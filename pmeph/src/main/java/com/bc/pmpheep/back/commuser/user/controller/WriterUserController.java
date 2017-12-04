@@ -23,6 +23,14 @@ public class WriterUserController extends BaseController {
 	@Autowired
 	private WriterUserService writerUserService;
 	
+	/**
+	 * 根据id和用户名修改用户密码
+	 * @author tyc
+     * @createDate 2017年12月4日 上午10:47:43
+     * @param id
+     * @param username
+     * @return
+     */
 	@ResponseBody
     @RequestMapping(value = "/updateUserPassWord", method = RequestMethod.POST)
     public ModelAndView updateUserPassWord(@RequestParam("id") Long id, 

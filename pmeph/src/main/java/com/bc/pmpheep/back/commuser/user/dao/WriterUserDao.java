@@ -78,7 +78,7 @@ public interface WriterUserDao {
 	WriterUserCertification updateCertification(Long id);
 	
 	/**
-	 * 根据id和用户名修改普通用户密码
+	 * 根据id和用户名修改用户密码
 	 * @author tyc
      * @createDate 2017年12月4日 上午10:31:11
      * @param id
