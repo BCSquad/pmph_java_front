@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.bc.pmpheep.back.commuser.group.bean.GroupList;
-import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.commuser.group.bean.GroupMessage;
 
 /**
  * PmphGroup 实体类数据访问层接口
@@ -29,7 +29,7 @@ public interface GroupDao {
 	 * @return
 	 *
 	 */
-	GroupList list(@Param("start") Integer start, @Param("pageSize") Integer pageSize, @Param("id") Long id);
+	List<GroupList> list(@Param("start") Integer start, @Param("pageSize") Integer pageSize, @Param("id") Long id);
 
 	/**
 	 * 
@@ -44,4 +44,43 @@ public interface GroupDao {
 	 */
 	Integer getTotal(@Param("id") Long id);
 
+	/**
+	 * 
+	 * Description:统计小组人数
+	 * @author:lyc
+	 * @date:2017年12月2日下午5:06:04
+	 * @param 小组id
+	 * @return Integer
+	 */
+	Integer getMemberTotal(@Param("groupId") Long groupId);
+	
+	/**
+	 * 
+	 * Description:统计小组文件数
+	 * @author:lyc
+	 * @date:2017年12月2日下午5:09:31
+	 * @param 小组id
+	 * @return Integer
+	 */
+	Integer getFileTotal(@Param("groupId") Long groupId);
+	
+	/**
+	 * 
+	 * Description:获取小组中所有成员的头像
+	 * @author:lyc
+	 * @date:2017年12月4日下午3:14:09
+	 * @param 
+	 * @return List<String>
+	 */
+	List<String> getAvatars(@Param("groupId") Long groupId);
+	
+	/**
+	 * 
+	 * Description:获取小组动态
+	 * @author:lyc
+	 * @date:2017年12月4日下午3:34:58
+	 * @param 
+	 * @return List<String>
+	 */
+	List<GroupMessage> getMessages(@Param("groupId") Long groupId);
 }

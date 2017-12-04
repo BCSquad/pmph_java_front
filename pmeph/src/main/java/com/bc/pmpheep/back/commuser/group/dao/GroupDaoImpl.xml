@@ -51,5 +51,29 @@
 		ORDER BY
 		group_name
 	</select>
-
+    <!-- 统计小组成员数 -->
+    <select id="getMemberTotal" parameterType="java.lang.Long" 
+        resultType="java.lang.Integer">
+        SELECT COUNT(user_id) FROM pmph_group_member WHERE group_id = #{groupId};
+    </select>
+    <!-- 统计小组文件数 -->
+    <select id="getFileTotal" parameterType="java.lang.Long" 
+        resultType="java.lang.Integer">
+        SELECT COUNT(file_id) FROM pmph_group_file WHERE group_id = #{groupId};
+    </select>
+    <!-- 获取小组所有成员的头像 -->
+    <select id="getAvatars" parameterType="java.lang.Long" 
+        resultType="String">
+        SELECT IFNULL(b.avatar,c.avatar) 
+		FROM pmph_group_member a 
+		LEFT JOIN pmph_user b ON (a.user_id = b.id AND a.is_writer = 0) 
+		LEFT JOIN writer_user c ON (a.user_id = c.id AND a.is_writer = 1) 
+		WHERE a.group_id = #{groupId};
+    </select>
+    <!-- 获取小组动态 -->
+    <select id="getMessages" parameterType="java.lang.Long" 
+        resultType="GroupMessage">
+        SELECT * FROM pmph_group_message 
+        WHERE member_id = 0 AND group_id = #{groupId} ORDER BY gmt_create DESC
+    </select>
 </mapper>
