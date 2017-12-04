@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.commuser.readpage.dao.ReadDetailDao" >
+	<!-- 根据书籍ID查询数据相关信息 -->
+	<select id="queryReadBook" parameterType="java.util.Map" resultType="java.util.Map">
+		select 
+	      t.id,
+	      t.bookname,
+	      t.image_url,
+	      t.author,
+	      t.publisher,
+	      t.publish_date,
+	      t.isbn,
+	      t.type,
+	      t.reader,
+	      t.revision,
+	      t.clicks,
+	      t.bookmarks,
+	      t.score,
+	      t.likes,
+	      t.buy_url,
+	      t.pdf_url,
+	      b.detail
+	      from book t 
+	      left join book_detail b  on t.id=b.book_id where t.id=#{id}		 
+	</select>
+	<!-- 根据书籍ID查询书籍评论信息 -->
+	<select id="queryComment" parameterType="java.util.Map" resultType="java.util.Map">
+	   select 
+	     t.content,
+	     t.gmt_create,
+	     t.score,
+	     b.realname,
+	     b.avatar
+	     from book_user_comment t 
+	     left join book u on t.book_id=u.id
+	     left join writer_user b on b.id=t.writer_id where u.id=#{id}
+	</select>
+	<!-- 根据书籍ID查询配套图书 -->
+	<select id="querySupport" parameterType="java.util.Map" resultType="java.util.Map">
+	    select 
+		    t.bookname,
+		    t.image_url,
+	        t.author,
+		    b.detail
+		    from book t left join book_support c on  c.support_id=t.id 
+		    left join book_detail b on b.book_id=t.id 
+		    where t.id= (select support_id from book_support where book_id='8')
+	</select>
+	<!-- 查询人卫推荐书籍 -->
+	<select id="queryRecommendByE" parameterType="java.util.Map" resultType="java.util.Map">
+	    select bookname,author,id
+	       from book t 
+	       where t.is_promote != 0 OR t.is_promote is not null 
+	    <if test="x >= 0">
+	        limit #{x},5
+	    </if>
+	</select>
+	<!-- 根据书籍ID新增评论 -->
+	<insert id="insertComment" parameterType="java.util.Map">
+	   insert into book_user_comment(
+	   book_id,
+	   writer_id,
+	   score,
+	   content,
+	   is_hide,
+	   is_auth,
+	   is_deleted
+	   )values(
+	   #{book_id},
+	   #{writer_id},
+	   #{score},
+	   #{content},
+	   0,0,0)
+	</insert>
+	<!-- 根据作者查询该作者写的书 -->
+	<select id="queryAuthorType" parameterType="java.util.Map" resultType="java.util.Map">
+	   select * from book where author like #{author} limit 0,9
+	</select>
+	<!-- 作者所写的书本数不足9本，根据书籍类型补足9本 -->
+	<select id="queryBookByType" parameterType="java.util.Map" resultType="java.util.Map">
+	   select * from book where type=#{type} and author<![CDATA[<>]]>#{author} limit 0,#{x} 
+	</select>
+	<!-- 相关推荐换一换 -->
+	<select id="fresh" parameterType="java.util.Map" resultType="java.util.Map">
+	   select * from book where type=#{type} Order By rand()  limit 0,9
+	</select>
+	<!-- 根据书籍ID增加点赞数 -->
+	<update id="addlikes" parameterType="java.util.Map"> 
+	   update book set likes=#{likes} where id=#{book_id}
+	</update>
+	<!-- 往书籍点赞表里面添加数据 -->
+	<insert id="insertlikes" parameterType="java.util.Map">
+	   insert into book_user_like (book_id,writer_id) values (#{book_id},#{writer_id})
+	</insert>
+	<!-- 查询点赞数 -->
+	<select id="queryLikes" parameterType="java.util.Map" resultType="java.util.Map">
+	  select * from book_user_like where book_id=#{book_id} and writer_id=#{writer_id}
+	</select>
+	<!--查询用户收藏夹下是否已收藏此书籍  -->
+	<select id="queryMark" parameterType="map" resultType="int">
+	  select count(id) from book_user_mark where book_id=#{bookId} and writer_id=#{writerId} and favorite_id=#{favoriteId}
+	</select>
+	<!-- 添加书籍收藏 -->
+	<insert id="insertMark" parameterType="map">
+	    insert into book_user_mark(book_id,writer_id,favorite_id)  values(#{bookId},#{writerId},#{favoriteId})
+	</insert>
+	<!-- 更新书籍的收藏数量 -->
+	<update id="updateMarks" parameterType="map">
+	   update book set bookmarks=#{marks} where id=#{bookId}
+	 
+	</update>
+	<!-- 查询书籍的收藏数 -->
+	<select id="queryBookMarks" parameterType="java.util.Map" resultType="long">
+	  select bookmarks from book where id=#{bookId}
+	</select>
+</mapper>

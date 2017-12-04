@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.commuser.booksearch.dao.BookSearchDao">
+	
+	<resultMap type="java.util.Map" id="bookListMap">
+		
+	</resultMap>
+	
+	<select id="queryBookList" parameterType="java.util.Map" resultMap="bookListMap">
+		SELECT
+			b.id as bookId,
+			b.bookname,
+			b.author,
+			b.publisher,
+			b.image_url,
+			b.clicks,
+			b.comments,
+			b.likes,
+			bd.detail,
+			l.id as likeId
+		FROM
+		book AS b
+		left Join book_detail AS bd ON b.id = bd.book_id
+		left join book_user_like as l on b.id= l.book_id and l.writer_id = ${uid}
+		<where>
+			<if test="queryName != null and queryName != '' ">
+				and b.bookname like concat("%",#{queryName},"%")
+			</if>
+		</where>
+		group by b.id
+		limit ${startNum},${pageSize}
+	</select>
+	
+	<select id="queryBookCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		SELECT
+			count(b.id)
+		FROM
+		book AS b
+		<where>
+			<if test="queryName != null and queryName != '' ">
+				and b.bookname like concat("%",#{queryName},"%")
+			</if>
+		</where>
+	</select>
+	
+	<update id="statusModify" parameterType="java.util.Map">
+		update writer_user_certification set progress = ${status} 
+		where id = ${id}
+	</update>
+	
+	<delete id="UserDontLikeTheBook" parameterType="java.util.Map">
+		delete from book_user_like 
+		where book_id = ${bookId} and writer_id = ${uid}
+	</delete>
+	
+	<insert id="UserLikeTheBook" parameterType="java.util.Map">
+		insert into book_user_like 
+			(book_id,writer_id)
+		value(${bookId},${uid})
+	</insert>
+	
+	<update id="increaseOneLike" parameterType="java.lang.String">
+		update book set likes = likes+1 where id = #{bookId}
+	</update>
+	
+	<update id="decreaseOneLike" parameterType="java.lang.String">
+		update book set likes = likes-1 where id = #{bookId} and <![CDATA[likes > 0]]>
+	</update>
+	
+	<select id="queryBookLikeById" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select likes from book where id = #{bookId}
+	</select>
+	
+</mapper>

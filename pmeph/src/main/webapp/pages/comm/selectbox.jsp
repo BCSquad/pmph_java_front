@@ -13,9 +13,9 @@
     <title>Title</title>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" type="text/css" href="../css/jquery.selectlist.css">
-    <script src="${ctx}/statics/js/jquery/jquery.js"></script>
-    <script src="${ctx}/statics/js/jquery/jquery.selectlist.js"></script>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/statics/css/jquery.selectlist.css"/>">
+    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
 </head>
 <body>
 <select id="edu" name="edu">
@@ -48,7 +48,11 @@
             zIndex: 10,
             width: 200,
             height: 26,
-            optionHeight: 26
+            optionHeight: 26,
+            initValue:8,
+            onChange:function (value,text) {
+                console.log(value+","+text);
+            }
         });
     })
 </script>

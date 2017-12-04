@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bc.pmpheep.back.authadmin.applydocaudit.dao.DataAuditDao">
+	<!--分页查询条件查询列表 -->
+	<select id="findDataAudit" parameterType="java.util.Map" resultType="java.util.Map">
+		
+		SELECT
+			d.realname,
+			d.position,
+			d.title,
+			t.textbook_name,
+			p.preset_position,
+			d.online_progress,
+			d.offline_progress,
+			p.chosen_position
+			FROM
+			declaration AS d
+			LEFT JOIN dec_position AS p ON d.id = p.declaration_id
+			LEFT JOIN textbook AS t ON p.textbook_id = t.id  
+			<where>
+				<if test="queryName != null and queryName != '' ">
+					and realname like concat("%",#{queryName},"%")
+				</if>
+				<if test="material_id != null and material_id != '' ">
+					and d.material_id = ${material_id}
+				</if>
+			</where>
+		limit ${startNum},${pageSize}
+	</select>
+	
+	<select id="findDataAuditCount" parameterType="java.util.Map" resultType="int" >
+		
+		SELECT
+		COUNT(*)
+		FROM
+		declaration AS d
+		LEFT JOIN dec_position AS p ON d.id = p.declaration_id 
+		LEFT JOIN textbook AS t ON p.textbook_id = t.id  
+		<where>
+			<if test="queryName != null and queryName != '' ">
+				and realname like concat("%",#{queryName},"%")
+			</if>
+			<if test="material_id != null and material_id != '' ">
+				and d.material_id = ${material_id}
+			</if>
+		</where>
+			
+	</select>
+	
+</mapper>

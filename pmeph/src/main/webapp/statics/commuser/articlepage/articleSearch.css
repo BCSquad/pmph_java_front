@@ -1,0 +1,346 @@
+.nav {
+    width: 100%;
+    height: 85px;
+
+}
+
+.searchDiv {
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+.selectDiv {
+    height: 100%;
+    float: right;
+}
+
+.searchInputLeft {
+    margin-top: 35px;
+    margin-bottom: 10px;
+    height: 30px;
+    width: 80px;
+    background-color: #70bcc3;
+    float: left;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    text-align: center;
+    padding-top: 10px;
+    cursor:pointer;
+}
+
+.searchInputRight {
+    margin-top: 35px;
+    margin-bottom: 10px;
+    height: 38px;
+    width: 380px;
+    float: left;
+    border-top: solid 1px #d5d5d5;
+    border-bottom: solid 1px #d5d5d5;
+    border-right: solid 1px #d5d5d5;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.input {
+    border: none;
+    width: 94%;
+    height: 95%;
+    padding-left: 20px;
+}
+
+.unselected {
+    font-family: MicrosoftYaHei;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 0px;
+    letter-spacing: 0px;
+    color: #999999;
+}
+
+.bigContent {
+    width: 100%;
+    height: auto;
+}
+
+.list {
+    clear: both;
+    width: 100%;
+    height: auto;
+    padding-bottom: 30px;
+}
+
+.oneList {
+    height: 160px;
+    width: 1160px;
+    border-bottom: solid 1px #e5e5e5;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 26px;
+}
+
+.leftPicture {
+    height: 100%;
+    width: 138px;
+    float: left;
+}
+
+.pictureSize {
+    width: 138px;
+    height: 160px;
+}
+
+.rightContent {
+    width: 1022px;
+    height: 100%;
+    float: left;
+}
+
+.upDiv {
+    width: 1015px;
+    height: 50%;
+    float: left;
+    padding-left: 20px;
+}
+
+.upLeft {
+    width: 70%;
+    height: 73px;
+    float: left;
+    margin-top: 8px;
+}
+
+.bookName {
+    width: 100%;
+    height: 24px;
+    font-family: MicrosoftYaHei;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #333333;
+}
+
+.nameDiv {
+    width: 100%;
+    height: 35px;
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 1px;
+    color: #999999;
+    margin-top: 5px;
+}
+
+.headPicture {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    position: relative; 
+    top: 5px; 
+}
+
+.name {
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 1px;
+    color: #333333;
+    padding-left: 4px;
+}
+
+.time {
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #bdbdbd;
+    padding-left: 16px;
+}
+
+.downDiv {
+    width: 980px;
+    height: 50%;
+    float: left;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.upRight {
+    float: left;
+    width: 30%;
+    height: 72px;
+}
+
+.eyePicture {
+    background-image: url("../../image/css_sprites.png");;
+    background-position: -418px -147px;
+    background-repeat: no-repeat;
+    height: 25px;
+    width: 20px;
+    float: right;
+}
+
+.pictureDiv {
+    width: 100%;
+    height: 25px;
+}
+
+.number {
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #b5b5b5;
+    float: right;
+    width: 40px;
+    height: 25px;
+    margin-right: 15px;
+}
+
+.handPicture {
+    background-image: url("../../image/css_sprites.png");;
+    background-position: -418px -194px;
+    background-repeat: no-repeat;
+    height: 25px;
+    width: 20px;
+    float: right;
+    cursor: pointer;
+}
+
+.nohandPicture {
+    background-image: url("../../image/css_sprites.png");;
+    background-position: -418px -218px;
+    background-repeat: no-repeat;
+    height: 25px;
+    width: 20px;
+    float: right;
+    cursor: pointer;
+}
+
+.handPicture.active {
+    background-position: -418px -218px;
+}
+
+.comment {
+    background-image: url("../../image/css_sprites.png");;
+    background-position: -418px -243px;
+    background-repeat: no-repeat;
+    height: 25px;
+    width: 20px;
+    float: right;
+}
+
+.number2 {
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #b5b5b5;
+    float: right;
+    width: 40px;
+    height: 25px;
+    margin-left: 5px;
+}
+
+
+.contentPage {
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 24px;
+    letter-spacing: 0px;
+    color: #666666;
+}
+
+.pageDiv {
+    clear: both;
+    text-align: right;
+    margin-top: 30px;
+}
+
+.articleLeftPicture {
+    height: 100%;
+    width: 150px;
+    float: left;
+}
+
+.articlePictureSize {
+    width: 150px;
+    height: 95px;
+    border-radius: 6px;
+}
+
+.articleRightContent {
+    width: 990px;
+    height: 100%;
+    float: left;
+}
+
+.articleSelected {
+    padding-bottom: 16px;
+    border-bottom: 2px solid black;
+    font-family: MicrosoftYaHei;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #333333;
+}
+
+.articleUnselected {
+    font-family: MicrosoftYaHei;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 0px;
+    letter-spacing: 0px;
+    color: #999999;
+    margin-right: 40px;
+}
+
+.tab {
+    color: #999999;
+    display: block;
+    float: right;
+    height: 100%;
+    box-sizing: border-box;
+    height: 40px;
+    margin: 0 10px;
+    margin-top: 45px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.tab.active {
+    border-bottom: 2px solid black;
+    color: black;
+    cursor: default;
+}
+
+.a {
+    text-decoration: none;
+    color: #999999;
+}
+
+.articleOneList {
+    height: 140px;
+    width: 1140px;
+    border-bottom: solid 1px #e5e5e5;
+    margin-left: 20px;
+    margin-right: 40px;
+    padding-top: 26px;
+}
+
+.articleUpDiv {
+    width: 1002px;
+    height: 50%;
+    float: left;
+    padding-left: 20px;
+}

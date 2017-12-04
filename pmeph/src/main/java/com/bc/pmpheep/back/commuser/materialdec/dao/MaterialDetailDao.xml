@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.commuser.materialdec.dao.MaterialDetailDao" >
+	<!-- 通过教材ID查询出教材信息 -->
+	<select id="queryMaterialbyId" resultType="java.util.Map" parameterType="java.lang.String">
+		select * from material where id = #{material_id}
+	</select>
+	<!-- 通过教材ID查询所有书籍 -->
+	<select id="queryBookById" resultType="java.util.Map" parameterType="java.lang.String">
+		select * from textbook where material_id = #{material_id}
+	</select>
+	<!-- 专家信息 -->
+	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
+		select t1.*,t2.org_name from declaration t1 left join org t2 on t1.org_id = t2.id
+		 where 1= 1 
+		<if test="user_id != null and user_id != ''">
+			and t1.user_id = '${user_id}' 
+		</if>
+		<if test="material_id != null and material_id != ''">
+			and t1.material_id = '${material_id}'
+		</if>
+		<if test="realname != null and realname != ''">
+			and t1.realname = '${realname}'
+		</if>
+	</select>
+	<insert id="insertPerson" parameterType="java.util.Map">
+		insert into declaration(material_id,user_id,realname,sex,birthday,experience,org_name,position,
+		title,address,postcode,handphone,email,idtype,idcard,telephone,fax,org_id,gmt_create
+		) values('${material_id}','${user_id}','${realname}','${sex}','${birthday}','${experience}','${org_name}','${position}',
+		'${title}','${address}','${postcode}','${handphone}','${email}','${idtype}','${idcard}','${telephone}',
+		'${fax}','${org_id}','${gmt_create}')
+	</insert>
+	<!-- 图书选择 -->
+	<select id="queryTsxz" resultType="java.util.Map" parameterType="java.util.Map">
+		select t1.*,t2.textbook_name from dec_position t1 left join textbook t2
+		on t1.textbook_id = t2.id where t1.declaration_id = '${declaration_id}' 
+		ORDER BY t1.gmt_create desc
+	</select>
+	<insert id="insertTsxz" parameterType="java.util.Map">
+		insert into dec_position(declaration_id,textbook_id,preset_position,syllabus_id,syllabus_name,gmt_create)
+		  values('${declaration_id}','${textbook_id}','${preset_position}','${syllabus_id}','${syllabus_name}','${gmt_create}')
+	</insert>
+	<!-- 学习经历 -->
+	<select id="queryStu" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_edu_exp where declaration_id = '${declaration_id}' ORDER BY sort 
+	</select>
+	<!-- 工作经历 -->
+	<select id="queryWork" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_work_exp where declaration_id = '${declaration_id}' ORDER BY sort 
+	</select>
+	<!--教学经历-->
+	<select id="queryStea" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_teach_exp where declaration_id = '${declaration_id}' ORDER BY sort 
+	</select>
+	<!--上版教材编辑-->
+	<select id="queryJcbj" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_last_position where declaration_id = '${declaration_id}' ORDER BY sort 
+	</select>
+	<!-- 精品课程建设 -->
+	<select id="queryGjkcjs" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_course_construction where declaration_id = '${declaration_id}' ORDER BY sort 
+	</select>
+	<!-- 教材编写情况 -->
+	<select id="queryJcbx" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_textbook where declaration_id = '${declaration_id}' ORDER BY sort 
+	</select>
+</mapper>

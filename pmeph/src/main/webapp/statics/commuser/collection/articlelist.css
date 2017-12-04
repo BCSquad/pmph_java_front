@@ -1,0 +1,158 @@
+.area1{
+   width:1200px;
+    height:20px;
+    font-size: 14px;
+    margin-top: 20px
+}
+.area1 a{
+    color: #999999;
+    text-decoration: none;
+}
+.area2{
+    width:1200px;
+    height:24px;
+    margin-top: 15px
+}
+.area2 .name{
+    font-size: 18px;
+    color: #000000;
+}
+.area2 .del{
+    font-size: 12px;
+    color: #999999;
+    margin-left: 14px;
+    cursor: pointer;
+}
+.collection{
+    width: 1200px;
+    height: 172px;
+    margin-top: 12px;
+    background-color: #f8f8f8;
+    box-shadow: 0px 1px 4px 0px
+    rgba(0, 0, 0, 0.15);
+    border-radius: 2px;
+}
+.collection .title{
+    float: left;
+    margin-top: 16px;
+    margin-left: 15px;
+    width: 1170px;
+}
+.collection .title-text{
+    float: left;
+    font-size: 16px;
+    color: #000000;
+}
+.collection .title-text a{
+    color: #000000;
+}
+.collection .author{
+    height:25px;
+    margin-left: 10px;
+    float: right;
+    font-size: 12px;
+    color: #bdbdbd;
+}
+.collection .title .tm{
+    height:25px;
+    margin-left: 10px;
+    float: right;
+    font-size: 12px;
+}
+.collection .author-icon{
+    height: 25px;
+    width:25px;
+    float: left;
+    background-repeat: no-repeat;
+    border-radius:50%
+}
+.collection .title .name{
+    color: #333333;
+    height:25px;
+    float: left;
+    margin-left: 9px
+}
+.collection .title .time{
+    color:#bdbdbd;
+    height:25px;
+    float: left;
+    margin-left: 28px
+}
+.collection .content{
+    float: left;
+    height:115px;
+    margin-top: 16px;
+    margin-left: 15px
+}
+.collection .content .content-img{
+    width:150px;
+    height:90px;
+    float: left;
+    text-align: center;
+    vertical-align: middle;
+}
+.collection .content img{
+    width:150px;
+    height:90px;
+    border-radius: 2px
+}
+.collection .content .content-text{
+    width:997px;
+    height:116px;
+    margin-left: 20px;
+    float: left;
+}
+.collection .content .content-text .text{
+    line-height: 24px;
+    height: 72px;
+    font-size: 12px;
+    color: #666666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.collection .content .content-text .end{
+    height: 44px
+}
+.collection .content .content-text .end .foot{
+    height:24px;
+    margin-top: 10px
+}
+.collection .content .content-text .end .foot .span1{
+    font-size: 12px;
+    color: #999999;
+    float: right;
+    margin-left: 34px;
+    cursor: pointer;
+}
+.collection .content .content-text .end .foot .span2{
+    font-size: 11px;
+    color: #b5b5b5;
+    float: right
+}
+.collection .content .content-text .end .foot .span3{
+    font-size: 11px;
+    color: #1abd44;
+    float: right
+}
+.collection .content .content-text .end .foot .smicon{
+    width:20px;
+    height: 20px ;
+    background-image: url(../../image/css_sprites.png);
+    float: right;
+    margin-right: 5px;
+    margin-left: 20px
+}
+.look{
+    background-position:-418px -147px;
+}
+.comment{
+	    background-position: -418px -243px;
+}
+.good{
+     background-position: -418px -218px;
+    cursor: pointer;
+}
+.nogood{
+	background-position: -418px -194px;
+	cursor: pointer;
+}

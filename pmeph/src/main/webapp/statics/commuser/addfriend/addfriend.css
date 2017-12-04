@@ -1,0 +1,169 @@
+@CHARSET "UTF-8";
+
+.white-back-ground-float-box{
+    /* height: 1000px; */
+
+}
+
+.white-back-ground-float-box>div{
+    /*float:left;*/
+    margin:0px;
+    left: 0px;
+    font-family: MicrosoftYaHei;
+    white-space: nowrap;
+}
+
+.white-back-ground-float-box .add-friend-label{
+    margin:30px 0px 20px 0px;
+    height: 16px;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 16px;
+    letter-spacing: 0px;
+    color: #000000;
+}
+
+.white-back-ground-float-box .search-btn{
+    float:left;
+    width: 80px;
+    height: 40px;
+    background-color: #70bcc3;
+    border-radius: 4px 0px 0px 4px;
+    border:none;
+    outline: none;
+    background-image: url("../../image/sousuo-helpCenter.png");
+    background-size: 27.5%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+
+.white-back-ground-float-box .search-condition{
+    float:left;
+    width: 368px;
+    height: 38px;
+    padding:0px 0px 0px 10px;
+    background-color: #ffffff;
+    border-radius:0px 4px 4px 0px;
+    border: solid 1px #d5d5d5;
+    outline: none;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 38px;
+    letter-spacing: 1px;
+    color: #333333;
+    margin-bottom: 25px;
+}
+
+.friend-box-wrapper{
+    clear:left;
+    width: 1230px;
+    
+}
+
+.white-back-ground-float-box .friend-box{
+    width: 222px;
+    height: 228px;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    border: solid 1px #ececec;
+    float:left;
+    margin:0px 20px 30px 0px;
+}
+
+.content-wrapper .friend-box .head-portrait{
+    width: 76px;
+    height: 76px;
+    background-color: #0000cc;
+    margin:auto;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    background-image: url("../image/haoyoutouxiang1.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position:center;
+    border-radius: 40px;
+}
+
+.content-wrapper .friend-box .friend-name{
+    margin:auto;
+    width: 100%;
+    text-align:center;
+    height: 18px;
+    font-family: MicrosoftYaHei;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 18px;
+    letter-spacing: 0px;
+    color: #333333;
+}
+
+.content-wrapper .friend-box .friend-job{
+
+    text-align: center;
+    margin-top: 9px;
+    margin-bottom: 27px;
+    width: 100%;
+    height: 13px;
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 13px;
+    letter-spacing: 0px;
+    color: #a5a5a5;
+    white-space: nowrap;
+}
+
+.content-wrapper .friend-box .btn-personal-page{
+    width: 84px;
+    height: 36px;
+    border-radius: 4px;
+    border: solid 1px #1abd44;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 34px;
+    letter-spacing: 0px;
+    color: #17a33a;
+    background-color: transparent;
+    margin-right: 19px;
+    margin-left: 22px;
+}
+
+.content-wrapper .friend-box .btn-add-friend{
+    width: 70px;
+    height: 36px;
+    background-color: #1abd44;
+    border-radius: 4px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 36px;
+    letter-spacing: 0px;
+    color: #ffffff;
+    border:none;
+    cursor:pointer;
+}
+
+
+.content-wrapper .friend-box .btn-add-friend.requested{
+	background-color: #d2d2d2;
+	cursor:default;
+}
+.content-wrapper .friend-box .btn-add-friend.targeted{
+	background-color: rgb(236, 154, 98);
+}
+
+
+
+.white-back-ground-float-box .pagination-wrapper{
+    float: right;
+    margin: 30px -10px 50px 0px;
+}

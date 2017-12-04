@@ -1,0 +1,44 @@
+
+tr
+{
+    height:60px;
+    line-height:60px;
+    font-family: MicrosoftYaHei;
+}
+
+.td-lable-right
+{
+    width:97px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: 0px;
+    color: #333333;
+    padding-right:10px;
+}
+
+.td-lable-left
+{
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: 0px;
+    color: #bebebe;
+    padding-left:10px;
+}
+
+.td-input
+{
+    width:280px;
+}
+.div-menu-main {
+
+    font-size: 16px;
+    font-weight: normal;
+    height: 48px;
+    line-height: 48px;
+    margin-left: 20px;
+    cursor: pointer;
+    float: left;
+    border-bottom: 2px solid #666666;
+}

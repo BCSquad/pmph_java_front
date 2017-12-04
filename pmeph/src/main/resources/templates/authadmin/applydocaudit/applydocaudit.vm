@@ -1,0 +1,18 @@
+
+#if($!{isEnd}==1)
+	<div>
+		<div class="right-up-tag">已结束</div>
+	    <div class="material-title">$!{materialName}</div>
+	    <div class="material-deadline">截止日期：$!{deadline}</div>
+	    <button class="material-button btn-type-3 btn-result-statistics" onclick="resultStatistics($!{id},'$!{materialName}')">结果统计</button>
+	</div>
+#else
+	<div>
+	    <div class="material-title">$!{materialName}</div>
+	    <div class="material-deadline">截止日期：$!{deadline}</div>
+	    <button class="material-button btn-type-1 btn-result-statistics" onclick="resultStatistics($!{id},'$!{materialName}')">结果统计</button>
+	    <button class="material-button btn-type-2 btn-transaction" onclick="dealWithAudit($!{id},'$!{materialName}')">办理</button>
+	</div>
+#end
+
+

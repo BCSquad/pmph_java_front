@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.general.dao.UserDao">
+
+    <select id="getUserInfo" resultType="map">
+        <if test="usertype == 1">
+            select * from writer_user where id=#{userid}
+        </if>
+        <if test="usertype == 2">
+            select * from org_user where id=#{userid}
+        </if>
+    </select>
+</mapper>

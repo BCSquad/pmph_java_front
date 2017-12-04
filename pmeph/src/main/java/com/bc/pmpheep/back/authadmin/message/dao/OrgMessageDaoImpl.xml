@@ -3,7 +3,101 @@
 <mapper namespace="com.bc.pmpheep.back.authadmin.message.dao.OrgMessageDao">
 <resultMap type="java.util.Map" id="messageMap"></resultMap>
 
-	<select id="queryMessageList" resultMap="messageMap">
+	<select id="getMessageList" resultMap="messageMap">
 	     select * from user_message 
 	</select>
+	
+	 <!-- 申请消息列表 -->
+	<select id="selectApplyMessage" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT a.id,a.status,a.gmt_create,b.realname FROM writer_friend a
+		LEFT JOIN writer_user b
+		ON a.request_id = b.id
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			a.target_id = #{userId}
+			<if test="condition==null">AND status in(0,1,2)</if>
+			<if test="condition==3">AND status in(0,1,2)</if>
+			<if test="condition==1">AND status in(1,2)</if>
+			<if test="condition==2">AND status = 0</if>
+		</trim>
+		ORDER BY a.gmt_create DESC
+		<if test="startPara!=null">limit #{startPara},8</if>	
+	</select>
+	
+	<!-- 更新申请消息表 -->
+	<update id="updateApplyMessage" parameterType="java.util.Map">
+		update writer_friend set 
+		<if test="flag==1">status='1'</if>
+		<if test="flag==2">status='2'</if>
+		where id=#{applyId}
+	</update>
+	
+	<!-- 消息通知列表 -->
+	<select id="selectNoticeMessage" parameterType="java.util.Map" resultType="java.util.Map">
+		select id,msg_id,title,gmt_create,msg_type
+		from user_message
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			receiver_id = #{userId}
+			<if test="condition==null">AND msg_type in(0,1)</if>
+			<if test="condition==3">AND msg_type in(0,1)</if>
+			<if test="condition==0">AND msg_type = 0</if>
+			<if test="condition==1">AND msg_type = 1</if>
+			and is_deleted = 0
+		</trim>
+		ORDER BY gmt_create DESC
+		<if test="startPara!=null">limit #{startPara},8</if>	
+		
+	</select>
+	
+	<!-- 删除通知 -->
+	<delete id="deleteNoticeMessage" parameterType="java.util.Map">
+		update user_message set is_deleted=1 where id = #{noticeId}
+	</delete>
+	
+	<!-- 获取机构用户id和作家用户id -->
+	<select id="findOrgUserAndWriterUser" parameterType="java.lang.String" resultType="java.util.Map">
+		select a.id as receiver_id,'orgUserId' as type from org_user a,org_user b where a.org_id = b.org_id and a.id=#{userId}
+		union all
+		select d.id as receiver_id, 'writerUserId' as type from org_user c join writer_user d on c.org_id = d.org_id where c.id= #{userId}
+	</select>
+	
+	<!-- 批量插入消息 -->
+	<insert id="batchInsertMessage" parameterType="java.util.List">
+	INSERT INTO user_message (msg_id,msg_type,title,sender_id,sender_type,receiver_id,receiver_type)  
+    VALUES   
+    <foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.msg_id},#{item.msg_type},#{item.title},#{item.sender_id},#{item.sender_type},#{item.receiver_id},#{item.receiver_type})  
+    </foreach>  
+	</insert>
+	
+	<insert id="insertAttachmentInfo" parameterType="java.util.Map">
+		insert into message_attachment(msg_id,attachment,attachment_name)
+		values(#{msg_id},#{attachment},#{attachment_name})
+	</insert>
+	
+	<!-- 教材申报通知详情 -->
+	<select id="noticeMessageDetail" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT DISTINCT m.`material_name`,m.`id` AS materialId ,m.`deadline`,m.`mail_address`,e.`note`,e.id AS attachmentId
+		FROM cms_content a
+		LEFT JOIN user_message b
+		ON a.mid = b.`msg_id`
+		LEFT JOIN material m
+		ON a.`material_id` = m.`id`
+		LEFT JOIN material_extra e
+		ON m.`id` = e.`material_id`
+		LEFT JOIN `material_contact` c
+		ON c.`material_id` = m.`id`
+		WHERE b.`msg_id`=#{messageId}
+	</select>
+	
+	<!-- 查询教材备注相关的附件 -->
+	<select id="queryNoticeMessageDetailAttachment" parameterType="java.util.Map" resultType="java.util.Map">
+		select * from `material_note_attachment` where material_extra_id = #{attachmentId}
+	</select>
+	
+	<!-- 查询教材相关的联系人 -->
+	<select id="queryNoticeMessageDetailContact" parameterType="java.util.Map" resultType="java.util.Map">
+		select * from material_contact where material_id = #{materialId}
+	</select>
+	
+	
 </mapper>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.commuser.collection.dao.ArticleCollectionDao">
+<resultMap type="java.util.Map" id="articleMap"></resultMap>
+    <!-- 查询书籍收藏夹名称和收藏夹下收藏书籍的数量 -->
+	<select id="queryArticleCollectionList" parameterType="map" resultMap="articleMap">
+	   select f.favorite_name,f.id as id,count(f.content_id) as mcount from (select w.*,m.content_id from writer_cms_favorite w left  join cms_user_mark m on w.id=m.favorite_id) f where f.writer_id=#{writerId} GROUP BY f.favorite_name
+	</select>
+	<!--查询一个收藏夹下所有的书籍  -->
+	<select id="queryArticleList" parameterType="map" resultMap="articleMap">
+	  select f.id as fid,
+		     f.favorite_name,
+		     c.id as cid,
+		     c.title,
+		     c.author_id ,
+		     w.realname,
+		     w.avatar,
+		     w.avatar,
+		     c.gmt_create,
+		     c.mid,
+		     c.summary ,
+		     c.likes,
+		     c.clicks,
+		     c.comments,
+		     c.bookmarks,
+		     m.id as markId
+     from writer_cms_favorite f LEFT JOIN cms_user_mark  m on f.id=m.favorite_id
+	 LEFT JOIN cms_content c on m.content_id=c.id   
+	 LEFT JOIN  writer_user w on c.author_id=w.id  where f.id=#{favoriteId} and f.writer_id=#{writerId}
+	 limit #{startnum},#{size}
+	</select>
+	<!--查询一个收藏夹下的书籍 数量 -->
+	<select id="queryArticleCont" parameterType="map" resultType="int">
+	   select count(m.content_id) from cms_user_mark m LEFT JOIN cms_content c on m.content_id=c.id  where m.favorite_id=#{favoriteId} and m.writer_id=#{writerId}
+	</select>
+	<!--查询用户是否对某一文章点赞  -->
+	<select id="queryLikes" parameterType="map" resultType="int">
+	   select count(id)  from cms_user_like where content_id=#{contentId} and writer_id=#{writerId}
+	</select>
+	<!--向用户文章点赞表中加入数据  -->
+	<insert id="insertArticelLike" parameterType="map">
+	   insert into cms_user_like(content_id,writer_id) values(#{contentId},#{writerId})
+	</insert>
+	<!--删除用户文章点赞表中一条数据  -->
+	<delete id="deleteArticleLike" parameterType="map">
+	   delete from cms_user_like where content_id=#{contentId}  and  writer_id=#{writerId}
+	</delete>
+	<!--更改cms_content表中点赞数量  -->
+	<update id="updateArticleLikes" parameterType="map">
+	   update cms_content set likes=#{likes} where id=#{contentId}
+	</update>
+	<!--更改cms_content表中收藏数量  -->
+	<update id="updateMarkes" parameterType="map">
+	   update cms_content set bookmarks=#{markes} where id=#{contentId}
+	</update>
+	 <!--删除文章的收藏-->
+	<delete id="deleteMark" parameterType="map">
+	   delete from cms_user_mark where writer_id=#{writerId} and favorite_id=#{favoriteId}
+	   <if test="markId !=null">
+	    and  id=#{markId}
+	   </if>
+	</delete>
+	<!--删除收藏夹  -->
+	<delete id="deleteFavorite" parameterType="map">
+	   delete from writer_cms_favorite where id=#{favoriteId} and writer_id=#{writerId}
+	</delete>
+    <!--查询用户收藏夹下的文章收藏数，点赞数，点击数和评论数  -->
+	<select id="queryOther" parameterType="map" resultMap="articleMap">
+	     select  
+		     c.id as cid,
+		     c.likes,
+		     c.clicks,
+		     c.comments,
+		     c.bookmarks
+     from cms_user_mark  m  LEFT JOIN cms_content c on m.content_id=c.id   
+     where m.favorite_id=#{favoriteId} and m.writer_id=#{writerId}
+	</select>
+	<!--查询一片文章文章收藏数，点赞数，点击数和评论数  -->
+	<select id="queryNum" parameterType="map" resultMap="articleMap">
+	     select  
+		    id ,
+		    likes,
+		    clicks,
+		    comments,
+		    bookmarks
+     from cms_content 
+     where id=#{contentId}
+	</select>
+</mapper>

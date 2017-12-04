@@ -1,0 +1,43 @@
+#foreach($c in $!{List_map})
+	<div class="friend-box">
+        #if(!$c.avatar || $c.avatar == "DEFAULT")
+			<div class="head-portrait" style="background-image: url('$!{contextpath}statics/image/haoyoutouxiang1.png');"></div>
+		#else
+			<div class="head-portrait" style="background-image: url("$c.avatar");"></div>
+		#end
+        <div class="friend-name">$c.realname</div>
+        #if($c.rank == 0)
+        	<div class="friend-job">普通用户</div>
+        #elseif($c.rank == 1)
+        	<div class="friend-job">教师</div>
+        #elseif($c.rank == 2)
+        	<div class="friend-job">作家</div>
+        #elseif($c.rank == 3)
+        	<div class="friend-job">专家</div>
+        #else
+        	<div class="friend-job">&nbsp;</div>
+        #end
+        <button class="btn-personal-page" onclick="personalPage($!{c.uid})">个人主页</button>
+        
+        #if($!{my_uid} && $c.relations && $c.relations.substring(0,1) == "0")
+        	#foreach($relation in $c.relations.split(","))
+	        	#set($request_target_list=$relation.split("-"))
+	        	#if($request_target_list.get(0) =="0" && $request_target_list.get(1) ==""+$!{my_uid}  && $request_target_list.get(2)== ""+$!{c.uid})
+	        		<button class="btn-add-friend requested">已申请</button>
+	        		#break
+	        	#elseif($request_target_list.get(0) =="0" && $request_target_list.get(1) ==""+$!{c.uid}  && $request_target_list.get(2)== ""+$!{my_uid})
+	        		<button class="btn-add-friend targeted" onclick="addFriendfun($!{c.uid},2)" title="对方也想加您为好友">加好友</button>
+	        		#break
+	        	#elseif( !$foreach.hasNext )
+	        		<button class="btn-add-friend" onclick="addFriendfun($!{c.uid},0)">加好友</button>
+	        		#break
+	        	#end
+        	#end
+        #else
+        	<button class="btn-add-friend" onclick="addFriendfun($!{c.uid},0)">加好友</button>
+        #end
+        
+        
+        
+    </div>	
+#end

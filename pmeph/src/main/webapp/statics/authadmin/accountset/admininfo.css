@@ -1,0 +1,117 @@
+.body {
+    background: #f6f6f6;
+}
+.div-content{
+    background: white;
+}
+
+.div-menu-main {
+
+    font-size: 16px;
+    font-weight: normal;
+    height: 48px;
+    line-height: 48px;
+    margin-left: 20px;
+    cursor: pointer;
+    float: left;
+    border-bottom: 2px solid #666666;
+}
+
+table {
+    width: 1180px;
+    margin: 0 auto;
+}
+
+td.label {
+    width: 110px;
+}
+
+td.input {
+    width: 200px;
+}
+
+tr {
+    height: 70px;
+    font-family: MicrosoftYaHei;
+}
+
+.td-font {
+    height: 46px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    line-height:46px;
+    letter-spacing: 0px;
+    color: #333333;
+    padding-right: 10px;
+    display: block;
+}
+
+.td-title {
+    width: 58px;
+    height: 15px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 30px;
+    letter-spacing: 0px;
+    color: #333333;
+    font-weight: bold;
+    padding-left: 20px;
+}
+
+.red {
+    color: red;
+}
+
+.he {
+    padding: 30px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.he > img {
+    width: 120px;
+    height: 120px;
+    background-color: #000000;
+    border-radius: 10px;
+    opacity: 0.5;
+    border: 0px solid red;
+    float: left;
+
+}
+
+.he > .modify {
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    color: #ffffff;
+    width: 120px;
+    height: 120px;
+    z-index: 9;
+    line-height: 120px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.he > .links {
+    float: left;
+    margin-left: 20px;
+}
+
+.he > .links a {
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.he > .links .manager {
+    margin-top: 70px;
+    margin-bottom: 5px;
+    color: #333333;
+    /*text-decoration: underline;*/
+}
+
+.he > .links .password {
+    color: #e52e2e;
+}

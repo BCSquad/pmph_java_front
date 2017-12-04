@@ -1,0 +1,67 @@
+<tr>
+    <th>序号</th>
+    <th>姓名</th>
+    <th>身份证</th>
+    <th>手机</th>
+    <th>邮箱</th>
+    <th>职务</th>
+    <th>职称</th>
+    <th>审核标志</th>
+    <th>教师资格证</th>
+    <th>审核操作</th>
+</tr>
+#set($teacherauthNum =$!{startNum})
+#foreach($c in $!{List_map})
+	<tr>
+	    <td>$teacherauthNum</td>
+	    <td>
+	    	<div class="head-portrait-wrapper">
+	    		#if(!$c.avatar || $c.avatar == "DEFAULT")
+	    			<div class="head-portrait" style="background-image: url('$!{contextpath}statics/image/haoyoutouxiang1.png');"></div>
+	    		#else
+	    			<div class="head-portrait" style="background-image: url("$c.avatar");"></div>
+	    		#end
+	    		<div>$c.realname</div>
+	    	</div>
+	    </td>
+	    <td>$c.idcard</td>
+	    <td>$c.handphone</td>
+	    <td>$c.email</td>
+	    <td>$c.position</td>
+	    <td>$c.title</td>
+	    
+	    #if($c.progress == 1)
+	    	<td><span class="audit-status s1">等待验证</span></td>
+	    #elseif($c.progress == 3)
+	    	<td><span class="audit-status s2">验证已通过</span></td>
+	    #elseif($c.progress == 2)
+	    	<td><span class="audit-status s1">已退回</span></td>
+	    #else
+	    	<td></td>
+	    #end
+	    
+	    #if($null.isNull($c.cert) || $c.cert == "DEFAULT" || !$c.cert)
+	    	<td>未上传</td>
+	    #else
+	    	<td><a class="a-preview" target="_blank" href="$!{c.cert}" onclick="previewCert($!{c.cert})">预览</a></td>
+	    #end
+	    
+	    #if($c.progress == 1)
+	    	<td>
+		        <a class="a-pass" onclick="passCertification($c.id)">通过验证</a>
+		        <a class="a-reject" onclick="rejectCertification($c.id)">退回</a>
+		    </td>
+	    #elseif($c.progress == 3 || $c.progress == 2)
+	    	<td>
+                <span class="no-operate">——</span>
+            </td>
+        #else
+        	<td>
+                <span class="no-operate">——</span>
+            </td>
+	    #end
+	</tr>	
+	
+	#set($teacherauthNum = $teacherauthNum + 1)
+			
+#end

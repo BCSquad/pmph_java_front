@@ -1,0 +1,222 @@
+@charset "utf-8"
+
+.body{
+    background-color: #f6f6f6;
+}
+
+.body .content-wrapper .material-body-wrapper{
+    width: 1200px;
+    height: 675px;
+    padding:30px 0px 61px 0px;
+}
+
+
+
+.status-tab{
+    height: 26px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 12px;
+    letter-spacing: 0px;
+    padding:6px 16px 10px 16px;
+    color: #03717b;
+    text-align: center;
+    float:left;
+    border: none;
+    border-bottom: 1px solid #03717b;
+    border-top: 1px solid #03717b;
+    background: none;
+    outline: none;
+}
+
+
+#status-tab-line button:last-of-type{
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-right: 1px solid #03717b;
+}
+
+#status-tab-line button:first-of-type{
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-left: 1px solid #03717b;
+}
+
+.status-tab.selected{
+    height: 30px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 13px;
+    letter-spacing: 0px;
+    padding: 6px 16px 10px 16px;
+    color: #ffffff;
+    text-align: center;
+    float: left;
+    background-image: url(../../image/jcsbqbmid.png);
+    background-repeat: no-repeat;
+    border: none !important;
+}
+
+#status-tab-line button:first-of-type.selected{
+    background-image: url(../../image/jcsbqbleft.png);
+}
+#status-tab-line button:last-of-type.selected{
+    background-image: url(../../image/jcsbqbright.png);
+    background-position-x: -1px;
+}
+
+
+.right{
+    float: right;
+}
+.left{
+    float: left;
+}
+.search-tag{
+    width: 240px;
+    height: 28px;
+    border-radius: 2px;
+    border: solid 1px #999999;
+}
+
+.search-tag input{
+    width: 200px;
+    height: 26px;
+    background-color: #f6f6f6;
+    opacity: 1;
+    border: none;
+    outline: none;
+    float: left;
+    padding-left: 10px;
+
+}
+.search-tag button{
+    width: 28px;
+    height: 28px;
+    background-color: #f6f6f6;
+    opacity: 1;
+    border: none;
+    outline: none;
+    background-image: url(../../image/sousuo-helpCenter.png);
+    background-position: 3px 3px;
+    background-repeat: no-repeat;
+    float: right;
+}
+
+.body .nine-block-box-container{
+    width: 1230px;
+    /* height:582px; */
+    margin:28px 0px 16px 0px;
+    float: left;
+}
+.body .nine-block-box-container div{
+    float: left;
+    width: 382px;
+    height: 168px;
+    background-color: #ffffff;
+    border: solid 1px #dedede;
+    margin:0px 24px 24px 0px;
+    position: relative;
+}
+
+.body .nine-block-box-container div.right-up-tag{
+    margin: 0px 0px -35px 0px;
+    padding-right: 10px;
+    text-align: right;
+    float: right;
+    width: 73px;
+    height: 23px;
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 23px;
+    letter-spacing: 0px;
+    color: #999999;
+    background-image: url(../../image/right-top-tag1.png);
+    background-position: 10px 0px;
+    background-repeat: no-repeat;
+    border: none;
+}
+
+.body .nine-block-box-container div .material-title{
+    margin: 35px 15px 0px 15px;
+    border: none;
+    height: initial;
+    width: initial;
+    max-height: 34px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    font-family: MicrosoftYaHei;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 17px;
+    letter-spacing: 0px;
+    background: none;
+    color: #333333;
+}
+
+.body .nine-block-box-container div .material-deadline{
+    margin: 18px 0px 0px 16px;
+    border: none;
+    height: 14px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 14px;
+    background: none;
+    letter-spacing: 0px;
+    color: #b8b8b8;
+}
+
+.body .nine-block-box-container div .material-button{
+    margin: 0px 0px 0px 15px;
+    padding:0 18px 0px 18px;
+    height: 24px;
+    border-radius: 12px;
+    border: solid 0px #03717b;
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 22px;
+    letter-spacing: 0px;
+    outline: none;
+    position: absolute;
+    bottom: 25px;
+    
+}
+
+.body .nine-block-box-container div .btn-type-1{
+    color: #03717b;
+    background:none;
+    border: solid 1px #03717b;
+    left: 0px;
+}
+.body .nine-block-box-container div .btn-type-2{
+    color: #ffffff;
+    background-color: #03717b;
+    border: solid 1px #03717b;
+    left: 114px;
+}
+.body .nine-block-box-container div .btn-type-3{
+    color: #ffffff;
+    background-color: #fd9a2e;
+    border: solid 1px #fd9a2e;
+    left: 0px;
+}
+
+.pagination-wrapper{
+    float: right;
+    margin: 0px -10px 0px 0px;
+}
+
+
+

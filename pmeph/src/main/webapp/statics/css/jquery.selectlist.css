@@ -76,6 +76,7 @@
     overflow: hidden;
     white-space: nowrap;
     word-break: keep-all;
+    text-align: left;
     text-overflow: ellipsis;
   }
   .select-list ul li.selected,

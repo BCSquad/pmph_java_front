@@ -1,5 +1,5 @@
 /********************/
-/*** ÂÌÉ«±³¾°Ö÷²Ëµ¥µÄÑùÊ½ ***/
+/*** ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½Ê½ ***/
 
 body {
     margin: 0;
@@ -7,20 +7,20 @@ body {
     background-color: #f6f6f6;
 }
 
-/*¹Ì¶¨ÇøÓòÏÔÊ¾£¬ÔÚÖ÷ÒªÄÚÈÝÏÔÊ¾½çÃæ¶¼»áÓÃµ½*/
-.div-content {
+/*ï¿½Ì¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½æ¶¼ï¿½ï¿½ï¿½Ãµï¿½*/
+.org-head .div-content {
     width: 1200px;
     margin: 0 auto;
     background-color: White;
 }
 
-#div-titletop {
+.org-head #div-titletop {
     width: 100%;
     height: 40px;
     line-height: 40px;
 }
 
-.top-lable1 {
+.org-head .top-lable1 {
     height: 12px;
     font-family: MicrosoftYaHei;
     font-size: 14px;
@@ -30,7 +30,7 @@ body {
     color: #9aaabf;
 }
 
-.top-lable2 {
+.org-head .top-lable2 {
     height: 12px;
     font-family: MicrosoftYaHei;
     font-size: 14px;
@@ -41,13 +41,13 @@ body {
     float: right;
 }
 
-.div-menu {
+.org-head .div-menu {
     width: 100%;
     height: 70px;
     background-color: #29ab8f;
 }
 
-.div-menu-child {
+.org-head .div-menu-child {
     font-family: MicrosoftYaHei;
     font-size: 16px;
     font-weight: normal;
@@ -61,12 +61,12 @@ body {
     cursor: pointer;
 }
 
-.div-menu-child-click {
+.org-head .div-menu-child-click {
     background: #259980;
 }
 
 /**************/
-/*¶þ¼¶²Ëµ¥ÑùÊ½*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½Ê½*/
 
 #div-child {
     height: 50px;
@@ -109,12 +109,12 @@ body {
 
 /*************************************************************/
 
-/*Ö÷±í¸ñÑùÊ½*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½*/
 table {
     width: 1200px;
 }
 
-/*ÊäÈë¿òÑùÊ½-¶Ì*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½-ï¿½ï¿½*/
 .txt {
     width: 260px;
     height: 40px;
@@ -126,7 +126,7 @@ table {
     border-radius: 4px;
 }
 
-/*Ñ¡ÔñÏÂÀ­¿ò*/
+/*Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 .select-td {
     width: 280px;
     height: 40px;
@@ -136,7 +136,7 @@ table {
     margin-left: 10px;
 }
 
-/*ÊäÈë¿òÑùÊ½-³¤*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½-ï¿½ï¿½*/
 .txt-L {
     width: 650px;
     height: 40px;
@@ -148,7 +148,7 @@ table {
     border-radius: 4px;
 }
 
-/*°´Å¥ÑùÊ½-4¸ö×Ö*/
+/*ï¿½ï¿½Å¥ï¿½ï¿½Ê½-4ï¿½ï¿½ï¿½ï¿½*/
 .btn-4 {
     border: none;
     width: 100px;
@@ -160,7 +160,7 @@ table {
     border-radius: 2px;
 }
 
-/*°´Å¥ÑùÊ½-2¸ö×Ö*/
+/*ï¿½ï¿½Å¥ï¿½ï¿½Ê½-2ï¿½ï¿½ï¿½ï¿½*/
 .btn-2 {
     border: none;
     width: 75px;

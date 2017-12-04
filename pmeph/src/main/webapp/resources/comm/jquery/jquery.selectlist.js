@@ -6,13 +6,13 @@
  *
  * 用法
  * $(function(){
-		$('select').selectlist({
-			zIndex: 10,
-			width: 200,
-			height: 26,
-			optionHeight:26
-		});
-	})
+ $('select').selectlist({
+ zIndex: 10,
+ width: 200,
+ height: 26,
+ optionHeight:26
+ });
+ })
  */
 
 ;(function ($, window, document) {
@@ -22,7 +22,7 @@
 
             //默认属性配置
             enable: true,   //选择列表是否可用
-            zIndex: null,  //选择列表z-index值，如需兼容IE6/7,必须加此属性
+            zIndex: 0,  //选择列表z-index值，如需兼容IE6/7,必须加此属性
             width: null,   //选择列表宽度
             height: null,  //选择列表高度
             border: null,  //选择列表边框
@@ -32,6 +32,7 @@
             triangleSize: 6,   //右侧小三角大小
             triangleColor: '#d0d0d0',  //右侧小三角颜色
             fiter: false,
+            initValue: null,
             topPosition: false,  //选择列表项在列表框上部显示,默认在下边显示
             speed: 100,   //选择列表框显示动画速度（毫秒）
             onChange: function () {
@@ -96,7 +97,10 @@
                 tempClassNameArray = [classNameArray[0]];
                 for (var i = 1; i < classNameArray.length; i++) {
                     if (classNameArray[i] !== tempClassNameArray[tempClassNameArray.length - 1]) {
-                        tempClassNameArray.push(classNameArray[i]);
+                        if(classNameArray[i]!='required'){
+                            tempClassNameArray.push(classNameArray[i]);
+                        }
+
                     }
                 }
                 return tempClassNameArray.join(' ');
@@ -110,7 +114,12 @@
         getSelectedIndex: function (element) {
             var $this = $(element),
                 selectedIndex = $this.get(0).selectedIndex || 0;
-
+            var values = this.getOptionValue(element);
+            for (var i = 0; i < values.length; i++) {
+                if (values[i] == this.settings.initValue) {
+                    selectedIndex = i;
+                }
+            }
             return selectedIndex;
         },
 
@@ -182,8 +191,27 @@
                 selectOptionValue = that.getOptionValue($this),
                 selectedIndex = that.getSelectedIndex($this),
                 selectedValue = that.getSelectedOptionValue($this),
-                selectLength = that.getOptionCount($this),
-                selectHTML = '<div id="' + selectID + '" class="select-wrapper ' + selectClassName + '"><input type="hidden" name="' + selectName + '" value="' + selectedValue + '" /><i class="icon select-down"></i>',
+                selectLength = that.getOptionCount($this);
+
+            var selectHTML = '<div id="' + selectID + '" class="select-wrapper '
+                + selectClassName + ' " data-tip="' + data_tip + '" data-valid="' + data_valid + '" data-error="' + data_error + '">' +
+                '<input type="hidden" name="' + selectName + '" value="' + selectedValue + '" ';
+            if ($this.hasClass("required")) {
+                var data_tip = $this.attr("data-tip");
+                if (data_tip) {
+                    selectHTML += 'data-tip="' + data_tip + '"';
+                }
+                var data_valid = $this.attr("data-valid");
+                if (data_valid) {
+                    selectHTML += 'data-valid="' + data_valid + '"';
+                }
+                var data_error = $this.attr("data-error");
+                if (data_error) {
+                    selectHTML += 'data-error="' + data_error + '"';
+                }
+            }
+            selectHTML += '/>' +
+                '<i class="icon select-down"></i>',
                 selectListHTML = '';
             if (that.settings.fiter) {
                 selectHTML += '<input type="text" class="select-button" value="' + selectedOptionText + '" />';
@@ -295,7 +323,8 @@
                         }
                     }
                 },
-                'max-height': that.setStyleProperty(that.settings.showMaxHeight) + 'px'
+                'max-height': that.setStyleProperty(that.settings.showMaxHeight) + 'px',
+                'z-index': that.settings.zIndex+20
             });
 
             //设置设置模拟选择列表选项外层样式
@@ -396,7 +425,7 @@
                                     .val($selectedItem.text())
                                     .prev().prev().val($selectedItem.attr('data-value'));
                                 if ($.isFunction(that.settings.onChange)) {
-                                    that.settings.onChange.call(that);
+                                    that.settings.onChange.call(that, $selectedItem.attr('data-value'), $selectedItem.text());
                                 }
                                 break;
                             //Esc
@@ -453,7 +482,7 @@
                     }
 
                     if ($.isFunction(that.settings.onChange)) {
-                        that.settings.onChange.call(that);
+                        that.settings.onChange.call(that, $(this).attr('data-value'), $(this).text());
                     }
 
                     return false;

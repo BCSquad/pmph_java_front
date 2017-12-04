@@ -3,6 +3,9 @@ function Page(opt) {
     if (set.startnum > set.num || set.startnum < 1) {
         set.startnum = 1;
     }
+    set.startnum=parseInt(set.startnum);
+    set.num=parseInt(set.num);
+
     var n = 0, htm = '';
     var clickpages = {
         elem: set.elem,
@@ -80,7 +83,7 @@ function Page(opt) {
             return clickpages.elem.children('li.active').text();
         },
         JumpPages: function () {
-            $(".pageJump input[type=\"text\"]").bind('keydown', function (event) {
+            $(".pageJump input[type=\"text\"]").unbind().bind('keydown', function (event) {
                 if (event.keyCode == "13") {
                     var i = parseInt($(this).val());
                     if (isNaN(i) || (i <= 0) || i > clickpages.num) {
@@ -123,7 +126,7 @@ function Page(opt) {
                         }
                     }
                 });*/
-            $(".pageJump .button").click(function () {
+            $(".pageJump .button").unbind().click(function () {
                 var i = parseInt($(this).siblings('input').val());
                 if (isNaN(i) || (i <= 0) || i > clickpages.num) {
                     return;
@@ -225,12 +228,12 @@ function Page(opt) {
             }
         }
     }
-    if (set.num <= 1) {
+    if (set.num <= 0) {
         $(".pagination").html('');
         return;
     } else if (parseInt(set.num) <= 6) {
         n = parseInt(set.num);
-        var html = '<li><a  aria-label="Previous">&laquo;</a></li>\
+        var html = '<li><a  aria-label="Previous">首页</a></li>\
 					<li><a><</a></li>';
         for (var i = 1; i <= n; i++) {
             if (i == set.startnum) {

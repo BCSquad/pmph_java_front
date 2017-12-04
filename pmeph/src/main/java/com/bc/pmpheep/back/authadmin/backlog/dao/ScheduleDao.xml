@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.authadmin.backlog.dao.ScheduleDao" >
+	
+	<!-- 查询待办事项列表 -->
+	<select id="selectScheduleList" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT * FROM(
+		SELECT d.realname AS NAME,d.gmt_create AS TIME,m.`material_name` AS TYPE 
+		FROM declaration d 
+		LEFT JOIN material m
+		ON d.`material_id` = m.`id`
+		LEFT JOIN org_user u
+		ON d.`org_id` = u.`org_id`
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			u.`id` = #{userId} AND d.online_progress='1'
+			<if test="null!=week">AND d.gmt_create >= #{week} </if>
+			<if test="null!=month">AND d.gmt_create >= #{month}</if>
+			<if test="null!=year">AND d.gmt_create >= #{year}</if>
+		</trim>
+		ORDER BY d.gmt_create DESC) t1
+		UNION 
+		SELECT * FROM (
+		SELECT w1.username,w.gmt_create,"教师资格认证" FROM writer_user_certification w
+		LEFT JOIN org_user u1
+		ON w.org_id = u1.org_id
+		LEFT JOIN writer_user w1		
+		ON w1.id= w.user_id 
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			u1.`id` = #{userId} AND w.progress='1' 
+			<if test="null!=week">AND w.gmt_create >= #{week} </if>
+			<if test="null!=month">AND w.gmt_create >= #{month}</if>
+			<if test="null!=year">AND w.gmt_create >= #{year}</if>
+		</trim>
+		ORDER BY w.gmt_create DESC) t2
+		limit #{startPage},#{endPage}
+	</select>
+	<!-- 查询待办事项条数 -->
+	<select id="selectScheduleCount" parameterType="java.util.Map" resultType="int" >
+		SELECT COUNT(*) FROM (
+		SELECT * FROM(
+		SELECT d.realname AS NAME,d.gmt_create AS TIME,m.`material_name` AS TYPE 
+		FROM declaration d 
+		LEFT JOIN material m
+		ON d.`material_id` = m.`id`
+		LEFT JOIN org_user u
+		ON d.`org_id` = u.`org_id`
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			u.`id` = #{userId} AND d.online_progress='1'
+			<if test="null!=week">AND d.gmt_create >= #{week} </if>
+			<if test="null!=month">AND d.gmt_create >= #{month}</if>
+			<if test="null!=year">AND d.gmt_create >= #{year}</if>
+		</trim>
+		ORDER BY d.gmt_create DESC) t1
+		UNION 
+		SELECT * FROM (
+		SELECT w1.username,w.gmt_create,"教师资格认证" FROM writer_user_certification w
+		LEFT JOIN org_user u1
+		ON w.org_id = u1.org_id
+		LEFT JOIN writer_user w1		
+		ON w1.id= w.user_id 
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			u1.`id` = #{userId} AND w.progress='1' 
+			<if test="null!=week">AND w.gmt_create >= #{week} </if>
+			<if test="null!=month">AND w.gmt_create >= #{month}</if>
+			<if test="null!=year">AND w.gmt_create >= #{year}</if>
+		</trim>
+		ORDER BY w.gmt_create DESC) t2)t3
+	</select>
+	
+	<!-- 查询机构用户信息 -->
+	<select id="selectOrgUser" parameterType="Long" resultType="java.util.Map">
+		SELECT * FROM org_user u
+		LEFT JOIN org o
+		ON u.`org_id`=o.`id`
+		WHERE u.`id`=#{userId}
+	</select>
+	
+	<!-- 查询已办事项id集合 -->
+	<select id="selectUserMessageList" parameterType="java.util.Map" resultType="String">
+		select msg_id,gmt_create,title 
+		from user_message 
+		where receiver_id = #{userId} 
+		ORDER BY gmt_create DESC
+		limit #{startPage},#{endPage}
+	</select>
+	<!-- 查询已办事项集合 -->
+	<select id="selectUserMessageNameAndTime" parameterType="java.util.Map" resultType="java.util.Map">
+		select gmt_create,title,msg_id 
+		from user_message 
+		where receiver_id = #{userId} 
+		<if test="null!=time">AND gmt_create like #{time} </if>
+		ORDER BY gmt_create DESC
+		limit #{startPage},#{endPage}
+	</select>
+	
+	<!-- 查询已办事项id集合数量 -->
+	<select id="selectUserMessageCount" parameterType="java.util.Map" resultType="int">
+		select count(*) from user_message where receiver_id = #{userId}	<if test="null!=time">AND gmt_create like #{time} </if>
+	</select>
+	
+	
+</mapper>

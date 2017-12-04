@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.authadmin.teacherauth.dao.TeacherAuthDao">
+	
+	<resultMap type="java.util.Map" id="teacherAuthListMap">
+		
+	</resultMap>
+	
+	<select id="queryTeacherAuthList" parameterType="java.util.Map" resultMap="teacherAuthListMap">
+		SELECT
+		u.realname,
+		u.position,
+		u.title,
+		u.email,
+		u.is_teacher,
+		c.id,
+		c.user_id,
+		c.org_id,
+		c.handphone,
+		c.idcard,
+		c.progress,
+		c.cert,
+		u.avatar
+		
+		FROM
+		writer_user_certification AS c
+		Inner Join writer_user AS u ON c.user_id = u.id 
+		inner join org_user as o on c.org_id = o.org_id
+		<where>
+			<if test="orgUserId != null and orgUserId != '' ">
+				and o.id =#{orgUserId}
+			</if>
+			<if test="queryName != null and queryName != '' ">
+				and u.realname like concat("%",#{queryName},"%")
+			</if>
+			<if test="queryStatus != null and queryStatus != '' ">
+				and progress = ${queryStatus}
+			</if>
+		</where>
+		limit ${startNum},${pageSize}
+	</select>
+	
+	<select id="queryTeacherAuthCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(*) from writer_user_certification AS c
+		Inner Join writer_user AS u ON c.user_id = u.id 
+		inner join org_user as o on c.org_id = o.org_id
+		<where>
+			<if test="orgUserId != null and orgUserId != '' ">
+				and o.id =#{orgUserId}
+			</if>
+			<if test="queryName != null and queryName != '' ">
+				and u.realname like concat("%",#{queryName},"%")
+			</if>
+			<if test="queryStatus != null and queryStatus != '' ">
+				and c.progress = ${queryStatus}
+			</if>
+		</where>
+	</select>
+	
+	<update id="statusModify" parameterType="java.util.Map">
+		update writer_user_certification set progress = ${status} 
+		where id = ${id}
+	</update>
+	
+	
+</mapper>

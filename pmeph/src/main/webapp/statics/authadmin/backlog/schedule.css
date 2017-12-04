@@ -1,0 +1,624 @@
+.content{
+    width: 1200px;
+    height: auto;
+    background-color: #E6E6E6;
+    margin-left: 75px;
+}
+.big{
+    margin-left: 0px;
+    width: 890px;
+    height: auto;
+    float: left;
+    padding-bottom: 50px;
+}
+.nav{
+    clear: both;
+    width: 890px;
+    height: 32px;
+}
+.bigList{
+    width: 890px;
+    height: auto;
+    padding-top: 30px;
+    clear: both;
+
+}
+.left{
+    float: left;
+    background-color: #489299;
+    text-align: center;
+    width: 58px;
+    height: 16px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    color: #ffffff;
+    margin-top: 40px;
+    padding-top: 7px;
+    padding-bottom: 9px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.mid{
+    width: 490px;
+    margin-top: 40px;
+    border-bottom: solid 2px #489299;
+    float: left;
+    height: 24px;
+    padding-left: 15px;
+    padding-top: 6px;
+}
+.midButton{
+	color:red;
+	text-decoration:none;
+	font-family: MicrosoftYaHei;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0px;
+	color: #489299;
+}
+.right{
+    width: 296px;
+    margin-top: 40px;
+    height: 24px;
+    padding-top: 6px;
+    color: #489299;
+    border-bottom: solid 2px #489299;
+    float: left;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    color: #999999;
+}
+
+.list{
+    width: 890px;
+    height: 108px;
+    clear: both;
+
+}
+.leftContent{
+    width: 60px;
+    height: 100%;
+    float: left;
+
+}
+
+.leftContentSmall{
+    float: top;
+    margin-top: 0px;
+    margin-left: 1px;
+    border-radius:50%;
+    width: 38px;
+    height: 38px;
+    background-color: #ffffff;
+}
+.straightLine{
+    float: top;
+    color: #ffffff;
+    width: 100%;
+    margin-top: 0px;
+    height: 70px;
+}
+.whiteDiv{
+    width: 4px;
+    height: 70px;
+    margin-left: 18px;
+    margin-top: 0px;
+    background-color: #ffffff;
+}
+.picture{
+    width: 20px;
+    height: 16px;
+}
+.pictureDiv{
+    padding-top: 11px;
+    padding-left: 9px;
+}
+
+.rightContent{
+    width: 830px;
+    height: 88px;
+    float: left;
+    background-color: #ffffff;
+    border-radius: 2px;
+}
+.headPictureDiv{
+    height: 42px;
+    width: 400px;
+    float: left;
+}
+.leftPictureAndName{
+    width: 700px;
+    height: 88px;
+    float: left;
+}
+.rightButton{
+    width: 130px;
+    height: 88px;
+    float: left;
+}
+.upContent{
+    height: 50px;
+    width: 100%
+}
+.downContent{
+    width: 700px;
+    padding-left: 30px;
+}
+.timeEvent{
+    width: 670px;
+    float: left;
+    margin-top: 8px;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow: hidden;
+    height:20px;
+}
+.headPicture{
+    padding-left: 30px;
+    padding-top: 12px;
+    float: left;
+    width: 38px;
+
+}
+
+.picture1{
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+}
+.username{
+    width: 200px;
+    height: 28px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 1px;
+    color: #333333;
+    float: left;
+    padding-left: 10px;
+    padding-top: 22px;
+    margin-top: 0px;
+}
+.time{
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #666666;
+}
+.event{
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: 0px;
+    color: #489299;
+}
+
+.buttonDiv{
+    width: 60px;
+    height: 24px;
+    float: right;
+    font-size: 14px;
+    line-height: 24px;
+    background-color: #70bcc3;
+    text-align: center;
+    border-radius: 2px;
+    color: #ffffff;
+    margin: 32px 20px 0 0;
+    cursor: pointer;
+}
+
+.info{
+    float: left;
+    width: 255px;
+    height: 360px;
+    background-color: #ffffff;
+    margin-left: 35px;
+    margin-top: 102px;
+}
+.topPicture{
+    width: 184px;
+    height: 184px;
+    border-radius: 50%;
+}
+.topPictureDiv{
+    width: 100%;
+    padding-top: 30px;
+    padding-left: 36px;
+}
+
+.firstRow{
+    height: 25px;
+    width: 100%;
+    text-align: center;
+    margin-top: 38px;
+    font-family: MicrosoftYaHei;
+    font-size: 24px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 10px;
+    letter-spacing: 2px;
+    color: #03717b;
+}
+
+.littleV{
+    background-image: url("http://localhost:8080/pmeph/statics/pictures/css_sprites.png");
+    background-position: -9px -437px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 18px;
+    float: left;
+    margin-left: 30px;
+}
+.littleTitle{
+    width: auto;
+    height: 18px;
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 18px;
+    letter-spacing: 0px;
+    color: #03717b;
+    margin-left: 10px;
+    float: left;
+}
+.littleTitle2{
+    font-family: MicrosoftYaHei;
+    text-decoration: underline;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #03717b;
+    width: auto;
+    line-height: 16px;
+    height: 16px;
+    margin-left: 14px;
+    float: left;
+}
+.littleTitle3{
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #03717b;
+    width: auto;
+    line-height: 16px;
+    height: 16px;
+    margin-left: 14px;
+    float: left;
+}
+.secondRow{
+    width: 100%;
+    height: 18px;
+    text-align: center;
+}
+.thirdRow{
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 0px;
+    letter-spacing: 0px;
+    color: #666666;
+    margin-top: 28px;
+    text-align: center;
+}
+
+/****************************************************   eventRecord  ********************************************************************/
+
+.eventLeft{
+    float: left;
+    text-align: center;
+    width: 56px;
+    height: 16px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    color: #489299;
+    margin-top: 40px;
+    padding-top: 6px;
+    padding-bottom: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-bottom: solid 2px #489299;
+    text-decoration:none;
+}
+.eventMid{
+    background-color:#489299 ;
+    color: white;
+    width: 80px;
+    margin-top: 40px;
+    border-bottom: solid 2px #489299;
+    float: left;
+    height: 24px;
+    padding-left: 15px;
+    padding-top: 6px;
+}
+
+.eventRight{
+    width: 709px;
+    margin-top: 40px;
+    height: 24px;
+    padding-top: 6px;
+    color: #489299;
+    border-bottom: solid 2px #489299;
+    float: left;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    color: #999999;
+    text-align: right;
+}
+
+.eventTypeAndTime{
+    width: 500px;
+    height: 22px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 1px;
+    color: #333333;
+    float: left;
+    padding-top: 14px;
+    margin-top: 0px;
+}
+
+.timeEventFont{
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 24px;
+    letter-spacing: 0px;
+    color: #666666;
+}
+
+.listEvent{
+    width: 890px;
+    height: 96px;
+    clear: both;
+
+}
+.rightContentEvent{
+    width: 830px;
+    height: 74px;
+    float: left;
+    background-color: #ffffff;
+    border-radius: 2px;
+}
+
+.upContentEvent{
+    height: 40px;
+    width: 100%;
+    padding-left: 30px;
+}
+.downContentEvent{
+    width: 670px;
+    height: 34px;
+    padding-left: 30px;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow: hidden;
+}
+.rightButtonEvent{
+    width: 130px;
+    height: 74px;
+    float: left;
+}
+
+.leftEvent{
+    width: 700px;
+    height: 74px;
+    float: left;
+}
+.eventType{
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 24px;
+    letter-spacing: 0px;
+    color: #333333;
+}
+.eventTime{
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 24px;
+    letter-spacing: 0px;
+    color: #cccccc;
+}
+/*.buttonDivEvent{*/
+    /*width: 60px;*/
+    /*height: 24px;*/
+    /*float: right;*/
+    /*background-color: #70bcc3;*/
+    /*text-align: center;*/
+    /*border-radius: 2px;*/
+    /*color: #ffffff;*/
+    /*margin-top: 26px;*/
+    /*margin-right: 20px;*/
+    /*cursor: pointer;*/
+/*}*/
+.straightLineEvent{
+    float: top;
+    color: #ffffff;
+    width: 100%;
+    margin-top: 0px;
+    height: 58px;
+}
+.infoEvent{
+    float: left;
+    width: 255px;
+    height: 165px;
+    background-color: #ffffff;
+    margin-left: 35px;
+    margin-top: 102px;
+}
+
+.infoTop{
+    width: 100%;
+    height: 100%;
+    margin-top: 4px;
+}
+.firstRowEvent{
+    height: 24px;
+    width: 100%;
+    text-align: center;
+    margin-top: 44px;
+    font-family: MicrosoftYaHei;
+    font-size: 24px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 10px;
+    letter-spacing: 2px;
+    color: #03717b;
+}
+.secondRowEvent{
+    width: 100%;
+    height: 18px;
+    text-align: center;
+}
+.thirdRowEvent{
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 0px;
+    letter-spacing: 0px;
+    color: #666666;
+    margin-top: 28px;
+    text-align: center;
+}
+.contentEvent{
+    width: 1200px;
+    height: auto;
+    margin: 0 auto;
+}
+.pageDiv{
+    clear: both;
+    margin-top: 18px;
+}
+.close{
+    width: 30px;
+    height: 30px;
+    background-color: #ffffff;
+    position:absolute;
+    right:-15px;
+    top: -16px;
+    border-radius: 50%;
+    box-shadow: 1px -1px 0px 0px #e3e3e3;
+    text-align: center;
+    font-size: 18px;
+    cursor: pointer;
+}
+.tip{
+    position:absolute;
+    top:35%;
+    left:30%;
+    z-index:20;
+    width: 390px;
+    height: 204px;
+    display: none;
+    background-color: #ffffff;
+    border-radius: 6px;
+    box-shadow: 0px 4px 10px 0px
+    rgba(0, 0, 0, 0.2);
+}
+.gray{
+    position: fixed;
+    left:0;
+    top:0;
+    width: 100%;
+    height:100%;
+    z-index:10;
+    display: none;
+    background-color: rgba(0,0,0,0.5);
+    /*ºÊ»›ie8*/
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F000000,endColorstr=#7F000000);
+}
+/*ºÊ»›ie fixed*/
+.ie{
+    _position: absolute;
+    _clear: both;
+    _top:expression(eval(document.compatMode &&
+               document.compatMode=='CSS1Compat') ?
+               documentElement.scrollTop
+               +(documentElement.clientHeight-this.clientHeight) - 1
+               : document.body.scrollTop
+               +(document.body.clientHeight-this.clientHeight) - 1);
+}
+.upDiv{
+    width: auto;
+    height: 70px;
+    margin-top: 34px;
+    padding-left: 72px;
+
+}
+.downDiv{
+    width: auto;
+    height: 60px;
+
+    padding-left: 106px;
+    padding-top: 40px;
+}
+.tipWords{
+    width: 170px;
+    height: 37px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 24px;
+    letter-spacing: 0px;
+    color: #333333;
+    margin-top: 14px;
+    float: left;
+    margin-left: 16px;
+}
+
+.tipPicture{
+    width: 70px;
+    height: 70px;
+    float: left;
+}
+.leftButton,.checkButton{
+    height: 30px;
+    border-radius: 4px;
+    padding: 0 10px;
+    cursor: pointer;
+    border: solid 1px #03717b;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 30px;
+    letter-spacing: 0px;
+    text-align: center;
+    color: #03717b;
+    /*padding-top: 3px;*/
+    float: left;
+}
+
+.checkButton{
+    margin-left: 20px;
+    /*height: 27px;*/
+    background-color: #03717b;
+    /*border-radius: 4px;*/
+    /*font-family: MicrosoftYaHei;*/
+    /*font-size: 14px;*/
+    /*font-weight: normal;*/
+    /*font-stretch: normal;*/
+    /*line-height: 24px;*/
+    /*letter-spacing: 0px;*/
+    color: #ffffff;
+    /*float: left;*/
+    /*text-align: center;*/
+    /*padding-top: 3px;*/
+}

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.commuser.addfriend.dao.AddFriendDao">
+
+	<!-- 教材和相应申报人数 -->
+	<resultMap type="java.util.Map" id="addFriendListMap">
+		
+	</resultMap>
+
+	
+	<sql id="noFriendPara">
+		u.realname
+		,u.id as uid
+		,u.rank
+		,f.id 
+		,MIN(f.status) as min_status
+		,Max(f.status) as max_status
+		,group_concat(f.status ,"-",f.request_id,"-",f.target_id  order by f.status asc ) as relations
+		, f.request_id
+		,f.target_id
+		,f.`status`
+	</sql>
+	
+	<!-- 申报资料审核列表查询 -->
+	<select id="addFriendListQuery" resultMap="addFriendListMap" parameterType="java.util.Map" >	
+	select t.*
+	from
+		(
+		SELECT
+		<include refid="noFriendPara"></include>
+		,
+		case 
+		when f.target_id = ${uid} then 1 
+		else 0 
+		end as targeted
+		
+		from 
+		writer_user u
+		left join 
+		writer_friend f
+		on u.id = f.request_id or u.id = f.target_id
+		<where>
+			<if test="uid != null and uid != '' ">
+				and u.id != ${uid}
+			</if>
+			<if test="queryName != null and queryName != '' ">
+				and u.realname like  concat("%",#{queryName},"%")
+			</if>
+		</where>
+		group by u.id
+		) t
+	
+	left join
+
+		(
+		SELECT
+		u.id as uid2
+		from 
+		writer_user u
+		left join 
+		writer_friend f
+		on u.id = f.request_id or u.id = f.target_id
+		where (f.request_id is not null and f.target_id is not null and status = 2)
+		and (f.request_id= ${uid} or f.target_id = ${uid})
+		and u.id != ${uid}
+		group by u.id
+		) t2
+		
+	on t.uid = t2.uid2 where t2.uid2 is null
+	order by t.targeted desc
+	limit ${startNum},15
+	</select>
+	
+	<select id="addFriendListQueryCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(t.uid)
+		from
+			(
+			SELECT
+			
+			u.id as uid
+			
+			from 
+			writer_user u
+			left join 
+			writer_friend f
+			on u.id = f.request_id or u.id = f.target_id
+			<where>
+				<if test="uid != null and uid != '' ">
+					and u.id != ${uid}
+				</if>
+				<if test="queryName != null and queryName != '' ">
+					and u.realname like  concat("%",#{queryName},"%")
+				</if>
+			</where>
+			group by u.id
+			) t
+		
+		left join
+		
+			(
+			SELECT
+			
+			u.id as uid2
+			
+			from 
+			writer_user u
+			left join 
+			writer_friend f
+			on u.id = f.request_id or u.id = f.target_id
+			where (f.request_id is not null and f.target_id is not null and status = 2)
+			and (f.request_id= ${uid} or f.target_id = ${uid})
+			and u.id != ${uid}
+			group by u.id
+			) t2
+			
+		on t.uid = t2.uid2 where t2.uid2 is null
+		
+	</select>
+	
+	<insert id="addFriendRequest" parameterType="java.util.Map">
+		insert into writer_friend
+		(request_id
+		,target_id
+		,status)
+		value(
+		${request_id}
+		,${target_id}
+		,${status}
+		)
+	</insert>
+	
+	
+</mapper>

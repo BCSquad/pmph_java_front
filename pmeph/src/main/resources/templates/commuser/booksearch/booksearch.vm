@@ -1,0 +1,48 @@
+#set($objectNum =$!{startNum})
+#foreach($c in $!{List_map})	
+	
+	<div class="oneList">
+	    <div class="leftPicture">
+	    	#if(!$c.image_url || $c.image_url == "DEFAULT")
+	        	<img class="pictureSize" src="$!{contextpath}statics/image/ts_01.png">
+	        #else
+	        	<img class="pictureSize" src="$!{c.image_url}">
+	        #end
+	    </div>
+	
+	    <div class="rightContent">
+	        <div class="upDiv">
+	            <div class="upLeft">
+	                <div class="bookName">
+	                    <a class="not-like-an-a" target="_blank" href="$!{contextpath}readdetail/todetail.action?id=$!{c.bookId}"><span class="book-name-span">$!{c.bookname}</span></a>
+	                </div>
+	                <div class="name">
+	                    <span >$!{c.author} 丨 $!{c.publisher}</span>
+	                </div>
+	
+	            </div>
+	            <div class="upRight">
+	                <div class="pictureDiv">
+	                    <div class="number2">$!{c.comments}</div>
+	                    <div class="comment" title="评论数"></div>
+	                    <div class="number2">$!{c.likes}</div>
+	                    #if($c.likeId)
+	                    <div class="handPicture active" title="取消赞" onclick="likeSwitch($!{c.bookId},this)"></div>
+	                    #else
+	                    <div class="handPicture" title="点赞" onclick="likeSwitch($!{c.bookId},this)"></div>
+	                    #end
+	                    <div class="number">$!{c.clicks}</div>
+	                    <div class="eyePicture div" title="点击数"></div>
+	                </div>
+	            </div>
+	
+	        </div>
+	        <div class="downDiv">
+	        <span class="contentPage">$!{c.detail}</span>
+	        </div>
+	    </div>
+	</div>
+	
+#set($objectNum = $objectNum + 1)
+			
+#end

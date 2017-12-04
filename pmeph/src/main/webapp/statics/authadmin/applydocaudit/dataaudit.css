@@ -1,0 +1,166 @@
+.body{
+	background-color: #f6f6f6;
+	float: left;
+	padding-bottom: 60px;
+}
+
+.content-wrapper{
+	padding-top: 28px;
+	
+}
+
+.title{
+	clear:both;
+    border-bottom: 1px dotted #999999;
+    padding-bottom: 13px;
+    width:1200px;
+    text-align:left;
+    
+}
+
+.box{
+    margin-top: 21px;
+    padding-bottom: 60px;
+    width: 1200px;
+    background-color: #ffffff;
+}
+
+.query_btn{
+    height: 80px;
+}
+.query{
+    padding-top: 15px;
+    margin-left: 15px;
+}
+.query_input{
+    float: left;
+    width: 358px;
+    height: 40px;
+    border: solid 1px #ededed;
+}
+
+.btn{
+    float: right;
+    width: 825px;
+    padding-top: 5px;
+
+}
+
+.btn_1{
+    width: 80px;
+    height: 33px;
+    background-color: #1898dd;
+    margin-left: 20px;
+    border-radius: 1px;
+    font-family: MicrosoftYaHei;
+    color: #ffffff;
+    font-size: 14px;
+    border:none;
+
+}
+
+.btn_2{
+    width: 100px;
+    height: 33px;
+    background-color: #f9be3e;
+    margin-left: 540px;
+    border-radius: 1px;
+    font-family: MicrosoftYaHei;
+    color: #ffffff;
+    font-size: 14px;
+    border:none;
+}
+.btn_3{
+    width: 60px;
+    height: 33px;
+    background-color: #b0120e;
+    margin-left: 10px;
+    border-radius: 1px;
+    font-family: MicrosoftYaHei;
+    color: #ffffff;
+    font-size: 14px;
+    border:none;
+}
+
+
+
+.message{
+    margin-right: auto;
+    margin-left: auto;
+    width: 1200px;
+    margin-bottom: 30px;
+
+}
+
+table,tr,td{
+    padding: 0;
+    margin: 0;
+}
+table{
+    width: 100%;
+    border-spacing: 0px 0px;
+    border-collapse: collapse;
+    table-layout: fixed;/*列宽由表格宽度和列宽度设定。*/  
+}
+table thead tr{
+    height: 46px;
+    line-height: 30px;
+    background-color:#f0f0f0;
+}
+table thead td{
+    text-align: center;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+   border: 3px solid #fff;
+}
+table tbody tr{
+    height: 46px;
+    line-height: 30px;
+    font-family: SimSun;
+}
+
+table tr:hover{background:#fff4e5;}
+
+
+
+table tbody tr:nth-child(odd){
+
+    text-align: center;
+}
+
+table tbody tr:nth-child(even){
+    text-align: center;
+    background-color:#f0f0f0;
+
+}
+
+td{
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+
+.font_name {
+    width: auto;
+    height: 12px;
+    font-family: SimSun;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 24px;
+    letter-spacing: 0px;
+    color: #489299;
+}
+
+.pg_right{
+    float: right;
+
+    margin-right: 15px;
+}
+
+
+
+
+
+
+

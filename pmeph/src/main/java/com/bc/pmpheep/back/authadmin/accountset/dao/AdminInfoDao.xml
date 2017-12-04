@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.authadmin.accountset.dao.AdminInfoDao">
+    <resultMap id="adminInfoBaseMap" type="java.util.Map"></resultMap>
+    <!--通过机构用户ID获取机构用户信息-->
+    <select id="getOrgUserById" parameterType="java.lang.Long" resultMap="adminInfoBaseMap">
+        SELECT u.*,o.org_name AS org_name FROM org_user u
+        LEFT JOIN org o
+        ON u.org_id=o.id
+        WHERE u.id=#{id}
+    </select>
+    <!--根据机构用户ID修改机构用户基本信息-->
+    <update id="updateOrgUserById" parameterType="com.bc.pmpheep.back.authadmin.accountset.bean.OrgUser">
+        UPDATE org_user
+        <set>
+            <if test="realName!=null and realName!=''">realname=#{realName},</if>
+            <if test="sex!=null and sex!=''">sex=#{sex},</if>
+            <if test="position!=null and position!=''">position=#{position},</if>
+            <if test="telephone!=null and telephone!=''">telephone=#{telephone},</if>
+            <if test="title!=null and title!=''">title=#{title},</if>
+            <if test="handphone!=null and handphone!=''">handphone=#{handphone},</if>
+            <if test="postCode!=null and postCode!=''">postcode=#{postCode},</if>
+            <if test="email!=null and email!=''">email=#{email},</if>
+            <if test="fax!=null and fax!=''">fax=#{fax},</if>
+            <if test="address!=null and address!=''">address=#{address}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+    <!--修改密码-->
+    <update id="updatePassword" parameterType="com.bc.pmpheep.back.authadmin.accountset.bean.OrgUser">
+        UPDATE org_user
+        <set>
+            <if test="password!=null and password!=null">password=#{password}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+</mapper>

@@ -42,10 +42,11 @@
 }
 .message-list{
     width:1200px;
-    height:963px;
+    height:923px;
     margin:0px auto 15px;
     background-color: #ffffff;
     padding-top: 19px;
+    font-size: 14px;
 }
 .message-list .title{
     height: 40px;
@@ -95,6 +96,7 @@
     margin-bottom: 14px;
     height: 20px;
     font-size: 14px;
+  
 }
 .message-list .appendix span{
 float: left;
@@ -103,7 +105,7 @@ float: left;
     color: #333333;
 }
 .message-list .appendix .icon{
-    background-image: url(../image/附件拷贝4.png);
+    background-image: url(/pmeph/statics/image/附件拷贝4.png);
     background-position: 0px 2px;
     height: 30px;
     width: 16px;
@@ -119,6 +121,21 @@ float: left;
     font-size: 14px;
     color: #03717b;
 }
+a.input {
+
+    text-align:center;
+    display:inline-block;/*具有行内元素的视觉，块级元素的属性 宽高*/
+    overflow:hidden;/*去掉的话，输入框也可以点击*/
+    position:relative;/*相对定位，为 #file 的绝对定位准备*/
+}
+.file {
+    opacity:0;/*设置此控件透明度为零，即完全透明*/
+    filter:alpha(opacity=0);/*设置此控件透明度为零，即完全透明针对IE*/
+    font-size:100px;
+    position:absolute;/*绝对定位，相对于 .input */
+    top:0;
+    right:0;
+}
 .message-list  .file-tip{
     color: #bebebe;
     font-size: 14px;
@@ -133,7 +150,7 @@ float: left;
     border-top:1px #999999 dashed ;
     margin: 0px auto 0px;
 }
-.message-list .send button{
+.message-list .send input{
     width: 74px;
     height: 24px;
     background-color: #70bcc3;

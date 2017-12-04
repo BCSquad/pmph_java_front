@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.authadmin.applydocaudit.dao.ApplyDocAuditDao">
+
+	<!-- 教材和相应申报人数 -->
+	<resultMap type="java.util.Map" id="materialDeclareAuditListMap">
+		<id property="id" column="id"/>
+		<result property="materialName" column="materialName"/>
+		<result property="deadline" column="deadline"/>
+		<result property="actualDeadline" column="actualDeadline"/>
+		<result property="user_num" column="user_num"/>
+		<result property="isAllTextbookPublished" column="isAllTextbookPublished"/>
+		<result property="is_deleted" column="is_deleted"/>
+		<result property="is_all_textbook_published" column="is_all_textbook_published"/>
+	</resultMap>
+
+	<!-- 申报资料审核列表查询 -->
+	<select id="materialDeclareAuditListQuery" resultMap="materialDeclareAuditListMap" parameterType="java.util.Map" >
+		SELECT
+		m.id as id,
+		m.material_name as materialName,
+		m.deadline as deadline,
+		m.actual_deadline as actualDeadline,
+		m.is_all_textbook_published as isAllTextbookPublished,
+		count(u.id) as user_num,
+		count(u.id) as declaration_num,
+		m.is_deleted,
+		m.is_all_textbook_published
+		
+		FROM
+		material AS m
+		left Join declaration AS d ON m.id = d.material_id
+		left Join writer_user AS u ON u.id = d.user_id
+		
+		GROUP BY
+		m.id
+		HAVING
+		1=1
+		and (m.is_deleted = 0 or m.is_deleted is null )
+		<if test="queryCon != null and queryCon != '' ">
+			and m.material_name LIKE CONCAT('%',#{queryCon },'%')
+		</if>
+		<choose>
+			<when test='queryStatus == "1" '>
+				and (
+				(m.is_all_textbook_published != 0 and m.is_all_textbook_published is not null)
+				<![CDATA[ and m.actual_deadline >= NOW()]]>
+				)
+			</when>
+			<when test='queryStatus =="2" '>
+				and (
+				(m.is_all_textbook_published = 0 or m.is_all_textbook_published is null)
+				<![CDATA[ or m.actual_deadline < NOW()]]> 
+				)
+			</when>
+			<otherwise>
+				
+			</otherwise>
+		</choose>
+		ORDER BY
+		m.deadline ASC
+		LIMIT ${startNum}, ${pageSize}
+	</select>
+	
+	<select id="materialDeclareAuditListQueryCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		SELECT
+		count(m.id)
+		FROM
+		material AS m
+		<where>
+			(m.is_deleted = 0 or m.is_deleted is null )
+			
+			<if test="queryCon != null and queryCon != '' ">
+			and m.material_name LIKE CONCAT('%',#{queryCon },'%')
+		</if>
+		<choose>
+			<when test='queryStatus == "1" '>
+				and (
+				(m.is_all_textbook_published != 0 and m.is_all_textbook_published is not null)
+				<![CDATA[ and m.actual_deadline >= NOW()]]>
+				)
+			</when>
+			<when test='queryStatus =="2" '>
+				and (
+				(m.is_all_textbook_published = 0 or m.is_all_textbook_published is null)
+				<![CDATA[ or m.actual_deadline < NOW()]]> 
+				)
+			</when>
+			<otherwise>
+				
+			</otherwise>
+		</choose>
+		</where>
+		<!-- <![CDATA[ and m.actual_deadline >= NOW()]]> -->
+	</select>
+	
+	
+</mapper>

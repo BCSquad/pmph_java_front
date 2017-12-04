@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.commuser.articlepage.dao.ArticleSearchDao" >
+<!-- 初始化文章搜索页面 -->
+ <select id="searchArticle" parameterType="java.util.Map" resultType="java.util.Map">
+      select 
+		    t.title, 
+		    t.summary,
+		    t.clicks,
+		    t.id,
+		    t.likes,
+		    t.gmt_create,
+		    t.comments,
+		    b.realname,
+		    b.avatar,
+		    a.id as cms_user_like
+		    from cms_content t
+		    left join writer_user b on t.author_id=b.id
+		    left join cms_user_like a on a.content_id=t.id
+		    order by clicks desc limit #{startrow},#{endrow}
+ </select>
+ <!-- 查询一共有多少条数据 -->
+ <select id="queryList" resultType="java.util.Map">
+   select * from cms_content
+ </select>
+ <!-- 根据ID增加/取消点赞数 -->
+ <update  id="changeLikes" parameterType="java.util.Map">
+   update cms_content set likes=#{likes} where id=#{id}
+ </update>
+  <!-- 根据ID查询 -->
+ <select id="queryById" parameterType="java.util.Map" resultType="java.util.Map" >
+   select * from cms_content where id=#{id}
+ </select>
+ <!-- 查询当前文章是否被点过赞 -->
+ <select id="queryPraise" parameterType="java.util.Map" resultType="java.util.Map" >
+   select * from cms_user_like where writer_id=#{writer_id} and content_id=#{content_id}
+ </select>
+ <!-- 往点赞表里面新增数据 -->
+ <insert id="insertPraise" parameterType="java.util.Map">
+   insert into cms_user_like (content_id,writer_id)values(#{id},#{writer_id});
+ </insert>
+ <!-- 删除数据 -->
+ <delete id="del" parameterType="java.util.Map">
+   delete from cms_user_like where id=#{delete_id}
+ </delete>
+ <!-- 文章搜索模糊查询 -->
+  <!-- 查询当前文章是否被点过赞 -->
+ <select id="queryall" parameterType="java.util.Map" resultType="java.util.Map" >
+    select 
+		    t.title, 
+		    t.summary,
+		    t.clicks,
+		    t.id,
+		    t.likes,
+		    t.gmt_create,
+		    t.comments,
+		    b.realname,
+		    b.avatar,
+		    a.id as cms_user_like
+		    from cms_content t
+		    left join writer_user b on t.author_id=b.id
+		    left join cms_user_like a on a.content_id=t.id
+		    where t.title like #{title} limit 0,5
+ </select>
+</mapper>

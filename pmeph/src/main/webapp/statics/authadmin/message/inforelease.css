@@ -1,0 +1,160 @@
+.body {
+    background-color: #f1f1f1;
+    padding-top:30px;
+   	padding-bottom:30px;
+   	
+}
+
+.box{
+	background-color: #ffffff;
+	
+}
+
+.boxsm {
+    background-color: white;
+    padding-top:35px;
+    margin-left:20px;
+    margin-right:20px;
+}
+
+.item {
+    height: 40px;
+}
+
+.title{
+	width: 64px;
+	height: 17px;
+    margin-top: 8px;
+    color: #333333;
+    margin-right:20px;
+}
+.st_2 {
+    width: 600px;
+    height: 40px;
+    background-color: #f1f1f1;
+
+}
+
+.message {
+    width: 1160px;
+    margin-top:15px;
+}
+
+.title1{
+	float:left;
+	width: 64px;
+	height:auto;
+    margin-top: 8px;
+    color: #333333;
+    margin-right:20px;
+}
+
+.table{
+	 border-collapse: collapse;
+    	width: 1076px;
+    	height:auto;
+    	
+}
+
+
+.check_box {
+    width: 18px;
+    height: 18px;
+    background-color: #ffffff;
+    border-radius: 2px;
+    border: solid 1px #999999;
+}
+
+table thead tr {
+    height: 46px;
+    line-height: 30px;
+    background-color: #dedede;
+    border: solid 1px #dedede;
+}
+
+table thead td {
+    font-family: MicrosoftYaHei;
+    color: #333333;
+    font-size: 14px;
+    border: 1px solid #ffffff;
+    padding-left:20px;
+}
+
+table tbody td {
+
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    color: #666666;
+    border: solid 1px #dedede;
+    padding-left:20px;
+}
+
+table tbody tr {
+    height: 46px;
+    line-height: 30px;
+    font-family: SimSun;
+}
+
+table tbody tr:hover {
+    background: #fff4e5;
+}
+
+table tbody tr:nth-child(odd) {
+}
+
+table tbody tr:nth-child(even) {
+    
+    background: #f6f6f6;
+}
+
+.pagination-wrapper{
+	float:right;
+    margin: 30px 10px 30px 0px;
+}
+
+.bom_btn {
+	clear:both;
+    height: 54px;
+     width: 1160px;
+    border-top: 1px dotted #999999;
+    margin-top: 40px;
+   	padding-bottom:30px;
+   
+}
+
+.bom_btn_01 {
+    margin-top: 30px;
+    margin-left: 500px;
+    width: 104px;
+    height: 24px;
+    background-color: #70bcc3;
+    font-family: MicrosoftYaHe;
+    color: #ffffff;
+    border: none;
+    border-radius: 2px;
+}
+
+.bom_btn_02 {
+   	width: 74px;
+    height: 24px;
+    background-color: #70bcc3;
+    font-family: MicrosoftYaHe;
+    color: #ffffff;
+    border: none;
+    border-radius: 2px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

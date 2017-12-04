@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.commuser.myfriend.dao.MyFriendDao" >
+
+
+    <select id="getMyFriends" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        wu.id AS ID,
+        wu.nickname AS nickname,
+        CASE
+        WHEN wu.rank = '0' THEN
+        '普通用户'
+        WHEN wu.rank = '1' THEN
+        '教师'
+        WHEN wu.rank = '2' THEN
+        '作家'
+        WHEN wu.rank = '3' THEN
+        '专家'
+        END AS rank
+        FROM
+        writer_friend wf
+        INNER JOIN writer_user wu ON wf.request_id = wu.id
+        WHERE
+        STATUS = '2'
+        AND target_id = #{userId}
+    </select>
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.authadmin.message.dao.InfoReleaseDao" >
+	
+	<!-- 选择消息发布对象(机构用户) 下拉菜单 -->
+	<select id="selectMenu"  resultType="java.util.Map">
+		SELECT
+			textbook.id,
+			textbook.textbook_name,
+			textbook.textbook_round
+			FROM
+			textbook
+	</select>
+	
+
+	
+	
+	<!-- 选择消息发布对象(机构用户) -->
+	<select id="selectInfoRelease" parameterType="java.util.Map" resultType="java.util.Map">
+	SELECT
+	c.user_id AS id,
+	textbook_name,
+	textbook_round
+FROM
+	textbook a
+JOIN dec_position b ON b.textbook_id = a.id
+JOIN   declaration c ON  b.declaration_id = c.id
+JOIN org_user d on d.org_id = c.org_id
+		<where>
+			d.id = #{userId}
+			<if test="queryName != null and queryName != '' ">
+				and textbook_name like concat("%",#{queryName},"%")
+			</if>
+			
+		</where>
+		limit ${startNum},${pageSize}
+	</select>
+	<!-- 查询条数 -->
+	<select id="selectInfoReleaseCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(*) from textbook
+		<where>
+			<if test="queryName != null and queryName != '' ">
+				and textbook_name like concat("%",#{queryName},"%")
+			</if>
+			
+		</where>
+	</select>
+	
+	
+</mapper>
