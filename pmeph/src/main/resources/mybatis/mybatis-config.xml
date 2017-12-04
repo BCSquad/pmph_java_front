@@ -39,10 +39,4 @@
         <setting name="aggressiveLazyLoading" value="false"/>
     </settings>
 	
-	<plugins>
-		<plugin interceptor="com.bc.pmpheep.back.plugin.PagePlugin">
-			<property name="dialect" value="mysql"/>
-			<property name="pageSqlId" value=".*listPage.*"/>
-		</plugin>
-	</plugins>
 </configuration>

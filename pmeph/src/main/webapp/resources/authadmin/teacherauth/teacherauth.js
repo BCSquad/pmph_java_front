@@ -101,9 +101,10 @@ function selectSearchCondition(mutiCondition){
 function queryBtnClick(){
 	$("#page-num-temp").val(1);
 	if($("#select-search-condition").find("input[name='select-search-condition']").val() == '1' ) { //根据姓名查询
-		$("#select-search-status").val("");
+		$("#select-search-status").find("input[name='select-search-status']").val("");
 		$("#search-name-temp").val($("#search-name").val());
 	}else if($("#select-search-condition").find("input[name='select-search-condition']").val() == '2'){ //根据状态查询
+		$("#select-search-status").find("input[name='select-search-status']").val($("#select-search-status").find("li[class='selected']").attr("data-value"));
 		$("#search-name-temp").val("");
 	}
 	

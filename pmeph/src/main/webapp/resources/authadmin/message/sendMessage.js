@@ -86,7 +86,10 @@ function getValue(){
 	 if(radioval=='0'){
 		 $("#radioValue").val(radioval);
 	 }
-	
+	if($("#radioValue").val().length==0){
+		window.message.error("请选择教材报名者");
+		return false;
+	}
 	$("#UEContent").val(UEContent);
 	
 	if($("#TitleValue").val().length==0){

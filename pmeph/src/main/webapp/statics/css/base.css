@@ -25,3 +25,292 @@ body {
 .bgcolor-blue {
     background: #179192;
 }
+
+.head {
+    width: 100%;
+    height: 80px;
+    border-bottom: #E5E3DF 1px solid;
+}
+
+.head .content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.head .image {
+    width: 180px;
+    position: absolute;
+    top: 19px;
+    left: 0;
+}
+
+.head .links {
+    position: absolute;
+    top: 30px;
+    left: 240px;
+}
+
+.head .links a {
+    text-decoration: none;
+}
+
+.head .link {
+    display: inline-block;
+    width: 76px;
+    color: #999999;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.head .link.active {
+    color: #333333;
+}
+
+.head .delete {
+    background: url("../../statics/image/close.png");
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    left: 518px;
+    top: 35px;
+    cursor: pointer;
+    display: none;
+}
+
+.head .search-input {
+    width: 295px;
+    height: 34px;
+    position: absolute;
+    padding-left: 25px;
+    left: 542px;
+    top: 23px;
+    border-radius: 17px;
+    border: solid 1px #1abd9b;
+    line-height: 34px;
+    display: none;
+}
+
+.head .search-icon {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    left: 829px;
+    top: 33px;
+    cursor: pointer;
+}
+
+.head .write {
+    position: absolute;
+    left: 892px;
+    top: 23px;
+    width: 90px;
+    height: 34px;
+    border-radius: 17px;
+    border: solid 2px #1abd9b;
+    color: #1abd9b;
+    font-size: 16px;
+    line-height: 34px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+}
+
+.head .download {
+    position: absolute;
+    top: 33px;
+    right: 125px;
+    width: 61px;
+    height: 12px;
+    line-height: 18px;
+    color: #999999;
+    cursor: pointer;
+}
+
+.head .login-logout {
+    position: absolute;
+    top: 36px;
+    left: 1078px;
+    color: #999999;
+    line-height: 13px;
+    height: 13px;
+}
+
+.head .login-logout a {
+    text-decoration: none;
+    color: #999999;
+}
+
+.head .login-logout img {
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    left: 86px;
+    top: -12px;
+    cursor: pointer;
+}
+
+.head .user-info {
+
+}
+
+.head .user-info .notice-icon {
+    width: 24px;
+    height: 28px;
+    position: absolute;
+    right: 70px;
+    top: 25px;
+    cursor: pointer;
+
+}
+
+.head .user-info .user-icon {
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    right: 0px;
+    top: 21px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.head .user-info .sign {
+    background: red;
+    width: 8px;
+    height: 8px;
+    display: block;
+    position: absolute;
+    right: 67px;
+    top: 22px;
+    z-index: 4;
+    border-radius: 50%;
+}
+
+.head .user-select {
+    width: 130px;
+    height: 140px;
+    z-index: 99;
+ /*   background: white;*/
+    position: absolute;
+    top: 66px;
+    right: -40px;
+    display: none;
+}
+
+.head .user-select .select {
+    position: absolute;
+    top: 0;
+    left: 38px;
+    width: 68px;
+    height: 110px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.head .option {
+    height: 28px;
+    line-height: 28px;
+    width: 100%;
+    text-align: center;
+    color: #999999;
+    cursor: pointer;
+}
+
+.head .option.out {
+    margin-top: 4px;
+    color: red;
+}
+
+.head .download-pic {
+    width: 320px;
+    height: 177px;
+    z-index: 99;
+/*    background: white;*/
+    position: absolute;
+    top: 68px;
+    right: 120px;
+    display: none;
+}
+
+.tail .about {
+    margin: 0 auto;
+    width: 400px;
+    height: 50px;
+}
+
+.tail .about .item {
+    float: left;
+    width: 99px;
+    text-align: center;
+    border-left: 1px solid #9A9691;
+}
+
+.tail .copyright {
+    text-align: center;
+    margin-top: 15px;
+}
+
+
+
+.org-head .div-content {
+    width: 1200px;
+    margin: 0 auto;
+    background-color: White;
+}
+
+.org-head #div-titletop {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+}
+
+.org-head .top-lable1 {
+    height: 12px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 45px;
+    letter-spacing: 0px;
+    color: #9aaabf;
+}
+
+.org-head .top-lable2 {
+    height: 12px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 45px;
+    letter-spacing: 0px;
+    color: #9aaabf;
+    float: right;
+}
+
+.org-head .div-menu {
+    width: 100%;
+    height: 70px;
+    background-color: #29ab8f;
+}
+
+.org-head .div-menu-child {
+    font-family: MicrosoftYaHei;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 70px;
+    letter-spacing: 1px;
+    color: #ffffff;
+    text-align: center;
+    float: left;
+    padding-right: 20px;
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+.org-head .div-menu-child-click {
+    background: #259980;
+}
+
+.clear{
+    clear: both;
+}

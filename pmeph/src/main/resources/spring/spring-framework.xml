@@ -28,7 +28,6 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
     <context:component-scan base-package="com.bc.pmpheep.websocket"/>
-    <context:component-scan base-package="com.bc.pmpheep.back.commuser"/>
     <context:component-scan base-package="com.bc.pmpheep.utils"/>
     <!-- 加载属性文件 -->
     <context:property-placeholder location="classpath:spring/spring.properties" ignore-unresolvable="true" />
@@ -62,7 +61,7 @@
         <!-- 注入数据源-->
         <property name="dataSource" ref="dataSource"></property>
         <!-- 扫描 sql 配置文件，即 mapper 对应的 xml 文件 -->
-        <property name="mapperLocations" value="classpath:com/bc/pmpheep/back/**/dao/*.xml" />
+        <property name="mapperLocations" value="classpath:com/bc/pmpheep/**/dao/*.xml" />
         <!-- 扫描 entity 包，这样在 mapper 中就可以使用简单类名，多个用 ; 隔开 -->
         <property name="typeAliasesPackage" value="com.bc.pmpheep.back" />
         <!-- 配置 MyBatis 全局配置文件 -->
@@ -71,7 +70,7 @@
     <!-- MyBatis 集成 Spring 必须配置的项 2，可以不配置 id  -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!-- 给出须要被扫描的 Dao 接口-->
-        <property name="basePackage" value="com.bc.pmpheep.back.*.*.dao" />
+        <property name="basePackage" value="com.bc.pmpheep" />
         <!-- 注入 SqlSessionFactory -->
         <!-- 这是推荐配置的项，不要去配置 sqlSessionFactory ，已经被弃用了-->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
@@ -101,7 +100,7 @@
         </tx:attributes>
     </tx:advice>
     
-    <!--<bean id="responseBeanAop" class="com.bc.pmpheep.controller.bean.ResponseBeanAop" />-->
+    <bean id="responseBeanAop" class="com.bc.pmpheep.controller.bean.ResponseBeanAop" />
     
     <!-- 事务入口 -->
     <aop:config>
@@ -109,9 +108,9 @@
         <aop:advisor pointcut-ref="allServiceMethod" advice-ref="txAdvice" />
         
         <!-- controller responseBean封装拦截 -->
-       <!-- <aop:aspect  ref="responseBeanAop" order="2">
+        <aop:aspect  ref="responseBeanAop" order="2">
             <aop:around method="controllerMethodHandler" pointcut="execution(* com.bc.pmpheep.back..controller..*(..))" />
-        </aop:aspect>-->
+        </aop:aspect>
     </aop:config>
    
     <!--MongoDB-->

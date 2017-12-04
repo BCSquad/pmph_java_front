@@ -3,7 +3,7 @@
 
 <mapper namespace="com.bc.pmpheep.back.authadmin.applydocaudit.dao.DeclareCountDao">
 	<!--分页查询条件查询列表 -->
-	<select id="findDeclareCount"  resultType="java.util.Map">
+	<select id="findDeclareCount"  resultType="java.util.Map" parameterType="java.util.Map">
 		select 
 				t.textbook_name,
 				sum(case dp.chosen_position  when '0' then 1 else 0 end) as dp0, 
@@ -14,13 +14,19 @@
 				sum(case dp.declaration_id  when '1' then 1 else 0 end) as decid1, 
 				sum(case dp.declaration_id  when '2' then 1 else 0 end) as decid2, 
 				sum(case dp.declaration_id  when '3' then 1 else 0 end) as decid3
-				from  textbook t LEFT JOIN dec_position dp ON t.id=dp.textbook_id  GROUP BY t.textbook_name
-				order by dp.textbook_id desc limit 0,9
+				from  textbook t LEFT JOIN dec_position dp ON t.id=dp.textbook_id 
+				<where>
+					<if test="material_id != null and material_id != '' ">
+						t.material_id = ${material_id}
+					</if>
+				</where>
+				GROUP BY t.textbook_name
+				HAVING (decid1>=1 or decid2>=1 or decid3>=1)  limit 0,9
 	</select>
 	
 	
 	<!--最终结果名单列表 -->
-	<select id="findNameList"  resultType="java.util.Map">
+	<select id="findNameList"  resultType="java.util.Map" parameterType="java.util.Map">
 		Select b.id, b.textbook_name, 
 			    GROUP_CONCAT(p.rank,'',(CASE p.chosen_position WHEN '1' THEN d.realname   END )) AS 'zb',
 			    GROUP_CONCAT(CASE p.chosen_position WHEN '2' THEN d.realname   END ) AS 'fb', 
@@ -28,11 +34,16 @@
 		From dec_position	p
 		left join declaration d   on d.id = p.declaration_id
 		left join textbook b  on p.textbook_id = b.id
+		<where>
+			<if test="material_id != null and material_id != '' ">
+				b.material_id = ${material_id}
+			</if>
+		</where>
 		GROUP BY b.id   limit 0,15
 	</select>
 	
 	
-		<!-- 消息通知列表 -->
+		<!-- 加载更多-->
 	<select id="selectNoticeMessage" parameterType="java.util.Map" resultType="java.util.Map">
 		Select b.id, b.textbook_name, 
 			    GROUP_CONCAT(p.rank,'',(CASE p.chosen_position WHEN '1' THEN d.realname   END )) AS 'zb',
@@ -43,7 +54,37 @@
 		left join textbook b  on p.textbook_id = b.id
 		GROUP BY b.id  
 		<if test="startPara!=null">limit #{startPara},5</if>	
-		
+	</select>
+	
+	
+		<!-- 查看全部-->
+	<select id="selectAll"  resultType="java.util.Map">
+						select 
+				t.textbook_name,
+				sum(case dp.chosen_position  when '1' then 1 else 0 end) as dp1, 
+				sum(case dp.chosen_position  when '2' then 1 else 0 end) as dp2, 
+				sum(case dp.chosen_position  when '3' then 1 else 0 end) as dp3,
+
+				sum(case dp.declaration_id  when '1' then 1 else 0 end) as decid1, 
+				sum(case dp.declaration_id  when '2' then 1 else 0 end) as decid2, 
+				sum(case dp.declaration_id  when '3' then 1 else 0 end) as decid3
+				from  textbook t LEFT JOIN dec_position dp ON t.id=dp.textbook_id   
+				GROUP BY t.textbook_name  HAVING (decid1>=1 or decid2>=1 or decid3>=1) 
+			
+				UNION 
+				select 
+				t.textbook_name,
+				sum(case dp.chosen_position  when '1' then 1 else 0 end) as dp1, 
+				sum(case dp.chosen_position  when '2' then 1 else 0 end) as dp2, 
+				sum(case dp.chosen_position  when '3' then 1 else 0 end) as dp3,
+
+				sum(case dp.declaration_id  when '1' then 1 else 0 end) as decid1, 
+				sum(case dp.declaration_id  when '2' then 1 else 0 end) as decid2, 
+				sum(case dp.declaration_id  when '3' then 1 else 0 end) as decid3
+				from  textbook t LEFT JOIN dec_position dp ON t.id=dp.textbook_id   
+				GROUP BY t.textbook_name  
+				
+				limit 0,9
 	</select>
 
 </mapper>

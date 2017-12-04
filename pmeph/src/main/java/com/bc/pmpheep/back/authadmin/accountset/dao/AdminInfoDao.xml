@@ -10,7 +10,7 @@
         WHERE u.id=#{id}
     </select>
     <!--根据机构用户ID修改机构用户基本信息-->
-    <update id="updateOrgUserById" parameterType="com.bc.pmpheep.back.authadmin.accountset.bean.OrgUser">
+    <update id="updateOrgUserById" parameterType="com.bc.pmpheep.back.authadmin.accountset.bean.OrgAdminUser">
         UPDATE org_user
         <set>
             <if test="realName!=null and realName!=''">realname=#{realName},</if>
@@ -27,7 +27,7 @@
         WHERE id=#{id}
     </update>
     <!--修改密码-->
-    <update id="updatePassword" parameterType="com.bc.pmpheep.back.authadmin.accountset.bean.OrgUser">
+    <update id="updatePassword" parameterType="com.bc.pmpheep.back.authadmin.accountset.bean.OrgAdminUser">
         UPDATE org_user
         <set>
             <if test="password!=null and password!=null">password=#{password}</if>

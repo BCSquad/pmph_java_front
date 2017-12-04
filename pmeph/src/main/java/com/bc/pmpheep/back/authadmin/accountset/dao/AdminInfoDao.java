@@ -1,6 +1,6 @@
 package com.bc.pmpheep.back.authadmin.accountset.dao;
 
-import com.bc.pmpheep.back.authadmin.accountset.bean.OrgUser;
+import com.bc.pmpheep.back.authadmin.accountset.bean.OrgAdminUser;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,11 +25,11 @@ public interface AdminInfoDao {
      * 根据机构用户ID修改机构用户基本信息
      * @param orgUser
      */
-    public void updateOrgUserById(OrgUser orgUser);
+    public void updateOrgUserById(OrgAdminUser orgUser);
 
     /**
      * 修改密码
      * @param orgUser
      */
-    public void updatePassword(OrgUser orgUser);
+    public void updatePassword(OrgAdminUser orgUser);
 }

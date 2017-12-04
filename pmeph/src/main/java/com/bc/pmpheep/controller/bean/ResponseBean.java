@@ -6,8 +6,6 @@ package com.bc.pmpheep.controller.bean;
 
 import java.io.Serializable;
 
-import org.springframework.web.servlet.ModelAndView;
-
 /**
  * 控制器通用返回格式
  * 
@@ -53,7 +51,6 @@ public class ResponseBean<T> implements Serializable {
     private int             code                = SUCCESS;
     private String          msg                 = "success";
     private T               data;
-    private ModelAndView    modle;
 
     public ResponseBean() {
         super();
@@ -111,19 +108,4 @@ public class ResponseBean<T> implements Serializable {
     public void setData(T data) {
         this.data = data;
     }
-
-    /**
-     * @return the modle
-     */
-    public ModelAndView getModle() {
-        return modle;
-    }
-
-    /**
-     * @param modle the modle to set
-     */
-    public void setModle(ModelAndView modle) {
-        this.modle = modle;
-    }
-
 }

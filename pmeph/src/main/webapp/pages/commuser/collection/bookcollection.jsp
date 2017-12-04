@@ -5,27 +5,43 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<script type="text/javascript">
+		var pathName=window.document.location.pathname;  
+		var contxtpath=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+		var contextpath=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+</script>
+<c:set var="ctx" value="${pageContext.request.contextPath }"/>
 <head>
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
  <link rel="stylesheet" href="<%=path %>/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="<%=path %>/statics/commuser/collection/bookcollection.css" type="text/css">
+    <script src="<%=path %>/resources/comm/jquery/jquery.js"></script>
+    <script src="<%=path %>/resources/comm/base.js"></script>
+    <script src="${ctx }/resources/commuser/collection/bookcollection.js"></script>
 </head>
 <style type="text/css">
 </style>
+<script type="text/javascript" >
+/*    function toBookList(id,nameid){
+	   var name=$("#title"+nameid).text();
+	   window.location.href=contxtpath+"/bookcollection/tobookcollectionlist.action?favoriteId="+id+"&&favoriteName="+name;
+   } */
+</script>
 <body>
-<iframe style="width: 100%;padding: 0;margin: 0;height: 81px;border: none" src="../comm/head.html"></iframe>
-    <div class="content-wrapper" style="height:763px">
+<jsp:include page="/pages/comm/head.jsp"></jsp:include>
+    <div class="content-wrapper">
         <div class="message">
-            <a href="bookCollection.html">
+            <a href="javascript:;">
                 <div class="item">
                     <div class="on-text">书籍收藏夹</div>
                     <div class="on-line" ></div>
                 </div>
             </a>
-            <a href="articleCollection.html">
+            <a href="articlecollection/toarticlecollection.action">
                 <div class="item">
                     <div class="off-text" >文章收藏夹</div>
                     <div class="off-line" ></div>
@@ -33,32 +49,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </a>
         </div>
         <div class="message-line"></div>
-        <c:forEach items="${bookCollection }" var="collection">
-          <a href="bookcollection/booklist.action?favoriteId=${collection.id }">
+        <c:forEach items="${bookCollection }" var="collection" varStatus="status">
+          <a href="javascript:toBookList(${collection.id},${status.index });" target="_blank">
            <div class="collection">
-            <p class="title" >${collection.favorite_name }</p>
+            <p class="title" id="title${status.index }">${collection.favorite_name }</p>
             <p class="count">共${collection.mcount }条内容</p>
            </div>
           </a>
         </c:forEach>
-       <%--  <a href="bookCollectionList.html">
-        <div class="collection">
-            <p class="title" >${bookCollection }</p>
-            <p class="count">共34条内容</p>
-        </div></a> --%>
-       <!--  <a href="bookCollectionList.html"><div class="collection">
-            <p class="title" >神经学</p>
-            <p class="count">共34条内容</p>
-        </div></a>
-        <a href="bookCollectionList.html"><div class="collection">
-            <p class="title" >神经学</p>
-            <p class="count">共34条内容</p>
-        </div></a>
-        <a href="bookCollectionList.html"><div class="collection">
-            <p class="title" >神经学</p>
-            <p class="count">共34条内容</p>
-        </div></a> -->
     </div>
-<iframe style="width: 100%;clear:both;padding: 0;margin: 0;height: 200px;border: none" src="../comm/tail.html"></iframe>
+<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
 </html>

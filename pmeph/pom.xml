@@ -62,7 +62,6 @@
         <!--poi -->
         <poi.ver>3.17</poi.ver>
         <!--ueditor -->
-        <ueditor.ver>1.1.2-edit-1.0</ueditor.ver>
     </properties>
     <dependencies>
         <dependency>
@@ -227,12 +226,19 @@
             <artifactId>poi</artifactId>
             <version>${poi.ver}</version>
         </dependency>
-        <!-- ueditor -->
+
         <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.24</version>
+        </dependency>
+
+        <!-- ueditor -->
+       <!--  <dependency>
             <groupId>cn.songxinqiang</groupId>
             <artifactId>com.baidu.ueditor</artifactId>
             <version>${ueditor.ver}</version>
-        </dependency>
+        </dependency> -->
         <!--websocket-->
         <dependency>
             <groupId>javax.websocket</groupId>

@@ -19,11 +19,11 @@ package com.bc.pmpheep.back.util;
  */
 public class RouteUtil {
 	// 小组默认头像路径（现在没有数据没有路径，等有路径的时候加入）
-	public static final String DEFAULT_GROUP_IMAGE = "/static/default_image.png";
+	public static final String DEFAULT_GROUP_IMAGE = "/statics/group.png";
 	// 新建用户默认头像（现在没有数据没有路径，等有路径的时候加入）
-	public static final String DEFAULT_USER_AVATAR = "/static/default_image.png";
+	public static final String DEFAULT_USER_AVATAR = "/statics/user.png";
 	// mongoDB图片的前缀
-	public static final String MONGODB_IMAGE = "/pmpheep/image/";
+	public static final String MONGODB_IMAGE = "/image/";
 	// mongoDB文件的前缀(小组)
 	public static final String MONGODB_GROUP_FILE = "/groupfile/download/";
 	// mongoDB文件的前缀(普通)

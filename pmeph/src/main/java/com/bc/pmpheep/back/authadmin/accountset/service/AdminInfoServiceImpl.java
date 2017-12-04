@@ -1,6 +1,6 @@
 package com.bc.pmpheep.back.authadmin.accountset.service;
 
-import com.bc.pmpheep.back.authadmin.accountset.bean.OrgUser;
+import com.bc.pmpheep.back.authadmin.accountset.bean.OrgAdminUser;
 import com.bc.pmpheep.back.authadmin.accountset.dao.AdminInfoDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import java.util.Map;
 @Service("com.bc.pmpheep.back.authadmin.accountset.service.AdminInfoServiceImpl")
 public class AdminInfoServiceImpl implements AdminInfoService{
     @Override
-    public void updatePassword(OrgUser orgUser) {
+    public void updatePassword(OrgAdminUser orgUser) {
         adminInfoDao.updatePassword(orgUser);
     }
 
@@ -31,7 +31,7 @@ public class AdminInfoServiceImpl implements AdminInfoService{
     }
 
     @Override
-    public void updateOrgUser(OrgUser orgUser) {
+    public void updateOrgUser(OrgAdminUser orgUser) {
         adminInfoDao.updateOrgUserById(orgUser);
     }
 }

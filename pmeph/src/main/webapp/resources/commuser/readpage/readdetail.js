@@ -13,12 +13,12 @@ $("select").selectlist({
 //新增评论
 function insert(){
 	if($("#content").val()==''){
-		alert("请输入评论！");
+		window.message.info("请输入评论！");
 		return;
 	}
 	var json={
 		 content:$("#content").val(),
-		 score:$("#score").val(),
+		 score:$("#last_score").html(),
 		 book_id:$("#book_id").val(), 
 	};
 	 $.ajax({
@@ -29,7 +29,8 @@ function insert(){
 			data:json,
 			success:function(json){
 				if(json.returncode=="OK"){
-					  alert("评论成功！");
+					  $("#content").val(null);
+					  window.message.success("评论成功");
 				}
 			}
 		});
@@ -87,10 +88,10 @@ function addlikes(){
 			async:false,
 			dataType:'json',
 			success:function(json){
-				if(json.data.returncode=="yes"){
-					alert("已经点过赞了！");
+				if(json.returncode=="yes"){
+					window.message.info("已经点过赞了！");
 				}else{
-					alert("点赞成功");
+					window.message.success("点赞成功");
 				}
 			}
 		});
@@ -115,3 +116,4 @@ function addmark(){
 			}
 		});
 }
+

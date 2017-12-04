@@ -33,9 +33,10 @@ $(function(){
 		$('input[name="choose"]:checked').each(function(){ 
 		chk_value.push($(this).val()); 
 		}); 
-		if(chk_value.length==0){
+		/*if(chk_value.length==0){
 			window.message.error("请选择教材报名者");
-		}
+			return false;
+		}*/
 	    parent.$('#radioValue').val(chk_value);
 	   // parent.layer.tips('Look here', '#parentIframe', {time: 5000});
 	   

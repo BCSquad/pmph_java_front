@@ -221,6 +221,7 @@
     color: #B3AFA9;
     padding-bottom: 3px;
     border-bottom: 3px solid white;
+    cursor: pointer;
 }
 
 .tab-bar .point {
@@ -247,24 +248,30 @@
 }
 
 .tab-bar .page .page-num {
-    text-align: center;
-    vertical-align: top;
+    float: right;
+}
+
+.beforepage {
+    margin-top: -50px;
 }
 
 .tab-bar .page .icon-left {
-    background: url("../image/css_sprites.png");
+    float: right;
+    background: url("../../image/css_sprites.png");
     background-position: -462px -314px;
     width: 12px;
     height: 24px;
     cursor: pointer;
+    cursor: pointer
 }
 
 .tab-bar .page .icon-right {
-    background: url("../image/css_sprites.png");
+    float: right;
+    background: url("../../image/css_sprites.png");
     background-position: -462px -344px;
     width: 12px;
     height: 24px;
-    cursor: pointer;
+    cursor: pointer
 }
 
 .area-4 .content {
@@ -311,6 +318,7 @@
     border-radius: 3px;
     margin: 6px;
     cursor: pointer;
+    text-decoration:none;
 
 }
 
@@ -333,7 +341,7 @@
 .area-4 .content .left .div_photo {
     width: 311px;
     height: 131px;
-    margin-top: 7px;
+    margin-top: 15px;
     background-image: url("../../testfile/p_adv.png");
 }
 
@@ -350,6 +358,7 @@
     margin-left: 29px;
     /*background-color: darkseagreen;*/
     margin-top: 23px;
+    cursor: pointer;
 }
 
 .label1 {
@@ -359,14 +368,22 @@
 }
 
 .area-4 .content .right .book .bk {
-    margin-left: 22px;
+    margin: auto;
     margin-top: 11px;
+    max-width: 140px;
+    height: 140px;
+    display: block;
 }
 
 .book_content_size {
     font-size: 14px;
-    margin-top: 29px;
+    margin-top: 24px;
     color: #333333;
+    overflow: hidden;
+    text-overflow: ellipsis; /*超出部分省略号显示*/
+    white-space: nowrap; /*强制不换行*/
+    text-align: center;
+
 }
 
 .yellow {
@@ -392,23 +409,27 @@
     font-size: 15px;
     color: #FFD200;
     float: left;
-    margin-top: -5px;
+    margin-top: -7px;
     margin-left: 4px;
 }
 
 .yellow-span {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     float: left;
+    width: 50px;
 }
 
 .book_content_name {
     font-size: 11px;
-    margin-top: 9px;
+    margin-top: 2px;
     color: #999999
 }
 
 .book_content_picture {
     font-size: 11px;
-    margin-top: 16px;
+    margin-top: 8px;
 }
 
 .area-4 .content .right .book .book1 {
@@ -470,20 +491,26 @@
 }
 
 .a6_div2 {
+    font-size: 12px;
+    line-height: 18px;
+    color: #999999;
     margin-left: 15px;
     margin-right: 17px;
     margin-top: 15px;
+    margin-bottom: 15px;
     width: 252px;
     height: 73px;
+    text-overflow: ellipsis; /*超出部分省略号显示*/
+    overflow: hidden;
 }
 
-.a6_con2 {
+/*.a6_con2 {
     font-family: MicrosoftYaHei;
     font-size: 12px;
     line-height: 18px;
     letter-spacing: 0px;
     color: #999999;
-}
+}*/
 
 /*.small{*/
 /*background-color: red;*/
@@ -537,7 +564,7 @@
 }
 
 .tt {
-    margin-top: 34px;
+    margin-top: 17px;
     width: 252px;
     margin-left: 15px;
 }
@@ -676,8 +703,8 @@
     color: #999999;
     margin-left: 5px;
     margin-top: -4px;
-    text-overflow: ellipsis; 
-    white-space: nowrap; 
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .last_content_picture {
@@ -693,7 +720,7 @@
 }
 
 .last_star_true {
-    background-image: url("../testfile/sprites.png");
+    background-image: url("../../testfile/sprites.png");
     background-position: -183px -175px;
     background-repeat: no-repeat;
     height: 11px;
@@ -702,7 +729,7 @@
 }
 
 .last_star_false {
-    background-image: url("../testfile/sprites.png");
+    background-image: url("../../testfile/sprites.png");
     background-position: -182px -154px;
     background-repeat: no-repeat;
     height: 12px;
@@ -818,14 +845,13 @@
     width: 276px;
     height: 18px;
     margin-left: 14px;
-    margin-top: -30px;
 }
 
 .last_two_font {
     width: 296px;
     height: 120px;
-    margin-top: 50px;
-    margin-left: 109px;
+    margin-top: 0px;
+    margin-left: 120px;
 }
 
 .last_last_font {
@@ -856,8 +882,8 @@
     font-size: 12px;
     color: #999999;
     overflow: hidden;
-    text-overflow: ellipsis; 
-    white-space: nowrap; 
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .last_advice_head {
@@ -868,22 +894,24 @@
     font-size: 12px;
     color: #999999;
     overflow: hidden;
-    text-overflow: ellipsis; 
-    white-space: nowrap; 
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .right_div1 {
     width: 86px;
-    height: 40px;
+    height: 39px;
+    line-height: 39px;
+    text-align: center;
     float: left;
     margin-left: 0px;
-    border-bottom: 1px solid #DEDEDE;
+    border-bottom: 1px solid #ffffff;
+    cursor: pointer
 }
 
-.right_div1.active{
-    border-bottom: 1px solid  #ff825c;
+.right_div1.active {
+    border-bottom: 1px solid #ff825c;
 }
-
 
 .last_right_content_title {
     font-family: MicrosoftYaHei;
@@ -922,6 +950,71 @@
     height: 61px;
     margin-top: 20px;
     margin-left: 14px;
+    overflow: hidden;
+}
+
+.left .items {
+    width: 100%;
+}
+
+.left .item1 {
+    float: left;
+    width: 416px;
+   /* height: 170px;*/
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.sp_01 {
+    float: left;
+    height: 132px;
+    width: 120px;
+}
+
+.sp_01 img{
+    height: 132px;
+    max-width: 120px;
+    display: block;
+    margin: auto;
+}
+
+.sp_02 {
+    float: left;
+    margin-left: 5px;
+    height: 100%;
+    width: 268px;
+}
+
+.sp_title {
+    font-family: MicrosoftYaHei;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 24px;
+    letter-spacing: 0px;
+    color: #333333;
+}
+
+.sp_pl {
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 30px;
+    letter-spacing: 1px;
+    color: #999999;
+}
+
+.sp_remark {
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 24px;
+    letter-spacing: 0px;
+    color: #333333;
+    height: 74px;
+    overflow: hidden;
 }
 
 .last_content_font {
@@ -949,21 +1042,24 @@
     float: left;
     width: 120px;
     height: 180px;
+    position: relative;
 }
 
 .last_right_book {
-    background-image: url("");
-    float: left;
-    width: 70px;
+ /*   float: left;*/
+    width: 95px;
     height: 100px;
+    margin: 0 auto;
     margin-top: 30px;
-    margin-left: 25px;
-    background-color: #333333;
+    cursor: pointer;
 }
 
 .book_style {
-    width: 70px;
+    max-width: 95px;
+    margin:0 auto;
     height: 100px;
+    display: block;
+    z-index: 1;
 }
 
 .body_top {
@@ -981,64 +1077,66 @@
 
 .sale_book {
     float: left;
+    height: 35px;
     margin-top: -4px;
     font-family: MicrosoftYaHei;
     font-size: 12px;
     line-height: 24px;
     letter-spacing: 0px;
     color: #333333;
+    line-height: 17px;
+    overflow: hidden;
+    text-align: center;
 }
 
 .num1 {
     background-image: url("../../testfile/sprites.png");
     background-position: -374px -12px;
     background-repeat: no-repeat;
-    height: 27px;
-    width: 32px;
-    float: left;
+    position: absolute;
     width: 24px;
     height: 29px;
     margin-left: 10px;
     margin-top: -115px;
+    z-index: 10;
 }
 
 .num2 {
     background-image: url("../../testfile/sprites.png");
     background-position: -374px -50px;
     background-repeat: no-repeat;
-    height: 27px;
-    width: 32px;
-    float: left;
+    position: absolute;
     width: 24px;
     height: 29px;
     margin-left: 10px;
     margin-top: -115px;
+    z-index: 10;
 }
 
 .num3 {
     background-image: url("../../testfile/sprites.png");
     background-position: -374px -87px;
     background-repeat: no-repeat;
-    height: 27px;
-    width: 32px;
-    float: left;
+    position: absolute;
     width: 24px;
     height: 29px;
     margin-left: 10px;
     margin-top: -115px;
+    z-index: 10;
 }
 
 .num4 {
     background-image: url("../../testfile/sprites.png");
     background-position: -374px -126px;
     background-repeat: no-repeat;
-    height: 27px;
-    width: 32px;
-    float: left;
+/*    height: 27px;
+    width: 32px;*/
     width: 24px;
     height: 29px;
     margin-left: 10px;
     margin-top: -115px;
+    position: absolute;
+    z-index: 10;
 }
 
 .num_book {

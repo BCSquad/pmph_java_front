@@ -1,19 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bc.pmpheep.back.commuser.collection.dao.BookCollectionDao">
-	<resultMap type="java.util.Map" id="bookMap"></resultMap>
-	<!-- 查询书籍收藏夹名称和收藏夹下收藏书籍的数量 -->
-	<select id="queryBookCollectionList" resultMap="bookMap">
-		select
-		f.favorite_name,f.id as id,count(f.book_id) as mcount from (select
-		w.*,m.book_id from writer_book_favorite w left join book_user_mark m
-		on w.id=m.favorite_id) f GROUP BY f.favorite_name
+<resultMap type="java.util.Map" id="bookMap"></resultMap>
+    <!-- 查询书籍收藏夹名称和收藏夹下收藏书籍的数量 -->
+	<select id="queryBookCollectionList" parameterType="map" resultMap="bookMap">
+	   select f.favorite_name,f.id as id,count(f.book_id) as mcount from (select w.*,m.book_id from writer_book_favorite w left  join book_user_mark m on w.id=m.favorite_id) f where f.writer_id=#{writerId} GROUP BY f.favorite_name
 	</select>
-	<!--查询一个收藏夹下所有的书籍 -->
+	<!--查询一个收藏夹下所有的书籍  -->
 	<select id="queryBookList" parameterType="map" resultMap="bookMap">
-		select
-		b.author,b.bookname,b.clicks,b.comments,b.likes,b.bookmarks,d.detail
-		from book_user_mark m LEFT JOIN book b on m.book_id=b.id LEFT JOIN
-		book_detail d on b.id=d.book_id where m.favorite_id=#{favoriteId}
+	   select 
+	       m.id as mid,
+	       b.id,
+		   b.author,
+		   b.bookname,
+		   b.image_url,
+		   b.clicks,
+		   b.comments,
+		   b.likes,
+		   b.bookmarks,
+		   d.detail 
+	   from 
+		   book_user_mark m 
+		   LEFT JOIN book b on m.book_id=b.id   
+		   LEFT JOIN  book_detail d on b.id=d.book_id
+	   where 
+	   	   m.favorite_id=#{favoriteId} and m.writer_id=#{writerId} 
+	   limit #{startnum},#{size}
 	</select>
+	<!--查询用户是否对某一本书点赞  -->
+	<select id="queryLikes" parameterType="map" resultType="int">
+	   select count(id)  from book_user_like where book_id=#{bookId} and writer_id=#{writerId}
+	</select>
+	<!--向用户书籍点赞表中加入数据  -->
+	<insert id="insertBookLike" parameterType="map">
+	   insert into book_user_like(book_id,writer_id) values(#{bookId},#{writerId})
+	</insert>
+	<!--删除用户书籍点赞表中一条数据  -->
+	<delete id="deleteBookLike" parameterType="map">
+	   delete from book_user_like where book_id=#{bookId}  and  writer_id=#{writerId}
+	</delete>
+	<!--更改book表中点赞数量  -->
+	<update id="updateBookLikes" parameterType="map">
+	   update book set likes=#{likes} where id=#{bookId}
+	</update>
+	<!--更改book表中收藏数量  -->
+	<update id="updateMarkes" parameterType="map">
+	   update book set bookmarks=#{markes} where id=#{bookId}
+	</update>
+	<!--查询一个收藏夹下的书籍 数量 -->
+	<select id="queryBookCont" parameterType="map" resultType="int">
+	   select count(m.book_id) from book_user_mark m LEFT JOIN book b on m.book_id=b.id   LEFT JOIN  book_detail d on b.id=d.book_id where m.favorite_id=#{favoriteId} and m.writer_id=#{writerId}
+	</select>
+    <!--删除书籍的收藏-->
+	<delete id="deleteMark" parameterType="map">
+	   delete from book_user_mark where writer_id=#{writerId} and favorite_id=#{favoriteId}
+	   <if test="markId !=null">
+	    and  id=#{markId}
+	   </if>
+	</delete>
+	<!--删除收藏夹  -->
+	<delete id="deleteFavorite" parameterType="map">
+	   delete from writer_book_favorite where id=#{favoriteId} and writer_id=#{writerId}
+	</delete>
+	 <!--查询一个收藏夹下书籍的收藏数量、点赞数量、点击数和收藏数  -->
+	 <select id="queryOther" parameterType="map" resultMap="bookMap">
+	  select 
+	       b.id,
+		   b.clicks,
+		   b.comments,
+		   b.likes,
+		   b.bookmarks
+	   from 
+		   book_user_mark m 
+		   LEFT JOIN book b on m.book_id=b.id   
+	   where 
+	   	   m.favorite_id=#{favoriteId} and m.writer_id=#{writerId} 
+	 </select>
+	 <!-- 查询一本书籍的收藏数量、点赞数量、点击数和收藏数   -->
+	 <select id="queryNum" parameterType="java.util.Map" resultMap="bookMap">
+	  select  id,
+		      clicks,
+		      comments,
+		      likes,
+		      bookmarks 
+	  from book where id=#{bookId}
+	 </select>
 </mapper>

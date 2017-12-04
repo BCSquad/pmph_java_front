@@ -49,18 +49,16 @@ public class PageResult<T> {
 	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
 		this.start    = (this.pageNumber-1)*this.pageSize;
-		if(null == rows || rows.size() == 0){
-			rows          = new ArrayList<T>(this.pageSize);
-		}
+		rows          = new ArrayList<T>(this.pageSize);
 	}
 
 	public void setTotal(Integer total) {
 		this.total = total;
-		if(this.total%this.pageSize==0){
-			this.pageTotal=this.total/this.pageSize;
-		}else{
+//		if(this.total%this.pageSize==0){
+//			this.pageTotal=this.total/this.pageSize;
+//		}else{
 			this.pageTotal=(this.total/this.pageSize)+1;
-		}
+//		}
 		if(this.pageTotal==this.pageNumber){
 			isLast     = true;
 		}else{

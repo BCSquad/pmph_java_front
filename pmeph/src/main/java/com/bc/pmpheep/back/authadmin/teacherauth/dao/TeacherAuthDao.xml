@@ -34,7 +34,7 @@
 				and u.realname like concat("%",#{queryName},"%")
 			</if>
 			<if test="queryStatus != null and queryStatus != '' ">
-				and progress = ${queryStatus}
+				and c.progress = ${queryStatus}
 			</if>
 		</where>
 		limit ${startNum},${pageSize}

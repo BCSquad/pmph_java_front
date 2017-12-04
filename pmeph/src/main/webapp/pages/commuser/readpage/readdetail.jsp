@@ -299,7 +299,7 @@ $(document).ready(function(){
 	 $(".scorestar1").bind({
 	  mouseover: function () {
 		  $(this).css("background-position", "-183px -174px").prevAll().css("background-position", "-183px -174px");
-		  $(this).nextAll().css({"background-position": "-183px -152.5px"});
+		  $(this).nextAll().css({"background-position": "-183px -153px"});
 		  var score=parseInt($(this).attr("id").substring(5))*2+'.00';
 		  $("#last_score").html(score);
 	  }

@@ -9,7 +9,7 @@ import java.sql.Timestamp;
  * @Date: Created in 11:51 2017/11/30
  * @Modified: SuiXinYang
  **/
-public class OrgUser implements Serializable{
+public class OrgAdminUser implements Serializable{
     //主键ID
     private Long id;
     //机构ID

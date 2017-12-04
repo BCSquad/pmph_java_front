@@ -22,7 +22,7 @@
 <script src="${ctx}/resources/authadmin/applydocaudit/declarecount.js"
 	type="text/javascript"></script>
 <script type="text/javascript">
-	var contextpath=<%=request.getContextPath()%>
+	var contextpath="${pageContext.request.contextPath}";
 </script>
 </head>
 <body >
@@ -31,7 +31,7 @@
 	</div>
 	<div class="body" >
 		<div class="content-wrapper" style="background-color: #f0f0f0;">
-			<div class="title">查询统计>全国高等学校五年制临床医学专业第九轮规划教材</div>
+			<div class="title">查询统计>${material_name }</div>
 			<div class="bigbox" >
 				<div class="top-title">
 					<div class="top-title-bg">
@@ -54,7 +54,7 @@
 						<div class="excel_right_e">
 							<a href="#" class="aa">导出Excel</a>
 						</div>
-						<div class="excel_right_q">查看全部</div>
+						<div class="excel_right_q"  style="cursor: pointer;"  onclick='selectAll()'>查看全部</div>
 						<div class="excel_right_xljt">
 							<img src="${ctx}/statics/image/xljt.png" />
 						</div>
@@ -63,7 +63,7 @@
 
 
 				<div class="message">
-					<table class="table">
+					<table class="table" id="tableCount">
 						<thead>
 							<tr>
 								<td class="">序号</td>
@@ -76,8 +76,7 @@
 								<td class="">编委当选数</td>
 							</tr>
 						</thead>
-						<tbody>
-						 <c:set var="sum" value="10"></c:set>
+						<tbody id="queryTable">
 						 <c:set var="decid1" value="0"></c:set>
 						 <c:set var="decid2" value="0"></c:set>
 						 <c:set var="decid3" value="0"></c:set>
@@ -102,17 +101,7 @@
 									<c:set var="dp3" value="${dp3+one.dp3}"></c:set>
 								</tr>
 							</c:forEach>
-							
-								<tr>
-									<td>${sum }</td>    
-									<td >合计</td>
-									<td>${decid1}</td>
-									<td>${decid2}</td>
-									<td>${decid3}</td>
-									<td>${dp1}</td>
-									<td>${dp2}</td>
-									<td>${dp3}</td>
-								</tr>
+								
 						</tbody>
 					</table>
 				</div>
@@ -162,7 +151,6 @@
 				<div class="jiazaigengduo" style="cursor: pointer;" onclick='loadMore()'>加载更多……</div>
 				
 				<input id="startPara" name="startPara" type="hidden">
-				<input id="n" name="n" type="hidden">
 			</div>
 		</div>
 	</div>

@@ -73,7 +73,7 @@ public class DesRun {
     }
 
     private String decrypt(String strPassword) {
-        if (null== strPassword || ("".equals(strPassword))) {
+        if ("".equals(strPassword)) {
             return "";
         }
         String pw = "";
@@ -126,7 +126,7 @@ public class DesRun {
         String hs = "";
         String stmp;
         for (int n = 0; n < b.length; n++) {
-            stmp = (java.lang.Integer.toHexString(b[n] & 0XFF));
+            stmp = (Integer.toHexString(b[n] & 0XFF));
             if (stmp.length() == 1) {
                 hs = hs + "0" + stmp;
             } else {

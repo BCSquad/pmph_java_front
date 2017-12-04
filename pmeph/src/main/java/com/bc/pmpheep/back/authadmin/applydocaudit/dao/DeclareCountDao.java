@@ -12,6 +12,7 @@ public interface DeclareCountDao {
      * <pre>
      * 功能描述：申报统计（机构用户）
      * 使用示范：
+	 * @param paraMap 
      *
      * @param sessionId 
      * @return 
@@ -19,22 +20,28 @@ public interface DeclareCountDao {
      */
     
 	//查询
-	List<Map<String,Object>> findDeclareCount();
+	List<Map<String,Object>> findDeclareCount(Map<String, Object> paraMap);
 	
 	 /**
      * 最终结果名单列表
      * <pre>
      * 功能描述：申报统计（机构用户）
      * 使用示范： 
+	 * @param paraMap 
      *
      * @param sessionId 
      * @return 
      * </pre>
      */
     
-	List<Map<String,Object>> findNameList();
+	List<Map<String,Object>> findNameList(Map<String, Object> paraMap);
 	
-  	//消息通知列表
+  	//查看更多
   	List<Map<String, Object>> selectNoticeMessage(Map<String, Object> paraMap);
+  	
+  	//查看全部
+  	List<Map<String, Object>> selectAll();
+  	
+  	
 
 }

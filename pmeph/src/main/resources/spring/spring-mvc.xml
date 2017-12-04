@@ -12,34 +12,28 @@
           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd
           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 ">
-	<mvc:annotation-driven />
-	
-   	<!-- 使用cglib进行动态代理 -->
+    	 <!-- 使用cglib进行动态代理 -->
     <aop:aspectj-autoproxy proxy-target-class="true" />
-    
+
     <context:component-scan base-package="com.bc.pmpheep.back;com.bc.pmpheep.general">
        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
-    
+
     <!--AXIOS跨域请求访问拦截 -->
-    <mvc:interceptors>  
-       <bean class="com.bc.pmpheep.back.interceptor.ProcessInterceptor"></bean>  
-    </mvc:interceptors> 
+    <mvc:interceptors>
+       <bean class="com.bc.pmpheep.back.interceptor.ProcessInterceptor"></bean>
+    </mvc:interceptors>
+
+    <mvc:annotation-driven />
     
     <mvc:resources mapping="/statics/**" location="/statics/" />
-     <mvc:resources mapping="/static/**" location="/static/" />
-     <mvc:resources mapping="/plugins/**" location="plugins" />
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
         <property name="prefix" value="/pages/" />
         <property name="suffix" value=".jsp" />
     </bean>
-    
-    <!-- Controller异常处理 -->
-    <bean id="exceptionResolver" class="com.bc.pmpheep.back.resolver.MyExceptionResolver"></bean>
-    
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="defaultEncoding" value="utf-8" />
-        <property name="maxUploadSize" value="10485760" />
+        <property name="maxUploadSize" value="104857600" />
     </bean>
 </beans>

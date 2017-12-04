@@ -20,7 +20,10 @@ import org.springframework.context.ApplicationContext;
  * </pre>
  */
 public class Const {
-
+    // 小组默认头像路径（现在没有数据没有路径，等有路径的时候加入）
+    public static final String       DEFAULT_GROUP_IMAGE        = "5a012a17a201ee3ed7590351";
+    // 新建用户默认头像（现在没有数据没有路径，等有路径的时候加入）
+    public static final String       DEFAULT_USER_AVATAR        = "5a012a17a201ee3ed7590351";
     public static final String       DEFAULT_PASSWORD           = "123456";
     public static final String       WEB_PROJECT_NAME           = "PMPH_PROJECT";
     // 社内部门根节点id
@@ -58,10 +61,10 @@ public class Const {
     public static final String       SESSION_USERROL            = "USERROL";
     // 用户名
     public static final String       SESSION_USERNAME           = "USERNAME";
-    public static final Boolean      TRUE                       = true;
-    public static final Boolean      FALSE                      = false;
+    public static final String       TRUE                       = "T";
+    public static final String       FALSE                      = "F";
     // 登录地址
-    public static final String       LOGIN                      = "/pmph/login";
+    public static final String       LOGIN                      = "/login_toLogin.do";
     // 图片上传路径
     public static final String       FILE_PATH_IMG              = "uploadFiles/uploadImgs/";
     // 文件上传路径
@@ -70,7 +73,7 @@ public class Const {
     public static final String       FILE_PATH_FILE             = "uploadFiles/file/";
     // 不对匹配该值的访问路径拦截（正则）
     public static final String       NO_INTERCEPTOR_PATH        =
-                                                                ".*/((login)|(logout)|(code)|(static)|(websocket))";
+                                                                ".*/((login)|(logout)|(code)|(app)|(static)|(main)|(websocket)).*";
     // 该值会在web容器启动时由WebAppContextListener初始化
     public static ApplicationContext WEB_APP_CONTEXT            = null;
     // 普通文件下载控制器方法
@@ -172,6 +175,10 @@ public class Const {
     public static final Short        CMS_AUTHOR_TYPE_1          = 1;
     // 作者类型--作家
     public static final Short        CMS_AUTHOR_TYPE_2          = 2;
+    // CMS-CONTENT 表上级id
+    public static final Long         CMS_CONTENT_PARENT_ID      = 0l;
+    // CMS-CONTENT 表 根节点路径
+    public static final String       CMS_CONTENT_PATH           = "0";
     // CMS 页面搜索状态(0:是否发布,1:是否审核,2:是否置顶,3:是否热门,4:是否推荐,5:是否隐藏)
     public static final Integer      CMS_PAGE_SEARCH_0          = 0;
     public static final Integer      CMS_PAGE_SEARCH_1          = 1;

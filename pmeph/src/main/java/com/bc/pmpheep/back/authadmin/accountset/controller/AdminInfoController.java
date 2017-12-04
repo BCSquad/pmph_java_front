@@ -1,6 +1,6 @@
 package com.bc.pmpheep.back.authadmin.accountset.controller;
 
-import com.bc.pmpheep.back.authadmin.accountset.bean.OrgUser;
+import com.bc.pmpheep.back.authadmin.accountset.bean.OrgAdminUser;
 import com.bc.pmpheep.back.authadmin.accountset.service.AdminInfoService;
 import com.bc.pmpheep.back.util.DesRun;
 import com.bc.pmpheep.controller.bean.ResponseBean;
@@ -80,8 +80,8 @@ public class AdminInfoController extends BaseController {
      */
     @RequestMapping(value = "updateorguser",method = RequestMethod.POST,consumes="application/json")
     @ResponseBody
-    public ResponseBean<OrgUser> updateOrgUser(@RequestBody OrgUser orgUser){
-        ResponseBean<OrgUser> responseBean=new ResponseBean<>();
+    public ResponseBean<OrgAdminUser> updateOrgUser(@RequestBody OrgAdminUser orgUser){
+        ResponseBean<OrgAdminUser> responseBean=new ResponseBean<>();
         orgUser.setId(Long.parseLong("1267"));
         if (StringUtils.isEmpty(orgUser.getPosition())){
             orgUser.setPosition("-");
@@ -115,19 +115,20 @@ public class AdminInfoController extends BaseController {
      */
     @RequestMapping(value = "/updateorguserpassword",method = RequestMethod.POST,consumes = "application/json")
     @ResponseBody
-    public ResponseBean<OrgUser> updateOrgUserPassword(@RequestBody OrgUser orgUser){
-        ResponseBean<OrgUser> responseBean=new ResponseBean<>();
+    public ResponseBean<OrgAdminUser> updateOrgUserPassword(@RequestBody OrgAdminUser orgUser){
+        ResponseBean<OrgAdminUser> responseBean=new ResponseBean<>();
         orgUser.setId(Long.parseLong("1267"));
         DesRun desRun=new DesRun("",orgUser.getPassword());
         orgUser.setPassword(desRun.enpsw);
         adminInfoService.updatePassword(orgUser);
         return responseBean;
     }
+
     @RequestMapping(value = "/uploadProxy",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseBean<OrgUser> uploadProxy(@RequestParam(value = "id",required = true)String id,
+    public ResponseBean<OrgAdminUser> uploadProxy(@RequestParam(value = "id",required = true)String id,
                                              @RequestParam("file") MultipartFile file) throws IOException {
         String fileId=fileService.save(file, FileType.ORGUSER_PIC, 0);
-        return new ResponseBean<OrgUser>();
+        return new ResponseBean<OrgAdminUser>();
     }
 }

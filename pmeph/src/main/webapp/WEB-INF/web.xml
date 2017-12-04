@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance http://www.springmodules.org/schema/cache/springmodules-cache.xsd http://www.springmodules.org/schema/cache/springmodules-ehcache.xsd"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-	version="3.1">
-	<display-name>人卫E教</display-name>
-	<description>人民卫生出版社医学教育交互综合服务平台</description>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <display-name>人卫E教</display-name>
+    <description>人民卫生出版社医学教育交互综合服务平台</description>
 
-	<servlet>
-		<servlet-name>springMvc</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:spring/spring-mvc.xml</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-		<async-supported>true</async-supported>
-	</servlet>
+    <servlet>
+        <servlet-name>springMvc</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring/spring-mvc.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+        <async-supported>true</async-supported>
+    </servlet>
 
-	<servlet-mapping>
-		<servlet-name>springMvc</servlet-name>
-		<url-pattern>*.action</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>springMvc</servlet-name>
+        <url-pattern>*.action</url-pattern>
+    </servlet-mapping>
 
-	<!-- 使用配置文件修改来实现Put和Delete请求的参数传递 这种方式是在有时候，Ajax使用PUT/DELTET调用时，参数获取不到的情况下使用 
-		名称必须和springMvc配置的servlet名称对应 -->
-	<filter>
-		<filter-name>HiddenHttpMethodFilter</filter-name>
-		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
-		<async-supported>true</async-supported>
-	</filter>
-	<filter-mapping>
-		<filter-name>HiddenHttpMethodFilter</filter-name>
-		<servlet-name>springMvc</servlet-name>
-	</filter-mapping>
+    <listener>
+        <listener-class>
+            org.springframework.web.context.request.RequestContextListener
+        </listener-class>
+    </listener>
 
-	<filter>
-		<filter-name>HttpPutFormContentFilter</filter-name>
-		<filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>
-		<async-supported>true</async-supported>
-	</filter>
-	<filter-mapping>
-		<filter-name>HttpPutFormContentFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
 
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
+    <filter>
+        <filter-name>user</filter-name>
+        <filter-class>com.bc.pmpheep.general.filter.UserInfoFilter</filter-class>
+        <init-param>
+            <description>用户ID，用于测试</description>
+            <param-name>userid</param-name>
+            <param-value>24980</param-value>
+        </init-param>
+        <init-param>
+            <description>用户类型，用于测试(1:普通用户 2:机构用户)</description>
+            <param-name>usertype</param-name>
+            <param-value>1</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>user</filter-name>
+        <url-pattern>*.action</url-pattern>
+    </filter-mapping>
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -65,10 +65,10 @@
 		<init-param> <param-name>targetFilterLifecycle</param-name> <param-value>true</param-value> 
 		</init-param> </filter> -->
 
-	<!-- Make sure any request you want accessible to Shiro is filtered. /* 
-		catches all -->
-	<!-- requests. Usually this filter mapping is defined first (before all 
-		others) to -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
 	<!-- ensure that Shiro works in subsequent filters in the filter chain: -->
 	<!-- <filter-mapping> <filter-name>shiroFilter</filter-name> <url-pattern>/*</url-pattern> 
 		</filter-mapping> -->
@@ -87,16 +87,12 @@
 		</init-param>
 		<async-supported>true</async-supported>
 	</filter>
+
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	<welcome-file-list>
-		<welcome-file>/homepage/tohomepage.action</welcome-file>
-	</welcome-file-list>
-	<session-config>
-		<session-timeout>60</session-timeout>
-	</session-config>
+
 	<!-- 出错页面定义 -->
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>
@@ -114,4 +110,10 @@
 		<error-code>403</error-code>
 		<location>/500.jsp</location>
 	</error-page>
+    <welcome-file-list>
+        <welcome-file>/homepage/tohomepage.action</welcome-file>
+    </welcome-file-list>
+    <session-config>
+        <session-timeout>60</session-timeout>
+    </session-config>
 </web-app>

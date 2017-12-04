@@ -1,52 +1,120 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bc.pmpheep.back.commuser.homepage.dao.HomeDao" >
-  <resultMap id="BaseResultMap" type="com.bc.pmpheep.back.commuser.homepage.bean.HomepageDocument" >
-    <id column="id" property="id" />   
-    <result column="parent_id" property="parent_id"/>
-    <result column="path" property="path"/>
-    <result column="mid" property="mid"/>
-    <result column="category_id" property="category_id"/> 
-    <result column="title" property="title"/>     
-    <result column="summary" property="summary"/>
-    <result column="keyword" property="keyword"/>
-    <result column="author_type" property="author_type"/>
-    <result column="author_id" property="author_id"/>
-    <result column="clicks" property="clicks"/>
-    <result column="comments" property="comments"/>
-    <result column="likes" property="likes"/>
-    <result column="bookmarks" property="bookmarks"/>
-    <result column="is_stick" property="is_stick"/>
-    <result column="sort" property="sort"/>
-    <result column="deadline_stick" property="deadline_stick"/>
-    <result column="is_hot" property="is_hot"/>
-    <result column="sort_hot" property="sort_hot"/>
-    <result column="deadline_hot" property="deadline_hot"/>
-    <result column="is_promote" property="is_promote"/>
-    <result column="sort_promote" property="sort_promote"/>
-    <result column="deadline_promote" property="deadline_promote"/>
-    <result column="is_scheduled" property="is_scheduled"/>
-    <result column="is_hide" property="is_hide"/>
-    <result column="is_published" property="is_published"/>
-    <result column="auth_status" property="auth_status"/>
-    <result column="auth_user_id" property="auth_user_id"/>
-    <result column="is_staging" property="is_staging"/>
-    <result column="auth_date" property="auth_date"/>
-    <result column="is_deleted" property="is_deleted"/>
-    <result column="gmt_create" property="gmt_create"/>
-    <result column="gmt_update" property="gmt_update"/>
-    <result column="gmt_reedit" property="gmt_reedit"/>
-  </resultMap>
+  <resultMap id="Mapresult" type="java.util.Map"></resultMap>
   <!-- 查询最新三条公文 -->
-  <select id="queryDocument"  resultMap="BaseResultMap">
+  <select id="queryDocument"  resultMap="Mapresult">
      select  * from cms_content  where  category_id='59'  order by gmt_create desc limit 0,3
   </select>
    <!-- 查询最新五条公告 -->
-  <select id="queryNotice"  resultMap="BaseResultMap">
+  <select id="queryNotice"  resultMap="Mapresult">
      select  * from cms_content  where  category_id='57'  order by gmt_create desc limit 0,5
   </select>
+   <!-- 查询书籍 -->
+  <select id="queryBook" parameterType="map" resultMap="Mapresult">
+		SELECT
+			t.type_name,
+			b.*
+			FROM
+			book AS b
+			inner JOIN material_type AS t ON b.type = t.id
+			and
+			SUBSTRING_INDEX(SUBSTRING_INDEX(CONCAT(t.path,'-',t.id),'-',
+						(select 
+							cast(
+									(CHAR_LENGTH(path)-CHAR_LENGTH(REPLACE(path,'-','')))/CHAR_LENGTH('-')+2
+										as decimal(9,2)
+							)
+							 from material_type 
+							where id = cast(#{type} as decimal(9,2)))
+				),'-',-1) = #{type}
+       <if test="startrows >= 0">
+				<![CDATA[limit ${startrows},10]]>
+	   </if>
+  </select>
    <!-- 查询最新四条医学随笔 -->
-  <select id="queryArticle"  resultMap="BaseResultMap">
-      select  * from cms_content  where  category_id='58' order by gmt_create desc limit 0,4
+  <select id="queryArticle"  resultMap="Mapresult">
+      select  
+        t.title,
+        t.summary,
+        t.gmt_create,
+        c.realname       
+        from cms_content t
+        left join cms_category b on t.category_id=b.id
+        left join writer_user c on t.author_id=c.id
+        where  category_id='132' order by gmt_create desc limit 0,4
+  </select>
+   <!-- 查询热门标签 -->
+  <select id="queryLabel"  resultMap="Mapresult">
+      SELECT
+  b.type,t.note
+FROM
+  book b
+  join material_type t
+  on b.type=t.id
+GROUP BY b.type,t.note
+ORDER BY
+  sum(b.clicks) desc
+LIMIT 0,10
+  </select>
+   <!-- 查询点击人数最多的最多的作者 -->
+  <select id="queryAuthor"  resultMap="Mapresult">
+	select  
+	       t.title,
+	       b.realname,
+	       b.avatar
+	       from cms_content  t left join writer_user b on t.author_id=b.id
+	       where  category_id='58'  order by clicks desc limit 0,4
+      <!--  select  * from cms_content  where  category_id='58'  order by clicks desc limit 0,4 -->
+  </select>
+   <!-- 查询点击人数最多的书评的作者、书名以及评论内容 -->
+  <select id="queryComment"  resultMap="Mapresult">
+       SELECT
+			u.id,
+			b.id,
+			b.bookname,
+			b.image_url,
+			c.content,
+			c.score,
+			u.realname
+			FROM
+					book 
+			AS b
+			INNER JOIN 
+				(SELECT * from book_user_comment 
+					GROUP BY book_id 
+					HAVING is_auth = 1 AND
+					is_hide = 0 AND
+					is_deleted = 0)AS c 
+			ON b.id = c.book_id
+			INNER JOIN writer_user AS u ON c.writer_id = u.id
+			ORDER BY
+			b.comments ASC
+  </select>
+   <!-- 根据书籍类型查询图书畅销榜 -->
+  <select id="querySale" parameterType="map" resultMap="Mapresult">
+       SELECT
+		t.type_name,
+		b.*
+		FROM
+		book AS b
+		inner JOIN material_type AS t ON b.type = t.id
+		and
+		SUBSTRING_INDEX(SUBSTRING_INDEX(CONCAT(t.path,'-',t.id),'-',
+			(select 
+				cast(
+						(CHAR_LENGTH(path)-CHAR_LENGTH(REPLACE(path,'-','')))/CHAR_LENGTH('-')+2
+							as decimal(9,2)
+				)
+				 from material_type 
+				where id = cast(#{type} as decimal(9,2)))
+	        ),'-',-1) = #{type}
+		where b.is_on_sale = 1
+		ORDER BY
+		b.sales DESC limit 0,6
+  </select>
+   <!-- 查询书籍分类-->
+  <select id="queryBookType" parameterType="map" resultMap="Mapresult">
+       select * from material_type where  parent_id=#{parent_id}
   </select>
 </mapper>

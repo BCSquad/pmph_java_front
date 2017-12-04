@@ -31,7 +31,11 @@
 		material AS m
 		left Join declaration AS d ON m.id = d.material_id
 		left Join writer_user AS u ON u.id = d.user_id
-		
+		<where>
+			<if test="org_id != null and org_id != '' ">
+				and d.org_id =#{org_id}
+			</if>
+		</where>
 		GROUP BY
 		m.id
 		HAVING
@@ -40,6 +44,7 @@
 		<if test="queryCon != null and queryCon != '' ">
 			and m.material_name LIKE CONCAT('%',#{queryCon },'%')
 		</if>
+		
 		<choose>
 			<when test='queryStatus == "1" '>
 				and (
@@ -63,34 +68,42 @@
 	</select>
 	
 	<select id="materialDeclareAuditListQueryCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(*) from 
+		(
 		SELECT
-		count(m.id)
+		m.id
 		FROM
 		material AS m
+		left Join declaration AS d ON m.id = d.material_id
 		<where>
 			(m.is_deleted = 0 or m.is_deleted is null )
 			
 			<if test="queryCon != null and queryCon != '' ">
 			and m.material_name LIKE CONCAT('%',#{queryCon },'%')
-		</if>
-		<choose>
-			<when test='queryStatus == "1" '>
-				and (
-				(m.is_all_textbook_published != 0 and m.is_all_textbook_published is not null)
-				<![CDATA[ and m.actual_deadline >= NOW()]]>
-				)
-			</when>
-			<when test='queryStatus =="2" '>
-				and (
-				(m.is_all_textbook_published = 0 or m.is_all_textbook_published is null)
-				<![CDATA[ or m.actual_deadline < NOW()]]> 
-				)
-			</when>
-			<otherwise>
-				
-			</otherwise>
-		</choose>
+			</if>
+			<if test="org_id != null and org_id != '' ">
+				and d.org_id =#{org_id}
+			</if>
+			<choose>
+				<when test='queryStatus == "1" '>
+					and (
+					(m.is_all_textbook_published != 0 and m.is_all_textbook_published is not null)
+					<![CDATA[ and m.actual_deadline >= NOW()]]>
+					)
+				</when>
+				<when test='queryStatus =="2" '>
+					and (
+					(m.is_all_textbook_published = 0 or m.is_all_textbook_published is null)
+					<![CDATA[ or m.actual_deadline < NOW()]]> 
+					)
+				</when>
+				<otherwise>
+					
+				</otherwise>
+			</choose>
 		</where>
+		group by m.id
+		)t
 		<!-- <![CDATA[ and m.actual_deadline >= NOW()]]> -->
 	</select>
 	

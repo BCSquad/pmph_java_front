@@ -35,12 +35,12 @@ function queryMain(){
 		dataType:'json',
 		data:data,
 		success:function(json){
-			$("#zebra-table").html(json.data.html);
+			$("#zebra-table").html(json.html);
 			$('#page1').html("");	
-			$("#totoal_count").html(json.data.totoal_count);
+			$("#totoal_count").html(json.totoal_count);
 			//刷新分页栏
 			 Page({
-                num: json.data.totoal_count,					//页码数
+                num: json.totoal_count,					//页码数
                 startnum: $("#page-num-temp").val(),				//指定页码
                 elem: $('#page1'),
                 callback: function (n){     //点击页码后触发的回调函数

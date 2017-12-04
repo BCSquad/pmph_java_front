@@ -35,10 +35,14 @@ public enum FileType {
      * CMS附件
      */
     CMS_ATTACHMENT("CMS附件"),
-    /**
+	/**
      * 教师认证图片
      */
-    TEACHER_CERTIFICATION_PIC("教师认证图片");
+    TEACHER_CERTIFICATION_PIC("教师认证图片"),
+    /**
+     * 机构用户委托书
+     */
+    ORGUSER_PIC("机构用户委托书");
 
     private final String type;
 

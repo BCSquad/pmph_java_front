@@ -46,7 +46,7 @@
 					<div class="btn">
 						<button class="btn_1"  id="btn-search" onclick="queryBtnClick()">查 询</button>
 						<button class="btn_2">导出Excel</button>
-						<button class="btn_3">返 回</button>
+						<button class="btn_3" onclick="history.go(-1);">返 回</button>
 					</div>
 				</div>
 

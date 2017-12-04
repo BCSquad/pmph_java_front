@@ -17,20 +17,30 @@ public class DeclareCountServiceImpl implements DeclareCountService {
     
     //
   	@Override
-  	public List<Map<String,Object>> findDeclareCount() {
-  		List<Map<String,Object>> list = declareCountDao.findDeclareCount();
+  	public List<Map<String,Object>> findDeclareCount(Map<String, Object> paraMap) {
+  		
+  		List<Map<String,Object>> list = declareCountDao.findDeclareCount(paraMap);
   		return list;
   	}
   	//最终结果名单列表 
   	@Override
-  	public List<Map<String,Object>> findNameList() {
-  		List<Map<String,Object>> list = declareCountDao.findNameList();
+  	public List<Map<String,Object>> findNameList(Map<String, Object> paraMap) {
+  		List<Map<String,Object>> list = declareCountDao.findNameList(paraMap);
   		return list;
   	}
+  	
+  	//加载更多
 	@Override
 	public List<Map<String, Object>> selectNoticeMessage(
 			Map<String, Object> paraMap) {
 		List<Map<String, Object>> list= declareCountDao.selectNoticeMessage(paraMap);
+  		return list;
+	}
+	
+  	//查看全部
+	@Override
+	public List<Map<String, Object>> selectAll() {
+		List<Map<String, Object>> list= declareCountDao.selectAll();
   		return list;
 	}
   	

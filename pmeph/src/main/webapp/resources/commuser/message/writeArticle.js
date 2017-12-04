@@ -49,7 +49,7 @@ function btntype(btn_this){
 		if(writeArticleValidate()){
 			
 			$.ajax({
-				url:contextpath+"/authSendMessage/writeArticle.action",
+				url:contextpath+"/writerArticle/writeArticle.action",
 				type:"post",
 		        data:$("#form1").serialize(),
 		        success:function(data){
@@ -79,7 +79,7 @@ function btntype(btn_this){
 		}else if(btn_this=='1'){*/
 			if(writeArticleValidate()){
 				$.ajax({
-					url:contextpath+"/authSendMessage/updateIsStaging.action",
+					url:contextpath+"/writerArticle/updateIsStaging.action",
 					type:"post",
 			        data:$("#form1").serialize(),
 			        success:function(data){

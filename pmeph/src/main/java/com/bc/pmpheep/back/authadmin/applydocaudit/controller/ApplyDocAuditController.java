@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.authadmin.applydocaudit.controller;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -45,12 +46,14 @@ public class ApplyDocAuditController extends BaseController {
 	@RequestMapping(value = "/toPage",method = RequestMethod.GET)
 	public ModelAndView approvelList(HttpServletRequest request){
 		Map<String, Object> user = getUserInfo();
+		BigInteger org_id=(BigInteger) user.get("org_id");
 		ModelAndView mv = new  ModelAndView();
 		String queryCon = request.getParameter("queryCon");
 		String queryStatus = request.getParameter("queryStatus");
 		Map<String,Object> queryConMap = new HashMap<String,Object>();
 		queryConMap.put("queryCon", queryCon);
 		queryConMap.put("queryStatus", queryStatus);
+		queryConMap.put("org_id", org_id);
 		String contextpath = request.getParameter("contextpath");
 		
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<Map<String,Object>>(1,9);

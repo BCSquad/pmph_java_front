@@ -1,6 +1,7 @@
 package com.bc.pmpheep.back.authadmin.accountset.service;
 
-import com.bc.pmpheep.back.authadmin.accountset.bean.OrgUser;
+
+import com.bc.pmpheep.back.authadmin.accountset.bean.OrgAdminUser;
 
 import java.util.Map;
 
@@ -22,11 +23,11 @@ public interface AdminInfoService {
      * 修改机构用户信息
      * @param orgUser
      */
-    public void updateOrgUser(OrgUser orgUser);
+    public void updateOrgUser(OrgAdminUser orgUser);
 
     /**
      * 修改密码
      * @param orgUser
      */
-    public void updatePassword(OrgUser orgUser);
+    public void updatePassword(OrgAdminUser orgUser);
 }

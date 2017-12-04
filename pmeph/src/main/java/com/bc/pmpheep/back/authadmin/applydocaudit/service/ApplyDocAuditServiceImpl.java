@@ -30,6 +30,7 @@ public class ApplyDocAuditServiceImpl implements ApplyDocAuditService {
 		paraMap.put("pageSize", pageParameter.getPageSize());
 		paraMap.put("queryCon", pageParameter.getParameter().get("queryCon"));
 		paraMap.put("queryStatus", pageParameter.getParameter().get("queryStatus"));
+		paraMap.put("org_id", pageParameter.getParameter().get("org_id"));
 		List<Map<String,Object>> resultList = applyDocAuditDao.materialDeclareAuditListQuery(paraMap);
 		return resultList;
 	}
@@ -39,6 +40,7 @@ public class ApplyDocAuditServiceImpl implements ApplyDocAuditService {
 		Map<String, Object> paraMap = pageParameter.getParameter();
 		paraMap.put("queryCon", pageParameter.getParameter().get("queryCon"));
 		paraMap.put("queryStatus", pageParameter.getParameter().get("queryStatus"));
+		paraMap.put("org_id", pageParameter.getParameter().get("org_id"));
 		Integer count =applyDocAuditDao.materialDeclareAuditListQueryCount(paraMap);
 		Integer maxPageNum = (int) Math.ceil(1.0*count/pageParameter.getPageSize());
 		return maxPageNum;
