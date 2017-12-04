@@ -1,7 +1,5 @@
 package com.bc.pmpheep.back.commuser.user.controller;
 
-import java.io.IOException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.common.controller.BaseController;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
-import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertification;
-import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertificationVO;
+import com.bc.pmpheep.back.commuser.user.service.OrgUserService;
 import com.bc.pmpheep.back.commuser.user.service.WriterUserService;
 
 /**
@@ -27,6 +24,8 @@ public class OrgUserController extends BaseController {
 	
 	@Autowired
 	private WriterUserService writerUserService;
+	@Autowired
+	private OrgUserService orgUserService;
 	
 	/**
 	 * 根据机构id 查询该机构下的申报的人数
@@ -52,6 +51,24 @@ public class OrgUserController extends BaseController {
 		ModelAndView model = this.getModelAndView();
 		WriterUser writerUsers = writerUserService.getByOrgId(writerUser);
 		model.addObject("writerUsers", writerUsers);
+		return model;
+    }
+	
+	/**
+	 * 根据id和机构代码修改机构用户密码
+	 * @author tyc
+     * @createDate 2017年12月4日 上午10:14:57
+     * @param id
+     * @param username
+	 * @return
+	 */
+	@ResponseBody
+    @RequestMapping(value = "/updateOrgUserPassWord", method = RequestMethod.POST)
+    public ModelAndView updateOrgUserPassWord(@RequestParam("id") Long id, 
+    		@RequestParam("username") String username) {
+		ModelAndView model = this.getModelAndView();
+		Integer orgUser = orgUserService.updateOrgUserPassWord(id, username);
+		model.addObject("orgUser", orgUser);
 		return model;
     }
 }
