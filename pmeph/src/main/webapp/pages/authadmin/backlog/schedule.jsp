@@ -28,6 +28,7 @@
                    <div style="float: right;">
                       		 筛选：
                        <select id="filtrate-select" name="filtrate-select" title="请选择">
+                           <option value="all" ${time=='all' ?'selected':''}>全部</option>
                            <option value="week" ${time=='week' ?'selected':''}>一周内</option>
                            <option value="month" ${time=='month' ?'selected':''}>一月内</option>
                            <option value="year" ${time=='year' ?'selected':''}>一年内</option>

@@ -7,9 +7,9 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <head>
     <title>申请列表</title>
-    <script>
+   <!--  <script>
         var contextpath='${pageContext.request.contextPath}';
-    </script>
+    </script> -->
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
     <link rel="stylesheet" href="${ctx}/statics/authadmin/message/message.css" type="text/css">

@@ -134,6 +134,7 @@ a{
     color: white;
     font-family: MicrosoftYaHei;
     font-size: 14px;
+    cursor: pointer;
 }
 .registerDiv{
     clear:both;

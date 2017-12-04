@@ -49,6 +49,7 @@
 			<if test="null!=week">AND d.gmt_create >= #{week} </if>
 			<if test="null!=month">AND d.gmt_create >= #{month}</if>
 			<if test="null!=year">AND d.gmt_create >= #{year}</if>
+			<if test="null!=all"></if>
 		</trim>
 		ORDER BY d.gmt_create DESC) t1
 		UNION 

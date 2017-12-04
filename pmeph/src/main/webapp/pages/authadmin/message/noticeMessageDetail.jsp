@@ -3,7 +3,6 @@
 <html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
 <head>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>申请列表</title>
@@ -31,12 +30,7 @@
         </div>
         <div class="content">
             <p class="pSize">
-		                人民卫生出版社建社50年来，累计出版图书2万余种，总印数约67000万册，每年出书1000余种，年发行量1000多万册，
-		                年产值超过5亿元。出书品种主要包括： 医学教材、参考书和医学科普读物等，涉及现代医药学和中国传统医药学的所有领域，
-		                体系完整，品种齐全。人卫社不断加强管理，优化选题，提高质量，多出精品，加强服务，已成为国内唯一涵盖医学各领域,
-		                各层次的出版机构,能满足不同读者的需求。使读者享受到一流的作者、一流的质量、一流的服务。人卫社的品牌已成为优质图书的代名词。
-		                人民卫生出版社出版医学教材有着优良的传统。 从建社伊始的20世纪50年代， 翻译前苏联的医学教材以满足国内教学需要，
-		                到组织国内一流作者自编教材至今已有50年的历史。一代代的医学生都是伴随着人卫社出版的教材成长起来的。
+		               ${message.content}
             </p>
         </div>
         <div align="center">
@@ -82,11 +76,19 @@
         </div>
         </div>
 
-        <div class="registerDiv" >
-            <span class="button">报名参加</span>
+        <div class="registerDiv"  >
+            <span class="button" onclick="register(${map.materialId})">报名参加</span>
         </div>
 	</div>
 </div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
+
+<script type="text/javascript">
+		function register(materialId){
+			window.location.href="${ctx}/material/toMaterialAdd?material_id="+materialId;
+		}
+
+
+</script>
 </html>

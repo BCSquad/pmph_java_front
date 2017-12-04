@@ -36,10 +36,7 @@
 					window.location.href="${ctx}/message/applyMessageList.action?condition="+$("input[name='condition']") .val();
 				}	
 			});
-		})
-		
-		
-		
+		})	
 </script>
 </head>
 <body>
@@ -111,10 +108,6 @@
     	var flag="2";
     	window.location.href="${ctx}/message/updateApplyMessage.action?id="+id+"&flag="+flag;
     }
-    /* function loadMore(addPara){
-    	
-		addPara+=3;
-		window.location.href="${ctx}/message/applyMessageList.action?addPara="+addPara+"&condition="+$("input[name='condition']") .val();
-	} */
+
 </script>
 </html>

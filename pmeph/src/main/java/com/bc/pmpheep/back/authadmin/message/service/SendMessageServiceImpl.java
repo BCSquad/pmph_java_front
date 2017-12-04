@@ -47,21 +47,6 @@ public class SendMessageServiceImpl implements SendMessageService {
 		 orgMessageDao.insertAttachmentInfo(map);
 	}
 
-	public void insertWriteArticle(Map map) {
-		// TODO Auto-generated method stub
-		orgMessageDao.insertWriteArticle(map);
-	}
-
-	public void updateIsStaging(Map map) {
-		// TODO Auto-generated method stub
-		orgMessageDao.updateIsStaging(map);
-	}
-
-	@Override
-	public Map<String, Object> queryWriteArticleInfo(Map map) {
-		// TODO Auto-generated method stub
-		
-		return orgMessageDao.queryWriteArticleInfo(map);
-	}
+	
 
 }

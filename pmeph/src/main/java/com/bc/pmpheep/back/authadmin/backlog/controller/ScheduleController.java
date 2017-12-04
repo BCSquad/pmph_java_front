@@ -51,6 +51,7 @@ public class ScheduleController {
 		
 		Map<String,Object> paraMap = new HashMap<String,Object>();
 		
+		//查询条件
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd 00:00:00.0");
         Calendar c = Calendar.getInstance();
         if(null!=time&&!time.equals("")){
@@ -62,17 +63,21 @@ public class ScheduleController {
                  String week = format.format(d);
                  paraMap.put("week", week);
              }else if(time.equals("month")){
-             	 c.setTime(new Date());
+            	 //过去一月
+             	  c.setTime(new Date());
                   c.add(Calendar.MONTH, - 1);
                   Date d = c.getTime();
                   String month = format.format(d);
                   paraMap.put("month", month);
              }else if(time.equals("year")){
+            	 //过去一年
              	 c.setTime(new Date());
                   c.add(Calendar.YEAR, - 1);
                   Date d = c.getTime();
                   String year = format.format(d);
                   paraMap.put("year", year);
+             }else if(time.equals("year")){
+            	  paraMap.put("all", "all");
              }
         } 
        
@@ -82,11 +87,9 @@ public class ScheduleController {
 		
 		if(null!=currentPageStr&&!currentPageStr.equals("")){
 			 currentPage = Integer.parseInt(currentPageStr);
-			 
 		}
 		if(null!=pageSizeStr&&!pageSizeStr.equals("")){
 			 pageSize = Integer.parseInt(pageSizeStr);
-			 
 		}
 		
 		if(currentPage==0){
@@ -98,10 +101,10 @@ public class ScheduleController {
 		paraMap.put("userId", userId);
 		paraMap.put("endPage", pageSize);
 		
-		
-		
+		//代办事项列表
 		List<Map<String,Object>> list = scheduleService.selectScheduleList(paraMap);
 		int pageCount = scheduleService.selectScheduleCount(paraMap);
+		//机构用户基本信息
 		Map<String,Object> map = scheduleService.selectOrgUser(userId);
 		boolean license =  (boolean) map.get("is_proxy_upload");
 		boolean progress = map.get("progress")=="1"?true:false;
@@ -161,6 +164,7 @@ public class ScheduleController {
 			paraMap.put("startPage", currentPage*pageSize-pageSize);
 		}
 		
+		//查询条件时间
 		if(null!=time&&!time.equals("")){
 			time="%"+time+"%";
 			paraMap.put("time", time);
@@ -172,12 +176,13 @@ public class ScheduleController {
 		
 		//List<String> list = scheduleService.selectUserMessageList(paraMap);
 		int pageCount = scheduleService.selectUserMessageCount(paraMap);
+		//机构用户基本信息
 		Map<String,Object> map = scheduleService.selectOrgUser(userId);
-		
+		//已办事项的名称和时间
 		List<Map<String,Object>> listNameAndTime = scheduleService.selectUserMessageNameAndTime(paraMap);
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
 		for(Map<String,Object> NT:listNameAndTime){
-			
+			//已办事项内容
 			Message message = mssageService.get((String)NT.get("msg_id"));
 			if(null!=message&&!message.equals("")){
 				NT.put("content",message.getContent());
@@ -197,7 +202,6 @@ public class ScheduleController {
 		mv.addObject("totalPage",totalPage);
 		mv.addObject("currentPage",currentPage);
 		mv.addObject("pageSize",pageSize);
-		
 		
 		mv.setViewName("authadmin/backlog/eventRecord");
 		return mv;

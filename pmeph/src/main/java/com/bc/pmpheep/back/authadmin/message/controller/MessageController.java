@@ -90,6 +90,7 @@ public class MessageController extends BaseController{
 	@RequestMapping(value="/updateApplyMessage")
 	public ModelAndView updateApplyMessage(HttpServletRequest  request){
 		String id=request.getParameter("id");
+		//1：忽略    2：接受
 		String flag=request.getParameter("flag");
 		ModelAndView mv = new ModelAndView();
 		Map<String,Object> paraMap = new HashMap<String,Object>();
@@ -154,7 +155,7 @@ public class MessageController extends BaseController{
 		return list;
 	}
 	
-	//更新申请信息状态
+	//更新申请信息状态(逻辑删除)
 	@RequestMapping(value="/deleteNoticeMessage")
 	@ResponseBody
 	public String deleteNoticeMessage(HttpServletRequest  request){
@@ -181,11 +182,14 @@ public class MessageController extends BaseController{
 		ModelAndView mv = new ModelAndView();
 		Map<String,Object> paraMap = new HashMap<String,Object>();
 		paraMap.put("messageId", messageId);
+		//标题、时间、邮寄地址、备注
 		Map<String,Object> mapTitle = OrgMessageService.queryNoticeMessageDetail(paraMap);
 		if(mapTitle.size()>0){
 			paraMap.put("attachmentId", mapTitle.get("attachmentId"));
 			paraMap.put("materialId", mapTitle.get("materialId"));
+			//备注附件
 			List<Map<String,Object>> listAttachment = OrgMessageService.queryNoticeMessageDetailAttachment(paraMap);
+			//联系人
 			List<Map<String,Object>> listContact = OrgMessageService.queryNoticeMessageDetailContact(paraMap);
 			
 			mv.addObject("map",mapTitle);
@@ -195,6 +199,12 @@ public class MessageController extends BaseController{
 		}
 		
 		
+	/*	Message message = new Message();
+		message.setContent(" 人民卫生出版社建社50年来，累计出版图书2万余种，总印数约67000万册，每年出书1000余种，年发行量1000多万册， 年产值超过5亿元。出书品种主要包括： 医学教材、参考书和医学科普读物等，涉及现代医药学和中国传统医药学的所有领域， 体系完整，品种齐全。人卫社不断加强管理，优化选题，提高质量，多出精品，加强服务，已成为国内唯一涵盖医学各领域,各层次的出版机构,能满足不同读者的需求。使读者享受到一流的作者、一流的质量、一流的服务。人卫社的品牌已成为优质图书的代名词。人民卫生出版社出版医学教材有着优良的传统。 从建社伊始的20世纪50年代， 翻译前苏联的医学教材以满足国内教学需要， 到组织国内一流作者自编教材至今已有50年的历史。一代代的医学生都是伴随着人卫社出版的教材成长起来的。");
+		message.setId("5a15c32dc5482247f0b8dca2");
+		mssageService.add(message);*/
+		
+		//mongoDB查询通知内容
 		Message message = mssageService.get(messageId);
 		
 		mv.addObject("message",message);
