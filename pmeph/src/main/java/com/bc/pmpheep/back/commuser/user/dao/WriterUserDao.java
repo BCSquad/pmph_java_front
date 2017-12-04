@@ -76,4 +76,14 @@ public interface WriterUserDao {
 	 * @return
 	 */
 	WriterUserCertification updateCertification(Long id);
+	
+	/**
+	 * 根据id和用户名修改普通用户密码
+	 * @author tyc
+     * @createDate 2017年12月4日 上午10:31:11
+     * @param id
+     * @param username
+     * @return
+     */
+    Integer updateUserPassWord(Long id, String username);
 }

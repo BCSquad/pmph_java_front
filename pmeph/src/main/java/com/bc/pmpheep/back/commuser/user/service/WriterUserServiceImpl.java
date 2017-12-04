@@ -11,6 +11,7 @@ import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertification;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertificationVO;
 import com.bc.pmpheep.back.commuser.user.dao.WriterUserDao;
 import com.bc.pmpheep.back.util.ObjectUtil;
+import com.bc.pmpheep.back.util.StringUtil;
 import com.bc.pmpheep.general.bean.FileType;
 import com.bc.pmpheep.general.service.FileService;
 import com.bc.pmpheep.service.exception.CheckedExceptionBusiness;
@@ -113,5 +114,19 @@ public class WriterUserServiceImpl implements WriterUserService {
             }
         }
 		return writerUserCertification;
+	}
+
+	@Override
+	public Integer updateUserPassWord(Long id, String username) {
+		if (ObjectUtil.isNull(id)) {
+			throw new CheckedServiceException(CheckedExceptionBusiness.USER_MANAGEMENT,
+                    CheckedExceptionResult.NULL_PARAM, "id不能为空");
+		}
+		if (StringUtil.isEmpty(username)) {
+			throw new CheckedServiceException(CheckedExceptionBusiness.USER_MANAGEMENT,
+                    CheckedExceptionResult.NULL_PARAM, "机构代码不能为空");
+		}
+		Integer writerUser = writerUserDao.updateUserPassWord(id, username);
+		return writerUser;
 	}
 }
