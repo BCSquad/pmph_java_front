@@ -1,14 +1,15 @@
 package com.bc.pmpheep.back.commuser.myfriend.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bc.pmpheep.back.common.controller.BaseController;
 import com.bc.pmpheep.back.commuser.myfriend.bean.WriterFriendVO;
 import com.bc.pmpheep.back.commuser.myfriend.service.MyFriendService;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
@@ -36,8 +37,9 @@ import com.bc.pmpheep.service.exception.CheckedServiceException;
  */
 @Controller
 @RequestMapping(value = "/myFriend")
-public class MyFriendController extends BaseController {
+public class MyFriendController extends com.bc.pmpheep.general.controller.BaseController {
     @Autowired
+    @Qualifier("com.bc.pmpheep.back.commuser.myfriend.service.MyFriendServiceImpl")
     MyFriendService myFriendService;
 
     /**
@@ -52,15 +54,25 @@ public class MyFriendController extends BaseController {
      */
     @RequestMapping(value = "/listMyFriend", method = RequestMethod.GET)
     public ModelAndView listMyFriend() throws Exception {
-        ModelAndView model = this.getModelAndView();
-        WriterUser writerUser =
-        (WriterUser) this.getRequest().getSession().getAttribute(Const.SESSION_WRITER_USER);
-        String pageUrl = "";
+        //ModelAndView model = this.getModelAndView();
+        ModelAndView model = new ModelAndView();
+//        WriterUser writerUser =
+//        (WriterUser) this.getRequest().getSession().getAttribute(Const.SESSION_WRITER_USER);
+        
+        //获取用户
+        Map<String, Object> writerUserMap = this.getUserInfo();
+        WriterUser writerUser = new WriterUser ();
+        writerUser.setId(Long.parseLong(writerUserMap.get("id").toString()));
+        
+        String pageUrl = "commuser/myfriend/myFriend";
         try {
             List<WriterFriendVO> listFriends = myFriendService.listMyFriend(writerUser);
             if (CollectionUtil.isNotEmpty(listFriends)) {
                 for (WriterFriendVO writerFriendVO : listFriends) {
-                    writerFriendVO.setAvatar(RouteUtil.DEFAULT_USER_AVATAR);
+                	if(null != writerFriendVO && (null == writerFriendVO.getAvatar() || "".equals(writerFriendVO.getAvatar().trim()) ||
+                			"DEFAULT".equals((writerFriendVO.getAvatar().trim())))){
+                		 writerFriendVO.setAvatar(RouteUtil.DEFAULT_USER_AVATAR);
+                	}
                 }
             }
             model.setViewName(pageUrl);
