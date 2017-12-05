@@ -8,13 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bc.pmpheep.back.common.controller.BaseController;
 import com.bc.pmpheep.back.commuser.myfriend.bean.WriterFriendVO;
 import com.bc.pmpheep.back.commuser.myfriend.service.MyFriendService;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
 import com.bc.pmpheep.back.util.CollectionUtil;
-import com.bc.pmpheep.back.util.Const;
 import com.bc.pmpheep.back.util.RouteUtil;
+import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 
 /**
@@ -52,9 +51,9 @@ public class MyFriendController extends BaseController {
      */
     @RequestMapping(value = "/listMyFriend", method = RequestMethod.GET)
     public ModelAndView listMyFriend() throws Exception {
-        ModelAndView model = this.getModelAndView();
-        WriterUser writerUser =
-        (WriterUser) this.getRequest().getSession().getAttribute(Const.SESSION_WRITER_USER);
+        ModelAndView model = new ModelAndView();
+        WriterUser writerUser = new WriterUser();
+        writerUser.setId(Long.parseLong(this.getUserInfo().get("id").toString()));
         String pageUrl = "";
         try {
             List<WriterFriendVO> listFriends = myFriendService.listMyFriend(writerUser);
