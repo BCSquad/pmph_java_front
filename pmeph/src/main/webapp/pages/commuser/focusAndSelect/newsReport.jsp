@@ -16,7 +16,7 @@
     <script src="${ctx}/resources/comm/base.js"></script>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     
-    <link rel="stylesheet" href="${ctx}/statics/commuser/focusAndSelect/newsReport.css" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/commuser/focusAndSelect/newsReportAndMaterialNotice.css" type="text/css">
     
     <script src="${ctx}/resources/commuser/focusAndSelect/newsReport.js" ></script>
     
