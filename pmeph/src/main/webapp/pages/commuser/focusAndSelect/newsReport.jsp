@@ -7,12 +7,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%String path = request.getContextPath();%>
+
 <html>
 <head>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>Title</title>
-    <script src="<%=path %>/resources/comm/jquery/jquery.js"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
     <script src="${ctx}/resources/comm/base.js"></script>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     

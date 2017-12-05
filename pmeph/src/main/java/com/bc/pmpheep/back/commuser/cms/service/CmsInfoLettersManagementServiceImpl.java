@@ -1,8 +1,10 @@
 package com.bc.pmpheep.back.commuser.cms.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.bc.pmpheep.back.commuser.cms.bean.CmsInfoLettersList;
 import com.bc.pmpheep.back.commuser.cms.dao.CmsInfoLettersManagementDao;
 
@@ -31,14 +33,14 @@ public class CmsInfoLettersManagementServiceImpl implements CmsInfoLettersManage
 	CmsInfoLettersManagementDao cmsInfoLettersManagementDao;
 
 	@Override
-	public List<CmsInfoLettersList> list(Integer pageSize, Integer pageNumber) {
+	public List<CmsInfoLettersList> list(Integer pageSize, Integer pageNumber,Integer order) {
 		if(null == pageSize || pageSize <1 ){
 			pageSize   = 10;                 //默认10条
 		}
 		if(null == pageNumber || pageNumber < 1){
 			pageNumber =1;
 		}
-		return cmsInfoLettersManagementDao.list((pageNumber-1)*pageSize,pageSize);
+		return cmsInfoLettersManagementDao.list((pageNumber-1)*pageSize,pageSize,order);
 	}
 	
 	@Override

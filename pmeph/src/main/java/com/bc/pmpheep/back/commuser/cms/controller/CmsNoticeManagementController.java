@@ -38,6 +38,22 @@ public class CmsNoticeManagementController {
 	CmsNoticeManagementService cmsNoticeManagementService;
 
 	/**
+	 * 跳转到教材列表页面
+	 * @author Mryang
+	 * @createDate 2017年12月5日 下午4:29:26
+	 * @param pageSize
+	 * @param pageNumber
+	 * @param isHot
+	 * @return
+	 */
+	@RequestMapping(value = "/tolist", method = RequestMethod.GET)
+	public ModelAndView tolistPage(Integer pageSize, Integer pageNumber, Boolean isHot) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("commuser/focusAndSelect/newsReport");
+		return  modelAndView;
+	}
+	
+	/**
 	 * 
 	 * 
 	 * 功能描述：获取公告列表
@@ -51,7 +67,7 @@ public class CmsNoticeManagementController {
 	 * @return
 	 *
 	 */
-	@RequestMapping(value = "/tolist", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(Integer pageSize, Integer pageNumber, Boolean isHot) {
 		PageParameter<CmsNoticeList> pageParameter = new PageParameter<>(pageNumber, pageSize);
 		CmsNoticeList cmsNoticeList = new CmsNoticeList();
