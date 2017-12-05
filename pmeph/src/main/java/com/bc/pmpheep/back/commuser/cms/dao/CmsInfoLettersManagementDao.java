@@ -2,9 +2,9 @@ package com.bc.pmpheep.back.commuser.cms.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.bc.pmpheep.back.commuser.cms.bean.CmsInfoLettersList;
-import com.bc.pmpheep.back.plugin.PageParameter;
-import com.bc.pmpheep.back.plugin.PageResult;
 
 /**
  * 
@@ -30,7 +30,6 @@ public interface CmsInfoLettersManagementDao {
 	 * 
 	 * 功能描述：获取信息快报的总条数
 	 *
-	 * @param pageParameter
 	 * @return
 	 *
 	 */
@@ -41,9 +40,8 @@ public interface CmsInfoLettersManagementDao {
 	 * 
 	 * 功能描述：前台获取信息快报列表
 	 *
-	 * @param pageParameter
 	 * @return
 	 *
 	 */
-	List<CmsInfoLettersList> list(PageParameter<CmsInfoLettersList> pageParameter);
+	List<CmsInfoLettersList> list(@Param("start")Integer start, @Param("pageSize")Integer pageSize);
 }

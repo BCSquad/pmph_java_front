@@ -1,9 +1,8 @@
 package com.bc.pmpheep.back.commuser.cms.service;
 
+import java.util.List;
+
 import com.bc.pmpheep.back.commuser.cms.bean.CmsInfoLettersList;
-import com.bc.pmpheep.back.plugin.PageParameter;
-import com.bc.pmpheep.back.plugin.PageResult;
-import com.bc.pmpheep.service.exception.CheckedServiceException;
 
 /**
  * 
@@ -23,16 +22,26 @@ import com.bc.pmpheep.service.exception.CheckedServiceException;
  *
  */
 public interface CmsInfoLettersManagementService {
+	
 	/**
 	 * 
 	 * 
 	 * 功能描述：前台获取信息快报列表
 	 *
-	 * @param pageParameter
 	 * @return
-	 * @throws CheckedServiceException
 	 *
 	 */
-	PageResult<CmsInfoLettersList> list(PageParameter<CmsInfoLettersList> pageParameter) throws CheckedServiceException;
+	List<CmsInfoLettersList> list(Integer pageSize, Integer pageNumber) ;
+	
+	/**
+	 * 获取前台获取信息快报列表总数
+	 * @author Mryang
+	 * @createDate 2017年12月5日 下午1:51:28
+	 * @param pageSize
+	 * @param pageNumber
+	 * @param pageParameter
+	 * @return
+	 */
+	Integer getCmsInfoLettersListTotal(Integer pageSize, Integer pageNumber) ;
 
 }

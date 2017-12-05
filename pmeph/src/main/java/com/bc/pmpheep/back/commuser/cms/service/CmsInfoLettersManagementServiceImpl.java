@@ -1,14 +1,11 @@
 package com.bc.pmpheep.back.commuser.cms.service;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.bc.pmpheep.back.commuser.cms.bean.CmsInfoLettersList;
 import com.bc.pmpheep.back.commuser.cms.dao.CmsInfoLettersManagementDao;
-import com.bc.pmpheep.back.plugin.PageParameter;
-import com.bc.pmpheep.back.plugin.PageResult;
-import com.bc.pmpheep.back.util.PageParameterUitl;
-import com.bc.pmpheep.service.exception.CheckedServiceException;
+
 
 /**
  * 
@@ -27,21 +24,26 @@ import com.bc.pmpheep.service.exception.CheckedServiceException;
  * @审核人 ：
  *
  */
-@Service
+@Service("com.bc.pmpheep.back.commuser.cms.service.CmsInfoLettersManagementServiceImpl")
 public class CmsInfoLettersManagementServiceImpl implements CmsInfoLettersManagementService {
+	
 	@Autowired
 	CmsInfoLettersManagementDao cmsInfoLettersManagementDao;
 
 	@Override
-	public PageResult<CmsInfoLettersList> list(PageParameter<CmsInfoLettersList> pageParameter)
-			throws CheckedServiceException {
-		PageResult<CmsInfoLettersList> pageResult = new PageResult<>();
-		Integer total = cmsInfoLettersManagementDao.getCmsInfoLettersListTotal();
-		if (total > 0) {
-			PageParameterUitl.CopyPageParameter(pageParameter, pageResult);
-			pageResult.setRows(cmsInfoLettersManagementDao.list(pageParameter));
-			pageResult.setTotal(total);
+	public List<CmsInfoLettersList> list(Integer pageSize, Integer pageNumber) {
+		if(null == pageSize || pageSize <1 ){
+			pageSize   = 10;                 //默认10条
 		}
-		return pageResult;
+		if(null == pageNumber || pageNumber < 1){
+			pageNumber =1;
+		}
+		return cmsInfoLettersManagementDao.list((pageNumber-1)*pageSize,pageSize);
 	}
+	
+	@Override
+	public Integer getCmsInfoLettersListTotal(Integer pageSize, Integer pageNumber) {
+		return cmsInfoLettersManagementDao.getCmsInfoLettersListTotal();
+	}
+		
 }
