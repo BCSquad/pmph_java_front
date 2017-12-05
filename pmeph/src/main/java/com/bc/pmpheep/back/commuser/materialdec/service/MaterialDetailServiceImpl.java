@@ -73,6 +73,54 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 	public int insertTsxz(Map<String, Object> map) {
 		return this.madd.insertTsxz(map);
 	}
+	@Override
+	public int insertStu(Map<String, Object> map) {
+		return this.madd.insertStu(map);
+	}
+	@Override
+	public int insertWork(Map<String, Object> map) {
+		return this.madd.insertWork(map);
+	}
+	@Override
+	public List<Map<String, Object>> queryZjxs(Map<String, Object> map) {
+		return this.madd.queryZjxs(map);
+	}
+	@Override
+	public int insertZjxs(Map<String, Object> map) {
+		return this.madd.insertZjxs(map);
+	}
+	@Override
+	public int insertStea(Map<String, Object> map) {
+		return this.madd.insertStea(map);
+	}
+	@Override
+	public int insertJcbj(Map<String, Object> map) {
+		return this.madd.insertJcbj(map);
+	}
+	@Override
+	public int insertGjkcjs(Map<String, Object> map) {
+		return this.madd.insertGjkcjs(map);
+	}
+	@Override
+	public int insertJcbx(Map<String, Object> map) {
+		return this.madd.insertJcbx(map);
+	}
+	@Override
+	public List<Map<String, Object>> queryZjkyqk(Map<String, Object> map) {
+		return this.madd.queryZjkyqk(map);
+	}
+	@Override
+	public int insertZjkyqk(Map<String, Object> map) {
+		return this.madd.insertZjkyqk(map);
+	}
+	@Override
+	public List<Map<String, Object>> queryGjghjc(Map<String, Object> map) {
+		return this.madd.queryGjghjc(map);
+	}
+	@Override
+	public int insertGjghjc(Map<String, Object> map) {
+		return this.madd.insertGjghjc(map);
+	}
 
 	
 }

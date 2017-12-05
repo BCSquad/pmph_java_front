@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
         <div class="message-line"></div>
         <c:forEach items="${bookCollection }" var="collection" varStatus="status">
-          <a href="javascript:toBookList(${collection.id},${status.index });" target="_blank">
+          <a href="bookcollection/tobookcollectionlist.action?favoriteId=${collection.id}&&favoriteName=${collection.favorite_name }" target="_blank">
            <div class="collection">
             <p class="title" id="title${status.index }">${collection.favorite_name }</p>
             <p class="count">共${collection.mcount }条内容</p>

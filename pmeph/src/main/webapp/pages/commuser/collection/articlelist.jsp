@@ -25,6 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="<%=path %>/resources/comm/jquery/jquery.js"></script>
     <script src="<%=path %>/resources/comm/jquery/jquery.selectlist.js"></script>
     <script src="<%=path %>/resources/comm/jquery/jquery.pager.js"></script>
+    <script src="<%=path %>/resources/comm/layer/layer.js"></script>
    <script src="<%=path %>/resources/comm/base.js"></script>
    <script src="${ctx }/resources/commuser/collection/articlelist.js"></script>
 </head>

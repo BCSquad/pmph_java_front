@@ -8,32 +8,35 @@ import com.bc.pmpheep.service.exception.CheckedServiceException;
 
 /**
  * 
- * <pre>
- * 功能描述：CmsContentService 接口
- * 使用示范：
+ * @ClassName: DataAuditService
+ * @Description: 申报资料审核（机构用户）
+ * @author SunZhuoQun
+ * @date 2017-12-5 上午9:28:01
  * 
- * 
- * @since (该版本支持的JDK版本) ：JDK 1.6或以上
- * @version (版本) 1.0
- * @modify (最后修改时间) 
- * @修改人 ：
- * </pre>
  */
 public interface DataAuditService {
-   
+
 	/**
-	 * 查询列表
-	 * @param pageParameter
-	 * @return
+	 * 
+	 * @Title: findDataAudit
+	 * @Description: 查询列表
+	 * @param @param pageParameter
+	 * @param @return
+	 * @return List<Map<String,Object>> 返回类型
+	 * @throws
 	 */
-	List<Map<String, Object>> findDataAudit(PageParameter<Map<String, Object>> pageParameter);
-	
+	List<Map<String, Object>> findDataAudit(
+			PageParameter<Map<String, Object>> pageParameter);
+
 	/**
-	 * 查询总数
-	 * @param pageParameter
-	 * @return
+	 * 
+	 * @Title: findDataAuditCount
+	 * @Description: 查询总数
+	 * @param @param pageParameter
+	 * @param @return
+	 * @return int 返回类型
+	 * @throws
 	 */
 	int findDataAuditCount(PageParameter<Map<String, Object>> pageParameter);
 
-   
 }

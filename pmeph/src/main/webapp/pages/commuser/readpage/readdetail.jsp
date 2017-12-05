@@ -295,7 +295,7 @@
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 <script type="text/javascript">
 $(document).ready(function(){
-	//为所有的class为scorestar1绑定mouseout和mouseover事件。bind({事件名：function(){},事件名：function(){}})的方法绑定多个事件
+	 //为所有的class为scorestar1绑定mouseout和mouseover事件。bind({事件名：function(){},事件名：function(){}})的方法绑定多个事件
 	 $(".scorestar1").bind({
 	  mouseover: function () {
 		  $(this).css("background-position", "-183px -174px").prevAll().css("background-position", "-183px -174px");

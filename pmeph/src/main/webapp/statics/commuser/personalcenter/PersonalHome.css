@@ -158,7 +158,7 @@
     text-align: justify;
     color: #03717b;
     margin-left: 11px;
-    width: 88px;
+    width: 688px;
 }
 
 #bianji {
@@ -468,6 +468,11 @@
 #dongtai {
     width: 870px;
     height: 500px;
+    float: left;
+}
+
+#gengduo {
+    width: 870px;
     float: left;
 }
 
@@ -1000,3 +1005,31 @@
     height: 175px;
     margin-top: 10px;
 }
+
+#liulan {
+    background-image: url(../../image/css_sprites27.png);
+    background-position: -156px -114px;
+    height: 20px;
+    width: 20px;
+    background-repeat: no-repeat;
+    float: left;
+}
+
+#dianzan {
+    background-image: url(../../image/css_sprites27.png);
+    background-position: -154px -178px;
+    height: 20px;
+    width: 20px;
+    background-repeat: no-repeat;
+    float: left;
+}
+
+#shouchang {
+    background-image: url(../../image/css_sprites27.png);
+    background-position: -154px -145px;
+    height: 20px;
+    width: 20px;
+    background-repeat: no-repeat;
+    float: left;
+}
+

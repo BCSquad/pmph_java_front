@@ -15,6 +15,8 @@
     <title>我的好友</title>
     <script src="<%=path %>/resources/comm/jquery/jquery.js"></script>
     <link rel="stylesheet" href="${ctx}/statics/commuser/myfriend/myFriend.css" type="text/css">
+    <script src="${ctx}/resources/comm/base.js"></script>
+    <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
@@ -27,107 +29,25 @@
         </div>
     </div>
     <div class="items">
-        <div class="item1">
-            <div><img src="${ctx}/statics/testfile/tx.png" class="img2"></div>
-            <div class="div_txt1">龙鼎新</div>
-            <div class="div_txt2">作家</div>
-            <div class="div_txt3">
-                <div>
-                    私信
-                </div>
+    	<c:forEach var="friend" items="${listFriends}" varStatus="st" >
+			<c:choose>  
+  			   <c:when test="${(st.index+1)%5 == 1}"><div class="item1"> 
+			   </c:when>  
+			   <c:otherwise>                         <div class="item1 item11"> 
+			   </c:otherwise>  
+			</c:choose>
+			
+	            <div><img src="${ctx}/${friend.avatar}" class="img2"></div>
+	            <div class="div_txt1">${friend.username}</div>
+	            <div class="div_txt2">${friend.position}</div>
+	            <div class="div_txt3">
+	                <div>私信</div>
+	            </div>
             </div>
-        </div>
-        <div class="item1 item11">
-            <div><img src="${ctx}/statics/testfile/tx.png" class="img2"></div>
-            <div class="div_txt1">龙鼎新</div>
-            <div class="div_txt2">作家</div>
-            <div class="div_txt3">
-                <div>
-                    私信
-                </div>
-            </div>
-        </div>
-        <div class="item1 item11">
-            <div><img src="${ctx}/statics/testfile/tx.png" class="img2"></div>
-            <div class="div_txt1">龙鼎新</div>
-            <div class="div_txt2">作家</div>
-            <div class="div_txt3">
-                <div>
-                    私信
-                </div>
-            </div>
-        </div>
-        <div class="item1 item11">
-            <div><img src="${ctx}/statics/testfile/tx.png" class="img2"></div>
-            <div class="div_txt1">龙鼎新</div>
-            <div class="div_txt2">作家</div>
-            <div class="div_txt3">
-                <div>
-                    私信
-                </div>
-            </div>
-        </div>
-        <div class="item1 item11">
-            <div><img src="${ctx}/statics/testfile/tx.png" class="img2"></div>
-            <div class="div_txt1">龙鼎新</div>
-            <div class="div_txt2">作家</div>
-            <div class="div_txt3">
-                <div>
-                    私信
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="items">
-        <div class="item1">
-            <div><img src="${ctx}/statics/testfile/tx.png" class="img2"></div>
-            <div class="div_txt1">龙鼎新</div>
-            <div class="div_txt2">作家</div>
-            <div class="div_txt3">
-                <div>
-                    私信
-                </div>
-            </div>
-        </div>
-        <div class="item1 item11">
-            <div><img src="${ctx}/statics/testfile/tx.png" class="img2"></div>
-            <div class="div_txt1">龙鼎新</div>
-            <div class="div_txt2">作家</div>
-            <div class="div_txt3">
-                <div>
-                    私信
-                </div>
-            </div>
-        </div>
-        <div class="item1 item11">
-            <div><img src="${ctx}/statics/testfile/tx.png" class="img2"></div>
-            <div class="div_txt1">龙鼎新</div>
-            <div class="div_txt2">作家</div>
-            <div class="div_txt3">
-                <div>
-                    私信
-                </div>
-            </div>
-        </div>
-        <div class="item1 item11">
-            <div><img src="${ctx}/statics/testfile/tx.png" class="img2"></div>
-            <div class="div_txt1">龙鼎新</div>
-            <div class="div_txt2">作家</div>
-            <div class="div_txt3">
-                <div>
-                    私信
-                </div>
-            </div>
-        </div>
-        <div class="item1 item11">
-            <div><img src="${ctx}/statics/testfile/tx.png" class="img2"></div>
-            <div class="div_txt1">龙鼎新</div>
-            <div class="div_txt2">作家</div>
-            <div class="div_txt3">
-                <div>
-                    私信
-                </div>
-            </div>
+			<c:if test="${(st.index+1)%5==0}">
+				</div><div class="items"><!-- 拼装换行 -->
+			</c:if>
+	    </c:forEach>
         </div>
     </div>
 </div>

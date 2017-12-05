@@ -59,7 +59,7 @@ public class PersonalServiceImpl implements PersonalService {
 
 	@Override
 	public List<PersonalNewMessage> queryMyBooksJoin() {
-		// TODO 自动生成的方法存根
+		// TODO 自动生成的方法存根  查询我的教材申报最新信息
 		List<PersonalNewMessage> list7=personaldao.ListAllBookJoin();
 		return list7;
 	}

@@ -19,7 +19,7 @@
 		AND is_published = TRUE
 	</select>
 
-	<select id="list" parameterType="PageParameter" resultType="CmsInfoLettersList">
+	<select id="list"  resultType="CmsInfoLettersList">
 		SELECT
 		*
 		FROM
@@ -33,10 +33,17 @@
 		AND cc.auth_status = 2
 		AND is_published = TRUE
 		ORDER BY
-		<if test="parameter.isHot != null">
+		<if test="order == 1">
+			cc.is_promote desc,
 			cc.is_hot DESC,cc.sort_hot,
+		    cc.auth_date DESC
 		</if>
-		cc.auth_date DESC
+		<if test="order == 2">
+			cc.auth_date DESC
+		</if>
+		<if test="order == 3">
+			cc.is_hot DESC,cc.sort_hot
+		</if>
 		LIMIT #{start},#{pageSize}
 	</select>
 </mapper>

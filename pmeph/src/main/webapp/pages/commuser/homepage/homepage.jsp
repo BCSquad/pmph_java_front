@@ -80,7 +80,7 @@
                     </div>
                 </c:if>
             </c:forEach>
-            <div class="more">全部>></div>
+            <div class="more" onclick="top.location='${ctx}/cmsnotice/tolist.action'">全部>></div>
         </div>
         <div class="notice area-3">
             <div class="title" style="float: left">
@@ -108,7 +108,7 @@
                     </c:forEach>
                 </ul>
             </div>
-            <div class="more">全部>></div>
+            <div class="more" onclick="top.location='${ctx}/cmsinfoletters/tolist.action'">全部>></div>
         </div>
         <div class="area-4">
             <div class="tab-bar">

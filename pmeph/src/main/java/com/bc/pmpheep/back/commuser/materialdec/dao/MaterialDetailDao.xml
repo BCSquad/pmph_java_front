@@ -5,63 +5,123 @@
 	<select id="queryMaterialbyId" resultType="java.util.Map" parameterType="java.lang.String">
 		select * from material where id = #{material_id}
 	</select>
+	
 	<!-- 通过教材ID查询所有书籍 -->
 	<select id="queryBookById" resultType="java.util.Map" parameterType="java.lang.String">
 		select * from textbook where material_id = #{material_id}
 	</select>
+	
 	<!-- 专家信息 -->
 	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
 		select t1.*,t2.org_name from declaration t1 left join org t2 on t1.org_id = t2.id
 		 where 1= 1 
 		<if test="user_id != null and user_id != ''">
-			and t1.user_id = '${user_id}' 
+			and t1.user_id = #{user_id} 
 		</if>
 		<if test="material_id != null and material_id != ''">
-			and t1.material_id = '${material_id}'
+			and t1.material_id = #{material_id}
 		</if>
 		<if test="realname != null and realname != ''">
-			and t1.realname = '${realname}'
+			and t1.realname = #{realname}
 		</if>
 	</select>
 	<insert id="insertPerson" parameterType="java.util.Map">
 		insert into declaration(material_id,user_id,realname,sex,birthday,experience,org_name,position,
 		title,address,postcode,handphone,email,idtype,idcard,telephone,fax,org_id,gmt_create
-		) values('${material_id}','${user_id}','${realname}','${sex}','${birthday}','${experience}','${org_name}','${position}',
-		'${title}','${address}','${postcode}','${handphone}','${email}','${idtype}','${idcard}','${telephone}',
-		'${fax}','${org_id}','${gmt_create}')
+		) values(#{material_id},#{user_id},#{realname},#{sex},#{birthday},#{experience},#{org_name},#{position},
+		#{title},#{address},#{postcode},#{handphone},#{email},#{idtype},#{idcard},#{telephone},
+		#{fax},#{org_id},#{gmt_create})
 	</insert>
+	
 	<!-- 图书选择 -->
 	<select id="queryTsxz" resultType="java.util.Map" parameterType="java.util.Map">
 		select t1.*,t2.textbook_name from dec_position t1 left join textbook t2
-		on t1.textbook_id = t2.id where t1.declaration_id = '${declaration_id}' 
+		on t1.textbook_id = t2.id where t1.declaration_id = #{declaration_id} 
 		ORDER BY t1.gmt_create desc
 	</select>
 	<insert id="insertTsxz" parameterType="java.util.Map">
 		insert into dec_position(declaration_id,textbook_id,preset_position,syllabus_id,syllabus_name,gmt_create)
-		  values('${declaration_id}','${textbook_id}','${preset_position}','${syllabus_id}','${syllabus_name}','${gmt_create}')
+		  values(#{declaration_id},#{textbook_id},#{preset_position},#{syllabus_id},#{syllabus_name},#{gmt_create})
 	</insert>
+	
 	<!-- 学习经历 -->
 	<select id="queryStu" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from dec_edu_exp where declaration_id = '${declaration_id}' ORDER BY sort 
+		select * from dec_edu_exp where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
+	<insert id="insertStu" parameterType="java.util.Map">
+		insert into dec_edu_exp(declaration_id,school_name,major,degree,note,date_begin,date_end)
+		  values(#{declaration_id},#{school_name},#{major},#{degree},#{note},#{date_begin},#{date_end})
+	</insert>
+	
 	<!-- 工作经历 -->
 	<select id="queryWork" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from dec_work_exp where declaration_id = '${declaration_id}' ORDER BY sort 
+		select * from dec_work_exp where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
+	<insert id="insertWork" parameterType="java.util.Map">
+		insert into dec_work_exp(declaration_id,org_name,position,note,date_begin,date_end)
+		  values(#{declaration_id},#{org_name},#{position},#{note},#{date_begin},#{date_end})
+	</insert>
+	
 	<!--教学经历-->
 	<select id="queryStea" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from dec_teach_exp where declaration_id = '${declaration_id}' ORDER BY sort 
+		select * from dec_teach_exp where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
+	<insert id="insertStea" parameterType="java.util.Map">
+		insert into dec_teach_exp(declaration_id,school_name,subject,note,date_begin,date_end)
+		  values(#{declaration_id},#{school_name},#{subject},#{note},#{date_begin},#{date_end})
+	</insert>
+	
+	<!-- //作家学术 -->
+	<select id="queryZjxs" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_acade where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+	<insert id="insertZjxs" parameterType="java.util.Map">
+		insert into dec_acade(declaration_id,org_name,rank,position,note)
+		  values(#{declaration_id},#{org_name},#{rank},#{position},#{note})
+	</insert>
+	
 	<!--上版教材编辑-->
 	<select id="queryJcbj" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from dec_last_position where declaration_id = '${declaration_id}' ORDER BY sort 
+		select * from dec_last_position where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
+	<insert id="insertJcbj" parameterType="java.util.Map">
+		insert into dec_last_position(declaration_id,material_name,position)
+		  values(#{declaration_id},#{material_name},#{position},#{note})
+	</insert>
+	
 	<!-- 精品课程建设 -->
 	<select id="queryGjkcjs" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from dec_course_construction where declaration_id = '${declaration_id}' ORDER BY sort 
+		select * from dec_course_construction where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
+	<insert id="insertGjkcjs" parameterType="java.util.Map">
+		insert into dec_course_construction(declaration_id,course_name,class_hour,type,note)
+		  values(#{declaration_id},#{course_name},#{class_hour},#{type},#{note})
+	</insert>
+	
+	<!-- 作家主编国家级规划教材情况 -->
+	<select id="queryGjghjc" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_national_plan where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+	<insert id="insertGjghjc" parameterType="java.util.Map">
+		insert into dec_national_plan(declaration_id,material_name,isbn,rank,note)
+		  values(#{declaration_id},#{material_name},#{isbn},#{rank},#{note})
+	</insert>
+	
 	<!-- 教材编写情况 -->
 	<select id="queryJcbx" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from dec_textbook where declaration_id = '${declaration_id}' ORDER BY sort 
+		select * from dec_textbook where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
+	<insert id="insertJcbx" parameterType="java.util.Map">
+		insert into dec_textbook(declaration_id,material_name,rank,position,publisher,publish_date,isbn,note)
+		  values(#{declaration_id},#{material_name},#{rank},#{position},#{publisher},#{publish_date},#{isbn},#{note})
+	</insert>
+	
+	<!-- //作家科研情况表 -->
+	<select id="queryZjkyqk" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_research where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+	<insert id="insertZjkyqk" parameterType="java.util.Map">
+		insert into dec_research(declaration_id,research_name,approval_unit,award,note)
+		  values(#{declaration_id},#{research_name},#{approval_unit},#{award},#{note})
+	</insert>
 </mapper>

@@ -45,16 +45,17 @@
         where  category_id='132' order by gmt_create desc limit 0,4
   </select>
    <!-- 查询热门标签 -->
-  <select id="queryLabel"  resultMap="Mapresult">
-      SELECT
-  b.type,t.note
+  <select id="queryLabel" parameterType="string"  resultMap="Mapresult">
+          SELECT
+  max(b.type) type,t.note
 FROM
   book b
   join material_type t
   on b.type=t.id
-GROUP BY b.type,t.note
+  where t.path like #{typepath}
+GROUP BY t.note
 ORDER BY
-  sum(b.clicks) desc
+  sum(b.clicks) desc,LENGTH(t.note)
 LIMIT 0,10
   </select>
    <!-- 查询点击人数最多的最多的作者 -->
