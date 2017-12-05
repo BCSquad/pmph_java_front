@@ -103,7 +103,82 @@ public class MaterialDetailController extends BaseController{
 			tsxzMap.put("gmt_create", date);
 			this.mdService.insertTsxz(tsxzMap);
 			//主要学习经历
-			
+			Map<String,Object> xxjlMap = new HashMap<String,Object>();
+			xxjlMap.put("declaration_id", declaration_id);
+			xxjlMap.put("major", request.getParameter("xx_major"));
+			xxjlMap.put("degree", request.getParameter("xx_degree"));
+			xxjlMap.put("note", request.getParameter("xx_note"));
+			xxjlMap.put("date_begin", request.getParameter("xx_kssj"));
+			xxjlMap.put("date_end", request.getParameter("xx_jssj"));
+			this.mdService.insertStu(xxjlMap);
+			//作家工作经历
+			Map<String,Object> workjlMap = new HashMap<String,Object>();
+			workjlMap.put("declaration_id", declaration_id);
+			workjlMap.put("org_name", request.getParameter("gz_org_name"));
+			workjlMap.put("position", request.getParameter("gz_position"));
+			workjlMap.put("note", request.getParameter("gz_note"));
+			workjlMap.put("date_begin", request.getParameter("gz_kssj"));
+			workjlMap.put("date_end", request.getParameter("gz_jssj"));
+			this.mdService.insertWork(workjlMap);
+			//教学经历表
+			Map<String,Object> jxjlMap = new HashMap<String,Object>();
+			jxjlMap.put("declaration_id", declaration_id);
+			jxjlMap.put("school_name", request.getParameter("jx_school_name"));
+			jxjlMap.put("subject", request.getParameter("jx_subject"));
+			jxjlMap.put("note", request.getParameter("jx_note"));
+			jxjlMap.put("date_begin", request.getParameter("jx_kssj"));
+			jxjlMap.put("date_end", request.getParameter("jx_jssj"));
+			this.mdService.insertStea(jxjlMap);
+			//作家兼职学术
+			Map<String,Object> xsjzMap = new HashMap<String,Object>();
+			xsjzMap.put("declaration_id", declaration_id);
+			xsjzMap.put("org_name", request.getParameter("xs_org_name"));
+			xsjzMap.put("rank", request.getParameter("xs_rank"));
+			xsjzMap.put("note", request.getParameter("xs_note"));
+			xsjzMap.put("position", request.getParameter("xs_position"));
+			this.mdService.insertZjxs(xsjzMap);
+			//上套教材参编情况
+			Map<String,Object> JcbjMap = new HashMap<String,Object>();
+			JcbjMap.put("declaration_id", declaration_id);
+			JcbjMap.put("material_name", request.getParameter("jc_material_name"));
+			JcbjMap.put("position", request.getParameter("jc_position"));
+			JcbjMap.put("note", request.getParameter("jc_note"));
+			this.mdService.insertJcbj(JcbjMap);
+			//精品课程建设情况
+			Map<String,Object> GjkcjsMap = new HashMap<String,Object>();
+			GjkcjsMap.put("declaration_id", declaration_id);
+			GjkcjsMap.put("course_name", request.getParameter("gj_course_name"));
+			GjkcjsMap.put("class_hour", request.getParameter("gj_class_hour"));
+			GjkcjsMap.put("type", request.getParameter("gj_type"));
+			GjkcjsMap.put("note", request.getParameter("gj_note"));
+			this.mdService.insertGjkcjs(GjkcjsMap);
+			//主编国家级规划教材情况
+			Map<String,Object> GjghjcMap = new HashMap<String,Object>();
+			GjghjcMap.put("declaration_id", declaration_id);
+			GjghjcMap.put("material_name", request.getParameter("hj_material_name"));
+			GjghjcMap.put("isbn", request.getParameter("hj_isbn"));
+			GjghjcMap.put("rank", request.getParameter("hj_rank"));
+			GjghjcMap.put("note", request.getParameter("hj_note"));
+			this.mdService.insertGjghjc(GjghjcMap);
+			//作家教材编写情况
+			Map<String,Object> JcbxMap = new HashMap<String,Object>();
+			JcbxMap.put("declaration_id", declaration_id);
+			JcbxMap.put("material_name", request.getParameter("jcb_material_name"));
+			JcbxMap.put("rank", request.getParameter("jcb_rank"));
+			JcbxMap.put("position", request.getParameter("jcb_position"));
+			JcbxMap.put("publisher", request.getParameter("jcb_publisher"));
+			JcbxMap.put("publish_date", request.getParameter("jcb_publish_date"));
+			JcbxMap.put("isbn", request.getParameter("jcb_isbn"));
+			JcbxMap.put("note", request.getParameter("jcb_note"));
+			this.mdService.insertJcbx(JcbxMap);
+			//作家科研情况
+			Map<String,Object> ZjkyqkMap = new HashMap<String,Object>();
+			ZjkyqkMap.put("declaration_id", declaration_id);
+			ZjkyqkMap.put("research_name", request.getParameter("zjk_research_name"));
+			ZjkyqkMap.put("approval_unit", request.getParameter("zjk_approval_unit"));
+			ZjkyqkMap.put("award", request.getParameter("zjk_award"));
+			ZjkyqkMap.put("note", request.getParameter("zjk_note"));
+			this.mdService.insertZjkyqk(ZjkyqkMap);
 			msg = "OK";
 		}
 		

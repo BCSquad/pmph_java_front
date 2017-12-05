@@ -53,5 +53,5 @@ public interface HomeDao {
 	 * @Description: 查询热门标签
 	 * @return List<HomepageDocument>
 	 */
-	List<Map<String, Object>> queryLabel();
+	List<Map<String, Object>> queryLabel(String typepath);
 }

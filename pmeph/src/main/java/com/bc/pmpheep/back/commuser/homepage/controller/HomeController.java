@@ -41,7 +41,7 @@ public class HomeController {
         List<Map<String, Object>> listCom = homeService.queryComment();
         List<Map<String, Object>> listSal = homeService.querySale(633);
         List<Map<String, Object>> listType = homeService.queryBookType(633);
-        List<Map<String, Object>> listLabel = homeService.queryLabel();
+        List<Map<String, Object>> listLabel = homeService.queryLabel(633);
 
         modelAndView.addObject("listDou", listDou);
         modelAndView.addObject("listNot", listNot);
@@ -173,7 +173,9 @@ public class HomeController {
             map.put("homepagebook", html);
         }
         List<Map<String, Object>> listType = homeService.queryBookType(Integer.parseInt(state));
+        List<Map<String, Object>> listLabel = homeService.queryLabel(Integer.parseInt(state));
         map.put("listType", listType);
+        map.put("listLabel", listLabel);
         Map<String, Object> cmap = new HashMap<String, Object>();
         cmap.put("startrows", -1);
         cmap.put("type", Integer.parseInt(state));
