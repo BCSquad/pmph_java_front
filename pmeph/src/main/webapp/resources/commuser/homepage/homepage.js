@@ -8,13 +8,13 @@ function on(state){
 	if(state=="next"){
 		 var flag=$("#next").text();
 		 if(flag==startrows){
-			 alert("已经是最后一页了！");
+			 message.info("已经是最后一页了！");
 			 return;
 		 }
 	}else if(state=="before"){
 		 var flag=$("#before").text();
 		 if(flag==1){
-			 alert("已经是第一页了！");
+			 message.info("已经是第一页了！");
 			 return;
 		 }
 	}
@@ -51,6 +51,11 @@ function chooseType(state){
 			$("#"+state).addClass("active");
 			$("#book_type").val(state);
 			$("#before").html(1);
+			var labelHtml="";
+			for(var i=0;i<json.listLabel.length;i++){
+				labelHtml+='<a href="'+json.listLabel[i].type+'" class="little"><span class="little_content">'+json.listLabel[i].note+'</span></a>';
+			}
+			$(".div_photo1 .div1").html(labelHtml);
 		}
 	});
 }

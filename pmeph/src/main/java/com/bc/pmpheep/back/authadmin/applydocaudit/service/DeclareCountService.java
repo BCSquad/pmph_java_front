@@ -8,41 +8,54 @@ import com.bc.pmpheep.service.exception.CheckedServiceException;
 
 /**
  * 
- * <pre>
- * 功能描述：DeclareCountService 接口
- * 使用示范：
+ * @ClassName: DeclareCountService
+ * @Description: 申报统计（机构用户）接口
+ * @author SunZhuoQun
+ * @date 2017-12-5 上午9:37:36
+ * 
  */
 
 public interface DeclareCountService {
-   
-    /**
-     * 
-     * <pre>
-     * 功能描述：申报统计（机构用户）查询显示
-     * 使用示范：
-     * @param paraMap 
-     *
-     * @param pageParameter 带有分页参数和查询条件参数
-     * @throws CheckedServiceException
-     * </pre>
-     */
-	List<Map<String,Object>> findDeclareCount(Map<String, Object> paraMap);
+	/**
+	 * 
+	 * @Title: findDeclareCount
+	 * @Description: 我校申报统计情况
+	 * @param @param paraMap
+	 * @param @return
+	 * @return List<Map<String,Object>> 返回类型
+	 * @throws
+	 */
+	List<Map<String, Object>> findDeclareCount(Map<String, Object> paraMap);
 
-	
-	 /**
-     * 最终结果名单列表
-     * <pre>
-     * 功能描述：申报统计（机构用户）查询显示
-     * 使用示范：
-     *
-     * @param pageParameter 带有分页参数和查询条件参数
-     * @throws CheckedServiceException
-     * </pre>
-     */
-	List<Map<String,Object>> findNameList(Map<String, Object> paraMap);
-	
-	//加载更多
+	/**
+	 * 
+	 * @Title: findNameList
+	 * @Description: 最终结果名单列表
+	 * @param @param paraMap
+	 * @param @return
+	 * @return List<Map<String,Object>> 返回类型
+	 * @throws
+	 */
+	List<Map<String, Object>> findNameList(Map<String, Object> paraMap);
+
+	/**
+	 * 
+	 * @Title: selectNoticeMessage
+	 * @Description: 加载更多
+	 * @param @param paraMap
+	 * @param @return
+	 * @return List<Map<String,Object>> 返回类型
+	 * @throws
+	 */
 	List<Map<String, Object>> selectNoticeMessage(Map<String, Object> paraMap);
-   //查看全部
+
+	/**
+	 * 
+	 * @Title: selectAll
+	 * @Description: 查看全部
+	 * @param @return
+	 * @return List<Map<String,Object>> 返回类型
+	 * @throws
+	 */
 	List<Map<String, Object>> selectAll();
 }

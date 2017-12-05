@@ -45,7 +45,7 @@ public class ReadDetailController extends BaseController{
 	public ModelAndView move(HttpServletRequest request){
 		ModelAndView modelAndView=new ModelAndView();
 		String id=request.getParameter("id");
-		id="168";
+/*		id="168";*/
 		List<Map<String,Object>> flist = bookCollectionService.queryBookCollectionList(new BigInteger("12179"));
 		Map<String, Object> map=readDetailService.queryReadBook(id);
 		List<Map<String, Object>> listCom=readDetailService.queryComment(id);

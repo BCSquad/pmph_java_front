@@ -50,5 +50,5 @@ public interface HomeService {
 	 * @Description: 查询热门标签
 	 * @return List<Map<String, Object>>
 	 */
-	List<Map<String, Object>> queryLabel();
+	List<Map<String, Object>> queryLabel(long typeid);
 }

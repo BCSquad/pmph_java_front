@@ -88,8 +88,9 @@ public class HomeServiceImpl implements HomeService {
 	 * 查询热门标签
 	 */
 	@Override
-	public List<Map<String, Object>> queryLabel(){
-		List<Map<String, Object>> list=homeDao.queryLabel();
+	public List<Map<String, Object>> queryLabel(long typeid){
+		String typepath="0-"+typeid+"-%";
+		List<Map<String, Object>> list=homeDao.queryLabel(typepath);
 		return list;
 	}
 }
