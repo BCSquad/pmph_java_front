@@ -13,6 +13,10 @@ public interface ReadDao {
 	
 	//重点推荐
 	List<Map<String,Object>> queryZdtjReadList(Map<String,Object> map);
+
+	//获取图书分类信息
+	public List<Map<String,Object>> queryMaterialType();
+
 	//新书推荐
 	List<Map<String,Object>> queryXstjReadList(Map<String,Object> map); 
 	//热门书评

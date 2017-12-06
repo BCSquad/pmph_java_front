@@ -1,71 +1,80 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.bc.pmpheep.back.commuser.readpage.dao.ReadDao" >
-	<!-- 根据某类下的重点推荐图书 -->
-	<select id="queryZdtjReadList" parameterType="java.util.Map" resultType="java.util.Map">
-		 SELECT t.type_name,b.* FROM book AS b
-				inner JOIN material_type AS t ON b.type = t.id 
-				and SUBSTRING_INDEX(SUBSTRING_INDEX(CONCAT(t.path,'-',t.id),'-',
-					(select cast(
-						(CHAR_LENGTH(path)-CHAR_LENGTH(REPLACE(path,'-','')))/CHAR_LENGTH('-')+2
-						as decimal(9,2)
-							)
-					from material_type where id = cast('${type}' as decimal(9,2)))),'-',-1) = '${type}'
-					WHERE b.is_promote = 1 AND b.deadline_promote > now()
-					ORDER BY b.sort_promote ASC
-					<if test="startrows != null and startrows != ''">
-						<![CDATA[limit ${startrows},${endrows}]]>
-					</if>
+<mapper namespace="com.bc.pmpheep.back.commuser.readpage.dao.ReadDao">
+    <!-- 根据某类下的重点推荐图书 -->
+    <select id="queryZdtjReadList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT t.type_name,b.* FROM book AS b
+        inner JOIN material_type AS t ON b.type = t.id
+        and SUBSTRING_INDEX(SUBSTRING_INDEX(CONCAT(t.path,'-',t.id),'-',
+        (select cast(
+        (CHAR_LENGTH(path)-CHAR_LENGTH(REPLACE(path,'-','')))/CHAR_LENGTH('-')+2
+        as decimal(9,2)
+        )
+        from material_type where id = cast('${type}' as decimal(9,2)))),'-',-1) = '${type}'
+        WHERE b.is_promote = 1 AND b.deadline_promote > now()
+        ORDER BY b.sort_promote ASC
+        <if test="startrows != null and startrows != ''">
+            <![CDATA[limit ${startrows},${endrows}]]>
+        </if>
+    </select>
+
+
+    <select id="queryMaterialType" resultType="map">
+		<![CDATA[
+
+		select * from material_type where length(path) < 10 order by length(path),parent_id,length(note),sort
+
+        ]]>
 	</select>
-	
-	<!-- 根据某类下的新书推荐 -->
-	<select id="queryXstjReadList" parameterType="java.util.Map" resultType="java.util.Map">
-		 SELECT t.type_name,b.* FROM book AS b
-			inner JOIN material_type AS t ON b.type = t.id 
-			and SUBSTRING_INDEX(SUBSTRING_INDEX(CONCAT(t.path,'-',t.id),'-',
-				(select cast(
-					(CHAR_LENGTH(path)-CHAR_LENGTH(REPLACE(path,'-','')))/CHAR_LENGTH('-')+2
-					as decimal(9,2)
-						)
-				from material_type where id = cast('${type}' as decimal(9,2)))),'-',-1) = '${type}'
-				WHERE b.is_new = 1 AND b.deadline_new > now()
-				ORDER BY b.sort_new ASC
-				<if test="startrows != null and startrows != ''">
-					<![CDATA[limit ${startrows},${endrows}]]>
-				</if>
-	</select>
-	
-	<!-- 热门书评 -->
-	<select id="queryRmspReadList" parameterType="java.util.Map" resultType="java.util.Map">
-		 SELECT u.id,b.id id1,b.bookname,b.image_url,c.content,c.score,u.realname
-		 	FROM book AS b INNER JOIN 
-						(SELECT * from book_user_comment 
-							GROUP BY book_id 
-							HAVING is_auth = 1 AND
-							is_hide = 0 AND
-							is_deleted = 0)AS c 
-					ON b.id = c.book_id
-					INNER JOIN writer_user AS u ON c.writer_id = u.id
-					ORDER BY
-					b.comments ASC 
-					<if test="startrows != null and startrows != ''">
-						<![CDATA[limit ${startrows},${endrows}]]>
-					</if>
-	</select>
-	
-	<!-- 图书畅销 -->
-	<select id="queryTscxReadList" parameterType="java.util.Map" resultType="java.util.Map">
- 		SELECT t.type_name,b.* FROM book AS b
-			inner JOIN material_type AS t ON b.type = t.id 
-			and SUBSTRING_INDEX(SUBSTRING_INDEX(CONCAT(t.path,'-',t.id),'-',
-				(select cast(
-					(CHAR_LENGTH(path)-CHAR_LENGTH(REPLACE(path,'-','')))/CHAR_LENGTH('-')+2
-					as decimal(9,2)
-						)
-				from material_type where id = cast('${type}' as decimal(9,2)))),'-',-1) = '${type}'
-				where b.is_on_sale = 1 ORDER BY b.sales DESC
-				<if test="startrows != null and startrows != ''">
-					<![CDATA[limit ${startrows},${endrows}]]>
-				</if>
-	</select>
+
+    <!-- 根据某类下的新书推荐 -->
+    <select id="queryXstjReadList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT t.type_name,b.* FROM book AS b
+        inner JOIN material_type AS t ON b.type = t.id
+        and SUBSTRING_INDEX(SUBSTRING_INDEX(CONCAT(t.path,'-',t.id),'-',
+        (select cast(
+        (CHAR_LENGTH(path)-CHAR_LENGTH(REPLACE(path,'-','')))/CHAR_LENGTH('-')+2
+        as decimal(9,2)
+        )
+        from material_type where id = cast('${type}' as decimal(9,2)))),'-',-1) = '${type}'
+        WHERE b.is_new = 1 AND b.deadline_new > now()
+        ORDER BY b.sort_new ASC
+        <if test="startrows != null and startrows != ''">
+            <![CDATA[limit ${startrows},${endrows}]]>
+        </if>
+    </select>
+
+    <!-- 热门书评 -->
+    <select id="queryRmspReadList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT u.id,b.id id1,b.bookname,b.image_url,c.content,c.score,u.realname
+        FROM book AS b INNER JOIN
+        (SELECT * from book_user_comment
+        GROUP BY book_id
+        HAVING is_auth = 1 AND
+        is_hide = 0 AND
+        is_deleted = 0)AS c
+        ON b.id = c.book_id
+        INNER JOIN writer_user AS u ON c.writer_id = u.id
+        ORDER BY
+        b.comments ASC
+        <if test="startrows != null and startrows != ''">
+            <![CDATA[limit ${startrows},${endrows}]]>
+        </if>
+    </select>
+
+    <!-- 图书畅销 -->
+    <select id="queryTscxReadList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT t.type_name,b.* FROM book AS b
+        inner JOIN material_type AS t ON b.type = t.id
+        and SUBSTRING_INDEX(SUBSTRING_INDEX(CONCAT(t.path,'-',t.id),'-',
+        (select cast(
+        (CHAR_LENGTH(path)-CHAR_LENGTH(REPLACE(path,'-','')))/CHAR_LENGTH('-')+2
+        as decimal(9,2)
+        )
+        from material_type where id = cast('${type}' as decimal(9,2)))),'-',-1) = '${type}'
+        where b.is_on_sale = 1 ORDER BY b.sales DESC
+        <if test="startrows != null and startrows != ''">
+            <![CDATA[limit ${startrows},${endrows}]]>
+        </if>
+    </select>
 </mapper>

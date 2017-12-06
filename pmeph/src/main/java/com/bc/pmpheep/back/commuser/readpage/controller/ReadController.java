@@ -1,13 +1,11 @@
 package com.bc.pmpheep.back.commuser.readpage.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -48,6 +46,33 @@ public class ReadController {
         zdtjXxjyMap.put("endrows", "4");
         zdtjXxjyList = readService.queryRmspReadList(zdtjXxjyMap);
         mv.addObject("rmspList", zdtjXxjyList);
+
+        List<Map<String, Object>> materialType = readService.queryMaterialType();
+
+        List<Map<String, Object>> gradeMaterialType = new ArrayList<Map<String, Object>>();
+
+        //循环取出分类信息，按层次排列好
+        for (Map<String, Object> type : materialType) {
+            if (MapUtils.getString(type, "path", "").split("-").length == 1) {
+                List<Map<String, Object>> dataList = new ArrayList<Map<String, Object>>();
+                type.put("dataList", dataList);
+                for (Map<String, Object> type2 : materialType) {
+                    if (MapUtils.getString(type, "id").equals(MapUtils.getString(type2, "parent_id"))) {
+                        List<Map<String, Object>> dataList2 = new ArrayList<Map<String, Object>>();
+                        type2.put("dataList", dataList2);
+                        for (Map<String, Object> type3 : materialType) {
+                            if (MapUtils.getString(type2, "id").equals(MapUtils.getString(type3, "parent_id"))) {
+                                dataList2.add(type3);
+                            }
+                        }
+                        dataList.add(type2);
+                    }
+                }
+                gradeMaterialType.add(type);
+            }
+        }
+        mv.addObject("materialType", gradeMaterialType);
+
         return mv;
     }
 

@@ -57,9 +57,15 @@ function ChangeCXDiv(divId,divName,zDivCount)
 }
 
 //图书分类
-function ChangeFLDiv(divId,divName,zDivCount)
+function ChangeFLDiv(divId,divName)
 {
-    for(var i=0;i<=zDivCount;i++)
+    $(".ChangeFLDiv").css("display",'none');
+    $(".ts_type").removeClass("ts_type1");
+
+    $("#FLDiv_"+divId).addClass("ts_type1");
+    $("#ChangeFLDiv_"+divId).css("display",'block');
+
+  /*  for(var i=0;i<=zDivCount;i++)
     {
         document.getElementById(divName+i).style.display="none";
         document.getElementById("FLDiv_"+i).setAttribute("class","ts_type");
@@ -67,7 +73,7 @@ function ChangeFLDiv(divId,divName,zDivCount)
     }
     document.getElementById(divName+divId).style.display="block";
     document.getElementById("FLDiv_"+divId).setAttribute("class","ts_type ts_type1");
-//显示当前层
+//显示当前层*/
 }
 
 //重点推荐

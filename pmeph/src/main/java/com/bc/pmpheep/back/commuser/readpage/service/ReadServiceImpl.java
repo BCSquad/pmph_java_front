@@ -20,6 +20,11 @@ public class ReadServiceImpl implements ReadService {
 	}
 
 	@Override
+	public List<Map<String, Object>> queryMaterialType() {
+		return readDao.queryMaterialType();
+	}
+
+	@Override
 	public List<Map<String, Object>> queryXstjReadList(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return this.readDao.queryXstjReadList(map);

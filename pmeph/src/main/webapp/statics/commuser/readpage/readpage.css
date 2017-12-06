@@ -426,7 +426,7 @@
     word-wrap: break-word;
 }
 
-.part_2 span {
+.part_2 a {
     font-family: MicrosoftYaHei;
     font-size: 14px;
     font-weight: normal;
@@ -436,6 +436,8 @@
     color: #489299;
     margin-left: 10px;
     display: inline-block;
+    cursor: pointer;
+    text-decoration:none;
 }
 
 .tsfl_1 {
