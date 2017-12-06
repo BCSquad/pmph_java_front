@@ -61,6 +61,7 @@ div.white-out-div .search-condition{
     border:none;
     outline: none;
     border-radius: 3px;
+    cursor: pointer;
 }
 
 #view-switch{
@@ -86,7 +87,7 @@ div.white-out-div .search-condition{
 	min-height: 80px;
 }
 
-.body table#zebra-table{
+.body .table-area table{
     padding:0px;
     margin: 24px 0px 24px 0px;
     width:100%;
@@ -96,14 +97,14 @@ div.white-out-div .search-condition{
     white-space: nowrap;
 
 }
-.body table#zebra-table tr{
+.body .table-area tr{
     height: 46px;
 
 }
-.body table#zebra-table tr:first-of-type{
+.body .table-area tr:first-of-type{
     height: 40px;
 }
-.body table#zebra-table th{
+.body .table-area th{
     height: 40px;
     background-color: #f0f0f0;
     padding:0px;margin:0px;
@@ -116,20 +117,20 @@ div.white-out-div .search-condition{
     color: #4e4e4e;
     border-left:3px  #ffffff solid;
 }
-.body table#zebra-table th:first-of-type{
+.body .table-area th:first-of-type{
     border-left:none;
 }
 
-.body table#zebra-table tr:nth-child(odd){
-    background-color: #f9f9f9;
+.body .table-area tr:nth-child(odd){
+    
 
 }
 
-.body table#zebra-table tr:nth-child(even){
-
+.body .table-area tr:nth-child(even){
+	background-color: #f9f9f9;
 }
 
-.body table#zebra-table td{
+.body .table-area td{
     height: 46px;
     border-collapse: collapse;
     border:none;
@@ -144,7 +145,7 @@ div.white-out-div .search-condition{
     text-align: center;
 }
 
-.body table#zebra-table td .audit-status{
+.body .table-area td .audit-status{
     font-family: MicrosoftYaHei;
     width: 49px;
     height: 13px;
@@ -155,22 +156,22 @@ div.white-out-div .search-condition{
     border-radius: 2px;
 }
 
-.body table#zebra-table td .audit-status.s1{
+.body #zebra-table td .audit-status.s1{
     color: #fd9a2e;
     background-color: #FFEBD6;
 }
 
-.body table#zebra-table td .audit-status.s2{
+.body #zebra-table td .audit-status.s2{
     color: #24c6c8;
     background-color: #CDEFF0;
 }
 
-.body table#zebra-table td .no-operate{
+.body #zebra-table td .no-operate{
     color: #666666;
     letter-spacing: 0px;
 }
 
-.body table#zebra-table td a.a-preview{
+.body #zebra-table td a.a-preview{
     font-family: SimSun;
     font-size: 12px;
     font-weight: normal;
@@ -182,7 +183,7 @@ div.white-out-div .search-condition{
 }
 
 
-.body table#zebra-table td a.a-pass{
+.body #zebra-table td a.a-pass{
     font-family: SimSun;
     text-decoration: underline;
     font-size: 12px;
@@ -194,7 +195,7 @@ div.white-out-div .search-condition{
     cursor: pointer;
 }
 
-.body table#zebra-table td a.a-reject{
+.body #zebra-table td a.a-reject{
     font-family: SimSun;
     text-decoration: underline;
     font-size: 12px;
@@ -206,28 +207,29 @@ div.white-out-div .search-condition{
     cursor: pointer;
 }
 
-.body table#zebra-table td:nth-child(2){
+.body #zebra-table td:nth-child(2){
     width: 143px;
 }
 
-.body table#zebra-table td .head-portrait-wrapper{
+.body #zebra-table td .head-portrait-wrapper{
     width: 90px;
     height: 44px;
     margin: auto;
     display:inline;
 }
 
-.body table#zebra-table td div.head-portrait{
-    width: 44px;
-    height: 44px;
-    /* background-image: url("../image/haoyoutouxiang1.png"); */
-    background-size: 84%;
+.body #zebra-table td div.head-portrait{
+    width: 40px;
+    height: 40px;
+    background-image: url("../../image/putongyhtouxiang.png");
+    background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
     float:left;
-    margin: 0px 10px 0px 22px;
+    margin: 3.2px 10px 0px 22px;
+    border-radius:40px;
 }
-.body table#zebra-table td div.head-portrait+div{
+.body #zebra-table td div.head-portrait+div{
     float:left;
     width: 55px;
     text-align: center;

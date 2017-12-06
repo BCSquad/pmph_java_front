@@ -21,7 +21,7 @@ public interface TeacherAuthService {
 	List<Map<String, Object>> queryTeacherAuthList(PageParameter<Map<String, Object>> pageParameter);
 	
 	/**
-	 * 查询认证总数
+	 * 查询认证分页总页数
 	 * @param pageParameter
 	 * @return
 	 */

@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.booksearch.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,12 +41,15 @@ public class BookSearchController extends BaseController {
 	
 	
 	@RequestMapping("toPage")
-	public ModelAndView toPage(HttpServletRequest request){
+	public ModelAndView toPage(HttpServletRequest request) throws UnsupportedEncodingException{
 		ModelAndView mv = new ModelAndView();
 		String search = request.getParameter("search");
 		String real_search = request.getParameter("real_search");
+		search = new String((search!=null?search:"").getBytes("iso8859-1"), "utf-8");
+		real_search = new String((real_search!=null?real_search:"").getBytes("iso8859-1"), "utf-8");
 		mv.addObject("search",search);
-		mv.addObject("real_search",real_search);
+		mv.addObject("real_search",search);
+		
 		mv.setViewName("commuser/booksearch/booksearch");
 		
 		return mv;

@@ -66,7 +66,7 @@ String contextpath=request.getContextPath();
                         <!--<button id="view-switch">头像视图</button>-->
                     </div>
                     <div class="table-area">
-	                    <table id="zebra-table">
+	                    <table >
 	                        <tr>
 	                            <th>序号</th>
 	                            <th>姓名</th>
@@ -79,6 +79,9 @@ String contextpath=request.getContextPath();
 	                            <th>教师资格证</th>
 	                            <th>审核操作</th>
 	                        </tr>
+	                        <tbody id="zebra-table">
+	                        
+	                        </tbody>
 	                    </table>
                     </div>
                    

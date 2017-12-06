@@ -1,7 +1,7 @@
 package com.bc.pmpheep.back.commuser.addfriend.service;
 
 /**
- * 资料申报审核（机构用户）service层
+ * 添加好友（普通用户）service层
  */
 import java.util.List;
 import java.util.Map;
@@ -11,14 +11,14 @@ import com.bc.pmpheep.controller.bean.ResponseBean;
 public interface AddFriendService {
 
 	/**
-	 * 查询教材列表
+	 * 查询仍未添加的好友列表
 	 * @param pageParameter 
 	 * @return
 	 */
 	public List<Map<String,Object>> addFriendListQuery(PageParameter<Map<String, Object>> pageParameter);
 	
 	/**
-	 * 查询教材总数量
+	 * 查询好友分页总页数
 	 * @param pageParameter
 	 * @return
 	 */

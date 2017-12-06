@@ -1,15 +1,3 @@
-<tr>
-    <th>序号</th>
-    <th>姓名</th>
-    <th>身份证</th>
-    <th>手机</th>
-    <th>邮箱</th>
-    <th>职务</th>
-    <th>职称</th>
-    <th>审核标志</th>
-    <th>教师资格证</th>
-    <th>审核操作</th>
-</tr>
 #set($teacherauthNum =$!{startNum})
 #foreach($c in $!{List_map})
 	<tr>
@@ -17,9 +5,9 @@
 	    <td>
 	    	<div class="head-portrait-wrapper">
 	    		#if(!$c.avatar || $c.avatar == "DEFAULT")
-	    			<div class="head-portrait" style="background-image: url('$!{contextpath}statics/image/haoyoutouxiang1.png');"></div>
+	    			<div class="head-portrait" style="background-image: url('$!{contextpath}statics/image/putongyhtouxiang.png');"></div>
 	    		#else
-	    			<div class="head-portrait" style="background-image: url("$c.avatar");"></div>
+	    			<div class="head-portrait" style="background-image: url('$c.avatar');"></div>
 	    		#end
 	    		<div>$c.realname</div>
 	    	</div>

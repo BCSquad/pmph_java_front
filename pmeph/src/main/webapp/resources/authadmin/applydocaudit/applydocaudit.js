@@ -46,8 +46,13 @@ function applyDocAuditQuery(n,query_condition,status){
 		data:data,
 		success:function(json){
 			$("#nine-block-box-container").html(json.html);
+			if (json.html == "") {
+				$(".pagination-wrapper").hide();
+			}else{
+				$(".pagination-wrapper").show();
+			}
 			$('#page1').html("");	
-			$("#totoal_count").html(json.totoal_count);
+			$("#totoal_count").html('共'+json.totoal_count+'页');
 			//刷新分页栏
 			 Page({
                 num: json.totoal_count,					//页码数
@@ -72,11 +77,11 @@ function search(){
 
 //结果统计 按钮点击触发事件 跳转页面
 function resultStatistics(id,name){
-	window.location.href = contextpath + "declareCount/findDeclareCount.action?material_id="+id+"&material_name="+name;
+	window.location.href = contextpath + "declareCount/findDeclareCount.action?material_id="+id;
 }
 
 //办理 按钮点击触发事件 跳转页面
 function dealWithAudit(id,name){
-	window.location.href = contextpath + "dataaudit/toPage.action?material_id="+id+"&material_name="+name;
+	window.location.href = contextpath + "dataaudit/toPage.action?material_id="+id;
 }
                

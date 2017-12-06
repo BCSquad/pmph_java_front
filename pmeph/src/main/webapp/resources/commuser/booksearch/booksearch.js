@@ -44,6 +44,11 @@ function queryMain(){
 		success:function(json){
 			
 			$("#book-list-table").html(json.html);
+			if (json.html == "") {
+				$(".pageDiv").hide();
+			}else{
+				$(".pageDiv").show();
+			}
 			$('#page1').html("");	
 			$("#totoal_count").html(json.totoal_count);
 			redQuery();

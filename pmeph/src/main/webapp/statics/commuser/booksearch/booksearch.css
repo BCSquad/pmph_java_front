@@ -90,7 +90,7 @@
 
 .leftPicture {
     height: 100%;
-    width: 138px;
+    width: 160px;
     float: left;
     overflow: hidden;
     text-align: center;
@@ -103,13 +103,13 @@
 img[src=""],img:not([src]){opacity:0;}
 
 .rightContent {
-    width: 1022px;
+    width: 1000px;
     height: 100%;
     float: left;
 }
 
 .upDiv {
-    width: 1015px;
+    width: 993px;
     height: 50%;
     float: left;
     padding-left: 20px;
@@ -175,7 +175,7 @@ img[src=""],img:not([src]){opacity:0;}
 }
 
 .downDiv {
-    width: 1010px;
+    width: 980px;
     height: 50%;
     float: left;
     padding-left: 20px;

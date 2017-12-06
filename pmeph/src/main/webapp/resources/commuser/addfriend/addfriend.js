@@ -27,6 +27,11 @@ function queryMain(){
 		data:data,
 		success:function(json){
 			$("#table-15").html(json.html);
+			if (json.html == "") {
+				$(".pagination-wrapper").hide();
+			}else{
+				$(".pagination-wrapper").show();
+			}
 			$('#page1').html("");	
 			$("#totoal_count").html(json.totoal_count);
 			//刷新分页栏

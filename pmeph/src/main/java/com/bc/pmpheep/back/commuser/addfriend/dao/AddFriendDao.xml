@@ -12,6 +12,7 @@
 		u.realname
 		,u.id as uid
 		,u.rank
+		,u.avatar
 		,f.id 
 		,MIN(f.status) as min_status
 		,Max(f.status) as max_status
