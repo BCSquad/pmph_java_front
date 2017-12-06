@@ -63,5 +63,49 @@ public class PersonalCenterController extends BaseController {
 		return modelAndView;
 	}
 	
+	@RequestMapping("/tohomepageone")
+	public ModelAndView moveoutone() {
+		ModelAndView modelAndView = new ModelAndView();
+		Map<String, Object> permap=this.getUserInfo();//个人信息
+		List<PersonalNewMessage> listmycol=personalService.queryMyCol();//我的收藏
+		List<PersonalNewMessage> listmyfriend=personalService.queryMyFriend();//我的好友
+		List<PersonalNewMessage> listbookjoins=personalService.queryMyBooksJoin();//教材申报最新消息
+		modelAndView.addObject("permap",permap );
+		modelAndView.addObject("listmycol",listmycol );
+		modelAndView.addObject("listmyfriend",listmyfriend );
+		modelAndView.addObject("listbookjoins",listbookjoins);
+		modelAndView.setViewName("commuser/personalcenter/PersonalHomeOne");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/tohomepagetwo")
+	public ModelAndView moveouttwo() {
+		ModelAndView modelAndView = new ModelAndView();
+		Map<String, Object> permap=this.getUserInfo();//个人信息
+		List<PersonalNewMessage> listmycol=personalService.queryMyCol();//我的收藏
+		List<PersonalNewMessage> listmyfriend=personalService.queryMyFriend();//我的好友
+		List<PersonalNewMessage> listmywritingsnew=personalService.queryMyWritingsNew();//我的随笔文章动态最新消息
+		modelAndView.addObject("permap",permap );
+		modelAndView.addObject("listmycol",listmycol );
+		modelAndView.addObject("listmyfriend",listmyfriend );
+		modelAndView.addObject("listmywritingsnew",listmywritingsnew);
+		modelAndView.setViewName("commuser/personalcenter/PersonalHomeTwo");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/tohomepagethe")
+	public ModelAndView moveoutthe() {
+		ModelAndView modelAndView = new ModelAndView();
+		Map<String, Object> permap=this.getUserInfo();//个人信息
+		List<PersonalNewMessage> listmycol=personalService.queryMyCol();//我的收藏
+		List<PersonalNewMessage> listmyfriend=personalService.queryMyFriend();//我的好友
+		List<PersonalNewMessage> listmybooknews=personalService.queryMyBooksNew();//我的书评消息动态最新消息
+		modelAndView.addObject("permap",permap );
+		modelAndView.addObject("listmycol",listmycol );
+		modelAndView.addObject("listmyfriend",listmyfriend );
+		modelAndView.addObject("listmybooknews",listmybooknews);
+		modelAndView.setViewName("commuser/personalcenter/PersonalHomeThere");
+		return modelAndView;
+	}
 	
 }
