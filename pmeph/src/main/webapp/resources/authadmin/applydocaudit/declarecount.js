@@ -40,7 +40,7 @@ function selectAll(){
 	
 	$.ajax({
 		type:'post',
-		url:contextpath+'/declareCount/selectAll.action',
+		url:contextpath+'declareCount/selectAll.action',
 		async:false,
 		dataType:'json',
 		success:function(json){

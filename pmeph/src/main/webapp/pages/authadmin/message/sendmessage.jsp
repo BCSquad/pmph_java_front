@@ -5,7 +5,7 @@
 <html>
 <head>
     <script type="text/javascript">
-        var contextpath = '${pageContext.request.contextPath}';
+        var contextpath = '${pageContext.request.contextPath}/';
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>Insert title here</title>

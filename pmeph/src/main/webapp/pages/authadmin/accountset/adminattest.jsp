@@ -11,7 +11,7 @@
 <html>
 <head>
     <script type="text/javascript">
-        var contextpath = '${pageContext.request.contextPath}';
+        var contextpath = '${pageContext.request.contextPath}/';
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>学校管理员认证</title>

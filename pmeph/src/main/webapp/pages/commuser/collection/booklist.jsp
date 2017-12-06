@@ -9,8 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <script type="text/javascript">
 		var pathName=window.document.location.pathname;  
-		var contextpath=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
-		var contextpath=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+		var contextpath="${pageContext.request.contextPath}/";
 </script>
 <c:set var="ctx" value="${pageContext.request.contextPath }"/>
 <head>

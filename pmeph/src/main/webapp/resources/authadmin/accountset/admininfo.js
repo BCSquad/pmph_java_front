@@ -18,7 +18,7 @@ function getform(){
 function save(){
     $.ajax({
         type:'post',
-        url:contextpath+'/admininfocontroller/updateorguser.action',
+        url:contextpath+'admininfocontroller/updateorguser.action',
         async:false,
         contentType: 'application/json',
         dataType:'json',

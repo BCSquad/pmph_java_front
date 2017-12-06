@@ -28,7 +28,7 @@ $(function(){
     		//$("#send").val("下一步")
     		var index =layer.open({
     			  type: 2,
-    			  content: contextpath+'/info/toPage.action',
+    			  content: contextpath+'info/toPage.action',
     			  area: ['320px', '195px'],
     			  maxmin: true
     			});

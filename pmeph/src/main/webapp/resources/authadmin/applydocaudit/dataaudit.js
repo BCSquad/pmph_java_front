@@ -30,7 +30,7 @@ function queryMain(){
 	
 	$.ajax({
 		type:'post',
-		url:contextpath+'/dataaudit/findDataAudit.action?t='+new Date().getTime(),
+		url:contextpath+'dataaudit/findDataAudit.action?t='+new Date().getTime(),
 		async:false,
 		dataType:'json',
 		data:data,

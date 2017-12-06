@@ -10,8 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <script type="text/javascript">
-		var pathName=window.document.location.pathname;  
-		var contxtpath=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+		var pathName=window.document.location.pathname;
 		var contextpath="${pageContext.request.contextPath }/";
 </script>
 <c:set var="ctx" value="${pageContext.request.contextPath }"/>

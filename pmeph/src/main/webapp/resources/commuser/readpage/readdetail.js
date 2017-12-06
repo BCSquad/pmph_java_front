@@ -23,7 +23,7 @@ function insert(){
 	};
 	 $.ajax({
 			type:'post',
-			url:contextpath+'/readdetail/insertComment.action',
+			url:contextpath+'readdetail/insertComment.action',
 			async:false,
 			dataType:'json',
 			data:json,
@@ -42,7 +42,7 @@ function fresh(){
 	var str='';
 	 $.ajax({
 			type:'post',
-			url:contextpath+'/readdetail/fresh.action?type='+type,
+			url:contextpath+'readdetail/fresh.action?type='+type,
 			async:false,
 			dataType:'json',
 			success:function(json){
@@ -62,7 +62,7 @@ function fresh(){
 function change(){
 	 $.ajax({
 			type:'post',
-			url:contextpath+'/readdetail/change.action',
+			url:contextpath+'readdetail/change.action',
 			async:false,
 			dataType:'json',
 			success:function(json){
@@ -84,7 +84,7 @@ function addlikes(){
 	var book_id=$("#book_id").val();
 	 $.ajax({
 			type:'post',
-			url:contextpath+'/readdetail/addlikes.action?id='+book_id,
+			url:contextpath+'readdetail/addlikes.action?id='+book_id,
 			async:false,
 			dataType:'json',
 			success:function(json){
@@ -107,7 +107,7 @@ function addmark(){
 	}
 	 $.ajax({
 			type:'post',
-			url:contextpath+'/readdetail/addmark.action',
+			url:contextpath+'readdetail/addmark.action',
 			data:{favoriteId:favoriteId,bookId:bookId,marks:marks},
 			async:false,
 			dataType:'json',

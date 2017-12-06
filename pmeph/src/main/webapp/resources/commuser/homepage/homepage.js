@@ -20,7 +20,7 @@ function on(state){
 	}
     $.ajax({
 		type:'post',
-		url:contextpath+'/homepage/changerows.action?startrows='+startrows+'&&state='+state+'&&type='+type,
+		url:contextpath+'homepage/changerows.action?startrows='+startrows+'&&state='+state+'&&type='+type,
 		async:false,
 		dataType:'json',
 		success:function(json){
@@ -34,7 +34,7 @@ function on(state){
 function chooseType(state){
     $.ajax({
 		type:'post',
-		url:contextpath+'/homepage/chooseType.action?state='+state,
+		url:contextpath+'homepage/chooseType.action?state='+state,
 		async:false,
 		dataType:'json',
 		success:function(json){
@@ -73,7 +73,7 @@ function changesale(state){
 		type=636;
 	}$.ajax({
 			type:'post',
-			url:contextpath+'/homepage/changesale.action?type='+type,
+			url:contextpath+'homepage/changesale.action?type='+type,
 			async:false,
 			dataType:'json',
 			success:function(json){

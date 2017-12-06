@@ -18,9 +18,9 @@
     /*   $('head').append('<style type="text/css" href="'
      + contextpath +
      '/resources/comm/layer/theme/default/layer.css"></style>');*/
-    $('head').append('<script  src="' +
-        /*+ contextpath +*/
-        '/resources/comm/layer/layer.js"></script>');
+    $('head').append('<script  src="'
+        + contextpath +
+        'resources/comm/layer/layer.js"></script>');
 
 
     var bg_img = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAAAoCAMAAABO8gGqAAAAeFBMVEVQv//3uioTzmb/SUn///+o3///u7v/urr73JVs4aD/3d3x/Pb1+/9ixf/++/Km7MU/14PT9uIi0XDD6f9xy//6YWP/VFT5x1Lzwkky0nzq9/+S1/9hvPr+9uRMwsb86byZu7L85bD61Hr4vjeclr+X6byckrky033aXjaWAAABNklEQVRYw+3ZzW7CMBAE4OAMMTGOS36atFCgQH/e/w0rLZFyWeQ9mESqdk4+fpfRWHZ2+jWifL3monxUmSifbytRsncji9CXC30Z+SRAI0wuTCbMSoEKVKACFahAIfDg/UECHEIYFgF6wEuAG2CTDNg7ez9Y18eAe2D/DOB33TwGOsCSD3AxYNe23ROAL0D9GFgAsORDISlJQuDkQ8kDJ+HomxO4azgfARkh+aLAqm2rVMASdcP7TM4KC0GL18A6FXALEt59EaAFADszcEdCzmcYHwnTAW+Xyy0GJOGW8xnGV1BTRMAEUzcJWZ9hfGOXZwNOwtLEgI58JHSpgMP5HNviUVhKpq4Yu+z6VMAjcFzgsiAHBiAsAuy8F23xNYSrXlgVqEAFKlCBcuB/eUQ/CYU/C31D/AFyLi+YoY/uFQAAAABJRU5ErkJggg==';

@@ -13,7 +13,7 @@ $(function () {
 	        elem: $('#page1'),		    //指定的元素
 	        callback: function (n) {	//回调函数
 	           console.log(n);
-	           location.href=contextpath+'/articlesearch/change.action?n='+n+'&&m='+$('input[name=edu]').val();
+	           location.href=contextpath+'articlesearch/change.action?n='+n+'&&m='+$('input[name=edu]').val();
 	        }
 	    });
 	   $('select').selectlist({
@@ -24,13 +24,13 @@ $(function () {
            onChange:function(){
         	   var m=$('input[name=edu]').val();
         	   var n=1;
-        	   location.href=contextpath+'/articlesearch/change.action?n='+n+'&&m='+$('input[name=edu]').val();
+        	   location.href=contextpath+'articlesearch/change.action?n='+n+'&&m='+$('input[name=edu]').val();
            }
        });
 });
 //跳转到书籍搜索页面
 function tobookpage(){
-	window.location=contextpath+'/booksearch/toPage.action?search='+$("#selectall").val()+'&&real_search=""';
+	window.location=contextpath+'booksearch/toPage.action?search='+$("#selectall").val()+'&&real_search=""';
 }
 
 //点赞/取消赞
@@ -45,7 +45,7 @@ function changelikes(flag){
 	}
 	   $.ajax({
 			type:'post',
-			url:contextpath+'/articlesearch/changelikes.action?id='+id+'&&status='+status,
+			url:contextpath+'articlesearch/changelikes.action?id='+id+'&&status='+status,
 			async:false,
 			dataType:'json',
 			success:function(json){
@@ -72,7 +72,7 @@ function jump(){
 		 alert("超过了最大页数！");
 		 return;
 	 }
-	 location.href=contextpath+'/articlesearch/change.action?n='+n+'&&m='+$('input[name=edu]').val();
+	 location.href=contextpath+'articlesearch/change.action?n='+n+'&&m='+$('input[name=edu]').val();
 }
 
 //模糊查询

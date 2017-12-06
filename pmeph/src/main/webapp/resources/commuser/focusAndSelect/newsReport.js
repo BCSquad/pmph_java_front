@@ -19,7 +19,7 @@ $(function(){
 	var order      = $('#sort-wrapper').val();
 	$.ajax({
         type:'get',
-        url :contextpath+'/cmsinfoletters/list.action',
+        url :contextpath+'cmsinfoletters/list.action',
         async:false,
         contentType: 'application/json',
         dataType:'json',

@@ -8,7 +8,7 @@
 <head>
     <title>申请列表</title>
    <!--  <script>
-        var contextpath='${pageContext.request.contextPath}';
+        var contextpath='${pageContext.request.contextPath}/';
     </script> -->
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>

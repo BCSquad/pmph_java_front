@@ -17,7 +17,7 @@ function getform() {
 function submit(){
     $.ajax({
         type:'post',
-        url:contextpath+'/admininfocontroller/updateorguser.action',
+        url:contextpath+'admininfocontroller/updateorguser.action',
         async:false,
         contentType: 'application/json',
         dataType:'json',
@@ -33,7 +33,7 @@ function submit(){
 function uploadproxy(){
     $.ajax({
         type:'post',
-        url:contextpath+'/admininfocontroller/uploadProxy.action?',
+        url:contextpath+'admininfocontroller/uploadProxy.action?',
         async:false,
         success:function(responsebean){
             if (responsebean.code==1){

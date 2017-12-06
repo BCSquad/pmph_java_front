@@ -1,4 +1,3 @@
-var contextpath="http://localhost:8080/pmeph/";
 $(function () {
     $('.select-input').selectlist({
         zIndex: 10,
@@ -120,7 +119,7 @@ function add_xxjl(){
 	"<td><input class='cg_input' name='xx_major' value='' /></td>"+
 	"<td><input class='cg_input' name='xx_degree' value='' style='width: 120px;'/></td>"+
 	"<td><input class='cg_input' name='xx_note' value='' style='width: 310px;'/></td>"+
-	"<td><img class='add_img' src='"+contextpath+"/statics/image/del.png' onclick=\"javascript:del_tr('xxjl_"+num+"')\"/></td>"
+	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('xxjl_"+num+"')\"/></td>"
 	);
 	$table.append($tr);
 	$tr.calendar();
@@ -136,7 +135,7 @@ function add_gzjl(){
 	"<td><input class='cg_input' name='gz_org_name' value='' /></td>"+
 	"<td><input class='cg_input' name='gz_position' value='' /></td>"+
 	"<td><input class='cg_input' name='gz_note' value='' style='width: 370px;'/></td>"+
-	"<td><img class='add_img' src='"+contextpath+"/statics/image/del.png' onclick=\"javascript:del_tr('gzjl_"+num+"')\"/></td>"
+	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('gzjl_"+num+"')\"/></td>"
 	);
 	$table.append($tr);
 }
@@ -151,7 +150,7 @@ function add_jxjl(){
 	"<td><input class='cg_input' name='jx_school_name' value='' /></td>"+
 	"<td><input class='cg_input' name='jx_subject' value='' /></td>"+
 	"<td><input class='cg_input' name='jx_note' value='' style='width: 370px;'/></td>"+
-	"<td><img class='add_img' src='"+contextpath+"/statics/image/del.png' onclick=\"javascript:del_tr('jxjz_"+num+"')\"/></td>"
+	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('jxjz_"+num+"')\"/></td>"
 	);
 	$table.append($tr);
 }
@@ -169,7 +168,7 @@ function add_xsjz(){
 		"<input type='radio' name='xs_rank_"+num+"' value='4' />其他</td>"+
 	"<td><input class='cg_input' name='xs_position' value='' /></td>"+
 	"<td><input class='cg_input' name='xs_note' value='' style='width: 370px;'/></td>"+
-	"<td><img class='add_img' src='"+contextpath+"/statics/image/del.png' onclick=\"javascript:del_tr('xsjz_"+num+"')\"/></td>"+
+	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('xsjz_"+num+"')\"/></td>"+
 	"</tr>");
 	$table.append($tr);
 }
@@ -186,7 +185,7 @@ function add_jccb(){
 		"<input type='radio' name='jc_position_"+num+"' value='2' />编委"+
 		"<input type='radio' name='jc_position_"+num+"' value='3' />副编委</td>"+
 	"<td><input class='cg_input' name='jc_note' value='' style='width: 330px;'/></td>"+
-	"<td><img class='add_img' src='"+contextpath+"/statics/image/del.png' onclick=\"javascript:del_tr('jccb_"+num+"')\"/></td>"+
+	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('jccb_"+num+"')\"/></td>"+
 	"</tr>");
 	$table.append($tr);
 }
@@ -200,7 +199,7 @@ function add_jpkcjs(str,dim){
 	"<td><input class='cg_input' name='gj_class_hour' value='' style='width: 170px;'/></td>"+
 	"<td><input class='cg_input' name='gj_note' value='' style='width: 450px;'/>" +
 	"<input type='hidden' name='gj_type' value='"+dim+"' /></td>"+
-	"<td><img class='add_img' src='"+contextpath+"/statics/image/del.png' onclick=\"javascript:del_tr('jpkcjs_"+num+"')\"/></td>"+
+	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('jpkcjs_"+num+"')\"/></td>"+
 	"</tr>");
 	$table.append($tr);
 }
@@ -217,7 +216,7 @@ function add_gjghjc(){
 		"<input type='radio' name='hj_rank_"+num+"' value='2' />国家卫计委十二五"+
 		"<input type='radio' name='hj_rank_"+num+"' value='3' />其他</td>"+
 	"<td><input class='cg_input' name='hj_note' value='' style='width: 250px;'/></td>"+
-	"<td><img class='add_img' src='"+contextpath+"/statics/image/del.png' onclick=\"javascript:del_tr('gjghjc_"+num+"')\"/></td>"+
+	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('gjghjc_"+num+"')\"/></td>"+
 	"</tr>");
 	$table.append($tr);
 }
@@ -245,7 +244,7 @@ function add_jcbx(){
 		"<td><input class='cg_input' placeholder='出版时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100' name='jcb_publish_date' value='' style='width: 110px;'/></td>"+
 		"<td><input class='cg_input' name='jcb_isbn' value='' style='width: 110px;'/></td>"+
 		"<td><input class='cg_input' name='jcb_note' value=''/></td>"+
-		"<td><img class='add_img' src='"+contextpath+"/statics/image/del.png' onclick=\"javascript:del_tr('jcbx_"+num+"')\"/></td>"+
+		"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('jcbx_"+num+"')\"/></td>"+
 		"</tr>");
 	$table.append($tr);
 	  $('#jcjb').selectlist({
@@ -270,7 +269,7 @@ function add_zjky(){
 			"<td><input class='cg_input' name='zjk_approval_unit' value='' style='width: 200px;'/></td>"+
 			"<td><input class='cg_input' name='zjk_award' value='' style='width: 300px;'/></td>"+
 			"<td><input class='cg_input' name='zjk_note' value='' style='width: 300px;'/></td>"+
-	"<td><img class='add_img' src='"+contextpath+"/statics/image/del.png' onclick=\"javascript:del_tr('zjky_"+num+"')\"/></td>"+
+	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('zjky_"+num+"')\"/></td>"+
 	"</tr>");
 	$table.append($tr);	
 }
@@ -284,7 +283,7 @@ function del_tr(trId){
 function buttAdd(){
 	$.ajax({
 		type: "POST",
-		url:contextpath+'/material/doMaterialAdd.action',
+		url:contextpath+'material/doMaterialAdd.action',
 		data:$('#objForm').serialize(),// 你的formid
 		async: false,
 	    success: function(data) {
