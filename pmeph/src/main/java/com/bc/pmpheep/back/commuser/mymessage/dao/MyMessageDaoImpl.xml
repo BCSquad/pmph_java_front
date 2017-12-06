@@ -10,7 +10,7 @@
 		FROM
 		user_message m
 		WHERE
-		(m.receiver_id = #{parameter.userId} and  m.sender_id = #{parameter.userId})
+		(m.receiver_id = #{parameter.userId} or m.sender_id = #{parameter.userId})
 		AND m.receiver_type =
 		#{parameter.userType}
 		AND m.is_deleted = FALSE
@@ -29,7 +29,7 @@
 		FROM
 		user_message m
 		WHERE
-		(m.receiver_id = #{parameter.userId} and  m.sender_id = #{parameter.userId})
+		(m.receiver_id = #{parameter.userId} or m.sender_id = #{parameter.userId})
 		AND m.receiver_type =
 		#{parameter.userType}
 		AND m.is_deleted = FALSE

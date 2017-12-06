@@ -3,6 +3,7 @@ package com.bc.pmpheep.back.commuser.mymessage.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
@@ -13,7 +14,6 @@ import com.bc.pmpheep.back.commuser.user.service.PmphUserService;
 import com.bc.pmpheep.back.commuser.user.service.WriterUserService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
-import com.bc.pmpheep.back.util.ArrayUtil;
 import com.bc.pmpheep.back.util.ObjectUtil;
 import com.bc.pmpheep.back.util.PageParameterUitl;
 import com.bc.pmpheep.general.pojo.Message;
@@ -22,18 +22,22 @@ import com.bc.pmpheep.service.exception.CheckedExceptionBusiness;
 import com.bc.pmpheep.service.exception.CheckedExceptionResult;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 
-@Service
+@Service("com.bc.pmpheep.back.commuser.mymessage.service.MyMessageServiceImpl")
 public class MyMessageServiceImpl implements MyMessageService {
 
 	@Autowired
 	MyMessageDao myMessageDao;
 	@Autowired
+	@Qualifier("com.bc.pmpheep.general.service.MessageService")
 	MessageService messageService;
 	@Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.mymessage.service.MessageAttachmentServiceImpl")
 	MessageAttachmentService messageAttachmentService;
 	@Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.user.service.PmphUserServiceImpl")
 	PmphUserService pmphUserService;
 	@Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.user.service.WriterUserServiceImpl")
 	WriterUserService writerUserService;
 
 	@Override
