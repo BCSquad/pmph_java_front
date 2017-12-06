@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 
 import com.bc.pmpheep.back.commuser.collection.dao.ArticleCollectionDao;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.general.pojo.Message;
 import com.bc.pmpheep.general.service.MessageService;
 
@@ -39,11 +41,14 @@ public class ArticleCollectionServiceImpl implements ArticleCollectionService {
 	}
 
 	@Override
-	public List<Map<String, Object>> queryArticleList(BigInteger favoriteId,
-			int startnum, int size, BigInteger writerId) {
-		List<Map<String, Object>> list=articleCollectionDao.queryArticleList(favoriteId, startnum, size, writerId);
+	public PageResult<Map<String,Object>> queryArticleList(PageParameter<Map<String,Object>> param) {
+		PageResult<Map<String,Object>> result=new PageResult<>();
+		result.setPageNumber(param.getPageNumber());
+		result.setPageSize(param.getPageSize());
+		int articlecont=articleCollectionDao.queryArticleCont(param.getParameter());
+		List<Map<String, Object>> list=articleCollectionDao.queryArticleList(param);
 		for (Map<String, Object> map : list) {
-			int like=articleCollectionDao.queryLikes((BigInteger) map.get("cid"), writerId);
+			int like=articleCollectionDao.queryLikes((BigInteger) map.get("cid"), (BigInteger) param.getParameter().get("writerId"));
 			map.put("like", like);
 			Message message=messageService.get((String) map.get("mid"));
 			if(message!=null){
@@ -51,20 +56,22 @@ public class ArticleCollectionServiceImpl implements ArticleCollectionService {
 			    if(imglist.size()>0){
 			    	map.put("imgpath", imglist.get(0));
 			    }else{
-			    	map.put("imgpath", "statics/pictures/articon.png");
+			    	map.put("imgpath", "statics/image/articon.png");
 			    }
 			}else{
-				map.put("imgpath", "statics/pictures/articon.png");
+				map.put("imgpath", "statics/image/articon.png");
 			}
 		}
-		return list;
+		result.setTotal(articlecont);
+		result.setRows(list);
+		return result;
 	}
 
 	//根据收藏夹id获取收藏夹内收藏的文章
 	@Override
 	public int queryArticleCont(BigInteger favoriteId, BigInteger writerId) {
 		// TODO Auto-generated method stub
-		return articleCollectionDao.queryArticleCont(favoriteId, writerId);
+		return 0;
 	}
 
     //对文章点赞或取消点赞

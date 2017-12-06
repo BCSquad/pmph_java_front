@@ -6,6 +6,9 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
+
 /**
  * @author guoxiaobao
  *@Title: 
@@ -22,14 +25,10 @@ public interface ArticleCollectionService {
     List<Map<String,Object>> queryArticleCollectionList(BigInteger writerId );
     
     /**根据收藏夹id获取收藏夹内收藏的文章
-     * @param favoriteId   收藏夹id
-     * @param size         分页参数，每一页展示的数据的数量
-     * @param startnum     分页开始下角标
-     * @param  writerId   BigInteger  作家用户id
-     * @return List<Map<String,Object>>
+     * @param param   
+     * @return PageResult<Map<String,Object>>
      */
-    List<Map<String,Object>> queryArticleList(BigInteger favoriteId,
-         int startnum,int size,BigInteger writerId);
+    PageResult<Map<String,Object>> queryArticleList(PageParameter<Map<String,Object>> parm);
     /**查询某一收藏夹下文章的数量
 	 * @param favoriteId  收藏夹id
 	 * @param  writerId   BigInteger  作家用户id

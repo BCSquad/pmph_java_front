@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.bc.pmpheep.back.plugin.PageParameter;
+
 /**
  * @author guoxiaobao
  *@Title: 
@@ -22,20 +24,15 @@ public interface ArticleCollectionDao {
     List<Map<String,Object>> queryArticleCollectionList(@Param("writerId") BigInteger writerId );
     
     /**根据收藏夹id获取收藏夹内收藏的文章
-     * @param favoriteId   收藏夹id
-     * @param size         分页参数，每一页展示的数据的数量
-     * @param startnum     分页开始下角标
-     * @param  writerId   BigInteger  作家用户id
+     * @param param
      * @return List<Map<String,Object>>
      */
-    List<Map<String,Object>> queryArticleList(@Param("favoriteId") BigInteger favoriteId,
-         @Param("startnum") int startnum,@Param("size") int size,@Param("writerId") BigInteger writerId);
+    List<Map<String,Object>> queryArticleList(PageParameter<Map<String,Object>> param);
     /**查询某一收藏夹下文章的数量
-	 * @param favoriteId
-	 * @param  writerId   BigInteger  作家用户id
+	 * @param map
 	 * @return
 	 */
-	int queryArticleCont(@Param("favoriteId") BigInteger favoriteId,@Param("writerId") BigInteger writerId);
+	int queryArticleCont(Map<String,Object> map);
     /**查询用户为某一文章是否点赞
      * @param contentId  文章id
      * @param writerId   用户id

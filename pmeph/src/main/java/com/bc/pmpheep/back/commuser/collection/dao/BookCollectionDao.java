@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.bc.pmpheep.back.plugin.PageParameter;
+
 /**
  * @author guoxiaobao
  *@Title: 
@@ -28,14 +30,12 @@ public interface BookCollectionDao {
      * @param  writerId   BigInteger  作家用户id
      * @return List<Map<String,Object>>
      */
-    List<Map<String,Object>> queryBookList(@Param("favoriteId") BigInteger favoriteId,
-         @Param("startnum") int startnum,@Param("size") int size,@Param("writerId") BigInteger writerId);
+    List<Map<String,Object>> queryBookList(PageParameter<Map<String,Object>> param);
     /**查询某一收藏夹下书籍的数量
-	 * @param favoriteId  BigInteger  收藏夹id
-	 * @param  writerId   BigInteger  作家用户id
+	 * @param map     favoriteId,收藏夹id; writerId,作家用户id
 	 * @return int
 	 */
-	int queryBookCont(@Param("favoriteId") BigInteger favoriteId,@Param("writerId") BigInteger writerId);
+	int queryBookCont(Map<String,Object> map);
 	/**查询用户是否对某一本书点赞
 	 * @param bookId  BigInteger 书籍id
 	 * @param writerId BigInteger 用户id

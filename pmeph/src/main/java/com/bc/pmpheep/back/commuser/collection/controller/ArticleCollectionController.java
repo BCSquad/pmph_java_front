@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.collection.service.ArticleCollectionService;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.general.controller.BaseController;
 
 /**
@@ -51,39 +53,50 @@ public class ArticleCollectionController extends BaseController{
     public ModelAndView initArticleList(HttpServletRequest request) throws UnsupportedEncodingException{
     	Map<String,Object> map=new HashMap<String, Object>();
     	Map<String,Object> userMap=getUserInfo();
+    	Map<String,Object> rmap=new HashMap<>();
     	request.setCharacterEncoding("utf-8");
     	BigInteger favoriteId=new BigInteger(request.getParameter("favoriteId")); 
-    	int articlecount = articleCollectionService.queryArticleCont(favoriteId,(BigInteger) userMap.get("id"));
+//    	int articlecount = articleCollectionService.queryArticleCont(favoriteId,(BigInteger) userMap.get("id"));
     	String favoriteName = new String(request.getParameter("favoriteName").getBytes("ISO-8859-1"),"utf-8");
     	String pagenum=request.getParameter("pagenum");
     	String pagesize=request.getParameter("pagesize");
-    	int startnum=0;
+    	int curpage=1;
     	int size=5;
-    	int pages=0;
-    	if(pagenum!=null&&!"".equals(pagenum)&&pagesize!=null&&!"".equals(pagesize)){
-    		startnum=Integer.parseInt(pagenum)*Integer.parseInt(pagesize)-Integer.parseInt(pagesize);
-    	    size=Integer.parseInt(pagesize);
-    	    if((articlecount%Integer.parseInt(pagesize))==0){
-    	    	pages=articlecount/Integer.parseInt(pagesize);
-    	    }else{
-    	    	pages=articlecount/Integer.parseInt(pagesize)+1;
-    	    }
-    	}else{
-    		if(articlecount%size==0){
-    			pages=articlecount/size;
-    		}else{
-    			pages=articlecount/size+1;
-    		}
-    		pagenum="1";
-    		pagesize="5";
+//    	int pages=0;
+//    	if(pagenum!=null&&!"".equals(pagenum)&&pagesize!=null&&!"".equals(pagesize)){
+//    		startnum=Integer.parseInt(pagenum)*Integer.parseInt(pagesize)-Integer.parseInt(pagesize);
+//    	    size=Integer.parseInt(pagesize);
+//    	    if((articlecount%Integer.parseInt(pagesize))==0){
+//    	    	pages=articlecount/Integer.parseInt(pagesize);
+//    	    }else{
+//    	    	pages=articlecount/Integer.parseInt(pagesize)+1;
+//    	    }
+//    	}else{
+//    		if(articlecount%size==0){
+//    			pages=articlecount/size;
+//    		}else{
+//    			pages=articlecount/size+1;
+//    		}
+//    		pagenum="1";
+//    		pagesize="5";
+//    	}
+    	if(pagenum!=null && !pagenum.equals("") ){
+    		curpage=Integer.parseInt(pagenum);
     	}
-    	List<Map<String, Object>> booklist = articleCollectionService.queryArticleList(favoriteId,startnum,size,(BigInteger) userMap.get("id"));
-    	map.put("booklist", booklist);
+        if(pagesize!=null && !pagesize.equals("") ){
+        	size=Integer.parseInt(pagesize);
+    	}
+        PageParameter<Map<String,Object>> parm=new PageParameter<>(curpage, size);
+        rmap.put("favoriteId", favoriteId);
+        rmap.put("writerId",userMap.get("id") );
+        parm.setParameter(rmap);
+        PageResult<Map<String,Object>> articlelist = articleCollectionService.queryArticleList(parm);
+    	map.put("articlelist", articlelist);
     	map.put("favoriteName",favoriteName);
-    	map.put("bookcount", articlecount);
-    	map.put("pagenum",pagenum);
-    	map.put("pagesize",pagesize);
-    	map.put("pages", pages+"");
+//    	map.put("bookcount", articlecount);
+//    	map.put("pagenum",pagenum);
+//    	map.put("pagesize",pagesize);
+//    	map.put("pages", pages+"");
     	map.put("favoriteId", request.getParameter("favoriteId"));
     	return new ModelAndView("/commuser/collection/articlelist",map);
     }

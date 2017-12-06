@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.commuser.collection.dao.BookCollectionDao;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
 
 /**
  * @author guoxiaobao
@@ -31,19 +33,29 @@ public class BookCollectionServiceImpl implements BookCollectionService {
 	}
 
 	@Override
-	public List<Map<String, Object>> queryBookList(BigInteger favoriteId,int startnum,int size,BigInteger writerId) {
-        List<Map<String, Object>> list = bookCollectionDao.queryBookList(favoriteId,startnum,size,writerId);
+	public PageResult<Map<String,Object>> queryBookList(PageParameter<Map<String,Object>> param) {
+		PageResult<Map<String,Object>> result=new PageResult<>();
+		result.setPageSize(param.getPageSize());
+		result.setPageNumber(param.getPageNumber());
+		int bookcount = bookCollectionDao.queryBookCont(param.getParameter());
+		List<Map<String, Object>> list = bookCollectionDao.queryBookList(param);
 		for (Map<String, Object> map : list) {
-			int like=bookCollectionDao.queryLikes((BigInteger) map.get("id"), writerId);
+			if("DEFAULT".equals(map.get("image_url"))){
+				map.put("image_url", "statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+			}
+			int like=bookCollectionDao.queryLikes((BigInteger) map.get("id"),(BigInteger) param.getParameter().get("writerId"));
 		    map.put("like", like);
 		}
-        return list;
+		result.setTotal(bookcount);
+		result.setRows(list);
+        return result;
 	}
 
 	@Override
 	public int queryBookCont(BigInteger favoriteId,BigInteger writerId) {
 		// TODO Auto-generated method stub
-		return bookCollectionDao.queryBookCont(favoriteId,writerId);
+//		return bookCollectionDao.queryBookCont(favoriteId,writerId);
+	    return 0;
 	}
 
 	@Override

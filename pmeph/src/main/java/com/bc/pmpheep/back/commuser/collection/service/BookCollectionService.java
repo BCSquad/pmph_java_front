@@ -6,6 +6,9 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
+
 /**
  * @author guoxiaobao
  *@Title: 
@@ -23,7 +26,7 @@ public interface BookCollectionService {
      * @param favoriteId   收藏夹id
      * @return List<Map<String,Object>>
      */
-    List<Map<String,Object>> queryBookList(BigInteger favoriteId,int startnum,int size,BigInteger writerId);
+    PageResult<Map<String,Object>> queryBookList(PageParameter<Map<String,Object>> param);
 	/**查询某一收藏夹下书籍的数量
 	 * @param favoriteId  收藏夹id
 	 * @return

@@ -7,7 +7,7 @@
 	   select f.favorite_name,f.id as id,count(f.book_id) as mcount from (select w.*,m.book_id from writer_book_favorite w left  join book_user_mark m on w.id=m.favorite_id) f where f.writer_id=#{writerId} GROUP BY f.favorite_name
 	</select>
 	<!--查询一个收藏夹下所有的书籍  -->
-	<select id="queryBookList" parameterType="map" resultMap="bookMap">
+	<select id="queryBookList" parameterType="com.bc.pmpheep.back.plugin.PageParameter" resultMap="bookMap">
 	   select 
 	       m.id as mid,
 	       b.id,
@@ -24,8 +24,8 @@
 		   LEFT JOIN book b on m.book_id=b.id   
 		   LEFT JOIN  book_detail d on b.id=d.book_id
 	   where 
-	   	   m.favorite_id=#{favoriteId} and m.writer_id=#{writerId} 
-	   limit #{startnum},#{size}
+	   	   m.favorite_id=#{parameter.favoriteId} and m.writer_id=#{parameter.writerId} 
+	   limit #{start},#{pageSize}
 	</select>
 	<!--查询用户是否对某一本书点赞  -->
 	<select id="queryLikes" parameterType="map" resultType="int">
