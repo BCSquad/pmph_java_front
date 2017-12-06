@@ -230,6 +230,9 @@ function Page(opt) {
     }
     if (set.num <= 0) {
         $(".pagination").html('');
+        $(".pagination").css("display","none");
+        $('.pagination').next().css("display","none");
+        $('.pagination').nextAll(".pageJump").css("display","none");
         return;
     } else if (parseInt(set.num) <= 6) {
         n = parseInt(set.num);
