@@ -1,14 +1,31 @@
-
 $(function(){
-$("select").selectlist({
-    		zIndex: 10,
-            width: 110,
-            height: 24,
-            optionHeight: 30,
-            onChange: function () {
-            	
-            }  //自定义模拟选择列表项chang
-    	});
+	//初始化分页器
+//	var flag=$("#n").val();
+//	if(flag==''){
+//		flag=1;
+//	}else{
+//		flag=parseInt(flag);
+//	}
+	 Page({
+	        num: 10,	//页码数
+	        startnum: 1,	//指定页码
+	        elem: $('#page1'),		    //指定的元素
+	        callback: function (n) {	//回调函数
+	           console.log(n);
+	           //location.href=contextpath+'articlesearch/change.action?n='+n+'&&m='+$('input[name=edu]').val();
+	        }
+	    });
+	   $('select').selectlist({
+           zIndex: 10,
+           width: 110,
+           height: 30,
+           optionHeight: 30,
+           onChange:function(){
+        	   var m=$('input[name=edu]').val();
+        	   var n=1;
+        	  // location.href=contextpath+'articlesearch/change.action?n='+n+'&&m='+$('input[name=edu]').val();
+           }
+       });
 });
 //新增评论
 function insert(){
@@ -47,7 +64,7 @@ function fresh(){
 			dataType:'json',
 			success:function(json){
 				$.each(json,function(i,x){
-					str+='<div class="right_9"> <div class="right_10"><img class="right_12" src='+
+					str+='<div class="right_9" onclick="todetail('+x.id+')"> <div class="right_10"><img class="right_12" src='+
                     	x.image_url+ 
 						'></div><div class="right_11">'+
                         x.bookname+
@@ -68,17 +85,23 @@ function change(){
 			success:function(json){
 				var ste='';
 				$.each(json,function(i,x){
-					ste+='<div class="right_20"><div class="right_21">'+
+					ste+='<div class="right_20"><div class="right_21" onclick="todetail('+
+					    x.id
+				       +')">'+
 						x.bookname+
-					'</div><div class="right_22">（'+
+					   '</div><div class="right_22">（'+
 					    x.author+
-					'）</div></div>';
+					   '）</div></div>';
 				});
 				$("#comment").html(ste);
 			}
 		});
 }
 
+//人卫推荐跳转到详情书
+function todetail(flag){
+	location.href=contxtpath+'/readdetail/todetail.action?id='+flag;
+}
 //点赞
 function addlikes(){
 	var book_id=$("#book_id").val();
@@ -89,9 +112,9 @@ function addlikes(){
 			dataType:'json',
 			success:function(json){
 				if(json.returncode=="yes"){
-					window.message.info("已经点过赞了！");
+					$("#dz").attr("src",contxtpath+"/statics/image/dz02.png");
 				}else{
-					window.message.success("点赞成功");
+					$("#dz").attr("src",contxtpath+"/statics/image/dz01.png");
 				}
 			}
 		});
