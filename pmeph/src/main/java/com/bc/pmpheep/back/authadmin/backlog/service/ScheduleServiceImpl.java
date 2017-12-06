@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.authadmin.backlog.dao.ScheduleDao;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
 
 @Service("com.bc.pmpheep.back.authadmin.backlog.service.ScheduleServiceImpl")
 public class ScheduleServiceImpl implements ScheduleService {
@@ -16,9 +18,14 @@ public class ScheduleServiceImpl implements ScheduleService {
 	
 	//查询待办事项列表
 	@Override
-	public List<Map<String,Object>> selectScheduleList(Map<String,Object> paraMap) {
-		List<Map<String,Object>> list = scheduleDao.selectScheduleList(paraMap);
-		return list;
+	public PageResult<Map<String, Object>> selectScheduleList(PageParameter<Map<String, Object>> pageParameter) {
+		PageResult<Map<String, Object>> pageResult= new PageResult<Map<String,Object>>();  
+		List<Map<String, Object>> list = scheduleDao.selectScheduleList(pageParameter);
+		int count = scheduleDao.selectScheduleCount(pageParameter);
+		
+		pageResult.setRows(list);
+		pageResult.setTotal(count);
+		return pageResult;
 	}
 	
 	//查询机构用户信息
