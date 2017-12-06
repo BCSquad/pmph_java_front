@@ -5,7 +5,7 @@
 <html>
 <head>
     <script type="text/javascript">
-        var contextpath = '${pageContext.request.contextPath}';
+        var contextpath = '${pageContext.request.contextPath}/';
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>Insert title here</title>
@@ -29,7 +29,7 @@
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="message-body">
     <div class="message">
-        <a href="organizationMessage.html">
+        <a href="organizationMessage.jsp">
             <div class="item">
                 <div class="off-text">全部消息</div>
                 <div class="off-line"></div>
