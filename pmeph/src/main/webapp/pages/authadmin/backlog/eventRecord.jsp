@@ -6,8 +6,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
 	<script type="text/javascript">
-       var contextpath = "${pageContext.request.contextPath}";
-       var contxtpath = "${pageContext.request.contextPath}";
+       var contextpath = "${pageContext.request.contextPath}/";
+       var contextpath = "${pageContext.request.contextPath}/";
     </script>
     <title>事项记录</title>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>

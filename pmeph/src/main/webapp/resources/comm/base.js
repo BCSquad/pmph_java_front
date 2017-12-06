@@ -11,14 +11,14 @@
 (function () {
 
 
-  /*  var contextpath = contextpath ;
-    if (contextpath.lastIndexOf("/") == contextpath.length - 1) {
-        contextpath = contextpath.substring(0, contextpath.length - 1);
-    }*/
+    /*  var contextpath = contextpath ;
+     if (contextpath.lastIndexOf("/") == contextpath.length - 1) {
+     contextpath = contextpath.substring(0, contextpath.length - 1);
+     }*/
     /*   $('head').append('<style type="text/css" href="'
      + contextpath +
      '/resources/comm/layer/theme/default/layer.css"></style>');*/
-    $('head').append('<script  src="'+
+    $('head').append('<script  src="' +
         /*+ contextpath +*/
         '/resources/comm/layer/layer.js"></script>');
 
@@ -225,16 +225,22 @@ $(function () {
     //搜索框效果
     var input_open = false;
     $(".search-icon").click(function () {
+        var search = function () {
+            window.location.href = contextpath + "booksearch/toPage.action?search=" + $("#search-input").val();
+        }
         if (!input_open) {
             $(".delete").css("display", "block");
             $(".search-input").css("display", "block");
-            $(this).bind('keydown', function (event) {
-                if (event.keyCode == "13") {
+            input_open = true;
 
+            $(".search-input").bind('keydown', function (event) {
+                if (event.keyCode == "13") {
+                    search();
                 }
             });
-        } else {
 
+        } else {
+            search();
         }
     });
     $(".delete").click(function () {

@@ -23,7 +23,7 @@
                    onclick="window.location='${ctx}/pages/commuser/articlepage/articlepage.jsp'">文章</a>
             </div>
             <span class="delete"></span>
-            <input class="search-input" placeholder="图书/文章">
+            <input class="search-input" id="search-input" placeholder="图书/文章">
 
             <img class="search-icon" src="${ctx}/statics/image/search.png" alt="">
 

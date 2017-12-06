@@ -11,7 +11,7 @@
 <html>
 <head>
     <script type="text/javascript">
-        var contxtpath = '${pageContext.request.contextPath}';
+        var contextpath = '${pageContext.request.contextPath}/';
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>首页</title>
@@ -396,7 +396,7 @@
                         <c:forEach items="${listSal}" var="list" varStatus="status">
                             <div class="last_right_body">
                                 <div class="last_right_book"
-                                     onclick="window.open(contxtpath+'/readdetail/todetail.action?id=${list.id}')">
+                                     onclick="window.open(contextpath+'/readdetail/todetail.action?id=${list.id}')">
                                     <c:set var="default_url"
                                            value="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"></c:set>
                                     <img src='${list.image_url == "DEFAULT"?default_url:list.image_url}'

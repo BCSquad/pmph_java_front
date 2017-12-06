@@ -22,7 +22,7 @@
 <script src="${ctx}/resources/authadmin/applydocaudit/declarecount.js"
 	type="text/javascript"></script>
 <script type="text/javascript">
-	var contextpath="${pageContext.request.contextPath}";
+	var contextpath="${pageContext.request.contextPath}/";
 </script>
 </head>
 <body >

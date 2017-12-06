@@ -22,7 +22,7 @@ function getform(){
 function modpassword() {
     $.ajax({
         type: 'post',
-        url: contxtpath + '/admininfocontroller/updateorguserpassword.action',
+        url: contextpath + '/admininfocontroller/updateorguserpassword.action',
         async: false,
         contentType: 'application/json',
         dataType: 'json',

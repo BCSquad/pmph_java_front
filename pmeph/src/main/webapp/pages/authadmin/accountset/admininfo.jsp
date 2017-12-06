@@ -11,7 +11,7 @@
 <html>
 <head>
     <script type="text/javascript">
-        var contxtpath = '${pageContext.request.contextPath}';
+        var contextpath = '${pageContext.request.contextPath}';
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>个人资料修改(机构用户)</title>

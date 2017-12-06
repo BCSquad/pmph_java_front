@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 	<head>
 	    <script type="text/javascript">
-           var contxtpath = '${pageContext.request.contextPath}';
+           var contextpath = '${pageContext.request.contextPath}/';
         </script>
 		<title>读书详情</title>
 		<c:set var="ctx" value="${pageContext.request.contextPath}"/>

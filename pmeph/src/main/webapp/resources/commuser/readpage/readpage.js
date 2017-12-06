@@ -80,7 +80,7 @@ function ChangeFLDiv(divId,divName)
 function searchBook(divId,type){
 	$.ajax({
 		type:'post',
-		url:contxtpath+'readpage/searchZdtjBook.action?type='+type,
+		url:contextpath+'readpage/searchZdtjBook.action?type='+type,
 		async:false,
 		dataType:'json',
 		success:function(json){
@@ -94,7 +94,7 @@ function searchBook(divId,type){
 function searchXstjBook(divId,type){
 	$.ajax({
 		type:'post',
-		url:contxtpath+'readpage/searchXstjBook.action?type='+type,
+		url:contextpath+'readpage/searchXstjBook.action?type='+type,
 		async:false,
 		dataType:'json',
 		success:function(json){
@@ -108,7 +108,7 @@ function searchXstjBook(divId,type){
 function searchTscxBook(divId,type){
 	$.ajax({
 		type:'post',
-		url:contxtpath+'readpage/searchTscxBook.action?type='+type,
+		url:contextpath+'readpage/searchTscxBook.action?type='+type,
 		async:false,
 		dataType:'json',
 		success:function(json){
@@ -120,5 +120,5 @@ function searchTscxBook(divId,type){
 
 //路径跳转
 function openUrl(id){
-	window.open(contxtpath+'readdetail/todetail.action?id='+id);
+	window.open(contextpath+'readdetail/todetail.action?id='+id);
 }

@@ -5,6 +5,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <head>
+    <script type="text/javascript">
+        var contextpath = "${pageContext.request.contextPath}/";
+    </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title></title>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
@@ -17,9 +20,7 @@
      <script src="${ctx}/resources/comm/base.js"></script>
      <script src="${ctx}/resources/authadmin/message/inforelease.js"></script>
       <script src="${ctx}/resources/comm/layer/layer.js"></script>
-     <script type="text/javascript">
-     	var contextpath = "${pageContext.request.contextPath}";
-     </script>
+
 </head>
 <body >
 

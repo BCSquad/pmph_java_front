@@ -12,7 +12,7 @@
 <html>
 <head>
     <script type="text/javascript">
-        var contxtpath = '${pageContext.request.contextPath}/';
+        var contextpath = '${pageContext.request.contextPath}/';
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>读书首页</title>
