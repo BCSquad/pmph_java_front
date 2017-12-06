@@ -1,10 +1,13 @@
 package com.bc.pmpheep.back.commuser.user.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertification;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertificationVO;
+import com.bc.pmpheep.back.plugin.PageParameter;
 
 /**
  * 
@@ -35,21 +38,6 @@ public interface WriterUserDao {
 	 *
 	 */
 	WriterUser get(Long id);
-	
-	/**
-	 * 根据机构orgid 加载机构用户下的作家
-	 * @param orgId
-	 * @return
-	 */
-	WriterUser getOrg(Long orgId);
-	
-	/**
-	 * 根据用户输入查询 必传orgid
-	 * @param writerUser
-	 * @return
-	 */
-	WriterUser getByOrgId(WriterUser writerUser);
-	
 	/**
 	 * 查看学校教师认证信息
 	 * @author tyc
@@ -86,4 +74,16 @@ public interface WriterUserDao {
      * @return
      */
     Integer updateUserPassWord(Long id, String username);
+    /**
+     * 查询机构用户下的作家总数
+     * @param pageParameter
+     * @return
+     */
+	Integer getOrgTotal(PageParameter<WriterUser> pageParameter);
+	/**
+	 * 分页查询机构用户的作家
+	 * @param pageParameter
+	 * @return
+	 */
+	List<WriterUser> getOrg(PageParameter<WriterUser> pageParameter);
 }

@@ -24,5 +24,17 @@ public interface  CmsContentDao{
 	 * @return
 	 */
 	Integer getCmsContentListTotal();
+	/**
+	 * 查询文章总条数
+	 * @return
+	 */
+	Integer getCmsContentCount();
+	
+	/**
+	 * 查询文章
+	 * @param pageParameter
+	 * @return
+	 */
+	List<CmsContentVO> listCmsContentVO(PageParameter<CmsContentVO> pageParameter);
 	
 }

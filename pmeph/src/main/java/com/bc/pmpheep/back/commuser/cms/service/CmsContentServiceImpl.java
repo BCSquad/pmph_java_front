@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bc.pmpheep.back.commuser.book.bean.BookVO;
 import com.bc.pmpheep.back.commuser.cms.bean.CmsContentVO;
 import com.bc.pmpheep.back.commuser.cms.dao.CmsContentDao;
 import com.bc.pmpheep.back.plugin.PageParameter;
@@ -41,6 +42,18 @@ public class CmsContentServiceImpl implements CmsContentService{
 		}
 		pageResult.setTotal(total);
 		return pageResult;
+	}
+
+	@Override
+	public PageResult<CmsContentVO> listCms(PageParameter<CmsContentVO> pageParameter) {
+		PageResult<CmsContentVO> pageResult = new PageResult<>();
+		int total = cmsContentDao.getCmsContentCount();
+        if (total > 0) {
+            PageParameterUitl.CopyPageParameter(pageParameter, pageResult);
+            pageResult.setRows(cmsContentDao.listCmsContentVO(pageParameter));
+        }
+        pageResult.setTotal(total);
+        return pageResult;
 	}
 
 }
