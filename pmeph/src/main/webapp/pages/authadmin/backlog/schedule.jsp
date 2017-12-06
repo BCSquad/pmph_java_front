@@ -5,6 +5,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
+	<script>
+        var contextpath='${pageContext.request.contextPath}/';
+    </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>待办事项</title>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
