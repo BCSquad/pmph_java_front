@@ -29,7 +29,7 @@
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="message-body">
     <div class="message">
-        <a href="organizationMessage.jsp">
+        <a href="organizationMessage.html">
             <div class="item">
                 <div class="off-text">全部消息</div>
                 <div class="off-line"></div>
