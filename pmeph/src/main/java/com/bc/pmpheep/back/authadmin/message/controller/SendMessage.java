@@ -55,7 +55,15 @@ public class SendMessage extends BaseController {
 		
 	}
 	
-	
+	/**
+	 * 发送新消息——机构用户 页面
+	 * @return
+	 */
+	@RequestMapping("/initAllMessage")
+	public ModelAndView initAllMessage(){
+		return new ModelAndView("/authadmin/message/organizationAllMessage");
+		
+	}
 	/**
 	 * 机构用户发送新消息 （批量）
 	 * @return

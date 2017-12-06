@@ -26,15 +26,15 @@
     <script src="${ctx}/resources/comm/layer/layer.js"></script>
 </head>
 <body>
-<jsp:include page="/pages/comm/head.jsp"></jsp:include>
+<jsp:include page="/pages/comm/headGreenBackGround.jsp"></jsp:include>
 <div class="message-body">
     <div class="message">
-        <a href="organizationMessage.html">
+        <a href="${pageContext.request.contextPath}/authSendMessage/initAllMessage.action">
             <div class="item">
                 <div class="off-text">全部消息</div>
                 <div class="off-line"></div>
             </div>
-        </a> <a href="sendNewMessage.jsp">
+        </a> <a href="${pageContext.request.contextPath}/authSendMessage/init.action">
         <div class="item">
             <div class="on-text">发送消息</div>
             <div class="on-line"></div>
