@@ -25,13 +25,14 @@ import com.bc.pmpheep.back.authadmin.message.bean.UserMessage;
 import com.bc.pmpheep.back.authadmin.message.service.SendMessageServiceImpl;
 import com.bc.pmpheep.controller.bean.ResponseBean;
 import com.bc.pmpheep.general.bean.FileType;
+import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.general.pojo.Message;
 import com.bc.pmpheep.general.service.FileService;
 import com.bc.pmpheep.general.service.MessageService;
 
 @RequestMapping("/authSendMessage")
 @Controller
-public class SendMessage {
+public class SendMessage extends BaseController {
 	
 	@Autowired
 	MessageService mssageService;
@@ -56,7 +57,7 @@ public class SendMessage {
 	
 	
 	/**
-	 * 
+	 * 机构用户发送新消息 （批量）
 	 * @return
 	 */
 	
