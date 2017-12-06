@@ -3,6 +3,7 @@ package com.bc.pmpheep.back.commuser.myfriend.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.commuser.myfriend.bean.WriterFriendVO;
@@ -31,7 +32,7 @@ import com.bc.pmpheep.service.exception.CheckedServiceException;
  * @审核人 ：
  * </pre>
  */
-@Service
+@Service("com.bc.pmpheep.back.commuser.myfriend.service.MyFriendServiceImpl")
 public class MyFriendServiceImpl implements MyFriendService {
     @Autowired
     MyFriendDao myFriendDao;

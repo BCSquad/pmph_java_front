@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bc.pmpheep.back.common.controller.BaseController;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertification;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertificationVO;
 import com.bc.pmpheep.back.commuser.user.service.WriterUserService;
+import com.bc.pmpheep.general.controller.BaseController;
 
 /**
  * @author tyc
@@ -23,27 +23,28 @@ import com.bc.pmpheep.back.commuser.user.service.WriterUserService;
 @Controller
 @RequestMapping(value = "/teacherCertification")
 public class TeacherCertification extends BaseController {
-	
-	@Autowired
-	private WriterUserService writerUserService;
-	
-	@ResponseBody
+
+    @Autowired
+    private WriterUserService writerUserService;
+
+    @ResponseBody
     @RequestMapping(value = "/showTeacherCertification", method = RequestMethod.GET)
     public ModelAndView showTeacherCertification(@RequestParam("id") Long id) {
-		ModelAndView model = this.getModelAndView();
-		WriterUserCertificationVO showWriterUserCertification = writerUserService.showTeacherCertification(id);
-		model.addObject("showWriterUserCertification", showWriterUserCertification);
-		return model;
+        ModelAndView model = new ModelAndView();
+        WriterUserCertificationVO showWriterUserCertification =
+        writerUserService.showTeacherCertification(id);
+        model.addObject("showWriterUserCertification", showWriterUserCertification);
+        return model;
     }
-	
-	@ResponseBody
+
+    @ResponseBody
     @RequestMapping(value = "/updateTeacherCertification", method = RequestMethod.GET)
-    public ModelAndView updateTeacherCertification(WriterUserCertificationVO writerUserCertificationVO) 
-    		throws IOException {
-		ModelAndView model = this.getModelAndView();
-		WriterUserCertification updateWriterUserCertification = 
-				writerUserService.updateTeacherCertification(writerUserCertificationVO);
-		model.addObject("updateWriterUserCertification", updateWriterUserCertification);
-		return model;
+    public ModelAndView updateTeacherCertification(
+    WriterUserCertificationVO writerUserCertificationVO) throws IOException {
+        ModelAndView model = new ModelAndView();
+        WriterUserCertification updateWriterUserCertification =
+        writerUserService.updateTeacherCertification(writerUserCertificationVO);
+        model.addObject("updateWriterUserCertification", updateWriterUserCertification);
+        return model;
     }
 }

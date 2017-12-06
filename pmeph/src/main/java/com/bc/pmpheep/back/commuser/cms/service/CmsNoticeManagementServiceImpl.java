@@ -1,14 +1,11 @@
 package com.bc.pmpheep.back.commuser.cms.service;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.bc.pmpheep.back.commuser.cms.bean.CmsNoticeList;
 import com.bc.pmpheep.back.commuser.cms.dao.CmsNoticeManagementDao;
-import com.bc.pmpheep.back.plugin.PageParameter;
-import com.bc.pmpheep.back.plugin.PageResult;
-import com.bc.pmpheep.back.util.PageParameterUitl;
-import com.bc.pmpheep.service.exception.CheckedServiceException;
+
 
 /**
  * 
@@ -27,22 +24,20 @@ import com.bc.pmpheep.service.exception.CheckedServiceException;
  * @审核人 ：
  *
  */
-@Service
+@Service("com.bc.pmpheep.back.commuser.cms.service.CmsNoticeManagementServiceImpl")
 public class CmsNoticeManagementServiceImpl implements CmsNoticeManagementService {
 	@Autowired
 	CmsNoticeManagementDao cmsNoticeManagementDao;
 
 	@Override
-	public PageResult<CmsNoticeList> list(PageParameter<CmsNoticeList> pageParameter) throws CheckedServiceException {
-		PageResult<CmsNoticeList> pageResult = new PageResult<>();
-		Integer total = cmsNoticeManagementDao.getCmsNoticeListTotal();
-		if (total > 0) {
-			PageParameterUitl.CopyPageParameter(pageParameter, pageResult);
-			pageResult.setRows(cmsNoticeManagementDao.list(pageParameter));
+	public List<CmsNoticeList> list(Integer pageSize, Integer pageNumber, Integer order){
+		if(null == pageSize || pageSize < 1){
+			pageSize =10 ;
 		}
-		pageResult.setTotal(total);
-
-		return pageResult;
+		if(null == pageNumber || pageNumber < 1){
+			pageNumber = 1 ;
+		}
+		return  cmsNoticeManagementDao.list((pageNumber-1)*pageSize,pageSize,order);
 	}
 
 }

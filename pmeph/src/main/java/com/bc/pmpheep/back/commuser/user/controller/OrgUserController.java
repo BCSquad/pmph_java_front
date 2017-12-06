@@ -1,6 +1,5 @@
 package com.bc.pmpheep.back.commuser.user.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,18 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bc.pmpheep.back.common.controller.BaseController;
-import com.bc.pmpheep.back.commuser.book.bean.BookVO;
-import com.bc.pmpheep.back.commuser.myfriend.bean.WriterFriendVO;
 import com.bc.pmpheep.back.commuser.user.bean.OrgUser;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
 import com.bc.pmpheep.back.commuser.user.service.OrgUserService;
 import com.bc.pmpheep.back.commuser.user.service.WriterUserService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
-import com.bc.pmpheep.back.util.CollectionUtil;
-import com.bc.pmpheep.back.util.Const;
-import com.bc.pmpheep.back.util.RouteUtil;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 
 /**
@@ -72,16 +65,17 @@ public class OrgUserController extends  com.bc.pmpheep.general.controller.BaseCo
         }
 		return model;
     }
-	
-	/**
-	 * 根据id和机构代码修改机构用户密码
-	 * @author tyc
+
+    /**
+     * 根据id和机构代码修改机构用户密码
+     * 
+     * @author tyc
      * @createDate 2017年12月4日 上午10:14:57
      * @param id
      * @param username
-	 * @return
-	 */
-	@ResponseBody
+     * @return
+     */
+    @ResponseBody
     @RequestMapping(value = "/updateOrgUserPassWord", method = RequestMethod.POST)
     public ModelAndView updateOrgUserPassWord(@RequestParam("id") Long id, 
     		@RequestParam("username") String username) {
