@@ -16,5 +16,11 @@ public interface CmsContentService {
 	 * @throws Exception
 	 */
 	PageResult<CmsContentVO> list(PageParameter<CmsContentVO> pageParameter);
+	/**
+	 *  文章
+	 * @param pageParameter
+	 * @return
+	 */
+	PageResult<CmsContentVO> listCms(PageParameter<CmsContentVO> pageParameter);
 	
 }

@@ -14,7 +14,6 @@ import com.bc.pmpheep.back.commuser.myfriend.bean.WriterFriendVO;
 import com.bc.pmpheep.back.commuser.myfriend.service.MyFriendService;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
 import com.bc.pmpheep.back.util.CollectionUtil;
-import com.bc.pmpheep.back.util.Const;
 import com.bc.pmpheep.back.util.RouteUtil;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 
@@ -54,25 +53,25 @@ public class MyFriendController extends com.bc.pmpheep.general.controller.BaseCo
      */
     @RequestMapping(value = "/listMyFriend", method = RequestMethod.GET)
     public ModelAndView listMyFriend() throws Exception {
-        //ModelAndView model = this.getModelAndView();
+        // ModelAndView model = this.getModelAndView();
         ModelAndView model = new ModelAndView();
-//        WriterUser writerUser =
-//        (WriterUser) this.getRequest().getSession().getAttribute(Const.SESSION_WRITER_USER);
-        
-        //获取用户
+        // WriterUser writerUser =
+        // (WriterUser) this.getRequest().getSession().getAttribute(Const.SESSION_WRITER_USER);
+
+        // 获取用户
         Map<String, Object> writerUserMap = this.getUserInfo();
-        WriterUser writerUser = new WriterUser ();
+        WriterUser writerUser = new WriterUser();
         writerUser.setId(Long.parseLong(writerUserMap.get("id").toString()));
-        
         String pageUrl = "commuser/myfriend/myFriend";
         try {
             List<WriterFriendVO> listFriends = myFriendService.listMyFriend(writerUser);
             if (CollectionUtil.isNotEmpty(listFriends)) {
                 for (WriterFriendVO writerFriendVO : listFriends) {
-                	if(null != writerFriendVO && (null == writerFriendVO.getAvatar() || "".equals(writerFriendVO.getAvatar().trim()) ||
-                			"DEFAULT".equals((writerFriendVO.getAvatar().trim())))){
-                		 writerFriendVO.setAvatar(RouteUtil.DEFAULT_USER_AVATAR);
-                	}
+                    if (null != writerFriendVO
+                        && (null == writerFriendVO.getAvatar()
+                            || "".equals(writerFriendVO.getAvatar().trim()) || "DEFAULT".equals((writerFriendVO.getAvatar().trim())))) {
+                        writerFriendVO.setAvatar(RouteUtil.DEFAULT_USER_AVATAR);
+                    }
                 }
             }
             model.setViewName(pageUrl);

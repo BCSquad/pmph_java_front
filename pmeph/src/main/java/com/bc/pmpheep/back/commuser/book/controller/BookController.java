@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bc.pmpheep.back.common.controller.BaseController;
 import com.bc.pmpheep.back.commuser.book.bean.BookVO;
 import com.bc.pmpheep.back.commuser.book.service.BookService;
 import com.bc.pmpheep.back.plugin.PageParameter;
@@ -17,6 +16,7 @@ import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.back.util.RouteUtil;
 import com.bc.pmpheep.back.util.StringUtil;
 import com.bc.pmpheep.controller.bean.ResponseBean;
+import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 
 @Controller
@@ -51,8 +51,7 @@ public class BookController extends BaseController {
     // @LogDetail(businessType = BUSSINESS_TYPE, logRemark = "初始化/条件查询书籍信息")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView list(Integer pageSize, Integer pageNumber, BookVO bookVO) throws Exception {
-        logBefore(logger, "初始化/条件查询书籍信息");
-        ModelAndView model = this.getModelAndView();
+        ModelAndView model = new ModelAndView();
         String pageUrl = "";
         PageParameter<BookVO> pageParameter = new PageParameter<>(pageNumber, pageSize);
         if (StringUtil.notEmpty(bookVO.getName())) {

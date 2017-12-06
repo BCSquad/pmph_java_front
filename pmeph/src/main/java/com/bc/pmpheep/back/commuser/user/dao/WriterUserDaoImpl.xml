@@ -336,30 +336,6 @@
 		WHERE
 		id = #{id}
 	</select>
-	<!-- 根据机构id查询该机构下的作家 -->
-	<select id="getOrg" parameterType="Long" resultType="WriterUser">
-		select wu.* 
-		from writer_user wu
-		left join org o on o.id= wu.org_id
-		where wu.org_id=#{orgid}
-	</select>
-	<!-- 根据用户输入的条件查询该机构下的作家 -->
-	<select id="getByOrgId" parameterType="Long" resultType="WriterUser">
-		select wu.* 
-		from writer_user wu
-		left join org o on o.id= wu.org_id
-		where 1=1
-		<if test="username !=null and username !='' ">
-			and wu.username like concat('%',#{username},'%' )
-		</if>
-		<if test="realname !=null and realname !='' ">
-			and wu.realname like concat('%',#{realname},'%' )
-		</if>
-		<if test="orgId !=null">
-			and  wu.org_id=#{orgId}
-		</if>
-	</select>
-	
 	<!-- 查看学校教师认证信息 -->
 	<select id="showTeacherCertification" parameterType="Long" resultType="WriterUserCertificationVO">
 		select *,wu.username,o.org_name from writer_user_certification wuc 
@@ -414,4 +390,42 @@
 		</set>
 		where id = #{id} and username = #{username};
 	</update>
+	
+	<!-- 分页查询机构用户的作家用户 -->
+	<select id="getOrg" parameterType="PageParameter"
+		resultType="WriterUser">
+		select wu.* 
+		from writer_user wu
+		left join org o on o.id= wu.org_id
+		where 1=1
+		<if test="parameter.orgId !=null and parameter.orgId !='' ">
+			and  wu.org_id=#{parameter.orgId}
+		</if>
+		<if test="parameter.username !=null and parameter.username !='' ">
+			and (wu.username like concat('%',#{parameter.username},'%' )
+		</if>
+		<if test="parameter.realname !=null and parameter.realname !=''">
+			and wu.realname like concat('%',#{parameter.realname},'%')
+		</if>
+		<if test="start !=null and pageNumber != null">
+			limit #{start},#{pageSize}
+		</if>
+	</select>
+	<!-- 查询机构用户的作家用户总数 -->
+	<select id="getOrgTotal" parameterType="PageParameter"
+		resultType="java.lang.Integer">
+		select count(*)
+		from writer_user wu
+		left join org o on o.id= wu.org_id
+		where 1=1
+		<if test="parameter.orgId !=null and parameter.orgId !='' ">
+			and  wu.org_id=#{parameter.orgId}
+		</if>
+		<if test="parameter.username !=null and parameter.username !='' ">
+			and (wu.username like concat('%',#{parameter.username},'%' )
+		</if>
+		<if test="parameter.realname !=null and parameter.realname !=''">
+			and wu.realname like concat('%',#{parameter.realname},'%')
+		</if>
+	</select>
 </mapper>

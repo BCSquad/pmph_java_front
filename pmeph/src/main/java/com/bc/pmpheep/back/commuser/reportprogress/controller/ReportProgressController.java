@@ -9,12 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bc.pmpheep.back.common.controller.BaseController;
 import com.bc.pmpheep.back.commuser.reportprogress.bean.TextBookCheckVO;
 import com.bc.pmpheep.back.commuser.reportprogress.service.ReportProgressService;
-import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
-import com.bc.pmpheep.back.util.Const;
-import com.bc.pmpheep.service.exception.CheckedServiceException;
+import com.bc.pmpheep.general.controller.BaseController;
 
 /**
  * 
@@ -54,25 +51,18 @@ public class ReportProgressController extends BaseController {
     @RequestMapping(value = "/listReportProgress", method = RequestMethod.GET)
     public ModelAndView listReportProgress(@RequestParam("materialId") Long materialId)
     throws Exception {
-        ModelAndView model = this.getModelAndView();
-        WriterUser writerUser =
-        (WriterUser) this.getRequest().getSession().getAttribute(Const.SESSION_WRITER_USER);
+        ModelAndView model = new ModelAndView();
+        this.getUserInfo();
         String pageUrl = "";
-        try {
-            Long userId = writerUser.getId();
-            // 申报进度
-            TextBookCheckVO progress =
-            reportProgressService.getMaterialProgress(userId, materialId);
-            // 书籍审核结果
-            List<TextBookCheckVO> textBookChecks =
-            reportProgressService.getTextBookCheckResult(userId, materialId);
-            model.addObject("progress", progress);
-            model.addObject("textBookCheck", textBookChecks);
-            model.setViewName(pageUrl);
-        } catch (CheckedServiceException e) {
-            throw new CheckedServiceException(e.getBusiness(), e.getResult(), e.getMessage(),
-                                              pageUrl);
-        }
+        Long userId = Long.parseLong(this.getUserInfo().get("id").toString());
+        // 申报进度
+        TextBookCheckVO progress = reportProgressService.getMaterialProgress(userId, materialId);
+        // 书籍审核结果
+        List<TextBookCheckVO> textBookChecks =
+        reportProgressService.getTextBookCheckResult(userId, materialId);
+        model.addObject("progress", progress);
+        model.addObject("textBookCheck", textBookChecks);
+        model.setViewName(pageUrl);
         return model;
     }
 }
