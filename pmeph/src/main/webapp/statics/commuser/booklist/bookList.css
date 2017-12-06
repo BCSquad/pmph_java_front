@@ -1,0 +1,164 @@
+
+.nav{
+    width: 70%;
+    height: 15px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 1px;
+    color: #333333;
+    float: left;
+}
+.select{
+    width: 30%;
+    height: 15px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 1px;
+    color: #333333;
+    float: left;
+    text-align: right;
+}
+.list{
+    clear: both;
+    width: 100%;
+    height: auto;
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+
+.oneList{
+    height: 146px;
+    width: 1140px;
+    border-bottom: solid 1px #e5e5e5;
+    margin-left: 20px;
+    margin-right: 40px;
+    padding-top: 26px;
+    background-color: #ffffff;
+}
+
+.leftPicture{
+    height: 100%;
+    width: 104px;
+    float: left;
+}
+.pictureSize{
+    width: 104px;
+    height: 120px;
+}
+.rightContent{
+    width: 1036px;
+    height: 100%;
+    float: left;
+}
+.upDiv{
+    width: 100%;
+    height: 50%;
+    float: left;
+    padding-left: 20px;
+}
+.upLeft{
+    width: 70%;
+    height: 73px;
+    float: left;
+}
+.bookName{
+    width: 100%;
+    height: 24px;
+    font-family: MicrosoftYaHei;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #333333;
+}
+.name{
+    width: 100%;
+    height: 35px;
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 1px;
+    color: #999999;
+    margin-top: 5px;
+}
+
+.downDiv{
+    width: 100%;
+    height: 50%;
+    float: left;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+.upRight{
+    float: left;
+    width: 30%;
+    height: 72px;
+}
+.eyePicture {
+    background-image:  url("../image/css_sprites.png");;
+    background-position: -418px -147px;
+    background-repeat: no-repeat;
+    height: 25px;
+    width: 20px;
+    float: right;
+}
+.pictureDiv{
+    width: 100%;
+    height: 25px;
+}
+.number{
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #b5b5b5;
+    float: right;
+    width: 40px;
+    height: 25px;
+    margin-left: 5px;
+}
+.handPicture{
+    background-image:  url("../image/css_sprites.png");;
+    background-position: -418px -194px;
+    background-repeat: no-repeat;
+    height: 25px;
+    width: 20px;
+    float: right;
+}
+.number2{
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #b5b5b5;
+    float: right;
+    width: 40px;
+    height: 25px;
+    margin-left: 5px;
+}
+
+.contentPage{
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #666666;
+    padding-top: 0px;
+}
+
+.pageDiv{
+    clear: both;
+    text-align: right;
+    margin-top: 30px;
+}
