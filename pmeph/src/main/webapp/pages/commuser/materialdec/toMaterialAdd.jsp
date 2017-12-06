@@ -4,6 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <script type="text/javascript">
+           var contextpath = '${pageContext.request.contextPath}/';
+  </script>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <title>申报表添加</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -28,10 +31,10 @@
 		<div class="sbxq_item" id="tsxz">
 			<div>
 				<input type="hidden" id="select_nr" value="${bookSelects}"/>
-				<input type="hidden" name="material_id" value="${materialMap.id}"/>
+				<input type="hidden" id="material_id" name="material_id" value="${materialMap.id}"/>
 				<span id="tsxz_span1"></span>
 				<span class="tsxz_title">图书选择(只能选择一本书籍，一本书籍只能选择一个职位。) </span>
-				<span class="tsxz_ts"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_ts1"><img src="${ctx}/statics/image/btxx.png" /></span>
 				<div class="addBtn pull-right" onclick="javascript:addTsxz()"><span>增加</span></div>
 			</div>
 			<div class="item" id="xz1">
@@ -56,7 +59,7 @@
 			<div>
 				<span id="tsxz_span2"></span>
 				<span class="tsxz_title">专家信息</span>
-				<span class="tsxz_ts"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_ts1"><img src="${ctx}/statics/image/btxx.png" /></span>
 			</div>
 			<div class="content">
 				<table class="tab_1">
@@ -72,7 +75,7 @@
                                 <option value="2">女</option>
                             </select></td>
 						<td><span class="btbs">*</span><span>出生年月：</span>
-							<input class="cg_input" calendar format="'yyyy-mm-dd'" offset="[3,9]" z-index="100"  name="birthday" value="" /></td>
+							<input class="cg_input" calendar format="'yyyy-mm-dd'"  name="birthday" value="" /></td>
 						<td><span class="btbs">*</span><span>教&emsp;&emsp;龄：</span>
 							<input class="cg_input" name="experience" value="" /></td>
 					</tr>
@@ -121,11 +124,12 @@
 			</div>
 		</div>
 		<!--主要学习经历-->
-		<div class="sbxq_item">
+		<div class="sbxq_item" id="zyxxjl" style="display: none">
 			<div>
 				<span id="tsxz_span3"></span>
 				<span class="tsxz_title">主要学习经历</span>
-				<span class="tsxz_ts"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_ts" id="zyxxjl_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span id="zyxxjl_xt" class="tsxz_xt">（选填）</span>
 			</div>
 			<div class="content">
 				<table class="tab_2" id="tab_xxjl">
@@ -157,11 +161,12 @@
 			</div>
 		</div>
 			<!--主要工作经历-->
-		<div class="sbxq_item">
+		<div class="sbxq_item" id="gzjl">
 			<div>
 				<span id="tsxz_span4"></span>
 				<span class="tsxz_title">主要工作经历</span>
-				<span class="tsxz_ts"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_ts" id="gzjl_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_xt" id="gzjl_xt" >（选填）</span>
 			</div>
 			<div class="content">
 				<table class="tab_2" id="tab_gzjl">
@@ -191,11 +196,12 @@
 			</div>
 		</div>
 			<!--主要教学经历-->
-		<div class="sbxq_item">
+		<div class="sbxq_item" id="jxjl">
 			<div>
 				<span id="tsxz_span5"></span>
 				<span class="tsxz_title">主要教学经历</span>
-				<span class="tsxz_ts"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_ts" id="jxjl_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_xt" id="jxjl_xt" >（选填）</span>
 			</div>
 			<div class="content">
 				<table class="tab_2" id="tab_jxjz">
@@ -225,10 +231,12 @@
 			</div>
 		</div>
 		<!--主要学术兼职-->
-		<div class="sbxq_item">
+		<div class="sbxq_item" id="xsjz">
 			<div>
 				<span id="tsxz_span10"></span>
-				<span class="tsxz_title">主要学术兼职（选填）</span>
+				<span class="tsxz_title">主要学术兼职</span>
+				<span class="tsxz_ts" id="xsjz_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span id="xsjz_xt" class="tsxz_xt">（选填）</span>
 			</div>
 			<div class="content">
 				<table class="tab_2" id="tab_xsjz">
@@ -509,11 +517,7 @@
 			<div class="sbdw">
 				<span class="btbs">*</span><span>申报单位：</span>
 				<select id="apply-org" name="edu" class="st_2" >
-				    <option value="0">武汉大学</option>
-				    <option value="1">北京大学1</option>
-                    <option value="2">北京大学2</option>
-                    <option value="3">家里蹲大学</option>
-                    <option value="4">草根大学</option>
+				    ${orgSelects}
 				</select>
 			</div>
 		</div>

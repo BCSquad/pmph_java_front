@@ -85,7 +85,22 @@
 	margin-left: 10px;
 }
 
+.tsxz_xt{
+	font-family: MicrosoftYaHei;
+	letter-spacing: 0px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-weight: bold;
+	color: #333333;
+	display: none;
+}
+
+
 .tsxz_ts{
+	margin-left: 5px;
+	display: none;
+}
+.tsxz_ts1{
 	margin-left: 5px;
 }
 

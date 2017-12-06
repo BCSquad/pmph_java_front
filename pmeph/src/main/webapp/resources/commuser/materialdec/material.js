@@ -1,4 +1,6 @@
 $(function () {
+	var id = $("#material_id").val();
+//	queryMaterialMap(id);  //执行查询方法
     $('.select-input').selectlist({
         zIndex: 10,
         width: 192,
@@ -7,12 +9,6 @@ $(function () {
     });
 
     $('.book').selectlist({
-        zIndex: 10,
-        width: 200,
-        height: 30,
-        optionHeight: 30
-    });
-    $('#edu').selectlist({
         zIndex: 10,
         width: 200,
         height: 30,
@@ -39,6 +35,129 @@ $(function () {
         optionHeight: 30
     });
 });
+
+//页面组合方法
+function queryMaterialMap(id){
+	$.ajax({
+		type: "POST",
+		url:contextpath+'material/queryMaterialMap.action',
+		data:{material_id:id},// 你的formid
+		dataType:"json",
+	    success: function(json) {
+	    	chooseModel(json.data);
+	    }
+	});
+}
+
+//模块显示与隐藏判断
+function chooseModel(data){
+	//学习经历
+	if(data.is_edu_exp_used == "1"){
+		$("#zyxxjl").css("display","block");
+	}
+	//学习经历必填
+	if(data.is_edu_exp_used == "1"){
+		$("#zyxxjl_bt").css("display","block");
+	}else{
+		$("#zyxxjl_xt").css("display","block");
+		
+	}
+	//工作经历
+	if(data.is_work_exp_used == "1"){
+		$("#gzjl").css("display","block");
+	}
+	//工作经历必填
+	if(data.is_work_exp_required == "1"){
+		$("#gzjl_bt").css("display","block");
+	}else{
+		$("#gzjl_xt").css("display","block");
+	}
+	//教学经历
+	if(data.is_teach_exp_used == "1"){
+		$("#jxjl").css("display","block");
+	}
+	//教学经历必填
+	if(data.is_teach_exp_required == "1"){
+		$("#jxjl_bt").css("display","block");
+	}else{
+		$("#jxjl_xt").css("display","block");
+	}
+	//主要学术兼职
+	if(data.is_acade_used == "1"){
+		$("#xsjz").css("display","block");
+	}
+	//主要学术兼职必填
+	if(data.is_acade_required == "1"){
+		$("#xsjz_bt").css("display","block");
+	}else{
+		$("#xsjz_xt").css("display","block");
+	}
+	//上版教材参编情况
+	if(data.is_last_position_used == "1"){
+		$("#zyxxjl").css("display","block");
+	}
+	//上版教材参编情况必填
+	if(data.is_last_position_required == "1"){
+		$("#zyxxjl").css("display","block");
+	}
+	//国家级课程建设情况
+	if(data.is_national_course_used == "1"){
+		$("#zyxxjl").css("display","block");
+	}
+	//国家级课程建设情况必填
+	if(data.is_national_course_required == "1"){
+		$("#zyxxjl").css("display","block");
+	}
+	//省部级课程建设情况
+	if(data.is_provincial_course_used == "1"){
+		$("#zyxxjl").css("display","block");
+	}
+	//省部级课程建设情况必填
+	if(data.is_provincial_course_required == "1"){
+		$("#zyxxjl").css("display","block");
+	}
+	//学校课程建设情况
+	if(data.is_school_course_used == "1"){
+		$("#zyxxjl").css("display","block");
+	}
+	//学校课程建设情况必填
+	if(data.is_school_course_required == "1"){
+		$("#zyxxjl").css("display","block");
+	}
+	//主编国家规划教材情况
+	if(data.is_national_plan_used == "1"){
+		$("#zyxxjl").css("display","block");
+	}
+	//主编国家规划教材情况必填
+	if(data.is_national_plan_required == "1"){
+		$("#zyxxjl").css("display","block");
+	}
+	//教材编写情况
+	if(data.is_textbook_used == "1"){
+		$("#zyxxjl").css("display","block");
+	}
+	//教材编写情况必填
+	if(data.is_textbook_required == "1"){
+		$("#zyxxjl").css("display","block");
+	}
+	//其他教材编写情况
+	if(data.is_other_textbook_used == "1"){
+		$("#zyxxjl").css("display","block");
+	}
+	//其他教材编写情况必填
+	if(data.is_other_textbook_required == "1"){
+		$("#zyxxjl").css("display","block");
+	}
+	//科研情况
+	if(data.is_research_used == "1"){
+		$("#zyxxjl").css("display","block");
+	}
+	//科研情况必填
+	if(data.is_research_required == "1"){
+		$("#zyxxjl").css("display","block");
+	}
+}
+
 //生成随机数
 function only(ele,arr){ 
 	 if(arr.length==0){ 
@@ -80,7 +199,7 @@ function addTsxz(){
 	var str = fnt();
 	$("#tsxz").append("<div class='item' id='xz_"+str+"'>"+
 				"<span style='float: left;'>图书：</span>"+
-				"<select id='edu' name='edu' class='st book' style='float: left;'>"+
+				"<select id='edu_"+str+"' name='edu' class='st book' style='float: left;'>"+
 					"<option value=''>请选择书籍</option>"+
 					select_nr+
 				"</select>"+
@@ -95,8 +214,7 @@ function addTsxz(){
 				"</div>"+
 				"<div class='delBtn pull-right' onclick=\"javascript:delTsxz( 'xz_"+str+"')\"><span>删除</span></div>"+
 			"</div>");
-	$('#edu').selectlist({
-        zIndex: 10,
+	$('#edu_'+str).selectlist({
         width: 200,
         height: 30,
         optionHeight: 30
@@ -138,6 +256,7 @@ function add_gzjl(){
 	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('gzjl_"+num+"')\"/></td>"
 	);
 	$table.append($tr);
+	$tr.calendar();
 }
 
 //追加教学经历
@@ -153,6 +272,7 @@ function add_jxjl(){
 	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('jxjz_"+num+"')\"/></td>"
 	);
 	$table.append($tr);
+	$tr.calendar();
 }
 
 //追加学术兼职
@@ -227,14 +347,14 @@ function add_jcbx(){
 	var $table = $("#tab_jcbx");
 	var $tr = $("<tr id='jcbx_"+num+"'>"+
 		"<td><input class='cg_input' name='jcb_material_name' value='' style='width: 210px;'/></td>"+
-		"<td><select id='jcxz' name='jcb_rank'>"+
+		"<td><select id='jcxz_"+num+"' name='jcb_rank'>"+
 	            "<option value='0'>其他教材</option>"+
 	           "<option value='1'>教育部规划</option>"+
 	            "<option value='2'>卫计委规划</option>"+
 	            "<option value='3'>区域规划</option>"+
 	            "<option value='4'>创新教材</option>"+
 	    	"</select></td>"+
-		"<td><select id='jcjb' name='jcb_position'>"+
+		"<td><select id='jcjb_"+num+"' name='jcb_position'>"+
 	            "<option value='0'>无</option>"+
 	            "<option value='1'>主编</option>"+
 	            "<option value='2'>副主编</option>"+
@@ -247,18 +367,19 @@ function add_jcbx(){
 		"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('jcbx_"+num+"')\"/></td>"+
 		"</tr>");
 	$table.append($tr);
-	  $('#jcjb').selectlist({
+	  $('#jcjb_'+num).selectlist({
 	    	zIndex: 10,
 	    	width: 110,
 	    	height: 30,
 	    	optionHeight: 30
 	    });
-	   $('#jcxz').selectlist({
+	   $('#jcxz_'+num).selectlist({
 	    	zIndex: 10,
 	    	width: 110,
 	    	height: 30,
 	    	optionHeight: 30
 	    });
+	   $tr.calendar();
 }
 //作家科研
 function add_zjky(){
