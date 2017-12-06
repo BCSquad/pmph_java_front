@@ -18,8 +18,8 @@
         <script src="${ctx}/resources/commuser/readpage/readdetail.js"></script>
 </head>
 <body>
+<jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="body">
-    <jsp:include page="/pages/comm/head.jsp"></jsp:include>
     <input type="hidden" value="${map.type}" id="type_id">
 	<div class="content-wrapper">
 	     <input type="hidden" id="book_id" value="${id}">

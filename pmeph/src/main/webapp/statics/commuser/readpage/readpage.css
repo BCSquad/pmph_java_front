@@ -250,7 +250,8 @@
 .block .item1 {
     float: left;
     width: 416px;
-    height: 170px;
+   /* height: 170px;*/
+    margin: 25px 0;
     cursor: pointer;
 }
 
@@ -280,6 +281,8 @@
     font-weight: normal;
     font-stretch: normal;
     line-height: 24px;
+    height: 24px;
+    overflow: hidden;
     letter-spacing: 0px;
     color: #333333;
 }
@@ -290,6 +293,9 @@
     font-weight: normal;
     font-stretch: normal;
     line-height: 30px;
+    display: block;
+    height: 30px;
+    overflow: hidden;
     letter-spacing: 1px;
     color: #999999;
 }

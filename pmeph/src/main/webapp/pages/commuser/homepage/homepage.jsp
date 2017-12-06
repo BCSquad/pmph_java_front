@@ -268,12 +268,12 @@
                 </div>
                 <div class="items">
                     <c:forEach items="${listCom}" var="list" varStatus="status">
-                        <div class="item1" onclick="openUrl('${list.id1}')">
+                        <div class="item1" onclick="window.open(contextpath+'readdetail/todetail.action?id=${list.id1}')">
                             <div class="sp_01"><img src="${list.image_url}"/></div>
                             <div class="sp_02">
                                 <div class="sp_title">${list.bookname}</div>
                                 <div class="sp_pl">
-                                    <span style="float: left;">${rmsp.realname} 评论了 《${list.bookname}》</span>
+                                    <span style="float: left;">${list.realname} 评论了 《${list.bookname}》</span>
                                         <%--	<span class="rwtx1"></span>
                                             <span class="rwtx1"></span>
                                             <span class="rwtx1"></span>

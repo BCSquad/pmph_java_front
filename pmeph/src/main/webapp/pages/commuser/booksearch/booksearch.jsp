@@ -33,9 +33,9 @@ String contextpath=request.getContextPath();
 	<input type="hidden" id="search-name-temp" value="${real_search }">
 	<input type="hidden" id="page-num-temp" value="1">
 
-<div style="width: 100%;padding: 0;margin: 0;height: 81px;border: none;overflow: hidden;">
+
 	<jsp:include page="/pages/comm/head.jsp"></jsp:include> 
-</div>
+
 <!-- <iframe style="width: 100%;padding: 0;margin: 0;height: 81px;border: none" src="../comm/head.html"></iframe> -->
 <div class="body" style="background-color: #f6f6f6;padding-bottom:60px">
 	<div class="nav" style="background-color: white">

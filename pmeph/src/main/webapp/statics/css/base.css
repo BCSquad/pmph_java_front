@@ -233,7 +233,9 @@ body {
     right: 120px;
     display: none;
 }
-
+.tail{
+    padding-bottom: 30px;
+}
 .tail .about {
     margin: 0 auto;
     width: 400px;

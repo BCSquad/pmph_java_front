@@ -296,7 +296,7 @@
 .div1 {
     /*  float: left;*/
     margin: 0 15px;
-    margin-top: 10px;
+   /* margin-top: 10px;*/
 }
 
 .area-4 .content .left .div_photo1 .label {
@@ -962,7 +962,7 @@
     width: 416px;
    /* height: 170px;*/
     cursor: pointer;
-    margin: 10px 0;
+    margin: 25px 0;
 }
 
 .sp_01 {
@@ -991,6 +991,8 @@
     font-weight: normal;
     font-stretch: normal;
     line-height: 24px;
+    height: 24px;
+    overflow: hidden;
     letter-spacing: 0px;
     color: #333333;
 }
@@ -1003,6 +1005,9 @@
     line-height: 30px;
     letter-spacing: 1px;
     color: #999999;
+    display: block;
+    height: 30px;
+    overflow: hidden;
 }
 
 .sp_remark {
