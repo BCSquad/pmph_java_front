@@ -25,7 +25,7 @@
         <div class="float_left">我的好友</div>
         <div class="float_right" style="color: #1abd44;">
             <img src="${ctx}/statics/image/tjhy.png" class="img1"/>
-            <text class="v_a">添加好友</text>
+            <text class="v_a" onclick = "window.location.href='${ctx}/addFriend/toPage.action'">添加好友</text>
         </div>
     </div>
     <div class="items">
