@@ -30,32 +30,4 @@ public interface MyMessageDao {
      */
     Integer listMyMessageTotal(PageParameter<MyMessageVO> pageParameter);
 
-    /**
-     * 
-     * 
-     * 功能描述：获取消息详情
-     * 
-     * @param id 消息id
-     * @return
-     * @throws CheckedServiceException
-     * 
-     */
-    MyMessageVO getMyMessageDetail(Long id);
-
-    /**
-     * 
-     * 
-     * 功能描述：逻辑删除我的消息
-     * 
-     * @param ids 需要删除的消息id
-     * @return
-     * @throws CheckedServiceException
-     * 
-     */
-    Integer updateMyMessage(Long[] ids);
-    
-    /**
-     * 通过id 动态更新UserMessage
-     */
-    Integer readMyMessage(MyMessageVO messageVO);
 }

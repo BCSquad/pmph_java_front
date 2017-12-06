@@ -6,131 +6,38 @@
 	<select id="listMyMessage" parameterType="PageParameter"
 		resultType="MyMessageVO">
 		SELECT
-		*,
-		m.gmt_create sendTime
+		*, MAX(m.gmt_create) sendTime
 		FROM
 		user_message m
 		WHERE
-		m.receiver_id=#{parameter.userId}
-		AND
-		m.receiver_type =
+		(m.receiver_id = #{parameter.userId} and  m.sender_id = #{parameter.userId})
+		AND m.receiver_type =
 		#{parameter.userType}
-		AND
-		m.is_deleted = false
-		AND
-		m.is_withdraw = false
-		AND
-		m.msg_type = 2
-		<if test="parameter.title != null and parameter.title != ''">
-			and m.title like concat('%',#{parameter.title},'%')
-		</if>
-		<if test="parameter.isRead != null ">
-			and m.is_read = #{parameter.isRead}
-		</if>
-		ORDER BY
-		m.gmt_create DESC
+		AND m.is_deleted = FALSE
+		AND m.is_withdraw = FALSE
+		AND m.msg_type = 2
+		GROUP BY m.sender_id
+		ORDER BY sendTime DESC
 		LIMIT
 		#{start},#{pageSize}
 	</select>
 
 	<select id="listMyMessageTotal" parameterType="PageParameter"
 		resultType="Integer">
-		SELECT
-		count(*)
-		from
-		(SELECT
-		*,m.gmt_create sendTime
+		SELECT count(*) FROM (SELECT
+		*, MAX(m.gmt_create) sendTime
 		FROM
 		user_message m
 		WHERE
-		m.receiver_id=#{parameter.userId}
-		AND
-		m.receiver_type =
+		(m.receiver_id = #{parameter.userId} and  m.sender_id = #{parameter.userId})
+		AND m.receiver_type =
 		#{parameter.userType}
-		AND
-		m.is_deleted = false
-		AND
-		m.msg_type = 2
-		<if test="parameter.title != null and parameter.title != ''">
-			and m.title like concat('%',#{parameter.title},'%')
-		</if>
-		<if test="parameter.isRead != null ">
-			and m.is_read = #{parameter.isRead}
-		</if>
-		ORDER BY
-		m.gmt_create DESC
-		) t
+		AND m.is_deleted = FALSE
+		AND m.is_withdraw = FALSE
+		AND m.msg_type = 2
+		GROUP BY m.sender_id
+		ORDER BY sendTime DESC) t
 	</select>
 
-	<select id="getMyMessageDetail" parameterType="PageParameter"
-		resultType="MyMessageVO">
-		SELECT
-		*,
-		m.gmt_create sendTime
-		FROM
-		user_message m
-		WHERE
-		m.id =
-		#{id}
-	</select>
 
-	<!-- 通过id 动态更新UserMessage -->
-	<update id="updateUserMessage" parameterType="MyMessageVO">
-		update user_message
-		<set>
-			<if test="msgId != null">
-				msg_id = #{msgId},
-			</if>
-			<if test="msgType != null">
-				msg_type = #{msgType},
-			</if>
-			<if test="title != null and title != '' ">
-				title = #{title},
-			</if>
-			<if test="senderId != null">
-				sender_id = #{senderId},
-			</if>
-			<if test="senderType != null">
-				sender_type =#{senderType},
-			</if>
-			<if test="receiverId != null">
-				receiver_id =#{receiverId},
-			</if>
-			<if test="receiverType != null">
-				receiver_type = #{receiverType},
-			</if>
-			<if test="isRead != null">
-				is_read =#{isRead},
-			</if>
-			<if test="isWithdraw != null">
-				is_withdraw = #{isWithdraw},
-			</if>
-			<if test="isDeleted != null">
-				is_deleted =#{isDeleted},
-			</if>
-			<if test="gmtCreate != null">
-				gmt_create = #{gmtCreate},
-			</if>
-			<if test="gmtUpdate != null">
-				gmt_update =#{gmtUpdate},
-			</if>
-		</set>
-		where id = #{id} ;
-	</update>
-	
-	<!-- 通过id 更新是否被逻辑删除 -->
-	<update id="updateMyMessage">
-		update
-		user_message
-		set
-		is_deleted = true
-		where
-		id
-		in
-		<foreach collection="array" item="id" index="index" open="("
-			close=")" separator=",">
-			#{id}
-		</foreach>
-		;
-	</update>
 </mapper>

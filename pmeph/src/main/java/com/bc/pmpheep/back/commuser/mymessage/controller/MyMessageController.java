@@ -13,6 +13,7 @@ import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
 import com.bc.pmpheep.back.commuser.mymessage.service.MyMessageService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.controller.bean.ResponseBean;
+import com.bc.pmpheep.general.controller.BaseController;
 
 /**
  * @author 曾庆峰
@@ -21,79 +22,58 @@ import com.bc.pmpheep.controller.bean.ResponseBean;
  **/
 @Controller
 @RequestMapping("/mymessage")
-public class MyMessageController {
+public class MyMessageController extends BaseController {
 
-    @Autowired
-    MyMessageService myMessageService;
+	@Autowired
+	MyMessageService myMessageService;
 
-    /**
-     * 
-     * 
-     * 功能描述：获取我的消息列表
-     * 
-     * @param pageSize 当页条数
-     * @param pageNumber 当前页码
-     * @param title 标题
-     * @param isRead 是否已读
-     * @param userId 用户id
-     * @param userType 用户类型
-     * @return
-     * 
-     */
-    @RequestMapping(value = "/tolist", method = RequestMethod.GET)
-    public ModelAndView list(Integer pageSize, Integer pageNumber, Long userId, Integer userType,
-    String title, Boolean isRead) {
-        PageParameter<MyMessageVO> pageParameter = new PageParameter<>(pageNumber, pageSize);
-        MyMessageVO myMessageVO = new MyMessageVO();
-        myMessageVO.setUserId(userId);
-        myMessageVO.setUserType(userType);
-        myMessageVO.setTitle(title);
-        myMessageVO.setIsRead(isRead);
-        pageParameter.setParameter(myMessageVO);
-        Map<String, ResponseBean<MyMessageVO>> map = new HashMap<>();
-        map.put("mymessage", new ResponseBean(myMessageService.listMyMessage(pageParameter)));
-        return new ModelAndView("commuser/mymessage/list", map);
-    }
+	/**
+	 * 
+	 * 
+	 * 功能描述：获取我的消息列表
+	 * 
+	 * @param pageSize
+	 *            当页条数
+	 * @param pageNumber
+	 *            当前页码
+	 * @param title
+	 *            标题
+	 * @param isRead
+	 *            是否已读
+	 * @param userId
+	 *            用户id
+	 * @param userType
+	 *            用户类型
+	 * @return
+	 * 
+	 */
+	@RequestMapping(value = "/tolist", method = RequestMethod.GET)
+	public ModelAndView list(Integer pageSize, Integer pageNumber, Long userId, Integer userType) {
+		PageParameter<MyMessageVO> pageParameter = new PageParameter<>(pageNumber, pageSize);
+		MyMessageVO myMessageVO = new MyMessageVO();
+		myMessageVO.setUserId(userId);
+		myMessageVO.setUserType(userType);
+		pageParameter.setParameter(myMessageVO);
+		Map<String, ResponseBean<MyMessageVO>> map = new HashMap<>();
+		map.put("mymessage", new ResponseBean(myMessageService.listMyMessage(pageParameter)));
+		return new ModelAndView("commuser/mymessage/list", map);
+	}
 
-    /**
-     * 
-     * 
-     * 功能描述：获取前几条未读消息
-     * 
-     * @param pageSize 前几条消息
-     * @param pageNumber 当前页码
-     * @param userId 用户id
-     * @param userType 用户类型
-     * @return
-     * 
-     */
-    @RequestMapping(value = "/toicon", method = RequestMethod.GET)
-    public ModelAndView icon(Integer pageSize, Integer pageNumber, Long userId, Integer userType) {
-        PageParameter<MyMessageVO> pageParameter = new PageParameter<>(pageNumber, pageSize);
-        MyMessageVO myMessageVO = new MyMessageVO();
-        myMessageVO.setUserId(userId);
-        myMessageVO.setUserType(userType);
-        myMessageVO.setIsRead(false);
-        pageParameter.setParameter(myMessageVO);
-        Map<String, ResponseBean<MyMessageVO>> map = new HashMap<>();
-        map.put("mymessage", new ResponseBean(myMessageService.listMyMessageOfIcon(pageParameter)));
-        return new ModelAndView("commuser/mymessage/icon", map);
-    }
-
-    /**
-     * 
-     * 
-     * 功能描述： 获取消息详情
-     * 
-     * @param id 消息id
-     * @return
-     * 
-     */
-    @RequestMapping(value = "/todetail", method = RequestMethod.PUT)
-    public ModelAndView detail(Long id) {
-        Map<String, ResponseBean<MyMessageVO>> map = new HashMap<>();
-        map.put("mymessage", new ResponseBean(myMessageService.updateMyMessageDetail(id)));
-        return new ModelAndView("commuser/mymessage/detail", map);
-    }
+	/**
+	 * 
+	 * 
+	 * 功能描述： 获取消息详情
+	 * 
+	 * @param id
+	 *            消息id
+	 * @return
+	 * 
+	 */
+	@RequestMapping(value = "/todetail", method = RequestMethod.PUT)
+	public ModelAndView detail(Long senderId, Integer senderType, Long userId, Long userType) {
+		Map<String, ResponseBean<MyMessageVO>> map = new HashMap<>();
+		map.put("mymessage", new ResponseBean());
+		return new ModelAndView("commuser/mymessage/detail", map);
+	}
 
 }

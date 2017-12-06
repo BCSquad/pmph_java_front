@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
-
 @SuppressWarnings("serial")
 @Alias("MyMessageVO")
 public class MyMessageVO implements Serializable {
@@ -43,9 +42,21 @@ public class MyMessageVO implements Serializable {
 	 */
 	private String senderName;
 	/**
-	 * 消息附件列表
+	 * 接收者id
 	 */
-	private List<MessageAttachment> messageAttachments;
+	private Long receiverId;
+	/**
+	 * 接收者类型
+	 */
+	private Integer receiverType;
+	/**
+	 * 接收者姓名
+	 */
+	private String receiverName;
+	/**
+	 * 接收者头像
+	 */
+	private String receiverAvatar;
 	/**
 	 * 发送时间
 	 */
@@ -103,14 +114,6 @@ public class MyMessageVO implements Serializable {
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-	public List<MessageAttachment> getMessageAttachments() {
-		return messageAttachments;
-	}
-
-	public void setMessageAttachments(List<MessageAttachment> messageAttachments) {
-		this.messageAttachments = messageAttachments;
 	}
 
 	public Timestamp getSendTime() {
@@ -175,6 +178,38 @@ public class MyMessageVO implements Serializable {
 
 	public void setSenderName(String senderName) {
 		this.senderName = senderName;
+	}
+
+	public Long getReceiverId() {
+		return receiverId;
+	}
+
+	public void setReceiverId(Long receiverId) {
+		this.receiverId = receiverId;
+	}
+
+	public Integer getReceiverType() {
+		return receiverType;
+	}
+
+	public void setReceiverType(Integer receiverType) {
+		this.receiverType = receiverType;
+	}
+
+	public String getReceiverName() {
+		return receiverName;
+	}
+
+	public void setReceiverName(String receiverName) {
+		this.receiverName = receiverName;
+	}
+
+	public String getReceiverAvatar() {
+		return receiverAvatar;
+	}
+
+	public void setReceiverAvatar(String receiverAvatar) {
+		this.receiverAvatar = receiverAvatar;
 	}
 
 }
