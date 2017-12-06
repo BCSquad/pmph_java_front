@@ -12,9 +12,11 @@
 	    <link  href="${ctx}/statics/css/base.css" type="text/css" rel="stylesheet">
 	    <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
 	    <link  href="${ctx}/statics/commuser/readpage/readdetail.css" type="text/css" rel="stylesheet">
+	    <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css" type="text/css">
 	    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
 	    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
-	     <script src="${ctx}/resources/comm/base.js"></script>
+	    <script src="${ctx}/resources/comm/base.js"></script>
+	    <script src="${ctx}/resources/comm/jquery/jquery.pager.js"></script>
         <script src="${ctx}/resources/commuser/readpage/readdetail.js"></script>
 </head>
 <body>
@@ -33,24 +35,20 @@
         		<span class="span_2">学校教育>高职高专教材>护理类专业>规划教材>涉外护理  </span>
         	</div>
         	<div style="width: 100%;">
-        		<!--<div class="dzsc">
-        			<span id="span_1"></span><span style="float:left">点赞</span><span id="span_2"></span><span style="float:left">收藏</span>
-        		</div>-->
         		<div class="dzsc">
-        			<img src="../statics/image/dz.png" onclick="addlikes()"/>
-        			<img src="../statics/image/sc1.png" onclick="addmark()" />
-        			 <div style="display: inline-block;vertical-align: top;margin-right: 8px;text-align:left;">
-					            <select id="edu" name="edu">
-					                 <option value="">选择收藏夹</option>
-			        			     <c:forEach items="${flist }" var="favorite">
-			        			        <option value="${favorite.id }">${favorite.favorite_name }</option>
-			        			     </c:forEach>
-					            </select>
+        		   <c:if test="${flag=='no'}">
+        		     <img src="${ctx}/statics/image/dz02.png" onclick="addlikes()" id="dz"/>
+        		   </c:if>
+        		   <c:if test="${flag=='yes'}">
+        			 <img src="${ctx}/statics/image/dz01.png" onclick="addlikes()" id="dz"/>
+        		   </c:if>	  
+        		      <img src="${ctx}/statics/image/s102(1).png" onclick="addmark()" id="sc"/>
+        			  <div style="display: inline-block;vertical-align: top;margin-right: 8px;text-align:left;">
                     </div>
         		</div>
         	</div>
         	<div class="xqbf1">
-        		<div class="xl1"><img src="${map.image_url }" style="margin-left: 20px;margin-bottom: 25px;height: 150px;width: 115px"/></div>
+        		<div class="xl1"><img src="${map.image_url }" style="display: block;margin-bottom: 25px;height: 150px;margin: auto"/></div>
         		<div class="xl2">
         			<ul>
                         <li><span class="author">作者：</span><span class="writer" style="color: #489299">${map.author}</span></li>
@@ -111,7 +109,6 @@
 	                                <span class="rwtx1"></span>
 	                        </div>
 	                    </c:if>
-	                     
                         <div class="eight">${map.score}</div>
                         <!-- <div class="zero">0</div> -->
         			</ul>
@@ -213,7 +210,24 @@
                         <div class="item_content">${list.content}</div>
                         <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
                     </div>
-              </c:forEach>      
+              </c:forEach> 
+              <div class="pageDiv" style="float: right;">
+	                  <ul class="pagination" id="page1"></ul>
+	                  <div style="display: inline-block;    vertical-align: top;text-align: left">
+	                      <select id="edu" name="edu">
+	                          <option value="5" ${m=='5'?'selected':''}>每页5条</option>
+	                          <option value="10" ${m=='10'?'selected':''}>每页10条</option>
+	                          <option value="15" ${m=='15'?'selected':''}>每页15条</option>
+	                          <option value="20" ${m=='20'?'selected':''}>每页20条</option>
+	                      </select>
+	                  </div>
+	                  <div class="pageJump">
+	                      <span>共<span id="allppage">${allpage}</span>页，跳转到</span>
+	                      <input type="text" id="jumpId"/>
+	                      <span class="pp">页</span>
+	                      <button type="button" class="button" onclick="jump()">确定</button>
+	                  </div>
+                </div>     
             </div>
         </div>
         <!--右边区域-->
@@ -250,7 +264,7 @@
                 </div>
                 <div id="change">
 	                <c:forEach items="${auList}" var="list">
-		                <div class="right_9">
+		                <div class="right_9" onclick="todetail('${list.id}')">
 		                    <div class="right_10">
 		                        <img src="${list.image_url}" class="right_12">
 		                    </div>
@@ -258,7 +272,7 @@
 		                </div>
 	                </c:forEach>
 	                <c:forEach items="${tMaps}" var="list">
-		                <div class="right_9">
+		                <div class="right_9" onclick="todetail('${list.id}')">
 		                    <div class="right_10">
 		                        <img src="${list.image_url}" class="right_12">
 		                    </div>
@@ -282,7 +296,7 @@
                 <div  id="comment">
 	                <c:forEach items="${eMap}" var="list">
 		                <div class="right_20">
-		                    <div class="right_21">${list.bookname}</div>
+		                    <div class="right_21" onclick="todetail('${list.id}')">${list.bookname}</div>
 		                    <div class="right_22">（${list.author}）</div>
 		                </div>
 	                </c:forEach>
