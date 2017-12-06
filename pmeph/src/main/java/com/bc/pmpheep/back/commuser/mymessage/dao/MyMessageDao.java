@@ -53,4 +53,9 @@ public interface MyMessageDao {
      * 
      */
     Integer updateMyMessage(Long[] ids);
+    
+    /**
+     * 通过id 动态更新UserMessage
+     */
+    Integer readMyMessage(MyMessageVO messageVO);
 }

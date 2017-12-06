@@ -117,7 +117,10 @@ public class MyMessageServiceImpl implements MyMessageService {
 		myMessageVO.setContent(message.getContent());
 		myMessageVO.setMessageAttachments(messageAttachmentService.getMessageAttachmentByMsgId(myMessageVO.getMsgId()));
 		// 查看了应该将消息变为已读
-
+		MyMessageVO messageVO = new MyMessageVO();
+		messageVO.setId(id);
+		messageVO.setIsRead(true);
+		myMessageDao.readMyMessage(messageVO);
 		return myMessageVO;
 	}
 
