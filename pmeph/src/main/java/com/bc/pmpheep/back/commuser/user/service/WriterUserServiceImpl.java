@@ -1,16 +1,21 @@
 package com.bc.pmpheep.back.commuser.user.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bc.pmpheep.back.commuser.book.bean.BookVO;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertification;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertificationVO;
 import com.bc.pmpheep.back.commuser.user.dao.WriterUserDao;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.back.util.ObjectUtil;
+import com.bc.pmpheep.back.util.PageParameterUitl;
 import com.bc.pmpheep.back.util.StringUtil;
 import com.bc.pmpheep.general.bean.FileType;
 import com.bc.pmpheep.general.service.FileService;
@@ -35,7 +40,7 @@ import com.bc.pmpheep.service.exception.CheckedServiceException;
  * @审核人 ：
  *
  */
-@Service
+@Service("com.bc.pmpheep.back.commuser.user.service.WriterUserServiceImpl")
 public class WriterUserServiceImpl implements WriterUserService {
 	@Autowired
 	private WriterUserDao writerUserDao;
@@ -49,24 +54,6 @@ public class WriterUserServiceImpl implements WriterUserService {
 					CheckedExceptionResult.NULL_PARAM, "用户ID为空时禁止查询");
 		}
 		return writerUserDao.get(id);
-	}
-
-	@Override
-	public WriterUser getOrg(Long orgId) throws CheckedServiceException {
-		if(ObjectUtil.isNull(orgId)){
-			throw new CheckedServiceException(CheckedExceptionBusiness.USER_MANAGEMENT,
-					CheckedExceptionResult.NULL_PARAM, "机构ID为空时禁止查询");
-		}
-		return writerUserDao.getOrg(orgId);
-	}
-
-	@Override
-	public WriterUser getByOrgId(WriterUser writerUser) throws CheckedServiceException {
-		if(ObjectUtil.isNull(writerUser.getOrgId())){
-			throw new CheckedServiceException(CheckedExceptionBusiness.USER_MANAGEMENT,
-					CheckedExceptionResult.NULL_PARAM, "机构ID为空时禁止查询");
-		}
-		return writerUserDao.getByOrgId(writerUser);
 	}
 
 	@Override
@@ -128,5 +115,21 @@ public class WriterUserServiceImpl implements WriterUserService {
 		}
 		Integer writerUser = writerUserDao.updateUserPassWord(id, username);
 		return writerUser;
+	}
+
+	@Override
+	public PageResult<WriterUser> getOrg(PageParameter<WriterUser> pageParameter) {
+		if(ObjectUtil.isNull(pageParameter.getParameter().getOrgId())){
+			throw new CheckedServiceException(CheckedExceptionBusiness.USER_MANAGEMENT,
+                    CheckedExceptionResult.NULL_PARAM, "机构id不能为空");
+		}
+		int total = writerUserDao.getOrgTotal(pageParameter);
+        PageResult<WriterUser> pageResult = new PageResult<>();
+        if (total > 0) {
+            PageParameterUitl.CopyPageParameter(pageParameter, pageResult);
+            pageResult.setRows(writerUserDao.getOrg(pageParameter));
+        }
+        pageResult.setTotal(total);
+        return pageResult;
 	}
 }

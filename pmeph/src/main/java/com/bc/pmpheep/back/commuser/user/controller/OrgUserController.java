@@ -1,6 +1,13 @@
 package com.bc.pmpheep.back.commuser.user.controller;
 
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,9 +16,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.common.controller.BaseController;
+import com.bc.pmpheep.back.commuser.book.bean.BookVO;
+import com.bc.pmpheep.back.commuser.myfriend.bean.WriterFriendVO;
+import com.bc.pmpheep.back.commuser.user.bean.OrgUser;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
 import com.bc.pmpheep.back.commuser.user.service.OrgUserService;
 import com.bc.pmpheep.back.commuser.user.service.WriterUserService;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
+import com.bc.pmpheep.back.util.CollectionUtil;
+import com.bc.pmpheep.back.util.Const;
+import com.bc.pmpheep.back.util.RouteUtil;
+import com.bc.pmpheep.service.exception.CheckedServiceException;
 
 /**
  * @author mr
@@ -19,10 +35,11 @@ import com.bc.pmpheep.back.commuser.user.service.WriterUserService;
  * 
  **/
 @Controller
-@RequestMapping(value = "/orgUser")
-public class OrgUserController extends BaseController {
+@RequestMapping(value = "/user")
+public class OrgUserController extends  com.bc.pmpheep.general.controller.BaseController{
 	
 	@Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.user.service.WriterUserServiceImpl")
 	private WriterUserService writerUserService;
 	@Autowired
 	private OrgUserService orgUserService;
@@ -32,25 +49,27 @@ public class OrgUserController extends BaseController {
 	 * @param orgId
 	 * @return
 	 */
-	@ResponseBody
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView list(@RequestParam("orgId") Long orgId) {
-		ModelAndView model = this.getModelAndView();
-		WriterUser writerUser = writerUserService.getOrg(orgId);
-		model.addObject("writerUser", writerUser);
-		return model;
-    }
-	/**
-	 * 根据条件搜索该机构下的作家用户
-	 * @param writerUser
-	 * @return
-	 */
-	@ResponseBody
-    @RequestMapping(value = "/writerList", method = RequestMethod.GET)
-    public ModelAndView writerList(WriterUser writerUser) {
-		ModelAndView model = this.getModelAndView();
-		WriterUser writerUsers = writerUserService.getByOrgId(writerUser);
-		model.addObject("writerUsers", writerUsers);
+    @RequestMapping(value = "/writerLists")
+    public ModelAndView writerLists(Integer pageSize, Integer pageNumber,WriterUser writerUser,
+    		HttpServletRequest request,HttpServletResponse response)
+    		throws Exception{
+		ModelAndView model = new ModelAndView("commuser/user/writerLists");
+		//获取当前用户 
+		Map<String,Object> writerUserMap=this.getUserInfo();
+		OrgUser orgUser=new OrgUser();
+		orgUser.setOrgId(Long.parseLong( writerUserMap.get("org_id").toString()));
+		PageParameter<WriterUser> pageParameter = new PageParameter<>(pageNumber, pageSize);
+		writerUser.setOrgId(orgUser.getOrgId());
+		pageParameter.setParameter(writerUser);
+	    String pageUrl = "";
+        try {
+        	PageResult<WriterUser> page = writerUserService.getOrg(pageParameter);
+            model.setViewName(pageUrl);
+            model.addObject("page", page);
+        } catch (CheckedServiceException e) {
+            throw new CheckedServiceException(e.getBusiness(), e.getResult(), e.getMessage(),
+                                              pageUrl);
+        }
 		return model;
     }
 	
@@ -66,7 +85,7 @@ public class OrgUserController extends BaseController {
     @RequestMapping(value = "/updateOrgUserPassWord", method = RequestMethod.POST)
     public ModelAndView updateOrgUserPassWord(@RequestParam("id") Long id, 
     		@RequestParam("username") String username) {
-		ModelAndView model = this.getModelAndView();
+		ModelAndView model = new ModelAndView();
 		Integer orgUser = orgUserService.updateOrgUserPassWord(id, username);
 		model.addObject("orgUser", orgUser);
 		return model;
