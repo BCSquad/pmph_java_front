@@ -10,6 +10,7 @@
 		    t.id,
 		    t.likes,
 		    t.gmt_create,
+		    t.mid,
 		    t.comments,
 		    b.realname,
 		    b.avatar,
