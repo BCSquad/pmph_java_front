@@ -3,6 +3,7 @@
     height: auto;
     background-color: #E6E6E6;
     margin-left: 75px;
+    
 }
 .big{
     margin-left: 0px;
@@ -37,6 +38,7 @@
     padding-bottom: 9px;
     padding-left: 15px;
     padding-right: 15px;
+    line-height: 18px;
 }
 .mid{
     width: 490px;
@@ -56,6 +58,7 @@
 	font-stretch: normal;
 	letter-spacing: 0px;
 	color: #489299;
+	line-height:20px;
 }
 .right{
     width: 296px;
@@ -540,10 +543,10 @@
     z-index:10;
     display: none;
     background-color: rgba(0,0,0,0.5);
-    /*¼æÈÝie8*/
+    /*ï¿½ï¿½ï¿½ï¿½ie8*/
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F000000,endColorstr=#7F000000);
 }
-/*¼æÈÝie fixed*/
+/*ï¿½ï¿½ï¿½ï¿½ie fixed*/
 .ie{
     _position: absolute;
     _clear: both;

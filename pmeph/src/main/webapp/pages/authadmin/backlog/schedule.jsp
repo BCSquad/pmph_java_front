@@ -16,6 +16,16 @@
     <script src="${ctx}/resources/comm/jquery/jquery.pager.js"></script>
     <script src="${ctx}/resources/comm/base.js"></script>
 </head>
+<style type="text/css">
+
+         #right .select-button {
+            background: #f6f6f6;
+        }
+
+        #right .select-wrapper {
+            border: none;
+        }
+    </style>
 <body style="background-color: #f6f6f6;">
 <jsp:include page="/pages/comm/headGreenBackGround.jsp"/>
 <div class="body"  >
@@ -24,7 +34,7 @@
         <div class="big">
                 <div class="left">待办事项</div>
                 <div class="mid"><a class="midButton" href="${ctx}/schedule/eventRecord.action">办事记录</a></div>
-                <div class="right">
+                <div class="right" id="right">
                    <div style="float: right;">
                       		 筛选：
                        <select id="filtrate-select" name="filtrate-select" title="请选择">
@@ -33,10 +43,11 @@
                            <option value="month" ${time=='month' ?'selected':''}>一月内</option>
                            <option value="year" ${time=='year' ?'selected':''}>一年内</option>
                        </select>
+                       
                    </div>
                 </div>
             <div class="bigList">
-            <c:forEach items="${listMap}" var="one" varStatus="status">
+            <c:forEach items="${map.pageResult.rows}" var="one" varStatus="status">
             	<div class="list">
                     <div class="leftContent">
                         <div class="leftContentSmall">
@@ -99,20 +110,20 @@
                 </div>
             </div>
             <div class="gray ie" onclick="toogleTip('none')"></div>
-            	<c:if test="${listSize>=2 }">
+            	<c:if test="${map.pageResult.total>=1 }">
             	<div class="pageDiv">
                 <div style="float: right;">
                     <ul class="pagination" id="page1">
                     </ul>
                     <div style="display: inline-block;    vertical-align: top">
                         <select id="edu" name="edu" >
-                            <option value="2" ${pageSize=='2' ?'selected':''}>每页2条</option>
-                            <option value="3" ${pageSize=='3' ?'selected':''}>每页3条</option>
-                            <option value="4" ${pageSize=='4' ?'selected':''}>每页4条</option>
+                            <option value="2" ${map.pageResult.pageSize=='2' ?'selected':''}>每页2条</option>
+                            <option value="3" ${map.pageResult.pageSize=='3' ?'selected':''}>每页3条</option>
+                            <option value="4" ${map.pageResult.pageSize=='4' ?'selected':''}>每页4条</option>
                         </select>
                     </div>
                     <div class="pageJump">
-                        <span>共${totalPage}页，跳转到</span>
+                        <span>共${map.pageResult.pageTotal}页，跳转到</span>
                         <input type="text" id="toPage"/>
                         <span class="pp">页</span>
                         <button type="button" class="button">确定</button>
@@ -167,7 +178,6 @@
             window.location.href="${ctx}/schedule/scheduleList.action?currentPage="+n+"&pageSize="+$("input[name='edu']").val(); 
         }
     });
-    
     $(function () {
         $('#filtrate-select').selectlist({
             width: 100,
