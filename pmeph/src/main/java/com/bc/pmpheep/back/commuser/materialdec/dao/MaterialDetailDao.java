@@ -9,6 +9,8 @@ public interface MaterialDetailDao {
 		public Map<String,Object> queryMaterialbyId(String material_id);
 		//通过教材ID查出所有教材下的书籍
 		public List<Map<String,Object>> queryBookById(String material_id);
+		//通过教材ID查出相关的机构信息
+		public List<Map<String,Object>> queryOrgById(String material_id);
 		
 		//图书选择信息
 		public List<Map<String,Object>> queryTsxz(Map<String,Object> map);

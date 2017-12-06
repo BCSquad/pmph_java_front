@@ -121,6 +121,10 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 	public int insertGjghjc(Map<String, Object> map) {
 		return this.madd.insertGjghjc(map);
 	}
+	@Override
+	public List<Map<String, Object>> queryOrgById(String material_id) {
+		return this.madd.queryOrgById(material_id);
+	}
 
 	
 }

@@ -3,12 +3,18 @@
 <mapper namespace="com.bc.pmpheep.back.commuser.materialdec.dao.MaterialDetailDao" >
 	<!-- 通过教材ID查询出教材信息 -->
 	<select id="queryMaterialbyId" resultType="java.util.Map" parameterType="java.lang.String">
-		select * from material where id = #{material_id}
+		select t1.*,t2.extension_name,t2.is_required from material t1 left join material_extension t2 
+			on t1.id=t2.material_id where t1.id = #{material_id}
 	</select>
 	
 	<!-- 通过教材ID查询所有书籍 -->
 	<select id="queryBookById" resultType="java.util.Map" parameterType="java.lang.String">
 		select * from textbook where material_id = #{material_id}
+	</select>
+	<!-- 通过教材ID查出相关的机构信息 -->
+	<select id="queryOrgById" resultType="java.util.Map" parameterType="java.lang.String">
+		select * from material_org t1 LEFT JOIN org t2 on t1.org_id = t2.id
+			where t1.material_id = #{material_id}
 	</select>
 	
 	<!-- 专家信息 -->

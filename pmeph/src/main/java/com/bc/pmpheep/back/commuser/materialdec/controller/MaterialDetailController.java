@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailService;
@@ -38,7 +39,7 @@ public class MaterialDetailController extends BaseController{
 		ModelAndView mav = new ModelAndView("commuser/materialdec/toMaterialAdd");
 		Map<String,Object> userMap =  this.getUserInfo();
 		//String material_id = request.getParameter("material_id"); //教材ID
-		String material_id = "119";
+		String material_id = "124";
 		//教材信息
 		Map<String,Object> materialMap = new HashMap<String,Object>();
 		materialMap = this.mdService.queryMaterialbyId(material_id);
@@ -48,14 +49,39 @@ public class MaterialDetailController extends BaseController{
 		for (Map<String, Object> map : bookList) {
 			bookSelects.append("<option value='"+map.get("id")+"'>"+map.get("textbook_name")+"</option>");
 		}
+		//机构信息
+		List<Map<String,Object>> orgList = this.mdService.queryOrgById(material_id);
+		StringBuffer orgSelects = new StringBuffer();
+		if(orgList.size()>0){
+		for (Map<String, Object> map : orgList) {
+			orgSelects.append("<option value='"+map.get("org_id")+"'>"+map.get("org_name")+"</option>");
+		}}
 		mav.addObject("bookSelects", bookSelects.toString());
+		mav.addObject("orgSelects", orgSelects.toString());
 		mav.addObject("materialMap", materialMap);
 		mav.addObject("userMap", userMap);
+		mav.addObject("material_id", materialMap.get("id"));
 		return mav;
+	}
+	
+	/**
+	 * 页面组合方法，主要js中通过ajax传值对新增页面模块进行初始化操作
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("queryMaterialMap")
+	@ResponseBody
+	public Map<String,Object> queryMaterialMap(HttpServletRequest request){
+		//教材信息
+		String material_id = request.getParameter("material_id");
+		Map<String,Object> materialMap = new HashMap<String,Object>();
+		materialMap = this.mdService.queryMaterialbyId(material_id);
+		return materialMap;
 	}
 	
 	//执行添加
 	@RequestMapping("doMaterialAdd")
+	@ResponseBody
 	public String doMaterialAdd(HttpServletRequest request,
 			HttpServletResponse response){
 		//公共参数
