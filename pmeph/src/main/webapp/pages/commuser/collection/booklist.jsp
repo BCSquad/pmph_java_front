@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <input type="hidden" id="favoriteId" value="${favoriteId }"/>
            <span class="del" onclick="delFavorite('${favoriteId }')">删除收藏夹</span>
        </div>
-       <c:forEach items="${booklist }" var="book">
+       <c:forEach items="${booklist.rows}" var="book">
        <div class="collection">
            <div class="title" >
                <input type="hidden" id="mark${book.mid }" value="${book.mid }"/>
@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            </div>
            <div class="content" >
                <div class="content-img">
-                   <img src="${book.image_url }" />
+                   <img src="${book.image_url}" />
                </div>
                <div class="content-text">
                        <div class="text" >
@@ -71,23 +71,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            </div>
        </div>
        </c:forEach>
-       <input type="hidden" id="bookcount" value="${bookcount }" />
-       <input type="hidden" id="pagenum" value="${pagenum }" />
-       <input type="hidden" id="pagesize" value="${pagesize }" />
-       <input type="hidden" id="pages" value="${pages }" />
+       <input type="hidden" id="bookcount" value="${booklist.total }" />
+       <input type="hidden" id="pagenum" value="${booklist.pageNumber }" />
+       <input type="hidden" id="pagesize" value="${booklist.pageSize }" />
+       <input type="hidden" id="pages" value="${booklist.pageTotal}" />
        <div style="margin-top: 30px;text-align:right;">     
            <ul class="pagination" id="page1">
            </ul>
            <div style="display: inline-block;vertical-align: top;text-align:left;">
                <select id="edu" name="edu">
-                   <option value="5" ${pagesize=="5"? "selected":"" }>每页5条</option>
-                   <option value="10" ${pagesize=="10"? "selected":"" }>每页10条</option>
-                   <option value="15" ${pagesize=="15"? "selected":"" }>每页15条</option>
-                   <option value="20" ${pagesize=="20"? "selected":"" }>每页20条</option>
+                   <option value="5" ${booklist.pageSize=="5"? "selected":"" }>每页5条</option>
+                   <option value="10" ${booklist.pageSize=="10"? "selected":"" }>每页10条</option>
+                   <option value="15" ${booklist.pageSize=="15"? "selected":"" }>每页15条</option>
+                   <option value="20" ${booklist.pageSize=="20"? "selected":"" }>每页20条</option>
                </select>
            </div>
            <div class="pageJump">
-               <span>共${pages }页，跳转到</span>
+               <span>共${booklist.pageTotal}页，${booklist.total }条数据，跳转到</span>
                <input type="text"/>
                <span class="pp">页</span>
                <button type="button" class="button">确定</button>
