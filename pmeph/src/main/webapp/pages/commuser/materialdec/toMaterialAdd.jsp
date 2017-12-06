@@ -28,7 +28,7 @@
 		</div>
 		<!-- 图书选择-->
 		<form id="objForm">
-		<div class="sbxq_item" id="tsxz">
+		<div class="sbxq_item1" id="tsxz">
 			<div>
 				<input type="hidden" id="select_nr" value="${bookSelects}"/>
 				<input type="hidden" id="material_id" name="material_id" value="${materialMap.id}"/>
@@ -55,7 +55,7 @@
 			</div>
 		</div>
 		<!-- 专家信息-->
-		<div class="sbxq_item">
+		<div class="sbxq_item1">
 			<div>
 				<span id="tsxz_span2"></span>
 				<span class="tsxz_title">专家信息</span>
@@ -124,7 +124,7 @@
 			</div>
 		</div>
 		<!--主要学习经历-->
-		<div class="sbxq_item" id="zyxxjl" style="display: none">
+		<div class="sbxq_item" id="zyxxjl">
 			<div>
 				<span id="tsxz_span3"></span>
 				<span class="tsxz_title">主要学习经历</span>
@@ -267,11 +267,12 @@
 			</div>
 		</div>
 			<!--上版教材参编情况-->
-		<div class="sbxq_item">
+		<div class="sbxq_item" id="sbjccb">
 			<div>
 				<span id="tsxz_span6"></span>
 				<span class="tsxz_title">上版教材参编情况</span>
-				<span class="tsxz_ts"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_ts" id="sbjccb_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_xt" id="sbjccb_xt" >（选填）</span>
 			</div>
 			<div class="content">
 				<table class="tab_2" id="tab_jccb">
@@ -299,10 +300,12 @@
 			</div>
 		</div>
 			<!--国家级精品课程建设-->
-		<div class="sbxq_item">
+		<div class="sbxq_item" id="gjjpkcjs">
 			<div>
 				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">国家级精品课程建设情况（选填）</span>
+				<span class="tsxz_title">国家级精品课程建设情况</span>
+				<span class="tsxz_ts" id="gjjpkcjs_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_xt" id="gjjpkcjs_xt" >（选填）</span>
 			</div>
 			<div class="content">
 				<table class="tab_2" id="tab_jpkcjs">
@@ -328,10 +331,12 @@
 			</div>
 		</div>
 		<!--省部级课程建设-->
-		<div class="sbxq_item">
+		<div class="sbxq_item" id="sbkcjs">
 			<div>
 				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">省部级课程建设情况（选填）</span>
+				<span class="tsxz_title">省部级课程建设情况</span>
+				<span class="tsxz_ts" id="sbkcjs_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_xt" id="sbkcjs_xt" >（选填）</span>
 			</div>
 			<div class="content">
 				<table class="tab_2" id="tab_sjkcjs">
@@ -356,11 +361,13 @@
 				</table>
 			</div>
 		</div>
-		<!--作家国家级精品课程建设-->
-		<div class="sbxq_item">
+		<!--学校课程建设情况-->
+		<div class="sbxq_item" id="xxkcjs">
 			<div>
 				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">学校课程建设情况（选填）</span>
+				<span class="tsxz_title">学校课程建设情况</span>
+				<span class="tsxz_ts" id="xxkcjs_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_xt" id="xxkcjs_xt" >（选填）</span>
 			</div>
 			<div class="content">
 				<table class="tab_2" id="tab_xskcjs">
@@ -386,10 +393,12 @@
 			</div>
 		</div>
 		<!--主编国家级规划教材情况-->
-		<div class="sbxq_item">
+		<div class="sbxq_item" id="zbgjjgh">
 			<div>
 				<span id="tsxz_span7"></span>
 				<span class="tsxz_title">主编国家级规划教材情况</span>
+				<span class="tsxz_ts" id="zbgjjgh_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_xt" id="zbgjjgh_xt" >（选填）</span>
 			</div>
 			<div class="content">
 				<table class="tab_2" id="tab_gjghjc">
@@ -419,10 +428,12 @@
 			</div>
 		</div>
 			<!--教材编写情况-->
-		<div class="sbxq_item">
+		<div class="sbxq_item" id="jcbxqk">
 			<div>
 				<span id="tsxz_span7"></span>
 				<span class="tsxz_title">教材编写情况</span>
+				<span class="tsxz_ts" id="jcbxqk_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_xt" id="jcbxqk_xt" >（选填）</span>
 			</div>
 			<div class="content">
 				<table class="tab_2" id="tab_jcbx">
@@ -469,10 +480,12 @@
 			</div>
 		<div>
 		<!--作家科研情况-->
-		<div class="sbxq_item">
+		<div class="sbxq_item" id="zjkyqk">
 			<div>
 				<span id="tsxz_span7"></span>
 				<span class="tsxz_title">作家科研情况</span>
+				<span class="tsxz_ts" id="zjkyqk_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_xt" id="zjkyqk_xt" >（选填）</span>
 			</div>
 			<div class="content">
 				<table class="tab_2" id="tab_zjky">
@@ -509,7 +522,7 @@
 			<hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">
 		</div> -->
 		<!-- 申报单位-->
-		<div class="sbxq_item">
+		<div class="sbxq_item1">
 			<div>
 				<span id="tsxz_span8"></span>
 				<span class="tsxz_title">请选择你的申报单位</span>

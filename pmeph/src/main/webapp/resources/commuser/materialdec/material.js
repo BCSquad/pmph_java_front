@@ -1,6 +1,6 @@
 $(function () {
 	var id = $("#material_id").val();
-//	queryMaterialMap(id);  //执行查询方法
+	queryMaterialMap(id);  //执行查询方法
     $('.select-input').selectlist({
         zIndex: 10,
         width: 192,
@@ -94,51 +94,63 @@ function chooseModel(data){
 	}
 	//上版教材参编情况
 	if(data.is_last_position_used == "1"){
-		$("#zyxxjl").css("display","block");
+		$("#sbjccb").css("display","block");
 	}
 	//上版教材参编情况必填
 	if(data.is_last_position_required == "1"){
-		$("#zyxxjl").css("display","block");
+		$("#sbjccb_bt").css("display","block");
+	}else{
+		$("#sbjccb_xt").css("display","block");
 	}
 	//国家级课程建设情况
 	if(data.is_national_course_used == "1"){
-		$("#zyxxjl").css("display","block");
+		$("#gjjpkcjs").css("display","block");
 	}
 	//国家级课程建设情况必填
 	if(data.is_national_course_required == "1"){
-		$("#zyxxjl").css("display","block");
+		$("#gjjpkcjs_bt").css("display","block");
+	}else{
+		$("#gjjpkcjs_xt").css("display","block");
 	}
 	//省部级课程建设情况
 	if(data.is_provincial_course_used == "1"){
-		$("#zyxxjl").css("display","block");
+		$("#sbkcjs").css("display","block");
 	}
 	//省部级课程建设情况必填
 	if(data.is_provincial_course_required == "1"){
-		$("#zyxxjl").css("display","block");
+		$("#sbkcjs_bt").css("display","block");
+	}else{
+		$("#sbkcjs_xt").css("display","block");
 	}
 	//学校课程建设情况
 	if(data.is_school_course_used == "1"){
-		$("#zyxxjl").css("display","block");
+		$("#xxkcjs").css("display","block");
 	}
 	//学校课程建设情况必填
 	if(data.is_school_course_required == "1"){
-		$("#zyxxjl").css("display","block");
+		$("#xxkcjs_bt").css("display","block");
+	}else{
+		$("#xxkcjs_xt").css("display","block");
 	}
 	//主编国家规划教材情况
 	if(data.is_national_plan_used == "1"){
-		$("#zyxxjl").css("display","block");
+		$("#zbgjjgh").css("display","block");
 	}
 	//主编国家规划教材情况必填
 	if(data.is_national_plan_required == "1"){
-		$("#zyxxjl").css("display","block");
+		$("#zbgjjgh_bt").css("display","block");
+	}else{
+		$("#zbgjjgh_xt").css("display","block");
 	}
 	//教材编写情况
 	if(data.is_textbook_used == "1"){
-		$("#zyxxjl").css("display","block");
+		$("#jcbxqk").css("display","block");
 	}
 	//教材编写情况必填
 	if(data.is_textbook_required == "1"){
-		$("#zyxxjl").css("display","block");
+		$("#jcbxqk_bt").css("display","block");
+	}else{
+		$("#jcbxqk_xt").css("display","block");
 	}
 	//其他教材编写情况
 	if(data.is_other_textbook_used == "1"){
@@ -150,11 +162,13 @@ function chooseModel(data){
 	}
 	//科研情况
 	if(data.is_research_used == "1"){
-		$("#zyxxjl").css("display","block");
+		$("#zjkyqk").css("display","block");
 	}
 	//科研情况必填
 	if(data.is_research_required == "1"){
-		$("#zyxxjl").css("display","block");
+		$("#zjkyqk_bt").css("display","block");
+	}else{
+		$("#zjkyqk_xt").css("display","block");
 	}
 }
 
