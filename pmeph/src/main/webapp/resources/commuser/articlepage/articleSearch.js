@@ -78,5 +78,5 @@ function jump(){
 //模糊查询
 function queryall(){
 	var title=$("#selectall").val();
-	location.href=contxtpath+'/articlesearch/queryall.action?title='+title;
+	location.href=contextpath+'/articlesearch/queryall.action?title='+title;
 }

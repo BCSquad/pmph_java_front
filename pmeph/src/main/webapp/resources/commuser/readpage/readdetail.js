@@ -100,7 +100,7 @@ function change(){
 
 //人卫推荐跳转到详情书
 function todetail(flag){
-	location.href=contxtpath+'/readdetail/todetail.action?id='+flag;
+	location.href=contextpath+'/readdetail/todetail.action?id='+flag;
 }
 //点赞
 function addlikes(){
@@ -112,9 +112,9 @@ function addlikes(){
 			dataType:'json',
 			success:function(json){
 				if(json.returncode=="yes"){
-					$("#dz").attr("src",contxtpath+"/statics/image/dz02.png");
+					$("#dz").attr("src",contextpath+"/statics/image/dz02.png");
 				}else{
-					$("#dz").attr("src",contxtpath+"/statics/image/dz01.png");
+					$("#dz").attr("src",contextpath+"/statics/image/dz01.png");
 				}
 			}
 		});

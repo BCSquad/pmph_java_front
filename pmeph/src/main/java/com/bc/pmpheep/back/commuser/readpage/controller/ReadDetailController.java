@@ -44,8 +44,7 @@ public class ReadDetailController extends BaseController{
 	@RequestMapping("/todetail")
 	public ModelAndView move(HttpServletRequest request){
 		ModelAndView modelAndView=new ModelAndView();
-//		String id=request.getParameter("id");
-		String id="168";
+		String id=request.getParameter("id");
 		Map<String, Object> supMap=readDetailService.querySupport(id);
 		Map<String, Object> map=readDetailService.queryReadBook(id);
 		String author="%"+map.get("author").toString()+"%";
