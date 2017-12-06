@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.common.service.BaseService;
@@ -24,7 +25,7 @@ import com.bc.pmpheep.service.exception.CheckedServiceException;
  * @author tyc
  * 
  */
-@Service
+@Service("com.bc.pmpheep.back.commuser.user.service.OrgUserServiceImpl")
 public class OrgUserServiceImpl extends BaseService implements OrgUserService {
     @Autowired
     private OrgUserDao orgUserDao;

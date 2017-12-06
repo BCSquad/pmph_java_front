@@ -35,6 +35,7 @@ public class OrgUserController extends  com.bc.pmpheep.general.controller.BaseCo
 	@Qualifier("com.bc.pmpheep.back.commuser.user.service.WriterUserServiceImpl")
 	private WriterUserService writerUserService;
 	@Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.user.service.OrgUserServiceImpl")
 	private OrgUserService orgUserService;
 	
 	/**
@@ -43,10 +44,9 @@ public class OrgUserController extends  com.bc.pmpheep.general.controller.BaseCo
 	 * @return
 	 */
     @RequestMapping(value = "/writerLists")
-    public ModelAndView writerLists(Integer pageSize, Integer pageNumber,WriterUser writerUser,
-    		HttpServletRequest request,HttpServletResponse response)
+    public ModelAndView writerLists(Integer pageSize, Integer pageNumber,WriterUser writerUser)
     		throws Exception{
-		ModelAndView model = new ModelAndView("commuser/user/writerLists");
+		ModelAndView model = new ModelAndView();
 		//获取当前用户 
 		Map<String,Object> writerUserMap=this.getUserInfo();
 		OrgUser orgUser=new OrgUser();
@@ -54,7 +54,7 @@ public class OrgUserController extends  com.bc.pmpheep.general.controller.BaseCo
 		PageParameter<WriterUser> pageParameter = new PageParameter<>(pageNumber, pageSize);
 		writerUser.setOrgId(orgUser.getOrgId());
 		pageParameter.setParameter(writerUser);
-	    String pageUrl = "";
+	    String pageUrl = "commuser/user/writerLists";
         try {
         	PageResult<WriterUser> page = writerUserService.getOrg(pageParameter);
             model.setViewName(pageUrl);
