@@ -85,7 +85,7 @@
 	<select id="fresh" parameterType="java.util.Map" resultType="java.util.Map">
 	   select * from book where type=#{type} Order By rand()  limit 0,9
 	</select>
-	<!-- 根据书籍ID增加点赞数 -->
+	<!-- 根据书籍ID改变点赞数 -->
 	<update id="addlikes" parameterType="java.util.Map"> 
 	   update book set likes=#{likes} where id=#{book_id}
 	</update>
@@ -93,11 +93,15 @@
 	<insert id="insertlikes" parameterType="java.util.Map">
 	   insert into book_user_like (book_id,writer_id) values (#{book_id},#{writer_id})
 	</insert>
-	<!-- 查询点赞数 -->
+	<!-- 查询是否点过赞 -->
 	<select id="queryLikes" parameterType="java.util.Map" resultType="java.util.Map">
 	  select * from book_user_like where book_id=#{book_id} and writer_id=#{writer_id}
 	</select>
-	<!--查询用户收藏夹下是否已收藏此书籍  -->
+	<!-- 根据ID删除点赞记录 -->
+	<update id="dellikes" parameterType="java.util.Map"> 
+	  delete from book_user_like where id=#{id}
+	</update>
+	<!-- 查询用户收藏夹下是否已收藏此书籍  -->
 	<select id="queryMark" parameterType="map" resultType="int">
 	  select count(id) from book_user_mark where book_id=#{bookId} and writer_id=#{writerId} and favorite_id=#{favoriteId}
 	</select>
@@ -108,7 +112,6 @@
 	<!-- 更新书籍的收藏数量 -->
 	<update id="updateMarks" parameterType="map">
 	   update book set bookmarks=#{marks} where id=#{bookId}
-	 
 	</update>
 	<!-- 查询书籍的收藏数 -->
 	<select id="queryBookMarks" parameterType="java.util.Map" resultType="long">

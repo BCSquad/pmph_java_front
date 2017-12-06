@@ -95,6 +95,11 @@ public interface ReadDetailDao {
 	 * @return long
 	 */
 	long queryBookMarks(@Param("bookId") long bookId);
-	
+	/**
+	 * 删除点赞表里面的记录
+	 * @param map
+	 * @return int
+	 */
+	int dellikes(Map<String, Object> map);
 	
 }

@@ -44,15 +44,30 @@ public class ReadDetailController extends BaseController{
 	@RequestMapping("/todetail")
 	public ModelAndView move(HttpServletRequest request){
 		ModelAndView modelAndView=new ModelAndView();
-		String id=request.getParameter("id");
-/*		id="168";*/
-		List<Map<String,Object>> flist = bookCollectionService.queryBookCollectionList(new BigInteger("12179"));
-		Map<String, Object> map=readDetailService.queryReadBook(id);
-		List<Map<String, Object>> listCom=readDetailService.queryComment(id);
+//		String id=request.getParameter("id");
+		String id="168";
 		Map<String, Object> supMap=readDetailService.querySupport(id);
-		List<Map<String, Object>> eMap=readDetailService.queryRecommendByE(0);
+		Map<String, Object> map=readDetailService.queryReadBook(id);
 		String author="%"+map.get("author").toString()+"%";
+		List<Map<String, Object>> eMap=readDetailService.queryRecommendByE(0);
+		List<Map<String,Object>> flist = bookCollectionService.queryBookCollectionList(new BigInteger("12179"));
+		List<Map<String, Object>> listCom=readDetailService.queryComment(id);
 		List<Map<String, Object>> auList=readDetailService.queryAuthorType(author);
+		for (Map<String, Object> pmap : auList) {
+			if(("DEFAULT").equals(pmap.get("image_url"))){
+				pmap.put("image_url", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+			}
+		}
+		Map<String, Object> user=getUserInfo();
+		Map<String, Object> zmap=new HashMap<String, Object>();
+		zmap.put("book_id", id);
+		zmap.put("writer_id", user.get("id"));
+		List<Map<String, Object>> list=readDetailService.queryLikes(zmap);
+		if(list.size()>0){
+			modelAndView.addObject("flag", "yes");
+		}else{
+			modelAndView.addObject("flag","no");
+		}
 		modelAndView.addObject("auList", auList);
 		if(auList.size()<9){
 			//该作者的书籍不足9本，根据书籍的类型凑足9本
@@ -62,6 +77,11 @@ public class ReadDetailController extends BaseController{
 			typeMap.put("type",map.get("type"));
 			typeMap.put("author", map.get("author"));
 			List<Map<String, Object>> tMaps=readDetailService.queryBookByType(typeMap);
+			for (Map<String, Object> pmap : tMaps) {
+				if(("DEFAULT").equals(pmap.get("image_url"))){
+					pmap.put("image_url", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+				}
+			}
 			modelAndView.addObject("tMaps", tMaps);
 		}
 		modelAndView.addObject("flist", flist);
@@ -100,12 +120,17 @@ public class ReadDetailController extends BaseController{
 	 */
 	@RequestMapping("/change")
 	@ResponseBody
-	public List<Map<String, Object>> change(){
+	public List<Map<String, Object>> change(HttpServletRequest request){
 		List<Map<String, Object>> eMap=readDetailService.queryRecommendByE(-1);
 		int num=eMap.size();
 		if(num>5){
 			int x=(int)(Math.random()*(num-5));
 			List<Map<String, Object>> cMap=readDetailService.queryRecommendByE(x);
+			for (Map<String, Object> pmap : cMap) {
+				if(("DEFAULT").equals(pmap.get("image_url"))){
+					pmap.put("image_url", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+				}
+			}
 			return cMap;
 		}else{
 			return null;
@@ -135,6 +160,11 @@ public class ReadDetailController extends BaseController{
 		Map<String, Object> pmap=new HashMap<String, Object>();
 		pmap.put("type", x);
 		List<Map<String, Object>> map=readDetailService.fresh(pmap);
+		for (Map<String, Object> zmap : map) {
+			if(("DEFAULT").equals(zmap.get("image_url"))){
+				zmap.put("image_url", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+			}
+		}
 		return map;
 	}
 	
@@ -147,21 +177,27 @@ public class ReadDetailController extends BaseController{
 	@ResponseBody
 	public Map<String, Object> addlikes(HttpServletRequest request){
 		String id=request.getParameter("id");
+		Map<String, Object> pmap=readDetailService.queryReadBook(id);
+		int likes=Integer.parseInt(pmap.get("likes").toString());
 		Map<String, Object> user=getUserInfo();
 		Map<String, Object> zMap=new HashMap<String, Object>();
 		zMap.put("book_id", id);
 		zMap.put("writer_id", user.get("id"));
 		List<Map<String, Object>> list=readDetailService.queryLikes(zMap);
 		Map<String, Object> map=new HashMap<String, Object>();
-		if(list.size()>=0){
-			map.put("returncode", "yes");
+		if(list.size()>0){
+			Map<String, Object> iMap=new HashMap<String, Object>();
+			iMap.put("id", list.get(0).get("id"));
+			iMap.put("book_id", id);
+			iMap.put("likes", likes-1);
+			iMap.put("flag", "del");
+			map=readDetailService.addlikes(iMap);
 		}else{
-			Map<String, Object> pmap=readDetailService.queryReadBook(id);
-			int likes=Integer.parseInt(pmap.get("likes").toString());
 			Map<String, Object> iMap=new HashMap<String, Object>();
 			iMap.put("writer_id", user.get("id"));
 			iMap.put("book_id", id);
 			iMap.put("likes", likes+1);
+			iMap.put("flag", "add");
 	 		map=readDetailService.addlikes(iMap);
 		}
 	    return map;

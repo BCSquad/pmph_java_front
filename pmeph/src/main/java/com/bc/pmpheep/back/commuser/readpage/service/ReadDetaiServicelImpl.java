@@ -108,10 +108,18 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 	@Override
 	public Map<String, Object> addlikes(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		readDetailDao.addlikes(map);
-		readDetailDao.insertlikes(map);
 		Map<String, Object> pmap=new HashMap<String, Object>();
-		pmap.put("returncode", "no");
+		if(("del").equals(map.get("flag"))){
+			readDetailDao.addlikes(map);
+			int count=readDetailDao.dellikes(map);
+			if(count>0){
+				pmap.put("returncode", "yes");
+			}
+		}else{
+			readDetailDao.addlikes(map);
+			readDetailDao.insertlikes(map);
+			pmap.put("returncode", "no");
+		}
 		return pmap;
 	}
 
