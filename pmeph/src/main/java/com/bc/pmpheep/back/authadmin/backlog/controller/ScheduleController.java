@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.authadmin.backlog.service.ScheduleService;
+import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.general.pojo.Message;
 import com.bc.pmpheep.general.service.MessageService;
 import com.sun.org.apache.bcel.internal.generic.SIPUSH;
@@ -54,7 +57,12 @@ public class ScheduleController {
 		//查询条件
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd 00:00:00.0");
         Calendar c = Calendar.getInstance();
+        paraMap.put("week", null);
+    	paraMap.put("month", null);
+    	paraMap.put("year", null);
         if(null!=time&&!time.equals("")){
+        	
+        	
         	 if(time.equals("week")){
              	//过去七天
                  c.setTime(new Date());
@@ -76,11 +84,8 @@ public class ScheduleController {
                   Date d = c.getTime();
                   String year = format.format(d);
                   paraMap.put("year", year);
-             }else if(time.equals("year")){
-            	  paraMap.put("all", "all");
              }
-        } 
-       
+        }
         
 		int currentPage = 0;
 		int pageSize = 2;
@@ -92,20 +97,25 @@ public class ScheduleController {
 			 pageSize = Integer.parseInt(pageSizeStr);
 		}
 		
+		
 		if(currentPage==0){
 			paraMap.put("startPage", currentPage);
 		}else{
 			paraMap.put("startPage", currentPage*pageSize-pageSize);
 		}
 		
+		PageParameter<Map<String,Object>> pageParameter = new PageParameter<>(currentPage,pageSize);
+		
 		paraMap.put("userId", userId);
 		paraMap.put("endPage", pageSize);
 		
+		pageParameter.setParameter(paraMap);
 		//代办事项列表
-		List<Map<String,Object>> list = scheduleService.selectScheduleList(paraMap);
-		int pageCount = scheduleService.selectScheduleCount(paraMap);
+		PageResult<Map<String,Object>> pageResult = scheduleService.selectScheduleList(pageParameter);
+		//int pageCount = scheduleService.selectScheduleCount(paraMap);
 		//机构用户基本信息
 		Map<String,Object> map = scheduleService.selectOrgUser(userId);
+		
 		boolean license =  (boolean) map.get("is_proxy_upload");
 		boolean progress = map.get("progress")=="1"?true:false;
 		if(license==true&&progress==true){
@@ -115,18 +125,29 @@ public class ScheduleController {
 		}
 		
 		//总页数
-		int totalPage  = pageCount/pageSize;
+		/*int totalPage  = pageCount/pageSize;
 		if(pageCount%pageSize>0){
 			totalPage+=1;
-		}
+		}*/
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("listMap",list);
+		map.put("time", time);
+		map.put("pageResult", pageResult);
 		mv.addObject("map",map);
-		mv.addObject("listSize",list.size());
-		mv.addObject("totalPage",totalPage);
-		mv.addObject("currentPage",currentPage);
-		mv.addObject("pageSize",pageSize);
-		mv.addObject("time",time);
+		
+		/*PageResult pageResult= new PageResult();
+		pageResult.setPageNumber(currentPage);
+		pageResult.setPageSize(pageSize);
+		pageResult.setPageTotal(totalPage);
+		pageResult.setTotal(list.size());
+		pageResult.setRows(list);*/
+		//mv.addObject("list",list);
+		//mv.addObject("listMap",list);
+		//mv.addObject("map",map);
+		//mv.addObject("listSize",list.size());
+		//mv.addObject("totalPage",totalPage);
+		//mv.addObject("currentPage",currentPage);
+		//mv.addObject("pageSize",pageSize);
+		//mv.addObject("time",time);
 		mv.setViewName("authadmin/backlog/schedule");
 		return mv;
 		

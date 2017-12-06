@@ -3,7 +3,7 @@
 <mapper namespace="com.bc.pmpheep.back.authadmin.backlog.dao.ScheduleDao" >
 	
 	<!-- 查询待办事项列表 -->
-	<select id="selectScheduleList" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="selectScheduleList" parameterType="PageParameter" resultType="java.util.Map">
 		SELECT * FROM(
 		SELECT d.realname AS NAME,d.gmt_create AS TIME,m.`material_name` AS TYPE 
 		FROM declaration d 
@@ -12,10 +12,10 @@
 		LEFT JOIN org_user u
 		ON d.`org_id` = u.`org_id`
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
-			u.`id` = #{userId} AND d.online_progress='1'
-			<if test="null!=week">AND d.gmt_create >= #{week} </if>
-			<if test="null!=month">AND d.gmt_create >= #{month}</if>
-			<if test="null!=year">AND d.gmt_create >= #{year}</if>
+			u.`id` = #{parameter.userId} AND d.online_progress='1'
+			<if test="null!=parameter.week">AND d.gmt_create >= #{parameter.week} </if>
+			<if test="null!=parameter.month">AND d.gmt_create >= #{parameter.month}</if>
+			<if test="null!=parameter.year">AND d.gmt_create >= #{parameter.year}</if>
 		</trim>
 		ORDER BY d.gmt_create DESC) t1
 		UNION 
@@ -26,13 +26,13 @@
 		LEFT JOIN writer_user w1		
 		ON w1.id= w.user_id 
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
-			u1.`id` = #{userId} AND w.progress='1' 
-			<if test="null!=week">AND w.gmt_create >= #{week} </if>
-			<if test="null!=month">AND w.gmt_create >= #{month}</if>
-			<if test="null!=year">AND w.gmt_create >= #{year}</if>
+			u1.`id` = #{parameter.userId} AND w.progress='1' 
+			<if test="null!=parameter.week">AND w.gmt_create >= #{parameter.week} </if>
+			<if test="null!=parameter.month">AND w.gmt_create >= #{parameter.month}</if>
+			<if test="null!=parameter.year">AND w.gmt_create >= #{parameter.year}</if>
 		</trim>
 		ORDER BY w.gmt_create DESC) t2
-		limit #{startPage},#{endPage}
+		limit #{start},#{pageSize}
 	</select>
 	<!-- 查询待办事项条数 -->
 	<select id="selectScheduleCount" parameterType="java.util.Map" resultType="int" >
@@ -45,11 +45,10 @@
 		LEFT JOIN org_user u
 		ON d.`org_id` = u.`org_id`
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
-			u.`id` = #{userId} AND d.online_progress='1'
-			<if test="null!=week">AND d.gmt_create >= #{week} </if>
-			<if test="null!=month">AND d.gmt_create >= #{month}</if>
-			<if test="null!=year">AND d.gmt_create >= #{year}</if>
-			<if test="null!=all"></if>
+			u.`id` = #{parameter.userId} AND d.online_progress='1'
+			<if test="null!=parameter.week">AND d.gmt_create >= #{parameter.week} </if>
+			<if test="null!=parameter.month">AND d.gmt_create >= #{parameter.month}</if>
+			<if test="null!=parameter.year">AND d.gmt_create >= #{parameter.year}</if>
 		</trim>
 		ORDER BY d.gmt_create DESC) t1
 		UNION 
@@ -60,10 +59,10 @@
 		LEFT JOIN writer_user w1		
 		ON w1.id= w.user_id 
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
-			u1.`id` = #{userId} AND w.progress='1' 
-			<if test="null!=week">AND w.gmt_create >= #{week} </if>
-			<if test="null!=month">AND w.gmt_create >= #{month}</if>
-			<if test="null!=year">AND w.gmt_create >= #{year}</if>
+			u1.`id` = #{parameter.userId} AND w.progress='1' 
+			<if test="null!=parameter.week">AND w.gmt_create >= #{parameter.week} </if>
+			<if test="null!=parameter.month">AND w.gmt_create >= #{parameter.month}</if>
+			<if test="null!=parameter.year">AND w.gmt_create >= #{parameter.year}</if>
 		</trim>
 		ORDER BY w.gmt_create DESC) t2)t3
 	</select>
