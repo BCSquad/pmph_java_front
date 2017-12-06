@@ -123,7 +123,7 @@ public class BookVO implements Serializable {
     /**
      * 图书详情
      */
-    private String  content;
+    private String  detail;
 
     /**
      * 书籍类别根目录
@@ -134,6 +134,10 @@ public class BookVO implements Serializable {
      */
     private String  typeName;
     private String  name;
+    /**
+     * 排序1:综合，2：最新，3：最热
+     */
+    private Integer order;
 
     public Long getId() {
         return id;
@@ -502,17 +506,17 @@ public class BookVO implements Serializable {
     }
 
     /**
-     * @return the content
+     * @return the detail
      */
-    public String getContent() {
-        return content;
+    public String getDetail() {
+        return detail;
     }
 
     /**
-     * @param content the content to set
+     * @param detail the detail to set
      */
-    public void setContent(String content) {
-        this.content = content;
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
     /**
@@ -527,6 +531,20 @@ public class BookVO implements Serializable {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return the order
+     */
+    public Integer getOrder() {
+        return order;
+    }
+
+    /**
+     * @param order the order to set
+     */
+    public void setOrder(Integer order) {
+        this.order = order;
     }
 
 }

@@ -37,7 +37,7 @@ import com.bc.pmpheep.service.exception.CheckedExceptionBusiness;
 import com.bc.pmpheep.service.exception.CheckedExceptionResult;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 
-@Service
+@Service("com.bc.pmpheep.back.commuser.book.service.BookServiceImpl")
 public class BookServiceImpl extends BaseService implements BookService {
     private static Properties  pmphapiconfigPro = null;
     private static InputStream pmphapiconfigIs  = null;
