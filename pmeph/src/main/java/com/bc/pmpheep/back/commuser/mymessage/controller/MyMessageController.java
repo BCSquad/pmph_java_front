@@ -99,5 +99,13 @@ public class MyMessageController  extends  com.bc.pmpheep.general.controller.Bas
 		return lst;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/senNewMsg", method = RequestMethod.POST)
+	public String senNewMsg(@RequestParam(value="friendId")Long friendId,@RequestParam(value="title")String title,@RequestParam(value="content")String content){
+		Map <String,Object> writerUser = this.getUserInfo();
+		Long thisId = new Long(String.valueOf(writerUser.get("id")));
+		myMessageService.senNewMsg(thisId, friendId,title, content);
+		return "success";
+	}
 
 }

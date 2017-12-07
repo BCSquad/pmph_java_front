@@ -77,5 +77,147 @@
 			and ((a.sender_id = #{thisId} and a.receiver_id = #{friendId} ) or (a.sender_id = #{friendId}   and  a.receiver_id = #{thisId}))
 		ORDER BY a.gmt_create asc 
 	</select>
+	
+	<sql id="key">
+		<!-- 去掉最后一个, -->
+		<trim suffixOverrides=",">
+			<if test="msgId != null and msgId !=''">
+				msg_id,
+			</if>
+			<if test="msgType != null">
+				msg_type,
+			</if>
+			<if test="title != null and title !='' ">
+				title,
+			</if>
+			<if test="senderId != null ">
+				sender_id,
+			</if>
+			<if test="senderType != null ">
+				sender_type,
+			</if>
+			<if test="receiverId != null ">
+				receiver_id,
+			</if>
+			<if test="receiverType != null ">
+				receiver_type,
+			</if>
+			<if test="isRead != null ">
+				is_read,
+			</if>
+			<if test="isWithdraw != null ">
+				is_withdraw,
+			</if>
+			<if test="isDeleted != null ">
+				is_deleted,
+			</if>
+			<if test="gmtCreate != null ">
+				gmt_create,
+			</if>
+			<if test="gmtUpdate != null ">
+				gmt_update,
+			</if>
+		</trim>
+	</sql>
+	<!-- sql片段对应?,id属性值任意 -->
+	<sql id="value">
+		<!-- 去掉最后一个, -->
+		<trim suffixOverrides=",">
+			<if test="msgId != null and msgId !=''">
+				#{msgId},
+			</if>
+			<if test="msgType != null">
+				#{msgType},
+			</if>
+			<if test="title != null and title !='' ">
+				#{title},
+			</if>
+			<if test="senderId != null ">
+				#{senderId},
+			</if>
+			<if test="senderType != null ">
+				#{senderType},
+			</if>
+			<if test="receiverId != null ">
+				#{receiverId},
+			</if>
+			<if test="receiverType != null ">
+				#{receiverType},
+			</if>
+			<if test="isRead != null ">
+				#{isRead},
+			</if>
+			<if test="isWithdraw != null ">
+				#{isWithdraw},
+			</if>
+			<if test="isDeleted != null ">
+				#{isDeleted},
+			</if>
+			<if test="gmtCreate != null ">
+				#{gmtCreate},
+			</if>
+			<if test="gmtUpdate != null ">
+				#{gmtUpdate},
+			</if>
+		</trim>
+	</sql>
+	<!--单条插入 UserMessage -->
+	<insert id="addUserMessage" parameterType="MyMessage">
+		<selectKey resultType="java.lang.Long" order="AFTER"
+			keyProperty="id"> <!-- order="AFTER"表示先执行插入语句，之后再执行查询语句 BEFORE 或 AFTER -->
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into
+			user_message(
+				<include refid="key" />
+				)
+		values (
+				<include refid="value" />
+			)
+	</insert>
+
+	<!-- 通过id 动态更新UserMessage -->
+	<update id="updateUserMessage" parameterType="MyMessage">
+		update user_message
+		<set>
+			<if test="msgId != null">
+				msg_id = #{msgId},
+			</if>
+			<if test="msgType != null">
+				msg_type = #{msgType},
+			</if>
+			<if test="title != null and title != '' ">
+				title = #{title},
+			</if>
+			<if test="senderId != null">
+				sender_id = #{senderId},
+			</if>
+			<if test="senderType != null">
+				sender_type =#{senderType},
+			</if>
+			<if test="receiverId != null">
+				receiver_id =#{receiverId},
+			</if>
+			<if test="receiverType != null">
+				receiver_type = #{receiverType},
+			</if>
+			<if test="isRead != null">
+				is_read =#{isRead},
+			</if>
+			<if test="isWithdraw != null">
+				is_withdraw = #{isWithdraw},
+			</if>
+			<if test="isDeleted != null">
+				is_deleted =#{isDeleted},
+			</if>
+			<if test="gmtCreate != null">
+				gmt_create = #{gmtCreate},
+			</if>
+			<if test="gmtUpdate != null">
+				gmt_update =#{gmtUpdate},
+			</if>
+		</set>
+		where id = #{id} ;
+	</update>
 
 </mapper>

@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
 import com.bc.pmpheep.back.commuser.mymessage.bean.DialogueVO;
+import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessage;
 import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
 import com.bc.pmpheep.back.commuser.mymessage.dao.MyMessageDao;
 import com.bc.pmpheep.back.commuser.user.bean.PmphUser;
@@ -189,4 +189,31 @@ public class MyMessageServiceImpl implements MyMessageService {
 		}
 		return lst;
 	}
+	
+	@Override
+	public void senNewMsg(Long thisId,Long frendId,String title,String content){
+		Message message =  new Message ();
+		message.setContent(content);
+		messageService.add(message);
+		MyMessage userMessage = new MyMessage();
+		userMessage.setMsgId(message.getId());
+		userMessage.setMsgType(new Short("2"));
+		userMessage.setTitle(title);
+		userMessage.setSenderId(thisId);
+		userMessage.setSenderType(new Short("2"));
+		userMessage.setReceiverId(frendId);
+		userMessage.setReceiverType(new Short("2"));
+		myMessageDao.addUserMessage(userMessage);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
