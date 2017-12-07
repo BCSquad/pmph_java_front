@@ -55,7 +55,7 @@
                         <div class="articleUpDiv">
                             <div class="upLeft">
                                 <div class="bookName">
-                                    <span class="book-name-span" id="search-name">${list.title}</span>
+                                    <span class="book-name-span">${list.title}</span>
                                 </div>
                                 <div class="nameDiv">
                                     <img class="headPicture" src="../statics/pictures/avatar.png"/>
