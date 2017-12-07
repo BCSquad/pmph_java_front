@@ -30,7 +30,7 @@ $(function () {
 });
 //跳转到书籍搜索页面
 function tobookpage(){
-	window.location=contextpath+'booksearch/toPage.action?search='+$("#selectall").val()+'&&real_search=""';
+	window.location=contextpath+'booksearch/toPage.action?search='+encodeURI(encodeURI($("#selectall").val()))+'&&real_search=""';
 }
 
 //点赞/取消赞
