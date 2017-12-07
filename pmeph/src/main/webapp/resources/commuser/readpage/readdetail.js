@@ -1,19 +1,12 @@
 $(function(){
-	//初始化分页器
-//	var flag=$("#n").val();
-//	if(flag==''){
-//		flag=1;
-//	}else{
-//		flag=parseInt(flag);
-//	}
 	 Page({
-	        num: 10,	//页码数
-	        startnum: 1,	//指定页码
+	        num: parseInt($("#allppage").html()),	//页码数
+	        startnum: parseInt($("#pageNumber").val()),	//指定页码
 	        elem: $('#page1'),		    //指定的元素
-	        callback: function (n) {	//回调函数
-	           console.log(n);
-	           //location.href=contextpath+'articlesearch/change.action?n='+n+'&&m='+$('input[name=edu]').val();
-	        }
+	        callback: function (n) {    //回调函数
+	          console.log(n);
+	        	changepage(n);
+	        },
 	    });
 	   $('select').selectlist({
            zIndex: 10,
@@ -21,12 +14,96 @@ $(function(){
            height: 30,
            optionHeight: 30,
            onChange:function(){
-        	   var m=$('input[name=edu]').val();
         	   var n=1;
-        	  // location.href=contextpath+'articlesearch/change.action?n='+n+'&&m='+$('input[name=edu]').val();
+        	   changepage(n);
            }
        });
 });
+//分页前的初始化
+function beforechange(){
+	var n=$("#jumpId").val();
+	changepage(n);
+	$("#jumpId").val(null);
+}
+
+//分页的具体实现
+function changepage(n){
+	var json={
+			pageNumber:n,	
+			allppage:$('input[name=edu]').val(),
+			id:$("#book_id").val(),
+	};
+	 $.ajax({
+		type:'post',
+		url:contextpath+'readdetail/changepage.action?',
+		async:false,
+		dataType:'json',
+		data:json,
+		success:function(json){
+			var str='';
+			$.each(json.rows,function(i,n){
+				str+='<div class="item"><div class="item_title">'
+					+'<div style="float: left;"><img src="';
+					if(n.avatar==''||n.avatar=='DEFAULT'||n.avatar==null){
+						str+=contextpath+'statics/image/rwtx.png';
+					}else{
+						str+=n.avatar;
+					}
+					str+='" class="picturesize"/></div><div style="float: left;margin-left: 10px;margin-top: 5px;">'+
+					n.realname
+					+'</div><div style="float: left;margin-left: 10px;">';
+           	if(n.score<=3){
+           		str+='<span class="rwtx1"></span>'
+           		+'<span class="rwtx2"></span>'
+           		+'<span class="rwtx2"></span>'
+           		+'<span class="rwtx2"></span>'
+           		+'<span class="rwtx2"></span>'
+           	}else if(n.score<=5){
+           		str+='<span class="rwtx1"></span>'
+           		+'<span class="rwtx1"></span>'
+           		+'<span class="rwtx2"></span>'
+           		+'<span class="rwtx2"></span>'
+           		+'<span class="rwtx2"></span>'
+           	}else if(n.score<=7){
+           		str+='<span class="rwtx1"></span>'
+           		+'<span class="rwtx1"></span>'
+           		+'<span class="rwtx1"></span>'
+           		+'<span class="rwtx2"></span>'
+           		+'<span class="rwtx2"></span>'
+           	}else if(n.score<=9){
+           		str+='<span class="rwtx1"></span>'
+           		+'<span class="rwtx1"></span>'
+           		+'<span class="rwtx1"></span>'
+           		+'<span class="rwtx1"></span>'
+           		+'<span class="rwtx2"></span>'
+           	}else if(n.score==10){
+           		str+='<span class="rwtx1"></span>'
+           		+'<span class="rwtx1"></span>'
+           		+'<span class="rwtx1"></span>'
+           		+'<span class="rwtx1"></span>'
+           		+'<span class="rwtx1"></span>'
+           	}
+           	str+='</div><div class="date_content"><div class="date">'
+           	+n.gmt_create
+           	+'</div></div></div><div class="item_content">'
+           	+n.content
+           	+'</div><hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;"></div>';
+			});
+			$("#changepage").html(str);
+			$("#allppage").html(json.pageTotal);
+			Page({
+		        num: json.pageTotal,	    //页码数
+		        startnum: json.pageNumber,	//指定页码
+		        elem: $('#page1'),	        //指定的元素
+		        callback: function (n) {    //回调函数
+			          console.log(n);
+			          changepage(n);
+			        },
+		    });
+		},
+	});
+   
+};
 //新增评论
 function insert(){
 	if($("#content").val()==''){
