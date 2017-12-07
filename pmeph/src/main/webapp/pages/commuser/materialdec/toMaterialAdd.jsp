@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="${ctx}/statics/materialdec/materialadd.css" type="text/css">
 <link rel="stylesheet" href="${ctx}/statics/css/jquery.calendar.css" type="text/css">
 <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css" type="text/css">
+<script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
 <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="${ctx}/resources/commuser/materialdec/material.js"></script>
 <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.calendar.js"></script>
@@ -44,13 +45,22 @@
 				    	${bookSelects}
 				</select>
 				<div style="float: left;margin-left: 30px;" class="ts_radio">
-					<input type="radio" name="preset_position" checked="checked" value="1"/>主编
-					<input type="radio" name="preset_position" value="2"/>副编委
-					<input type="radio" name="preset_position" value="3"/>编委
+					<input type="radio" name="zw_1" checked="checked" value="1"/>主编
+					<input type="radio" name="zw_1" value="2"/>副编委
+					<input type="radio" name="zw_1" value="3"/>编委
+					<!-- 用于遍历radio中的值 -->
+					<input type="hidden" name="preset_position" value="zw_1">
 				</div>
 				<div style="float: left;margin-left: 30px;">
 					<span style="float: left;">上传教学大纲：</span>
-					<div class="scys"><span>上传文件</span></div>
+					<!-- <a>
+					<div class="scys"><span>上传文件</span>
+					</div>
+					<input type="file" multiple="multiple" class="file" id="file_id" name="file"/></a> -->
+					 <div style="display: inline;">
+		                <a href="javascript:void(0);" class="operate input">
+		                <input type="file" multiple="multiple" class="file" id="file_id" name="file" /></a>
+		            </div>
 				</div>
 			</div>
 		</div>
@@ -124,12 +134,12 @@
 			</div>
 		</div>
 		<!--主要学习经历-->
-		<div class="sbxq_item" id="zyxxjl">
+		<div class="sbxq_item1" id="zyxxjl">
 			<div>
 				<span id="tsxz_span3"></span>
 				<span class="tsxz_title">主要学习经历</span>
 				<span class="tsxz_ts" id="zyxxjl_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
-				<span id="zyxxjl_xt" class="tsxz_xt">（选填）</span>
+				<span class="tsxz_xt" id="zyxxjl_xt">（选填）</span>
 			</div>
 			<div class="content">
 				<table class="tab_2" id="tab_xxjl">
@@ -253,10 +263,11 @@
 						<tr>
 							<td><input class="cg_input" name="org_name" value="" /></td>
 							<td style="color: #333333;">
-								<input type="radio" name="xs_rank" value="1" checked="checked"/>国际
-								<input type="radio" name="xs_rank" value="2" />国家
-								<input type="radio" name="xs_rank" value="3" />省部
-								<input type="radio" name="xs_rank" value="4" />其他
+								<input type="radio" name="xs_rank_1" value="1" checked="checked"/>国际
+								<input type="radio" name="xs_rank_1" value="2" />国家
+								<input type="radio" name="xs_rank_1" value="3" />省部
+								<input type="radio" name="xs_rank_1" value="4" />其他
+								<input type="hidden" name="xs_rank" value="xs_rank_1" />
 							</td>
 							<td><input class="cg_input" name="xs_position" value="" /></td>
 							<td><input class="cg_input" name="xs_note" value="" style="width: 370px;"/></td>
@@ -288,10 +299,12 @@
 						<tr>
 							<td><input class="cg_input" name="jc_material_name" value="" style="width: 360px;"/></td>
 							<td style="color: #333333;">
-								<input type="radio" name="jc_position" value="0" checked="checked"/>无
-								<input type="radio" name="jc_position" value="1" />主编
-								<input type="radio" name="jc_position" value="2" />编委
-								<input type="radio" name="jc_position" value="3" />副编委</td>
+								<input type="radio" name="jc_position_1" value="0" checked="checked"/>无
+								<input type="radio" name="jc_position_1" value="1" />主编
+								<input type="radio" name="jc_position_1" value="2" />编委
+								<input type="radio" name="jc_position_1" value="3" />副编委
+								<input type="hidden" name="jc_position" value="jc_position_1" />
+							</td>
 							<td><input class="cg_input" name="jc_note" value="" style="width: 330px;"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jccb()"/></td>
 						</tr>
@@ -416,9 +429,10 @@
 							<td><input class="cg_input" name="hj_material_name" value="" style="width: 300px;"/></td>
 							<td><input class="cg_input" name="hj_isbn" value="" style="width: 110px;"/></td>
 							<td style="color: #333333;">
-								<input type="radio" name="hj_rank" value="1" checked="checked" />教育部十二五
-								<input type="radio" name="hj_rank" value="2" />国家卫计委十二五
-								<input type="radio" name="hj_rank" value="3" />其他
+								<input type="radio" name="hj_rank_1" value="1" checked="checked" />教育部十二五
+								<input type="radio" name="hj_rank_1" value="2" />国家卫计委十二五
+								<input type="radio" name="hj_rank_1" value="3" />其他
+								<input type="hidden" name="hj_rank" value="hj_rank_1" />
 							</td>
 							<td><input class="cg_input" name="hj_note" value="" style="width: 250px;"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_gjghjc()"/></td>

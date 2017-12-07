@@ -91,7 +91,7 @@
 		select * from dec_last_position where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
 	<insert id="insertJcbj" parameterType="java.util.Map">
-		insert into dec_last_position(declaration_id,material_name,position)
+		insert into dec_last_position(declaration_id,material_name,position,note)
 		  values(#{declaration_id},#{material_name},#{position},#{note})
 	</insert>
 	
