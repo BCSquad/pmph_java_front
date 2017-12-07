@@ -1,6 +1,7 @@
 package com.bc.pmpheep.back.commuser.mymessage.bean;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -34,13 +35,13 @@ public class MyMessageVO implements Serializable {
 	 */
 	private Integer senderType;
 	/**
-	 * 发送者头像
+	 * 对话着头像
 	 */
-	private String senderAvatar;
+	private String avatar;
 	/**
-	 * 发送者姓名
+	 * 对话这姓名
 	 */
-	private String senderName;
+	private String name;
 	/**
 	 * 接收者id
 	 */
@@ -50,17 +51,17 @@ public class MyMessageVO implements Serializable {
 	 */
 	private Integer receiverType;
 	/**
-	 * 接收者姓名
+	 * 当前用户姓名
 	 */
-	private String receiverName;
+	private String userName;
 	/**
-	 * 接收者头像
+	 * 当前用户头像
 	 */
-	private String receiverAvatar;
+	private String userAvatar;
 	/**
 	 * 发送时间
 	 */
-	private Timestamp sendTime;
+	private Date sendTime;
 	/**
 	 * 是否已读
 	 */
@@ -73,16 +74,10 @@ public class MyMessageVO implements Serializable {
 	 * 用户类型
 	 */
 	private Integer userType;
-
-	private Boolean is_withdraw;
-
-	public Boolean getIs_withdraw() {
-		return is_withdraw;
-	}
-
-	public void setIs_withdraw(Boolean is_withdraw) {
-		this.is_withdraw = is_withdraw;
-	}
+	/**
+	 * 是否是当前用户发送的消息
+	 */
+	private Boolean isMy;
 
 	public Long getId() {
 		return id;
@@ -116,11 +111,11 @@ public class MyMessageVO implements Serializable {
 		this.content = content;
 	}
 
-	public Timestamp getSendTime() {
+	public Date getSendTime() {
 		return sendTime;
 	}
 
-	public void setSendTime(Timestamp sendTime) {
+	public void setSendTime(Date sendTime) {
 		this.sendTime = sendTime;
 	}
 
@@ -164,22 +159,6 @@ public class MyMessageVO implements Serializable {
 		this.senderType = senderType;
 	}
 
-	public String getSenderAvatar() {
-		return senderAvatar;
-	}
-
-	public void setSenderAvatar(String senderAvatar) {
-		this.senderAvatar = senderAvatar;
-	}
-
-	public String getSenderName() {
-		return senderName;
-	}
-
-	public void setSenderName(String senderName) {
-		this.senderName = senderName;
-	}
-
 	public Long getReceiverId() {
 		return receiverId;
 	}
@@ -196,20 +175,44 @@ public class MyMessageVO implements Serializable {
 		this.receiverType = receiverType;
 	}
 
-	public String getReceiverName() {
-		return receiverName;
+	public String getAvatar() {
+		return avatar;
 	}
 
-	public void setReceiverName(String receiverName) {
-		this.receiverName = receiverName;
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
-	public String getReceiverAvatar() {
-		return receiverAvatar;
+	public String getName() {
+		return name;
 	}
 
-	public void setReceiverAvatar(String receiverAvatar) {
-		this.receiverAvatar = receiverAvatar;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserAvatar() {
+		return userAvatar;
+	}
+
+	public void setUserAvatar(String userAvatar) {
+		this.userAvatar = userAvatar;
+	}
+
+	public Boolean getIsMy() {
+		return isMy;
+	}
+
+	public void setIsMy(Boolean isMy) {
+		this.isMy = isMy;
 	}
 
 }

@@ -1,5 +1,5 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
@@ -89,44 +89,59 @@ String contextpath=request.getContextPath();
                     <td colspan="3" align="center"><img alt="" src="<%=path%>/statics/image/_cupline.jpg"/></td>
                 </tr>
                 <tr  class="sxy-tr">
-                    <td colspan="3"><font class="td-title">学校教师信息登记（<font color="#fd9a2e">未审核</font>）</font></td>
+                    <td colspan="3"><font class="td-title">学校教师信息登记（<font color="#fd9a2e">
+                    <c:choose>
+                    	<c:when test="${showWriterUserCertification.progress==1}"> 
+                    	未提交
+					   	</c:when> 
+					   	<c:when test="${showWriterUserCertification.progress==2}"> 
+                    	已提交
+					   	</c:when>  
+					   	<c:when test="${showWriterUserCertification.progress==3}"> 
+                    	被退回
+					   	</c:when>  
+					   	<c:when test="${showWriterUserCertification.progress==4}"> 
+                    	通过
+					   	</c:when>   
+					   	<c:otherwise></c:otherwise>
+                    </c:choose></font>）</font></td>
                 </tr>
                 <tr  class="sxy-tr">
                     <td align="right" style="width:100px;"><font class="td-font-1">*姓名</font></td>
-                    <td style="width:280px;"><input class="sxy-txt" type="text"/></td>
+                    <td style="width:280px;"><input class="sxy-txt" type="text" value="${showWriterUserCertification.realName}"/></td>
                     <td><font class="td-font-3">请填写与与教师资格证上一致的真实姓名</font></td>
                 </tr>
                 <tr  class="sxy-tr">
                     <td align="right"><font class="td-font-1">*身份证号</font></td>
-                    <td><input class="sxy-txt" type="text"/></td>
+                    <td><input class="sxy-txt" type="text" value="${showWriterUserCertification.idcard}"/></td>
                     <td><font class="td-font-3">请填正确的身份证信息</font></td>
                 </tr>
                 <tr  class="sxy-tr">
                     <td align="right"><font class="td-font-1">*选择学校</font></td>
                     <td>
                         <select class="sxy-select-td" id="Select1" name="position">
-                            <option value="teacher1">华中师范大学</option>
-                            <option value="teacher2">北京师范大学</option>
-                            <option value="teacher3">湖北师范大学</option>
+                        <c:forEach var = "org" items="" >
+                        	<option value="${org.id}"  <c:if test="${org.id==showWriterUserCertification.orgId}">selected</c:if>>${org.name}</option>
+                        </c:forEach>
                         </select>
                     </td>
                     <td><font class="td-font-3">请选择您所在的学校</font></td>
                 </tr>
                 <tr  class="sxy-tr">
                     <td align="right"><font class="td-font-1">*手机</font></td>
-                    <td><input class="sxy-txt" type="text"/></td>
+                    <td><input class="sxy-txt" type="text" value="${showWriterUserCertification.handphone}"/></td>
                     <td><font class="td-font-3">请填写正确的手机号码，以使我们能及时联系到您</font></td>
                 </tr>
                 <tr  class="sxy-tr">
                     <td align="right"><font class="td-font-1">*教师资格证</font></td>
-                    <td><input class="sxy-txt" type="text"/></td>                    
+                    <td><input class="sxy-txt" type="text" value="${showWriterUserCertification.cert}"/></td>                    
                     <td><input id="sxy-btn-upload" type="button" value="上传文件"/></td>
                 </tr>               
                 <tr  class="sxy-tr">
                     <td></td>
                     <td colspan="2"><font class="td-font-last">请上传bmp、jpg、gif、jpge、png格式的照片或扫描件</font></td>
                 </tr>
-                <tr><td colspan="3" align="center"><img alt="" src="../../image/_cupline.jpg"/></td></tr>
+                <tr><td colspan="3" align="center"><img alt="" src="<%=path%>/statics/image/_cupline.jpg"/></td></tr>
                 <tr  class="sxy-tr">
                     <td colspan="3" align="center"><input type="submit" class="btn-2" value="提交"/></td>
                 </tr>

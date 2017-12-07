@@ -1,0 +1,105 @@
+.message-body{
+    padding-top:30px;
+    background-color: #f6f6f6;
+    padding-bottom: 60px;
+}
+.message{
+    width: 1200px;
+    height: 50px;
+    margin:0px auto 15px ;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e6e6e6;
+}
+.message .item{
+    float:left;
+    margin-left: 20px;
+    width: 65px;
+    height:50px;
+    font-size: 16px;
+}
+.message .item .on-text{
+    height: 20px;
+    color: #333333;
+    margin-top: 14px
+}
+.message .item .off-text{
+    height: 20px;
+    color:#999999;
+    margin-top: 14px
+}
+.message .item .on-line{
+    height: 2px;
+    margin-top: 15px;
+    background-color: #666666;
+}
+.message .item .off-line{
+    height: 2px;
+    margin-top: 15px
+}
+.message-list{
+    width:1200px;
+   height:963px;
+    margin:0px auto 15px;
+    background-color: #ffffff;
+    padding-top: 19px;
+}
+.message-list .item{
+    width: 1160px;
+    height: 70px;
+    margin:18px 20px 18px 20px;
+}
+.message-list .item .item-img{
+    width: 70px;
+    height: 70px;
+    float:left
+}
+.message-list .item .item-img img{
+    width: 70px;
+    height: 70px;
+    border-radius: 35px
+}
+.message-list .item .content{
+    float:left;
+    width: 1066px;
+    height:70px;
+    margin-left: 24px
+}
+.message-list .item .content .title{
+    margin-top:6px;
+    margin-bottom: 16px
+}
+.message-list .item .content .msg{
+    font-size: 14px;
+    color: #999999;
+}
+.message-list .item .content .time{
+    margin-left: 28px;
+    font-size: 12px;
+    color: #bbbbbb;
+}
+.message-list .item .content .text{
+    margin-top:0;
+    margin-bottom: 10px ;
+    color: #333333;
+    font-size: 14px;
+    height:18px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.message-list .item-line{
+    width: 1160px;
+    height:1px;
+    background-color: #f3f3f3;
+    margin: 0px auto 0px
+}
+.message-list  .load-more{
+    width: 1160px;
+    height: 95px;
+}
+.message-list  .load-more  .load-text{
+    font-size: 16px;
+    color: #7d7d7d;
+    margin-top: 30px;
+    text-align: center
+}

@@ -2,6 +2,8 @@ package com.bc.pmpheep.back.commuser.myfriend.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.bc.pmpheep.back.commuser.myfriend.bean.WriterFriendVO;
 
 /**
@@ -32,5 +34,5 @@ public interface MyFriendDao {
      * @return WriterFriend 好友对象集合
      * </pre>
      */
-    List<WriterFriendVO> listMyFriend(Long userId);
+    List<WriterFriendVO> listMyFriend(@Param("userId") Long userId);
 }

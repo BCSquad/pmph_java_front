@@ -3,11 +3,11 @@ package com.bc.pmpheep.back.commuser.user.controller;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertification;
@@ -25,19 +25,19 @@ import com.bc.pmpheep.general.controller.BaseController;
 public class TeacherCertification extends BaseController {
 
     @Autowired
+    @Qualifier("com.bc.pmpheep.back.commuser.user.service.WriterUserServiceImpl")
     private WriterUserService writerUserService;
 
-    @ResponseBody
     @RequestMapping(value = "/showTeacherCertification", method = RequestMethod.GET)
     public ModelAndView showTeacherCertification(@RequestParam("id") Long id) {
         ModelAndView model = new ModelAndView();
+        model.setViewName("authadmin/teacherauth/teacherAttest");
         WriterUserCertificationVO showWriterUserCertification =
         writerUserService.showTeacherCertification(id);
         model.addObject("showWriterUserCertification", showWriterUserCertification);
         return model;
     }
 
-    @ResponseBody
     @RequestMapping(value = "/updateTeacherCertification", method = RequestMethod.GET)
     public ModelAndView updateTeacherCertification(
     WriterUserCertificationVO writerUserCertificationVO) throws IOException {
