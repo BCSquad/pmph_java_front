@@ -50,7 +50,7 @@ public class OrgUserController extends  com.bc.pmpheep.general.controller.BaseCo
 		//获取当前用户 
 		Map<String,Object> writerUserMap=this.getUserInfo();
 		OrgUser orgUser=new OrgUser();
-		orgUser.setOrgId(Long.parseLong( writerUserMap.get("org_id").toString()));
+		orgUser.setOrgId(Long.parseLong(writerUserMap.get("id").toString()));
 		PageParameter<WriterUser> pageParameter = new PageParameter<>(pageNumber, pageSize);
 		writerUser.setOrgId(orgUser.getOrgId());
 		pageParameter.setParameter(writerUser);
