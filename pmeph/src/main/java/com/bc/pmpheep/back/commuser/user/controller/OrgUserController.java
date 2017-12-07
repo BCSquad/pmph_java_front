@@ -22,7 +22,7 @@ import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 
-/**
+/**	用户管理（机构用户）
  * @author mr
  * @Date 2017年12月2日 下午16:00:00
  * 

@@ -3,6 +3,7 @@ package com.bc.pmpheep.back.commuser.mymessage.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
@@ -22,7 +23,7 @@ import com.bc.pmpheep.service.exception.CheckedExceptionBusiness;
 import com.bc.pmpheep.service.exception.CheckedExceptionResult;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 
-@Service
+@Service("com.bc.pmpheep.back.commuser.mymessage.service.MyMessageServiceImpl")
 public class MyMessageServiceImpl implements MyMessageService {
 
 	@Autowired
