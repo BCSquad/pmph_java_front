@@ -3,6 +3,7 @@ package com.bc.pmpheep.back.commuser.mymessage.service;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bc.pmpheep.back.commuser.mymessage.bean.DialogueVO;
 import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
@@ -50,5 +51,15 @@ public interface MyMessageService {
 	 * @return
 	 */
 	List<DialogueVO> findMyDialogue  (Long thisId,Long friendId);
+	
+	/**
+	 * 发送私信
+	 * @introduction 
+	 * @author Mryang
+	 * @createDate 2017年12月7日 下午3:51:11
+	 * @param frendId
+	 * @param content
+	 */
+	void senNewMsg(Long thisId,Long frendId,String title,String content);
 	
 }
