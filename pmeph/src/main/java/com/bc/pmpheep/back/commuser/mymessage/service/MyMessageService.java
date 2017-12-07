@@ -35,6 +35,6 @@ public interface MyMessageService {
 	 * @throws CheckedServiceException
 	 *
 	 */
-	List<MyMessageVO> updateMyMessage(Long senderId, Integer senderType, Long userId, Long userType)
+	List<MyMessageVO> updateMyMessage(Long senderId, Integer senderType, Long userId, Integer userType)
 			throws CheckedServiceException;
 }

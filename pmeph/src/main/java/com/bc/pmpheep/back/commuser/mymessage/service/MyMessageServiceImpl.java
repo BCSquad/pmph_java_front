@@ -142,9 +142,37 @@ public class MyMessageServiceImpl implements MyMessageService {
 	}
 
 	@Override
-	public List<MyMessageVO> updateMyMessage(Long senderId, Integer senderType, Long userId, Long userType)
+	public List<MyMessageVO> updateMyMessage(Long senderId, Integer senderType, Long userId, Integer userType)
 			throws CheckedServiceException {
-		// TODO Auto-generated method stub
-		return null;
+		if (ObjectUtil.isNull(senderId)) {
+			throw new CheckedServiceException(CheckedExceptionBusiness.MESSAGE, CheckedExceptionResult.NULL_PARAM,
+					"对话者id为空");
+		}
+		if (ObjectUtil.isNull(senderType)) {
+			throw new CheckedServiceException(CheckedExceptionBusiness.MESSAGE, CheckedExceptionResult.NULL_PARAM,
+					"对话者类型为空");
+		}
+		if (ObjectUtil.isNull(userId)) {
+			throw new CheckedServiceException(CheckedExceptionBusiness.MESSAGE, CheckedExceptionResult.NULL_PARAM,
+					"用户id为空");
+		}
+		if (ObjectUtil.isNull(userType)) {
+			throw new CheckedServiceException(CheckedExceptionBusiness.MESSAGE, CheckedExceptionResult.NULL_PARAM,
+					"用户类型为空");
+		}
+		List<MyMessageVO> list = myMessageDao.listMyMessageDetail(senderId, senderType, userId, userType);
+		for (MyMessageVO myMessageVO : list) {
+			myMessageVO.setUserId(userId);
+			myMessageVO.setUserType(userType);
+			myMessageVO = setAvatar(myMessageVO);
+			Message message = messageService.get(myMessageVO.getMsgId());
+			if (ObjectUtil.isNull(message)) {
+				throw new CheckedServiceException(CheckedExceptionBusiness.MESSAGE, CheckedExceptionResult.NULL_PARAM,
+						"没有获取到内容！");
+			}
+			myMessageVO.setContent(message.getContent());
+
+		}
+		return list;
 	}
 }

@@ -72,9 +72,10 @@ public class MyMessageController extends BaseController {
 	 * 
 	 */
 	@RequestMapping(value = "/todetail", method = RequestMethod.PUT)
-	public ModelAndView detail(Long senderId, Integer senderType, Long userId, Long userType) {
+	public ModelAndView detail(Long senderId, Integer senderType, Long userId, Integer userType) {
 		Map<String, ResponseBean<MyMessageVO>> map = new HashMap<>();
-		map.put("mymessage", new ResponseBean());
+		map.put("mymessage",
+				new ResponseBean(myMessageService.updateMyMessage(senderId, senderType, userId, userType)));
 		return new ModelAndView("commuser/mymessage/detail", map);
 	}
 
