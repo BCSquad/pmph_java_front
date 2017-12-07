@@ -2,6 +2,7 @@ package com.bc.pmpheep.back.commuser.user.bean;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
@@ -39,8 +40,18 @@ public class WriterUserCertificationVO implements Serializable {
     private Timestamp gmtCreate;
     // 修改时间
     private Timestamp gmtUpdate;
+    // 获取机构
+    private List<Org> orgList;
 
-    public WriterUserCertificationVO() {
+    public List<Org> getOrgList() {
+		return orgList;
+	}
+
+	public void setOrgList(List<Org> orgList) {
+		this.orgList = orgList;
+	}
+
+	public WriterUserCertificationVO() {
     }
 
     public WriterUserCertificationVO(Long userId, Integer progress) {
@@ -159,8 +170,8 @@ public class WriterUserCertificationVO implements Serializable {
 				+ ", realName=" + realName + ", orgId=" + orgId + ", orgName="
 				+ orgName + ", handphone=" + handphone + ", idcard=" + idcard
 				+ ", progress=" + progress + ", cert=" + cert + ", gmtCreate="
-				+ gmtCreate + ", gmtUpdate=" + gmtUpdate + "]";
+				+ gmtCreate + ", gmtUpdate=" + gmtUpdate + ", orgList="
+				+ orgList + "]";
 	}
-
     
 }

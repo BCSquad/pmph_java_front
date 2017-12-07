@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.bc.pmpheep.back.commuser.user.bean.Org;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertification;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertificationVO;
@@ -47,6 +48,7 @@ public interface WriterUserDao {
 	 */
 	WriterUserCertificationVO showTeacherCertification(@Param("id") Long id);
 	
+	List<Org> getOrg();
 	/**
 	 * 添加学校教师认证
 	 * @author tyc

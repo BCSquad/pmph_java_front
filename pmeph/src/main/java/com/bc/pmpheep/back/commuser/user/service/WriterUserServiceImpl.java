@@ -2,9 +2,12 @@ package com.bc.pmpheep.back.commuser.user.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bc.pmpheep.back.commuser.user.bean.Org;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertification;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertificationVO;
@@ -60,6 +63,8 @@ public class WriterUserServiceImpl implements WriterUserService {
 					CheckedExceptionResult.NULL_PARAM, "id不能为空");
 		}
 		WriterUserCertificationVO writerUserCertificationVO = writerUserDao.showTeacherCertification(id);
+		List<Org> orgList = writerUserDao.getOrg();
+		writerUserCertificationVO.setOrgList(orgList);
 		/*String cert = writerUserCertificationVO.getCert();
 		String mongoId = null;
 		if (cert.isEmpty()) {
