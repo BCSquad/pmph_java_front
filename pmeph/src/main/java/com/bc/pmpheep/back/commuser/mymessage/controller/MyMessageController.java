@@ -1,6 +1,7 @@
 package com.bc.pmpheep.back.commuser.mymessage.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bc.pmpheep.back.commuser.mymessage.bean.DialogueVO;
 import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
 import com.bc.pmpheep.back.commuser.mymessage.service.MyMessageService;
 import com.bc.pmpheep.back.plugin.PageParameter;
@@ -77,5 +81,23 @@ public class MyMessageController  extends  com.bc.pmpheep.general.controller.Bas
 				new ResponseBean(myMessageService.updateMyMessage(senderId, senderType, userId, userType)));
 		return new ModelAndView("commuser/mymessage/detail", map);
 	}
+	
+	/**
+	 * 获取我和朋友的对话记录
+	 * @introduction 
+	 * @author Mryang
+	 * @createDate 2017年12月7日 下午2:30:29
+	 * @param friendId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getDialogue", method = RequestMethod.GET)
+	public List<DialogueVO> getDialogue(@RequestParam(value="friendId")Long friendId) {
+		Map <String,Object> writerUser = this.getUserInfo();
+		Long thisId = new Long(String.valueOf(writerUser.get("id")));
+		List<DialogueVO> lst=myMessageService.findMyDialogue(thisId, friendId);
+		return lst;
+	}
+	
 
 }

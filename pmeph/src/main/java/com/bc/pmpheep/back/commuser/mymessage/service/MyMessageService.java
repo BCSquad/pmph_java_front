@@ -2,6 +2,9 @@ package com.bc.pmpheep.back.commuser.mymessage.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.bc.pmpheep.back.commuser.mymessage.bean.DialogueVO;
 import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
@@ -37,4 +40,15 @@ public interface MyMessageService {
 	 */
 	List<MyMessageVO> updateMyMessage(Long senderId, Integer senderType, Long userId, Integer userType)
 			throws CheckedServiceException;
+	
+	/**
+	 * 获取我和朋友的对话记录
+	 * @author Mryang
+	 * @createDate 2017年12月7日 下午2:20:33
+	 * @param thisId
+	 * @param friendId
+	 * @return
+	 */
+	List<DialogueVO> findMyDialogue  (Long thisId,Long friendId);
+	
 }

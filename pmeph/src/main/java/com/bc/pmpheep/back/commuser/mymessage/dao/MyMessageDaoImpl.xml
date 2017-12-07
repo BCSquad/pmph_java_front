@@ -57,5 +57,26 @@
 		(m.receiver_type = #{senderType} OR	m.sender_type = #{senderType})
 		ORDER BY sendTime DESC
 	</select>
+	
+	<!-- 查询我与好友的对话记录 -->
+	<select id="findMyDialogue" resultType ="DialogueVO" >
+		select 
+			a.id,
+			IF(receiver_id =1 ,c.avatar,b.avatar) avatar,
+			IF(receiver_id =1 ,c.realname,b.realname) senderName,
+			a.msg_id,
+			a.gmt_create sendTime,
+			IF(receiver_id =1 ,true,false) is_my
+		from user_message a 
+			LEFT JOIN writer_user b on a.receiver_id = b.id 
+			left join writer_user c on a.sender_id   = c.id 
+		where 
+			a.msg_type = 2 
+			and a.is_withdraw = 0 
+			and a.is_deleted =0 
+			and (a.sender_id   = #{thisId}   or a.receiver_id = #{thisId} ) 
+			and (a.receiver_id = #{friendId} or a.receiver_id = #{friendId} )
+		ORDER BY a.gmt_create desc 
+	</select>
 
 </mapper>

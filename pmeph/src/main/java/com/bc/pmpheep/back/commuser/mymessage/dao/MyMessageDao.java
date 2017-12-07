@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.bc.pmpheep.back.commuser.mymessage.bean.DialogueVO;
 import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
@@ -47,5 +48,15 @@ public interface MyMessageDao {
 	 */
 	List<MyMessageVO> listMyMessageDetail(@Param("senderId") Long senderId, @Param("senderType") Integer senderType,
 			@Param("userId") Long userId, @Param("userType") Integer userType);
+	
+	/**
+	 * 获取我和朋友的对话记录
+	 * @author Mryang
+	 * @createDate 2017年12月7日 下午2:20:33
+	 * @param thisId
+	 * @param friendId
+	 * @return
+	 */
+	List<DialogueVO> findMyDialogue  (@Param("thisId")Long thisId,@Param("friendId")Long friendId);
 
 }

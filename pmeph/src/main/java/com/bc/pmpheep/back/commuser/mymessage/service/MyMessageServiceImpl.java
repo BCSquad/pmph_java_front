@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.bc.pmpheep.back.commuser.mymessage.bean.DialogueVO;
 import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
 import com.bc.pmpheep.back.commuser.mymessage.dao.MyMessageDao;
 import com.bc.pmpheep.back.commuser.user.bean.PmphUser;
@@ -174,5 +175,10 @@ public class MyMessageServiceImpl implements MyMessageService {
 
 		}
 		return list;
+	}
+	
+	@Override
+	public  List<DialogueVO> findMyDialogue  (Long thisId,Long friendId){
+		return myMessageDao.findMyDialogue(thisId, friendId);
 	}
 }
