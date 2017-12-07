@@ -162,7 +162,8 @@ public class ArticleSearchController extends BaseController{
 	public ModelAndView queryall(HttpServletRequest request) throws UnsupportedEncodingException{
 		request.setCharacterEncoding("utf-8");
 		ModelAndView modelAndView=new ModelAndView();
-		String title = new String(request.getParameter("title").getBytes("ISO-8859-1"),"utf-8");
+		//String title = new String(request.getParameter("title").getBytes("ISO-8859-1"),"utf-8");
+		String title = java.net.URLDecoder.decode(request.getParameter("title"),"UTF-8"); 
 		if(("").equals(title)){
 			List<Map<String, Object>> list=articleSearchService.queryList();
 	 		int allpage=0;

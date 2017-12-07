@@ -45,7 +45,8 @@ public class BookSearchController extends BaseController {
 		ModelAndView mv = new ModelAndView();
 		String search = request.getParameter("search");
 		String real_search = request.getParameter("real_search");
-		search = new String((search!=null?search:"").getBytes("iso8859-1"), "utf-8");
+		//search = new String((search!=null?search:"").getBytes("iso8859-1"), "utf-8");
+		search = java.net.URLDecoder.decode(search,"UTF-8"); 
 		real_search = new String((real_search!=null?real_search:"").getBytes("iso8859-1"), "utf-8");
 		mv.addObject("search",search);
 		mv.addObject("real_search",search);

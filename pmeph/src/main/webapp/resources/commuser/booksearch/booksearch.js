@@ -141,7 +141,7 @@ function pageScroll(){
 
 function switchBetweenBookAndArticle(n){
 	if (n=="article") {
-		window.location=contextpath+'articlesearch/queryall.action?title='+$("#search-name").val()+'&&real_title='+$("#search-name-temp").val();
+		window.location=contextpath+'articlesearch/queryall.action?title='+encodeURI(encodeURI($("#search-name").val()))+'&&real_title='+encodeURI(encodeURI($("#search-name-temp").val()));
 	}else{
 		/*window.location=contextpath+'booksearch/toPage.action?search='+$("#search-name").val()+'&&real_search='+$("#search-name-temp").val();*/
 	}
