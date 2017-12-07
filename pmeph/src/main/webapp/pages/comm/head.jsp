@@ -27,7 +27,7 @@
 
             <img class="search-icon" src="${ctx}/statics/image/search.png" alt="">
 
-            <span class="write" onclick="window.location.href='${ctx}/authSendMessage/initWriteArticle.action'">写文章</span>
+            <span class="write" onclick="window.location.href='${ctx}/writerArticle/initWriteArticle.action'">写文章</span>
 
             <span class="download">下载APP</span>
 
