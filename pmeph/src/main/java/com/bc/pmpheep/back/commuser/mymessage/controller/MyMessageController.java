@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.mymessage.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,11 +32,11 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 	MyMessageService myMessageService;
 
 	@RequestMapping(value = "/listMyMessage", method = RequestMethod.GET)
-	    public ModelAndView listMyFriend() throws Exception {
-		  ModelAndView modelAndView = new ModelAndView();
-		  modelAndView.setViewName("commuser/mymessage/personnelMessage");
-		  return modelAndView;
-	  }
+	public ModelAndView listMyFriend() throws Exception {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("commuser/mymessage/personnelMessage");
+		return modelAndView;
+	}
 
 	/**
 	 * 
@@ -83,10 +84,16 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/todetail", method = RequestMethod.PUT)
-	public List<MyMessageVO> detail(Long senderId, Integer senderType) {
+	public List<MyMessageVO> detail(Long senderId, Integer senderType, Long receiverId, Integer receiverType) {
 		Map<String, Object> writerUser = this.getUserInfo();
 		Long userId = new Long(String.valueOf(writerUser.get("id")));
-		List<MyMessageVO> list = myMessageService.updateMyMessage(senderId, senderType, userId, 2);
+		List<MyMessageVO> list = new ArrayList<>();
+		if (senderId.equals(userId) && senderType == 2) {
+			list = myMessageService.updateMyMessage(senderId, senderType, userId, 2);
+		}else {
+			list = myMessageService.updateMyMessage(receiverId, receiverType, userId, 2);
+		}
+
 		return list;
 	}
 
@@ -110,10 +117,11 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 
 	@ResponseBody
 	@RequestMapping(value = "/senNewMsg", method = RequestMethod.GET)
-	public String senNewMsg(@RequestParam(value="friendId")Long friendId,Short friendIdType,@RequestParam(value="title")String title,@RequestParam(value="content")String content){
-		Map <String,Object> writerUser = this.getUserInfo();
+	public String senNewMsg(@RequestParam(value = "friendId") Long friendId, Short friendIdType,
+			@RequestParam(value = "title") String title, @RequestParam(value = "content") String content) {
+		Map<String, Object> writerUser = this.getUserInfo();
 		Long thisId = new Long(String.valueOf(writerUser.get("id")));
-		myMessageService.senNewMsg(thisId, friendId,friendIdType,title, content);
+		myMessageService.senNewMsg(thisId, friendId, friendIdType, title, content);
 		return "success";
 	}
 

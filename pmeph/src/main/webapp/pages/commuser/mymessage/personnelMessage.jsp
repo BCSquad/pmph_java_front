@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css" />
 <script src="${ctx}/statics/js/jquery/jquery.js"></script>
 <script src="${ctx}/statics/js/jquery/jquery.selectlist.js"></script>
- <script src="${ctx}/resources/commuser/mymessage/personnelMessage.js" ></script>
+<script src="${ctx}/resources/commuser/mymessage/personnelMessage.js"></script>
 <style type="text/css">
 #rightContent .select-button {
 	background: #f6f6f6;
@@ -27,7 +27,7 @@
 }
 </style>
 <script type="text/javascript">
-var contxtpath = '${pageContext.request.contextPath}';
+	var contxtpath = '${pageContext.request.contextPath}';
 	$(function() {
 		$('#select').selectlist({
 			zIndex : 10,
@@ -53,8 +53,8 @@ var contxtpath = '${pageContext.request.contextPath}';
 		</span>
 	</div>
 	</div>
-	<div id = "list" class="message">
-		
+	<div id="list" class="message">
+
 		<!--  <a class="a" href="javascript:void(0)" onclick="show()" style=" background:red">弹出</a>-->
 
 		<div class="b hidden" id="box">
@@ -82,97 +82,23 @@ var contxtpath = '${pageContext.request.contextPath}';
 						<div class="talkTime talkTimeAlignLeft">2017.04.01</div>
 					</div>
 				</div>
-				<div class="oneTalk">
-					<div class="headAndNameRight float_right">
-						<div class="headDiv">
-							<img class="headPicture" src="../测试文件/tx.png" />
-						</div>
-						<div class="talkName">
-							<text>曾若男</text>
-						</div>
-					</div>
-
-					<div class="talkDivRight float_right">
-						<div class="sendMessage">
-
-							<div class="textDiv float_right">
-								简单地说，世上行医的人大致可以分为几类：医匠(为赚钱陌生而行医)、
-								医生(为治病救人而行简单地说，世上行医的人大致可以分为几类：医匠
-								(为赚钱陌生而行医)、医生(为治病救人而行简单地说，世上行医的人大致
-								可以分为几类：医匠(为赚钱陌生而行医)、医生(为治病救人而行简单地说，
-								世上行医的人大致可以分为几类：医匠(为赚钱陌生而行医)、医生(为治病救人而行</div>
-
-						</div>
-						<div class="talkTime talkTimeAlignRight">2017.04.01</div>
-					</div>
-				</div>
-				<div class="oneTalk">
-					<div class="headAndNameRight float_right">
-						<div class="headDiv">
-							<img class="headPicture" src="../测试文件/tx.png" />
-						</div>
-						<div class="talkName">
-							<text>曾若男</text>
-						</div>
-					</div>
-
-					<div class="talkDivRight float_right">
-						<div class="sendMessage">
-							<div class="leftTriangle float_right"></div>
-							<div class="textDiv float_right">
-								简单地说，世上行医的人大致可以分为几类：医匠(为赚钱陌生而行医)、
-								医生(为治病救人而行简单地说，世上行医的人大致可以分为几类：医匠
-								(为赚钱陌生而行医)、医生(为治病救人而行简单地说，世上行医的人大致
-								可以分为几类：医匠(为赚钱陌生而行医)、医生(为治病救人而行简单地说，
-								世上行医的人大致可以分为几类：医匠(为赚钱陌生而行医)、医生(为治病救人而行</div>
-						</div>
-						<div class="talkTime talkTimeAlignRight">2017.04.01</div>
-					</div>
-				</div>
-				<div class="oneTalk">
-					<div class="headAndNameRight float_right">
-						<div class="headDiv">
-							<img class="headPicture" src="../测试文件/tx.png" />
-						</div>
-						<div class="talkName">
-							<text>曾若男</text>
-						</div>
-					</div>
-
-					<div class="talkDivRight float_right">
-						<div class="sendMessage">
-							<div class="leftTriangle float_right"></div>
-							<div class="textDiv float_right">
-								简单地说，世上行医的人大致可以分为几类：医匠(为赚钱陌生而行医)、
-								医生(为治病救人而行简单地说，世上行医的人大致可以分为几类：医匠
-								(为赚钱陌生而行医)、医生(为治病救人而行简单地说，世上行医的人大致
-								可以分为几类：医匠(为赚钱陌生而行医)、医生(为治病救人而行简单地说，
-								世上行医的人大致可以分为几类：医匠(为赚钱陌生而行医)、医生(为治病救人而行医）</div>
-						</div>
-						<div class="talkTime talkTimeAlignRight">2017.04.01</div>
-					</div>
-				</div>
-
-
 			</div>
-
-
-
-			<div class="inputBox">
-				<div style="float: left; width: 80%; height: 100%">
-					<textarea
-						style="width: 100%; height: 98%; border: none; outline: 0; font-size: 15px;"
-						type="text" placeholder="请输入消息内容,按回车键发送"></textarea>
-				</div>
-				<div style="float: left; width: 20%; height: 100%">
-					<div class="div_btn11" style="cursor: pointer;">
-						<span class="button11">发送</span>
-					</div>
-				</div>
-			</div>
-
 		</div>
-		<div id="loadMore" class="load-more clearfix">加载更多...</div>
+		<div class="inputBox">
+			<div style="float: left; width: 80%; height: 100%">
+				<textarea
+					style="width: 100%; height: 98%; border: none; outline: 0; font-size: 15px;"
+					type="text" placeholder="请输入消息内容,按回车键发送"></textarea>
+			</div>
+			<div style="float: left; width: 20%; height: 100%">
+				<div class="div_btn11" style="cursor: pointer;">
+					<span class="button11">发送</span>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div id="loadMore" class="load-more clearfix">加载更多...</div>
 	</div>
 	<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
