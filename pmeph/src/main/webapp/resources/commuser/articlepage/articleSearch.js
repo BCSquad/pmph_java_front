@@ -27,6 +27,8 @@ $(function () {
         	   location.href=contextpath+'articlesearch/change.action?n='+n+'&&m='+$('input[name=edu]').val();
            }
        });
+	   
+	   redQuery();
 });
 //跳转到书籍搜索页面
 function tobookpage(){
@@ -77,6 +79,18 @@ function jump(){
 
 //模糊查询
 function queryall(){
-	var title=$("#selectall").val();
+	var title=encodeURI(encodeURI($("#selectall").val()));
 	location.href=contextpath+'articlesearch/queryall.action?title='+title;
+}
+
+//搜索条件在相应部位红色
+function redQuery(){
+	var qs=$("#selectall").val();
+	var re=new RegExp(qs,"ig");
+	var $tag= $(".book-name-span");
+	$tag.each(function(){
+		var html = $(this).html();
+		var fit_html = '<font style="color:red;">'+qs+'</font>';
+		$(this).html(html.replace(re,fit_html));
+	});
 }
