@@ -20,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bc.pmpheep.back.commuser.collection.dao.BookCollectionDao;
 import com.bc.pmpheep.back.commuser.collection.service.BookCollectionService;
 import com.bc.pmpheep.back.commuser.readpage.service.ReadDetailService;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.general.controller.BaseController;
 
 /**
@@ -47,10 +49,17 @@ public class ReadDetailController extends BaseController{
 		String id=request.getParameter("id");
 		Map<String, Object> supMap=readDetailService.querySupport(id);
 		Map<String, Object> map=readDetailService.queryReadBook(id);
+		if(("DEFAULT").equals(map.get("image_url"))){
+			map.put("image_url", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+		}
 		String author="%"+map.get("author").toString()+"%";
 		List<Map<String, Object>> eMap=readDetailService.queryRecommendByE(0);
-		List<Map<String,Object>> flist = bookCollectionService.queryBookCollectionList(new BigInteger("12179"));
-		List<Map<String, Object>> listCom=readDetailService.queryComment(id);
+//		List<Map<String,Object>> flist = bookCollectionService.queryBookCollectionList(new BigInteger("12179"));
+		PageParameter<Map<String, Object>> pageParameter=new PageParameter<Map<String, Object>>(1,2);
+		Map<String, Object> wMap=new HashMap<String, Object>();
+		wMap.put("id", id);
+		pageParameter.setParameter(wMap);
+		PageResult<Map<String, Object>> listCom=readDetailService.queryComment(pageParameter);
 		List<Map<String, Object>> auList=readDetailService.queryAuthorType(author);
 		for (Map<String, Object> pmap : auList) {
 			if(("DEFAULT").equals(pmap.get("image_url"))){
@@ -83,13 +92,13 @@ public class ReadDetailController extends BaseController{
 			}
 			modelAndView.addObject("tMaps", tMaps);
 		}
-		modelAndView.addObject("flist", flist);
+//		modelAndView.addObject("flist", flist);
 		modelAndView.addObject("id", id);
 		modelAndView.addObject("eMap", eMap);
 		modelAndView.addObject("supMap", supMap);
 		modelAndView.addObject("map", map);
 		modelAndView.addObject("listCom", listCom);
-		modelAndView.addObject("ComNum", listCom.size());
+//		modelAndView.addObject("ComNum", listCom.size());
 		modelAndView.setViewName("commuser/readpage/readdetail");
 		return modelAndView;
 	}
@@ -200,5 +209,24 @@ public class ReadDetailController extends BaseController{
 	 		map=readDetailService.addlikes(iMap);
 		}
 	    return map;
+	}
+	
+	/**
+	 * 分页的具体实现
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("changepage")
+	@ResponseBody
+	public PageResult<Map<String, Object>> changepage(HttpServletRequest request){
+		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
+		int allppage=Integer.parseInt(request.getParameter("allppage"));
+		String id=request.getParameter("id");
+		PageParameter<Map<String, Object>> pageParameter=new PageParameter<Map<String, Object>>(pageNumber,allppage);
+		Map<String, Object> wMap=new HashMap<String, Object>();
+		wMap.put("id", id);
+		pageParameter.setParameter(wMap);
+		PageResult<Map<String, Object>> listCom=readDetailService.queryComment(pageParameter);
+		return listCom;
 	}
 }
