@@ -29,9 +29,9 @@ $(function () {
        });
 	   
 	   redQuery();
-	   $("#search-name").keyup(function(event){
+	   $("#selectall").keyup(function(event){
 			if(event.keyCode ==13){ //回车键弹起事件
-				queryBtnClick();
+				queryall();
 			  }
 		});
 });
