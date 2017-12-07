@@ -29,6 +29,11 @@ $(function () {
        });
 	   
 	   redQuery();
+	   $("#search-name").keyup(function(event){
+			if(event.keyCode ==13){ //回车键弹起事件
+				queryBtnClick();
+			  }
+		});
 });
 //跳转到书籍搜索页面
 function tobookpage(){
