@@ -6,83 +6,77 @@
 	<select id="listMyMessage" parameterType="PageParameter"
 		resultType="MyMessageVO">
 		SELECT
-		*,
-		m.gmt_create sendTime
+		*, MAX(m.gmt_create) sendTime
 		FROM
 		user_message m
 		WHERE
-		m.receiver_id=#{parameter.userId}
-		AND
-		m.receiver_type =
+		(m.receiver_id = #{parameter.userId} or m.sender_id =
+		#{parameter.userId})
+		AND m.receiver_type =
 		#{parameter.userType}
 		AND
-		m.is_deleted = false
-		AND
-		m.is_withdraw = false
-		<if test="parameter.title != null and parameter.title != ''">
-			and m.title like concat('%',#{parameter.title},'%')
-		</if>
-		<if test="parameter.isRead != null ">
-			and m.is_read = #{parameter.isRead}
-		</if>
-		ORDER BY
-		m.gmt_create DESC
+		m.is_deleted = FALSE
+		AND m.is_withdraw = FALSE
+		AND m.msg_type = 2
+		GROUP
+		BY m.sender_id
+		ORDER BY sendTime DESC
 		LIMIT
 		#{start},#{pageSize}
 	</select>
 
 	<select id="listMyMessageTotal" parameterType="PageParameter"
 		resultType="Integer">
+		SELECT count(*) FROM (SELECT
+		*, MAX(m.gmt_create) sendTime
+		FROM
+		user_message m
+		WHERE
+		(m.receiver_id = #{parameter.userId} or
+		m.sender_id = #{parameter.userId})
+		AND m.receiver_type =
+		#{parameter.userType}
+		AND m.is_deleted = FALSE
+		AND m.is_withdraw = FALSE
+		AND m.msg_type = 2
+		GROUP BY m.sender_id
+		ORDER BY sendTime DESC) t
+	</select>
+	<select id="listMyMessageDetail" resultType="MyMessageVO">
 		SELECT
-		count(*)
-		from
-		(SELECT
 		*,m.gmt_create sendTime
 		FROM
 		user_message m
 		WHERE
-		m.receiver_id=#{parameter.userId}
+		(m.receiver_id = #{userId} OR m.sender_id = #{userId})
 		AND
-		m.receiver_type =
-		#{parameter.userType}
+		(m.receiver_id = #{senderId} OR m.sender_id = #{senderType})
 		AND
-		m.is_deleted = false
-		<if test="parameter.title != null and parameter.title != ''">
-			and m.title like concat('%',#{parameter.title},'%')
-		</if>
-		<if test="parameter.isRead != null ">
-			and m.is_read = #{parameter.isRead}
-		</if>
-		ORDER BY
-		m.gmt_create DESC
-		) t
+		(m.receiver_type = #{userType} OR m.sender_type = #{userType})
+		AND
+		(m.receiver_type = #{senderType} OR	m.sender_type = #{senderType})
+		ORDER BY sendTime DESC
+	</select>
+	
+	<!-- 查询我与好友的对话记录 -->
+	<select id="findMyDialogue" resultType ="DialogueVO" >
+		select 
+			a.id,
+			IF(receiver_id =1 ,c.avatar,b.avatar) avatar,
+			IF(receiver_id =1 ,c.realname,b.realname) senderName,
+			a.msg_id,
+			a.gmt_create sendTime,
+			IF(receiver_id =1 ,true,false) is_my
+		from user_message a 
+			LEFT JOIN writer_user b on a.receiver_id = b.id 
+			left join writer_user c on a.sender_id   = c.id 
+		where 
+			a.msg_type = 2 
+			and a.is_withdraw = 0 
+			and a.is_deleted =0 
+			and (a.sender_id   = #{thisId}   or a.receiver_id = #{thisId} ) 
+			and (a.receiver_id = #{friendId} or a.receiver_id = #{friendId} )
+		ORDER BY a.gmt_create desc 
 	</select>
 
-	<select id="getMyMessageDetail" parameterType="PageParameter"
-		resultType="MyMessageVO">
-		SELECT
-		*,
-		m.gmt_create sendTime
-		FROM
-		user_message m
-		WHERE
-		m.id =
-		#{id}
-	</select>
-
-	<!-- 通过id 更新是否被逻辑删除 -->
-	<update id="updateMyMessage">
-		update
-		user_message
-		set
-		is_deleted = true
-		where
-		id
-		in
-		<foreach collection="array" item="id" index="index" open="("
-			close=")" separator=",">
-			#{id}
-		</foreach>
-		;
-	</update>
 </mapper>

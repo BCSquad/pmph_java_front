@@ -1,0 +1,232 @@
+.body{
+    background: #f6f6f6;
+}
+.content-wrapper{
+    padding-top: 30px;
+    padding-bottom: 60px;
+}
+.title {
+    font-size: 16px;
+    color: #333333;
+    height: 20px;
+    line-height: 20px;
+    padding:14px 0;
+    border-bottom: 2px dotted #999999;
+    margin-bottom: 20px;
+}
+
+.bigbox{
+    width:1200px;
+    height: auto;
+   background-color: #FFFFFF;
+}
+
+.top-title{
+    position: relative;
+    height: 64px;
+    width: 1160px;
+    margin-top: 12px;
+    margin-left: 20px;
+    background-color:#F8F8F8;
+    padding-top: 12px;
+}
+
+.tj{
+    position: absolute;
+    width: 162px;
+    height: 30px;
+    background-color: #106dc1;
+    border-radius: 5px;
+    margin-left: 89px;
+    padding-bottom: 7px;
+}
+
+.wz {
+    position: absolute;
+    top:9px;
+    width: 121px;
+    font-family: SimSun;
+    color: #ffffff;
+    margin-left: 21px;
+}
+
+.tj1{
+    position: absolute;
+    top:33px;
+    left:281px;
+    width: 100px;
+    line-height: 0px;
+    font-family: SimSun;
+    color: #626262;
+}
+
+.top-tag {
+    height: 31px;
+    background-color: #FFFFFF;
+    margin-top: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 1160px;
+}
+
+.iconfont-export {
+    width: 18px;
+    height: 20px;
+    background-color: #1c74c2;
+}
+
+.excel {
+    width: 60px;
+    height: 12px;
+    font-family: SimSun;
+    font-size: 12px;
+    line-height: 42px;
+    color: #1c74c2;
+    float: right;
+}
+
+
+
+
+
+
+.message{
+    margin-right: auto;
+    margin-left: auto;
+    /*padding: 25px 20px;*/
+    background: #FFFFFF;
+    width: 100%;
+}
+
+table,tr,td{
+    padding: 0;
+    margin: 0;
+}
+table{
+    width: 100%;
+}
+table thead tr{
+    height: 46px;
+    line-height: 30px;
+    background-color:#f0f0f0;
+}
+table thead td{
+    text-align: center;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+}
+table tbody tr{
+    height: 46px;
+    line-height: 30px;
+}
+
+
+table tbody tr:nth-child(odd){
+    background-color:#f9f9f9;
+    text-align: center;
+}
+
+table tbody tr:nth-child(even){
+    background: #f0f0f0;
+    text-align: center;
+}
+
+
+.fenyelan {
+	margin-top: 20px;
+	float: right;
+}
+.sousuokuang {
+	padding-top:15px;
+	margin-bottom: 20px;
+	color: #cacaca;
+	height: 50px;
+}
+#sstj {
+	width: 208px;
+	height: 40px;
+	float: left;
+    color: #4e4e4e;
+	margin-right: 15px;
+    margin-left: 15px;
+}
+#ssk {
+	width: 196px;
+	color: #A9A9A9;
+	height: 38px;
+	float: left;
+    border: solid 1px #ededed;
+	margin-right: 15px;
+    padding-left: 10px;
+}
+#cxan {
+	width: 80px;
+	background-color: #1898dd;
+	height: 33px;
+	color: #FFFFFF;
+	margin-right: 15px;
+	float: left;
+	margin-top: 5px;
+    border: none;
+}
+#gjss {
+	width: 100px;
+	padding-top: 14px;
+	float: left;
+}
+#gjss a{
+    color: #4e4e4e;
+}
+
+
+table,tr,td{
+    padding: 0;
+    margin: 0;
+}
+table{
+    width: 100%;
+    border-spacing: 0px 0px;
+    border-collapse: collapse;
+}
+table thead tr{
+    height: 46px;
+    line-height: 30px;
+    background-color:#f0f0f0;
+}
+table thead td{
+    text-align: center;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    color: #4e4e4e;
+    border: 2px solid #fff;
+}
+
+table tbody td{
+    font-family: SimSun;
+    font-size: 12px;
+    color: #4e4e4e;
+}
+
+table tbody tr{
+    height: 46px;
+    line-height: 30px;
+    font-family: SimSun;
+}
+
+table tbody tr:hover{background:#fff4e5;}
+
+
+
+table tbody tr:nth-child(odd){
+    background: #ffffff;
+    text-align: center;
+}
+
+table tbody tr:nth-child(even){
+    text-align: center;
+    background-color:#f9f9f9;
+
+}
+table tbody td a{
+    text-decoration:none;
+}

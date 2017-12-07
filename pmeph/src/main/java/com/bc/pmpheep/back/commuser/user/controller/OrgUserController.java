@@ -22,7 +22,7 @@ import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 
-/**
+/**	用户管理（机构用户）
  * @author mr
  * @Date 2017年12月2日 下午16:00:00
  * 
@@ -50,7 +50,7 @@ public class OrgUserController extends  com.bc.pmpheep.general.controller.BaseCo
 		//获取当前用户 
 		Map<String,Object> writerUserMap=this.getUserInfo();
 		OrgUser orgUser=new OrgUser();
-		orgUser.setOrgId(Long.parseLong( writerUserMap.get("org_id").toString()));
+		orgUser.setOrgId(Long.parseLong(writerUserMap.get("id").toString()));
 		PageParameter<WriterUser> pageParameter = new PageParameter<>(pageNumber, pageSize);
 		writerUser.setOrgId(orgUser.getOrgId());
 		pageParameter.setParameter(writerUser);
