@@ -179,6 +179,14 @@ public class MyMessageServiceImpl implements MyMessageService {
 	
 	@Override
 	public  List<DialogueVO> findMyDialogue  (Long thisId,Long friendId){
-		return myMessageDao.findMyDialogue(thisId, friendId);
+		List<DialogueVO> lst = myMessageDao.findMyDialogue(thisId, friendId);
+		//装入详情
+		for (DialogueVO dialogueVO : lst) {
+			Message message = messageService.get(dialogueVO.getMsgId());
+			if(null != message ){
+				dialogueVO.setContent(message.getContent());
+			}
+		}
+		return lst;
 	}
 }
