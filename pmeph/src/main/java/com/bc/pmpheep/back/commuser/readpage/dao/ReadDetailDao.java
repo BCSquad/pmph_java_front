@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
+import com.bc.pmpheep.back.plugin.PageParameter;
 import com.sun.org.glassfish.gmbal.ParameterNames;
 
 public interface ReadDetailDao {
@@ -19,13 +20,18 @@ public interface ReadDetailDao {
 	 * @param id
 	 * @return List<Map<String, Object>>
 	 */
-	List<Map<String, Object>> queryComment(@Param("id") String id);
+	List<Map<String, Object>> queryComment(PageParameter<Map<String, Object>> pageParameter);
 	/**
 	 * 根据书籍ID查询配套图书
 	 * @param id
 	 * @return Map<String, Object>
 	 */
 	Map<String, Object> querySupport(@Param("id") String id);
+	/**
+	 * 根据书籍ID查询一共有多少条数据
+	 * @return int
+	 */
+	int querySize(@Param("book_id") String book_id);
 	/**
 	 * 查询人卫推荐
 	 * @return List<Map<String, Object>>

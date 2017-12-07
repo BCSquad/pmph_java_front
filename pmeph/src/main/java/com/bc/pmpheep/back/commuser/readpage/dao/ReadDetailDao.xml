@@ -34,7 +34,11 @@
 	     b.avatar
 	     from book_user_comment t 
 	     left join book u on t.book_id=u.id
-	     left join writer_user b on b.id=t.writer_id where u.id=#{id}
+	     left join writer_user b on b.id=t.writer_id where u.id=#{parameter.id} limit #{start},#{pageSize}
+	</select>
+	<!-- 查询一共有多少条数据 -->
+	<select id="querySize" parameterType="java.util.Map" resultType="int">
+	   select count(*) from book_user_comment where book_id=#{book_id}
 	</select>
 	<!-- 根据书籍ID查询配套图书 -->
 	<select id="querySupport" parameterType="java.util.Map" resultType="java.util.Map">

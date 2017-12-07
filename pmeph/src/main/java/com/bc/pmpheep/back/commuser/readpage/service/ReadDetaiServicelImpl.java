@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.commuser.readpage.dao.ReadDetailDao;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
 import com.mongodb.util.Hash;
 
 @Service("com.bc.pmpheep.back.commuser.readpage.service.ReadDetaiServicelImpl")
@@ -30,14 +32,20 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 	 * 查询相关评论
 	 */
 	@Override
-	public List<Map<String, Object>> queryComment(String id) {
+	public PageResult<Map<String, Object>> queryComment(PageParameter<Map<String, Object>> pageParameter) {
 		// TODO Auto-generated method stub
-		List<Map<String, Object>> map=readDetailDao.queryComment(id);
+		PageResult<Map<String, Object>> pageResult=new PageResult<Map<String, Object>>();
+		pageResult.setPageSize(pageParameter.getPageSize());
+		List<Map<String, Object>> map=readDetailDao.queryComment(pageParameter);
 		for (Map<String, Object> pmap : map) {
 			String time=pmap.get("gmt_create").toString().substring(0, 16);
 			pmap.put("gmt_create", time);
 		}
-		return map;
+		int count=readDetailDao.querySize(pageParameter.getParameter().get("id").toString());
+		pageResult.setTotal(count);
+		pageResult.setRows(map);
+		pageResult.setPageNumber(pageParameter.getPageNumber());
+		return pageResult;
 	}
 
 	/**

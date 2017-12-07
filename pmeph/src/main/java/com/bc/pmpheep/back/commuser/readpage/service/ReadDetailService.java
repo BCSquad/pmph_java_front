@@ -3,7 +3,9 @@ package com.bc.pmpheep.back.commuser.readpage.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
+
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
 
 public interface ReadDetailService {
 
@@ -18,7 +20,7 @@ public interface ReadDetailService {
 	 * @param id
 	 * @return
 	 */
-	List<Map<String, Object>> queryComment(String id);
+	PageResult<Map<String, Object>> queryComment(PageParameter<Map<String, Object>> pageParameter);
 	/**
 	 * 根据书籍ID查询配套图书
 	 * @param id
