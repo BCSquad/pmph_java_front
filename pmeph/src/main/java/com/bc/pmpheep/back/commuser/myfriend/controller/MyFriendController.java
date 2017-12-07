@@ -62,6 +62,7 @@ public class MyFriendController extends com.bc.pmpheep.general.controller.BaseCo
         Map<String, Object> writerUserMap = this.getUserInfo();
         WriterUser writerUser = new WriterUser();
         writerUser.setId(Long.parseLong(writerUserMap.get("id").toString()));
+        // writerUser.setId(24966L);
         String pageUrl = "commuser/myfriend/myFriend";
         try {
             List<WriterFriendVO> listFriends = myFriendService.listMyFriend(writerUser);
