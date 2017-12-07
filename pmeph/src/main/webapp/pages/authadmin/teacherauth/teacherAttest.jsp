@@ -1,5 +1,5 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
@@ -126,7 +126,7 @@ String contextpath=request.getContextPath();
                     <td></td>
                     <td colspan="2"><font class="td-font-last">请上传bmp、jpg、gif、jpge、png格式的照片或扫描件</font></td>
                 </tr>
-                <tr><td colspan="3" align="center"><img alt="" src="../../image/_cupline.jpg"/></td></tr>
+                <tr><td colspan="3" align="center"><img alt="" src="<%=path%>/statics/image/_cupline.jpg"/></td></tr>
                 <tr  class="sxy-tr">
                     <td colspan="3" align="center"><input type="submit" class="btn-2" value="提交"/></td>
                 </tr>
