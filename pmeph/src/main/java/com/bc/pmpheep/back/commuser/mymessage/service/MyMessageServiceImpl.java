@@ -17,6 +17,7 @@ import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.back.util.ObjectUtil;
 import com.bc.pmpheep.back.util.PageParameterUitl;
+import com.bc.pmpheep.back.util.RouteUtil;
 import com.bc.pmpheep.general.pojo.Message;
 import com.bc.pmpheep.general.service.MessageService;
 import com.bc.pmpheep.service.exception.CheckedExceptionBusiness;
@@ -84,21 +85,25 @@ public class MyMessageServiceImpl implements MyMessageService {
 	 *
 	 */
 	public MyMessageVO setAvatar(MyMessageVO myMessageVO) {
+		WriterUser user = writerUserService.get(myMessageVO.getUserId());
 		if (myMessageVO.getUserId().equals(myMessageVO.getReceiverId())
 				&& myMessageVO.getUserType().equals(myMessageVO.getReceiverType())) {// 当接收者是当前用户时，给发送者赋值
+			myMessageVO.setReceiverAvatar(RouteUtil.userAvatar(user.getAvatar()));
+			myMessageVO.setReceiverName(user.getRealname());
+			myMessageVO.setIsMy(false);
 			switch (myMessageVO.getSenderType()) {
 			case 0:
 				myMessageVO.setSenderName("系统");
 				break;
 			case 1:
 				PmphUser pmphUser = pmphUserService.get(myMessageVO.getSenderId());
-				myMessageVO.setSenderAvatar(pmphUser.getAvatar());
+				myMessageVO.setSenderAvatar(RouteUtil.userAvatar(pmphUser.getAvatar()));
 				myMessageVO.setSenderName(pmphUser.getRealname());
 				break;
 
 			case 2:
 				WriterUser writerUser = writerUserService.get(myMessageVO.getSenderId());
-				myMessageVO.setSenderAvatar(writerUser.getAvatar());
+				myMessageVO.setSenderAvatar(RouteUtil.userAvatar(writerUser.getAvatar()));
 				myMessageVO.setSenderName(writerUser.getRealname());
 				break;
 
@@ -113,19 +118,22 @@ public class MyMessageServiceImpl implements MyMessageService {
 		}
 		if (myMessageVO.getUserId().equals(myMessageVO.getSenderId())
 				&& myMessageVO.getUserType().equals(myMessageVO.getSenderType())) {// 当发送者是当前用户时，给接收者赋值
+			myMessageVO.setSenderAvatar(RouteUtil.userAvatar(user.getAvatar()));
+			myMessageVO.setSenderName(user.getRealname());
+			myMessageVO.setIsMy(true);
 			switch (myMessageVO.getSenderType()) {
 			case 0:
 				myMessageVO.setSenderName("系统");
 				break;
 			case 1:
 				PmphUser pmphUser = pmphUserService.get(myMessageVO.getSenderId());
-				myMessageVO.setReceiverAvatar(pmphUser.getAvatar());
+				myMessageVO.setReceiverAvatar(RouteUtil.userAvatar(pmphUser.getAvatar()));
 				myMessageVO.setReceiverName(pmphUser.getRealname());
 				break;
 
 			case 2:
 				WriterUser writerUser = writerUserService.get(myMessageVO.getSenderId());
-				myMessageVO.setReceiverAvatar(writerUser.getAvatar());
+				myMessageVO.setReceiverAvatar(RouteUtil.userAvatar(writerUser.getAvatar()));
 				myMessageVO.setReceiverName(writerUser.getRealname());
 				break;
 
@@ -176,14 +184,14 @@ public class MyMessageServiceImpl implements MyMessageService {
 		}
 		return list;
 	}
-	
+
 	@Override
-	public  List<DialogueVO> findMyDialogue  (Long thisId,Long friendId){
+	public List<DialogueVO> findMyDialogue(Long thisId, Long friendId) {
 		List<DialogueVO> lst = myMessageDao.findMyDialogue(thisId, friendId);
-		//装入详情
+		// 装入详情
 		for (DialogueVO dialogueVO : lst) {
 			Message message = messageService.get(dialogueVO.getMsgId());
-			if(null != message ){
+			if (null != message) {
 				dialogueVO.setContent(message.getContent());
 			}
 		}

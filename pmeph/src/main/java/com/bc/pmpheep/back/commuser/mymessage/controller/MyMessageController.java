@@ -17,6 +17,7 @@ import com.bc.pmpheep.back.commuser.mymessage.bean.DialogueVO;
 import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
 import com.bc.pmpheep.back.commuser.mymessage.service.MyMessageService;
 import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.controller.bean.ResponseBean;
 import com.bc.pmpheep.general.controller.BaseController;
 
@@ -27,10 +28,10 @@ import com.bc.pmpheep.general.controller.BaseController;
  **/
 @Controller
 @RequestMapping("/mymessage")
-public class MyMessageController  extends  com.bc.pmpheep.general.controller.BaseController{
-    @Autowired
-    @Qualifier("com.bc.pmpheep.back.commuser.mymessage.service.MyMessageServiceImpl")
-    MyMessageService myMessageService;
+public class MyMessageController extends com.bc.pmpheep.general.controller.BaseController {
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.mymessage.service.MyMessageServiceImpl")
+	MyMessageService myMessageService;
 
 	/**
 	 * 
@@ -53,15 +54,13 @@ public class MyMessageController  extends  com.bc.pmpheep.general.controller.Bas
 	 * 
 	 */
 	@RequestMapping(value = "/tolist", method = RequestMethod.GET)
-	public ModelAndView list(Integer pageSize, Integer pageNumber, Long userId, Integer userType) {
+	public PageResult<MyMessageVO> list(Integer pageSize, Integer pageNumber, Long userId, Integer userType) {
 		PageParameter<MyMessageVO> pageParameter = new PageParameter<>(pageNumber, pageSize);
 		MyMessageVO myMessageVO = new MyMessageVO();
 		myMessageVO.setUserId(userId);
 		myMessageVO.setUserType(userType);
 		pageParameter.setParameter(myMessageVO);
-		Map<String, ResponseBean<MyMessageVO>> map = new HashMap<>();
-		map.put("mymessage", new ResponseBean(myMessageService.listMyMessage(pageParameter)));
-		return new ModelAndView("commuser/mymessage/list", map);
+		return myMessageService.listMyMessage(pageParameter);
 	}
 
 	/**
@@ -74,17 +73,20 @@ public class MyMessageController  extends  com.bc.pmpheep.general.controller.Bas
 	 * @return
 	 * 
 	 */
+	@ResponseBody
 	@RequestMapping(value = "/todetail", method = RequestMethod.PUT)
-	public ModelAndView detail(Long senderId, Integer senderType, Long userId, Integer userType) {
-		Map<String, ResponseBean<MyMessageVO>> map = new HashMap<>();
-		map.put("mymessage",
-				new ResponseBean(myMessageService.updateMyMessage(senderId, senderType, userId, userType)));
-		return new ModelAndView("commuser/mymessage/detail", map);
+	public List<MyMessageVO> detail(Long senderId, Integer senderType) {
+		Map<String, Object> writerUser = this.getUserInfo();
+		Long userId = new Long(String.valueOf(writerUser.get("id")));
+		Integer userType = new Integer(String.valueOf(writerUser.get("userType")));
+		List<MyMessageVO> list = myMessageService.updateMyMessage(senderId, senderType, userId, userType);
+		return list;
 	}
-	
+
 	/**
 	 * 获取我和朋友的对话记录
-	 * @introduction 
+	 * 
+	 * @introduction
 	 * @author Mryang
 	 * @createDate 2017年12月7日 下午2:30:29
 	 * @param friendId
@@ -92,12 +94,11 @@ public class MyMessageController  extends  com.bc.pmpheep.general.controller.Bas
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/getDialogue", method = RequestMethod.GET)
-	public List<DialogueVO> getDialogue(@RequestParam(value="friendId")Long friendId) {
-		Map <String,Object> writerUser = this.getUserInfo();
+	public List<DialogueVO> getDialogue(@RequestParam(value = "friendId") Long friendId) {
+		Map<String, Object> writerUser = this.getUserInfo();
 		Long thisId = new Long(String.valueOf(writerUser.get("id")));
-		List<DialogueVO> lst=myMessageService.findMyDialogue(thisId, friendId);
+		List<DialogueVO> lst = myMessageService.findMyDialogue(thisId, friendId);
 		return lst;
 	}
-	
 
 }

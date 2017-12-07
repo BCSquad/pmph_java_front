@@ -73,16 +73,10 @@ public class MyMessageVO implements Serializable {
 	 * 用户类型
 	 */
 	private Integer userType;
-
-	private Boolean is_withdraw;
-
-	public Boolean getIs_withdraw() {
-		return is_withdraw;
-	}
-
-	public void setIs_withdraw(Boolean is_withdraw) {
-		this.is_withdraw = is_withdraw;
-	}
+	/**
+	 * 是否是当前用户发送的消息
+	 */
+	private Boolean isMy;
 
 	public Long getId() {
 		return id;
@@ -210,6 +204,14 @@ public class MyMessageVO implements Serializable {
 
 	public void setReceiverAvatar(String receiverAvatar) {
 		this.receiverAvatar = receiverAvatar;
+	}
+
+	public Boolean getIsMy() {
+		return isMy;
+	}
+
+	public void setIsMy(Boolean isMy) {
+		this.isMy = isMy;
 	}
 
 }
