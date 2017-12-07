@@ -401,11 +401,9 @@
 		<if test="parameter.orgId !=null and parameter.orgId !='' ">
 			and  wu.org_id=#{parameter.orgId}
 		</if>
-		<if test="parameter.username !=null and parameter.username !='' ">
-			and (wu.username like concat('%',#{parameter.username},'%' )
-		</if>
-		<if test="parameter.realname !=null and parameter.realname !=''">
-			and wu.realname like concat('%',#{parameter.realname},'%')
+		<if test="parameter.name !=null and parameter.name !='' ">
+			and (wu.username like concat('%',#{parameter.name},'%' ) or
+			wu.realname like concat('%',#{parameter.name},'%' ) )
 		</if>
 		<if test="start !=null and pageNumber != null">
 			limit #{start},#{pageSize}
@@ -421,11 +419,9 @@
 		<if test="parameter.orgId !=null and parameter.orgId !='' ">
 			and  wu.org_id=#{parameter.orgId}
 		</if>
-		<if test="parameter.username !=null and parameter.username !='' ">
-			and (wu.username like concat('%',#{parameter.username},'%' )
-		</if>
-		<if test="parameter.realname !=null and parameter.realname !=''">
-			and wu.realname like concat('%',#{parameter.realname},'%')
+		<if test="parameter.name !=null and parameter.name !='' ">
+			and (wu.username like concat('%',#{parameter.name},'%' ) or
+			wu.realname like concat('%',#{parameter.name},'%' ) )
 		</if>
 	</select>
 </mapper>

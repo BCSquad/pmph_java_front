@@ -24,16 +24,46 @@
 	<script src="${ctx}/resources/commuser/user/writerLists.js" type="text/javascript"></script>
 </head>
 <body>
-<iframe style="width: 100%;padding: 0;margin: 0;height: 112px;border: none"
-        src="${ctx}/pages/authadmin/accountset/head_1.jsp"></iframe>
+
+<div class="org-head">
+    <div >
+        
+        <div class="div-content">
+            <div id="div-titletop">
+                <span class="top-lable1">欢迎访问人教e卫平台！</span>
+                <span class="top-lable2">∨</span>
+                <span class="top-lable2">&nbsp</span>
+                <span class="top-lable2">哈尔滨医科大学的账号</span>
+                <span class="top-lable2">&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+                <span class="top-lable2">下载手机客户端！</span>
+            </div>
+        </div>
+    </div>
+    <div class="div-menu">
+        <div class="div-content">
+            <div style="width:176px;float:left;"><img alt="" src="/pmeph/statics/image/_logo.jpg"/></div>
+            <div style="width:90px;float:left;">&nbsp</div>
+            <div class="div-menu-child "     >待办事项</div>
+            <div class="div-menu-child "       >申报资料审核</div>
+            <div class="div-menu-child "	 onclick="window.location.href='/pmeph/teacherauth/toPage.action'">教师认证</div>
+            <div class="div-menu-child  div-menu-child-click" onclick="window.location.href='/pmeph/user/writerLists.action'">用户管理</div>
+            <div class="div-menu-child "     onclick="window.location.href='/pmeph/user/writerLists.action'">账户设置</div>
+            <div class="div-menu-child "     onclick="window.location.href='/pmeph/teacherauth/toPage.action'">消息</div>
+        </div>
+    </div>
+</div>
+
 <div class="body">
     <div class="content-wrapper">
         <div class="message">
-            <div class="sousuokuang">
-                <input type="text" value="" placeholder='请输入姓名或用户代码' id="ssk">
-                <input type="button" value="查询" id="cxan">
-                <!--  <div id="gjss"><a href="">高级搜素</a></div>-->
-            <div class="friend-box-wrapper" id="table-15">
+             <div class="sousuokuang">
+                <select id="sstj" name="sstj">
+                    <option value="0" >姓名</option>
+                    <option value="1" >用户代码</option>
+                </select>
+                <input type="text" value="" placeholder='请输入' id="ssk" name="username">
+                <input type="button" value="查询" id="cxan" onclick="query()">
+               	<!--  <div id="gjss"><a href="">高级搜素</a></div>-->
             </div>
             <table class="table">
                 <thead>
@@ -48,7 +78,7 @@
                     <td class="">操作</td>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id='tb'>
 	              		<c:forEach items="${page.rows }" var="item">
 	              			<tr>
 	              				<td>${item.id } </td>
@@ -68,10 +98,10 @@
                 <ul class="pagination" id="page1">
                 </ul>
                 <div style="display: inline-block; vertical-align: top">
-                    <select id="page1select" name="edu">
-                        <option value="5 "   ${pageSize=='5'?'selected':'' }>每页5条</option>
-                        <option value="10 "  ${pageSize=='10'?'selected':'' }>每页10条</option>
-                        <option value="15 "  ${pageSize=='15'?'selected':'' }>每页150条</option>
+                    <select id="pages" name="pages">
+                       	<option value="10 "  ${pageSize=='10'?'selected':'' }>每页10条</option>
+                        <option value="20 "  ${pageSize=='20'?'selected':'' }>每页20条</option>
+                        <option value="50 "  ${pageSize=='50'?'selected':'' }>每页50条</option>
                     </select>
                 </div>
                 <div class="pageJump">
@@ -84,12 +114,12 @@
             </div>
              </div>
             <div class="clear"></div>
-    		</div>
+    		
 		</div>
 	</div>
 </div>
 <script type="text/javascript">
-	var pageSize =$("#page1select").val();
+	var pageSize =$("#pages").val();
             Page({
                 num: parseInt('${page.pageTotal}'),					//页码数
                 startnum: parseInt('${pageNumber}'),				//指定页码
@@ -99,26 +129,35 @@
                 }
             });
             $(function () {
-                $('#page1select').selectlist({
+                $('#pages').selectlist({
                     zIndex: 10,
                     width: 110,
                     height: 30,
                     optionHeight: 30,
                     onChange: function () {
-                    	var pageSize =this.getSelectedOptionValue(page1select);
+                    	var pageSize =this.getSelectedOptionValue(pages);
+                    	var p=$('#pages').val();
+                    	alert(pageSize);
+                    	alert(p);
                    	 	pageFun(pageSize,'${pageNumber}');
                     }
                 });
+                $('#ssk').keyup(function(event){
+            		if(event.keyCode ==13){ //回车键弹起事件
+            			this.query();
+            		  }
+                });
            });
+        function query(){
+        	var username=$("#ssk").val();
+        	window.location.href = '<%=basePath%>/user/writerLists.action?username='+username;
+        }
         function pageFun(pageSize,pageNumber){
         	window.location.href = '<%=basePath%>/user/writerLists.action?pageSize='+pageSize+'&pageNumber='+pageNumber;
         }
     </script>
-    <script type="text/javascript">
-    </script>
-   <div style="background-color: #f4f4f4;width: 100%;padding: 0;margin-top: 0;height: 220px;border: none;overflow: hidden; t">
+	<div style="background-color: white;width: 100%;padding: 0;margin: 0;height: 220px;border: none;overflow: hidden;">
 		<jsp:include page="/pages/comm/tail.jsp"></jsp:include> 
-	</div>
-          <!--  <iframe style="width: 100%;clear:both;padding: 0;margin: 0;height: 200px;border: none" src="${ctx }/pages/comm/tail.jsp"></iframe>-->
+	</div>       
 </body>
 </html>

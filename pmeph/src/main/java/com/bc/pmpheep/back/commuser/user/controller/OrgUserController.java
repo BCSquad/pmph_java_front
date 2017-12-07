@@ -38,21 +38,28 @@ public class OrgUserController extends  com.bc.pmpheep.general.controller.BaseCo
 	@Qualifier("com.bc.pmpheep.back.commuser.user.service.OrgUserServiceImpl")
 	private OrgUserService orgUserService;
 	
+	
+	
 	/**
 	 * 根据机构id 查询该机构下的申报的人数
 	 * @param orgId
 	 * @return
 	 */
     @RequestMapping(value = "/writerLists",method = RequestMethod.GET)
-    public ModelAndView writerLists(Integer pageSize, Integer pageNumber,WriterUser writerUser)
+    public ModelAndView writerLists(Integer pageSize, Integer pageNumber,String username)
     		throws Exception{
 		ModelAndView model = new ModelAndView();
+		if(null==pageSize){
+			pageSize=10;
+		}
 		PageParameter<WriterUser> pageParameter = new PageParameter<>(pageNumber, pageSize);
 		//获取当前用户 
 		Map<String,Object> writerUserMap=this.getUserInfo();
 		OrgUser orgUser=new OrgUser();
+		WriterUser writerUser=new WriterUser();
 		orgUser.setOrgId(Long.parseLong(writerUserMap.get("id").toString()));
 		writerUser.setOrgId(orgUser.getOrgId());
+		writerUser.setName(username);
 		pageParameter.setParameter(writerUser);
 	    String pageUrl = "commuser/user/writerLists";
         try {
