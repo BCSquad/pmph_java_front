@@ -39,7 +39,10 @@ public class BookSearchController extends BaseController {
 	@Qualifier("com.bc.pmpheep.back.commuser.booksearch.service.BookSearchServiceImpl")
 	BookSearchService bookSearchService;
 	
-	
+	/**
+	 * 跳转到查询页面
+	 * @throws UnsupportedEncodingException
+	 */
 	@RequestMapping("toPage")
 	public ModelAndView toPage(HttpServletRequest request) throws UnsupportedEncodingException{
 		ModelAndView mv = new ModelAndView();
@@ -56,6 +59,9 @@ public class BookSearchController extends BaseController {
 		return mv;
 	}
 	
+	/**
+	 * 查询列表刷新
+	 */
 	@RequestMapping(value = "/querybooklist",method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> querybooklist(HttpServletRequest request){
@@ -86,6 +92,9 @@ public class BookSearchController extends BaseController {
 		return resultMap;
 	}
 	
+	/**
+	 * 当前用户（作家用户）点赞或取消赞
+	 */
 	@RequestMapping(value="likeSwitch" ,method= RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> likeSwitch(HttpServletRequest request){
