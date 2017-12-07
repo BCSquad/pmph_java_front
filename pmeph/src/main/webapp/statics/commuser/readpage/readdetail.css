@@ -19,6 +19,11 @@
 	margin-left: 10px;
 }
 
+.picturesize{
+	width: 30px;
+	height: 30px;
+}
+
 .scorestar1{
 	float: left;
 	background-image: url(../../image/css_sprites.png);
@@ -310,6 +315,7 @@
 	background-color: #E4614F;
 	border-radius: 3px;
 	margin-top: -20px;
+	cursor:pointer;
 }
 
 .lookbook{
@@ -414,6 +420,12 @@
 	margin-top: 10px;
 }
 
+.rightarea{
+	margin-left: 30px;
+	width: 270px;
+	margin-top: 30px;
+	float: right;
+}
 
 .right_3{
     float: left;
@@ -620,7 +632,18 @@
 	float:left;
 	font-family: MicrosoftYaHei;
 	letter-spacing: 0px;
+	font-size: 14px;
 	color: #000000;
+	height: 41px;
+	margin-top: -4px;
+	overflow: hidden;
+	line-height: 22px;
+}
+
+.righttopbook{
+	height: 116px;
+	margin: auto;
+	display: block;
 }
 
 .ptts_sp2{
@@ -628,6 +651,9 @@
 	font-size: 12px;
 	letter-spacing: 0px;
 	color: #999999;
+	width:100%;
+	height: 13px;
+	margin-top: 42px;
 }
 
 .ptts_sp3{
@@ -635,6 +661,11 @@
 	font-size: 12px;
 	letter-spacing: 0px;
 	color: #666666;
+	margin-top: 18px;
+	height: 38px;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	line-height: 20px;
 }
 
 .right_2{
