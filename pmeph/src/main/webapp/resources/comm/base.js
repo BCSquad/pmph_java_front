@@ -226,7 +226,7 @@ $(function () {
     var input_open = false;
     $(".search-icon").click(function () {
         var search = function () {
-            window.location.href = contextpath + "booksearch/toPage.action?search=" + $("#search-input").val();
+            window.location.href = contextpath + "booksearch/toPage.action?search=" + encodeURI(encodeURI($("#search-input").val()));
         }
         if (!input_open) {
             $(".delete").css("display", "block");
