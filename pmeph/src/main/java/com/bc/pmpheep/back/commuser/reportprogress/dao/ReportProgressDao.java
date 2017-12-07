@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.bc.pmpheep.back.commuser.reportprogress.bean.Declaration;
 import com.bc.pmpheep.back.commuser.reportprogress.bean.TextBookCheckVO;
+import com.bc.pmpheep.back.commuser.reportprogress.bean.UserMessageVO;
 
 /**
  * 
@@ -50,6 +52,34 @@ public interface ReportProgressDao {
      * </pre>
      */
     List<TextBookCheckVO> getTextBookCheckResult(@Param("userId") Long userId,
+    @Param("materialId") Long materialId);
+
+    /**
+     * 
+     * <pre>
+     * 功能描述：获取用户申报消息
+     * 使用示范：
+     *
+     * @param userId 作家ID
+     * @param materialId 教材ID
+     * @return
+     * </pre>
+     */
+    List<UserMessageVO> getUserMessageByMaterialId(@Param("userId") Long userId,
+    @Param("materialId") Long materialId);
+
+    /**
+     * 
+     * <pre>
+     * 功能描述：获取作家用户申报教材信息
+     * 使用示范：
+     *
+     * @param userId 作家ID
+     * @param materialId 教材ID
+     * @return
+     * </pre>
+     */
+    Declaration getDeclarationByMaterialIdAndUserId(@Param("userId") Long userId,
     @Param("materialId") Long materialId);
 
 }

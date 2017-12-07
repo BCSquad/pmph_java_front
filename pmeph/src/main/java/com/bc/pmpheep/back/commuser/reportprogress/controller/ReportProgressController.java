@@ -3,6 +3,7 @@ package com.bc.pmpheep.back.commuser.reportprogress.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.reportprogress.bean.TextBookCheckVO;
+import com.bc.pmpheep.back.commuser.reportprogress.bean.UserMessageVO;
 import com.bc.pmpheep.back.commuser.reportprogress.service.ReportProgressService;
 import com.bc.pmpheep.general.controller.BaseController;
 
@@ -35,6 +37,7 @@ import com.bc.pmpheep.general.controller.BaseController;
 public class ReportProgressController extends BaseController {
 
     @Autowired
+    @Qualifier("com.bc.pmpheep.back.commuser.reportprogress.service.impl.ReportProgressServiceImpl")
     ReportProgressService reportProgressService;
 
     /**
@@ -52,16 +55,21 @@ public class ReportProgressController extends BaseController {
     public ModelAndView listReportProgress(@RequestParam("materialId") Long materialId)
     throws Exception {
         ModelAndView model = new ModelAndView();
-        this.getUserInfo();
-        String pageUrl = "";
-        Long userId = Long.parseLong(this.getUserInfo().get("id").toString());
+        String pageUrl = "commuser/report_progress/progress";
+        // Long userId = Long.parseLong(this.getUserInfo().get("id").toString());
+        Long userId = 32781L;
+        materialId = 123L;
         // 申报进度
         TextBookCheckVO progress = reportProgressService.getMaterialProgress(userId, materialId);
         // 书籍审核结果
         List<TextBookCheckVO> textBookChecks =
         reportProgressService.getTextBookCheckResult(userId, materialId);
+        // 申报消息
+        List<UserMessageVO> userMessageList =
+        reportProgressService.getUserMessageByMaterialId(userId, materialId);
         model.addObject("progress", progress);
         model.addObject("textBookCheck", textBookChecks);
+        model.addObject("userMessageList", userMessageList);
         model.setViewName(pageUrl);
         return model;
     }
