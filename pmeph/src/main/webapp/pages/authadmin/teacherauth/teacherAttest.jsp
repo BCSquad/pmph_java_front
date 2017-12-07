@@ -86,7 +86,7 @@ String contextpath=request.getContextPath();
          <div>
             <table border="0" style="margin-left:20px;">
                 <tr>
-                    <td colspan="3" align="center"><img alt="" src="../../image/_cupline.jpg"/></td>
+                    <td colspan="3" align="center"><img alt="" src="<%=path%>/statics/image/_cupline.jpg"/></td>
                 </tr>
                 <tr  class="sxy-tr">
                     <td colspan="3"><font class="td-title">学校教师信息登记（<font color="#fd9a2e">未审核</font>）</font></td>
