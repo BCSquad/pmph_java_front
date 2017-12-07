@@ -61,10 +61,14 @@ function queryMain(){
 		data:data,
 		success:function(json){
 			$("#zebra-table").html(json.html);
+			
 			if (json.html.trim() == "") {
 				$(".pagination-wrapper").hide();
 			}else{
 				$(".pagination-wrapper").show();
+				$(".pagination").css("display","inline-block");
+				$(".pageJump").css("display","inline-block");
+				$(".pagination").next("div").css("display","inline-block");
 			}
 			$('#page1').html("");	
 			$("#totoal_count").html(json.totoal_count);
