@@ -7,10 +7,15 @@
 	<select id="getMaterialProgress" parameterType="java.util.Map" resultType="TextBookCheckVO">
 		SELECT 
 			dc.`material_id`,
+			m.`material_name`,
 			dc.`offline_progress`,
 			dc.`online_progress`
 		FROM 
 			`declaration` dc 
+		LEFT JOIN 
+			`material` m 
+    	ON 
+    		dc.`material_id` = m.`id` 
 		WHERE
 			 dc.`material_id` =#{materialId}
 		AND 
@@ -20,7 +25,7 @@
 	<!-- 获取申报教材中书籍审核结果 -->
 	<select id="getTextBookCheckResult" parameterType="java.util.Map" resultType="TextBookCheckVO">
 		SELECT 
-			d.`material_id`,dp.`textbook_id`,
+			d.`material_id`, dp.`textbook_id`,
 			tb.`textbook_name`,d.`user_id`,
 			dp.`chosen_position`,dp.`rank`,
 			tb.`is_chief_chosen`,tb.`is_published` 
@@ -39,6 +44,39 @@
 		ON 
 			tb.`material_id` = m.`id`
 		WHERE 
+			d.`user_id`=#{userId}
+		AND 
+			d.`material_id`=#{materialId}
+	</select>
+	
+	<!-- 获取作家用户申报教材消息 -->
+	<select id="getUserMessageByMaterialId" parameterType="java.util.Map" resultType="UserMessageVO">
+		SELECT 
+			* 
+		FROM 
+			user_message d 
+		WHERE 
+			d.`is_withdraw` =0
+		AND
+			d.`is_deleted` =0
+		AND
+			d.`receiver_id`=#{userId}
+		AND 
+			d.`material_id`=#{materialId}
+		ORDER BY 
+			d.`gmt_create` DESC 
+		LIMIT 0,4
+	</select>
+	
+	<!-- 获取作家用户申报教材信息 -->
+	<select id="getDeclarationByMaterialIdAndUserId" parameterType="java.util.Map" resultType="Declaration">
+		SELECT 
+			* 
+		FROM 
+			`declaration` d 
+		WHERE 
+			d.`is_staging`=0
+		AND
 			d.`user_id`=#{userId}
 		AND 
 			d.`material_id`=#{materialId}
