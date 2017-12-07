@@ -86,65 +86,40 @@ public class MyMessageServiceImpl implements MyMessageService {
 	 */
 	public MyMessageVO setAvatar(MyMessageVO myMessageVO) {
 		WriterUser user = writerUserService.get(myMessageVO.getUserId());
+		myMessageVO.setUserAvatar(RouteUtil.userAvatar(user.getAvatar()));
+		myMessageVO.setUserName(user.getRealname());
+		switch (myMessageVO.getSenderType()) {
+		case 0:
+			myMessageVO.setName("系统");
+			break;
+		case 1:
+			PmphUser pmphUser = pmphUserService.get(myMessageVO.getSenderId());
+			myMessageVO.setAvatar(RouteUtil.userAvatar(pmphUser.getAvatar()));
+			myMessageVO.setName(pmphUser.getRealname());
+			break;
+
+		case 2:
+			WriterUser writerUser = writerUserService.get(myMessageVO.getSenderId());
+			myMessageVO.setAvatar(RouteUtil.userAvatar(writerUser.getAvatar()));
+			myMessageVO.setName(writerUser.getRealname());
+			break;
+
+		case 3:
+			// 现在没有机构用户
+			break;
+
+		default:
+			throw new CheckedServiceException(CheckedExceptionBusiness.MESSAGE, CheckedExceptionResult.NULL_PARAM,
+					"发送者类型不正确！");
+		}
 		if (myMessageVO.getUserId().equals(myMessageVO.getReceiverId())
-				&& myMessageVO.getUserType().equals(myMessageVO.getReceiverType())) {// 当接收者是当前用户时，给发送者赋值
-			myMessageVO.setReceiverAvatar(RouteUtil.userAvatar(user.getAvatar()));
-			myMessageVO.setReceiverName(user.getRealname());
+				&& myMessageVO.getUserType().equals(myMessageVO.getReceiverType())) {// 当接收者是当前用户时，表示不是我发送的
 			myMessageVO.setIsMy(false);
-			switch (myMessageVO.getSenderType()) {
-			case 0:
-				myMessageVO.setSenderName("系统");
-				break;
-			case 1:
-				PmphUser pmphUser = pmphUserService.get(myMessageVO.getSenderId());
-				myMessageVO.setSenderAvatar(RouteUtil.userAvatar(pmphUser.getAvatar()));
-				myMessageVO.setSenderName(pmphUser.getRealname());
-				break;
 
-			case 2:
-				WriterUser writerUser = writerUserService.get(myMessageVO.getSenderId());
-				myMessageVO.setSenderAvatar(RouteUtil.userAvatar(writerUser.getAvatar()));
-				myMessageVO.setSenderName(writerUser.getRealname());
-				break;
-
-			case 3:
-				// 现在没有机构用户
-				break;
-
-			default:
-				throw new CheckedServiceException(CheckedExceptionBusiness.MESSAGE, CheckedExceptionResult.NULL_PARAM,
-						"发送者类型不正确！");
-			}
 		}
 		if (myMessageVO.getUserId().equals(myMessageVO.getSenderId())
-				&& myMessageVO.getUserType().equals(myMessageVO.getSenderType())) {// 当发送者是当前用户时，给接收者赋值
-			myMessageVO.setSenderAvatar(RouteUtil.userAvatar(user.getAvatar()));
-			myMessageVO.setSenderName(user.getRealname());
+				&& myMessageVO.getUserType().equals(myMessageVO.getSenderType())) {// 当发送者是当前用户时，表示是我发送的
 			myMessageVO.setIsMy(true);
-			switch (myMessageVO.getSenderType()) {
-			case 0:
-				myMessageVO.setSenderName("系统");
-				break;
-			case 1:
-				PmphUser pmphUser = pmphUserService.get(myMessageVO.getSenderId());
-				myMessageVO.setReceiverAvatar(RouteUtil.userAvatar(pmphUser.getAvatar()));
-				myMessageVO.setReceiverName(pmphUser.getRealname());
-				break;
-
-			case 2:
-				WriterUser writerUser = writerUserService.get(myMessageVO.getSenderId());
-				myMessageVO.setReceiverAvatar(RouteUtil.userAvatar(writerUser.getAvatar()));
-				myMessageVO.setReceiverName(writerUser.getRealname());
-				break;
-
-			case 3:
-				// 现在没有机构用户
-				break;
-
-			default:
-				throw new CheckedServiceException(CheckedExceptionBusiness.MESSAGE, CheckedExceptionResult.NULL_PARAM,
-						"发送者类型不正确！");
-			}
 		}
 
 		return myMessageVO;
@@ -197,10 +172,10 @@ public class MyMessageServiceImpl implements MyMessageService {
 		}
 		return lst;
 	}
-	
+
 	@Override
-	public void senNewMsg(Long thisId,Long frendId,String title,String content){
-		Message message =  new Message ();
+	public void senNewMsg(Long thisId, Long frendId, String title, String content) {
+		Message message = new Message();
 		message.setContent(content);
 		messageService.add(message);
 		MyMessage userMessage = new MyMessage();
@@ -214,14 +189,3 @@ public class MyMessageServiceImpl implements MyMessageService {
 		myMessageDao.addUserMessage(userMessage);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-

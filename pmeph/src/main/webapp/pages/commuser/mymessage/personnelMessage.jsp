@@ -4,15 +4,19 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head lang="en">
-    <c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <title>私信列表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
-<link rel="stylesheet" href="${ctx}/statics/commuser/mymessage/message.css" type="text/css">
-<link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/chat.css" type="text/css">
+<link rel="stylesheet" href="${ctx}/statics/css/base.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${ctx}/statics/commuser/mymessage/message.css" type="text/css">
+<link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/chat.css"
+	type="text/css">
 <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css" />
 <script src="${ctx}/statics/js/jquery/jquery.js"></script>
 <script src="${ctx}/statics/js/jquery/jquery.selectlist.js"></script>
+ <script src="${ctx}/resources/commuser/mymessage/personnelMessage.js" ></script>
 <style type="text/css">
 #rightContent .select-button {
 	background: #f6f6f6;
@@ -23,6 +27,7 @@
 }
 </style>
 <script type="text/javascript">
+var contxtpath = '${pageContext.request.contextPath}';
 	$(function() {
 		$('#select').selectlist({
 			zIndex : 10,
@@ -35,42 +40,21 @@
 </script>
 </head>
 <body>
-	<iframe
-		style="width: 100%; padding: 0; margin: 0; height: 81px; border: none"
-		src="../comm/head.html"></iframe>
-
+	<jsp:include page="/pages/comm/head.jsp"></jsp:include>
 	<div class="messageList">
 		<span><a class="otherOptions" href="../mymessage/notice.html">通知</a></span>
 		<span><a href="../mymessage/apply.html" class="unselected">申请</a></span>
 		<span id="otherSelected"><b>私信</b></span> <span id="rightContent">筛选：
 			<select id="select" title="请选择">
 				<option value="">全部</option>
-				<option value="1">个人私信</option>
+				<option value="true">已读</option>
+				<option value="false">未读</option>
 		</select>
 		</span>
 	</div>
 	</div>
-	<div class="message">
-		<table class="table">
-			<tr>
-				<th rowspan="2" class="headPortrait"><img class="pictureNotice"
-					src="../pictures/头像.png"></th>
-				<td class="name"><span>张三</span><span class="time1">2017.11.13
-						15:23</span></td>
-			</tr>
-			<tr>
-				<td colspan="2" class="personMessageContent">私信内容：享有“西方医学之父”之称的古希腊医学家希波克拉底曾经发誓：治病时不给病人带来痛苦与危害，今天的医生们...</td>
-				<td class="buttonDetail">
-					<div class="buttonAccept">
-						<a class="a" href="javascript:void(0)" onclick="show()">查看详情</a>
-					</div>
-
-				</td>
-			</tr>
-			<tr>
-				<td colspan="4" align="center"><hr class="line"></td>
-			</tr>
-		</table>
+	<div id = "list" class="message">
+		
 		<!--  <a class="a" href="javascript:void(0)" onclick="show()" style=" background:red">弹出</a>-->
 
 		<div class="b hidden" id="box">
@@ -188,11 +172,9 @@
 			</div>
 
 		</div>
-		<div class="load-more clearfix">加载更多...</div>
+		<div id="loadMore" class="load-more clearfix">加载更多...</div>
 	</div>
-	<iframe
-		style="width: 100%; clear: both; padding: 0; margin: 0; height: 190px; border: none"
-		src="../comm/tail.html"></iframe>
+	<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
 <script>
 	function show() {

@@ -1,6 +1,5 @@
 package com.bc.pmpheep.back.commuser.mymessage.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,8 +17,6 @@ import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
 import com.bc.pmpheep.back.commuser.mymessage.service.MyMessageService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
-import com.bc.pmpheep.controller.bean.ResponseBean;
-import com.bc.pmpheep.general.controller.BaseController;
 
 /**
  * @author 曾庆峰
@@ -32,6 +29,13 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.mymessage.service.MyMessageServiceImpl")
 	MyMessageService myMessageService;
+
+	@RequestMapping(value = "/listMyMessage", method = RequestMethod.GET)
+	    public ModelAndView listMyFriend() throws Exception {
+		  ModelAndView modelAndView = new ModelAndView();
+		  modelAndView.setViewName("commuser/mymessage/personnelMessage");
+		  return modelAndView;
+	  }
 
 	/**
 	 * 
@@ -53,12 +57,16 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 	 * @return
 	 * 
 	 */
+	@ResponseBody
 	@RequestMapping(value = "/tolist", method = RequestMethod.GET)
-	public PageResult<MyMessageVO> list(Integer pageSize, Integer pageNumber, Long userId, Integer userType) {
+	public PageResult<MyMessageVO> list(Integer pageSize, Integer pageNumber, Boolean isRead) {
+		Map<String, Object> writerUser = this.getUserInfo();
+		Long userId = new Long(String.valueOf(writerUser.get("id")));
 		PageParameter<MyMessageVO> pageParameter = new PageParameter<>(pageNumber, pageSize);
 		MyMessageVO myMessageVO = new MyMessageVO();
 		myMessageVO.setUserId(userId);
-		myMessageVO.setUserType(userType);
+		myMessageVO.setUserType(2);
+		myMessageVO.setIsRead(isRead);
 		pageParameter.setParameter(myMessageVO);
 		return myMessageService.listMyMessage(pageParameter);
 	}
@@ -78,8 +86,7 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 	public List<MyMessageVO> detail(Long senderId, Integer senderType) {
 		Map<String, Object> writerUser = this.getUserInfo();
 		Long userId = new Long(String.valueOf(writerUser.get("id")));
-		Integer userType = new Integer(String.valueOf(writerUser.get("userType")));
-		List<MyMessageVO> list = myMessageService.updateMyMessage(senderId, senderType, userId, userType);
+		List<MyMessageVO> list = myMessageService.updateMyMessage(senderId, senderType, userId, 2);
 		return list;
 	}
 
@@ -100,13 +107,14 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 		List<DialogueVO> lst = myMessageService.findMyDialogue(thisId, friendId);
 		return lst;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/senNewMsg", method = RequestMethod.POST)
-	public String senNewMsg(@RequestParam(value="friendId")Long friendId,@RequestParam(value="title")String title,@RequestParam(value="content")String content){
-		Map <String,Object> writerUser = this.getUserInfo();
+	public String senNewMsg(@RequestParam(value = "friendId") Long friendId,
+			@RequestParam(value = "title") String title, @RequestParam(value = "content") String content) {
+		Map<String, Object> writerUser = this.getUserInfo();
 		Long thisId = new Long(String.valueOf(writerUser.get("id")));
-		myMessageService.senNewMsg(thisId, friendId,title, content);
+		myMessageService.senNewMsg(thisId, friendId, title, content);
 		return "success";
 	}
 
