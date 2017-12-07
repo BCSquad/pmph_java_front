@@ -43,15 +43,15 @@ public class OrgUserController extends  com.bc.pmpheep.general.controller.BaseCo
 	 * @param orgId
 	 * @return
 	 */
-    @RequestMapping(value = "/writerLists")
+    @RequestMapping(value = "/writerLists",method = RequestMethod.GET)
     public ModelAndView writerLists(Integer pageSize, Integer pageNumber,WriterUser writerUser)
     		throws Exception{
 		ModelAndView model = new ModelAndView();
+		PageParameter<WriterUser> pageParameter = new PageParameter<>(pageNumber, pageSize);
 		//获取当前用户 
 		Map<String,Object> writerUserMap=this.getUserInfo();
 		OrgUser orgUser=new OrgUser();
 		orgUser.setOrgId(Long.parseLong(writerUserMap.get("id").toString()));
-		PageParameter<WriterUser> pageParameter = new PageParameter<>(pageNumber, pageSize);
 		writerUser.setOrgId(orgUser.getOrgId());
 		pageParameter.setParameter(writerUser);
 	    String pageUrl = "commuser/user/writerLists";
@@ -59,6 +59,11 @@ public class OrgUserController extends  com.bc.pmpheep.general.controller.BaseCo
         	PageResult<WriterUser> page = writerUserService.getOrg(pageParameter);
             model.setViewName(pageUrl);
             model.addObject("page", page);
+            if (null == pageNumber) {
+                pageNumber = 1;
+            }
+            model.addObject("pageNumber", pageNumber);
+            model.addObject("pageSize", pageSize);
         } catch (CheckedServiceException e) {
             throw new CheckedServiceException(e.getBusiness(), e.getResult(), e.getMessage(),
                                               pageUrl);
