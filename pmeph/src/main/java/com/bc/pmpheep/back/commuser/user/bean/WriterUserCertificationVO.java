@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 import org.apache.ibatis.type.Alias;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 
@@ -35,7 +34,7 @@ public class WriterUserCertificationVO implements Serializable {
     // 认证进度 --- 0=未提交/1=已提交/2=被退回/3=通过
     private Integer progress;
     // 教师资格证--- 资格证图片的资源地址
-    private MultipartFile cert;
+    private String cert;
     // 创建时间
     private Timestamp gmtCreate;
     // 修改时间
@@ -55,7 +54,7 @@ public class WriterUserCertificationVO implements Serializable {
     }
 
     public WriterUserCertificationVO(Long userId, Long orgId, String handphone, String idcard,
-    		Integer progress, MultipartFile cert, Timestamp gmtCreate, Timestamp gmtUpdate) {
+    		Integer progress, String cert, Timestamp gmtCreate, Timestamp gmtUpdate) {
         this.userId = userId;
         this.orgId = orgId;
         this.handphone = handphone;
@@ -130,11 +129,11 @@ public class WriterUserCertificationVO implements Serializable {
 		this.progress = progress;
 	}
 
-	public MultipartFile getCert() {
+	public String getCert() {
 		return cert;
 	}
 
-	public void setCert(MultipartFile cert) {
+	public void setCert(String cert) {
 		this.cert = cert;
 	}
 

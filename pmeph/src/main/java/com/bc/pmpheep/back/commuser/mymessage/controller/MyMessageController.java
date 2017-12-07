@@ -109,12 +109,11 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/senNewMsg", method = RequestMethod.POST)
-	public String senNewMsg(@RequestParam(value = "friendId") Long friendId,
-			@RequestParam(value = "title") String title, @RequestParam(value = "content") String content) {
-		Map<String, Object> writerUser = this.getUserInfo();
+	@RequestMapping(value = "/senNewMsg", method = RequestMethod.GET)
+	public String senNewMsg(@RequestParam(value="friendId")Long friendId,Short friendIdType,@RequestParam(value="title")String title,@RequestParam(value="content")String content){
+		Map <String,Object> writerUser = this.getUserInfo();
 		Long thisId = new Long(String.valueOf(writerUser.get("id")));
-		myMessageService.senNewMsg(thisId, friendId, title, content);
+		myMessageService.senNewMsg(thisId, friendId,friendIdType,title, content);
 		return "success";
 	}
 

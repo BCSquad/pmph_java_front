@@ -1,13 +1,10 @@
 package com.bc.pmpheep.back.commuser.user.service;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.bc.pmpheep.back.commuser.book.bean.BookVO;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertification;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertificationVO;
@@ -63,6 +60,13 @@ public class WriterUserServiceImpl implements WriterUserService {
 					CheckedExceptionResult.NULL_PARAM, "id不能为空");
 		}
 		WriterUserCertificationVO writerUserCertificationVO = writerUserDao.showTeacherCertification(id);
+		/*String cert = writerUserCertificationVO.getCert();
+		String mongoId = null;
+		if (cert.isEmpty()) {
+			
+		} else {
+			
+		}*/
 		return writerUserCertificationVO;
 	}
 
@@ -79,7 +83,7 @@ public class WriterUserServiceImpl implements WriterUserService {
 		String handPhone = writerUserCertificationVO.getHandphone(); // 获取手机
 		String idCard = writerUserCertificationVO.getIdcard(); // 获取身份证
 		Integer progress = writerUserCertificationVO.getProgress(); // 认证进度
-		MultipartFile cert = writerUserCertificationVO.getCert(); // 获取教师资格证
+		String cert = writerUserCertificationVO.getCert(); // 获取教师资格证
 		// 把获取的数据添加进writerUserCertification
 		WriterUserCertification writerUserCertification = new WriterUserCertification();
 		writerUserCertification.setUserId(userId);
@@ -89,11 +93,23 @@ public class WriterUserServiceImpl implements WriterUserService {
 		writerUserCertification.setProgress(progress);
 		writerUserCertification.setCert(null);
 		writerUserDao.addCertification(writerUserCertification);
-		String mongoId = null;
-        if (null == cert) {
-        	
+		File migCert = null;
+		if (StringUtil.isEmpty(cert)) {
+			writerUserCertification.setCert(null);
         } else {
-            mongoId = fileService.save(cert, FileType.TEACHER_CERTIFICATION_PIC, writerUserCertificationVO.getId());
+        	migCert = new File(cert);
+            if (migCert.exists()) {
+                String fileName = migCert.getName(); // 获取原文件名字
+                writerUserCertification.setCert(fileName);
+            } else {
+            	writerUserCertification.setCert(null);
+            }
+        }
+		String mongoId = null;
+        if (null == migCert) {
+        	writerUserCertification.setCert(null);
+        } else {
+            mongoId = fileService.saveLocalFile(migCert, FileType.TEACHER_CERTIFICATION_PIC, writerUserCertificationVO.getId());
             if (null != mongoId) {
             	Long ids = writerUserCertification.getId();
             	writerUserCertification.setCert(mongoId);

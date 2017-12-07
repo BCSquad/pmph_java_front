@@ -86,11 +86,11 @@ $(function(){
 		}else{
 			var frendId =$("#frendId").val();
 			$.ajax({
-		        type:'post',
+		        type:'get',
 		        url :contxtpath+'/mymessage/senNewMsg.action',
 		        async:false,
 		        contentType: 'application/json',
-		        dataType:'text',
+		        dataType:'json',
 		        data:{
 		        	friendId : frendId,
 		        	content  : content,
@@ -100,6 +100,7 @@ $(function(){
 		        	if(responsebean=='success'){
 		        		window.message.success('发送成功');
 			        	hide();
+			        	$("#content").val('')
 		        	}
 		        }
 			});
