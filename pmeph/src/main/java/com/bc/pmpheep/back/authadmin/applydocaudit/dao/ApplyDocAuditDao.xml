@@ -67,6 +67,7 @@
 		LIMIT ${start}, ${pageSize}
 	</select>
 	
+	<!-- 申报资料审核总数查询 -->
 	<select id="materialDeclareAuditListQueryCount" parameterType="PageParameter" resultType="java.lang.Integer">
 		select count(*) from 
 		(
@@ -104,7 +105,6 @@
 		</where>
 		group by m.id
 		)t
-		<!-- <![CDATA[ and m.actual_deadline >= NOW()]]> -->
 	</select>
 	
 	

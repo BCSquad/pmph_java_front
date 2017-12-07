@@ -6,7 +6,7 @@
 		
 	</resultMap>
 	
-	<select id="queryTeacherAuthList" parameterType="java.util.Map" resultMap="teacherAuthListMap">
+	<select id="queryTeacherAuthList" parameterType="PageParameter" resultMap="teacherAuthListMap">
 		SELECT
 		u.realname,
 		u.position,
@@ -27,32 +27,32 @@
 		Inner Join writer_user AS u ON c.user_id = u.id 
 		inner join org_user as o on c.org_id = o.org_id
 		<where>
-			<if test="orgUserId != null and orgUserId != '' ">
-				and o.id =#{orgUserId}
+			<if test="parameter.orgUserId != null and parameter.orgUserId != '' ">
+				and o.id =#{parameter.orgUserId}
 			</if>
-			<if test="queryName != null and queryName != '' ">
-				and u.realname like concat("%",#{queryName},"%")
+			<if test="parameter.queryName != null and parameter.queryName != '' ">
+				and u.realname like concat("%",#{parameter.queryName},"%")
 			</if>
-			<if test="queryStatus != null and queryStatus != '' ">
-				and c.progress = ${queryStatus}
+			<if test="parameter.queryStatus != null and parameter.queryStatus != '' ">
+				and c.progress = ${parameter.queryStatus}
 			</if>
 		</where>
-		limit ${startNum},${pageSize}
+		limit ${start},${pageSize}
 	</select>
 	
-	<select id="queryTeacherAuthCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+	<select id="queryTeacherAuthCount" parameterType="PageParameter" resultType="java.lang.Integer">
 		select count(*) from writer_user_certification AS c
 		Inner Join writer_user AS u ON c.user_id = u.id 
 		inner join org_user as o on c.org_id = o.org_id
 		<where>
-			<if test="orgUserId != null and orgUserId != '' ">
-				and o.id =#{orgUserId}
+			<if test="parameter.orgUserId != null and parameter.orgUserId != '' ">
+				and o.id =#{parameter.orgUserId}
 			</if>
-			<if test="queryName != null and queryName != '' ">
-				and u.realname like concat("%",#{queryName},"%")
+			<if test="parameter.queryName != null and parameter.queryName != '' ">
+				and u.realname like concat("%",#{parameter.queryName},"%")
 			</if>
-			<if test="queryStatus != null and queryStatus != '' ">
-				and c.progress = ${queryStatus}
+			<if test="parameter.queryStatus != null and parameter.queryStatus != '' ">
+				and c.progress = ${parameter.queryStatus}
 			</if>
 		</where>
 	</select>

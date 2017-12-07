@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.bc.pmpheep.back.plugin.PageParameter;
-import com.bc.pmpheep.controller.bean.ResponseBean;
 public interface AddFriendService {
 
 	/**

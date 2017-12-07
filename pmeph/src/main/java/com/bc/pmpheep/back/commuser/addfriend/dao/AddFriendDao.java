@@ -2,24 +2,26 @@ package com.bc.pmpheep.back.commuser.addfriend.dao;
 
 import java.util.List;
 import java.util.Map;
+
+import com.bc.pmpheep.back.plugin.PageParameter;
 /**
- * 资料申报审核（机构用户）dao层
+ * 添加好友 列表 dao层
  * @author Administrator
  *
  */
 public interface AddFriendDao {
 	/**
-	 * 查询教材列表
-	 * @param paraMap
+	 * 查询未添加的好友（分页）
+	 * @param pageParameter
 	 * @return
 	 */
-	public List<Map<String,Object>> addFriendListQuery(Map<String,Object> paraMap);
+	public List<Map<String,Object>> addFriendListQuery(PageParameter<Map<String, Object>> pageParameter);
 	/**
-	 * 查询教材总数
-	 * @param map
+	 * 查询未添加的好友总数
+	 * @param pageParameter
 	 * @return
 	 */
-	public Integer addFriendListQueryCount(Map<String, Object> map);
+	public Integer addFriendListQueryCount(PageParameter<Map<String, Object>> pageParameter);
 	/**
 	 * 添加一条好友申请
 	 * @param para_map
