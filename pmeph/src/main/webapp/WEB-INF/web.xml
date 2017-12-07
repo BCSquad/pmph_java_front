@@ -35,12 +35,12 @@
         <init-param>
             <description>用户ID，用于测试</description>
             <param-name>userid</param-name>
-            <param-value>1389</param-value>
+            <param-value>27783</param-value>
         </init-param>
         <init-param>
             <description>用户类型，用于测试(1:普通用户 2:机构用户)</description>
             <param-name>usertype</param-name>
-            <param-value>2</param-value>
+            <param-value>1</param-value>
         </init-param>
     </filter>
     <filter-mapping>

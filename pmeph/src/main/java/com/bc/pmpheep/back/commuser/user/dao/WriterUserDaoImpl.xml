@@ -338,8 +338,8 @@
 	</select>
 	<!-- 查看学校教师认证信息 -->
 	<select id="showTeacherCertification" parameterType="Long" resultType="WriterUserCertificationVO">
-		select *,wu.username,o.org_name from writer_user_certification wuc 
-		left join (select id,username from writer_user) wu on (wu.id=wuc.user_id) 
+		select *,wu.realname,o.org_name from writer_user_certification wuc 
+		left join (select id,realname from writer_user) wu on (wu.id=wuc.user_id) 
 		left join (select id,org_name from org) o on (o.id=wuc.org_id)
 		where wuc.id=#{id}
 	</select>
