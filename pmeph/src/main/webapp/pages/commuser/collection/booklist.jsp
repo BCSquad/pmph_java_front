@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
    <div class="content-wrapper">
-       <div class="area1"> <a>个人中心</a> &gt;<a> 我的收藏</a> &gt; <a href="bookcollection/tobookcollection.action">书籍收藏夹</a> &gt; <a>${favoriteName }</a></div>
+       <div class="area1"> <a  href="personalhomepage/tohomepage.action" >个人中心</a> &gt;<a href="javascript:;"> 我的收藏</a> &gt; <a href="bookcollection/tobookcollection.action">书籍收藏夹</a> &gt; <a>${favoriteName }</a></div>
        <div class="area2">
            <span class="name" >${favoriteName }</span>
            <input type="hidden" id="favoriteName" value="${favoriteName }"/>

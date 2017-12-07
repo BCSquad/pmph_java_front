@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
    <div class="content-wrapper">
-        <div class="area1"><a href="#">个人中心</a> &gt; <a href="#">我的收藏</a> &gt; <a href="articlecollection/toarticlecollection.action">文章收藏夹</a> &gt; ${favoriteName }</div>
+        <div class="area1"><a href="personalhomepage/tohomepage.action">个人中心</a> &gt; <a href="javascript:;">我的收藏</a> &gt; <a href="articlecollection/toarticlecollection.action">文章收藏夹</a> &gt; ${favoriteName }</div>
     <div class="area2">
         <span class="name" >${favoriteName }</span>
          <input type="hidden" id="favoriteName" value="${favoriteName }"/>
@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                    <span class="author-icon" style="background-image: url(${article.avatar=='DEFAULT'?'statics/image/deficon.png':article.avatar}); ">
                    </span>
                    <span class="name">${article.realname }</span>
-                   <span class="time"><fmt:formatDate  value="${article.gmt_create}" pattern="yyyy-MM-dd"/></span>
+                   <span class="time"><fmt:formatDate  value="${article.gmt_create}" pattern="yyyy.MM.dd"/></span>
                </span>
         </div>
         <div class="content">
