@@ -213,7 +213,7 @@ function addmark(){
 			dataType:'json',
 			success:function(json){
 					if(json.returncode=="OK"){
-						$("#sc").attr("src",contextpath+"statics/image/sc101(1).jpg");
+						$("#sc").attr("src",contextpath+"statics/image/sc101(1).png");
 					}else{
 						$("#sc").attr("src",contextpath+"statics/image/s102(1).png");
 					}
