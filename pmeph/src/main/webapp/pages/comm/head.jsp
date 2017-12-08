@@ -54,7 +54,7 @@
             <c:if test="${userInfo != null}">
                 <div class="user-info">
                     <span class="sign"></span>
-                    <img class="notice-icon" src="${ctx}/statics/image/message.png" alt="">
+                    <img class="notice-icon" src="${ctx}/statics/image/message.png" alt="" onclick="location.href='${ctx}/message/applyMessageList.action'">
                     <img class="user-icon" src="${ctx}/statics/pictures/head.png" alt="">
                 </div>
                 <div class="user-select">

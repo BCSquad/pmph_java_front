@@ -169,7 +169,7 @@ td{
     color: red;
 }
 .form-table .input-wrapper{
-    /*width: 280px;*/
+    width: 280px;
     height: 70px;
     float: left;
 }
