@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.bc.pmpheep.back.commuser.group.bean.GroupFile;
 import com.bc.pmpheep.back.commuser.group.bean.GroupList;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 
@@ -21,4 +22,15 @@ public interface GroupService {
 	 */
 	List<GroupList> groupList(@Param("start") Integer start, @Param("pageSize") Integer pageSize, 
 			@Param("id") Long id) throws CheckedServiceException;
+	
+	/**
+	 * 
+	 * Description:前台获取文件小组列表
+	 * @author:lyc
+	 * @date:2017年12月8日下午5:59:07
+	 * @param 
+	 * @return List<GroupFile>
+	 */
+	List<GroupFile> groupFiles(@Param("start") Integer start, @Param("pageSize") Integer pageSize, 
+			@Param("groupId") Long groupId, @Param("id") Long id, @Param("fileName") String fileName);
 }

@@ -76,4 +76,16 @@
         SELECT * FROM pmph_group_message 
         WHERE member_id = 0 AND group_id = #{groupId} ORDER BY gmt_create DESC
     </select>
+    <!-- 获取小组文件列表 -->
+    <select id="getFiles" parameterType="java.lang.Long" 
+        resultType="GroupFile">
+        SELECT * FROM pmph_group_file WHERE group_id=#{groupId} 
+        <if test="fileName !=null and fileName !=''">
+        AND file_name = #{fileName}
+        </if>
+        ORDER BY gmt_create DESC 
+        limit
+		#{start},#{pageSize}
+        ;
+    </select>
 </mapper>

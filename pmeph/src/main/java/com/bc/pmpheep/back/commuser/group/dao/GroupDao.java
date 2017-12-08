@@ -1,7 +1,10 @@
 package com.bc.pmpheep.back.commuser.group.dao;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+
+import com.bc.pmpheep.back.commuser.group.bean.GroupFile;
 import com.bc.pmpheep.back.commuser.group.bean.GroupList;
 import com.bc.pmpheep.back.commuser.group.bean.GroupMessage;
 
@@ -79,4 +82,15 @@ public interface GroupDao {
 	 * @return List<String>
 	 */
 	List<GroupMessage> getMessages(@Param("groupId") Long groupId);
+	
+	/**
+	 * 
+	 * Description:获取小组文件列表
+	 * @author:lyc
+	 * @date:2017年12月8日下午4:47:42
+	 * @param 
+	 * @return List<GroupFile>
+	 */
+	List<GroupFile> getFiles(@Param("start") Integer start, @Param("pageSize") Integer pageSize,
+			@Param("groupId") Long groupId);
 }

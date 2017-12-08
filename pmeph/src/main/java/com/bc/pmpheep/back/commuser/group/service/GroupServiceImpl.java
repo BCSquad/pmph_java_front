@@ -3,13 +3,13 @@
  */
 package com.bc.pmpheep.back.commuser.group.service;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bc.pmpheep.back.commuser.group.bean.GroupFile;
 import com.bc.pmpheep.back.commuser.group.bean.GroupList;
 import com.bc.pmpheep.back.commuser.group.bean.GroupMessage;
 import com.bc.pmpheep.back.commuser.group.dao.GroupDao;
@@ -43,7 +43,6 @@ public class GroupServiceImpl implements GroupService{
 			Long groupId = group.getId();
 			String temp = group.getGmtCreate() ;
 			String createTime = temp.substring(0,4)+"年"+temp.substring(5,7)+"月"+temp.substring(8,10)+"日";
-			//String createTime = (new SimpleDateFormat("yyyy年MM月dd日").format(group.getGmtCreate()));
 			Integer members = groupDao.getMemberTotal(groupId);
 			Integer files = groupDao.getFileTotal(groupId);
 			List<String> avatars = groupDao.getAvatars(groupId);
@@ -56,6 +55,20 @@ public class GroupServiceImpl implements GroupService{
 			groupList.add(group);
 		}		
 		return groupList;
+	}
+
+	@Override
+	public List<GroupFile> groupFiles(Integer start, Integer pageSize,
+			Long groupId, Long id, String fileName) {
+		if (ObjectUtil.isNull(groupId)){
+			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,
+					CheckedExceptionResult.NULL_PARAM, "小组id不能为空");
+		}
+		if (ObjectUtil.isNull(id)){
+			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,
+					CheckedExceptionResult.NULL_PARAM, "用户id不能为空");
+		}
+		return null;
 	}
 
 }
