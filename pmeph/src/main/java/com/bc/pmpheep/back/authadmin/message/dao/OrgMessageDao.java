@@ -14,37 +14,77 @@ import com.bc.pmpheep.back.authadmin.message.bean.UserMessage;
  * @throws
  */
 public interface OrgMessageDao {
+	
     /**获取消息列表
      * @return List<OrgMessage>
      */
     List<Map<String,Object>> getMessageList();
     
-  	//更新申请消息表
+    /**
+     * 更新申请消息表
+     * @param paraMap
+     */
   	void updateApplyMessage(Map<String, Object> paraMap);
   	
-  	//申请列表
+  	/**
+  	 * 申请列表
+  	 * @param paraMap
+  	 * @return
+  	 */
   	List<Map<String, Object>> selectApplyMessage(Map<String, Object> paraMap);
   	
-  	//消息通知列表
+  	/**
+  	 * 消息通知列表
+  	 * @param paraMap
+  	 * @return
+  	 */
   	List<Map<String, Object>> selectNoticeMessage(Map<String, Object> paraMap);
   	
-  	//删除通知
+  	/**
+  	 * 删除通知
+  	 * @param paraMap
+  	 */
   	void deleteNoticeMessage(Map<String, Object> paraMap);
 
-  	//获取到机构用户和作家用户的id
+  	/**
+  	 * 获取到机构用户和作家用户的id
+  	 * @param userId
+  	 * @return
+  	 */
 	List<Map<String, Object>> findOrgUserAndWriterUser(String userId);
 
+	/**
+	 * 批量插入消息
+	 * @param userMessageList
+	 */
 	void batchInsertMessage(List<UserMessage> userMessageList);
 
+	/**
+	 * 插入附件信息
+	 * @param map
+	 */
 	void insertAttachmentInfo(Map map);
 
-	//查询通知详情
+	/**
+	 * 查询通知详情
+	 * @param paraMap
+	 * @return
+	 */
 	Map<String, Object> noticeMessageDetail(Map<String, Object> paraMap);
 	
-	//查询通知相关的附件
+	/**
+	 * 查询通知相关的附件
+	 * @param paraMap
+	 * @return
+	 */
 	List<Map<String, Object>> queryNoticeMessageDetailAttachment(
 			Map<String, Object> paraMap);
-	//查询通知相关的联系人
+
+	/**
+	 * 查询通知相关的联系人
+	 * @param paraMap
+	 * @return
+	 */
 	List<Map<String, Object>> queryNoticeMessageDetailContact(
 			Map<String, Object> paraMap);
 
