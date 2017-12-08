@@ -14,14 +14,13 @@
     <title>用户管理</title>
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css"/>
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
-    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
+    <script src="${ctx}/statics/js/jquery/jquery.js"></script>
+    <script src="${ctx}/statics/js/jquery/jquery.selectlist.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.pager.js"></script>
-    <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.js"></script>
-    <script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
+    <script src="${ctx}/resources/comm/base.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/user/writerLists.css" type="text/css">
-	<script src="${ctx}/resources/commuser/user/writerLists.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -94,7 +93,6 @@
                 </tbody>
             </table>
               <div class="fenyelan">
-              	<div class="utf">
                 <ul class="pagination" id="page1">
                 </ul>
                 <div style="display: inline-block; vertical-align: top">
@@ -111,7 +109,6 @@
 					<span>页</span>
                     <button type="button" class="button">确定</button>
                 </div>
-            </div>
              </div>
             <div class="clear"></div>
     		
@@ -119,6 +116,11 @@
 	</div>
 </div>
 <script type="text/javascript">
+	//点击查询
+	function query(){
+		var username=$("#ssk").val();
+		window.location.href = '<%=basePath%>/user/writerLists.action?username='+username;
+	}
 	var pageSize =$("#pages").val();
             Page({
                 num: parseInt('${page.pageTotal}'),					//页码数
@@ -136,22 +138,16 @@
                     optionHeight: 30,
                     onChange: function () {
                     	var pageSize =this.getSelectedOptionValue(pages);
-                    	var p=$('#pages').val();
-                    	alert(pageSize);
-                    	alert(p);
                    	 	pageFun(pageSize,'${pageNumber}');
                     }
                 });
                 $('#ssk').keyup(function(event){
             		if(event.keyCode ==13){ //回车键弹起事件
-            			this.query();
-            		  }
+            			query();
+            		}
                 });
            });
-        function query(){
-        	var username=$("#ssk").val();
-        	window.location.href = '<%=basePath%>/user/writerLists.action?username='+username;
-        }
+        //分页
         function pageFun(pageSize,pageNumber){
         	window.location.href = '<%=basePath%>/user/writerLists.action?pageSize='+pageSize+'&pageNumber='+pageNumber;
         }
