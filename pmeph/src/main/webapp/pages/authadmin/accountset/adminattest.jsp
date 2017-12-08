@@ -16,6 +16,7 @@
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>学校管理员认证</title>
     <script src="${ctx}/resources/comm/jquery/jquery.js" type="text/javascript"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery-validate.js" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/base.js" type="text/javascript"></script>
     <script src="${ctx}/resources/authadmin/accountset/adminattest.js" type="text/javascript"></script>
@@ -91,7 +92,8 @@
                     </tr>
                     <tr>
                         <td align="right"><font class="td-font-1">*管理员姓名</font></td>
-                        <td><input class="txt" type="text" id="realName" required value="${admininfo.realname}"/></td>
+                        <td><input class="txt required" type="text" id="realName" data-valid="isNonEmpty" data-error="真实姓名不能为空"
+                                   placeholder="请填写真实姓名"  value="${admininfo.realname}"/></td>
                         <td><font class="td-font-3">请填写与上次委托书上一致的管理员真实姓名</font></td>
                     </tr>
                     <tr>

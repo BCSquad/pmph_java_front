@@ -1,4 +1,40 @@
+$(function () {
+    $('select').selectlist({
+        zIndex: 10,
+        width: 260,
+        height: 40,
+        optionHeight: 40,
+        initValue:$("#title-hidden").val()
 
+    });
+    $('form').validate({
+        onFocus: function () {
+            this.removeClass("input-error");
+            return false;
+        },
+        onBlur: function () {
+            var $parent = this.parent();
+            var _status = parseInt(this.attr('data-status'));
+            if (!_status) {
+                this.addClass("input-error");
+            }
+            return false;
+        },
+        submitHandler:function(){
+            saveobject();
+
+        }
+    });
+    function saveobject() {
+        alert(123);
+    }
+    /* $('form').on('submit', function (event) {
+     alert(111);
+     //save();
+     /!* event.preventDefault();
+     $(this).validate('submitValidate'); //return boolean;*!/
+     });*/
+})
 function getform(){
     var json={};
     json.realName=$("#realName").val();
@@ -16,17 +52,20 @@ function getform(){
 
 }
 function save(){
-    $.ajax({
-        type:'post',
-        url:contextpath+'admininfocontroller/updateorguser.action',
-        async:false,
-        contentType: 'application/json',
-        dataType:'json',
-        data:JSON2.stringify(getform()),
-        success:function(responsebean){
-            if (responsebean.code==1){
-                message.success("保存成功");
+    if($("form").validate('submitValidate')){
+        $.ajax({
+            type:'post',
+            url:contextpath+'admininfocontroller/updateorguser.action',
+            async:false,
+            contentType: 'application/json',
+            dataType:'json',
+            data:JSON2.stringify(getform()),
+            success:function(responsebean){
+                if (responsebean.code==1){
+                    message.success("保存成功");
+                }
             }
-        }
-    });
+        });
+    };
+
 }

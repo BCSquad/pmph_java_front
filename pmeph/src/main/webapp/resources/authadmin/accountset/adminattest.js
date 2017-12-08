@@ -1,4 +1,23 @@
+$(function () {
+    $('form').validate({
+        onFocus: function () {
+            this.removeClass("input-error");
+            return false;
+        },
+        onBlur: function () {
+            var $parent = this.parent();
+            var _status = parseInt(this.attr('data-status'));
+            if (!_status) {
+                this.addClass("input-error");
+            }
+            return false;
+        },
+        submitHandler:function(){
+            saveobject();
 
+        }
+    });
+});
 function getform() {
     var json={};
     json.realName=$("#realName").val();
