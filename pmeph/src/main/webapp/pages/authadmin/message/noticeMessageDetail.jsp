@@ -86,7 +86,7 @@
 
 <script type="text/javascript">
 		function register(materialId){
-			window.location.href="${ctx}/material/toMaterialAdd?material_id="+materialId;
+			window.location.href="${ctx}/material/toMaterialAdd.action?material_id="+materialId;
 		}
 
 

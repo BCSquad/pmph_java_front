@@ -14,26 +14,26 @@
     <link rel="stylesheet" href="${ctx}/statics/authadmin/backlog/schedule.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css"/>
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
+    <script src="${ctx}/resources/comm/base.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
     <script src="${ctx}/resources/comm/base.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.pager.js"></script>
-
+    
 </head>
 <style type="text/css">
 
-         #right .select-button {
-            background: #f6f6f6;
-        }
-
         #right .select-wrapper {
             border: none;
+        }
+         #right .select-button {
+            background: #f6f6f6;
         }
     </style>
 <body style="background-color: #f6f6f6;">
 <jsp:include page="/pages/comm/headGreenBackGround.jsp"/>
 <div class="body"  >
-	<input id="license" value="${license}" type="hidden"/>
+	<input id="license" value="${map.license}" type="hidden"/>
     <div class="content-wrapper">
         <div class="big">
                 <div class="left">待办事项</div>
@@ -42,10 +42,10 @@
                    <div style="float: right;">
                       		 筛选：
                        <select id="filtrate-select" name="filtrate-select" title="请选择">
-                           <option value="all" ${time=='all' ?'selected':''}>全部</option>
-                           <option value="week" ${time=='week' ?'selected':''}>一周内</option>
-                           <option value="month" ${time=='month' ?'selected':''}>一月内</option>
-                           <option value="year" ${time=='year' ?'selected':''}>一年内</option>
+                           <option value="all" ${map.time=='all' ?'selected':''}>全部</option>
+                           <option value="week" ${map.time=='week' ?'selected':''}>一周内</option>
+                           <option value="month" ${map.time=='month' ?'selected':''}>一月内</option>
+                           <option value="year" ${map.time=='year' ?'selected':''}>一年内</option>
                        </select>
                        
                    </div>
@@ -56,7 +56,12 @@
                     <div class="leftContent">
                         <div class="leftContentSmall">
                             <div class="pictureDiv">
-                                <img  class="picture" src="${ctx}/statics/pictures/head.png">
+                            	<c:if test="${one.TYPE=='A'}">
+                            		<img  class="picture">
+                            	</c:if>
+                                <c:if test="${one.TYPE=='B'}">
+                                	<img  class="pictureB" src="${ctx}/statics/image/pic3555.png">
+                                </c:if>
                             </div>
                         </div>
                        <c:if test="${status.last==false}" >
@@ -81,12 +86,12 @@
                                 </div>
                                 <div class="downContent">
                                     <div class="timeEvent">
-                                        <span class="time">于<fmt:formatDate pattern="yyyy年MM月dd日" value="${one.TIME}" /></span>&nbsp;<span class="event">提交${one.TYPE}</span><span class="event">，请审批</span>
+                                        <span class="time">于<fmt:formatDate pattern="yyyy年MM月dd日" value="${one.TIME}" /></span>&nbsp;<span class="event">提交${one.CONTENT}</span><span class="event">，请审批</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="rightButton">
-                                <div onclick="toogleTip('block')" class="buttonDiv">
+                                <div onclick="toogleTip('block','${one.TYPE}',${one.auditId})" class="buttonDiv">
                                         		办理
                                 </div>
                             </div>
@@ -107,7 +112,7 @@
                 </div>
                 <div class="downDiv">
                     <div class="leftButton" onclick="toogleTip('none')">知道了</div>
-                    <div class="checkButton">马上认证</div>
+                    <div class="checkButton" onclick="toAuthAudit(${map.userId})">马上认证</div>
                 </div>
                 <div class="close" id="close" onclick="toogleTip('none')">
                     <span>×</span>
@@ -153,7 +158,7 @@
                 </div>
                 <c:if test="${map.license==false}">
                 	<div>
-	                	<span class="littleTitle2">未认证</span>
+	                	<span class="littleTitle2" onclick="toAuthAudit(${map.userId})">未认证</span>
 	                </div>
                 </c:if>
                 <c:if test="${map.license==true}">
@@ -174,8 +179,8 @@
 </div>
 <script>
     Page({
-        num: "${totalPage}",					//页码数
-        startnum: "${currentPage}",				//指定页码
+        num: parseInt("${map.pageResult.pageTotal}"),					//页码数
+        startnum: parseInt("${map.pageResult.pageNumber}"),				//指定页码
         elem: $('#page1'),		//指定的元素
         callback: function (n) {	//回调函数
             console.log(n);
@@ -201,11 +206,22 @@
             
         });
     })
-    function toogleTip(val) {
-    	/* var license = document.getElementById("license").val();
-    	if(license==false){ */
+    function toogleTip(val,type,auditId) {
+    	var license = $("#license").val();
+    	if(license=='false'){
     		 $('.tip').css('display',val);
     	     $('.gray').css('display',val);
+    	} else{ 
+    		if(type=="B"){
+    			//跳转教师资格认证页面
+    		}else{
+    			window.location.href="${ctx}/dataaudit/toPage.action?material_id="+auditId;
+    		}
+    	}	
+    		
+    }
+    function toAuthAudit(userId){
+    	window.location.href="${ctx}/admininfocontroller/toadminattest.action?userId="+userId;
     }
     
 </script>

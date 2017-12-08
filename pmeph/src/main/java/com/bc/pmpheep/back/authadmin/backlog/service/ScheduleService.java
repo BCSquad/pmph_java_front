@@ -11,9 +11,6 @@ public interface ScheduleService {
 	//查询待办事项列表
 	PageResult<Map<String, Object>> selectScheduleList(PageParameter<Map<String, Object>> pageParameter);
 	
-	//查询待办事项列表
-	List<Map<String,Object>> selectUserMessageNameAndTime(Map<String, Object> paraMap);
-	
 	//查询机构用户信息
 	Map<String, Object> selectOrgUser(Long userId);
 	
@@ -21,9 +18,13 @@ public interface ScheduleService {
 	int selectScheduleCount(Map<String, Object> paraMap);
 	
 	//查询消息id列表
-	List<String> selectUserMessageList(Map<String, Object> paraMap);
+	//List<String> selectUserMessageList(Map<String, Object> paraMap);
 	
 	//查询已办事项消息id数量
-	int selectUserMessageCount(Map<String, Object> paraMap);
+	//int selectUserMessageCount(Map<String, Object> paraMap);
+	
+	//查询已办事项列表
+	PageResult<Map<String, Object>> selectDoneSchedule(
+			PageParameter<Map<String, Object>> pageParameter);
 
 }
