@@ -28,15 +28,6 @@
 </style>
 <script type="text/javascript">
 	var contxtpath = '${pageContext.request.contextPath}';
-	$(function() {
-		$('#select').selectlist({
-			zIndex : 10,
-			width : 70,
-			height : 20,
-			optionHeight : 20,
-			triangleColor : '#333333'
-		});
-	})
 </script>
 </head>
 <body>
@@ -52,8 +43,9 @@
 		</select>
 		</span>
 	</div>
-	<div id="list" class="message">
-
+	<div class="message">
+		<table id="list" class='table'>
+		</table>
 		<!--  <a class="a" href="javascript:void(0)" onclick="show()" style=" background:red">弹出</a>-->
 
 		<div class="b hidden" id="box">
@@ -61,51 +53,12 @@
 				<img onclick="hide()" style="width: 100%; height: 100%;"
 					src="../image/关闭.png">
 			</div>
-			<div id= "boxmessage">
-				<span class="personMessageTitle">你与特朗普的私信窗口</span>
-				<div class="contentBox">
-					<div class="oneTalk">
-						<div class="headAndNameLeft float_left">
-							<div class="headDiv">
-								<img class="headPicture" src="../测试文件/tx.png" />
-							</div>
-							<div class="talkName">
-								<text>曾若男</text>
-							</div>
-						</div>
-
-						<div class="talkDiv float_left">
-							<div class="sendMessage">
-								<div class="textDiv float_left">简单地说 简单地说 简单地说 简单地说 简单地说</div>
-							</div>
-							<div class="talkTime talkTimeAlignLeft">2017.04.01</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="inputBox">
-				<div style="float: left; width: 80%; height: 100%">
-					<textarea
-						style="width: 100%; height: 98%; border: none; outline: 0; font-size: 15px;"
-						type="text" placeholder="请输入消息内容,按回车键发送"></textarea>
-				</div>
-				<div style="float: left; width: 20%; height: 100%">
-					<div class="div_btn11" style="cursor: pointer;">
-						<span class="button11">发送</span>
-					</div>
-				</div>
-			</div>
 		</div>
-	<div id="loadMore" class="load-more clearfix">加载更多...</div>
-</div>
+		<div id="loadMore" class="load-more clearfix">加载更多...</div>
+	</div>
 	<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
 <script>
-	function show() {
-
-		document.getElementById("box").setAttribute("class", "b show");
-		document.getElementById("close").setAttribute("class", "hiddenX show");
-	}
 	function hide() {
 		document.getElementById("box").setAttribute("class", "b hidden");
 		document.getElementById("close")
