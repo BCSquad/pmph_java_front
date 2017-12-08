@@ -1,6 +1,7 @@
 package com.bc.pmpheep.back.commuser.personalcenter.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,52 +16,52 @@ public class PersonalServiceImpl implements PersonalService {
 	private PersonalDao personaldao;
 	
 	@Override
-	public List<PersonalNewMessage> queryMyCol() {
+	public List<PersonalNewMessage> queryMyCol(Map<String, Object> permap) {
 		// TODO 自动生成的方法存根 查询我的收藏列表
 		
-		List<PersonalNewMessage> list1=personaldao.ListMyConlection();
+		List<PersonalNewMessage> list1=personaldao.ListMyConlection(permap);
 		return list1;
 	}
 
 	@Override
-	public List<PersonalNewMessage> queryMyFriend() {
+	public List<PersonalNewMessage> queryMyFriend(Map<String, Object> permap) {
 		// TODO 自动生成的方法存根 查询我的好友
-		List<PersonalNewMessage> list2=personaldao.ListMyFriend();
+		List<PersonalNewMessage> list2=personaldao.ListMyFriend(permap);
 		return list2;
 	}
 
 	@Override
-	public List<PersonalNewMessage> queryMyGroup() {
+	public List<PersonalNewMessage> queryMyGroup(Map<String, Object> permap) {
 		// TODO 自动生成的方法存根  查询我的小组信息
-		List<PersonalNewMessage> list3=personaldao.ListMyGroup();
+		List<PersonalNewMessage> list3=personaldao.ListMyGroup(permap);
 		return list3;
 	}
 
 	@Override
-	public List<PersonalNewMessage> queryMyOfeerNew() {
+	public List<PersonalNewMessage> queryMyOfeerNew(Map<String, Object> permap) {
 		// TODO 自动生成的方法存根 查询最新申请动态信息
-		List<PersonalNewMessage> list4=personaldao.ListMyOfeerTwo();
+		List<PersonalNewMessage> list4=personaldao.ListMyOfeerTwo(permap);
 		return list4;
 	}
 
 	@Override
-	public List<PersonalNewMessage> queryMyWritingsNew() {
+	public List<PersonalNewMessage> queryMyWritingsNew(Map<String, Object> permap) {
 		// TODO 自动生成的方法存根  查询我的随笔文章最新信息
-		List<PersonalNewMessage> list5=personaldao.ListMyWritingsTwo();
+		List<PersonalNewMessage> list5=personaldao.ListMyWritingsTwo(permap);
 		return list5;
 	}
 
 	@Override
-	public List<PersonalNewMessage> queryMyBooksNew() {
+	public List<PersonalNewMessage> queryMyBooksNew(Map<String, Object> permap) {
 		// TODO 自动生成的方法存根 查询我的书评最新信息
-		List<PersonalNewMessage> list6=personaldao.ListMyBookNewsTwo();
+		List<PersonalNewMessage> list6=personaldao.ListMyBookNewsTwo(permap);
 		return list6;
 	}
 
 	@Override
-	public List<PersonalNewMessage> queryMyBooksJoin() {
+	public List<PersonalNewMessage> queryMyBooksJoin(Map<String, Object> permap) {
 		// TODO 自动生成的方法存根  查询我的教材申报最新信息
-		List<PersonalNewMessage> list7=personaldao.ListAllBookJoin();
+		List<PersonalNewMessage> list7=personaldao.ListAllBookJoin(permap);
 		return list7;
 	}
 

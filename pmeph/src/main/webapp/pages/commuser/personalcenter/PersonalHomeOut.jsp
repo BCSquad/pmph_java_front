@@ -3,26 +3,27 @@
 <%String path = request.getContextPath();%>
 <html>
 <head>
+<script type="text/javascript">
+        var contextpath = '${pageContext.request.contextPath}/';
+    </script>
 	<c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/personalcenter/PersonalHome.css" type="text/css">
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.js"></script>
       <script src="${ctx}/resources/comm/base.js"></script>
-<script type="text/javascript">
-        var contextpath = '${pageContext.request.contextPath}/';
-    </script>
+
     <script type="text/javascript">
     
         $(document).ready(function () {
             document.getElementById("dt").className = "xz";
-            $("#suibiwenzhang").hide()
-            $("#zuixinshuping").hide()
+            $("#suibiwenzhang").hide();
+            $("#zuixinshuping").hide();
 
             $("#dt").click(function () {
                 $("#dongtai").show();
                 document.getElementById("dt").className = "xz";
-                $("#suibiwenzhang").hide()
-                $("#zuixinshuping").hide()
+                $("#suibiwenzhang").hide();
+                $("#zuixinshuping").hide();
                 document.getElementById("sbwz").className = "dtl";
                 document.getElementById("zxsp").className = "dtl";
             });
@@ -30,8 +31,8 @@
             $("#sbwz").click(function () {
                 $("#suibiwenzhang").show();
                 document.getElementById("sbwz").className = "xz";
-                $("#dongtai").hide()
-                $("#zuixinshuping").hide()
+                $("#dongtai").hide();
+                $("#zuixinshuping").hide();
                 document.getElementById("dt").className = "dtl";
                 document.getElementById("zxsp").className = "dtl";
             });
@@ -39,8 +40,8 @@
             $("#zxsp").click(function () {
                 $("#zuixinshuping").show();
                 document.getElementById("zxsp").className = "xz";
-                $("#suibiwenzhang").hide()
-                $("#dongtai").hide()
+                $("#suibiwenzhang").hide();
+                $("#dongtai").hide();
                 document.getElementById("sbwz").className = "dtl";
                 document.getElementById("dt").className = "dtl";
             });
@@ -63,12 +64,12 @@
                     <c:if test="${permap.sex==2}"><div id="sex"></div></c:if>
                     <br/>
                     <br/>
-                    <span id="grqm">${permap.signature}</span>
+                    <span id="grqm"><c:if test="${permap.signature == null}">暂无个性签名</c:if>${permap.signature}</span>
                 </div>
                 <br/>
-                <c:if test="${permap.rank==0}"><span class="grsx">普通用户</span></c:if>
-                <c:if test="${permap.rank==1}"><span class="grsx">教师用户</span></c:if>
-                <c:if test="${permap.rank==2}"><span class="grsx">作家用户</span></c:if>
+                <c:if test="${permap.rank==0}"><span id="zjrz"></span><span class="grsx">普通用户</span></c:if>
+                <c:if test="${permap.rank==1}"><span id="zjrz"></span><span class="grsx">教师用户</span></c:if>
+                <c:if test="${permap.rank==2}"><span id="zjrz"></span><span class="grsx">作家用户</span></c:if>
                 <c:if test="${permap.rank==3}"><span id="zjrz"></span> <span class="grsx">专家用户</span></c:if>
                 <input type="button" value="加好友">
             </div>

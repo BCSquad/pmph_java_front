@@ -3,7 +3,7 @@
 <%String path = request.getContextPath();%>
 <html>
 <head>
-    <script type="text/javascript">
+<script type="text/javascript">
         var contextpath = '${pageContext.request.contextPath}/';
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
@@ -34,12 +34,12 @@
                     </c:if>
                     <br/>
                     <br/>
-                    <span id="grqm">${permap.signature}</span>
+                    <span id="grqm"><c:if test="${permap.signature == null}">暂无个性签名</c:if>${permap.signature}</span>
                 </div>
                 <br/>
-                <c:if test="${permap.rank==0}"><span class="grsx">普通用户</span></c:if>
-                <c:if test="${permap.rank==1}"><span class="grsx">教师用户</span></c:if>
-                <c:if test="${permap.rank==2}"><span class="grsx">作家用户</span></c:if>
+                <c:if test="${permap.rank==0}"><span id="zjrz"></span><span class="grsx">普通用户</span></c:if>
+                <c:if test="${permap.rank==1}"><span id="zjrz"></span><span class="grsx">教师用户</span></c:if>
+                <c:if test="${permap.rank==2}"><span id="zjrz"></span><span class="grsx">作家用户</span></c:if>
                 <c:if test="${permap.rank==3}"><span id="zjrz"></span> <span class="grsx">专家用户</span></c:if>
             </div>
             <div class="headae">

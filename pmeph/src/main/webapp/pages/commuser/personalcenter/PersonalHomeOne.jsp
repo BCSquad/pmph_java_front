@@ -3,15 +3,16 @@
 <%String path = request.getContextPath();%>
 <html>
 <head>
+<script type="text/javascript">
+        var contextpath = '${pageContext.request.contextPath}/';
+    </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/personalcenter/PersonalHome.css" type="text/css">
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.js"></script>
     <script src="${ctx}/resources/commuser/personalcenter/PersonalHome.js"></script>
   <script src="${ctx}/resources/comm/base.js"></script>
-<script type="text/javascript">
-        var contextpath = '${pageContext.request.contextPath}/';
-    </script>
+
 
 </head>
 <body>
@@ -32,12 +33,12 @@
                     </c:if>
                     <br/>
                     <br/>
-                    <span id="grqm">${permap.signature}</span>
+                    <span id="grqm"><c:if test="${permap.signature == null}">暂无个性签名</c:if>${permap.signature}</span>
                 </div>
                 <br/>
-                <c:if test="${permap.rank==0}"><span class="grsx">普通用户</span></c:if>
-                <c:if test="${permap.rank==1}"><span class="grsx">教师用户</span></c:if>
-                <c:if test="${permap.rank==2}"><span class="grsx">作家用户</span></c:if>
+                <c:if test="${permap.rank==0}"><span id="zjrz"></span><span class="grsx">普通用户</span></c:if>
+                <c:if test="${permap.rank==1}"><span id="zjrz"></span><span class="grsx">教师用户</span></c:if>
+                <c:if test="${permap.rank==2}"><span id="zjrz"></span><span class="grsx">作家用户</span></c:if>
                 <c:if test="${permap.rank==3}"><span id="zjrz"></span> <span class="grsx">专家用户</span></c:if>
             </div>
             <div class="headae">
@@ -75,7 +76,7 @@
                                                     <br/><span class="ybmcj">已报名参加</span></div>
                                             </div>
                                             <div class="bmcj">
-                                                <div class="bmcjan"><span>报名参加</span></div>
+                                                <div class="bmcjan"><span><a class="abmcj" href="${ctx}/material/toMaterialAdd.action?material_id=${list.material_id}">报名参加</a></span></div>
                                             </div>
                                         </div>
                                     </c:if>
@@ -109,7 +110,8 @@
 
                                     <div class="mright">
                                         <div class="rshang">
-                                            <div class="rshangn">${list.material_name}</div>
+                                            <div class="rshangn">${list.material_name}
+                                           <c:if test="${list.is_staging==1}"><img src="${ctx}/statics/image/zancun.png"></c:if></div>
                                         </div>
                                         <div class="rxia">
                                             <div class="rxian">截止日期：${list.age_deadline}</div>
