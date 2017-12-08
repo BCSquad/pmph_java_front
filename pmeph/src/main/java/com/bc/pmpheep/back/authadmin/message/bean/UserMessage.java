@@ -1,14 +1,40 @@
 package com.bc.pmpheep.back.authadmin.message.bean;
 
+/**
+ * 机构用户发送新消息 （批量）
+ * @author xcy
+ *
+ */
 public class UserMessage {
 
-	private String msg_id; //消息id
-	private int msg_type; // 消息类型
-	private String title; //消息标题
-	private long sender_id; // 发送者id
-	private int sender_type; // 发送者类型
-	private long receiver_id; // 接收者id
-	private int receiver_type; // 接收者类型
+	/**
+	 * 消息id
+	 */
+	private String msg_id; 
+	/**
+	 * 消息类型
+	 */
+	private int msg_type; 
+	/**
+	 * 消息标题
+	 */
+	private String title; 
+	/**
+	 * 发送者id
+	 */
+	private long sender_id;  
+	/**
+	 * 发送者类型
+	 */
+	private int sender_type;  
+	/**
+	 * 接收者id
+	 */
+	private long receiver_id; 
+	/**
+	 * 接收者类型
+	 */
+	private int receiver_type; 
 	public String getMsg_id() {
 		return msg_id;
 	}
