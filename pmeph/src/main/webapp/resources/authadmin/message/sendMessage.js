@@ -83,6 +83,8 @@ $(function(){
 	$('input:radio[name="sendObject"]').change(function(){
     	if($('input:radio[name="sendObject"]:checked').val()!='0'){
     		$("#send").val("下一步");
+    	}else{
+    		$("#send").val("发送");
     	}
     	});
 	send_init();
@@ -114,7 +116,6 @@ $(function(){
     });
 	//切换分页每页数据数量时 刷新
 	$("#page-size-select").find("li").bind("click",function(){
-		
 		$("#page-num-temp").val(1);
 		queryMain();
 	});
@@ -238,8 +239,8 @@ function queryMain(){
 		dataType:'json',
 		data:data,
 		success:function(json){
-			$("#totoal_count").val(json.totoal_count);
-			addColum(json.listMap,json.startNum);
+			$("#totoal_count").val(json.data.totoal_count);
+			addColum(json.data.listMap,json.data.startNum);
 			//刷新分页栏
 			 Page({
                 num: json.totoal_count,					//页码数
@@ -262,7 +263,7 @@ function selectPageSize(){
 }
 
 function addColum(list,startNum){
-	
+	//alert(typeof list);
 	//清空
 	$("#tbody1").html("");
 	var str='';
