@@ -198,21 +198,25 @@ function addlikes(){
 }
 //收藏
 function addmark(){
-	var favoriteId=$("input[name=edu]").val();
+//	var favoriteId=$("input[name=edu]").val();
 	var bookId=$("#book_id").val();
 	var marks=$("#marks").val();
-	if(favoriteId==""){
-		window.message.info("请选择收藏夹");
-		return
-	}
+//	if(favoriteId==""){
+//		window.message.info("请选择收藏夹");
+//		return
+//	}
 	 $.ajax({
 			type:'post',
 			url:contextpath+'readdetail/addmark.action',
-			data:{favoriteId:favoriteId,bookId:bookId,marks:marks},
+			data:{bookId:bookId},
 			async:false,
 			dataType:'json',
 			success:function(json){
-					window.message.info("已添加收藏");
+					if(json.returncode=="OK"){
+						$("#sc").attr("src",contextpath+"statics/image/sc101(1).jpg");
+					}else{
+						$("#sc").attr("src",contextpath+"statics/image/s102(1).png");
+					}
 			}
 		});
 }
