@@ -18,10 +18,9 @@
     	        elem:$("#page1"),
     	        callback: function (n) {
     	        	var pagesize=$("input[name='edu']").val();
-    	        	var favoriteName=$("#favoriteName").val();
     	        	var favoriteId=$("#favoriteId").val();
     	            window.location.href=contextpath+'articlecollection/toarticlecollectionlist.action?pagenum='+n+'&pagesize='+pagesize+
-    	            		'&favoriteName='+favoriteName+'&favoriteId='+favoriteId;
+    	            		'&favoriteId='+favoriteId;
     	        }
     	 });
       $('select').selectlist({
@@ -31,10 +30,9 @@
             optionHeight: 30,
             onChange: function () {
             	var pagesize=$("input[name='edu']").val();
-              	var favoriteName=$("#favoriteName").val();
               	var favoriteId=$("#favoriteId").val();
               	 window.location.href=contextpath+'articlecollection/toarticlecollectionlist.action?pagenum=1&pagesize='+pagesize+
-           		'&favoriteName='+favoriteName+'&favoriteId='+favoriteId;
+           		'&favoriteId='+favoriteId;
             }  //自定义模拟选择列表项chang
         });
     }); 
@@ -79,10 +77,9 @@
     			dataType:'json',
     			success:function(json){
     				var pagesize=$("input[name='edu']").val();
-                  	var favoriteName=$("#favoriteName").val();
                   	var favoriteId=$("#favoriteId").val();
                   	 window.location.href=contextpath+'articlecollection/toarticlecollectionlist.action?pagenum=1&pagesize='+pagesize+
-               		'&favoriteName='+favoriteName+'&favoriteId='+favoriteId;
+               		'&favoriteId='+favoriteId;
     			}
     		});	
     	},function(){});

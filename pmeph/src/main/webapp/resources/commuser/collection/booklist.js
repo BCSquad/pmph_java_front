@@ -17,11 +17,10 @@
     	        startnum: pagenum,
     	        elem:$("#page1"),
     	        callback: function (n) {
-    	        	var pagesize=$("input[name='edu']").val();
-    	        	var favoriteName=$("#favoriteName").val();
+    	        	var pagesize=$("input[name='edu']").val();  	
     	        	var favoriteId=$("#favoriteId").val();
     	            window.location.href=contextpath+'bookcollection/tobookcollectionlist.action?pagenum='+n+'&pagesize='+pagesize+
-    	            		'&favoriteName='+favoriteName+'&favoriteId='+favoriteId;
+    	            		'&favoriteId='+favoriteId;
     	        }
     	 });
       $('select').selectlist({
@@ -34,7 +33,7 @@
               	var favoriteName=$("#favoriteName").val();
               	var favoriteId=$("#favoriteId").val();
               	 window.location.href=contextpath+'bookcollection/tobookcollectionlist.action?pagenum=1&pagesize='+pagesize+
-           		'&favoriteName='+favoriteName+'&favoriteId='+favoriteId;
+           		'&favoriteId='+favoriteId;
             }  //自定义模拟选择列表项chang
         });
     });
@@ -68,7 +67,7 @@
     function cancelMark(id,markes,bkid){
     	var favoriteId=$("#favoriteId").val();
     	var bookId=$("#book"+bkid).val();
-    	window.message.confirm("你确定删除吗？",{btn:["确定","取消"]},function(){
+    	window.message.confirm("你确定取消收藏吗？",{btn:["确定","取消"]},function(){
     		$.ajax({
     			type:'post',
     			url:contextpath+'bookcollection/cancelmark.action',
@@ -77,10 +76,9 @@
     			dataType:'json',
     			success:function(json){
     				var pagesize=$("input[name='edu']").val();
-                  	var favoriteName=$("#favoriteName").val();
                   	var favoriteId=$("#favoriteId").val();
     				window.location.href=contextpath+'bookcollection/tobookcollectionlist.action?pagenum=1&pagesize='+pagesize+
-    	    		'&favoriteName='+favoriteName+'&favoriteId='+favoriteId;     
+    	    		'&favoriteId='+favoriteId;     
     			}
     		});
    	    },function(){});
