@@ -85,4 +85,10 @@ public interface ArticleCollectionDao {
 	 * @return
 	 */
 	Map<String,Object> queryNum(@Param("contentId") BigInteger contentId);
+
+	/**根据id查询文章收藏夹
+	 * @param favoriteId
+	 * @return
+	 */
+	Map<String, Object> queryFavoriteById(@Param("favoriteId") BigInteger favoriteId);
 }

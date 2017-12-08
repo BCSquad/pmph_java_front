@@ -59,4 +59,9 @@ public interface BookCollectionService {
 	 * @return
 	 */
 	Map<String, Object> deleteFavorite(BigInteger writerId,BigInteger favoriteId);
+	 /**根据id查询书籍收藏夹
+     * @param favoriteId
+     * @return
+     */
+    Map<String,Object> queryFavoriteById(BigInteger favoriteId);
 }

@@ -115,4 +115,10 @@ public class BookCollectionServiceImpl implements BookCollectionService {
 		bookCollectionDao.deleteFavorite(writerId, favoriteId);
 		return map;
 	}
+
+	@Override
+	public Map<String, Object> queryFavoriteById(BigInteger favoriteId) {
+		// TODO Auto-generated method stub
+		return bookCollectionDao.queryFavoriteById(favoriteId);
+	}
 }

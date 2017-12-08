@@ -60,7 +60,6 @@ public class BookCollectionController  extends BaseController{
     	Map<String,Object> pmap=new HashMap<>();
     	request.setCharacterEncoding("utf-8");
     	BigInteger favoriteId=new BigInteger(request.getParameter("favoriteId"));
-    	String favoriteName = new String(request.getParameter("favoriteName").getBytes("ISO-8859-1"),"utf-8");
     	String pagenum=request.getParameter("pagenum");
     	String pagesize=request.getParameter("pagesize");
     	int curpage=1;
@@ -76,8 +75,9 @@ public class BookCollectionController  extends BaseController{
     	pmap.put("writerId", (BigInteger) userMap.get("id"));
         param.setParameter(pmap);
         PageResult<Map<String,Object>> booklist = bookCollectionService.queryBookList(param);
+        Map<String,Object> fmap=bookCollectionService.queryFavoriteById(favoriteId);
         map.put("booklist", booklist);
-    	map.put("favoriteName",favoriteName);
+        map.put("fmap", fmap);
     	map.put("favoriteId", request.getParameter("favoriteId"));
     	return new ModelAndView("/commuser/collection/booklist",map);
     }

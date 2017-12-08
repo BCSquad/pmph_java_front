@@ -54,11 +54,17 @@ public interface ArticleCollectionService {
 	Map<String, Object> deleteMark(BigInteger markId, BigInteger writerId,
 			BigInteger favoriteId, BigInteger contentId);
 
-	/**删除收藏夹
+	/**删除文章收藏夹
 	 * @param writerId     作家用户id
 	 * @param favoriteId   收藏夹id
 	 * @return
 	 */
 	Map<String, Object> deleteFavorite(BigInteger writerId,
 			BigInteger favoriteId);
+
+	/**  根据id查询文章收藏夹
+	 * @param favoriteId
+	 * @return
+	 */
+	Map<String, Object> queryFavoriteById(BigInteger favoriteId);
 }

@@ -86,4 +86,8 @@
      from cms_content 
      where id=#{contentId}
 	</select>
+	<!-- 根据收藏夹的id查询收藏夹 -->
+	<select id="queryFavoriteById"  parameterType="map" resultMap="articleMap">
+	    select  * from  writer_cms_favorite   where id=#{favoriteId}
+	</select>
 </mapper>

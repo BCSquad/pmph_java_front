@@ -85,4 +85,8 @@
 		      bookmarks 
 	  from book where id=#{bookId}
 	 </select>
+	 <!--根据id查询书籍收藏夹  -->
+	 <select id="queryFavoriteById" parameterType="map" resultMap="bookMap">
+	    select * from writer_book_favorite where id=#{favoriteId}
+	 </select>
 </mapper>

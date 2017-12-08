@@ -125,6 +125,12 @@ public class ArticleCollectionServiceImpl implements ArticleCollectionService {
 		return map;
 	}
 	
+    //	根据id查询文章收藏夹
+	@Override
+	public Map<String, Object> queryFavoriteById(BigInteger favoriteId) {
+		// TODO Auto-generated method stub
+		return articleCollectionDao.queryFavoriteById(favoriteId);
+	}
 	/**
      * 抓取HTML中src地址
      *

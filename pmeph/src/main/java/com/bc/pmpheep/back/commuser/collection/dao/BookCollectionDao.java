@@ -86,4 +86,9 @@ public interface BookCollectionDao {
      * @return
      */
     Map<String,Object> queryNum(@Param("bookId") BigInteger bookId);
+    /**根据id查询书籍收藏夹
+     * @param favoriteId
+     * @return
+     */
+    Map<String,Object> queryFavoriteById(@Param("favoriteId")  BigInteger favoriteId);
 }
