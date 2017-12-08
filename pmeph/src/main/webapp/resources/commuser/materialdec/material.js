@@ -449,7 +449,7 @@ function buttAdd(){
 		async: false,
 	    success: function(json) {
 		    if(json.msg=='OK'){
-		    	alert("新增成功！");
+		    	window.location.href=contextpath+"personalhomepage/tohomepageone.action";
 		    }else{
 		    	alert("新增失败！");
 		    }
