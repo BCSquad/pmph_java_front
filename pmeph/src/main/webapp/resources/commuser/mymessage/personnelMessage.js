@@ -83,7 +83,11 @@ $(function() {
 											+ "/></div><div class='talkName'><text>"
 											+ res[i].userName
 											+ "</text></div></div>";
-									html += "";
+									html += "<div class='talkDiv float_right'><div class='sendMessage'><div class='textDiv float_right'>"
+											+ res[i].content
+											+ "</div></div><div class='talkTime headAndNameRight'>"
+											+ formatDate(res[i].sendTime, "")
+											+ "</div></div>";
 								} else {
 									html += "<div class='headAndNameLeft float_left'><div class='headDiv'><img class='headPicture' src="
 											+ res[i].avatar
@@ -97,6 +101,8 @@ $(function() {
 											+ "</div></div>";
 								}
 							}
+							html += "</div></div></div>";
+							html += "<div class='inputBox'><div style='float: left; width: 80%; height: 100%'><textarea style='width: 100%; height: 98%; border: none; outline: 0; font-size: 15px;'	type='text' placeholder='请输入消息内容,按回车键发送'></textarea></div><div style='float: left; width: 20%; height: 100%'><div class='div_btn11' style='cursor: pointer;'><span class='button11'>发送</span></div></div></div></div>";
 						}
 					}
 				})
