@@ -94,6 +94,11 @@ function queryMain(){
 		dataType:'json',
 		data:data,
 		success:function(json){
+			if (json.listMap.length == 0) {
+				$("#fenye").hide();
+			}else{
+				$("#fenye").show();
+			}
 			$("#totoal_count").val(json.totoal_count);
 			addColum(json.listMap,json.startNum);
 			//刷新分页栏

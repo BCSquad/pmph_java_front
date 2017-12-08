@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.authadmin.message.controller;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,17 +66,18 @@ public class InfoReleaseController extends BaseController{
 	 */
 	@RequestMapping(value = "/infoRelease", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseBean<Map<String, Object>> infoRelease(
+	public Map<String, Object> infoRelease(
 			HttpServletRequest request) {
 
-		ResponseBean<Map<String, Object>> rb = new ResponseBean<Map<String, Object>>();
 		Integer pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		Integer pageSize = Integer.parseInt(request.getParameter("pageSize"));
 		String queryName = request.getParameter("queryName");
 
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("queryName", queryName);
-		paraMap.put("userId", "524");
+		Map<String, Object>   user=getUserInfo();
+		BigInteger uid = (BigInteger) user.get("id");
+		paraMap.put("userId", uid);
 		PageParameter<Map<String, Object>> pageParameter = new PageParameter<Map<String, Object>>(
 				pageNum, pageSize);
 		pageParameter.setParameter(paraMap);
@@ -88,8 +90,7 @@ public class InfoReleaseController extends BaseController{
 		vm_map.put("startNum", pageParameter.getStart() + 1);
 		vm_map.put("pageSize", pageParameter.getPageSize());
 		vm_map.put("totoal_count", totoal_count);
-		rb.setData(vm_map);
-		return rb;
+		return vm_map;
 	}
 
 }

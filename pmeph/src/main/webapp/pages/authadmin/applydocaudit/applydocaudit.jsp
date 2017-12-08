@@ -12,14 +12,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <base href="<%=basePath%>">
-	<script>
-		var contextpath = "${pageContext.request.contextPath}/";
-	</script>
-    <title>申报资料审核</title>
     <script type="text/javascript">
-        var contextpath="<%=request.getContextPath()+"/"%>";
-        
+        var contextpath = "${pageContext.request.contextPath}/";
     </script>
+    <title>申报资料审核</title>
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="<%=path%>/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="<%=path%>/statics/authadmin/applydocaudit/applydocaudit.css" type="text/css">

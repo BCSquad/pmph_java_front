@@ -15,9 +15,9 @@
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css"/>
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
     <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
+     <script src="${ctx}/resources/comm/base.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.pager.js"></script>
-     <script src="${ctx}/resources/comm/base.js"></script>
      <script src="${ctx}/resources/authadmin/message/inforelease.js"></script>
       <script src="${ctx}/resources/comm/layer/layer.js"></script>
 
