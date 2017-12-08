@@ -232,6 +232,8 @@ accept{
     height: 20px;
     vertical-align:top;
     padding-left: 12px;
+    font-family: MicrosoftYaHei;
+	color: #333333;
 }
 
 a{
@@ -471,16 +473,16 @@ a{
     
 }
 
-.contentBox::-webkit-scrollbar {/*¹ö¶¯ÌõÕûÌåÑùÊ½*/
-    width: 6px;     /*¸ß¿í·Ö±ð¶ÔÓ¦ºáÊú¹ö¶¯ÌõµÄ³ß´ç*/
+.contentBox::-webkit-scrollbar {/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½*/
+    width: 6px;     /*ï¿½ß¿ï¿½Ö±ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä³ß´ï¿½*/
     height: 1px;
 }
-.contentBox::-webkit-scrollbar-thumb {/*¹ö¶¯ÌõÀïÃæÐ¡·½¿é*/
+.contentBox::-webkit-scrollbar-thumb {/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½*/
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
     background: #999;
 }
-.contentBox::-webkit-scrollbar-track {/*¹ö¶¯ÌõÀïÃæ¹ìµÀ*/
+.contentBox::-webkit-scrollbar-track {/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
     -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
     border-radius: 10px;
     background: #EDEDED;

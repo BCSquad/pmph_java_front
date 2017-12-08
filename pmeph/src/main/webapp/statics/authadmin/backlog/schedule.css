@@ -110,7 +110,7 @@
     background-color: #ffffff;
 }
 .picture{
-	background-image: url("http://localhost:8080/pmeph/statics/image/css_sprites.png");
+	background-image: url("../../image/css_sprites.png");
     background-position: -10px -464px;
     background-repeat: no-repeat;
     width: 20px;
