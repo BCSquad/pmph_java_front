@@ -521,7 +521,7 @@ a{
     </div>
     <div class="b hidden" id="box">
             <div class="hiddenX hidden" id="close">
-                <img onclick="hide()" style="width:100%;height:100%;" src="../image/关闭.png">
+                <img onclick="hide()" style="width:100%;height:100%;" src="../statics/image/关闭.png">
             </div>
             <span class="personMessageTitle">私信窗口</span>
             <div class="contentBox" id="dialogue">
@@ -547,7 +547,7 @@ a{
 			   </c:otherwise>  
 			</c:choose>
 			
-	            <div><img src="${ctx}/${friend.avatar}" class="img2"></div>
+	            <div><img src="${pageContext.request.contextPath}/image/${friend.avatar}.action" class="img2"></div>
 	            <div class="div_txt1">${friend.username}</div>
 	            <div class="div_txt2">${friend.position}</div>
 	            <div class="div_txt3">
