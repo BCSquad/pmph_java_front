@@ -54,7 +54,6 @@ public class ReadDetailController extends BaseController{
 		}
 		String author="%"+map.get("author").toString()+"%";
 		List<Map<String, Object>> eMap=readDetailService.queryRecommendByE(0);
-//		List<Map<String,Object>> flist = bookCollectionService.queryBookCollectionList(new BigInteger("12179"));
 		PageParameter<Map<String, Object>> pageParameter=new PageParameter<Map<String, Object>>(1,2);
 		Map<String, Object> wMap=new HashMap<String, Object>();
 		wMap.put("id", id);
@@ -92,13 +91,22 @@ public class ReadDetailController extends BaseController{
 			}
 			modelAndView.addObject("tMaps", tMaps);
 		}
-//		modelAndView.addObject("flist", flist);
+		Map<String, Object> amap=readDetailService.queryDedaultFavorite(user.get("id").toString());
+		if(amap==null){
+			modelAndView.addObject("mark", "no");
+		}else{
+			int x=readDetailService.queryMark(id,amap.get("id").toString(),user.get("id").toString());
+			if(x>0){
+				modelAndView.addObject("mark", "yes");	
+			}else{
+				modelAndView.addObject("mark", "no");	
+			}
+		}
 		modelAndView.addObject("id", id);
 		modelAndView.addObject("eMap", eMap);
 		modelAndView.addObject("supMap", supMap);
 		modelAndView.addObject("map", map);
 		modelAndView.addObject("listCom", listCom);
-//		modelAndView.addObject("ComNum", listCom.size());
 		modelAndView.setViewName("commuser/readpage/readdetail");
 		return modelAndView;
 	}

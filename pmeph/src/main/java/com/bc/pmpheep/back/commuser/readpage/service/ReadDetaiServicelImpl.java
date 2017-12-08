@@ -163,5 +163,27 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		}
 		return map;
 	}
+
+	/**
+	 * 查询是否有收藏夹
+	 */
+	@Override
+	public Map<String, Object> queryDedaultFavorite(String id) {
+		// TODO Auto-generated method stub
+		long userId=Long.valueOf(id);
+		return readDetailDao.queryDedaultFavorite(userId);
+	}
+
+	/**
+	 * 查询默认收藏夹是否收藏本书
+	 */
+	@Override
+	public int queryMark(String bookId, String favoriteId, String writerId) {
+		// TODO Auto-generated method stub
+		long book_id=Long.valueOf(bookId);
+		long favorite_id=Long.valueOf(favoriteId);
+		long writer_id=Long.valueOf(writerId);
+		return readDetailDao.queryMark(book_id,favorite_id,writer_id);
+	}
 	
 }

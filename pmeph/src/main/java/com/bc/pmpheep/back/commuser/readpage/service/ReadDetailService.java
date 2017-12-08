@@ -72,4 +72,18 @@ public interface ReadDetailService {
 	 * @return
 	 */
 	Map<String, Object> inserMark(long bookId,long writerId);
+	/**
+	 * 查询是否有收藏夹
+	 * @param id
+	 * @return
+	 */
+	Map<String, Object> queryDedaultFavorite(String id);
+	/**
+	 * 查询默认收藏夹是否收藏本书
+	 * @param bookId
+	 * @param favoriteId
+	 * @param writerId
+	 * @return
+	 */
+	int queryMark(String bookId,String favoriteId,String writerId);
 }
