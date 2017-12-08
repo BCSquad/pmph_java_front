@@ -30,12 +30,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
    <div class="content-wrapper">
-       <div class="area1"> <a  href="personalhomepage/tohomepage.action" >个人中心</a> &gt;<a href="javascript:;"> 我的收藏</a> &gt; <a href="bookcollection/tobookcollection.action">书籍收藏夹</a> &gt; <a>${favoriteName }</a></div>
+       <div class="area1"> <a  href="personalhomepage/tohomepage.action" >个人中心</a> &gt;<a href="javascript:;"> 我的收藏</a> &gt; <a href="bookcollection/tobookcollection.action">书籍收藏夹</a> &gt; <a>${fmap.favorite_name }</a></div>
        <div class="area2">
-           <span class="name" >${favoriteName }</span>
-           <input type="hidden" id="favoriteName" value="${favoriteName }"/>
-            <input type="hidden" id="favoriteId" value="${favoriteId }"/>
-           <span class="del" onclick="delFavorite('${favoriteId }')">删除收藏夹</span>
+           <span class="name" >${fmap.favorite_name }</span>
+            <input type="hidden" id="favoriteId" value="${fmap.id }"/>
+           <span class="del" onclick="delFavorite('fmap.id }')">删除收藏夹</span>
        </div>
        <c:forEach items="${booklist.rows}" var="book">
        <div class="collection">

@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
         <div class="message-line"></div>
         <c:forEach items="${articleCollection }" var="collection">
-        <a href="articlecollection/toarticlecollectionlist.action?favoriteId=${collection.id }&favoriteName=${collection.favorite_name }" target="_blank">
+        <a href="articlecollection/toarticlecollectionlist.action?favoriteId=${collection.id }" target="_blank">
         <div class="collection">
             <p class="title" >${collection.favorite_name }</p>
             <p class="count">共${collection.mcount }条内容</p>

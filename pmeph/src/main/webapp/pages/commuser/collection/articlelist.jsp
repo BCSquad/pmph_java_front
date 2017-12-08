@@ -32,12 +32,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
    <div class="content-wrapper">
-        <div class="area1"><a href="personalhomepage/tohomepage.action">个人中心</a> &gt; <a href="javascript:;">我的收藏</a> &gt; <a href="articlecollection/toarticlecollection.action">文章收藏夹</a> &gt; ${favoriteName }</div>
+        <div class="area1"><a href="personalhomepage/tohomepage.action">个人中心</a> &gt; <a href="javascript:;">我的收藏</a> &gt; <a href="articlecollection/toarticlecollection.action">文章收藏夹</a> &gt; ${fmap.favorite_name }</div>
     <div class="area2">
-        <span class="name" >${favoriteName }</span>
-         <input type="hidden" id="favoriteName" value="${favoriteName }"/>
-         <input type="hidden" id="favoriteId" value="${favoriteId }"/>
-        <span class="del" onclick="delFavorite('${favoriteId }')">删除收藏夹</span>
+        <span class="name" >${fmap.favorite_name }</span>
+         <input type="hidden" id="favoriteId" value="${fmap.id }"/>
+        <span class="del" onclick="delFavorite('${fmap.favorite_id }')">删除收藏夹</span>
     </div>
     <c:forEach items="${articlelist.rows }" var="article"> 
     <div class="collection" >
@@ -102,109 +101,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
 </html>
-<script>
-   
-    /*    Page({
-     num: 17,					//页码数
-     startnum: 6,				//指定页码
-     elem: $('#page2'),		//指定的元素
-     callback: function (n) {	//回调函数
-     console.log(n);
-     }
-     });*/
-   /*  $(function () {
-    	var pagenum;
-    	if($("#pagenum").val()==""){
-    		pagenum=1;
-    	}else{
-    		pagenum=parseInt($("#pagenum").val());
-    	}
-    	var pagecount;
-    	if(!($("#pages").val()=='')){
-    		pagecount=parseInt($("#pages").val());
-    	}else{
-    		pagecount=1;
-    	}
-    	
-    	Page({
-    	        num:pagecount,					
-    	        startnum: pagenum,
-    	        elem:$("#page1"),
-    	        callback: function (n) {
-    	        	var pagesize=$("input[name='edu']").val();
-    	        	var favoriteName=$("#favoriteName").val();
-    	        	var favoriteId=$("#favoriteId").val();
-    	            window.location.href=contxtpath+'/articlecollection/toarticlecollectionlist.action?pagenum='+n+'&pagesize='+pagesize+
-    	            		'&favoriteName='+favoriteName+'&favoriteId='+favoriteId;
-    	        }
-    	 });
-      $('select').selectlist({
-            zIndex: 10,
-            width: 110,
-            height: 30,
-            optionHeight: 30,
-            onChange: function () {
-            	var pagesize=$("input[name='edu']").val();
-              	var favoriteName=$("#favoriteName").val();
-              	var favoriteId=$("#favoriteId").val();
-              	 window.location.href=contxtpath+'/articlecollection/toarticlecollectionlist.action?pagenum=1&pagesize='+pagesize+
-           		'&favoriteName='+favoriteName+'&favoriteId='+favoriteId;
-            }  //自定义模拟选择列表项chang
-        });
-    }); 
-    
-    
-    //点赞或取消点赞  
-    function addlike(id){
-    	var likes=$("#like"+id).text();
-    	$.ajax({
-			type:'post',
-			url:contxtpath+'/articlecollection/changelike.action',
-			data:{contentId:id,likes:likes},
-			async:false,
-			dataType:'json',
-			success:function(json){
-			   if(json.returncode=="OK"){
-				if($("#good"+id).hasClass("good")){
-		    		$("#good"+id).removeClass("good");
-		    		$("#good"+id).addClass("nogood");
-		    		$("#like"+id).css({"color":"#b5b5b5"});
-		    	}else{
-		    		$("#good"+id).removeClass("nogood");
-		    		$("#good"+id).addClass("good");
-		    		$("#like"+id).css({"color":"#1abd44"});
-		    	}
-				$("#like"+id).text(json.likes);
-			   }
-				     
-			}
-		});
-    }
-    //取消收藏
-    function cancelMark(id,markes,cmsid){
-    	var favoriteId=$("#favoriteId").val();
-    	var cmsId=$("#cms"+cmsid).val();
-    	if(confirm("你确定取消收藏吗？")){
-    	$.ajax({
-			type:'post',
-			url:contxtpath+'/articlecollection/cancelmark.action',
-			data:{markId:id,favoriteId:favoriteId,contentId:cmsId,markes:markes},
-			async:false,
-			dataType:'json',
-			success:function(json){
-				var pagesize=$("input[name='edu']").val();
-              	var favoriteName=$("#favoriteName").val();
-              	var favoriteId=$("#favoriteId").val();
-              	 window.location.href=contxtpath+'/articlecollection/toarticlecollectionlist.action?pagenum=1&pagesize='+pagesize+
-           		'&favoriteName='+favoriteName+'&favoriteId='+favoriteId;
-			}
-		});
-    	}
-    }
-    //删除收藏夹
-    function delFavorite(id){
-    	if(confirm("你确定删除吗？")){
-    	     window.location.href=contxtpath+'/articlecollection/delfavorite.action?favoriteId='+id;
-    	}
-    } */
-</script>
+
+  
+
