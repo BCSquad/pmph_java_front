@@ -54,11 +54,11 @@ public class PageResult<T> {
 
 	public void setTotal(Integer total) {
 		this.total = total;
-//		if(this.total%this.pageSize==0){
-//			this.pageTotal=this.total/this.pageSize;
-//		}else{
+		if(this.total%this.pageSize==0){
+			this.pageTotal=this.total/this.pageSize;
+		}else{
 			this.pageTotal=(this.total/this.pageSize)+1;
-//		}
+		}
 		if(this.pageTotal==this.pageNumber){
 			isLast     = true;
 		}else{

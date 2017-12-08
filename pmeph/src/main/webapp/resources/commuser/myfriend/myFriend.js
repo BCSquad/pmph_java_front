@@ -41,7 +41,7 @@ $(function(){
 	        				html = 
 		        				"<div class='oneTalk'> "+
 		                        "<div class='headAndNameRight float_right'> "+
-		                            "<div class='headDiv'><img class='headPicture' src='"+responsebean[i].avatar+"'/></div> "+
+		                            "<div class='headDiv'><img class='headPicture' src='"+contxtpath+"/"+responsebean[i].avatar+"'/></div> "+
 		                            "<div class='talkName'><text>"+responsebean[i].senderName+"</text></div> "+
 		                        "</div> "+
 		                        "<div class='talkDivRight float_right' > "+
@@ -57,7 +57,7 @@ $(function(){
 	        				html =
 	        				"<div class='oneTalk'> "+
 		                        "<div class='headAndNameLeft float_left'> "+
-		                            "<div class='headDiv'><img class='headPicture' src='"+responsebean[i].avatar+"'/></div> "+
+		                            "<div class='headDiv'><img class='headPicture' src='"+contxtpath+"/"+responsebean[i].avatar+"'/></div> "+
 		                            "<div class='talkName'><text>"+responsebean[i].senderName+"</text></div> "+
 		                        "</div> "+
 	

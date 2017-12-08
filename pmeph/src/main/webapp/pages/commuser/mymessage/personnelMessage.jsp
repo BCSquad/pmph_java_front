@@ -52,7 +52,6 @@
 		</select>
 		</span>
 	</div>
-	</div>
 	<div id="list" class="message">
 
 		<!--  <a class="a" href="javascript:void(0)" onclick="show()" style=" background:red">弹出</a>-->
@@ -62,44 +61,43 @@
 				<img onclick="hide()" style="width: 100%; height: 100%;"
 					src="../image/关闭.png">
 			</div>
-			<span class="personMessageTitle">你与特朗普的私信窗口</span>
-			<div class="contentBox">
-				<div class="oneTalk">
-					<div class="headAndNameLeft float_left">
-						<div class="headDiv">
-							<img class="headPicture" src="../测试文件/tx.png" />
+			<div id= "boxmessage">
+				<span class="personMessageTitle">你与特朗普的私信窗口</span>
+				<div class="contentBox">
+					<div class="oneTalk">
+						<div class="headAndNameLeft float_left">
+							<div class="headDiv">
+								<img class="headPicture" src="../测试文件/tx.png" />
+							</div>
+							<div class="talkName">
+								<text>曾若男</text>
+							</div>
 						</div>
-						<div class="talkName">
-							<text>曾若男</text>
+
+						<div class="talkDiv float_left">
+							<div class="sendMessage">
+								<div class="textDiv float_left">简单地说 简单地说 简单地说 简单地说 简单地说</div>
+							</div>
+							<div class="talkTime talkTimeAlignLeft">2017.04.01</div>
 						</div>
 					</div>
-
-					<div class="talkDiv float_left">
-						<div class="sendMessage">
-							<!-- <div class="triangle leftTriangle float_left"></div>-->
-							<div class="textDiv float_left">简单地说 简单地说 简单地说 简单地说 简单地说</div>
-						</div>
-						<div class="talkTime talkTimeAlignLeft">2017.04.01</div>
+				</div>
+			</div>
+			<div class="inputBox">
+				<div style="float: left; width: 80%; height: 100%">
+					<textarea
+						style="width: 100%; height: 98%; border: none; outline: 0; font-size: 15px;"
+						type="text" placeholder="请输入消息内容,按回车键发送"></textarea>
+				</div>
+				<div style="float: left; width: 20%; height: 100%">
+					<div class="div_btn11" style="cursor: pointer;">
+						<span class="button11">发送</span>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="inputBox">
-			<div style="float: left; width: 80%; height: 100%">
-				<textarea
-					style="width: 100%; height: 98%; border: none; outline: 0; font-size: 15px;"
-					type="text" placeholder="请输入消息内容,按回车键发送"></textarea>
-			</div>
-			<div style="float: left; width: 20%; height: 100%">
-				<div class="div_btn11" style="cursor: pointer;">
-					<span class="button11">发送</span>
-				</div>
-			</div>
-		</div>
-
-	</div>
 	<div id="loadMore" class="load-more clearfix">加载更多...</div>
-	</div>
+</div>
 	<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
 <script>

@@ -30,7 +30,7 @@ a:visited {color:gray;} /*已访问颜色*/
     text-align: center;
     float: left;
     border: solid 1px #ececec;
-    margin: 40px 0;
+    margin: 40px 10px ;
 }
 .item_center{
     margin:40px 30px;

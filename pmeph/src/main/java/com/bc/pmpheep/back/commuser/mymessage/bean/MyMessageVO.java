@@ -61,7 +61,7 @@ public class MyMessageVO implements Serializable {
 	/**
 	 * 发送时间
 	 */
-	private Date sendTime;
+	private Timestamp sendTime;
 	/**
 	 * 是否已读
 	 */
@@ -111,11 +111,11 @@ public class MyMessageVO implements Serializable {
 		this.content = content;
 	}
 
-	public Date getSendTime() {
+	public Timestamp getSendTime() {
 		return sendTime;
 	}
 
-	public void setSendTime(Date sendTime) {
+	public void setSendTime(Timestamp sendTime) {
 		this.sendTime = sendTime;
 	}
 
