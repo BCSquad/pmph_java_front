@@ -1,5 +1,5 @@
 $(function() {
-	var pageSize = 10;
+	var pageSize = 1;
 	var pageNumber = 1;
 	var isRead = null;
 	init();
@@ -44,6 +44,18 @@ $(function() {
 					}
 				})
 	}
+	//更多
+	$("#loadMore").click(function() {
+		init();
+	});
+	//序列
+	$("#otherSelected").change(function() {
+		isRead = $("#select").val;
+		pageSize = 1;
+		pageNumber = 1;
+		init();
+	});
+	
 	function show() {
 
 		$.ajax({

@@ -18,6 +18,9 @@
 		m.is_deleted = FALSE
 		AND m.is_withdraw = FALSE
 		AND m.msg_type = 2
+		<if test="isRead != null">
+		AND m.is_read = #{parameter.isRead}
+		</if>
 		GROUP
 		BY m.sender_id
 		ORDER BY sendTime DESC
