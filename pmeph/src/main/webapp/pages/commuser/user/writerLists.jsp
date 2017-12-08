@@ -78,9 +78,17 @@
                 </tr>
                 </thead>
                 <tbody id='tb'>
-	              		<c:forEach items="${page.rows }" var="item">
+	              		<c:forEach items="${page.rows }" var="item" varStatus="vs">
 	              			<tr>
-	              				<td>${item.id } </td>
+	              				
+	              				<c:choose>  
+  			   						<c:when test="${(vs.index+1)%10 == 1}">
+  			   							<td>${vs.count}</td>
+  			   						</c:when>  
+			   						<c:otherwise>        
+			   							<td>${vs.count}</td> 
+			   						</c:otherwise>  
+								</c:choose>
 	              				<td>${item.username } </td>
 	              				<td>${item.realname } </td>
 	              				<td>${item.handphone } </td>
