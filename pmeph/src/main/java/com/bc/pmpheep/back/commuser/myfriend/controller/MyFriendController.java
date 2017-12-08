@@ -66,15 +66,6 @@ public class MyFriendController extends com.bc.pmpheep.general.controller.BaseCo
         String pageUrl = "commuser/myfriend/myFriend";
         try {
             List<WriterFriendVO> listFriends = myFriendService.listMyFriend(writerUser);
-            if (CollectionUtil.isNotEmpty(listFriends)) {
-                for (WriterFriendVO writerFriendVO : listFriends) {
-                    if (null != writerFriendVO
-                        && (null == writerFriendVO.getAvatar()
-                            || "".equals(writerFriendVO.getAvatar().trim()) || "DEFAULT".equals((writerFriendVO.getAvatar().trim())))) {
-                        writerFriendVO.setAvatar(RouteUtil.DEFAULT_USER_AVATAR);
-                    }
-                }
-            }
             model.setViewName(pageUrl);
             model.addObject("listFriends", listFriends);
         } catch (CheckedServiceException e) {
