@@ -3,6 +3,8 @@ package com.bc.pmpheep.back.authadmin.message.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.bc.pmpheep.back.plugin.PageParameter;
+
 /**
  * 
  * @ClassName: InfoReleaseDao
@@ -24,7 +26,7 @@ public interface InfoReleaseDao {
 	 * @return List<Map<String,Object>> 返回类型
 	 * @throws
 	 */
-	List<Map<String, Object>> selectInfoRelease(Map<String, Object> paraMap);
+	List<Map<String, Object>> selectInfoRelease(PageParameter<Map<String, Object>> pageParameter);
 
 	/**
 	 * 
@@ -45,6 +47,6 @@ public interface InfoReleaseDao {
 	 * @return Integer 返回类型
 	 * @throws
 	 */
-	Integer selectInfoReleaseCount(Map<String, Object> paraMap);
+	Integer selectInfoReleaseCount(PageParameter<Map<String, Object>> pageParameter);
 
 }

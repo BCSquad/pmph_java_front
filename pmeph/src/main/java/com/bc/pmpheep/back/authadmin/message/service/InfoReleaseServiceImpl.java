@@ -41,12 +41,12 @@ public class InfoReleaseServiceImpl implements InfoReleaseService {
 	@Override
 	public List<Map<String, Object>> selectInfoRelease(
 			PageParameter<Map<String, Object>> pageParameter) {
-		Map<String, Object> paraMap = new HashMap<String, Object>();
+	/*	Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("startNum", pageParameter.getStart());
 		paraMap.put("pageSize", pageParameter.getPageSize());
-		paraMap.put("queryName", pageParameter.getParameter().get("queryName"));
+		paraMap.put("queryName", pageParameter.getParameter().get("queryName"));*/
 		List<Map<String, Object>> resultList = infoReleaseDao
-				.selectInfoRelease(paraMap);
+				.selectInfoRelease(pageParameter);
 		return resultList;
 	}
 
@@ -56,9 +56,9 @@ public class InfoReleaseServiceImpl implements InfoReleaseService {
 	@Override
 	public int selectInfoReleaseCount(
 			PageParameter<Map<String, Object>> pageParameter) {
-		Map<String, Object> paraMap = pageParameter.getParameter();
-		paraMap.put("queryName", pageParameter.getParameter().get("queryName"));
-		Integer count = infoReleaseDao.selectInfoReleaseCount(paraMap);
+		/*Map<String, Object> paraMap = pageParameter.getParameter();
+		paraMap.put("queryName", pageParameter.getParameter().get("queryName"));*/
+		Integer count = infoReleaseDao.selectInfoReleaseCount(pageParameter);
 		Integer maxPageNum = (int) Math.ceil(1.0 * count
 				/ pageParameter.getPageSize());
 		return maxPageNum;

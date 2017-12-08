@@ -13,7 +13,7 @@
 	</select>
 
 	<!-- 查询列表 -->
-	<select id="selectInfoRelease" parameterType="java.util.Map"
+	<select id="selectInfoRelease" parameterType="PageParameter"
 		resultType="java.util.Map">
 		SELECT
 		c.user_id AS id,
@@ -24,33 +24,33 @@
 		JOIN dec_position b ON b.textbook_id = a.id
 		JOIN declaration c ON b.declaration_id = c.id
 		JOIN org_user d on d.org_id = c.org_id
-		<where>
-			<if test="queryName != null and queryName != '' ">
-				and textbook_name like concat("%",#{queryName},"%")
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="parameter。queryName != null ">
+				and textbook_name like concat("%",#{parameter。queryName},"%")
 			</if>
-			<if test="userId != null and userId != '' ">
-				and d.id = ${userId}
+			<if test="parameter。userId != null ">
+				and d.id = ${parameter。userId}
 			</if>
-		</where>
+		</trim>
 		limit ${startNum},${pageSize}
 	</select>
 
 	<!-- 查询条数 -->
-	<select id="selectInfoReleaseCount" parameterType="java.util.Map"
+	<select id="selectInfoReleaseCount" parameterType="PageParameter"
 		resultType="java.lang.Integer">
-		select count(*)  FROM
+		select count(*) FROM
 		textbook a
 		JOIN dec_position b ON b.textbook_id = a.id
 		JOIN declaration c ON b.declaration_id = c.id
 		JOIN org_user d on d.org_id = c.org_id
-		<where>
-			<if test="queryName != null and queryName != '' ">
-				and textbook_name like concat("%",#{queryName},"%")
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="parameter。queryName != null">
+				and textbook_name like concat("%",#{parameter。queryName},"%")
 			</if>
-			<if test="userId != null and userId != '' ">
-				and d.id = ${userId}
+			<if test="parameter。userId != null ">
+				and d.id = ${parameter。userId}
 			</if>
-		</where>
+		</trim>
 	</select>
 
 
