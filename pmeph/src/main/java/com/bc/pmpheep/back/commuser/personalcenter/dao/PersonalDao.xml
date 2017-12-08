@@ -62,12 +62,12 @@ AND a.online_progress IN (2, 3)
   </select>
   <!-- 查最新文章动态 -->
  <select id="ListMyWritingsTwo"  resultMap="BaseResultMap">
- SELECT title,summary,auth_status,gmt_update from cms_content where author_id=#{id}  and is_deleted ='0'
+ SELECT title,summary,auth_status,DATE_FORMAT(gmt_update,'%Y-%m-%d %h:%i') as gmt_update from cms_content where author_id=#{id}  and is_deleted ='0'
   </select>
 
  <!-- 查最新书评动态 -->
  <select id="ListMyBookNewsTwo"  resultMap="BaseResultMap">
- select a.score,a.content,a.gmt_update,b.bookname,b.image_url from book_user_comment a left JOIN  book b ON a.book_id=b.id where a.writer_id=#{id}  and a.is_deleted='0' and a.is_auth='1'
+ select a.score,a.content,DATE_FORMAT(a.gmt_update,'%Y-%m-%d %h:%i') as gmt_update,b.bookname,b.image_url from book_user_comment a left JOIN  book b ON a.book_id=b.id where a.writer_id=#{id}  and a.is_deleted='0' and a.is_auth='1'
   </select>
 
 
