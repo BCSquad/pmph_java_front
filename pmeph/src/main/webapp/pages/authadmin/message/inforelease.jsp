@@ -36,8 +36,8 @@
     <div class="content-wrapper" >
     		 <div class="box">
             <div class="boxsm">
-                <div class="item">
-                    <span  class="title" >选择教材</span>
+                <div class="item1">
+                    <span  class="title2" >选择教材</span>
                     <select   class="st_2"  id="select-search-condition" >
                     	<option  value="" >请选择</option>
                     	<c:forEach items="${listMenu}" var="item">

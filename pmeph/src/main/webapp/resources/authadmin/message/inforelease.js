@@ -26,25 +26,7 @@ function DoCheck() {
 
 
 $(function(){
-	var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
-	//给父页面传值
-	$('#send2').on('click', function(){
-	var chk_value =[]; 
-		$('input[name="choose"]:checked').each(function(){ 
-		chk_value.push($(this).val()); 
-		}); 
-		/*if(chk_value.length==0){
-			window.message.error("请选择教材报名者");
-			return false;
-		}*/
-	    parent.$('#radioValue').val(chk_value);
-	   // parent.layer.tips('Look here', '#parentIframe', {time: 5000});
-	   
-	    parent.layer.close(index);
-	});
-	$('#backupdate').on('click', function(){
-		    parent.layer.close(index);
-		});
+
 	$('#page-size-select').selectlist({
         zIndex: 10,
         width: 110,
@@ -89,16 +71,11 @@ function queryMain(){
 	
 	$.ajax({
 		type:'post',
-		url:contextpath+'info/infoRelease.action?t='+new Date().getTime(),
+		url:contextpath+'/info/infoRelease.action?t='+new Date().getTime(),
 		async:false,
 		dataType:'json',
 		data:data,
 		success:function(json){
-			if (json.listMap.length == 0) {
-				$("#fenye").hide();
-			}else{
-				$("#fenye").show();
-			}
 			$("#totoal_count").val(json.totoal_count);
 			addColum(json.listMap,json.startNum);
 			//刷新分页栏
