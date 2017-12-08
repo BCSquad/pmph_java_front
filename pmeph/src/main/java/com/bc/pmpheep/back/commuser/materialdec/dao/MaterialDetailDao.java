@@ -11,6 +11,8 @@ public interface MaterialDetailDao {
 		public List<Map<String,Object>> queryBookById(String material_id);
 		//通过教材ID查出相关的机构信息
 		public List<Map<String,Object>> queryOrgById(String material_id);
+		//通过教材ID查出扩展信息
+		public List<Map<String,Object>> queryZjkzxxById(String material_id);
 		
 		//图书选择信息
 		public List<Map<String,Object>> queryTsxz(Map<String,Object> map);
@@ -47,4 +49,7 @@ public interface MaterialDetailDao {
 		//作家科研情况表
 		public List<Map<String,Object>> queryZjkyqk(Map<String,Object> map);
 		public int insertZjkyqk(Map<String,Object> map);
+		//作家扩展项填报表
+		public List<Map<String,Object>> queryZjkzbb(Map<String,Object> map);
+		public int insertZjkzbb(Map<String,Object> map);
 }

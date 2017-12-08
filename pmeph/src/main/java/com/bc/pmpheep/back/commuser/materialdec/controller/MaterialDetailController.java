@@ -56,6 +56,8 @@ public class MaterialDetailController extends BaseController{
 		//教材信息
 		Map<String,Object> materialMap = new HashMap<String,Object>();
 		materialMap = this.mdService.queryMaterialbyId(material_id);
+		//作家扩展信息
+		List<Map<String,Object>> zjkzxxList = this.mdService.queryZjkzxxById(material_id);
 		//书籍信息
 		List<Map<String,Object>> bookList = this.mdService.queryBookById(material_id);
 		StringBuffer bookSelects = new StringBuffer();
@@ -73,6 +75,7 @@ public class MaterialDetailController extends BaseController{
 		mav.addObject("orgSelects", orgSelects.toString());
 		mav.addObject("materialMap", materialMap);
 		mav.addObject("userMap", userMap);
+		mav.addObject("zjkzxxList", zjkzxxList);
 		mav.addObject("material_id", materialMap.get("id"));
 		return mav;
 	}

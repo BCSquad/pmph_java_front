@@ -492,7 +492,7 @@
 					</tbody>
 				</table>
 			</div>
-		<div>
+		</div>
 		<!--作家科研情况-->
 		<div class="sbxq_item" id="zjkyqk">
 			<div>
@@ -518,23 +518,26 @@
 							<td><input class="cg_input" name="zjk_approval_unit" value="" style="width: 200px;"/></td>
 							<td><input class="cg_input" name="zjk_award" value="" style="width: 300px;"/></td>
 							<td><input class="cg_input" name="zjk_note" value="" style="width: 300px;"/></td>
-							<td><img class="add_img" src="${ctx}/statics/image/add.png"/ onclick="add_zjky()"></td>
+							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="add_zjky()"></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-		<div>
-			<!--个人成就-->
-	<!-- 	<div class="sbxq_item">
-			<div>
-				<span id="tsxz_span9"></span>
-				<span class="tsxz_title">个人成就（选填）</span>
+		</div>
+			<!--扩展信息-->
+		<c:forEach var="zjkzxx" items="${zjkzxxList}">
+		 	<div class="sbxq_item">
+				<div>
+					<span id="tsxz_span9"></span>
+					<span class="tsxz_title">${zjkzxx.extension_name}（选填）</span>
+					<input type="hidden" name="extension_id" value="${zjkzxx.id}"/>
+				</div>
+				<div class="content">
+					<textarea class="text_cl" name="content"></textarea>
+				</div>
+				<hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">
 			</div>
-			<div class="content">
-				<textarea class="text_cl">填写我的成就...</textarea>
-			</div>
-			<hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">
-		</div> -->
+		</c:forEach>
 		<!-- 申报单位-->
 		<div class="sbxq_item1">
 			<div>
