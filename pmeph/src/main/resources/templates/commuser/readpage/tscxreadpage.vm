@@ -1,4 +1,4 @@
-<div class="item" onclick="openUrl('$!{url}')">
+<div class="item" onclick="openUrl('$!{id}')">
 	#if($ordernum == 1)	
     <div class="flag red">
         $!{ordernum}

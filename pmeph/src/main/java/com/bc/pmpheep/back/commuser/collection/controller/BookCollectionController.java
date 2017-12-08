@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.collection.service.BookCollectionService;
+import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
 
 /**
  * @author guoxiaobao
@@ -54,40 +57,27 @@ public class BookCollectionController  extends BaseController{
     public ModelAndView initBookList(HttpServletRequest request) throws UnsupportedEncodingException{
     	Map<String,Object> map=new HashMap<String, Object>();
     	Map<String,Object> userMap=getUserInfo();
+    	Map<String,Object> pmap=new HashMap<>();
     	request.setCharacterEncoding("utf-8");
     	BigInteger favoriteId=new BigInteger(request.getParameter("favoriteId"));
-    	//根据书籍收藏夹的id获取收藏夹下收藏书籍的总数
-    	int bookcount = bookCollectionService.queryBookCont(favoriteId,(BigInteger) userMap.get("id"));
-    	String favoriteName = new String(request.getParameter("favoriteName").getBytes("ISO-8859-1"),"utf-8");
     	String pagenum=request.getParameter("pagenum");
     	String pagesize=request.getParameter("pagesize");
-    	int startnum=0;
+    	int curpage=1;
     	int size=5;
-    	int pages=0;
-    	if(pagenum!=null&&!"".equals(pagenum)&&pagesize!=null&&!"".equals(pagesize)){
-    		startnum=Integer.parseInt(pagenum)*Integer.parseInt(pagesize)-Integer.parseInt(pagesize);
-    	    size=Integer.parseInt(pagesize);
-    	    if((bookcount%Integer.parseInt(pagesize))==0){
-    	    	pages=bookcount/Integer.parseInt(pagesize);
-    	    }else{
-    	    	pages=bookcount/Integer.parseInt(pagesize)+1;
-    	    }
-    	}else{
-    		if(bookcount%size==0){
-    			pages=bookcount/size;
-    		}else{
-    			pages=bookcount/size+1;
-    		}
-    		pagenum="1";
-    		pagesize="5";
+    	if(pagenum!=null && !pagenum.equals("")){
+    		curpage=Integer.parseInt(pagenum);
     	}
-    	List<Map<String, Object>> booklist = bookCollectionService.queryBookList(favoriteId,startnum,size,(BigInteger) userMap.get("id"));
-    	map.put("booklist", booklist);
-    	map.put("favoriteName",favoriteName);
-    	map.put("bookcount", bookcount);
-    	map.put("pagenum",pagenum);
-    	map.put("pagesize",pagesize);
-    	map.put("pages", pages+"");
+    	if(pagesize!=null && !"".equals(pagesize)){
+    		size=Integer.parseInt(pagesize);
+    	}
+    	PageParameter<Map<String,Object>> param=new PageParameter<>(curpage,size);
+    	pmap.put("favoriteId", favoriteId);
+    	pmap.put("writerId", (BigInteger) userMap.get("id"));
+        param.setParameter(pmap);
+        PageResult<Map<String,Object>> booklist = bookCollectionService.queryBookList(param);
+        Map<String,Object> fmap=bookCollectionService.queryFavoriteById(favoriteId);
+        map.put("booklist", booklist);
+        map.put("fmap", fmap);
     	map.put("favoriteId", request.getParameter("favoriteId"));
     	return new ModelAndView("/commuser/collection/booklist",map);
     }

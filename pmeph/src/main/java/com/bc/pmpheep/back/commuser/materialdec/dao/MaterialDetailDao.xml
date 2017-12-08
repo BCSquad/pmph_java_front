@@ -3,12 +3,22 @@
 <mapper namespace="com.bc.pmpheep.back.commuser.materialdec.dao.MaterialDetailDao" >
 	<!-- 通过教材ID查询出教材信息 -->
 	<select id="queryMaterialbyId" resultType="java.util.Map" parameterType="java.lang.String">
-		select * from material where id = #{material_id}
+		select t1.*,t2.extension_name,t2.is_required from material t1 left join material_extension t2 
+			on t1.id=t2.material_id where t1.id = #{material_id}
 	</select>
 	
 	<!-- 通过教材ID查询所有书籍 -->
 	<select id="queryBookById" resultType="java.util.Map" parameterType="java.lang.String">
 		select * from textbook where material_id = #{material_id}
+	</select>
+	<!-- 通过教材ID查出相关的机构信息 -->
+	<select id="queryOrgById" resultType="java.util.Map" parameterType="java.lang.String">
+		select * from material_org t1 LEFT JOIN org t2 on t1.org_id = t2.id
+			where t1.material_id = #{material_id}
+	</select>
+	<!-- 通过教材ID查出相关的机构信息 -->
+	<select id="queryZjkzxxById" resultType="java.util.Map" parameterType="java.lang.String">
+		select * from material_extension where material_id = #{material_id}
 	</select>
 	
 	<!-- 专家信息 -->
@@ -85,7 +95,7 @@
 		select * from dec_last_position where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
 	<insert id="insertJcbj" parameterType="java.util.Map">
-		insert into dec_last_position(declaration_id,material_name,position)
+		insert into dec_last_position(declaration_id,material_name,position,note)
 		  values(#{declaration_id},#{material_name},#{position},#{note})
 	</insert>
 	
@@ -124,4 +134,14 @@
 		insert into dec_research(declaration_id,research_name,approval_unit,award,note)
 		  values(#{declaration_id},#{research_name},#{approval_unit},#{award},#{note})
 	</insert>
+	
+	<!-- 作家扩展项填报表 -->
+	<select id="queryZjkzbb" resultType="java.util.Map" parameterType="java.util.Map">
+		select t1.*,t2.extension_name from dec_extension t1 LEFT JOIN material_extension t2 ON 
+		   t1.extension_id = t2.id where t1.declaration_id = #{declaration_id}
+	</select>
+	<!-- 作家扩展项填报表新增 -->
+	<select id="insertZjkzbb" resultType="java.util.Map" parameterType="java.util.Map">
+		insert into dec_extension(extension_id,declaration_id,content) values(#{extension_id},#{declaration_id},#{content})
+	</select>
 </mapper>

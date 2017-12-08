@@ -1,3 +1,13 @@
+.aher {
+text-decoration:none; 
+color:#333; 
+}
+
+.abmcj {
+text-decoration:none; 
+color:#FFF; 
+}
+
 .body {
     background: url("../../image/ypzj_bg.png");
     padding-bottom: 60px;
@@ -181,8 +191,8 @@
 
 #wdscx {
     background-image: url(../../image/css_sprites.png);
-    background-position: -462px -101px;
-    height: 16px;
+    background-position: -462px -99px;
+    height: 22px;
     width: 20px;
     background-repeat: no-repeat;
     float: left;
@@ -312,12 +322,12 @@
 }
 
 #jiantou {
-    background-image: url(../../image/sx.png);
+    background-image: url(../../image/refresh.png);
     height: 20px;
     width: 20px;
     background-repeat: no-repeat;
     float: right;
-    background-position: 1px 1px;
+    background-position: 1px 4px;
 }
 
 #hyp {
@@ -334,6 +344,7 @@
 }
 
 .sclb {
+	line-height: 18px;
     float: left;
     height: 130px;
     width: 80px;

@@ -44,6 +44,15 @@ function queryMain(){
 		success:function(json){
 			
 			$("#book-list-table").html(json.html);
+			
+			if (json.html.trim() == "") {
+				$(".pageDiv").hide();
+			}else{
+				$(".pageDiv").show();
+				$(".pagination").css("display","inline-block");
+				$(".pageJump").css("display","inline-block");
+				$(".pagination").next("div").css("display","inline-block");
+			}
 			$('#page1').html("");	
 			$("#totoal_count").html(json.totoal_count);
 			redQuery();
@@ -136,7 +145,7 @@ function pageScroll(){
 
 function switchBetweenBookAndArticle(n){
 	if (n=="article") {
-		window.location=contextpath+'articlesearch/queryall.action?title='+$("#search-name").val()+'&&real_title='+$("#search-name-temp").val();
+		window.location=contextpath+'articlesearch/queryall.action?title='+encodeURI(encodeURI($("#search-name").val()))+'&&real_title='+encodeURI(encodeURI($("#search-name-temp").val()));
 	}else{
 		/*window.location=contextpath+'booksearch/toPage.action?search='+$("#search-name").val()+'&&real_search='+$("#search-name-temp").val();*/
 	}

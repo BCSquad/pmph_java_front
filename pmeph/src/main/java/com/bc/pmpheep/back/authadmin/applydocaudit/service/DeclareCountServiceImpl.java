@@ -61,5 +61,16 @@ public class DeclareCountServiceImpl implements DeclareCountService {
 		List<Map<String, Object>> list = declareCountDao.selectAll();
 		return list;
 	}
+	
+	/**
+	 * 最终结果名单
+	 * 查看全部
+	 */
+	@Override
+	public List<Map<String, Object>> selectResults() {
+		List<Map<String, Object>> list = declareCountDao.selectResults();
+		return list;
+	}
+	
 
 }

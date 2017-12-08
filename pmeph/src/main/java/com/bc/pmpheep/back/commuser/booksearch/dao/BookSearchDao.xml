@@ -6,7 +6,8 @@
 		
 	</resultMap>
 	
-	<select id="queryBookList" parameterType="java.util.Map" resultMap="bookListMap">
+	<!-- 查询书籍列表 带出当前登录人与每本书籍的点赞记录id -->
+	<select id="queryBookList" parameterType="PageParameter" resultMap="bookListMap">
 		SELECT
 			b.id as bookId,
 			b.bookname,
@@ -21,24 +22,25 @@
 		FROM
 		book AS b
 		left Join book_detail AS bd ON b.id = bd.book_id
-		left join book_user_like as l on b.id= l.book_id and l.writer_id = ${uid}
+		left join book_user_like as l on b.id= l.book_id and l.writer_id = ${parameter.uid}
 		<where>
-			<if test="queryName != null and queryName != '' ">
-				and b.bookname like concat("%",#{queryName},"%")
+			<if test="parameter.queryName != null and parameter.queryName != '' ">
+				and b.bookname like concat("%",#{parameter.queryName},"%")
 			</if>
 		</where>
 		group by b.id
-		limit ${startNum},${pageSize}
+		limit ${start},${pageSize}
 	</select>
 	
-	<select id="queryBookCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+	<!-- 书籍总数 -->
+	<select id="queryBookCount" parameterType="PageParameter" resultType="java.lang.Integer">
 		SELECT
 			count(b.id)
 		FROM
 		book AS b
 		<where>
-			<if test="queryName != null and queryName != '' ">
-				and b.bookname like concat("%",#{queryName},"%")
+			<if test="parameter.queryName != null and parameter.queryName != '' ">
+				and b.bookname like concat("%",#{parameter.queryName},"%")
 			</if>
 		</where>
 	</select>

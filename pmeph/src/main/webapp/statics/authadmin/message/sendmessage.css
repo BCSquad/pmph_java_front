@@ -69,14 +69,6 @@
     border-radius: 4px;
     border: none
 }
-textarea{
-	width: 1060px; 
-	height:550px;  
-	background-color: #f1f1f1;
-    border-radius: 4px;
-    border: none;
-    overflow: hidden;
-}
 .message-list .sel-object{
     font-size: 14px;
     margin-left: 32px;
@@ -98,7 +90,7 @@ textarea{
     font-size: 14px;
     color: #333333;
 }
-/* .message-list .appendix{
+.message-list .appendix{
     margin-top:30px;
     margin-left: 32px;
     margin-bottom: 14px;
@@ -108,12 +100,12 @@ textarea{
 }
 .message-list .appendix span{
 float: left;
-} */
-/* .message-list .appendix .span1{
+}
+.message-list .appendix .span1{
     color: #333333;
 }
 .message-list .appendix .icon{
-    background-image: url(/pmeph/statics/image/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½4.png);
+    background-image: url(/pmeph/statics/image/¸½¼þ¿½±´4.png);
     background-position: 0px 2px;
     height: 30px;
     width: 16px;
@@ -132,15 +124,15 @@ float: left;
 a.input {
 
     text-align:center;
-    display:inline-block;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½Øµï¿½ï¿½Ó¾ï¿½ï¿½ï¿½ï¿½é¼¶Ôªï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
-    overflow:hidden;È¥ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½Ôµï¿½ï¿½
-    position:relative;ï¿½ï¿½Ô¶ï¿½Î»ï¿½ï¿½Îª #file ï¿½Ä¾ï¿½Ô¶ï¿½Î»×¼ï¿½ï¿½
+    display:inline-block;/*¾ßÓÐÐÐÄÚÔªËØµÄÊÓ¾õ£¬¿é¼¶ÔªËØµÄÊôÐÔ ¿í¸ß*/
+    overflow:hidden;/*È¥µôµÄ»°£¬ÊäÈë¿òÒ²¿ÉÒÔµã»÷*/
+    position:relative;/*Ïà¶Ô¶¨Î»£¬Îª #file µÄ¾ø¶Ô¶¨Î»×¼±¸*/
 }
 .file {
-    opacity:0;ï¿½ï¿½ï¿½Ã´Ë¿Ø¼ï¿½Í¸ï¿½ï¿½ï¿½ï¿½Îªï¿½ã£¬ï¿½ï¿½ï¿½ï¿½È«Í¸ï¿½ï¿½
-    filter:alpha(opacity=0);ï¿½ï¿½ï¿½Ã´Ë¿Ø¼ï¿½Í¸ï¿½ï¿½ï¿½ï¿½Îªï¿½ã£¬ï¿½ï¿½ï¿½ï¿½È«Í¸ï¿½ï¿½ï¿½ï¿½ï¿½IE
+    opacity:0;/*ÉèÖÃ´Ë¿Ø¼þÍ¸Ã÷¶ÈÎªÁã£¬¼´ÍêÈ«Í¸Ã÷*/
+    filter:alpha(opacity=0);/*ÉèÖÃ´Ë¿Ø¼þÍ¸Ã÷¶ÈÎªÁã£¬¼´ÍêÈ«Í¸Ã÷Õë¶ÔIE*/
     font-size:100px;
-    position:absolute;ï¿½ï¿½Ô¶ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ .input
+    position:absolute;/*¾ø¶Ô¶¨Î»£¬Ïà¶ÔÓÚ .input */
     top:0;
     right:0;
 }
@@ -151,7 +143,7 @@ a.input {
     margin-left: 119px;
     margin-top: 0px;
     margin-bottom: 19px
-} */
+}
 .message-list .send{
     width: 1160px;
     height: 84px;

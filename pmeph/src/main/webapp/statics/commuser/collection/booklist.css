@@ -6,7 +6,6 @@
 }
 .area1 a{
 	color: #999999;
-	text-decoration: none;
 }
 .area2{
     width:1200px;
@@ -155,4 +154,6 @@
 	background-position: -418px -194px;
 	cursor: pointer;
 }
-
+a{
+	 text-decoration: none;
+}

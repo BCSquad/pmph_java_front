@@ -2,6 +2,8 @@ package com.bc.pmpheep.back.commuser.booksearch.dao;
 
 import java.util.List;
 import java.util.Map;
+
+import com.bc.pmpheep.back.plugin.PageParameter;
 /**
  * 书籍搜索dao接口
  * @author Administrator
@@ -10,17 +12,17 @@ import java.util.Map;
 public interface BookSearchDao {
 	/**
 	 * 查询书籍列表
-	 * @param paraMap
+	 * @param pageParameter
 	 * @return
 	 */
-	List<Map<String, Object>> queryBookList(Map<String, Object> paraMap);
+	List<Map<String, Object>> queryBookList(PageParameter<Map<String, Object>> pageParameter);
 	
 	/**
 	 * 查询书籍总数
-	 * @param paraMap
+	 * @param pageParameter
 	 * @return
 	 */
-	Integer queryBookCount(Map<String, Object> paraMap);
+	Integer queryBookCount(PageParameter<Map<String, Object>> pageParameter);
 
 	/**
 	 * 修改状态

@@ -23,23 +23,13 @@ public class TeacherAuthServiceImpl implements TeacherAuthService {
 	
 	@Override
 	public List<Map<String, Object>> queryTeacherAuthList(PageParameter<Map<String, Object>> pageParameter) {
-		Map<String,Object> paraMap = new HashMap<String,Object>();
-		paraMap.put("startNum", pageParameter.getStart());
-		paraMap.put("pageSize", pageParameter.getPageSize());
-		paraMap.put("queryName", pageParameter.getParameter().get("queryName"));
-		paraMap.put("queryStatus", pageParameter.getParameter().get("queryStatus"));
-		paraMap.put("orgUserId", pageParameter.getParameter().get("orgUserId"));
-		List<Map<String,Object>> resultList = teacherAuthDao.queryTeacherAuthList(paraMap);
+		List<Map<String,Object>> resultList = teacherAuthDao.queryTeacherAuthList(pageParameter);
 		return resultList;
 	}
 
 	@Override
 	public int queryTeacherAuthCount(PageParameter<Map<String, Object>> pageParameter) {
-		Map<String, Object> paraMap = pageParameter.getParameter();
-		paraMap.put("queryName", pageParameter.getParameter().get("queryName"));
-		paraMap.put("queryStatus", pageParameter.getParameter().get("queryStatus"));
-		paraMap.put("orgUserId", pageParameter.getParameter().get("orgUserId"));
-		Integer count =teacherAuthDao.queryTeacherAuthCount(paraMap);
+		Integer count =teacherAuthDao.queryTeacherAuthCount(pageParameter);
 		Integer maxPageNum = (int) Math.ceil(1.0*count/pageParameter.getPageSize());
 		return maxPageNum;
 	}

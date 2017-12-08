@@ -12,14 +12,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <base href="<%=basePath%>">
-	<script>
-		var contextpath = "${pageContext.request.contextPath}/";
-	</script>
-    <title>申报资料审核</title>
     <script type="text/javascript">
-        var contextpath="<%=request.getContextPath()+"/"%>";
-        
+        var contextpath = "${pageContext.request.contextPath}/";
     </script>
+    <title>申报资料审核</title>
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="<%=path%>/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="<%=path%>/statics/authadmin/applydocaudit/applydocaudit.css" type="text/css">
@@ -64,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </ul>
 
                     <div class="pageJump">
-                        <span>共<span id="totoal_count" >${totoal_count }</span>页，跳转到</span>
+                        <span id="totoal_count" >共${totoal_count }页</span><span>，跳转到</span>
                         <input type="text"/>
                         <span class="pp">页</span>
                         <button type="button" class="button">确定</button>

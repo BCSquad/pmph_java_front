@@ -3,7 +3,9 @@ package com.bc.pmpheep.back.commuser.readpage.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
+
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
 
 public interface ReadDetailService {
 
@@ -18,7 +20,7 @@ public interface ReadDetailService {
 	 * @param id
 	 * @return
 	 */
-	List<Map<String, Object>> queryComment(String id);
+	PageResult<Map<String, Object>> queryComment(PageParameter<Map<String, Object>> pageParameter);
 	/**
 	 * 根据书籍ID查询配套图书
 	 * @param id
@@ -67,8 +69,21 @@ public interface ReadDetailService {
 	/**添加收藏
 	 * @param bookId   书籍id
 	 * @param writerId  作家用户id
-	 * @param favoriteId  收藏夹id
 	 * @return
 	 */
-	Map<String, Object> inserMark(long bookId, long favoriteId, long writerId);
+	Map<String, Object> inserMark(long bookId,long writerId);
+	/**
+	 * 查询是否有收藏夹
+	 * @param id
+	 * @return
+	 */
+	Map<String, Object> queryDedaultFavorite(String id);
+	/**
+	 * 查询默认收藏夹是否收藏本书
+	 * @param bookId
+	 * @param favoriteId
+	 * @param writerId
+	 * @return
+	 */
+	int queryMark(String bookId,String favoriteId,String writerId);
 }

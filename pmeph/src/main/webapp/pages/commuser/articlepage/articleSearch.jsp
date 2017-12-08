@@ -4,7 +4,7 @@
 <html>
 <head>
    <script type="text/javascript">
-        var contxtpath = '${pageContext.request.contextPath}';
+        var contextpath = '${pageContext.request.contextPath}/';
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>文章搜索</title>
@@ -55,7 +55,7 @@
                         <div class="articleUpDiv">
                             <div class="upLeft">
                                 <div class="bookName">
-                                    <span>${list.title}</span>
+                                    <span class="book-name-span">${list.title}</span>
                                 </div>
                                 <div class="nameDiv">
                                     <img class="headPicture" src="../statics/pictures/avatar.png"/>

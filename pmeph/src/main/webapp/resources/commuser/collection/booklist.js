@@ -17,11 +17,10 @@
     	        startnum: pagenum,
     	        elem:$("#page1"),
     	        callback: function (n) {
-    	        	var pagesize=$("input[name='edu']").val();
-    	        	var favoriteName=$("#favoriteName").val();
+    	        	var pagesize=$("input[name='edu']").val();  	
     	        	var favoriteId=$("#favoriteId").val();
-    	            window.location.href=contxtpath+'/bookcollection/tobookcollectionlist.action?pagenum='+n+'&pagesize='+pagesize+
-    	            		'&favoriteName='+favoriteName+'&favoriteId='+favoriteId;
+    	            window.location.href=contextpath+'bookcollection/tobookcollectionlist.action?pagenum='+n+'&pagesize='+pagesize+
+    	            		'&favoriteId='+favoriteId;
     	        }
     	 });
       $('select').selectlist({
@@ -33,8 +32,8 @@
             	var pagesize=$("input[name='edu']").val();
               	var favoriteName=$("#favoriteName").val();
               	var favoriteId=$("#favoriteId").val();
-              	 window.location.href=contxtpath+'/bookcollection/tobookcollectionlist.action?pagenum=1&pagesize='+pagesize+
-           		'&favoriteName='+favoriteName+'&favoriteId='+favoriteId;
+              	 window.location.href=contextpath+'bookcollection/tobookcollectionlist.action?pagenum=1&pagesize='+pagesize+
+           		'&favoriteId='+favoriteId;
             }  //自定义模拟选择列表项chang
         });
     });
@@ -43,7 +42,7 @@
     	var likes=$("#like"+id).text();
     	$.ajax({
 			type:'post',
-			url:contxtpath+'/bookcollection/changelike.action',
+			url:contextpath+'bookcollection/changelike.action',
 			data:{bookId:id,likes:likes},
 			async:false,
 			dataType:'json',
@@ -68,19 +67,18 @@
     function cancelMark(id,markes,bkid){
     	var favoriteId=$("#favoriteId").val();
     	var bookId=$("#book"+bkid).val();
-    	window.message.confirm("你确定删除吗？",{btn:["确定","取消"]},function(){
+    	window.message.confirm("你确定取消收藏吗？",{btn:["确定","取消"]},function(){
     		$.ajax({
     			type:'post',
-    			url:contxtpath+'/bookcollection/cancelmark.action',
+    			url:contextpath+'bookcollection/cancelmark.action',
     			data:{markId:id,favoriteId:favoriteId,bookId:bookId,markes:markes},
     			async:false,
     			dataType:'json',
     			success:function(json){
     				var pagesize=$("input[name='edu']").val();
-                  	var favoriteName=$("#favoriteName").val();
                   	var favoriteId=$("#favoriteId").val();
-    				window.location.href=contxtpath+'/bookcollection/tobookcollectionlist.action?pagenum=1&pagesize='+pagesize+
-    	    		'&favoriteName='+favoriteName+'&favoriteId='+favoriteId;     
+    				window.location.href=contextpath+'bookcollection/tobookcollectionlist.action?pagenum=1&pagesize='+pagesize+
+    	    		'&favoriteId='+favoriteId;     
     			}
     		});
    	    },function(){});
@@ -88,6 +86,6 @@
     //删除收藏夹
     function delFavorite(id){
     	window.message.confirm("你确定删除吗？",{btn:["确定","取消"]},function(){
-    		window.location.href=contxtpath+'/bookcollection/delfavorite.action?favoriteId='+id;
+    		window.location.href=contextpath+'bookcollection/delfavorite.action?favoriteId='+id;
    	    },function(){});
     }

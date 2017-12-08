@@ -5,7 +5,6 @@
 	<!--分页查询条件查询列表 -->
 	<select id="findDataAudit" parameterType="java.util.Map"
 		resultType="java.util.Map">
-
 		SELECT
 		d.realname,
 		d.position,
@@ -46,6 +45,17 @@
 			</if>
 			<if test="material_id != null and material_id != '' ">
 				and d.material_id = ${material_id}
+			</if>
+		</where>
+	</select>
+	
+	<!--标题 -->
+	<select id="findTitleName" parameterType="java.util.Map"
+		resultType="java.lang.String">
+		SELECT m.material_name from  material m  
+		<where>
+			<if test="material_id != null and material_id != '' ">
+				and m.id = ${material_id}
 			</if>
 		</where>
 	</select>

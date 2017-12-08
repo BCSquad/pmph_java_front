@@ -13,7 +13,7 @@ $(function () {
 	        elem: $('#page1'),		    //指定的元素
 	        callback: function (n) {	//回调函数
 	           console.log(n);
-	           location.href=contxtpath+'/articlesearch/change.action?n='+n+'&&m='+$('input[name=edu]').val();
+	           location.href=contextpath+'articlesearch/change.action?n='+n+'&&m='+$('input[name=edu]').val();
 	        }
 	    });
 	   $('select').selectlist({
@@ -24,13 +24,20 @@ $(function () {
            onChange:function(){
         	   var m=$('input[name=edu]').val();
         	   var n=1;
-        	   location.href=contxtpath+'/articlesearch/change.action?n='+n+'&&m='+$('input[name=edu]').val();
+        	   location.href=contextpath+'articlesearch/change.action?n='+n+'&&m='+$('input[name=edu]').val();
            }
        });
+	   
+	   redQuery();
+	   $("#selectall").keyup(function(event){
+			if(event.keyCode ==13){ //回车键弹起事件
+				queryall();
+			  }
+		});
 });
 //跳转到书籍搜索页面
 function tobookpage(){
-	window.location=contxtpath+'/booksearch/toPage.action?search='+$("#selectall").val()+'&&real_search=""';
+	window.location=contextpath+'booksearch/toPage.action?search='+encodeURI(encodeURI($("#selectall").val()))+'&&real_search=""';
 }
 
 //点赞/取消赞
@@ -45,7 +52,7 @@ function changelikes(flag){
 	}
 	   $.ajax({
 			type:'post',
-			url:contxtpath+'/articlesearch/changelikes.action?id='+id+'&&status='+status,
+			url:contextpath+'articlesearch/changelikes.action?id='+id+'&&status='+status,
 			async:false,
 			dataType:'json',
 			success:function(json){
@@ -72,11 +79,23 @@ function jump(){
 		 alert("超过了最大页数！");
 		 return;
 	 }
-	 location.href=contxtpath+'/articlesearch/change.action?n='+n+'&&m='+$('input[name=edu]').val();
+	 location.href=contextpath+'articlesearch/change.action?n='+n+'&&m='+$('input[name=edu]').val();
 }
 
 //模糊查询
 function queryall(){
-	var title=$("#selectall").val();
-	location.href=contxtpath+'/articlesearch/queryall.action?title='+title;
+	var title=encodeURI(encodeURI($("#selectall").val()));
+	location.href=contextpath+'articlesearch/queryall.action?title='+title;
+}
+
+//搜索条件在相应部位红色
+function redQuery(){
+	var qs=$("#selectall").val();
+	var re=new RegExp(qs,"ig");
+	var $tag= $(".book-name-span");
+	$tag.each(function(){
+		var html = $(this).html();
+		var fit_html = '<font style="color:red;">'+qs+'</font>';
+		$(this).html(html.replace(re,fit_html));
+	});
 }

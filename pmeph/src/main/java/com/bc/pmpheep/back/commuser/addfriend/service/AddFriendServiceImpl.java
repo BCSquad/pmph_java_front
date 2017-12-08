@@ -15,7 +15,7 @@ import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.controller.bean.ResponseBean;
 
 /**
- * 资料申报审核（机构用户）service层实现类
+ * 添加好友（普通用户）service层实现类
  * @author liudi
  *
  */
@@ -27,23 +27,13 @@ public class AddFriendServiceImpl implements AddFriendService {
 	
 	@Override
 	public List<Map<String,Object>> addFriendListQuery(PageParameter<Map<String, Object>> pageParameter) {
-		Map<String,Object> paraMap = new HashMap<String,Object>();
-		paraMap.put("startNum", pageParameter.getStart());
-		paraMap.put("pageSize", pageParameter.getPageSize());
-		paraMap.put("queryName", pageParameter.getParameter().get("queryName"));
-		paraMap.put("uid", pageParameter.getParameter().get("uid"));
-		/*paraMap.put("uid", "24966");*/
-		List<Map<String,Object>> resultList = addFriendDao.addFriendListQuery(paraMap);
+		List<Map<String,Object>> resultList = addFriendDao.addFriendListQuery(pageParameter);
 		return resultList;
 	}
 
 	@Override
 	public int addFriendListQueryCount(PageParameter<Map<String, Object>> pageParameter) {
-		Map<String, Object> paraMap = pageParameter.getParameter();
-		paraMap.put("queryName", pageParameter.getParameter().get("queryName"));
-		paraMap.put("uid", pageParameter.getParameter().get("uid"));
-		/*paraMap.put("uid", "24966");*/
-		Integer count =addFriendDao.addFriendListQueryCount(paraMap);
+		Integer count =addFriendDao.addFriendListQueryCount(pageParameter);
 		Integer maxPageNum = (int) Math.ceil(1.0*count/pageParameter.getPageSize());
 		return maxPageNum;
 	}

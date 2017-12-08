@@ -32,7 +32,7 @@
         }
     </style>
     <script type="text/javascript">
-        var contxtpath = '${pageContext.request.contextPath}';
+        var contextpath = '${pageContext.request.contextPath}/';
         $(function () {
             $('#sort-wrapper').selectlist({
                 zIndex: 10,

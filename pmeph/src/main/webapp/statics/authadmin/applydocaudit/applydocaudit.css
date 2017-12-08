@@ -29,6 +29,7 @@
     border-top: 1px solid #03717b;
     background: none;
     outline: none;
+    cursor: pointer;
 }
 
 
@@ -105,6 +106,7 @@
     background-position: 3px 3px;
     background-repeat: no-repeat;
     float: right;
+    cursor: pointer;
 }
 
 .body .nine-block-box-container{
@@ -191,6 +193,7 @@
     outline: none;
     position: absolute;
     bottom: 25px;
+    cursor: pointer;
     
 }
 

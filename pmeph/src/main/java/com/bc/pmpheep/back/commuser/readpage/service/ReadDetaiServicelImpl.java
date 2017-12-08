@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.commuser.readpage.dao.ReadDetailDao;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
 import com.mongodb.util.Hash;
 
 @Service("com.bc.pmpheep.back.commuser.readpage.service.ReadDetaiServicelImpl")
@@ -30,14 +32,20 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 	 * 查询相关评论
 	 */
 	@Override
-	public List<Map<String, Object>> queryComment(String id) {
+	public PageResult<Map<String, Object>> queryComment(PageParameter<Map<String, Object>> pageParameter) {
 		// TODO Auto-generated method stub
-		List<Map<String, Object>> map=readDetailDao.queryComment(id);
+		PageResult<Map<String, Object>> pageResult=new PageResult<Map<String, Object>>();
+		pageResult.setPageSize(pageParameter.getPageSize());
+		List<Map<String, Object>> map=readDetailDao.queryComment(pageParameter);
 		for (Map<String, Object> pmap : map) {
 			String time=pmap.get("gmt_create").toString().substring(0, 16);
 			pmap.put("gmt_create", time);
 		}
-		return map;
+		int count=readDetailDao.querySize(pageParameter.getParameter().get("id").toString());
+		pageResult.setTotal(count);
+		pageResult.setRows(map);
+		pageResult.setPageNumber(pageParameter.getPageNumber());
+		return pageResult;
 	}
 
 	/**
@@ -108,10 +116,18 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 	@Override
 	public Map<String, Object> addlikes(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		readDetailDao.addlikes(map);
-		readDetailDao.insertlikes(map);
 		Map<String, Object> pmap=new HashMap<String, Object>();
-		pmap.put("returncode", "no");
+		if(("del").equals(map.get("flag"))){
+			readDetailDao.addlikes(map);
+			int count=readDetailDao.dellikes(map);
+			if(count>0){
+				pmap.put("returncode", "yes");
+			}
+		}else{
+			readDetailDao.addlikes(map);
+			readDetailDao.insertlikes(map);
+			pmap.put("returncode", "no");
+		}
 		return pmap;
 	}
 
@@ -126,11 +142,19 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 	 * 添加收藏
 	 */
 	@Override
-	public Map<String, Object> inserMark(long bookId,long favoriteId, long writerId) {
+	public Map<String, Object> inserMark(long bookId, long writerId) {
 		Map<String,Object> map=new HashMap<>();
-		int count=readDetailDao.queryMark(bookId,favoriteId,writerId);//查询用户是否收藏某一本书，如收藏count大于0，否则，等于0
+		Map<String,Object> dmap=readDetailDao.queryDedaultFavorite(writerId);
+		if(dmap==null){
+			readDetailDao.insertFavorite(writerId);
+			dmap=readDetailDao.queryDedaultFavorite(writerId);
+		}
+		long favoriteId=Long.valueOf(dmap.get("id").toString());
+		int count=readDetailDao.queryMark(bookId,favoriteId,writerId);//查询用户是否收藏某一本书，如果收藏       count大于0，否则，等于0
 		long marks=readDetailDao.queryBookMarks(bookId);//查询书籍的收藏数
 		if(count>0){
+			readDetailDao.deleteMark(bookId,favoriteId,writerId);
+			readDetailDao.updateMarks(bookId,marks-1);//更新书籍表中的收藏数量啊
 			map.put("returncode","remain");
 		}else{
 			readDetailDao.insertMark(bookId,favoriteId,writerId);//向用户书籍收藏表中加入收藏记录
@@ -138,6 +162,28 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 			map.put("returncode", "OK");
 		}
 		return map;
+	}
+
+	/**
+	 * 查询是否有收藏夹
+	 */
+	@Override
+	public Map<String, Object> queryDedaultFavorite(String id) {
+		// TODO Auto-generated method stub
+		long userId=Long.valueOf(id);
+		return readDetailDao.queryDedaultFavorite(userId);
+	}
+
+	/**
+	 * 查询默认收藏夹是否收藏本书
+	 */
+	@Override
+	public int queryMark(String bookId, String favoriteId, String writerId) {
+		// TODO Auto-generated method stub
+		long book_id=Long.valueOf(bookId);
+		long favorite_id=Long.valueOf(favoriteId);
+		long writer_id=Long.valueOf(writerId);
+		return readDetailDao.queryMark(book_id,favorite_id,writer_id);
 	}
 	
 }

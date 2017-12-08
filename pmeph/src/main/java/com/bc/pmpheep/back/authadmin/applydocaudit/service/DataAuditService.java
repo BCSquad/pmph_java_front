@@ -39,4 +39,15 @@ public interface DataAuditService {
 	 */
 	int findDataAuditCount(PageParameter<Map<String, Object>> pageParameter);
 
+
+	/**
+	 * 
+	 * @Title: findTitleName
+	 * @Description: 查询列表
+	 * @param @param pageParameter
+	 * @param @return
+	 * @return List<Map<String,Object>> 返回类型
+	 * @throws
+	 */
+	String findTitleName(Map<String, Object> map);
 }

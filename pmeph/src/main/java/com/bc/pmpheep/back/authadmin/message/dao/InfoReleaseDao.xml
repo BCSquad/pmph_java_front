@@ -25,9 +25,11 @@
 		JOIN declaration c ON b.declaration_id = c.id
 		JOIN org_user d on d.org_id = c.org_id
 		<where>
-			d.id = #{userId}
 			<if test="queryName != null and queryName != '' ">
 				and textbook_name like concat("%",#{queryName},"%")
+			</if>
+			<if test="userId != null and userId != '' ">
+				and d.id = ${userId}
 			</if>
 		</where>
 		limit ${startNum},${pageSize}
@@ -36,10 +38,17 @@
 	<!-- 查询条数 -->
 	<select id="selectInfoReleaseCount" parameterType="java.util.Map"
 		resultType="java.lang.Integer">
-		select count(*) from textbook
+		select count(*)  FROM
+		textbook a
+		JOIN dec_position b ON b.textbook_id = a.id
+		JOIN declaration c ON b.declaration_id = c.id
+		JOIN org_user d on d.org_id = c.org_id
 		<where>
 			<if test="queryName != null and queryName != '' ">
 				and textbook_name like concat("%",#{queryName},"%")
+			</if>
+			<if test="userId != null and userId != '' ">
+				and d.id = ${userId}
 			</if>
 		</where>
 	</select>

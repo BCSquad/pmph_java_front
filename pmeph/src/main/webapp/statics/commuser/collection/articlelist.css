@@ -2,11 +2,11 @@
    width:1200px;
     height:20px;
     font-size: 14px;
+   color: #999999;
     margin-top: 20px
 }
 .area1 a{
     color: #999999;
-    text-decoration: none;
 }
 .area2{
     width:1200px;
@@ -155,4 +155,7 @@
 .nogood{
 	background-position: -418px -194px;
 	cursor: pointer;
+}
+a{
+	 text-decoration: none;
 }

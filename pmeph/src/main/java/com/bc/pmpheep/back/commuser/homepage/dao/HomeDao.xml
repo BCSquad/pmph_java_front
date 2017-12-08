@@ -72,7 +72,7 @@ LIMIT 0,10
   <select id="queryComment"  resultMap="Mapresult">
        SELECT
 			u.id,
-			b.id,
+			b.id id1,
 			b.bookname,
 			b.image_url,
 			c.content,

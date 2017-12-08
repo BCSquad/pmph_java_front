@@ -30,11 +30,16 @@ function queryMain(){
 	
 	$.ajax({
 		type:'post',
-		url:contextpath+'/dataaudit/findDataAudit.action?t='+new Date().getTime(),
+		url:contextpath+'dataaudit/findDataAudit.action?t='+new Date().getTime(),
 		async:false,
 		dataType:'json',
 		data:data,
 		success:function(json){
+			if (json.html.trim() == "") {
+				$("#fenye").hide();
+			}else{
+				$("#fenye").show();
+			}
 			$("#zebra-table").html(json.html);
 			$('#page1').html("");	
 			$("#totoal_count").html(json.totoal_count);

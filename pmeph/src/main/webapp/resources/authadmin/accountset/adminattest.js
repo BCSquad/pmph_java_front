@@ -1,4 +1,23 @@
+$(function () {
+    $('form').validate({
+        onFocus: function () {
+            this.removeClass("input-error");
+            return false;
+        },
+        onBlur: function () {
+            var $parent = this.parent();
+            var _status = parseInt(this.attr('data-status'));
+            if (!_status) {
+                this.addClass("input-error");
+            }
+            return false;
+        },
+        submitHandler:function(){
+            saveobject();
 
+        }
+    });
+});
 function getform() {
     var json={};
     json.realName=$("#realName").val();
@@ -17,7 +36,7 @@ function getform() {
 function submit(){
     $.ajax({
         type:'post',
-        url:contxtpath+'/admininfocontroller/updateorguser.action',
+        url:contextpath+'admininfocontroller/updateorguser.action',
         async:false,
         contentType: 'application/json',
         dataType:'json',
@@ -33,7 +52,7 @@ function submit(){
 function uploadproxy(){
     $.ajax({
         type:'post',
-        url:contxtpath+'/admininfocontroller/uploadProxy.action?',
+        url:contextpath+'admininfocontroller/uploadProxy.action?',
         async:false,
         success:function(responsebean){
             if (responsebean.code==1){

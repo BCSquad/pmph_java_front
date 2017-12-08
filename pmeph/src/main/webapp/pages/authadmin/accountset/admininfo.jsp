@@ -11,7 +11,7 @@
 <html>
 <head>
     <script type="text/javascript">
-        var contxtpath = '${pageContext.request.contextPath}';
+        var contextpath = '${pageContext.request.contextPath}/';
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>个人资料修改(机构用户)</title>
@@ -26,43 +26,7 @@
     <link href="${ctx}/statics/authadmin/accountset/admininfo.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/statics/css/jquery.selectlist.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
-        $(function () {
-            $('select').selectlist({
-                zIndex: 10,
-                width: 284,
-                height: 40,
-                optionHeight: 40,
-                initValue:$("#titlehidden").val()
 
-            });
-            $('form').validate({
-                onFocus: function () {
-                    this.removeClass("input-error");
-                    return false;
-                },
-                onBlur: function () {
-                    var $parent = this.parent();
-                    var _status = parseInt(this.attr('data-status'));
-                    if (!_status) {
-                        this.addClass("input-error");
-                    }
-                    return false;
-                },
-                submitHandler:function(){
-                    saveobject();
-
-                }
-            });
-            function saveobject() {
-                alert(123);
-            }
-           /* $('form').on('submit', function (event) {
-                alert(111);
-                //save();
-               /!* event.preventDefault();
-                $(this).validate('submitValidate'); //return boolean;*!/
-            });*/
-        })
     </script>
     <style type="text/css">
         .select-wrapper {
@@ -73,6 +37,38 @@
             background: #f1f1f1;
             padding-left: 20px;
         }
+        .select-wrapper{
+            border-color: #f1f1f1;
+        }
+        .select-list ul li{
+            padding-left: 20px;
+        }
+        #address {
+            width: 1040px;
+        }
+        /*input {
+            color: #333333;
+            height: 40px;
+            line-height: 40px;
+        }
+        #address {
+            width: 1070px;
+        }
+
+        .line {
+            height: 10px;
+        }
+
+        .line td {
+            height: 10px;
+        }
+
+        .font-1 {
+            display: inline-block;
+            height: 42px;
+            line-height: 42px;
+            vertical-align: top;
+        }*/
     </style>
 </head>
 <body>
@@ -89,7 +85,7 @@
             </div>
         </div>
         <div style="height:14px"></div>
-<%--        <div class="div-content" style="height:25px;"></div>--%>
+        <%--        <div class="div-content" style="height:25px;"></div>--%>
         <div class="div-content">
             <div class="he">
                 <img src="${ctx}/statics/image/putongyhtouxiang.png" alt=""/>
@@ -98,115 +94,144 @@
                     <a href="#" class="manager"
                        onclick="window.location='${ctx}/admininfocontroller/toadminattest.action'">学校管理员认证</a>
                     <a href="#" class="password"
-                        onclick="window.location='${ctx}/admininfocontroller/tochangepwd.action'">修改密码</a>
+                       onclick="window.location='${ctx}/admininfocontroller/tochangepwd.action'">修改密码</a>
                 </div>
                 <div style="clear: both"></div>
             </div>
             <div><font class="td-title">基本信息</font></div>
             <form id="orgForm">
-'                <table border="0">
+                <table border="0" class="form-table" cellpadding="0" cellspacing="0">
                     <tr>
-                        <td valign="top" align="right" width="110">
-                            <font class="td-font">
-                                <span class="red">*</span>真实姓名
-                            </font>
+                        <td>
+                            <div class="label-input">
+                                <label class="require">真实姓名:</label>
+                                <div class="input-wrapper">
+                                    <input class="required" data-valid="isNonEmpty" data-error="真实姓名不能为空"
+                                           placeholder="请填写真实姓名" type="text" id="realName"
+                                           value="${admininfo.realname}">
+                                </div>
+                            </div>
                         </td>
-                        <td valign="top">
-                            <input class="txt required" data-valid="isNonEmpty" data-error="真实姓名不能为空" type="text" id="realName" value="${admininfo.realname}"/>
+                        <td>
+                            <div class="label-input">
+                                <label class="require">职务:</label>
+                                <div class="input-wrapper">
+                                    <input class="required" data-valid="isNonEmpty" data-error="职务不能为空"
+                                           placeholder="请填写职务"
+                                           type="text" id="position" value="${admininfo.position}">
+                                </div>
+                            </div>
                         </td>
-                        <td valign="top" align="right">
-                            <font class="td-font">职务</font>
+                        <td>
+                            <div class="label-input">
+                                <label>联系电话:</label>
+                                <div class="input-wrapper">
+                                    <input type="text" id="telephone" placeholder="填写联系电话"
+                                           value="${admininfo.telephone}">
+                                </div>
+                            </div>
                         </td>
-                        <td valign="top">
-                            <input class="txt" type="text" id="position" value="${admininfo.position}"/>
+                    </tr>
+                    <tr>
+
+                        <td>
+                            <div class="label-input">
+                                <label class="require">性别:</label>
+                                <div class="input-wrapper">
+                                    <span class="radio-area required" data-valid="isChecked" data-error="性别必选"
+                                          data-type="radio">
+                                        <input type="radio" name="sex"
+                                               value="1" ${admininfo.sex=='1'?'checked="checked"':''}/>男
+                                        <input type="radio" name="sex"
+                                               value="2" ${admininfo.sex=='2'?'checked="checked"':''}/>女
+                                    </span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="label-input">
+                                <label class="require">职称:</label>
+                                <div class="input-wrapper">
+                                    <input type="hidden" id="title-hidden" value="${admininfo.title}">
+                                    <select class="select-td" name="title" id="title">
+                                        <option value="teacher1">教师1</option>
+                                        <option value="teacher2">教师2</option>
+                                        <option value="teacher3">教师3</option>
+                                        <option value="teacher4">教师4</option>
+                                        <option value="teacher5">教师5</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="label-input">
+                                <label class="require">手机:</label>
+                                <div class="input-wrapper">
+                                    <input class="required" data-valid="isNonEmpty||isMobile"
+                                           data-error="手机不能为空||手机格式不正确"
+                                           type="text" id="handphone" value="${admininfo.handphone}"/>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>
+                            <div class="label-input">
+                                <label class="require">邮编:</label>
+                                <div class="input-wrapper">
+                                    <input type="text" class="required" data-valid="isNonEmpty" data-error="邮编不能为空"
+                                           type="text" id="postCode" value="${admininfo.postcode}">
+                                </div>
+                            </div>
                         </td>
 
-                        <td valign="top" align="right" width="110">
-                            <font class="td-font">联系电话</font>
-                        </td>
-                        <td valign="top">
-                            <input class="txt" type="text" id="telephone" placeholder="填写联系电话" value="${admininfo.telephone}"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td valign="top" align="right">
-                            <font class="td-font"><span class="red">*</span>性别</font>
-                        </td>
-                        <td valign="top">
-                            <c:choose>
-                                <c:when test="${admininfo.sex=='1'}">
-                                    <input type="radio" value="1" name="sex" checked/><font class="font-1" color="Black">男</font>
-                                    <input type="radio" value="2" name="sex"/><font class="font-1" color="Black">女</font>
-                                </c:when>
-                                <c:when test="${admininfo.sex=='2'}">
-                                    <input type="radio" value="1" name="sex"/><font class="font-1" color="Black">男</font>
-                                    <input type="radio" value="2" name="sex" checked/><font class="font-1" color="Black">女</font>
-                                </c:when>
-                                <c:otherwise>
-                                    <input type="radio" value="1" name="sex"/><font class="font-1" color="Black">男</font>
-                                    <input type="radio" value="2" name="sex"/><font class="font-1" color="Black">女</font>
-                                </c:otherwise>
-                            </c:choose>
-
+                        <td>
+                            <div class="label-input">
+                                <label class="require">E-mail:</label>
+                                <div class="input-wrapper">
+                                    <input type="text" class="required" data-valid="isNonEmpty||isEmail"
+                                           data-error="E-mail不能为空||E-mail格式不正确" type="text" id="email"
+                                           value="${admininfo.email}">
+                                </div>
+                            </div>
                         </td>
 
-                        <td align="right" width="110" valign="top">
-                            <font class="td-font"><span class="red"></span>职称</font>
+
+                        <td>
+                            <div class="label-input">
+                                <label class="require">传真:</label>
+                                <div class="input-wrapper">
+                                    <input type="text" class="required" data-valid="isNonEmpty" data-error="传真不能为空"
+                                           type="text" id="fax" value="${admininfo.fax}">
+                                </div>
+                            </div>
                         </td>
-                        <td valign="top">
-                            <input type="hidden" id="titlehidden" name="titlehidden" value="${admininfo.title}">
-                            <select class="select-td" name="title" id="title">
-                                <option value="teacher1">教师1</option>
-                                <option value="teacher2">教师2</option>
-                                <option value="teacher3">教师3</option>
-                                <option value="teacher4">教师4</option>
-                                <option value="teacher5">教师5</option>
-                            </select>
-                        </td>
-                        <td align="right" valign="top">
-                            <font class="td-font"><span class="red"></span>手机</font>
-                        </td>
-                        <td valign="top">
-                            <input class="txt" type="text" id="handphone" value="${admininfo.handphone}"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="right" valign="top">
-                            <font class="td-font"><span class="red"></span>邮编</font>
-                        </td>
-                        <td valign="top">
-                            <input class="txt" type="text" id="postCode" value="${admininfo.postcode}"/>
-                        </td>
-                        <td valign="top" align="right">
-                            <font class="td-font">E-mail</font>
-                        </td>
-                        <td valign="top">
-                            <input class="txt" type="text" id="email" value="${admininfo.email}"/>
-                        </td>
-                        <td valign="top" align="right">
-                            <font class="td-font">传真</font>
-                        </td>
-                        <td valign="top">
-                            <input class="txt" type="text" id="fax" value="${admininfo.fax}"/>
-                        </td>
+
                     </tr>
 
                     <tr>
-                        <td valign="top" align="right">
-                            <font class="td-font">地址</font>
-                        </td>
-                        <td colspan="5"><input class="txt-L" type="text" id="address" value="${admininfo.address}"/></td>
-                    </tr>
-                    <tr>
-                        <td colspan="6" align="center"><img alt="" width="100%" src="${ctx}/statics/image/_cupline.jpg"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="6" align="center">
-                            <input class="btn-2" type="button" value="保存" onclick="save()"/>
-                            <input class="btn-2" type="button" value="提交"/>
+                        <td colspan="3">
+                            <div class="label-input col-3">
+                                <label class="require">地址:</label>
+                                <div class="input-wrapper">
+                                    <input type="text" class="required" data-valid="isNonEmpty" data-error="地址不能为空"
+                                            id="address" value="${admininfo.address}">
+                                </div>
+                            </div>
                         </td>
                     </tr>
+                    <tr class="line">
+                       <td colspan="3" align="center"><img alt="" width="100%"
+                                                           src="${ctx}/statics/image/_cupline.jpg"/>
+                       </td>
+                   </tr>
+                   <tr>
+                       <td colspan="3" align="center">
+                           <input class="button"  type="button" value="保存" onclick="save()"/>
+                           <input class="button"  type="button" value="提交" onclick="submit()"/>
+                       </td>
+                   </tr>
                 </table>
             </form>
         </div>

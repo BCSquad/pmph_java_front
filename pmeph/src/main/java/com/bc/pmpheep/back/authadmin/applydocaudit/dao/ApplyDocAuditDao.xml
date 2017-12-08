@@ -15,7 +15,7 @@
 	</resultMap>
 
 	<!-- 申报资料审核列表查询 -->
-	<select id="materialDeclareAuditListQuery" resultMap="materialDeclareAuditListMap" parameterType="java.util.Map" >
+	<select id="materialDeclareAuditListQuery" resultMap="materialDeclareAuditListMap" parameterType="PageParameter" >
 		SELECT
 		m.id as id,
 		m.material_name as materialName,
@@ -32,8 +32,8 @@
 		left Join declaration AS d ON m.id = d.material_id
 		left Join writer_user AS u ON u.id = d.user_id
 		<where>
-			<if test="org_id != null and org_id != '' ">
-				and d.org_id =#{org_id}
+			<if test="parameter.org_id != null and parameter.org_id != '' ">
+				and d.org_id =#{parameter.org_id}
 			</if>
 		</where>
 		GROUP BY
@@ -41,18 +41,18 @@
 		HAVING
 		1=1
 		and (m.is_deleted = 0 or m.is_deleted is null )
-		<if test="queryCon != null and queryCon != '' ">
-			and m.material_name LIKE CONCAT('%',#{queryCon },'%')
+		<if test="parameter.queryCon != null and parameter.queryCon != '' ">
+			and m.material_name LIKE CONCAT('%',#{parameter.queryCon },'%')
 		</if>
 		
 		<choose>
-			<when test='queryStatus == "1" '>
+			<when test='parameter.queryStatus == "1" '>
 				and (
 				(m.is_all_textbook_published != 0 and m.is_all_textbook_published is not null)
 				<![CDATA[ and m.actual_deadline >= NOW()]]>
 				)
 			</when>
-			<when test='queryStatus =="2" '>
+			<when test='parameter.queryStatus =="2" '>
 				and (
 				(m.is_all_textbook_published = 0 or m.is_all_textbook_published is null)
 				<![CDATA[ or m.actual_deadline < NOW()]]> 
@@ -64,10 +64,11 @@
 		</choose>
 		ORDER BY
 		m.deadline ASC
-		LIMIT ${startNum}, ${pageSize}
+		LIMIT ${start}, ${pageSize}
 	</select>
 	
-	<select id="materialDeclareAuditListQueryCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+	<!-- 申报资料审核总数查询 -->
+	<select id="materialDeclareAuditListQueryCount" parameterType="PageParameter" resultType="java.lang.Integer">
 		select count(*) from 
 		(
 		SELECT
@@ -78,20 +79,20 @@
 		<where>
 			(m.is_deleted = 0 or m.is_deleted is null )
 			
-			<if test="queryCon != null and queryCon != '' ">
-			and m.material_name LIKE CONCAT('%',#{queryCon },'%')
+			<if test="parameter.queryCon != null and parameter.queryCon != '' ">
+			and m.material_name LIKE CONCAT('%',#{parameter.queryCon },'%')
 			</if>
-			<if test="org_id != null and org_id != '' ">
-				and d.org_id =#{org_id}
+			<if test="parameter.org_id != null and parameter.org_id != '' ">
+				and d.org_id =#{parameter.org_id}
 			</if>
 			<choose>
-				<when test='queryStatus == "1" '>
+				<when test='parameter.queryStatus == "1" '>
 					and (
 					(m.is_all_textbook_published != 0 and m.is_all_textbook_published is not null)
 					<![CDATA[ and m.actual_deadline >= NOW()]]>
 					)
 				</when>
-				<when test='queryStatus =="2" '>
+				<when test='parameter.queryStatus =="2" '>
 					and (
 					(m.is_all_textbook_published = 0 or m.is_all_textbook_published is null)
 					<![CDATA[ or m.actual_deadline < NOW()]]> 
@@ -104,7 +105,6 @@
 		</where>
 		group by m.id
 		)t
-		<!-- <![CDATA[ and m.actual_deadline >= NOW()]]> -->
 	</select>
 	
 	

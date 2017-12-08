@@ -21,6 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.authadmin.backlog.service.ScheduleService;
+import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
+import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.general.pojo.Message;
 import com.bc.pmpheep.general.service.MessageService;
 import com.sun.org.apache.bcel.internal.generic.SIPUSH;
@@ -32,7 +36,7 @@ import com.sun.org.apache.bcel.internal.generic.SIPUSH;
  */
 @Controller
 @RequestMapping("/schedule")
-public class ScheduleController {
+public class ScheduleController extends BaseController{
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.authadmin.backlog.service.ScheduleServiceImpl")
 	private
@@ -43,7 +47,7 @@ public class ScheduleController {
 	
 	//查询待办事项列表
 	@RequestMapping(value="/scheduleList")
-	public ModelAndView toScheduleList(HttpServletRequest  request){
+	public ModelAndView toScheduleList (HttpServletRequest  request){
 		Long userId = (long) 1383;
 		String  currentPageStr = (String) request.getParameter("currentPage");
 		String  pageSizeStr = request.getParameter("pageSize");
@@ -54,7 +58,12 @@ public class ScheduleController {
 		//查询条件
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd 00:00:00.0");
         Calendar c = Calendar.getInstance();
+        paraMap.put("week", null);
+    	paraMap.put("month", null);
+    	paraMap.put("year", null);
         if(null!=time&&!time.equals("")){
+        	
+        	
         	 if(time.equals("week")){
              	//过去七天
                  c.setTime(new Date());
@@ -76,13 +85,10 @@ public class ScheduleController {
                   Date d = c.getTime();
                   String year = format.format(d);
                   paraMap.put("year", year);
-             }else if(time.equals("year")){
-            	  paraMap.put("all", "all");
              }
-        } 
-       
+        }
         
-		int currentPage = 0;
+		int currentPage = 1;
 		int pageSize = 2;
 		
 		if(null!=currentPageStr&&!currentPageStr.equals("")){
@@ -92,20 +98,17 @@ public class ScheduleController {
 			 pageSize = Integer.parseInt(pageSizeStr);
 		}
 		
-		if(currentPage==0){
-			paraMap.put("startPage", currentPage);
-		}else{
-			paraMap.put("startPage", currentPage*pageSize-pageSize);
-		}
+		PageParameter<Map<String,Object>> pageParameter = new PageParameter<>(currentPage,pageSize);
 		
 		paraMap.put("userId", userId);
 		paraMap.put("endPage", pageSize);
 		
+		pageParameter.setParameter(paraMap);
 		//代办事项列表
-		List<Map<String,Object>> list = scheduleService.selectScheduleList(paraMap);
-		int pageCount = scheduleService.selectScheduleCount(paraMap);
+		PageResult<Map<String,Object>> pageResult = scheduleService.selectScheduleList(pageParameter);
 		//机构用户基本信息
 		Map<String,Object> map = scheduleService.selectOrgUser(userId);
+		
 		boolean license =  (boolean) map.get("is_proxy_upload");
 		boolean progress = map.get("progress")=="1"?true:false;
 		if(license==true&&progress==true){
@@ -113,20 +116,13 @@ public class ScheduleController {
 		}else{
 			map.put("license",false);
 		}
-		
-		//总页数
-		int totalPage  = pageCount/pageSize;
-		if(pageCount%pageSize>0){
-			totalPage+=1;
-		}
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("listMap",list);
+		map.put("time", time);
+		map.put("userId", userId);
+		map.put("pageResult", pageResult);
 		mv.addObject("map",map);
-		mv.addObject("listSize",list.size());
-		mv.addObject("totalPage",totalPage);
-		mv.addObject("currentPage",currentPage);
-		mv.addObject("pageSize",pageSize);
-		mv.addObject("time",time);
+		
+		
 		mv.setViewName("authadmin/backlog/schedule");
 		return mv;
 		
@@ -136,17 +132,22 @@ public class ScheduleController {
 	//查询办事记录列表
 	@RequestMapping(value="/eventRecord")
 	public ModelAndView toEventRecord(HttpServletRequest  request) throws ParseException{
-		Long userId = (long) 1270;
+		Long userId = (long) 1459;
 		String  currentPageStr = (String) request.getParameter("currentPage");
-		String  time =  request.getParameter("time");
+		//String  time =  request.getParameter("time");
 		String  pageSizeStr = request.getParameter("pageSize");
-		if(null!=time&&!time.equals("")){
+		/*if(null!=time&&!time.equals("")){
 			String year = time.substring(0,4);
 			String month = time.substring(5,7);
 			String day = time.substring(8);
 			
 			time = year+"-"+month+"-"+day;
+			//查询条件时间
+			if(null!=time&&!time.equals("")){
+			time="%"+time+"%";
+			paraMap.put("time", time);
 		}
+		}*/
 		
 		int currentPage = 0;
 		int pageSize = 2;
@@ -164,44 +165,22 @@ public class ScheduleController {
 			paraMap.put("startPage", currentPage*pageSize-pageSize);
 		}
 		
-		//查询条件时间
-		if(null!=time&&!time.equals("")){
-			time="%"+time+"%";
-			paraMap.put("time", time);
-		}
 		paraMap.put("userId", userId);
 		
-		paraMap.put("endPage", pageSize);
-		
-		
+		PageParameter<Map<String,Object>> pageParameter = new PageParameter<>(currentPage,pageSize);
+		pageParameter.setParameter(paraMap);
 		//List<String> list = scheduleService.selectUserMessageList(paraMap);
-		int pageCount = scheduleService.selectUserMessageCount(paraMap);
+		//int pageCount = scheduleService.selectUserMessageCount(paraMap);
 		//机构用户基本信息
 		Map<String,Object> map = scheduleService.selectOrgUser(userId);
 		//已办事项的名称和时间
-		List<Map<String,Object>> listNameAndTime = scheduleService.selectUserMessageNameAndTime(paraMap);
-		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
-		for(Map<String,Object> NT:listNameAndTime){
-			//已办事项内容
-			Message message = mssageService.get((String)NT.get("msg_id"));
-			if(null!=message&&!message.equals("")){
-				NT.put("content",message.getContent());
-			}
-			list.add(NT);
-		}
+		PageResult<Map<String,Object>> pageResult = scheduleService.selectDoneSchedule(pageParameter);
 		
-		//总页数
-		int totalPage  = pageCount/pageSize;
-		if(pageCount%pageSize>0){
-			totalPage+=1;
-		}
+		
 		ModelAndView mv = new ModelAndView();
+		map.put("pageResult", pageResult);
+		map.put("userId", userId);
 		mv.addObject("map",map);
-		mv.addObject("listSize",listNameAndTime.size());
-		mv.addObject("list",list);
-		mv.addObject("totalPage",totalPage);
-		mv.addObject("currentPage",currentPage);
-		mv.addObject("pageSize",pageSize);
 		
 		mv.setViewName("authadmin/backlog/eventRecord");
 		return mv;

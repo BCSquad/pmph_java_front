@@ -29,9 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="<%=path%>/resources/commuser/addfriend/addfriend.js"></script>
 </head>
 <body>
-<div style="width: 100%;padding: 0;margin: 0;height: 81px;border: none;overflow: hidden;">
-	<jsp:include page="/pages/comm/head.jsp"></jsp:include> 
-</div>
+<jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="body">
 	<!-- 隐藏域 -->
 	

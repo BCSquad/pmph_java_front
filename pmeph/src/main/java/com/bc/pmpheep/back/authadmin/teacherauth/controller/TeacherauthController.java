@@ -38,7 +38,9 @@ public class TeacherauthController extends BaseController {
 	@Qualifier("com.bc.pmpheep.back.authadmin.teacherauth.service.TeacherAuthServiceImpl")
 	TeacherAuthService teacherAuthService;
 	
-	
+	/**
+	 * 跳转到教师认证界面
+	 */
 	@RequestMapping("toPage")
 	public ModelAndView toPage(HttpServletRequest request){
 		ModelAndView mv = new ModelAndView();
@@ -48,6 +50,9 @@ public class TeacherauthController extends BaseController {
 		return mv;
 	}
 	
+	/**
+	 * 教师认证列表查询更新
+	 */
 	@RequestMapping(value = "/queryTeacherAuth",method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> queryTeacherAuth(HttpServletRequest request){
@@ -82,6 +87,9 @@ public class TeacherauthController extends BaseController {
 		return data_map;
 	}
 	
+	/**
+	 * 改变教师认证状态 通过或退回 （若有专门的认证界面，此方法废弃，换做跳转到认证界面方法）
+	 */
 	@RequestMapping(value="statusModify" ,method= RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> statusModify(HttpServletRequest request){

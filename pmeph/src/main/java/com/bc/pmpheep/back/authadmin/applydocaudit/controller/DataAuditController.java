@@ -57,8 +57,10 @@ public class DataAuditController extends BaseController{
 			throws UnsupportedEncodingException {
 		ModelAndView mv = new ModelAndView();
 		String material_id = request.getParameter("material_id");
-		String material_name = request.getParameter("material_name");
-		material_name = new String(material_name.getBytes("iso8859-1"), "utf-8");
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("material_id", material_id);
+		//获取标题
+		String	material_name = dataAuditService.findTitleName(map);
 		mv.addObject("material_id", material_id);
 		mv.addObject("material_name", material_name);
 		mv.setViewName("authadmin/applydocaudit/dataaudit");
@@ -76,7 +78,7 @@ public class DataAuditController extends BaseController{
 	 */
 	@RequestMapping(value = "/findDataAudit", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseBean<Map<String, Object>> findDataAudit(
+	public Map<String, Object> findDataAudit(
 			HttpServletRequest request) {
 
 		ResponseBean<Map<String, Object>> rb = new ResponseBean<Map<String, Object>>();
@@ -107,8 +109,8 @@ public class DataAuditController extends BaseController{
 		Map<String, Object> data_map = new HashMap<String, Object>();
 		data_map.put("html", html);
 		data_map.put("totoal_count", totoal_count);
-		rb.setData(data_map);
-		return rb;
+		
+		return data_map;
 	}
 
 }

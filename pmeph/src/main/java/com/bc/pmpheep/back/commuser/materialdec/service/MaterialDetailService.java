@@ -9,7 +9,10 @@ public interface MaterialDetailService {
 	public Map<String,Object> queryMaterialbyId(String material_id);
 	//通过教材ID查出所有教材下的书籍
 	public List<Map<String,Object>> queryBookById(String material_id);
-	
+	//通过教材ID查出相关的机构信息
+	public List<Map<String,Object>> queryOrgById(String material_id);
+	//通过教材ID查出扩展信息
+	public List<Map<String,Object>> queryZjkzxxById(String material_id);
 	//查询专家信息
 	public List<Map<String,Object>> queryPerson(Map<String,Object> map);
 	public int insertPerson(Map<String,Object> map);
@@ -44,4 +47,7 @@ public interface MaterialDetailService {
 	//作家科研情况表
 	public List<Map<String,Object>> queryZjkyqk(Map<String,Object> map);
 	public int insertZjkyqk(Map<String,Object> map);
+	//作家扩展项填报表
+	public List<Map<String,Object>> queryZjkzbb(Map<String,Object> map);
+	public int insertZjZjkzbb(Map<String,Object> map);
 }

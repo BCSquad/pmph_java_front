@@ -23,11 +23,11 @@
                    onclick="window.location='${ctx}/pages/commuser/articlepage/articlepage.jsp'">文章</a>
             </div>
             <span class="delete"></span>
-            <input class="search-input" placeholder="图书/文章">
+            <input class="search-input" id="search-input" placeholder="图书/文章">
 
             <img class="search-icon" src="${ctx}/statics/image/search.png" alt="">
 
-            <span class="write" onclick="window.location.href='${ctx}/authSendMessage/initWriteArticle.action'">写文章</span>
+            <span class="write" onclick="window.location.href='${ctx}/writerArticle/initWriteArticle.action'">写文章</span>
 
             <span class="download">下载APP</span>
 
@@ -54,7 +54,7 @@
             <c:if test="${userInfo != null}">
                 <div class="user-info">
                     <span class="sign"></span>
-                    <img class="notice-icon" src="${ctx}/statics/image/message.png" alt="">
+                    <img class="notice-icon" src="${ctx}/statics/image/message.png" alt="" onclick="location.href='${ctx}/message/applyMessageList.action'">
                     <img class="user-icon" src="${ctx}/statics/pictures/head.png" alt="">
                 </div>
                 <div class="user-select">

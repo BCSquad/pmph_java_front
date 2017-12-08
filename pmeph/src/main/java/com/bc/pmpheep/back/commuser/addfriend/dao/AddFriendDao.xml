@@ -2,16 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bc.pmpheep.back.commuser.addfriend.dao.AddFriendDao">
 
-	<!-- 教材和相应申报人数 -->
+	<!-- 返回好友map -->
 	<resultMap type="java.util.Map" id="addFriendListMap">
 		
 	</resultMap>
 
-	
+	<!-- 好友列表 所需查询的字段 -->
 	<sql id="noFriendPara">
 		u.realname
 		,u.id as uid
 		,u.rank
+		,u.avatar
 		,f.id 
 		,MIN(f.status) as min_status
 		,Max(f.status) as max_status
@@ -21,8 +22,8 @@
 		,f.`status`
 	</sql>
 	
-	<!-- 申报资料审核列表查询 -->
-	<select id="addFriendListQuery" resultMap="addFriendListMap" parameterType="java.util.Map" >	
+	<!-- 未添加为好友的作家用户列表查询（分页）(排除法) -->
+	<select id="addFriendListQuery" resultMap="addFriendListMap" parameterType="PageParameter" >	
 	select t.*
 	from
 		(
@@ -30,7 +31,7 @@
 		<include refid="noFriendPara"></include>
 		,
 		case 
-		when f.target_id = ${uid} then 1 
+		when f.target_id = ${parameter.uid} then 1 
 		else 0 
 		end as targeted
 		
@@ -40,11 +41,11 @@
 		writer_friend f
 		on u.id = f.request_id or u.id = f.target_id
 		<where>
-			<if test="uid != null and uid != '' ">
-				and u.id != ${uid}
+			<if test="parameter.uid != null and parameter.uid != '' ">
+				and u.id != ${parameter.uid}
 			</if>
-			<if test="queryName != null and queryName != '' ">
-				and u.realname like  concat("%",#{queryName},"%")
+			<if test="parameter.queryName != null and parameter.queryName != '' ">
+				and u.realname like  concat("%",#{parameter.queryName},"%")
 			</if>
 		</where>
 		group by u.id
@@ -61,17 +62,18 @@
 		writer_friend f
 		on u.id = f.request_id or u.id = f.target_id
 		where (f.request_id is not null and f.target_id is not null and status = 2)
-		and (f.request_id= ${uid} or f.target_id = ${uid})
-		and u.id != ${uid}
+		and (f.request_id= ${parameter.uid} or f.target_id = ${parameter.uid})
+		and u.id != ${parameter.uid}
 		group by u.id
 		) t2
 		
 	on t.uid = t2.uid2 where t2.uid2 is null
 	order by t.targeted desc
-	limit ${startNum},15
+	limit ${start},15
 	</select>
 	
-	<select id="addFriendListQueryCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+	<!-- 未添加为好友的作家用户总数查询(排除法) -->
+	<select id="addFriendListQueryCount" parameterType="PageParameter" resultType="java.lang.Integer">
 		select count(t.uid)
 		from
 			(
@@ -85,11 +87,11 @@
 			writer_friend f
 			on u.id = f.request_id or u.id = f.target_id
 			<where>
-				<if test="uid != null and uid != '' ">
-					and u.id != ${uid}
+				<if test="parameter.uid != null and parameter.uid != '' ">
+					and u.id != ${parameter.uid}
 				</if>
-				<if test="queryName != null and queryName != '' ">
-					and u.realname like  concat("%",#{queryName},"%")
+				<if test="parameter.queryName != null and parameter.queryName != '' ">
+					and u.realname like  concat("%",#{parameter.queryName},"%")
 				</if>
 			</where>
 			group by u.id
@@ -108,8 +110,8 @@
 			writer_friend f
 			on u.id = f.request_id or u.id = f.target_id
 			where (f.request_id is not null and f.target_id is not null and status = 2)
-			and (f.request_id= ${uid} or f.target_id = ${uid})
-			and u.id != ${uid}
+			and (f.request_id= ${parameter.uid} or f.target_id = ${parameter.uid})
+			and u.id != ${parameter.uid}
 			group by u.id
 			) t2
 			

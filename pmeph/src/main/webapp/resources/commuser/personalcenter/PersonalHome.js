@@ -1,52 +1,6 @@
   $(document).ready(function () {
-            document.getElementById("dt").className = "xz";
-            $("#suibiwenzhang").hide();
-            $("#zuixinshuping").hide();
-            $("#jiaocaishenbao").hide();
-            $("#gengduo").hide();
-            $("#jcsb").click(function () {
-                $("#dongtai").hide();
-                $("#suibiwenzhang").hide();
-                $("#zuixinshuping").hide();
-                document.getElementById("dt").className = "dtl";
-                document.getElementById("sbwz").className = "dtl";
-                document.getElementById("zxsp").className = "dtl";
-                $("#jiaocaishenbao").show();
-                document.getElementById("jcsb").className = "xz";
-            });
 
-            $("#dt").click(function () {
-                $("#dongtai").show();
-                document.getElementById("dt").className = "xz";
-                $("#jiaocaishenbao").hide();
-                $("#suibiwenzhang").hide();
-                $("#zuixinshuping").hide();
-                document.getElementById("jcsb").className = "dtl";
-                document.getElementById("sbwz").className = "dtl";
-                document.getElementById("zxsp").className = "dtl";
-            });
-
-            $("#sbwz").click(function () {
-                $("#suibiwenzhang").show();
-                document.getElementById("sbwz").className = "xz";
-                $("#jiaocaishenbao").hide();
-                $("#dongtai").hide();
-                $("#zuixinshuping").hide();
-                document.getElementById("jcsb").className = "dtl";
-                document.getElementById("dt").className = "dtl";
-                document.getElementById("zxsp").className = "dtl";
-            });
-
-            $("#zxsp").click(function () {
-                $("#zuixinshuping").show();
-                document.getElementById("zxsp").className = "xz";
-                $("#jiaocaishenbao").hide();
-                $("#suibiwenzhang").hide();
-                $("#dongtai").hide();
-                document.getElementById("jcsb").className = "dtl";
-                document.getElementById("sbwz").className = "dtl";
-                document.getElementById("dt").className = "dtl";
-            });
+            $("#gengduo").hide();   
 
             $("#jiazaigengduo").click(function () {
             	$("#jiazaigengduo").hide();

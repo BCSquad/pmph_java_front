@@ -25,21 +25,21 @@
            <result column="age_deadline" property="age_deadline"/>
       <result column="exmember" property="exmember"/>
             <result column="iamin" property="iamin"/>
-      
-      
+      <result column="is_staging" property="is_staging"/>
+            <result column="material_id" property="material_id"/>
   </resultMap>
 
 <!-- 查询最新收藏信息 -->
   <select id="ListMyConlection"  resultMap="BaseResultMap">
-     select  * from book_user_mark a left join book b on a.book_id=b.id  where  a.writer_id='1' 
+     select  * from book_user_mark a left join book b on a.book_id=b.id  where  a.writer_id=#{id} 
   </select>
 <!-- 查好友信息 -->
  <select id="ListMyFriend"  resultMap="BaseResultMap">
-     select  * from writer_friend a left join writer_user b on a.target_id=b.id WHERE  a.request_id='24966' AND a.status=2 
+     select  * from writer_friend a left join writer_user b on a.target_id=b.id WHERE  a.request_id=#{id}  AND a.status=2 
   </select>
 <!-- 查小组信息 -->
  <select id="ListMyGroup"  resultMap="BaseResultMap">
-SELECT c.group_id,c.group_name,c.group_image,d.grouppeo from (select  a.group_id,b.group_name,b.group_image from pmph_group_member a left join pmph_group b on a.group_id=b.id WHERE  a.user_id='24966') c left JOIN 
+SELECT c.group_id,c.group_name,c.group_image,d.grouppeo from (select  a.group_id,b.group_name,b.group_image from pmph_group_member a left join pmph_group b on a.group_id=b.id WHERE  a.user_id=#{id} ) c left JOIN 
 (select  a.group_id,b.group_name,b.group_image,COUNT(b.group_name ) AS grouppeo from pmph_group_member a left join pmph_group b on a.group_id=b.id group BY a.group_id) d
 on c.group_id=d.group_id
   </select>
@@ -57,17 +57,17 @@ FROM
 	declaration a
 LEFT JOIN material b ON a.material_id = b.id
 WHERE
-	a.user_id = '24966'
+	a.user_id = #{id} 
 AND a.online_progress IN (2, 3)
   </select>
   <!-- 查最新文章动态 -->
  <select id="ListMyWritingsTwo"  resultMap="BaseResultMap">
- SELECT title,summary,auth_status,gmt_update from cms_content where author_id='24966' and is_deleted ='0'
+ SELECT title,summary,auth_status,DATE_FORMAT(gmt_update,'%Y-%m-%d %h:%i') as gmt_update from cms_content where author_id=#{id}  and is_deleted ='0'
   </select>
 
  <!-- 查最新书评动态 -->
  <select id="ListMyBookNewsTwo"  resultMap="BaseResultMap">
- select a.score,a.content,a.gmt_update,b.bookname,b.image_url from book_user_comment a left JOIN  book b ON a.book_id=b.id where a.writer_id='24966' and a.is_deleted='0' and a.is_auth='1'
+ select a.score,a.content,DATE_FORMAT(a.gmt_update,'%Y-%m-%d %h:%i') as gmt_update,b.bookname,b.image_url from book_user_comment a left JOIN  book b ON a.book_id=b.id where a.writer_id=#{id}  and a.is_deleted='0' and a.is_auth='1'
   </select>
 
 
@@ -75,16 +75,18 @@ AND a.online_progress IN (2, 3)
  <select id="ListAllBookJoin"  resultMap="BaseResultMap">
 SELECT
 	b.online_progress,
+	b.is_staging,
 	a.age_deadline,
 	a.material_name,
 	COUNT(a.material_name) AS exmember,
+	c.material_id,
 	c.s as iamin
 FROM
 	material a
 LEFT JOIN declaration b ON a.id = b.material_id
 LEFT JOIN (
 	SELECT
-		sum(t.user_id = '30110') s,
+		sum(t.user_id = #{id}) s,
 		t.material_id
 	FROM
 		declaration t

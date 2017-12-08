@@ -2,6 +2,7 @@ package com.bc.pmpheep.back.commuser.articlepage.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService;
+import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.general.pojo.Message;
 import com.bc.pmpheep.general.service.MessageService;
@@ -34,7 +36,7 @@ public class ArticleSearchController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("/toarticle")
-	public ModelAndView search(){
+	public ModelAndView search(HttpServletRequest request){
 		ModelAndView modelAndView=new ModelAndView();
 		List<Map<String, Object>> list=articleSearchService.queryList();
  		int allpage=0;
@@ -48,16 +50,16 @@ public class ArticleSearchController extends BaseController{
 		map.put("endrow", 5);
 		List<Map<String, Object>> artlist=articleSearchService.searchArticle(map);
 		for (Map<String, Object> pmap : artlist) {
-			Message message=messageService.get((String) map.get("mid"));
+			Message message=messageService.get((String) pmap.get("mid"));
 			if(message!=null){
 				List<String> imglist = articleSearchService.getImgSrc(message.getContent());
 			    if(imglist.size()>0){
 			    	pmap.put("imgpath", imglist.get(0));
-			    }else{
-			    	pmap.put("imgpath", "");
+			    }else{//没有图片放置默认图片
+			    	pmap.put("imgpath",request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
 			    }
-			}else{
-				pmap.put("imgpath", "");
+			}else{//没有图片放置默认图片
+				pmap.put("imgpath", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
 			}
 		}
 		modelAndView.addObject("artlist", artlist);
@@ -101,6 +103,19 @@ public class ArticleSearchController extends BaseController{
 		map.put("startrow", (n-1)*m);
 		map.put("endrow", m);
 		List<Map<String, Object>> artlist=articleSearchService.searchArticle(map);
+		for (Map<String, Object> pmap : artlist) {
+			Message message=messageService.get((String) pmap.get("mid"));
+			if(message!=null){
+				List<String> imglist = articleSearchService.getImgSrc(message.getContent());
+			    if(imglist.size()>0){
+			    	pmap.put("imgpath", imglist.get(0));
+			    }else{//没有图片放置默认图片
+			    	pmap.put("imgpath",request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+			    }
+			}else{//没有图片放置默认图片
+				pmap.put("imgpath", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+			}
+		}
 		List<Map<String, Object>> list=articleSearchService.queryList();
  		int allpage=0;
 		if(list.size()% m == 0){
@@ -161,7 +176,8 @@ public class ArticleSearchController extends BaseController{
 	public ModelAndView queryall(HttpServletRequest request) throws UnsupportedEncodingException{
 		request.setCharacterEncoding("utf-8");
 		ModelAndView modelAndView=new ModelAndView();
-		String title = new String(request.getParameter("title").getBytes("ISO-8859-1"),"utf-8");
+		//String title = new String(request.getParameter("title").getBytes("ISO-8859-1"),"utf-8");
+		String title = java.net.URLDecoder.decode(request.getParameter("title"),"UTF-8"); 
 		if(("").equals(title)){
 			List<Map<String, Object>> list=articleSearchService.queryList();
 	 		int allpage=0;
@@ -174,10 +190,36 @@ public class ArticleSearchController extends BaseController{
 			map.put("startrow", 0);
 			map.put("endrow", 5);
 			List<Map<String, Object>> artlist=articleSearchService.searchArticle(map);
+			for (Map<String, Object> pmap : artlist) {
+				Message message=messageService.get((String) pmap.get("mid"));
+				if(message!=null){
+					List<String> imglist = articleSearchService.getImgSrc(message.getContent());
+				    if(imglist.size()>0){
+				    	pmap.put("imgpath", imglist.get(0));
+				    }else{//没有图片放置默认图片
+				    	pmap.put("imgpath",request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+				    }
+				}else{//没有图片放置默认图片
+					pmap.put("imgpath", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+				}
+			}
 			modelAndView.addObject("artlist", artlist);
 			modelAndView.addObject("allpage", allpage);
 		}else{
 			List<Map<String, Object>> artlist=articleSearchService.queryall("%"+title+"%");
+			for (Map<String, Object> pmap : artlist) {
+				Message message=messageService.get((String) pmap.get("mid"));
+				if(message!=null){
+					List<String> imglist = articleSearchService.getImgSrc(message.getContent());
+				    if(imglist.size()>0){
+				    	pmap.put("imgpath", imglist.get(0));
+				    }else{//没有图片放置默认图片
+				    	pmap.put("imgpath",request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+				    }
+				}else{//没有图片放置默认图片
+					pmap.put("imgpath", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+				}
+			}
 	 		int allpage=0;
 			if(artlist.size()% 5 == 0){
 				allpage=artlist.size()/5;

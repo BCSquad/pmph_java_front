@@ -88,13 +88,15 @@ public class ApplyDocAuditController extends BaseController {
 	@RequestMapping(value = "/approvelninelist",method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> approvelninelist(HttpServletRequest request){
-		
+		Map<String, Object> user = getUserInfo();
+		BigInteger org_id=(BigInteger) user.get("org_id");
 		Integer pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		String queryCon = request.getParameter("queryCon");
 		String queryStatus = request.getParameter("queryStatus");
 		Map<String,Object> queryConMap = new HashMap<String,Object>();
 		queryConMap.put("queryCon", queryCon);
 		queryConMap.put("queryStatus", queryStatus);
+		queryConMap.put("org_id", org_id);
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<Map<String,Object>>(pageNum,9);
 		pageParameter.setParameter(queryConMap);
 		List<Map<String, Object>> List_map = applyDocAuditService.materialDeclareAuditListQuery(pageParameter);

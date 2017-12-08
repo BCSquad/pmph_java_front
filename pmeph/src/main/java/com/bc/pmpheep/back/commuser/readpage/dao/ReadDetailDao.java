@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
+import com.bc.pmpheep.back.plugin.PageParameter;
 import com.sun.org.glassfish.gmbal.ParameterNames;
 
 public interface ReadDetailDao {
@@ -19,13 +20,18 @@ public interface ReadDetailDao {
 	 * @param id
 	 * @return List<Map<String, Object>>
 	 */
-	List<Map<String, Object>> queryComment(@Param("id") String id);
+	List<Map<String, Object>> queryComment(PageParameter<Map<String, Object>> pageParameter);
 	/**
 	 * 根据书籍ID查询配套图书
 	 * @param id
 	 * @return Map<String, Object>
 	 */
 	Map<String, Object> querySupport(@Param("id") String id);
+	/**
+	 * 根据书籍ID查询一共有多少条数据
+	 * @return int
+	 */
+	int querySize(@Param("book_id") String book_id);
 	/**
 	 * 查询人卫推荐
 	 * @return List<Map<String, Object>>
@@ -95,6 +101,26 @@ public interface ReadDetailDao {
 	 * @return long
 	 */
 	long queryBookMarks(@Param("bookId") long bookId);
+	/**
+	 * 删除点赞表里面的记录
+	 * @param map
+	 * @return int
+	 */
+	int dellikes(Map<String, Object> map);
 	
-	
+	/**查询默认收藏夹
+	 * @param writerId  用户id
+	 * @return
+	 */
+	Map<String, Object> queryDedaultFavorite(@Param("writerId") long writerId);
+    /**添加默认收藏夹
+     * @param writerId 用户id
+     */
+    void insertFavorite(@Param("writerId") long writerId);
+	/**删除某一本书的收藏记录
+	 * @param bookId      书籍id
+	 * @param favoriteId  收藏夹id
+	 * @param writerId    用户id
+	 */
+	void deleteMark(@Param("bookId")long bookId,@Param("favoriteId") long favoriteId,@Param("writerId") long writerId);
 }

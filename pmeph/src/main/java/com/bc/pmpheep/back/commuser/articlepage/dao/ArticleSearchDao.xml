@@ -10,6 +10,7 @@
 		    t.id,
 		    t.likes,
 		    t.gmt_create,
+		    t.mid,
 		    t.comments,
 		    b.realname,
 		    b.avatar,
@@ -44,7 +45,6 @@
    delete from cms_user_like where id=#{delete_id}
  </delete>
  <!-- 文章搜索模糊查询 -->
-  <!-- 查询当前文章是否被点过赞 -->
  <select id="queryall" parameterType="java.util.Map" resultType="java.util.Map" >
     select 
 		    t.title, 
@@ -52,6 +52,7 @@
 		    t.clicks,
 		    t.id,
 		    t.likes,
+		    t.mid,
 		    t.gmt_create,
 		    t.comments,
 		    b.realname,

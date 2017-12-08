@@ -7,7 +7,7 @@
 	   select f.favorite_name,f.id as id,count(f.content_id) as mcount from (select w.*,m.content_id from writer_cms_favorite w left  join cms_user_mark m on w.id=m.favorite_id) f where f.writer_id=#{writerId} GROUP BY f.favorite_name
 	</select>
 	<!--查询一个收藏夹下所有的书籍  -->
-	<select id="queryArticleList" parameterType="map" resultMap="articleMap">
+	<select id="queryArticleList" parameterType="com.bc.pmpheep.back.plugin.PageParameter" resultMap="articleMap">
 	  select f.id as fid,
 		     f.favorite_name,
 		     c.id as cid,
@@ -26,8 +26,8 @@
 		     m.id as markId
      from writer_cms_favorite f LEFT JOIN cms_user_mark  m on f.id=m.favorite_id
 	 LEFT JOIN cms_content c on m.content_id=c.id   
-	 LEFT JOIN  writer_user w on c.author_id=w.id  where f.id=#{favoriteId} and f.writer_id=#{writerId}
-	 limit #{startnum},#{size}
+	 LEFT JOIN  writer_user w on c.author_id=w.id  where f.id=#{parameter.favoriteId} and f.writer_id=#{parameter.writerId}
+	 limit #{start},#{pageSize}
 	</select>
 	<!--查询一个收藏夹下的书籍 数量 -->
 	<select id="queryArticleCont" parameterType="map" resultType="int">
@@ -85,5 +85,9 @@
 		    bookmarks
      from cms_content 
      where id=#{contentId}
+	</select>
+	<!-- 根据收藏夹的id查询收藏夹 -->
+	<select id="queryFavoriteById"  parameterType="map" resultMap="articleMap">
+	    select  * from  writer_cms_favorite   where id=#{favoriteId}
 	</select>
 </mapper>

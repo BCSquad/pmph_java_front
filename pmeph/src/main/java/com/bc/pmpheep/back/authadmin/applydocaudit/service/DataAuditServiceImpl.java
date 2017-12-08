@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.authadmin.applydocaudit.dao.DataAuditDao;
+import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
 import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
 
 /**
  * 
@@ -54,6 +56,15 @@ public class DataAuditServiceImpl implements DataAuditService {
 		Integer maxPageNum = (int) Math.ceil(1.0 * count
 				/ pageParameter.getPageSize());
 		return maxPageNum;
+	}
+	
+	/**
+	 * 标题
+	 */
+	@Override
+	public String findTitleName(Map<String, Object> map) {
+		String resultList = dataAuditDao.findTitleName(map);
+		return resultList;
 	}
 
 }

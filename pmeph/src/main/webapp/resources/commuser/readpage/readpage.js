@@ -57,9 +57,15 @@ function ChangeCXDiv(divId,divName,zDivCount)
 }
 
 //图书分类
-function ChangeFLDiv(divId,divName,zDivCount)
+function ChangeFLDiv(divId,divName)
 {
-    for(var i=0;i<=zDivCount;i++)
+    $(".ChangeFLDiv").css("display",'none');
+    $(".ts_type").removeClass("ts_type1");
+
+    $("#FLDiv_"+divId).addClass("ts_type1");
+    $("#ChangeFLDiv_"+divId).css("display",'block');
+
+  /*  for(var i=0;i<=zDivCount;i++)
     {
         document.getElementById(divName+i).style.display="none";
         document.getElementById("FLDiv_"+i).setAttribute("class","ts_type");
@@ -67,14 +73,14 @@ function ChangeFLDiv(divId,divName,zDivCount)
     }
     document.getElementById(divName+divId).style.display="block";
     document.getElementById("FLDiv_"+divId).setAttribute("class","ts_type ts_type1");
-//显示当前层
+//显示当前层*/
 }
 
 //重点推荐
 function searchBook(divId,type){
 	$.ajax({
 		type:'post',
-		url:contxtpath+'readpage/searchZdtjBook.action?type='+type,
+		url:contextpath+'readpage/searchZdtjBook.action?type='+type,
 		async:false,
 		dataType:'json',
 		success:function(json){
@@ -88,7 +94,7 @@ function searchBook(divId,type){
 function searchXstjBook(divId,type){
 	$.ajax({
 		type:'post',
-		url:contxtpath+'readpage/searchXstjBook.action?type='+type,
+		url:contextpath+'readpage/searchXstjBook.action?type='+type,
 		async:false,
 		dataType:'json',
 		success:function(json){
@@ -102,7 +108,7 @@ function searchXstjBook(divId,type){
 function searchTscxBook(divId,type){
 	$.ajax({
 		type:'post',
-		url:contxtpath+'readpage/searchTscxBook.action?type='+type,
+		url:contextpath+'readpage/searchTscxBook.action?type='+type,
 		async:false,
 		dataType:'json',
 		success:function(json){
@@ -114,5 +120,5 @@ function searchTscxBook(divId,type){
 
 //路径跳转
 function openUrl(id){
-	window.open(contxtpath+'readdetail/todetail.action?id='+id);
+	window.open(contextpath+'readdetail/todetail.action?id='+id);
 }

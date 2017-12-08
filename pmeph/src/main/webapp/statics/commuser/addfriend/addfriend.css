@@ -36,6 +36,7 @@
     background-size: 27.5%;
     background-repeat: no-repeat;
     background-position: center;
+    cursor: pointer;
 }
 
 
@@ -74,14 +75,17 @@
     margin:0px 20px 30px 0px;
 }
 
+.content-wrapper{
+	min-height: 800px;
+}
+
 .content-wrapper .friend-box .head-portrait{
     width: 76px;
     height: 76px;
-    background-color: #0000cc;
     margin:auto;
     margin-top: 20px;
     margin-bottom: 12px;
-    background-image: url("../image/haoyoutouxiang1.png");
+    background-image: url("../image/putongyhtouxiang.png");
     background-repeat: no-repeat;
     background-size: 100%;
     background-position:center;
@@ -134,6 +138,7 @@
     background-color: transparent;
     margin-right: 19px;
     margin-left: 22px;
+    cursor: pointer;
 }
 
 .content-wrapper .friend-box .btn-add-friend{

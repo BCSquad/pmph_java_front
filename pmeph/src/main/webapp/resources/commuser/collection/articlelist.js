@@ -18,10 +18,9 @@
     	        elem:$("#page1"),
     	        callback: function (n) {
     	        	var pagesize=$("input[name='edu']").val();
-    	        	var favoriteName=$("#favoriteName").val();
     	        	var favoriteId=$("#favoriteId").val();
-    	            window.location.href=contxtpath+'/articlecollection/toarticlecollectionlist.action?pagenum='+n+'&pagesize='+pagesize+
-    	            		'&favoriteName='+favoriteName+'&favoriteId='+favoriteId;
+    	            window.location.href=contextpath+'articlecollection/toarticlecollectionlist.action?pagenum='+n+'&pagesize='+pagesize+
+    	            		'&favoriteId='+favoriteId;
     	        }
     	 });
       $('select').selectlist({
@@ -31,10 +30,9 @@
             optionHeight: 30,
             onChange: function () {
             	var pagesize=$("input[name='edu']").val();
-              	var favoriteName=$("#favoriteName").val();
               	var favoriteId=$("#favoriteId").val();
-              	 window.location.href=contxtpath+'/articlecollection/toarticlecollectionlist.action?pagenum=1&pagesize='+pagesize+
-           		'&favoriteName='+favoriteName+'&favoriteId='+favoriteId;
+              	 window.location.href=contextpath+'articlecollection/toarticlecollectionlist.action?pagenum=1&pagesize='+pagesize+
+           		'&favoriteId='+favoriteId;
             }  //自定义模拟选择列表项chang
         });
     }); 
@@ -45,7 +43,7 @@
     	var likes=$("#like"+id).text();
     	$.ajax({
 			type:'post',
-			url:contxtpath+'/articlecollection/changelike.action',
+			url:contextpath+'articlecollection/changelike.action',
 			data:{contentId:id,likes:likes},
 			async:false,
 			dataType:'json',
@@ -73,16 +71,15 @@
     	window.message.confirm("你确定取消收藏吗？",{btn:["确定","取消"]},function(){
     		$.ajax({
     			type:'post',
-    			url:contxtpath+'/articlecollection/cancelmark.action',
+    			url:contextpath+'articlecollection/cancelmark.action',
     			data:{markId:id,favoriteId:favoriteId,contentId:cmsId,markes:markes},
     			async:false,
     			dataType:'json',
     			success:function(json){
     				var pagesize=$("input[name='edu']").val();
-                  	var favoriteName=$("#favoriteName").val();
                   	var favoriteId=$("#favoriteId").val();
-                  	 window.location.href=contxtpath+'/articlecollection/toarticlecollectionlist.action?pagenum=1&pagesize='+pagesize+
-               		'&favoriteName='+favoriteName+'&favoriteId='+favoriteId;
+                  	 window.location.href=contextpath+'articlecollection/toarticlecollectionlist.action?pagenum=1&pagesize='+pagesize+
+               		'&favoriteId='+favoriteId;
     			}
     		});	
     	},function(){});
@@ -90,7 +87,7 @@
     //删除收藏夹
     function delFavorite(id){
     	window.message.confirm("你确定删除吗？",{btn:["确定","取消"]},function(){
-    		 window.location.href=contxtpath+'/articlecollection/delfavorite.action?favoriteId='+id;
+    		 window.location.href=contextpath+'articlecollection/delfavorite.action?favoriteId='+id;
     	},function(){});
     }
     

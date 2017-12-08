@@ -23,21 +23,13 @@ public class BookSearchServiceImpl implements BookSearchService {
 	
 	@Override
 	public List<Map<String, Object>> queryBookList(PageParameter<Map<String, Object>> pageParameter) {
-		Map<String,Object> paraMap = new HashMap<String,Object>();
-		paraMap.put("startNum", pageParameter.getStart());
-		paraMap.put("pageSize", pageParameter.getPageSize());
-		paraMap.put("queryName", pageParameter.getParameter().get("queryName"));
-		paraMap.put("uid", pageParameter.getParameter().get("uid"));
-		List<Map<String,Object>> resultList = bookDao.queryBookList(paraMap);
+		List<Map<String,Object>> resultList = bookDao.queryBookList(pageParameter);
 		return resultList;
 	}
 
 	@Override
 	public int queryBookCount(PageParameter<Map<String, Object>> pageParameter) {
-		Map<String, Object> paraMap = pageParameter.getParameter();
-		paraMap.put("queryName", pageParameter.getParameter().get("queryName"));
-		paraMap.put("queryStatus", pageParameter.getParameter().get("queryStatus"));
-		Integer count =bookDao.queryBookCount(paraMap);
+		Integer count =bookDao.queryBookCount(pageParameter);
 		Integer maxPageNum = (int) Math.ceil(1.0*count/pageParameter.getPageSize());
 		return maxPageNum;
 	}

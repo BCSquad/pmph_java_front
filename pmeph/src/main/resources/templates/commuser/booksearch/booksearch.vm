@@ -4,7 +4,7 @@
 	<div class="oneList">
 	    <div class="leftPicture">
 	    	#if(!$c.image_url || $c.image_url == "DEFAULT")
-	        	<img class="pictureSize" src="$!{contextpath}statics/image/ts_01.png">
+	        	<img class="pictureSize" src="$!{contextpath}statics/image/564f34b00cf2b738819e9c35_122x122!.jpg">
 	        #else
 	        	<img class="pictureSize" src="$!{c.image_url}">
 	        #end

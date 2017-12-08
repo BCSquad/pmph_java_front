@@ -7,13 +7,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<script type="text/javascript">
-		var pathName=window.document.location.pathname;  
-		var contxtpath=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
-		var contextpath=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
-</script>
+
 <c:set var="ctx" value="${pageContext.request.contextPath }"/>
 <head>
+    <script type="text/javascript">
+        var pathName=window.document.location.pathname;
+        var contextpath="${pageContext.request.contextPath }/";
+    </script>
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
  <link rel="stylesheet" href="<%=path %>/statics/css/base.css" type="text/css">
@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
         <div class="message-line"></div>
         <c:forEach items="${articleCollection }" var="collection">
-        <a href="articlecollection/toarticlecollectionlist.action?favoriteId=${collection.id }&favoriteName=${collection.favorite_name }" target="_blank">
+        <a href="articlecollection/toarticlecollectionlist.action?favoriteId=${collection.id }" target="_blank">
         <div class="collection">
             <p class="title" >${collection.favorite_name }</p>
             <p class="count">共${collection.mcount }条内容</p>

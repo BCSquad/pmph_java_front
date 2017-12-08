@@ -7,11 +7,11 @@ import com.bc.pmpheep.back.commuser.personalcenter.bean.PersonalNewMessage;
 
 public interface PersonalDao {
 
-	public List<PersonalNewMessage> ListMyConlection();
-	public List<PersonalNewMessage> ListMyFriend();
-	public List<PersonalNewMessage> ListMyGroup();
-	public List<PersonalNewMessage> ListMyOfeerTwo();
-	public List<PersonalNewMessage> ListMyWritingsTwo();
-	public List<PersonalNewMessage> ListMyBookNewsTwo();
-	public List<PersonalNewMessage> ListAllBookJoin();
+	public List<PersonalNewMessage> ListMyConlection(Map<String, Object> permap);
+	public List<PersonalNewMessage> ListMyFriend(Map<String, Object> permap);
+	public List<PersonalNewMessage> ListMyGroup(Map<String, Object> permap);
+	public List<PersonalNewMessage> ListMyOfeerTwo(Map<String, Object> permap);
+	public List<PersonalNewMessage> ListMyWritingsTwo(Map<String, Object> permap);
+	public List<PersonalNewMessage> ListMyBookNewsTwo(Map<String, Object> permap);
+	public List<PersonalNewMessage> ListAllBookJoin(Map<String, Object> permap);
 }

@@ -30,7 +30,8 @@ public class PersonalNewMessage {
 	private String age_deadline;
 	private String exmember;
 	private String iamin;
-	
+	private String is_staging;
+	private String material_id;
 	
 	
 	
@@ -201,6 +202,18 @@ public class PersonalNewMessage {
 	}
 	public void setIamin(String iamin) {
 		this.iamin = iamin;
+	}
+	public String getIs_staging() {
+		return is_staging;
+	}
+	public void setIs_staging(String is_staging) {
+		this.is_staging = is_staging;
+	}
+	public String getMaterial_id() {
+		return material_id;
+	}
+	public void setMaterial_id(String material_id) {
+		this.material_id = material_id;
 	}
 
 }

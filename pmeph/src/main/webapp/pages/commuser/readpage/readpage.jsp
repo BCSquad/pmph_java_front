@@ -5,14 +5,14 @@
   Time: 14:37
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%String path = request.getContextPath();%>
 <!DOCTYPE html>
 <html>
 <head>
     <script type="text/javascript">
-        var contxtpath='${pageContext.request.contextPath}/';
+        var contextpath = '${pageContext.request.contextPath}/';
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>读书首页</title>
@@ -63,12 +63,12 @@
                     </div>
                     <!-- 学校教育 -->
                     <div class="content" id="JKDiv_0">
-                    	
+
                     </div>
                     <div class="content" id="JKDiv_1" style="display: none;">
-					</div>
+                    </div>
                     <div class="content" id="JKDiv_2" style="display: none;">
-					</div>
+                    </div>
                     <div class="content" id="JKDiv_3" style="display: none;">
                     </div>
                 </div>
@@ -96,7 +96,7 @@
                     <div class="content" id="JKFYDiv_0">
                     </div>
                     <div class="content" id="JKFYDiv_1" style="display: none;">
-                     </div>
+                    </div>
                     <div class="content" id="JKFYDiv_2" style="display: none;">
                     </div>
                     <div class="content" id="JKFYDiv_3" style="display: none;">
@@ -111,43 +111,43 @@
                     </div>
                     <div class="items">
                         <c:forEach var="rmsp" items="${rmspList}">
-	                        <div class="item1" onclick="openUrl('${rmsp.id1}')">
-	                            <div class="sp_01"><img src="${rmsp.image_url}"/></div>
-	                            <div class="sp_02">
-	                                <div class="sp_title">${rmsp.bookname}</div>
-	                                <div class="sp_pl">
-	                                	<span style="float: left;">${rmsp.realname} 评论了 《${rmsp.bookname}》</span>
-	                                <%--	<span class="rwtx1"></span>
-			                        	<span class="rwtx1"></span>
-			                        	<span class="rwtx1"></span>
-			                        	<span class="rwtx2"></span>
-			                        	<span class="rwtx2"></span>--%>
-                                	</div>
-                                	<div style="clear: both"></div>
-	                                <div class="sp_remark">${rmsp.content}</div>
-	                            </div>
-	                        </div>
-                        </c:forEach> 
-                    
-                   <%--  <div class="item1">
-                            <div class="sp_01"><img src="${ctx}/statics/image/sp_01.png"/></div>
-                            <div class="sp_02">
-                                <div class="sp_title">器官移植护理学</div>
-                                <div class="sp_pl">
-                                	<span style="float: left;">余艾莲 评论了 《器官移植护理学》</span>
-                                	<span class="rwtx1"></span>
-		                        	<span class="rwtx1"></span>
-		                        	<span class="rwtx1"></span>
-		                        	<span class="rwtx2"></span>
-		                        	<span class="rwtx2"></span>
-                                	</div>
-                                	<div style="clear: both"></div>
-                                <div class="sp_remark">口腔医师资格考试紧密结合口腔临床工作实际，内容
-									涵盖从事口腔临床工作所必须的基本素质、基本知识
-									和基本技能，考核考生综合运用专业知识处理临床...</div>
+                            <div class="item1" onclick="openUrl('${rmsp.id1}')">
+                                <div class="sp_01"><img src="${rmsp.image_url}"/></div>
+                                <div class="sp_02">
+                                    <div class="sp_title">${rmsp.bookname}</div>
+                                    <div class="sp_pl">
+                                        <span style="float: left;">${rmsp.realname} 评论了 《${rmsp.bookname}》</span>
+                                            <%--	<span class="rwtx1"></span>
+                                                <span class="rwtx1"></span>
+                                                <span class="rwtx1"></span>
+                                                <span class="rwtx2"></span>
+                                                <span class="rwtx2"></span>--%>
+                                    </div>
+                                    <div style="clear: both"></div>
+                                    <div class="sp_remark">${rmsp.content}</div>
+                                </div>
                             </div>
-                        </div> --%>
-                     </div>   
+                        </c:forEach>
+
+                        <%--  <div class="item1">
+                                 <div class="sp_01"><img src="${ctx}/statics/image/sp_01.png"/></div>
+                                 <div class="sp_02">
+                                     <div class="sp_title">器官移植护理学</div>
+                                     <div class="sp_pl">
+                                         <span style="float: left;">余艾莲 评论了 《器官移植护理学》</span>
+                                         <span class="rwtx1"></span>
+                                         <span class="rwtx1"></span>
+                                         <span class="rwtx1"></span>
+                                         <span class="rwtx2"></span>
+                                         <span class="rwtx2"></span>
+                                         </div>
+                                         <div style="clear: both"></div>
+                                     <div class="sp_remark">口腔医师资格考试紧密结合口腔临床工作实际，内容
+                                         涵盖从事口腔临床工作所必须的基本素质、基本知识
+                                         和基本技能，考核考生综合运用专业知识处理临床...</div>
+                                 </div>
+                             </div> --%>
+                    </div>
                 </div>
 
             </div>
@@ -169,7 +169,7 @@
                 </div>
                 <div style="clear: both;height: 14px;"></div>
                 <div class="hot-list" id="JKCXDiv_0">
-                    
+
                 </div>
                 <div class="hot-list" id="JKCXDiv_1" style="display: none;"></div>
                 <div class="hot-list" id="JKCXDiv_2" style="display: none;"></div>
@@ -182,17 +182,41 @@
                     <hr style=" height:1px;border:none;border-top:1px solid #f0f0f0;">
                 </div>
                 <div>
-                    <div class="ts_type ts_type1" id="FLDiv_0" onclick="javaScript:ChangeFLDiv('0','ChangeFLDiv_',3)">
+
+                    <c:forEach var="type1" items="${materialType}"  varStatus="status">
+                        <div class="ts_type ${status.index=='0'?'ts_type1':''}" id="FLDiv_${type1.id}" onclick="javaScript:ChangeFLDiv('${type1.id}','ChangeFLDiv_',3)">
+                            <span>${type1.note}</span></div>
+                    </c:forEach>
+
+                    <%--<div class="ts_type ts_type1" id="FLDiv_0" onclick="javaScript:ChangeFLDiv('0','ChangeFLDiv_',3)">
                         <span>学校教育</span></div>
                     <div class="ts_type" id="FLDiv_1" onclick="javaScript:ChangeFLDiv('1','ChangeFLDiv_',3)">
                         <span>毕业后教育</span></div>
                     <div class="ts_type" id="FLDiv_2" onclick="javaScript:ChangeFLDiv('2','ChangeFLDiv_',3)">
                         <span>继续教育</span></div>
                     <div class="ts_type" id="FLDiv_3" onclick="javaScript:ChangeFLDiv('3','ChangeFLDiv_',3)">
-                        <span>考试用书</span></div>
+                        <span>考试用书</span></div>--%>
                 </div>
                 <div style="clear: both;height: 14px;"></div>
-                <div id="ChangeFLDiv_0" class="tsfl_1">
+
+                <c:forEach items="${materialType}" var="type1" varStatus="status">
+
+                    <div id="ChangeFLDiv_${type1.id}" class="tsfl_1 ChangeFLDiv" ${status.index!='0'?'style="display: none;"':''}>
+                        <c:forEach items="${type1.dataList}" var="type2">
+                            <div class="part_1">
+                                <span>${type2.note}</span>
+                            </div>
+                            <div class="part_2">
+                                <c:forEach var="type3" items="${type2.dataList}">
+                                    <a href="#">${type3.note}</a>
+                                </c:forEach>
+                            </div>
+                        </c:forEach>
+                    </div>
+
+                </c:forEach>
+
+               <%-- <div id="ChangeFLDiv_0" class="tsfl_1">
                     <div class="part_1">
                         <span>研究生教材</span>
                     </div>
@@ -358,7 +382,7 @@
                         <span>法医</span>
                         <span>康复治疗</span>
                     </div>
-                </div>
+                </div>--%>
 
 
             </div>

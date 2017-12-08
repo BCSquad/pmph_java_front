@@ -17,7 +17,7 @@ public interface ApplyDocAuditService {
 	public List<Map<String,Object>> materialDeclareAuditListQuery(PageParameter<Map<String, Object>> pageParameter);
 	
 	/**
-	 * 查询教材总数量
+	 * 查询教材分页总页数
 	 * @param pageParameter
 	 * @return
 	 */
