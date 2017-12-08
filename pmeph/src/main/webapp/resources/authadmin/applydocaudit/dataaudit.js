@@ -35,6 +35,11 @@ function queryMain(){
 		dataType:'json',
 		data:data,
 		success:function(json){
+			if (json.html.trim() == "") {
+				$("#fenye").hide();
+			}else{
+				$("#fenye").show();
+			}
 			$("#zebra-table").html(json.html);
 			$('#page1').html("");	
 			$("#totoal_count").html(json.totoal_count);

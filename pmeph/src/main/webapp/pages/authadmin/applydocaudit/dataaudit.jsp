@@ -7,21 +7,22 @@
 <head>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <title></title>
+<script type="text/javascript">
+	var contextpath="${pageContext.request.contextPath}/"
+</script>
 	<link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css"/>
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
     <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
+	<script src="${ctx}/resources/comm/base.js"></script>	
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.pager.js"></script>
-	<script src="${ctx}/resources/comm/base.js"></script>	
 <link rel="stylesheet"
 	href="${ctx}/statics/authadmin/applydocaudit/dataaudit.css"
 	type="text/css">
 <script src="${ctx}/resources/authadmin/applydocaudit/dataaudit.js"
 	type="text/javascript"></script>
-<script type="text/javascript">
-	var contextpath="${pageContext.request.contextPath}/"
-</script>
+
 </head>
 <body>
 	<!-- 隐藏域 -->
@@ -70,7 +71,7 @@
 					</table>
 				</div>
 				<div style="clear: both;"></div>	
-           		<div style="float:right;">
+           		<div style="float:right;"   id="fenye">
                         <ul class="pagination" id="page1">
                         </ul>
                         <div style="display: inline-block;    vertical-align: top">
