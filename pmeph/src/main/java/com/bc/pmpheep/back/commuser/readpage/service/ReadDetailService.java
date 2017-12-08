@@ -69,8 +69,7 @@ public interface ReadDetailService {
 	/**添加收藏
 	 * @param bookId   书籍id
 	 * @param writerId  作家用户id
-	 * @param favoriteId  收藏夹id
 	 * @return
 	 */
-	Map<String, Object> inserMark(long bookId, long favoriteId, long writerId);
+	Map<String, Object> inserMark(long bookId,long writerId);
 }

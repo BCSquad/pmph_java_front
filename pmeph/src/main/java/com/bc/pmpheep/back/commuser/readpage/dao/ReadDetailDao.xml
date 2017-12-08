@@ -121,4 +121,16 @@
 	<select id="queryBookMarks" parameterType="java.util.Map" resultType="long">
 	  select bookmarks from book where id=#{bookId}
 	</select>
+	<!-- 查询默认收藏夹 -->
+	<select id="queryDedaultFavorite" parameterType="map" resultType="java.util.Map">
+	    select * from writer_book_favorite where writer_id=#{writerId} and favorite_name='默认收藏夹'
+	</select>
+	<!--添加默认收藏夹  -->
+	<insert id="insertFavorite" parameterType="map">
+	   insert into writer_book_favorite(writer_id,favorite_name) values(#{writerId},'默认收藏夹')
+	</insert>
+	<!-- 删除一本书的收藏记录 -->
+	<delete id="deleteMark" parameterType="map" >
+	    delete from book_user_mark where writer_id=#{writerId} and  favorite_id=#{favoriteId} and book_id=#{bookId}
+	</delete>
 </mapper>

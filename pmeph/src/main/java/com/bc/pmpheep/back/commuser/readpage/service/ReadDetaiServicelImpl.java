@@ -142,11 +142,19 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 	 * 添加收藏
 	 */
 	@Override
-	public Map<String, Object> inserMark(long bookId,long favoriteId, long writerId) {
+	public Map<String, Object> inserMark(long bookId, long writerId) {
 		Map<String,Object> map=new HashMap<>();
-		int count=readDetailDao.queryMark(bookId,favoriteId,writerId);//查询用户是否收藏某一本书，如收藏count大于0，否则，等于0
+		Map<String,Object> dmap=readDetailDao.queryDedaultFavorite(writerId);
+		if(dmap==null){
+			readDetailDao.insertFavorite(writerId);
+			dmap=readDetailDao.queryDedaultFavorite(writerId);
+		}
+		long favoriteId=Long.valueOf(dmap.get("id").toString());
+		int count=readDetailDao.queryMark(bookId,favoriteId,writerId);//查询用户是否收藏某一本书，如果收藏       count大于0，否则，等于0
 		long marks=readDetailDao.queryBookMarks(bookId);//查询书籍的收藏数
 		if(count>0){
+			readDetailDao.deleteMark(bookId,favoriteId,writerId);
+			readDetailDao.updateMarks(bookId,marks-1);//更新书籍表中的收藏数量啊
 			map.put("returncode","remain");
 		}else{
 			readDetailDao.insertMark(bookId,favoriteId,writerId);//向用户书籍收藏表中加入收藏记录

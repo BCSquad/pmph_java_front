@@ -151,9 +151,9 @@ public class ReadDetailController extends BaseController{
 	public Map<String, Object> addMark(HttpServletRequest request){
 		Map<String,Object> map=new HashMap<>();
 		long bookId=Long.valueOf(request.getParameter("bookId"));
-		long favoriteId=Long.valueOf(request.getParameter("favoriteId"));
-		long writerId=12179;
-		map=readDetailService.inserMark(bookId,favoriteId,writerId);
+		Map<String,Object> userMap=getUserInfo();
+		long writerId=Long.valueOf(userMap.get("id").toString());
+		map=readDetailService.inserMark(bookId,writerId);
 		return map;
 	}
 	

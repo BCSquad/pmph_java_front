@@ -108,4 +108,19 @@ public interface ReadDetailDao {
 	 */
 	int dellikes(Map<String, Object> map);
 	
+	/**查询默认收藏夹
+	 * @param writerId  用户id
+	 * @return
+	 */
+	Map<String, Object> queryDedaultFavorite(@Param("writerId") long writerId);
+    /**添加默认收藏夹
+     * @param writerId 用户id
+     */
+    void insertFavorite(@Param("writerId") long writerId);
+	/**删除某一本书的收藏记录
+	 * @param bookId      书籍id
+	 * @param favoriteId  收藏夹id
+	 * @param writerId    用户id
+	 */
+	void deleteMark(@Param("bookId")long bookId,@Param("favoriteId") long favoriteId,@Param("writerId") long writerId);
 }
