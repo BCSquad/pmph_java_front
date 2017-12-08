@@ -48,7 +48,7 @@ public interface WriterUserDao {
 	 */
 	WriterUserCertificationVO showTeacherCertification(@Param("id") Long id);
 	
-	List<Org> getOrg();
+	List<Org> getOrgList();
 	/**
 	 * 添加学校教师认证
 	 * @author tyc

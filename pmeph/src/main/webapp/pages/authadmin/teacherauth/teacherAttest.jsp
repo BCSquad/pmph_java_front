@@ -120,8 +120,8 @@ String contextpath=request.getContextPath();
                     <td align="right"><font class="td-font-1">*选择学校</font></td>
                     <td>
                         <select class="sxy-select-td" id="Select1" name="position">
-                        <c:forEach var = "org" items="">
-                        	<option value="${org.id}"  <c:if test="${org.id==showWriterUserCertification.orgId}">selected</c:if>>${org.name}</option>
+                        <c:forEach var = "org" items="showWriterUserCertification.orgList">
+                        	<option value="${org.id}"  <c:if test="${org.id==showWriterUserCertification.orgId}">selected</c:if>>${org.orgName}</option>
                         </c:forEach>
                         </select>
                     </td>

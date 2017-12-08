@@ -63,7 +63,7 @@ public class WriterUserServiceImpl implements WriterUserService {
 					CheckedExceptionResult.NULL_PARAM, "id不能为空");
 		}
 		WriterUserCertificationVO writerUserCertificationVO = writerUserDao.showTeacherCertification(id);
-		List<Org> orgList = writerUserDao.getOrg();
+		List<Org> orgList = writerUserDao.getOrgList();
 		writerUserCertificationVO.setOrgList(orgList);
 		/*String cert = writerUserCertificationVO.getCert();
 		String mongoId = null;
