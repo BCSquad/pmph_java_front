@@ -24,7 +24,7 @@ import com.bc.pmpheep.service.exception.CheckedServiceException;
  * @author lyc
  * @date 2017年12月2日 下午3:38:03
  */
-@Service
+@Service("com.bc.pmpheep.back.commuser.group.service.GroupServiceImpl")
 public class GroupServiceImpl implements GroupService{
 
 	@Autowired
@@ -41,12 +41,14 @@ public class GroupServiceImpl implements GroupService{
 		List<GroupList> groupList = new ArrayList<>();
 		for (GroupList group : groups){
 			Long groupId = group.getId();
-			String createTime = (new SimpleDateFormat("yyyy年MM月dd日").format(group.getCreateTime()));
+			String temp = group.getGmtCreate() ;
+			String createTime = temp.substring(0,4)+"年"+temp.substring(5,7)+"月"+temp.substring(8,10)+"日";
+			//String createTime = (new SimpleDateFormat("yyyy年MM月dd日").format(group.getGmtCreate()));
 			Integer members = groupDao.getMemberTotal(groupId);
 			Integer files = groupDao.getFileTotal(groupId);
 			List<String> avatars = groupDao.getAvatars(groupId);
 			List<GroupMessage> messages = groupDao.getMessages(groupId);
-			group.setCreateTime(createTime);
+			group.setGmtCreate(createTime);
 			group.setMembers(members);
 			group.setFiles(files);
 			group.setAvatars(avatars);

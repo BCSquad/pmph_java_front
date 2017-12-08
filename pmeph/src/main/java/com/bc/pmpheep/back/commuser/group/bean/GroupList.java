@@ -25,7 +25,7 @@ public class GroupList {
 	/**
 	 * 创建时间
 	 */
-	private String createTime;
+	private String gmtCreate;
 	/**
 	 * 小组人数
 	 */
@@ -107,12 +107,13 @@ public class GroupList {
 		this.bookName = bookName;
 	}
 
-	public String getCreateTime() {
-		return createTime;
+	public String getGmtCreate() {
+		return gmtCreate;
 	}
 
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
+	public void setGmtCreate(String gmtCreate) {
+		this.gmtCreate = gmtCreate;
 	}
 
+	
 }

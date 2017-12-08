@@ -1,10 +1,7 @@
 package com.bc.pmpheep.back.commuser.group.dao;
 
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
-
 import com.bc.pmpheep.back.commuser.group.bean.GroupList;
 import com.bc.pmpheep.back.commuser.group.bean.GroupMessage;
 
@@ -13,7 +10,6 @@ import com.bc.pmpheep.back.commuser.group.bean.GroupMessage;
  * 
  * @author mryang
  */
-@Repository
 public interface GroupDao {
 	/**
 	 * 
