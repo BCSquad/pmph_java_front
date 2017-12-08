@@ -255,7 +255,7 @@
 }
 
 .littleV{
-    background-image: url("http://localhost:8080/pmeph/statics/pictures/css_sprites.png");
+    background-image: url("../../image/css_sprites.png");
     background-position: -9px -437px;
     background-repeat: no-repeat;
     height: 18px;
