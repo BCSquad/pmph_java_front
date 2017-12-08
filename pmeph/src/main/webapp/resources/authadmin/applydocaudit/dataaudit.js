@@ -57,7 +57,10 @@ function queryMain(){
 	});
 }
 
-
+//点击名字跳转页面
+function toName(material_id,declaration_id){
+	window.location.href = contextpath + 'material/showMaterial.action?material_id='+material_id+'&declaration_id='+declaration_id;
+}
 
 
 //选择每页数据数量
