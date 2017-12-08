@@ -4,6 +4,11 @@ import java.util.*;
 
 import com.bc.pmpheep.back.authadmin.message.bean.UserMessage;
 
+/**
+ * 机构用户发送 新消息
+ * @author xcy
+ *
+ */
 public interface SendMessageService {
 	
 	/**
@@ -11,19 +16,6 @@ public interface SendMessageService {
 	 * @param userId
 	 */
 	public List<Map<String,Object>> findOrgUserAndWriterUser(String userId);
-	/**
-	 * 存放消息
-	 * @param list
-	 */
-	public void insertMessage(List<Map<String,Object>> list);
-	
-
-	/**
-	 * 存放附件
-	 * @param list
-	 */
-	public void insertAttachment(List<Map<String,Object>> list);
-	
 	
 	/**
 	 * 批量插入消息
