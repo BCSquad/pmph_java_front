@@ -6,6 +6,7 @@
 	<select id="findDataAudit" parameterType="java.util.Map"
 		resultType="java.util.Map">
 		SELECT
+		d.id,
 		d.realname,
 		d.position,
 		d.title,
@@ -19,6 +20,7 @@
 		LEFT JOIN dec_position AS p ON d.id = p.declaration_id
 		LEFT JOIN textbook AS t ON p.textbook_id = t.id
 		<where>
+			1=1
 			<if test="queryName != null and queryName != '' ">
 				and realname like concat("%",#{queryName},"%")
 			</if>
@@ -40,6 +42,7 @@
 		= p.declaration_id
 		LEFT JOIN textbook AS t ON p.textbook_id = t.id
 		<where>
+		1=1
 			<if test="queryName != null and queryName != '' ">
 				and realname like concat("%",#{queryName},"%")
 			</if>
