@@ -19,9 +19,9 @@ package com.bc.pmpheep.back.util;
  */
 public class RouteUtil {
 	// 小组默认头像路径（现在没有数据没有路径，等有路径的时候加入）
-	public static final String DEFAULT_GROUP_IMAGE = "/statics/group.png";
+	public static final String DEFAULT_GROUP_IMAGE = "/static/default_image.png";
 	// 新建用户默认头像（现在没有数据没有路径，等有路径的时候加入）
-	public static final String DEFAULT_USER_AVATAR = "/statics/user.png";
+	public static final String DEFAULT_USER_AVATAR = "/static/default_image.png";
 	// mongoDB图片的前缀
 	public static final String MONGODB_IMAGE = "/image/";
 	// mongoDB文件的前缀(小组)
@@ -39,8 +39,11 @@ public class RouteUtil {
 	 *
 	 */
 	public static String gruopImage(String gruopImage) {
+		if (StringUtil.isEmpty(gruopImage)) {
+			gruopImage = DEFAULT_GROUP_IMAGE;
+		}
 		if (!DEFAULT_GROUP_IMAGE.equals(gruopImage)) {
-			gruopImage = MONGODB_IMAGE + gruopImage;
+			gruopImage = MONGODB_IMAGE + gruopImage + ".action";
 		}
 		return gruopImage;
 	}
@@ -55,8 +58,11 @@ public class RouteUtil {
 	 *
 	 */
 	public static String userAvatar(String avatar) {
+		if (StringUtil.isEmpty(avatar)) {
+			avatar = DEFAULT_USER_AVATAR;
+		}
 		if (!DEFAULT_USER_AVATAR.equals(avatar)) {
-			avatar = MONGODB_IMAGE + avatar;
+			avatar = MONGODB_IMAGE + avatar + ".action";
 		}
 		return avatar;
 	}

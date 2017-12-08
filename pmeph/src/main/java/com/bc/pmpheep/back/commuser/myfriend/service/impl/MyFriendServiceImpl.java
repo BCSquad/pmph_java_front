@@ -11,6 +11,7 @@ import com.bc.pmpheep.back.commuser.myfriend.dao.MyFriendDao;
 import com.bc.pmpheep.back.commuser.myfriend.service.MyFriendService;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
 import com.bc.pmpheep.back.util.ObjectUtil;
+import com.bc.pmpheep.back.util.RouteUtil;
 import com.bc.pmpheep.service.exception.CheckedExceptionBusiness;
 import com.bc.pmpheep.service.exception.CheckedExceptionResult;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
@@ -44,6 +45,11 @@ public class MyFriendServiceImpl implements MyFriendService {
             throw new CheckedServiceException(CheckedExceptionBusiness.WRITER_FRIEND,
                                               CheckedExceptionResult.NULL_PARAM, "用户Id为空");
         }
-        return myFriendDao.listMyFriend(userId);
+        List<WriterFriendVO> lst  =  myFriendDao.listMyFriend(userId);
+        for(WriterFriendVO writerFriendVO:  lst){
+        	String avatar =  writerFriendVO.getAvatar();
+        	writerFriendVO.setAvatar(RouteUtil.userAvatar(avatar));
+        }
+        return lst ;
     }
 }

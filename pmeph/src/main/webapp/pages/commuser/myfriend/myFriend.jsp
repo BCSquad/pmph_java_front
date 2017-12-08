@@ -547,7 +547,7 @@ a{
 			   </c:otherwise>  
 			</c:choose>
 			
-	            <div><img src="${pageContext.request.contextPath}/image/${friend.avatar}.action" class="img2"></div>
+	            <div><img src="${pageContext.request.contextPath}/${friend.avatar}" class="img2"></div>
 	            <div class="div_txt1">${friend.username}</div>
 	            <div class="div_txt2">${friend.position}</div>
 	            <div class="div_txt3">

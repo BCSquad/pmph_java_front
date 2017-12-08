@@ -13,7 +13,9 @@ import com.bc.pmpheep.back.commuser.group.bean.GroupFile;
 import com.bc.pmpheep.back.commuser.group.bean.GroupList;
 import com.bc.pmpheep.back.commuser.group.bean.GroupMessage;
 import com.bc.pmpheep.back.commuser.group.dao.GroupDao;
+import com.bc.pmpheep.back.commuser.myfriend.bean.WriterFriendVO;
 import com.bc.pmpheep.back.util.ObjectUtil;
+import com.bc.pmpheep.back.util.RouteUtil;
 import com.bc.pmpheep.service.exception.CheckedExceptionBusiness;
 import com.bc.pmpheep.service.exception.CheckedExceptionResult;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
@@ -46,7 +48,12 @@ public class GroupServiceImpl implements GroupService{
 			Integer members = groupDao.getMemberTotal(groupId);
 			Integer files = groupDao.getFileTotal(groupId);
 			List<String> avatars = groupDao.getAvatars(groupId);
+			for(String avatar: avatars){
+				avatar = RouteUtil.userAvatar(avatar);
+			}
 			List<GroupMessage> messages = groupDao.getMessages(groupId);
+			String gruopImage =  group.getGroupImage();
+			group.setGroupImage(RouteUtil.gruopImage(gruopImage));
 			group.setGmtCreate(createTime);
 			group.setMembers(members);
 			group.setFiles(files);
