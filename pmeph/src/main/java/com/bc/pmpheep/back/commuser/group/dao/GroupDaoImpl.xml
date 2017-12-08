@@ -74,6 +74,6 @@
     <select id="getMessages" parameterType="java.lang.Long" 
         resultType="GroupMessage">
         SELECT * FROM pmph_group_message 
-        WHERE member_id = 0 AND group_id = #{groupId} ORDER BY gmt_create DESC
+        WHERE  group_id = #{groupId} ORDER BY gmt_create DESC
     </select>
 </mapper>

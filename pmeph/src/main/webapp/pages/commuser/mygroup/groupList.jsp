@@ -27,7 +27,7 @@
     <div class="items">
         <c:forEach var = 'group' items="${listgroup}" > 
 	        <div class="item">
-            <img src="${pageContext.request.contextPath}/image/${group.groupImage}.action" alt="头像" class="img1"/>
+            <img src="${pageContext.request.contextPath}/${group.groupImage}" alt="头像" class="img1"/>
             <div class="item_content">
                 <text class="txt1">${group.groupName}</text>
                 <br/>
@@ -38,7 +38,7 @@
                 <div class="imgs">
                 	<c:forEach var = 'avatar' items="${group.avatars}" varStatus="o">
                 		<c:if test="${o.index <=5 }"><!-- 展示6位 -->
-                			<img src="${pageContext.request.contextPath}/image/${avatar}.action"/>
+                			<img src="${pageContext.request.contextPath}/${avatar}"/>
                 		</c:if>
                 	 </c:forEach>
                 </div>
@@ -49,7 +49,7 @@
                     文件
                     <text class="txt30">${group.files}</text>
                 </text>
-                <div style="margin-top:10px;"><a class="item_link" href="communication.html">
+                <div style="margin-top:10px;"><a class="item_link" href="${pageContext.request.contextPath}/group/list.action?groupId=${group.id}">
                     <div class="item_content_button">小组主页></div>
                 </a></div>
             </div>
