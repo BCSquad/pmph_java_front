@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.authadmin.message.bean.UserMessage;
+import com.bc.pmpheep.back.authadmin.message.service.InfoReleaseService;
 import com.bc.pmpheep.back.authadmin.message.service.SendMessageServiceImpl;
 import com.bc.pmpheep.controller.bean.ResponseBean;
 import com.bc.pmpheep.general.bean.FileType;
@@ -43,6 +44,9 @@ public class SendMessage extends BaseController {
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.authadmin.message.service.SendMessageServiceImpl")
 	private SendMessageServiceImpl sendMessageServiceImpl;
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.authadmin.message.service.InfoReleaseServiceImpl")
+	InfoReleaseService infoReleaseService;
 	Logger logger = LoggerFactory.getLogger(SendMessage.class);
 	
 	/**
@@ -51,19 +55,28 @@ public class SendMessage extends BaseController {
 	 */
 	@RequestMapping("/init")
 	public ModelAndView init(){
-		return new ModelAndView("/authadmin/message/sendmessage");
+		ModelAndView mv = new ModelAndView();
+		List<Map<String, Object>> List_map = infoReleaseService.selectMenu();
+		mv.addObject("listMenu", List_map);
+		mv.setViewName("/authadmin/message/sendmessage");
+		return mv;
 		
 	}
 	
 	/**
-	 * 发送新消息——机构用户 页面
-	 * @return
+	 * 
+	* @Title: showSelectBook 
+	* @Description: 初始化 选择教材报名者界面
+	* @return List<Map<String,Object>>    返回类型 
+	* @throws
 	 */
-	@RequestMapping("/initAllMessage")
-	public ModelAndView initAllMessage(){
-		return new ModelAndView("/authadmin/message/organizationAllMessage");
-		
+	/*@RequestMapping(value="showSelectBook",method=RequestMethod.POST)
+	@ResponseBody
+	public List<Map<String,Object>> showSelectBook(){
+		List<Map<String, Object>> List_map = infoReleaseService.selectMenu();
+		return List_map;
 	}
+*/
 	/**
 	 * 机构用户发送新消息 （批量）
 	 * @return
@@ -71,11 +84,11 @@ public class SendMessage extends BaseController {
 	
 	@RequestMapping(value="/sendMessage",method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView sendMessage(HttpServletRequest request,@RequestParam(value="file",required=false)MultipartFile file){
+	public ModelAndView sendMessage(HttpServletRequest request/*,@RequestParam(value="file",required=false)MultipartFile file*/){
 		
 		String resultFlag = "true";
-		String fileName = file.getOriginalFilename(); //文件名
-		long fileSize = file.getSize(); //文件大小
+		//String fileName = file.getOriginalFilename(); //文件名
+		//long fileSize = file.getSize(); //文件大小
 		
 		String titleValue = request.getParameter("titleValue");
 		String radioValue = request.getParameter("radioValue");
@@ -132,14 +145,14 @@ public class SendMessage extends BaseController {
 				//批量操作
 				sendMessageServiceImpl.batchInsertMessage(userMessageList);
 				//文件上传  到MongoDB 
-				if(fileSize>0){
+				/*if(fileSize>0){
 		           String attachment_id =fileService.save(file, FileType.MSG_FILE, 0);
 		           Map map = new HashMap();
 		           map.put("msg_id", msg_id);
 		           map.put("attachment", attachment_id);
 		           map.put("attachment_name", fileName);
 		           sendMessageServiceImpl.insertAttachmentInfo(map);
-				}
+				}*/
 				return new ModelAndView("/authadmin/message/sendmessage");
 			} catch (Exception e) {
 				// TODO: handle exception

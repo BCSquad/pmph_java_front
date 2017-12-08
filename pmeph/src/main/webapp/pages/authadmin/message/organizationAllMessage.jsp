@@ -10,12 +10,15 @@
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>Insert title here</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
+    <script src="${ctx}/resources/comm/layer/layer.js"></script>
+    <script src="${ctx}/resources/comm/base.js"></script>
+    <script src="${ctx}/resources/authadmin/message/organizationMessage.js" ></script>
+    <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet"
           href="${ctx}/statics/authadmin/message/organizationMessage.css"
           type="text/css">
-    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
-    <script src="${ctx}/resources/authadmin/message/organizationMessage.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
 </head>
 <body>
 <jsp:include page="/pages/comm/headGreenBackGround.jsp"></jsp:include>
@@ -34,131 +37,36 @@
                 </div >
             </a>
         </div>
-        <div class="message-list" >
+        <div class="message-list"  >
             <div style="height: 20px;"></div>
+            <div id="message-list">
+            <c:forEach items="${list}" var="item" >
             <div class="item">
                 <div class="item-img">
                     <img src="${ctx}/statics/testfile/tttt.png" />
                 </div>
                 <div class="content" >
                      <p class="title" >
-                         <span class="msg">申报资料审核</span>
-                         <span class="time">20175.17&nbsp;&nbsp;15:13</span>
+                         <span class="msg">${item.NAME}</span>
+                         <span class="time">${item.TIME}</span>
                      </p>
                     <p class="text">
-                        张三提交了《全国高等学校心理学研究教材》张三提交了《全国高等学校心理学研究教材》张三提交了《全国高等学校心理学研究教材》张三提交了《全国高等学校心理学研究教材》张三提交了《全国高等学校心理学研究教材》张三提交了《全国高等学校心理学研究教材》
-                        张三提交了《全国高等学校心理学研究教材》张三提交了《全国高等学校心理学研究教材》张三提交了《全国高等学校心理学研究教材》张三提交了《全国高等学校心理学研究教材》张三提交了《全国高等学校心理学研究教材》张三提交了《全国高等学校心理学研究教材》
-
+                        ${item.TYPE}
                     </p>
                 </div>
             </div>
-
-            <div class="item">
-                <div class="item-img">
-                    <img src="${ctx}/statics/testfile/tttt.png" />
-                </div>
-                <div class="content" >
-                    <p class="title" >
-                        <span class="msg">申报资料审核</span>
-                        <span class="time">20175.17&nbsp;&nbsp;15:13</span>
-                    </p>
-                    <p class="text">
-                        张三提交了《全国高等学校心理学研究教材》张三提交了
-                    </p>
-                </div>
+            </c:forEach>
             </div>
-            <div class="item">
-                <div class="item-img">
-                    <img src="${ctx}/statics/testfile/tttt.png" />
-                </div>
-                <div class="content" >
-                    <p class="title" >
-                        <span class="msg">申报资料审核</span>
-                        <span class="time">20175.17&nbsp;&nbsp;15:13</span>
-                    </p>
-                    <p class="text">
-                        张三提交了《全国高等学校心理学研究教材》张三提交了
-                    </p>
-                </div>
+            <c:if test="${listSize>=8 }">
+             <div class="load-more" id="load-more">
+                <a href="javascript:void(0);" onclick="loadMore()"><p class="load-text">加载更多...</p></a>
             </div>
-            <div class="item">
-                <div class="item-img">
-                    <img src="${ctx}/statics/testfile/tttt.png" />
-                </div>
-                <div class="content" >
-                    <p class="title" >
-                        <span class="msg">申报资料审核</span>
-                        <span class="time">20175.17&nbsp;&nbsp;15:13</span>
-                    </p>
-                    <p class="text">
-                        张三提交了《全国高等学校心理学研究教材》张三提交了
-                    </p>
-                </div>
-            </div>
-            <div class="item">
-                <div class="item-img">
-                    <img src="${ctx}/statics/testfile/tttt.png" />
-                </div>
-                <div class="content" >
-                    <p class="title" >
-                        <span class="msg">申报资料审核</span>
-                        <span class="time">20175.17&nbsp;&nbsp;15:13</span>
-                    </p>
-                    <p class="text">
-                        张三提交了《全国高等学校心理学研究教材》张三提交了
-                    </p>
-                </div>
-            </div>
-            <div class="item">
-                <div class="item-img">
-                    <img src="${ctx}/statics/testfile/tttt.png" />
-                </div>
-                <div class="content" >
-                    <p class="title" >
-                        <span class="msg">申报资料审核</span>
-                        <span class="time">20175.17&nbsp;&nbsp;15:13</span>
-                    </p>
-                    <p class="text">
-                        张三提交了《全国高等学校心理学研究教材》张三提交了
-                    </p>
-                </div>
-            </div>
-            <div class="item">
-                <div class="item-img">
-                    <img src="${ctx}/statics/testfile/tttt.png" />
-                </div>
-                <div class="content" >
-                    <p class="title" >
-                        <span class="msg">申报资料审核</span>
-                        <span class="time">20175.17&nbsp;&nbsp;15:13</span>
-                    </p>
-                    <p class="text">
-                        张三提交了《全国高等学校心理学研究教材》张三提交了
-                    </p>
-                </div>
-            </div>
-            <div class="item">
-                <div class="item-img">
-                    <img src="${ctx}/statics/testfile/tttt.png" />
-                </div>
-                <div class="content" >
-                    <p class="title" >
-                        <span class="msg">申报资料审核</span>
-                        <span class="time">20175.17&nbsp;&nbsp;15:13</span>
-                    </p>
-                    <p class="text">
-                        张三提交了《全国高等学校心理学研究教材》张三提交了
-                    </p>
-                </div>
-            </div>
-            <div class="load-more">
-                <a href=""><p class="load-text">加载更多...</p></a>
-            </div>
+            </c:if>
+             <input id="startPara" name="startPara"  type="hidden">
+        
         </div>
  </div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
 </html>
-<script type="text/javascript">
-    UE.getEditor('mText');
-</script>
+
