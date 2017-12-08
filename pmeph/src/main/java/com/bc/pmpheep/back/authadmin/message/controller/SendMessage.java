@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,6 +58,9 @@ public class SendMessage extends BaseController {
 	public ModelAndView init(){
 		ModelAndView mv = new ModelAndView();
 		List<Map<String, Object>> List_map = infoReleaseService.selectMenu();
+		mv.addObject("resultFlag", "2");
+		mv.addObject("titleValue", "");
+		mv.addObject("UEContent", "");
 		mv.addObject("listMenu", List_map);
 		mv.setViewName("/authadmin/message/sendmessage");
 		return mv;
@@ -84,7 +88,7 @@ public class SendMessage extends BaseController {
 	
 	@RequestMapping(value="/sendMessage",method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView sendMessage(HttpServletRequest request/*,@RequestParam(value="file",required=false)MultipartFile file*/){
+	public ModelAndView sendMessage(HttpServletRequest request/*,@RequestParam(value="file",required=false)MultipartFile file*/,HttpServletResponse response){
 		
 		String resultFlag = "true";
 		//String fileName = file.getOriginalFilename(); //文件名
@@ -93,7 +97,21 @@ public class SendMessage extends BaseController {
 		String titleValue = request.getParameter("titleValue");
 		String radioValue = request.getParameter("radioValue");
 		String UEContent = request.getParameter("UEContent");
-		
+		ModelAndView mv = new ModelAndView();
+		String address = "/authadmin/message/sendmessage";
+		if(titleValue.length()==0||UEContent.length()==0){
+			mv.addObject("resultFlag", "0");
+			mv.addObject("titleValue", titleValue);
+			mv.addObject("UEContent", UEContent);
+			mv.setViewName(address);
+			return mv;
+		}else if(titleValue.length()>=30){
+			mv.addObject("resultFlag", "1");
+			mv.addObject("titleValue", titleValue);
+			mv.addObject("UEContent", UEContent);
+			mv.setViewName(address);
+			return mv;
+		}
 		//发送消息 到MongoDB 
 		Message message = new Message();
 		message.setContent(UEContent);
@@ -144,6 +162,7 @@ public class SendMessage extends BaseController {
 			try {
 				//批量操作
 				sendMessageServiceImpl.batchInsertMessage(userMessageList);
+				//return new ModelAndView("redirect:/authSendMessage/init.action");
 				//文件上传  到MongoDB 
 				/*if(fileSize>0){
 		           String attachment_id =fileService.save(file, FileType.MSG_FILE, 0);
@@ -153,7 +172,8 @@ public class SendMessage extends BaseController {
 		           map.put("attachment_name", fileName);
 		           sendMessageServiceImpl.insertAttachmentInfo(map);
 				}*/
-				return new ModelAndView("/authadmin/message/sendmessage");
+				
+				//return new ModelAndView("/authadmin/message/sendmessage");
 			} catch (Exception e) {
 				// TODO: handle exception
 				
@@ -161,7 +181,7 @@ public class SendMessage extends BaseController {
 			
 		
 		
-			return new ModelAndView("/authadmin/message/sendmessage");
+			return  new ModelAndView("redirect:/authSendMessage/init.action");
 	}
 	
 	

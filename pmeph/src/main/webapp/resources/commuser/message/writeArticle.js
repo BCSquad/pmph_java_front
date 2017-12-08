@@ -45,29 +45,37 @@ function btntype(btn_this){
 //	debugger;
 //	contxtpath
 	$("#btn_type").val(btn_this);
-	if($("#submitTypeCode").val()=='0'){ //submitTypeCode 状态码为0表示未提交 未保存 为1 表示已保存 为
+	if($("#submitTypeCode").val()=='0'){ //submitTypeCode 状态码为0表示新增 1表示修改
 		if(writeArticleValidate()){
 			
 			$.ajax({
 				url:contextpath+"/writerArticle/writeArticle.action",
 				type:"post",
 		        data:$("#form1").serialize(),
-		        success:function(data){
-		        	if(data != '1'){
-		        		if(btn_this== '0'){
-			        		$("#submitTypeCode").val("1");
-			        		$("#msg_id").val(data);
-			        	}else if(btn_this== '1') {
-			        		document.getElementById("form1").reset(); 
-			        		$("#TitleValue").val("");
-			        		UE.getEditor('mText').setContent("");
+		        success:function(json){
+		        	var data = json.flag;
+		        	if(data=='2'||data == '3'){
+		        		$("#TitleValue").val(json.titleValue);
+		        		UE.getEditor('mText').setContent(json.UEContent);
+		        		window.message.error(json.isValidate);
+		        	}else {
+		        		if(data != '1'){
+			        		if(btn_this== '0'){
+				        		$("#submitTypeCode").val("1");
+				        		$("#msg_id").val(data);
+				        	}else if(btn_this== '1') {
+				        		document.getElementById("form1").reset(); 
+				        		$("#TitleValue").val("");
+				        		UE.getEditor('mText').setContent("");
+				        		$("#submitTypeCode").val("0");
+				        	}
+			        		window.message.success("成功");
+			        	}else{
 			        		$("#submitTypeCode").val("0");
+			        		window.message.error("失败");
 			        	}
-		        		window.message.success("成功");
-		        	}else{
-		        		$("#submitTypeCode").val("0");
-		        		window.message.error("失败");
 		        	}
+		        	
 		        
 		        }
 			});
@@ -82,26 +90,34 @@ function btntype(btn_this){
 					url:contextpath+"/writerArticle/updateIsStaging.action",
 					type:"post",
 			        data:$("#form1").serialize(),
-			        success:function(data){
-			        	if(data != '1'){
-			        		if(btn_this== '0'){
-				        		$("#submitTypeCode").val("1");
-				        		$("#msg_id").val(data);
-				        	}else if(btn_this== '1') {
-				        		document.getElementById("form1").reset(); 
-				        		$("#TitleValue").val("");
+			        success:function(json){
+			        	var data = json.flag;
+			        	if(data=='2'||data == '3'){
+			        		$("#TitleValue").val(json.titleValue);
+			        		UE.getEditor('mText').setContent(json.UEContent);
+			        		window.message.error(json.isValidate);
+			        	}else{
+			        		if(data != '1'){
+				        		if(btn_this== '0'){
+					        		$("#submitTypeCode").val("1");
+					        		$("#msg_id").val(data);
+					        	}else if(btn_this== '1') {
+					        		document.getElementById("form1").reset(); 
+					        		$("#TitleValue").val("");
+					        		UE.getEditor('mText').setContent("");
+					        		$("#msg_id").val("");
+					        		$("#submitTypeCode").val("0");
+					        	}
+				        	/*	document.getElementById("form1").reset(); 
 				        		UE.getEditor('mText').setContent("");
-				        		$("#msg_id").val("");
-				        		$("#submitTypeCode").val("0");
+				        		$("#submitTypeCode").val("0");*/
+				        		window.message.success("成功");
+				        	} else {
+				        		$("#submitTypeCode").val("1");
+				        		window.message.error("失败");
 				        	}
-			        	/*	document.getElementById("form1").reset(); 
-			        		UE.getEditor('mText').setContent("");
-			        		$("#submitTypeCode").val("0");*/
-			        		window.message.success("成功");
-			        	} else {
-			        		$("#submitTypeCode").val("1");
-			        		window.message.error("失败");
 			        	}
+			        	
 			        }
 				});
 			}

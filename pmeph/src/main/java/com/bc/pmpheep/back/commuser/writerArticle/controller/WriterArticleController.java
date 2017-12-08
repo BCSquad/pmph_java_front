@@ -62,11 +62,26 @@ public class WriterArticleController {
 	 */
 	@RequestMapping(value="/writeArticle",method=RequestMethod.POST)
 	@ResponseBody
-	public String writeArticle(HttpServletRequest request){
+	public Map<String,Object> writeArticle(HttpServletRequest request){
 		String titleValue = request.getParameter("titleValue");
 		String UEContent = request.getParameter("UEContent");
 		String btnType = request.getParameter("btnType");
+		Map<String,Object> resultMap = new HashMap<String,Object>();
 		String flag = "0";
+		if(titleValue.length()==0||UEContent.length()==0){
+			
+			resultMap.put("isValidate","必填项不为空");
+			resultMap.put("flag","2");
+			resultMap.put("titleValue",titleValue);
+			resultMap.put("UEContent",UEContent);
+			return resultMap;
+		}else if(titleValue.length()>30){
+			resultMap.put("isValidate","标题不能超过30个字");
+			resultMap.put("flag","3");
+			resultMap.put("titleValue",titleValue);
+			resultMap.put("UEContent",UEContent);
+			return resultMap;
+		}
 		//List list= new ArrayList();
 		try {
 			    int is_staging = "0".equals(btnType)?0:1;  //是否暂存  0 暂存  1不暂存 提交
@@ -92,10 +107,11 @@ public class WriterArticleController {
 			// TODO: handle exception
 			flag ="1";
 			e.printStackTrace();
-			return flag;
+			resultMap.put("flag", flag);
+			return resultMap;
 		}
-		
-		return flag;
+		resultMap.put("flag", flag);
+		return resultMap;
 		
 	}
 	
@@ -105,12 +121,13 @@ public class WriterArticleController {
 	 */
 	@RequestMapping(value="/updateIsStaging",method=RequestMethod.POST)
 	@ResponseBody
-	public String updateIsStaging(HttpServletRequest request){
+	public Map<String,Object> updateIsStaging(HttpServletRequest request){
 		String titleValue = request.getParameter("titleValue");
 		String UEContent = request.getParameter("UEContent");
 		String msg_id = request.getParameter("msg_id");
 		String btnType = request.getParameter("btnType");
-		String flag = "0";
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		String  flag="0";
 		try {
 			int is_staging = "0".equals(btnType)?0:1;  //是否暂存  0 暂存  1不暂存 提交
 			//发送消息 到MongoDB  根据传过去的msg_id 去找到写的这个文章
@@ -135,10 +152,12 @@ public class WriterArticleController {
 			// TODO: handle exception
 			flag ="1";
 			e.printStackTrace();
-			return flag;
+			resultMap.put("flag", flag);
+			return resultMap;
 			
 		}
-		return flag;
+		resultMap.put("flag", flag);
+		return resultMap;
 	}
 
 }

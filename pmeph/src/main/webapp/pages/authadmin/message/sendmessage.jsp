@@ -36,7 +36,7 @@
 </head>
 <body>
 <!-- 隐藏域 -->
-	
+	<input type="hidden" id="validate" value="${resultFlag}">
 	<input type="hidden" id="search-name-temp" value="">
 	<input type="hidden" id="page-num-temp" value="1">
 <jsp:include page="/pages/comm/headGreenBackGround.jsp"></jsp:include>
@@ -60,7 +60,7 @@
         <div class="title">
             <span class="span1" style="margin-right: 25px;"><span class="span2">*</span>标题</span>
             <input type="text" name="titleValue" id="TitleValue" placeholder="请输入消息标题 30字以内"
-                   oninput="if(value.length>30){value=value.slice(0,30)}" required/>
+                   oninput="if(value.length>30){value=value.slice(0,30)}" value="${titleValue}" required/>
 
         </div>
         <div class="sel-object">
@@ -74,7 +74,7 @@
           <!--   <script type="text/plian" id="mText"
                     style="width: 1060px; height:478px;position:absolute;left:126px;top:0px"></script> -->
            <!--  <input type="hidden" name="UEContent" id="UEContent"/> -->
-           <div style="width: 1060px; height:500px;position:absolute;left:126px;top:0px">  <textarea rows="8" cols="50" placeholder="请输入内容" id="UEContent" name ="UEContent" required></textarea></div>
+           <div style="width: 1060px; height:500px;position:absolute;left:126px;top:0px">  <textarea rows="8" cols="50" placeholder="请输入内容" id="UEContent" name ="UEContent" value="${UEContent}" required></textarea></div>
         </div>
        <!--  <div class="appendix">
                          <span class="span1">
