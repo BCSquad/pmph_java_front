@@ -75,7 +75,7 @@ public class InfoReleaseController extends BaseController{
 
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("queryName", queryName);
-		Map<String, Object>   user=getUserInfo();
+		Map<String, Object> user = getUserInfo();
 		BigInteger uid = (BigInteger) user.get("id");
 		paraMap.put("userId", uid);
 		PageParameter<Map<String, Object>> pageParameter = new PageParameter<Map<String, Object>>(
