@@ -7,7 +7,6 @@
 
 .box{
 	background-color: #ffffff;
-	
 }
 
 .boxsm {
@@ -17,30 +16,30 @@
     margin-right:20px;
 }
 
-.item {
+.body .content-wrapper .boxsm .item {
     height: 40px;
 }
 
-.title{
+.body .content-wrapper .boxsm .item .title{
 	width: 64px;
 	height: 17px;
     margin-top: 8px;
     color: #333333;
     margin-right:20px;
 }
-.st_2 {
+.body .content-wrapper .boxsm .item .st_2 {
     width: 600px;
     height: 40px;
     background-color: #f1f1f1;
 
 }
 
-.message {
+.body .content-wrapper .boxsm .message {
     width: 1160px;
     margin-top:15px;
 }
 
-.title1{
+.body .content-wrapper .boxsm .message  .title1{
 	float:left;
 	width: 64px;
 	height:auto;
@@ -49,7 +48,7 @@
     margin-right:20px;
 }
 
-.table{
+.body .content-wrapper .boxsm .message  .table{
 	 border-collapse: collapse;
     	width: 1076px;
     	height:auto;
@@ -57,7 +56,7 @@
 }
 
 
-.check_box {
+.body .content-wrapper .boxsm .message  .table .check_box {
     width: 18px;
     height: 18px;
     background-color: #ffffff;
