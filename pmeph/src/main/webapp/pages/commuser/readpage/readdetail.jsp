@@ -42,7 +42,7 @@
         		   <c:if test="${flag=='yes'}">
         			 <img src="${ctx}/statics/image/dz01.png" onclick="addlikes()" id="dz"/>
         		   </c:if>	  
-        		      <img src="${ctx}/statics/image/s102(1).png" onclick="addmark()" id="sc"/>
+        		      <img src="${ctx}/statics/image/${mark=='yes' ? 'sc101(1).png':'s102(1).png'}" onclick="addmark()" id="sc"/>
         			  <div style="display: inline-block;vertical-align: top;margin-right: 8px;text-align:left;">
                     </div>
         		</div>
