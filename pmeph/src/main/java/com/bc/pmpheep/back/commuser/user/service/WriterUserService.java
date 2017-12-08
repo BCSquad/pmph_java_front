@@ -1,7 +1,6 @@
 package com.bc.pmpheep.back.commuser.user.service;
 
 import java.io.IOException;
-import java.util.List;
 
 import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertification;
@@ -49,10 +48,10 @@ public interface WriterUserService {
 	 * 修改学校教师认证
 	 * @author tyc
      * @createDate 2017年11月30日 上午10:44:09
-	 * @param writerUserCertificationVO
+	 * @param writerUserCertification
 	 * @return
 	 */
-	WriterUserCertification updateTeacherCertification(WriterUserCertificationVO writerUserCertificationVO) 
+	WriterUserCertification updateTeacherCertification(WriterUserCertification writerUserCertification) 
 			throws IOException ;
 	
 	/**

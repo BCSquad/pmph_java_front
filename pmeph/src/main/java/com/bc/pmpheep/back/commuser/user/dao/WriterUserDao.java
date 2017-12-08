@@ -43,7 +43,7 @@ public interface WriterUserDao {
 	 * 查看学校教师认证信息
 	 * @author tyc
      * @createDate 2017年11月30日 上午10:44:09
-	 * @param id
+	 * @param userId
 	 * @return
 	 */
 	WriterUserCertificationVO showTeacherCertification(@Param("userId") Long userId);

@@ -76,42 +76,42 @@ public class WriterUserServiceImpl implements WriterUserService {
 	}
 
 	@Override
-	public WriterUserCertification updateTeacherCertification(WriterUserCertificationVO writerUserCertificationVO) 
+	public WriterUserCertification updateTeacherCertification(WriterUserCertification writerUserCertification) 
 			throws IOException {
-		if (ObjectUtil.isNull(writerUserCertificationVO)) { // 获取的数据不能为空
+		if (ObjectUtil.isNull(writerUserCertification)) { // 获取的数据不能为空
 			throw new CheckedServiceException(CheckedExceptionBusiness.USER_MANAGEMENT,
 					CheckedExceptionResult.NULL_PARAM, "作家用户信息不能为空");
 		}
 		// 获取需要插入数据库的数据
-		Long id = writerUserCertificationVO.getId();
-		Long userId = writerUserCertificationVO.getUserId(); // 获取作家id
-		Long orgId = writerUserCertificationVO.getOrgId(); // 获取对应学校id
-		String handPhone = writerUserCertificationVO.getHandphone(); // 获取手机
-		String idCard = writerUserCertificationVO.getIdcard(); // 获取身份证
-		Integer progress = writerUserCertificationVO.getProgress(); // 认证进度
-		String cert = writerUserCertificationVO.getCert(); // 获取教师资格证
+		Long id = writerUserCertification.getId();
+		Long userId = writerUserCertification.getUserId(); // 获取作家id
+		Long orgId = writerUserCertification.getOrgId(); // 获取对应学校id
+		String handPhone = writerUserCertification.getHandphone(); // 获取手机
+		String idCard = writerUserCertification.getIdcard(); // 获取身份证
+		Integer progress = writerUserCertification.getProgress(); // 认证进度
+		String cert = writerUserCertification.getCert(); // 获取教师资格证
 		// 把获取的数据添加进writerUserCertification
-		WriterUserCertification writerUserCertification = new WriterUserCertification();
-		writerUserCertification.setId(id);
-		writerUserCertification.setUserId(userId);
-		writerUserCertification.setOrgId(orgId);
-		writerUserCertification.setHandphone(handPhone);
-		writerUserCertification.setIdcard(idCard);
-		writerUserCertification.setProgress(progress);
-		writerUserCertification.setCert(cert);
+		WriterUserCertification writerUserCertifications = new WriterUserCertification();
+		writerUserCertifications.setId(id);
+		writerUserCertifications.setUserId(userId);
+		writerUserCertifications.setOrgId(orgId);
+		writerUserCertifications.setHandphone(handPhone);
+		writerUserCertifications.setIdcard(idCard);
+		writerUserCertifications.setProgress(progress);
+		writerUserCertifications.setCert(cert);
 		if (ObjectUtil.isNull(id)) { //id为空就增加否则修改
-			writerUserDao.addCertification(writerUserCertification);
+			writerUserDao.addCertification(writerUserCertifications);
 			writerUserDao.updateWriterUser(userId);
 			File migCert = new File(cert);
 			String mongoId = null;
 	        if (migCert.exists()) {
 	        	writerUserCertification.setCert(null);
 	        } else {
-	            mongoId = fileService.saveLocalFile(migCert, FileType.TEACHER_CERTIFICATION_PIC, writerUserCertificationVO.getId());
+	            mongoId = fileService.saveLocalFile(migCert, FileType.TEACHER_CERTIFICATION_PIC, writerUserCertifications.getId());
 	            if (null != mongoId) {
-	            	Long ids = writerUserCertification.getId();
-	            	Long userIds = writerUserCertification.getUserId();
-	            	writerUserCertification.setCert(mongoId);
+	            	Long ids = writerUserCertifications.getId();
+	            	Long userIds = writerUserCertifications.getUserId();
+	            	writerUserCertifications.setCert(mongoId);
 	            	writerUserDao.updateCertification(ids);
 	            	writerUserDao.updateWriterUser(userIds);
 	            }
