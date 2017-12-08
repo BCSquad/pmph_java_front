@@ -46,8 +46,13 @@ public interface WriterUserDao {
 	 * @param id
 	 * @return
 	 */
-	WriterUserCertificationVO showTeacherCertification(@Param("id") Long id);
-	
+	WriterUserCertificationVO showTeacherCertification(@Param("userId") Long userId);
+	/**
+	 * 所有学校
+	 * @author tyc
+     * @createDate 2017年12月8日 上午08:34:22
+	 * @return
+	 */
 	List<Org> getOrgList();
 	/**
 	 * 添加学校教师认证
@@ -66,6 +71,14 @@ public interface WriterUserDao {
 	 * @return
 	 */
 	WriterUserCertification updateCertification(Long id);
+	/**
+	 * 修改用户
+	 * @author tyc
+     * @createDate 2017年12月8日 下午16:44:27
+	 * @param userId
+	 * @return
+	 */
+	WriterUser updateWriterUser(Long userId);
 	
 	/**
 	 * 根据id和用户名修改用户密码

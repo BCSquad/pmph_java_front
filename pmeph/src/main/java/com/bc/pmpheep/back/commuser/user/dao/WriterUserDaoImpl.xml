@@ -341,7 +341,7 @@
 		select *,wu.realname,o.org_name from writer_user_certification wuc 
 		left join (select id,realname from writer_user) wu on (wu.id=wuc.user_id) 
 		left join (select id,org_name from org) o on (o.id=wuc.org_id)
-		where wuc.id=#{id}
+		where wuc.user_id=#{userId}
 	</select>
 	<select id="getOrgList" parameterType="list" resultType="Org">
 		select id,org_name from org where org_type_id!=1
@@ -358,10 +358,10 @@
 	<update id="updateCertification" parameterType="WriterUserCertification">
 		UPDATE writer_user_certification
 		<set>
-			<if test="userid != null and userid !=''">
-				user_id = #{userid}
+			<if test="userId != null">
+				user_id = #{userId},
 			</if>
-			<if test="orgId != null and  orgId!=''">
+			<if test="orgId != null">
 				org_id = #{orgId},
 			</if>
 			<if test=" handphone != null and handphone !=''">
@@ -370,7 +370,7 @@
 			<if test=" idcard != null and idcard !=''">
 				idcard= #{idcard},
 			</if>
-			<if test=" progress != null and  progress != ''">
+			<if test=" progress != null">
 				progress = #{progress},
 			</if>
 			<if test=" cert != null and  cert != ''">
@@ -379,6 +379,106 @@
 		</set>
 		WHERE
 		id = #{id}
+	</update>
+	<update id="updateWriterUser" parameterType="WriterUser">
+		UPDATE writer_user
+		<set>
+			<if test="username != null and username!=''">
+				username = #{username},
+			</if>
+			<if test="password != null and password!='' ">
+				`password` = #{password},
+			</if>
+			<if test=" isDisabled!= null ">
+				is_disabled= #{isDisabled},
+			</if>
+			<if test="orgId != null and  orgId!=''">
+				org_id = #{orgId},
+			</if>
+			<if test=" nickname!= null and nickname !=''">
+				nickname= #{nickname},
+			</if>
+			<if test=" realname!= null and realname !=''">
+				realname= #{realname},
+			</if>
+			<if test=" sex!= null and  sex!=''">
+				sex= #{sex},
+			</if>
+			<if test=" birthday!= null">
+				birthday= #{birthday},
+			</if>
+			<if test=" experience!= null and  experience!=''">
+				experience = #{experience},
+			</if>
+			<if test=" position!= null and  position!=''">
+				position= #{position},
+			</if>
+			<if test=" title!= null and title !=''">
+				title= #{title},
+			</if>
+			<if test=" fax!= null and  fax!=''">
+				fax= #{fax},
+			</if>
+			<if test=" handphone!= null and handphone !=''">
+				handphone = #{handphone},
+			</if>
+			<if test=" telephone!= null and  telephone!=''">
+				telephone = #{telephone},
+			</if>
+			<if test=" idcard!= null and idcard !=''">
+				idcard= #{idcard},
+			</if>
+			<if test=" email!= null and email !=''">
+				email= #{email},
+			</if>
+			<if test=" address!= null and  address!=''">
+				address= #{address},
+			</if>
+			<if test=" postcode!= null and  postcode!=''">
+				postcode = #{postcode},
+			</if>
+			<if test=" rank!= null and  rank!=''">
+				rank = #{rank},
+			</if>
+			<if test=" isTeacher!= null ">
+				is_teacher= #{isTeacher},
+			</if>
+			<if test=" cert!= null and  cert!=''">
+				cert = #{cert},
+			</if>
+			<if test=" authTime!= null">
+				auth_time = #{authTime},
+			</if>
+			<if test=" authUserType!= null and  authUserType!=''">
+				auth_user_type= #{authUserType},
+			</if>
+			<if test=" authUserId!= null and  authUserId!=''">
+				auth_user_id= #{authUserId},
+			</if>
+			<if test=" isWriter!= null ">
+				is_writer= #{isWriter},
+			</if>
+			<if test=" isExpert!= null ">
+				is_expert = #{isExpert},
+			</if>
+			<if test=" avatar!= null and  avatar!=''">
+				avatar= #{avatar},
+			</if>
+			<if test=" signature!=null and signature!=''">
+			    signature = #{signature},
+			</if>
+			<if test=" note!= null and  note!=''">
+				note = #{note},
+			</if>
+			<if test=" sort!= null and  sort!=''">
+				sort = #{sort},
+			</if>
+			<if test=" isDeleted!= null">
+				is_deleted= #{isDeleted},
+			</if>
+		</set>
+		WHERE
+		id = #{user_id}
 	</update>
 	
 	<!-- 根据id和用户名修改用户密码-->

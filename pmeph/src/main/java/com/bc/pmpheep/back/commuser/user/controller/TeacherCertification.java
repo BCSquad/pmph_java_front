@@ -29,16 +29,16 @@ public class TeacherCertification extends BaseController {
     private WriterUserService writerUserService;
 
     @RequestMapping(value = "/showTeacherCertification", method = RequestMethod.GET)
-    public ModelAndView showTeacherCertification(@RequestParam("id") Long id) {
+    public ModelAndView showTeacherCertification(@RequestParam("userId") Long userId) {
         ModelAndView model = new ModelAndView();
         model.setViewName("authadmin/teacherauth/teacherAttest");
         WriterUserCertificationVO showWriterUserCertification =
-        writerUserService.showTeacherCertification(id);
+        writerUserService.showTeacherCertification(userId);
         model.addObject("showWriterUserCertification", showWriterUserCertification);
         return model;
     }
 
-    @RequestMapping(value = "/updateTeacherCertification", method = RequestMethod.GET)
+    @RequestMapping(value = "/updateTeacherCertification", method = RequestMethod.POST)
     public ModelAndView updateTeacherCertification(
     WriterUserCertificationVO writerUserCertificationVO) throws IOException {
         ModelAndView model = new ModelAndView();

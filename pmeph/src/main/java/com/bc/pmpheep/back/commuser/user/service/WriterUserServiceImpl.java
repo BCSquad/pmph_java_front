@@ -57,12 +57,12 @@ public class WriterUserServiceImpl implements WriterUserService {
 	}
 
 	@Override
-	public WriterUserCertificationVO showTeacherCertification(Long id) {
-		if (ObjectUtil.isNull(id)) {
+	public WriterUserCertificationVO showTeacherCertification(Long userId) {
+		if (ObjectUtil.isNull(userId)) {
 			throw new CheckedServiceException(CheckedExceptionBusiness.USER_MANAGEMENT,
-					CheckedExceptionResult.NULL_PARAM, "id不能为空");
+					CheckedExceptionResult.NULL_PARAM, "userId不能为空");
 		}
-		WriterUserCertificationVO writerUserCertificationVO = writerUserDao.showTeacherCertification(id);
+		WriterUserCertificationVO writerUserCertificationVO = writerUserDao.showTeacherCertification(userId);
 		List<Org> orgList = writerUserDao.getOrgList();
 		writerUserCertificationVO.setOrgList(orgList);
 		/*String cert = writerUserCertificationVO.getCert();
@@ -83,6 +83,7 @@ public class WriterUserServiceImpl implements WriterUserService {
 					CheckedExceptionResult.NULL_PARAM, "作家用户信息不能为空");
 		}
 		// 获取需要插入数据库的数据
+		Long id = writerUserCertificationVO.getId();
 		Long userId = writerUserCertificationVO.getUserId(); // 获取作家id
 		Long orgId = writerUserCertificationVO.getOrgId(); // 获取对应学校id
 		String handPhone = writerUserCertificationVO.getHandphone(); // 获取手机
@@ -91,36 +92,34 @@ public class WriterUserServiceImpl implements WriterUserService {
 		String cert = writerUserCertificationVO.getCert(); // 获取教师资格证
 		// 把获取的数据添加进writerUserCertification
 		WriterUserCertification writerUserCertification = new WriterUserCertification();
+		writerUserCertification.setId(id);
 		writerUserCertification.setUserId(userId);
 		writerUserCertification.setOrgId(orgId);
 		writerUserCertification.setHandphone(handPhone);
 		writerUserCertification.setIdcard(idCard);
 		writerUserCertification.setProgress(progress);
-		writerUserCertification.setCert(null);
-		writerUserDao.addCertification(writerUserCertification);
-		File migCert = null;
-		if (StringUtil.isEmpty(cert)) {
-			writerUserCertification.setCert(null);
-        } else {
-        	migCert = new File(cert);
-            if (migCert.exists()) {
-                String fileName = migCert.getName(); // 获取原文件名字
-                writerUserCertification.setCert(fileName);
-            } else {
-            	writerUserCertification.setCert(null);
-            }
-        }
-		String mongoId = null;
-        if (null == migCert) {
-        	writerUserCertification.setCert(null);
-        } else {
-            mongoId = fileService.saveLocalFile(migCert, FileType.TEACHER_CERTIFICATION_PIC, writerUserCertificationVO.getId());
-            if (null != mongoId) {
-            	Long ids = writerUserCertification.getId();
-            	writerUserCertification.setCert(mongoId);
-            	writerUserDao.updateCertification(ids);
-            }
-        }
+		writerUserCertification.setCert(cert);
+		if (ObjectUtil.isNull(id)) { //id为空就增加否则修改
+			writerUserDao.addCertification(writerUserCertification);
+			writerUserDao.updateWriterUser(userId);
+			File migCert = new File(cert);
+			String mongoId = null;
+	        if (migCert.exists()) {
+	        	writerUserCertification.setCert(null);
+	        } else {
+	            mongoId = fileService.saveLocalFile(migCert, FileType.TEACHER_CERTIFICATION_PIC, writerUserCertificationVO.getId());
+	            if (null != mongoId) {
+	            	Long ids = writerUserCertification.getId();
+	            	Long userIds = writerUserCertification.getUserId();
+	            	writerUserCertification.setCert(mongoId);
+	            	writerUserDao.updateCertification(ids);
+	            	writerUserDao.updateWriterUser(userIds);
+	            }
+	        }
+		} else {
+			writerUserDao.updateCertification(id);
+			writerUserDao.updateWriterUser(userId);
+		}
 		return writerUserCertification;
 	}
 

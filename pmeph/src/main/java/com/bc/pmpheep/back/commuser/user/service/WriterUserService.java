@@ -40,10 +40,10 @@ public interface WriterUserService {
 	 * 查看学校教师认证信息
 	 * @author tyc
      * @createDate 2017年11月30日 上午10:44:09
-	 * @param id
+	 * @param userId
 	 * @return
 	 */
-	WriterUserCertificationVO showTeacherCertification(Long id);
+	WriterUserCertificationVO showTeacherCertification(Long userId);
 	
 	/**
 	 * 修改学校教师认证

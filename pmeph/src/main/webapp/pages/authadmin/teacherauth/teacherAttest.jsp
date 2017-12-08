@@ -84,6 +84,7 @@ String contextpath=request.getContextPath();
         </div>
 
          <div>
+         <form action="${pageContext.request.contextPath}/teacherCertification/updateTeacherCertification.action" method="post">
             <table border="0" style="margin-left:20px;">
                 <tr>
                     <td colspan="3" align="center"><img alt="" src="<%=path%>/statics/image/_cupline.jpg"/></td>
@@ -94,7 +95,7 @@ String contextpath=request.getContextPath();
                     	<c:when test="${showWriterUserCertification.progress==1}"> 
                     	未提交
 					   	</c:when> 
-					   	<c:when test="${showWriterUserCertification.progress==2}"> 
+					   	<c:when test="${showWriterUserCertification.progress==2}">
                     	已提交
 					   	</c:when>  
 					   	<c:when test="${showWriterUserCertification.progress==3}"> 
@@ -108,20 +109,24 @@ String contextpath=request.getContextPath();
                 </tr>
                 <tr  class="sxy-tr">
                     <td align="right" style="width:100px;"><font class="td-font-1">*姓名</font></td>
-                    <td style="width:280px;"><input class="sxy-txt" type="text" value="${showWriterUserCertification.realName}"/></td>
+                    <td style="width:280px;">
+                    <input class="sxy-txt" type="hidden" value="1" name="progress"/>
+                    <input class="sxy-txt" type="hidden" value="${showWriterUserCertification.id}" name="id"/>
+                    <input class="sxy-txt" type="hidden" value="${showWriterUserCertification.userId}" name="userId"/>
+                    <input class="sxy-txt" type="text" value="${showWriterUserCertification.realName}" name="realName"/></td>
                     <td><font class="td-font-3">请填写与与教师资格证上一致的真实姓名</font></td>
                 </tr>
                 <tr  class="sxy-tr">
                     <td align="right"><font class="td-font-1">*身份证号</font></td>
-                    <td><input class="sxy-txt" type="text" value="${showWriterUserCertification.idcard}"/></td>
+                    <td><input class="sxy-txt" type="text" value="${showWriterUserCertification.idcard}" name="idcard"/></td>
                     <td><font class="td-font-3">请填正确的身份证信息</font></td>
                 </tr>
                 <tr  class="sxy-tr">
                     <td align="right"><font class="td-font-1">*选择学校</font></td>
                     <td>
-                        <select class="sxy-select-td" id="Select1" name="position">
-                        <c:forEach var = "org" items="showWriterUserCertification.orgList">
-                        	<option value="${org.id}"  <c:if test="${org.id==showWriterUserCertification.orgId}">selected</c:if>>${org.orgName}</option>
+                        <select class="sxy-select-td" id="Select1" name="orgId">
+                        <c:forEach var = "org" items="${showWriterUserCertification.orgList}"  >
+                        	<option value="${org.id}" <c:if test ="${org.id==showWriterUserCertification.orgId}" >selected</c:if> >${org.orgName}</option>
                         </c:forEach>
                         </select>
                     </td>
@@ -129,12 +134,12 @@ String contextpath=request.getContextPath();
                 </tr>
                 <tr  class="sxy-tr">
                     <td align="right"><font class="td-font-1">*手机</font></td>
-                    <td><input class="sxy-txt" type="text" value="${showWriterUserCertification.handphone}"/></td>
+                    <td><input class="sxy-txt" type="text" value="${showWriterUserCertification.handphone}" name="handphone"/></td>
                     <td><font class="td-font-3">请填写正确的手机号码，以使我们能及时联系到您</font></td>
                 </tr>
                 <tr  class="sxy-tr">
                     <td align="right"><font class="td-font-1">*教师资格证</font></td>
-                    <td><input class="sxy-txt" type="text" value="${showWriterUserCertification.cert}"/></td>                    
+                    <td><input class="sxy-txt" type="text" value="${showWriterUserCertification.cert}" name="cert"/></td>                    
                     <td><input id="sxy-btn-upload" type="button" value="上传文件"/></td>
                 </tr>               
                 <tr  class="sxy-tr">
@@ -146,6 +151,7 @@ String contextpath=request.getContextPath();
                     <td colspan="3" align="center"><input type="submit" class="btn-2" value="提交"/></td>
                 </tr>
             </table>
+        </form>
         </div>
     </div>    
 
