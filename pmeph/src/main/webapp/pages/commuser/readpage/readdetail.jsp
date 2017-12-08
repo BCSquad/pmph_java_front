@@ -246,7 +246,7 @@
         			    <img src="<%-- ${supMap.image_url} --%>${ctx}/statics/image/ts_06.png" class="righttopbook"/>
         			</div>
         			<div style="float: left;width: 170px;margin-left: 10px;">
-        				<div class="ptts_sp1">${supMap.book_name}麻醉解剖学学习指导与习题集（第3版）</div><div class="watch" onclick="todetail('${supMap.id}')"><div class="lookbook">去看看</div></div>
+        				<div class="ptts_sp1">${supMap.book_name}麻醉解剖学学习指导与习题集（第3版）</div><div class="watch" onclick="todetail('<%-- ${supMap.id} --%>168')"><div class="lookbook">去看看</div></div>
         				<div class="ptts_sp2">${supMap.realname}张励才</div>
         				<div class="ptts_sp3">${supMap.detail}全国高等学校麻醉学专业第四轮规划教材配套教材，根据麻醉...</div>
         			</div>
