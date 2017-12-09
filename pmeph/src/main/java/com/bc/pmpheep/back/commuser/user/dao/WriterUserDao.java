@@ -67,10 +67,10 @@ public interface WriterUserDao {
 	 * 修改学校教师认证
 	 * @author tyc
      * @createDate 2017年11月30日 上午10:44:09
-	 * @param id
+	 * @param writerUserCertification
 	 * @return
 	 */
-	WriterUserCertification updateCertification(Long id);
+	Integer updateCertification(WriterUserCertification  writerUserCertification);
 	/**
 	 * 修改用户
 	 * @author tyc
@@ -78,7 +78,7 @@ public interface WriterUserDao {
 	 * @param userId
 	 * @return
 	 */
-	WriterUser updateWriterUser(Long userId);
+	Integer updateWriterUser(WriterUser writerUser);
 	
 	/**
 	 * 根据id和用户名修改用户密码

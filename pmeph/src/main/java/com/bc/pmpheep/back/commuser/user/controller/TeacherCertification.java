@@ -1,6 +1,7 @@
 package com.bc.pmpheep.back.commuser.user.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,11 +26,13 @@ import com.bc.pmpheep.general.controller.BaseController;
 public class TeacherCertification extends BaseController {
 
     @Autowired
-    @Qualifier("com.bc.pmpheep.back.commuser.user.service.WriterUserServiceImpl")
+    @Qualifier("com.bc.pmpheep.back.commuser.user.service.WriterUserServiceImpl")  
     private WriterUserService writerUserService;
 
     @RequestMapping(value = "/showTeacherCertification", method = RequestMethod.GET)
-    public ModelAndView showTeacherCertification(@RequestParam("userId") Long userId) {
+    public ModelAndView showTeacherCertification( ) {
+    	Map <String,Object> map = this.getUserInfo() ;
+    	Long userId = new Long(String.valueOf(map.get("id")));
         ModelAndView model = new ModelAndView();
         model.setViewName("authadmin/teacherauth/teacherAttest");
         WriterUserCertificationVO showWriterUserCertification =

@@ -478,7 +478,7 @@
 			</if>
 		</set>
 		WHERE
-		id = #{user_id}
+		id = #{id}
 	</update>
 	
 	<!-- 根据id和用户名修改用户密码-->

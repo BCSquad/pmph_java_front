@@ -99,9 +99,13 @@ public class WriterUserServiceImpl implements WriterUserService {
 		writerUserCertifications.setIdcard(idCard);
 		writerUserCertifications.setProgress(progress);
 		writerUserCertifications.setCert(cert);
+		WriterUser writerUser = new WriterUser();
+		writerUser.setIdcard(idCard);
+		writerUser.setHandphone(handPhone);
+		writerUser.setOrgId(orgId);
 		if (ObjectUtil.isNull(id)) { //id为空就增加否则修改
 			writerUserDao.addCertification(writerUserCertifications);
-			writerUserDao.updateWriterUser(userId);
+			writerUserDao.updateWriterUser(writerUser);
 			File migCert = new File(cert);
 			String mongoId = null;
 	        if (migCert.exists()) {
@@ -109,16 +113,17 @@ public class WriterUserServiceImpl implements WriterUserService {
 	        } else {
 	            mongoId = fileService.saveLocalFile(migCert, FileType.TEACHER_CERTIFICATION_PIC, writerUserCertifications.getId());
 	            if (null != mongoId) {
-	            	Long ids = writerUserCertifications.getId();
-	            	Long userIds = writerUserCertifications.getUserId();
+	            	//Long ids = writerUserCertifications.getId();
+	            	//Long userIds = writerUserCertifications.getUserId();
 	            	writerUserCertifications.setCert(mongoId);
-	            	writerUserDao.updateCertification(ids);
-	            	writerUserDao.updateWriterUser(userIds);
+	            	writerUserDao.updateCertification(writerUserCertifications);
+	            	writerUser.setCert(mongoId);
+	            	writerUserDao.updateWriterUser(writerUser);
 	            }
 	        }
 		} else {
-			writerUserDao.updateCertification(id);
-			writerUserDao.updateWriterUser(userId);
+			writerUserDao.updateCertification(writerUserCertifications);
+			writerUserDao.updateWriterUser(writerUser);
 		}
 		return writerUserCertification;
 	}
