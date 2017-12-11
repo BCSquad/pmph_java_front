@@ -39,12 +39,12 @@ public class InfoReportServiceImpl implements InfoReportService {
 		map.put("likecount", likecount);
 		map.put("markcount", markcount);
 		if(map!=null){
-//			Message message=messageService.get(map.get("mid").toString());
-//		    if(message!=null){
-//			 map.put("cmsText", message.getContent());
-//		    }else{
-//		    	map.put("cmsText","");
-//		    }
+			Message message=messageService.get(map.get("mid").toString());
+		    if(message!=null){
+			 map.put("cmsText", message.getContent());
+		    }else{
+		    	map.put("cmsText","");
+		    }
 		}
 		return map;
 	}
