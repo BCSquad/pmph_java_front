@@ -2,12 +2,15 @@ package com.bc.pmpheep.back.commuser.group.controller;
 
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.bc.pmpheep.back.commuser.group.bean.GroupList;
 import com.bc.pmpheep.back.commuser.group.service.GroupService;
 
@@ -54,6 +57,21 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
         return model;
     }
     
+    @RequestMapping("/toMyGroup")
+    public ModelAndView toMyGroup(@RequestParam(value="groupId")Long groupId){
+    	Map<String, Object> map = this.getUserInfo();
+    	Long userId = new Long (String.valueOf(map.get("id")));
+    	ModelAndView modelAndView = new ModelAndView();
+    	modelAndView.addObject("groupId", groupId);
+        //角色
+        modelAndView.addObject("role", groupService.isFounderOrisAdmin(groupId,userId)?"你是这个小组的管理员":"你是这个小组的普通用户");
+        //小组用户
+        modelAndView.addObject("gropuMemebers",groupService.listPmphGroupMember(groupId,userId));
+        //其他小组
+        modelAndView.addObject("otherGroup",groupService.groupList(0,1000000,userId));
+        modelAndView.setViewName("commuser/mygroup/communication");
+        return modelAndView;
+    }
 }
 
 
