@@ -83,7 +83,7 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 	 * 
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/todetail", method = RequestMethod.PUT)
+	@RequestMapping(value = "/todetail", method = RequestMethod.GET)
 	public List<MyMessageVO> detail(Long senderId, Integer senderType, Long receiverId, Integer receiverType) {
 		Map<String, Object> writerUser = this.getUserInfo();
 		Long userId = new Long(String.valueOf(writerUser.get("id")));
