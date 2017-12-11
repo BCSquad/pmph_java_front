@@ -164,7 +164,9 @@
                     if (data.code != '1') {
                         window.message.error(data.msg);
                     } else {
-                        global_copy.success(data.data, textStatus);
+                        if (global_copy.success) {
+                            global_copy.success(data.data, textStatus);
+                        }
                     }
                     return;
                 }
