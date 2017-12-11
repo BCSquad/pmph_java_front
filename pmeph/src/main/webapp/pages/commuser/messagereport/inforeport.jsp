@@ -62,7 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
 
         <div class="sxy-content">
-             ${cmsText }
+             ${rmap.cmsText }
         </div>
 
         </div>
