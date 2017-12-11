@@ -80,32 +80,26 @@ public class AdminInfoController extends BaseController {
      */
     @RequestMapping(value = "updateorguser",method = RequestMethod.POST,consumes="application/json")
     @ResponseBody
-    public ResponseBean<OrgAdminUser> updateOrgUser(@RequestBody OrgAdminUser orgUser){
-        ResponseBean<OrgAdminUser> responseBean=new ResponseBean<>();
+    public String updateOrgUser(@RequestBody OrgAdminUser orgUser){
         orgUser.setId(Long.parseLong("1267"));
-        if (StringUtils.isEmpty(orgUser.getPosition())){
-            orgUser.setPosition("-");
+        String code ="";
+        if (StringUtils.isEmpty(orgUser.getPosition())||
+        	StringUtils.isEmpty(orgUser.getTelephone())||
+        	StringUtils.isEmpty(orgUser.getHandphone())||
+        	StringUtils.isEmpty(orgUser.getPostCode())||
+        	StringUtils.isEmpty(orgUser.getEmail())||
+        	StringUtils.isEmpty(orgUser.getFax())||	
+        	StringUtils.isEmpty(orgUser.getId())||	
+        	StringUtils.isEmpty(orgUser.getAddress())){
+        	
+        	code="fail";
+            
+        }else{
+        	 adminInfoService.updateOrgUser(orgUser);
+             code="success";
         }
-        if (StringUtils.isEmpty(orgUser.getTelephone())){
-            orgUser.setTelephone("-");
-        }
-        if (StringUtils.isEmpty(orgUser.getHandphone())){
-            orgUser.setHandphone("-");
-        }
-        if (StringUtils.isEmpty(orgUser.getPostCode())){
-            orgUser.setPostCode("-");
-        }
-        if (StringUtils.isEmpty(orgUser.getEmail())){
-            orgUser.setEmail("-");
-        }
-        if (StringUtils.isEmpty(orgUser.getFax())){
-            orgUser.setFax("-");
-        }
-        if (StringUtils.isEmpty(orgUser.getAddress())){
-            orgUser.setAddress("-");
-        }
-        adminInfoService.updateOrgUser(orgUser);
-        return responseBean;
+       
+        return code;
     }
 
     /**
@@ -124,7 +118,7 @@ public class AdminInfoController extends BaseController {
         return responseBean;
     }
 
-    @RequestMapping(value = "/uploadProxy",method = RequestMethod.POST)
+    @RequestMapping(value ="/uploadProxy",method = RequestMethod.POST)
     @ResponseBody
     public ResponseBean<OrgAdminUser> uploadProxy(@RequestParam(value = "id",required = true)String id,
                                              @RequestParam("file") MultipartFile file) throws IOException {
