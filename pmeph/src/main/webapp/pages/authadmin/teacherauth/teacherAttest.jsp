@@ -139,7 +139,7 @@ String contextpath=request.getContextPath();
                 </tr>
                 <tr  class="sxy-tr">
                     <td align="right"><font class="td-font-1">*教师资格证</font></td>
-                    <td><input class="sxy-txt" type="text" value="${showWriterUserCertification.cert}" name="cert"/></td>                    
+                    <td><input class="sxy-txt" type="text" value="${showWriterUserCertification.certName}" name="cert"/></td>                    
                     <td><input id="sxy-btn-upload" type="button" value="上传文件"/></td>
                 </tr>               
                 <tr  class="sxy-tr">
