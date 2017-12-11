@@ -19,9 +19,11 @@
 
  .item1 {
     height: 40px;
+    margin-bottom: 30px;
 }
 
  .title2{
+ 	float:left;
 	width: 64px;
 	height: 17px;
     margin-top: 8px;
@@ -69,14 +71,14 @@ table thead tr {
     height: 46px;
     line-height: 30px;
     background-color: #dedede;
-    border: solid 1px #dedede;
+    border-right: solid 1px #dedede;
 }
 
 table thead td {
     font-family: MicrosoftYaHei;
     color: #333333;
     font-size: 14px;
-    border: 1px solid #ffffff;
+    border-right: 1px solid #fff;
     padding-left:20px;
 }
 

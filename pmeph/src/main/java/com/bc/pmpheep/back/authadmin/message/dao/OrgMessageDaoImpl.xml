@@ -54,7 +54,7 @@
 	</delete>
 	
 	<!-- 获取机构用户id和作家用户id -->
-	<select id="findOrgUserAndWriterUser" parameterType="java.lang.String" resultType="java.util.Map">
+	<select id="findOrgUserAndWriterUser" parameterType="java.util.Map" resultType="java.util.Map">
 		select a.id as receiver_id,'orgUserId' as type from org_user a,org_user b where a.org_id = b.org_id and a.id=#{userId}
 		union all
 		select d.id as receiver_id, 'writerUserId' as type from org_user c join writer_user d on c.org_id = d.org_id where c.id= #{userId}

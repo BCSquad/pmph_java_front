@@ -39,12 +39,14 @@ public class BookCollectionServiceImpl implements BookCollectionService {
 		result.setPageNumber(param.getPageNumber());
 		int bookcount = bookCollectionDao.queryBookCont(param.getParameter());
 		List<Map<String, Object>> list = bookCollectionDao.queryBookList(param);
+		if(list.size()>0){
 		for (Map<String, Object> map : list) {
 			if("DEFAULT".equals(map.get("image_url"))){
 				map.put("image_url", "statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
 			}
 			int like=bookCollectionDao.queryLikes((BigInteger) map.get("id"),(BigInteger) param.getParameter().get("writerId"));
 		    map.put("like", like);
+		}
 		}
 		result.setTotal(bookcount);
 		result.setRows(list);
@@ -108,8 +110,10 @@ public class BookCollectionServiceImpl implements BookCollectionService {
 		Map<String,Object> map=new HashMap<>();
 		BigInteger step=new BigInteger("1");
 		List<Map<String,Object>> list=bookCollectionDao.queryOther(writerId, favoriteId);
+		if(list.size()>0){
 		for (Map<String, Object> book : list) {
 			bookCollectionDao.updateMarkes((BigInteger)book.get("id"), ((BigInteger) book.get("bookmarks")).subtract(step));
+		}
 		}
 		bookCollectionDao.deleteMark(null, writerId, favoriteId);
 		bookCollectionDao.deleteFavorite(writerId, favoriteId);

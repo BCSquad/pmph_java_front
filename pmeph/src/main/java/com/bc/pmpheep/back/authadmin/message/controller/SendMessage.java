@@ -93,7 +93,10 @@ public class SendMessage extends BaseController {
 		String resultFlag = "true";
 		//String fileName = file.getOriginalFilename(); //文件名
 		//long fileSize = file.getSize(); //文件大小
-		
+		Map<String, Object> user = this.getUserInfo();
+		BigInteger uid = (BigInteger) user.get("id");//用户的id
+		Map<String,Object> paraMap = new HashMap<String,Object>();
+		paraMap.put("userId", uid);
 		String titleValue = request.getParameter("titleValue");
 		String radioValue = request.getParameter("radioValue");
 		String UEContent = request.getParameter("UEContent");
@@ -123,15 +126,15 @@ public class SendMessage extends BaseController {
 		List<UserMessage> userMessageList = new ArrayList<UserMessage>();
 		//获取接受者的id
 		if("0".equals(radioValue)){
-			userIdList = sendMessageServiceImpl.findOrgUserAndWriterUser("524");
+			userIdList = sendMessageServiceImpl.findOrgUserAndWriterUser(paraMap);
 			for(int i =0;i<userIdList.size();i++){
 				UserMessage userMessage = new UserMessage();
 				userMessage.setMsg_id(msg_id);
 				userMessage.setMsg_type(1);
 				userMessage.setReceiver_id(((BigInteger)userIdList.get(i).get("receiver_id")).longValue());
 				userMessage.setReceiver_type(3);
-				userMessage.setSender_id(Long.parseLong("524"));
-				userMessage.setSender_type( 3);
+				userMessage.setSender_id(uid);
+				userMessage.setSender_type(3);
 				userMessage.setTitle(titleValue);
 				userMessageList.add(userMessage);
 				
@@ -151,7 +154,7 @@ public class SendMessage extends BaseController {
 				userMessage.setMsg_type(1);
 				userMessage.setReceiver_id(Long.parseLong(partSelect[i]));
 				userMessage.setReceiver_type(3);
-				userMessage.setSender_id(524);
+				userMessage.setSender_id(uid);
 				userMessage.setSender_type( 3);
 				userMessage.setTitle(titleValue);
 				userMessageList.add(userMessage);

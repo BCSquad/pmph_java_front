@@ -47,6 +47,7 @@ public class ArticleCollectionServiceImpl implements ArticleCollectionService {
 		result.setPageSize(param.getPageSize());
 		int articlecont=articleCollectionDao.queryArticleCont(param.getParameter());
 		List<Map<String, Object>> list=articleCollectionDao.queryArticleList(param);
+		if(list.size()>0){
 		for (Map<String, Object> map : list) {
 			int like=articleCollectionDao.queryLikes((BigInteger) map.get("cid"), (BigInteger) param.getParameter().get("writerId"));
 			map.put("like", like);
@@ -61,6 +62,7 @@ public class ArticleCollectionServiceImpl implements ArticleCollectionService {
 			}else{
 				map.put("imgpath", "statics/image/articon.png");
 			}
+		}
 		}
 		result.setTotal(articlecont);
 		result.setRows(list);
@@ -117,9 +119,11 @@ public class ArticleCollectionServiceImpl implements ArticleCollectionService {
         Map<String,Object> map=new HashMap<>();
         BigInteger step=new BigInteger("1");
         List<Map<String,Object>> list=articleCollectionDao.queryOther(writerId, favoriteId);
+        if(list.size()>0){
         for (Map<String, Object> art : list) {
         	articleCollectionDao.updateMarkes((BigInteger)art.get("cid"), ((BigInteger)art.get("bookmarks")).subtract(step));
 		}
+        }
         articleCollectionDao.deleteMark(null, writerId, favoriteId);
         articleCollectionDao.deleteFavorite(writerId, favoriteId);
 		return map;

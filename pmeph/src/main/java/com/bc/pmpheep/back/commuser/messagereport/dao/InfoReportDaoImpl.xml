@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.commuser.messagereport.dao.InfoReportDao">
+<resultMap type="java.util.Map" id="infoReport"></resultMap>
+   <!--根据信息id查询信息快报 -->  
+   <select id="queryInfoReportById" parameterType="map" resultMap="infoReport">
+       select * from cms_content  where id=#{id}
+   </select> 
+   <!--查询信息快报的列表  -->
+   <select id="queryReportList" parameterType="map" resultMap="infoReport">
+       select * from cms_content  order by gmt_create desc  limit #{num},#{size}
+   </select>
+   <!--查询信息快报的总数量  -->
+   <select id="queryInfoReportCount" resultType="int">
+     select count(1) from  cms_content
+   </select>
+   <!--查询用户对信息快报的点赞次数  -->
+   <select id="queryLike" parameterType="map" resultType="int">
+      select count(1) from cms_user_like where content_id=#{id} and writer_id=#{userId}
+   </select>
+    <!--查询用户对信息快报的收藏的次数  -->
+   <select id="queryMark" parameterType="map" resultType="int">
+      select count(1) from cms_user_mark where content_id=#{id} and writer_id=#{userId}
+   </select>
+   <!--删除点赞记录  -->
+   <delete id="deleteLike" parameterType="map">
+      delete from cms_user_like where  content_id=#{id} and writer_id=#{userId}
+   </delete>
+   <!--更新信息快报的总点赞数  -->
+   <update id="updateLikes" parameterType="map" >
+      update cms_content  set likes=#{likes} where id=#{id}
+   </update>
+   <!--向点赞表中添加点赞记录  -->
+   <insert id="insertLike" parameterType="map">
+      insert into cms_user_like(content_id,writer_id) values(#{id},#{userId})
+   </insert>
+   <!-- 查询用户的默认收藏夹 -->
+   <select id="queryDefaultFavorite" parameterType="long" resultType="java.util.Map">
+      select * from writer_cms_favorite where writer_id=#{userId} and favorite_name='默认收藏夹'
+   </select> 
+   <!-- 查询在默认收藏夹下对信息快报有没有收藏 -->
+   <select id="queryDefaultMark" parameterType="map" resultType="int">
+      select count(1) from cms_user_mark where content_id=#{id} and writer_id=#{userId} and  favorite_id=#{fid}
+   </select>
+   <!-- 删除信息快报在默认收藏夹下的收藏记录 -->
+   <delete id="deleteMark" parameterType="map">
+     delete from cms_user_mark where content_id=#{id} and writer_id=#{userId} and  favorite_id=#{fid}
+   </delete>
+   <!--更新信息快报的收藏总数  -->
+   <update id="updateMarks" parameterType="map">
+     update cms_content set bookmarks=#{marks} where id=#{id}
+   </update>
+   <!-- 添加收藏记录 -->
+   <insert id="insertMark" parameterType="map" >
+      insert  into cms_user_mark (content_id,writer_id,favorite_id) values(#{id},#{userId},#{fid});
+   </insert>
+   <!--添加默认收藏夹 -->
+   <insert id="insertDefaultFavorite" parameterType="long">
+      insert into writer_cms_favorite(favorite_name,writer_id) values('默认收藏夹',#{userId});
+   </insert>
+   <!-- 更改信息快报的点击总数 -->
+   <update id="updateClicks" parameterType="map" >
+      update cms_content  set clicks=#{clicks}  where id=#{id}
+   </update>
+</mapper>

@@ -15,7 +15,7 @@ public interface SendMessageService {
 	 * 获取到接受者id
 	 * @param userId
 	 */
-	public List<Map<String,Object>> findOrgUserAndWriterUser(String userId);
+	public List<Map<String,Object>> findOrgUserAndWriterUser(Map<String, Object> map);
 	
 	/**
 	 * 批量插入消息
