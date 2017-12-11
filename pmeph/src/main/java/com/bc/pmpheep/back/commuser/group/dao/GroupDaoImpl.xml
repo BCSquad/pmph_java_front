@@ -88,4 +88,113 @@
 		#{start},#{pageSize}
         ;
     </select>
+    <delete id="deleteFile" parameterType="java.lang.Long">
+        DELETE FROM pmph_group_file WHERE id = #{id};
+    </delete>
+    
+    <!-- 根据组员id查询PmphGroupMember -->
+	<select id="getPmphGroupMemberByMemberId" resultType="PmphGroupMemberVO">
+		select *
+		from pmph_group_member where
+		group_id=#{groupId} and
+		user_id= #{userId};
+	</select>
+	
+	<!-- 根据小组id查询小组所有成员 -->
+	<select id="listPmphGroupMember" parameterType="java.lang.Long"
+		resultType="PmphGroupMemberVO">
+		select * from pmph_group_member where
+		group_id=#{groupId}
+		and is_deleted = false
+		order by is_founder DESC ,is_admin DESC;
+	</select>
+	
+	<sql id="key">
+		<!-- 去掉最后一个, -->
+		<trim suffixOverrides=",">
+			<if test="groupId != null and groupId !=''">
+				group_id,
+			</if>
+			<if test="memberId != null and memberId !=''">
+				member_id,
+			</if>
+			<if test="fileId != null and fileId !=''">
+				file_id,
+			</if>
+			<if test="fileName != null and fileName !=''">
+				file_name,
+			</if>
+			<if test="download != null and download !=''">
+				download,
+			</if>
+		</trim>
+	</sql>
+	<!-- sql片段对应?,id属性值任意 -->
+	<sql id="value">
+		<!-- 去掉最后一个, -->
+		<trim suffixOverrides=",">
+			<if test="groupId !=null and groupId !=''">
+				#{groupId},
+			</if>
+			<if test="memberId !=null and memberId !=''">
+				#{memberId},
+			</if>
+			<if test="fileId !=null and fileId !=''">
+				#{fileId},
+			</if>
+			<if test="fileName !=null and fileName !=''">
+				#{fileName},
+			</if>
+			<if test="download !=null and download !=''">
+				#{download},
+			</if>
+		</trim>
+	</sql>
+
+	<!-- 新增 GroupFile -->
+	<insert id="addGroupFile" parameterType="GroupFile">
+		<selectKey resultType="java.lang.Long" order="AFTER"
+			keyProperty="id"> <!-- order="AFTER"表示先执行插入语句，之后再执行查询语句 BEFORE 或 AFTER -->
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into pmph_group_file (
+		<include refid="key" />
+		)
+		values(
+		<include refid="value" />
+		) ;
+	</insert>
+	
+	<!-- 根据组员id查询PmphGroupMember -->
+	<select id="getGroupMember" resultType="GroupMember">
+		select *
+		from pmph_group_member where
+		group_id=#{groupId} and
+		user_id= #{userId}
+		;
+	</select>
+	
+	<!-- 更新 GroupFile -->
+	<update id="updateGroupFile" parameterType="GroupFile">
+		update
+		pmph_group_file
+		<set>
+			<if test="groupId != null and groupId !=''">
+				group_id = #{groupId},
+			</if>
+			<if test="memberId != null and memberId !='' ">
+				member_id = #{memberId},
+			</if>
+			<if test=" fileId != null and fileId !=''">
+				file_id= #{fileId},
+			</if>
+			<if test=" fileName != null and fileName !=''">
+				file_name= #{fileName},
+			</if>
+			<if test=" download != null and download !=''">
+				download = #{download},
+			</if>
+		</set>
+		where id=#{id} ;
+	</update>
 </mapper>
