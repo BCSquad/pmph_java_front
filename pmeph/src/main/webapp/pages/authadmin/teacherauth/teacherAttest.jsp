@@ -110,7 +110,7 @@ String contextpath=request.getContextPath();
                 <tr  class="sxy-tr">
                     <td align="right" style="width:100px;"><font class="td-font-1">*姓名</font></td>
                     <td style="width:280px;">
-                    <input class="sxy-txt" type="hidden" value="1" name="progress"/>
+                    <input class="sxy-txt" type="hidden" value="2" name="progress"/>
                     <input class="sxy-txt" type="hidden" value="${showWriterUserCertification.id}" name="id"/>
                     <input class="sxy-txt" type="hidden" value="${showWriterUserCertification.userId}" name="userId"/>
                     <input class="sxy-txt" type="text" value="${showWriterUserCertification.realName}" name="realName"/></td>
