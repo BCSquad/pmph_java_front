@@ -11,5 +11,5 @@ public interface WriterArticleDao {
 		void updateIsStaging(Map map);
 		
 		//
-		Map<String, Object>  queryWriteArticleInfo(Map map);
+		Map<String, Object>  queryWriteArticleInfo(Map<String, Object> map);
 }

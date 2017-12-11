@@ -32,12 +32,21 @@
 		max(gmt_update) 
 		FROM
 			cms_content
-		WHERE
-			parent_id = 0
+		<where>
+		parent_id = 0
 		AND category_id = 1
 		AND author_type = 2
-		AND author_id = #{userId}
 		AND is_staging = 0
+		AND is_deleted = 0
 		AND path = 0
+		<if test="userId != null and userId != '' ">
+		AND author_id = #{userId}
+		</if>
+		<if test="id != null and id != '' ">
+		AND id = #{id}
+		</if>
+		</where>
+		
+		
 	</select>
 </mapper>
