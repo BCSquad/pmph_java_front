@@ -12,11 +12,10 @@
 		WHERE
 		(m.receiver_id = #{parameter.userId} or m.sender_id =
 		#{parameter.userId})
-		AND m.receiver_type =
-		#{parameter.userType}
-		AND
-		m.is_deleted = FALSE
-		AND m.is_withdraw = FALSE
+		AND (m.receiver_type =	#{parameter.userType}
+		OR m.sender_type = #{parameter.userType}) 
+		AND	m.is_deleted = FALSE
+		AND	m.is_withdraw = FALSE
 		AND m.msg_type = 2
 		<if test="parameter.isRead != null">
 			AND m.is_read = #{parameter.isRead}
@@ -35,14 +34,12 @@
 		FROM
 		user_message m
 		WHERE
-		(m.receiver_id = #{parameter.userId} or
-		m.sender_id
-		= #{parameter.userId})
-		AND m.receiver_type =
-		#{parameter.userType}
-		AND
-		m.is_deleted = FALSE
-		AND m.is_withdraw = FALSE
+		(m.receiver_id = #{parameter.userId} or m.sender_id =
+		#{parameter.userId})
+		AND (m.receiver_type =	#{parameter.userType}
+		OR m.sender_type = #{parameter.userType}) 
+		AND	m.is_deleted = FALSE
+		AND	m.is_withdraw = FALSE
 		AND m.msg_type = 2
 		<if test="parameter.isRead != null">
 			AND m.is_read = #{parameter.isRead}

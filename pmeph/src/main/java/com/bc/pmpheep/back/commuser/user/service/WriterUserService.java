@@ -51,8 +51,8 @@ public interface WriterUserService {
 	 * @param writerUserCertification
 	 * @return
 	 */
-	WriterUserCertification updateTeacherCertification(WriterUserCertification writerUserCertification) 
-			throws IOException ;
+	WriterUserCertification updateTeacherCertification(WriterUserCertification writerUserCertification, 
+			String realName) throws IOException ;
 	
 	/**
 	 * 根据id和用户名修改用户密码

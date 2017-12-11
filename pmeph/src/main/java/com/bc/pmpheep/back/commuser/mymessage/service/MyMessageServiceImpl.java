@@ -63,12 +63,12 @@ public class MyMessageServiceImpl implements MyMessageService {
 				myMessageVO.setUserId(pageParameter.getParameter().getUserId());
 				myMessageVO.setUserType(pageParameter.getParameter().getUserType());
 				myMessageVO = setAvatar(myMessageVO);
-				Message message = messageService.get(myMessageVO.getMsgId());
-				if (ObjectUtil.isNull(message)) {
-					throw new CheckedServiceException(CheckedExceptionBusiness.MESSAGE,
-							CheckedExceptionResult.NULL_PARAM, "没有获取到内容！");
-				}
-				myMessageVO.setContent(message.getContent());
+				// Message message = messageService.get(myMessageVO.getMsgId());
+				// if (ObjectUtil.isNull(message)) {
+				// throw new CheckedServiceException(CheckedExceptionBusiness.MESSAGE,
+				// CheckedExceptionResult.NULL_PARAM, "没有获取到内容！");
+				// }
+				// myMessageVO.setContent(message.getContent());
 			}
 			pageResult.setRows(list);
 		}
@@ -89,30 +89,58 @@ public class MyMessageServiceImpl implements MyMessageService {
 		WriterUser user = writerUserService.get(myMessageVO.getUserId());
 		myMessageVO.setUserAvatar(RouteUtil.userAvatar(user.getAvatar()));
 		myMessageVO.setUserName(user.getRealname());
-		switch (myMessageVO.getSenderType()) {
-		case 0:
-			myMessageVO.setName("系统");
-			break;
-		case 1:
-			PmphUser pmphUser = pmphUserService.get(myMessageVO.getSenderId());
-			myMessageVO.setAvatar(RouteUtil.userAvatar(pmphUser.getAvatar()));
-			myMessageVO.setName(pmphUser.getRealname());
-			break;
+		if (myMessageVO.getSenderId().equals(user.getId()) && myMessageVO.getSenderType().equals(2)) {
+			switch (myMessageVO.getReceiverType()) {
+			case 0:
+				myMessageVO.setName("系统");
+				break;
+			case 1:
+				PmphUser pmphUser = pmphUserService.get(myMessageVO.getReceiverId());
+				myMessageVO.setAvatar(RouteUtil.userAvatar(pmphUser.getAvatar()));
+				myMessageVO.setName(pmphUser.getRealname());
+				break;
 
-		case 2:
-			WriterUser writerUser = writerUserService.get(myMessageVO.getSenderId());
-			myMessageVO.setAvatar(RouteUtil.userAvatar(writerUser.getAvatar()));
-			myMessageVO.setName(writerUser.getRealname());
-			break;
+			case 2:
+				WriterUser writerUser = writerUserService.get(myMessageVO.getReceiverId());
+				myMessageVO.setAvatar(RouteUtil.userAvatar(writerUser.getAvatar()));
+				myMessageVO.setName(writerUser.getRealname());
+				break;
 
-		case 3:
-			// 现在没有机构用户
-			break;
+			case 3:
+				// 现在没有机构用户
+				break;
 
-		default:
-			throw new CheckedServiceException(CheckedExceptionBusiness.MESSAGE, CheckedExceptionResult.NULL_PARAM,
-					"发送者类型不正确！");
+			default:
+				throw new CheckedServiceException(CheckedExceptionBusiness.MESSAGE, CheckedExceptionResult.NULL_PARAM,
+						"发送者类型不正确！");
+			}
+		} else {
+			switch (myMessageVO.getSenderType()) {
+			case 0:
+				myMessageVO.setName("系统");
+				break;
+			case 1:
+				PmphUser pmphUser = pmphUserService.get(myMessageVO.getSenderId());
+				myMessageVO.setAvatar(RouteUtil.userAvatar(pmphUser.getAvatar()));
+				myMessageVO.setName(pmphUser.getRealname());
+				break;
+
+			case 2:
+				WriterUser writerUser = writerUserService.get(myMessageVO.getSenderId());
+				myMessageVO.setAvatar(RouteUtil.userAvatar(writerUser.getAvatar()));
+				myMessageVO.setName(writerUser.getRealname());
+				break;
+
+			case 3:
+				// 现在没有机构用户
+				break;
+
+			default:
+				throw new CheckedServiceException(CheckedExceptionBusiness.MESSAGE, CheckedExceptionResult.NULL_PARAM,
+						"发送者类型不正确！");
+			}
 		}
+
 		if (myMessageVO.getUserId().equals(myMessageVO.getReceiverId())
 				&& myMessageVO.getUserType().equals(myMessageVO.getReceiverType())) {// 当接收者是当前用户时，表示不是我发送的
 			myMessageVO.setIsMy(false);
@@ -150,12 +178,13 @@ public class MyMessageServiceImpl implements MyMessageService {
 			myMessageVO.setUserId(userId);
 			myMessageVO.setUserType(userType);
 			myMessageVO = setAvatar(myMessageVO);
-			Message message = messageService.get(myMessageVO.getMsgId());
-			if (ObjectUtil.isNull(message)) {
-				throw new CheckedServiceException(CheckedExceptionBusiness.MESSAGE, CheckedExceptionResult.NULL_PARAM,
-						"没有获取到内容！");
-			}
-			myMessageVO.setContent(message.getContent());
+			// Message message = messageService.get(myMessageVO.getMsgId());
+			// if (ObjectUtil.isNull(message)) {
+			// throw new CheckedServiceException(CheckedExceptionBusiness.MESSAGE,
+			// CheckedExceptionResult.NULL_PARAM,
+			// "没有获取到内容！");
+			// }
+			// myMessageVO.setContent(message.getContent());
 
 		}
 		return list;
@@ -175,8 +204,8 @@ public class MyMessageServiceImpl implements MyMessageService {
 	}
 
 	@Override
-	public void senNewMsg(Long thisId,Long frendId,Short friendIdType,String title,String content){
-		Message message =  new Message ();
+	public void senNewMsg(Long thisId, Long frendId, Short friendIdType, String title, String content) {
+		Message message = new Message();
 		message.setContent(content);
 		messageService.add(message);
 		MyMessage userMessage = new MyMessage();
@@ -184,9 +213,9 @@ public class MyMessageServiceImpl implements MyMessageService {
 		userMessage.setMsgType(new Short("2"));
 		userMessage.setTitle(title);
 		userMessage.setSenderId(thisId);
-		if(null == friendIdType){
+		if (null == friendIdType) {
 			userMessage.setSenderType(new Short("2"));
-		}else{
+		} else {
 			userMessage.setSenderType(friendIdType);
 		}
 		userMessage.setReceiverId(frendId);

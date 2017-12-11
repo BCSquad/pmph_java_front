@@ -29,6 +29,12 @@ public class TeacherCertification extends BaseController {
     @Qualifier("com.bc.pmpheep.back.commuser.user.service.WriterUserServiceImpl")  
     private WriterUserService writerUserService;
 
+    /**
+	 * 查看学校教师认证信息
+	 * @author tyc
+     * @createDate 2017年11月30日 上午10:44:09
+	 * @return
+	 */
     @RequestMapping(value = "/showTeacherCertification", method = RequestMethod.GET)
     public ModelAndView showTeacherCertification( ) {
     	Map <String,Object> map = this.getUserInfo() ;
@@ -41,12 +47,20 @@ public class TeacherCertification extends BaseController {
         return model;
     }
 
+    /**
+	 * 修改学校教师认证
+	 * @author tyc
+     * @createDate 2017年11月30日 上午10:44:09
+	 * @param writerUserCertification
+	 * @param realName
+	 * @return
+	 */
     @RequestMapping(value = "/updateTeacherCertification", method = RequestMethod.POST)
-    public ModelAndView updateTeacherCertification(
-    		WriterUserCertification WriterUserCertification) throws IOException {
+    public ModelAndView updateTeacherCertification(WriterUserCertification WriterUserCertification, 
+    		@RequestParam("realName") String realName) throws IOException {
         ModelAndView model = new ModelAndView();
         WriterUserCertification updateWriterUserCertification =
-        writerUserService.updateTeacherCertification(WriterUserCertification);
+        writerUserService.updateTeacherCertification(WriterUserCertification, realName);
         model.addObject("updateWriterUserCertification", updateWriterUserCertification);
         return model;
     }

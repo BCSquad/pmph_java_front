@@ -10,12 +10,12 @@ $(function() {
 			$("#list").html("");
 			$("#loadMore").show();
 			isRead = $("#select").val();
-			pageSize = 1;
+			pageSize = 5;
 			pageNumber = 1;
 			init();
 		}
 	});
-	var pageSize = 1;
+	var pageSize = 5;
 	var pageNumber = 1;
 	var isRead = null;
 	init();
@@ -98,7 +98,7 @@ $(function() {
 function detail(i) {
 	$
 			.ajax({
-				type : 'put',
+				type : 'get',
 				url : contxtpath + '/mymessage/todetail.action',
 				async : false,
 				contentType : 'application/json',
@@ -111,42 +111,68 @@ function detail(i) {
 				},
 				success : function(res) {
 					if (null != res && res.length >= 0) {
+						data = res;
 						var html = "<div><span class='personMessageTitle'>你与"
-								+ res[0].name
+								+ data[0].name
 								+ "的私信窗口</span><div class='contentBox'><div class='oneTalk'>";
-						for (var i; i < res.length; i++) {
-							if (res[i].isMy) {
+						for (var i; i < data.length; i++) {
+							if (data[i].isMy) {
 								html += "<div class='headAndNameRight float_right'><div class='headDiv'><img class='headPicture' src='"
 										+ contxtpath
-										+ res[i].userAvatar
+										+ data[i].userAvatar
 										+ "'/></div><div class='talkName'><text>"
-										+ res[i].userName
+										+ data[i].userName
 										+ "</text></div></div>";
 								html += "<div class='talkDiv float_right'><div class='sendMessage'><div class='textDiv float_right'>"
-										+ res[i].content
+										+ data[i].content
 										+ "</div></div><div class='talkTime headAndNameRight'>"
-										+ formatDate(res[i].sendTime, "")
+										+ formatDate(data[i].sendTime, "")
 										+ "</div></div>";
 							} else {
 								html += "<div class='headAndNameLeft float_left'><div class='headDiv'><img class='headPicture' src='"
 										+ contxtpath
-										+ res[i].avatar
+										+ data[i].avatar
 										+ "'/></div><div class='talkName'><text>"
-										+ res[i].name + "</text></div></div>";
+										+ data[i].name + "</text></div></div>";
 								html += "<div class='talkDiv float_left'><div class='sendMessage'><div class='textDiv float_left'>"
-										+ res[i].content
+										+ data[i].content
 										+ "</div></div><div class='talkTime talkTimeAlignLeft'>"
-										+ formatDate(res[i].sendTime, "")
+										+ formatDate(data[i].sendTime, "")
 										+ "</div></div>";
 							}
 						}
 						html += "</div></div></div>";
-						html += "<div class='inputBox'><div style='float: left; width: 80%; height: 100%'><textarea style='width: 100%; height: 98%; border: none; outline: 0; font-size: 15px;'	type='text' placeholder='请输入消息内容,按回车键发送'></textarea></div><div style='float: left; width: 20%; height: 100%'><div class='div_btn11' style='cursor: pointer;'><span class='button11'>发送</span></div></div></div>";
+						html += "<div class='inputBox'><div style='float: left; width: 80%; height: 100%'><textarea style='width: 100%; height: 98%; border: none; outline: 0; font-size: 15px;'	type='text' placeholder='请输入消息内容,按回车键发送'></textarea></div><div style='float: left; width: 20%; height: 100%'><div class='div_btn11' style='cursor: pointer;'><span onclick ='send("
+								+ i
+								+ ")' class='button11'>发送</span></div></div></div>";
 						$("#box").append(html);
-						$("#box").setAttribute("class", "b show");
-						$("#close").setAttribute("class", "hiddenX show");
+						box();
 					}
 				}
 			})
 
+}
+
+function box() {
+	document.getElementById("box").setAttribute("class", "b show");
+	document.getElementById("close").setAttribute("class", "hiddenX show");
+}
+
+function send(i) {
+	$.ajax({
+		type : 'post',
+		url : contxtpath + '/mymessage/senNewMsg.action',
+		async : false,
+		contentType : 'application/json',
+		dataType : 'json',
+		data : {
+			senderId : data[i].senderId,
+			senderType : data[i].senderType,
+			receiverId : data[i].receiverId,
+			receiverType : data[i].receiverType
+		},
+		success : function(res) {
+			}
+		}
+})
 }
