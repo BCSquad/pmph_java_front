@@ -20,6 +20,21 @@ String contextpath=request.getContextPath();
     <link href="<%=path%>/statics/authadmin/teacherauth/teacherAttest.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript">
+    	function upload(){
+	       if($("#realName").val()==""){
+	           alert("真实姓名不能为空!");
+	           return false;
+	       }
+	       if($("#idcard").val()==""){
+	           alert("身份证号不能为空!");
+	           return false;
+	       }
+	       if($("#handphone").val()==""){
+	           alert("手机号不能为空!");
+	           return false;
+	       }
+	       return true;
+    	}
         $(function () {
             $('select').selectlist({
                 zIndex: 10,
@@ -113,12 +128,12 @@ String contextpath=request.getContextPath();
                     <input class="sxy-txt" type="hidden" value="2" name="progress"/>
                     <input class="sxy-txt" type="hidden" value="${showWriterUserCertification.id}" name="id"/>
                     <input class="sxy-txt" type="hidden" value="${showWriterUserCertification.userId}" name="userId"/>
-                    <input class="sxy-txt" type="text" value="${showWriterUserCertification.realName}" name="realName"/></td>
+                    <input id="realName" class="sxy-txt" type="text" value="${showWriterUserCertification.realName}" name="realName"/></td>
                     <td><font class="td-font-3">请填写与与教师资格证上一致的真实姓名</font></td>
                 </tr>
                 <tr  class="sxy-tr">
                     <td align="right"><font class="td-font-1">*身份证号</font></td>
-                    <td><input class="sxy-txt" type="text" value="${showWriterUserCertification.idcard}" name="idcard"/></td>
+                    <td><input id="idcard" class="sxy-txt" type="text" value="${showWriterUserCertification.idcard}" name="idcard"/></td>
                     <td><font class="td-font-3">请填正确的身份证信息</font></td>
                 </tr>
                 <tr  class="sxy-tr">
@@ -134,7 +149,7 @@ String contextpath=request.getContextPath();
                 </tr>
                 <tr  class="sxy-tr">
                     <td align="right"><font class="td-font-1">*手机</font></td>
-                    <td><input class="sxy-txt" type="text" value="${showWriterUserCertification.handphone}" name="handphone"/></td>
+                    <td><input id="handphone" class="sxy-txt" type="text" value="${showWriterUserCertification.handphone}" name="handphone"/></td>
                     <td><font class="td-font-3">请填写正确的手机号码，以使我们能及时联系到您</font></td>
                 </tr>
                 <tr  class="sxy-tr">
@@ -148,7 +163,7 @@ String contextpath=request.getContextPath();
                 </tr>
                 <tr><td colspan="3" align="center"><img alt="" src="<%=path%>/statics/image/_cupline.jpg"/></td></tr>
                 <tr  class="sxy-tr">
-                    <td colspan="3" align="center"><input type="submit" class="btn-2" value="提交"/></td>
+                    <td colspan="3" align="center"><input type="submit" class="btn-2" value="提交" onClick="upload()"/></td>
                 </tr>
             </table>
         </form>
