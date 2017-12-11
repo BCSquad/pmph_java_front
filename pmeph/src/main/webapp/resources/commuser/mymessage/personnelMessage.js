@@ -28,7 +28,6 @@ $(function() {
 		$.ajax({
 	        type:'get',
 	        url :contxtpath+'/mymessage/getDialogue.action',
-	        async:false,
 	        contentType: 'application/json',
 	        dataType:'json',
 	        data:{
@@ -79,7 +78,6 @@ $(function() {
 		        	$.ajax({
 		    	        type:'get',
 		    	        url :contxtpath+'/mymessage/updateMyTalk.action',
-		    	        async:false,
 		    	        contentType: 'application/json',
 		    	        dataType:'json',
 		    	        data:{

@@ -26,7 +26,6 @@ $(function(){
 		$.ajax({
 	        type:'get',
 	        url :contxtpath+'/mymessage/getDialogue.action',
-	        async:false,
 	        contentType: 'application/json',
 	        dataType:'json',
 	        data:{
@@ -74,6 +73,20 @@ $(function(){
 	        		}
 	        	}
 	        	show();
+	        	//更新消息状态
+	        	$.ajax({
+	    	        type:'get',
+	    	        url :contxtpath+'/mymessage/updateMyTalk.action',
+	    	        contentType: 'application/json',
+	    	        dataType:'json',
+	    	        data:{
+	    	        	senderId   : frendid,
+	    	        	senderType : 2
+	    	        },
+	    	        success:function(responsebean){
+	    	        	
+	    	        }
+	    	    });
 	        }
 	    });
 		
