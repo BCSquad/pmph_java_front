@@ -21,9 +21,9 @@ public class SendMessageServiceImpl implements SendMessageService {
 	 * @param userId
 	 */
 	@Override
-	public List<Map<String,Object>> findOrgUserAndWriterUser(String userId) {
+	public List<Map<String,Object>> findOrgUserAndWriterUser(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return orgMessageDao.findOrgUserAndWriterUser(userId);
+		return orgMessageDao.findOrgUserAndWriterUser(map);
 	}
 	
 	/**
