@@ -1,5 +1,7 @@
 package com.bc.pmpheep.back.authadmin.message.bean;
 
+import java.math.BigInteger;
+
 /**
  * 机构用户发送新消息 （批量）
  * @author xcy
@@ -22,7 +24,7 @@ public class UserMessage {
 	/**
 	 * 发送者id
 	 */
-	private long sender_id;  
+	private BigInteger sender_id;  
 	/**
 	 * 发送者类型
 	 */
@@ -53,10 +55,10 @@ public class UserMessage {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public long getSender_id() {
+	public BigInteger getSender_id() {
 		return sender_id;
 	}
-	public void setSender_id(long sender_id) {
+	public void setSender_id(BigInteger sender_id) {
 		this.sender_id = sender_id;
 	}
 	public int getSender_type() {
