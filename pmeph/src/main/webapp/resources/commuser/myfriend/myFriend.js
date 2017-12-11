@@ -78,8 +78,19 @@ $(function(){
 	    });
 		
 	});
-	
+	//回车事件
+	$(".inputBox").keypress(function (e){ 
+		var code = event.keyCode; 
+		if (13 == code) { 
+			sendNewMsg(); 
+		} 
+	}); 
+	//发送消息
 	$("#sendNewMsg").click(function(){
+		sendNewMsg () ;
+	});
+	
+	function sendNewMsg (){
 		var content=$("#content").val();
 		if(!content || content.trim() ==''){
 			window.message.warning("请键入消息");
@@ -105,7 +116,7 @@ $(function(){
 		        }
 			});
 		}
-	});
+	}
 	
 	function formatDate(nS,str) {
 		  if(!nS){

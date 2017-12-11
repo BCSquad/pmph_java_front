@@ -2,13 +2,8 @@ package com.bc.pmpheep.back.commuser.mymessage.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.bc.pmpheep.back.commuser.mymessage.bean.DialogueVO;
 import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
-import com.bc.pmpheep.back.plugin.PageParameter;
-import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 
 public interface MyMessageService {
@@ -24,7 +19,7 @@ public interface MyMessageService {
 	 * @throws CheckedServiceException
 	 * 
 	 */
-	PageResult<MyMessageVO> listMyMessage(PageParameter<MyMessageVO> pageParameter) throws CheckedServiceException;
+	List<MyMessageVO> listMyMessage(Integer pageNumber,Integer pageSize,String state,Long userId) throws CheckedServiceException;
 	
 	/**
 	 * 
@@ -50,7 +45,20 @@ public interface MyMessageService {
 	 * @param friendId
 	 * @return
 	 */
-	List<DialogueVO> findMyDialogue  (Long thisId,Long friendId);
+	List<DialogueVO> findMyDialogue  (Long thisId,Long friendId,Integer friendType);
+	
+    /**
+     * 
+     * 更新我和对话者的对话状态
+     * @author Mryang
+     * @createDate 2017年12月11日 下午4:57:50
+     * @param senderId
+     * @param senderType
+     * @param receiverId
+     * @param receiverType
+     * @return
+     */
+	Integer updateMyTalk(Long senderId, Short senderType, Long receiverId, Short receiverType);
 	
 	/**
 	 * 发送私信

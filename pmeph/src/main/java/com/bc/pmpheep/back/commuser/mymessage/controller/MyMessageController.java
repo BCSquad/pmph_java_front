@@ -16,8 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bc.pmpheep.back.commuser.mymessage.bean.DialogueVO;
 import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
 import com.bc.pmpheep.back.commuser.mymessage.service.MyMessageService;
-import com.bc.pmpheep.back.plugin.PageParameter;
-import com.bc.pmpheep.back.plugin.PageResult;
+
 
 /**
  * @author 曾庆峰
@@ -60,16 +59,11 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/tolist", method = RequestMethod.GET)
-	public PageResult<MyMessageVO> list(Integer pageSize, Integer pageNumber, Boolean isRead) {
+	public List<MyMessageVO> list(Integer pageSize, Integer pageNumber,String state) {
 		Map<String, Object> writerUser = this.getUserInfo();
 		Long userId = new Long(String.valueOf(writerUser.get("id")));
-		PageParameter<MyMessageVO> pageParameter = new PageParameter<>(pageNumber, pageSize);
-		MyMessageVO myMessageVO = new MyMessageVO();
-		myMessageVO.setUserId(userId);
-		myMessageVO.setUserType(2);
-		myMessageVO.setIsRead(isRead);
-		pageParameter.setParameter(myMessageVO);
-		return myMessageService.listMyMessage(pageParameter);
+		List<MyMessageVO> list = myMessageService.listMyMessage(pageNumber,pageSize,state,userId);
+		return list;
 	}
 
 	/**
@@ -108,10 +102,10 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/getDialogue", method = RequestMethod.GET)
-	public List<DialogueVO> getDialogue(@RequestParam(value = "friendId") Long friendId) {
+	public List<DialogueVO> getDialogue(@RequestParam(value = "friendId") Long friendId,Integer friendType) {
 		Map<String, Object> writerUser = this.getUserInfo();
 		Long thisId = new Long(String.valueOf(writerUser.get("id")));
-		List<DialogueVO> lst = myMessageService.findMyDialogue(thisId, friendId);
+		List<DialogueVO> lst = myMessageService.findMyDialogue(thisId, friendId,friendType);
 		return lst;
 	}
 
@@ -122,6 +116,15 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 		Map<String, Object> writerUser = this.getUserInfo();
 		Long thisId = new Long(String.valueOf(writerUser.get("id")));
 		myMessageService.senNewMsg(thisId, friendId, friendIdType, title, content);
+		return "success";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/updateMyTalk", method = RequestMethod.GET)
+	public String senNewMsg(@RequestParam(value = "senderId") Long senderId, @RequestParam(value = "senderType")Short senderType ) {
+		Map<String, Object> writerUser = this.getUserInfo();
+		Long  thisId = new Long(String.valueOf(writerUser.get("id")));
+		myMessageService.updateMyTalk(senderId,senderType, thisId,new Short("2"));
 		return "success";
 	}
 
