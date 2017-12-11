@@ -42,11 +42,11 @@ public class TeacherCertification extends BaseController {
     }
 
     @RequestMapping(value = "/updateTeacherCertification", method = RequestMethod.POST)
-    public ModelAndView updateTeacherCertification(
-    		WriterUserCertification WriterUserCertification) throws IOException {
+    public ModelAndView updateTeacherCertification(WriterUserCertification WriterUserCertification, 
+    		@RequestParam("realName") String realName) throws IOException {
         ModelAndView model = new ModelAndView();
         WriterUserCertification updateWriterUserCertification =
-        writerUserService.updateTeacherCertification(WriterUserCertification);
+        writerUserService.updateTeacherCertification(WriterUserCertification, realName);
         model.addObject("updateWriterUserCertification", updateWriterUserCertification);
         return model;
     }

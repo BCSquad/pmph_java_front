@@ -65,19 +65,16 @@ public class WriterUserServiceImpl implements WriterUserService {
 		WriterUserCertificationVO writerUserCertificationVO = writerUserDao.showTeacherCertification(userId);
 		List<Org> orgList = writerUserDao.getOrgList();
 		writerUserCertificationVO.setOrgList(orgList);
-		/*String cert = writerUserCertificationVO.getCert();
-		String mongoId = null;
-		if (cert.isEmpty()) {
-			
-		} else {
-			
-		}*/
+		String cert = writerUserCertificationVO.getCert();
+		if (StringUtil.notEmpty(cert)) {
+			fileService.get(cert);
+		}
 		return writerUserCertificationVO;
 	}
 
 	@Override
-	public WriterUserCertification updateTeacherCertification(WriterUserCertification writerUserCertification) 
-			throws IOException {
+	public WriterUserCertification updateTeacherCertification(WriterUserCertification writerUserCertification, 
+			String realName) throws IOException {
 		if (ObjectUtil.isNull(writerUserCertification)) { // 获取的数据不能为空
 			throw new CheckedServiceException(CheckedExceptionBusiness.USER_MANAGEMENT,
 					CheckedExceptionResult.NULL_PARAM, "作家用户信息不能为空");
@@ -103,6 +100,7 @@ public class WriterUserServiceImpl implements WriterUserService {
 		writerUser.setIdcard(idCard);
 		writerUser.setHandphone(handPhone);
 		writerUser.setOrgId(orgId);
+		writerUser.setRealname(realName);
 		if (ObjectUtil.isNull(id)) { //id为空就增加否则修改
 			writerUserDao.addCertification(writerUserCertifications);
 			writerUserDao.updateWriterUser(writerUser);
@@ -113,8 +111,6 @@ public class WriterUserServiceImpl implements WriterUserService {
 	        } else {
 	            mongoId = fileService.saveLocalFile(migCert, FileType.TEACHER_CERTIFICATION_PIC, writerUserCertifications.getId());
 	            if (null != mongoId) {
-	            	//Long ids = writerUserCertifications.getId();
-	            	//Long userIds = writerUserCertifications.getUserId();
 	            	writerUserCertifications.setCert(mongoId);
 	            	writerUserDao.updateCertification(writerUserCertifications);
 	            	writerUser.setCert(mongoId);
