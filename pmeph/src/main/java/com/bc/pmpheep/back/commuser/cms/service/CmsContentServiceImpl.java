@@ -18,7 +18,7 @@ import com.bc.pmpheep.general.service.FileService;
  * @author Mr
  *
  */
-@Service
+@Service("com.bc.pmpheep.back.commuser.cms.service.CmsContentServiceImpl")
 public class CmsContentServiceImpl implements CmsContentService{
 	
 	@Autowired
@@ -26,28 +26,11 @@ public class CmsContentServiceImpl implements CmsContentService{
 	
 	@Autowired
 	private FileService fileService;
-	
-	@Override
-	public PageResult<CmsContentVO> list(PageParameter<CmsContentVO> pageParameter) {
-		PageResult<CmsContentVO> pageResult = new PageResult<>();
-		Integer total = cmsContentDao.getCmsContentListTotal();
-		if (total > 0) {
-			PageParameterUitl.CopyPageParameter(pageParameter, pageResult);
-			List<CmsContentVO>  list = cmsContentDao.list(pageParameter);
-			for (CmsContentVO cmsContentVO : list) {
-				cmsContentVO.setAuthorImg(RouteUtil.DEFAULT_USER_AVATAR);
-				cmsContentVO.setCmsImg(RouteUtil.MONGODB_IMAGE);
-			}
-			pageResult.setRows(list);
-		}
-		pageResult.setTotal(total);
-		return pageResult;
-	}
 
 	@Override
 	public PageResult<CmsContentVO> listCms(PageParameter<CmsContentVO> pageParameter) {
 		PageResult<CmsContentVO> pageResult = new PageResult<>();
-		int total = cmsContentDao.getCmsContentCount();
+		int total = cmsContentDao.getCmsContentCount(pageParameter);
         if (total > 0) {
             PageParameterUitl.CopyPageParameter(pageParameter, pageResult);
             pageResult.setRows(cmsContentDao.listCmsContentVO(pageParameter));
