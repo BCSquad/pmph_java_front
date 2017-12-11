@@ -112,11 +112,14 @@ public class WriterUserServiceImpl implements WriterUserService {
 			writerUserDao.addCertification(writerUserCertifications);
 			writerUserDao.updateWriterUser(writerUser);
 			File migCert = new File(cert);
+			String parent = migCert.getParent(); // 获取文件路径
+			String migCertName = migCert.getName(); // 获取文件名
+			String nameEnd = migCertName.substring(migCertName.lastIndexOf(".")+1); // 获取文件后缀
 			String mongoId = null;
 	        if (migCert.exists()) {
 	        	writerUserCertification.setCert(null);
 	        } else {
-	        	File newMigCert = new File("教师资格证");
+	        	File newMigCert = new File(parent+"教师资格证"+nameEnd);
 	        	migCert.renameTo(newMigCert);
 	            mongoId = fileService.saveLocalFile(migCert, FileType.TEACHER_CERTIFICATION_PIC, writerUserCertifications.getId());
 	            if (null != mongoId) {
