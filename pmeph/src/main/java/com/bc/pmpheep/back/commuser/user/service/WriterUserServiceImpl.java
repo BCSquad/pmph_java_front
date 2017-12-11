@@ -2,6 +2,7 @@ package com.bc.pmpheep.back.commuser.user.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import com.bc.pmpheep.general.service.FileService;
 import com.bc.pmpheep.service.exception.CheckedExceptionBusiness;
 import com.bc.pmpheep.service.exception.CheckedExceptionResult;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
+import com.mongodb.gridfs.GridFSDBFile;
 
 /**
  * 
@@ -63,11 +65,16 @@ public class WriterUserServiceImpl implements WriterUserService {
 					CheckedExceptionResult.NULL_PARAM, "userId不能为空");
 		}
 		WriterUserCertificationVO writerUserCertificationVO = writerUserDao.showTeacherCertification(userId);
+		if (ObjectUtil.isNull(writerUserCertificationVO)) {
+			writerUserCertificationVO = new WriterUserCertificationVO();
+		}
 		List<Org> orgList = writerUserDao.getOrgList();
 		writerUserCertificationVO.setOrgList(orgList);
 		String cert = writerUserCertificationVO.getCert();
 		if (StringUtil.notEmpty(cert)) {
-			fileService.get(cert);
+			GridFSDBFile getFile = fileService.get(cert);
+			String getFileName = getFile.getFilename();
+			writerUserCertificationVO.setCertName(getFileName);
 		}
 		return writerUserCertificationVO;
 	}
@@ -109,11 +116,15 @@ public class WriterUserServiceImpl implements WriterUserService {
 	        if (migCert.exists()) {
 	        	writerUserCertification.setCert(null);
 	        } else {
+	        	File newMigCert = new File("教师资格证");
+	        	migCert.renameTo(newMigCert);
 	            mongoId = fileService.saveLocalFile(migCert, FileType.TEACHER_CERTIFICATION_PIC, writerUserCertifications.getId());
 	            if (null != mongoId) {
 	            	writerUserCertifications.setCert(mongoId);
 	            	writerUserDao.updateCertification(writerUserCertifications);
+	            	Date date = new Date();
 	            	writerUser.setCert(mongoId);
+	            	writerUser.setAuthTime(date);
 	            	writerUserDao.updateWriterUser(writerUser);
 	            }
 	        }
