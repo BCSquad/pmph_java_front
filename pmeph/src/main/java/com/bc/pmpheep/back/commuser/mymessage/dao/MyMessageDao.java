@@ -1,7 +1,9 @@
 package com.bc.pmpheep.back.commuser.mymessage.dao;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+
 import com.bc.pmpheep.back.commuser.mymessage.bean.DialogueVO;
 import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
 import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessage;
@@ -20,7 +22,7 @@ public interface MyMessageDao {
 	 * @throws CheckedServiceException
 	 * 
 	 */
-	List<MyMessageVO> listMyMessage(PageParameter<MyMessageVO> pageParameter);
+	List<MyMessageVO> listMyMessage(@Param("start")Integer start ,@Param("pageSize")Integer pageSize ,@Param("state")String state,@Param("thisUserId")Long thisUserId);
 
 	/**
 	 * 
@@ -32,6 +34,17 @@ public interface MyMessageDao {
 	 * 
 	 */
 	Integer listMyMessageTotal(PageParameter<MyMessageVO> pageParameter);
+	
+	/**
+	 * 
+	 * 更新已经看了的数据 
+	 * @author Mryang
+	 * @createDate 2017年12月11日 下午4:52:16
+	 * @param pageParameter
+	 * @return
+	 */
+	Integer updateMyTalk(@Param("senderId") Long senderId, @Param("senderType") Short senderType,
+			             @Param("receiverId") Long receiverId, @Param("receiverType") Short receiverType);
 	
 	/**
 	 * 
@@ -56,7 +69,7 @@ public interface MyMessageDao {
 	 * @param friendId
 	 * @return
 	 */
-	List<DialogueVO> findMyDialogue  (@Param("thisId")Long thisId,@Param("friendId")Long friendId);
+	List<DialogueVO> findMyDialogue  (@Param("thisId")Long thisId,@Param("friendId")Long friendId,@Param("friendType")Integer friendType);
 	
 	/**
      * 单条数据插入 UserMessage

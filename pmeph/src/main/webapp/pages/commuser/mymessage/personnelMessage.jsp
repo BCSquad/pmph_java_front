@@ -17,6 +17,7 @@
 <script src="${ctx}/statics/js/jquery/jquery.js"></script>
 <script src="${ctx}/statics/js/jquery/jquery.selectlist.js"></script>
 <script src="${ctx}/resources/commuser/mymessage/personnelMessage.js"></script>
+ <script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
 <style type="text/css">
 #rightContent .select-button {
 	background: #f6f6f6;
@@ -38,8 +39,8 @@
 		<span id="otherSelected"><b>私信</b></span> <span id="rightContent">筛选：
 			<select id="select" title="请选择">
 				<option value="">全部</option>
-				<option value="true">已读</option>
-				<option value="false">未读</option>
+				<option value="reade">已读</option>
+				<option value="noreade">未读</option>
 		</select>
 		</span>
 	</div>
@@ -50,19 +51,29 @@
 
 		<div class="b hidden" id="box">
 			<div class="hiddenX hidden" id="close">
-				<img onclick="hide()" style="width: 100%; height: 100%;"
-					src="../image/关闭.png">
+				<img id="hide" style="width: 100%; height: 100%;" src="../statics/image/关闭.png">
 			</div>
+			
+			  
+			<span class="personMessageTitle">你与特朗普的私信窗口</span>
+			<input id='talk' type='hidden' value=''/>
+            <div class="contentBox" id="dialogue">
+            	<!---->
+	        </div>
+			<div class="inputBox">
+                <div style="float: left;width: 80%;height: 100%">
+                <textarea id= "content" style="width: 100%;height: 98%;border: none;outline:0;font-size:15px;" type="text" placeholder="请输入消息内容,按回车键发送" ></textarea>
+                </div>
+                <div style="float: left;width: 20%;height: 100%">
+                <div class="div_btn11" style="cursor: pointer;">
+                    <span class="button11" id ='sendNewMsg'>发送</span>
+                </div>
+                </div>
+            </div>
 		</div>
 		<div id="loadMore" class="load-more clearfix">加载更多...</div>
 	</div>
 	<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
-<script>
-	function hide() {
-		document.getElementById("box").setAttribute("class", "b hidden");
-		document.getElementById("close")
-				.setAttribute("class", "hiddenX hidden");
-	}
-</script>
+
 </html>

@@ -42,8 +42,18 @@ public class WriterUserCertificationVO implements Serializable {
     private Timestamp gmtUpdate;
     // 获取机构
     private List<Org> orgList;
+    // 教师资格证名称
+    private String certName;
 
-    public List<Org> getOrgList() {
+    public String getCertName() {
+		return certName;
+	}
+
+	public void setCertName(String certName) {
+		this.certName = certName;
+	}
+
+	public List<Org> getOrgList() {
 		return orgList;
 	}
 
@@ -171,7 +181,7 @@ public class WriterUserCertificationVO implements Serializable {
 				+ orgName + ", handphone=" + handphone + ", idcard=" + idcard
 				+ ", progress=" + progress + ", cert=" + cert + ", gmtCreate="
 				+ gmtCreate + ", gmtUpdate=" + gmtUpdate + ", orgList="
-				+ orgList + "]";
+				+ orgList + ", certName=" + certName + "]";
 	}
     
 }

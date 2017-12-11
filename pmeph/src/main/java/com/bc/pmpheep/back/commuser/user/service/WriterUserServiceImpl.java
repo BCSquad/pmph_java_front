@@ -2,6 +2,7 @@ package com.bc.pmpheep.back.commuser.user.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import com.bc.pmpheep.general.service.FileService;
 import com.bc.pmpheep.service.exception.CheckedExceptionBusiness;
 import com.bc.pmpheep.service.exception.CheckedExceptionResult;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
+import com.mongodb.gridfs.GridFSDBFile;
 
 /**
  * 
@@ -63,11 +65,16 @@ public class WriterUserServiceImpl implements WriterUserService {
 					CheckedExceptionResult.NULL_PARAM, "userId不能为空");
 		}
 		WriterUserCertificationVO writerUserCertificationVO = writerUserDao.showTeacherCertification(userId);
+		if (ObjectUtil.isNull(writerUserCertificationVO)) {
+			writerUserCertificationVO = new WriterUserCertificationVO();
+		}
 		List<Org> orgList = writerUserDao.getOrgList();
 		writerUserCertificationVO.setOrgList(orgList);
 		String cert = writerUserCertificationVO.getCert();
 		if (StringUtil.notEmpty(cert)) {
-			fileService.get(cert);
+			GridFSDBFile getFile = fileService.get(cert);
+			String getFileName = getFile.getFilename();
+			writerUserCertificationVO.setCertName(getFileName);
 		}
 		return writerUserCertificationVO;
 	}
@@ -101,19 +108,27 @@ public class WriterUserServiceImpl implements WriterUserService {
 		writerUser.setHandphone(handPhone);
 		writerUser.setOrgId(orgId);
 		writerUser.setRealname(realName);
+		writerUser.setId(userId);
 		if (ObjectUtil.isNull(id)) { //id为空就增加否则修改
 			writerUserDao.addCertification(writerUserCertifications);
 			writerUserDao.updateWriterUser(writerUser);
 			File migCert = new File(cert);
+			String parent = migCert.getParent(); // 获取文件路径
+			String migCertName = migCert.getName(); // 获取文件名
+			String nameEnd = migCertName.substring(migCertName.lastIndexOf(".")+1); // 获取文件后缀
 			String mongoId = null;
 	        if (migCert.exists()) {
 	        	writerUserCertification.setCert(null);
 	        } else {
+	        	File newMigCert = new File(parent+"教师资格证"+nameEnd);
+	        	migCert.renameTo(newMigCert);
 	            mongoId = fileService.saveLocalFile(migCert, FileType.TEACHER_CERTIFICATION_PIC, writerUserCertifications.getId());
 	            if (null != mongoId) {
 	            	writerUserCertifications.setCert(mongoId);
 	            	writerUserDao.updateCertification(writerUserCertifications);
+	            	Date date = new Date();
 	            	writerUser.setCert(mongoId);
+	            	writerUser.setAuthTime(date);
 	            	writerUserDao.updateWriterUser(writerUser);
 	            }
 	        }

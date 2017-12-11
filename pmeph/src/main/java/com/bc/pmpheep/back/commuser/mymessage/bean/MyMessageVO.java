@@ -1,9 +1,7 @@
 package com.bc.pmpheep.back.commuser.mymessage.bean;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
@@ -42,6 +40,14 @@ public class MyMessageVO implements Serializable {
 	 * 对话这姓名
 	 */
 	private String name;
+	/**
+	 * 对话者类型
+	 */
+	private Integer type;
+	/**
+	 * 对话者的id
+	 */
+	private Integer talkId;
 	/**
 	 * 接收者id
 	 */
@@ -215,4 +221,34 @@ public class MyMessageVO implements Serializable {
 		this.isMy = isMy;
 	}
 
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public Integer getTalkId() {
+		return talkId;
+	}
+
+	public void setTalkId(Integer talkId) {
+		this.talkId = talkId;
+	}
+
+	@Override
+	public String toString() {
+		return "{id:" + id + ", title:" + title + ", msgId:" + msgId
+				+ ", content:" + content + ", senderId:" + senderId
+				+ ", senderType:" + senderType + ", avatar:" + avatar
+				+ ", name:" + name + ", type:" + type + ", talkId:" + talkId
+				+ ", receiverId:" + receiverId + ", receiverType:"
+				+ receiverType + ", userName:" + userName + ", userAvatar:"
+				+ userAvatar + ", sendTime:" + sendTime + ", isRead:" + isRead
+				+ ", userId:" + userId + ", userType:" + userType + ", isMy:"
+				+ isMy + "}";
+	}
+	
+	
 }
