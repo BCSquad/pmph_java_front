@@ -51,7 +51,7 @@ public interface OrgMessageDao {
   	 * @param userId
   	 * @return
   	 */
-	List<Map<String, Object>> findOrgUserAndWriterUser(String userId);
+	List<Map<String, Object>> findOrgUserAndWriterUser(Map<String, Object> map);
 
 	/**
 	 * 批量插入消息
