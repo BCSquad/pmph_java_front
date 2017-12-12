@@ -23,7 +23,7 @@
         },
         minLength: function(value, length, errorMsg) {
             //大于
-            if (value.length < length) {
+            if (value.length > length) {
                 return errorMsg;
             }
         },
