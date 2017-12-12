@@ -7,6 +7,8 @@ import com.bc.pmpheep.controller.bean.ResponseBean;
 import com.bc.pmpheep.general.bean.FileType;
 import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.general.service.FileService;
+import com.mongodb.gridfs.GridFSDBFile;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author: SuiXinYang
@@ -56,7 +60,18 @@ public class AdminInfoController extends BaseController {
     public ModelAndView toadminattest(HttpServletRequest request){
         ModelAndView mv=new ModelAndView();
         Long id=Long.parseLong("1267");
-        mv.addObject("admininfo",adminInfoService.getOrgUserById(id));
+        
+        Map<String,Object> map = adminInfoService.getOrgUserById(id);
+        
+        if(null!=map&&map.size()>0){
+        	String fileId = (String) map.get("proxy");
+        	if(null!=fileId&&!fileId.equals("")){
+        		GridFSDBFile file = fileService.get(fileId);
+        		map.put("proxyName", file.getFilename());
+        	}
+        }
+        
+        mv.addObject("admininfo",map);
         mv.setViewName("authadmin/accountset/adminattest");
         return mv;
     }
@@ -117,12 +132,38 @@ public class AdminInfoController extends BaseController {
         adminInfoService.updatePassword(orgUser);
         return responseBean;
     }
-
+    
+    //上传委托书
     @RequestMapping(value ="/uploadProxy",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseBean<OrgAdminUser> uploadProxy(@RequestParam(value = "id",required = true)String id,
-                                             @RequestParam("file") MultipartFile file) throws IOException {
-        String fileId=fileService.save(file, FileType.ORGUSER_PIC, 0);
-        return new ResponseBean<OrgAdminUser>();
+    public String uploadProxy(HttpServletRequest request) throws IOException{
+    	String code = "";
+    	String fileId  = request.getParameter("fileid");
+    	String id  = request.getParameter("id");
+    	Map<String,Object> map = new HashMap<String,Object>();
+    	map.put("fileId", fileId);
+    	map.put("id", id);
+    	
+    	try{
+    		adminInfoService.uploadProxy(map);
+    		code="1";
+    	}catch(Exception e){
+    		
+    	}
+        return code;
+    }
+    //下载委托书
+    @RequestMapping(value ="/downLoad",method = RequestMethod.POST)
+    @ResponseBody
+    public void downLoad(HttpServletRequest request) throws IOException{
+    	String id  = request.getParameter("id");
+    	Map<String,Object> map = new HashMap<String,Object>();
+    	map.put("id", id);
+    	
+    	try{
+    		adminInfoService.uploadProxy(map);
+    	}catch(Exception e){
+    		
+    	}
     }
 }

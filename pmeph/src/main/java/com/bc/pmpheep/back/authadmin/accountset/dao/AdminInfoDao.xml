@@ -34,4 +34,10 @@
         </set>
         WHERE id=#{id}
     </update>
+    <!--上传委托书-->
+    <update id="uploadProxy" parameterType="map">
+        UPDATE org_user
+        set proxy=#{fileId}
+        WHERE id=#{id}
+    </update>
 </mapper>
