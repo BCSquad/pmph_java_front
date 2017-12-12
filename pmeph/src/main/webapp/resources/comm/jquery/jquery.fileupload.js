@@ -2287,8 +2287,11 @@ $.fn.uploadFile = function (option) {
             file_input = $("<input class='hidden-upload' name='file' type='file' id='" + $ele.attr("id") + "_upload'/>");
             file_input.css("width", $ele.outerWidth());
             file_input.css("height", $ele.outerHeight());
-            file_input.css("top", $ele.offset().top);
-            file_input.css("left", $ele.offset().left);
+            file_input.css("top", $ele[0].offsetTop);
+            file_input.css("left", $ele[0].offsetLeft);
+            if(option.accept){
+            	file_input.attr("accept",option.accept);
+            }
             file_input.appendTo($ele.parent());
         }
 
