@@ -216,6 +216,7 @@ body {
     text-align: center;
     color: #999999;
     cursor: pointer;
+    text-decoration:none;
 }
 
 .head .option.out {

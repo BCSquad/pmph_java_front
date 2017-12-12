@@ -54,16 +54,17 @@
             <c:if test="${userInfo != null}">
                 <div class="user-info">
                     <span class="sign"></span>
-                    <img class="notice-icon" src="${ctx}/statics/image/message.png" alt="" onclick="location.href='${ctx}/message/applyMessageList.action'">
+                    <img class="notice-icon" src="${ctx}/statics/image/message.png" alt=""
+                         onclick="location.href='${ctx}/message/applyMessageList.action'">
                     <img class="user-icon" src="${ctx}/statics/pictures/head.png" alt="">
                 </div>
                 <div class="user-select">
                     <img src="${ctx}/statics/image/userSelectbg.png" alt="">
                     <div class="select">
-                        <div class="option">个人中心</div>
-                        <div class="option">我的小组</div>
-                        <div class="option">教程申报</div>
-                        <div class="option out">退出</div>
+                        <a class="option" href='<c:url value="/personalhomepage/tohomepage.action"/>'>个人中心</a>
+                        <a class="option" href="<c:url value='/group/list.action'/>">我的小组</a>
+                        <a class="option" href='<c:url value="/personalhomepage/tohomepageone.action"/>'>教程申报</a>
+                        <a class="option out">退出</a>
                     </div>
                 </div>
             </c:if>
