@@ -81,6 +81,27 @@ public interface GroupService {
 	
 	/**
 	 * 
+	 * Description:添加小组信息
+	 * @author:lyc
+	 * @date:2017年12月12日下午3:56:57
+	 * @param 
+	 * @return String
+	 */
+	String addGroupMessage(String msgConrent, Long groupId) throws CheckedServiceException,IOException;
+	
+	/**
+	 * 
+	 * Description:更新小组文件下载次数
+	 * @author:lyc
+	 * @date:2017年12月12日下午4:34:43
+	 * @param 
+	 * @return Integer
+	 */
+	Integer updateGroupFileOfDown(@Param("groupId")Long groupId, @Param("fileId")String fileId) 
+			throws CheckedServiceException;
+	
+	/**
+	 * 
 	 * Description:进行各种操作之前判断是否为创建者或管理者
 	 * 
 	 * @author:lyc
