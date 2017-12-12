@@ -3,13 +3,13 @@ package com.bc.pmpheep.back.commuser.book.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bc.pmpheep.back.common.controller.BaseController;
 import com.bc.pmpheep.back.commuser.book.bean.BookVO;
 import com.bc.pmpheep.back.commuser.book.service.BookService;
 import com.bc.pmpheep.back.plugin.PageParameter;
@@ -17,6 +17,7 @@ import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.back.util.RouteUtil;
 import com.bc.pmpheep.back.util.StringUtil;
 import com.bc.pmpheep.controller.bean.ResponseBean;
+import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 
 @Controller
@@ -25,11 +26,8 @@ import com.bc.pmpheep.service.exception.CheckedServiceException;
 public class BookController extends BaseController {
 
     @Autowired
-    BookService                 bookService;
-    // @Autowired
-    // MaterialTypeService materialTypeService;
-    // 当前业务类型
-    private static final String BUSSINESS_TYPE = "图书管理";
+    @Qualifier("com.bc.pmpheep.back.commuser.book.service.BookServiceImpl")
+    BookService bookService;
 
     /**
      * 
@@ -48,12 +46,10 @@ public class BookController extends BaseController {
      * @throws Exception
      * 
      */
-    // @LogDetail(businessType = BUSSINESS_TYPE, logRemark = "初始化/条件查询书籍信息")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView list(Integer pageSize, Integer pageNumber, BookVO bookVO) throws Exception {
-        logBefore(logger, "初始化/条件查询书籍信息");
-        ModelAndView model = this.getModelAndView();
-        String pageUrl = "";
+        ModelAndView model = new ModelAndView();
+        String pageUrl = "commuser/booklist/bookList";
         PageParameter<BookVO> pageParameter = new PageParameter<>(pageNumber, pageSize);
         if (StringUtil.notEmpty(bookVO.getName())) {
             bookVO.setName(bookVO.getName().replaceAll(" ", ""));// 去除空格
@@ -66,6 +62,12 @@ public class BookController extends BaseController {
                 book.setImageUrl(RouteUtil.DEFAULT_USER_AVATAR);
             }
             model.addObject("page", page);
+            if (null == pageNumber) {
+                pageNumber = 1;
+            }
+            model.addObject("pageNumber", pageNumber);
+            model.addObject("pageSize", pageSize);
+            model.addObject("order", bookVO.getOrder());
             model.setViewName(pageUrl);
         } catch (CheckedServiceException e) {
             throw new CheckedServiceException(e.getBusiness(), e.getResult(), e.getMessage(),

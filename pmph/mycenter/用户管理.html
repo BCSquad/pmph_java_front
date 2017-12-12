@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>用户管理</title>
+    <link rel="stylesheet" href="../css/jquery.pager.css"/>
+    <link rel="stylesheet" href="../css/jquery.selectlist.css"/>
+    <script src="../js/jquery/jquery.js"></script>
+    <script src="../js/jquery/jquery.selectlist.js"></script>
+    <script src="../js/jquery/jquery.pager.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="../css/base.css" type="text/css">
+    <link rel="stylesheet" href="用户管理.css" type="text/css">
+    <script type="text/javascript">
+
+        $(function () {
+            Page({
+                num: 16,					//页码数
+                startnum: 3,				//指定页码
+                elem: $('#page1'),		//指定的元素
+                callback: function (n) {	//回调函数
+                    console.log(n);
+                }
+            });
+            $('#page1select').selectlist({
+                zIndex: 10,
+                width: 110,
+                height: 30,
+                optionHeight: 30
+            });
+        })
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#sstj').selectlist({
+                zIndex: 10,
+                width: 208,
+                height: 40,
+                optionHeight: 40
+            });
+        })
+    </script>
+</head>
+<body>
+<iframe style="width: 100%;padding: 0;margin: 0;height: 112px;border: none"
+        src="../accountSettings/masters/head_1.html"></iframe>
+<div class="body">
+    <div class="content-wrapper">
+
+        <div class="message">
+
+            <div class="sousuokuang">
+                <select id="sstj" name="sstj">
+                    <option value="0">请选择搜索条件</option>
+                    <option value="1">高中</option>
+                    <option value="2">中技</option>
+                </select>
+                <input type="text" value="" placeholder='请输入' id="ssk">
+                <input type="button" value="查询" id="cxan">
+                <div id="gjss"><a href="">高级搜素</a></div>
+            </div>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <td class="" width="50">序号</td>
+                    <td class="" width="100">姓名</td>
+                    <td class="" width="128">用户名</td>
+                    <td class="" width="234">工作单位</td>
+                    <td class="" width="124">手机</td>
+                    <td class="" width="185">邮箱</td>
+                    <td class="" width="135">职务</td>
+                    <td class="" width="90">职称</td>
+                    <td class="">操作</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="">1</td>
+                    <td class="">医用高等数学</td>
+                    <td class="">11</td>
+                    <td class="">11</td>
+                    <td class="">11</td>
+                    <td class="">11</td>
+                    <td class="">11</td>
+                    <td class="">11</td>
+                    <td class=""><a href="">发消息</a></td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="fenyelan">
+                <div class="utf">
+                    <div>
+                        <ul class="pagination" id="page1">
+                        </ul>
+                        <div style="display: inline-block;    vertical-align: top">
+                            <select id="page1select" name="edu">
+                                <option value="10">每页10条</option>
+                                <option value="20">每页20条</option>
+                                <option value="50">每页50条</option>
+                            </select>
+                        </div>
+                        <div class="pageJump">
+                            <span>共10页，跳转到</span>
+                            <input type="text"/>
+                            <span class="pp">页</span>
+                            <button type="button" class="button">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear">
+        </div>
+    </div>
+</div>
+</div>
+
+
+<iframe style="width: 100%;clear:both;padding: 0;margin: 0;height: 200px;border: none" src="../comm/tail.html"></iframe>
+</body>
+</html>

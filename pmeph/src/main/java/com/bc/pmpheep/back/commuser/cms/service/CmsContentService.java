@@ -10,11 +10,12 @@ import com.bc.pmpheep.back.plugin.PageResult;
  *
  */
 public interface CmsContentService {
+	
 	/**
-	 * 查询医学随笔列表
+	 *  查询医学随笔列表(文章)
+	 * @param pageParameter
 	 * @return
-	 * @throws Exception
 	 */
-	PageResult<CmsContentVO> list(PageParameter<CmsContentVO> pageParameter);
+	PageResult<CmsContentVO> listCms(PageParameter<CmsContentVO> pageParameter);
 	
 }

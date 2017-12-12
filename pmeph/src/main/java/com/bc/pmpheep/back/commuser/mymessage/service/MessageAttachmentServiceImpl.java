@@ -13,7 +13,7 @@ import com.bc.pmpheep.service.exception.CheckedExceptionBusiness;
 import com.bc.pmpheep.service.exception.CheckedExceptionResult;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 
-@Service
+@Service("com.bc.pmpheep.back.commuser.mymessage.service.MessageAttachmentServiceImpl")
 public class MessageAttachmentServiceImpl implements MessageAttachmentService {
 
 	@Autowired

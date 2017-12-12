@@ -2,9 +2,9 @@ package com.bc.pmpheep.back.commuser.user.bean;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 
@@ -35,13 +35,33 @@ public class WriterUserCertificationVO implements Serializable {
     // 认证进度 --- 0=未提交/1=已提交/2=被退回/3=通过
     private Integer progress;
     // 教师资格证--- 资格证图片的资源地址
-    private MultipartFile cert;
+    private String cert;
     // 创建时间
     private Timestamp gmtCreate;
     // 修改时间
     private Timestamp gmtUpdate;
+    // 获取机构
+    private List<Org> orgList;
+    // 教师资格证名称
+    private String certName;
 
-    public WriterUserCertificationVO() {
+    public String getCertName() {
+		return certName;
+	}
+
+	public void setCertName(String certName) {
+		this.certName = certName;
+	}
+
+	public List<Org> getOrgList() {
+		return orgList;
+	}
+
+	public void setOrgList(List<Org> orgList) {
+		this.orgList = orgList;
+	}
+
+	public WriterUserCertificationVO() {
     }
 
     public WriterUserCertificationVO(Long userId, Integer progress) {
@@ -55,7 +75,7 @@ public class WriterUserCertificationVO implements Serializable {
     }
 
     public WriterUserCertificationVO(Long userId, Long orgId, String handphone, String idcard,
-    		Integer progress, MultipartFile cert, Timestamp gmtCreate, Timestamp gmtUpdate) {
+    		Integer progress, String cert, Timestamp gmtCreate, Timestamp gmtUpdate) {
         this.userId = userId;
         this.orgId = orgId;
         this.handphone = handphone;
@@ -130,11 +150,11 @@ public class WriterUserCertificationVO implements Serializable {
 		this.progress = progress;
 	}
 
-	public MultipartFile getCert() {
+	public String getCert() {
 		return cert;
 	}
 
-	public void setCert(MultipartFile cert) {
+	public void setCert(String cert) {
 		this.cert = cert;
 	}
 
@@ -160,8 +180,8 @@ public class WriterUserCertificationVO implements Serializable {
 				+ ", realName=" + realName + ", orgId=" + orgId + ", orgName="
 				+ orgName + ", handphone=" + handphone + ", idcard=" + idcard
 				+ ", progress=" + progress + ", cert=" + cert + ", gmtCreate="
-				+ gmtCreate + ", gmtUpdate=" + gmtUpdate + "]";
+				+ gmtCreate + ", gmtUpdate=" + gmtUpdate + ", orgList="
+				+ orgList + ", certName=" + certName + "]";
 	}
-
     
 }

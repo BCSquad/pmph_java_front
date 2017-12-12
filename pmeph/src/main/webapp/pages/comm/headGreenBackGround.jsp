@@ -22,7 +22,7 @@
             <div class="div-menu-child <%="backlog".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"     >待办事项</div>
             <div class="div-menu-child <%="audit".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"       >申报资料审核</div>
             <div class="div-menu-child <%="teachercert".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>" onclick="window.location.href='<c:url value="/teacherauth/toPage.action"/>'">教师认证</div>
-            <div class="div-menu-child <%="usermanage".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>">用户管理</div>
+            <div class="div-menu-child <%="usermanage".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"  onclick="window.location.href='<c:url value="/user/toPage.action"/>'">用户管理</div>
             <div class="div-menu-child <%="account".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"     onclick="window.location.href='<c:url value="/teacherauth/toPage.action"/>'">账户设置</div>
             <div class="div-menu-child <%="message".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"     onclick="window.location.href='<c:url value="/teacherauth/toPage.action"/>'">消息</div>
         </div>

@@ -27,7 +27,7 @@ import com.bc.pmpheep.service.exception.CheckedServiceException;
  * @审核人 ：
  *
  */
-@Service
+@Service("com.bc.pmpheep.back.commuser.user.service.PmphUserServiceImpl")
 public class PmphUserServiceImpl implements PmphUserService {
 	@Autowired
 	PmphUserDao pmphUserDao;

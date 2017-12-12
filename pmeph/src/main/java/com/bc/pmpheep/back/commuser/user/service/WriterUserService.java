@@ -5,6 +5,8 @@ import java.io.IOException;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertification;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertificationVO;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 
 /**
@@ -34,39 +36,23 @@ public interface WriterUserService {
 	WriterUser get(Long id) throws CheckedServiceException;
 	
 	/**
-	 * 根据机构orgid 加载机构用户下的作家
-	 * @param orgId
-	 * @return
-	 * @throws CheckedServiceException
-	 */
-	WriterUser getOrg(Long orgId) throws CheckedServiceException;
-	
-	/**
-	 * 条件搜索 必传orgid
-	 * @param writerUser
-	 * @return
-	 * @throws CheckedServiceException
-	 */
-	WriterUser getByOrgId(WriterUser writerUser) throws CheckedServiceException;
-	
-	/**
 	 * 查看学校教师认证信息
 	 * @author tyc
      * @createDate 2017年11月30日 上午10:44:09
-	 * @param id
+	 * @param userId
 	 * @return
 	 */
-	WriterUserCertificationVO showTeacherCertification(Long id);
+	WriterUserCertificationVO showTeacherCertification(Long userId);
 	
 	/**
 	 * 修改学校教师认证
 	 * @author tyc
      * @createDate 2017年11月30日 上午10:44:09
-	 * @param writerUserCertificationVO
+	 * @param writerUserCertification
 	 * @return
 	 */
-	WriterUserCertification updateTeacherCertification(WriterUserCertificationVO writerUserCertificationVO) 
-			throws IOException ;
+	WriterUserCertification updateTeacherCertification(WriterUserCertification writerUserCertification, 
+			String realName) throws IOException ;
 	
 	/**
 	 * 根据id和用户名修改用户密码
@@ -77,4 +63,10 @@ public interface WriterUserService {
      * @return
      */
     Integer updateUserPassWord(Long id, String username);
+    /**
+     * 根据机构orgid 分页加载机构用户下的作家
+     * @param pageParameter
+     * @return
+     */
+	PageResult<WriterUser> getOrg(PageParameter<WriterUser> pageParameter) throws CheckedServiceException;
 }

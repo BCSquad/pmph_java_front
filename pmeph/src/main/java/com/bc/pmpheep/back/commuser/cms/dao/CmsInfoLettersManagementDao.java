@@ -43,5 +43,5 @@ public interface CmsInfoLettersManagementDao {
 	 * @return
 	 *
 	 */
-	List<CmsInfoLettersList> list(@Param("start")Integer start, @Param("pageSize")Integer pageSize);
+	List<CmsInfoLettersList> list(@Param("start")Integer start, @Param("pageSize")Integer pageSize,@Param("order")Integer order);
 }

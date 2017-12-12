@@ -1,19 +1,20 @@
 package com.bc.pmpheep.back.commuser.user.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bc.pmpheep.back.common.controller.BaseController;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertification;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertificationVO;
 import com.bc.pmpheep.back.commuser.user.service.WriterUserService;
+import com.bc.pmpheep.general.controller.BaseController;
 
 /**
  * @author tyc
@@ -23,27 +24,44 @@ import com.bc.pmpheep.back.commuser.user.service.WriterUserService;
 @Controller
 @RequestMapping(value = "/teacherCertification")
 public class TeacherCertification extends BaseController {
-	
-	@Autowired
-	private WriterUserService writerUserService;
-	
-	@ResponseBody
+
+    @Autowired
+    @Qualifier("com.bc.pmpheep.back.commuser.user.service.WriterUserServiceImpl")  
+    private WriterUserService writerUserService;
+
+    /**
+	 * 查看学校教师认证信息
+	 * @author tyc
+     * @createDate 2017年11月30日 上午10:44:09
+	 * @return
+	 */
     @RequestMapping(value = "/showTeacherCertification", method = RequestMethod.GET)
-    public ModelAndView showTeacherCertification(@RequestParam("id") Long id) {
-		ModelAndView model = this.getModelAndView();
-		WriterUserCertificationVO showWriterUserCertification = writerUserService.showTeacherCertification(id);
-		model.addObject("showWriterUserCertification", showWriterUserCertification);
-		return model;
+    public ModelAndView showTeacherCertification( ) {
+    	Map <String,Object> map = this.getUserInfo() ;
+    	Long userId = new Long(String.valueOf(map.get("id")));
+        ModelAndView model = new ModelAndView();
+        model.setViewName("authadmin/teacherauth/teacherAttest");
+        WriterUserCertificationVO showWriterUserCertification =
+        writerUserService.showTeacherCertification(userId);
+        model.addObject("showWriterUserCertification", showWriterUserCertification);
+        return model;
     }
-	
-	@ResponseBody
-    @RequestMapping(value = "/updateTeacherCertification", method = RequestMethod.GET)
-    public ModelAndView updateTeacherCertification(WriterUserCertificationVO writerUserCertificationVO) 
-    		throws IOException {
-		ModelAndView model = this.getModelAndView();
-		WriterUserCertification updateWriterUserCertification = 
-				writerUserService.updateTeacherCertification(writerUserCertificationVO);
-		model.addObject("updateWriterUserCertification", updateWriterUserCertification);
-		return model;
+
+    /**
+	 * 修改学校教师认证
+	 * @author tyc
+     * @createDate 2017年11月30日 上午10:44:09
+	 * @param writerUserCertification
+	 * @param realName
+	 * @return
+	 */
+    @RequestMapping(value = "/updateTeacherCertification", method = RequestMethod.POST)
+    public ModelAndView updateTeacherCertification(WriterUserCertification WriterUserCertification, 
+    		@RequestParam("realName") String realName) throws IOException {
+        ModelAndView model = new ModelAndView();
+        WriterUserCertification updateWriterUserCertification =
+        writerUserService.updateTeacherCertification(WriterUserCertification, realName);
+        model.addObject("updateWriterUserCertification", updateWriterUserCertification);
+        return model;
     }
 }

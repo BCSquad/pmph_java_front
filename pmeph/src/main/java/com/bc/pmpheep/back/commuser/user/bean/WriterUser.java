@@ -152,8 +152,18 @@ public class WriterUser implements Serializable {
     private Date    gmtUpdate;
 
     private Short   loginType;
+    //姓名或用户代码
+    private String name;
+    
+    public String getName() {
+		return name;
+	}
 
-    /**
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
      * @return the id
      */
     public Long getId() {

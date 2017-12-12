@@ -205,8 +205,8 @@
 			</if>
 		</trim>
 	</sql>
-	<!--CmsContent查询获取列表 -->
-	<select id="list" parameterType="PageParameter"
+	<!-- 查询文章 -->
+	<select id="listCmsContentVO" parameterType="PageParameter"
 		resultType="CmsContentVO">
 		select cc.*,IFNULL(wu.realname,pu.realname) realname
 		from cms_content cc
@@ -217,14 +217,18 @@
 			and cc.is_deleted=0
 			and cc.auth_status=2 
 			and cc.is_published=1 
+		<if test="parameter.title != null and parameter.title != ''">
+			and cc.`title` like concat('%',#{parameter.title},'%')
+		</if>
 		order by 
 				cc.`auth_date` desc
 		<if test="start !=null and pageNumber != null">
 			limit #{start},#{pageSize}
 		</if>
 	</select>
-	<!-- 查询医学随笔总条数 -->
-	<select id="getCmsContentListTotal" resultType="java.lang.Integer">
+	<!-- 查询文章条数 -->
+	<select id="getCmsContentCount" parameterType="PageParameter"
+		resultType="java.lang.Integer">
 		select count(*)
 			from cms_content cc
 			left join pmph_user pu on pu.id=cc.author_id
@@ -233,6 +237,9 @@
 			where   ccy.category_name='医学随笔' 
 				and cc.is_deleted=0
 				and cc.auth_status=2 
-				and cc.is_published=1 
+				and cc.is_published=1
+		<if test="parameter.title != null and parameter.title != ''">
+			and cc.`title` like concat('%',#{parameter.title},'%')
+		</if>
 	</select>
 </mapper>

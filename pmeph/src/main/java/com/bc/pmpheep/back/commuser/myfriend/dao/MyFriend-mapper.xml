@@ -51,22 +51,36 @@
 	<!--获取用户好友列表  -->
 	<select id="listMyFriend" parameterType="java.lang.Long" resultType="WriterFriendVO">
 		SELECT 
-			wu.`id`,
-			wu.`username`,
-			wu.`position`,
-			wu.`avatar`
-		FROM 
+		  wf.`request_id` id,
+		  wu.`username`,
+		  wu.`position`,
+		  wu.`avatar` 
+		FROM
 			writer_friend wf 
 		LEFT JOIN 
 			writer_user wu 
 		ON 
-			wf.`request_id`= wu.`id`
-		WHERE
-			wf.`status`=2
-		AND
-			wf.`target_id`=#{userId}
-		ORDER BY 
-			wf.`gmt_create` DESC
+			wf.`request_id` = wu.`id`  
+		WHERE 
+			wf.`status` = 2 
+		AND 
+			wf.`target_id` = ${userId}
+		UNION 
+		SELECT 
+		  wf.`target_id` id,
+		  wu.`username`,
+		  wu.`position`,
+		  wu.`avatar` 
+		FROM
+			writer_friend wf 
+		LEFT JOIN 
+			writer_user wu 
+		ON 
+			wf.`request_id` = wu.`id`  
+		WHERE 
+			wf.`status` = 2 
+		AND 
+			wf.`request_id` = ${userId} 
 	</select>
 
 </mapper>

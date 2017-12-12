@@ -1,0 +1,147 @@
+.message-body{
+    padding-top:30px;
+    background-color: #f6f6f6;
+    padding-bottom: 60px;
+}
+.message{
+    width: 1200px;
+    height: 50px;
+    margin:0px auto 15px ;
+    background-color: #ffffff;
+}
+.message .item{
+    float:left;
+    margin-left: 20px;
+    width: 65px;
+    height:50px;
+    font-size: 16px;
+}
+.message .item .on-text{
+    height: 20px;
+    color: #333333;
+    margin-top: 14px
+}
+.message .item .off-text{
+    height: 20px;
+    color:#999999;
+    margin-top: 14px
+}
+.message .item .on-line{
+    height: 2px;
+    margin-top: 15px;
+    background-color: #666666;
+}
+.message .item .off-line{
+    height: 2px;
+    margin-top: 15px
+}
+.message-line{
+    width: 1200px;
+    height: 1px;
+    background-color: #e6e6e6;"
+}
+.message-list{
+    width:1200px;
+    height:963px;
+    margin:0px auto 15px;
+    background-color: #ffffff;
+    padding-top: 19px;
+}
+.message-list .title{
+    height: 40px;
+    margin-top:35px;
+    margin-left: 60px;
+    margin-bottom: 33px;
+    font-size: 14px;
+}
+.message-list .title .span1{
+    margin-right: 25px;
+    color: #333333;
+}
+ .span2{
+     color: #ff3d38;
+}
+.message-list .title input{
+    width: 600px;
+    height: 40px;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    border: none
+}
+.message-list .sel-object{
+    font-size: 14px;
+    margin-left: 32px;
+    margin-bottom: 33px;
+    color: #333333;
+}
+.message-list .sel-object input{
+    margin-left: 25px
+}
+.message-input{
+    position: relative;
+    width: 1200px;
+    height: 582px
+}
+.message-list .message-input .tip{
+    margin-left: 32px;
+    width: 65px;
+    margin-right: 25px;
+    font-size: 14px;
+    color: #333333;
+}
+.message-list .appendix{
+    margin-top:30px;
+    margin-left: 32px;
+    margin-bottom: 14px;
+    height: 20px;
+    font-size: 14px;
+}
+.message-list .appendix span{
+float: left;
+}
+.message-list .appendix .span1{
+    color: #333333;
+}
+.message-list .appendix .icon{
+    background-image: url(../image/附件拷贝4.png);
+    background-position: 0px 2px;
+    height: 30px;
+    width: 16px;
+    background-repeat: no-repeat;
+    margin-left: 25px
+}
+.message-list .appendix .name{
+    color: #333333;
+    margin-right: 6px
+}
+.message-list .appendix .operate{
+    margin-left: 20px;
+    font-size: 14px;
+    color: #03717b;
+}
+.message-list  .file-tip{
+    color: #bebebe;
+    font-size: 14px;
+    height: 30px;
+    margin-left: 119px;
+    margin-top: 0px;
+    margin-bottom: 19px
+}
+.message-list .send{
+    width: 1160px;
+    height: 84px;
+    border-top:1px #999999 dashed ;
+    margin: 0px auto 0px;
+}
+.message-list .send button{
+    width: 74px;
+    height: 24px;
+    background-color: #70bcc3;
+    border-radius: 2px;
+    border:none;
+    font-size: 14px;
+    color: #ffffff;
+    margin-top: 22px;
+    margin-left: 563px
+}
+

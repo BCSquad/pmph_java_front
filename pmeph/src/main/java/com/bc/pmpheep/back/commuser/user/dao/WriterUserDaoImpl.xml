@@ -336,38 +336,16 @@
 		WHERE
 		id = #{id}
 	</select>
-	<!-- 根据机构id查询该机构下的作家 -->
-	<select id="getOrg" parameterType="Long" resultType="WriterUser">
-		select wu.* 
-		from writer_user wu
-		left join org o on o.id= wu.org_id
-		where wu.org_id=#{orgid}
-	</select>
-	<!-- 根据用户输入的条件查询该机构下的作家 -->
-	<select id="getByOrgId" parameterType="Long" resultType="WriterUser">
-		select wu.* 
-		from writer_user wu
-		left join org o on o.id= wu.org_id
-		where 1=1
-		<if test="username !=null and username !='' ">
-			and wu.username like concat('%',#{username},'%' )
-		</if>
-		<if test="realname !=null and realname !='' ">
-			and wu.realname like concat('%',#{realname},'%' )
-		</if>
-		<if test="orgId !=null">
-			and  wu.org_id=#{orgId}
-		</if>
-	</select>
-	
 	<!-- 查看学校教师认证信息 -->
 	<select id="showTeacherCertification" parameterType="Long" resultType="WriterUserCertificationVO">
-		select *,wu.username,o.org_name from writer_user_certification wuc 
-		left join (select id,username from writer_user) wu on (wu.id=wuc.user_id) 
+		select *,wu.realname,o.org_name from writer_user_certification wuc 
+		left join (select id,realname from writer_user) wu on (wu.id=wuc.user_id) 
 		left join (select id,org_name from org) o on (o.id=wuc.org_id)
-		where wuc.id=#{id}
+		where wuc.user_id=#{userId}
 	</select>
-	
+	<select id="getOrgList" parameterType="list" resultType="Org">
+		select id,org_name from org where org_type_id!=1
+	</select>
 	<insert id="addCertification" parameterType="WriterUserCertification" useGeneratedKeys="true"
 		keyProperty="id">
 		INSERT INTO writer_user_certification
@@ -380,10 +358,10 @@
 	<update id="updateCertification" parameterType="WriterUserCertification">
 		UPDATE writer_user_certification
 		<set>
-			<if test="userid != null and userid !=''">
-				user_id = #{userid}
+			<if test="userId != null">
+				user_id = #{userId},
 			</if>
-			<if test="orgId != null and  orgId!=''">
+			<if test="orgId != null">
 				org_id = #{orgId},
 			</if>
 			<if test=" handphone != null and handphone !=''">
@@ -392,11 +370,111 @@
 			<if test=" idcard != null and idcard !=''">
 				idcard= #{idcard},
 			</if>
-			<if test=" progress != null and  progress != ''">
+			<if test=" progress != null">
 				progress = #{progress},
 			</if>
 			<if test=" cert != null and  cert != ''">
 				cert = #{cert},
+			</if>
+		</set>
+		WHERE
+		id = #{id}
+	</update>
+	<update id="updateWriterUser" parameterType="WriterUser">
+		UPDATE writer_user
+		<set>
+			<if test="username != null and username!=''">
+				username = #{username},
+			</if>
+			<if test="password != null and password!='' ">
+				`password` = #{password},
+			</if>
+			<if test=" isDisabled!= null ">
+				is_disabled= #{isDisabled},
+			</if>
+			<if test="orgId != null and  orgId!=''">
+				org_id = #{orgId},
+			</if>
+			<if test=" nickname!= null and nickname !=''">
+				nickname= #{nickname},
+			</if>
+			<if test=" realname!= null and realname !=''">
+				realname= #{realname},
+			</if>
+			<if test=" sex!= null and  sex!=''">
+				sex= #{sex},
+			</if>
+			<if test=" birthday!= null">
+				birthday= #{birthday},
+			</if>
+			<if test=" experience!= null and  experience!=''">
+				experience = #{experience},
+			</if>
+			<if test=" position!= null and  position!=''">
+				position= #{position},
+			</if>
+			<if test=" title!= null and title !=''">
+				title= #{title},
+			</if>
+			<if test=" fax!= null and  fax!=''">
+				fax= #{fax},
+			</if>
+			<if test=" handphone!= null and handphone !=''">
+				handphone = #{handphone},
+			</if>
+			<if test=" telephone!= null and  telephone!=''">
+				telephone = #{telephone},
+			</if>
+			<if test=" idcard!= null and idcard !=''">
+				idcard= #{idcard},
+			</if>
+			<if test=" email!= null and email !=''">
+				email= #{email},
+			</if>
+			<if test=" address!= null and  address!=''">
+				address= #{address},
+			</if>
+			<if test=" postcode!= null and  postcode!=''">
+				postcode = #{postcode},
+			</if>
+			<if test=" rank!= null and  rank!=''">
+				rank = #{rank},
+			</if>
+			<if test=" isTeacher!= null ">
+				is_teacher= #{isTeacher},
+			</if>
+			<if test=" cert!= null and  cert!=''">
+				cert = #{cert},
+			</if>
+			<if test=" authTime!= null">
+				auth_time = #{authTime},
+			</if>
+			<if test=" authUserType!= null and  authUserType!=''">
+				auth_user_type= #{authUserType},
+			</if>
+			<if test=" authUserId!= null and  authUserId!=''">
+				auth_user_id= #{authUserId},
+			</if>
+			<if test=" isWriter!= null ">
+				is_writer= #{isWriter},
+			</if>
+			<if test=" isExpert!= null ">
+				is_expert = #{isExpert},
+			</if>
+			<if test=" avatar!= null and  avatar!=''">
+				avatar= #{avatar},
+			</if>
+			<if test=" signature!=null and signature!=''">
+			    signature = #{signature},
+			</if>
+			<if test=" note!= null and  note!=''">
+				note = #{note},
+			</if>
+			<if test=" sort!= null and  sort!=''">
+				sort = #{sort},
+			</if>
+			<if test=" isDeleted!= null">
+				is_deleted= #{isDeleted},
 			</if>
 		</set>
 		WHERE
@@ -414,4 +492,38 @@
 		</set>
 		where id = #{id} and username = #{username};
 	</update>
+	
+	<!-- 分页查询机构用户的作家用户 -->
+	<select id="getOrg" parameterType="PageParameter"
+		resultType="WriterUser">
+		select wu.* 
+		from writer_user wu
+		left join org o on o.id= wu.org_id
+		where 1=1
+		<if test="parameter.orgId !=null and parameter.orgId !='' ">
+			and  wu.org_id=#{parameter.orgId}
+		</if>
+		<if test="parameter.name !=null and parameter.name !='' ">
+			and (wu.username like concat('%',#{parameter.name},'%' ) or
+			wu.realname like concat('%',#{parameter.name},'%' ) )
+		</if>
+		<if test="start !=null and pageNumber != null">
+			limit #{start},#{pageSize}
+		</if>
+	</select>
+	<!-- 查询机构用户的作家用户总数 -->
+	<select id="getOrgTotal" parameterType="PageParameter"
+		resultType="java.lang.Integer">
+		select count(*)
+		from writer_user wu
+		left join org o on o.id= wu.org_id
+		where 1=1
+		<if test="parameter.orgId !=null and parameter.orgId !='' ">
+			and  wu.org_id=#{parameter.orgId}
+		</if>
+		<if test="parameter.name !=null and parameter.name !='' ">
+			and (wu.username like concat('%',#{parameter.name},'%' ) or
+			wu.realname like concat('%',#{parameter.name},'%' ) )
+		</if>
+	</select>
 </mapper>

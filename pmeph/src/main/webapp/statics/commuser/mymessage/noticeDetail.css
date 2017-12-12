@@ -1,0 +1,157 @@
+
+.allDiv{
+    height: auto;
+}
+#section{
+    width: 100%;
+    height: auto;
+    text-align: center;
+    padding-top: 20px;
+
+}
+
+.navigator{
+    height: auto;
+    width:1200px;
+    color: #999999;
+    margin-top: 28px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+}
+.time{
+    width: 100%;
+    height: 14px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    height: auto;
+    color: #bdbdbd;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    text-align: center;
+    padding: 0 auto;
+}
+#address{
+    color: #666666;
+    font-family: MicrosoftYaHei;
+    align: center;
+}
+.content{
+    padding-left: 140px;
+    padding-right: 140px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 30px;
+    letter-spacing: 0px;
+    color: #333333;
+}
+
+.picture{
+
+    width: 1200px;
+    height: auto;
+    margin-top: 25px;
+    text-align: center;
+}
+.title{
+    font-family: MicrosoftYaHei;
+    font-size: 24px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #333333;
+    padding: 0 auto;
+}
+.list{
+    padding-left: 140px;
+    padding-right: 140px;
+    height: auto;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 30px;
+    letter-spacing: 0px;
+    color: #666666;
+
+}
+.title2{
+    margin-top: 10px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #666666;
+    padding: 0 auto;
+    width: 8%;
+    height:14px ;
+    float: left;
+    text-align: right;
+}
+.listContent{
+    margin-top: 10px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #666666;
+    width: 92%;
+    float: left;
+    height: auto;
+}
+a{
+    text-decoration:none;
+    color: #03717b;
+    font-family: MicrosoftYaHei;
+
+}
+
+.pictureSizeBig{
+    width: 870px;
+    height: 1238px;
+    align-self: center;
+}
+.pictureSize{
+    width: 16px;
+    height: 14px;
+}
+.line{
+    color:#E6E6E6;
+    width: 100%;
+}
+.button{
+    padding:3px 20px;
+    background-color: #70bcc3;
+    border-radius: 2px;
+    color: white;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+}
+.registerDiv{
+    clear:both;
+    width: 100%;
+    height: 120px;
+    text-align: center;
+    line-height: 120px;
+
+}
+
+.title{
+    font-family: MicrosoftYaHei;
+    font-size: 24px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #333333;
+    width: 1200px;
+}
+.liseDiv{
+    margin-top: 10px;
+    width: auto;
+    height: auto;
+}

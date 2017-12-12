@@ -13,8 +13,11 @@
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title></title>
     <script src="<%=path %>/resources/comm/jquery/jquery.js"></script>
+    <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/communication.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/chat.css" type="text/css">
+    <script src="<%=path %>/resources/comm/jquery/jquery.js"></script>
+    <script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
     <script src="<%=path %>/resources/commuser/mygroup/group.js" type="text/javascript"></script>
 </head>
 <body>
@@ -31,7 +34,7 @@
                         <div class="top_content22">
                             <img src="${ctx}/statics/image/zjyh.png">
                         </div>
-                        <text>你是这个小组的管理员</text>
+                        <text>${role}</text>
                         <a href="#">退出小组</a>
                     </div>
                     <div class="top_content3">
@@ -402,7 +405,8 @@
 
 </div>
 </div>
-<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
-
+<div style="background-color: white;width: 100%;padding: 0;margin: 0;height: 220px;border: none;overflow: hidden;">
+		<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
+</div>
 </body>
 </html>

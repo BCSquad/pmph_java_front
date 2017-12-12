@@ -63,7 +63,7 @@ public class CmsInfoLettersManagementController {
 //			model.addObject("cmsInfoLettersList", cmsInfoLettersList);
 //		}
 //		model.addObject("total",total);
-		return cmsInfoLettersManagementService.list(pageSize,pageNumber);
+		return cmsInfoLettersManagementService.list(pageSize,pageNumber, order);
 	}
 	
 	/**

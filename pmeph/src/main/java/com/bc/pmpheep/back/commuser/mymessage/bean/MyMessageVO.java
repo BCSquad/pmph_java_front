@@ -2,10 +2,8 @@ package com.bc.pmpheep.back.commuser.mymessage.bean;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
 
 import org.apache.ibatis.type.Alias;
-
 
 @SuppressWarnings("serial")
 @Alias("MyMessageVO")
@@ -35,17 +33,37 @@ public class MyMessageVO implements Serializable {
 	 */
 	private Integer senderType;
 	/**
-	 * 发送者头像
+	 * 对话着头像
 	 */
-	private String senderAvatar;
+	private String avatar;
 	/**
-	 * 发送者姓名
+	 * 对话这姓名
 	 */
-	private String senderName;
+	private String name;
 	/**
-	 * 消息附件列表
+	 * 对话者类型
 	 */
-	private List<MessageAttachment> messageAttachments;
+	private Integer type;
+	/**
+	 * 对话者的id
+	 */
+	private Integer talkId;
+	/**
+	 * 接收者id
+	 */
+	private Long receiverId;
+	/**
+	 * 接收者类型
+	 */
+	private Integer receiverType;
+	/**
+	 * 当前用户姓名
+	 */
+	private String userName;
+	/**
+	 * 当前用户头像
+	 */
+	private String userAvatar;
 	/**
 	 * 发送时间
 	 */
@@ -62,16 +80,10 @@ public class MyMessageVO implements Serializable {
 	 * 用户类型
 	 */
 	private Integer userType;
-
-	private Boolean is_withdraw;
-
-	public Boolean getIs_withdraw() {
-		return is_withdraw;
-	}
-
-	public void setIs_withdraw(Boolean is_withdraw) {
-		this.is_withdraw = is_withdraw;
-	}
+	/**
+	 * 是否是当前用户发送的消息
+	 */
+	private Boolean isMy;
 
 	public Long getId() {
 		return id;
@@ -103,14 +115,6 @@ public class MyMessageVO implements Serializable {
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-	public List<MessageAttachment> getMessageAttachments() {
-		return messageAttachments;
-	}
-
-	public void setMessageAttachments(List<MessageAttachment> messageAttachments) {
-		this.messageAttachments = messageAttachments;
 	}
 
 	public Timestamp getSendTime() {
@@ -161,20 +165,90 @@ public class MyMessageVO implements Serializable {
 		this.senderType = senderType;
 	}
 
-	public String getSenderAvatar() {
-		return senderAvatar;
+	public Long getReceiverId() {
+		return receiverId;
 	}
 
-	public void setSenderAvatar(String senderAvatar) {
-		this.senderAvatar = senderAvatar;
+	public void setReceiverId(Long receiverId) {
+		this.receiverId = receiverId;
 	}
 
-	public String getSenderName() {
-		return senderName;
+	public Integer getReceiverType() {
+		return receiverType;
 	}
 
-	public void setSenderName(String senderName) {
-		this.senderName = senderName;
+	public void setReceiverType(Integer receiverType) {
+		this.receiverType = receiverType;
 	}
 
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserAvatar() {
+		return userAvatar;
+	}
+
+	public void setUserAvatar(String userAvatar) {
+		this.userAvatar = userAvatar;
+	}
+
+	public Boolean getIsMy() {
+		return isMy;
+	}
+
+	public void setIsMy(Boolean isMy) {
+		this.isMy = isMy;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public Integer getTalkId() {
+		return talkId;
+	}
+
+	public void setTalkId(Integer talkId) {
+		this.talkId = talkId;
+	}
+
+	@Override
+	public String toString() {
+		return "{id:" + id + ", title:" + title + ", msgId:" + msgId
+				+ ", content:" + content + ", senderId:" + senderId
+				+ ", senderType:" + senderType + ", avatar:" + avatar
+				+ ", name:" + name + ", type:" + type + ", talkId:" + talkId
+				+ ", receiverId:" + receiverId + ", receiverType:"
+				+ receiverType + ", userName:" + userName + ", userAvatar:"
+				+ userAvatar + ", sendTime:" + sendTime + ", isRead:" + isRead
+				+ ", userId:" + userId + ", userType:" + userType + ", isMy:"
+				+ isMy + "}";
+	}
+	
+	
 }

@@ -1,10 +1,14 @@
 package com.bc.pmpheep.back.commuser.user.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
+import com.bc.pmpheep.back.commuser.user.bean.Org;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertification;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertificationVO;
+import com.bc.pmpheep.back.plugin.PageParameter;
 
 /**
  * 
@@ -35,30 +39,21 @@ public interface WriterUserDao {
 	 *
 	 */
 	WriterUser get(Long id);
-	
-	/**
-	 * 根据机构orgid 加载机构用户下的作家
-	 * @param orgId
-	 * @return
-	 */
-	WriterUser getOrg(Long orgId);
-	
-	/**
-	 * 根据用户输入查询 必传orgid
-	 * @param writerUser
-	 * @return
-	 */
-	WriterUser getByOrgId(WriterUser writerUser);
-	
 	/**
 	 * 查看学校教师认证信息
 	 * @author tyc
      * @createDate 2017年11月30日 上午10:44:09
-	 * @param id
+	 * @param userId
 	 * @return
 	 */
-	WriterUserCertificationVO showTeacherCertification(@Param("id") Long id);
-	
+	WriterUserCertificationVO showTeacherCertification(@Param("userId") Long userId);
+	/**
+	 * 所有学校
+	 * @author tyc
+     * @createDate 2017年12月8日 上午08:34:22
+	 * @return
+	 */
+	List<Org> getOrgList();
 	/**
 	 * 添加学校教师认证
 	 * @author tyc
@@ -72,10 +67,18 @@ public interface WriterUserDao {
 	 * 修改学校教师认证
 	 * @author tyc
      * @createDate 2017年11月30日 上午10:44:09
-	 * @param id
+	 * @param writerUserCertification
 	 * @return
 	 */
-	WriterUserCertification updateCertification(Long id);
+	Integer updateCertification(WriterUserCertification  writerUserCertification);
+	/**
+	 * 修改用户
+	 * @author tyc
+     * @createDate 2017年12月8日 下午16:44:27
+	 * @param userId
+	 * @return
+	 */
+	Integer updateWriterUser(WriterUser writerUser);
 	
 	/**
 	 * 根据id和用户名修改用户密码
@@ -86,4 +89,16 @@ public interface WriterUserDao {
      * @return
      */
     Integer updateUserPassWord(Long id, String username);
+    /**
+     * 查询机构用户下的作家总数
+     * @param pageParameter
+     * @return
+     */
+	Integer getOrgTotal(PageParameter<WriterUser> pageParameter);
+	/**
+	 * 分页查询机构用户的作家
+	 * @param pageParameter
+	 * @return
+	 */
+	List<WriterUser> getOrg(PageParameter<WriterUser> pageParameter);
 }
