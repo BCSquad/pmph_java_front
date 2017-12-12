@@ -1,7 +1,7 @@
 package com.bc.pmpheep.back.commuser.mymessage.service;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -14,10 +14,7 @@ import com.bc.pmpheep.back.commuser.user.bean.PmphUser;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
 import com.bc.pmpheep.back.commuser.user.service.PmphUserService;
 import com.bc.pmpheep.back.commuser.user.service.WriterUserService;
-import com.bc.pmpheep.back.plugin.PageParameter;
-import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.back.util.ObjectUtil;
-import com.bc.pmpheep.back.util.PageParameterUitl;
 import com.bc.pmpheep.back.util.RouteUtil;
 import com.bc.pmpheep.general.pojo.Message;
 import com.bc.pmpheep.general.service.MessageService;
@@ -44,36 +41,28 @@ public class MyMessageServiceImpl implements MyMessageService {
 	WriterUserService writerUserService;
 
 	@Override
-	public PageResult<MyMessageVO> listMyMessage(PageParameter<MyMessageVO> pageParameter)
-			throws CheckedServiceException {
-		if (ObjectUtil.isNull(pageParameter.getParameter().getUserId())) {
+	public List<MyMessageVO> listMyMessage(Integer pageNumber,Integer pageSize,String state,Long userId) throws CheckedServiceException {
+		if (null == userId ) {
 			throw new CheckedServiceException(CheckedExceptionBusiness.MESSAGE, CheckedExceptionResult.NULL_PARAM,
 					"用户id为空！");
 		}
-		if (ObjectUtil.isNull(pageParameter.getParameter().getUserType())) {
-			throw new CheckedServiceException(CheckedExceptionBusiness.MESSAGE, CheckedExceptionResult.NULL_PARAM,
-					"用户类型为空！");
+		if(null == pageNumber || pageNumber < 1){
+			pageNumber =1; 
 		}
-		PageResult<MyMessageVO> pageResult = new PageResult<MyMessageVO>();
-		Integer total = myMessageDao.listMyMessageTotal(pageParameter);
-		PageParameterUitl.CopyPageParameter(pageParameter, pageResult);
-		if (total > 0) {
-			List<MyMessageVO> list = myMessageDao.listMyMessage(pageParameter);
-			for (MyMessageVO myMessageVO : list) {
-				myMessageVO.setUserId(pageParameter.getParameter().getUserId());
-				myMessageVO.setUserType(pageParameter.getParameter().getUserType());
-				myMessageVO = setAvatar(myMessageVO);
-				// Message message = messageService.get(myMessageVO.getMsgId());
-				// if (ObjectUtil.isNull(message)) {
-				// throw new CheckedServiceException(CheckedExceptionBusiness.MESSAGE,
-				// CheckedExceptionResult.NULL_PARAM, "没有获取到内容！");
-				// }
-				// myMessageVO.setContent(message.getContent());
-			}
-			pageResult.setRows(list);
+		if(null == pageSize || pageSize < 1){
+			pageSize = 999999; 
 		}
-		pageResult.setTotal(total);
-		return pageResult;
+		List<MyMessageVO> list = myMessageDao.listMyMessage((pageNumber-1)*pageSize,pageSize,state,userId);
+		if(null==list){
+			list = new ArrayList<MyMessageVO> (1);
+		}
+		for (MyMessageVO myMessageVO : list) {
+			String msgId = myMessageVO.getMsgId() ;
+			Message message = messageService.get(msgId);
+			myMessageVO.setContent(null == message ?null :message.getContent());
+			myMessageVO.setAvatar(RouteUtil.userAvatar(myMessageVO.getAvatar()));
+		}
+		return list;
 	}
 
 	/**
@@ -153,7 +142,7 @@ public class MyMessageServiceImpl implements MyMessageService {
 
 		return myMessageVO;
 	}
-
+	
 	@Override
 	public List<MyMessageVO> updateMyMessage(Long senderId, Integer senderType, Long userId, Integer userType)
 			throws CheckedServiceException {
@@ -191,16 +180,26 @@ public class MyMessageServiceImpl implements MyMessageService {
 	}
 
 	@Override
-	public List<DialogueVO> findMyDialogue(Long thisId, Long friendId) {
-		List<DialogueVO> lst = myMessageDao.findMyDialogue(thisId, friendId);
+	public List<DialogueVO> findMyDialogue(Long thisId, Long friendId,Integer friendType) {
+		if(null == friendType){
+			friendType =2 ; //默认作家用户
+		}
+		List<DialogueVO> lst = myMessageDao.findMyDialogue(thisId, friendId,friendType);
 		// 装入详情
 		for (DialogueVO dialogueVO : lst) {
 			Message message = messageService.get(dialogueVO.getMsgId());
 			if (null != message) {
 				dialogueVO.setContent(message.getContent());
 			}
+			String avatar =  dialogueVO.getAvatar();
+			dialogueVO.setAvatar(RouteUtil.userAvatar(avatar));
 		}
 		return lst;
+	}
+	
+	@Override
+	public Integer updateMyTalk(Long senderId, Short senderType, Long receiverId, Short receiverType){
+		return myMessageDao.updateMyTalk(senderId, senderType, receiverId, receiverType);
 	}
 
 	@Override

@@ -26,7 +26,6 @@ $(function(){
 		$.ajax({
 	        type:'get',
 	        url :contxtpath+'/mymessage/getDialogue.action',
-	        async:false,
 	        contentType: 'application/json',
 	        dataType:'json',
 	        data:{
@@ -74,12 +73,37 @@ $(function(){
 	        		}
 	        	}
 	        	show();
+	        	//更新消息状态
+	        	$.ajax({
+	    	        type:'get',
+	    	        url :contxtpath+'/mymessage/updateMyTalk.action',
+	    	        contentType: 'application/json',
+	    	        dataType:'json',
+	    	        data:{
+	    	        	senderId   : frendid,
+	    	        	senderType : 2
+	    	        },
+	    	        success:function(responsebean){
+	    	        	
+	    	        }
+	    	    });
 	        }
 	    });
 		
 	});
-	
+	//回车事件
+	$(".inputBox").keypress(function (e){ 
+		var code = event.keyCode; 
+		if (13 == code) { 
+			sendNewMsg(); 
+		} 
+	}); 
+	//发送消息
 	$("#sendNewMsg").click(function(){
+		sendNewMsg () ;
+	});
+	
+	function sendNewMsg (){
 		var content=$("#content").val();
 		if(!content || content.trim() ==''){
 			window.message.warning("请键入消息");
@@ -105,7 +129,7 @@ $(function(){
 		        }
 			});
 		}
-	});
+	}
 	
 	function formatDate(nS,str) {
 		  if(!nS){

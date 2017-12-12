@@ -108,6 +108,7 @@ public class WriterUserServiceImpl implements WriterUserService {
 		writerUser.setHandphone(handPhone);
 		writerUser.setOrgId(orgId);
 		writerUser.setRealname(realName);
+		writerUser.setId(userId);
 		if (ObjectUtil.isNull(id)) { //id为空就增加否则修改
 			writerUserDao.addCertification(writerUserCertifications);
 			writerUserDao.updateWriterUser(writerUser);
