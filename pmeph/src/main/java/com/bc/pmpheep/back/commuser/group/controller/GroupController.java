@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.group.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.group.bean.GroupList;
+import com.bc.pmpheep.back.commuser.group.bean.PmphGroupMemberVO;
 import com.bc.pmpheep.back.commuser.group.service.GroupService;
 
 
@@ -59,16 +61,41 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
     
     @RequestMapping("/toMyGroup")
     public ModelAndView toMyGroup(@RequestParam(value="groupId")Long groupId){
+    	ModelAndView modelAndView = new ModelAndView();
+    	if(null == groupId){
+    		modelAndView.setViewName("/comm/error");
+            return modelAndView;
+    	}
     	Map<String, Object> map = this.getUserInfo();
     	Long userId = new Long (String.valueOf(map.get("id")));
-    	ModelAndView modelAndView = new ModelAndView();
     	modelAndView.addObject("groupId", groupId);
+    	//我的小组
+    	List<GroupList> myGroupList     = groupService.groupList(0,1000000,userId);
+    	List<GroupList> otherGroupList  = new ArrayList<GroupList>(myGroupList.size()-1 );
+    	GroupList thisGroup = null;
+    	for(GroupList group: myGroupList){
+    		if(groupId.equals(group.getId())){
+    			thisGroup = group ;
+    		}else{
+    			otherGroupList.add(group);
+    		}
+    	}
+    	//没有当前小组的权限
+    	if(null == thisGroup){
+    		modelAndView.setViewName("/comm/error");
+            return modelAndView;
+    	}
+    	//当前小组
+    	modelAndView.addObject("thisGroup",thisGroup);
+    	//其他小组
+        modelAndView.addObject("otherGroup",otherGroupList);
         //角色
         modelAndView.addObject("role", groupService.isFounderOrisAdmin(groupId,userId)?"你是这个小组的管理员":"你是这个小组的普通用户");
         //小组用户
-        modelAndView.addObject("gropuMemebers",groupService.listPmphGroupMember(groupId,userId));
-        //其他小组
-        modelAndView.addObject("otherGroup",groupService.groupList(0,1000000,userId));
+        List<PmphGroupMemberVO> gropuMemebers= groupService.listPmphGroupMember(groupId,userId);
+        modelAndView.addObject("gropuMemebers",gropuMemebers);
+        modelAndView.addObject("gropuMemebersNum",gropuMemebers.size());
+        //页面路径
         modelAndView.setViewName("commuser/mygroup/communication");
         return modelAndView;
     }

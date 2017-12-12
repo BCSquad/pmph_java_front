@@ -7,8 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import com.bc.pmpheep.back.commuser.group.bean.GroupFile;
 import com.bc.pmpheep.back.commuser.group.bean.GroupList;
 import com.bc.pmpheep.back.commuser.group.bean.GroupMember;
-import com.bc.pmpheep.back.commuser.group.bean.GroupMessage;
-import com.bc.pmpheep.back.commuser.mygroup.bean.PmphGroupMemberVO;
+import com.bc.pmpheep.back.commuser.group.bean.GroupMessageVO;
+import com.bc.pmpheep.back.commuser.group.bean.PmphGroupMemberVO;
+
 
 /**
  * PmphGroup 实体类数据访问层接口
@@ -83,7 +84,7 @@ public interface GroupDao {
 	 * @param 
 	 * @return List<String>
 	 */
-	List<GroupMessage> getMessages(@Param("groupId") Long groupId);
+	List<GroupMessageVO> getMessages(@Param("groupId") Long groupId);
 	
 	/**
 	 * 

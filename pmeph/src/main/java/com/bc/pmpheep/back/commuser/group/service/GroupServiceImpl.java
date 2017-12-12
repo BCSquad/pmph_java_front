@@ -14,9 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bc.pmpheep.back.commuser.group.bean.GroupFile;
 import com.bc.pmpheep.back.commuser.group.bean.GroupList;
 import com.bc.pmpheep.back.commuser.group.bean.GroupMember;
-import com.bc.pmpheep.back.commuser.group.bean.GroupMessage;
+import com.bc.pmpheep.back.commuser.group.bean.GroupMessageVO;
+import com.bc.pmpheep.back.commuser.group.bean.PmphGroupMemberVO;
 import com.bc.pmpheep.back.commuser.group.dao.GroupDao;
-import com.bc.pmpheep.back.commuser.mygroup.bean.PmphGroupMemberVO;
 import com.bc.pmpheep.back.util.Const;
 import com.bc.pmpheep.back.util.ObjectUtil;
 import com.bc.pmpheep.back.util.RouteUtil;
@@ -59,7 +59,7 @@ public class GroupServiceImpl implements GroupService{
 			for(String avatar: avatars){
 				avatar = RouteUtil.userAvatar(avatar);
 			}
-			List<GroupMessage> messages = groupDao.getMessages(groupId);
+			List<GroupMessageVO> messages = groupDao.getMessages(groupId);
 			String gruopImage =  group.getGroupImage();
 			group.setGroupImage(RouteUtil.gruopImage(gruopImage));
 			group.setGmtCreate(createTime);

@@ -49,7 +49,7 @@
                     文件
                     <text class="txt30">${group.files}</text>
                 </text>
-                <div style="margin-top:10px;"><a class="item_link" href="${pageContext.request.contextPath}/group/list.action?groupId=${group.id}">
+                <div style="margin-top:10px;"><a class="item_link" href="${pageContext.request.contextPath}/group/toMyGroup.action?groupId=${group.id}">
                     <div class="item_content_button">小组主页></div>
                 </a></div>
             </div>

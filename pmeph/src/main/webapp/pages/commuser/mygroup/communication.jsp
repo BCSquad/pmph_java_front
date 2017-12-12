@@ -27,15 +27,16 @@
     <div class="content">
         <div class="left">
             <div class="top">
-                <div class="div_img70"><img src="${ctx}/statics/testfile/wdxz.png" class="img1" alt="小组图像"/></div>
+                <div class="div_img70"><img src="${pageContext.request.contextPath}/${thisGroup.groupImage}" class="img1" alt="小组图像"/></div>
                 <div class="top_content">
-                    <span class="span1">中医护理基础学习与实验指导</span>
+                    <span class="span1">${thisGroup.groupName}</span>
+                    <input id="groupNameId" type="hidden" value="${thisGroup.id}"/>
                     <div class="top_content2">
                         <div class="top_content22">
                             <img src="${ctx}/statics/image/zjyh.png">
                         </div>
                         <text>${role}</text>
-                        <a href="#">退出小组</a>
+                        <a href="${thisGroup.id}">退出小组</a>
                     </div>
                     <div class="top_content3">
                         <div class="top_content33">
@@ -48,7 +49,7 @@
                 </div>
                 <div class="top_tj">
                     <div class="top_tj1 ">
-                        <text class="top_tj1_text1">117</text>
+                        <text class="top_tj1_text1">${gropuMemebersNum}</text>
                         <br/>
                         <text class="top_tj1_text2">总人数</text>
                     </div>
@@ -244,94 +245,21 @@
                 <div class="float_right font_size14">邀请好友>></div>
             </div>
             <ul>
-                <li>
-                    <div class="init_center w65_h50"><img src="${ctx}/statics/image/haoyoutouxiang1.png" class="groupc_li"/></div>
-                    <div class="init_center w65_h20_line20">
-                        <span class="li_span2"></span>
-                        <text>曾若男</text>
-                    </div>
-
-                </li>
-                <li>
-                    <div class="init_center w65_h50"><img src="${ctx}/statics/image/haoyoutouxiang1.png" class="groupc_li"/></div>
-                    <div class="init_center w65_h20_line20">
-                        <text>曾若男</text>
-                    </div>
-
-                </li>
-                <li>
-                    <div class="init_center w65_h50"><img src="${ctx}/statics/image/haoyoutouxiang1.png" class="groupc_li"/></div>
-                    <div class="init_center w65_h20_line20">
-                        <text>曾若男</text>
-                    </div>
-
-                </li>
-                <li>
-                    <div class="init_center w65_h50"><img src="${ctx}/statics/image/haoyoutouxiang1.png" class="groupc_li"/></div>
-                    <div class="init_center w65_h20_line20">
-                        <text>曾若男</text>
-                    </div>
-
-                </li>
-                <li>
-                    <div style="margin:0 auto;clear: both; width: 65px;height: 50px;"><img
-                            src="${ctx}/statics/image/haoyoutouxiang1.png" class="groupc_li"/></div>
-                    <div style="clear: both;margin: 0 auto; width: 65px;height: 20px;line-height: 20px;">
-
-                        <text>曾若男</text>
-                    </div>
-                </li>
-                <li>
-                    <div class="init_center w65_h50"><img src="${ctx}/statics/image/haoyoutouxiang1.png" class="groupc_li"/></div>
-                    <div class="init_center w65_h20_line20">
-                        <text>曾若男</text>
-                    </div>
-
-                </li>
-                <li>
-                    <div class="init_center w65_h50"><img src="${ctx}/statics/image/haoyoutouxiang1.png" class="groupc_li"/></div>
-                    <div class="init_center w65_h20_line20">
-                        <text>曾若男</text>
-                    </div>
-
-                </li>
-                <li>
-                    <div class="init_center w65_h50"><img src="${ctx}/statics/image/haoyoutouxiang1.png" class="groupc_li"/></div>
-                    <div class="init_center w65_h20_line20">
-                        <text>曾若男</text>
-                    </div>
-
-                </li>
-                <li>
-                    <div class="init_center w65_h50"><img src="${ctx}/statics/image/haoyoutouxiang1.png" class="groupc_li"/></div>
-                    <div class="init_center w65_h20_line20">
-                        <text>曾若男</text>
-                    </div>
-
-                </li>
-                <li>
-                    <div class="init_center w65_h50"><img src="${ctx}/statics/image/haoyoutouxiang1.png" class="groupc_li"/></div>
-                    <div class="init_center w65_h20_line20">
-                        <text>曾若男</text>
-                    </div>
-
-                </li>
-                <li>
-                    <div class="init_center w65_h50"><img src="${ctx}/statics/image/haoyoutouxiang1.png" class="groupc_li"/></div>
-                    <div class="init_center w65_h20_line20">
-                        <text>曾若男</text>
-                    </div>
-
-                </li>
-                <li>
-                    <div class="init_center w65_h50"><img src="${ctx}/statics/image/haoyoutouxiang1.png" class="groupc_li"/></div>
-                    <div class="init_center w65_h20_line20">
-                        <text>曾若男</text>
-                    </div>
-
-                </li>
+                <c:if test="${gropuMemebers !=null }">
+                	<c:forEach var="gropuMemeber" items="${gropuMemebers}" varStatus="st">
+                	   <c:if test="${st.index+1 <= 12 }"><!-- 展示12位 -->
+	                		<li>
+			                    <div class="init_center w65_h50"><img src="${pageContext.request.contextPath}/${gropuMemeber.avatar}" class="groupc_li"/></div>
+			                    <div class="init_center w65_h20_line20">
+			                        <span class="li_span2"></span>
+			                        <text>${gropuMemeber.displayName}</text>
+			                    </div>
+							</li>
+						</c:if>
+                	</c:forEach>
+                </c:if>
             </ul>
-            <div class="show_all"><a href="#">>查看所有成员(117) </a></div>
+            <div class="show_all"><a href="#">>查看所有成员(${gropuMemebersNum}) </a></div>
         </div>
         <div class="alwaysgroup">
             <div class="ul_top">
@@ -345,60 +273,21 @@
             </div>
 
             <ul>
-                <li>
-                    <div class="init_center w85_h50"><img src="${ctx}/statics/image/rightbook.png"/></div>
-                    <div class="init_center w85_h36_line18">
-                        <text class="color03">中医健康</text>
-                        <br/>
-                        <text class="color99">(148人)</text>
-                    </div>
-
-                </li>
-                <li>
-                    <div class="init_center w85_h50"><img src="${ctx}/statics/image/rightbook.png"/></div>
-                    <div class="init_center w85_h36_line18">
-                        <text class="color03">中医健康</text>
-                        <br/>
-                        <text class="color99">(148人)</text>
-                    </div>
-
-                </li>
-                <li>
-                    <div class="init_center w85_h50"><img src="${ctx}/statics/image/rightbook.png"/></div>
-                    <div class="init_center w85_h36_line18">
-                        <text class="color03">中医健康</text>
-                        <br/>
-                        <text class="color99">(148人)</text>
-                    </div>
-
-                </li>
-                <li>
-                    <div class="init_center w85_h50"><img src="${ctx}/statics/image/rightbook.png"/></div>
-                    <div class="init_center w85_h36_line18">
-                        <text class="color03">中医健康</text>
-                        <br/>
-                        <text class="color99">(148人)</text>
-                    </div>
-
-                </li>
-                <li>
-                    <div class="init_center w85_h50"><img src="${ctx}/statics/image/rightbook.png"/></div>
-                    <div class="init_center w85_h36_line18">
-                        <text class="color03">中医健康</text>
-                        <br/>
-                        <text class="color99">(148人)</text>
-                    </div>
-
-                </li>
-                <li>
-                    <div class="init_center w85_h50"><img src="${ctx}/statics/image/rightbook.png"/></div>
-                    <div class="init_center w85_h36_line18">
-                        <text class="color03">中医健康</text>
-                        <br/>
-                        <text class="color99">(148人)</text>
-                    </div>
-
-                </li>
+            	<c:if test="${otherGroup !=null }">
+                	<c:forEach var="item" items="${otherGroup}" varStatus="st">
+                	   <c:if test="${item.id != thisGroup.id }">
+	                		 <li>
+			                    <div class="init_center w85_h50"><img src="${pageContext.request.contextPath}/${item.groupImage}"/></div>
+			                    <div class="init_center w85_h36_line18">
+			                        <text class="color03">${item.groupName}</text>
+			                        <br/>
+			                        <text class="color99">(${item.members}人)</text>
+			                    </div>
+			
+			                </li>
+						</c:if>
+                	</c:forEach>
+                </c:if>
             </ul>
         </div>
     </div>
