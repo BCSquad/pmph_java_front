@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.authadmin.chooseeditor.dao.ChooseEditorDao">
+	
+	<resultMap type="java.util.Map" id="editorToBeList">
+		
+	</resultMap>
+	
+	<select id="queryEditorToBeList" parameterType="PageParameter" resultMap="editorToBeList">
+		SELECT
+		dp.id as dec_position_id,
+		d.user_id,
+		d.realname,
+		d.sex,
+		d.org_name AS work_org_name,
+		o.id as dec_org_id,
+		o.org_name AS dec_org_name,
+		d.position,
+		d.title,
+		tb.is_list_selected,
+		case
+		when tb.is_list_selected = 1
+		then
+			dp.chosen_position
+		else	
+			dpt.chosen_position
+		end
+		as chosen_position
+		
+		FROM
+		dec_position AS dp
+		left join textbook tb on tb.id = dp.textbook_id
+		left Join dec_position_temp AS dpt  
+		ON dpt.declaration_id = dp.declaration_id 
+		and dpt.textbook_id=dp.textbook_id
+		<if test="parameter.logUserId != null and parameter.logUserId != '' ">
+			and dpt.author_id =  #{parameter.logUserId}
+		</if>
+		Inner Join declaration AS d ON dp.declaration_id = d.id
+		Left Join org AS o ON d.org_id = o.id
+		<where>
+			dp.chosen_position NOT IN  (1, 2)
+			<if test="parameter.textBookId != null and parameter.textBookId != '' ">
+				and dp.textbook_id = ${parameter.textBookId}
+			</if>
+			<if test="parameter.queryName != null and parameter.queryName != '' ">
+				and d.realname like concat("%",#{parameter.queryName},"%")
+			</if>
+			<if test="parameter.queryOrg != null and parameter.queryOrg != '' and parameter.queryOrg != 'all' ">
+				and o.id = ${parameter.queryOrg}
+			</if>
+		</where>
+		limit ${start},${pageSize}
+	</select>
+	
+	<select id="queryEditorToBeCount" parameterType="PageParameter" resultType="java.util.Map">
+		
+			SELECT
+			dp.id as dec_position_id,
+			tb.is_list_selected,
+			case
+			when tb.is_list_selected = 1
+			then
+				dp.chosen_position
+			else	
+				dpt.chosen_position
+			end
+			as chosen_position
+			FROM
+			dec_position AS dp
+			left join textbook tb on tb.id = dp.textbook_id
+			left Join dec_position_temp AS dpt  
+			ON dpt.declaration_id = dp.declaration_id 
+			and dpt.textbook_id=dp.textbook_id
+			<if test="parameter.logUserId != null and parameter.logUserId != '' ">
+				and dpt.author_id =  #{parameter.logUserId}
+			</if>
+			Inner Join declaration AS d ON dp.declaration_id = d.id
+			Left Join org AS o ON d.org_id = o.id
+			<where>
+				dp.chosen_position NOT IN  (1, 2)
+				<if test="parameter.textBookId != null and parameter.textBookId != '' ">
+					and dp.textbook_id = ${parameter.textBookId}
+				</if>
+				<if test="parameter.queryName != null and parameter.queryName != '' ">
+					and d.realname like concat("%",#{parameter.queryName},"%")
+				</if>
+				<if test="parameter.queryOrg != null and parameter.queryOrg != '' and parameter.queryOrg != 'all'  ">
+					and o.id = ${parameter.queryOrg}
+				</if>
+			</where>
+		
+	</select>
+
+	<select id="queryTextBookById" parameterType="String" resultType="Map">
+		SELECT
+		*
+		FROM
+		textbook
+		WHERE
+		textbook.id =  #{textBookId}
+	</select>
+	
+	<select id="getOrgList" resultType="Map">
+		select id,org_name
+		from 
+		org
+	</select>
+	
+	<delete id="deleteTempByAuthorIdAndTextbookId" parameterType="Map">
+		<if test="logUserId != null and logUserId != '' and textBookId != null and textBookId != '' ">
+			delete from dec_position_temp
+			where author_id=#{logUserId} and is_background = #{is_background} and textbook_id = #{textBookId}
+		</if>
+	</delete>
+	
+	<insert id="copyTempBySelectedIds" parameterType="Map" >
+		
+		insert  into dec_position_temp   (
+		author_id,
+		is_background,
+		declaration_id,
+		textbook_id,
+		preset_position,
+		is_on_list,
+		chosen_position,
+		rank,
+		syllabus_id,
+		syllabus_name
+		
+		 )
+		select 
+		${logUserId},
+		${is_background},
+		d.declaration_id,
+		d.textbook_id,
+		d.preset_position,
+		d.is_on_list,
+		3,
+		d.rank,
+		d.syllabus_id,
+		d.syllabus_name
+		
+		 from dec_position d
+		where
+		d.id in  (${selectedIds})
+		
+		ON DUPLICATE KEY UPDATE author_id= values(author_id) , is_background = values(is_background) , gmt_update = now()
+	
+	</insert>
+	
+	<update id="updateDecPositionBySelectIds" parameterType="Map">
+		update dec_position set chosen_position = 3 
+		where id in (${selectedIds})
+	</update>
+	
+	<update id="updateTextBookListSelected" parameterType="Map">
+		update textbook set is_list_selected = 1 
+		where id = #{textBookId}
+	</update>
+
+</mapper>
