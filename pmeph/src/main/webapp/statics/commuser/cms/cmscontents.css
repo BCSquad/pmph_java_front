@@ -66,7 +66,7 @@
     top:10px;
     left:-6px;
     color:white;
-    background-image:url(../image/wenzhangtuijian.png);
+    background-image:url("../statics/image/wenzhangtuijian.png");
 }
 .notes .item .content{
     width:284px;
@@ -115,7 +115,7 @@
 }
 
 #span_1{
-	background-image: url(../image/css_sprites.png);
+	background-image: url(/statics/image/css_sprites.png);
     background-position: -415px -149px;
     background-repeat: no-repeat;
     height: 25px;
@@ -125,7 +125,7 @@
 }
 
 #span_2{
-	background-image: url(../image/css_sprites.png);
+	background-image: url(/statics/image/css_sprites.png);
     background-position: -415px -195px;
     background-repeat: no-repeat;
     height: 25px;
@@ -135,7 +135,7 @@
 }
 
 #span_3{
-	background-image: url(../image/css_sprites.png);
+	background-image: url(/statics/image/css_sprites.png);
     background-position: -415px -245px;
     background-repeat: no-repeat;
     height: 25px;

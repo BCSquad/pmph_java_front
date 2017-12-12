@@ -14,7 +14,7 @@
     <title>医学随笔</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
-    <link rel="stylesheet" href="${ctx}/resources/commuser/cms/cmscontents.css" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/commuser/cms/cmscontents.css" type="text/css">
 </head>
 <body>
 <div style="width: 100%;padding: 0;margin: 0;height: 81px;border: none;overflow: hidden;">
@@ -25,36 +25,46 @@
     <div class="content-wrapper">
     	<div class="sbxq_title">
 			<span>文章 > 医学随笔</span>
-		</div>
         <div class="notes">
-            <div class="item" onclick="">
-                <!--<div class="command">
-                  <span style="margin-left: 5px">推荐</span>
-                </div>-->
-                <div  class="content" >
-                   <div class="content-image">
-                       <img src="../测试文件/p2.png" />
-                   </div>
+		   	<c:choose>
+        		<c:when test="${not empty page}">
+        			<c:forEach items="${page.rows}" var="cms" varStatus="vs">
+           			<div class="item behind" onclick="">
+                			<div class="command">
+			                   	<span style="margin-left: 5px">推荐</span>
+			               	</div>
+                			<div  class="content" >
+	                   			<div class="content-image">
+	                       			<img src="${ctx}/statics/testfile/p2.png" />
+	                   			</div>
 
-                    <p  class="content-title">尊敬的白衣人，你准备好了吗？</p>
-                    <p  class="content-text">
-                            技术等级好地方海景房独活独活肌肤的家分店绝代风华军火贩海景房禾
-                    <div  class="foot">
-                        <div  class="msg">
-                        	<span id="span_1"></span><span id="span_4">453</span>
-                        	<span id="span_2"></span><span id="span_4">53</span>
-                        	<span id="span_3"></span><span id="span_4">45</span>
-                        </div>
-                    </div>
-                    <div class="ryxx">
-                    	<div class="ryxx_foot">
-                    		<img class="ryxx_tx" src="../image/tx_1.png" />
-                    		<span class="ryxx_xm">黄钰</span>
-                    		<span class="ryxx_sj">2017.11.21</span>
-                    	</div>
-                    </div>
-                </div>
-            </div>
+	                    		<p  class="content-title">${cms.title }</p>
+	                    		<p  class="content-text">
+	                            		${cms.summary }
+	                    		<div  class="foot">
+			                        <div  class="msg">
+			                        	<span id="span_1"></span><span id="span_4">453</span>
+			                        	<span id="span_2"></span><span id="span_4">53</span>
+			                        	<span id="span_3"></span><span id="span_4">45</span>
+			                        </div>
+	                    		</div>
+			                    <div class="ryxx">
+			                    	<div class="ryxx_foot">
+			                    		<img class="ryxx_tx" src="${ctx}/statics/testfile/mi.png" />
+			                    		<span class="ryxx_xm">${cms.realname }</span>
+			                    		<span class="ryxx_sj">${cms.gmtCreate }</span>
+			                    	</div>
+			                    </div>
+                			</div>
+            			</div>
+            	 		</c:forEach>
+           			</c:when>
+           		<c:otherwise>
+					<div class="oneList">
+						没有相关数据
+					</div>
+				</c:otherwise>
+            </c:choose>
         </div>
         <div style="clear: both"></div>
         <div class="_load">
