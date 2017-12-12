@@ -7,6 +7,7 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,13 +71,13 @@
                 <c:if test="${status.index==0}">
                     <div class="content-left" style="margin-left: 30px">
                         <p class="content-size">${list.title}</p>
-                        <p class="time-size">${list.gmt_create}</p>
+                        <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date" pattern="yyyy-MM-dd"/></p>
                     </div>
                 </c:if>
                 <c:if test="${status.index!=0}">
                     <div class="content-left">
                         <p class="content-size">${list.title}</p>
-                        <p class="time-size">${list.gmt_create}</p>
+                        <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date" pattern="yyyy-MM-dd"/></p>
                     </div>
                 </c:if>
             </c:forEach>
@@ -95,7 +96,7 @@
                 <c:if test="${status.index==0}">
                     <div class="content-photo">
                         <p class="content-size">${list.title}</p>
-                        <p class="time-size">发布时间:${list.gmt_create}</p>
+                        <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date" pattern="yyyy-MM-dd"/></p>
                     </div>
                 </c:if>
             </c:forEach>
