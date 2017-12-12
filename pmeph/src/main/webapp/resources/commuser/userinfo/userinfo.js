@@ -96,7 +96,7 @@ function save(){
                 if (json.returncode=="OK"){
                 	location.href=contextpath+'userinfo/touser.action?id='+json.id;
                 }else if(json.returncode=="DEFAULT"){
-                	alert("错误！");
+                	massage.error("错误！");
                 }
             }
         });
