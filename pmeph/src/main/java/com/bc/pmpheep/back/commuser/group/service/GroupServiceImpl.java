@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bc.pmpheep.back.commuser.group.bean.Group;
 import com.bc.pmpheep.back.commuser.group.bean.GroupFile;
 import com.bc.pmpheep.back.commuser.group.bean.GroupList;
 import com.bc.pmpheep.back.commuser.group.bean.GroupMember;
@@ -20,6 +21,7 @@ import com.bc.pmpheep.back.commuser.group.dao.GroupDao;
 import com.bc.pmpheep.back.util.Const;
 import com.bc.pmpheep.back.util.ObjectUtil;
 import com.bc.pmpheep.back.util.RouteUtil;
+import com.bc.pmpheep.back.util.StringUtil;
 import com.bc.pmpheep.general.bean.FileType;
 import com.bc.pmpheep.general.service.FileService;
 import com.bc.pmpheep.service.exception.CheckedExceptionBusiness;
@@ -170,6 +172,8 @@ public class GroupServiceImpl implements GroupService{
 			groupFile.setFileId(fileId);
 			groupDao.updateGroupFile(groupFile);
 			GroupMember groupMember = groupDao.getGroupMember(groupFile.getGroupId(), userId);
+			addGroupMessage(groupMember.getDisplayName() + "共享了文件" + file.getOriginalFilename(),
+					groupFile.getGroupId());
 		}
 		return null;
 	}
@@ -217,6 +221,32 @@ public class GroupServiceImpl implements GroupService{
 			flag = true;
 		}
 		return flag;
+	}
+
+	@Override
+	public String addGroupMessage(String msgConrent, Long groupId) throws CheckedServiceException,IOException {
+		GroupMessage groupMessage = new GroupMessage(groupId, 0L, msgConrent);
+		groupDao.addGroupMessage(groupMessage);
+		groupMessage = groupDao.getGroupMessageById(groupMessage.getId());
+		Group group = new Group();
+		group.setId(groupId);
+		group.setGmtLastMessage(groupMessage.getGmtCreate());
+		groupDao.updateGroup(group);
+		return "SUCCESS";
+	}
+
+	@Override
+	public Integer updateGroupFileOfDown(Long groupId, String fileId)
+			throws CheckedServiceException {
+		if (ObjectUtil.isNull(groupId)){
+			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,
+					CheckedExceptionResult.NULL_PARAM, "小组id不能为空");
+		}
+		if (StringUtil.isEmpty(fileId)){
+			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,
+					CheckedExceptionResult.NULL_PARAM, "文件id不能为空");
+		}	
+		return groupDao.updateGroupFileOfDownload(groupId, fileId);
 	}
 
 

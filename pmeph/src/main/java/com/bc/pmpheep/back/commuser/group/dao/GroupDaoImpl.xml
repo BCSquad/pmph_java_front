@@ -197,4 +197,90 @@
 		</set>
 		where id=#{id} ;
 	</update>
+	
+	<sql id="key">
+		<!-- 去掉最后一个, -->
+		<trim suffixOverrides=",">
+			<if test="groupId != null and groupId !=''">
+				group_id,
+			</if>
+			<if test="memberId != null">
+				member_id,
+			</if>
+			<if test="msgContent != null and msgContent !=''">
+				msg_content,
+			</if>
+		</trim>
+	</sql>
+	<!-- sql片段对应?,id属性值任意 -->
+	<sql id="value">
+		<!-- 去掉最后一个, -->
+		<trim suffixOverrides=",">
+			<if test="groupId != null and groupId !=''">
+				#{groupId},
+			</if>
+			<if test="memberId != null ">
+				#{memberId},
+			</if>
+			<if test="msgContent != null and msgContent !=''">
+				#{msgContent},
+			</if>
+		</trim>
+	</sql>
+
+	<!-- 新增 GroupMessage -->
+	<insert id="addGroupMessage" parameterType="GroupMessage">
+		<selectKey resultType="java.lang.Long" order="AFTER"
+			keyProperty="id"> <!-- order="AFTER"表示先执行插入语句，之后再执行查询语句 BEFORE 或 AFTER -->
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into pmph_group_message (
+		<include refid="key" />
+		)
+		values(
+		<include refid="value" />
+		) ;
+	</insert>
+	
+	<!-- 根据id查询一个 GroupMessage -->
+	<select id="getGroupMessageById" parameterType="java.lang.Long"
+		resultType="GroupMessage">
+		select * from pmph_group_message where
+		id=#{id} ;
+	</select>
+	
+	<!-- 更新 Group -->
+	<update id="updateGroup" parameterType="Group">
+		update
+		pmph_group
+		<set>
+			<if test="groupName != null and groupName !=''">
+				group_name = #{groupName},
+			</if>
+			<if test="groupImage != null and groupImage !='' ">
+				group_image = #{groupImage},
+			</if>
+			<if test=" founderId != null and founderId !=''">
+				founder_id= #{founderId},
+			</if>
+			<if test=" bookId != null and bookId !=''">
+				book_id= #{bookId},
+			</if>
+			<if test=" note != null and note !=''">
+				note = #{note},
+			</if>
+			<if test="gmtLastMessage !=null ">
+				gmt_Last_Message = #{gmtLastMessage},
+			</if>
+		</set>
+		where id=#{id} ;
+	</update>
+	
+	<!-- 更新 下载次数 -->
+	<update id="updateGroupFileOfDownload" >
+		update
+		pmph_group_file set download=download+1 WHERE group_id = #{groupId}
+		AND
+		file_id = #{fileId}
+	</update>
 </mapper>

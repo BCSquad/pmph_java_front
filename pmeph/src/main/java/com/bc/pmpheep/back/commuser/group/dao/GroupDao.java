@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.bc.pmpheep.back.commuser.group.bean.Group;
 import com.bc.pmpheep.back.commuser.group.bean.GroupFile;
 import com.bc.pmpheep.back.commuser.group.bean.GroupList;
 import com.bc.pmpheep.back.commuser.group.bean.GroupMember;
@@ -159,4 +160,44 @@ public interface GroupDao {
 	 * @return Integer
 	 */
 	Integer updateGroupFile(GroupFile groupFile);
+	
+	/**
+	 * 
+	 * Description:添加小组信息
+	 * @author:lyc
+	 * @date:2017年12月12日下午3:43:22
+	 * @param 
+	 * @return Integer
+	 */
+	Integer addGroupMessage(GroupMessage groupMessage);
+	
+	/**
+	 * 
+	 * Description:获取小组信息
+	 * @author:lyc
+	 * @date:2017年12月12日下午4:05:40
+	 * @param 
+	 * @return GroupMessage
+	 */
+	GroupMessage getGroupMessageById(Long id);
+	
+	/**
+	 * 
+	 * Description:更新小组信息
+	 * @author:lyc
+	 * @date:2017年12月12日下午4:17:43
+	 * @param 
+	 * @return Integer
+	 */
+	Integer updateGroup(Group group);
+	
+	/**
+	 * 
+	 * Description:下载成功后下载次数+1
+	 * @author:lyc
+	 * @date:2017年12月12日下午4:31:02
+	 * @param 
+	 * @return Integer
+	 */
+	Integer updateGroupFileOfDownload(@Param("groupId") Long groupId, @Param("fileId") String fileId);
 }
