@@ -71,7 +71,6 @@
             	<c:forEach items="${listAttachment}" var="attachment">
             	<span><a href="#"><img class="pictureSize" src="${ctx}/statics/pictures/attachment.png">&nbsp;&nbsp;${attachment.attachment_name}</a></span><br>
             	</c:forEach>
-                
             </div>
         </div>
         </div>

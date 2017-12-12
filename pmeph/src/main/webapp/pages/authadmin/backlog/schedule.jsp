@@ -29,9 +29,9 @@
             background: #f6f6f6;
         }
     </style>
-<body style="background-color: #f6f6f6;">
+<body>
 <jsp:include page="/pages/comm/headGreenBackGround.jsp"/>
-<div class="body"  >
+<div class="body" style="background-color:#f6f6f6;float: left">
 	<input id="license" value="${map.license}" type="hidden"/>
     <div class="content-wrapper">
         <div class="big">
@@ -46,7 +46,6 @@
                            <option value="month" ${map.time=='month' ?'selected':''}>一月内</option>
                            <option value="year" ${map.time=='year' ?'selected':''}>一年内</option>
                        </select>
-                       
                    </div>
                 </div>
             <div class="bigList">

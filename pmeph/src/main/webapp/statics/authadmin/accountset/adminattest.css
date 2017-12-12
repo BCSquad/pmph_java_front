@@ -141,3 +141,20 @@ td{
 	color:white;
 	padding-bottom: 1px;
 }
+
+.upload{
+	color: #03717b;
+	font-family: MicrosoftYaHei;
+	font-size: 14px;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.filename{
+	font-family: MicrosoftYaHei;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	color: #333333;
+	text-decoration:none;s
+}
