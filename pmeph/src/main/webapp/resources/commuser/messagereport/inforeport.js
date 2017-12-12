@@ -21,7 +21,7 @@ function trychange(){
 				    n.title+
 			       '</div></div></td></tr><tr class="sxy-tr"><td><img alt="" src="'+
 			       contextpath+
-			       '/statics/image/cupline.jpg" /></td></tr>';
+			       'statics/image/cupline.jpg" /></td></tr>';
 		   });
 		   $("#count").val(json.count);
 		   $("#trows").html(str);
@@ -36,7 +36,7 @@ function lookDetail(id){
 	if(!(mvalue==""||isNaN(mvalue))){
 		x=parseInt(mvalue);
 	}
-	location.href=contextpath+"/inforeport/toinforeport.action?count="+x+"&&id="+id;
+	location.href=contextpath+"inforeport/toinforeport.action?count="+x+"&&id="+id;
 }
 //添加或取消收藏
 function addlike(id){
@@ -48,9 +48,9 @@ function addlike(id){
 		dataType:'json',
 		success:function(json){
 		   if(json.returncode=="NO"){
-			   $("#like").attr("src",contextpath+"/statics/image/dz02.png");
+			   $("#like").attr("src",contextpath+"statics/image/dz02.png");
 		   }else{
-			   $("#like").attr("src",contextpath+"/statics/image/dz01.png");
+			   $("#like").attr("src",contextpath+"statics/image/dz01.png");
 		   }
 		}
 	});
@@ -65,9 +65,9 @@ function addmark(id){
 		dataType:'json',
 		success:function(json){
 		   if(json.returncode=="NO"){
-			   $("#mark").attr("src",contextpath+"/statics/image/s102(1).png");
+			   $("#mark").attr("src",contextpath+"statics/image/s102(1).png");
 		   }else{
-			   $("#mark").attr("src",contextpath+"/statics/image/sc101(1).png");
+			   $("#mark").attr("src",contextpath+"statics/image/sc101(1).png");
 		   }
 		}
 	});

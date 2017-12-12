@@ -41,16 +41,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <c:forEach items="${articlelist.rows }" var="article"> 
     <div class="collection" >
         <div class="title">
-               <span class="title-text">
+               <div class="title-text">
                    <a href="#"> ${article.title }</a>
-               </span>
+               </div>
                <input type="hidden" id="cms${article.cid }" value="${article.cid }"/>
-               <span class="tm">
+               <div class="tm">
                    <span class="author-icon" style="background-image: url(${article.avatar=='DEFAULT'?'statics/image/deficon.png':article.avatar}); ">
                    </span>
                    <span class="name">${article.realname }</span>
                    <span class="time"><fmt:formatDate  value="${article.gmt_create}" pattern="yyyy.MM.dd"/></span>
-               </span>
+               </div>
         </div>
         <div class="content">
             <div  class="content-img">

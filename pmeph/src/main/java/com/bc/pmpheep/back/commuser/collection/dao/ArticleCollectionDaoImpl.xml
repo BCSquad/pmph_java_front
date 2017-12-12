@@ -4,7 +4,18 @@
 <resultMap type="java.util.Map" id="articleMap"></resultMap>
     <!-- 查询书籍收藏夹名称和收藏夹下收藏书籍的数量 -->
 	<select id="queryArticleCollectionList" parameterType="map" resultMap="articleMap">
-	   select f.favorite_name,f.id as id,count(f.content_id) as mcount from (select w.*,m.content_id from writer_cms_favorite w left  join cms_user_mark m on w.id=m.favorite_id) f where f.writer_id=#{writerId} GROUP BY f.favorite_name
+	   select 
+	       f.favorite_name,f.id as id,count(f.content_id) as mcount 
+	  from 
+	      (select
+	             w.*,m.content_id 
+	      from 
+	        writer_cms_favorite w left  join cms_user_mark m on w.id=m.favorite_id
+	      ) f 
+	  where 
+	      f.writer_id=#{writerId} 
+	  GROUP BY 
+	      f.favorite_name
 	</select>
 	<!--查询一个收藏夹下所有的书籍  -->
 	<select id="queryArticleList" parameterType="com.bc.pmpheep.back.plugin.PageParameter" resultMap="articleMap">
@@ -24,10 +35,14 @@
 		     c.comments,
 		     c.bookmarks,
 		     m.id as markId
-     from writer_cms_favorite f LEFT JOIN cms_user_mark  m on f.id=m.favorite_id
-	 LEFT JOIN cms_content c on m.content_id=c.id   
-	 LEFT JOIN  writer_user w on c.author_id=w.id  where f.id=#{parameter.favoriteId} and f.writer_id=#{parameter.writerId}
-	 limit #{start},#{pageSize}
+     from 
+	     writer_cms_favorite f LEFT JOIN cms_user_mark  m on f.id=m.favorite_id
+		 LEFT JOIN cms_content c on m.content_id=c.id   
+		 LEFT JOIN  writer_user w on c.author_id=w.id 
+    where
+         f.id=#{parameter.favoriteId} and f.writer_id=#{parameter.writerId} and c.category_id in(1,2)
+	limit 
+	     #{start},#{pageSize}
 	</select>
 	<!--查询一个收藏夹下的书籍 数量 -->
 	<select id="queryArticleCont" parameterType="map" resultType="int">

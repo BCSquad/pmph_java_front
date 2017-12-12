@@ -41,12 +41,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <div class="title" >
                <input type="hidden" id="mark${book.mid }" value="${book.mid }"/>
                 <input type="hidden" id="book${book.id }" value="${book.id }"/>
-               <span class="title-text" >
+               <div class="title-text" >
                    <a href="readdetail/todetail.action?id=${book.id }">${book.bookname }</a>
-               </span>
-               <span class="author" >
+               </div>
+               <div class="author" >
                                                                     作者： ${book.author }
-               </span>
+               </div>
            </div>
            <div class="content" >
                <div class="content-img">

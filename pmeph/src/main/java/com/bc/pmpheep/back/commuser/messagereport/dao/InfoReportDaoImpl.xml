@@ -4,15 +4,15 @@
 <resultMap type="java.util.Map" id="infoReport"></resultMap>
    <!--根据信息id查询信息快报 -->  
    <select id="queryInfoReportById" parameterType="map" resultMap="infoReport">
-       select * from cms_content  where id=#{id}
+       select * from cms_content  where id=#{id} 
    </select> 
    <!--查询信息快报的列表  -->
    <select id="queryReportList" parameterType="map" resultMap="infoReport">
-       select * from cms_content  order by gmt_create desc  limit #{num},#{size}
+       select * from cms_content where category_id=2  order by gmt_create desc  limit #{num},#{size}
    </select>
    <!--查询信息快报的总数量  -->
    <select id="queryInfoReportCount" resultType="int">
-     select count(1) from  cms_content
+     select count(1) from  cms_content  where category_id=2
    </select>
    <!--查询用户对信息快报的点赞次数  -->
    <select id="queryLike" parameterType="map" resultType="int">

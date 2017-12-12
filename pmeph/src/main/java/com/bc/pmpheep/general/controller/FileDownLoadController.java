@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -53,6 +54,25 @@ public class FileDownLoadController {
             logger.error("文件下载时出现IO异常：{}", ex.getMessage());
         }
     }
+    
+    
+    /**
+     * 文件名称
+     *
+     * @param id 文件在MongoDB中的id
+     */
+    @RequestMapping(value = "/file/{id}/name", method = RequestMethod.GET)
+    @ResponseBody
+    public String getFileName(@PathVariable("id") String id) {
+        GridFSDBFile file = fileService.get(id);
+        if (null == file) {
+            logger.warn("未找到id为'{}'的文件", id);
+           return "文件不存在";
+        }
+        return file.getFilename();
+    }
+    
+    
     /**
      * 普通文件下载并且更新下载次数
      *
