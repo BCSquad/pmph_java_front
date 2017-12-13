@@ -34,4 +34,11 @@ public class AdminInfoServiceImpl implements AdminInfoService{
     public void updateOrgUser(OrgAdminUser orgUser) {
         adminInfoDao.updateOrgUserById(orgUser);
     }
+
+    //上传委托书
+	@Override
+	public void uploadProxy(Map<String, Object>  map) {
+		adminInfoDao.uploadProxy(map);
+		
+	}
 }

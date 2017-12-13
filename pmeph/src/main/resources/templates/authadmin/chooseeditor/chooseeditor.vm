@@ -1,0 +1,28 @@
+#set($ColNum =$!{startNum})
+#foreach($c in $!{List_map})
+
+	<tr>
+	    <td class="">$!ColNum</td>
+	    <td class=""><a href="$!{contextpath}" target="_blank">$!{c.realname}</a></td>
+	    #if($!{c.sex} == 1)
+	    	<td class="">男</td>
+	    #elseif($!{c.sex} == 2)
+	   		 <td class="">女</td>
+	    #else
+	    	<td class="">未填写</td>
+	    #end
+	    <td class="">$!{c.work_org_name}</td>
+	    <td class="">$!{c.dec_org_name}</td>
+	    <td class="">$!{c.position}</td>
+	    <td class="">$!{c.title}</td>
+	    #if($!{c.is_list_selected} == 1 || $!{c.is_list_selected} == true )
+	    	<td class=""><input class="check" value="$!{c.dec_position_id}" type="checkbox" disabled="disabled"></td>
+	    #else
+	    	<td class=""><input class="check" value="$!{c.dec_position_id}" type="checkbox"></td>
+	    #end
+	    
+	    
+	</tr>	
+	#set($ColNum = $ColNum + 1)
+			
+#end

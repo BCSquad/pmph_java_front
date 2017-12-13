@@ -23,9 +23,12 @@
     <script src="${ctx}/resources/comm/jquery/jquery.calendar.js"></script>
     <%-- <script src="${ctx}/resources/authadmin/backlog/eventRecord.js"></script> --%>
 </head>
-<body style="background-color: #f6f6f6;">
+<body>
 <jsp:include page="/pages/comm/headGreenBackGround.jsp"/>
+<div class="body" style="background-color:#f6f6f6;float: left">
+<div class="content-wrapper">
 <div class="contentEvent">
+
     <div class="big">
         <div class="nav">
             <div ><a class="eventLeft" href="${ctx}/schedule/scheduleList.action">待办事项</a></div>
@@ -126,6 +129,8 @@
                 <span>最近登录:  2017-09-27 16:12:07</span>
             </div>
         </div>
+</div>
+</div>
 </div>
 <div style="clear: both; background-color: white;">   
 <jsp:include page="/pages/comm/tail.jsp"/>

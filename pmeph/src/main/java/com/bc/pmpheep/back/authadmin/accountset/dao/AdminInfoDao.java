@@ -32,4 +32,7 @@ public interface AdminInfoDao {
      * @param orgUser
      */
     public void updatePassword(OrgAdminUser orgUser);
+    
+    //上传委托书
+	public void uploadProxy(Map<String, Object> map);
 }
