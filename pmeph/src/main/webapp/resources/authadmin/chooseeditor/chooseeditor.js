@@ -54,7 +54,7 @@ $(function(){
 			queryBtnClick();
 		  }
 	});
-	
+
 	
 });
 
@@ -115,7 +115,9 @@ function queryMain(){
 			
 			if (json.html.trim() == "") {
 				$(".pagination-wrapper").hide();
+				$(".no-more").show();
 			}else{
+				$(".no-more").hide();
 				$(".pagination-wrapper").show();
 				$(".pagination").css("display","inline-block");
 				$(".pageJump").css("display","inline-block");
@@ -212,7 +214,19 @@ function selectRubmit(){
 	}else{
 		window.message.warning("未选择任何一个编委！");
 	}
-	
-	
-	
 }
+
+function bfRedirect(uri){
+	window.message.confirm(
+			"将离开本页面，未保存的操作将丢失，确定离开吗？"
+			,{btn:["确定离开","留在本页"]}
+			,function(index){
+				layer.close(index);
+				window.location.href=contextpath+uri;
+			}
+			,function(index){
+				layer.close(index);
+			}
+	);
+}
+

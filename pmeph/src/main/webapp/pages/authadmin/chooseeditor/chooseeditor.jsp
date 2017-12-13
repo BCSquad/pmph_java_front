@@ -45,16 +45,16 @@ String contextpath=request.getContextPath();
     <div class="top">
         <div class="title">
             <div class="top1">
-            	<a href="">个人中心 </a>
+            	<a  onclick="bfRedirect('personalhomepage/tohomepage.action')">个人中心 </a>
             	> 
-            	<a href="">教材申报 </a>
+            	<a onclick="bfRedirect('personalhomepage/tohomepageone.action')">教材申报 </a>
             	> 
-            	<a href="">申报进度</a>
+            	<a >申报进度</a>
             	>选择编委
             </div>
         </div>
         <div class="bt">
-            <div class="top2"><a ><B>${textBookName }</B></a></div>
+            <div class="top2"><a href="/books/list.action" target="_blank"><B>${textBookName }</B></a></div>
             <div class="top3">编辑策划：${logUserName }</div>
         </div>
     </div>
@@ -94,9 +94,15 @@ String contextpath=request.getContextPath();
                     </tr>
                     </thead>
                     <tbody id="userTbody">
-                    
+                    	
                     </tbody>
+                    
+                    
                 </table>
+                <div class="no-more" style="display: none;">
+                    <img src="<c:url value="/statics/image/aaa4.png"></c:url>">
+                    <span>木有内容呀~~</span>
+               	</div>
             </div>
             <div class="utf">
                 <div>
@@ -121,8 +127,8 @@ String contextpath=request.getContextPath();
     </div>
 </div>
 
-<div style="background-color: white;width: 100%;padding: 0;margin: 0;height: 220px;border: none;overflow: hidden;">
+
 	<jsp:include page="/pages/comm/tail.jsp"></jsp:include> 
-</div>
+
 </body>
 </html>

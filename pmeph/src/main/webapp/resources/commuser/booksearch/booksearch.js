@@ -47,7 +47,9 @@ function queryMain(){
 			
 			if (json.html.trim() == "") {
 				$(".pageDiv").hide();
+				$(".no-more").show();
 			}else{
+				$(".no-more").hide();
 				$(".pageDiv").show();
 				$(".pagination").css("display","inline-block");
 				$(".pageJump").css("display","inline-block");

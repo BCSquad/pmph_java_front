@@ -48,6 +48,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 
                 
             </div>
+            <div class="no-more" style="display: none;">
+                <img src="<c:url value="/statics/image/aaa4.png"></c:url>">
+                <span>木有内容呀~~</span>
+           	</div>
             <div style="clear:both;"></div>
             <div class="pagination-wrapper">
                 <ul class="pagination" id="page1">
@@ -60,22 +64,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <button type="button" class="button">确定</button>
                 </div>
             </div>
-            <script>
-                Page({
-                    num: 16,					//页码数
-                    startnum: 3,				//指定页码
-                    elem: $('#page1'),		//指定的元素
-                    callback: function (n) {	//回调函数
-                        console.log(n);
-                    }
-                });
-                
-            </script>
+            
 
         </div>
     </div>
 </div>
-<div style="background-color: #f4f4f4;width: 100%;padding: 0;margin: 0;height: 220px;border: none;overflow: hidden;">
+<div style="background-color: #f4f4f4;width: 100%;padding: 0;margin: 0;min-height: 10px;border: none;overflow: hidden;">
 	<jsp:include page="/pages/comm/tail.jsp"></jsp:include> 
 </div>
 <!-- <iframe style="width: 100%;clear:both;padding: 0;margin: 0;height: 220px;border: none;background-color: #f4f4f4;" src="../comm/tail.html"></iframe> -->

@@ -56,6 +56,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div id="nine-block-box-container" class="nine-block-box-container">
                 	${materialNineTable }
                 </div>
+                <div class="no-more" style="display: none;">
+                    <img src="<c:url value="/statics/image/aaa4.png"></c:url>">
+                    <span>木有内容呀~~</span>
+               	</div>
                 <div class="pagination-wrapper">
                     <ul class="pagination" id="page1">
                     </ul>
@@ -73,8 +77,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
     </div>
     <!-- <iframe src="../comm/tail.html" style="width: 100%;padding: 0;margin: 0;height: 220px;border: none;overflow: hidden;"></iframe> -->
-	<div style="background-color: white;width: 100%;padding: 0;margin: 0;height: 220px;border: none;overflow: hidden;">
+	
 		<jsp:include page="/pages/comm/tail.jsp"></jsp:include> 
-	</div>
+	
 </body>
 </html>

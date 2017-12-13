@@ -16,6 +16,7 @@
 }
 
 .top2 a{
+	color: #333333;
 	text-decoration:blink;
 	cursor: pointer;
 }

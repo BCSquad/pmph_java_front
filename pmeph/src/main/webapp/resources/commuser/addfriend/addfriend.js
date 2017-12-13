@@ -30,7 +30,9 @@ function queryMain(){
 			
 			if (json.html.trim() == "") {
 				$(".pagination-wrapper").hide();
+				$(".no-more").show();
 			}else{
+				$(".no-more").hide();
 				$(".pagination-wrapper").show();
 				$(".pagination").css("display","inline-block");
 				$(".pageJump").css("display","inline-block");

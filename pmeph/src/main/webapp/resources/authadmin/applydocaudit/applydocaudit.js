@@ -48,7 +48,9 @@ function applyDocAuditQuery(n,query_condition,status){
 			$("#nine-block-box-container").html(json.html);
 			if (json.html.trim() == "") {
 				$(".pagination-wrapper").hide();
+				$(".no-more").show();
 			}else{
+				$(".no-more").hide();
 				$(".pagination-wrapper").show();
 				$(".pagination").css("display","inline-block");
 				$(".pageJump").css("display","inline-block");
