@@ -91,7 +91,9 @@ public class DeclareCountController extends BaseController{
 	public List<Map<String, Object>> loadMore(HttpServletRequest request) {
 //		String para = request.getParameter("startPara");
 //		int startPara = 0;
+		String material_id = request.getParameter("material_id");
 		Map<String, Object> paraMap = new HashMap<String, Object>();
+		paraMap.put("material_id", material_id);
 //		if (null != para && !para.equals("")) {
 //			startPara = Integer.parseInt(para);
 //			paraMap.put("startPara", startPara);
@@ -117,7 +119,10 @@ public class DeclareCountController extends BaseController{
 	@RequestMapping(value = "/selectAll",method=RequestMethod.POST)
 	@ResponseBody
 	public List<Map<String, Object>> selectAll(HttpServletRequest request) {
-		List<Map<String, Object>> list = declareCountService.selectAll();
+		String material_id = request.getParameter("material_id");
+		Map<String, Object> paraMap = new HashMap<String, Object>();
+		paraMap.put("material_id", material_id);
+		List<Map<String, Object>> list = declareCountService.selectAll(paraMap);
 		return list;
 	}
 	
@@ -135,7 +140,10 @@ public class DeclareCountController extends BaseController{
 	@RequestMapping(value = "/selectResults",method=RequestMethod.POST)
 	@ResponseBody
 	public List<Map<String, Object>> selectResults(HttpServletRequest request) {
-		List<Map<String, Object>> list = declareCountService.selectResults();
+		String material_id = request.getParameter("material_id");
+		Map<String, Object> paraMap = new HashMap<String, Object>();
+		paraMap.put("material_id", material_id);
+		List<Map<String, Object>> list = declareCountService.selectResults(paraMap);
 		return list;
 	}
 
