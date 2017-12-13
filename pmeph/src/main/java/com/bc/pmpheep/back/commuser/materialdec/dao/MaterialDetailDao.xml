@@ -16,7 +16,7 @@
 		select * from material_org t1 LEFT JOIN org t2 on t1.org_id = t2.id
 			where t1.material_id = #{material_id}
 	</select>
-	<!-- 通过教材ID查出相关的机构信息 -->
+	<!-- 通过教材ID查出相关的扩展信息 -->
 	<select id="queryZjkzxxById" resultType="java.util.Map" parameterType="java.lang.String">
 		select * from material_extension where material_id = #{material_id}
 	</select>
@@ -34,19 +34,16 @@
 		<if test="declaration_id != null and declaration_id != ''">
 			and t1.id = #{declaration_id}
 		</if>
-		<if test="material_id != null and material_id != ''">
-			and t1.material_id = #{material_id}
-		</if>
 		<if test="realname != null and realname != ''">
 			and t1.realname = #{realname}
 		</if>
 	</select>
 	<insert id="insertPerson" parameterType="java.util.Map">
 		insert into declaration(material_id,user_id,realname,sex,birthday,experience,org_name,position,
-		title,address,postcode,handphone,email,idtype,idcard,telephone,fax,org_id,gmt_create
+		title,address,postcode,handphone,email,idtype,idcard,telephone,fax,org_id,gmt_create,is_staging
 		) values(#{material_id},#{user_id},#{realname},#{sex},#{birthday},#{experience},#{org_name},#{position},
 		#{title},#{address},#{postcode},#{handphone},#{email},#{idtype},#{idcard},#{telephone},
-		#{fax},#{org_id},#{gmt_create})
+		#{fax},#{org_id},#{gmt_create},#{is_staging})
 	</insert>
 	
 	<!-- 图书选择 -->

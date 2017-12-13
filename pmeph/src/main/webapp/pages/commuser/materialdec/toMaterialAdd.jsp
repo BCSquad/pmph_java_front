@@ -55,6 +55,9 @@
 				</div>
 				<div style="float: left;margin-left: 30px;">
 					<span style="float: left;">上传教学大纲：</span>
+					<div id="fileNameDiv_1" class="fileNameDiv"></div>
+					<input type="hidden" name="syllabus_id" id="syllabus_id_1"/>
+					<input type="hidden" name="syllabus_name" id="syllabus_name_1"/>
 					<div class="scys" id="scjxdg_1"><span>上传文件</span></div>
 				</div>
 			</div>

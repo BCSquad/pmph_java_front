@@ -6,7 +6,7 @@ jsonStr = "{\"id\":\"realname\",\"content\":\"姓名不能为空\"}," +
 
 $(function () {
 	var id = $("#material_id").val();
-	upload("scjxdg_1"); //附件上传
+	upload("1"); //附件上传
 	queryMaterialMap(id);  //执行查询方法
     $('.select-input').selectlist({
         zIndex: 10,
@@ -45,11 +45,16 @@ $(function () {
 
 //附件上传方法
 function upload(id){
-	$("#"+id).uploadFile({
+	$("#scjxdg_"+id).uploadFile({
 	    start: function () {
 	        console.log("开始上传。。。");
 	    },
 	    done: function (filename, fileid) {
+	    	$("#fileNameDiv_"+id).empty(); //清楚内容
+	    	$("#fileNameDiv_"+id).append("<span>"+filename+"</span>");
+	    	$("#fileNameDiv_"+id).css("display","inline");
+	    	$("#syllabus_id_"+id).val(fileid);
+	    	$("#syllabus_name_"+id).val(filename);
 	        console.log("上传完成：name " + filename + " fileid " + fileid);
 	    },
 	    progressall: function (loaded, total, bitrate) {
@@ -260,7 +265,10 @@ function addTsxz(){
 				"</div>"+
 				"<div style='float: left;margin-left: 30px;'>"+
 					"<span style='float: left;'>上传教学大纲：</span>"+
-					"<div class='scys' id='scjxdg_'"+str+"><span>上传文件</span></div>"+
+					"<div id='fileNameDiv_"+str+"' class='fileNameDiv'></div>"+
+					"<input type='hidden' name='syllabus_id' id='syllabus_id_"+str+"'/>"+
+					"<input type='hidden' name='syllabus_name' id='syllabus_name_"+str+"'/>"+
+					"<div class='scys' id='scjxdg_"+str+"'><span>上传文件</span></div>"+
 				"</div>"+
 				"<div class='delBtn pull-right' onclick=\"javascript:delTsxz( 'xz_"+str+"')\"><span>删除</span></div>"+
 			"</div>");
@@ -269,7 +277,7 @@ function addTsxz(){
         height: 30,
         optionHeight: 30
     });
-	upload("scjxdg_"+str);
+	upload(str);
 }
 
 //删除内容
@@ -456,20 +464,21 @@ function del_tr(trId){
 
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type){
-	if(checkNull(jsonStr)){
+//	if(checkNull(jsonStr)){
 		$.ajax({
 			type: "POST",
-		//	url:contextpath+'material/doMaterialAdd.action?type='+type,
-			url:contextpath+'material/doMaterialTest.action',
+			url:contextpath+'material/doMaterialAdd.action?type='+type,
+		//	url:contextpath+'material/doMaterialTest.action',
 			data:$('#objForm').serialize(),// 你的formid
 			async: false,
-		    success: function(json) {
-			    if(json.msg=='OK'){
+			dataType:"json",
+		    success: function(msg) {
+			    if(msg=='OK'){
 			    	window.location.href=contextpath+"personalhomepage/tohomepageone.action";
 			    }
 		    }
 		});
-	}	
+//	}	
 }
 
 

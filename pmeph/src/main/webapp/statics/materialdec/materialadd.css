@@ -351,3 +351,8 @@
 .relative{
 	position: relative;
 }
+
+.fileNameDiv{
+	float: left;
+	margin-right: 10px;
+}

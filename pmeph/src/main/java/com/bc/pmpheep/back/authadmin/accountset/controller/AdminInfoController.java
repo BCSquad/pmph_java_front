@@ -1,26 +1,28 @@
 package com.bc.pmpheep.back.authadmin.accountset.controller;
 
-import com.bc.pmpheep.back.authadmin.accountset.bean.OrgAdminUser;
-import com.bc.pmpheep.back.authadmin.accountset.service.AdminInfoService;
-import com.bc.pmpheep.back.util.DesRun;
-import com.bc.pmpheep.controller.bean.ResponseBean;
-import com.bc.pmpheep.general.bean.FileType;
-import com.bc.pmpheep.general.controller.BaseController;
-import com.bc.pmpheep.general.service.FileService;
-import com.mongodb.gridfs.GridFSDBFile;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import com.bc.pmpheep.back.authadmin.accountset.bean.OrgAdminUser;
+import com.bc.pmpheep.back.authadmin.accountset.service.AdminInfoService;
+import com.bc.pmpheep.back.util.DesRun;
+import com.bc.pmpheep.controller.bean.ResponseBean;
+import com.bc.pmpheep.general.controller.BaseController;
+import com.bc.pmpheep.general.service.FileService;
+import com.mongodb.gridfs.GridFSDBFile;
 
 /**
  * @Author: SuiXinYang
