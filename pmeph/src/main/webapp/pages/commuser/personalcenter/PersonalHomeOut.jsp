@@ -71,7 +71,7 @@
                 <c:if test="${permap.rank==1}"><span id="zjrz"></span><span class="grsx">教师用户</span></c:if>
                 <c:if test="${permap.rank==2}"><span id="zjrz"></span><span class="grsx">作家用户</span></c:if>
                 <c:if test="${permap.rank==3}"><span id="zjrz"></span> <span class="grsx">专家用户</span></c:if>
-                <input type="button" value="加好友">
+                <input type="button" id="jiahaoyou" value="+加好友">
             </div>
             <div class="headae">
                 <img src="${ctx}/statics/image/tx.png" alt="头像" height="164" width="165">

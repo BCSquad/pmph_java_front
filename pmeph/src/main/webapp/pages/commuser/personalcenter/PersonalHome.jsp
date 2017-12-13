@@ -103,8 +103,11 @@
                                 </div>
                             </div>
                             <div class="dtxia">
-                                <span id="bianji"></span><span class="dtxiawz">编辑</span><span id="sanchu"></span><span
-                                    class="dtxiawz">删除</span>
+                                <c:if test="${listmon.auth_status == 1&&listmon.auth_status == 0}">
+                                <span id="bianji"></span>
+                                <span class="dtxiawz"><a herf="${ctx}/writerArticle/initWriteArticle.action?id=${listmon.id}&&userid=${permap.id}">编辑</a></span>
+                                </c:if>
+                                <span id="sanchu"></span><span  class="dtxiawz" onclick="DelMyWriter('${listmon.id}');">删除</span>
                             </div>
                             <div id="tzxian"></div>
                         </div>
@@ -119,7 +122,9 @@
                             <div class="dtzhong">
                                 <div id="suibiwenzhangtp"></div>
                                 <div id="suibiwenzhanneirong">
-                                    <div id="pingluntu"></div>
+                                    <div id="pingluntu"><c:if test="${listmon.image_url==DEFAULT}"><img src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"></c:if>
+                                    <c:if test="${listmon.image_url!=DEFAULT}"><img src="${listmon.image_url}"></c:if>
+                                    </div>
                                     <div class="pinlunbt"><span class="suibibiaoti">${listmon.book_name}</span>
                                         <br/><span class="pinglunlr">${permap.realname}评论了 《${listmon.book_name}》 “非常不错，值得推荐！”</span>
                                         <br/>${listmon.score}
@@ -131,7 +136,7 @@
                                 </div>
                             </div>
                             <div class="dtxia">
-                                <span id="sanchu"></span><span class="dtxiawz">删除</span>
+                                <span id="sanchu"></span><span class="dtxiawz" onclick="DelMyBookWriter('${listmon.id}');">删除</span>
                             </div>
                             <div id="tzxian"></div>
                         </div>
@@ -190,9 +195,11 @@
                                     </div>
                                 </div>
                                 <div class="dtxia">
-                                    <span id="bianji"></span><span class="dtxiawz">编辑</span><span
-                                        id="sanchu"></span><span
-                                        class="dtxiawz">删除</span>
+                                                                  <c:if test="${listmon.auth_status ==1 &&listmon.auth_status ==0}">
+                                <span id="bianji"></span>
+                                <span class="dtxiawz"><a herf="${ctx}/writerArticle/initWriteArticle.action?id=${listmon.id}&&userid=${permap.id}">编辑</a></span>
+                                </c:if>
+                                <span id="sanchu"></span><span  class="dtxiawz" onclick="DelMyWriter('${listmon.id}');">删除</span>
                                 </div>
                                 <div id="tzxian"></div>
                             </div>
@@ -205,7 +212,10 @@
                                     <div class="shangright">${listmon.gmt_update}</div>
                                 </div>
                                 <div class="dtzhong">
-                                    <div id="suibiwenzhangtp"></div>
+                                    <div id="suibiwenzhangtp">
+                                    <c:if test="${listmon.image_url==DEFAULT}"><img src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"></c:if>
+                                    <c:if test="${listmon.image_url!=DEFAULT}"><img src="${listmon.image_url}"></c:if>
+                                    </div>
                                     <div id="suibiwenzhanneirong">
                                         <div id="pingluntu"></div>
                                         <div class="pinlunbt"><span class="suibibiaoti">${listmon.book_name}</span>
@@ -220,26 +230,13 @@
                                     </div>
                                 </div>
                                 <div class="dtxia">
-                                    <span id="sanchu"></span><span class="dtxiawz">删除</span>
+                                    <span id="sanchu"></span><span class="dtxiawz" onclick="DelMyBookWriter('${listmon.id}');">删除</span>
                                 </div>
                                 <div id="tzxian"></div>
                             </div>
                         </c:forEach>
-                        <a href="javascript:abc();">换一批</a>
-                        <div id="tabone1">
-                            1
-                        </div>
-                        <div id="tabone2" style="display:none">
-                            2
-                        </div>
-                        <div id="tabone3" style="display:none">
-                            3
-                        </div>
-                        <div id="tabone4" style="display:none">
-                            4
-                        </div>
-
-
+                        
+						<span class="jiazaigengduo">暂无更多</span>
                     </div>
                 </div>
 

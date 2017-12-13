@@ -65,7 +65,10 @@
                                 <div class="shangright">${listmon.gmt_update}</div>
                             </div>
                             <div class="dtzhong">
-                                <div id="suibiwenzhangtp"></div>
+                                <div id="suibiwenzhangtp">
+                                <c:if test="${listmon.image_url==DEFAULT}"><img src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"></c:if>
+                                    <c:if test="${listmon.image_url!=DEFAULT}"><img src="${listmon.image_url}"></c:if>
+                                </div>
                                 <div id="suibiwenzhanneirong">
                                     <div id="pingluntu"></div>
                                     <div class="pinlunbt"><span class="suibibiaoti">${listmon.book_name}</span>
@@ -79,7 +82,7 @@
                                 </div>
                             </div>
                             <div class="dtxia">
-                                <span id="sanchu"></span><span class="dtxiawz">删除</span>
+<span id="sanchu"></span><span class="dtxiawz" onclick="DelMyBookWriter('${listmon.id}');">删除</span>
                             </div>
                             <div id="tzxian"></div>
                         </div>

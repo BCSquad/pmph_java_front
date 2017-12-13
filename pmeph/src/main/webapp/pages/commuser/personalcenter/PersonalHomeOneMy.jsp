@@ -14,7 +14,7 @@
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.js"></script>
         <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.pager.js"></script>
-    <script src="${ctx}/resources/commuser/personalcenter/PersonalHomeOne.js"></script>
+    <script src="${ctx}/resources/commuser/personalcenter/PersonalHomeOneMy.js"></script>
   <script src="${ctx}/resources/comm/base.js"></script>
 
 
@@ -62,7 +62,7 @@
                
                 <div id="jiaocaishenbao">
                     <div class="jcsbssl">
-                        <span id="jcsbqb">全部</span><span id="jcsbwdsb" onclick="listoction();">我的申报</span><span class="jcsbsbzt"  onclick="listoction1();">正在进行</span><span
+                        <span id="jcsbqbmy"  onclick="listoction();">全部</span><span id="jcsbwdsbmy">我的申报</span><span class="jcsbsbzt"  onclick="listoction1();">正在进行</span><span
                             class="jcsbsbzt"  onclick="listoction2();">已结束</span>
                         <span class="jcsbsbzt"  onclick="listoction3();">暂存</span><span class="jcsbsbzt"  onclick="listoction4();">已提交</span><input type="text" id="wdsbssk" value="${serchbox}">
                     </div>

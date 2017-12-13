@@ -81,8 +81,11 @@
                                 </div>
                             </div>
                             <div class="dtxia">
-                                <span id="bianji"></span><span class="dtxiawz">编辑</span><span id="sanchu"></span><span
-                                    class="dtxiawz">删除</span>
+                                                              <c:if test="${listmon.auth_status!=2}">
+                                <span id="bianji"></span>
+                                <span class="dtxiawz"><a herf="${ctx}/writerArticle/initWriteArticle.action?id=${listmon.id}&&userid=${permap.id}">编辑</a></span>
+                                </c:if>
+                                <span id="sanchu"></span><span  class="dtxiawz" onclick="DelMyWriter('${listmon.id}')">删除</span>
                             </div>
                             <div id="tzxian"></div>
                         </div>
