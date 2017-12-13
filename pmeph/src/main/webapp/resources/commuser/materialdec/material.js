@@ -464,7 +464,7 @@ function del_tr(trId){
 
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type){
-//	if(checkNull(jsonStr)){
+	if(checkNull(jsonStr)){
 		$.ajax({
 			type: "POST",
 			url:contextpath+'material/doMaterialAdd.action?type='+type,
@@ -478,7 +478,7 @@ function buttAdd(type){
 			    }
 		    }
 		});
-//	}	
+	}	
 }
 
 
