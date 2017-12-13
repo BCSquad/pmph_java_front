@@ -11,11 +11,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script type="text/javascript">
+        var contextpath = '${pageContext.request.contextPath}/';
+    </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>我的好友</title>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/myfriend/myFriend.css" type="text/css">
-    
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
     <script type="text/javascript" src="${ctx}/resources/commuser/myfriend/myFriend.js"></script>
@@ -220,6 +222,15 @@ accept{
     color:#999;
 }
 
+.more{
+    font-family: MicrosoftYaHei;
+	font-size: 16px;
+	line-height: 18px;
+	color: #7d7d7d;
+	text-align:center;
+	
+}
+
 .picture{
     width: 50px;
     height:50px;
@@ -284,15 +295,21 @@ a{
     color:#999999;
     cursor: pointer;
 }
+
+.last_div{
+	margin-top: 40px;
+}
+
 .b{
     width: 690px;
     height: 495px;
+    position:fixed;
     background-color: #ffffff;
     box-shadow: 0px 4px 10px 0px
     rgba(0, 0, 0, 0.2);
     position:absolute;
-    top:35%;
-    left:25%;
+    top:200px;
+    left:605px;
     z-index: 99;
 }
 .hiddenX{
@@ -509,8 +526,10 @@ a{
         var contxtpath = '${pageContext.request.contextPath}';
 </script>
 <body>
-<jsp:include page="/pages/comm/head.jsp"></jsp:include>
-<div class="content-body">
+<jsp:include page="/pages/comm/head.jsp">
+    <jsp:param value="homepage" name="pageTitle"/>
+</jsp:include>
+<div class="content-body" id="more">
     <div class="div_top">
         <div class="float_left">我的好友</div>
         <div class="float_right" style="color: #1abd44;">
@@ -521,14 +540,14 @@ a{
     </div>
     <div class="b hidden" id="box">
             <div class="hiddenX hidden" id="close">
-                <img onclick="hide()" style="width:100%;height:100%;" src="../statics/image/关闭.png">
+                <img onclick="hide()" style="width:100%;height:100%;" src="${ctx}/statics/image/closediv.png">
             </div>
             <span class="personMessageTitle">私信窗口</span>
             <div class="contentBox" id="dialogue">
             </div>
 			<div class="inputBox">
                 <div style="float: left;width: 80%;height: 100%">
-                <textarea id="content" style="width: 100%;height: 98%;border: none;outline:0;font-size:15px;" type="text" placeholder="请输入消息内容,按回车键发送" ></textarea>
+                <textarea id="content" style="width: 100%;height: 98%;border: none;outline:0;font-size:15px;" placeholder="请输入消息内容,按回车键发送" ></textarea>
                 </div>
                 <div style="float: left;width: 20%;height: 100%">
                 <div class="div_btn11" style="cursor: pointer;">
@@ -538,16 +557,15 @@ a{
             </div>
 
     </div>
+    <!-- 隐藏域 -->
+    <input type="hidden" value="${row}" id="row">
+    <input type="hidden" value="${id}" id="id">
+    <input type="hidden" value="${more}" id="moreeee">
     <div class="items">
     	<c:forEach var="friend" items="${listFriends}" varStatus="st" >
-			<c:choose>  
-  			   <c:when test="${(st.index+1)%5 == 1}"><div class="item1"> 
-			   </c:when>  
-			   <c:otherwise>                         <div class="item1 item11"> 
-			   </c:otherwise>  
-			</c:choose>
-			
-	            <div><img src="${pageContext.request.contextPath}/${friend.avatar}" class="img2"></div>
+  			    <div class="${(st.index+1)%5 == 1? 'item1':'item1 item11'}">
+	            <%-- <div><img src="${ctx}${friend.avatar}" class="img2"></div> --%>
+	            <div><img src="${ctx}/statics/pictures/head.png" class="img2"></div>
 	            <div class="div_txt1">${friend.username}</div>
 	            <div class="div_txt2">${friend.position}</div>
 	            <div class="div_txt3">
@@ -555,15 +573,69 @@ a{
 	                <input type="hidden" id="t_${friend.id}" value= "${friend.username}" />
 	            </div>
             </div>
-			<c:if test="${(st.index+1)%5==0}">
-				</div><div class="items"><!-- 拼装换行 -->
-			</c:if>
 	    </c:forEach>
-        </div>
-    </div>
+     </div>
 </div>
+<div style="clear:both;"></div>
+<div class="last_div" id="span_more"><div class="more" ><span style="cursor: pointer;" onclick="morefriend()" id="mooorew">加载更多。。。</span></div></div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
-
+<script type="text/javascript">
+    $(function() {
+        $(window).scroll(function() {
+            var top = $(window).scrollTop()+200;
+            var left= $(window).scrollLeft()+605;
+            $("#box").css({ left:left + "px", top: top + "px" });
+        });
+    });
+    
+    if(($("#more").val)<15){
+		$("#span_more").hide();
+	}
+    
+    //加载更多
+    function morefriend(){
+    	var json={
+    			 id:$("#id").val(),
+    			 row:$("#row").val(),
+    	};
+    	$.ajax({
+            type:'post',
+            url :contxtpath+'/myFriend/more.action',
+            async:false,
+            dataType:'json',
+            data:json,
+            success:function(json){
+            	var str='';
+            	$.each(json,function(i,n){
+            		$("#row").val(n.row);
+                 	$("#id").val(n.queryid);
+                 	$("#moreeee").val(i);
+            		str+='<div class="items">'
+               			if((i+1)%5==1){
+               				str+='<div class="item1">'
+               			}else{
+               				str+='<div class="item1 item11">'
+               			}; 
+               	            <%-- <div><img src="${ctx}${friend.avatar}" class="img2"></div> --%>
+               	       str+='<div><img src="${ctx}/statics/pictures/head.png" class="img2"></div><div class="div_txt1">'
+               	            +n.username
+               	            +'</div><div class="div_txt2">'
+               	            +n.position
+               	            +'</div><div class="div_txt3"><div  class ="showTalk" id='
+               	            +n.id
+               	            +'>私信</div><input type="hidden" id="t_'
+               	            +n.id 
+               	            +'value=' 
+               	            +n.username 
+               	            +'/></div></div></div></div>';
+            	});
+            	$("#more").append(str);
+            	if($("#moreeee").val()<15){
+            		$("#mooorew").html('没有更多了~~');
+            	}
+            }
+    	});
+    }
+</script>
 </body>
-
 </html>
