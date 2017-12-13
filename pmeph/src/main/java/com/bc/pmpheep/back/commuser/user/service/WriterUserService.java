@@ -2,6 +2,8 @@ package com.bc.pmpheep.back.commuser.user.service;
 
 import java.io.IOException;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertification;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertificationVO;
@@ -52,7 +54,7 @@ public interface WriterUserService {
 	 * @return
 	 */
 	WriterUserCertification updateTeacherCertification(WriterUserCertification writerUserCertification, 
-			String realName) throws IOException ;
+			String realName, MultipartFile certFile) throws IOException ;
 	
 	/**
 	 * 根据id和用户名修改用户密码
