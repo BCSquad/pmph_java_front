@@ -12,6 +12,11 @@
     color: #333333;
     float: left;
 }
+.nav a{
+	text-decoration: blink;
+	cursor: pointer;
+	color: #333333;
+}
 .select{
     width: 30%;
     height: 15px;
@@ -104,12 +109,15 @@
     height: 72px;
 }
 .eyePicture {
-    background-image:  url("../image/css_sprites.png");;
+    background-image:  url("../../image/css_sprites.png");;
     background-position: -418px -147px;
     background-repeat: no-repeat;
     height: 25px;
     width: 20px;
     float: right;
+}
+.eyePicture.active{
+	background-position: -418px -170px;
 }
 .pictureDiv{
     width: 100%;
@@ -128,8 +136,19 @@
     margin-left: 5px;
 }
 .handPicture{
-    background-image:  url("../image/css_sprites.png");;
+    background-image:  url("../../image/css_sprites.png");;
     background-position: -418px -194px;
+    background-repeat: no-repeat;
+    height: 25px;
+    width: 20px;
+    float: right;
+}
+.handPicture.active {
+    background-position: -418px -218px;
+}
+.comment {
+    background-image: url("../../image/css_sprites.png");;
+    background-position: -418px -243px;
     background-repeat: no-repeat;
     height: 25px;
     width: 20px;
@@ -155,6 +174,10 @@
     letter-spacing: 0px;
     color: #666666;
     padding-top: 0px;
+    max-height: 70px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .pageDiv{

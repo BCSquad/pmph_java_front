@@ -1,12 +1,16 @@
 package com.bc.pmpheep.back.commuser.book.controller;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -47,16 +51,23 @@ public class BookController extends BaseController {
      * 
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView list(Integer pageSize, Integer pageNumber, BookVO bookVO) throws Exception {
+    public ModelAndView list(Integer pageSize, Integer pageNumber, BookVO bookVO,@RequestParam(value="type",required=true)Long type) throws Exception {
         ModelAndView model = new ModelAndView();
         String pageUrl = "commuser/booklist/bookList";
+        
+        bookVO.setLogUserId((BigInteger)getUserInfo().get("id"));
         PageParameter<BookVO> pageParameter = new PageParameter<>(pageNumber, pageSize);
+        //书籍的分类，将会查询该类及其所有子类的图书
+        bookVO.setType(type);
         if (StringUtil.notEmpty(bookVO.getName())) {
             bookVO.setName(bookVO.getName().replaceAll(" ", ""));// 去除空格
         }
         pageParameter.setParameter(bookVO);
         try {
-            PageResult<BookVO> page = bookService.listBookVO(pageParameter);
+        	//获取某教材分类及其父类列表
+        	List<Map<String,Object>> parentTypeList = bookService.queryParentTypeListByTypeId(type);
+        	String materiaName = bookService.getMaterialTypeNameById(type);
+        	PageResult<BookVO> page = bookService.listBookVO(pageParameter);
             List<BookVO> bookList = page.getRows();
             for (BookVO book : bookList) {
                 book.setImageUrl(RouteUtil.DEFAULT_USER_AVATAR);
@@ -65,9 +76,13 @@ public class BookController extends BaseController {
             if (null == pageNumber) {
                 pageNumber = 1;
             }
+            
+            model.addObject("parentTypeList", parentTypeList);
+            model.addObject("materiaName", materiaName);
             model.addObject("pageNumber", pageNumber);
             model.addObject("pageSize", pageSize);
             model.addObject("order", bookVO.getOrder());
+            model.addObject("materialType", type);
             model.setViewName(pageUrl);
         } catch (CheckedServiceException e) {
             throw new CheckedServiceException(e.getBusiness(), e.getResult(), e.getMessage(),

@@ -362,46 +362,106 @@
 	<select id="listBookVO" parameterType="PageParameter"
 		resultType="BookVO">
 		SELECT 
+			b.id,
 			b.`bookname`,b.`author`,
 			b.`publisher`,bd.`detail`,
   			b.`clicks`,b.`comments`,
   			b.`likes`,b.`bookmarks`,
-  			t.type_name, t.path 
+  			b.image_url as imageUrl,
+  			t.type_name, t.path ,
+  			l.id as likeId
 		FROM 
 			`book` b 
+		left join book_user_like as l 
+		ON b.id= l.book_id and l.writer_id = ${parameter.logUserId}
 		LEFT JOIN 
 			`book_detail` bd 
 		ON 
 			b.`id`= bd.`book_id`
-		LEFT JOIN 
+		INNER JOIN 
 			`material_type` t
 		ON
 			t.`id` = b.`type`
+			
+			and
+			(
+				SUBSTRING_INDEX(SUBSTRING_INDEX(CONCAT(t.path,'-',t.id),'-',
+										(select 
+											cast(
+													(CHAR_LENGTH(path)-CHAR_LENGTH(REPLACE(path,'-','')))/CHAR_LENGTH('-')+2
+														as decimal(9,2)
+											)
+											 from material_type 
+											where id = cast(#{parameter.type} as decimal(9,2)))
+								),'-',-1) = #{parameter.type}
+				or t.id = 	#{parameter.type}		
+			)				
 		WHERE 
 			1 = 1
+		ORDER BY 
 		<if test="parameter.order !=null">
-		 ORDER BY 
+		 
 			<!-- 综合 -->
 			<if test="parameter.order == 1">
 				b.`is_stick` DESC,
-				b.`sort` DESC
+				b.`sort` DESC,
 			</if>
 			<!-- 最新 -->
 			<if test="parameter.order == 2">
 				b.`is_new` DESC ,
-				b.`sort_new` DESC
+				b.`sort_new` DESC,
 			</if>
 			<!-- 最热 -->
 			<if test="parameter.order == 3">
 				b.`is_promote` DESC,
-				b.`sort_promote`DESC
+				b.`sort_promote`DESC,
 			</if>
 		</if>
+		b.id
 		LIMIT #{start},#{pageSize}
 	</select>
-
+	
 	<!-- 查询总数 -->
 	<select id="getBookVOTotal" parameterType="PageParameter"
+		resultType="Integer">
+		SELECT COUNT(*) FROM
+		(
+			SELECT 
+				b.id
+			FROM 
+				`book` b 
+			left join book_user_like as l 
+			on b.id= l.book_id and l.writer_id = ${parameter.logUserId}
+			LEFT JOIN 
+				`book_detail` bd 
+			ON 
+				b.`id`= bd.`book_id`
+			
+			INNER JOIN 
+				`material_type` t
+			ON
+				t.`id` = b.`type`
+				
+				and
+				(
+					SUBSTRING_INDEX(SUBSTRING_INDEX(CONCAT(t.path,'-',t.id),'-',
+											(select 
+												cast(
+														(CHAR_LENGTH(path)-CHAR_LENGTH(REPLACE(path,'-','')))/CHAR_LENGTH('-')+2
+															as decimal(9,2)
+												)
+												 from material_type 
+												where id = cast(#{parameter.type} as decimal(9,2)))
+									),'-',-1) = #{parameter.type}
+					or t.id = 	#{parameter.type}		
+				)				
+		)t
+	</select>
+	
+	
+
+	<!-- 查询总数 -->
+	<!-- <select id="getBookVOTotal" parameterType="PageParameter"
 		resultType="Integer">
 		SELECT count(*) FROM book b LEFT JOIN material_type t ON t.id =
 		b.type
@@ -424,7 +484,11 @@
 			and (t.path like concat(#{parameter.path},'%') or
 			t.id=#{parameter.type})
 		</if>
-	</select>
+	</select> -->
 
+	<select id="queryMaterialTypeById" parameterType="String" resultType="Map">
+		select id,path,type_name from material_type
+		where id = #{id}
+	</select>
 
 </mapper>

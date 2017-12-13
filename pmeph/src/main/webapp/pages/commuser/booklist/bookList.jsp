@@ -8,23 +8,38 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
+  	<script>
+		var contextpath = "${pageContext.request.contextPath}/";
+	</script>
     <base href="<%=basePath%>">
     <title>图书列表</title>
-	<link rel="stylesheet" href="<%=basePath%>/statics/css/base.css" type="text/css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="<%=path%>/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="<%=basePath%>/statics/commuser/booklist/bookList.css" type="text/css">
-    <link rel="stylesheet" href="<%=basePath%>/statics/css/jquery.pager.css"/>
-    <link rel="stylesheet" href="<%=basePath%>/statics/css/jquery.selectlist.css"/>
-    <script src="<%=basePath%>/statics/js/jquery/jquery.js"></script>
-    <script src="<%=basePath%>/statics/js/jquery/jquery.selectlist.js"></script>
-    <script src="<%=basePath%>/statics/js/jquery/jquery.pager.js"></script>
+    <link rel="stylesheet" href="<%=path%>/statics/css/jquery.pager.css"/>
+    <link rel="stylesheet" href="<%=path%>/statics/css/jquery.selectlist.css"/>
+    <script src="<%=path%>/resources/comm/jquery/jquery.js"></script>
+    <script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js"></script>
+    <script src="<%=path%>/resources/comm/jquery/jquery.pager.js"></script>
+    <script src="<%=path%>/resources/comm/base.js"></script>
+    <script src="<%=path%>/resources/commuser/booklist/booklist.js"></script>
   </head>
   
 <body>
-<iframe style="width: 100%;padding: 0;margin: 0;height: 81px;border: none" src="<%=basePath%>/statics/comm/head.html"></iframe>
+
+<!-- 隐藏域 -->
+<input type="hidden" id="materialType" value="${materialType }">
+
+<jsp:include page="/pages/comm/head.jsp"></jsp:include> 
 <div class="body" style="background-color: #f6f6f6;padding-bottom:60px">
     <div class="content-wrapper">
         <div class="nav">
-            <span>书籍分类：学校教育 > 长学制教材 > 临床医学</span>
+        	<span>书籍分类：
+        	<c:forEach items="${parentTypeList }" var="type">
+        		<a href="/books/list.action?pageSize=${pageSize }&pageNumber=1&order=${order }&type=${type.id}">${type.type_name }</a> >
+        	</c:forEach>
+        	${materiaName }
+			</span>
         </div>
         <div class="select">
             <span>排序：</span>
@@ -54,10 +69,13 @@
 			                        </div>
 			                        <div class="upRight">
 			                            <div class="pictureDiv">
-			                                <div class="number2">${books.clicks}</div>
-			                                <div class="handPicture">${books.likes}</div>
-			                                <div class="number">${books.comments}</div>
-			                                <div class="eyePicture">${books.bookmarks}</div>
+			                            	<div class="number2">${books.comments}</div>
+						                    <div class="comment" title="评论数"></div>
+						                    <div class="number2">${books.likes}</div>
+						                    <!-- <div class="handPicture active" title="取消赞" onclick="likeSwitch($!{c.bookId},this)"></div> -->
+						                    <div class="handPicture ${books.likeId!=null?'active':'' }" title="点赞" onclick="likeSwitch(${books.id},this)" ></div>
+						                    <div class="number">${books.clicks}</div>
+						                    <div class="eyePicture div" title="点击数"></div>																						
 			                            </div>
 			                        </div>
 			                    </div>
@@ -103,7 +121,7 @@
         startnum: parseInt('${pageNumber}'),				//指定页码
         elem: $('#page1'),		//指定的元素
         callback: function (pageNumber) {	//回调函数
-        	pageFun(pageSize,pageNumber,order);
+        	pageFun(pageSize,pageNumber,order,'${materialType}');
         }
     });
     $(function () {
@@ -114,7 +132,7 @@
             optionHeight: 30,
             onChange: function () {
             	var pageSize =this.getSelectedOptionValue(pages);
-           	 	pageFun(pageSize,'${pageNumber}',order);
+           	 	pageFun(pageSize,'${pageNumber}',order,'${materialType}');
             }
         });
         $('#sort').selectlist({
@@ -124,15 +142,15 @@
             optionHeight: 20,
             onChange: function () {
             	var order =this.getSelectedOptionValue(sort);
-           	 	pageFun(pageSize,'${pageNumber}',order);
+           	 	pageFun(pageSize,'${pageNumber}',order,'${materialType}');
             }
         });
     });
     //分页
-    function pageFun(pageSize,pageNumber,order){
-    	window.location.href = '<%=basePath%>/books/list.action?pageSize='+pageSize+'&pageNumber='+pageNumber+'&order='+order;
+    function pageFun(pageSize,pageNumber,order,materialType){
+    	window.location.href = '<%=basePath%>/books/list.action?pageSize='+pageSize+'&pageNumber='+pageNumber+'&order='+order+'&type='+materialType;
     }
 </script>
-<iframe style="width: 100%;clear:both;padding: 0;margin: 0;height: 190px;border: none" src="<%=basePath%>/statics/comm/tail.html"></iframe>
+<jsp:include page="/pages/comm/tail.jsp"></jsp:include> 
 </body>
 </html>

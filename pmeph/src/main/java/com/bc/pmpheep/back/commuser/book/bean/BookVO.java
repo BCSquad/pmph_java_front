@@ -1,6 +1,8 @@
 package com.bc.pmpheep.back.commuser.book.bean;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
@@ -138,6 +140,16 @@ public class BookVO implements Serializable {
      * 排序1:综合，2：最新，3：最热
      */
     private Integer order;
+    
+    /**
+     * 当前登录人id
+     */
+    private BigInteger logUserId;
+    
+    /**
+     * 点赞关联表主键id 
+     */
+    private BigDecimal likeId;
 
     public Long getId() {
         return id;
@@ -546,5 +558,21 @@ public class BookVO implements Serializable {
     public void setOrder(Integer order) {
         this.order = order;
     }
+
+	public BigInteger getLogUserId() {
+		return logUserId;
+	}
+
+	public void setLogUserId(BigInteger logUserId) {
+		this.logUserId = logUserId;
+	}
+
+	public BigDecimal getLikeId() {
+		return likeId;
+	}
+
+	public void setLikeId(BigDecimal likeId) {
+		this.likeId = likeId;
+	}
 
 }

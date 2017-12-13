@@ -1,6 +1,7 @@
 package com.bc.pmpheep.back.commuser.book.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -80,4 +81,11 @@ public interface BookDao {
      * 
      */
     Book getBookByVn(String vn);
+
+    /**
+     * 通过id查询material_type
+     * @param id
+     * @return
+     */
+	Map<String, Object> queryMaterialTypeById(String id);
 }

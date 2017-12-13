@@ -1,5 +1,8 @@
 package com.bc.pmpheep.back.commuser.book.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.bc.pmpheep.back.commuser.book.bean.Book;
 import com.bc.pmpheep.back.commuser.book.bean.BookDetail;
 import com.bc.pmpheep.back.commuser.book.bean.BookUserLike;
@@ -94,5 +97,19 @@ public interface BookService {
      * 
      */
     String deleteBookById(Long id) throws Exception;
+
+    /**
+     * 获取某教材分类及其父类列表
+     * @param id material_type的id
+     * @return 
+     */
+	List<Map<String, Object>> queryParentTypeListByTypeId(Long id);
+
+	/**
+	 * 通过id查询教材分类名称
+	 * @param type
+	 * @return
+	 */
+	String getMaterialTypeNameById(Long type);
 
 }

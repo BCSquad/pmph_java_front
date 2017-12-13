@@ -61,6 +61,10 @@ String contextpath=request.getContextPath();
             <div  style="background-color: #f6f6f6;width: 100%;height: 15px;"></div>
             <div class="list" style="background-color: white" >
             	<div id="book-list-table"></div>
+            	<div class="no-more" style="display: none;">
+	                <img src="<c:url value="/statics/image/aaa4.png"></c:url>">
+	                <span>木有内容呀~~</span>
+	           	</div>
                 <div class="pageDiv" >
                     <ul class="pagination" id="page1">
                     </ul>
@@ -85,7 +89,7 @@ String contextpath=request.getContextPath();
         </div>
     </div>
 </div>
-<script>
+<!-- <script>
     Page({
         num: 16,					//页码数
         startnum: 3,				//指定页码
@@ -102,10 +106,10 @@ String contextpath=request.getContextPath();
             optionHeight: 30
         });
     })
-</script>
+</script> -->
 <!-- <iframe style="width: 100%;clear:both;padding: 0;margin: 0;height: 190px;border: none" src="../comm/tail.html"></iframe> -->
-<div style="background-color: white;width: 100%;padding: 0;margin: 0;height: 220px;border: none;overflow: hidden;">
+
 	<jsp:include page="/pages/comm/tail.jsp"></jsp:include> 
-</div>
+
 </body>
 </html>

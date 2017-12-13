@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import net.sf.json.JSONArray;
@@ -330,5 +333,28 @@ public class BookServiceImpl extends BaseService implements BookService {
         bookUserMarkDao.deleteBookUserMarkByBookId(id);
         return "SUCCESS";
     }
+
+	@Override
+	public List<Map<String, Object>> queryParentTypeListByTypeId(Long id) {
+		Map<String, Object> materialType = bookDao.queryMaterialTypeById(String.valueOf(id));
+		String pathStr = (String) materialType.get("path");
+		String[] pathStrList = pathStr.split("-");
+		List<Map<String, Object>> typeList= new ArrayList<Map<String, Object>>();
+		for (String pid : pathStrList) {
+			Map<String, Object> parent_material = bookDao.queryMaterialTypeById(pid);
+			if (parent_material != null) {
+				typeList.add(parent_material);
+			}
+		}
+		
+		return typeList;
+	}
+
+	@Override
+	public String getMaterialTypeNameById(Long id) {
+		Map<String, Object> materialType = bookDao.queryMaterialTypeById(String.valueOf(id));
+		
+		return (String) materialType.get("type_name");
+	}
 
 }
