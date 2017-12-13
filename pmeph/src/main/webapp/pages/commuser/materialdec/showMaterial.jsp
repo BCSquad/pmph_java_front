@@ -4,21 +4,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-    <title>申报详情</title>
-    <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
-    <link rel="stylesheet" href="${ctx}/statics/materialdec/material.css" type="text/css">
-    <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.js"></script>
+ <script type="text/javascript">
+           var contextpath = '${pageContext.request.contextPath}/';
+  </script>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<title>申报详情</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
+ <link rel="stylesheet" href="${ctx}/statics/materialdec/material.css" type="text/css">
+<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
+<script type="text/javascript" src="${ctx}/resources/commuser/materialdec/materialdetail.js"></script>
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="body">
 	<div class="content-wrapper">
 		<div class="sbxq_title">
-			<span>个人中心 > 教材申报 > 申报详情</span>
+			<span>个人中心 > 教材申报 > 填写申报表</span>
 		</div>
 		<!-- 图书选择-->
-		<div class="sbxq_item">
+		<div class="sbxq_item1">
 			<div>
 				<span id="tsxz_span1"></span>
 				<span class="tsxz_title">图书选择</span>
@@ -32,7 +38,7 @@
 			</c:forEach>
 		<div>
 		<!-- 专家信息-->
-		<div class="sbxq_item">
+		<div class="sbxq_item1">
 			<div>
 				<span id="tsxz_span2"></span>
 				<span class="tsxz_title">专家信息</span>
@@ -40,25 +46,25 @@
 			<div class="content">
 				<table class="tab_1">
 					<tr>
-						<td><span>姓名：${gezlList.realname}</span></td>
-						<td><span>性别：${gezlList.sex}</span></td>
+						<td><span>姓&emsp;&emsp;名：${gezlList.realname}</span></td>
+						<td><span>性&emsp;&emsp;别：${gezlList.sex}</span></td>
 						<td><span>出生年月：${gezlList.birthday}</span></td>
-						<td><span>教龄：${gezlList.experience}</span></td>
+						<td><span>教&emsp;&emsp;龄：${gezlList.experience}</span></td>
 					</tr>
 					<tr>
 						<td><span>工作单位：${gezlList.org_name}</span></td>
-						<td><span>职务：${gezlList.position}</span></td>
-						<td><span>职称：${gezlList.title}</span></td>
-						<td><span>邮编：${gezlList.postcode}</span></td>
+						<td><span>职&emsp;&emsp;务：${gezlList.position}</span></td>
+						<td><span>职&emsp;&emsp;称：${gezlList.title}</span></td>
+						<td><span>邮&emsp;&emsp;编：${gezlList.postcode}</span></td>
 					</tr>
 					<tr>
-						<td colspan="2"><span>地址：${gezlList.address}</span></td>
-						<td><span>  联系电话：${gezlList.telephone}</span></td>
-						<td><span>传真：${gezlList.fax}</span></td>
+						<td colspan="2"><span>地&emsp;&emsp;址：${gezlList.address}</span></td>
+						<td><span>联系电话：${gezlList.telephone}</span></td>
+						<td><span>传&emsp;&emsp;真：${gezlList.fax}</span></td>
 					</tr>
 					<tr>
-						<td><span>手机：${gezlList.handphone}</span></td>
-						<td><span>E-mail：${gezlList.email}</span></td>
+						<td><span>手&emsp;&emsp;机：${gezlList.handphone}</span></td>
+						<td><span style="width: 70px">E-mail：${gezlList.email}</span></td>
 						<td><span>证件类型：${gezlList.idtype}</span></td>
 						<td><span>证件号码：${gezlList.idcard}</span></td>
 					</tr>
@@ -66,44 +72,44 @@
 			</div>
 		<div>
 		<!--主要学习经历-->
-		<div class="sbxq_item">
+		<div class="sbxq_item" id="zyxxjl">
 			<div>
 				<span id="tsxz_span3"></span>
 				<span class="tsxz_title">主要学习经历</span>
 			</div>
 			<div class="content">
-				<table class="tab_2">
+				<table class="tab_2" id="tab_xxjl">
 					<thead>
 						<tr>
 							<td width="220px">起止时间</td>
-							<td width="220px">学校名称</td>
-							<td width="220px">所学专业</td>
-							<td width="170px">学历</td>
+							<td width="210px">学校名称</td>
+							<td width="210px">所学专业</td>
+							<td width="138px">学历</td>
 							<td>备注</td>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="stulist" items="${stuList}">
-						<tr>
-							<td>${stulist.date_begin}-${stulist.date_end}</td>
-							<td>${stulist.school_name}</td>
-							<td>${stulist.major}</td>
-							<td>${stulist.degree}</td>
-							<td>${stulist.note}</td>
-						</tr>
+							<tr>
+								<td>${stulist.date_begin}-${stulist.date_end}</td>
+								<td>${stulist.school_name}</td>
+								<td>${stulist.major}</td>
+								<td>${stulist.degree}</td>
+								<td>${stulist.note}</td>
+							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 			</div>
-		<div>
+		</div>
 			<!--主要工作经历-->
-		<div class="sbxq_item">
+		<div class="sbxq_item" id="gzjl">
 			<div>
 				<span id="tsxz_span4"></span>
 				<span class="tsxz_title">主要工作经历</span>
 			</div>
 			<div class="content">
-				<table class="tab_2">
+				<table class="tab_2" id="tab_gzjl">
 					<thead>
 						<tr>
 							<td width="220px">起止时间</td>
@@ -114,54 +120,83 @@
 					</thead>
 					<tbody>
 						<c:forEach var="list" items="${workList}">
-						<tr>
-							<td>${list.date_begin}-${list.date_end}</td>
-							<td>${list.org_name}</td>
-							<td>${list.position}</td>
-							<td>${list.note}</td>
-						</tr>
+							<tr>
+								<td>${list.date_begin}-${list.date_end}</td>
+								<td>${list.org_name}</td>
+								<td>${list.position}</td>
+								<td>${list.note}</td>
+							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 			</div>
-		<div>
+		</div>
 			<!--主要教学经历-->
-		<div class="sbxq_item">
+		<div class="sbxq_item" id="jxjl">
 			<div>
 				<span id="tsxz_span5"></span>
 				<span class="tsxz_title">主要教学经历</span>
 			</div>
 			<div class="content">
-				<table class="tab_2">
+				<table class="tab_2" id="tab_jxjz">
 					<thead>
 						<tr>
 							<td width="220px">起止时间</td>
 							<td width="220px">学校名称</td>
-							<td width="420px">教学科目 </td>
+							<td width="220px">教学科目 </td>
 							<td>备注</td>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="list" items="${steaList}">
-						<tr>
-							<td>${list.date_begin}-${list.date_end}</td>
-							<td>${list.school_name}</td>
-							<td>${list.subject}</td>
-							<td>${list.note}</td>
-						</tr>
+							<tr>
+								<td>${list.date_begin}-${list.date_end}</td>
+								<td>${list.school_name}</td>
+								<td>${list.subject}</td>
+								<td>${list.note}</td>
+							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 			</div>
-		<div>
+		</div>
+		<!--主要学术兼职-->
+		<div class="sbxq_item" id="xsjz">
+			<div>
+				<span id="tsxz_span10"></span>
+				<span class="tsxz_title">主要学术兼职</span>
+			</div>
+			<div class="content">
+				<table class="tab_2" id="tab_xsjz">
+					<thead>
+						<tr>
+							<td width="220px">兼职学术组织</td>
+							<td width="220px">级别</td>
+							<td width="220px">职务 </td>
+							<td>备注</td>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="list" items="${zjxsList}">
+							<tr>
+								<td>${list.org_name}</td>
+								<td>${list.rank}</td>
+								<td>${list.position}</td>
+								<td>${list.note}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
 			<!--上版教材参编情况-->
-		<div class="sbxq_item">
+		<div class="sbxq_item" id="sbjccb">
 			<div>
 				<span id="tsxz_span6"></span>
 				<span class="tsxz_title">上版教材参编情况</span>
 			</div>
 			<div class="content">
-				<table class="tab_2">
+				<table class="tab_2" id="tab_jccb">
 					<thead>
 						<tr>
 							<td width="420px">教材名称</td>
@@ -171,59 +206,148 @@
 					</thead>
 					<tbody>
 						<c:forEach var="list" items="${jcbjList}">
-						<tr>
-							<td>${list.material_name}</td>
-							<td>${list.position}</td>
-							<td>${list.note}</td>
-						</tr>
+							<tr>
+								<td>${list.material_name}</td>
+								<td>${list.position}</td>
+								<td>${list.note}</td>
+							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 			</div>
-		<div>
-			<!--国家精品课程建设情况-->
-		<div class="sbxq_item">
+		</div>
+			<!--国家级精品课程建设-->
+		<div class="sbxq_item" id="gjjpkcjs">
 			<div>
 				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">国家精品课程建设情况</span>
+				<span class="tsxz_title">国家级精品课程建设情况</span>
 			</div>
 			<div class="content">
-				<table class="tab_2">
+				<table class="tab_2" id="tab_jpkcjs">
 					<thead>
 						<tr>
 							<td width="420px">课程名称</td>
-							<td width="300px">该课程全年课时数</td>
+							<td width="200px">该课程全年课时数</td>
 							<td>备注</td>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="list" items="${gjkcjsList}">
-						<tr>
-							<td>${list.course_name}</td>
-							<td>${list.class_hour}</td>
-							<td>${list.note}</td>
-						</tr>
+						<c:if test="${list.type == 1}">
+							<tr>
+								<td>${list.course_name}</td>
+								<td>${list.class_hour}</td>
+								<td>${list.note}</td>
+							</tr>
+						</c:if>
 						</c:forEach>
 					</tbody>
 				</table>
 			</div>
-		<div>
+		</div>
+		<!--省部级课程建设-->
+		<div class="sbxq_item" id="sbkcjs">
+			<div>
+				<span id="tsxz_span7"></span>
+				<span class="tsxz_title">省部级课程建设情况</span>
+			</div>
+			<div class="content">
+				<table class="tab_2" id="tab_sjkcjs">
+					<thead>
+						<tr>
+							<td width="420px">课程名称</td>
+							<td width="200px">该课程全年课时数</td>
+							<td>备注</td>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="list" items="${gjkcjsList}">
+						<c:if test="${list.type == 2}">
+							<tr>
+								<td>${list.course_name}</td>
+								<td>${list.class_hour}</td>
+								<td>${list.note}</td>
+							</tr>
+						</c:if>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!--学校课程建设情况-->
+		<div class="sbxq_item" id="xxkcjs">
+			<div>
+				<span id="tsxz_span7"></span>
+				<span class="tsxz_title">学校课程建设情况</span>
+			</div>
+			<div class="content">
+				<table class="tab_2" id="tab_xskcjs">
+					<thead>
+						<tr>
+							<td width="420px">课程名称</td>
+							<td width="200px">该课程全年课时数</td>
+							<td>备注</td>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="list" items="${gjkcjsList}">
+						<c:if test="${list.type == 3}">
+							<tr>
+								<td>${list.course_name}</td>
+								<td>${list.class_hour}</td>
+								<td>${list.note}</td>
+							</tr>
+						</c:if>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!--主编国家级规划教材情况-->
+		<div class="sbxq_item" id="zbgjjgh">
+			<div>
+				<span id="tsxz_span7"></span>
+				<span class="tsxz_title">主编国家级规划教材情况</span>
+			</div>
+			<div class="content">
+				<table class="tab_2" id="tab_gjghjc">
+					<thead>
+						<tr>
+							<td width="340px">教材名称</td>
+							<td width="150px">标准书号</td>
+							<td width="330px">教材级别</td>
+							<td>备注</td>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="list" items="${gjghjcList}">
+							<tr>
+								<td>${list.material_name}</td>
+								<td>${list.isbn}</td>
+								<td>${list.rank}</td>
+								<td>${list.note}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
 			<!--教材编写情况-->
-		<div class="sbxq_item">
+		<div class="sbxq_item" id="jcbxqk">
 			<div>
 				<span id="tsxz_span7"></span>
 				<span class="tsxz_title">教材编写情况</span>
 			</div>
 			<div class="content">
-				<table class="tab_2">
+				<table class="tab_2" id="tab_jcbx">
 					<thead>
 						<tr>
-							<td width="220px">教材名称</td>
+							<td width="250px">教材名称</td>
 							<td width="120px">级别</td>
-							<td width="120px">职责</td>
-							<td width="170px">出版社</td>
-							<td width="170px">出版时间</td>
-							<td width="170px">标准书号</td>
+							<td width="120px">编写职务</td>
+							<td width="150px">出版社</td>
+							<td width="130px">出版时间</td>
+							<td width="130px">标准书号</td>
 							<td>备注</td>
 						</tr>
 					</thead>
@@ -242,23 +366,65 @@
 					</tbody>
 				</table>
 			</div>
-			<hr style=" height:1px;border:none;border-top:1px #999999 dashed;margin-top: 30px;">
-		<div>
+		</div>
+		<!--作家科研情况-->
+		<div class="sbxq_item" id="zjkyqk">
+			<div>
+				<span id="tsxz_span7"></span>
+				<span class="tsxz_title">作家科研情况</span>
+			</div>
+			<div class="content">
+				<table class="tab_2" id="tab_zjky">
+					<thead>
+						<tr>
+							<td width="220px">课题名称</td>
+							<td width="220px">审批单位</td>
+							<td width="320px">获奖情况</td>
+							<td width="320px">备注</td>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="list" items="${zjkyList}">
+							<tr>
+								<td>${list.research_name}</td>
+								<td>${list.approval_unit}</td>
+								<td>${list.award}</td>
+								<td>${list.note}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+			<!--扩展信息-->
+		<c:forEach var="zjkzxx" items="${zjkzqkList}">
+		 	<div class="sbxq_item">
+				<div>
+					<span id="tsxz_span9"></span>
+					<span class="tsxz_title">${zjkzxx.extension_name}</span>
+				</div>
+				<div class="content">
+					<textarea class="text_cl" name="content">${zjkzxx.content}</textarea>
+				</div>
+				<hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">
+			</div>
+		</c:forEach>
 		<!-- 申报单位-->
-		<div class="sbxq_item">
+		<div class="sbxq_item1">
 			<div>
 				<span id="tsxz_span8"></span>
-				<span class="tsxz_title">申报单位</span>
+				<span class="tsxz_title">请选择你的申报单位</span>
 			</div>
 			<div class="sbdw">
 				<span>申报单位：</span>
-				<span>${gezlList.org_name}</span>
+				<span>${gezlList.dwmc}</span>
 			</div>
-		<div>
+		</div>
 		<hr style=" height:1px;border:none;border-top:1px #999999 dashed;margin-top: 30px;">
 		<div class="button">
 			<div class="bt_tj">返回申报列表</div>
 		</div>
+		</form>
 	</div>
 </div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>

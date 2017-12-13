@@ -14,9 +14,13 @@ public interface MaterialDetailDao {
 		//通过教材ID查出扩展信息
 		public List<Map<String,Object>> queryZjkzxxById(String material_id);
 		
-		//图书选择信息
+		//图书申报职位
 		public List<Map<String,Object>> queryTsxz(Map<String,Object> map);
 		public int insertTsxz(Map<String,Object> map);
+		
+		//图书申报职位暂存
+		public List<Map<String,Object>> queryTssbZc(Map<String,Object> map);
+		public int insertTssbZc(Map<String,Object> map);
 		
 		//查询专家信息
 		public List<Map<String,Object>> queryPerson(Map<String,Object> map);

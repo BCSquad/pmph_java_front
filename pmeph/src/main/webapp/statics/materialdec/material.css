@@ -11,6 +11,15 @@
 
 .sbxq_item{
 	margin-top: 30px;
+	clear: none;
+	margin-top: 20px;
+	width: 1200px;
+} 
+
+.sbxq_item1{
+	clear: none;
+	margin-top: 20px;
+	width: 1200px;
 }
 
 /**图书选择**/

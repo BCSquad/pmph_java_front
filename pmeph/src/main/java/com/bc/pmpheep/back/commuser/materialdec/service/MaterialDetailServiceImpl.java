@@ -27,6 +27,19 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 	public List<Map<String, Object>> queryZjkzxxById(String material_id) {
 		return this.madd.queryZjkzxxById(material_id);
 	}
+	
+	/**
+	 * 图书申报职位暂存
+	 */
+	@Override
+	public List<Map<String, Object>> queryTssbZc(Map<String, Object> map) {
+		return this.madd.queryTssbZc(map);
+	}
+	@Override
+	public int insertTssbZc(Map<String, Object> map) {
+		return this.madd.insertTssbZc(map);
+	}
+	
 	@Override
 	public List<Map<String, Object>> queryPerson(Map<String, Object> map) {
 		return this.madd.queryPerson(map);
@@ -135,7 +148,5 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 	public int insertZjZjkzbb(Map<String, Object> map) {
 		return this.madd.insertZjkzbb(map);
 	}
-	
-
 	
 }
