@@ -1,6 +1,12 @@
 package com.bc.pmpheep.back.commuser.cms.controller;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,6 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.cms.bean.CmsInfoLettersList;
 import com.bc.pmpheep.back.commuser.cms.service.CmsInfoLettersManagementService;
+import com.bc.pmpheep.back.commuser.collection.dao.ArticleCollectionDao;
+import com.bc.pmpheep.back.commuser.collection.service.ArticleCollectionService;
+import com.bc.pmpheep.general.controller.BaseController;
 
 
 /**
@@ -33,11 +42,17 @@ import com.bc.pmpheep.back.commuser.cms.service.CmsInfoLettersManagementService;
  */
 @Controller
 @RequestMapping(value = "/cmsinfoletters")
-public class CmsInfoLettersManagementController {
+public class CmsInfoLettersManagementController extends BaseController{
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.cms.service.CmsInfoLettersManagementServiceImpl")
 	CmsInfoLettersManagementService cmsInfoLettersManagementService;
-
+	
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.collection.service.ArticleCollectionServiceImpl")
+	private ArticleCollectionService articleCollectionService;
+	
+	@Autowired
+	private ArticleCollectionDao articleCollectionDao;
 	/**
 	 * 
 	 * 
@@ -54,16 +69,19 @@ public class CmsInfoLettersManagementController {
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	@ResponseBody
-	public List<CmsInfoLettersList> topage(Integer pageSize, Integer pageNumber, Integer order) {
-//		ModelAndView model = new ModelAndView();
-//		model.setViewName("commuser/focusAndSelect/annoceSelect");
-//		Integer total =  cmsInfoLettersManagementService.getCmsInfoLettersListTotal(pageSize,pageNumber);
-//		if(null != total && total>0 ){
-//			List<CmsInfoLettersList> cmsInfoLettersList = cmsInfoLettersManagementService.list(pageSize,pageNumber);
-//			model.addObject("cmsInfoLettersList", cmsInfoLettersList);
-//		}
-//		model.addObject("total",total);
-		return cmsInfoLettersManagementService.list(pageSize,pageNumber, order);
+	public Map<String,Object> topage(Integer pageSize, Integer pageNumber, Integer order) {
+		Map<String,Object> map=new HashMap<>();
+		Map<String, Object> usermap = getUserInfo();
+		BigInteger writerId = new BigInteger(usermap.get("id").toString());
+		List<CmsInfoLettersList> mylist = cmsInfoLettersManagementService.list(pageSize,pageNumber, order);
+		if(mylist !=null && mylist.size()>0){
+			for (CmsInfoLettersList cmsInfo : mylist) {
+			 int islike=articleCollectionDao.queryLikes(new BigInteger(cmsInfo.getId().toString()), writerId);
+			 map.put("cms"+cmsInfo.getId().toString(), islike);
+			}
+		}
+		map.put("list", mylist);
+		return map;
 	}
 	
 	/**
@@ -80,5 +98,16 @@ public class CmsInfoLettersManagementController {
 		ModelAndView model = new ModelAndView();
 		model.setViewName("commuser/focusAndSelect/newsReport");
 		return model;
+	}
+	
+	@RequestMapping(value = "/addlike", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String,Object> addLike(HttpServletRequest request) {
+		Map<String,Object> map=new HashMap<String, Object>();
+		BigInteger contentId=new BigInteger(request.getParameter("id"));
+		Map<String, Object> usermap = getUserInfo();
+		BigInteger writerId=new BigInteger(usermap.get("id").toString());
+		map=articleCollectionService.updateLike(contentId, writerId);
+		return map;
 	}
 }

@@ -38,7 +38,7 @@ public class CmsInfoLettersList {
 	/**
 	 * 点击数
 	 */
-	private Long cilcks;
+	private Long clicks;
 	/**
 	 * 点赞数
 	 */
@@ -84,12 +84,12 @@ public class CmsInfoLettersList {
 		this.summary = summary;
 	}
 
-	public Long getCilcks() {
-		return cilcks;
+	public Long getClicks() {
+		return clicks;
 	}
 
-	public void setCilcks(Long cilcks) {
-		this.cilcks = cilcks;
+	public void setClicks(Long clicks) {
+		this.clicks = clicks;
 	}
 
 	public Long getLikes() {

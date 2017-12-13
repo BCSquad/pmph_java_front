@@ -16,7 +16,7 @@
 		cc.is_deleted = 0
 		AND ccg.category_name = '信息快报'
 		AND cc.auth_status = 2
-		AND is_published = TRUE
+		AND is_published =1
 	</select>
 
 	<select id="list"  resultType="CmsInfoLettersList">
@@ -29,20 +29,20 @@
 		LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
 		WHERE
 		cc.is_deleted = 0
-		AND ccg.category_name = '信息快报'
+		AND ccg.category_name = '信息快报管理'
 		AND cc.auth_status = 2
-		AND is_published = TRUE
+		AND is_published = 1
 		ORDER BY
 		<if test="order == 1">
-			cc.is_promote desc,
-			cc.is_hot DESC,cc.sort_hot,
-		    cc.auth_date DESC
+			cc.is_promote desc,cc.sort_promote asc,
+			cc.is_hot desc,cc.sort_hot asc,
+		    cc.auth_date desc
 		</if>
 		<if test="order == 2">
 			cc.auth_date DESC
 		</if>
 		<if test="order == 3">
-			cc.is_hot DESC,cc.sort_hot
+			cc.is_hot desc,cc.sort_hot asc
 		</if>
 		LIMIT #{start},#{pageSize}
 	</select>

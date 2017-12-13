@@ -13,6 +13,9 @@
     color: #999999;
     text-align: left;
 }
+.div_top a{
+	 color: #999999;
+}
 
 .div_content{
     width: 1134px;
@@ -60,7 +63,7 @@
     text-align: left;
     transition: all .28s;
     -moz-transition: all .28s; /* Firefox 4 */
-    -webkit-transition: all .28s; /* Safari 和 Chrome */
+    -webkit-transition: all .28s; /* Safari 鍜�Chrome */
     -o-transition: all .28s; /* Opera */
 }
 .items:hover{
@@ -70,7 +73,7 @@
 .items_img{
     position: absolute;
     top:4px;
-    left:-10px;
+    left:-8px;
     background-image: url(../../../statics/image/wenzhangtuijian.png);
     font-size:12px;
     color: #fff;
@@ -85,6 +88,14 @@
     color:#333;
     font-size: 18px;
     padding:29px 0 0 15px;
+    height:25px
+}
+.item1 a{
+    color:#333;
+}
+
+a{
+	text-decoration: none
 }
 
 .item2{
@@ -92,6 +103,7 @@
     font-size: 12px;
     line-height: 18px;
     color: #999999;
+    height:40px
 }
 
 .item3{
@@ -117,3 +129,27 @@
     text-decoration: underline;
 }
 #sort-wrapper input{color: #333333;}
+.cutmore{
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.cms-icon{
+	background-image: url(../../image/css_sprites.png);
+	background-repeat: no-repeat;
+	width:20px;
+	height: 20px;
+	display:block;
+	margin-top: 16px;
+	margin-right: 5px;
+}
+.look{
+    background-position:-418px -147px;
+}
+.good{
+     background-position: -413px -218px;
+    cursor: pointer;
+}
+.nogood{
+	background-position: -413px -194px;
+	cursor: pointer;
+}
