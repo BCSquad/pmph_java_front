@@ -358,7 +358,6 @@ color:#FFF;
 
 .sctp {
     height: 80px;
-    width: 56px;
     margin: 0 auto;
     display: block;
 }
@@ -593,12 +592,9 @@ color:#FFF;
 }
 
 #pingluntu {
-    background-image: url(../../image/sp_01.png);
-    background-repeat: no-repeat;
     float: left;
     height: 120px;
-    width: 85px;
-    background-position: 3px 5px;
+    width: 90px;
     margin-right: 25px;
 }
 
@@ -682,19 +678,47 @@ color:#FFF;
 }
 
 #jcsbqb {
-    width: 60px;
-    background-image: url(../../image/jcsbqb.png);
+    color: white;
+    background-image: url(../../image/jcsbqbleft.png);
     background-repeat: no-repeat;
     height: 30px;
+    text-align: center;
     float: left;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 #jcsbwdsb {
-    width: 100px;
-    background-image: url(../../image/jcsbwdsb.png);
+       color: #03717b;
+    border: 1px solid #03717b;
+    background-repeat: no-repeat;
+    height: 24px;
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: 15px;
+}
+
+#jcsbqbmy {
+ color: #03717b;
+    border: 1px solid #03717b;
+    background-repeat: no-repeat;
+    height: 24px;
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#jcsbwdsbmy {
+	 color: white;
+    background-image: url(../../image/jcsbqbright.png);
     background-repeat: no-repeat;
     height: 30px;
+    text-align: center;
     float: left;
+    padding-left: 10px;
+    padding-right: 15px;
+       
 }
 
 .jcsbssl {
@@ -1043,4 +1067,15 @@ color:#FFF;
     background-repeat: no-repeat;
     float: left;
 }
-
+#jiahaoyou{
+	 display: block;
+    float: left;
+    position: relative;
+    height: 25px;
+    width: 80px;
+    margin: 0 10px 18px 0;
+    color: #555;
+     background: #eee;
+    text-decoration: none;
+    text-align: center;
+}
