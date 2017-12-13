@@ -71,13 +71,15 @@
                 <c:if test="${status.index==0}">
                     <div class="content-left" style="margin-left: 30px">
                         <p class="content-size">${list.title}</p>
-                        <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date" pattern="yyyy-MM-dd"/></p>
+                        <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date"
+                                                                  pattern="yyyy-MM-dd"/></p>
                     </div>
                 </c:if>
                 <c:if test="${status.index!=0}">
                     <div class="content-left">
                         <p class="content-size">${list.title}</p>
-                        <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date" pattern="yyyy-MM-dd"/></p>
+                        <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date"
+                                                                  pattern="yyyy-MM-dd"/></p>
                     </div>
                 </c:if>
             </c:forEach>
@@ -96,7 +98,8 @@
                 <c:if test="${status.index==0}">
                     <div class="content-photo">
                         <p class="content-size">${list.title}</p>
-                        <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date" pattern="yyyy-MM-dd"/></p>
+                        <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date"
+                                                                  pattern="yyyy-MM-dd"/></p>
                     </div>
                 </c:if>
             </c:forEach>
@@ -113,10 +116,14 @@
         </div>
         <div class="area-4">
             <div class="tab-bar">
-                <div class="tab active" id="633" onclick='chooseType("633")'>学校教育</div>
-                <div class="tab" id="634" onclick='chooseType("634")'>毕业后教育</div>
-                <div class="tab" id="635" onclick='chooseType("635")'>继续教育</div>
-                <div class="tab" id="636" onclick='chooseType("636")'>教育用书</div>
+                <c:forEach items="${bookTypes}" var="type" varStatus="status">
+                    <div class="tab ${status.index==0?'active':''}" id="${type.id}"
+                         onclick='chooseType("${type.id}")'>${type.type_name}</div>
+                </c:forEach>
+                <%--     <div class="tab active" id="633" onclick='chooseType("633")'>学校教育</div>
+                     <div class="tab" id="634" onclick='chooseType("634")'>毕业后教育</div>
+                     <div class="tab" id="635" onclick='chooseType("635")'>继续教育</div>
+                     <div class="tab" id="636" onclick='chooseType("636")'>教育用书</div>--%>
                 <div class="page ">
                     <div class="page-num">
                         <input type="hidden" id="book_type">
@@ -147,17 +154,6 @@
                                 <a href="${item.type}" class="little"><span
                                         class="little_content">${item.note}</span></a>
                             </c:forEach>
-                            <%--<div class="little"><span class="little_content">护理</span></div>
-                            <div class="little"><span class="little_content">应用心理</span></div>
-                            <div class="little"><span class="little_content">法医</span></div>
-                            <div class="little"><span class="little_content">口腔医学</span></div>
-                            <div class="little"><span class="little_content">医学影像</span></div>
-                            <div class="little"><span class="little_content">医学美容</span></div>
-                            <div class="little"><span class="little_content">护理</span></div>
-                            <div class="little"><span class="little_content">应用心理</span></div>
-                            <div class="little"><span class="little_content">口腔医学</span></div>
-                            <div class="little"><span class="little_content">眼视光</span></div>
-                            <div class="little"><span class="little_content">临床</span></div>--%>
                         </div>
                     </div>
                     <div class="div_photo"></div>
@@ -269,7 +265,8 @@
                 </div>
                 <div class="items">
                     <c:forEach items="${listCom}" var="list" varStatus="status">
-                        <div class="item1" onclick="window.open(contextpath+'readdetail/todetail.action?id=${list.id1}')">
+                        <div class="item1"
+                             onclick="window.open(contextpath+'readdetail/todetail.action?id=${list.id1}')">
                             <div class="sp_01"><img src="${list.image_url}"/></div>
                             <div class="sp_02">
                                 <div class="sp_title">${list.bookname}</div>
@@ -285,94 +282,8 @@
                                 <div class="sp_remark">${list.content}</div>
                             </div>
                         </div>
-                        <%--<c:if test="${status.index==0}">
-                            <div class="last_left1">
-                                <div class="sp_01"><img src="${list.image_url}"/></div>
-                                <div class="last_two_font">
-                                    <div class="last_title_head"><span class="last_title_font">${list.bookname}</span></div>
-                                    <div class="last_comment">
-                                        <div class="last_advice_head">${list.author}评论了《${list.bookname}》</div>
-                                       &lt;%&ndash; <div class="last_content_picture1">
-                                            <span class="last_star_true"></span>
-                                            <span class="last_star_true"></span>
-                                            <span class="last_star_true"></span>
-                                            <span class="last_star_true"></span>
-                                            <span class="last_star_false"></span>
-                                        </div>&ndash;%&gt;
-                                    </div>
-                                    <div class="last_content_head"><span class="last_content_font">${list.content}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </c:if>--%>
                     </c:forEach>
                 </div>
-                <%--<c:forEach items="${listCom}" var="list" varStatus="status">
-                    <c:if test="${status.index==1}">
-                        <div class="last_left1 last_behind">
-                            <div><img src="${ctx}/statics/testfile/rightbook.png" class="last_book"></div>
-                            <div class="last_two_font">
-                                <div class="last_title_head"><span class="last_title_font">${list.bookname}</span></div>
-                                <div class="last_comment">
-                                    <div class="last_advice_head">${list.author}评论了《${list.bookname}》</div>
-                                    <div class="last_content_picture1">
-                                        <span class="last_star_true"></span>
-                                        <span class="last_star_true"></span>
-                                        <span class="last_star_true"></span>
-                                        <span class="last_star_true"></span>
-                                        <span class="last_star_false"></span>
-                                    </div>
-                                </div>
-                                <div class="last_content_head"><span class="last_content_font">${list.content}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </c:if>
-                </c:forEach>
-                <c:forEach items="${listCom}" var="list" varStatus="status">
-                    <c:if test="${status.index==2}">
-                        <div class="last_left">
-                            <div><img src="${ctx}/statics/testfile/rightbook.png" class="last_book"></div>
-                            <div class="last_last_font">
-                                <div class="last_title"><span class="last_title_font">${list.bookname}</span></div>
-                                <div class="last_comment">
-                                    <div class="last_advice">${list.author}评论了《${list.bookname}》</div>
-                                    <div class="last_content_picture">
-                                        <span class="last_star_true"></span>
-                                        <span class="last_star_true"></span>
-                                        <span class="last_star_true"></span>
-                                        <span class="last_star_true"></span>
-                                        <span class="last_star_false"></span>
-                                    </div>
-                                </div>
-                                <div class="last_content"><span class="last_content_font">${list.content}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </c:if>
-                </c:forEach>
-                <c:forEach items="${listCom}" var="list" varStatus="status">
-                    <c:if test="${status.index==3}">
-                        <div class="last_left last_behind">
-                            <div><img src="${ctx}/statics/testfile/rightbook.png" class="last_book1"></div>
-                            <div class="last_last_font">
-                                <div class="last_title"><span class="last_title_font">${list.bookname}</span></div>
-                                <div class="last_comment">
-                                    <div class="last_advice">${list.author}评论了《${list.bookname}》</div>
-                                    <div class="last_content_picture">
-                                        <span class="last_star_true"></span>
-                                        <span class="last_star_true"></span>
-                                        <span class="last_star_true"></span>
-                                        <span class="last_star_true"></span>
-                                        <span class="last_star_false"></span>
-                                    </div>
-                                </div>
-                                <div class="last_content"><span class="last_content_font">${list.content}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </c:if>
-                </c:forEach>--%>
                 <div id="last_div"></div>
             </div>
             <div class="right">
@@ -381,18 +292,31 @@
                     <div class="name">图书畅销榜</div>
                     <div class="last_right">
                         <div class="last_right_head">
-                            <div class="right_div1 active" onclick='changesale("school")' id="school">
-                                学校教育
-                            </div>
-                            <div class="div_center"><img src="${ctx}/statics/image/shu.png" style="margin-top: 13px">
-                            </div>
-                            <div class="right_div1" onclick='changesale("graduate")' id="graduate">毕业后教育</div>
-                            <div class="div_center"><img src="${ctx}/statics/image/shu.png"
-                                                         style="margin-top: 13px;margin-left: 3px"></div>
-                            <div class="right_div1" onclick='changesale("continue")' id="continue">继续教育</div>
-                            <div class="div_center"><img src="${ctx}/statics/image/shu.png" style="margin-top: 13px">
-                            </div>
-                            <div class="right_div1" onclick='changesale("exam")' id="exam">考试用书</div>
+
+                            <c:forEach items="${bookTypes}" var="type" varStatus="status">
+                                <%--<div class="tab ${status.index==0?'active':''}" id="${type.id}"
+                                     onclick='chooseType("${type.id}")'>${type.type_name}</div>--%>
+
+                                <div class="right_div1 ${status.index==0?'active':''}"
+                                     onclick='changesale("${type.id}")' id="typeid-${type.id}">
+                                        ${type.type_name}
+                                </div>
+                                <c:if test="${status.index!=3}">
+                                    <div class="div_center"><img src="${ctx}/statics/image/shu.png"
+                                                                 style="margin-top: 13px">
+                                    </div>
+                                </c:if>
+                            </c:forEach>
+
+                            <%--
+
+                                                        <div class="right_div1" onclick='changesale("graduate")' id="graduate">毕业后教育</div>
+                                                        <div class="div_center"><img src="${ctx}/statics/image/shu.png"
+                                                                                     style="margin-top: 13px;margin-left: 3px"></div>
+                                                        <div class="right_div1" onclick='changesale("continue")' id="continue">继续教育</div>
+                                                        <div class="div_center"><img src="${ctx}/statics/image/shu.png" style="margin-top: 13px">
+                                                        </div>
+                                                        <div class="right_div1" onclick='changesale("exam")' id="exam">考试用书</div>--%>
                         </div>
                         <c:forEach items="${listSal}" var="list" varStatus="status">
                             <div class="last_right_body">

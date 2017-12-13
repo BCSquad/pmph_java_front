@@ -1,124 +1,106 @@
 //初始化加载
 $(function () {
-	//重点推荐
-	searchBook("JKDiv_0",0);
-	//新书推荐
-	searchXstjBook("JKFYDiv_0",0);
-	//畅销
-	searchTscxBook("JKCXDiv_0",0);
+    //重点推荐
+    searchBook($(".tab.recommend.active").attr("typeid"));
+    //新书推荐
+    searchXstjBook($(".tab.type.active").attr("typeid"));
+    //畅销
+    searchTscxBook($(".ts_type.ts_type1").attr("typeid"));
 });
 
 //重点推荐表格切换
-function ChangeDiv(divId,divName,zDivCount)
-{
-    for(var i=0;i<=zDivCount;i++)
-    {
-        document.getElementById(divName+i).style.display="none";
-        document.getElementById("ZKDiv_"+i).setAttribute("class","tab recommend");
-        
-//将所有的层都隐藏
-    }
-    document.getElementById(divName+divId).style.display="block";
-    document.getElementById("ZKDiv_"+divId).setAttribute("class","tab recommend active");
-    searchBook(divName+divId,divId);
-    
+function ChangeDiv(typeid) {
+
+    $(".tab.recommend").removeClass("active");
+
+    $("#ZKDiv_" + typeid).addClass("active");
+    searchBook(typeid);
+
 //显示当前层
 }
 
 //新书推荐
-function ChangeFYDiv(divId,divName,zDivCount)
-{
-    for(var i=0;i<=zDivCount;i++)
-    {
-        document.getElementById(divName+i).style.display="none";
-        document.getElementById("FYDiv_"+i).setAttribute("class","tab type");
-//将所有的层都隐藏
-    }
-    document.getElementById(divName+divId).style.display="block";
-    document.getElementById("FYDiv_"+divId).setAttribute("class","tab type active");
-    searchXstjBook(divName+divId,divId);
+function ChangeFYDiv(typeid) {
+    $(".tab.type").removeClass("active");
+
+    $("#JKFYDiv_" + typeid).addClass("active");
+
+    searchXstjBook(typeid);
 //显示当前层
 }
 
 //畅销榜表格切换
-function ChangeCXDiv(divId,divName,zDivCount)
-{
+function ChangeCXDiv(typeid) {
 
-    for(var i=0;i<=zDivCount;i++)
-    {
-        document.getElementById(divName+i).style.display="none";
-        document.getElementById("CXDiv_"+i).setAttribute("class","ts_type");
-//将所有的层都隐藏
-    }
-    document.getElementById(divName+divId).style.display="block";
-    document.getElementById("CXDiv_"+divId).setAttribute("class","ts_type ts_type1");
-    searchTscxBook(divName+divId,divId);
+    $(".ts_type").removeClass("ts_type1");
+
+    $("#CXDiv_" + typeid).addClass("ts_type1");
+    searchTscxBook(typeid);
     //显示当前层
 }
 
 //图书分类
-function ChangeFLDiv(divId,divName)
-{
-    $(".ChangeFLDiv").css("display",'none');
+function ChangeFLDiv(divId, divName) {
+    $(".ChangeFLDiv").css("display", 'none');
     $(".ts_type").removeClass("ts_type1");
 
-    $("#FLDiv_"+divId).addClass("ts_type1");
-    $("#ChangeFLDiv_"+divId).css("display",'block');
+    $("#FLDiv_" + divId).addClass("ts_type1");
+    $("#ChangeFLDiv_" + divId).css("display", 'block');
 
-  /*  for(var i=0;i<=zDivCount;i++)
-    {
-        document.getElementById(divName+i).style.display="none";
-        document.getElementById("FLDiv_"+i).setAttribute("class","ts_type");
-//将所有的层都隐藏
-    }
-    document.getElementById(divName+divId).style.display="block";
-    document.getElementById("FLDiv_"+divId).setAttribute("class","ts_type ts_type1");
-//显示当前层*/
+    /*  for(var i=0;i<=zDivCount;i++)
+     {
+     document.getElementById(divName+i).style.display="none";
+     document.getElementById("FLDiv_"+i).setAttribute("class","ts_type");
+     //将所有的层都隐藏
+     }
+     document.getElementById(divName+divId).style.display="block";
+     document.getElementById("FLDiv_"+divId).setAttribute("class","ts_type ts_type1");
+     //显示当前层*/
 }
 
 //重点推荐
-function searchBook(divId,type){
-	$.ajax({
-		type:'post',
-		url:contextpath+'readpage/searchZdtjBook.action?type='+type,
-		async:false,
-		dataType:'json',
-		success:function(json){
-			//alert(json.pagebook);
-			$("#"+divId).html(json.pagebook);
-		}
-	});
+function searchBook(typeid) {
+    $.ajax({
+        type: 'post',
+        url: contextpath + 'readpage/searchZdtjBook.action?type=' + typeid,
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+            //alert(json.pagebook);
+            $("#JKDiv_0").html(json.pagebook);
+        }
+    });
 }
 
 //新书推荐
-function searchXstjBook(divId,type){
-	$.ajax({
-		type:'post',
-		url:contextpath+'readpage/searchXstjBook.action?type='+type,
-		async:false,
-		dataType:'json',
-		success:function(json){
-			//alert(json.pagebook);
-			$("#"+divId).html(json.pagebook);
-		}
-	});
+function searchXstjBook(typeid) {
+    $.ajax({
+        type: 'post',
+        url: contextpath + 'readpage/searchXstjBook.action?type=' + typeid,
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+            //alert(json.pagebook);
+            $("#JKFYDiv_0").html(json.pagebook);
+        }
+    });
 }
 
 //图书畅销
-function searchTscxBook(divId,type){
-	$.ajax({
-		type:'post',
-		url:contextpath+'readpage/searchTscxBook.action?type='+type,
-		async:false,
-		dataType:'json',
-		success:function(json){
-			//alert(json.pagebook);
-			$("#"+divId).html(json.pagebook);
-		}
-	});
+function searchTscxBook(typeid) {
+    $.ajax({
+        type: 'post',
+        url: contextpath + 'readpage/searchTscxBook.action?type=' + typeid,
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+            //alert(json.pagebook);
+            $("#JKCXDiv_0").html(json.pagebook);
+        }
+    });
 }
 
 //路径跳转
-function openUrl(id){
-	window.open(contextpath+'readdetail/todetail.action?id='+id);
+function openUrl(id) {
+    window.open(contextpath + 'readdetail/todetail.action?id=' + id);
 }

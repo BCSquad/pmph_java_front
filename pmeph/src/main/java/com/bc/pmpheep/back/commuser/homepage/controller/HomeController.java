@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -38,26 +39,33 @@ public class HomeController {
         List<Map<String, Object>> listArt = homeService.queryArticle();
         List<Map<String, Object>> listAut = homeService.queryAuthor();
         List<Map<String, Object>> listCom = homeService.queryComment();
-        List<Map<String, Object>> listSal = homeService.querySale(633);
-        List<Map<String, Object>> listType = homeService.queryBookType(633);
-        List<Map<String, Object>> listLabel = homeService.queryLabel(633);
 
         modelAndView.addObject("listDou", listDou);
         modelAndView.addObject("listNot", listNot);
         modelAndView.addObject("listArt", listArt);
         modelAndView.addObject("listAut", listAut);
         modelAndView.addObject("listCom", listCom);
-        modelAndView.addObject("listSal", listSal);
-        modelAndView.addObject("listType", listType);
-        modelAndView.addObject("listLabel", listLabel);
+
+        List<Map<String, Object>> types = homeService.queryBookType(0);
+        modelAndView.addObject("bookTypes", types);
+        if (types.size() > 0) {
+            List<Map<String, Object>> listSal = homeService.querySale(MapUtils.getIntValue(types.get(0), "id"));
+            List<Map<String, Object>> listType = homeService.queryBookType(MapUtils.getIntValue(types.get(0), "id"));
+            List<Map<String, Object>> listLabel = homeService.queryLabel(MapUtils.getIntValue(types.get(0), "id"));
+            modelAndView.addObject("listSal", listSal);
+            modelAndView.addObject("listType", listType);
+            modelAndView.addObject("listLabel", listLabel);
+        }
+
+
         Map<String, Object> rowsmap = new HashMap<String, Object>();
         rowsmap.put("startrows", -1);
-        rowsmap.put("type", 633);
+        rowsmap.put("type", MapUtils.getIntValue(types.get(0), "id"));
         List<Map<String, Object>> listrows = homeService.queryBook(rowsmap);
         //模板(首页默认显示学校教育下的书籍,从第一条开始显示，每页10条数据)
         Map<String, Object> pmap = new HashMap<String, Object>();
         pmap.put("startrows", 0);
-        pmap.put("type", 633);
+        pmap.put("type", MapUtils.getIntValue(types.get(0), "id"));
         List<Map<String, Object>> listBok = homeService.queryBook(pmap);
         String html = "";
         String vm = "commuser/homepage/homepage.vm";

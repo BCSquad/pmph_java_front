@@ -5,6 +5,7 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bc.pmpheep.back.commuser.homepage.service.HomeService;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -32,6 +33,10 @@ public class ReadController {
     @Autowired
     @Qualifier("com.bc.pmpheep.back.template.service.TemplateService")
     private TemplateService templateService;
+
+    @Autowired
+    @Qualifier("com.bc.pmpheep.back.homepage.service.HomeServiceImpl")
+    private HomeService homeService;
 
     //首页跳转
     @RequestMapping("/main")
@@ -71,6 +76,14 @@ public class ReadController {
                 gradeMaterialType.add(type);
             }
         }
+        List<Map<String, Object>> types = homeService.queryBookType(0);
+        Collections.sort(types, new Comparator<Map<String, Object>>() {
+            @Override
+            public int compare(Map<String, Object> o1, Map<String, Object> o2) {
+                return MapUtils.getIntValue(o2,"sort")-MapUtils.getIntValue(o1,"sort");
+            }
+        });
+        mv.addObject("bookTypes", types);
         mv.addObject("materialType", gradeMaterialType);
 
         return mv;
@@ -87,7 +100,8 @@ public class ReadController {
         String html = "";
         String vm = "commuser/readpage/readpage.vm";
         //图书类型
-        if (type.equals("0")) {
+        zdtjXxjyMap.put("type", type);
+        /*if (type.equals("0")) {
             zdtjXxjyMap.put("type", 633); //学校教育
         } else if (type.equals("1")) {
             zdtjXxjyMap.put("type", 634); //毕业教育
@@ -95,7 +109,7 @@ public class ReadController {
             zdtjXxjyMap.put("type", 635); //继续教育
         } else if (type.equals("3")) {
             zdtjXxjyMap.put("type", 636); //考试用书
-        }
+        }*/
         //查询条数
         zdtjXxjyMap.put("startrows", "1");
         zdtjXxjyMap.put("endrows", "10");
@@ -129,15 +143,7 @@ public class ReadController {
         String html = "";
         String vm = "commuser/readpage/readpage.vm";
         //图书类型
-        if (type.equals("0")) {
-            zdtjXxjyMap.put("type", 633); //学校教育
-        } else if (type.equals("1")) {
-            zdtjXxjyMap.put("type", 634); //毕业教育
-        } else if (type.equals("2")) {
-            zdtjXxjyMap.put("type", 635); //继续教育
-        } else if (type.equals("3")) {
-            zdtjXxjyMap.put("type", 636); //考试用书
-        }
+        zdtjXxjyMap.put("type", type);
         //查询条数
         zdtjXxjyMap.put("startrows", "1");
         zdtjXxjyMap.put("endrows", "10");
@@ -171,15 +177,7 @@ public class ReadController {
         String html = "";
         String vm = "commuser/readpage/tscxreadpage.vm";
         //图书类型
-        if (type.equals("0")) {
-            zdtjXxjyMap.put("type", 633); //学校教育
-        } else if (type.equals("1")) {
-            zdtjXxjyMap.put("type", 634); //毕业教育
-        } else if (type.equals("2")) {
-            zdtjXxjyMap.put("type", 635); //继续教育
-        } else if (type.equals("3")) {
-            zdtjXxjyMap.put("type", 636); //考试用书
-        }
+        zdtjXxjyMap.put("type", type);
         //查询条数
         zdtjXxjyMap.put("startrows", "1");
         zdtjXxjyMap.put("endrows", "6");

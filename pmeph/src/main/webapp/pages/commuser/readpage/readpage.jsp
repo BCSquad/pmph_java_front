@@ -43,18 +43,30 @@
             <div class="area3">
                 <div class="block">
                     <div class="tab-bar">
-                        <div class="tab recommend active" id="ZKDiv_0" onclick="javaScript:ChangeDiv('0','JKDiv_',3)">
-                            学校教育
-                        </div>
-                        <div class="tab recommend" id="ZKDiv_1" onclick="javaScript:ChangeDiv('1','JKDiv_',3)">
-                            毕业后教育
-                        </div>
-                        <div class="tab recommend" id="ZKDiv_2" onclick="javaScript:ChangeDiv('2','JKDiv_',3)">
-                            继续教育
-                        </div>
-                        <div class="tab recommend" id="ZKDiv_3" onclick="javaScript:ChangeDiv('3','JKDiv_',3)">
-                            考试用书
-                        </div>
+
+                        <c:forEach items="${bookTypes}" var="type" varStatus="status">
+                            <%--<div class="tab ${status.index==0?'active':''}" id="${type.id}"
+                                 onclick='chooseType("${type.id}")'>${type.type_name}</div>--%>
+
+                            <div class="tab recommend ${status.index==bookTypes.size()-1?'active':''}"
+                                 typeid="${type.id}"
+                                 id="ZKDiv_${type.id}" onclick="javaScript:ChangeDiv(${type.id})">
+                                    ${type.type_name}
+                            </div>
+                        </c:forEach>
+
+                        <%--  <div class="tab recommend active" id="ZKDiv_0" onclick="javaScript:ChangeDiv('0','JKDiv_',3)">
+                              学校教育
+                          </div>
+                          <div class="tab recommend" id="ZKDiv_1" onclick="javaScript:ChangeDiv('1','JKDiv_',3)">
+                              毕业后教育
+                          </div>
+                          <div class="tab recommend" id="ZKDiv_2" onclick="javaScript:ChangeDiv('2','JKDiv_',3)">
+                              继续教育
+                          </div>
+                          <div class="tab recommend" id="ZKDiv_3" onclick="javaScript:ChangeDiv('3','JKDiv_',3)">
+                              考试用书
+                          </div>--%>
                         <div class="remark">
                             <!--<img class="img_zdtj"/>-->
                             <span class="span_1"></span>
@@ -65,17 +77,11 @@
                     <div class="content" id="JKDiv_0">
 
                     </div>
-                    <div class="content" id="JKDiv_1" style="display: none;">
-                    </div>
-                    <div class="content" id="JKDiv_2" style="display: none;">
-                    </div>
-                    <div class="content" id="JKDiv_3" style="display: none;">
-                    </div>
                 </div>
 
                 <div class="block">
                     <div class="tab-bar" style="border-bottom-color: #FC9C03">
-                        <div class="tab type active" id="FYDiv_0" onclick="javaScript:ChangeFYDiv('0','JKFYDiv_',3)">
+                       <%-- <div class="tab type active" id="FYDiv_0" onclick="javaScript:ChangeFYDiv('0','JKFYDiv_',3)">
                             学校教育
                         </div>
                         <div class="tab type" id="FYDiv_1" onclick="javaScript:ChangeFYDiv('1','JKFYDiv_',3)">
@@ -86,7 +92,18 @@
                         </div>
                         <div class="tab type" id="FYDiv_3" onclick="javaScript:ChangeFYDiv('3','JKFYDiv_',3)">
                             考试用书
-                        </div>
+                        </div>--%>
+                        <c:forEach items="${bookTypes}" var="type" varStatus="status">
+                            <%--<div class="tab ${status.index==0?'active':''}" id="${type.id}"
+                                 onclick='chooseType("${type.id}")'>${type.type_name}</div>--%>
+
+                            <div class="tab type ${status.index==bookTypes.size()-1?'active':''}"
+                                 typeid="${type.id}"
+                                 id="JKFYDiv_${type.id}" onclick="javaScript:ChangeFYDiv(${type.id})">
+                                    ${type.type_name}
+                            </div>
+                        </c:forEach>
+
                         <div class="remark">
                             <img class="span_1" src="${ctx}/statics/image/xstj.png"/>
                             <!--<span id="span_1"></span>-->
@@ -94,12 +111,6 @@
                         </div>
                     </div>
                     <div class="content" id="JKFYDiv_0">
-                    </div>
-                    <div class="content" id="JKFYDiv_1" style="display: none;">
-                    </div>
-                    <div class="content" id="JKFYDiv_2" style="display: none;">
-                    </div>
-                    <div class="content" id="JKFYDiv_3" style="display: none;">
                     </div>
                 </div>
 
@@ -129,24 +140,6 @@
                             </div>
                         </c:forEach>
 
-                        <%--  <div class="item1">
-                                 <div class="sp_01"><img src="${ctx}/statics/image/sp_01.png"/></div>
-                                 <div class="sp_02">
-                                     <div class="sp_title">器官移植护理学</div>
-                                     <div class="sp_pl">
-                                         <span style="float: left;">余艾莲 评论了 《器官移植护理学》</span>
-                                         <span class="rwtx1"></span>
-                                         <span class="rwtx1"></span>
-                                         <span class="rwtx1"></span>
-                                         <span class="rwtx2"></span>
-                                         <span class="rwtx2"></span>
-                                         </div>
-                                         <div style="clear: both"></div>
-                                     <div class="sp_remark">口腔医师资格考试紧密结合口腔临床工作实际，内容
-                                         涵盖从事口腔临床工作所必须的基本素质、基本知识
-                                         和基本技能，考核考生综合运用专业知识处理临床...</div>
-                                 </div>
-                             </div> --%>
                     </div>
                 </div>
 
@@ -158,6 +151,15 @@
                     <hr style=" height:1px;border:none;border-top:1px solid #f0f0f0;">
                 </div>
                 <div>
+
+                    <c:forEach items="${bookTypes}" var="type" varStatus="status">
+                        <div class="ts_type ${status.index==0?'ts_type1':''}" id="CXDiv_${type.id}" typeid="${type.id}"
+                             onclick="javaScript:ChangeCXDiv(${type.id})">
+                            <span>${type.type_name}</span></div>
+
+                    </c:forEach>
+
+<%--
                     <div class="ts_type ts_type1" id="CXDiv_0" onclick="javaScript:ChangeCXDiv('0','JKCXDiv_',3)">
                         <span>学校教育</span></div>
                     <div class="ts_type" id="CXDiv_1" onclick="javaScript:ChangeCXDiv('1','JKCXDiv_',3)">
@@ -165,15 +167,12 @@
                     <div class="ts_type" id="CXDiv_2" onclick="javaScript:ChangeCXDiv('2','JKCXDiv_',3)">
                         <span>继续教育</span></div>
                     <div class="ts_type" id="CXDiv_3" onclick="javaScript:ChangeCXDiv('3','JKCXDiv_',3)">
-                        <span>考试用书</span></div>
+                        <span>考试用书</span></div>--%>
                 </div>
                 <div style="clear: both;height: 14px;"></div>
                 <div class="hot-list" id="JKCXDiv_0">
 
                 </div>
-                <div class="hot-list" id="JKCXDiv_1" style="display: none;"></div>
-                <div class="hot-list" id="JKCXDiv_2" style="display: none;"></div>
-                <div class="hot-list" id="JKCXDiv_3" style="display: none;"></div>
 
                 <div style="clear: both"></div>
 
@@ -183,8 +182,9 @@
                 </div>
                 <div>
 
-                    <c:forEach var="type1" items="${materialType}"  varStatus="status">
-                        <div class="ts_type ${status.index=='0'?'ts_type1':''}" id="FLDiv_${type1.id}" onclick="javaScript:ChangeFLDiv('${type1.id}','ChangeFLDiv_',3)">
+                    <c:forEach var="type1" items="${materialType}" varStatus="status">
+                        <div class="ts_type ${status.index=='0'?'ts_type1':''}" id="FLDiv_${type1.id}"
+                             onclick="javaScript:ChangeFLDiv('${type1.id}','ChangeFLDiv_',3)">
                             <span>${type1.note}</span></div>
                     </c:forEach>
 
@@ -201,7 +201,8 @@
 
                 <c:forEach items="${materialType}" var="type1" varStatus="status">
 
-                    <div id="ChangeFLDiv_${type1.id}" class="tsfl_1 ChangeFLDiv" ${status.index!='0'?'style="display: none;"':''}>
+                    <div id="ChangeFLDiv_${type1.id}"
+                         class="tsfl_1 ChangeFLDiv" ${status.index!='0'?'style="display: none;"':''}>
                         <c:forEach items="${type1.dataList}" var="type2">
                             <div class="part_1">
                                 <span>${type2.note}</span>
@@ -216,173 +217,173 @@
 
                 </c:forEach>
 
-               <%-- <div id="ChangeFLDiv_0" class="tsfl_1">
-                    <div class="part_1">
-                        <span>研究生教材</span>
-                    </div>
-                    <div class="part_2">
-                        <span>护理</span>
-                        <span>临床</span>
-                        <span>中医</span>
-                        <span>口腔</span>
-                    </div>
-                    <div class="part_1">
-                        <span>本科教材</span>
-                    </div>
-                    <div class="part_2">
-                        <span>护理</span>
-                        <span>临床</span>
-                        <span>应用心理</span>
-                        <span>法医</span>
-                        <span>康复治疗</span>
-                        <span>麻醉</span>
-                        <span>医容美学</span>
-                        <span>精神</span>
-                        <span>预防</span>
-                        <span>生物医学</span>
-                        <span>药学</span>
-                    </div>
-                    <div class="part_1">
-                        <span>高职高专教材</span>
-                    </div>
-                    <div class="part_2">
-                        <span>护理</span>
-                        <span>临床</span>
-                        <span>应用心理</span>
-                        <span>法医</span>
-                        <span>康复治疗</span>
-                        <span>麻醉</span>
-                        <span>医容美学</span>
-                        <span>精神</span>
-                        <span>预防</span>
-                        <span>生物医学</span>
-                        <span>药学</span>
-                    </div>
-                    <div class="part_1">
-                        <span>中职中专教材</span>
-                    </div>
-                    <div class="part_2">
-                        <span>护理</span>
-                        <span>临床</span>
-                        <span>应用心理</span>
-                        <span>法医</span>
-                        <span>康复治疗</span>
-                        <span>麻醉</span>
-                        <span>医容美学</span>
-                    </div>
-                    <div class="part_1">
-                        <span>长学制教材</span>
-                    </div>
-                    <div class="part_2">
-                        <span>临床医学</span>
-                        <span>协编及其他</span>
-                    </div>
-                </div>
-                <div id="ChangeFLDiv_1" class="tsfl_1" style="display: none;">
-                    <div class="part_1">
-                        <span>研究生教材</span>
-                    </div>
-                    <div class="part_2">
-                        <span>护理</span>
-                        <span>临床</span>
-                        <span>中医</span>
-                        <span>口腔</span>
-                    </div>
-                    <div class="part_1">
-                        <span>本科教材</span>
-                    </div>
-                    <div class="part_2">
-                        <span>护理</span>
-                        <span>临床</span>
-                        <span>麻醉</span>
-                        <span>医容美学</span>
-                        <span>精神</span>
-                        <span>药学</span>
-                    </div>
-                    <div class="part_1">
-                        <span>高职高专教材</span>
-                    </div>
-                    <div class="part_2">
-                        <span>护理</span>
-                        <span>临床</span>
-                        <span>应用心理</span>
-                    </div>
-                    <div class="part_1">
-                        <span>中职中专教材</span>
-                    </div>
-                    <div class="part_2">
-                        <span>护理</span>
-                        <span>临床</span>
-                        <span>应用心理</span>
-                    </div>
-                    <div class="part_1">
-                        <span>长学制教材</span>
-                    </div>
-                    <div class="part_2">
-                        <span>临床医学</span>
-                        <span>协编及其他</span>
-                    </div>
-                </div>
-                <div id="ChangeFLDiv_2" class="tsfl_1" style="display: none;">
-                    <div class="part_1">
-                        <span>研究生教材</span>
-                    </div>
-                    <div class="part_2">
-                        <span>护理</span>
-                        <span>口腔</span>
-                    </div>
-                    <div class="part_1">
-                        <span>本科教材</span>
-                    </div>
-                    <div class="part_2">
-                        <span>护理</span>
-                        <span>应用心理</span>
-                        <span>康复治疗</span>
-                        <span>麻醉</span>
-                        <span>医容美学</span>
-                        <span>生物医学</span>
-                        <span>药学</span>
-                    </div>
-                    <div class="part_1">
-                        <span>高职高专教材</span>
-                    </div>
-                    <div class="part_1">
-                        <span>长学制教材</span>
-                    </div>
-                    <div class="part_2">
-                        <span>临床医学</span>
-                        <span>协编及其他</span>
-                    </div>
-                </div>
-                <div id="ChangeFLDiv_3" class="tsfl_1" style="display: none;">
-                    <div class="part_1">
-                        <span>研究生教材</span>
-                    </div>
-                    <div class="part_2">
-                        <span>护理</span>
-                        <span>临床</span>
-                    </div>
-                    <div class="part_1">
-                        <span>本科教材</span>
-                    </div>
-                    <div class="part_2">
-                        <span>护理</span>
-                        <span>临床</span>
-                        <span>应用心理</span>
-                        <span>生物医学</span>
-                        <span>药学</span>
-                    </div>
-                    <div class="part_1">
-                        <span>高职高专教材</span>
-                    </div>
-                    <div class="part_2">
-                        <span>护理</span>
-                        <span>临床</span>
-                        <span>应用心理</span>
-                        <span>法医</span>
-                        <span>康复治疗</span>
-                    </div>
-                </div>--%>
+                <%-- <div id="ChangeFLDiv_0" class="tsfl_1">
+                     <div class="part_1">
+                         <span>研究生教材</span>
+                     </div>
+                     <div class="part_2">
+                         <span>护理</span>
+                         <span>临床</span>
+                         <span>中医</span>
+                         <span>口腔</span>
+                     </div>
+                     <div class="part_1">
+                         <span>本科教材</span>
+                     </div>
+                     <div class="part_2">
+                         <span>护理</span>
+                         <span>临床</span>
+                         <span>应用心理</span>
+                         <span>法医</span>
+                         <span>康复治疗</span>
+                         <span>麻醉</span>
+                         <span>医容美学</span>
+                         <span>精神</span>
+                         <span>预防</span>
+                         <span>生物医学</span>
+                         <span>药学</span>
+                     </div>
+                     <div class="part_1">
+                         <span>高职高专教材</span>
+                     </div>
+                     <div class="part_2">
+                         <span>护理</span>
+                         <span>临床</span>
+                         <span>应用心理</span>
+                         <span>法医</span>
+                         <span>康复治疗</span>
+                         <span>麻醉</span>
+                         <span>医容美学</span>
+                         <span>精神</span>
+                         <span>预防</span>
+                         <span>生物医学</span>
+                         <span>药学</span>
+                     </div>
+                     <div class="part_1">
+                         <span>中职中专教材</span>
+                     </div>
+                     <div class="part_2">
+                         <span>护理</span>
+                         <span>临床</span>
+                         <span>应用心理</span>
+                         <span>法医</span>
+                         <span>康复治疗</span>
+                         <span>麻醉</span>
+                         <span>医容美学</span>
+                     </div>
+                     <div class="part_1">
+                         <span>长学制教材</span>
+                     </div>
+                     <div class="part_2">
+                         <span>临床医学</span>
+                         <span>协编及其他</span>
+                     </div>
+                 </div>
+                 <div id="ChangeFLDiv_1" class="tsfl_1" style="display: none;">
+                     <div class="part_1">
+                         <span>研究生教材</span>
+                     </div>
+                     <div class="part_2">
+                         <span>护理</span>
+                         <span>临床</span>
+                         <span>中医</span>
+                         <span>口腔</span>
+                     </div>
+                     <div class="part_1">
+                         <span>本科教材</span>
+                     </div>
+                     <div class="part_2">
+                         <span>护理</span>
+                         <span>临床</span>
+                         <span>麻醉</span>
+                         <span>医容美学</span>
+                         <span>精神</span>
+                         <span>药学</span>
+                     </div>
+                     <div class="part_1">
+                         <span>高职高专教材</span>
+                     </div>
+                     <div class="part_2">
+                         <span>护理</span>
+                         <span>临床</span>
+                         <span>应用心理</span>
+                     </div>
+                     <div class="part_1">
+                         <span>中职中专教材</span>
+                     </div>
+                     <div class="part_2">
+                         <span>护理</span>
+                         <span>临床</span>
+                         <span>应用心理</span>
+                     </div>
+                     <div class="part_1">
+                         <span>长学制教材</span>
+                     </div>
+                     <div class="part_2">
+                         <span>临床医学</span>
+                         <span>协编及其他</span>
+                     </div>
+                 </div>
+                 <div id="ChangeFLDiv_2" class="tsfl_1" style="display: none;">
+                     <div class="part_1">
+                         <span>研究生教材</span>
+                     </div>
+                     <div class="part_2">
+                         <span>护理</span>
+                         <span>口腔</span>
+                     </div>
+                     <div class="part_1">
+                         <span>本科教材</span>
+                     </div>
+                     <div class="part_2">
+                         <span>护理</span>
+                         <span>应用心理</span>
+                         <span>康复治疗</span>
+                         <span>麻醉</span>
+                         <span>医容美学</span>
+                         <span>生物医学</span>
+                         <span>药学</span>
+                     </div>
+                     <div class="part_1">
+                         <span>高职高专教材</span>
+                     </div>
+                     <div class="part_1">
+                         <span>长学制教材</span>
+                     </div>
+                     <div class="part_2">
+                         <span>临床医学</span>
+                         <span>协编及其他</span>
+                     </div>
+                 </div>
+                 <div id="ChangeFLDiv_3" class="tsfl_1" style="display: none;">
+                     <div class="part_1">
+                         <span>研究生教材</span>
+                     </div>
+                     <div class="part_2">
+                         <span>护理</span>
+                         <span>临床</span>
+                     </div>
+                     <div class="part_1">
+                         <span>本科教材</span>
+                     </div>
+                     <div class="part_2">
+                         <span>护理</span>
+                         <span>临床</span>
+                         <span>应用心理</span>
+                         <span>生物医学</span>
+                         <span>药学</span>
+                     </div>
+                     <div class="part_1">
+                         <span>高职高专教材</span>
+                     </div>
+                     <div class="part_2">
+                         <span>护理</span>
+                         <span>临床</span>
+                         <span>应用心理</span>
+                         <span>法医</span>
+                         <span>康复治疗</span>
+                     </div>
+                 </div>--%>
 
 
             </div>
