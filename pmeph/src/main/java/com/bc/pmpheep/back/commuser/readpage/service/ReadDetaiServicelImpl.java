@@ -185,5 +185,11 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		long writer_id=Long.valueOf(writerId);
 		return readDetailDao.queryMark(book_id,favorite_id,writer_id);
 	}
+
+	@Override
+	public String delbookwriter(Map<String, Object> map) {
+		// TODO 自动生成的方法存根  删除书评
+		return readDetailDao.updateDelBookWriter(map);
+	}
 	
 }

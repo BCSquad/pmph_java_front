@@ -86,4 +86,12 @@ public interface ReadDetailService {
 	 * @return
 	 */
 	int queryMark(String bookId,String favoriteId,String writerId);
+	String delbookwriter(Map<String, Object> map);
+	/**
+	 * 删除对应的书评
+	 * @param 书评Id
+	 * @param favoriteId
+	 * @param writerId
+	 * @return
+	 */
 }
