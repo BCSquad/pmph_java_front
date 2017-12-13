@@ -237,4 +237,35 @@ public class ReadDetailController extends BaseController{
 		PageResult<Map<String, Object>> listCom=readDetailService.queryComment(pageParameter);
 		return listCom;
 	}
+	
+	/**
+	 * 删除相关书评
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("updateDelBookWriter")
+	@ResponseBody
+	public Map<String,Object> updateDelBookWriter(HttpServletRequest request){
+		String bookwriterid = request.getParameter("id");
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		String  flag="0";
+		Map<String, Object> user = this.getUserInfo();
+		BigInteger uid = (BigInteger) user.get("id");//用户的id
+		try {
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("bookwriterid",bookwriterid); //书评id
+			//修改上一次的全部内容
+			 flag = readDetailService.delbookwriter(map);
+		} catch (Exception e) {
+			// TODO: handle exception
+			flag ="1";
+			e.printStackTrace();
+			resultMap.put("flag", flag);
+			return resultMap;
+			
+		}
+		resultMap.put("flag", flag);
+		return resultMap;
+	
+	}
 }
