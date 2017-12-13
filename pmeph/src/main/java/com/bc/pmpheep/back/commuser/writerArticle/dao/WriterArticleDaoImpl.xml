@@ -25,6 +25,15 @@
 		where mid = #{msg_id}
 	</update>
 	
+	<!-- 更新文章状态删除文章 -->
+	<update id="updateDelWriter"  parameterType="java.util.Map">
+		update cms_content set 
+		is_deleted = 1
+		gmt_update = sysdate()
+		where id = #{writerid}
+	</update>
+	
+	
 	<select id="queryWriteArticleInfo" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT
 			mid,

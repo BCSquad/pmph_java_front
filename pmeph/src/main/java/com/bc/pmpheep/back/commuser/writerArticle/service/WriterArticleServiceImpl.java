@@ -51,4 +51,9 @@ public class WriterArticleServiceImpl implements WriterArticleService {
 		return writerArticleDao.queryWriteArticleInfo(map);
 	}
 
+	public String updateDelWriter(Map<String, Object> map) {
+		// TODO 自动生成的方法存根
+		return writerArticleDao.updateDelWriter(map);
+	}
+
 }

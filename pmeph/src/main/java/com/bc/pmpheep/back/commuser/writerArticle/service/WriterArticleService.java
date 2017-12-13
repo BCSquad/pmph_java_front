@@ -22,4 +22,12 @@ public interface WriterArticleService {
 	 * @param map
 	 */
 	public Map<String, Object> queryWriteArticleInfo(Map<String, Object> map);
+	
+	
+	/**
+	 * 删除文章
+	 * @param map
+	 */
+	
+	public String updateDelWriter(Map<String, Object> map);
 }

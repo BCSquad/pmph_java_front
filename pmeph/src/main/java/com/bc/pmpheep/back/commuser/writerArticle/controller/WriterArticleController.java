@@ -162,5 +162,35 @@ public class WriterArticleController extends BaseController{
 		resultMap.put("flag", flag);
 		return resultMap;
 	}
+	
+	/**
+	 * 删除随笔文章
+	 * @return
+	 */
+	@RequestMapping(value="/updateDelWriter",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> updateDelWriter(HttpServletRequest request){
+		String writerid = request.getParameter("id");
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		String  flag="0";
+		Map<String, Object> user = this.getUserInfo();
+		BigInteger uid = (BigInteger) user.get("id");//用户的id
+		try {
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("author_id",uid); //作者id
+			map.put("writerid",writerid); //文章id
+			//修改上一次的全部内容
+			 flag =writerArticleServiceImpl.updateDelWriter(map);
+		} catch (Exception e) {
+			// TODO: handle exception
+			flag ="1";
+			e.printStackTrace();
+			resultMap.put("flag", flag);
+			return resultMap;
+			
+		}
+		resultMap.put("flag", flag);
+		return resultMap;
+	}
 
 }
