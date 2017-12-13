@@ -4,20 +4,21 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head lang="en">
-<c:set var="ctx" value="${pageContext.request.contextPath}" />
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <title>私信列表</title>
+<script>
+    var contextpath='${pageContext.request.contextPath}/';
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="${ctx}/statics/css/base.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${ctx}/statics/commuser/mymessage/message.css" type="text/css">
-<link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/chat.css"
-	type="text/css">
+<link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
+<link rel="stylesheet" href="${ctx}/statics/commuser/mymessage/message.css" type="text/css">
+<link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/chat.css" type="text/css">
 <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css" />
 <script src="${ctx}/statics/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
 <script src="${ctx}/statics/js/jquery/jquery.selectlist.js"></script>
 <script src="${ctx}/resources/commuser/mymessage/personnelMessage.js"></script>
- <script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
+
 <style type="text/css">
 #rightContent .select-button {
 	background: #f6f6f6;
@@ -27,15 +28,12 @@
 	border: none;
 }
 </style>
-<script type="text/javascript">
-	var contxtpath = '${pageContext.request.contextPath}';
-</script>
 </head>
 <body>
 	<jsp:include page="/pages/comm/head.jsp"></jsp:include>
 	<div class="messageList">
-		<span><a class="otherOptions" href="../mymessage/notice.html">通知</a></span>
-		<span><a href="../mymessage/apply.html" class="unselected">申请</a></span>
+		<span><a class="otherOptions" href="${ctx}/message/noticeMessageList.action">通知</a></span>
+		<span><a href="${ctx}/message/applyMessageList.action" class="unselected">申请</a></span>
 		<span id="otherSelected"><b>私信</b></span> <span id="rightContent">筛选：
 			<select id="select" title="请选择">
 				<option value="">全部</option>
@@ -51,7 +49,7 @@
 
 		<div class="b hidden" id="box">
 			<div class="hiddenX hidden" id="close">
-				<img id="hide" style="width: 100%; height: 100%;" src="../statics/image/关闭.png">
+				<img id="hide" style="width: 100%; height: 100%;" src="${ctx}/statics/image/yellowclose.png">
 			</div>
 			
 			  

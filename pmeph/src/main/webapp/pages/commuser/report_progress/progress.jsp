@@ -5,19 +5,26 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
 %>
-
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
     <title>申报进度</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" href="<%=basePath%>/statics/css/base.css" type="text/css">
-    <link rel="stylesheet" href="<%=basePath%>/statics/commuser/report_progress/progress.css" type="text/css">
-
+    <script>
+        var contextpath='${pageContext.request.contextPath}/';
+    </script>
+    <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
+    <link rel="stylesheet" href="${ctx}/statics/commuser/report_progress/progress.css" type="text/css">
+    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
+    <script src="${ctx}/resources/comm/base.js"></script>
+    <script src="${ctx}/resources/comm/layer/layer.js"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
+	
 </head>
-	<body>
-<iframe style="width: 100%;padding: 0;margin: 0;height: 81px;border: none" src="<%=basePath%>/statics/comm/head.html"></iframe>
+<body>
+<jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="body">
     <div class="content-wrapper">
         <div class="title">
@@ -28,12 +35,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="conten-left">
                 <div class="conten-left-top">
                     <div class="img-bg">
-                    	<c:if test="${progress.onlineSubmit=='1'}">
+                    	<c:if test="${progress.onlineSubmit=='1'||progress.onlineProgress=='2'}">
 	                        <div class="img_left">
 	                            <div class="picture_top"></div>
 	                            <div class="picture_bom">
 	                                <span class="span_bom_left">已提交</span>
-	                                <img   class="img_bom_right"   src="<%=basePath%>/statics/image/yiwancheng.png" >
+	                                <img   class="img_bom_right"   src="${ctx}/statics/image/yiwancheng.png" >
+	                            </div>
+	                        </div>
+                        </c:if>
+                    	<c:if test="${progress.onlineSubmit=='0'}">
+	                        <div class="img_left">
+	                            <div class="picture_top1"></div>
+	                            <div class="picture_bom1">
+	                                <span class="span_bom_left" style="color: #999999">未提交</span>
 	                            </div>
 	                        </div>
                         </c:if>
@@ -42,7 +57,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                            <div class="picture_mid"></div>
 	                            <div class="picture_bom">
 	                                <span class="span_bom_left">资料已审核</span>
-	                                <img   class="img_bom_right"  src="<%=basePath%>/statics/image/yiwancheng.png">
+	                                <img   class="img_bom_right"  src="${ctx}/statics/image/yiwancheng.png">
+	                            </div>
+	                        </div>
+	                    </c:if>
+                        <c:if test="${progress.onlineProgress=='2'}">
+	                        <div class="img_mid">
+	                            <div class="picture_mid1"></div>
+	                            <div class="picture_bom">
+	                                <span class="span_bom_left" style="color: #999999">资料被退回</span>
 	                            </div>
 	                        </div>
 	                    </c:if>
@@ -51,7 +74,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                            <div class="picture_right"></div>
 	                            <div class="picture_bom">
 	                                <span class="span_bom_left">纸质表已收到</span>
-	                                <img   class="img_bom_right"   src="<%=basePath%>/statics/image/yiwancheng.png" >
+	                                <img   class="img_bom_right"   src="${ctx}/statics/image/yiwancheng.png" >
+	                            </div>
+	                        </div>
+                        </c:if>
+                        <c:if test="${progress.offlineProgress=='0'}">
+	                        <div class="img_right">
+	                            <div class="picture_right1"></div>
+	                            <div class="picture_bom">
+	                                <span class="span_bom_left" style="color: #999999">纸质表未收到</span>
+	                            </div>
+	                        </div>
+                        </c:if>
+                        <c:if test="${progress.offlineProgress=='1'}">
+	                        <div class="img_right">
+	                            <div class="picture_right1"></div>
+	                            <div class="picture_bom">
+	                                <span class="span_bom_left" style="color: #999999">纸质表被退回</span>
 	                            </div>
 	                        </div>
                         </c:if>
@@ -90,23 +129,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
             </div>
             <div class="conten-right">
-            	 <c:forEach items="${userMessageList}" var="message" varStatus="vs">
+            	 <c:forEach items="${userMessageList}" var="message" varStatus="vs" >
             	 	<div class="list">
 		                <div class="rightContent-top">
 		                    <div class="board-line"></div>
 		                    <fmt:parseDate value="${message.gmtCreate}" var="date1" type="both"></fmt:parseDate>
 		                    <div class="time"><fmt:formatDate value="${date1}" pattern="yyyy-MM-dd HH:mm:ss"/></div>
 		                </div>
+		                <c:if test="${vs.last==false}" >
 		                <div class="rightContent-bom">
 		                    <div class="wzContent">${message.msgContent}</div>
 		                </div>
+		                </c:if>
+		                <c:if test="${vs.last==true}" >
+		                <div class="rightContent-bom1">
+		                    <div class="wzContent">${message.msgContent}</div>
+		                </div>
+		                </c:if>
 		            </div>
             	 </c:forEach>
         	</div>
         </div>
     </div>
 </div>
-
-<iframe style="width: 100%;clear:both;padding: 0;margin: 0;height: 200px;border: none" src="<%=basePath%>/statics/comm/tail.html"></iframe>
+<div style="clear: both; background-color: #f6f6f6;">   
+<jsp:include page="/pages/comm/tail.jsp"/>
+</div>
 </body>
 </html>

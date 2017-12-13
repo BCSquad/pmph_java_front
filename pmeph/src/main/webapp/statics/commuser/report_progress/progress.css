@@ -19,7 +19,7 @@
 }
 
 .img-bg{
-    background-image: url("../image/jinduBG.png");
+    background-image: url("../../image/jinduBG.png");
     background-repeat: no-repeat;
     width: auto;
     height: 115px;
@@ -34,17 +34,33 @@
 }
 
 .picture_top{
-    background-image: url(../image/css_sprites27.png);
+    background-image: url(../../image/css_sprites27.png);
     background-position: -380px -15px;
     height: 30px;
     width: 32px;
     background-repeat: no-repeat;
    margin-left: 48px;
 }
+.picture_top1{
+    background-image: url(../../image/css_sprites27.png);
+    background-position: -340px -15px;
+    height: 30px;
+    width: 32px;
+    background-repeat: no-repeat;
+   margin-left: 48px;
+}
 
-.picture_mid{
-    background-image: url(../image/css_sprites27.png);
+.picture_mid1{
+    background-image: url(../../image/css_sprites27.png);
     background-position: -194px -15px;
+    height: 30px;
+    width: 32px;
+    background-repeat: no-repeat;
+    margin-left: 48px;
+}
+.picture_mid{
+    background-image: url(../../image/css_sprites27.png);
+    background-position: -230px -15px;
     height: 30px;
     width: 32px;
     background-repeat: no-repeat;
@@ -52,16 +68,29 @@
 }
 
 .picture_right{
-    background-image: url(../image/css_sprites27.png);
+    background-image: url(../../image/css_sprites27.png);
     background-position: -302px -16px;
     height: 30px;
     width: 32px;
     background-repeat: no-repeat;
-    margin-left: 48px;
+    margin-left: 55px;
+}
+.picture_right1{
+    background-image: url(../../image/css_sprites27.png);
+    background-position: -266px -16px;
+    height: 30px;
+    width: 32px;
+    background-repeat: no-repeat;
+    margin-left: 55px;
 }
 
 .picture_bom{
     margin-left: 23px;
+    padding-top: 10px;
+    height: 18px;
+}
+.picture_bom1{
+    margin-left: 38px;
     padding-top: 10px;
     height: 18px;
 }
@@ -130,8 +159,9 @@
 .left-bom-21{
     float: left;
     text-align: left;
-    padding-left: 15px;
-    width: 97px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: auto;
     height: 30px;
     font-size: 14px;
     background-color: #e8e8e8;
@@ -163,10 +193,11 @@
 }
 .left-bom-24{
     float: left;
-    width: 210px;
+    width: auto;
     height: 30px;
     text-align: left;
-    padding-left: 38px;
+    padding-left: 20px;
+   padding-right: 20px;
     font-family: MicrosoftYaHei;
     font-size: 14px;
     color: #666666;
@@ -203,6 +234,13 @@
     height: 100px;
     line-height: 100px;
     border-left: 4px solid #F2F2F2;
+    margin-left:9px;
+    padding-left:30px;
+}
+.rightContent-bom1{
+    height: 100px;
+    line-height: 100px;
+    border-left: 4px solid white;
     margin-left:9px;
     padding-left:30px;
 }

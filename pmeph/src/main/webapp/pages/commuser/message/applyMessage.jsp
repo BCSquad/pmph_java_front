@@ -6,6 +6,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
  <c:set var="ctx" value="${pageContext.request.contextPath}"/>
+ <script>
+    var contextpath='${pageContext.request.contextPath}/';
+</script>
     <title>申请列表</title>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
@@ -45,7 +48,7 @@
     <div class="messageList">
         <span><a href="${ctx}/message/noticeMessageList.action" class="otherOptions">通知</a></span>
         <span id="otherSelected"><b>申请</b></span>
-        <span><a href="../mymessage/personnelMessage.html" class="unselected">私信</a></span>
+        <span><a href="${ctx}/mymessage/listMyMessage.action" class="unselected">私信</a></span>
             <span id="rightContent">
                 <span class="filtrate-wrapper">
                   		  筛选:

@@ -61,7 +61,8 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 	@RequestMapping(value = "/tolist", method = RequestMethod.GET)
 	public List<MyMessageVO> list(Integer pageSize, Integer pageNumber,String state) {
 		Map<String, Object> writerUser = this.getUserInfo();
-		Long userId = new Long(String.valueOf(writerUser.get("id")));
+		//Long userId = new Long(String.valueOf(writerUser.get("id")));
+		Long userId =  new Long(1456);
 		List<MyMessageVO> list = myMessageService.listMyMessage(pageNumber,pageSize,state,userId);
 		return list;
 	}

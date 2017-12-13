@@ -74,7 +74,7 @@
         <div class="messageList">
             <span id="selected"><b>通知</b></span>
             <span><a href="${ctx}/message/applyMessageList.action" class="unselected">申请</a></span>
-            <span><a href="../mymessage/personnelMessage.html" class="unselected">私信</a></span>
+            <span><a href="${ctx}/mymessage/listMyMessage.action"  class="unselected">私信</a></span>
             <span id="rightContent" >筛选：
                 <select id="select" name="select" title="请选择" >
                     <option value="3" ${condition=='3' ?'selected':''}>全部</option>

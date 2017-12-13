@@ -52,18 +52,17 @@ public class ReportProgressController extends BaseController {
      * </pre>
      */
     @RequestMapping(value = "/listReportProgress", method = RequestMethod.GET)
-    public ModelAndView listReportProgress(@RequestParam("materialId") Long materialId)
+    public ModelAndView listReportProgress(/*@RequestParam("materialId") Long materialId*/)
     throws Exception {
         ModelAndView model = new ModelAndView();
         String pageUrl = "commuser/report_progress/progress";
         // Long userId = Long.parseLong(this.getUserInfo().get("id").toString());
         Long userId = 32781L;
-        materialId = 123L;
+        Long materialId = 123L;
         // 申报进度
         TextBookCheckVO progress = reportProgressService.getMaterialProgress(userId, materialId);
         // 书籍审核结果
-        List<TextBookCheckVO> textBookChecks =
-        reportProgressService.getTextBookCheckResult(userId, materialId);
+        List<TextBookCheckVO> textBookChecks =reportProgressService.getTextBookCheckResult(userId, materialId);
         // 申报消息
         List<UserMessageVO> userMessageList =
         reportProgressService.getUserMessageByMaterialId(userId, materialId);
