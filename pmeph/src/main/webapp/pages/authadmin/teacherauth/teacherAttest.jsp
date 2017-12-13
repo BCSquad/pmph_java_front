@@ -99,7 +99,7 @@ String contextpath=request.getContextPath();
         </div>
 
          <div>
-         <form action="${pageContext.request.contextPath}/teacherCertification/updateTeacherCertification.action" method="post">
+         <form action="${pageContext.request.contextPath}/teacherCertification/updateTeacherCertification.action" method="post" enctype="multipart/form-data">
             <table border="0" style="margin-left:20px;">
                 <tr>
                     <td colspan="3" align="center"><img alt="" src="<%=path%>/statics/image/_cupline.jpg"/></td>
@@ -154,8 +154,8 @@ String contextpath=request.getContextPath();
                 </tr>
                 <tr  class="sxy-tr">
                     <td align="right"><font class="td-font-1">*教师资格证</font></td>
-                    <td><input class="sxy-txt" type="text" value="${showWriterUserCertification.certName}" name="cert"/></td>                    
-                    <td><input id="sxy-btn-upload" type="button" value="上传文件"/></td>
+                    <td><input class="sxy-txt" type="text" value="${showWriterUserCertification.certName}" name="certFile"/></td>                    
+                    <td><input id="sxy-btn-upload" type="submit" value="上传文件"/></td>
                 </tr>               
                 <tr  class="sxy-tr">
                     <td></td>

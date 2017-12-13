@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertification;
@@ -57,10 +58,11 @@ public class TeacherCertification extends BaseController {
 	 */
     @RequestMapping(value = "/updateTeacherCertification", method = RequestMethod.POST)
     public ModelAndView updateTeacherCertification(WriterUserCertification WriterUserCertification, 
-    		@RequestParam("realName") String realName) throws IOException {
+    		@RequestParam("realName") String realName, 
+    		@RequestParam("certFile") MultipartFile certFile) throws IOException {
         ModelAndView model = new ModelAndView();
         WriterUserCertification updateWriterUserCertification =
-        writerUserService.updateTeacherCertification(WriterUserCertification, realName);
+        writerUserService.updateTeacherCertification(WriterUserCertification, realName, certFile);
         model.addObject("updateWriterUserCertification", updateWriterUserCertification);
         return model;
     }
