@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bc.pmpheep.back.commuser.group.bean.GroupFileVO;
 import com.bc.pmpheep.back.commuser.group.bean.GroupList;
 import com.bc.pmpheep.back.commuser.group.bean.GroupMessageVO;
 import com.bc.pmpheep.back.commuser.group.bean.PmphGroupMemberVO;
@@ -62,7 +63,7 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
     }
     
     /**
-     * 进入某个吓跑组
+     * 进入某个具体小组
      * @introduction 
      * @author Mryang
      * @createDate 2017年12月12日 下午5:42:27
@@ -105,6 +106,8 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
         List<PmphGroupMemberVO> gropuMemebers= groupService.listPmphGroupMember(groupId,userId);
         modelAndView.addObject("gropuMemebers",gropuMemebers);
         modelAndView.addObject("gropuMemebersNum",gropuMemebers.size());
+        //文件总数
+        modelAndView.addObject("fileTotal",groupService.getFilesTotal(groupId, null));
         //页面路径
         modelAndView.setViewName("commuser/mygroup/communication");
         return modelAndView;
@@ -126,6 +129,42 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
     	Map<String, Object> map = this.getUserInfo();
     	Long thisId = new Long (String.valueOf(map.get("id")));
         return groupService.getTalks(thisId, groupId, pageNumber,pageSize);
+    }
+    
+    /**
+     * 获取文件
+     * @introduction 
+     * @author Mryang
+     * @createDate 2017年12月13日 上午10:28:14
+     * @param pageNumber
+     * @param pageSize
+     * @param groupId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getFiles", method = RequestMethod.GET)
+    public List<GroupFileVO> getFiles(Integer pageNumber,Integer pageSize,@RequestParam(value="groupId")Long  groupId,String  fileName)  {
+    	Map<String, Object> map = this.getUserInfo();
+    	Long thisId = new Long (String.valueOf(map.get("id")));
+        return groupService.groupFiles(pageNumber,pageSize,groupId,fileName,thisId);
+    }
+    
+    /**
+     * 获取文件
+     * @introduction 
+     * @author Mryang
+     * @createDate 2017年12月13日 上午10:28:14
+     * @param pageNumber
+     * @param pageSize
+     * @param groupId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/quitGroup", method = RequestMethod.GET)
+    public Boolean quitGroup(@RequestParam(value="groupId")Long  groupId)  {
+    	Map<String, Object> map = this.getUserInfo();
+    	Long thisId = new Long (String.valueOf(map.get("id")));
+        return groupService.quitGroup(groupId,thisId);
     }
 }
 

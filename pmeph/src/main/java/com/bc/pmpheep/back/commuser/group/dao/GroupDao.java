@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.bc.pmpheep.back.commuser.group.bean.Group;
-import com.bc.pmpheep.back.commuser.group.bean.GroupFile;
+import com.bc.pmpheep.back.commuser.group.bean.GroupFileVO;
 import com.bc.pmpheep.back.commuser.group.bean.GroupList;
 import com.bc.pmpheep.back.commuser.group.bean.GroupMember;
 import com.bc.pmpheep.back.commuser.group.bean.GroupMessageVO;
@@ -18,6 +18,48 @@ import com.bc.pmpheep.back.commuser.group.bean.PmphGroupMemberVO;
  * @author mryang
  */
 public interface GroupDao {
+	
+	/**
+	 * 查询我在这个小组上传的文件
+	 * @introduction 
+	 * @author Mryang
+	 * @createDate 2017年12月13日 上午11:47:24
+	 * @param groupId
+	 * @param userId
+	 * @return
+	 */
+	List<GroupFileVO> getMyFiles(@Param("groupId")Long groupId,@Param("userId")Long userId);
+	
+	/**
+	 * 根据用户id删除文件
+	 * @introduction 
+	 * @author Mryang
+	 * @createDate 2017年12月13日 上午11:38:39
+	 * @param userId
+	 * @return
+	 */
+	Integer deletePmphGroupFile(@Param("groupId")Long groupId,@Param("userId")Long userId);
+	
+	/**
+	 * 根据用户id删除对话
+	 * @introduction 
+	 * @author Mryang
+	 * @createDate 2017年12月13日 上午11:39:00
+	 * @param userId
+	 * @return
+	 */
+	Integer deleteMessage(@Param("groupId")Long groupId,@Param("userId")Long userId);
+	
+	/**
+	 * 根据用户id删除成员
+	 * @introduction 
+	 * @author Mryang
+	 * @createDate 2017年12月13日 上午11:39:06
+	 * @param userId
+	 * @return
+	 */
+	Integer deletePmphGroupMember(@Param("groupId")Long groupId, @Param("userId")Long userId);
+	
 	/**
 	 * 
 	 * 
@@ -103,13 +145,24 @@ public interface GroupDao {
 	/**
 	 * 
 	 * Description:获取小组文件列表
-	 * @author:lyc
+	 * @author:mryang
 	 * @date:2017年12月8日下午4:47:42
 	 * @param 
 	 * @return List<GroupFile>
 	 */
-	List<GroupFile> getFiles(@Param("start") Integer start, @Param("pageSize") Integer pageSize,
-			@Param("groupId") Long groupId, @Param("fileName")String fileName);
+	List<GroupFileVO> getFiles(@Param("start") Integer start, @Param("pageSize") Integer pageSize,
+			@Param("groupId") Long groupId, @Param("fileName")String fileName, @Param("thisId")Long thisId);
+	
+	/**
+	 * 获取某小组文件的文件总数
+	 * @introduction 
+	 * @author Mryang
+	 * @createDate 2017年12月13日 上午10:13:15
+	 * @param groupId
+	 * @param fileName
+	 * @return
+	 */
+	Integer getFilesTotal(@Param("groupId") Long groupId, @Param("fileName")String fileName);
 	
 	/**
 	 * 
@@ -152,7 +205,7 @@ public interface GroupDao {
 	 * @param 
 	 * @return Long
 	 */
-	Long addGroupFile(GroupFile groupFile);
+	Long addGroupFile(GroupFileVO groupFile);
 	
 	/**
 	 * 
@@ -172,7 +225,7 @@ public interface GroupDao {
 	 * @param 
 	 * @return Integer
 	 */
-	Integer updateGroupFile(GroupFile groupFile);
+	Integer updateGroupFile(GroupFileVO groupFile);
 	
 	/**
 	 * 

@@ -2,11 +2,9 @@ package com.bc.pmpheep.back.commuser.group.service;
 
 import java.io.IOException;
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.bc.pmpheep.back.commuser.group.bean.GroupFile;
+import com.bc.pmpheep.back.commuser.group.bean.GroupFileVO;
 import com.bc.pmpheep.back.commuser.group.bean.GroupList;
 import com.bc.pmpheep.back.commuser.group.bean.GroupMember;
 import com.bc.pmpheep.back.commuser.group.bean.GroupMessageVO;
@@ -14,6 +12,28 @@ import com.bc.pmpheep.back.commuser.group.bean.PmphGroupMemberVO;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 
 public interface GroupService {
+	/**
+	 * 退出小组
+	 * @introduction 
+	 * @author Mryang
+	 * @createDate 2017年12月13日 上午11:33:52
+	 * @param groupId
+	 * @param thisId
+	 * @return
+	 * @throws CheckedServiceException
+	 */
+	Boolean quitGroup(Long groupId,Long thisId) throws CheckedServiceException;
+
+	/**
+	 * 获取某小组文件的文件总数
+	 * @introduction 
+	 * @author Mryang
+	 * @createDate 2017年12月13日 上午10:13:15
+	 * @param groupId
+	 * @param fileName
+	 * @return
+	 */
+	Integer getFilesTotal(Long groupId, String fileName) throws CheckedServiceException;
 
 	/**
 	 * 
@@ -31,12 +51,11 @@ public interface GroupService {
 	 * 
 	 * Description:前台获取文件小组列表
 	 * @author:lyc
-	 * @date:2017年12月8日下午5:59:07
+	 * @date:2017年12月13日 上午10:28:14
 	 * @param 
-	 * @return List<GroupFile>
+	 * @return List<GroupFileVO>
 	 */
-	List<GroupFile> groupFiles(@Param("start") Integer start, @Param("pageSize") Integer pageSize, 
-			@Param("groupId") Long groupId,  @Param("fileName") String fileName) throws CheckedServiceException;
+	List<GroupFileVO> groupFiles (Integer pageNumber,Integer pageSize,Long groupId,String fileName,Long thisId) throws CheckedServiceException;
 	
 	/**
 	 * 
@@ -46,7 +65,7 @@ public interface GroupService {
 	 * @param 
 	 * @return Integer
 	 */
-	String deleteFile(List<GroupFile> list, @Param("userId")Long userId) throws CheckedServiceException;
+	String deleteFile(List<GroupFileVO> list,Long userId) throws CheckedServiceException;
 	
 	/**
 	 * 

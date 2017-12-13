@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/chat.css" type="text/css">
     <script src="<%=path %>/resources/comm/jquery/jquery.js"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
+    <script type="text/javascript" src="${ctx}/resources/comm/layer/layer.js"></script>
     <script src="<%=path %>/resources/commuser/mygroup/group.js" type="text/javascript"></script>
 </head>
 <body>
@@ -39,7 +40,7 @@
                             <img src="${ctx}/statics/image/zjyh.png">
                         </div>
                         <text>${role}</text>
-                        <a href="${thisGroup.id}">退出小组</a>
+                        <span id='quitGroup'>退出小组</span>
                     </div>
                     <div class="top_content3">
                         <div class="top_content33">
@@ -58,7 +59,7 @@
                     </div>
                     <label></label>
                     <div class="top_tj2">
-                        <text class="top_tj1_text1">22</text>
+                        <text class="top_tj1_text1">${fileTotal}</text>
                         <br/>
                         <text class="top_tj1_text2">文件分享</text>
                     </div>
@@ -73,168 +74,19 @@
                 <div class="_show" id="commnions">
                     <div class="iframe1">
 						<a id ="history">历史消息。。。</a>
-                        <div class="chat_items other">
-                            <div class="chat_item1">
-                                <div class="div_item1_img">
-                                    <img src="${ctx}/statics/testfile/tx.png"/>
-                                    <text>曾若男</text>
-                                </div>
-                                <div class="arrows"></div>
-                            </div>
-
-                            <div class="chat_item2">
-                                <div class="sender">
-                                    值此首届丝绸之路沿线民间组织合作网络论坛开幕之际，我谨代表中国政府和中国人民，并以我个人的名义，向论坛召开表示热烈的祝贺！向出席论坛的各国民间组织代表和各界人士表示诚挚的欢迎！
-                                </div>
-                                <div class="chat_item2_time">2017.04.01 10:32</div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-						<div>这里是系统消息</div>
-                        <div class="chat_items mine">
-                            <div class="chat_item1">
-                                <div class="div_item1_img">
-                                    <img src="${ctx}/statics/testfile/tx.png"/>
-                                    <text>曾若男</text>
-                                </div>
-                                <div class="arrows"></div>
-                            </div>
-
-                            <div class="chat_item2">
-                                <div class="sender">
-                                    促进共同发展提供了新平台、注入新动力。
-                                </div>
-                                <div class="chat_item2_time">2017.04.01 10:38</div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-
-
-                        <div class="chat_items mine">
-                            <div class="chat_item1">
-                                <div class="div_item1_img">
-                                    <img src="${ctx}/statics/testfile/tx.png"/>
-                                    <text>曾若男</text>
-                                </div>
-                                <div class="arrows"></div>
-                            </div>
-
-                            <div class="chat_item2">
-                                <div class="sender">
-                                    好
-                                </div>
-                                <div class="chat_item2_time">2017.04.01 10:38</div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-
-                        <div class="chat_items mine">
-                            <div class="chat_item1">
-                                <div class="div_item1_img">
-                                    <img src="${ctx}/statics/testfile/tx.png"/>
-                                    <text>曾若男</text>
-                                </div>
-                                <div class="arrows"></div>
-                            </div>
-
-                            <div class="chat_item2">
-                                <div class="sender">
-                                    值此首届丝绸之路沿线民间组织合作网络论坛开幕之际，我谨代表中国政府和中国人民，并以我个人的名义，向论坛召开表示热烈的祝贺！向出席论坛的各国民间组织代表和各界人士表示诚挚的欢迎！
-                                </div>
-                                <div class="chat_item2_time">2017.04.01 10:32</div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-
-                        <div class="chat_items other">
-                            <div class="chat_item1">
-                                <div class="div_item1_img">
-                                    <img src="${ctx}/statics/testfile/tx.png"/>
-                                    <text>曾若男</text>
-                                </div>
-                                <div class="arrows"></div>
-                            </div>
-
-                            <div class="chat_item2">
-                                <div class="sender">
-                                    值此首届丝绸之路沿线民间组织合作网络论坛开幕之际，我谨代表中国政府和中国人民，并以我个人的名义，向论坛召开表示热烈的祝贺！向出席论坛的各国民间组织代表和各界人士表示诚挚的欢迎！
-                                </div>
-                                <div class="chat_item2_time">2017.04.01 10:32</div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-
-
-                        <div class="chat_items other">
-                            <div class="chat_item1">
-                                <div class="div_item1_img">
-                                    <img src="${ctx}/statics/testfile/tx.png"/>
-                                    <text>曾若男</text>
-                                </div>
-                                <div class="arrows"></div>
-                            </div>
-
-                            <div class="chat_item2">
-                                <div class="sender">
-                                    值此首届丝绸之路沿线民间组织合作网络论坛开幕之际，我谨代表中国政府和中国人民，并以我个人的名义，向论坛召开表示热烈的祝贺！向出席论坛的各国民间组织代表和各界人士表示诚挚的欢迎！
-                                </div>
-                                <div class="chat_item2_time">2017.04.01 10:32</div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-
-                    </div>
+                     </div>
                     <div class="iframe2">
                         <textarea  type="text" placeholder="请输入消息内容,按回车键发送" ></textarea>
                         <div class="div_btn"><span class="button">发送</span></div>
                     </div>
                 </div>
                 <div class="hidden" id="filesgx">
-                    <input type="text" placeholder="请输入文件名" class="file_input"/><img class="search"
-                                                                                     src="${ctx}/statics/image/sx1.png"/>
-                    <div class="items">
-                        <div class="item1" style="clear:both;">
-                            <span><img src="${ctx}/statics/image/word-(1).png" alt="文件类型" class="item_img1"/><text>全国高等学校五年制本科临床医学专业第九轮规划教材主编人会会议纪要.xls</text></span>
-                            <span><img src="${ctx}/statics/image/xztp.png" class="item_img2"/><text style="color: #70bcc3;">5</text></span>
-                        </div>
-                        <div class="item2">
-                            <div class="item2_div1">诺男于2017.8.28 13.16上传文件</div>
-                            <div style=" float: right;height: 50px;line-height: 50px;"><span class="del_span"></span>
-                                <text style="width: 20px;height: 20px;">删除</text>
-                            </div>
-
-                        </div>
+                    <input type="text" placeholder="请输入文件名" id= "fileName" class="file_input"/><img class="search" src="${ctx}/statics/image/sx1.png"/>
+                    <span id ="fileContent"></span>
+                    <div id ="fileMore">
+                    	<center>更多</center>
                     </div>
-
-                    <div class="items">
-                        <div class="item1" style="clear:both;">
-                            <span><img src="${ctx}/statics/image/word-(1).png" alt="文件类型" class="item_img1"/><text>全国高等学校五年制本科临床医学专业第九轮规划教材主编人会会议纪要.xls</text></span>
-                            <span><img src="${ctx}/statics/image/xztp.png" class="item_img2"/><text style="color: #70bcc3;">5</text></span>
-                        </div>
-                        <div class="item2" style="clear:both;">
-                            <div class="item2_div1">诺男于2017.8.28 13.16上传文件</div>
-                            <div style=" color: #b0b0b0;float: right;"><span class="del_span"></span>
-                                <text>删除</text>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="items">
-                        <div class="item1" style="clear:both;">
-                            <span><img src="${ctx}/statics/image/word-(1).png" alt="文件类型" class="item_img1"/><text>全国高等学校五年制本科临床医学专业第九轮规划教材主编人会会议纪要.xls</text></span>
-                            <span><img src="${ctx}/statics/image/xztp.png" class="item_img2"/><text style="color: #70bcc3;">5</text></span>
-                        </div>
-                        <div class="item2" style="clear:both;">
-                            <div class="item2_div1">诺男于2017.8.28 13.16上传文件</div>
-                            <div style=" color: #b0b0b0;float: right;"><span class="del_span"></span>
-                                <text>删除</text>
-                            </div>
-
-                        </div>
-                    </div>
-
-
-                </div>
+				</div>
 
             </div>
         </div>

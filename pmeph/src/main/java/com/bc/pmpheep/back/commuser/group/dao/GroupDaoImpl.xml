@@ -2,6 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.bc.pmpheep.back.commuser.group.dao.GroupDao">
+	
+	<!-- 查询我在这个小组上传的文件 -->
+    <select id="getMyFiles" resultType="GroupFileVO"> 
+    	select * from pmph_group_file where member_id in (select id from pmph_group_member where user_id =#{userId} ) and group_id =#{groupId};
+    </select>
+	
+	<!-- 根据用户id删除文件 -->
+	<delete id="deletePmphGroupFile" >
+		delete from pmph_group_file where member_id in (select id from pmph_group_member where user_id =#{userId} ) and group_id =#{groupId};
+	</delete>
+	
+	<!--  根据用户id删除对话 -->
+	<delete id="deleteMessage" >
+		delete from pmph_group_message where member_id in (select id from pmph_group_member where user_id =#{userId}) and group_id =#{groupId};
+	</delete>
+	
+	<!--  根据用户id删除成员 -->
+	<delete id="deletePmphGroupMember" >
+		delete from pmph_group_member  where user_id =#{userId} and group_id =#{groupId} ;
+	</delete>
     
     <!-- 获取小组讨论 -->
     <select id="getTalks" resultType="GroupMessageVO"> 
@@ -9,7 +29,7 @@
 			a.*,
 			if(a.member_id=0 ,'系统',if(b.is_writer  ,d.avatar, c.avatar))  avatar,
 			IF(a.member_id=0 ,'系统',b.display_name) displayName,
-			if(a.member_id=0 ,0,     if(a.member_id = #{thisId} ,1, 2)) msgType
+			if(a.member_id=0 ,0,     if(b.user_id = #{thisId} ,1, 2)) msgType
 		from 
 			pmph_group_message a 
 			LEFT JOIN pmph_group_member b on b.id =a.member_id 
@@ -93,18 +113,38 @@
         SELECT * FROM pmph_group_message 
         WHERE  group_id = #{groupId} ORDER BY gmt_create DESC
     </select>
-    <!-- 获取小组文件列表 -->
-    <select id="getFiles" parameterType="java.lang.Long" 
-        resultType="GroupFile">
-        SELECT * FROM pmph_group_file WHERE group_id=#{groupId} 
-        <if test="fileName !=null and fileName !=''">
-        AND file_name = #{fileName}
-        </if>
-        ORDER BY gmt_create DESC 
-        limit
-		#{start},#{pageSize}
-        ;
+    
+    <!-- 查询小组总文件数目 -->
+    <select id="getFilesTotal" resultType="java.lang.Integer">
+         SELECT 
+	         count(a.id)
+		 FROM 
+		 	pmph_group_file a 
+		 LEFT JOIN 
+		 	pmph_group_member b on b.id = a.member_id
+		 WHERE b.group_id = #{groupId}
+		 <if test="fileName != null and fileName != '' ">
+		 	and a.file_name like CONCAT('%',#{fileName},'%')
+		 </if>
+	</select>
+    
+    <!-- 获取小组文件分页列表 -->
+    <select id="getFiles"  resultType="GroupFileVO">
+         SELECT 
+	         a.*,
+			 b.display_name ,
+			 if(b.is_admin or b.is_founder , true ,if(b.user_id = #{thisId} ,true,false))deletePower
+		 FROM 
+		 	pmph_group_file a 
+		 LEFT JOIN 
+		 	pmph_group_member b on b.id = a.member_id
+		 WHERE b.group_id = #{groupId}
+		 <if test="fileName != null and fileName != '' ">
+		 	and a.file_name like CONCAT('%',#{fileName},'%')
+		 </if>
+		 limit #{start},#{pageSize}
     </select>
+    
     <delete id="deleteFile" parameterType="java.lang.Long">
         DELETE FROM pmph_group_file WHERE id = #{id};
     </delete>
@@ -169,7 +209,7 @@
 	</sql>
 
 	<!-- 新增 GroupFile -->
-	<insert id="addGroupFile" parameterType="GroupFile">
+	<insert id="addGroupFile" parameterType="GroupFileVO">
 		<selectKey resultType="java.lang.Long" order="AFTER"
 			keyProperty="id"> <!-- order="AFTER"表示先执行插入语句，之后再执行查询语句 BEFORE 或 AFTER -->
 			SELECT LAST_INSERT_ID()
@@ -192,7 +232,7 @@
 	</select>
 	
 	<!-- 更新 GroupFile -->
-	<update id="updateGroupFile" parameterType="GroupFile">
+	<update id="updateGroupFile" parameterType="GroupFileVO">
 		update
 		pmph_group_file
 		<set>
