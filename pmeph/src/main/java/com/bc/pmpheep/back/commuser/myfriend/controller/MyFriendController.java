@@ -3,11 +3,14 @@ package com.bc.pmpheep.back.commuser.myfriend.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.myfriend.bean.WriterFriendVO;
@@ -62,16 +65,41 @@ public class MyFriendController extends com.bc.pmpheep.general.controller.BaseCo
         Map<String, Object> writerUserMap = this.getUserInfo();
         WriterUser writerUser = new WriterUser();
         writerUser.setId(Long.parseLong(writerUserMap.get("id").toString()));
-        // writerUser.setId(24966L);
+        writerUser.setId(12180L);
         String pageUrl = "commuser/myfriend/myFriend";
         try {
-            List<WriterFriendVO> listFriends = myFriendService.listMyFriend(writerUser);
+        	int startrow=0;
+            List<Map<String, Object>> listFriends = myFriendService.listMyFriend(writerUser,startrow);
             model.setViewName(pageUrl);
+            model.addObject("row", startrow);
+            model.addObject("id", writerUser.getId());
+            model.addObject("more",listFriends.size());
             model.addObject("listFriends", listFriends);
         } catch (CheckedServiceException e) {
             throw new CheckedServiceException(e.getBusiness(), e.getResult(), e.getMessage(),
                                               pageUrl);
         }
         return model;
+    }
+    
+    /**
+     * 加载更多
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("more")
+    @ResponseBody
+    public List<Map<String, Object>> more(HttpServletRequest request) throws Exception{
+    	int row=Integer.parseInt(request.getParameter("row"));
+    	String id=request.getParameter("id");
+    	WriterUser writerUser = new WriterUser();
+        writerUser.setId(Long.parseLong(id.toString()));
+        List<Map<String, Object>> listFriends = myFriendService.listMyFriend(writerUser,row+15);
+        for(int i=0;i<listFriends.size();i++){
+        	listFriends.get(i).put("row",row+15);
+        	listFriends.get(i).put("queryid",id);
+        }
+    	return listFriends;
     }
 }

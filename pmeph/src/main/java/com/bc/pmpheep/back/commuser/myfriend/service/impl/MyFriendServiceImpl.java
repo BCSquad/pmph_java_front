@@ -1,6 +1,7 @@
 package com.bc.pmpheep.back.commuser.myfriend.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -39,17 +40,17 @@ public class MyFriendServiceImpl implements MyFriendService {
     MyFriendDao myFriendDao;
 
     @Override
-    public List<WriterFriendVO> listMyFriend(WriterUser writerUser) throws Exception {
+    public List<Map<String, Object>> listMyFriend(WriterUser writerUser,int startrow) throws Exception {
         Long userId = writerUser.getId();
         if (ObjectUtil.isNull(userId)) {
             throw new CheckedServiceException(CheckedExceptionBusiness.WRITER_FRIEND,
                                               CheckedExceptionResult.NULL_PARAM, "用户Id为空");
         }
-        List<WriterFriendVO> lst  =  myFriendDao.listMyFriend(userId);
-        for(WriterFriendVO writerFriendVO:  lst){
-        	String avatar =  writerFriendVO.getAvatar();
-        	writerFriendVO.setAvatar(RouteUtil.userAvatar(avatar));
-        }
+        List<Map<String, Object>> lst  =  myFriendDao.listMyFriend(userId,startrow);
+//        for(WriterFriendVO writerFriendVO:  lst){
+//        	String avatar =  writerFriendVO.getAvatar();
+//        	writerFriendVO.setAvatar(RouteUtil.userAvatar(avatar));
+//        }
         return lst ;
     }
 }
