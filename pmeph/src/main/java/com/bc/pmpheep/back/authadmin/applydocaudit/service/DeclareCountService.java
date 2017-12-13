@@ -57,7 +57,7 @@ public interface DeclareCountService {
 	 * @return List<Map<String,Object>> 返回类型
 	 * @throws
 	 */
-	List<Map<String, Object>> selectAll();
+	List<Map<String, Object>> selectAll(Map<String, Object> paraMap);
 	
 	/**
 	 * 最终结果名单
@@ -67,5 +67,5 @@ public interface DeclareCountService {
 	 * @return List<Map<String,Object>> 返回类型
 	 * @throws
 	 */
-	List<Map<String, Object>> selectResults();
+	List<Map<String, Object>> selectResults(Map<String, Object> paraMap);
 }

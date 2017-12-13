@@ -57,8 +57,8 @@ public class DeclareCountServiceImpl implements DeclareCountService {
 	 * 查看全部
 	 */
 	@Override
-	public List<Map<String, Object>> selectAll() {
-		List<Map<String, Object>> list = declareCountDao.selectAll();
+	public List<Map<String, Object>> selectAll(Map<String, Object> paraMap) {
+		List<Map<String, Object>> list = declareCountDao.selectAll(paraMap);
 		return list;
 	}
 	
@@ -67,8 +67,8 @@ public class DeclareCountServiceImpl implements DeclareCountService {
 	 * 查看全部
 	 */
 	@Override
-	public List<Map<String, Object>> selectResults() {
-		List<Map<String, Object>> list = declareCountDao.selectResults();
+	public List<Map<String, Object>> selectResults(Map<String, Object> paraMap) {
+		List<Map<String, Object>> list = declareCountDao.selectResults(paraMap);
 		return list;
 	}
 	

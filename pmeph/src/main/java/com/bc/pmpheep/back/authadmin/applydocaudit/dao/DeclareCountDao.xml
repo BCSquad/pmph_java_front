@@ -20,8 +20,9 @@
 		from
 		textbook t LEFT JOIN dec_position dp ON t.id=dp.textbook_id
 		<where>
+		1=1
 			<if test="material_id != null and material_id != '' ">
-				t.material_id = ${material_id}
+			and	t.material_id = ${material_id}
 			</if>
 		</where>
 		GROUP BY t.textbook_name
@@ -47,8 +48,9 @@
 		left
 		join textbook b on p.textbook_id = b.id
 		<where>
+			1=1
 			<if test="material_id != null and material_id != '' ">
-				b.material_id = ${material_id}
+				and b.material_id = ${material_id}
 			</if>
 		</where>
 		GROUP BY b.id  HAVING (zb>=1 or fb>=1 or bw>=1) limit 0,15
@@ -71,6 +73,12 @@
 		p.declaration_id
 		left
 		join textbook b on p.textbook_id = b.id
+		<where>
+		1=1
+			<if test="material_id != null and material_id != '' ">
+				and	b.material_id = ${material_id}
+			</if>
+		</where>
 		GROUP BY
 		b.id
 		<!-- <if test="startPara!=null">limit #{startPara},5</if> -->
@@ -78,7 +86,7 @@
 
 
 	<!-- 查看全部 我校申报情况统计-->
-	<select id="selectAll" resultType="java.util.Map">
+	<select id="selectAll" resultType="java.util.Map"  parameterType="java.util.Map">
 		select
 		t.textbook_name,
 		sum(case dp.chosen_position when '1' then 1 else
@@ -91,6 +99,12 @@
 		sum(case dp.declaration_id when '3' then 1 else 0 end) as decid3
 		from
 		textbook t LEFT JOIN dec_position dp ON t.id=dp.textbook_id
+		<where>
+		1=1
+			<if test="material_id != null and material_id != '' ">
+				and	t.material_id = ${material_id}
+			</if>
+		</where>
 		GROUP BY t.textbook_name
 		limit 0,9
 	</select>
@@ -109,7 +123,14 @@
 		left join declaration d on d.id =
 		p.declaration_id
 		left
-		join textbook b on p.textbook_id = b.id	  GROUP BY b.id limit 0,15
+		join textbook b on p.textbook_id = b.id	 
+		<where>
+		1=1
+			<if test="material_id != null and material_id != '' ">
+				and	b.material_id = ${material_id}
+			</if>
+		</where>
+		GROUP BY b.id limit 0,15
 	</select>
 
 </mapper>
