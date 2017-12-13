@@ -337,7 +337,10 @@ body {
     height: 300px;
     width: 330px;
     text-align: center;
-    margin: auto;
+    margin: auto !important;
     padding-top: 10px;
     color: #333333;
+}
+.no-more img{
+	display: block;
 }
