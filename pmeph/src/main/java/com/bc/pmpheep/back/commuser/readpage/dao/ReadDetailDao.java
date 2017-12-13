@@ -123,4 +123,6 @@ public interface ReadDetailDao {
 	 * @param writerId    用户id
 	 */
 	void deleteMark(@Param("bookId")long bookId,@Param("favoriteId") long favoriteId,@Param("writerId") long writerId);
+	
+	String updateDelBookWriter(Map<String, Object> map);
 }

@@ -60,6 +60,14 @@
 	        limit #{x},5
 	    </if>
 	</select>
+			<!-- 根据评论ID删除评论 -->
+	<update id="updateDelBookWriter"  parameterType="java.util.Map">
+		update book_user_comment set 
+		is_deleted = 1
+		gmt_update = sysdate()
+		where id = #{bookwriterid}
+	</update>
+	
 	<!-- 根据书籍ID新增评论 -->
 	<insert id="insertComment" parameterType="java.util.Map">
 	   insert into book_user_comment(
@@ -77,6 +85,9 @@
 	   #{content},
 	   0,0,0)
 	</insert>
+	
+	
+	
 	<!-- 根据作者查询该作者写的书 -->
 	<select id="queryAuthorType" parameterType="java.util.Map" resultType="java.util.Map">
 	   select * from book where author like #{author} limit 0,9
