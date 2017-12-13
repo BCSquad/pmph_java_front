@@ -32,7 +32,9 @@ import com.bc.pmpheep.general.service.FileService;
 @Controller
 @RequestMapping("/material/")
 public class MaterialDetailController extends BaseController{
-	
+
+
+
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailServiceImpl")
 	private MaterialDetailService mdService;
