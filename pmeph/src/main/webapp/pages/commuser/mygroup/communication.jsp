@@ -21,6 +21,9 @@
     <script src="<%=path %>/resources/commuser/mygroup/group.js" type="text/javascript"></script>
 </head>
 <body>
+	<script type="text/javascript">
+		var contxtpath = '${pageContext.request.contextPath}';
+	</script>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 
 <div class="content-body">
@@ -30,7 +33,7 @@
                 <div class="div_img70"><img src="${pageContext.request.contextPath}/${thisGroup.groupImage}" class="img1" alt="小组图像"/></div>
                 <div class="top_content">
                     <span class="span1">${thisGroup.groupName}</span>
-                    <input id="groupNameId" type="hidden" value="${thisGroup.id}"/>
+                    <input id="groupId" type="hidden" value="${thisGroup.id}"/>
                     <div class="top_content2">
                         <div class="top_content22">
                             <img src="${ctx}/statics/image/zjyh.png">
@@ -69,7 +72,7 @@
             <div class="left-content">
                 <div class="_show" id="commnions">
                     <div class="iframe1">
-
+						<a id ="history">历史消息。。。</a>
                         <div class="chat_items other">
                             <div class="chat_item1">
                                 <div class="div_item1_img">
@@ -87,7 +90,7 @@
                             </div>
                             <div class="clear"></div>
                         </div>
-
+						<div>这里是系统消息</div>
                         <div class="chat_items mine">
                             <div class="chat_item1">
                                 <div class="div_item1_img">

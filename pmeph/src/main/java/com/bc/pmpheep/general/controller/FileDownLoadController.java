@@ -40,7 +40,7 @@ public class FileDownLoadController {
     @Qualifier("com.bc.pmpheep.general.service.FileService")
     FileService fileService;
     @Autowired
-    @Qualifier("com.bc.pmpheep.back.commuser.group.service")
+    @Qualifier("com.bc.pmpheep.back.commuser.group.service.GroupServiceImpl")
     GroupService groupService;
 
     /**

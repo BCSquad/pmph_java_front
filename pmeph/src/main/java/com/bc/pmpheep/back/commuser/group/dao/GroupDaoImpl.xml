@@ -2,6 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.bc.pmpheep.back.commuser.group.dao.GroupDao">
+    
+    <!-- 获取小组讨论 -->
+    <select id="getTalks" resultType="GroupMessageVO"> 
+    	select 
+			a.*,
+			if(a.member_id=0 ,'系统',if(b.is_writer  ,d.avatar, c.avatar))  avatar,
+			IF(a.member_id=0 ,'系统',b.display_name) displayName,
+			if(a.member_id=0 ,0,     if(a.member_id = #{thisId} ,1, 2)) msgType
+		from 
+			pmph_group_message a 
+			LEFT JOIN pmph_group_member b on b.id =a.member_id 
+			LEFT JOIN pmph_user c on c.id = b.user_id
+			LEFT JOIN writer_user d on d.id = b.user_id
+		where a.group_id = #{groupId} 
+		ORDER BY a.gmt_create desc
+		limit #{start} , #{pageSize}
+    </select>
 
 	<!-- 查当前用户的小组列表 -->
 	<select id="list" resultType="GroupList">
@@ -72,7 +89,7 @@
     </select>
     <!-- 获取小组动态 -->
     <select id="getMessages" parameterType="java.lang.Long" 
-        resultType="GroupMessage">
+        resultType="GroupMessageVO">
         SELECT * FROM pmph_group_message 
         WHERE  group_id = #{groupId} ORDER BY gmt_create DESC
     </select>
@@ -198,7 +215,7 @@
 		where id=#{id} ;
 	</update>
 	
-	<sql id="key">
+	<sql id="key1">
 		<!-- 去掉最后一个, -->
 		<trim suffixOverrides=",">
 			<if test="groupId != null and groupId !=''">
@@ -213,7 +230,7 @@
 		</trim>
 	</sql>
 	<!-- sql片段对应?,id属性值任意 -->
-	<sql id="value">
+	<sql id="value1">
 		<!-- 去掉最后一个, -->
 		<trim suffixOverrides=",">
 			<if test="groupId != null and groupId !=''">
@@ -229,22 +246,22 @@
 	</sql>
 
 	<!-- 新增 GroupMessage -->
-	<insert id="addGroupMessage" parameterType="GroupMessage">
+	<insert id="addGroupMessage" parameterType="GroupMessageVO">
 		<selectKey resultType="java.lang.Long" order="AFTER"
 			keyProperty="id"> <!-- order="AFTER"表示先执行插入语句，之后再执行查询语句 BEFORE 或 AFTER -->
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 		insert into pmph_group_message (
-		<include refid="key" />
+		<include refid="key1" />
 		)
 		values(
-		<include refid="value" />
+		<include refid="value1" />
 		) ;
 	</insert>
 	
 	<!-- 根据id查询一个 GroupMessage -->
 	<select id="getGroupMessageById" parameterType="java.lang.Long"
-		resultType="GroupMessage">
+		resultType="GroupMessageVO">
 		select * from pmph_group_message where
 		id=#{id} ;
 	</select>

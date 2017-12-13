@@ -43,6 +43,17 @@ public class GroupServiceImpl implements GroupService{
 	private FileService fileService;
 	
 	@Override
+	public List<GroupMessageVO> getTalks(Long thisId,Long groupId,Integer pageNumber,Integer pageSize){
+		if(null == pageNumber || pageNumber < 1){
+    		pageNumber = 1 ;
+    	}
+    	if(null == pageSize   || pageSize < 1) {
+    		pageSize = 100000 ;  //默认100000,差不多就是查询全部
+    	}
+		return groupDao.getTalks(thisId, groupId , (pageNumber-1)*pageSize ,pageSize);
+	}
+	
+	@Override
 	public List<GroupList> groupList(Integer start, Integer pageSize, Long id)
 			throws CheckedServiceException {
 		if (ObjectUtil.isNull(id)){
@@ -225,7 +236,7 @@ public class GroupServiceImpl implements GroupService{
 
 	@Override
 	public String addGroupMessage(String msgConrent, Long groupId) throws CheckedServiceException,IOException {
-		GroupMessage groupMessage = new GroupMessage(groupId, 0L, msgConrent);
+		GroupMessageVO groupMessage = new GroupMessageVO(groupId, 0L, msgConrent);
 		groupDao.addGroupMessage(groupMessage);
 		groupMessage = groupDao.getGroupMessageById(groupMessage.getId());
 		Group group = new Group();

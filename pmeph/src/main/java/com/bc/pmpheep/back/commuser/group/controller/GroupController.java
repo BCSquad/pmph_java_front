@@ -10,9 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.group.bean.GroupList;
+import com.bc.pmpheep.back.commuser.group.bean.GroupMessageVO;
 import com.bc.pmpheep.back.commuser.group.bean.PmphGroupMemberVO;
 import com.bc.pmpheep.back.commuser.group.service.GroupService;
 
@@ -59,6 +61,14 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
         return model;
     }
     
+    /**
+     * 进入某个吓跑组
+     * @introduction 
+     * @author Mryang
+     * @createDate 2017年12月12日 下午5:42:27
+     * @param groupId
+     * @return
+     */
     @RequestMapping("/toMyGroup")
     public ModelAndView toMyGroup(@RequestParam(value="groupId")Long groupId){
     	ModelAndView modelAndView = new ModelAndView();
@@ -98,6 +108,24 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
         //页面路径
         modelAndView.setViewName("commuser/mygroup/communication");
         return modelAndView;
+    }
+    
+    /**
+     * 获取小组讨论
+     * @introduction 
+     * @author Mryang
+     * @createDate 2017年12月12日 下午5:50:14
+     * @param pageNumber
+     * @param pageSize
+     * @param groupId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getTalks", method = RequestMethod.GET)
+    public List<GroupMessageVO> getTalks(Integer pageNumber,Integer pageSize,@RequestParam(value="groupId")Long  groupId)  {
+    	Map<String, Object> map = this.getUserInfo();
+    	Long thisId = new Long (String.valueOf(map.get("id")));
+        return groupService.getTalks(thisId, groupId, pageNumber,pageSize);
     }
 }
 

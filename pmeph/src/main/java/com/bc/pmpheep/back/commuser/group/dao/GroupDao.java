@@ -46,6 +46,19 @@ public interface GroupDao {
 	 *
 	 */
 	Integer getTotal(@Param("id") Long id);
+	
+	/**
+	 * 获取小组讨论 
+	 * @introduction 
+	 * @author Mryang
+	 * @createDate 2017年12月12日 下午5:38:47
+	 * @return
+	 */
+	List<GroupMessageVO> getTalks(
+			@Param("thisId")Long thisId,
+			@Param("groupId")Long groupId,
+			@Param("start")Integer start ,
+			@Param("pageSize")Integer pageSize);
 
 	/**
 	 * 
@@ -169,7 +182,7 @@ public interface GroupDao {
 	 * @param 
 	 * @return Integer
 	 */
-	Integer addGroupMessage(GroupMessage groupMessage);
+	Integer addGroupMessage(GroupMessageVO groupMessage);
 	
 	/**
 	 * 
@@ -179,7 +192,7 @@ public interface GroupDao {
 	 * @param 
 	 * @return GroupMessage
 	 */
-	GroupMessage getGroupMessageById(Long id);
+	GroupMessageVO getGroupMessageById(Long id);
 	
 	/**
 	 * 

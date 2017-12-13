@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bc.pmpheep.back.commuser.group.bean.GroupFile;
 import com.bc.pmpheep.back.commuser.group.bean.GroupList;
 import com.bc.pmpheep.back.commuser.group.bean.GroupMember;
+import com.bc.pmpheep.back.commuser.group.bean.GroupMessageVO;
 import com.bc.pmpheep.back.commuser.group.bean.PmphGroupMemberVO;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 
@@ -121,6 +122,12 @@ public interface GroupService {
 	 */
 	Boolean isFounder(Long groupId,  Long memberId) throws CheckedServiceException;
 	
-	
-	getTalks();
+	/**
+	 * 获取小组讨论
+	 * @introduction 
+	 * @author Mryang
+	 * @createDate 2017年12月12日 下午5:40:07
+	 * @return
+	 */
+	List<GroupMessageVO> getTalks(Long thisId,Long groupId,Integer pageNumber,Integer pageSize);
 }
