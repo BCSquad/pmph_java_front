@@ -27,6 +27,7 @@
 
 </head>
 <body >
+	<input type="text" id="material_id" value="${material_id }"/>
 	<div style=" padding: 0; margin: 0; height: 110px; border: none; overflow: hidden;">
 		<jsp:include page="/pages/comm/headGreenBackGround.jsp"></jsp:include>
 	</div>
@@ -93,6 +94,7 @@
 								
 						</tbody>
 					</table>
+
 				</div>
 
 				<div class="excel">
@@ -135,7 +137,12 @@
 								</tr>
 							</c:forEach>
 						</tbody>
+					
 					</table>
+					<div class="no-more" >
+						<img src="<c:url value="/statics/image/aaa4.png"></c:url>">
+						<span>木有内容呀~~</span>
+					</div>
 				</div>
 				
 				<!-- <div class="jiazaigengduo" style="cursor: pointer;" onclick='loadMore()' >加载更多……</div> -->
