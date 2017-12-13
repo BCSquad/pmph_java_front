@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -41,9 +42,9 @@ public class ChooseEditorController extends BaseController {
 	 * 跳转到第一主编选择编委界面
 	 */
 	@RequestMapping("toPage")
-	public ModelAndView toPage(HttpServletRequest request){
+	public ModelAndView toPage(@RequestParam(value="textBookId",required=true)String textBookId, HttpServletRequest request){
 		ModelAndView mv = new ModelAndView();
-		String textBookId = request.getParameter("textBookId");
+		/*String textBookId = request.getParameter("textBookId");*/
 		textBookId = "21524";
 		
 		Map<String, Object> user = getUserInfo();

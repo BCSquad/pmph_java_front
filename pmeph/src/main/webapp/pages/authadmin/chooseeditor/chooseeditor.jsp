@@ -44,10 +44,17 @@ String contextpath=request.getContextPath();
 <div class="content-wrapper">
     <div class="top">
         <div class="title">
-            <div class="top1">个人中心 > 教材申报 > 申报进度 > 选择编委</div>
+            <div class="top1">
+            	<a href="">个人中心 </a>
+            	> 
+            	<a href="">教材申报 </a>
+            	> 
+            	<a href="">申报进度</a>
+            	>选择编委
+            </div>
         </div>
         <div class="bt">
-            <div class="top2"><B>${textBookName }</B></div>
+            <div class="top2"><a ><B>${textBookName }</B></a></div>
             <div class="top3">编辑策划：${logUserName }</div>
         </div>
     </div>

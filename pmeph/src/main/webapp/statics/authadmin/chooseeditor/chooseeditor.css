@@ -9,6 +9,16 @@
     margin-top: 40px;
     float: left;
 }
+.top1 a{
+	color: rgb(153, 153, 153);
+	text-decoration:blink;
+	cursor: pointer;
+}
+
+.top2 a{
+	text-decoration:blink;
+	cursor: pointer;
+}
 
 .title {
     float: left;

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -44,9 +45,9 @@ public class BookSearchController extends BaseController {
 	 * @throws UnsupportedEncodingException
 	 */
 	@RequestMapping("toPage")
-	public ModelAndView toPage(HttpServletRequest request) throws UnsupportedEncodingException{
+	public ModelAndView toPage(@RequestParam(value="search",defaultValue="")String search,HttpServletRequest request) throws UnsupportedEncodingException{
 		ModelAndView mv = new ModelAndView();
-		String search = request.getParameter("search");
+		/*String search = request.getParameter("search");*/
 		String real_search = request.getParameter("real_search");
 		//search = new String((search!=null?search:"").getBytes("iso8859-1"), "utf-8");
 		search = java.net.URLDecoder.decode(search,"UTF-8"); 
