@@ -14,7 +14,40 @@ function ChangeDiv(type){
 
 
 }
+
+
 $(function(){
+	var webSocket = new WebSocket("ws:'http://120.76.221.250:11000/pmpheep/websocket?userType=" +2+"?userId="+$("#userId").val());
+	webSocket.onopen = function(event){
+	    console.log("连接成功");
+	    console.log(event);
+	};
+	webSocket.onerror = function(event){
+	    console.log("连接失败");
+	    console.log(event);
+	};
+	webSocket.onclose = function(event){
+	    console.log("Socket连接断开");
+	    console.log(event);
+	};
+	//监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+    window.onbeforeunload = function(){
+        websocket.close();
+    };
+	webSocket.onmessage = function(event){
+	    //接受来自服务器的消息
+	    //...
+	    console.log("Socket新消息:"+event.data);
+	}
+	$("#sendMsg").click(function(){
+		var content=$("#msgContent").val();
+		if(!content || content.trim() ==''){
+			window.message.warning("请键入消息");
+			return ;
+		}
+		webSocket.send("{'userType':2,'msg':{'memberId':"+$("#userId").val()+",'msgContent':'"+content+"'}}");
+	});
+	//-------------------------------
 	var talkPagesize  = 5 ;
 	var talkPagenumber= 1  ;
 	var maxTime       = 0  ;
@@ -48,7 +81,31 @@ $(function(){
 			initFile();
 		} 
 	}); 
-	
+	//$("#uploadForm").submit();
+	$("#file_upload").change(function(){
+	//	$("#uploadForm").submit();
+		//var formData = new FormData();
+        //formData.append("file",document.getElementById("file_upload").files[0]);
+        //formData.append("groupId", $("#groupId").val());
+        //formData.append("filee",$("#file_upload"));
+		//alert();
+		$("#uploadForm").submit();
+		return ;
+		$.ajax({
+			type:'post',
+	        url :contxtpath+'/group/d.action',
+	        dataType:'json',
+	        //Content-Type:'multipart/form-data',
+	        data:$('#uploadForm').serialize(),
+	        success:function(responsebean){
+	        	if(responsebean){
+	        		window.message.success("成功");
+	        	}else{
+	        		window.message.error("失败");
+	        	}
+	        }
+	     });
+	});
 
 	//退出小组
 	$("#quitGroup").click(function(){
@@ -76,6 +133,40 @@ $(function(){
 	        }
 	     });
 	});
+	//*删除文件
+	$('body').on('click','.deleteThis',function(){
+		var btId =  this.id;
+		var id = btId.replace('bt_','');
+		var fileId = $("#"+id).val() ;
+		$.ajax({
+			type:'get',
+	        url :contxtpath+'/group/deleteFile.action',
+	        contentType: 'application/json',
+	        dataType:'json',
+	        data:{
+	        	groupId   : $("#groupId").val(),
+	        	id: id ,
+	        	fileId  : fileId ,
+	        },
+	        success:function(responsebean){
+	        	if(responsebean){
+	        		window.message.success("删除成功");
+		        	$("#item_"+id).remove();
+	        	}else{
+	        		window.message.error("删除失败");
+	        	}
+	        }
+	     });
+	});
+	$('body').on('click','.item_img2',function(){
+		var imgId =  this.id;
+		var id = imgId.replace('img_','');
+		var fileId = $("#"+id).val() ;
+		window.location.href = contxtpath+'/groupfile/download/'+fileId+'.action?groupId='+$("#groupId").val() ;
+		var num = parseInt($("#dw_"+id).html())+1;
+		$("#dw_"+id).html(num);
+		return ;
+	});
 	
 	//初始化文件
 	function initFile(){
@@ -93,17 +184,18 @@ $(function(){
 	        success:function(responsebean){
 	        	if(responsebean){
 	        		for(var i= 0 ; i< responsebean.length ;i++){
-	        			var html = "<div class='items'> "+
+	        			var html = "<div class='items' id='item_"+responsebean[i].id+"'> "+
 				                        "<div class='item1' style='clear:both;'> "+
 				                            "<span><img src='"+contxtpath+"/statics/image/word-(1).png' alt='文件类型' class='item_img1'/><text>"+responsebean[i].fileName+"</text></span> "+
-				                            "<span><img src='"+contxtpath+"/statics/image/xztp.png' class='item_img2'/><text style='color: #70bcc3;'>"+responsebean[i].download+"</text></span> "+
+				                            "<span><img src='"+contxtpath+"/statics/image/xztp.png' id='img_"+responsebean[i].id+"' class='item_img2'/><text id='dw_"+responsebean[i].id+"' style='color: #70bcc3;'>"+responsebean[i].download+"</text></span> "+
 				                        "</div> "+
 				                        "<div class='item2' style='clear:both;'> "+
 				                            "<div class='item2_div1'>"+responsebean[i].displayName+" 于 "+formatDate(responsebean[i].gmtCreate,"yyyy.MM.dd hh:ss:mm")+"上传文件</div> "+
 				                            "<div style='color: #b0b0b0;float: right;'><span class='del_span'></span> "+
-				                            (responsebean[i].deletePower?'<text>删除</text> ':'')
+				                            (responsebean[i].deletePower?'<a href="javascript:void()"  id="bt_'+responsebean[i].id+'" class="deleteThis" >删除</a> ':'') +
 				                            "</div> "+
 				                         "</div> "+
+				                         "<input type='hidden' id='"+responsebean[i].id+"' value='"+responsebean[i].fileId+"' />"+
 				                    "</div> ";
 	        			$("#fileContent").append(html);
 	        		}

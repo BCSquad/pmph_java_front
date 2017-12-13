@@ -162,7 +162,7 @@ public interface GroupDao {
 	 * @param fileName
 	 * @return
 	 */
-	Integer getFilesTotal(@Param("groupId") Long groupId, @Param("fileName")String fileName);
+	Integer getFilesTotal(@Param("groupId") Long groupId,@Param("thisId")Long thisId ,@Param("fileName")String fileName);
 	
 	/**
 	 * 
@@ -172,7 +172,7 @@ public interface GroupDao {
 	 * @param 
 	 * @return Integer
 	 */
-	Integer deleteFile(@Param("id")Long id);
+	Integer deleteMyPowerFile(@Param("id")Long id,@Param("thisId")Long thisId,@Param("groupId")Long groupId);
 	
 	/**
 	 * 
@@ -205,7 +205,7 @@ public interface GroupDao {
 	 * @param 
 	 * @return Long
 	 */
-	Long addGroupFile(GroupFileVO groupFile);
+	Integer addGroupFile(GroupFileVO groupFile);
 	
 	/**
 	 * 

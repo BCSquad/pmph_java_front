@@ -1,8 +1,13 @@
 package com.bc.pmpheep.back.commuser.group.controller;
 
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.group.bean.GroupFileVO;
@@ -18,6 +24,7 @@ import com.bc.pmpheep.back.commuser.group.bean.GroupList;
 import com.bc.pmpheep.back.commuser.group.bean.GroupMessageVO;
 import com.bc.pmpheep.back.commuser.group.bean.PmphGroupMemberVO;
 import com.bc.pmpheep.back.commuser.group.service.GroupService;
+import com.bc.pmpheep.service.exception.CheckedServiceException;
 
 
 /**
@@ -98,6 +105,8 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
     	}
     	//当前小组
     	modelAndView.addObject("thisGroup",thisGroup);
+    	//用户id
+    	modelAndView.addObject("userId",userId);
     	//其他小组
         modelAndView.addObject("otherGroup",otherGroupList);
         //角色
@@ -107,7 +116,7 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
         modelAndView.addObject("gropuMemebers",gropuMemebers);
         modelAndView.addObject("gropuMemebersNum",gropuMemebers.size());
         //文件总数
-        modelAndView.addObject("fileTotal",groupService.getFilesTotal(groupId, null));
+        modelAndView.addObject("fileTotal",groupService.getFilesTotal(groupId, null,userId));
         //页面路径
         modelAndView.setViewName("commuser/mygroup/communication");
         return modelAndView;
@@ -165,6 +174,38 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
     	Map<String, Object> map = this.getUserInfo();
     	Long thisId = new Long (String.valueOf(map.get("id")));
         return groupService.quitGroup(groupId,thisId);
+    }
+    
+    /**
+     * 获取文件
+     * @introduction 
+     * @author Mryang
+     * @createDate 2017年12月13日 上午10:28:14
+     * @param pageNumber
+     * @param pageSize
+     * @param groupId
+     * @return
+     * @throws IOException 
+     * @throws CheckedServiceException 
+     */
+    @ResponseBody
+    @RequestMapping(value = "/fileup", method = RequestMethod.POST)
+    public Boolean fileup(@RequestParam("file")MultipartFile file,@RequestParam(value="groupId")Long groupId,
+    		HttpServletResponse response,HttpServletRequest request) throws CheckedServiceException, IOException  {
+    	Map<String, Object> map = this.getUserInfo();
+    	Long thisId = new Long (String.valueOf(map.get("id")));
+    	groupService.addFile(file,  groupId, thisId);
+    	response.sendRedirect(request.getServletContext().getContextPath()+"/group/toMyGroup.action?groupId="+groupId);//重定向到apage.jsp
+    	return true;
+    }
+    
+    @ResponseBody
+    @RequestMapping(value = "/deleteFile", method = RequestMethod.GET)
+    public Boolean deleteFile(@RequestParam(value="groupId")Long groupId,@RequestParam(value="id")Long id,@RequestParam(value="fileId")String fileId)  {
+    	Map<String, Object> map = this.getUserInfo();
+    	Long thisId = new Long (String.valueOf(map.get("id")));
+    	groupService.deleteFile(id,groupId,fileId,thisId);
+    	return true;
     }
 }
 

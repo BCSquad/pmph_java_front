@@ -3,14 +3,13 @@
  */
 package com.bc.pmpheep.back.commuser.group.service;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.bc.pmpheep.back.commuser.group.bean.Group;
 import com.bc.pmpheep.back.commuser.group.bean.GroupFileVO	;
 import com.bc.pmpheep.back.commuser.group.bean.GroupList;
@@ -42,6 +41,41 @@ public class GroupServiceImpl implements GroupService{
 	@Autowired
 	private FileService fileService;
 	
+	
+	/**
+	 * 小组上传文件
+	 * @introduction 
+	 * @author Mryang
+	 * @createDate 2017年12月13日 下午2:29:12
+	 * @param file
+	 * @param filee
+	 * @param thisId
+	 * @return
+	 * @throws IOException 
+	 */
+	public Integer addFile(MultipartFile file,Long groupId,Long thisId)throws CheckedServiceException, IOException{
+		if(null == file || file.isEmpty()){
+			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,CheckedExceptionResult.NULL_PARAM, "上传文件不能为空");
+		}
+		if (null == groupId){
+			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,CheckedExceptionResult.NULL_PARAM, "小组id不能为空");
+		}
+		if (null == thisId){
+			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,CheckedExceptionResult.NULL_PARAM, "用户不能为空");
+		}
+		//获取成员id 
+		GroupMember groupMember =groupDao.getGroupMember(groupId,thisId);
+		//创建对象
+		GroupFileVO groupFileVO = new GroupFileVO(groupId,groupMember.getId(),"---",file.getOriginalFilename(),0,null);
+		//保存对象
+		groupDao.addGroupFile(groupFileVO);
+		//保存文件
+		String mongoId = fileService.save(file,FileType.GROUP_FILE, groupFileVO.getId()) ;
+		groupFileVO.setFileId(mongoId);
+		//更新文件主键
+		return groupDao.updateGroupFile(groupFileVO);
+	}
+	
 	@Override
 	public Boolean quitGroup(Long groupId,Long thisId) throws CheckedServiceException{
 		if (null == groupId){
@@ -62,11 +96,11 @@ public class GroupServiceImpl implements GroupService{
 	}
 	
 	@Override
-	public Integer getFilesTotal(Long groupId, String fileName) throws CheckedServiceException{
+	public Integer getFilesTotal(Long groupId, String fileName,Long thisId) throws CheckedServiceException{
 		if (null == groupId){
 			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,CheckedExceptionResult.NULL_PARAM, "小组id不能为空");
 		}
-		return groupDao.getFilesTotal(groupId, fileName);
+		return groupDao.getFilesTotal(groupId,thisId, fileName);
 	}
 	
 	@Override
@@ -133,43 +167,14 @@ public class GroupServiceImpl implements GroupService{
 	}
 
 	@Override
-	public String deleteFile(List<GroupFileVO> list, Long userId)
-			throws CheckedServiceException {
-		if (ObjectUtil.isNull(userId)){
-			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,
-					CheckedExceptionResult.NULL_PARAM, "当前用户id不能为空");
+	public Integer deleteFile(Long id,Long groupId,String fileId,Long thisId)throws CheckedServiceException {
+		Integer res = groupDao.deleteMyPowerFile(id, thisId, groupId);
+		if(null != res && 1 == res.intValue()){
+			fileService.remove(fileId);
+			return res ;
+		}else{
+			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,CheckedExceptionResult.NULL_PARAM, "删除失败");
 		}
-		String result = "FAIL";
-		for (GroupFileVO groupFile : list){
-			if (ObjectUtil.isNull(groupFile.getId())){
-				throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,
-						CheckedExceptionResult.NULL_PARAM, "文件id不能为空");
-			}
-			if (ObjectUtil.isNull(groupFile.getGroupId())){
-				throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,
-						CheckedExceptionResult.NULL_PARAM, "小组id不能为空");
-			}
-			//判断当前用户是否为管理员，若为管理员，可以删除除创建者和其他管理员以外的人上传的文件
-			if (isFounderOrisAdmin(groupFile.getGroupId(), userId)){
-				if (isFounderOrisAdmin(groupFile.getGroupId(), groupFile.getMemberId())){
-					throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,
-							CheckedExceptionResult.ILLEGAL_PARAM, "无法删除其他管理员或创建者所上传的文件");
-				}else{
-					groupDao.deleteFile(groupFile.getId());
-					result = "SUCCESS";
-				}
-				//若不为管理员，只能删除自己上传的文件
-			} else {
-				if (userId != groupFile.getMemberId()){
-					throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,
-							CheckedExceptionResult.ILLEGAL_PARAM, "没有此操作权限,只能删除自己上传的文件");
-				 }else{
-					groupDao.deleteFile(groupFile.getId());
-					result = "SUCCESS";
-				 }
-			}
-		}
-		return result;
 	}
 
 	@Override

@@ -2,6 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.bc.pmpheep.back.commuser.group.dao.GroupDao">
+
+    <!--  删除我能删除的文件 --> 
+	<delete id="deleteMyPowerFile">
+		delete from pmph_group_file 
+		where id = #{id}
+		and id in (
+			select temp.id from(
+					 SELECT 
+						 a.id,
+						 if(p.po , true ,if(b.user_id = #{thisId} ,true,false)) deletePower
+					 FROM 
+						 pmph_group_file a 
+					 LEFT JOIN 
+						pmph_group_member b on b.id = a.member_id
+					 ,(SELECT if(is_founder or is_admin,true,false ) po from pmph_group_member where user_id = #{thisId} and group_id = #{groupId} )p 
+					 WHERE b.group_id = #{groupId}
+			 )temp where temp.deletePower
+		)
+	</delete>
+	
 	
 	<!-- 查询我在这个小组上传的文件 -->
     <select id="getMyFiles" resultType="GroupFileVO"> 
@@ -121,7 +141,8 @@
 		 FROM 
 		 	pmph_group_file a 
 		 LEFT JOIN 
-		 	pmph_group_member b on b.id = a.member_id
+		 	pmph_group_member b on b.id = a.member_id ,
+		 (SELECT if(is_founder or is_admin,true,false ) po from pmph_group_member where user_id = #{thisId} and group_id = #{groupId} )p
 		 WHERE b.group_id = #{groupId}
 		 <if test="fileName != null and fileName != '' ">
 		 	and a.file_name like CONCAT('%',#{fileName},'%')
@@ -133,11 +154,12 @@
          SELECT 
 	         a.*,
 			 b.display_name ,
-			 if(b.is_admin or b.is_founder , true ,if(b.user_id = #{thisId} ,true,false))deletePower
+			 if(p.po , true ,if(b.user_id = #{thisId} ,true,false))deletePower
 		 FROM 
 		 	pmph_group_file a 
 		 LEFT JOIN 
-		 	pmph_group_member b on b.id = a.member_id
+		 	pmph_group_member b on b.id = a.member_id ,
+		 (SELECT if(is_founder or is_admin,true,false ) po from pmph_group_member where user_id = #{thisId} and group_id = #{groupId} )p
 		 WHERE b.group_id = #{groupId}
 		 <if test="fileName != null and fileName != '' ">
 		 	and a.file_name like CONCAT('%',#{fileName},'%')
@@ -233,13 +255,12 @@
 	
 	<!-- 更新 GroupFile -->
 	<update id="updateGroupFile" parameterType="GroupFileVO">
-		update
-		pmph_group_file
+		update  pmph_group_file
 		<set>
-			<if test="groupId != null and groupId !=''">
+			<if test="groupId != null">
 				group_id = #{groupId},
 			</if>
-			<if test="memberId != null and memberId !='' ">
+			<if test="memberId != null ">
 				member_id = #{memberId},
 			</if>
 			<if test=" fileId != null and fileId !=''">
@@ -248,7 +269,7 @@
 			<if test=" fileName != null and fileName !=''">
 				file_name= #{fileName},
 			</if>
-			<if test=" download != null and download !=''">
+			<if test=" download != null">
 				download = #{download},
 			</if>
 		</set>
@@ -335,9 +356,6 @@
 	
 	<!-- 更新 下载次数 -->
 	<update id="updateGroupFileOfDownload" >
-		update
-		pmph_group_file set download=download+1 WHERE group_id = #{groupId}
-		AND
-		file_id = #{fileId}
+		update pmph_group_file set download=download+1  WHERE group_id = #{groupId} AND file_id = #{fileId}
 	</update>
 </mapper>

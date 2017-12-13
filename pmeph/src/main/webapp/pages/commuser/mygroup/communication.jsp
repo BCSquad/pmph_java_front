@@ -35,6 +35,7 @@
                 <div class="top_content">
                     <span class="span1">${thisGroup.groupName}</span>
                     <input id="groupId" type="hidden" value="${thisGroup.id}"/>
+                    <input id="userId" type="hidden" value="${userId}"/>
                     <div class="top_content2">
                         <div class="top_content22">
                             <img src="${ctx}/statics/image/zjyh.png">
@@ -47,7 +48,10 @@
                             <img src="${ctx}/statics/image/scz.png"/>
                         </div>
                         <div class="file_upload">
-                            <text>上传文件</text>
+                        	<form id="uploadForm" action="${ctx}/group/fileup.action" method="post" enctype="multipart/form-data" >
+                            	<input id="file_upload" type="file" name='file' />
+                            	<input  type="hidden" name='groupId' value="${thisGroup.id}" />
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -76,8 +80,8 @@
 						<a id ="history">历史消息。。。</a>
                      </div>
                     <div class="iframe2">
-                        <textarea  type="text" placeholder="请输入消息内容,按回车键发送" ></textarea>
-                        <div class="div_btn"><span class="button">发送</span></div>
+                        <textarea  id="msgContent" type="text" placeholder="请输入消息内容,按回车键发送" ></textarea>
+                        <div class="div_btn"><span id="sendMsg" class="button">发送</span></div>
                     </div>
                 </div>
                 <div class="hidden" id="filesgx">

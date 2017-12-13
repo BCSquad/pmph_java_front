@@ -7,6 +7,7 @@ import com.bc.pmpheep.service.exception.CheckedExceptionBusiness;
 import com.bc.pmpheep.service.exception.CheckedExceptionResult;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 import com.mongodb.gridfs.GridFSDBFile;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
@@ -80,8 +84,9 @@ public class FileDownLoadController {
      * @param response 服务响应
      * @return ResponseBean对象
      */
+    @ResponseBody
     @RequestMapping(value = "/groupfile/download/{id}", method = RequestMethod.GET)
-	public ModelAndView download(@PathVariable("id") String id, @RequestParam("groupId") long groupId,
+	public void download(@PathVariable("id") String id, @RequestParam("groupId") long groupId,
 			HttpServletRequest request, HttpServletResponse response) {
 		if (groupId < 1) {
 			throw new CheckedServiceException(CheckedExceptionBusiness.FILE,
@@ -97,19 +102,20 @@ public class FileDownLoadController {
 		}
 		String fileName = returnFileName(request, file.getFilename());
 		response.setHeader("Content-Disposition", "attachment;fileName=" + fileName);
-		ModelAndView modelAndView = new ModelAndView();
+		//ModelAndView modelAndView = new ModelAndView();
 		try (OutputStream out = response.getOutputStream()) {
 			file.writeTo(out);
 			out.flush();
 			out.close();
-			modelAndView.setViewName("commuser/mygroup/download");
-			modelAndView.addObject("down", groupService.updateGroupFileOfDown(groupId, id));
+			groupService.updateGroupFileOfDown(groupId, id);
+			//modelAndView.setViewName("commuser/mygroup/download");
+			//modelAndView.addObject("down", groupService.updateGroupFileOfDown(groupId, id));
 		} catch (IOException ex) {
 			logger.warn("文件下载时出现IO异常：{}", ex.getMessage());
 			throw new CheckedServiceException(CheckedExceptionBusiness.FILE,
 					CheckedExceptionResult.FILE_DOWNLOAD_FAILED, "文件在传输时中断");
 		}
-		return modelAndView;
+		//return modelAndView;
 	}
     
     /**
