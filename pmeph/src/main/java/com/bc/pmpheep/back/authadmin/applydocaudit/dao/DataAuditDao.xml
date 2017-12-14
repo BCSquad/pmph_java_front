@@ -62,4 +62,31 @@
 			</if>
 		</where>
 	</select>
+	
+	<select id="findDataAuditExcel" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		d.id,
+		d.realname,
+		d.position,
+		d.title,
+		t.textbook_name,
+		p.preset_position,
+		d.online_progress,
+		d.offline_progress,
+		p.chosen_position
+		FROM
+		declaration AS d
+		LEFT JOIN dec_position AS p ON d.id = p.declaration_id
+		LEFT JOIN textbook AS t ON p.textbook_id = t.id
+		<where>
+			1=1
+			<if test="queryName != null and queryName != '' ">
+				and realname like concat("%",#{queryName},"%")
+			</if>
+			<if test="material_id != null and material_id != '' ">
+				and d.material_id = ${material_id}
+			</if>
+		</where>
+	</select>
 </mapper>
