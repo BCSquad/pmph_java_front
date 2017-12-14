@@ -1,4 +1,5 @@
-<%@ page import="java.util.Map" %><%--
+<%@ page import="java.util.Map" %>
+<%@ page import="com.bc.pmpheep.back.util.Const" %><%--
   Created by IntelliJ IDEA.
   User: SuiXinYang
   Date: 2017/11/21
@@ -34,7 +35,7 @@
             <img class="download-pic" src="${ctx}/statics/image/APP-download.png">
 
             <%
-                Map<String, Object> userInfo = (Map<String, Object>) request.getSession().getAttribute("_CONST_USER_");
+                Map<String, Object> userInfo = (Map<String, Object>) request.getSession().getAttribute(Const.SESSION_USER_CONST);
 
                 if (userInfo == null || userInfo.isEmpty()) {
                     request.setAttribute("userInfo", null);

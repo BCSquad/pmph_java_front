@@ -8,5 +8,5 @@ import java.util.Map;
  * Created by lihuan on 2017/11/23.
  */
 public interface UserDao {
-    public Map<String, Object> getUserInfo(@Param("userid") long userid,@Param("usertype") String usertype);
+    public Map<String, Object> getUserInfo(@Param("username") String username, @Param("usertype") String usertype);
 }

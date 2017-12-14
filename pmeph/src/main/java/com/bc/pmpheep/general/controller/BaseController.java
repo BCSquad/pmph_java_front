@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bc.pmpheep.back.util.Const;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -18,12 +19,11 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
  */
 public class BaseController {
 
-    private static String CONST_USER = "_CONST_USER_";
 
     protected Map<String, Object> getUserInfo() {
         HttpServletRequest request =
         ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        return (Map<String, Object>) request.getSession().getAttribute(CONST_USER);
+        return (Map<String, Object>) request.getSession().getAttribute(Const.SESSION_USER_CONST);
     }
 
     @ExceptionHandler(Exception.class)

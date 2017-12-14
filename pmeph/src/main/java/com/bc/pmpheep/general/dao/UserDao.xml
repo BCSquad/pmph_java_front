@@ -4,10 +4,10 @@
 
     <select id="getUserInfo" resultType="map">
         <if test="usertype == 1">
-            select * from writer_user where id=#{userid}
+            select * from writer_user where username=#{username}
         </if>
         <if test="usertype == 2">
-            select * from org_user where id=#{userid}
+            select * from org_user where username=#{username}
         </if>
     </select>
 </mapper>

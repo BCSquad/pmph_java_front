@@ -201,4 +201,8 @@ public class Const {
     public static final Long         CMS_CATEGORY_ID_1          = 1l;
     public static final Long         CMS_CATEGORY_ID_2          = 2l;
     public static final Long         CMS_CATEGORY_ID_3          = 3l;
+
+
+    public static final String       SESSION_USER_CONST         ="SESSION_USER_CONST_";
+
 }
