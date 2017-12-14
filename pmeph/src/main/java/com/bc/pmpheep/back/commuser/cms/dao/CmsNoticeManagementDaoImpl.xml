@@ -36,13 +36,12 @@
 		WHERE
 		cc.is_deleted = 0
 		AND
-		ccg.category_name = '公告'
+		ccg.category_name = '公告管理'
 		AND cc.auth_status = 2
-		AND cc.is_published =
-		TRUE
+		AND cc.is_published =1
 		ORDER BY
 		<if test="order == 1">
-			cc.is_promote desc,
+			cc.is_promote desc,cc.sort_promote,
 			cc.is_hot DESC,cc.sort_hot,
 		    cc.auth_date DESC
 		</if>

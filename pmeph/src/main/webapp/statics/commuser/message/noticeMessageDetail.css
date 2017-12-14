@@ -18,6 +18,10 @@
     font-family: MicrosoftYaHei;
     font-size: 14px;
 }
+.navigator a{
+	color: #999999;
+	text-decoration: none;
+}
 .time{
     width: 100%;
     height: 14px;

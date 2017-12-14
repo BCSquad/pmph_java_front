@@ -18,18 +18,25 @@ function ChangeDiv(type){
 $(function(){
 	var pageSize   = 10;
 	var pageNumber = 1 ;
-	var order      = $('#sort-wrapper').val();
+	var order;
+	 $('#sort-wrapper').selectlist({
+         zIndex: 10,
+         width: 70,
+         height: 20,
+         optionHeight: 20,
+         triangleColor: '#333333',
+         onChange:function(){
+        	order = $('input[name=sort-wrapper]').val();
+        	pageNumber = 1;
+    		$("#content").html("");
+    		$("#loadMore").show();
+    		loadData ();
+         }
+     });
+	 order = $('input[name=sort-wrapper]').val();
 	
 	loadData();
 	
-	//排序切换
-	$('#sort-wrapper').change(function(event){
-		order = $(this).val();
-		pageNumber = 1;
-		$("#content").html("");
-		$("#loadMore").show();
-		loadData ();
-	});
 	//加载更错
 	$("#loadMore").click(function(){
 		loadData();
@@ -58,11 +65,12 @@ $(function(){
 	        			var html = 
 	                		"<div class=\"items\"> "+ 
 	                		    (responsebean[i].isPromote?"<div class='items_img'>推荐</div> ":"")+
-	        	                "<div class=\"item1\">"   +responsebean[i].title+"</div> "+
-	        	                "<div class=\"item2\"><p>"+responsebean[i].summary+"</p></div> "+
+	        	                "<div class=\"item1 cutmore\">" +
+	        	                "<a href='"+contextpath+"message/noticeMessageDetail.action?id="+responsebean[i].mid+"&&tag=FromList'>" +responsebean[i].title+"</a></div> "+
+	        	                "<div class=\"item2 cutmore\"><p style='margin:0;height:40px;line-height:20px'>"+responsebean[i].summary+"</p></div> "+
 	        	                "<div class=\"item3\">  "+
 	        	                     deadline+
-	        	                    "<div style=\"float:right\">发布日期："+formatDate(responsebean[i].authDate,"yyyy.MM.dd")+"</div> "+ 
+	        	                    "<div style=\"float:right\">发布日期："+formatDate(responsebean[i].gmtCreate,"yyyy.MM.dd")+"</div> "+ 
 	        	                "</div> "+
 	                        "</div> ";
 	                	$("#content").append(html);
@@ -70,29 +78,33 @@ $(function(){
 	        		if(responsebean.length < pageSize){
 	        			$("#loadMore").hide();
 	        		}
+	        	}else{
+	        		if(list.length==0){
+	        			$("#nomore").css({"display":"block"});
+	        			}
 	        	}
 	        }
 	    });
 	}
 	
-	function formatDate(nS,str) {
-		  if(!nS){
-		    return "";
-		  }
-		  var date=new Date(nS);
-		  var year=date.getFullYear();
-		  var mon = date.getMonth()+1;
-		  var day = date.getDate();
-		  var hours = date.getHours();
-		  var minu = date.getMinutes();
-		  var sec = date.getSeconds();
-		  if(str=='yyyy-MM-dd'){
-		   return year + '-' + (mon < 10 ? '0' + mon : mon) + '-' + (day < 10 ? '0' + day : day);
-		  }else if(str=='yyyy.MM.dd'){
-		   return year + '.' + (mon < 10 ? '0' + mon : mon) + '.' + (day < 10 ? '0' + day : day);
-		  }else{
-		   return year + '-' + (mon < 10 ? '0' + mon : mon) + '-' + (day < 10 ? '0' + day : day) + ' ' + (hours < 10 ? '0' + hours : hours) + ':' + (minu < 10 ? '0' + minu : minu) + ':' + (sec < 10 ? '0' + sec : sec);
-		  }
+});
+function formatDate(nS,str) {
+	  if(!nS){
+	    return "";
+	  }
+	  var date=new Date(nS);
+	  var year=date.getFullYear();
+	  var mon = date.getMonth()+1;
+	  var day = date.getDate();
+	  var hours = date.getHours();
+	  var minu = date.getMinutes();
+	  var sec = date.getSeconds();
+	  if(str=='yyyy-MM-dd'){
+	   return year + '-' + (mon < 10 ? '0' + mon : mon) + '-' + (day < 10 ? '0' + day : day);
+	  }else if(str=='yyyy.MM.dd'){
+	   return year + '.' + (mon < 10 ? '0' + mon : mon) + '.' + (day < 10 ? '0' + day : day);
+	  }else{
+	   return year + '-' + (mon < 10 ? '0' + mon : mon) + '-' + (day < 10 ? '0' + day : day) + ' ' + (hours < 10 ? '0' + hours : hours) + ':' + (minu < 10 ? '0' + minu : minu) + ':' + (sec < 10 ? '0' + sec : sec);
+	  }
 
-	}
-})
+}

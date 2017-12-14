@@ -10,14 +10,18 @@
 
 <html>
 <head>
+    <script type="text/javascript">
+       var contxtpath = '${pageContext.request.contextPath}';
+       var contextpath = '${pageContext.request.contextPath}/';
+    </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>Title</title>
-    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
-    <script src="${ctx}/resources/comm/base.js"></script>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
-    
     <link rel="stylesheet" href="${ctx}/statics/commuser/focusAndSelect/newsReportAndMaterialNotice.css" type="text/css">
-    
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
+    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
+    <script src="${ctx}/resources/comm/base.js"></script>
     <script src="${ctx}/resources/commuser/focusAndSelect/materialNotice.js" ></script>
     
 
@@ -31,45 +35,39 @@
             border: none;
         }
     </style>
-    <script type="text/javascript">
-        var contxtpath = '${pageContext.request.contextPath}';
-        $(function () {
-            $('#sort-wrapper').selectlist({
-                zIndex: 10,
-                width: 70,
-                height: 20,
-                optionHeight: 20,
-                triangleColor: '#333333'
-            });
-        })
-    </script>
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="content-body">
     <div class="div_top">
-        首页>遴选公告
+    <a href="${ctx }/homepage/tohomepage.action">首页</a>&gt;遴选公告
     </div>
     <div class="div_content">
         <div class="div_content_left">
-            <span class="clickbefore" id="infoReport" 
+            <span class="clickbefore mouse-gesture" id="infoReport" 
                   onclick="ChangeDiv('infoReport')">信息快报</span>
             <span class="clicked"     style="margin-left: 15px;" id="selectAnnco" onclick="ChangeDiv('selectAnnco')">遴选公告</span>
         </div>
         <div class="div_content_right">
             <span style="color: #999999;">排序：</span>
-            <span style="color: #333333;">
-                <select id="sort-wrapper">
+             <div style="display: inline-block;text-align:left;color: #333333;">
+                <select id="sort-wrapper" name="sort-wrapper">
 				    <option value="1">综合</option>
                 	<option value="2">最新</option>
                		 <option value="3">最热</option>
 				</select>
-            </span>
+             </div>
         </div>
     </div>
     <div style="margin-top:25px;">
-        <div class="left" id = "content"></div>
+        <div class="left" >
+        <div id = "content"></div>  
         <div class="load-more clearfix" id="loadMore">加载更多...</div>
+         <div class="no-more" style="display:none" id="nomore">
+                    <img src="<c:url value="/statics/image/aaa4.png"></c:url>" style="display: block;margin: 0px auto 0px;">
+                    <span style="display: block;width: 100px;margin: 0px auto 0px;">木有内容呀~~</span>
+              </div>
+        </div>
         <div class="right" style="width: 335px;float: right;">
             <img src="${ctx}/statics/image/caode.png" style="width: 335px;height: 335px;"/>
         </div>

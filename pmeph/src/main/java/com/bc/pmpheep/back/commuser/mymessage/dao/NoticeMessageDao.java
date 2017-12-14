@@ -48,6 +48,12 @@ public interface NoticeMessageDao {
 	List<Map<String, Object>> queryNoticeMessageDetailContact(
 			Map<String, Object> paraMap);
 
+	/**查询遴选公告的内容id的查询公告详情
+	 * @param paraMap
+	 * @return
+	 */
+	Map<String, Object> queryCMSNotice(Map<String, Object> paraMap);
+
 	
 	
   }
