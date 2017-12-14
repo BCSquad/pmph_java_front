@@ -158,22 +158,44 @@
 table,tr,td{
     padding: 0;
     margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0px 10px;
+    text-overflow: ellipsis;
 }
 table{
     width: 100%;
     border-spacing: 0px 0px;
     border-collapse: collapse;
+    table-layout: fixed;
 }
 table thead tr{
     height: 46px;
     line-height: 30px;
     background-color:#f0f0f0;
 }
+table thead .td1 {
+	width: 5%;
+}
+table thead .td2 {
+	width: 7%;
+}
+table thead .td3 {
+	width: 5%;
+}
+
+table thead .td8 {
+	width: 7%;
+}
 table thead td{
     text-align: center;
     font-family: MicrosoftYaHei;
     font-size: 14px;
     border: 3px solid #fff;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0px 10px;
+    text-overflow: ellipsis;
 }
 table tbody tr{
     height: 46px;

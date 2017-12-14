@@ -83,14 +83,14 @@ String contextpath=request.getContextPath();
                 <table class="table">
                     <thead>
                     <tr>
-                        <td class="">序号</td>
-                        <td class="">姓名</td>
-                        <td class="">性别</td>
-                        <td class="">工作单位</td>
-                        <td class="">申报单位</td>
-                        <td class="">职位</td>
-                        <td class="">职称</td>
-                        <td class="">选择编委</td>
+                        <td class="td1">序号</td>
+                        <td class="td2">姓名</td>
+                        <td class="td3">性别</td>
+                        <td class="td4">工作单位</td>
+                        <td class="td5">申报单位</td>
+                        <td class="td6">职位</td>
+                        <td class="td7">职称</td>
+                        <td class="td8">选择编委</td>
                     </tr>
                     </thead>
                     <tbody id="userTbody">
