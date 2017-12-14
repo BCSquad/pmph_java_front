@@ -16,9 +16,9 @@ public interface DataAuditDao {
 	 * @param @return
 	 * @return List<Map<String,Object>> 返回类型
 	 * @throws
-	 */										 	
+	 */
 	List<Map<String, Object>> findDataAudit(Map<String, Object> paraMap);
-				
+
 	/**
 	 * 
 	 * @Title: findDataAuditCount
@@ -29,6 +29,7 @@ public interface DataAuditDao {
 	 * @throws
 	 */
 	Integer findDataAuditCount(Map<String, Object> paraMap);
+
 	/**
 	 * 
 	 * @Title: findTitleName
@@ -39,5 +40,16 @@ public interface DataAuditDao {
 	 * @throws
 	 */
 	String findTitleName(Map<String, Object> paraMap);
+
+	/**
+	 * 导出excle表
+	 * @Title: findDataAuditExcel
+	 * @Description: TODO
+	 * @param @param paraMap
+	 * @param @return 设定文件
+	 * @return List<Map<String,Object>> 返回类型
+	 * @throws
+	 */
+	List<Map<String, Object>> findDataAuditExcel(Map<String, Object> paraMap);
 
 }
