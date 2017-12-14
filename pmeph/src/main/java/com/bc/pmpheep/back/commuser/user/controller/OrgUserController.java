@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bc.pmpheep.back.commuser.mymessage.service.MyMessageService;
 import com.bc.pmpheep.back.commuser.user.bean.OrgUser;
 import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
 import com.bc.pmpheep.back.commuser.user.service.OrgUserService;
@@ -37,7 +38,9 @@ public class OrgUserController extends  com.bc.pmpheep.general.controller.BaseCo
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.user.service.OrgUserServiceImpl")
 	private OrgUserService orgUserService;
-	
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.mymessage.service.MyMessageServiceImpl")
+	MyMessageService myMessageService;
 	
 	
 	/**
@@ -53,13 +56,17 @@ public class OrgUserController extends  com.bc.pmpheep.general.controller.BaseCo
 			pageSize=10;
 		}
 		PageParameter<WriterUser> pageParameter = new PageParameter<>(pageNumber, pageSize);
+		String userName="";
+		if(username!=null){
+			 userName = java.net.URLDecoder.decode(username,"UTF-8");
+		}
 		//获取当前用户 
 		Map<String,Object> writerUserMap=this.getUserInfo();
 		OrgUser orgUser=new OrgUser();
 		WriterUser writerUser=new WriterUser();
-		orgUser.setOrgId(Long.parseLong(writerUserMap.get("id").toString()));
+		orgUser.setOrgId(Long.parseLong(writerUserMap.get("org_id").toString()));
 		writerUser.setOrgId(orgUser.getOrgId());
-		writerUser.setName(username);
+		writerUser.setName(userName);
 		pageParameter.setParameter(writerUser);
 	    String pageUrl = "commuser/user/writerLists";
         try {
@@ -96,4 +103,24 @@ public class OrgUserController extends  com.bc.pmpheep.general.controller.BaseCo
 		model.addObject("orgUser", orgUser);
 		return model;
     }
+    
+    /**
+     * 发送消息
+     * @param friendId 接受人ID
+     * @param friendIdType
+     * @param title
+     * @param content
+     * @return
+     */
+    @ResponseBody
+	@RequestMapping(value = "/senNewMsg", method = RequestMethod.POST)
+	public String senNewMsg(Short friendIdType,HttpServletRequest request) {
+    	String content=request.getParameter("content");
+    	Long friendId=Long.valueOf(request.getParameter("friendId"));
+    	String title=request.getParameter("title");
+		Map<String, Object> writerUser = this.getUserInfo();
+		Long thisId = new Long(String.valueOf(writerUser.get("id")));
+		myMessageService.senNewMsg(thisId, friendId, friendIdType, title, content);
+		return "success";
+	}
 }
