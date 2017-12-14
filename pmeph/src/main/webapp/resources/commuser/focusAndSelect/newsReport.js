@@ -56,10 +56,6 @@ $(function(){
 	        	if(null != list && list.length >= 0){
 	        		pageNumber ++ ;
 	        		var i= 0;
-	        		if(list.length==0){
-	        			$("#loadMore").hide();
-	        			$("#nomore").css({"display":"block"});
-	        		}
 	        		for( ; i<list.length ; i++ ){
 	        			var tarId="cms"+list[i].id;
 	        			var html =
@@ -83,6 +79,10 @@ $(function(){
 	        		}
 	        		if(list.length < pageSize){
 	        			$("#loadMore").hide();
+	        		}
+	        	}else{
+	        		if(list.length==0){
+	        			$("#nomore").css({"display":"block"});
 	        		}
 	        	}
 	        }

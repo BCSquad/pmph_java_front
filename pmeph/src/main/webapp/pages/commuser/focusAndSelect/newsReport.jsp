@@ -44,7 +44,7 @@
         <div class="div_content_left">
             <span class="clicked" id="infoReport" style="margin-right: 15px;"
                   onclick="ChangeDiv('infoReport')">信息快报</span>
-            <span class="clickbefore" id="selectAnnco" onclick="ChangeDiv('selectAnnco')">遴选公告</span>
+            <span class="clickbefore mouse-gesture" id="selectAnnco" onclick="ChangeDiv('selectAnnco')">遴选公告</span>
         </div>
         <div class="div_content_right">
             <span style="color: #999999;">排序：</span>
@@ -66,7 +66,7 @@
              <div class="no-more" style="display:none" id="nomore">
                     <img src="<c:url value="/statics/image/aaa4.png"></c:url>" style="display: block;margin: 0px auto 0px;">
                     <span style="display: block;width: 100px;margin: 0px auto 0px;">木有内容呀~~</span>
-                </div>
+              </div>
         </div>
         <div class="right" style="width: 335px;float: right;">
             <img src="${ctx}/statics/image/caode.png" style="width: 335px;height: 335px;"/>

@@ -50,11 +50,23 @@ public class CmsNoticeList {
 	/**
 	 * 审核时间
 	 */
-	private Timestamp authDate;
+	private Timestamp gmtCreate;
 	/**
 	 * 截止时间
 	 */
 	private Timestamp deadline;
+    /**
+     * 内容id
+     */
+    private String mid;
+    
+	public String getMid() {
+		return mid;
+	}
+
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
 
 	public Long getId() {
 		return id;
@@ -104,12 +116,12 @@ public class CmsNoticeList {
 		this.isPromote = isPromote;
 	}
 
-	public Timestamp getAuthDate() {
-		return authDate;
+	public Timestamp getGmtCreate() {
+		return gmtCreate;
 	}
 
-	public void setAuthDate(Timestamp authDate) {
-		this.authDate = authDate;
+	public void setGmtCreate(Timestamp gmtCreate) {
+		this.gmtCreate = gmtCreate;
 	}
 
 	public Timestamp getDeadline() {
