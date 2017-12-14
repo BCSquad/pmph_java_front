@@ -50,7 +50,8 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
         ModelAndView model = new ModelAndView();
         // 获取用户
         Map<String, Object> writerUserMap = this.getUserInfo();
-        Long userId =  Long.parseLong(writerUserMap.get("id").toString()) ;
+        //Long userId =  Long.parseLong(writerUserMap.get("id").toString()) ;
+        Long userId = 24975L;
         List<GroupList> lst=groupService.groupList((pageNumber-1)*pageSize, pageSize, userId) ;
         model.setViewName("commuser/mygroup/groupList");
         model.addObject("listgroup", lst);

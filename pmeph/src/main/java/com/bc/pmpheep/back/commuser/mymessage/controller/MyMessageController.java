@@ -1,6 +1,7 @@
 package com.bc.pmpheep.back.commuser.mymessage.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -81,7 +82,8 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 	@RequestMapping(value = "/todetail", method = RequestMethod.GET)
 	public List<MyMessageVO> detail(Long senderId, Integer senderType, Long receiverId, Integer receiverType) {
 		Map<String, Object> writerUser = this.getUserInfo();
-		Long userId = new Long(String.valueOf(writerUser.get("id")));
+		//Long userId = new Long(String.valueOf(writerUser.get("id")));
+		Long userId = new Long(24967);
 		List<MyMessageVO> list = new ArrayList<>();
 		if (senderId.equals(userId) && senderType == 2) {
 			list = myMessageService.updateMyMessage(senderId, senderType, userId, 2);
@@ -105,26 +107,37 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 	@RequestMapping(value = "/getDialogue", method = RequestMethod.GET)
 	public List<DialogueVO> getDialogue(@RequestParam(value = "friendId") Long friendId,Integer friendType) {
 		Map<String, Object> writerUser = this.getUserInfo();
-		Long thisId = new Long(String.valueOf(writerUser.get("id")));
+		//Long thisId = new Long(String.valueOf(writerUser.get("id")));
+		Long thisId = new Long(24967);
 		List<DialogueVO> lst = myMessageService.findMyDialogue(thisId, friendId,friendType);
 		return lst;
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/senNewMsg", method = RequestMethod.GET)
-	public String senNewMsg(@RequestParam(value = "friendId") Long friendId, Short friendIdType,
+	public Map<String,Object> senNewMsg(@RequestParam(value = "friendId") Long friendId, Short friendIdType,
 			@RequestParam(value = "title") String title, @RequestParam(value = "content") String content) {
 		Map<String, Object> writerUser = this.getUserInfo();
-		Long thisId = new Long(String.valueOf(writerUser.get("id")));
+		//Long thisId = new Long(String.valueOf(writerUser.get("id")));
+		//String name = writerUser.get("name");
+		Long thisId = new Long(24967);
+		String name = "测试";
+		String avatar = "static/default_image.png";
 		myMessageService.senNewMsg(thisId, friendId, friendIdType, title, content);
-		return "success";
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("code","success");
+		map.put("name",name);
+		map.put("avatar",avatar);
+		return map;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/updateMyTalk", method = RequestMethod.GET)
 	public String senNewMsg(@RequestParam(value = "senderId") Long senderId, @RequestParam(value = "senderType")Short senderType ) {
 		Map<String, Object> writerUser = this.getUserInfo();
-		Long  thisId = new Long(String.valueOf(writerUser.get("id")));
+		//Long  thisId = new Long(String.valueOf(writerUser.get("id")));
+		Long thisId = new Long(24967);
 		myMessageService.updateMyTalk(senderId,senderType, thisId,new Short("2"));
 		return "success";
 	}
