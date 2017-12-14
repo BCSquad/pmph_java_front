@@ -35,7 +35,7 @@
   </select>
 <!-- 查好友信息 -->
  <select id="ListMyFriend"  resultMap="BaseResultMap">
-     select  * from writer_friend a left join writer_user b on a.target_id=b.id WHERE  a.request_id=#{id}  AND a.status=2 
+     select  b.realname,b.id,b.avatar from writer_friend a left join writer_user b on a.target_id=b.id WHERE  a.request_id=#{id}  AND a.status=2 
   </select>
 <!-- 查小组信息 -->
  <select id="ListMyGroup"  resultMap="BaseResultMap">
@@ -77,7 +77,7 @@ AND a.online_progress IN (2, 3)
 SELECT
 	b.online_progress,
 	b.is_staging,
-	a.age_deadline,
+	a.deadline as age_deadline,
 	a.material_name,
 	COUNT(a.material_name) AS exmember,
 	c.material_id,
@@ -101,13 +101,13 @@ WHERE
 	a.is_deleted = '0'
 AND a.is_public = '0'
 AND a.is_published = '1'
-AND b.online_progress not in  (0,2)
+AND b.online_progress not in  (2)
 	<if test="s!=null and s!= ''">AND c.s = #{s}</if> 
  	<if test="is_staging!=null and is_staging!= ''">AND b.is_staging =#{is_staging}</if>
  	<if test="online_progress!=null and online_progress!= ''">AND b.online_progress=#{online_progress}</if>
 <if test="bookname!=null and bookname!= ''">AND a.material_name like CONCAT('%',#{bookname},'%')</if>  
-<!-- 					<if test="startTime!=null">AND B.apply_time &gt;= #{startTime}</if>  -->
-<!-- 					<if test="endTime!=null">AND B.apply_time &lt;= #{endTime} </if>  -->
+ 					<if test="dateinfo!=null and dateinfo =='1' ">AND a.deadline &gt;= sysdate()</if>  
+ 					<if test="dateinfo!=null and dateinfo =='2' ">AND a.deadline &lt;= sysdate() </if>  
 GROUP BY
 	(a.id)
 	 </select>
