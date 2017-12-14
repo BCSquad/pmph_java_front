@@ -8,14 +8,14 @@
 <html>
 <head>
     <script type="text/javascript">
-        var contxtpath='${pageContext.request.contextPath}/';
+        var contextpath='${pageContext.request.contextPath}/';
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>用户管理</title>
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css"/>
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
-    <script src="${ctx}/statics/js/jquery/jquery.js"></script>
-    <script src="${ctx}/statics/js/jquery/jquery.selectlist.js"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.pager.js"></script>
     <script src="${ctx}/resources/comm/base.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -26,7 +26,6 @@
 
 <div class="org-head">
     <div >
-        
         <div class="div-content">
             <div id="div-titletop">
                 <span class="top-lable1">欢迎访问人教e卫平台！</span>
@@ -53,6 +52,24 @@
 </div>
 
 <div class="body">
+ <div class="b hidden" id="box" style="display: none">
+         <div class="hiddenX hidden" id="close">
+             <img onclick="hide()" style="width:100%;height:100%;cursor: pointer;" src="${ctx}/statics/image/closediv.png">
+         </div>
+         <span class="personMessageTitle" id="realname"></span>
+         <div class="contentBox" id="dialogue">
+         </div>
+         <div class="inputBox">
+             <div style="float: left;width: 80%;height: 100%">
+             <textarea id="content" style="width: 100%;height: 98%;border: none;outline:0;font-size:15px;" placeholder="请输入消息内容,按回车键发送" ></textarea>
+             </div>
+             <div style="float: left;width: 20%;height: 100%">
+             <div class="div_btn11" style="cursor: pointer;">
+                 <span class="button11" onclick="sendNewMsg()">发送</span>
+             </div>
+             </div>
+         </div>
+</div>
     <div class="content-wrapper">
         <div class="message">
              <div class="sousuokuang">
@@ -67,37 +84,36 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <td class="" width="50">序号</td>
-                    <td class="" width="100">用户代码</td>
-                    <td class="" width="128">姓名</td>
-                    <td class="" width="124">手机</td>
-                    <td class="" width="185">邮箱</td>
-                    <td class="" width="135">职务</td>
-                    <td class="" width="90">职称</td>
-                    <td class="">操作</td>
+                    <td>序号</td>
+                    <td>用户代码</td>
+                    <td>姓名</td>
+                    <td>手机</td>
+                    <td>邮箱</td>
+                    <td>职务</td>
+                    <td>职称</td>
+                    <td>操作</td>
                 </tr>
                 </thead>
                 <tbody id='tb'>
-	              		<c:forEach items="${page.rows }" var="item" varStatus="vs">
-	              			<tr>
-	              				
-	              				<c:choose>  
-  			   						<c:when test="${(vs.index+1)%10 == 1}">
-  			   							<td>${vs.count}</td>
-  			   						</c:when>  
-			   						<c:otherwise>        
-			   							<td>${vs.count}</td> 
-			   						</c:otherwise>  
-								</c:choose>
-	              				<td>${item.username } </td>
-	              				<td>${item.realname } </td>
-	              				<td>${item.handphone } </td>
-	              				<td>${item.email } </td>
-	              				<td>${item.position } </td>
-	              				<td>${item.title } </td>
-	              				<td><a href="">发消息</a></td>
-	              			</tr>
-	              		</c:forEach>
+              		<c:forEach items="${page.rows }" var="item" varStatus="vs">
+              			<tr>
+              				<c:choose>  
+ 			   						<c:when test="${(vs.index+1)%10 == 1}">
+ 			   							<td>${vs.count}</td>
+ 			   						</c:when>  
+		   						<c:otherwise>        
+		   							<td>${vs.count}</td> 
+		   						</c:otherwise>  
+							</c:choose>
+              				<td>${item.username } </td>
+              				<td>${item.realname } </td>
+              				<td>${item.handphone } </td>
+              				<td>${item.email } </td>
+              				<td>${item.position } </td>
+              				<td>${item.title } </td>
+              				<td><a onclick="show('${item.realname}','${item.id}')" style="cursor: pointer;">发消息</a></td>
+              			</tr>
+              		</c:forEach>
                 </tbody>
             </table>
               <div class="fenyelan">
@@ -105,9 +121,9 @@
                 </ul>
                 <div style="display: inline-block; vertical-align: top">
                     <select id="pages" name="pages">
-                       	<option value="10 "  ${pageSize=='10'?'selected':'' }>每页10条</option>
-                        <option value="20 "  ${pageSize=='20'?'selected':'' }>每页20条</option>
-                        <option value="50 "  ${pageSize=='50'?'selected':'' }>每页50条</option>
+                       	<option value="10"  ${pageSize=='10'?'selected':'' }>每页10条</option>
+                        <option value="20"  ${pageSize=='20'?'selected':'' }>每页20条</option>
+                        <option value="50"  ${pageSize=='50'?'selected':'' }>每页50条</option>
                     </select>
                 </div>
                 <div class="pageJump">
@@ -122,11 +138,138 @@
     		
 		</div>
 	</div>
+	<input type="hidden" id="frendId">
 </div>
 <script type="text/javascript">
+//发送消息
+function sendNewMsg (){
+	var content=$("#content").val();
+	if(!content || content.trim() ==''){
+		window.message.warning("请键入消息");
+	}else{
+		var frendId =$("#frendId").val();
+		$.ajax({
+	        type:'post',
+	        url :contextpath+'/user/senNewMsg.action',
+	        async:false,
+	        dataType:'json',
+	        data:{
+	        	friendId : frendId,
+	        	content  : content,
+	        	title    : $(".personMessageTitle").html()
+	        },
+	        success:function(responsebean){
+	        	if(responsebean=='success'){
+	        		$("#content").val(null);
+	        		refreshmessage();
+	        	}
+	        }
+		});
+	}
+}
+
+//刷新消息
+function refreshmessage(){
+	var frendid = $("#frendId").val();
+	$.ajax({
+        type:'get',
+        url :contextpath+'/mymessage/getDialogue.action',
+        contentType: 'application/json',
+        dataType:'json',
+        data:{
+        	friendId : frendid,
+        },
+        success:function(responsebean){
+        	$("#dialogue").html('');
+        	if(null != responsebean && responsebean.length >= 0){
+        		for( var i= 0; i<responsebean.length ; i++ ){
+        			var html ="";
+        			if(responsebean[i].isMy){//我发送的
+        				html = 
+	        				"<div class='oneTalk'> "+
+	                        "<div class='headAndNameRight float_right'> "+
+	                            "<div class='headDiv'><img class='headPicture' src=''/></div> "+
+	                            "<div class='talkName'><text>"+responsebean[i].senderName+"&nbsp;&nbsp;&nbsp;&nbsp;"+formatDate(responsebean[i].sendTime,'yyyy.MM.dd hh:ss:mm')+"</text></div> "+
+	                        "</div> "+
+	                        "<div class='talkDivRight float_right' > "+
+	                            "<div class='sendMessage'> "+
+	                                "<div class='textDiv float_right'> "+responsebean[i].content+"</div> "+
+	                            "</div> "+
+	                        "</div> "+
+	                        "</div> ";
+        			}else{
+        				html =
+        				"<div class='oneTalk'> "+
+	                        "<div class='headAndNameLeft float_left'> "+
+	                            "<div class='headDiv'><img class='headPicture' src=''/></div> "+
+	                            "<div class='talkName'><text>"+responsebean[i].senderName+"</text></div> "+
+	                        "</div> "+
+	                        "<div class='talkDiv float_left' > "+
+	                            "<div class='sendMessage'> "+
+	                               "<!-- <div class='triangle leftTriangle float_left'></div>--> "+
+	                                "<div class='textDiv float_left'> "+responsebean[i].content+"</div> "+
+	                            "</div> "+
+	                            "<div class='talkTime talkTimeAlignLeft'>"+formatDate(responsebean[i].sendTime,'yyyy.MM.dd hh:ss:mm')+"</div> "+
+	                        "</div> "+
+                        "</div> ";
+        			}
+        			$("#dialogue").append(html);
+        		}
+        	}
+        	//更新消息状态
+        	$.ajax({
+    	        type:'get',
+    	        url :contextpath+'/mymessage/updateMyTalk.action',
+    	        contentType: 'application/json',
+    	        dataType:'json',
+    	        data:{
+    	        	senderId   : frendid,
+    	        	senderType : 2
+    	        },
+    	        success:function(responsebean){
+    	        	
+    	        }
+    	    });
+        }
+    });
+}
+
+function formatDate(nS,str) {
+	  if(!nS){
+	    return "";
+	  }
+	  var date=new Date(nS);
+	  var year=date.getFullYear();
+	  var mon = date.getMonth()+1;
+	  var day = date.getDate();
+	  var hours = date.getHours();
+	  var minu = date.getMinutes();
+	  var sec = date.getSeconds();
+	  if(str=='yyyy-MM-dd'){
+		  return year + '-' + (mon < 10 ? '0' + mon : mon) + '-' + (day < 10 ? '0' + day : day);
+	  }else if(str=='yyyy.MM.dd'){
+		  return year + '.' + (mon < 10 ? '0' + mon : mon) + '.' + (day < 10 ? '0' + day : day);
+	  }else if(str=='yyyy.MM.dd hh:ss:mm'){
+		  return year + '.' + (mon < 10 ? '0' + mon : mon) + '.' + (day < 10 ? '0' + day : day) + ' ' + (hours < 10 ? '0' + hours : hours) + ':' + (minu < 10 ? '0' + minu : minu) + ':' + (sec < 10 ? '0' + sec : sec);
+	  }else{
+		  return year + '-' + (mon < 10 ? '0' + mon : mon) + '-' + (day < 10 ? '0' + day : day) + ' ' + (hours < 10 ? '0' + hours : hours) + ':' + (minu < 10 ? '0' + minu : minu) + ':' + (sec < 10 ? '0' + sec : sec);
+	  }
+
+}
+    //点击显示聊天窗口
+    function show(name,id){
+    	$("#box").show();
+    	$("#frendId").val(id);
+    	$("#realname").html('与'+name+'的私信窗口');
+    	refreshmessage();
+    }
+    //隐藏聊天窗口
+    function hide(){
+    	$("#box").hide();
+    }
 	//点击查询
 	function query(){
-		var username=$("#ssk").val();
+		var username=encodeURI(encodeURI($("#ssk").val()));
 		window.location.href = '<%=basePath%>/user/writerLists.action?username='+username;
 	}
 	var pageSize =$("#pages").val();
@@ -145,7 +288,8 @@
                     height: 30,
                     optionHeight: 30,
                     onChange: function () {
-                    	var pageSize =this.getSelectedOptionValue(pages);
+ //                   	var pageSize =this.getSelectedOptionValue(pages);
+                    	var pageSize=$('input[name=pages]').val();
                    	 	pageFun(pageSize,'${pageNumber}');
                     }
                 });
@@ -153,6 +297,11 @@
             		if(event.keyCode ==13){ //回车键弹起事件
             			query();
             		}
+                });
+                $(window).scroll(function() {
+                    var top = $(window).scrollTop()+200;
+                    var left= $(window).scrollLeft()+605;
+                    $("#box").css({ left:left + "px", top: top + "px" });
                 });
            });
         //分页
