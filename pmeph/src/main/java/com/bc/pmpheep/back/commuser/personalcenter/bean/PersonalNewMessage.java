@@ -2,36 +2,36 @@ package com.bc.pmpheep.back.commuser.personalcenter.bean;
 
 public class PersonalNewMessage {
 
-	private String realname;
-	private String sex;
-	private String rank;
-	private String avatar;
-	private String signature;
-	private String id;
-	private String org_id;
-	private String email;
-	private String book_id;
-	private String book_name;
-	private String buy_url;
-	private String category_id;
-	private String image_url;
-	private String group_name;			
-	private String group_image;
-	private String grouppeo;
-	private String gmt_create;
-	private String online_progress;			
-	private String material_name;
-	private String gmt_update;
-	private String title;			
-	private String summary;
-	private String auth_status;
-	private String score;
-	private String content;
-	private String age_deadline;
-	private String exmember;
-	private String iamin;
-	private String is_staging;
-	private String material_id;
+	private String realname;//真实姓名
+	private String sex;//性别
+	private String rank;//用户级别，普通，专家
+	private String avatar;//头像
+	private String signature;//个性签名
+	private String id;//主键
+	private String org_id;//对应学校id
+	private String email;//邮箱
+	private String book_id;//书本ID
+	private String book_name;//书名
+	private String buy_url;//购买地址
+	private String category_id;//内容类型
+	private String image_url;//书评书本图片
+	private String group_name;	//小组名称		
+	private String group_image;//小组头像
+	private String grouppeo;//小组人数
+	private String gmt_create;//创建日期
+	private String online_progress;//审核进度		0=未提交/1=已提交/2=被退回/3=通过	
+	private String material_name;//教材名称
+	private String gmt_update;//更新日期
+	private String title;	//标题
+	private String summary;//内容
+	private String auth_status;//审核状态
+	private String score;//评分
+	private String content;//评价内容
+	private String age_deadline;//deadline,报名截止日期
+	private String exmember;//报名人数
+	private String iamin;//用户是否报名，1已报名，0未报名
+	private String is_staging;//是否暂存
+	private String material_id;//教材ID
 	
 	
 	
