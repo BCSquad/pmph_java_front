@@ -141,6 +141,7 @@
     display: block;
     text-decoration: none;
     margin-top: 4px;
+    cursor: pointer;
 
 }
 
@@ -239,11 +240,11 @@ table tbody tr:nth-child(even){
   padding:0 15px;
   width:120px;
   height:30px;
-  background-color:#D31733;
-  color:#fff;
+ /*  background-color:#D31733; */
+  /* color:#fff; */
   line-height:30px;
   text-align:center;
-  border-radius:5px;
+  /* border-radius:5px; */
   margin:20px auto;
   border:0 none;
   font-size:16px;
