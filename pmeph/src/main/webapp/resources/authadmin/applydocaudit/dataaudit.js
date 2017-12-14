@@ -80,7 +80,7 @@ function queryBtnClick(){
 //导出excel
 
 function exportExcel(){
-    window.location.href =contextpath+'/excel/download.action?service=dataAuditExcel&startNum='+$("#page-num-temp").val()+'&pageSize='+$("#page-size-select").find("input[name='page-size-select']").val()+'&queryName='+$("#search-name-temp").val()+'&material_id='+$("#material_id").val();
+    window.location.href =contextpath+'/excel/download.action?service=dataAuditExcel&queryName='+$("#search-name-temp").val()+'&material_id='+$("#material_id").val();
 }
 
 
