@@ -2,10 +2,31 @@
 text-decoration:none; 
 color:#333; 
 }
-
+.dtpltpl{
+	    height: 100px;
+}
+.aright{
+	text-decoration:none; 
+color:#999999;
+}
 .abmcj {
 text-decoration:none; 
 color:#FFF; 
+}
+
+.hytp{
+	 height: 46px;
+}
+.sctpdiv{
+	margin: auto;
+	height: 90px;
+	width: 67px;
+}
+
+.hytxdiv{
+	margin: auto;
+	height: 50px;
+	width: 50px;
 }
 
 .body {
@@ -358,8 +379,7 @@ color:#FFF;
 
 .sctp {
     height: 80px;
-    margin: 0 auto;
-    display: block;
+        width: 65px;
 }
 
 .scul {
@@ -595,7 +615,7 @@ color:#FFF;
     float: left;
     height: 120px;
     width: 90px;
-    margin-right: 25px;
+    margin : auto;
 }
 
 #shenhezhong {
@@ -653,6 +673,15 @@ color:#FFF;
 .pinlunxinji {
     background-image: url(../../image/css_sprites.png);
     background-position: -181px -171px;
+    height: 16px;
+    width: 16px;
+    background-repeat: no-repeat;
+    float: left;
+}
+
+.pinlunxinjiban {
+    background-image: url(../../image/bankexin.png);
+    background-position: 1px 1px;
     height: 16px;
     width: 16px;
     background-repeat: no-repeat;
