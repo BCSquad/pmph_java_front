@@ -196,7 +196,7 @@ public class MessageController extends BaseController{
 			mv.addObject("firsttag", "首页");
 			mv.addObject("secondtag", "遴选公告");
 			mv.addObject("firstpath", "homepage/tohomepage.action");
-			mv.addObject("path", "cmsnotice/tolist.action");
+			mv.addObject("secondpath", "cmsnotice/tolist.action");
 		}else{
 			//来自消息列表中通知的request
 			
