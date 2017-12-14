@@ -45,7 +45,7 @@ public class ChooseEditorController extends BaseController {
 	public ModelAndView toPage(@RequestParam(value="textBookId",required=true)String textBookId, HttpServletRequest request){
 		ModelAndView mv = new ModelAndView();
 		/*String textBookId = request.getParameter("textBookId");*/
-		textBookId = "21524";
+		/*textBookId = "21524";*/
 		
 		Map<String, Object> user = getUserInfo();
 		BigInteger logUserId=(BigInteger) user.get("id");
