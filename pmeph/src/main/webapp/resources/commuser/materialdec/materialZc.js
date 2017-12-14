@@ -459,8 +459,8 @@ function buttAdd(type){
 	if(checkNull(jsonStr)){
 		$.ajax({
 			type: "POST",
-		//	url:contextpath+'material/doMaterialAdd.action?type='+type,
-			url:contextpath+'material/doMaterialTest.action',
+			url:contextpath+'material/doMaterialUpdate.action?type='+type,
+		//	url:contextpath+'material/doMaterialTest.action',
 			data:$('#objForm').serialize(),// 你的formid
 			async: false,
 		    success: function(json) {

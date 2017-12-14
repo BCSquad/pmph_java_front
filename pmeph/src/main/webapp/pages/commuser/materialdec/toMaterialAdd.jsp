@@ -557,7 +557,7 @@
 			<div class="div_butt">
 				<div class="bt_tj" onclick="javascript:buttAdd('1')">提交</div>
 				<div class="bt_tj" onclick="javascript:buttAdd('2')">暂存</div>
-				<div class="bt_tj">放弃</div>
+				<div class="bt_tj" onclick="javascript:buttGive()">放弃</div>
 			</div>
 
 		</div>

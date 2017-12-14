@@ -137,4 +137,9 @@ public interface MaterialDetailService {
 	 */
 	public List<Map<String,Object>> queryZjkzbb(Map<String,Object> map);
 	public int insertZjZjkzbb(Map<String,Object> map);
+	
+	/**
+	 * 清除所有关联表
+	 */
+	public int delGlxx(Map<String,Object> map);
 }

@@ -148,5 +148,21 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 	public int insertZjZjkzbb(Map<String, Object> map) {
 		return this.madd.insertZjkzbb(map);
 	}
+	@Override
+	public int delGlxx(Map<String, Object> map) {
+		
+		this.madd.DelGjghjc(map);
+		this.madd.DelGjkcjs(map);
+		this.madd.DelJcbj(map);
+		this.madd.DelJcbx(map);
+		this.madd.DelTssbZc(map);
+		this.madd.DelStea(map);
+		this.madd.DelZjkyqk(map);
+		this.madd.DelPerson(map);
+		this.madd.DelZjxs(map);
+		this.madd.DelStu(map);
+		this.madd.DelWork(map);
+		return 0;
+	}
 	
 }

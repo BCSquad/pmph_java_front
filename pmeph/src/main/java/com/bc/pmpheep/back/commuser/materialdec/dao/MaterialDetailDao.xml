@@ -67,7 +67,9 @@
 		insert into dec_position_temp(author_id,is_background,declaration_id,textbook_id,preset_position,syllabus_id,syllabus_name,gmt_create)
 		  values(#{author_id},#{is_background},#{declaration_id},#{textbook_id},#{preset_position},#{syllabus_id},#{syllabus_name},#{gmt_create})
 	</insert>
-	
+	<delete id="DelTssbZc" parameterType="java.util.Map">
+		delete from dec_position_temp where declaration_id = #{declaration_id}
+	</delete>
 	<!-- 学习经历 -->
 	<select id="queryStu" resultType="java.util.Map" parameterType="java.util.Map">
 		select * from dec_edu_exp where declaration_id = #{declaration_id} ORDER BY sort 
@@ -76,7 +78,9 @@
 		insert into dec_edu_exp(declaration_id,school_name,major,degree,note,date_begin,date_end)
 		  values(#{declaration_id},#{school_name},#{major},#{degree},#{note},#{date_begin},#{date_end})
 	</insert>
-	
+	<delete id="DelStu" parameterType="java.util.Map">
+		delete from dec_edu_exp where declaration_id = #{declaration_id}
+	</delete>
 	<!-- 工作经历 -->
 	<select id="queryWork" resultType="java.util.Map" parameterType="java.util.Map">
 		select * from dec_work_exp where declaration_id = #{declaration_id} ORDER BY sort 
@@ -85,7 +89,9 @@
 		insert into dec_work_exp(declaration_id,org_name,position,note,date_begin,date_end)
 		  values(#{declaration_id},#{org_name},#{position},#{note},#{date_begin},#{date_end})
 	</insert>
-	
+	<delete id="DelWork" parameterType="java.util.Map">
+		delete from dec_work_exp where declaration_id = #{declaration_id}
+	</delete>
 	<!--教学经历-->
 	<select id="queryStea" resultType="java.util.Map" parameterType="java.util.Map">
 		select * from dec_teach_exp where declaration_id = #{declaration_id} ORDER BY sort 
@@ -94,7 +100,9 @@
 		insert into dec_teach_exp(declaration_id,school_name,subject,note,date_begin,date_end)
 		  values(#{declaration_id},#{school_name},#{subject},#{note},#{date_begin},#{date_end})
 	</insert>
-	
+	<delete id="DelStea" parameterType="java.util.Map">
+		delete from dec_teach_exp where declaration_id = #{declaration_id}
+	</delete>
 	<!-- //作家学术 -->
 	<select id="queryZjxs" resultType="java.util.Map" parameterType="java.util.Map">
 		select * from dec_acade where declaration_id = #{declaration_id} ORDER BY sort 
@@ -103,7 +111,9 @@
 		insert into dec_acade(declaration_id,org_name,rank,position,note)
 		  values(#{declaration_id},#{org_name},#{rank},#{position},#{note})
 	</insert>
-	
+	<delete id="DelZjxs" parameterType="java.util.Map">
+		delete from dec_acade where declaration_id = #{declaration_id}
+	</delete>
 	<!--上版教材编辑-->
 	<select id="queryJcbj" resultType="java.util.Map" parameterType="java.util.Map">
 		select * from dec_last_position where declaration_id = #{declaration_id} ORDER BY sort 
@@ -112,7 +122,9 @@
 		insert into dec_last_position(declaration_id,material_name,position,note)
 		  values(#{declaration_id},#{material_name},#{position},#{note})
 	</insert>
-	
+	<delete id="DelJcbj" parameterType="java.util.Map">
+		delete from dec_last_position where declaration_id = #{declaration_id}
+	</delete>
 	<!-- 精品课程建设 -->
 	<select id="queryGjkcjs" resultType="java.util.Map" parameterType="java.util.Map">
 		select * from dec_course_construction where declaration_id = #{declaration_id} ORDER BY sort 
@@ -121,7 +133,9 @@
 		insert into dec_course_construction(declaration_id,course_name,class_hour,type,note)
 		  values(#{declaration_id},#{course_name},#{class_hour},#{type},#{note})
 	</insert>
-	
+	<delete id="DelGjkcjs" parameterType="java.util.Map">
+		delete from dec_course_construction where declaration_id = #{declaration_id}
+	</delete>
 	<!-- 作家主编国家级规划教材情况 -->
 	<select id="queryGjghjc" resultType="java.util.Map" parameterType="java.util.Map">
 		select * from dec_national_plan where declaration_id = #{declaration_id} ORDER BY sort 
@@ -130,7 +144,9 @@
 		insert into dec_national_plan(declaration_id,material_name,isbn,rank,note)
 		  values(#{declaration_id},#{material_name},#{isbn},#{rank},#{note})
 	</insert>
-	
+	<delete id="DelGjghjc" parameterType="java.util.Map">
+		delete from dec_national_plan where declaration_id = #{declaration_id}
+	</delete>
 	<!-- 教材编写情况 -->
 	<select id="queryJcbx" resultType="java.util.Map" parameterType="java.util.Map">
 		select * from dec_textbook where declaration_id = #{declaration_id} ORDER BY sort 
@@ -139,7 +155,9 @@
 		insert into dec_textbook(declaration_id,material_name,rank,position,publisher,publish_date,isbn,note)
 		  values(#{declaration_id},#{material_name},#{rank},#{position},#{publisher},#{publish_date},#{isbn},#{note})
 	</insert>
-	
+	<delete id="DelJcbx" parameterType="java.util.Map">
+		delete from dec_textbook where declaration_id = #{declaration_id}
+	</delete>
 	<!-- //作家科研情况表 -->
 	<select id="queryZjkyqk" resultType="java.util.Map" parameterType="java.util.Map">
 		select * from dec_research where declaration_id = #{declaration_id} ORDER BY sort 
@@ -148,7 +166,9 @@
 		insert into dec_research(declaration_id,research_name,approval_unit,award,note)
 		  values(#{declaration_id},#{research_name},#{approval_unit},#{award},#{note})
 	</insert>
-	
+	<delete id="DelZjkyqk" parameterType="java.util.Map">
+		delete from dec_research where declaration_id = #{declaration_id}
+	</delete>
 	<!-- 作家扩展项填报表 -->
 	<select id="queryZjkzbb" resultType="java.util.Map" parameterType="java.util.Map">
 		select t1.*,t2.extension_name from dec_extension t1 LEFT JOIN material_extension t2 ON 

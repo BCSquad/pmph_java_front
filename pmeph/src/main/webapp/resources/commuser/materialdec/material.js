@@ -481,7 +481,10 @@ function buttAdd(type){
 	}	
 }
 
-
+//放弃
+function buttGive(){
+	window.location.href=contextpath+"personalhomepage/tohomepageone.action";
+}
 /**
  * 表单校验方法
  */
