@@ -38,11 +38,11 @@ function listoction(){
 	
 }
 function listoction1(){
-	window.location.href=contextpath+'personalhomepage/tohomepageone.action?bookname='+$("#wdsbssk").val();
+	window.location.href=contextpath+'personalhomepage/tohomepageone.action?bookname='+$("#wdsbssk").val()+"&&dateinfo=1";
 	
 }
 function listoction2(){
-	window.location.href=contextpath+'personalhomepage/tohomepageone.action?bookname='+$("#wdsbssk").val();
+	window.location.href=contextpath+'personalhomepage/tohomepageone.action?bookname='+$("#wdsbssk").val()+"&&dateinfo=2";
 	
 }
 function listoction3(){
