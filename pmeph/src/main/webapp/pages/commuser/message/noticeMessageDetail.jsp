@@ -4,6 +4,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <head>
+<script type="text/javascript">
+   var contextpath="${pageContext.request.contextPath}/"
+</script>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>申请列表</title>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
@@ -12,13 +15,14 @@
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
+    <script src="${ctx}/resources/comm/base.js"></script>
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="body">
 	<div class="content-wrapper">
         <div class="navigator">
-           	 个人中心 > 消息通知 > 公告详情
+           	 <a href="${ctx }/${firstpath}">${firsttag } </a>&gt; <a href="${ctx }/${secondpath}">${secondtag }</a> &gt; 公告详情
         </div>
         <div id="section">
 
@@ -55,6 +59,7 @@
                 </c:forEach>
             </div>
         </div>
+        <c:if test="${map.note !=null && map.note !=''}">
         <div class="list">
             <div class="title2">
                 	备注：
@@ -63,6 +68,8 @@
 		               ${map.note}
             </div>
         </div>
+        </c:if>
+        <c:if test="${listAttachment.size()>0}">
         <div class="list">
             <div class="title2">
                 	附件：
@@ -73,6 +80,7 @@
             	</c:forEach>
             </div>
         </div>
+        </c:if>
         </div>
 
         <div class="registerDiv"  >

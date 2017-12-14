@@ -98,6 +98,15 @@
 	<select id="queryNoticeMessageDetailContact" parameterType="java.util.Map" resultType="java.util.Map">
 		select * from material_contact where material_id = #{materialId}
 	</select>
-	
-	
+    
+    
+    <!-- 查询遴选公告的内容id的查询公告详情 -->
+	<select id="queryCMSNotice" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT DISTINCT m.`material_name`,m.`id` AS materialId ,m.`deadline`,m.`mail_address`,e.`note`,e.id AS attachmentId
+		FROM
+		   cms_content a LEFT JOIN material m ON a.`material_id` = m.`id`
+		   LEFT JOIN material_extra e  ON m.`id` = e.`material_id`
+		   LEFT JOIN `material_contact` c  ON c.`material_id` = m.`id`
+		WHERE a.mid=#{messageId}
+	</select>
 </mapper>

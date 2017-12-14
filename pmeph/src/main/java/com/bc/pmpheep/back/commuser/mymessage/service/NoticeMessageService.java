@@ -19,6 +19,11 @@ public interface NoticeMessageService {
 	List<Map<String, Object>> queryNoticeMessageDetailAttachment(Map<String, Object> paraMap);
 	//查询教材相关联系人
 	List<Map<String, Object>> queryNoticeMessageDetailContact(Map<String, Object> paraMap);
+	/**查询遴选公告的内容id的查询公告详情
+	 * @param paraMap
+	 * @return
+	 */
+	Map<String, Object> queryCMSNotice(Map<String, Object> paraMap);
 
 
 }

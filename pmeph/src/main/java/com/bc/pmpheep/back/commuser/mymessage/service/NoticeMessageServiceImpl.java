@@ -62,6 +62,13 @@ public class NoticeMessageServiceImpl implements NoticeMessageService {
 			List<Map<String, Object>> list = noticeMessageDao.queryNoticeMessageDetailContact(paraMap);
 			return list;
 	}
+     
+	//查询遴选公告的内容id的查询公告详情
+	@Override
+	public Map<String, Object> queryCMSNotice(Map<String, Object> paraMap) {
+		// TODO Auto-generated method stub
+		return noticeMessageDao.queryCMSNotice(paraMap);
+	}
 
 	
 	
