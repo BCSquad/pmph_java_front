@@ -43,7 +43,8 @@
                 <c:if test="${permap.rank==3}"><span id="zjrz"></span> <span class="grsx">专家用户</span></c:if>
             </div>
             <div class="headae">
-                <img src="${ctx}/statics/image/tx.png" alt="头像" height="164" width="165">
+                <c:if test="${permap.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/tx.png" alt="头像" height="164" width="165"></c:if>
+                                    <c:if test="${permap.avatar!='DEFAULT'}"><img src="${permap.avatar}" alt="头像" height="164" width="165"></c:if>
             </div>
         </div>
 
@@ -122,11 +123,11 @@
                             <div class="dtzhong">
                                 <div id="suibiwenzhangtp"></div>
                                 <div id="suibiwenzhanneirong">
-                                    <div id="pingluntu"><c:if test="${listmon.image_url==DEFAULT}"><img src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"></c:if>
-                                    <c:if test="${listmon.image_url!=DEFAULT}"><img src="${listmon.image_url}"></c:if>
+                                    <div id="pingluntu"><c:if test="${listmon.image_url=='DEFAULT'}"><img src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg" class="dtpltpl"></c:if>
+                                    <c:if test="${listmon.image_url!='DEFAULT'}"><img src="${listmon.image_url}" class="dtpltpl"></c:if>
                                     </div>
                                     <div class="pinlunbt"><span class="suibibiaoti">${listmon.book_name}</span>
-                                        <br/><span class="pinglunlr">${permap.realname}评论了 《${listmon.book_name}》 “非常不错，值得推荐！”</span>
+                                        <br/><span class="pinglunlr">${permap.realname}评论了 《${listmon.book_name}》</span>
                                         <br/>${listmon.score}
                                         <span class="pinlunxinji"></span><span class="pinlunxinji"></span><span
                                                 class="pinlunxinji"></span><span class="pinlunxinjihei"></span></div>
@@ -142,7 +143,7 @@
                         </div>
                     </c:forEach>
 
-                    <div class="jiazaigengduo" id="jiazaigengduo">加载更多……</div>
+                    <div class="jiazaigengduo" id="jiazaigengduo"><span style="cursor:pointer">加载更多……</span></div>
 
 
                     <div class="gengduo" id="gengduo">
@@ -213,13 +214,13 @@
                                 </div>
                                 <div class="dtzhong">
                                     <div id="suibiwenzhangtp">
-                                    <c:if test="${listmon.image_url==DEFAULT}"><img src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"></c:if>
-                                    <c:if test="${listmon.image_url!=DEFAULT}"><img src="${listmon.image_url}"></c:if>
+                                    <c:if test="${listmon.image_url=='DEFAULT'}"><img src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg" class="dtpltpl"></c:if>
+                                    <c:if test="${listmon.image_url!='DEFAULT'}"><img src="${listmon.image_url}" class="dtpltpl"></c:if>
                                     </div>
                                     <div id="suibiwenzhanneirong">
                                         <div id="pingluntu"></div>
                                         <div class="pinlunbt"><span class="suibibiaoti">${listmon.book_name}</span>
-                                            <br/><span class="pinglunlr">${permap.realname}评论了 《${listmon.book_name}》 “非常不错，值得推荐！”</span>
+                                            <br/><span class="pinglunlr">${permap.realname}评论了 《${listmon.book_name}》 </span>
                                             <br/>${listmon.score}
                                             <span class="pinlunxinji"></span><span class="pinlunxinji"></span><span
                                                     class="pinlunxinji"></span><span class="pinlunxinjihei"></span>
@@ -252,27 +253,34 @@
                     <br/>
                     <ul class="scul">
                         <c:forEach items="${listmycol}" begin='0' end='5' var="list" varStatus="status">
-                            <li class="sclb"><img src="${ctx}/statics/image/sp_01.png" class="sctp">${list.book_name}
+                            <li class="sclb"><div class="sctpdiv">
+                                                                <c:if test="${list.image_url=='DEFAULT'}"><img src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg" class="sctp"></c:if>
+                                    <c:if test="${list.image_url!='DEFAULT'}"><img src="${list.image_url}" class="sctp"></c:if>                
+                            </div>${list.book_name}
                             </li>
                         </c:forEach>
                     </ul>
                 </div>
                 <div id="wdhy"><span id="hytb"></span> <span class="rlan">我的好友</span> <span
-                        id="qbhy">全部好友>>&nbsp;</span>
+                        id="qbhy"><a href="${ctx}/myFriend/listMyFriend.action" class="aright">全部好友>>&nbsp;</a></span>
                     <br/>
                     <ul class="scul">
                         <c:forEach items="${listmyfriend}" begin='0' end='11' var="listmyf" varStatus="status">
-                            <li class="hylb"><img src="${ctx}/statics/image/haoyoutouxiang1.png"
-                                                  class="hytp">${listmyf.realname}</li>
+                            <li class="hylb">
+                            <div class="hytxdiv">
+                            <c:if test="${listmyf.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/haoyoutouxiang1.png" class="hytp"></c:if>
+                                    <c:if test="${listmyf.avatar!='DEFAULT'}"><img src="${list.image_url}" class="hytp"></c:if> 
+                            </div>
+                            ${listmyf.realname}</li>
                         </c:forEach>
                     </ul>
                 </div>
                 <div id="wdxz"><span id="xztb"></span><span class="rlan">我加入的小组</span><span
-                        id="qbhy">全部小组>>&nbsp;</span>
+                        id="qbhy"><a href="${ctx}/group/list.action" class="aright">全部小组>>&nbsp;</a></span>
                     <br/>
                     <ul class="scul">
                         <c:forEach items="${listmygroup}" begin='0' end='8' var="listmyg" varStatus="status">
-                            <li class="wdxz"><img src="${ctx}${listmyg.group_image}"
+                            <li class="wdxz"><img src="${listmyg.group_image}"
                                                   class="xztp"><br/>${listmyg.group_name}<br/><span
                                     class="xzrs">(${listmyg.grouppeo}人)</span></li>
                         </c:forEach>

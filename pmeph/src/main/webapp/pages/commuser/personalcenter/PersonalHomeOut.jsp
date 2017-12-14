@@ -74,7 +74,8 @@
                 <input type="button" id="jiahaoyou" value="+加好友">
             </div>
             <div class="headae">
-                <img src="${ctx}/statics/image/tx.png" alt="头像" height="164" width="165">
+                 <c:if test="${permap.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/tx.png" alt="头像" height="164" width="165"></c:if>
+                                    <c:if test="${permap.avatar!='DEFAULT'}"><img src="${permap.avatar}" alt="头像" height="164" width="165"></c:if>
             </div>
         </div>
 
@@ -213,13 +214,19 @@
                 <div id="wdsc"><span id="wdscx"></span> <span class="rlan">他的收藏</span>
                     <br/>
                     <ul class="scul">
-                        <c:forEach items="${listmycol}" begin='0' end='5' var="list" varStatus="status"><li class="sclb"><img src="${ctx}/statics/image/sp_01.png" class="sctp">${list.book_name}</li></c:forEach>
+                        <c:forEach items="${listmycol}" begin='0' end='5' var="list" varStatus="status"><li class="sclb"><div class="sctpdiv">
+                                                                <c:if test="${list.image_url=='DEFAULT'}"><img src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg" class="sctp"></c:if>
+                                    <c:if test="${list.image_url!='DEFAULT'}"><img src="${list.image_url}" class="sctp"></c:if>                
+                            </div>${list.book_name}</li></c:forEach>
                     </ul>
                 </div>
                 <div id="wdhy"><span id="hytb"></span> <span class="rlan">他的好友</span>
                     <br/>
                     <ul class="scul">
-                    	<c:forEach items="${listmyfriend}" begin='0' end='11' var="listmyf" varStatus="status"><li class="hylb"><img src="${ctx}/statics/image/haoyoutouxiang1.png" class="hytp">${listmyf.realname}</li></c:forEach>
+                    	<c:forEach items="${listmyfriend}" begin='0' end='11' var="listmyf" varStatus="status"><li class="hylb"><div class="hytxdiv">
+                            <c:if test="${listmyf.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/haoyoutouxiang1.png" class="hytp"></c:if>
+                                    <c:if test="${listmyf.avatar!='DEFAULT'}"><img src="${list.image_url}" class="hytp"></c:if> 
+                            </div>${listmyf.realname}</li></c:forEach>
                     </ul>
                 </div>
                 <div id="bzzx">

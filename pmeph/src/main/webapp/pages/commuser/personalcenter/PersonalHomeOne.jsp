@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="java.util.Date"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
 <%String path = request.getContextPath();%>
 <html>
 <head>
@@ -46,7 +48,8 @@
                 <c:if test="${permap.rank==3}"><span id="zjrz"></span> <span class="grsx">专家用户</span></c:if>
             </div>
             <div class="headae">
-                <img src="${ctx}/statics/image/tx.png" alt="头像" height="164" width="165">
+                 <c:if test="${permap.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/tx.png" alt="头像" height="164" width="165"></c:if>
+                                    <c:if test="${permap.avatar!='DEFAULT'}"><img src="${permap.avatar}" alt="头像" height="164" width="165"></c:if>
             </div>
         </div>
 
@@ -62,16 +65,16 @@
                
                 <div id="jiaocaishenbao">
                     <div class="jcsbssl">
-                        <span id="jcsbqb">全部</span><span id="jcsbwdsb" onclick="listoction();">我的申报</span><span class="jcsbsbzt"  onclick="listoction1();">正在进行</span><span
-                            class="jcsbsbzt"  onclick="listoction2();">已结束</span>
-                        <span class="jcsbsbzt"  onclick="listoction3();">暂存</span><span class="jcsbsbzt"  onclick="listoction4();">已提交</span><input type="text" id="wdsbssk" value="${serchbox}">
+                        <span id="jcsbqb" style="cursor:pointer">全部</span><span id="jcsbwdsb" onclick="listoction();" style="cursor:pointer">我的申报</span><span class="jcsbsbzt"  onclick="listoction1();" style="cursor:pointer">正在进行</span><span
+                            class="jcsbsbzt"  style="cursor:pointer" onclick="listoction2();">已结束</span>
+                        <span class="jcsbsbzt"  onclick="listoction3();" style="cursor:pointer">暂存</span><span class="jcsbsbzt"  onclick="listoction4();" style="cursor:pointer">已提交</span><input type="text" id="wdsbssk" value="${serchbox}">
                     </div>
                     <div class="shenbaoliebiao">
                         <ul class="scul">
                             <c:forEach items="${listbookjoins}" begin='0' end='7' var="list" varStatus="status">
                                 <li class="leftlb">
 
-                                    <c:if test="${list.iamin==0}">
+                                    <c:if test="${list.iamin==0&&list.online_progress==0}">
                                         <div class="mleft">
                                             <div class="ysbrs">
                                                 <div class="baomingrenshu"><span
@@ -80,6 +83,7 @@
                                             </div>
                                             <div class="bmcj">
                                                 <div class="bmcjan"><span><a class="abmcj" href="${ctx}/material/toMaterialAdd.action?material_id=${list.material_id}">报名参加</a></span></div>
+                                            <!-- toMaterialZc暂存   showMaterial查看 -->
                                             </div>
                                         </div>
                                     </c:if>
@@ -92,12 +96,12 @@
                                             </div>
                                             <div class="bmcj1">
                                                 <div class="bmcjan1"><span>进度查询</span></div>
-                                                <div class="cksbb1">查看申报表</div>
+                                                <div class="cksbb1"><a class="abmcj" href="${ctx}/material/toMaterialZc.action?material_id=${list.material_id}">查看申报表</a></div>
                                             </div>
                                         </div>
                                     </c:if>
 
-                                    <c:if test="${list.iamin==1&&list.online_progress==2}">
+                                    <c:if test="${list.iamin==1&&list.online_progress==3}">
                                         <div class="mleft2">
                                             <div class="ysbrs2">
                                                 <div class="baomingrenshu2"><span
@@ -105,12 +109,27 @@
                                                     <br/><span class="ybmcj2">已报名参加</span></div>
                                             </div>
                                             <div class="bmcj2">
-                                                <div class="bmcjan2"><span>查看申报表</span></div>
+                                                <div class="bmcjan2"><span><a class="abmcj" href="${ctx}/material/showMaterial.action?material_id=${list.material_id}">查看申报表</a></span></div>
                                             </div>
                                         </div>
                                     </c:if>
-
-
+                                    <c:set var="nowDate">  
+    <fmt:formatDate value="<%=new Date()%>" pattern="yyyy-MM-dd " type="date"/>  
+</c:set>  
+                                    
+                                    
+									<c:if test="${nowDate > createDate }">
+									<div class="mleft3">
+                                    <div class="ysbrs3">
+                                        <div class="baomingrenshu3"><span class="canjiarenshu3">${list.exmember}</span><span>人</span>
+                                            <br/><span class="ybmcj3">已报名参加</span></div>
+                                    </div>
+                                    <div class="bmcj3">
+                                        <div class="bmcjan3"><span>已结束</span></div>
+                                    </div>
+                                </div>
+									</c:if>
+									
                                     <div class="mright">
                                         <div class="rshang">
                                             <div class="rshangn">${list.material_name}
@@ -222,27 +241,34 @@
                     <br/>
                     <ul class="scul">
                         <c:forEach items="${listmycol}" begin='0' end='5' var="list" varStatus="status">
-                            <li class="sclb"><img src="${ctx}/statics/image/sp_01.png" class="sctp">${list.book_name}
+                            <li class="sclb"><div class="sctpdiv">
+                                                                <c:if test="${list.image_url=='DEFAULT'}"><img src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg" class="sctp"></c:if>
+                                    <c:if test="${list.image_url!='DEFAULT'}"><img src="${list.image_url}" class="sctp"></c:if>               
+                            </div>${list.book_name}
                             </li>
                         </c:forEach>
                     </ul>
                 </div>
                 <div id="wdhy"><span id="hytb"></span> <span class="rlan">我的好友</span> <span
-                        id="qbhy">全部好友>>&nbsp;</span>
+                        id="qbhy"><a href="${ctx}/myFriend/listMyFriend.action" class="aright">全部好友>>&nbsp;</a></span>
                     <br/>
                     <ul class="scul">
                         <c:forEach items="${listmyfriend}" begin='0' end='11' var="listmyf" varStatus="status">
-                            <li class="hylb"><img src="${ctx}/statics/image/haoyoutouxiang1.png"
-                                                  class="hytp">${listmyf.realname}</li>
+                            <li class="hylb">
+<div class="hytxdiv">
+                            <c:if test="${listmyf.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/haoyoutouxiang1.png" class="hytp"></c:if>
+                                    <c:if test="${listmyf.avatar!='DEFAULT'}"><img src="${list.image_url}" class="hytp"></c:if> 
+                            </div>
+${listmyf.realname}</li>
                         </c:forEach>
                     </ul>
                 </div>
                 <div id="wdxz"><span id="xztb"></span><span class="rlan">我加入的小组</span><span
-                        id="qbhy">全部小组>>&nbsp;</span>
+                        id="qbhy"><a href="${ctx}/group/list.action" class="aright">全部小组>>&nbsp;</a></span>
                     <br/>
                     <ul class="scul">
                         <c:forEach items="${listmygroup}" begin='0' end='8' var="listmyg" varStatus="status">
-                            <li class="wdxz"><img src="${ctx}${listmyg.group_image}"
+                            <li class="wdxz"><img src="${listmyg.group_image}"
                                                   class="xztp"><br/>${listmyg.group_name}<br/><span
                                     class="xzrs">(${listmyg.grouppeo}人)</span></li>
                         </c:forEach>
