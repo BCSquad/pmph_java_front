@@ -67,14 +67,35 @@ public class DeclareCountController extends BaseController{
 		List<Map<String, Object>> list = declareCountService
 				.findDeclareCount(paraMap);
 		// 最终结果名单列表
-		List<Map<String, Object>> listName = declareCountService .findNameList(paraMap);
+//		List<Map<String, Object>> listName = declareCountService .findNameList(paraMap);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("material_id", material_id);
 		mv.addObject("material_name", material_name);
 		mv.addObject("listMap", list);
-		mv.addObject("listName", listName);
+//		mv.addObject("listName", listName);
+//		mv.addObject("listNameSize", listName.size());
 		mv.setViewName("authadmin/applydocaudit/declarecount");
 		return mv;
+	}
+	
+	/**
+	 * 
+	 * @Title: loadResult
+	 * @Description: 加载更多
+	 * @param @param request
+	 * @param @return
+	 * @return List<Map<String,Object>> 返回类型
+	 * @throws
+	 */
+	@RequestMapping(value = "/loadResult",method=RequestMethod.POST)
+	@ResponseBody
+	public List<Map<String, Object>> loadResult(HttpServletRequest request) {
+		String material_id = request.getParameter("material_id");
+		Map<String, Object> paraMap = new HashMap<String, Object>();
+		paraMap.put("material_id", material_id);
+//		 最终结果名单列表
+		List<Map<String, Object>> listName = declareCountService .findNameList(paraMap);
+		return listName;
 	}
 
 	/**

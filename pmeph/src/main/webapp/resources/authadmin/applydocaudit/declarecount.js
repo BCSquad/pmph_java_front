@@ -1,8 +1,28 @@
 
 $(function(){
 	totalcount();
-	
+	loadResult();
 });
+
+//初始加载书籍  结果名单
+function loadResult(){
+	var material_id=$("#material_id").val();
+		 $.ajax({
+			type:'post',
+			url:"loadResult.action?material_id="+material_id,
+			async:false,
+			dataType:'json',
+			success:function(json){
+				var list = json;
+				var str='';
+				$.each(list,function(i,n){
+					
+					str+= "<tr><td   >"+(i+1)+"</td><td   >"+(n.textbook_name?n.textbook_name:'--')+"</td><td   >"+(n.zb?n.zb:'--') +"</td><td   >"+(n.fb?n.fb:'--')+"</td><td   >"+(n.bw?n.bw:'--')+"</td></tr>";
+				});
+				$("#messageTable").append(str);
+			}
+		}); 
+	}
 
 //加载更多  作废
 function loadMore(){
@@ -26,7 +46,7 @@ function loadMore(){
 				var str='';
 				$.each(list,function(i,n){
 					
-					str+= "<tr><td   >"+(i+Number(startPara)+1+10)+"</td><td   >"+n.textbook_name+"</td><td   >"+(n.zb?n.zb:'') +"</td><td   >"+(n.fb?n.fb:'')+"</td><td   >"+(n.bw?n.bw:'')+"</td></tr>";
+					str+= "<tr><td   >"+(i+Number(startPara)+1+10)+"</td><td   >"+(n.textbook_name?n.textbook_name:'--')+"</td><td   >"+(n.zb?n.zb:'--') +"</td><td   >"+(n.fb?n.fb:'--')+"</td><td   >"+(n.bw?n.bw:'--')+"</td></tr>";
 				});
 				$("#messageTable").append(str);
 			}
@@ -47,7 +67,7 @@ function selectAll(){
 			var str='';
 			$.each(list,function(i,n){
 				
-				str+= "<tr><td   >"+(i+1)+"</td><td   >"+n.textbook_name+"</td><td   >"+n.decid1+"</td><td   >"+n.decid2+"</td><td   >"+n.decid3+"</td><td   >"+n.dp1+"</td><td   >"+n.dp2+"</td><td   >"+n.dp3+"</td></tr>";
+				str+= "<tr><td   >"+(i+1)+"</td><td   >"+(n.textbook_name?n.textbook_name:'--')+"</td><td   >"+(n.decid1?n.decid1:'0')+"</td><td   >"+(n.decid2?n.decid2:'0')+"</td><td   >"+(n.decid3?n.decid3:'0')+"</td><td   >"+(n.dp1?n.dp1:'0')+"</td><td   >"+(n.dp2?n.dp2:'0')+"</td><td   >"+(n.dp3?n.dp3:'0')+"</td></tr>";
 			});
 			$("#queryTable").html("");
 			$("#queryTable").append(str);
@@ -93,8 +113,9 @@ function totalcount(){
 			$ ('#queryTable tr:last').append ("<td>合计</td>");
 		}else{
 	         $ ('#tableCount tr:gt(0) td:nth-child(' +(i+1)+ ')').each (function (j, dom)
-	         {
-	        	  sum += parseFloat ($ (this).text ());
+	         {	
+	        	 
+	        	 sum += parseFloat ($ (this).text ());
 	         });
 	         $ ('#tableCount tr:last').append ("<td>" + sum + "</td>");
 		}
@@ -112,7 +133,7 @@ $(function(){
 	  var pageSize = 15; /*size*/
 	   
 	  /*首次加载*/
-//	  getData(pageStart, pageSize);
+
 	   
 	  /*监听加载更多*/
 	  $(document).on('click', '.js-load-more', function(){
@@ -149,7 +170,7 @@ function getData(offset,size){
 	       
 	      /*使用for循环模拟SQL里的limit(offset,size)*/
 	      for(var i=offset; i< (offset+size); i++){
-	        result +="<tr><td   >"+(i+1)+"</td><td   >"+data[i].textbook_name+"</td><td   >"+(data[i].zb?data[i].zb:'') +"</td><td   >"+(data[i].fb?data[i].fb:'')+"</td><td   >"+(data[i].bw?data[i].bw:'')+"</td></tr>";
+	        result +="<tr><td   >"+(i+1)+"</td><td   >"+(data[i].textbook_name?data[i].textbook_name:'--')+"</td><td   >"+(data[i].zb?data[i].zb:'--') +"</td><td   >"+(data[i].fb?data[i].fb:'--')+"</td><td   >"+(data[i].bw?data[i].bw:'--')+"</td></tr>";
 	      }
 	   
 	      $("#messageTable").append(result);
@@ -168,4 +189,17 @@ function getData(offset,size){
 	    }
 	  });
 	}
+
+//导出excel   我校申报情况统计
+
+function exportExcel(){
+    window.location.href =contextpath+'excel/download.action?service=declareCountExcel&material_id='+$("#material_id").val();
+}
+
+//导出excel   最终结果名单
+
+function exportResultExcel(){
+    window.location.href =contextpath+'excel/download.action?service=declareResultExcel&material_id='+$("#material_id").val();
+}
+
 

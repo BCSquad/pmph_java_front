@@ -25,7 +25,7 @@
 			and	t.material_id = ${material_id}
 			</if>
 		</where>
-		GROUP BY t.textbook_name
+		GROUP BY t.id
 		HAVING (decid1>=1 or decid2>=1 or decid3>=1)
 		limit 0,9
 	</select>
@@ -36,17 +36,16 @@
 		parameterType="java.util.Map">
 		Select b.id, b.textbook_name,
 		GROUP_CONCAT(p.rank,'',(CASE
-		p.chosen_position WHEN '1' THEN d.realname END )) AS 'zb',
+		p.chosen_position WHEN '1' THEN d.realname END )) AS zb,
 		GROUP_CONCAT(CASE p.chosen_position WHEN '2' THEN d.realname END ) AS
-		'fb',
+		fb,
 		GROUP_CONCAT(CASE p.chosen_position WHEN '3' THEN d.realname END
-		) AS 'bw'
+		) AS bw
 		From
 		dec_position p
 		left join declaration d on d.id =
 		p.declaration_id
-		left
-		join textbook b on p.textbook_id = b.id
+		left join textbook b on p.textbook_id = b.id
 		<where>
 			1=1
 			<if test="material_id != null and material_id != '' ">
@@ -62,11 +61,11 @@
 		resultType="java.util.Map">
 		Select b.id, b.textbook_name,
 		GROUP_CONCAT(p.rank,'',(CASE
-		p.chosen_position WHEN '1' THEN d.realname END )) AS 'zb',
+		p.chosen_position WHEN '1' THEN d.realname END )) AS zb,
 		GROUP_CONCAT(CASE p.chosen_position WHEN '2' THEN d.realname END ) AS
-		'fb',
+		fb,
 		GROUP_CONCAT(CASE p.chosen_position WHEN '3' THEN d.realname END
-		) AS 'bw'
+		) AS bw
 		From
 		dec_position p
 		left join declaration d on d.id =
@@ -79,8 +78,7 @@
 				and	b.material_id = ${material_id}
 			</if>
 		</where>
-		GROUP BY
-		b.id
+		GROUP BY b.id
 		<!-- <if test="startPara!=null">limit #{startPara},5</if> -->
 	</select>
 
@@ -105,7 +103,7 @@
 				and	t.material_id = ${material_id}
 			</if>
 		</where>
-		GROUP BY t.textbook_name
+		GROUP BY t.id
 		limit 0,9
 	</select>
 
@@ -113,11 +111,11 @@
 	<select id="selectResults" resultType="java.util.Map">
 		Select b.id, b.textbook_name,
 		GROUP_CONCAT(p.rank,'',(CASE
-		p.chosen_position WHEN '1' THEN d.realname END )) AS 'zb',
+		p.chosen_position WHEN '1' THEN d.realname END )) AS zb,
 		GROUP_CONCAT(CASE p.chosen_position WHEN '2' THEN d.realname END ) AS
-		'fb',
+		fb,
 		GROUP_CONCAT(CASE p.chosen_position WHEN '3' THEN d.realname END
-		) AS 'bw'
+		) AS bw
 		From
 		dec_position p
 		left join declaration d on d.id =
@@ -131,6 +129,30 @@
 			</if>
 		</where>
 		GROUP BY b.id limit 0,15
+	</select>
+	
+	<!--  导出excel 最终结果名单-->
+	<select id="selectResultsExcel" resultType="java.util.Map">
+		Select b.id, b.textbook_name,
+		GROUP_CONCAT(p.rank,'',(CASE
+		p.chosen_position WHEN '1' THEN d.realname END )) AS zb,
+		GROUP_CONCAT(CASE p.chosen_position WHEN '2' THEN d.realname END ) AS
+		fb,
+		GROUP_CONCAT(CASE p.chosen_position WHEN '3' THEN d.realname END
+		) AS bw
+		From
+		dec_position p
+		left join declaration d on d.id =
+		p.declaration_id
+		left
+		join textbook b on p.textbook_id = b.id	 
+		<where>
+		1=1
+			<if test="material_id != null and material_id != '' ">
+				and	b.material_id = ${material_id}
+			</if>
+		</where>
+		GROUP BY b.id 
 	</select>
 
 </mapper>

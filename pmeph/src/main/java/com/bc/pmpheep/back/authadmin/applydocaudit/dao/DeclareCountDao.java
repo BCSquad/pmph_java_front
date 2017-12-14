@@ -66,5 +66,16 @@ public interface DeclareCountDao {
 	 * @throws
 	 */
 	List<Map<String, Object>> selectResults(Map<String, Object> paraMap);
+	
+	/**
+	 * 导出excel
+	 * 最终结果名单  
+	 * @Title: selectResults
+	 * @Description: 查看全部  
+	 * @param @return
+	 * @return List<Map<String,Object>> 返回类型
+	 * @throws
+	 */
+	List<Map<String, Object>> selectResultsExcel(Map<String, Object> paraMap);
 
 }

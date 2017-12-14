@@ -27,7 +27,8 @@
 
 </head>
 <body >
-	<input type="text" id="material_id" value="${material_id }"/>
+	<input type="hidden" id="listNameSize" value="${listNameSize }"/>
+	<input type="hidden" id="material_id" value="${material_id }"/>
 	<div style=" padding: 0; margin: 0; height: 110px; border: none; overflow: hidden;">
 		<jsp:include page="/pages/comm/headGreenBackGround.jsp"></jsp:include>
 	</div>
@@ -54,7 +55,7 @@
 							<img src="${ctx}/statics/image/iconfont-export-01.png" />
 						</div>
 						<div class="excel_right_e">
-							<a href="#" class="aa">导出Excel</a>
+							<a  class="aa"  onclick="exportExcel();">导出Excel</a>
 						</div>
 						<div class="excel_right_q"  style="cursor: pointer;"  onclick='selectAll()'>查看全部</div>
 						<div class="excel_right_xljt">
@@ -106,7 +107,7 @@
 							<img src="${ctx}/statics/image/iconfont-export-01.png" />
 						</div>
 						<div class="excel_right_e">
-							<a href="#" class="aa">导出Excel</a>
+							<a  class="aa"  onclick="exportResultExcel();">导出Excel</a>
 						</div>
 						<div class="excel_right_q"  style="cursor: pointer;"  onclick='selectResults()'>查看全部</div>
 						<div class="excel_right_xljt">
@@ -127,26 +128,28 @@
 							</tr>
 						</thead>
 						<tbody id="messageTable">
-							<c:forEach items="${listName}" var="two" varStatus="status">
+							<%-- <c:forEach items="${listName}" var="two" varStatus="status">
 								<tr>
 									<td   >${ status.index + 1}</td>    
-									<td   >${two.textbook_name}</td>
-									<td   >${two.zb}</td>
-									<td   >${two.fb}</td>
-									<td   >${two.bw}</td>
+									<td   >${two.textbook_name!=null?two.textbook_name:'--'}</td>
+									<td   >${two.zb!=null?two.zb:'--'}</td>
+									<td   >${two.fb!=null?two.fb:'--'}</td>
+									<td   >${two.bw!=null?two.bw:'--'}</td>
 								</tr>
-							</c:forEach>
+							</c:forEach> --%>
 						</tbody>
 					
 					</table>
-					<div class="no-more" >
+					<%-- <div class="no-more" >
 						<img src="<c:url value="/statics/image/aaa4.png"></c:url>">
 						<span>木有内容呀~~</span>
-					</div>
+					</div> --%>
 				</div>
 				
 				<!-- <div class="jiazaigengduo" style="cursor: pointer;" onclick='loadMore()' >加载更多……</div> -->
-				 <div class="js-load-more" style="cursor: pointer;">加载更多</div>
+				
+				 <div class="js-load-more" style="cursor: pointer;">加载更多...</div>
+				
 				<!-- <input id="startPara" name="startPara" type="hidden"> -->
 			</div>
 		</div>
