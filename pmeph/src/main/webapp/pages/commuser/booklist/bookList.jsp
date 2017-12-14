@@ -55,7 +55,14 @@
 					<c:forEach items="${page.rows}" var="books" varStatus="vs">
 						<div class="oneList">
 			                <div class="leftPicture">
-			                    <img class="pictureSize" src="<%=basePath%>/statics/image/ts04.png">
+			                	<c:choose>
+			                		<c:when test="${not empty books.imageUrl}">
+			                			<img class="pictureSize" src="${books.imageUrl }">
+			                		</c:when>
+			                		<c:otherwise>
+			                			<img class="pictureSize" src="<%=basePath%>/statics/image/ts04.png">
+			                		</c:otherwise>
+			                	</c:choose>
 			                </div>
 			                <div class="rightContent">
 			                    <div class="upDiv">
@@ -87,9 +94,10 @@
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
-					<div class="oneList">
-						没有相关数据
-					</div>
+					<div class="no-more" style="display: none;">
+	                    <img src="<c:url value="/statics/image/aaa4.png"></c:url>">
+	                    <span>木有内容呀~~</span>
+	               	</div>
 				</c:otherwise>
 			</c:choose>
             <div class="pageDiv">

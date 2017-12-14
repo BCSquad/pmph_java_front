@@ -51,15 +51,17 @@
 
 .leftPicture{
     height: 100%;
-    width: 104px;
+    width: 140px;
     float: left;
 }
 .pictureSize{
-    width: 104px;
+    max-width: 120px;
     height: 120px;
+    display: block;
+    margin: auto;
 }
 .rightContent{
-    width: 1036px;
+    width: 1000px;
     height: 100%;
     float: left;
 }
