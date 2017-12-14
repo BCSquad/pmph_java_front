@@ -73,8 +73,10 @@ public class WriterUserServiceImpl implements WriterUserService {
 		String cert = writerUserCertificationVO.getCert();
 		if (StringUtil.notEmpty(cert)) {
 			GridFSDBFile getFile = fileService.get(cert);
-			String getFileName = getFile.getFilename();
-			writerUserCertificationVO.setCertName(getFileName);
+			if (getFile!=null) {
+				String getFileName = getFile.getFilename();
+				writerUserCertificationVO.setCertName(getFileName);
+			}
 		}
 		return writerUserCertificationVO;
 	}

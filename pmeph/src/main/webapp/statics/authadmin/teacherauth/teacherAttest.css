@@ -26,12 +26,16 @@ body
 	float:left;
     }
     
- /*ÉîÉ«Ò³Í·¶þ¼¶²Ëµ¥µã»÷³öÏÖÏÂ»®Ïß*/
+ /*ï¿½ï¿½É«Ò³Í·ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â»ï¿½ï¿½ï¿½*/
  .sxy-span-menu{
     border-bottom:2px solid #259980;
 }
 
 /*********************************************/
+
+#certForm table{
+	table-layout: fixed;
+}
 
 .sxy-tr
 {
@@ -44,9 +48,14 @@ body
 	letter-spacing: 0px;
 }
 
+.valid_message{
+	display: block;
+    margin: 0px;
+}
+
 .sxy-txt
 {
-    width: 260px;
+    width: 258px;
     height: 40px;
     background-color: #f1f1f1;
     font-family: MicrosoftYaHei;
@@ -200,7 +209,7 @@ body
 
 .sxy-select-td
 {
-    width: 280px;
+    width: 260px;
 	height: 40px;
 	background-color: #f1f1f1;
 	border-radius: 4px;
@@ -226,6 +235,8 @@ body
 	font-stretch: normal;
 	letter-spacing: 0px;
 	color: #ffffff;
+	line-height: 36px;
+    padding: 0;
 }
 
 .td-font-last
@@ -237,6 +248,7 @@ body
 	line-height: 30px;
 	letter-spacing: 0px;
 	color: #bebebe;
+    padding-left: 110px;
 }
 
 .btn-2 {
@@ -248,4 +260,18 @@ body
     color: #ffffff;
     font-size: 14px;
     border-radius: 2px;
+    margin:0px auto;
+    display: block;
+}
+
+.submit_btn_wrapper{
+	width: 1200px;
+    height: 50px;
+    padding-top: 20px;
+	
+}
+
+.cupline{
+	display: block;
+    margin: auto;
 }
