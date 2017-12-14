@@ -12,22 +12,25 @@
 <head>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>小组列表</title>
-    <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
+    <script>
+        var contextpath='${pageContext.request.contextPath}/';
+    </script>
+   	<link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/groupList.css" type="text/css">
-    
-    <script src="<%=path %>/resources/comm/jquery/jquery.js"></script>
-    <script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
+    <script src="${ctx}/resources/comm/base.js"></script>
     
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
-
-<div class="content-body">
+<div class="body">
+<div class="content-wrapper">
     <div class="div_top">我加入的小组</div>
     <div class="items">
         <c:forEach var = 'group' items="${listgroup}" > 
-	        <div class="item">
-            <img src="${pageContext.request.contextPath}/${group.groupImage}" alt="头像" class="img1"/>
+	        <div class="oneitem">
+            <img src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg" alt="暂无图片" class="img1"/>
+           <%--  <img src="${pageContext.request.contextPath}${group.groupImage}" alt="暂无图片" class="img1"/> --%>
             <div class="item_content">
                 <text class="txt1">${group.groupName}</text>
                 <br/>
@@ -38,15 +41,16 @@
                 <div class="imgs">
                 	<c:forEach var = 'avatar' items="${group.avatars}" varStatus="o">
                 		<c:if test="${o.index <=5 }"><!-- 展示6位 -->
-                			<img src="${pageContext.request.contextPath}/${avatar}"/>
+                			<%-- <img src="${pageContext.request.contextPath}/${avatar}" alt="暂无图片"/> --%>
+                			 <img src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg" alt="暂无图片"/>
                 		</c:if>
                 	 </c:forEach>
                 </div>
                 <text class="txt3">
-                    人数
+                  	  人数
                     <text class="txt30">${group.members}</text>
                     <label></label>
-                    文件
+                    	文件
                     <text class="txt30">${group.files}</text>
                 </text>
                 <div style="margin-top:10px;"><a class="item_link" href="${pageContext.request.contextPath}/group/list.action?groupId=${group.id}">
@@ -58,22 +62,21 @@
                     <text>最新动态</text>
                     <div></div>
                 </div>
-                <div>
                 	<c:forEach var = 'groupMassage' items="${group.groupMassages}" varStatus="o">
                 		<c:if test="${o.index <= 2 }"><!-- 展示2条 -->
-                			<p>
-                        		<text>${groupMassage.msgContent}</text>
-                   			 </p>
+                			<div class="pContent">
+                        		${groupMassage.msgContent}
+                   			</div>
                 		</c:if>
                 	 </c:forEach>
-                </div>
 			</div>
         </div>
         </c:forEach>
     </div>
 </div>
-<div style="background-color: white;width: 100%;padding: 0;margin: 0;height: 220px;border: none;overflow: hidden;">
-		<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </div>
+		<div style="clear: both; background-color: #f6f6f6;">   
+			<jsp:include page="/pages/comm/tail.jsp"/>
+		</div>
 </body>
 </html>

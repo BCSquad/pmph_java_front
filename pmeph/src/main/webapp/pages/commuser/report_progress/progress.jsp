@@ -105,7 +105,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                            	<c:choose>
 											<c:when test="${books.isChiefChosen==true && books.rank=='1'}">
 				                            	<span class="left-bom-24">已被遴选为第一主编</span>
-				                            	<button class="left-bom-23">选择编委>></button>
+				                            	<button class="left-bom-23" style="cursor: pointer;" onclick="chooseEditor('${books.textbookId}')">选择编委>></button>
 				                            </c:when>
 				                            <c:otherwise>
 												<span class="left-bom-22">审核通过</span>
@@ -139,11 +139,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                <c:if test="${vs.last==false}" >
 		                <div class="rightContent-bom">
 		                    <div class="wzContent">${message.msgContent}</div>
+		                    <!-- <div class="wzContent">爱仕达开始打卡刷的卡刷的卡刷的卡合适的看哈上看到哈克斯电话卡睡得好卡视角大卡司哈上看到哈克斯电话卡睡得好卡视角大卡司</div> -->
 		                </div>
 		                </c:if>
 		                <c:if test="${vs.last==true}" >
 		                <div class="rightContent-bom1">
 		                    <div class="wzContent">${message.msgContent}</div>
+		                    <!-- <div class="wzContent">爱仕达开始打卡刷的卡刷的卡刷的卡合适的看哈上看到哈克斯电话卡睡得好卡视角大卡司哈上看到哈克斯电话卡睡得好卡视角大卡司</div> -->
 		                </div>
 		                </c:if>
 		            </div>
@@ -156,4 +158,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <jsp:include page="/pages/comm/tail.jsp"/>
 </div>
 </body>
+
+<script type="text/javascript">
+		function chooseEditor(bookId){
+			window.location.href="${ctx}/chooseEditor/toPage.action?textBookId="+bookId;
+		}
+
+</script>
 </html>

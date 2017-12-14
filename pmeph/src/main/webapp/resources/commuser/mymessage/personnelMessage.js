@@ -1,11 +1,19 @@
 
 var addAvatar="";
 var addName="";
+var addhtml="";
 $(function() {
-	
+
 	var pageSize = 5;
 	var pageNumber = 1;
 	
+	
+	$(window).scroll(function() {
+        var top = $(window).scrollTop()+150;
+        var left= $(window).scrollLeft()+300;
+        $("#box").css({ left:left + "px", top: top + "px" });
+    });
+
 	$('select').selectlist({
         zIndex: 10,
         width: 70,
@@ -54,12 +62,14 @@ $(function() {
 	        success:function(responsebean){
 	        	$("#dialogue").html('');
 	        	if(null != responsebean && responsebean.length >= 0){
+	        		var content="";
 	        		for( var i= 0; i<responsebean.length ; i++ ){
 	        			var html ="";
 	        			if(responsebean[i].isMy){//我发送的
 	        				html = "<div class='oneTalk'> "+
 						                "<div class='headAndNameRight float_right'> "+
-						                    "<div class='headDiv'><img class='headPicture' src='"+contextpath+'/'+responsebean[i].avatar+"'/></div> "+
+						                /*"<div class='headDiv'><img class='headPicture' src='"+contextpath+'/'+responsebean[i].avatar+"'/></div> "+*/
+						                    "<div class='headDiv'><img class='headPicture' src='"+contextpath+"statics/image/putongyhtouxiang.png"+"'/></div> "+
 						                    "<div class='talkName'><text>"+responsebean[i].senderName+"</text></div> "+
 						                "</div> "+
 						
@@ -76,7 +86,8 @@ $(function() {
 	        			}else{
 	        				html = "<div class='oneTalk'> "+
 						                "<div class='headAndNameLeft float_left'> "+
-						                    "<div class='headDiv'><img class='headPicture' src='"+contextpath+'/'+responsebean[i].avatar+"'/></div> "+
+						                   /* "<div class='headDiv'><img class='headPicture' src='"+contextpath+'/'+responsebean[i].avatar+"'/></div> "+*/
+						                  "<div class='headDiv'><img class='headPicture' src='"+contextpath+"statics/image/putongyhtouxiang.png"+"'/></div> "+
 						                    "<div class='talkName'><text>"+responsebean[i].senderName+"</text></div> "+
 						                "</div> "+
 						                "<div class='talkDiv float_left'> "+
@@ -89,8 +100,12 @@ $(function() {
 						                "</div> "+
 						            "</div> ";
 	        			}
+	        			
 	        			$("#dialogue").append(html);
+	        			content+=html;
 	        		}
+	        		
+	        		addhtml=content;
 	        		//更新消息状态
 		        	$.ajax({
 		    	        type:'get',
@@ -115,12 +130,12 @@ $(function() {
 	$(".inputBox").keypress(function (e){ 
 		var code = event.keyCode; 
 		if (13 == code) { 
-			sendNewMsg(); 
+			sendNewMsg(addhtml); 
 		} 
 	}); 
 	//发送信息
 	$("#sendNewMsg").click(function(){
-		sendNewMsg () ;
+		sendNewMsg (addhtml) ;
 	});
 	//关闭对话框 
 	$('#hide').click(function(){
@@ -144,7 +159,7 @@ $(function() {
 					data : {
 						pageNumber : pageNumber,
 						pageSize : pageSize,
-						state : $("#select").val()
+						state : $("input[name='select']") .val()
 					},
 					success : function(res) {
 						if ( res) {
@@ -152,34 +167,39 @@ $(function() {
 							if (res.length < pageSize) {
 								$("#loadMore").hide();
 							}
-							for (var i = 0; i < res.length; i++) {
+							if(res.length>0){
+								
+								for (var i = 0; i < res.length; i++) {
+									
+									var  html ="";
+									html += "<tr><th rowspan='2' class='headPortrait'><img class='pictureNotice' src='"+contextpath+"statics/image/putongyhtouxiang.png"
+											/*+ res[i].avatar*/
+											+ "'></th><td class='name'><span>"
+											+ res[i].name
+											+ "</span><span class='time1'>"
+											+ formatDate(res[i].sendTime, "")
+											+ "</span></td></tr>";
+									html += "<tr><td colspan='2' class='personMessageContent'>私信内容："
+											+ res[i].content
+											+ '</td><td class="buttonDetail"><div class="buttonAccept" ><a class="a openTallk" id="'+res[i].talkId+'" href="javascript:" >查看详情</a></div></td></tr>';
+									html += "<tr><td colspan='4' align='center'><hr class='line'></td></tr>";
+									html +="<input id='name_"+res[i].talkId+"' type='hidden' value='"+res[i].name+"'/><input id='type_"+res[i].talkId+"' type='hidden'value='"+res[i].type+"' />";
+									$("#list").append(html);
+								}
+							}else{
 								var  html ="";
-								html += "<tr><th rowspan='2' class='headPortrait'><img class='pictureNotice' src='"
-										+ contextpath
-										+ res[i].avatar
-										+ "'></th><td class='name'><span>"
-										+ res[i].name
-										+ "</span><span class='time1'>"
-										+ formatDate(res[i].sendTime, "")
-										+ "</span></td></tr>";
-								html += "<tr><td colspan='2' class='personMessageContent'>私信内容："
-										+ res[i].content
-										+ "</td><td class='buttonDetail'><div class='buttonAccept'><a class='a openTallk' onclick='detail('"+res[i].avatar+","+res[i].name+"') id='"+res[i].talkId+"' href='javascript:void(0)' >查看详情</a></div></td></tr>";
-								html += "<tr><td colspan='4' align='center'><hr class='line'></td></tr>";
-								html +="<input id='name_"+res[i].talkId+"' type='hidden' value='"+res[i].name+"'/><input id='type_"+res[i].talkId+"' type='hidden'value='"+res[i].type+"' />";
-								$("#list").append(html);
+									 html+="<tr><td><div class='no-more'><img src='<c:url value='/statics/image/aaa4.png'></c:url><span>木有内容呀~~</span></div></td></tr>"
+								     $("#list").append(html);
 							}
 						}
 					}
 				})
 	}
 	
-	function sendNewMsg (){
+	function sendNewMsg (addhtml){
 		$("#dialogue").html('');
 		var content=$("#content").val();
 		var sendTime = new Date();
-		var avatar="";
-		var senderName="";
 		if(!content || content.trim() ==''){
 			window.message.warning("请键入消息");
 		}else{
@@ -196,15 +216,16 @@ $(function() {
 		        	content  : content,
 		        	title    : $(".personMessageTitle").html()
 		        },
-		        success:function(responsebean){
-		        	if(responsebean=='success'){
+		        success:function(map){
+		        	if(map.code=='success'){
 		        		//window.message.success('发送成功');
 			        	//hide();
 		        		
 		        		html = "<div class='oneTalk'> "+
 		                "<div class='headAndNameRight float_right'> "+
-		                    "<div class='headDiv'><img class='headPicture' src='"+contextpath+'/'+addAvatar+"'/></div> "+
-		                    "<div class='talkName'><text>"+addName+"</text></div> "+
+		                    /*"<div class='headDiv'><img class='headPicture' src='"+contextpath+'/'+map.avatar+"'/></div> "+*/
+		                	"<div class='headDiv'><img class='headPicture' src='"+contextpath+"statics/image/putongyhtouxiang.png'/></div>"+
+		                    "<div class='talkName'><text>"+map.name+"</text></div> "+
 		                "</div> "+
 		
 		                "<div class='talkDivRight float_right' > "+
@@ -217,6 +238,7 @@ $(function() {
 		                "</div> "+
 		            "</div> ";
 		        		
+		        		$("#dialogue").append(addhtml);	
 		        		$("#dialogue").append(html);	
 			        	$("#content").val('');
 		        	}
@@ -253,8 +275,4 @@ $(function() {
 	
 });
 
-function detail(avatar,name){
-	addAvatar=avatar;
-	addName = name;
-}
 

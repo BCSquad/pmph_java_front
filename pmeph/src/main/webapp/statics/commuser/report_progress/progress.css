@@ -189,6 +189,7 @@
     border-radius: 2px;
     color: #ffffff;
     border: none;
+    cursor: pointer;
 
 }
 .left-bom-24{
@@ -258,6 +259,11 @@
     color: #777777;
     line-height: 50px;
     border-bottom: 1px dotted #999;
+    width:560px;
+    text-overflow:ellipsis; /*超出部分省略号显示*/
+    white-space:nowrap;/*强制不换行*/
+ 	overflow: hidden;
+    
 }
 
 .board-line{

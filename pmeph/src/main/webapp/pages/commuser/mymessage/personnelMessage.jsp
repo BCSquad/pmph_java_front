@@ -31,6 +31,8 @@
 </head>
 <body>
 	<jsp:include page="/pages/comm/head.jsp"></jsp:include>
+	<div class="body">
+	<div class="content-wrapper">
 	<div class="messageList">
 		<span><a class="otherOptions" href="${ctx}/message/noticeMessageList.action">通知</a></span>
 		<span><a href="${ctx}/message/applyMessageList.action" class="unselected">申请</a></span>
@@ -53,7 +55,7 @@
 			</div>
 			
 			  
-			<span class="personMessageTitle">你与特朗普的私信窗口</span>
+			<span class="personMessageTitle"></span>
 			<input id='talk' type='hidden' value=''/>
             <div class="contentBox" id="dialogue">
             	<!---->
@@ -70,6 +72,8 @@
             </div>
 		</div>
 		<div id="loadMore" class="load-more clearfix">加载更多...</div>
+	</div>
+	</div>
 	</div>
 	<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
