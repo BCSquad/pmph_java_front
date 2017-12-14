@@ -82,12 +82,14 @@ public class PersonalCenterController extends BaseController {
 			e.printStackTrace();
 		} 		}
 //		String s= request.getParameter("s");
+		String dateinfo= request.getParameter("dateinfo");
 		String online_progress= request.getParameter("online_progress");
 		String is_staging= request.getParameter("is_staging");
 		Map<String, Object> permap=this.getUserInfo();//个人信息
 		List<PersonalNewMessage> listmycol=personalService.queryMyCol(permap);//我的收藏
 		List<PersonalNewMessage> listmyfriend=personalService.queryMyFriend(permap);//我的好友
 //		permap.put("s", s);
+		permap.put("dateinfo", dateinfo);
 		permap.put("online_progress", online_progress);
 		permap.put("is_staging", is_staging);
 		permap.put("bookname", bookname);
@@ -113,12 +115,14 @@ public class PersonalCenterController extends BaseController {
 			e.printStackTrace();
 		} 		}
 		String s="1";
+		String dateinfo= request.getParameter("dateinfo");
 		String online_progress= request.getParameter("online_progress");
 		String is_staging= request.getParameter("is_staging");
 		Map<String, Object> permap=this.getUserInfo();//个人信息
 		List<PersonalNewMessage> listmycol=personalService.queryMyCol(permap);//我的收藏
 		List<PersonalNewMessage> listmyfriend=personalService.queryMyFriend(permap);//我的好友
 		permap.put("s", s);
+		permap.put("dateinfo", dateinfo);
 		permap.put("online_progress", online_progress);
 		permap.put("is_staging", is_staging);
 		permap.put("bookname", bookname);
