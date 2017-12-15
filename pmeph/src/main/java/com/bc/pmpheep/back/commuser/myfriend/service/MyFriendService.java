@@ -3,8 +3,8 @@ package com.bc.pmpheep.back.commuser.myfriend.service;
 import java.util.List;
 import java.util.Map;
 
+import com.bc.pmpheep.back.authadmin.user.bean.WriterUser;
 import com.bc.pmpheep.back.commuser.myfriend.bean.WriterFriendVO;
-import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
 
 /**
  * 
