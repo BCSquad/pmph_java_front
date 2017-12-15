@@ -17,7 +17,8 @@ function ChangeDiv(type){
 
 
 $(function(){
-	var webSocket = new WebSocket("ws:'http://120.76.221.250:11000/pmpheep/websocket?userType=" +2+"?userId="+$("#userId").val());
+	var webSocket = new WebSocket("ws:120.76.221.250:11000/pmpheep/websocket?userType=" +2+"&userId="+$("#userId").val());
+	//var webSocket = new WebSocket("ws:127.0.0.1:8036/pmpheep/websocket?userType=" +2+"&userId="+$("#userId").val());
 	webSocket.onopen = function(event){
 	    console.log("连接成功");
 	    console.log(event);
@@ -38,6 +39,17 @@ $(function(){
 	    //接受来自服务器的消息
 	    //...
 	    console.log("Socket新消息:"+event.data);
+	    var data = $.parseJSON(event.data); 
+	    var sender = 2 ; //他人的
+	    if(data.senderId == 0){//系统消息
+	    	sender = 0; 
+	    }else if(data.senderId == $("#userId").val() && data.senderType == 2 ){//我自己的
+	    	sender = 1 ;
+	    }
+	    //是小组消息，小组id相同，类型是新增
+	    if(data.msgType == 3 && data.groupId == $("#groupId").val() && data.sendType == 0){
+	    	loadNewGroupMsg(sender,data.senderName,data.senderIcon,data.content,data.time);
+	    }
 	}
 	$("#sendMsg").click(function(){
 		var content=$("#msgContent").val();
@@ -45,7 +57,8 @@ $(function(){
 			window.message.warning("请键入消息");
 			return ;
 		}
-		webSocket.send("{'userType':2,'msg':{'memberId':"+$("#userId").val()+",'msgContent':'"+content+"'}}");
+		var s = webSocket.send("{senderId:"+$("#userId").val()+",senderType:"+2+",content:'"+content+"',groupId:"+$("#groupId").val()+",sendType:0}");
+		$("#msgContent").val('');
 	});
 	//-------------------------------
 	var talkPagesize  = 5 ;
@@ -276,6 +289,45 @@ $(function(){
 	        	}
 	        }
 		});
+	}
+	//加载小组新的消息
+	function loadNewGroupMsg(msgType,senderName,senderIcon,content,time){
+		var html ="";
+		//系统消息
+		if(msgType == 0){
+			html = "<div>"+formatDate(time,"yyyy.MM.dd hh:ss:mm")+"  "+senderName+":"+content+"</div>";
+		}else if(msgType == 1){ //我发送的消息
+			html = "<div class='chat_items mine'> "+
+                        "<div class='chat_item1'> "+
+                            "<div class='div_item1_img'> "+
+                                "<img src='"+contxtpath+"/"+senderIcon+"'/> "+
+                                "<text>"+senderName+"</text> "+
+                            "</div> "+
+                            "<div class='arrows'></div> "+
+                        "</div> "+
+                        "<div class='chat_item2'> "+
+                            "<div class='sender'> "+content+" </div> "+
+                            "<div class='chat_item2_time'>"+formatDate(time,"yyyy.MM.dd hh:ss:mm")+"</div> "+
+                        "</div> "+
+                        "<div class='clear'></div> "+
+                    "</div> ";
+		}else if(msgType == 2){ //他人发送的消息
+			html = "<div class='chat_items other'> "+
+                        "<div class='chat_item1'> "+
+                            "<div class='div_item1_img'> "+
+                                "<img src='"+contxtpath+"/"+senderIcon+"'/> "+
+                                "<text>"+senderName+"</text> "+
+                            "</div> "+
+                            "<div class='arrows'></div> "+
+                        "</div> "+
+                        "<div class='chat_item2'> "+
+                            "<div class='sender'>"+content+"</div> "+
+                            "<div class='chat_item2_time'>"+formatDate(time,"yyyy.MM.dd hh:ss:mm")+"</div> "+
+                        "</div> "+
+                        "<div class='clear'></div> "+
+                    "</div> ";
+		}
+		$(".iframe1").append(html);
 	}
 	
 	//转换时间戳的方法
