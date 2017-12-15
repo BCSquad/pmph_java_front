@@ -27,7 +27,7 @@
             <mvc:mapping path="/personalhomepage/*"/>
             <mvc:mapping path="/writerArticle/*"/>
             <mvc:mapping path="/message/*"/>
-            
+            <mvc:mapping path="/material/*"/>
              <!--书籍收藏-->
             <mvc:mapping path="/bookcollection/*"/>
             

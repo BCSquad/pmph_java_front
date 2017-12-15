@@ -164,5 +164,9 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 		this.madd.DelWork(map);
 		return 0;
 	}
+	@Override
+	public int updateDeclaration(Map<String, Object> map) {
+		return this.updateDeclaration(map);
+	}
 	
 }

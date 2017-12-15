@@ -8,7 +8,7 @@
            var contextpath = '${pageContext.request.contextPath}/';
   </script>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-<title>申报表添加</title>
+<title>教材申报审核</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
 <link rel="stylesheet" href="${ctx}/statics/materialdec/materialadd.css" type="text/css">

@@ -40,10 +40,10 @@
 	</select>
 	<insert id="insertPerson" parameterType="java.util.Map">
 		insert into declaration(material_id,user_id,realname,sex,birthday,experience,org_name,position,
-		title,address,postcode,handphone,email,idtype,idcard,telephone,fax,org_id,gmt_create,is_staging
+		title,address,postcode,handphone,email,idtype,idcard,telephone,fax,org_id,gmt_create,is_staging,online_progress
 		) values(#{material_id},#{user_id},#{realname},#{sex},#{birthday},#{experience},#{org_name},#{position},
 		#{title},#{address},#{postcode},#{handphone},#{email},#{idtype},#{idcard},#{telephone},
-		#{fax},#{org_id},#{gmt_create},#{is_staging})
+		#{fax},#{org_id},#{gmt_create},#{is_staging},#{online_progress})
 	</insert>
 	
 	<!-- 图书选择 -->
@@ -178,4 +178,9 @@
 	<select id="insertZjkzbb" resultType="java.util.Map" parameterType="java.util.Map">
 		insert into dec_extension(extension_id,declaration_id,content) values(#{extension_id},#{declaration_id},#{content})
 	</select>
+	
+	<!-- 申报审核 -->
+	<update id="updateDeclaration" parameterType="java.util.Map">
+		update declaration set auth_user_id =#{auth_user_id} ,auth_date=#{auth_date} ,online_progress=#{online_progress} where id= #{declaration_id}
+	</update>
 </mapper>
