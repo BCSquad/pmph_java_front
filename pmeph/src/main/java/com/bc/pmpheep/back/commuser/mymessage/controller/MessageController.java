@@ -33,8 +33,10 @@ public class MessageController extends BaseController{
 	@RequestMapping(value="/applyMessageList")
 	public ModelAndView toScheduleList(HttpServletRequest  request){
 		
-		/*Map<String, Object> map = getUserInfo();
-		String id  = (String) map.get("id");*/
+		Map<String, Object> map = getUserInfo();
+		Long userId = new Long(String.valueOf(map.get("id")));
+		//Long userId = (long) 24967;
+		
 		String condition=request.getParameter("condition");
 		String para=request.getParameter("addPara");
 		int addPara=0;
@@ -45,7 +47,6 @@ public class MessageController extends BaseController{
 		}
 		Map<String,Object> paraMap = new HashMap<String,Object>();
 		ModelAndView mv = new ModelAndView();
-		Long userId = (long) 24967;
 		paraMap.put("condition",condition);
 		paraMap.put("userId",userId);
 		paraMap.put("addPara",addPara);
@@ -83,7 +84,6 @@ public class MessageController extends BaseController{
 		paraMap.put("userId",userId);
 		
 		List<Map<String,Object>> list = noticeMessageService.selectApplyMessage(paraMap);
-		
 		return list;
 	}
 	
@@ -114,11 +114,14 @@ public class MessageController extends BaseController{
 	//查询通知列表
 	@RequestMapping(value="/noticeMessageList")
 	public ModelAndView toNoticeMessageList(HttpServletRequest request){
-		String condition=request.getParameter("condition");
 		
+		Map<String, Object> map = getUserInfo();
+		Long userId = new Long(String.valueOf(map.get("id")));
+		//Long userId = (long) 1609;
+		String condition=request.getParameter("condition");
 		Map<String,Object> paraMap = new HashMap<String,Object>();
 		ModelAndView mv = new ModelAndView();
-		Long userId = (long) 1609;
+	
 		paraMap.put("condition",condition);
 		paraMap.put("userId",userId);
 		paraMap.put("startPara",0);

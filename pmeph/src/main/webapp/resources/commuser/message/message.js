@@ -17,6 +17,9 @@ function loadMore(){
 			dataType:'json',
 			success:function(json){
 				var list = json;
+				if(list.size<8){
+					$("#loadMoreDiv").hide();
+				}
 				$("#startPara").val(startPara);
 				var str='';
 				$.each(list,function(i,n){

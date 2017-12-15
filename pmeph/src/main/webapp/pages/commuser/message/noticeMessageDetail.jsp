@@ -9,6 +9,9 @@
 </script>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>申请列表</title>
+      <script>
+        var contextpath='${pageContext.request.contextPath}/';
+    </script>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
     <link rel="stylesheet" href="${ctx}/statics/commuser/message/noticeMessageDetail.css" type="text/css">
@@ -18,6 +21,7 @@
     <script src="${ctx}/resources/comm/base.js"></script>
 </head>
 <body>
+
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="body">
 	<div class="content-wrapper">
@@ -95,7 +99,6 @@
 		function register(materialId){
 			window.location.href="${ctx}/material/toMaterialAdd.action?material_id="+materialId;
 		}
-
 
 </script>
 </html>

@@ -33,7 +33,10 @@
             
             <!--书籍收藏-->
             <mvc:mapping path="/articlecollection/*"/>
-            
+            <mvc:mapping path="/schedule/*"/>
+            <mvc:mapping path="/admininfocontroller/*"/>
+            <mvc:mapping path="/myGroup/*"/>
+            <mvc:mapping path="/group/*"/>
             <!--信息快报列表点赞-->
             <mvc:mapping path="/cmsinfoletters/addlike.action"/>
             
@@ -44,6 +47,7 @@
 			<mvc:mapping path="/readdetail/addmark*"/><!-- 读书详情页添加收藏 -->
 			<mvc:mapping path="/readdetail/addlikes*"/><!-- 读书详情页点赞 -->
 			<mvc:mapping path="/user/*"/><!-- 用户管理（机构用户） -->
+			<mvc:mapping path="/myFriend/*"/><!-- 我的好友（普通用户） -->
             <!--申报资料审核（机构用户）第一主编选择编委 教师认证 添加好友 书籍查询 书籍列表 学校教师认证-->
             <mvc:mapping path="/applyDocAudit/*"/>
             <mvc:mapping path="/chooseEditor/*"/>

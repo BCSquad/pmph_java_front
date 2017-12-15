@@ -33,9 +33,9 @@ $(function () {
         }
     });
     
-    
     $("#fileNameDiv").hide();
     $("#uploadFile").uploadFile({
+    	
         start: function () {
             console.log("开始上传。。。");
         },
@@ -63,9 +63,6 @@ $(function () {
             console.log("正在上传。。。" + loaded / total);
         }
     });
-    
-    
-    
 });
 function getform() {
 	
@@ -84,7 +81,6 @@ function getform() {
     json.address=$("#address").val();
     json.id=$("#id").val();
     console.log(json);
-    alert(json.title);
     return json;
 
 }
@@ -113,6 +109,5 @@ function downLoad(){
 }
 //下载老委托书
 function downLoadProxy(fileId){
-	alert(fileId);
 	window.location.href=contextpath+'file/download/'+fileId+'.action';
 }

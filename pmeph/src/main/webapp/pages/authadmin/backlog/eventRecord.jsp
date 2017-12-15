@@ -44,6 +44,7 @@
             </div>
         </div>
         <div class="bigList">
+        <c:if test="${map.pageResult.total>=1 }">
         <c:forEach items="${map.pageResult.rows}" var="message" varStatus="status">
             <div class="listEvent">
                 <div class="leftContent">
@@ -84,6 +85,13 @@
                 </div>
             </div>
             </c:forEach>
+            </c:if>
+            <c:if test="${map.pageResult.total<1 }">
+            	<div class="no-more">
+                    <img src="<c:url value="/statics/image/aaa4.png"></c:url>">
+                    <span>木有内容呀~~</span>
+                </div>
+            </c:if>
         </div>
         <c:if test="${map.pageResult.total>=1 }">
         <div class="pageDiv">
@@ -107,7 +115,11 @@
             </div>
         </c:if>
     </div>
-    <div class="info">
+    <c:choose >
+    	<c:when test="${map.license=='no'}">
+    	</c:when>
+    	<c:otherwise >
+    		<div class="info">
             <div class="topPictureDiv">
                 <img class="topPicture"src="${ctx}/statics/pictures/head.png">
             </div>
@@ -121,16 +133,18 @@
                 <div>
                     <span class="littleTitle">${map.org_name},欢迎您!</span>
                 </div>
-               
                 	<div>
 	                	<span class="littleTitle3">已认证</span>
 	                </div>
-               
             </div>
             <div class="thirdRow">
                 <span>最近登录:  2017-09-27 16:12:07</span>
             </div>
         </div>
+    	</c:otherwise>
+    </c:choose>
+    	
+    
 </div>
 </div>
 </div>

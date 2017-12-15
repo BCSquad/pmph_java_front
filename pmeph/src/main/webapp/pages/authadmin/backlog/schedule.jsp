@@ -51,55 +51,62 @@
                    </div>
                 </div>
             <div class="bigList">
-            <c:forEach items="${map.pageResult.rows}" var="one" varStatus="status">
-            	<div class="list">
-                    <div class="leftContent">
-                        <div class="leftContentSmall">
-                            <div class="pictureDiv">
-                            	<c:if test="${one.TYPE=='A'}">
-                            		<img  class="picture">
-                            	</c:if>
-                                <c:if test="${one.TYPE=='B'}">
-                                	<img  class="pictureB" src="${ctx}/statics/image/pic3555.png">
-                                </c:if>
-                            </div>
-                        </div>
-                       <c:if test="${status.last==false}" >
-                        <div class="straightLine">
-                            <div class="whiteDiv">
-
-                            </div>
-                        </div>
-                        </c:if> 
-                         	
-                         
-                    </div>
-                    <div class="rightContent">
-                            <div class="leftPictureAndName">
-                                <div class="upContent">
-                                        <div class="headPicture">
-                                            <img class="picture1"  src="${ctx}/statics/pictures/head.png">
-                                        </div>
-                                        <div class="username">
-                                             <span>${one.NAME}</span>
-                                        </div>
-                                </div>
-                                <div class="downContent">
-                                    <div class="timeEvent">
-                                        <span class="time">于<fmt:formatDate pattern="yyyy年MM月dd日" value="${one.TIME}" /></span>&nbsp;<span class="event">提交${one.CONTENT}</span><span class="event">，请审批</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="rightButton">
-                                <div onclick="toogleTip('block','${one.TYPE}',${one.auditId})" class="buttonDiv">
-                                        		办理
-                                </div>
-                            </div>
-                    </div>
-            </div>
-            
-            </c:forEach>
-            
+            <c:if test="${map.pageResult.total>=1 }">
+	            	
+	            <c:forEach items="${map.pageResult.rows}" var="one" varStatus="status">
+	            	<div class="list">
+	                    <div class="leftContent">
+	                        <div class="leftContentSmall">
+	                            <div class="pictureDiv">
+	                            	<c:if test="${one.TYPE=='A'}">
+	                            		<img  class="picture">
+	                            	</c:if>
+	                                <c:if test="${one.TYPE=='B'}">
+	                                	<img  class="pictureB" src="${ctx}/statics/image/pic3555.png">
+	                                </c:if>
+	                            </div>
+	                        </div>
+	                       <c:if test="${status.last==false}" >
+	                        <div class="straightLine">
+	                            <div class="whiteDiv">
+	
+	                            </div>
+	                        </div>
+	                        </c:if> 
+	                         	
+	                         
+	                    </div>
+	                    <div class="rightContent">
+	                            <div class="leftPictureAndName">
+	                                <div class="upContent">
+	                                        <div class="headPicture">
+	                                            <img class="picture1"  src="${ctx}/statics/pictures/head.png">
+	                                        </div>
+	                                        <div class="username">
+	                                             <span>${one.NAME}</span>
+	                                        </div>
+	                                </div>
+	                                <div class="downContent">
+	                                    <div class="timeEvent">
+	                                        <span class="time">于<fmt:formatDate pattern="yyyy年MM月dd日" value="${one.TIME}" /></span>&nbsp;<span class="event">提交${one.CONTENT}</span><span class="event">，请审批</span>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            <div class="rightButton">
+	                                <div onclick="toogleTip('block','${one.TYPE}',${one.auditId})" class="buttonDiv">
+	                                        		办理
+	                                </div>
+	                            </div>
+	                    </div>
+	            </div>
+	            </c:forEach>
+              </c:if>
+               <c:if test="${map.pageResult.total<1 }">
+	            	<div class="no-more">
+                    <img src="<c:url value="/statics/image/aaa4.png"></c:url>">
+                    <span>木有内容呀~~</span>
+                	</div>
+	           </c:if>
             </div>
             <div class="tip" id="tip">
                 <div class="upDiv">
@@ -141,8 +148,11 @@
             </div>
             </c:if>
         </div>
-
-        <div class="info">
+		<c:choose>
+			<c:when test="${map.license=='no'}">
+			</c:when>
+			<c:otherwise>
+				<div class="info">
             <div class="topPictureDiv">
                 <img class="topPicture"src="${ctx}/statics/pictures/head.png">
             </div>
@@ -156,12 +166,12 @@
                 <div>
                     <span class="littleTitle">${map.org_name},欢迎您!</span>
                 </div>
-                <c:if test="${map.license==false}">
+                <c:if test="${map.license=='false'}">
                 	<div>
 	                	<span class="littleTitle2" onclick="toAuthAudit(${map.userId})">未认证</span>
 	                </div>
                 </c:if>
-                <c:if test="${map.license==true}">
+                <c:if test="${map.license=='true'}">
                 	<div>
 	                	<span class="littleTitle3">已认证</span>
 	                </div>
@@ -172,6 +182,9 @@
                 <span>最近登录:  2017-09-27 16:12:07</span>
             </div>
         </div>
+			</c:otherwise>
+		</c:choose>
+        
         </div>
    </div>
 <div style="clear: both; background-color: white;">   

@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -62,8 +64,8 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 	@RequestMapping(value = "/tolist", method = RequestMethod.GET)
 	public List<MyMessageVO> list(Integer pageSize, Integer pageNumber,String state) {
 		Map<String, Object> writerUser = this.getUserInfo();
-		//Long userId = new Long(String.valueOf(writerUser.get("id")));
-		Long userId =  new Long(1456);
+		Long userId = new Long(String.valueOf(writerUser.get("id")));
+		//Long userId =  new Long(1456);
 		List<MyMessageVO> list = myMessageService.listMyMessage(pageNumber,pageSize,state,userId);
 		return list;
 	}
@@ -114,10 +116,23 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/senNewMsg", method = RequestMethod.GET)
-	public Map<String,Object> senNewMsg(@RequestParam(value = "friendId") Long friendId, Short friendIdType,
-			@RequestParam(value = "title") String title, @RequestParam(value = "content") String content) {
+	@RequestMapping(value = "/senNewMsg", method = RequestMethod.POST)
+	public Map<String,Object> senNewMsg(HttpServletRequest  request) {
 		Map<String, Object> writerUser = this.getUserInfo();
+		String idStr = request.getParameter("friendId");
+		Long friendId=0L;
+		if(null!=idStr&&!idStr.equals("")){
+			 friendId = new Long(idStr);
+		}
+		
+		String title = request.getParameter("title");
+		String typeStr = request.getParameter("friendIdType");
+		Short friendIdType = null;
+		if(null!=typeStr&&!typeStr.equals("")){
+			friendIdType= new Short(typeStr); 
+		}
+		 
+		String content = request.getParameter("content"); 
 		//Long thisId = new Long(String.valueOf(writerUser.get("id")));
 		//String name = writerUser.get("name");
 		Long thisId = new Long(24967);

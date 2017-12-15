@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -32,7 +33,7 @@
 <body>
 	<jsp:include page="/pages/comm/head.jsp"></jsp:include>
 	<div class="body">
-	<div class="content-wrapper">
+	<div class="content-wrapper" style="line-height:normal">
 	<div class="messageList">
 		<span><a class="otherOptions" href="${ctx}/message/noticeMessageList.action">通知</a></span>
 		<span><a href="${ctx}/message/applyMessageList.action" class="unselected">申请</a></span>
@@ -45,16 +46,25 @@
 		</span>
 	</div>
 	<div class="message">
-		<table id="list" class='table'>
-		</table>
+		<c:choose>
+			<c:when test="${list== null || fn:length(list) == 0}">
+				<div class="no-more">
+	                    <img src="<c:url value="/statics/image/aaa4.png"></c:url>">
+	                    <span>木有内容呀~~</span>
+               	</div>
+			</c:when>
+			<c:otherwise>
+				<table id="list" class='table'>
+				</table>
+			</c:otherwise>
+		</c:choose>
+		
 		<!--  <a class="a" href="javascript:void(0)" onclick="show()" style=" background:red">弹出</a>-->
 
 		<div class="b hidden" id="box">
 			<div class="hiddenX hidden" id="close">
 				<img id="hide" style="width: 100%; height: 100%;" src="${ctx}/statics/image/yellowclose.png">
 			</div>
-			
-			  
 			<span class="personMessageTitle"></span>
 			<input id='talk' type='hidden' value=''/>
             <div class="contentBox" id="dialogue">

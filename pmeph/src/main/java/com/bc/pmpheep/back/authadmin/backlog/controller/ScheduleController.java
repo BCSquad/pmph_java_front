@@ -14,7 +14,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Request;
 
-import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -49,7 +48,9 @@ public class ScheduleController extends BaseController{
 	//查询待办事项列表
 	@RequestMapping(value="/scheduleList")
 	public ModelAndView toScheduleList (HttpServletRequest  request){
-		Long userId = MapUtils.getLong(getUserInfo(),"id");
+		Map<String, Object> writerUser = this.getUserInfo();
+		Long userId = new Long(String.valueOf(writerUser.get("id")));
+		//Long userId = (long) 1383;
 		String  currentPageStr = (String) request.getParameter("currentPage");
 		String  pageSizeStr = request.getParameter("pageSize");
 		String  time = request.getParameter("time");
@@ -107,22 +108,28 @@ public class ScheduleController extends BaseController{
 		pageParameter.setParameter(paraMap);
 		//代办事项列表
 		PageResult<Map<String,Object>> pageResult = scheduleService.selectScheduleList(pageParameter);
+		ModelAndView mv = new ModelAndView();
 		//机构用户基本信息
 		Map<String,Object> map = scheduleService.selectOrgUser(userId);
-		
-		boolean license =  (boolean) map.get("is_proxy_upload");
-		boolean progress = map.get("progress")=="1"?true:false;
-		if(license==true&&progress==true){
-			map.put("license",true);
+		if(null!=map&&map.size()>0){
+			boolean license =  (boolean) map.get("is_proxy_upload");
+			boolean progress = map.get("progress")=="1"?true:false;
+			if(license==true&&progress==true){
+				map.put("license","true");
+			}else{
+				map.put("license","false");
+			}
+			map.put("time", time);
+			map.put("userId", userId);
+			map.put("pageResult", pageResult);
+			mv.addObject("map",map);
 		}else{
-			map.put("license",false);
+			Map<String,Object> map1 = new HashMap<String,Object>();
+			map1.put("pageResult", pageResult);
+			map1.put("license", "no");
+			mv.addObject("map",map1);
+
 		}
-		ModelAndView mv = new ModelAndView();
-		map.put("time", time);
-		map.put("userId", userId);
-		map.put("pageResult", pageResult);
-		mv.addObject("map",map);
-		
 		
 		mv.setViewName("authadmin/backlog/schedule");
 		return mv;
@@ -133,7 +140,9 @@ public class ScheduleController extends BaseController{
 	//查询办事记录列表
 	@RequestMapping(value="/eventRecord")
 	public ModelAndView toEventRecord(HttpServletRequest  request) throws ParseException{
-		Long userId = MapUtils.getLong(getUserInfo(),"id");
+		Map<String, Object> writerUser = this.getUserInfo();
+		Long userId = new Long(String.valueOf(writerUser.get("id")));
+		//Long userId = (long) 1459;
 		String  currentPageStr = (String) request.getParameter("currentPage");
 		//String  time =  request.getParameter("time");
 		String  pageSizeStr = request.getParameter("pageSize");
@@ -176,13 +185,21 @@ public class ScheduleController extends BaseController{
 		Map<String,Object> map = scheduleService.selectOrgUser(userId);
 		//已办事项的名称和时间
 		PageResult<Map<String,Object>> pageResult = scheduleService.selectDoneSchedule(pageParameter);
-		
-		
+
 		ModelAndView mv = new ModelAndView();
-		map.put("pageResult", pageResult);
-		map.put("userId", userId);
-		mv.addObject("map",map);
+		if(null!=map&&map.size()>0){
+			map.put("pageResult", pageResult);
+			map.put("userId", userId);
+			mv.addObject("map",map);
+
+		}else{
+			Map<String,Object> map1 =  new HashMap<String,Object>();
+			map1.put("pageResult", pageResult);
+			map1.put("license", "no");
+			mv.addObject("map",map1);
+		}
 		
+
 		mv.setViewName("authadmin/backlog/eventRecord");
 		return mv;
 		

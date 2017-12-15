@@ -9,16 +9,18 @@
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>学校管理员认证</title>
     <script src="${ctx}/resources/comm/jquery/jquery.js" type="text/javascript"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery-validate.js" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/base.js" type="text/javascript"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery-validate.js" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js" type="text/javascript"></script>
-    <script src="${ctx}/resources/authadmin/accountset/adminattest.js" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js" type="text/javascript"></script>
+    <script src="${ctx}/resources/authadmin/accountset/adminattest.js" type="text/javascript"></script>
+    
     <script src="${ctx}/resources/comm/json2.js" type="text/javascript"></script>
     <link href="${ctx}/statics/css/base.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/statics/authadmin/accountset/publicStyle.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/statics/authadmin/accountset/adminattest.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/statics/css/jquery.selectlist.css" rel="stylesheet" type="text/css"/>
+    
     <script type="text/javascript">
         $(function () {
         	
@@ -86,7 +88,7 @@
                          	<div class="label-input">
                                 <label>学校名称</label>
 	                        	<div class="input-wrapper">
-	                        		<input style="width: 258px;" class="txt required" type="text" value="${admininfo.org_name}" readonly="readonly"/>
+	                        		<input style="width: 258px;" class="txt" type="text" value="${admininfo.org_name}" readonly="readonly"/>
 	                            </div>   
                             </div>    
                         <td colspan="2"></td>
@@ -163,10 +165,10 @@
 		                            </div>
 	                            </c:if>
                             </div>
-                            <div class="td-font-2" style="float: left;"><span class="upload" id="uploadFile">点击上传</span></div>
+                            <div class="td-font-2" style="float: left;"><span style="cursor: pointer;" class="uploadClick" id="uploadFile">点击上传</span></div>
                             <div style="float:left;margin-left: 105px">
-                            	<div style="float:left">
-	                            <img style="margin-left: 20px" alt="" src="${ctx}/statics/testfile/a01.png"/>&nbsp;
+                            	<div style="float:left" >
+	                            <img style="margin-left: 20px" alt="暂无图片" src="${ctx}/statics/testfile/a01.png"/>&nbsp;
 	                            </div>
 	                            <div style="float:left;">
 	                            <a href="${ctx}/statics/files/weituoshu.doc">
@@ -203,7 +205,7 @@
                          	<div class="label-input">
                                 <label class="require">职称</label>
 	                        	<div class="input-wrapper">
-	                        		 <select class="select-td" id="title" name="title" style="padding-left: 15px">
+	                        		 <select class="select-td" id="title" name="title" style="padding-left: 15px" data-valid="isNonEmpty" data-error="职称不能为空">
 			                            <option value="teacher1" ${admininfo.title=='teacher1' ?'selected':''}>讲师</option>
 			                            <option value="teacher2" ${admininfo.title=='teacher2' ?'selected':''}>高级讲师</option>
 			                            <option value="teacher3" ${admininfo.title=='teacher3' ?'selected':''}>副教授</option>
