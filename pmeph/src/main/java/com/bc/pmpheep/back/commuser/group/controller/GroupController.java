@@ -41,6 +41,9 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView listMyGroup(Integer pageNumber,Integer pageSize )  {
+    	Map<String, Object> map = this.getUserInfo();
+    	Long userId =  Long.parseLong(map.get("id").toString()) ;
+        //Long userId = 24975L;
     	if(null == pageNumber || pageNumber < 1){
     		pageNumber = 1 ;
     	}
@@ -50,11 +53,11 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
         ModelAndView model = new ModelAndView();
         // 获取用户
         Map<String, Object> writerUserMap = this.getUserInfo();
-        //Long userId =  Long.parseLong(writerUserMap.get("id").toString()) ;
-        Long userId = 24975L;
+        
         List<GroupList> lst=groupService.groupList((pageNumber-1)*pageSize, pageSize, userId) ;
         model.setViewName("commuser/mygroup/groupList");
         model.addObject("listgroup", lst);
+        model.addObject("listSize", lst.size());
         return model;
     }
     

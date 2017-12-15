@@ -69,7 +69,10 @@ public class AdminInfoController extends BaseController {
         	String fileId = (String) map.get("proxy");
         	if(null!=fileId&&!fileId.equals("")){
         		GridFSDBFile file = fileService.get(fileId);
-        		map.put("proxyName", file.getFilename());
+        		if(null!=file){
+        			map.put("proxyName", file.getFilename());
+        		}
+        	
         	}
         }
         
