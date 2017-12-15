@@ -45,9 +45,9 @@
             %>
             <c:if test="${userInfo == null}">
                 <div class="login-logout">
-                    <a href="#">登录</a>
+                    <a href="<c:url value="/pages/comm/login.jsp"/>">登录</a>
                     <span>/</span>
-                    <a href="#">注册</a>
+                    <a href="<c:url value="/pages/comm/login.jsp"/>">注册</a>
                     <img src="${ctx}/statics/image/question.png" alt="">
                 </div>
             </c:if>
@@ -65,7 +65,7 @@
                         <a class="option" href='<c:url value="/personalhomepage/tohomepage.action"/>'>个人中心</a>
                         <a class="option" href="<c:url value='/group/list.action'/>">我的小组</a>
                         <a class="option" href='<c:url value="/personalhomepage/tohomepageone.action"/>'>教程申报</a>
-                        <a class="option out">退出</a>
+                        <a class="option out" href='<c:url value="/logout.action"/>'>退出</a>
                     </div>
                 </div>
             </c:if>

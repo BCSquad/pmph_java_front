@@ -160,8 +160,9 @@
                 }
 
                 if (data.code) {
-
-                    if (data.code != '1') {
+                    if (data.code == '100') {
+                        window.location.href = data.data;
+                    } else if (data.code != '1') {
                         window.message.error(data.msg);
                     } else {
                         if (global_copy.success) {

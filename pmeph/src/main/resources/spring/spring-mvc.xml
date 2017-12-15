@@ -23,11 +23,12 @@
     <mvc:interceptors>
         <bean class="com.bc.pmpheep.back.interceptor.ProcessInterceptor"></bean>
 
-        <mvc:interceptor>
+        <mvc:interceptor >
             <mvc:mapping path="/personalhomepage/*"/>
             <mvc:mapping path="/writerArticle/*"/>
             <mvc:mapping path="/message/*"/>
             <bean class="com.bc.pmpheep.back.interceptor.LoginInterceptor">
+                <property name="redirectUrl" value="/pages/comm/login.jsp"/>
             </bean>
         </mvc:interceptor>
     </mvc:interceptors>

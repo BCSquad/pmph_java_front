@@ -85,7 +85,8 @@
 <div id="login">
     <h1>登录管理</h1>
     <form action="<c:url value="/login.action"/>" method="post">
-        <input type="hidden" name="refer" value="<%=request.getParameter("refer")%>">
+        <input type="hidden" name="refer"
+               value="<%=request.getParameter("refer")== null ? "" : request.getParameter("refer")%>">
         <p><input type="text" name="username" id="user" placeholder="用户名"></p>
         <p style="display: block;height: 50px;"><input type="radio" name="usertype" value="1">作家用户<input type="radio"
                                                                                                          name="usertype"
