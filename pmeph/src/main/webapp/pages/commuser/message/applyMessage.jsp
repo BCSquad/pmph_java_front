@@ -63,7 +63,9 @@
 </div>
 <div class="message">
     <table class="table" id="applyTable">
-    	<c:forEach items="${list}" var="message">
+    	<c:choose>
+    		<c:when test="${listSize>0}">
+    			<c:forEach items="${list}" var="message">
         <tr>
             <th rowspan="2" class="headPortrait"><img src="${ctx}/statics/pictures/head.png" class="picture" ></th>
         </tr>
@@ -85,6 +87,15 @@
             <td colspan="4"  ><hr class="line"></td>
         </tr>
 		</c:forEach>
+    		</c:when>
+    		<c:otherwise>
+    			<div class="no-more">
+                    <img src="<c:url value="/statics/image/aaa4.png"></c:url>">
+                    <span>木有内容呀~~</span>
+                </div>
+    		</c:otherwise>
+    	</c:choose>
+    	
     </table>
     <c:if test="${listSize>=8}">
     <div class="load-more clearfix" onclick="loadMoreApply()">加载更多...</div>

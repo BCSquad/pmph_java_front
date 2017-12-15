@@ -85,30 +85,39 @@
         </div>
         <div class="message">
             <table class="table" id="messageTable">
-           
-            <c:forEach items="${list}" var="message">
-                <tr style="width: 70%">
-                    <th rowspan="2" class="headPortrait"><img  class ="pictureNotice" src="${ctx}/statics/pictures/head.png"></th>
-                    <td class="type1"><span><c:if test="${message.msg_type==1}">公告 </c:if><c:if test="${message.msg_type==0}">系统消息</c:if></span><span class="time1" id="gmt_create"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${message.gmt_create}" /></span></td>
-                </tr>
-                <tr style="width: 30%">
-                    <td colspan="2" class="title">${message.title}</td>
-                    <td class="buttonDetail">
-                    	<c:if test="${message.msg_type==1}">
-                        <div class="buttonAccept"><a href="${ctx}/message/noticeMessageDetail.action?id=${message.msg_id}">查看详情</a></div>
-                        </c:if>
-                        <c:if test="${message.msg_type==0}">
-   					    <span class="deleteButton" onclick="deleteNotice(${message.id })"><span style="font-size:18px;">×</span> 删除</span>
-                        </c:if>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="4" align="center" ><hr class="line"></td>
-                </tr>
-			</c:forEach>
+            <c:choose>
+            	<c:when test="${listSize>0}">
+            		<c:forEach items="${list}" var="message">
+		                <tr style="width: 70%">
+		                    <th rowspan="2" class="headPortrait"><img  class ="pictureNotice" src="${ctx}/statics/pictures/head.png"></th>
+		                    <td class="type1"><span><c:if test="${message.msg_type==1}">公告 </c:if><c:if test="${message.msg_type==0}">系统消息</c:if></span><span class="time1" id="gmt_create"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${message.gmt_create}" /></span></td>
+		                </tr>
+		                <tr style="width: 30%">
+		                    <td colspan="2" class="title">${message.title}</td>
+		                    <td class="buttonDetail">
+		                    	<c:if test="${message.msg_type==1}">
+		                        <div class="buttonAccept"><a href="${ctx}/message/noticeMessageDetail.action?id=${message.msg_id}">查看详情</a></div>
+		                        </c:if>
+		                        <c:if test="${message.msg_type==0}">
+		   					    <span class="deleteButton" onclick="deleteNotice(${message.id })"><span style="font-size:18px;">×</span> 删除</span>
+		                        </c:if>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td colspan="4" align="center" ><hr class="line"></td>
+		                </tr>
+					</c:forEach>
+            	</c:when>
+            	<c:otherwise>
+            		<div class="no-more">
+	                    <img src="<c:url value="/statics/image/aaa4.png"></c:url>">
+	                    <span>木有内容呀~~</span>
+               		</div>
+            	</c:otherwise>
+            </c:choose>
             </table>
             <c:if test="${listSize>=8}">
-            <div class="load-more clearfix" onclick='loadMore()'>加载更多...</div>
+            <div id="loadMoreDiv" class="load-more clearfix" onclick='loadMore()'>加载更多...</div>
             <input id="startPara" name="startPara" type="hidden">
             </c:if>
         </div>
