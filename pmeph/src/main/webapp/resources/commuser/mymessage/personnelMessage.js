@@ -205,16 +205,15 @@ $(function() {
 		}else{
 			var frendId =$("#talk").val();
 			$.ajax({
-		        type:'get',
+		        type:'post',
 		        url :contextpath+'/mymessage/senNewMsg.action',
 		        async:false,
-		        contentType: 'application/json',
 		        dataType:'json',
 		        data:{
 		        	friendId : frendId,
 		        	friendIdType : $('#type_'+frendId).val(),
-		        	content  : content,
-		        	title    : $(".personMessageTitle").html()
+		        	content : content,
+		        	title: $(".personMessageTitle").html()
 		        },
 		        success:function(map){
 		        	if(map.code=='success'){

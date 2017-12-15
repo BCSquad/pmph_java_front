@@ -225,7 +225,7 @@
                 var errMsgAry = errCollection.split("||");
                 var ruleAry = [];
 
-                for (var i = 0; i < validLen.length; i++) {
+                for (var i = 0; i < validLen.length; i++){
                     ruleAry.push({
                         strategy: validLen[i],
                         errorMsg: errMsgAry[i]
