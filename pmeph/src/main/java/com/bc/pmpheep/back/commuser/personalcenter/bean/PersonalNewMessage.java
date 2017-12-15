@@ -32,7 +32,7 @@ public class PersonalNewMessage {
 	private String iamin;//用户是否报名，1已报名，0未报名
 	private String is_staging;//是否暂存
 	private String material_id;//教材ID
-	
+	private String datebase;//日期标识（当前日期-申报结束日期）
 	
 	
 	public String getRealname() {
@@ -214,6 +214,12 @@ public class PersonalNewMessage {
 	}
 	public void setMaterial_id(String material_id) {
 		this.material_id = material_id;
+	}
+	public String getDatebase() {
+		return datebase;
+	}
+	public void setDatebase(String datebase) {
+		this.datebase = datebase;
 	}
 
 }

@@ -68,4 +68,7 @@ public interface MaterialDetailDao {
 		public List<Map<String,Object>> queryZjkzbb(Map<String,Object> map);
 		public int insertZjkzbb(Map<String,Object> map);
 	//	public int insertZjkzbb(Map<String,Object> map);
+		
+		//申报审核
+		public int updateDeclaration(Map<String,Object> map);
 }

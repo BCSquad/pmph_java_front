@@ -31,7 +31,6 @@ color:#FFF;
 
 .body {
     background: url("../../image/ypzj_bg.png");
-    padding-bottom: 60px;
 }
 
 .wrapper {
@@ -302,7 +301,6 @@ color:#FFF;
 .rlan {
     font-size: 16px;
     float: left;
-    text-align: center;
     color: #000000;
 }
 
@@ -765,7 +763,16 @@ color:#FFF;
     margin-left: 10px;
     color: #03717b;
 }
-
+.jcsbsbztxz{
+width: 76px;
+    height: 26px;
+    background-color: #1d8ca0;
+    float: left;
+    font-size: 14px;
+    text-align: center;
+    margin-left: 10px;
+    color: #FFF;
+}
 .leftlb {
 	width: 425px;
 	height: 170px;

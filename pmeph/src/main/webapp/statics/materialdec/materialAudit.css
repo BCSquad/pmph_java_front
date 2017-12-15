@@ -1,0 +1,250 @@
+.body {
+    background-color: #f1f1f1;
+    padding-top:30px;
+   	padding-bottom:30px;
+   	
+}
+.box{
+	background-color: #ffffff;
+	padding: 15px 0 0 15px;
+	margin-top: 15px;
+}
+.sbxq_title{
+	margin-top: 28px;	
+	width: 1150px;
+}
+.sbxq_title span{
+	font-family: MicrosoftYaHei;
+	letter-spacing: 0px;
+	color: #999999;
+}
+
+.sbxq_item{
+	margin-top: 30px;
+	clear: none;
+	margin-top: 20px;
+	width: 1150px;
+} 
+
+.sbxq_item1{
+	clear: none;
+	margin-top: 20px;
+	width: 1150px;
+}
+
+/**鍥句功閫夋嫨**/
+
+#tsxz_span1{
+	background-image: url(../image/css_sprites.png);
+    background-position: -333px -7px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 20px;
+    float: left;
+	margin-top: 3px;
+}
+
+.tsxz_title{
+	font-family: MicrosoftYaHei;
+	letter-spacing: 0px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-weight: bold;
+	color: #333333;
+	margin-left: 10px;
+}
+
+.item{
+	margin-top: 15px;
+}
+
+.item span{
+	font-family: MicrosoftYaHei;
+	font-size: 14px;
+	letter-spacing: 0px;
+	color: #666666;
+}
+/**涓撳淇℃伅**/
+#tsxz_span2{
+	background-image: url(../image/css_sprites.png);
+    background-position: -333px -82px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 20px;
+    float: left;
+}
+
+.content{
+	width: 1150px;
+}
+
+.tab_1{
+	width: 100%;
+	margin-top: 15px;
+}
+
+.tab_1 tr td span{
+	font-family: MicrosoftYaHei;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	height: 32px;
+	line-height: 32px;
+	letter-spacing: 0px;
+	color: #666666;
+}
+/**涓昏瀛︿範缁忓巻**/
+#tsxz_span3{
+	background-image: url(../image/css_sprites.png);
+    background-position: -333px -135px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 20px;
+    float: left;
+}
+
+.tab_2{
+	width: 100%;
+	margin-top: 15px;
+	border:1px solid #dedede;
+	empty-cells:show; 
+	border-collapse: collapse;
+}
+
+.tab_2 thead tr{
+	background-color: #f8f8f8;
+}
+
+.tab_2 thead td{
+	font-family: MicrosoftYaHei;
+	line-height: 30px;
+	letter-spacing: 0px;
+	color: #333333;
+	text-align: center;
+	border:1px solid #dedede; 
+}
+
+.tab_2 tbody td{
+	font-family: MicrosoftYaHei;
+	line-height: 48px;
+	height: 48px;
+	letter-spacing: 0px;
+	color: #999999;
+	text-align: center;
+	border:1px solid #dedede; 
+}
+
+.sbdw{
+	margin-top: 15px;
+}
+.sbdw span{
+	font-family: MicrosoftYaHei;
+	line-height: 26px;
+	letter-spacing: 0px;
+	color: #333333;
+}
+
+.button{
+	height: 50px;
+	width: 1150px;
+	text-align: center;
+	margin-top: 30px;
+	
+}
+
+.div_butt{
+	width: 270px;
+	height: 24px;
+	color: #FFFFFF;
+	margin:auto;/*重要,IE兼容模式*/
+	top:50%;
+	left:50%;
+}
+.bt_tj{
+	width: 74px;
+	height: 24px;
+	background-color: #70bcc3;
+	border-radius: 2px;
+	cursor: pointer;
+	color: #FFFFFF;
+	float: left;
+	margin-left: 15px;
+}
+
+#tsxz_span4{
+	background-image: url(../image/css_sprites.png);
+    background-position: -333px -109px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 20px;
+    float: left;
+}
+
+#tsxz_span5{
+	background-image: url(../image/css_sprites.png);
+    background-position: -333px -56px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 20px;
+    float: left;
+}
+
+#tsxz_span6{
+	background-image: url(../image/css_sprites.png);
+    background-position: -333px -31px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 20px;
+    float: left;
+}
+
+#tsxz_span7{
+	background-image: url(../image/css_sprites.png);
+    background-position: -333px -163px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 20px;
+    float: left;
+}
+
+#tsxz_span8{
+	background-image: url(../image/css_sprites.png);
+    background-position: -333px -191px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 20px;
+    float: left;
+}
+/**附件样式**/
+a.input {
+
+    text-align:center;
+    display:inline-block;/*具有行内元素的视觉，块级元素的属性 宽高*/
+    overflow:hidden;/*去掉的话，输入框也可以点击*/
+    position:relative;/*相对定位，为 #file 的绝对定位准备*/
+}
+.file {
+    opacity:0;/*设置此控件透明度为零，即完全透明*/
+    filter:alpha(opacity=0);/*设置此控件透明度为零，即完全透明针对IE*/
+    font-size:100px;
+    position:absolute;/*绝对定位，相对于 .input */
+    top:0;
+    right:0;
+}
+.operate{
+    margin-left: 20px;
+    font-size: 14px;
+    color: #03717b;
+}
+.icon{
+    background-image: url(/pmeph/statics/image/附件拷贝4.png);
+    background-position: 0px 2px;
+    height: 30px;
+    width: 16px;
+    background-repeat: no-repeat;
+    margin-left: 25px
+}
+.name{
+    color: #333333;
+    margin-right: 6px
+}

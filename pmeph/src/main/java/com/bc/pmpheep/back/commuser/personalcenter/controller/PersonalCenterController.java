@@ -81,14 +81,16 @@ public class PersonalCenterController extends BaseController {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		} 		}
-//		String s= request.getParameter("s");
+		String s=request.getParameter("s");
+		String pageinfo= request.getParameter("pageinfo");
 		String dateinfo= request.getParameter("dateinfo");
 		String online_progress= request.getParameter("online_progress");
 		String is_staging= request.getParameter("is_staging");
 		Map<String, Object> permap=this.getUserInfo();//个人信息
 		List<PersonalNewMessage> listmycol=personalService.queryMyCol(permap);//我的收藏
 		List<PersonalNewMessage> listmyfriend=personalService.queryMyFriend(permap);//我的好友
-//		permap.put("s", s);
+		permap.put("s", s);
+		permap.put("pageinfo", pageinfo);
 		permap.put("dateinfo", dateinfo);
 		permap.put("online_progress", online_progress);
 		permap.put("is_staging", is_staging);
@@ -115,6 +117,7 @@ public class PersonalCenterController extends BaseController {
 			e.printStackTrace();
 		} 		}
 		String s="1";
+		String pageinfo= request.getParameter("pageinfo");
 		String dateinfo= request.getParameter("dateinfo");
 		String online_progress= request.getParameter("online_progress");
 		String is_staging= request.getParameter("is_staging");
@@ -122,6 +125,7 @@ public class PersonalCenterController extends BaseController {
 		List<PersonalNewMessage> listmycol=personalService.queryMyCol(permap);//我的收藏
 		List<PersonalNewMessage> listmyfriend=personalService.queryMyFriend(permap);//我的好友
 		permap.put("s", s);
+		permap.put("pageinfo", pageinfo);
 		permap.put("dateinfo", dateinfo);
 		permap.put("online_progress", online_progress);
 		permap.put("is_staging", is_staging);

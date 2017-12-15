@@ -124,8 +124,10 @@ public class MaterialDetailController extends BaseController{
 		Map<String,Object> perMap = new HashMap<String,Object>();
 		if(type.equals("1")){ //提交
 			perMap.put("is_staging", "0");
+			perMap.put("online_progress", "1");
 		}else{ //暂存
 			perMap.put("is_staging", "1");
+			perMap.put("online_progress", "0");
 		}
 		perMap.put("realname", request.getParameter("realname"));
 		perMap.put("user_id", user_id);
@@ -799,6 +801,106 @@ public class MaterialDetailController extends BaseController{
 			}
 		}
 		String msg = "OK";
+		return msg;
+	}
+	
+	//申报审核页面
+	@RequestMapping("toMaterialAudit")
+	public ModelAndView toMaterialAudit(HttpServletRequest request,
+			HttpServletResponse response){
+		ModelAndView mav = new ModelAndView("commuser/materialdec/toMaterialAudit");
+		//传参  user_id  material_id
+		Map<String,Object> userMap =  this.getUserInfo();
+		String material_id = request.getParameter("material_id");
+		String declaration_id = request.getParameter("declaration_id");
+		String user_id = userMap.get("id").toString();
+		if(material_id == null){			
+			material_id = "120";
+		}
+		Map<String,Object> queryMap = new HashMap<String,Object>();
+		queryMap.put("user_id", user_id);
+		queryMap.put("material_id", material_id); 
+		
+		//1.作家申报表
+		List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
+		gezlList = this.mdService.queryPerson(queryMap);
+		if(declaration_id == null){
+		queryMap.put("declaration_id", gezlList.get(0).get("id"));
+		}else{
+			queryMap.put("declaration_id", declaration_id);
+		}
+		//2.作家申报职位
+		List<Map<String,Object>> tsxzList = new ArrayList<Map<String,Object>>();
+		tsxzList=this.mdService.queryTsxz(queryMap);
+		//3.作家学习经历表
+		List<Map<String,Object>> stuList = new ArrayList<Map<String,Object>>();
+		stuList=this.mdService.queryStu(queryMap);
+		//4.作家工作经历表
+		List<Map<String,Object>> workList = new ArrayList<Map<String,Object>>();
+		workList=this.mdService.queryWork(queryMap);
+		//5.作家教学经历表
+		List<Map<String,Object>> steaList = new ArrayList<Map<String,Object>>();
+		steaList=this.mdService.queryStea(queryMap);
+		//6.作家兼职学术表
+		List<Map<String,Object>> zjxsList = new ArrayList<Map<String,Object>>();
+		zjxsList=this.mdService.queryZjxs(queryMap);
+		//7.作家上套教材参编情况表
+		List<Map<String,Object>> jcbjList = new ArrayList<Map<String,Object>>();
+		jcbjList=this.mdService.queryJcbj(queryMap);
+		//8.作家精品课程建设情况表
+		List<Map<String,Object>> gjkcjsList = new ArrayList<Map<String,Object>>();
+		gjkcjsList=this.mdService.queryGjkcjs(queryMap);
+		//9.作家主编国家级规划教材情况表
+		List<Map<String,Object>> gjghjcList = new ArrayList<Map<String,Object>>();
+		gjghjcList = this.mdService.queryGjghjc(queryMap);
+		//10.作家教材编写情况表
+		List<Map<String,Object>> jcbxList = new ArrayList<Map<String,Object>>();
+		jcbxList=this.mdService.queryJcbx(queryMap);
+		//11.作家科研情况表
+		List<Map<String,Object>> zjkyList = new ArrayList<Map<String,Object>>();
+		zjkyList = this.mdService.queryZjkyqk(queryMap);
+		//12.作家扩展项填报表
+		List<Map<String,Object>> zjkzqkList = new ArrayList<Map<String,Object>>();
+		zjkzqkList = this.mdService.queryZjkzbb(queryMap);
+
+		//填充
+		mav.addObject("gezlList", gezlList.get(0));
+		mav.addObject("tsxzList", tsxzList);
+		mav.addObject("stuList", stuList);
+		mav.addObject("workList", workList);
+		mav.addObject("steaList", steaList);
+		mav.addObject("jcbjList", jcbjList);
+		mav.addObject("gjkcjsList", gjkcjsList);
+		mav.addObject("jcbxList", jcbxList);
+		mav.addObject("gjghjcList", gjghjcList);
+		mav.addObject("zjkyList", zjkyList);
+		mav.addObject("zjxsList", zjxsList);
+		mav.addObject("zjkzqkList", zjkzqkList);
+		return mav;
+	}
+	
+	//申报审核
+	@RequestMapping("doMaterialAudit")
+	@ResponseBody
+	public String doMaterialAudit(HttpServletRequest request,
+			HttpServletResponse response){
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		String declaration_id = request.getParameter("declaration_id");
+		String type = request.getParameter("type");  //类型
+		Map<String,Object> userMap =  this.getUserInfo();
+		String user_id = userMap.get("id").toString();
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+		String date = df.format(new Date());
+		String msg = "";
+		
+		paramMap.put("declaration_id", declaration_id);
+		paramMap.put("online_progress", type);
+		paramMap.put("auth_user_id", user_id);
+		paramMap.put("auth_date", date);
+		int count = this.mdService.updateDeclaration(paramMap);
+		if(count>0){
+			msg = "OK";
+		}
 		return msg;
 	}
 	

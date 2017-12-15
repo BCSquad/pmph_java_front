@@ -70,12 +70,12 @@
                                 <div class="shangright">${listmon.gmt_update}</div>
                             </div>
                             <div class="dtzhong">
-                                <c:if test="${listmon.online_progress==3}"><span id="xinxiaoxi">	</span> <span
-                                        class="rlan">恭喜！您于${listmon.gmt_create}申报的《${listmon.material_name}》编委审核已通过。</span>
-                                    <span id="xiaoxitongguo"></span></c:if>
-                                <c:if test="${listmon.online_progress==2}"><span id="xinxiaoxi">	</span> <span
-                                        class="rlan">非常抱歉！您于${listmon.gmt_create} 提交的《${listmon.material_name}》选题被退回，请您尽快检查修改！</span>
-                                    <span id="xiaoxituihui"></span></c:if>
+                                <c:if test="${listmon.online_progress==3}"> 
+                                <span  class="rlan"> <span id="xinxiaoxi"></span><span id="xiaoxitongguo"></span>恭喜！您于${listmon.gmt_create}申报的《${listmon.material_name}》编委审核已通过。</span>
+                                    </c:if>
+                                <c:if test="${listmon.online_progress==2}"> 
+                                <span class="rlan"><span id="xinxiaoxi"></span><span id="xiaoxituihui"></span>非常抱歉！您于${listmon.gmt_create} 提交的《${listmon.material_name}》选题被退回，请您尽快检查修改！</span>
+                                    </c:if>
                             </div>
                             <div class="dtxia"></div>
                             <div id="tzxian"></div>

@@ -1,5 +1,39 @@
   $(document).ready(function () {
 
+	    
+
+          document.getElementById("dt").className = "xz";
+          $("#suibiwenzhang").hide();
+          $("#zuixinshuping").hide();
+
+          $("#dt").click(function () {
+              $("#dongtai").show();
+              document.getElementById("dt").className = "xz";
+              $("#suibiwenzhang").hide();
+              $("#zuixinshuping").hide();
+              document.getElementById("sbwz").className = "dtl";
+              document.getElementById("zxsp").className = "dtl";
+          });
+
+          $("#sbwz").click(function () {
+              $("#suibiwenzhang").show();
+              document.getElementById("sbwz").className = "xz";
+              $("#dongtai").hide();
+              $("#zuixinshuping").hide();
+              document.getElementById("dt").className = "dtl";
+              document.getElementById("zxsp").className = "dtl";
+          });
+
+          $("#zxsp").click(function () {
+              $("#zuixinshuping").show();
+              document.getElementById("zxsp").className = "xz";
+              $("#suibiwenzhang").hide();
+              $("#dongtai").hide();
+              document.getElementById("sbwz").className = "dtl";
+              document.getElementById("dt").className = "dtl";
+          });
+
+	  
             $("#gengduo").hide();   
 
             $("#jiazaigengduo").click(function () {

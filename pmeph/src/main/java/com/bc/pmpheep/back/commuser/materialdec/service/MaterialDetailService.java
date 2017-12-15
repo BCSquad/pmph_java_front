@@ -142,4 +142,9 @@ public interface MaterialDetailService {
 	 * 清除所有关联表
 	 */
 	public int delGlxx(Map<String,Object> map);
+	
+	/**
+	 * 申报审核
+	 */
+	public int updateDeclaration(Map<String,Object> map);
 }

@@ -33,10 +33,12 @@
 			<div class="item">
 				<span>图书：</span>
 				<span>${list.textbook_name} — ${list.preset_position}</span>
-				<span><a>${list.syllabus_name}</a></span>
+				<span>
+					<a href="javascript:" class="filename"  onclick="downLoadProxy('${list.syllabus_id}')">${list.syllabus_name}</a>
+				</span>
 			</div>
 			</c:forEach>
-		<div>
+		</div>
 		<!-- 专家信息-->
 		<div class="sbxq_item1">
 			<div>
@@ -70,7 +72,7 @@
 					</tr>
 				</table>
 			</div>
-		<div>
+		</div>
 		<!--主要学习经历-->
 		<div class="sbxq_item" id="zyxxjl">
 			<div>
@@ -424,7 +426,6 @@
 		<div class="button">
 			<div class="bt_tj">返回申报列表</div>
 		</div>
-		</form>
 	</div>
 </div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
