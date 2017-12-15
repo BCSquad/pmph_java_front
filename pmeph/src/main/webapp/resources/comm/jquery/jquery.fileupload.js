@@ -2282,9 +2282,7 @@ $.fn.uploadFile = function (option) {
 
         var file_input;
         var add_input = function ($ele) {
-        	debugger;
             $ele.parent().find("#" + $ele.attr("id") + "_upload").remove();
-
             file_input = $("<input class='hidden-upload' name='file' type='file' id='" + $ele.attr("id") + "_upload'/>");
             file_input.css("width", $ele.outerWidth());
             file_input.css("height", $ele.outerHeight());
