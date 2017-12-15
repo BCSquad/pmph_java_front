@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.bc.pmpheep.back.authadmin.user.bean.PmphUser;
-import com.bc.pmpheep.back.authadmin.user.bean.WriterUser;
-import com.bc.pmpheep.back.authadmin.user.service.PmphUserService;
-import com.bc.pmpheep.back.authadmin.user.service.WriterUserService;
+import com.bc.pmpheep.back.authadmin.usermanage.bean.PmphUser;
+import com.bc.pmpheep.back.authadmin.usermanage.bean.WriterUser;
+import com.bc.pmpheep.back.authadmin.usermanage.service.PmphUserService;
+import com.bc.pmpheep.back.authadmin.usermanage.service.WriterUserService;
 import com.bc.pmpheep.back.commuser.mymessage.bean.DialogueVO;
 import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessage;
 import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
@@ -34,10 +34,10 @@ public class MyMessageServiceImpl implements MyMessageService {
 	@Qualifier("com.bc.pmpheep.back.commuser.mymessage.service.MessageAttachmentServiceImpl")
 	MessageAttachmentService messageAttachmentService;
 	@Autowired
-	@Qualifier("com.bc.pmpheep.back.authadmin.user.service.PmphUserServiceImpl")
+	@Qualifier("com.bc.pmpheep.back.authadmin.usermanage.service.PmphUserServiceImpl")
 	PmphUserService pmphUserService;
 	@Autowired
-	@Qualifier("com.bc.pmpheep.back.authadmin.user.service.WriterUserServiceImpl")
+	@Qualifier("com.bc.pmpheep.back.authadmin.usermanage.service.WriterUserServiceImpl")
 	WriterUserService writerUserService;
 
 	@Override

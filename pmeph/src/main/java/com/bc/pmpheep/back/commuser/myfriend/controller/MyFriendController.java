@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bc.pmpheep.back.authadmin.user.bean.WriterUser;
+import com.bc.pmpheep.back.authadmin.usermanage.bean.WriterUser;
 import com.bc.pmpheep.back.commuser.myfriend.bean.WriterFriendVO;
 import com.bc.pmpheep.back.commuser.myfriend.service.MyFriendService;
 import com.bc.pmpheep.back.util.CollectionUtil;
