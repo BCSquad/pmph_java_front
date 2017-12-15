@@ -91,9 +91,9 @@
                 <img src="${ctx}/statics/image/putongyhtouxiang.png" alt=""/>
                 <span class="modify">修改头像</span>
                 <div class="links">
-                    <a href="#" class="manager"
+                    <a href="javascript:;" class="manager"
                        onclick="window.location='${ctx}/admininfocontroller/toadminattest.action'">学校管理员认证</a>
-                    <a href="#" class="password"
+                    <a href="javascript:;" class="password"
                        onclick="window.location='${ctx}/admininfocontroller/tochangepwd.action'">修改密码</a>
                 </div>
                 <div style="clear: both"></div>

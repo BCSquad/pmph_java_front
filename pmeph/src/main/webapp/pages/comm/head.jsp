@@ -48,9 +48,9 @@
             %>
             <c:if test="${userInfo == null}">
                 <div class="login-logout">
-                    <a href="<c:url value="/pages/comm/login.jsp"/>">登录</a>
+                    <a href="<c:url value="/pages/comm/login.jsp?refer="/><%=request.getHeader("Referer")%>">登录</a>
                     <span>/</span>
-                    <a href="<c:url value="/pages/comm/login.jsp"/>">注册</a>
+                    <a href="<c:url value="/pages/comm/login.jsp?refer="/><%=request.getHeader("Referer")%>">注册</a>
                     <img src="${ctx}/statics/image/question.png" alt="">
                 </div>
             </c:if>

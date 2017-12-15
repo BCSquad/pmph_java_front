@@ -128,7 +128,7 @@ function sendNewMsg (){
 		var frendId =$("#frendId").val();
 		$.ajax({
 	        type:'post',
-	        url :contextpath+'/user/senNewMsg.action',
+	        url :contextpath+'/usermanage/senNewMsg.action',
 	        async:false,
 	        dataType:'json',
 	        data:{
@@ -248,7 +248,7 @@ function formatDate(nS,str) {
 	//点击查询
 	function query(){
 		var username=encodeURI(encodeURI($("#ssk").val()));
-		window.location.href = '<%=basePath%>/user/writerLists.action?username='+username;
+		window.location.href = '<%=basePath%>/usermanage/writerLists.action?username='+username;
 	}
 	var pageSize =$("#pages").val();
             Page({
@@ -291,7 +291,7 @@ function formatDate(nS,str) {
            });
         //分页
         function pageFun(pageSize,pageNumber){
-        	window.location.href = '<%=basePath%>/user/writerLists.action?pageSize='+pageSize+'&pageNumber='+pageNumber;
+        	window.location.href = '<%=basePath%>/usermanage/writerLists.action?pageSize='+pageSize+'&pageNumber='+pageNumber;
         }
     </script>
 	<div style="background-color: white;width: 100%;padding: 0;margin: 0;height: 220px;border: none;overflow: hidden;">
