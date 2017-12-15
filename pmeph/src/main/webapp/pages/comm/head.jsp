@@ -35,7 +35,10 @@
             <img class="download-pic" src="${ctx}/statics/image/APP-download.png">
 
             <%
-                Map<String, Object> userInfo = (Map<String, Object>) request.getSession().getAttribute(Const.SESSION_USER_CONST);
+                Map<String, Object> userInfo = null;
+                if ("1".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
+                    userInfo = (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_WRITER);
+                }
 
                 if (userInfo == null || userInfo.isEmpty()) {
                     request.setAttribute("userInfo", null);

@@ -3,19 +3,19 @@ package com.bc.pmpheep.back.util;
 import org.springframework.context.ApplicationContext;
 
 /**
- * 
+ *
  * <pre>
  * 功能描述：常量工具类
  * 使用示范：
- * 
- * 
+ *
+ *
  * @author (作者) nyz
- * 
+ *
  * @since (该版本支持的JDK版本) ：JDK 1.6或以上
  * @version (版本) 1.0
  * @date (开发日期) 2017-9-20
- * @modify (最后修改时间) 
- * @修改人 ：nyz 
+ * @modify (最后修改时间)
+ * @修改人 ：nyz
  * @审核人 ：
  * </pre>
  */
@@ -143,7 +143,7 @@ public class Const {
     public static final String       LOGIN_SYS_USER_IS_ADMIN    = "系统管理员";
     /**
      * 学校审核
-     * 
+     *
      * 0=待审核/1=通过/2=退回
      */
     public static final Integer      ORG_USER_PROGRESS_0        = 0;
@@ -151,7 +151,7 @@ public class Const {
     public static final Integer      ORG_USER_PROGRESS_2        = 2;
     /**
      * 教师审核
-     * 
+     *
      * 0=未提交/1=已提交/2=被退回/3=通过
      */
     public static final Short        WRITER_PROGRESS_0          = 0;
@@ -203,6 +203,8 @@ public class Const {
     public static final Long         CMS_CATEGORY_ID_3          = 3l;
 
 
-    public static final String       SESSION_USER_CONST         ="SESSION_USER_CONST_";
+    public static final String       SESSION_USER_CONST_ORGUSER ="SESSION_USER_CONST_ORGUSER";
+    public static final String       SESSION_USER_CONST_WRITER  ="SESSION_USER_CONST_WRITER";
 
+    public static final String       SESSION_USER_CONST_TYPE    ="SESSION_USER_CONST_TYPE";
 }

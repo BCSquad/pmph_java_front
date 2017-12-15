@@ -34,7 +34,14 @@ public class SSOLoginoutController {
         }
 
         HttpSession session = request.getSession();
-        session.setAttribute(Const.SESSION_USER_CONST, user);
+        if ("1".equals(usertype)) {
+            session.setAttribute(Const.SESSION_USER_CONST_WRITER, user);
+            session.setAttribute(Const.SESSION_USER_CONST_TYPE, "1");
+        } else if ("2".equals(usertype)) {
+            session.setAttribute(Const.SESSION_USER_CONST_ORGUSER, user);
+            session.setAttribute(Const.SESSION_USER_CONST_TYPE, "2");
+        }
+
         if (StringUtils.isEmpty(request.getParameter("refer"))) {
             response.sendRedirect(request.getContextPath() + "/");
         } else {
@@ -45,10 +52,18 @@ public class SSOLoginoutController {
     @RequestMapping("logout")
     public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
-        session.removeAttribute(Const.SESSION_USER_CONST);
-        String headReferer = request.getHeader("Referer");
-        String refer = StringUtils.isEmpty(headReferer) ? request.getHeader("referer") : headReferer;
-        response.sendRedirect(refer);
+        if ("1".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
+            session.removeAttribute(Const.SESSION_USER_CONST_WRITER);
+            String headReferer = request.getHeader("Referer");
+            String refer = StringUtils.isEmpty(headReferer) ? request.getHeader("referer") : headReferer;
+            response.sendRedirect(refer);
+        } else if ("2".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
+            session.removeAttribute(Const.SESSION_USER_CONST_ORGUSER);
+            String headReferer = request.getHeader("Referer");
+            String refer = StringUtils.isEmpty(headReferer) ? request.getHeader("referer") : headReferer;
+            response.sendRedirect(refer);
+        }
+
     }
 
 }

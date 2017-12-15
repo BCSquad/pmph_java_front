@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Arrays;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -31,7 +33,12 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
 
         HttpSession session = httpServletRequest.getSession();
-        Object userInfo = session.getAttribute(Const.SESSION_USER_CONST);
+        Object userInfo = null;
+        if ("1".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
+            userInfo = session.getAttribute(Const.SESSION_USER_CONST_WRITER);
+        } else if ("2".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
+            userInfo = session.getAttribute(Const.SESSION_USER_CONST_ORGUSER);
+        }
 
         boolean isAjax = "XMLHttpRequest".equalsIgnoreCase(httpServletRequest.getHeader("X-Requested-With"));
 
@@ -46,7 +53,13 @@ public class LoginInterceptor implements HandlerInterceptor {
                 responseBean.setData(httpServletRequest.getContextPath() + redirectUrl + "?refer=" + refer);
                 httpServletResponse.getWriter().write(JSON.toJSONString(responseBean));
             } else {
-                refer = URLEncoder.encode(httpServletRequest.getContextPath() + httpServletRequest.getServletPath(), "UTF-8");
+                StringBuilder builder = new StringBuilder("");
+                Map<String, String[]> map = (Map<String, String[]>) httpServletRequest.getParameterMap();
+                for (String name : map.keySet()) {
+                    String[] values = map.get(name);
+                    builder.append(name + "=" + (values.length > 0 ? values[0] : "") + "&");
+                }
+                refer = URLEncoder.encode(httpServletRequest.getContextPath() + httpServletRequest.getServletPath() + "?" + builder.toString(), "UTF-8");
                 httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + redirectUrl + "?refer=" + refer);
             }
             return false;

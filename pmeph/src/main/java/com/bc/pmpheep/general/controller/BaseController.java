@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.bc.pmpheep.back.util.Const;
 import org.apache.commons.lang3.StringUtils;
@@ -22,13 +23,26 @@ public class BaseController {
 
     protected Map<String, Object> getUserInfo() {
         HttpServletRequest request =
-        ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        return (Map<String, Object>) request.getSession().getAttribute(Const.SESSION_USER_CONST);
+                ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
+        if ("1".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
+            return (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_WRITER);
+        } else if ("2".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
+            return (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_ORGUSER);
+        }
+        return null;
+    }
+
+    protected String getUserType() {
+        HttpServletRequest request =
+                ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
+        return session.getAttribute(Const.SESSION_USER_CONST_TYPE) == null ? "-1" : session.getAttribute(Const.SESSION_USER_CONST_TYPE).toString();
     }
 
     @ExceptionHandler(Exception.class)
     public ModelAndView otherException(Exception ex, HttpServletRequest request,
-    HttpServletResponse response) {
+                                       HttpServletResponse response) {
         ex.printStackTrace();
         response.setStatus(500);
         if (StringUtils.isEmpty(request.getHeader("x-requested-with"))) {

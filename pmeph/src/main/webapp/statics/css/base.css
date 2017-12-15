@@ -208,6 +208,7 @@ body {
     height: 110px;
     margin: auto;
     margin-top: 20px;
+    text-align: center;
 }
 
 .head .option {
@@ -222,6 +223,7 @@ body {
 
 .head .option.out {
     margin-top: 4px;
+    text-align: center;
     color: red;
 }
 
