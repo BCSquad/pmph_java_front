@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/personalcenter/PersonalHome.css" type="text/css">
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.js"></script>
-      <script src="${ctx}/resources/comm/base.js"></script>
+    <script src="${ctx}/resources/commuser/personalcenter/PersonalHome.js"></script>
+    <script src="${ctx}/resources/comm/base.js"></script>
 
     
 </head>
