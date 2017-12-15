@@ -76,7 +76,7 @@ public class InfoReportController extends BaseController {
 		   int total=infoReportService.getInfoReportCount();
 		   if(count!=null && !count.equals("")&&pattern.matcher(count).matches()){
 			   num=Integer.parseInt(count)*size;
-			   if(num>total){
+			   if(num>=total){
 				   num=0;
 				   map.put("count", "0");
 			   }else{

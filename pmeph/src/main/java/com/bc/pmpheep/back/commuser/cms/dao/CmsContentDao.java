@@ -3,7 +3,6 @@ package com.bc.pmpheep.back.commuser.cms.dao;
 import java.util.List;
 
 import com.bc.pmpheep.back.commuser.cms.bean.CmsContentVO;
-import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
 import com.bc.pmpheep.back.plugin.PageParameter;
 
 /**

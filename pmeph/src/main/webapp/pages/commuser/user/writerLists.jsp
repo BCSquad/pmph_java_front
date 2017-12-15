@@ -14,44 +14,22 @@
     <title>用户管理</title>
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css"/>
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
+    <link href="${ctx}/statics/css/jquery.selectlist.css" rel="stylesheet" type="text/css" />
     <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.pager.js"></script>
     <script src="${ctx}/resources/comm/base.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/user/writerLists.css" type="text/css">
+    
+    
 </head>
 <body>
-
-<div class="org-head">
-    <div >
-        <div class="div-content">
-            <div id="div-titletop">
-                <span class="top-lable1">欢迎访问人教e卫平台！</span>
-                <span class="top-lable2">∨</span>
-                <span class="top-lable2">&nbsp</span>
-                <span class="top-lable2">哈尔滨医科大学的账号</span>
-                <span class="top-lable2">&nbsp&nbsp&nbsp&nbsp&nbsp</span>
-                <span class="top-lable2">下载手机客户端！</span>
-            </div>
-        </div>
-    </div>
-    <div class="div-menu">
-        <div class="div-content">
-            <div style="width:176px;float:left;"><img alt="" src="/pmeph/statics/image/_logo.jpg"/></div>
-            <div style="width:90px;float:left;">&nbsp</div>
-            <div class="div-menu-child "     >待办事项</div>
-            <div class="div-menu-child "       >申报资料审核</div>
-            <div class="div-menu-child "	 onclick="window.location.href='/pmeph/teacherauth/toPage.action'">教师认证</div>
-            <div class="div-menu-child  div-menu-child-click" onclick="window.location.href='/pmeph/user/writerLists.action'">用户管理</div>
-            <div class="div-menu-child "     onclick="window.location.href='/pmeph/user/writerLists.action'">账户设置</div>
-            <div class="div-menu-child "     onclick="window.location.href='/pmeph/teacherauth/toPage.action'">消息</div>
-        </div>
-    </div>
-</div>
-
-<div class="body">
+<jsp:include page="/pages/comm/headGreenBackGround.jsp">
+    <jsp:param name="pageTitle" value="usermanage"></jsp:param>
+</jsp:include>
  <div class="b hidden" id="box" style="display: none">
          <div class="hiddenX hidden" id="close">
              <img onclick="hide()" style="width:100%;height:100%;cursor: pointer;" src="${ctx}/statics/image/closediv.png">
@@ -282,6 +260,13 @@ function formatDate(nS,str) {
                 }
             });
             $(function () {
+            	$('#sstj').selectlist({
+                    zIndex: 10,
+                    width: 208,
+                    height: 40,
+                    optionHeight: 40
+                });
+            	
                 $('#pages').selectlist({
                     zIndex: 10,
                     width: 110,

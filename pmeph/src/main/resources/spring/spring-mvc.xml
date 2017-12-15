@@ -40,6 +40,15 @@
             <!--信息快报详情点赞、收藏  -->
             <mvc:mapping path="/inforeport/add*"/>
             
+            <!--申报资料审核（机构用户）第一主编选择编委 教师认证 添加好友 书籍查询 书籍列表 学校教师认证-->
+            <mvc:mapping path="/applyDocAudit/*"/>
+            <mvc:mapping path="/chooseEditor/*"/>
+            <mvc:mapping path="/teacherauth/*"/>
+            <mvc:mapping path="/addFriend/*"/>
+            <mvc:mapping path="/booksearch/likeSwitch*"/>
+            <mvc:mapping path="/teacherCertification/*"/>
+            <!--  -->
+            
             <bean class="com.bc.pmpheep.back.interceptor.LoginInterceptor">
                 <property name="redirectUrl" value="/pages/comm/login.jsp"/>
             </bean>
