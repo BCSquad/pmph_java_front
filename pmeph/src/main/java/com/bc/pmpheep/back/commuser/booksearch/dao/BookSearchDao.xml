@@ -22,7 +22,15 @@
 		FROM
 		book AS b
 		left Join book_detail AS bd ON b.id = bd.book_id
-		left join book_user_like as l on b.id= l.book_id and l.writer_id = ${parameter.uid}
+		left join book_user_like as l on b.id= l.book_id and 
+		<choose>
+			<when test="parameter.uid != null and parameter.uid != '' ">
+				l.writer_id = ${parameter.uid}
+			</when>
+			<otherwise>
+				1=2
+			</otherwise>
+		</choose>
 		<where>
 			<if test="parameter.queryName != null and parameter.queryName != '' ">
 				and b.bookname like concat("%",#{parameter.queryName},"%")

@@ -71,7 +71,11 @@ public class BookSearchController extends BaseController {
 		Integer pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		Integer pageSize = Integer.parseInt(request.getParameter("pageSize"));
 		String queryName = request.getParameter("queryName");
-		String uid = getUserInfo().get("id").toString();
+
+		String uid = null;
+		if (user != null && getUserInfo().get("id")!=null && getUserInfo().get("id").toString() != null) {
+			uid = getUserInfo().get("id").toString();
+		}
 		String contextpath = request.getParameter("contextpath");
 		
 		Map<String, Object> paraMap = new HashMap<String, Object>();
