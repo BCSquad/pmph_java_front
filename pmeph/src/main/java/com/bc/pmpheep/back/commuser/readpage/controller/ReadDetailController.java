@@ -47,6 +47,7 @@ public class ReadDetailController extends BaseController{
 	public ModelAndView move(HttpServletRequest request){
 		ModelAndView modelAndView=new ModelAndView();
 		String id=request.getParameter("id");
+//		id="168";
 		Map<String, Object> supMap=readDetailService.querySupport(id);
 		Map<String, Object> map=readDetailService.queryReadBook(id);
 		if(("DEFAULT").equals(map.get("image_url"))){
@@ -66,14 +67,30 @@ public class ReadDetailController extends BaseController{
 			}
 		}
 		Map<String, Object> user=getUserInfo();
-		Map<String, Object> zmap=new HashMap<String, Object>();
-		zmap.put("book_id", id);
-		zmap.put("writer_id", user.get("id"));
-		List<Map<String, Object>> list=readDetailService.queryLikes(zmap);
-		if(list.size()>0){
-			modelAndView.addObject("flag", "yes");
+		if(user!=null){
+			Map<String, Object> zmap=new HashMap<String, Object>();
+			zmap.put("book_id", id);
+			zmap.put("writer_id", user.get("id"));
+			List<Map<String, Object>> list=readDetailService.queryLikes(zmap);
+			Map<String, Object> amap=readDetailService.queryDedaultFavorite(user.get("id").toString());
+			if(amap==null){
+				modelAndView.addObject("mark", "no");
+			}else{
+				int x=readDetailService.queryMark(id,amap.get("id").toString(),user.get("id").toString());
+				if(x>0){
+					modelAndView.addObject("mark", "yes");	
+				}else{
+					modelAndView.addObject("mark", "no");	
+				}
+			}
+			if(list.size()>0){
+				modelAndView.addObject("flag", "yes");
+			}else{
+				modelAndView.addObject("flag","no");
+			}
 		}else{
 			modelAndView.addObject("flag","no");
+			modelAndView.addObject("mark", "no");
 		}
 		modelAndView.addObject("auList", auList);
 		if(auList.size()<9){
@@ -90,17 +107,6 @@ public class ReadDetailController extends BaseController{
 				}
 			}
 			modelAndView.addObject("tMaps", tMaps);
-		}
-		Map<String, Object> amap=readDetailService.queryDedaultFavorite(user.get("id").toString());
-		if(amap==null){
-			modelAndView.addObject("mark", "no");
-		}else{
-			int x=readDetailService.queryMark(id,amap.get("id").toString(),user.get("id").toString());
-			if(x>0){
-				modelAndView.addObject("mark", "yes");	
-			}else{
-				modelAndView.addObject("mark", "no");	
-			}
 		}
 		modelAndView.addObject("id", id);
 		modelAndView.addObject("eMap", eMap);
