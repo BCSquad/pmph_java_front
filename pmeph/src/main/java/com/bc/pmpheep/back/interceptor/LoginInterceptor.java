@@ -43,11 +43,11 @@ public class LoginInterceptor implements HandlerInterceptor {
                 ResponseBean<String> responseBean = new ResponseBean<String>();
                 responseBean.setCode(ResponseBean.NO_PERMISSION);
                 responseBean.setMsg("user is not login");
-                responseBean.setData(redirectUrl + "?refer=" + refer);
+                responseBean.setData(httpServletRequest.getContextPath() + redirectUrl + "?refer=" + refer);
                 httpServletResponse.getWriter().write(JSON.toJSONString(responseBean));
             } else {
                 refer = URLEncoder.encode(httpServletRequest.getContextPath() + httpServletRequest.getServletPath(), "UTF-8");
-                httpServletResponse.sendRedirect(redirectUrl + "?refer=" + refer);
+                httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + redirectUrl + "?refer=" + refer);
             }
             return false;
         } else {
