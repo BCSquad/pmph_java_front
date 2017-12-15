@@ -23,14 +23,17 @@
     <mvc:interceptors>
         <bean class="com.bc.pmpheep.back.interceptor.ProcessInterceptor"></bean>
 
-        <mvc:interceptor >
-            <mvc:mapping path="/personalhomepage/*"/>
-            <mvc:mapping path="/writerArticle/*"/>
-            <mvc:mapping path="/message/*"/>
-            <bean class="com.bc.pmpheep.back.interceptor.LoginInterceptor">
-                <property name="redirectUrl" value="/pages/comm/login.jsp"/>
-            </bean>
-        </mvc:interceptor>
+
+        <bean class="com.bc.pmpheep.back.interceptor.LoginInterceptor">
+            <property name="redirectUrl" value="/pages/comm/login.jsp"/>
+            <property name="pathWithUsertypeMaps">
+                <set>
+                    <value>/message/* -> 1</value><!--作家用户消息模块 -->
+                    <value>/writerArticle/* -> 1</value><!--作家写文章 -->
+                    <value>/personalhomepage/* -> 1</value><!--作家个人中心 -->
+                </set>
+            </property>
+        </bean>
     </mvc:interceptors>
 
     <mvc:annotation-driven/>
@@ -44,5 +47,14 @@
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="defaultEncoding" value="utf-8"/>
         <property name="maxUploadSize" value="104857600"/>
+    </bean>
+
+    <bean id="customEditorConfigurer" class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="customEditors">
+            <map>
+                <entry key="com.bc.pmpheep.back.interceptor.LoginInterceptor.PathWithUsertypeMap"
+                       value="com.bc.pmpheep.back.interceptor.LoginInterceptor.PathWithUsertypeMapPropertyEditor"></entry>
+            </map>
+        </property>
     </bean>
 </beans>
