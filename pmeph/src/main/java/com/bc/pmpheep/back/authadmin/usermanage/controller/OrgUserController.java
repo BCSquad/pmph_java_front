@@ -30,10 +30,10 @@ import java.util.Map;
 public class OrgUserController extends  com.bc.pmpheep.general.controller.BaseController{
 	
 	@Autowired
-	@Qualifier("com.bc.pmpheep.back.commuser.user.service.WriterUserServiceImpl")
+	@Qualifier("com.bc.pmpheep.back.authadmin.usermanage.service.WriterUserServiceImpl")
 	private WriterUserService writerUserService;
 	@Autowired
-	@Qualifier("com.bc.pmpheep.back.commuser.user.service.OrgUserServiceImpl")
+	@Qualifier("com.bc.pmpheep.back.authadmin.usermanage.service.OrgUserServiceImpl")
 	private OrgUserService orgUserService;
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.mymessage.service.MyMessageServiceImpl")

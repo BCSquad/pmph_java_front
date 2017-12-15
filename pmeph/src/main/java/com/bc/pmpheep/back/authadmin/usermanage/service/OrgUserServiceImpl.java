@@ -19,7 +19,7 @@ import java.util.List;
  * @author tyc
  * 
  */
-@Service("com.bc.pmpheep.back.commuser.user.service.OrgUserServiceImpl")
+@Service("com.bc.pmpheep.back.authadmin.usermanage.service.OrgUserServiceImpl")
 public class OrgUserServiceImpl extends BaseService implements OrgUserService {
     @Autowired
     private OrgUserDao orgUserDao;

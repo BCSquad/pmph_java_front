@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
  * @审核人 ：
  *
  */
-@Service("com.bc.pmpheep.back.commuser.user.service.PmphUserServiceImpl")
+@Service("com.bc.pmpheep.back.authadmin.usermanage.service.PmphUserServiceImpl")
 public class PmphUserServiceImpl implements PmphUserService {
 	@Autowired
     PmphUserDao pmphUserDao;

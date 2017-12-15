@@ -25,7 +25,7 @@ import java.util.Map;
 public class TeacherCertification extends BaseController {
 
     @Autowired
-    @Qualifier("com.bc.pmpheep.back.commuser.user.service.WriterUserServiceImpl")  
+    @Qualifier("com.bc.pmpheep.back.authadmin.usermanage.service.WriterUserServiceImpl")
     private WriterUserService writerUserService;
 
     /**

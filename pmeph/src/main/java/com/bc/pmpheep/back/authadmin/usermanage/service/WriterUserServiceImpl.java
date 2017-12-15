@@ -41,7 +41,7 @@ import java.util.List;
  * @审核人 ：
  *
  */
-@Service("com.bc.pmpheep.back.commuser.user.service.WriterUserServiceImpl")
+@Service("com.bc.pmpheep.back.authadmin.usermanage.service.WriterUserServiceImpl")
 public class WriterUserServiceImpl implements WriterUserService {
 	@Autowired
 	private WriterUserDao writerUserDao;
