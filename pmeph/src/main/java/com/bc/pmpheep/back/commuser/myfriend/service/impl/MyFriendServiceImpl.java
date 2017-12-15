@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.bc.pmpheep.back.authadmin.user.bean.WriterUser;
 import com.bc.pmpheep.back.commuser.myfriend.bean.WriterFriendVO;
 import com.bc.pmpheep.back.commuser.myfriend.dao.MyFriendDao;
 import com.bc.pmpheep.back.commuser.myfriend.service.MyFriendService;
-import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
 import com.bc.pmpheep.back.util.ObjectUtil;
 import com.bc.pmpheep.back.util.RouteUtil;
 import com.bc.pmpheep.service.exception.CheckedExceptionBusiness;
