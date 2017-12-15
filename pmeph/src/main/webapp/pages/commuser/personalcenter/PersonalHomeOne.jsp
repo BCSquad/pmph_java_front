@@ -64,17 +64,17 @@
                 <div id="dhxian"></div>
                
                 <div id="jiaocaishenbao">
-                    <div class="jcsbssl">
-                        <span id="jcsbqb" style="cursor:pointer">全部</span><span id="jcsbwdsb" onclick="listoction();" style="cursor:pointer">我的申报</span><span class="jcsbsbzt"  onclick="listoction1();" style="cursor:pointer">正在进行</span><span
-                            class="jcsbsbzt"  style="cursor:pointer" onclick="listoction2();">已结束</span>
-                        <span class="jcsbsbzt"  onclick="listoction3();" style="cursor:pointer">暂存</span><span class="jcsbsbzt"  onclick="listoction4();" style="cursor:pointer">已提交</span><input type="text" id="wdsbssk" value="${serchbox}">
+                    <div class="jcsbssl"><input type="hidden" id="pageinfo" value="${permap.pageinfo}">
+                        <span id="jcsbqb" style="cursor:pointer">全部</span><span id="jcsbwdsb" onclick="listoction();" style="cursor:pointer">我的申报</span><span class="jcsbsbzt" id="sbzzjx" onclick="listoction1();" style="cursor:pointer">正在进行</span><span
+                            class="jcsbsbzt" id="sbyjs" style="cursor:pointer" onclick="listoction2();">已结束</span>
+                        <span class="jcsbsbzt" id="sbzc" onclick="listoction3();" style="cursor:pointer">暂存</span><span class="jcsbsbzt"  onclick="listoction4();" id="sbytj" style="cursor:pointer">已提交</span><input type="text" id="wdsbssk" value="${serchbox}">
                     </div>
                     <div class="shenbaoliebiao">
                         <ul class="scul">
                             <c:forEach items="${listbookjoins}" begin='0' end='7' var="list" varStatus="status">
                                 <li class="leftlb">
 
-                                    <c:if test="${list.iamin==0&&list.online_progress==0}">
+                                    <c:if test="${list.iamin==0&&list.datebase<0}">
                                         <div class="mleft">
                                             <div class="ysbrs">
                                                 <div class="baomingrenshu"><span
@@ -87,7 +87,7 @@
                                             </div>
                                         </div>
                                     </c:if>
-                                    <c:if test="${list.iamin==1&&list.online_progress==1}">
+                                    <c:if test="${list.iamin==1&&list.online_progress==1&&list.datebase<0}">
                                         <div class="mleft1">
                                             <div class="ysbrs1">
                                                 <div class="baomingrenshu1"><span
@@ -101,7 +101,7 @@
                                         </div>
                                     </c:if>
 
-                                    <c:if test="${list.iamin==1&&list.online_progress==3}">
+                                    <c:if test="${list.iamin==1&&list.online_progress==3&&list.datebase<0}">
                                         <div class="mleft2">
                                             <div class="ysbrs2">
                                                 <div class="baomingrenshu2"><span
@@ -118,7 +118,7 @@
 </c:set>  
                                     
                                     
-									<c:if test="${nowDate > createDate }">
+									<c:if test="${list.datebase>0}">
 									<div class="mleft3">
                                     <div class="ysbrs3">
                                         <div class="baomingrenshu3"><span class="canjiarenshu3">${list.exmember}</span><span>人</span>
@@ -143,80 +143,7 @@
                                 </li>
                             </c:forEach>
 
-                            <li class="rightlb">
-                                <div class="mleft1">
-                                    <div class="ysbrs1">
-                                        <div class="baomingrenshu1"><span class="canjiarenshu1">137</span><span>人</span>
-                                            <br/><span class="ybmcj1">已报名参加</span></div>
-                                    </div>
-                                    <div class="bmcj1">
-                                        <div class="bmcjan1"><span>进度查询</span></div>
-                                        <div class="cksbb1">查看申报表</div>
-                                    </div>
-                                </div>
-
-                                <div class="mright">
-                                    <div class="rshang">
-                                        <div class="rshangn">全国高等学校本科应用心理学专业第三轮规划教材</div>
-                                    </div>
-                                    <div class="rxia">
-                                        <div class="rxian">截止日期： 2017.12.13</div>
-                                    </div>
-                                </div>
-
-
-                            </li>
-                            <!-- </ul>
-                         </div>-->
-
-                            <!--<div class="shenbaoliebiao">
-                                <ul class="scul">-->
-                            <li class="leftlb">
-
-                                <div class="mleft2">
-                                    <div class="ysbrs2">
-                                        <div class="baomingrenshu2"><span class="canjiarenshu2">360</span><span>人</span>
-                                            <br/><span class="ybmcj2">已报名参加</span></div>
-                                    </div>
-                                    <div class="bmcj2">
-                                        <div class="bmcjan2"><span>查看申报表</span></div>
-                                    </div>
-                                </div>
-
-                                <div class="mright">
-                                    <div class="rshang">
-                                        <div class="rshangn">全国高等学校五年制临床医学专业第九轮规划材料<img
-                                                src="${ctx}/statics/image/zancun.png"></div>
-                                    </div>
-                                    <div class="rxia">
-                                        <div class="rxian">截止日期： 2017.12.31</div>
-                                    </div>
-                                </div>
-
-                            </li>
-
-                            <li class="rightlb">
-                                <div class="mleft3">
-                                    <div class="ysbrs3">
-                                        <div class="baomingrenshu3"><span class="canjiarenshu3">531</span><span>人</span>
-                                            <br/><span class="ybmcj3">已报名参加</span></div>
-                                    </div>
-                                    <div class="bmcj3">
-                                        <div class="bmcjan3"><span>已结束</span></div>
-                                    </div>
-                                </div>
-
-                                <div class="mright">
-                                    <div class="rshang">
-                                        <div class="rshangn">全国高等学校五年制临床医学专业第九轮规划材料<img
-                                                src="${ctx}/statics/image/zancun.png"></div>
-                                    </div>
-                                    <div class="rxia">
-                                        <div class="rxian">截止日期： 2017.11.21</div>
-                                    </div>
-                                </div>
-
-                            </li>
+                           
 
                         </ul>
                         
