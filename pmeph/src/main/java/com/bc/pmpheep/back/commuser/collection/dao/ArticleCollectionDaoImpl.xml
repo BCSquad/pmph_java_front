@@ -40,7 +40,7 @@
 		 LEFT JOIN cms_content c on m.content_id=c.id   
 		 LEFT JOIN  writer_user w on c.author_id=w.id 
     where
-         f.id=#{parameter.favoriteId} and f.writer_id=#{parameter.writerId} and c.category_id in(1,2)
+         f.id=#{parameter.favoriteId} and f.writer_id=#{parameter.writerId}
 	limit 
 	     #{start},#{pageSize}
 	</select>

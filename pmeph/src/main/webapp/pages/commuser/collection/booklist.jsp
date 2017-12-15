@@ -75,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        <input type="hidden" id="pagenum" value="${booklist.pageNumber }" />
        <input type="hidden" id="pagesize" value="${booklist.pageSize }" />
        <input type="hidden" id="pages" value="${booklist.pageTotal}" />
-       <div style="margin-top: 30px;text-align:right;">     
+       <div style="margin-top: 30px;text-align:right;display:${booklist.pageTotal=='1' && booklist.rows.size()<5 ? 'none':'block' }">     
            <ul class="pagination" id="page1">
            </ul>
            <div style="display: inline-block;vertical-align: top;text-align:left;">
@@ -93,6 +93,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                <button type="button" class="button">确定</button>
            </div>
        </div>
+        <div class="no-more" style="display:${booklist.rows.size()>0 ?'none':'block' }" id="nomore">
+                    <img src="<c:url value="/statics/image/aaa4.png"></c:url>" style="display: block;margin: 0px auto 0px;">
+                    <span style="display: block;width: 100px;margin: 0px auto 0px;">木有内容呀~~</span>
+        </div>
    </div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>

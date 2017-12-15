@@ -27,14 +27,19 @@
             <mvc:mapping path="/personalhomepage/*"/>
             <mvc:mapping path="/writerArticle/*"/>
             <mvc:mapping path="/message/*"/>
-            <!--申报资料审核（机构用户）第一主编选择编委 教师认证 添加好友 书籍查询 书籍列表 学校教师认证-->
-            <mvc:mapping path="/applyDocAudit/*"/>
-            <mvc:mapping path="/chooseEditor/*"/>
-            <mvc:mapping path="/teacherauth/*"/>
-            <mvc:mapping path="/addFriend/*"/>
-            <mvc:mapping path="/booksearch/likeSwitch*"/>
-            <mvc:mapping path="/teacherCertification/*"/>
-            <!--  -->
+            
+             <!--书籍收藏-->
+            <mvc:mapping path="/bookcollection/*"/>
+            
+            <!--书籍收藏-->
+            <mvc:mapping path="/articlecollection/*"/>
+            
+            <!--信息快报列表点赞-->
+            <mvc:mapping path="/cmsinfoletters/addlike.action"/>
+            
+            <!--信息快报详情点赞、收藏  -->
+            <mvc:mapping path="/inforeport/add*"/>
+            
             <bean class="com.bc.pmpheep.back.interceptor.LoginInterceptor">
                 <property name="redirectUrl" value="/pages/comm/login.jsp"/>
             </bean>
