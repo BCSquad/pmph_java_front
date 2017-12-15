@@ -38,7 +38,7 @@ public class SSOLoginoutController {
         if (StringUtils.isEmpty(request.getParameter("refer"))) {
             response.sendRedirect(request.getContextPath() + "/");
         } else {
-            response.sendRedirect(request.getContextPath() + request.getParameter("refer"));
+            response.sendRedirect(request.getParameter("refer"));
         }
     }
 
