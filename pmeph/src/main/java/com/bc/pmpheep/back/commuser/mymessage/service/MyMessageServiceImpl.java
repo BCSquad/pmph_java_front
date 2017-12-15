@@ -34,10 +34,10 @@ public class MyMessageServiceImpl implements MyMessageService {
 	@Qualifier("com.bc.pmpheep.back.commuser.mymessage.service.MessageAttachmentServiceImpl")
 	MessageAttachmentService messageAttachmentService;
 	@Autowired
-	@Qualifier("com.bc.pmpheep.back.commuser.user.service.PmphUserServiceImpl")
+	@Qualifier("com.bc.pmpheep.back.authadmin.user.service.PmphUserServiceImpl")
 	PmphUserService pmphUserService;
 	@Autowired
-	@Qualifier("com.bc.pmpheep.back.commuser.user.service.WriterUserServiceImpl")
+	@Qualifier("com.bc.pmpheep.back.authadmin.user.service.WriterUserServiceImpl")
 	WriterUserService writerUserService;
 
 	@Override
