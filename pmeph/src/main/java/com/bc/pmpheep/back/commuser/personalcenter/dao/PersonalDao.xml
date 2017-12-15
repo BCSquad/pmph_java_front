@@ -27,6 +27,7 @@
             <result column="iamin" property="iamin"/>
       <result column="is_staging" property="is_staging"/>
             <result column="material_id" property="material_id"/>
+         <result column="datebase" property="datebase"/>   
   </resultMap>
 
 <!-- 查询最新收藏信息 -->
@@ -81,6 +82,7 @@ SELECT
 	a.material_name,
 	COUNT(a.material_name) AS exmember,
 	c.material_id,
+	(TO_DAYS(NOW()) - TO_DAYS(a.deadline)) AS datebase,
 	c.s as iamin
 FROM
 	material a
@@ -106,8 +108,8 @@ AND b.online_progress not in  (2)
  	<if test="is_staging!=null and is_staging!= ''">AND b.is_staging =#{is_staging}</if>
  	<if test="online_progress!=null and online_progress!= ''">AND b.online_progress=#{online_progress}</if>
 <if test="bookname!=null and bookname!= ''">AND a.material_name like CONCAT('%',#{bookname},'%')</if>  
- 					<if test="dateinfo!=null and dateinfo =='1' ">AND a.deadline &gt;= sysdate()</if>  
- 					<if test="dateinfo!=null and dateinfo =='2' ">AND a.deadline &lt;= sysdate() </if>  
+ 					<if test="dateinfo!=null and dateinfo ==1 ">AND (TO_DAYS(NOW()) - TO_DAYS(a.deadline)) &lt; 0</if>  
+ 					<if test="dateinfo!=null and dateinfo ==2 ">AND (TO_DAYS(NOW()) - TO_DAYS(a.deadline)) &gt; 0 </if>  
 GROUP BY
 	(a.id)
 	 </select>
