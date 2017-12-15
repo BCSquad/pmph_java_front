@@ -113,7 +113,7 @@ public class WriterUserServiceImpl implements WriterUserService {
 		if (ObjectUtil.isNull(id)) { //id为空就增加否则修改
 			writerUserDao.addCertification(writerUserCertifications);
 			writerUserDao.updateWriterUser(writerUser);
-			File migCert = new File(cert);
+			/*File migCert = new File(cert);
 			String parent = migCert.getParent(); // 获取文件路径
 			String migCertName = migCert.getName(); // 获取文件名
 			String nameEnd = migCertName.substring(migCertName.lastIndexOf(".")+1); // 获取文件后缀
@@ -132,7 +132,7 @@ public class WriterUserServiceImpl implements WriterUserService {
 	            	writerUser.setAuthTime(date);
 	            	writerUserDao.updateWriterUser(writerUser);
 	            }
-	        }
+	        }*/
 		} else {
 			writerUserDao.updateCertification(writerUserCertifications);
 			writerUserDao.updateWriterUser(writerUser);

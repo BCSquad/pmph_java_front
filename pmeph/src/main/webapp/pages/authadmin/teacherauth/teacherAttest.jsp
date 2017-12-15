@@ -6,6 +6,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 String contextpath=request.getContextPath();
 %>
+<!DOCTYPE html>
 <html>
 <head>
 	<script>
@@ -87,7 +88,39 @@ String contextpath=request.getContextPath();
                     
                 } */
             });
+            $("#downLoad_a").html("下载: ${showWriterUserCertification.certName}");    
+            $("#downLoad_a").unbind().bind("click",function(){
+            	downLoadProxy("${showWriterUserCertification.cert}");
+            });
+            
+            $("#sxy-btn-upload").uploadFile({
+                start: function () {
+                    console.log("开始上传。。。")
+                },
+                done: function (filename, fileid) {
+                    console.log("上传完成：name " + filename + " fileid " + fileid);
+                    $("#cert").val(fileid);     
+                    $("#certName").val(filename);   
+                    $("#downLoad_a").html("下载: "+filename);     
+                    $("#downLoad_a").unbind().bind("click",function(){
+                    	downLoadProxy(fileid);
+                    });
+                    
+                    window.message.success(filename+"上传成功！");
+                },
+                progressall: function (loaded, total, bitrate) {
+                    console.log("正在上传。。。" + loaded / total);
+                }
+            });
+
+            
+            
         });
+        
+      //下载
+        function downLoadProxy(fileId){
+        	window.location.href=contextpath+'file/download/'+fileId+'.action';
+        }
 
         $(function () {
             $(".sxy-div-menu").bind("click", function () {
@@ -246,14 +279,40 @@ String contextpath=request.getContextPath();
                     <div class="label-input">
                     <label>*教师资格证</label>
 	                    <div class="input-wrapper">
-	                    	<input class="sxy-txt" type="text" value="${showWriterUserCertification.certName}" name="cert"/>
+	                    	<input class="sxy-txt" type="hidden" value="${showWriterUserCertification.cert}" id="cert" name="cert" />
+	                    	<input class="sxy-txt" type="text" value="${showWriterUserCertification.certName}" id="certName" name="certcertName" />
 	                    </div>
                     </div>
                     </td>
                     <td>
-                    	<div style="margin-bottom: 30px;margin-left: 20px">
-                    		<input id="sxy-btn-upload" type="button" value="上传文件"/>
-                    	</div>
+                    <div style="margin-bottom: 65px;margin-left: 20px;">
+                   		<input id="sxy-btn-upload" type="button" value="上传文件"/>
+                   		<div id="proxyDiv">
+	                      <c:if test="${showWriterUserCertification.cert !=null}">
+	                       <div class="td-font-2"  style="float: left;" id="proxyName" >
+	                       	<div style="float:left">
+	                       		<img alt=""  src="<%=path%>/statics/testfile/_al.jpg"/>
+	                       	</div>
+	                       	<div style="float:left;margin-left: 5px">
+	                       		<a href="javascript:" class="filename" id="downLoad_a" ></a>
+	                       	</div>
+	                       </div>
+	                      </c:if>
+	                     </div>
+                   	</div>
+                   	
+                    <%-- <div  id="fileNameDiv" style="float: left;cursor: pointer;padding-left:10px;">
+                     	<div style="float:left">
+                     		<img alt="" src="<%=path%>/statics/testfile/_al.jpg"/>
+                     	</div>
+                     	<div style="float:left;margin-left: 5px">
+                     		<a href="#javascript:" class="filename" onclick="downLoad()" id="fileName"></a>
+                     	</div>
+                     </div>  --%>
+                      
+                    
+                    
+                   	
                     </td>
                 </tr>
            
@@ -272,5 +331,6 @@ String contextpath=request.getContextPath();
 	<div style="background-color: white;width: 100%;padding: 0;margin: 0;height: 220px;border: none;overflow: hidden;">
 		<jsp:include page="/pages/comm/tail.jsp"></jsp:include> 
 	</div>
+	<div style="clear: both;"></div>
 </body>
 </html>

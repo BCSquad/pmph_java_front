@@ -1,9 +1,4 @@
-body 
-{
-    margin: 0;
-    padding: 0;
-    background-color: #f6f6f6;
-}
+
 
 .sxy-div-content
 {
@@ -219,14 +214,16 @@ body
 	font-weight: normal;
 	letter-spacing: 0px;
 	color: #333333;
+	display: block;
 }
 
 
 #sxy-btn-upload
 {
+	float: left;
     width: 100px;
 	height: 36px;
-	margin:10px;
+	margin:0px;
 	background-color: #03717b;
 	border-radius: 4px;
 	font-family: MicrosoftYaHei;
@@ -237,6 +234,12 @@ body
 	color: #ffffff;
 	line-height: 36px;
     padding: 0;
+}
+
+#proxyDiv{
+	float: left;
+	margin-top: 6px;
+	clear:right;
 }
 
 .td-font-last
