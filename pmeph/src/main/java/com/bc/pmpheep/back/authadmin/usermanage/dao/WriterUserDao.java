@@ -57,10 +57,10 @@ public interface WriterUserDao {
 	 * 添加学校教师认证
 	 * @author tyc
      * @createDate 2017年12月1日 上午09:39:09
-	 * @param writerUserCertification
+	 * @param Integer
 	 * @return
 	 */
-	WriterUserCertification addCertification(WriterUserCertification writerUserCertification);
+	Integer addCertification(WriterUserCertification writerUserCertification);
 	
 	/**
 	 * 修改学校教师认证
