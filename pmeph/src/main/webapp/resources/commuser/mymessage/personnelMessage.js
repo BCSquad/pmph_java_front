@@ -52,7 +52,7 @@ $(function() {
 		$("#talk").val(frendid) ;
 		$.ajax({
 	        type:'get',
-	        url :contextpath+'/mymessage/getDialogue.action',
+	        url :contextpath+'mymessage/getDialogue.action',
 	        contentType: 'application/json',
 	        dataType:'json',
 	        data:{
@@ -109,7 +109,7 @@ $(function() {
 	        		//更新消息状态
 		        	$.ajax({
 		    	        type:'get',
-		    	        url :contextpath+'/mymessage/updateMyTalk.action',
+		    	        url :contextpath+'mymessage/updateMyTalk.action',
 		    	        contentType: 'application/json',
 		    	        dataType:'json',
 		    	        data:{
@@ -152,7 +152,7 @@ $(function() {
 	function init() {
 		$.ajax({
 					type : 'get',
-					url : contextpath + '/mymessage/tolist.action',
+					url : contextpath + 'mymessage/tolist.action',
 					async : false,
 					contentType : 'application/json',
 					dataType : 'json',
@@ -188,7 +188,7 @@ $(function() {
 								}
 							}else{
 								var  html ="";
-									 html+="<tr><td><div class='no-more'><img src='<c:url value='/statics/image/aaa4.png'></c:url><span>木有内容呀~~</span></div></td></tr>"
+									 html+="<tr><td><div class='no-more'><img src='"+contextpath+"statics/image/aaa4.png'/><span>木有内容呀~~</span></div></td></tr>"
 								     $("#list").append(html);
 							}
 						}
@@ -206,7 +206,7 @@ $(function() {
 			var frendId =$("#talk").val();
 			$.ajax({
 		        type:'get',
-		        url :contextpath+'/mymessage/senNewMsg.action',
+		        url :contextpath+'mymessage/senNewMsg.action',
 		        async:false,
 		        contentType: 'application/json',
 		        dataType:'json',

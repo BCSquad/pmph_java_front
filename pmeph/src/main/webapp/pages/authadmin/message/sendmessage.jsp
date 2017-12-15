@@ -39,7 +39,9 @@
 	<input type="hidden" id="validate" value="${resultFlag}">
 	<input type="hidden" id="search-name-temp" value="">
 	<input type="hidden" id="page-num-temp" value="1">
-<jsp:include page="/pages/comm/headGreenBackGround.jsp"></jsp:include>
+<jsp:include page="/pages/comm/headGreenBackGround.jsp">
+    <jsp:param name="pageTitle" value="message"></jsp:param>
+</jsp:include>
 <div class="message-body" id="message-body">
     <div class="message">
         <a href="${pageContext.request.contextPath}/AllMessage/init.action">

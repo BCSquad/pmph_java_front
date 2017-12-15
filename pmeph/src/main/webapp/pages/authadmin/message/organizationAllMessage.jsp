@@ -21,7 +21,9 @@
           type="text/css">
 </head>
 <body>
-<jsp:include page="/pages/comm/headGreenBackGround.jsp"></jsp:include>
+<jsp:include page="/pages/comm/headGreenBackGround.jsp">
+    <jsp:param name="pageTitle" value="message"></jsp:param>
+</jsp:include>
  <div class="message-body" >
         <div class="message">
            <a href="${pageContext.request.contextPath}/authSendMessage/initAllMessage.action">

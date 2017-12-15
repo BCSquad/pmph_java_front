@@ -30,7 +30,9 @@
         }
     </style>
 <body>
-<jsp:include page="/pages/comm/headGreenBackGround.jsp"/>
+<jsp:include page="/pages/comm/headGreenBackGround.jsp">
+    <jsp:param name="pageTitle" value="backlog"></jsp:param>
+</jsp:include>
 <div class="body" style="background-color:#f6f6f6;float: left">
 	<input id="license" value="${map.license}" type="hidden"/>
     <div class="content-wrapper">

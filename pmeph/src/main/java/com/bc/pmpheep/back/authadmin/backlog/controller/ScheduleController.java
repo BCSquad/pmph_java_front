@@ -14,6 +14,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Request;
 
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -48,7 +49,7 @@ public class ScheduleController extends BaseController{
 	//查询待办事项列表
 	@RequestMapping(value="/scheduleList")
 	public ModelAndView toScheduleList (HttpServletRequest  request){
-		Long userId = (long) 1383;
+		Long userId = MapUtils.getLong(getUserInfo(),"id");
 		String  currentPageStr = (String) request.getParameter("currentPage");
 		String  pageSizeStr = request.getParameter("pageSize");
 		String  time = request.getParameter("time");
@@ -132,7 +133,7 @@ public class ScheduleController extends BaseController{
 	//查询办事记录列表
 	@RequestMapping(value="/eventRecord")
 	public ModelAndView toEventRecord(HttpServletRequest  request) throws ParseException{
-		Long userId = (long) 1459;
+		Long userId = MapUtils.getLong(getUserInfo(),"id");
 		String  currentPageStr = (String) request.getParameter("currentPage");
 		//String  time =  request.getParameter("time");
 		String  pageSizeStr = request.getParameter("pageSize");

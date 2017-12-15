@@ -24,7 +24,9 @@
     <%-- <script src="${ctx}/resources/authadmin/backlog/eventRecord.js"></script> --%>
 </head>
 <body>
-<jsp:include page="/pages/comm/headGreenBackGround.jsp"/>
+<jsp:include page="/pages/comm/headGreenBackGround.jsp">
+    <jsp:param name="pageTitle" value="backlog"></jsp:param>
+</jsp:include>
 <div class="body" style="background-color:#f6f6f6;float: left">
 <div class="content-wrapper">
 <div class="contentEvent">
