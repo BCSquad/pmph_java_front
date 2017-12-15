@@ -65,7 +65,7 @@ public class OrgUserController extends  com.bc.pmpheep.general.controller.BaseCo
 		writerUser.setOrgId(orgUser.getOrgId());
 		writerUser.setName(userName);
 		pageParameter.setParameter(writerUser);
-	    String pageUrl = "commuser/usermanage/writerLists";
+	    String pageUrl = "authadmin/usermanage/writerLists";
         try {
         	PageResult<WriterUser> page = writerUserService.getOrg(pageParameter);
             model.setViewName(pageUrl);
