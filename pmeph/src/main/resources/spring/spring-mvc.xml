@@ -33,7 +33,10 @@
             
             <!--书籍收藏-->
             <mvc:mapping path="/articlecollection/*"/>
-            
+            <mvc:mapping path="/schedule/*"/>
+            <mvc:mapping path="/admininfocontroller/*"/>
+            <mvc:mapping path="/myGroup/*"/>
+            <mvc:mapping path="/group/*"/>
             <!--信息快报列表点赞-->
             <mvc:mapping path="/cmsinfoletters/addlike.action"/>
             
