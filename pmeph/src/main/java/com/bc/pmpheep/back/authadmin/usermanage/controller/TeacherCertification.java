@@ -55,10 +55,13 @@ public class TeacherCertification extends BaseController {
 	 * @return
 	 */
     @RequestMapping(value = "/updateTeacherCertification", method = RequestMethod.POST)
-    public ModelAndView updateTeacherCertification(WriterUserCertification WriterUserCertification,
+    public ModelAndView updateTeacherCertification(WriterUserCertification WriterUserCertification, 
     		@RequestParam("realName") String realName) throws IOException {
         ModelAndView model = new ModelAndView();
-        com.bc.pmpheep.back.authadmin.usermanage.bean.WriterUserCertification updateWriterUserCertification =
+        Map <String,Object> map = this.getUserInfo() ;
+    	Long userId = new Long(String.valueOf(map.get("id")));
+    	WriterUserCertification.setUserId(userId);
+        WriterUserCertification updateWriterUserCertification =
         writerUserService.updateTeacherCertification(WriterUserCertification, realName);
         model.addObject("updateWriterUserCertification", updateWriterUserCertification);
         return model;
