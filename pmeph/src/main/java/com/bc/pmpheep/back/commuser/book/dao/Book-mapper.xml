@@ -373,7 +373,17 @@
 		FROM 
 			`book` b 
 		left join book_user_like as l 
-		ON b.id= l.book_id and l.writer_id = ${parameter.logUserId}
+		ON b.id= l.book_id  
+		
+		<choose>
+			<when test="parameter.logUserId != null and parameter.logUserId != '' ">
+				and l.writer_id = ${parameter.logUserId}
+			</when>
+			<otherwise>
+				and 1=2
+			</otherwise>
+		</choose>
+
 		LEFT JOIN 
 			`book_detail` bd 
 		ON 
@@ -431,7 +441,17 @@
 			FROM 
 				`book` b 
 			left join book_user_like as l 
-			on b.id= l.book_id and l.writer_id = ${parameter.logUserId}
+			on b.id= l.book_id 
+			
+			<choose>
+				<when test="parameter.logUserId != null and parameter.logUserId != '' ">
+					and l.writer_id = ${parameter.logUserId}
+				</when>
+				<otherwise>
+					and 1=2
+				</otherwise>
+			</choose>
+			
 			LEFT JOIN 
 				`book_detail` bd 
 			ON 

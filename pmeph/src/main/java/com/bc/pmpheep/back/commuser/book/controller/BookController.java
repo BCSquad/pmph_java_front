@@ -54,8 +54,12 @@ public class BookController extends BaseController {
     public ModelAndView list(Integer pageSize, Integer pageNumber, BookVO bookVO,@RequestParam(value="type",required=true)Long type) throws Exception {
         ModelAndView model = new ModelAndView();
         String pageUrl = "commuser/booklist/bookList";
-        
-        bookVO.setLogUserId((BigInteger)getUserInfo().get("id"));
+        Map<String, Object> user = getUserInfo();
+        BigInteger uid = null;
+		if (user != null && getUserInfo().get("id")!=null && getUserInfo().get("id").toString() != null) {
+			uid = (BigInteger)getUserInfo().get("id");
+		}
+        bookVO.setLogUserId(uid);
         PageParameter<BookVO> pageParameter = new PageParameter<>(pageNumber, pageSize);
         //书籍的分类，将会查询该类及其所有子类的图书
         bookVO.setType(type);
