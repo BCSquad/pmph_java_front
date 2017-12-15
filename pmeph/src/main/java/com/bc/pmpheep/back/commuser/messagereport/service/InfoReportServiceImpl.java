@@ -33,9 +33,13 @@ public class InfoReportServiceImpl implements InfoReportService {
 	public Map<String, Object> queryInfoReportById(long id, Map<String, Object> usermap) {
 		// TODO Auto-generated method stub
 		Map<String,Object> map=infoReportDao.queryInfoReportById(id);
-		long userId=Long.valueOf(usermap.get("id").toString());
-		int likecount=infoReportDao.queryLike(id,userId);
-		int markcount=infoReportDao.queryMark(id,userId);
+		int likecount=0;
+		int markcount=0;
+		if(usermap!=null){
+		long userId=Long.valueOf(usermap.get("id").toString());	
+		likecount=infoReportDao.queryLike(id,userId);
+		markcount=infoReportDao.queryMark(id,userId);
+		}
 		map.put("likecount", likecount);
 		map.put("markcount", markcount);
 		if(map!=null){

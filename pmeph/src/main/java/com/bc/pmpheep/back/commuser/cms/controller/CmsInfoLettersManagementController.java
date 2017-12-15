@@ -72,14 +72,21 @@ public class CmsInfoLettersManagementController extends BaseController{
 	public Map<String,Object> topage(Integer pageSize, Integer pageNumber, Integer order) {
 		Map<String,Object> map=new HashMap<>();
 		Map<String, Object> usermap = getUserInfo();
-		BigInteger writerId = new BigInteger(usermap.get("id").toString());
 		List<CmsInfoLettersList> mylist = cmsInfoLettersManagementService.list(pageSize,pageNumber, order);
-		if(mylist !=null && mylist.size()>0){
+		BigInteger writerId=null;
+		int islike=0;
+		if(usermap!=null){
+		  writerId = new BigInteger(usermap.get("id").toString());
+		}
+		  if(mylist !=null && mylist.size()>0){
 			for (CmsInfoLettersList cmsInfo : mylist) {
-			 int islike=articleCollectionDao.queryLikes(new BigInteger(cmsInfo.getId().toString()), writerId);
+			 if(writerId!=null){
+			    islike=articleCollectionDao.queryLikes(new BigInteger(cmsInfo.getId().toString()), writerId);
+			 }
 			 map.put("cms"+cmsInfo.getId().toString(), islike);
 			}
 		}
+	
 		map.put("list", mylist);
 		return map;
 	}
@@ -100,6 +107,10 @@ public class CmsInfoLettersManagementController extends BaseController{
 		return model;
 	}
 	
+	/**信息快报点赞或取消点赞
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/addlike", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String,Object> addLike(HttpServletRequest request) {
