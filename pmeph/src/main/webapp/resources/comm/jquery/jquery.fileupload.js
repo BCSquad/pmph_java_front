@@ -2283,15 +2283,19 @@ $.fn.uploadFile = function (option) {
         var file_input;
         var add_input = function ($ele) {
             $ele.parent().find("#" + $ele.attr("id") + "_upload").remove();
+
             file_input = $("<input class='hidden-upload' name='file' type='file' id='" + $ele.attr("id") + "_upload'/>");
-            file_input.css("width", $ele.outerWidth());
-            file_input.css("height", $ele.outerHeight());
-            file_input.css("top", $ele.offset().top);
-            file_input.css("left", $ele.offset().left);
+            file_input.css("width", 0);
+            file_input.css("height", 0);
+            file_input.css("padding-bottom",$ele.outerHeight());
+            file_input.css("padding-left",$ele.outerWidth());
+            file_input.css("top", $ele[0].offsetTop);
+            file_input.css("left", $ele[0].offsetLeft);
+            file_input.css("cursor", "pointer");
             if(option.accept){
             	file_input.attr("accept",option.accept);
             }
-            file_input.appendTo($("body"));
+            file_input.appendTo($ele.parent());
         }
 
         add_input($ele);
