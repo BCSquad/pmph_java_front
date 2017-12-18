@@ -109,8 +109,8 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 	@RequestMapping(value = "/getDialogue", method = RequestMethod.GET)
 	public List<DialogueVO> getDialogue(@RequestParam(value = "friendId") Long friendId,Integer friendType) {
 		Map<String, Object> writerUser = this.getUserInfo();
-		//Long thisId = new Long(String.valueOf(writerUser.get("id")));
-		Long thisId = new Long(24967);
+		Long thisId = new Long(String.valueOf(writerUser.get("id")));
+//		Long thisId = new Long(24967);
 		List<DialogueVO> lst = myMessageService.findMyDialogue(thisId, friendId,friendType);
 		return lst;
 	}

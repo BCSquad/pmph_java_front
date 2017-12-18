@@ -37,7 +37,7 @@ public class UserInfoController {
 	public ModelAndView toperson(HttpServletRequest request){
 		ModelAndView modelAndView=new ModelAndView();
 		String id=request.getParameter("id");
-		id="12179";
+//		id="12179";
 		Map<String, Object> map=userinfoService.queryWriter(id);
 		//图片为空则显示默认图片
 		if(("").equals(map.get("avatar"))){

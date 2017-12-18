@@ -242,16 +242,20 @@
 
 .firstRow{
     height: 25px;
-    width: 100%;
+    width: 210px;
     text-align: center;
     margin-top: 38px;
+    margin-bottom:10px;
     font-family: MicrosoftYaHei;
     font-size: 24px;
     font-weight: normal;
     font-stretch: normal;
-    line-height: 10px;
     letter-spacing: 2px;
     color: #03717b;
+    text-overflow:ellipsis; /*超出部分省略号显示*/
+    white-space:nowrap;/*强制不换行*/
+ 	overflow: hidden;
+ 	margin-left: 25px;
 }
 
 .littleV{
@@ -261,10 +265,10 @@
     height: 18px;
     width: 18px;
     float: left;
-    margin-left: 30px;
+    margin-left: 20px;
 }
 .littleTitle{
-    width: auto;
+    width: 140px;
     height: 18px;
     font-family: MicrosoftYaHei;
     font-size: 12px;
@@ -275,6 +279,11 @@
     color: #03717b;
     margin-left: 10px;
     float: left;
+    text-overflow:ellipsis; /*超出部分省略号显示*/
+    white-space:nowrap;/*强制不换行*/
+ 	overflow: hidden;
+    
+    
 }
 .littleTitle2{
     font-family: MicrosoftYaHei;
@@ -332,8 +341,8 @@
     font-size: 14px;
     color: #489299;
     margin-top: 40px;
-    padding-top: 6px;
-    padding-bottom: 8px;
+    padding-top: 3px;
+    padding-bottom: 11px;
     padding-left: 15px;
     padding-right: 15px;
     border-bottom: solid 2px #489299;
@@ -346,9 +355,9 @@
     margin-top: 40px;
     border-bottom: solid 2px #489299;
     float: left;
-    height: 24px;
+    height: 27px;
     padding-left: 15px;
-    padding-top: 6px;
+    padding-top: 3px;
 }
 
 .eventRight{

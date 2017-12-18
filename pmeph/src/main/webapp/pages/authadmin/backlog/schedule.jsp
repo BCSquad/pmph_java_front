@@ -165,6 +165,7 @@
                 </div>
                 <div>
                     <span class="littleTitle">${map.org_name},欢迎您!</span>
+                    <!-- <span class="littleTitle">阿打算大所大所大所大所大</span> -->
                 </div>
                 <c:if test="${map.license=='false'}">
                 	<div>
@@ -184,7 +185,6 @@
         </div>
 			</c:otherwise>
 		</c:choose>
-        
         </div>
    </div>
 <div style="clear: both; background-color: white;">   

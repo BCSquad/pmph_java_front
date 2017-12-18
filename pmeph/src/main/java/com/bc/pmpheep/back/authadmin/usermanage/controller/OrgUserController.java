@@ -4,6 +4,7 @@ import com.bc.pmpheep.back.authadmin.usermanage.bean.OrgUser;
 import com.bc.pmpheep.back.authadmin.usermanage.bean.WriterUser;
 import com.bc.pmpheep.back.authadmin.usermanage.service.OrgUserService;
 import com.bc.pmpheep.back.authadmin.usermanage.service.WriterUserService;
+import com.bc.pmpheep.back.commuser.mymessage.bean.DialogueVO;
 import com.bc.pmpheep.back.commuser.mymessage.service.MyMessageService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.util.List;
 import java.util.Map;
 
 /**	用户管理（机构用户）
@@ -119,5 +122,21 @@ public class OrgUserController extends  com.bc.pmpheep.general.controller.BaseCo
 		Long thisId = new Long(String.valueOf(writerUser.get("id")));
 		myMessageService.senNewMsg(thisId, friendId, friendIdType, title, content);
 		return "success";
+	}
+    
+    /**
+     * 查询消息
+     * @param friendId
+     * @param friendType
+     * @return
+     */
+    @ResponseBody
+	@RequestMapping(value = "/getDialogue", method = RequestMethod.POST)
+	public List<DialogueVO> getDialogue(@RequestParam(value = "friendId") Long friendId,Integer friendType) {
+		Map<String, Object> writerUser = this.getUserInfo();
+	//	String friendId=
+		Long thisId = new Long(String.valueOf(writerUser.get("id")));
+		List<DialogueVO> lst = myMessageService.findMyDialogue(thisId, friendId,friendType);
+		return lst;
 	}
 }
