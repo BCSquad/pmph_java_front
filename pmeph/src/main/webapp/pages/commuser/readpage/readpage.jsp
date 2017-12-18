@@ -81,18 +81,18 @@
 
                 <div class="block">
                     <div class="tab-bar" style="border-bottom-color: #FC9C03">
-                       <%-- <div class="tab type active" id="FYDiv_0" onclick="javaScript:ChangeFYDiv('0','JKFYDiv_',3)">
-                            学校教育
-                        </div>
-                        <div class="tab type" id="FYDiv_1" onclick="javaScript:ChangeFYDiv('1','JKFYDiv_',3)">
-                            毕业后教育
-                        </div>
-                        <div class="tab type" id="FYDiv_2" onclick="javaScript:ChangeFYDiv('2','JKFYDiv_',3)">
-                            继续教育
-                        </div>
-                        <div class="tab type" id="FYDiv_3" onclick="javaScript:ChangeFYDiv('3','JKFYDiv_',3)">
-                            考试用书
-                        </div>--%>
+                        <%-- <div class="tab type active" id="FYDiv_0" onclick="javaScript:ChangeFYDiv('0','JKFYDiv_',3)">
+                             学校教育
+                         </div>
+                         <div class="tab type" id="FYDiv_1" onclick="javaScript:ChangeFYDiv('1','JKFYDiv_',3)">
+                             毕业后教育
+                         </div>
+                         <div class="tab type" id="FYDiv_2" onclick="javaScript:ChangeFYDiv('2','JKFYDiv_',3)">
+                             继续教育
+                         </div>
+                         <div class="tab type" id="FYDiv_3" onclick="javaScript:ChangeFYDiv('3','JKFYDiv_',3)">
+                             考试用书
+                         </div>--%>
                         <c:forEach items="${bookTypes}" var="type" varStatus="status">
                             <%--<div class="tab ${status.index==0?'active':''}" id="${type.id}"
                                  onclick='chooseType("${type.id}")'>${type.type_name}</div>--%>
@@ -159,15 +159,15 @@
 
                     </c:forEach>
 
-<%--
-                    <div class="ts_type ts_type1" id="CXDiv_0" onclick="javaScript:ChangeCXDiv('0','JKCXDiv_',3)">
-                        <span>学校教育</span></div>
-                    <div class="ts_type" id="CXDiv_1" onclick="javaScript:ChangeCXDiv('1','JKCXDiv_',3)">
-                        <span>毕业后教育</span></div>
-                    <div class="ts_type" id="CXDiv_2" onclick="javaScript:ChangeCXDiv('2','JKCXDiv_',3)">
-                        <span>继续教育</span></div>
-                    <div class="ts_type" id="CXDiv_3" onclick="javaScript:ChangeCXDiv('3','JKCXDiv_',3)">
-                        <span>考试用书</span></div>--%>
+                    <%--
+                                        <div class="ts_type ts_type1" id="CXDiv_0" onclick="javaScript:ChangeCXDiv('0','JKCXDiv_',3)">
+                                            <span>学校教育</span></div>
+                                        <div class="ts_type" id="CXDiv_1" onclick="javaScript:ChangeCXDiv('1','JKCXDiv_',3)">
+                                            <span>毕业后教育</span></div>
+                                        <div class="ts_type" id="CXDiv_2" onclick="javaScript:ChangeCXDiv('2','JKCXDiv_',3)">
+                                            <span>继续教育</span></div>
+                                        <div class="ts_type" id="CXDiv_3" onclick="javaScript:ChangeCXDiv('3','JKCXDiv_',3)">
+                                            <span>考试用书</span></div>--%>
                 </div>
                 <div style="clear: both;height: 14px;"></div>
                 <div class="hot-list" id="JKCXDiv_0">
@@ -209,7 +209,7 @@
                             </div>
                             <div class="part_2">
                                 <c:forEach var="type3" items="${type2.dataList}">
-                                    <a href="#">${type3.note}</a>
+                                    <a target="_blank" href="<c:url value="/books/list.action?type=${type3.id}"/>">${type3.note}</a>
                                 </c:forEach>
                             </div>
                         </c:forEach>
