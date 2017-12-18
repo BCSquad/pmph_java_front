@@ -146,10 +146,10 @@
             </div>
             </c:if>
         </div>
-		<c:choose>
+		<%-- <c:choose>
 			<c:when test="${map.license=='no'}">
 			</c:when>
-			<c:otherwise>
+			<c:otherwise> --%>
 				<div class="info">
             <div class="topPictureDiv">
                 <img class="topPicture"src="${ctx}/statics/pictures/head.png">
@@ -163,6 +163,7 @@
                 </div>
                 <div>
                     <span class="littleTitle">${map.org_name},欢迎您!</span>
+                    <!-- <span class="littleTitle">阿打算大所大所大所大所大</span> -->
                 </div>
                 <c:if test="${map.license=='false'}">
                 	<div>
@@ -180,9 +181,9 @@
                 <span>最近登录:  2017-09-27 16:12:07</span>
             </div>
         </div>
-			</c:otherwise>
+			<%-- </c:otherwise>
 		</c:choose>
-        
+         --%>
         </div>
    </div>
 <div style="clear: both; background-color: white;">   
