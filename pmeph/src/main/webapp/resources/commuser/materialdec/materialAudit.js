@@ -72,13 +72,13 @@ function chooseModel(data){
 function toAudit(id,type){
 		$.ajax({
 			type: "POST",
-			url:contextpath+'material/doMaterialAdd.action',
+			url:contextpath+'material/doMaterialAudit.action',
 			data:{declaration_id:id,type:type},// 你的formid
 			async: false,
 			dataType:"json",
 		    success: function(msg) {
 			    if(msg=='OK'){
-			    	window.location.href=contextpath+"personalhomepage/tohomepageone.action";
+			    	window.location.href=contextpath+"applyDocAudit/toPage.action";
 			    }
 		    }
 		});
