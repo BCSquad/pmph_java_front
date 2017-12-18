@@ -55,10 +55,12 @@
             <mvc:mapping path="/addFriend/*"/>
             <mvc:mapping path="/booksearch/likeSwitch*"/>
             <mvc:mapping path="/teacherCertification/*"/>
+            <mvc:mapping path="/schedule/*"/>
             <!--  -->
             
             <bean class="com.bc.pmpheep.back.interceptor.LoginInterceptor">
-                <property name="redirectUrl" value="/pages/comm/login.jsp"/>
+                <property name="redirectUrl" value="http://sso.ipmph.com/login"/>
+                <property name="serviceID" value="yixuejiaoyujiaohu"></property>
             </bean>
         </mvc:interceptor>
     </mvc:interceptors>
