@@ -1,8 +1,9 @@
-package com.bc.pmpheep.back.authadmin.usermanage.controller;
+package com.bc.pmpheep.back.commuser.user.controller;
 
-import com.bc.pmpheep.back.authadmin.usermanage.bean.WriterUserCertification;
-import com.bc.pmpheep.back.authadmin.usermanage.bean.WriterUserCertificationVO;
-import com.bc.pmpheep.back.authadmin.usermanage.service.WriterUserService;
+
+import com.bc.pmpheep.back.commuser.user.bean.CommuserWriterUserCertification;
+import com.bc.pmpheep.back.commuser.user.bean.CommuserWriterUserCertificationVO;
+import com.bc.pmpheep.back.commuser.user.service.WriterUserCommuserService;
 import com.bc.pmpheep.general.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,8 +26,8 @@ import java.util.Map;
 public class TeacherCertification extends BaseController {
 
     @Autowired
-    @Qualifier("com.bc.pmpheep.back.authadmin.usermanage.service.WriterUserServiceImpl")
-    private WriterUserService writerUserService;
+    @Qualifier("com.bc.pmpheep.back.commuser.user.service.commWriterUserServiceImpl")
+    private WriterUserCommuserService writerUserService;
 
     /**
 	 * 查看学校教师认证信息
@@ -39,8 +40,8 @@ public class TeacherCertification extends BaseController {
     	Map <String,Object> map = this.getUserInfo() ;
     	Long userId = new Long(String.valueOf(map.get("id")));
         ModelAndView model = new ModelAndView();
-        model.setViewName("authadmin/teacherauth/teacherAttest");
-        WriterUserCertificationVO showWriterUserCertification =
+        model.setViewName("commuser/teachercertification/teacherAttest");
+        CommuserWriterUserCertificationVO showWriterUserCertification =
         writerUserService.showTeacherCertification(userId);
         model.addObject("showWriterUserCertification", showWriterUserCertification);
         return model;
@@ -55,13 +56,13 @@ public class TeacherCertification extends BaseController {
 	 * @return
 	 */
     @RequestMapping(value = "/updateTeacherCertification", method = RequestMethod.POST)
-    public ModelAndView updateTeacherCertification(WriterUserCertification WriterUserCertification, 
+    public ModelAndView updateTeacherCertification(CommuserWriterUserCertification WriterUserCertification, 
     		@RequestParam("realName") String realName) throws IOException {
         ModelAndView model = new ModelAndView();
         Map <String,Object> map = this.getUserInfo() ;
     	Long userId = new Long(String.valueOf(map.get("id")));
     	WriterUserCertification.setUserId(userId);
-        WriterUserCertification updateWriterUserCertification =
+        CommuserWriterUserCertification updateWriterUserCertification =
         writerUserService.updateTeacherCertification(WriterUserCertification, realName);
         model.addObject("updateWriterUserCertification", updateWriterUserCertification);
         return model;

@@ -102,6 +102,7 @@ public class DataAuditController extends BaseController{
 
 		Map<String, Object> vm_map = new HashMap<String, Object>();
 		vm_map.put("List_map", List_map);
+		vm_map.put("material_id", material_id);
 		vm_map.put("startNum", pageParameter.getStart() + 1);
 		vm_map.put("contextpath", contextpath);
 		String html = "";

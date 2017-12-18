@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.bc.pmpheep.back.authadmin.usermanage.bean.PmphUser;
-import com.bc.pmpheep.back.authadmin.usermanage.bean.WriterUser;
-import com.bc.pmpheep.back.authadmin.usermanage.service.PmphUserService;
-import com.bc.pmpheep.back.authadmin.usermanage.service.WriterUserService;
 import com.bc.pmpheep.back.commuser.mymessage.bean.DialogueVO;
 import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessage;
 import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
 import com.bc.pmpheep.back.commuser.mymessage.dao.MyMessageDao;
+import com.bc.pmpheep.back.commuser.user.bean.CommuserPmphUser;
+import com.bc.pmpheep.back.commuser.user.bean.CommuserWriterUser;
+import com.bc.pmpheep.back.commuser.user.service.PmphUserCommuserService;
+import com.bc.pmpheep.back.commuser.user.service.WriterUserCommuserService;
 import com.bc.pmpheep.back.util.ObjectUtil;
 import com.bc.pmpheep.back.util.RouteUtil;
 import com.bc.pmpheep.general.pojo.Message;
@@ -34,11 +34,11 @@ public class MyMessageServiceImpl implements MyMessageService {
 	@Qualifier("com.bc.pmpheep.back.commuser.mymessage.service.MessageAttachmentServiceImpl")
 	MessageAttachmentService messageAttachmentService;
 	@Autowired
-	@Qualifier("com.bc.pmpheep.back.authadmin.usermanage.service.PmphUserServiceImpl")
-	PmphUserService pmphUserService;
+	@Qualifier("com.bc.pmpheep.back.commuser.user.service.commPmphUserServiceImpl")
+	PmphUserCommuserService pmphUserService;
 	@Autowired
-	@Qualifier("com.bc.pmpheep.back.authadmin.usermanage.service.WriterUserServiceImpl")
-	WriterUserService writerUserService;
+	@Qualifier("com.bc.pmpheep.back.commuser.user.service.commWriterUserServiceImpl")
+	WriterUserCommuserService writerUserService;
 
 	@Override
 	public List<MyMessageVO> listMyMessage(Integer pageNumber,Integer pageSize,String state,Long userId) throws CheckedServiceException {
@@ -75,7 +75,7 @@ public class MyMessageServiceImpl implements MyMessageService {
 	 *
 	 */
 	public MyMessageVO setAvatar(MyMessageVO myMessageVO) {
-		WriterUser user = writerUserService.get(myMessageVO.getUserId());
+		CommuserWriterUser user = writerUserService.get(myMessageVO.getUserId());
 		myMessageVO.setUserAvatar(RouteUtil.userAvatar(user.getAvatar()));
 		myMessageVO.setUserName(user.getRealname());
 		if (myMessageVO.getSenderId().equals(user.getId()) && myMessageVO.getSenderType().equals(2)) {
@@ -84,13 +84,13 @@ public class MyMessageServiceImpl implements MyMessageService {
 				myMessageVO.setName("系统");
 				break;
 			case 1:
-				PmphUser pmphUser = pmphUserService.get(myMessageVO.getReceiverId());
+				CommuserPmphUser pmphUser = pmphUserService.get(myMessageVO.getReceiverId());
 				myMessageVO.setAvatar(RouteUtil.userAvatar(pmphUser.getAvatar()));
 				myMessageVO.setName(pmphUser.getRealname());
 				break;
 
 			case 2:
-				WriterUser writerUser = writerUserService.get(myMessageVO.getReceiverId());
+				CommuserWriterUser writerUser = writerUserService.get(myMessageVO.getReceiverId());
 				myMessageVO.setAvatar(RouteUtil.userAvatar(writerUser.getAvatar()));
 				myMessageVO.setName(writerUser.getRealname());
 				break;
@@ -109,13 +109,13 @@ public class MyMessageServiceImpl implements MyMessageService {
 				myMessageVO.setName("系统");
 				break;
 			case 1:
-				PmphUser pmphUser = pmphUserService.get(myMessageVO.getSenderId());
+				CommuserPmphUser pmphUser = pmphUserService.get(myMessageVO.getSenderId());
 				myMessageVO.setAvatar(RouteUtil.userAvatar(pmphUser.getAvatar()));
 				myMessageVO.setName(pmphUser.getRealname());
 				break;
 
 			case 2:
-				WriterUser writerUser = writerUserService.get(myMessageVO.getSenderId());
+				CommuserWriterUser writerUser = writerUserService.get(myMessageVO.getSenderId());
 				myMessageVO.setAvatar(RouteUtil.userAvatar(writerUser.getAvatar()));
 				myMessageVO.setName(writerUser.getRealname());
 				break;

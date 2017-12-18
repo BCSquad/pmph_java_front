@@ -24,6 +24,7 @@
 	<div class="content-wrapper">	
 		<div class="tsxz_title">资料审核</div>
 		<hr style=" height:1px;border:none;border-top:2px #999999 dashed;margin-top: 10px;">
+		<!-- 参数 -->
 		<div class="box">
 			<!-- 图书选择-->
 			<div class="sbxq_item1">
@@ -408,7 +409,7 @@
 						<span class="tsxz_title">${zjkzxx.extension_name}</span>
 					</div>
 					<div class="content">
-						<textarea class="text_cl" name="content">${zjkzxx.content}</textarea>
+						<div style="margin: 5px;">${zjkzxx.content}</div>
 					</div>
 					<hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">
 				</div>

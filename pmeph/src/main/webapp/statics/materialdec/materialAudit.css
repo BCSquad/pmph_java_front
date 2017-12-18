@@ -248,3 +248,18 @@ a.input {
     color: #333333;
     margin-right: 6px
 }
+
+.text_cl{
+	width: 1106px;
+	height: 60px;
+	background-color: #e8f1fa;
+	border-radius: 3px;
+	border: solid 1px #3996fa;
+	-moz-opacity: 0.3;
+	-khtml-opacity: 0.3;
+	-webkit-opacity: 0.3;
+	opacity: 0.3;
+	filter:alpha(opacity=30);
+	padding: 15px 20px;
+	margin-top: 20px;
+}

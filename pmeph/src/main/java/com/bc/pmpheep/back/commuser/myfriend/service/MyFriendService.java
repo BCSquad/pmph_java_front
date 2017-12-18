@@ -2,9 +2,7 @@ package com.bc.pmpheep.back.commuser.myfriend.service;
 
 import java.util.List;
 import java.util.Map;
-
-import com.bc.pmpheep.back.authadmin.usermanage.bean.WriterUser;
-import com.bc.pmpheep.back.commuser.myfriend.bean.WriterFriendVO;
+import com.bc.pmpheep.back.commuser.user.bean.CommuserWriterUser;
 
 /**
  * 
@@ -35,5 +33,5 @@ public interface MyFriendService {
      * @throws Exception
      * </pre>
      */
-    List<Map<String, Object>> listMyFriend(WriterUser writerUser,int startrow) throws Exception;
+    List<Map<String, Object>> listMyFriend(CommuserWriterUser writerUser,int startrow) throws Exception;
 }

@@ -56,9 +56,6 @@ public class MaterialDetailController extends BaseController{
 		ModelAndView mav = new ModelAndView("commuser/materialdec/toMaterialAdd");
 		Map<String,Object> userMap =  this.getUserInfo();
 		String material_id = request.getParameter("material_id"); //教材ID
-		if(material_id == null){			
-			material_id = "120";
-		}
 		//教材信息
 		Map<String,Object> materialMap = new HashMap<String,Object>();
 		materialMap = this.mdService.queryMaterialbyId(material_id);
@@ -345,17 +342,12 @@ public class MaterialDetailController extends BaseController{
 	public ModelAndView showMaterial(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("commuser/materialdec/showMaterial");
 		//传参  user_id  material_id
-		Map<String,Object> userMap =  this.getUserInfo();
 		//	String user_id = request.getParameter("user_id");
 		String material_id = request.getParameter("material_id");
 		String declaration_id = request.getParameter("declaration_id");
-		String user_id = userMap.get("id").toString();
-		if(material_id == null){			
-			material_id = "120";
-		}
 		Map<String,Object> queryMap = new HashMap<String,Object>();
-		queryMap.put("user_id", user_id);
 		queryMap.put("material_id", material_id); 
+		queryMap.put("declaration_id", declaration_id); 
 		
 		//1.作家申报表
 		List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
@@ -430,12 +422,10 @@ public class MaterialDetailController extends BaseController{
 		String material_id = request.getParameter("material_id");
 		String declaration_id = request.getParameter("declaration_id");
 		String user_id = userMap.get("id").toString();
-		if(material_id == null){			
-			material_id = "120";
-		}
 		Map<String,Object> queryMap = new HashMap<String,Object>();
 		queryMap.put("user_id", user_id);
 		queryMap.put("material_id", material_id); 
+		queryMap.put("declaration_id", declaration_id); 
 		
 		//1.作家申报信息表
 		List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
@@ -810,16 +800,11 @@ public class MaterialDetailController extends BaseController{
 			HttpServletResponse response){
 		ModelAndView mav = new ModelAndView("commuser/materialdec/toMaterialAudit");
 		//传参  user_id  material_id
-		Map<String,Object> userMap =  this.getUserInfo();
 		String material_id = request.getParameter("material_id");
 		String declaration_id = request.getParameter("declaration_id");
-		String user_id = userMap.get("id").toString();
-		if(material_id == null){			
-			material_id = "120";
-		}
 		Map<String,Object> queryMap = new HashMap<String,Object>();
-		queryMap.put("user_id", user_id);
 		queryMap.put("material_id", material_id); 
+		queryMap.put("declaration_id", declaration_id); 
 		
 		//1.作家申报表
 		List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
@@ -882,9 +867,10 @@ public class MaterialDetailController extends BaseController{
 	//申报审核
 	@RequestMapping("doMaterialAudit")
 	@ResponseBody
-	public String doMaterialAudit(HttpServletRequest request,
+	public Map<String,Object> doMaterialAudit(HttpServletRequest request,
 			HttpServletResponse response){
 		Map<String,Object> paramMap = new HashMap<String,Object>();
+		Map<String,Object> resultMap = new HashMap<String,Object>();
 		String declaration_id = request.getParameter("declaration_id");
 		String type = request.getParameter("type");  //类型
 		Map<String,Object> userMap =  this.getUserInfo();
@@ -901,7 +887,9 @@ public class MaterialDetailController extends BaseController{
 		if(count>0){
 			msg = "OK";
 		}
-		return msg;
+		resultMap.put("msg", msg);
+		resultMap.put("msg", msg);
+		return resultMap;
 	}
 	
 }

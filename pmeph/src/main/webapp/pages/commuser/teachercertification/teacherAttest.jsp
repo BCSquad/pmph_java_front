@@ -25,7 +25,7 @@ String contextpath=request.getContextPath();
     <script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js" type="text/javascript"></script>
     <link href="<%=path%>/statics/css/jquery.selectlist.css" rel="stylesheet" type="text/css" />
 	<script src="<%=path%>/resources/comm/base.js"></script>
-    <link href="<%=path%>/statics/authadmin/teacherauth/teacherAttest.css" rel="stylesheet" type="text/css" />
+    <link href="<%=path%>/statics/commuser/teachercertification/teacherAttest.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript">
     	
@@ -38,9 +38,10 @@ String contextpath=request.getContextPath();
         $(function () {
             $('select').selectlist({
                 zIndex: 10,
-                width: 242,
+                width: 264,
                 height: 40,
-                optionHeight: 40
+                optionHeight: 40,
+                fiter:true
             });
             
             //$("input[name='orgId']").addClass("required");
@@ -198,7 +199,7 @@ String contextpath=request.getContextPath();
 					   	<c:when test="${showWriterUserCertification.progress==4}"> 
                     	通过
 					   	</c:when>   
-					   	<c:otherwise></c:otherwise>
+					   	<c:otherwise>未提交</c:otherwise>
                     </c:choose></font>）</font></td>
                 </tr>
                 <tr  class="sxy-tr">

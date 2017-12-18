@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.bc.pmpheep.back.authadmin.usermanage.bean.WriterUser;
 import com.bc.pmpheep.back.commuser.myfriend.bean.WriterFriendVO;
 import com.bc.pmpheep.back.commuser.myfriend.dao.MyFriendDao;
 import com.bc.pmpheep.back.commuser.myfriend.service.MyFriendService;
+import com.bc.pmpheep.back.commuser.user.bean.CommuserWriterUser;
 import com.bc.pmpheep.back.util.ObjectUtil;
 import com.bc.pmpheep.back.util.RouteUtil;
 import com.bc.pmpheep.service.exception.CheckedExceptionBusiness;
@@ -40,7 +40,7 @@ public class MyFriendServiceImpl implements MyFriendService {
     MyFriendDao myFriendDao;
 
     @Override
-    public List<Map<String, Object>> listMyFriend(WriterUser writerUser,int startrow) throws Exception {
+    public List<Map<String, Object>> listMyFriend(CommuserWriterUser writerUser,int startrow) throws Exception {
         Long userId = writerUser.getId();
         if (ObjectUtil.isNull(userId)) {
             throw new CheckedServiceException(CheckedExceptionBusiness.WRITER_FRIEND,
