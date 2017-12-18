@@ -21,6 +21,7 @@ String contextpath=request.getContextPath();
     <script src="<%=path%>/resources/comm/jquery/jquery.js"></script>
     <script src="<%=path%>/resources/comm/jquery/jquery.fileupload.js" type="text/javascript"></script>
     <script src="<%=path%>/resources/comm/jquery/jquery-validate.js" type="text/javascript"></script>
+    <script src="<%=path%>/resources/comm/jquery/jquery.form.js" type="text/javascript"></script>
     <script src="<%=path%>/statics/js/main/read/read.js" type="text/javascript"></script>
     <script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js" type="text/javascript"></script>
     <link href="<%=path%>/statics/css/jquery.selectlist.css" rel="stylesheet" type="text/css" />
@@ -31,7 +32,30 @@ String contextpath=request.getContextPath();
     	
     	function submitValidate(){
     		if($("form").validate('submitValidate')){
-    			document.getElementById("certForm").submit();
+    			$("#certForm").ajaxSubmit({
+    				url:contextpath+"teacherCertification/updateTeacherCertification.action",
+					type:"post",
+					success:function(json){
+						if (json.operatCount>0) {
+							window.message.success("提交成功");
+							setTimeout(function(){
+								window.location.href=contextpath+"";
+							},1500);
+						}else{
+							window.message.error("提交失败");
+						}
+					},      //提交成功后执行的回调函数
+   		            error:function(){
+   		            	window.message.error("提交失败");
+   		            },          //提交失败执行的函数
+					dataType:"json",		//服务器返回数据类型
+					clearForm:false,	//提交成功后是否清空表单中的字段值
+					restForm:false,		//提交成功后是否重置表单中的字段值，即恢复到页面加载时的状态
+					timeout:6000 		//设置请求时间，超过该时间后，自动退出请求，单位(毫秒)。　　
+    			});
+    			
+    			return false;
+    			//document.getElementById("certForm").submit();
     		}
     	}
 
@@ -165,7 +189,9 @@ String contextpath=request.getContextPath();
         <div style="height:50px;">
             <span style="width:20px;"></span>
             <span class="sxy-div-menu">学校教师认证</span>
+            <a href="" >
             <span id="sxy-spantopright">〈〈返回个人资料&nbsp&nbsp</span>
+            </a>
         </div>
     </div>
     <div style="height:14px"></div>
