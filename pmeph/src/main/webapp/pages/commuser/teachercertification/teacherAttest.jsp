@@ -40,7 +40,8 @@ String contextpath=request.getContextPath();
                 zIndex: 10,
                 width: 264,
                 height: 40,
-                optionHeight: 40
+                optionHeight: 40,
+                fiter:true
             });
             
             //$("input[name='orgId']").addClass("required");
@@ -198,7 +199,7 @@ String contextpath=request.getContextPath();
 					   	<c:when test="${showWriterUserCertification.progress==4}"> 
                     	通过
 					   	</c:when>   
-					   	<c:otherwise></c:otherwise>
+					   	<c:otherwise>未提交</c:otherwise>
                     </c:choose></font>）</font></td>
                 </tr>
                 <tr  class="sxy-tr">
