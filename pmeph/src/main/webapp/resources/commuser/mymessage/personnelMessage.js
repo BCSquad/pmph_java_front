@@ -188,7 +188,7 @@ $(function() {
 								}
 							}else{
 								var  html ="";
-									 html+="<tr><td><div class='no-more'><img src='<c:url value='/statics/image/aaa4.png'></c:url><span>木有内容呀~~</span></div></td></tr>"
+									 html+="<tr><td><div class='no-more'><img src='"+contextpath+"statics/image/aaa4.png'/><span>木有内容呀~~</span></div></td></tr>";
 								     $("#list").append(html);
 							}
 						}
