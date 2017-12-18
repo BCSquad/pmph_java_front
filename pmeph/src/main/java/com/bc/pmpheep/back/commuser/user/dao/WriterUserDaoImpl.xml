@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.bc.pmpheep.back.commuser.user.dao.WriterUserDao">
+<mapper namespace="com.bc.pmpheep.back.commuser.user.dao.WriterUserCommuserDao">
 	<sql id="key">
 		<!-- 去掉最后一个, -->
 		<trim suffixOverrides=",">
@@ -210,7 +210,7 @@
 			</if>
 		</trim>
 	</sql>
-	<insert id="add" parameterType="WriterUser" useGeneratedKeys="true"
+	<insert id="add" parameterType="CommuserWriterUserCertificationVO" useGeneratedKeys="true"
 		keyProperty="id">
 		<selectKey resultType="java.lang.Long" order="AFTER"
 			keyProperty="id"> <!-- order="AFTER"表示先执行插入语句，之后再执行查询语句 BEFORE 或 AFTER -->
@@ -227,7 +227,7 @@
 	</insert>
 
 	<!-- 动态更新对象的写法 -->
-	<update id="update" parameterType="WriterUser">
+	<update id="update" parameterType="CommuserWriterUserCertificationVO">
 		UPDATE writer_user
 		<set>
 			<if test="username != null and username!=''">
@@ -328,7 +328,7 @@
 		id = #{id}
 	</update>
 
-	<select id="get" parameterType="Long" resultType="WriterUser">
+	<select id="get" parameterType="Long" resultType="CommuserWriterUserCertificationVO">
 		SELECT
 		*
 		FROM
@@ -337,13 +337,13 @@
 		id = #{id}
 	</select>
 	<!-- 查看学校教师认证信息 -->
-	<select id="showTeacherCertification" parameterType="Long" resultType="WriterUserCertificationVO">
+	<select id="showTeacherCertification" parameterType="Long" resultType="CommuserWriterUserCertificationVO">
 		select *,wu.realname,o.org_name from writer_user_certification wuc 
 		left join (select id,realname from writer_user) wu on (wu.id=wuc.user_id) 
 		left join (select id,org_name from org) o on (o.id=wuc.org_id)
 		where wuc.user_id=#{userId}
 	</select>
-	<select id="getOrgList" parameterType="list" resultType="Org">
+	<select id="getOrgList" parameterType="list" resultType="CommuserOrg">
 		select id,org_name from org where org_type_id!=1
 	</select>
 	<insert id="addCertification" parameterType="WriterUserCertification" useGeneratedKeys="true"
@@ -380,7 +380,7 @@
 		WHERE
 		id = #{id}
 	</update>
-	<update id="updateWriterUser" parameterType="WriterUser">
+	<update id="updateWriterUser" parameterType="CommuserWriterUserCertificationVO">
 		UPDATE writer_user
 		<set>
 			<if test="username != null and username!=''">
@@ -482,7 +482,7 @@
 	</update>
 	
 	<!-- 根据id和用户名修改用户密码-->
-	<update id="updateUserPassWord" parameterType="WriterUser">
+	<update id="updateUserPassWord" parameterType="CommuserWriterUserCertificationVO">
 		update
 		writer_user
 		<set>
@@ -495,7 +495,7 @@
 	
 	<!-- 分页查询机构用户的作家用户 -->
 	<select id="getOrg" parameterType="PageParameter"
-		resultType="WriterUser">
+		resultType="CommuserWriterUserCertificationVO">
 		select wu.* 
 		from writer_user wu
 		left join org o on o.id= wu.org_id

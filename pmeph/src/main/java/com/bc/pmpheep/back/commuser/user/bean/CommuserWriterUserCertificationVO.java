@@ -16,8 +16,8 @@ import java.util.List;
  * 
  */
 @SuppressWarnings("serial")
-@Alias("WriterUserCertificationVO")
-public class WriterUserCertificationVO implements Serializable {
+@Alias("CommuserWriterUserCertificationVO")
+public class CommuserWriterUserCertificationVO implements Serializable {
     // 主键
     private Long id;
     // 作家id
@@ -41,7 +41,7 @@ public class WriterUserCertificationVO implements Serializable {
     // 修改时间
     private Timestamp gmtUpdate;
     // 获取机构
-    private List<Org> orgList;
+    private List<CommuserOrg> orgList;
     // 教师资格证名称
     private String certName;
 
@@ -53,28 +53,28 @@ public class WriterUserCertificationVO implements Serializable {
 		this.certName = certName;
 	}
 
-	public List<Org> getOrgList() {
+	public List<CommuserOrg> getOrgList() {
 		return orgList;
 	}
 
-	public void setOrgList(List<Org> orgList) {
+	public void setOrgList(List<CommuserOrg> orgList) {
 		this.orgList = orgList;
 	}
 
-	public WriterUserCertificationVO() {
+	public CommuserWriterUserCertificationVO() {
     }
 
-    public WriterUserCertificationVO(Long userId, Integer progress) {
+    public CommuserWriterUserCertificationVO(Long userId, Integer progress) {
         this.userId = userId;
         this.progress = progress;
     }
 
-    public WriterUserCertificationVO(Long id) {
+    public CommuserWriterUserCertificationVO(Long id) {
         super();
         this.id = id;
     }
 
-    public WriterUserCertificationVO(Long userId, Long orgId, String handphone, String idcard,
+    public CommuserWriterUserCertificationVO(Long userId, Long orgId, String handphone, String idcard,
     		Integer progress, String cert, Timestamp gmtCreate, Timestamp gmtUpdate) {
         this.userId = userId;
         this.orgId = orgId;

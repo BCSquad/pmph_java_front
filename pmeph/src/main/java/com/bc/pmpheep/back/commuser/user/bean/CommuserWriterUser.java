@@ -12,8 +12,8 @@ import java.util.Date;
  * 
  */
 @SuppressWarnings("serial")
-@Alias("WriterUser")
-public class WriterUser implements Serializable {
+@Alias("CommuserWriterUser")
+public class CommuserWriterUser implements Serializable {
     /**
      * 主键
      */
@@ -618,15 +618,15 @@ public class WriterUser implements Serializable {
         this.loginType = loginType;
     }
 
-    public WriterUser() {
+    public CommuserWriterUser() {
     }
 
-    public WriterUser(String username, String password) {
+    public CommuserWriterUser(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    public WriterUser(String username, String password, Boolean isDisabled, Long orgId,
+    public CommuserWriterUser(String username, String password, Boolean isDisabled, Long orgId,
     String nickname, String realname, Integer sex, Date birthday, Integer experience,
     String position, String title, String fax, String handphone, String telephone, String idcard,
     String email, String address, String postcode, Integer rank, Boolean isTeacher, String cert,

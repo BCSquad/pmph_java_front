@@ -1,6 +1,6 @@
 package com.bc.pmpheep.back.commuser.user.service;
 
-import com.bc.pmpheep.back.commuser.user.bean.OrgUser;
+import com.bc.pmpheep.back.commuser.user.bean.CommuserOrgUser;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 
 import java.util.List;
@@ -10,11 +10,11 @@ import java.util.List;
  * 
  * @author tyc
  */
-public interface OrgUserService {
+public interface OrgUserCommuserService {
     /**
      * 根据机构id集查询用户(逻辑没有删除和启用的)
      */
-    List<OrgUser> getOrgUserListByOrgIds(List<Long> orgIds) throws CheckedServiceException;
+    List<CommuserOrgUser> getOrgUserListByOrgIds(List<Long> orgIds) throws CheckedServiceException;
 
     /**
      * 
@@ -22,7 +22,7 @@ public interface OrgUserService {
      * @return 带主键的 OrgUser
      * @throws CheckedServiceException
      */
-    OrgUser addOrgUser(OrgUser orgUser) throws CheckedServiceException;
+    CommuserOrgUser addOrgUser(CommuserOrgUser orgUser) throws CheckedServiceException;
 
     /**
      * 
@@ -30,7 +30,7 @@ public interface OrgUserService {
      * @return OrgUser
      * @throws CheckedServiceException
      */
-    OrgUser getOrgUserById(Long id) throws CheckedServiceException;
+    CommuserOrgUser getOrgUserById(Long id) throws CheckedServiceException;
 
     /**
      * 
@@ -45,7 +45,7 @@ public interface OrgUserService {
      * @return 影响行数
      * @throws CheckedServiceException
      */
-    Integer updateOrgUser(OrgUser orgUser) throws CheckedServiceException;
+    Integer updateOrgUser(CommuserOrgUser orgUser) throws CheckedServiceException;
 
     /**
      * 
@@ -67,12 +67,12 @@ public interface OrgUserService {
      * 
      * 功能描述：后台机构用户管理页面添加机构用户
      * 
-     * @param OrgUser 添加的机构用户用户属性
+     * @param CommuserOrgUser 添加的机构用户用户属性
      * @return 是否成功
      * @throws CheckedServiceException
      * 
      */
-    String addOrgUserOfBack(OrgUser orgUser) throws CheckedServiceException;
+    String addOrgUserOfBack(CommuserOrgUser orgUser) throws CheckedServiceException;
     
 	/**
 	 * 根据id和机构代码修改机构用户密码

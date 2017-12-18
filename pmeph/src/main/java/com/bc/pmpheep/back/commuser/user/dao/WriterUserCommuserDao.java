@@ -1,9 +1,9 @@
 package com.bc.pmpheep.back.commuser.user.dao;
 
-import com.bc.pmpheep.back.commuser.user.bean.Org;
-import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
-import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertification;
-import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertificationVO;
+import com.bc.pmpheep.back.commuser.user.bean.CommuserOrg;
+import com.bc.pmpheep.back.commuser.user.bean.CommuserWriterUser;
+import com.bc.pmpheep.back.commuser.user.bean.CommuserWriterUserCertification;
+import com.bc.pmpheep.back.commuser.user.bean.CommuserWriterUserCertificationVO;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import org.apache.ibatis.annotations.Param;
 
@@ -26,7 +26,7 @@ import java.util.List;
  * @审核人 ：
  *
  */
-public interface WriterUserDao {
+public interface WriterUserCommuserDao {
 	
 	/**
 	 * 
@@ -37,7 +37,7 @@ public interface WriterUserDao {
 	 * @return
 	 *
 	 */
-	WriterUser get(Long id);
+	CommuserWriterUser get(Long id);
 	/**
 	 * 查看学校教师认证信息
 	 * @author tyc
@@ -45,14 +45,14 @@ public interface WriterUserDao {
 	 * @param userId
 	 * @return
 	 */
-	WriterUserCertificationVO showTeacherCertification(@Param("userId") Long userId);
+	CommuserWriterUserCertificationVO showTeacherCertification(@Param("userId") Long userId);
 	/**
 	 * 所有学校
 	 * @author tyc
      * @createDate 2017年12月8日 上午08:34:22
 	 * @return
 	 */
-	List<Org> getOrgList();
+	List<CommuserOrg> getOrgList();
 	/**
 	 * 添加学校教师认证
 	 * @author tyc
@@ -60,7 +60,7 @@ public interface WriterUserDao {
 	 * @param Integer
 	 * @return
 	 */
-	Integer addCertification(WriterUserCertification writerUserCertification);
+	Integer addCertification(CommuserWriterUserCertification writerUserCertification);
 	
 	/**
 	 * 修改学校教师认证
@@ -69,7 +69,7 @@ public interface WriterUserDao {
 	 * @param writerUserCertification
 	 * @return
 	 */
-	Integer updateCertification(WriterUserCertification writerUserCertification);
+	Integer updateCertification(CommuserWriterUserCertification writerUserCertification);
 	/**
 	 * 修改用户
 	 * @author tyc
@@ -77,7 +77,7 @@ public interface WriterUserDao {
 	 * @param userId
 	 * @return
 	 */
-	Integer updateWriterUser(WriterUser writerUser);
+	Integer updateWriterUser(CommuserWriterUser writerUser);
 	
 	/**
 	 * 根据id和用户名修改用户密码
@@ -93,11 +93,11 @@ public interface WriterUserDao {
      * @param pageParameter
      * @return
      */
-	Integer getOrgTotal(PageParameter<WriterUser> pageParameter);
+	Integer getOrgTotal(PageParameter<CommuserWriterUser> pageParameter);
 	/**
 	 * 分页查询机构用户的作家
 	 * @param pageParameter
 	 * @return
 	 */
-	List<WriterUser> getOrg(PageParameter<WriterUser> pageParameter);
+	List<CommuserWriterUser> getOrg(PageParameter<CommuserWriterUser> pageParameter);
 }

@@ -1,10 +1,10 @@
 package com.bc.pmpheep.back.commuser.user.service;
 
-import com.bc.pmpheep.back.commuser.user.bean.Org;
-import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
-import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertification;
-import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertificationVO;
-import com.bc.pmpheep.back.commuser.user.dao.WriterUserDao;
+import com.bc.pmpheep.back.commuser.user.bean.CommuserOrg;
+import com.bc.pmpheep.back.commuser.user.bean.CommuserWriterUser;
+import com.bc.pmpheep.back.commuser.user.bean.CommuserWriterUserCertification;
+import com.bc.pmpheep.back.commuser.user.bean.CommuserWriterUserCertificationVO;
+import com.bc.pmpheep.back.commuser.user.dao.WriterUserCommuserDao;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.back.util.ObjectUtil;
@@ -38,15 +38,15 @@ import java.util.List;
  * @审核人 ：
  *
  */
-@Service("com.bc.pmpheep.back.authadmin.usermanage.service.WriterUserServiceImpl")
-public class WriterUserServiceImpl implements WriterUserService {
+@Service("com.bc.pmpheep.back.commuser.user.service.commWriterUserServiceImpl")
+public class WriterUserCommuserServiceImpl implements WriterUserCommuserService {
 	@Autowired
-	private WriterUserDao writerUserDao;
+	private WriterUserCommuserDao writerUserDao;
 	@Autowired
 	private FileService fileService;
 
 	@Override
-	public WriterUser get(Long id) throws CheckedServiceException {
+	public CommuserWriterUser get(Long id) throws CheckedServiceException {
 		if (ObjectUtil.isNull(id)) {
 			throw new CheckedServiceException(CheckedExceptionBusiness.USER_MANAGEMENT,
 					CheckedExceptionResult.NULL_PARAM, "用户ID为空时禁止查询");
@@ -55,16 +55,16 @@ public class WriterUserServiceImpl implements WriterUserService {
 	}
 
 	@Override
-	public WriterUserCertificationVO showTeacherCertification(Long userId) {
+	public CommuserWriterUserCertificationVO showTeacherCertification(Long userId) {
 		if (ObjectUtil.isNull(userId)) {
 			throw new CheckedServiceException(CheckedExceptionBusiness.USER_MANAGEMENT,
 					CheckedExceptionResult.NULL_PARAM, "userId不能为空");
 		}
-		WriterUserCertificationVO writerUserCertificationVO = writerUserDao.showTeacherCertification(userId);
+		CommuserWriterUserCertificationVO writerUserCertificationVO = writerUserDao.showTeacherCertification(userId);
 		if (ObjectUtil.isNull(writerUserCertificationVO)) {
-			writerUserCertificationVO = new WriterUserCertificationVO();
+			writerUserCertificationVO = new CommuserWriterUserCertificationVO();
 		}
-		List<Org> orgList = writerUserDao.getOrgList();
+		List<CommuserOrg> orgList = writerUserDao.getOrgList();
 		writerUserCertificationVO.setOrgList(orgList);
 		String cert = writerUserCertificationVO.getCert();
 		if (StringUtil.notEmpty(cert)) {
@@ -78,7 +78,7 @@ public class WriterUserServiceImpl implements WriterUserService {
 	}
 
 	@Override
-	public WriterUserCertification updateTeacherCertification(WriterUserCertification writerUserCertification,
+	public CommuserWriterUserCertification updateTeacherCertification(CommuserWriterUserCertification writerUserCertification,
                                                               String realName) throws IOException {
 		if (ObjectUtil.isNull(writerUserCertification)) { // 获取的数据不能为空
 			throw new CheckedServiceException(CheckedExceptionBusiness.USER_MANAGEMENT,
@@ -93,7 +93,7 @@ public class WriterUserServiceImpl implements WriterUserService {
 		Integer progress = writerUserCertification.getProgress(); // 认证进度
 		String cert = writerUserCertification.getCert(); // 获取教师资格证
 		// 把获取的数据添加进writerUserCertification
-		WriterUserCertification writerUserCertifications = new WriterUserCertification();
+		CommuserWriterUserCertification writerUserCertifications = new CommuserWriterUserCertification();
 		writerUserCertifications.setId(id);
 		writerUserCertifications.setUserId(userId);
 		writerUserCertifications.setOrgId(orgId);
@@ -101,7 +101,7 @@ public class WriterUserServiceImpl implements WriterUserService {
 		writerUserCertifications.setIdcard(idCard);
 		writerUserCertifications.setProgress(progress);
 		writerUserCertifications.setCert(cert);
-		WriterUser writerUser = new WriterUser();
+		CommuserWriterUser writerUser = new CommuserWriterUser();
 		writerUser.setIdcard(idCard);
 		writerUser.setHandphone(handPhone);
 		writerUser.setOrgId(orgId);
@@ -152,13 +152,13 @@ public class WriterUserServiceImpl implements WriterUserService {
 	}
 
 	@Override
-	public PageResult<WriterUser> getOrg(PageParameter<WriterUser> pageParameter) {
+	public PageResult<CommuserWriterUser> getOrg(PageParameter<CommuserWriterUser> pageParameter) {
 		if(ObjectUtil.isNull(pageParameter.getParameter().getOrgId())){
 			throw new CheckedServiceException(CheckedExceptionBusiness.USER_MANAGEMENT,
                     CheckedExceptionResult.NULL_PARAM, "机构id不能为空");
 		}
 		int total = writerUserDao.getOrgTotal(pageParameter);
-        PageResult<WriterUser> pageResult = new PageResult<>();
+        PageResult<CommuserWriterUser> pageResult = new PageResult<>();
         if (total > 0) {
             PageParameterUitl.CopyPageParameter(pageParameter, pageResult);
             pageResult.setRows(writerUserDao.getOrg(pageParameter));

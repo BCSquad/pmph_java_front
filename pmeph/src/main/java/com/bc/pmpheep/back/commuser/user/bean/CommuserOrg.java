@@ -12,8 +12,8 @@ import java.sql.Timestamp;
  *
  */
 @SuppressWarnings("serial")
-@Alias("Org")
-public class Org implements Serializable {
+@Alias("CommuserOrg")
+public class CommuserOrg implements Serializable {
 	/**
 	 * 主键
 	 */
@@ -63,11 +63,11 @@ public class Org implements Serializable {
 	 */
 	private Timestamp gmtUpdate;
 
-	public Org() {
+	public CommuserOrg() {
 
 	}
 
-	public Org(Long id) {
+	public CommuserOrg(Long id) {
 		this.id = id;
 	}
 
@@ -94,7 +94,7 @@ public class Org implements Serializable {
 	 * @param gmtCreate
 	 * @param gmtUpdate
 	 */
-	public Org(Long parentId, String orgName, Long orgTypeId, Long areaId, String contactPerson, String contactPhone,
+	public CommuserOrg(Long parentId, String orgName, Long orgTypeId, Long areaId, String contactPerson, String contactPhone,
 			String note, Integer sort, boolean isDeleted, Timestamp gmtCreate, Timestamp gmtUpdate) {
 		this.parentId = parentId;
 		this.orgName = orgName;

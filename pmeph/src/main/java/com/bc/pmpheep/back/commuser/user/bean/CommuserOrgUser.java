@@ -13,8 +13,8 @@ import java.util.Date;
  * 
  */
 @SuppressWarnings("serial")
-@Alias("OrgUser")
-public class OrgUser implements Serializable {
+@Alias("CommuserOrgUser")
+public class CommuserOrgUser implements Serializable {
     /**
      * 主键
      */
@@ -118,11 +118,11 @@ public class OrgUser implements Serializable {
 
     private String    loginType;
 
-    public OrgUser() {
+    public CommuserOrgUser() {
 
     }
 
-    public OrgUser(Long id) {
+    public CommuserOrgUser(Long id) {
         this.id = id;
     }
 
@@ -131,17 +131,17 @@ public class OrgUser implements Serializable {
      * @param username 机构代码
      * @param password 密码
      */
-    public OrgUser(String username, String password) {
+    public CommuserOrgUser(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    public OrgUser(Long id, Integer progress) {
+    public CommuserOrgUser(Long id, Integer progress) {
         this.id = id;
         this.progress = progress;
     }
 
-    public OrgUser(String username, String password, Boolean isDisabled, Long orgId,
+    public CommuserOrgUser(String username, String password, Boolean isDisabled, Long orgId,
     String realname, Integer sex, String position, String title, String fax, String handphone,
     String telephone, String idcard, String email, String address, String postcode, String note,
     Integer sort, Boolean isDeleted, Timestamp gmtCreate, Timestamp gmtUpdate) {

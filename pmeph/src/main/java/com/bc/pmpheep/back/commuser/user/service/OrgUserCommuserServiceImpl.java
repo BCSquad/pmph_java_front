@@ -1,8 +1,8 @@
 package com.bc.pmpheep.back.commuser.user.service;
 
 import com.bc.pmpheep.back.common.service.BaseService;
-import com.bc.pmpheep.back.commuser.user.bean.OrgUser;
-import com.bc.pmpheep.back.commuser.user.dao.OrgUserDao;
+import com.bc.pmpheep.back.commuser.user.bean.CommuserOrgUser;
+import com.bc.pmpheep.back.commuser.user.dao.OrgUserCommuserDao;
 import com.bc.pmpheep.back.util.*;
 import com.bc.pmpheep.service.exception.CheckedExceptionBusiness;
 import com.bc.pmpheep.service.exception.CheckedExceptionResult;
@@ -19,13 +19,13 @@ import java.util.List;
  * @author tyc
  * 
  */
-@Service("com.bc.pmpheep.back.authadmin.usermanage.service.OrgUserServiceImpl")
-public class OrgUserServiceImpl extends BaseService implements OrgUserService {
+@Service("com.bc.pmpheep.back.commuser.user.service.commOrgUserServiceImpl")
+public class OrgUserCommuserServiceImpl extends BaseService implements OrgUserCommuserService {
     @Autowired
-    private OrgUserDao orgUserDao;
+    private OrgUserCommuserDao orgUserDao;
 
     @Override
-    public List<OrgUser> getOrgUserListByOrgIds(List<Long> orgIds) throws CheckedServiceException {
+    public List<CommuserOrgUser> getOrgUserListByOrgIds(List<Long> orgIds) throws CheckedServiceException {
         if (null == orgIds) {
             throw new CheckedServiceException(CheckedExceptionBusiness.USER_MANAGEMENT,
                                               CheckedExceptionResult.NULL_PARAM, "参数为空");
@@ -40,7 +40,7 @@ public class OrgUserServiceImpl extends BaseService implements OrgUserService {
      * @throws CheckedServiceException
      */
     @Override
-    public OrgUser addOrgUser(OrgUser orgUser) throws CheckedServiceException {
+    public CommuserOrgUser addOrgUser(CommuserOrgUser orgUser) throws CheckedServiceException {
         if (ObjectUtil.isNull(orgUser)) {
             throw new CheckedServiceException(CheckedExceptionBusiness.USER_MANAGEMENT,
                                               CheckedExceptionResult.ILLEGAL_PARAM, "参数为空");
@@ -72,7 +72,7 @@ public class OrgUserServiceImpl extends BaseService implements OrgUserService {
      * @throws CheckedServiceException
      */
     @Override
-    public OrgUser getOrgUserById(Long id) throws CheckedServiceException {
+    public CommuserOrgUser getOrgUserById(Long id) throws CheckedServiceException {
         if (null == id) {
             throw new CheckedServiceException(CheckedExceptionBusiness.USER_MANAGEMENT,
                                               CheckedExceptionResult.NULL_PARAM, "主键为空");
@@ -101,7 +101,7 @@ public class OrgUserServiceImpl extends BaseService implements OrgUserService {
      * @throws CheckedServiceException
      */
     @Override
-    public Integer updateOrgUser(OrgUser orgUser) throws CheckedServiceException {
+    public Integer updateOrgUser(CommuserOrgUser orgUser) throws CheckedServiceException {
         if (null == orgUser.getId()) {
             throw new CheckedServiceException(CheckedExceptionBusiness.USER_MANAGEMENT,
                                               CheckedExceptionResult.NULL_PARAM, "主键为空");
@@ -116,18 +116,18 @@ public class OrgUserServiceImpl extends BaseService implements OrgUserService {
             throw new CheckedServiceException(CheckedExceptionBusiness.SCHOOL_ADMIN_CHECK,
                                               CheckedExceptionResult.NULL_PARAM, "参数为空");
         }
-        List<OrgUser> orgUserList = orgUserDao.getOrgUserByIds(orgUserIds);
+        List<CommuserOrgUser> orgUserList = orgUserDao.getOrgUserByIds(orgUserIds);
         Integer count = 0;
         if (CollectionUtil.isNotEmpty(orgUserList)) {
-            List<OrgUser> orgUsers = new ArrayList<OrgUser>(orgUserList.size());
-            for (OrgUser orgUser : orgUserList) {
+            List<CommuserOrgUser> orgUsers = new ArrayList<CommuserOrgUser>(orgUserList.size());
+            for (CommuserOrgUser orgUser : orgUserList) {
                 if (Const.ORG_USER_PROGRESS_1 == orgUser.getProgress()
                     || Const.ORG_USER_PROGRESS_2 == orgUser.getProgress()) {
                     throw new CheckedServiceException(CheckedExceptionBusiness.USER_MANAGEMENT,
                                                       CheckedExceptionResult.NULL_PARAM,
                                                       "已审核的用户不能再次审核");
                 }
-                orgUsers.add(new OrgUser(orgUser.getId(), progress));
+                orgUsers.add(new CommuserOrgUser(orgUser.getId(), progress));
             }
             if (CollectionUtil.isNotEmpty(orgUsers)) {
                 count = orgUserDao.updateOrgUserProgressById(orgUsers);
@@ -137,7 +137,7 @@ public class OrgUserServiceImpl extends BaseService implements OrgUserService {
     }
 
     @Override
-    public String addOrgUserOfBack(OrgUser orgUser) throws CheckedServiceException {
+    public String addOrgUserOfBack(CommuserOrgUser orgUser) throws CheckedServiceException {
         if (StringUtil.isEmpty(orgUser.getUsername())) {
             throw new CheckedServiceException(CheckedExceptionBusiness.USER_MANAGEMENT,
                                               CheckedExceptionResult.NULL_PARAM, "机构代码不能为空");

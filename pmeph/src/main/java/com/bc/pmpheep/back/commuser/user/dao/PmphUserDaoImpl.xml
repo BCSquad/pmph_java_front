@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.bc.pmpheep.back.commuser.user.dao.PmphUserDao">
+<mapper namespace="com.bc.pmpheep.back.commuser.user.dao.PmphUserCommuserDao">
 	<sql id="key">
 		<!-- 去掉最后一个, -->
 		<trim suffixOverrides=",">
@@ -91,7 +91,7 @@
 			</if>
 		</trim>
 	</sql>
-	<insert id="add" parameterType="PmphUser" useGeneratedKeys="true"
+	<insert id="add" parameterType="CommuserPmphUser" useGeneratedKeys="true"
 		keyProperty="id">
 		<!-- sql片段对应字段名,id属性值任意 -->
 		INSERT INTO pmph_user
@@ -105,7 +105,7 @@
 	</insert>
 
 	<!-- 动态更新对象的写法 -->
-	<update id="update" parameterType="PmphUser">
+	<update id="update" parameterType="CommuserPmphUser">
 		UPDATE pmph_user
 		<set>
 			<if test="username != null and username!=''">
@@ -167,7 +167,7 @@
 		</foreach>
 	</delete>
 
-	<select id="get" parameterType="Long" resultType="PmphUser">
+	<select id="get" parameterType="Long" resultType="CommuserPmphUser">
 		SELECT
 		username,
 		is_disabled,

@@ -15,8 +15,8 @@ import java.sql.Timestamp;
  * 
  */
 @SuppressWarnings("serial")
-@Alias("WriterUserCertification")
-public class WriterUserCertification implements Serializable {
+@Alias("CommuserWriterUserCertification")
+public class CommuserWriterUserCertification implements Serializable {
     // 主键
     private Long id;
     // 作家id
@@ -36,20 +36,20 @@ public class WriterUserCertification implements Serializable {
     // 修改时间
     private Timestamp gmtUpdate;
 
-    public WriterUserCertification() {
+    public CommuserWriterUserCertification() {
     }
 
-    public WriterUserCertification(Long userId, Integer progress) {
+    public CommuserWriterUserCertification(Long userId, Integer progress) {
         this.userId = userId;
         this.progress = progress;
     }
 
-    public WriterUserCertification(Long id) {
+    public CommuserWriterUserCertification(Long id) {
         super();
         this.id = id;
     }
 
-    public WriterUserCertification(Long userId, Long orgId, String handphone, String idcard,
+    public CommuserWriterUserCertification(Long userId, Long orgId, String handphone, String idcard,
     		Integer progress, String cert, Timestamp gmtCreate, Timestamp gmtUpdate) {
         this.userId = userId;
         this.orgId = orgId;

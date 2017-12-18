@@ -1,6 +1,6 @@
 package com.bc.pmpheep.back.commuser.user.service;
 
-import com.bc.pmpheep.back.commuser.user.bean.PmphUser;
+import com.bc.pmpheep.back.commuser.user.bean.CommuserPmphUser;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 
 /**
@@ -20,12 +20,12 @@ import com.bc.pmpheep.service.exception.CheckedServiceException;
  * @审核人 ：
  *
  */
-public interface PmphUserService {
+public interface PmphUserCommuserService {
 	/**
 	 * 根据主键 id 加载用户对象
 	 * 
 	 * @param id
 	 * @return
 	 */
-	PmphUser get(Long id) throws CheckedServiceException;
+	CommuserPmphUser get(Long id) throws CheckedServiceException;
 }

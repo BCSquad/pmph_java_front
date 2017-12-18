@@ -1,8 +1,8 @@
 package com.bc.pmpheep.back.commuser.user.service;
 
-import com.bc.pmpheep.back.commuser.user.bean.WriterUser;
-import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertification;
-import com.bc.pmpheep.back.commuser.user.bean.WriterUserCertificationVO;
+import com.bc.pmpheep.back.commuser.user.bean.CommuserWriterUser;
+import com.bc.pmpheep.back.commuser.user.bean.CommuserWriterUserCertification;
+import com.bc.pmpheep.back.commuser.user.bean.CommuserWriterUserCertificationVO;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
@@ -26,14 +26,14 @@ import java.io.IOException;
  * @审核人 ：
  *
  */
-public interface WriterUserService {
+public interface WriterUserCommuserService {
 	/**
 	 * 根据主键 id 加载用户对象
 	 * 
 	 * @param id
 	 * @return
 	 */
-	WriterUser get(Long id) throws CheckedServiceException;
+	CommuserWriterUser get(Long id) throws CheckedServiceException;
 	
 	/**
 	 * 查看学校教师认证信息
@@ -42,7 +42,7 @@ public interface WriterUserService {
 	 * @param userId
 	 * @return
 	 */
-	WriterUserCertificationVO showTeacherCertification(Long userId);
+	CommuserWriterUserCertificationVO showTeacherCertification(Long userId);
 	
 	/**
 	 * 修改学校教师认证
@@ -51,7 +51,7 @@ public interface WriterUserService {
 	 * @param writerUserCertification
 	 * @return
 	 */
-	WriterUserCertification updateTeacherCertification(WriterUserCertification writerUserCertification,
+	CommuserWriterUserCertification updateTeacherCertification(CommuserWriterUserCertification writerUserCertification,
                                                        String realName) throws IOException ;
 	
 	/**
@@ -68,5 +68,5 @@ public interface WriterUserService {
      * @param pageParameter
      * @return
      */
-	PageResult<WriterUser> getOrg(PageParameter<WriterUser> pageParameter) throws CheckedServiceException;
+	PageResult<CommuserWriterUser> getOrg(PageParameter<CommuserWriterUser> pageParameter) throws CheckedServiceException;
 }

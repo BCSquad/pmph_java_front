@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.bc.pmpheep.back.commuser.user.dao.OrgUserDao">
+<mapper namespace="com.bc.pmpheep.back.commuser.user.dao.OrgUserCommuserDao">
 	<sql id="key">
 		<!-- 去掉最后一个, -->
 		<trim suffixOverrides=",">
@@ -146,7 +146,7 @@
 		</trim>
 	</sql>
 	<!-- 新增OrgUser -->
-	<insert id="addOrgUser" parameterType="OrgUser">
+	<insert id="addOrgUser" parameterType="CommuserOrgUser">
 		<selectKey resultType="java.lang.Long" order="AFTER"
 			keyProperty="id"> <!-- order="AFTER"表示先执行插入语句，之后再执行查询语句 BEFORE 或 AFTER -->
 			SELECT LAST_INSERT_ID()
@@ -166,7 +166,7 @@
 	</delete>
 
 	<!-- 更新OrgUser -->
-	<update id="updateOrgUser" parameterType="OrgUser">
+	<update id="updateOrgUser" parameterType="CommuserOrgUser">
 		update
 		org_user
 		<set>
@@ -256,7 +256,7 @@
 	</update>
 
 	<!-- 根据id集合查询一个OrgUser -->
-	<select id="getOrgUserByIds" parameterType="list" resultType="OrgUser">
+	<select id="getOrgUserByIds" parameterType="list" resultType="CommuserOrgUser">
 		select 
 			* 
 		from 
@@ -270,12 +270,12 @@
 	</select>
 	
 	<!-- 根据id查询一个OrgUser -->
-	<select id="getOrgUserById" parameterType="java.lang.Long" resultType="OrgUser">
+	<select id="getOrgUserById" parameterType="java.lang.Long" resultType="CommuserOrgUser">
 		select * from org_user where id=#{id} ;
 	</select>
 
 	<!-- 根据机构id集查询用户 -->
-	<select id="getOrgUserListByOrgIds" resultType="OrgUser" parameterType="list">
+	<select id="getOrgUserListByOrgIds" resultType="CommuserOrgUser" parameterType="list">
 		select
 			*
 		from
@@ -302,18 +302,18 @@
 
 	<!-- 根据机构id查询OrgUser -->
 	<select id="listOrgUserByOrgId" parameterType="java.lang.Long"
-		resultType="OrgUser">
+		resultType="CommuserOrgUser">
 		select * from org_user where org_id=#{orgId} ;
 	</select>
 	
 	<!-- 根据机构username查询OrgUser -->
 	<select id="getOrgUsername" parameterType="java.lang.String"
-		resultType="OrgUser">
+		resultType="CommuserOrgUser">
 		select * from org_user where username=#{username} ;
 	</select>
 	
 	<!-- 根据id和机构代码修改机构用户密码 -->
-	<update id="updateOrgUserPassWord" parameterType="OrgUser">
+	<update id="updateOrgUserPassWord" parameterType="CommuserOrgUser">
 		update
 		org_user
 		<set>

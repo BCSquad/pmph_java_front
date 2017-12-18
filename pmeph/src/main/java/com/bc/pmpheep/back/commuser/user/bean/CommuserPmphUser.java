@@ -10,8 +10,8 @@ import java.util.Date;
  * PmphUser 实体类
  */
 @SuppressWarnings("serial")
-@Alias("PmphUser")
-public class PmphUser implements java.io.Serializable {
+@Alias("CommuserPmphUser")
+public class CommuserPmphUser implements java.io.Serializable {
     /**
      * 主键
      */
@@ -77,20 +77,20 @@ public class PmphUser implements java.io.Serializable {
      */
     private Boolean isAdmin = false;
 
-    public PmphUser() {
+    public CommuserPmphUser() {
     }
 
-    public PmphUser(Long id) {
+    public CommuserPmphUser(Long id) {
         this.id = id;
     }
 
-    public PmphUser(String username, String password) {
+    public CommuserPmphUser(String username, String password) {
         this.username = username;
         this.password = password;
 
     }
 
-    public PmphUser(String username, String password, Boolean isDisabled, String realname,
+    public CommuserPmphUser(String username, String password, Boolean isDisabled, String realname,
     Long departmentId, String handphone, String email, String avatar, String note, Integer sort,
     Boolean isDeleted, Date gmtCreate, Date gmtUpdate, Short loginType) {
         this.username = username;

@@ -1,6 +1,6 @@
 package com.bc.pmpheep.back.commuser.user.dao;
 
-import com.bc.pmpheep.back.commuser.user.bean.OrgUser;
+import com.bc.pmpheep.back.commuser.user.bean.CommuserOrgUser;
 
 import java.util.List;
 
@@ -9,18 +9,18 @@ import java.util.List;
  * 
  * @author mryang
  */
-public interface OrgUserDao {
+public interface OrgUserCommuserDao {
     /**
      * 根据机构id集查询用户 (逻辑没有删除和启用的)
      */
-    List<OrgUser> getOrgUserListByOrgIds(List<Long> orgIds);
+    List<CommuserOrgUser> getOrgUserListByOrgIds(List<Long> orgIds);
 
     /**
      * 
      * @param orgUser 实体对象
      * @return 影响行数
      */
-    Integer addOrgUser(OrgUser orgUser);
+    Integer addOrgUser(CommuserOrgUser orgUser);
 
     /**
      * 根据主键Id查询对象
@@ -28,7 +28,7 @@ public interface OrgUserDao {
      * @param id 主键id
      * @return OrgUser OrgUser对象
      */
-    OrgUser getOrgUserById(Long id);
+    CommuserOrgUser getOrgUserById(Long id);
 
     /**
      * 
@@ -40,7 +40,7 @@ public interface OrgUserDao {
      * @return
      * </pre>
      */
-    List<OrgUser> getOrgUserByIds(List<Long> ids);
+    List<CommuserOrgUser> getOrgUserByIds(List<Long> ids);
 
     /**
      * 
@@ -53,7 +53,7 @@ public interface OrgUserDao {
      * @param orgUser
      * @return 影响行数
      */
-    Integer updateOrgUser(OrgUser orgUser);
+    Integer updateOrgUser(CommuserOrgUser orgUser);
 
     /**
      * 
@@ -76,7 +76,7 @@ public interface OrgUserDao {
 	 * @return
 	 * </pre>
      */
-    Integer updateOrgUserProgressById(List<OrgUser> orgUser);
+    Integer updateOrgUserProgressById(List<CommuserOrgUser> orgUser);
 
     /**
      * 
@@ -87,14 +87,14 @@ public interface OrgUserDao {
      * @return
      * 
      */
-    List<OrgUser> listOrgUserByOrgId(Long orgId);
+    List<CommuserOrgUser> listOrgUserByOrgId(Long orgId);
     
     /**
      * 根据username查询是否存在该机构名称
      * @param username
      * @return
      */
-	List<OrgUser> getOrgUsername(String username);
+	List<CommuserOrgUser> getOrgUsername(String username);
 	
 	/**
 	 * 根据id和机构代码修改机构用户密码

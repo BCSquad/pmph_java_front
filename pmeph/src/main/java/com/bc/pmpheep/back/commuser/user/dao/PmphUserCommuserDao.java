@@ -1,6 +1,6 @@
 package com.bc.pmpheep.back.commuser.user.dao;
 
-import com.bc.pmpheep.back.commuser.user.bean.PmphUser;
+import com.bc.pmpheep.back.commuser.user.bean.CommuserPmphUser;
 
 /**
  * 
@@ -19,7 +19,7 @@ import com.bc.pmpheep.back.commuser.user.bean.PmphUser;
  * @审核人 ：
  *
  */
-public interface PmphUserDao {
+public interface PmphUserCommuserDao {
 	/**
 	 * 
 	 * 
@@ -29,5 +29,5 @@ public interface PmphUserDao {
 	 * @return
 	 *
 	 */
-	PmphUser get(Long id);
+	CommuserPmphUser get(Long id);
 }
