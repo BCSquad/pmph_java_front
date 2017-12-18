@@ -166,7 +166,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 	}
 	@Override
 	public int updateDeclaration(Map<String, Object> map) {
-		return this.updateDeclaration(map);
+		return this.madd.updateDeclaration(map);
 	}
 	
 }
