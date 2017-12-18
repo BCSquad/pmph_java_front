@@ -25,7 +25,7 @@ String contextpath=request.getContextPath();
     <script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js" type="text/javascript"></script>
     <link href="<%=path%>/statics/css/jquery.selectlist.css" rel="stylesheet" type="text/css" />
 	<script src="<%=path%>/resources/comm/base.js"></script>
-    <link href="<%=path%>/statics/authadmin/teacherauth/teacherAttest.css" rel="stylesheet" type="text/css" />
+    <link href="<%=path%>/statics/commuser/teachercertification/teacherAttest.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript">
     	
