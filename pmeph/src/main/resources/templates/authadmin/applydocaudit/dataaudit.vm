@@ -4,7 +4,7 @@
 #foreach($c in $!{List_map})
 	<tr>
 	    <td>$teacherauthNum</td>
-	   	<td class="font_name" onclick="toName('$!{material_id}',$!{c.id})">$!{c.realname}</td>
+	   	<td class="font_name" onclick="toName($!{material_id},$!{c.id})">$!{c.realname}</td>
 		<td>$!c.position</td>
 		<td>$!c.title</td>
 		
