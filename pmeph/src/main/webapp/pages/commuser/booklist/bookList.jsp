@@ -51,16 +51,17 @@
         </div>
         <div class="list" style="background-color: #ffffff">
         	<c:choose>
-				<c:when test="${not empty page}">
+				<%-- <c:when test="${not empty page}"> --%>
+				<c:when test="${listSize > 0}">
 					<c:forEach items="${page.rows}" var="books" varStatus="vs">
 						<div class="oneList">
 			                <div class="leftPicture">
 			                	<c:choose>
-			                		<c:when test="${not empty books.imageUrl}">
+			                		<c:when test="${not empty books.imageUrl && books.imageUrl!='DEFAULT'}">
 			                			<img class="pictureSize" src="${books.imageUrl }">
 			                		</c:when>
 			                		<c:otherwise>
-			                			<img class="pictureSize" src="<%=basePath%>/statics/image/ts04.png">
+			                			<img class="pictureSize" src="<%=basePath%>/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg">
 			                		</c:otherwise>
 			                	</c:choose>
 			                </div>
@@ -68,7 +69,8 @@
 			                    <div class="upDiv">
 			                        <div class="upLeft">
 			                            <div class="bookName">
-			                                <span>${books.bookname}</span>
+			                            	<a class="not-like-an-a" target="_blank" href="<%=path%>/readdetail/todetail.action?id=${books.id}"><span class="book-name-span">${books.bookname}</span></a>
+			                                
 			                            </div>
 			                            <div class="name">
 			                                <span>${books.author} 丨 ${books.publisher}</span>
@@ -94,7 +96,7 @@
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
-					<div class="no-more" style="display: none;">
+					<div class="no-more" style="">
 	                    <img src="<c:url value="/statics/image/aaa4.png"></c:url>">
 	                    <span>木有内容呀~~</span>
 	               	</div>
