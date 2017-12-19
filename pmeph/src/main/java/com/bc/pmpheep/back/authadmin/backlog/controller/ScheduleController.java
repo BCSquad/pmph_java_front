@@ -136,7 +136,6 @@ public class ScheduleController extends BaseController{
 		
 	}
 	
-	
 	//查询办事记录列表
 	@RequestMapping(value="/eventRecord")
 	public ModelAndView toEventRecord(HttpServletRequest  request) throws ParseException{
