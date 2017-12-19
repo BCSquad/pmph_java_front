@@ -31,7 +31,7 @@ import java.util.Map;
  * Created by lihuan on 2017/12/14.
  */
 @Controller
-public class SSOLoginoutController extends BaseController{
+public class SSOLoginoutController extends BaseController {
 
     @Autowired
     UserService userService;
@@ -81,19 +81,22 @@ public class SSOLoginoutController extends BaseController{
                 if ("Message".equals(attrs.getNamedItem("name").getNodeValue())) {
                     message = node.getTextContent();
                 }
+                if ("UserName".equals(attrs.getNamedItem("name").getNodeValue())) {
+                    username = node.getTextContent();
+                }
             }
-            if (!"ok".equals(status)) {
-                throw new RuntimeException("获取用户帐号失败");
+            if (!"OK".equals(status)) {
+                throw new RuntimeException("获取用户帐号失败:" + message);
             }
-            username = message;
+            System.out.println("username:" + username);
             Map<String, Object> user = userService.getUserInfo(username, usertype);
             if (user == null) {
 
                 //新建用户信息
 
-                userService.addNewUser(username,usertype);
+                userService.addNewUser(username, usertype);
                 user = userService.getUserInfo(username, usertype);
-               // throw new RuntimeException("获取用户帐号不存在");
+                // throw new RuntimeException("获取用户帐号不存在");
             }
 
             HttpSession session = request.getSession();
