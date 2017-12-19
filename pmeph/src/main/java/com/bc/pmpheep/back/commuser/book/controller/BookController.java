@@ -73,14 +73,15 @@ public class BookController extends BaseController {
         	String materiaName = bookService.getMaterialTypeNameById(type);
         	PageResult<BookVO> page = bookService.listBookVO(pageParameter);
             List<BookVO> bookList = page.getRows();
-            for (BookVO book : bookList) {
-                book.setImageUrl(RouteUtil.DEFAULT_USER_AVATAR);
-            }
             model.addObject("page", page);
             if (null == pageNumber) {
                 pageNumber = 1;
             }
-            
+            if (bookList!=null && bookList.size()>0) {
+            	model.addObject("listSize", bookList.size());
+			}else{
+				model.addObject("listSize", 0);
+			}
             model.addObject("parentTypeList", parentTypeList);
             model.addObject("materiaName", materiaName);
             model.addObject("pageNumber", pageNumber);
