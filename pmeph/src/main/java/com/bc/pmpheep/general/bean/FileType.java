@@ -35,10 +35,6 @@ public enum FileType {
      * CMS附件
      */
     CMS_ATTACHMENT("CMS附件"),
-	/**
-     * 教师资格证
-     */
-    TEACHER_CERTIFICATION_PIC("教师资格证"),
     /**
      * 机构用户委托书
      */
