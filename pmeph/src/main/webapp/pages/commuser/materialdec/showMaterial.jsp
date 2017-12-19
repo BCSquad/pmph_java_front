@@ -32,7 +32,11 @@
 			<c:forEach var="list" items="${tsxzList}">
 			<div class="item">
 				<span>图书：</span>
-				<span>${list.textbook_name} — ${list.preset_position}</span>
+				<span>${list.textbook_name} — 
+					<c:if test="${list.preset_position == '1'}">主编</c:if>
+					<c:if test="${list.preset_position == '2'}">副主编</c:if>
+					<c:if test="${list.preset_position == '3'}">编委</c:if>
+					</span>
 				<span>
 					<a href="javascript:" class="filename"  onclick="downLoadProxy('${list.syllabus_id}')">${list.syllabus_name}</a>
 				</span>
@@ -49,14 +53,22 @@
 				<table class="tab_1">
 					<tr>
 						<td><span>姓&emsp;&emsp;名：${gezlList.realname}</span></td>
-						<td><span>性&emsp;&emsp;别：${gezlList.sex}</span></td>
+						<td><span>性&emsp;&emsp;别：
+								<c:if test="${gezlList.sex == '0'}">保密</c:if>
+								<c:if test="${gezlList.sex == '1'}">男</c:if>
+								<c:if test="${gezlList.sex == '2'}">女</c:if>
+							</span></td>
 						<td><span>出生年月：${gezlList.birthday}</span></td>
 						<td><span>教&emsp;&emsp;龄：${gezlList.experience}</span></td>
 					</tr>
 					<tr>
 						<td><span>工作单位：${gezlList.org_name}</span></td>
 						<td><span>职&emsp;&emsp;务：${gezlList.position}</span></td>
-						<td><span>职&emsp;&emsp;称：${gezlList.title}</span></td>
+						<td><span>职&emsp;&emsp;称：
+								<c:if test="${gezlList.title == '0'}">教授</c:if>
+								<c:if test="${gezlList.title == '1'}">主任</c:if>
+								<c:if test="${gezlList.title == '2'}">副主任</c:if>
+							</span></td>
 						<td><span>邮&emsp;&emsp;编：${gezlList.postcode}</span></td>
 					</tr>
 					<tr>
@@ -67,7 +79,11 @@
 					<tr>
 						<td><span>手&emsp;&emsp;机：${gezlList.handphone}</span></td>
 						<td><span style="width: 70px">E-mail：${gezlList.email}</span></td>
-						<td><span>证件类型：${gezlList.idtype}</span></td>
+						<td><span>证件类型：
+								<c:if test="${gezlList.idtype == '0'}">身份证</c:if>
+								<c:if test="${gezlList.idtype == '1'}">护照</c:if>
+								<c:if test="${gezlList.idtype == '2'}">军官证</c:if>
+							</span></td>
 						<td><span>证件号码：${gezlList.idcard}</span></td>
 					</tr>
 				</table>
@@ -182,7 +198,12 @@
 						<c:forEach var="list" items="${zjxsList}">
 							<tr>
 								<td>${list.org_name}</td>
-								<td>${list.rank}</td>
+								<td>
+									<c:if test="${list.rank == '1'}">国际</c:if>
+									<c:if test="${list.rank == '2'}">国家</c:if>
+									<c:if test="${list.rank == '3'}">省部</c:if>
+									<c:if test="${list.rank == '4'}">其他</c:if>
+								</td>
 								<td>${list.position}</td>
 								<td>${list.note}</td>
 							</tr>
@@ -210,7 +231,12 @@
 						<c:forEach var="list" items="${jcbjList}">
 							<tr>
 								<td>${list.material_name}</td>
-								<td>${list.position}</td>
+								<td>
+									<c:if test="${list.position == '1'}">主编</c:if>
+									<c:if test="${list.position == '2'}">副主编</c:if>
+									<c:if test="${list.position == '3'}">编委 </c:if>
+									<c:if test="${list.position == '0'}">无</c:if>
+								</td>
 								<td>${list.note}</td>
 							</tr>
 						</c:forEach>
@@ -326,7 +352,11 @@
 							<tr>
 								<td>${list.material_name}</td>
 								<td>${list.isbn}</td>
-								<td>${list.rank}</td>
+								<td>
+									<c:if test="${list.rank == '1'}">教育部十二五</c:if>
+									<c:if test="${list.rank == '2'}">国家卫计委十二五</c:if>
+									<c:if test="${list.rank == '3'}">教育部十二五、国家卫计委十二五</c:if>
+								</td>
 								<td>${list.note}</td>
 							</tr>
 						</c:forEach>
@@ -357,8 +387,19 @@
 						<c:forEach var="list" items="${jcbxList}">
 						<tr>
 							<td>${list.material_name}</td>
-							<td>${list.rank}</td>
-							<td>${list.position}</td>
+							<td>
+								<c:if test="${list.rank == '1'}">其他教材</c:if>
+								<c:if test="${list.rank == '2'}">教育部规划</c:if>
+								<c:if test="${list.rank == '3'}">卫计委规划</c:if>
+								<c:if test="${list.rank == '4'}">区域规划</c:if>
+								<c:if test="${list.rank == '5'}">创新教材</c:if>
+							</td>
+							<td>
+								<c:if test="${list.position == '1'}">主编</c:if>
+								<c:if test="${list.position == '2'}">副主编</c:if>
+								<c:if test="${list.position == '3'}">编委 </c:if>
+								<c:if test="${list.position == '0'}">无</c:if>
+							</td>
 							<td>${list.publisher}</td>
 							<td>${list.publish_date}</td>
 							<td>${list.isbn}</td>
@@ -389,7 +430,12 @@
 						<c:forEach var="list" items="${zjkyList}">
 							<tr>
 								<td>${list.research_name}</td>
-								<td>${list.approval_unit}</td>
+								<td>
+									<c:if test="${list.approval_unit == '1'}">主编</c:if>
+									<c:if test="${list.approval_unit == '2'}">副主编</c:if>
+									<c:if test="${list.approval_unit == '3'}">编委 </c:if>
+									<c:if test="${list.approval_unit == '0'}">无</c:if>
+								</td>
 								<td>${list.award}</td>
 								<td>${list.note}</td>
 							</tr>
@@ -406,7 +452,7 @@
 					<span class="tsxz_title">${zjkzxx.extension_name}</span>
 				</div>
 				<div class="content">
-					<textarea class="text_cl" name="content">${zjkzxx.content}</textarea>
+					<div style="margin: 5px;">${zjkzxx.content}</div>
 				</div>
 				<hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">
 			</div>

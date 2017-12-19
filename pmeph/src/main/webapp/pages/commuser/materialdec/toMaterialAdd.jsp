@@ -8,14 +8,13 @@
            var contextpath = '${pageContext.request.contextPath}/';
   </script>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-<title>教材申报审核</title>
+<title>教材申报填写</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
 <link rel="stylesheet" href="${ctx}/statics/materialdec/materialadd.css" type="text/css">
 <link rel="stylesheet" href="${ctx}/statics/css/jquery.calendar.css" type="text/css">
 <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css" type="text/css">
 <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery-validate.js"></script>
 <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.calendar.js"></script>
 <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
 <script type="text/javascript" src="${ctx}/resources/comm/layer/layer.js"></script>
@@ -32,7 +31,7 @@
 		</div>
 		<!-- 图书选择-->
 		<form id="objForm">
-		<div class="sbxq_item1" id="tsxz">
+		 <div class="sbxq_item1" id="tsxz">
 			<div>
 				<input type="hidden" id="select_nr" value="${bookSelects}"/>
 				<input type="hidden" id="material_id" name="material_id" value="${materialMap.id}"/>
@@ -48,7 +47,7 @@
 				</select>
 				<div style="float: left;margin-left: 30px;" class="ts_radio">
 					<input type="radio" name="zw_1" checked="checked" value="1"/>主编
-					<input type="radio" name="zw_1" value="2"/>副编委
+					<input type="radio" name="zw_1" value="2"/>副主编
 					<input type="radio" name="zw_1" value="3"/>编委
 					<!-- 用于遍历radio中的值 -->
 					<input type="hidden" name="preset_position" value="zw_1">
@@ -61,9 +60,9 @@
 					<div class="scys" id="scjxdg_1"><span>上传文件</span></div>
 				</div>
 			</div>
-		</div>
+		</div> 
 		<!-- 专家信息-->
-		<div class="sbxq_item1">
+		 <div class="sbxq_item1">
 			<div>
 				<span id="tsxz_span2"></span>
 				<span class="tsxz_title">专家信息</span>
@@ -82,7 +81,7 @@
                                 <option value="1">男</option>
                                 <option value="2">女</option>
                             </select></td>
-						<td><span class="btbs">*</span><span>出生年月：</span>
+						<td><span class="btbs">*</span><span>出生年月：</span> 
 							<input class="cg_input" calendar format="'yyyy-mm-dd'"  name="birthday" value=""  id="birthday" onBlur="toisNah('出生日期不能为空','birthday')" /></td>
 						<td><span class="btbs">*</span><span>教&emsp;&emsp;龄：</span>
 							<input class="cg_input" name="experience" value="" id="experience" onBlur="toisNah('教龄不能为空','experience')"
@@ -99,7 +98,7 @@
                             <select class="select-input" id="zc" name="title" >
                                 <option value="0">教授</option>
                                 <option value="1">主任</option>
-                                <option value="3">一级教师</option>
+                                <option value="3">副主任</option>
                             </select></td>
 						<td><span class="btbs">*</span><span>地&emsp;&emsp;址：</span>
 							<input class="cg_input" name="address" value="" id="address" onBlur="toisNah('地址不能为空','address')" maxlength="45"/></td>

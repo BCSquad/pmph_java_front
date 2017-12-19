@@ -49,14 +49,17 @@
 					    	${list.bookSelect}
 					</select>
 					<div style="float: left;margin-left: 30px;" class="ts_radio">
-						<input type="radio" name="zw_1" checked="checked" value="1"/>主编
-						<input type="radio" name="zw_1" value="2"/>副编委
-						<input type="radio" name="zw_1" value="3"/>编委
+						<input type="radio" name="zw_1_${status.count}" checked="checked" value="1"/>主编
+						<input type="radio" name="zw_1_${status.count}" value="2"/>副编委
+						<input type="radio" name="zw_1_${status.count}" value="3"/>编委
 						<!-- 用于遍历radio中的值 -->
-						<input type="hidden" name="preset_position" value="zw_1">
+						<input type="hidden" name="preset_position" value="zw_1_${status.count}">
 					</div>
 					<div style="float: left;margin-left: 30px;">
 						<span style="float: left;">上传教学大纲：</span>
+						<span style="float: left;margin-right: 10px;">
+						<a href="javascript:" class="filename"  onclick="downLoadProxy('${list.syllabus_id}')">${list.syllabus_name}</a>
+						</span>
 						<div class="scys" id="scjxdg_1"><span>上传文件</span></div>
 					</div>
 				</div>
