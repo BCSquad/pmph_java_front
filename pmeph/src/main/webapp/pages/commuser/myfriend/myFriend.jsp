@@ -534,7 +534,7 @@ a{
         <div class="float_left">我的好友</div>
         <div class="float_right" style="color: #1abd44;">
             <img src="${ctx}/statics/image/tjhy.png" class="img1"/>
-            <text class="v_a" onclick = "window.location.href='${ctx}/addFriend/toPage.action'">添加好友</text>
+            <label class="v_a" onclick = "window.location.href='${ctx}/addFriend/toPage.action'" style="cursor: pointer;">添加好友</label>
             <input type="hidden" value="" id="frendId" />
         </div>
     </div>

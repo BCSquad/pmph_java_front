@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
@@ -56,15 +57,18 @@ public class TeacherCertification extends BaseController {
 	 * @return
 	 */
     @RequestMapping(value = "/updateTeacherCertification", method = RequestMethod.POST)
-    public ModelAndView updateTeacherCertification(CommuserWriterUserCertification WriterUserCertification, 
+    @ResponseBody
+    public CommuserWriterUserCertification updateTeacherCertification(CommuserWriterUserCertification WriterUserCertification, 
     		@RequestParam("realName") String realName) throws IOException {
-        ModelAndView model = new ModelAndView();
+        
         Map <String,Object> map = this.getUserInfo() ;
     	Long userId = new Long(String.valueOf(map.get("id")));
     	WriterUserCertification.setUserId(userId);
         CommuserWriterUserCertification updateWriterUserCertification =
         writerUserService.updateTeacherCertification(WriterUserCertification, realName);
-        model.addObject("updateWriterUserCertification", updateWriterUserCertification);
-        return model;
+       
+        return updateWriterUserCertification;
     }
+    
+    
 }

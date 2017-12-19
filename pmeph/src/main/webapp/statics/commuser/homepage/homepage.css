@@ -53,7 +53,10 @@
 .op-link .link:hover {
     background-color: #4d4d4d;
 }
-
+.op-link .link a{
+    text-decoration:none;
+    color: #dedede;
+}
 .op-link .link .icon {
     width: 6px;
     height: 12px;

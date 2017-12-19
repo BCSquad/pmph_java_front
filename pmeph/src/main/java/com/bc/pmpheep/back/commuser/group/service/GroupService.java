@@ -1,18 +1,56 @@
 package com.bc.pmpheep.back.commuser.group.service;
 
+
 import java.io.IOException;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.bc.pmpheep.back.commuser.group.bean.GroupFile;
+import com.bc.pmpheep.back.commuser.group.bean.GroupFileVO;
 import com.bc.pmpheep.back.commuser.group.bean.GroupList;
 import com.bc.pmpheep.back.commuser.group.bean.GroupMember;
-import com.bc.pmpheep.back.commuser.mygroup.bean.PmphGroupMemberVO;
+import com.bc.pmpheep.back.commuser.group.bean.GroupMessageVO;
+import com.bc.pmpheep.back.commuser.group.bean.PmphGroupMemberVO;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 
 public interface GroupService {
+	
+	/**
+	 * 小组上传文件
+	 * @introduction 
+	 * @author Mryang
+	 * @createDate 2017年12月13日 下午2:29:12
+	 * @param file
+	 * @param filee
+	 * @param groupId
+	 * @param thisId
+	 * @return
+	 */
+	Integer addFile(MultipartFile file,Long groupId,Long thisId)throws CheckedServiceException , IOException;
+	
+	/**
+	 * 退出小组
+	 * @introduction 
+	 * @author Mryang
+	 * @createDate 2017年12月13日 上午11:33:52
+	 * @param groupId
+	 * @param thisId
+	 * @return
+	 * @throws CheckedServiceException
+	 */
+	Boolean quitGroup(Long groupId,Long thisId) throws CheckedServiceException;
+
+	/**
+	 * 获取某小组文件的文件总数
+	 * @introduction 
+	 * @author Mryang
+	 * @createDate 2017年12月13日 上午10:13:15
+	 * @param groupId
+	 * @param fileName
+	 * @return
+	 */
+	Integer getFilesTotal(Long groupId, String fileName,Long thisId) throws CheckedServiceException;
 
 	/**
 	 * 
@@ -24,29 +62,30 @@ public interface GroupService {
 	 * @param id 用户id
 	 * @return List<GroupList>
 	 */
-	List<GroupList> groupList(@Param("start") Integer start, @Param("pageSize") Integer pageSize, 
-			@Param("id") Long id) throws CheckedServiceException;
+	List<GroupList> groupList(Integer start, Integer pageSize, Long id) throws CheckedServiceException;
 	
 	/**
 	 * 
 	 * Description:前台获取文件小组列表
 	 * @author:lyc
-	 * @date:2017年12月8日下午5:59:07
+	 * @date:2017年12月13日 上午10:28:14
 	 * @param 
-	 * @return List<GroupFile>
+	 * @return List<GroupFileVO>
 	 */
-	List<GroupFile> groupFiles(@Param("start") Integer start, @Param("pageSize") Integer pageSize, 
-			@Param("groupId") Long groupId,  @Param("fileName") String fileName) throws CheckedServiceException;
+	List<GroupFileVO> groupFiles (Integer pageNumber,Integer pageSize,Long groupId,String fileName,Long thisId) throws CheckedServiceException;
 	
 	/**
-	 * 
-	 * Description:删除文件（可批量删除）
-	 * @author:lyc
-	 * @date:2017年12月11日上午9:35:21
-	 * @param 
-	 * @return Integer
+	 * 删除我能删除的文件
+	 * @introduction 
+	 * @author Mryang
+	 * @createDate 2017年12月13日 下午4:52:11
+	 * @param groupId
+	 * @param id
+	 * @param fileId
+	 * @param thisId
+	 * @return
 	 */
-	String deleteFile(List<GroupFile> list, @Param("userId")Long userId) throws CheckedServiceException;
+	Integer deleteFile(Long id,Long groupId,String fileId,Long thisId) throws CheckedServiceException ;
 	
 	/**
 	 * 
@@ -81,6 +120,27 @@ public interface GroupService {
 	
 	/**
 	 * 
+	 * Description:添加小组信息
+	 * @author:lyc
+	 * @date:2017年12月12日下午3:56:57
+	 * @param 
+	 * @return String
+	 */
+	String addGroupMessage(String msgConrent, Long groupId) throws CheckedServiceException,IOException;
+	
+	/**
+	 * 
+	 * Description:更新小组文件下载次数
+	 * @author:lyc
+	 * @date:2017年12月12日下午4:34:43
+	 * @param 
+	 * @return Integer
+	 */
+	Integer updateGroupFileOfDown(@Param("groupId")Long groupId, @Param("fileId")String fileId) 
+			throws CheckedServiceException;
+	
+	/**
+	 * 
 	 * Description:进行各种操作之前判断是否为创建者或管理者
 	 * 
 	 * @author:lyc
@@ -100,4 +160,13 @@ public interface GroupService {
 	 * @return Boolean
 	 */
 	Boolean isFounder(Long groupId,  Long memberId) throws CheckedServiceException;
+	
+	/**
+	 * 获取小组讨论
+	 * @introduction 
+	 * @author Mryang
+	 * @createDate 2017年12月12日 下午5:40:07
+	 * @return
+	 */
+	List<GroupMessageVO> getTalks(Long thisId,Long groupId,Integer pageNumber,Integer pageSize);
 }

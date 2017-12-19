@@ -183,7 +183,7 @@ color:#FFF;
 
 .grsx {
     float: left;
-    height: 32px;
+    /*height: 32px;*/
     font-size: 12px;
     text-align: justify;
     color: #03717b;
@@ -512,13 +512,13 @@ color:#FFF;
 
 #suibiwenzhang {
     width: 870px;
-    height: 500px;
+    /*height: 500px;*/
     float: left;
 }
 
 #zuixinshuping {
     width: 870px;
-    height: 500px;
+    /*height: 500px;*/
     float: left;
 }
 

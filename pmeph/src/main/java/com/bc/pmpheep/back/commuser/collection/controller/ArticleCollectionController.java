@@ -1,6 +1,7 @@
 package com.bc.pmpheep.back.commuser.collection.controller;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.collection.service.ArticleCollectionService;
+import com.bc.pmpheep.back.commuser.messagereport.dao.InfoReportDao;
+import com.bc.pmpheep.back.commuser.readpage.dao.ReadDetailDao;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.general.controller.BaseController;
@@ -33,6 +36,8 @@ public class ArticleCollectionController extends BaseController{
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.collection.service.ArticleCollectionServiceImpl")
 	private ArticleCollectionService articleCollectionService;
+	@Autowired
+	private InfoReportDao infoReportDao;
 	/**
      *到文章收藏页面
      */
@@ -40,7 +45,16 @@ public class ArticleCollectionController extends BaseController{
     public ModelAndView toArticleCollecton(){
     	Map<String,Object> map=new HashMap<String, Object>();
     	Map<String,Object> userMap=getUserInfo();
-    	List<Map<String, Object>> articleCollection = articleCollectionService.queryArticleCollectionList((BigInteger) userMap.get("id"));
+    	
+//    	Long writerId=Long.valueOf(userMap.get("id").toString());
+//查询收是否有默认的文章收藏夹，如果没有，就新建一个文章的 默认收藏夹
+//    	Map<String, Object>  dmap = infoReportDao.queryDefaultFavorite(writerId);
+//    	if(dmap==null){
+//    		infoReportDao.insertDefaultFavorite(writerId);
+//		}
+    	
+    	List<Map<String, Object>> articleCollection=new ArrayList<>();
+    	articleCollection = articleCollectionService.queryArticleCollectionList((BigInteger) userMap.get("id"));
     	map.put("articleCollection", articleCollection);
     	return new ModelAndView("/commuser/collection/articlecollection",map);
     }

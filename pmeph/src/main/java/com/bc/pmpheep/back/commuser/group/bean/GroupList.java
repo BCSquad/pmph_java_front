@@ -41,7 +41,7 @@ public class GroupList {
 	/**
 	 * 小组最新动态
 	 */
-	private List<GroupMessage> groupMassages;
+	private List<GroupMessageVO> groupMassages;
 
 	public Long getId() {
 		return id;
@@ -91,11 +91,11 @@ public class GroupList {
 		this.avatars = avatars;
 	}
 
-	public List<GroupMessage> getGroupMassages() {
+	public List<GroupMessageVO> getGroupMassages() {
 		return groupMassages;
 	}
 
-	public void setGroupMassages(List<GroupMessage> groupMassages) {
+	public void setGroupMassages(List<GroupMessageVO> groupMassages) {
 		this.groupMassages = groupMassages;
 	}
 
@@ -113,6 +113,15 @@ public class GroupList {
 
 	public void setGmtCreate(String gmtCreate) {
 		this.gmtCreate = gmtCreate;
+	}
+
+	@Override
+	public String toString() {
+		return "{id:" + id + ", groupName:" + groupName + ", groupImage:"
+				+ groupImage + ", bookName:" + bookName + ", gmtCreate:"
+				+ gmtCreate + ", members:" + members + ", files:" + files
+				+ ", avatars:" + avatars + ", groupMassages:" + groupMassages
+				+ "}";
 	}
 
 	

@@ -77,6 +77,10 @@ public class AddFriendController extends BaseController {
 		List<Map<String, Object>> List_map = addFriendService.addFriendListQuery(pageParameter);
 		int totoal_count = addFriendService.addFriendListQueryCount(pageParameter);
 		Map<String, Object> vmMap = new HashMap<String, Object>();
+		
+		
+		
+		
 		vmMap.put("my_uid", my_uid);
 		vmMap.put("List_map", List_map);
 		vmMap.put("contextpath", contextpath);

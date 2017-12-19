@@ -65,7 +65,7 @@ function queryBtnClick(){
 
 
 //添加好友 按钮触发
-function addFriendfun(uid,status){
+function addFriendfun(uid,realname,status){
 	var data={uid:uid
 			,status:status};
 	$.ajax({
@@ -75,6 +75,11 @@ function addFriendfun(uid,status){
 		dataType:'json',
 		data:data,
 		success:function(json){
+			if (status == "2") {
+				window.message.success("已和 "+realname+" 成为好友！");
+			} else {
+				window.message.success("已向 "+realname+" 发起好友申请！");
+			}
 			queryMain();
 		}
 	});

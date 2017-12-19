@@ -86,6 +86,6 @@
     //删除收藏夹
     function delFavorite(id){
     	window.message.confirm("你确定删除吗？",{btn:["确定","取消"]},function(){
-    		window.location.href=contextpath+'bookcollection/delfavorite.action?favoriteId='+id;
+    		location.href=contextpath+'bookcollection/delfavorite.action?favoriteId='+id;
    	    },function(){});
     }

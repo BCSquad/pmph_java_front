@@ -107,9 +107,10 @@ public class WriterUserCommuserServiceImpl implements WriterUserCommuserService 
 		writerUser.setOrgId(orgId);
 		writerUser.setRealname(realName);
 		writerUser.setId(userId);
+		int c_result=0,w_result=0;
 		if (ObjectUtil.isNull(id)) { //id为空就增加否则修改
-			writerUserDao.addCertification(writerUserCertifications);
-			writerUserDao.updateWriterUser(writerUser);
+			c_result = writerUserDao.addCertification(writerUserCertifications);
+			w_result = writerUserDao.updateWriterUser(writerUser);
 			/*File migCert = new File(cert);
 			String parent = migCert.getParent(); // 获取文件路径
 			String migCertName = migCert.getName(); // 获取文件名
@@ -131,9 +132,10 @@ public class WriterUserCommuserServiceImpl implements WriterUserCommuserService 
 	            }
 	        }*/
 		} else {
-			writerUserDao.updateCertification(writerUserCertifications);
-			writerUserDao.updateWriterUser(writerUser);
+			c_result = writerUserDao.updateCertification(writerUserCertifications);
+			w_result = writerUserDao.updateWriterUser(writerUser);
 		}
+		writerUserCertification.setOperatCount(w_result*c_result);
 		return writerUserCertification;
 	}
 

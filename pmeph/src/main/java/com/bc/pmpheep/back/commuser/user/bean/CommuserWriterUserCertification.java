@@ -35,6 +35,9 @@ public class CommuserWriterUserCertification implements Serializable {
     private Timestamp gmtCreate;
     // 修改时间
     private Timestamp gmtUpdate;
+    
+    //修改成功的标记**********
+    private int operatCount;
 
     public CommuserWriterUserCertification() {
     }
@@ -139,6 +142,14 @@ public class CommuserWriterUserCertification implements Serializable {
 				+ ", orgId=" + orgId + ", handphone=" + handphone + ", idcard="
 				+ idcard + ", progress=" + progress + ", cert=" + cert
 				+ ", gmtCreate=" + gmtCreate + ", gmtUpdate=" + gmtUpdate + "]";
+	}
+
+	public int getOperatCount() {
+		return operatCount;
+	}
+
+	public void setOperatCount(int operatCount) {
+		this.operatCount = operatCount;
 	}
 
     

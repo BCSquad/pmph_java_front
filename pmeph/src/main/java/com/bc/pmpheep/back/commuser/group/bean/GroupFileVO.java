@@ -12,8 +12,8 @@ import org.apache.ibatis.type.Alias;
  *
  */
 @SuppressWarnings("serial")
-@Alias("GroupFile")
-public class GroupFile implements Serializable {
+@Alias("GroupFileVO")
+public class GroupFileVO implements Serializable {
 	/**
 	 * 主键
 	 */
@@ -42,17 +42,29 @@ public class GroupFile implements Serializable {
 	 * 上传时间
 	 */
 	private Timestamp gmtCreate;
+	
+	// --- 用于展示的额外字段
+	/**
+	 * 是否有删除的权利
+	 */
+	private  Boolean  deletePower;
+	/**
+	 * 上传者名字 
+	 */
+	private String    displayName  ;
+	
+	
 
-	public GroupFile() {
+	public GroupFileVO() {
 		super();
 	}
 
-	public GroupFile(Long id) {
+	public GroupFileVO(Long id) {
 		super();
 		this.id = id;
 	}
 
-	public GroupFile(Long groupId, Long memberId, String fileId, String fileName, Integer download,
+	public GroupFileVO(Long groupId, Long memberId, String fileId, String fileName, Integer download,
 			Timestamp gmtCreate) {
 		super();
 		this.groupId = groupId;
@@ -118,11 +130,31 @@ public class GroupFile implements Serializable {
 	public void setGmtCreate(Timestamp gmtCreate) {
 		this.gmtCreate = gmtCreate;
 	}
+	
+	
+	public Boolean getDeletePower() {
+		return deletePower;
+	}
+
+	public void setDeletePower(Boolean deletePower) {
+		this.deletePower = deletePower;
+	}
+
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
 
 	@Override
 	public String toString() {
-		return "{id:" + id + ", groupId:" + groupId + ", memberId:" + memberId + ", fileId:" + fileId + ", fileName:"
-				+ fileName + ", download:" + download + ", gmtCreate:" + gmtCreate + "}";
+		return "{id:" + id + ", groupId:" + groupId + ", memberId:" + memberId
+				+ ", fileId:" + fileId + ", fileName:" + fileName
+				+ ", download:" + download + ", gmtCreate:" + gmtCreate
+				+ ", deletePower:" + deletePower + ", displayName:"
+				+ displayName + "}";
 	}
 
 }

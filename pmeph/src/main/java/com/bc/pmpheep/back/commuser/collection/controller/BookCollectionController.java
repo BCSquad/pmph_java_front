@@ -3,6 +3,7 @@ package com.bc.pmpheep.back.commuser.collection.controller;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.collection.service.BookCollectionService;
 import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
+import com.bc.pmpheep.back.commuser.readpage.dao.ReadDetailDao;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 
@@ -38,6 +40,8 @@ public class BookCollectionController  extends BaseController{
     @Qualifier("com.bc.pmpheep.back.commuser.collection.service.BookCollectionServiceImpl")
     private BookCollectionService bookCollectionService;
     
+	@Autowired
+	private ReadDetailDao readDetailDao;
     /**
      *到书籍收藏页面
      */
@@ -45,7 +49,16 @@ public class BookCollectionController  extends BaseController{
     public ModelAndView toBookCollecton(){
     	Map<String,Object> map=new HashMap<String, Object>();
     	Map<String,Object> userMap=getUserInfo();
-    	List<Map<String, Object>> bookCollection = bookCollectionService.queryBookCollectionList((BigInteger) userMap.get("id"));
+    	
+//    	Long writerId=Long.valueOf(userMap.get("id").toString());
+//查询用户是否存在默认的书籍收藏夹，如果没有，就常见一个书籍默认的收藏夹
+//    	Map<String,Object> dmap=readDetailDao.queryDedaultFavorite(writerId);
+//    	if(dmap==null){
+//    		readDetailDao.insertFavorite(writerId);
+//    	}
+    	
+    	List<Map<String, Object>> bookCollection =new ArrayList<>();
+    	bookCollection = bookCollectionService.queryBookCollectionList((BigInteger) userMap.get("id"));
     	map.put("bookCollection", bookCollection);
     	return new ModelAndView("/commuser/collection/bookcollection",map);
     }

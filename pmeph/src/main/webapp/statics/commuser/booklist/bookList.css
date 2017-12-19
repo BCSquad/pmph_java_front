@@ -55,8 +55,8 @@
     float: left;
 }
 .pictureSize{
-    max-width: 120px;
-    height: 120px;
+    max-width: 140px;
+    height: 140px;
     display: block;
     margin: auto;
 }
@@ -180,6 +180,11 @@
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+a.not-like-an-a{
+	text-decoration: blink;
+	color: #333333;
 }
 
 .pageDiv{

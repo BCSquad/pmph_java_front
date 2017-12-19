@@ -33,8 +33,9 @@ public class DeclareCountServiceImpl implements DeclareCountService {
 		return list;
 	}
 
+
 	/**
-	 * 最终结果名单列表
+	 * 最终结果名单列表 加载更多
 	 */
 	@Override
 	public List<Map<String, Object>> findNameList(Map<String, Object> paraMap) {
@@ -42,16 +43,7 @@ public class DeclareCountServiceImpl implements DeclareCountService {
 		return list;
 	}
 
-	/**
-	 * 加载更多
-	 */
-	@Override
-	public List<Map<String, Object>> selectNoticeMessage(
-			Map<String, Object> paraMap) {
-		List<Map<String, Object>> list = declareCountDao
-				.selectNoticeMessage(paraMap);
-		return list;
-	}
+
 
 	/**
 	 * 查看全部

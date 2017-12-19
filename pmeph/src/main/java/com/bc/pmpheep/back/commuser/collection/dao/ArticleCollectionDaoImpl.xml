@@ -19,8 +19,7 @@
 	</select>
 	<!--查询一个收藏夹下所有的书籍  -->
 	<select id="queryArticleList" parameterType="com.bc.pmpheep.back.plugin.PageParameter" resultMap="articleMap">
-	  select f.id as fid,
-		     f.favorite_name,
+	  select 
 		     c.id as cid,
 		     c.title,
 		     c.author_id ,
@@ -36,14 +35,14 @@
 		     c.bookmarks,
 		     m.id as markId
      from 
-	     writer_cms_favorite f LEFT JOIN cms_user_mark  m on f.id=m.favorite_id
-		 LEFT JOIN cms_content c on m.content_id=c.id   
+	     cms_user_mark  m  LEFT JOIN cms_content c on m.content_id=c.id   
 		 LEFT JOIN  writer_user w on c.author_id=w.id 
     where
-         f.id=#{parameter.favoriteId} and f.writer_id=#{parameter.writerId}
+         m.favorite_id=#{parameter.favoriteId} and  m.writer_id=#{parameter.writerId}
 	limit 
 	     #{start},#{pageSize}
 	</select>
+
 	<!--查询一个收藏夹下的书籍 数量 -->
 	<select id="queryArticleCont" parameterType="map" resultType="int">
 	   select count(m.content_id) from cms_user_mark m LEFT JOIN cms_content c on m.content_id=c.id  where m.favorite_id=#{favoriteId} and m.writer_id=#{writerId}

@@ -71,14 +71,14 @@ public interface InfoReportDao {
 	 */
 	int queryDefaultMark(Map<String, Object> param);
 
-	/**查询默认收藏夹  
+	/**查询默认文章收藏夹  
 	 * @param userId 用户id
 	 * @return
 	 */
 	Map<String, Object> queryDefaultFavorite(long userId);
 
-	/**删除默认收藏夹中对信息快报的收藏记录
-	 * @param param
+	/**删除收藏夹中对信息快报的收藏记录
+	 * @param param   （id 信息快报id;userId 用户id;fid  收藏夹id）
 	 */
 	void deleteMark(Map<String, Object> param);
     
@@ -89,11 +89,11 @@ public interface InfoReportDao {
 	void updateMarks(@Param("id") long id,@Param("marks")  long marks);
 
 	/**添加收藏记录
-	 * @param param
+	 * @param param   （id 信息快报id;userId 用户id;fid  收藏夹id）
 	 */
 	void insertMark(Map<String, Object> param);
 
-	/**为用户添加默认收藏级
+	/**为用户添加默认文章收藏夹
 	 * @param userId
 	 */
 	void insertDefaultFavorite(long userId);

@@ -45,7 +45,7 @@ public class DeclareResultExcelService implements ExcelDownloadService {
     public List<Map<String, Object>> getData(Map<String, Object> param) throws Exception {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         
-        List<Map<String, Object>> resultList = declareCountDao.selectResultsExcel(param);
+        List<Map<String, Object>> resultList = declareCountDao.selectResults(param);
         
         for (int i = 0; i < resultList.size(); i++) {
             Map<String, Object> map = new HashMap<String, Object>();

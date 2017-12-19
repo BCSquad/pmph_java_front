@@ -35,7 +35,7 @@
             <div class="op-link">
                 <div class="title">教材申报</div>
                 <div class="link">
-                    <span>最新公告</span>
+                    <a href="<c:url value="/cmsnotice/tolist.action"/>">最新公告</a>
                     <span class="icon">></span>
                 </div>
                 <div class="link">
@@ -47,7 +47,7 @@
                     <span class="icon">></span>
                 </div>
                 <div class="link">
-                    <span>结果公布</span>
+                    <a href="<c:url value="/personalhomepage/tohomepageonelist.action"/>">结果公布</a>
                     <span class="icon">></span>
                 </div>
 
@@ -55,7 +55,7 @@
 
                 <div class="title">交互服务</div>
                 <div class="link">
-                    <span>医学小组</span>
+                    <span href="<c:url value="/group/toMyGroup.action"/>">医学小组</span>
                     <span class="icon">></span>
                 </div>
 

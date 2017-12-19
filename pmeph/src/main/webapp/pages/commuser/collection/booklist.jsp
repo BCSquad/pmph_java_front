@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        <div class="area2">
            <span class="name" >${fmap.favorite_name }</span>
             <input type="hidden" id="favoriteId" value="${fmap.id }"/>
-           <span class="del" onclick="delFavorite('fmap.id }')">删除收藏夹</span>
+           <span class="del" onclick="delFavorite('${fmap.id }')">删除收藏夹</span>
        </div>
        <c:forEach items="${booklist.rows}" var="book">
        <div class="collection">

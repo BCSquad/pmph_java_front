@@ -2,7 +2,9 @@ package com.bc.pmpheep.back.commuser.personalcenter.bean;
 
 public class PersonalNewMessage {
 
-	private String realname;//真实姓名
+	private String msgType;//动态类型  1  申报动态  2、文章动态   3、评论动态
+
+	private String realname;//真实姓名s
 	private String sex;//性别
 	private String rank;//用户级别，普通，专家
 	private String avatar;//头像

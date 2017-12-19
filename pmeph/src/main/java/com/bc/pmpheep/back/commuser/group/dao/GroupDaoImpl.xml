@@ -3,6 +3,63 @@
 
 <mapper namespace="com.bc.pmpheep.back.commuser.group.dao.GroupDao">
 
+    <!--  删除我能删除的文件 --> 
+	<delete id="deleteMyPowerFile">
+		delete from pmph_group_file 
+		where id = #{id}
+		and id in (
+			select temp.id from(
+					 SELECT 
+						 a.id,
+						 if(p.po , true ,if(b.user_id = #{thisId} ,true,false)) deletePower
+					 FROM 
+						 pmph_group_file a 
+					 LEFT JOIN 
+						pmph_group_member b on b.id = a.member_id
+					 ,(SELECT if(is_founder or is_admin,true,false ) po from pmph_group_member where user_id = #{thisId} and group_id = #{groupId} )p 
+					 WHERE b.group_id = #{groupId}
+			 )temp where temp.deletePower
+		)
+	</delete>
+	
+	
+	<!-- 查询我在这个小组上传的文件 -->
+    <select id="getMyFiles" resultType="GroupFileVO"> 
+    	select * from pmph_group_file where member_id in (select id from pmph_group_member where user_id =#{userId} ) and group_id =#{groupId};
+    </select>
+	
+	<!-- 根据用户id删除文件 -->
+	<delete id="deletePmphGroupFile" >
+		delete from pmph_group_file where member_id in (select id from pmph_group_member where user_id =#{userId} ) and group_id =#{groupId};
+	</delete>
+	
+	<!--  根据用户id删除对话 -->
+	<delete id="deleteMessage" >
+		delete from pmph_group_message where member_id in (select id from pmph_group_member where user_id =#{userId}) and group_id =#{groupId};
+	</delete>
+	
+	<!--  根据用户id删除成员 -->
+	<delete id="deletePmphGroupMember" >
+		delete from pmph_group_member  where user_id =#{userId} and group_id =#{groupId} ;
+	</delete>
+    
+    <!-- 获取小组讨论 -->
+    <select id="getTalks" resultType="GroupMessageVO"> 
+    	select 
+			a.*,
+			if(a.member_id=0 ,'系统',if(b.is_writer  ,d.avatar, c.avatar))  avatar,
+			IF(a.member_id=0 ,'系统',b.display_name) displayName,
+			if(a.member_id=0 ,0,     if(b.user_id = #{thisId} ,1, 2)) msgType
+		from 
+			pmph_group_message a 
+			LEFT JOIN pmph_group_member b on b.id =a.member_id 
+			LEFT JOIN pmph_user c on c.id = b.user_id
+			LEFT JOIN writer_user d on d.id = b.user_id
+		where a.group_id = #{groupId} 
+		ORDER BY a.gmt_create desc
+		limit #{start} , #{pageSize}
+    </select>
+
 	<!-- 查当前用户的小组列表 -->
 	<select id="list" resultType="GroupList">
 		select
@@ -72,22 +129,44 @@
     </select>
     <!-- 获取小组动态 -->
     <select id="getMessages" parameterType="java.lang.Long" 
-        resultType="GroupMessage">
+        resultType="GroupMessageVO">
         SELECT * FROM pmph_group_message 
         WHERE  group_id = #{groupId} ORDER BY gmt_create DESC
     </select>
-    <!-- 获取小组文件列表 -->
-    <select id="getFiles" parameterType="java.lang.Long" 
-        resultType="GroupFile">
-        SELECT * FROM pmph_group_file WHERE group_id=#{groupId} 
-        <if test="fileName !=null and fileName !=''">
-        AND file_name = #{fileName}
-        </if>
-        ORDER BY gmt_create DESC 
-        limit
-		#{start},#{pageSize}
-        ;
+    
+    <!-- 查询小组总文件数目 -->
+    <select id="getFilesTotal" resultType="java.lang.Integer">
+         SELECT 
+	         count(a.id)
+		 FROM 
+		 	pmph_group_file a 
+		 LEFT JOIN 
+		 	pmph_group_member b on b.id = a.member_id ,
+		 (SELECT if(is_founder or is_admin,true,false ) po from pmph_group_member where user_id = #{thisId} and group_id = #{groupId} )p
+		 WHERE b.group_id = #{groupId}
+		 <if test="fileName != null and fileName != '' ">
+		 	and a.file_name like CONCAT('%',#{fileName},'%')
+		 </if>
+	</select>
+    
+    <!-- 获取小组文件分页列表 -->
+    <select id="getFiles"  resultType="GroupFileVO">
+         SELECT 
+	         a.*,
+			 b.display_name ,
+			 if(p.po , true ,if(b.user_id = #{thisId} ,true,false))deletePower
+		 FROM 
+		 	pmph_group_file a 
+		 LEFT JOIN 
+		 	pmph_group_member b on b.id = a.member_id ,
+		 (SELECT if(is_founder or is_admin,true,false ) po from pmph_group_member where user_id = #{thisId} and group_id = #{groupId} )p
+		 WHERE b.group_id = #{groupId}
+		 <if test="fileName != null and fileName != '' ">
+		 	and a.file_name like CONCAT('%',#{fileName},'%')
+		 </if>
+		 limit #{start},#{pageSize}
     </select>
+    
     <delete id="deleteFile" parameterType="java.lang.Long">
         DELETE FROM pmph_group_file WHERE id = #{id};
     </delete>
@@ -152,7 +231,7 @@
 	</sql>
 
 	<!-- 新增 GroupFile -->
-	<insert id="addGroupFile" parameterType="GroupFile">
+	<insert id="addGroupFile" parameterType="GroupFileVO">
 		<selectKey resultType="java.lang.Long" order="AFTER"
 			keyProperty="id"> <!-- order="AFTER"表示先执行插入语句，之后再执行查询语句 BEFORE 或 AFTER -->
 			SELECT LAST_INSERT_ID()
@@ -175,14 +254,13 @@
 	</select>
 	
 	<!-- 更新 GroupFile -->
-	<update id="updateGroupFile" parameterType="GroupFile">
-		update
-		pmph_group_file
+	<update id="updateGroupFile" parameterType="GroupFileVO">
+		update  pmph_group_file
 		<set>
-			<if test="groupId != null and groupId !=''">
+			<if test="groupId != null">
 				group_id = #{groupId},
 			</if>
-			<if test="memberId != null and memberId !='' ">
+			<if test="memberId != null ">
 				member_id = #{memberId},
 			</if>
 			<if test=" fileId != null and fileId !=''">
@@ -191,10 +269,93 @@
 			<if test=" fileName != null and fileName !=''">
 				file_name= #{fileName},
 			</if>
-			<if test=" download != null and download !=''">
+			<if test=" download != null">
 				download = #{download},
 			</if>
 		</set>
 		where id=#{id} ;
+	</update>
+	
+	<sql id="key1">
+		<!-- 去掉最后一个, -->
+		<trim suffixOverrides=",">
+			<if test="groupId != null and groupId !=''">
+				group_id,
+			</if>
+			<if test="memberId != null">
+				member_id,
+			</if>
+			<if test="msgContent != null and msgContent !=''">
+				msg_content,
+			</if>
+		</trim>
+	</sql>
+	<!-- sql片段对应?,id属性值任意 -->
+	<sql id="value1">
+		<!-- 去掉最后一个, -->
+		<trim suffixOverrides=",">
+			<if test="groupId != null and groupId !=''">
+				#{groupId},
+			</if>
+			<if test="memberId != null ">
+				#{memberId},
+			</if>
+			<if test="msgContent != null and msgContent !=''">
+				#{msgContent},
+			</if>
+		</trim>
+	</sql>
+
+	<!-- 新增 GroupMessage -->
+	<insert id="addGroupMessage" parameterType="GroupMessageVO">
+		<selectKey resultType="java.lang.Long" order="AFTER"
+			keyProperty="id"> <!-- order="AFTER"表示先执行插入语句，之后再执行查询语句 BEFORE 或 AFTER -->
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into pmph_group_message (
+		<include refid="key1" />
+		)
+		values(
+		<include refid="value1" />
+		) ;
+	</insert>
+	
+	<!-- 根据id查询一个 GroupMessage -->
+	<select id="getGroupMessageById" parameterType="java.lang.Long"
+		resultType="GroupMessageVO">
+		select * from pmph_group_message where
+		id=#{id} ;
+	</select>
+	
+	<!-- 更新 Group -->
+	<update id="updateGroup" parameterType="Group">
+		update
+		pmph_group
+		<set>
+			<if test="groupName != null and groupName !=''">
+				group_name = #{groupName},
+			</if>
+			<if test="groupImage != null and groupImage !='' ">
+				group_image = #{groupImage},
+			</if>
+			<if test=" founderId != null and founderId !=''">
+				founder_id= #{founderId},
+			</if>
+			<if test=" bookId != null and bookId !=''">
+				book_id= #{bookId},
+			</if>
+			<if test=" note != null and note !=''">
+				note = #{note},
+			</if>
+			<if test="gmtLastMessage !=null ">
+				gmt_Last_Message = #{gmtLastMessage},
+			</if>
+		</set>
+		where id=#{id} ;
+	</update>
+	
+	<!-- 更新 下载次数 -->
+	<update id="updateGroupFileOfDownload" >
+		update pmph_group_file set download=download+1  WHERE group_id = #{groupId} AND file_id = #{fileId}
 	</update>
 </mapper>
