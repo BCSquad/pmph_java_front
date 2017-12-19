@@ -50,10 +50,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <p class="count">共${collection.mcount }条内容</p>
         </div></a>
         </c:forEach>
-        <!-- <a href="articleCollectionList.html"><div class="collection">
-            <p class="title" >默认收藏</p>
-            <p class="count">共34条内容</p>
-        </div></a> -->
+        <div class="no-more" style="display:${articleCollection.size()>0 ?'none':'block' }" id="nomore">
+                    <img src="<c:url value="/statics/image/aaa4.png"></c:url>" style="display: block;margin: 0px auto 0px;">
+                    <span style="display: block;width: 100px;margin: 0px auto 0px;">木有内容呀~~</span>
+        </div>
     </div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>

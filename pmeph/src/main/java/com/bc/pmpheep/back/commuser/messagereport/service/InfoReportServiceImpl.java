@@ -19,6 +19,14 @@ import com.bc.pmpheep.general.service.MessageService;
  * @return 
  * @throws
  */
+/**
+ * @author 
+ *@Title: 
+ * @Description: 
+ * @param 
+ * @return 
+ * @throws
+ */
 @Service("com.bc.pmpheep.back.commuser.messagereport.service.InfoReportServiceImpl")
 public class InfoReportServiceImpl implements InfoReportService {
 
@@ -87,6 +95,11 @@ public class InfoReportServiceImpl implements InfoReportService {
 		}
 		return map;
 	}
+	
+	
+	/* 
+	 * 添加收藏或取消收藏	 
+	 */
 	@Override
 	public Map<String,Object> insertMark(long id, long userId) {
 		Map<String,Object> map=new HashMap<>();
