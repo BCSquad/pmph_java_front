@@ -45,7 +45,7 @@ public class FileDownLoadController {
             logger.warn("未找到id为'{}'的文件", id);
             return;
         }
-        response.setHeader("Content-Disposition", "attachment;fileName=" + file.getFilename());
+        response.setHeader("Content-Disposition", "attachment;fileName=\" "+ file.getFilename()+"\"");
         try (OutputStream out = response.getOutputStream()) {
             file.writeTo(out);
             out.flush();
