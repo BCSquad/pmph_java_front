@@ -488,15 +488,15 @@ $(function () {
                     offs = _this.options.offset;
 
                 $this.addClass('calendar-modal').css({
-                    left: (_this.$trigger.offset().left + offs[0]) + 'px',
-                    top: (_this.$trigger.offset().top + _this.$trigger.outerHeight() + offs[1]) + 'px',
+                    left: (_this.$trigger[0].offsetLeft + offs[0]) + 'px',
+                    top: (_this.$trigger[0].offsetTop + _this.$trigger.outerHeight() + offs[1]) + 'px',
                     zIndex: _this.options.zIndex
                 });
 
                 _this.$trigger.click(function () {
                     $this.addClass('calendar-modal').css({
-                        left: (_this.$trigger.offset().left + offs[0]) + 'px',
-                        top: (_this.$trigger.offset().top + _this.$trigger.outerHeight() + offs[1]) + 'px',
+                        left: (_this.$trigger[0].offsetLeft + offs[0]) + 'px',
+                        top: (_this.$trigger[0].offsetTop + _this.$trigger.outerHeight() + offs[1]) + 'px',
                     });
                     $this.show();
                 });
