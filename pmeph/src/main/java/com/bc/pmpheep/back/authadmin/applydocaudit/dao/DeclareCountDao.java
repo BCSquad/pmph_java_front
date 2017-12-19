@@ -25,6 +25,8 @@ public interface DeclareCountDao {
 	 */
 	List<Map<String, Object>> findDeclareCount(Map<String, Object> paraMap);
 
+
+
 	/**
 	 * 
 	 * @Title: findNameList
@@ -35,17 +37,8 @@ public interface DeclareCountDao {
 	 * @throws
 	 */
 	List<Map<String, Object>> findNameList(Map<String, Object> paraMap);
+	
 
-	/**
-	 * 
-	 * @Title: selectNoticeMessage
-	 * @Description: 查看更多
-	 * @param @param paraMap
-	 * @param @return
-	 * @return List<Map<String,Object>> 返回类型
-	 * @throws
-	 */
-	List<Map<String, Object>> selectNoticeMessage(Map<String, Object> paraMap);
 
 	/**
 	 * 
@@ -58,7 +51,7 @@ public interface DeclareCountDao {
 	List<Map<String, Object>> selectAll(Map<String, Object> paraMap);
 	
 	/**
-	 * 最终结果名单
+	 * 最终结果名单  导出excel
 	 * @Title: selectResults
 	 * @Description: 查看全部  
 	 * @param @return
@@ -67,15 +60,6 @@ public interface DeclareCountDao {
 	 */
 	List<Map<String, Object>> selectResults(Map<String, Object> paraMap);
 	
-	/**
-	 * 导出excel
-	 * 最终结果名单  
-	 * @Title: selectResults
-	 * @Description: 查看全部  
-	 * @param @return
-	 * @return List<Map<String,Object>> 返回类型
-	 * @throws
-	 */
-	List<Map<String, Object>> selectResultsExcel(Map<String, Object> paraMap);
+
 
 }

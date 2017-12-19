@@ -8,7 +8,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <title>申报统计（机构用户）</title>
 <script type="text/javascript">
-	var contextpath="${pageContext.request.contextPath}/";
+	var contextpath = "${pageContext.request.contextPath}/";
 </script>
 <link rel="stylesheet" href="${ctx}/statics/css/base.css"
 	type="text/css">
@@ -26,16 +26,16 @@
 	type="text/javascript"></script>
 
 </head>
-<body >
-	<input type="hidden" id="listNameSize" value="${listNameSize }"/>
-	<input type="hidden" id="material_id" value="${material_id }"/>
-	<div style=" padding: 0; margin: 0; height: 110px; border: none; overflow: hidden;">
+<body>
+	<input type="hidden" id="material_id" value="${material_id }" />
+	<div
+		style="padding: 0; margin: 0; height: 110px; border: none; overflow: hidden;">
 		<jsp:include page="/pages/comm/headGreenBackGround.jsp"></jsp:include>
 	</div>
-	<div class="body" >
+	<div class="body">
 		<div class="content-wrapper" style="background-color: #f0f0f0;">
 			<div class="title">查询统计>${material_name }</div>
-			<div class="bigbox" >
+			<div class="bigbox">
 				<div class="top-title">
 					<div class="top-title-bg">
 						<div class="span-1">
@@ -55,9 +55,10 @@
 							<img src="${ctx}/statics/image/iconfont-export-01.png" />
 						</div>
 						<div class="excel_right_e">
-							<a  class="aa"  onclick="exportExcel();">导出Excel</a>
+							<a class="aa" onclick="exportExcel();">导出Excel</a>
 						</div>
-						<div class="excel_right_q"  style="cursor: pointer;"  onclick='selectAll()'>查看全部</div>
+						<div class="excel_right_q" style="cursor: pointer;"
+							onclick='selectAll()'>查看全部</div>
 						<div class="excel_right_xljt">
 							<img src="${ctx}/statics/image/xljt.png" />
 						</div>
@@ -82,8 +83,8 @@
 						<tbody id="queryTable">
 							<c:forEach items="${listMap}" var="one" varStatus="status">
 								<tr>
-									<td>${ status.index + 1}</td>    
-									<td >${one.textbook_name}</td>
+									<td>${ status.index + 1}</td>
+									<td>${one.textbook_name}</td>
 									<td>${one.decid1}</td>
 									<td>${one.decid2}</td>
 									<td>${one.decid3}</td>
@@ -92,10 +93,8 @@
 									<td>${one.dp3}</td>
 								</tr>
 							</c:forEach>
-								
 						</tbody>
 					</table>
-
 				</div>
 
 				<div class="excel">
@@ -107,9 +106,10 @@
 							<img src="${ctx}/statics/image/iconfont-export-01.png" />
 						</div>
 						<div class="excel_right_e">
-							<a  class="aa"  onclick="exportResultExcel();">导出Excel</a>
+							<a class="aa" onclick="exportResultExcel();">导出Excel</a>
 						</div>
-						<div class="excel_right_q"  style="cursor: pointer;"  onclick='selectResults()'>查看全部</div>
+						<div class="excel_right_q" style="cursor: pointer;"
+							onclick='selectResults()'>查看全部</div>
 						<div class="excel_right_xljt">
 							<img src="${ctx}/statics/image/xljt.png" />
 						</div>
@@ -117,40 +117,25 @@
 				</div>
 
 				<div class="message">
-					<table class="table" >
+					<table class="table">
 						<thead>
 							<tr>
-								<td >序号</td>
-								<td >书名</td>
-								<td >主编名单</td>
-								<td >副主编名单</td>
-								<td >编委名单</td>
+								<td>序号</td>
+								<td>书名</td>
+								<td>主编名单</td>
+								<td>副主编名单</td>
+								<td>编委名单</td>
 							</tr>
 						</thead>
 						<tbody id="messageTable">
-							<%-- <c:forEach items="${listName}" var="two" varStatus="status">
-								<tr>
-									<td   >${ status.index + 1}</td>    
-									<td   >${two.textbook_name!=null?two.textbook_name:'--'}</td>
-									<td   >${two.zb!=null?two.zb:'--'}</td>
-									<td   >${two.fb!=null?two.fb:'--'}</td>
-									<td   >${two.bw!=null?two.bw:'--'}</td>
-								</tr>
-							</c:forEach> --%>
 						</tbody>
-					
 					</table>
-					<%-- <div class="no-more" >
+					<div class="no-more" >
 						<img src="<c:url value="/statics/image/aaa4.png"></c:url>">
 						<span>木有内容呀~~</span>
-					</div> --%>
+					</div>
 				</div>
-				
-				<!-- <div class="jiazaigengduo" style="cursor: pointer;" onclick='loadMore()' >加载更多……</div> -->
-				
-				 <div class="js-load-more" style="cursor: pointer;">加载更多...</div>
-				
-				<!-- <input id="startPara" name="startPara" type="hidden"> -->
+				<div class="js-load-more" style="cursor: pointer;">加载更多...</div>
 			</div>
 		</div>
 	</div>

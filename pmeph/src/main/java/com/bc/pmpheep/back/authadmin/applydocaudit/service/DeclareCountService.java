@@ -27,10 +27,12 @@ public interface DeclareCountService {
 	 */
 	List<Map<String, Object>> findDeclareCount(Map<String, Object> paraMap);
 
+
+	
 	/**
 	 * 
 	 * @Title: findNameList
-	 * @Description: 最终结果名单列表
+	 * @Description:加载更多      最终结果名单列表
 	 * @param @param paraMap
 	 * @param @return
 	 * @return List<Map<String,Object>> 返回类型
@@ -38,19 +40,10 @@ public interface DeclareCountService {
 	 */
 	List<Map<String, Object>> findNameList(Map<String, Object> paraMap);
 
-	/**
-	 * 
-	 * @Title: selectNoticeMessage
-	 * @Description: 加载更多
-	 * @param @param paraMap
-	 * @param @return
-	 * @return List<Map<String,Object>> 返回类型
-	 * @throws
-	 */
-	List<Map<String, Object>> selectNoticeMessage(Map<String, Object> paraMap);
+
 
 	/**
-	 * 
+	 * 我校统计情况
 	 * @Title: selectAll
 	 * @Description: 查看全部
 	 * @param @return

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper
-	namespace="com.bc.pmpheep.back.authadmin.applydocaudit.dao.DeclareCountDao">
+<mapper namespace="com.bc.pmpheep.back.authadmin.applydocaudit.dao.DeclareCountDao">
 	<!--分页查询条件查询列表 -->
 	<select id="findDeclareCount" resultType="java.util.Map"
 		parameterType="java.util.Map">
@@ -20,9 +19,9 @@
 		from
 		textbook t LEFT JOIN dec_position dp ON t.id=dp.textbook_id
 		<where>
-		1=1
+			1=1
 			<if test="material_id != null and material_id != '' ">
-			and	t.material_id = ${material_id}
+				and t.material_id = ${material_id}
 			</if>
 		</where>
 		GROUP BY t.id
@@ -31,60 +30,8 @@
 	</select>
 
 
-	<!--最终结果名单列表 -->
-	<select id="findNameList" resultType="java.util.Map"
-		parameterType="java.util.Map">
-		Select b.id, b.textbook_name,
-		GROUP_CONCAT(p.rank,'',(CASE
-		p.chosen_position WHEN '1' THEN d.realname END )) AS zb,
-		GROUP_CONCAT(CASE p.chosen_position WHEN '2' THEN d.realname END ) AS
-		fb,
-		GROUP_CONCAT(CASE p.chosen_position WHEN '3' THEN d.realname END
-		) AS bw
-		From
-		dec_position p
-		left join declaration d on d.id =
-		p.declaration_id
-		left join textbook b on p.textbook_id = b.id
-		<where>
-			1=1
-			<if test="material_id != null and material_id != '' ">
-				and b.material_id = ${material_id}
-			</if>
-		</where>
-		GROUP BY b.id  HAVING (zb>=1 or fb>=1 or bw>=1) limit 0,15
-	</select>
-
-
-	<!-- 加载更多 -->
-	<select id="selectNoticeMessage" parameterType="java.util.Map"
-		resultType="java.util.Map">
-		Select b.id, b.textbook_name,
-		GROUP_CONCAT(p.rank,'',(CASE
-		p.chosen_position WHEN '1' THEN d.realname END )) AS zb,
-		GROUP_CONCAT(CASE p.chosen_position WHEN '2' THEN d.realname END ) AS
-		fb,
-		GROUP_CONCAT(CASE p.chosen_position WHEN '3' THEN d.realname END
-		) AS bw
-		From
-		dec_position p
-		left join declaration d on d.id =
-		p.declaration_id
-		left
-		join textbook b on p.textbook_id = b.id
-		<where>
-		1=1
-			<if test="material_id != null and material_id != '' ">
-				and	b.material_id = ${material_id}
-			</if>
-		</where>
-		GROUP BY b.id
-		<!-- <if test="startPara!=null">limit #{startPara},5</if> -->
-	</select>
-
-
-	<!-- 查看全部 我校申报情况统计-->
-	<select id="selectAll" resultType="java.util.Map"  parameterType="java.util.Map">
+	<!-- 查看全部 我校申报情况统计 -->
+	<select id="selectAll" resultType="java.util.Map" parameterType="java.util.Map">
 		select
 		t.textbook_name,
 		sum(case dp.chosen_position when '1' then 1 else
@@ -98,16 +45,41 @@
 		from
 		textbook t LEFT JOIN dec_position dp ON t.id=dp.textbook_id
 		<where>
-		1=1
+			1=1
 			<if test="material_id != null and material_id != '' ">
-				and	t.material_id = ${material_id}
+				and t.material_id = ${material_id}
 			</if>
 		</where>
 		GROUP BY t.id
-		limit 0,9
 	</select>
 
-	<!-- 查看全部 最终结果名单-->
+	<!--最终结果名单列表 加载更多 -->
+	<select id="findNameList" resultType="java.util.Map"
+		parameterType="java.util.Map">
+		Select b.id, b.textbook_name,
+		GROUP_CONCAT(p.rank,'',(CASE
+		p.chosen_position WHEN '1' THEN d.realname END )) AS zb,
+		GROUP_CONCAT(CASE p.chosen_position WHEN '2' THEN d.realname END ) AS
+		fb,
+		GROUP_CONCAT(CASE p.chosen_position WHEN '3' THEN d.realname END
+		)
+		AS bw
+		From
+		dec_position p
+		left join declaration d on d.id =
+		p.declaration_id
+		left join textbook b on p.textbook_id = b.id
+		<where>
+			1=1
+			<if test="material_id != null and material_id != '' ">
+				and b.material_id = ${material_id}
+			</if>
+		</where>
+		GROUP BY b.id HAVING (zb>=1 or fb>=1 or bw>=1)
+	</select>
+
+
+	<!-- 查看全部 最终结果名单   导出excel-->
 	<select id="selectResults" resultType="java.util.Map">
 		Select b.id, b.textbook_name,
 		GROUP_CONCAT(p.rank,'',(CASE
@@ -115,44 +87,21 @@
 		GROUP_CONCAT(CASE p.chosen_position WHEN '2' THEN d.realname END ) AS
 		fb,
 		GROUP_CONCAT(CASE p.chosen_position WHEN '3' THEN d.realname END
-		) AS bw
+		)
+		AS bw
 		From
 		dec_position p
 		left join declaration d on d.id =
 		p.declaration_id
 		left
-		join textbook b on p.textbook_id = b.id	 
+		join textbook b on p.textbook_id = b.id
 		<where>
-		1=1
+			1=1
 			<if test="material_id != null and material_id != '' ">
-				and	b.material_id = ${material_id}
+				and b.material_id = ${material_id}
 			</if>
 		</where>
-		GROUP BY b.id limit 0,15
-	</select>
-	
-	<!--  导出excel 最终结果名单-->
-	<select id="selectResultsExcel" resultType="java.util.Map">
-		Select b.id, b.textbook_name,
-		GROUP_CONCAT(p.rank,'',(CASE
-		p.chosen_position WHEN '1' THEN d.realname END )) AS zb,
-		GROUP_CONCAT(CASE p.chosen_position WHEN '2' THEN d.realname END ) AS
-		fb,
-		GROUP_CONCAT(CASE p.chosen_position WHEN '3' THEN d.realname END
-		) AS bw
-		From
-		dec_position p
-		left join declaration d on d.id =
-		p.declaration_id
-		left
-		join textbook b on p.textbook_id = b.id	 
-		<where>
-		1=1
-			<if test="material_id != null and material_id != '' ">
-				and	b.material_id = ${material_id}
-			</if>
-		</where>
-		GROUP BY b.id 
+		GROUP BY b.id
 	</select>
 
 </mapper>
