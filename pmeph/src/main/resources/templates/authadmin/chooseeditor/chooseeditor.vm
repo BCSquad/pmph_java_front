@@ -3,7 +3,7 @@
 
 	<tr>
 	    <td class="">$!ColNum</td>
-	    <td class=""><a href="$!{contextpath}" target="_blank">$!{c.realname}</a></td>
+	    <td class=""><a href="$!{contextpath}personalhomepage/tohomepageone.action?userId=$!{c.user_id}"  target="_blank">$!{c.realname}</a></td>
 	    #if($!{c.sex} == 1)
 	    	<td class="">男</td>
 	    #elseif($!{c.sex} == 2)
