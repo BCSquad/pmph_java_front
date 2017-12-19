@@ -31,7 +31,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <span><a class="alink" href="${ctx}/personalhomepage/tohomepage.action?">个人中心 ></a><a class="alink" href="${ctx}/personalhomepage/tohomepageone.action?bookname=${progress.materialName}"> 教材申报</a> > 申报进度</span>
             <h2>${progress.materialName}</h2>
         </div>
-        
         	<c:choose>
         		<c:when test="${flag=='no'}">
         			<div class="no-more">
