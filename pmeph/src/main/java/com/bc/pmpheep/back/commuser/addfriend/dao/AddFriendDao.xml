@@ -39,7 +39,8 @@
 		writer_user u
 		left join 
 		writer_friend f
-		on u.id = f.request_id or u.id = f.target_id
+		on (u.id = f.request_id and ${parameter.uid} =f.target_id) 
+		or (u.id = f.target_id and ${parameter.uid} = f.request_id) 
 		<where>
 			<if test="parameter.uid != null and parameter.uid != '' ">
 				and u.id != ${parameter.uid}
