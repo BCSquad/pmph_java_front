@@ -2,6 +2,8 @@ package com.bc.pmpheep.back.commuser.reportprogress.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -52,23 +54,33 @@ public class ReportProgressController extends BaseController {
      * </pre>
      */
     @RequestMapping(value = "/listReportProgress", method = RequestMethod.GET)
-    public ModelAndView listReportProgress(/*@RequestParam("materialId") Long materialId*/)
+    public ModelAndView listReportProgress(HttpServletRequest request/*@RequestParam("materialId") Long materialId*/)
     throws Exception {
         ModelAndView model = new ModelAndView();
         String pageUrl = "commuser/report_progress/progress";
-        // Long userId = Long.parseLong(this.getUserInfo().get("id").toString());
-        Long userId = 32781L;
-        Long materialId = 123L;
-        // 申报进度
-        TextBookCheckVO progress = reportProgressService.getMaterialProgress(userId, materialId);
-        // 书籍审核结果
-        List<TextBookCheckVO> textBookChecks =reportProgressService.getTextBookCheckResult(userId, materialId);
-        // 申报消息
-        List<UserMessageVO> userMessageList =
-        reportProgressService.getUserMessageByMaterialId(userId, materialId);
-        model.addObject("progress", progress);
-        model.addObject("textBookCheck", textBookChecks);
-        model.addObject("userMessageList", userMessageList);
+        Long userId = Long.parseLong(this.getUserInfo().get("id").toString());
+        String materialStr = request.getParameter("materialId");
+        Long materialId = null;	
+        //Long userId = 32781L; 
+        //Long materialId = 123L;
+        if(null!=materialStr&&!materialStr.equals("")){
+        	 materialId = new Long(materialStr);
+        	 // 申报进度
+             TextBookCheckVO progress = reportProgressService.getMaterialProgress(userId, materialId);
+             // 书籍审核结果
+             List<TextBookCheckVO> textBookChecks =reportProgressService.getTextBookCheckResult(userId, materialId);
+             // 申报消息
+             List<UserMessageVO> userMessageList = reportProgressService.getUserMessageByMaterialId(userId, materialId);
+             model.addObject("progress", progress);
+             model.addObject("textBookCheck", textBookChecks);
+             model.addObject("userMessageList", userMessageList);
+             model.addObject("materialId", materialId);
+        	 
+        }else{
+        	model.addObject("flag", "no");
+        }
+        
+        
         model.setViewName(pageUrl);
         return model;
     }
