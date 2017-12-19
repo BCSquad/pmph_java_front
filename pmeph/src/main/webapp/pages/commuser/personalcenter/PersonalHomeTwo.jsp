@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%String path = request.getContextPath();%>
 <html>
 <head>
@@ -10,8 +11,9 @@
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/personalcenter/PersonalHome.css" type="text/css">
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.js"></script>
+    <script src="${ctx}/resources/comm/base.js"></script>
     <script src="${ctx}/resources/commuser/personalcenter/PersonalHome.js"></script>
-  <script src="${ctx}/resources/comm/base.js"></script>
+
 
 
 </head>
@@ -93,7 +95,12 @@
                     </c:forEach>
 
                 </div>
-
+                <c:if test="${fn:length(listmywritingsnew)==0}">
+                    <div class="no-more">
+                        <img src="<c:url value="/statics/image/aaa4.png"></c:url>">
+                        <span>木有内容呀~~</span>
+                    </div>
+                </c:if>
            
 
             </div>

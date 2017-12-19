@@ -1,4 +1,4 @@
-  $(document).ready(function () {
+/*  $(document).ready(function () {
 
 	    
 
@@ -40,7 +40,7 @@
             	$("#jiazaigengduo").hide();
                 $("#gengduo").show();
             });
-        });
+        });*/
   function abc() {
   var itemMax=4;
   var n=1;

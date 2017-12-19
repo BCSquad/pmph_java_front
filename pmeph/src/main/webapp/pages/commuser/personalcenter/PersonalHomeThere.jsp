@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%String path = request.getContextPath();%>
 <html>
 <head>
@@ -91,7 +92,12 @@
 
                 </div>
 
-
+                <c:if test="${fn:length(listmybooknews)==0}">
+                    <div class="no-more">
+                        <img src="<c:url value="/statics/image/aaa4.png"></c:url>">
+                        <span>木有内容呀~~</span>
+                    </div>
+                </c:if>
             </div>
 
 
