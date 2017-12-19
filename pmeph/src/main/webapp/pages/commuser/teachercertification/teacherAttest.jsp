@@ -39,7 +39,7 @@ String contextpath=request.getContextPath();
 						if (json.operatCount>0) {
 							window.message.success("提交成功");
 							setTimeout(function(){
-								window.location.href=contextpath+"";
+								window.location.href=contextpath+"userinfo/touser.action?id="+$("#userId").val();
 							},1500);
 						}else{
 							window.message.error("提交失败");
@@ -189,7 +189,7 @@ String contextpath=request.getContextPath();
         <div style="height:50px;">
             <span style="width:20px;"></span>
             <span class="sxy-div-menu">学校教师认证</span>
-            <a href="" >
+            <a href="<%=path %>/userinfo/touser.action?id=${showWriterUserCertification.userId}" >
             <span id="sxy-spantopright">〈〈返回个人资料&nbsp&nbsp</span>
             </a>
         </div>
@@ -232,7 +232,7 @@ String contextpath=request.getContextPath();
                     <td style="width: 10px;">
                     <input class="sxy-txt" type="hidden" value="2" name="progress"/>
                     <input class="sxy-txt" type="hidden" value="${showWriterUserCertification.id}" name="id"/>
-                    <input class="sxy-txt" type="hidden" value="${showWriterUserCertification.userId}" name="userId"/>
+                    <input class="sxy-txt" type="hidden" value="${showWriterUserCertification.userId}" name="userId" id="userId"/>
                     <div class="label-input">
                     <label>*姓名</label>
 	                    <div class="input-wrapper">
