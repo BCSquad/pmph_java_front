@@ -59,7 +59,7 @@
             <!--  -->
             
             <bean class="com.bc.pmpheep.back.interceptor.LoginInterceptor">
-                <property name="redirectUrl" value="http://sso.ipmph.com/login"/>
+                <property name="redirectUrl" value="http://books123456789.ipmph.com/newsso/"/>
                 <property name="serviceID" value="yiyaojiaohu"></property>
             </bean>
         </mvc:interceptor>

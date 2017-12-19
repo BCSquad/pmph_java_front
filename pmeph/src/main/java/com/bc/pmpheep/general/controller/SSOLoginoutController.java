@@ -31,7 +31,7 @@ import java.util.Map;
  * Created by lihuan on 2017/12/14.
  */
 @Controller
-public class SSOLoginoutController {
+public class SSOLoginoutController extends BaseController{
 
     @Autowired
     UserService userService;
@@ -59,7 +59,7 @@ public class SSOLoginoutController {
 
         String ticket = request.getParameter("ST");
         try {
-            HttpGet httpget = new HttpGet("http://sso.ipmph.com/ServiceValidate.jsp?ServiceID=yiyaojiaohu&ST=" + ticket);
+            HttpGet httpget = new HttpGet("http://books123456789.ipmph.com/newsso/ServiceValidate.jsp?ServiceID=yiyaojiaohu&ST=" + ticket);
             CloseableHttpResponse closeableHttpResponse = httpclient.execute(httpget);
             HttpEntity entity = closeableHttpResponse.getEntity();
             String xmlString = EntityUtils.toString(entity);
@@ -88,7 +88,12 @@ public class SSOLoginoutController {
             username = message;
             Map<String, Object> user = userService.getUserInfo(username, usertype);
             if (user == null) {
-                throw new RuntimeException("获取用户帐号不存在");
+
+                //新建用户信息
+
+                userService.addNewUser(username,usertype);
+                user = userService.getUserInfo(username, usertype);
+               // throw new RuntimeException("获取用户帐号不存在");
             }
 
             HttpSession session = request.getSession();

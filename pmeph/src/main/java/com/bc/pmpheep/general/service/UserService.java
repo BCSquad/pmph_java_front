@@ -18,4 +18,11 @@ public class UserService {
     public Map<String, Object> getUserInfo(String username, String usertype) {
         return userDao.getUserInfo(username, usertype);
     }
+
+    public int addNewUser(String username, String usertype) {
+        return userDao.addNewUser(username, usertype);
+    }
+
+    ;
+
 }
