@@ -38,7 +38,7 @@ public class SSOLoginoutController {
 
     private static final CloseableHttpClient httpclient = HttpClients.createDefault();
 
-    @RequestMapping("login")
+    @RequestMapping("weblogin!main")
     public void login(HttpServletRequest request, HttpServletResponse response) {
         String username = null;
         String usertype;
@@ -48,13 +48,22 @@ public class SSOLoginoutController {
             usertype = "1";
         }
 
+        StringBuilder builder = new StringBuilder("");
+        Map<String, String[]> map = (Map<String, String[]>) request.getParameterMap();
+        for (String name : map.keySet()) {
+            String[] values = map.get(name);
+            builder.append(name + "=" + (values.length > 0 ? values[0] : "") + "&");
+        }
+        System.out.println(builder);
+
+
         String ticket = request.getParameter("ST");
         try {
-            HttpGet httpget = new HttpGet("http://sso.ipmph.com/ServiceValidate.jsp?ServiceID=yixuejiaoyujiaohu&ST=" + ticket);
+            HttpGet httpget = new HttpGet("http://sso.ipmph.com/ServiceValidate.jsp?ServiceID=yiyaojiaohu&ST=" + ticket);
             CloseableHttpResponse closeableHttpResponse = httpclient.execute(httpget);
             HttpEntity entity = closeableHttpResponse.getEntity();
             String xmlString = EntityUtils.toString(entity);
-
+            System.out.println(xmlString);
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
             DocumentBuilder db = dbf.newDocumentBuilder();

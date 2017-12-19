@@ -45,6 +45,16 @@ public class WriterArticleController extends BaseController{
 	 */
 	@RequestMapping("/initWriteArticle")
 	public  ModelAndView initWriteArticle(HttpServletRequest request){
+
+		StringBuilder builder = new StringBuilder("");
+		Map<String, String[]> map = (Map<String, String[]>) request.getParameterMap();
+		for (String name : map.keySet()) {
+			String[] values = map.get(name);
+			builder.append(name + "=" + (values.length > 0 ? values[0] : "") + "&");
+		}
+		System.out.println(builder);
+
+
 		//初始化展示 保存 提交 查看  控制按钮的显示
 		Map<String,Object> paraMap = new HashMap<String,Object>();
 		Map<String, Object> user = this.getUserInfo();
