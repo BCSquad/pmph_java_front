@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="${ctx}/statics/authadmin/usermanage/writerLists.css" type="text/css">
     <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js" type="text/javascript"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.pager.js"></script>
     <script src="${ctx}/resources/comm/base.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
