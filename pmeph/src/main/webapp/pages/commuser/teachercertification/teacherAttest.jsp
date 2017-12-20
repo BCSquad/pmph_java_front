@@ -119,6 +119,7 @@ String contextpath=request.getContextPath();
             });
             
             $("#sxy-btn-upload").uploadFile({
+            	accept:"image/*",
                 start: function () {
                     console.log("开始上传。。。")
                 },
@@ -135,6 +136,7 @@ String contextpath=request.getContextPath();
                 },
                 progressall: function (loaded, total, bitrate) {
                     console.log("正在上传。。。" + loaded / total);
+                    window.message.info("正在上传。。。" + loaded / total);
                 }
             });
 
@@ -313,7 +315,7 @@ String contextpath=request.getContextPath();
                     </td>
                     <td>
                     <div style="margin-bottom: 65px;margin-left: 20px;">
-                   		<input id="sxy-btn-upload" type="button" value="上传文件"/>
+                   		<input id="sxy-btn-upload"  type="button" value="上传文件"/>
                    		<div id="proxyDiv">
 	                      <c:if test="${showWriterUserCertification.cert !=null}">
 	                       <div class="td-font-2"  style="float: left;" id="proxyName" >
