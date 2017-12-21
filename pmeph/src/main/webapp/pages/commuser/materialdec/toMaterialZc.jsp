@@ -49,18 +49,27 @@
 					    	${list.bookSelect}
 					</select>
 					<div style="float: left;margin-left: 30px;" class="ts_radio">
-						<input type="radio" name="zw_1_${status.count}" checked="checked" value="1"/>主编
-						<input type="radio" name="zw_1_${status.count}" value="2"/>副编委
-						<input type="radio" name="zw_1_${status.count}" value="3"/>编委
+						<table style="width: 280px;">
+							<tr>
+								<td><input type="radio" name="zw_1_${status.count}" value="1" ${list.preset_position=='1'?'checked':'' }/>主编</td>
+								<td><input type="radio" name="zw_1_${status.count}" value="2" ${list.preset_position=='2'?'checked':'' }/>副编委</td>
+								<td><input type="radio" name="zw_1_${status.count}" value="3" ${list.preset_position=='3'?'checked':'' }/>编委</td>
+								<td><input type="radio" name="zw_1_${status.count}" value="4" ${list.preset_position=='4'?'checked':'' }/>数字编委</td>
+							</tr>
+						</table>
 						<!-- 用于遍历radio中的值 -->
 						<input type="hidden" name="preset_position" value="zw_1_${status.count}">
 					</div>
 					<div style="float: left;margin-left: 30px;">
 						<span style="float: left;">上传教学大纲：</span>
-						<span style="float: left;margin-right: 10px;">
-						<a href="javascript:" class="filename"  onclick="downLoadProxy('${list.syllabus_id}')">${list.syllabus_name}</a>
+						<div id="fileNameDiv_1" class="fileNameDiv"></div>
+						<input type="hidden" name="syllabus_id" id="syllabus_id_1" value="${list.syllabus_id}"/>
+						<input type="hidden" name="syllabus_name" id="syllabus_name_1" value="${list.syllabus_name}"/>
+						<span style="float: left;margin-right: 10px;" id="fjxq">
+							<a href="javascript:" class="filename"  onclick="downLoadProxy('${list.syllabus_id}')">${list.syllabus_name}</a>
 						</span>
 						<div class="scys" id="scjxdg_1"><span>上传文件</span></div>
+						<input type="hidden" name="scfjb" id="scfjb" value="${status.count}">
 					</div>
 				</div>
 			</c:forEach>	
@@ -81,9 +90,9 @@
 							</td>
 						<td><span class="btbs">*</span><span>性&emsp;&emsp;别：</span>
                             <select class="select-input" id="sex" name="sex">
-                                <option value="0">保密</option>
-                                <option value="1">男</option>
-                                <option value="2">女</option>
+                                <option value="0" ${gezlList.sex=='0'?'selected':'' }>保密</option>
+                                <option value="1" ${gezlList.sex=='1'?'selected':'' }>男</option>
+                                <option value="2" ${gezlList.sex=='2'?'selected':'' }>女</option>
                             </select></td>
 						<td><span class="btbs">*</span><span>出生年月：</span>
 							<input class="cg_input" calendar format="'yyyy-mm-dd'"  name="birthday" value="${gezlList.birthday}"  id="birthday" onBlur="toisNah('出生日期不能为空','birthday')" /></td>
@@ -100,9 +109,9 @@
 							<input class="cg_input" name="position" value="${gezlList.position}" id="position" onBlur="toisNah('职务不能为空','position')" maxlength="35"/></td>
 						<td><span class="btbs">*</span><span>职&emsp;&emsp;称：</span>
                             <select class="select-input" id="zc" name="title" >
-                                <option value="0">教授</option>
-                                <option value="1">主任</option>
-                                <option value="3">一级教师</option>
+                                <option value="0" ${gezlList.sex=='0'?'selected':'' }>教授</option>
+                                <option value="1" ${gezlList.sex=='1'?'selected':'' }>主任</option>
+                                <option value="3" ${gezlList.sex=='3'?'selected':'' }>一级教师</option>
                             </select></td>
 						<td><span class="btbs">*</span><span>地&emsp;&emsp;址：</span>
 							<input class="cg_input" name="address" value="${gezlList.address}" id="address" onBlur="toisNah('地址不能为空','address')" maxlength="45"/></td>
@@ -126,9 +135,9 @@
 							<input class="cg_input" name="email" value="${gezlList.email}" id="email" onBlur="toisNah('邮箱不能为空','email')" maxlength="40"/></td>
 						<td><span class="btbs">*</span><span>证件类型：</span>
                             <select class="select-input" id="zjlx" name="idtype">
-                                <option value="0">身份证</option>
-                                <option value="1">护照</option>
-                                <option value="2">军官证</option>
+                                <option value="0" ${list.preset_position=='0'?'selected':'' }>身份证</option>
+                                <option value="1" ${list.preset_position=='1'?'selected':'' }>护照</option>
+                                <option value="2" ${list.preset_position=='2'?'selected':'' }>军官证</option>
                             </select></td>
 						<td><span class="btbs">*</span><span>证件号码：</span>
 							<input class="cg_input" name="idcard" value="${gezlList.idcard}" id="idcard" onBlur="checkIdCard('idcard')" maxlength="20"/></td>
@@ -307,10 +316,12 @@
 						<tr>
 							<td><input class="cg_input" name="xs_org_name" id="xs_org_name" value="" placeholder="学术组织"/></td>
 							<td style="color: #333333;">
-								<input type="radio" name="xs_rank_1" value="1" checked="checked"/>国际
-								<input type="radio" name="xs_rank_1" value="2" />国家
-								<input type="radio" name="xs_rank_1" value="3" />省部
-								<input type="radio" name="xs_rank_1" value="4" />其他
+								<table class="radio_tb" style="width: 220px;"><tr>
+									<td><input type="radio" name="xs_rank_1" value="1" checked="checked"/>国际</td>
+									<td><input type="radio" name="xs_rank_1" value="2" />国家</td>
+									<td><input type="radio" name="xs_rank_1" value="3" />省部</td>
+									<td><input type="radio" name="xs_rank_1" value="4" />其他</td>
+								</tr></table>
 								<input type="hidden" name="xs_rank" value="xs_rank_1" />
 							</td>
 							<td><input class="cg_input" name="xs_position" value="" placeholder="职务"/></td>
@@ -321,11 +332,13 @@
 							<tr id="xsjz_${status.count}">
 								<td><input class="cg_input" name="xs_org_name" id="xs_org_name" value="${list.org_name}" placeholder="学术组织"/></td>
 							<td style="color: #333333;">
-								<input type="radio" name="xs_rank_1" value="1" checked="checked"/>国际
-								<input type="radio" name="xs_rank_1" value="2" />国家
-								<input type="radio" name="xs_rank_1" value="3" />省部
-								<input type="radio" name="xs_rank_1" value="4" />其他
-								<input type="hidden" name="xs_rank" value="xs_rank_1" />
+								<table class="radio_tb" style="width: 220px;"><tr>
+									<td><input type="radio" name="xs_rank_${status.count}" value="1" ${list.rank=='1'?'checked':'' }/>国际</td>
+									<td><input type="radio" name="xs_rank_${status.count}" value="2" ${list.rank=='2'?'checked':'' }/>国家</td>
+									<td><input type="radio" name="xs_rank_${status.count}" value="3" ${list.rank=='3'?'checked':'' }/>省部</td>
+									<td><input type="radio" name="xs_rank_${status.count}" value="4" ${list.rank=='4'?'checked':'' }/>其他</td>
+								</tr></table>	
+									<input type="hidden" name="xs_rank" value="xs_rank_${status.count}" />
 							</td>
 							<td><input class="cg_input" name="xs_position" value="${list.position}" placeholder="职务"/></td>
 							<td><input class="cg_input" name="xs_note" value="${list.note}" style="width: 370px;" placeholder="备注"/></td>
@@ -358,10 +371,12 @@
 						<tr>
 							<td><input class="cg_input" name="jc_material_name" id="jc_material_name" value="" style="width: 360px;" placeholder="教材名称"/></td>
 							<td style="color: #333333;">
-								<input type="radio" name="jc_position_1" value="0" checked="checked"/>无
-								<input type="radio" name="jc_position_1" value="1" />主编
-								<input type="radio" name="jc_position_1" value="2" />编委
-								<input type="radio" name="jc_position_1" value="3" />副编委
+								<table class="radio_tb" style="width: 230px;"><tr>
+									<td><input type="radio" name="jc_position_1" value="0" checked="checked"/>无</td>
+									<td><input type="radio" name="jc_position_1" value="1" />主编</td>
+									<td><input type="radio" name="jc_position_1" value="2" />编委</td>
+									<td><input type="radio" name="jc_position_1" value="3" />副编委</td>
+								</tr></table>	
 								<input type="hidden" name="jc_position" value="jc_position_1" />
 							</td>
 							<td><input class="cg_input" name="jc_note" value="" style="width: 330px;" placeholder="备注"/></td>
@@ -371,11 +386,13 @@
 							<tr id="jccb_${status.count}">
 								<td><input class="cg_input" name="jc_material_name" id="jc_material_name" value="${list.material_name}" style="width: 360px;" placeholder="教材名称"/></td>
 								<td style="color: #333333;">
-									<input type="radio" name="jc_position_1" value="0" checked="checked"/>无
-									<input type="radio" name="jc_position_1" value="1" />主编
-									<input type="radio" name="jc_position_1" value="2" />编委
-									<input type="radio" name="jc_position_1" value="3" />副编委
-									<input type="hidden" name="jc_position" value="jc_position_1" />
+									<table class="radio_tb" style="width: 230px;"><tr>
+										<td><input type="radio" name="jc_position_${status.count}" value="0" ${list.position=='1'?'checked':'' }/>无</td>
+										<td><input type="radio" name="jc_position_${status.count}" value="1" ${list.position=='2'?'checked':'' }/>主编</td>
+										<td><input type="radio" name="jc_position_${status.count}" value="2" ${list.position=='3'?'checked':'' }/>编委</td>
+										<td><input type="radio" name="jc_position_${status.count}" value="3" ${list.position=='4'?'checked':'' }/>副编委</td>
+									</tr></table>		
+									<input type="hidden" name="jc_position" value="jc_position_${status.count}" />
 								</td>
 								<td><input class="cg_input" name="jc_note" value="${list.note}" style="width: 330px;" placeholder="备注"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('jccb_${status.count}')"/></td>
@@ -460,7 +477,7 @@
 								<td><input class="cg_input" name="gj_course_name" id="gj_course_name" value="${list.course_name}" style="width: 370px;" placeholder="课程名称"/></td>
 								<td><input class="cg_input" name="gj_class_hour" value="${list.class_hour}" style="width: 170px;" placeholder="课时数"/></td>
 								<td><input class="cg_input" name="gj_note" value="${list.note}" style="width: 450px;" placeholder="备注"/>
-									<input type="hidden" name="gj_type" value="1"/>
+									<input type="hidden" name="gj_type" value="2"/>
 								</td>
 								<td><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('jpkcjs_${status.count}')"/></td>
 							</tr>
@@ -502,7 +519,7 @@
 								<td><input class="cg_input" name="gj_course_name" id="gj_course_name" value="${list.course_name}" style="width: 370px;" placeholder="课程名称"/></td>
 								<td><input class="cg_input" name="gj_class_hour" value="${list.class_hour}" style="width: 170px;" placeholder="课时数"/></td>
 								<td><input class="cg_input" name="gj_note" value="${list.note}" style="width: 450px;" placeholder="备注"/>
-									<input type="hidden" name="gj_type" value="1"/>
+									<input type="hidden" name="gj_type" value="3"/>
 								</td>
 								<td><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('jpkcjs_${status.count}')"/></td>
 							</tr>
@@ -535,9 +552,11 @@
 							<td><input class="cg_input" name="hj_material_name" id="hj_material_name" value="" style="width: 300px;" placeholder="教材名称"/></td>
 							<td><input class="cg_input" name="hj_isbn" value="" style="width: 110px;" placeholder="标准书号"/></td>
 							<td style="color: #333333;">
-								<input type="radio" name="hj_rank_1" value="1" checked="checked" />教育部十二五
-								<input type="radio" name="hj_rank_1" value="2" />国家卫计委十二五
-								<input type="radio" name="hj_rank_1" value="3" />其他
+								<table class="radio_tb" style="width: 320px;"><tr>
+									<td><input type="radio" name="hj_rank_1" value="1" checked="checked" />教育部十二五</td>
+									<td><input type="radio" name="hj_rank_1" value="2" />国家卫计委十二五</td>
+									<td><input type="radio" name="hj_rank_1" value="3" />其他</td>
+								</tr></table>	
 								<input type="hidden" name="hj_rank" value="hj_rank_1" />
 							</td>
 							<td><input class="cg_input" name="hj_note" value="" style="width: 250px;" placeholder="备注"/></td>
@@ -548,10 +567,12 @@
 								<td><input class="cg_input" name="hj_material_name" id="hj_material_name" value="${list.material_name}" style="width: 300px;" placeholder="教材名称"/></td>
 								<td><input class="cg_input" name="hj_isbn" value="${list.isbn}" style="width: 110px;" placeholder="标准书号"/></td>
 								<td style="color: #333333;">
-									<input type="radio" name="hj_rank_1" value="1" checked="checked" />教育部十二五
-									<input type="radio" name="hj_rank_1" value="2" />国家卫计委十二五
-									<input type="radio" name="hj_rank_1" value="3" />其他
-									<input type="hidden" name="hj_rank" value="hj_rank_1" />
+									<table class="radio_tb" style="width: 320px;"><tr>
+										<td><input type="radio" name="hj_rank_${status.count}" value="1" ${list.rank=='1'?'checked':'' } />教育部十二五</td>
+										<td><input type="radio" name="hj_rank_${status.count}" value="2" ${list.rank=='2'?'checked':'' } />国家卫计委十二五</td>
+										<td><input type="radio" name="hj_rank_${status.count}" value="3" ${list.rank=='3'?'checked':'' } />其他</td>
+									</tr></table>
+									<input type="hidden" name="hj_rank" value="hj_rank_${status.count}" />
 								</td>
 								<td><input class="cg_input" name="hj_note" value="${list.note}" style="width: 250px;" placeholder="备注"/></td>
 								<td><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('gjghjc_${status.count}')"/></td>
@@ -614,19 +635,19 @@
 							<td><input class="cg_input" name="jcb_material_name" id="jcb_material_name" value="${list.material_name}" style="width: 210px;" placeholder="教材名称"/></td>
 							<td>
 								<select id="jcxz" name="jcb_rank">
-	                                <option value="0">其他教材</option>
-	                                <option value="1">教育部规划</option>
-	                                <option value="2">卫计委规划</option>
-	                                <option value="3">区域规划</option>
-	                                <option value="4">创新教材</option>
+	                                <option value="0" ${list.rank=='0'?'selected':'' }>其他教材</option>
+	                                <option value="1" ${list.rank=='1'?'selected':'' }>教育部规划</option>
+	                                <option value="2" ${list.rank=='2'?'selected':'' }>卫计委规划</option>
+	                                <option value="3" ${list.rank=='3'?'selected':'' }>区域规划</option>
+	                                <option value="4" ${list.rank=='4'?'selected':'' }>创新教材</option>
                             	</select>
 							</td>
 							<td>
 								<select id="jcjb" name="jcb_position">
-	                                <option value="0">无</option>
-	                                <option value="1">主编</option>
-	                                <option value="2">副主编</option>
-	                                <option value="3">编委</option>
+	                                <option value="0" ${list.position=='0'?'selected':'' }>无</option>
+	                                <option value="1" ${list.position=='1'?'selected':'' }>主编</option>
+	                                <option value="2" ${list.position=='2'?'selected':'' }>副主编</option>
+	                                <option value="3" ${list.position=='3'?'selected':'' }>编委</option>
                             	</select>
 							</td>
 							<td><input class="cg_input" name="jcb_publisher" value="${list.publisher}" style="width: 120px;" placeholder="出版社"/></td>

@@ -36,6 +36,7 @@
 					<c:if test="${list.preset_position == '1'}">主编</c:if>
 					<c:if test="${list.preset_position == '2'}">副主编</c:if>
 					<c:if test="${list.preset_position == '3'}">编委</c:if>
+					<c:if test="${list.preset_position == '4'}">数字编委</c:if>
 					</span>
 				<span>
 					<a href="javascript:" class="filename"  onclick="downLoadProxy('${list.syllabus_id}')">${list.syllabus_name}</a>

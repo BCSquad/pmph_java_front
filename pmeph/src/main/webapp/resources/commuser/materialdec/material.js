@@ -258,9 +258,12 @@ function addTsxz(){
 					select_nr+
 				"</select>"+
 				"<div style='float: left;margin-left: 30px;' class='ts_radio'>"+
-					"<input type='radio' name='zw_"+str+"' value='1' checked='checked' />主编"+
-					"<input type='radio' name='zw_"+str+"' value='2' />副编委"+
-					"<input type='radio' name='zw_"+str+"' value='3' />编委"+
+				"<table style='width: 280px;'><tr>"+
+					"<td><input type='radio' name='zw_"+str+"' checked='checked' value='1'/>主编</td>"+
+					"<td><input type='radio' name='zw_"+str+"' value='2'/>副主编</td>"+
+					"<td><input type='radio' name='zw_"+str+"' value='3'/>编委</td>"+
+					"<td><input type='radio' name='zw_"+str+"' value='4'/>数字编委</td>"+
+				"</tr></table>"+
 					"<input type='hidden' name='preset_position' value='zw_"+str+"'>"+
 				"</div>"+
 				"<div style='float: left;margin-left: 30px;'>"+
@@ -341,10 +344,12 @@ function add_xsjz(){
 	var $tr = $("<tr id='xsjz_"+num+"'>"+
 	"<td><input class='cg_input' name='xs_org_name' value='' placeholder='学术组织'/></td>"+
 	"<td style='color: #333333;'>"+
-		"<input type='radio' name='xs_rank_"+num+"' value='1' checked='checked'/>国际"+
-		"<input type='radio' name='xs_rank_"+num+"' value='2' />国家"+
-		"<input type='radio' name='xs_rank_"+num+"' value='3' />省部"+
-		"<input type='radio' name='xs_rank_"+num+"' value='4' />其他</td>"+
+		"<table class='radio_tb' style='width: 220px;'><tr>"+
+			"<td><input type='radio' name='xs_rank_"+num+"' checked='checked' value='1'/>国际</td>"+
+			"<td><input type='radio' name='xs_rank_"+num+"' value='2'/>国家</td>"+
+			"<td><input type='radio' name='xs_rank_"+num+"' value='3'/>省部</td>"+
+			"<td><input type='radio' name='xs_rank_"+num+"' value='4'/>其他</td>"+
+		"</tr></table>"+
 		"<input type='hidden' name='xs_rank' value='xs_rank_"+num+"' />"+
 	"<td><input class='cg_input' name='xs_position' value='' placeholder='职务'/></td>"+
 	"<td><input class='cg_input' name='xs_note' value='' style='width: 370px;' placeholder='备注'/></td>"+
@@ -360,11 +365,13 @@ function add_jccb(){
 	var $tr = $("<tr id='jccb_"+num+"'>"+
 	"<td><input class='cg_input' name='jc_material_name' value='' style='width: 360px;' placeholder='教材名称'/></td>"+
 	"<td style='color: #333333;'>"+
-		"<input type='radio' name='jc_position_"+num+"' value='0' checked='checked'/>无"+
-		"<input type='radio' name='jc_position_"+num+"' value='1' />主编"+
-		"<input type='radio' name='jc_position_"+num+"' value='2' />编委"+
-		"<input type='radio' name='jc_position_"+num+"' value='3' />副编委</td>"+
-		"<input type='hidden' name='jc_position' value='jc_position_"+num+"'/>"+
+	"<table class='radio_tb' style='width: 230px;'><tr>"+
+		"<td><input type='radio' name='jc_position_"+num+"' checked='checked' value='0'/>无</td>"+
+		"<td><input type='radio' name='jc_position_"+num+"' value='1'/>主编</td>"+
+		"<td><input type='radio' name='jc_position_"+num+"' value='2'/>编委</td>"+
+		"<td><input type='radio' name='jc_position_"+num+"' value='3'/>副编委</td>"+
+	"</tr></table>"+
+	"<input type='hidden' name='jc_position' value='jc_position_"+num+"'/>"+
 	"<td><input class='cg_input' name='jc_note' value='' style='width: 330px;' placeholder='职务'/></td>"+
 	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('jccb_"+num+"')\"/></td>"+
 	"</tr>");
@@ -393,9 +400,11 @@ function add_gjghjc(){
 	"<td><input class='cg_input' name='hj_material_name' value='' style='width: 300px;' placeholder='教材名称'/></td>"+
 	"<td><input class='cg_input' name='hj_isbn' value='' style='width: 110px;' placeholder='标准书号'/></td>"+
 	"<td style='color: #333333;'>"+
-		"<input type='radio' name='hj_rank_"+num+"' value='1' checked='checked' />教育部十二五"+
-		"<input type='radio' name='hj_rank_"+num+"' value='2' />国家卫计委十二五"+
-		"<input type='radio' name='hj_rank_"+num+"' value='3' />其他</td>"+
+	"<table class='radio_tb' style='width:320px;'><tr>"+
+		"<td><input type='radio' name='hj_rank_"+num+"' checked='checked' value='1'/>教育部十二五</td>"+
+		"<td><input type='radio' name='hj_rank_"+num+"' value='2'/>国家卫计委十二五</td>"+
+		"<td><input type='radio' name='hj_rank_"+num+"' value='3'/>其他</td>"+
+	"</tr></table>"+
 		"<input type='hidden' name='hj_rank' value='hj_rank_"+num+"' />"+
 	"<td><input class='cg_input' name='hj_note' value='' style='width: 250px;' placeholder='备注'/></td>"+
 	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('gjghjc_"+num+"')\"/></td>"+
@@ -430,13 +439,11 @@ function add_jcbx(){
 		"</tr>");
 	$table.append($tr);
 	  $('#jcjb_'+num).selectlist({
-	    	zIndex: 10,
 	    	width: 110,
 	    	height: 30,
 	    	optionHeight: 30
 	    });
 	   $('#jcxz_'+num).selectlist({
-	    	zIndex: 10,
 	    	width: 110,
 	    	height: 30,
 	    	optionHeight: 30
