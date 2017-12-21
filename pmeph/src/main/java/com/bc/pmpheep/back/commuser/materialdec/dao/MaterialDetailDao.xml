@@ -45,6 +45,13 @@
 		#{title},#{address},#{postcode},#{handphone},#{email},#{idtype},#{idcard},#{telephone},
 		#{fax},#{org_id},#{gmt_create},#{is_staging},#{online_progress})
 	</insert>
+	<update id="updatePerson" parameterType="java.util.Map">
+		update declaration set realname = #{realname},sex = #{sex},birthday = #{birthday},experience = #{experience},
+		org_name = #{org_name},position = #{position},title = #{title},address = #{address},
+		postcode = #{postcode},handphone = #{handphone},email = #{email},idtype = #{idtype},is_staging = #{is_staging},
+		telephone = #{telephone},fax = #{fax},org_id = #{org_id},gmt_update = #{gmt_update},online_progress = #{online_progress}
+		 where id = #{declaration_id}
+	</update>
 	
 	<!-- 图书选择 -->
 	<select id="queryTsxz" resultType="java.util.Map" parameterType="java.util.Map">

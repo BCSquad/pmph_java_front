@@ -158,15 +158,18 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 		this.madd.DelTssbZc(map);
 		this.madd.DelStea(map);
 		this.madd.DelZjkyqk(map);
-		this.madd.DelPerson(map);
 		this.madd.DelZjxs(map);
 		this.madd.DelStu(map);
 		this.madd.DelWork(map);
-		return 0;
+		return 1;
 	}
 	@Override
 	public int updateDeclaration(Map<String, Object> map) {
 		return this.madd.updateDeclaration(map);
+	}
+	@Override
+	public int updatePerson(Map<String, Object> map) {
+		return this.madd.updatePerson(map);
 	}
 	
 }
