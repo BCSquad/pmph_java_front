@@ -32,19 +32,20 @@
 								<span class="titleFont">所有问卷</span>
 							</div>
 							<div class="researches">
-								<c:forEach var="survey" items="${list}"></c:forEach>
+								<c:forEach var="survey" items="${list}">
 								<div class="oneResearch">
 									<div class="researchPic">
 										<img class="newPicSize" src="../statics/image/research1.png">
 									</div>
 									<div class="researchContent">
-										<span class="newResearchContentFont" onclick="detail()">${survey.title }已通过</span>
+										<span class="newResearchContentFont" onclick="detail()">${survey.title}已通过</span>
 									</div>
 									<div class="resaerchTime">
-										<span class="newTimeFont">${list.gmt_create}</span>
+										<span class="newTimeFont"><fmt:formatDate pattern="yyyy年MM月dd日" value="${survey.gmt_create}" /></span>
 									</div>
 								</div>
-								<div class="oneResearch">
+								</c:forEach>
+								<!-- <div class="oneResearch">
 									<div class="researchPic">
 										<img class="oldPicSize" src="../statics/image/research2.png">
 									</div>
@@ -54,7 +55,7 @@
 									<div class="resaerchTime">
 										<span class="oldTimeFont">2017-12-20</span>
 									</div>
-								</div>
+								</div> -->
 							</div>	
 						</c:when>
 						<c:otherwise>
