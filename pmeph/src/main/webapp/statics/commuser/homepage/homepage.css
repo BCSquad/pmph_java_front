@@ -386,6 +386,7 @@
 
 .tab-bar .page {
     float: right;
+    margin-right:320px;
     width: 100px;
     height: 100%;
     color: #999999
@@ -433,7 +434,7 @@
 }
 
 .content .left {
-    float: left;
+    float: right;
     width: 320px;
     height: 100%;
 }
