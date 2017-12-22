@@ -47,7 +47,7 @@ public class ReadDetailController extends BaseController{
 	public ModelAndView move(HttpServletRequest request){
 		ModelAndView modelAndView=new ModelAndView();
 		String id=request.getParameter("id");
-		id="168";
+//		id="168";
 		Map<String, Object> supMap=readDetailService.querySupport(id);
 		Map<String, Object> map=readDetailService.queryReadBook(id);
 		if(("DEFAULT").equals(map.get("image_url"))){
