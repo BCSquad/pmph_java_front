@@ -245,6 +245,20 @@
 				</table>
 			</div>
 		</div>
+		<!--扩展信息-->
+		<c:forEach var="zjkzxx" items="${zjkzxxList}">
+		 	<div class="sbxq_item">
+				<div>
+					<span id="tsxz_span9"></span>
+					<span class="tsxz_title">${zjkzxx.extension_name}（选填）</span>
+					<input type="hidden" name="extension_id" value="${zjkzxx.id}"/>
+				</div>
+				<div class="content">
+					<textarea class="text_cl" name="content"></textarea>
+				</div>
+				<hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">
+			</div>
+		</c:forEach>
 		<!--主要学术兼职-->
 		<div class="sbxq_item" id="xsjz">
 			<div>
@@ -535,20 +549,6 @@
 				</table>
 			</div>
 		</div>
-			<!--扩展信息-->
-		<c:forEach var="zjkzxx" items="${zjkzxxList}">
-		 	<div class="sbxq_item">
-				<div>
-					<span id="tsxz_span9"></span>
-					<span class="tsxz_title">${zjkzxx.extension_name}（选填）</span>
-					<input type="hidden" name="extension_id" value="${zjkzxx.id}"/>
-				</div>
-				<div class="content">
-					<textarea class="text_cl" name="content"></textarea>
-				</div>
-				<hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">
-			</div>
-		</c:forEach>
 		<!-- 申报单位-->
 		<div class="sbxq_item1">
 			<div>

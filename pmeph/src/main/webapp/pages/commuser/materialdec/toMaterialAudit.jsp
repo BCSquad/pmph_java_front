@@ -182,6 +182,20 @@
 					</table>
 				</div>
 			</div>
+			<!--扩展信息-->
+			<c:forEach var="zjkzxx" items="${zjkzqkList}">
+			 	<div class="sbxq_item">
+					<div>
+						<span id="tsxz_span9"></span>
+						<span class="tsxz_title">${zjkzxx.extension_name}</span>
+					</div>
+					<div class="content">
+						<div style="margin: 5px;">${zjkzxx.content}</div>
+					</div>
+					<hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">
+				</div>
+			</c:forEach>
+			
 			<!--主要学术兼职-->
 			<div class="sbxq_item" id="xsjz">
 				<div>
@@ -448,19 +462,7 @@
 					</table>
 				</div>
 			</div>
-				<!--扩展信息-->
-			<c:forEach var="zjkzxx" items="${zjkzqkList}">
-			 	<div class="sbxq_item">
-					<div>
-						<span id="tsxz_span9"></span>
-						<span class="tsxz_title">${zjkzxx.extension_name}</span>
-					</div>
-					<div class="content">
-						<div style="margin: 5px;">${zjkzxx.content}</div>
-					</div>
-					<hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">
-				</div>
-			</c:forEach>
+			
 			<!-- 申报单位-->
 			<div class="sbxq_item1">
 				<div>
