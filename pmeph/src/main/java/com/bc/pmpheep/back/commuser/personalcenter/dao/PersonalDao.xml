@@ -2,9 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bc.pmpheep.back.commuser.personalcenter.dao.PersonalDao">
 
- <resultMap id="BaseResultMap" type="com.bc.pmpheep.back.commuser.personalcenter.bean.PersonalNewMessage" >
+
+ <resultMap id="BaseResultMap" type="Map" ><!-- com.bc.pmpheep.back.commuser.personalcenter.bean.PersonalNewMessage -->
     <id column="id" property="id" />
-     <result column="msg_type" property="msgType"/>
+     <result column="msg_type" property="msg_type"/>
     <result column="bookname" property="book_name"/>
     <result column="buy_url" property="buy_url"/>
     <result column="image_url" property="image_url"/>
@@ -76,46 +77,117 @@ AND a.online_progress IN (2, 3)
 
 
  <!-- 查全部可申请的教材 -->
- <select id="ListAllBookJoin"  resultMap="BaseResultMap">
-SELECT
-	b.online_progress,
-	b.is_staging,
-	a.deadline as age_deadline,
-	a.material_name,
-	COUNT(a.material_name) AS exmember,
-	c.material_id,
-	(TO_DAYS(NOW()) - TO_DAYS(a.deadline)) AS datebase,
-	c.s as iamin
-FROM
-	material a
-LEFT JOIN declaration b ON a.id = b.material_id
-RIGHT JOIN (
+ <select id="ListAllBookJoin"  resultMap="BaseResultMap" parameterType="PageParameter">
 	SELECT
-		sum(t.user_id = #{id}) s,
-		t.material_id
+		max(c.online_progress) as online_progress,
+		c.is_staging,
+		a.deadline as age_deadline,
+		a.material_name,
+		COUNT(b.id) AS exmember,
+		b.material_id,
+		(TO_DAYS(NOW()) - TO_DAYS(a.deadline)) AS datebase,
+		count(c.id) as iamin,
+		c.id as declaration_id
 	FROM
-		declaration t
-  where t.is_deleted='0'
+		material a
+	LEFT JOIN declaration b ON a.id = b.material_id
+	LEFT JOIN declaration c ON a.id = c.material_id and c.user_id = #{parameter.logUserId} and c.online_progress != 2
+	WHERE
+		a.is_deleted = '0'
+	AND a.is_public = '0'
+	AND a.is_published = '1'
+	AND b.online_progress not in  (2)
+		<if test="parameter.s!=null and parameter.s!= ''">AND c.id is not null </if> 
+	 	<if test="parameter.is_staging!=null and parameter.is_staging!= ''">AND c.is_staging =#{parameter.is_staging}</if>
+	 	<if test="parameter.online_progress!=null and parameter.online_progress!= ''">AND c.online_progress=#{parameter.online_progress}</if>
+		<if test="parameter.bookname!=null and parameter.bookname!= ''">AND a.material_name like CONCAT('%',#{parameter.bookname},'%')</if>  
+	 	<if test="parameter.dateinfo!=null and parameter.dateinfo ==1 ">AND (TO_DAYS(NOW()) - TO_DAYS(a.deadline)) &lt; 0</if>  
+	 	<if test="parameter.dateinfo!=null and parameter.dateinfo ==2 ">AND (TO_DAYS(NOW()) - TO_DAYS(a.deadline)) &gt; 0 </if>  
 	GROUP BY
-		t.material_id 
-
-) c  ON c.material_id=a.id
-
-WHERE
-	a.is_deleted = '0'
-AND a.is_public = '0'
-AND a.is_published = '1'
-AND b.online_progress not in  (2)
-	<if test="s!=null and s!= ''">AND c.s = #{s}</if> 
- 	<if test="is_staging!=null and is_staging!= ''">AND b.is_staging =#{is_staging}</if>
- 	<if test="online_progress!=null and online_progress!= ''">AND b.online_progress=#{online_progress}</if>
-<if test="bookname!=null and bookname!= ''">AND a.material_name like CONCAT('%',#{bookname},'%')</if>  
- 					<if test="dateinfo!=null and dateinfo ==1 ">AND (TO_DAYS(NOW()) - TO_DAYS(a.deadline)) &lt; 0</if>  
- 					<if test="dateinfo!=null and dateinfo ==2 ">AND (TO_DAYS(NOW()) - TO_DAYS(a.deadline)) &gt; 0 </if>  
-GROUP BY
-	(a.id)
+		(a.id)
+	limit ${start},${pageSize}	
 	 </select>
+	 
+	 <select id="queryMyBooksJoinCount" resultType="Integer" parameterType="PageParameter">
+	 	select count(*) from
+	 	(
+		 	SELECT
+				max(c.online_progress) as online_progress,
+				c.is_staging,
+				a.deadline as age_deadline,
+				a.material_name,
+				COUNT(b.id) AS exmember,
+				b.material_id,
+				(TO_DAYS(NOW()) - TO_DAYS(a.deadline)) AS datebase,
+				count(c.id) as iamin,
+				c.id as declaration_id
+			FROM
+				material a
+			LEFT JOIN declaration b ON a.id = b.material_id
+			LEFT JOIN declaration c ON a.id = c.material_id and c.user_id = #{parameter.logUserId} and c.online_progress != 2
+			WHERE
+				a.is_deleted = '0'
+			AND a.is_public = '0'
+			AND a.is_published = '1'
+			AND b.online_progress not in  (2)
+				<if test="parameter.s!=null and parameter.s!= ''">AND c.id is not null </if> 
+			 	<if test="parameter.is_staging!=null and parameter.is_staging!= ''">AND c.is_staging =#{parameter.is_staging}</if>
+			 	<if test="parameter.online_progress!=null and parameter.online_progress!= ''">AND c.online_progress=#{parameter.online_progress}</if>
+			<if test="parameter.bookname!=null and parameter.bookname!= ''">AND a.material_name like CONCAT('%',#{parameter.bookname},'%')</if>  
+			 					<if test="parameter.dateinfo!=null and parameter.dateinfo ==1 ">AND (TO_DAYS(NOW()) - TO_DAYS(a.deadline)) &lt; 0</if>  
+			 					<if test="parameter.dateinfo!=null and parameter.dateinfo ==2 ">AND (TO_DAYS(NOW()) - TO_DAYS(a.deadline)) &gt; 0 </if>  
+			GROUP BY
+				(a.id)
+		)t
+	 </select>
+	 
+	 
+	 
 
-
+	<!-- 查询选题申报（个人中心 我要出书） -->
+	<select id="queryMyTopicChoose" parameterType="PageParameter" resultType="Map">
+		SELECT
+		t.id,
+		t.bookname,
+		t.deadline,
+		t.source,
+		t.type,
+		t.gmt_create,
+		t.auth_progress
+		FROM
+		topic t
+		<where>
+			<if test="parameter.logUserId != null and parameter.logUserId != '' ">
+				AND t.user_id =  #{parameter.logUserId}
+			</if>
+			<if test="parameter.queryName != null and parameter.queryName!= '' ">
+				AND t.bookname LIKE  concat('%',#{parameter.queryName},'%')
+			</if>
+			<if test="parameter.auth_progress != null and parameter.auth_progress != '' ">
+				AND t.auth_progress =  #{parameter.auth_progress}
+			</if>
+		</where>
+		limit ${start},${pageSize}
+		
+	</select>
+	
+	<select id="queryMyTopicChooseCount" parameterType="PageParameter" resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		topic t
+		<where>
+			<if test="parameter.logUserId != null and parameter.logUserId != '' ">
+				AND t.user_id =  #{parameter.logUserId}
+			</if>
+			<if test="parameter.queryName != null and parameter.queryName!= '' ">
+				AND t.bookname LIKE  concat('%',#{parameter.queryName},'%')
+			</if>
+			<if test="parameter.auth_progress != null and parameter.auth_progress != '' ">
+				AND t.auth_progress =  #{parameter.auth_progress}
+			</if>
+		</where>
+		
+	</select>
 
 </mapper>
