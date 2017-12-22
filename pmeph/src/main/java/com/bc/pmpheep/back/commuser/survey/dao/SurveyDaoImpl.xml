@@ -7,5 +7,20 @@
 		select * from survey where is_deleted=0
 	</select>
 	
+	<!-- 查询单个调查对应的问题 -->
+	<select id="getSurvey" resultType="map">
+		SELECT a.*,c.title AS surveyTitle 
+		FROM `survey_question` a
+		LEFT JOIN `survey_question_category` b
+		ON a.`category_id`= b.`id`
+		LEFT JOIN `survey` c
+		ON b.`id` = c.`type_id`
+		WHERE c.`id`=#{surveyId}
+	</select>
 	
+	<!-- 查询问题对应的选项 -->
+	<select id="getOptions" resultType="map">
+		SELECT * FROM `survey_question_option`
+		WHERE question_id=#{questionId}
+	</select>
 </mapper>
