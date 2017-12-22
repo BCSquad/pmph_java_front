@@ -1,6 +1,6 @@
 .banner {
-    width: 1050px;
-    height: 380px;
+    width: 922px;
+    height: 340px;
     background: gray;
     float: left;
 }
@@ -20,12 +20,10 @@
 }
 
 .op-link {
-    width: 150px;
-    height: 340px;
+    width: 278px;
+    height: 380px;
     /*background: chartreuse;*/
     float: right;
-    background: #2b333b;
-    padding: 20px 0;
 }
 
 .op-link .title {
@@ -38,6 +36,71 @@
     margin: 22px 20px;
     height: 1px;
     background-color: #4d4d4d;
+}
+
+.transaction{
+	float:right;
+	width: 268px;
+	height: 121px;
+	background-color: #EFEEEC;
+}
+
+.labeling{
+	font: left;
+	margin-top: 15px;
+	margin-left: 17px;
+	font-family: MicrosoftYaHei;
+	font-size: 16px;
+	color: #636363;
+}
+
+.consol{
+	margin-top: 12px;
+	margin-left: 17px;
+}
+
+.marks{
+	margin-top: -24px;
+	margin-left: 146px;
+}
+
+.bin{
+	font: left;
+	width: 94px;
+	height: 24px;
+	background-color: #4aceb2;
+	border-radius:3px;
+	font-family: MicrosoftYaHei;
+	font-size: 13px;
+	color: #ffffff;
+	text-align: center;
+	cursor: pointer;
+}
+
+.binone{
+	font: left;
+	width: 94px;
+	height: 24px;
+	background-color: #F6B06B;
+	border-radius:3px;
+	font-family: MicrosoftYaHei;
+	font-size: 13px;
+	color: #ffffff;
+	text-align: center;
+	cursor: pointer;
+}
+
+.bintwo{
+	font: left;
+	width: 94px;
+	height: 24px;
+	background-color: #0E9BAC;
+	border-radius:3px;
+	font-family: MicrosoftYaHei;
+	font-size: 13px;
+	color: #ffffff;
+	text-align: center;
+	cursor: pointer;
 }
 
 .op-link .link {
@@ -71,9 +134,79 @@
     clear: both;
 }
 
+.left_one{
+	width: 310px;
+	height: 223px;
+	margin-top: 25px;
+	float: left;
+    /* background-image: url("../../testfile/rectangle.png"); */
+    border: 1px solid #F2F2F2;
+    border-radius:6px;
+    box-shadow: 1px 1px 3px #888888;
+}
+
+.p1_left{
+	width: 216px;
+	height: 89px;
+	margin-left: 42px;
+	margin-top: 55px;
+	background-image:url("../../image/adv1_left.jpg");
+	border-radius:6px;
+}
+
+.p2_left{
+	width: 216px;
+	height: 89px;
+	margin-left: 42px;
+	margin-top: 8px;
+	background-image:url("../../image/adv2_left.jpg");
+	border-radius:6px;
+}
+
+.left_two{
+	width: 310px;
+	height: 250px;
+	margin-top: 25px;
+	float: left;
+	/* background-image: url("../../testfile/rectangle.png"); */
+	border: 1px solid #F2F2F2;
+    border-radius:6px;
+    box-shadow: 1px 1px 3px #888888;
+}
+
+.left_con1{
+	width: 280px;
+	height: 35px;
+	margin-left: 15px;
+	margin-top: 18px;
+	font-family: MicrosoftYaHei;
+	font-size: 14px;
+	line-height: 20px;
+	color: #555555;
+}
+
+.textbook_left{
+	margin-top:17px;
+	margin-left:15px;
+	font-family: MicrosoftYaHei;
+	font-size: 18px;
+	color: #489299;
+	float: left;
+}
+
+.all_left{
+	margin-top:21px;
+	margin-right:18px;
+	font-family: MicrosoftYaHei;
+	font-size: 13px;
+	color: #000000;
+	float: right;
+}
+
 .area-2.title.name {
     width: 28px;
     height: 106px;
+    border-radius:6px;
 }
 
 .area-2 .content-left {
@@ -83,6 +216,21 @@
     margin: 20px 0;
     margin-left: 89px;
     cursor: pointer;
+}
+
+.left_join{
+	width: 67px;
+	height: 27px;
+	background-color: #33CAA9;
+    margin-top: -32px;
+    margin-left: 170px;
+    border-radius:3px;
+	font-family: MicrosoftYaHei;
+	font-size: 13px;
+	color: #ffffff;
+	text-align: center;
+	line-height: 25px;
+	cursor: pointer;
 }
 
 .area-2 .content-left .content-size {
@@ -1174,4 +1322,22 @@
     float: left;
     height: 100%;
     width: 360px;
+}
+
+.test{
+	position:fixed;
+	float:right;
+	width: 229px;
+	height: 226px;
+	right: 90px;
+	bottom: 70px;
+	background-image:url("../../image/test.jpg"); 
+	cursor: pointer;
+}
+
+.cancel{
+	float: right;
+	font-family: MicrosoftYaHei;
+	color: #999999;
+	font-size: 14px;
 }
