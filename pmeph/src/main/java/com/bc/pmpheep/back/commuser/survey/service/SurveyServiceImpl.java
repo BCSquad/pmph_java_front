@@ -22,5 +22,19 @@ public class SurveyServiceImpl implements SurveyService {
 		List<Map<String, Object>> list= surveyDao.surveyList();
 		return list;
 	}
+	
+	//查询调查对应的题目
+	@Override
+	public List<Map<String, Object>> getSurvey(long surveyId) {
+		List<Map<String, Object>> list = surveyDao.getSurvey(surveyId);
+		return list;
+	}
+
+	//查询单选和多选对应的选项
+	@Override
+	public List<Map<String, Object>> getOptions(Long questionId) {
+		List<Map<String, Object>> list = surveyDao.getOptions(questionId);
+		return list;
+	}
 
 }

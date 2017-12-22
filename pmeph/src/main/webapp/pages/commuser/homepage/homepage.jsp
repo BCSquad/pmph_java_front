@@ -135,7 +135,7 @@
                     </c:if>
                 </c:forEach>
                 <c:forEach items="${listType}" var="list" varStatus="status">
-                    <c:if test="${status.index!=0}">
+                    <c:if test="${status.index==1 or status.index==2 }">
                         <div class="point"></div>
                         <div class="type" id="typeTwo">${list.type_name}</div>
                     </c:if>

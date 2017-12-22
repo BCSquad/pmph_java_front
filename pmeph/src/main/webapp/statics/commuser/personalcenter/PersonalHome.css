@@ -1116,3 +1116,16 @@ width: 76px;
     text-decoration: none;
     text-align: center;
 }
+
+.block {
+    clear: both;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.tab-bar {
+    height: 34px;
+    border-bottom: 2px solid;
+    border-bottom-color: #9B9D58;
+    margin-top: 20px;
+}

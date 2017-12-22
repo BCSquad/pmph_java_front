@@ -1,8 +1,17 @@
-$("#male").click( function () {
-    $(this).siblings("span").addClass("active");
-    $(this).parents("div").siblings("div").children("span").removeClass("active");
-});
-$("#female").click( function () {
-    $(this).siblings("span").addClass("active");
-    $(this).parents("div").siblings("div").children("span").removeClass("active");
-});
+function submit(){
+	$.ajax({
+		type: "POST",
+		url:contextpath+'survey/addSurveyAnswers.action?',
+		data:$('#contentForm').serialize(),
+		async: false,
+		dataType:"json",
+	    success: function(code) {
+		    if(code=='OK'){
+		    	window.location.href=contextpath+"survey/surveyList.action";
+		    }
+	    }
+	});
+}
+
+
+

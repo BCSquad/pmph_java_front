@@ -116,6 +116,6 @@ LIMIT 0,10
   </select>
    <!-- 查询书籍分类-->
   <select id="queryBookType" parameterType="map" resultMap="Mapresult">
-       select * from material_type where  parent_id=#{parent_id} order by sort
+       select * from material_type where  parent_id=#{parent_id} order by sort 
   </select>
 </mapper>

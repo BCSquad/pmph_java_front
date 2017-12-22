@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.commuser.cms.dao.ArticleDetailDao">
+	<!-- 根据ID查询标题 -->
+	<select id="queryTitle" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT * FROM cms_content c WHERE c.id=#{id}
+	</select>
+
+	<!-- 查询作者 -->
+	<select id="queryAuthor" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		select
+		t.id,
+		t.author_id,
+		c.realname
+		from cms_content t
+		left join cms_category b on t.category_id=b.id
+		left join writer_user c on t.author_id=c.id WHERE t.id=#{id}
+	</select>
+
+	<!-- 查询最近文章条数 -->
+	<select id="queryArticleCount" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select COUNT(*) from cms_content t
+		left join cms_category b on
+		t.category_id=b.id
+		left join writer_user c on t.author_id=c.id
+		WHERE t.author_id=#{author_id}
+		order by t.gmt_create desc
+	</select>
+
+	<!-- 查询最近文章医学随笔 -->
+	<select id="queryArticle" resultType="java.util.Map"
+		parameterType="java.lang.String">
+		select
+		t.id,
+		t.title,
+		t.gmt_create,
+		c.realname
+		from cms_content t
+		left join cms_category b on t.category_id=b.id
+		left join writer_user c on t.author_id=c.id WHERE t.author_id=#{author_id}
+		order by gmt_create desc LIMIT 0,3
+	</select>
+
+
+	<!-- 查询相关文章 换一换 -->
+	<select id="queryRecommendByE" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		select c.title,w.realname,c.id
+		from cms_content c left join writer_user
+		w
+		on c.author_id=w.id
+		where c.is_promote != 0 OR c.is_promote is not
+		null
+		<if test="x >= 0">
+			limit #{x},5
+		</if>
+	</select>
+
+	<!-- 写评论插入数据 -->
+	<insert id="insertWriteArticle" parameterType="java.util.Map">
+		insert into cms_content (mid,parent_id,category_id,author_type,author_id,is_staging,path)
+		values(#{mid},#{parent_id},#{category_id},#{author_type},#{author_id},#{is_staging},#{path})
+	</insert>
+
+
+</mapper>

@@ -61,6 +61,8 @@
                                                  href="${ctx}/personalhomepage/tohomepagetwo.action">随笔文章</a></li>
                     <li id="zxsp" class="dtl"><a class="aher"
                                                  href="${ctx}/personalhomepage/tohomepagethe.action">最新书评</a></li>
+                    <li id="wycs" class="dtl"><a class="aher"
+                                                 href="${ctx}/personalhomepage/toBookList.action">我要出书</a></li>
                 </ul>
                 <div id="dhxian"></div>
 

@@ -54,19 +54,6 @@
                                     ${type.type_name}
                             </div>
                         </c:forEach>
-
-                        <%--  <div class="tab recommend active" id="ZKDiv_0" onclick="javaScript:ChangeDiv('0','JKDiv_',3)">
-                              学校教育
-                          </div>
-                          <div class="tab recommend" id="ZKDiv_1" onclick="javaScript:ChangeDiv('1','JKDiv_',3)">
-                              毕业后教育
-                          </div>
-                          <div class="tab recommend" id="ZKDiv_2" onclick="javaScript:ChangeDiv('2','JKDiv_',3)">
-                              继续教育
-                          </div>
-                          <div class="tab recommend" id="ZKDiv_3" onclick="javaScript:ChangeDiv('3','JKDiv_',3)">
-                              考试用书
-                          </div>--%>
                         <div class="remark">
                             <!--<img class="img_zdtj"/>-->
                             <span class="span_1"></span>
@@ -147,60 +134,18 @@
             <!--描述：图书畅销榜-->
             <div class="area4">
                 <div class="rg_content">
-                    <span class="tsfl">图书畅销榜</span>
-                    <hr style=" height:1px;border:none;border-top:1px solid #f0f0f0;">
-                </div>
-                <div>
-
-                    <c:forEach items="${bookTypes}" var="type" varStatus="status">
-                        <div class="ts_type ${status.index==0?'ts_type1':''}" id="CXDiv_${type.id}" typeid="${type.id}"
-                             onclick="javaScript:ChangeCXDiv(${type.id})">
-                            <span>${type.type_name}</span></div>
-
-                    </c:forEach>
-
-                    <%--
-                                        <div class="ts_type ts_type1" id="CXDiv_0" onclick="javaScript:ChangeCXDiv('0','JKCXDiv_',3)">
-                                            <span>学校教育</span></div>
-                                        <div class="ts_type" id="CXDiv_1" onclick="javaScript:ChangeCXDiv('1','JKCXDiv_',3)">
-                                            <span>毕业后教育</span></div>
-                                        <div class="ts_type" id="CXDiv_2" onclick="javaScript:ChangeCXDiv('2','JKCXDiv_',3)">
-                                            <span>继续教育</span></div>
-                                        <div class="ts_type" id="CXDiv_3" onclick="javaScript:ChangeCXDiv('3','JKCXDiv_',3)">
-                                            <span>考试用书</span></div>--%>
-                </div>
-                <div style="clear: both;height: 14px;"></div>
-                <div class="hot-list" id="JKCXDiv_0">
-
-                </div>
-
-                <div style="clear: both"></div>
-
-                <div class="rg_content">
                     <span id="span_3" class="tsfl">图书分类</span>
                     <hr style=" height:1px;border:none;border-top:1px solid #f0f0f0;">
                 </div>
                 <div>
-
                     <c:forEach var="type1" items="${materialType}" varStatus="status">
                         <div class="ts_type ${status.index=='0'?'ts_type1':''}" id="FLDiv_${type1.id}"
                              onclick="javaScript:ChangeFLDiv('${type1.id}','ChangeFLDiv_',3)">
                             <span>${type1.note}</span></div>
                     </c:forEach>
-
-                    <%--<div class="ts_type ts_type1" id="FLDiv_0" onclick="javaScript:ChangeFLDiv('0','ChangeFLDiv_',3)">
-                        <span>学校教育</span></div>
-                    <div class="ts_type" id="FLDiv_1" onclick="javaScript:ChangeFLDiv('1','ChangeFLDiv_',3)">
-                        <span>毕业后教育</span></div>
-                    <div class="ts_type" id="FLDiv_2" onclick="javaScript:ChangeFLDiv('2','ChangeFLDiv_',3)">
-                        <span>继续教育</span></div>
-                    <div class="ts_type" id="FLDiv_3" onclick="javaScript:ChangeFLDiv('3','ChangeFLDiv_',3)">
-                        <span>考试用书</span></div>--%>
                 </div>
                 <div style="clear: both;height: 14px;"></div>
-
                 <c:forEach items="${materialType}" var="type1" varStatus="status">
-
                     <div id="ChangeFLDiv_${type1.id}"
                          class="tsfl_1 ChangeFLDiv" ${status.index!='0'?'style="display: none;"':''}>
                         <c:forEach items="${type1.dataList}" var="type2">
@@ -214,182 +159,25 @@
                             </div>
                         </c:forEach>
                     </div>
-
                 </c:forEach>
-
-                <%-- <div id="ChangeFLDiv_0" class="tsfl_1">
-                     <div class="part_1">
-                         <span>研究生教材</span>
-                     </div>
-                     <div class="part_2">
-                         <span>护理</span>
-                         <span>临床</span>
-                         <span>中医</span>
-                         <span>口腔</span>
-                     </div>
-                     <div class="part_1">
-                         <span>本科教材</span>
-                     </div>
-                     <div class="part_2">
-                         <span>护理</span>
-                         <span>临床</span>
-                         <span>应用心理</span>
-                         <span>法医</span>
-                         <span>康复治疗</span>
-                         <span>麻醉</span>
-                         <span>医容美学</span>
-                         <span>精神</span>
-                         <span>预防</span>
-                         <span>生物医学</span>
-                         <span>药学</span>
-                     </div>
-                     <div class="part_1">
-                         <span>高职高专教材</span>
-                     </div>
-                     <div class="part_2">
-                         <span>护理</span>
-                         <span>临床</span>
-                         <span>应用心理</span>
-                         <span>法医</span>
-                         <span>康复治疗</span>
-                         <span>麻醉</span>
-                         <span>医容美学</span>
-                         <span>精神</span>
-                         <span>预防</span>
-                         <span>生物医学</span>
-                         <span>药学</span>
-                     </div>
-                     <div class="part_1">
-                         <span>中职中专教材</span>
-                     </div>
-                     <div class="part_2">
-                         <span>护理</span>
-                         <span>临床</span>
-                         <span>应用心理</span>
-                         <span>法医</span>
-                         <span>康复治疗</span>
-                         <span>麻醉</span>
-                         <span>医容美学</span>
-                     </div>
-                     <div class="part_1">
-                         <span>长学制教材</span>
-                     </div>
-                     <div class="part_2">
-                         <span>临床医学</span>
-                         <span>协编及其他</span>
-                     </div>
-                 </div>
-                 <div id="ChangeFLDiv_1" class="tsfl_1" style="display: none;">
-                     <div class="part_1">
-                         <span>研究生教材</span>
-                     </div>
-                     <div class="part_2">
-                         <span>护理</span>
-                         <span>临床</span>
-                         <span>中医</span>
-                         <span>口腔</span>
-                     </div>
-                     <div class="part_1">
-                         <span>本科教材</span>
-                     </div>
-                     <div class="part_2">
-                         <span>护理</span>
-                         <span>临床</span>
-                         <span>麻醉</span>
-                         <span>医容美学</span>
-                         <span>精神</span>
-                         <span>药学</span>
-                     </div>
-                     <div class="part_1">
-                         <span>高职高专教材</span>
-                     </div>
-                     <div class="part_2">
-                         <span>护理</span>
-                         <span>临床</span>
-                         <span>应用心理</span>
-                     </div>
-                     <div class="part_1">
-                         <span>中职中专教材</span>
-                     </div>
-                     <div class="part_2">
-                         <span>护理</span>
-                         <span>临床</span>
-                         <span>应用心理</span>
-                     </div>
-                     <div class="part_1">
-                         <span>长学制教材</span>
-                     </div>
-                     <div class="part_2">
-                         <span>临床医学</span>
-                         <span>协编及其他</span>
-                     </div>
-                 </div>
-                 <div id="ChangeFLDiv_2" class="tsfl_1" style="display: none;">
-                     <div class="part_1">
-                         <span>研究生教材</span>
-                     </div>
-                     <div class="part_2">
-                         <span>护理</span>
-                         <span>口腔</span>
-                     </div>
-                     <div class="part_1">
-                         <span>本科教材</span>
-                     </div>
-                     <div class="part_2">
-                         <span>护理</span>
-                         <span>应用心理</span>
-                         <span>康复治疗</span>
-                         <span>麻醉</span>
-                         <span>医容美学</span>
-                         <span>生物医学</span>
-                         <span>药学</span>
-                     </div>
-                     <div class="part_1">
-                         <span>高职高专教材</span>
-                     </div>
-                     <div class="part_1">
-                         <span>长学制教材</span>
-                     </div>
-                     <div class="part_2">
-                         <span>临床医学</span>
-                         <span>协编及其他</span>
-                     </div>
-                 </div>
-                 <div id="ChangeFLDiv_3" class="tsfl_1" style="display: none;">
-                     <div class="part_1">
-                         <span>研究生教材</span>
-                     </div>
-                     <div class="part_2">
-                         <span>护理</span>
-                         <span>临床</span>
-                     </div>
-                     <div class="part_1">
-                         <span>本科教材</span>
-                     </div>
-                     <div class="part_2">
-                         <span>护理</span>
-                         <span>临床</span>
-                         <span>应用心理</span>
-                         <span>生物医学</span>
-                         <span>药学</span>
-                     </div>
-                     <div class="part_1">
-                         <span>高职高专教材</span>
-                     </div>
-                     <div class="part_2">
-                         <span>护理</span>
-                         <span>临床</span>
-                         <span>应用心理</span>
-                         <span>法医</span>
-                         <span>康复治疗</span>
-                     </div>
-                 </div>--%>
-
-
+                <div class="rg_content">
+                    <span class="tsfl">图书畅销榜</span>
+                    <hr style=" height:1px;border:none;border-top:1px solid #f0f0f0;">
+                </div>
+                <div>
+                    <c:forEach items="${bookTypes}" var="type" varStatus="status">
+                        <div class="ts_type ${status.index==0?'ts_type1':''}" id="CXDiv_${type.id}" typeid="${type.id}"
+                             onclick="javaScript:ChangeCXDiv(${type.id})">
+                            <span>${type.type_name}</span></div>
+                    </c:forEach>
+                </div>
+                <div style="clear: both;height: 14px;"></div>
+                <div class="hot-list" id="JKCXDiv_0">
+                </div>
+                <div style="clear: both"></div>
             </div>
             <div style="clear: both"></div>
         </div>
-
     </div>
 </div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
