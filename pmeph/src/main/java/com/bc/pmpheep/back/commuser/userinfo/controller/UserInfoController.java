@@ -41,17 +41,31 @@ public class UserInfoController extends BaseController {
         ModelAndView modelAndView = new ModelAndView();
 
         String id = MapUtils.getString(getUserInfo(), "id");
-//		id="12179";
-        Map<String, Object> map = userinfoService.queryWriter(id);
-        //图片为空则显示默认图片
-        if (("").equals(map.get("avatar"))) {
-            map.put("avatar", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
-        }
-        modelAndView.addObject("map", map);
-        modelAndView.setViewName("commuser/userinfo/userinfo");
-        return modelAndView;
-    }
-
+		id="12179";
+		Map<String, Object> map=userinfoService.queryWriter(id);
+		//图片为空则显示默认图片
+		if(map.get("avatar")==null){
+			 map.put("avatar", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+		}
+		modelAndView.addObject("map", map);
+		modelAndView.setViewName("commuser/userinfo/userinfo");
+		return modelAndView;
+	}
+	
+	/**
+	 * 根据ID修改头像
+	 * @param request
+	 */
+	@RequestMapping("updateavatar")
+	@ResponseBody	
+	public Map<String, Object> updateavatar(HttpServletRequest request){
+		Map<String, Object> map=new HashMap<String, Object>();
+		String avatar=request.getParameter("avatar");
+		String id=request.getParameter("id");
+		map=userinfoService.updateavatar(avatar, id);
+		return map;
+	}
+	
     /**
      * 根据ID改变普通作家信息
      *
@@ -119,20 +133,5 @@ public class UserInfoController extends BaseController {
             zmap = userinfoService.update(map);
         }
         return zmap;
-    }
-
-    /**
-     * 根据ID修改头像
-     *
-     * @param request
-     */
-    @RequestMapping("updateavatar")
-    @ResponseBody
-    public Map<String, Object> updateavatar(HttpServletRequest request) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        String avatar = request.getParameter("avatar");
-        String id = request.getParameter("id");
-        map = userinfoService.updateavatar(avatar, id);
-        return map;
     }
 }
