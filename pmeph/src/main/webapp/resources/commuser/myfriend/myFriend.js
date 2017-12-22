@@ -109,10 +109,9 @@ $(function(){
 		}else{
 			var frendId =$("#frendId").val();
 			$.ajax({
-		        type:'get',
-		        url :contxtpath+'/mymessage/senNewMsg.action',
+		        type:'post',
+		        url :contxtpath+'/user/senNewMsg.action',
 		        async:false,
-		        contentType: 'application/json',
 		        dataType:'json',
 		        data:{
 		        	friendId : frendId,

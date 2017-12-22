@@ -577,8 +577,8 @@ public class MaterialDetailController extends BaseController{
 		perMap.put("idtype", request.getParameter("idtype"));
 		perMap.put("idcard", request.getParameter("idcard"));
 		perMap.put("org_id", request.getParameter("edu"));
-		perMap.put("gmt_create", date);	
-		int count = this.mdService.insertPerson(perMap);
+		perMap.put("update_create", date);	
+		int count = this.mdService.updatePerson(perMap);
 		if(count>0){ //表示主表已添加
 			List<Map<String,Object>> perList = this.mdService.queryPerson(perMap);
 			Object declaration_id = perList.get(0).get("id");

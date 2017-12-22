@@ -55,13 +55,19 @@ public class ReadDetailController extends BaseController{
 		}
 		String author="%"+map.get("author").toString()+"%";
 		List<Map<String, Object>> eMap=readDetailService.queryRecommendByE(0);
-		PageParameter<Map<String, Object>> pageParameter=new PageParameter<Map<String, Object>>(1,2);
-		Map<String, Object> wMap=new HashMap<String, Object>();
-		wMap.put("id", id);
-		pageParameter.setParameter(wMap);
-		PageResult<Map<String, Object>> listCom=readDetailService.queryComment(pageParameter);
+		List<Map<String, Object>> listCom=readDetailService.queryComment(id,0);
+		List<Map<String, Object>> ComNum=readDetailService.queryComment(id,-1);
 		List<Map<String, Object>> auList=readDetailService.queryAuthorType(author);
 		for (Map<String, Object> pmap : auList) {
+			if(("DEFAULT").equals(pmap.get("image_url"))){
+				pmap.put("image_url", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+			}
+		}
+		Map<String, Object> fmap=new HashMap<String, Object>();
+		fmap.put("type", map.get("type"));
+		fmap.put("row", 6);
+		List<Map<String, Object>> frList=readDetailService.fresh(fmap);
+		for (Map<String, Object> pmap : frList) {
 			if(("DEFAULT").equals(pmap.get("image_url"))){
 				pmap.put("image_url", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
 			}
@@ -110,10 +116,20 @@ public class ReadDetailController extends BaseController{
 		}
 		modelAndView.addObject("id", id);
 		modelAndView.addObject("eMap", eMap);
+		modelAndView.addObject("ComNum", ComNum.size());
 		modelAndView.addObject("supMap", supMap);
 		modelAndView.addObject("map", map);
 		modelAndView.addObject("listCom", listCom);
+		modelAndView.addObject("frList", frList);
+		modelAndView.addObject("start", 2);
 		modelAndView.setViewName("commuser/readpage/readdetail");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/towritecom")
+	public ModelAndView towritecom(){
+		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.setViewName("commuser/readpage/writecom");
 		return modelAndView;
 	}
 	
@@ -179,7 +195,13 @@ public class ReadDetailController extends BaseController{
 	@ResponseBody
 	public List<Map<String, Object>> fresh(HttpServletRequest request){
 		int x=Integer.parseInt(request.getParameter("type"));
+		String row=request.getParameter("row");
 		Map<String, Object> pmap=new HashMap<String, Object>();
+		if(row.equals("6")){
+			pmap.put("row", 6);
+		}else{
+			pmap.put("row", 9);
+		}
 		pmap.put("type", x);
 		List<Map<String, Object>> map=readDetailService.fresh(pmap);
 		for (Map<String, Object> zmap : map) {
@@ -232,15 +254,10 @@ public class ReadDetailController extends BaseController{
 	 */
 	@RequestMapping("changepage")
 	@ResponseBody
-	public PageResult<Map<String, Object>> changepage(HttpServletRequest request){
+	public List<Map<String, Object>> changepage(HttpServletRequest request){
 		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
-		int allppage=Integer.parseInt(request.getParameter("allppage"));
 		String id=request.getParameter("id");
-		PageParameter<Map<String, Object>> pageParameter=new PageParameter<Map<String, Object>>(pageNumber,allppage);
-		Map<String, Object> wMap=new HashMap<String, Object>();
-		wMap.put("id", id);
-		pageParameter.setParameter(wMap);
-		PageResult<Map<String, Object>> listCom=readDetailService.queryComment(pageParameter);
+		List<Map<String, Object>> listCom=readDetailService.queryComment(id,pageNumber);
 		return listCom;
 	}
 	

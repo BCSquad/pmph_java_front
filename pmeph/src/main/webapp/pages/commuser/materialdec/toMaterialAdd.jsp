@@ -46,9 +46,14 @@
 				    	${bookSelects}
 				</select>
 				<div style="float: left;margin-left: 30px;" class="ts_radio">
-					<input type="radio" name="zw_1" checked="checked" value="1"/>主编
-					<input type="radio" name="zw_1" value="2"/>副主编
-					<input type="radio" name="zw_1" value="3"/>编委
+					<table style="width: 280px;">
+						<tr>
+							<td><input type="radio" name="zw_1" checked="checked" value="1"/>主编</td>
+							<td><input type="radio" name="zw_1" value="2"/>副主编</td>
+							<td><input type="radio" name="zw_1" value="3"/>编委</td>
+							<td><input type="radio" name="zw_1" value="4"/>数字编委</td>
+						</tr>
+					</table>
 					<!-- 用于遍历radio中的值 -->
 					<input type="hidden" name="preset_position" value="zw_1">
 				</div>
@@ -240,6 +245,20 @@
 				</table>
 			</div>
 		</div>
+		<!--扩展信息-->
+		<c:forEach var="zjkzxx" items="${zjkzxxList}">
+		 	<div class="sbxq_item">
+				<div>
+					<span id="tsxz_span9"></span>
+					<span class="tsxz_title">${zjkzxx.extension_name}（选填）</span>
+					<input type="hidden" name="extension_id" value="${zjkzxx.id}"/>
+				</div>
+				<div class="content">
+					<textarea class="text_cl" name="content"></textarea>
+				</div>
+				<hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">
+			</div>
+		</c:forEach>
 		<!--主要学术兼职-->
 		<div class="sbxq_item" id="xsjz">
 			<div>
@@ -263,10 +282,12 @@
 						<tr>
 							<td><input class="cg_input" name="xs_org_name" id="xs_org_name" value="" placeholder="学术组织"/></td>
 							<td style="color: #333333;">
-								<input type="radio" name="xs_rank_1" value="1" checked="checked"/>国际
-								<input type="radio" name="xs_rank_1" value="2" />国家
-								<input type="radio" name="xs_rank_1" value="3" />省部
-								<input type="radio" name="xs_rank_1" value="4" />其他
+								<table class="radio_tb" style="width: 220px;"><tr>
+									<td><input type="radio" name="xs_rank_1" value="1" checked="checked"/>国际</td>
+									<td><input type="radio" name="xs_rank_1" value="2" />国家</td>
+									<td><input type="radio" name="xs_rank_1" value="3" />省部</td>
+									<td><input type="radio" name="xs_rank_1" value="4" />其他</td>
+								</tr></table>
 								<input type="hidden" name="xs_rank" value="xs_rank_1" />
 							</td>
 							<td><input class="cg_input" name="xs_position" value="" placeholder="职务"/></td>
@@ -299,10 +320,12 @@
 						<tr>
 							<td><input class="cg_input" name="jc_material_name" id="jc_material_name" value="" style="width: 360px;" placeholder="教材名称"/></td>
 							<td style="color: #333333;">
-								<input type="radio" name="jc_position_1" value="0" checked="checked"/>无
-								<input type="radio" name="jc_position_1" value="1" />主编
-								<input type="radio" name="jc_position_1" value="2" />编委
-								<input type="radio" name="jc_position_1" value="3" />副编委
+								<table class="radio_tb" style="width: 230px;"><tr>
+									<td><input type="radio" name="jc_position_1" value="0" checked="checked"/>无</td>
+					 				<td><input type="radio" name="jc_position_1" value="1" />主编</td>
+									<td><input type="radio" name="jc_position_1" value="2" />编委</td>
+									<td><input type="radio" name="jc_position_1" value="3" />副编委</td>
+								</tr></table>
 								<input type="hidden" name="jc_position" value="jc_position_1" />
 							</td>
 							<td><input class="cg_input" name="jc_note" value="" style="width: 330px;" placeholder="备注"/></td>
@@ -429,9 +452,11 @@
 							<td><input class="cg_input" name="hj_material_name" id="hj_material_name" value="" style="width: 300px;" placeholder="教材名称"/></td>
 							<td><input class="cg_input" name="hj_isbn" value="" style="width: 110px;" placeholder="标准书号"/></td>
 							<td style="color: #333333;">
-								<input type="radio" name="hj_rank_1" value="1" checked="checked" />教育部十二五
-								<input type="radio" name="hj_rank_1" value="2" />国家卫计委十二五
-								<input type="radio" name="hj_rank_1" value="3" />其他
+								<table class="radio_tb" style="width: 320px;"><tr>
+									<td><input type="radio" name="hj_rank_1" value="1" checked="checked"/>教育部十二五</td>
+									<td><input type="radio" name="hj_rank_1" value="2" />国家卫计委十二五</td>
+									<td><input type="radio" name="hj_rank_1" value="3" />其他</td>
+								</tr></table>
 								<input type="hidden" name="hj_rank" value="hj_rank_1" />
 							</td>
 							<td><input class="cg_input" name="hj_note" value="" style="width: 250px;" placeholder="备注"/></td>
@@ -524,20 +549,6 @@
 				</table>
 			</div>
 		</div>
-			<!--扩展信息-->
-		<c:forEach var="zjkzxx" items="${zjkzxxList}">
-		 	<div class="sbxq_item">
-				<div>
-					<span id="tsxz_span9"></span>
-					<span class="tsxz_title">${zjkzxx.extension_name}（选填）</span>
-					<input type="hidden" name="extension_id" value="${zjkzxx.id}"/>
-				</div>
-				<div class="content">
-					<textarea class="text_cl" name="content"></textarea>
-				</div>
-				<hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">
-			</div>
-		</c:forEach>
 		<!-- 申报单位-->
 		<div class="sbxq_item1">
 			<div>

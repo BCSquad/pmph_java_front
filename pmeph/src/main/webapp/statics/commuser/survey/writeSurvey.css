@@ -1,0 +1,68 @@
+input[type="radio"] + label::before {
+    content: "\a0"; /*不换行空格*/
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 18px;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+    border-radius: 50%;
+    border: 1px solid #01cd78;
+    text-indent: .15em;
+    line-height: 1; 
+}
+
+input[type="radio"]:checked + label::before {
+    background-color: #01cd78;
+    background-clip: content-box;
+    padding:.1em;
+}
+
+input[type="radio"] {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+}
+
+.female, .male {
+    position: relative; /* 设置为相对定位，以便让子元素能绝对定位 */
+    height: 40px;
+    line-height: 40px;
+    margin-left: 22px;
+}
+.sex label {
+    display: block;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.sex input {
+    z-index: 3;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 40px;
+    margin: auto; /* 这里及以上的定位，可以让该元素竖直居中。(top: 0; bottom: 0;) */
+    opacity: 0;
+    display: block;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+.sex span {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 40px;
+    margin: auto;
+    display: block;
+    width: 25px;
+    height: 25px;
+    border: 1px solid #000;
+    border-radius: 50%;
+    cursor: pointer;
+}        
+.sex span.active {
+    background-color: #000;            
+}

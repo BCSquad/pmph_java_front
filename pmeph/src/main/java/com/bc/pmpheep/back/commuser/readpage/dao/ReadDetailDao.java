@@ -20,7 +20,7 @@ public interface ReadDetailDao {
 	 * @param id
 	 * @return List<Map<String, Object>>
 	 */
-	List<Map<String, Object>> queryComment(PageParameter<Map<String, Object>> pageParameter);
+	List<Map<String, Object>> queryComment(@Param("id") String id,@Param("start") int start);
 	/**
 	 * 根据书籍ID查询配套图书
 	 * @param id
@@ -31,7 +31,7 @@ public interface ReadDetailDao {
 	 * 根据书籍ID查询一共有多少条数据
 	 * @return int
 	 */
-	int querySize(@Param("book_id") String book_id);
+//	int querySize(@Param("book_id") String book_id);
 	/**
 	 * 查询人卫推荐
 	 * @return List<Map<String, Object>>

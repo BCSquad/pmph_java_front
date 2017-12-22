@@ -96,7 +96,7 @@
                                             </div>
                                             <div class="bmcj1">
                                                 <div class="bmcjan1"><span>进度查询</span></div>
-                                                <div class="cksbb1"><a class="abmcj" href="${ctx}/material/toMaterialZc.action?material_id=${list.material_id}">修改申报表</a></div>
+                                                <div class="bmcjan1"><a class="abmcj" href="${ctx}/material/toMaterialZc.action?material_id=${list.material_id}">修改申报表</a></div>
                                             </div>
                                         </div>
                                     </c:if>

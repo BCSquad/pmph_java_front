@@ -32,20 +32,15 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 	 * 查询相关评论
 	 */
 	@Override
-	public PageResult<Map<String, Object>> queryComment(PageParameter<Map<String, Object>> pageParameter) {
+	public List<Map<String, Object>> queryComment(String id,int start) {
 		// TODO Auto-generated method stub
-		PageResult<Map<String, Object>> pageResult=new PageResult<Map<String, Object>>();
-		pageResult.setPageSize(pageParameter.getPageSize());
-		List<Map<String, Object>> map=readDetailDao.queryComment(pageParameter);
+		List<Map<String, Object>> map=readDetailDao.queryComment(id,start);
 		for (Map<String, Object> pmap : map) {
 			String time=pmap.get("gmt_create").toString().substring(0, 16);
 			pmap.put("gmt_create", time);
+			pmap.put("start", start+2);
 		}
-		int count=readDetailDao.querySize(pageParameter.getParameter().get("id").toString());
-		pageResult.setTotal(count);
-		pageResult.setRows(map);
-		pageResult.setPageNumber(pageParameter.getPageNumber());
-		return pageResult;
+		return map;
 	}
 
 	/**

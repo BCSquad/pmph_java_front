@@ -95,3 +95,8 @@ function changesale(type) {
     $(".right_div1").removeClass("active");
     $("#typeid-" + type).addClass("active");
 }
+
+//关闭问卷调查
+function cancel(){
+	$("#test_float").hide();
+}

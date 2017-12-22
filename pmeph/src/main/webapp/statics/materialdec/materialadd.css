@@ -21,7 +21,7 @@
 	width: 1200px;
 }
 .ts_radio{
-	width: 200px;
+	width: 280px;
 }
 .ts_radio input{
 	vertical-align:middle;
@@ -355,4 +355,11 @@
 .fileNameDiv{
 	float: left;
 	margin-right: 10px;
+}
+
+.radio_tb{
+	border: 0;
+}
+.radio_tb tr td{
+	border: 0;
 }

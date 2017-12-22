@@ -200,5 +200,9 @@ public class PersonalCenterController extends BaseController {
         modelAndView.setViewName("commuser/personalcenter/PersonalHomeThere");
         return modelAndView;
     }
+    
+    /**
+     * 我要出书
+     */
 
 }

@@ -30,35 +30,29 @@
     <div class="content-wrapper">
         <div class="area-1">
             <div class="banner">
-                <img src="${ctx}/statics/testfile/index.png" style="width: 1050px; height: 380px">
+                <img src="${ctx}/statics/testfile/index.png" style="width: 922px; height: 380px">
             </div>
             <div class="op-link">
-                <div class="title">教材申报</div>
-                <div class="link">
-                    <a href="<c:url value="/cmsnotice/tolist.action"/>">最新公告</a>
-                    <span class="icon">></span>
+                <div class="transaction">
+                    <div class="labeling">教材申报</div>
+                    <div class="bin consol">最新公告</div>
+                    <div class="bin marks" >专家申报</div>
+                    <div class="bin consol">学校审核</div>
+                    <div class="bin marks" >结果公布</div>
+                <div class="transaction" style="margin-top: 18px;">
+                    <div class="labeling">我要出书</div>
+                    <div class="binone consol">医学专著</div>
+                    <div class="binone marks" >科普图书</div>
+                    <div class="binone consol">创新教材</div>
+                    <div class="binone marks" >进度查询</div>
                 </div>
-                <div class="link">
-                    <span>学校审核</span>
-                    <span class="icon">></span>
+                <div class="transaction" style="margin-top: 8px;">
+                    <div class="labeling">交互服务</div>
+                    <div class="bintwo consol">医学小组</div>
+                    <div class="bintwo marks" >图书纠错</div>
+                    <div class="bintwo consol">问卷调查</div>
+                    <div class="bintwo marks" >经验交流</div>
                 </div>
-                <div class="link">
-                    <span>专家申报</span>
-                    <span class="icon">></span>
-                </div>
-                <div class="link">
-                    <a href="<c:url value="/personalhomepage/tohomepageonelist.action"/>">结果公布</a>
-                    <span class="icon">></span>
-                </div>
-
-                <div class="line"></div>
-
-                <div class="title">交互服务</div>
-                <div class="link">
-                    <span href="<c:url value="/group/toMyGroup.action"/>">医学小组</span>
-                    <span class="icon">></span>
-                </div>
-
             </div>
         </div>
         <div class="notice area-2">
@@ -73,6 +67,7 @@
                         <p class="content-size">${list.title}</p>
                         <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date"
                                                                   pattern="yyyy-MM-dd"/></p>
+                        <div class="left_join">报名参加</div>                                          
                     </div>
                 </c:if>
                 <c:if test="${status.index!=0}">
@@ -80,6 +75,7 @@
                         <p class="content-size">${list.title}</p>
                         <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date"
                                                                   pattern="yyyy-MM-dd"/></p>
+                        <div class="left_join">报名参加</div>  
                     </div>
                 </c:if>
             </c:forEach>
@@ -146,7 +142,7 @@
                 </c:forEach>
             </div>
             <div class="content">
-                <div class="left">
+                <%-- <div class="left">
                     <div class="div_photo1">
                         <div class="label"><label style="font-size: 24px;color: #489399">热门标签</label></div>
                         <div class="div1">
@@ -158,8 +154,23 @@
                     </div>
                     <div class="div_photo"></div>
                     <div class="div_photo"></div>
+                </div> --%>
+                <div class="left">
+                    <div class="left_one">
+                        <div class="textbook_left">教材社区</div>
+                        <div class="all_left">全部>></div>
+                        <div class="left_con1" style="margin-top: 63px;">全国高等学校健康服务与管理专业第二轮规划教材</div>
+                        <div class="left_con1" >全国高等学校健康服务与管理专业第二轮规划教材</div>
+                        <div class="left_con1" >全国高等学校健康服务与管理专业第二轮规划教材</div>
+                    </div>
+                    <div class="left_two">
+                        <div class="textbook_left">重点学科推荐</div>  
+                        <div class="all_left">全部>></div>
+                        <div class="p1_left"></div>
+                        <div class="p2_left"></div>
+                    </div>
                 </div>
-                <div class="right" id="homepagebook">${homepagebook}</div>
+                <div class="right" id="homepagebook" style="float: right;">${homepagebook}</div>
             </div>
         </div>
         <div class="area-5">
@@ -416,7 +427,10 @@
         </div>
         <div style="clear: both"></div>
     </div>
+    <div class="test" id="test_float">
+        <div class="cancel" onclick="cancel()">关闭</div>
+    </div>
 </div>
-<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
+<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </html>

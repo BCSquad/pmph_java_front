@@ -102,5 +102,9 @@ function save(){
             }
         });
     };
+}
 
+//教师认证
+function teacher(){
+	location.href=contextpath+'teacherauth/toPage.action';
 }

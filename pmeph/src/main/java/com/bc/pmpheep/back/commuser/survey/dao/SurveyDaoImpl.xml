@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bc.pmpheep.back.commuser.survey.dao.SurveyDao">
+	<!-- 调查列表 -->
+	<select id="surveyList" resultType="map">
+		select * from survey where is_deleted=0
+	</select>
+	
+	
+</mapper>
