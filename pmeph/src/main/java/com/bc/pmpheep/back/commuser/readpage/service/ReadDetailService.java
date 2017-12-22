@@ -20,7 +20,7 @@ public interface ReadDetailService {
 	 * @param id
 	 * @return
 	 */
-	PageResult<Map<String, Object>> queryComment(PageParameter<Map<String, Object>> pageParameter);
+	List<Map<String, Object>> queryComment(String id,int start);
 	/**
 	 * 根据书籍ID查询配套图书
 	 * @param id

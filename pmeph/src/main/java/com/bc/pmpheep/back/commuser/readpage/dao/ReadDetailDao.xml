@@ -34,7 +34,10 @@
 	     b.avatar
 	     from book_user_comment t 
 	     left join book u on t.book_id=u.id
-	     left join writer_user b on b.id=t.writer_id where u.id=#{parameter.id} limit #{start},#{pageSize}
+	     left join writer_user b on b.id=t.writer_id where u.id=#{id}
+	     <if test="start >= 0">
+	        limit #{start},2
+	     </if> 
 	</select>
 	<!-- 查询一共有多少条数据 -->
 	<select id="querySize" parameterType="java.util.Map" resultType="int">
@@ -98,7 +101,7 @@
 	</select>
 	<!-- 相关推荐换一换 -->
 	<select id="fresh" parameterType="java.util.Map" resultType="java.util.Map">
-	   select * from book where type=#{type} Order By rand()  limit 0,9
+	   select * from book where type=#{type} Order By rand()  limit 0,#{row}
 	</select>
 	<!-- 根据书籍ID改变点赞数 -->
 	<update id="addlikes" parameterType="java.util.Map"> 
