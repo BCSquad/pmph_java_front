@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -204,5 +205,12 @@ public class PersonalCenterController extends BaseController {
     /**
      * 我要出书
      */
+    @RequestMapping("/toBookList")
+    public ModelAndView toBookList(HttpServletRequest request,
+    		HttpServletResponse response){
+    	ModelAndView mav = new ModelAndView("commuser/personalcenter/toBookList");
+    	
+    	return mav;
+    }
 
 }
