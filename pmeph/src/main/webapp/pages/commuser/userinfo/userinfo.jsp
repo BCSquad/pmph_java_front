@@ -81,9 +81,9 @@
                 <div class="sxy-userinfo-row"></div>
                 <div class="sxy-userinfo-row"></div>
                 <div class="sxy-userinfo-row"></div>
-                <div class="sxy-userinfo-row"><font id="sxy-font-1">教师认证</font></div>
+                <div class="sxy-userinfo-row" style="cursor: pointer;" onclick="teacher()"><font id="sxy-font-1">教师认证</font></div>
                 <div class="sxy-userinfo-row"></div>
-                <div class="sxy-userinfo-row"><font id="sxy-font-2">修改密码</font></div>
+                <div class="sxy-userinfo-row" style="cursor: pointer;"><font id="sxy-font-2">修改密码</font></div>
             </div>
             <div style="height:35px;"></div>
         </div>
