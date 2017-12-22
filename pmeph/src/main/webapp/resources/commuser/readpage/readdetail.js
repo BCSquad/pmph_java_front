@@ -1,36 +1,26 @@
 $(function(){
-	 Page({
-	        num: parseInt($("#allppage").html()),	//页码数
-	        startnum: parseInt($("#pageNumber").val()),	//指定页码
-	        elem: $('#page1'),		    //指定的元素
-	        callback: function (n) {    //回调函数
-	          console.log(n);
-	        	changepage(n);
-	        },
-	    });
-	   $('select').selectlist({
-           zIndex: 10,
-           width: 110,
-           height: 30,
-           optionHeight: 30,
-           onChange:function(){
-        	   var n=1;
-        	   changepage(n);
-           }
-       });
+	//文件上传
+	$("#uploadFile").uploadFile({
+        start: function () {
+            console.log("开始上传。。。");
+        },
+        done: function (filename, fileid) {
+            console.log("上传完成：name " + filename + " fileid " + fileid);
+            $("#upname").html(filename);
+        },
+        progressall: function (loaded, total, bitrate) {
+            console.log("正在上传。。。" + loaded / total);
+        }
+    });
 });
-//分页前的初始化
-function beforechange(){
-	var n=$("#jumpId").val();
-	changepage(n);
-	$("#jumpId").val(null);
-}
+
 
 //分页的具体实现
-function changepage(n){
+function changepage(){
+	$(".morecom").show();
+	$(".moreothers").hide();
 	var json={
-			pageNumber:n,	
-			allppage:$('input[name=edu]').val(),
+			pageNumber:$("#start").val(),	
 			id:$("#book_id").val(),
 	};
 	 $.ajax({
@@ -40,8 +30,14 @@ function changepage(n){
 		dataType:'json',
 		data:json,
 		success:function(json){
+			$(".morecom").hide();
+			$(".moreothers").show();
+			if(json.length<2){
+				$(".moreothers").html('没有更多了~~~');
+			}
 			var str='';
-			$.each(json.rows,function(i,n){
+			$.each(json,function(i,n){
+				$("#start").val(n.start);
 				str+='<div class="item"><div class="item_title">'
 					+'<div style="float: left;"><img src="';
 					if(n.avatar==''||n.avatar=='DEFAULT'||n.avatar==null){
@@ -89,17 +85,7 @@ function changepage(n){
            	+n.content
            	+'</div><hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;"></div>';
 			});
-			$("#changepage").html(str);
-			$("#allppage").html(json.pageTotal);
-			Page({
-		        num: json.pageTotal,	    //页码数
-		        startnum: json.pageNumber,	//指定页码
-		        elem: $('#page1'),	        //指定的元素
-		        callback: function (n) {    //回调函数
-			          console.log(n);
-			          changepage(n);
-			        },
-		    });
+			$("#changepage").append(str);
 		},
 	});
    
@@ -131,12 +117,12 @@ function insert(){
 }
 
 //相关推荐换一换
-function fresh(){
+function fresh(row){
 	var type=$("#type_id").val();
 	var str='';
 	 $.ajax({
 			type:'post',
-			url:contextpath+'readdetail/fresh.action?type='+type,
+			url:contextpath+'readdetail/fresh.action?type='+type+'&&row='+row,
 			async:false,
 			dataType:'json',
 			success:function(json){
@@ -147,7 +133,11 @@ function fresh(){
                         x.bookname+
                      '</div></div>';
 				});
-				$("#change").html(str);
+				if(row==6){
+					$("#about").html(str);
+				}else{
+					$("#change").html(str);
+				}
 			}
 		});
 }
@@ -219,5 +209,20 @@ function addmark(){
 					}
 			}
 		});
+}
+
+//跳转到写文章页面
+function writeablut(){
+	location.href=contextpath+'readdetail/towritecom.action';
+}
+
+//点击显示纠错弹窗
+function showup(){
+	$("#bookmistake").show();
+}
+
+//点击纠错弹窗隐藏
+function hideup(){
+	$("#bookmistake").hide();
 }
 
