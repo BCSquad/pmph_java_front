@@ -186,6 +186,7 @@ ul {
     background-color: #fff;
     border: 1px solid #ddd;
     vertical-align: middle;
+    box-sizing: content-box;
 }
 
 .pageJump input {
