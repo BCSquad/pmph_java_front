@@ -294,13 +294,10 @@ function addmark() {
 }
 
 //跳转到写文章页面
-<<<<<<< .mine
 function writeablut(){
 	location.href=contextpath+'readdetail/todetail.action?state=write&&id='+$("#book_id").val();
-=======
 function writeablut() {
     location.href = contextpath + 'readdetail/towritecom.action';
->>>>>>> .r776
 }
 
 //点击显示纠错弹窗
@@ -335,5 +332,6 @@ function correction(){
 				}
 		}
 	});
+   }
 }
 
