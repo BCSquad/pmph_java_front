@@ -327,13 +327,35 @@
     text-align: center;
 }
 
+.video{
+	width: 260px;
+	height: 140px;
+	float: left;
 .video {
     width: 260px;
     height: 140px;
     background-image: url(../../image/css_sprites.png);
     float: left;
+	position:relative;
 }
 
+.video-a{
+	float: left;
+	width: 260px;
+	height: 140px;
+	opacity:0.5;
+	background-color: black;
+	position:absolute;
+	top:0px;
+}
+
+.img-a{
+	width: 260px;
+	height: 140px;
+}
+
+.longcom{
+	float:left;
 .longcom {
     float: left;
     font-family: MicrosoftYaHei;
@@ -379,6 +401,7 @@
     top: 30%;
     box-shadow: 0px 0px 5px #888888;
     border-radius: 5px;
+   z-index: 999;
 }
 
 .mistitle {
@@ -664,7 +687,7 @@
     float: left;
     margin-bottom: 12px;
     width: 100%;
-    height: 38px;
+    height: 37px;
     text-overflow: ellipsis;
     font-size: 12px;
     line-height: 18px;
@@ -748,8 +771,7 @@
 
 .refresh1 {
     float: left;
-    margin-left: 5px;
-    margin-top: 12px;
+    margin-top: 10px;
     font-family: MicrosoftYaHei;
     font-size: 12px;
     color: #999999;
@@ -793,7 +815,6 @@
 
 .right_7 {
 
-}
 
 #span_3 {
     font-family: MicrosoftYaHei;
