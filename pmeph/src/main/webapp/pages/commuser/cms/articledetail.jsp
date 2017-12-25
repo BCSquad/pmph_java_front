@@ -24,6 +24,8 @@
 <script src="${ctx}/resources/commuser/cms/articledetail.js"></script>
 </head>
 <body>
+<input type="hidden" id="wid" value="${wid}">
+<input type="hidden" id="marks" value="${map.bookmarks}">
 	<jsp:include page="/pages/comm/head.jsp">
 		<jsp:param value="homepage" name="pageTitle" />
 	</jsp:include>
@@ -34,14 +36,23 @@
 	    	<div class="_title">
 				<span>文章&gt; ${map.title }</span>
 			</div>
-			<div class="wz_title">
-				<span>${map.title }</span>
-	    		<div class="dzsc">
-	    			<img src="${ctx}/statics/image/dz.png" onclick=""/>
-	    			<img src="${ctx}/statics/image/sc1.png" onclick="" />
-	    		</div>
-	    	</div>
-	    	<div class="th_title">
+				<div class="wz_title">
+					<span>${map.title }</span>
+					<div style="width: 100%;">
+        		<div class="dzsc">
+        		   <c:if test="${flag=='no'}">
+        		     <img src="${ctx}/statics/image/dz02.png" onclick="addlikes()" id="dz"/>
+        		   </c:if>
+        		   <c:if test="${flag=='yes'}">
+        			 <img src="${ctx}/statics/image/${mark=='yes' ? 'dz02.png':'dz01.png'}" onclick="addlikes()" id="dz"/>
+        		   </c:if>	  
+        		      <img src="${ctx}/statics/image/${mark=='yes' ? 'sc101(1).png':'s102(1).png'}" onclick="addmark()" id="sc"/>
+        			  <div style="display: inline-block;vertical-align: top;margin-right: 8px;text-align:left;">
+                    </div>
+        		</div>
+        	</div>
+				</div>
+				<div class="th_title">
 	    		<span>医学随笔</span>
 	    		<span>2017-4-17</span>
 	    		<img style="float: left;margin-top: 5px;margin-right: 5px;" src="${ctx}/statics/image/scan.png"/>
@@ -82,7 +93,7 @@
                     <div class="pl_add">
                     	<textarea class="tarea" id="content"></textarea>
                     </div>
-                    <div class="button"><button id="span_4" onclick="insert()">发表</button></div>
+                    <div class="buttonb"><button id="span_4" onclick="insert()">发表</button></div>
             </div>  
              <div class="block">
               <div id="changepage">
@@ -135,7 +146,7 @@
                     </div>
               </c:forEach> 
               </div>
-              <%-- <div class="pageDiv" style="float: right;">
+              <div class="pageDiv" style="float: right;">
 	                  <ul class="pagination" id="page1"></ul>
 	                  <div style="display: inline-block;    vertical-align: top;text-align: left">
 	                      <select id="edu" name="edu">
@@ -153,7 +164,7 @@
 	                      <span class="pp">页</span>
 	                      <button type="button" class="button" onclick="beforechange()">确定</button>
 	                  </div>
-                </div>  --%>    
+                </div>  
             </div> 
         	<!--猜你喜欢-->
         	<div class="block">
@@ -162,31 +173,17 @@
                         <div class="rd_name">猜你喜欢</div>
                     </div>
                     <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
+                    <c:forEach items="${listArtSix}" var="list" varStatus="status">
+                    <c:if test="${status.index!=0}">
                     <div class="content" id="JKFYDiv_0">
                         <div class="item">
-                            <div class="ir_01">
-                            </div>
-                            
-                        </div>
-                        <div class="item">
-                            <div class="ir_01"></div>
-                            
-                        </div>
-                        <div class="item">
-                            <div class="ir_01"></div>
-                            
-                        </div>
-                        <div class="item">
-                            <div class="ir_01"></div>
-                            
-                        </div>
-                        <div class="item">
-                            <div class="ir_01"></div>
-                        </div>
-                        <div class="item">
-                            <div class="ir_01"></div>
+                            <div class="ir_01"> 
+                            <div class="tt"><div class="a6_content">${list.title}</div></div>
+                           </div>
                         </div>
                     </div>
+                     </c:if>
+                    </c:forEach>
             </div>
     	</div>
     	<div class="area2">

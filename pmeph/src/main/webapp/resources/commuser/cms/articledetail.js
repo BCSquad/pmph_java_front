@@ -43,11 +43,11 @@ function changepage(n){
 	var json={
 			pageNumber:n,	
 			allppage:$('input[name=edu]').val(),
-			id:$("#book_id").val(),
+			/*id:$("#book_id").val(),*/
 	};
 	 $.ajax({
 		type:'post',
-		url:contextpath+'readdetail/changepage.action?',
+		url:contextpath+'articledetail/changepage.action',
 		async:false,
 		dataType:'json',
 		data:json,
@@ -98,7 +98,7 @@ function changepage(n){
            	str+='</div><div class="date_content"><div class="date">'
            	+n.gmt_create
            	+'</div></div></div><div class="item_content">'
-           	+n.content
+           	+n.mid
            	+'</div><hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;"></div>';
 			});
 			$("#changepage").html(str);
@@ -126,7 +126,7 @@ function insert(){
 	}
 	var json={
 		 content:$("#content").val(),
-		 /*score:$("#last_score").html(),*/
+		 score:$("#last_score").html(),
 	};
 	 $.ajax({
 			type:'post',
@@ -165,10 +165,10 @@ function change(){
 
 //点赞
 function addlikes(){
-	var book_id=$("#book_id").val();
+	/*var book_id=$("#book_id").val();*/
 	 $.ajax({
 			type:'post',
-			url:contextpath+'readdetail/addlikes.action?id='+book_id,
+			url:contextpath+'articledetail/addlikes.action',
 			async:false,
 			dataType:'json',
 			success:function(json){
@@ -183,7 +183,7 @@ function addlikes(){
 //收藏
 function addmark(){
 //	var favoriteId=$("input[name=edu]").val();
-	var bookId=$("#book_id").val();
+	var wid=$("#wid").val();
 	var marks=$("#marks").val();
 //	if(favoriteId==""){
 //		window.message.info("请选择收藏夹");
@@ -191,8 +191,8 @@ function addmark(){
 //	}
 	 $.ajax({
 			type:'post',
-			url:contextpath+'readdetail/addmark.action',
-			data:{bookId:bookId},
+			url:contextpath+'articledetail/addmark.action',
+			data:{wid:wid},
 			async:false,
 			dataType:'json',
 			success:function(json){

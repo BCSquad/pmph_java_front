@@ -39,10 +39,12 @@
 }
 
 .dzsc{
-	width: 140px;
+	/* width: 140px; */
 	height: 26px;
 	float: right;
 }
+
+
 
 .wz_title{
 	width: 890px;
@@ -137,7 +139,7 @@
 	margin-top: 10px;
 }
 
-.button{
+.buttonb{
     float: right;
     width: 80px;
     height: 28px;
@@ -247,6 +249,7 @@
     width: 280px;
     margin: auto;
     background-image: url("../../image/yxsb.png");
+    background-repeat: no-repeat;
 }
 
 .ir_02 span{
@@ -474,3 +477,28 @@
     margin-top: 6px;
     float: left;
 }
+
+.tt{
+	width: 280px;
+	height: 40px;
+	border-radius: 0px 0px 4px 4px;
+	padding-top: 122px;
+    margin-left: 10px;
+   
+    
+}
+
+.a6_content{
+	overflow: hidden;
+    text-overflow:ellipsis; 
+   	white-space: nowrap;
+	height: 20px;
+	width:200px;
+	font-family: MicrosoftYaHei;
+	font-size: 14px;
+	color: #ffffff;
+    cursor:pointer; 
+}
+
+
+
