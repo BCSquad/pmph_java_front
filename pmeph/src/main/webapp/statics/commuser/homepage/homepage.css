@@ -1330,8 +1330,9 @@
 	float:right;
 	width: 229px;
 	height: 226px;
-	right: 90px;
-	bottom: 70px;
+	right: 0px;
+	bottom: 0px;
+    z-index: 1000;
 	background-image:url("../../image/test.jpg"); 
 	cursor: pointer;
 }

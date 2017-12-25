@@ -2325,25 +2325,25 @@ $.fn.uploadFile = function (option) {
                     if (option.start) {
                         option.start();
                     }
-                    //if (!option.progressall) {
-                    var img = loadding.children("img");
-                    img.css("height", $ele.outerHeight() * 0.8);
-                    img.css("width", $ele.outerHeight() * 0.8);
-                    img.css("margin-top", $ele.outerHeight() * 0.1);
-                    img.css("margin-left", $ele.outerHeight() * 0.1);
+                    if (!option.progressall) {
+                        var img = loadding.children("img");
+                        img.css("height", $ele.outerHeight() * 0.8);
+                        img.css("width", $ele.outerHeight() * 0.8);
+                        img.css("margin-top", $ele.outerHeight() * 0.1);
+                        img.css("margin-left", $ele.outerHeight() * 0.1);
 
-                    var text = loadding.children(".loading-text");
-                    text.css("height", $ele.outerHeight() + "px");
-                    text.css("line-height", $ele.outerHeight() + "px");
+                        var text = loadding.children(".loading-text");
+                        text.css("height", $ele.outerHeight() + "px");
+                        text.css("line-height", $ele.outerHeight() + "px");
 
-                    loadding.children(".shade").css("border-radius", $ele.css("border-radius"));
-                    loadding.css("border-radius", $ele.css("border-radius"));
-                    loadding.css("width", $ele.outerWidth());
-                    loadding.css("height", $ele.outerHeight());
-                    loadding.css("top", $ele.offset().top);
-                    loadding.css("left", $ele.offset().left);
-                    loadding.appendTo($("body"));
-                    //}
+                        loadding.children(".shade").css("border-radius", $ele.css("border-radius"));
+                        loadding.css("border-radius", $ele.css("border-radius"));
+                        loadding.css("width", $ele.outerWidth());
+                        loadding.css("height", $ele.outerHeight());
+                        loadding.css("top", $ele.offset().top);
+                        loadding.css("left", $ele.offset().left);
+                        loadding.appendTo($("body"));
+                    }
                 },
                 done: function (e, data) {
                     //if (!option.progressall) {
