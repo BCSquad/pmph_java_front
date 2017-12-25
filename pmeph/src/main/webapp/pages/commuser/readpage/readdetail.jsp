@@ -28,6 +28,39 @@
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="body">
     <input type="hidden" value="${map.type}" id="type_id">
+<<<<<<< .mine
+	<div class="content-wrapper">
+	     <input type="hidden" id="book_id" value="${id}">
+	     <input type="hidden" id="marks" value="${map.bookmarks}">
+	     <!-- 图书纠错悬浮框 -->
+	     <div class="bookmistake" id="bookmistake">
+	         <div class="apache">
+	            <div class="mistitle">纠错</div>
+	            <div class="x" onclick="hideup()">X</div>
+	         </div>
+	         <div class="input">
+	             <label style="margin-left: 20px" class="labell">页码&nbsp;:&nbsp;</label>
+	             <input type="text" class="text" id="page"/>
+	             <label style="margin-left: 10px" class="labell">行数&nbsp;:&nbsp;</label>
+	             <input type="text" class="text" id="line"/>
+	         </div>
+	         <div class="info">
+	             <label style="margin-left: 20px" class="labell">纠错内容&nbsp;:&nbsp;</label>
+	             <textarea class="misarea" id="content"></textarea>
+	         </div>
+	         <div class="upload">
+	            <label style="margin-left: 20px" class="labell">纠错内容附件&nbsp;:&nbsp;</label>
+	            <div style="position: relative">
+	                <input type="button" id="uploadFile" value="选择文件">
+	            </div>
+	            <label class="uploadfile" id="upname">未选择任何文件</label>
+	         </div>
+	         <div class="">
+	              <button class="btn" onclick="correction()">确认</button>
+	         </div>
+	     </div>
+		<!--左边区域-->
+=======
     <div class="content-wrapper">
         <input type="hidden" id="book_id" value="${id}">
         <input type="hidden" id="marks" value="${map.bookmarks}">
@@ -59,6 +92,7 @@
             </div>
         </div>
         <!--左边区域-->
+>>>>>>> .r774
         <div class="leftarea">
             <div class="title" style="margin-top: -20px"><span>读书 > 病理生理学</span></div>
             <div class="bt"><span>${map.bookname}</span></div>
@@ -216,9 +250,26 @@
                         <div class="scorestar1" id="score4"></div>
                         <div class="scorestar1" id="score5"></div>
                     </div>
+<<<<<<< .mine
+                    <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
+                    <div class="aticle">
+                        <div class="video">
+                    	    <img src="${ctx}/statics/image/index.png" class="img-a">
+                    	    <div class="video-a"></div>
+	                    </div>
+                   	    <div class="video" style="margin-left: 40px">
+                  	        <img src="${ctx}/statics/image/index.png" class="img-a">
+                  	        <div class="video-a" ></div>   
+                    	</div>
+                    	<div class="video" style="margin-left: 40px">
+                   	       <img src="${ctx}/statics/image/index.png" class="img-a">
+                   	       <div class="video-a"></div>
+                    	</div>
+=======
                     <div class="user_score">
                         <!-- <span>评分：</span> -->
                         <span style="color: #FFD200" id="last_score">10.0</span>
+>>>>>>> .r774
                     </div>
                     <div class="button">
                         <button id="span_4" onclick="insert()">发表</button>
