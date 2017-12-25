@@ -294,8 +294,13 @@ function addmark() {
 }
 
 //跳转到写文章页面
+<<<<<<< .mine
+function writeablut(){
+	location.href=contextpath+'readdetail/todetail.action?state=write&&id='+$("#book_id").val();
+=======
 function writeablut() {
     location.href = contextpath + 'readdetail/towritecom.action';
+>>>>>>> .r776
 }
 
 //点击显示纠错弹窗
@@ -306,5 +311,29 @@ function showup() {
 //点击纠错弹窗隐藏
 function hideup() {
     $("#bookmistake").hide();
+}
+
+//图书纠错
+function correction(){
+	var json={
+		book_id:$("book_id").val(),
+		page:$("page").val(),
+		content:$("content").val(),
+		attachment_name:$("upname").val(),
+	};
+	$.ajax({
+		type:'post',
+		url:contextpath+'readdetail/correction.action',
+		data:json,
+		async:false,
+		dataType:'json',
+		success:function(json){
+				if(json=="OK"){
+					alert('成功');
+				}else{
+					alert(132);
+				}
+		}
+	});
 }
 
