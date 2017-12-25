@@ -78,6 +78,7 @@ color:#FFF;
 }
 
 .content .left {
+	clear:left;
     width: 870px;
     float: left;
     height: auto;
@@ -268,13 +269,6 @@ color:#FFF;
 }
 
 .xz {
-    font-size: 16px;
-    color: #333333;
-    float: left;
-    list-style-type: none;
-    width: auto;
-    text-align: center;
-    margin-right: 40px;
     padding-bottom: 16px;
     border-bottom-width: 3px;
     border-bottom-style: solid;
@@ -499,6 +493,11 @@ color:#FFF;
     float: left;
 }
 
+#leftContent{
+	width: 870px;
+    float: left;
+}
+
 #gengduo {
     width: 870px;
     float: left;
@@ -706,7 +705,7 @@ color:#FFF;
 
 #jcsbqb {
     color: white;
-    background-image: url(../../image/jcsbqbleft.png);
+    background-image: none;
     background-repeat: no-repeat;
     height: 30px;
     text-align: center;
@@ -715,15 +714,24 @@ color:#FFF;
     padding-right: 15px;
 }
 
+#jcsbqb.active{
+	background-image: url(../../image/jcsbqbleft.png);
+}
+
 #jcsbwdsb {
        color: #03717b;
     border: 1px solid #03717b;
     background-repeat: no-repeat;
+    background-image: none;
     height: 24px;
     float: left;
     padding-left: 15px;
     padding-right: 15px;
     margin-right: 15px;
+}
+
+#jcsbwdsb.active{
+	background-image: url(../../image/jcsbqbright.png);
 }
 
 #jcsbqbmy {
@@ -964,8 +972,8 @@ width: 76px;
 
 .bmcjan3 {
     width: 98px;
-    height: 31px;
-    font-size: 16px;
+    height: 33px;
+    font-size: 14px;
     color: #999999;
     text-align: center;
     border: 1px solid #FFFFFF;
@@ -974,14 +982,14 @@ width: 76px;
     margin-right: 17px;
     margin-bottom: 31px;
     margin-left: 17px;
-    padding-top: 3px;
     background-color: #d5d5d5;
     border-radius: 18px;
+    line-height:33px;
 }
 
 .bmcjan2 {
     width: 98px;
-    height: 31px;
+    height: 33px;
     font-size: 14px;
     color: #FFFFFF;
     text-align: center;
@@ -991,14 +999,14 @@ width: 76px;
     margin-right: 17px;
     margin-bottom: 31px;
     margin-left: 17px;
-    padding-top: 3px;
     background-color: #7acdd4;
     border-radius: 18px;
+    line-height:33px;
 }
 
 .bmcjan {
     width: 98px;
-    height: 31px;
+    height: 33px;
     font-size: 14px;
     color: #FFFFFF;
     text-align: center;
@@ -1008,13 +1016,14 @@ width: 76px;
     margin-right: 17px;
     margin-bottom: 31px;
     margin-left: 17px;
-    padding-top: 3px;
     border-radius: 18px;
+    line-height: 33px;
+    
 }
 
 .bmcjan1 {
     width: 98px;
-    height: 31px;
+    height: 33px;
     font-size: 14px;
     color: #FFFFFF;
     text-align: center;
@@ -1027,6 +1036,7 @@ width: 76px;
     padding-top: 3px;
     background-color: #7acdd4;
     border-radius: 18px;
+    line-height: 33px;
 }
 
 .rshang {
@@ -1041,7 +1051,8 @@ width: 76px;
 
 .rshangn {
     width: 253px;
-    height: 19px;
+    max-height: 71px;
+    overflow:hidden;
     text-align: left;
     font-size: 18px;
     color: #333333;
@@ -1071,11 +1082,13 @@ width: 76px;
     margin-top: 10px;
 }
 
-.shenbaoliebiao {
+.listContent {
     width: 870px;
     margin-bottom: 25px;
-    height: 175px;
+    min-height: 175px;
     margin-top: 10px;
+    clear: both;
+    contain: content;
 }
 
 #liulan {
@@ -1128,4 +1141,11 @@ width: 76px;
     border-bottom: 2px solid;
     border-bottom-color: #9B9D58;
     margin-top: 20px;
+}
+.pageDiv{
+	text-align: right;
+}
+
+.pagetag{
+	cursor: pointer;
 }

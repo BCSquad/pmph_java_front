@@ -1,0 +1,97 @@
+#set($objectNum =$!{startNum})
+
+<input type="hidden" class="queryCondition" id="s" value="$!{s}">
+<input type="hidden" class="queryCondition" id="pageinfo" value="$!{pageinfo}">
+<input type="hidden" class="queryCondition" id="dateinfo" value="$!{dateinfo}">
+<input type="hidden" class="queryCondition" id="online_progress" value="$!{online_progress}">
+<input type="hidden" class="queryCondition" id="bookname" value="$!{bookname}">
+<input type="hidden" class="queryCondition" id="is_staging" value="$!{is_staging}">
+
+<div class="jcsbssl">
+	<input type="hidden" id="pageinfo" value="$!{para.pageinfo}">
+    <span id="jcsbqb" class="active" onclick="listoction(this,'');" style="cursor:pointer">全部</span>
+    <span id="jcsbwdsb" class=""  onclick="listoction(this,1);" style="cursor:pointer">我的申报</span>
+    <span class="jcsbsbzt" id="sbzzjx" onclick="listoction1();" style="cursor:pointer">正在进行</span>
+    <span class="jcsbsbzt" id="sbyjs" style="cursor:pointer" onclick="listoction2();">已结束</span>
+    <span class="jcsbsbzt" id="sbzc" onclick="listoction3();" style="cursor:pointer">暂存</span>
+    <span class="jcsbsbzt" id="sbytj" onclick="listoction4();" style="cursor:pointer">已提交</span>
+    <span class="jcsbsbzt" id="qktj" onclick="listoction5();" style="cursor:pointer">全部</span>
+    <input type="text" id="wdsbssk" value="$!{para.bookname}">
+</div>
+
+
+<div class="listContent">
+    <ul class="scul">
+    #foreach($c in $!{List_map})
+		
+		<li class="leftlb">
+		
+		#if($!{c.iamin}==0 && $!{c.datebase}<0)
+			<div class="mleft">
+                <div class="ysbrs">
+                    <div class="baomingrenshu"><span
+                            class="canjiarenshu">$!{c.exmember}</span><span>人</span>
+                        <br/><span class="ybmcj">已报名参加</span></div>
+                </div>
+                <div class="bmcj">
+                    <a class="abmcj" href="$!{contextpath}material/toMaterialAdd.action?material_id=$!{c.material_id}"><div class="bmcjan"><span>
+                    		报名参加</span></div></a>
+                <!-- toMaterialZc暂存   showMaterial查看 -->
+                </div>
+            </div>
+		#elseif($!{c.iamin}>0 && ($!{c.online_progress}==1||$!{c.online_progress}==0) && $!{c.datebase}<0)  
+			<div class="mleft1">
+                <div class="ysbrs1">
+                    <div class="baomingrenshu1"><span
+                            class="canjiarenshu1">$!{c.exmember}</span><span>人</span>
+                        <br/><span class="ybmcj1">已报名参加</span></div>
+                </div>
+                <div class="bmcj1">
+                    <a class="abmcj" href="$!{contextpath}declareCount/findDeclareCount.action?material_id=$!{c.material_id}"><div class="bmcjan1"><span>进度查询</span></div></a>
+                    <a class="abmcj" href="$!{contextpath}material/toMaterialZc.action?declaration_id=$!{c.declaration_id}"><div class="cksbb1">
+                    		修改申报表</div></a>
+                </div>
+            </div>
+		#elseif($!{c.iamin}>0 && $!{c.online_progress}==3 && $!{c.datebase}<0)
+			<div class="mleft2">
+                <div class="ysbrs2">
+                    <div class="baomingrenshu2"><span
+                            class="canjiarenshu2">$!{c.exmember}</span><span>人</span>
+                        <br/><span class="ybmcj2">已报名参加</span></div>
+                </div>
+                <div class="bmcj2">
+                    <a class="abmcj" href="$!{contextpath}material/showMaterial.action?declaration_id=$!{c.declaration_id}"><div class="bmcjan2"><span>
+                    		查看申报表</span></div></a>
+                </div>
+            </div>
+        #elseif($!{c.datebase}>0)
+        	<div class="mleft3">
+            <div class="ysbrs3">
+                <div class="baomingrenshu3"><span class="canjiarenshu3">$!{c.exmember}</span><span>人</span>
+                    <br/><span class="ybmcj3">已报名参加</span></div>
+                </div>
+                <div class="bmcj3">
+                    <div class="bmcjan3"><span>已结束</span></div>
+                </div>
+            </div>
+		#end
+
+            <div class="mright">
+                <div class="rshang">
+                    <div class="rshangn">$!{c.material_name}
+                    #if(($!{c.is_staging}==true || $!{c.is_staging}==1)&&$!{c.online_progress}==0)
+                    	<img src="$!{contextpath}statics/image/zancun.png">
+                    #end
+                   </div>
+                </div>
+                <div class="rxia">
+                    <div class="rxian">截止日期：$!{c.age_deadline}</div>
+                </div>
+            </div>
+	</li>
+		
+	#set($objectNum = $objectNum + 1)	
+	#end
+	    </ul>
+</div>
+    

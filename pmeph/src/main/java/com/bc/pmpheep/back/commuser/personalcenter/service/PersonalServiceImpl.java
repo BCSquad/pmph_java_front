@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.commuser.personalcenter.bean.PersonalNewMessage;
 import com.bc.pmpheep.back.commuser.personalcenter.dao.PersonalDao;
+import com.bc.pmpheep.back.plugin.PageParameter;
 
 @Service("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
 public class PersonalServiceImpl implements PersonalService {
@@ -59,10 +60,29 @@ public class PersonalServiceImpl implements PersonalService {
 	}
 
 	@Override
-	public List<PersonalNewMessage> queryMyBooksJoin(Map<String, Object> permap) {
-		// TODO 自动生成的方法存根  查询我的教材申报最新信息
-		List<PersonalNewMessage> list7=personaldao.ListAllBookJoin(permap);
+	public List<Map<String, Object>>  queryMyBooksJoin(PageParameter<Map<String, Object>> pageParameter) {
+		// 查询我的教材申报最新信息
+		List<Map<String, Object>> list7=personaldao.ListAllBookJoin(pageParameter);
 		return list7;
 	}
+	@Override
+	public int queryMyBooksJoinCount(PageParameter<Map<String, Object>> pageParameter) {
+		Integer count =personaldao.queryMyBooksJoinCount(pageParameter);
+		return count;
+	}
+
+	@Override
+	public List<Map<String, Object>> queryMyTopicChoose(PageParameter<Map<String, Object>> pageParameter) {
+		List<Map<String, Object>> result_list = personaldao.queryMyTopicChoose(pageParameter);
+		return result_list;
+	}
+
+	@Override
+	public int queryMyTopicChooseCount(PageParameter<Map<String, Object>> pageParameter) {
+		Integer count =personaldao.queryMyTopicChooseCount(pageParameter);
+		return count;
+	}
+
+	
 
 }

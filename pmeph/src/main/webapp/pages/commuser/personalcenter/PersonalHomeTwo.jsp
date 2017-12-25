@@ -52,10 +52,14 @@
         <div class="content">
             <div class="left">
                 <ul class="dhl">
-                    <li id="dt" class="dtl"><a class="aher" href="${ctx}/personalhomepage/tohomepage.action">动态</a></li>
-                    <li id="jcsb" class="dtl"><a class="aher" href="${ctx}/personalhomepage/tohomepageone.action">教材申报</a></li>
-                    <li id="sbwz" class="xz"><a class="aher" href="${ctx}/personalhomepage/tohomepagetwo.action">随笔文章</a></li>
-                    <li id="zxsp" class="dtl"><a class="aher" href="${ctx}/personalhomepage/tohomepagethe.action">最新书评</a></li>
+                    <li id="dt" class="dtl pagetag"><a class="aher" href="${ctx}/personalhomepage/tohomepage.action">动态</a></li>
+                    <li id="jcsb" class="dtl pagetag"><a class="aher" href="${ctx}/personalhomepage/tohomepageone.action">教材申报</a></li>
+                    <li id="sbwz" class="dtl xz pagetag"><a class="aher" href="${ctx}/personalhomepage/tohomepagetwo.action">随笔文章</a></li>
+                    <li id="tsjc" class="dtl pagetag"><a class="aher" href="${ctx}/personalhomepage/tohomepage.action?pagetag=tsjc">图书纠错</a></li>
+                    <li id="wycs" class="dtl pagetag"><a class="aher" href="${ctx}/personalhomepage/tohomepage.action?pagetag=wycs">我要出书</a></li>
+					<li id="wdjc" class="dtl pagetag"><a class="aher" href="${ctx}/personalhomepage/tohomepage.action?pagetag=wdjc">我的纠错</a></li>
+                    <li id="wdpl" class="dtl pagetag"><a class="aher" href="${ctx}/personalhomepage/tohomepagethe.action">我的评论</a></li>
+                    <li id="wdwj" class="dtl pagetag"><a class="aher" href="${ctx}/personalhomepage/tohomepage.action?pagetag=wdwj">我的问卷</a></li>
                 </ul>
                 <div id="dhxian"></div>
                 
