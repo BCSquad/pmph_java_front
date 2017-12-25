@@ -20,7 +20,7 @@
     <div class="body">
         <div class="apply-book"><div class="text">教材<br>申报</div></div>
         <div class="content-wrapper">
-            <div class="news">
+            <%-- <div class="news">
                 <div class="focus-news">
                     <div class="focus-title">
                     <span class="text1">FOCUS
@@ -67,6 +67,12 @@
                         </div>
                     </div>
                 </div>
+                
+                
+                
+                
+                
+                
                 <div class="notice ">
                     <div class="title">
                         <div class="line"></div>
@@ -133,9 +139,9 @@
                         </p>
                     </div>
                 </div>
-            </div>
+            </div> --%>
 
-            <div class="notes">
+            <div class="notes" style="margin-top: 50px">
                 <div class="title">
                     <div class="line"></div>
                     <div class="name">医学随笔  <a href="#">全部&gt;&gt;</a></div>
