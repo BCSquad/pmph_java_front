@@ -139,10 +139,11 @@
 	height: 223px;
 	margin-top: 25px;
 	float: left;
-    /* background-image: url("../../testfile/rectangle.png"); */
+    background-image: url("../../testfile/rectangle.png"); 
     border: 1px solid #F2F2F2;
     border-radius:6px;
     box-shadow: 1px 1px 3px #888888;
+    background-size:110%  110%; 
 }
 
 .p1_left{
@@ -168,10 +169,11 @@
 	height: 250px;
 	margin-top: 25px;
 	float: left;
-	/* background-image: url("../../testfile/rectangle.png"); */
+	background-image: url("../../testfile/rectangle.png"); 
 	border: 1px solid #F2F2F2;
     border-radius:6px;
     box-shadow: 1px 1px 3px #888888;
+    background-size:110%  110%; 
 }
 
 .left_con1{
