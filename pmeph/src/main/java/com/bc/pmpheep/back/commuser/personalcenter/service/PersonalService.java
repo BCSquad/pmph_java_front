@@ -17,9 +17,9 @@ public interface PersonalService {
 	
 	public List<PersonalNewMessage> queryMyOfeerNew(Map<String, Object> permap);//我的申请动态最新消息
 
-	public List<PersonalNewMessage> queryMyWritingsNew(Map<String, Object> permap);//我的随笔文章动态最新消息
+	
 
-	public List<PersonalNewMessage> queryMyBooksNew(Map<String, Object> permap);//我的书评消息动态最新消息
+	public List<Map<String,Object>> queryMyBooksNew(PageParameter<Map<String, Object>> pageParameter);//我的书评消息动态最新消息
 
 	public List<Map<String, Object>>  queryMyBooksJoin(PageParameter<Map<String, Object>> pageParameter);//教材申报最新消息
 	
@@ -38,6 +38,34 @@ public interface PersonalService {
 	 * @return
 	 */
 	public int queryMyTopicChooseCount(PageParameter<Map<String, Object>> pageParameter);
+
+	/**
+	 * 我的随笔文章
+	 * @param pageParameter
+	 * @return
+	 */
+	public List<Map<String,Object>> queryMyWritingsNew(PageParameter<Map<String, Object>> pageParameter);//我的随笔文章动态最新消息
+	
+	/**
+	 * 我的随笔文章总数
+	 * @param pageParameter
+	 * @return
+	 */
+	public int queryMyWritingsNewCount(PageParameter<Map<String, Object>> pageParameter);
+
+	/**
+	 * 作为第一主编被提出的图书纠错查询 （图书纠错 页面）
+	 * @param pageParameter
+	 * @return
+	 */
+	public List<Map<String, Object>> queryBookCorrectd(PageParameter<Map<String, Object>> pageParameter);
+
+	/**
+	 * 作为第一主编被提出的图书纠错总数 （图书纠错 页面）
+	 * @param pageParameter
+	 * @return
+	 */
+	public int queryBookCorrectdCount(PageParameter<Map<String, Object>> pageParameter);
 
 	
 	

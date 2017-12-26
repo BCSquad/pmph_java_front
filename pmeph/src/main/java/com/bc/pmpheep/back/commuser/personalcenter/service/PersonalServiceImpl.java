@@ -46,16 +46,22 @@ public class PersonalServiceImpl implements PersonalService {
 	}
 
 	@Override
-	public List<PersonalNewMessage> queryMyWritingsNew(Map<String, Object> permap) {
-		// TODO 自动生成的方法存根  查询我的随笔文章最新信息
-		List<PersonalNewMessage> list5=personaldao.ListMyWritingsTwo(permap);
+	public List<Map<String,Object>> queryMyWritingsNew(PageParameter<Map<String, Object>> pageParameter) {
+		// 查询我的随笔文章最新信息
+		List<Map<String,Object>> list5=personaldao.ListMyWritingsTwo(pageParameter);
 		return list5;
+	}
+	
+	@Override
+	public int queryMyWritingsNewCount(PageParameter<Map<String, Object>> pageParameter) {
+		Integer count =personaldao.queryMyWritingsNewCount(pageParameter);
+		return count;
 	}
 
 	@Override
-	public List<PersonalNewMessage> queryMyBooksNew(Map<String, Object> permap) {
+	public List<Map<String,Object>> queryMyBooksNew(PageParameter<Map<String, Object>> pageParameter) {
 		// TODO 自动生成的方法存根 查询我的书评最新信息
-		List<PersonalNewMessage> list6=personaldao.ListMyBookNewsTwo(permap);
+		List<Map<String,Object>> list6=personaldao.ListMyBookNewsTwo(pageParameter);
 		return list6;
 	}
 
@@ -82,6 +88,20 @@ public class PersonalServiceImpl implements PersonalService {
 		Integer count =personaldao.queryMyTopicChooseCount(pageParameter);
 		return count;
 	}
+
+	@Override
+	public List<Map<String, Object>> queryBookCorrectd(PageParameter<Map<String, Object>> pageParameter) {
+		List<Map<String, Object>> result_list = personaldao.queryBookCorrectd(pageParameter);
+		return result_list;
+	}
+
+	@Override
+	public int queryBookCorrectdCount(PageParameter<Map<String, Object>> pageParameter) {
+		Integer count =personaldao.queryBookCorrectdCount(pageParameter);
+		return count;
+	}
+
+	
 
 	
 

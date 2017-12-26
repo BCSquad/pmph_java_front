@@ -22,14 +22,18 @@
     <result column="title" property="title"/>
     <result column="summary" property="summary"/>
     <result column="auth_status" property="auth_status"/>
-     <result column="score" property="score"/>
-      <result column="content" property="content"/>
-           <result column="age_deadline" property="age_deadline"/>
-      <result column="exmember" property="exmember"/>
-            <result column="iamin" property="iamin"/>
-      <result column="is_staging" property="is_staging"/>
-            <result column="material_id" property="material_id"/>
-         <result column="datebase" property="datebase"/>   
+    <result column="score" property="score"/>
+    <result column="content" property="content"/>
+    <result column="age_deadline" property="age_deadline"/>
+    <result column="exmember" property="exmember"/>
+    <result column="iamin" property="iamin"/>
+    <result column="is_staging" property="is_staging"/>
+    <result column="material_id" property="material_id"/>
+    <result column="datebase" property="datebase"/>
+    <result column="notNullIfFirstManager" property="notNullIfFirstManager"/>
+    <result column="textbook_id" property="textbook_id"/>
+         
+            
   </resultMap>
 
 <!-- 查询最新收藏信息 -->
@@ -66,12 +70,39 @@ WHERE
 AND a.online_progress IN (2, 3)
   </select>
   <!-- 查最新文章动态 -->
- <select id="ListMyWritingsTwo"  resultMap="BaseResultMap">
- SELECT id,title,summary,auth_status,DATE_FORMAT(gmt_update,'%Y-%m-%d %h:%i') as gmt_update, '2' msg_type from cms_content where author_id=#{id}  and is_deleted ='0'
+ <select id="ListMyWritingsTwo"   resultMap="BaseResultMap" parameterType="PageParameter">
+	 SELECT 
+	 cc.id
+	 ,cc.title
+	 ,cc.summary
+	 ,cc.auth_status
+	 ,DATE_FORMAT(cc.gmt_update,'%Y-%m-%d %h:%i') as gmt_update
+	 , '2' msg_type 
+	 from cms_content cc
+	 inner join cms_category ct on cc.category_id = ct.id and ct.category_name = '医学随笔'
+	 where cc.author_id=#{parameter.logUserId}  and cc.is_deleted !='1'
+	 <if test="parameter.auth_status != null and parameter.auth_status != '' ">
+	 	and cc.auth_status = #{parameter.auth_status}
+	 </if>
+	 limit ${start},${pageSize}	
+  </select>
+  
+   <!-- 查最新文章动态总数 -->
+  <select id="queryMyWritingsNewCount" resultType="Integer" parameterType="PageParameter">
+	  select count(*) from 
+	  (
+	  	 SELECT cc.id
+		 from cms_content cc
+		 inner join cms_category ct on cc.category_id = ct.id and ct.category_name = '医学随笔'
+		 where cc.author_id=#{parameter.logUserId}  and cc.is_deleted !='1'
+		 <if test="parameter.auth_status != null and parameter.auth_status != '' ">
+		 	and cc.auth_status = #{parameter.auth_status}
+		 </if>
+		)t
   </select>
 
  <!-- 查最新书评动态 -->
- <select id="ListMyBookNewsTwo"  resultMap="BaseResultMap">
+ <select id="ListMyBookNewsTwo"  resultMap="BaseResultMap" parameterType="PageParameter">
  select a.id,a.score,a.content,DATE_FORMAT(a.gmt_update,'%Y-%m-%d %h:%i') as gmt_update,b.bookname,b.image_url, '3' msg_type from book_user_comment a left JOIN  book b ON a.book_id=b.id where a.writer_id=#{id}  and a.is_deleted='0' and a.is_auth='1'
   </select>
 
@@ -87,11 +118,15 @@ AND a.online_progress IN (2, 3)
 		b.material_id,
 		(TO_DAYS(NOW()) - TO_DAYS(a.deadline)) AS datebase,
 		count(c.id) as iamin,
-		c.id as declaration_id
+		c.id as declaration_id,
+		dp.id as notNullIfFirstManager,
+		dp.textbook_id
 	FROM
 		material a
 	LEFT JOIN declaration b ON a.id = b.material_id
 	LEFT JOIN declaration c ON a.id = c.material_id and c.user_id = #{parameter.logUserId} and c.online_progress != 2
+	LEFT JOIN dec_position dp on c.id = dp.declaration_id and chosen_position in (4,12) and rank=1
+	
 	WHERE
 		a.is_deleted = '0'
 	AND a.is_public = '0'
@@ -149,19 +184,19 @@ AND a.online_progress IN (2, 3)
 		SELECT
 		t.id,
 		t.bookname,
-		t.deadline,
+		DATE_FORMAT(t.deadline,'%Y-%m-%d') as deadline,
 		t.source,
 		t.type,
-		t.gmt_create,
+		DATE_FORMAT(t.gmt_create,'%Y-%m-%d') as gmt_create,
 		t.auth_progress
 		FROM
 		topic t
 		<where>
-			<if test="parameter.logUserId != null and parameter.logUserId != '' ">
+			<if test="parameter.isMine!=null and parameter.isMine!='' and parameter.logUserId != null and parameter.logUserId != '' ">
 				AND t.user_id =  #{parameter.logUserId}
 			</if>
-			<if test="parameter.queryName != null and parameter.queryName!= '' ">
-				AND t.bookname LIKE  concat('%',#{parameter.queryName},'%')
+			<if test="parameter.bookname != null and parameter.bookname!= '' ">
+				AND t.bookname LIKE  concat('%',#{parameter.bookname},'%')
 			</if>
 			<if test="parameter.auth_progress != null and parameter.auth_progress != '' ">
 				AND t.auth_progress =  #{parameter.auth_progress}
@@ -177,17 +212,59 @@ AND a.online_progress IN (2, 3)
 		FROM
 		topic t
 		<where>
-			<if test="parameter.logUserId != null and parameter.logUserId != '' ">
+			<if test="parameter.isMine!=null and parameter.isMine!='' and parameter.logUserId != null and parameter.logUserId != '' ">
 				AND t.user_id =  #{parameter.logUserId}
 			</if>
-			<if test="parameter.queryName != null and parameter.queryName!= '' ">
-				AND t.bookname LIKE  concat('%',#{parameter.queryName},'%')
+			<if test="parameter.bookname != null and parameter.bookname!= '' ">
+				AND t.bookname LIKE  concat('%',#{parameter.bookname},'%')
 			</if>
 			<if test="parameter.auth_progress != null and parameter.auth_progress != '' ">
 				AND t.auth_progress =  #{parameter.auth_progress}
 			</if>
 		</where>
 		
+	</select>
+	
+	<select id="queryBookCorrectd" parameterType="PageParameter" resultType="Map">
+		SELECT
+		b.bookname,
+		b.isbn,
+		b.revision,
+		b.author,
+		b.image_url,
+		bc.id,
+		bc.book_id,
+		bc.page,
+		bc.line,
+		bc.content,
+		bc.attachment,
+		bc.attachment_name
+		FROM
+		book AS b
+		Inner Join book_editor AS be ON b.id = be.book_id
+		Inner Join book_correction AS bc ON b.id = bc.book_id
+		WHERE
+		be.author_id =  '758'
+		
+		bc.is_editor_replied != 0
+		
+		order by  bc.is_author_replied asc , bc.gmt_create desc
+	</select>
+	
+	<select id="queryBookCorrectdCount" parameterType="PageParameter" resultType="Integer">
+	
+	select count(*) from
+		(
+		SELECT
+		bc.book_id
+		FROM
+		book AS b
+		Inner Join book_editor AS be ON b.id = be.book_id
+		Inner Join book_correction AS bc ON b.id = bc.book_id
+		WHERE
+		be.author_id =  '758'
+		bc.is_editor_replied != 0
+		)t
 	</select>
 
 </mapper>

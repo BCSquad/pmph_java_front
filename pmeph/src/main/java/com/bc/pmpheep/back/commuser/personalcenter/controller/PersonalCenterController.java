@@ -39,9 +39,9 @@ public class PersonalCenterController extends BaseController {
     public ModelAndView move(@RequestParam(value="pagetag",defaultValue="dt")String pagetag
     						,HttpServletRequest request
     						,@RequestParam(value="pageNum",defaultValue="1")Integer pageNum
-    						,@RequestParam(value="pageSize",defaultValue="10")Integer pageSize) throws UnsupportedEncodingException {
+    						,@RequestParam(value="pageSize",defaultValue="10")Integer pageSize
+    						) throws UnsupportedEncodingException {
 
-    	
     	ModelAndView mv = new ModelAndView();
         Map<String, Object> permap = this.getUserInfo();//个人信息
         mv.addObject("permap", permap);
@@ -60,14 +60,44 @@ public class PersonalCenterController extends BaseController {
     	if ("dt".equals(pagetag)) { //动态
     		this.queryPersonalNewMessage(mv, permap);
     		mv.setViewName("commuser/personalcenter/PersonalHome");
-		}else if("tsjc".equals(pagetag)){ //图书纠错
+		}else if("tsjc".equals(pagetag)){ //图书纠错 (我是第一主编)
+			//从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
+			//设定条件名数组 
+			String[] names={"is_replied"};
+			String[] namesChi = {};
+			queryConditionOperation(names,namesChi,request, mv, paraMap,vm_map);
+			pageParameter.setParameter(paraMap);
+
+			List<Map<String,Object>> List_map = personalService.queryBookCorrectd(pageParameter);//教材申报最新消息
+			count = personalService.queryBookCorrectdCount(pageParameter);
+			//分页数据代码块
+			String html = this.mergeToHtml("commuser/personalcenter/bookCorrected.vm",contextpath, pageParameter, List_map,vm_map);
+			/*mv.addObject("List_map",List_map);*///测试
+			mv.addObject("html",html);
+			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
 			
+			
+		}else if("sbwz".equals(pagetag)){ //随笔文章
+			//从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
+			//设定条件名数组 
+			String[] names={"auth_status","is_staging"};
+			String[] namesChi = {};
+			queryConditionOperation(names,namesChi,request, mv, paraMap,vm_map);
+			pageParameter.setParameter(paraMap);
+
+			List<Map<String,Object>> List_map = personalService.queryMyWritingsNew(pageParameter);//教材申报最新消息
+			count = personalService.queryMyWritingsNewCount(pageParameter);
+			//分页数据代码块
+			String html = this.mergeToHtml("commuser/personalcenter/myWritingsList.vm",contextpath, pageParameter, List_map,vm_map);
+			/*mv.addObject("List_map",List_map);*///测试
+			mv.addObject("html",html);
+			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
 			
 			
 		}else if("jcsb".equals(pagetag)){ //教材申报
 			//从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
 			//设定条件名数组 
-			String[] names={"s","pageinfo","dateinfo","online_progress","is_staging"};
+			String[] names={"s","pageinfo","dateinfo","online_progress","is_staging","pageinfo1"};
 			String[] namesChi = {"bookname"};
 			queryConditionOperation(names,namesChi,request, mv, paraMap,vm_map);
 			pageParameter.setParameter(paraMap);
@@ -76,7 +106,7 @@ public class PersonalCenterController extends BaseController {
 			count = personalService.queryMyBooksJoinCount(pageParameter);
 			//分页数据代码块
 			String html = this.mergeToHtml("commuser/personalcenter/materialDeclarationList.vm",contextpath, pageParameter, List_map,vm_map);
-			mv.addObject("List_map",List_map);//测试
+			/*mv.addObject("List_map",List_map);*///测试
 			mv.addObject("html",html);
 			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
 			
@@ -85,8 +115,8 @@ public class PersonalCenterController extends BaseController {
 			
 			//从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView，放入模版空间
 			//设定条件名数组 
-			String[] names={"auth_progress","is_staging"};
-			String[] namesChi = {"queryName"};
+			String[] names={"auth_progress","is_staging","isMine","pageinfo1"};
+			String[] namesChi = {"bookname"};
 			queryConditionOperation(names,namesChi,request, mv, paraMap,vm_map);
 			
 			pageParameter.setParameter(paraMap);
@@ -107,11 +137,11 @@ public class PersonalCenterController extends BaseController {
     	
     	//总页数
     	Integer maxPageNum = (int) Math.ceil(1.0*count/pageSize);
+    	mv.addObject("listCount",count);
     	mv.addObject("maxPageNum",maxPageNum);
     	mv.addObject("pagetag",pagetag);
     	mv.addObject("pageNum",pageNum);
     	mv.addObject("pageSize",pageSize);
-    	
         
         return mv;
     }
@@ -173,7 +203,7 @@ public class PersonalCenterController extends BaseController {
 	}
 
 
-    @RequestMapping("/tohomepageout")//个人中心展示页面
+    /*@RequestMapping("/tohomepageout")//个人中心展示页面
     public ModelAndView moveout(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         String uid = request.getParameter("uid");
@@ -191,7 +221,7 @@ public class PersonalCenterController extends BaseController {
         modelAndView.addObject("listmybooknews", listmybooknews);
         modelAndView.setViewName("commuser/personalcenter/PersonalHomeOut");
         return modelAndView;
-    }
+    }*/
 
     /*@RequestMapping("/tohomepageone")//个人中心教材申报列表
     public ModelAndView moveoutone(HttpServletRequest request) {
@@ -266,7 +296,7 @@ public class PersonalCenterController extends BaseController {
     }*/
 
 
-    @RequestMapping("/tohomepagetwo")//个人中心随笔文章列表
+    /*@RequestMapping("/tohomepagetwo")//个人中心随笔文章列表
     public ModelAndView moveouttwo() {
         ModelAndView modelAndView = new ModelAndView();
         Map<String, Object> permap = this.getUserInfo();//个人信息
@@ -279,9 +309,9 @@ public class PersonalCenterController extends BaseController {
         modelAndView.addObject("listmywritingsnew", listmywritingsnew);
         modelAndView.setViewName("commuser/personalcenter/PersonalHomeTwo");
         return modelAndView;
-    }
+    }*/
 
-    @RequestMapping("/tohomepagethe")//个人中心我的书评列表
+    /*@RequestMapping("/tohomepagethe")//个人中心我的书评列表
     public ModelAndView moveoutthe() {
         ModelAndView modelAndView = new ModelAndView();
         Map<String, Object> permap = this.getUserInfo();//个人信息
@@ -294,7 +324,7 @@ public class PersonalCenterController extends BaseController {
         modelAndView.addObject("listmybooknews", listmybooknews);
         modelAndView.setViewName("commuser/personalcenter/PersonalHomeThere");
         return modelAndView;
-    }
+    }*/
     
     /**
      * 我要出书
@@ -316,7 +346,7 @@ public class PersonalCenterController extends BaseController {
      * @param permap
      */
 	private void queryPersonalNewMessage(ModelAndView modelAndView,
-			Map<String, Object> permap) {
+			Map<String, Object> permap) {/*
 		List<PersonalNewMessage> listmyofeernew = personalService.queryMyOfeerNew(permap);//我的申请动态最新消息
 		List<PersonalNewMessage> listmywritingsnew = personalService.queryMyWritingsNew(permap);//我的随笔文章动态最新消息
 		List<PersonalNewMessage> listmybooknews = personalService.queryMyBooksNew(permap);//我的书评消息动态最新消息
@@ -348,7 +378,7 @@ public class PersonalCenterController extends BaseController {
 		    }
 		});
 		modelAndView.addObject("newMessages", newMessages);
-	}
+	*/}
 	
 	/**
      * 查询个人主页共用部分 收藏 好友 小组
