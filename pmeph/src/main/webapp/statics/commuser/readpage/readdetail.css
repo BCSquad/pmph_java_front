@@ -348,7 +348,6 @@
 }
 
 .video-a{
-	float: left;
 	width: 260px;
 	height: 165px;
 	opacity:0.5;
@@ -838,9 +837,11 @@
     background-repeat: no-repeat;
     height: 84px;
     width: 82px;
-    float: left;
-    margin-top: 5px;
-    margin-left: 15px;
+    margin-top: -115px;
+    margin-left: 95px;
+    position: absolute;
+    z-index: 999;
+    cursor: pointer;
 }
 
 .vid_pic{  
