@@ -185,30 +185,16 @@ public class MessageController extends BaseController{
 	@RequestMapping(value="/noticeMessageDetail")
 	public ModelAndView toNoticeMessageDetail(HttpServletRequest request){
 		String messageId=request.getParameter("id");
-		String tag=request.getParameter("tag");
 		ModelAndView mv = new ModelAndView();
 		Map<String,Object> paraMap = new HashMap<String,Object>();
 		paraMap.put("messageId", messageId);
 		//标题、时间、邮寄地址、备注
 		Map<String,Object> mapTitle =new HashMap<>();
-		
-		if(tag!=null && tag.equals("FromList")){
-			//来自遴选公告列表的request
-			
-			mapTitle=noticeMessageService.queryCMSNotice(paraMap);
-			mv.addObject("firsttag", "首页");
-			mv.addObject("secondtag", "遴选公告");
-			mv.addObject("firstpath", "homepage/tohomepage.action");
-			mv.addObject("secondpath", "cmsnotice/tolist.action");
-		}else{
-			//来自消息列表中通知的request
-			
 			mapTitle = noticeMessageService.queryNoticeMessageDetail(paraMap);
 			mv.addObject("firsttag", "个人中心");
 			mv.addObject("secondtag", "消息通知");
 			mv.addObject("firstpath", "personalhomepage/tohomepage.action");
 			mv.addObject("secondpath", "message/noticeMessageList.action");
-		}
 		
 		
 		if(mapTitle!=null && mapTitle.size()>0){
