@@ -186,5 +186,18 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		// TODO 自动生成的方法存根  删除书评
 		return readDetailDao.updateDelBookWriter(map);
 	}
-	
+
+	/**
+	 * 新增图书纠错
+	 */
+	@Override
+	public String correction(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		String returncode="";
+		int count=readDetailDao.correction(map);
+		if(count>0){
+			returncode="OK";
+		}
+		return returncode;
+	}
 }

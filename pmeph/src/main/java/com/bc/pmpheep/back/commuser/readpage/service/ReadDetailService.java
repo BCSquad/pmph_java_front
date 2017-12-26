@@ -28,6 +28,12 @@ public interface ReadDetailService {
 	 */
 	Map<String, Object> querySupport (String id);
 	/**
+	 * 新增图书纠错
+	 * @param map
+	 * @return
+	 */
+	String correction(Map<String, Object> map);
+	/**
 	 * 查询人卫推荐书籍
 	 * @return List<Map<String, Object>>
 	 */
