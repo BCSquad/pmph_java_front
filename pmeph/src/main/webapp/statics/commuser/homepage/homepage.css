@@ -12,6 +12,138 @@
     transition: 10s;
 }
 
+.lab-pic1{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -232px -103px;
+    background-repeat: no-repeat;
+    height: 22px;
+    width: 21px;
+    float: left;
+    margin-top: 3.5px;
+    margin-left: 9px;
+}
+
+.lab-pic2{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -266px -101px;
+    background-repeat: no-repeat;
+    height: 22px;
+    width: 21px;
+    float: left;
+    margin-top: 2px;
+    margin-left: 9px;
+}
+
+.lab-pic3{ 
+	background-image: url(../../image/css_sprites.png);
+    background-position: -232px -128px;
+    background-repeat: no-repeat;
+    height: 22px;
+    width: 21px;
+    float: left;
+    margin-top: 2px;
+    margin-left: 9px;
+}
+
+.lab-pic4{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -266px -128px;
+    background-repeat: no-repeat;
+    height: 22px;
+    width: 21px;
+    float: left;
+    margin-top: 2px;
+    margin-left: 9px;
+}
+
+.lab-pic5{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -231px -156px;
+    background-repeat: no-repeat;
+    height: 22px;
+    width: 21px;
+    float: left;
+    margin-top: 2px;
+    margin-left: 9px; 
+}
+
+.lab-pic6{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -265px -159px;
+    background-repeat: no-repeat;
+    height: 22px;
+    width: 21px;
+    float: left;
+    margin-top: 5px;
+    margin-left: 9px;
+}
+
+.lab-pic7{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -232px -186px;
+    background-repeat: no-repeat;
+    height: 22px;
+    width: 21px;
+    float: left;
+    margin-top: 4px;
+    margin-left: 9px;
+}
+
+.lab-pic8{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -266px -187px;
+    background-repeat: no-repeat;
+    height: 22px;
+    width: 21px;
+    float: left;
+    margin-top: 4px;
+    margin-left: 9px;
+}
+
+.lab-pic9{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -232px -213px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 20px;
+    float: left;
+    margin-top: 5px;
+    margin-left: 9px;
+}
+
+.lab-pic10{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -267px -214px;
+    background-repeat: no-repeat;
+    height: 14px;
+    width: 14px;
+    float: left;
+    margin-top: 5.5px;
+    margin-left: 9px;
+}
+
+.lab-pic11{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -232px -241px;
+    background-repeat: no-repeat;
+    height: 14px;
+    width: 16px;
+    float: left;
+    margin-top: 5.5px;
+    margin-left: 9px;
+}
+
+.lab-pic12{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -268px -242px;
+    background-repeat: no-repeat;
+    height: 14px;
+    width: 14px;
+    float: left;
+    margin-top: 5.5px;
+    margin-left: 9px;
+}
+
 #radio {
     width: 830px;
     height: 382px;
@@ -73,7 +205,6 @@
 	font-family: MicrosoftYaHei;
 	font-size: 13px;
 	color: #ffffff;
-	text-align: center;
 	cursor: pointer;
 }
 
@@ -86,7 +217,6 @@
 	font-family: MicrosoftYaHei;
 	font-size: 13px;
 	color: #ffffff;
-	text-align: center;
 	cursor: pointer;
 }
 
