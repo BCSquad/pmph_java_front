@@ -274,7 +274,7 @@
 
 .mistake {
     height: 33px;
-    width: 100px;
+    width: 110px;
     float: left;
     margin-left: 10px;
     background-color: #ECF4F6;
@@ -324,31 +324,44 @@
     font-size: 14px;
     color: #489299;
     line-height: 31px;
-    text-align: center;
 }
 
 
 .video {
     width: 260px;
-    height: 140px;
-    background-image: url(../../image/css_sprites.png);
+    height: 230px;
     float: left;
 	position:relative;
+}
+
+.video-name{
+	width: 260px;
+	height: 30px;
+	background-color: #F5F5F5;
+	border-radius:2px;
+	text-align:center;
+	font-family: MicrosoftYaHei-Bold;
+	font-size: 14px;
+	line-height: 30px;
+	color: #182d4c;
+	cursor: pointer;
 }
 
 .video-a{
 	float: left;
 	width: 260px;
-	height: 140px;
+	height: 165px;
 	opacity:0.5;
 	background-color: black;
 	position:absolute;
 	top:0px;
+	cursor: pointer;
 }
 
 .img-a{
 	width: 260px;
-	height: 140px;
+	height: 165px;
+	cursor: pointer;
 }
 
 .longcom {
@@ -800,12 +813,55 @@
 
 .right_6 {
     background-image: url("../../image/css_sprites.png");
-    background-position: -460px -60px;
+    background-position: -413px -274px;
     background-repeat: no-repeat;
-    height: 24px;
-    width: 24px;
+    height: 23px;
+    width: 26px;
     float: left;
-    margin-top: -2.5px;
+    margin-top: 1px;
+}
+
+.mis_pic{  
+	background-image: url("../../image/css_sprites.png");
+    background-position: -373px -203px;
+    background-repeat: no-repeat;
+    height: 22px;
+    width: 22px;
+    float: left;
+    margin-top: 5px;
+    margin-left: 15px;
+}
+
+.play{
+	background-image: url("../../image/css_sprites.png");
+    background-position: -220px -273px;
+    background-repeat: no-repeat;
+    height: 84px;
+    width: 82px;
+    float: left;
+    margin-top: 5px;
+    margin-left: 15px;
+}
+
+.vid_pic{  
+	background-image: url("../../image/css_sprites.png");
+    background-position: -373px -232px;
+    background-repeat: no-repeat;
+    height: 23px;
+    width: 23px;
+    float: left;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.right_6a{
+	background-image: url("../../image/css_sprites.png");
+    background-position: -416px -310px;
+    background-repeat: no-repeat;
+    height: 22px;
+    width: 22px;
+    float: left;
+    margin-top: 3px;
 }
 
 .right_7 {
