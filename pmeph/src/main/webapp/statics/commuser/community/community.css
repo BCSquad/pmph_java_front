@@ -1,0 +1,122 @@
+a{text-decoration: none}
+   .navigation{
+   		height:40px;margin-top:20px;font-size: 16px;color:#9c9c9c
+   }
+   .navigation 	a{
+      color:#9c9c9c
+   }
+   .pagecontent{
+       width:900px;float:left;
+   }
+   .report{
+      border-left:10px solid #499299;width:890px;float:left;height:178px;background-color: #EEEEEE;font-size: 16px;color:#4d4e4e  
+   }
+   .report .left{
+       width:46px;height:100px;float:left;text-align: center;height:178px
+   }
+   .report .center{
+   			width:748px;float:left;margin-top:20px;height:158px;margin-left:10px
+   }
+   .report .center li{
+     border-bottom:1px dashed black;height:35px;vertical-align: bottom
+   }
+   .report .center .tag{
+      float:left;width:20px;height:35px;line-height:35px
+   }
+   .report .center .inleft{
+       float:left;max-width:590px;height:35px;line-height:35px;overflow: hidden;color:#4d4e4e
+   }
+   .report .center .inright{
+       float:right;width:80px;height:35px;line-height:35px
+   }
+   .report .right{
+       float:left;text-align: right;width:70px;height:168px;margin-top:10px
+   }
+   .book{width:900px;float:left;}
+   .book .bhead{
+       float:left;width:900px;height:50px;line-height:50px;font-size: 16px;
+   }
+   .book .bhead .headicon{
+       background-image:url(../../image/css_sprites.png);background-position:-50px -235px;width:20px;height:20px;float:left; margin-top: 15px;
+   }
+   .book .bhead .headtext{
+      float:left;margin-left:10px
+   }
+   .book .booklist{
+       margin:0px auto 0px;width:840px;font-size: 16px;
+   }
+   .book .booklist .item{
+        width:210px;float:left;
+   }
+   .book .booklist .item .itemimg{
+      width:126px;height:126px;margin:20px auto 0px;text-align: center
+   }
+   .book .booklist .item .itemimg img{
+        height:126px;
+   }
+   .book .booklist .item  .bookname{
+       width:190px;height:60px;line-height: 30px;text-align: center;margin:10px auto 0px
+   }
+   .book .booklist .item  .bookname a{
+       color:#343434;
+   }
+   .pageright{
+       float:left;width:300px;height:650px;
+   }
+   .pageright .rhead{
+      height:40px;font-size: 16px;
+   }
+   .pageright .rhead  .item{
+      height:38px;line-height: 38px;float:left;margin-left:20px;cursor: pointer;
+   }
+   .select{
+      border-bottom:2px solid #5A9DA3;
+      color:#444544
+   }
+   .noselect{
+      border-bottom:2px solid #FFFFFF;
+      color:#9c9c9c
+   }
+   .pageright .list{margin-left:20px;width:230px;}
+   .pageright .list .commentli{border-bottom:1px dashed #CCCCCC;height:130px}
+   .pageright .list .commentli .title{
+       font-size: 16px;margin: 10px auto 0px;color:#606060
+   }
+   .pageright .list .commentli .message{
+       font-size: 12px;margin: 5px auto 5px;color:#AFAFAF
+   }
+   .pageright .list .commentli .message span{float:left}
+   .pageright .list .commentli .message .name{margin-right:10px}
+   .pageright .list .commentli .message .scoreimg{
+            background-image: url(../../image/css_sprites.png);
+            background-repeat: no-repeat;
+    		height: 24px;width: 15px;
+   }
+   .yellowstar{
+       background-position: -183px -169px;
+   }
+   .graystar{background-position: -183px -148px;}
+   .pageright .list .commentli .contentext{
+       font-size: 14px;margin: 0;height:66px;width:230px;overflow: hidden;line-height: 22px;color:#5C6878
+   }
+   .pageright .more{
+       margin-top:10px;margin-left:20px;height:20px;width:230px;text-align: center;color:#404243
+   }
+   .pageright .more a{
+      color:#404243
+   }
+   .play{
+       z-index: 110;position: absolute;width: 80px; height: 80px;
+       background-image: url(../../image/css_sprites.png);
+       background-position: -216px -265px;margin-top: 52px;margin-left: 75px;"
+   }
+   .video-a{width:230px;border:1px solid #CCCCCC;height:260px;margin-top:15px}
+   .video-b{z-index:99;position:absolute;background-color: #000;height:184px;width:230px;opacity:0.5;}
+   .video-c{width:230px;background-color: #EEEEEE;height:184px}
+   .video-d{width:210px;border-bottom:1px solid #EEEEEE;height:44px;margin:0px auto 0px;line-height: 44px;font-size: 16px;color:#333333}
+   .video-e{height:30px;width:210px;margin:0px auto 0px;color:#999999;font-size: 14px}
+   .video-f{float:left;line-height: 30px};
+   .video-g{float:right;line-height:30px;margin-left:5px}
+   .video-h{float:right;width:20px;height:30px;
+            background-image: url(../../image/css_sprites.png);
+            background-position:-418px -144px;}

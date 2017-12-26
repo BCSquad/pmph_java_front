@@ -32,7 +32,7 @@ String contextpath=request.getContextPath();
 <div class="content-wrapper">
         <div class="area1"><a href="personalhomepage/tohomepage.action">个人中心</a> &gt; <a href="javascript:;">我的收藏</a> &gt; <a href="articlecollection/toarticlecollection.action">文章收藏夹</a> &gt; ${fmap.favorite_name }</div>
     		<div class="area2">
-        		<span class="name" >${fmap.favorite_name }</span>
+        		<span class="name" >精选书评</span>
         		<span class="del" onclick="delFavorite('${fmap.id }')">删除收藏夹</span>
    		</div>
      <div class="collection" >
