@@ -53,6 +53,8 @@
                     <input type="button" id="uploadFile" value="选择文件">
                 </div>
                 <label class="uploadfile" id="upname">未选择任何文件</label>
+                <input type="hidden" id="attachment"/>
+                <input type="hidden" id="attachment_name"/>
             </div>
             <div class="">
                 <button class="btn">确认</button>
@@ -195,16 +197,19 @@
 	           <div class="video" style="margin-left: 20px">
 	                <img src="${ctx}/statics/image/index.png" class="img-a">
 	                <div class="video-a"></div>
+	                <div class="play"></div>
 	                <div class="video-name">微视频</div>
 	           </div>
 	           <div class="video" style="margin-left: 40px">
 	               <img src="${ctx}/statics/image/index.png" class="img-a">
 	               <div class="video-a" ></div>  
+	               <div class="play"></div>
 	               <div class="video-name">人卫慕课</div> 
 	           </div>
 	           <div class="video" style="margin-left: 40px">
 	                <img src="${ctx}/statics/image/index.png" class="img-a">
 	                <div class="video-a"></div>
+	                <div class="play"></div>
 	                <div class="video-name">考试</div>
 	              </div>
 	           </div>
