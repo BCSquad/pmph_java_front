@@ -35,7 +35,6 @@ public class MaterialDetailController extends BaseController{
 
 
 
-
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailServiceImpl")
 	private MaterialDetailService mdService;
@@ -578,8 +577,8 @@ public class MaterialDetailController extends BaseController{
 		perMap.put("idtype", request.getParameter("idtype"));
 		perMap.put("idcard", request.getParameter("idcard"));
 		perMap.put("org_id", request.getParameter("edu"));
-		perMap.put("update_create", date);	
-		int count = this.mdService.updatePerson(perMap);
+		perMap.put("gmt_create", date);	
+		int count = this.mdService.insertPerson(perMap);
 		if(count>0){ //表示主表已添加
 			List<Map<String,Object>> perList = this.mdService.queryPerson(perMap);
 			Object declaration_id = perList.get(0).get("id");
@@ -892,5 +891,13 @@ public class MaterialDetailController extends BaseController{
 		resultMap.put("msg", msg);
 		return resultMap;
 	}
+	
+	//机构信息选择
+	@RequestMapping("toSearchOrg")
+	public ModelAndView toSearchOrg(HttpServletRequest request,
+			HttpServletResponse response){
+		ModelAndView mav = new ModelAndView("");
+		return mav;
+	} 
 	
 }
