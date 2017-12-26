@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.commuser.community.dao.CommunityDao">
+<resultMap type="java.util.Map" id="baseMap"></resultMap>
+     <!--查询公告列表  --> 
+     <select id="queryNoticeList" parameterType="map" resultMap="baseMap">
+         select 
+            * 
+         from 
+            cms_content cc left join cms_category  ccg  on cc.category_id=ccg.id
+            left join material m on cc.material_id=m.id
+         where 
+            ccg.category_name='公告管理'
+            <if test="searchText !=null" >
+              and  cc.title like #{searchText}
+            </if>
+         ORDER BY  cc.gmt_create  desc
+         limit #{startnum},#{size}
+     </select>
+     
+     <!--id查询公告  -->
+     <select id="queryNoticeById" parameterType="map" resultMap="baseMap">
+        select * from cms_content  where id=#{Id}
+     </select>
+     
+     <!--根据教材id查询社区主页快报列表  -->
+     <select id="queryMaterialNoticeList"  parameterType="map" resultMap="baseMap">
+        select 
+             *  
+        from  
+            cms_content cc left join cms_category  ccg  on cc.category_id=ccg.id 
+       where  
+       		cc.material_id=#{materialId} and ccg.category_name='快报管理'
+      order by 
+            gmt_create desc  
+     limit 0,4
+     </select>
+     
+     <!--根据教材id查询本套教材的图书  -->
+     <select id="queryTextBookList" parameterType="map" resultMap="baseMap">
+        select 
+            tb.id,material_id,tb.textbook_name,tb.gmt_create,b.image_url,b.id as bookId
+        from 
+            textbook tb left join book b on tb.textbook_name=b.bookname
+        where 
+            tb.material_id=#{materialId} and tb.is_published>0
+        order by 
+            tb.sort
+     </select>
+</mapper>
