@@ -156,10 +156,12 @@
                     <a href="#001" style="text-decoration: none"><span id="xsp1">写书评</span></a>
                 </div>
                 <div class="mistake">
-                    <div class="mis_content" onclick="showup()">O图书纠错</div>
+                    <div class="mis_pic"></div>
+                    <div class="mis_content" onclick="showup()">图书纠错</div>
                 </div>
                 <div class="mistake">
-                    <div class="mis_content">O上传微视频</div>
+                    <div class="vid_pic"></div>
+                    <div class="mis_content">上传微视频</div>
                     <input id="upload-video" type="file" class='hidden-upload' name='file'
                            style="width: 0px;height: 33px;padding-left: 100px;">
                 </div>
@@ -186,19 +188,26 @@
             </div>
             <div class="block">
                 <div class="title">
-                    <div class="line"></div>
-                    <div class="rd_name">相关资源</div>
-                </div>
-                <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
-                <div class="aticle">
-                    <div class="video">
-                    </div>
-                    <div class="video" style="margin-left: 40px">
-                    </div>
-                    <div class="video" style="margin-left: 40px">
-                    </div>
-                </div>
-            </div>
+                   <div class="line"></div>
+                   <div class="rd_name">相关资源</div>
+               </div>
+               <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
+	           <div class="video" style="margin-left: 20px">
+	                <img src="${ctx}/statics/image/index.png" class="img-a">
+	                <div class="video-a"></div>
+	                <div class="video-name">微视频</div>
+	           </div>
+	           <div class="video" style="margin-left: 40px">
+	               <img src="${ctx}/statics/image/index.png" class="img-a">
+	               <div class="video-a" ></div>  
+	               <div class="video-name">人卫慕课</div> 
+	           </div>
+	           <div class="video" style="margin-left: 40px">
+	                <img src="${ctx}/statics/image/index.png" class="img-a">
+	                <div class="video-a"></div>
+	                <div class="video-name">考试</div>
+	              </div>
+	           </div>
             <div class="block">
                 <div class="title">
                     <div class="line"></div>
@@ -207,7 +216,7 @@
                 <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 15px;">
                 <div class="pl_add">
                     <textarea class="tarea" id="content"></textarea>
-                    <hr style="border:0.5px solid #B6EFCE;margin-left: 16px;margin-rihgt: 16px;">
+                    <hr style="border:0.05px solid rgba(180, 239, 205, 0.5);margin-left: 16px;margin-rihgt: 16px;">
                     <div class="star_num">星级评分:</div>
                     <div class="scorestar" id="star">
                         <div class="scorestar1" id="score1"></div>
@@ -216,20 +225,7 @@
                         <div class="scorestar1" id="score4"></div>
                         <div class="scorestar1" id="score5"></div>
                     </div>
-                    <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
                     <div class="aticle">
-                        <div class="video">
-                    	    <img src="${ctx}/statics/image/index.png" class="img-a">
-                    	    <div class="video-a"></div>
-	                    </div>
-                   	    <div class="video" style="margin-left: 40px">
-                  	        <img src="${ctx}/statics/image/index.png" class="img-a">
-                  	        <div class="video-a" ></div>   
-                    	</div>
-                    	<div class="video" style="margin-left: 40px">
-                   	       <img src="${ctx}/statics/image/index.png" class="img-a">
-                   	       <div class="video-a"></div>
-                    	</div>
                     <div class="user_score">
                         <!-- <span>评分：</span> -->
                         <span style="color: #FFD200" id="last_score">10.0</span>
@@ -381,6 +377,7 @@
                 </div>
             </div>
         </div>
+        </div>
         <!--右边区域-->
         <div class="rightarea">
             <div class="right_1">
@@ -407,7 +404,7 @@
                     <div class="right_5">
                         <div class="right_6"></div>
                         <div class="right_7">
-                            <span id="span_3">教材相关图书</span>
+                            <span id="span_3">教材关联图书</span>
                         </div>
                     </div>
                     <div class="right_8">
@@ -429,7 +426,7 @@
             <div class="right_3">
                 <div class="right_4">
                     <div class="right_5">
-                        <div class="right_6"></div>
+                        <div class="right_6a"></div>
                         <div class="right_7">
                             <span id="span_3">相关推荐</span>
                         </div>
