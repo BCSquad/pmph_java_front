@@ -704,7 +704,7 @@ color:#FFF;
     margin-bottom: 38px;
 }
 
-#jcsbqb {
+/* #jcsbqb {
     color: white;
     background-image: url(../../image/jcsbqbleft.png);
     background-repeat: no-repeat;
@@ -746,7 +746,7 @@ color:#FFF;
     padding-left: 10px;
     padding-right: 15px;
        
-}
+} */
 
 .jcsbssl {
     height: 40px;
@@ -754,7 +754,7 @@ color:#FFF;
 }
 
 .jcsbsbzt {
-    width: 76px;
+    width: 83px;
     height: 26px;
     background-color: #E6F1F3;
     float: left;
@@ -762,9 +762,14 @@ color:#FFF;
     text-align: center;
     margin-left: 10px;
     color: #03717b;
+    padding-left:0px;
+    padding-right: 8px;
+    line-height: 26px;
+    border:none;
+    outline: none;
 }
 .jcsbsbztxz{
-width: 76px;
+width: 83px;
     height: 26px;
     background-color: #1d8ca0;
     float: left;
@@ -772,6 +777,11 @@ width: 76px;
     text-align: center;
     margin-left: 10px;
     color: #FFF;
+    padding-left:0px;
+    padding-right: 8px;
+    line-height: 26px;
+    border:none;
+    outline: none;
 }
 .leftlb {
 	width: 425px;
@@ -1130,43 +1140,47 @@ width: 76px;
     margin-top: 20px;
 }
 
-/**ÎÒÒª³öÊé**/ 
-#ytg1 {
+/**ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½**/ 
+.ytg1 {
     background-image: url(../../image/css_sprites.png);
-    background-position: -333px -290px;
+    background-position: -333px -289px;
     height: 20px;
     width: 20px;
     background-repeat: no-repeat;
     float: right;
+    margin-top: 3px;
 }
 
-#ytj1 {
+.ytj1 {
     background-image: url(../../image/css_sprites.png);
-    background-position: -333px -243px;
+    background-position: -333px -242.5px;
     height: 20px;
     width: 20px;
     background-repeat: no-repeat;
     float: right;
+    margin-top: 3px;
 }
-#yzc1 {
+.yzc1 {
     background-image: url(../../image/css_sprites.png);
     background-position: -333px -218px;
     height: 20px;
     width: 20px;
     background-repeat: no-repeat;
     float: right;
+    margin-top: 3px;
 }
-#btg1 {
+.btg1 {
     background-image: url(../../image/css_sprites.png);
-    background-position: -333px -267px;
+    background-position: -333px -265.5px;
     height: 20px;
     width: 20px;
     background-repeat: no-repeat;
     float: right;
+    margin-top: 3px;
 }
-#ytg {
+.ytg {
     background-image: url(../../image/css_sprites.png);
-    background-position: -333px -290px;
+    background-position: -333px -289px;
     height: 20px;
     width: 20px;
     background-repeat: no-repeat;
@@ -1174,9 +1188,9 @@ width: 76px;
     margin-top:3px;
     float: left;
 }
-#ytj {
+.ytj {
     background-image: url(../../image/css_sprites.png);
-    background-position: -333px -243px;
+    background-position: -333px -242.5px;
     height: 20px;
     width: 20px;
     background-repeat: no-repeat;
@@ -1184,7 +1198,7 @@ width: 76px;
     margin-top:3px;
     float: left;
 }
-#yzc {
+.yzc {
     background-image: url(../../image/css_sprites.png);
     background-position: -333px -218px;
     height: 20px;
@@ -1194,9 +1208,9 @@ width: 76px;
     margin-top:3px;
     float: left;
 }
-#btg {
+.btg {
     background-image: url(../../image/css_sprites.png);
-    background-position: -333px -267px;
+    background-position: -333px -265.5px;
     height: 20px;
     width: 20px;
     background-repeat: no-repeat;
@@ -1231,10 +1245,16 @@ width: 76px;
 	font-family: MicrosoftYaHei;
 	font-size: 16px;
 	font-weight: bold;
+	width: 300px;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+    height: 22px;
 }
 
 .left_content{
 	font-family: MicrosoftYaHei;
+	font-size:15px;
 	color: #848484;
 }
 
@@ -1247,10 +1267,14 @@ width: 76px;
 .left_zt{
 	float: right;
 	margin-right: 5px;
+	font-size: 12px;
+	line-height: 26px;
+	color: #848484;
 }
 
 .left_herf{
 	text-align: center;
 	margin-top: 60px;
 	font-family: MicrosoftYaHei;
+	color: #73adad;
 }

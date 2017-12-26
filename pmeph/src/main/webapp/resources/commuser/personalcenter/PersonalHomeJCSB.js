@@ -19,6 +19,14 @@
 		  }
 	  }
 	  
+	  if ($("#pageinfo1").val()!=null && $("#pageinfo1").val()!='') {
+		$("#jcsbqb").removeClass("active");
+		$("#jcsbwdsb").removeClass("active");
+		$("#"+$("#pageinfo1").val()).addClass("active");
+	}
+	  
+	  
+	  
 	  $("#wdsbssk").keyup(function(event){
 			if(event.keyCode ==13){ //回车键弹起事件
 				window.location.href=contextpath+'personalhomepage/tohomepage.action?pagetag=jcsb&bookname='+$("#wdsbssk").val();
@@ -28,10 +36,7 @@
 });
 
 function listoction(thisclicked,s){
-	window.location.href=contextpath+'personalhomepage/tohomepage.action?pagetag=jcsb&bookname='+$("#wdsbssk").val()+"&&s="+s;
-	$("#jcsbqb").removeClass("active");
-	$("#jcsbwdsb").removeClass("active");
-	$(thisclicked).addClass("active");
+	window.location.href=contextpath+'personalhomepage/tohomepage.action?pagetag=jcsb&bookname='+$("#wdsbssk").val()+"&&s="+s+"&pageinfo1="+$(thisclicked).attr('id');
 }
 function listoction1(){
 	window.location.href=contextpath+'personalhomepage/tohomepage.action?pagetag=jcsb&bookname='+$("#wdsbssk").val()+"&&dateinfo=1&&pageinfo=1";
@@ -52,4 +57,12 @@ function listoction4(){
 function listoction5(){
 	window.location.href=contextpath+'personalhomepage/tohomepage.action?pagetag=jcsb&bookname='+$("#wdsbssk").val()+"&&pageinfo=5";
 	document.getElementById("qktj").className = "jcsbsbztxz";
+}
+
+/**
+ * 打开第一主编选择编委界面
+ * @param textbook_id
+ */
+function chooseEditor(textbook_id){
+	window.open(contextpath+"chooseEditor/toPage.action?textBookId="+textbook_id);
 }

@@ -1,3 +1,4 @@
+<script src="${contextpath}resources/commuser/personalcenter/PersonalHomeJCSB.js"></script>
 #set($objectNum =$!{startNum})
 
 <input type="hidden" class="queryCondition" id="s" value="$!{s}">
@@ -6,6 +7,7 @@
 <input type="hidden" class="queryCondition" id="online_progress" value="$!{online_progress}">
 <input type="hidden" class="queryCondition" id="bookname" value="$!{bookname}">
 <input type="hidden" class="queryCondition" id="is_staging" value="$!{is_staging}">
+<input type="hidden" class="queryCondition" id="pageinfo1" value="$!{pageinfo1}">
 
 <div class="jcsbssl">
 	<input type="hidden" id="pageinfo" value="$!{para.pageinfo}">
@@ -16,7 +18,7 @@
     <span class="jcsbsbzt" id="sbzc" onclick="listoction3();" style="cursor:pointer">暂存</span>
     <span class="jcsbsbzt" id="sbytj" onclick="listoction4();" style="cursor:pointer">已提交</span>
     <span class="jcsbsbzt" id="qktj" onclick="listoction5();" style="cursor:pointer">全部</span>
-    <input type="text" id="wdsbssk" value="$!{para.bookname}">
+    <input type="text" id="wdsbssk" value="$!{para.bookname}" placeholder="公告搜索">
 </div>
 
 
@@ -72,7 +74,11 @@
                 </div>
                 <div class="bmcj3">
                     <div class="bmcjan3"><span>已结束</span></div>
+                    <a class="abmcj" href="$!{contextpath}">
+                		<div class="bmcjan4">查看编写进度</div>
+                	</a>
                 </div>
+                
             </div>
 		#end
 
@@ -86,7 +92,11 @@
                 </div>
                 <div class="rxia">
                     <div class="rxian">截止日期：$!{c.age_deadline}</div>
+                    #if(${c.notNullIfFirstManager}&&$!{c.datebase}<0)
+	                	<div class="btn-chooseEditor" onclick="chooseEditor('$!{c.textbook_id}')">选编委>></div>
+	                #end
                 </div>
+                
             </div>
 	</li>
 		

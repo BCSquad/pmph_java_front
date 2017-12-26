@@ -17,7 +17,7 @@
     <script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js"></script>
     <script src="<%=path%>/resources/comm/jquery/jquery.pager.js"></script>
     <script src="${ctx}/resources/commuser/personalcenter/PersonalHome.js"></script>
-    <script src="${ctx}/resources/commuser/personalcenter/PersonalHomeJCSB.js"></script>
+    <%-- <script src="${ctx}/resources/commuser/personalcenter/PersonalHomeJCSB.js"></script> --%>
     <script src="${ctx}/resources/comm/base.js"></script>
 
 
@@ -33,12 +33,13 @@
 	<input type="hidden" class="" id="pageNum" value="${pageNum }">
 	<input type="hidden" class="" id="maxPageNum" value="${maxPageNum }">
 	<input type="hidden" class="" id="pageSize" value="${pageSize }">
+	<input type="hidden" class="" id="pageType" value="${pageType }">
 	
 	<!-- 查询条件 -->
 		<!-- 我要出书 -->
-	<input type="hidden" class="queryCondition" id="queryName" value="${queryName }">
+	<%-- <input type="hidden" class="queryCondition" id="queryName" value="${queryName }">
 	<input type="hidden" class="queryCondition" id="auth_progress" value="${auth_progress }">
-	<input type="hidden" class="queryCondition" id="is_staging" value="${is_staging }">
+	<input type="hidden" class="queryCondition" id="is_staging" value="${is_staging }"> --%>
 	
 		<!-- 教材申报 -->
 	<%-- <input type="hidden" class="queryCondition" id="s" value="${s }">
@@ -80,14 +81,14 @@
         <div class="content">
             <div class="left">
                 <ul class="dhl">
-                    <li id="dt" class="dtl pagetag"><a class="aher" href="${ctx}/personalhomepage/tohomepage.action?pagetag=dt">动态</a></li>
+                    <li id="dt" class="dtl pagetag"><a class="aher paged" href="${ctx}/personalhomepage/tohomepage.action?pagetag=dt">动态</a></li>
                     <li id="jcsb" class="dtl pagetag"><a class="aher paged" >教材申报</a></li>
-                    <li id="sbwz" class="dtl pagetag"><a class="aher" href="${ctx}/personalhomepage/tohomepagetwo.action">随笔文章</a></li>
-                    <li id="tsjc" class="dtl pagetag"><a class="aher" href="${ctx}/personalhomepage/tohomepage.action?pagetag=tsjc">图书纠错</a></li>
+                    <li id="sbwz" class="dtl pagetag"><a class="aher paged">随笔文章</a></li>
+                    <li id="tsjc" class="dtl pagetag"><a class="aher paged">图书纠错</a></li>
                     <li id="wycs" class="dtl pagetag"><a class="aher paged"  >我要出书</a></li>
-					<li id="wdjc" class="dtl pagetag"><a class="aher" href="${ctx}/personalhomepage/tohomepage.action?pagetag=wdjc">我的纠错</a></li>
-                    <li id="wdpl" class="dtl pagetag"><a class="aher" href="${ctx}/personalhomepage/tohomepagethe.action">我的评论</a></li>
-                    <li id="wdwj" class="dtl pagetag"><a class="aher" href="${ctx}/personalhomepage/tohomepage.action?pagetag=wdwj">我的问卷</a></li>
+					<li id="wdjc" class="dtl pagetag"><a class="aher paged" href="${ctx}/personalhomepage/tohomepage.action?pagetag=wdjc">我的纠错</a></li>
+                    <li id="wdpl" class="dtl pagetag"><a class="aher paged" href="${ctx}/personalhomepage/tohomepagethe.action">我的评论</a></li>
+                    <li id="wdwj" class="dtl pagetag"><a class="aher paged" href="${ctx}/personalhomepage/tohomepage.action?pagetag=wdwj">我的问卷</a></li>
                     <%-- <li id="zxsp" class="dtl"><a class="aher"
                                                  href="${ctx}/personalhomepage/tohomepagethe.action">最新书评</a></li> --%>
                 </ul>
@@ -95,8 +96,11 @@
 
                 <div id="leftContent">
                 	
+                	
+                	
+                	
                 	${html }
-                	<c:forEach items="${List_map }" var="t">
+                	<%-- <c:forEach items="${List_map }" var="t">
                 		<div style="border:1px black solid">${t.id}
 							${t.bookname}
 							${t.deadline}
@@ -105,7 +109,14 @@
 							${t.gmt_create}
 							${t.auth_progress }
 						</div>
-                	</c:forEach>
+                	</c:forEach> --%>
+                	
+                	<c:if test="${listCount == 0 }">
+                		<div class="no-more">
+	                        <img src="<c:url value="/statics/image/aaa4.png"></c:url>">
+	                        <span>木有内容呀~~</span>
+	                    </div>
+                	</c:if>
                 	
                 	<div class="pageDiv" >
 	                    <ul class="pagination" id="page1">
@@ -126,7 +137,6 @@
 	                        <button type="button" class="button">确定</button>
 	                    </div>
 	                </div>
-                	
                 </div>
 
 
