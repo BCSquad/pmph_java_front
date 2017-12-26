@@ -327,10 +327,7 @@
     text-align: center;
 }
 
-.video{
-	width: 260px;
-	height: 140px;
-	float: left;
+
 .video {
     width: 260px;
     height: 140px;
@@ -354,8 +351,6 @@
 	height: 140px;
 }
 
-.longcom{
-	float:left;
 .longcom {
     float: left;
     font-family: MicrosoftYaHei;
@@ -815,6 +810,7 @@
 
 .right_7 {
 
+}
 
 #span_3 {
     font-family: MicrosoftYaHei;

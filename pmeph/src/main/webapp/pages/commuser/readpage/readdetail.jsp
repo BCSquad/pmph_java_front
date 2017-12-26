@@ -11,9 +11,9 @@
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <link href="${ctx}/statics/css/base.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
-    <link href="${ctx}/statics/commuser/readpage/readdetail.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/resources/comm/layui/css/layui.css">
+    <link href="${ctx}/statics/commuser/readpage/readdetail.css" type="text/css" rel="stylesheet">
     <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery-validate.js" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js" type="text/javascript"></script>
@@ -28,37 +28,6 @@
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="body">
     <input type="hidden" value="${map.type}" id="type_id">
-	<div class="content-wrapper">
-	     <input type="hidden" id="book_id" value="${id}">
-	     <input type="hidden" id="marks" value="${map.bookmarks}">
-	     <!-- 图书纠错悬浮框 -->
-	     <div class="bookmistake" id="bookmistake">
-	         <div class="apache">
-	            <div class="mistitle">纠错</div>
-	            <div class="x" onclick="hideup()">X</div>
-	         </div>
-	         <div class="input">
-	             <label style="margin-left: 20px" class="labell">页码&nbsp;:&nbsp;</label>
-	             <input type="text" class="text" id="page"/>
-	             <label style="margin-left: 10px" class="labell">行数&nbsp;:&nbsp;</label>
-	             <input type="text" class="text" id="line"/>
-	         </div>
-	         <div class="info">
-	             <label style="margin-left: 20px" class="labell">纠错内容&nbsp;:&nbsp;</label>
-	             <textarea class="misarea" id="content"></textarea>
-	         </div>
-	         <div class="upload">
-	            <label style="margin-left: 20px" class="labell">纠错内容附件&nbsp;:&nbsp;</label>
-	            <div style="position: relative">
-	                <input type="button" id="uploadFile" value="选择文件">
-	            </div>
-	            <label class="uploadfile" id="upname">未选择任何文件</label>
-	         </div>
-	         <div class="">
-	              <button class="btn" onclick="correction()">确认</button>
-	         </div>
-	     </div>
-		<!--左边区域-->
     <div class="content-wrapper">
         <input type="hidden" id="book_id" value="${id}">
         <input type="hidden" id="marks" value="${map.bookmarks}">

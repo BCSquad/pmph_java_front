@@ -88,7 +88,7 @@ $(function () {
             }
         },
         progressall: function (e, data) {
-            console.log(e.delegatedEvent, data);
+           // console.log(e.delegatedEvent, data);
             element.progress('demo', ( Math.round((data.loaded / data.total * 1000), 1) / 10).toFixed(1) + '%')
         }
     });
@@ -294,8 +294,9 @@ function addmark() {
 }
 
 //跳转到写文章页面
-function writeablut(){
-	location.href=contextpath+'readdetail/todetail.action?state=write&&id='+$("#book_id").val();
+function writeablut() {
+    location.href = contextpath + 'readdetail/todetail.action?state=write&&id=' + $("#book_id").val();
+}
 function writeablut() {
     location.href = contextpath + 'readdetail/towritecom.action';
 }
@@ -311,27 +312,26 @@ function hideup() {
 }
 
 //图书纠错
-function correction(){
-	var json={
-		book_id:$("book_id").val(),
-		page:$("page").val(),
-		content:$("content").val(),
-		attachment_name:$("upname").val(),
-	};
-	$.ajax({
-		type:'post',
-		url:contextpath+'readdetail/correction.action',
-		data:json,
-		async:false,
-		dataType:'json',
-		success:function(json){
-				if(json=="OK"){
-					alert('成功');
-				}else{
-					alert(132);
-				}
-		}
-	});
-   }
+function correction() {
+    var json = {
+        book_id: $("book_id").val(),
+        page: $("page").val(),
+        content: $("content").val(),
+        attachment_name: $("upname").val(),
+    };
+    $.ajax({
+        type: 'post',
+        url: contextpath + 'readdetail/correction.action',
+        data: json,
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+            if (json == "OK") {
+                alert('成功');
+            } else {
+                alert(132);
+            }
+        }
+    });
 }
 
