@@ -7,6 +7,8 @@ $(function () {
         done: function (filename, fileid) {
             console.log("上传完成：name " + filename + " fileid " + fileid);
             $("#upname").html(filename);
+            $("#attachment").val(fileid);
+            $("#attachment_name").val(filename);
         },
         progressall: function (loaded, total, bitrate) {
             console.log("正在上传。。。" + loaded / total);
@@ -297,9 +299,6 @@ function addmark() {
 function writeablut() {
     location.href = contextpath + 'readdetail/todetail.action?state=write&&id=' + $("#book_id").val();
 }
-function writeablut() {
-    location.href = contextpath + 'readdetail/towritecom.action';
-}
 
 //点击显示纠错弹窗
 function showup() {
@@ -317,7 +316,8 @@ function correction() {
         book_id: $("book_id").val(),
         page: $("page").val(),
         content: $("content").val(),
-        attachment_name: $("upname").val(),
+        attachment: $("attachment").val(),
+        attachment_name: $("attachment_name").val(),
     };
     $.ajax({
         type: 'post',
@@ -327,9 +327,9 @@ function correction() {
         dataType: 'json',
         success: function (json) {
             if (json == "OK") {
-                alert('成功');
+            	window.message.info("数据已提交！");
             } else {
-                alert(132);
+            	window.message.info("错误，请填写完所有内容！");
             }
         }
     });
