@@ -21,7 +21,9 @@ import com.bc.pmpheep.general.controller.BaseController;
 @Controller
 @RequestMapping(value="/survey")
 public class SurveyController extends BaseController{
-	
+
+
+
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.survey.service.SurveyServiceImpl")
 	SurveyService surveyService; 
