@@ -36,4 +36,9 @@ public interface CommunityService {
      * @return
      */
     List<Map<String,Object>> queryTextBookList(Long id );
+    /**查询社区主页精选书评
+     * @param id 教材id
+     * @return  List<Map<String,Object>>
+     */
+    List<Map<String,Object>> querySomeComment(Long id);
 }

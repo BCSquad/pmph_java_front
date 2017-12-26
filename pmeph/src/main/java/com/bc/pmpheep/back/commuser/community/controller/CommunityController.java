@@ -58,7 +58,7 @@ public class CommunityController {
 	}
 	
 	/**
-	 * 到教材社区列表界面
+	 * 到教材社区主界面
 	 */
 	@RequestMapping("/toCommunity")
 	public ModelAndView toCommunity(HttpServletRequest req){
@@ -66,10 +66,22 @@ public class CommunityController {
 		Map<String,Object> notice=communityService.queryNoticeById(noticeId);
 		List<Map<String,Object>> reportlist=communityService.queryMaterialNoticeList(Long.valueOf(notice.get("material_id").toString()));
 		List<Map<String,Object>> booklist=communityService.queryTextBookList(Long.valueOf(notice.get("material_id").toString()));
+		List<Map<String,Object>> someComments=communityService.querySomeComment(Long.valueOf(notice.get("material_id").toString()));
 		Map<String,Object> map=new HashMap<>();
 		map.put("notice", notice);
 		map.put("reportlist", reportlist);
 		map.put("booklist", booklist);
+		map.put("someComments", someComments);
 		return new ModelAndView("commuser/community/community",map);
+	}
+	
+	@RequestMapping("/getComments")
+	@ResponseBody
+	public Map<String,Object> getComments(HttpServletRequest req){
+		Map<String,Object> map=new HashMap<String, Object>();
+		Long materialId=Long.valueOf(req.getParameter("materialId"));
+		List<Map<String,Object>> comments=communityService.querySomeComment(materialId);
+		map.put("comments", comments);
+		return map;
 	}
 }

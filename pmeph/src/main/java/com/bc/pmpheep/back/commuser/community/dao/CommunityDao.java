@@ -36,4 +36,9 @@ public interface CommunityDao {
      * @return
      */
     List<Map<String,Object>> queryTextBookList(@Param("materialId") Long id );
+    /**查询社区主页精选书评
+     * @param id 教材id
+     * @return  List<Map<String,Object>>
+     */
+    List<Map<String,Object>> querySomeComment(@Param("materialId") Long id);
 }

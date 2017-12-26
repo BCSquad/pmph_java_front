@@ -53,5 +53,10 @@ public class CommunityServiceImpl implements CommunityService {
 		// TODO Auto-generated method stub
 		return communityDao.queryTextBookList(id);
 	}
+	@Override
+	public List<Map<String, Object>> querySomeComment(Long id) {
+		// TODO Auto-generated method stub
+		return communityDao.querySomeComment(id);
+	}
 
 }

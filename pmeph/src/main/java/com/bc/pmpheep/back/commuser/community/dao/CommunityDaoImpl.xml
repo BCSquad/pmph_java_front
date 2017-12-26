@@ -47,4 +47,17 @@
         order by 
             tb.sort
      </select>
+     
+     <!--查询社区主页精选书评  -->
+     <select id="querySomeComment" parameterType="map" resultMap="baseMap">
+        select c.*,bk.bookname,w.realname  from book_user_comment c left join book bk on c.book_id=bk.id   left join  writer_user w on c.writer_id=w.id
+		where c.book_id in(
+			select b.id from material m left join textbook t on m.id=t.material_id
+			left join book b  on t.textbook_name=b.bookname 
+			where m.id=#{materialId}
+		) and c.is_auth>0  and c.is_deleted=0
+		ORDER BY
+		 c.score
+		limit 0,4
+     </select>
 </mapper>
