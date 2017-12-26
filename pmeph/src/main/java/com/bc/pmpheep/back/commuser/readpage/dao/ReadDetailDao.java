@@ -43,6 +43,11 @@ public interface ReadDetailDao {
 	 */
 	void insertComment(Map<String, Object> map);
 	/**
+	 * 新增图书纠错
+	 * @param map
+	 */
+	int correction(Map<String, Object> map);
+	/**
 	 * 根据作者查询该作者写的书
 	 * @param author
 	 * @return List<Map<String,Object>>

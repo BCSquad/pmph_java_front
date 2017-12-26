@@ -147,4 +147,24 @@
 	<delete id="deleteMark" parameterType="map" >
 	    delete from book_user_mark where writer_id=#{writerId} and  favorite_id=#{favoriteId} and book_id=#{bookId}
 	</delete>
+	<!-- 新增图书纠错 -->
+	<insert id="correction" parameterType="java.util.Map">
+	    insert into book_correction (
+	    book_id,
+	    user_id,
+	    page,
+	    line,
+	    content,
+	    attachment,
+	    attachment_name
+	    )values(
+	    #{book_id},
+	    #{user_id},
+	    #{page},
+	    #{line},
+	    #{content},
+	    #{attachment},
+	    #{attachment_name}
+	    );
+	</insert>
 </mapper>
