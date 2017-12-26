@@ -13,8 +13,6 @@
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.js"></script>
     <script src="${ctx}/resources/commuser/personalcenter/PersonalHome.js"></script>
   <script src="${ctx}/resources/comm/base.js"></script>
-
-
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp">

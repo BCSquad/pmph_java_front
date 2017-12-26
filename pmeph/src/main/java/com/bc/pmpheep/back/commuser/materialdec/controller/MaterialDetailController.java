@@ -35,6 +35,7 @@ public class MaterialDetailController extends BaseController{
 
 
 
+
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailServiceImpl")
 	private MaterialDetailService mdService;
