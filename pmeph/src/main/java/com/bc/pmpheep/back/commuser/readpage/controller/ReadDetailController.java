@@ -13,6 +13,7 @@ import javax.ws.rs.PUT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -122,15 +123,48 @@ public class ReadDetailController extends BaseController{
 		modelAndView.addObject("listCom", listCom);
 		modelAndView.addObject("frList", frList);
 		modelAndView.addObject("start", 2);
-		modelAndView.setViewName("commuser/readpage/readdetail");
+		if(null!=(request.getParameter("state"))){
+			modelAndView.setViewName("commuser/readpage/writecom");
+		}else{
+			modelAndView.setViewName("commuser/readpage/readdetail");
+		}
 		return modelAndView;
 	}
 	
-	@RequestMapping("/towritecom")
-	public ModelAndView towritecom(){
-		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("commuser/readpage/writecom");
-		return modelAndView;
+	/**
+	 * 新增图书纠错
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/correction")
+	@ResponseBody
+	public String correction(HttpServletRequest request){
+		String returncode="";
+		Map<String, Object> map = new HashMap<String, Object>();
+		String book_id=request.getParameter("book_id");
+		String user_id=request.getParameter("user_id");
+		String page=request.getParameter("page");
+		String content=request.getParameter("content");
+		String attachment=request.getParameter("attachment");
+		String attachment_name=request.getParameter("attachment_name");
+		if(StringUtils.isEmpty(book_id)||
+			StringUtils.isEmpty(user_id)||	
+			StringUtils.isEmpty(page)||
+			StringUtils.isEmpty(content)||
+			StringUtils.isEmpty(attachment)||
+			StringUtils.isEmpty(attachment_name)){
+			returncode="NO";
+		}else{
+			Map<String, Object> user=getUserInfo();
+			map.put("user_id", user.get("id"));
+			map.put("book_id", book_id);
+			map.put("page", page);
+			map.put("content", content);
+			map.put("attachment", attachment);
+			map.put("attachment_name", attachment_name);
+			returncode=readDetailService.correction(map);
+		}
+		return returncode;
 	}
 	
 	/**
