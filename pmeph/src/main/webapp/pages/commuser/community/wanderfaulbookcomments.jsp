@@ -19,57 +19,132 @@ String contextpath=request.getContextPath();
     <link rel="stylesheet" href="<%=path%>/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="<%=path%>/statics/css/jquery.pager.css"/>
     <link rel="stylesheet" href="<%=path%>/statics/css/jquery.selectlist.css"/>
-    <%--  <link rel="stylesheet" href="<%=path%>/statics/commuser/community/communitylist.css" type="text/css"> --%>
+    <link rel="stylesheet" href="<%=path%>/statics/commuser/community/wanderfaulbookcomments.css" type="text/css">
     <script src="<%=path%>/resources/comm/jquery/jquery.js"></script>
     <script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js"></script>
     <script src="<%=path%>/resources/comm/jquery/jquery.pager.js"></script>
     <script src="<%=path%>/resources/comm/base.js"></script>
-    <link rel="stylesheet" href="<%=path %>/statics/commuser/collection/articlelist.css"/>
     <%-- <script src="<%=path%>/resources/commuser/community/communitylist.js"></script> --%>
 </head>
+<style type="text/css">
+  
+</style>
 <body>
-            <jsp:include page="/pages/comm/head.jsp"></jsp:include> 
+            <jsp:include page="/pages/comm/head.jsp"></jsp:include>
+<div style="background-color: #f6f6f6;padding-top:28px;padding-bottom:130px"> 
 <div class="content-wrapper">
-        <div class="area1"><a href="personalhomepage/tohomepage.action">个人中心</a> &gt; <a href="javascript:;">我的收藏</a> &gt; <a href="articlecollection/toarticlecollection.action">文章收藏夹</a> &gt; ${fmap.favorite_name }</div>
-    		<div class="area2">
+    	<div class="area2">
+        		<div class="namehead">
         		<span class="name" >精选书评</span>
-        		<span class="del" onclick="delFavorite('${fmap.id }')">删除收藏夹</span>
+        		</div>
    		</div>
-     <div class="collection" >
-        <div class="title">
-               <div class="title-text">
-                   <a href="#"> 的电视剧电视剧接到街道上的</a>
-               </div>
-               <div class="tm">
-                   <span class="author-icon" style="background-image: url(${ctx}/statics/image/deficon.png); ">
-                   </span>
-                   <span class="name">海慧寺</span>
-                   <span class="time">2017-12-25</span>
-               </div>
-        </div>
+     <div style="margin-top:25px">
+     <div class="collection">
         <div class="content">
             <div  class="content-img">
                 <img src="${article.imgpath }"/>
             </div>
-            <div  class="content-text" >
+            <div  class="content-text">
                 <div class="text">
                                                                              鸡蛋减肥法冬季减肥就发电机风机电机东方反对开口问哦饿哦我id到时看看地方看看疯狂的疯狂开发贷款房价跌哦日欸惹库房库管库管库管看看哥哥
                 </div>
+                <div class="message">
+                   <div class="personicon"></div>
+                   <div class="username">张三</div>
+                   <div class="staricon" >
+    		       </div>
+    		        <div class="staricon">
+    		       </div>
+    		        <div class="staricon">
+    		       </div>
+    		        <div class="staricon">
+    		       </div>
+    		        <div class="staricon">
+    		       </div>
+                </div>
                 <div class="end">
-                    <div class="foot">
-                        <span class="span1" onclick="">取消收藏</span>
-                        <span class="span2" >36</span>
-                        <span class="smicon comment"></span>
-                        <span class="span3" >11</span>
-                        <span class="smicon good" ></span>
-                        <span class="span2">55</span>
-                        <span class="smicon look"></span>
-                    </div>
+                                                                健康水健康水等级考试的角色等级考试的健康都换积分兑换积分兑换积分兑换话费的环境黑胡椒粉的机会发动机发动机回家的话就是觉得和计算机和环境和精神上的
                 </div>
             </div>
         </div>
     </div>
+    
+   <div class="collection">
+        <div class="content">
+            <div  class="content-img">
+                <img src="${article.imgpath }"/>
+            </div>
+            <div  class="content-text">
+                <div class="text">
+                                                                             鸡蛋减肥法冬季减肥就发电机风机电机东方反对开口问哦饿哦我id到时看看地方看看疯狂的疯狂开发贷款房价跌哦日欸惹库房库管库管库管看看哥哥
+                </div>
+                <div class="message">
+                   <div class="personicon"></div>
+                   <div class="username">张三</div>
+                   <div class="staricon" >
+    		       </div>
+    		        <div class="staricon">
+    		       </div>
+    		        <div class="staricon">
+    		       </div>
+    		        <div class="staricon">
+    		       </div>
+    		        <div class="staricon">
+    		       </div>
+                </div>
+                <div class="end">
+                                                                健康水健康水等级考试的角色等级考试的健康都换积分兑换积分兑换积分兑换话费的环境黑胡椒粉的机会发动机发动机回家的话就是觉得和计算机和环境和精神上的
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div style="height:70px;padding-top:30px;background-color: #ffffff;">
+    <div style="text-align: right;">
+	        <ul class="pagination" id="page1">
+	        </ul>
+	        <div style="display: inline-block;vertical-align: top;text-align:left;">
+	            <select id="edu" name="edu">
+	                <option value="5"  >每页5条</option>
+	                <option value="10" >每页10条</option>
+	                <option value="15" >每页15条</option>
+	                <option value="20">每页20条</option>
+	            </select>
+	        </div>
+	        <div class="pageJump">
+	            <span>共10页，共10条数据，跳转到</span>
+	            <input type="text"/>
+	            <span class="pp">页</span>
+	            <button type="button" class="button">确定</button>
+	        </div>
+	    </div>
+   </div>
+   </div>
+   
    </div>          
             <jsp:include page="/pages/comm/tail.jsp"></jsp:include> 
 </body>
+<script type="text/javascript">
+$(function(){
+	Page({
+        num:10,					
+        startnum: 1,
+        elem:$("#page1"),
+        callback: function (n) {
+        
+        }
+ });
+$('select').selectlist({
+    zIndex: 10,
+    width: 110,
+    height: 30,
+    optionHeight: 30,
+    onChange: function () {
+    	
+    }  //自定义模拟选择列表项chang
+});
+	
+});
+
+</script>
 </html>

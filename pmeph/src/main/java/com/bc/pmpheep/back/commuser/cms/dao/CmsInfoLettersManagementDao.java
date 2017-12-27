@@ -33,7 +33,7 @@ public interface CmsInfoLettersManagementDao {
 	 * @return
 	 *
 	 */
-	Integer getCmsInfoLettersListTotal();
+	Integer getCmsInfoLettersListTotal(@Param("materialId") Long materialId);
 
 	/**
 	 * 
@@ -43,5 +43,6 @@ public interface CmsInfoLettersManagementDao {
 	 * @return
 	 *
 	 */
-	List<CmsInfoLettersList> list(@Param("start")Integer start, @Param("pageSize")Integer pageSize,@Param("order")Integer order);
+	List<CmsInfoLettersList> list(@Param("start")Integer start, @Param("pageSize")Integer pageSize,
+			@Param("order")Integer order,@Param("materialId") Long materialId);
 }

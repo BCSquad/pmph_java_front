@@ -18,7 +18,7 @@ a{text-decoration: none}
    			width:748px;float:left;margin-top:20px;height:158px;margin-left:10px
    }
    .report .center li{
-     border-bottom:1px dashed black;height:35px;vertical-align: bottom
+     border-bottom:1px dashed #c9c9c9;height:35px;vertical-align: bottom
    }
    .report .center .tag{
       float:left;width:20px;height:35px;line-height:35px
@@ -31,6 +31,9 @@ a{text-decoration: none}
    }
    .report .right{
        float:left;text-align: right;width:70px;height:168px;margin-top:10px
+   }
+   .report .right a{
+   			color: #4d4e4e;
    }
    .book{width:900px;float:left;}
    .book .bhead{

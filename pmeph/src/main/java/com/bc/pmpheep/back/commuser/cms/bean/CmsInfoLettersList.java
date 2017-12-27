@@ -59,6 +59,18 @@ public class CmsInfoLettersList {
 	 * 审核时间
 	 */
 	private Timestamp authDate;
+    /**
+     * 创建时间
+     */
+    private Timestamp gmtCreate;
+    
+	public Timestamp getGmtCreate() {
+		return gmtCreate;
+	}
+
+	public void setGmtCreate(Timestamp gmtCreate) {
+		this.gmtCreate = gmtCreate;
+	}
 
 	public Long getId() {
 		return id;

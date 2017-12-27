@@ -46,6 +46,7 @@
             tb.material_id=#{materialId} and tb.is_published>0
         order by 
             tb.sort
+        limit 0,10
      </select>
      
      <!--查询社区主页精选书评  -->

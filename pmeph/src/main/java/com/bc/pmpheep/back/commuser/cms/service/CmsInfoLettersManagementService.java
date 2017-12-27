@@ -31,7 +31,7 @@ public interface CmsInfoLettersManagementService {
 	 * @return
 	 *
 	 */
-	List<CmsInfoLettersList> list(Integer pageSize, Integer pageNumber,Integer order) ;
+	List<CmsInfoLettersList> list(Integer pageSize, Integer pageNumber,Integer order,Long materialId) ;
 	
 	/**
 	 * 获取前台获取信息快报列表总数
@@ -42,6 +42,6 @@ public interface CmsInfoLettersManagementService {
 	 * @param pageParameter
 	 * @return
 	 */
-	Integer getCmsInfoLettersListTotal(Integer pageSize, Integer pageNumber) ;
+	Integer getCmsInfoLettersListTotal(Integer pageSize, Integer pageNumber,Long materialId) ;
 
 }

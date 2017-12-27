@@ -75,6 +75,9 @@ public class CommunityController {
 		return new ModelAndView("commuser/community/community",map);
 	}
 	
+	/**
+	 * 获取社区主页右边的精彩视屏列表
+	 */
 	@RequestMapping("/getComments")
 	@ResponseBody
 	public Map<String,Object> getComments(HttpServletRequest req){
@@ -84,4 +87,11 @@ public class CommunityController {
 		map.put("comments", comments);
 		return map;
 	}
+	@RequestMapping("/morecomments")
+	public ModelAndView getMoreComments(HttpServletRequest req){
+		Map<String,Object> map=new HashMap<String, Object>();
+		
+		return new ModelAndView("commuser/community/wanderfaulbookcomments");
+	}
+	
 }
