@@ -142,23 +142,22 @@ public class ReadDetailController extends BaseController{
 		String returncode="";
 		Map<String, Object> map = new HashMap<String, Object>();
 		String book_id=request.getParameter("book_id");
-		String user_id=request.getParameter("user_id");
 		String page=request.getParameter("page");
+		String line=request.getParameter("line");
 		String content=request.getParameter("content");
 		String attachment=request.getParameter("attachment");
 		String attachment_name=request.getParameter("attachment_name");
 		if(StringUtils.isEmpty(book_id)||
-			StringUtils.isEmpty(user_id)||	
 			StringUtils.isEmpty(page)||
-			StringUtils.isEmpty(content)||
-			StringUtils.isEmpty(attachment)||
-			StringUtils.isEmpty(attachment_name)){
+			StringUtils.isEmpty(line)||
+			StringUtils.isEmpty(content)){
 			returncode="NO";
 		}else{
 			Map<String, Object> user=getUserInfo();
 			map.put("user_id", user.get("id"));
 			map.put("book_id", book_id);
 			map.put("page", page);
+			map.put("line", line);
 			map.put("content", content);
 			map.put("attachment", attachment);
 			map.put("attachment_name", attachment_name);
