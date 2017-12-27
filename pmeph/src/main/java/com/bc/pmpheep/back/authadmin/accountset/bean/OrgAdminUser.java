@@ -1,7 +1,9 @@
 package com.bc.pmpheep.back.authadmin.accountset.bean;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.sql.Timestamp;
+
 
 /**
  * @Author: SuiXinYang
@@ -52,8 +54,51 @@ public class OrgAdminUser implements Serializable{
     private int sort;
     //是否被逻辑删除
     private int isDeleted;
+    
+    /**
+     * 生日
+     */
+    private Date    birthday;
+    /**
+     * 教龄
+     */
+    private int experience;
 
-    public String getPassword() {
+
+	/**
+     * 教龄
+     */
+    private String workplace;
+    
+    public int getExperience() {
+		return experience;
+	}
+
+	public void setExperience(int experience) {
+		this.experience = experience;
+	}
+
+
+
+
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getWorkplace() {
+		return workplace;
+	}
+
+	public void setWorkplace(String workplace) {
+		this.workplace = workplace;
+	}
+
+	public String getPassword() {
         return password;
     }
 
