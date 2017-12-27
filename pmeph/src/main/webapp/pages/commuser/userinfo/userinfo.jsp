@@ -80,23 +80,13 @@
                 <div class="sxy-userinfo-row"></div>
                 <div class="sxy-userinfo-row"></div>
                 <div class="sxy-userinfo-row"></div>
-<<<<<<< .mine
+
                 <div class="sxy-userinfo-row">
-                <font id="sxy-font-1" style="cursor: pointer;" onclick="window.location='${ctx}/teacherCertification/showTeacherCertification.action'">教师认证</font></div>
-||||||| .r721
-                <div class="sxy-userinfo-row"><font id="sxy-font-1">教师认证</font></div>
-=======
-                <div class="sxy-userinfo-row" style="cursor: pointer;" onclick="teacher()"><font id="sxy-font-1">教师认证</font></div>
->>>>>>> .r826
-                <div class="sxy-userinfo-row"></div>
-<<<<<<< .mine
+                	<a id="sxy-font-1" style="cursor: pointer;" onclick="window.location='${ctx}/teacherCertification/showTeacherCertification.action'">教师认证</a>
+                </div>
                 <div class="sxy-userinfo-row">
-                <font id="sxy-font-2" style="cursor: pointer;" onclick="window.location='${ctx}/userinfo/comchangepwd.action'">修改密码</font></div>
-||||||| .r721
-                <div class="sxy-userinfo-row"><font id="sxy-font-2">修改密码</font></div>
-=======
-                <div class="sxy-userinfo-row" style="cursor: pointer;"><font id="sxy-font-2">修改密码</font></div>
->>>>>>> .r826
+                	<a id="sxy-font-2" style="cursor: pointer;" onclick="window.location='${ctx}/userinfo/comchangepwd.action'">修改密码</a>
+                </div>
             </div>
             <div style="height:35px;"></div>
         </div>

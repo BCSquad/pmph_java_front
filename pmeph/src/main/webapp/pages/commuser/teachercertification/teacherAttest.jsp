@@ -191,16 +191,8 @@ String contextpath=request.getContextPath();
         <div style="height:50px;">
             <span style="width:20px;"></span>
             <span class="sxy-div-menu">学校教师认证</span>
-<<<<<<< .mine
             <a>
             <span id="sxy-spantopright" style="cursor: pointer;" onclick="window.location='<%=path%>/userinfo/touser.action'"><<返回个人资料&nbsp&nbsp</span>
-||||||| .r721
-            <a href="" >
-            <span id="sxy-spantopright">〈〈返回个人资料&nbsp&nbsp</span>
-=======
-            <a href="<%=path %>/userinfo/touser.action?id=${showWriterUserCertification.userId}" >
-            <span id="sxy-spantopright">〈〈返回个人资料&nbsp&nbsp</span>
->>>>>>> .r826
             </a>
         </div>
     </div>
