@@ -54,7 +54,7 @@
         <div id="div-child">
             <span class="span1"></span>
             <span class="div-menu-main">学校管理员认证</span>
-            <a href="#" class="return-menu-main"
+            <a  class="return-menu-main"
                 onclick="window.location='${ctx}/admininfocontroller/toadmininfo.action'"><< 返回个人资料</a>
         </div>
     </div>
@@ -78,6 +78,9 @@
             <input type="hidden" id="handphone" value="${admininfo.handphone}"/>
             <%-- <input type="hidden" id="postCode" value="${admininfo.postCode}"/> --%>
             <input type="hidden" id="fax" value="${admininfo.fax}"/>
+            <input type="hidden" id="birthday" value="${admininfo.birthday}"/>
+            <input type="hidden" id="experience" value="${admininfo.experience}"/>
+            <input type="hidden" id="workplace" value="${admininfo.workplace}"/>
             <form>
             <table border="0" class="form-table">
                     <tr>

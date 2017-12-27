@@ -15,7 +15,7 @@ $(function () {
                 dataType:'json',
                 success:function(json){
                     if (json.returncode=="OK"){
-                    	$("#sxy-img1").attr("src",contextpath+"file/download/"+fileid+".action");
+                    	$("#sxy-img1").attr("src",contextpath+"file/download"+fileid+".action");
                     }
                 }
             });

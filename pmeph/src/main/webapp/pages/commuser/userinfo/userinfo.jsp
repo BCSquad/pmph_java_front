@@ -7,9 +7,8 @@
     <script type="text/javascript">
         var contextpath = '${pageContext.request.contextPath}/';
     </script>
-    <c:set var="ctx" value="${pageContext.request.contextPath}"/>
+    <c:set var="ctx" value="${pageContext.request.contextPath}" />
     <title>个人资料</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link href="${ctx}/statics/authadmin/accountset/publicStyle.css" rel="stylesheet" type="text/css"/>
@@ -71,7 +70,7 @@
     <div class="sxy-div-content">
         <div>
             <div id="sxy-userinfo-div">
-                <img id="sxy-img1" src="${ctx}/file/download/${map.avatar}.action"/>
+                <img id="sxy-img1" src="${ctx}/statics/image/putongyhtouxiang.png"/>
                 <div class="shade" id="uploadFile">修改头像</div>
             </div>
             <div style="height:35px;"></div>
@@ -81,9 +80,23 @@
                 <div class="sxy-userinfo-row"></div>
                 <div class="sxy-userinfo-row"></div>
                 <div class="sxy-userinfo-row"></div>
+<<<<<<< .mine
+                <div class="sxy-userinfo-row">
+                <font id="sxy-font-1" style="cursor: pointer;" onclick="window.location='${ctx}/teacherCertification/showTeacherCertification.action'">教师认证</font></div>
+||||||| .r721
+                <div class="sxy-userinfo-row"><font id="sxy-font-1">教师认证</font></div>
+=======
                 <div class="sxy-userinfo-row" style="cursor: pointer;" onclick="teacher()"><font id="sxy-font-1">教师认证</font></div>
+>>>>>>> .r826
                 <div class="sxy-userinfo-row"></div>
+<<<<<<< .mine
+                <div class="sxy-userinfo-row">
+                <font id="sxy-font-2" style="cursor: pointer;" onclick="window.location='${ctx}/userinfo/comchangepwd.action'">修改密码</font></div>
+||||||| .r721
+                <div class="sxy-userinfo-row"><font id="sxy-font-2">修改密码</font></div>
+=======
                 <div class="sxy-userinfo-row" style="cursor: pointer;"><font id="sxy-font-2">修改密码</font></div>
+>>>>>>> .r826
             </div>
             <div style="height:35px;"></div>
         </div>

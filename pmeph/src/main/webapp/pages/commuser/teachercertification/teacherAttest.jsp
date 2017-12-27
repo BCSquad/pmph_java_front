@@ -182,17 +182,25 @@ String contextpath=request.getContextPath();
         }
     </style>
 </head>
-<body>
+<body >
 	<div style="width: 100%;padding: 0;margin: 0;height: 81px;border: none">
 		<jsp:include page="/pages/comm/head.jsp"></jsp:include> 
 	</div>
     <div style="height:30px"></div>
-    <div class="sxy-div-content">
+    <div class="sxy-div-content" >
         <div style="height:50px;">
             <span style="width:20px;"></span>
             <span class="sxy-div-menu">学校教师认证</span>
+<<<<<<< .mine
+            <a>
+            <span id="sxy-spantopright" style="cursor: pointer;" onclick="window.location='<%=path%>/userinfo/touser.action'"><<返回个人资料&nbsp&nbsp</span>
+||||||| .r721
+            <a href="" >
+            <span id="sxy-spantopright">〈〈返回个人资料&nbsp&nbsp</span>
+=======
             <a href="<%=path %>/userinfo/touser.action?id=${showWriterUserCertification.userId}" >
             <span id="sxy-spantopright">〈〈返回个人资料&nbsp&nbsp</span>
+>>>>>>> .r826
             </a>
         </div>
     </div>
@@ -236,7 +244,7 @@ String contextpath=request.getContextPath();
                     <input class="sxy-txt" type="hidden" value="${showWriterUserCertification.id}" name="id"/>
                     <input class="sxy-txt" type="hidden" value="${showWriterUserCertification.userId}" name="userId" id="userId"/>
                     <div class="label-input">
-                    <label>*姓名</label>
+                    <label><font color="#ff3d38">*</font>姓名</label>
 	                    <div class="input-wrapper">
 	                    	<input id="realName" class="sxy-txt required" type="text" value="${showWriterUserCertification.realName}" name="realName" data-valid="isNonEmpty" data-error="真实姓名不能为空!"/>
 	                    </div>
@@ -252,7 +260,7 @@ String contextpath=request.getContextPath();
                 <tr  class="sxy-tr">
                     <td>
                     <div class="label-input">
-                    <label>*身份证号</label>
+                    <label><font color="#ff3d38">*</font>身份证号</label>
 	                    <div class="input-wrapper">
 	                    	<input id="idcard" class="sxy-txt required" type="text" value="${showWriterUserCertification.idcard}" name="idcard" data-valid="idcard" data-error="请填正确的身份证信息!"/>
 	                    </div>
@@ -268,7 +276,7 @@ String contextpath=request.getContextPath();
                 <tr  class="sxy-tr">
                     <td>
                     <div class="label-input">
-                    <label>*选择学校</label>
+                    <label><font color="#ff3d38">*</font>选择学校</label>
 	                    <div class="input-wrapper">
 	                    	<input type="hidden" class="required" data-valid="isSelected"  data-error="请选择您所在的学校!">
                         	<select class="sxy-select-td" id="Select1" name="orgId" >
@@ -290,7 +298,7 @@ String contextpath=request.getContextPath();
                <tr  class="sxy-tr">
                     <td>
                     <div class="label-input">
-                    <label>*手机</label>
+                    <label><font color="#ff3d38">*</font>手机</label>
 	                    <div class="input-wrapper">
 	                    	<input id="handphone" class="sxy-txt required" type="text" value="${showWriterUserCertification.handphone}" name="handphone" data-valid="isHandphone" data-error="请填写正确的手机号码!"/>
 	                    </div>
@@ -306,7 +314,7 @@ String contextpath=request.getContextPath();
                <tr  class="sxy-tr">
                     <td>
                     <div class="label-input">
-                    <label>*教师资格证</label>
+                    <label><font color="#ff3d38">*</font>教师资格证</label>
 	                    <div class="input-wrapper">
 	                    	<input class="sxy-txt" type="hidden" value="${showWriterUserCertification.cert}" id="cert" name="cert" />
 	                    	<input class="sxy-txt" type="text" value="${showWriterUserCertification.certName}" id="certName" name="certcertName" />

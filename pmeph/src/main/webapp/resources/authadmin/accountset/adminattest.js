@@ -80,6 +80,9 @@ function getform() {
     json.fax=$("#fax").val();
     json.address=$("#address").val();
     json.id=$("#id").val();
+    json.birthday=$("#birthday").val();
+    json.experience=$("#experience").val();
+    json.workplace=$("#workplace").val();
     console.log(json);
     return json;
 
@@ -90,9 +93,10 @@ function submit(){
 	        type:'post',
 	        url:contextpath+'admininfocontroller/updateorguser.action',
 	        async:false,
-	        contentType: 'application/json',
+	       /* contentType: 'application/json',*/
 	        dataType:'json',
-	        data:JSON2.stringify(getform()),
+	       /* data:JSON2.stringify(getform()),*/
+	        data:getform(),
 	        success:function(code){
 	            if (code=="success"){
 	                message.success("提交成功");

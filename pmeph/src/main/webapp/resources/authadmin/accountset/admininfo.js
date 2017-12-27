@@ -36,6 +36,7 @@ $(function () {
      });*/
 })
 function getform(){
+
     var json={};
     json.realName=$("#realName").val();
     json.position=$("#position").val();
@@ -47,23 +48,34 @@ function getform(){
     json.email=$("#email").val();$("#tesetSelect").find("option:selected").text()
     json.fax=$("#fax").val();
     json.address=$("#address").val();
+    json.birthday=$("#birthday").val();
+    json.experience=$("#experience").val();
+    json.workplace=$("#workplace").val();
     console.log(json);
     return json;
 
 }
+
+
 function save(){
     if($("form").validate('submitValidate')){
         $.ajax({
             type:'post',
             url:contextpath+'admininfocontroller/updateorguser.action',
             async:false,
-            contentType: 'application/json',
+           /* contentType: 'application/json',*/
             dataType:'json',
-            data:JSON2.stringify(getform()),
-            success:function(responsebean){
-                if (responsebean.code==1){
+            /*data:JSON2.stringify(getform()),*/
+            data:getform(),
+            success:function(code){
+                /*if (responsebean.code==1){
                     message.success("保存成功");
-                }
+                }*/
+                if (code=="success"){
+	                message.success("提交成功");
+	            }else{
+	            	message.error("提交失败");
+	            }
             }
         });
     };
