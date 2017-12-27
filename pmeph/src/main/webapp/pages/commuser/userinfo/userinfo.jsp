@@ -55,11 +55,15 @@
     </script>
 </head>
 <body>
-<input type="hidden" id="id" value="${map.id}">
+
 <jsp:include page="/pages/comm/head.jsp">
-    <jsp:param value="homepage" name="pageTitle"/>
-</jsp:include>
-    <div style="height:30px"></div>
+		<jsp:param value="homepage" name="pageTitle" />
+	</jsp:include>
+	<div class="body" style="background: #f6f6f6;">
+		<div class="content-wrapper" >
+			<div style="height: 30px"></div>
+			<input type="hidden" id="id" value="${map.id}">
+
     <div class="sxy-div-content">
         <div style="height:50px;">
             <span style="width:20px;"></span>
@@ -279,6 +283,11 @@
         </table>
         </form>
     </div>
-    <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
-</body>
+			
+		</div>
+		<div style="height: 60px; width: 100%;"></div>
+	</div>
+	<div style="clear: both"></div>
+	<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
+
 </html>

@@ -1,10 +1,10 @@
-ï»¿body 
+body 
 {
     margin: 0;
     padding: 0;
-	background: #F6F6F6;
+	/* background: #F6F6F6; */
 }
-/*çº¢è‰² * */
+/*ºìÉ« * */
 .must-star{
 	color: #FF0000;
 }
@@ -42,7 +42,7 @@
 	border-bottom:2px solid #666;
     }
     
- /*æ·±è‰²é¡µå¤´äºŒçº§èœå•ç‚¹å‡»å‡ºç°ä¸‹åˆ’çº¿*/
+ /*ÉîÉ«Ò³Í·¶ş¼¶²Ëµ¥µã»÷³öÏÖÏÂ»®Ïß*/
  .sxy-span-menu{
     border-bottom:2px solid #666;
 }
@@ -75,7 +75,7 @@
 	width: 120px;
 	height: 120px;
 	background-color: rgba(0,0,0,0.5);
-	/*å…¼å®¹ie8*/
+	/*¼æÈİie8*/
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F000000,endColorstr=#7F000000);
 	border-radius: 10px;
 	text-align: center;
@@ -95,7 +95,8 @@
 #sxy-font-2
 {
 	float:left;
-	margin-top:-2px;
+	margin-top:2px;
+	margin-left:-56px;
 	font-family: MicrosoftYaHei;
 	font-size: 14px;
 	font-weight: normal;
@@ -103,7 +104,7 @@
 	letter-spacing: 0px;
 	color: #e52e2e;
 }
-/*åŸºæœ¬ä¿¡æ¯å‡ ä¸ªå­—æ ·å¼*/
+/*»ù±¾ĞÅÏ¢¼¸¸ö×ÖÑùÊ½*/
 #sxy-font-3
 {
 	width: 58px;
@@ -171,7 +172,7 @@
     border-radius: 4px;
 }
 
-/*é€‰æ‹©ä¸‹æ‹‰æ¡†*/
+/*Ñ¡ÔñÏÂÀ­¿ò*/
 .sxy-select-td 
 {
 	margin-top:-25px;
