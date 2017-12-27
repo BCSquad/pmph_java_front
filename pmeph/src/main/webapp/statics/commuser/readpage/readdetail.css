@@ -193,6 +193,7 @@
     float: left;
     margin-top: -20px;
     margin-left: 20px;
+    width: 110px;
 }
 
 .display {
@@ -431,7 +432,9 @@
 }
 
 .x {
-    width: 3%;
+    width: 14px;
+    height:14px;
+    background-image:url(../../image/close.png);
     float: right;
     margin-right: 10px;
     cursor: pointer;
@@ -471,6 +474,7 @@
 
 .uploadfile {
     color: #039378;
+    margin-left: 10px;
 }
 
 .upload {
@@ -574,13 +578,14 @@
 }
 
 .pl_add .tarea {
-    width: 894px;
-    height: 73px;
+    width: 874px;
+    height: 50px;
     background-color: #f1fbf4;
     border-radius: 3px;
     color: #1abd44;
     font-family: "微软雅黑";
     border: none;
+    padding: 10px;
 }
 
 .pl_add {
@@ -848,6 +853,15 @@
 	border: none;
 	cursor: pointer;
 	border-radius:3px;
+	color: white;
+}
+
+.video-btn{
+	margin-top: 136px;
+	margin-left: 9px;
+	font-family: MicrosoftYaHei;
+	font-size: 12px;
+	color: #ffffff;
 }
 
 .vid_pic{  

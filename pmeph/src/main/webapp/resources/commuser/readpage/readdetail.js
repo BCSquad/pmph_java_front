@@ -15,7 +15,7 @@ $(function () {
         }
     });
 
-    var $pop = $("<div><div class='pop-body'>" +
+    var $pop = $("<div id='video-upload'><div class='pop-body'>" +
         "<div class='title'>当前上传：幼儿护理学</div>" +
         "<div class='remark'>视频上传中，请勿关闭页面</div>" +
         "<div class='layui-progress layui-progress-big' lay-filter='demo' lay-showPercent='true'>" +
@@ -27,7 +27,7 @@ $(function () {
         "</div>" +
         " <div class='lable-input title'><div class='label'>标 题</div><input class='input' type='text'></div>" +
         " <div class='lable-input type'><div class='label'>分 类</div><select id='select'><option>教育</option><option>培训</option></select></div>" +
-        "<div class='button-area'><button class='submit disable'>提交</button><button class='cancel'>取消</button></div>" +
+        "<div class='button-area'><button class='submit disable'>提交</button><button class='cancel' onclick='hidevideo()'>取消</button></div>" +
         "</div> </div>");
 
     var element;
@@ -97,6 +97,11 @@ $(function () {
 
 
 });
+
+//点击取消上传视频弹窗
+function hidevideo(){
+	$("#layui-layer1").hide();
+}
 
 
 //分页的具体实现
@@ -250,7 +255,7 @@ function change() {
 }
 
 //人卫推荐跳转到详情书
-function todetail(flag) {
+function todetail(flag) { 
     location.href = contextpath + 'readdetail/todetail.action?id=' + flag;
 }
 //点赞
@@ -312,26 +317,39 @@ function hideup() {
 
 //图书纠错
 function correction() {
-    var json = {
-        book_id: $("book_id").val(),
-        page: $("page").val(),
-        content: $("content").val(),
-        attachment: $("attachment").val(),
-        attachment_name: $("attachment_name").val(),
-    };
-    $.ajax({
-        type: 'post',
-        url: contextpath + 'readdetail/correction.action',
-        data: json,
-        async: false,
-        dataType: 'json',
-        success: function (json) {
-            if (json == "OK") {
-            	window.message.info("数据已提交！");
-            } else {
-            	window.message.info("错误，请填写完所有内容！");
-            }
-        }
-    });
+	 page=$("#page").val();
+     line=$("#line").val();
+     content=$("#content").val();
+     if(!Empty(page)&&!Empty(line)&&!Empty(content)){//非空判断
+    	 var json = {
+    		        book_id: $("#book_id").val(),
+    		        page: page,
+    		        line: line,
+    		        content: content,
+    		        attachment: $("#attachment").val(),
+    		        attachment_name: $("#attachment_name").val(),
+    		    };
+    		    $.ajax({
+    		        type: 'post',
+    		        url: contextpath + 'readdetail/correction.action',
+    		        data: json,
+    		        async: false,
+    		        dataType: 'json',
+    		        success: function (json) {
+    		            if (json == "OK") {
+    		            	window.message.info("数据已提交！");
+    		            	$("#bookmistake").hide();
+    		            	$("#page").val(null);
+    		                $("#line").val(null);
+    		                $("#content").val(null);
+    		                $("#upname").html('未选择任何文件!');
+    		            } else {
+    		            	window.message.info("错误，请填写完所有内容！");
+    		            }
+    		        }
+    		    });
+     }else{
+    	 window.message.info("错误，请填写完所有内容！");
+     }
 }
 

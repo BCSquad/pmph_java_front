@@ -34,30 +34,30 @@
         <!-- 图书纠错悬浮框 -->
         <div class="bookmistake" id="bookmistake">
             <div class="apache">
-                <div class="mistitle">纠错</div>
-                <div class="x" onclick="hideup()">X</div>
+                <div class="mistitle">图书纠错</div>
+                <div class="x" onclick="hideup()"></div>
             </div>
             <div class="input">
-                <label style="margin-left: 20px" class="labell">页码&nbsp;:&nbsp;</label>
-                <input type="text" class="text"/>
-                <label style="margin-left: 10px" class="labell">行数&nbsp;:&nbsp;</label>
-                <input type="text" class="text"/>
+                <label style="margin-left: 20px" class="labell" >页码&nbsp;:&nbsp;</label>
+                <input type="text" class="text" id="page"/>
+                <label style="margin-left: 10px" class="labell" >行数&nbsp;:&nbsp;</label>
+                <input type="text" class="text" id="line"/>
             </div>
             <div class="info">
-                <label style="margin-left: 20px" class="labell">纠错内容&nbsp;:&nbsp;</label>
-                <textarea class="misarea"></textarea>
+                <label style="margin-left: 20px" class="labell" >纠错内容&nbsp;:&nbsp;</label>
+                <textarea class="misarea" id="content"></textarea>
             </div>
             <div class="upload">
                 <label style="margin-left: 20px" class="labell">纠错内容附件&nbsp;:&nbsp;</label>
                 <div style="position: relative">
                     <input type="button" id="uploadFile" value="选择文件" class="upbutten">
                 </div>
-                <label class="uploadfile" id="upname">未选择任何文件</label>
+                <label class="uploadfile" id="upname">未选择任何文件!</label>
                 <input type="hidden" id="attachment"/>
                 <input type="hidden" id="attachment_name"/>
             </div>
             <div class="">
-                <button class="btn">确认</button>
+                <button class="btn" onclick="correction()">确认</button>
             </div>
         </div>
         <!--左边区域-->
@@ -158,14 +158,14 @@
                     <a href="#001" style="text-decoration: none"><span id="xsp1">写书评</span></a>
                 </div>
                 <div class="mistake">
-                    <div class="mis_pic"></div>
+                    <div class="mis_pic" onclick="showup()"></div>
                     <div class="mis_content" onclick="showup()">图书纠错</div>
                 </div>
                 <div class="mistake">
                     <div class="vid_pic"></div>
                     <div class="mis_content">上传微视频</div>
                     <input id="upload-video" type="file" class='hidden-upload' name='file'
-                           style="width: 0px;height: 33px;padding-left: 100px;">
+                           style="width: 0px;height: 33px;padding-left: 100px;cursor: pointer;">
                 </div>
                 <div class="left1">
                     <div id="xsp3"></div>
@@ -196,19 +196,25 @@
                <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
 	           <div class="video" style="margin-left: 20px">
 	                <img src="${ctx}/statics/image/index.png" class="img-a">
-	                <div class="video-a"></div>
+	                <div class="video-a">
+	                   <div class="video-btn">微视频</div>
+	                </div>
 	                <div class="play"></div>
 	                <div class="video-name">微视频</div>
 	           </div>
 	           <div class="video" style="margin-left: 40px">
 	               <img src="${ctx}/statics/image/index.png" class="img-a">
-	               <div class="video-a" ></div>  
+	               <div class="video-a" >
+	                   <div class="video-btn">人卫慕课</div>
+	               </div>  
 	               <div class="play"></div>
 	               <div class="video-name">人卫慕课</div> 
 	           </div>
 	           <div class="video" style="margin-left: 40px">
 	                <img src="${ctx}/statics/image/index.png" class="img-a">
-	                <div class="video-a"></div>
+	                <div class="video-a">
+	                   <div class="video-btn">考试</div>
+	                </div>
 	                <div class="play"></div>
 	                <div class="video-name">考试</div>
 	              </div>
