@@ -50,7 +50,7 @@
             <div class="upload">
                 <label style="margin-left: 20px" class="labell">纠错内容附件&nbsp;:&nbsp;</label>
                 <div style="position: relative">
-                    <input type="button" id="uploadFile" value="选择文件">
+                    <input type="button" id="uploadFile" value="选择文件" class="upbutten">
                 </div>
                 <label class="uploadfile" id="upname">未选择任何文件</label>
                 <input type="hidden" id="attachment"/>
@@ -404,7 +404,7 @@
                     </div>
                 </div>
             </div>
-            <div class="right_3" style="height: 349px">
+            <div class="right_3">
                 <div class="right_4">
                     <div class="right_5">
                         <div class="right_6"></div>
