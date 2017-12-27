@@ -844,7 +844,10 @@
 }
 
 .upbutten{
-	background-color: red;
+	background-color: #70D68A;
+	border: none;
+	cursor: pointer;
+	border-radius:3px;
 }
 
 .vid_pic{  
