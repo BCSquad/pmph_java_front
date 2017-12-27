@@ -39,18 +39,20 @@ public class UserInfoController extends BaseController {
     @RequestMapping("touser")
     public ModelAndView toperson(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
+        Map <String,Object> map1 = getUserInfo() ;
 
-        String id = MapUtils.getString(getUserInfo(), "id");
-		id="12179";
-		Map<String, Object> map=userinfoService.queryWriter(id);
-		//图片为空则显示默认图片
-		if(map.get("avatar")==null){
-			 map.put("avatar", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
-		}
-		modelAndView.addObject("map", map);
-		modelAndView.setViewName("commuser/userinfo/userinfo");
-		return modelAndView;
-	}
+
+        Map<String, Object> map = userinfoService.queryWriter(map1.get("id").toString());
+        //图片为空则显示默认图片
+        if (("").equals(map.get("avatar"))) {
+            map.put("avatar", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+        }
+        modelAndView.addObject("map", map);
+        modelAndView.setViewName("commuser/userinfo/userinfo");
+        return modelAndView;
+    }
+
+
 	
 	/**
 	 * 根据ID修改头像
@@ -66,6 +68,7 @@ public class UserInfoController extends BaseController {
 		return map;
 	}
 	
+
     /**
      * 根据ID改变普通作家信息
      *
@@ -133,5 +136,18 @@ public class UserInfoController extends BaseController {
             zmap = userinfoService.update(map);
         }
         return zmap;
+    }
+    
+    
+    /**
+     * 跳转到修改密码页面
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "comchangepwd")
+    public ModelAndView tochangepwd(HttpServletRequest request){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("commuser/userinfo/comchangepwd");
+        return mv;
     }
 }
