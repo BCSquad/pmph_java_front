@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.personalcenter.bean.PersonalNewMessage;
@@ -63,7 +65,7 @@ public class PersonalCenterController extends BaseController {
 		}else if("tsjc".equals(pagetag)){ //图书纠错 (我是第一主编)
 			//从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
 			//设定条件名数组 
-			String[] names={"is_replied"};
+			String[] names={"is_author_replied"};
 			String[] namesChi = {};
 			queryConditionOperation(names,namesChi,request, mv, paraMap,vm_map);
 			pageParameter.setParameter(paraMap);
@@ -72,7 +74,7 @@ public class PersonalCenterController extends BaseController {
 			count = personalService.queryBookCorrectdCount(pageParameter);
 			//分页数据代码块
 			String html = this.mergeToHtml("commuser/personalcenter/bookCorrected.vm",contextpath, pageParameter, List_map,vm_map);
-			/*mv.addObject("List_map",List_map);*///测试
+			mv.addObject("List_map",List_map);//测试
 			mv.addObject("html",html);
 			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
 			
@@ -146,6 +148,16 @@ public class PersonalCenterController extends BaseController {
         return mv;
     }
 
+    @RequestMapping(value="authorReply",method=RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> authorReply(HttpServletRequest request){
+    	String id = request.getParameter("id");
+    	String author_reply = request.getParameter("author_reply");
+    	
+    	Map<String,Object> result_map = personalService.authorReply(id,author_reply);
+
+    	return result_map;
+    }
 
     /**
      * 分页数据执行模版转化为html

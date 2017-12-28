@@ -100,16 +100,66 @@
                 	
                 	
                 	${html }
-                	<%-- <c:forEach items="${List_map }" var="t">
-                		<div style="border:1px black solid">${t.id}
-							${t.bookname}
-							${t.deadline}
-							${t.source}
-							${t.type}
-							${t.gmt_create}
-							${t.auth_progress }
-						</div>
-                	</c:forEach> --%>
+                	
+                	<%-- <!-- <link rel="stylesheet" href="$!{contextpath}statics/commuser/personalcenter/bookCorrected.css" type="text/css"> -->
+                	<link rel="stylesheet" href="${ctx}/statics/commuser/personalcenter/bookCorrected.css" type="text/css">
+                	<script src="${ctx}/resources/commuser/personalcenter/PersonalHomeTSJC.js"></script>
+                	
+                	<input type="hidden" class="queryCondition" id="is_author_replied" value="${is_author_replied}">
+                	
+                	<ul class="replytag_wrapper">
+	                    <li id="replytag_all" class="replytag ${is_author_replied==null||is_author_replied==''?'active':''}">全部</li>
+	                    <li id="replytag_toreply" class="replytag ${is_author_replied=='0'?'active':''}">待回复</li>
+	                    <li id="replytag_replied" class="replytag ${is_author_replied=='1'?'active':''}">已回复</li>
+	                </ul>
+                	<div class="listContent">
+                		<c:forEach items="${List_map }" var="c">
+                			<div class="book_correct_unit">
+                				<div class="unit_left">
+                					<div class="img_box">
+                						<img src="${c.image_url }">
+                					</div>
+                					<div class="text_box">
+                						<div>
+                						作者：${c.author }
+                						</div>
+                						<div>
+                						版次：${c.revision }
+                						</div>
+                					</div>
+                				</div>
+                				<div class="unit_right">
+                				
+                					<form id="form${c.id }">
+	                					<div class="title_line">
+	                						<span class="bookname">${c.bookname }</span>
+	                						<span class="isbn">${c.isbn }</span>
+	                					</div>
+	                					<div class="position_line">
+		                					<span>纠错信息：${c.page }页码</span>
+		                					<span class=" ">${c.line }行</span>
+	                					</div>
+	                					<div class="content_line">
+	                						纠错内容：${c.content }
+	                					</div>
+	                					<div >
+	                						附件：<span onclick="downLoadProxy(${attachment})">${c.attachment_name }</span>
+	                					</div>
+	                					<div class="reply_line">
+	                						<span>回复意见：</span>
+	                						<textarea ${c.is_author_replied?'disabled':''} id="textarea_${c.id }" rows="5" cols="5">${c.author_reply }</textarea>
+	                					</div>
+	                					<div >
+	                						<button type="button" class="btn_reply ${c.is_author_replied?'hidden':''}" id="btn_${c.id }" value=""  onclick="submitReply('${c.id }')">提交编辑</button>
+	                					</div>
+                					</form>
+                				</div>
+                			</div>
+                		
+                		
+                		</c:forEach>
+                	</div>
+                	--%>
                 	
                 	<c:if test="${listCount == 0 }">
                 		<div class="no-more">
@@ -136,7 +186,7 @@
 	                        <span class="pp">页</span>
 	                        <button type="button" class="button">确定</button>
 	                    </div>
-	                </div>
+	                </div> 
                 </div>
 
 

@@ -238,17 +238,21 @@ AND a.online_progress IN (2, 3)
 		bc.line,
 		bc.content,
 		bc.attachment,
-		bc.attachment_name
+		bc.attachment_name,
+		bc.is_author_replied,
+		bc.author_reply
 		FROM
 		book AS b
 		Inner Join book_editor AS be ON b.id = be.book_id
 		Inner Join book_correction AS bc ON b.id = bc.book_id
-		WHERE
-		be.author_id =  '758'
-		
-		bc.is_editor_replied != 0
-		
+		<where>
+		be.author_id =  #{parameter.logUserId}
+		<if test="parameter.is_author_replied != null and parameter.is_author_replied != '' ">
+			and bc.is_author_replied = #{parameter.is_author_replied}
+		</if>
+		</where>
 		order by  bc.is_author_replied asc , bc.gmt_create desc
+		limit ${start},${pageSize}
 	</select>
 	
 	<select id="queryBookCorrectdCount" parameterType="PageParameter" resultType="Integer">
@@ -262,9 +266,18 @@ AND a.online_progress IN (2, 3)
 		Inner Join book_editor AS be ON b.id = be.book_id
 		Inner Join book_correction AS bc ON b.id = bc.book_id
 		WHERE
-		be.author_id =  '758'
-		bc.is_editor_replied != 0
+		be.author_id =  #{parameter.logUserId}
+		<if test="parameter.is_author_replied != null and parameter.is_author_replied != '' ">
+			and bc.is_author_replied = #{parameter.is_author_replied}
+		</if>
 		)t
 	</select>
+	
+	<update id="authorReply" parameterType="Map">
+		update book_correction
+		set  is_author_replied = 1
+			,author_reply = #{author_reply}
+		where id = #{id}
+	</update>
 
 </mapper>

@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.personalcenter.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -99,6 +100,22 @@ public class PersonalServiceImpl implements PersonalService {
 	public int queryBookCorrectdCount(PageParameter<Map<String, Object>> pageParameter) {
 		Integer count =personaldao.queryBookCorrectdCount(pageParameter);
 		return count;
+	}
+
+	@Override
+	public Map<String, Object> authorReply(String id, String author_reply) {
+		Map<String, String> paraMap = new HashMap<String, String>();
+		paraMap.put("id", id);
+		paraMap.put("author_reply", author_reply);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		if (author_reply!=null && author_reply.length()>0 ) {
+			int count = personaldao.authorReply(paraMap);
+			resultMap.put("msg", "回复已提交成功！");
+		}else{
+			resultMap.put("msg", "回复内容不可为空！");
+		}
+		
+		return resultMap;
 	}
 
 	

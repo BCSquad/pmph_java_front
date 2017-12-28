@@ -1,0 +1,71 @@
+
+<link rel="stylesheet" href="$!{contextpath}statics/commuser/personalcenter/bookCorrected.css" type="text/css">
+<script src="$!{contextpath}resources/commuser/personalcenter/PersonalHomeTSJC.js"></script>
+
+<input type="hidden" class="queryCondition" id="is_author_replied" value="$!{is_author_replied}">
+
+<ul class="replytag_wrapper">
+    <li id="replytag_all" class="replytag 
+	    #if(!$!{is_author_replied}||$!{is_author_replied}=='') 
+	    	active
+	    #end ">全部</li>
+    <li id="replytag_toreply" class="replytag 
+		#if($!{is_author_replied}==0) 
+	    	active
+	    #end ">待回复</li>
+    <li id="replytag_replied" class="replytag 
+		#if($!{is_author_replied}==1)
+	    	active
+	    #end ">已回复</li>
+</ul>
+<div class="listContent">
+	#foreach($c in $!{List_map})
+		<div class="book_correct_unit">
+			<div class="unit_left">
+				<div class="img_box">
+					<img src="$!{c.image_url}">
+				</div>
+				<div class="text_box">
+					<div>
+					作者：$!{c.author}
+					</div>
+					<div>
+					版次：$!{c.revision}
+					</div>
+				</div>
+			</div>
+			<div class="unit_right">
+			
+				<form id="form$!{c.id}">
+					<div class="title_line">
+						<span class="bookname">$!{c.bookname}</span>
+						<span class="isbn">$!{c.isbn}</span>
+					</div>
+					<div class="position_line">
+    					<span>纠错信息：$!{c.page}页码</span>
+    					<span class=" ">$!{c.line}行</span>
+					</div>
+					<div class="content_line">
+						纠错内容：$!{c.content}
+					</div>
+					<div >
+						附件：<span onclick="downLoadProxy($!{attachment})">$!{c.attachment_name}</span>
+					</div>
+					<div class="reply_line">
+						<span>回复意见：</span>
+						<textarea 
+							#if($!{c.is_author_replied}=='true') disabled #end
+							id="textarea_$!{c.id}" rows="5" cols="5">$!{c.author_reply}</textarea>
+					</div>
+					<div >
+						<button type="button" class="btn_reply 
+							#if($!{c.is_author_replied}=='true') hidden #end
+							" id="btn_$!{c.id}" value=""  onclick="submitReply('$!{c.id}')">提交编辑</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	
+	
+	#end
+</div>

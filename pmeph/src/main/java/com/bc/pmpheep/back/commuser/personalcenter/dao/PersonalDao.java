@@ -53,6 +53,12 @@ public interface PersonalDao {
 	 * @return
 	 */
 	public Integer queryBookCorrectdCount(PageParameter<Map<String, Object>> pageParameter);
+	/**
+	 * 第一主编回复纠错
+	 * @param paraMap
+	 * @return
+	 */
+	public int authorReply(Map<String, String> paraMap);
 	
 	
 	

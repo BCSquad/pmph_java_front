@@ -67,6 +67,14 @@ public interface PersonalService {
 	 */
 	public int queryBookCorrectdCount(PageParameter<Map<String, Object>> pageParameter);
 
+	/**
+	 * 对主键为id的纠错进行主编回复
+	 * @param id
+	 * @param author_reply
+	 * @return
+	 */
+	public Map<String, Object> authorReply(String id, String author_reply);
+
 	
 	
 	
