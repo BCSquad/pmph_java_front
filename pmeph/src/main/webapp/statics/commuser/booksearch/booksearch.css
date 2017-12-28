@@ -85,12 +85,13 @@
     border-bottom: solid 1px #e5e5e5;
     margin-left: 20px;
     margin-right: 20px;
-    padding-top: 26px;
+    padding-top: 5px;
+    padding-bottom:5px
 }
 
 .leftPicture {
-    height: 100%;
-    width: 160px;
+    height: 160px;
+    width: 138px;
     float: left;
     overflow: hidden;
     text-align: center;
@@ -119,7 +120,7 @@ img[src=""],img:not([src]){opacity:0;}
     width: 70%;
     height: 73px;
     float: left;
-    margin-top: 8px;
+    margin-top: 18px;
 }
 
 .bookName {
@@ -155,7 +156,7 @@ img[src=""],img:not([src]){opacity:0;}
 
 .name {
     font-family: MicrosoftYaHei;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: normal;
     font-stretch: normal;
     letter-spacing: 1px;
@@ -186,6 +187,7 @@ img[src=""],img:not([src]){opacity:0;}
     float: left;
     width: 30%;
     height: 72px;
+    padding-top: 18px;
 }
 
 .eyePicture {
@@ -255,7 +257,7 @@ img[src=""],img:not([src]){opacity:0;}
 
 .contentPage {
     font-family: MicrosoftYaHei;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
     line-height: 24px;
