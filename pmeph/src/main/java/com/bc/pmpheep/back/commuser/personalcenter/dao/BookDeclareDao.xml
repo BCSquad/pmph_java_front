@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.commuser.personalcenter.dao.BookDeclareDao">
+	
+	<!-- 选题申报信息插入 -->
+	<insert id="insertTopic" parameterType="java.util.Map">
+		insert into topic(user_id,bookname,deadline,source,word_number,picture_number,subject,rank,type,is_staging,auth_progress,
+		bank_account_id,purchase,sponsorship,is_translation,original_bookname,original_author,nation,edition,vn) values(
+		#{user_id},#{bookname},#{deadline},#{source},#{word_number},#{picture_number},#{subject},#{rank},#{type},#{is_staging},#{auth_progress},#{bank_account_id},
+		#{purchase},#{sponsorship},#{is_translation},#{original_bookname},#{original_author},#{nation},#{edition},#{vn}
+		) 
+	</insert>
+	<!-- 根据条件查询申报信息 -->
+	<select id="queryTopic" parameterType="java.util.Map" resultType="java.util.Map">
+		select * from topic t1 where 1= 1 
+		<if test="vn != null and vn != ''">
+			and t1.vn = #{vn} 
+		</if>
+		<if test="topic_id != null and topic_id != ''">
+			and t1.id = #{topic_id}
+		</if>
+	</select>
+	
+	<!-- 选题申报-额外信息 -->
+	<insert id="insertTopicExtra" parameterType="java.util.Map">
+		insert into topic_extra(topic_id,reason,price,score) values(#{topic_id},
+		#{reason},#{price},#{score})
+	</insert>
+	<!-- 根据条件查询选题申报-额外信息 -->
+	<select id="queryTopicExtra" parameterType="java.util.Map" resultType="java.util.Map">
+		select * from topic_extra t1 where 1= 1 
+		<if test="topic_id != null and topic_id != ''">
+			and t1.topic_id = #{topic_id} 
+		</if>
+	</select>
+	
+	<!-- 选题申报-编者情况 -->
+	<insert id="insertTopicWriter" parameterType="java.util.Map">
+		insert into topic_writer(topic_id,realname,sex,price,position,workplace) values(#{topic_id},
+		#{realname},#{sex},#{price},#{position},#{workplace})
+	</insert>
+	<!-- 根据条件查询选题申报-编者情况 -->
+	<select id="queryTopicWriter" parameterType="java.util.Map" resultType="java.util.Map">
+		select * from topic_writer t1 where 1= 1 
+		<if test="topic_id != null and topic_id != ''">
+			and t1.topic_id = #{topic_id} 
+		</if>
+	</select>
+
+</mapper>
