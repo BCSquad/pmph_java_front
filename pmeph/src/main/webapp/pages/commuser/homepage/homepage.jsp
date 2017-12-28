@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/homepage/homepage.css" type="text/css">
     <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.scroll.js"></script>
     <script src="${ctx}/resources/comm/base.js"></script>
     <script src="${ctx}/resources/commuser/homepage/homepage.js"></script>
 </head>
@@ -30,7 +31,16 @@
     <div class="content-wrapper">
         <div class="area-1">
             <div class="banner">
-                <img src="${ctx}/statics/testfile/index.png" style="width: 922px; height: 380px">
+                <div class="move" id="move">
+                    <ul>
+                        <li><img src="${ctx}/statics/testfile/index.png" style="width: 922px; height: 380px"></li>
+                        <li><img src="${ctx}/statics/testfile/index.png" style="width: 922px; height: 380px"></li>
+                        <li><img src="${ctx}/statics/testfile/index.png" style="width: 922px; height: 380px"></li>
+                        <li><img src="${ctx}/statics/testfile/index.png" style="width: 922px; height: 380px"></li>
+                        <li><img src="${ctx}/statics/testfile/index.png" style="width: 922px; height: 380px"></li>
+                    </ul>
+                </div>
+                <div class="ctrl" id="ctrl"></div>
             </div>
             <div class="op-link">
                 <div class="transaction">
@@ -67,7 +77,7 @@
                         <p class="content-size">${list.title}</p>
                         <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date"
                                                                   pattern="yyyy-MM-dd"/></p>
-                        <div class="left_join">报名参加</div>                                          
+                        <div class="left_join">报名参加</div>
                     </div>
                 </c:if>
                 <c:if test="${status.index!=0}">
@@ -75,7 +85,7 @@
                         <p class="content-size">${list.title}</p>
                         <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date"
                                                                   pattern="yyyy-MM-dd"/></p>
-                        <div class="left_join">报名参加</div>  
+                        <div class="left_join">报名参加</div>
                     </div>
                 </c:if>
             </c:forEach>
@@ -164,7 +174,7 @@
                         <div class="left_con1" >全国高等学校健康服务与管理专业第二轮规划教材</div>
                     </div>
                     <div class="left_two">
-                        <div class="textbook_left">重点学科推荐</div>  
+                        <div class="textbook_left">重点学科推荐</div>
                         <div class="all_left">全部>></div>
                         <div class="p1_left"></div>
                         <div class="p2_left"></div>
@@ -346,81 +356,6 @@
                                 </div>
                             </div>
                         </c:forEach>
-                        <%--<c:forEach items="${listSal}" var="list" varStatus="status">
-                            <c:if test="${status.index==1}">
-			                        <div class="last_right_body">
-			                            <div class="last_right_book">
-			                                <img src="${list.image_url=='DEFAULT'?ctx+'/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg':list.image_url}" class="book_style" id="right_book2">
-			                            </div>
-			                            <div class="num2">
-			                                <div class="num_book">2</div>
-			                            </div>
-			                            <div class="last_right_content">
-			                                <div class="sale_book" id="sale_book2">${list.bookname}</div>
-			                            </div>
-			                        </div>
-			                </c:if>
-                        </c:forEach>
-                        <c:forEach items="${listSal}" var="list" varStatus="status">
-                            <c:if test="${status.index==2}">
-			                        <div class="last_right_body">
-			                            <div class="last_right_book">
-			                                <img src="${list.image_url=='DEFAULT'?ctx+'/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg':list.image_url}" class="book_style" id="right_book3">
-			                            </div>
-			                            <div class="num3">
-			                                <div class="num_book">3</div>
-			                            </div>
-			                            <div class="last_right_content">
-			                                <div class="sale_book" id="sale_book3">${list.bookname}</div>
-			                            </div>
-			                        </div>
-			                </c:if>
-                        </c:forEach>
-                        <c:forEach items="${listSal}" var="list" varStatus="status">
-                            <c:if test="${status.index==3}">
-		                        <div class="last_right_body body_top">
-		                            <div class="last_right_book">
-		                                <img src="${list.image_url=='DEFAULT'?ctx+'/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg':list.image_url}" class="book_style" id="right_book4">
-		                            </div>
-		                            <div class="num4">
-		                                <div class="num_book">4</div>
-		                            </div>
-		                            <div class="last_right_content">
-		                                <div class="sale_book" id="sale_book4">${list.bookname}</div>
-		                            </div>
-		                        </div>
-		                   </c:if>
-                        </c:forEach>
-                        <c:forEach items="${listSal}" var="list" varStatus="status">
-                            <c:if test="${status.index==4}">
-		                        <div class="last_right_body body_top">
-		                            <div class="last_right_book">
-		                                <img src="${list.image_url=='DEFAULT'?ctx+'/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg':list.image_url}" class="book_style" id="right_book5">
-		                            </div>
-		                            <div class="num4">
-		                                <div class="num_book">5</div>
-		                            </div>
-		                            <div class="last_right_content">
-		                                <div class="sale_book" id="sale_book5">${list.bookname}</div>
-		                            </div>
-		                        </div>
-		                    </c:if>
-                        </c:forEach>
-                        <c:forEach items="${listSal}" var="list" varStatus="status">
-                            <c:if test="${status.index==5}">
-		                        <div class="last_right_body body_top">
-		                            <div class="last_right_book">
-		                                <img src="${list.image_url=='DEFAULT'?ctx+'/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg':list.image_url}" class="book_style" id="right_book6">
-		                            </div>
-		                            <div class="num4">
-		                                <div class="num_book">6</div>
-		                            </div>
-		                            <div class="last_right_content">
-		                                <div class="sale_book" id="sale_book6">${list.bookname}</div>
-		                            </div>
-		                        </div>
-		                 </c:if>
-                        </c:forEach>--%>
                     </div>
                 </div>
             </div>
@@ -431,6 +366,7 @@
         <div class="cancel" onclick="cancel()">关闭</div>
     </div>
 </div>
+    <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
-<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
+
 </html>
