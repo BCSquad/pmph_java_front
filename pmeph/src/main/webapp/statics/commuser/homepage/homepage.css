@@ -315,6 +315,8 @@
 	font-size: 14px;
 	line-height: 20px;
 	color: #555555;
+	cursor: pointer;
+	overflow: hidden;
 }
 
 .textbook_left{
@@ -333,6 +335,7 @@
 	font-size: 13px;
 	color: #000000;
 	float: right;
+	cursor: pointer;
 }
 
 .area-2.title.name {
@@ -347,7 +350,6 @@
     height: 100px;
     margin: 20px 0;
     margin-left: 89px;
-    cursor: pointer;
 }
 
 .left_join{
@@ -481,6 +483,7 @@
 .area-4 .tab-bar {
     height: 40px;
     border-bottom: 1px solid #E5E3DF;
+    overflow: hidden;
 }
 
 .tab-bar .tab {
