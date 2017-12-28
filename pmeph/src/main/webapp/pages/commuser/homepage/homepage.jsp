@@ -75,17 +75,17 @@
                 <c:if test="${status.index==0}">
                     <div class="content-left" style="margin-left: 30px">
                         <p class="content-size">${list.title}</p>
-                        <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date"
-                                                                  pattern="yyyy-MM-dd"/></p>
-                        <div class="left_join">报名参加</div>
+                        <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date" pattern="yyyy-MM-dd"/></p>
+                        <div class="left_join"
+                        onclick="window.location.href='${ctx}/material/toMaterialAdd.action?material_id=${list.material_id}'">报名参加</div>
                     </div>
                 </c:if>
                 <c:if test="${status.index!=0}">
                     <div class="content-left">
                         <p class="content-size">${list.title}</p>
-                        <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date"
-                                                                  pattern="yyyy-MM-dd"/></p>
-                        <div class="left_join">报名参加</div>
+                        <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date" pattern="yyyy-MM-dd"/></p>
+                        <div class="left_join"
+                        onclick="window.location.href='${ctx}/material/toMaterialAdd.action?material_id=${list.material_id}'">报名参加</div>
                     </div>
                 </c:if>
             </c:forEach>
@@ -168,13 +168,18 @@
                 <div class="left">
                     <div class="left_one">
                         <div class="textbook_left">教材社区</div>
-                        <div class="all_left">全部>></div>
-                        <div class="left_con1" style="margin-top: 63px;">全国高等学校健康服务与管理专业第二轮规划教材</div>
-                        <div class="left_con1" >全国高等学校健康服务与管理专业第二轮规划教材</div>
-                        <div class="left_con1" >全国高等学校健康服务与管理专业第二轮规划教材</div>
+                        <div class="all_left" onclick="window.location.href='${ctx}/cmsnotice/tolist.action'">全部>></div>
+                        <c:forEach items="${listDou}" var="list" varStatus="status">
+	                      <c:if test="${status.index==0}">
+	                        <div class="left_con1" style="margin-top: 63px;" onclick="todou('${list.mid}')">${list.title}</div>
+	                      </c:if>
+	                      <c:if test="${status.index!=0}">
+	                        <div class="left_con1" onclick="todou('${list.mid}')">${list.title}</div>
+                          </c:if>
+                        </c:forEach>
                     </div>
                     <div class="left_two">
-                        <div class="textbook_left">重点学科推荐</div>
+                        <div class="textbook_left">重点学科推荐</div>  
                         <div class="all_left">全部>></div>
                         <div class="p1_left"></div>
                         <div class="p2_left"></div>

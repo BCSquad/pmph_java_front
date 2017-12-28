@@ -193,7 +193,7 @@
     float: left;
     margin-top: -20px;
     margin-left: 20px;
-    width: 110px;
+    width: 130px;
 }
 
 .display {
@@ -448,9 +448,10 @@
 }
 
 .text {
-    width: 133px;
-    height: 29px;
+    width: 125px;
+    height: 25px;
     border: 1px solid #E0E0E0;
+    padding: 5px;
 }
 
 .apache {
@@ -490,6 +491,7 @@
     height: 75px;
     border: 1px solid #E0E0E0;
     margin-left: 20px;
+    padding: 5px;
 }
 
 .info {
@@ -521,7 +523,7 @@
     height: 16px;
     background-color: #E4614F;
     border-radius: 3px;
-    margin-top: -20px;
+    margin-top: -17px;
     cursor: pointer;
 }
 

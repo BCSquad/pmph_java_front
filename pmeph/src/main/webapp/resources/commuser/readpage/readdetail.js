@@ -3,9 +3,12 @@ $(function () {
     $("#uploadFile").uploadFile({
         start: function () {
             console.log("开始上传。。。");
+            $("#upload_status").val('start');
         },
         done: function (filename, fileid) {
             console.log("上传完成：name " + filename + " fileid " + fileid);
+            window.message.success("上传成功！");
+            $("#upload_status").val('');
             $("#upname").html(filename);
             $("#attachment").val(fileid);
             $("#attachment_name").val(filename);
@@ -100,7 +103,7 @@ $(function () {
 
 //点击取消上传视频弹窗
 function hidevideo(){
-	$("#layui-layer1").hide();
+	layer.closeAll('page');
 }
 
 
@@ -307,7 +310,15 @@ function writeablut() {
 
 //点击显示纠错弹窗
 function showup() {
-    $("#bookmistake").show();
+	 $.ajax({
+	        type: 'post',
+	        url: contextpath + 'readdetail/tologin.action',
+	        async: false,
+	        dataType: 'json',
+	        success: function (json) {
+	        	 $("#bookmistake").show();
+	        }
+	    });
 }
 
 //点击纠错弹窗隐藏
@@ -317,39 +328,45 @@ function hideup() {
 
 //图书纠错
 function correction() {
-	 page=$("#page").val();
-     line=$("#line").val();
-     content=$("#content").val();
-     if(!Empty(page)&&!Empty(line)&&!Empty(content)){//非空判断
-    	 var json = {
-    		        book_id: $("#book_id").val(),
-    		        page: page,
-    		        line: line,
-    		        content: content,
-    		        attachment: $("#attachment").val(),
-    		        attachment_name: $("#attachment_name").val(),
-    		    };
-    		    $.ajax({
-    		        type: 'post',
-    		        url: contextpath + 'readdetail/correction.action',
-    		        data: json,
-    		        async: false,
-    		        dataType: 'json',
-    		        success: function (json) {
-    		            if (json == "OK") {
-    		            	window.message.info("数据已提交！");
-    		            	$("#bookmistake").hide();
-    		            	$("#page").val(null);
-    		                $("#line").val(null);
-    		                $("#content").val(null);
-    		                $("#upname").html('未选择任何文件!');
-    		            } else {
-    		            	window.message.info("错误，请填写完所有内容！");
-    		            }
-    		        }
-    		    });
-     }else{
-    	 window.message.info("错误，请填写完所有内容！");
-     }
+	if($("#upload_status").val()==''){
+		page=$("#page").val();
+	     line=$("#line").val();
+	     content=$("#content").val();
+	     if(!Empty(page)&&!Empty(line)&&!Empty(content)){//非空判断
+	    	 var json = {
+	    		        book_id: $("#book_id").val(),
+	    		        page: page,
+	    		        line: line,
+	    		        content: content,
+	    		        attachment: $("#attachment").val(),
+	    		        attachment_name: $("#attachment_name").val(),
+	    		    };
+	    		    $.ajax({
+	    		        type: 'post',
+	    		        url: contextpath + 'readdetail/correction.action',
+	    		        data: json,
+	    		        async: false,
+	    		        dataType: 'json',
+	    		        success: function (json) {
+	    		            if (json == "OK") {
+	    		            	window.message.info("数据已提交！");
+	    		            	$("#bookmistake").hide();
+	    		            	$("#page").val(null);
+	    		                $("#line").val(null);
+	    		                $("#content").val(null);
+	    		                $("#upname").html('未选择任何文件!');
+	    		                $("#upload_status").val(null);
+	    		            } else {
+	    		            	window.message.info("错误，请填写完所有内容！");
+	    		            }
+	    		        }
+	    		    });
+	     }else{
+	    	 window.message.info("错误，请填写完所有内容！");
+	     }
+	}else{
+		 window.message.info("错误，请等待文件上传完毕再提交！");
+	}
+	 
 }
 

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bc.pmpheep.back.commuser.book.service.BookService;
 import com.bc.pmpheep.back.commuser.collection.dao.BookCollectionDao;
 import com.bc.pmpheep.back.commuser.collection.service.BookCollectionService;
 import com.bc.pmpheep.back.commuser.readpage.service.ReadDetailService;
@@ -39,6 +40,9 @@ public class ReadDetailController extends BaseController{
 	 @Autowired
 	 @Qualifier("com.bc.pmpheep.back.commuser.collection.service.BookCollectionServiceImpl")
 	 private BookCollectionService bookCollectionService;
+	 @Autowired
+	 @Qualifier("com.bc.pmpheep.back.commuser.book.service.BookServiceImpl")
+	 private BookService bookService;
 	/**
 	 * 根据图书ID初始化数据
 	 * @param request
@@ -59,6 +63,8 @@ public class ReadDetailController extends BaseController{
 		List<Map<String, Object>> listCom=readDetailService.queryComment(id,0);
 		List<Map<String, Object>> ComNum=readDetailService.queryComment(id,-1);
 		List<Map<String, Object>> auList=readDetailService.queryAuthorType(author);
+		Long typeid=Long.valueOf(map.get("type").toString());
+		List<Map<String, Object>> typeList=bookService.queryParentTypeListByTypeId(typeid);
 		for (Map<String, Object> pmap : auList) {
 			if(("DEFAULT").equals(pmap.get("image_url"))){
 				pmap.put("image_url", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
@@ -122,6 +128,7 @@ public class ReadDetailController extends BaseController{
 		modelAndView.addObject("map", map);
 		modelAndView.addObject("listCom", listCom);
 		modelAndView.addObject("frList", frList);
+		modelAndView.addObject("typeList", typeList);
 		modelAndView.addObject("start", 2);
 		if(null!=(request.getParameter("state"))){
 			modelAndView.setViewName("commuser/readpage/writecom");
@@ -323,5 +330,15 @@ public class ReadDetailController extends BaseController{
 		resultMap.put("flag", flag);
 		return resultMap;
 	
+	}
+	
+	/**
+	 * 强制登录方法
+	 * @return
+	 */
+	@RequestMapping("tologin")
+	@ResponseBody
+	public String tologin(){
+		return "";
 	}
 }
