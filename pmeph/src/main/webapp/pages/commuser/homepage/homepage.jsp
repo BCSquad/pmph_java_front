@@ -39,7 +39,8 @@
                     <div class="bin marks" ><div class="lab-pic2"></div>专家申报</div>
                     <div class="bin consol"><div class="lab-pic3"></div>学校审核</div>
                     <div class="bin marks" ><div class="lab-pic4"></div>结果公布</div>
-                <div class="transaction" style="margin-top: 18px;">
+                </div>
+                <div class="transaction" style="margin-top: 8px;">
                     <div class="labeling">我要出书</div>
                     <div class="binone consol"><div class="lab-pic5"></div>医学专著</div>
                     <div class="binone marks" ><div class="lab-pic6"></div>科普图书</div>
@@ -53,8 +54,7 @@
                     <div class="bintwo consol"><div class="lab-pic11"></div>问卷调查</div>
                     <div class="bintwo marks" ><div class="lab-pic12"></div>经验交流</div>
                 </div>
-            </div>
-        </div>
+           </div>
         <div class="notice area-2">
             <div class="title" style="float: left">
                 <div class="line bgcolor-blue" style="float: left"></div>
@@ -65,17 +65,17 @@
                 <c:if test="${status.index==0}">
                     <div class="content-left" style="margin-left: 30px">
                         <p class="content-size">${list.title}</p>
-                        <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date"
-                                                                  pattern="yyyy-MM-dd"/></p>
-                        <div class="left_join">报名参加</div>                                          
+                        <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date" pattern="yyyy-MM-dd"/></p>
+                        <div class="left_join" 
+                        onclick="window.location.href='${ctx}/material/toMaterialAdd.action?material_id=${list.material_id}'">报名参加</div>                                          
                     </div>
                 </c:if>
                 <c:if test="${status.index!=0}">
                     <div class="content-left">
                         <p class="content-size">${list.title}</p>
-                        <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date"
-                                                                  pattern="yyyy-MM-dd"/></p>
-                        <div class="left_join">报名参加</div>  
+                        <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date" pattern="yyyy-MM-dd"/></p>
+                        <div class="left_join" 
+                        onclick="window.location.href='${ctx}/material/toMaterialAdd.action?material_id=${list.material_id}'">报名参加</div>  
                     </div>
                 </c:if>
             </c:forEach>
@@ -158,10 +158,15 @@
                 <div class="left">
                     <div class="left_one">
                         <div class="textbook_left">教材社区</div>
-                        <div class="all_left">全部>></div>
-                        <div class="left_con1" style="margin-top: 63px;">全国高等学校健康服务与管理专业第二轮规划教材</div>
-                        <div class="left_con1" >全国高等学校健康服务与管理专业第二轮规划教材</div>
-                        <div class="left_con1" >全国高等学校健康服务与管理专业第二轮规划教材</div>
+                        <div class="all_left" onclick="window.location.href='${ctx}/cmsnotice/tolist.action'">全部>></div>
+                        <c:forEach items="${listDou}" var="list" varStatus="status">
+	                      <c:if test="${status.index==0}">  
+	                        <div class="left_con1" style="margin-top: 63px;" onclick="todou('${list.mid}')">${list.title}</div>
+	                      </c:if> 
+	                      <c:if test="${status.index!=0}">   
+	                        <div class="left_con1" onclick="todou('${list.mid}')">${list.title}</div>
+                          </c:if>
+                        </c:forEach>
                     </div>
                     <div class="left_two">
                         <div class="textbook_left">重点学科推荐</div>  
@@ -427,9 +432,10 @@
         </div>
         <div style="clear: both"></div>
     </div>
-    <div class="test" id="test_float">
+    <div class="test" id="test_float" onclick="tosurvey()">
         <div class="cancel" onclick="cancel()">关闭</div>
     </div>
+  </div>
 </div>
 </body>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>

@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="${ctx}/resources/comm/layui/css/layui.css">
     <link href="${ctx}/statics/commuser/readpage/readdetail.css" type="text/css" rel="stylesheet">
     <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery-validate.js" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
     <script src="${ctx}/resources/comm/base.js"></script>
@@ -38,10 +37,10 @@
                 <div class="x" onclick="hideup()"></div>
             </div>
             <div class="input">
-                <label style="margin-left: 20px" class="labell" >页码&nbsp;:&nbsp;</label>
-                <input type="text" class="text" id="page"/>
+                <label style="margin-left: 20px" class="labell require" >页码&nbsp;:&nbsp;</label>
+                <input type="text" class="text" id="page" />
                 <label style="margin-left: 10px" class="labell" >行数&nbsp;:&nbsp;</label>
-                <input type="text" class="text" id="line"/>
+                <input type="text" class="text" id="line" />
             </div>
             <div class="info">
                 <label style="margin-left: 20px" class="labell" >纠错内容&nbsp;:&nbsp;</label>
@@ -55,18 +54,25 @@
                 <label class="uploadfile" id="upname">未选择任何文件!</label>
                 <input type="hidden" id="attachment"/>
                 <input type="hidden" id="attachment_name"/>
+                <input type="hidden" id="upload_status"/>
             </div>
             <div class="">
-                <button class="btn" onclick="correction()">确认</button>
+                <button class="btn" type="button" onclick="correction()">确认</button>
             </div>
         </div>
         <!--左边区域-->
         <div class="leftarea">
-            <div class="title" style="margin-top: -20px"><span>读书 > 病理生理学</span></div>
+            <div class="title" style="margin-top: -20px"><span>读书 >${map.bookname}</span></div>
             <div class="bt"><span>${map.bookname}</span></div>
             <div class="lj" style="margin-top: -10px">
                 <span class="span_1">分类路径：</span>
-                <span class="span_2">学校教育>高职高专教材>护理类专业>规划教材>涉外护理  </span>
+                <c:forEach items="${typeList}" var="list" varStatus="status">
+                  <span class="span_2">${list.type_name }
+                  	 <c:if test="${status.index < typeList.size()-1}">
+                    		>
+                   		</c:if>  
+                  </span>
+                </c:forEach>
             </div>
             <div style="width: 100%;">
                 <div class="dzsc">
