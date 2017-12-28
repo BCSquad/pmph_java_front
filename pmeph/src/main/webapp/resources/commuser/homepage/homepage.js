@@ -99,4 +99,15 @@ function changesale(type) {
 //关闭问卷调查
 function cancel(){
 	$("#test_float").hide();
+	$("#test_float").attr('onclick','');
+}
+
+//跳转到问卷调查页面
+function tosurvey(){
+	 location.href = contextpath + 'survey/surveyList.action';
+}
+
+//跳转公告详情页面
+function todou(mid){
+	location.href = contextpath + 'cmsnotice/noticeMessageDetail.action?id='+mid;
 }
