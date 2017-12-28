@@ -75,8 +75,19 @@ public interface PersonalService {
 	 */
 	public Map<String, Object> authorReply(String id, String author_reply);
 
-	
-	
-	
+	/**
+	 * 我的纠错查询 （作为纠错人）
+	 * @param pageParameter
+	 * @return
+	 */
+	public List<Map<String, Object>> queryMyCorrection(PageParameter<Map<String, Object>> pageParameter);
+
+	/**
+	 * 我的纠错查询总数 （作为纠错人）
+	 * @param pageParameter
+	 * @return
+	 */
+	public int queryMyCorrectionCount(PageParameter<Map<String, Object>> pageParameter);
+
 	
 }

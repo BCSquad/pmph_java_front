@@ -60,6 +60,20 @@ public interface PersonalDao {
 	 */
 	public int authorReply(Map<String, String> paraMap);
 	
+	/**
+	 * 我的纠错查询 （作为纠错人）
+	 * @param pageParameter
+	 * @return
+	 */
+	public List<Map<String, Object>> queryMyCorrection(PageParameter<Map<String, Object>> pageParameter);
+	
+	/**
+	 * 我的纠错查询总数 （作为纠错人）
+	 * @param pageParameter
+	 * @return
+	 */
+	public Integer queryMyCorrectionCount(PageParameter<Map<String, Object>> pageParameter);
+	
 	
 	
 	

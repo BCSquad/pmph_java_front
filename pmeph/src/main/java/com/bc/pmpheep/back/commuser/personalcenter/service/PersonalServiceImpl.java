@@ -105,21 +105,51 @@ public class PersonalServiceImpl implements PersonalService {
 	@Override
 	public Map<String, Object> authorReply(String id, String author_reply) {
 		Map<String, String> paraMap = new HashMap<String, String>();
+		author_reply = author_reply.trim();
+		int ml = 500;
+		
 		paraMap.put("id", id);
 		paraMap.put("author_reply", author_reply);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		if (author_reply!=null && author_reply.length()>0 ) {
-			int count = personaldao.authorReply(paraMap);
-			resultMap.put("msg", "回复已提交成功！");
+			
+			int length = author_reply.replaceAll("[^\\x00-\\xff]", "**").length();  
+			if (length <= ml) {
+				int count = personaldao.authorReply(paraMap);
+				resultMap.put("msg", "回复已提交成功！");
+				resultMap.put("code", "OK");
+			}else{
+				resultMap.put("msg", "不可超过输入最大长度"+ml+"字节！");
+				resultMap.put("code", "WARNING");
+			}
 		}else{
 			resultMap.put("msg", "回复内容不可为空！");
+			resultMap.put("code", "WARNING");
 		}
 		
 		return resultMap;
 	}
 
-	
+	@Override
+	public List<Map<String, Object>> queryMyCorrection(PageParameter<Map<String, Object>> pageParameter) {
+		List<Map<String, Object>> result_list=  personaldao.queryMyCorrection(pageParameter);
+		return result_list;
+	}
+
+	@Override
+	public int queryMyCorrectionCount(PageParameter<Map<String, Object>> pageParameter) {
+		Integer count =personaldao.queryMyCorrectionCount(pageParameter);
+		return count;
+	}
 
 	
+	/*基本原理是将字符串中所有的非标准字符（双字节字符）替换成两个标准字符（**，或其他的也可以）。这样就可以直接例用length方法获得字符串的字节长度了*/  
+    public static  int getWordCountRegex(String s)  
+    {  
+  
+        s = s.replaceAll("[^\\x00-\\xff]", "**");  
+        int length = s.length();  
+        return length;  
+    }  
 
 }

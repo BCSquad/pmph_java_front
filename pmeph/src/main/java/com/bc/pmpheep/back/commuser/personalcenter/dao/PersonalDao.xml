@@ -225,6 +225,7 @@ AND a.online_progress IN (2, 3)
 		
 	</select>
 	
+	<!-- 图书纠错 -->
 	<select id="queryBookCorrectd" parameterType="PageParameter" resultType="Map">
 		SELECT
 		b.bookname,
@@ -247,14 +248,15 @@ AND a.online_progress IN (2, 3)
 		Inner Join book_correction AS bc ON b.id = bc.book_id
 		<where>
 		be.author_id =  #{parameter.logUserId}
-		<if test="parameter.is_author_replied != null and parameter.is_author_replied != '' ">
-			and bc.is_author_replied = #{parameter.is_author_replied}
+		<if test="parameter.is_replied != null and parameter.is_replied != '' ">
+			and bc.is_author_replied = #{parameter.is_replied}
 		</if>
 		</where>
 		order by  bc.is_author_replied asc , bc.gmt_create desc
 		limit ${start},${pageSize}
 	</select>
 	
+	<!-- 图书纠错 总数 -->
 	<select id="queryBookCorrectdCount" parameterType="PageParameter" resultType="Integer">
 	
 	select count(*) from
@@ -267,17 +269,92 @@ AND a.online_progress IN (2, 3)
 		Inner Join book_correction AS bc ON b.id = bc.book_id
 		WHERE
 		be.author_id =  #{parameter.logUserId}
-		<if test="parameter.is_author_replied != null and parameter.is_author_replied != '' ">
-			and bc.is_author_replied = #{parameter.is_author_replied}
+		<if test="parameter.is_replied != null and parameter.is_replied != '' ">
+			and bc.is_author_replied = #{parameter.is_replied}
 		</if>
 		)t
 	</select>
 	
+	<!-- 图书纠错回复 -->
 	<update id="authorReply" parameterType="Map">
 		update book_correction
 		set  is_author_replied = 1
 			,author_reply = #{author_reply}
 		where id = #{id}
 	</update>
+
+	<!-- 我的纠错resultMap 主map为图书信息 -->
+	<resultMap type="Map" id="MyBookCorrectionMap">
+		<id property="book_id" column="book_id"/>
+		<result property="bookname" column="bookname"/>
+		<result property="isbn" column="isbn"/>
+		<result property="author" column="author"/>
+		<result property="image_url" column="image_url"/>
+		<!-- 该图书的多条纠错信息 -->
+		<collection property="correctionList" javaType="ArrayList" ofType="Map">
+			<id property="id" column="id"/>
+			<result property="page" column="page"/>
+			<result property="line" column="line"/>
+			<result property="content" column="content"/>
+			<result property="attachment" column="attachment"/>
+			<result property="attachment_name" column="attachment_name"/>
+			<result property="is_author_replied" column="is_author_replied"/>
+			<result property="is_editor_replied" column="is_editor_replied"/>
+			<result property="result" column="result"/>
+			<result property="reply_date" column="reply_date"/>
+			<result property="editor_reply" column="editor_reply"/>
+		</collection>
+	</resultMap>
+
+	<!-- 我的纠错 -->
+	<select id="queryMyCorrection" parameterType="PageParameter" resultMap="MyBookCorrectionMap">
+		SELECT
+		b.bookname,
+		b.isbn,
+		b.author,
+		b.image_url,
+		bc.id,
+		bc.book_id,
+		bc.page,
+		bc.line,
+		bc.content,
+		bc.attachment,
+		bc.attachment_name,
+		bc.is_editor_replied,
+		bc.result,
+		bc.reply_date,
+		bc.editor_reply,
+		bc.is_author_replied
+		FROM
+		book AS b
+		Inner Join book_correction AS bc ON b.id = bc.book_id
+		WHERE
+		bc.user_id =  #{parameter.logUserId}
+		AND bc.is_deleted =  '0' 
+		<if test="parameter.is_replied != null and parameter.is_replied != '' ">
+			AND bc.is_editor_replied =  #{parameter.is_replied}
+		</if>
+		order by  bc.gmt_create desc
+		limit ${start},${pageSize}
+	</select>
+	
+	<select id="queryMyCorrectionCount" parameterType="PageParameter" resultType="Integer">
+		select count(*) from 
+			(
+				SELECT
+				b.id
+				FROM
+				book AS b
+				Inner Join book_correction AS bc ON b.id = bc.book_id
+				WHERE
+				bc.user_id =  #{parameter.logUserId}
+				AND bc.is_deleted =  '0' 
+				<if test="parameter.is_replied != null and parameter.is_replied != '' ">
+					AND bc.is_editor_replied =  #{parameter.is_replied}
+				</if>
+				group by b.id
+			)t
+	</select>
+
 
 </mapper>

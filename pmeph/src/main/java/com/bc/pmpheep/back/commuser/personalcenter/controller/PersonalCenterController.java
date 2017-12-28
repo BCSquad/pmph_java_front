@@ -1,6 +1,7 @@
 package com.bc.pmpheep.back.commuser.personalcenter.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -21,6 +22,7 @@ import com.bc.pmpheep.back.commuser.personalcenter.bean.PersonalNewMessage;
 import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.template.service.TemplateService;
+import com.bc.pmpheep.back.util.MD5;
 import com.bc.pmpheep.general.controller.BaseController;
 
 //首页controller
@@ -28,6 +30,7 @@ import com.bc.pmpheep.general.controller.BaseController;
 @RequestMapping("/personalhomepage")
 public class PersonalCenterController extends BaseController {
 
+	
 	@Autowired
     @Qualifier("com.bc.pmpheep.back.template.service.TemplateService")
     private TemplateService templateService;
@@ -65,20 +68,33 @@ public class PersonalCenterController extends BaseController {
 		}else if("tsjc".equals(pagetag)){ //图书纠错 (我是第一主编)
 			//从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
 			//设定条件名数组 
-			String[] names={"is_author_replied"};
+			String[] names={"is_replied"};
 			String[] namesChi = {};
 			queryConditionOperation(names,namesChi,request, mv, paraMap,vm_map);
 			pageParameter.setParameter(paraMap);
 
-			List<Map<String,Object>> List_map = personalService.queryBookCorrectd(pageParameter);//教材申报最新消息
+			List<Map<String,Object>> List_map = personalService.queryBookCorrectd(pageParameter);
 			count = personalService.queryBookCorrectdCount(pageParameter);
 			//分页数据代码块
 			String html = this.mergeToHtml("commuser/personalcenter/bookCorrected.vm",contextpath, pageParameter, List_map,vm_map);
-			mv.addObject("List_map",List_map);//测试
+			/*mv.addObject("List_map",List_map);*///测试
 			mv.addObject("html",html);
 			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
-			
-			
+		}else if("wdjc".equals(pagetag)){  //我的纠错(我是纠错人)
+			//从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
+			//设定条件名数组 
+			String[] names={"is_replied"};
+			String[] namesChi = {};
+			queryConditionOperation(names,namesChi,request, mv, paraMap,vm_map);
+			pageParameter.setParameter(paraMap);
+
+			List<Map<String,Object>> List_map = personalService.queryMyCorrection(pageParameter);
+			count = personalService.queryMyCorrectionCount(pageParameter);
+			//分页数据代码块
+			String html = this.mergeToHtml("commuser/personalcenter/myCorrection.vm",contextpath, pageParameter, List_map,vm_map);
+			/*mv.addObject("List_map",List_map);*///测试
+			mv.addObject("html",html);
+			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
 		}else if("sbwz".equals(pagetag)){ //随笔文章
 			//从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
 			//设定条件名数组 
@@ -87,7 +103,7 @@ public class PersonalCenterController extends BaseController {
 			queryConditionOperation(names,namesChi,request, mv, paraMap,vm_map);
 			pageParameter.setParameter(paraMap);
 
-			List<Map<String,Object>> List_map = personalService.queryMyWritingsNew(pageParameter);//教材申报最新消息
+			List<Map<String,Object>> List_map = personalService.queryMyWritingsNew(pageParameter);
 			count = personalService.queryMyWritingsNewCount(pageParameter);
 			//分页数据代码块
 			String html = this.mergeToHtml("commuser/personalcenter/myWritingsList.vm",contextpath, pageParameter, List_map,vm_map);
@@ -129,8 +145,6 @@ public class PersonalCenterController extends BaseController {
 			mv.addObject("List_map",List_map);//测试
 			mv.addObject("html",html);
 			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
-		}else if("wdjc".equals(pagetag)){  //我的纠错
-			
 		}else if("wdwj".equals(pagetag)){  //我的问卷
 			
 		}else{
@@ -412,4 +426,5 @@ public class PersonalCenterController extends BaseController {
         modelAndView.addObject("listbookjoins", listbookjoins);*/
 	}
 
+	
 }
