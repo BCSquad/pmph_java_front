@@ -36,8 +36,8 @@ public class HomeServiceImpl implements HomeService {
 	 * 查询医学随笔
 	 */
 	@Override
-	public List<Map<String, Object>> queryArticle(){
-		List<Map<String, Object>> list=homeDao.queryArticle();
+	public List<Map<String, Object>> queryArticle(int endrow){
+		List<Map<String, Object>> list=homeDao.queryArticle(endrow);
 		for (Map<String, Object> map : list) {
 			String time=map.get("gmt_create").toString().substring(0, 16);
 			map.put("gmt_create", time);
@@ -49,7 +49,7 @@ public class HomeServiceImpl implements HomeService {
 	 */
 	@Override
 	public List<Map<String, Object>> queryAuthor(){
-		List<Map<String, Object>> list=homeDao.queryArticle();
+		List<Map<String, Object>> list=homeDao.queryAuthor();
 		return list;
 	}
 	/**

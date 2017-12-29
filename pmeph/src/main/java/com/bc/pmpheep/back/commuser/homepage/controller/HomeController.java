@@ -36,7 +36,7 @@ public class HomeController {
         int flag = 0;
         List<Map<String, Object>> listDou = homeService.queryDocument();
         List<Map<String, Object>> listNot = homeService.queryNotice();
-        List<Map<String, Object>> listArt = homeService.queryArticle();
+        List<Map<String, Object>> listArt = homeService.queryArticle(4);
         List<Map<String, Object>> listAut = homeService.queryAuthor();
         List<Map<String, Object>> listCom = homeService.queryComment();
 

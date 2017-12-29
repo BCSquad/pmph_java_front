@@ -28,7 +28,12 @@ public interface HomeDao {
 	 * @Description: 查询最新四条医学随笔
 	 * @return List<HomepageDocument>
 	 */
-	List<Map<String, Object>> queryArticle();
+	List<Map<String, Object>> queryArticle(@Param("endrow") int endrow);
+	/**
+	 * 查询作者
+	 * @return List<Map<String, Object>>
+	 */
+	List<Map<String, Object>> queryAuthor();
 	/**
 	 * @Description: 查询四个点击人数最多的随笔的作者
 	 * @return List<HomepageDocument>
