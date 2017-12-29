@@ -58,6 +58,8 @@
             <mvc:mapping path="/booksearch/likeSwitch*"/>
             <mvc:mapping path="/teacherCertification/*"/>
             <!--  -->
+            <!--出书申报 -->
+            <mvc:mapping path="/bookdeclare/*"/>
             
             <bean class="com.bc.pmpheep.back.interceptor.LoginInterceptor">
                 <property name="redirectUrl" value="/pages/comm/login.jsp"/>
