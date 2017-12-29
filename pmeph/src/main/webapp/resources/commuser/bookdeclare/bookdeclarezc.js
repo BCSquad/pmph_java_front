@@ -1,5 +1,6 @@
 
 $(function () {
+	
     $('.dzdx').selectlist({
         width: 308,
         height: 30,
@@ -15,7 +16,14 @@ $(function () {
     	height: 30,
     	optionHeight: 30
     });
-
+    var twriteCount = $("#twriteCount").val();
+	for(var i =1 ;i<=twriteCount;i++){
+		$('#r_sex_'+i).selectlist({
+	    	width: 90,
+	    	height: 30,
+	    	optionHeight: 30
+	    });
+	}
 });
 //生成随机数
 function only(ele,arr){ 
@@ -83,7 +91,7 @@ function del_tr(trId){
 function buttAdd(type){
 	$.ajax({
 		type: "POST",
-		url:contextpath+'bookdeclare/doBookdeclareAdd.action?stype='+type,
+		url:contextpath+'bookdeclare/doBookdeclareZc.action?stype='+type,
 		data:$('#objForm').serialize(),// 你的formid
 		async: false,
 		dataType:"json",

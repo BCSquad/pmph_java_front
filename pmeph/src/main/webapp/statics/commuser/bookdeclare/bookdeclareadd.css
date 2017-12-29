@@ -35,7 +35,47 @@
 
 #tsxz_span1{
 	background-image: url(../../image/css_sprites.png);
-    background-position: -333px -7px;
+    background-position: -333px -309px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 20px;
+    float: left;
+}
+#tsxz_span2{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -333px -332px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 20px;
+    float: left;
+}
+#tsxz_span3{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -333px -354px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 20px;
+    float: left;
+}
+#tsxz_span4{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -333px -379px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 20px;
+    float: left;
+}
+#tsxz_span5{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -333px -400px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 20px;
+    float: left;
+}
+#tsxz_span6{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -333px -423px;
     background-repeat: no-repeat;
     height: 18px;
     width: 20px;
@@ -207,4 +247,23 @@
 .add_img{
 	cursor: pointer;
 	
+}
+.tj_div{
+	width: 55px;
+	height: 22px;
+	margin-top: 3px;
+	margin-left: 10px;
+}
+
+#img_1{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -262px -101px;
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 20px;
+    float: left;
+}
+
+#wz_1{
+	float: left;
 }

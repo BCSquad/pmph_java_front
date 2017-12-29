@@ -475,7 +475,6 @@ function del_tr(trId){
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type){
 	//if(checkNull(jsonStr)){
-	alert(11);
 		$.ajax({
 			type: "POST",
 			url:contextpath+'material/doMaterialUpdate.action?type='+type,

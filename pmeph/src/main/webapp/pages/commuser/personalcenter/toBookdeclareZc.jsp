@@ -20,7 +20,7 @@
 <script type="text/javascript" src="${ctx}/resources/comm/layer/layer.js"></script>
 <script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
 <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js" type="text/javascript"></script>
-<script type="text/javascript" src="${ctx}/resources/commuser/bookdeclare/bookdeclareadd.js"></script>
+<script type="text/javascript" src="${ctx}/resources/commuser/bookdeclare/bookdeclarezc.js"></script>
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
@@ -47,56 +47,57 @@
 					<tr>
 						<td width="140px"><span class="btbs">*</span><span>选题名称：</span></td>
 						<td width="460px">
-							<input class="cg_input" name="bookname" id="bookname" placeholder="选题名称" value="" maxlength="100"/>
-							<input type="hidden" name="user_id" value="${userMap.id}"/>
+							<input class="cg_input" name="bookname" id="bookname" placeholder="选题名称" value="${topicMap.bookname}" maxlength="100"/>
+							<input type="hidden" name="user_id" value="${topicMap.user_id}"/>
+							<input type="hidden" name="topic_id" value="${topicMap.id}"/>
 						</td>
 						<td width="100px"><span class="btbs">*</span><span>读者对象：</span></td>
 						<td width="300px">
 							<select name="reader" id="dzdx" class="dzdx">
-								<option value="0">医务工作者</option>
-								<option value="1">医学院校师生</option>
-								<option value="2">大众</option>
+								<option value="0" ${topicMap.reader=='0'?'selected':''}>医务工作者</option>
+								<option value="1" ${topicMap.reader=='1'?'selected':''}>医学院校师生</option>
+								<option value="2" ${topicMap.reader=='2'?'selected':''}>大众</option>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<td><span class="btbs">*</span><span>预计交稿时间：</span></td>
 						<td>
-							<input class="cg_input" name="deadline" id="deadline" calendar format="'yyyy-mm-dd'" value="" placeholder="预计交稿时间"/>
+							<input class="cg_input" name="deadline" id="deadline" calendar format="'yyyy-mm-dd'" value="${topicMap.bookname}" placeholder="预计交稿时间"/>
 						</td>
 						<td><span class="btbs">*</span><span>选题来源：</span></td>
 						<td>
 							<select name="source" id="xzly" class="xzly">
-								<option value="0">社策划</option>
-								<option value="1">编辑策划</option>
-								<option value="2">专家策划</option>
-								<option value="3">离退休编审策划</option>
-								<option value="4">上级交办</option>
-								<option value="5">作者投稿</option>
+								<option value="0" ${topicMap.source=='0'?'selected':''}>社策划</option>
+								<option value="1" ${topicMap.source=='1'?'selected':''}>编辑策划</option>
+								<option value="2" ${topicMap.source=='2'?'selected':''}>专家策划</option>
+								<option value="3" ${topicMap.source=='3'?'selected':''}>离退休编审策划</option>
+								<option value="4" ${topicMap.source=='4'?'selected':''}>上级交办</option>
+								<option value="5" ${topicMap.source=='5'?'selected':''}>作者投稿</option>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<td><span class="btbs">*</span><span>预估字数：</span></td>
 						<td>
-							<input class="cg_input" name="word_number" id="word_number" value="" placeholder="单位千字"  maxlength="20"/>
+							<input class="cg_input" name="word_number" id="word_number" value="${topicMap.bookname}" placeholder="单位千字"  maxlength="20"/>
 						</td>
 						<td><span class="btbs">*</span><span>预估图数：</span></td>
 						<td>
-							<input class="cg_input" name="picture_number" id="picture_number" value=""  maxlength="20"/>
+							<input class="cg_input" name="picture_number" id="picture_number" value="${topicMap.bookname}"  maxlength="20"/>
 						</td>
 					</tr>
 						<tr>
 						<td><span class="btbs">*</span><span>学科及专业：</span></td>
 						<td>
-							<input class="cg_input" name="subject" id="subject" placeholder="学科及专业" value="" />
+							<input class="cg_input" name="subject" id="subject" placeholder="学科及专业" value="${topicMap.bookname}" />
 						</td>
 						<td><span class="btbs">*</span><span>级别：</span></td>
 						<td>
 							<div class="tsjb">&emsp;
-								<input type="radio" name="rank" value="0" checked="checked"/>低
-								<input type="radio" name="rank" value="1" />中
-								<input type="radio" name="rank" value="2" />高
+								<input type="radio" name="rank" value="0" ${topicMap.rank=='0'?'checked':''}/>低
+								<input type="radio" name="rank" value="1" ${topicMap.rank=='1'?'checked':''}/>中
+								<input type="radio" name="rank" value="2" ${topicMap.rank=='2'?'checked':''}/>高
 							</div>
 						</td>
 					</tr>
@@ -104,13 +105,13 @@
 						<td><span class="btbs">*</span><span>图书类别：</span></td>
 						<td colspan="3">
 							<div class="tslb">&emsp;
-								<input type="radio" name="type" value="0" checked="checked"/>专著
-								<input type="radio" name="type" value="1" />基础理论
-								<input type="radio" name="type" value="2" />论文集
-								<input type="radio" name="type" value="3" />科普
-								<input type="radio" name="type" value="4" />应用技术
-								<input type="radio" name="type" value="5" />工具书
-								<input type="radio" name="type" value="6" />其他
+								<input type="radio" name="type" value="0" ${topicMap.type=='0'?'checked':''}/>专著
+								<input type="radio" name="type" value="1" ${topicMap.type=='1'?'checked':''}/>基础理论
+								<input type="radio" name="type" value="2" ${topicMap.type=='2'?'checked':''}/>论文集
+								<input type="radio" name="type" value="3" ${topicMap.type=='3'?'checked':''}/>科普
+								<input type="radio" name="type" value="4" ${topicMap.type=='4'?'checked':''}/>应用技术
+								<input type="radio" name="type" value="5" ${topicMap.type=='5'?'checked':''}/>工具书
+								<input type="radio" name="type" value="6" ${topicMap.type=='6'?'checked':''}/>其他
 							</div>
 						</td>
 					</tr>
@@ -118,7 +119,7 @@
 					<tr>
 						<td colspan="4">
 							<div>
-								<span id="tsxz_span1"></span>
+								<span id="tsxz_span2"></span>
 								<span class="tsxz_title">结算信息</span>
 							</div>
 						</td>
@@ -126,18 +127,18 @@
 					<tr>
 						<td><span>银行账户：</span></td>
 						<td>
-							<input class="cg_input" name="bank_account_id" id="bank_account_id" placeholder="银行账户" value=""/>
+							<input class="cg_input" name="bank_account_id" id="bank_account_id" placeholder="银行账户" value="${topicMap.bookname}"/>
 						</td>
 						<td><span>开户银行：</span></td>
 						<td>
-							<input class="cg_input" name="realname" id="realname" placeholder="开户银行" value=""/>
+							<input class="cg_input" name="realname" id="realname" placeholder="开户银行" value="${topicMap.bookname}"/>
 						</td>
 					</tr>
 					<!-- 选题情况 -->
 					<tr>
 						<td colspan="4">
 							<div>
-								<span id="tsxz_span1"></span>
+								<span id="tsxz_span3"></span>
 								<span class="tsxz_title">选题情况</span>
 								<span class="tsxz_ts1"><img src="${ctx}/statics/image/btxx.png" /></span>
 							</div>
@@ -146,8 +147,9 @@
 					<tr>
 						<td><span>一、选题理由：</span></td>
 						<td colspan="3">
+							<input type="hidden" name="extra_id" value="${textraMap.id}"/>
 							<div class="content">
-								<textarea class="text_cl" name="reason"></textarea>
+								<textarea class="text_cl" name="reason">${textraMap.reason}</textarea>
 							</div>
 						</td>
 					</tr>
@@ -155,7 +157,7 @@
 						<td><span>二、出版价值：</span></td>
 						<td colspan="3">
 							<div class="content">
-								<textarea class="text_cl" name="price"></textarea>
+								<textarea class="text_cl" name="price">${textraMap.price}</textarea>
 							</div>
 						</td>
 					</tr>
@@ -163,7 +165,7 @@
 						<td><span>三、主要内容：</span></td>
 						<td colspan="3">
 							<div class="content">
-								<textarea class="text_cl" name="extra_score"></textarea>
+								<textarea class="text_cl" name="extra_score">${textraMap.score}</textarea>
 							</div>
 						</td>
 					</tr>
@@ -171,7 +173,7 @@
 					<tr>
 						<td colspan="4">
 							<div>
-								<span id="tsxz_span1"></span>
+								<span id="tsxz_span4"></span>
 								<span class="tsxz_title">读者情况及印刷预测 </span>
 							</div>
 						</td>
@@ -179,11 +181,11 @@
 					<tr>
 						<td><span>作者购书：</span></td>
 						<td>
-							<input class="cg_input" name="purchase" id="purchase" placeholder="请输入作者购买册数" value=""/>
+							<input class="cg_input" name="purchase" id="purchase" placeholder="请输入作者购买册数" value="${topicMap.bookname}"/>
 						</td>
 						<td><span>作者赞助：</span></td>
 						<td>
-							<input class="cg_input" name="sponsorship" id="sponsorship" placeholder="请输入预估金额" value=""/>
+							<input class="cg_input" name="sponsorship" id="sponsorship" placeholder="请输入预估金额" value="${topicMap.bookname}"/>
 						</td>
 					</tr>
 				</table>
@@ -192,7 +194,7 @@
 					<tr>
 						<td colspan="4">
 							<div>
-								<span id="tsxz_span1"></span>
+								<span id="tsxz_span5"></span>
 								<span class="tsxz_title">翻译书稿</span>
 							</div>
 						</td>
@@ -200,21 +202,21 @@
 					<tr>
 						<td width="106px"><span>译稿原书名：</span></td>
 						<td width="400px">
-							<input class="cg_input" name="original_bookname" id="original_bookname" placeholder="" value=""/>
+							<input class="cg_input" name="original_bookname" id="original_bookname" placeholder="" value="${topicMap.bookname}"/>
 						</td>
 						<td style="text-align: center;"><span>原编著者：</span></td>
 						<td width="308px">
-							<input class="cg_input" name="original_author" id="original_author" placeholder="" value=""/>
+							<input class="cg_input" name="original_author" id="original_author" placeholder="" value="${topicMap.bookname}"/>
 						</td>
 					</tr>
 					<tr>
 						<td><span>国籍：</span></td>
 						<td>
-							<input class="cg_input" name="nation" id="nation" placeholder="" value=""/>
+							<input class="cg_input" name="nation" id="nation" placeholder="" value="${topicMap.bookname}"/>
 						</td>
 						<td style="text-align: center;"><span>出版年代及版次：</span></td>
 						<td>
-							<input class="cg_input" name="edition" id="edition" placeholder="出版年代及版次" value=""/>
+							<input class="cg_input" name="edition" id="edition" placeholder="出版年代及版次" value="${topicMap.bookname}"/>
 						</td>
 					</tr>
 				</table>
@@ -223,12 +225,14 @@
 		<!-- 申报编者情况 -->
 		<div class="sbxq_item">
 			<div>
-				<span id="tsxz_span1"></span>
+				<span id="tsxz_span6"></span>
 				<span class="tsxz_title">申报编者情况 </span>
-				<!-- <div class="sb_tj">
-					<span></span>
-					<span>添加</span>
-				</div> -->
+				<div class="sb_tj">
+				 	<div class="tj_div" onclick="add_zjky()">
+						<span id="img_1"></span>
+						<span id="wz_1">添加</span>
+				 	</div>
+				</div>
 			</div>
 			<div class="content">
 				<table class="tab_2" id="sbbzqk">
@@ -243,19 +247,22 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td><input class="sb_input" style="width: 100px;" name="write_realname" placeholder="编者姓名" value=""/></td>
-							<td>
-								<select id="r_sex" name="sex">
-									<option value="0">男</option>
-									<option value="1">女</option>
-								</select>
-							</td>
-							<td><input class="sb_input" style="width: 80px;" name="write_price" placeholder="年龄" value=""/></td>
-							<td><input class="sb_input" style="width: 320px;" name="write_position" placeholder="行政职务" value=""/></td>
-							<td><input class="sb_input" style="width: 200px;" name="workplace" placeholder="工作单位" value=""/></td>
-							<td><div class="add_div"><img class="add_img" src="${ctx}/statics/image/add.png" onclick="add_zjky()"></div></td>
-						</tr>
+						<c:forEach var="list" items="${twriteList}" varStatus="status">
+							<tr id="sbbzqk_${status.count}">
+								<td><input class="sb_input" style="width: 100px;" name="write_realname" placeholder="编者姓名" value="${list.realname}"/></td>
+								<td>
+									<select id="r_sex_${status.count}" name="sex">
+										<option value="0" ${list.sex=='0'?'selected':''}>男</option>
+										<option value="1" ${list.sex=='1'?'selected':''}>女</option>
+									</select>
+									<input type="hidden" id="twriteCount" name="twriteCount" value="${twriteCount} "/>
+								</td>
+								<td><input class="sb_input" style="width: 80px;" name="write_price" placeholder="年龄" value="${list.price}"/></td>
+								<td><input class="sb_input" style="width: 320px;" name="write_position" placeholder="行政职务" value="${list.position}"/></td>
+								<td><input class="sb_input" style="width: 200px;" name="workplace" placeholder="工作单位" value="${list.workplace}"/></td>
+								<td><div class="add_div"><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('sbbzqk_${status.count}')"></div></td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
