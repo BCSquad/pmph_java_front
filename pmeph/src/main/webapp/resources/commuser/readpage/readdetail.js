@@ -184,12 +184,12 @@ function changepage() {
 };
 //新增评论
 function insert() {
-    if ($("#content").val() == '') {
+    if ($("#content_book").val() == '') {
         window.message.info("请输入评论！");
         return;
     }
     var json = {
-        content: $("#content").val(),
+        content: $("#content_book").val(),
         score: $("#last_score").html(),
         book_id: $("#book_id").val(),
     };
@@ -201,7 +201,7 @@ function insert() {
         data: json,
         success: function (json) {
             if (json.returncode == "OK") {
-                $("#content").val(null);
+                $("#content_book").val(null);
                 window.message.success("评论成功");
             }
         }
