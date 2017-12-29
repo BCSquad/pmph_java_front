@@ -27,12 +27,20 @@
     <jsp:param value="readpage" name="pageTitle"/>
 </jsp:include>
 <div class="body">
-
     <div class="content-wrapper">
         <div class="area1">
             <div class="banner">
-                <img src="${ctx}/statics/image/gg_01.png" style="margin: 7px;"/>
                 <!--广告轮播区域-->
+                <div class="move" id="move">
+	                <ul>
+		                <li><img src="${ctx}/statics/image/gg_01.png" style="margin: 7px;"/></li>
+		                <li><img src="${ctx}/statics/image/gg_01.png" style="margin: 7px;"/></li>
+		                <li><img src="${ctx}/statics/image/gg_01.png" style="margin: 7px;"/></li>
+		                <li><img src="${ctx}/statics/image/gg_01.png" style="margin: 7px;"/></li>
+		                <li><img src="${ctx}/statics/image/gg_01.png" style="margin: 7px;"/></li>
+	                </ul>
+                </div>
+                <div class="ctrl" id="ctrl"></div>
             </div>
             <div class="op-link">
                 <!--教程推荐-->
