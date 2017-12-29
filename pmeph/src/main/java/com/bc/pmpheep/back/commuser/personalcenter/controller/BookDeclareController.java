@@ -89,8 +89,8 @@ public class BookDeclareController extends BaseController{
 		topicMap.put("vn",ssid);
 		int count = this.bdecService.insertTopic(topicMap);
 		if(count>0){
-			List<Map<String,Object>> topicLsit = this.bdecService.queryTopic(topicMap);
-			String topic_id = topicLsit.get(0).get("id").toString();
+			Map<String,Object> topicLsit = this.bdecService.queryTopic(topicMap);
+			String topic_id = topicLsit.get("id").toString();
 			//选题申报额外信息topic_extra
 			Map<String,Object> extraMap = new HashMap<String,Object>();
 			extraMap.put("reason", request.getParameter("reason"));
@@ -130,14 +130,111 @@ public class BookDeclareController extends BaseController{
 		ModelAndView mav= new ModelAndView("commuser/personalcenter/toBookdeclareZc");
 		Map<String,Object> queryMap = new HashMap<String,Object>();
 		queryMap.put("topic_id", request.getParameter("topic_id"));
-		List<Map<String,Object>> topicList = this.bdecService.queryTopic(queryMap);
-		List<Map<String,Object>> textraList = this.bdecService.queryTopicExtra(queryMap);
+		Map<String,Object> topicMap = this.bdecService.queryTopic(queryMap);
+		Map<String,Object> textraMap = this.bdecService.queryTopicExtra(queryMap);
 		List<Map<String,Object>> twriteList = this.bdecService.queryTopicWriter(queryMap);
 		
-		mav.addObject("topicList", topicList);
-		mav.addObject("textraList", textraList);
+		mav.addObject("topicMap", topicMap);
+		mav.addObject("textraMap", textraMap);
 		mav.addObject("twriteList", twriteList);
+		mav.addObject("twriteCount", twriteList.size());
 		
 		return mav;
 	}
+	
+	/**
+	 * 修改保存
+	 */
+	@RequestMapping("doBookdeclareZc")
+	public String doBookdeclareZc(HttpServletRequest request,
+			HttpServletResponse response){
+		String topic_id = request.getParameter("topic_id"); //主键id
+		String stype = request.getParameter("stype"); //申报信息存储方式
+		//获取申报信息
+		Map<String,Object> topicMap = new HashMap<String,Object>();
+		String msg = "";
+		if(stype.equals("1")){ //表示提交
+			topicMap.put("is_staging", "0");
+			topicMap.put("auth_progress", "1");
+		}else{//2 表示暂存
+			topicMap.put("is_staging","1");
+			topicMap.put("auth_progress","0");
+		}
+		topicMap.put("topic_id",topic_id);
+		topicMap.put("bookname", request.getParameter("bookname"));
+		topicMap.put("reader", request.getParameter("reader"));
+		topicMap.put("user_id", request.getParameter("user_id"));
+		topicMap.put("deadline", request.getParameter("deadline"));
+		topicMap.put("source", request.getParameter("source"));
+		topicMap.put("word_number", request.getParameter("word_number"));
+		topicMap.put("picture_number", request.getParameter("picture_number"));
+		topicMap.put("subject", request.getParameter("subject"));
+		topicMap.put("rank", request.getParameter("rank"));
+		topicMap.put("type", request.getParameter("type"));
+		topicMap.put("bank_account_id", request.getParameter("bank_account_id"));
+		topicMap.put("purchase", request.getParameter("purchase"));
+		topicMap.put("sponsorship", request.getParameter("sponsorship"));
+		topicMap.put("original_bookname", request.getParameter("original_bookname"));
+		//判断是否为翻译书稿，若有值则表示为翻译书籍
+		if(request.getParameter("original_bookname").toString().equals("")){
+			topicMap.put("is_translation","0"); //表示原作
+		}else{
+			topicMap.put("is_translation","1"); //表示翻作
+		}
+		topicMap.put("original_author", request.getParameter("original_author"));
+		topicMap.put("nation", request.getParameter("nation"));
+		topicMap.put("edition", request.getParameter("edition"));
+		int count = this.bdecService.updateTopic(topicMap);
+		if(count>0){
+			//修改选题申报额外信息topic_extra
+			Map<String,Object> extraMap = new HashMap<String,Object>();
+			extraMap.put("extra_id", request.getParameter("extra_id"));
+			extraMap.put("reason", request.getParameter("reason"));
+			extraMap.put("price", request.getParameter("price"));
+			extraMap.put("score", request.getParameter("extra_score"));
+			extraMap.put("topic_id", topic_id);
+			this.bdecService.updateTopicExtra(extraMap);
+			//申报编者情况
+			this.bdecService.delTopicWriter(topic_id);
+			String[] realnames = request.getParameterValues("write_realname");
+			String[] sexs = request.getParameterValues("sex");
+			String[] prices = request.getParameterValues("write_price");
+			String[] positions = request.getParameterValues("write_position");
+			String[] workplaces = request.getParameterValues("workplace");
+			for(int i=0;i<realnames.length;i++) { //遍历数组
+				if(!realnames[i].equals("")){
+					Map<String,Object> writeMap = new HashMap<String,Object>();
+					writeMap.put("topic_id", topic_id);
+					writeMap.put("realname", realnames[i]);
+					writeMap.put("sex", sexs[i]);
+					writeMap.put("price", prices[i]);
+					writeMap.put("position", positions[i]);
+					writeMap.put("workplace", workplaces[i]);
+					this.bdecService.insertTopicWriter(writeMap);
+					msg = "OK";
+				}
+			}
+		}
+		return msg;
+	}
+	
+	/**
+	 * 详情
+	 */
+	@RequestMapping("toBookdeclareDetail")
+	public ModelAndView toBookdeclareDetail(HttpServletRequest request,
+			HttpServletResponse response){
+		ModelAndView mav= new ModelAndView("commuser/personalcenter/toBookdeclareDetail");
+		Map<String,Object> queryMap = new HashMap<String,Object>();
+		queryMap.put("topic_id", request.getParameter("topic_id"));
+		Map<String,Object> topicMap = this.bdecService.queryTopic(queryMap);
+		Map<String,Object> textraMap = this.bdecService.queryTopicExtra(queryMap);
+		List<Map<String,Object>> twriteList = this.bdecService.queryTopicWriter(queryMap);
+		
+		mav.addObject("topicMap", topicMap);
+		mav.addObject("textraMap", textraMap);
+		mav.addObject("twriteList", twriteList);
+		return mav;
+	}
 }
+	

@@ -20,7 +20,14 @@
 			and t1.id = #{topic_id}
 		</if>
 	</select>
-	
+	<!-- 申报信息修改 -->
+	<update id="updateTopic" parameterType="java.util.Map">
+		update topic set bookname=#{bookname},deadline=#{deadline},source=#{source},word_number=#{word_number},
+		picture_number=#{picture_number},subject=#{subject},rank=#{rank},type=#{type},is_staging=#{is_staging},
+		auth_progress=#{auth_progress},bank_account_id=#{bank_account_id},purchase=#{purchase},sponsorship=#{sponsorship},
+		is_translation=#{is_translation},original_bookname=#{original_bookname},original_author=#{original_author},
+		nation=#{nation},edition=#{edition} where id = #{topic_id}
+	</update>
 	<!-- 选题申报-额外信息 -->
 	<insert id="insertTopicExtra" parameterType="java.util.Map">
 		insert into topic_extra(topic_id,reason,price,score) values(#{topic_id},
@@ -33,7 +40,10 @@
 			and t1.topic_id = #{topic_id} 
 		</if>
 	</select>
-	
+	<!-- 额外信息修改 -->
+	<update id="updateTopicExtra" parameterType="java.util.Map">
+		update topic_extra set reason=#{reason},price=#{price},score=#{source} where id = #{extra_id}
+	</update>
 	<!-- 选题申报-编者情况 -->
 	<insert id="insertTopicWriter" parameterType="java.util.Map">
 		insert into topic_writer(topic_id,realname,sex,price,position,workplace) values(#{topic_id},
@@ -46,5 +56,8 @@
 			and t1.topic_id = #{topic_id} 
 		</if>
 	</select>
-
+	<!-- 删除编者情况 -->
+	<delete id="delTopicWriter" parameterType="java.lang.String">
+		delete from topic_writer where topic_id = #{topic_id}
+	</delete>
 </mapper>

@@ -14,7 +14,11 @@ public interface BookDeclareDao {
 	 * @param map
 	 * @return
 	 */
-	public List<Map<String,Object>> queryTopic(Map<String,Object> map);
+	public Map<String,Object> queryTopic(Map<String,Object> map);
+	/**
+	 * 申报信息修改
+	 */
+	public int updateTopic (Map<String,Object> map);
 	
 	/**
 	 * 选题申报-额外信息
@@ -25,7 +29,11 @@ public interface BookDeclareDao {
 	 * @param map
 	 * @return
 	 */
-	public List<Map<String,Object>> queryTopicExtra(Map<String,Object> map);
+	public Map<String,Object> queryTopicExtra(Map<String,Object> map);
+	/**
+	 * 额外信息修改
+	 */
+	public int updateTopicExtra(Map<String,Object> map);
 	
 	/**
 	 * 选题申报-编者情况
@@ -38,4 +46,9 @@ public interface BookDeclareDao {
 	 * @return
 	 */
 	public List<Map<String,Object>> queryTopicWriter(Map<String,Object> map);
+	
+	/**
+	 * 删除编者情况
+	 */
+	public int delTopicWriter(String id);
 }
