@@ -117,19 +117,26 @@
 	border: solid 1px #dedede;
 	padding-left: 10px;
 }
+.sb_input{
+	clear:none;
+	width:90%;
+	height: 30px;
+	line-height: 26px;
+	border: solid 1px #dedede;
+	padding-left: 10px;
+}
 .tsjb{
-	width: 296px;
+	width: 306px;
 	height: 30px;
 	border: dashed 1px #dedede;
-	padding-left: 10px;
+	padding-top: 7px;
 }
 
 .tslb{
 	width: 100%;
 	height: 30px;
 	border: dashed 1px #dedede;
-	margin:auto;
-	top:50%;
+	padding-top: 7px;
 	
 }
 
@@ -187,4 +194,17 @@
 	color: #FFFFFF;
 	float: right;
 	margin-left: 15px;
+}
+
+/**²Ù×÷°´Å¥**/
+.add_div{
+	width: 100px;
+	height: 32px;
+	margin-top: 5px;
+	text-align: center;
+}
+
+.add_img{
+	cursor: pointer;
+	
 }
