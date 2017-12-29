@@ -1,4 +1,5 @@
-
+.green{color: #1abd44;}
+.red{color: #e52e2e;}
 
 .top {
     width: 1200px;
@@ -81,6 +82,7 @@
 	font-size: 15px;
 	color: #333333;
 	margin-right:2%;
+	cursor: pointer;
 }
 
 #table {
@@ -140,7 +142,7 @@ table tbody tr:nth-child(even){
     background-color:#f0f0f0;
 }
 
-.jzgd{
+/* .jzgd{
     margin: 0 auto;
     margin-top: 30px;
     margin-bottom: 38px;
@@ -149,4 +151,18 @@ table tbody tr:nth-child(even){
     font-family: MicrosoftYaHei;
     font-size: 14px;
     color: #999999;
+} */
+
+.js-load-more{
+  padding:0 15px;
+  width:120px;
+  height:30px;
+  line-height:30px;
+  text-align:center;
+  margin:20px auto;
+  border:0 none;
+  font-size:16px;
+  font-family: MicrosoftYaHei;
+  display:none;/*默认不显示，ajax调用成功后才决定显示与否*/
 }
+

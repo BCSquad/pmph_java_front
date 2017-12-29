@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.commuser.personalcenter.dao.IntegralDao">
+
+	<!--积分记录  加载更多 -->
+	<select id="findPointList" resultType="java.util.Map"
+		parameterType="java.util.Map">
+		SELECT
+		l.id,
+		r.rule_name,
+		l.point,
+		l.gmt_create
+		FROM
+		writer_point_log AS l
+		LEFT JOIN writer_point_rule AS r ON l.rule_id = r.id
+		LEFT JOIN writer_user AS u ON l.user_id = u.id 
+		where  l.user_id=#{userId}
+	</select>
+
+<!--总积分 -->
+	<select id="findTotalPoint" resultType="java.util.Map"
+		parameterType="java.util.Map">
+		SELECT
+		p.id,p.total
+		FROM
+		writer_point AS p
+		
+		LEFT JOIN writer_user AS u ON p.user_id = u.id 
+		where  p.user_id=#{userId}
+	</select>
+
+	<!--查询三个月内积分记录数据 -->
+	<select id="findPointByMonth" resultType="java.util.Map"
+		parameterType="java.util.Map">
+		SELECT
+		l.id,
+		r.rule_name,
+		l.point,
+		l.gmt_create
+		FROM
+		writer_point_log AS l
+		LEFT JOIN writer_point_rule AS r ON l.rule_id = r.id
+		LEFT JOIN writer_user AS u ON l.user_id = u.id 
+		where  l.user_id=#{userId}
+	</select>
+
+</mapper>

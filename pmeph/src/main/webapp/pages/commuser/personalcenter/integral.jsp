@@ -19,7 +19,7 @@
 <script type="text/javascript"
 	src="${ctx}/resources/comm/jquery/jquery.js"></script>
 <script src="${ctx}/resources/comm/base.js"></script>
-<%-- <script src="${ctx}/resources/commuser/personalcenter/integral.js"></script> --%>
+<script src="${ctx}/resources/commuser/personalcenter/integral.js"></script>
 </head>
 <body>
 	<jsp:include page="/pages/comm/head.jsp">
@@ -34,13 +34,13 @@
 			
 			<div id="table">
 				<div class="top2">总积分：</div>
-				<div class="top3">365</div>
+				<div class="top3">${total.total }</div>
 				<div class="line"></div>
 				<div class="tb2">
 					<div class="top-three">
 						<div class="top4">积分记录：</div>
 						<div class="top5">筛选：</div>
-						<div class="top6">三个月内></div>
+						<div class="top6" onclick='queryTime()'>三个月内<img src="${ctx}/statics/image/down.png"/></div>
 					</div>
 					<div class="message">
 						<table class="table">
@@ -49,28 +49,20 @@
 									<td class="">来源/用途</td>
 									<td class="">积分变化</td>
 									<td class="">时间</td>
-
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td class="">发表随笔文章</td>
-									<td class="">+10</td>
-									<td class="">2015-10-11 14:05:20</td>
-
-								</tr>
-								<tr>
-									<td class="">发表图书评论</td>
-									<td class="">-10</td>
-									<td class="">2015-10-11 14:05:20</td>
-
-								</tr>
+							<tbody id="messageTable">
 							</tbody>
 						</table>
+						<div class="no-more" >
+						<img src="<c:url value="/statics/image/aaa4.png"></c:url>">
+						<span>木有内容呀~~</span>
+					</div>
 					</div>
 				</div>
 				<div style="clear: both"></div>
-				<div class="jzgd">加载更多...</div>
+				<!-- <div class="jzgd">加载更多...</div> -->
+				<div class="js-load-more" style="cursor: pointer;">加载更多...</div>
 			</div>
 		</div>
 		<div style="height: 60px; width: 100%;"></div>
