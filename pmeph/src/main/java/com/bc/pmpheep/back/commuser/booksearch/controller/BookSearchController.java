@@ -1,6 +1,7 @@
 package com.bc.pmpheep.back.commuser.booksearch.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,9 +53,22 @@ public class BookSearchController extends BaseController {
 		//search = new String((search!=null?search:"").getBytes("iso8859-1"), "utf-8");
 		search = java.net.URLDecoder.decode(search,"UTF-8"); 
 		real_search = new String((real_search!=null?real_search:"").getBytes("iso8859-1"), "utf-8");
+		Long id=0L;
+		List<Map<String,Object>> fistsort=bookSearchService.queryChildSort(id);
+//		List<Map<String,Object>> childsort=null;
+//		List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
+//		Map<String,Object> allsort=null;
+//		for (Map<String, Object> map : fistsort) {
+//			childsort=bookSearchService.queryChildSort(Long.valueOf(map.get("id").toString()));
+//			allsort=new HashMap<String, Object>();
+//			allsort.put("parent", map);
+//			allsort.put("child", childsort);
+//			list.add(allsort);
+//		}
+//		mv.addObject("list",list);
+		mv.addObject("fistsort",fistsort);
 		mv.addObject("search",search);
 		mv.addObject("real_search",search);
-		
 		mv.setViewName("commuser/booksearch/booksearch");
 		
 		return mv;
@@ -71,7 +85,15 @@ public class BookSearchController extends BaseController {
 		Integer pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		Integer pageSize = Integer.parseInt(request.getParameter("pageSize"));
 		String queryName = request.getParameter("queryName");
-
+        String sortid=request.getParameter("id");
+        Map<String,Object> bigsort=null;
+        List<Map<String,Object>> smallsort=null;
+        if(sortid!=null && !"".equals(sortid)){
+        	bigsort=bookSearchService.querySortById(Long.valueOf(sortid));
+        	smallsort=bookSearchService.queryChildSort(Long.valueOf(bigsort.get("id").toString()));
+        }
+        resultMap.put("parent", bigsort);
+        resultMap.put("child", smallsort);
 		String uid = null;
 		if (user != null && getUserInfo().get("id")!=null && getUserInfo().get("id").toString() != null) {
 			uid = getUserInfo().get("id").toString();
@@ -79,12 +101,21 @@ public class BookSearchController extends BaseController {
 		String contextpath = request.getParameter("contextpath");
 		
 		Map<String, Object> paraMap = new HashMap<String, Object>();
-		paraMap.put("queryName", queryName);
-		paraMap.put("uid", uid);
+		paraMap.put("searchText", queryName !=null && !"".equals(queryName)? "%"+queryName+"%":null );
+		paraMap.put("logUserId", uid);
+		paraMap.put("type", sortid);
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<Map<String,Object>>(pageNum,pageSize);
 		pageParameter.setParameter(paraMap);
-		List<Map<String, Object>> List_map = bookSearchService.queryBookList(pageParameter);
-		int totoal_count = bookSearchService.queryBookCount(pageParameter);
+		List<Map<String, Object>> List_map = bookSearchService.listBook(pageParameter);
+		int count =bookSearchService.getBookTotal(pageParameter);
+		Integer maxPageNum = (int) Math.ceil(1.0*count/pageParameter.getPageSize());
+//		Map<String, Object> paraMap = new HashMap<String, Object>();
+//		paraMap.put("queryName", queryName);
+//		paraMap.put("uid", uid);
+//		PageParameter<Map<String,Object>> pageParameter = new PageParameter<Map<String,Object>>(pageNum,pageSize);
+//		pageParameter.setParameter(paraMap);
+//		List<Map<String, Object>> List_map = bookSearchService.queryBookList(pageParameter);
+//		int totoal_count = bookSearchService.queryBookCount(pageParameter);
 		Map<String, Object> vm_map = new HashMap<String, Object>();
 		vm_map.put("List_map", List_map);
 		vm_map.put("startNum", pageParameter.getStart()+1);
@@ -93,7 +124,8 @@ public class BookSearchController extends BaseController {
 		String vm = "commuser/booksearch/booksearch.vm";
 		html = templateService.mergeTemplateIntoString(vm, vm_map);
 		resultMap.put("html", html);
-		resultMap.put("totoal_count", totoal_count);
+		resultMap.put("totoal_count", maxPageNum);
+		resultMap.put("count", count);
 		return resultMap;
 	}
 	

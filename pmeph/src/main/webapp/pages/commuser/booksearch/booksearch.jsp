@@ -22,7 +22,9 @@ String contextpath=request.getContextPath();
     <link rel="stylesheet" href="<%=path%>/statics/commuser/booksearch/booksearch.css" type="text/css">
     <link rel="stylesheet" href="<%=path%>/statics/css/jquery.pager.css"/>
     <link rel="stylesheet" href="<%=path%>/statics/css/jquery.selectlist.css"/>
+    <link rel="stylesheet" href="<%=path%>/resources/comm/radiobox/css/jquery-labelauty.css">
     <script src="<%=path%>/resources/comm/jquery/jquery.js"></script>
+    <script src="<%=path%>/resources/comm/radiobox/js/jquery-labelauty.js"></script>
     <script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js"></script>
     <script src="<%=path%>/resources/comm/jquery/jquery.pager.js"></script>
     <script src="<%=path%>/resources/comm/base.js"></script>
@@ -32,8 +34,8 @@ String contextpath=request.getContextPath();
 	<!-- 隐藏域 -->
 	<input type="hidden" id="search-name-temp" value="${real_search }">
 	<input type="hidden" id="page-num-temp" value="1">
-
-
+    <input type="hidden" id="selected" value="" />
+ 
 	<jsp:include page="/pages/comm/head.jsp"></jsp:include> 
 
 <!-- <iframe style="width: 100%;padding: 0;margin: 0;height: 81px;border: none" src="../comm/head.html"></iframe> -->
@@ -58,6 +60,35 @@ String contextpath=request.getContextPath();
     <div class="content-wrapper" >
         
         <div class="bigContent">
+           <div id="mysort" style="background-color: #ffffff;float:left;margin-top: 20px;padding-bottom: 10px;width:1200px">
+          <%--  <c:forEach items="${list }" var="sort" varStatus="status">
+           <div style="background-color: #ffffff;float:left;padding-bottom: 10px" id="sort${sort.parent.id }">
+           <div style="float:left;min-width:100px;height:56px;line-height: 56px;text-align: center">
+             ${sort.parent.type_name }:
+           </div>
+            <div style="float:left;max-width: 1100px">
+            <ul class="dowebok" >
+                 <c:forEach items="${sort.child }" var="child">
+                   <li style="float:left;margin-left: 10px;margin-top: 10px" ><input type="radio" name="radio${child.parent_id }" value="${child.id }" onclick="getSort('${sort.parent.id }',this.value)" data-labelauty="${child.type_name }"></li>
+                 </c:forEach>
+                 </ul>
+           </div>
+           </div>
+           </c:forEach> --%>
+           <div style="background-color: #ffffff;float:left;padding-bottom: 10px" id="sort${fistsort[0].parent_id }">
+           <div style="float:left;min-width:100px;height:56px;line-height: 56px;text-align: center;margin-left:10px">
+                                                      全部分类:
+           </div>
+            <div style="float:left;max-width: 1090px">
+            <ul class="dowebok" >
+                 <c:forEach items="${fistsort}" var="child">
+                   <li style="float:left;margin-left: 10px;margin-top: 10px" ><input type="radio" name="radio${child.parent_id }" value="${child.id }" onclick="getSort('${child.parent_id }',this.value,'sort')" data-labelauty="${child.type_name }"></li>
+                 </c:forEach>
+                 </ul>
+           </div>
+           </div>
+           
+           </div>
             <div  style="background-color: #f6f6f6;width: 100%;height: 15px;"></div>
             <div class="list" style="background-color: white" >
             	<div id="book-list-table"></div>
@@ -112,4 +143,7 @@ String contextpath=request.getContextPath();
 	<jsp:include page="/pages/comm/tail.jsp"></jsp:include> 
 
 </body>
+<script type="text/javascript">
+
+</script>
 </html>

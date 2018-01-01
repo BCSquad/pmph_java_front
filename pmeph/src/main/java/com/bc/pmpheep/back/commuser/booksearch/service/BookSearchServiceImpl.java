@@ -57,6 +57,31 @@ public class BookSearchServiceImpl implements BookSearchService {
 		return resultMap;
 	}
 
+	@Override
+	public List<Map<String, Object>> queryChildSort(Long parentId) {
+		// TODO Auto-generated method stub
+		return bookDao.queryChildSort(parentId);
+	}
+
+	@Override
+	public Map<String, Object> querySortById(Long id) {
+		// TODO Auto-generated method stub
+		return bookDao.querySortById(id);
+	}
+
+	@Override
+	public List<Map<String, Object>> listBook(
+			PageParameter<Map<String, Object>> pageParameter) {
+		// TODO Auto-generated method stub
+		return bookDao.listBook(pageParameter);
+	}
+
+	@Override
+	public Integer getBookTotal(PageParameter<Map<String, Object>> pageParameter) {
+		// TODO Auto-generated method stub
+		return bookDao.getBookTotal(pageParameter);
+	}
+
 	
 	
 }

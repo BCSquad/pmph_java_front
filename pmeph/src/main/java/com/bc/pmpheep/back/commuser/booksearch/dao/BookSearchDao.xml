@@ -80,5 +80,128 @@
 	<select id="queryBookLikeById" parameterType="java.lang.String" resultType="java.lang.Integer">
 		select likes from book where id = #{bookId}
 	</select>
+	<!-- 查询某一类型下的子类型 -->
+	<select id="queryChildSort" parameterType="map" resultMap="bookListMap">
+	   select * from material_type where parent_id=${parentId};
+	</select>
+	<select id="querySortById" parameterType="map" resultMap="bookListMap">
+	   select * from material_type where id=#{id}
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="listBook" parameterType="PageParameter"
+		resultMap="bookListMap">
+		SELECT 
+			b.id as bookId,
+			b.`bookname`,b.`author`,
+			b.`publisher`,bd.`detail`,
+  			b.`clicks`,b.`comments`,
+  			b.`likes`,b.`bookmarks`,
+  			b.image_url,
+  			<if test="parameter.type !=null and parameter.type !=''">
+  			t.type_name, 
+  			t.path ,
+  			</if>
+  			l.id as likeId  			
+		FROM 
+			`book` b 
+		left join book_user_like as l 
+		ON b.id= l.book_id  
+		
+		<choose>
+			<when test="parameter.logUserId != null and parameter.logUserId != '' ">
+				and l.writer_id = ${parameter.logUserId}
+			</when>
+			<otherwise>
+				and 1=2
+			</otherwise>
+		</choose>
+
+		LEFT JOIN 
+			`book_detail` bd 
+		ON 
+			b.`id`= bd.`book_id`
+		
+		<if test="parameter.type !=null and parameter.type !=''">
+		INNER JOIN 
+			`material_type` t
+		ON
+			t.`id` = b.`type`
+			
+			and
+			(
+				SUBSTRING_INDEX(SUBSTRING_INDEX(CONCAT(t.path,'-',t.id),'-',
+										(select 
+											cast(
+													(CHAR_LENGTH(path)-CHAR_LENGTH(REPLACE(path,'-','')))/CHAR_LENGTH('-')+2
+														as decimal(9,2)
+											)
+											 from material_type 
+											where id = cast(#{parameter.type} as decimal(9,2)))
+								),'-',-1) = #{parameter.type}
+				or t.id = 	#{parameter.type}		
+			)
+			</if>				
+		WHERE 
+			1 = 1
+			<if test="parameter.searchText!=null">
+			   and  b.bookname like #{parameter.searchText}
+			</if>
+		
+		LIMIT #{start},#{pageSize}
+	</select>
+	
+	<!-- 查询总数 -->
+	<select id="getBookTotal" parameterType="PageParameter"
+		resultType="Integer">
+		SELECT COUNT(*) FROM
+		(
+			SELECT 
+				b.id,b.bookname
+			FROM 
+				`book` b 
+			left join book_user_like as l 
+			on b.id= l.book_id 
+			
+			<choose>
+				<when test="parameter.logUserId != null and parameter.logUserId != '' ">
+					and l.writer_id = ${parameter.logUserId}
+				</when>
+				<otherwise>
+					and 1=2
+				</otherwise>
+			</choose>
+			
+			LEFT JOIN 
+				`book_detail` bd 
+			ON 
+				b.`id`= bd.`book_id`
+			<if test="parameter.type !=null and parameter.type !=''">
+			INNER JOIN 
+				`material_type` t
+			ON
+				t.`id` = b.`type`
+				
+				and
+				(
+					SUBSTRING_INDEX(SUBSTRING_INDEX(CONCAT(t.path,'-',t.id),'-',
+											(select 
+												cast(
+														(CHAR_LENGTH(path)-CHAR_LENGTH(REPLACE(path,'-','')))/CHAR_LENGTH('-')+2
+															as decimal(9,2)
+												)
+												 from material_type 
+												where id = cast(#{parameter.type} as decimal(9,2)))
+									),'-',-1) = #{parameter.type}
+					or t.id = 	#{parameter.type}		
+				)
+				</if>				
+		)t
+		where 1=1
+		<if test="parameter.searchText!=null">
+			   and  t.bookname like #{parameter.searchText}
+		</if>
+	</select>
+	
 	
 </mapper>
