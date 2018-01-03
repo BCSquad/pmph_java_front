@@ -52,7 +52,6 @@
             <div class="area3">
                 <div class="block">
                     <div class="tab-bar">
-
                         <c:forEach items="${bookTypes}" var="type" varStatus="status">
                             <%--<div class="tab ${status.index==0?'active':''}" id="${type.id}"
                                  onclick='chooseType("${type.id}")'>${type.type_name}</div>--%>
