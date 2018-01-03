@@ -36,6 +36,7 @@
   <select id="queryArticle"  resultMap="Mapresult">
       select  
         t.title,
+        t.id,
         t.summary,
         t.gmt_create,
         c.realname       
