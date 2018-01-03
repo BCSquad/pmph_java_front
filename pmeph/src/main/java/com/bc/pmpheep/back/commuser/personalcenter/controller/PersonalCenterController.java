@@ -154,7 +154,7 @@ public class PersonalCenterController extends BaseController {
 			count = personalService.queryMyTopicChooseCount(pageParameter);
 			//分页数据代码块
 			String html = this.mergeToHtml("commuser/personalcenter/myTopicChoose.vm",contextpath, pageParameter, List_map,vm_map);
-			mv.addObject("List_map",List_map);//测试
+			/*mv.addObject("List_map",List_map);*///测试
 			mv.addObject("html",html);
 			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
 		}else if("wdwj".equals(pagetag)){  //我的问卷

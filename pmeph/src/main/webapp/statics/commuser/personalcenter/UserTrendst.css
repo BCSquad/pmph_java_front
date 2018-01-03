@@ -83,7 +83,7 @@
 }
 
 .content_line .img_wrapper{
-	width: 180px;
+	/* width: 180px; */
     height: 180px;
     margin-right: 30px;
     float: left;
@@ -91,10 +91,17 @@
 }
 
 .content_line .img_wrapper img{
-	width: 180px;
-	max-height: 180px;
-	
+	max-width: 180px;
+    height: 180px;
+    margin: auto;
+    display: block;
 }
+
+ .content_line .img_wrapper .book_img{
+ 	max-width: 180px;
+    height: 178px;
+    border:1px solid #ebebeb;
+ }
 
 .trendstWrapper div{
 	word-break: break-all;

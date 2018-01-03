@@ -106,13 +106,8 @@ request.setAttribute("currentTime",datetime);
                 <div id="dhxian"></div>
 
                 <div id="leftContent">
-                	
-                	
-                	
-                	
                 	${html }
                 	
-                	<!-- <link rel="stylesheet" href="$!{contextpath}statics/commuser/personalcenter/bookCorrected.css" type="text/css"> -->
                 	<link rel="stylesheet" href="${ctx}/statics/commuser/personalcenter/UserTrendst.css" type="text/css">
                 	<%-- <script src="${ctx}/resources/commuser/personalcenter/PersonalHomeDT.js"></script> --%>
                 	
@@ -294,7 +289,14 @@ request.setAttribute("currentTime",datetime);
                						<c:when test="${c.table_name == 'tsjc' && c.trendst_type == 0}"><%-- 图书纠错 发表 --%>
                							<div class="issue_line"><span class="issue_name">收到了纠错</span><span class="issue_time">${c.trendst_date }</span></div>
                							<div class="content_line">
-               								<div class="img_wrapper"><img src="${ctx }/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"></div>
+               								<div class="img_wrapper">
+               									<c:if test="${c.tsjc_image_url==null || c.tsjc_image_url ==''||c.tsjc_image_url=='default'||c.tsjc_image_url=='DEFAULT' }">
+               										<img src="${ctx }/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg">
+               									</c:if>
+               									<c:if test="${c.tsjc_image_url!=null && c.tsjc_image_url !=''&& c.tsjc_image_url!='default' && c.tsjc_image_url!='DEFAULT'}">
+               										<img class="book_img" src="${c.tsjc_image_url}">
+               									</c:if>
+               								</div>
                								<div class="content_wrapper">
                									<div class="bookc_title">${c.tsjc_bookname }</div>
                									<div class="sub_title">${c.tsjc_realname } 纠正了《${c.tsjc_bookname }》第${c.tsjc_page }页${c.tsjc_line },提出纠错：“${c.tsjc_content }”。</div>
@@ -305,12 +307,24 @@ request.setAttribute("currentTime",datetime);
                						</c:when>
                						<c:when test="${c.table_name == 'wycs' && c.trendst_type == 0}"><%-- 我要出书 发表 --%>
                							<div class="issue_line"><span class="issue_name">提交了选题</span><span class="issue_time">${c.trendst_date }</span></div>
-				
+										<div class="msg_line">
+               								<div class="msg_content">
+               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
+               									您发起的《${c.wycs_bookname}》选题已提交，请耐心等待审核结果。
+               								</div>
+               							</div>
                						</c:when>
                						<c:when test="${c.table_name == 'wdjc' && c.trendst_type == 0}"><%-- 我要纠错 发表 --%>
                							<div class="issue_line"><span class="issue_name">纠正了教材</span><span class="issue_time">${c.trendst_date }</span></div>
 										<div class="content_line">
-               								<div class="img_wrapper"><img src="${ctx }/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"></div>
+               								<div class="img_wrapper">
+               									<c:if test="${c.wdjc_image_url==null || c.wdjc_image_url ==''||c.wdjc_image_url=='default'||c.wdjc_image_url=='DEFAULT' }">
+               										<img src="${ctx }/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg">
+               									</c:if>
+               									<c:if test="${c.wdjc_image_url!=null && c.wdjc_image_url !=''&& c.wdjc_image_url!='default' && c.wdjc_image_url!='DEFAULT'}">
+               										<img class="book_img" src="${c.wdjc_image_url}">
+               									</c:if>
+               								</div>
                								<div class="content_wrapper">
                									<div class="bookc_title">${c.wdjc_bookname }</div>
                									<div class="sub_title">${c.wdjc_realname } 纠正了《${c.wdjc_bookname }》第${c.wdjc_page }页${c.wdjc_line },提出纠错：“${c.wdjc_content }”。</div>
@@ -325,7 +339,14 @@ request.setAttribute("currentTime",datetime);
                						<c:when test="${c.table_name == 'wdsp' && c.trendst_type == 0}"><%-- 我的书评 发表 --%>
                							<div class="issue_line"><span class="issue_name">发表了评论</span><span class="issue_time">${c.trendst_date }</span></div>
                							<div class="content_line">
-               								<div class="img_wrapper"><img src="${ctx }/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"></div>
+               								<div class="img_wrapper">
+               									<c:if test="${c.wdsp_image_url==null || c.wdsp_image_url ==''||c.wdsp_image_url=='default'||c.wdsp_image_url=='DEFAULT' }">
+               										<img src="${ctx }/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg">
+               									</c:if>
+               									<c:if test="${c.wdsp_image_url!=null && c.wdsp_image_url !=''&& c.wdsp_image_url!='default' && c.wdsp_image_url!='DEFAULT'}">
+               										<img class="book_img" src="${c.wdsp_image_url}">
+               									</c:if>
+               								</div>
                								<div class="content_wrapper">
                									<div class="bookc_title">${c.wdsp_bookname }</div>
                									<div class="sub_title">${c.wdsp_realname } 评论了《${c.wdsp_bookname }》：“${c.wdsp_content }”。</div>
