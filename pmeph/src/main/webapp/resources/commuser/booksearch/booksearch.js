@@ -1,7 +1,7 @@
 
 
 $(function(){
-	$(':input').labelauty();
+//	$(':input').labelauty();
 	$('#page-size-select').selectlist({
         zIndex: 10,
         width: 110,
@@ -10,13 +10,13 @@ $(function(){
     });
 	var selId=$("#selected").val();
 	var mid=$("input[name='radio"+selId+"']:checked ").val();
-	getSort(selId,mid,'');
+	getSort('',mid,selId,'sort');
 	//切换分页每页数据数量时 刷新
 	$("#page-size-select").find("li").bind("click",function(){
 		$("#page-num-temp").val(1);
 		var selId=$("#selected").val();
     	var mid=$("input[name='radio"+selId+"']:checked ").val();
-    	getSort(selId,mid,'');
+    	getSort('',mid,selId,'page');
 	});
 	
 	$("#search-name").keyup(function(event){
@@ -28,10 +28,11 @@ $(function(){
 
 });
 
-function getSort(pid,id,tag){
+function getSort(order,id,pid,tag){
 	if(tag=="sort"){
 		$("#page-num-temp").val(1);
 	}
+	
 	$("#search-name-temp").val($("#search-name").val());
 	toTopAfterQuery();
 	data = {
@@ -39,7 +40,8 @@ function getSort(pid,id,tag){
 			pageSize:$("#page-size-select").find("input[name='page-size-select']").val(),
 			queryName:$("#search-name-temp").val(),
 			contextpath:contextpath,
-			id:id
+			id:id,
+			order:order
 			};
 	
 	$.ajax({
@@ -49,25 +51,32 @@ function getSort(pid,id,tag){
 		dataType:'json',
 		data:data,
 		success:function(json){
-			if(id !=null && !(id=="")&& json.count>0){
-				var str= '<div id="sort'+json.parent.id+'" style="background-color: #ffffff;float:left;padding-bottom: 10px;width:1200px">'+
+//			if(id !=null && !(id=="")&& json.count>0){
+				var str= '<div id="sort'+json.parent.order+'" style="background-color: #ffffff;float:left;padding-bottom: 10px;width:1200px">'+
 				'<div style="float:left;min-width:100px;height:56px;line-height: 56px;text-align: center;margin-left:10px">'+
 				json.parent.type_name+
 				':</div>'+
 				' <div style="float:left;max-width:1090px">'+
 				'<ul class="dowebok" >';
 				$.each(json.child,function(i,n){
-					str +='<li style="float:left;margin-left: 10px;margin-top: 10px" ><input type="radio" name="radio'+n.parent_id+'" value="'+n.id+'" onclick="getSort(\''+n.parent_id+'\',\''+n.id+'\',\'sort\')" data-labelauty="'+n.type_name+'"></li>'
+					str +='<li style="float:left;margin-left: 10px;margin-top: 10px" ><input type="radio" name="radio'+n.parent_id+'" value="'+n.id+'" onclick="getSort(\''+json.parent.order+'\',\''+n.id+'\',\''+n.parent_id+'\',\'sort\')" data-labelauty="'+n.type_name+'"></li>'
 				});
 				str +='</ul></div></div>';
-				$("#sort"+pid).nextAll().remove();
-				if(json.child.length>0){
-					$("#sort"+pid).after(str);
-					$("input[name=radio"+json.parent.id+"]").labelauty();
+				if(tag=='sort'){
+					    $("#sort"+order).nextAll().remove();
+						if(json.child.length>0){
+						    $("#mysort").append(str);
+							$("input[name=radio"+json.child[0].parent_id+"]").labelauty();
+						}
+				}else if(tag=="page"){
+					   
+				}else if(tag=="search"){
+					 $("#mysort").html(str);
+					 $("input[name=radio"+json.child[0].parent_id+"]").labelauty();
 				}
-			}else{
-				$("#sort"+pid).nextAll().remove();
-			}
+//			}else{
+//				$("#sort"+order).nextAll().remove();
+//			}
 			$("#book-list-table").html(json.html);
 			$("#selected").val(pid);
 			if (json.html.trim() == "") {
@@ -92,7 +101,7 @@ function getSort(pid,id,tag){
                 	$("#page-num-temp").val(n);
                 	var selId=$("#selected").val();
                 	var mid=$("input[name='radio"+selId+"']:checked ").val();
-                	getSort(selId,mid,'');
+                	getSort('',mid,selId,'page');
                 }
                 });
 			 
@@ -156,14 +165,14 @@ function queryBtnClick(){
 	$("#search-name-temp").val($("#search-name").val());
 	var selId=$("#selected").val();
 	var mid=$("input[name='radio"+selId+"']:checked ").val();
-	getSort(selId,mid,'');
+	getSort('','',selId,'search');
 }
 
 //选择每页数据数量
 function selectPageSize(){
 	var selId=$("#selected").val();
 	var mid=$("input[name='radio"+selId+"']:checked ").val();
-	getSort(selId,mid,'');
+	getSort('',mid,selId,'');
 }
 
 //点赞按钮 点击 触发 点赞和取消赞

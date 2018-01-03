@@ -74,5 +74,5 @@ public interface BookSearchService {
      * 
      */
     Integer getBookTotal(PageParameter<Map<String,Object>> pageParameter);
-	
+    List<Map<String,Object>> querySearchSort(Map<String,Object> map);
 }

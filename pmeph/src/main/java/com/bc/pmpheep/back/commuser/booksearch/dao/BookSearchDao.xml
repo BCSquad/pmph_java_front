@@ -202,6 +202,30 @@
 			   and  t.bookname like #{parameter.searchText}
 		</if>
 	</select>
+	<select id="querySearchSort" parameterType="map" resultMap="bookListMap">
+			SELECT  
+				m.* 
+			from 
+				material_type  m 
+			where 
+				m.id 
+			in 
+			   (
+				SELECT
+				    SUBSTRING_INDEX(SUBSTRING_INDEX(t.path,'-',#{order}),'-',-1)
+				FROM
+					book b
+				JOIN material_type t ON t.id = b.type
+				  WHERE 1=1
+				  <if test="searchText !=nill">
+				     and   b.bookname LIKE #{searchText}
+				  </if>
+				  <if test="sortId !=null" >
+				     and m.parent_id=#{sortId}
+				  </if>
+				 	 group by  SUBSTRING_INDEX(t.path,'-',#{order})	
+				)
+	</select>
 	
 	
 </mapper>
