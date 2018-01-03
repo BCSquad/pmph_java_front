@@ -917,6 +917,7 @@ ul li {
     float: left;
     height: 400px;
     border: 1px solid #E5E3DF;
+    cursor: pointer;
 }
 
 .pc1 {
@@ -970,6 +971,7 @@ ul li {
     float: left;
     height: 400px;
     border: 1px solid #E5E3DF;
+    cursor: pointer;
 }
 
 .a6_head {
