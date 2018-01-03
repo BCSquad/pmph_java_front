@@ -38,6 +38,11 @@ ul li {
     text-align: center;
 }
 
+.img-move{
+	width: 814px;
+	height: 400px;
+}
+
 .ctrl .libs {
     display: inline-block;
     margin-left: 10px;
