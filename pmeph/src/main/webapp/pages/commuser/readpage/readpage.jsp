@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/readpage/readpage.css" type="text/css">
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.js"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.scroll.js"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
     <script src="${ctx}/resources/commuser/readpage/readpage.js" type="text/javascript"></script>
 </head>
@@ -33,11 +34,11 @@
                 <!--广告轮播区域-->
                 <div class="move" id="move">
 	                <ul>
-		                <li><img src="${ctx}/statics/image/gg_01.png" style="margin: 7px;"/></li>
-		                <li><img src="${ctx}/statics/image/gg_01.png" style="margin: 7px;"/></li>
-		                <li><img src="${ctx}/statics/image/gg_01.png" style="margin: 7px;"/></li>
-		                <li><img src="${ctx}/statics/image/gg_01.png" style="margin: 7px;"/></li>
-		                <li><img src="${ctx}/statics/image/gg_01.png" style="margin: 7px;"/></li>
+		                <li><img src="${ctx}/statics/image/gg_01.png" class="img-move"/></li>
+		                <li><img src="${ctx}/statics/image/gg_01.png" class="img-move"/></li>
+		                <li><img src="${ctx}/statics/image/gg_01.png" class="img-move"/></li>
+		                <li><img src="${ctx}/statics/image/gg_01.png" class="img-move"/></li>
+		                <li><img src="${ctx}/statics/image/gg_01.png" class="img-move"/></li>
 	                </ul>
                 </div>
                 <div class="ctrl" id="ctrl"></div>
