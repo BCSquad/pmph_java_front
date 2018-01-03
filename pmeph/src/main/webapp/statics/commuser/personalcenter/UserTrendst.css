@@ -1,0 +1,253 @@
+@CHARSET "UTF-8";
+
+.trendstListContent .trendstWrapper{
+	width: 870px;
+    border-bottom: 1px solid #f1f1f1;
+    clear: both;
+    padding: 20px 0px 20px 0px;
+    float: left;
+    clear: both;
+}
+
+
+
+.trendstWrapper .issue_line{
+	float: left;
+    clear: both;
+    width: 100%;
+}
+
+.issue_line .issue_name{
+	font-size: 14px;
+	color: #999999;
+	float: left;
+    clear: right;
+}
+
+.issue_line .issue_time{
+	font-size:12px;
+	color: #d8d8d8;
+	float: right;
+    clear: right;
+}
+
+.trendstWrapper .msg_line{
+	margin-top: 15px;
+    float: left;
+    clear: right;
+}
+
+.msg_line .msg_content{
+	float: left;
+    max-width: 850px;
+    line-height: 16px;
+}
+
+.trendstWrapper .tag_new{
+	background-image: url(../../image/new.png);
+    background-position:0px 1px;
+    background-repeat: no-repeat;
+    height: 15px;
+    display: inline-block;
+    width: 30px;
+    float: left;
+    clear: right;
+}
+
+.msg_line .success_smile{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -462px -192px;
+    background-repeat: no-repeat;
+    height: 17px;
+    display: inline-block;
+    width: 17px;
+    float: left;
+    clear: right;
+}
+
+.msg_line .fail_unhappy{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -462px -218px;
+    background-repeat: no-repeat;
+    height: 17px;
+    display: inline-block;
+    width: 17px;
+    float: left;
+    clear: right;
+}
+
+.trendstWrapper .content_line{
+	margin: 15px 0px 15px 0px;
+	float: left;
+    clear: right;
+}
+
+.content_line .img_wrapper{
+	width: 180px;
+    height: 180px;
+    margin-right: 30px;
+    float: left;
+    overflow: hidden;
+}
+
+.content_line .img_wrapper img{
+	width: 180px;
+	max-height: 180px;
+	
+}
+
+.trendstWrapper div{
+	word-break: break-all;
+	color: #323232;
+}
+
+.content_line .content_wrapper{
+	float: left;
+    clear: right;
+    width: 660px;
+}
+
+.content_line .content_wrapper .status_tag{
+	font-size: 12px;
+	line-height: 18px;
+	height: 18px;
+	padding:0px 8px 0px 8px;
+	display: block;
+	float: left;
+	margin-right: 10px;
+	color: #ffffff
+}
+
+.content_line .content_wrapper .status_tag.toAudit{
+	background-color: #ff9a2e;
+}
+
+.content_line .content_wrapper .status_tag.reject{
+	background-color: #ff1800;
+}
+
+.content_line .content_wrapper .status_tag.Audited{
+	background-color: #65bd8d;
+}
+
+.content_line .content_wrapper .article_title{
+	color: #343434;
+	font-size: 16px;
+	float: left;
+	clear: right;
+	line-height: 16px;
+}
+
+.content_line .content_wrapper .bookc_title{
+	color: #343434;
+	font-size: 16px;
+	float: left;
+	clear: right;
+	line-height: 16px;
+}
+
+.content_line .content_wrapper .sub_title{
+	color: #999999;
+    font-size: 12px;
+    float: left;
+    clear: right;
+    line-height: 12px;
+    margin-top: 15px;
+    width: 100%;
+    max-height: 12px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-all;
+}
+
+.content_line .content_wrapper .rank_stars{
+	float: left;
+    clear: right;
+    margin-top: 15px;
+    width: 100%;
+    height: 15px;
+}
+
+.scorestar1 {
+    float: left;
+    background-image: url(../../image/css_sprites.png);
+    background-position: -183px -174px;
+    background-repeat: no-repeat;
+    height: 15px;
+    width: 15px;
+}
+
+.scorestar2 {
+    float: left;
+    background-image: url(../../image/css_sprites.png);
+    background-position: -183px -152.5px;
+    background-repeat: no-repeat;
+    height: 15px;
+    width: 15px;
+}
+
+.content_line .content_wrapper .book_detail{
+	font-size: 12px;
+    line-height: 24px;
+    margin-top: 15px;
+    width: 100%;
+    min-height: 20px;
+    max-height: 90px;
+    overflow: hidden;
+    word-break: break-all;
+    float: left;
+    clear: right;
+    text-overflow: ellipsis;
+}
+
+.content_line .content_wrapper .article_summary{
+	font-size: 12px;
+    line-height: 24px;
+    margin-top: 15px;
+    width: 100%;
+    min-height: 20px;
+    max-height: 150px;
+    overflow: hidden;
+    word-break: break-all;
+    float: left;
+    clear: right;
+    text-overflow: ellipsis;
+}
+
+.operate_wrapper {
+	float: left;
+    clear: right;
+}
+
+.operate_wrapper .img{
+	background-image: url("../../image/css_sprites.png");
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	float: left;
+}
+
+.img_edit{
+	background-position: -461px -252px;
+}
+
+.operate_wrapper a{
+	 height: 20px;
+	 display: inline-block;
+	 clear: both;
+	 margin-right: 20px;
+	 cursor: pointer;
+}
+
+.img_delete{
+	background-position: -461px -277px;
+}
+
+
+.operate_wrapper a div{
+	line-height: 20px;
+    display: inline-block;
+    height: 20px;
+    float: left;
+    color: #a0b1c5;
+}

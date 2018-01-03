@@ -2,6 +2,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%String path = request.getContextPath();%>
+
+<%@ page import="java.util.*"%> //获取系统时间必须导入的 
+<%@ page import="java.text.*"%> //获取系统时间必须导入的 
+<% 
+Calendar now = Calendar.getInstance();
+now.add(Calendar.DAY_OF_MONTH, -3);
+String datetime=new SimpleDateFormat("yyyyMMddHHmm").format(now.getTime()); //获取系统时间 
+request.setAttribute("currentTime",datetime);
+%>
+
+
 <html>
 <head>
     <script type="text/javascript">
@@ -101,65 +112,240 @@
                 	
                 	${html }
                 	
-                	<%-- <!-- <link rel="stylesheet" href="$!{contextpath}statics/commuser/personalcenter/bookCorrected.css" type="text/css"> -->
-                	<link rel="stylesheet" href="${ctx}/statics/commuser/personalcenter/bookCorrected.css" type="text/css">
-                	<script src="${ctx}/resources/commuser/personalcenter/PersonalHomeTSJC.js"></script>
+                	<!-- <link rel="stylesheet" href="$!{contextpath}statics/commuser/personalcenter/bookCorrected.css" type="text/css"> -->
+                	<link rel="stylesheet" href="${ctx}/statics/commuser/personalcenter/UserTrendst.css" type="text/css">
+                	<%-- <script src="${ctx}/resources/commuser/personalcenter/PersonalHomeDT.js"></script> --%>
                 	
-                	<input type="hidden" class="queryCondition" id="is_author_replied" value="${is_author_replied}">
                 	
-                	<ul class="replytag_wrapper">
-	                    <li id="replytag_all" class="replytag ${is_author_replied==null||is_author_replied==''?'active':''}">全部</li>
-	                    <li id="replytag_toreply" class="replytag ${is_author_replied=='0'?'active':''}">待回复</li>
-	                    <li id="replytag_replied" class="replytag ${is_author_replied=='1'?'active':''}">已回复</li>
-	                </ul>
-                	<div class="listContent">
+                	<div class="trendstListContent">
                 		<c:forEach items="${List_map }" var="c">
-                			<div class="book_correct_unit">
-                				<div class="unit_left">
-                					<div class="img_box">
-                						<img src="${c.image_url }">
-                					</div>
-                					<div class="text_box">
-                						<div>
-                						作者：${c.author }
-                						</div>
-                						<div>
-                						版次：${c.revision }
-                						</div>
-                					</div>
-                				</div>
-                				<div class="unit_right">
+                			<div class="trendstWrapper"> 
+                			<c:choose>
+                				<%-- 通过动态 --%>
+               						<c:when test="${c.table_name == 'jcsb' && c.trendst_type == 1} "><%-- 教材申报 通过 --%>
+               							<div class="issue_line"><span class="issue_name">通过了审核</span><span class="issue_time">${c.trendst_date }</span></div>
+               							
+               							<div class="msg_line">
+               								
+               								<div class="msg_content">
+               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
+               									恭喜！您于${c.jcsb_create_time}申报的《${c.jcsb_textbook_name}》${c.jcsb_chosen_position }审核已通过。
+               								</div>
+               								<div class="success_smile"></div>
+               							</div>
+               							
+               						</c:when>
+               						<c:when test="${c.table_name == 'sbwz' && c.trendst_type == 1}"><%-- 随笔文章 通过 --%>
+               							<div class="issue_line"><span class="issue_name">通过了审核</span><span class="issue_time">${c.trendst_date }</span></div>
+               							<div class="msg_line">
+               								
+               								<div class="msg_content">
+               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
+               									恭喜！您于${c.sbwz_create_time}发表的随笔文章《${c.sbwz_title}》审核已通过。
+               								</div>
+               								<div class="success_smile"></div>
+               							</div>
+               						</c:when>
+               						<c:when test="${c.table_name == 'tsjc' && c.trendst_type == 1}"><%-- 图书纠错 通过 --%>
+               							<div class="issue_line"><span class="issue_name">通过了审核</span><span class="issue_time">${c.trendst_date }</span></div>
+               							<div class="msg_line">
+               								
+               								<div class="msg_content">
+               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
+               									${c.tsjc_realname} 于${c.tsjc_create_time}对您主编的图书《${c.tsjc_bookname}》第${c.tsjc_page }页${c.tsjc_line }提出的纠错：“${c.tsjc_content }”审核已通过。
+               								</div>
+               								<div class="success_smile"></div>
+               							</div>
+               						</c:when>
+               						<c:when test="${c.table_name == 'wycs' && c.trendst_type == 1}"><%-- 我要出书 通过 --%>
+               							<div class="issue_line"><span class="issue_name">通过了审核</span><span class="issue_time">${c.trendst_date }</span></div>
+               							<div class="msg_line">
+               								
+               								<div class="msg_content">
+               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
+               									恭喜！您于${c.wycs_create_time}提交的《${c.wycs_bookname}》选题审核已通过。
+               								</div>
+               								<div class="success_smile"></div>
+               							</div>
+               						</c:when>
+               						<c:when test="${c.table_name == 'wdjc' && c.trendst_type == 1}"><%-- 我要纠错 通过 --%>
+               							<div class="issue_line"><span class="issue_name">通过了审核</span><span class="issue_time">${c.trendst_date }</span></div>
+               							<div class="msg_line">
+               								
+               								<div class="msg_content">
+               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
+               									非常感谢 ${c.wdjc_realname }！您于${c.wdjc_create_time}对图书《${c.wdjc_bookname}》第${c.wdjc_page }页${c.wdjc_line }提出的纠错：“${c.wdjc_content }”审核已通过。
+               								</div>
+               								<div class="success_smile"></div>
+               							</div>
+               						</c:when>
+               						<c:when test="${c.table_name == 'wdsp' && c.trendst_type == 1}"><%-- 我的书评 通过 --%>
+                						<div class="issue_line"><span class="issue_name">通过了审核</span><span class="issue_time">${c.trendst_date }</span></div>
+               							<div class="msg_line">
+               								
+               								<div class="msg_content">
+               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
+               									恭喜！您于${c.wdsp_create_time}对《${c.wdsp_bookname}》的评价 “${c.wdsp_content }” 审核已通过。
+               								</div>
+               								<div class="success_smile"></div>
+               							</div>
+               						</c:when>
+               						<c:when test="${c.table_name == 'wdwj' && c.trendst_type == 1}"><%-- 我的问卷 通过 --%>
+               							
+               						</c:when>
                 				
-                					<form id="form${c.id }">
-	                					<div class="title_line">
-	                						<span class="bookname">${c.bookname }</span>
-	                						<span class="isbn">${c.isbn }</span>
-	                					</div>
-	                					<div class="position_line">
-		                					<span>纠错信息：${c.page }页码</span>
-		                					<span class=" ">${c.line }行</span>
-	                					</div>
-	                					<div class="content_line">
-	                						纠错内容：${c.content }
-	                					</div>
-	                					<div >
-	                						附件：<span onclick="downLoadProxy(${attachment})">${c.attachment_name }</span>
-	                					</div>
-	                					<div class="reply_line">
-	                						<span>回复意见：</span>
-	                						<textarea ${c.is_author_replied?'disabled':''} id="textarea_${c.id }" rows="5" cols="5">${c.author_reply }</textarea>
-	                					</div>
-	                					<div >
-	                						<button type="button" class="btn_reply ${c.is_author_replied?'hidden':''}" id="btn_${c.id }" value=""  onclick="submitReply('${c.id }')">提交编辑</button>
-	                					</div>
-                					</form>
-                				</div>
-                			</div>
-                		
-                		
+                				<%-- 未通过动态 --%>
+                				
+                					<c:when test="${c.table_name == 'jcsb' && c.trendst_type == 2}"><%-- 教材申报 未通过 --%>
+               							<div class="issue_line"><span class="issue_name">未通过审核</span><span class="issue_time">${c.trendst_date }</span></div>
+            							<div class="msg_line">
+            								
+               								<div class="msg_content">
+               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
+               									非常抱歉！您于${c.jcsb_create_time}申报的《${c.jcsb_textbook_name}》${c.jcsb_chosen_position }审核未通过。
+               								</div>		
+               								<div class="fail_unhappy"></div>
+               							</div>
+               						</c:when>
+               						<c:when test="${c.table_name == 'sbwz' && c.trendst_type == 2}"><%-- 随笔文章 未通过 --%>
+               							<div class="issue_line"><span class="issue_name">未通过审核</span><span class="issue_time">${c.trendst_date }</span></div>
+               							<div class="msg_line">
+               								
+               								<div class="msg_content">
+               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
+               									非常抱歉！您于${c.sbwz_create_time}发表的随笔文章《${c.sbwz_title}》审核未通过。
+               								</div>
+               								<div class="fail_unhappy"></div>
+               							</div>
+               						</c:when>
+               						<c:when test="${c.table_name == 'tsjc' && c.trendst_type == 2}"><%-- 图书纠错 未通过 --%>
+               							<div class="issue_line"><span class="issue_name">未通过审核</span><span class="issue_time">${c.trendst_date }</span></div>
+               							<div class="msg_line">
+               								
+               								<div class="msg_content">
+               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
+               									${c.tsjc_realname} 于${c.tsjc_create_time}对您主编的图书《${c.tsjc_bookname}》第${c.tsjc_page }页${c.tsjc_line }提出的纠错：“${c.tsjc_content }”审核未通过。
+               								</div>
+               								<div class="fail_unhappy"></div>
+               							</div>
+               						</c:when>
+               						<c:when test="${c.table_name == 'wycs' && c.trendst_type == 2}"><%-- 我要出书 未通过 --%>
+               							<div class="issue_line"><span class="issue_name">未通过审核</span><span class="issue_time">${c.trendst_date }</span></div>
+               							<div class="msg_line">
+               								
+               								<div class="msg_content">
+               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
+               									非常抱歉！您于${c.wycs_create_time}提交的《${c.wycs_bookname}》选题被退回，请尽快检查修改！
+               								</div>
+               								<div class="fail_unhappy"></div>
+               							</div>
+               						</c:when>
+               						<c:when test="${c.table_name == 'wdjc' && c.trendst_type == 2}"><%-- 我要纠错 未通过 --%>
+               							<div class="issue_line"><span class="issue_name">未通过审核</span><span class="issue_time">${c.trendst_date }</span></div>
+               							<div class="msg_line">
+               								
+               								<div class="msg_content">
+               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
+               									非常抱歉 ${c.wdjc_realname }！您于${c.wdjc_create_time}对图书《${c.wdjc_bookname}》第${c.wdjc_page }页${c.wdjc_line }提出的纠错：“${c.wdjc_content }”审核结果为无问题，仍然感谢您的关注。
+               								</div>
+               								<div class="fail_unhappy"></div>
+               							</div>
+               						</c:when>
+               						<c:when test="${c.table_name == 'wdsp' && c.trendst_type == 2}"><%-- 我的书评 未通过 --%>
+               							<div class="issue_line"><span class="issue_name">未通过审核</span><span class="issue_time">${c.trendst_date }</span></div>
+               							<div class="msg_line">
+               								
+               								<div class="msg_content">
+               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
+               									非常抱歉！您于${c.wdsp_create_time}对《${c.wdsp_bookname}》的评价 “${c.wdsp_content }” 审核未通过。
+               								</div>
+               								<div class="fail_unhappy"></div>
+               							</div>
+               						</c:when>
+               						<c:when test="${c.table_name == 'wdwj' && c.trendst_type == 2}"><%-- 我的问卷 未通过 --%>
+               							
+               						</c:when>
+                				
+                				<%-- 发表动态 --%>
+                				
+                					<c:when test="${c.table_name == 'jcsb' && c.trendst_type == 0}"><%-- 教材申报 发表 --%>
+               							<div class="issue_line"><span class="issue_name">申报了编写教材</span><span class="issue_time">${c.trendst_date }</span></div>
+                						<div>您申报的《${c.jcsb_textbook_name}》${c.preset_position }已提交成功，请耐心等待遴选结果。</div>		
+               						</c:when>
+               						<c:when test="${c.table_name == 'sbwz' && c.trendst_type == 0}"><%-- 随笔文章 发表 --%>
+               							<div class="issue_line"><span class="issue_name">发表了随笔文章<img></span><span class="issue_time">${c.trendst_date }</span></div>
+               							<div class="content_line">
+               								<div class="img_wrapper"><img src="${ctx }/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"></div>
+               								<div class="content_wrapper">
+               									
+               										<c:if test="${c.sbwz_auth_status ==0}"><div class="status_tag toAudit">待审核</div></c:if>
+               										<c:if test="${c.sbwz_auth_status ==1}"><div class="status_tag reject">未通过</div></c:if>
+               										<c:if test="${c.sbwz_auth_status ==2}"><div class="status_tag Audited">已通过</div></c:if>
+               									
+               									<div class="article_title">${c.sbwz_title }</div>
+               									<div class="article_summary">${c.sbwz_summary }</div>
+               								</div>
+               							</div>
+               							<div class="operate_wrapper">
+	               							<a><div class="img img_edit" ></div><div>编辑</div></a> 
+	               							<a><div class="img img_delete"></div><div>删除</div></a>
+               							</div>
+               						</c:when>
+               						<c:when test="${c.table_name == 'tsjc' && c.trendst_type == 0}"><%-- 图书纠错 发表 --%>
+               							<div class="issue_line"><span class="issue_name">收到了纠错</span><span class="issue_time">${c.trendst_date }</span></div>
+               							<div class="content_line">
+               								<div class="img_wrapper"><img src="${ctx }/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"></div>
+               								<div class="content_wrapper">
+               									<div class="bookc_title">${c.tsjc_bookname }</div>
+               									<div class="sub_title">${c.tsjc_realname } 纠正了《${c.tsjc_bookname }》第${c.tsjc_page }页${c.tsjc_line },提出纠错：“${c.tsjc_content }”。</div>
+               									<div class="rank_stars"></div>
+               									<div class="book_detail">${c.tsjc_detail }</div>
+               								</div>
+               							</div>
+               						</c:when>
+               						<c:when test="${c.table_name == 'wycs' && c.trendst_type == 0}"><%-- 我要出书 发表 --%>
+               							<div class="issue_line"><span class="issue_name">提交了选题</span><span class="issue_time">${c.trendst_date }</span></div>
+				
+               						</c:when>
+               						<c:when test="${c.table_name == 'wdjc' && c.trendst_type == 0}"><%-- 我要纠错 发表 --%>
+               							<div class="issue_line"><span class="issue_name">纠正了教材</span><span class="issue_time">${c.trendst_date }</span></div>
+										<div class="content_line">
+               								<div class="img_wrapper"><img src="${ctx }/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"></div>
+               								<div class="content_wrapper">
+               									<div class="bookc_title">${c.wdjc_bookname }</div>
+               									<div class="sub_title">${c.wdjc_realname } 纠正了《${c.wdjc_bookname }》第${c.wdjc_page }页${c.wdjc_line },提出纠错：“${c.wdjc_content }”。</div>
+               									<div class="rank_stars"></div>
+               									<div class="book_detail">${c.wdjc_detail }</div>
+               								</div>
+               							</div>
+               							<div class="operate_wrapper">
+	               							<a><div class="img img_delete"></div><div>删除</div></a>
+               							</div>
+               						</c:when>
+               						<c:when test="${c.table_name == 'wdsp' && c.trendst_type == 0}"><%-- 我的书评 发表 --%>
+               							<div class="issue_line"><span class="issue_name">发表了评论</span><span class="issue_time">${c.trendst_date }</span></div>
+               							<div class="content_line">
+               								<div class="img_wrapper"><img src="${ctx }/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"></div>
+               								<div class="content_wrapper">
+               									<div class="bookc_title">${c.wdsp_bookname }</div>
+               									<div class="sub_title">${c.wdsp_realname } 评论了《${c.wdsp_bookname }》：“${c.wdsp_content }”。</div>
+               									<div class="rank_stars">${c.wdsp_score}</div>
+               									<div class="book_detail">${c.wdsp_detail }</div>
+               								</div>
+               							</div>
+               							<div class="operate_wrapper">
+	               							<a><div class="img img_delete"></div><div>删除</div></a>
+               							</div>
+               						</c:when>
+               						<c:when test="${c.table_name == 'wdwj' && c.trendst_type == 0}"><%-- 我的问卷 发表 --%>
+               							
+               						</c:when>
+
+                			</c:choose>
+                		</div>
                 		</c:forEach>
                 	</div>
-                	--%>
+                	
                 	
                 	<c:if test="${listCount == 0 }">
                 		<div class="no-more">

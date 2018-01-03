@@ -356,5 +356,310 @@ AND a.online_progress IN (2, 3)
 			)t
 	</select>
 
+	<select id="queryWriterUserTrendst"  parameterType="PageParameter" resultType="Map">
+		select 
+		t.id,t.table_name,t.table_id
+		,DATE_FORMAT(t.trendst_date,'%Y-%m-%d %H:%i') AS trendst_date
+		,DATE_FORMAT(t.trendst_date,'%Y%m%d%H%i') AS trendst_date_num
+		,t.trendst_type
+		,tsjc.*,jcsb.*,sbwz.*,wdjc.*,wycs.*,wdsp.*
+		from 
+		writer_user_trendst t
+		left join 
+		(
+			SELECT
+		bc.id AS tsjc_id,
+		'tsjc' AS tsjc_type,
+		DATE_FORMAT(bc.gmt_create,'%Y年%m月%d日') AS tsjc_create_time,
+		b.bookname AS tsjc_bookname,
+		b.image_url AS tsjc_image_url,
+		bc.book_id AS tsjc_book_id,
+		bc.page AS tsjc_page,
+		bc.line AS tsjc_line,
+		bd.detail AS tsjc_detail,
+		bc.content AS tsjc_content,
+		u.realname AS tsjc_realname,
+		bc.result AS tsjc_result,
+		bc.is_editor_replied AS tsjc_is_editor_replied
+		FROM
+		book AS b
+		Inner Join book_editor AS be ON b.id = be.book_id
+		Inner Join book_correction AS bc ON b.id = bc.book_id
+		Inner Join writer_user AS u ON bc.user_id = u.id
+		left  Join book_detail AS bd ON bd.book_id = b.id
+		WHERE
+		be.author_id =  #{parameter.logUserId}
+		ORDER BY
+		bc.gmt_create DESC
+		)tsjc
+		on t.table_name = tsjc.tsjc_type and t.table_id=tsjc.tsjc_id 
+		
+		left join 
+		(
+			SELECT
+		dp.id AS jcsb_id,
+		'jcsb' AS jcsb_type,
+		DATE_FORMAT(dp.gmt_update,'%Y年%m月%d日') AS jcsb_update_time,
+		DATE_FORMAT(dp.gmt_create,'%Y年%m月%d日') AS jcsb_create_time,
+		tb.textbook_name as jcsb_textbook_name,
+		concat(
+			case 
+			when dp.preset_position >= 8
+			then '数字编委 '
+			else ''
+			end
+			,
+			case 
+			when dp.preset_position in (4,5,6,7,12,13,14,15) 
+			then '主编 '
+			else ''
+			end
+			,
+			case 
+			when dp.preset_position in (2,3,6,7,10,11,14,15) 
+			then '副主编 '
+			else ''
+			end
+			,
+			case 
+			when dp.preset_position in (1,3,5,7,9,11,13,15) 
+			then '编委 '
+			else ''
+			end
+		) as jcsb_preset_position,
+		concat(
+			case 
+			when dp.chosen_position >= 8
+			then '数字编委 '
+			else ''
+			end
+			,
+			case 
+			when dp.chosen_position in (4,5,6,7,12,13,14,15) 
+			then '主编 '
+			else ''
+			end
+			,
+			case 
+			when dp.chosen_position in (2,3,6,7,10,11,14,15) 
+			then '副主编 '
+			else ''
+			end
+			,
+			case 
+			when dp.chosen_position in (1,3,5,7,9,11,13,15) 
+			then '编委 '
+			else ''
+			end
+		) as jcsb_chosen_position,
+		d.online_progress as jcsb_online_progress,
+		dp.rank as jcsb_rank
+		FROM
+		dec_position AS dp
+		Inner Join declaration AS d ON dp.declaration_id = d.id
+		Inner Join textbook AS tb ON dp.textbook_id = tb.id
+		WHERE
+		d.user_id =  #{parameter.logUserId}
+		order by dp.gmt_update
+		)jcsb
+		on t.table_name = jcsb.jcsb_type and t.table_id=jcsb.jcsb_id 
+		
+		left join 
+		(
+			 SELECT 
+			cc.id  as sbwz_id
+			,'sbwz' as sbwz_type
+			,DATE_FORMAT(cc.gmt_create,'%Y年%m月%d日') AS sbwz_create_time
+			 ,cc.title AS sbwz_title
+			 ,cc.summary AS sbwz_summary
+			 ,cc.auth_status AS sbwz_auth_status
+		
+			 from cms_content cc
+			 inner join cms_category ct on cc.category_id = ct.id and ct.category_name = '医学随笔'
+			 where cc.author_id=#{parameter.logUserId}
+				  and cc.is_deleted !='1'
+		order by cc.gmt_create
+		)sbwz
+		on t.table_name = sbwz.sbwz_type and t.table_id=sbwz.sbwz_id 
+		
+		left join
+		(
+			SELECT
+				bc.id  AS wdjc_id,
+		'wdjc' AS wdjc_type,
+		DATE_FORMAT(bc.gmt_create,'%Y年%m月%d日') AS wdjc_create_time,
+		b.bookname AS wdjc_bookname,
+		b.image_url AS wdjc_image_url,
+		bc.book_id AS wdjc_book_id,
+		bd.detail AS wdjc_detail,
+		bc.page AS wdjc_page,
+		bc.line AS wdjc_line,
+		bc.content AS wdjc_content,
+		u.realname AS wdjc_realname,
+		bc.result AS wdjc_result,
+		bc.is_editor_replied AS wdjc_is_editor_replied
+				FROM
+				book AS b
+				Inner Join book_correction AS bc ON b.id = bc.book_id
+				Inner Join writer_user AS u ON bc.user_id = u.id
+				left  Join book_detail AS bd ON bd.book_id = b.id
+				WHERE
+				bc.user_id =  #{parameter.logUserId}
+				AND bc.is_deleted =  '0' 
+				
+				order by  bc.gmt_create desc
+		) wdjc
+		on t.table_name = wdjc.wdjc_type and t.table_id=wdjc.wdjc_id 
+		
+		left join 
+		(
+			SELECT
+		t.id  AS wycs_id,
+		'wycs' AS wycs_type,
+		DATE_FORMAT(t.gmt_update,'%Y年%m月%d日') AS wycs_update_time,
+		DATE_FORMAT(t.gmt_create,'%Y年%m月%d日') AS wycs_create_time,
+		t.bookname AS wycs_bookname,
+		t.auth_progress AS wycs_auth_progress
+		FROM
+		topic AS t
+		WHERE
+		t.user_id =  #{parameter.logUserId} AND
+		t.is_deleted =  '0' AND
+		t.auth_progress IN  ('2', '3')
+		
+		order by t.gmt_update
+		) wycs
+		on t.table_name = wycs.wycs_type and t.table_id=wycs.wycs_id 
+		
+		left join
+		(
+			SELECT
+		a.id  AS wdsp_id,
+		'wdsp' AS wdsp_type,
+		DATE_FORMAT(a.gmt_create,'%Y年%m月%d日') AS wdsp_create_time,
+		b.bookname AS wdsp_bookname,
+		b.image_url AS wdsp_image_url,
+		b.id AS wdsp_book_id,
+		a.score AS wdsp_score,
+		a.content AS wdsp_content,
+		bd.detail AS wdsp_detail,
+		u.realname AS wdsp_realname,
+		DATE_FORMAT(a.gmt_update,'%Y年%m月%d日') AS wdsp_update_time
+		from book_user_comment a 
+		left JOIN  book b ON a.book_id=b.id
+		join writer_user u on a.writer_id = u.id
+		left join book_detail bd on bd.book_id = b.id
+		WHERE
+		a.writer_id =  #{parameter.logUserId} AND
+		a.is_deleted =  '0' 
+		) wdsp
+		on t.table_name = wdsp.wdsp_type and t.table_id=wdsp.wdsp_id
+		
+
+		order by t.trendst_date desc
+		limit ${start},${pageSize}
+	</select>
+	
+	<select id="queryWriterUserTrendstCount"  parameterType="PageParameter" resultType="Integer">
+		select count(*) from
+			(
+			select 
+			t.*
+			from 
+			writer_user_trendst t
+			left join 
+			(
+				SELECT
+			bc.id AS tsjc_id,
+			'tsjc' AS tsjc_type
+			FROM
+			book AS b
+			Inner Join book_editor AS be ON b.id = be.book_id
+			Inner Join book_correction AS bc ON b.id = bc.book_id
+			Inner Join writer_user AS u ON bc.user_id = u.id
+			WHERE
+			be.author_id =  #{parameter.logUserId}
+			ORDER BY
+			bc.gmt_create DESC
+			)tsjc
+			on t.table_name = tsjc.tsjc_type and t.table_id=tsjc.tsjc_id 
+			
+			left join 
+			(
+				SELECT
+			dp.id AS jcsb_id,
+			'jcsb' AS jcsb_type
+			FROM
+			dec_position AS dp
+			Inner Join declaration AS d ON dp.declaration_id = d.id
+			Inner Join textbook AS tb ON dp.textbook_id = tb.id
+			WHERE
+			d.user_id =  #{parameter.logUserId}
+			order by dp.gmt_update
+			)jcsb
+			on t.table_name = jcsb.jcsb_type and t.table_id=jcsb.jcsb_id 
+			
+			left join 
+			(
+				 SELECT 
+				cc.id  as sbwz_id
+				,'sbwz' as sbwz_type
+				
+				 from cms_content cc
+				 inner join cms_category ct on cc.category_id = ct.id and ct.category_name = '医学随笔'
+				 where cc.author_id=#{parameter.logUserId}
+					  and cc.is_deleted !='1'
+			order by cc.gmt_create
+			)sbwz
+			on t.table_name = sbwz.sbwz_type and t.table_id=sbwz.sbwz_id 
+			
+			left join
+			(
+				SELECT
+					bc.id  AS wdjc_id,
+			'wdjc' AS wdjc_type
+					FROM
+					book AS b
+					Inner Join book_correction AS bc ON b.id = bc.book_id
+					Inner Join writer_user AS u ON bc.user_id = u.id
+					WHERE
+					bc.user_id =  #{parameter.logUserId}
+					AND bc.is_deleted =  '0' 
+					
+					order by  bc.gmt_create desc
+			) wdjc
+			on t.table_name = wdjc.wdjc_type and t.table_id=wdjc.wdjc_id 
+			
+			left join 
+			(
+				SELECT
+			t.id  AS wycs_id,
+			'wycs' AS wycs_type
+			FROM
+			topic AS t
+			WHERE
+			t.user_id =  #{parameter.logUserId} AND
+			t.is_deleted =  '0' AND
+			t.auth_progress IN  ('2', '3')
+			
+			order by t.gmt_update
+			) wycs
+			on t.table_name = wycs.wycs_type and t.table_id=wycs.wycs_id 
+			
+			left join
+			(
+				SELECT
+			a.id  AS wdsp_id,
+			'wdsp' AS wdsp_type
+			from book_user_comment a left JOIN  book b ON a.book_id=b.id
+			WHERE
+			a.writer_id =  #{parameter.logUserId} AND
+			a.is_deleted =  '0' 
+			) wdsp
+			on t.table_name = wdsp.wdsp_type and t.table_id=wdsp.wdsp_id
+			
+		)t
+	</select>
+
 
 </mapper>
