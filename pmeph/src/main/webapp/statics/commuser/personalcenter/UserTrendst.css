@@ -171,7 +171,7 @@
 .scorestar1 {
     float: left;
     background-image: url(../../image/css_sprites.png);
-    background-position: -183px -174px;
+    background-position: -182px -174px;
     background-repeat: no-repeat;
     height: 15px;
     width: 15px;
@@ -180,7 +180,7 @@
 .scorestar2 {
     float: left;
     background-image: url(../../image/css_sprites.png);
-    background-position: -183px -152.5px;
+    background-position: -182px -153px;
     background-repeat: no-repeat;
     height: 15px;
     width: 15px;

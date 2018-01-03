@@ -3,8 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%String path = request.getContextPath();%>
 
-<%@ page import="java.util.*"%> //获取系统时间必须导入的 
-<%@ page import="java.text.*"%> //获取系统时间必须导入的 
+<%@ page import="java.util.*"%> <!-- //获取系统时间必须导入的 --> 
+<%@ page import="java.text.*"%> <!-- //获取系统时间必须导入的  -->
 <% 
 Calendar now = Calendar.getInstance();
 now.add(Calendar.DAY_OF_MONTH, -3);
@@ -329,7 +329,14 @@ request.setAttribute("currentTime",datetime);
                								<div class="content_wrapper">
                									<div class="bookc_title">${c.wdsp_bookname }</div>
                									<div class="sub_title">${c.wdsp_realname } 评论了《${c.wdsp_bookname }》：“${c.wdsp_content }”。</div>
-               									<div class="rank_stars">${c.wdsp_score}</div>
+               									<div class="rank_stars">
+               										<c:forEach begin="1" end="${c.wdsp_score/2}">
+               											<div class="scorestar1"></div>
+               										</c:forEach>
+               										<c:forEach begin="1" end="${5-c.wdsp_score/2}">
+               											<div class="scorestar2"></div>
+               										</c:forEach>
+               									</div>
                									<div class="book_detail">${c.wdsp_detail }</div>
                								</div>
                							</div>
