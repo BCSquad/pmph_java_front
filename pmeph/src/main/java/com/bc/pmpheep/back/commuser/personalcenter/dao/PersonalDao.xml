@@ -42,7 +42,19 @@
   </select>
 <!-- 查好友信息 -->
  <select id="ListMyFriend"  resultMap="BaseResultMap">
-     select  b.realname,b.id,b.avatar from writer_friend a left join writer_user b on a.target_id=b.id WHERE  a.request_id=#{id}  AND a.status=2 
+     select  
+     b.realname
+     ,b.id
+     ,b.avatar 
+     from 
+     writer_friend a 
+     left join writer_user b 
+     on a.target_id=b.id or a.request_id = b.id
+     WHERE (a.target_id= #{id}  or a.request_id = #{id})
+	 and b.id != #{id}
+	AND a.status=2 
+	group by b.id
+	
   </select>
 <!-- 查小组信息 -->
  <select id="ListMyGroup"  resultMap="BaseResultMap">
@@ -640,7 +652,7 @@ AND a.online_progress IN (2, 3)
 		) wdsp
 		on t.table_name = wdsp.wdsp_type and t.table_id=wdsp.wdsp_id
 		
-
+		where t.writer_user_id = #{parameter.logUserId}
 		order by t.trendst_date desc
 		limit ${start},${pageSize}
 	</select>
@@ -742,7 +754,7 @@ AND a.online_progress IN (2, 3)
 			a.is_deleted =  '0' 
 			) wdsp
 			on t.table_name = wdsp.wdsp_type and t.table_id=wdsp.wdsp_id
-			
+			where t.writer_user_id = #{parameter.logUserId}
 		)t
 	</select>
 

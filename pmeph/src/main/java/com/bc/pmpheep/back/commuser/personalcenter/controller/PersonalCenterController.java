@@ -394,14 +394,14 @@ public class PersonalCenterController extends BaseController {
     
     /**
      * 我要出书
-     */
+     *//*
     @RequestMapping("/toBookList")
     public ModelAndView toBookList(HttpServletRequest request,
     		HttpServletResponse response){
     	ModelAndView mav = new ModelAndView("commuser/personalcenter/toBookList");
     	
     	return mav;
-    }
+    }*/
     
     
     //内部方法***************************************************************************
