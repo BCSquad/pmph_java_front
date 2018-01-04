@@ -6,6 +6,7 @@
 		
 	</resultMap>
 	
+	
 	<select id="queryEditorToBeList" parameterType="PageParameter" resultMap="editorToBeList">
 		SELECT
 		dp.id as dec_position_id,

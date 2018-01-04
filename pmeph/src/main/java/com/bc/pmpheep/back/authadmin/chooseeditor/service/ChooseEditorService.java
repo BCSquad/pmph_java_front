@@ -11,6 +11,7 @@ import com.bc.pmpheep.controller.bean.ResponseBean;
  * @author liudi
  * 第一主编选择编委 服务层接口
  */
+
 public interface ChooseEditorService {
 
 	/**

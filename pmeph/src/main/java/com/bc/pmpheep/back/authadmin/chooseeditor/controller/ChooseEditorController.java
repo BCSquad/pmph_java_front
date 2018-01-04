@@ -38,6 +38,7 @@ public class ChooseEditorController extends BaseController {
 	@Qualifier("com.bc.pmpheep.back.authadmin.chooseeditor.service.ChooseEditorServiceImpl")
 	ChooseEditorService chooseEditorService;
 	
+	
 	/**
 	 * 跳转到第一主编选择编委界面
 	 */

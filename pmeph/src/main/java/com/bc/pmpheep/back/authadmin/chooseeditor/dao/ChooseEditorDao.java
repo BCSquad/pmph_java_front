@@ -9,6 +9,7 @@ import com.bc.pmpheep.back.plugin.PageParameter;
  * @author Administrator
  *
  */
+
 public interface ChooseEditorDao {
 	/**
 	 * 查询列表
