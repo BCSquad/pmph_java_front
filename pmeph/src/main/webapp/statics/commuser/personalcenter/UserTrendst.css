@@ -21,7 +21,14 @@
 	font-size: 14px;
 	color: #999999;
 	float: left;
-    clear: right;
+	line-height: 16px;
+    /* clear: right; */
+}
+
+.issue_line .img_xiewenzhang{
+	float:left;
+	margin-left: 5px;
+	clear: right;
 }
 
 .issue_line .issue_time{
@@ -158,10 +165,10 @@
     font-size: 12px;
     float: left;
     clear: right;
-    line-height: 12px;
+    line-height: 16px;
     margin-top: 15px;
     width: 100%;
-    max-height: 12px;
+    max-height: 15px;
     text-overflow: ellipsis;
     overflow: hidden;
     word-break: break-all;
