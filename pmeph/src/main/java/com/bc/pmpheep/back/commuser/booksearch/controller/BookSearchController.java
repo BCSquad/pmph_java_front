@@ -148,7 +148,6 @@ public class BookSearchController extends BaseController {
 		String bookId = request.getParameter("bookId");
 		String uid = getUserInfo().get("id").toString();
 		Map<String,Object> resultMap = bookSearchService.likeSwitch(uid,bookId);
-		
 		return resultMap;
 	}
 }
