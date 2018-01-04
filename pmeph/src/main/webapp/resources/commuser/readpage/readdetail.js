@@ -184,7 +184,7 @@ function changepage() {
 };
 //新增评论
 function insert() {
-    if ($("#content_book").val() == '') {
+    if ($("#content_book").val() == ''||$("#content_book").val() == null) {
         window.message.info("请输入评论！");
         return;
     }

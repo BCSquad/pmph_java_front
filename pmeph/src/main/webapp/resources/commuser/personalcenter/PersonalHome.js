@@ -15,11 +15,6 @@ $(document).ready(function () {
 		});
 		//进入页面 回显选中页签
 	    $("#"+$("#pagetag").val()).addClass("xz");
-
-	    $("#jiazaigengduo").click(function () {
-	    	$("#jiazaigengduo").hide();
-	        $("#gengduo").show();
-	    });
 	    
 	    //分页
 		//刷新分页栏

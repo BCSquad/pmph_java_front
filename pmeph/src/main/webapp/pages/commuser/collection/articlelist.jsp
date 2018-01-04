@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="collection" >
         <div class="title">
                <div class="title-text">
-                   <a href="#"> ${article.title }</a>
+                   <a href="articledetail/toPage.action?wid=${article.cid }"> ${article.title }</a>
                </div>
                <input type="hidden" id="cms${article.cid }" value="${article.cid }"/>
                <div class="tm">

@@ -202,7 +202,7 @@
             </div>
             <c:forEach items="${listArt}" var="list" varStatus="status">
                 <c:if test="${status.index==0}">
-                    <div class="item1">
+                    <div class="item1" onclick="window.location.href='${ctx}/articledetail/toPage.action?wid=${list.id}'">
                         <div class="big">
                             <div class="small"><span class="recommend">推荐</span></div>
                             <div class="pc1"><img src="${ctx}/statics/testfile/a6_photo.png"></div>
@@ -220,15 +220,14 @@
             </c:forEach>
             <c:forEach items="${listArt}" var="list" varStatus="status">
                 <c:if test="${status.index!=0}">
-                    <div class="item">
+                    <div class="item" onclick="window.location.href='${ctx}/articledetail/toPage.action?wid=${list.id}'">
                         <div class="big">
                             <div class="small"><span class="recommend">推荐</span></div>
                             <div class="pc1"><img src="${ctx}/statics/testfile/a6_photo.png"></div>
                             <div class="tt"><span class="a6_content">${list.title}</span></div>
                             <div class="a6_div2">${list.summary}</div>
                             <div>
-                                <div class="a6_head_div"><img src="${ctx}/statics/testfile/a6_photo.png"
-                                                              class="a6_head"></div>
+                                <div class="a6_head_div"><img src="${ctx}/statics/testfile/a6_photo.png"class="a6_head"></div>
                                 <div class="a6_name_div"><span>${list.realname}</span></div>
                                 <div class="a6_time_div"><span>${list.gmt_create}</span></div>
                             </div>

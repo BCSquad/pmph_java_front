@@ -75,7 +75,7 @@ String contextpath=request.getContextPath();
            </div>
            </div>
            </c:forEach> --%>
-           <div style="background-color: #ffffff;float:left;padding-bottom: 10px" id="sort${fistsort[0].parent_id }">
+           <%-- <div style="background-color: #ffffff;float:left;padding-bottom: 10px" id="sort${fistsort[0].parent_id }">
            <div style="float:left;min-width:100px;height:56px;line-height: 56px;text-align: center;margin-left:10px">
                                                       全部分类:
            </div>
@@ -86,7 +86,7 @@ String contextpath=request.getContextPath();
                  </c:forEach>
                  </ul>
            </div>
-           </div>
+           </div> --%>
            
            </div>
             <div  style="background-color: #f6f6f6;width: 100%;height: 15px;"></div>

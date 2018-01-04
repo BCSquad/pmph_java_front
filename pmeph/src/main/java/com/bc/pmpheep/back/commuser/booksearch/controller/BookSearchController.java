@@ -85,16 +85,37 @@ public class BookSearchController extends BaseController {
 		Integer pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		Integer pageSize = Integer.parseInt(request.getParameter("pageSize"));
 		String queryName = request.getParameter("queryName");
-        String sortid=request.getParameter("id");
-        Map<String,Object> bigsort=null;
+        
+		
+		
+		String sortid=request.getParameter("id");
+        Map<String,Object> bigsort=new HashMap<String, Object>();;
         List<Map<String,Object>> smallsort=null;
-        if(sortid!=null && !"".equals(sortid)){
+       if(sortid!=null && !"".equals(sortid)){
+    	   
         	bigsort=bookSearchService.querySortById(Long.valueOf(sortid));
-        	smallsort=bookSearchService.queryChildSort(Long.valueOf(bigsort.get("id").toString()));
+//        	smallsort=bookSearchService.queryChildSort(Long.valueOf(bigsort.get("id").toString()));
         }
-        resultMap.put("parent", bigsort);
+//        resultMap.put("parent", bigsort);
+//        resultMap.put("child", smallsort);
+		String order=request.getParameter("order");
+        Map<String,Object> smap=new HashMap<String, Object>();
+        smap.put("searchText", queryName !=null && !"".equals(queryName)? "%"+queryName+"%":null );
+        smap.put("order", order !=null && !"".equals(order)? Long.valueOf(order)+2:2);
+        smap.put("sortId", sortid!=null && !"".equals(sortid)? sortid:0 );
+        smallsort= bookSearchService.querySearchSort(smap);
+        Long nextorder=1L;
+        if(order !=null && !"".equals(order)){
+        	nextorder=Long.valueOf(order)+1;
+        	
+        }else{
+        	bigsort.put("type_name", "全部分类");
+        }
+        bigsort.put("order", nextorder);
         resultMap.put("child", smallsort);
-		String uid = null;
+        resultMap.put("parent", bigsort);
+        
+        String uid = null;
 		if (user != null && getUserInfo().get("id")!=null && getUserInfo().get("id").toString() != null) {
 			uid = getUserInfo().get("id").toString();
 		}

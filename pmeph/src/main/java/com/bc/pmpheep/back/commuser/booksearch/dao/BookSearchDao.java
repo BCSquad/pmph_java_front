@@ -105,4 +105,9 @@ public interface BookSearchDao {
      * 
      */
     Integer getBookTotal(PageParameter<Map<String,Object>> pageParameter);
+    /**
+     * @param map
+     * @return
+     */
+    List<Map<String,Object>> querySearchSort(Map<String,Object> map);
 }

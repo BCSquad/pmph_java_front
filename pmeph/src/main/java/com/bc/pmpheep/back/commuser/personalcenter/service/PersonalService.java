@@ -89,5 +89,21 @@ public interface PersonalService {
 	 */
 	public int queryMyCorrectionCount(PageParameter<Map<String, Object>> pageParameter);
 
+	/**
+	 * 个人中心动态 汇总后面所有页签对应信息的新增、审批的动态
+	 * @param pageParameter
+	 * @return
+	 */
+	public List<Map<String, Object>> queryWriterUserTrendst(PageParameter<Map<String, Object>> pageParameter);
+	
+	/**
+	 * 个人中心动态总数
+	 * @param pageParameter
+	 * @return
+	 */
+	public int queryWriterUserTrendstCount(PageParameter<Map<String, Object>> pageParameter);
+	
+	
+
 	
 }

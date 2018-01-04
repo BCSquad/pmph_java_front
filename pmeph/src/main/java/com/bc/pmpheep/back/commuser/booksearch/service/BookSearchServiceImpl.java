@@ -82,6 +82,12 @@ public class BookSearchServiceImpl implements BookSearchService {
 		return bookDao.getBookTotal(pageParameter);
 	}
 
+	@Override
+	public List<Map<String, Object>> querySearchSort(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return bookDao.querySearchSort(map);
+	}
+
 	
 	
 }

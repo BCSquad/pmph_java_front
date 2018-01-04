@@ -146,7 +146,7 @@
                     <div class="name">医学随笔  <a href="#">全部&gt;&gt;</a></div>
                 </div>
                 <c:forEach items="${listArt}" var="list" varStatus="status">
-	                <div class="${status.index==0 or status.index==4 ?'item' :'item behind'}" onclick="">
+	                <div class="${status.index==0 or status.index==4 ?'item' :'item behind'}" onclick="window.location.href='${ctx}/articledetail/toPage.action?wid=${list.id}'">
                     <div class="command">
                         <span style="margin-left: 5px">推荐</span>
                     </div>
