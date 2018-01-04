@@ -38,14 +38,15 @@ public class ChooseEditorController extends BaseController {
 	@Qualifier("com.bc.pmpheep.back.authadmin.chooseeditor.service.ChooseEditorServiceImpl")
 	ChooseEditorService chooseEditorService;
 	
+	
 	/**
 	 * 跳转到第一主编选择编委界面
 	 */
 	@RequestMapping("toPage")
-	public ModelAndView toPage(@RequestParam(value="textBookId",required=true)String textBookId, HttpServletRequest request){
+	public ModelAndView toPage(/*@RequestParam(value="textBookId",required=true)String textBookId,*/ HttpServletRequest request){
 		ModelAndView mv = new ModelAndView();
-		/*String textBookId = request.getParameter("textBookId");*/
-		/*textBookId = "21524";*/
+		String textBookId = request.getParameter("textBookId");
+		textBookId = "3141";
 		
 		Map<String, Object> user = getUserInfo();
 		BigInteger logUserId=(BigInteger) user.get("id");
@@ -55,9 +56,13 @@ public class ChooseEditorController extends BaseController {
 		List<Map<String, Object>> OrgList = chooseEditorService.getOrgList();
 		String textBookName = (String) textBook.get("textbook_name");
 		Boolean is_list_selected = (Boolean) textBook.get("is_list_selected");
-		String selectedIds = getTempSelectedIds(textBookId, logUserId);
+		String tag ="editor";
+		String selectedIds = getTempSelectedIds(textBookId, logUserId,tag);
+		tag ="numEditor";
+		String selectedNumIds = getTempSelectedIds(textBookId, logUserId,tag);
 		
 		mv.addObject("selectedIds", selectedIds);
+		mv.addObject("selectedNumIds", selectedNumIds);
 		mv.addObject("logUserName",logUserName);
 		mv.addObject("textBookName",textBookName);
 		mv.addObject("OrgList",OrgList);
@@ -73,28 +78,45 @@ public class ChooseEditorController extends BaseController {
 	 * @param logUserId
 	 * @return
 	 */
-	private String getTempSelectedIds(String textBookId, BigInteger logUserId) {
+	private String getTempSelectedIds(String textBookId, BigInteger logUserId,String tag) {
 		//查询条件封装入pageParameter的parameter
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("textBookId", textBookId);
 		paraMap.put("logUserId", logUserId);
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<Map<String,Object>>(0,10);
 		pageParameter.setParameter(paraMap);
-		
-		//查询所有页
-		List<Map<String, Object>> total_List_map = chooseEditorService.queryEditorToBeCount(pageParameter);
-		
-		//将暂存表中已选中的初始化入selectedIds
 		String selectedIds = "";
-		for (Map<String, Object> m : total_List_map) {
-			if ("3".equals(""+m.get("chosen_position"))) {
-				selectedIds += ("'"+ m.get("dec_position_id") + "',");
+		if(tag.equals("editor")){
+			//查询所有页的编委
+			List<Map<String, Object>> total_List_map = chooseEditorService.queryEditorToBeCount(pageParameter);
+			
+			//将暂存表中已选中的初始化入selectedIds
+			
+			for (Map<String, Object> m : total_List_map) {
+				if ("3".equals(""+m.get("chosen_position"))||"9".equals(""+m.get("chosen_position"))) {
+					selectedIds += ("'"+ m.get("dec_position_id") + "',");
+				}
 			}
+			if (selectedIds.length()>0) {
+				selectedIds = selectedIds.substring(0,selectedIds.length()-1);
+			}
+			selectedIds = "["+selectedIds+"]";
+		}else if(tag.equals("numEditor")){
+			//查询所有页的数字编委
+			List<Map<String, Object>> total_List_map = chooseEditorService.queryNumEditorToBeCount(pageParameter);
+			
+			//将暂存表中已选中的初始化入selectedIds
+			for (Map<String, Object> m : total_List_map) {
+				if ("8".equals(""+m.get("chosen_position"))||"9".equals(""+m.get("chosen_position"))) {
+					selectedIds += ("'"+ m.get("dec_position_id") + "',");
+				}
+			}
+			if (selectedIds.length()>0) {
+				selectedIds = selectedIds.substring(0,selectedIds.length()-1);
+			}
+			selectedIds = "["+selectedIds+"]";
 		}
-		if (selectedIds.length()>0) {
-			selectedIds = selectedIds.substring(0,selectedIds.length()-1);
-		}
-		selectedIds = "["+selectedIds+"]";
+		
 		return selectedIds;
 	}
 	
@@ -153,7 +175,8 @@ public class ChooseEditorController extends BaseController {
 	@RequestMapping(value="tempSave",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> tempSave(HttpServletRequest request){
-		String selectedIds = request.getParameter("selectedIds");
+ 		String selectedIds = request.getParameter("selectedIds");
+		String selectedNumIds = request.getParameter("selectedNumIds");
 		String textBookId = request.getParameter("textBookId");
 		Map<String, Object> user = getUserInfo();
 		BigInteger logUserId=(BigInteger) user.get("id");
@@ -161,6 +184,8 @@ public class ChooseEditorController extends BaseController {
 		paraMap.put("logUserId", logUserId);
 		paraMap.put("textBookId", textBookId);
 		paraMap.put("selectedIds", selectedIds);
+		paraMap.put("selectedNumIds", selectedNumIds);
+		
 		if (true) {//作家用户 判断条件暂不明 待修改
 			paraMap.put("is_background", 0);
 		}else{
@@ -169,9 +194,12 @@ public class ChooseEditorController extends BaseController {
 		Map<String,Object> resultMap= new HashMap<String,Object>();
 		
 		resultMap = chooseEditorService.tempSave(paraMap);
-		
-		String result_selectedIds = getTempSelectedIds(textBookId, logUserId);
+		String tag = "editor";
+		String result_selectedIds = getTempSelectedIds(textBookId, logUserId,tag);
+		tag="numEditor";
+		String result_selectedIdsNum = getTempSelectedIds(textBookId, logUserId,tag);
 		resultMap.put("selectedIds", result_selectedIds);
+		resultMap.put("selectedNumIds", result_selectedIdsNum);
 		
 		return resultMap;
 	}
@@ -183,6 +211,7 @@ public class ChooseEditorController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> selectSubmit(HttpServletRequest request){
 		String selectedIds = request.getParameter("selectedIds");
+		String selectedNumIds = request.getParameter("selectedNumIds");
 		String textBookId = request.getParameter("textBookId");
 		Map<String, Object> user = getUserInfo();
 		BigInteger logUserId=(BigInteger) user.get("id");
@@ -190,6 +219,7 @@ public class ChooseEditorController extends BaseController {
 		paraMap.put("logUserId", logUserId);
 		paraMap.put("textBookId", textBookId);
 		paraMap.put("selectedIds", selectedIds);
+		paraMap.put("selectedNumIds", selectedNumIds);
 		if (true) {//作家用户 判断条件暂不明 待修改
 			paraMap.put("is_background", 0);
 		}else{

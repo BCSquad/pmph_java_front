@@ -1,5 +1,6 @@
 var selectedIds_original=[1];
 var selectedIds = [];
+var selectedNumIds = [];//数字编委id集合
 
 //为数组对象增加删除某元素的方法
 Array.prototype.removeByValue = function(val) {
@@ -38,6 +39,7 @@ $(function(){
         optionHeight: 30
     });
 	selectedIds=eval($("#selectedIds").val());
+	selectedNumIds=eval($("#selectedNumIds").val());
 	queryMain();
 	//切换分页每页数据数量时 刷新
 	$("#page-size-select").find("li").bind("click",function(){
@@ -73,7 +75,7 @@ function selectPageSize(){
 
 //初始化复选框的点击事件
 function checkboxInit(){
-	$("#userTbody").find("input[type='checkbox']").each(function(i,n){
+	$("#userTbody").find("input.editor").each(function(i,n){
 		var $t = $(this);
 		//刷新 搜索 翻页等后 根据selectedIds回填复选框
 		if ($.inArray($t.val(),selectedIds)>-1) {
@@ -89,6 +91,24 @@ function checkboxInit(){
 				selectedIds.removeByValue($t.val());
 			}
 			//alert(selectedIds);
+		});
+	});
+	$("#userTbody").find("input.numEditor").each(function(i,n){
+		
+		var $m = $(this);
+		//刷新 搜索 翻页等后 根据selectedNumIds回填复选框
+		if ($.inArray($m.val(),selectedNumIds)>-1) {
+			$m.prop("checked",true);
+		}else{
+			$m.prop("checked",false);
+		}
+		//复选框被点击
+		$m.unbind().bind("click",function(){
+			if ($m.prop("checked")) {
+				selectedNumIds.push($m.val());
+			}else{
+				selectedNumIds.removeByValue($m.val());
+			}
 		});
 	});
 }
@@ -143,10 +163,10 @@ function queryMain(){
 
 //暂存
 function tempSave(){
-	//alert(selectedIds);
 	data={
 			textBookId:$("#textBookId").val(),
-			selectedIds:selectedIds.toString()
+			selectedIds:selectedIds.toString(),
+			selectedNumIds:selectedNumIds.toString()
 			};
 	$.ajax({
 		type:'post',
@@ -156,6 +176,7 @@ function tempSave(){
 		data:data,
 		success:function(json){
 			$("#selectedIds").val(json.selectedIds);
+			$("#selectedNumIds").val(json.selectedNumIds);
 			if (json.msg!=null) {
 				window.message.success(json.msg);
 			}
@@ -170,6 +191,7 @@ function selectReset(){
 			,{icon: 3, title:'提示',btn:["确定","取消"]}
 			,function(index){
 				selectedIds=eval($("#selectedIds").val());
+				selectedNumIds=eval($("#selectedNumIds").val());
 				//重新初始化复选框
 				checkboxInit();
 				layer.close(index);
@@ -182,6 +204,7 @@ function selectReset(){
 
 //提交
 function selectRubmit(){
+	
 	if (selectedIds.length>0) {
 		window.message.confirm(
 				'确定要提交吗？'
@@ -190,7 +213,8 @@ function selectRubmit(){
 		
 					data={
 							textBookId:$("#textBookId").val(),
-							selectedIds:selectedIds.toString() //提交时选择前台最新数据，即使未暂存的勾选，也应该提交
+							selectedIds:selectedIds.toString(), //提交时选择前台最新数据，即使未暂存的勾选，也应该提交
+							selectedNumIds:selectedNumIds.toString() //数字编委集合
 							};
 					$.ajax({
 						type:'post',
@@ -200,8 +224,10 @@ function selectRubmit(){
 						data:data,
 						success:function(json){
 							$("#selectedIds").val(json.selectedIds);
+							$("#selectedNumIds").val(json.selectedNumIds);
 							if (json.msg!=null) {
 								window.message.success(json.msg);
+								window.location.href=contextpath+'chooseEditor/toPage.action';
 							}
 						}
 					});

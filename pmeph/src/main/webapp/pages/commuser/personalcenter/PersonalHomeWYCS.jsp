@@ -219,9 +219,9 @@ request.setAttribute("currentTime",datetime);
                								
                								<div class="msg_content">
                									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
-               									${c.tsjc_realname} 于${c.tsjc_create_time}对您主编的图书《${c.tsjc_bookname}》第${c.tsjc_page }页${c.tsjc_line }提出的纠错：“${c.tsjc_content }”审核未通过。
+               									${c.tsjc_realname} 于${c.tsjc_create_time}对您主编的图书《${c.tsjc_bookname}》第${c.tsjc_page }页${c.tsjc_line }提出的纠错：“${c.tsjc_content }”审核结果为“无问题”。
                								</div>
-               								<div class="fail_unhappy"></div>
+               								<div class="success_smile"></div>
                							</div>
                						</c:when>
                						<c:when test="${c.table_name == 'wycs' && c.trendst_type == 2}"><%-- 我要出书 未通过 --%>
@@ -238,7 +238,6 @@ request.setAttribute("currentTime",datetime);
                						<c:when test="${c.table_name == 'wdjc' && c.trendst_type == 2}"><%-- 我要纠错 未通过 --%>
                							<div class="issue_line"><span class="issue_name">未通过审核</span><span class="issue_time">${c.trendst_date }</span></div>
                							<div class="msg_line">
-               								
                								<div class="msg_content">
                									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
                									非常抱歉 ${c.wdjc_realname }！您于${c.wdjc_create_time}对图书《${c.wdjc_bookname}》第${c.wdjc_page }页${c.wdjc_line }提出的纠错：“${c.wdjc_content }”审核结果为无问题，仍然感谢您的关注。
@@ -268,15 +267,13 @@ request.setAttribute("currentTime",datetime);
                 						<div>您申报的《${c.jcsb_textbook_name}》${c.preset_position }已提交成功，请耐心等待遴选结果。</div>		
                						</c:when>
                						<c:when test="${c.table_name == 'sbwz' && c.trendst_type == 0}"><%-- 随笔文章 发表 --%>
-               							<div class="issue_line"><span class="issue_name">发表了随笔文章<img></span><span class="issue_time">${c.trendst_date }</span></div>
+               							<div class="issue_line"><span class="issue_name">发表了随笔文章</span><img class="img_xiewenzhang" src="${ctx }/statics/image/xiewenzhang.png"><span class="issue_time">${c.trendst_date }</span></div>
                							<div class="content_line">
                								<div class="img_wrapper"><img src="${ctx }/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"></div>
                								<div class="content_wrapper">
-               									
                										<c:if test="${c.sbwz_auth_status ==0}"><div class="status_tag toAudit">待审核</div></c:if>
                										<c:if test="${c.sbwz_auth_status ==1}"><div class="status_tag reject">未通过</div></c:if>
                										<c:if test="${c.sbwz_auth_status ==2}"><div class="status_tag Audited">已通过</div></c:if>
-               									
                									<div class="article_title">${c.sbwz_title }</div>
                									<div class="article_summary">${c.sbwz_summary }</div>
                								</div>
@@ -299,7 +296,7 @@ request.setAttribute("currentTime",datetime);
                								</div>
                								<div class="content_wrapper">
                									<div class="bookc_title">${c.tsjc_bookname }</div>
-               									<div class="sub_title">${c.tsjc_realname } 纠正了《${c.tsjc_bookname }》第${c.tsjc_page }页${c.tsjc_line },提出纠错：“${c.tsjc_content }”。</div>
+               									<div class="sub_title"><c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>${c.tsjc_realname } 纠正了《${c.tsjc_bookname }》第${c.tsjc_page }页${c.tsjc_line },提出纠错：“${c.tsjc_content }”。</div>
                									<div class="rank_stars"></div>
                									<div class="book_detail">${c.tsjc_detail }</div>
                								</div>
@@ -327,7 +324,10 @@ request.setAttribute("currentTime",datetime);
                								</div>
                								<div class="content_wrapper">
                									<div class="bookc_title">${c.wdjc_bookname }</div>
-               									<div class="sub_title">${c.wdjc_realname } 纠正了《${c.wdjc_bookname }》第${c.wdjc_page }页${c.wdjc_line },提出纠错：“${c.wdjc_content }”。</div>
+               									<div class="sub_title">
+               										<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
+               										${c.wdjc_realname } 纠正了《${c.wdjc_bookname }》第${c.wdjc_page }页${c.wdjc_line },提出纠错：“${c.wdjc_content }”。
+               									</div>
                									<div class="rank_stars"></div>
                									<div class="book_detail">${c.wdjc_detail }</div>
                								</div>
@@ -349,7 +349,10 @@ request.setAttribute("currentTime",datetime);
                								</div>
                								<div class="content_wrapper">
                									<div class="bookc_title">${c.wdsp_bookname }</div>
-               									<div class="sub_title">${c.wdsp_realname } 评论了《${c.wdsp_bookname }》：“${c.wdsp_content }”。</div>
+               									<div class="sub_title">
+	               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
+	               									${c.wdsp_realname } 评论了《${c.wdsp_bookname }》：“${c.wdsp_content }”。
+               									</div>
                									<div class="rank_stars">
                										<c:forEach begin="1" end="${c.wdsp_score/2}">
                											<div class="scorestar1"></div>
@@ -368,7 +371,6 @@ request.setAttribute("currentTime",datetime);
                						<c:when test="${c.table_name == 'wdwj' && c.trendst_type == 0}"><%-- 我的问卷 发表 --%>
                							
                						</c:when>
-
                 			</c:choose>
                 		</div>
                 		</c:forEach>
@@ -408,6 +410,39 @@ request.setAttribute("currentTime",datetime);
 
 
             <div class="right">
+            	<div id="wdxz"><span id="xztb"></span><span class="rlan">我加入的小组</span><span
+                        id="qbhy"><a href="${ctx}/group/list.action" class="aright">全部小组>>&nbsp;</a></span>
+                    <br/>
+                    <ul class="scul">
+                        <c:forEach items="${listmygroup}" begin='0' end='8' var="listmyg" varStatus="status">
+                            <li class="wdxz">
+                            	<img src="<%=path %>/image/${listmyg.group_image}.action" class="xztp">
+                                <br/>
+                                <span class="group_name">${listmyg.group_name}</span>
+                                <span class="xzrs">(${listmyg.grouppeo}人)</span>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
+                
+                <div id="wdhy"><span id="hytb"></span> <span class="rlan">我的好友</span> <span
+                        id="qbhy"><a href="${ctx}/myFriend/listMyFriend.action" class="aright">全部好友>>&nbsp;</a></span>
+                    <br/>
+                    <ul class="scul">
+                        <c:forEach items="${listmyfriend}" begin='0' end='11' var="listmyf" varStatus="status">
+                            <li class="hylb">
+                                <div class="hytxdiv">
+                                    <c:if test="${listmyf.avatar=='DEFAULT'||listmyf.avatar==''||listmyf.avatar== NULL}"><img
+                                            src="${ctx}/statics/image/haoyoutouxiang1.png" class="hytp"></c:if>
+                                    <c:if test="${listmyf.avatar!='DEFAULT'}"><img src="<%=path %>/image/${listmyf.avatar}.action"
+                                                                                   class="hytp"></c:if>
+                                </div>
+                                    ${listmyf.realname}
+                             </li>
+                        </c:forEach>
+                    </ul>
+                </div>
+                
                 <div id="wdsc"><span id="wdscx"></span> <span class="rlan">我的收藏</span> <span id="hyp">换一批</span><span
                         id="jiantou"></span>
                     <br/>
@@ -415,7 +450,7 @@ request.setAttribute("currentTime",datetime);
                         <c:forEach items="${listmycol}" begin='0' end='5' var="list" varStatus="status">
                             <li class="sclb">
                                 <div class="sctpdiv">
-                                    <c:if test="${list.image_url=='DEFAULT'}"><img
+                                    <c:if test="${list.image_url=='DEFAULT' }"><img
                                             src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"
                                             class="sctp"></c:if>
                                     <c:if test="${list.image_url!='DEFAULT'}"><img src="${list.image_url}"
@@ -426,33 +461,7 @@ request.setAttribute("currentTime",datetime);
                         </c:forEach>
                     </ul>
                 </div>
-                <div id="wdhy"><span id="hytb"></span> <span class="rlan">我的好友</span> <span
-                        id="qbhy"><a href="${ctx}/myFriend/listMyFriend.action" class="aright">全部好友>>&nbsp;</a></span>
-                    <br/>
-                    <ul class="scul">
-                        <c:forEach items="${listmyfriend}" begin='0' end='11' var="listmyf" varStatus="status">
-                            <li class="hylb">
-                                <div class="hytxdiv">
-                                    <c:if test="${listmyf.avatar=='DEFAULT'}"><img
-                                            src="${ctx}/statics/image/haoyoutouxiang1.png" class="hytp"></c:if>
-                                    <c:if test="${listmyf.avatar!='DEFAULT'}"><img src="${list.image_url}"
-                                                                                   class="hytp"></c:if>
-                                </div>
-                                    ${listmyf.realname}</li>
-                        </c:forEach>
-                    </ul>
-                </div>
-                <div id="wdxz"><span id="xztb"></span><span class="rlan">我加入的小组</span><span
-                        id="qbhy"><a href="${ctx}/group/list.action" class="aright">全部小组>>&nbsp;</a></span>
-                    <br/>
-                    <ul class="scul">
-                        <c:forEach items="${listmygroup}" begin='0' end='8' var="listmyg" varStatus="status">
-                            <li class="wdxz"><img src="${listmyg.group_image}"
-                                                  class="xztp"><br/>${listmyg.group_name}<br/><span
-                                    class="xzrs">(${listmyg.grouppeo}人)</span></li>
-                        </c:forEach>
-                    </ul>
-                </div>
+                
                 <div id="bzzx">
                     <div id="bzxxherd"></div>
                     <span class="bzzxwz">帮助中心</span>
