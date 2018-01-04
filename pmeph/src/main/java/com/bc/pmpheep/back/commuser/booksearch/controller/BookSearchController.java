@@ -162,6 +162,4 @@ public class BookSearchController extends BaseController {
 		
 		return resultMap;
 	}
-	
-	
 }
