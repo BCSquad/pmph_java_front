@@ -37,6 +37,7 @@ String contextpath=request.getContextPath();
 <input type="hidden" id="page-num-temp" value="1">
 <input type="hidden" id="textBookId" value="${textBookId }">
 <input type="hidden" id="selectedIds" value="${selectedIds }">
+<input type="hidden" id="selectedNumIds" value="${selectedNumIds}">
 <input type="hidden" id="is_list_selected" value="${is_list_selected }">
 
 
@@ -91,6 +92,7 @@ String contextpath=request.getContextPath();
                         <td class="td6">职位</td>
                         <td class="td7">职称</td>
                         <td class="td8">选择编委</td>
+                        <td class="td9">选择数字编委</td>
                     </tr>
                     </thead>
                     <tbody id="userTbody">
@@ -126,8 +128,8 @@ String contextpath=request.getContextPath();
         </div>
     </div>
 </div>
-
-
+	
+	<div style="width: 100%;height: 60px"></div>
 	<jsp:include page="/pages/comm/tail.jsp"></jsp:include> 
 
 </body>

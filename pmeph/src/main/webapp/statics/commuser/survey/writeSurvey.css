@@ -50,4 +50,83 @@ input[type=radio]:checked:after  {
     -webkit-transform:matrix(-0.766044,-0.642788,-0.642788,0.766044,0,0);  
     border-color: #37AF6E;  
     background-color: #37AF6E;  
-}  
+}
+
+.emptyDiv{
+	height: 60px;
+	width: 100%
+}
+
+.whiteDiv{
+	width:1200px;
+	height:auto;
+	background-color: white
+}
+
+.titleDiv{
+	padding-top: 60px;
+	width: 100%;
+	text-align: center
+}
+
+.titleFont{
+	font-size: x-large;
+	color: #757575;
+}
+
+.bigContent{
+	width: 1200px;
+	height: auto;
+	padding-top: 60px;
+	padding-bottom: 60px
+}
+
+.tipDiv{
+	width: 1120px;
+	height: auto;
+	margin-left: 80px
+}
+
+.tipFont{
+	color: #757575;
+	font-size: 16px
+}
+
+.questions{
+	width: 1120px;
+	height:auto;
+	margin-left: 80px;
+	color: #757575;
+	font-size: 16px
+}
+
+.oneQuestion{
+	width: 100%;
+	height: auto
+}
+
+.inputStyle{
+	width: 500px;
+	height:20px; 
+	border-style:none;
+	border-bottom: dashed 2px #d8d8d8
+}
+
+.buttonDiv{
+	cursor:pointer;
+	margin-left:530px;
+	width: 140px;
+	height: 28px;
+	background-color: #6FBCC2;
+	border-radius:4px;
+	padding-top: 4px;
+}
+
+.submitFont{
+	color: white;
+	font-size:18px;
+	margin-left: 52px
+}
+
+
+
