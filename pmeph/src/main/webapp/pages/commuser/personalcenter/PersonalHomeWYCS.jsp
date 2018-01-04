@@ -98,8 +98,8 @@ request.setAttribute("currentTime",datetime);
                     <li id="tsjc" class="dtl pagetag"><a class="aher paged">图书纠错</a></li>
                     <li id="wycs" class="dtl pagetag"><a class="aher paged"  >我要出书</a></li>
 					<li id="wdjc" class="dtl pagetag"><a class="aher paged" href="${ctx}/personalhomepage/tohomepage.action?pagetag=wdjc">我的纠错</a></li>
-                    <li id="wdpl" class="dtl pagetag"><a class="aher paged" href="${ctx}/personalhomepage/tohomepagethe.action">我的评论</a></li>
-                    <li id="wdwj" class="dtl pagetag"><a class="aher paged" href="${ctx}/personalhomepage/tohomepage.action?pagetag=wdwj">我的问卷</a></li>
+                    <li id="wdpl" class="dtl pagetag"><a class="aher paged" >我的评论</a></li>
+                    <li id="wdwj" class="dtl pagetag"><a class="aher paged" >我的问卷</a></li>
                     <%-- <li id="zxsp" class="dtl"><a class="aher"
                                                  href="${ctx}/personalhomepage/tohomepagethe.action">最新书评</a></li> --%>
                 </ul>

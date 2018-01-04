@@ -88,6 +88,33 @@ public interface PersonalService {
 	 * @return
 	 */
 	public int queryMyCorrectionCount(PageParameter<Map<String, Object>> pageParameter);
+	
+	
+	/**
+	 * 我的评论
+	 * @param pageParameter
+	 * @return
+	 */
+	public List<Map<String, Object>> myComment(PageParameter<Map<String, Object>> pageParameter);
+	/**
+	 * 我的评论总数
+	 * @param pageParameter
+	 * @return
+	 */
+	public int myCommentCount(PageParameter<Map<String, Object>> pageParameter);
+	
+	/**
+	 * 我的问卷
+	 * @param pageParameter
+	 * @return
+	 */
+	public List<Map<String, Object>> mySurvey(PageParameter<Map<String, Object>> pageParameter);
+	/**
+	 * 我的问卷总数
+	 * @param pageParameter
+	 * @return
+	 */
+	public int mySurveyCount(PageParameter<Map<String, Object>> pageParameter);
 
 	/**
 	 * 个人中心动态 汇总后面所有页签对应信息的新增、审批的动态

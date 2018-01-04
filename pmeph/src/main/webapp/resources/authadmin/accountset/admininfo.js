@@ -48,9 +48,9 @@ function getform(){
     json.email=$("#email").val();$("#tesetSelect").find("option:selected").text()
     json.fax=$("#fax").val();
     json.address=$("#address").val();
-    json.birthday=$("#birthday").val();
+    /*json.birthday=$("#birthday").val();
     json.experience=$("#experience").val();
-    json.workplace=$("#workplace").val();
+    json.workplace=$("#workplace").val();*/
     console.log(json);
     return json;
 

@@ -166,7 +166,7 @@
 								</div>
 							</td>
 							<td>
-								<div style="width: 400px">
+								<%-- <div style="width: 400px">
 									<label class="require">教龄</label>
 									<div class="input-wrapper">
 										<input class="sxy-txt required"
@@ -174,33 +174,8 @@
 											data-error="教龄不能为空||教龄不能大于3位" placeholder="填写教龄" type="text"
 											id="experience" name="experience" value="${admininfo.experience }" />
 									</div>
-								</div>
-							</td>
-							<td>
-								<div class="label-input">
-									<label >传真</label>
-									<div class="input-wrapper">
-										<input type="text" 
-											type="text" id="fax"
-											value="${admininfo.fax}">
-									</div>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div style="width: 400px">
-									<label class="require">出生年月</label>
-									<div class="input-wrapper">
-										<input type="text" id="birthday" name="birthday"
-											class="sxy-txt" calendar format="'yyyy-mm-dd'" z-index="100"
-											onselected="(function(view, date, value){this.value=date.toLocaleDateString()})"
-											value="${admininfo.birthday }">
-									</div>
-								</div>
-							</td>
-
-							<td>
+								</div> --%>
+								
 								<div class="label-input">
 									<label class="require">职称</label>
 									<div class="input-wrapper">
@@ -215,26 +190,37 @@
 										</select>
 									</div>
 								</div>
+								
 							</td>
 							<td>
+								<div class="label-input">
+									<label >传真</label>
+									<div class="input-wrapper">
+										<input type="text" 
+											type="text" id="fax"
+											value="${admininfo.fax}">
+									</div>
+								</div>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<%-- <div style="width: 400px">
+									<label class="require">工作单位</label>
+									<div class="input-wrapper">
+										<input class="sxy-txt required" data-valid="isNonEmpty"
+											data-error="工作单位不能为空" placeholder="填写工作单位" type="text"
+											id="workplace" name="workplace" value="${admininfo.workplace }" />
+									</div>
+								</div> --%>
+								
 								<div class="label-input">
 									<label class="require">手机</label>
 									<div class="input-wrapper">
 										<input class="required" data-valid="isNonEmpty||isMobile"
 											data-error="手机不能为空||手机格式不正确" type="text" id="handphone"
 											value="${admininfo.handphone}" />
-									</div>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div style="width: 400px">
-									<label class="require">工作单位</label>
-									<div class="input-wrapper">
-										<input class="sxy-txt required" data-valid="isNonEmpty"
-											data-error="工作单位不能为空" placeholder="填写工作单位" type="text"
-											id="workplace" name="workplace" value="${admininfo.workplace }" />
 									</div>
 								</div>
 							</td>

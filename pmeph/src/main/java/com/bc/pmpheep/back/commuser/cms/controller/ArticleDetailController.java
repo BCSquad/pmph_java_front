@@ -45,7 +45,7 @@ public class ArticleDetailController extends BaseController {
 	@RequestMapping(value = "/toPage", method = RequestMethod.GET)
 	public ModelAndView list(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
-		// String id=request.getParameter(wid);
+		// String id=request.getParameter("wid");
 		String wid = "10";
 		Map<String, Object> map1 = new HashMap<String, Object>();
 		map1.put("id", wid);

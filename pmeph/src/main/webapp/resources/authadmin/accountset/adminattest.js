@@ -80,9 +80,9 @@ function getform() {
     json.fax=$("#fax").val();
     json.address=$("#address").val();
     json.id=$("#id").val();
-    json.birthday=$("#birthday").val();
+    /*json.birthday=$("#birthday").val();
     json.experience=$("#experience").val();
-    json.workplace=$("#workplace").val();
+    json.workplace=$("#workplace").val();*/
     console.log(json);
     return json;
 

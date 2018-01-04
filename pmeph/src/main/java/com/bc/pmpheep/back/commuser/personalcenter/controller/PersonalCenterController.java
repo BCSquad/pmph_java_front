@@ -157,8 +157,36 @@ public class PersonalCenterController extends BaseController {
 			/*mv.addObject("List_map",List_map);*///测试
 			mv.addObject("html",html);
 			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
-		}else if("wdwj".equals(pagetag)){  //我的问卷
+		}else if("wdpl".equals(pagetag)){ //我的评论
+			//从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
+			//设定条件名数组 
+			String[] names={"is_replied"};
+			String[] namesChi = {};
+			queryConditionOperation(names,namesChi,request, mv, paraMap,vm_map);
+			pageParameter.setParameter(paraMap);
+
+			List<Map<String,Object>> List_map = personalService.myComment(pageParameter);
+			count = personalService.myCommentCount(pageParameter);
+			//分页数据代码块
+			String html = this.mergeToHtml("commuser/personalcenter/myComment.vm",contextpath, pageParameter, List_map,vm_map);
 			
+			mv.addObject("html",html);
+			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
+		}else if("wdwj".equals(pagetag)){  //我的问卷
+			//从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
+			//设定条件名数组 
+			String[] names={};
+			String[] namesChi = {};
+			queryConditionOperation(names,namesChi,request, mv, paraMap,vm_map);
+			pageParameter.setParameter(paraMap);
+
+			List<Map<String,Object>> List_map = personalService.mySurvey(pageParameter);
+			count = personalService.myCommentCount(pageParameter);
+			//分页数据代码块
+			String html = this.mergeToHtml("commuser/personalcenter/mySurvey.vm",contextpath, pageParameter, List_map,vm_map);
+			
+			mv.addObject("html",html);
+			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
 		}else{
 			
 		}

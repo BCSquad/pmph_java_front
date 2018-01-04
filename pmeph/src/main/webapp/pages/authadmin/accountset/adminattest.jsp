@@ -78,9 +78,9 @@
             <input type="hidden" id="handphone" value="${admininfo.handphone}"/>
             <%-- <input type="hidden" id="postCode" value="${admininfo.postCode}"/> --%>
             <input type="hidden" id="fax" value="${admininfo.fax}"/>
-            <input type="hidden" id="birthday" value="${admininfo.birthday}"/>
+            <%-- <input type="hidden" id="birthday" value="${admininfo.birthday}"/>
             <input type="hidden" id="experience" value="${admininfo.experience}"/>
-            <input type="hidden" id="workplace" value="${admininfo.workplace}"/>
+            <input type="hidden" id="workplace" value="${admininfo.workplace}"/> --%>
             <form>
             <table border="0" class="form-table">
                     <tr>
