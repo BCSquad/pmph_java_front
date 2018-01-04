@@ -60,4 +60,8 @@
 	<delete id="delTopicWriter" parameterType="java.lang.String">
 		delete from topic_writer where topic_id = #{topic_id}
 	</delete>
+	<!-- 查询作家用户关联银行信息 -->
+	<select id="queryBank" parameterType="java.util.Map" resultType="java.util.Map">
+		select * from writer_bank_account where user_id = #{user_id}
+	</select>
 </mapper>

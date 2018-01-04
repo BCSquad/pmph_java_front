@@ -51,4 +51,9 @@ public interface BookDeclareDao {
 	 * 删除编者情况
 	 */
 	public int delTopicWriter(String id);
+	
+	/**
+	 * 查询作家用户关联银行信息
+	 */
+	public List<Map<String,Object>> queryBank(Map<String,Object> map);
 }

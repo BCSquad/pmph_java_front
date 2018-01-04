@@ -59,4 +59,9 @@ public class BookDeclareServiceImpl implements BookDeclareService {
 		return this.bookDecdao.delTopicWriter(id);
 	}
 
+	@Override
+	public List<Map<String, Object>> queryBank(Map<String, Object> map) {
+		return this.bookDecdao.queryBank(map);
+	}
+
 }

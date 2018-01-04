@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.personalcenter.service.BookDeclareService;
@@ -40,7 +41,20 @@ public class BookDeclareController extends BaseController{
 			HttpServletResponse response){
 		ModelAndView mav= new ModelAndView("commuser/personalcenter/toBookdeclareAdd");
 		Map<String,Object> userMap =  this.getUserInfo();
+		Map<String,Object> queryMap = new HashMap<String,Object>();
+		queryMap.put("user_id", userMap.get("id"));
+		List<Map<String,Object>> bankList = this.bdecService.queryBank(queryMap);
+		StringBuffer bankSelects = new StringBuffer();
+		if(bankList.size()>0){
+			for (Map<String, Object> map : bankList) {
+				bankSelects.append("<option value='"+map.get("id")+"'>"+map.get("account_number")+"</option>");
+			}
+		}else{
+			bankSelects.append("<option value=''>暂无数据</option>");
+		}
 		mav.addObject("userMap", userMap);
+		mav.addObject("bankList", bankList);
+		mav.addObject("bankSelects", bankSelects);
 		return mav;
 	}
 	
@@ -48,6 +62,7 @@ public class BookDeclareController extends BaseController{
 	 * 申报添加
 	 */
 	@RequestMapping("doBookdeclareAdd")
+	@ResponseBody
 	public String doBookdeclareAdd(HttpServletRequest request,
 			HttpServletResponse response){
 		//创建一个唯一标识
@@ -114,9 +129,9 @@ public class BookDeclareController extends BaseController{
 					writeMap.put("position", positions[i]);
 					writeMap.put("workplace", workplaces[i]);
 					this.bdecService.insertTopicWriter(writeMap);
-					msg = "OK";
 				}
 			}
+			msg = "OK";
 		}
 		return msg;
 	}
@@ -146,6 +161,7 @@ public class BookDeclareController extends BaseController{
 	 * 修改保存
 	 */
 	@RequestMapping("doBookdeclareZc")
+	@ResponseBody
 	public String doBookdeclareZc(HttpServletRequest request,
 			HttpServletResponse response){
 		String topic_id = request.getParameter("topic_id"); //主键id
