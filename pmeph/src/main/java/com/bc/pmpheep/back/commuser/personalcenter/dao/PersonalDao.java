@@ -88,7 +88,31 @@ public interface PersonalDao {
 	 */
 	public Integer queryWriterUserTrendstCount(PageParameter<Map<String, Object>> pageParameter);
 	
+	/**
+	 * 我的评论
+	 * @param pageParameter
+	 * @return
+	 */
+	public List<Map<String, Object>> myComment(PageParameter<Map<String, Object>> pageParameter);
+	/**
+	 * 我的评论总数
+	 * @param pageParameter
+	 * @return
+	 */
+	public Integer myCommentCount(PageParameter<Map<String, Object>> pageParameter);
 	
+	/**
+	 * 我的问卷
+	 * @param pageParameter
+	 * @return
+	 */
+	public List<Map<String, Object>> mySurvey(PageParameter<Map<String, Object>> pageParameter);
+	/**
+	 * 我的问卷总数
+	 * @param pageParameter
+	 * @return
+	 */
+	public Integer mySurveyCount(PageParameter<Map<String, Object>> pageParameter);
 	
 	
 }

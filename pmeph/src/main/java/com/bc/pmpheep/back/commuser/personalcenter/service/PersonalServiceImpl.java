@@ -161,6 +161,46 @@ public class PersonalServiceImpl implements PersonalService {
         s = s.replaceAll("[^\\x00-\\xff]", "**");  
         int length = s.length();  
         return length;  
-    }
+    } 
+    
+   /**
+    * 我的评论
+    */
+	@Override
+	public List<Map<String, Object>> myComment(PageParameter<Map<String, Object>> pageParameter) {
+		List<Map<String, Object>> result_list = personaldao.myComment(pageParameter);
+		return result_list;
+	}
+	
+	/**
+	 * 我的评论总数
+	 */
+
+	@Override
+	public int myCommentCount(PageParameter<Map<String, Object>> pageParameter) {
+		Integer count =personaldao.myCommentCount(pageParameter);
+		return count;
+	}
+	
+	  
+	   /**
+	    * 我的问卷
+	    */
+		@Override
+		public List<Map<String, Object>> mySurvey(PageParameter<Map<String, Object>> pageParameter) {
+			List<Map<String, Object>> result_list = personaldao.myComment(pageParameter);
+			return result_list;
+		}
+		
+		/**
+		 * 我的问卷总数
+		 */
+
+		@Override
+		public int mySurveyCount(PageParameter<Map<String, Object>> pageParameter) {
+			Integer count =personaldao.myCommentCount(pageParameter);
+			return count;
+		}
+
 
 }

@@ -355,7 +355,92 @@ AND a.online_progress IN (2, 3)
 				group by b.id
 			)t
 	</select>
+	
+		<!-- 我的评论resultMap 主map为图书信息 -->
+	<resultMap type="Map" id="MyBookCommentMap">
+		<id property="book_id" column="book_id"/>
+		<result property="bookname" column="bookname"/>
+		<result property="publish_date" column="publish_date"/>
+		<result property="author" column="author"/>
+		<result property="image_url" column="image_url"/>
+		<!-- 该图书的多条评论信息 -->
+		<collection property="commentList" javaType="ArrayList" ofType="Map">
+			<id property="id" column="id"/>
+			<result property="score" column="score"/>
+			<result property="content" column="content"/>
+			<result property="writer_id" column="writer_id"/>
+			<result property="is_hide" column="is_hide"/>
+			<result property="is_auth" column="is_auth"/>
+			<result property="auth_user_id" column="auth_user_id"/>
+			<result property="auth_date" column="auth_date"/>
+			<result property="is_deleted" column="is_deleted"/>
+			<result property="gmt_create" column="gmt_create"/>
+			<result property="gmt_update" column="gmt_update"/>
+		</collection>
+	</resultMap>
+	
+	<!-- 我的评论 -->
+	<select id="myComment" parameterType="PageParameter" resultMap="MyBookCommentMap">
+		SELECT
+		b.bookname,
+		b.publish_date,
+		b.author,
+		b.image_url,
+		bc.id,
+		bc.book_id,	
+			
+		bc.content,		
+		bc.gmt_create,
+		bc.gmt_update,		
+		bc.is_author_replied
+		FROM
+		book_user_comment AS bc
+		left Join book AS b ON b.id = bc.book_id
+		WHERE
+		bc.writer_id =  #{parameter.logUserId}
+		AND bc.is_deleted =  '0' 
+		<if test="parameter.is_replied != null and parameter.is_replied != '' ">
+			AND bc.is_author_replied =  #{parameter.is_replied}
+		</if>
+		order by  bc.gmt_create desc
+		limit ${start},${pageSize}
+	</select>
+	
+	<!-- 我的评论 总数 -->
+	<select id="myCommentCount" parameterType="PageParameter" resultType="Integer">
+	
+	select count(*) from
+		(
+		SELECT
+		b.bookname,
+		b.publish_date,
+		b.author,
+		b.image_url,
+		bc.id,
+		bc.book_id,	
+			
+		bc.content,		
+		bc.gmt_create,
+		bc.gmt_update,		
+		bc.is_author_replied
+		FROM
+		book_user_comment AS bc
+		left Join book AS b ON b.id = bc.book_id
+		WHERE
+		bc.writer_id =  #{parameter.logUserId}
+		AND bc.is_deleted =  '0' 
+		<if test="parameter.is_replied != null and parameter.is_replied != '' ">
+			AND bc.is_author_replied =  #{parameter.is_replied}
+		</if>
+		group by b.id
+		
+		)t
+	</select>
 
+<!-- 我的问卷 -->
+	<select id="mySurvey" parameterType="PageParameter" resultType="java.util.Map">
+		select  * from survey s where s.user_id=#{parameter.user_id}  limit ${start},${pageSize}
+	</select>
 	<select id="queryWriterUserTrendst"  parameterType="PageParameter" resultType="Map">
 		select 
 		t.id,t.table_name,t.table_id
@@ -661,5 +746,10 @@ AND a.online_progress IN (2, 3)
 		)t
 	</select>
 
+
+<!-- 我的问卷总数-->
+	<select id="mySurveyCount" parameterType="PageParameter" resultType="Integer">
+		select count(*) from survey s where s.user_id=#{parameter.user_id}
+	</select>
 
 </mapper>
