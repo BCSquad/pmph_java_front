@@ -88,6 +88,7 @@
            			<div><span class="ytg1"></span><span class="left_zt">已通过</span></div>
            		#end
                <a style="cursor: pointer;" onclick="viewTopic($!{c.id})"><div class="left_herf">进入查看</div></a>
+                <a style="cursor: pointer;" onclick="updateTopic($!{c.id})"><div class="left_herf">修改</div></a>
                
            </div>
          </li>
