@@ -1,0 +1,43 @@
+.blank_space{
+    height: 20px;
+    width: 100%;
+}
+
+.email_content{
+    float: left;
+    margin-top: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #F6F6F6;
+    width: 100%;
+}
+
+.email_left{
+    float: left;
+   padding-top: 5px;
+   margin-right:5px;
+}
+
+.email_right{
+    float: left;
+    font-size: 16px;
+    text-decoration: none;
+    color: #333;
+   
+}
+
+.email_right a {
+    font-family: MicrosoftYaHei ;
+    text-decoration: none;
+    color: #333;
+   	cursor: default;
+    background:url('../../image/research1.png') left 5px no-repeat; 
+}
+
+.email_right a:hover{
+	font-family: MicrosoftYaHei ;
+	color: #C0C0C0;
+	cursor: default;
+	text-decoration: none;
+	background:url('../../image/research2.png') left 5px no-repeat;
+	
+}
