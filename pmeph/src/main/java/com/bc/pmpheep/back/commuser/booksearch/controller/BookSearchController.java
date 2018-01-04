@@ -55,17 +55,6 @@ public class BookSearchController extends BaseController {
 		real_search = new String((real_search!=null?real_search:"").getBytes("iso8859-1"), "utf-8");
 		Long id=0L;
 		List<Map<String,Object>> fistsort=bookSearchService.queryChildSort(id);
-//		List<Map<String,Object>> childsort=null;
-//		List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
-//		Map<String,Object> allsort=null;
-//		for (Map<String, Object> map : fistsort) {
-//			childsort=bookSearchService.queryChildSort(Long.valueOf(map.get("id").toString()));
-//			allsort=new HashMap<String, Object>();
-//			allsort.put("parent", map);
-//			allsort.put("child", childsort);
-//			list.add(allsort);
-//		}
-//		mv.addObject("list",list);
 		mv.addObject("fistsort",fistsort);
 		mv.addObject("search",search);
 		mv.addObject("real_search",search);
