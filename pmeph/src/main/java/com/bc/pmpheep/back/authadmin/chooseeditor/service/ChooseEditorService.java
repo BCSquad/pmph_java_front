@@ -55,6 +55,9 @@ public interface ChooseEditorService {
 	 */
 	Map<String, Object> editorSelectRubmit(Map<String, Object> paraMap);
 
+	//查询所有数字编委
+	List<Map<String, Object>> queryNumEditorToBeCount(PageParameter<Map<String, Object>> pageParameter);
+
 	
 
 	

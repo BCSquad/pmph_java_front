@@ -91,6 +91,54 @@
 			</where>
 		
 	</select>
+	
+	<!-- 查询所有数字编委 -->
+	<select id="queryNumEditorToBeCount" parameterType="PageParameter" resultType="java.util.Map">
+			SELECT
+			dp.id as dec_position_id,
+			tb.is_list_selected,
+			case
+			when tb.is_list_selected = 1
+			then
+				dp.chosen_position
+			else	
+				dpt.chosen_position
+			end
+			as chosen_position
+			FROM
+			dec_position AS dp
+			left join textbook tb on tb.id = dp.textbook_id
+			left Join dec_position_temp AS dpt  
+			ON dpt.declaration_id = dp.declaration_id 
+			and dpt.textbook_id=dp.textbook_id
+			<if test="parameter.logUserId != null and parameter.logUserId != '' ">
+				and dpt.author_id =  #{parameter.logUserId}
+			</if>
+			Inner Join declaration AS d ON dp.declaration_id = d.id
+			Left Join org AS o ON d.org_id = o.id
+			<where>
+				case
+				when tb.is_list_selected = 1
+				then
+					dp.chosen_position > 8
+				else	
+					dpt.chosen_position > 8
+				end
+				
+				<if test="parameter.textBookId != null and parameter.textBookId != '' ">
+					and dp.textbook_id = ${parameter.textBookId}
+				</if>
+				<if test="parameter.queryName != null and parameter.queryName != '' ">
+					and d.realname like concat("%",#{parameter.queryName},"%")
+				</if>
+				<if test="parameter.queryOrg != null and parameter.queryOrg != '' and parameter.queryOrg != 'all'  ">
+					and o.id = ${parameter.queryOrg}
+				</if>
+			</where>
+	</select>
+
+
+
 
 	<select id="queryTextBookById" parameterType="String" resultType="Map">
 		SELECT
@@ -148,6 +196,25 @@
 		ON DUPLICATE KEY UPDATE author_id= values(author_id) , is_background = values(is_background) , gmt_update = now()
 	
 	</insert>
+	
+	<!-- 暂存数字编委 -->
+	<update id="updateTempBySelectedNumIds" parameterType="map">
+		update dec_position_temp   
+		set chosen_position = 9
+		where declaration_id IN (
+			select 
+			d.declaration_id 
+		 	from dec_position d
+			where
+			d.id in  (${selectedNumIds})
+			)
+	</update>
+	
+	<!-- 保存数字编委 -->
+	<update id="updateDecPositionBySelectNumIds" parameterType="Map">
+		update dec_position set chosen_position = 9 
+		where id in (${selectedNumIds})
+	</update>
 	
 	<update id="updateDecPositionBySelectIds" parameterType="Map">
 		update dec_position set chosen_position = 3 

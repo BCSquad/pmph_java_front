@@ -64,6 +64,16 @@ public interface ChooseEditorDao {
 	 * @return
 	 */
 	Integer updateTextBookListSelected(Map<String, Object> paraMap);
+	
+	//查询所有数字编委
+	List<Map<String, Object>> queryNumEditorToBeCount(
+			PageParameter<Map<String, Object>> pageParameter);
+	
+	//暂存数字编委
+	void updateTempBySelectedNumIds(Map<String, Object> paraMap);
+	
+	//保存数字编委
+	void updateDecPositionBySelectNumIds(Map<String, Object> paraMap);
 
 	
 }

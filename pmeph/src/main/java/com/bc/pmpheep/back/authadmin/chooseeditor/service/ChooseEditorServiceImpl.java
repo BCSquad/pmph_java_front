@@ -32,6 +32,14 @@ public class ChooseEditorServiceImpl implements ChooseEditorService {
 		
 		return resultList;
 	}
+	//查询数字编委id集合
+	@Override
+	public List<Map<String,Object>> queryNumEditorToBeCount(PageParameter<Map<String, Object>> pageParameter) {
+		
+		List<Map<String,Object>> resultList =chooseEditorDao.queryNumEditorToBeCount(pageParameter);
+		
+		return resultList;
+	}
 
 	@Override
 	public Map<String, Object> queryTextBookById(String textBookId) {
@@ -56,6 +64,8 @@ public class ChooseEditorServiceImpl implements ChooseEditorService {
 		
 		Integer del_count = chooseEditorDao.deleteTempByAuthorIdAndTextbookId(paraMap);
 		Integer copy_count = chooseEditorDao.copyTempBySelectedIds(paraMap);
+		//暂存数字编委
+		chooseEditorDao.updateTempBySelectedNumIds(paraMap);
 		if (del_count>=0 && copy_count >=0) {
 			resultMap = paraMap;
 			resultMap.put("msg", "已暂存");
@@ -73,6 +83,8 @@ public class ChooseEditorServiceImpl implements ChooseEditorService {
 			paraMap.put("selectedIds", selectedIds);
 		}
 		Integer u_count = chooseEditorDao.updateDecPositionBySelectIds(paraMap);
+		//保存数字编委
+		chooseEditorDao.updateDecPositionBySelectNumIds(paraMap);
 		if (u_count>0) {
 			Integer del_count = chooseEditorDao.deleteTempByAuthorIdAndTextbookId(paraMap);
 			Integer b_count=chooseEditorDao.updateTextBookListSelected(paraMap);
