@@ -63,7 +63,7 @@
 					<tr>
 						<td><span class="btbs">*</span><span>预计交稿时间：</span></td>
 						<td>
-							<input class="cg_input" name="deadline" id="deadline" calendar format="'yyyy-mm-dd'" value="${topicMap.bookname}" placeholder="预计交稿时间"/>
+							<input class="cg_input" name="deadline" id="deadline" calendar format="'yyyy-mm-dd'" value="${topicMap.deadline}" />
 						</td>
 						<td><span class="btbs">*</span><span>选题来源：</span></td>
 						<td>
@@ -80,17 +80,17 @@
 					<tr>
 						<td><span class="btbs">*</span><span>预估字数：</span></td>
 						<td>
-							<input class="cg_input" name="word_number" id="word_number" value="${topicMap.bookname}" placeholder="单位千字"  maxlength="20"/>
+							<input class="cg_input" name="word_number" id="word_number" value="${topicMap.word_number}" placeholder="单位千字"  maxlength="20"/>
 						</td>
 						<td><span class="btbs">*</span><span>预估图数：</span></td>
 						<td>
-							<input class="cg_input" name="picture_number" id="picture_number" value="${topicMap.bookname}"  maxlength="20"/>
+							<input class="cg_input" name="picture_number" id="picture_number" value="${topicMap.picture_number}"  maxlength="20"/>
 						</td>
 					</tr>
 						<tr>
 						<td><span class="btbs">*</span><span>学科及专业：</span></td>
 						<td>
-							<input class="cg_input" name="subject" id="subject" placeholder="学科及专业" value="${topicMap.bookname}" />
+							<input class="cg_input" name="subject" id="subject" placeholder="学科及专业" value="${topicMap.subject}" />
 						</td>
 						<td><span class="btbs">*</span><span>级别：</span></td>
 						<td>
@@ -127,7 +127,7 @@
 					<tr>
 						<td><span>银行账户：</span></td>
 						<td>
-							<input class="cg_input" name="bank_account_id" id="bank_account_id" placeholder="银行账户" value="${topicMap.bookname}"/>
+							<input class="cg_input" name="bank_account_id" id="bank_account_id" placeholder="银行账户" value="${topicMap.bank_account_id}"/>
 						</td>
 						<td><span>开户银行：</span></td>
 						<td>
@@ -181,11 +181,11 @@
 					<tr>
 						<td><span>作者购书：</span></td>
 						<td>
-							<input class="cg_input" name="purchase" id="purchase" placeholder="请输入作者购买册数" value="${topicMap.bookname}"/>
+							<input class="cg_input" name="purchase" id="purchase" placeholder="请输入作者购买册数" value="${topicMap.purchase}"/>
 						</td>
 						<td><span>作者赞助：</span></td>
 						<td>
-							<input class="cg_input" name="sponsorship" id="sponsorship" placeholder="请输入预估金额" value="${topicMap.bookname}"/>
+							<input class="cg_input" name="sponsorship" id="sponsorship" placeholder="请输入预估金额" value="${topicMap.sponsorship}"/>
 						</td>
 					</tr>
 				</table>
@@ -202,21 +202,21 @@
 					<tr>
 						<td width="106px"><span>译稿原书名：</span></td>
 						<td width="400px">
-							<input class="cg_input" name="original_bookname" id="original_bookname" placeholder="" value="${topicMap.bookname}"/>
+							<input class="cg_input" name="original_bookname" id="original_bookname" placeholder="" value="${topicMap.original_bookname}"/>
 						</td>
 						<td style="text-align: center;"><span>原编著者：</span></td>
 						<td width="308px">
-							<input class="cg_input" name="original_author" id="original_author" placeholder="" value="${topicMap.bookname}"/>
+							<input class="cg_input" name="original_author" id="original_author" placeholder="" value="${topicMap.original_author}"/>
 						</td>
 					</tr>
 					<tr>
 						<td><span>国籍：</span></td>
 						<td>
-							<input class="cg_input" name="nation" id="nation" placeholder="" value="${topicMap.bookname}"/>
+							<input class="cg_input" name="nation" id="nation" placeholder="" value="${topicMap.nation}"/>
 						</td>
 						<td style="text-align: center;"><span>出版年代及版次：</span></td>
 						<td>
-							<input class="cg_input" name="edition" id="edition" placeholder="出版年代及版次" value="${topicMap.bookname}"/>
+							<input class="cg_input" name="edition" id="edition" placeholder="出版年代及版次" value="${topicMap.edition}"/>
 						</td>
 					</tr>
 				</table>

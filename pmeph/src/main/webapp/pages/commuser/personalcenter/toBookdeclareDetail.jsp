@@ -61,7 +61,7 @@
 					<tr>
 						<td><span class="btbs">*</span><span>预计交稿时间：</span></td>
 						<td>
-							${topicMap.bookname}
+							${topicMap.deadline}
 						</td>
 						<td><span class="btbs">*</span><span>选题来源：</span></td>
 						<td>
@@ -75,13 +75,13 @@
 					</tr>
 					<tr>
 						<td><span class="btbs">*</span><span>预估字数：</span></td>
-						<td>${topicMap.bookname}</td>
+						<td>${topicMap.word_number}</td>
 						<td><span class="btbs">*</span><span>预估图数：</span></td>
-						<td>${topicMap.bookname}</td>
+						<td>${topicMap.picture_number}</td>
 					</tr>
 						<tr>
 						<td><span class="btbs">*</span><span>学科及专业：</span></td>
-						<td>${topicMap.bookname}</td>
+						<td>${topicMap.subject}</td>
 						<td><span class="btbs">*</span><span>级别：</span></td>
 						<td>
 							<c:if test="${topicMap.rank == '0'}">低</c:if>
@@ -112,7 +112,7 @@
 					</tr>
 					<tr>
 						<td><span>银行账户：</span></td>
-						<td>${topicMap.bookname}
+						<td>${topicMap.bank_account_id}
 						</td>
 						<td><span>开户银行：</span></td>
 						<td>${topicMap.bookname}
@@ -160,10 +160,10 @@
 					</tr>
 					<tr>
 						<td><span>作者购书：</span></td>
-						<td>${topicMap.bookname}
+						<td>${topicMap.purchase}
 						</td>
 						<td><span>作者赞助：</span></td>
-						<td>${topicMap.bookname}
+						<td>${topicMap.sponsorship}
 						</td>
 					</tr>
 				</table>
@@ -179,18 +179,18 @@
 					</tr>
 					<tr>
 						<td width="106px"><span>译稿原书名：</span></td>
-						<td width="400px">${topicMap.bookname}
+						<td width="400px">${topicMap.original_bookname}
 						</td>
 						<td style="text-align: center;"><span>原编著者：</span></td>
-						<td width="308px">${topicMap.bookname}
+						<td width="308px">${topicMap.original_author}
 						</td>
 					</tr>
 					<tr>
 						<td><span>国籍：</span></td>
-						<td>${topicMap.bookname}
+						<td>${topicMap.nation}
 						</td>
 						<td style="text-align: center;"><span>出版年代及版次：</span></td>
-						<td>${topicMap.bookname}
+						<td>${topicMap.edition}
 						</td>
 					</tr>
 				</table>
@@ -201,12 +201,6 @@
 			<div>
 				<span id="tsxz_span6"></span>
 				<span class="tsxz_title">申报编者情况 </span>
-				<div class="sb_tj">
-				 	<div class="tj_div" onclick="add_zjky()">
-						<span id="img_1"></span>
-						<span id="wz_1">添加</span>
-				 	</div>
-				</div>
 			</div>
 			<div class="content">
 				<table class="tab_2" id="sbbzqk">

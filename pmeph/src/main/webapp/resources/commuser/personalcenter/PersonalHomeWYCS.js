@@ -54,5 +54,10 @@ function listoction(thisclicked,s){
  * @param id
  */
 function viewTopic(id){
-	window.open(contextpath+"");
+	window.open(contextpath+"bookdeclare/toBookdeclareDetail.action?topic_id="+id);
+}
+
+//修改
+function updateTopic(id){
+	window.open(contextpath+"bookdeclare/toBookdeclareZc.action?topic_id="+id);
 }
