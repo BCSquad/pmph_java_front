@@ -27,6 +27,7 @@
         }
 </style>
 <body>
+
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 	<div class="body"> 
 		<div class="content-wrapper">
