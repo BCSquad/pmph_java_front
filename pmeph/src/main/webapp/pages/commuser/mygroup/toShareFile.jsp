@@ -64,56 +64,17 @@
             </div>
 
             <div class="left_communions_files">
-                <span id="commnions_top" class="clicked" onclick="ChangeDiv('commnions',${groupMap.id})">互动交流</span>
-                <span id="filesgx_top" class="clickbefore" onclick="ChangeDiv('filesgx',${groupMap.id})">文件共享</span>
+                <span id="commnions_top" class="clickbefore" onclick="ChangeDiv('commnions',${groupMap.id})">互动交流</span>
+                <span id="filesgx_top" class="clicked" onclick="ChangeDiv('filesgx',${groupMap.id})">文件共享</span>
             </div>
             <div class="left-content">
-                <div class="_show" id="commnions">
-                    <div class="iframe1">
-                    <c:forEach var="list" items="${messgaeList}">
-                    <c:if test="${list.member_id != queryMap.user_id}">
-						<div class="chat_items other">
-                            <div class="chat_item1">
-                                <div class="div_item1_img">
-                                    <img src="<%=path %>/statics/image/tx.png"/>
-                                    <text>${list.member_id}</text>
-                                </div>
-                                <div class="arrows"></div>
-                            </div>
-                            <div class="chat_item2">
-                                <div class="sender">
-                                    ${list.msg_content}
-                                </div>
-                                <div class="chat_item2_time"> ${list.gmt_create}</div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        </c:if>
-                        <c:if test="${list.member_id == queryMap.user_id}">
-                        	<div class="chat_items mine">
-                            <div class="chat_item1">
-                                <div class="div_item1_img">
-                                    <img src="<%=path %>/statics/image/tx.png"/>
-                                    <text>${list.member_id}</text>
-                                </div>
-                                <div class="arrows"></div>
-                            </div>
-                            <div class="chat_item2">
-                                <div class="sender">
-                                    ${list.msg_content}
-                                </div>
-                                <div class="chat_item2_time"> ${list.gmt_create}</div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        </c:if>
-                    </c:forEach>
-                     </div>
-                    <div class="iframe2">
-                        <textarea  id="msgContent" type="text" placeholder="请输入消息内容,按回车键发送" ></textarea>
-                        <div class="div_btn"><span id="sendMsg" class="button">发送</span></div>
+                <div class="_show" id="filesgx">
+                    <input type="text" placeholder="请输入文件名" id= "fileName" class="file_input"/><img class="search" src="${ctx}/statics/image/sx1.png"/>
+                    <span id ="fileContent"></span>
+                    <div id ="fileMore">
+                    	<center>更多</center>
                     </div>
-                </div>
+				</div>
             </div>
         </div>
     </div>

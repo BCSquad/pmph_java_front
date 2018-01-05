@@ -1,17 +1,10 @@
-
-function ChangeDiv(type){
-    if(type=='commnions'){
-        document.getElementById("commnions_top").setAttribute("class","clicked");
-        document.getElementById("filesgx_top").setAttribute("class","clickbefore");
-        document.getElementById("filesgx").setAttribute("class","hidden");
-        document.getElementById("commnions").setAttribute("class","show");
-    }else{
-        document.getElementById("filesgx_top").setAttribute("class","clicked");
-        document.getElementById("commnions_top").setAttribute("class","clickbefore");
-        document.getElementById("commnions").setAttribute("class","hidden");
-        document.getElementById("filesgx").setAttribute("class","show");
+//跳转
+function ChangeDiv(type,groupId){
+    if(type=='commnions'){ //互动交流
+    	window.location.href=contextpath+"group/toMyGroup.action?groupId="+groupId+"&type=hdjl";
+    }else{ //文件共享
+    	window.location.href=contextpath+"group/toMyGroup.action?groupId="+groupId+"&type=wjgx";
     }
-
 
 }
 

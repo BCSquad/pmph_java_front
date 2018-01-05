@@ -1,9 +1,9 @@
 body { margin: 0px;   padding: 0px;  text-align: center;  }
-a{color:#666666;} /*设置默认颜色*/
-a:link {color:blue;} /*未访问颜色*/
-a:visited {color:gray;} /*已访问颜色*/
-a:hover {color:red;} /*悬浮（鼠标经过）时颜色*/
-a:active {color:yellow;} /*点击时的颜色*/
+a{color:#666666;} /*璁剧疆榛樿棰滆壊*/
+a:link {color:blue;} /*鏈闂鑹�/
+a:visited {color:gray;} /*宸茶闂鑹�/
+a:hover {color:red;} /*鎮诞锛堥紶鏍囩粡杩囷級鏃堕鑹�/
+a:active {color:yellow;} /*鐐瑰嚮鏃剁殑棰滆壊*/
 .content-body{
     width: 100%;
     margin: 0 auto;
@@ -129,7 +129,7 @@ a:active {color:yellow;} /*点击时的颜色*/
 }
 
 .li_span1,.li_span2,#li_span3{
-    background-image: url(../image/css_sprites.png);
+    background-image: url(../../image/css_sprites.png);
     background-repeat: no-repeat;
     float: left;
     overflow: hidden;
@@ -162,7 +162,7 @@ a:active {color:yellow;} /*点击时的颜色*/
     clear: both;
     height: 20px;
     width: 20px;
-    background-image: url(../image/css_sprites.png);
+    background-image: url(../../image/css_sprites.png);
     vertical-align: middle;
     background-position: -463px -280px;
     background-repeat: no-repeat;
@@ -217,9 +217,11 @@ a:active {color:yellow;} /*点击时的颜色*/
 .clicked{
     background:#489399;
     color: #ffffff;
+    cursor: pointer;
 }
 .clickbefore{
     color: #489399;
+    cursor: pointer;
 }
 
 .hidden{
@@ -368,16 +370,16 @@ ul li img{
     border-bottom: 1px solid #dedede;
     clear: both;
 }
-.iframe1::-webkit-scrollbar {/*滚动条整体样式*/
-    width: 6px;     /*高宽分别对应横竖滚动条的尺寸*/
+.iframe1::-webkit-scrollbar {/*婊氬姩鏉℃暣浣撴牱寮�/
+    width: 6px;     /*楂樺鍒嗗埆瀵瑰簲妯珫婊氬姩鏉＄殑灏哄*/
     height: 1px;
 }
-.iframe1::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+.iframe1::-webkit-scrollbar-thumb {/*婊氬姩鏉￠噷闈㈠皬鏂瑰潡*/
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
     background: #999;
 }
-.iframe1::-webkit-scrollbar-track {/*滚动条里面轨道*/
+.iframe1::-webkit-scrollbar-track {/*婊氬姩鏉￠噷闈㈣建閬�/
     -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
     border-radius: 10px;
     background: #EDEDED;
