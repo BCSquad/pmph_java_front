@@ -59,7 +59,7 @@
 		on t1.textbook_id = t2.id where t1.declaration_id = #{declaration_id} 
 		ORDER BY t1.gmt_create desc
 	</select>
-	<insert id="insertTsxz" parameterType="java.util.Map">
+	<insert id="insertTsxz" parameterType="java.util.Map"  useGeneratedKeys="true" keyProperty="table_trendst_id">
 		insert into dec_position(declaration_id,textbook_id,preset_position,syllabus_id,syllabus_name,gmt_create)
 		  values(#{declaration_id},#{textbook_id},#{preset_position},#{syllabus_id},#{syllabus_name},#{gmt_create})
 	</insert>

@@ -54,7 +54,7 @@
 						<span>$!{c.content}</span>
 					</div>
 					<div >
-						#if($!{c.attachment})
+						#if($!{c.attachment} && $!{c.attachment} != '')
 							附件：<a class="download-tag" onclick="downLoadProxy('$!{c.attachment}')">$!{c.attachment_name}-点击下载</a>
 						#else
 							附件：--

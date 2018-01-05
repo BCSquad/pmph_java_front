@@ -5,7 +5,7 @@
 	
 	
 	<!-- 写文章插入数据 -->
-	<insert id="insertWriteArticle" parameterType="java.util.Map">
+	<insert id="insertWriteArticle" parameterType="java.util.Map"  useGeneratedKeys="true" keyProperty="table_trendst_id">
 		insert into cms_content (mid,parent_id,category_id,title,author_type,author_id,is_staging,path)
 		values(#{mid},#{parent_id},#{category_id},#{title},#{author_type},#{author_id},#{is_staging},#{path})
 	</insert>

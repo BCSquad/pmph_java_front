@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.authadmin.message.bean.UserMessage;
 import com.bc.pmpheep.back.authadmin.message.dao.OrgMessageDao;
+import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.commuser.writerArticle.dao.WriterArticleDao;
 import com.bc.pmpheep.general.pojo.Message;
 import com.bc.pmpheep.general.service.MessageService;
@@ -19,6 +21,9 @@ public class WriterArticleServiceImpl implements WriterArticleService {
 	WriterArticleDao writerArticleDao;
 	@Autowired
 	MessageService mssageService;
+	@Autowired
+    @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
+    private PersonalService personalService;
 	
 	public String insertWriteArticle(Map map,String UEContent) {
 		// TODO Auto-generated method stub
@@ -29,6 +34,7 @@ public class WriterArticleServiceImpl implements WriterArticleService {
 		String msg_id = messageResult.getId();
 		map.put("mid", msg_id); //内容id
 		writerArticleDao.insertWriteArticle(map);
+		personalService.saveUserTrendst("sbwz", map.get("table_trendst_id").toString(), 0, map.get("author_id").toString());
 		return msg_id;
 	}
 

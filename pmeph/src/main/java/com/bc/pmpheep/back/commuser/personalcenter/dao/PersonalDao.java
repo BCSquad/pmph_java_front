@@ -114,5 +114,19 @@ public interface PersonalDao {
 	 */
 	public Integer mySurveyCount(PageParameter<Map<String, Object>> pageParameter);
 	
+	/**
+	 * 生成动态
+	 * @param paraMap
+	 * @return
+	 */
+	public int saveUserTrendst(Map<String, Object> paraMap);
+	
+	/**
+	 * 通过图书纠错表主键查询被纠错图书的第一主编id
+	 * @param tableId
+	 * @return
+	 */
+	public String queryFirstEditorByBookCorrectionId(String tableId);
+	
 	
 }
