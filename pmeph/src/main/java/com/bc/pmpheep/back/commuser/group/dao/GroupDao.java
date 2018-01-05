@@ -1,6 +1,7 @@
 package com.bc.pmpheep.back.commuser.group.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -183,7 +184,7 @@ public interface GroupDao {
 	 * @Param:小组内成员id
 	 * @Return:PmphGroupMember
 	 */
-	PmphGroupMemberVO getPmphGroupMemberByMemberId(@Param("groupId") Long groupId, @Param("userId") Long userId);
+	PmphGroupMemberVO getPmphGroupMemberByMemberId(String groupId, String userId);
 	
 	/**
 	 * 
@@ -266,4 +267,29 @@ public interface GroupDao {
 	 * @return Integer
 	 */
 	Integer updateGroupFileOfDownload(@Param("groupId") Long groupId, @Param("fileId") String fileId);
+	
+	/**
+	 * 查询小组消息
+	 */
+	public List<Map<String,Object>> messageList(Map<String,Object> map);
+	/**
+	 * 查询小组成员
+	 */
+	public List<Map<String,Object>> memberList(Map<String,Object> map);
+	/**
+	 * 查询成员总数
+	 */
+	public int countMember(Map<String,Object> map);
+	/**
+	 * 查询文章共享总数
+	 */
+	public int countFile(Map<String,Object> map);
+	/**
+	 * 查询成员角色
+	 */
+	public Map<String,Object> memberRole(Map<String,Object> map);
+	/**
+	 * 查询小组信息
+	 */
+	public Map<String,Object> groupMap(Map<String,Object> map);
 }

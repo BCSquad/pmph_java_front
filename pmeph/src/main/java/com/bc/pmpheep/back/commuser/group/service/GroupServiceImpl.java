@@ -6,7 +6,10 @@ package com.bc.pmpheep.back.commuser.group.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -247,22 +250,27 @@ public class GroupServiceImpl implements GroupService{
 		}
 		return list;
 	}
-    
+    /**
+     * 判断成员角色
+     */
     @Override
-	public Boolean isFounderOrisAdmin(Long groupId,  Long memberId) throws CheckedServiceException {
+	public Boolean isFounderOrisAdmin(String groupId,String memberId) throws CheckedServiceException {
+    	Map<String,Object> queryMap = new HashMap<String,Object>();
+    	queryMap.put("group_id", groupId);
+    	queryMap.put("user_id", memberId);
 		boolean flag = false;
-		PmphGroupMemberVO currentUser = groupDao.getPmphGroupMemberByMemberId(groupId, memberId);
-		if(null == currentUser){
+		Map<String,Object> map = groupDao.memberRole(queryMap);
+		if(null == map){
 			return flag;
 		}
-		if (currentUser.getIsFounder() || currentUser.getIsAdmin()) {
+		if (map.get("is_founder").toString().equals("1") || map.get("is_admin").toString().equals("1")) {
 			flag = true;
 		}
 		return flag;
 	}
 
 	@Override
-	public Boolean isFounder(Long groupId, Long memberId ) throws CheckedServiceException {
+	public Boolean isFounder(String groupId, String memberId ) throws CheckedServiceException {
 		boolean flag = false;
 		PmphGroupMemberVO currentUser = groupDao.getPmphGroupMemberByMemberId(groupId, memberId);
 		
@@ -300,6 +308,32 @@ public class GroupServiceImpl implements GroupService{
 		}	
 		return groupDao.updateGroupFileOfDownload(groupId, fileId);
 	}
+
+	@Override
+	public List<Map<String, Object>> messageList(Map<String, Object> map) {
+		return this.groupDao.messageList(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> memberList(Map<String, Object> map) {
+		return this.groupDao.memberList(map);
+	}
+
+	@Override
+	public int countMember(Map<String, Object> map) {
+		return this.groupDao.countMember(map);
+	}
+
+	@Override
+	public int countFile(Map<String, Object> map) {
+		return this.groupDao.countFile(map);
+	}
+
+	@Override
+	public Map<String, Object> queryGroup(Map<String, Object> map) {
+		return this.groupDao.groupMap(map);
+	}
+
 
 
 	

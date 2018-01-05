@@ -358,4 +358,33 @@
 	<update id="updateGroupFileOfDownload" >
 		update pmph_group_file set download=download+1  WHERE group_id = #{groupId} AND file_id = #{fileId}
 	</update>
+	
+	<!-- 查询小组消息 -->
+	<select id="messageList" parameterType="java.util.Map" resultType="java.util.Map">
+		select * from pmph_group_message where group_id = #{group_id} ORDER BY gmt_create asc
+	</select>
+	<!-- 查询小组成员 -->
+	<select id="memberList" parameterType="java.util.Map" resultType="java.util.Map">
+		select t1.*,t2.avatar from pmph_group_member t1 left join writer_user t2
+		on t1.user_id = t2.id
+		 where t1.group_id = #{group_id} and t1.user_id != #{user_id} and t2.is_writer = '1' LIMIT 0,12
+	</select>
+	<!-- 查询小组成员角色-->
+	<select id="memberRole" parameterType="java.util.Map" resultType="java.util.Map">
+		select * from pmph_group_member t1
+		 where t1.group_id = #{group_id} and t1.user_id = #{user_id} 
+	</select>
+	<!-- 查询成员总数 -->
+	<select id="countMember" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(*) from pmph_group_member where group_id = #{group_id}
+	</select>
+	<!-- 查询文章共享总数 -->
+	<select id="countFile" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(*) from pmph_group_file where group_id = #{group_id}
+	</select>
+	<!-- 查询小组信息 -->
+	<select id="groupMap" parameterType="java.util.Map" resultType="java.util.Map">
+		select t1.*,t2.textbook_name from pmph_group t1 left join textbook t2 
+		on t1.book_id = t2.id where t1.id = #{group_id}
+	</select>
 </mapper>

@@ -3,6 +3,7 @@ package com.bc.pmpheep.back.commuser.group.service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.multipart.MultipartFile;
@@ -148,7 +149,7 @@ public interface GroupService {
 	 * @param:
 	 * @return:Boolean
 	 */
-	Boolean isFounderOrisAdmin(Long groupId, Long memberId) throws CheckedServiceException;
+	Boolean isFounderOrisAdmin(String groupId, String memberId) throws CheckedServiceException;
 	
 	/**
 	 * 
@@ -159,7 +160,7 @@ public interface GroupService {
 	 * @param
 	 * @return Boolean
 	 */
-	Boolean isFounder(Long groupId,  Long memberId) throws CheckedServiceException;
+	Boolean isFounder(String groupId,  String memberId) throws CheckedServiceException;
 	
 	/**
 	 * 获取小组讨论
@@ -169,4 +170,27 @@ public interface GroupService {
 	 * @return
 	 */
 	List<GroupMessageVO> getTalks(Long thisId,Long groupId,Integer pageNumber,Integer pageSize);
+	
+	/**
+	 * 查询小组消息
+	 */
+	public List<Map<String,Object>> messageList(Map<String,Object> map);
+	/**
+	 * 查询小组成员
+	 */
+	public List<Map<String,Object>> memberList(Map<String,Object> map);
+	/**
+	 * 查询成员总数
+	 */
+	public int countMember(Map<String,Object> map);
+	/**
+	 * 查询文章共享总数
+	 */
+	public int countFile(Map<String,Object> map);
+	
+	/**
+	 * 获取小组名称
+	 */
+	public Map<String,Object> queryGroup(Map<String,Object> map);
+	
 }
