@@ -12,21 +12,11 @@
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <link href="${ctx}/statics/css/base.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css" type="text/css">
-    <link rel="stylesheet" href="${ctx}/statics/commuser/hotComment/hotCommentList.css" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/commuser/hotComment/hotCommentDetail.css" type="text/css">
     <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
     <script src="${ctx}/resources/comm/base.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.pager.js"></script>
-    <script src="${ctx}/resources/commuser/hotComment/hotCommentList.js"></script>
 </head>
-<style type="text/css">
-
-        #right .select-wrapper {
-            border: none;
-        }
-         #right .select-button {
-            background: #f6f6f6;
-        }
-</style>
 <body>
 
 
@@ -38,20 +28,89 @@
 					<div class="nav">文章 > 热门书评</div>
 				</div>
 				<c:choose>
-					<c:when test="${listHotComment.total>0}">
-						<c:forEach items="${listHotComment.rows}" var="one">
-							<div class="oneComment">
-								<div style="width: 90px;height: 100%;float:left;">
-									<img style="width: 90px;height:auto" src="${one.image_url}"/>
-								</div>
-								<div style="width: 88%;height: 100%;float:left;">
-									<div style="width: 100%;height: 30px;clear: both"><span style="font-size: 16px">《${one.bookname}》</span></div>
-									<div class="top">
+					<c:when test="${map==null}">
+						<div class="no-more">
+		                    <img src="<c:url value='/statics/image/aaa4.png'></c:url>">
+		                    <span>木有内容呀~~</span>
+		                </div>		
+					</c:when>
+					<c:otherwise>
+							<div class="xqbf1">
+			                <div class="xl1"><img src="${map.image_url }"
+			                                      style="display: block;margin-bottom: 25px;height: 150px;margin: auto"/></div>
+			                <div class="xl2">
+			                    <ul>
+			                        <li><span class="author">作者：</span><span class="writer"
+			                                                                 style="color: #489299">${map.author}</span></li>
+			                        <li class="author">出版社： ${map.publisher}</li>
+			                        <li class="author">出版日期：${map.publish_date}</li>
+			                        <li class="author">ISBN：${map.isbn}</li>
+			                    </ul>
+			                </div>
+			                <div class="xl3"></div>
+			                <div class="xl4">
+			                    <ul>
+			                        <li class="author">读者对象：${map.reader}</li>
+			                        <li class="author">版次：${map.revision}</li>
+			                        <li class="author">被浏览：${map.clicks}次</li>
+			                        <div class="author">评分&nbsp;&nbsp;:</div>
+			                        <c:if test="${map.score<=3}">
+			                            <div class="star">
+			                                <span class="rwtx1"></span>
+			                                <span class="rwtx2"></span>
+			                                <span class="rwtx2"></span>
+			                                <span class="rwtx2"></span>
+			                                <span class="rwtx2"></span>
+			                            </div>
+			                        </c:if>
+			                        <c:if test="${map.score<=5 and map.score>3}">
+			                            <div class="star">
+			                                <span class="rwtx1"></span>
+			                                <span class="rwtx1"></span>
+			                                <span class="rwtx2"></span>
+			                                <span class="rwtx2"></span>
+			                                <span class="rwtx2"></span>
+			                            </div>
+			                        </c:if>
+			                        <c:if test="${map.score<=7 and map.score>5}">
+			                            <div class="star">
+			                                <span class="rwtx1"></span>
+			                                <span class="rwtx1"></span>
+			                                <span class="rwtx1"></span>
+			                                <span class="rwtx2"></span>
+			                                <span class="rwtx2"></span>
+			                            </div>
+			                        </c:if>
+			                        <c:if test="${map.score<=9 and map.score>7}">
+			                            <div class="star">
+			                                <span class="rwtx1"></span>
+			                                <span class="rwtx1"></span>
+			                                <span class="rwtx1"></span>
+			                                <span class="rwtx1"></span>
+			                                <span class="rwtx2"></span>
+			                            </div>
+			                        </c:if>
+			                        <c:if test="${map.score>9}">
+			                            <div class="star">
+			                                <span class="rwtx1"></span>
+			                                <span class="rwtx1"></span>
+			                                <span class="rwtx1"></span>
+			                                <span class="rwtx1"></span>
+			                                <span class="rwtx1"></span>
+			                            </div>
+			                        </c:if>
+			                        <div class="eight">${map.score}</div>
+			                        <!-- <div class="zero">0</div> -->
+			                    </ul>
+			                </div>
+			            </div>	
+			            <div style="width: 100%;height: auto;margin-top: 36px">
+			            	<div class="top">
 										<div class="pic"><img style="width: 32px;height: 32px" src="${ctx}/statics/pictures/head.png"></div>
 										<div class="nameAndTime">
-											<div class="name">${one.userName}</div>
-											<div class="star">
-												<c:if test="${one.score>=9}">
+											<div class="name">${map.userName}</div>
+											<div class="commentStar">
+												<c:if test="${map.score>=9}">
 													<div class="oneStar">
 													</div>
 													<div class="oneStar">
@@ -63,7 +122,7 @@
 													<div class="oneStar">
 													</div>
 												</c:if>
-												<c:if test="${one.score>=7&&one.score<9}">
+												<c:if test="${map.score>=7&&map.score<9}">
 													<div class="oneStar">
 													</div>
 													<div class="oneStar">
@@ -73,7 +132,7 @@
 													<div class="oneStar">
 													</div>
 												</c:if>
-												<c:if test="${one.score>=5&&one.score<7}">
+												<c:if test="${map.score>=5&&map.score<7}">
 													<div class="oneStar">
 													</div>
 													<div class="oneStar">
@@ -81,61 +140,26 @@
 													<div class="oneStar">
 													</div>
 												</c:if>
-												<c:if test="${one.score>=3&&one.score<5}">
+												<c:if test="${map.score>=3&&map.score<5}">
 													<div class="oneStar">
 													</div>
 													<div class="oneStar">
 													</div>
 												</c:if>
-												<c:if test="${one.score>=1&&one.score<3}">
+												<c:if test="${map.score>=1&&map.score<3}">
 													<div class="oneStar">
 													</div>
 												</c:if>
 											</div>
-											<div class="time"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${one.gmt_create}" /></div>
+											<div class="time"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${map.createTime}" /></div>
 										</div>
 									</div>
-									
-									<div class="bottom">
-										<div class="contentDiv">
-											${one.content}
-				  						</div>
-				  						<div class="open" onclick="detail(${one.id})">(展开)</div>
-									</div> 
-								</div>
-							</div>
-						</c:forEach> 	
-					</c:when>
-					<c:otherwise>
-						<div class="no-more">
-		                    <img src="<c:url value='/statics/image/aaa4.png'></c:url>">
-		                    <span>木有内容呀~~</span>
-		                </div>					
+			            </div>		
+			            <div style="width: 100%; height: auto">
+			            	<p style="color: #545454">${map.content}</p>
+			            </div>
 					</c:otherwise>
 				</c:choose>
-				
-				
-				<c:if test="${listHotComment.total>2}">
-					<div class="pageDiv">
-		                <div style="float: right;">
-		                    <ul class="pagination" id="page1">
-		                    </ul>
-		                    <div style="display: inline-block;vertical-align: top">
-		                        <select id="edu" name="edu" >
-		                            <option value="2" ${listHotComment.pageSize=='2' ?'selected':''}>每页2条</option>
-		                            <option value="3" ${listHotComment.pageSize=='3' ?'selected':''}>每页3条</option>
-		                            <option value="4" ${listHotComment.pageSize=='4' ?'selected':''}>每页4条</option>
-		                        </select>
-		                    </div>
-		                    <div class="pageJump">
-		                        <span>共${listHotComment.pageTotal}页，跳转到</span>
-		                        <input type="text" id="toPage"/>
-		                        <span class="pp">页</span>
-		                        <button type="button" class="button">确定</button>
-		                    </div>
-		                </div>
-		            </div>
-				</c:if>
 				
 			</div>
 			<div class="bigRight">
@@ -221,54 +245,5 @@
 <div style="background-color: #f8f8f8">
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </div>
-<script>
-    Page({
-    	num: parseInt("${listHotComment.pageTotal}"),					//页码数
-        startnum: parseInt("${listHotComment.pageNumber}"),				//指定页码
-        elem: $('#page1'),															//指定的元素
-        callback: function (n) {													//回调函数
-            console.log(n);
-            window.location.href="${ctx}/hotComment/hotCommentList.action?"; 
-        }
-    });
-    $(function () {
-        $('#edu').selectlist({
-            width: 110,
-            height: 30,
-            optionHeight: 30,
-            onChange:function (){
-            	window.location.href="${ctx}/hotComment/hotCommentList.action?pageSize="+$("input[name='edu']").val();
-            }
-            
-        });
-    })
-    //人卫推荐换一换
-	function change() {
-	    $.ajax({
-	        type: 'post',
-	        url: contextpath + 'readdetail/change.action',
-	        async: false,
-	        dataType: 'json',
-	        success: function (json) {
-	            var ste = '';
-	            $.each(json, function (i, x) {
-	                ste += '<div class="right_20"><div class="right_21" onclick="todetail(' +
-	                    x.id
-	                    + ')">' +
-	                    x.bookname +
-	                    '</div><div class="right_22">（' +
-	                    x.author +
-	                    '）</div></div>';
-	            });
-	            $("#comment").html(ste);
-	        }
-    	});
-	}
-    
-    //展开
-    function detail(id){
-    	window.location.href="${ctx}/hotComment/hotCommentDetail.action?id="+id;
-    }
-</script>
 </body>
 </html>

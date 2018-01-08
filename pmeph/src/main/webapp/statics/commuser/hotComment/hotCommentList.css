@@ -47,7 +47,7 @@
 .nameAndTime{
 	float: left;
 	margin-left: 10px;
-	width: 800px;
+	width: 600px;
 	height: 32px;
 }
 
@@ -115,8 +115,9 @@
 }
 
 .bottom{
-	width: 850px;
+	width: 800px;
 	height: auto;
+	maggin-top:3px;
 }
 
 .contentDiv{
@@ -139,6 +140,7 @@
 	font-weight: normal;
 	letter-spacing: 0px;
 	color: #5b5b5b;
+	cursor: pointer;
 }
 
 .pageDiv{
@@ -366,6 +368,14 @@
     font-size: 12px;
     color: #999999;
     cursor: pointer;
+}
+.picture1 {
+    width: 14px;
+    height: 15px;
+    background-image: url("../../image/refresh.png");
+    float: left;
+    margin-top: 16px;
+    margin-left: 80px;
 }
 
 .right_16 {
