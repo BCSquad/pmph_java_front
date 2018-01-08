@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="${ctx}/statics/commuser/mymessage/message.css" type="text/css">
 <link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/chat.css" type="text/css">
 <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css" />
-<script src="${ctx}/statics/js/jquery/jquery.js"></script>
+<script src="${ctx}/resources/comm/jquery/jquery.js"></script>
 <script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
 <script src="${ctx}/statics/js/jquery/jquery.selectlist.js"></script>
 <script src="${ctx}/resources/commuser/mymessage/personnelMessage.js"></script>
