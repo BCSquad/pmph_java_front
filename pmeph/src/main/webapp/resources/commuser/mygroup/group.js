@@ -1,17 +1,10 @@
-
-function ChangeDiv(type){
-    if(type=='commnions'){
-        document.getElementById("commnions_top").setAttribute("class","clicked");
-        document.getElementById("filesgx_top").setAttribute("class","clickbefore");
-        document.getElementById("filesgx").setAttribute("class","hidden");
-        document.getElementById("commnions").setAttribute("class","show");
-    }else{
-        document.getElementById("filesgx_top").setAttribute("class","clicked");
-        document.getElementById("commnions_top").setAttribute("class","clickbefore");
-        document.getElementById("commnions").setAttribute("class","hidden");
-        document.getElementById("filesgx").setAttribute("class","show");
+//跳转
+function ChangeDiv(type,groupId){
+    if(type=='commnions'){ //互动交流
+    	window.location.href=contextpath+"group/toMyGroup.action?groupId="+groupId+"&type=hdjl";
+    }else{ //文件共享
+    	window.location.href=contextpath+"group/toMyGroup.action?groupId="+groupId+"&type=wjgx";
     }
-
 
 }
 
@@ -50,15 +43,26 @@ $(function(){
 	    if(data.msgType == 3 && data.groupId == $("#groupId").val() && data.sendType == 0){
 	    	loadNewGroupMsg(sender,data.senderName,data.senderIcon,data.content,data.time);
 	    }
-	}
+	};
 	$("#sendMsg").click(function(){
 		var content=$("#msgContent").val();
+		var group_id=$("#groupId").val();
 		if(!content || content.trim() ==''){
 			window.message.warning("请键入消息");
 			return ;
 		}
-		var s = webSocket.send("{senderId:"+$("#userId").val()+",senderType:"+2+",content:'"+content+"',groupId:"+$("#groupId").val()+",sendType:0}");
-		$("#msgContent").val('');
+		$.ajax({
+			type: "POST",
+			url:contextpath+'group/sendMessage.action',
+			data:{group_id:group_id,msg_content:content},// 你的formid
+			async: false,
+			dataType:"json",
+		    success: function(msg) {
+			    if(msg=='OK'){
+			    	//window.location.href=contextpath+"personalhomepage/tohomepageone.action";
+			    }
+		    }
+		});
 	});
 	//-------------------------------
 	var talkPagesize  = 5 ;
@@ -94,31 +98,6 @@ $(function(){
 			initFile();
 		} 
 	}); 
-	//$("#uploadForm").submit();
-	$("#file_upload").change(function(){
-	//	$("#uploadForm").submit();
-		//var formData = new FormData();
-        //formData.append("file",document.getElementById("file_upload").files[0]);
-        //formData.append("groupId", $("#groupId").val());
-        //formData.append("filee",$("#file_upload"));
-		//alert();
-		$("#uploadForm").submit();
-		return ;
-		$.ajax({
-			type:'post',
-	        url :contxtpath+'/group/d.action',
-	        dataType:'json',
-	        //Content-Type:'multipart/form-data',
-	        data:$('#uploadForm').serialize(),
-	        success:function(responsebean){
-	        	if(responsebean){
-	        		window.message.success("成功");
-	        	}else{
-	        		window.message.error("失败");
-	        	}
-	        }
-	     });
-	});
 
 	//退出小组
 	$("#quitGroup").click(function(){
@@ -128,7 +107,7 @@ $(function(){
 		}
 		$.ajax({
 			type:'get',
-	        url :contxtpath+'/group/quitGroup.action',
+	        url :contextpath+'/group/quitGroup.action',
 	        contentType: 'application/json',
 	        dataType:'json',
 	        data:{
@@ -138,7 +117,7 @@ $(function(){
 	        	if(responsebean){
 	        		window.message.success("退出成功");
 	        		setTimeout(function(){
-	        			window.location.href = contxtpath+'/group/list.action';
+	        			window.location.href = contextpath+'/group/list.action';
 	        		},800);
 	        	}else{
 	        		window.message.error("退出失败");
@@ -153,7 +132,7 @@ $(function(){
 		var fileId = $("#"+id).val() ;
 		$.ajax({
 			type:'get',
-	        url :contxtpath+'/group/deleteFile.action',
+	        url :contextpath+'/group/deleteFile.action',
 	        contentType: 'application/json',
 	        dataType:'json',
 	        data:{
@@ -175,7 +154,7 @@ $(function(){
 		var imgId =  this.id;
 		var id = imgId.replace('img_','');
 		var fileId = $("#"+id).val() ;
-		window.location.href = contxtpath+'/groupfile/download/'+fileId+'.action?groupId='+$("#groupId").val() ;
+		window.location.href = contextpath+'/groupfile/download/'+fileId+'.action?groupId='+$("#groupId").val() ;
 		var num = parseInt($("#dw_"+id).html())+1;
 		$("#dw_"+id).html(num);
 		return ;
@@ -185,7 +164,7 @@ $(function(){
 	function initFile(){
 		$.ajax({
 			type:'get',
-	        url :contxtpath+'/group/getFiles.action',
+	        url :contextpath+'/group/getFiles.action',
 	        contentType: 'application/json',
 	        dataType:'json',
 	        data:{
@@ -199,8 +178,8 @@ $(function(){
 	        		for(var i= 0 ; i< responsebean.length ;i++){
 	        			var html = "<div class='items' id='item_"+responsebean[i].id+"'> "+
 				                        "<div class='item1' style='clear:both;'> "+
-				                            "<span><img src='"+contxtpath+"/statics/image/word-(1).png' alt='文件类型' class='item_img1'/><text>"+responsebean[i].fileName+"</text></span> "+
-				                            "<span><img src='"+contxtpath+"/statics/image/xztp.png' id='img_"+responsebean[i].id+"' class='item_img2'/><text id='dw_"+responsebean[i].id+"' style='color: #70bcc3;'>"+responsebean[i].download+"</text></span> "+
+				                            "<span><img src='"+contextpath+"/statics/image/word-(1).png' alt='文件类型' class='item_img1'/><text>"+responsebean[i].fileName+"</text></span> "+
+				                            "<span><img src='"+contextpath+"/statics/image/xztp.png' id='img_"+responsebean[i].id+"' class='item_img2'/><text id='dw_"+responsebean[i].id+"' style='color: #70bcc3;'>"+responsebean[i].download+"</text></span> "+
 				                        "</div> "+
 				                        "<div class='item2' style='clear:both;'> "+
 				                            "<div class='item2_div1'>"+responsebean[i].displayName+" 于 "+formatDate(responsebean[i].gmtCreate,"yyyy.MM.dd hh:ss:mm")+"上传文件</div> "+
@@ -227,7 +206,7 @@ $(function(){
 	function initTalk (){
 		$.ajax({
 			type:'get',
-	        url :contxtpath+'/group/getTalks.action',
+	        url :contextpath+'/group/getTalks.action',
 	        contentType: 'application/json',
 	        dataType:'json',
 	        data:{
@@ -251,7 +230,7 @@ $(function(){
 	        				html = "<div class='chat_items mine'> "+
 			                            "<div class='chat_item1'> "+
 			                                "<div class='div_item1_img'> "+
-			                                    "<img src='"+contxtpath+"/"+responsebean[i].avatar+"'/> "+
+			                                    "<img src='"+contextpath+"/"+responsebean[i].avatar+"'/> "+
 			                                    "<text>"+responsebean[i].displayName+"</text> "+
 			                                "</div> "+
 			                                "<div class='arrows'></div> "+
@@ -266,7 +245,7 @@ $(function(){
 	        				html = "<div class='chat_items other'> "+
 			                            "<div class='chat_item1'> "+
 			                                "<div class='div_item1_img'> "+
-			                                    "<img src='"+contxtpath+"/"+responsebean[i].avatar+"'/> "+
+			                                    "<img src='"+contextpath+"/"+responsebean[i].avatar+"'/> "+
 			                                    "<text>"+responsebean[i].displayName+"</text> "+
 			                                "</div> "+
 			                                "<div class='arrows'></div> "+
@@ -300,7 +279,7 @@ $(function(){
 			html = "<div class='chat_items mine'> "+
                         "<div class='chat_item1'> "+
                             "<div class='div_item1_img'> "+
-                                "<img src='"+contxtpath+"/"+senderIcon+"'/> "+
+                                "<img src='"+contextpath+"/"+senderIcon+"'/> "+
                                 "<text>"+senderName+"</text> "+
                             "</div> "+
                             "<div class='arrows'></div> "+
@@ -315,7 +294,7 @@ $(function(){
 			html = "<div class='chat_items other'> "+
                         "<div class='chat_item1'> "+
                             "<div class='div_item1_img'> "+
-                                "<img src='"+contxtpath+"/"+senderIcon+"'/> "+
+                                "<img src='"+contextpath+"/"+senderIcon+"'/> "+
                                 "<text>"+senderName+"</text> "+
                             "</div> "+
                             "<div class='arrows'></div> "+
@@ -353,5 +332,33 @@ $(function(){
 		  }
 
 	}
-	
+	//加载上传方法
+	upload();
 });
+
+//附件上传方法
+function upload(){
+	$("#scwj1").uploadFile({
+	    start: function () {
+	        console.log("开始上传。。。");
+	    },
+	    done: function (filename, fileid) {
+	    	$.ajax({
+				type: "POST",
+				url:contextpath+'group/uploadFile.action',
+				data:{syllabus_name:filename,syllabus_id:fileid},// 你的formid
+				async: false,
+				dataType:"json",
+			    success: function(msg) {
+				    if(msg=='OK'){
+				    	//window.location.href=contextpath+"personalhomepage/tohomepageone.action";
+				    	console.log("上传完成：name " + filename + " fileid " + fileid);
+				    }
+			    }
+			});
+	    },
+	    progressall: function (loaded, total, bitrate) {
+	        console.log("正在上传。。。" + loaded / total);
+	    }
+	});
+}

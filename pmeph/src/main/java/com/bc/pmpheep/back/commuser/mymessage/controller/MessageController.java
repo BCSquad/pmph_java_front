@@ -221,7 +221,7 @@ public class MessageController extends BaseController{
 		Message message = mssageService.get(messageId);
 		
 		mv.addObject("message",message);
-		
+		mv.addObject("messageId",messageId);
 		
 		mv.setViewName("commuser/message/noticeMessageDetail");
 		return mv;

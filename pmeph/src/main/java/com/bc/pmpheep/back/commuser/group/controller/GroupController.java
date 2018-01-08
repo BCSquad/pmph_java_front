@@ -2,7 +2,7 @@ package com.bc.pmpheep.back.commuser.group.controller;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bc.pmpheep.back.commuser.group.bean.GroupFileVO;
 import com.bc.pmpheep.back.commuser.group.bean.GroupList;
 import com.bc.pmpheep.back.commuser.group.bean.GroupMessageVO;
-import com.bc.pmpheep.back.commuser.group.bean.PmphGroupMemberVO;
 import com.bc.pmpheep.back.commuser.group.service.GroupService;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 
@@ -82,16 +81,40 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
      * @return
      */
     @RequestMapping("/toMyGroup")
-    public ModelAndView toMyGroup(@RequestParam(value="groupId")Long groupId){
-    	ModelAndView modelAndView = new ModelAndView();
-    	if(null == groupId){
-    		modelAndView.setViewName("/comm/error");
-            return modelAndView;
+    public ModelAndView toMyGroup(HttpServletRequest request,
+    		HttpServletResponse response){
+    	ModelAndView mav = new ModelAndView();
+    	Map<String, Object> userMap = this.getUserInfo();
+    	String type = request.getParameter("type");
+    	String groupId = request.getParameter("groupId");
+    	Map<String,Object> queryMap = new HashMap<String,Object>();
+    	queryMap.put("group_id", groupId);
+    	queryMap.put("user_id", userMap.get("id"));
+    	//消息列表
+    	List<Map<String,Object>> messgaeList = this.groupService.messageList(queryMap);
+    	//其余成员信息
+    	List<Map<String,Object>> memberList = this.groupService.memberList(queryMap);
+    	mav.addObject("memberList", memberList);
+    	mav.addObject("messgaeList", messgaeList);
+    	mav.addObject("queryMap", queryMap);
+    	//小组名称
+    	mav.addObject("groupMap", this.groupService.queryGroup(queryMap));
+    	 //角色
+    	mav.addObject("role", groupService.isFounderOrisAdmin(groupId,userMap.get("id").toString())?"你是这个小组的管理员":"你是这个小组的普通用户");
+    	//人数
+    	mav.addObject("memberCount", groupService.countMember(queryMap));
+    	//文件数
+    	mav.addObject("fileCount", groupService.countFile(queryMap));
+    	if(type!=null){
+	    	 if(type.equals("wjgx")){ //文件共享
+	    		 mav.setViewName("commuser/mygroup/toShareFile");
+	    	}else{
+	    		mav.setViewName("commuser/mygroup/communication");
+	    	}
+    	}else{
+    		mav.setViewName("commuser/mygroup/communication");
     	}
-    	Map<String, Object> map = this.getUserInfo();
-    	Long userId = new Long (String.valueOf(map.get("id")));
-    	modelAndView.addObject("groupId", groupId);
-    	//我的小组
+    	/*//我的小组
     	List<GroupList> myGroupList     = groupService.groupList(0,1000000,userId);
     	List<GroupList> otherGroupList  = new ArrayList<GroupList>(myGroupList.size()-1 );
     	GroupList thisGroup = null;
@@ -120,10 +143,9 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
         modelAndView.addObject("gropuMemebers",gropuMemebers);
         modelAndView.addObject("gropuMemebersNum",gropuMemebers.size());
         //文件总数
-        modelAndView.addObject("fileTotal",groupService.getFilesTotal(groupId, null,userId));
+        modelAndView.addObject("fileTotal",groupService.getFilesTotal(groupId, null,userId));*/
         //页面路径
-        modelAndView.setViewName("commuser/mygroup/communication");
-        return modelAndView;
+        return mav;
     }
     
     /**
@@ -211,6 +233,55 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
     	groupService.deleteFile(id,groupId,fileId,thisId);
     	return true;
     }
+    
+    /**
+     * 发送消息
+     */
+    @RequestMapping("/sendMessage")
+    @ResponseBody
+    public String sendMessage(HttpServletRequest request,
+    		HttpServletResponse response){
+    	String Msg = "";
+    	Map<String, Object> userMap = this.getUserInfo();
+    	String group_id = request.getParameter("group_id");
+    	String msg_content = request.getParameter("msg_content");
+    	Map<String, Object> queryMap = new HashMap<String,Object>();
+    	queryMap.put("group_id", group_id);
+    	queryMap.put("member_id", userMap.get("id"));
+    	queryMap.put("msg_content", msg_content);
+    	int count = this.groupService.addMessage(queryMap);
+    	if(count>0){
+    		Msg = "OK";
+    	}
+    	return Msg;
+    }
+    
+    /**
+     * 添加附件
+     */
+    @RequestMapping("/uploadFile")
+    @ResponseBody
+    public String uploadFile(HttpServletRequest request,
+    		HttpServletResponse response){
+    	String Msg = "";
+    	Map<String, Object> userMap = this.getUserInfo();
+    	String syllabus_id = request.getParameter("syllabus_id");
+    	String syllabus_name = request.getParameter("syllabus_name");
+    	String group_id = request.getParameter("group_id");
+    	Map<String, Object> queryMap = new HashMap<String,Object>();
+    	queryMap.put("group_id", group_id);
+    	queryMap.put("member_id", userMap.get("id"));
+    	queryMap.put("msg_content", userMap.get("nickname")+"上传了"+syllabus_name);
+    	queryMap.put("file_id", syllabus_id);
+    	queryMap.put("file_name", syllabus_name);
+    	int count = this.groupService.addMessage(queryMap);
+    	count += this.groupService.addFile(queryMap);
+    	if(count>0){
+    		Msg = "OK";
+    	}
+    	return Msg;
+    }
+    
 }
 
 

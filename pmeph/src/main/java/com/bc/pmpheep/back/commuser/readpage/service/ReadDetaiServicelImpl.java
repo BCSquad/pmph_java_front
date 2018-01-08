@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.commuser.readpage.dao.ReadDetailDao;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
@@ -17,6 +19,10 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 	
 	@Autowired
 	private ReadDetailDao readDetailDao;
+	
+	@Autowired
+    @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
+    private PersonalService personalService;
 
 	/**
 	 * 查询读书详情页信息
@@ -71,6 +77,7 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		// TODO Auto-generated method stub
 		Map<String, Object> rmap=new HashMap<String, Object>();
 	    readDetailDao.insertComment(map);
+	    personalService.saveUserTrendst("wdsp", map.get("table_trendst_id").toString(), 0, map.get("writer_id").toString());
 	    rmap.put("returncode", "OK");
 	    return rmap;
 	}
@@ -197,6 +204,11 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		int count=readDetailDao.correction(map);
 		if(count>0){
 			returncode="OK";
+			personalService.saveUserTrendst("wdjc", map.get("table_trendst_id").toString(), 0, map.get("user_id").toString());
+			
+			
+			
+			
 		}
 		return returncode;
 	}

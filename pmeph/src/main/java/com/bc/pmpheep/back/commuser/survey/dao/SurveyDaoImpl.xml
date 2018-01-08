@@ -23,4 +23,27 @@
 		SELECT * FROM `survey_question_option`
 		WHERE question_id=#{questionId}
 	</select>
+	
+	<!-- 保存单选答案 -->
+	<insert id="saveRadioAnswer" parameterType="map">
+		insert into survey_question_answer(
+			user_id,question_id,option_id)
+			values(#{userId},#{questionId},#{optionId})
+	</insert>
+
+	<!-- 保存多选答案 -->
+	<insert id="saveCheckboxAnswer" parameterType="map">
+		insert into survey_question_answer
+		(user_id,question_id,option_content)
+		values(#{userId},#{questionId},#{checkboxAnswer})
+	</insert>
+	
+	<!-- 保存输入框答案 -->
+	<insert id="saveInputAnswer" parameterType="map">
+		insert into survey_question_answer
+		(user_id,question_id,option_content)
+		values(#{userId},#{questionId},#{inputValue})
+	</insert>
+
+
 </mapper>

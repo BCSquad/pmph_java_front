@@ -36,5 +36,24 @@ public class SurveyServiceImpl implements SurveyService {
 		List<Map<String, Object>> list = surveyDao.getOptions(questionId);
 		return list;
 	}
-
+	
+	//保存单选答案
+	@Override
+	public void saveRadioAnswer(Map<String, Object> map) {
+		surveyDao.saveRadioAnswer(map);
+	}
+	
+	//保存多选答案
+	@Override
+	public void saveCheckboxAnswer(Map<String, Object> map1) {
+		surveyDao.saveCheckboxAnswer(map1);
+		
+	}
+	
+	//保存输入框答案
+	@Override
+	public void saveInputAnswer(Map<String, Object> map2) {
+		surveyDao.saveInputAnswer(map2);
+		
+	}
 }

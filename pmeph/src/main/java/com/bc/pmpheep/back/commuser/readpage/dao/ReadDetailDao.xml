@@ -72,7 +72,7 @@
 	</update>
 	
 	<!-- 根据书籍ID新增评论 -->
-	<insert id="insertComment" parameterType="java.util.Map">
+	<insert id="insertComment" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="table_trendst_id">
 	   insert into book_user_comment(
 	   book_id,
 	   writer_id,
@@ -148,7 +148,7 @@
 	    delete from book_user_mark where writer_id=#{writerId} and  favorite_id=#{favoriteId} and book_id=#{bookId}
 	</delete>
 	<!-- 新增图书纠错 -->
-	<insert id="correction" parameterType="java.util.Map">
+	<insert id="correction" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="table_trendst_id">
 	    insert into book_correction (
 	    book_id,
 	    user_id,

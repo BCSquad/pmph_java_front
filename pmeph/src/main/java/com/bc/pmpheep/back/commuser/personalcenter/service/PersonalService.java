@@ -130,7 +130,13 @@ public interface PersonalService {
 	 */
 	public int queryWriterUserTrendstCount(PageParameter<Map<String, Object>> pageParameter);
 	
-	
+	/**
+	 * 生成个人动态的方法
+	 * @param TrendstName 动态名称
+	 * @param tableId	  关联表主键
+	 * @param trendstType 动态类型：0生成，1通过，2未通过
+	 */
+	public void saveUserTrendst(String TrendstName,String tableId,int trendstType,String writer_user_id);
 
 	
 }
