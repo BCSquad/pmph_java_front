@@ -133,6 +133,9 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		return pmap;
 	}
 
+	/**
+	 * 查询是否点赞
+	 */
 	@Override
 	public List<Map<String, Object>> queryLikes(Map<String, Object> map) {
 		// TODO Auto-generated method stub
@@ -140,7 +143,7 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		return list;
 	}
 
-	/* 
+	/** 
 	 * 添加收藏
 	 */
 	@Override
@@ -188,6 +191,9 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		return readDetailDao.queryMark(book_id,favorite_id,writer_id);
 	}
 
+	/**
+	 * 删除书评 
+	 */
 	@Override
 	public String delbookwriter(Map<String, Object> map) {
 		// TODO 自动生成的方法存根  删除书评
@@ -207,5 +213,44 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 			personalService.saveUserTrendst("wdjc", map.get("table_trendst_id").toString(), 0, map.get("user_id").toString());
 		}
 		return returncode;
+	}
+
+	/**
+	 * 写长评
+	 */
+	@Override
+	public String insertlong(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		String returncode="";
+		int count=readDetailDao.insertlong(map);
+		if(count>0){
+			returncode="OK";
+		}
+		return returncode;
+	}
+
+	/**
+	 * 查询登陆人是否写过长评
+	 */
+	@Override
+	public List<Map<String, Object>> queryLoginLong(String writer_id,String book_id) {
+		// TODO Auto-generated method stub
+		List<Map<String, Object>> list=readDetailDao.queryLoginLong(writer_id,book_id);
+		return list;
+	}
+
+	/**
+	 * 查询长评
+	 */
+	@Override
+	public List<Map<String, Object>> queryLong(String book_id,int start) {
+		// TODO Auto-generated method stub
+		List<Map<String, Object>> list=readDetailDao.queryLong(book_id,start);
+		for (Map<String, Object> pmap : list) {
+			String time=pmap.get("gmt_create").toString().substring(0, 16);
+			pmap.put("gmt_create", time);
+			pmap.put("longstart", start+2);
+		}
+		return list;
 	}
 }

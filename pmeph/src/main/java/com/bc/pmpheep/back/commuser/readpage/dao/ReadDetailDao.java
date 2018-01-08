@@ -128,6 +128,26 @@ public interface ReadDetailDao {
 	 * @param writerId    用户id
 	 */
 	void deleteMark(@Param("bookId")long bookId,@Param("favoriteId") long favoriteId,@Param("writerId") long writerId);
-	
+	/**
+	 * 写长评
+	 * @param map
+	 * @return 1，1代表数据添加成功
+	 */
+	int insertlong(Map<String, Object> map);
+	/**
+	 * 查询登录人是否写过长评
+	 * @return list,list.size大于1说明写过
+	 */
+	List<Map<String, Object>> queryLoginLong(@Param("writer_id") String writer_id,@Param("book_id") String book_id);
+	/**
+	 * 删除评论
+	 * @param map
+	 * @return
+	 */
 	String updateDelBookWriter(Map<String, Object> map);
+	/**
+	 * 查询长评
+	 * @return List<Map<String, Object>>
+	 */
+	List<Map<String, Object>> queryLong(@Param("book_id") String book_id,@Param("start") int start);
 }

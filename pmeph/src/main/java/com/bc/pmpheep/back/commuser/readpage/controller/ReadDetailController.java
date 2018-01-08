@@ -52,7 +52,6 @@ public class ReadDetailController extends BaseController{
 	public ModelAndView move(HttpServletRequest request){
 		ModelAndView modelAndView=new ModelAndView();
 		String id=request.getParameter("id");
-//		id="168";
 		Map<String, Object> supMap=readDetailService.querySupport(id);
 		Map<String, Object> map=readDetailService.queryReadBook(id);
 		if(("DEFAULT").equals(map.get("image_url"))){
@@ -63,6 +62,13 @@ public class ReadDetailController extends BaseController{
 		List<Map<String, Object>> listCom=readDetailService.queryComment(id,0);
 		List<Map<String, Object>> ComNum=readDetailService.queryComment(id,-1);
 		List<Map<String, Object>> auList=readDetailService.queryAuthorType(author);
+		List<Map<String, Object>> longList=readDetailService.queryLong(id,0);
+		if(longList.size()==0){
+			modelAndView.addObject("longcom", "nothing");
+		}
+		if(listCom.size()==0){
+			modelAndView.addObject("shortcom", "nothing");
+		}
 		Long typeid=Long.valueOf(map.get("type").toString());
 		List<Map<String, Object>> typeList=bookService.queryParentTypeListByTypeId(typeid);
 		for (Map<String, Object> pmap : auList) {
@@ -128,6 +134,7 @@ public class ReadDetailController extends BaseController{
 		modelAndView.addObject("map", map);
 		modelAndView.addObject("listCom", listCom);
 		modelAndView.addObject("frList", frList);
+		modelAndView.addObject("longList", longList);
 		modelAndView.addObject("typeList", typeList);
 		modelAndView.addObject("start", 2);
 		if(null!=(request.getParameter("state"))){
@@ -288,7 +295,7 @@ public class ReadDetailController extends BaseController{
 	}
 	
 	/**
-	 * 分页的具体实现
+	 * 评论分页的具体实现
 	 * @param request
 	 * @return
 	 */
@@ -299,6 +306,20 @@ public class ReadDetailController extends BaseController{
 		String id=request.getParameter("id");
 		List<Map<String, Object>> listCom=readDetailService.queryComment(id,pageNumber);
 		return listCom;
+	}
+	
+	/**
+	 * 长评的具体实现
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("longcom")
+	@ResponseBody
+	public List<Map<String, Object>> longcom(HttpServletRequest request){
+		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
+		String id=request.getParameter("id");
+		List<Map<String, Object>> longcom=readDetailService.queryLong(id, pageNumber);
+		return longcom;
 	}
 	
 	/**
@@ -340,5 +361,57 @@ public class ReadDetailController extends BaseController{
 	@ResponseBody
 	public String tologin(){
 		return "";
+	}
+	
+	/**
+	 * 查询登陆人是否写过长评
+	 * @return returncode;
+	 */
+	@RequestMapping("queryLoginLong")
+	@ResponseBody
+	public Map<String, Object> queryLoginLong(HttpServletRequest request){
+		String book_id=request.getParameter("book_id");
+		Map<String, Object> map=new HashMap<String, Object>();
+		Map<String, Object> user=getUserInfo();
+		List<Map<String, Object>> list=readDetailService.queryLoginLong(user.get("id").toString(),book_id);
+		if(list.size()>0){
+			map.put("returncode", "yes");
+			map.put("list", list);
+		}else{
+			map.put("returncode", "no");
+		}
+		return map;
+	}
+	
+	/**
+	 * 写长评
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("insertlong")
+	@ResponseBody
+	public String insertlong(HttpServletRequest request){
+		String returncode="";
+		String book_id=request.getParameter("book_id");
+		String score=request.getParameter("score");
+		String content=request.getParameter("content");
+		String title=request.getParameter("title");
+		if(StringUtils.isEmpty(book_id)||
+		   StringUtils.isEmpty(score)||
+		   StringUtils.isEmpty(content)||
+		   StringUtils.isEmpty(title)){
+		   returncode="NO";
+		}else{
+		   Map<String, Object> map=new HashMap<String, Object>();
+		   Map<String, Object> user=getUserInfo();
+		   map.put("book_id", book_id);
+		   map.put("score", score);
+		   map.put("content", content);
+		   map.put("title", title);
+		   map.put("is_long", "1");
+		   map.put("writer_id", user.get("id"));
+		   returncode=readDetailService.insertlong(map);
+		}
+		return returncode;
 	}
 }
