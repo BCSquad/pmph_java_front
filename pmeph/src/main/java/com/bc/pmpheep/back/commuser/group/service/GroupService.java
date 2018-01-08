@@ -192,5 +192,13 @@ public interface GroupService {
 	 * 获取小组名称
 	 */
 	public Map<String,Object> queryGroup(Map<String,Object> map);
+	/**
+	 * 添加发送的小组信息
+	 */
+	public int addMessage(Map<String,Object> map);
 	
+	/**
+	 * 添加小组文件
+	 */
+	public int addFile(Map<String,Object> map);
 }

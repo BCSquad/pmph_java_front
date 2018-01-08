@@ -334,7 +334,15 @@ public class GroupServiceImpl implements GroupService{
 		return this.groupDao.groupMap(map);
 	}
 
+	@Override
+	public int addMessage(Map<String, Object> map) {
+		return this.groupDao.addMessage(map);
+	}
 
+	@Override
+	public int addFile(Map<String, Object> map) {
+		return this.groupDao.addFile(map);
+	}
 
 	
 }

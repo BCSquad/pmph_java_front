@@ -22,6 +22,7 @@
     <script src="<%=path %>/resources/comm/jquery/jquery.js"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/layer/layer.js"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js" type="text/javascript"></script>
     <script src="<%=path %>/resources/commuser/mygroup/group.js" type="text/javascript"></script> 
 </head>
 <body>
@@ -34,7 +35,7 @@
                 <div class="div_img70"><img src="" class="img1" alt="小组图像"/></div>
                 <div class="top_content">
                     <span class="span1">${groupMap.textbook_name}</span>
-                    <input id="groupId" type="hidden" value="${groupMap.id}"/>
+                    <input id="groupId" name="group_id" type="hidden" value="${groupMap.id}"/>
                     <div class="top_content2">
                         <div class="top_content22">
                             <img src="${ctx}/statics/image/zjyh.png">
@@ -46,6 +47,7 @@
                         <div class="top_content33">
                             <img src="${ctx}/statics/image/scz.png"/>
                         </div>
+                        <span id="scwj1" class="scmsg">上传文件</span>
                     </div>
                 </div>
                 <div class="top_tj">
@@ -75,7 +77,7 @@
 						<div class="chat_items other">
                             <div class="chat_item1">
                                 <div class="div_item1_img">
-                                    <img src="<%=path %>/statics/image/tx.png"/>
+                                    <img src="<%=path %>${list.avatar}"/>
                                     <text>${list.member_id}</text>
                                 </div>
                                 <div class="arrows"></div>
@@ -93,7 +95,7 @@
                         	<div class="chat_items mine">
                             <div class="chat_item1">
                                 <div class="div_item1_img">
-                                    <img src="<%=path %>/statics/image/tx.png"/>
+                                    <img src="<%=path %>${list.avatar}"/>
                                     <text>${list.member_id}</text>
                                 </div>
                                 <div class="arrows"></div>
@@ -110,8 +112,9 @@
                     </c:forEach>
                      </div>
                     <div class="iframe2">
-                        <textarea  id="msgContent" type="text" placeholder="请输入消息内容,按回车键发送" ></textarea>
-                        <div class="div_btn"><span id="sendMsg" class="button">发送</span></div>
+                         <textarea  id="msgContent" type="text" placeholder="请输入消息内容,按回车键发送" ></textarea>
+                        <div class="div_btn"><span id="sendMsg" class="button">发送</span></div> 
+                     
                     </div>
                 </div>
             </div>

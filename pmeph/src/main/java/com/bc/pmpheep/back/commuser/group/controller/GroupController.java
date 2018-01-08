@@ -233,6 +233,55 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
     	groupService.deleteFile(id,groupId,fileId,thisId);
     	return true;
     }
+    
+    /**
+     * 发送消息
+     */
+    @RequestMapping("/sendMessage")
+    @ResponseBody
+    public String sendMessage(HttpServletRequest request,
+    		HttpServletResponse response){
+    	String Msg = "";
+    	Map<String, Object> userMap = this.getUserInfo();
+    	String group_id = request.getParameter("group_id");
+    	String msg_content = request.getParameter("msg_content");
+    	Map<String, Object> queryMap = new HashMap<String,Object>();
+    	queryMap.put("group_id", group_id);
+    	queryMap.put("member_id", userMap.get("id"));
+    	queryMap.put("msg_content", msg_content);
+    	int count = this.groupService.addMessage(queryMap);
+    	if(count>0){
+    		Msg = "OK";
+    	}
+    	return Msg;
+    }
+    
+    /**
+     * 添加附件
+     */
+    @RequestMapping("/uploadFile")
+    @ResponseBody
+    public String uploadFile(HttpServletRequest request,
+    		HttpServletResponse response){
+    	String Msg = "";
+    	Map<String, Object> userMap = this.getUserInfo();
+    	String syllabus_id = request.getParameter("syllabus_id");
+    	String syllabus_name = request.getParameter("syllabus_name");
+    	String group_id = request.getParameter("group_id");
+    	Map<String, Object> queryMap = new HashMap<String,Object>();
+    	queryMap.put("group_id", group_id);
+    	queryMap.put("member_id", userMap.get("id"));
+    	queryMap.put("msg_content", userMap.get("nickname")+"上传了"+syllabus_name);
+    	queryMap.put("file_id", syllabus_id);
+    	queryMap.put("file_name", syllabus_name);
+    	int count = this.groupService.addMessage(queryMap);
+    	count += this.groupService.addFile(queryMap);
+    	if(count>0){
+    		Msg = "OK";
+    	}
+    	return Msg;
+    }
+    
 }
 
 

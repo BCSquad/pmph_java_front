@@ -292,4 +292,14 @@ public interface GroupDao {
 	 * 查询小组信息
 	 */
 	public Map<String,Object> groupMap(Map<String,Object> map);
+	
+	/**
+	 * 添加发送的小组信息
+	 */
+	public int addMessage(Map<String,Object> map);
+	
+	/**
+	 * 添加小组文件
+	 */
+	public int addFile(Map<String,Object> map);
 }

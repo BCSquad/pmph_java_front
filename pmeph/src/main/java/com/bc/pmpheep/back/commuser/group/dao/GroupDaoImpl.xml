@@ -361,7 +361,8 @@
 	
 	<!-- 查询小组消息 -->
 	<select id="messageList" parameterType="java.util.Map" resultType="java.util.Map">
-		select * from pmph_group_message where group_id = #{group_id} ORDER BY gmt_create asc
+		select t1.*,t2.avatar from pmph_group_message t1 left join writer_user t2 on t1.member_id = t2.id where group_id = '630' 
+			and t2.is_writer = '1' ORDER BY t1.gmt_create asc
 	</select>
 	<!-- 查询小组成员 -->
 	<select id="memberList" parameterType="java.util.Map" resultType="java.util.Map">
@@ -387,4 +388,14 @@
 		select t1.*,t2.textbook_name from pmph_group t1 left join textbook t2 
 		on t1.book_id = t2.id where t1.id = #{group_id}
 	</select>
+	<!-- 添加发送的小组信息 -->
+	<insert id="addMessage" parameterType="java.util.Map">
+		insert pmph_group_message(group_id,member_id,msg_content) 
+			values(#{group_id},#{member_id},#{msg_content})
+	</insert>
+	<!-- 添加小组文件 -->
+	<insert id="addFile" parameterType="java.util.Map">
+		insert pmph_group_message(group_id,member_id,file_id,file_name) 
+			values(#{group_id},#{member_id},#{file_id},#{file_name})
+	</insert>
 </mapper>
