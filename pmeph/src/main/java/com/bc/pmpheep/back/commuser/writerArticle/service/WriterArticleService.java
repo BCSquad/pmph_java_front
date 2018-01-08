@@ -9,7 +9,7 @@ public interface WriterArticleService {
 	 * 插入作家的随笔文章
 	 * @param map
 	 */
-	public String insertWriteArticle(Map map,String UEContent);
+	public Map<String, Object> insertWriteArticle(Map map,String UEContent);
 	
 	/**
 	 * 更改写文章的状态 
@@ -29,5 +29,5 @@ public interface WriterArticleService {
 	 * @param map
 	 */
 	
-	public String updateDelWriter(Map<String, Object> map);
+	public int updateDelWriter(Map<String, Object> map);
 }

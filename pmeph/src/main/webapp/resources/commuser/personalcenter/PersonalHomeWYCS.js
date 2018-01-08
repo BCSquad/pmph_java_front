@@ -49,6 +49,10 @@ function listoction(thisclicked,s){
 	window.location.href=contextpath+'personalhomepage/tohomepage.action?pagetag=wycs&bookname='+$("#wdsbssk").val()+"&&isMine="+s+"&pageinfo1="+$(thisclicked).attr('id');
 }
 
+
+
+
+
 /**
  * 查看选题
  * @param id

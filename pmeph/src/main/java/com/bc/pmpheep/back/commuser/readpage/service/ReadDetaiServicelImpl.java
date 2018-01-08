@@ -205,10 +205,6 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		if(count>0){
 			returncode="OK";
 			personalService.saveUserTrendst("wdjc", map.get("table_trendst_id").toString(), 0, map.get("user_id").toString());
-			
-			
-			
-			
 		}
 		return returncode;
 	}

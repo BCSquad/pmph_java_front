@@ -53,8 +53,8 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView listMyGroup(Integer pageNumber,Integer pageSize )  {
     	Map<String, Object> map = this.getUserInfo();
-    	//Long userId =  Long.parseLong(map.get("id").toString());
-        Long userId = 10226L;
+    	Long userId =  Long.parseLong(map.get("id").toString());
+        //Long userId = 10226L;
     	if(null == pageNumber || pageNumber < 1){
     		pageNumber = 1 ;
     	}

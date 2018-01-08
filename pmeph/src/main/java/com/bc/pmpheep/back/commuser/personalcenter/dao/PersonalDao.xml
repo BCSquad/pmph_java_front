@@ -573,11 +573,12 @@ AND a.online_progress IN (2, 3)
 			 ,cc.title AS sbwz_title
 			 ,cc.summary AS sbwz_summary
 			 ,cc.auth_status AS sbwz_auth_status
-		
+			 ,cc.is_deleted AS sbwz_is_deleted
+			 ,cc.mid AS sbwz_mid
 			 from cms_content cc
 			 inner join cms_category ct on cc.category_id = ct.id and ct.category_name = '医学随笔'
 			 where cc.author_id=#{parameter.logUserId}
-				  and cc.is_deleted !='1'
+				  <!-- and cc.is_deleted !='1' -->
 		order by cc.gmt_create
 		)sbwz
 		on t.table_name = sbwz.sbwz_type and t.table_id=sbwz.sbwz_id 

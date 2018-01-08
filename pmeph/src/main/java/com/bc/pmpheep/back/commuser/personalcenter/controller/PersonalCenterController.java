@@ -1,5 +1,8 @@
 package com.bc.pmpheep.back.commuser.personalcenter.controller;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.text.ParseException;
@@ -18,12 +21,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService;
 import com.bc.pmpheep.back.commuser.personalcenter.bean.PersonalNewMessage;
 import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.template.service.TemplateService;
 import com.bc.pmpheep.back.util.MD5;
 import com.bc.pmpheep.general.controller.BaseController;
+import com.bc.pmpheep.general.pojo.Message;
+import com.bc.pmpheep.general.service.MessageService;
 
 //首页controller
 @Controller
@@ -38,6 +44,13 @@ public class PersonalCenterController extends BaseController {
     @Autowired
     @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
     private PersonalService personalService;
+    
+    @Autowired
+	private MessageService messageService;
+    
+    @Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService")
+	private ArticleSearchService articleSearchService;
     
 
     @RequestMapping("/tohomepage")//个人中心动态
@@ -55,7 +68,8 @@ public class PersonalCenterController extends BaseController {
 
         Map<String, Object> paraMap = new HashMap<String, Object>();
         String contextpath = request.getContextPath()+"/";
-		paraMap.put("logUserId", getUserInfo().get("id"));
+        String logUserId = getUserInfo().get("id").toString();
+		paraMap.put("logUserId", logUserId);
 		//数据总数初始化
 		int count = 0;
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<Map<String,Object>>(pageNum,pageSize);
@@ -193,6 +207,7 @@ public class PersonalCenterController extends BaseController {
     	
     	//总页数
     	Integer maxPageNum = (int) Math.ceil(1.0*count/pageSize);
+    	mv.addObject("logUserId",logUserId);
     	mv.addObject("listCount",count);
     	mv.addObject("maxPageNum",maxPageNum);
     	mv.addObject("pagetag",pagetag);
@@ -466,5 +481,33 @@ public class PersonalCenterController extends BaseController {
         modelAndView.addObject("listbookjoins", listbookjoins);*/
 	}
 
+	
+	@SuppressWarnings("deprecation")
+	@RequestMapping(value="getFirstImgByMid")
+	@ResponseBody
+	public String getFirstImgByMid(@RequestParam(value="mid",defaultValue="")String mid,HttpServletRequest request,HttpServletResponse response){
+		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
+		String img_url = basePath+"statics/image/564f34b00cf2b738819e9c35_122x122!.jpg";
+		if (!"".equals(mid)) {
+			Message message=messageService.get(mid);
+			if(message!=null){
+				List<String> imglist = articleSearchService.getImgSrc(message.getContent());
+			    if(imglist.size()>0){
+			    	img_url = imglist.get(0);
+			    	if (img_url.length()>0) {
+			    		img_url=img_url.substring(img_url.indexOf("/ueditor/jsp/upload/image"), img_url.length());
+			    		//本地项目名和相对路径不一定一样 此处文章图片会保存到应用发布地址 如 pmeph1 而相对路径是pmeph 此处需拼接回真是应用的发布地址
+			    		String realpath = request.getRealPath("/");//D:\Program Files\apache-tomcat-7.0.78\webapps\pmeph1\
+			    		realpath = realpath.substring(0,realpath.length()-1);
+			    		realpath=realpath.substring(realpath.lastIndexOf("\\"), realpath.length());
+			    		img_url = realpath+img_url;
+					}
+			    	
+			    	
+			    }
+			}
+		}
+		return img_url;
+	}
 	
 }

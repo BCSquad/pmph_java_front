@@ -6,14 +6,16 @@
 	
 	<!-- 写文章插入数据 -->
 	<insert id="insertWriteArticle" parameterType="java.util.Map"  useGeneratedKeys="true" keyProperty="table_trendst_id">
-		insert into cms_content (mid,parent_id,category_id,title,author_type,author_id,is_staging,path)
-		values(#{mid},#{parent_id},#{category_id},#{title},#{author_type},#{author_id},#{is_staging},#{path})
+		insert into cms_content (mid,parent_id,category_id,title,author_type,author_id,is_staging,path,summary,auth_status)
+		values(#{mid},#{parent_id},#{category_id},#{title},#{author_type},#{author_id},#{is_staging},#{path},#{summary},0
+		)
 	</insert>
 	
 	<!-- 更新文章状态 -->
-	<update id="updateIsStaging"  parameterType="java.util.Map">
+	<update id="updateIsStaging"  parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="table_trendst_id">
 		update cms_content set 
 		mid = #{mid},
+		summary=#{summary},
 		parent_id = #{parent_id},
 		category_id = #{category_id},
 		title = #{title},
@@ -21,6 +23,7 @@
 		author_id = #{author_id},
 		is_staging = #{is_staging}, 
 		path = #{path}, 
+		auth_status=0,
 		gmt_update = sysdate()
 		where mid = #{msg_id}
 	</update>
@@ -29,13 +32,14 @@
 	<update id="updateDelWriter"  parameterType="java.util.Map">
 		update cms_content set 
 		is_deleted = 1
-		gmt_update = sysdate()
+		<!-- gmt_update = sysdate() -->
 		where id = #{writerid}
 	</update>
 	
 	
 	<select id="queryWriteArticleInfo" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT
+			id as atrticle_id,
 			mid,
 			title,
 		max(gmt_update) 
@@ -43,9 +47,9 @@
 			cms_content
 		<where>
 		parent_id = 0
-		AND category_id = 1
+		AND category_id = #{category_id}
 		AND author_type = 2
-		AND is_staging = 0
+		<!-- AND is_staging = 0 -->
 		AND is_deleted = 0
 		AND path = 0
 		<if test="userId != null and userId != '' ">
