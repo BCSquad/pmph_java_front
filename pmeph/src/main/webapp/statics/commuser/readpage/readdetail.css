@@ -622,7 +622,7 @@
 
 .block .item {
     width: 890px;
-    height: 110px;
+    margin-top: 25px;
 }
 
 .block .item .item_title {
@@ -636,7 +636,15 @@
     font-family: MicrosoftYaHei;
     letter-spacing: 1px;
     color: #666666;
-    margin-top: 10px;
+    overflow: hidden;
+}
+
+.longcom_title{
+	width: 890px;
+	font-family: MicrosoftYaHei;
+	font-size: 16px;
+	line-height: 45px;
+	color: #3377aa;
 }
 
 .rightarea {
@@ -851,11 +859,11 @@
 }
 
 .upbutten{
-	background-color: #70D68A;
-	border: none;
+	/* background-color: #70D68A;
+	border: none; */
 	cursor: pointer;
-	border-radius:3px;
-	color: white;
+	/* border-radius:3px;
+	color: white; */
 }
 
 .video-btn{
