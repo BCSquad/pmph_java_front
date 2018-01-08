@@ -56,10 +56,11 @@
                              <div class="scorestar1" id="score4"></div>
                              <div class="scorestar1" id="score5"></div>
 	                    </div>
+	                    <input type="hidden" id="last_score">
                 </div>
 			    <div class="">
 			        <div class="longcomtitle">长评标题：</div>
-			        <input type="text" class="sxy-txt2" id="TitleValue" name="titleValue" placeholder="输入长评标题请限30字以内.."  oninput="if(value.length>30){value=value.slice(0,30)}" value="${title}" />
+			        <input type="text" class="sxy-txt2" id="TitleValue" name="titleValue" placeholder="输入长评标题请限30字以内.."  oninput="if(value.length>30){value=value.slice(0,30)}" />
 			    </div>
 			    <div class="sxy-div-content4">
 			        <div style="height:10px;"></div>
@@ -68,7 +69,7 @@
 				<form id="form1" >
 			    <div class="sxy-div-content">
 			        <div style="height:auto !important;min-height:600px;height:600px;width: 880px">
-			            <script type="text/plian" id="mText" style="width: 880px; height:478px;scorll-y:true;position:absolute;margin-left:0px;"></script>
+			           <script type="text/plian" id="mText" style="width: 880px; height:478px;scorll-y:true;position:absolute;margin-left:0px;"></script>
 			           <input type="hidden" id="UEContent" name="UEContent"  value="" />
 			        </div>
 			    </div>
@@ -76,10 +77,8 @@
 			        <img style="width: 880px;" alt="" src="${ctx}/statics/image/_cupline.jpg"/>
 			    </div>
 			    <div id="sxy-return">
-			    <input type="hidden" id="msg_id" name="msg_id" value="${mid}" />
 			    	<input type="hidden" id="btn_type" name="btnType"  />
-			    	<input type="hidden" id="submitTypeCode" name="submitTypeCode" value="0" />
-			        <input class="sxy-btn" type="button" value="发表" onclick="btntype(0)" />
+			        <input class="sxy-btn" type="button" value="发表" onclick="insertlong()" />
 			    </div>
 			    </form>
 			    <div id="content" hidden="true"></div>
@@ -168,19 +167,10 @@ $(document).ready(function(){
 		  $(this).css("background-position", "-183px -174px").prevAll().css("background-position", "-183px -174px");
 		  $(this).nextAll().css({"background-position": "-183px -153px"});
 		  var score=parseInt($(this).attr("id").substring(5))*2+'.0';
-		  $("#last_score").html(score);
+		  $("#last_score").val(score);
 	  }
 	  });
 });
-
-UE.getEditor('mText');
-if(('${UEContent}').length!=0){
-	var ue = UE.getEditor('mText');
-	ue.ready(function(){
-		ue.setContent('${UEContent}');
-	});
-	$("#submitTypeCode").val("1");
-}
 </script> 
 </html>
 </script>
