@@ -48,7 +48,7 @@ String contextpath=request.getContextPath();
 		                                <div class="tag">&gt;</div>
 		                                <a href="inforeport/toinforeport.action?id=${report.id }">
 		                                    <div class="inleft">${report.title}</div>
-		                                    <div style="float: left;width: 29px;height: 15px;background-image: url(/pmeph3/statics/image/css_sprites.png); background-position: -45px -212px;margin: 10px;back"></div>
+		                                    <div style="float: left;width: 29px;height: 15px;background-image: url(${ctx}/statics/image/css_sprites.png); background-position: -45px -212px;margin: 10px;back"></div>
 		                                </a>
 		                                <div class="inright" >
 		         
@@ -72,7 +72,7 @@ String contextpath=request.getContextPath();
 		                  <div class="itemimg" style="width:126px;height:126px;margin:20px auto 0px;text-align: center">
 		                     <img alt="" src="${book.image_url=='DEFAULT'? 'statics/image/564f34b00cf2b738819e9c35_122x122!.jpg':book.image_url }" >
 		                  </div>
-                 	<div class="bookname"><a href="readdetail/todetail.action?id=${book.bookId }">${book.textbook_name }</a> </div>
+                 	<div class="bookname"><a href="readdetail/todetail.action?id=${book.bookId }">${book.bookname }</a> </div>
                </div>
                
                </c:forEach>
@@ -84,7 +84,7 @@ String contextpath=request.getContextPath();
                  <div class="item select"  id="comment" onclick="comments('${notice.material_id }')">
                                                                              精彩书评
                  </div>
-                 <div class="item noselect"  id="smallvideo" onclick="smallvideos()">
+                 <div class="item noselect"  id="smallvideo" onclick="smallvideos('${notice.material_id }')">
                                                                               微视频                                                       
                  </div>
              </div>

@@ -87,6 +87,9 @@ public class CommunityController {
 		map.put("comments", comments);
 		return map;
 	}
+	/**
+	 * 更多精彩评论
+	 */
 	@RequestMapping("/morecomments")
 	public ModelAndView getMoreComments(HttpServletRequest req){
 		Map<String,Object> map=new HashMap<String, Object>();
@@ -94,4 +97,13 @@ public class CommunityController {
 		return new ModelAndView("commuser/community/wanderfaulbookcomments");
 	}
 	
+	/**
+	 * 更多精彩微视频
+	 */
+	@RequestMapping("/morevideo")
+	public ModelAndView getMoreVideo(HttpServletRequest req){
+		Map<String,Object> map=new HashMap<String, Object>();
+		
+		return new ModelAndView("commuser/community/wanderfaulvideos");
+	}
 }

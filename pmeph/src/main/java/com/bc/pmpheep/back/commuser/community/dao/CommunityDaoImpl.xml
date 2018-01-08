@@ -32,31 +32,33 @@
        where  
        		cc.material_id=#{materialId} and ccg.category_name='快报管理'
       order by 
-            gmt_create desc  
+            cc.gmt_create desc  
      limit 0,4
      </select>
      
      <!--根据教材id查询本套教材的图书  -->
      <select id="queryTextBookList" parameterType="map" resultMap="baseMap">
         select 
-            tb.id,material_id,tb.textbook_name,tb.gmt_create,b.image_url,b.id as bookId
+           material_id,b.bookname,b.gmt_create,b.image_url,b.id as bookId
         from 
-            textbook tb left join book b on tb.textbook_name=b.bookname
+            book b 
         where 
-            tb.material_id=#{materialId} and tb.is_published>0
+            b.material_id=#{materialId}
         order by 
-            tb.sort
+            b.sort
         limit 0,10
      </select>
      
      <!--查询社区主页精选书评  -->
      <select id="querySomeComment" parameterType="map" resultMap="baseMap">
-        select c.*,bk.bookname,w.realname  from book_user_comment c left join book bk on c.book_id=bk.id   left join  writer_user w on c.writer_id=w.id
+        select c.*,bk.bookname,w.realname  
+        from book_user_comment c left join book bk on c.book_id=bk.id   
+        left join  writer_user w on c.writer_id=w.id
 		where c.book_id in(
-			select b.id from material m left join textbook t on m.id=t.material_id
-			left join book b  on t.textbook_name=b.bookname 
+			select b.id 
+			from material m left join book  b  on m.id=b.material_id
 			where m.id=#{materialId}
-		) and c.is_auth>0  and c.is_deleted=0
+		) and c.is_auth>0  and c.is_deleted=0 and c.is_long>0 and c.is_hide=0
 		ORDER BY
 		 c.score
 		limit 0,4
