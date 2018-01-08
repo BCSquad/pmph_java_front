@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.uncertainfieldcom.dao.TypeConfigDao">
+
+	<!-- 通过CmsCategory分类名称返回现数据库中该分类的主键id -->
+	<select id="queryCmsCategoryIdByCmsCategoryName" parameterType="String" resultType="String">
+		select id from cms_category where category_name = #{cmsCategoryName}
+	</select>
+	
+</mapper>
