@@ -35,24 +35,24 @@
 
 .top{
 	width: 100%;
-	height: 32px;
+	height: 26px;
 }
 
 .pic{
 	float: left;
-	width: 32px;
-	height: 32px;
+	width: 24px;
+	height: 24px;
 }
 
 .nameAndTime{
 	float: left;
 	margin-left: 10px;
 	width: 600px;
-	height: 32px;
+	height: 24px;
 }
 
 .name{
-	height:28px;
+	height:24px;
 	width:auto;
 	font-family: MicrosoftYaHei;
 	font-size: 13px;
@@ -60,7 +60,6 @@
 	font-stretch: normal;
 	letter-spacing: 0px;
 	color: #3377aa;
-	padding-top: 4px;
 	float:left;
 }
 
@@ -68,13 +67,13 @@
 	margin-left:8px;
 	height:22px;
 	width:auto;
-	padding-top: 10px;
+	padding-top: 6px;
 	float:left;
 }
 
 .time{
 	margin-left:8px;
-	height:28px;
+	height:24px;
 	width:auto;
 	font-family: MicrosoftYaHei;
 	font-size: 12px;
@@ -82,7 +81,6 @@
 	font-stretch: normal;
 	letter-spacing: 0px;
 	color: #5b5b5b;
-	padding-top: 4px;
 	float:left;
 }
 
@@ -140,7 +138,6 @@
 	font-weight: normal;
 	letter-spacing: 0px;
 	color: #5b5b5b;
-	cursor: pointer;
 }
 
 .pageDiv{

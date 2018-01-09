@@ -574,11 +574,11 @@ a{
 		    		<c:when test="${status.last==false}">
 		  				<div class="${(st.index+1)%5 == 1? 'item1':'item1 item11'}" >
 				            <div><img src="${ctx}/statics/pictures/head.png" class="img2"></div>
-				            <div class="div_txt1">${friend.username}</div>
+				            <div class="div_txt1">${friend.realname}</div>
 				            <div class="div_txt2">${friend.position}</div>
 				            <div class="div_txt3">
 				                <div  class ="showTalk" id="${friend.id}" >私信</div>
-				                <input type="hidden" id="t_${friend.id}" value= "${friend.username}" />
+				                <input type="hidden" id="t_${friend.id}" value= "${friend.realname}" />
 				            </div>
 		            	</div>
 		    		</c:when>
@@ -586,11 +586,11 @@ a{
 			  			<div class="${(st.index+1)%5 == 1? 'item1':'item1 item11'}" style="margin-right: 20px">
 				            <%-- <div><img src="${ctx}${friend.avatar}" class="img2"></div> --%>
 				            <div><img src="${ctx}/statics/pictures/head.png" class="img2"></div>
-				            <div class="div_txt1">${friend.username}</div>
+				            <div class="div_txt1">${friend.realname}</div>
 				            <div class="div_txt2">${friend.position}</div>
 				            <div class="div_txt3">
 				                <div  class ="showTalk" id="${friend.id}" >私信</div>
-				                <input type="hidden" id="t_${friend.id}" value= "${friend.username}" />
+				                <input type="hidden" id="t_${friend.id}" value= "${friend.realname}" />
 				            </div>
 			            </div>
 		            </c:otherwise>

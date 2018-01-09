@@ -7,11 +7,19 @@ function submit(){
 		dataType:"json",
 	    success: function(code) {
 		    if(code=='OK'){
-		    	window.location.href=contextpath+"survey/surveyList.action";
-		    }
+		      
+		    	message.success("提交成功");
+		    	setTimeout("toList()",1000);
+		    }else{
+		    	
+            	message.error("提交失败");
+            	setTimeout("toList()",1000);
+            }
 	    }
 	});
 }
 
-
+function toList(){
+	window.location.href=contextpath+"survey/surveyList.action";
+}
 

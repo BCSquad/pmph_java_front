@@ -69,6 +69,7 @@ public class SurveyController extends BaseController{
 		}
 		
 		mv.addObject("listSesult",listResult);
+		mv.addObject("surveyId",surveyId);
 		mv.addObject("listSize",listResult.size());
 		mv.setViewName("commuser/survey/writeSurvey");
 		return mv;
@@ -81,16 +82,20 @@ public class SurveyController extends BaseController{
 		Map<String, Object> writerUser = this.getUserInfo();
 		//Long userId = new Long(String.valueOf(writerUser.get("id")));
 		long userId = 1L;
+		
+		String surveyId = request.getParameter("surveyId");
 		//先获取所有单选的name集合
 		String radios[] = request.getParameterValues("radioValues");
 		//单选问题id集合
 		String questionIds[] = request.getParameterValues("questionIds");
-		Map<String,Object> map = new HashMap<String,Object>();
-		Map<String,Object> map1 = new HashMap<String,Object>();
-		Map<String,Object> map2 = new HashMap<String,Object>();
-		map.put("userId", userId);
-		map1.put("userId", userId);
-		map2.put("userId", userId);
+		Map<String,Object> map = new HashMap<String,Object>(); //存放单选
+		Map<String,Object> map1 = new HashMap<String,Object>();//存放多选
+		Map<String,Object> map2 = new HashMap<String,Object>();//存放输入框
+		Map<String,Object> map3 = new HashMap<String,Object>();//存放文本框
+		map.put("userId", userId);   map.put("surveyId", surveyId);
+		map1.put("userId", userId);  map1.put("surveyId", surveyId);
+		map2.put("userId", userId);  map2.put("surveyId", surveyId);
+		map3.put("userId", userId);  map3.put("surveyId", surveyId);
 		//遍历单选name
 		for(int i=0;i<radios.length;i++){
 				//取出每一道单选题的答案
@@ -143,6 +148,19 @@ public class SurveyController extends BaseController{
 				map2.put("inputValue", inputValue);
 			}
 			surveyService.saveInputAnswer(map2);
+		}
+		
+		//获取所有文本框的name集合
+		String textValues[] = request.getParameterValues("textValues");
+		//输入框问题id集合
+		String textQuestionIds[] = request.getParameterValues("textQuestionIds");
+		for(int x=0;x<inputQuestionIds.length;x++){
+			map3.put("questionId", textQuestionIds[x]);
+			for(int y=0;y<textValues.length;y++){
+				String textValue = request.getParameter(textValues[y]);
+				map3.put("inputValue", textValue);
+			}
+			surveyService.saveInputAnswer(map3);
 		}
 		
 		String code = "OK";
