@@ -510,4 +510,84 @@ public class PersonalCenterController extends BaseController {
 		return img_url;
 	}
 	
+	
+	/**
+	 * 跳转到某一个问卷页面
+	* @Title: writeSurvey 
+	* @Description: TODO
+	* @param @param request
+	* @param @return    设定文件 
+	* @return ModelAndView    返回类型 
+	* @throws
+	 */
+	
+		@RequestMapping(value="/queryMySurvey")
+		public ModelAndView queryMySurvey(HttpServletRequest request){
+			ModelAndView mv = new ModelAndView();
+			String surveyIdStr = request.getParameter("surveyId");
+			long surveyId = new Long(surveyIdStr);
+			//查询该调查包含的所有题目
+			List<Map<String,Object>> list = personalService.getSurvey(surveyId);
+			List<Map<String,Object>> listResult = new ArrayList<Map<String,Object>>();
+			if(list.size()>0){
+				//遍历题目
+				for(Map<String,Object> question : list){
+					//查询每一个单选和多选题对应的选项
+					if(question.get("type").equals(1)||question.get("type").equals(2)){
+						String questionIdStr = question.get("id").toString();
+						if(null!=questionIdStr&&!questionIdStr.equals("")){
+							long questionId = Long.valueOf(questionIdStr).longValue();
+							List<Map<String,Object>> listOptions = personalService.getOptions(questionId);
+							
+							//查询单选答案
+							  String answer = personalService.getAnswers(questionId);
+							//查询多选答案
+							  String che = personalService.getCheckAnswers(questionId);
+							
+							  boolean flag=false;
+							  if (null!=che&&""!=che) {
+								  String[] checkAnswer=che.split(",");
+								  for (String ch : checkAnswer) {
+									  for (Map<String, Object> opt : listOptions) {
+										 
+										if (ch.equals(opt.get("id").toString())) {
+											flag=true;
+											opt.put("flag", flag);
+											
+										}else {
+											flag=false;
+										} 
+									}
+								}
+								 
+								  
+							}
+							
+							question.put("listOptions", listOptions);
+							question.put("answer", answer);
+							listResult.add(question);
+						}
+					}else if(question.get("type").equals(3)){
+						//查询填空答案
+						String questionIdStr = question.get("id").toString();
+						if(null!=questionIdStr&&!questionIdStr.equals("")){
+							long questionId = Long.valueOf(questionIdStr).longValue();
+							 String inp = personalService.getInpAnswers(questionId);
+							question.put("inp", inp);
+							listResult.add(question);
+						}
+					}else{
+						listResult.add(question);
+					}
+					
+				}
+			}
+			
+			mv.addObject("listSesult",listResult);
+			mv.addObject("listSize",listResult.size());
+			mv.setViewName("commuser/personalcenter/queryMySurvey");
+			return mv;
+		}
+
+	
 }

@@ -2,14 +2,17 @@
 <link rel="stylesheet" href="$!{contextpath}statics/commuser/personalcenter/mySurvey.css" type="text/css">
 <script src="$!{contextpath}resources/commuser/personalcenter/mySurvey.js"></script>
 
+
 <div class="blank_space"></div>
 <div class="listContent">
 	<div class="blank_space"></div>
+	#foreach($c in $!{List_map})
         <div class="email_content">
-	            <div class="email_right"><a href="">&nbsp;&nbsp;&nbsp;&nbsp;企业问卷4已通过</a></div>
+	            <div class="email_right">
+		            <a target="_blank" href="$!{contextpath}personalhomepage/queryMySurvey.action?surveyId=$!{c.id}">
+		            	&nbsp;&nbsp;&nbsp;&nbsp;$!{c.title}已通过
+		            </a>
+	            </div>
         </div>
-        
-        <div class="email_content">
-	            <div class="email_right"><a href="">&nbsp;&nbsp;&nbsp;&nbsp;企业员工满意度问卷调查</a></div>
-        </div>
+    #end    
 </div>
