@@ -98,8 +98,19 @@ $(function () {
         }
     });
 
-
+     morecontent();
+    
 });
+
+function morecontent(){
+	var a=document.getElementsByName("item_content");
+	for(var i=0;i<a.length;i++){
+		if((a[i].offsetHeight)>45){
+			$("#"+i+"more").show();
+			$("#"+i+"con").css({"height":"45px"});
+		}
+	}
+}
 
 //点击取消上传视频弹窗
 function hidevideo(){
@@ -125,7 +136,7 @@ function changepage() {
             $(".morecom").hide();
             $(".moreothers").show();
             if (json.length < 2) {
-                $(".moreothers").html('没有更多了~~~');
+                $("#moreothers").html('没有更多了~~~');
             }
             var str = '';
             $.each(json, function (i, n) {
@@ -182,6 +193,82 @@ function changepage() {
     });
 
 };
+
+//长评加载更多
+function longcom(){
+    $(".morecom").show();
+    $(".moreothers").hide();
+    var json = {
+        pageNumber: $("#longstart").val(),
+        id: $("#book_id").val(),
+    };
+    $.ajax({
+        type: 'post',
+        url: contextpath + 'readdetail/longcom.action?',
+        async: false,
+        dataType: 'json',
+        data: json,
+        success: function (json) {
+            $(".morecom").hide();
+            $(".moreothers").show();
+            if (json.length < 2) {
+                $("#longothers").html('没有更多了~~~');
+            }
+            var str = '';
+            $.each(json, function (i, n) {
+                $("#start").val(n.start);
+                str += '<div class="item"><div class="item_title">'
+                    + '<div style="float: left;"><img src="';
+                if (n.avatar == '' || n.avatar == 'DEFAULT' || n.avatar == null) {
+                    str += contextpath + 'statics/image/rwtx.png';
+                } else {
+                    str += n.avatar;
+                }
+                str += '" class="picturesize"/></div><div style="float: left;margin-left: 10px;margin-top: 5px;">' +
+                    n.nickname
+                    + '</div><div style="float: left;margin-left: 10px;">';
+                if (n.score <= 3) {
+                    str += '<span class="rwtx1"></span>'
+                        + '<span class="rwtx2"></span>'
+                        + '<span class="rwtx2"></span>'
+                        + '<span class="rwtx2"></span>'
+                        + '<span class="rwtx2"></span>'
+                } else if (n.score <= 5) {
+                    str += '<span class="rwtx1"></span>'
+                        + '<span class="rwtx1"></span>'
+                        + '<span class="rwtx2"></span>'
+                        + '<span class="rwtx2"></span>'
+                        + '<span class="rwtx2"></span>'
+                } else if (n.score <= 7) {
+                    str += '<span class="rwtx1"></span>'
+                        + '<span class="rwtx1"></span>'
+                        + '<span class="rwtx1"></span>'
+                        + '<span class="rwtx2"></span>'
+                        + '<span class="rwtx2"></span>'
+                } else if (n.score <= 9) {
+                    str += '<span class="rwtx1"></span>'
+                        + '<span class="rwtx1"></span>'
+                        + '<span class="rwtx1"></span>'
+                        + '<span class="rwtx1"></span>'
+                        + '<span class="rwtx2"></span>'
+                } else if (n.score == 10) {
+                    str += '<span class="rwtx1"></span>'
+                        + '<span class="rwtx1"></span>'
+                        + '<span class="rwtx1"></span>'
+                        + '<span class="rwtx1"></span>'
+                        + '<span class="rwtx1"></span>'
+                }
+                str += '</div><div class="date_content"><div class="date">'
+                    + n.gmt_create
+                    + '</div></div></div><div class="item_content">'
+                    + n.content
+                    + '</div><hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;"></div>';
+            });
+            $("#longcompage").append(str);
+        },
+    });
+}
+
 //新增评论
 function insert() {
     if ($("#content_book").val() == ''||$("#content_book").val() == null) {
@@ -305,7 +392,15 @@ function addmark() {
 
 //跳转到写文章页面
 function writeablut() {
-    location.href = contextpath + 'readdetail/todetail.action?state=write&&id=' + $("#book_id").val();
+	 $.ajax({
+			type:'post',
+			url:contextpath+'readdetail/tologin.action',
+			async:false,
+			dataType:'json',
+			success:function(json){
+				location.href = contextpath + 'readdetail/todetail.action?state=write&&id=' + $("#book_id").val();
+			}
+		});
 }
 
 //点击显示纠错弹窗
@@ -370,3 +465,14 @@ function correction() {
 	 
 }
 
+//展开功能
+function more(con,more){
+	if($("#"+more).html()=='...(展开)'){
+		$("#"+con).css({"height":""});
+		$("#"+more).html("(收起)");
+	}else{
+		$("#"+con).css({"height":"45px"});
+		$("#"+more).html("...(展开)");
+	}
+	
+}

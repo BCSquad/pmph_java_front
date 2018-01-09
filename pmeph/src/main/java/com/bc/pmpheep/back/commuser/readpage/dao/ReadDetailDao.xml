@@ -34,7 +34,7 @@
 	     b.avatar
 	     from book_user_comment t 
 	     left join book u on t.book_id=u.id
-	     left join writer_user b on b.id=t.writer_id where u.id=#{id}
+	     left join writer_user b on b.id=t.writer_id where u.id=#{id} and t.is_long=0
 	     <if test="start >= 0">
 	        limit #{start},2
 	     </if> 
@@ -72,25 +72,18 @@
 	</update>
 	
 	<!-- 根据书籍ID新增评论 -->
-	<insert id="insertComment" parameterType="java.util.Map">
+	<insert id="insertComment" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="table_trendst_id">
 	   insert into book_user_comment(
 	   book_id,
 	   writer_id,
 	   score,
-	   content,
-	   is_hide,
-	   is_auth,
-	   is_deleted
+	   content
 	   )values(
 	   #{book_id},
 	   #{writer_id},
 	   #{score},
-	   #{content},
-	   0,0,0)
+	   #{content})
 	</insert>
-	
-	
-	
 	<!-- 根据作者查询该作者写的书 -->
 	<select id="queryAuthorType" parameterType="java.util.Map" resultType="java.util.Map">
 	   select * from book where author like #{author} limit 0,9
@@ -148,7 +141,7 @@
 	    delete from book_user_mark where writer_id=#{writerId} and  favorite_id=#{favoriteId} and book_id=#{bookId}
 	</delete>
 	<!-- 新增图书纠错 -->
-	<insert id="correction" parameterType="java.util.Map">
+	<insert id="correction" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="table_trendst_id">
 	    insert into book_correction (
 	    book_id,
 	    user_id,
@@ -167,4 +160,42 @@
 	    #{attachment_name}
 	    );
 	</insert>
+	<!-- 新增图书长评 -->
+	<insert id="insertlong" parameterType="java.util.Map">
+	     insert into book_user_comment(
+	     book_id,
+	     writer_id,
+	     is_long,
+	     score,
+	     content,
+	     title
+	     )values(
+	     #{book_id},
+	     #{writer_id},
+	     #{is_long},
+	     #{score},
+	     #{content},
+	     #{title}
+	     );   
+	</insert>
+	<!-- 查询登录人是否写过长评 -->
+	<select id="queryLoginLong" parameterType="java.util.Map" resultType="java.util.Map">
+	    select * from book_user_comment where writer_id=#{writer_id} and book_id=#{book_id} and is_long=1
+	</select>
+	<!-- 查询长评 --> 
+	<select id="queryLong" parameterType="java.util.Map" resultType="java.util.Map">
+	    select
+	     t.content,
+	     t.score,
+	     t.title,
+	     t.gmt_create,
+	     b.nickname,
+	     b.avatar
+	     from book_user_comment t 
+	     left join writer_user b
+	     on t.writer_id=b.id where t.book_id=#{book_id} and t.is_long =1 and is_hide=0
+	     <if test="start >= 0">
+	        limit #{start},2
+	     </if> 
+	</select>
 </mapper>

@@ -39,6 +39,7 @@
 <!-- 查询最新收藏信息 -->
   <select id="ListMyConlection"  resultMap="BaseResultMap">
      select  * from book_user_mark a left join book b on a.book_id=b.id  where  a.writer_id=#{id} 
+     limit 0,6
   </select>
 <!-- 查好友信息 -->
  <select id="ListMyFriend"  resultMap="BaseResultMap">
@@ -61,6 +62,7 @@
 SELECT c.group_id,c.group_name,c.group_image,d.grouppeo from (select  a.group_id,b.group_name,b.group_image from pmph_group_member a left join pmph_group b on a.group_id=b.id WHERE  a.user_id=#{id} ) c left JOIN 
 (select  a.group_id,b.group_name,b.group_image,COUNT(b.group_name ) AS grouppeo from pmph_group_member a left join pmph_group b on a.group_id=b.id group BY a.group_id) d
 on c.group_id=d.group_id
+limit 0,9
   </select>
 <!-- 查申报最新动态信息 -->
  <select id="ListMyOfeerTwo"  resultMap="BaseResultMap">
@@ -453,6 +455,7 @@ AND a.online_progress IN (2, 3)
 	<select id="mySurvey" parameterType="PageParameter" resultType="java.util.Map">
 		select  * from survey s where s.user_id=#{parameter.user_id}  limit ${start},${pageSize}
 	</select>
+	<!-- 动态查询 -->
 	<select id="queryWriterUserTrendst"  parameterType="PageParameter" resultType="Map">
 		select 
 		t.id,t.table_name,t.table_id
@@ -570,11 +573,12 @@ AND a.online_progress IN (2, 3)
 			 ,cc.title AS sbwz_title
 			 ,cc.summary AS sbwz_summary
 			 ,cc.auth_status AS sbwz_auth_status
-		
+			 ,cc.is_deleted AS sbwz_is_deleted
+			 ,cc.mid AS sbwz_mid
 			 from cms_content cc
 			 inner join cms_category ct on cc.category_id = ct.id and ct.category_name = '医学随笔'
 			 where cc.author_id=#{parameter.logUserId}
-				  and cc.is_deleted !='1'
+				  <!-- and cc.is_deleted !='1' -->
 		order by cc.gmt_create
 		)sbwz
 		on t.table_name = sbwz.sbwz_type and t.table_id=sbwz.sbwz_id 
@@ -762,6 +766,24 @@ AND a.online_progress IN (2, 3)
 <!-- 我的问卷总数-->
 	<select id="mySurveyCount" parameterType="PageParameter" resultType="Integer">
 		select count(*) from survey s where s.user_id=#{parameter.user_id}
+	</select>
+	
+	<!-- 产生一条动态 -->
+	<insert id="saveUserTrendst" parameterType="Map">
+		insert into writer_user_trendst 
+		(table_name,table_id,trendst_type,writer_user_id)
+		values(#{TrendstName},#{tableId},#{trendstType},#{writer_user_id})
+	</insert>
+	
+	<!-- 通过图书纠错表主键查询被纠错图书的第一主编id -->
+	<select id="queryFirstEditorByBookCorrectionId" parameterType="String" resultType="String">
+		SELECT
+		be.author_id
+		FROM
+		book_correction AS bc
+		Inner Join book_editor AS be ON bc.book_id = be.book_id
+		WHERE
+		bc.id =  #{id}
 	</select>
 
 </mapper>

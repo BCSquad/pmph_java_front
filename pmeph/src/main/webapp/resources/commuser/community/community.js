@@ -53,10 +53,10 @@
 			}
 	  }); 
   }
-  function smallvideos(){
+  function smallvideos(id){
 	  $("#comment").css({"border-bottom":"2px solid #FFFFFF","color":"#9c9c9c"});
 	  $("#smallvideo").css({"border-bottom":"2px solid #5A9DA3","color":"#444544"});
-	  $("#more").html('<a href="#">查看更多微视频</a>');
+	  $("#more").html('<a href="'+contextpath+'/community/morevideo.action?materialId='+id+'">查看更多微视频</a>');
 	  $("#ullist").html("");
 	  for(var i=0;i<2;i++){
 	  $("#ullist").append('<li><div class="play" ></div>'+

@@ -202,5 +202,25 @@ public class PersonalServiceImpl implements PersonalService {
 			return count;
 		}
 
+		@Override
+		public void saveUserTrendst(String TrendstName, String tableId,int trendstType,String writer_user_id) {
+			Map<String,Object> paraMap = new HashMap<String,Object>();
+			paraMap.put("TrendstName", TrendstName);
+			paraMap.put("tableId", tableId);
+			paraMap.put("trendstType", trendstType);
+			paraMap.put("writer_user_id", writer_user_id);
+
+			int count = personaldao.saveUserTrendst(paraMap);
+			
+			//如果是提纠错 同时也应该为书籍第一主编生成一条动态
+			if ("wdjc".equals(TrendstName)) {
+				String firstEditorId = personaldao.queryFirstEditorByBookCorrectionId(tableId);
+				paraMap.put("TrendstName", "tsjc");
+				paraMap.put("writer_user_id", firstEditorId);
+				int count_corrected = personaldao.saveUserTrendst(paraMap);
+			}
+			
+		}
+
 
 }

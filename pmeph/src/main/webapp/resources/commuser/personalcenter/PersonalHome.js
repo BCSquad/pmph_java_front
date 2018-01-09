@@ -128,6 +128,38 @@ function queryConditionStrFun(){
 	  }
   }
   
+  /**
+   * 删除文章
+   */
+  function deleteArticle(id,title){
+	  window.message.confirm(
+				'确定要删除《'+title+'》吗？'
+				,{icon: 3, title:'提示',btn:["确定","取消"]}
+				,function(index){
+					layer.close(index);
+					$.ajax({
+				  		url:contextpath+"writerArticle/updateDelWriter.action?t="+new Date()+"&id="+id,
+				  		type:"post",
+				  		success:function(json){
+				  			$("#pageNum").val(1);
+				  			if (json.flag=="0") {
+				  				window.message.success("删除成功！");
+				  				setTimeout(queryMain(), 800);
+							}else{
+								window.message.error("删除失败！");
+							}
+				  		}
+				  		
+				  	});
+				}
+				,function(index){
+					layer.close(index);
+				}
+				);
+  	
+  	
+  }
+  
   //tjx所写 不知有何用 未被调用过
   /*function abc() {
   var itemMax=4;

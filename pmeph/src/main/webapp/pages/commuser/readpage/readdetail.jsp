@@ -308,20 +308,20 @@
                 </div>
                 <div class="morecon">
                     <input type="hidden" value="${start}" id="start">
-                    <span class="moreothers" onclick="changepage()">加载更多...</span>
+                    <span class="moreothers" onclick="changepage()" id="moreothers">${shortcom=='nothing' ? '暂无评论':'加载更多...'}</span>
                     <div class="morecom" style="display: none;"></div>
                 </div>
-                <div id="changepage">
+                <div id="longcompage">
                     <div class="comm">
                         <div class="longcom">图书长评</div>
                         <div class="writecom" onclick="writeablut()">写书评</div>
                     </div>
-                    <c:forEach items="${listCom}" var="list">
+                    <c:forEach items="${longList}" var="list" varStatus="status">
                         <div class="item">
                             <div class="item_title">
                                 <div style="float: left;"><img src="${ctx}/statics/image/rwtx.png" class="picturesize"/>
                                 </div>
-                                <div style="float: left;margin-left: 10px;margin-top: 5px;">${list.realname}</div>
+                                <div style="float: left;margin-left: 10px;margin-top: 5px;">${list.nickname}</div>
                                 <div style="float: left;margin-left: 10px;">
                                     <c:if test="${list.score<=3}">
                                         <span class="rwtx1"></span>
@@ -363,33 +363,17 @@
                                     <div class="date">${list.gmt_create}</div>
                                 </div>
                             </div>
-                            <div class="item_content">${list.content}</div>
+                            <div class="longcom_title">"${list.title}"</div>
+                            <div id="${status.index }con" class="item_content" name="item_content">${list.content}</div>
+                            <span id="${status.index }more" style="cursor: pointer;color: #666666;display: none;" 
+                            onclick="more('${status.index }con','${status.index }more')" >...(展开)</span>
                             <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
                         </div>
                     </c:forEach>
                 </div>
-                <%-- <div class="pageDiv" style="float: right;">
-                        <ul class="pagination" id="page1"></ul>
-                        <div style="display: inline-block;    vertical-align: top;text-align: left">
-                            <select id="edu" name="edu">
-                                <option value="2" >每页2条</option>
-                                <option value="5" >每页5条</option>
-                                <option value="10">每页10条</option>
-                                <option value="15">每页15条</option>
-                                <option value="20">每页20条</option>
-                            </select>
-                        </div>
-                        <div class="pageJump">
-                            <input type="hidden" id="pageNumber" value="${listCom.pageNumber}">
-                            <span>共<span id="allppage">${listCom.pageTotal}</span>页，跳转到</span>
-                            <input type="text" id="jumpId"/>
-                            <span class="pp">页</span>
-                            <button type="button" class="button" onclick="beforechange()">确定</button>
-                        </div>
-                  </div>     --%>
                 <div class="morecon">
-                    <input type="hidden" value="${start}" id="start">
-                    <span class="moreothers">加载更多...</span>
+                    <input type="hidden" value="${start}" id="longstart"><!-- onclick="longcom()" -->
+                    <span class="moreothers"  id="longothers">${longcom=='nothing' ? '暂无长评':'加载更多...'}</span>
                     <div class="morecom" style="display: none;"></div>
                 </div>
             </div>

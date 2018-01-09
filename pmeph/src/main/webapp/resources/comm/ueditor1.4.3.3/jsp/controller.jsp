@@ -8,6 +8,7 @@
 	response.setHeader("Content-Type" , "text/html");
 	
 	String rootPath = application.getRealPath( "/" );
+	 //rootPath ="D:\\Program Files\\apache-tomcat-7.0.78\\webapps\\pmeph1\\";
 	String result = new ActionEnter( request, rootPath ).exec();
 	String action = request.getParameter("action");
 	if( action!=null && 

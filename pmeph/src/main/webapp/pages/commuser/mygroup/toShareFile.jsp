@@ -22,7 +22,6 @@
     <script src="<%=path %>/resources/comm/jquery/jquery.js"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/layer/layer.js"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js" type="text/javascript"></script>
     <script src="<%=path %>/resources/commuser/mygroup/group.js" type="text/javascript"></script> 
 </head>
 <body>
@@ -35,7 +34,7 @@
                 <div class="div_img70"><img src="" class="img1" alt="小组图像"/></div>
                 <div class="top_content">
                     <span class="span1">${groupMap.textbook_name}</span>
-                    <input id="groupId" name="group_id" type="hidden" value="${groupMap.id}"/>
+                    <input id="groupId" type="hidden" value="${groupMap.id}"/>
                     <div class="top_content2">
                         <div class="top_content22">
                             <img src="${ctx}/statics/image/zjyh.png">
@@ -47,7 +46,6 @@
                         <div class="top_content33">
                             <img src="${ctx}/statics/image/scz.png"/>
                         </div>
-                        <span id="scwj1" class="scmsg">上传文件</span>
                     </div>
                 </div>
                 <div class="top_tj">
@@ -66,57 +64,17 @@
             </div>
 
             <div class="left_communions_files">
-                <span id="commnions_top" class="clicked" onclick="ChangeDiv('commnions',${groupMap.id})">互动交流</span>
-                <span id="filesgx_top" class="clickbefore" onclick="ChangeDiv('filesgx',${groupMap.id})">文件共享</span>
+                <span id="commnions_top" class="clickbefore" onclick="ChangeDiv('commnions',${groupMap.id})">互动交流</span>
+                <span id="filesgx_top" class="clicked" onclick="ChangeDiv('filesgx',${groupMap.id})">文件共享</span>
             </div>
             <div class="left-content">
-                <div class="_show" id="commnions">
-                    <div class="iframe1">
-                    <c:forEach var="list" items="${messgaeList}">
-                    <c:if test="${list.member_id != queryMap.user_id}">
-						<div class="chat_items other">
-                            <div class="chat_item1">
-                                <div class="div_item1_img">
-                                    <img src="<%=path %>${list.avatar}"/>
-                                    <text>${list.member_id}</text>
-                                </div>
-                                <div class="arrows"></div>
-                            </div>
-                            <div class="chat_item2">
-                                <div class="sender">
-                                    ${list.msg_content}
-                                </div>
-                                <div class="chat_item2_time"> ${list.gmt_create}</div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        </c:if>
-                        <c:if test="${list.member_id == queryMap.user_id}">
-                        	<div class="chat_items mine">
-                            <div class="chat_item1">
-                                <div class="div_item1_img">
-                                    <img src="<%=path %>${list.avatar}"/>
-                                    <text>${list.member_id}</text>
-                                </div>
-                                <div class="arrows"></div>
-                            </div>
-                            <div class="chat_item2">
-                                <div class="sender">
-                                    ${list.msg_content}
-                                </div>
-                                <div class="chat_item2_time"> ${list.gmt_create}</div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        </c:if>
-                    </c:forEach>
-                     </div>
-                    <div class="iframe2">
-                         <textarea  id="msgContent" type="text" placeholder="请输入消息内容,按回车键发送" ></textarea>
-                        <div class="div_btn"><span id="sendMsg" class="button">发送</span></div> 
-                     
+                <div class="_show" id="filesgx">
+                    <input type="text" placeholder="请输入文件名" id= "fileName" class="file_input"/><img class="search" src="${ctx}/statics/image/sx1.png"/>
+                    <span id ="fileContent"></span>
+                    <div id ="fileMore">
+                    	<center>更多</center>
                     </div>
-                </div>
+				</div>
             </div>
         </div>
     </div>

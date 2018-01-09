@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%String path = request.getContextPath();%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String contextpath=request.getContextPath();
+%>
 
 <%@ page import="java.util.*"%> <!-- //获取系统时间必须导入的 --> 
 <%@ page import="java.text.*"%> <!-- //获取系统时间必须导入的  -->
@@ -18,6 +22,7 @@ request.setAttribute("currentTime",datetime);
     <script type="text/javascript">
         var contextpath = '${pageContext.request.contextPath}/';
     </script>
+    
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
@@ -27,11 +32,30 @@ request.setAttribute("currentTime",datetime);
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.js"></script>
     <script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js"></script>
     <script src="<%=path%>/resources/comm/jquery/jquery.pager.js"></script>
+    <script src="${ctx}/resources/comm/base.js"></script>
     <script src="${ctx}/resources/commuser/personalcenter/PersonalHome.js"></script>
     <%-- <script src="${ctx}/resources/commuser/personalcenter/PersonalHomeJCSB.js"></script> --%>
-    <script src="${ctx}/resources/comm/base.js"></script>
+    
 
-
+	<script type="text/javascript">
+		$(function(){
+			$(".img_mongoDB").each(function(){
+				var $t = $(this);
+				var data ={mid:$t.attr("name")};
+				$.ajax({
+					type:'post',
+					url:contextpath+"personalhomepage/getFirstImgByMid.action?t="+new Date().getTime(),
+					async:false,
+					dataType:'json',
+					data:data,
+					success:function(json){
+						$t.attr("src",json);
+					}
+				});
+				
+			});
+		});
+	</script>
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp">
@@ -46,18 +70,6 @@ request.setAttribute("currentTime",datetime);
 	<input type="hidden" class="" id="pageSize" value="${pageSize }">
 	<input type="hidden" class="" id="pageType" value="${pageType }">
 	
-	<!-- 查询条件 -->
-		<!-- 我要出书 -->
-	<%-- <input type="hidden" class="queryCondition" id="queryName" value="${queryName }">
-	<input type="hidden" class="queryCondition" id="auth_progress" value="${auth_progress }">
-	<input type="hidden" class="queryCondition" id="is_staging" value="${is_staging }"> --%>
-	
-		<!-- 教材申报 -->
-	<%-- <input type="hidden" class="queryCondition" id="s" value="${s }">
-	<input type="hidden" class="queryCondition" id="pageinfo" value="${pageinfo }">
-	<input type="hidden" class="queryCondition" id="dateinfo" value="${dateinfo }">
-	<input type="hidden" class="queryCondition" id="online_progress" value="${online_progress }">
-	<input type="hidden" class="queryCondition" id="bookname" value="${bookname }"> --%>
 
     <div class="content-wrapper">
         <div class="wrapper">
@@ -269,18 +281,26 @@ request.setAttribute("currentTime",datetime);
                						<c:when test="${c.table_name == 'sbwz' && c.trendst_type == 0}"><%-- 随笔文章 发表 --%>
                							<div class="issue_line"><span class="issue_name">发表了随笔文章</span><img class="img_xiewenzhang" src="${ctx }/statics/image/xiewenzhang.png"><span class="issue_time">${c.trendst_date }</span></div>
                							<div class="content_line">
-               								<div class="img_wrapper"><img src="${ctx }/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"></div>
+               								
+               								
+               								<div class="img_wrapper ">
+               									
+               									<img class="img_mongoDB" name="${c.sbwz_mid }" src="">
+               									<%-- <img src="${ctx }/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"> --%>
+               								</div>
                								<div class="content_wrapper">
-               										<c:if test="${c.sbwz_auth_status ==0}"><div class="status_tag toAudit">待审核</div></c:if>
-               										<c:if test="${c.sbwz_auth_status ==1}"><div class="status_tag reject">未通过</div></c:if>
-               										<c:if test="${c.sbwz_auth_status ==2}"><div class="status_tag Audited">已通过</div></c:if>
-               									<div class="article_title">${c.sbwz_title }</div>
-               									<div class="article_summary">${c.sbwz_summary }</div>
+            									<c:if test="${c.sbwz_is_deleted=='0' && c.sbwz_auth_status ==0}"><div class="status_tag toAudit">待审核</div></c:if>
+            									<c:if test="${c.sbwz_is_deleted=='0' && c.sbwz_auth_status ==1}"><div class="status_tag reject">未通过</div></c:if>
+            									<c:if test="${c.sbwz_is_deleted=='0' && c.sbwz_auth_status ==2}"><div class="status_tag Audited">已通过</div></c:if>
+               									<c:if test="${c.sbwz_is_deleted !='0'}"><div class="status_tag reject">已删除</div></c:if>
+               									
+               									<div class="article_title">${c.sbwz_is_deleted == "0"?c.sbwz_title:"该文章已删除" }</div>
+               									<div class="article_summary">${c.sbwz_is_deleted == "0"?c.sbwz_summary:"该文章已删除" } ...</div>
                								</div>
                							</div>
                							<div class="operate_wrapper">
-	               							<a><div class="img img_edit" ></div><div>编辑</div></a> 
-	               							<a><div class="img img_delete"></div><div>删除</div></a>
+	               							<a target="_blank" href="${ctx }/writerArticle/initWriteArticle.action?id=${c.sbwz_id}&userid=${logUserId}"><div class="img img_edit" ></div><div>编辑</div></a> 
+	               							<a onclick="deleteArticle(${c.sbwz_id})" ><div class="img img_delete"></div><div>删除</div></a>
                							</div>
                						</c:when>
                						<c:when test="${c.table_name == 'tsjc' && c.trendst_type == 0}"><%-- 图书纠错 发表 --%>
@@ -295,7 +315,10 @@ request.setAttribute("currentTime",datetime);
                									</c:if>
                								</div>
                								<div class="content_wrapper">
-               									<div class="bookc_title">${c.tsjc_bookname }</div>
+               									<div class="bookc_title">
+               										<a class="not-like-an-a" target="_blank" href="/readdetail/todetail.action?id=${c.tsjc_book_id }"
+               											>${c.tsjc_bookname }</a>
+               									</div>
                									<div class="sub_title"><c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>${c.tsjc_realname } 纠正了《${c.tsjc_bookname }》第${c.tsjc_page }页${c.tsjc_line },提出纠错：“${c.tsjc_content }”。</div>
                									<div class="rank_stars"></div>
                									<div class="book_detail">${c.tsjc_detail }</div>
@@ -323,7 +346,10 @@ request.setAttribute("currentTime",datetime);
                									</c:if>
                								</div>
                								<div class="content_wrapper">
-               									<div class="bookc_title">${c.wdjc_bookname }</div>
+               									<div class="bookc_title">
+               										<a class="not-like-an-a" target="_blank" href="/readdetail/todetail.action?id=${c.wdjc_book_id }"
+               											>${c.wdjc_bookname }</a>
+												</div>
                									<div class="sub_title">
                										<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
                										${c.wdjc_realname } 纠正了《${c.wdjc_bookname }》第${c.wdjc_page }页${c.wdjc_line },提出纠错：“${c.wdjc_content }”。
@@ -348,7 +374,10 @@ request.setAttribute("currentTime",datetime);
                									</c:if>
                								</div>
                								<div class="content_wrapper">
-               									<div class="bookc_title">${c.wdsp_bookname }</div>
+               									<div class="bookc_title">
+	               									<a class="not-like-an-a" target="_blank" href="/readdetail/todetail.action?id=${c.wdsp_book_id }"
+	               											>${c.wdsp_bookname }</a>
+               									</div>
                									<div class="sub_title">
 	               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
 	               									${c.wdsp_realname } 评论了《${c.wdsp_bookname }》：“${c.wdsp_content }”。

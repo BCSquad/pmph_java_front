@@ -59,7 +59,7 @@ public class MyFriendController extends com.bc.pmpheep.general.controller.BaseCo
         Map<String, Object> writerUserMap = this.getUserInfo();
         CommuserWriterUser writerUser = new CommuserWriterUser();
         writerUser.setId(Long.parseLong(writerUserMap.get("id").toString()));
-        writerUser.setId(645L);
+        //writerUser.setId(645L);
         String pageUrl = "commuser/myfriend/myFriend";
         try {
             int startrow = 0;

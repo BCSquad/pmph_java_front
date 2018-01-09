@@ -13,5 +13,5 @@ public interface WriterArticleDao {
 		//
 		Map<String, Object>  queryWriteArticleInfo(Map<String, Object> map);
 
-		String updateDelWriter(Map<String, Object> map);
+		int updateDelWriter(Map<String, Object> map);
 }

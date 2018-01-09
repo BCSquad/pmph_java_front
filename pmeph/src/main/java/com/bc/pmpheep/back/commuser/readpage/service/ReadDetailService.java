@@ -3,6 +3,8 @@ package com.bc.pmpheep.back.commuser.readpage.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
@@ -92,7 +94,6 @@ public interface ReadDetailService {
 	 * @return
 	 */
 	int queryMark(String bookId,String favoriteId,String writerId);
-	String delbookwriter(Map<String, Object> map);
 	/**
 	 * 删除对应的书评
 	 * @param 书评Id
@@ -100,4 +101,22 @@ public interface ReadDetailService {
 	 * @param writerId
 	 * @return
 	 */
+	String delbookwriter(Map<String, Object> map);
+	/**
+	 * 写长评
+	 * @param map
+	 * @return OK,OK代表数据添加成功
+	 */
+	String insertlong(Map<String, Object> map);
+	/**
+	 * 查询是否写过长评
+	 * @return
+	 */
+	List<Map<String, Object>> queryLoginLong(String writer_id,String book_id);
+	/**
+	 * 查询长评
+	 * @param book_id
+	 * @return
+	 */
+	List<Map<String, Object>> queryLong(String book_id,int start);
 }
