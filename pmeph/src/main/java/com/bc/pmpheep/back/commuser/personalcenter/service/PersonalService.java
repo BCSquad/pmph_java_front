@@ -115,6 +115,20 @@ public interface PersonalService {
 	 * @return
 	 */
 	public int mySurveyCount(PageParameter<Map<String, Object>> pageParameter);
+	
+	//查询一个调查
+	List<Map<String, Object>> getSurvey(long surveyId);
+	
+	//查询选项
+	List<Map<String, Object>> getOptions(Long questionId);
+	
+	//查询单选选项答案
+	public String getAnswers(Long questionId);
+	
+	//查询多选选项答案
+	public String getCheckAnswers(Long questionId);
+	//查询填空选项答案
+	public String getInpAnswers(Long questionId);
 
 	/**
 	 * 个人中心动态 汇总后面所有页签对应信息的新增、审批的动态
@@ -138,5 +152,7 @@ public interface PersonalService {
 	 */
 	public void saveUserTrendst(String TrendstName,String tableId,int trendstType,String writer_user_id);
 
+	
+	
 	
 }

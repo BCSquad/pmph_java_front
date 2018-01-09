@@ -37,17 +37,17 @@
                 <div class="x" onclick="hideup()"></div>
             </div>
             <div class="input">
-                <label style="margin-left: 20px" class="labell require" >页码&nbsp;:&nbsp;</label>
+                <label style="margin-left: 20px" class="labell require" >页码:</label>
                 <input type="text" class="text" id="page" />
-                <label style="margin-left: 10px" class="labell" >行数&nbsp;:&nbsp;</label>
+                <label style="margin-left: 10px" class="labell" >行数:</label>
                 <input type="text" class="text" id="line" />
             </div>
             <div class="info">
-                <label style="margin-left: 20px" class="labell" >纠错内容&nbsp;:&nbsp;</label>
+                <label style="margin-left: 20px" class="labell" >纠错内容</label>
                 <textarea class="misarea" id="content"></textarea>
             </div>
             <div class="upload">
-                <label style="margin-left: 20px" class="labell">纠错内容附件&nbsp;:&nbsp;</label>
+                <label style="margin-left: 20px" class="labell">纠错内容附件</label>
                 <div style="position: relative">
                     <input type="button" id="uploadFile" value="选择文件" class="upbutten">
                 </div>
@@ -368,12 +368,13 @@
                             <span id="${status.index }more" style="cursor: pointer;color: #666666;display: none;" 
                             onclick="more('${status.index }con','${status.index }more')" >...(展开)</span>
                             <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
+                            <input type="hidden" id="long-hidden" value="2">
                         </div>
                     </c:forEach>
                 </div>
                 <div class="morecon">
-                    <input type="hidden" value="${start}" id="longstart"><!-- onclick="longcom()" -->
-                    <span class="moreothers"  id="longothers">${longcom=='nothing' ? '暂无长评':'加载更多...'}</span>
+                    <input type="hidden" value="${start}" id="longstart">
+                    <span class="moreothers"  id="longothers" onclick="longcom()">${longcom=='nothing' ? '暂无长评':'加载更多...'}</span>
                     <div class="morecom" style="display: none;"></div>
                 </div>
             </div>
