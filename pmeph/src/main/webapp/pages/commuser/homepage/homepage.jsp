@@ -366,9 +366,9 @@
         </div>
         <div style="clear: both"></div>
     </div>
-    <div class="test" id="test_float">
+    <a href="<c:url value="/survey/surveyList.action"/>" class="test" id="test_float">
         <div class="cancel" onclick="cancel()">关闭</div>
-    </div>
+    </a>
 </div>
     <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>

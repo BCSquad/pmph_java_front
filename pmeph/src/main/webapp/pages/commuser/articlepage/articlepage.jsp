@@ -11,9 +11,14 @@
 <html>
 <head>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
+    <script type="text/javascript">
+        var contextpath = '${pageContext.request.contextPath}/';
+    </script>
     <title>文章首页</title>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/articlepage/articlepage.css" type="text/css">
+    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
+    <script src="${ctx}/resources/comm/base.js"></script>
 </head>
 <body>
     <jsp:include page="/pages/comm/head.jsp"></jsp:include>
