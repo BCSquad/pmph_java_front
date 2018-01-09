@@ -101,11 +101,12 @@ $(function () {
      morecontent();
     
 });
-
+//展开、收起
 function morecontent(){
+	debugger;
 	var a=document.getElementsByName("item_content");
 	for(var i=0;i<a.length;i++){
-		if((a[i].offsetHeight)>45){
+		if((a[i].offsetHeight)>47){
 			$("#"+i+"more").show();
 			$("#"+i+"con").css({"height":"45px"});
 		}
@@ -216,7 +217,8 @@ function longcom(){
             }
             var str = '';
             $.each(json, function (i, n) {
-                $("#start").val(n.start);
+            	//获取从第几条开始分页的数据
+                $("#longstart").val(n.longstart);
                 str += '<div class="item"><div class="item_title">'
                     + '<div style="float: left;"><img src="';
                 if (n.avatar == '' || n.avatar == 'DEFAULT' || n.avatar == null) {
@@ -260,11 +262,20 @@ function longcom(){
                 }
                 str += '</div><div class="date_content"><div class="date">'
                     + n.gmt_create
-                    + '</div></div></div><div class="item_content">'
+                    + '</div></div></div>'
+                    +'<div class="longcom_title">"'+n.title+'"</div>'
+                    +'<div id="' +$("#long-hidden").val()+'con" class="item_content" name="item_content">'
                     + n.content
-                    + '</div><hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;"></div>';
+                    + '</div><span id="' +$("#long-hidden").val()+'more" style="cursor: pointer;color: #666666;display: none;"' 
+                    +'onclick="more(\''+$("#long-hidden").val()+'con\',\''+$("#long-hidden").val()+'more\')" >...(展开)</span>'
+                    +'<hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;"></div>';
+                //给隐藏于赋值，用于展开以及收起功能过
+                var x=(parseInt($("#long-hidden").val())+1);
+                $("#long-hidden").val(x);
             });
             $("#longcompage").append(str);
+            //将过长的长评折叠，显示展开按钮
+            morecontent();
         },
     });
 }
