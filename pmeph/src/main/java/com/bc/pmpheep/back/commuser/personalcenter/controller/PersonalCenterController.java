@@ -74,6 +74,7 @@ public class PersonalCenterController extends BaseController {
 		int count = 0;
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<Map<String,Object>>(pageNum,pageSize);
 		Map<String, Object> vm_map = new HashMap<String, Object>();
+		vm_map.put("logUserId", logUserId);
         
     	//页签分支
     	if ("dt".equals(pagetag)) { //动态
