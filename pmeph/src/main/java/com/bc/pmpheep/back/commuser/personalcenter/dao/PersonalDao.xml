@@ -448,15 +448,15 @@
 		bc.content,
 		bc.gmt_create,
 		bc.gmt_update,
-		bc.is_author_replied
+		bc.is_long
 		FROM
 		book_user_comment AS bc
 		left Join book AS b ON b.id = bc.book_id
 		WHERE
 		bc.writer_id = #{parameter.logUserId}
 		AND bc.is_deleted = '0'
-		<if test="parameter.is_replied != null and parameter.is_replied != '' ">
-			AND bc.is_author_replied = #{parameter.is_replied}
+		<if test="parameter.is_long != null and parameter.is_long != '' ">
+			AND bc.is_long = #{parameter.is_long}
 		</if>
 		order by bc.gmt_create desc
 		limit ${start},${pageSize}
@@ -479,15 +479,15 @@
 		bc.content,
 		bc.gmt_create,
 		bc.gmt_update,
-		bc.is_author_replied
+		bc.is_long
 		FROM
 		book_user_comment AS bc
 		left Join book AS b ON b.id = bc.book_id
 		WHERE
 		bc.writer_id = #{parameter.logUserId}
 		AND bc.is_deleted = '0'
-		<if test="parameter.is_replied != null and parameter.is_replied != '' ">
-			AND bc.is_author_replied = #{parameter.is_replied}
+		<if test="parameter.is_long != null and parameter.is_long != '' ">
+			AND bc.is_long = #{parameter.is_long}
 		</if>
 		group by b.id
 
@@ -496,7 +496,7 @@
 
 	<!-- 我的问卷 -->
 	<select id="mySurvey" parameterType="PageParameter" resultType="java.util.Map">
-		select * from survey s where s.user_id=#{parameter.user_id} limit
+		select * from survey s where s.user_id=1 limit
 		${start},${pageSize}
 	</select>
 
@@ -504,7 +504,8 @@
 	<select id="mySurveyCount" parameterType="PageParameter"
 		resultType="Integer">
 		select count(*) from survey s where
-		s.user_id=#{parameter.user_id}
+		s.user_id=1
+		<!-- #{parameter.user_id} -->
 	</select>
 
 	<!-- 查询单个调查对应的问题 -->
