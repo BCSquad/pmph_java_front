@@ -103,7 +103,6 @@ $(function () {
 });
 //展开、收起
 function morecontent(){
-	debugger;
 	var a=document.getElementsByName("item_content");
 	for(var i=0;i<a.length;i++){
 		if((a[i].offsetHeight)>47){

@@ -62,7 +62,7 @@ function queryConditionStrFun(){
 	$(".queryCondition").each(function(){
 		var $t=$(this);
 		if ($t.val() != null && $t.val() != "") {
-			Str+="&"+$t.attr("id")+"="+$t.val();
+			Str+="&"+$t.attr("id")+"="+encodeURI(encodeURI($t.val()));//编码 到controller层再解码 避免乱码
 		}
 	});
 	return Str;
@@ -156,9 +156,74 @@ function queryConditionStrFun(){
 					layer.close(index);
 				}
 				);
-  	
-  	
   }
+  
+  /**
+   * 删除我的纠错
+   * @param id
+   */
+  function deleteMyCorrect(id){
+	  window.message.confirm(
+				'确定要删除该条纠错吗？'
+				,{icon: 3, title:'提示',btn:["确定","取消"]}
+				,function(index){
+					layer.close(index);
+					$.ajax({
+				  		url:contextpath+"personalhomepage/deleteMyCorrection.action?t="+new Date()+"&id="+id,
+				  		type:"post",
+				  		success:function(json){
+				  			$("#pageNum").val(1);
+				  			
+				  			if (json.code=="OK") {
+				  				window.message.success(json.msg);
+				  				setTimeout(queryMain(), 800);
+							}else{
+								window.message.warning(json.msg);
+							}
+				  		}
+				  		
+				  	});
+				}
+				,function(index){
+					layer.close(index);
+				}
+				);
+  }
+  
+  
+    /**
+   * 删除我的书评
+   * @param id
+   */
+  function deleteMyBookComment(id){
+	  window.message.confirm(
+				'确定要删除该条书评吗？'
+				,{icon: 3, title:'提示',btn:["确定","取消"]}
+				,function(index){
+					layer.close(index);
+					$.ajax({
+				  		url:contextpath+"personalhomepage/deleteMyBookComment.action?t="+new Date()+"&id="+id,
+				  		type:"post",
+				  		success:function(json){
+				  			$("#pageNum").val(1);
+				  			
+				  			if (json.code=="OK") {
+				  				window.message.success(json.msg);
+				  				setTimeout(queryMain(), 800);
+							}else{
+								window.message.warning(json.msg);
+							}
+				  		}
+				  		
+				  	});
+				}
+				,function(index){
+					layer.close(index);
+				}
+				);
+  }
+  
+  
   
   //tjx所写 不知有何用 未被调用过
   /*function abc() {

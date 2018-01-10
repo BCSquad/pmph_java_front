@@ -155,12 +155,16 @@
 	background-color: #65bd8d;
 }
 
+.content_line .content_wrapper .status_tag.toApply {
+    background-color: #a7a7a7;
+}
+
 .content_line .content_wrapper .article_title{
 	color: #343434;
 	font-size: 16px;
 	float: left;
 	clear: right;
-	line-height: 16px;
+	line-height: 18px;
 }
 
 .content_line .content_wrapper .bookc_title{
@@ -176,13 +180,26 @@
     font-size: 12px;
     float: left;
     clear: right;
-    line-height: 16px;
+    line-height: 18px;
     margin-top: 15px;
     width: 100%;
-    max-height: 15px;
+    max-height: 18px;
     text-overflow: ellipsis;
     overflow: hidden;
     word-break: break-all;
+}
+
+.sub_title .tag_new{
+	margin-top: 1px;
+}
+
+.tag_new.article_new{
+	margin-top: 1.5px;
+	padding-left: 3px;
+}
+
+.sub_title .status_tag.reject{
+	margin-left: 3px;
 }
 
 .content_line .content_wrapper .rank_stars{

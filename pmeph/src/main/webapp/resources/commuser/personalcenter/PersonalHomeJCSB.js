@@ -29,7 +29,9 @@
 	  
 	  $("#wdsbssk").keyup(function(event){
 			if(event.keyCode ==13){ //回车键弹起事件
-				window.location.href=contextpath+'personalhomepage/tohomepage.action?pagetag=jcsb&bookname='+$("#wdsbssk").val();
+				//window.location.href=contextpath+'personalhomepage/tohomepage.action?pagetag=jcsb&bookname='+$("#wdsbssk").val();
+				$("#bookname").val($("#wdsbssk").val());
+				queryMain();
 			  }
 		});
 

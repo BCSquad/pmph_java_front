@@ -109,6 +109,9 @@ function insertlong(){
 			dataType:'json',
 			success:function(json){
 				window.message.success("保存成功！");
+				$(".sxy-btn").attr("disabled",true);
+				$("#TitleValue").attr("disabled",true);
+				ue.setDisabled();
 			}
 		});
 	}else{

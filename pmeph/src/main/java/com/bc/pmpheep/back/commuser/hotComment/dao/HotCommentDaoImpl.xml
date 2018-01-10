@@ -9,7 +9,7 @@
 		ON a.`writer_id` = b.id
 		LEFT JOIN `book` c
 		ON a.`book_id`= c.`id`
-		WHERE a.is_hide = 0 AND a.is_auth=1 AND a.is_long=1
+		WHERE a.is_hide = 0 AND a.is_auth=1 AND a.is_long=1 and is_hot=1
 		ORDER BY a.gmt_create DESC
 		limit #{start},#{pageSize}
 	</select>

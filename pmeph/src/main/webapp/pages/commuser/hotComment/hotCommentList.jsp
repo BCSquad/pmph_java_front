@@ -13,10 +13,12 @@
     <link href="${ctx}/statics/css/base.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/hotComment/hotCommentList.css" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
     <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
     <script src="${ctx}/resources/comm/base.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.pager.js"></script>
     <script src="${ctx}/resources/commuser/hotComment/hotCommentList.js"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
 </head>
 <style type="text/css">
 
@@ -45,9 +47,9 @@
 									<img style="width: 90px;height:auto" src="${one.image_url}"/>
 								</div>
 								<div style="width: 88%;height: 100%;float:left;">
-									<div style="width: 100%;height: 30px;clear: both"><span style="font-size: 16px">《${one.bookname}》</span></div>
+									<div style="width: 100%;height: 30px;clear: both"><span style="font-size: 16px;font-weight:500">《${one.bookname}》</span></div>
 									<div class="top">
-										<div class="pic"><img style="width: 32px;height: 32px" src="${ctx}/statics/pictures/head.png"></div>
+										<div class="pic"><img style="width: 24px;height: 24px" src="${ctx}/statics/pictures/head.png"></div>
 										<div class="nameAndTime">
 											<div class="name">${one.userName}</div>
 											<div class="star">
@@ -100,7 +102,7 @@
 										<div class="contentDiv">
 											${one.content}
 				  						</div>
-				  						<div class="open" onclick="detail(${one.id})">(展开)</div>
+				  						<div class="open"><span style="cursor: pointer" onclick="detail(${one.id})">(展开)</span></div>
 									</div> 
 								</div>
 							</div>

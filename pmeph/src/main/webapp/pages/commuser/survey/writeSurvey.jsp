@@ -35,6 +35,7 @@
 						</div>
 						<form id="contentForm">
 						<div class="questions">
+							<input type="hidden" name="surveyId" value="${surveyId}">
 							<c:choose>
 								<c:when test="${listSize>0 }">
 									<c:forEach items="${listSesult}" var="question" varStatus="code">
@@ -76,6 +77,16 @@
 												</div>
 												<input type="hidden" name="inputValues" value="input_${code.index+1}">
 												<input type="hidden" name="inputQuestionIds" value="${question.id}">
+											</div>
+										</c:if>
+										<c:if test="${question.type==5}">
+											<div class="oneQuestion">
+												<p>Q${code.index+1} : ${question.title}</p>
+												<div style="padding-left: 22px">
+													<textarea id="${question.id}" name="input_${code.index+1}" class="textAreaStyle"></textarea>
+												</div>
+												<input type="hidden" name="textValues" value="input_${code.index+1}">
+												<input type="hidden" name="textQuestionIds" value="${question.id}">
 											</div>
 										</c:if>
 									</c:forEach>
