@@ -384,3 +384,15 @@
     float: left
 }
 
+.Bigcontent{
+	font-family: MicrosoftYaHei;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 13px;
+    color: #515151;
+    line-height:30px;
+}
+
+.contentDiv{
+	width: 100%; height: auto;margin-bottom: 60px;
+}

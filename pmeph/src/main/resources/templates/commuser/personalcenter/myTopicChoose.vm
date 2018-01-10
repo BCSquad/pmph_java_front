@@ -17,7 +17,7 @@
         <button class="jcsbsbzt" id="sbzc"  value="3" style="cursor:pointer"><span class="ytg"></span>已通过</button>
         <button class="jcsbsbzt" id="sbytj" value="2" style="cursor:pointer"><span class="btg"></span>不通过</button>
         <button class="jcsbsbzt" id="allStatus" value="" style="cursor:pointer"><span class=""></span>全部状态</button>
-        <input type="text" id="wdsbssk" value="$!{para.bookname}" placeholder="公告搜索">
+        <input type="text" id="wdsbssk" class="wdsbssk" value="$!{para.bookname}" placeholder="选题搜索">
         
     </div>
     <div class="listContent">
@@ -88,7 +88,7 @@
            			<div><span class="ytg1"></span><span class="left_zt">已通过</span></div>
            		#end
                <a style="cursor: pointer;" onclick="viewTopic($!{c.id})"><div class="left_herf">进入查看</div></a>
-                <a style="cursor: pointer;" onclick="updateTopic($!{c.id})"><div class="left_herf">修改</div></a>
+                <a style="cursor: pointer;" onclick="updateTopic($!{c.id})"><div class="left_herf2">修改</div></a>
                
            </div>
          </li>

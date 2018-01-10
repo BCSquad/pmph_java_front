@@ -18,8 +18,6 @@
     <script src="${ctx}/resources/comm/jquery/jquery.pager.js"></script>
 </head>
 <body>
-
-
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 	<div class="body"> 
 		<div class="content-wrapper">
@@ -155,8 +153,8 @@
 										</div>
 									</div>
 			            </div>		
-			            <div style="width: 100%; height: auto">
-			            	<p style="color: #545454">${map.content}</p>
+			            <div  class="contentDiv">
+			            	<p class="Bigcontent">${map.content}</p>
 			            </div>
 					</c:otherwise>
 				</c:choose>
@@ -245,5 +243,31 @@
 <div style="background-color: #f8f8f8">
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </div>
+<script>
+//人卫推荐换一换
+function change() {
+    $.ajax({
+        type: 'post',
+        url: contextpath + 'readdetail/change.action',
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+            var ste = '';
+            $.each(json, function (i, x) {
+                ste += '<div class="right_20"><div class="right_21" onclick="todetail(' +
+                    x.id
+                    + ')">' +
+                    x.bookname +
+                    '</div><div class="right_22">（' +
+                    x.author +
+                    '）</div></div>';
+            });
+            $("#comment").html(ste);
+        }
+	});
+}
+
+</script>
+
 </body>
 </html>

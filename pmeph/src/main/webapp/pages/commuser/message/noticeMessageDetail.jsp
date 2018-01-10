@@ -32,10 +32,9 @@
         <c:choose>
         	<c:when test="${messageId==null}">
         		<div class="no-more">
-			                    <img src="<c:url value='/statics/image/aaa4.png'></c:url>">
-			                    <span>木有内容呀~~</span>
-			                </div>
-        	
+                    <img src="<c:url value='/statics/image/aaa4.png'></c:url>">
+                    <span>木有内容呀~~</span>
+                </div>
         	</c:when>
         	<c:otherwise>
         		<div id="section">

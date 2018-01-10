@@ -53,7 +53,7 @@
 		select * from (
 		SELECT 
 		  wf.request_id id,
-		  wu.username,
+		  wu.realname,
 		  wu.position,
 		  wu.avatar 
 		FROM
@@ -69,7 +69,7 @@
 		UNION 
 		SELECT 
 		  wf.target_id id,
-		  wu.username,
+		  wu.realname,
 		  wu.position,
 		  wu.avatar 
 		FROM

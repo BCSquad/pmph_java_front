@@ -18,8 +18,8 @@ input[type=radio]:after  {
     height: 20px;  
     border-radius: 50%;  
     text-align: center;  
-    line-height: 14px;  
-    font-size: 16px;  
+    line-height: 15px;  
+    font-size: 15px;  
     color: #fff;  
     border: 2px solid #ddd;  
     background-color: #fff;  
@@ -109,9 +109,14 @@ input[type=radio]:checked:after  {
 	width: 500px;
 	height:20px; 
 	border-style:none;
-	border-bottom: dashed 2px #d8d8d8
+	border-bottom: dashed 2px #d8d8d8;
 }
 
+.textAreaStyle{
+	width: 500px;
+	height:80px; 
+	border: solid 1px #d8d8d8
+}
 .buttonDiv{
 	cursor:pointer;
 	margin-left:530px;
