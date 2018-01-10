@@ -50,8 +50,7 @@ public class PersonalServiceImpl implements PersonalService {
 	public List<Map<String, Object>> queryMyWritingsNew(
 			PageParameter<Map<String, Object>> pageParameter) {
 		// 查询我的随笔文章最新信息
-		List<Map<String, Object>> list5 = personaldao
-				.ListMyWritingsTwo(pageParameter);
+		List<Map<String, Object>> list5 = personaldao.ListMyWritingsTwo(pageParameter);
 		return list5;
 	}
 
@@ -66,8 +65,7 @@ public class PersonalServiceImpl implements PersonalService {
 	public List<Map<String, Object>> queryMyBooksNew(
 			PageParameter<Map<String, Object>> pageParameter) {
 		// TODO 自动生成的方法存根 查询我的书评最新信息
-		List<Map<String, Object>> list6 = personaldao
-				.ListMyBookNewsTwo(pageParameter);
+		List<Map<String, Object>> list6 = personaldao.ListMyBookNewsTwo(pageParameter);
 		return list6;
 	}
 
@@ -75,8 +73,7 @@ public class PersonalServiceImpl implements PersonalService {
 	public List<Map<String, Object>> queryMyBooksJoin(
 			PageParameter<Map<String, Object>> pageParameter) {
 		// 查询我的教材申报最新信息
-		List<Map<String, Object>> list7 = personaldao
-				.ListAllBookJoin(pageParameter);
+		List<Map<String, Object>> list7 = personaldao.ListAllBookJoin(pageParameter);
 		return list7;
 	}
 
@@ -90,8 +87,7 @@ public class PersonalServiceImpl implements PersonalService {
 	@Override
 	public List<Map<String, Object>> queryMyTopicChoose(
 			PageParameter<Map<String, Object>> pageParameter) {
-		List<Map<String, Object>> result_list = personaldao
-				.queryMyTopicChoose(pageParameter);
+		List<Map<String, Object>> result_list = personaldao.queryMyTopicChoose(pageParameter);
 		return result_list;
 	}
 
@@ -105,8 +101,7 @@ public class PersonalServiceImpl implements PersonalService {
 	@Override
 	public List<Map<String, Object>> queryBookCorrectd(
 			PageParameter<Map<String, Object>> pageParameter) {
-		List<Map<String, Object>> result_list = personaldao
-				.queryBookCorrectd(pageParameter);
+		List<Map<String, Object>> result_list = personaldao.queryBookCorrectd(pageParameter);
 		return result_list;
 	}
 
@@ -149,8 +144,7 @@ public class PersonalServiceImpl implements PersonalService {
 	@Override
 	public List<Map<String, Object>> queryMyCorrection(
 			PageParameter<Map<String, Object>> pageParameter) {
-		List<Map<String, Object>> result_list = personaldao
-				.queryMyCorrection(pageParameter);
+		List<Map<String, Object>> result_list = personaldao.queryMyCorrection(pageParameter);
 		return result_list;
 	}
 
@@ -164,8 +158,7 @@ public class PersonalServiceImpl implements PersonalService {
 	@Override
 	public List<Map<String, Object>> queryWriterUserTrendst(
 			PageParameter<Map<String, Object>> pageParameter) {
-		List<Map<String, Object>> result_list = personaldao
-				.queryWriterUserTrendst(pageParameter);
+		List<Map<String, Object>> result_list = personaldao.queryWriterUserTrendst(pageParameter);
 		return result_list;
 	}
 
@@ -176,6 +169,7 @@ public class PersonalServiceImpl implements PersonalService {
 		return count;
 	}
 
+	
 	/*
 	 * 基本原理是将字符串中所有的非标准字符（双字节字符）替换成两个标准字符（**，或其他的也可以）。这样就可以直接例用length方法获得字符串的字节长度了
 	 */
@@ -192,8 +186,7 @@ public class PersonalServiceImpl implements PersonalService {
 	@Override
 	public List<Map<String, Object>> myComment(
 			PageParameter<Map<String, Object>> pageParameter) {
-		List<Map<String, Object>> result_list = personaldao
-				.myComment(pageParameter);
+		List<Map<String, Object>> result_list = personaldao.myComment(pageParameter);
 		return result_list;
 	}
 
@@ -213,8 +206,7 @@ public class PersonalServiceImpl implements PersonalService {
 	@Override
 	public List<Map<String, Object>> mySurvey(
 			PageParameter<Map<String, Object>> pageParameter) {
-		List<Map<String, Object>> result_list = personaldao
-				.mySurvey(pageParameter);
+		List<Map<String, Object>> result_list = personaldao.mySurvey(pageParameter);
 		return result_list;
 	}
 
@@ -264,8 +256,7 @@ public class PersonalServiceImpl implements PersonalService {
 	}
 
 	@Override
-	public void saveUserTrendst(String TrendstName, String tableId,
-			int trendstType, String writer_user_id) {
+	public void saveUserTrendst(String TrendstName, String tableId,int trendstType, String writer_user_id) {
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("TrendstName", TrendstName);
 		paraMap.put("tableId", tableId);
@@ -273,7 +264,6 @@ public class PersonalServiceImpl implements PersonalService {
 		paraMap.put("writer_user_id", writer_user_id);
 
 		int count = personaldao.saveUserTrendst(paraMap);
-
 		// 如果是提纠错 同时也应该为书籍第一主编生成一条动态
 		if ("wdjc".equals(TrendstName)) {
 			String firstEditorId = personaldao
@@ -282,7 +272,42 @@ public class PersonalServiceImpl implements PersonalService {
 			paraMap.put("writer_user_id", firstEditorId);
 			int count_corrected = personaldao.saveUserTrendst(paraMap);
 		}
-
 	}
+
+		@Override
+		public Map<String, Object> deleteMyCorrection(String id,String logUserId) {
+			Map<String, Object> result_map = new HashMap<String,Object>();
+			Map<String, Object> para_map = new HashMap<String,Object>();
+			para_map.put("id", id);
+			para_map.put("logUserId", logUserId);
+			int count = personaldao.deleteMyCorrection(para_map);
+			if (count>0) {
+				result_map.put("code", "OK");
+				result_map.put("msg", "删除成功！");
+			}else{
+				result_map.put("code", "FAIL");
+				result_map.put("msg", "删除失败！");
+			}
+			
+			return result_map;
+		}
+
+		@Override
+		public Map<String, Object> deleteMyBookComment(String id,String logUserId) {
+			Map<String, Object> result_map = new HashMap<String,Object>();
+			Map<String, Object> para_map = new HashMap<String,Object>();
+			para_map.put("id", id);
+			para_map.put("logUserId", logUserId);
+			int count = personaldao.deleteMyBookComment(para_map);
+			if (count>0) {
+				result_map.put("code", "OK");
+				result_map.put("msg", "删除成功！");
+			}else{
+				result_map.put("code", "FAIL");
+				result_map.put("msg", "删除失败！");
+			}
+			return result_map;
+		}
+
 
 }

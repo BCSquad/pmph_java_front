@@ -273,7 +273,7 @@ public class PersonalCenterController extends BaseController {
 		for (String queryName : namesChi) {
 			//查询条件
 			String queryValue = request.getParameter(queryName);
-			queryName = java.net.URLDecoder.decode((queryName!=null?queryName:""),"UTF-8"); 
+			queryValue = java.net.URLDecoder.decode((queryValue!=null?queryValue:""),"UTF-8"); 
 			//封装查询条件入pageParameter 用以查询
 			paraMap.put(queryName, queryValue);
 			//传回查询条件
@@ -480,6 +480,35 @@ public class PersonalCenterController extends BaseController {
         modelAndView.addObject("listmybooknews", listmybooknews);
         modelAndView.addObject("listbookjoins", listbookjoins);*/
 	}
+	
+	/**
+	 * 我的纠错删除方法 伪删除
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="deleteMyCorrection",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> deleteMyCorrection(@RequestParam(value="id",required=true)String id,HttpServletRequest request){
+		String logUserId = getUserInfo().get("id").toString();
+		Map<String,Object> result_map = personalService.deleteMyCorrection(id,logUserId);
+		return result_map;
+		
+	}
+	
+	/**
+	 * 我的书评删除方法 伪删除
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="deleteMyBookComment",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> deleteMyBookComment(@RequestParam(value="id",required=true)String id,HttpServletRequest request){
+		String logUserId = getUserInfo().get("id").toString();
+		Map<String,Object> result_map = personalService.deleteMyBookComment(id,logUserId);
+		return result_map;
+	}
+	
+	
 
 	
 	@SuppressWarnings("deprecation")
