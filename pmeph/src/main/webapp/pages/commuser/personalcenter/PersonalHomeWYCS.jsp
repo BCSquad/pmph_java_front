@@ -1,3 +1,5 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -289,19 +291,23 @@ request.setAttribute("currentTime",datetime);
                									<%-- <img src="${ctx }/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"> --%>
                								</div>
                								<div class="content_wrapper">
-            									<c:if test="${c.sbwz_is_deleted=='0' && c.sbwz_auth_status ==0}"><div class="status_tag toAudit">待审核</div></c:if>
-            									<c:if test="${c.sbwz_is_deleted=='0' && c.sbwz_auth_status ==1}"><div class="status_tag reject">未通过</div></c:if>
-            									<c:if test="${c.sbwz_is_deleted=='0' && c.sbwz_auth_status ==2}"><div class="status_tag Audited">已通过</div></c:if>
+               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new article_new"></div></c:if>
+               									<c:if test="${c.sbwz_is_deleted=='0' && c.sbwz_is_staging== true}"><div class="status_tag toApply">未提交</div></c:if>
+            									<c:if test="${c.sbwz_is_deleted=='0' && c.sbwz_is_staging== false && c.sbwz_auth_status ==0}"><div class="status_tag toAudit">待审核</div></c:if>
+            									<c:if test="${c.sbwz_is_deleted=='0' && c.sbwz_is_staging== false && c.sbwz_auth_status ==1}"><div class="status_tag reject">未通过</div></c:if>
+            									<c:if test="${c.sbwz_is_deleted=='0' && c.sbwz_is_staging== false && c.sbwz_auth_status ==2}"><div class="status_tag Audited">已通过</div></c:if>
                									<c:if test="${c.sbwz_is_deleted !='0'}"><div class="status_tag reject">已删除</div></c:if>
                									
                									<div class="article_title">${c.sbwz_is_deleted == "0"?c.sbwz_title:"该文章已删除" }</div>
                									<div class="article_summary">${c.sbwz_is_deleted == "0"?c.sbwz_summary:"该文章已删除" } ...</div>
                								</div>
                							</div>
-               							<div class="operate_wrapper">
-	               							<a target="_blank" href="${ctx }/writerArticle/initWriteArticle.action?id=${c.sbwz_id}&userid=${logUserId}"><div class="img img_edit" ></div><div>编辑</div></a> 
-	               							<a onclick="deleteArticle(${c.sbwz_id})" ><div class="img img_delete"></div><div>删除</div></a>
-               							</div>
+               							<c:if test="${c.sbwz_is_deleted =='0'}">
+	               							<div class="operate_wrapper">
+		               							<a target="_blank" href="${ctx }/writerArticle/initWriteArticle.action?id=${c.sbwz_id}&userid=${logUserId}"><div class="img img_edit" ></div><div>编辑</div></a> 
+		               							<a onclick="deleteArticle('${c.sbwz_id}','${c.sbwz_title }')" ><div class="img img_delete"></div><div>删除</div></a>
+	               							</div>
+               							</c:if>
                						</c:when>
                						<c:when test="${c.table_name == 'tsjc' && c.trendst_type == 0}"><%-- 图书纠错 发表 --%>
                							<div class="issue_line"><span class="issue_name">收到了纠错</span><span class="issue_time">${c.trendst_date }</span></div>
@@ -352,15 +358,18 @@ request.setAttribute("currentTime",datetime);
 												</div>
                									<div class="sub_title">
                										<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
+               										<c:if test="${c.wdjc_is_deleted !='0'}"><div class="status_tag reject">已删除</div></c:if>
                										${c.wdjc_realname } 纠正了《${c.wdjc_bookname }》第${c.wdjc_page }页${c.wdjc_line },提出纠错：“${c.wdjc_content }”。
                									</div>
                									<div class="rank_stars"></div>
                									<div class="book_detail">${c.wdjc_detail }</div>
                								</div>
                							</div>
-               							<div class="operate_wrapper">
-	               							<a><div class="img img_delete"></div><div>删除</div></a>
-               							</div>
+               							<c:if test="${c.wdjc_is_deleted =='0'}">
+	               							<div class="operate_wrapper">
+		               							<a onclick="deleteMyCorrect(${c.wdjc_id})"><div class="img img_delete"></div><div>删除</div></a>
+	               							</div>
+               							</c:if>
                						</c:when>
                						<c:when test="${c.table_name == 'wdsp' && c.trendst_type == 0}"><%-- 我的书评 发表 --%>
                							<div class="issue_line"><span class="issue_name">发表了评论</span><span class="issue_time">${c.trendst_date }</span></div>
@@ -380,7 +389,8 @@ request.setAttribute("currentTime",datetime);
                									</div>
                									<div class="sub_title">
 	               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
-	               									${c.wdsp_realname } 评论了《${c.wdsp_bookname }》：“${c.wdsp_content }”。
+	               									<c:if test="${c.wdsp_is_deleted !='0'}"><div class="status_tag reject">已删除</div></c:if>
+	               									${c.wdsp_realname } 评论了《${c.wdsp_bookname }》：“${c.wdsp_is_deleted !='0'?'该条评论已删除':c.wdsp_content }”。
                									</div>
                									<div class="rank_stars">
                										<c:forEach begin="1" end="${c.wdsp_score/2}">
@@ -393,9 +403,11 @@ request.setAttribute("currentTime",datetime);
                									<div class="book_detail">${c.wdsp_detail }</div>
                								</div>
                							</div>
-               							<div class="operate_wrapper">
-	               							<a><div class="img img_delete"></div><div>删除</div></a>
-               							</div>
+               							<c:if test="${c.wdsp_is_deleted =='0'}">
+	               							<div class="operate_wrapper">
+		               							<a onclick="deleteMyBookComment(${c.wdsp_id})"><div class="img img_delete"></div><div>删除</div></a>
+	               							</div>
+               							</c:if>
                						</c:when>
                						<c:when test="${c.table_name == 'wdwj' && c.trendst_type == 0}"><%-- 我的问卷 发表 --%>
                							
