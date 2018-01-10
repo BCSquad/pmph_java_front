@@ -152,6 +152,22 @@ public interface PersonalService {
 	 */
 	public void saveUserTrendst(String TrendstName,String tableId,int trendstType,String writer_user_id);
 
+	/**
+	 * 伪删除我的纠错
+	 * @param id
+	 * @param logUserId
+	 * @return
+	 */
+	public Map<String, Object> deleteMyCorrection(String id, String logUserId);
+
+	/**
+	 * 伪删除我的书评
+	 * @param id
+	 * @param logUserId
+	 * @return
+	 */
+	public Map<String, Object> deleteMyBookComment(String id, String logUserId);
+
 	
 	
 	
