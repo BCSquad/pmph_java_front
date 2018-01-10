@@ -10,7 +10,7 @@
 
     </script>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-<title>Insert title here</title>
+<title>写文章</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet"
 	href="${ctx}/statics/commuser/message/writeArticle.css"

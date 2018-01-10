@@ -439,7 +439,7 @@
 	<select id="myComment" parameterType="PageParameter" resultMap="MyBookCommentMap">
 		SELECT
 		b.bookname,
-		b.publish_date,
+		DATE_FORMAT(b.publish_date,'%Y年%m月%d日') AS publish_date,
 		b.author,
 		b.image_url,
 		bc.id,
@@ -447,7 +447,7 @@
 
 		bc.content,
 		bc.gmt_create,
-		bc.gmt_update,
+		DATE_FORMAT(bc.gmt_update,'%Y年%m月%d日') AS gmt_update,
 		bc.is_long
 		FROM
 		book_user_comment AS bc

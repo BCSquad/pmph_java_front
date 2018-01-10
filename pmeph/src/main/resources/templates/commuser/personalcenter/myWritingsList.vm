@@ -33,12 +33,15 @@
                 </div>
             </div>
             <div class="dtxia">
-            	#if($!{c.auth_status}!=2)
-                
+            	#if(false && $!{c.auth_status}!=2)
+                	
 	                <span id="bianji"></span>
-	                <span class="dtxiawz"><a herf="$!{contextpath}/writerArticle/initWriteArticle.action?id=$!{c.id}&&userid=$!{permap.id}">编辑</a></span>
+	                <span class="dtxiawz"><a href="$!{contextpath}writerArticle/initWriteArticle.action?id=$!{c.id}&&userid=$!{permap.id}">编辑</a></span>
                 #end
-                <span id="sanchu"></span><span  class="dtxiawz" onclick="DelMyWriter('$!{c.id}')">删除</span>
+                <div class="operate_wrapper">
+	                <a target="_blank" href="$!{contextpath}writerArticle/initWriteArticle.action?id=$!{c.id}&userid=$!{logUserId}"><div class="img img_edit" ></div><div>编辑</div></a> 
+			        <a onclick="deleteArticle('$!{c.id}','$!{c.title}')" ><div class="img img_delete"></div><div>删除</div></a>
+                </div>
             </div>
             <div id="tzxian"></div>
         </div>

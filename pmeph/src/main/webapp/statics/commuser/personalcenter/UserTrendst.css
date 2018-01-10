@@ -256,7 +256,7 @@
     text-overflow: ellipsis;
 }
 
-.operate_wrapper {
+/* .operate_wrapper {
 	float: left;
     clear: right;
 }
@@ -267,9 +267,9 @@
 	height: 20px;
 	display: inline-block;
 	float: left;
-}
+} */
 
-.img_edit{
+/* .img_edit{
 	background-position: -461px -252px;
 }
 
@@ -283,16 +283,16 @@
 
 .img_delete{
 	background-position: -461px -277px;
-}
+} */
 
 
-.operate_wrapper a div{
+/* .operate_wrapper a div{
 	line-height: 20px;
     display: inline-block;
     height: 20px;
     float: left;
     color: #a0b1c5;
-}
+} */
 
 .not-like-an-a{
 	cursor: pointer;
