@@ -3,8 +3,14 @@
 
 <mapper namespace="com.bc.pmpheep.back.commuser.survey.dao.SurveyDao">
 	<!-- 调查列表 -->
-	<select id="surveyList" resultType="map">
-		select * from survey where is_deleted=0
+	<select id="surveyList" resultType="map" parameterType="map">
+		SELECT DISTINCT a.* FROM `survey` a
+		LEFT JOIN `survey_question_answer`  b
+		ON a.`id`= b.`survey_id`
+		WHERE a.is_deleted=0
+		AND b.`user_id` != #{userId}
+		AND #{dateStr} &gt;= a.`begin_date`
+		AND #{dateStr} &lt;= a.`end_date`
 	</select>
 	
 	<!-- 查询单个调查对应的问题 -->

@@ -9,6 +9,7 @@ function ChangeDiv(type,groupId){
 }
 
 
+
 $(function(){
 	var webSocket = new WebSocket("ws:120.76.221.250:11000/pmpheep/websocket?userType=" +2+"&userId="+$("#userId").val());
 	//var webSocket = new WebSocket("ws:127.0.0.1:8036/pmpheep/websocket?userType=" +2+"&userId="+$("#userId").val());

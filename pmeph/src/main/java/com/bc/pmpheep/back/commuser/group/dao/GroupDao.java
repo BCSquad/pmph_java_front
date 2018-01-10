@@ -13,6 +13,7 @@ import com.bc.pmpheep.back.commuser.group.bean.GroupMessageVO;
 import com.bc.pmpheep.back.commuser.group.bean.PmphGroupMemberVO;
 
 
+
 /**
  * PmphGroup 实体类数据访问层接口
  * 

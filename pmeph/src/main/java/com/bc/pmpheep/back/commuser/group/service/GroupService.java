@@ -15,6 +15,7 @@ import com.bc.pmpheep.back.commuser.group.bean.GroupMessageVO;
 import com.bc.pmpheep.back.commuser.group.bean.PmphGroupMemberVO;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 
+
 public interface GroupService {
 	
 	/**

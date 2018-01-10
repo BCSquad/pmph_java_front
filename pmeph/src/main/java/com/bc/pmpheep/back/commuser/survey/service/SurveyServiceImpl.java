@@ -18,8 +18,8 @@ public class SurveyServiceImpl implements SurveyService {
 	
 	//调查列表
 	@Override
-	public List<Map<String, Object>> surveyList() {
-		List<Map<String, Object>> list= surveyDao.surveyList();
+	public List<Map<String, Object>> surveyList(Map<String, Object> map) {
+		List<Map<String, Object>> list= surveyDao.surveyList(map);
 		return list;
 	}
 	
