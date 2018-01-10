@@ -676,20 +676,19 @@
 
 		left join
 		(
-		SELECT
-		cc.id as sbwz_id
-		,'sbwz' as sbwz_type
-		,DATE_FORMAT(cc.gmt_create,'%Y年%m月%d日') AS sbwz_create_time
-		,cc.title AS sbwz_title
-		,cc.summary AS sbwz_summary
-		,cc.auth_status AS sbwz_auth_status
-		,cc.is_deleted AS sbwz_is_deleted
-		,cc.mid AS sbwz_mid
-		from cms_content cc
-		inner join cms_category ct on cc.category_id = ct.id and ct.category_name =
-		'医学随笔'
-		where cc.author_id=#{parameter.logUserId}
-		<!-- and cc.is_deleted !='1' -->
+			 SELECT 
+			cc.id  as sbwz_id
+			,'sbwz' as sbwz_type
+			,DATE_FORMAT(cc.gmt_create,'%Y年%m月%d日') AS sbwz_create_time
+			 ,cc.title AS sbwz_title
+			 ,cc.summary AS sbwz_summary
+			 ,cc.auth_status AS sbwz_auth_status
+			 ,cc.is_deleted AS sbwz_is_deleted
+			 ,cc.mid AS sbwz_mid
+			 from cms_content cc
+			 inner join cms_category ct on cc.category_id = ct.id and ct.category_name = '医学随笔'
+			 where cc.author_id=#{parameter.logUserId}
+				  <!-- and cc.is_deleted !='1' -->
 		order by cc.gmt_create
 		)sbwz
 		on t.table_name = sbwz.sbwz_type and
@@ -712,19 +711,19 @@
 		wdjc_line,
 		bc.content AS wdjc_content,
 		u.realname AS wdjc_realname,
+		bc.is_deleted AS wdjc_is_deleted,
 		bc.result AS wdjc_result,
-		bc.is_editor_replied AS
-		wdjc_is_editor_replied
-		FROM
-		book AS b
-		Inner Join book_correction AS bc ON b.id = bc.book_id
-		Inner Join writer_user AS u ON bc.user_id = u.id
-		left Join book_detail AS bd ON bd.book_id = b.id
-		WHERE
-		bc.user_id = #{parameter.logUserId}
-		AND bc.is_deleted = '0'
-
-		order by bc.gmt_create desc
+		bc.is_editor_replied AS wdjc_is_editor_replied
+				FROM
+				book AS b
+				Inner Join book_correction AS bc ON b.id = bc.book_id
+				Inner Join writer_user AS u ON bc.user_id = u.id
+				left  Join book_detail AS bd ON bd.book_id = b.id
+				WHERE
+				bc.user_id =  #{parameter.logUserId}
+				AND bc.is_deleted =  '0' 
+				
+				order by  bc.gmt_create desc
 		) wdjc
 		on t.table_name = wdjc.wdjc_type and
 		t.table_id=wdjc.wdjc_id
@@ -763,8 +762,8 @@
 		b.id AS wdsp_book_id,
 		a.score AS wdsp_score,
 		a.content AS wdsp_content,
-		bd.detail AS
-		wdsp_detail,
+		a.is_deleted AS wdsp_is_deleted,
+		bd.detail AS wdsp_detail,
 		u.realname AS wdsp_realname,
 		DATE_FORMAT(a.gmt_update,'%Y年%m月%d日') AS wdsp_update_time
 		from
@@ -773,9 +772,8 @@
 		join writer_user u on a.writer_id = u.id
 		left join book_detail bd on bd.book_id = b.id
 		WHERE
-		a.writer_id =
-		#{parameter.logUserId} AND
-		a.is_deleted = '0'
+		a.writer_id =  #{parameter.logUserId} 
+		<!-- AND a.is_deleted =  '0'  -->
 		) wdsp
 		on t.table_name = wdsp.wdsp_type and t.table_id=wdsp.wdsp_id
 
@@ -911,6 +909,21 @@
 		WHERE
 		bc.id = #{id}
 	</select>
+	
+	<!-- 伪删除我的纠错 同时根据纠错表主键和纠错人id 同时满足才删除 -->
+	<update id="deleteMyCorrection" parameterType="Map">
+		update book_correction
+		set is_deleted = 1
+		where 
+		id= #{id} and user_id = #{logUserId}
+	</update>
+	
+	<update id="deleteMyBookComment" parameterType="Map">
+		update book_user_comment
+		set is_deleted = 1
+		where 
+		id= #{id} and writer_id = #{logUserId}
+	</update>
 
 
 
