@@ -37,6 +37,7 @@
                 <div class="top_content">
                     <span class="span1">${groupMap.textbook_name}</span>
                     <input id="groupId" name="group_id" type="hidden" value="${groupMap.id}"/>
+                    <input id="type" name="type" type="hidden" value="${type}"/>
                     <div class="top_content2">
                         <div class="top_content22">
                             <img src="${ctx}/statics/image/zjyh.png">
