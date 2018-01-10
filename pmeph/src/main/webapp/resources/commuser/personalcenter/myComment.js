@@ -5,11 +5,11 @@ $(function(){
 		$t.unbind().bind("click",function(){
 			var tid = $t.attr("id");
 			if (tid=="replytag_all") {
-				$("#is_replied").val("");
+				$("#is_long").val("");
 			}else if(tid=="replytag_toreply"){
-				$("#is_replied").val("1");
+				$("#is_long").val("1");
 			}else if(tid=="replytag_replied"){
-				$("#is_replied").val("0");
+				$("#is_long").val("0");
 			}
 			$(".replytag").removeClass("active");
 			$t.addClass("active");
@@ -17,44 +17,36 @@ $(function(){
 			queryMain();
 		});
 	});
+	
 });
 
 
+$(function() {  
+    var slideHeight = 50; // px 定义折叠的最小高度  
+    var defHeight = $('#wrap').height();  
+    if(defHeight >= slideHeight) {  
+        $('#wrap').css('height', slideHeight + 'px');  
+        $('#read-more').append('<a href="#">...(展开)</a>');  
+        $('#read-more a').click(function() {  
+            var curHeight = $('#wrap').height();  
+            if(curHeight == slideHeight) {  
+                $('#wrap').animate({  
+                    height: defHeight  
+                }, "normal");  
+                $('#read-more a').html('收起');  
+            } else {  
+                $('#wrap').animate({  
+                    height: slideHeight  
+                }, "normal");  
+                $('#read-more a').html('...(展开)');  
+            }  
+            return false;  
+        });  
+    }  
+});  
 
-//提交回复 id是纠错表的主键id
-function submitReply(id){
-	
-	
-	$("#btn_"+id).attr("disabled",true);
-	
-	var data={
-			author_reply:$("#textarea_"+id).val(),
-			id:id
-	};
-	
-	$.ajax({
-		type:'post',
-		url:contextpath+'personalhomepage/authorReply.action?t='+new Date().getTime(),
-		async:false,
-		dataType:'json',
-		data:data,
-		success:function(json){
-			if (json.code=="OK") {
-				window.message.success(json.msg);
-				setTimeout(function(){
-					queryMain();
-				}, 800);
-			}else if(json.code=="WARNING"){
-				window.message.warning(json.msg);
-				$("#btn_"+id).attr("disabled",false);
-			}
-			
-		},
-		error:function(XMLHttpRequest, textStatus, errorThrown) {
-			$("#btn_"+id).attr("disabled",false);
-		}
-	});
-}
+
+
 
 //输入长度限制校验，ml为最大字节长度
 function LengthLimit(obj,ml){

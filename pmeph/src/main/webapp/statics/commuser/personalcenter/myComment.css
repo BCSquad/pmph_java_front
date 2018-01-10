@@ -1330,24 +1330,27 @@
 
 .bookC_right_g{
     padding-left: 20px;
-    padding-top: 15px;
+    padding-top: 5px;
 }
+
 
 .bookC_right_a{
     padding-left: 20px;
-    height:15px;
-    font-size: 15px;
+    height:24px;
+    font-size: 14px;
 }
 
 .time-a{
     float: left;
     font-weight: bolder;
     margin-right: 20px;
+    /* padding-bottom: 5px; */
 }
 
 .link_a{
     margin-right: 20px;
     color:#0785d1;
+    text-decoration: none;  
 }
 
 .dotted_line{
@@ -1356,5 +1359,39 @@
     width: 100%;
     height: 20px;
 }
+
+/* ------------展开样式----------------------- */
+#container {  
+    margin: 10 auto;  
+    border: 1px solid #3bb2d0;
+    background-color: #F6F6F6;
+    width: 740px;
+    margin-bottom: 5px;  
+}  
+  
+#wrap {  
+    position: relative;  
+    overflow: hidden;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;  
+}  
+  
+#read-more {  
+    padding: 0px;  
+    color: #333;
+    font-size: 14px;
+}  
+  
+#read-more a {  
+    padding-left: 20px;  
+    no-repeat 100% 50%;  
+   /*  font-weight: bold;   */
+    text-decoration: none;  
+}  
+  
+#read-more a: hover {  
+    color: #000;  
+}  
 
 

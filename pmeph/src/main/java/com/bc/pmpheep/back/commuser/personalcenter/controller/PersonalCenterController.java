@@ -174,7 +174,7 @@ public class PersonalCenterController extends BaseController {
 		}else if("wdpl".equals(pagetag)){ //我的评论
 			//从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
 			//设定条件名数组 
-			String[] names={"is_replied"};
+			String[] names={"is_long"};
 			String[] namesChi = {};
 			queryConditionOperation(names,namesChi,request, mv, paraMap,vm_map);
 			pageParameter.setParameter(paraMap);
