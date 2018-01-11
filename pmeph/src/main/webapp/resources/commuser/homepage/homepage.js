@@ -111,6 +111,7 @@ function changesale(type) {
 function cancel(){
 	$("#test_float").hide();
 	$("#test_float").attr('onclick','');
+	return false;
 }
 
 //跳转到问卷调查页面
