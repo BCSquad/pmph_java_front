@@ -122,7 +122,7 @@ public class LoginInterceptor implements HandlerInterceptor {
                         ResponseBean<String> responseBean = new ResponseBean<String>();
                         responseBean.setCode(ResponseBean.NO_PERMISSION);
                         responseBean.setMsg("user is not login");
-                        responseBean.setData(httpServletRequest.getContextPath() + redirectUrl + "?refer=" + refer);
+                        responseBean.setData(redirectUrl + "?ServiceID=" + serviceID + "&Referer=" + refer);
                         httpServletResponse.getWriter().write(JSON.toJSONString(responseBean));
                     } else {
                         StringBuilder builder = new StringBuilder("");
@@ -131,8 +131,11 @@ public class LoginInterceptor implements HandlerInterceptor {
                             String[] values = map.get(name);
                             builder.append(name + "=" + (values.length > 0 ? values[0] : "") + "&");
                         }
-                        refer = URLEncoder.encode(httpServletRequest.getContextPath() + httpServletRequest.getServletPath() + "?" + builder.toString(), "UTF-8");
-                        httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + redirectUrl + "?refer=" + refer);
+                        refer = URLEncoder.encode(httpServletRequest.getScheme() + "://" + httpServletRequest.getServerName() +
+                                ":" + httpServletRequest.getServerPort() + httpServletRequest.getContextPath() +
+                                httpServletRequest.getServletPath() + "?" + builder.toString(), "UTF-8");
+
+                        httpServletResponse.sendRedirect(redirectUrl + "?ServiceID=" + serviceID + "&Referer=" + refer);
                     }
                     return false;
                 } else {
@@ -144,37 +147,6 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
 
         return true;
-
-        if (userInfo == null) {
-            String refer;
-            if (isAjax) {
-                String headReferer = httpServletRequest.getHeader("Referer");
-                refer = StringUtils.isEmpty(headReferer) ? httpServletRequest.getHeader("referer") : headReferer;
-                refer = URLEncoder.encode(refer, "UTF-8");
-
-                ResponseBean<String> responseBean = new ResponseBean<String>();
-                responseBean.setCode(ResponseBean.NO_PERMISSION);
-                responseBean.setMsg("user is not login");
-                responseBean.setData(redirectUrl + "?ServiceID=" + serviceID + "&Referer=" + refer);
-                httpServletResponse.getWriter().write(JSON.toJSONString(responseBean));
-
-            } else {
-                StringBuilder builder = new StringBuilder("");
-                Map<String, String[]> map = (Map<String, String[]>) httpServletRequest.getParameterMap();
-                for (String name : map.keySet()) {
-                    String[] values = map.get(name);
-                    builder.append(name + "=" + (values.length > 0 ? values[0] : "") + "&");
-                }
-                refer = URLEncoder.encode(httpServletRequest.getScheme() + "://" + httpServletRequest.getServerName() +
-                        ":" + httpServletRequest.getServerPort() + httpServletRequest.getContextPath() +
-                        httpServletRequest.getServletPath() + "?" + builder.toString(), "UTF-8");
-
-                httpServletResponse.sendRedirect(redirectUrl + "?ServiceID=" + serviceID + "&Referer=" + refer);
-            }
-            return false;
-        } else {
-            return true;
-        }
     }
 
     @Override

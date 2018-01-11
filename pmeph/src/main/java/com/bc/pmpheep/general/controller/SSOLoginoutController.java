@@ -108,23 +108,20 @@ public class SSOLoginoutController extends BaseController {
                 session.setAttribute(Const.SESSION_USER_CONST_TYPE, "2");
             }
 
-            if (StringUtils.isEmpty(request.getParameter("Referer"))) {
-                response.sendRedirect(request.getContextPath() + "/");
+            if (StringUtils.isEmpty(request.getParameter("refer")) || request.getParameter("refer").endsWith("/") || request.getParameter("refer").endsWith("tohomepage.action")) {
+                if ("1".equals(usertype)) {
+                    response.sendRedirect(request.getContextPath() + "/");
+                } else if ("2".equals(usertype)) {
+                    response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
+                }
+
             } else {
-                response.sendRedirect(request.getParameter("Referer"));
+                response.sendRedirect(request.getParameter("refer"));
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
-        if (StringUtils.isEmpty(request.getParameter("refer")) || request.getParameter("refer").endsWith("/")|| request.getParameter("refer").endsWith("tohomepage.action")) {
-            if ("1".equals(usertype)) {
-                response.sendRedirect(request.getContextPath() + "/");
-            } else if ("2".equals(usertype)) {
-                response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
-            }
-
-        } else {
-            response.sendRedirect(request.getParameter("refer"));
         }
+
 
     }
 

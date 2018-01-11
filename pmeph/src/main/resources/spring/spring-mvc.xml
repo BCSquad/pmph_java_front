@@ -24,7 +24,8 @@
         <bean class="com.bc.pmpheep.back.interceptor.ProcessInterceptor"></bean>
 
         <bean class="com.bc.pmpheep.back.interceptor.LoginInterceptor">
-            <property name="redirectUrl" value="/pages/comm/login.jsp"/>
+            <property name="redirectUrl" value="http://books123456789.ipmph.com/newsso/"/>
+            <property name="serviceID" value="yiyaojiaohu"></property>
             <property name="pathWithUsertypeMaps">
                 <set>
 
