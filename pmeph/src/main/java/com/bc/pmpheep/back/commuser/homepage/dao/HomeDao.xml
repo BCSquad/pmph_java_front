@@ -4,7 +4,7 @@
   <resultMap id="Mapresult" type="java.util.Map"></resultMap>
   <!-- 查询最新三条公文 -->
   <select id="queryDocument"  resultMap="Mapresult">
-     select  * from cms_content  where  category_id='130'  order by gmt_create desc limit 0,3
+     select  * from cms_content  where  category_id='56'  order by gmt_create desc limit 0,3
   </select>
    <!-- 查询最新五条公告 -->
   <select id="queryNotice"  resultMap="Mapresult">
@@ -32,17 +32,18 @@
 				<![CDATA[limit ${startrows},10]]>
 	   </if>
   </select>
-   <!-- 查询最新四条医学随笔 -->
+   <!-- 查询最新医学随笔 -->
   <select id="queryArticle"  resultMap="Mapresult">
       select  
         t.title,
+        t.id,
         t.summary,
         t.gmt_create,
         c.realname       
         from cms_content t
         left join cms_category b on t.category_id=b.id
         left join writer_user c on t.author_id=c.id
-        where  category_id='132' order by gmt_create desc limit 0,4
+        where  category_id='58' order by gmt_create desc limit 0,#{endrow}
   </select>
    <!-- 查询热门标签 -->
   <select id="queryLabel" parameterType="string"  resultMap="Mapresult">
@@ -66,7 +67,6 @@ LIMIT 0,10
 	       b.avatar
 	       from cms_content  t left join writer_user b on t.author_id=b.id
 	       where  category_id='58'  order by clicks desc limit 0,4
-      <!--  select  * from cms_content  where  category_id='58'  order by clicks desc limit 0,4 -->
   </select>
    <!-- 查询点击人数最多的书评的作者、书名以及评论内容 -->
   <select id="queryComment"  resultMap="Mapresult">
@@ -116,6 +116,6 @@ LIMIT 0,10
   </select>
    <!-- 查询书籍分类-->
   <select id="queryBookType" parameterType="map" resultMap="Mapresult">
-       select * from material_type where  parent_id=#{parent_id} order by sort
+       select * from material_type where  parent_id=#{parent_id} order by sort 
   </select>
 </mapper>

@@ -13,10 +13,12 @@ import javax.ws.rs.PUT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bc.pmpheep.back.commuser.book.service.BookService;
 import com.bc.pmpheep.back.commuser.collection.dao.BookCollectionDao;
 import com.bc.pmpheep.back.commuser.collection.service.BookCollectionService;
 import com.bc.pmpheep.back.commuser.readpage.service.ReadDetailService;
@@ -38,6 +40,9 @@ public class ReadDetailController extends BaseController{
 	 @Autowired
 	 @Qualifier("com.bc.pmpheep.back.commuser.collection.service.BookCollectionServiceImpl")
 	 private BookCollectionService bookCollectionService;
+	 @Autowired
+	 @Qualifier("com.bc.pmpheep.back.commuser.book.service.BookServiceImpl")
+	 private BookService bookService;
 	/**
 	 * 根据图书ID初始化数据
 	 * @param request
@@ -47,7 +52,6 @@ public class ReadDetailController extends BaseController{
 	public ModelAndView move(HttpServletRequest request){
 		ModelAndView modelAndView=new ModelAndView();
 		String id=request.getParameter("id");
-//		id="168";
 		Map<String, Object> supMap=readDetailService.querySupport(id);
 		Map<String, Object> map=readDetailService.queryReadBook(id);
 		if(("DEFAULT").equals(map.get("image_url"))){
@@ -55,13 +59,28 @@ public class ReadDetailController extends BaseController{
 		}
 		String author="%"+map.get("author").toString()+"%";
 		List<Map<String, Object>> eMap=readDetailService.queryRecommendByE(0);
-		PageParameter<Map<String, Object>> pageParameter=new PageParameter<Map<String, Object>>(1,2);
-		Map<String, Object> wMap=new HashMap<String, Object>();
-		wMap.put("id", id);
-		pageParameter.setParameter(wMap);
-		PageResult<Map<String, Object>> listCom=readDetailService.queryComment(pageParameter);
+		List<Map<String, Object>> listCom=readDetailService.queryComment(id,0);
+		List<Map<String, Object>> ComNum=readDetailService.queryComment(id,-1);
 		List<Map<String, Object>> auList=readDetailService.queryAuthorType(author);
+		List<Map<String, Object>> longList=readDetailService.queryLong(id,0);
+		if(longList.size()==0){
+			modelAndView.addObject("longcom", "nothing");
+		}
+		if(listCom.size()==0){
+			modelAndView.addObject("shortcom", "nothing");
+		}
+		Long typeid=Long.valueOf(map.get("type").toString());
+		List<Map<String, Object>> typeList=bookService.queryParentTypeListByTypeId(typeid);
 		for (Map<String, Object> pmap : auList) {
+			if(("DEFAULT").equals(pmap.get("image_url"))){
+				pmap.put("image_url", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+			}
+		}
+		Map<String, Object> fmap=new HashMap<String, Object>();
+		fmap.put("type", map.get("type"));
+		fmap.put("row", 6);
+		List<Map<String, Object>> frList=readDetailService.fresh(fmap);
+		for (Map<String, Object> pmap : frList) {
 			if(("DEFAULT").equals(pmap.get("image_url"))){
 				pmap.put("image_url", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
 			}
@@ -110,11 +129,55 @@ public class ReadDetailController extends BaseController{
 		}
 		modelAndView.addObject("id", id);
 		modelAndView.addObject("eMap", eMap);
+		modelAndView.addObject("ComNum", ComNum.size());
 		modelAndView.addObject("supMap", supMap);
 		modelAndView.addObject("map", map);
 		modelAndView.addObject("listCom", listCom);
-		modelAndView.setViewName("commuser/readpage/readdetail");
+		modelAndView.addObject("frList", frList);
+		modelAndView.addObject("longList", longList);
+		modelAndView.addObject("typeList", typeList);
+		modelAndView.addObject("start", 2);
+		if(null!=(request.getParameter("state"))){
+			modelAndView.setViewName("commuser/readpage/writecom");
+		}else{
+			modelAndView.setViewName("commuser/readpage/readdetail");
+		}
 		return modelAndView;
+	}
+	
+	/**
+	 * 新增图书纠错
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/correction")
+	@ResponseBody
+	public String correction(HttpServletRequest request){
+		String returncode="";
+		Map<String, Object> map = new HashMap<String, Object>();
+		String book_id=request.getParameter("book_id");
+		String page=request.getParameter("page");
+		String line=request.getParameter("line");
+		String content=request.getParameter("content");
+		String attachment=request.getParameter("attachment");
+		String attachment_name=request.getParameter("attachment_name");
+		if(StringUtils.isEmpty(book_id)||
+			StringUtils.isEmpty(page)||
+			StringUtils.isEmpty(line)||
+			StringUtils.isEmpty(content)){
+			returncode="NO";
+		}else{
+			Map<String, Object> user=getUserInfo();
+			map.put("user_id", user.get("id"));
+			map.put("book_id", book_id);
+			map.put("page", page);
+			map.put("line", line);
+			map.put("content", content);
+			map.put("attachment", attachment);
+			map.put("attachment_name", attachment_name);
+			returncode=readDetailService.correction(map);
+		}
+		return returncode;
 	}
 	
 	/**
@@ -179,7 +242,13 @@ public class ReadDetailController extends BaseController{
 	@ResponseBody
 	public List<Map<String, Object>> fresh(HttpServletRequest request){
 		int x=Integer.parseInt(request.getParameter("type"));
+		String row=request.getParameter("row");
 		Map<String, Object> pmap=new HashMap<String, Object>();
+		if(row.equals("6")){
+			pmap.put("row", 6);
+		}else{
+			pmap.put("row", 9);
+		}
 		pmap.put("type", x);
 		List<Map<String, Object>> map=readDetailService.fresh(pmap);
 		for (Map<String, Object> zmap : map) {
@@ -226,22 +295,31 @@ public class ReadDetailController extends BaseController{
 	}
 	
 	/**
-	 * 分页的具体实现
+	 * 评论分页的具体实现
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping("changepage")
 	@ResponseBody
-	public PageResult<Map<String, Object>> changepage(HttpServletRequest request){
+	public List<Map<String, Object>> changepage(HttpServletRequest request){
 		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
-		int allppage=Integer.parseInt(request.getParameter("allppage"));
 		String id=request.getParameter("id");
-		PageParameter<Map<String, Object>> pageParameter=new PageParameter<Map<String, Object>>(pageNumber,allppage);
-		Map<String, Object> wMap=new HashMap<String, Object>();
-		wMap.put("id", id);
-		pageParameter.setParameter(wMap);
-		PageResult<Map<String, Object>> listCom=readDetailService.queryComment(pageParameter);
+		List<Map<String, Object>> listCom=readDetailService.queryComment(id,pageNumber);
 		return listCom;
+	}
+	
+	/**
+	 * 长评的具体实现
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("longcom")
+	@ResponseBody
+	public List<Map<String, Object>> longcom(HttpServletRequest request){
+		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
+		String id=request.getParameter("id");
+		List<Map<String, Object>> longcom=readDetailService.queryLong(id, pageNumber);
+		return longcom;
 	}
 	
 	/**
@@ -273,5 +351,67 @@ public class ReadDetailController extends BaseController{
 		resultMap.put("flag", flag);
 		return resultMap;
 	
+	}
+	
+	/**
+	 * 强制登录方法
+	 * @return
+	 */
+	@RequestMapping("tologin")
+	@ResponseBody
+	public String tologin(){
+		return "";
+	}
+	
+	/**
+	 * 查询登陆人是否写过长评
+	 * @return returncode;
+	 */
+	@RequestMapping("queryLoginLong")
+	@ResponseBody
+	public Map<String, Object> queryLoginLong(HttpServletRequest request){
+		String book_id=request.getParameter("book_id");
+		Map<String, Object> map=new HashMap<String, Object>();
+		Map<String, Object> user=getUserInfo();
+		List<Map<String, Object>> list=readDetailService.queryLoginLong(user.get("id").toString(),book_id);
+		if(list.size()>0){
+			map.put("returncode", "yes");
+			map.put("list", list);
+		}else{
+			map.put("returncode", "no");
+		}
+		return map;
+	}
+	
+	/**
+	 * 写长评
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("insertlong")
+	@ResponseBody
+	public String insertlong(HttpServletRequest request){
+		String returncode="";
+		String book_id=request.getParameter("book_id");
+		String score=request.getParameter("score");
+		String content=request.getParameter("content");
+		String title=request.getParameter("title");
+		if(StringUtils.isEmpty(book_id)||
+		   StringUtils.isEmpty(score)||
+		   StringUtils.isEmpty(content)||
+		   StringUtils.isEmpty(title)){
+		   returncode="NO";
+		}else{
+		   Map<String, Object> map=new HashMap<String, Object>();
+		   Map<String, Object> user=getUserInfo();
+		   map.put("book_id", book_id);
+		   map.put("score", score);
+		   map.put("content", content);
+		   map.put("title", title);
+		   map.put("is_long", "1");
+		   map.put("writer_id", user.get("id"));
+		   returncode=readDetailService.insertlong(map);
+		}
+		return returncode;
 	}
 }

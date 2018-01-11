@@ -3,14 +3,17 @@ package com.bc.pmpheep.back.interceptor;
 import com.alibaba.fastjson.JSON;
 import com.bc.pmpheep.back.util.Const;
 import com.bc.pmpheep.controller.bean.ResponseBean;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.util.Assert;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.beans.PropertyEditorSupport;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Arrays;
@@ -22,6 +25,55 @@ import java.util.Set;
  */
 
 public class LoginInterceptor implements HandlerInterceptor {
+
+    public static class PathWithUsertypeMap {
+        private String path;
+        private String userType;
+
+        public PathWithUsertypeMap(String path, String userType) {
+            this.path = path;
+            this.userType = userType;
+        }
+
+        public String getPath() {
+            return path;
+        }
+
+        public String getUserType() {
+            return userType;
+        }
+
+        @Override
+        public String toString() {
+            return "PathWithUsertypeMap{" +
+                    "path='" + path + '\'' +
+                    ", userType='" + userType + '\'' +
+                    '}';
+        }
+    }
+
+    public static class PathWithUsertypeMapPropertyEditor extends PropertyEditorSupport {
+        public void setAsText(String text) {
+            Assert.notNull(text);
+            String[] paths = text.split("->");
+            Assert.state(paths.length == 2, "属性必须使用 -> 分割，例如：/login -> 1");
+            this.setValue(new PathWithUsertypeMap(paths[0].trim(), paths[1].trim()));
+        }
+    }
+
+    private static final ThreadLocal<PathMatchingResourcePatternResolver> resolvers;
+
+    static {
+        resolvers = new ThreadLocal<PathMatchingResourcePatternResolver>();
+    }
+
+    private PathMatchingResourcePatternResolver getPathMatchingResourcePatternResolver() {
+        if (resolvers.get() == null) {
+            resolvers.set(new PathMatchingResourcePatternResolver());
+        }
+        return resolvers.get();
+    }
+
 
     private String redirectUrl;
 
@@ -35,18 +87,63 @@ public class LoginInterceptor implements HandlerInterceptor {
         this.serviceID = serviceID;
     }
 
+    private Set<PathWithUsertypeMap> pathWithUsertypeMaps;
+
+    public void setPathWithUsertypeMaps(Set<PathWithUsertypeMap> pathWithUsertypeMaps) {
+        this.pathWithUsertypeMaps = pathWithUsertypeMaps;
+    }
+
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
 
-        HttpSession session = httpServletRequest.getSession();
-        Object userInfo = null;
-        if ("1".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
-            userInfo = session.getAttribute(Const.SESSION_USER_CONST_WRITER);
-        } else if ("2".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
-            userInfo = session.getAttribute(Const.SESSION_USER_CONST_ORGUSER);
+        PathMatchingResourcePatternResolver resolver = getPathMatchingResourcePatternResolver();
+        for (PathWithUsertypeMap pathMap : pathWithUsertypeMaps) {
+            //需要拦截的URL
+            if (resolver.getPathMatcher().match(pathMap.getPath(), httpServletRequest.getServletPath())) {
+
+                HttpSession session = httpServletRequest.getSession();
+                Map<String, Object> userInfo = null;
+                if (pathMap.getUserType().equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE)) && pathMap.getUserType().equals("1")) {
+                    userInfo = (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_WRITER);
+                } else if (pathMap.getUserType().equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE)) && pathMap.getUserType().equals("2")) {
+                    userInfo = (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_ORGUSER);
+                }
+
+                boolean isAjax = "XMLHttpRequest".equalsIgnoreCase(httpServletRequest.getHeader("X-Requested-With"));
+
+                if (userInfo == null) {
+                    String refer;
+                    if (isAjax) {
+                        String headReferer = httpServletRequest.getHeader("Referer");
+                        refer = StringUtils.isEmpty(headReferer) ? httpServletRequest.getHeader("referer") : headReferer;
+                        refer = URLEncoder.encode(refer, "UTF-8");
+
+
+                        ResponseBean<String> responseBean = new ResponseBean<String>();
+                        responseBean.setCode(ResponseBean.NO_PERMISSION);
+                        responseBean.setMsg("user is not login");
+                        responseBean.setData(httpServletRequest.getContextPath() + redirectUrl + "?refer=" + refer);
+                        httpServletResponse.getWriter().write(JSON.toJSONString(responseBean));
+                    } else {
+                        StringBuilder builder = new StringBuilder("");
+                        Map<String, String[]> map = (Map<String, String[]>) httpServletRequest.getParameterMap();
+                        for (String name : map.keySet()) {
+                            String[] values = map.get(name);
+                            builder.append(name + "=" + (values.length > 0 ? values[0] : "") + "&");
+                        }
+                        refer = URLEncoder.encode(httpServletRequest.getContextPath() + httpServletRequest.getServletPath() + "?" + builder.toString(), "UTF-8");
+                        httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + redirectUrl + "?refer=" + refer);
+                    }
+                    return false;
+                } else {
+                    return true;
+                }
+
+
+            }
         }
 
-        boolean isAjax = "XMLHttpRequest".equalsIgnoreCase(httpServletRequest.getHeader("X-Requested-With"));
+        return true;
 
         if (userInfo == null) {
             String refer;

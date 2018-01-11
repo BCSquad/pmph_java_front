@@ -1,6 +1,7 @@
 package com.bc.pmpheep.back.commuser.booksearch.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,9 +53,11 @@ public class BookSearchController extends BaseController {
 		//search = new String((search!=null?search:"").getBytes("iso8859-1"), "utf-8");
 		search = java.net.URLDecoder.decode(search,"UTF-8"); 
 		real_search = new String((real_search!=null?real_search:"").getBytes("iso8859-1"), "utf-8");
+		Long id=0L;
+		List<Map<String,Object>> fistsort=bookSearchService.queryChildSort(id);
+		mv.addObject("fistsort",fistsort);
 		mv.addObject("search",search);
 		mv.addObject("real_search",search);
-		
 		mv.setViewName("commuser/booksearch/booksearch");
 		
 		return mv;
@@ -71,20 +74,58 @@ public class BookSearchController extends BaseController {
 		Integer pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		Integer pageSize = Integer.parseInt(request.getParameter("pageSize"));
 		String queryName = request.getParameter("queryName");
-
-		String uid = null;
+        
+		
+		
+		String sortid=request.getParameter("id");
+        Map<String,Object> bigsort=new HashMap<String, Object>();;
+        List<Map<String,Object>> smallsort=null;
+       if(sortid!=null && !"".equals(sortid)){
+    	   
+        	bigsort=bookSearchService.querySortById(Long.valueOf(sortid));
+//        	smallsort=bookSearchService.queryChildSort(Long.valueOf(bigsort.get("id").toString()));
+        }
+//        resultMap.put("parent", bigsort);
+//        resultMap.put("child", smallsort);
+		String order=request.getParameter("order");
+        Map<String,Object> smap=new HashMap<String, Object>();
+        smap.put("searchText", queryName !=null && !"".equals(queryName)? "%"+queryName+"%":null );
+        smap.put("order", order !=null && !"".equals(order)? Long.valueOf(order)+2:2);
+        smap.put("sortId", sortid!=null && !"".equals(sortid)? sortid:0 );
+        smallsort= bookSearchService.querySearchSort(smap);
+        Long nextorder=1L;
+        if(order !=null && !"".equals(order)){
+        	nextorder=Long.valueOf(order)+1;
+        	
+        }else{
+        	bigsort.put("type_name", "全部分类");
+        }
+        bigsort.put("order", nextorder);
+        resultMap.put("child", smallsort);
+        resultMap.put("parent", bigsort);
+        
+        String uid = null;
 		if (user != null && getUserInfo().get("id")!=null && getUserInfo().get("id").toString() != null) {
 			uid = getUserInfo().get("id").toString();
 		}
 		String contextpath = request.getParameter("contextpath");
 		
 		Map<String, Object> paraMap = new HashMap<String, Object>();
-		paraMap.put("queryName", queryName);
-		paraMap.put("uid", uid);
+		paraMap.put("searchText", queryName !=null && !"".equals(queryName)? "%"+queryName+"%":null );
+		paraMap.put("logUserId", uid);
+		paraMap.put("type", sortid);
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<Map<String,Object>>(pageNum,pageSize);
 		pageParameter.setParameter(paraMap);
-		List<Map<String, Object>> List_map = bookSearchService.queryBookList(pageParameter);
-		int totoal_count = bookSearchService.queryBookCount(pageParameter);
+		List<Map<String, Object>> List_map = bookSearchService.listBook(pageParameter);
+		int count =bookSearchService.getBookTotal(pageParameter);
+		Integer maxPageNum = (int) Math.ceil(1.0*count/pageParameter.getPageSize());
+//		Map<String, Object> paraMap = new HashMap<String, Object>();
+//		paraMap.put("queryName", queryName);
+//		paraMap.put("uid", uid);
+//		PageParameter<Map<String,Object>> pageParameter = new PageParameter<Map<String,Object>>(pageNum,pageSize);
+//		pageParameter.setParameter(paraMap);
+//		List<Map<String, Object>> List_map = bookSearchService.queryBookList(pageParameter);
+//		int totoal_count = bookSearchService.queryBookCount(pageParameter);
 		Map<String, Object> vm_map = new HashMap<String, Object>();
 		vm_map.put("List_map", List_map);
 		vm_map.put("startNum", pageParameter.getStart()+1);
@@ -93,7 +134,8 @@ public class BookSearchController extends BaseController {
 		String vm = "commuser/booksearch/booksearch.vm";
 		html = templateService.mergeTemplateIntoString(vm, vm_map);
 		resultMap.put("html", html);
-		resultMap.put("totoal_count", totoal_count);
+		resultMap.put("totoal_count", maxPageNum);
+		resultMap.put("count", count);
 		return resultMap;
 	}
 	
@@ -106,9 +148,6 @@ public class BookSearchController extends BaseController {
 		String bookId = request.getParameter("bookId");
 		String uid = getUserInfo().get("id").toString();
 		Map<String,Object> resultMap = bookSearchService.likeSwitch(uid,bookId);
-		
 		return resultMap;
 	}
-	
-	
 }

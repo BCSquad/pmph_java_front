@@ -130,40 +130,63 @@ function selectPageSize(){
 
 //预览资格证 输入为*资格证图片的资源地址	MongoDB对应主键
 function previewCert(id){
-	alert(id);
+	window.open(contextpath+"image/"+id+'.action');
+	//window.location.href=contextpath+'file/download/'+id+'.action';
 }
 
 //通过验证 输入为writer_user_certification	的id
-function passCertification(id){
-	var data={id:id
-			,status:3
-			,contextpath:contextpath};
-	$.ajax({
-		type:'post',
-		url:contextpath+'teacherauth/statusModify.action?t='+new Date().getTime(),
-		async:false,
-		dataType:'json',
-		data:data,
-		success:function(json){
-			queryMain();
-		}
-	});
+function passCertification(id,realname){
+	window.message.confirm(
+			'确定通过 '+realname+' 的教师认证吗？'
+			,{icon: 3, title:'通过认证',btn:["确定","取消"]}
+			,function(index){
 	
+				var data={id:id
+						,status:3
+						,contextpath:contextpath};
+				$.ajax({
+					type:'post',
+					url:contextpath+'teacherauth/statusModify.action?t='+new Date().getTime(),
+					async:false,
+					dataType:'json',
+					data:data,
+					success:function(json){
+						queryMain();
+					}
+				});
+				layer.close(index);
+			}
+			,function(index){
+				layer.close(index);
+			}
+	);
 }
 //退回验证 输入为writer_user_certification	的id
-function rejectCertification(id){
-	var data={id:id
-			,status:2};
-	$.ajax({
-		type:'post',
-		url:contextpath+'teacherauth/statusModify.action?t='+new Date().getTime(),
-		async:false,
-		dataType:'json',
-		data:data,
-		success:function(json){
-			queryMain();
-		}
-	});
+function rejectCertification(id,realname){
+	window.message.confirm(
+			'确定要退回 '+realname+' 的教师认证吗？'
+			,{icon: 3, title:'退回认证',btn:["确定","取消"]}
+			,function(index){
+	
+				var data={id:id
+						,status:2
+						,contextpath:contextpath};
+				$.ajax({
+					type:'post',
+					url:contextpath+'teacherauth/statusModify.action?t='+new Date().getTime(),
+					async:false,
+					dataType:'json',
+					data:data,
+					success:function(json){
+						queryMain();
+					}
+				});
+				layer.close(index);
+			}
+			,function(index){
+				layer.close(index);
+			}
+	);
 }
 
 

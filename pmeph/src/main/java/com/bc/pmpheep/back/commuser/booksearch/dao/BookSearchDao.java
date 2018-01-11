@@ -3,7 +3,11 @@ package com.bc.pmpheep.back.commuser.booksearch.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.bc.pmpheep.back.commuser.book.bean.BookVO;
 import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.service.exception.CheckedServiceException;
 /**
  * 书籍搜索dao接口
  * @author Administrator
@@ -65,5 +69,45 @@ public interface BookSearchDao {
 	 * @return
 	 */
 	int queryBookLikeById(String bookId);
-	
+	/**查询某一类型下的子类型
+	 * @param parentId
+	 * @return
+	 */
+	List<Map<String,Object>> queryChildSort(@Param("parentId") Long parentId);
+
+	/**根据id差分类
+	 * @param id
+	 * @return
+	 */
+	Map<String, Object> querySortById(@Param("id") Long id);
+	 /**
+     * 
+     * 
+     * 功能描述：分页初始化/查询图书详情
+     * 
+     * @param pageParameter 分页参数 ，isOnSale 是否上架，isNew 是否新书 ，type 书籍类别 ， isPromote 是否推荐，name
+     *            isbn/图书名称
+     * @return 分好页的结果集
+     * @throws CheckedServiceException
+     * 
+     */
+    List<Map<String,Object>> listBook(PageParameter<Map<String,Object>> pageParameter);
+
+    /**
+     * 
+     * 
+     * 功能描述：获取总条数
+     * 
+     * @param pageParameter 分页参数 ，isOnSale 是否上架，isNew 是否新书 ，type 书籍类别 ， isPromote 是否推荐，name
+     *            isbn/图书名称
+     * @return 分好页的结果集
+     * @throws CheckedServiceException
+     * 
+     */
+    Integer getBookTotal(PageParameter<Map<String,Object>> pageParameter);
+    /**
+     * @param map
+     * @return
+     */
+    List<Map<String,Object>> querySearchSort(Map<String,Object> map);
 }

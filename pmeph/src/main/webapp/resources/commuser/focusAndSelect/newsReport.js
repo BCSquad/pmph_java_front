@@ -49,7 +49,8 @@ $(function(){
 	        data:{
 	        	pageNumber : pageNumber,
 	        	pageSize   : pageSize,
-	        	order      : order
+	        	order      : order,
+	        	materialId:$("#materialId").val()
 	        },
 	        success:function(json){
 	        	var list=json.list;
@@ -72,7 +73,7 @@ $(function(){
 		        	                    	"<span class='cms-icon "+(json[tarId]>0? "good":"nogood")+"' id='like"+list[i].id+"' onclick=\"addlike('"+list[i].id+"')\"></span></div>" +
 		        	                    "<div style='float:left;color:"+(json[tarId]>0? "#1abd44":"#b5b5b5")+"' id='likes"+list[i].id+"'>"+list[i].likes+"</div>" +
 	        	                    "</div>"+
-	        	                    "<div style='float:right'>发布日期："+formatDate(list[i].authDate,'yyyy.MM.dd')+"</div> "+ 
+	        	                    "<div style='float:right'>创建日期："+formatDate(list[i].gmtCreate,'yyyy.MM.dd')+"</div> "+ 
 	        	                "</div> "+
 	                        "</div> ";
 	                	$("#content").append(html);

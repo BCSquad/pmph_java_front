@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/homepage/homepage.css" type="text/css">
     <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.scroll.js"></script>
     <script src="${ctx}/resources/comm/base.js"></script>
     <script src="${ctx}/resources/commuser/homepage/homepage.js"></script>
 </head>
@@ -30,35 +31,38 @@
     <div class="content-wrapper">
         <div class="area-1">
             <div class="banner">
-                <img src="${ctx}/statics/testfile/index.png" style="width: 1050px; height: 380px">
+                <div class="move" id="move">
+                    <ul>
+                        <li><img src="${ctx}/statics/testfile/index.png" style="width: 922px; height: 380px"></li>
+                        <li><img src="${ctx}/statics/testfile/index.png" style="width: 922px; height: 380px"></li>
+                        <li><img src="${ctx}/statics/testfile/index.png" style="width: 922px; height: 380px"></li>
+                        <li><img src="${ctx}/statics/testfile/index.png" style="width: 922px; height: 380px"></li>
+                        <li><img src="${ctx}/statics/testfile/index.png" style="width: 922px; height: 380px"></li>
+                    </ul>
+                </div>
+                <div class="ctrl" id="ctrl"></div>
             </div>
             <div class="op-link">
-                <div class="title">教材申报</div>
-                <div class="link">
-                    <a href="<c:url value="/cmsnotice/tolist.action"/>">最新公告</a>
-                    <span class="icon">></span>
+                <div class="transaction">
+                    <div class="labeling">教材申报</div>
+                    <div class="bin consol"><div class="lab-pic1"></div>最新公告</div>
+                    <div class="bin marks" ><div class="lab-pic2"></div>专家申报</div>
+                    <div class="bin consol"><div class="lab-pic3"></div>学校审核</div>
+                    <div class="bin marks" ><div class="lab-pic4"></div>结果公布</div>
+                <div class="transaction" style="margin-top: 18px;">
+                    <div class="labeling">我要出书</div>
+                    <div class="binone consol"><div class="lab-pic5"></div>医学专著</div>
+                    <div class="binone marks" ><div class="lab-pic6"></div>科普图书</div>
+                    <div class="binone consol"><div class="lab-pic7"></div>创新教材</div>
+                    <div class="binone marks" ><div class="lab-pic8"></div>进度查询</div>
                 </div>
-                <div class="link">
-                    <span>学校审核</span>
-                    <span class="icon">></span>
+                <div class="transaction" style="margin-top: 8px;">
+                    <div class="labeling">交互服务</div>
+                    <div class="bintwo consol"><div class="lab-pic9"></div>医学小组</div>
+                    <div class="bintwo marks" ><div class="lab-pic10"></div>图书纠错</div>
+                    <div class="bintwo consol"><div class="lab-pic11"></div>问卷调查</div>
+                    <div class="bintwo marks" ><div class="lab-pic12"></div>经验交流</div>
                 </div>
-                <div class="link">
-                    <span>专家申报</span>
-                    <span class="icon">></span>
-                </div>
-                <div class="link">
-                    <a href="<c:url value="/personalhomepage/tohomepageonelist.action"/>">结果公布</a>
-                    <span class="icon">></span>
-                </div>
-
-                <div class="line"></div>
-
-                <div class="title">交互服务</div>
-                <div class="link">
-                    <span href="<c:url value="/group/toMyGroup.action"/>">医学小组</span>
-                    <span class="icon">></span>
-                </div>
-
             </div>
         </div>
         <div class="notice area-2">
@@ -71,15 +75,17 @@
                 <c:if test="${status.index==0}">
                     <div class="content-left" style="margin-left: 30px">
                         <p class="content-size">${list.title}</p>
-                        <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date"
-                                                                  pattern="yyyy-MM-dd"/></p>
+                        <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date" pattern="yyyy-MM-dd"/></p>
+                        <div class="left_join"
+                        onclick="window.location.href='${ctx}/material/toMaterialAdd.action?material_id=${list.material_id}'">报名参加</div>
                     </div>
                 </c:if>
                 <c:if test="${status.index!=0}">
                     <div class="content-left">
                         <p class="content-size">${list.title}</p>
-                        <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date"
-                                                                  pattern="yyyy-MM-dd"/></p>
+                        <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date" pattern="yyyy-MM-dd"/></p>
+                        <div class="left_join"
+                        onclick="window.location.href='${ctx}/material/toMaterialAdd.action?material_id=${list.material_id}'">报名参加</div>
                     </div>
                 </c:if>
             </c:forEach>
@@ -139,14 +145,14 @@
                     </c:if>
                 </c:forEach>
                 <c:forEach items="${listType}" var="list" varStatus="status">
-                    <c:if test="${status.index!=0}">
+                    <c:if test="${status.index==1 or status.index==2 }">
                         <div class="point"></div>
                         <div class="type" id="typeTwo">${list.type_name}</div>
                     </c:if>
                 </c:forEach>
             </div>
             <div class="content">
-                <div class="left">
+                <%-- <div class="left">
                     <div class="div_photo1">
                         <div class="label"><label style="font-size: 24px;color: #489399">热门标签</label></div>
                         <div class="div1">
@@ -158,8 +164,28 @@
                     </div>
                     <div class="div_photo"></div>
                     <div class="div_photo"></div>
+                </div> --%>
+                <div class="left">
+                    <div class="left_one">
+                        <div class="textbook_left">教材社区</div>
+                        <div class="all_left" onclick="window.location.href='${ctx}/cmsnotice/tolist.action'">全部>></div>
+                        <c:forEach items="${listDou}" var="list" varStatus="status">
+	                      <c:if test="${status.index==0}">
+	                        <div class="left_con1" style="margin-top: 63px;" onclick="todou('${list.mid}')">${list.title}</div>
+	                      </c:if>
+	                      <c:if test="${status.index!=0}">
+	                        <div class="left_con1" onclick="todou('${list.mid}')">${list.title}</div>
+                          </c:if>
+                        </c:forEach>
+                    </div>
+                    <div class="left_two">
+                        <div class="textbook_left">重点学科推荐</div>  
+                        <div class="all_left">全部>></div>
+                        <div class="p1_left"></div>
+                        <div class="p2_left"></div>
+                    </div>
                 </div>
-                <div class="right" id="homepagebook">${homepagebook}</div>
+                <div class="right" id="homepagebook" style="float: right;">${homepagebook}</div>
             </div>
         </div>
         <div class="area-5">
@@ -176,7 +202,7 @@
             </div>
             <c:forEach items="${listArt}" var="list" varStatus="status">
                 <c:if test="${status.index==0}">
-                    <div class="item1">
+                    <div class="item1" onclick="window.location.href='${ctx}/articledetail/toPage.action?wid=${list.id}'">
                         <div class="big">
                             <div class="small"><span class="recommend">推荐</span></div>
                             <div class="pc1"><img src="${ctx}/statics/testfile/a6_photo.png"></div>
@@ -194,15 +220,14 @@
             </c:forEach>
             <c:forEach items="${listArt}" var="list" varStatus="status">
                 <c:if test="${status.index!=0}">
-                    <div class="item">
+                    <div class="item" onclick="window.location.href='${ctx}/articledetail/toPage.action?wid=${list.id}'">
                         <div class="big">
                             <div class="small"><span class="recommend">推荐</span></div>
                             <div class="pc1"><img src="${ctx}/statics/testfile/a6_photo.png"></div>
                             <div class="tt"><span class="a6_content">${list.title}</span></div>
                             <div class="a6_div2">${list.summary}</div>
                             <div>
-                                <div class="a6_head_div"><img src="${ctx}/statics/testfile/a6_photo.png"
-                                                              class="a6_head"></div>
+                                <div class="a6_head_div"><img src="${ctx}/statics/testfile/a6_photo.png"class="a6_head"></div>
                                 <div class="a6_name_div"><span>${list.realname}</span></div>
                                 <div class="a6_time_div"><span>${list.gmt_create}</span></div>
                             </div>
@@ -222,7 +247,7 @@
                             </div>
                             <div class="a7_name_div">
                                 <div class="a7_author">
-                                    <span class="a7_write">${list.author_id}</span>
+                                    <span class="a7_write">${list.realname}</span>
                                 </div>
                                 <br>
                                 <div class="a7_cont">
@@ -242,7 +267,7 @@
                             </div>
                             <div class="a7_name_div">
                                 <div class="a7_author">
-                                    <span class="a7_write">${list.author_id}</span>
+                                    <span class="a7_write">${list.realname}</span>
                                 </div>
                                 <br>
                                 <div class="a7_cont">
@@ -335,88 +360,17 @@
                                 </div>
                             </div>
                         </c:forEach>
-                        <%--<c:forEach items="${listSal}" var="list" varStatus="status">
-                            <c:if test="${status.index==1}">
-			                        <div class="last_right_body">
-			                            <div class="last_right_book">
-			                                <img src="${list.image_url=='DEFAULT'?ctx+'/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg':list.image_url}" class="book_style" id="right_book2">
-			                            </div>
-			                            <div class="num2">
-			                                <div class="num_book">2</div>
-			                            </div>
-			                            <div class="last_right_content">
-			                                <div class="sale_book" id="sale_book2">${list.bookname}</div>
-			                            </div>
-			                        </div>
-			                </c:if>
-                        </c:forEach>
-                        <c:forEach items="${listSal}" var="list" varStatus="status">
-                            <c:if test="${status.index==2}">
-			                        <div class="last_right_body">
-			                            <div class="last_right_book">
-			                                <img src="${list.image_url=='DEFAULT'?ctx+'/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg':list.image_url}" class="book_style" id="right_book3">
-			                            </div>
-			                            <div class="num3">
-			                                <div class="num_book">3</div>
-			                            </div>
-			                            <div class="last_right_content">
-			                                <div class="sale_book" id="sale_book3">${list.bookname}</div>
-			                            </div>
-			                        </div>
-			                </c:if>
-                        </c:forEach>
-                        <c:forEach items="${listSal}" var="list" varStatus="status">
-                            <c:if test="${status.index==3}">
-		                        <div class="last_right_body body_top">
-		                            <div class="last_right_book">
-		                                <img src="${list.image_url=='DEFAULT'?ctx+'/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg':list.image_url}" class="book_style" id="right_book4">
-		                            </div>
-		                            <div class="num4">
-		                                <div class="num_book">4</div>
-		                            </div>
-		                            <div class="last_right_content">
-		                                <div class="sale_book" id="sale_book4">${list.bookname}</div>
-		                            </div>
-		                        </div>
-		                   </c:if>
-                        </c:forEach>
-                        <c:forEach items="${listSal}" var="list" varStatus="status">
-                            <c:if test="${status.index==4}">
-		                        <div class="last_right_body body_top">
-		                            <div class="last_right_book">
-		                                <img src="${list.image_url=='DEFAULT'?ctx+'/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg':list.image_url}" class="book_style" id="right_book5">
-		                            </div>
-		                            <div class="num4">
-		                                <div class="num_book">5</div>
-		                            </div>
-		                            <div class="last_right_content">
-		                                <div class="sale_book" id="sale_book5">${list.bookname}</div>
-		                            </div>
-		                        </div>
-		                    </c:if>
-                        </c:forEach>
-                        <c:forEach items="${listSal}" var="list" varStatus="status">
-                            <c:if test="${status.index==5}">
-		                        <div class="last_right_body body_top">
-		                            <div class="last_right_book">
-		                                <img src="${list.image_url=='DEFAULT'?ctx+'/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg':list.image_url}" class="book_style" id="right_book6">
-		                            </div>
-		                            <div class="num4">
-		                                <div class="num_book">6</div>
-		                            </div>
-		                            <div class="last_right_content">
-		                                <div class="sale_book" id="sale_book6">${list.bookname}</div>
-		                            </div>
-		                        </div>
-		                 </c:if>
-                        </c:forEach>--%>
                     </div>
                 </div>
             </div>
         </div>
         <div style="clear: both"></div>
     </div>
+    <a href="<c:url value="/survey/surveyList.action"/>" class="test" id="test_float">
+        <div class="cancel" onclick="cancel()">关闭</div>
+    </a>
 </div>
-<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
+    <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
+
 </html>

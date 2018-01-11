@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+
 <mapper namespace="com.bc.pmpheep.back.commuser.group.dao.GroupDao">
 
     <!--  删除我能删除的文件 --> 
@@ -358,4 +359,50 @@
 	<update id="updateGroupFileOfDownload" >
 		update pmph_group_file set download=download+1  WHERE group_id = #{groupId} AND file_id = #{fileId}
 	</update>
+	
+	<!-- 查询小组消息 -->
+	<select id="messageList" parameterType="java.util.Map" resultType="java.util.Map">
+		select t1.*,t2.avatar from pmph_group_message t1 left join writer_user t2 on t1.member_id = t2.id where group_id = '630' 
+			and t2.is_writer = '1' ORDER BY t1.gmt_create asc
+	</select>
+	<!-- 查询小组成员 -->
+	<select id="memberList" parameterType="java.util.Map" resultType="java.util.Map">
+		select t1.*,t2.avatar from pmph_group_member t1 left join writer_user t2
+		on t1.user_id = t2.id
+		 where t1.group_id = #{group_id} and t1.user_id != #{user_id} and t2.is_writer = '1' LIMIT 0,12
+	</select>
+	<!-- 查询小组成员角色-->
+	<select id="memberRole" parameterType="java.util.Map" resultType="java.util.Map">
+		select * from pmph_group_member t1
+		 where t1.group_id = #{group_id} and t1.user_id = #{user_id} 
+	</select>
+	<!-- 查询成员总数 -->
+	<select id="countMember" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(*) from pmph_group_member where group_id = #{group_id}
+	</select>
+	<!-- 查询文章共享总数 -->
+	<select id="countFile" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(*) from pmph_group_file where group_id = #{group_id}
+	</select>
+	<!-- 查询小组信息 -->
+	<select id="groupMap" parameterType="java.util.Map" resultType="java.util.Map">
+		select t1.*,t2.textbook_name from pmph_group t1 left join textbook t2 
+		on t1.book_id = t2.id where t1.id = #{group_id}
+	</select>
+	<!-- 添加发送的小组信息 -->
+	<insert id="addMessage" parameterType="java.util.Map">
+		insert pmph_group_message(group_id,member_id,msg_content) 
+			values(#{group_id},#{member_id},#{msg_content})
+	</insert>
+	<!-- 添加小组文件 -->
+	<insert id="addFile" parameterType="java.util.Map">
+		insert pmph_group_file(group_id,member_id,file_id,file_name) 
+			values(#{group_id},#{member_id},#{file_id},#{file_name})
+	</insert>
+	<!-- 查询文件信息 -->
+	<select id="fileList" parameterType="java.util.Map" resultType="java.util.Map">
+		select t1.*,t2.realname,substr(t1.file_name,INSTR(t1.file_name,'.')) xtype from pmph_group_file t1 
+			left join writer_user t2 on t1.member_id = t2.id
+		where t1.group_id = #{group_id} order by t1.gmt_create desc limit 0,#{pageSize} 
+	</select>
 </mapper>

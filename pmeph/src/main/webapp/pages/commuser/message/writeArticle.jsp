@@ -10,7 +10,7 @@
 
     </script>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-<title>Insert title here</title>
+<title>写文章</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet"
 	href="${ctx}/statics/commuser/message/writeArticle.css"
@@ -35,7 +35,7 @@
 	<form id="form1" >
     <div class="sxy-div-content">
         <div class="sxy-div-content">
-            <img src="${ctx}/statics/testfile/5写文章.png" alt="" />
+            <img src="${ctx}/statics/image/write_article1.png" alt="" />
         </div>
     </div>
     <div class="sxy-div-content2">
@@ -43,6 +43,7 @@
         <font class="sxy-font1">文章标题：</font>
     </div>
     <div class="sxy-div-content2">
+    	<input type="hidden" name="atrticle_id" id="atrticle_id" value="${atrticle_id }">
         <input type="text" class="sxy-txt2" id="TitleValue" name="titleValue" placeholder="输入文章标题请限30字以内.."  oninput="if(value.length>30){value=value.slice(0,30)}" value="${title}" />
     </div>
     <div class="sxy-div-content4">
@@ -62,9 +63,9 @@
     <div id="sxy-return">
     <input type="hidden" id="msg_id" name="msg_id" value="${mid}" />
     	<input type="hidden" id="btn_type" name="btnType"  />
-    	<input type="hidden" id="submitTypeCode" name="submitTypeCode" value="0" />
-        <input class="sxy-btn" type="button" value="保存" onclick="btntype(0)" />
-        <input class="sxy-btn" type="button" value="提交" onclick="btntype(1)"  />
+    	<input type="hidden" id="submitTypeCode" name="submitTypeCode" value="${submitTypeCode }" />
+        <input class="sxy-btn" type="button" value="保存" onclick="btntype(1)" />
+        <input class="sxy-btn" type="button" value="提交" onclick="btntype(0)"  />
     </div>
     </form>
     <div id="content" hidden="true"></div>

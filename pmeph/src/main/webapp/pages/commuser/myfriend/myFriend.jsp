@@ -297,19 +297,18 @@ a{
 }
 
 .last_div{
-	margin-top: 40px;
+	margin-bottom: 60px;
 }
 
 .b{
     width: 690px;
     height: 495px;
-    position:fixed;
     background-color: #ffffff;
     box-shadow: 0px 4px 10px 0px
     rgba(0, 0, 0, 0.2);
     position:absolute;
-    top:200px;
-    left:605px;
+    top:100px;
+    left:330px;
     z-index: 99;
 }
 .hiddenX{
@@ -322,6 +321,7 @@ a{
     -webkit-transition: all 0.3s ;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
+    cursor: pointer;
 }
 .show{
     display:block;
@@ -555,35 +555,63 @@ a{
                 </div>
                 </div>
             </div>
-
     </div>
     <!-- 隐藏域 -->
     <input type="hidden" value="${row}" id="row">
     <input type="hidden" value="${id}" id="id">
     <input type="hidden" value="${more}" id="moreeee">
     <div class="items">
-    	<c:forEach var="friend" items="${listFriends}" varStatus="st" >
-  			    <div class="${(st.index+1)%5 == 1? 'item1':'item1 item11'}">
-	            <%-- <div><img src="${ctx}${friend.avatar}" class="img2"></div> --%>
-	            <div><img src="${ctx}/statics/pictures/head.png" class="img2"></div>
-	            <div class="div_txt1">${friend.username}</div>
-	            <div class="div_txt2">${friend.position}</div>
-	            <div class="div_txt3">
-	                <div  class ="showTalk" id="${friend.id}" >私信</div>
-	                <input type="hidden" id="t_${friend.id}" value= "${friend.username}" />
-	            </div>
-            </div>
-	    </c:forEach>
+    	<c:choose>
+    		<c:when test="${listSize<1}">
+    			<div class="no-more">
+                   <img src="<c:url value="/statics/image/aaa4.png"></c:url>">
+                   <span>木有内容呀~~</span>
+               	</div>
+    		</c:when>
+    		<c:otherwise>
+    			<c:forEach var="friend" items="${listFriends}" varStatus="st" >
+		    		<c:choose>
+		    		<c:when test="${status.last==false}">
+		  				<div class="${(st.index+1)%5 == 1? 'item1':'item1 item11'}" >
+				            <div><img src="${ctx}/statics/pictures/head.png" class="img2"></div>
+				            <div class="div_txt1">${friend.realname}</div>
+				            <div class="div_txt2">${friend.position}</div>
+				            <div class="div_txt3">
+				                <div  class ="showTalk" id="${friend.id}" >私信</div>
+				                <input type="hidden" id="t_${friend.id}" value= "${friend.realname}" />
+				            </div>
+		            	</div>
+		    		</c:when>
+		    		<c:otherwise>
+			  			<div class="${(st.index+1)%5 == 1? 'item1':'item1 item11'}" style="margin-right: 20px">
+				            <%-- <div><img src="${ctx}${friend.avatar}" class="img2"></div> --%>
+				            <div><img src="${ctx}/statics/pictures/head.png" class="img2"></div>
+				            <div class="div_txt1">${friend.realname}</div>
+				            <div class="div_txt2">${friend.position}</div>
+				            <div class="div_txt3">
+				                <div  class ="showTalk" id="${friend.id}" >私信</div>
+				                <input type="hidden" id="t_${friend.id}" value= "${friend.realname}" />
+				            </div>
+			            </div>
+		            </c:otherwise>
+		  			</c:choose>
+			    </c:forEach>
+    		</c:otherwise>
+    	</c:choose>
      </div>
 </div>
-<div style="clear:both;"></div>
-<div class="last_div" id="span_more"><div class="more" ><span style="cursor: pointer;" onclick="morefriend()" id="mooorew">加载更多。。。</span></div></div>
-<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
+<div style="clear:both;height: 30px" ></div>
+<c:if test="${listSize>15}">
+	<div class="last_div" id="span_more"><div class="more" ><span style="cursor: pointer;" onclick="morefriend()" id="mooorew">加载更多...</span></div></div>
+</c:if>
+<div style="background-color: #f4f4f4">
+	<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
+</div>
 <script type="text/javascript">
     $(function() {
         $(window).scroll(function() {
-            var top = $(window).scrollTop()+200;
-            var left= $(window).scrollLeft()+605;
+            var top = $(window).scrollTop()+100;
+            var left= $(window).scrollLeft()+330;
             $("#box").css({ left:left + "px", top: top + "px" });
         });
     });

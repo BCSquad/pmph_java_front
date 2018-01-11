@@ -42,34 +42,36 @@ function writeArticleValidate(){
     };  */
 //确定 点击的按钮类型
 function btntype(btn_this){
-//	debugger;
+	debugger;
 //	contxtpath
 	$("#btn_type").val(btn_this);
 	if($("#submitTypeCode").val()=='0'){ //submitTypeCode 状态码为0表示新增 1表示修改
 		if(writeArticleValidate()){
 			
 			$.ajax({
-				url:contextpath+"/writerArticle/writeArticle.action",
+				url:contextpath+"writerArticle/writeArticle.action",
 				type:"post",
 		        data:$("#form1").serialize(),
 		        success:function(json){
 		        	var data = json.flag;
+		        	$("#atrticle_id").val(json.atrticle_id);
 		        	if(data=='2'||data == '3'){
 		        		$("#TitleValue").val(json.titleValue);
 		        		UE.getEditor('mText').setContent(json.UEContent);
 		        		window.message.error(json.isValidate);
 		        	}else {
 		        		if(data != '1'){
-			        		if(btn_this== '0'){
+			        		if(btn_this== '1'){
 				        		$("#submitTypeCode").val("1");
 				        		$("#msg_id").val(data);
-				        	}else if(btn_this== '1') {
+				        	}else if(btn_this== '0') {
 				        		document.getElementById("form1").reset(); 
 				        		$("#TitleValue").val("");
 				        		UE.getEditor('mText').setContent("");
 				        		$("#submitTypeCode").val("0");
 				        	}
 			        		window.message.success("成功");
+			        		
 			        	}else{
 			        		$("#submitTypeCode").val("0");
 			        		window.message.error("失败");
@@ -87,7 +89,7 @@ function btntype(btn_this){
 		}else if(btn_this=='1'){*/
 			if(writeArticleValidate()){
 				$.ajax({
-					url:contextpath+"/writerArticle/updateIsStaging.action",
+					url:contextpath+"writerArticle/updateIsStaging.action",
 					type:"post",
 			        data:$("#form1").serialize(),
 			        success:function(json){
@@ -98,10 +100,10 @@ function btntype(btn_this){
 			        		window.message.error(json.isValidate);
 			        	}else{
 			        		if(data != '1'){
-				        		if(btn_this== '0'){
+				        		if(btn_this== '1'){
 					        		$("#submitTypeCode").val("1");
 					        		$("#msg_id").val(data);
-					        	}else if(btn_this== '1') {
+					        	}else if(btn_this== '0') {
 					        		document.getElementById("form1").reset(); 
 					        		$("#TitleValue").val("");
 					        		UE.getEditor('mText').setContent("");

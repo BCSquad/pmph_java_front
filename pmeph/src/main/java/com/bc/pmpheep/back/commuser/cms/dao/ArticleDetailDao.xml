@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.commuser.cms.dao.ArticleDetailDao">
+	<!-- 根据书籍ID查询数据相关信息 -->
+	<select id="queryRead" parameterType="java.util.Map" resultType="java.util.Map">
+		select * from cms_content t   where t.id=#{id}		 
+	</select>
+
+	<!-- 根据ID查询标题 -->
+	<select id="queryTitle" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT * FROM cms_content c WHERE c.id=#{id}
+	</select>
+
+	<!-- 查询作者 -->
+	<select id="queryAuthor" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		select
+		t.id,
+		t.author_id,
+		c.realname
+		from cms_content t
+		left
+		join cms_category b on t.category_id=b.id
+		left join writer_user c on
+		t.author_id=c.id WHERE t.id=#{id}
+	</select>
+
+	<!-- 查询最近文章条数 -->
+	<select id="queryArticleCount" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select COUNT(*) from cms_content t
+		left join cms_category b
+		on
+		t.category_id=b.id
+		left join writer_user c on t.author_id=c.id
+		WHERE
+		t.author_id=#{author_id}
+		order by t.gmt_create desc
+	</select>
+
+	<!-- 查询最近文章医学随笔 -->
+	<select id="queryArticle" resultType="java.util.Map"
+		parameterType="java.lang.String">
+		select
+		t.id,
+		t.title,
+		t.gmt_create,
+		c.realname
+		from
+		cms_content t
+		left join cms_category b on t.category_id=b.id
+		left join
+		writer_user c on t.author_id=c.id WHERE t.author_id=#{author_id}
+		order
+		by gmt_create desc LIMIT 0,3
+	</select>
+
+
+	<!-- 查询相关文章 换一换 -->
+	<select id="queryRecommendByE" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		select c.title,w.realname,c.id
+		from cms_content c left join writer_user
+		w
+		on c.author_id=w.id
+		where c.is_promote != 0 OR c.is_promote is not
+		null
+		<if test="x >= 0">
+			limit #{x},5
+		</if>
+	</select>
+
+	<!-- 写评论插入数据 -->
+	<insert id="insertWriteArticle" parameterType="java.util.Map">
+		insert into
+		cms_content
+		(mid,parent_id,category_id,author_type,author_id,is_staging,path,score)
+		values(#{mid},#{parent_id},#{category_id},#{author_type},#{author_id},#{is_staging},#{path},#{score})
+	</insert>
+
+	<!-- 评论返回 -->
+	<select id="queryComment" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		select
+		t.id,
+		t.mid,
+		c.realname,
+		t.gmt_create,
+		t.score,
+		c.avatar
+		from cms_content t
+		left join cms_category b on t.category_id=b.id
+		left join writer_user c
+		on t.author_id=c.id
+		where t.parent_id =#{parameter.id}
+		AND t.category_id = 0
+		order by
+		t.gmt_create desc limit #{start},#{pageSize}
+	</select>
+	<!-- 查询评论一共有多少条数据 -->
+	<select id="querySize" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select
+		count(*)
+		from cms_content t
+		left join cms_category b on
+		t.category_id=b.id
+		left join writer_user c on t.author_id=c.id
+		where t.parent_id =#{id}
+		AND t.category_id = 0
+		order by t.gmt_create desc
+	</select>
+
+	<!-- 查询猜你喜欢 -->
+	<select id="queryArticleSix" resultType="java.util.Map">
+		select
+		t.title,
+		t.summary,
+		t.gmt_create,
+		c.realname
+		from cms_content t
+		left join cms_category b on t.category_id=b.id
+		left join writer_user c on t.author_id=c.id
+		where t.category_id='0' limit 0,6
+	</select>
+	
+	
+	<!-- 根据书籍ID改变点赞数 -->
+	<update id="addlikes" parameterType="java.util.Map"> 
+	   update cms_content set likes=#{likes} where id=#{content_id}
+	</update>
+	<!-- 往书籍点赞表里面添加数据 -->
+	<insert id="insertlikes" parameterType="java.util.Map">
+	   insert into cms_user_like (content_id,writer_id) values (#{content_id},#{writer_id})
+	</insert>
+	<!-- 查询是否点过赞 -->
+	<select id="queryLikes" parameterType="java.util.Map" resultType="java.util.Map">
+	  select * from cms_user_like where content_id=#{content_id} and writer_id=#{writer_id}
+	</select>
+	<!-- 根据ID删除点赞记录 -->
+	<update id="dellikes" parameterType="java.util.Map"> 
+	  delete from cms_user_like where id=#{id}
+	</update>
+	
+	
+	
+	<!-- 查询用户收藏夹下是否已收藏此书籍  -->
+	<select id="queryMark" parameterType="java.util.Map" resultType="java.lang.Integer">
+	  select count(*) from cms_user_mark where content_id=#{wid} and writer_id=#{writer_id} and favorite_id=#{favorite_id}
+	</select>
+	<!-- 添加书籍收藏 -->
+	<insert id="insertMark" parameterType="java.util.Map">
+	    insert into cms_user_mark(content_id,writer_id,favorite_id)  values(#{wid},#{writer_id},#{favorite_id})
+	</insert>
+	<!-- 更新书籍的收藏数量 -->
+	<update id="updateMarks" parameterType="java.util.Map">
+	   update cms_content set bookmarks=#{bookmarks} where id=#{wid}
+	</update>
+	<!-- 查询书籍的收藏数 -->
+	<select id="queryBookMarks" parameterType="java.util.Map" resultType="java.lang.Long">
+	  select bookmarks from cms_content where id=#{wid}
+	</select>
+	<!-- 查询默认收藏夹 -->
+	<select id="queryDedaultFavorite" parameterType="java.util.Map" resultType="java.util.Map">
+	    select * from writer_cms_favorite where writer_id=#{writer_id} and favorite_name='默认收藏夹'
+	</select>
+	<!--添加默认收藏夹  -->
+	<insert id="insertFavorite" parameterType="java.util.Map">
+	   insert into writer_cms_favorite(writer_id,favorite_name) values(#{writer_id},'默认收藏夹')
+	</insert>
+	<!-- 删除一本书的收藏记录 -->
+	<delete id="deleteMark" parameterType="java.util.Map" >
+	    delete from cms_user_mark where writer_id=#{writer_id} and  favorite_id=#{favorite_id} and content_id=#{wid}
+	</delete>
+
+</mapper>

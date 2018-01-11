@@ -1,3 +1,6 @@
+var addContent="";
+var senderName="";
+var avatar="";
 function show(){
 	    document.getElementById("box").setAttribute("class","b show");
         document.getElementById("close").setAttribute("class","hiddenX show");
@@ -28,14 +31,19 @@ $(function(){
 	        contentType: 'application/json',
 	        dataType:'json',
 	        data:{
-	        	friendId : frendid,
+	        	friendId : frendid,            
 	        },
 	        success:function(responsebean){
+	        	var content="";
 	        	$("#dialogue").html('');
 	        	if(null != responsebean && responsebean.length >= 0){
 	        		for( var i= 0; i<responsebean.length ; i++ ){
 	        			var html ="";
 	        			if(responsebean[i].isMy){//我发送的
+	        				
+	        				senderName=responsebean[i].senderName;
+	        				avatar=responsebean[i].avatar;
+	        				
 	        				html = 
 		        				"<div class='oneTalk'> "+
 		                        "<div class='headAndNameRight float_right'> "+
@@ -69,7 +77,10 @@ $(function(){
 	                        "</div> ";
 	        			}
 	        			$("#dialogue").append(html);
+	        			content+=html;
 	        		}
+	        		
+	        		addContent=content;
 	        	}
 	        	show();
 	        	//更新消息状态
@@ -94,25 +105,25 @@ $(function(){
 	$(".inputBox").keypress(function (e){ 
 		var code = event.keyCode; 
 		if (13 == code) { 
-			sendNewMsg(); 
+			sendNewMsg(addContent); 
 		} 
 	}); 
 	//发送消息
 	$("#sendNewMsg").click(function(){
-		sendNewMsg () ;
+		sendNewMsg (addContent) ;
 	});
 	
 	function sendNewMsg (){
 		var content=$("#content").val();
+		var sendTime = new Date();
 		if(!content || content.trim() ==''){
 			window.message.warning("请键入消息");
 		}else{
 			var frendId =$("#frendId").val();
 			$.ajax({
-		        type:'get',
-		        url :contxtpath+'/mymessage/senNewMsg.action',
+		        type:'post',
+		        url :contxtpath+'/user/senNewMsg.action',
 		        async:false,
-		        contentType: 'application/json',
 		        dataType:'json',
 		        data:{
 		        	friendId : frendId,
@@ -121,8 +132,30 @@ $(function(){
 		        },
 		        success:function(responsebean){
 		        	if(responsebean=='success'){
-		        		window.message.success('发送成功');
-			        	hide();
+		        		//window.message.success('发送成功');
+		        		
+		        		var currentContent=$("#dialogue").html();
+		        		$("#dialogue").append(addContent);
+			        	//hide();
+		        		html = 
+	        				"<div class='oneTalk'> "+
+	                        "<div class='headAndNameRight float_right'> "+
+	                            "<div class='headDiv'><img class='headPicture' src='"+contxtpath+avatar+"'/></div> "+
+	                            "<div class='talkName'><text>"+senderName+"</text></div> "+
+/*	                            "<div class='headDiv'><img class='headPicture' src='"+contxtpath+responsebean.avatar+"'/></div> "+
+	                            "<div class='talkName'><text>"+responsebean.senderName+"</text></div> "+
+*/	                        "</div> "+
+	                        "<div class='talkDivRight float_right' > "+
+	                            "<div class='sendMessage'> "+
+
+	                                "<div class='textDiv float_right'> "+content+"</div> "+
+
+	                            "</div> "+
+	                            "<div class='talkTime talkTimeAlignRight'>"+formatDate(sendTime,'yyyy.MM.dd hh:ss:mm')+"</div> "+
+	                        "</div> "+
+	                        "</div> ";
+		        		currentContent+=html;
+		        		$("#dialogue").append(currentContent);
 			        	$("#content").val('');
 		        	}
 		        }

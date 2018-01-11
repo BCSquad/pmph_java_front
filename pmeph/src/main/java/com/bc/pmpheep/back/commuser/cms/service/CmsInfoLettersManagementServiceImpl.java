@@ -33,19 +33,19 @@ public class CmsInfoLettersManagementServiceImpl implements CmsInfoLettersManage
 	CmsInfoLettersManagementDao cmsInfoLettersManagementDao;
 
 	@Override
-	public List<CmsInfoLettersList> list(Integer pageSize, Integer pageNumber,Integer order) {
+	public List<CmsInfoLettersList> list(Integer pageSize, Integer pageNumber,Integer order,Long materialId) {
 		if(null == pageSize || pageSize <1 ){
 			pageSize   = 10;                 //默认10条
 		}
 		if(null == pageNumber || pageNumber < 1){
 			pageNumber =1;
 		}
-		return cmsInfoLettersManagementDao.list((pageNumber-1)*pageSize,pageSize,order);
+		return cmsInfoLettersManagementDao.list((pageNumber-1)*pageSize,pageSize,order,materialId);
 	}
 	
 	@Override
-	public Integer getCmsInfoLettersListTotal(Integer pageSize, Integer pageNumber) {
-		return cmsInfoLettersManagementDao.getCmsInfoLettersListTotal();
+	public Integer getCmsInfoLettersListTotal(Integer pageSize, Integer pageNumber,Long materialId) {
+		return cmsInfoLettersManagementDao.getCmsInfoLettersListTotal(materialId);
 	}
 		
 }

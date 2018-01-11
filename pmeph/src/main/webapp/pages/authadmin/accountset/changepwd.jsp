@@ -33,7 +33,7 @@
         <div class="div-content">
             <div id="div-child">
                 <span class="span1"></span>
-                <span class="div-menu-main">学校管理员认证</span>
+                <span class="div-menu-main">修改密码</span>
                 <a href="#" class="return-menu-main"
                     onclick="window.location='${ctx}/admininfocontroller/toadmininfo.action'"><< 返回个人资料</a>
             </div>
@@ -42,12 +42,12 @@
         <div class="div-content"  style="height:546px;">
             <table border="0">
                 <tr>
-                    <td class="td-lable-right" align="right">*新密码</td>
+                    <td class="td-lable-right" align="right"><font color="#ff3d38">*</font>新密码</td>
                     <td class="td-input"><input class="txt" type="password" id="newpassword"/></td>
                     <td class="td-lable-left">请输入您的新密码（6-16位字母、数字或符号的组合）</td>
                 </tr>
                 <tr>
-                    <td class="td-lable-right" align="right">*确认新密码</td>
+                    <td class="td-lable-right" align="right"><font color="#ff3d38">*</font>确认新密码</td>
                     <td class="td-input"><input class="txt" type="password" id="confirmpassword"/></td>
                     <td class="td-lable-left">请再次输入您的密码</td>
                 </tr>

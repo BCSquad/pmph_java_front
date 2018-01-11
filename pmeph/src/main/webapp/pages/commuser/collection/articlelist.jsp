@@ -42,11 +42,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="collection" >
         <div class="title">
                <div class="title-text">
-                   <a href="#"> ${article.title }</a>
+                   <a href="articledetail/toPage.action?wid=${article.cid }"> ${article.title }</a>
                </div>
                <input type="hidden" id="cms${article.cid }" value="${article.cid }"/>
                <div class="tm">
-                   <span class="author-icon" style="background-image: url(${article.avatar=='DEFAULT'?'statics/image/deficon.png':article.avatar}); ">
+                   <span class="author-icon" style="background-image: url(${article.avatar=='DEFAULT'?'statics/image/deficon.png':'/file/download/'+article.avatar+'.action'}); ">
                    </span>
                    <span class="name">${article.realname }</span>
                    <span class="time"><fmt:formatDate  value="${article.gmt_create}" pattern="yyyy.MM.dd"/></span>

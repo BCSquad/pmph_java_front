@@ -1,0 +1,112 @@
+
+.searchDiv {
+    width: 650px;
+    height: 100%;
+    float: left;
+}
+.searchInputLeft {
+	float: right;
+    margin-bottom: 10px;
+    height: 30px;
+    width:65px;
+    background-color: #70bcc3;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    text-align: center;
+    padding-top: 10px;
+    cursor:pointer;
+   
+}
+.input {
+    border: none;
+    width: 96%;
+    height: 95%;
+    padding-left: 20px;
+}
+.nname{
+	float:left;
+	height:40px;
+	color:#3D3D3D;
+	line-height: 40px;
+}
+
+.searchInputRight {
+	float: right;
+    margin-bottom: 10px;
+    height: 38px;
+    width: 504px;
+    float: left;
+    border-top: solid 1px #d5d5d5;
+    border-bottom: solid 1px #d5d5d5;
+    border-left:solid 1px #d5d5d5;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.items{
+    position: relative;
+    margin-bottom: 10px;
+    background-color: #F8F8F8;
+    border:solid 1px #CCCCCC;
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.15);
+    border-radius: 2px;
+    text-align: left;
+    transition: all .28s;
+    -moz-transition: all .28s; /* Firefox 4 */
+    -webkit-transition: all .28s; /* Safari 鍜�Chrome */
+    -o-transition: all .28s; /* Opera */
+    float:left;
+    width:1200px
+}
+.items_img{
+    position: absolute;
+    top:-1px;
+    left:-8px;
+    background-image: url(../../../statics/image/wenzhangtuijian.png);
+    font-size:12px;
+    color: #fff;
+    width: 40px;
+    height: 30px;
+    text-align: center;
+    line-height: 24px;
+    background-repeat: no-repeat;
+}
+.items .left{
+	width:1015px;
+	float:left;
+	height:132px;
+	margin-left:45px
+}
+
+.items .right{
+	float:left;
+	border-left: dashed 1px #D7D7D7;
+	width:136px;
+	height:132px
+}
+.item1{
+    color:#333;
+    font-size: 18px;
+    padding:20px 0 0 0;
+    height:25px;
+    line-height: 24px;
+}
+.item1 a{
+	color:#333333
+}
+
+a{
+	text-decoration: none
+}
+.item2{
+    padding:0 15px 0 0;
+    font-size: 12px;
+    line-height: 18px;
+    color: #686868;
+    height: 40px;
+    margin-bottom: 10px;
+}
+.cutmore{
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

@@ -7,7 +7,7 @@
 	    		#if(!$c.avatar || $c.avatar == "DEFAULT")
 	    			<div class="head-portrait" style="background-image: url('$!{contextpath}statics/image/putongyhtouxiang.png');"></div>
 	    		#else
-	    			<div class="head-portrait" style="background-image: url('$c.avatar');"></div>
+	    			<div class="head-portrait" style="background-image: url($!{contextpath}image/$!{c.avatar}.action);"></div>
 	    		#end
 	    		<div>$c.realname</div>
 	    	</div>
@@ -31,13 +31,13 @@
 	    #if($null.isNull($c.cert) || $c.cert == "DEFAULT" || !$c.cert)
 	    	<td>未上传</td>
 	    #else
-	    	<td><a class="a-preview" target="_blank" href="$!{c.cert}" onclick="previewCert($!{c.cert})">预览</a></td>
+	    	<td><a class="a-preview" target="_blank" href="javascript:" onclick="previewCert('$!{c.cert}')">预览</a></td>
 	    #end
 	    
 	    #if($c.progress == 1)
 	    	<td>
-		        <a class="a-pass" onclick="passCertification($c.id)">通过验证</a>
-		        <a class="a-reject" onclick="rejectCertification($c.id)">退回</a>
+		        <a class="a-pass" onclick="passCertification($c.id,'$c.realname')">通过验证</a>
+		        <a class="a-reject" onclick="rejectCertification($c.id,'$c.realname')">退回</a>
 		    </td>
 	    #elseif($c.progress == 3 || $c.progress == 2)
 	    	<td>

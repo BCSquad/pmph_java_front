@@ -45,6 +45,13 @@
 		#{title},#{address},#{postcode},#{handphone},#{email},#{idtype},#{idcard},#{telephone},
 		#{fax},#{org_id},#{gmt_create},#{is_staging},#{online_progress})
 	</insert>
+	<update id="updatePerson" parameterType="java.util.Map">
+		update declaration set realname = #{realname},sex = #{sex},birthday = #{birthday},experience = #{experience},
+		org_name = #{org_name},position = #{position},title = #{title},address = #{address},
+		postcode = #{postcode},handphone = #{handphone},email = #{email},idtype = #{idtype},is_staging = #{is_staging},
+		telephone = #{telephone},fax = #{fax},org_id = #{org_id},gmt_update = #{gmt_update},online_progress = #{online_progress}
+		 where id = #{declaration_id}
+	</update>
 	
 	<!-- 图书选择 -->
 	<select id="queryTsxz" resultType="java.util.Map" parameterType="java.util.Map">
@@ -52,7 +59,7 @@
 		on t1.textbook_id = t2.id where t1.declaration_id = #{declaration_id} 
 		ORDER BY t1.gmt_create desc
 	</select>
-	<insert id="insertTsxz" parameterType="java.util.Map">
+	<insert id="insertTsxz" parameterType="java.util.Map"  useGeneratedKeys="true" keyProperty="table_trendst_id">
 		insert into dec_position(declaration_id,textbook_id,preset_position,syllabus_id,syllabus_name,gmt_create)
 		  values(#{declaration_id},#{textbook_id},#{preset_position},#{syllabus_id},#{syllabus_name},#{gmt_create})
 	</insert>

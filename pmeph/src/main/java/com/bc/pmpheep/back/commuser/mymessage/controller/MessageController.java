@@ -138,6 +138,9 @@ public class MessageController extends BaseController{
 	@RequestMapping(value="/loadMore")
 	@ResponseBody
 	public List<Map<String,Object>> loadMore(HttpServletRequest request){
+		Map<String, Object> map = getUserInfo();
+		Long userId = new Long(String.valueOf(map.get("id")));
+		//Long userId = (long) 1609;
 		String condition=request.getParameter("condition");
 		String para=request.getParameter("startPara");
 		int startPara=0;
@@ -152,7 +155,6 @@ public class MessageController extends BaseController{
 			paraMap.put("startPara",startPara);
 		}
 		
-		Long userId = (long) 1609;
 		paraMap.put("condition",condition);
 		paraMap.put("userId",userId);
 		
@@ -185,30 +187,16 @@ public class MessageController extends BaseController{
 	@RequestMapping(value="/noticeMessageDetail")
 	public ModelAndView toNoticeMessageDetail(HttpServletRequest request){
 		String messageId=request.getParameter("id");
-		String tag=request.getParameter("tag");
 		ModelAndView mv = new ModelAndView();
 		Map<String,Object> paraMap = new HashMap<String,Object>();
 		paraMap.put("messageId", messageId);
 		//标题、时间、邮寄地址、备注
 		Map<String,Object> mapTitle =new HashMap<>();
-		
-		if(tag!=null && tag.equals("FromList")){
-			//来自遴选公告列表的request
-			
-			mapTitle=noticeMessageService.queryCMSNotice(paraMap);
-			mv.addObject("firsttag", "首页");
-			mv.addObject("secondtag", "遴选公告");
-			mv.addObject("firstpath", "homepage/tohomepage.action");
-			mv.addObject("secondpath", "cmsnotice/tolist.action");
-		}else{
-			//来自消息列表中通知的request
-			
 			mapTitle = noticeMessageService.queryNoticeMessageDetail(paraMap);
 			mv.addObject("firsttag", "个人中心");
 			mv.addObject("secondtag", "消息通知");
 			mv.addObject("firstpath", "personalhomepage/tohomepage.action");
 			mv.addObject("secondpath", "message/noticeMessageList.action");
-		}
 		
 		
 		if(mapTitle!=null && mapTitle.size()>0){
@@ -235,7 +223,7 @@ public class MessageController extends BaseController{
 		Message message = mssageService.get(messageId);
 		
 		mv.addObject("message",message);
-		
+		mv.addObject("messageId",messageId);
 		
 		mv.setViewName("commuser/message/noticeMessageDetail");
 		return mv;

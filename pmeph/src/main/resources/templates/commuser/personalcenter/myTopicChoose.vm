@@ -1,0 +1,97 @@
+
+<link rel="stylesheet" href="$!{contextpath}statics/commuser/personalcenter/booklist.css" type="text/css">
+<script src="${contextpath}resources/commuser/personalcenter/PersonalHomeWYCS.js"></script>
+
+<input type="hidden" class="queryCondition" id="isMine" value="$!{isMine}">
+<input type="hidden" class="queryCondition" id="auth_progress" value="$!{auth_progress}">
+<input type="hidden" class="queryCondition" id="bookname" value="$!{bookname}">
+<input type="hidden" class="queryCondition" id="is_staging" value="$!{is_staging}">
+<input type="hidden" class="queryCondition" id="pageinfo1" value="$!{pageinfo1}">
+
+
+    <div class="jcsbssl">
+        <span id="jcsbqb" onclick="listoction(this,'');" style="cursor:pointer">全部</span>
+        <span id="jcsbwdsb" onclick="listoction(this,1);" style="cursor:pointer">我的申报</span>
+        <button class="jcsbsbzt" id="sbzzjx" value="0" style="cursor:pointer"><span class="yzc"></span>已暂存</button>
+        <button class="jcsbsbzt" id="sbyjs"  value="1" style="cursor:pointer" ><span class="ytj"></span>已提交</button>
+        <button class="jcsbsbzt" id="sbzc"  value="3" style="cursor:pointer"><span class="ytg"></span>已通过</button>
+        <button class="jcsbsbzt" id="sbytj" value="2" style="cursor:pointer"><span class="btg"></span>不通过</button>
+        <button class="jcsbsbzt" id="allStatus" value="" style="cursor:pointer"><span class=""></span>全部状态</button>
+        <input type="text" id="wdsbssk" class="wdsbssk" value="$!{para.bookname}" placeholder="选题搜索">
+        
+    </div>
+    <div class="listContent">
+       <ul class="scul">
+       #foreach($c in $!{List_map})
+       
+         <li class="leftlb">
+           <div class="leftlb_1">
+               <table class="left_tab">
+               		<tr>
+               			<td colspan="2"><span class="left_title">$!{c.bookname}</span></td>
+               		</tr>
+               		<tr>	
+               			<td>
+	               			<span class="left_content">图书类别：
+		               			#if($!{c.type}==0)
+		               				专著
+		               			#elseif($!{c.type}==1)
+		               				基础理论
+		               			#elseif($!{c.type}==2)
+		               				论文集
+		               			#elseif($!{c.type}==3)
+		               				科普
+		               			#elseif($!{c.type}==4)
+		               				应用技术
+		               			#elseif($!{c.type}==5)
+		               				工具书
+		               			#elseif($!{c.type}==6)
+		               				其他
+		               			#else
+		               				其他
+		               			#end
+	               			</span></td>
+               			<td>
+               				<span class="left_content">选题来源：
+								#if($!{c.source}==0)
+		               				社策划
+		               			#elseif($!{c.source}==1)
+		               				编辑策划
+		               			#elseif($!{c.source}==2)
+		               				专家策划
+		               			#elseif($!{c.source}==3)
+		               				离退休编审策划
+		               			#elseif($!{c.source}==4)
+		               				上级交办
+		               			#elseif($!{c.source}==5)
+		               				作者投稿
+		               			#else
+		               				其他
+		               			#end
+							</span>
+               			</td>
+               		</tr>	
+               		<tr>	
+               			<td><span class="left_time">提交时间：$!{c.gmt_create}</span></td>
+               			<td><span class="left_time">预计交稿日期：$!{c.deadline}</span></td>
+               		</tr>
+               </table>
+           </div>
+           <div class="leftlb_2">
+           		#if($!{c.auth_progress}==0)
+           			<div><span class="yzc1"></span><span class="left_zt">已暂存</span></div>
+           		#elseif($!{c.auth_progress}==1)
+           			<div><span class="ytj1"></span><span class="left_zt">已提交</span></div>
+           		#elseif($!{c.auth_progress}==2)
+           			<div><span class="btg1"></span><span class="left_zt">被退回/</span></div>
+           		#elseif($!{c.auth_progress}==3)
+           			<div><span class="ytg1"></span><span class="left_zt">已通过</span></div>
+           		#end
+               <a style="cursor: pointer;" onclick="viewTopic($!{c.id})"><div class="left_herf">进入查看</div></a>
+                <a style="cursor: pointer;" onclick="updateTopic($!{c.id})"><div class="left_herf2">修改</div></a>
+               
+           </div>
+         </li>
+         #end
+       </ul>
+    </div>

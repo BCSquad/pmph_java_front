@@ -21,7 +21,7 @@
                 <a class="link <%="readpage".equals(request.getParameter("pageTitle"))?"active":""%>"
                    onclick="window.location='${ctx}/readpage/main.action'">读书</a>
                 <a class="link <%="articlepage".equals(request.getParameter("pageTitle"))?"active":""%>"
-                   onclick="window.location='${ctx}/pages/commuser/articlepage/articlepage.jsp'">文章</a>
+                   onclick="window.location='${ctx}/articlepage/toarticlepage.action'">文章</a>
             </div>
             <span class="delete"></span>
             <input class="search-input" id="search-input" placeholder="图书/文章">

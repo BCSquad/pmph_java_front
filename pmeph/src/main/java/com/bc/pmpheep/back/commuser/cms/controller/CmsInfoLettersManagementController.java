@@ -69,10 +69,15 @@ public class CmsInfoLettersManagementController extends BaseController{
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String,Object> topage(Integer pageSize, Integer pageNumber, Integer order) {
+	public Map<String,Object> topage(HttpServletRequest req,Integer pageSize, Integer pageNumber, Integer order) {
 		Map<String,Object> map=new HashMap<>();
 		Map<String, Object> usermap = getUserInfo();
-		List<CmsInfoLettersList> mylist = cmsInfoLettersManagementService.list(pageSize,pageNumber, order);
+		String id=req.getParameter("materialId");
+		Long materialId=null;
+		if(id!=null && !"".equals(id)){
+			materialId=Long.valueOf(id);
+		}
+		List<CmsInfoLettersList> mylist = cmsInfoLettersManagementService.list(pageSize,pageNumber, order,materialId);
 		BigInteger writerId=null;
 		int islike=0;
 		if(usermap!=null){
@@ -101,9 +106,10 @@ public class CmsInfoLettersManagementController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value = "/tolist", method = RequestMethod.GET)
-	public ModelAndView list(Integer pageSize, Integer pageNumber, Integer order) {
+	public ModelAndView list(HttpServletRequest req,Integer pageSize, Integer pageNumber, Integer order) {
 		ModelAndView model = new ModelAndView();
 		model.setViewName("commuser/focusAndSelect/newsReport");
+		model.addObject("materialId", req.getParameter("materialId"));
 		return model;
 	}
 	

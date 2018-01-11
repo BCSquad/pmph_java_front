@@ -3,7 +3,7 @@
         #if(!$c.avatar || $c.avatar == "DEFAULT")
 			<div class="head-portrait" style="background-image: url('$!{contextpath}statics/image/putongyhtouxiang.png');"></div>
 		#else
-			<div class="head-portrait" style="background-image: url('$!{c.avatar}');"></div>
+			<div class="head-portrait" style="background-image: url($!{contextpath}image/$!{c.avatar}.action);"></div>
 		#end
         <div class="friend-name">$c.realname</div>
         #if($c.rank == 0)

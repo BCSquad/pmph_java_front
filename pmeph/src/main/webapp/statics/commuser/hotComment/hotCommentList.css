@@ -1,0 +1,401 @@
+.bigLeft{
+	float: left;
+	height:auto;
+	width: 890px;
+}
+
+.bigRight{
+	float: left;
+	height:auto;
+	width: 270px;
+	padding-left:40px;
+}
+
+.navDiv{
+	width: 100%;
+	height: auto;
+}
+
+.nav{
+	margin-top:24px;
+	font-family: MicrosoftYaHei;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0px;
+	color: #999999;
+}
+
+.oneComment{
+	width: 100%;
+	height: 154px;
+	border-bottom: solid 1px #EDEDED;
+	margin-top: 20px
+}
+
+.top{
+	width: 100%;
+	height: 26px;
+}
+
+.pic{
+	float: left;
+	width: 24px;
+	height: 24px;
+}
+
+.nameAndTime{
+	float: left;
+	margin-left: 10px;
+	width: 600px;
+	height: 24px;
+}
+
+.name{
+	height:24px;
+	width:auto;
+	font-family: MicrosoftYaHei;
+	font-size: 13px;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0px;
+	color: #3377aa;
+	float:left;
+}
+
+.star{
+	margin-left:8px;
+	height:22px;
+	width:auto;
+	padding-top: 6px;
+	float:left;
+}
+
+.time{
+	margin-left:8px;
+	height:24px;
+	width:auto;
+	font-family: MicrosoftYaHei;
+	font-size: 12px;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0px;
+	color: #5b5b5b;
+	float:left;
+}
+
+.oneStar{
+	background-image: url("../../image/css_sprites.png");
+    background-position: -183px -175px;
+    background-repeat: no-repeat;
+    width: 12px;
+    height: 12px;
+    float: left
+}
+
+.mid{
+	margin-top: 10px;
+	width: 100%;
+	height: auto;
+}
+
+.title{
+	width: 500px;
+	height: 24px;
+	font-family: MicrosoftYaHei;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	color: #3377aa;
+	text-overflow:ellipsis; /*超出部分省略号显示*/
+    white-space:nowrap;/*强制不换行*/
+ 	overflow: hidden;
+}
+
+.bottom{
+	width: 800px;
+	height: auto;
+	maggin-top:3px;
+}
+
+.contentDiv{
+	font-family: MicrosoftYaHei;
+	font-size: 13px;
+	font-weight: normal;
+	letter-spacing: 0px;
+	color: #5b5b5b;
+	 word-break: break-all;
+    text-overflow: ellipsis;
+    display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+    -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+    -webkit-line-clamp: 2; /** 显示的行数 **/
+    overflow: hidden;  /** 隐藏超出的内容 **/
+}
+
+.open{
+	font-family: MicrosoftYaHei;
+	font-size: 13px;
+	font-weight: normal;
+	letter-spacing: 0px;
+	color: #5b5b5b;
+}
+
+.pageDiv{
+	width:100%;
+	height:60px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.right_1{
+	width: auto;
+	height: auto;
+	margin-top: 30px;
+}
+
+.ptts_sp1 {
+    float: left;
+    font-family: MicrosoftYaHei;
+    letter-spacing: 0px;
+    font-size: 14px;
+    color: #000000;
+    height: 41px;
+    margin-top: -4px;
+    overflow: hidden;
+    line-height: 22px;
+}
+
+#ptts {
+    background-image: url(../../image/css_sprites.png);
+    background-position: -460px -35px;
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 20px;
+    float: left;
+}
+
+.righttopbook {
+    height: 116px;
+    margin: auto;
+    display: block;
+}
+
+.watch {
+    float: right;
+    width: 50px;
+    height: 16px;
+    background-color: #E4614F;
+    border-radius: 3px;
+    margin-top: -15px;
+    cursor: pointer;
+}
+
+.lookbook {
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 16px;
+}
+
+.ptts_sp2 {
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #999999;
+    width: 100%;
+    height: 13px;
+    margin-top: 42px;
+}
+
+.ptts_sp3 {
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #666666;
+    margin-top: 18px;
+    height: 38px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 20px;
+}
+
+.right_3 {
+    float: left;
+    margin-top: 26px;
+    width: 278px;
+    height: auto;
+    border-top: 1px solid #EFEFEF;
+}
+
+.right_4 {
+    width: 278px;
+    height: 61px;
+}
+
+.right_5 {
+    float: left;
+    margin-top: 25px;
+    width: 139px;
+    height: 36px;
+}
+.right_6a{
+	background-image: url("../../image/css_sprites.png");
+    background-position: -416px -310px;
+    background-repeat: no-repeat;
+    height: 22px;
+    width: 22px;
+    float: left;
+    margin-top: 3px;
+}
+.right_8 {
+    float: left;
+    margin-top: 25px;
+    width: 139px;
+    height: 36px;
+}
+
+.refresh {
+    float: left;
+    margin-top: -5px;
+    margin-left: 4px;
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    color: #999999;
+    cursor: pointer;
+}
+
+.right_10 {
+    float: left;
+    width: 100%;
+    height: 96px;
+}
+
+.right_11 {
+    float: left;
+    margin-bottom: 12px;
+    width: 100%;
+    height: 37px;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    line-height: 18px;
+    color: #333333;
+    overflow: hidden;
+}
+
+.right_12 {
+    height: 90px;
+    margin: auto;
+    display: block;
+}
+
+.right_13 {
+    float: left;
+    width: 275px;
+    margin-top: 40px;
+    height: 1px;
+    background-color: #EFEFEF;
+}
+
+.right_14 {
+    float: left;
+    margin-top: 10px;
+    width: 275px;
+    height: 228px;
+}
+
+.right_15 {
+    float: left;
+    height: 56px;
+    width: 137px;
+}
+
+.right_19 {
+    float: right;
+    height: 56px;
+    width: 137px;
+}
+
+.picture1 {
+    width: 14px;
+    height: 15px;
+    background-image: url("../../image/refresh.png");
+    float: left;
+    margin-top: 16px;
+    margin-left: 80px;
+}
+
+.right_20 {
+    float: left;
+    height: 34px;
+    width: 275px;
+    border-top: 1px dashed #EFEFEF;
+    border-bottom: 1px dashed #EFEFEF;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.right_21 {
+    height: 28px;
+    float: left;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    overflow: hidden;
+    color: #489299;
+    margin-top: 6px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.right_22 {
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    color: #999999;
+    margin-top: 6px;
+    float: left;
+}
+
+.refresh1 {
+    float: left;
+    margin-top: 10px;
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    color: #999999;
+    cursor: pointer;
+}
+.picture1 {
+    width: 14px;
+    height: 15px;
+    background-image: url("../../image/refresh.png");
+    float: left;
+    margin-top: 16px;
+    margin-left: 80px;
+}
+
+.right_16 {
+    float: left;
+    height: 56px;
+    width: 275px;
+}
+
+.right_17 {
+    background-image: url(../../image/css_sprites.png);
+    background-position: -460px -6px;
+    background-repeat: no-repeat;
+    width: 22px;
+    height: 22px;
+    float: left;
+    margin-top: 12px;
+}
+
+.right_18 {
+    float: left;
+    margin-top: 12px;
+    margin-left: 5px;
+    font-family: MicrosoftYaHei;
+    font-size: 16px;
+    color: #000000;
+}

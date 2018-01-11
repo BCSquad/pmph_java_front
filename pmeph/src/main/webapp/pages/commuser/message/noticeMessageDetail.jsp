@@ -28,68 +28,82 @@
         <div class="navigator">
            	 <a href="${ctx }/${firstpath}">${firsttag } </a>&gt; <a href="${ctx }/${secondpath}">${secondtag }</a> &gt; 公告详情
         </div>
-        <div id="section">
+        
+        <c:choose>
+        	<c:when test="${messageId==null}">
+        		<div class="no-more">
+                    <img src="<c:url value='/statics/image/aaa4.png'></c:url>">
+                    <span>木有内容呀~~</span>
+                </div>
+        	</c:when>
+        	<c:otherwise>
+        		<div id="section">
 
-            <span class="title">${map.material_name}</span>
-
-            <div class="time">
-            <span >截止日期：${map.deadline}</span>
-            </div>
-        </div>
-        <div class="content">
-            <p class="pSize">
-		               ${message.content}
-            </p>
-        </div>
-        <div align="center">
-            <img  class="pictureSizeBig" src="${ctx}/statics/pictures/1395ea09518bf0f9b1787e0ec8c7452c.jpg" />
-        </div>
-        <div class="liseDiv">
-        <div class="list">
-            <div class="title2">
-               	 邮寄地址：
-            </div>
-            <div class="listContent">
-            	${map.mail_address}
-            </div>
-        </div>
-        <div class="list">
-        <div class="title2">
-           	 联系人：
-        </div>
-            <div class="listContent">
-            	<c:forEach items="${listContact}" var="contact">
-                	<span>${contact.contact_user_name }（电话：${contact.contact_phone } 邮箱：${contact.contact_email}）</span><br>
-                </c:forEach>
-            </div>
-        </div>
-        <c:if test="${map.note !=null && map.note !=''}">
-        <div class="list">
-            <div class="title2">
-                	备注：
-            </div>
-            <div class="listContent">
-		               ${map.note}
-            </div>
-        </div>
-        </c:if>
-        <c:if test="${listAttachment.size()>0}">
-        <div class="list">
-            <div class="title2">
-                	附件：
-            </div>
-            <div class="listContent">
-            	<c:forEach items="${listAttachment}" var="attachment">
-            	<span><a href="#"><img class="pictureSize" src="${ctx}/statics/pictures/attachment.png">&nbsp;&nbsp;${attachment.attachment_name}</a></span><br>
-            	</c:forEach>
-            </div>
-        </div>
-        </c:if>
-        </div>
-
-        <div class="registerDiv"  >
-            <span class="button" onclick="register(${map.materialId})">报名参加</span>
-        </div>
+		            <span class="title">${map.material_name}</span>
+		
+		            <div class="time">
+		            <span >截止日期：${map.deadline}</span>
+		            </div>
+		        </div>
+		        <div class="content">
+		            <p class="pSize">
+				               ${message.content}
+		            </p>
+		        </div>
+		        <div align="center">
+		            <img  class="pictureSizeBig" src="${ctx}/statics/pictures/1395ea09518bf0f9b1787e0ec8c7452c.jpg" />
+		        </div>
+		        <div class="liseDiv">
+		        <div class="list">
+		            <div class="title2">
+		               	 邮寄地址：
+		            </div>
+		            <div class="listContent">
+		            	${map.mail_address}
+		            </div>
+		        </div>
+		        <div class="list">
+		        <div class="title2">
+		           	 联系人：
+		        </div>
+		            <div class="listContent">
+		            	<c:forEach items="${listContact}" var="contact">
+		                	<span>${contact.contact_user_name }（电话：${contact.contact_phone } 邮箱：${contact.contact_email}）</span><br>
+		                </c:forEach>
+		            </div>
+		        </div>
+		        <c:if test="${map.note !=null && map.note !=''}">
+		        <div class="list">
+		            <div class="title2">
+		                	备注：
+		            </div>
+		            <div class="listContent">
+				               ${map.note}
+		            </div>
+		        </div>
+		        </c:if>
+		        <c:if test="${listAttachment.size()>0}">
+		        <div class="list">
+		            <div class="title2">
+		                	附件：
+		            </div>
+		            <div class="listContent">
+		            	<c:forEach items="${listAttachment}" var="attachment">
+		            	<span><a href="#"><img class="pictureSize" src="${ctx}/statics/pictures/attachment.png">&nbsp;&nbsp;${attachment.attachment_name}</a></span><br>
+		            	</c:forEach>
+		            </div>
+		        </div>
+		        </c:if>
+		        </div>
+		
+		        <div class="registerDiv"  >
+		            <span class="button" onclick="register(${map.materialId})">报名参加</span>
+		        </div>
+        	
+        	</c:otherwise>
+        </c:choose>
+        
+        
 	</div>
 </div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>

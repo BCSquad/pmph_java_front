@@ -66,7 +66,7 @@ $(function(){
 	                		"<div class=\"items\"> "+ 
 	                		    (responsebean[i].isPromote?"<div class='items_img'>推荐</div> ":"")+
 	        	                "<div class=\"item1 cutmore\">" +
-	        	                "<a href='"+contextpath+"message/noticeMessageDetail.action?id="+responsebean[i].mid+"&&tag=FromList'>" +responsebean[i].title+"</a></div> "+
+	        	                "<a href='"+contextpath+"cmsnotice/noticeMessageDetail.action?id="+responsebean[i].mid+"'>" +responsebean[i].title+"</a></div> "+
 	        	                "<div class=\"item2 cutmore\"><p style='margin:0;height:40px;line-height:20px'>"+responsebean[i].summary+"</p></div> "+
 	        	                "<div class=\"item3\">  "+
 	        	                     deadline+

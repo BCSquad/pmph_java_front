@@ -15,7 +15,8 @@ color:#FFF;
 }
 
 .hytp{
-	 height: 46px;
+	height: 50px;
+    width: 50px;
 }
 .sctpdiv{
 	margin: auto;
@@ -25,8 +26,11 @@ color:#FFF;
 
 .hytxdiv{
 	margin: auto;
-	height: 50px;
-	width: 50px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+    overflow: hidden;
+    border:1px solid #ebebeb;
 }
 
 .body {
@@ -47,25 +51,23 @@ color:#FFF;
     z-index: 10;
     top: 40px;
     left: 0;
-
+    height: 164px;
+    width: 165px;
+    border-radius: 165px;
+    border: 10px solid white;
+	overflow: hidden;
+	box-shadow: 0px 3px 10px 3px #f0f0f0;
 }
 
-/*.head .bg{
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 11;
-	width: 100%;
-	height: 100%;
-
-}*/
 .headae img {
     position: absolute;
     top: 0;
     left: 0;
     z-index: 10;
-    border: 10px solid white;
     border-radius: 50%;
+    height: 164px;
+    width: 165px;
+    font-size: 0px;
 }
 
 .content {
@@ -78,6 +80,7 @@ color:#FFF;
 }
 
 .content .left {
+	clear:left;
     width: 870px;
     float: left;
     height: auto;
@@ -268,13 +271,6 @@ color:#FFF;
 }
 
 .xz {
-    font-size: 16px;
-    color: #333333;
-    float: left;
-    list-style-type: none;
-    width: auto;
-    text-align: center;
-    margin-right: 40px;
     padding-bottom: 16px;
     border-bottom-width: 3px;
     border-bottom-style: solid;
@@ -398,13 +394,22 @@ color:#FFF;
     font-size: 12px;
     color: #03717b;
     float: left;
-    height: 90px;
+    max-height: 105px;
     width: 65px;
     list-style-type: none;
     margin-top: 23px;
     margin-right: 3px;
     margin-left: 12px;
     text-align: center;
+    word-break: break-all;
+    line-height: 15px;
+}
+
+.wdxz .group_name{
+	text-overflow: ellipsis;
+    overflow: hidden;
+    max-height: 31px;
+    display: block;
 }
 
 .hylb {
@@ -412,12 +417,12 @@ color:#FFF;
     color: #333333;
     float: left;
     height: 70px;
-    width: 45px;
+    width: 50px;
     list-style-type: none;
     text-align: center;
     margin-top: 23px;
     margin-right: 3px;
-    margin-left: 12px;
+    margin-left: 7px;
 }
 
 .xztp {
@@ -452,11 +457,18 @@ color:#FFF;
     font-size: 12px;
     color: #81b8bd;
     height: 26px;
-    width: 238px;
+    width: 208px;
     background-image: url(../../image/sousuo-helpCenter.png);
     background-repeat: no-repeat;
-    background-position: 200px;
+    background-position: 212px;
     float: right;
+    padding-left: 5px;
+    padding-right: 30px;
+}
+
+#wdsbssk.wdsbssk{
+	width: 178px;
+	background-position: 182px;
 }
 
 #bzzxcxk {
@@ -496,6 +508,11 @@ color:#FFF;
 #dongtai {
     width: 870px;
     height: 500px;
+    float: left;
+}
+
+#leftContent{
+	width: 870px;
     float: left;
 }
 
@@ -551,6 +568,7 @@ color:#FFF;
 
 .shangright {
     float: right;
+    color: #999999;
 }
 
 .xiaoxi {
@@ -560,7 +578,7 @@ color:#FFF;
 
 .dtzhong {
     width: 870px;
-    margin-top: 19px;
+    /* margin-top: 19px; */
     float: left;
 }
 
@@ -636,12 +654,17 @@ color:#FFF;
     font-size: 12px;
     color: #666666;
     margin-top: 16px;
+    display: block;
+    max-height: 68px;
+    overflow: hidden;
+    
 }
 
 .suibibt {
     float: left;
     margin-bottom: 14px;
     width: 650px;
+    line-height: 20px;
 }
 
 .pinlunbt {
@@ -705,25 +728,47 @@ color:#FFF;
 }
 
 #jcsbqb {
-    color: white;
-    background-image: url(../../image/jcsbqbleft.png);
+    color: #00717d;
+    background-image: none;
     background-repeat: no-repeat;
-    height: 30px;
+    height: 23px;
     text-align: center;
     float: left;
     padding-left: 15px;
     padding-right: 15px;
+    border:1px solid #00717d;
+    border-radius:2px;
+    border-right: none;
+}
+
+#jcsbqb.active{
+	height: 30px;
+	border:none;
+	color: white;
+	background-image: url(../../image/jcsbqbleft.png);
 }
 
 #jcsbwdsb {
-       color: #03717b;
+    color: #03717b;
     border: 1px solid #03717b;
     background-repeat: no-repeat;
-    height: 24px;
+    background-image: none;
+    height: 23.5px;
     float: left;
     padding-left: 15px;
     padding-right: 15px;
     margin-right: 15px;
+    border-radius:2px;
+    border-left: none;
+}
+
+#jcsbwdsb.active{
+	background-image: url(../../image/jcsbqbright.png);
+	height: 30px;
+	border:none;
+	color: white;
+	padding-left: 10px;
+    padding-right: 20px;
 }
 
 #jcsbqbmy {
@@ -964,24 +1009,38 @@ width: 76px;
 
 .bmcjan3 {
     width: 98px;
-    height: 31px;
-    font-size: 16px;
+    height: 33px;
+    font-size: 14px;
     color: #999999;
     text-align: center;
     border: 1px solid #FFFFFF;
-    float: left;
+    /* float: left; */
     margin-top: 4px;
     margin-right: 17px;
-    margin-bottom: 31px;
+    margin-bottom: 0px;
     margin-left: 17px;
-    padding-top: 3px;
     background-color: #d5d5d5;
     border-radius: 18px;
+    line-height:33px;
+}
+
+.bmcjan4{
+	width: 112px;
+    height: 33px;
+    font-size: 14px;
+    color: #ffffff;
+    text-align: center;
+    margin: auto;
+    margin-top: 4px;
+    margin-bottom: 0px;
+    background-color: ff5722;
+    border-radius: 18px;
+    line-height: 33px;
 }
 
 .bmcjan2 {
     width: 98px;
-    height: 31px;
+    height: 33px;
     font-size: 14px;
     color: #FFFFFF;
     text-align: center;
@@ -991,14 +1050,14 @@ width: 76px;
     margin-right: 17px;
     margin-bottom: 31px;
     margin-left: 17px;
-    padding-top: 3px;
     background-color: #7acdd4;
     border-radius: 18px;
+    line-height:33px;
 }
 
 .bmcjan {
     width: 98px;
-    height: 31px;
+    height: 33px;
     font-size: 14px;
     color: #FFFFFF;
     text-align: center;
@@ -1008,13 +1067,14 @@ width: 76px;
     margin-right: 17px;
     margin-bottom: 31px;
     margin-left: 17px;
-    padding-top: 3px;
     border-radius: 18px;
+    line-height: 33px;
+    
 }
 
 .bmcjan1 {
     width: 98px;
-    height: 31px;
+    height: 33px;
     font-size: 14px;
     color: #FFFFFF;
     text-align: center;
@@ -1027,6 +1087,7 @@ width: 76px;
     padding-top: 3px;
     background-color: #7acdd4;
     border-radius: 18px;
+    line-height: 33px;
 }
 
 .rshang {
@@ -1041,7 +1102,8 @@ width: 76px;
 
 .rshangn {
     width: 253px;
-    height: 19px;
+    max-height: 71px;
+    overflow:hidden;
     text-align: left;
     font-size: 18px;
     color: #333333;
@@ -1067,14 +1129,17 @@ width: 76px;
     float: left;
     font-size: 14px;
     color: #7acdd4;
+    /* background-color: #7acdd4; */
     margin-top: 10px;
 }
 
-.shenbaoliebiao {
+.listContent {
     width: 870px;
     margin-bottom: 25px;
-    height: 175px;
+    min-height: 175px;
     margin-top: 10px;
+    clear: both;
+    contain: content;
 }
 
 #liulan {
@@ -1114,4 +1179,99 @@ width: 76px;
      background: #eee;
     text-decoration: none;
     text-align: center;
+}
+
+.block {
+    clear: both;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.tab-bar {
+    height: 34px;
+    border-bottom: 2px solid;
+    border-bottom-color: #9B9D58;
+    margin-top: 20px;
+}
+.pageDiv{
+	text-align: right;
+	clear:both;
+}
+
+.pagetag{
+	cursor: pointer;
+}
+
+.btn-chooseEditor{
+	text-align: center ;
+    width: 88px;
+    height: 25px;
+    background-color: #1ebc42;
+    margin-right: 12px;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #f8fcf9;
+    float: right;
+    clear: left;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+#auth_status_select_wrapper{
+	font-size: 15px;
+}
+
+.auth_status_select_wrapper_span {
+	color:#999999;
+}
+
+.btn_loadMore_wrapper{
+	width: 100%;
+    text-align: center;
+    font-size: 15px;
+    color: #999999;
+    clear: both;
+}
+
+#btn_loadMore{
+	width: 100px;
+    margin: auto;
+    cursor: pointer;
+}
+
+.operate_wrapper {
+	float: left;
+    clear: right;
+}
+
+.operate_wrapper .img{
+	background-image: url("../../image/css_sprites.png");
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	float: left;
+}
+
+.img_edit{
+	background-position: -461px -252px;
+}
+
+.operate_wrapper a{
+	 height: 20px;
+	 display: inline-block;
+	 clear: both;
+	 margin-right: 20px;
+	 cursor: pointer;
+}
+
+.img_delete{
+	background-position: -461px -277px;
+}
+
+.operate_wrapper a div{
+	line-height: 20px;
+    display: inline-block;
+    height: 20px;
+    float: left;
+    color: #a0b1c5;
 }

@@ -15,7 +15,7 @@ $(function () {
                 dataType:'json',
                 success:function(json){
                     if (json.returncode=="OK"){
-                    	$("#sxy-img1").attr("src",contextpath+"file/download/"+fileid+".action");
+                    	$("#sxy-img1").attr("src",contextpath+"file/download"+fileid+".action");
                     }
                 }
             });
@@ -102,5 +102,9 @@ function save(){
             }
         });
     };
+}
 
+//教师认证
+function teacher(){
+	location.href=contextpath+'teacherauth/toPage.action';
 }

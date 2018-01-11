@@ -1,7 +1,11 @@
 package com.bc.pmpheep.back.commuser.cms.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,6 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.cms.bean.CmsNoticeList;
 import com.bc.pmpheep.back.commuser.cms.service.CmsNoticeManagementService;
+import com.bc.pmpheep.back.commuser.mymessage.service.NoticeMessageService;
+import com.bc.pmpheep.general.pojo.Message;
+import com.bc.pmpheep.general.service.MessageService;
 
 /**
  * 
@@ -37,7 +44,12 @@ public class CmsNoticeManagementController {
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.cms.service.CmsNoticeManagementServiceImpl")
 	CmsNoticeManagementService cmsNoticeManagementService;
-
+	@Autowired
+	MessageService mssageService;
+	
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.mymessage.service.NoticeMessageServiceImpl")
+	NoticeMessageService noticeMessageService;
 	/**
 	 * 跳转到教材列表页面
 	 * @author Mryang
@@ -74,5 +86,54 @@ public class CmsNoticeManagementController {
 		List<CmsNoticeList> cmsNoticeList =  cmsNoticeManagementService.list(pageSize, pageNumber, order);
 		return cmsNoticeList ;
 	}
-
+    
+	//查询公告详情
+		@RequestMapping(value="/noticeMessageDetail")
+		public ModelAndView toNoticeMessageDetail(HttpServletRequest request){
+			String messageId=request.getParameter("id");
+			String tag=request.getParameter("tag");
+			ModelAndView mv = new ModelAndView();
+			Map<String,Object> paraMap = new HashMap<String,Object>();
+			paraMap.put("messageId", messageId);
+			//标题、时间、邮寄地址、备注
+			Map<String,Object> mapTitle =new HashMap<>();
+			mapTitle=noticeMessageService.queryCMSNotice(paraMap);
+			mv.addObject("firsttag", "首页");
+			mv.addObject("firstpath", "homepage/tohomepage.action");
+			if(tag!=null && tag.equals("FromCommunityList")){
+				//来自教材社区列表的request
+				
+				mv.addObject("secondtag", "教材社区");
+				mv.addObject("secondpath", "community/tolist.action");
+			}else{
+				//来遴选公告列表中通知的request
+				
+				mv.addObject("secondtag", "遴选公告");
+				mv.addObject("secondpath", "cmsnotice/tolist.action");
+			}
+			
+			
+			if(mapTitle!=null && mapTitle.size()>0){
+				paraMap.put("attachmentId", mapTitle.get("attachmentId"));
+				paraMap.put("materialId", mapTitle.get("materialId"));
+				//备注附件
+				List<Map<String,Object>> listAttachment = noticeMessageService.queryNoticeMessageDetailAttachment(paraMap);
+				//联系人
+				List<Map<String,Object>> listContact = noticeMessageService.queryNoticeMessageDetailContact(paraMap);
+				
+				mv.addObject("map",mapTitle);
+				mv.addObject("listAttachment",listAttachment);
+				mv.addObject("listContact",listContact);
+				
+			}
+			
+			//mongoDB查询通知内容
+			Message message = mssageService.get(messageId);
+			
+			mv.addObject("message",message);
+			
+			
+			mv.setViewName("commuser/message/noticeMessageDetail");
+			return mv;
+		}
 }

@@ -3,23 +3,23 @@
  * Includes: widget.js
  * Copyright 2015 jQuery Foundation and other contributors; Licensed MIT */
 
-(function( factory ) {
-    if ( typeof define === "function" && define.amd ) {
+(function (factory) {
+    if (typeof define === "function" && define.amd) {
 
         // AMD. Register as an anonymous module.
-        define([ "jquery" ], factory );
+        define(["jquery"], factory);
 
-    } else if ( typeof exports === "object" ) {
+    } else if (typeof exports === "object") {
 
         // Node/CommonJS
-        factory( require( "jquery" ) );
+        factory(require("jquery"));
 
     } else {
 
         // Browser globals
-        factory( jQuery );
+        factory(jQuery);
     }
-}(function( $ ) {
+}(function ($) {
     /*!
      * jQuery UI Widget 1.11.4
      * http://jqueryui.com
@@ -35,65 +35,66 @@
     var widget_uuid = 0,
         widget_slice = Array.prototype.slice;
 
-    $.cleanData = (function( orig ) {
-        return function( elems ) {
+    $.cleanData = (function (orig) {
+        return function (elems) {
             var events, elem, i;
-            for ( i = 0; (elem = elems[i]) != null; i++ ) {
+            for (i = 0; (elem = elems[i]) != null; i++) {
                 try {
 
                     // Only trigger remove when necessary to save time
-                    events = $._data( elem, "events" );
-                    if ( events && events.remove ) {
-                        $( elem ).triggerHandler( "remove" );
+                    events = $._data(elem, "events");
+                    if (events && events.remove) {
+                        $(elem).triggerHandler("remove");
                     }
 
                     // http://bugs.jquery.com/ticket/8235
-                } catch ( e ) {}
+                } catch (e) {
+                }
             }
-            orig( elems );
+            orig(elems);
         };
-    })( $.cleanData );
+    })($.cleanData);
 
-    $.widget = function( name, base, prototype ) {
+    $.widget = function (name, base, prototype) {
         var fullName, existingConstructor, constructor, basePrototype,
             // proxiedPrototype allows the provided prototype to remain unmodified
             // so that it can be used as a mixin for multiple widgets (#8876)
             proxiedPrototype = {},
-            namespace = name.split( "." )[ 0 ];
+            namespace = name.split(".")[0];
 
-        name = name.split( "." )[ 1 ];
+        name = name.split(".")[1];
         fullName = namespace + "-" + name;
 
-        if ( !prototype ) {
+        if (!prototype) {
             prototype = base;
             base = $.Widget;
         }
 
         // create selector for plugin
-        $.expr[ ":" ][ fullName.toLowerCase() ] = function( elem ) {
-            return !!$.data( elem, fullName );
+        $.expr[":"][fullName.toLowerCase()] = function (elem) {
+            return !!$.data(elem, fullName);
         };
 
-        $[ namespace ] = $[ namespace ] || {};
-        existingConstructor = $[ namespace ][ name ];
-        constructor = $[ namespace ][ name ] = function( options, element ) {
+        $[namespace] = $[namespace] || {};
+        existingConstructor = $[namespace][name];
+        constructor = $[namespace][name] = function (options, element) {
             // allow instantiation without "new" keyword
-            if ( !this._createWidget ) {
-                return new constructor( options, element );
+            if (!this._createWidget) {
+                return new constructor(options, element);
             }
 
             // allow instantiation without initializing for simple inheritance
             // must use "new" keyword (the code above always passes args)
-            if ( arguments.length ) {
-                this._createWidget( options, element );
+            if (arguments.length) {
+                this._createWidget(options, element);
             }
         };
         // extend with the existing constructor to carry over any static properties
-        $.extend( constructor, existingConstructor, {
+        $.extend(constructor, existingConstructor, {
             version: prototype.version,
             // copy the object used to create the prototype in case we need to
             // redefine the widget later
-            _proto: $.extend( {}, prototype ),
+            _proto: $.extend({}, prototype),
             // track widgets that inherit from this widget in case this widget is
             // redefined after a widget inherits from it
             _childConstructors: []
@@ -103,20 +104,20 @@
         // we need to make the options hash a property directly on the new instance
         // otherwise we'll modify the options hash on the prototype that we're
         // inheriting from
-        basePrototype.options = $.widget.extend( {}, basePrototype.options );
-        $.each( prototype, function( prop, value ) {
-            if ( !$.isFunction( value ) ) {
-                proxiedPrototype[ prop ] = value;
+        basePrototype.options = $.widget.extend({}, basePrototype.options);
+        $.each(prototype, function (prop, value) {
+            if (!$.isFunction(value)) {
+                proxiedPrototype[prop] = value;
                 return;
             }
-            proxiedPrototype[ prop ] = (function() {
-                var _super = function() {
-                        return base.prototype[ prop ].apply( this, arguments );
+            proxiedPrototype[prop] = (function () {
+                var _super = function () {
+                        return base.prototype[prop].apply(this, arguments);
                     },
-                    _superApply = function( args ) {
-                        return base.prototype[ prop ].apply( this, args );
+                    _superApply = function (args) {
+                        return base.prototype[prop].apply(this, args);
                     };
-                return function() {
+                return function () {
                     var __super = this._super,
                         __superApply = this._superApply,
                         returnValue;
@@ -124,7 +125,7 @@
                     this._super = _super;
                     this._superApply = _superApply;
 
-                    returnValue = value.apply( this, arguments );
+                    returnValue = value.apply(this, arguments);
 
                     this._super = __super;
                     this._superApply = __superApply;
@@ -133,7 +134,7 @@
                 };
             })();
         });
-        constructor.prototype = $.widget.extend( basePrototype, {
+        constructor.prototype = $.widget.extend(basePrototype, {
             // TODO: remove support for widgetEventPrefix
             // always use the name + a colon as the prefix, e.g., draggable:start
             // don't prefix for widgets that aren't DOM-based
@@ -149,45 +150,45 @@
         // are inheriting from it and redefine all of them so that they inherit from
         // the new version of this widget. We're essentially trying to replace one
         // level in the prototype chain.
-        if ( existingConstructor ) {
-            $.each( existingConstructor._childConstructors, function( i, child ) {
+        if (existingConstructor) {
+            $.each(existingConstructor._childConstructors, function (i, child) {
                 var childPrototype = child.prototype;
 
                 // redefine the child widget using the same prototype that was
                 // originally used, but inherit from the new version of the base
-                $.widget( childPrototype.namespace + "." + childPrototype.widgetName, constructor, child._proto );
+                $.widget(childPrototype.namespace + "." + childPrototype.widgetName, constructor, child._proto);
             });
             // remove the list of existing child constructors from the old constructor
             // so the old child constructors can be garbage collected
             delete existingConstructor._childConstructors;
         } else {
-            base._childConstructors.push( constructor );
+            base._childConstructors.push(constructor);
         }
 
-        $.widget.bridge( name, constructor );
+        $.widget.bridge(name, constructor);
 
         return constructor;
     };
 
-    $.widget.extend = function( target ) {
-        var input = widget_slice.call( arguments, 1 ),
+    $.widget.extend = function (target) {
+        var input = widget_slice.call(arguments, 1),
             inputIndex = 0,
             inputLength = input.length,
             key,
             value;
-        for ( ; inputIndex < inputLength; inputIndex++ ) {
-            for ( key in input[ inputIndex ] ) {
-                value = input[ inputIndex ][ key ];
-                if ( input[ inputIndex ].hasOwnProperty( key ) && value !== undefined ) {
+        for (; inputIndex < inputLength; inputIndex++) {
+            for (key in input[inputIndex]) {
+                value = input[inputIndex][key];
+                if (input[inputIndex].hasOwnProperty(key) && value !== undefined) {
                     // Clone objects
-                    if ( $.isPlainObject( value ) ) {
-                        target[ key ] = $.isPlainObject( target[ key ] ) ?
-                            $.widget.extend( {}, target[ key ], value ) :
+                    if ($.isPlainObject(value)) {
+                        target[key] = $.isPlainObject(target[key]) ?
+                            $.widget.extend({}, target[key], value) :
                             // Don't extend strings, arrays, etc. with objects
-                            $.widget.extend( {}, value );
+                            $.widget.extend({}, value);
                         // Copy everything else by reference
                     } else {
-                        target[ key ] = value;
+                        target[key] = value;
                     }
                 }
             }
@@ -195,32 +196,32 @@
         return target;
     };
 
-    $.widget.bridge = function( name, object ) {
+    $.widget.bridge = function (name, object) {
         var fullName = object.prototype.widgetFullName || name;
-        $.fn[ name ] = function( options ) {
+        $.fn[name] = function (options) {
             var isMethodCall = typeof options === "string",
-                args = widget_slice.call( arguments, 1 ),
+                args = widget_slice.call(arguments, 1),
                 returnValue = this;
 
-            if ( isMethodCall ) {
-                this.each(function() {
+            if (isMethodCall) {
+                this.each(function () {
                     var methodValue,
-                        instance = $.data( this, fullName );
-                    if ( options === "instance" ) {
+                        instance = $.data(this, fullName);
+                    if (options === "instance") {
                         returnValue = instance;
                         return false;
                     }
-                    if ( !instance ) {
-                        return $.error( "cannot call methods on " + name + " prior to initialization; " +
-                            "attempted to call method '" + options + "'" );
+                    if (!instance) {
+                        return $.error("cannot call methods on " + name + " prior to initialization; " +
+                            "attempted to call method '" + options + "'");
                     }
-                    if ( !$.isFunction( instance[options] ) || options.charAt( 0 ) === "_" ) {
-                        return $.error( "no such method '" + options + "' for " + name + " widget instance" );
+                    if (!$.isFunction(instance[options]) || options.charAt(0) === "_") {
+                        return $.error("no such method '" + options + "' for " + name + " widget instance");
                     }
-                    methodValue = instance[ options ].apply( instance, args );
-                    if ( methodValue !== instance && methodValue !== undefined ) {
+                    methodValue = instance[options].apply(instance, args);
+                    if (methodValue !== instance && methodValue !== undefined) {
                         returnValue = methodValue && methodValue.jquery ?
-                            returnValue.pushStack( methodValue.get() ) :
+                            returnValue.pushStack(methodValue.get()) :
                             methodValue;
                         return false;
                     }
@@ -228,19 +229,19 @@
             } else {
 
                 // Allow multiple hashes to be passed on init
-                if ( args.length ) {
-                    options = $.widget.extend.apply( null, [ options ].concat(args) );
+                if (args.length) {
+                    options = $.widget.extend.apply(null, [options].concat(args));
                 }
 
-                this.each(function() {
-                    var instance = $.data( this, fullName );
-                    if ( instance ) {
-                        instance.option( options || {} );
-                        if ( instance._init ) {
+                this.each(function () {
+                    var instance = $.data(this, fullName);
+                    if (instance) {
+                        instance.option(options || {});
+                        if (instance._init) {
                             instance._init();
                         }
                     } else {
-                        $.data( this, fullName, new object( options, this ) );
+                        $.data(this, fullName, new object(options, this));
                     }
                 });
             }
@@ -249,7 +250,8 @@
         };
     };
 
-    $.Widget = function( /* options, element */ ) {};
+    $.Widget = function (/* options, element */) {
+    };
     $.Widget._childConstructors = [];
 
     $.Widget.prototype = {
@@ -262,9 +264,9 @@
             // callbacks
             create: null
         },
-        _createWidget: function( options, element ) {
-            element = $( element || this.defaultElement || this )[ 0 ];
-            this.element = $( element );
+        _createWidget: function (options, element) {
+            element = $(element || this.defaultElement || this)[0];
+            this.element = $(element);
             this.uuid = widget_uuid++;
             this.eventNamespace = "." + this.widgetName + this.uuid;
 
@@ -272,30 +274,30 @@
             this.hoverable = $();
             this.focusable = $();
 
-            if ( element !== this ) {
-                $.data( element, this.widgetFullName, this );
-                this._on( true, this.element, {
-                    remove: function( event ) {
-                        if ( event.target === element ) {
+            if (element !== this) {
+                $.data(element, this.widgetFullName, this);
+                this._on(true, this.element, {
+                    remove: function (event) {
+                        if (event.target === element) {
                             this.destroy();
                         }
                     }
                 });
-                this.document = $( element.style ?
+                this.document = $(element.style ?
                     // element within the document
                     element.ownerDocument :
                     // element is window or document
-                element.document || element );
-                this.window = $( this.document[0].defaultView || this.document[0].parentWindow );
+                element.document || element);
+                this.window = $(this.document[0].defaultView || this.document[0].parentWindow);
             }
 
-            this.options = $.widget.extend( {},
+            this.options = $.widget.extend({},
                 this.options,
                 this._getCreateOptions(),
-                options );
+                options);
 
             this._create();
-            this._trigger( "create", null, this._getCreateEventData() );
+            this._trigger("create", null, this._getCreateEventData());
             this._init();
         },
         _getCreateOptions: $.noop,
@@ -303,236 +305,237 @@
         _create: $.noop,
         _init: $.noop,
 
-        destroy: function() {
+        destroy: function () {
             this._destroy();
             // we can probably remove the unbind calls in 2.0
             // all event bindings should go through this._on()
             this.element
-                .unbind( this.eventNamespace )
-                .removeData( this.widgetFullName )
+                .unbind(this.eventNamespace)
+                .removeData(this.widgetFullName)
                 // support: jquery <1.6.3
                 // http://bugs.jquery.com/ticket/9413
-                .removeData( $.camelCase( this.widgetFullName ) );
+                .removeData($.camelCase(this.widgetFullName));
             this.widget()
-                .unbind( this.eventNamespace )
-                .removeAttr( "aria-disabled" )
+                .unbind(this.eventNamespace)
+                .removeAttr("aria-disabled")
                 .removeClass(
                     this.widgetFullName + "-disabled " +
-                    "ui-state-disabled" );
+                    "ui-state-disabled");
 
             // clean up events and states
-            this.bindings.unbind( this.eventNamespace );
-            this.hoverable.removeClass( "ui-state-hover" );
-            this.focusable.removeClass( "ui-state-focus" );
+            this.bindings.unbind(this.eventNamespace);
+            this.hoverable.removeClass("ui-state-hover");
+            this.focusable.removeClass("ui-state-focus");
         },
         _destroy: $.noop,
 
-        widget: function() {
+        widget: function () {
             return this.element;
         },
 
-        option: function( key, value ) {
+        option: function (key, value) {
             var options = key,
                 parts,
                 curOption,
                 i;
 
-            if ( arguments.length === 0 ) {
+            if (arguments.length === 0) {
                 // don't return a reference to the internal hash
-                return $.widget.extend( {}, this.options );
+                return $.widget.extend({}, this.options);
             }
 
-            if ( typeof key === "string" ) {
+            if (typeof key === "string") {
                 // handle nested keys, e.g., "foo.bar" => { foo: { bar: ___ } }
                 options = {};
-                parts = key.split( "." );
+                parts = key.split(".");
                 key = parts.shift();
-                if ( parts.length ) {
-                    curOption = options[ key ] = $.widget.extend( {}, this.options[ key ] );
-                    for ( i = 0; i < parts.length - 1; i++ ) {
-                        curOption[ parts[ i ] ] = curOption[ parts[ i ] ] || {};
-                        curOption = curOption[ parts[ i ] ];
+                if (parts.length) {
+                    curOption = options[key] = $.widget.extend({}, this.options[key]);
+                    for (i = 0; i < parts.length - 1; i++) {
+                        curOption[parts[i]] = curOption[parts[i]] || {};
+                        curOption = curOption[parts[i]];
                     }
                     key = parts.pop();
-                    if ( arguments.length === 1 ) {
-                        return curOption[ key ] === undefined ? null : curOption[ key ];
+                    if (arguments.length === 1) {
+                        return curOption[key] === undefined ? null : curOption[key];
                     }
-                    curOption[ key ] = value;
+                    curOption[key] = value;
                 } else {
-                    if ( arguments.length === 1 ) {
-                        return this.options[ key ] === undefined ? null : this.options[ key ];
+                    if (arguments.length === 1) {
+                        return this.options[key] === undefined ? null : this.options[key];
                     }
-                    options[ key ] = value;
+                    options[key] = value;
                 }
             }
 
-            this._setOptions( options );
+            this._setOptions(options);
 
             return this;
         },
-        _setOptions: function( options ) {
+        _setOptions: function (options) {
             var key;
 
-            for ( key in options ) {
-                this._setOption( key, options[ key ] );
+            for (key in options) {
+                this._setOption(key, options[key]);
             }
 
             return this;
         },
-        _setOption: function( key, value ) {
-            this.options[ key ] = value;
+        _setOption: function (key, value) {
+            this.options[key] = value;
 
-            if ( key === "disabled" ) {
+            if (key === "disabled") {
                 this.widget()
-                    .toggleClass( this.widgetFullName + "-disabled", !!value );
+                    .toggleClass(this.widgetFullName + "-disabled", !!value);
 
                 // If the widget is becoming disabled, then nothing is interactive
-                if ( value ) {
-                    this.hoverable.removeClass( "ui-state-hover" );
-                    this.focusable.removeClass( "ui-state-focus" );
+                if (value) {
+                    this.hoverable.removeClass("ui-state-hover");
+                    this.focusable.removeClass("ui-state-focus");
                 }
             }
 
             return this;
         },
 
-        enable: function() {
-            return this._setOptions({ disabled: false });
+        enable: function () {
+            return this._setOptions({disabled: false});
         },
-        disable: function() {
-            return this._setOptions({ disabled: true });
+        disable: function () {
+            return this._setOptions({disabled: true});
         },
 
-        _on: function( suppressDisabledCheck, element, handlers ) {
+        _on: function (suppressDisabledCheck, element, handlers) {
             var delegateElement,
                 instance = this;
 
             // no suppressDisabledCheck flag, shuffle arguments
-            if ( typeof suppressDisabledCheck !== "boolean" ) {
+            if (typeof suppressDisabledCheck !== "boolean") {
                 handlers = element;
                 element = suppressDisabledCheck;
                 suppressDisabledCheck = false;
             }
 
             // no element argument, shuffle and use this.element
-            if ( !handlers ) {
+            if (!handlers) {
                 handlers = element;
                 element = this.element;
                 delegateElement = this.widget();
             } else {
-                element = delegateElement = $( element );
-                this.bindings = this.bindings.add( element );
+                element = delegateElement = $(element);
+                this.bindings = this.bindings.add(element);
             }
 
-            $.each( handlers, function( event, handler ) {
+            $.each(handlers, function (event, handler) {
                 function handlerProxy() {
                     // allow widgets to customize the disabled handling
                     // - disabled as an array instead of boolean
                     // - disabled class as method for disabling individual parts
-                    if ( !suppressDisabledCheck &&
+                    if (!suppressDisabledCheck &&
                         ( instance.options.disabled === true ||
-                        $( this ).hasClass( "ui-state-disabled" ) ) ) {
+                        $(this).hasClass("ui-state-disabled") )) {
                         return;
                     }
-                    return ( typeof handler === "string" ? instance[ handler ] : handler )
-                        .apply( instance, arguments );
+                    return ( typeof handler === "string" ? instance[handler] : handler )
+                        .apply(instance, arguments);
                 }
 
                 // copy the guid so direct unbinding works
-                if ( typeof handler !== "string" ) {
+                if (typeof handler !== "string") {
                     handlerProxy.guid = handler.guid =
                         handler.guid || handlerProxy.guid || $.guid++;
                 }
 
-                var match = event.match( /^([\w:-]*)\s*(.*)$/ ),
+                var match = event.match(/^([\w:-]*)\s*(.*)$/),
                     eventName = match[1] + instance.eventNamespace,
                     selector = match[2];
-                if ( selector ) {
-                    delegateElement.delegate( selector, eventName, handlerProxy );
+                if (selector) {
+                    delegateElement.delegate(selector, eventName, handlerProxy);
                 } else {
-                    element.bind( eventName, handlerProxy );
+                    element.bind(eventName, handlerProxy);
                 }
             });
         },
 
-        _off: function( element, eventName ) {
-            eventName = (eventName || "").split( " " ).join( this.eventNamespace + " " ) +
+        _off: function (element, eventName) {
+            eventName = (eventName || "").split(" ").join(this.eventNamespace + " ") +
                 this.eventNamespace;
-            element.unbind( eventName ).undelegate( eventName );
+            element.unbind(eventName).undelegate(eventName);
 
             // Clear the stack to avoid memory leaks (#10056)
-            this.bindings = $( this.bindings.not( element ).get() );
-            this.focusable = $( this.focusable.not( element ).get() );
-            this.hoverable = $( this.hoverable.not( element ).get() );
+            this.bindings = $(this.bindings.not(element).get());
+            this.focusable = $(this.focusable.not(element).get());
+            this.hoverable = $(this.hoverable.not(element).get());
         },
 
-        _delay: function( handler, delay ) {
+        _delay: function (handler, delay) {
             function handlerProxy() {
-                return ( typeof handler === "string" ? instance[ handler ] : handler )
-                    .apply( instance, arguments );
+                return ( typeof handler === "string" ? instance[handler] : handler )
+                    .apply(instance, arguments);
             }
+
             var instance = this;
-            return setTimeout( handlerProxy, delay || 0 );
+            return setTimeout(handlerProxy, delay || 0);
         },
 
-        _hoverable: function( element ) {
-            this.hoverable = this.hoverable.add( element );
-            this._on( element, {
-                mouseenter: function( event ) {
-                    $( event.currentTarget ).addClass( "ui-state-hover" );
+        _hoverable: function (element) {
+            this.hoverable = this.hoverable.add(element);
+            this._on(element, {
+                mouseenter: function (event) {
+                    $(event.currentTarget).addClass("ui-state-hover");
                 },
-                mouseleave: function( event ) {
-                    $( event.currentTarget ).removeClass( "ui-state-hover" );
+                mouseleave: function (event) {
+                    $(event.currentTarget).removeClass("ui-state-hover");
                 }
             });
         },
 
-        _focusable: function( element ) {
-            this.focusable = this.focusable.add( element );
-            this._on( element, {
-                focusin: function( event ) {
-                    $( event.currentTarget ).addClass( "ui-state-focus" );
+        _focusable: function (element) {
+            this.focusable = this.focusable.add(element);
+            this._on(element, {
+                focusin: function (event) {
+                    $(event.currentTarget).addClass("ui-state-focus");
                 },
-                focusout: function( event ) {
-                    $( event.currentTarget ).removeClass( "ui-state-focus" );
+                focusout: function (event) {
+                    $(event.currentTarget).removeClass("ui-state-focus");
                 }
             });
         },
 
-        _trigger: function( type, event, data ) {
+        _trigger: function (type, event, data) {
             var prop, orig,
-                callback = this.options[ type ];
+                callback = this.options[type];
 
             data = data || {};
-            event = $.Event( event );
+            event = $.Event(event);
             event.type = ( type === this.widgetEventPrefix ?
                 type :
             this.widgetEventPrefix + type ).toLowerCase();
             // the original event may come from any element
             // so we need to reset the target on the new event
-            event.target = this.element[ 0 ];
+            event.target = this.element[0];
 
             // copy original event properties over to the new event
             orig = event.originalEvent;
-            if ( orig ) {
-                for ( prop in orig ) {
-                    if ( !( prop in event ) ) {
-                        event[ prop ] = orig[ prop ];
+            if (orig) {
+                for (prop in orig) {
+                    if (!( prop in event )) {
+                        event[prop] = orig[prop];
                     }
                 }
             }
 
-            this.element.trigger( event, data );
-            return !( $.isFunction( callback ) &&
-            callback.apply( this.element[0], [ event ].concat( data ) ) === false ||
+            this.element.trigger(event, data);
+            return !( $.isFunction(callback) &&
+            callback.apply(this.element[0], [event].concat(data)) === false ||
             event.isDefaultPrevented() );
         }
     };
 
-    $.each( { show: "fadeIn", hide: "fadeOut" }, function( method, defaultEffect ) {
-        $.Widget.prototype[ "_" + method ] = function( element, options, callback ) {
-            if ( typeof options === "string" ) {
-                options = { effect: options };
+    $.each({show: "fadeIn", hide: "fadeOut"}, function (method, defaultEffect) {
+        $.Widget.prototype["_" + method] = function (element, options, callback) {
+            if (typeof options === "string") {
+                options = {effect: options};
             }
             var hasOptions,
                 effectName = !options ?
@@ -541,23 +544,23 @@
                         defaultEffect :
                     options.effect || defaultEffect;
             options = options || {};
-            if ( typeof options === "number" ) {
-                options = { duration: options };
+            if (typeof options === "number") {
+                options = {duration: options};
             }
-            hasOptions = !$.isEmptyObject( options );
+            hasOptions = !$.isEmptyObject(options);
             options.complete = callback;
-            if ( options.delay ) {
-                element.delay( options.delay );
+            if (options.delay) {
+                element.delay(options.delay);
             }
-            if ( hasOptions && $.effects && $.effects.effect[ effectName ] ) {
-                element[ method ]( options );
-            } else if ( effectName !== method && element[ effectName ] ) {
-                element[ effectName ]( options.duration, options.easing, callback );
+            if (hasOptions && $.effects && $.effects.effect[effectName]) {
+                element[method](options);
+            } else if (effectName !== method && element[effectName]) {
+                element[effectName](options.duration, options.easing, callback);
             } else {
-                element.queue(function( next ) {
-                    $( this )[ method ]();
-                    if ( callback ) {
-                        callback.call( element[ 0 ] );
+                element.queue(function (next) {
+                    $(this)[method]();
+                    if (callback) {
+                        callback.call(element[0]);
                     }
                     next();
                 });
@@ -568,11 +571,7 @@
     var widget = $.widget;
 
 
-
 }));
-
-
-
 
 
 /*
@@ -834,12 +833,12 @@
     $.support.fileInput = !(new RegExp(
         // Handle devices which give false positives for the feature detection:
         '(Android (1\\.[0156]|2\\.[01]))' +
-            '|(Windows Phone (OS 7|8\\.0))|(XBLWP)|(ZuneWP)|(WPDesktop)' +
-            '|(w(eb)?OSBrowser)|(webOS)' +
-            '|(Kindle/(1\\.0|2\\.[05]|3\\.0))'
+        '|(Windows Phone (OS 7|8\\.0))|(XBLWP)|(ZuneWP)|(WPDesktop)' +
+        '|(w(eb)?OSBrowser)|(webOS)' +
+        '|(Kindle/(1\\.0|2\\.[05]|3\\.0))'
     ).test(window.navigator.userAgent) ||
-        // Feature detection for all other devices:
-        $('<input type="file">').prop('disabled'));
+    // Feature detection for all other devices:
+    $('<input type="file">').prop('disabled'));
 
     // The FileReader API is not actually used, but works as feature detection,
     // as some Safari versions (5?) support XHR file uploads via the FormData API,
@@ -860,10 +859,10 @@
             e.dataTransfer = e.originalEvent && e.originalEvent.dataTransfer;
             var dataTransfer = e.dataTransfer;
             if (dataTransfer && $.inArray('Files', dataTransfer.types) !== -1 &&
-                    this._trigger(
-                        type,
-                        $.Event(type, {delegatedEvent: e})
-                    ) !== false) {
+                this._trigger(
+                    type,
+                    $.Event(type, {delegatedEvent: e})
+                ) !== false) {
                 e.preventDefault();
                 if (isDragOver) {
                     dataTransfer.dropEffect = 'copy';
@@ -1009,7 +1008,7 @@
                     return false;
                 }
                 if (data.autoUpload || (data.autoUpload !== false &&
-                        $(this).fileupload('option', 'autoUpload'))) {
+                    $(this).fileupload('option', 'autoUpload'))) {
                     data.process().done(function () {
                         data.submit();
                     });
@@ -1170,14 +1169,14 @@
                 var now = ((Date.now) ? Date.now() : (new Date()).getTime()),
                     loaded;
                 if (data._time && data.progressInterval &&
-                        (now - data._time < data.progressInterval) &&
-                        e.loaded !== e.total) {
+                    (now - data._time < data.progressInterval) &&
+                    e.loaded !== e.total) {
                     return;
                 }
                 data._time = now;
                 loaded = Math.floor(
-                    e.loaded / e.total * (data.chunkSize || data._progress.total)
-                ) + (data.uploadedBytes || 0);
+                        e.loaded / e.total * (data.chunkSize || data._progress.total)
+                    ) + (data.uploadedBytes || 0);
                 // Add the difference from the previously loaded state
                 // to the global loaded counter:
                 this._progress.loaded += (loaded - data._progress.loaded);
@@ -1270,7 +1269,7 @@
                         $.each(options.files, function (index, file) {
                             formData.push({
                                 name: ($.type(options.paramName) === 'array' &&
-                                    options.paramName[index]) || paramName,
+                                options.paramName[index]) || paramName,
                                 value: file
                             });
                         });
@@ -1291,10 +1290,10 @@
                             // This check allows the tests to run with
                             // dummy objects:
                             if (that._isInstanceOf('File', file) ||
-                                    that._isInstanceOf('Blob', file)) {
+                                that._isInstanceOf('Blob', file)) {
                                 formData.append(
                                     ($.type(options.paramName) === 'array' &&
-                                        options.paramName[index]) || paramName,
+                                    options.paramName[index]) || paramName,
                                     file,
                                     file.uploadName || file.name
                                 );
@@ -1382,10 +1381,10 @@
             // The HTTP request method must be "POST" or "PUT":
             options.type = (options.type ||
                 ($.type(options.form.prop('method')) === 'string' &&
-                    options.form.prop('method')) || ''
-                ).toUpperCase();
+                options.form.prop('method')) || ''
+            ).toUpperCase();
             if (options.type !== 'POST' && options.type !== 'PUT' &&
-                    options.type !== 'PATCH') {
+                options.type !== 'PATCH') {
                 options.type = 'POST';
             }
             if (!options.formAcceptCharset) {
@@ -1489,7 +1488,7 @@
             };
             data.processing = function () {
                 return !this.jqXHR && this._processQueue && that
-                    ._getDeferredState(this._processQueue) === 'pending';
+                        ._getDeferredState(this._processQueue) === 'pending';
             };
             data.progress = function () {
                 return this._progress;
@@ -1527,7 +1526,7 @@
                 jqXHR,
                 upload;
             if (!(this._isXHRUpload(options) && slice && (ub || mcs < fs)) ||
-                    options.data) {
+                options.data) {
                 return false;
             }
             if (testOnly) {
@@ -1563,7 +1562,7 @@
                 // Add progress listeners for this chunk upload:
                 that._initProgressListener(o);
                 jqXHR = ((that._trigger('chunksend', null, o) !== false && $.ajax(o)) ||
-                        that._getXHRPromise(false, o.context))
+                that._getXHRPromise(false, o.context))
                     .done(function (result, textStatus, jqXHR) {
                         ub = that._getUploadedBytes(jqXHR) ||
                             (ub + o.chunkSize);
@@ -1693,51 +1692,51 @@
                     // Set timer for bitrate progress calculation:
                     options._bitrateTimer = new that._BitrateTimer();
                     jqXHR = jqXHR || (
-                        ((aborted || that._trigger(
-                            'send',
-                            $.Event('send', {delegatedEvent: e}),
-                            options
-                        ) === false) &&
-                        that._getXHRPromise(false, options.context, aborted)) ||
-                        that._chunkedUpload(options) || $.ajax(options)
-                    ).done(function (result, textStatus, jqXHR) {
-                        that._onDone(result, textStatus, jqXHR, options);
-                    }).fail(function (jqXHR, textStatus, errorThrown) {
-                        that._onFail(jqXHR, textStatus, errorThrown, options);
-                    }).always(function (jqXHRorResult, textStatus, jqXHRorError) {
-                        that._onAlways(
-                            jqXHRorResult,
-                            textStatus,
-                            jqXHRorError,
-                            options
-                        );
-                        that._sending -= 1;
-                        that._active -= 1;
-                        if (options.limitConcurrentUploads &&
+                            ((aborted || that._trigger(
+                                'send',
+                                $.Event('send', {delegatedEvent: e}),
+                                options
+                            ) === false) &&
+                            that._getXHRPromise(false, options.context, aborted)) ||
+                            that._chunkedUpload(options) || $.ajax(options)
+                        ).done(function (result, textStatus, jqXHR) {
+                            that._onDone(result, textStatus, jqXHR, options);
+                        }).fail(function (jqXHR, textStatus, errorThrown) {
+                            that._onFail(jqXHR, textStatus, errorThrown, options);
+                        }).always(function (jqXHRorResult, textStatus, jqXHRorError) {
+                            that._onAlways(
+                                jqXHRorResult,
+                                textStatus,
+                                jqXHRorError,
+                                options
+                            );
+                            that._sending -= 1;
+                            that._active -= 1;
+                            if (options.limitConcurrentUploads &&
                                 options.limitConcurrentUploads > that._sending) {
-                            // Start the next queued upload,
-                            // that has not been aborted:
-                            var nextSlot = that._slots.shift();
-                            while (nextSlot) {
-                                if (that._getDeferredState(nextSlot) === 'pending') {
-                                    nextSlot.resolve();
-                                    break;
+                                // Start the next queued upload,
+                                // that has not been aborted:
+                                var nextSlot = that._slots.shift();
+                                while (nextSlot) {
+                                    if (that._getDeferredState(nextSlot) === 'pending') {
+                                        nextSlot.resolve();
+                                        break;
+                                    }
+                                    nextSlot = that._slots.shift();
                                 }
-                                nextSlot = that._slots.shift();
                             }
-                        }
-                        if (that._active === 0) {
-                            // The stop callback is triggered when all uploads have
-                            // been completed, equivalent to the global ajaxStop event:
-                            that._trigger('stop');
-                        }
-                    });
+                            if (that._active === 0) {
+                                // The stop callback is triggered when all uploads have
+                                // been completed, equivalent to the global ajaxStop event:
+                                that._trigger('stop');
+                            }
+                        });
                     return jqXHR;
                 };
             this._beforeSend(e, options);
             if (this.options.sequentialUploads ||
-                    (this.options.limitConcurrentUploads &&
-                    this.options.limitConcurrentUploads <= this._sending)) {
+                (this.options.limitConcurrentUploads &&
+                this.options.limitConcurrentUploads <= this._sending)) {
                 if (this.options.limitConcurrentUploads > 1) {
                     slot = $.Deferred();
                     this._slots.push(slot);
@@ -1786,8 +1785,7 @@
             if (limitSize && files[0].size === undefined) {
                 limitSize = undefined;
             }
-            if (!(options.singleFileUploads || limit || limitSize) ||
-                    !this._isXHRUpload(options)) {
+            if (!(options.singleFileUploads || limit || limitSize) || !this._isXHRUpload(options)) {
                 fileSet = [files];
                 paramNameSet = [paramName];
             } else if (!(options.singleFileUploads || limitSize) && limit) {
@@ -1807,8 +1805,8 @@
                 for (i = 0; i < filesLength; i = i + 1) {
                     batchSize += files[i].size + overhead;
                     if (i + 1 === filesLength ||
-                            ((batchSize + files[i + 1].size + overhead) > limitSize) ||
-                            (limit && i + 1 - j >= limit)) {
+                        ((batchSize + files[i + 1].size + overhead) > limitSize) ||
+                        (limit && i + 1 - j >= limit)) {
                         fileSet.push(files.slice(j, i + 1));
                         paramNameSlice = paramName.slice(j, i + 1);
                         if (!paramNameSlice.length) {
@@ -1947,7 +1945,7 @@
             dataTransfer = dataTransfer || {};
             var items = dataTransfer.items;
             if (items && items.length && (items[0].webkitGetAsEntry ||
-                    items[0].getAsEntry)) {
+                items[0].getAsEntry)) {
                 return this._handleFileTreeEntries(
                     $.map(items, function (item) {
                         var entry;
@@ -2123,7 +2121,7 @@
             var options = this.options;
             if (options.fileInput === undefined) {
                 options.fileInput = this.element.is('input[type="file"]') ?
-                        this.element : this.element.find('input[type="file"]');
+                    this.element : this.element.find('input[type="file"]');
             } else if (!(options.fileInput instanceof $)) {
                 options.fileInput = $(options.fileInput);
             }
@@ -2284,21 +2282,31 @@ $.fn.uploadFile = function (option) {
         var add_input = function ($ele) {
             $ele.parent().find("#" + $ele.attr("id") + "_upload").remove();
 
+
             file_input = $("<input class='hidden-upload' name='file' type='file' id='" + $ele.attr("id") + "_upload'/>");
+
+
             file_input.css("width", 0);
             file_input.css("height", 0);
-            file_input.css("padding-bottom",$ele.outerHeight());
-            file_input.css("padding-left",$ele.outerWidth());
+            file_input.css("padding-bottom", $ele.outerHeight());
+            file_input.css("padding-left", $ele.outerWidth());
             file_input.css("top", $ele[0].offsetTop);
             file_input.css("left", $ele[0].offsetLeft);
             file_input.css("cursor", "pointer");
-            if(option.accept){
-            	file_input.attr("accept",option.accept);
+            if (option.accept) {
+                file_input.attr("accept", option.accept);
             }
             file_input.appendTo($ele.parent());
         }
 
         add_input($ele);
+
+        var loadding = $("<div class='upload-loading'>" +
+            "<div class='shade'></div>" +
+            "<img src='" + contextpath + "statics/image/20140524124238403.gif'/>" +
+            "<div class='loading-text'>上传中</div>" +
+            "</div>");
+
 
         var fileupload = function ($file_input) {
             $file_input.fileupload({
@@ -2307,6 +2315,7 @@ $.fn.uploadFile = function (option) {
                 autoUpload: true,
                 replaceFileInput: false,
                 singleFileUploads: true,
+                limitMultiFileUploadSize: 104857600,
                 add: function (e, data) {
                     if (data.files[0].name) {
                         data.submit();
@@ -2316,8 +2325,30 @@ $.fn.uploadFile = function (option) {
                     if (option.start) {
                         option.start();
                     }
+                    if (!option.progressall) {
+                        var img = loadding.children("img");
+                        img.css("height", $ele.outerHeight() * 0.8);
+                        img.css("width", $ele.outerHeight() * 0.8);
+                        img.css("margin-top", $ele.outerHeight() * 0.1);
+                        img.css("margin-left", $ele.outerHeight() * 0.1);
+
+                        var text = loadding.children(".loading-text");
+                        text.css("height", $ele.outerHeight() + "px");
+                        text.css("line-height", $ele.outerHeight() + "px");
+
+                        loadding.children(".shade").css("border-radius", $ele.css("border-radius"));
+                        loadding.css("border-radius", $ele.css("border-radius"));
+                        loadding.css("width", $ele.outerWidth());
+                        loadding.css("height", $ele.outerHeight());
+                        loadding.css("top", $ele.offset().top);
+                        loadding.css("left", $ele.offset().left);
+                        loadding.appendTo($("body"));
+                    }
                 },
                 done: function (e, data) {
+                    //if (!option.progressall) {
+                    loadding.remove();
+                    // }
                     //data.context.text('Upload finished.');
                     if (data.result.code == '1') {
                         if (option.done) {

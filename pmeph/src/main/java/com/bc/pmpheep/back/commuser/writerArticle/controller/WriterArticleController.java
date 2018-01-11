@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bc.pmpheep.back.authadmin.message.controller.SendMessage;
 import com.bc.pmpheep.back.authadmin.message.service.SendMessageServiceImpl;
 import com.bc.pmpheep.back.commuser.writerArticle.service.WriterArticleServiceImpl;
+import com.bc.pmpheep.back.uncertainfieldcom.bean.CmsCategoryConfig;
 import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.general.pojo.Message;
 import com.bc.pmpheep.general.service.FileService;
@@ -37,7 +38,8 @@ public class WriterArticleController extends BaseController{
 	private WriterArticleServiceImpl writerArticleServiceImpl;
 	Logger logger = LoggerFactory.getLogger(WriterArticleController.class);
 	
-	
+	@Autowired
+	CmsCategoryConfig cmsCategoryConfig;
 	
 	/**
 	 * 写文章页面
@@ -61,12 +63,29 @@ public class WriterArticleController extends BaseController{
 		BigInteger uid = (BigInteger) user.get("id");//用户的id
 		paraMap.put("userId", uid);
 	    String id = request.getParameter("id");//写文章的id
-	    if(id!=null&&"".equals(id)){
+	    paraMap.put("category_id", cmsCategoryConfig.getId("医学随笔"));
+	     
+	    
+	    if(id!=null&&!"".equals(id)){
 	    	String userid = request.getParameter("userid");
 	    	paraMap.put("userId", Long.parseLong(userid));
 	    	paraMap.put("id", Long.parseLong(id));//写文章的id
-	    }
-		Map<String, Object> map2 = writerArticleServiceImpl.queryWriteArticleInfo(paraMap);
+	    }else {
+	    	paraMap.put("id", -1);//写文章的id 如果不是请求中传入的，就应该无法查到已有的，用不存在的id
+		}
+	    Map<String, Object> map2 = new HashMap<String, Object>();
+	    
+	    Map<String, Object> map1 = writerArticleServiceImpl.queryWriteArticleInfo(paraMap);
+		if (map1!=null) {
+			map2.putAll(map1);
+		}
+		
+		if(id!=null&&!"".equals(id)){
+			map2.put("submitTypeCode", 1);
+		}else{
+			map2.put("submitTypeCode", 0);
+		}
+		
 		try {
 			String UEContent = mssageService.get(map2.get("mid").toString()).getContent();
 			map2.put("UEContent", map2==null?"":UEContent);
@@ -107,7 +126,7 @@ public class WriterArticleController extends BaseController{
 		}
 		//List list= new ArrayList();
 		try {
-			    int is_staging = "0".equals(btnType)?0:1;  //是否暂存  0 暂存  1不暂存 提交
+			    int is_staging = "0".equals(btnType)?0:1;  //是否暂存  1 暂存  0不暂存 提交
 				Map map = new HashMap();
 				map.put("parent_id", 0); //上级id
 				map.put("category_id",1); //内容类型 >0 非评论
@@ -116,7 +135,9 @@ public class WriterArticleController extends BaseController{
 				map.put("author_id",uid); //作者id
 				map.put("is_staging",is_staging); //是否暂存
 				map.put("path",0); //根路径
-				flag=writerArticleServiceImpl.insertWriteArticle(map,UEContent);
+				Map<String, Object> insertMap = writerArticleServiceImpl.insertWriteArticle(map,UEContent);
+				flag=insertMap.get("msg_id").toString();
+				resultMap.put("atrticle_id", insertMap.get("atrticle_id").toString());
 				//flag = "0".equals(btnType)?"0":"1";
 			//	flag = msg_id;
 			
@@ -143,12 +164,14 @@ public class WriterArticleController extends BaseController{
 		String UEContent = request.getParameter("UEContent");
 		String msg_id = request.getParameter("msg_id");
 		String btnType = request.getParameter("btnType");
+		String atrticle_id = request.getParameter("atrticle_id");
+		
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		String  flag="0";
 		Map<String, Object> user = this.getUserInfo();
 		BigInteger uid = (BigInteger) user.get("id");//用户的id
 		try {
-			int is_staging = "0".equals(btnType)?0:1;  //是否暂存  0 暂存  1不暂存 提交
+			int is_staging = "0".equals(btnType)?0:1;  //是否暂存  1 暂存  0不暂存 提交
 		
 			Map map = new HashMap();
 			map.put("msg_id", msg_id); //内容id 唯一标识
@@ -159,6 +182,7 @@ public class WriterArticleController extends BaseController{
 			map.put("author_id",uid); //作者id
 			map.put("path",0); //根路径
 			map.put("is_staging",is_staging); //是否暂存
+			map.put("atrticle_id",atrticle_id); //文章主键
 			//修改上一次的全部内容
 			 flag =writerArticleServiceImpl.updateIsStaging(map,UEContent);
 		} catch (Exception e) {
@@ -190,7 +214,7 @@ public class WriterArticleController extends BaseController{
 			map.put("author_id",uid); //作者id
 			map.put("writerid",writerid); //文章id
 			//修改上一次的全部内容
-			 flag =writerArticleServiceImpl.updateDelWriter(map);
+			 writerArticleServiceImpl.updateDelWriter(map);
 		} catch (Exception e) {
 			// TODO: handle exception
 			flag ="1";

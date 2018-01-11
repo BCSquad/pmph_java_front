@@ -11,6 +11,7 @@ import com.bc.pmpheep.controller.bean.ResponseBean;
  * @author liudi
  * 第一主编选择编委 服务层接口
  */
+
 public interface ChooseEditorService {
 
 	/**
@@ -54,6 +55,9 @@ public interface ChooseEditorService {
 	 * @return
 	 */
 	Map<String, Object> editorSelectRubmit(Map<String, Object> paraMap);
+
+	//查询所有数字编委
+	List<Map<String, Object>> queryNumEditorToBeCount(PageParameter<Map<String, Object>> pageParameter);
 
 	
 

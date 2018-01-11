@@ -1,0 +1,27 @@
+
+<link rel="stylesheet" href="$!{contextpath}statics/commuser/personalcenter/mySurvey.css" type="text/css">
+<script src="$!{contextpath}resources/commuser/personalcenter/mySurvey.js"></script>
+
+
+<div class="blank_space"></div>
+<div class="listContent">
+	<div class="blank_space"></div>
+	#foreach($c in $!{List_map})
+        <div class="email_content">
+        	#if(($c.curdate)<($c.enddate))  
+	            <div class="email_right">
+		            <a class="a1" target="_blank" href="$!{contextpath}personalhomepage/queryMySurvey.action?surveyId=$!{c.id}">
+		            	&nbsp;&nbsp;&nbsp;&nbsp;$!{c.title}已通过
+		            </a>
+	            </div>
+	       #else  
+	          <div class="email_right">
+		            <a class="a2" href="#">
+		            	&nbsp;&nbsp;&nbsp;&nbsp;$!{c.title}已通过
+		            </a>
+	            </div>   
+           #end  
+	      
+        </div>
+    #end    
+</div>

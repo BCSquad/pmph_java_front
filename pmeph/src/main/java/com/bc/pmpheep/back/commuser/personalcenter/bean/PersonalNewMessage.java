@@ -2,7 +2,7 @@ package com.bc.pmpheep.back.commuser.personalcenter.bean;
 
 public class PersonalNewMessage {
 
-	private String msgType;//动态类型  1  申报动态  2、文章动态   3、评论动态
+	private String msg_type;//动态类型  1  申报动态  2、文章动态   3、评论动态 
 
 	private String realname;//真实姓名s
 	private String sex;//性别
@@ -222,6 +222,12 @@ public class PersonalNewMessage {
 	}
 	public void setDatebase(String datebase) {
 		this.datebase = datebase;
+	}
+	public String getMsg_type() {
+		return msg_type;
+	}
+	public void setMsg_type(String msg_type) {
+		this.msg_type = msg_type;
 	}
 
 }

@@ -1,10 +1,21 @@
 $(function () {
     $("#book_type").val(633);
+
+    $('.banner').scroll({
+        picElem: $('#move'), //图片父级
+        ctrlElem: $('#ctrl'), //控制条父级(包括小圆点和左右箭头)
+        isLibs: true, //是否创建底部小圆点(样式均可自定义调整),默认向lib添加单独类名，详情见调用后dom结构
+        isArrows: true, //是否创建左右箭头(样式均可自定义调整)
+        autoPlay: true, //是否自动播放
+        playTime: 3000, //自动播放间隔时间
+        playSpeed: 700, //图片切换速度
+        effect: 'left' //轮播的改变方式 top(向上) left(向左) fade(淡入淡出)
+    });
 });
 //下一页
 function on(state) {
     var startrows = $("#before").text();
-    var type = $("#book_type").val();
+    var type = $(".tab-bar .tab.active").attr("id");
     if (state == "next") {
         var flag = $("#next").text();
         if (flag == startrows) {
@@ -94,4 +105,20 @@ function changesale(type) {
     });
     $(".right_div1").removeClass("active");
     $("#typeid-" + type).addClass("active");
+}
+
+//关闭问卷调查
+function cancel(){
+	$("#test_float").hide();
+	$("#test_float").attr('onclick','');
+}
+
+//跳转到问卷调查页面
+function tosurvey(){
+	 location.href = contextpath + 'survey/surveyList.action';
+}
+
+//跳转公告详情页面
+function todou(mid){
+	location.href = contextpath + 'cmsnotice/noticeMessageDetail.action?id='+mid;
 }

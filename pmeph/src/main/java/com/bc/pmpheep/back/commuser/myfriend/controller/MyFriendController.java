@@ -58,8 +58,8 @@ public class MyFriendController extends com.bc.pmpheep.general.controller.BaseCo
         // 获取用户
         Map<String, Object> writerUserMap = this.getUserInfo();
         CommuserWriterUser writerUser = new CommuserWriterUser();
-        writerUser.setId(Long.parseLong(writerUserMap.get("id").toString()));
-        writerUser.setId(12180L);
+        //writerUser.setId(Long.parseLong(writerUserMap.get("id").toString()));
+        writerUser.setId(645L);
         String pageUrl = "commuser/myfriend/myFriend";
         try {
             int startrow = 0;
@@ -69,6 +69,7 @@ public class MyFriendController extends com.bc.pmpheep.general.controller.BaseCo
             model.addObject("id", writerUser.getId());
             model.addObject("more", listFriends.size());
             model.addObject("listFriends", listFriends);
+            model.addObject("listSize", listFriends.size());
         } catch (CheckedServiceException e) {
             throw new CheckedServiceException(e.getBusiness(), e.getResult(), e.getMessage(),
                     pageUrl);

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bc.pmpheep.back.commuser.survey.dao.SurveyDao">
+	<!-- 调查列表 -->
+	<select id="surveyList" resultType="map" parameterType="map">
+		SELECT DISTINCT a.* FROM `survey` a
+		LEFT JOIN `survey_question_answer`  b
+		ON a.`id`= b.`survey_id`
+		WHERE a.is_deleted=0
+		AND b.`user_id` != #{userId}
+		AND #{dateStr} &gt;= a.`begin_date`
+		AND #{dateStr} &lt;= a.`end_date`
+	</select>
+	
+	<!-- 查询单个调查对应的问题 -->
+	<select id="getSurvey" resultType="map">
+		SELECT a.*,d.title AS surveyTitle 
+		FROM `survey_question` a
+		LEFT JOIN `survey_template_question` b
+		ON a.id= b.`question_id`
+		LEFT JOIN `survey_template` c
+		ON b.`template_id` = c.id
+		LEFT JOIN survey d
+		ON d.`template_id` = c.`id`
+		WHERE d.`id`=#{surveyId}
+	</select>
+	
+	<!-- 查询问题对应的选项 -->
+	<select id="getOptions" resultType="map">
+		SELECT * FROM `survey_question_option`
+		WHERE question_id=#{questionId}
+	</select>
+	
+	<!-- 保存单选答案 -->
+	<insert id="saveRadioAnswer" parameterType="map">
+		insert into survey_question_answer(
+			user_id,question_id,option_id,survey_id)
+			values(#{userId},#{questionId},#{optionId},#{surveyId})
+	</insert>
+
+	<!-- 保存多选答案 -->
+	<insert id="saveCheckboxAnswer" parameterType="map">
+		insert into survey_question_answer
+		(user_id,question_id,option_content,survey_id)
+		values(#{userId},#{questionId},#{checkboxAnswer},#{surveyId})
+	</insert>
+	
+	<!-- 保存输入框答案 -->
+	<insert id="saveInputAnswer" parameterType="map">
+		insert into survey_question_answer
+		(user_id,question_id,option_content,survey_id)
+		values(#{userId},#{questionId},#{inputValue},#{surveyId})
+	</insert>
+
+
+</mapper>

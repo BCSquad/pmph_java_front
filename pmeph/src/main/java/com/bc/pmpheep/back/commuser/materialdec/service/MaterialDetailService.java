@@ -42,6 +42,12 @@ public interface MaterialDetailService {
 	 */
 	public int insertPerson(Map<String,Object> map);
 	/**
+	 * 修改个人信息
+	 * @param map
+	 * @return
+	 */
+	public int updatePerson(Map<String,Object> map);
+	/**
 	 * 作家申报职位-图书选择信息
 	 * @param map
 	 * @return

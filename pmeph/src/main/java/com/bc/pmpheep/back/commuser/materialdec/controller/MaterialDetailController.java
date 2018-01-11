@@ -184,7 +184,7 @@ public class MaterialDetailController extends BaseController{
 					Map<String,Object> xxjlMap = new HashMap<String,Object>();
 					xxjlMap.put("declaration_id", declaration_id);
 					xxjlMap.put("major", xx_major[i]);
-					xxjlMap.put("xx_school_name", xx_school_name[i]);
+					xxjlMap.put("school_name", xx_school_name[i]);
 					xxjlMap.put("degree", xx_degree[i]);
 					xxjlMap.put("note", xx_note[i]);
 					xxjlMap.put("date_begin", xx_kssj[i]);
@@ -891,5 +891,13 @@ public class MaterialDetailController extends BaseController{
 		resultMap.put("msg", msg);
 		return resultMap;
 	}
+	
+	//机构信息选择
+	@RequestMapping("toSearchOrg")
+	public ModelAndView toSearchOrg(HttpServletRequest request,
+			HttpServletResponse response){
+		ModelAndView mav = new ModelAndView("");
+		return mav;
+	} 
 	
 }

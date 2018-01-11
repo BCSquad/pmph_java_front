@@ -1,18 +1,22 @@
 
 
 $(function(){
+//	$(':input').labelauty();
 	$('#page-size-select').selectlist({
         zIndex: 10,
         width: 110,
         height: 30,
         optionHeight: 30
     });
-    
-	queryMain();
+	var selId=$("#selected").val();
+	var mid=$("input[name='radio"+selId+"']:checked ").val();
+	getSort('',mid,selId,'sort');
 	//切换分页每页数据数量时 刷新
 	$("#page-size-select").find("li").bind("click",function(){
 		$("#page-num-temp").val(1);
-		queryMain();
+		var selId=$("#selected").val();
+    	var mid=$("input[name='radio"+selId+"']:checked ").val();
+    	getSort('',mid,selId,'page');
 	});
 	
 	$("#search-name").keyup(function(event){
@@ -24,6 +28,86 @@ $(function(){
 
 });
 
+function getSort(order,id,pid,tag){
+	if(tag=="sort"){
+		$("#page-num-temp").val(1);
+	}
+	
+	$("#search-name-temp").val($("#search-name").val());
+	toTopAfterQuery();
+	data = {
+			pageNum:$("#page-num-temp").val(),
+			pageSize:$("#page-size-select").find("input[name='page-size-select']").val(),
+			queryName:$("#search-name-temp").val(),
+			contextpath:contextpath,
+			id:id,
+			order:order
+			};
+	
+	$.ajax({
+		type:'post',
+		url:contextpath+'booksearch/querybooklist.action?t='+new Date().getTime(),
+		async:false,
+		dataType:'json',
+		data:data,
+		success:function(json){
+//			if(id !=null && !(id=="")&& json.count>0){
+				var str= '<div id="sort'+json.parent.order+'" style="background-color: #ffffff;float:left;padding-bottom: 10px;width:1200px">'+
+				'<div style="float:left;min-width:100px;height:56px;line-height: 56px;text-align: center;margin-left:10px">'+
+				json.parent.type_name+
+				':</div>'+
+				' <div style="float:left;max-width:1090px">'+
+				'<ul class="dowebok" >';
+				$.each(json.child,function(i,n){
+					str +='<li style="float:left;margin-left: 10px;margin-top: 10px" ><input type="radio" name="radio'+n.parent_id+'" value="'+n.id+'" onclick="getSort(\''+json.parent.order+'\',\''+n.id+'\',\''+n.parent_id+'\',\'sort\')" data-labelauty="'+n.type_name+'"></li>'
+				});
+				str +='</ul></div></div>';
+				if(tag=='sort'){
+					    $("#sort"+order).nextAll().remove();
+						if(json.child.length>0){
+						    $("#mysort").append(str);
+							$("input[name=radio"+json.child[0].parent_id+"]").labelauty();
+						}
+				}else if(tag=="page"){
+					   
+				}else if(tag=="search"){
+					 $("#mysort").html(str);
+					 $("input[name=radio"+json.child[0].parent_id+"]").labelauty();
+				}
+//			}else{
+//				$("#sort"+order).nextAll().remove();
+//			}
+			$("#book-list-table").html(json.html);
+			$("#selected").val(pid);
+			if (json.html.trim() == "") {
+				$(".pageDiv").hide();
+				$(".no-more").show();
+			}else{
+				$(".no-more").hide();
+				$(".pageDiv").show();
+				$(".pagination").css("display","inline-block");
+				$(".pageJump").css("display","inline-block");
+				$(".pagination").next("div").css("display","inline-block");
+			}
+			$('#page1').html("");	
+			$("#totoal_count").html(json.totoal_count);
+			redQuery();
+			//刷新分页栏
+			 Page({
+                num: json.totoal_count,					//页码数
+                startnum: $("#page-num-temp").val(),				//指定页码
+                elem: $('#page1'),
+                callback: function (n){     //点击页码后触发的回调函数
+                	$("#page-num-temp").val(n);
+                	var selId=$("#selected").val();
+                	var mid=$("input[name='radio"+selId+"']:checked ").val();
+                	getSort('',mid,selId,'page');
+                }
+                });
+			 
+		}
+	});
+}
 
 //条件设定完成后查询的实现  点击查询 翻页 更换查询条件等都要先设定条件 不能直接调用此实现
 function queryMain(){
@@ -79,12 +163,16 @@ function queryMain(){
 function queryBtnClick(){
 	$("#page-num-temp").val(1);
 	$("#search-name-temp").val($("#search-name").val());
-	queryMain();
+	var selId=$("#selected").val();
+	var mid=$("input[name='radio"+selId+"']:checked ").val();
+	getSort('','',selId,'search');
 }
 
 //选择每页数据数量
 function selectPageSize(){
-	queryMain();
+	var selId=$("#selected").val();
+	var mid=$("input[name='radio"+selId+"']:checked ").val();
+	getSort('',mid,selId,'');
 }
 
 //点赞按钮 点击 触发 点赞和取消赞

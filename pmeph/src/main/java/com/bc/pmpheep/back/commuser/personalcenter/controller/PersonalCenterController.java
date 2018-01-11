@@ -1,84 +1,292 @@
 package com.bc.pmpheep.back.commuser.personalcenter.controller;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService;
 import com.bc.pmpheep.back.commuser.personalcenter.bean.PersonalNewMessage;
 import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.template.service.TemplateService;
+import com.bc.pmpheep.back.util.MD5;
 import com.bc.pmpheep.general.controller.BaseController;
+import com.bc.pmpheep.general.pojo.Message;
+import com.bc.pmpheep.general.service.MessageService;
 
 //首页controller
 @Controller
 @RequestMapping("/personalhomepage")
 public class PersonalCenterController extends BaseController {
 
+	
+	@Autowired
+    @Qualifier("com.bc.pmpheep.back.template.service.TemplateService")
+    private TemplateService templateService;
+	
     @Autowired
     @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
     private PersonalService personalService;
+    
+    @Autowired
+	private MessageService messageService;
+    
+    @Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService")
+	private ArticleSearchService articleSearchService;
+    
 
     @RequestMapping("/tohomepage")//个人中心动态
-    public ModelAndView move() {
+    public ModelAndView move(@RequestParam(value="pagetag",defaultValue="dt")String pagetag
+    						,HttpServletRequest request
+    						,@RequestParam(value="pageNum",defaultValue="1")Integer pageNum
+    						,@RequestParam(value="pageSize",defaultValue="10")Integer pageSize
+    						) throws UnsupportedEncodingException {
 
-        ModelAndView modelAndView = new ModelAndView();
+    	ModelAndView mv = new ModelAndView();
         Map<String, Object> permap = this.getUserInfo();//个人信息
-        List<PersonalNewMessage> listmycol = personalService.queryMyCol(permap);//我的收藏
-        List<PersonalNewMessage> listmyfriend = personalService.queryMyFriend(permap);//我的好友
-        List<PersonalNewMessage> listmygroup = personalService.queryMyGroup(permap);//我的小组
-        List<PersonalNewMessage> listmyofeernew = personalService.queryMyOfeerNew(permap);//我的申请动态最新消息
-        List<PersonalNewMessage> listmywritingsnew = personalService.queryMyWritingsNew(permap);//我的随笔文章动态最新消息
-        List<PersonalNewMessage> listmybooknews = personalService.queryMyBooksNew(permap);//我的书评消息动态最新消息
-        List<PersonalNewMessage> listbookjoins = personalService.queryMyBooksJoin(permap);//教材申报最新消息
+        mv.addObject("permap", permap);
+        //查询个人主页共用部分 收藏 好友 小组
+        queryPersonalRightPageInfo(mv, permap);
 
-        List<PersonalNewMessage> newMessages = new ArrayList<PersonalNewMessage>();
-        for (PersonalNewMessage m : listmyofeernew) {
-            newMessages.add(m);
-        }
+        Map<String, Object> paraMap = new HashMap<String, Object>();
+        String contextpath = request.getContextPath()+"/";
+        String logUserId = getUserInfo().get("id").toString();
+		paraMap.put("logUserId", logUserId);
+		//数据总数初始化
+		int count = 0;
+		PageParameter<Map<String,Object>> pageParameter = new PageParameter<Map<String,Object>>(pageNum,pageSize);
+		Map<String, Object> vm_map = new HashMap<String, Object>();
+		vm_map.put("logUserId", logUserId);
+        
+    	//页签分支
+    	if ("dt".equals(pagetag)) { //动态
+    		//从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
+			//设定条件名数组 
+			String[] names={};
+			String[] namesChi = {};
+			queryConditionOperation(names,namesChi,request, mv, paraMap,vm_map);
+			pageParameter.setParameter(paraMap);
 
-        for (PersonalNewMessage m : listmywritingsnew) {
-            newMessages.add(m);
-        }
+			List<Map<String,Object>> List_map = personalService.queryWriterUserTrendst(pageParameter);
+			count = personalService.queryWriterUserTrendstCount(pageParameter);
+			//分页数据代码块
+			String html = this.mergeToHtml("commuser/personalcenter/writerUserTrendst.vm",contextpath, pageParameter, List_map,vm_map);
+			mv.addObject("List_map",List_map);//测试
+			mv.addObject("html",html);
+			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
+		}else if("tsjc".equals(pagetag)){ //图书纠错 (我是第一主编)
+			//从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
+			//设定条件名数组 
+			String[] names={"is_replied"};
+			String[] namesChi = {};
+			queryConditionOperation(names,namesChi,request, mv, paraMap,vm_map);
+			pageParameter.setParameter(paraMap);
 
-        for (PersonalNewMessage m : listmybooknews) {
-            newMessages.add(m);
-        }
+			List<Map<String,Object>> List_map = personalService.queryBookCorrectd(pageParameter);
+			count = personalService.queryBookCorrectdCount(pageParameter);
+			//分页数据代码块
+			String html = this.mergeToHtml("commuser/personalcenter/bookCorrected.vm",contextpath, pageParameter, List_map,vm_map);
+			/*mv.addObject("List_map",List_map);*///测试
+			mv.addObject("html",html);
+			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
+		}else if("wdjc".equals(pagetag)){  //我的纠错(我是纠错人)
+			//从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
+			//设定条件名数组 
+			String[] names={"is_replied"};
+			String[] namesChi = {};
+			queryConditionOperation(names,namesChi,request, mv, paraMap,vm_map);
+			pageParameter.setParameter(paraMap);
 
-        Collections.sort(newMessages, new Comparator<PersonalNewMessage>() {
-            @Override
-            public int compare(PersonalNewMessage o1, PersonalNewMessage o2) {
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                try {
-                    return format.parse(o1.getGmt_update()).compareTo(format.parse(o2.getGmt_update()));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                    throw new RuntimeException(e);
-                }
-            }
-        });
-        modelAndView.addObject("newMessages", newMessages);
-        modelAndView.addObject("permap", permap);
-        modelAndView.addObject("listmycol", listmycol);
-        modelAndView.addObject("listmyfriend", listmyfriend);
-        modelAndView.addObject("listmygroup", listmygroup);
-        modelAndView.addObject("listmyofeernew", listmyofeernew);
-        modelAndView.addObject("listmywritingsnew", listmywritingsnew);
-        modelAndView.addObject("listmybooknews", listmybooknews);
-        modelAndView.addObject("listbookjoins", listbookjoins);
-        modelAndView.setViewName("commuser/personalcenter/PersonalHome");
-        return modelAndView;
+			List<Map<String,Object>> List_map = personalService.queryMyCorrection(pageParameter);
+			count = personalService.queryMyCorrectionCount(pageParameter);
+			//分页数据代码块
+			String html = this.mergeToHtml("commuser/personalcenter/myCorrection.vm",contextpath, pageParameter, List_map,vm_map);
+			/*mv.addObject("List_map",List_map);*///测试
+			mv.addObject("html",html);
+			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
+		}else if("sbwz".equals(pagetag)){ //随笔文章
+			//从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
+			//设定条件名数组 
+			String[] names={"auth_status","is_staging"};
+			String[] namesChi = {};
+			queryConditionOperation(names,namesChi,request, mv, paraMap,vm_map);
+			pageParameter.setParameter(paraMap);
+
+			List<Map<String,Object>> List_map = personalService.queryMyWritingsNew(pageParameter);
+			count = personalService.queryMyWritingsNewCount(pageParameter);
+			//分页数据代码块
+			String html = this.mergeToHtml("commuser/personalcenter/myWritingsList.vm",contextpath, pageParameter, List_map,vm_map);
+			/*mv.addObject("List_map",List_map);*///测试
+			mv.addObject("html",html);
+			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
+			
+			
+		}else if("jcsb".equals(pagetag)){ //教材申报
+			//从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
+			//设定条件名数组 
+			String[] names={"s","pageinfo","dateinfo","online_progress","is_staging","pageinfo1"};
+			String[] namesChi = {"bookname"};
+			queryConditionOperation(names,namesChi,request, mv, paraMap,vm_map);
+			pageParameter.setParameter(paraMap);
+
+			List<Map<String,Object>> List_map = personalService.queryMyBooksJoin(pageParameter);//教材申报最新消息
+			count = personalService.queryMyBooksJoinCount(pageParameter);
+			//分页数据代码块
+			String html = this.mergeToHtml("commuser/personalcenter/materialDeclarationList.vm",contextpath, pageParameter, List_map,vm_map);
+			/*mv.addObject("List_map",List_map);*///测试
+			mv.addObject("html",html);
+			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
+			
+			
+		}else if("wycs".equals(pagetag)){  //我要出书
+			
+			//从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView，放入模版空间
+			//设定条件名数组 
+			String[] names={"auth_progress","is_staging","isMine","pageinfo1"};
+			String[] namesChi = {"bookname"};
+			queryConditionOperation(names,namesChi,request, mv, paraMap,vm_map);
+			
+			pageParameter.setParameter(paraMap);
+			List<Map<String,Object>> List_map =personalService.queryMyTopicChoose(pageParameter);
+			count = personalService.queryMyTopicChooseCount(pageParameter);
+			//分页数据代码块
+			String html = this.mergeToHtml("commuser/personalcenter/myTopicChoose.vm",contextpath, pageParameter, List_map,vm_map);
+			/*mv.addObject("List_map",List_map);*///测试
+			mv.addObject("html",html);
+			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
+		}else if("wdpl".equals(pagetag)){ //我的评论
+			//从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
+			//设定条件名数组 
+			String[] names={"is_long"};
+			String[] namesChi = {};
+			queryConditionOperation(names,namesChi,request, mv, paraMap,vm_map);
+			pageParameter.setParameter(paraMap);
+
+			List<Map<String,Object>> List_map = personalService.myComment(pageParameter);
+			count = personalService.myCommentCount(pageParameter);
+			//分页数据代码块
+			String html = this.mergeToHtml("commuser/personalcenter/myComment.vm",contextpath, pageParameter, List_map,vm_map);
+			
+			mv.addObject("html",html);
+			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
+		}else if("wdwj".equals(pagetag)){  //我的问卷
+			//从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
+			//设定条件名数组 
+			String[] names={};
+			String[] namesChi = {};
+			queryConditionOperation(names,namesChi,request, mv, paraMap,vm_map);
+			pageParameter.setParameter(paraMap);
+
+			List<Map<String,Object>> List_map = personalService.mySurvey(pageParameter);
+			count = personalService.myCommentCount(pageParameter);
+			
+			//分页数据代码块
+			String html = this.mergeToHtml("commuser/personalcenter/mySurvey.vm",contextpath, pageParameter, List_map,vm_map);
+			
+			mv.addObject("html",html);
+			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
+		}else{
+			
+		}
+    	
+    	//总页数
+    	Integer maxPageNum = (int) Math.ceil(1.0*count/pageSize);
+    	mv.addObject("logUserId",logUserId);
+    	mv.addObject("listCount",count);
+    	mv.addObject("maxPageNum",maxPageNum);
+    	mv.addObject("pagetag",pagetag);
+    	mv.addObject("pageNum",pageNum);
+    	mv.addObject("pageSize",pageSize);
+        
+        return mv;
     }
 
+    @RequestMapping(value="authorReply",method=RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> authorReply(HttpServletRequest request){
+    	String id = request.getParameter("id");
+    	String author_reply = request.getParameter("author_reply");
+    	
+    	Map<String,Object> result_map = personalService.authorReply(id,author_reply);
 
-    @RequestMapping("/tohomepageout")//个人中心展示页面
+    	return result_map;
+    }
+
+    /**
+     * 分页数据执行模版转化为html
+     * @param vm 模版地址
+     * @param contextpath
+     * @param pageParameter
+     * @param List_map
+     * @return
+     */
+	private String mergeToHtml(String vm,String contextpath,
+			PageParameter<Map<String, Object>> pageParameter,
+			List<Map<String, Object>> List_map,Map<String, Object> vm_map) {
+		
+		vm_map.put("List_map", List_map);
+		vm_map.put("startNum", pageParameter.getStart()+1);
+		vm_map.put("para", pageParameter.getParameter());
+		vm_map.put("contextpath", contextpath);
+		String html ="";
+		html = templateService.mergeTemplateIntoString(vm, vm_map);
+		return html;
+	}
+
+
+    /**
+     * 从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView，放入模版空间
+     * @param names 数字字母查询条件
+     * @param namesChi js中编码过的中文查询条件
+     * @param request
+     * @param modelAndView
+     * @param paraMap
+     * @throws UnsupportedEncodingException
+     */
+	private void queryConditionOperation(String[] names,String[] namesChi,HttpServletRequest request,ModelAndView modelAndView, Map<String, Object> paraMap,Map<String, Object> vm_map) throws UnsupportedEncodingException {
+		for (String queryName : names) {
+			//查询条件
+			String queryValue = request.getParameter(queryName);
+			//封装查询条件入pageParameter 用以查询
+			paraMap.put(queryName, queryValue);
+			//传回查询条件
+			modelAndView.addObject(queryName, queryValue);
+			//放入模版空间
+			vm_map.put(queryName, queryValue);
+		}
+		for (String queryName : namesChi) {
+			//查询条件
+			String queryValue = request.getParameter(queryName);
+			queryValue = java.net.URLDecoder.decode((queryValue!=null?queryValue:""),"UTF-8"); 
+			//封装查询条件入pageParameter 用以查询
+			paraMap.put(queryName, queryValue);
+			//传回查询条件
+			modelAndView.addObject(queryName, queryValue);
+			//放入模版空间
+			vm_map.put(queryName, queryValue);
+		}
+	}
+
+
+    /*@RequestMapping("/tohomepageout")//个人中心展示页面
     public ModelAndView moveout(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         String uid = request.getParameter("uid");
@@ -96,9 +304,9 @@ public class PersonalCenterController extends BaseController {
         modelAndView.addObject("listmybooknews", listmybooknews);
         modelAndView.setViewName("commuser/personalcenter/PersonalHomeOut");
         return modelAndView;
-    }
+    }*/
 
-    @RequestMapping("/tohomepageone")//个人中心教材申报列表
+    /*@RequestMapping("/tohomepageone")//个人中心教材申报列表
     public ModelAndView moveoutone(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         String bookname = null;
@@ -132,9 +340,9 @@ public class PersonalCenterController extends BaseController {
         modelAndView.setViewName("commuser/personalcenter/PersonalHomeOne");
         modelAndView.addObject("serchbox", bookname);
         return modelAndView;
-    }
+    }*/
 
-    @RequestMapping("/tohomepageonelist")//我的申请个人中心教材申报列表
+    /*@RequestMapping("/tohomepageonelist")//我的申请个人中心教材申报列表
     public ModelAndView moveoutone1(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         String bookname = null;
@@ -168,10 +376,10 @@ public class PersonalCenterController extends BaseController {
         modelAndView.setViewName("commuser/personalcenter/PersonalHomeOneMy");
         modelAndView.addObject("serchbox", bookname);
         return modelAndView;
-    }
+    }*/
 
 
-    @RequestMapping("/tohomepagetwo")//个人中心随笔文章列表
+    /*@RequestMapping("/tohomepagetwo")//个人中心随笔文章列表
     public ModelAndView moveouttwo() {
         ModelAndView modelAndView = new ModelAndView();
         Map<String, Object> permap = this.getUserInfo();//个人信息
@@ -184,9 +392,9 @@ public class PersonalCenterController extends BaseController {
         modelAndView.addObject("listmywritingsnew", listmywritingsnew);
         modelAndView.setViewName("commuser/personalcenter/PersonalHomeTwo");
         return modelAndView;
-    }
+    }*/
 
-    @RequestMapping("/tohomepagethe")//个人中心我的书评列表
+    /*@RequestMapping("/tohomepagethe")//个人中心我的书评列表
     public ModelAndView moveoutthe() {
         ModelAndView modelAndView = new ModelAndView();
         Map<String, Object> permap = this.getUserInfo();//个人信息
@@ -199,6 +407,221 @@ public class PersonalCenterController extends BaseController {
         modelAndView.addObject("listmybooknews", listmybooknews);
         modelAndView.setViewName("commuser/personalcenter/PersonalHomeThere");
         return modelAndView;
-    }
+    }*/
+    
+    /**
+     * 我要出书
+     *//*
+    @RequestMapping("/toBookList")
+    public ModelAndView toBookList(HttpServletRequest request,
+    		HttpServletResponse response){
+    	ModelAndView mav = new ModelAndView("commuser/personalcenter/toBookList");
+    	
+    	return mav;
+    }*/
+    
+    
+    //内部方法***************************************************************************
+    
+    /**
+     * 查询动态
+     * @param modelAndView
+     * @param permap
+     */
+	private void queryPersonalNewMessage(ModelAndView modelAndView,
+			Map<String, Object> permap) {/*
+		List<PersonalNewMessage> listmyofeernew = personalService.queryMyOfeerNew(permap);//我的申请动态最新消息
+		List<PersonalNewMessage> listmywritingsnew = personalService.queryMyWritingsNew(permap);//我的随笔文章动态最新消息
+		List<PersonalNewMessage> listmybooknews = personalService.queryMyBooksNew(permap);//我的书评消息动态最新消息
+		//List<PersonalNewMessage> listbookjoins = personalService.queryMyBooksJoin(permap);//教材申报最新消息
 
+		List<PersonalNewMessage> newMessages = new ArrayList<PersonalNewMessage>();
+		for (PersonalNewMessage m : listmyofeernew) {
+		    newMessages.add(m);
+		}
+
+		for (PersonalNewMessage m : listmywritingsnew) {
+		    newMessages.add(m);
+		}
+
+		for (PersonalNewMessage m : listmybooknews) {
+		    newMessages.add(m);
+		}
+
+		Collections.sort(newMessages, new Comparator<PersonalNewMessage>() {
+		    @Override
+		    public int compare(PersonalNewMessage o1, PersonalNewMessage o2) {
+		        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		        try {
+		            return format.parse(o1.getGmt_update()).compareTo(format.parse(o2.getGmt_update()));
+		        } catch (ParseException e) {
+		            e.printStackTrace();
+		            throw new RuntimeException(e);
+		        }
+		    }
+		});
+		modelAndView.addObject("newMessages", newMessages);
+	*/}
+	
+	/**
+     * 查询个人主页共用部分 收藏 好友 小组
+     * @param modelAndView
+     * @param permap
+     */
+	private void queryPersonalRightPageInfo(ModelAndView modelAndView,
+			Map<String, Object> permap) {
+		List<PersonalNewMessage> listmycol = personalService.queryMyCol(permap);//我的收藏
+        List<PersonalNewMessage> listmyfriend = personalService.queryMyFriend(permap);//我的好友
+        List<PersonalNewMessage> listmygroup = personalService.queryMyGroup(permap);//我的小组
+        modelAndView.addObject("listmycol", listmycol);
+        modelAndView.addObject("listmyfriend", listmyfriend);
+        modelAndView.addObject("listmygroup", listmygroup);
+        
+        /*modelAndView.addObject("listmyofeernew", listmyofeernew);
+        modelAndView.addObject("listmywritingsnew", listmywritingsnew);
+        modelAndView.addObject("listmybooknews", listmybooknews);
+        modelAndView.addObject("listbookjoins", listbookjoins);*/
+	}
+	
+	/**
+	 * 我的纠错删除方法 伪删除
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="deleteMyCorrection",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> deleteMyCorrection(@RequestParam(value="id",required=true)String id,HttpServletRequest request){
+		String logUserId = getUserInfo().get("id").toString();
+		Map<String,Object> result_map = personalService.deleteMyCorrection(id,logUserId);
+		return result_map;
+		
+	}
+	
+	/**
+	 * 我的书评删除方法 伪删除
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="deleteMyBookComment",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> deleteMyBookComment(@RequestParam(value="id",required=true)String id,HttpServletRequest request){
+		String logUserId = getUserInfo().get("id").toString();
+		Map<String,Object> result_map = personalService.deleteMyBookComment(id,logUserId);
+		return result_map;
+	}
+	
+	
+
+	
+	@SuppressWarnings("deprecation")
+	@RequestMapping(value="getFirstImgByMid")
+	@ResponseBody
+	public String getFirstImgByMid(@RequestParam(value="mid",defaultValue="")String mid,HttpServletRequest request,HttpServletResponse response){
+		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
+		String img_url = basePath+"statics/image/564f34b00cf2b738819e9c35_122x122!.jpg";
+		if (!"".equals(mid)) {
+			Message message=messageService.get(mid);
+			if(message!=null){
+				List<String> imglist = articleSearchService.getImgSrc(message.getContent());
+			    if(imglist.size()>0){
+			    	img_url = imglist.get(0);
+			    	if (img_url.length()>0) {
+			    		img_url=img_url.substring(img_url.indexOf("/ueditor/jsp/upload/image"), img_url.length());
+			    		//本地项目名和相对路径不一定一样 此处文章图片会保存到应用发布地址 如 pmeph1 而相对路径是pmeph 此处需拼接回真是应用的发布地址
+			    		String realpath = request.getRealPath("/");//D:\Program Files\apache-tomcat-7.0.78\webapps\pmeph1\
+			    		realpath = realpath.substring(0,realpath.length()-1);
+			    		realpath=realpath.substring(realpath.lastIndexOf("\\"), realpath.length());
+			    		img_url = realpath+img_url;
+					}
+			    	
+			    	
+			    }
+			}
+		}
+		return img_url;
+	}
+	
+	
+	/**
+	 * 跳转到某一个问卷页面
+	* @Title: writeSurvey 
+	* @Description: TODO
+	* @param @param request
+	* @param @return    设定文件 
+	* @return ModelAndView    返回类型 
+	* @throws
+	 */
+	
+		@RequestMapping(value="/queryMySurvey")
+		public ModelAndView queryMySurvey(HttpServletRequest request){
+			ModelAndView mv = new ModelAndView();
+			String surveyIdStr = request.getParameter("surveyId");
+			long surveyId = new Long(surveyIdStr);
+			 Map<String, Object> paraMap = new HashMap<String, Object>();
+		        String logUserId = getUserInfo().get("id").toString();
+				paraMap.put("logUserId", logUserId);
+				
+			//查询该调查包含的所有题目
+			List<Map<String,Object>> list = personalService.getSurvey(surveyId);
+			List<Map<String,Object>> listResult = new ArrayList<Map<String,Object>>();
+			if(list.size()>0){
+				//遍历题目
+				for(Map<String,Object> question : list){
+					//查询每一个单选和多选题对应的选项
+					if(question.get("type").equals(1)||question.get("type").equals(2)){
+						String questionIdStr = question.get("id").toString();
+						if(null!=questionIdStr&&!questionIdStr.equals("")){
+							long questionId = Long.valueOf(questionIdStr).longValue();
+							List<Map<String,Object>> listOptions = personalService.getOptions(questionId);
+							
+							//查询单选答案
+							paraMap.put("questionId", questionId);
+							  String answer = personalService.getAnswers(paraMap);
+							//查询多选答案
+							  String che = personalService.getCheckAnswers(paraMap);
+							
+							  boolean flag=false;
+							  if (null!=che&&""!=che) {
+								  String[] checkAnswer=che.split(",");
+								  for (String ch : checkAnswer) {
+									  for (Map<String, Object> opt : listOptions) {
+										 
+										if (ch.equals(opt.get("id").toString())) {
+											flag=true;
+											opt.put("flag", flag);
+											
+										}else {
+											flag=false;
+										} 
+									}
+								}
+							}
+							
+							question.put("listOptions", listOptions);
+							question.put("answer", answer);
+							listResult.add(question);
+						}
+					}else if(question.get("type").equals(3)||question.get("type").equals(5)){
+						//查询填空答案
+						String questionIdStr = question.get("id").toString();
+						if(null!=questionIdStr&&!questionIdStr.equals("")){
+							long questionId = Long.valueOf(questionIdStr).longValue();
+							 String inp = personalService.getInpAnswers(paraMap);
+							question.put("inp", inp);
+							listResult.add(question);
+						}
+					}else{
+						listResult.add(question);
+					}
+					
+				}
+			}
+			
+			mv.addObject("listSesult",listResult);
+			mv.addObject("listSize",listResult.size());
+			mv.setViewName("commuser/personalcenter/queryMySurvey");
+			return mv;
+		}
+
+	
 }

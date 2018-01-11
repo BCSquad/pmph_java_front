@@ -27,6 +27,7 @@ public interface MaterialDetailDao {
 		public List<Map<String,Object>> queryPerson(Map<String,Object> map);
 		public int insertPerson(Map<String,Object> map);
 		public int DelPerson(Map<String,Object> map);
+		public int updatePerson(Map<String,Object> map);
 		
 		//查询学习经历
 		public List<Map<String,Object>> queryStu(Map<String,Object> map);

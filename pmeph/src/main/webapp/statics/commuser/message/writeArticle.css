@@ -25,7 +25,7 @@ body
 	float:left;
     }
     
- /*ÉîÉ«Ò³Í·¶þ¼¶²Ëµ¥µã»÷³öÏÖÏÂ»®Ïß*/
+ /*ï¿½ï¿½É«Ò³Í·ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â»ï¿½ï¿½ï¿½*/
  .sxy-span-menu{
     border-bottom:2px solid #259980;
 }
@@ -42,11 +42,16 @@ body
     border-radius: 4px;
 }
 
+.sxy-div-content{
+	margin-top: 30px;
+}
+
 .sxy-div-content2
 {
     width: 1200px;
     height:56px;
     margin: 0 auto;
+    
 }
 
 .sxy-div-content3

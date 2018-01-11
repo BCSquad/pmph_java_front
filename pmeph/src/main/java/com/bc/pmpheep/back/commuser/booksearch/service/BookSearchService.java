@@ -3,8 +3,11 @@ package com.bc.pmpheep.back.commuser.booksearch.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.controller.bean.ResponseBean;
+import com.bc.pmpheep.service.exception.CheckedServiceException;
 
 /**
  * 
@@ -35,6 +38,41 @@ public interface BookSearchService {
 	 */
 	Map<String, Object> likeSwitch(String uid, String bookId);
 
-	
-	
+	/**查询某一类型下的子类型
+	 * @param parentId
+	 * @return
+	 */
+	List<Map<String,Object>> queryChildSort(Long parentId);
+
+	/**根据id查询分类
+	 * @param valueOf
+	 * @return
+	 */
+	Map<String, Object> querySortById(Long id);
+	 /**
+     * 
+     * 
+     * 功能描述：分页初始化/查询图书详情
+     * 
+     * @param pageParameter 分页参数 ，isOnSale 是否上架，isNew 是否新书 ，type 书籍类别 ， isPromote 是否推荐，name
+     *            isbn/图书名称
+     * @return 分好页的结果集
+     * @throws CheckedServiceException
+     * 
+     */
+    List<Map<String,Object>> listBook(PageParameter<Map<String,Object>> pageParameter);
+
+    /**
+     * 
+     * 
+     * 功能描述：获取总条数
+     * 
+     * @param pageParameter 分页参数 ，isOnSale 是否上架，isNew 是否新书 ，type 书籍类别 ， isPromote 是否推荐，name
+     *            isbn/图书名称
+     * @return 分好页的结果集
+     * @throws CheckedServiceException
+     * 
+     */
+    Integer getBookTotal(PageParameter<Map<String,Object>> pageParameter);
+    List<Map<String,Object>> querySearchSort(Map<String,Object> map);
 }

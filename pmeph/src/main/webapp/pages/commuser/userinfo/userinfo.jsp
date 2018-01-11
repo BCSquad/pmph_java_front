@@ -7,9 +7,8 @@
     <script type="text/javascript">
         var contextpath = '${pageContext.request.contextPath}/';
     </script>
-    <c:set var="ctx" value="${pageContext.request.contextPath}"/>
+    <c:set var="ctx" value="${pageContext.request.contextPath}" />
     <title>个人资料</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link href="${ctx}/statics/authadmin/accountset/publicStyle.css" rel="stylesheet" type="text/css"/>
@@ -56,11 +55,15 @@
     </script>
 </head>
 <body>
-<input type="hidden" id="id" value="${map.id}">
+
 <jsp:include page="/pages/comm/head.jsp">
-    <jsp:param value="homepage" name="pageTitle"/>
-</jsp:include>
-    <div style="height:30px"></div>
+		<jsp:param value="homepage" name="pageTitle" />
+	</jsp:include>
+	<div class="body" style="background: #f6f6f6;">
+		<div class="content-wrapper" >
+			<div style="height: 30px"></div>
+			<input type="hidden" id="id" value="${map.id}">
+
     <div class="sxy-div-content">
         <div style="height:50px;">
             <span style="width:20px;"></span>
@@ -71,7 +74,7 @@
     <div class="sxy-div-content">
         <div>
             <div id="sxy-userinfo-div">
-                <img id="sxy-img1" src="${ctx}/file/download/${map.avatar}.action"/>
+                <img id="sxy-img1" src="${ctx}/statics/image/putongyhtouxiang.png"/>
                 <div class="shade" id="uploadFile">修改头像</div>
             </div>
             <div style="height:35px;"></div>
@@ -81,9 +84,13 @@
                 <div class="sxy-userinfo-row"></div>
                 <div class="sxy-userinfo-row"></div>
                 <div class="sxy-userinfo-row"></div>
-                <div class="sxy-userinfo-row"><font id="sxy-font-1">教师认证</font></div>
-                <div class="sxy-userinfo-row"></div>
-                <div class="sxy-userinfo-row"><font id="sxy-font-2">修改密码</font></div>
+
+                <div class="sxy-userinfo-row">
+                	<a id="sxy-font-1" style="cursor: pointer;" onclick="window.location='${ctx}/teacherCertification/showTeacherCertification.action'">教师认证</a>
+                </div>
+                <div class="sxy-userinfo-row">
+                	<a id="sxy-font-2" style="cursor: pointer;" onclick="window.location='${ctx}/userinfo/comchangepwd.action'">修改密码</a>
+                </div>
             </div>
             <div style="height:35px;"></div>
         </div>
@@ -276,6 +283,11 @@
         </table>
         </form>
     </div>
-    <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
-</body>
+			
+		</div>
+		<div style="height: 60px; width: 100%;"></div>
+	</div>
+	<div style="clear: both"></div>
+	<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
+
 </html>

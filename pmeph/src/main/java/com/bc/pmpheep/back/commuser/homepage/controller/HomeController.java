@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.homepage.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +37,7 @@ public class HomeController {
         int flag = 0;
         List<Map<String, Object>> listDou = homeService.queryDocument();
         List<Map<String, Object>> listNot = homeService.queryNotice();
-        List<Map<String, Object>> listArt = homeService.queryArticle();
+        List<Map<String, Object>> listArt = homeService.queryArticle(4);
         List<Map<String, Object>> listAut = homeService.queryAuthor();
         List<Map<String, Object>> listCom = homeService.queryComment();
 
@@ -57,7 +58,6 @@ public class HomeController {
             modelAndView.addObject("listLabel", listLabel);
         }
 
-
         Map<String, Object> rowsmap = new HashMap<String, Object>();
         rowsmap.put("startrows", -1);
         rowsmap.put("type", MapUtils.getIntValue(types.get(0), "id"));
@@ -69,6 +69,9 @@ public class HomeController {
         List<Map<String, Object>> listBok = homeService.queryBook(pmap);
         String html = "";
         String vm = "commuser/homepage/homepage.vm";
+
+        Map<String, Object> map2 = new HashMap<String, Object>();
+        map2.put("books", new ArrayList());
         for (int i = 0; i < listBok.size(); i++) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("id", listBok.get(i).get("id"));
@@ -79,9 +82,11 @@ public class HomeController {
             } else {
                 map.put("img", listBok.get(i).get("image_url"));
             }
+            ((List) map2.get("books")).add(map);
 
-            html += templateService.mergeTemplateIntoString(vm, map);
         }
+        html += templateService.mergeTemplateIntoString(vm, map2);
+
         if (listrows.size() % 10 == 0) {
             flag = listrows.size() / 10;
         } else {
@@ -111,6 +116,9 @@ public class HomeController {
         String vm = "commuser/homepage/homepage.vm";
         Map<String, Object> typeMap = new HashMap<String, Object>();
         typeMap.put("type", type);
+
+        Map<String, Object> map2 = new HashMap<String, Object>();
+        map2.put("books", new ArrayList());
         if (state.equals("next")) {
             typeMap.put("startrows", startrows * 10 + 1);
             List<Map<String, Object>> listRow = homeService.queryBook(typeMap);
@@ -124,9 +132,7 @@ public class HomeController {
                 } else {
                     map.put("img", listRow.get(i).get("image_url"));
                 }
-                html += templateService.mergeTemplateIntoString(vm, map);
-                pMap.put("homepagebook", html);
-                pMap.put("thisrows", startrows + 1);
+                ((List) map2.get("books")).add(map);
             }
         } else {
             typeMap.put("startrows", (startrows - 2) * 10);
@@ -141,11 +147,13 @@ public class HomeController {
                 } else {
                     map.put("img", listRow.get(i).get("image_url"));
                 }
-                html += templateService.mergeTemplateIntoString(vm, map);
-                pMap.put("homepagebook", html);
-                pMap.put("thisrows", startrows - 1);
+                ((List) map2.get("books")).add(map);
+
             }
         }
+        html += templateService.mergeTemplateIntoString(vm, map2);
+        pMap.put("homepagebook", html);
+        pMap.put("thisrows", state.endsWith("next") ? startrows + 1 : startrows - 1);
         return pMap;
     }
 
@@ -166,6 +174,8 @@ public class HomeController {
         List<Map<String, Object>> listrows = homeService.queryBook(rowsmap);
         String html = "";
         String vm = "commuser/homepage/homepage.vm";
+        Map<String, Object> map2 = new HashMap<String, Object>();
+        map2.put("books", new ArrayList());
         for (int i = 0; i < listrows.size(); i++) {
             Map<String, Object> pmap = new HashMap<String, Object>();
             pmap.put("id", listrows.get(i).get("id"));
@@ -176,9 +186,12 @@ public class HomeController {
             } else {
                 pmap.put("img", listrows.get(i).get("image_url"));
             }
-            html += templateService.mergeTemplateIntoString(vm, pmap);
-            map.put("homepagebook", html);
+            ((List) map2.get("books")).add(pmap);
+
         }
+        html += templateService.mergeTemplateIntoString(vm, map2);
+        map.put("homepagebook", html);
+
         List<Map<String, Object>> listType = homeService.queryBookType(Integer.parseInt(state));
         List<Map<String, Object>> listLabel = homeService.queryLabel(Integer.parseInt(state));
         map.put("listType", listType);

@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.commuser.readpage.dao.ReadDetailDao;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
@@ -17,6 +19,10 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 	
 	@Autowired
 	private ReadDetailDao readDetailDao;
+	
+	@Autowired
+    @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
+    private PersonalService personalService;
 
 	/**
 	 * 查询读书详情页信息
@@ -32,20 +38,15 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 	 * 查询相关评论
 	 */
 	@Override
-	public PageResult<Map<String, Object>> queryComment(PageParameter<Map<String, Object>> pageParameter) {
+	public List<Map<String, Object>> queryComment(String id,int start) {
 		// TODO Auto-generated method stub
-		PageResult<Map<String, Object>> pageResult=new PageResult<Map<String, Object>>();
-		pageResult.setPageSize(pageParameter.getPageSize());
-		List<Map<String, Object>> map=readDetailDao.queryComment(pageParameter);
+		List<Map<String, Object>> map=readDetailDao.queryComment(id,start);
 		for (Map<String, Object> pmap : map) {
 			String time=pmap.get("gmt_create").toString().substring(0, 16);
 			pmap.put("gmt_create", time);
+			pmap.put("start", start+2);
 		}
-		int count=readDetailDao.querySize(pageParameter.getParameter().get("id").toString());
-		pageResult.setTotal(count);
-		pageResult.setRows(map);
-		pageResult.setPageNumber(pageParameter.getPageNumber());
-		return pageResult;
+		return map;
 	}
 
 	/**
@@ -76,6 +77,7 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		// TODO Auto-generated method stub
 		Map<String, Object> rmap=new HashMap<String, Object>();
 	    readDetailDao.insertComment(map);
+	    personalService.saveUserTrendst("wdsp", map.get("table_trendst_id").toString(), 0, map.get("writer_id").toString());
 	    rmap.put("returncode", "OK");
 	    return rmap;
 	}
@@ -131,6 +133,9 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		return pmap;
 	}
 
+	/**
+	 * 查询是否点赞
+	 */
 	@Override
 	public List<Map<String, Object>> queryLikes(Map<String, Object> map) {
 		// TODO Auto-generated method stub
@@ -138,7 +143,7 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		return list;
 	}
 
-	/* 
+	/** 
 	 * 添加收藏
 	 */
 	@Override
@@ -186,10 +191,66 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		return readDetailDao.queryMark(book_id,favorite_id,writer_id);
 	}
 
+	/**
+	 * 删除书评 
+	 */
 	@Override
 	public String delbookwriter(Map<String, Object> map) {
 		// TODO 自动生成的方法存根  删除书评
 		return readDetailDao.updateDelBookWriter(map);
 	}
-	
+
+	/**
+	 * 新增图书纠错
+	 */
+	@Override
+	public String correction(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		String returncode="";
+		int count=readDetailDao.correction(map);
+		if(count>0){
+			returncode="OK";
+			personalService.saveUserTrendst("wdjc", map.get("table_trendst_id").toString(), 0, map.get("user_id").toString());
+		}
+		return returncode;
+	}
+
+	/**
+	 * 写长评
+	 */
+	@Override
+	public String insertlong(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		String returncode="";
+		int count=readDetailDao.insertlong(map);
+		if(count>0){
+			returncode="OK";
+		}
+		return returncode;
+	}
+
+	/**
+	 * 查询登陆人是否写过长评
+	 */
+	@Override
+	public List<Map<String, Object>> queryLoginLong(String writer_id,String book_id) {
+		// TODO Auto-generated method stub
+		List<Map<String, Object>> list=readDetailDao.queryLoginLong(writer_id,book_id);
+		return list;
+	}
+
+	/**
+	 * 查询长评
+	 */
+	@Override
+	public List<Map<String, Object>> queryLong(String book_id,int start) {
+		// TODO Auto-generated method stub
+		List<Map<String, Object>> list=readDetailDao.queryLong(book_id,start);
+		for (Map<String, Object> pmap : list) {
+			String time=pmap.get("gmt_create").toString().substring(0, 16);
+			pmap.put("gmt_create", time);
+			pmap.put("longstart", start+2);
+		}
+		return list;
+	}
 }

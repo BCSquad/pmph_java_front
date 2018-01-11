@@ -20,7 +20,7 @@ public interface HomeService {
 	 * @Description: 查询最新四条医学随笔
 	 * @return List<HomepageDocument>
 	 */
-	List<Map<String, Object>> queryArticle();
+	List<Map<String, Object>> queryArticle(int endrow);
 	/**
 	 * @Description: 查询点击人数最多的随笔的作者
 	 * @return List<HomepageDocument>

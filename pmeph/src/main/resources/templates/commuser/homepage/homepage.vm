@@ -1,7 +1,8 @@
-<div class="book" onclick="window.open(contextpath+'readdetail/todetail.action?id=$!{id}')"><img src="$!{img}" class="bk">
-    <div class="book_content_size">$!{bookname}</div>
+#foreach($book in $books)
+<div class="book" onclick="window.open(contextpath+'readdetail/todetail.action?id=$!{book.id}')"><img src="$!{book.img}" class="bk">
+    <div class="book_content_size">$!{book.bookname}</div>
     <div class="book_content_name">
-        <span class="yellow-span">$!{author}</span>
+        <span class="yellow-span">$!{book.author}</span>
     </div>
     <div class="book_content_picture">
         <span class="yellow"></span>
@@ -12,3 +13,4 @@
         <span class="con">9</span>
     </div>
 </div>
+#end

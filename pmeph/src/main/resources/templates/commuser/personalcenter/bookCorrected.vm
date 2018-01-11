@@ -1,0 +1,82 @@
+
+<link rel="stylesheet" href="$!{contextpath}statics/commuser/personalcenter/bookCorrected.css" type="text/css">
+<script src="$!{contextpath}resources/commuser/personalcenter/PersonalHomeTSJC.js"></script>
+
+<input type="hidden" class="queryCondition" id="is_replied" value="$!{is_replied}">
+
+<ul class="replytag_wrapper">
+    <li id="replytag_all" class="replytag 
+	    #if(!$!{is_replied}||$!{is_replied}=='') 
+	    	active
+	    #end ">全部</li>
+    <li id="replytag_toreply" class="replytag 
+		#if($!{is_replied}==0) 
+	    	active
+	    #end ">待回复</li>
+    <li id="replytag_replied" class="replytag 
+		#if($!{is_replied}==1)
+	    	active
+	    #end ">已回复</li>
+</ul>
+<div class="listContent">
+	#foreach($c in $!{List_map})
+		<div class="book_correct_unit">
+			<div class="unit_left">
+				<div class="img_box">
+					#if(!$c.image_url || $c.image_url == "DEFAULT")
+			        	<img src="$!{contextpath}statics/image/564f34b00cf2b738819e9c35_122x122!.jpg">
+			        #else
+			        	<img src="$!{c.image_url}">
+			        #end
+				</div>
+				<div class="text_box">
+					<div>
+					作者：$!{c.author}
+					</div>
+					<div>
+					版次：$!{c.revision}
+					</div>
+				</div>
+			</div>
+			<div class="unit_right">
+			
+				<form id="form$!{c.id}">
+					<div class="title_line">
+						<a target="_blank" href="$!{contextpath}readdetail/todetail.action?id=$!{c.book_id}"><span class="bookname">$!{c.bookname}</span></a>
+						<span class="isbn">$!{c.isbn}</span>
+					</div>
+					<div class="position_line">
+    					<span>纠错信息：$!{c.page}页码</span>
+    					<span class="line_span">$!{c.line}行</span>
+					</div>
+					<div class="content_line">
+						<span>纠错内容：</span>
+						<span>$!{c.content}</span>
+					</div>
+					<div >
+						#if($!{c.attachment} && $!{c.attachment} != '')
+							附件：<a class="download-tag" onclick="downLoadProxy('$!{c.attachment}')">$!{c.attachment_name}-点击下载</a>
+						#else
+							附件：--
+						#end
+					</div>
+					<div class="reply_line">
+						<span>回复意见：</span>
+						<textarea 
+							#if($!{c.is_author_replied}=='true') disabled #end
+							id="textarea_$!{c.id}" rows="5" cols="5"
+							onkeyup="LengthLimit(this,500);" onblur="LengthLimit(this,500);"
+							>$!{c.author_reply}</textarea>
+					</div>
+					<div >
+						<button type="button" class="btn_reply 
+							#if($!{c.is_author_replied}=='true') hidden #end
+							" id="btn_$!{c.id}" value=""  onclick="submitReply('$!{c.id}')">提交编辑</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	
+	
+	#end
+</div>

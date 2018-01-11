@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -47,8 +48,10 @@ public class AdminInfoController extends BaseController {
     @RequestMapping(value="/toadmininfo")
     public ModelAndView toadmininfopage(HttpServletRequest request){
         ModelAndView mv=new ModelAndView();
-        Long id=Long.parseLong("1267");
-        mv.addObject("admininfo",adminInfoService.getOrgUserById(id));
+        Map <String,Object> map = this.getUserInfo() ;
+    	Long userId = new Long(String.valueOf(map.get("id")));
+        
+        mv.addObject("admininfo",adminInfoService.getOrgUserById(userId));
         mv.setViewName("authadmin/accountset/admininfo");
         return mv;
     }
@@ -61,9 +64,10 @@ public class AdminInfoController extends BaseController {
     @RequestMapping(value = "/toadminattest")
     public ModelAndView toadminattest(HttpServletRequest request){
         ModelAndView mv=new ModelAndView();
-        Long id=Long.parseLong("1267");
-        
-        Map<String,Object> map = adminInfoService.getOrgUserById(id);
+//        Long id=Long.parseLong("1267");
+        Map <String,Object> map1 = this.getUserInfo() ;
+    	Long userId = new Long(String.valueOf(map1.get("id")));
+        Map<String,Object> map = adminInfoService.getOrgUserById(userId);
         
         if(null!=map&&map.size()>0){
         	String fileId = (String) map.get("proxy");
@@ -98,10 +102,12 @@ public class AdminInfoController extends BaseController {
      * @param orgUser
      * @return
      */
-    @RequestMapping(value = "updateorguser",method = RequestMethod.POST,consumes="application/json")
+    @RequestMapping(value = "updateorguser",method = RequestMethod.POST/*,consumes="application/json"*/)
     @ResponseBody
-    public String updateOrgUser(@RequestBody OrgAdminUser orgUser){
-        orgUser.setId(Long.parseLong("1267"));
+    public String updateOrgUser(/*@RequestBody*/ OrgAdminUser orgUser){
+    	Map <String,Object> map1 = this.getUserInfo() ;
+    	Long userId = new Long(String.valueOf(map1.get("id")));
+        orgUser.setId(userId);
         String code ="";
         if (StringUtils.isEmpty(orgUser.getPosition())||
         	StringUtils.isEmpty(orgUser.getTelephone())||
@@ -110,6 +116,9 @@ public class AdminInfoController extends BaseController {
         	StringUtils.isEmpty(orgUser.getEmail())||
         	StringUtils.isEmpty(orgUser.getFax())||	
         	StringUtils.isEmpty(orgUser.getId())||	
+        	/*StringUtils.isEmpty(orgUser.getBirthday())||
+        	StringUtils.isEmpty(orgUser.getExperience())||	
+        	StringUtils.isEmpty(orgUser.getWorkplace())||	*/
         	StringUtils.isEmpty(orgUser.getAddress())){
         	
         	code="fail";
@@ -131,7 +140,10 @@ public class AdminInfoController extends BaseController {
     @ResponseBody
     public ResponseBean<OrgAdminUser> updateOrgUserPassword(@RequestBody OrgAdminUser orgUser){
         ResponseBean<OrgAdminUser> responseBean=new ResponseBean<>();
-        orgUser.setId(Long.parseLong("1267"));
+//        orgUser.setId(Long.parseLong("1267"));
+        Map <String,Object> map1 = this.getUserInfo() ;
+    	Long userId = new Long(String.valueOf(map1.get("id")));
+        orgUser.setId(userId);
         DesRun desRun=new DesRun("",orgUser.getPassword());
         orgUser.setPassword(desRun.enpsw);
         adminInfoService.updatePassword(orgUser);

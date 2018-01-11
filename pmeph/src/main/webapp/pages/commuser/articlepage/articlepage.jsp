@@ -11,16 +11,21 @@
 <html>
 <head>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-    <title>Title</title>
+    <script type="text/javascript">
+        var contextpath = '${pageContext.request.contextPath}/';
+    </script>
+    <title>文章首页</title>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/articlepage/articlepage.css" type="text/css">
+    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
+    <script src="${ctx}/resources/comm/base.js"></script>
 </head>
 <body>
     <jsp:include page="/pages/comm/head.jsp"></jsp:include>
     <div class="body">
-        <div class="apply-book"><div class="text">教材<br>申报</div></div>
+        <!-- <div class="apply-book"><div class="text">教材<br>申报</div></div> -->
         <div class="content-wrapper">
-            <div class="news">
+            <%-- <div class="news">
                 <div class="focus-news">
                     <div class="focus-title">
                     <span class="text1">FOCUS
@@ -67,6 +72,12 @@
                         </div>
                     </div>
                 </div>
+                
+                
+                
+                
+                
+                
                 <div class="notice ">
                     <div class="title">
                         <div class="line"></div>
@@ -133,14 +144,14 @@
                         </p>
                     </div>
                 </div>
-            </div>
-
-            <div class="notes">
+            </div> --%>
+            <div class="notes" style="margin-top: 50px">
                 <div class="title">
                     <div class="line"></div>
                     <div class="name">医学随笔  <a href="#">全部&gt;&gt;</a></div>
                 </div>
-                <div class="item" onclick="">
+                <c:forEach items="${listArt}" var="list" varStatus="status">
+	                <div class="${status.index==0 or status.index==4 ?'item' :'item behind'}" onclick="window.location.href='${ctx}/articledetail/toPage.action?wid=${list.id}'">
                     <div class="command">
                         <span style="margin-left: 5px">推荐</span>
                     </div>
@@ -148,268 +159,40 @@
                         <div class="content-image">
                             <img src="${ctx}/statics/testfile/p2.png" />
                         </div>
-
-                        <p   class="content-title">尊敬的白衣人，你准备好了吗？</p>
-                        <p  class="content-text">
-                            技术等级好地方海景房独活独活肌肤的家分店绝代风华军火贩海景房禾嘉股份京汉股份热i哦日哦热i
-                            偶热尽快的飞机发动机科技开发的进口发动机可放大尽快发的肌肤的健康
-                        </p>
-
+                        <p   class="content-title">${list.title}</p>
+                        <p  class="content-text">${list.summary}</p>
                         <div  class="foot">
                             <div style="float:left">
                                 <img src="${ctx}/statics/testfile/mi.png" class="personicon"/>
                             </div>
                             <div  class="msg">
-                                <span  class="name">张三</span>
-                                <span  class="name">2017.03.21</span>
+                                <span  class="name">${list.realname}</span>
+                                <span  class="name">${list.gmt_create}</span>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="item behind" onclick="">
-                    <div class="command">
-                        <span style="margin-left: 5px">推荐</span>
                     </div>
-                    <div  class="content" >
-                        <div class="content-image">
-                            <img src="${ctx}/statics/testfile/p2.png" />
-                        </div>
-
-                        <p   class="content-title">尊敬的白衣人，你准备好了吗？</p>
-                        <p  class="content-text">
-                            技术等级好地方海景房独活独活肌肤的家分店绝代风华军火贩海景房禾嘉股份京汉股份热i哦日哦热i
-                            偶热尽快的飞机发动机科技开发的进口发动机可放大尽快发的肌肤的健康
-                        </p>
-
-                        <div  class="foot">
-                            <div style="float:left">
-                                <img src="${ctx}/statics/testfile/mi.png" class="personicon"/>
-                            </div>
-                            <div  class="msg">
-                                <span  class="name">张三</span>
-                                <span  class="name">2017.03.21</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item behind" onclick="">
-                    <div class="command">
-                        <span style="margin-left: 5px">推荐</span>
-                    </div>
-                    <div  class="content" >
-                        <div class="content-image">
-                            <img src="${ctx}/statics/testfile/p2.png" />
-                        </div>
-
-                        <p   class="content-title">尊敬的白衣人，你准备好了吗？</p>
-                        <p  class="content-text">
-                            技术等级好地方海景房独活独活肌肤的家分店绝代风华军火贩海景房禾嘉股份京汉股份热i哦日哦热i
-                            偶热尽快的飞机发动机科技开发的进口发动机可放大尽快发的肌肤的健康
-                        </p>
-
-                        <div  class="foot">
-                            <div style="float:left">
-                                <img src="${ctx}/statics/testfile/mi.png" class="personicon"/>
-                            </div>
-                            <div  class="msg">
-                                <span  class="name">张三</span>
-                                <span  class="name">2017.03.21</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item behind" onclick="">
-                    <div class="command">
-                        <span style="margin-left: 5px">推荐</span>
-                    </div>
-                    <div  class="content" >
-                        <div class="content-image">
-                            <img src="${ctx}/statics/testfile/p2.png" />
-                        </div>
-
-                        <p   class="content-title">尊敬的白衣人，你准备好了吗？</p>
-                        <p  class="content-text">
-                            技术等级好地方海景房独活独活肌肤的家分店绝代风华军火贩海景房禾嘉股份京汉股份热i哦日哦热i
-                            偶热尽快的飞机发动机科技开发的进口发动机可放大尽快发的肌肤的健康
-                        </p>
-
-                        <div  class="foot">
-                            <div style="float:left">
-                                <img src="${ctx}/statics/testfile/mi.png" class="personicon"/>
-                            </div>
-                            <div  class="msg">
-                                <span  class="name">张三</span>
-                                <span  class="name">2017.03.21</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item" onclick="">
-                    <div class="command">
-                        <span style="margin-left: 5px">推荐</span>
-                    </div>
-                    <div  class="content" >
-                        <div class="content-image">
-                            <img src="${ctx}/statics/testfile/p2.png" />
-                        </div>
-
-                        <p   class="content-title">尊敬的白衣人，你准备好了吗？</p>
-                        <p  class="content-text">
-                            技术等级好地方海景房独活独活肌肤的家分店绝代风华军火贩海景房禾嘉股份京汉股份热i哦日哦热i
-                            偶热尽快的飞机发动机科技开发的进口发动机可放大尽快发的肌肤的健康
-                        </p>
-
-                        <div  class="foot">
-                            <div style="float:left">
-                                <img src="${ctx}/statics/testfile/mi.png" class="personicon"/>
-                            </div>
-                            <div  class="msg">
-                                <span  class="name">张三</span>
-                                <span  class="name">2017.03.21</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item behind" onclick="">
-                    <div class="command">
-                        <span style="margin-left: 5px">推荐</span>
-                    </div>
-                    <div  class="content" >
-                        <div class="content-image">
-                            <img src="${ctx}/statics/testfile/p2.png" />
-                        </div>
-
-                        <p   class="content-title">尊敬的白衣人，你准备好了吗？</p>
-                        <p  class="content-text">
-                            技术等级好地方海景房独活独活肌肤的家分店绝代风华军火贩海景房禾嘉股份京汉股份热i哦日哦热i
-                            偶热尽快的飞机发动机科技开发的进口发动机可放大尽快发的肌肤的健康发的经济发动机发动机开发
-                            的艰苦奋斗空间发的活动和姐夫的换地方很近的防护划分兑换积分兑换积分兑换积分等级划分的话就
-                            发到几点回家发的和积分兑换积分兑换积分兑换积分等级和姐夫的
-                        </p>
-
-                        <div  class="foot">
-                            <div style="float:left">
-                                <img src="${ctx}/statics/testfile/mi.png" class="personicon"/>
-                            </div>
-                            <div  class="msg">
-                                <span  class="name">张三</span>
-                                <span  class="name">2017.03.21</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item behind" onclick="">
-                    <div class="command">
-                        <span style="margin-left: 5px">推荐</span>
-                    </div>
-                    <div  class="content" >
-                        <div class="content-image">
-                            <img src="${ctx}/statics/testfile/p2.png" />
-                        </div>
-
-                        <p   class="content-title">尊敬的白衣人，你准备好了吗？</p>
-                        <p  class="content-text">
-                            技术等级好地方海景房独活独活肌肤的家分店绝代风华军火贩海景房禾嘉股份京汉股份热i哦日哦热i
-                            偶热尽快的飞机发动机科技开发的进口发动机可放大尽快发的肌肤的健康
-                        </p>
-
-                        <div  class="foot">
-                            <div style="float:left">
-                                <img src="${ctx}/statics/testfile/mi.png" class="personicon"/>
-                            </div>
-                            <div  class="msg">
-                                <span  class="name">张三</span>
-                                <span  class="name">2017.03.21</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item behind" onclick="">
-                    <div class="command">
-                        <span style="margin-left: 5px">推荐</span>
-                    </div>
-                    <div  class="content" >
-                        <div class="content-image">
-                            <img src="${ctx}/statics/testfile/p2.png" />
-                        </div>
-
-                        <p   class="content-title">尊敬的白衣人，你准备好了吗？</p>
-                        <p  class="content-text">
-                            技术等级好地方海景房独活独活肌肤的家分店绝代风华军火贩海景房禾嘉股份京汉股份热i哦日哦热i
-                            偶热尽快的飞机发动机科技开发的进口发动机可放大尽快发的肌肤的健康
-                        </p>
-
-                        <div  class="foot">
-                            <div style="float:left">
-                                <img src="${ctx}/statics/testfile/mi.png" class="personicon"/>
-                            </div>
-                            <div  class="msg">
-                                <span  class="name">张三</span>
-                                <span  class="name">2017.03.21</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
             <div class="writer">
                 <div class="title">推荐作者</div>
                 <div style="margin-top: 11px">
+                <c:forEach items="${listAut}" var="list" varStatus="status">
                     <div class="item">
                         <div class="content">
                             <div class="content-img" >
                                 <img src="${ctx}/statics/testfile/mi.png" />
                             </div>
                             <div class="msg">
-                                <div class="name">张三</div>
-                                <div class="text">发表随笔 “哈哈哈哈哈”</div>
+                                <div class="name">${list.realname}</div>
+                                <div class="text">${list.title}</div>
                             </div>
                             <div class="add">
                                 <div><img src="${ctx}/statics/image/addcopy6.png"/> <span style="margin-left: 2px;color: #35c974;">好友</span></div>
                             </div>
                         </div>
                     </div>
-                    <div class="item">
-                        <div class="content">
-                            <div class="content-img" >
-                                <img src="${ctx}/statics/testfile/mi.png" />
-                            </div>
-                            <div class="msg">
-                                <div class="name">张三</div>
-                                <div class="text">发表随笔 “哈哈哈哈哈”</div>
-                            </div>
-                            <div class="add">
-                                <div><img src="${ctx}/statics/image/addcopy6.png"/> <span style="margin-left: 2px;color: #35c974;">好友</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="content">
-                            <div class="content-img" >
-                                <img src="${ctx}/statics/testfile/mi.png" />
-                            </div>
-                            <div class="msg">
-                                <div class="name">张三</div>
-                                <div class="text">发表随笔 “哈哈哈哈哈”</div>
-                            </div>
-                            <div class="add">
-                                <div><img src="${ctx}/statics/image/addcopy6.png"/> <span style="margin-left: 2px;color: #35c974;">好友</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="content">
-                            <div class="content-img" >
-                                <img src="${ctx}/statics/testfile/mi.png" />
-                            </div>
-                            <div class="msg">
-                                <div class="name">张三</div>
-                                <div class="text">发表随笔 “哈哈哈哈哈”刚刚还和共和国国会过会个 </div>
-                            </div>
-                            <div class="add">
-                                <div><img src="${ctx}/statics/image/addcopy6.png"/> <span style="margin-left: 2px;color: #35c974;">好友</span></div>
-                            </div>
-                        </div>
-                    </div>
+                </c:forEach>
                 </div>
             </div>
             <div style="clear: both"></div>

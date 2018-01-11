@@ -20,7 +20,7 @@ public interface ReadDetailDao {
 	 * @param id
 	 * @return List<Map<String, Object>>
 	 */
-	List<Map<String, Object>> queryComment(PageParameter<Map<String, Object>> pageParameter);
+	List<Map<String, Object>> queryComment(@Param("id") String id,@Param("start") int start);
 	/**
 	 * 根据书籍ID查询配套图书
 	 * @param id
@@ -31,7 +31,7 @@ public interface ReadDetailDao {
 	 * 根据书籍ID查询一共有多少条数据
 	 * @return int
 	 */
-	int querySize(@Param("book_id") String book_id);
+//	int querySize(@Param("book_id") String book_id);
 	/**
 	 * 查询人卫推荐
 	 * @return List<Map<String, Object>>
@@ -42,6 +42,11 @@ public interface ReadDetailDao {
 	 * @param map
 	 */
 	void insertComment(Map<String, Object> map);
+	/**
+	 * 新增图书纠错
+	 * @param map
+	 */
+	int correction(Map<String, Object> map);
 	/**
 	 * 根据作者查询该作者写的书
 	 * @param author
@@ -123,6 +128,26 @@ public interface ReadDetailDao {
 	 * @param writerId    用户id
 	 */
 	void deleteMark(@Param("bookId")long bookId,@Param("favoriteId") long favoriteId,@Param("writerId") long writerId);
-	
+	/**
+	 * 写长评
+	 * @param map
+	 * @return 1，1代表数据添加成功
+	 */
+	int insertlong(Map<String, Object> map);
+	/**
+	 * 查询登录人是否写过长评
+	 * @return list,list.size大于1说明写过
+	 */
+	List<Map<String, Object>> queryLoginLong(@Param("writer_id") String writer_id,@Param("book_id") String book_id);
+	/**
+	 * 删除评论
+	 * @param map
+	 * @return
+	 */
 	String updateDelBookWriter(Map<String, Object> map);
+	/**
+	 * 查询长评
+	 * @return List<Map<String, Object>>
+	 */
+	List<Map<String, Object>> queryLong(@Param("book_id") String book_id,@Param("start") int start);
 }

@@ -4,14 +4,20 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.commuser.materialdec.dao.MaterialDetailDao;
+import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 @Service("com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailServiceImpl")
 public class MaterialDetailServiceImpl implements MaterialDetailService {
 	
 	@Autowired 
 	private MaterialDetailDao madd;
+	
+	@Autowired
+    @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
+    private PersonalService personalService;
 	
 	//通过教材ID查出教材
 	@Override
@@ -86,7 +92,9 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 	}
 	@Override
 	public int insertTsxz(Map<String, Object> map) {
-		return this.madd.insertTsxz(map);
+		int result = this.madd.insertTsxz(map);
+		personalService.saveUserTrendst("jcsb", map.get("table_trendst_id").toString(), 0, map.get("author_id").toString());
+		return result;
 	}
 	@Override
 	public int insertStu(Map<String, Object> map) {
@@ -158,15 +166,18 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 		this.madd.DelTssbZc(map);
 		this.madd.DelStea(map);
 		this.madd.DelZjkyqk(map);
-		this.madd.DelPerson(map);
 		this.madd.DelZjxs(map);
 		this.madd.DelStu(map);
 		this.madd.DelWork(map);
-		return 0;
+		return 1;
 	}
 	@Override
 	public int updateDeclaration(Map<String, Object> map) {
 		return this.madd.updateDeclaration(map);
+	}
+	@Override
+	public int updatePerson(Map<String, Object> map) {
+		return this.madd.updatePerson(map);
 	}
 	
 }

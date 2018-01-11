@@ -25,7 +25,6 @@
 		     c.author_id ,
 		     w.realname,
 		     w.avatar,
-		     w.avatar,
 		     c.gmt_create,
 		     c.mid,
 		     c.summary ,

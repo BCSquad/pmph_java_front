@@ -1,0 +1,168 @@
+.green{color: #1abd44;}
+.red{color: #e52e2e;}
+
+.top {
+    width: 1200px;
+    height: 50px;
+    background-color: #ffffff;
+  	margin-bottom: 16px;
+}
+
+
+.top1 {
+    padding-top: 15px;
+    padding-left: 20px;
+    height: 16px;
+    width: 40px;
+    font-family: MicrosoftYaHei;
+    font-size: 16px;
+    color: #333333;
+}
+
+.top2 {
+    float: left;
+    margin-top: 55px;
+    margin-left: 20px;
+    width: 62px;
+    height: 14px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    color: #666666;
+}
+
+.top3 {
+    float: left;
+    margin-top: 40px;
+    margin-left: 20px;
+    width: 78px;
+    height: 37px;
+    font-family: MicrosoftYaHei;
+    font-size: 48px;
+    color: #333333;
+}
+
+.line{
+	width: 1160px;
+	height: 1px;
+	background-color: #f6f6f6;
+	margin-top:110px;
+	margin-left:20px;
+	
+}
+
+.top-three{
+	width: 1200px;
+    height: 15px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+.top4{
+	float:left;
+    margin-left: 20px;
+    width: 100px;
+    font-family: MicrosoftYaHei;
+    font-size: 15px;
+    color: #666666;
+}
+
+.top5{
+	float:left;
+	width: auto;
+	font-family: MicrosoftYaHei;
+	 font-size: 15px;
+	color: #999999;
+	margin-left:78%;
+}
+
+.top6{
+	float:right;
+	width: auto;
+	font-family: MicrosoftYaHei;
+	font-size: 15px;
+	color: #333333;
+	margin-right:2%;
+	cursor: pointer;
+}
+
+#table {
+    width: 1200px;
+    height: auto;
+    border: 1px solid #ffffff;
+    background-color: #ffffff;
+}
+
+.message {
+    width: 1200px;
+}
+
+.tb2 {
+    width: 1200px;
+}
+
+table,tr,td{
+    padding: 0;
+    margin: 0;
+}
+.table{
+    width: 1160px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-spacing: 0px 0px;
+    border-collapse: collapse;
+}
+table thead tr{
+    height: 46px;
+    line-height: 30px;
+    background-color:#f0f0f0;
+}
+table thead td{
+    text-align: center;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    border: 3px solid #fff;
+}
+table tbody tr{
+    height: 46px;
+    line-height: 30px;
+    font-family: SimSun;
+}
+
+table tr:hover{background:#fff4e5;}
+
+
+
+table tbody tr:nth-child(odd){
+
+    text-align: center;
+}
+
+table tbody tr:nth-child(even){
+    text-align: center;
+    background-color:#f0f0f0;
+}
+
+/* .jzgd{
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 38px;
+    text-align: center;
+    height: 15px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    color: #999999;
+} */
+
+.js-load-more{
+  padding:0 15px;
+  width:120px;
+  height:30px;
+  line-height:30px;
+  text-align:center;
+  margin:20px auto;
+  border:0 none;
+  font-size:16px;
+  font-family: MicrosoftYaHei;
+  display:none;/*默认不显示，ajax调用成功后才决定显示与否*/
+}
+

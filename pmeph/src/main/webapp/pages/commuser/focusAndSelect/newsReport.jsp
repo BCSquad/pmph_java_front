@@ -16,7 +16,7 @@
     
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-    <title>Title</title>
+    <title>信息快报</title>
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/focusAndSelect/newsReportAndMaterialNotice.css" type="text/css"> 
@@ -36,9 +36,10 @@
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
+<input type="hidden" id="materialId" value="${materialId }" />
 <div class="content-body">
     <div class="div_top">
-      <a href="${ctx }/homepage/tohomepage.action">首页</a>&gt;遴选公告
+      <a href="${ctx }/homepage/tohomepage.action">首页</a>&gt;信息快报
     </div>
     <div class="div_content">
         <div class="div_content_left">
