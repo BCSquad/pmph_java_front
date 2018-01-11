@@ -15,7 +15,7 @@ $(function () {
 //下一页
 function on(state) {
     var startrows = $("#before").text();
-    var type = $(".tab-bar .tab.active").attr("id");
+    var type = $("#book_type").val();
     if (state == "next") {
         var flag = $("#next").text();
         if (flag == startrows) {
@@ -120,5 +120,5 @@ function tosurvey(){
 
 //跳转公告详情页面
 function todou(mid){
-	location.href = contextpath + 'cmsnotice/noticeMessageDetail.action?id='+mid;
+	location.href = contextpath + 'community/tolist.action?id='+mid;
 }
