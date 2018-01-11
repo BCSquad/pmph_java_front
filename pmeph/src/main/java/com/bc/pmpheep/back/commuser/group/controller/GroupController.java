@@ -56,23 +56,21 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
     		HttpServletResponse response )  {
     	Integer pageNumber = 1;
     	Integer pageSize = 6;
+    	String count = request.getParameter("pageNumber");
     	Map<String, Object> map = this.getUserInfo();
     	Long userId =  Long.parseLong(map.get("id").toString());
         //Long userId = 10226L;
-    	if(null == pageNumber || pageNumber < 1){
-    		pageNumber = 0 ;
-    	}
-    	if(null == pageSize   || pageSize < 1){
-    		pageSize = 6 ;  //默认100000,差不多就是查询全部
-    	}
+		 if(count!=null){
+			 pageNumber = Integer.parseInt(count)+1;
+			 pageSize = pageSize+(pageNumber-1)*3;
+		 }
         ModelAndView model = new ModelAndView();
-        // 获取用户
-        Map<String, Object> writerUserMap = this.getUserInfo();
-        
-        List<GroupList> lst=groupService.groupList((pageNumber-1)*pageSize, pageSize, userId) ;
+        //加载更多
+        List<GroupList> lst=groupService.groupList(0, pageSize, userId) ;
         model.setViewName("commuser/mygroup/groupList");
         model.addObject("listgroup", lst);
         model.addObject("listSize", lst.size());
+        model.addObject("pageNumber", pageNumber);
         return model;
     }
     
@@ -176,7 +174,7 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
     }
     
     /**
-     * 获取文件
+     * 退出小组
      * @introduction 
      * @author Mryang
      * @createDate 2017年12月13日 上午10:28:14
@@ -272,6 +270,7 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
     	}
     	return Msg;
     }
+    
     
 }
 
