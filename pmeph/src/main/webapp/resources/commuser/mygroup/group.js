@@ -68,3 +68,19 @@ function upload(){
 	});
 }
 
+//退出小组
+function quitGroup(groupId){
+	$.ajax({
+		type: "POST",
+		url:contextpath+'group/quitGroup.action',
+		data:{groupId:groupId},// 你的formid
+		async: false,
+		dataType:"json",
+	    success: function(msg) {
+		    if(msg=='OK'){
+		    	window.location.href=contextpath+"group/list.action";
+		    }
+	    }
+	});
+}
+
