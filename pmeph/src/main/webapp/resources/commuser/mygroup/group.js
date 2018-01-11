@@ -5,7 +5,6 @@ function ChangeDiv(type,groupId){
     }else{ //文件共享
     	window.location.href=contextpath+"group/toMyGroup.action?groupId="+groupId+"&type=wjgx";
     }
-
 }
 
 //加载更多

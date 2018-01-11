@@ -138,6 +138,9 @@ public class MessageController extends BaseController{
 	@RequestMapping(value="/loadMore")
 	@ResponseBody
 	public List<Map<String,Object>> loadMore(HttpServletRequest request){
+		Map<String, Object> map = getUserInfo();
+		Long userId = new Long(String.valueOf(map.get("id")));
+		//Long userId = (long) 1609;
 		String condition=request.getParameter("condition");
 		String para=request.getParameter("startPara");
 		int startPara=0;
@@ -152,7 +155,6 @@ public class MessageController extends BaseController{
 			paraMap.put("startPara",startPara);
 		}
 		
-		Long userId = (long) 1609;
 		paraMap.put("condition",condition);
 		paraMap.put("userId",userId);
 		
