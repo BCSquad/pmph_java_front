@@ -28,6 +28,15 @@
     
     <!-- pmph ehcache  -->
 
+    <cache name="commDataCache"
+           maxEntriesLocalHeap="1000"
+           eternal="false"
+           timeToIdleSeconds="600"
+           timeToLiveSeconds="600"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+
     <cache name="shiro-pmph-authenticationCache"
            maxEntriesLocalHeap="1000"
            eternal="false"
@@ -36,52 +45,5 @@
            overflowToDisk="false"
            statistics="true">
     </cache>
-
-    <cache name="shiro-pmph-authorizationCache"
-           maxEntriesLocalHeap="2000"
-           eternal="false"
-           timeToIdleSeconds="600"
-           timeToLiveSeconds="600"
-           overflowToDisk="false"
-           statistics="true">
-    </cache>
-
-    <cache name="shiro-pmphUserCache"
-           maxEntriesLocalHeap="2000"
-           eternal="false"
-           timeToIdleSeconds="600"
-           timeToLiveSeconds="600"
-           overflowToDisk="false"
-           statistics="true">
-    </cache>
-    
-    <!-- writer ehcache  -->
-    
-    <!-- <cache name="shiro-writerUserCache"
-           maxEntriesLocalHeap="2000"
-           eternal="false"
-           timeToIdleSeconds="600"
-           timeToLiveSeconds="600"
-           overflowToDisk="false"
-           statistics="true">
-    </cache>
-    
-    <cache name="shiro-writer-authenticationCache"
-           maxEntriesLocalHeap="1000"
-           eternal="false"
-           timeToIdleSeconds="600"
-           timeToLiveSeconds="600"
-           overflowToDisk="false"
-           statistics="true">
-    </cache>
-    
-    <cache name="shiro-writer-authorizationCache"
-           maxEntriesLocalHeap="2000"
-           eternal="false"
-           timeToIdleSeconds="600"
-           timeToLiveSeconds="600"
-           overflowToDisk="false"
-           statistics="true">
-    </cache> -->
 
 </ehcache>

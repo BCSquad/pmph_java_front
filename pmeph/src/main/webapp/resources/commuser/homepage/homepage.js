@@ -15,7 +15,7 @@ $(function () {
 //下一页
 function on(state) {
     var startrows = $("#before").text();
-    var type = $("#book_type").val();
+    var type = $(".tab-bar .tab.active").attr("id");
     if (state == "next") {
         var flag = $("#next").text();
         if (flag == startrows) {

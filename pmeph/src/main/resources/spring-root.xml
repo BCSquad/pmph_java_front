@@ -6,6 +6,7 @@
 ">
 
     <import resource="classpath:spring/spring-framework.xml" />
+    <import resource="classpath:spring/spring-ehcache.xml"/>
     <!-- <import resource="classpath:spring/spring-mvc.xml" /> -->
     <!-- <import resource="classpath:spring/spring-pmph-shiro.xml" /> -->
     <!--<import resource="classpath:spring/spring-writer-shiro.xml" />-->
