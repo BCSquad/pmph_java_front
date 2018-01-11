@@ -123,12 +123,12 @@ public interface PersonalService {
 	List<Map<String, Object>> getOptions(Long questionId);
 	
 	//查询单选选项答案
-	public String getAnswers(Long questionId);
+	public String getAnswers(Map<String, Object> map);
 	
 	//查询多选选项答案
-	public String getCheckAnswers(Long questionId);
+	public String getCheckAnswers(Map<String, Object> map);
 	//查询填空选项答案
-	public String getInpAnswers(Long questionId);
+	public String getInpAnswers(Map<String, Object> map);
 
 	/**
 	 * 个人中心动态 汇总后面所有页签对应信息的新增、审批的动态
