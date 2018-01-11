@@ -236,22 +236,22 @@ public class PersonalServiceImpl implements PersonalService {
 
 	// 查询单选对应的选项答案
 	@Override
-	public String getAnswers(Long questionId) {
-		String slist = personaldao.getAnswers(questionId);
+	public String getAnswers(Map<String, Object> map) {
+		String slist = personaldao.getAnswers(map);
 		return slist;
 	}
 
 	// 查询多选对应的选项答案
 	@Override
-	public String getCheckAnswers(Long questionId) {
-		String slist = personaldao.getCheckAnswers(questionId);
+	public String getCheckAnswers(Map<String, Object> map) {
+		String slist = personaldao.getCheckAnswers(map);
 		return slist;
 	}
 
 	// 查询填空对应的选项答案
 	@Override
-	public String getInpAnswers(Long questionId) {
-		String slist = personaldao.getInpAnswers(questionId);
+	public String getInpAnswers(Map<String, Object> map) {
+		String slist = personaldao.getInpAnswers(map);
 		return slist;
 	}
 

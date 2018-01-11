@@ -197,6 +197,7 @@ public class PersonalCenterController extends BaseController {
 
 			List<Map<String,Object>> List_map = personalService.mySurvey(pageParameter);
 			count = personalService.myCommentCount(pageParameter);
+			
 			//分页数据代码块
 			String html = this.mergeToHtml("commuser/personalcenter/mySurvey.vm",contextpath, pageParameter, List_map,vm_map);
 			
@@ -556,6 +557,10 @@ public class PersonalCenterController extends BaseController {
 			ModelAndView mv = new ModelAndView();
 			String surveyIdStr = request.getParameter("surveyId");
 			long surveyId = new Long(surveyIdStr);
+			 Map<String, Object> paraMap = new HashMap<String, Object>();
+		        String logUserId = getUserInfo().get("id").toString();
+				paraMap.put("logUserId", logUserId);
+				
 			//查询该调查包含的所有题目
 			List<Map<String,Object>> list = personalService.getSurvey(surveyId);
 			List<Map<String,Object>> listResult = new ArrayList<Map<String,Object>>();
@@ -570,9 +575,10 @@ public class PersonalCenterController extends BaseController {
 							List<Map<String,Object>> listOptions = personalService.getOptions(questionId);
 							
 							//查询单选答案
-							  String answer = personalService.getAnswers(questionId);
+							paraMap.put("questionId", questionId);
+							  String answer = personalService.getAnswers(paraMap);
 							//查询多选答案
-							  String che = personalService.getCheckAnswers(questionId);
+							  String che = personalService.getCheckAnswers(paraMap);
 							
 							  boolean flag=false;
 							  if (null!=che&&""!=che) {
@@ -589,20 +595,18 @@ public class PersonalCenterController extends BaseController {
 										} 
 									}
 								}
-								 
-								  
 							}
 							
 							question.put("listOptions", listOptions);
 							question.put("answer", answer);
 							listResult.add(question);
 						}
-					}else if(question.get("type").equals(3)){
+					}else if(question.get("type").equals(3)||question.get("type").equals(5)){
 						//查询填空答案
 						String questionIdStr = question.get("id").toString();
 						if(null!=questionIdStr&&!questionIdStr.equals("")){
 							long questionId = Long.valueOf(questionIdStr).longValue();
-							 String inp = personalService.getInpAnswers(questionId);
+							 String inp = personalService.getInpAnswers(paraMap);
 							question.put("inp", inp);
 							listResult.add(question);
 						}

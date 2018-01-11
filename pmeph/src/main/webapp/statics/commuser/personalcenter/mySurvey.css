@@ -25,7 +25,7 @@
    
 }
 
-.email_right a {
+.email_right .a1 {
     font-family: MicrosoftYaHei ;
     text-decoration: none;
     color: #333;
@@ -33,11 +33,149 @@
     background:url('../../image/research1.png') left 5px no-repeat; 
 }
 
-.email_right a:hover{
+.email_right .a2{
 	font-family: MicrosoftYaHei ;
 	color: #C0C0C0;
-	cursor: default;
+	cursor:not-allowed;
 	text-decoration: none;
 	background:url('../../image/research2.png') left 5px no-repeat;
 	
+	
+}
+
+
+/* ------------------跳转到对应的问卷--------------------------------- */
+ input[type=radio],input[type=checkbox]  {  
+    display: inline-block;  
+    vertical-align: middle;  
+    width: 20px;  
+    height: 20px;  
+    margin-left: 5px;  
+    -webkit-appearance: none;  
+    background-color: transparent;  
+    border: 0;  
+    outline: 0 !important;  
+    line-height: 20px;  
+    color: #d8d8d8;  
+}  
+input[type=radio]:after  {  
+    content: "";  
+    display:block;  
+    width: 20px;  
+    height: 20px;  
+    border-radius: 50%;  
+    text-align: center;  
+    line-height: 15px;  
+    font-size: 15px;  
+    color: #fff;  
+    border: 2px solid #ddd;  
+    background-color: #fff;  
+    box-sizing:border-box;  
+}  
+  
+input[type=checkbox]:after  {  
+    content: "";  
+    display:block;  
+    width: 20px;  
+    height: 20px;  
+    text-align: center;  
+    line-height: 14px;  
+    font-size: 16px;  
+    color: #fff;  
+    border: 2px solid #ddd;  
+    background-color: #fff;  
+    box-sizing:border-box;  
+}  
+input[type=checkbox]:checked:after  {  
+    border: 4px solid #ddd;  
+    background-color: #37AF6E;  
+}  
+  
+input[type=radio]:checked:after  {  
+    content: "L";  
+    transform:matrix(-0.766044,-0.642788,-0.642788,0.766044,0,0);  
+    -webkit-transform:matrix(-0.766044,-0.642788,-0.642788,0.766044,0,0);  
+    border-color: #37AF6E;  
+    background-color: #37AF6E;  
+}
+
+.emptyDiv{
+	height: 60px;
+	width: 100%
+}
+
+.whiteDiv{
+	width:1200px;
+	height:auto;
+	background-color: white
+}
+
+.titleDiv{
+	padding-top: 60px;
+	width: 100%;
+	text-align: center
+}
+
+.titleFont{
+	font-size: x-large;
+	color: #757575;
+}
+
+.bigContent{
+	width: 1200px;
+	height: auto;
+	padding-top: 60px;
+	padding-bottom: 60px
+}
+
+.tipDiv{
+	width: 1120px;
+	height: auto;
+	margin-left: 80px
+}
+
+.tipFont{
+	color: #757575;
+	font-size: 16px
+}
+
+.questions{
+	width: 1120px;
+	height:auto;
+	margin-left: 80px;
+	color: #757575;
+	font-size: 16px
+}
+
+.oneQuestion{
+	width: 100%;
+	height: auto
+}
+
+.inputStyle{
+	width: 500px;
+	height:20px; 
+	border-style:none;
+	border-bottom: dashed 2px #d8d8d8;
+}
+
+.textAreaStyle{
+	width: 500px;
+	height:80px; 
+	border: solid 1px #d8d8d8
+}
+.buttonDiv{
+	cursor:pointer;
+	margin-left:530px;
+	width: 140px;
+	height: 28px;
+	background-color: #6FBCC2;
+	border-radius:4px;
+	padding-top: 4px;
+}
+
+.submitFont{
+	color: white;
+	font-size:18px;
+	margin-left: 52px
 }

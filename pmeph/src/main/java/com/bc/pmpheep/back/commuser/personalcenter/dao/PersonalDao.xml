@@ -496,29 +496,32 @@
 
 	<!-- 我的问卷 -->
 	<select id="mySurvey" parameterType="PageParameter" resultType="java.util.Map">
-		select * from survey s where s.user_id=1 limit
-		${start},${pageSize}
+		select s.*, cast(DATE_FORMAT(s.end_date,'%Y%m%d%H%i%s') as decimal(16,0))  as enddate ,
+		cast(DATE_FORMAT(CURRENT_TIMESTAMP(),'%Y%m%d%H%i%s') as decimal(16,0))  as curdate   
+		from survey s   LEFT JOIN  survey_question_answer  a  on s.id=a.survey_id
+ 		where a.user_id=#{parameter.logUserId} 
+  		limit ${start},${pageSize}
 	</select>
 
 	<!-- 我的问卷总数 -->
 	<select id="mySurveyCount" parameterType="PageParameter"
 		resultType="Integer">
-		select count(*) from survey s where
-		s.user_id=1
-		<!-- #{parameter.user_id} -->
+		select count(*) from 
+		survey s  LEFT JOIN 
+		survey_question_answer  a  on s.id=a.survey_id  
+ 		where a.user_id=#{parameter.logUserId}
 	</select>
 
 	<!-- 查询单个调查对应的问题 -->
 	<select id="getSurvey" resultType="map" parameterType="java.util.Map">
-		SELECT
-		a.*,c.title AS surveyTitle
+		SELECT a.*,d.title AS surveyTitle ,d.id
 		FROM `survey_question` a
-		LEFT JOIN `survey_question_category` b
-		ON
-		a.`category_id`= b.`id`
-		LEFT JOIN `survey` c
-		ON b.`id` = c.`type_id`
-		WHERE c.`id`=#{surveyId}
+		LEFT JOIN `survey_template_question` b
+		ON a.id= b.`question_id`
+		LEFT JOIN `survey_template` c
+		ON b.`template_id` = c.id
+		LEFT JOIN survey d
+		ON d.`template_id` = c.`id`
 	</select>
 
 	<!-- 查询问题对应的选项 -->
@@ -529,28 +532,28 @@
 	</select>
 
 	<!-- 查询单选对应的答案 -->
-	<select id="getAnswers" resultType="java.lang.String">
+	<select id="getAnswers" resultType="java.lang.String" parameterType="java.util.Map">
 		select
 		a.option_id FROM survey_question_answer a
 		INNER JOIN
 		survey_question_option o on o.id=a.option_id
 		where
-		a.question_id=#{questionId} and user_id=1
+		a.question_id=#{questionId} and a.user_id=#{logUserId}
 	</select>
 
 	<!-- 查询多选对应的答案 -->
-	<select id="getCheckAnswers" resultType="java.lang.String">
+	<select id="getCheckAnswers" resultType="java.lang.String" parameterType="java.util.Map">
 		select a.option_content FROM survey_question_answer a
 		where
-		a.question_id=#{questionId} and a.user_id=1
+		a.question_id=#{questionId} and a.user_id=#{logUserId}
 	</select>
 
 	<!-- 查询填空对应的答案 -->
-	<select id="getInpAnswers" resultType="java.lang.String">
+	<select id="getInpAnswers" resultType="java.lang.String" parameterType="java.util.Map">
 		select
 		a.option_content FROM survey_question_answer a
 		where
-		a.question_id=#{questionId} and a.user_id=1
+		a.question_id=#{questionId} and a.user_id=#{logUserId}
 	</select>
 
 
