@@ -69,6 +69,9 @@ public class ReadDetailController extends BaseController{
 		if(listCom.size()==0){
 			modelAndView.addObject("shortcom", "nothing");
 		}
+		//增加点击数
+		int clinum=(Integer.parseInt(map.get("clicks").toString())+1);
+		readDetailService.changeClicks(id, clinum);
 		Long typeid=Long.valueOf(map.get("type").toString());
 		List<Map<String, Object>> typeList=bookService.queryParentTypeListByTypeId(typeid);
 		for (Map<String, Object> pmap : auList) {
