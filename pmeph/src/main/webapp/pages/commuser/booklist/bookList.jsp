@@ -11,7 +11,7 @@
   	<script>
 		var contextpath = "${pageContext.request.contextPath}/";
 	</script>
-    <base href="<%=basePath%>">
+    <%-- <base href="<%=basePath%>"> --%>
     <title>图书列表</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="<%=path%>/statics/css/base.css" type="text/css">

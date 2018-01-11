@@ -34,7 +34,15 @@ public class SurveyController extends BaseController{
 	@RequestMapping(value="/surveyList")
 	public ModelAndView surveyList(){
 		ModelAndView mv = new ModelAndView();
-		List<Map<String,Object>> list = surveyService.surveyList();
+		//Long userId = new Long(String.valueOf(writerUser.get("id")));
+		long userId = 2L;
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String dateStr = sdf.format(date);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("userId", userId);
+		map.put("dateStr", dateStr);
+		List<Map<String,Object>> list = surveyService.surveyList(map);
 		mv.addObject("list",list);
 		mv.addObject("listSize",list.size());
 		mv.setViewName("commuser/survey/surveyList");

@@ -2,19 +2,19 @@
 <link rel="stylesheet" href="$!{contextpath}statics/commuser/personalcenter/myComment.css" type="text/css">
 <script src="$!{contextpath}resources/commuser/personalcenter/myComment.js"></script>
 
-<input type="hidden" class="queryCondition" id="is_replied" value="$!{is_replied}">
+<input type="hidden" class="queryCondition" id="is_long" value="$!{is_long}">
 
 <ul class="replytag_wrapper">
     <li id="replytag_all" class="replytag 
-	    #if(!$!{is_replied}||$!{is_replied}=='') 
+	    #if(!$!{is_long}||$!{is_long}=='') 
 	    	active
 	    #end ">全部</li>
     <li id="replytag_toreply" class="replytag 
-		#if($!{is_replied}==1) 
+		#if($!{is_long}==1) 
 	    	active
 	    #end ">我的长评</li>
     <li id="replytag_replied" class="replytag 
-		#if($!{is_replied}==0)
+		#if($!{is_long}==0)
 	    	active
 	    #end ">我的评论</li>
 </ul>
@@ -34,14 +34,16 @@
             <div class="bookC_right_title">$!{c.bookname}</div>
             <div class="bookC_right_name">$!{c.author} &nbsp;&nbsp;/&nbsp;&nbsp; $!{c.publish_date}</div>
             #foreach($o in $!{c.commentList})
-            <div class="bookC_right_grade">
-                <div class="bookC_right_g"> $!{o.content}</div>
-                <div class="bookC_right_a">
-                    <div class="time-a">$!{o.gmt_update}</div> 
-                    <a class="link_a" href="$!{contextpath}readdetail/todetail.action?id=$!{c.book_id}">修改</a>
-                    <a class="link_a" href="$!{contextpath}readdetail/todetail.action?id=$!{c.book_id}">删除</a>
-                </div>
-            </div>
+            
+           <div id="container">   
+           <div id="wrap" >$!{o.content}</div>
+            <div id="read-more"></div>
+	           <div class="bookC_right_a">
+	                    <div class="time-a">$!{o.gmt_update}</div> 
+	                    <a class="link_a" href="$!{contextpath}readdetail/todetail.action?id=$!{c.book_id}">修改</a>
+	                    <a class="link_a" href="$!{contextpath}readdetail/todetail.action?id=$!{c.book_id}">删除</a>
+	            </div> 
+		    </div>
 			#end
             
         </div>

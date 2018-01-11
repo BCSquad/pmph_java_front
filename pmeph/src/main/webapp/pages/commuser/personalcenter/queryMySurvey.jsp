@@ -100,6 +100,17 @@
 												<input type="hidden" name="inputQuestionIds" value="${question.id}">
 											</div>
 										</c:if>
+										
+										<c:if test="${question.type==5}">
+											<div class="oneQuestion">
+												<p>Q${code.index+1} : ${question.title}</p>
+												<div style="padding-left: 22px">
+													<textarea id="${question.id}" name="input_${code.index+1}" class="textAreaStyle" >${question.inp }</textarea>
+												</div>
+												<input type="hidden" name="textValues" value="input_${code.index+1}">
+												<input type="hidden" name="textQuestionIds" value="${question.id}">
+											</div>
+										</c:if>
 									</c:forEach>
 									
 								</c:when>

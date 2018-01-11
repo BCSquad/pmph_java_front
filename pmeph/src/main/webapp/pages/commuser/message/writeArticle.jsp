@@ -10,7 +10,7 @@
 
     </script>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-<title>Insert title here</title>
+<title>写文章</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet"
 	href="${ctx}/statics/commuser/message/writeArticle.css"
@@ -43,7 +43,7 @@
         <font class="sxy-font1">文章标题：</font>
     </div>
     <div class="sxy-div-content2">
-    	<input type="text" name="atrticle_id" id="atrticle_id" value="${atrticle_id }">
+    	<input type="hidden" name="atrticle_id" id="atrticle_id" value="${atrticle_id }">
         <input type="text" class="sxy-txt2" id="TitleValue" name="titleValue" placeholder="输入文章标题请限30字以内.."  oninput="if(value.length>30){value=value.slice(0,30)}" value="${title}" />
     </div>
     <div class="sxy-div-content4">

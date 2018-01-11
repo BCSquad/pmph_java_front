@@ -6,7 +6,7 @@ import java.util.Map;
 public interface SurveyService {
 	
 	//调查列表
-	List<Map<String, Object>> surveyList();
+	List<Map<String, Object>> surveyList(Map<String, Object> map);
 	
 	//查询一个调查
 	List<Map<String, Object>> getSurvey(long surveyId);

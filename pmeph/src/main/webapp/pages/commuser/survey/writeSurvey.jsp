@@ -45,8 +45,8 @@
 												<div style="padding-left: 22px">
 														<c:forEach items="${question.listOptions }" var="option">
 															<div style="height: 40px">
-														    	<input type="radio" name="radio_${code.index+1}" value="${option.id}"/>
-														    	<label>${option.option_content }</label><br/>
+														    	<div style="float: left"><input type="radio" name="radio_${code.index+1}" value="${option.id}"/></div>
+														    	<div  style="float: left;marging-top: 10px;margin-left: 5px"><label>${option.option_content }</label></div><br/>
 													    	</div>
 														</c:forEach>
 														<input type="hidden" name="radioValues" value="radio_${code.index+1}">

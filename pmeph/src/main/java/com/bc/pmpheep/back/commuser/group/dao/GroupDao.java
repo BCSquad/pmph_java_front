@@ -13,6 +13,7 @@ import com.bc.pmpheep.back.commuser.group.bean.GroupMessageVO;
 import com.bc.pmpheep.back.commuser.group.bean.PmphGroupMemberVO;
 
 
+
 /**
  * PmphGroup 实体类数据访问层接口
  * 
@@ -302,4 +303,9 @@ public interface GroupDao {
 	 * 添加小组文件
 	 */
 	public int addFile(Map<String,Object> map);
+	
+	/**
+	 * 查询文件信息
+	 */
+	public List<Map<String,Object>> fileList(Map<String,Object> map);
 }

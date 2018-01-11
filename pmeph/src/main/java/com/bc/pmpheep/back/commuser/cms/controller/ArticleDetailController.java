@@ -45,8 +45,8 @@ public class ArticleDetailController extends BaseController {
 	@RequestMapping(value = "/toPage", method = RequestMethod.GET)
 	public ModelAndView list(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
-		// String id=request.getParameter("wid");
-		String wid = "10";
+		 String wid=request.getParameter("wid");
+//		String wid = "10";
 		Map<String, Object> map1 = new HashMap<String, Object>();
 		map1.put("id", wid);
 		Map<String, Object> map = articleDetailService.queryTitle(map1);
@@ -125,8 +125,8 @@ public class ArticleDetailController extends BaseController {
 	public PageResult<Map<String, Object>> changepage(HttpServletRequest request){
 		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
 		int allppage=Integer.parseInt(request.getParameter("allppage"));
-//		String id=request.getParameter("id");
-		String wid = "10";
+		 String wid=request.getParameter("wid");
+//		String wid = "10";
 		PageParameter<Map<String, Object>> pageParameter=new PageParameter<Map<String, Object>>(pageNumber,allppage);
 		Map<String, Object> wMap=new HashMap<String, Object>();
 		wMap.put("id", wid);
@@ -171,7 +171,8 @@ public class ArticleDetailController extends BaseController {
 	@ResponseBody
 	public Map<String, Object> insertComment(HttpServletRequest request){
 		Map<String, Object> map=new HashMap<String, Object>();
-		String wid = "10";
+		 String wid=request.getParameter("wid");
+//		String wid = "10";
 		String content=request.getParameter("content");
 		
 		Map<String, Object> user=getUserInfo();
@@ -195,8 +196,8 @@ public class ArticleDetailController extends BaseController {
 	@RequestMapping("addlikes")
 	@ResponseBody
 	public Map<String, Object> addlikes(HttpServletRequest request){
-		/*String id=request.getParameter("id");*/
-		String wid = "10";
+		 String wid=request.getParameter("wid");
+//		String wid = "10";
 		Map<String, Object> pmap=articleDetailService.queryRead(wid);
 		int likes=Integer.parseInt(pmap.get("likes").toString());
 		Map<String, Object> user=getUserInfo();

@@ -4,6 +4,7 @@
 package com.bc.pmpheep.back.commuser.group.service;
 
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -342,6 +343,11 @@ public class GroupServiceImpl implements GroupService{
 	@Override
 	public int addFile(Map<String, Object> map) {
 		return this.groupDao.addFile(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> fileList(Map<String, Object> map) {
+		return this.groupDao.fileList(map);
 	}
 
 	

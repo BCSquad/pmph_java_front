@@ -61,6 +61,9 @@
             <!--出书申报 -->
             <mvc:mapping path="/bookdeclare/*"/>
             
+            <!--问卷 -->
+            <mvc:mapping path="/survey/*"/>
+            
             <bean class="com.bc.pmpheep.back.interceptor.LoginInterceptor">
                 <property name="redirectUrl" value="/pages/comm/login.jsp"/>
             </bean>

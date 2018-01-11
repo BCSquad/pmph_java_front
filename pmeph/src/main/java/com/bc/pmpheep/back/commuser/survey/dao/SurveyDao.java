@@ -6,7 +6,7 @@ import java.util.Map;
 public interface SurveyDao {
 	
 	//调查列表
-	List<Map<String, Object>> surveyList();
+	List<Map<String, Object>> surveyList(Map<String, Object> map);
 	
 	//查询的单个调查对应的问题
 	List<Map<String, Object>> getSurvey(long surveyId);

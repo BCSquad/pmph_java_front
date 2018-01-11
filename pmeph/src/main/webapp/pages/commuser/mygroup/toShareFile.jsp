@@ -22,6 +22,7 @@
     <script src="<%=path %>/resources/comm/jquery/jquery.js"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/layer/layer.js"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js" type="text/javascript"></script>
     <script src="<%=path %>/resources/commuser/mygroup/group.js" type="text/javascript"></script> 
 </head>
 <body>
@@ -35,17 +36,19 @@
                 <div class="top_content">
                     <span class="span1">${groupMap.textbook_name}</span>
                     <input id="groupId" type="hidden" value="${groupMap.id}"/>
+                    <input id="type" name="type" type="hidden" value="${type}"/>
                     <div class="top_content2">
                         <div class="top_content22">
                             <img src="${ctx}/statics/image/zjyh.png">
                         </div>
                         <text>${role}</text>
-                        <span id='quitGroup'>退出小组</span>
+                       <span style="cursor: pointer;" onclick="javascript:quitGroup('${groupMap.id}')">退出小组</span>
                     </div>
                     <div class="top_content3">
                         <div class="top_content33">
                             <img src="${ctx}/statics/image/scz.png"/>
                         </div>
+                        <span id="scwj1" class="scmsg">上传文件</span>
                     </div>
                 </div>
                 <div class="top_tj">
@@ -69,11 +72,43 @@
             </div>
             <div class="left-content">
                 <div class="_show" id="filesgx">
-                    <input type="text" placeholder="请输入文件名" id= "fileName" class="file_input"/><img class="search" src="${ctx}/statics/image/sx1.png"/>
-                    <span id ="fileContent"></span>
-                    <div id ="fileMore">
-                    	<center>更多</center>
-                    </div>
+                    <input type="text" placeholder="请输入文件名" id= "fileName" class="file_input"/>
+                    <img class="search" src="${ctx}/statics/image/sx1.png"/>
+                     <c:forEach var="list" items="${fileList}">
+	                     <div class="items">
+	                        <div class="item1" style="clear:both;">
+	                            <span>
+	                            <c:if test="${list.xtype == '.xls' || list.xtype == '.xlsx'}">
+	                            <img src="${ctx}/statics/image/excl.png" alt="文件类型" class="item_img1"/>
+	                            </c:if>
+	                            <c:if test="${list.xtype == '.txt'}">
+	                            <img src="${ctx}/statics/image/txt.png" alt="文件类型" class="item_img1"/>
+	                            </c:if>
+	                            <c:if test="${list.xtype == '.png' || list.xtype == '.jpg'}">
+	                            <img src="${ctx}/statics/image/img.png" alt="文件类型" class="item_img1"/>
+	                            </c:if>
+	                            <c:if test="${list.xtype == '.doc' || list.xtype == '.docx'}">
+	                            <img src="${ctx}/statics/image/word.png" alt="文件类型" class="item_img1"/>
+	                            </c:if>
+	                            <c:if test="${list.xtype == 'pdf'}">
+	                            <img src="${ctx}/statics/image/pdf.png" alt="文件类型" class="item_img1"/>
+	                            </c:if>
+	                            <text>${list.file_name}</text></span>
+	                            <span style="margin-left: 30px;">
+	                            	<img src="${ctx}/statics/image/xztp.png" onclick="downLoadProxy('${list.file_id}')" class="item_img2"/>
+	                            <text style="color: #70bcc3;">${list.download}</text></span>
+	                        </div>
+	                        <div class="item2">
+	                            <div class="item2_div1">${list.realname}于${list.gmt_create}上传文件</div>
+	                            <div style=" float: right;height: 50px;line-height: 50px;"><span class="del_span"></span>
+	                                <text style="width: 20px;height: 20px;">删除</text>
+	                            </div>
+	                        </div>
+	                    </div>
+                     </c:forEach>
+                    <div class="jzgd">
+                    	<span onclick="javascript:doMore('${pageSize}')">加载更多...</span>
+                    </div> 
 				</div>
             </div>
         </div>

@@ -14,7 +14,7 @@
 <script>
 	var contextpath = "${pageContext.request.contextPath}/";
 </script>
-<base href="<%=basePath%>">
+<%-- <base href="<%=basePath%>"> --%>
 <title>个人资料</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="<%=path%>/statics/css/base.css" rel="stylesheet"

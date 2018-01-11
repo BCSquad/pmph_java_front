@@ -5,6 +5,7 @@
   Time: 16:12
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%String path = request.getContextPath();%>
@@ -18,6 +19,7 @@
    	<link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/groupList.css" type="text/css">
     <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
+    <script src="${ctx}/resources/commuser/mygroup/groupList.js"></script>
     <script src="${ctx}/resources/comm/base.js"></script>
     
 </head>
@@ -74,6 +76,7 @@
 					</div>
 		        </div>
 		        </c:forEach>
+		        
     		</c:when>
     		<c:otherwise>
     			<div class="no-more">
@@ -82,8 +85,9 @@
                 </div>
     		</c:otherwise>
     	</c:choose>
-        
     </div>
+        <div class="jzgd"><span onclick="javascript:doMore('${pageNumber}')">加载更多...</span></div>
+        <div style="height: 30px;"></div>
 </div>
 </div>
 		<div style="clear: both; background-color: #f6f6f6;">   
