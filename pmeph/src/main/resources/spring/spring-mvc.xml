@@ -23,59 +23,47 @@
     <mvc:interceptors>
         <bean class="com.bc.pmpheep.back.interceptor.ProcessInterceptor"></bean>
 
-        <mvc:interceptor >
-            <mvc:mapping path="/personalhomepage/*"/>
-            <mvc:mapping path="/writerArticle/*"/>
-            <mvc:mapping path="/message/*"/>
-            <mvc:mapping path="/material/*"/>
-             <!--书籍收藏-->
-            <mvc:mapping path="/bookcollection/*"/>
-
-            <!--书籍收藏-->
-            <mvc:mapping path="/articlecollection/*"/>
-            <mvc:mapping path="/schedule/*"/>
-            <mvc:mapping path="/admininfocontroller/*"/>
-            <mvc:mapping path="/myGroup/*"/>
-            <mvc:mapping path="/group/*"/>
-            <!--信息快报列表点赞-->
-            <mvc:mapping path="/cmsinfoletters/addlike.action"/>
-
-            <!--信息快报详情点赞、收藏  -->
-            <mvc:mapping path="/inforeport/add*"/>
-            <mvc:mapping path="/articlesearch/changelikes*"/><!-- 文章搜索点赞 -->
-			<mvc:mapping path="/readdetail/insertComment*"/><!-- 读书详情页面新增评论 -->
-			<mvc:mapping path="/readdetail/addmark*"/><!-- 读书详情页添加收藏 -->
-			<mvc:mapping path="/readdetail/addlikes*"/><!-- 读书详情页点赞 -->
-			<mvc:mapping path="/readdetail/correction*"/><!-- 读书详情页图书纠错 -->
-			<mvc:mapping path="/user/*"/><!-- 用户管理（机构用户） -->
-			<mvc:mapping path="/myFriend/*"/><!-- 我的好友（普通用户） -->
-			<mvc:mapping path="/articlesearch/changelikes*"/><!-- 读书详情页改变点赞数 -->
-            <!--申报资料审核（机构用户）第一主编选择编委 教师认证 添加好友 书籍查询 书籍列表 学校教师认证-->
-            <mvc:mapping path="/applyDocAudit/*"/>
-            <mvc:mapping path="/chooseEditor/*"/>
-            <mvc:mapping path="/teacherauth/*"/>
-            <mvc:mapping path="/addFriend/*"/>
-            <mvc:mapping path="/booksearch/likeSwitch*"/>
-            <mvc:mapping path="/teacherCertification/*"/>
-            <!--  -->
-            <!--出书申报 -->
-            <mvc:mapping path="/bookdeclare/*"/>
-
-            <!--问卷 -->
-            <mvc:mapping path="/survey/*"/>
-
-            <bean class="com.bc.pmpheep.back.interceptor.LoginInterceptor">
-                <property name="redirectUrl" value="/pages/comm/login.jsp"/>
-            </bean>
-        </mvc:interceptor>
-
         <bean class="com.bc.pmpheep.back.interceptor.LoginInterceptor">
             <property name="redirectUrl" value="/pages/comm/login.jsp"/>
             <property name="pathWithUsertypeMaps">
                 <set>
+
+                    <!--作家用户-->
+
                     <value>/message/* -> 1</value><!--作家用户消息模块 -->
                     <value>/writerArticle/* -> 1</value><!--作家写文章 -->
                     <value>/personalhomepage/* -> 1</value><!--作家个人中心 -->
+                    <value>/material/* -> 1</value><!--教材申报 -->
+
+                    <value>/bookcollection/* -> 1</value><!--书籍收藏 -->
+                    <value>/articlecollection/* -> 1</value><!--文章收藏 -->
+                    <value>/myGroup/* -> 1</value><!--我的小组 -->
+                    <value>/group/* -> 1</value><!--我的小组 -->
+                    <value>/group/* -> 1</value><!--我的小组 -->
+                    <value>/cmsinfoletters/addlike.action -> 1</value><!--信息快报列表点赞 -->
+                    <value>/inforeport/add* -> 1</value><!--信息快报详情点赞、收藏  -->
+                    <value>/articlesearch/changelikes* -> 1</value><!--文章搜索点赞 -->
+                    <value>/readdetail/insertComment* -> 1</value><!--读书详情页面新增评论 -->
+                    <value>/readdetail/addmark* -> 1</value><!--读书详情页添加收藏 -->
+                    <value>/readdetail/addlikes* -> 1</value><!--读书详情页点赞 -->
+                    <value>/readdetail/correction* -> 1</value><!--读书详情页图书纠错 -->
+                    <value>/myFriend/* -> 1</value><!--我的好友（普通用户） -->
+                    <value>/articlesearch/changelikes* -> 1</value><!--读书详情页改变点赞数 -->
+                    <value>/articlesearch/changelikes* -> 1</value><!--读书详情页改变点赞数 -->
+                    <value>/addFriend/* -> 1</value><!--添加好友 -->
+                    <value>/booksearch/likeSwitch* -> 1</value><!--书籍查询 -->
+                    <value>/teacherCertification/* -> 1</value><!--学校教师认证 -->
+                    <value>/bookdeclare/* -> 1</value><!--出书申报 -->
+                    <value>/survey/* -> 1</value><!--出书申报 -->
+
+
+                    <!--机构用户-->
+                    <value>/user/* -> 2</value><!--用户管理（机构用户） -->
+                    <value>/schedule/* -> 2</value><!--机构用户待办事项 -->
+                    <value>/applyDocAudit/* -> 2</value><!--申报资料审核（机构用户） -->
+                    <value>/chooseEditor/* -> 2</value><!--第一主编选择编委 -->
+                    <value>/teacherauth/* -> 2</value><!--教师认证 -->
+
                 </set>
             </property>
         </bean>

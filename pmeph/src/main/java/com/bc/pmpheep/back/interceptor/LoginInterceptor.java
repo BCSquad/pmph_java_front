@@ -3,6 +3,7 @@ package com.bc.pmpheep.back.interceptor;
 import com.alibaba.fastjson.JSON;
 import com.bc.pmpheep.back.util.Const;
 import com.bc.pmpheep.controller.bean.ResponseBean;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.util.Assert;
@@ -40,6 +41,14 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         public String getUserType() {
             return userType;
+        }
+
+        @Override
+        public String toString() {
+            return "PathWithUsertypeMap{" +
+                    "path='" + path + '\'' +
+                    ", userType='" + userType + '\'' +
+                    '}';
         }
     }
 
@@ -87,11 +96,11 @@ public class LoginInterceptor implements HandlerInterceptor {
             if (resolver.getPathMatcher().match(pathMap.getPath(), httpServletRequest.getServletPath())) {
 
                 HttpSession session = httpServletRequest.getSession();
-                Object userInfo = null;
-                if (pathMap.getUserType().equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
-                    userInfo = session.getAttribute(Const.SESSION_USER_CONST_WRITER);
-                } else if (pathMap.getUserType().equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
-                    userInfo = session.getAttribute(Const.SESSION_USER_CONST_ORGUSER);
+                Map<String, Object> userInfo = null;
+                if (pathMap.getUserType().equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE)) && pathMap.getUserType().equals("1")) {
+                    userInfo = (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_WRITER);
+                } else if (pathMap.getUserType().equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE)) && pathMap.getUserType().equals("2")) {
+                    userInfo = (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_ORGUSER);
                 }
 
                 boolean isAjax = "XMLHttpRequest".equalsIgnoreCase(httpServletRequest.getHeader("X-Requested-With"));
