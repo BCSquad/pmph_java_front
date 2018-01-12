@@ -275,7 +275,7 @@ public class PersonalCenterController extends BaseController {
 		for (String queryName : namesChi) {
 			//查询条件
 			String queryValue = request.getParameter(queryName);
-			queryValue = java.net.URLDecoder.decode((queryValue!=null?queryValue:""),"UTF-8"); 
+			queryValue = java.net.URLDecoder.decode((queryValue!=null?queryValue:""),"UTF-8").trim(); 
 			//封装查询条件入pageParameter 用以查询
 			paraMap.put(queryName, queryValue);
 			//传回查询条件
