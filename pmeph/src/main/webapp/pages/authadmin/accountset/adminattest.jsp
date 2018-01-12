@@ -208,7 +208,7 @@
                          	<div class="label-input">
                                 <label class="require">职称</label>
 	                        	<div class="input-wrapper">
-	                        		 <select class="select-td" id="title" name="title" style="padding-left: 15px" data-valid="isNonEmpty" data-error="职称不能为空">
+	                        		 <select class="select-td" id="title" name="title"  style="padding-left: 15px" data-valid="isNonEmpty" data-error="职称不能为空">
 			                            <option value="teacher1" ${admininfo.title=='teacher1' ?'selected':''}>讲师</option>
 			                            <option value="teacher2" ${admininfo.title=='teacher2' ?'selected':''}>高级讲师</option>
 			                            <option value="teacher3" ${admininfo.title=='teacher3' ?'selected':''}>副教授</option>

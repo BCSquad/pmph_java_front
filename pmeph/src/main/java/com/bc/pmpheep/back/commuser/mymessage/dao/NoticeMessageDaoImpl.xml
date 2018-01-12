@@ -9,7 +9,8 @@
 	
 	 <!-- 申请消息列表 -->
 	<select id="selectApplyMessage" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT a.id,a.status,a.gmt_create,b.realname FROM writer_friend a
+		SELECT a.id,a.status,a.gmt_create,b.realname,b.avatar 
+		FROM writer_friend a
 		LEFT JOIN writer_user b
 		ON a.request_id = b.id
 		<trim prefix="WHERE" prefixOverrides="AND|OR">

@@ -5,12 +5,14 @@
 	<!-- 查询待办事项列表 -->
 	<select id="selectScheduleList" parameterType="PageParameter" resultType="java.util.Map">
 		SELECT * FROM(
-		SELECT d.realname AS NAME,d.gmt_create AS TIME,m.`material_name` AS CONTENT,d.material_id as auditId,"A" as TYPE 
+		SELECT d.realname AS NAME,d.gmt_create AS TIME,m.`material_name` AS CONTENT,d.material_id as auditId,"A" as TYPE,w.avatar
 		FROM declaration d 
 		LEFT JOIN material m
 		ON d.`material_id` = m.`id`
 		LEFT JOIN org_user u
 		ON d.`org_id` = u.`org_id`
+		left join writer_user w
+		on d.user_id = w.id
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			u.`id` = #{parameter.userId} AND d.online_progress='1'
 			<if test="null!=parameter.week">AND d.gmt_create >= #{parameter.week} </if>
@@ -20,7 +22,8 @@
 		ORDER BY d.gmt_create DESC) t1
 		UNION 
 		SELECT * FROM (
-		SELECT w1.username,w.gmt_create,"教师资格认证",w1.id,"B" FROM writer_user_certification w
+		SELECT w1.username,w.gmt_create,"教师资格认证",w1.id,"B",w1.avatar 
+		FROM writer_user_certification w
 		LEFT JOIN org_user u1
 		ON w.org_id = u1.org_id
 		LEFT JOIN writer_user w1		
@@ -70,17 +73,20 @@
 	<select id="selectDoneSchedule" parameterType="PageParameter" resultType="java.util.Map">
 		SELECT * FROM(
 		SELECT d.realname AS NAME,d.gmt_create AS TIME,m.`material_name` AS CONTENT,
-		d.material_id AS AUDITID,"A" AS TYPE,d.gmt_update AS UPDATETIME,d.`online_progress` AS PROGRESS
+		d.material_id AS AUDITID,"A" AS TYPE,d.gmt_update AS UPDATETIME,d.`online_progress` AS PROGRESS,w.avatar
 		FROM declaration d 
 		LEFT JOIN material m
 		ON d.`material_id` = m.`id`
 		LEFT JOIN org_user u
 		ON d.`org_id` = u.`org_id`
+		left join writer_user w
+		on d.user_id = w.id
 		WHERE	u.`id` = #{parameter.userId} AND d.online_progress IN(2,3)
 		ORDER BY d.gmt_create DESC) t1
 		UNION 
 		SELECT * FROM (
-		SELECT w1.realname,w.gmt_create,"教师资格认证",w1.id,"B",w1.gmt_update,w.progress FROM writer_user_certification w
+		SELECT w1.realname,w.gmt_create,"教师资格认证",w1.id,"B",w1.gmt_update,w.progress,w1.avatar 
+		FROM writer_user_certification w
 		LEFT JOIN org_user u1
 		ON w.org_id = u1.org_id
 		LEFT JOIN writer_user w1		

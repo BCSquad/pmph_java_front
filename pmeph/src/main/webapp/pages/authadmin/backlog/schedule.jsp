@@ -66,21 +66,19 @@
 	                                </c:if>
 	                            </div>
 	                        </div>
-	                       <c:if test="${status.last==false}" >
-	                        <div class="straightLine">
-	                            <div class="whiteDiv">
-	
-	                            </div>
-	                        </div>
+	                        <c:if test="${status.last==false}" >
+		                        <div class="straightLine">
+		                            <div class="whiteDiv">
+		                            </div>
+		                        </div>
 	                        </c:if> 
-	                         	
-	                         
 	                    </div>
 	                    <div class="rightContent">
 	                            <div class="leftPictureAndName">
 	                                <div class="upContent">
 	                                        <div class="headPicture">
 	                                            <img class="picture1"  src="${ctx}/statics/pictures/head.png">
+	                                            <%-- <img class="picture1"  src="${ctx}${one.avatar}"> --%>
 	                                        </div>
 	                                        <div class="username">
 	                                             <span>${one.NAME}</span>

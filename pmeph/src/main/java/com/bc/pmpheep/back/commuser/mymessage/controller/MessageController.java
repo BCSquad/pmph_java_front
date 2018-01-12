@@ -67,6 +67,9 @@ public class MessageController extends BaseController{
 	public List<Map<String,Object>> loadMoreApply(HttpServletRequest request){
 		String condition=request.getParameter("condition");
 		String para=request.getParameter("startPara");
+		Map<String, Object> map = getUserInfo();
+		Long userId = new Long(String.valueOf(map.get("id")));
+		//Long userId = (long) 1609;
 		int startPara=0;
 		Map<String,Object> paraMap = new HashMap<String,Object>();
 		if(null!=para&&!para.equals("")){
@@ -79,7 +82,7 @@ public class MessageController extends BaseController{
 			paraMap.put("startPara",startPara);
 		}
 		
-		Long userId = (long) 1609;
+		
 		paraMap.put("condition",condition);
 		paraMap.put("userId",userId);
 		
@@ -93,6 +96,9 @@ public class MessageController extends BaseController{
 	@RequestMapping(value="/updateApplyMessage")
 	public ModelAndView updateApplyMessage(HttpServletRequest  request){
 		String id=request.getParameter("id");
+		Map<String, Object> map = getUserInfo();
+		Long userId = new Long(String.valueOf(map.get("id")));
+		//Long userId = (long) 24967;
 		//1：忽略    2：接受
 		String flag=request.getParameter("flag");
 		ModelAndView mv = new ModelAndView();
@@ -103,7 +109,7 @@ public class MessageController extends BaseController{
 			paraMap.put("applyId", applyId);
 			noticeMessageService.updateApplyMessage(paraMap);
 		}
-		Long userId = (long) 24967;
+		
 		paraMap.put("userId", userId);
 		List<Map<String,Object>> list = noticeMessageService.selectApplyMessage(paraMap);
 		mv.addObject("list",list);
@@ -168,13 +174,16 @@ public class MessageController extends BaseController{
 	@ResponseBody
 	public String deleteNoticeMessage(HttpServletRequest  request){
 		String id=request.getParameter("nid");
+		Map<String, Object> map = getUserInfo();
+		Long userId = new Long(String.valueOf(map.get("id")));
+		//Long userId = (long) 1609;
 		Map<String,Object> paraMap = new HashMap<String,Object>();
 		if(null!=id&&!id.equals("")){
 			long noticeId = Long.valueOf(id).longValue();
 			paraMap.put("noticeId", noticeId);
 			noticeMessageService.deleteNoticeMessage(paraMap);
 		}
-		Long userId = (long) 1609;
+		
 		paraMap.put("userId", userId);
 		//List<Map<String,Object>> list = OrgMessageService.selectNoticeMessage(paraMap);
 		//mv.addObject("list",list);
