@@ -403,6 +403,10 @@
 	<select id="fileList" parameterType="java.util.Map" resultType="java.util.Map">
 		select t1.*,t2.realname,substr(t1.file_name,INSTR(t1.file_name,'.')) xtype from pmph_group_file t1 
 			left join writer_user t2 on t1.member_id = t2.id
-		where t1.group_id = #{group_id} order by t1.gmt_create desc limit 0,#{pageSize} 
+		where t1.group_id = #{group_id} 
+		<if test="file_name != null and file_name !=''">
+			and	file_name like #{file_name} 
+		</if>
+		order by t1.gmt_create desc limit 0,#{pageSize} 
 	</select>
 </mapper>

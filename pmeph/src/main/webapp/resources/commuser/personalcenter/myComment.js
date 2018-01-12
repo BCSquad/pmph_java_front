@@ -1,4 +1,4 @@
-
+//评论切换
 $(function(){
 	$(".replytag").each(function(){
 		var $t = $(this);
@@ -20,7 +20,7 @@ $(function(){
 	
 });
 
-
+//评论展开收起样式
 $(function() {  
     var slideHeight = 50; // px 定义折叠的最小高度  
     var defHeight = $('#wrap').height();  
@@ -45,10 +45,139 @@ $(function() {
     }  
 });  
 
+//评论弹出框
+var score="";
+$(document).ready(function () {
+    //为所有的class为scorestar1绑定mouseout和mouseover事件。bind({事件名：function(){},事件名：function(){}})的方法绑定多个事件
+    $(".scorestar1").bind({
+        mouseover: function () {
+            $(this).css("background-position", "-183px -174px").prevAll().css("background-position", "-183px -174px");
+            $(this).nextAll().css({"background-position": "-183px -153px"});
+             score = parseInt($(this).attr("id").substring(5)) * 2 + '.0';
+             $("#last_score").html(score);
+            
+        }
+    });
+});
+
+
+//点击显示评论弹窗
+function showup(id) {
+	 $.ajax({
+	        type: 'post',
+	        url: contextpath + 'personalhomepage/tologin.action',
+	        async: false,
+	        dataType: 'json',
+	        success: function (json) {
+	        	 $("#bookmistake").show();
+	        	 $("#comm_id").val(id);
+	        }
+	    });
+}
+
+//点击弹窗隐藏
+function hideup() {
+    $("#bookmistake").hide();
+}
+//弹出框修改提交
+function upd_comment() {
+	   
+	     if(!Empty(content)){//非空判断
+	    	 var json = {
+	    			 	comm_id: $("#comm_id").val(),
+	    			 	score: score,
+	    		        content:$("#content").val()
+	    		    };
+	    		    $.ajax({
+	    		        type: 'post',
+	    		        url: contextpath + 'personalhomepage/updateComment.action',
+	    		        data: json,
+	    		        async: false,
+	    		        dataType: 'json',
+	    		        success: function (json) {
+	    		            if (json.returncode == "OK") {
+	    		            	window.message.info("数据已提交！");
+	    		            	$("#bookmistake").hide();
+	    		                $("#content").val(null);
+	    		                queryMain();
+	    		            } else {
+	    		            	window.message.info("请填写内容和评分！！");
+	    		            }
+	    		        }
+	    		    });
+	     }else{
+	    	 window.message.info("请填写内容和评分！");
+	     }
+ 
+}
+
+//删除评论
+/*function DelMyComm(id) {
+	var msg = "您真的确定要删除吗？\n\n请确认！";
+	if (confirm(msg) == true) {
+		var json = {
+				comm_id : id,
+		};
+		$.ajax({
+			type : 'post',
+			url : contextpath + 'personalhomepage/deleteComment.action',
+			async : false,
+			dataType : 'json',
+			data : json,
+			success : function(json) {
+				if (json.flag == "0") {
+					$("#content").val(null);
+					window.message.success("删除成功!");
+				} else {
+					window.message.error("删除失败!");
+				}
+			}
+		});
+		return location.reload;
+	} else {
+		return false;
+	}
+}*/
+//删除评论
+function DelMyComm(id) {
+	var json = {
+			comm_id : id,
+	};
+	window.message.confirm('您真的确定要删除吗？请确认！', {
+		icon : 3,
+		title : '提示',
+		btn : [ "确定", "取消" ]
+	}, function(index) {
+		layer.close(index);
+		$.ajax({
+			url : contextpath + 'personalhomepage/deleteComment.action',
+			type : "post",
+			async : false,
+			dataType : 'json',
+			data : json,
+			success : function(json) {
+				if (json.flag == "0") {
+					$("#content").val(null);
+					window.message.success("删除成功！");
+					setTimeout(queryMain(), 800);
+				} else {
+					window.message.error("删除失败！");
+				}
+			}
+
+		});
+	}, function(index) {
+		layer.close(index);
+	});
+}
 
 
 
-//输入长度限制校验，ml为最大字节长度
+
+
+
+
+// 输入长度限制校验，ml为最大字节长度
 function LengthLimit(obj,ml){
 	
 	var va = obj.value;

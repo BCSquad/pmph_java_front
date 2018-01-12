@@ -2,6 +2,8 @@ package com.bc.pmpheep.back.commuser.group.controller;
 
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,9 +92,19 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
     	String type = request.getParameter("type");
     	String count = request.getParameter("pageSize");
     	String groupId = request.getParameter("groupId");
+    	String file_name1 = request.getParameter("file_name");
+    	String file_name = "";
+    	if(file_name1!=null){
+    		try {
+    			file_name = "%"+URLDecoder.decode(file_name1,"UTF-8")+"%";
+    		} catch (UnsupportedEncodingException e) {
+    			e.printStackTrace();
+    		}
+    	}
     	Map<String,Object> queryMap = new HashMap<String,Object>();
     	queryMap.put("group_id", groupId);
     	queryMap.put("user_id", userMap.get("id"));
+    	queryMap.put("file_name", file_name1);
     	
     	//其余成员信息
     	List<Map<String,Object>> memberList = this.groupService.memberList(queryMap);

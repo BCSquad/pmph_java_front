@@ -127,7 +127,7 @@
                 <div class="float_left"><span class="li_span1"></span>
                     <text class="font_size16">&ensp;小组成员</text>
                 </div>
-                <div class="float_right font_size14">邀请好友>></div>
+                <div class="float_right font_size14" onclick="javascript:visitFriends()" style="cursor: pointer;">邀请好友>></div>
             </div>
             <ul>
               	 <c:forEach var="gropuMemeber" items="${memberList}">

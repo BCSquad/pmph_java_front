@@ -421,7 +421,9 @@ function showup() {
 	        async: false,
 	        dataType: 'json',
 	        success: function (json) {
-	        	 $("#bookmistake").show();
+	        	if(json=="OK"){
+	        		$("#bookmistake").show();
+	        	}
 	        }
 	    });
 }

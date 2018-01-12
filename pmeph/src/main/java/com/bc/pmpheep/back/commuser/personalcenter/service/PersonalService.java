@@ -104,6 +104,20 @@ public interface PersonalService {
 	public int myCommentCount(PageParameter<Map<String, Object>> pageParameter);
 	
 	/**
+	 * 我的评论修改
+	 * @param map
+	 */
+	Map<String, Object> updateComment(Map<String, Object> map);
+	/**
+	 * 删除我的评论
+	 * @param id
+	 * @param logUserId
+	 * @return
+	 */
+	public void deleteComment(Map<String, Object> map);
+	
+	
+	/**
 	 * 我的问卷
 	 * @param pageParameter
 	 * @return

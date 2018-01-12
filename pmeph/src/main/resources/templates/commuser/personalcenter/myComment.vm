@@ -18,6 +18,39 @@
 	    	active
 	    #end ">我的评论</li>
 </ul>
+
+        <!--评论修改悬浮框 -->
+        <div class="bookmistake" id="bookmistake">
+            <div class="apache">
+                <div class="mistitle">我的评论</div>
+                <div class="x" onclick="hideup()"></div>
+            </div>
+                    <textarea class="misarea" id="content"></textarea>
+                    <hr style="border:0.05px dotted #E0E0E0;margin-left: 16px;margin-rihgt: 16px;">
+                    <div class="star_num">星级评分:</div>
+                    <div class="scorestar" id="star">
+                        <div class="scorestar1" id="score1"></div>
+                        <div class="scorestar1" id="score2"></div>
+                        <div class="scorestar1" id="score3"></div>
+                        <div class="scorestar1" id="score4"></div>
+                        <div class="scorestar1" id="score5"></div>
+                    </div>
+                    <div class="aticle">
+                    <div class="user_score">
+                        <!-- <span>评分：</span> -->
+                        <span style="color: #FFD200" id="last_score">10.0</span>
+                    </div>
+                    <div class="button01">
+                        <button id="span_4" onclick="upd_comment()">修改</button>
+                         <input type="hidden"  id="comm_id" value="">
+                    </div>
+            </div>
+        </div>
+        
+        
+        
+
+<!--弹框 end -->
 <div class="listContent">
 	#foreach($c in $!{List_map})
 	<div class="bookC">
@@ -40,10 +73,11 @@
             <div id="read-more"></div>
 	           <div class="bookC_right_a">
 	                    <div class="time-a">$!{o.gmt_update}</div> 
-	                    <a class="link_a" href="$!{contextpath}readdetail/todetail.action?id=$!{c.book_id}">修改</a>
-	                    <a class="link_a" href="$!{contextpath}readdetail/todetail.action?id=$!{c.book_id}">删除</a>
+	                    <a class="link_a"  onclick="showup('$!{o.id}')">修改</a>
+	                    <a class="link_a" onclick="DelMyComm('$!{o.id}');" >删除</a>
 	            </div> 
 		    </div>
+		   
 			#end
             
         </div>

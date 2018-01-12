@@ -860,11 +860,14 @@
 }
 
 .upbutten{
-	/* background-color: #70D68A;
-	border: none; */
+	width:60px;
+	height:20px;
+	background-color: #E1E1E1;
+	border: none; 
+	text-align:center;
 	cursor: pointer;
-	/* border-radius:3px;
-	color: white; */
+	border-radius:3px;
+	margin-left: 5px;
 }
 
 .video-btn{

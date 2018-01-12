@@ -199,6 +199,28 @@ public class PersonalServiceImpl implements PersonalService {
 		Integer count = personaldao.myCommentCount(pageParameter);
 		return count;
 	}
+	
+	/**
+	 * 我的评论修改
+	 */
+	@Override
+	public Map<String, Object> updateComment(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		Map<String, Object> rmap=new HashMap<String, Object>();
+		String score_tem=map.get("score").toString();
+		/*double score=Double.parseDouble(score_tem);*/
+		map.put("score", score_tem!= null&&score_tem != "" ?score_tem: 10 );
+		personaldao.updateComment(map);
+	    rmap.put("returncode", "OK");
+	    return rmap;
+	}
+	/**
+	 * 我的评论删除
+	 */
+	@Override
+	public void deleteComment(Map<String, Object> map) {
+		 personaldao.deleteComment(map);
+	}
 
 	/**
 	 * 我的问卷

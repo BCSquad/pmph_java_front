@@ -21,6 +21,7 @@ request.setAttribute("currentTime",datetime);
 
 <html>
 <head>
+	<title>个人中心</title>
     <script type="text/javascript">
         var contextpath = '${pageContext.request.contextPath}/';
     </script>
@@ -322,7 +323,7 @@ request.setAttribute("currentTime",datetime);
                								</div>
                								<div class="content_wrapper">
                									<div class="bookc_title">
-               										<a class="not-like-an-a" target="_blank" href="/readdetail/todetail.action?id=${c.tsjc_book_id }"
+               										<a class="not-like-an-a" target="_blank" href="${ctx }/readdetail/todetail.action?id=${c.tsjc_book_id }"
                											>${c.tsjc_bookname }</a>
                									</div>
                									<div class="sub_title"><c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>${c.tsjc_realname } 纠正了《${c.tsjc_bookname }》第${c.tsjc_page }页${c.tsjc_line },提出纠错：“${c.tsjc_content }”。</div>
@@ -353,7 +354,7 @@ request.setAttribute("currentTime",datetime);
                								</div>
                								<div class="content_wrapper">
                									<div class="bookc_title">
-               										<a class="not-like-an-a" target="_blank" href="/readdetail/todetail.action?id=${c.wdjc_book_id }"
+               										<a class="not-like-an-a" target="_blank" href="${ctx }/readdetail/todetail.action?id=${c.wdjc_book_id }"
                											>${c.wdjc_bookname }</a>
 												</div>
                									<div class="sub_title">
@@ -384,7 +385,7 @@ request.setAttribute("currentTime",datetime);
                								</div>
                								<div class="content_wrapper">
                									<div class="bookc_title">
-	               									<a class="not-like-an-a" target="_blank" href="/readdetail/todetail.action?id=${c.wdsp_book_id }"
+	               									<a class="not-like-an-a" target="_blank" href="${ctx }/readdetail/todetail.action?id=${c.wdsp_book_id }"
 	               											>${c.wdsp_bookname }</a>
                									</div>
                									<div class="sub_title">

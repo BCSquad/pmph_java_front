@@ -102,6 +102,19 @@ public interface PersonalDao {
 	public Integer myCommentCount(PageParameter<Map<String, Object>> pageParameter);
 	
 	/**
+	 * 我的评论修改
+	 * @param map
+	 */
+	void updateComment(Map<String, Object> map);
+	
+	/**
+	 * 我的评论删除
+	 * @param para_map
+	 * @return
+	 */
+	void deleteComment(Map<String, Object> map);
+	
+	/**
 	 * 我的问卷
 	 * @param pageParameter
 	 * @return
