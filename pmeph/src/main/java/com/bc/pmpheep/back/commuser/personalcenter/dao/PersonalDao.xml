@@ -97,14 +97,7 @@
 		,cc.title
 		,cc.summary
 		,cc.auth_status
-		,cc.is_staging
-		,case
-		when cc.gmt_update = '0000-00-00 00:00:00'
-		then DATE_FORMAT(cc.gmt_create,'%Y-%m-%d %H:%i') 
-		else 
-		DATE_FORMAT(cc.gmt_update,'%Y-%m-%d %H:%i') 
-		end
-		as gmt_update
+		,DATE_FORMAT(cc.gmt_update,'%Y-%m-%d %h:%i') as gmt_update
 		, '2' msg_type
 		from cms_content cc
 		inner join cms_category ct on cc.category_id = ct.id and ct.category_name =
@@ -112,9 +105,6 @@
 		where cc.author_id=#{parameter.logUserId} and cc.is_deleted !='1'
 		<if test="parameter.auth_status != null and parameter.auth_status != '' ">
 			and cc.auth_status = #{parameter.auth_status}
-		</if>
-		<if test="parameter.is_staging != null and parameter.is_staging != '' ">
-			and cc.is_staging = #{parameter.is_staging}
 		</if>
 		limit ${start},${pageSize}
 	</select>
@@ -131,9 +121,6 @@
 		where cc.author_id=#{parameter.logUserId} and cc.is_deleted !='1'
 		<if test="parameter.auth_status != null and parameter.auth_status != '' ">
 			and cc.auth_status = #{parameter.auth_status}
-		</if>
-		<if test="parameter.is_staging != null and parameter.is_staging != '' ">
-			and cc.is_staging = #{parameter.is_staging}
 		</if>
 		)t
 	</select>
@@ -176,7 +163,7 @@
 		a.is_deleted = '0'
 		AND a.is_public = '0'
 		AND a.is_published = '1'
-		<!-- AND b.online_progress not in (2) -->
+		AND b.online_progress not in (2)
 		<if test="parameter.s!=null and parameter.s!= ''">AND c.id is not null </if>
 		<if test="parameter.is_staging!=null and parameter.is_staging!= ''">AND c.is_staging =#{parameter.is_staging}</if>
 		<if
@@ -213,7 +200,7 @@
 		a.is_deleted = '0'
 		AND a.is_public = '0'
 		AND a.is_published = '1'
-		<!-- AND b.online_progress not in (2) -->
+		AND b.online_progress not in (2)
 		<if test="parameter.s!=null and parameter.s!= ''">AND c.id is not null </if>
 		<if test="parameter.is_staging!=null and parameter.is_staging!= ''">AND c.is_staging =#{parameter.is_staging}</if>
 		<if
@@ -457,7 +444,7 @@
 		b.image_url,
 		bc.id,
 		bc.book_id,
-
+		
 		bc.content,
 		bc.gmt_create,
 		DATE_FORMAT(bc.gmt_update,'%Y年%m月%d日') AS gmt_update,
@@ -506,6 +493,16 @@
 
 		)t
 	</select>
+	
+	<!-- 我的评论修改 -->
+	<update id="updateComment" parameterType="java.util.Map"> 
+	   UPDATE book_user_comment AS bc SET score=#{score},content=#{content} where id=#{id} and writer_id=#{writer_id}
+	</update>
+	<!-- 我的评论删除 -->
+	<delete id="deleteComment" parameterType="Map">
+		delete from  book_user_comment where 
+		id= #{id} and writer_id = #{writer_id}
+	</delete>
 
 	<!-- 我的问卷 -->
 	<select id="mySurvey" parameterType="PageParameter" resultType="java.util.Map">

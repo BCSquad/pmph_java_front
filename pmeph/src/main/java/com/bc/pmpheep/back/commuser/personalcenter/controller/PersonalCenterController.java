@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -198,6 +199,7 @@ public class PersonalCenterController extends BaseController {
 			List<Map<String,Object>> List_map = personalService.mySurvey(pageParameter);
 			count = personalService.myCommentCount(pageParameter);
 			
+			
 			//分页数据代码块
 			String html = this.mergeToHtml("commuser/personalcenter/mySurvey.vm",contextpath, pageParameter, List_map,vm_map);
 			
@@ -275,7 +277,7 @@ public class PersonalCenterController extends BaseController {
 		for (String queryName : namesChi) {
 			//查询条件
 			String queryValue = request.getParameter(queryName);
-			queryValue = java.net.URLDecoder.decode((queryValue!=null?queryValue:""),"UTF-8").trim(); 
+			queryValue = java.net.URLDecoder.decode((queryValue!=null?queryValue:""),"UTF-8"); 
 			//封装查询条件入pageParameter 用以查询
 			paraMap.put(queryName, queryValue);
 			//传回查询条件
@@ -622,6 +624,62 @@ public class PersonalCenterController extends BaseController {
 			mv.setViewName("commuser/personalcenter/queryMySurvey");
 			return mv;
 		}
+		
+		
+		/**
+		 * 强制登录方法
+		 * @return
+		 */
+		@RequestMapping("tologin")
+		@ResponseBody
+		public String tologin(){
+			return "";
+		}
+		
+		/**
+		 * 修改个人中心-我的评论
+		 * @param request
+		 * @return map
+		 */
+		@RequestMapping("/updateComment")
+		@ResponseBody
+		public Map<String, Object> updateComment(HttpServletRequest request){
+			Map<String, Object> map=new HashMap<String, Object>();
+			map.put("id", request.getParameter("comm_id"));
+			map.put("content", request.getParameter("content"));
+			map.put("score", request.getParameter("score"));
+			Map<String, Object> user=getUserInfo();
+			map.put("writer_id", user.get("id").toString());
+			Map<String, Object> rmap=personalService.updateComment(map);
+			return rmap;
+		}
 
+	
+		/**
+		 * 删除个人中心-我的评论
+		 * @param request
+		 * @return map
+		 */
+		@RequestMapping(value="/deleteComment",method=RequestMethod.POST)
+		@ResponseBody
+		public Map<String,Object> deleteComment(HttpServletRequest request){
+			Map<String,Object> resultMap = new HashMap<String,Object>();
+			String  flag="0";
+			try {
+				Map<String, Object> map=new HashMap<String, Object>();
+				map.put("id", request.getParameter("comm_id"));
+				Map<String, Object> user=getUserInfo();
+				map.put("writer_id", user.get("id").toString());
+				personalService.deleteComment(map);
+			} catch (Exception e) {
+				// TODO: handle exception
+				flag ="1";
+				e.printStackTrace();
+				resultMap.put("flag", flag);
+				return resultMap;
+			}
+			resultMap.put("flag", flag);
+			return resultMap;
+		}
 	
 }

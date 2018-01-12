@@ -1350,7 +1350,8 @@
 .link_a{
     margin-right: 20px;
     color:#0785d1;
-    text-decoration: none;  
+    text-decoration: none;
+    cursor: pointer;  
 }
 
 .dotted_line{
@@ -1360,7 +1361,7 @@
     height: 20px;
 }
 
-/* ------------展开样式----------------------- */
+/* -----------评论展开收缩样式----------------------- */
 #container {  
     margin: 10 auto;  
     border: 1px solid #3bb2d0;
@@ -1392,6 +1393,121 @@
   
 #read-more a: hover {  
     color: #000;  
-}  
+}
+
+/* -----------评论弹出框样式----------------------- */
+.bookmistake {
+    height: 200px; 
+    width: 600px;
+    
+   background-color: #fff;
+    display: none;
+    position: fixed;
+    left: 35%;
+    top: 30%;
+    box-shadow: 0px 0px 5px #888888;
+    border-radius: 5px;
+   z-index: 999;
+}
+
+
+.apache {
+    width: 100%;
+    height: 26px;
+    float: left;
+    margin-top: 16px;
+}
+
+.mistitle {
+    width: 50%;
+    float: left;
+    font-family: MicrosoftYaHei;
+    line-height: 20px;
+    letter-spacing: 1px;
+    color: #666666;
+    font-size: 16px;
+    margin-left: 20px;
+}
+
+.x {
+    width: 14px;
+    height:14px;
+    background-image:url(../../image/close.png);
+    float: right;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+
+
+.labell {
+    font-family: MicrosoftYaHei;
+    line-height: 20px;
+    letter-spacing: 1px;
+    color: #666666;
+    font-size: 14px;
+}
+
+.misarea {
+    width: 550px;
+    height: 90px;
+    border: 1px solid #E0E0E0;
+    margin-left: 20px;
+    padding: 5px;
+    border-radius: 3px;
+    background-color: #f1fbf4;
+}
+
+
+
+.star_num {
+    float: left;
+    margin-left: 16px;
+}
+
+.scorestar {
+    float: left;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.scorestar1 {
+    float: left;
+    background-image: url(../../image/css_sprites.png);
+    background-position: -183px -174px;
+    background-repeat: no-repeat;
+    height: 15px;
+    width: 15px;
+}
+
+.aticle {
+    font-family: MicrosoftYaHei;
+    line-height: 24px;
+    letter-spacing: 1px;
+    color: #666666;
+    width: 97%;
+    margin-left: 20px;
+}
+
+.user_score {
+    float: left;
+    margin-left: 20px;
+}
+
+
+
+#span_4 {
+    border: 0px;
+    margin-right: 20px;
+    float: right;
+    width: 80px;
+    height: 28px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    color: #F7FCF6;
+    cursor: pointer;
+    background-color: #70D68A;
+    border-radius: 3px;
+}
 
 
