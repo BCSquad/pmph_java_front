@@ -84,3 +84,21 @@ function quitGroup(groupId){
 	});
 }
 
+
+//邀请好友
+function visitFriends(){
+	window.location.href=contextpath+"/myFriend/listMyFriend.action";
+}
+
+//文件查询
+function doSearch(){
+	var groupId=$("#groupId").val();
+	var search_file=$("#search_file").val();
+	var file_name = encodeURI(encodeURI(search_file)); 
+	window.location.href=contextpath+"group/toMyGroup.action?groupId="+groupId+"&type=wjgx&file_name="+file_name;
+}
+
+//文件下载
+function downLoadProxy(fileId){
+	window.location.href=contextpath+'file/download/'+fileId+'.action';
+}

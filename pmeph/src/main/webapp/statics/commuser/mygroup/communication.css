@@ -253,7 +253,6 @@ a:active {color:yellow;}
     color: #666666;
 }
 .search{
-    position: absolute;
     top:30px;
     left: 424px;
     width: 22px;
@@ -472,5 +471,29 @@ ul li img{
 	height: 15px;
 }
 .jzgd span{
+	cursor: pointer;
+}
+
+.search_div{
+	width: 460px;
+	height: 40px;
+	border: solid 1px #d5d5d5;
+	border-radius: 4px;
+	margin-top: 20px;
+}
+
+.search_input{
+	width: 420px;
+	height: 40px;
+	float: left;
+	padding: 5px;
+	border: none;
+	border-radius: 4px;
+}
+
+.search_img{
+	float: right;
+	margin-top: 10px;
+	margin-right: 10px;
 	cursor: pointer;
 }

@@ -22,8 +22,8 @@
     <script src="<%=path %>/resources/comm/jquery/jquery.js"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/layer/layer.js"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js" type="text/javascript"></script>
     <script src="<%=path %>/resources/commuser/mygroup/group.js" type="text/javascript"></script> 
+    <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js" type="text/javascript"></script>
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
@@ -72,8 +72,10 @@
             </div>
             <div class="left-content">
                 <div class="_show" id="filesgx">
-                    <input type="text" placeholder="请输入文件名" id= "fileName" class="file_input"/>
-                    <img class="search" src="${ctx}/statics/image/sx1.png"/>
+                	<div class="search_div">
+                		<input type="text" placeholder="请输入文件名" class="search_input" id="search_file" value="${queryMap.file_name}"/>
+                		<img class="search_img" onclick="javascript:doSearch()" src="${ctx}/statics/image/sx1.png"/>
+                	</div>
                      <c:forEach var="list" items="${fileList}">
 	                     <div class="items">
 	                        <div class="item1" style="clear:both;">
@@ -95,7 +97,8 @@
 	                            </c:if>
 	                            <text>${list.file_name}</text></span>
 	                            <span style="margin-left: 30px;">
-	                            	<img src="${ctx}/statics/image/xztp.png" onclick="downLoadProxy('${list.file_id}')" class="item_img2"/>
+	                            	<a href="javascript:" class="filename"  onclick="downLoadProxy('${list.file_id}')">
+	                            	<img src="${ctx}/statics/image/xztp.png" class="item_img2"/></a>
 	                            <text style="color: #70bcc3;">${list.download}</text></span>
 	                        </div>
 	                        <div class="item2">
@@ -119,7 +122,7 @@
                 <div class="float_left"><span class="li_span1"></span>
                     <text class="font_size16">&ensp;小组成员</text>
                 </div>
-                <div class="float_right font_size14">邀请好友>></div>
+                <div class="float_right font_size14" style="cursor: pointer;" onclick="javascript:visitFriends()">邀请好友>></div>
             </div>
             <ul>
               	 <c:forEach var="gropuMemeber" items="${memberList}">
