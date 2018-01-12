@@ -153,15 +153,17 @@
 		dp.textbook_id
 		FROM
 		material a
+		left join material_org o on a.id = o.material_id
+		left join writer_user u on u.id = #{parameter.logUserId}
 		LEFT JOIN declaration b ON a.id = b.material_id
 		LEFT JOIN declaration c ON a.id = c.material_id and c.user_id =
 		#{parameter.logUserId} and c.online_progress != 2
-		LEFT JOIN dec_position dp on c.id = dp.declaration_id and chosen_position
-		in (4,12) and rank=1
+		LEFT JOIN dec_position dp on c.id = dp.declaration_id and dp.chosen_position
+		in (4,12) and dp.rank=1
 
 		WHERE
 		a.is_deleted = '0'
-		AND a.is_public = '0'
+		AND ((a.is_public = '0' and o.org_id = u.org_id) or (a.is_public = '1'))
 		AND a.is_published = '1'
 		AND b.online_progress not in (2)
 		<if test="parameter.s!=null and parameter.s!= ''">AND c.id is not null </if>
@@ -193,12 +195,14 @@
 		c.id as declaration_id
 		FROM
 		material a
+		left join material_org o on a.id = o.material_id
+		left join writer_user u on u.id = #{parameter.logUserId}
 		LEFT JOIN declaration b ON a.id = b.material_id
 		LEFT JOIN declaration c ON a.id = c.material_id and c.user_id =
 		#{parameter.logUserId} and c.online_progress != 2
 		WHERE
 		a.is_deleted = '0'
-		AND a.is_public = '0'
+		AND ((a.is_public = '0' and o.org_id = u.org_id) or (a.is_public = '1'))
 		AND a.is_published = '1'
 		AND b.online_progress not in (2)
 		<if test="parameter.s!=null and parameter.s!= ''">AND c.id is not null </if>
