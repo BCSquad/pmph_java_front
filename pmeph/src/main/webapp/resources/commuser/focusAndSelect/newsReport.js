@@ -64,7 +64,7 @@ $(function(){
 	                		   (list[i].isPromote?"<div class='items_img'>推荐</div> ":"")+
 	        	                "<div class=\"item1 cutmore\">" +
 	        	                "<a href='"+contextpath+"inforeport/toinforeport.action?id="+list[i].id+"'>"+list[i].title+"</a></div> "+
-	        	                "<div class=\"item2 cutmore\"><p style='margin:0'>"+list[i].summary+"</p></div> "+
+	        	                "<div class=\"item2 cutmore\"><p style='margin:0'>"+(list[i].summary==null?"(无摘要介绍)":list[i].summary)+"</p></div> "+
 	        	                "<div class=\"item3\">  "+
 	        	                    "<div style=\"float: left;\">" +
 		        	                    "<div style='float:left;height:57px'><span class='cms-icon look'></span></div>" +
