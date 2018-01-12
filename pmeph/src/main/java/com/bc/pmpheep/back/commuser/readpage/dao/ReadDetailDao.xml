@@ -1,25 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bc.pmpheep.back.commuser.readpage.dao.ReadDetailDao" >
+    <resultMap id="readdetailmMap" type="java.util.Map">
+    </resultMap>
 	<!-- 根据书籍ID查询数据相关信息 -->
-	<select id="queryReadBook" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="queryReadBook" parameterType="java.util.Map" resultMap="readdetailmMap">
 		select 
-	      t.id,
-	      t.bookname,
-	      t.image_url,
-	      t.author,
-	      t.publisher,
-	      t.publish_date,
-	      t.isbn,
-	      t.type,
-	      t.reader,
-	      t.revision,
-	      t.clicks,
-	      t.bookmarks,
-	      t.score,
-	      t.likes,
-	      t.buy_url,
-	      t.pdf_url,
+		  t.*,
 	      b.detail
 	      from book t 
 	      left join book_detail b  on t.id=b.book_id where t.id=#{id}		 
