@@ -198,4 +198,8 @@
 	        limit #{start},2
 	     </if> 
 	</select>
+	<!-- 根据ID增加点击数 -->
+	<update id="changeClicks" parameterType="java.util.Map">
+	    update book set clicks=#{clicks} where id=#{book_id}
+	</update>
 </mapper>

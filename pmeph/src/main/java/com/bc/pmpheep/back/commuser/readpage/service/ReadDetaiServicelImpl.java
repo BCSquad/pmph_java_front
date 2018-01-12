@@ -253,4 +253,13 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		}
 		return list;
 	}
+
+	/**
+	 * 根据ID改变点击数
+	 */
+	@Override
+	public void changeClicks(String book_id, int clicks) {
+		// TODO Auto-generated method stub
+		readDetailDao.changeClicks(book_id, clicks);
+	}
 }

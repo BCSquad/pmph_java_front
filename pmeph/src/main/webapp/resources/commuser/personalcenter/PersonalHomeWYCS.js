@@ -32,6 +32,7 @@
 		  $t.unbind().bind("click",function(){
 			  
 			  $("#auth_progress").val($t.val());
+			  $("#pageNum").val(1);
 			  queryMain();
 		  });
 	  });
@@ -39,6 +40,7 @@
 	  $("#wdsbssk").keyup(function(event){
 			if(event.keyCode ==13){ //回车键弹起事件
 				$("#bookname").val($("#wdsbssk").val());
+				$("#pageNum").val(1);
 				queryMain();
 			  }
 		});

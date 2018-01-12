@@ -15,7 +15,7 @@ $(function () {
 //下一页
 function on(state) {
     var startrows = $("#before").text();
-    var type = $(".tab-bar .tab.active").attr("id");
+    var type = $("#book_type").val();
     if (state == "next") {
         var flag = $("#next").text();
         if (flag == startrows) {
@@ -111,6 +111,7 @@ function changesale(type) {
 function cancel(){
 	$("#test_float").hide();
 	$("#test_float").attr('onclick','');
+	return false;
 }
 
 //跳转到问卷调查页面
@@ -120,5 +121,5 @@ function tosurvey(){
 
 //跳转公告详情页面
 function todou(mid){
-	location.href = contextpath + 'cmsnotice/noticeMessageDetail.action?id='+mid;
+	location.href = contextpath + 'community/tolist.action?id='+mid;
 }

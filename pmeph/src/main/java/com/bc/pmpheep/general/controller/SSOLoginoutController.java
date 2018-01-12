@@ -42,7 +42,7 @@ public class SSOLoginoutController {
             session.setAttribute(Const.SESSION_USER_CONST_TYPE, "2");
         }
 
-        if (StringUtils.isEmpty(request.getParameter("refer")) || request.getParameter("refer").endsWith("/")) {
+        if (StringUtils.isEmpty(request.getParameter("refer")) || request.getParameter("refer").endsWith("/")|| request.getParameter("refer").endsWith("tohomepage.action")) {
             if ("1".equals(usertype)) {
                 response.sendRedirect(request.getContextPath() + "/");
             } else if ("2".equals(usertype)) {

@@ -126,10 +126,6 @@
                     <div class="tab ${status.index==0?'active':''}" id="${type.id}"
                          onclick='chooseType("${type.id}")'>${type.type_name}</div>
                 </c:forEach>
-                <%--     <div class="tab active" id="633" onclick='chooseType("633")'>学校教育</div>
-                     <div class="tab" id="634" onclick='chooseType("634")'>毕业后教育</div>
-                     <div class="tab" id="635" onclick='chooseType("635")'>继续教育</div>
-                     <div class="tab" id="636" onclick='chooseType("636")'>教育用书</div>--%>
                 <div class="page ">
                     <div class="page-num">
                         <input type="hidden" id="book_type">
@@ -152,23 +148,10 @@
                 </c:forEach>
             </div>
             <div class="content">
-                <%-- <div class="left">
-                    <div class="div_photo1">
-                        <div class="label"><label style="font-size: 24px;color: #489399">热门标签</label></div>
-                        <div class="div1">
-                            <c:forEach items="${listLabel}" var="item" varStatus="status">
-                                <a href="${item.type}" class="little"><span
-                                        class="little_content">${item.note}</span></a>
-                            </c:forEach>
-                        </div>
-                    </div>
-                    <div class="div_photo"></div>
-                    <div class="div_photo"></div>
-                </div> --%>
                 <div class="left">
                     <div class="left_one">
                         <div class="textbook_left">教材社区</div>
-                        <div class="all_left" onclick="window.location.href='${ctx}/cmsnotice/tolist.action'">全部>></div>
+                        <div class="all_left" onclick="window.location.href='${ctx}/community/tolist.action'">全部>></div>
                         <c:forEach items="${listDou}" var="list" varStatus="status">
 	                      <c:if test="${status.index==0}">
 	                        <div class="left_con1" style="margin-top: 63px;" onclick="todou('${list.mid}')">${list.title}</div>
@@ -366,11 +349,11 @@
         </div>
         <div style="clear: both"></div>
     </div>
-    <a href="<c:url value="/survey/surveyList.action"/>" class="test" id="test_float">
+    <div class="test" id="test_float" onclick="tosurvey()">
         <div class="cancel" onclick="cancel()">关闭</div>
-    </a>
+    </div>
 </div>
     <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
+</div>
 </body>
-
 </html>

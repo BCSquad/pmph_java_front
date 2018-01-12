@@ -150,4 +150,11 @@ public interface ReadDetailDao {
 	 * @return List<Map<String, Object>>
 	 */
 	List<Map<String, Object>> queryLong(@Param("book_id") String book_id,@Param("start") int start);
+	/**
+	 * 根据ID修改点击数
+	 * @param book_id
+	 * @param clicks
+	 * @return
+	 */
+	void changeClicks(@Param("book_id") String book_id,@Param("clicks") int clicks);
 }

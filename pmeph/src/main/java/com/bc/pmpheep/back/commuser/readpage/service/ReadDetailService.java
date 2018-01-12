@@ -119,4 +119,10 @@ public interface ReadDetailService {
 	 * @return
 	 */
 	List<Map<String, Object>> queryLong(String book_id,int start);
+	/**
+	 * 根据ID编辑点击数
+	 * @param book_id 书籍ID
+	 * @param clicks 点击数
+	 */
+	void changeClicks(String book_id,int clicks);
 }
