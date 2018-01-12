@@ -49,7 +49,7 @@
             <div class="upload">
                 <label style="margin-left: 20px" class="labell">纠错内容附件</label>
                 <div style="position: relative">
-                    <input type="button" id="uploadFile" value="选择文件" class="upbutten">
+                    <div id="uploadFile" class="upbutten">选择文件</div>
                 </div>
                 <label class="uploadfile" id="upname">未选择任何文件!</label>
                 <input type="hidden" id="attachment"/>
