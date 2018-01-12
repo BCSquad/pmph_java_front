@@ -52,8 +52,15 @@ public class ReadDetailController extends BaseController{
 	public ModelAndView move(HttpServletRequest request){
 		ModelAndView modelAndView=new ModelAndView();
 		String id=request.getParameter("id");
+		id="7";
 		Map<String, Object> supMap=readDetailService.querySupport(id);
 		Map<String, Object> map=readDetailService.queryReadBook(id);
+		String urlString=(String)map.get("pdf_url");
+		System.out.print(urlString);
+		if (urlString==null) {
+			map.put("pdf_url", null);
+		}
+		
 		if(("DEFAULT").equals(map.get("image_url"))){
 			map.put("image_url", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
 		}
@@ -363,7 +370,8 @@ public class ReadDetailController extends BaseController{
 	@RequestMapping("tologin")
 	@ResponseBody
 	public String tologin(){
-		return "";
+		String returncode="OK";
+		return returncode;
 	}
 	
 	/**
