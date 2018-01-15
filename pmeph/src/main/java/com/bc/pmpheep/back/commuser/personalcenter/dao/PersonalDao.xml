@@ -165,7 +165,7 @@
 		a.is_deleted = '0'
 		AND ((a.is_public = '0' and o.org_id = u.org_id) or (a.is_public = '1'))
 		AND a.is_published = '1'
-		AND b.online_progress not in (2)
+<!-- 		AND b.online_progress not in (2) -->
 		<if test="parameter.s!=null and parameter.s!= ''">AND c.id is not null </if>
 		<if test="parameter.is_staging!=null and parameter.is_staging!= ''">AND c.is_staging =#{parameter.is_staging}</if>
 		<if
@@ -204,7 +204,7 @@
 		a.is_deleted = '0'
 		AND ((a.is_public = '0' and o.org_id = u.org_id) or (a.is_public = '1'))
 		AND a.is_published = '1'
-		AND b.online_progress not in (2)
+		<!-- AND b.online_progress not in (2) -->
 		<if test="parameter.s!=null and parameter.s!= ''">AND c.id is not null </if>
 		<if test="parameter.is_staging!=null and parameter.is_staging!= ''">AND c.is_staging =#{parameter.is_staging}</if>
 		<if
