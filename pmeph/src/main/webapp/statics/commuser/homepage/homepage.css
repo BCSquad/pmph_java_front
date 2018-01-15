@@ -394,7 +394,7 @@ ul li {
 
 .left_con1{
 	width: 280px;
-	height: 35px;
+	height: 40px;
 	margin-left: 15px;
 	margin-top: 18px;
 	font-family: MicrosoftYaHei;
@@ -531,7 +531,9 @@ ul li {
 .area-3 .content .table li {
     height: 28px;
     line-height: 28px;
-    color: #333333
+    color: #333333;
+    text-overflow: ellipsis; /*超出部分省略号显示*/
+    white-space: nowrap; /*强制不换行*/
 }
 
 .notice {
@@ -576,7 +578,7 @@ ul li {
     cursor: pointer;
     /*display: inline-block;*/
     float: left;
-    padding: 10px;
+    padding: 11px;
     padding-bottom: 3px;
     border-bottom: 3px solid white;
     color: #999999;
@@ -636,7 +638,6 @@ ul li {
     width: 12px;
     height: 24px;
     cursor: pointer;
-    cursor: pointer
 }
 
 .tab-bar .page .icon-right {
@@ -1276,12 +1277,11 @@ ul li {
 
 .right_div1 {
     width: 86px;
-    height: 39px;
+    height: 40px;
     line-height: 39px;
     text-align: center;
     float: left;
     margin-left: 0px;
-    border-bottom: 1px solid #ffffff;
     cursor: pointer
 }
 
