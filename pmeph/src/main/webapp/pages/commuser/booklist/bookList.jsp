@@ -15,7 +15,7 @@
     <title>图书列表</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="<%=path%>/statics/css/base.css" type="text/css">
-    <link rel="stylesheet" href="<%=basePath%>/statics/commuser/booklist/bookList.css" type="text/css">
+    <link rel="stylesheet" href="<%=path%>/statics/commuser/booklist/bookList.css" type="text/css">
     <link rel="stylesheet" href="<%=path%>/statics/css/jquery.pager.css"/>
     <link rel="stylesheet" href="<%=path%>/statics/css/jquery.selectlist.css"/>
     <script src="<%=path%>/resources/comm/jquery/jquery.js"></script>
@@ -61,7 +61,7 @@
 			                			<img class="pictureSize" src="${books.imageUrl }">
 			                		</c:when>
 			                		<c:otherwise>
-			                			<img class="pictureSize" src="<%=basePath%>/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg">
+			                			<img class="pictureSize" src="<%=path%>/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg">
 			                		</c:otherwise>
 			                	</c:choose>
 			                </div>
@@ -158,7 +158,7 @@
     });
     //分页
     function pageFun(pageSize,pageNumber,order,materialType){
-    	window.location.href = '<%=basePath%>/books/list.action?pageSize='+pageSize+'&pageNumber='+pageNumber+'&order='+order+'&type='+materialType;
+    	window.location.href = '<%=path%>/books/list.action?pageSize='+pageSize+'&pageNumber='+pageNumber+'&order='+order+'&type='+materialType;
     }
 </script>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include> 
