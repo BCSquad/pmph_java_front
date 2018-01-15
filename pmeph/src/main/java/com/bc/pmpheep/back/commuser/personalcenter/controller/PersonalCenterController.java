@@ -55,7 +55,7 @@ public class PersonalCenterController extends BaseController {
     
 
     @RequestMapping("/tohomepage")//个人中心动态
-    public ModelAndView move(@RequestParam(value="pagetag",defaultValue="dt")String pagetag
+    public ModelAndView move(@RequestParam(value="pagetag",defaultValue="sbwz")String pagetag
     						,HttpServletRequest request
     						,@RequestParam(value="pageNum",defaultValue="1")Integer pageNum
     						,@RequestParam(value="pageSize",defaultValue="10")Integer pageSize

@@ -278,7 +278,7 @@ public class PersonalServiceImpl implements PersonalService {
 	}
 
 	@Override
-	public void saveUserTrendst(String TrendstName, String tableId,int trendstType, String writer_user_id) {
+	public void saveUserTrendst(String TrendstName, String tableId,int trendstType, String writer_user_id) {/*
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("TrendstName", TrendstName);
 		paraMap.put("tableId", tableId);
@@ -294,7 +294,7 @@ public class PersonalServiceImpl implements PersonalService {
 			paraMap.put("writer_user_id", firstEditorId);
 			int count_corrected = personaldao.saveUserTrendst(paraMap);
 		}
-	}
+	*/}
 
 		@Override
 		public Map<String, Object> deleteMyCorrection(String id,String logUserId) {
