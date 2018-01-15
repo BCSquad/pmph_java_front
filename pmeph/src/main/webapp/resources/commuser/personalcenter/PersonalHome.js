@@ -52,6 +52,7 @@ function queryMain(){
 		+$("#pagetag").val()
 		+"&pageNum="+$("#pageNum").val()
 		+"&pageSize="+$("#pageSize").val()
+		+"&userId="+$("#logUserId").val()
 		+queryConditionStr;
 
 }

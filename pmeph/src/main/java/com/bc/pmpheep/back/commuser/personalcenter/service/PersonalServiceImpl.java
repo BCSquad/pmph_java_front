@@ -331,5 +331,11 @@ public class PersonalServiceImpl implements PersonalService {
 			return result_map;
 		}
 
+		@Override
+		public Map<String, Object> queryUserById(String userId) {
+			Map<String, Object> result_map = personaldao.queryUserById(userId);
+			return result_map;
+		}
+
 
 }

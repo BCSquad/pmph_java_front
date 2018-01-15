@@ -182,6 +182,13 @@ public interface PersonalService {
 	 */
 	public Map<String, Object> deleteMyBookComment(String id, String logUserId);
 
+	/**
+	 * 通过id查user
+	 * @param userId
+	 * @return
+	 */
+	public Map<String, Object> queryUserById(String userId);
+
 	
 	
 	

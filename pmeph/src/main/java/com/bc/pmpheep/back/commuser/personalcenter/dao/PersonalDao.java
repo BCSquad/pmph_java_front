@@ -168,6 +168,12 @@ public interface PersonalDao {
 	 * @return
 	 */
 	public int deleteMyBookComment(Map<String, Object> para_map);
+	/**
+	 * 查用户
+	 * @param userId
+	 * @return
+	 */
+	public Map<String, Object> queryUserById(String userId);
 	
 	
 }

@@ -62,20 +62,49 @@ public class PersonalCenterController extends BaseController {
     						) throws UnsupportedEncodingException {
 
     	ModelAndView mv = new ModelAndView();
-        Map<String, Object> permap = this.getUserInfo();//个人信息
-        mv.addObject("permap", permap);
-        //查询个人主页共用部分 收藏 好友 小组
-        queryPersonalRightPageInfo(mv, permap);
+        
+       
+        
+        
+        Map<String, Object> vm_map = new HashMap<String, Object>();
 
         Map<String, Object> paraMap = new HashMap<String, Object>();
         String contextpath = request.getContextPath()+"/";
         String logUserId = getUserInfo().get("id").toString();
-		paraMap.put("logUserId", logUserId);
+        Map<String, Object> permap = new HashMap<String, Object>();
+        
+        
+        
+        //所进入的是谁的主页
+        String userId = request.getParameter("userId");
+        Boolean selfLog = null;
+        if (userId != null && !"".equals(userId.trim()) && !logUserId.equals(userId.trim())) {
+        	paraMap.put("logUserId", userId);
+			vm_map.put("logUserId", userId);
+			mv.addObject("logUserId",userId);
+			permap = personalService.queryUserById(userId);
+			selfLog = false;
+		}else{
+			paraMap.put("logUserId", logUserId);
+        	vm_map.put("logUserId", logUserId);
+        	mv.addObject("logUserId",logUserId);
+        	permap = this.getUserInfo();//个人信息
+        	selfLog = true;
+		}
+        paraMap.put("selfLog", selfLog);
+        mv.addObject("selfLog", selfLog);
+        vm_map.put("selfLog", selfLog);
+        
+      //查询个人主页共用部分 收藏 好友 小组
+        queryPersonalRightPageInfo(mv, permap);
+        
+        mv.addObject("permap", permap);
+        
 		//数据总数初始化
 		int count = 0;
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<Map<String,Object>>(pageNum,pageSize);
-		Map<String, Object> vm_map = new HashMap<String, Object>();
-		vm_map.put("logUserId", logUserId);
+		
+		
         
     	//页签分支
     	if ("dt".equals(pagetag)) { //动态
@@ -211,7 +240,7 @@ public class PersonalCenterController extends BaseController {
     	
     	//总页数
     	Integer maxPageNum = (int) Math.ceil(1.0*count/pageSize);
-    	mv.addObject("logUserId",logUserId);
+    	
     	mv.addObject("listCount",count);
     	mv.addObject("maxPageNum",maxPageNum);
     	mv.addObject("pagetag",pagetag);

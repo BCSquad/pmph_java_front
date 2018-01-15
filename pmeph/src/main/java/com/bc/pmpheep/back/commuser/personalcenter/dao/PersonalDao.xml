@@ -943,6 +943,10 @@
 		id= #{id} and writer_id = #{logUserId}
 	</update>
 
+	<select id="queryUserById" parameterType="String" resultType="Map">
+		select * from writer_user 
+		where id = #{id}
+	</select>
 
 
 
