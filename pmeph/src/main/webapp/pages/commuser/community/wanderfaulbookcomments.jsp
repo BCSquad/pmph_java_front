@@ -15,7 +15,7 @@ String contextpath=request.getContextPath();
 	<c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
 	<base href="<%=basePath%>">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Insert title here</title>
+	<title>精彩书评</title>
     <link rel="stylesheet" href="<%=path%>/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="<%=path%>/statics/css/jquery.pager.css"/>
     <link rel="stylesheet" href="<%=path%>/statics/css/jquery.selectlist.css"/>

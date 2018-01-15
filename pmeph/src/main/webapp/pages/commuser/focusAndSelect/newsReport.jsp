@@ -16,7 +16,7 @@
     
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-    <title>信息快报</title>
+    <title>信息快报列表</title>
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/focusAndSelect/newsReportAndMaterialNotice.css" type="text/css"> 

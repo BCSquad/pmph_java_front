@@ -16,6 +16,7 @@ String basePath =path+"/";
     </script>
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>文章收藏</title>
  <link rel="stylesheet" href="<%=path %>/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="<%=path %>/statics/commuser/collection/articlecollection.css" type="text/css">
     <script src="<%=path %>/resources/comm/jquery/jquery.js"></script>

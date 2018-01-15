@@ -15,7 +15,7 @@
        var contextpath = '${pageContext.request.contextPath}/';
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-    <title>公告</title>
+    <title>遴选公告列表</title>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/focusAndSelect/newsReportAndMaterialNotice.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>

@@ -18,6 +18,7 @@ String basePath =path+"/";
 <head>
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>信息快报详情</title>
  <link rel="stylesheet" href="<%=path %>/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="<%=path %>/statics/css/jquery.pager.css"/>
     <link rel="stylesheet" href="<%=path %>/statics/css/jquery.selectlist.css"/>

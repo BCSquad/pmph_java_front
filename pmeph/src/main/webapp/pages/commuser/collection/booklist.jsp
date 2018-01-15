@@ -15,6 +15,7 @@ String basePath = path+"/";
 <c:set var="ctx" value="${pageContext.request.contextPath }"/>
 <head>
 <base href="<%=basePath%>">
+<title>书籍收藏列表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
  <link rel="stylesheet" href="<%=path %>/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="<%=path %>/statics/css/jquery.pager.css"/>
