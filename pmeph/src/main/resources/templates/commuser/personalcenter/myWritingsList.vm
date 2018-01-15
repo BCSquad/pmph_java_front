@@ -31,7 +31,7 @@
                     	#elseif($!{c.auth_status}==2&&$!{c.is_staging}!='0')
                     		<div class="status_tag Audited">已通过</div>
                     	#end
-                        <span class="suibibiaoti">$!{c.title}</span></div>
+                        <a target="_blank" href="$!{contextpath}articledetail/toPage.action?wid=$!{c.id}" ><span class="suibibiaoti">$!{c.title}</span></div></a>
                         <div class="shangright">$!{c.gmt_update}</div>
                     <br/>
                     <span class="suibineirong">$!{c.summary}</span>
@@ -43,10 +43,12 @@
 	                <span id="bianji"></span>
 	                <span class="dtxiawz"><a href="$!{contextpath}writerArticle/initWriteArticle.action?id=$!{c.id}&&userid=$!{permap.id}">编辑</a></span>
                 #end
+                #if($!{c.selfLog}=="true")
                 <div class="operate_wrapper">
 	                <a target="_blank" href="$!{contextpath}writerArticle/initWriteArticle.action?id=$!{c.id}&userid=$!{logUserId}"><div class="img img_edit" ></div><div>编辑</div></a> 
 			        <a onclick="deleteArticle('$!{c.id}','$!{c.title}')" ><div class="img img_delete"></div><div>删除</div></a>
                 </div>
+                #end
             </div>
             <div id="tzxian"></div>
         </div>

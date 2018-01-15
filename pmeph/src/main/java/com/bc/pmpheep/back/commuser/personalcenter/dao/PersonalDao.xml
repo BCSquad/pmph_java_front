@@ -106,6 +106,9 @@
 		<if test="parameter.auth_status != null and parameter.auth_status != '' ">
 			and cc.auth_status = #{parameter.auth_status}
 		</if>
+		<if test='parameter.selfLog == false '>
+			and cc.auth_status = 2
+		</if>
 		limit ${start},${pageSize}
 	</select>
 
@@ -121,6 +124,9 @@
 		where cc.author_id=#{parameter.logUserId} and cc.is_deleted !='1'
 		<if test="parameter.auth_status != null and parameter.auth_status != '' ">
 			and cc.auth_status = #{parameter.auth_status}
+		</if>
+		<if test='parameter.selfLog == false '>
+			and cc.auth_status = 2
 		</if>
 		)t
 	</select>
@@ -391,6 +397,9 @@
 		bc.is_deleted = '0'
 		<if test="parameter.is_replied != null and parameter.is_replied != '' ">
 			AND bc.is_editor_replied = #{parameter.is_replied}
+		</if>
+		<if test='parameter.selfLog == false '>
+			and bc.is_editor_replied = 1
 		</if>
 		order by bc.gmt_create desc
 		limit ${start},${pageSize}

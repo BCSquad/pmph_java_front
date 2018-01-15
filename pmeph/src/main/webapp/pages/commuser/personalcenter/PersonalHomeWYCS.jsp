@@ -112,7 +112,9 @@ request.setAttribute("currentTime",datetime);
                     	<li id="jcsb" class="dtl pagetag"><a class="aher paged" >教材申报</a></li>
                     </c:if>
                     <li id="sbwz" class="dtl pagetag"><a class="aher paged">随笔文章</a></li>
-                    <li id="tsjc" class="dtl pagetag"><a class="aher paged">图书纠错</a></li>
+                    <c:if test="${selfLog == true }">
+                    	<li id="tsjc" class="dtl pagetag"><a class="aher paged">图书纠错</a></li>
+                    </c:if>
                     <c:if test="${selfLog == true }">
                     	<li id="wycs" class="dtl pagetag"><a class="aher paged"  >我要出书</a></li>
                     </c:if>
@@ -210,7 +212,7 @@ request.setAttribute("currentTime",datetime);
                 				
                 				<%-- 未通过动态 --%>
                 				
-                					<c:when test="${c.table_name == 'jcsb' && c.trendst_type == 2}"><%-- 教材申报 未通过 --%>
+                					<c:when test="${c.table_name == 'jcsb' && c.trendst_type == 2&& selfLog == true}"><%-- 教材申报 未通过 --%>
                							<div class="issue_line"><span class="issue_name">未通过审核</span><span class="issue_time">${c.trendst_date }</span></div>
             							<div class="msg_line">
             								
@@ -221,7 +223,7 @@ request.setAttribute("currentTime",datetime);
                								<div class="fail_unhappy"></div>
                							</div>
                						</c:when>
-               						<c:when test="${c.table_name == 'sbwz' && c.trendst_type == 2}"><%-- 随笔文章 未通过 --%>
+               						<c:when test="${c.table_name == 'sbwz' && c.trendst_type == 2&& selfLog == true}"><%-- 随笔文章 未通过 --%>
                							<div class="issue_line"><span class="issue_name">未通过审核</span><span class="issue_time">${c.trendst_date }</span></div>
                							<div class="msg_line">
                								
@@ -232,7 +234,7 @@ request.setAttribute("currentTime",datetime);
                								<div class="fail_unhappy"></div>
                							</div>
                						</c:when>
-               						<c:when test="${c.table_name == 'tsjc' && c.trendst_type == 2}"><%-- 图书纠错 未通过 --%>
+               						<c:when test="${c.table_name == 'tsjc' && c.trendst_type == 2&& selfLog == true}"><%-- 图书纠错 未通过 --%>
                							<div class="issue_line"><span class="issue_name">未通过审核</span><span class="issue_time">${c.trendst_date }</span></div>
                							<div class="msg_line">
                								
@@ -243,7 +245,7 @@ request.setAttribute("currentTime",datetime);
                								<div class="success_smile"></div>
                							</div>
                						</c:when>
-               						<c:when test="${c.table_name == 'wycs' && c.trendst_type == 2}"><%-- 我要出书 未通过 --%>
+               						<c:when test="${c.table_name == 'wycs' && c.trendst_type == 2&& selfLog == true}"><%-- 我要出书 未通过 --%>
                							<div class="issue_line"><span class="issue_name">未通过审核</span><span class="issue_time">${c.trendst_date }</span></div>
                							<div class="msg_line">
                								
@@ -254,7 +256,7 @@ request.setAttribute("currentTime",datetime);
                								<div class="fail_unhappy"></div>
                							</div>
                						</c:when>
-               						<c:when test="${c.table_name == 'wdjc' && c.trendst_type == 2}"><%-- 我要纠错 未通过 --%>
+               						<c:when test="${c.table_name == 'wdjc' && c.trendst_type == 2&& selfLog == true}"><%-- 我要纠错 未通过 --%>
                							<div class="issue_line"><span class="issue_name">未通过审核</span><span class="issue_time">${c.trendst_date }</span></div>
                							<div class="msg_line">
                								<div class="msg_content">
@@ -264,7 +266,7 @@ request.setAttribute("currentTime",datetime);
                								<div class="fail_unhappy"></div>
                							</div>
                						</c:when>
-               						<c:when test="${c.table_name == 'wdsp' && c.trendst_type == 2}"><%-- 我的书评 未通过 --%>
+               						<c:when test="${c.table_name == 'wdsp' && c.trendst_type == 2&& selfLog == true}"><%-- 我的书评 未通过 --%>
                							<div class="issue_line"><span class="issue_name">未通过审核</span><span class="issue_time">${c.trendst_date }</span></div>
                							<div class="msg_line">
                								
@@ -275,13 +277,14 @@ request.setAttribute("currentTime",datetime);
                								<div class="fail_unhappy"></div>
                							</div>
                						</c:when>
-               						<c:when test="${c.table_name == 'wdwj' && c.trendst_type == 2}"><%-- 我的问卷 未通过 --%>
+               						<c:when test="${c.table_name == 'wdwj' && c.trendst_type == 2&& selfLog == true}"><%-- 我的问卷 未通过 --%>
                							
                						</c:when>
                 				
+                				
                 				<%-- 发表动态 --%>
                 				
-                					<c:when test="${c.table_name == 'jcsb' && c.trendst_type == 0}"><%-- 教材申报 发表 --%>
+                					<c:when test="${c.table_name == 'jcsb' && c.trendst_type == 0&& selfLog == true}"><%-- 教材申报 发表 --%>
                							<div class="issue_line"><span class="issue_name">申报了编写教材</span><span class="issue_time">${c.trendst_date }</span></div>
                 						<div>您申报的《${c.jcsb_textbook_name}》${c.preset_position }已提交成功，请耐心等待遴选结果。</div>		
                						</c:when>
@@ -307,7 +310,7 @@ request.setAttribute("currentTime",datetime);
                									<div class="article_summary">${c.sbwz_is_deleted == "0"?c.sbwz_summary:"该文章已删除" } ...</div>
                								</div>
                							</div>
-               							<c:if test="${c.sbwz_is_deleted =='0'}">
+               							<c:if test="${c.sbwz_is_deleted =='0' && selfLog == true}">
 	               							<div class="operate_wrapper">
 		               							<a target="_blank" href="${ctx }/writerArticle/initWriteArticle.action?id=${c.sbwz_id}&userid=${logUserId}"><div class="img img_edit" ></div><div>编辑</div></a> 
 		               							<a onclick="deleteArticle('${c.sbwz_id}','${c.sbwz_title }')" ><div class="img img_delete"></div><div>删除</div></a>
@@ -336,7 +339,7 @@ request.setAttribute("currentTime",datetime);
                								</div>
                							</div>
                						</c:when>
-               						<c:when test="${c.table_name == 'wycs' && c.trendst_type == 0}"><%-- 我要出书 发表 --%>
+               						<c:when test="${c.table_name == 'wycs' && c.trendst_type == 0&& selfLog == true}"><%-- 我要出书 发表 --%>
                							<div class="issue_line"><span class="issue_name">提交了选题</span><span class="issue_time">${c.trendst_date }</span></div>
 										<div class="msg_line">
                								<div class="msg_content">
@@ -370,7 +373,7 @@ request.setAttribute("currentTime",datetime);
                									<div class="book_detail">${c.wdjc_detail }</div>
                								</div>
                							</div>
-               							<c:if test="${c.wdjc_is_deleted =='0'}">
+               							<c:if test="${c.wdjc_is_deleted =='0'&& selfLog == true}">
 	               							<div class="operate_wrapper">
 		               							<a onclick="deleteMyCorrect(${c.wdjc_id})"><div class="img img_delete"></div><div>删除</div></a>
 	               							</div>
@@ -408,7 +411,7 @@ request.setAttribute("currentTime",datetime);
                									<div class="book_detail">${c.wdsp_detail }</div>
                								</div>
                							</div>
-               							<c:if test="${c.wdsp_is_deleted =='0'}">
+               							<c:if test="${c.wdsp_is_deleted =='0'&& selfLog == true}">
 	               							<div class="operate_wrapper">
 		               							<a onclick="deleteMyBookComment(${c.wdsp_id})"><div class="img img_delete"></div><div>删除</div></a>
 	               							</div>
