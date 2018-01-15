@@ -103,7 +103,8 @@
             <c:forEach items="${listNot}" var="list" varStatus="status">
                 <c:if test="${status.index==0}">
                     <div class="content-photo">
-                        <p class="content-size">${list.title}</p>
+                        <p class="content-size"><a href="inforeport/toinforeport.action?id=${list.id}"
+                        style="color: #666666;text-decoration:none;">${list.title}</a></p>
                         <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date"
                                                                   pattern="yyyy-MM-dd"/></p>
                     </div>
@@ -113,7 +114,8 @@
                 <ul class="table">
                     <c:forEach items="${listNot}" var="list" varStatus="status">
                         <c:if test="${status.index!=0}">
-                            <li>> ${list.title}</li>
+                            <li><a href="inforeport/toinforeport.action?id=${list.id}"
+                            style="color: #666666;text-decoration:none;">> ${list.title}</a></li>
                         </c:if>
                     </c:forEach>
                 </ul>
