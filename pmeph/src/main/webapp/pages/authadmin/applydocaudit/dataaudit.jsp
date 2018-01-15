@@ -41,7 +41,7 @@
 			</div>
 			<div class="box" >
 				<div class="query_btn">
-					<div class="query">
+					<div class="query00">
 						<input class="query_input" id="search-name-temp"  />
 					</div>
 					<div class="btn">

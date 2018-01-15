@@ -26,23 +26,27 @@
 }
 
 .query_btn{
+	
     height: 80px;
+    width: 100%;
 }
-.query{
+.query00{
+	float:left;
     padding-top: 15px;
     margin-left: 15px;
+    margin-top:10px;
 }
 .query_input{
-    float: left;
-    width: 358px;
-    height: 40px;
+    width: 350px;
+    height: 30px;
     border: solid 1px #ededed;
 }
 
 .btn{
+	 margin-top:10px;
     float: right;
-    width: 825px;
-    padding-top: 5px;
+    width: 823px;
+    padding-top: 15px;
 
 }
 
