@@ -64,8 +64,10 @@ public class MaterialDetailController extends BaseController{
 		//书籍信息
 		List<Map<String,Object>> bookList = this.mdService.queryBookById(material_id);
 		StringBuffer bookSelects = new StringBuffer();
-		for (Map<String, Object> map : bookList) {
-			bookSelects.append("<option value='"+map.get("id")+"'>"+map.get("textbook_name")+"</option>");
+		if(bookList.size()>0){
+			for (Map<String, Object> map : bookList) {
+				bookSelects.append("<option value='"+map.get("id")+"'>"+map.get("textbook_name")+"</option>");
+			}
 		}
 		//机构信息
 		List<Map<String,Object>> orgList = this.mdService.queryOrgById(material_id);
