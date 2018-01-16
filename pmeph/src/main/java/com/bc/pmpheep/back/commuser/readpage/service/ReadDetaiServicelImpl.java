@@ -77,7 +77,7 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		// TODO Auto-generated method stub
 		Map<String, Object> rmap=new HashMap<String, Object>();
 	    readDetailDao.insertComment(map);
-	    personalService.saveUserTrendst("wdsp", map.get("table_trendst_id").toString(), 0, map.get("writer_id").toString());
+	    //personalService.saveUserTrendst("wdsp", map.get("table_trendst_id").toString(), 0, map.get("writer_id").toString());
 	    rmap.put("returncode", "OK");
 	    return rmap;
 	}
@@ -210,7 +210,7 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		int count=readDetailDao.correction(map);
 		if(count>0){
 			returncode="OK";
-			personalService.saveUserTrendst("wdjc", map.get("table_trendst_id").toString(), 0, map.get("user_id").toString());
+			//personalService.saveUserTrendst("wdjc", map.get("table_trendst_id").toString(), 0, map.get("user_id").toString());
 		}
 		return returncode;
 	}
