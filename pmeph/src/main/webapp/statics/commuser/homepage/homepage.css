@@ -442,7 +442,7 @@ ul li {
 	width: 67px;
 	height: 27px;
 	background-color: #33CAA9;
-    margin-top: -32px;
+    margin-top: -25px;
     margin-left: 170px;
     border-radius:3px;
 	font-family: MicrosoftYaHei;
@@ -526,6 +526,8 @@ ul li {
     margin: 0px;
     list-style: none;
     font-size: 14px;
+    width: 430px;
+    word-break:break-all;
 }
 
 .area-3 .content .table li {
@@ -534,6 +536,7 @@ ul li {
     color: #333333;
     text-overflow: ellipsis; /*超出部分省略号显示*/
     white-space: nowrap; /*强制不换行*/
+    overflow: hidden;
 }
 
 .notice {
@@ -625,6 +628,7 @@ ul li {
 
 .tab-bar .page .page-num {
     float: right;
+    width: 120px;
 }
 
 .beforepage {
@@ -1283,6 +1287,11 @@ ul li {
     float: left;
     margin-left: 0px;
     cursor: pointer
+}
+
+.astyle{
+	color: #666666;
+	text-decoration:none;
 }
 
 .right_div1.active {
