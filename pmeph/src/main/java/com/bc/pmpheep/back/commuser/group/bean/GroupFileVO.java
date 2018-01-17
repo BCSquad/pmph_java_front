@@ -35,6 +35,10 @@ public class GroupFileVO implements Serializable {
 	 */
 	private String fileName;
 	/**
+	 * 文件大小
+	 */
+	private Double fileSize;
+	/**
 	 * 下载次数
 	 */
 	private Integer download;
@@ -64,7 +68,7 @@ public class GroupFileVO implements Serializable {
 		this.id = id;
 	}
 
-	public GroupFileVO(Long groupId, Long memberId, String fileId, String fileName, Integer download,
+	public GroupFileVO(Long groupId, Long memberId, String fileId, String fileName, Integer download,Double fileSize,
 			Timestamp gmtCreate) {
 		super();
 		this.groupId = groupId;
@@ -72,6 +76,7 @@ public class GroupFileVO implements Serializable {
 		this.fileId = fileId;
 		this.fileName = fileName;
 		this.download = download;
+		this.fileSize = fileSize;
 		this.gmtCreate = gmtCreate;
 	}
 
@@ -147,13 +152,21 @@ public class GroupFileVO implements Serializable {
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
 	}
+	
+	public Double getFileSize() {
+		return fileSize;
+	}
+
+	public void setFileSize(Double fileSize) {
+		this.fileSize = fileSize;
+	}
 
 	@Override
 	public String toString() {
-		return "{id:" + id + ", groupId:" + groupId + ", memberId:" + memberId
-				+ ", fileId:" + fileId + ", fileName:" + fileName
-				+ ", download:" + download + ", gmtCreate:" + gmtCreate
-				+ ", deletePower:" + deletePower + ", displayName:"
+		return "{id:" + id + ",groupId:" + groupId + ",memberId:" + memberId
+				+ ",fileId:" + fileId + ",fileName:" + fileName + ",fileSize:"
+				+ fileSize + ",download:" + download + ",gmtCreate:"
+				+ gmtCreate + ",deletePower:" + deletePower + ",displayName:"
 				+ displayName + "}";
 	}
 
