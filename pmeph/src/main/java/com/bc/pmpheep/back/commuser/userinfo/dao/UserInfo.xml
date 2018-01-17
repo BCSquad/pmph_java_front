@@ -32,4 +32,13 @@
     <update id="updateavatar" parameterType="java.util.Map">
        update writer_user set avatar=#{avatar} where id=#{id}
     </update>
+    
+        <!--修改密码-->
+    <update id="updatePassword" parameterType="java.util.Map">
+        UPDATE writer_user
+        <set>
+            <if test="password!=null and password!=null">password=#{password}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
 </mapper>

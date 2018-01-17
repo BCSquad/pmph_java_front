@@ -128,7 +128,7 @@
                 </td>
             </tr>
             <tr class="sxy-tr">
-                <td>
+                <td >
                   <div  style="width: 400px">
                     <span class="gender">性别</span>
                     <input type="hidden" value="${map.sex }" id="sex_hidden">
@@ -136,10 +136,10 @@
                     <input type="radio" value="2" class="sxy-radio" name="radio-set" id="sex2"/>女
                   </div>
                 </td>
-                <td>
-                  <div>
-                    <label class="require" style="margin-top: -23px">职称</label>
-                    <select class="sxy-select-td" id="title" name="title" style="padding-left: 20px;width: 240px">
+                <td >
+                  <div style="width: 400px;padding:0px;margin-top:-25px;">
+                    <label class="require" >职称</label>
+                    <select class="sxy-select-td" id="title" name="title" >
                         <option value="teacher1" ${map.title=='teacher1' ?'selected':''}>教师1</option>
                         <option value="teacher2" ${map.title=='teacher2' ?'selected':''}>教师2</option>
                         <option value="teacher3" ${map.title=='teacher3' ?'selected':''}>教师3</option>
@@ -148,7 +148,7 @@
                     </select>
                   </div>
                 </td>
-                <td>
+                <td >
                   <div  style="width: 400px">
                        <label class="require">手机</label>
                        <div class="input-wrapper">
@@ -208,12 +208,14 @@
                   </div>
                 </td>
                 <td>
-                    <label class="require"  style="margin-top: -23px">所属机构</label>
-	                    <select id="edu1" name="edu1" class="sxy-select-td">
+                <div  style="width: 400px;padding:0px;margin-top:-25px;">
+                    <label class="require"  >所属机构</label>
+	                    <select id="edu1" name="edu1" class="sxy-select-td" >
 		                    <option value="0" ${map.org_id=='0' ?'selected':''}>申报单位0</option>
 		                    <option value="1" ${map.org_id=='1' ?'selected':''}>申报单位1</option>
 		                    <option value="2" ${map.org_id=='2' ?'selected':''}>申报单位2</option>
 	                    </select>
+                </div>
                 </td>
             </tr>
             <tr class="sxy-tr">
@@ -232,7 +234,7 @@
                   <div  style="width: 400px">
                        <label class="require">地址</label>
                        <div class="input-wrapper">
-                          <input type="text" class="required" data-valid="isNonEmpty" data-error="地址不能为空"
+                          <input type="text" class="required" data-valid="isNonEmpty" data-error="地址不能为空"  onblur="javascript:LengthLimit(this,50);"
                             placeholder="填写地址"   id="address" name="address" style="width: 1040px" value="${map.address }">
                        </div>
                   </div>
@@ -243,7 +245,7 @@
                   <div style="width: 400px">
                       <label class="require">个人简介:</label>
                       <div class="input-wrapper">
-                          <input type="text" class="required" data-valid="isNonEmpty" data-error="个人简介不能为空"
+                          <input type="text" class="required" data-valid="isNonEmpty" data-error="个人简介不能为空" onblur="javascript:LengthLimit(this,100);"
                             placeholder="填写个人简介"  id="note" name="note" style="width: 1040px" value="${map.note }">
                       </div>
                   </div>
@@ -254,7 +256,7 @@
                    <div style="width: 400px">
                        <span class="sxy_span">个性签名:</span>
                        <div class="input-wrapper" style="margin-left: 20px">
-                           <input type="text" placeholder="填写个人签名" id="signature" 
+                           <input type="text" placeholder="填写个人签名" id="signature"  onblur="javascript:LengthLimit(this,50);"
                            name="signature" style="width: 1040px" value="${map.signature }">
                        </div>
                    </div>
@@ -274,7 +276,7 @@
             <tr class="sxy-tr">
                 <td colspan="9" align="center">
                      <button type="button" class="div1" onclick="save()">保存</button>
-                     <button type="button" class="div1">取消</button>
+                     <button type="button" class="div1" onclick="cancel()">取消</button>
                 </td>
             </tr>
             <tr class="sxy-tr">

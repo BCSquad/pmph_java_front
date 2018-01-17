@@ -73,6 +73,7 @@ function save(){
                 }*/
                 if (code=="success"){
 	                message.success("提交成功");
+	                
 	            }else{
 	            	message.error("提交失败");
 	            }
@@ -81,3 +82,4 @@ function save(){
     };
 
 }
+

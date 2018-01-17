@@ -175,15 +175,15 @@ body
 /*Ñ¡ÔñÏÂÀ­¿ò*/
 .sxy-select-td 
 {
-	margin-top:-25px;
+	
+	margin-top:0px;
     width: 283px;
 	background-color: #f1f1f1;
-	border-radius: 4px;
+	border-radius: 3px;
 	border: none;
 	font-family: MicrosoftYaHei;
 	font-size: 14px;
-	font-weight: normal;
-	letter-spacing: 0px;
+	
 	color: #333333;
 }
 
