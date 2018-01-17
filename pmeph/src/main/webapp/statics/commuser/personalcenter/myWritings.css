@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+
+.suibibt .status_tag{
+	font-size: 12px;
+	line-height: 18px;
+	height: 18px;
+	padding:0px 8px 0px 8px;
+	display: block;
+	float: left;
+	margin-right: 10px;
+	color: #ffffff
+}
+
+.suibibt a{
+	text-decoration: blink;
+}
+
+.suibibt .status_tag.toAudit{
+	background-color: #ff9a2e;
+}
+.suibibt .status_tag.reject{
+	background-color: #ff1800;
+}
+.suibibt .status_tag.Audited{
+	background-color: #65bd8d;
+}
+.suibibt .status_tag.toApply {
+    background-color: #a7a7a7;
+}
