@@ -153,7 +153,7 @@ public interface GroupDao {
 	 * @return List<GroupFile>
 	 */
 	List<GroupFileVO> getFiles(@Param("start") Integer start, @Param("pageSize") Integer pageSize,
-			@Param("groupId") Long groupId, @Param("fileName")String fileName, @Param("thisId")Long thisId);
+			@Param("groupId") Long groupId, @Param("fileName")String fileName, @Param("thisId")Long thisId,@Param("order")String order,@Param("rank")String rank);
 	
 	/**
 	 * 获取某小组文件的文件总数

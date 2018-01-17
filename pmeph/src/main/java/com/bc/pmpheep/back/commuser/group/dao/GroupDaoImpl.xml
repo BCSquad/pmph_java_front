@@ -165,6 +165,12 @@
 		 <if test="fileName != null and fileName != '' ">
 		 	and a.file_name like CONCAT('%',#{fileName},'%')
 		 </if>
+		 <if test="order == null">
+		    ORDER BY a.gmt_create desc 
+		 </if>
+		 <if test="order != null">
+		    ORDER BY #{order} #{rank}
+		 </if>
 		 limit #{start},#{pageSize}
     </select>
     
@@ -207,6 +213,9 @@
 			<if test="download != null and download !=''">
 				download,
 			</if>
+			<if test="fileSize != null ">
+				file_size,
+			</if>
 		</trim>
 	</sql>
 	<!-- sql片段对应?,id属性值任意 -->
@@ -227,6 +236,9 @@
 			</if>
 			<if test="download !=null and download !=''">
 				#{download},
+			</if>
+			<if test="fileSize != null ">
+				#{fileSize},
 			</if>
 		</trim>
 	</sql>
@@ -396,8 +408,8 @@
 	</insert>
 	<!-- 添加小组文件 -->
 	<insert id="addFile" parameterType="java.util.Map">
-		insert pmph_group_file(group_id,member_id,file_id,file_name) 
-			values(#{group_id},#{member_id},#{file_id},#{file_name})
+		insert pmph_group_file(group_id,member_id,file_id,file_name,file_size) 
+			values(#{group_id},#{member_id},#{file_id},#{file_name},#{file_size})
 	</insert>
 	<!-- 查询文件信息 -->
 	<select id="fileList" parameterType="java.util.Map" resultType="java.util.Map">
