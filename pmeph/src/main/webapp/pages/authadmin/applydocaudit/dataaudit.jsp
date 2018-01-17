@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <head>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-<title></title>
+<title>资料审核</title>
 <script type="text/javascript">
 	var contextpath="${pageContext.request.contextPath}/"
 </script>
@@ -42,7 +42,7 @@
 			<div class="box" >
 				<div class="query_btn">
 					<div class="query00">
-						<input class="query_input" id="search-name-temp"  />
+						姓名：<input class="query_input" id="search-name-temp"  />
 					</div>
 					<div class="btn">
 						<button class="btn_1"  id="btn-search" onclick="queryBtnClick()">查 询</button>
