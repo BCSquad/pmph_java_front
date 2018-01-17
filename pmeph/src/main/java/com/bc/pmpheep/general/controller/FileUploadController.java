@@ -16,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.ui.Model;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author: SuiXinYang
@@ -40,11 +42,17 @@ public class FileUploadController {
      */
     @ResponseBody
     @RequestMapping(value = "/file/upload", method = RequestMethod.POST)
-    public ResponseBean upload(Model model, @RequestParam("file") MultipartFile file) {
-        try {
-            return new ResponseBean(fileService.save(file, FileType.GROUP_FILE, 0));
+    public ResponseBean<Object> upload(Model model, @RequestParam("file") MultipartFile file) {
+    	Map<String,Object> map = new HashMap<String,Object>();
+    	try {
+        	Long fileSize = file.getSize();
+        	map.put("fileId",  fileService.save(file, FileType.GROUP_FILE, 0));
+        	map.put("fileSize",fileSize);
+            return new ResponseBean<Object>(map);
         } catch (IOException ex) {
-            return new ResponseBean(ex);
-        }
+            return new ResponseBean<Object>(ex);
+        } catch (Exception ex) {
+            return new ResponseBean<Object>("未知异常");
+        } 
     }
 }
