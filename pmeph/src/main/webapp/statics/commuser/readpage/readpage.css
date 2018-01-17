@@ -68,7 +68,7 @@ ul li {
     margin-top: -30px;
     background-color: #333;
     cursor: pointer;
-    font-family: "宋体";
+    font-family: "瀹嬩綋";
     opacity: .2;
     line-height: 58px;
     color: #fff;
@@ -159,7 +159,7 @@ ul li {
     line-height: 34px;
 }
 
-/**閲嶇偣鍏虫敞**/
+/**闁插秶鍋ｉ崗铏暈**/
 .content {
     width: 100%;
     margin-top: 20px;
@@ -191,8 +191,8 @@ ul li {
     height: 25px;
     margin: auto;
     margin-top: 10px;
-    text-overflow:ellipsis; /*超出部分省略号显示*/
-	white-space:nowrap;/*强制不换行*/
+    text-overflow:ellipsis; 
+	white-space:nowrap;/
 	overflow: hidden;
 }
 
@@ -207,8 +207,8 @@ ul li {
     width: 138px;
     margin: auto;
     margin-top: 0px;
-	text-overflow:ellipsis; /*超出部分省略号显示*/
-	white-space:nowrap;/*强制不换行*/
+	text-overflow:ellipsis; 
+	white-space:nowrap;
 	overflow: hidden;
 }
 
@@ -250,7 +250,7 @@ ul li {
     margin-top: 4px;
 }
 
-/**鍒嗛〉**/
+/**閸掑棝銆�*/
 .tab-bar .type {
     color: #FC9C03;
     background: white;
@@ -301,7 +301,7 @@ ul li {
     float: left;
 }
 
-/**鐑棬涔﹁瘎**/
+/**閻戭參妫稊锕佺槑**/
 
 .block .title {
     height: 30px;
@@ -398,7 +398,7 @@ ul li {
     overflow: hidden;
 }
 
-/**鍥句功鍒嗙被**/
+/**閸ュ彞鍔熼崚鍡欒**/
 .area4 {
     float: right;
 }
@@ -467,12 +467,11 @@ ul li {
 .hot-list .item .name {
     text-align: center;
     color: #333333;
-    text-overflow:ellipsis; /*超出部分省略号显示*/
-	white-space:nowrap;/*强制不换行*/
+    text-overflow:ellipsis; 
 	overflow: hidden;
 }
 
-/**鏀瑰彉涔嬪墠鐨勯鑹�*/
+
 .ts_type {
     background-color: #dbe9ea;
     height: 28px;
@@ -485,7 +484,7 @@ ul li {
     border-radius: 2px;
 }
 
-/**鏀瑰彉涔嬪悗鐨勯鑹�*/
+
 .ts_type1 {
     background-color: #489399;
 }
@@ -556,4 +555,26 @@ ul li {
     float: left;
     margin-top: 12px;
     margin-left: -3px;
+}
+/**图书畅销**/
+.tscx_type {
+    background-color: #dbe9ea;
+    height: 28px;
+    margin-right: 10px;
+    line-height: 28px;
+    padding: 0px 9px;
+    float: left;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 2px;
+}
+.tscx_type1 {
+    background-color: #489399;
+}
+.tscx_type span {
+    color: #489399;
+}
+
+.tscx_type1 span {
+    color: white;
 }
