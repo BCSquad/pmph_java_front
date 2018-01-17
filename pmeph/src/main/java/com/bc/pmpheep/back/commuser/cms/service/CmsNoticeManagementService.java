@@ -33,6 +33,6 @@ public interface CmsNoticeManagementService {
 	 * @param order
 	 * @return
 	 */
-	List<CmsNoticeList> list(Integer pageSize, Integer pageNumber, Integer order) ;
+	List<CmsNoticeList> list(Integer pageSize, Integer pageNumber, Integer order,Long userid) ;
 	
 }

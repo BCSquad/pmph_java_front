@@ -1,6 +1,10 @@
 package com.bc.pmpheep.back.commuser.cms.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bc.pmpheep.back.commuser.cms.bean.CmsNoticeList;
@@ -30,14 +34,20 @@ public class CmsNoticeManagementServiceImpl implements CmsNoticeManagementServic
 	CmsNoticeManagementDao cmsNoticeManagementDao;
 
 	@Override
-	public List<CmsNoticeList> list(Integer pageSize, Integer pageNumber, Integer order){
+	public List<CmsNoticeList> list(Integer pageSize, Integer pageNumber, Integer order,Long userid){
 		if(null == pageSize || pageSize < 1){
 			pageSize =10 ;
 		}
 		if(null == pageNumber || pageNumber < 1){
 			pageNumber = 1 ;
 		}
-		return  cmsNoticeManagementDao.list((pageNumber-1)*pageSize,pageSize,order);
+		
+		Map<String,Object>  map=new HashMap<>();
+		map.put("start", (pageNumber-1)*pageSize);
+		map.put("pageSize", pageSize);
+		map.put("order", order);
+		map.put("userid", userid);
+		return  cmsNoticeManagementDao.list(map);
 	}
 
 }
