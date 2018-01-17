@@ -71,7 +71,9 @@ function btntype(btn_this){
 				        		$("#submitTypeCode").val("0");
 				        	}
 			        		window.message.success("成功");
-			        		
+			        		setTimeout(function(){
+			        			window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=sbwz";
+			        		}, 800);
 			        	}else{
 			        		$("#submitTypeCode").val("0");
 			        		window.message.error("失败");

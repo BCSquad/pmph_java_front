@@ -76,10 +76,10 @@
 		a.material_id,
 		a.user_id,
 		a.realname,
-		DATE_FORMAT(a.gmt_create,'%Y-%m-%d %h:%i') as gmt_create,
+		DATE_FORMAT(a.gmt_create,'%Y-%m-%d %H:%i') as gmt_create,
 		a.online_progress,
 		b.material_name,
-		DATE_FORMAT(a.gmt_update,'%Y-%m-%d %h:%i') as gmt_update,
+		DATE_FORMAT(a.gmt_update,'%Y-%m-%d %H:%i') as gmt_update,
 		'1' msg_type
 		FROM
 		declaration a
@@ -97,7 +97,13 @@
 		,cc.title
 		,cc.summary
 		,cc.auth_status
-		,DATE_FORMAT(cc.gmt_update,'%Y-%m-%d %h:%i') as gmt_update
+		,cc.is_staging
+		,
+		case 
+		when cc.gmt_update = '0000-00-00 00:00:00'
+		then DATE_FORMAT(cc.gmt_create,'%Y-%m-%d %H:%i')
+		else DATE_FORMAT(cc.gmt_update,'%Y-%m-%d %H:%i')
+		end as gmt_update
 		, '2' msg_type
 		from cms_content cc
 		inner join cms_category ct on cc.category_id = ct.id and ct.category_name =
@@ -105,6 +111,9 @@
 		where cc.author_id=#{parameter.logUserId} and cc.is_deleted !='1'
 		<if test="parameter.auth_status != null and parameter.auth_status != '' ">
 			and cc.auth_status = #{parameter.auth_status}
+		</if>
+		<if test="parameter.is_staging != null and parameter.is_staging != '' ">
+			and cc.is_staging = #{parameter.is_staging}
 		</if>
 		<if test='parameter.selfLog == false '>
 			and cc.auth_status = 2
@@ -125,6 +134,9 @@
 		<if test="parameter.auth_status != null and parameter.auth_status != '' ">
 			and cc.auth_status = #{parameter.auth_status}
 		</if>
+		<if test="parameter.is_staging != null and parameter.is_staging != '' ">
+			and cc.is_staging = #{parameter.is_staging}
+		</if>
 		<if test='parameter.selfLog == false '>
 			and cc.auth_status = 2
 		</if>
@@ -134,7 +146,13 @@
 	<!-- 查最新书评动态 -->
 	<select id="ListMyBookNewsTwo" resultMap="BaseResultMap"
 		parameterType="PageParameter">
-		select a.id,a.score,a.content,DATE_FORMAT(a.gmt_update,'%Y-%m-%d %h:%i') as
+		select a.id,a.score,a.content,
+		case 
+		when a.gmt_update = '0000-00-00 00:00:00'
+		then DATE_FORMAT(a.gmt_create,'%Y-%m-%d %H:%i')
+		else DATE_FORMAT(a.gmt_update,'%Y-%m-%d %H:%i')
+		end
+		as
 		gmt_update,b.bookname,b.image_url, '3' msg_type from book_user_comment
 		a left JOIN book b ON a.book_id=b.id where a.writer_id=#{id} and
 		a.is_deleted='0' and a.is_auth='1'
