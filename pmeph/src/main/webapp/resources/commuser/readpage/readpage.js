@@ -5,7 +5,7 @@ $(function () {
     //新书推荐
     searchXstjBook($(".tab.type.active").attr("typeid"));
     //畅销
-    searchTscxBook($(".ts_type.ts_type1").attr("typeid"));
+    searchTscxBook($(".tscx_type.tscx_type1").attr("typeid"));
     
     $('.banner').scroll({
         picElem: $('#move'), //图片父级
@@ -43,9 +43,9 @@ function ChangeFYDiv(typeid) {
 //畅销榜表格切换
 function ChangeCXDiv(typeid) {
 
-    $(".ts_type").removeClass("ts_type1");
+    $(".tscx_type").removeClass("tscx_type1");
 
-    $("#CXDiv_" + typeid).addClass("ts_type1");
+    $("#CXDiv_" + typeid).addClass("tscx_type1");
     searchTscxBook(typeid);
     //显示当前层
 }
