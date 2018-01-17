@@ -1,11 +1,15 @@
 package com.bc.pmpheep.back.authadmin.applydocaudit.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.authadmin.applydocaudit.service.DataAuditService;
+import com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.template.service.TemplateService;
 import com.bc.pmpheep.controller.bean.ResponseBean;
@@ -41,7 +46,9 @@ public class DataAuditController extends BaseController{
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.template.service.TemplateService")
 	private TemplateService templateService;
-	
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailServiceImpl")
+	private MaterialDetailService mdService;
 	
 
 	/**
@@ -115,5 +122,105 @@ public class DataAuditController extends BaseController{
 		
 		return data_map;
 	}
+	
+	
+	//申报审核页面
+		@RequestMapping("toMaterialAudit")
+		public ModelAndView toMaterialAudit(HttpServletRequest request,
+				HttpServletResponse response){
+			ModelAndView mav = new ModelAndView("commuser/materialdec/toMaterialAudit");
+			//传参  user_id  material_id
+			String material_id = request.getParameter("material_id");
+			String declaration_id = request.getParameter("declaration_id");
+			Map<String,Object> queryMap = new HashMap<String,Object>();
+			queryMap.put("material_id", material_id); 
+			queryMap.put("declaration_id", declaration_id); 
+			
+			//1.作家申报表
+			List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
+			gezlList = this.mdService.queryPerson(queryMap);
+			if(declaration_id == null){
+			queryMap.put("declaration_id", gezlList.get(0).get("id"));
+			}else{
+				queryMap.put("declaration_id", declaration_id);
+			}
+			//2.作家申报职位
+			List<Map<String,Object>> tsxzList = new ArrayList<Map<String,Object>>();
+			tsxzList=this.mdService.queryTsxz(queryMap);
+			//3.作家学习经历表
+			List<Map<String,Object>> stuList = new ArrayList<Map<String,Object>>();
+			stuList=this.mdService.queryStu(queryMap);
+			//4.作家工作经历表
+			List<Map<String,Object>> workList = new ArrayList<Map<String,Object>>();
+			workList=this.mdService.queryWork(queryMap);
+			//5.作家教学经历表
+			List<Map<String,Object>> steaList = new ArrayList<Map<String,Object>>();
+			steaList=this.mdService.queryStea(queryMap);
+			//6.作家兼职学术表
+			List<Map<String,Object>> zjxsList = new ArrayList<Map<String,Object>>();
+			zjxsList=this.mdService.queryZjxs(queryMap);
+			//7.作家上套教材参编情况表
+			List<Map<String,Object>> jcbjList = new ArrayList<Map<String,Object>>();
+			jcbjList=this.mdService.queryJcbj(queryMap);
+			//8.作家精品课程建设情况表
+			List<Map<String,Object>> gjkcjsList = new ArrayList<Map<String,Object>>();
+			gjkcjsList=this.mdService.queryGjkcjs(queryMap);
+			//9.作家主编国家级规划教材情况表
+			List<Map<String,Object>> gjghjcList = new ArrayList<Map<String,Object>>();
+			gjghjcList = this.mdService.queryGjghjc(queryMap);
+			//10.作家教材编写情况表
+			List<Map<String,Object>> jcbxList = new ArrayList<Map<String,Object>>();
+			jcbxList=this.mdService.queryJcbx(queryMap);
+			//11.作家科研情况表
+			List<Map<String,Object>> zjkyList = new ArrayList<Map<String,Object>>();
+			zjkyList = this.mdService.queryZjkyqk(queryMap);
+			//12.作家扩展项填报表
+			List<Map<String,Object>> zjkzqkList = new ArrayList<Map<String,Object>>();
+			zjkzqkList = this.mdService.queryZjkzbb(queryMap);
+
+			//填充
+			mav.addObject("gezlList", gezlList.get(0));
+			mav.addObject("tsxzList", tsxzList);
+			mav.addObject("stuList", stuList);
+			mav.addObject("workList", workList);
+			mav.addObject("steaList", steaList);
+			mav.addObject("jcbjList", jcbjList);
+			mav.addObject("gjkcjsList", gjkcjsList);
+			mav.addObject("jcbxList", jcbxList);
+			mav.addObject("gjghjcList", gjghjcList);
+			mav.addObject("zjkyList", zjkyList);
+			mav.addObject("zjxsList", zjxsList);
+			mav.addObject("zjkzqkList", zjkzqkList);
+			return mav;
+		}
+		
+		//申报审核
+		@RequestMapping("doMaterialAudit")
+		@ResponseBody
+		public Map<String,Object> doMaterialAudit(HttpServletRequest request,
+				HttpServletResponse response){
+			Map<String,Object> paramMap = new HashMap<String,Object>();
+			Map<String,Object> resultMap = new HashMap<String,Object>();
+			String declaration_id = request.getParameter("declaration_id");
+			String type = request.getParameter("type");  //类型
+			Map<String,Object> userMap =  this.getUserInfo();
+			String user_id = userMap.get("id").toString();
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+			String date = df.format(new Date());
+			String msg = "";
+			
+			paramMap.put("declaration_id", declaration_id);
+			paramMap.put("online_progress", type);
+			paramMap.put("auth_user_id", user_id);
+			paramMap.put("auth_date", date);
+			int count = this.mdService.updateDeclaration(paramMap);
+			if(count>0){
+				msg = "OK";
+			}
+			resultMap.put("msg", msg);
+			resultMap.put("msg", msg);
+			return resultMap;
+		}
+		
 
 }

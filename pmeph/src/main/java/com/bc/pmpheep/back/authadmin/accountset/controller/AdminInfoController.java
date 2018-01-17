@@ -136,9 +136,9 @@ public class AdminInfoController extends BaseController {
      * @param orgUser
      * @return
      */
-    @RequestMapping(value = "/updateorguserpassword",method = RequestMethod.POST,consumes = "application/json")
+    @RequestMapping(value = "/updateorguserpassword",method = RequestMethod.POST/*,consumes = "application/json"*/)
     @ResponseBody
-    public ResponseBean<OrgAdminUser> updateOrgUserPassword(@RequestBody OrgAdminUser orgUser){
+    public ResponseBean<OrgAdminUser> updateOrgUserPassword(/*@RequestBody*/ OrgAdminUser orgUser){
         ResponseBean<OrgAdminUser> responseBean=new ResponseBean<>();
 //        orgUser.setId(Long.parseLong("1267"));
         Map <String,Object> map1 = this.getUserInfo() ;
@@ -146,7 +146,9 @@ public class AdminInfoController extends BaseController {
         orgUser.setId(userId);
         DesRun desRun=new DesRun("",orgUser.getPassword());
         orgUser.setPassword(desRun.enpsw);
+     
         adminInfoService.updatePassword(orgUser);
+        
         return responseBean;
     }
     
