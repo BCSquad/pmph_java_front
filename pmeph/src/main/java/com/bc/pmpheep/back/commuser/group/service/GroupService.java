@@ -19,17 +19,20 @@ import com.bc.pmpheep.service.exception.CheckedServiceException;
 public interface GroupService {
 	
 	/**
-	 * 小组上传文件
+	 * 小组上传文件信息保存
 	 * @introduction 
 	 * @author Mryang
-	 * @createDate 2017年12月13日 下午2:29:12
-	 * @param file
-	 * @param filee
+	 * @createDate 2018年1月17日 上午10:58:46
 	 * @param groupId
+	 * @param fileId
+	 * @param fileName
+	 * @param fileSize
 	 * @param thisId
 	 * @return
+	 * @throws CheckedServiceException
+	 * @throws IOException
 	 */
-	Integer addFile(MultipartFile file,Long groupId,Long thisId)throws CheckedServiceException , IOException;
+	Integer addFile(Long groupId,String fileId,String fileName,Long fileSize,Long thisId)throws CheckedServiceException , IOException;
 	
 	/**
 	 * 退出小组
@@ -74,7 +77,7 @@ public interface GroupService {
 	 * @param 
 	 * @return List<GroupFileVO>
 	 */
-	List<GroupFileVO> groupFiles (Integer pageNumber,Integer pageSize,Long groupId,String fileName,Long thisId) throws CheckedServiceException;
+	List<GroupFileVO> groupFiles (Integer pageNumber,Integer pageSize,Long groupId,String fileName,Long thisId,String order,String rank) throws CheckedServiceException;
 	
 	/**
 	 * 删除我能删除的文件
@@ -207,4 +210,6 @@ public interface GroupService {
 	 * 查询文件信息
 	 */
 	public List<Map<String,Object>> fileList(Map<String,Object> map);
+	
+	Integer updateDownload(Long groupId,String fileId);
 }
