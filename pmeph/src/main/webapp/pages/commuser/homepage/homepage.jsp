@@ -21,6 +21,8 @@
     <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.scroll.js"></script>
     <script src="${ctx}/resources/comm/base.js"></script>
+    <script src="${ctx}/resources/comm/menu.js"></script>
+
     <script src="${ctx}/resources/commuser/homepage/homepage.js"></script>
 </head>
 <body>
