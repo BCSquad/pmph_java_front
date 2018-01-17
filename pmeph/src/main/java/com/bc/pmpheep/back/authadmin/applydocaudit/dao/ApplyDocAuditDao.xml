@@ -12,6 +12,7 @@
 		<result property="isAllTextbookPublished" column="isAllTextbookPublished"/>
 		<result property="is_deleted" column="is_deleted"/>
 		<result property="is_all_textbook_published" column="is_all_textbook_published"/>
+		<result property="beenPublishTo" column="beenPublishTo"/>
 	</resultMap>
 
 	<!-- 申报资料审核列表查询 -->
@@ -25,16 +26,20 @@
 		count(u.id) as user_num,
 		count(u.id) as declaration_num,
 		m.is_deleted,
-		m.is_all_textbook_published
+		m.is_all_textbook_published,
+		case
+		when o.org_id = #{parameter.org_id}
+		then 1
+		else 0
+		end as beenPublishTo
 		
 		FROM
 		material AS m
 		left Join declaration AS d ON m.id = d.material_id
 		left Join writer_user AS u ON u.id = d.user_id
+		left join material_org o on m.id = o.material_id
 		<where>
-			<if test="parameter.org_id != null and parameter.org_id != '' ">
-				and d.org_id =#{parameter.org_id}
-			</if>
+		((m.is_public = '0' and o.org_id = #{parameter.org_id}) or (m.is_public = '1'))
 		</where>
 		GROUP BY
 		m.id
@@ -76,15 +81,16 @@
 		FROM
 		material AS m
 		left Join declaration AS d ON m.id = d.material_id
+		left join material_org o on m.id = o.material_id
 		<where>
 			(m.is_deleted = 0 or m.is_deleted is null )
-			
+			and((m.is_public = '0' and o.org_id = #{parameter.org_id}) or (m.is_public = '1'))
 			<if test="parameter.queryCon != null and parameter.queryCon != '' ">
 			and m.material_name LIKE CONCAT('%',#{parameter.queryCon },'%')
 			</if>
-			<if test="parameter.org_id != null and parameter.org_id != '' ">
+			<!-- <if test="parameter.org_id != null and parameter.org_id != '' ">
 				and d.org_id =#{parameter.org_id}
-			</if>
+			</if> -->
 			<choose>
 				<when test='parameter.queryStatus == "1" '>
 					and (
