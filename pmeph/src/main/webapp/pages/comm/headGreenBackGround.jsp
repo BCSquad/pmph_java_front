@@ -1,3 +1,6 @@
+<%@ page import="com.bc.pmpheep.back.util.Const" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="org.apache.commons.collections.MapUtils" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -9,7 +12,12 @@
                 <span class="top-lable1">欢迎访问人教e卫平台！</span>
                 <span class="top-lable2">∨</span>
                 <span class="top-lable2">&nbsp</span>
-                <span class="top-lable2">哈尔滨医科大学的账号</span>
+                <span class="top-lable2">
+                    <%
+                        Map<String, Object> userInfo = (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_ORGUSER);
+                        out.println(MapUtils.getString(userInfo, "org_name"));
+                    %>
+                </span>
                 <span class="top-lable2">&nbsp&nbsp&nbsp&nbsp&nbsp</span>
                 <span class="top-lable2">下载手机客户端！</span>
             </div>

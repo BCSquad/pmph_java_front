@@ -21,7 +21,7 @@ $(function () {
     }
 
 
-    $menu.css("left", (wrapper.offset().left + 1204) + "px");
+    $menu.css("left", (wrapper.offset().left + 1210) + "px");
     $menu.css("top", (winHeight - 160) / 2 + "px");
 
     wrapper.parent().append($menu)
