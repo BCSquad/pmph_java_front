@@ -37,6 +37,7 @@ public class ArticleDetailController extends BaseController {
 	private ArticleDetailService articleDetailService;
 	@Autowired
 	private ContentService contentService;
+	
 
 	/**
 	 * 跳转至页面

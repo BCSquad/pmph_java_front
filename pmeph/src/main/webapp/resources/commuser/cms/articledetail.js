@@ -205,7 +205,7 @@ function addmark(){
 		});
 }
 
-//人卫推荐跳转到详情书
+//跳转到详情文章
 function todetail(id) { 
     location.href = contextpath + 'articledetail/toPage.action?wid=' + id;
 }

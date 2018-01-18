@@ -60,6 +60,7 @@ public class ArticleDetailServiceImpl implements ArticleDetailService{
 		articleDetailDao.insertWriteArticle(map);
 	    rmap.put("returncode", "OK");
 	    return rmap;
+	    
 	}	
 	
 	/**
