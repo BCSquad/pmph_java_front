@@ -66,5 +66,68 @@ public class DataAuditServiceImpl implements DataAuditService {
 		String resultList = dataAuditDao.findTitleName(map);
 		return resultList;
 	}
+	
+	@Override
+	public List<Map<String, Object>> queryPerson(Map<String, Object> map) {
+		return this.dataAuditDao.queryPerson(map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> queryTsxz(Map<String, Object> map) {
+		return this.dataAuditDao.queryTsxz(map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> queryStu(Map<String, Object> map) {
+		return this.dataAuditDao.queryStu(map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> queryWork(Map<String, Object> map) {
+		return this.dataAuditDao.queryWork(map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> queryStea(Map<String, Object> map) {
+		return this.dataAuditDao.queryStea(map);
+	}
+	@Override
+	public List<Map<String, Object>> queryZjxs(Map<String, Object> map) {
+		return this.dataAuditDao.queryZjxs(map);
+	}
+	@Override
+	public List<Map<String, Object>> queryJcbj(Map<String, Object> map) {
+		return this.dataAuditDao.queryJcbj(map);
+	}
+	@Override
+	public List<Map<String, Object>> queryGjkcjs(Map<String, Object> map) {
+		return this.dataAuditDao.queryGjkcjs(map);
+	}
+	@Override
+	public List<Map<String, Object>> queryGjghjc(Map<String, Object> map) {
+		return this.dataAuditDao.queryGjghjc(map);
+	}
+	@Override
+	public List<Map<String, Object>> queryJcbx(Map<String, Object> map) {
+		return this.dataAuditDao.queryJcbx(map);
+	}
+	@Override
+	public List<Map<String, Object>> queryZjkyqk(Map<String, Object> map) {
+		return this.dataAuditDao.queryZjkyqk(map);
+	}
+	@Override
+	public List<Map<String, Object>> queryZjkzbb(Map<String, Object> map) {
+		return this.dataAuditDao.queryZjkzbb(map);
+	}
+	
+	@Override
+	public int updateDeclaration(Map<String, Object> map) {
+		return this.dataAuditDao.updateDeclaration(map);
+	}
+	//通过教材ID查出教材
+	@Override
+	public Map<String, Object> queryMaterialbyId(String material_id) {
+		return this.dataAuditDao.queryMaterialbyId(material_id);
+	}
 
 }
