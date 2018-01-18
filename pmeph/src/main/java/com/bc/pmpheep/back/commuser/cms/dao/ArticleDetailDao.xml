@@ -9,7 +9,7 @@
 	<!-- 根据ID查询标题 -->
 	<select id="queryTitle" parameterType="java.util.Map"
 		resultType="java.util.Map">
-		SELECT * FROM cms_content c WHERE c.id=#{id}
+		SELECT c.title, DATE_FORMAT(c.gmt_create,'%Y-%m-%d') as gmt_create,c.clicks FROM cms_content c WHERE   c.id=#{id}
 	</select>
 
 	<!-- 查询作者 -->
@@ -18,7 +18,8 @@
 		select
 		t.id,
 		t.author_id,
-		c.realname
+		c.realname,
+		c.avatar
 		from cms_content t
 		left
 		join cms_category b on t.category_id=b.id
@@ -44,8 +45,8 @@
 		parameterType="java.lang.String">
 		select
 		t.id,
-		t.title,
-		t.gmt_create,
+		t.title,		
+		DATE_FORMAT(t.gmt_create,'%Y-%m-%d %H:%i') as gmt_create,
 		c.realname
 		from
 		cms_content t

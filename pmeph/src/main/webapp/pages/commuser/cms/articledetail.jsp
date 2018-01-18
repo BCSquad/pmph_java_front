@@ -54,9 +54,9 @@
 				</div>
 				<div class="th_title">
 	    		<span>医学随笔</span>
-	    		<span>2017-4-17</span>
+	    		<span>${map.gmt_create }</span>
 	    		<img style="float: left;margin-top: 5px;margin-right: 5px;" src="${ctx}/statics/image/scan.png"/>
-	    		<span id="img_span">454</span>
+	    		<span id="img_span">${map.clicks }</span>
 	    	</div>
 	    	<!--内容-->
 	    	
@@ -180,7 +180,11 @@
     	<div class="area2">
     		<div style="position:relative;width: 275px;height: 410px;">
     			<div class="right_2">
-	    			<img src="${ctx}/statics/image/tx.png" />
+	    			<c:if test="${Art.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/tx.png" alt="头像" height="60"
+                                                              width="60"></c:if>
+                	<c:if test="${Art.avatar!='DEFAULT'}"><img src="${ctx}/image/${Art.avatar}.action" alt="头像" height="60"
+                                                              width="60"></c:if>
+	    			
 	    			<span>作者：${Art.realname}</span>
 	    		</div>
 	    		<div class="right_1" style=" position:absolute;top:20px;z-index:80;">
