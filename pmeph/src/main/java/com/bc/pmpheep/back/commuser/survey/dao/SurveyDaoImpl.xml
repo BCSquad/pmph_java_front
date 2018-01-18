@@ -4,13 +4,29 @@
 <mapper namespace="com.bc.pmpheep.back.commuser.survey.dao.SurveyDao">
 	<!-- 调查列表 -->
 	<select id="surveyList" resultType="map" parameterType="map">
-		SELECT DISTINCT a.* FROM `survey` a
+		<!-- SELECT DISTINCT a.* FROM `survey` a
 		LEFT JOIN `survey_question_answer`  b
 		ON a.`id`= b.`survey_id`
 		WHERE a.is_deleted=0
 		AND b.`user_id` != #{userId}
 		AND #{dateStr} &gt;= a.`begin_date`
-		AND #{dateStr} &lt;= a.`end_date`
+		AND #{dateStr} &lt;= a.`end_date` -->
+		SELECT 
+ 			 s.*
+		FROM
+		  	`survey` s 
+		JOIN 
+			`survey_target` st 
+		ON 
+			s.`id` = st.`survey_id` 
+		JOIN 
+			`writer_user` wu
+		ON 
+			st.`org_id` = wu.`org_id`
+		WHERE  
+			(SELECT CURRENT_TIMESTAMP())&lt;=s.`end_date`
+		AND
+		   wu.`id`=#{userId};
 	</select>
 	
 	<!-- 查询单个调查对应的问题 -->
@@ -41,10 +57,16 @@
 
 	<!-- 保存多选答案 -->
 	<insert id="saveCheckboxAnswer" parameterType="map">
-		insert into survey_question_answer
+		<!-- insert into survey_question_answer
 		(user_id,question_id,option_content,survey_id)
-		values(#{userId},#{questionId},#{checkboxAnswer},#{surveyId})
-	</insert>
+		values(#{userId},#{questionId},#{checkboxAnswer},#{surveyId}) -->
+		INSERT INTO 
+			`survey_question_answer`(`user_id`,`question_id`,`option_id`,`survey_id`)
+        VALUES
+        <foreach collection="optionIds" item="optionId" index="index" separator=",">
+            ( #{userId},#{questionId},#{optionId},#{surveyId})
+        </foreach>
+	</insert>	
 	
 	<!-- 保存输入框答案 -->
 	<insert id="saveInputAnswer" parameterType="map">
