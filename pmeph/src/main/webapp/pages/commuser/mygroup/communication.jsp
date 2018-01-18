@@ -86,7 +86,21 @@
                     </div>
                 </div>
                 <div class="hidden" id="filesgx">
-                    <input type="text" placeholder="请输入文件名" id= "fileName" class="file_input"/><img class="search" style="cursor:pointer" src="${ctx}/statics/image/sx1.png"/>
+                	排序:
+                	<select id="order">
+                		
+                		<option value="gmt_create:asc"  >上传时间升序</option>
+                		<option value="gmt_create:desc" selected="selected">上传时间降序</option>
+                		<option value="file_size:asc" >文件大小升序</option>
+                		<option value="file_size:desc">文件大小降序</option>
+                		
+                		<option value="file_name:asc" >文件名称升序</option>
+                		<option value="file_name:desc">文件名称降序</option>
+                	</select>
+                    <div class='search-wrapper'>
+                    	<input type="text" placeholder="请输入文件名" id= "fileName" class="file_input"/>
+                    	<img class="search" src="${ctx}/statics/image/sx1.png"/>
+                    </div>	
                     <span id ="fileContent"></span>
                     <div id ="fileMore">
                     	<center style="cursor:pointer" >更多。。。</center>
@@ -111,7 +125,6 @@
 	                		<li>
 			                    <div class="init_center w65_h50"><img src="${pageContext.request.contextPath}/${gropuMemeber.avatar}" class="groupc_li"/></div>
 			                    <div class="init_center w65_h20_line20">
-			                        <span class="li_span2"></span>
 			                        <text>${gropuMemeber.displayName}</text>
 			                    </div>
 							</li>
@@ -137,8 +150,8 @@
             	<c:if test="${otherGroup !=null }">
                 	<c:forEach var="item" items="${otherGroup}" varStatus="st">
                 	   <c:if test="${st.index <= 11 }"><!-- 0-11  展示12位 -->
-                	         <a href="${pageContext.request.contextPath}/group/toMyGroup.action?groupId=${item.id}">
-		                		 <li>
+                	         <a href="${pageContext.request.contextPath}/group/toMyGroup.action?groupId=${item.id}" style="display:block;" >
+		                		 <li style="margin-bottom: 25px;">
 				                    <div class="init_center w85_h50"><img src="${pageContext.request.contextPath}/${item.groupImage}"/></div>
 				                    <div class="init_center w85_h36_line18">
 				                        <text class="color03">${item.groupName}</text>

@@ -173,7 +173,22 @@
 		    ORDER BY a.gmt_create desc 
 		 </if>
 		 <if test="order != null">
-		    ORDER BY #{order} #{rank}
+		 	ORDER BY
+		 	<if test=" order == 'gmt_create' ">
+		 		a.gmt_create
+		 	</if>
+		 	<if test=" order == 'file_size' ">
+		 		file_size
+		 	</if>
+		 	<if test=" order == 'file_name' ">	
+		 		file_name
+		 	</if>
+		    <if test=" rank=='asc'  ">
+		       asc
+		    </if>
+		    <if test=" rank=='desc' ">
+		       desc
+		    </if>
 		 </if>
 		 limit #{start},#{pageSize}
     </select>
