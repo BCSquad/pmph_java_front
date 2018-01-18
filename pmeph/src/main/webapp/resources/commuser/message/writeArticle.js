@@ -116,6 +116,9 @@ function btntype(btn_this){
 				        		UE.getEditor('mText').setContent("");
 				        		$("#submitTypeCode").val("0");*/
 				        		window.message.success("成功");
+				        		setTimeout(function(){
+				        			window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=sbwz";
+				        		}, 800);
 				        	} else {
 				        		$("#submitTypeCode").val("1");
 				        		window.message.error("失败");
