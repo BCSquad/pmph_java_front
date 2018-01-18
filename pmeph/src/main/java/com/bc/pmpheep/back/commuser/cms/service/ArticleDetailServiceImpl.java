@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import com.bc.pmpheep.back.commuser.cms.dao.ArticleDetailDao;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
+import com.bc.pmpheep.general.pojo.Content;
 import com.bc.pmpheep.general.pojo.Message;
+import com.bc.pmpheep.general.service.ContentService;
 import com.bc.pmpheep.general.service.MessageService;
 /**
  * 	ArticleDetailServiceImpl 实现
@@ -23,7 +25,7 @@ public class ArticleDetailServiceImpl implements ArticleDetailService{
 	@Autowired
 	private ArticleDetailDao articleDetailDao;
 	@Autowired
-	MessageService mssageService;
+	private ContentService contentService;
 	
 	/**
 	 * 查询读书详情页信息
@@ -50,9 +52,9 @@ public class ArticleDetailServiceImpl implements ArticleDetailService{
 	public Map<String, Object> insertWriteArticle(Map<String, Object> map,String content) {
 		Map<String, Object> rmap=new HashMap<String, Object>();
 		//发送评论到MongoDB 
-		Message message = new Message();
+		Content message = new Content();
 		message.setContent(content);
-		Message messageResult = mssageService.add(message);
+		  Content messageResult = contentService.add(message);
 		String msg_id = messageResult.getId();
 		map.put("mid", msg_id); //评论id
 		articleDetailDao.insertWriteArticle(map);

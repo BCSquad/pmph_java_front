@@ -60,7 +60,7 @@
 	<!-- 查询相关文章 换一换 -->
 	<select id="queryRecommendByE" parameterType="java.util.Map"
 		resultType="java.util.Map">
-		select c.title,w.realname,c.id
+		select c.title,w.realname,c.id as wid
 		from cms_content c left join writer_user
 		w
 		on c.author_id=w.id
@@ -87,7 +87,7 @@
 		t.mid,
 		c.realname,
 		t.gmt_create,
-		t.score,
+		<!-- t.score, -->
 		c.avatar
 		from cms_content t
 		left join cms_category b on t.category_id=b.id
