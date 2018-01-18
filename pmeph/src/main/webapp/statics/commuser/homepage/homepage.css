@@ -947,6 +947,10 @@ ul li {
     margin-top: 17px;
     width: 252px;
     margin-left: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis; /*超出部分省略号显示*/
+    white-space: nowrap; /*强制不换行*/
+    height: 40px;
 }
 
 .a6_content {
