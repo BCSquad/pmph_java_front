@@ -52,11 +52,15 @@ public class UserInfoController extends BaseController {
 
 
         Map<String, Object> map = userinfoService.queryWriter(map1.get("id").toString());
+        //头像回显
+        
         //图片为空则显示默认图片
         if (("").equals(map.get("avatar"))) {
             map.put("avatar", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
         }
         modelAndView.addObject("map", map);
+        
+        
         modelAndView.setViewName("commuser/userinfo/userinfo");
         return modelAndView;
     }
