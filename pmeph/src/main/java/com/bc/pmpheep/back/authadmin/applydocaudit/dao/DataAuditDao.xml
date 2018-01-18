@@ -89,4 +89,81 @@
 			</if>
 		</where>
 	</select>
+	
+	<!-- 专家信息 --> 
+	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
+		select t1.*,t2.org_name dwmc from declaration t1 left join org t2 on t1.org_id = t2.id
+		 where 1= 1 
+		<if test="user_id != null and user_id != ''">
+			and t1.user_id = #{user_id} 
+		</if>
+		<if test="material_id != null and material_id != ''">
+			and t1.material_id = #{material_id}
+		</if>
+		<if test="declaration_id != null and declaration_id != ''">
+			and t1.id = #{declaration_id}
+		</if>
+		<if test="realname != null and realname != ''">
+			and t1.realname = #{realname}
+		</if>
+	</select>
+	
+		<!-- 图书选择 -->
+	<select id="queryTsxz" resultType="java.util.Map" parameterType="java.util.Map">
+		select t1.*,t2.textbook_name from dec_position t1 left join textbook t2
+		on t1.textbook_id = t2.id where t1.declaration_id = #{declaration_id} 
+		ORDER BY t1.gmt_create desc
+	</select>
+	
+		<!-- 学习经历 -->
+	<select id="queryStu" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_edu_exp where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+		<!-- 工作经历 -->
+	<select id="queryWork" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_work_exp where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+		<!--教学经历-->
+	<select id="queryStea" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_teach_exp where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+		<!-- //作家学术 -->
+	<select id="queryZjxs" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_acade where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+		<!--上版教材编辑-->
+	<select id="queryJcbj" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_last_position where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+		<!-- 精品课程建设 -->
+	<select id="queryGjkcjs" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_course_construction where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+		<!-- 作家主编国家级规划教材情况 -->
+	<select id="queryGjghjc" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_national_plan where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+		<!-- 教材编写情况 -->
+	<select id="queryJcbx" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_textbook where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+		<!-- //作家科研情况表 -->
+	<select id="queryZjkyqk" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_research where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+		<!-- 作家扩展项填报表 -->
+	<select id="queryZjkzbb" resultType="java.util.Map" parameterType="java.util.Map">
+		select t1.*,t2.extension_name from dec_extension t1 LEFT JOIN material_extension t2 ON 
+		   t1.extension_id = t2.id where t1.declaration_id = #{declaration_id}
+	</select>
+		<!-- 申报审核 -->
+	<update id="updateDeclaration" parameterType="java.util.Map">
+		update declaration set auth_user_id =#{auth_user_id} ,auth_date=#{auth_date} ,online_progress=#{online_progress} where id= #{declaration_id}
+	</update>
+		<!-- 通过教材ID查询出教材信息 -->
+	<select id="queryMaterialbyId" resultType="java.util.Map" parameterType="java.lang.String">
+		select t1.*,t2.extension_name,t2.is_required from material t1 left join material_extension t2 
+			on t1.id=t2.material_id where t1.id = #{material_id}
+	</select>
+	
 </mapper>
