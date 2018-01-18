@@ -45,7 +45,7 @@
 	                <span id="bianji"></span>
 	                <span class="dtxiawz"><a href="$!{contextpath}writerArticle/initWriteArticle.action?id=$!{c.id}&&userid=$!{permap.id}">编辑</a></span>
                 #end
-                #if($!{c.selfLog}=="true")
+                #if($!{selfLog}==true)
                 <div class="operate_wrapper">
 	                <a target="_blank" href="$!{contextpath}writerArticle/initWriteArticle.action?id=$!{c.id}&userid=$!{logUserId}"><div class="img img_edit" ></div><div>编辑</div></a> 
 			        <a onclick="deleteArticle('$!{c.id}','$!{c.title}')" ><div class="img img_delete"></div><div>删除</div></a>
