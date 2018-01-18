@@ -32,8 +32,15 @@
 			</otherwise>
 		</choose>
 		<where>
+			b.is_on_sale=1
 			<if test="parameter.queryName != null and parameter.queryName != '' ">
-				and b.bookname like concat("%",#{parameter.queryName},"%")
+				and 
+				(
+				b.bookname like concat("%",#{parameter.queryName},"%")
+				or b.isbn like concat("%",#{parameter.queryName},"%")
+				or b.publisher like concat("%",#{parameter.queryName},"%")
+				or b.author like concat("%",#{parameter.queryName},"%")
+				)
 			</if>
 		</where>
 		group by b.id
@@ -47,8 +54,15 @@
 		FROM
 		book AS b
 		<where>
+			b.is_on_sale=1
 			<if test="parameter.queryName != null and parameter.queryName != '' ">
-				and b.bookname like concat("%",#{parameter.queryName},"%")
+				and 
+				(
+				b.bookname like concat("%",#{parameter.queryName},"%")
+				or b.isbn like concat("%",#{parameter.queryName},"%")
+				or b.publisher like concat("%",#{parameter.queryName},"%")
+				or b.author like concat("%",#{parameter.queryName},"%")
+				)
 			</if>
 		</where>
 	</select>
@@ -93,6 +107,7 @@
 		resultMap="bookListMap">
 		SELECT 
 			b.id as bookId,
+			b.isbn,
 			b.`bookname`,b.`author`,
 			b.`publisher`,bd.`detail`,
   			b.`clicks`,b.`comments`,
@@ -143,9 +158,15 @@
 			)
 			</if>				
 		WHERE 
-			1 = 1
-			<if test="parameter.searchText!=null">
-			   and  b.bookname like #{parameter.searchText}
+			b.is_on_sale=1
+			<if test="parameter.searchText != null and parameter.searchText != '' ">
+				and 
+				(
+				b.bookname like #{parameter.searchText}
+				or b.isbn like #{parameter.searchText}
+				or b.publisher like #{parameter.searchText}
+				or b.author like #{parameter.searchText}
+				)
 			</if>
 		
 		LIMIT #{start},#{pageSize}
@@ -195,12 +216,21 @@
 									),'-',-1) = #{parameter.type}
 					or t.id = 	#{parameter.type}		
 				)
-				</if>				
+				</if>	
+			
+			where b.is_on_sale=1
+			<if test="parameter.searchText != null and parameter.searchText != '' ">
+				and 
+				(
+				b.bookname like #{parameter.searchText}
+				or b.isbn like #{parameter.searchText}
+				or b.publisher like #{parameter.searchText}
+				or b.author like #{parameter.searchText}
+				)
+			</if>
+			
 		)t
-		where 1=1
-		<if test="parameter.searchText!=null">
-			   and  t.bookname like #{parameter.searchText}
-		</if>
+		
 	</select>
 	<select id="querySearchSort" parameterType="map" resultMap="bookListMap">
 			SELECT  
@@ -218,7 +248,13 @@
 				JOIN material_type t ON t.id = b.type
 				  WHERE 1=1
 				  <if test="searchText !=nill">
-				     and   b.bookname LIKE #{searchText}
+				     and 
+						(
+						b.bookname like #{searchText}
+						or b.isbn like #{searchText}
+						or b.publisher like #{searchText}
+						or b.author like #{searchText}
+						)
 				  </if>
 				  <if test="sortId !=null" >
 				     and m.parent_id=#{sortId}

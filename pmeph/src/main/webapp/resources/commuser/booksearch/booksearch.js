@@ -71,8 +71,12 @@ function getSort(order,id,pid,tag){
 				}else if(tag=="page"){
 					   
 				}else if(tag=="search"){
+					if(json.child.length>0){
 					 $("#mysort").html(str);
 					 $("input[name=radio"+json.child[0].parent_id+"]").labelauty();
+					}else{
+						 $("#mysort").html('');
+					 }
 				}
 //			}else{
 //				$("#sort"+order).nextAll().remove();
