@@ -6,9 +6,36 @@ jsonStr = "{\"id\":\"realname\",\"content\":\"姓名不能为空\"}," +
 
 $(function () {
 	var id = $("#material_id").val();
-	//var str = $("#scfjb").val();
-	//alert(str);
-	upload("1"); //附件上传
+	//图书选择
+	var sjxz =document.getElementsByName("sjxz");
+	for (var i = 0, j = sjxz.length; i < j; i++){
+		upload(i+1); //附件上传
+		$('#'+sjxz[i].value).selectlist({
+	        width: 200,
+	        height: 30,
+	        optionHeight: 30
+	    });
+	}
+	//教材编写-级别
+	var els =document.getElementsByName("jcb_rank_sl");
+	for (var i = 0, j = els.length; i < j; i++){
+		$('#'+els[i].value).selectlist({
+	    	width: 110,
+	    	height: 30,
+	    	optionHeight: 30
+	    });
+	}
+	//教材编写-职务
+	var jcjbs =document.getElementsByName("jcjb_sl");
+	for (var i = 0, j = jcjbs.length; i < j; i++){
+		$('#'+jcjbs[i].value).selectlist({
+			width: 110,
+			height: 30,
+			optionHeight: 30
+		});
+	}
+	
+	
 	queryMaterialMap(id);  //执行查询方法
     $('.select-input').selectlist({
         zIndex: 10,
@@ -52,16 +79,13 @@ function upload(id){
 	        console.log("开始上传。。。");
 	    },
 	    done: function (filename, fileid) {
-	    	$("#fjxq").css("display","none");
+	    	$("#fjxq_"+id).css("display","none");
 	    	$("#fileNameDiv_"+id).empty(); //清楚内容
 	    	$("#fileNameDiv_"+id).append("<span>"+filename+"</span>");
 	    	$("#fileNameDiv_"+id).css("display","inline");
 	    	$("#syllabus_id_"+id).val(fileid);
 	    	$("#syllabus_name_"+id).val(filename);
 	        console.log("上传完成：name " + filename + " fileid " + fileid);
-	    },
-	    progressall: function (loaded, total, bitrate) {
-	        console.log("正在上传。。。" + loaded / total);
 	    }
 	});
 }
@@ -483,7 +507,7 @@ function buttAdd(type){
 			async: false,
 		    success: function(msg) {
 			    if(msg=='OK'){
-			    	window.location.href=contextpath+"personalhomepage/tohomepageone.action";
+			    	window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=jcsb";
 			    }
 		    }
 		});
