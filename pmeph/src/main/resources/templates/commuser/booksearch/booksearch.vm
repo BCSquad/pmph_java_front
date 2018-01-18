@@ -17,7 +17,7 @@
 	                    <a class="not-like-an-a" target="_blank" href="$!{contextpath}readdetail/todetail.action?id=$!{c.bookId}"><span class="book-name-span">$!{c.bookname}</span></a>
 	                </div>
 	                <div class="name">
-	                    <span >$!{c.author} 丨 $!{c.publisher}</span>
+	                    <span class="book-name-span">$!{c.author} 丨 $!{c.publisher} 丨 $!{c.isbn}</span>
 	                </div>
 	
 	            </div>
