@@ -51,15 +51,28 @@ $(function(){
 	    	loadNewGroupMsg(sender,data.senderName,data.senderIcon,data.content,data.time);
 	    }
 	}
+	//按钮发送消息
 	$("#sendMsg").click(function(){
+		sendSocktMsg();
+	});
+	
+	var sendSocktMsg = function(){
 		var content=$("#msgContent").val();
 		if(!content || content.trim() ==''){
 			window.message.warning("请键入消息");
 			return ;
 		}
 		webSocket.send("{senderId:"+$("#userId").val()+",senderType:"+2+",content:'"+content+"',groupId:"+$("#groupId").val()+",sendType:0}");
-		$("#msgContent").val('');
-	});
+		$("#msgContent").val(null);
+	}
+	
+	//回车发送消息
+	$("#msgContent").keypress(function (e){ 
+		var code = event.keyCode; 
+		if (13 == code) { 
+			sendSocktMsg();
+		} 
+	}); 
 	//-------------------------------
 	var talkPagesize  = 5 ;
 	var talkPagenumber= 1  ;
@@ -78,7 +91,9 @@ $(function(){
 	//加载更多文件
 	$("#fileMore").click(initFile);
 	//搜索文件
+	var fileName = $("#fileName").val();
 	$(".search").click(function(){
+		fileName = $("#fileName").val();
 		filePagenumber = 1  ;
 		$("#fileContent").html('');
 		initFile();
@@ -137,8 +152,8 @@ $(function(){
 		        	if(responsebean && responsebean.length > 0 ){
 		        		$("#anotherBatcH").html("");
 		        		for(var i= 0 ; i< responsebean.length ; i++  ){
-		        			var  html = "<a href=\""+contxtpath+"/group/toMyGroup.action?groupId="+responsebean[i].id+"\">"+
-			        				        "<li> "+
+		        			var  html = "<a style=\"display:block;\"  href=\""+contxtpath+"/group/toMyGroup.action?groupId="+responsebean[i].id+"\">"+
+			        				        "<li style=\"margin-bottom: 25px;\"> "+
 							                    "<div class=\"init_center w85_h50\"><img src=\""+contxtpath+"/"+responsebean[i].groupImage+"\"/></div>"+
 							                    "<div class=\"init_center w85_h36_line18\">"+
 							                        "<text class=\"color03\">"+responsebean[i].groupName+"</text>"+
@@ -193,8 +208,15 @@ $(function(){
 		return ;
 	});
 	
+	$("#order").on('change',function(){
+		filePagenumber = 1  ;
+		$("#fileContent").html('');
+		initFile();
+	});
+	
 	//初始化文件
 	function initFile(){
+		var order =$("#order").val().split(':');
 		$.ajax({
 			type:'get',
 	        url :contxtpath+'/group/getFiles.action',
@@ -204,7 +226,9 @@ $(function(){
 	        	groupId   : $("#groupId").val(),
 	        	pageNumber: filePagenumber,
 	        	pageSize  : filePagesize ,
-	        	fileName  : $("#fileName").val()
+	        	fileName  : fileName ,
+	        	order     : order[0],
+	        	rank      : order[1]
 	        },
 	        success:function(responsebean){
 	        	if(responsebean){
