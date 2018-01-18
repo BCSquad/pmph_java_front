@@ -9,7 +9,7 @@
 	
 	<!-- 通过教材ID查询所有书籍 -->
 	<select id="queryBookById" resultType="java.util.Map" parameterType="java.lang.String">
-		select * from textbook where material_id = #{material_id}
+		select * from textbook where material_id = #{material_id} order by sort asc
 	</select>
 	<!-- 通过教材ID查出相关的机构信息 -->
 	<select id="queryOrgById" resultType="java.util.Map" parameterType="java.lang.String">
