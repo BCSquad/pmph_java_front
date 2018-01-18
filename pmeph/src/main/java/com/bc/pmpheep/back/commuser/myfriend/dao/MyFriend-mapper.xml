@@ -50,6 +50,24 @@
 	
 	<!--获取用户好友列表  -->
 	<select id="listMyFriend" parameterType="java.lang.Long" resultType="java.util.Map">
+		select
+			b.realname as username
+			,b.position
+			,b.id 
+			,b.avatar
+			from
+			writer_friend a
+			left join writer_user b
+			on a.target_id=b.id or a.request_id = b.id
+			WHERE (a.target_id= #{userId} or a.request_id = #{userId})
+			and b.id != #{userId}
+			AND a.status=2
+			group by b.id
+			limit ${startrow},15
+	</select>
+	
+	<!-- 获取用户好友列表 不知道谁写的 
+	<select id="listMyFriend" parameterType="java.lang.Long" resultType="java.util.Map">
 		select * from (
 		SELECT 
 		  wf.request_id id,
@@ -82,6 +100,6 @@
 			wf.status = 2 
 		AND 
 			wf.request_id = ${userId})t limit ${startrow},15
-	</select>
+	</select> -->
 
 </mapper>
