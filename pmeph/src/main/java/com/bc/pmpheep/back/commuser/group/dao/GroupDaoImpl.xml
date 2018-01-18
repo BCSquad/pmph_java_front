@@ -82,9 +82,13 @@
 		true AND
 		is_deleted = FALSE
 		)
-		order by group_name
-		limit
-		#{start},#{pageSize}
+		<if test="order == null "> 
+			order by rand()
+		</if>
+		<if test="order != null "> 
+			order by #{order} 
+		</if>
+		limit #{start},#{pageSize}
 	</select>
 
 	<!-- 查当前用户的小组列表总数 -->
@@ -165,6 +169,12 @@
 		 <if test="fileName != null and fileName != '' ">
 		 	and a.file_name like CONCAT('%',#{fileName},'%')
 		 </if>
+		 <if test="order == null">
+		    ORDER BY a.gmt_create desc 
+		 </if>
+		 <if test="order != null">
+		    ORDER BY #{order} #{rank}
+		 </if>
 		 limit #{start},#{pageSize}
     </select>
     
@@ -207,6 +217,9 @@
 			<if test="download != null and download !=''">
 				download,
 			</if>
+			<if test="fileSize != null ">
+				file_size,
+			</if>
 		</trim>
 	</sql>
 	<!-- sql片段对应?,id属性值任意 -->
@@ -227,6 +240,9 @@
 			</if>
 			<if test="download !=null and download !=''">
 				#{download},
+			</if>
+			<if test="fileSize != null ">
+				#{fileSize},
 			</if>
 		</trim>
 	</sql>
@@ -396,17 +412,13 @@
 	</insert>
 	<!-- 添加小组文件 -->
 	<insert id="addFile" parameterType="java.util.Map">
-		insert pmph_group_file(group_id,member_id,file_id,file_name) 
-			values(#{group_id},#{member_id},#{file_id},#{file_name})
+		insert pmph_group_file(group_id,member_id,file_id,file_name,file_size) 
+			values(#{group_id},#{member_id},#{file_id},#{file_name},#{file_size})
 	</insert>
 	<!-- 查询文件信息 -->
 	<select id="fileList" parameterType="java.util.Map" resultType="java.util.Map">
 		select t1.*,t2.realname,substr(t1.file_name,INSTR(t1.file_name,'.')) xtype from pmph_group_file t1 
 			left join writer_user t2 on t1.member_id = t2.id
-		where t1.group_id = #{group_id} 
-		<if test="file_name != null and file_name !=''">
-			and	file_name like #{file_name} 
-		</if>
-		order by t1.gmt_create desc limit 0,#{pageSize} 
+		where t1.group_id = #{group_id} order by t1.gmt_create desc limit 0,#{pageSize} 
 	</select>
 </mapper>
