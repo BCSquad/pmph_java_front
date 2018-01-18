@@ -168,7 +168,7 @@
 		a.deadline as age_deadline,
 		a.material_name,
 		COUNT(b.id) AS exmember,
-		b.material_id,
+		a.id as material_id,
 		(TO_DAYS(NOW()) - TO_DAYS(a.deadline)) AS datebase,
 		count(c.id) as iamin,
 		c.id as declaration_id,

@@ -13,6 +13,8 @@
 		<result property="is_deleted" column="is_deleted"/>
 		<result property="is_all_textbook_published" column="is_all_textbook_published"/>
 		<result property="beenPublishTo" column="beenPublishTo"/>
+		<result property="is_force_end" column="is_force_end"/>
+	
 	</resultMap>
 
 	<!-- 申报资料审核列表查询 -->
@@ -27,6 +29,7 @@
 		count(u.id) as declaration_num,
 		m.is_deleted,
 		m.is_all_textbook_published,
+		m.is_force_end,
 		case
 		when o.org_id = #{parameter.org_id}
 		then 1
@@ -37,7 +40,7 @@
 		material AS m
 		left Join declaration AS d ON m.id = d.material_id
 		left Join writer_user AS u ON u.id = d.user_id
-		left join material_org o on m.id = o.material_id
+		left join material_org o on m.id = o.material_id and o.org_id = #{parameter.org_id}
 		<where>
 		((m.is_public = '0' and o.org_id = #{parameter.org_id}) or (m.is_public = '1'))
 		</where>
@@ -53,13 +56,15 @@
 		<choose>
 			<when test='parameter.queryStatus == "1" '>
 				and (
-				(m.is_all_textbook_published != 0 and m.is_all_textbook_published is not null)
+				(m.is_all_textbook_published = 0 )
+				and m.is_force_end =0
 				<![CDATA[ and m.actual_deadline >= NOW()]]>
 				)
 			</when>
 			<when test='parameter.queryStatus =="2" '>
 				and (
-				(m.is_all_textbook_published = 0 or m.is_all_textbook_published is null)
+				(m.is_all_textbook_published = 1)
+				or m.is_force_end =1
 				<![CDATA[ or m.actual_deadline < NOW()]]> 
 				)
 			</when>
@@ -81,7 +86,7 @@
 		FROM
 		material AS m
 		left Join declaration AS d ON m.id = d.material_id
-		left join material_org o on m.id = o.material_id
+		left join material_org o on m.id = o.material_id and o.org_id = #{parameter.org_id}
 		<where>
 			(m.is_deleted = 0 or m.is_deleted is null )
 			and((m.is_public = '0' and o.org_id = #{parameter.org_id}) or (m.is_public = '1'))
@@ -94,13 +99,15 @@
 			<choose>
 				<when test='parameter.queryStatus == "1" '>
 					and (
-					(m.is_all_textbook_published != 0 and m.is_all_textbook_published is not null)
+					(m.is_all_textbook_published = 0 )
+					and m.is_force_end =0
 					<![CDATA[ and m.actual_deadline >= NOW()]]>
 					)
 				</when>
 				<when test='parameter.queryStatus =="2" '>
 					and (
-					(m.is_all_textbook_published = 0 or m.is_all_textbook_published is null)
+					(m.is_all_textbook_published = 1)
+					or m.is_force_end =1
 					<![CDATA[ or m.actual_deadline < NOW()]]> 
 					)
 				</when>
