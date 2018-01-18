@@ -46,9 +46,7 @@ public class DataAuditController extends BaseController{
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.template.service.TemplateService")
 	private TemplateService templateService;
-	@Autowired
-	@Qualifier("com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailServiceImpl")
-	private MaterialDetailService mdService;
+	
 	
 
 	/**
@@ -128,7 +126,9 @@ public class DataAuditController extends BaseController{
 		@RequestMapping("toMaterialAudit")
 		public ModelAndView toMaterialAudit(HttpServletRequest request,
 				HttpServletResponse response){
-			ModelAndView mav = new ModelAndView("commuser/materialdec/toMaterialAudit");
+			
+			ModelAndView mav = new ModelAndView("authadmin/applydocaudit/toMaterialAudit");
+			
 			//传参  user_id  material_id
 			String material_id = request.getParameter("material_id");
 			String declaration_id = request.getParameter("declaration_id");
@@ -138,7 +138,7 @@ public class DataAuditController extends BaseController{
 			
 			//1.作家申报表
 			List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
-			gezlList = this.mdService.queryPerson(queryMap);
+			gezlList = this.dataAuditService.queryPerson(queryMap);
 			if(declaration_id == null){
 			queryMap.put("declaration_id", gezlList.get(0).get("id"));
 			}else{
@@ -146,37 +146,37 @@ public class DataAuditController extends BaseController{
 			}
 			//2.作家申报职位
 			List<Map<String,Object>> tsxzList = new ArrayList<Map<String,Object>>();
-			tsxzList=this.mdService.queryTsxz(queryMap);
+			tsxzList=this.dataAuditService.queryTsxz(queryMap);
 			//3.作家学习经历表
 			List<Map<String,Object>> stuList = new ArrayList<Map<String,Object>>();
-			stuList=this.mdService.queryStu(queryMap);
+			stuList=this.dataAuditService.queryStu(queryMap);
 			//4.作家工作经历表
 			List<Map<String,Object>> workList = new ArrayList<Map<String,Object>>();
-			workList=this.mdService.queryWork(queryMap);
+			workList=this.dataAuditService.queryWork(queryMap);
 			//5.作家教学经历表
 			List<Map<String,Object>> steaList = new ArrayList<Map<String,Object>>();
-			steaList=this.mdService.queryStea(queryMap);
+			steaList=this.dataAuditService.queryStea(queryMap);
 			//6.作家兼职学术表
 			List<Map<String,Object>> zjxsList = new ArrayList<Map<String,Object>>();
-			zjxsList=this.mdService.queryZjxs(queryMap);
+			zjxsList=this.dataAuditService.queryZjxs(queryMap);
 			//7.作家上套教材参编情况表
 			List<Map<String,Object>> jcbjList = new ArrayList<Map<String,Object>>();
-			jcbjList=this.mdService.queryJcbj(queryMap);
+			jcbjList=this.dataAuditService.queryJcbj(queryMap);
 			//8.作家精品课程建设情况表
 			List<Map<String,Object>> gjkcjsList = new ArrayList<Map<String,Object>>();
-			gjkcjsList=this.mdService.queryGjkcjs(queryMap);
+			gjkcjsList=this.dataAuditService.queryGjkcjs(queryMap);
 			//9.作家主编国家级规划教材情况表
 			List<Map<String,Object>> gjghjcList = new ArrayList<Map<String,Object>>();
-			gjghjcList = this.mdService.queryGjghjc(queryMap);
+			gjghjcList = this.dataAuditService.queryGjghjc(queryMap);
 			//10.作家教材编写情况表
 			List<Map<String,Object>> jcbxList = new ArrayList<Map<String,Object>>();
-			jcbxList=this.mdService.queryJcbx(queryMap);
+			jcbxList=this.dataAuditService.queryJcbx(queryMap);
 			//11.作家科研情况表
 			List<Map<String,Object>> zjkyList = new ArrayList<Map<String,Object>>();
-			zjkyList = this.mdService.queryZjkyqk(queryMap);
+			zjkyList = this.dataAuditService.queryZjkyqk(queryMap);
 			//12.作家扩展项填报表
 			List<Map<String,Object>> zjkzqkList = new ArrayList<Map<String,Object>>();
-			zjkzqkList = this.mdService.queryZjkzbb(queryMap);
+			zjkzqkList = this.dataAuditService.queryZjkzbb(queryMap);
 
 			//填充
 			mav.addObject("gezlList", gezlList.get(0));
@@ -213,14 +213,32 @@ public class DataAuditController extends BaseController{
 			paramMap.put("online_progress", type);
 			paramMap.put("auth_user_id", user_id);
 			paramMap.put("auth_date", date);
-			int count = this.mdService.updateDeclaration(paramMap);
+			int count = this.dataAuditService.updateDeclaration(paramMap);
 			if(count>0){
 				msg = "OK";
 			}
 			resultMap.put("msg", msg);
-			resultMap.put("msg", msg);
+			
 			return resultMap;
 		}
 		
+		
+		/**
+		 * 页面组合方法，主要js中通过ajax传值对新增页面模块进行初始化操作
+		 * @param request
+		 * @return
+		 */
+		@RequestMapping("queryMaterialMap")
+		@ResponseBody
+		public Map<String,Object> queryMaterialMap(HttpServletRequest request){
+			//教材信息
+			String material_id = request.getParameter("material_id");
+			Map<String,Object> materialMap = new HashMap<String,Object>();
+			materialMap = this.dataAuditService.queryMaterialbyId(material_id);
+			if(materialMap==null){
+				materialMap=new HashMap<String,Object>();
+			}
+			return materialMap;
+		}
 
 }
