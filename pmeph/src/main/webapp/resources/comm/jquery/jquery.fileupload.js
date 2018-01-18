@@ -2352,7 +2352,7 @@ $.fn.uploadFile = function (option) {
                     //data.context.text('Upload finished.');
                     if (data.result.code == '1') {
                         if (option.done) {
-                            option.done(data.files[0].name, data.result.data);
+                            option.done(data.files[0].name, data.result.data,data.files[0].size);
                         }
                     } else {
                         message.error("上传失败！");
