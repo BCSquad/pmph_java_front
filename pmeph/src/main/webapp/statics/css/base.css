@@ -389,7 +389,7 @@ td {
 
 .float-menu {
     width: 52px;
-    height: 160px;
+    height: 210px;
     position: fixed;
     top: 0;
 }
@@ -416,4 +416,9 @@ td {
 
 .float-menu .item.blue{
     background: #009EA3;
+}
+
+.float-menu .item.black{
+    line-height: 44px;
+    background: #383C48;
 }

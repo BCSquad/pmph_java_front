@@ -7,6 +7,7 @@ $(function () {
         "<a class='item' href='" + contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb'>教程申报</a>" +
         "<a class='item orange' href='" + contextpath + "personalhomepage/tohomepage.action?pagetag=wycs'>我要出书</a>" +
         "<a class='item blue' href='" + contextpath + "group/list.action'>交互服务</a>" +
+        "<a class='item black' href='" + contextpath + "group/list.action'>帮助</a>" +
         "</div>");
 
     var wrapper = $("body .content-wrapper");
@@ -22,7 +23,7 @@ $(function () {
 
 
     $menu.css("left", (wrapper.offset().left + 1210) + "px");
-    $menu.css("top", (winHeight - 160) / 2 + "px");
+    $menu.css("top", (winHeight - 210) / 2 + "px");
 
     wrapper.parent().append($menu)
 
