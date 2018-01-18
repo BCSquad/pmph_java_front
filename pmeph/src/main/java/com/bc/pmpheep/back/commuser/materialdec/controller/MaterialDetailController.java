@@ -285,7 +285,7 @@ public class MaterialDetailController extends BaseController{
 				if(!hj_material_name[i].equals("")){ //判断是否存在
 					Map<String,Object> GjghjcMap = new HashMap<String,Object>();
 					GjghjcMap.put("declaration_id", declaration_id);
-					GjghjcMap.put("hj_material_name",hj_material_name[i]);
+					GjghjcMap.put("material_name",hj_material_name[i]);
 					GjghjcMap.put("isbn",hj_isbn[i]);
 					GjghjcMap.put("rank", request.getParameter(hj_rank[i]));
 					GjghjcMap.put("note", hj_note[i]);
@@ -419,24 +419,19 @@ public class MaterialDetailController extends BaseController{
 	public ModelAndView toMaterialZc(HttpServletRequest request,
 			HttpServletResponse response){
 		ModelAndView mav = new ModelAndView("commuser/materialdec/toMaterialZc");
-		//传参   material_id declaration_id
+		//传参   declaration_id
 		Map<String,Object> userMap =  this.getUserInfo();
-		String material_id = request.getParameter("material_id");
 		String declaration_id = request.getParameter("declaration_id");
 		String user_id = userMap.get("id").toString();
 		Map<String,Object> queryMap = new HashMap<String,Object>();
 		queryMap.put("user_id", user_id);
-		queryMap.put("material_id", material_id); 
 		queryMap.put("declaration_id", declaration_id); 
 		
 		//1.作家申报信息表
 		List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
 		gezlList = this.mdService.queryPerson(queryMap);
-		if(declaration_id == null){
-		queryMap.put("declaration_id", gezlList.get(0).get("id"));
-		}else{
-			queryMap.put("declaration_id", declaration_id);
-		}
+		String material_id = gezlList.get(0).get("material_id").toString();
+		queryMap.put("material_id", material_id);
 		//2.作家申报职位暂存
 		List<Map<String,Object>> tssbList = new ArrayList<Map<String,Object>>();
 		tssbList=this.mdService.queryTssbZc(queryMap);
@@ -543,15 +538,15 @@ public class MaterialDetailController extends BaseController{
 			HttpServletResponse response){
 		//公共参数
 		String material_id = request.getParameter("material_id");
-		String declaration_id1 = request.getParameter("declaration_id");
+		String declaration_id = request.getParameter("declaration_id");
 		String user_id = request.getParameter("user_id"); //系统用户(暂存人)
 		String type = request.getParameter("type"); //类型
 		String is_background = "0";
 		String msg = "";
 		//删除暂存内容
 		Map<String,Object> glMap = new HashMap<String,Object>();
-		glMap.put("declaration_id", declaration_id1);
-		this.mdService.delGlxx(glMap);
+		glMap.put("declaration_id", declaration_id);
+		int scount = this.mdService.delGlxx(glMap);
 		//创建时间
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String date = df.format(new Date());
@@ -559,11 +554,14 @@ public class MaterialDetailController extends BaseController{
 		Map<String,Object> perMap = new HashMap<String,Object>();
 		if(type.equals("1")){ //提交
 			perMap.put("is_staging", "0");
+			perMap.put("online_progress", "1");
 		}else{ //暂存
 			perMap.put("is_staging", "1");
+			perMap.put("online_progress", "0");
 		}
 		perMap.put("realname", request.getParameter("realname"));
 		perMap.put("user_id", user_id);
+		perMap.put("declaration_id", declaration_id);
 		perMap.put("material_id", material_id);
 		perMap.put("sex", request.getParameter("sex"));
 		perMap.put("birthday", request.getParameter("birthday"));
@@ -580,10 +578,8 @@ public class MaterialDetailController extends BaseController{
 		perMap.put("idcard", request.getParameter("idcard"));
 		perMap.put("org_id", request.getParameter("edu"));
 		perMap.put("gmt_create", date);	
-		int count = this.mdService.insertPerson(perMap);
+		int count = this.mdService.updatePerson(perMap);
 		if(count>0){ //表示主表已添加
-			List<Map<String,Object>> perList = this.mdService.queryPerson(perMap);
-			Object declaration_id = perList.get(0).get("id");
 			//获取图书选择参数     
 			String textbook_ids[] = request.getParameterValues("textbook_id");
 			String preset_positions[] = request.getParameterValues("preset_position");
@@ -620,7 +616,7 @@ public class MaterialDetailController extends BaseController{
 					Map<String,Object> xxjlMap = new HashMap<String,Object>();
 					xxjlMap.put("declaration_id", declaration_id);
 					xxjlMap.put("major", xx_major[i]);
-					xxjlMap.put("xx_school_name", xx_school_name[i]);
+					xxjlMap.put("school_name", xx_school_name[i]);
 					xxjlMap.put("degree", xx_degree[i]);
 					xxjlMap.put("note", xx_note[i]);
 					xxjlMap.put("date_begin", xx_kssj[i]);
@@ -719,7 +715,7 @@ public class MaterialDetailController extends BaseController{
 				if(!hj_material_name[i].equals("")){ //判断是否存在
 					Map<String,Object> GjghjcMap = new HashMap<String,Object>();
 					GjghjcMap.put("declaration_id", declaration_id);
-					GjghjcMap.put("hj_material_name",hj_material_name[i]);
+					GjghjcMap.put("material_name",hj_material_name[i]);
 					GjghjcMap.put("isbn",hj_isbn[i]);
 					GjghjcMap.put("rank", request.getParameter(hj_rank[i]));
 					GjghjcMap.put("note", hj_note[i]);

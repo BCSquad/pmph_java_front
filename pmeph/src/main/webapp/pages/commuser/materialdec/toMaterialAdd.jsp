@@ -87,7 +87,7 @@
                                 <option value="2">女</option>
                             </select></td>
 						<td><span class="btbs">*</span><span>出生年月：</span> 
-							<input class="cg_input" calendar format="'yyyy-mm-dd'"  name="birthday" value=""  id="birthday" onBlur="toisNah('出生日期不能为空','birthday')" /></td>
+							<input class="cg_input" calendar format="'yyyy-mm-dd'"  name="birthday" value=""  id="birthday"  /></td>
 						<td><span class="btbs">*</span><span>教&emsp;&emsp;龄：</span>
 							<input class="cg_input" name="experience" value="" id="experience" onBlur="toisNah('教龄不能为空','experience')"
 							 onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"

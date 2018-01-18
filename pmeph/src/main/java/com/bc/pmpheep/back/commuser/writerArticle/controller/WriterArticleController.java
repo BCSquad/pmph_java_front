@@ -119,7 +119,7 @@ public class WriterArticleController extends BaseController{
 			    int is_staging = "0".equals(btnType)?0:1;  //是否暂存  1 暂存  0不暂存 提交
 				Map map = new HashMap();
 				map.put("parent_id", 0); //上级id
-				map.put("category_id",1); //内容类型 >0 非评论
+				map.put("category_id",cmsCategoryConfig.getId("医学随笔")); //内容类型 >0 非评论
 				map.put("title",titleValue); //内容标题  
 				map.put("author_type",2); //作者类型
 				map.put("author_id",uid); //作者id
@@ -166,7 +166,7 @@ public class WriterArticleController extends BaseController{
 			Map map = new HashMap();
 			map.put("msg_id", msg_id); //内容id 唯一标识
 			map.put("parent_id", 0); //上级id
-			map.put("category_id",1); //内容类型 >0 非评论
+			map.put("category_id",cmsCategoryConfig.getId("医学随笔")); //内容类型 >0 非评论
 			map.put("title",titleValue); //内容标题  
 			map.put("author_type",2); //作者类型
 			map.put("author_id",uid); //作者id

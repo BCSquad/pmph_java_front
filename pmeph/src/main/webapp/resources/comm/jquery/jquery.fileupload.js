@@ -2318,7 +2318,14 @@ $.fn.uploadFile = function (option) {
                 limitMultiFileUploadSize: 104857600,
                 add: function (e, data) {
                     if (data.files[0].name) {
-                        data.submit();
+                        if (option.valid) {
+                            if (option.valid(data.files[0])) {
+                                data.submit();
+                            }
+                        } else {
+                            data.submit();
+                        }
+
                     }
                 },
                 start: function (e) {

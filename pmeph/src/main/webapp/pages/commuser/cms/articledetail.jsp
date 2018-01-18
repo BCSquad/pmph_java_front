@@ -30,7 +30,7 @@
 		<jsp:param value="homepage" name="pageTitle" />
 	</jsp:include>
 	<div class="body">
-		<div class="cms-writer"><div class="text">写文章</div></div>
+		<div class="cms-writer"><div class="text" onclick="window.location.href='${ctx}/writerArticle/initWriteArticle.action'">写文章</div></div>
 		<div class="content-wrapper">
 			<div class="area1">
 	    	<div class="_title">
@@ -59,17 +59,8 @@
 	    		<span id="img_span">454</span>
 	    	</div>
 	    	<!--内容-->
-	    	<div class="yxsb_content"><!-- <p>享有“西方医学之父”之称的古希腊医学家希波克拉底曾经发誓：治病时不给病人带来痛苦与危害，今天的医生们仍然遵循着这一治疗原则。这位古希腊医学家的智慧不仅适用于医生，其实对于我们所有人都不无裨益。<br />
-			今日解读：很多研究显示，即使每天只步行30分钟，也能降低患上糖尿病、心脏病、骨质疏松和一些癌症的可能。美国癌症学会最近对650000人进行了一项研究，结果显示，那些每周仅仅进行150分钟走路的人，也会平均增加3.4年的预期寿命。“没有任何一
-			种药物能给你带来这么多好处。”克莱蒙特说。</p>
-			<p>凯兹博士曾经治疗过很多肥胖症病人，他问病人的第一个问题是他们是否有不良人际关系、紧张的工作或者缺少睡眠。他说：“医
-				生必须要找出引起肥胖的原因，然后才能对症治疗。当你从整体上医治一个病人，无论是肥胖或其他很多健康问题，治疗起来都会
-				变得相当容易。”</p>
-			<p>《英国医药》杂志最近刊文说，2013年，对超过7000人的一次研究显示，坚持地中海式饮食，也就是以蔬菜、水果、鱼、豆类
-				为主的人，比那些只重视低脂肪，导致偏食的人患中风、心脏病的比例低了30%。卡恩博士说：含有糖、动物性脂肪和反式脂肪的
-				加工食品、人工合成的药物能刺激致病基因的产生，给人体造成潜在危害，而且这些食物和药物里也缺少健康必需的、能激活免疫
-				基因的营养。</p> -->
-				--------------------------
+	    	
+	    	<div class="yxsb_content">
 				${UEContent }
 	    	</div>
 	    	<div class="block">
@@ -77,7 +68,7 @@
                     <div class="title">
                         <div class="line"></div>
                            <div class="rd_name">文章评论（共${ComNum}条）</div>
-                        <div class="scorestar" id="star">
+                        <!-- <div class="scorestar" id="star">
                              <div class="scorestar1" id="score1"></div>
                              <div class="scorestar1" id="score2"></div>
                              <div class="scorestar1" id="score3"></div>
@@ -87,7 +78,7 @@
 	                    <div class="user_score">
                               <span>评分：</span>
                               <span style="color: #FFD200" id="last_score">10.0</span>
-                        </div>
+                        </div> -->
                     </div>
                     <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
                     <div class="pl_add">
@@ -102,7 +93,7 @@
                         <div class="item_title">
                         	<div style="float: left;"><img src="${ctx}/statics/image/rwtx.png" class="picturesize"/></div>
                         	<div style="float: left;margin-left: 10px;margin-top: 5px;">${list.realname}</div>
-                        	<div style="float: left;margin-left: 10px;">
+                        	<%-- <div style="float: left;margin-left: 10px;">
                         	<c:if test="${list.score<=3}">
 	                        	<span class="rwtx1"></span>
 	                        	<span class="rwtx2"></span>
@@ -138,7 +129,7 @@
 	                        	<span class="rwtx1"></span>
 	                        	<span class="rwtx1"></span>
 	                        </c:if>
-                        	</div>
+                        	</div> --%>
                             <div class="date_content"><div class="date">${list.gmt_create}</div></div>
                         </div>
                         <div class="item_content">${list.content}</div>
@@ -226,7 +217,7 @@
     			<div  id="comment">
 	                <c:forEach items="${eMap}" var="list">
 		    			<div class="right_20" >
-			    			<div class="right_21" >${list.title}</div>
+			    			<div class="right_21" onclick="todetail('${list.wid}')">${list.title}</div>
 			    			<div class="right_22">（${list.realname}）</div>
 			    		</div>
 	    		 </c:forEach>
