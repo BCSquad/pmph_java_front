@@ -69,7 +69,7 @@
 												</div>							
 											</div>
 										</c:if>
-										<c:if test="${question.type==3}">
+										<c:if test="${question.type==4}">
 											<div class="oneQuestion">
 												<p>Q${code.index+1} : ${question.title}</p>
 												<div style="padding-left: 22px">
