@@ -51,7 +51,8 @@ public class BookSearchController extends BaseController {
 		/*String search = request.getParameter("search");*/
 		String real_search = request.getParameter("real_search");
 		//search = new String((search!=null?search:"").getBytes("iso8859-1"), "utf-8");
-		search = java.net.URLDecoder.decode(search,"UTF-8"); 
+		search = java.net.URLDecoder.decode(search.trim(),"UTF-8"); 
+		
 		real_search = new String((real_search!=null?real_search:"").getBytes("iso8859-1"), "utf-8");
 		Long id=0L;
 		List<Map<String,Object>> fistsort=bookSearchService.queryChildSort(id);
@@ -89,7 +90,15 @@ public class BookSearchController extends BaseController {
 //        resultMap.put("child", smallsort);
 		String order=request.getParameter("order");
         Map<String,Object> smap=new HashMap<String, Object>();
-        smap.put("searchText", queryName !=null && !"".equals(queryName)? "%"+queryName+"%":null );
+        
+        queryName = queryName !=null && !"".equals(queryName)? queryName.trim():"";
+        String[] searchTextArray = queryName.split(" ");
+        searchTextArray = searchTextArray.length>0?searchTextArray:null;
+        smap.put("searchTextArray",searchTextArray);
+        //smap.put("searchText", queryName !=null && !"".equals(queryName)? "%"+queryName+"%":null );
+        
+        
+        
         smap.put("order", order !=null && !"".equals(order)? Long.valueOf(order)+2:2);
         smap.put("sortId", sortid!=null && !"".equals(sortid)? sortid:0 );
         smallsort= bookSearchService.querySearchSort(smap);
@@ -111,7 +120,8 @@ public class BookSearchController extends BaseController {
 		String contextpath = request.getParameter("contextpath");
 		
 		Map<String, Object> paraMap = new HashMap<String, Object>();
-		paraMap.put("searchText", queryName !=null && !"".equals(queryName)? "%"+queryName+"%":null );
+		paraMap.put("searchTextArray",searchTextArray);
+		//paraMap.put("searchText", queryName !=null && !"".equals(queryName)? "%"+queryName+"%":null );
 		paraMap.put("logUserId", uid);
 		paraMap.put("type", sortid);
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<Map<String,Object>>(pageNum,pageSize);

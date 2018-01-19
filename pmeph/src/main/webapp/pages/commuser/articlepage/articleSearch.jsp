@@ -55,7 +55,7 @@
                         <div class="articleUpDiv">
                             <div class="upLeft">
                                 <div class="bookName">
-                                    <span class="book-name-span">${list.title}</span>
+                                    <div class="book-name-span">${list.title}</div>
                                 </div>
                                 <div class="nameDiv">
                                     <img class="headPicture" src="../statics/pictures/avatar.png"/>
@@ -65,7 +65,7 @@
                             <div class="upRight">
 	                                <div class="pictureDiv">
 	                                <div class="number2">${list.comments}</div>
-                                    <div class="comment" onclick="changelikes()"></div>
+                                    <div class="comment"></div>
                                     <div class="number2" id="likenum${list.id}">${list.likes}</div>
                                     <input type="hidden" id="likes${list.id}" value="${list.cms_user_like==null?'handPicture':'nohandPicture'}">
                                     <input type="hidden" id="mainid${list.id}" value="${list.id}">
@@ -95,7 +95,7 @@
 	                      <span>共<span id="allppage">${allpage}</span>页，跳转到</span>
 	                      <input type="text" id="jumpId"/>
 	                      <span class="pp">页</span>
-	                      <button type="button" class="button" onclick="jump()">确定</button>
+	                      <button type="button" class="button">确定</button>
 	                  </div>
                 </div>
              </div>

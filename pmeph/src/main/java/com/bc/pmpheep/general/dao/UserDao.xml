@@ -7,7 +7,7 @@
             select * from writer_user where username=#{username}
         </if>
         <if test="usertype == 2">
-            select * from org_user where username=#{username}
+            select u.*,o.org_name from org_user u join org o on u.org_id=o.id where username=#{username}
         </if>
     </select>
 </mapper>

@@ -66,7 +66,7 @@ public interface GroupDao {
 	 * 
 	 * 
 	 * 功能描述：前台查询小组列表
-	 *
+	 *  @param order 排序字段  null时候 随机排序
 	 * @param start
 	 *            起始条数
 	 * @param pageSize
@@ -76,7 +76,7 @@ public interface GroupDao {
 	 * @return
 	 *
 	 */
-	List<GroupList> list(@Param("start") Integer start, @Param("pageSize") Integer pageSize, @Param("id") Long id);
+	List<GroupList> list(@Param("start") Integer start, @Param("pageSize") Integer pageSize, @Param("id") Long id,@Param("order") String order);
 
 	/**
 	 * 
@@ -153,7 +153,7 @@ public interface GroupDao {
 	 * @return List<GroupFile>
 	 */
 	List<GroupFileVO> getFiles(@Param("start") Integer start, @Param("pageSize") Integer pageSize,
-			@Param("groupId") Long groupId, @Param("fileName")String fileName, @Param("thisId")Long thisId);
+			@Param("groupId") Long groupId, @Param("fileName")String fileName, @Param("thisId")Long thisId,@Param("order")String order,@Param("rank")String rank);
 	
 	/**
 	 * 获取某小组文件的文件总数

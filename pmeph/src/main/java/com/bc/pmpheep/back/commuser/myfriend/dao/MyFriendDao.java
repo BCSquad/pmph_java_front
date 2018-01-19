@@ -36,4 +36,12 @@ public interface MyFriendDao {
      * </pre>
      */
     List<Map<String, Object>> listMyFriend(@Param("userId") Long userId,@Param("startrow") int startrow);
+
+    /**
+     * 查询剩余总数
+     * @param userId
+     * @param startrow
+     * @return
+     */
+	int listMyFriendCount(@Param("userId") Long userId,@Param("startrow") int startrow);
 }

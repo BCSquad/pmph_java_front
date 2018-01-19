@@ -71,8 +71,12 @@ function getSort(order,id,pid,tag){
 				}else if(tag=="page"){
 					   
 				}else if(tag=="search"){
+					if(json.child.length>0){
 					 $("#mysort").html(str);
 					 $("input[name=radio"+json.child[0].parent_id+"]").labelauty();
+					}else{
+						 $("#mysort").html('');
+					 }
 				}
 //			}else{
 //				$("#sort"+order).nextAll().remove();
@@ -204,14 +208,17 @@ function likeSwitch(bookId,icon){
 
 //搜索条件在相应部位红色
 function redQuery(){
-	var qs=$("#search-name-temp").val();
-	var re=new RegExp(qs,"ig");
-	var $tag= $(".book-name-span");
-	$tag.each(function(){
-		var html = $(this).html();
-		var fit_html = '<font style="color:red;">'+qs+'</font>';
-		$(this).html(html.replace(re,fit_html));
-	});
+	var qsArray = $("#search-name-temp").val().trim().split(" ");
+	for ( var i in qsArray) {
+		var re=new RegExp(qsArray[i],"ig");
+		var $tag= $(".book-name-span");
+		$tag.each(function(){
+			var html = $(this).html();
+			var fit_html = '<font style="color:red;">'+qsArray[i]+'</font>';
+			$(this).html(html.replace(re,fit_html));
+		});
+	}
+	//var qs=$("#search-name-temp").val();
 }
 
 //搜索之后跳转到页面顶部

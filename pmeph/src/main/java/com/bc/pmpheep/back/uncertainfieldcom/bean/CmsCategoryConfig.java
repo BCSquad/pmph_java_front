@@ -27,22 +27,23 @@ public class CmsCategoryConfig {
 	public String getId(String CmsCategoryName) {
 		
 		String id = typeDao.queryCmsCategoryIdByCmsCategoryName(CmsCategoryName);
+		if (id == null) {
+			//id确定时解开，即使名称变动，后台java代码依然有一一对应关系，只用修改此一处的id
+			switch (CmsCategoryName) {
+			case "医学随笔":
+				id="3";
+				break;
+			case "快报管理":
+				id="2";
+				break;
+			case "公告管理":
+				id="1";
+				break;
+			default:
+				break;
+			}
+		}
 		
-		//id确定时解开，即使名称变动，后台java代码依然有一一对应关系，只用修改此一处的id
-		/*
-		switch (CmsCategoryName) {
-		case "医学随笔":
-			id="165";
-			break;
-		case "快报管理":
-			id="164";
-			break;
-		case "公告管理":
-			id="163";
-			break;
-		default:
-			break;
-		}*/
 		return id;
 	}
 

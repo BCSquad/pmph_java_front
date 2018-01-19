@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bc.pmpheep.back.commuser.cms.bean.CmsNoticeList;
 import com.bc.pmpheep.back.commuser.cms.service.CmsNoticeManagementService;
 import com.bc.pmpheep.back.commuser.mymessage.service.NoticeMessageService;
+import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.general.pojo.Message;
 import com.bc.pmpheep.general.service.MessageService;
 
@@ -40,7 +41,7 @@ import com.bc.pmpheep.general.service.MessageService;
  */
 @Controller
 @RequestMapping(value = "/cmsnotice")
-public class CmsNoticeManagementController {
+public class CmsNoticeManagementController extends BaseController {
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.cms.service.CmsNoticeManagementServiceImpl")
 	CmsNoticeManagementService cmsNoticeManagementService;
@@ -83,7 +84,12 @@ public class CmsNoticeManagementController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	@ResponseBody
 	public List<CmsNoticeList> list(Integer pageSize, Integer pageNumber, Integer order) {
-		List<CmsNoticeList> cmsNoticeList =  cmsNoticeManagementService.list(pageSize, pageNumber, order);
+		Long userid=0L;
+		Map<String,Object> usermap=getUserInfo();
+		if(usermap !=null){
+			userid=Long.valueOf(usermap.get("id").toString());
+		}
+		List<CmsNoticeList> cmsNoticeList =  cmsNoticeManagementService.list(pageSize, pageNumber, order,userid);
 		return cmsNoticeList ;
 	}
     

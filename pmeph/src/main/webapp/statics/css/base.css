@@ -387,4 +387,38 @@ td {
     display: block;
 }
 
+.float-menu {
+    width: 52px;
+    height: 210px;
+    position: fixed;
+    top: 0;
+}
 
+
+.float-menu .item{
+    display: block;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 2px;
+    background: #00D2B0;
+    color: #ffffff;
+    border-radius: 4px;
+    text-align: center;
+    padding: 4px;
+    text-decoration:none;
+    line-height: 22px;
+    cursor: pointer;
+    font-size: 15px;
+}
+.float-menu .item.orange{
+    background: #FF9C43;
+}
+
+.float-menu .item.blue{
+    background: #009EA3;
+}
+
+.float-menu .item.black{
+    line-height: 44px;
+    background: #383C48;
+}

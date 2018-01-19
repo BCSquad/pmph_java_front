@@ -9,7 +9,7 @@
 	<!-- 根据ID查询标题 -->
 	<select id="queryTitle" parameterType="java.util.Map"
 		resultType="java.util.Map">
-		SELECT * FROM cms_content c WHERE c.id=#{id}
+		SELECT c.title, DATE_FORMAT(c.gmt_create,'%Y-%m-%d') as gmt_create,c.clicks FROM cms_content c WHERE   c.id=#{id}
 	</select>
 
 	<!-- 查询作者 -->
@@ -18,7 +18,8 @@
 		select
 		t.id,
 		t.author_id,
-		c.realname
+		c.realname,
+		c.avatar
 		from cms_content t
 		left
 		join cms_category b on t.category_id=b.id
@@ -44,8 +45,8 @@
 		parameterType="java.lang.String">
 		select
 		t.id,
-		t.title,
-		t.gmt_create,
+		t.title,		
+		DATE_FORMAT(t.gmt_create,'%Y-%m-%d %H:%i') as gmt_create,
 		c.realname
 		from
 		cms_content t
@@ -60,7 +61,7 @@
 	<!-- 查询相关文章 换一换 -->
 	<select id="queryRecommendByE" parameterType="java.util.Map"
 		resultType="java.util.Map">
-		select c.title,w.realname,c.id
+		select c.title,w.realname,c.id as wid
 		from cms_content c left join writer_user
 		w
 		on c.author_id=w.id
@@ -70,13 +71,14 @@
 			limit #{x},5
 		</if>
 	</select>
+	
 
 	<!-- 写评论插入数据 -->
 	<insert id="insertWriteArticle" parameterType="java.util.Map">
 		insert into
 		cms_content
-		(mid,parent_id,category_id,author_type,author_id,is_staging,path,score)
-		values(#{mid},#{parent_id},#{category_id},#{author_type},#{author_id},#{is_staging},#{path},#{score})
+		(mid,parent_id,category_id,author_type,author_id,is_staging,path)
+		values(#{mid},#{parent_id},#{category_id},#{author_type},#{author_id},#{is_staging},#{path})
 	</insert>
 
 	<!-- 评论返回 -->
@@ -87,7 +89,7 @@
 		t.mid,
 		c.realname,
 		t.gmt_create,
-		t.score,
+		<!-- t.score, -->
 		c.avatar
 		from cms_content t
 		left join cms_category b on t.category_id=b.id

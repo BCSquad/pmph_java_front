@@ -23,33 +23,72 @@
 		AND cc.is_published = TRUE
 	</select>
 
-	<select id="list"  resultType="CmsNoticeList">
-		SELECT
+	<select id="list"  resultType="CmsNoticeList" parameterType="java.util.Map">
+		<!-- SELECT
 		*
 		FROM
 		cms_content cc
-		LEFT JOIN pmph_user pu ON cc.author_id =
-		pu.id
+		LEFT JOIN pmph_user pu ON cc.author_id =pu.id
 		LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
-		LEFT JOIN
-		material m ON m.id = cc.material_id
+		LEFT JOIN material m ON m.id = cc.material_id
+		left join material_org mo on mo.material_id=m.id
+		left join writer_user wu on wu.org_id=mo.id
 		WHERE
 		cc.is_deleted = 0
 		AND
 		ccg.category_name = '公告管理'
 		AND cc.auth_status = 2
 		AND cc.is_published =1
-		ORDER BY
+		and m.is_public=0
+		<if test="userid !=0">
+		   and  wu.id=#{userid}
+		</if> -->
+		
+  select b.* from (SELECT
+		cc.*
+		FROM
+		cms_content cc
+		LEFT JOIN pmph_user pu ON cc.author_id =pu.id
+		LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
+		LEFT JOIN material m ON m.id = cc.material_id
+		WHERE
+		cc.is_deleted = 0
+		AND
+		ccg.category_name = '公告管理'
+		AND cc.auth_status = 2
+		AND cc.is_published =1
+    and m.is_public=0
+union 
+select 
+     cc.*
+		FROM
+		cms_content cc
+		LEFT JOIN pmph_user pu ON cc.author_id =pu.id
+		LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
+		LEFT JOIN material m ON m.id = cc.material_id
+    left join material_org mo on mo.material_id=m.id
+		left join writer_user wu on wu.org_id=mo.id
+		WHERE
+		cc.is_deleted = 0
+		AND
+		ccg.category_name = '公告管理'
+		AND cc.auth_status =2
+		AND cc.is_published =1
+    and wu.id=#{userid}
+    and m.is_public=1
+) b 
+
+ORDER BY
 		<if test="order == 1">
-			cc.is_promote desc,cc.sort_promote,
-			cc.is_hot DESC,cc.sort_hot,
-		    cc.auth_date DESC
+			b.is_promote desc,b.sort_promote,
+			b.is_hot DESC,b.sort_hot,
+		    b.auth_date DESC
 		</if>
 		<if test="order == 2">
-			cc.auth_date DESC
+			b.auth_date DESC
 		</if>
 		<if test="order == 3">
-			cc.is_hot DESC,cc.sort_hot
+			b.is_hot DESC,b.sort_hot
 		</if>
 		LIMIT #{start},#{pageSize}
 	</select>

@@ -4,11 +4,13 @@
   <resultMap id="Mapresult" type="java.util.Map"></resultMap>
   <!-- 查询最新三条公文 -->
   <select id="queryDocument"  resultMap="Mapresult">
-     select  * from cms_content  where  category_id='1' and auth_status='2' order by gmt_create desc limit 0,3
+     select  * from cms_content  where  category_id='3' and auth_status='2' 
+     and is_deleted='0' order by gmt_create desc limit 0,3
   </select>
-   <!-- 查询最新五条公告 -->
+   <!-- 查询最新五条信息快报 -->
   <select id="queryNotice"  resultMap="Mapresult">
-     select  * from cms_content  where  category_id='3' and auth_status='2' order by gmt_create desc limit 0,5
+     select  * from cms_content  where  category_id='2' and auth_status='2' 
+     and is_deleted='0' order by gmt_create desc limit 0,5
   </select>
    <!-- 查询书籍 -->
   <select id="queryBook" parameterType="map" resultMap="Mapresult">

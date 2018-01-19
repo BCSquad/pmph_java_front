@@ -53,4 +53,15 @@ public class MyFriendServiceImpl implements MyFriendService {
 //        }
         return lst ;
     }
+
+	@Override
+	public int listMyFriendCount(CommuserWriterUser writerUser, int startrow) {
+		Long userId = writerUser.getId();
+        if (ObjectUtil.isNull(userId)) {
+            throw new CheckedServiceException(CheckedExceptionBusiness.WRITER_FRIEND,
+                                              CheckedExceptionResult.NULL_PARAM, "用户Id为空");
+        }
+        int count  =  myFriendDao.listMyFriendCount(userId,startrow);
+		return count;
+	}
 }

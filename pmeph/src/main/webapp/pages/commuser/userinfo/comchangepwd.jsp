@@ -11,7 +11,7 @@
     <script src="${ctx}/resources/comm/jquery/jquery.js" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/base.js" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/json2.js" type="text/javascript"></script>
-    <script src="${ctx}/resources/authadmin/accountset/changepwd.js" type="text/javascript"></script>
+    <script src="${ctx}/resources/commuser/userinfo/comchangepwd.js" type="text/javascript"></script>
     <link href="${ctx}/statics/css/base.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/statics/authadmin/accountset/publicStyle.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/statics/authadmin/accountset/changepwd.css" rel="stylesheet" type="text/css" />
@@ -28,7 +28,7 @@
                 <span class="span1"></span>
                 <span class="div-menu-main">修改密码</span>
                 <a href="#" class="return-menu-main"
-                    onclick="window.location='${ctx}/admininfocontroller/toadmininfo.action'"><< 返回个人资料</a>
+                    onclick="window.location='${ctx}/userinfo/touser.action'"><< 返回个人资料</a>
             </div>
         </div>
         <div style="height:14px"></div>

@@ -2,6 +2,8 @@ package com.bc.pmpheep.back.commuser.userinfo.service;
 
 import java.util.Map;
 
+import com.bc.pmpheep.back.authadmin.accountset.bean.OrgAdminUser;
+
 public interface UserInfoService {
 
 	/**
@@ -23,4 +25,10 @@ public interface UserInfoService {
 	 * @return
 	 */
 	Map<String, Object> updateavatar(String avatar,String id);
+	
+    /**
+     * 修改密码
+     * @param orgUser
+     */
+    public void updatePassword(Map<String, Object> map);
 }

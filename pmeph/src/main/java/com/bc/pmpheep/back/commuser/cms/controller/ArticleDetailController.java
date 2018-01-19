@@ -18,7 +18,9 @@ import com.bc.pmpheep.back.commuser.cms.service.ArticleDetailService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.general.controller.BaseController;
+import com.bc.pmpheep.general.pojo.Content;
 import com.bc.pmpheep.general.pojo.Message;
+import com.bc.pmpheep.general.service.ContentService;
 import com.bc.pmpheep.general.service.MessageService;
 
 /**
@@ -34,7 +36,8 @@ public class ArticleDetailController extends BaseController {
 	@Qualifier("com.bc.pmpheep.back.commuser.cms.service.ArticleDetailServiceImpl")
 	private ArticleDetailService articleDetailService;
 	@Autowired
-	private MessageService messageService;
+	private ContentService contentService;
+	
 
 	/**
 	 * 跳转至页面
@@ -50,8 +53,9 @@ public class ArticleDetailController extends BaseController {
 		Map<String, Object> map1 = new HashMap<String, Object>();
 		map1.put("id", wid);
 		Map<String, Object> map = articleDetailService.queryTitle(map1);
-		// mongoDB查询通知内容
-		Message message = messageService.get(map.get("mid").toString());
+		// mongoDB查询内容
+		Content message = contentService.get(map.get("mid").toString());
+//		Content message = contentService.get("5a2ffd33879abeb3ebc91cdf");
 		String UEContent="";
 		if (message==null||"".equals(message)) {
 			 UEContent = "没有内容！！！！！";
@@ -134,7 +138,7 @@ public class ArticleDetailController extends BaseController {
 		PageResult<Map<String, Object>> listCom=articleDetailService.queryComment(pageParameter);
 		// mongoDB查询评论
 		for (Map<String, Object> pmap : listCom.getRows()) {
-			String comment = messageService.get((String) pmap.get("mid")).getContent();
+			String comment = contentService.get((String) pmap.get("mid")).getContent();
 			pmap.put("mid", comment);
 		}
 		
@@ -176,7 +180,7 @@ public class ArticleDetailController extends BaseController {
 		String content=request.getParameter("content");
 		
 		Map<String, Object> user=getUserInfo();
-		map.put("score", request.getParameter("score"));
+		/*map.put("score", request.getParameter("score"));*/
 		map.put("parent_id", wid); //上级id
 		map.put("category_id",0); //内容类型 0评论
 		map.put("author_type",2); //作者类型

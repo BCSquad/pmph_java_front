@@ -39,17 +39,19 @@ public class ImageController {
      */
     @ResponseBody
     @RequestMapping(value = "/image/{id}", method = RequestMethod.GET)
-    public void avatar(@PathVariable("id") String id, HttpServletResponse response) throws IOException {
+    public void avatar(@PathVariable("id") String id, HttpServletResponse response)  {
         response.setContentType("image/png");
         GridFSDBFile file = fileService.get(id);
         if (null == file) {
-            throw new IOException();
+            //throw new IOException();
         }
         try (OutputStream out = response.getOutputStream()) {
             file.writeTo(out);
             out.flush();
             out.close();
         } catch (IOException ex) {
+            // logger.error("文件下载时出现IO异常：{}", ex.getMessage());
+        } catch (Exception ex) {
             // logger.error("文件下载时出现IO异常：{}", ex.getMessage());
         }
         return ;

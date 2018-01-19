@@ -1,13 +1,13 @@
 $(document).ready(function(){
 	 //为所有的class为scorestar1绑定mouseout和mouseover事件。bind({事件名：function(){},事件名：function(){}})的方法绑定多个事件
-	 $(".scorestar1").bind({
+	/* $(".scorestar1").bind({
 	  mouseover: function () {
 		  $(this).css("background-position", "-183px -174px").prevAll().css("background-position", "-183px -174px");
 		  $(this).nextAll().css({"background-position": "-183px -153px"});
 		  var score=parseInt($(this).attr("id").substring(5))*2+'.0';
 		  $("#last_score").html(score);
 	  }
-	  });
+	  });*/
 });
 
 $(function(){
@@ -43,7 +43,7 @@ function changepage(n){
 	var json={
 			pageNumber:n,	
 			allppage:$('input[name=edu]').val(),
-			/*id:$("#book_id").val(),*/
+			
 	};
 	 $.ajax({
 		type:'post',
@@ -64,7 +64,7 @@ function changepage(n){
 					str+='" class="picturesize"/></div><div style="float: left;margin-left: 10px;margin-top: 5px;">'+
 					n.realname
 					+'</div><div style="float: left;margin-left: 10px;">';
-           	if(n.score<=3){
+           /*	if(n.score<=3){
            		str+='<span class="rwtx1"></span>'
            		+'<span class="rwtx2"></span>'
            		+'<span class="rwtx2"></span>'
@@ -94,7 +94,7 @@ function changepage(n){
            		+'<span class="rwtx1"></span>'
            		+'<span class="rwtx1"></span>'
            		+'<span class="rwtx1"></span>'
-           	}
+           	}*/
            	str+='</div><div class="date_content"><div class="date">'
            	+n.gmt_create
            	+'</div></div></div><div class="item_content">'
@@ -126,7 +126,7 @@ function insert(){
 	}
 	var json={
 		 content:$("#content").val(),
-		 score:$("#last_score").html(),
+		/* score:$("#last_score").html(),*/
 	};
 	 $.ajax({
 			type:'post',
@@ -203,6 +203,11 @@ function addmark(){
 					}
 			}
 		});
+}
+
+//跳转到详情文章
+function todetail(id) { 
+    location.href = contextpath + 'articledetail/toPage.action?wid=' + id;
 }
 
 

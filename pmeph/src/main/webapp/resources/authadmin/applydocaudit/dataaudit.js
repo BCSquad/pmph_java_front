@@ -64,7 +64,9 @@ function queryMain(){
 
 //点击名字跳转页面
 function toName(material_id,declaration_id){
-	window.location.href = contextpath + 'material/toMaterialAudit.action?material_id='+material_id+'&declaration_id='+declaration_id;
+	/*window.location.href = contextpath + 'material/toMaterialAudit.action?material_id='+material_id+'&declaration_id='+declaration_id;*/
+	window.location.href = contextpath + 'dataaudit/toMaterialAudit.action?material_id='+material_id+'&declaration_id='+declaration_id;
+
 }
 
 

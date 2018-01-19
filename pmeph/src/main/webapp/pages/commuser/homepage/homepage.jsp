@@ -21,6 +21,8 @@
     <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.scroll.js"></script>
     <script src="${ctx}/resources/comm/base.js"></script>
+    <script src="${ctx}/resources/comm/menu.js"></script>
+
     <script src="${ctx}/resources/commuser/homepage/homepage.js"></script>
 </head>
 <body>
@@ -74,7 +76,7 @@
             <c:forEach items="${listDou}" var="list" varStatus="status">
                 <c:if test="${status.index==0}">
                     <div class="content-left" style="margin-left: 30px">
-                        <p class="content-size">${list.title}</p>
+                        <p class="content-size"><a href="${ctx}/message/noticeMessageDetail.action?id=${list.id }" class="astyle">${list.title}</a></p>
                         <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date" pattern="yyyy-MM-dd"/></p>
                         <div class="left_join"
                         onclick="window.location.href='${ctx}/material/toMaterialAdd.action?material_id=${list.material_id}'">报名参加</div>
@@ -82,7 +84,7 @@
                 </c:if>
                 <c:if test="${status.index!=0}">
                     <div class="content-left">
-                        <p class="content-size">${list.title}</p>
+                        <p class="content-size"><a href="${ctx}/message/noticeMessageDetail.action?id=${list.id }" class="astyle">${list.title}</a></p>
                         <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date" pattern="yyyy-MM-dd"/></p>
                         <div class="left_join"
                         onclick="window.location.href='${ctx}/material/toMaterialAdd.action?material_id=${list.material_id}'">报名参加</div>
@@ -103,8 +105,7 @@
             <c:forEach items="${listNot}" var="list" varStatus="status">
                 <c:if test="${status.index==0}">
                     <div class="content-photo">
-                        <p class="content-size"><a href="inforeport/toinforeport.action?id=${list.id}"
-                        style="color: #666666;text-decoration:none;">${list.title}</a></p>
+                        <p class="content-size"><a href="${ctx}/inforeport/toinforeport.action?id=${list.id}" class="astyle" style="color: #333333">${list.title}</a></p>
                         <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date"
                                                                   pattern="yyyy-MM-dd"/></p>
                     </div>
@@ -114,8 +115,7 @@
                 <ul class="table">
                     <c:forEach items="${listNot}" var="list" varStatus="status">
                         <c:if test="${status.index!=0}">
-                            <li><a href="inforeport/toinforeport.action?id=${list.id}"
-                            style="color: #666666;text-decoration:none;">> ${list.title}</a></li>
+                            <li><a href="${ctx}/inforeport/toinforeport.action?id=${list.id}" class="astyle" style="color: #333333">> ${list.title}</a></li>
                         </c:if>
                     </c:forEach>
                 </ul>

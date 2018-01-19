@@ -238,7 +238,7 @@ a:active {color:yellow;}
 }
 
 .file_input{
-    width: 445px;
+    width: 300px;
     height: 38px;
     background-color: #ffffff;
     border-radius: 4px;
@@ -253,11 +253,9 @@ a:active {color:yellow;}
     color: #666666;
 }
 .search{
-    top:30px;
-    left: 424px;
     width: 22px;
     height: 22px;
-
+	cursor:pointer;
 }
 
 .items{
@@ -288,6 +286,7 @@ a:active {color:yellow;}
     height:20px;
     vertical-align: middle;
     cursor: pointer;
+    margin-left: 10px;
 }
 .item2{
 	font-family: MicrosoftYaHei;
@@ -368,13 +367,14 @@ ul li img{
     max-height: 602px;
     overflow-y:auto;
     background-color: #f8f8f8;
-    padding: 0;
+    padding: 10px 0;
     margin: 0;
     border-left: 0;
     border-top: 0;
     border-right: 0;
     border-bottom: 1px solid #dedede;
     clear: both;
+    text-align:center;
 }
 .iframe1::-webkit-scrollbar {
     width: 6px;     
@@ -496,4 +496,19 @@ ul li img{
 	margin-top: 10px;
 	margin-right: 10px;
 	cursor: pointer;
+}
+.search-wrapper{
+	position:relative;
+	display:inline-block;
+}
+.search-wrapper>img{
+	position:absolute;
+	top:27px;
+	right:8px;
+}
+#fileMore{
+	padding:10px 0;
+}
+#order{
+	height:38px;
 }

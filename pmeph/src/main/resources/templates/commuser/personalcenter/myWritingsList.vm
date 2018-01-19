@@ -3,16 +3,18 @@
 <input type="hidden" class="queryCondition" id="auth_status" value="$!{auth_status}">
 <input type="hidden" class="queryCondition" id="is_staging" value="$!{is_staging}">
 
-<div id="auth_status_select_wrapper">
+
+<div id="auth_status_select_wrapper" #if($!{selfLog}==false) style="display:none;" #end>
 	<span class="auth_status_select_wrapper_span">筛选：</span>
 	<select id="auth_status_select" name="auth_status_select">
-		<option value="-" #if($!{auth_status}=='') selected #end >全部</option>
-		<option value="0-" #if($!{is_staging}=='0') selected #end >未提交</option>
-    	<option value="1-0" #if($!{auth_status}=='0'&&$!{is_staging}!='0') selected #end >待审核</option>
-        <option value="1-1" #if($!{auth_status}=='1'&&$!{is_staging}!='0') selected #end >未通过</option>
-        <option value="1-2" #if($!{auth_status}=='2'&&$!{is_staging}!='0') selected #end >已通过</option>
+		<option value="-" #if($!{auth_status}==''&&$!{is_staging}=='') selected #end >全部</option>
+		<option value="1-" #if($!{is_staging}=='1') selected #end >未提交</option>
+    	<option value="0-0" #if($!{auth_status}=='0'&&$!{is_staging}!='1') selected #end >待审核</option>
+        <option value="0-1" #if($!{auth_status}=='1'&&$!{is_staging}!='1') selected #end >未通过</option>
+        <option value="0-2" #if($!{auth_status}=='2'&&$!{is_staging}!='1') selected #end >已通过</option>
     </select>
 </div>
+
 
 <script src="${contextpath}resources/commuser/personalcenter/PersonalHomeSBWZ.js"></script>
 <div id="listContent">
@@ -22,13 +24,13 @@
                 <div id="suibiwenzhangtp"></div>
                 <div id="suibiwenzhanneirong">
                     <div class="suibibt">
-                    	#if($!{c.is_staging}=='0')
+                    	#if($!{c.is_staging}==true)
                     		<div class="status_tag toApply">未提交</div>
-                    	#elseif($!{c.auth_status}==0&&$!{c.is_staging}!='0')
+                    	#elseif($!{c.auth_status}==0&&$!{c.is_staging}==false)
                     		<div class="status_tag toAudit">待审核</div>
-                    	#elseif($!{c.auth_status}==1&&$!{c.is_staging}!='0')
+                    	#elseif($!{c.auth_status}==1&&$!{c.is_staging}==false)
                     		<div class="status_tag reject">未通过</div>
-                    	#elseif($!{c.auth_status}==2&&$!{c.is_staging}!='0')
+                    	#elseif($!{c.auth_status}==2&&$!{c.is_staging}==false)
                     		<div class="status_tag Audited">已通过</div>
                     	#end
                         <a target="_blank" href="$!{contextpath}articledetail/toPage.action?wid=$!{c.id}" ><span class="suibibiaoti">$!{c.title}</span></div></a>
@@ -43,7 +45,7 @@
 	                <span id="bianji"></span>
 	                <span class="dtxiawz"><a href="$!{contextpath}writerArticle/initWriteArticle.action?id=$!{c.id}&&userid=$!{permap.id}">编辑</a></span>
                 #end
-                #if($!{c.selfLog}=="true")
+                #if($!{selfLog}==true)
                 <div class="operate_wrapper">
 	                <a target="_blank" href="$!{contextpath}writerArticle/initWriteArticle.action?id=$!{c.id}&userid=$!{logUserId}"><div class="img img_edit" ></div><div>编辑</div></a> 
 			        <a onclick="deleteArticle('$!{c.id}','$!{c.title}')" ><div class="img img_delete"></div><div>删除</div></a>

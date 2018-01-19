@@ -1,6 +1,8 @@
 package com.bc.pmpheep.back.commuser.cms.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 import com.bc.pmpheep.back.commuser.cms.bean.CmsNoticeList;
 
@@ -43,5 +45,5 @@ public interface CmsNoticeManagementDao {
 	 * @return
 	 *
 	 */
-	List<CmsNoticeList> list(@Param("start")Integer start, @Param("pageSize")Integer pageSize,@Param("order") Integer order);
+	List<CmsNoticeList> list(Map<String,Object> map);
 }

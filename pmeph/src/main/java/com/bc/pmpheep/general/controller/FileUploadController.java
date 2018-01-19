@@ -40,11 +40,13 @@ public class FileUploadController {
      */
     @ResponseBody
     @RequestMapping(value = "/file/upload", method = RequestMethod.POST)
-    public ResponseBean upload(Model model, @RequestParam("file") MultipartFile file) {
+    public ResponseBean<Object> upload(Model model, @RequestParam("file") MultipartFile file) {
         try {
-            return new ResponseBean(fileService.save(file, FileType.GROUP_FILE, 0));
+            return new ResponseBean<Object>(fileService.save(file, FileType.GROUP_FILE, 0));
         } catch (IOException ex) {
-            return new ResponseBean(ex);
-        }
+            return new ResponseBean<Object>(ex);
+        } catch (Exception ex) {
+            return new ResponseBean<Object>("未知异常");
+        } 
     }
 }
