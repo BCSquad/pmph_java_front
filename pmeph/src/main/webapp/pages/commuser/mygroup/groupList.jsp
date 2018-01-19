@@ -80,14 +80,15 @@
     		</c:when>
     		<c:otherwise>
     			<div class="no-more">
-                    <img src="<c:url value="/statics/image/aaa4.png"></c:url>">
-                    <span>木有内容呀~~</span>
+                    <img src="<c:url value="/statics/image/noGroup.png"></c:url>">
                 </div>
     		</c:otherwise>
     	</c:choose>
     </div>
+    <c:if  test="${listSize>0 }">
         <div class="jzgd"><span onclick="javascript:doMore('${pageNumber}')">加载更多...</span></div>
         <div style="height: 30px;"></div>
+    </c:if>    
 </div>
 </div>
 		<div style="clear: both; background-color: #f6f6f6;">   

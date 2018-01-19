@@ -70,6 +70,13 @@ public class NoticeMessageServiceImpl implements NoticeMessageService {
 		return noticeMessageDao.queryCMSNotice(paraMap);
 	}
 
+	//更新通知点击量
+	@Override
+	public void updateNoticeClicks(String cmsId) {
+		noticeMessageDao.updateNoticeClicks(cmsId);
+		
+	}
+
 	
 	
 	
