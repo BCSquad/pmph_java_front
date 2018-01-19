@@ -17,7 +17,7 @@ function trychange(){
 		success:function(json){
 		   var str="";
 		   $.each(json.list,function(i,n){
-			   str+='<tr class="sxy-tr"><td><div onclick=lookDetail(\''+n.id+'\')>'+
+			   str+='<tr class="sxy-tr"><td><div onclick=lookDetail(\''+n.id+'\') style="width:275px">'+
 				    n.title+
 			       '</div></div></td></tr><tr class="sxy-tr"><td><img alt="" src="'+
 			       contextpath+
