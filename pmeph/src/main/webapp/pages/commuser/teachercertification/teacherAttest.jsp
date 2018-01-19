@@ -44,8 +44,7 @@
 <script type="text/javascript">
 	function submitValidate() {
 		if ($("form").validate('submitValidate')) {
-			$("#certForm")
-					.ajaxSubmit(
+			$("#certForm").ajaxSubmit(
 							{
 								url : contextpath
 										+ "teacherCertification/updateTeacherCertification.action",
@@ -57,8 +56,7 @@
 												function() {
 													window.location.href = contextpath
 															+ "userinfo/touser.action?id="
-															+ $("#userId")
-																	.val();
+															+ $("#userId").val();
 												}, 1500);
 									} else {
 										window.message.error("提交失败");
@@ -76,6 +74,9 @@
 
 			return false;
 			//document.getElementById("certForm").submit();
+		}else{
+			window.message.error("请按要求填写必填信息！");
+			return false;
 		}
 	}
 
@@ -233,10 +234,8 @@
 				</div>
 
 				<div>
-
 					<img class="cupline" alt=""
 						src="<%=path%>/statics/image/_cupline.jpg" />
-
 					<form id="certForm"
 						action="${pageContext.request.contextPath}/teacherCertification/updateTeacherCertification.action"
 						method="post">
@@ -245,16 +244,16 @@
 							<tr class="sxy-tr">
 								<td colspan="3"><font class="td-title">学校教师信息登记（<font
 										color="#fd9a2e"> <c:choose>
-												<c:when test="${showWriterUserCertification.progress==1}"> 
+												<c:when test="${showWriterUserCertification.progress==0}"> 
                     	未提交
 					   	</c:when>
-												<c:when test="${showWriterUserCertification.progress==2}">
+												<c:when test="${showWriterUserCertification.progress==1}">
                     	已提交
 					   	</c:when>
-												<c:when test="${showWriterUserCertification.progress==3}"> 
+												<c:when test="${showWriterUserCertification.progress==2}"> 
                     	被退回
 					   	</c:when>
-												<c:when test="${showWriterUserCertification.progress==4}"> 
+												<c:when test="${showWriterUserCertification.progress==3}"> 
                     	通过
 					   	</c:when>
 												<c:otherwise>未提交</c:otherwise>
@@ -263,7 +262,7 @@
 							</tr>
 							<tr class="sxy-tr">
 								<td style="width: 10px;"><input class="sxy-txt"
-									type="hidden" value="2" name="progress" /> <input
+									type="hidden" value="1" name="progress" /> <input
 									class="sxy-txt" type="hidden"
 									value="${showWriterUserCertification.id}" name="id" /> <input
 									class="sxy-txt" type="hidden"
@@ -275,7 +274,10 @@
 											<input id="realName" class="sxy-txt required" type="text"
 												value="${showWriterUserCertification.realName}"
 												name="realName" data-valid="isNonEmpty"
-												data-error="真实姓名不能为空!" />
+												data-error="真实姓名不能为空!" 
+												<c:if test="${showWriterUserCertification.progress != null&&showWriterUserCertification.progress>0}">disabled="disabled"</c:if>
+												/>
+												
 										</div>
 									</div></td>
 								<td>
@@ -292,7 +294,9 @@
 										<div class="input-wrapper">
 											<input id="idcard" class="sxy-txt required" type="text"
 												value="${showWriterUserCertification.idcard}" name="idcard"
-												data-valid="idcard" data-error="请填正确的身份证信息!" />
+												data-valid="idcard" data-error="请填正确的身份证信息!" 
+												<c:if test="${showWriterUserCertification.progress != null&&showWriterUserCertification.progress>0}">disabled="disabled"</c:if>
+												/>
 										</div>
 									</div>
 								</td>
@@ -309,14 +313,28 @@
 										<label><font color="#ff3d38">*</font>选择学校</label>
 										<div class="input-wrapper">
 											<input type="hidden" class="required" data-valid="isSelected"
-												data-error="请选择您所在的学校!"> <select
-												class="sxy-select-td" id="Select1" name="orgId">
-												<c:forEach var="org"
-													items="${showWriterUserCertification.orgList}">
-													<option value="${org.id}"
-														<c:if test ="${org.id==showWriterUserCertification.orgId}" >selected</c:if>>${org.orgName}</option>
-												</c:forEach>
-											</select>
+												data-error="请选择您所在的学校!"> 
+											
+											<c:choose>
+												<c:when test="${showWriterUserCertification.progress==null||showWriterUserCertification.progress==0}">
+													<select class="sxy-select-td " id="Select1" name="orgId" <c:if test="${showWriterUserCertification.progress != null&&showWriterUserCertification.progress>0}">disabled="disabled"</c:if> >
+														<c:forEach var="org"
+															items="${showWriterUserCertification.orgList}">
+															<option value="${org.id}"
+																<c:if test ="${org.id==showWriterUserCertification.orgId}" >selected</c:if>>${org.orgName}</option>
+														</c:forEach>
+													</select>
+												</c:when>
+												<c:when test="${showWriterUserCertification.progress != null&&showWriterUserCertification.progress>0}">
+													<input class="sxy-txt" type="text"
+														value="${showWriterUserCertification.orgName}" 
+														disabled="disabled"
+														/>
+												</c:when>
+												
+											</c:choose>
+											
+											
 										</div>
 									</div>
 								</td>
@@ -336,7 +354,9 @@
 											<input id="handphone" class="sxy-txt required" type="text"
 												value="${showWriterUserCertification.handphone}"
 												name="handphone" data-valid="isHandphone"
-												data-error="请填写正确的手机号码!" />
+												data-error="请填写正确的手机号码!" 
+												<c:if test="${showWriterUserCertification.progress != null&&showWriterUserCertification.progress>0}">disabled="disabled"</c:if>
+												/>
 										</div>
 									</div>
 								</td>
@@ -352,17 +372,21 @@
 									<div class="label-input">
 										<label><font color="#ff3d38">*</font>教师资格证</label>
 										<div class="input-wrapper">
-											<input class="sxy-txt" type="hidden"
+											<input class="sxy-txt required" type="hidden"
 												value="${showWriterUserCertification.cert}" id="cert"
-												name="cert" /> <input class="sxy-txt" type="text"
+												name="cert" data-valid="isNonEmpty"
+												data-error="请上传教师资格证照片，并等待上传完成!" /> 
+											<input class="sxy-txt" type="text"
 												value="${showWriterUserCertification.certName}"
-												id="certName" name="certcertName" />
+												id="certName" name="certcertName" disabled="disabled"/>
 										</div>
 									</div>
 								</td>
 								<td>
 									<div style="margin-bottom: 65px; margin-left: 20px;">
-										<input id="sxy-btn-upload" type="button" value="上传文件" />
+										<c:if test="${showWriterUserCertification.progress==null||showWriterUserCertification.progress==0}">
+											<input id="sxy-btn-upload" type="button" value="上传文件" />
+										</c:if>
 										<div id="proxyDiv">
 											<c:if test="${showWriterUserCertification.cert !=null}">
 												<div class="td-font-2" style="float: left;" id="proxyName">
@@ -394,7 +418,7 @@
 						<img class="cupline" alt=""
 							src="<%=path%>/statics/image/_cupline.jpg" />
 						<div class="submit_btn_wrapper">
-							<button class="btn-2" onclick="return submitValidate()">提交</button>
+							<button class="btn-2" onclick="return submitValidate()" <c:if test="${showWriterUserCertification.progress>0}">style = "display:none;"</c:if> >提交</button>
 						</div>
 					</form>
 				</div>
