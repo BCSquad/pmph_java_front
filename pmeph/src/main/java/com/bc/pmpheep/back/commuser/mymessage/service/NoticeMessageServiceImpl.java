@@ -50,7 +50,6 @@ public class NoticeMessageServiceImpl implements NoticeMessageService {
 	}
 
 	
-	
 	//查询教材备注相关的附件
 	@Override
 	public List<Map<String, Object>> queryNoticeMessageDetailAttachment(Map<String, Object> paraMap) {

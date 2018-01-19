@@ -142,7 +142,6 @@ public class MessageController extends BaseController{
 		return mv;
 	}
 	
-	
 	//查询更多通知列表
 	@RequestMapping(value="/loadMore")
 	@ResponseBody

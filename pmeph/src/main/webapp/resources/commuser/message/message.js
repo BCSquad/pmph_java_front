@@ -53,7 +53,6 @@ function loadMore(){
 		}); 
 	}
 
-
 //加载更多申请
 function loadMoreApply(){
 	var pathName=window.document.location.pathname;  
