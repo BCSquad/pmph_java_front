@@ -64,12 +64,13 @@ public class MyFriendController extends com.bc.pmpheep.general.controller.BaseCo
         try {
             int startrow = 0;
             List<Map<String, Object>> listFriends = myFriendService.listMyFriend(writerUser, startrow);
+            int remainCount = myFriendService.listMyFriendCount(writerUser, startrow+listFriends.size());
             model.setViewName(pageUrl);
             model.addObject("row", startrow);
             model.addObject("id", writerUser.getId());
             model.addObject("more", listFriends.size());
             model.addObject("listFriends", listFriends);
-            model.addObject("listSize", listFriends.size());
+            model.addObject("listSize", remainCount);
         } catch (CheckedServiceException e) {
             throw new CheckedServiceException(e.getBusiness(), e.getResult(), e.getMessage(),
                     pageUrl);
@@ -92,10 +93,13 @@ public class MyFriendController extends com.bc.pmpheep.general.controller.BaseCo
         CommuserWriterUser writerUser = new CommuserWriterUser();
         writerUser.setId(Long.parseLong(id.toString()));
         List<Map<String, Object>> listFriends = myFriendService.listMyFriend(writerUser, row + 15);
+        int remainCount = myFriendService.listMyFriendCount(writerUser, row+15+listFriends.size());
         for (int i = 0; i < listFriends.size(); i++) {
             listFriends.get(i).put("row", row + 15);
             listFriends.get(i).put("queryid", id);
+            listFriends.get(i).put("remainCount", remainCount);
         }
+        
         return listFriends;
     }
 }
