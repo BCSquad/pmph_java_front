@@ -34,4 +34,12 @@ public interface MyFriendService {
      * </pre>
      */
     List<Map<String, Object>> listMyFriend(CommuserWriterUser writerUser,int startrow) throws Exception;
+
+    /**
+     * 剩余未加载好友数量
+     * @param writerUser
+     * @param startrow
+     * @return
+     */
+	int listMyFriendCount(CommuserWriterUser writerUser, int startrow);
 }
