@@ -265,7 +265,7 @@
 							<td colspan="3" align="center"><input class="button"
 								type="button" value="保存" onclick="save()" /> 
 								<!-- <input class="button" type="button" value="提交" onclick="submit()" /> -->
-								<input class="button" type="button" value="取消" onclick="cancel()" />
+								<!-- <input class="button" type="button" value="取消"  /> -->
 							</td>
 						</tr>
 					</table>

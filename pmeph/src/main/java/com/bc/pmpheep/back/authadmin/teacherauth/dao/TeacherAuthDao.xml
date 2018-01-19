@@ -27,6 +27,7 @@
 		Inner Join writer_user AS u ON c.user_id = u.id 
 		inner join org_user as o on c.org_id = o.org_id
 		<where>
+			c.progress != 0
 			<if test="parameter.orgUserId != null and parameter.orgUserId != '' ">
 				and o.id =#{parameter.orgUserId}
 			</if>
@@ -36,6 +37,7 @@
 			<if test="parameter.queryStatus != null and parameter.queryStatus != '' ">
 				and c.progress = ${parameter.queryStatus}
 			</if>
+			
 		</where>
 		limit ${start},${pageSize}
 	</select>
@@ -45,6 +47,7 @@
 		Inner Join writer_user AS u ON c.user_id = u.id 
 		inner join org_user as o on c.org_id = o.org_id
 		<where>
+			c.progress != 0
 			<if test="parameter.orgUserId != null and parameter.orgUserId != '' ">
 				and o.id =#{parameter.orgUserId}
 			</if>

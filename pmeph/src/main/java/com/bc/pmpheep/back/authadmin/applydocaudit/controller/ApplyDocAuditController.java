@@ -65,7 +65,7 @@ public class ApplyDocAuditController extends BaseController {
 		for (Map<String, Object> m : List_map) {
 			Date now = new Date();
 			if(m.get("actualDeadline") != null){
-				m.put("isEnd",now.getTime()>((Date)m.get("actualDeadline")).getTime()?1:0);
+				m.put("isEnd",now.getTime()>((Date)m.get("actualDeadline")).getTime()||(Boolean)m.get("is_all_textbook_published") || (Boolean)m.get("is_force_end")?1:0);
 				m.put("contextpath", contextpath);
 			}else{
 				m.put("isEnd", 0);
@@ -106,7 +106,8 @@ public class ApplyDocAuditController extends BaseController {
 		for (Map<String, Object> m : List_map) {
 			Date now = new Date();
 			if(m.get("actualDeadline") != null){
-				m.put("isEnd",now.getTime()>((Date)m.get("actualDeadline")).getTime()?1:0);
+				
+				m.put("isEnd",now.getTime()>((Date)m.get("actualDeadline")).getTime()||(Boolean)m.get("is_all_textbook_published") || (Boolean)m.get("is_force_end")?1:0);
 			}else{
 				m.put("isEnd", 0);
 			}

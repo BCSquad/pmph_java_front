@@ -408,6 +408,7 @@
 			)				
 		WHERE 
 			1 = 1
+			and b.is_on_sale=1
 		ORDER BY 
 		<if test="parameter.order !=null">
 		 
@@ -474,7 +475,8 @@
 												where id = cast(#{parameter.type} as decimal(9,2)))
 									),'-',-1) = #{parameter.type}
 					or t.id = 	#{parameter.type}		
-				)				
+				)	
+			where b.is_on_sale=1			
 		)t
 	</select>
 	

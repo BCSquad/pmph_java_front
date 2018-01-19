@@ -27,7 +27,9 @@
             <property name="redirectUrl" value="/pages/comm/login.jsp"/>
             <property name="pathWithUsertypeMaps">
                 <set>
-
+                
+                 <value>/dataaudit/toMaterialAudit.action -> 2</value><!--申报资料审核（机构用户） -->
+                 
                     <!--作家用户-->
 
                     <value>/message/* -> 1</value><!--作家用户消息模块 -->

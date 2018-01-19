@@ -2318,7 +2318,14 @@ $.fn.uploadFile = function (option) {
                 limitMultiFileUploadSize: 104857600,
                 add: function (e, data) {
                     if (data.files[0].name) {
-                        data.submit();
+                        if (option.valid) {
+                            if (option.valid(data.files[0])) {
+                                data.submit();
+                            }
+                        } else {
+                            data.submit();
+                        }
+
                     }
                 },
                 start: function (e) {
@@ -2352,7 +2359,7 @@ $.fn.uploadFile = function (option) {
                     //data.context.text('Upload finished.');
                     if (data.result.code == '1') {
                         if (option.done) {
-                            option.done(data.files[0].name, data.result.data);
+                            option.done(data.files[0].name, data.result.data,data.files[0].size);
                         }
                     } else {
                         message.error("上传失败！");

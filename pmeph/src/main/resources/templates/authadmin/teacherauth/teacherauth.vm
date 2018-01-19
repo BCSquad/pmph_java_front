@@ -31,7 +31,7 @@
 	    #if($null.isNull($c.cert) || $c.cert == "DEFAULT" || !$c.cert)
 	    	<td>未上传</td>
 	    #else
-	    	<td><a class="a-preview" target="_blank" href="javascript:" onclick="previewCert('$!{c.cert}')">预览</a></td>
+	    	<td><a class="a-preview" href="javascript:" onclick="previewCert('$!{c.cert}')">预览</a></td>
 	    #end
 	    
 	    #if($c.progress == 1)

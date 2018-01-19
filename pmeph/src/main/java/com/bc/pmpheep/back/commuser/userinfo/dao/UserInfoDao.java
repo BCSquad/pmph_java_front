@@ -4,6 +4,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.bc.pmpheep.back.authadmin.accountset.bean.OrgAdminUser;
+
 public interface UserInfoDao {
 
 	/**
@@ -25,4 +27,10 @@ public interface UserInfoDao {
 	 * @return
 	 */
 	int updateavatar(@Param("avatar") String avatar,@Param("id") String id);
+	
+    /**
+     * 修改密码
+     * @param orgUser
+     */
+    public void updatePassword(Map<String, Object> map);
 }

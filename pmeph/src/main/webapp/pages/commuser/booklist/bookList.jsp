@@ -36,7 +36,7 @@
         <div class="nav">
         	<span>书籍分类：
         	<c:forEach items="${parentTypeList }" var="type">
-        		<a href="/books/list.action?pageSize=${pageSize }&pageNumber=1&order=${order }&type=${type.id}">${type.type_name }</a> >
+        		<a href="<%=path%>/books/list.action?pageSize=${pageSize }&pageNumber=1&order=${order }&type=${type.id}">${type.type_name }</a> >
         	</c:forEach>
         	${materiaName }
 			</span>
@@ -143,6 +143,14 @@
             onChange: function () {
             	var pageSize =this.getSelectedOptionValue(pages);
            	 	pageFun(pageSize,'${pageNumber}',order,'${materialType}');
+            }
+        });
+        Page({
+            num: parseInt('${page.pageTotal}'),					//页码数
+            startnum: parseInt('${pageNumber}'),				//指定页码
+            elem: $('#page1'),		//指定的元素
+            callback: function (pageNumber) {	//回调函数
+            	pageFun(pageSize,pageNumber,order,'${materialType}');
             }
         });
         $('#sort').selectlist({

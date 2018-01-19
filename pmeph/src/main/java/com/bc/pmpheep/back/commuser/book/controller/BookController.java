@@ -51,7 +51,7 @@ public class BookController extends BaseController {
      * 
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView list(Integer pageSize, Integer pageNumber, BookVO bookVO,@RequestParam(value="type",required=true)Long type) throws Exception {
+    public ModelAndView list(@RequestParam(value="pageSize",defaultValue="10")Integer pageSize, Integer pageNumber, BookVO bookVO,@RequestParam(value="type",required=true)Long type) throws Exception {
         ModelAndView model = new ModelAndView();
         String pageUrl = "commuser/booklist/bookList";
         Map<String, Object> user = getUserInfo();

@@ -6,6 +6,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.bc.pmpheep.general.controller.BaseController;
+import com.bc.pmpheep.general.service.FileService;
+import com.bc.pmpheep.general.service.MessageService;
+
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,7 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bc.pmpheep.back.authadmin.accountset.bean.OrgAdminUser;
 import com.bc.pmpheep.back.commuser.userinfo.service.UserInfoService;
+import com.bc.pmpheep.back.util.DesRun;
+import com.bc.pmpheep.controller.bean.ResponseBean;
+import com.mongodb.gridfs.GridFSDBFile;
 
 
 /**
@@ -29,7 +36,9 @@ public class UserInfoController extends BaseController {
     @Autowired
     @Qualifier("com.bc.pmpheep.back.commuser.userinfo.service.UserInfoServiceImpl")
     private UserInfoService userinfoService;
-
+    @Autowired
+    private FileService fileService;
+    
     /**
      * 根据ID查询作家相关信息
      *
@@ -43,11 +52,15 @@ public class UserInfoController extends BaseController {
 
 
         Map<String, Object> map = userinfoService.queryWriter(map1.get("id").toString());
+        //头像回显
+        
         //图片为空则显示默认图片
         if (("").equals(map.get("avatar"))) {
             map.put("avatar", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
         }
         modelAndView.addObject("map", map);
+        
+        
         modelAndView.setViewName("commuser/userinfo/userinfo");
         return modelAndView;
     }
@@ -149,5 +162,25 @@ public class UserInfoController extends BaseController {
         ModelAndView mv=new ModelAndView();
         mv.setViewName("commuser/userinfo/comchangepwd");
         return mv;
+    }
+    
+    /**
+     * 机构用户修改密码
+     * @param orgUser
+     * @return
+     */
+    @RequestMapping(value = "/updateorguserpassword",method = RequestMethod.POST/*,consumes = "application/json"*/)
+    @ResponseBody
+    public ResponseBean<Map<String, Object>> updateOrgUserPassword(HttpServletRequest request){
+        ResponseBean<Map<String, Object>> responseBean=new ResponseBean<Map<String, Object>>();
+        Map <String,Object> map = new HashMap<String, Object>();
+        Map <String,Object> map1 = this.getUserInfo() ;
+    	Long userId = new Long(String.valueOf(map1.get("id")));
+    	map.put("id", userId);
+    	String password=request.getParameter("password");
+        DesRun desRun=new DesRun("",password);
+        map.put("password", desRun.enpsw);
+        userinfoService.updatePassword(map);
+        return responseBean;
     }
 }

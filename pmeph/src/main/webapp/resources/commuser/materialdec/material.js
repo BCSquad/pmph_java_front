@@ -57,9 +57,14 @@ function upload(id){
 	    	$("#syllabus_name_"+id).val(filename);
 	        console.log("上传完成：name " + filename + " fileid " + fileid);
 	    },
-	    progressall: function (loaded, total, bitrate) {
-	        console.log("正在上传。。。" + loaded / total);
+	    valid:function(file){
+	    	if(file.size/1024/1024>=100){ //判断文件上传大小
+	    		window.message.warning("不得上传100M以上文件!");
+	    		return false;
+	    	}
+	    	return true;
 	    }
+	    
 	});
 }
 
@@ -481,7 +486,7 @@ function buttAdd(type){
 			dataType:"json",
 		    success: function(msg) {
 			    if(msg=='OK'){
-			    	window.location.href=contextpath+"personalhomepage/tohomepageone.action";
+			    	window.location.href=contextpath+"personalhomepage/tohomepageone.action?pagetag=jcsb";
 			    }
 		    }
 		});
@@ -490,7 +495,7 @@ function buttAdd(type){
 
 //放弃
 function buttGive(){
-	window.location.href=contextpath+"personalhomepage/tohomepageone.action";
+	window.location.href=contextpath+"personalhomepage/tohomepageone.action?pagetag=jcsb";
 }
 /**
  * 表单校验方法

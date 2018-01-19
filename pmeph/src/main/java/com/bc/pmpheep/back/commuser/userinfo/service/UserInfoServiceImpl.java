@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bc.pmpheep.back.authadmin.accountset.bean.OrgAdminUser;
 import com.bc.pmpheep.back.commuser.userinfo.dao.UserInfoDao;
 
 @Service("com.bc.pmpheep.back.commuser.userinfo.service.UserInfoServiceImpl")
@@ -51,5 +52,11 @@ public class UserInfoServiceImpl implements UserInfoService {
 		}
 		return map;
 	}
+	
+	
+    @Override
+    public void updatePassword(Map<String, Object> map) {
+    	userinfoDao.updatePassword(map);
+    }
 
 }

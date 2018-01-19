@@ -52,7 +52,6 @@ public class ReadDetailController extends BaseController{
 	public ModelAndView move(HttpServletRequest request){
 		ModelAndView modelAndView=new ModelAndView();
 		String id=request.getParameter("id");
-		id="7";
 		Map<String, Object> supMap=readDetailService.querySupport(id);
 		Map<String, Object> map=readDetailService.queryReadBook(id);
 		String urlString=(String)map.get("pdf_url");

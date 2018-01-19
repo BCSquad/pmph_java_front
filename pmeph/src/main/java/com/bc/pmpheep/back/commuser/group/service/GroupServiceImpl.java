@@ -12,8 +12,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.bc.pmpheep.back.authadmin.usermanage.bean.PmphUser;
+import com.bc.pmpheep.back.authadmin.usermanage.bean.WriterUser;
+import com.bc.pmpheep.back.authadmin.usermanage.service.PmphUserService;
+import com.bc.pmpheep.back.authadmin.usermanage.service.WriterUserService;
 import com.bc.pmpheep.back.commuser.group.bean.Group;
 import com.bc.pmpheep.back.commuser.group.bean.GroupFileVO	;
 import com.bc.pmpheep.back.commuser.group.bean.GroupList;
@@ -44,25 +50,26 @@ public class GroupServiceImpl implements GroupService{
 	private GroupDao groupDao;
 	@Autowired
 	private FileService fileService;
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.authadmin.usermanage.service.WriterUserServiceImpl")
+	private WriterUserService writerUserService;
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.authadmin.usermanage.service.PmphUserServiceImpl")
+	private PmphUserService pmphUserService;
 	
-	
-	/**
-	 * 小组上传文件
-	 * @introduction 
-	 * @author Mryang
-	 * @createDate 2017年12月13日 下午2:29:12
-	 * @param file
-	 * @param filee
-	 * @param thisId
-	 * @return
-	 * @throws IOException 
-	 */
-	public Integer addFile(MultipartFile file,Long groupId,Long thisId)throws CheckedServiceException, IOException{
-		if(null == file || file.isEmpty()){
-			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,CheckedExceptionResult.NULL_PARAM, "上传文件不能为空");
-		}
+	@Override
+	public Integer addFile(Long groupId,String fileId,String fileName,Long fileSize,Long thisId)throws CheckedServiceException, IOException{
 		if (null == groupId){
 			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,CheckedExceptionResult.NULL_PARAM, "小组id不能为空");
+		}
+		if (StringUtil.isEmpty(fileId)){
+			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,CheckedExceptionResult.NULL_PARAM, "文件id不能为空");
+		}
+		if (StringUtil.isEmpty(fileName)){
+			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,CheckedExceptionResult.NULL_PARAM, "文件名称不能为空");
+		}
+		if (null == fileSize){
+			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,CheckedExceptionResult.NULL_PARAM, "文件大小不能为空");
 		}
 		if (null == thisId){
 			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,CheckedExceptionResult.NULL_PARAM, "用户不能为空");
@@ -70,14 +77,9 @@ public class GroupServiceImpl implements GroupService{
 		//获取成员id 
 		GroupMember groupMember =groupDao.getGroupMember(groupId,thisId);
 		//创建对象
-		GroupFileVO groupFileVO = new GroupFileVO(groupId,groupMember.getId(),"---",file.getOriginalFilename(),0,null);
+		GroupFileVO groupFileVO = new GroupFileVO(groupId,groupMember.getId(),fileId,fileName,0,fileSize/1024.0,null);
 		//保存对象
-		groupDao.addGroupFile(groupFileVO);
-		//保存文件
-		String mongoId = fileService.save(file,FileType.GROUP_FILE, groupFileVO.getId()) ;
-		groupFileVO.setFileId(mongoId);
-		//更新文件主键
-		return groupDao.updateGroupFile(groupFileVO);
+		return groupDao.addGroupFile(groupFileVO);
 	}
 	
 	@Override
@@ -124,13 +126,13 @@ public class GroupServiceImpl implements GroupService{
 	}
 	
 	@Override
-	public List<GroupList> groupList(Integer start, Integer pageSize, Long id)
+	public List<GroupList> groupList(Integer start, Integer pageSize, Long id,String order)
 			throws CheckedServiceException {
 		if (ObjectUtil.isNull(id)){
 			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,
 					CheckedExceptionResult.NULL_PARAM, "用户id不能为空");
 		}
-		List<GroupList> groups = groupDao.list(start, pageSize, id);
+		List<GroupList> groups = groupDao.list(start, pageSize, id,order);
 		List<GroupList> groupList = new ArrayList<>();
 		for (GroupList group : groups){
 			Long groupId = group.getId();
@@ -156,7 +158,7 @@ public class GroupServiceImpl implements GroupService{
 	}
 
 	@Override
-	public List<GroupFileVO> groupFiles(Integer pageNumber,Integer pageSize,Long groupId,String fileName,Long thisId) {
+	public List<GroupFileVO> groupFiles(Integer pageNumber,Integer pageSize,Long groupId,String fileName,Long thisId,String order,String rank) {
 		if (ObjectUtil.isNull(groupId)){
 			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP, CheckedExceptionResult.NULL_PARAM, "小组id不能为空");
 		}
@@ -166,19 +168,25 @@ public class GroupServiceImpl implements GroupService{
     	if(null == pageSize   || pageSize < 1) {
     		pageSize = 100000 ;  //默认100000,差不多就是查询全部
     	}
-		List<GroupFileVO> list = groupDao.getFiles((pageNumber-1)*pageSize,pageSize,groupId,fileName,thisId);
+    	//设置排序规则
+    	if(StringUtil.isEmpty(order)){
+    		order = null;
+    	}else{
+    		if(StringUtil.isEmpty(rank) ){
+    			rank ="asc";
+    		}else if("asc".equals(rank.toLowerCase()) || "desc".equals(rank.toLowerCase())){
+    			rank = rank.toLowerCase() ;
+    		}else {
+    			rank ="asc";
+    		}
+    	}
+    	List<GroupFileVO> list = groupDao.getFiles((pageNumber-1)*pageSize,pageSize,groupId,fileName,thisId,order,rank);
 		return list;
 	}
 
 	@Override
 	public Integer deleteFile(Long id,Long groupId,String fileId,Long thisId)throws CheckedServiceException {
-		Integer res = groupDao.deleteMyPowerFile(id, thisId, groupId);
-		if(null != res && 1 == res.intValue()){
-			fileService.remove(fileId);
-			return res ;
-		}else{
-			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,CheckedExceptionResult.NULL_PARAM, "删除失败");
-		}
+		return  groupDao.deleteMyPowerFile(id, thisId, groupId);
 	}
 
 	@Override
@@ -219,7 +227,7 @@ public class GroupServiceImpl implements GroupService{
 			}
 			GroupMember groupMember = getGroupMember(groupId, userId);
 			GroupFileVO groupFile = new GroupFileVO(groupId, groupMember.getId(), "0" + groupMember.getId(),
-					file.getOriginalFilename(), 0, null);
+					file.getOriginalFilename(), 0,file.getSize()/1024.0, null);
 			groupDao.addGroupFile(groupFile);
 			list.add(groupFile);
 		}
@@ -234,6 +242,8 @@ public class GroupServiceImpl implements GroupService{
 		return null;
 	}
 	
+	
+	
 	@Override
 	public List<PmphGroupMemberVO> listPmphGroupMember(Long groupId, Long memberId)
 			throws CheckedServiceException {
@@ -241,11 +251,13 @@ public class GroupServiceImpl implements GroupService{
 		for (PmphGroupMemberVO pmphGroupMemberVO : list) {
 			if (pmphGroupMemberVO.getIsWriter()) {
 				//用户头像
-				//pmphGroupMemberVO.setAvatar(RouteUtil.userAvatar(writerUserService.get(pmphGroupMemberVO.getUserId()).getAvatar()));
+				WriterUser writerUser = writerUserService.get(pmphGroupMemberVO.getUserId());
+				pmphGroupMemberVO.setAvatar(RouteUtil.userAvatar(writerUser==null?"":writerUser.getAvatar()));
 				pmphGroupMemberVO.setUserType(Const.SENDER_TYPE_2);
 			} else {
 				//用户头像
-				//pmphGroupMemberVO.setAvatar(RouteUtil.userAvatar(pmphUserService.get(pmphGroupMemberVO.getUserId()).getAvatar()));
+				PmphUser pmphUser = pmphUserService.get(pmphGroupMemberVO.getUserId());
+				pmphGroupMemberVO.setAvatar(RouteUtil.userAvatar(pmphUser==null?"":pmphUser.getAvatar()));
 				pmphGroupMemberVO.setUserType(Const.SENDER_TYPE_1);
 			}
 		}
@@ -308,6 +320,19 @@ public class GroupServiceImpl implements GroupService{
 					CheckedExceptionResult.NULL_PARAM, "文件id不能为空");
 		}	
 		return groupDao.updateGroupFileOfDownload(groupId, fileId);
+	}
+	
+	@Override
+	public Integer updateDownload(Long groupId,String fileId){
+		if (ObjectUtil.isNull(groupId)){
+			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,
+					CheckedExceptionResult.NULL_PARAM, "小组id不能为空");
+		}
+		if (StringUtil.isEmpty(fileId)){
+			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,
+					CheckedExceptionResult.NULL_PARAM, "文件id不能为空");
+		}	
+		return groupDao.updateGroupFileOfDownload(groupId,fileId);
 	}
 
 	@Override
