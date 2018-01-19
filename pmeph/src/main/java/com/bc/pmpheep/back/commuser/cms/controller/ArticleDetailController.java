@@ -180,7 +180,7 @@ public class ArticleDetailController extends BaseController {
 		String content=request.getParameter("content");
 		
 		Map<String, Object> user=getUserInfo();
-		map.put("score", request.getParameter("score"));
+		/*map.put("score", request.getParameter("score"));*/
 		map.put("parent_id", wid); //上级id
 		map.put("category_id",0); //内容类型 0评论
 		map.put("author_type",2); //作者类型

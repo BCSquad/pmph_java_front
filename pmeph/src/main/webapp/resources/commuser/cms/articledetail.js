@@ -43,7 +43,7 @@ function changepage(n){
 	var json={
 			pageNumber:n,	
 			allppage:$('input[name=edu]').val(),
-			/*id:$("#book_id").val(),*/
+			
 	};
 	 $.ajax({
 		type:'post',

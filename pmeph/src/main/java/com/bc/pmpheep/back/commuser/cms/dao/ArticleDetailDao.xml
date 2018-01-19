@@ -77,8 +77,8 @@
 	<insert id="insertWriteArticle" parameterType="java.util.Map">
 		insert into
 		cms_content
-		(mid,parent_id,category_id,author_type,author_id,is_staging,path,score)
-		values(#{mid},#{parent_id},#{category_id},#{author_type},#{author_id},#{is_staging},#{path},#{score})
+		(mid,parent_id,category_id,author_type,author_id,is_staging,path)
+		values(#{mid},#{parent_id},#{category_id},#{author_type},#{author_id},#{is_staging},#{path})
 	</insert>
 
 	<!-- 评论返回 -->
