@@ -34,7 +34,7 @@ public class DeclareCountExcelService implements ExcelDownloadService {
 
     @Override
     public String[][] getColTitle() {
-        return new String[][]{{"书名", "textbook_name"}, {"主编申报数", "dp1"}, {"副主编申报数", "dp2"}, {"编委申报数", "dp3"}, {"主编当选数", "decid1"}, {"副主编当选数", "decid2"}, {"编委当选数", "decid3"}};
+        return new String[][]{{"书名", "textbook_name"}, {"主编申报数", "decid1"}, {"副主编申报数", "decid2"}, {"编委申报数", "decid3"}, {"主编当选数", "dp1"}, {"副主编当选数", "dp2"}, {"编委当选数", "dp3"}};
     }
 
     @Override

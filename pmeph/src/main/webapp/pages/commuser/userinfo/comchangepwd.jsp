@@ -28,7 +28,7 @@
                 <span class="span1"></span>
                 <span class="div-menu-main">修改密码</span>
                 <a href="#" class="return-menu-main"
-                    onclick="window.location='${ctx}/admininfocontroller/toadmininfo.action'"><< 返回个人资料</a>
+                    onclick="window.location='${ctx}/userinfo/touser.action'"><< 返回个人资料</a>
             </div>
         </div>
         <div style="height:14px"></div>

@@ -1,4 +1,33 @@
 $(function () {
+	//文件上传
+	$("#uploadFile").uploadFile({
+		accept:"image/*",
+        start: function () {
+            console.log("开始上传。。。");
+        },
+        done: function (filename, fileid) {
+            console.log("上传完成：name " + filename + " fileid " + fileid);
+            var id=$("#id").val();
+            $.ajax({
+                type:'post',
+                url:contextpath+'admininfocontroller/updateavatar.action?id='+id+'&&avatar='+fileid,
+                async:false,
+                dataType:'json',
+                success:function(json){
+                    if (json.returncode=="OK"){
+                    	$("#sxy-img1").attr("src",contextpath+"file/download/"+fileid+".action");
+                    }
+                }
+            });
+        },
+        progressall: function (loaded, total, bitrate) {
+            console.log("正在上传。。。" + loaded / total);
+        }
+    });
+	
+	
+	
+	
     $('select').selectlist({
         zIndex: 10,
         width: 260,

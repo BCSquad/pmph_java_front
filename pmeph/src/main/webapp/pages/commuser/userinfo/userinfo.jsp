@@ -142,11 +142,10 @@
                   <div style="width: 400px;padding:0px;margin-top:-25px;">
                     <label class="require" >职称</label>
                     <select class="sxy-select-td" id="title" name="title" >
-                        <option value="teacher1" ${map.title=='teacher1' ?'selected':''}>教师1</option>
-                        <option value="teacher2" ${map.title=='teacher2' ?'selected':''}>教师2</option>
-                        <option value="teacher3" ${map.title=='teacher3' ?'selected':''}>教师3</option>
-                        <option value="teacher4" ${map.title=='teacher4' ?'selected':''}>教师4</option>
-                        <option value="teacher5" ${map.title=='teacher5' ?'selected':''}>教师5</option>
+                        <option value="teacher1" ${map.title=='teacher1' ?'selected':''}>教授</option>
+                        <option value="teacher2" ${map.title=='teacher2' ?'selected':''}>讲师</option>
+                        <option value="teacher3" ${map.title=='teacher3' ?'selected':''}>副教授</option>
+                        <option value="teacher4" ${map.title=='teacher4' ?'selected':''}>院士</option>
                     </select>
                   </div>
                 </td>
