@@ -5,6 +5,8 @@ import java.util.Map;
 
 public interface NoticeMessageService {
 	
+	
+	
 	//申请信息列表
 	List<Map<String, Object>> selectApplyMessage(Map<String, Object> paraMap);
 	//更新申请消息表

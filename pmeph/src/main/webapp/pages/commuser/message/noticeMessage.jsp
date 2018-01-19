@@ -121,6 +121,8 @@
             	</c:otherwise>
             </c:choose>
             </table>
+            
+            
             <c:if test="${listSize>=8}">
             <div id="loadMoreDiv" class="load-more clearfix" onclick='loadMore()'>加载更多...</div>
             <input id="startPara" name="startPara" type="hidden">

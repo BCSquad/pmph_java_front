@@ -54,6 +54,9 @@
 		      <%--   <div align="center">
 		            <img  class="pictureSizeBig" src="${ctx}/statics/pictures/1395ea09518bf0f9b1787e0ec8c7452c.jpg" />
 		        </div> --%>
+		        
+		        
+		        
 		        <div class="liseDiv">
 		        <c:if test="${map.mail_address !=null && map.mail_address !=''}">
 		        <div class="list">
