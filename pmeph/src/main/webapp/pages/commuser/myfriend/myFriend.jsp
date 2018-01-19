@@ -583,7 +583,7 @@ a{
 		            	</div>
 		    		</c:when>
 		    		<c:otherwise>
-			  			<div class="${(st.index+1)%5 == 1? 'item1':'item1 item11'}" style="margin-right: 20px">
+			  			<div class="${(st.index+1)%5 == 1? 'item1':'item1 item11'}" >
 				            <%-- <div><img src="${ctx}${friend.avatar}" class="img2"></div> --%>
 				            <div><img src="${ctx}/statics/pictures/head.png" class="img2"></div>
 				            <div class="div_txt1">${friend.realname}</div>
@@ -601,7 +601,7 @@ a{
      </div>
 </div>
 <div style="clear:both;height: 30px" ></div>
-<c:if test="${listSize>15}">
+<c:if test="${listSize>0}">
 	<div class="last_div" id="span_more"><div class="more" ><span style="cursor: pointer;" onclick="morefriend()" id="mooorew">加载更多...</span></div></div>
 </c:if>
 <div style="background-color: #f4f4f4">
