@@ -28,7 +28,7 @@
 		
 		<li class="leftlb">
 		
-		#if($!{c.iamin}==0 && $!{c.datebase}<0)
+		#if($!{c.iamin}==0 && $!{c.datebase}<0 && $!{c.is_all_textbook_published}==false && $!{c.is_force_end}==false)
 			<div class="mleft">
                 <div class="ysbrs">
                     <div class="baomingrenshu"><span
@@ -41,7 +41,7 @@
                 <!-- toMaterialZc暂存   showMaterial查看 -->
                 </div>
             </div>
-		#elseif($!{c.iamin}>0 && ($!{c.online_progress}==1||$!{c.online_progress}==0) && $!{c.datebase}<0)  
+		#elseif($!{c.iamin}>0 && ($!{c.online_progress}==1||$!{c.online_progress}==0) && $!{c.datebase}<0 && $!{c.is_all_textbook_published}==false && $!{c.is_force_end}==false)  
 			<div class="mleft1">
                 <div class="ysbrs1">
                     <div class="baomingrenshu1"><span
@@ -54,7 +54,7 @@
                     		修改申报表</div></a>
                 </div>
             </div>
-		#elseif($!{c.iamin}>0 && $!{c.online_progress}==3 && $!{c.datebase}<0)
+		#elseif($!{c.iamin}>0 && $!{c.online_progress}==3 && $!{c.datebase}<0 && $!{c.is_all_textbook_published}==false && $!{c.is_force_end}==false )
 			<div class="mleft2">
                 <div class="ysbrs2">
                     <div class="baomingrenshu2"><span
@@ -66,7 +66,7 @@
                     		查看申报表</span></div></a>
                 </div>
             </div>
-        #elseif($!{c.datebase}>0)
+        #elseif($!{c.datebase}>0 || $!{c.is_all_textbook_published}==true || $!{c.is_force_end}==true )
         	<div class="mleft3">
             <div class="ysbrs3">
                 <div class="baomingrenshu3"><span class="canjiarenshu3">$!{c.exmember}</span><span>人</span>

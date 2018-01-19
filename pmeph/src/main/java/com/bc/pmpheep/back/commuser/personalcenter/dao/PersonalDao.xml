@@ -32,6 +32,8 @@
 		<result column="datebase" property="datebase" />
 		<result column="notNullIfFirstManager" property="notNullIfFirstManager" />
 		<result column="textbook_id" property="textbook_id" />
+		<result column="is_all_textbook_published" property="is_all_textbook_published" />
+		<result column="is_force_end" property="is_force_end" />
 
 
 	</resultMap>
@@ -164,12 +166,14 @@
 		parameterType="PageParameter">
 		SELECT
 		max(c.online_progress) as online_progress,
+		a.is_all_textbook_published,
+		a.is_force_end,
 		c.is_staging,
 		a.deadline as age_deadline,
 		a.material_name,
 		COUNT(b.id) AS exmember,
 		a.id as material_id,
-		(TO_DAYS(NOW()) - TO_DAYS(a.deadline)) AS datebase,
+		(TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) AS datebase,
 		count(c.id) as iamin,
 		c.id as declaration_id,
 		dp.id as
@@ -214,7 +218,7 @@
 		a.material_name,
 		COUNT(b.id) AS exmember,
 		b.material_id,
-		(TO_DAYS(NOW()) - TO_DAYS(a.deadline)) AS datebase,
+		(TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) AS datebase,
 		count(c.id) as iamin,
 		c.id as declaration_id
 		FROM
