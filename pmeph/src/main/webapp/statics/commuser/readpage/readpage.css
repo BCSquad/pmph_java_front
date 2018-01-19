@@ -467,7 +467,9 @@ ul li {
 .hot-list .item .name {
     text-align: center;
     color: #333333;
-    text-overflow:ellipsis; 
+    height:20px;
+    text-overflow:ellipsis; /*超出部分省略号显示*/
+	white-space:nowrap;/*强制不换行*/ 
 	overflow: hidden;
 }
 
