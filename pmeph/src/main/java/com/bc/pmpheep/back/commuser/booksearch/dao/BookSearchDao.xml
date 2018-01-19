@@ -159,7 +159,18 @@
 			</if>				
 		WHERE 
 			b.is_on_sale=1
-			<if test="parameter.searchText != null and parameter.searchText != '' ">
+			
+			<if test="parameter.searchTextArray != null ">
+				<foreach collection="parameter.searchTextArray" open=" and( "  close=")" separator=" and "  item="searchText">
+					(
+					b.bookname like concat('%',#{searchText},'%')
+					or b.isbn like concat('%',#{searchText},'%')
+					or b.publisher like concat('%',#{searchText},'%')
+					or b.author like concat('%',#{searchText},'%')
+					)
+				</foreach>
+			</if>
+			<!-- <if test="parameter.searchText != null and parameter.searchText != '' ">
 				and 
 				(
 				b.bookname like #{parameter.searchText}
@@ -167,8 +178,7 @@
 				or b.publisher like #{parameter.searchText}
 				or b.author like #{parameter.searchText}
 				)
-			</if>
-		
+			</if> -->
 		LIMIT #{start},#{pageSize}
 	</select>
 	
@@ -219,7 +229,17 @@
 				</if>	
 			
 			where b.is_on_sale=1
-			<if test="parameter.searchText != null and parameter.searchText != '' ">
+			<if test="parameter.searchTextArray != null ">
+				<foreach collection="parameter.searchTextArray" open=" and( "  close=")" separator=" and "  item="searchText">
+					(
+					b.bookname like concat('%',#{searchText},'%')
+					or b.isbn like concat('%',#{searchText},'%')
+					or b.publisher like concat('%',#{searchText},'%')
+					or b.author like concat('%',#{searchText},'%')
+					)
+				</foreach>
+			</if>
+			<!-- <if test="parameter.searchText != null and parameter.searchText != '' ">
 				and 
 				(
 				b.bookname like #{parameter.searchText}
@@ -227,7 +247,7 @@
 				or b.publisher like #{parameter.searchText}
 				or b.author like #{parameter.searchText}
 				)
-			</if>
+			</if> -->
 			
 		)t
 		
@@ -247,7 +267,17 @@
 					book b
 				JOIN material_type t ON t.id = b.type
 				  WHERE 1=1
-				  <if test="searchText !=nill">
+				  <if test="searchTextArray != null ">
+						<foreach collection="searchTextArray" open=" and( "  close=")" separator=" and "  item="searchText">
+							(
+							b.bookname like concat('%',#{searchText},'%')
+							or b.isbn like concat('%',#{searchText},'%')
+							or b.publisher like concat('%',#{searchText},'%')
+							or b.author like concat('%',#{searchText},'%')
+							)
+						</foreach>
+					</if>
+				  <!-- <if test="searchText !=nill">
 				     and 
 						(
 						b.bookname like #{searchText}
@@ -255,7 +285,7 @@
 						or b.publisher like #{searchText}
 						or b.author like #{searchText}
 						)
-				  </if>
+				  </if> -->
 				  <if test="sortId !=null" >
 				     and m.parent_id=#{sortId}
 				  </if>
