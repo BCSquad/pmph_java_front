@@ -478,7 +478,12 @@
 		
 		bc.content,
 		bc.gmt_create,
-		DATE_FORMAT(bc.gmt_update,'%Y年%m月%d日') AS gmt_update,
+		
+		case 
+		when bc.gmt_update = '0000-00-00 00:00:00'
+		then DATE_FORMAT(bc.gmt_create,'%Y年%m月%d日')
+		else DATE_FORMAT(bc.gmt_update,'%Y年%m月%d日')
+		end as gmt_update,
 		bc.is_long
 		FROM
 		book_user_comment AS bc

@@ -81,8 +81,7 @@ function hideup() {
 }
 //弹出框修改提交
 function upd_comment() {
-	   
-	     if(!Empty(content)){//非空判断
+	     if(!Empty($("#content").val())){//非空判断
 	    	 var json = {
 	    			 	comm_id: $("#comm_id").val(),
 	    			 	score: score,
