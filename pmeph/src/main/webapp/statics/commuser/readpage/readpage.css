@@ -192,11 +192,14 @@ ul li {
     margin: auto;
     margin-top: 10px;
     text-overflow:ellipsis; 
-	white-space:nowrap;/
+	white-space:nowrap;
 	overflow: hidden;
 }
 
 .ir_02 span {
+	text-overflow:ellipsis; 
+	white-space:nowrap;
+	overflow: hidden;
     font-family: MicrosoftYaHei;
     font-size: 14px;
     color: #333333;
