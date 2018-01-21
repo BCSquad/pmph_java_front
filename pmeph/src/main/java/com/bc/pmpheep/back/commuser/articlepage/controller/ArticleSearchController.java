@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService;
-import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.general.pojo.Message;
 import com.bc.pmpheep.general.service.MessageService;
@@ -141,7 +140,6 @@ public class ArticleSearchController extends BaseController{
 	public Map<String, Object> changelikes(HttpServletRequest request){
 		Map<String, Object> map=new HashMap<String, Object>();
 		String id=request.getParameter("id");
-		String status=request.getParameter("status");
 		Map<String, Object> user=getUserInfo();
 		Map<String, Object> lmap=articleSearchService.queryById(id);
 		Map<String, Object> pmap=new HashMap<String, Object>();
@@ -149,20 +147,18 @@ public class ArticleSearchController extends BaseController{
 		pmap.put("content_id", id);
 		List<Map<String, Object>> tList=articleSearchService.queryPraise(pmap);
 		int likes=Integer.parseInt(lmap.get("likes").toString());
-		if(("add").equals(status)){
-			map.put("likes", likes+1);
-			map.put("status", "add");
-			map.put("delete_id", "");
+		Map<String, Object> rmap=new HashMap<String, Object>();
+		if(tList.size()<1){
+			String str=articleSearchService.insertPraise(id, user.get("id").toString());
+			if(str.equals("OK")){
+				rmap=articleSearchService.changeLikes(likes+1,id);
+				rmap.put("likes", likes+1);
+			}
 		}else{
-			map.put("likes", likes-1);
-			map.put("status", "down");
-			map.put("delete_id", tList.get(0).get("id"));
+			articleSearchService.del(tList.get(0).get("id").toString());
+			rmap=articleSearchService.changeLikes(likes-1,id);
+			rmap.put("likes", likes-1);
 		}
-		
-		map.put("writer_id", user.get("id"));
-		map.put("id", id);
-		Map<String, Object> rmap=articleSearchService.changeLikes(map);
-		rmap.put("likes", map.get("likes"));
 		return rmap;
 	}
 	
@@ -178,6 +174,7 @@ public class ArticleSearchController extends BaseController{
 		ModelAndView modelAndView=new ModelAndView();
 		//String title = new String(request.getParameter("title").getBytes("ISO-8859-1"),"utf-8");
 		String title = java.net.URLDecoder.decode(request.getParameter("title"),"UTF-8"); 
+		Map<String, Object> user=getUserInfo();
 		if(("").equals(title)){
 			List<Map<String, Object>> list=articleSearchService.queryList();
 	 		int allpage=0;
@@ -192,6 +189,17 @@ public class ArticleSearchController extends BaseController{
 			List<Map<String, Object>> artlist=articleSearchService.searchArticle(map);
 			for (Map<String, Object> pmap : artlist) {
 				Message message=messageService.get((String) pmap.get("mid"));
+				//判断文章是否被点过赞
+				if(user!=null){
+					List<Map<String, Object>> list2=articleSearchService.querydExit(pmap.get("id").toString(), user.get("id").toString());
+					if(list2.size()>0){
+						pmap.put("code", "yes");
+					}else{
+						pmap.put("code", "no");
+					}
+				}else{
+					pmap.put("code", "no");
+				}
 				if(message!=null){
 					List<String> imglist = articleSearchService.getImgSrc(message.getContent());
 				    if(imglist.size()>0){
@@ -208,6 +216,17 @@ public class ArticleSearchController extends BaseController{
 		}else{
 			List<Map<String, Object>> artlist=articleSearchService.queryall("%"+title+"%");
 			for (Map<String, Object> pmap : artlist) {
+				//判断登陆人是否点过赞
+				if(user!=null){
+					List<Map<String, Object>> list2=articleSearchService.querydExit(pmap.get("id").toString(), user.get("id").toString());
+					if(list2.size()>0){
+						pmap.put("code", "yes");
+					}else{
+						pmap.put("code", "no");
+					}
+				}else{
+					pmap.put("code", "no");
+				}
 				Message message=messageService.get((String) pmap.get("mid"));
 				if(message!=null){
 					List<String> imglist = articleSearchService.getImgSrc(message.getContent());
