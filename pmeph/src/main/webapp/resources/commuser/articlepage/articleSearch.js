@@ -42,17 +42,11 @@ function tobookpage(){
 
 //点赞/取消赞
 function changelikes(flag){
-	var status='';
 	var id=$("#mainid"+flag).val();
 	var str=$("#likes"+flag).val();
-	if($("#praise"+flag).hasClass("nohandPicture")){
-		status='no';
-	}else{
-		status='add';
-	}
 	   $.ajax({
 			type:'post',
-			url:contextpath+'articlesearch/changelikes.action?id='+id+'&&status='+status,
+			url:contextpath+'articlesearch/changelikes.action?id='+id,
 			async:false,
 			dataType:'json',
 			success:function(json){
