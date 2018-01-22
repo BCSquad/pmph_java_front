@@ -62,6 +62,10 @@ $(function(){
 			window.message.warning("请键入消息");
 			return ;
 		}
+		if(content.length > 255){
+			window.message.error("发送失败:键入消息过长");
+			return ;
+		}
 		webSocket.send("{senderId:"+$("#userId").val()+",senderType:"+2+",content:'"+content+"',groupId:"+$("#groupId").val()+",sendType:0}");
 		$("#msgContent").val(null);
 	}
@@ -69,10 +73,36 @@ $(function(){
 	//回车发送消息
 	$("#msgContent").keypress(function (e){ 
 		var code = event.keyCode; 
-		if (13 == code) { 
+		if (13 == code) { //回车
 			sendSocktMsg();
+		}else{
+			var content=$("#msgContent").val();
+			if(content && content.length > 255){
+				window.message.error("发送失败:键入消息过长");
+				$("#msgContent").val(content.substring(0,255));
+			}
 		} 
 	}); 
+	//粘贴
+    $(document).on("paste", "#msgContent", function () {
+    	var content=$("#msgContent").val();
+		if(content && content.length > 255){
+			window.message.error("发送失败:键入消息过长");
+			$("#msgContent").val(content.substring(0,255));
+		}
+    });
+    $(document).on("keyup input", "#msgContent",function (e) {
+    	var content=$("#msgContent").val();
+		if(content && content.length > 255){
+			window.message.error("发送失败:键入消息过长");
+			$("#msgContent").val(content.substring(0,255));
+		}
+    });
+	
+	
+	
+	
+	
 	//-------------------------------
 	var talkPagesize  = 5 ;
 	var talkPagenumber= 1  ;
