@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.authadmin.accountset.bean.OrgAdminUser;
 import com.bc.pmpheep.back.authadmin.accountset.service.AdminInfoService;
+import com.bc.pmpheep.back.util.Const;
 import com.bc.pmpheep.back.util.DesRun;
 import com.bc.pmpheep.controller.bean.ResponseBean;
 import com.bc.pmpheep.general.controller.BaseController;
@@ -50,8 +52,9 @@ public class AdminInfoController extends BaseController {
         ModelAndView mv=new ModelAndView();
         Map <String,Object> map = this.getUserInfo() ;
     	Long userId = new Long(String.valueOf(map.get("id")));
+    	Map<String, Object> admininfo=adminInfoService.getOrgUserById(userId);
         
-        mv.addObject("admininfo",adminInfoService.getOrgUserById(userId));
+        mv.addObject("admininfo",admininfo);
         mv.setViewName("authadmin/accountset/admininfo");
         return mv;
     }
@@ -185,4 +188,27 @@ public class AdminInfoController extends BaseController {
     		
     	}
     }
+    
+    /**
+	 * 根据ID修改头像
+	 * @param request
+	 */
+	@RequestMapping("updateavatar")
+	@ResponseBody	
+	public Map<String, Object> updateavatar(HttpServletRequest request){
+		Map<String, Object> map=new HashMap<String, Object>();
+		String avatar=request.getParameter("avatar");
+		String id=request.getParameter("id");
+		map.put("id", id);
+		map.put("avatar", avatar);
+		map=adminInfoService.updateavatar(map);
+//		 Map<String, Object> user=getUserInfo();
+//		 user = userService.getUserInfo(MapUtils.getString(user, "username"), "1");
+//		 HttpSession session = request.getSession();
+//		 session.setAttribute(Const.SESSION_USER_CONST_WRITER, user);
+//         session.setAttribute(Const.SESSION_USER_CONST_TYPE, "1");
+		return map;
+	}
+	 
+    
 }

@@ -1,6 +1,9 @@
 $(function () {
+
+	
 	//文件上传
 	$("#uploadFile").uploadFile({
+		
 		accept:"image/*",
         start: function () {
             console.log("开始上传。。。");
@@ -23,9 +26,7 @@ $(function () {
         progressall: function (loaded, total, bitrate) {
             console.log("正在上传。。。" + loaded / total);
         }
-    });
-	
-	
+    });	
 	
 	
     $('select').selectlist({
@@ -64,6 +65,8 @@ $(function () {
      $(this).validate('submitValidate'); //return boolean;*!/
      });*/
 })
+
+
 function getform(){
 
     var json={};

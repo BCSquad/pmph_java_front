@@ -44,4 +44,11 @@
         set proxy=#{fileId},is_proxy_upload=1
         WHERE id=#{id}
     </update>
+    
+    
+        <!-- 根据ID更改作者头像 -->
+    <update id="updateavatar" parameterType="java.util.Map">
+       update org_user set avatar=#{avatar} where id=#{id}
+    </update>
+    
 </mapper>

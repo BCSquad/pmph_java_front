@@ -33,4 +33,12 @@ public interface AdminInfoService {
     
     //上传委托书
 	public void uploadProxy(Map<String, Object> map);
+	
+	/**
+	 * 根据ID修改机构用户头像
+	 * @param avatar 上传图片ID
+	 * @param id 主键
+	 * @return
+	 */
+	Map<String, Object> updateavatar(Map<String, Object> map1);
 }
