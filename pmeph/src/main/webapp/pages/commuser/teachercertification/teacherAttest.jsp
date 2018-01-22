@@ -217,8 +217,7 @@
 				<div style="height: 50px;">
 					<span style="width: 20px;"></span> <span class="sxy-div-menu">学校教师认证</span>
 					<a> <span id="sxy-spantopright" style="cursor: pointer;"
-						onclick="window.location='<%=path%>/userinfo/touser.action'"><<返回个人资料
-								&nbsp&nbsp</span>
+						onclick="window.location='<%=path%>/userinfo/touser.action'"><<返回个人资料&nbsp;&nbsp;</span>
 					</a>
 				</div>
 			</div>
