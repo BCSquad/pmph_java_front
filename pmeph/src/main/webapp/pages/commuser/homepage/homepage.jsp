@@ -124,10 +124,14 @@
         </div>
         <div class="area-4">
             <div class="tab-bar">
-                <c:forEach items="${bookTypes}" var="type" varStatus="status">
+                <%-- <c:forEach items="${bookTypes}" var="type" varStatus="status">
                     <div class="tab ${status.index==0?'active':''}" id="${type.id}"
                          onclick='chooseType("${type.id}")'>${type.type_name}</div>
-                </c:forEach>
+                </c:forEach> --%>
+                <div class="tab active" id="1" onclick='chooseType("1")'>学校教育</div>
+                <div class="tab" id="2" onclick='chooseType("2")'>毕业后教育</div>
+                <div class="tab" id="3" onclick='chooseType("3")'>继续教育</div>
+                <div class="tab" id="4" onclick='chooseType("4")'>考试用书</div>
                 <div class="page ">
                     <div class="page-num">
                         <input type="hidden" id="book_type">
@@ -190,7 +194,7 @@
                     <div class="item1" onclick="window.location.href='${ctx}/articledetail/toPage.action?wid=${list.id}'">
                         <div class="big">
                             <div class="small"><span class="recommend">推荐</span></div>
-                            <div class="pc1"><img src="${ctx}/statics/testfile/a6_photo.png"></div>
+                            <div class="pc1"><img src="${imgpath }"></div>
                             <div class="tt"><span class="a6_content">${list.title}</span></div>
                             <div class="a6_div2">${list.summary}</div>
                             <div>
@@ -208,7 +212,7 @@
                     <div class="item" onclick="window.location.href='${ctx}/articledetail/toPage.action?wid=${list.id}'">
                         <div class="big">
                             <div class="small"><span class="recommend">推荐</span></div>
-                            <div class="pc1"><img src="${ctx}/statics/testfile/a6_photo.png"></div>
+                            <div class="pc1"><img src="${imgpath }"></div>
                             <div class="tt"><span class="a6_content">${list.title}</span></div>
                             <div class="a6_div2">${list.summary}</div>
                             <div>

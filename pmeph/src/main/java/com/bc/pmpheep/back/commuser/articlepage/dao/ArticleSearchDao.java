@@ -27,7 +27,7 @@ public interface ArticleSearchDao {
 	 * 改变点赞数
 	 * @param map
 	 */
-	void changeLikes(Map<String, Object> map);
+	int changeLikes(@Param("likes") int likes,@Param("id") String id);
 	/**
 	 * 查询当前文章是否被点过赞
 	 * @param map
@@ -40,15 +40,28 @@ public interface ArticleSearchDao {
 	 */
 	void insertPraise(Map<String, Object> map);
 	/**
-	 * 删除数据
+	 * 删除点赞表里面的数据
 	 * @param map
 	 */
-	void del(Map<String, Object> map);
+	void del(@Param("id") String id);
 	/**
 	 * 模糊查询
 	 * @param title
 	 * @return
 	 */
 	List<Map<String, Object>> queryall(@Param("title") String title);
-
+	/**
+	 * 查询登陆人是否对指定文章点过赞
+	 * @param id 文章ID
+	 * @param writer_id 登陆人ID
+	 * @return
+	 */
+	List<Map<String, Object>> querydExit(@Param("id") String id,@Param("writer_id") String writer_id);
+	/**
+	 * 根据用户ID和文章ID往点赞表里面添加数据
+	 * @param content_id 文章ID
+	 * @param writer_id 用户ID
+	 * @return 1，1>0说明数据添加成功
+	 */
+	int insertPraise(@Param("content_id") String content_id,@Param("writer_id") String writer_id);
 }

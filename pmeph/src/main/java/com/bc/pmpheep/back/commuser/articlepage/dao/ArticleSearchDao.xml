@@ -16,9 +16,9 @@
 		    b.avatar,
 		    a.id as cms_user_like
 		    from cms_content t
-		    left join writer_user b on t.author_id=b.id
-		    left join cms_user_like a on a.content_id=t.id
-		    order by clicks desc limit #{startrow},#{endrow}
+		    left join writer_user b on t.author_id=b.id 
+		    left join cms_user_like a on a.content_id=t.id where t.category_id='1'
+		    order by clicks desc limit #{startrow},#{endrow} 
  </select>
  <!-- 查询一共有多少条数据 -->
  <select id="queryList" resultType="java.util.Map">
@@ -38,11 +38,11 @@
  </select>
  <!-- 往点赞表里面新增数据 -->
  <insert id="insertPraise" parameterType="java.util.Map">
-   insert into cms_user_like (content_id,writer_id)values(#{id},#{writer_id});
+   insert into cms_user_like (content_id,writer_id)values(#{content_id},#{writer_id});
  </insert>
  <!-- 删除数据 -->
  <delete id="del" parameterType="java.util.Map">
-   delete from cms_user_like where id=#{delete_id}
+   delete from cms_user_like where id=#{id}
  </delete>
  <!-- 文章搜索模糊查询 -->
  <select id="queryall" parameterType="java.util.Map" resultType="java.util.Map" >
@@ -62,5 +62,9 @@
 		    left join writer_user b on t.author_id=b.id
 		    left join cms_user_like a on a.content_id=t.id
 		    where t.title like #{title} limit 0,5
+ </select>
+ <!-- 查询登录用户是否对指定的文章点过赞 -->
+ <select id="querydExit" parameterType="java.util.Map" resultType="java.util.Map">
+    select * from cms_user_like b where b.writer_id=#{writer_id} and b.content_id=#{id}
  </select>
 </mapper>

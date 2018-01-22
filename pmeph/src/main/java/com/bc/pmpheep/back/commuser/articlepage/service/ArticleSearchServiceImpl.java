@@ -46,15 +46,12 @@ public class ArticleSearchServiceImpl implements ArticleSearchService {
 	 * 改变点赞数
 	 */
 	@Override
-	public Map<String, Object> changeLikes(Map<String, Object> map) {
+	public Map<String, Object> changeLikes(int likes,String id) {
 		Map<String, Object> rmap=new HashMap<String, Object>();
-		articleSearchDao.changeLikes(map);
-		if(map.get("status").equals("down")){
-			articleSearchDao.del(map);
-		}else{
-			articleSearchDao.insertPraise(map);
+		int count=articleSearchDao.changeLikes(likes,id);
+		if(count>0){
+			rmap.put("returncode", "OK");
 		}
-		rmap.put("returncode", "OK");
 		return rmap;
 	}
 
@@ -112,4 +109,37 @@ public class ArticleSearchServiceImpl implements ArticleSearchService {
         }
         return pics;
     }
+
+    /**
+     * 查询登陆人是否对指定文章点过赞
+     */
+	@Override
+	public List<Map<String, Object>> querydExit(String id, String writer_id) {
+		// TODO Auto-generated method stub
+		List<Map<String, Object>> list=articleSearchDao.querydExit(id, writer_id);
+		return list;
+	}
+
+	/**
+	 * 根据用户ID和文章ID往点赞变里面添加数据
+	 */
+	@Override
+	public String insertPraise(String content_id, String writer_id) {
+		// TODO Auto-generated method stub
+		String code="";
+		int count=articleSearchDao.insertPraise(content_id, writer_id);
+		if(count>0){
+			 code="OK";
+		}
+		return code;
+	}
+
+	/**
+	 * 删除点赞表里面的数据
+	 */
+	@Override
+	public void del(String id) {
+		// TODO Auto-generated method stub
+		articleSearchDao.del(id);
+	}
 }
