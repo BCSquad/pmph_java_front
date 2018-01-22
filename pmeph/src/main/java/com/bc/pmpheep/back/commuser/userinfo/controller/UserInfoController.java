@@ -54,19 +54,17 @@ public class UserInfoController extends BaseController {
     @RequestMapping("touser")
     public ModelAndView toperson(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        Map <String,Object> map1 = getUserInfo() ;
-
-
-        Map<String, Object> map = userinfoService.queryWriter(map1.get("id").toString());
+        Map <String,Object> map1 = getUserInfo();
+        Map<String, Object> map =new HashMap<String, Object>();
+        if (null!=map1) {
+        	 map = userinfoService.queryWriter(map1.get("id").toString());
+		}
         //头像回显
-        
         //图片为空则显示默认图片
-        if (("").equals(map.get("avatar"))) {
+        /*  if (("").equals(map.get("avatar"))) {
             map.put("avatar", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
-        }
+        }*/
         modelAndView.addObject("map", map);
-        
-        
         modelAndView.setViewName("commuser/userinfo/userinfo");
         return modelAndView;
     }
@@ -158,6 +156,11 @@ public class UserInfoController extends BaseController {
             map.put("workplace", workplace);
             map.put("telephone", telephone);
             zmap = userinfoService.update(map);
+            Map<String, Object> user=getUserInfo();
+   		 	user = userService.getUserInfo(MapUtils.getString(user, "username"), "1");
+   		 	HttpSession session = request.getSession();
+   		 	session.setAttribute(Const.SESSION_USER_CONST_WRITER, user);
+            session.setAttribute(Const.SESSION_USER_CONST_TYPE, "1");
         }
         return zmap;
     }
