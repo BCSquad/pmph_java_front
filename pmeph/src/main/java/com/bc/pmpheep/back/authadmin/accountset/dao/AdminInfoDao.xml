@@ -41,7 +41,7 @@
     <!--上传委托书-->
     <update id="uploadProxy" parameterType="map">
         UPDATE org_user
-        set proxy=#{fileId}
+        set proxy=#{fileId},is_proxy_upload=1
         WHERE id=#{id}
     </update>
 </mapper>
