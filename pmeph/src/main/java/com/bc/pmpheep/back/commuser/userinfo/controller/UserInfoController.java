@@ -4,10 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.general.service.FileService;
 import com.bc.pmpheep.general.service.MessageService;
+import com.bc.pmpheep.general.service.UserService;
 
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.authadmin.accountset.bean.OrgAdminUser;
 import com.bc.pmpheep.back.commuser.userinfo.service.UserInfoService;
+import com.bc.pmpheep.back.util.Const;
 import com.bc.pmpheep.back.util.DesRun;
 import com.bc.pmpheep.controller.bean.ResponseBean;
 import com.mongodb.gridfs.GridFSDBFile;
@@ -38,6 +41,9 @@ public class UserInfoController extends BaseController {
     private UserInfoService userinfoService;
     @Autowired
     private FileService fileService;
+    
+    @Autowired
+    UserService userService;
     
     /**
      * 根据ID查询作家相关信息
@@ -78,6 +84,11 @@ public class UserInfoController extends BaseController {
 		String avatar=request.getParameter("avatar");
 		String id=request.getParameter("id");
 		map=userinfoService.updateavatar(avatar, id);
+		 Map<String, Object> user=getUserInfo();
+		 user = userService.getUserInfo(MapUtils.getString(user, "username"), "1");
+		 HttpSession session = request.getSession();
+		 session.setAttribute(Const.SESSION_USER_CONST_WRITER, user);
+         session.setAttribute(Const.SESSION_USER_CONST_TYPE, "1");
 		return map;
 	}
 	
