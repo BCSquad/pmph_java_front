@@ -48,6 +48,7 @@
 		m.id
 		HAVING
 		1=1
+		and m.is_published = 1
 		and (m.is_deleted = 0 or m.is_deleted is null )
 		<if test="parameter.queryCon != null and parameter.queryCon != '' ">
 			and m.material_name LIKE CONCAT('%',#{parameter.queryCon },'%')
@@ -89,6 +90,7 @@
 		left join material_org o on m.id = o.material_id and o.org_id = #{parameter.org_id}
 		<where>
 			(m.is_deleted = 0 or m.is_deleted is null )
+			and m.is_published = 1
 			and((m.is_public = '0' and o.org_id = #{parameter.org_id}) or (m.is_public = '1'))
 			<if test="parameter.queryCon != null and parameter.queryCon != '' ">
 			and m.material_name LIKE CONCAT('%',#{parameter.queryCon },'%')
