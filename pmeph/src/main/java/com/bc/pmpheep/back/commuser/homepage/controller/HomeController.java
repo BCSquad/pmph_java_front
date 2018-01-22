@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService;
 import com.bc.pmpheep.back.commuser.homepage.service.HomeService;
 import com.bc.pmpheep.back.template.service.TemplateService;
+import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.general.pojo.Message;
 import com.bc.pmpheep.general.service.MessageService;
 
@@ -25,7 +26,7 @@ import com.bc.pmpheep.general.service.MessageService;
 //首页controller
 @Controller
 @RequestMapping("/homepage")
-public class HomeController {
+public class HomeController extends BaseController{
 
     @Autowired
     @Qualifier("com.bc.pmpheep.back.homepage.service.HomeServiceImpl")
@@ -43,12 +44,20 @@ public class HomeController {
     public ModelAndView move(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         int flag = 0;
-        List<Map<String, Object>> listDou = homeService.queryDocument();
         List<Map<String, Object>> listNot = homeService.queryNotice();
         List<Map<String, Object>> listArt = homeService.queryArticle(4);
         List<Map<String, Object>> listAut = homeService.queryAuthor();
         List<Map<String, Object>> listCom = homeService.queryComment();
 
+        //根据登录人查询可见公告，未登录查询所有人可见公告
+        List<Map<String, Object>> listDou=new ArrayList<Map<String,Object>>();
+        Map<String, Object> user=getUserInfo();
+        if(user!=null){
+        	 listDou = homeService.queryDocument(user.get("id").toString());
+        }else{
+        	 listDou = homeService.queryDocument("0");
+        }
+        
         modelAndView.addObject("listDou", listDou);
         modelAndView.addObject("listNot", listNot);
         modelAndView.addObject("listArt", listArt);

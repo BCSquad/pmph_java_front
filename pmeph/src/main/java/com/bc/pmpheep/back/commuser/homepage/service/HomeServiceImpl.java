@@ -18,16 +18,16 @@ public class HomeServiceImpl implements HomeService {
 	private HomeDao homeDao;
 
 	/**
-	 * 查询公文
+	 * 查询公告
 	 */
 	@Override
 	@Cacheable(value="commDataCache",key="#root.targetClass+#root.methodName")
-	public List<Map<String, Object>> queryDocument(){
-		List<Map<String, Object>> list=homeDao.queryDocument();
+	public List<Map<String, Object>> queryDocument(String id){
+		List<Map<String, Object>> list=homeDao.queryDocument(id);
 		return list;
 	}
 	/**
-	 * 查询公告
+	 * 查询信息快报
 	 */
 	@Override
 	@Cacheable(value="commDataCache",key="#root.targetClass+#root.methodName")
