@@ -54,9 +54,10 @@
 										window.message.success("提交成功");
 										setTimeout(
 												function() {
-													window.location.href = contextpath
+													/* window.location.href = contextpath
 															+ "userinfo/touser.action?id="
-															+ $("#userId").val();
+															+ $("#userId").val(); */
+													location.reload(true);  
 												}, 1500);
 									} else {
 										window.message.error("提交失败");
@@ -88,6 +89,7 @@
 			optionHeight : 40,
 			fiter : true
 		});
+		$('.select-list li[data-value=""]').remove();
 
 		//$("input[name='orgId']").addClass("required");
 
@@ -119,7 +121,8 @@
 									var i = 0;
 									var $collection = $("#Select1").find(
 											"li[class='selected']");
-									if (!$collection.length) {
+									var select_id = $("#Select1 input[type='hidden']").val();
+									if (!$collection.length || select_id == "") {
 										return errorMsg;
 									}
 								},
@@ -128,6 +131,28 @@
 									if (!(handphoneReg.test(value))) {
 										return errorMsg;
 									}
+								},
+								maxLength : function(value, errorMsg, el){
+									var v = $.trim(value);
+								　　var n = '';
+								　　var b = 0;
+									var tooLong = false;
+									var param = 9;
+								　　for (var i = 0; i < v.length; i++) {
+								    　　var c = v.slice(i, i + 1);
+								    　　if (b <= param) {
+								         　　 n += c;
+								    　　}else{
+								    	tooLong = true;
+								    	break;
+								    　　}
+								    　　b++;
+								　　}
+								　　$(el).val(n);
+									if (tooLong) {
+										return errorMsg;
+									}
+								　　
 								}
 							}
 						/* ,
@@ -253,7 +278,7 @@
                     	被退回
 					   	</c:when>
 												<c:when test="${showWriterUserCertification.progress==3}"> 
-                    	通过
+                    	已通过
 					   	</c:when>
 												<c:otherwise>未提交</c:otherwise>
 											</c:choose></font>）
@@ -272,9 +297,9 @@
 										<div class="input-wrapper">
 											<input id="realName" class="sxy-txt required" type="text"
 												value="${showWriterUserCertification.realName}"
-												name="realName" data-valid="isNonEmpty"
-												data-error="真实姓名不能为空!" 
-												<c:if test="${showWriterUserCertification.progress != null&&showWriterUserCertification.progress>0}">disabled="disabled"</c:if>
+												name="realName" data-valid="isNonEmpty||maxLength"
+												data-error="真实姓名不能为空!||超过最大输入长度！已截取。" 
+												<c:if test="${showWriterUserCertification.progress != null&&(showWriterUserCertification.progress==1 || showWriterUserCertification.progress == 3)}">disabled="disabled"</c:if>
 												/>
 												
 										</div>
@@ -294,7 +319,7 @@
 											<input id="idcard" class="sxy-txt required" type="text"
 												value="${showWriterUserCertification.idcard}" name="idcard"
 												data-valid="idcard" data-error="请填正确的身份证信息!" 
-												<c:if test="${showWriterUserCertification.progress != null&&showWriterUserCertification.progress>0}">disabled="disabled"</c:if>
+												<c:if test="${showWriterUserCertification.progress != null&&(showWriterUserCertification.progress==1 || showWriterUserCertification.progress == 3)}">disabled="disabled"</c:if>
 												/>
 										</div>
 									</div>
@@ -315,8 +340,9 @@
 												data-error="请选择您所在的学校!"> 
 											
 											<c:choose>
-												<c:when test="${showWriterUserCertification.progress==null||showWriterUserCertification.progress==0}">
-													<select class="sxy-select-td " id="Select1" name="orgId" <c:if test="${showWriterUserCertification.progress != null&&showWriterUserCertification.progress>0}">disabled="disabled"</c:if> >
+												<c:when test="${showWriterUserCertification.progress==null||showWriterUserCertification.progress==0||showWriterUserCertification.progress==2}">
+													<select class="sxy-select-td " id="Select1" name="orgId" <c:if test="${showWriterUserCertification.progress != null&&(showWriterUserCertification.progress==1 || showWriterUserCertification.progress == 3)}">disabled="disabled"</c:if> >
+														<option value=""></option>
 														<c:forEach var="org"
 															items="${showWriterUserCertification.orgList}">
 															<option value="${org.id}"
@@ -324,7 +350,7 @@
 														</c:forEach>
 													</select>
 												</c:when>
-												<c:when test="${showWriterUserCertification.progress != null&&showWriterUserCertification.progress>0}">
+												<c:when test="${showWriterUserCertification.progress != null&&(showWriterUserCertification.progress==1 || showWriterUserCertification.progress == 3)}">
 													<input class="sxy-txt" type="text"
 														value="${showWriterUserCertification.orgName}" 
 														disabled="disabled"
@@ -354,7 +380,7 @@
 												value="${showWriterUserCertification.handphone}"
 												name="handphone" data-valid="isHandphone"
 												data-error="请填写正确的手机号码!" 
-												<c:if test="${showWriterUserCertification.progress != null&&showWriterUserCertification.progress>0}">disabled="disabled"</c:if>
+												<c:if test="${showWriterUserCertification.progress != null&&(showWriterUserCertification.progress==1 || showWriterUserCertification.progress == 3)}">disabled="disabled"</c:if>
 												/>
 										</div>
 									</div>
@@ -383,7 +409,7 @@
 								</td>
 								<td>
 									<div style="margin-bottom: 65px; margin-left: 20px;">
-										<c:if test="${showWriterUserCertification.progress==null||showWriterUserCertification.progress==0}">
+										<c:if test="${showWriterUserCertification.progress==null||showWriterUserCertification.progress==0||showWriterUserCertification.progress==2}">
 											<input id="sxy-btn-upload" type="button" value="上传文件" />
 										</c:if>
 										<div id="proxyDiv">
@@ -417,7 +443,7 @@
 						<img class="cupline" alt=""
 							src="<%=path%>/statics/image/_cupline.jpg" />
 						<div class="submit_btn_wrapper">
-							<button class="btn-2" onclick="return submitValidate()" <c:if test="${showWriterUserCertification.progress>0}">style = "display:none;"</c:if> >提交</button>
+							<button class="btn-2" onclick="return submitValidate()" <c:if test="${(showWriterUserCertification.progress==1 || showWriterUserCertification.progress == 3)}">style = "display:none;"</c:if> >提交</button>
 						</div>
 					</form>
 				</div>

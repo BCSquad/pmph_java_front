@@ -464,12 +464,14 @@ request.setAttribute("currentTime",datetime);
                     <br/>
                     <ul class="scul">
                         <c:forEach items="${listmygroup}" begin='0' end='8' var="listmyg" varStatus="status">
-                            <li class="wdxz">
-                            	<img src="<%=path %>/image/${listmyg.group_image}.action" class="xztp">
-                                <br/>
-                                <span class="group_name">${listmyg.group_name}</span>
-                                <span class="xzrs">(${listmyg.grouppeo}人)</span>
-                            </li>
+                            <a target="_blank" class="not-like-an-a" href="${ctx}/group/toMyGroup.action?groupId=${listmyg.group_id}">
+	                            <li class="wdxz" title="${listmyg.group_name}">
+	                            	<img src="<%=path %>/image/${listmyg.group_image}.action" class="xztp">
+	                                <br/>
+	                                <span class="group_name">${listmyg.group_name}</span>
+	                                <span class="xzrs">(${listmyg.grouppeo}人)</span>
+	                            </li>
+                            </a>
                         </c:forEach>
                     </ul>
                 </div>
