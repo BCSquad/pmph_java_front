@@ -49,6 +49,7 @@ public class NoticeMessageServiceImpl implements NoticeMessageService {
 		return map;
 	}
 
+	
 	//查询教材备注相关的附件
 	@Override
 	public List<Map<String, Object>> queryNoticeMessageDetailAttachment(Map<String, Object> paraMap) {
@@ -68,6 +69,13 @@ public class NoticeMessageServiceImpl implements NoticeMessageService {
 	public Map<String, Object> queryCMSNotice(Map<String, Object> paraMap) {
 		// TODO Auto-generated method stub
 		return noticeMessageDao.queryCMSNotice(paraMap);
+	}
+
+	//更新通知点击量
+	@Override
+	public void updateNoticeClicks(String cmsId) {
+		noticeMessageDao.updateNoticeClicks(cmsId);
+		
 	}
 
 	

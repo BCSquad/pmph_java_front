@@ -40,20 +40,24 @@
         		<div id="section">
 
 		            <span class="title">${map.material_name}</span>
-		
+					<c:if test="${map.deadline !=null && map.deadline !=''}">
 		            <div class="time">
 		            <span >截止日期：${map.deadline}</span>
 		            </div>
+		            </c:if>
 		        </div>
 		        <div class="content">
 		            <p class="pSize">
 				               ${message.content}
 		            </p>
 		        </div>
-		        <div align="center">
+		      <%--   <div align="center">
 		            <img  class="pictureSizeBig" src="${ctx}/statics/pictures/1395ea09518bf0f9b1787e0ec8c7452c.jpg" />
-		        </div>
+		        </div> --%>
+		        
+		        		     
 		        <div class="liseDiv">
+		        <c:if test="${map.mail_address !=null && map.mail_address !=''}">
 		        <div class="list">
 		            <div class="title2">
 		               	 邮寄地址：
@@ -62,6 +66,8 @@
 		            	${map.mail_address}
 		            </div>
 		        </div>
+		        </c:if>
+		        <c:if test="${listContact.size()>0}">
 		        <div class="list">
 		        <div class="title2">
 		           	 联系人：
@@ -72,6 +78,7 @@
 		                </c:forEach>
 		            </div>
 		        </div>
+		        </c:if>
 		        <c:if test="${map.note !=null && map.note !=''}">
 		        <div class="list">
 		            <div class="title2">

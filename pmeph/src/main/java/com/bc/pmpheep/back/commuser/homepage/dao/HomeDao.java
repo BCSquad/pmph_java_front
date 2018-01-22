@@ -15,12 +15,12 @@ import org.apache.ibatis.annotations.Param;
 public interface HomeDao {
 	
 	/**
-	 * @Description: 查询前三条公文 
+	 * @Description: 查询三条最新公告
 	 * @return List<HomepageDocument>
 	 */
-	List<Map<String, Object>> queryDocument();
+	List<Map<String, Object>> queryDocument(@Param("id") String id);
 	/**
-	 * @Description: 查询前五条公告 
+	 * @Description: 查询前五条信息快报 
 	 * @return List<HomepageDocument>
 	 */
 	List<Map<String, Object>> queryNotice();

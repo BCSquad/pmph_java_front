@@ -53,6 +53,9 @@ public interface NoticeMessageDao {
 	 * @return
 	 */
 	Map<String, Object> queryCMSNotice(Map<String, Object> paraMap);
+	
+	//更新通知点击量
+	void updateNoticeClicks(String cmsId);
 
 	
 	

@@ -2,10 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bc.pmpheep.back.commuser.homepage.dao.HomeDao" >
   <resultMap id="Mapresult" type="java.util.Map"></resultMap>
-  <!-- 查询最新三条公文 -->
-  <select id="queryDocument"  resultMap="Mapresult">
-     select  * from cms_content  where  category_id='3' and auth_status='2' 
-     and is_deleted='0' order by gmt_create desc limit 0,3
+  <!-- 查询最新三条公告(所有人可见)-->
+  <select id="queryDocument"  parameterType="map" resultMap="Mapresult">   
+    select n.* from 
+		(select 
+		        t.*
+		        from cms_content t
+		        left join  material b on t.material_id =b.id 
+		        where  t.category_id=3 
+		        and t.material_id is not null 
+		        <![CDATA[and t.material_id >0]]>
+                <![CDATA[and b.is_public <> 0]]>
+		        and t.auth_status=2
+		        and t.is_deleted=0
+		 union
+		 select 
+		        t.*
+		        from cms_content t
+		        left join  material b on t.material_id =b.id 
+		        left join material_org u on b.id=u.material_id
+		        left join writer_user p on p.org_id=u.org_id
+		        where  t.category_id=3
+		        and t.material_id is not null 
+		        <![CDATA[and t.material_id >0]]>
+		        and b.is_public = 0
+		        and t.auth_status=2
+		        and t.is_deleted=0 
+		        and p.id= #{id}) n
+		order by n.gmt_create desc limit 0,3     
   </select>
    <!-- 查询最新五条信息快报 -->
   <select id="queryNotice"  resultMap="Mapresult">
@@ -19,17 +43,25 @@
 			b.*
 			FROM
 			book AS b
-			inner JOIN material_type AS t ON b.type = t.id
+			INNER JOIN 
+			`material_type` t
+		ON
+			t.`id` = b.`type`
+			
 			and
-			SUBSTRING_INDEX(SUBSTRING_INDEX(CONCAT(t.path,'-',t.id),'-',
-						(select 
-							cast(
-									(CHAR_LENGTH(path)-CHAR_LENGTH(REPLACE(path,'-','')))/CHAR_LENGTH('-')+2
-										as decimal(9,2)
-							)
-							 from material_type 
-							where id = cast(#{type} as decimal(9,2)))
-				),'-',-1) = #{type}
+			(
+				SUBSTRING_INDEX(SUBSTRING_INDEX(CONCAT(t.path,'-',t.id),'-',
+										(select 
+											cast(
+													(CHAR_LENGTH(path)-CHAR_LENGTH(REPLACE(path,'-','')))/CHAR_LENGTH('-')+2
+														as decimal(9,2)
+											)
+											 from material_type 
+											where id = cast(#{type} as decimal(9,2)))
+								),'-',-1) = #{type}
+				or t.id = 	#{type}		
+			)
+		
        <if test="startrows >= 0">
 				<![CDATA[limit ${startrows},10]]>
 	   </if>
@@ -39,13 +71,14 @@
       select  
         t.title,
         t.id,
+        t.mid,
         t.summary,
         t.gmt_create,
         c.realname       
         from cms_content t
-        left join cms_category b on t.category_id=b.id
         left join writer_user c on t.author_id=c.id
-        where  category_id='58' order by gmt_create desc limit 0,#{endrow}
+        where  t.category_id='1' and t.auth_status='2' 
+        and t.is_deleted='0' order by gmt_create desc limit 0,#{endrow}
   </select>
    <!-- 查询热门标签 -->
   <select id="queryLabel" parameterType="string"  resultMap="Mapresult">
@@ -101,7 +134,7 @@ LIMIT 0,10
 		b.*
 		FROM
 		book AS b
-		inner JOIN material_type AS t ON b.type = t.id
+		 inner JOIN material_type AS t ON b.type = t.id
 		and
 		SUBSTRING_INDEX(SUBSTRING_INDEX(CONCAT(t.path,'-',t.id),'-',
 			(select 
@@ -114,7 +147,7 @@ LIMIT 0,10
 	        ),'-',-1) = #{type}
 		where b.is_on_sale = 1
 		ORDER BY
-		b.sales DESC limit 0,6
+		b.sales DESC limit 0,6 
   </select>
    <!-- 查询书籍分类-->
   <select id="queryBookType" parameterType="map" resultMap="Mapresult">

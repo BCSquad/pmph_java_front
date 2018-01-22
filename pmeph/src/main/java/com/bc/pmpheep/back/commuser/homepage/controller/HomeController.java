@@ -15,14 +15,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService;
 import com.bc.pmpheep.back.commuser.homepage.service.HomeService;
 import com.bc.pmpheep.back.template.service.TemplateService;
+import com.bc.pmpheep.general.controller.BaseController;
+import com.bc.pmpheep.general.pojo.Message;
+import com.bc.pmpheep.general.service.MessageService;
 
 
 //首页controller
 @Controller
 @RequestMapping("/homepage")
-public class HomeController {
+public class HomeController extends BaseController{
 
     @Autowired
     @Qualifier("com.bc.pmpheep.back.homepage.service.HomeServiceImpl")
@@ -30,22 +34,49 @@ public class HomeController {
     @Autowired
     @Qualifier("com.bc.pmpheep.back.template.service.TemplateService")
     private TemplateService templateService;
+	@Autowired
+	private MessageService messageService;
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService")
+	private ArticleSearchService articleSearchService;
 
     @RequestMapping("/tohomepage")
     public ModelAndView move(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         int flag = 0;
-        List<Map<String, Object>> listDou = homeService.queryDocument();
         List<Map<String, Object>> listNot = homeService.queryNotice();
         List<Map<String, Object>> listArt = homeService.queryArticle(4);
         List<Map<String, Object>> listAut = homeService.queryAuthor();
         List<Map<String, Object>> listCom = homeService.queryComment();
 
+        //根据登录人查询可见公告，未登录查询所有人可见公告
+        List<Map<String, Object>> listDou=new ArrayList<Map<String,Object>>();
+        Map<String, Object> user=getUserInfo();
+        if(user!=null){
+        	 listDou = homeService.queryDocument(user.get("id").toString());
+        }else{
+        	 listDou = homeService.queryDocument("0");
+        }
+        
         modelAndView.addObject("listDou", listDou);
         modelAndView.addObject("listNot", listNot);
         modelAndView.addObject("listArt", listArt);
         modelAndView.addObject("listAut", listAut);
         modelAndView.addObject("listCom", listCom);
+        //读取mongeldb里面的图片 
+        for (Map<String, Object> pmap : listArt) {
+			Message message=messageService.get((String) pmap.get("mid"));
+			if(message!=null){
+				List<String> imglist = articleSearchService.getImgSrc(message.getContent());
+			    if(imglist.size()>0){
+			    	pmap.put("imgpath", imglist.get(0));
+			    }else{//没有图片放置默认图片
+			    	pmap.put("imgpath",request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+			    }
+			}else{//没有图片放置默认图片
+				pmap.put("imgpath", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+			}
+		}
 
         List<Map<String, Object>> types = homeService.queryBookType(0);
         modelAndView.addObject("bookTypes", types);
@@ -60,7 +91,8 @@ public class HomeController {
 
         Map<String, Object> rowsmap = new HashMap<String, Object>();
         rowsmap.put("startrows", -1);
-        rowsmap.put("type", MapUtils.getIntValue(types.get(0), "id"));
+//      rowsmap.put("type", MapUtils.getIntValue(types.get(0), "id"));
+        rowsmap.put("type",1);
         List<Map<String, Object>> listrows = homeService.queryBook(rowsmap);
         //模板(首页默认显示学校教育下的书籍,从第一条开始显示，每页10条数据)
         Map<String, Object> pmap = new HashMap<String, Object>();

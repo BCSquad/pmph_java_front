@@ -5,6 +5,7 @@ import java.util.Map;
 
 public interface NoticeMessageService {
 	
+	
 	//申请信息列表
 	List<Map<String, Object>> selectApplyMessage(Map<String, Object> paraMap);
 	//更新申请消息表
@@ -24,6 +25,9 @@ public interface NoticeMessageService {
 	 * @return
 	 */
 	Map<String, Object> queryCMSNotice(Map<String, Object> paraMap);
+	
+	//更新通知点击量
+	void updateNoticeClicks(String cmsId);
 
 
 }

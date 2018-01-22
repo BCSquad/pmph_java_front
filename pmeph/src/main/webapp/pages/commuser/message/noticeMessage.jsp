@@ -78,7 +78,7 @@
             <span id="rightContent" >筛选：
                 <select id="select" name="select" title="请选择" >
                     <option value="3" ${condition=='3' ?'selected':''}>全部</option>
-                    <option value="1" ${condition=='1' ?'selected':''}>公告</option>
+                    <option value="4" ${condition=='4' ?'selected':''}>公告</option>
                     <option value="0" ${condition=='0' ?'selected':''}>系统消息</option>
                 </select>
             </span>
@@ -90,15 +90,20 @@
             		<c:forEach items="${list}" var="message">
 		                <tr style="width: 70%">
 		                    <th rowspan="2" class="headPortrait"><img  class ="pictureNotice" src="${ctx}/statics/pictures/head.png"></th>
-		                    <td class="type1"><span><c:if test="${message.msg_type==1}">公告 </c:if><c:if test="${message.msg_type==0}">系统消息</c:if></span><span class="time1" id="gmt_create"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${message.gmt_create}" /></span></td>
+		                    <td class="type1">
+			                    <span><c:if test="${message.msgType==4}">公告 </c:if>
+			                          <c:if test="${message.msgType==0||message.msgType==1}">系统消息</c:if>
+			                    </span>
+			                    <span class="time1" id="gmt_create"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${message.gmt_create}" /></span>
+		                    </td>
 		                </tr>
 		                <tr style="width: 30%">
 		                    <td colspan="2" class="title">${message.title}</td>
 		                    <td class="buttonDetail">
-		                    	<c:if test="${message.msg_type==1}">
-		                        <div class="buttonAccept"><a href="${ctx}/message/noticeMessageDetail.action?id=${message.msg_id}">查看详情</a></div>
+		                    	<c:if test="${message.msgType==4}">
+		                        <div class="buttonAccept"><a href="${ctx}/message/noticeMessageDetail.action?msgId=${message.fId}&&cmsId=${message.id}">查看详情</a></div>
 		                        </c:if>
-		                        <c:if test="${message.msg_type==0}">
+		                        <c:if test="${message.msgType==0||message.msgType==1}">
 		   					    <span class="deleteButton" onclick="deleteNotice(${message.id })"><span style="font-size:18px;">×</span> 删除</span>
 		                        </c:if>
 		                    </td>
@@ -116,6 +121,7 @@
             	</c:otherwise>
             </c:choose>
             </table>
+           
             <c:if test="${listSize>=8}">
             <div id="loadMoreDiv" class="load-more clearfix" onclick='loadMore()'>加载更多...</div>
             <input id="startPara" name="startPara" type="hidden">

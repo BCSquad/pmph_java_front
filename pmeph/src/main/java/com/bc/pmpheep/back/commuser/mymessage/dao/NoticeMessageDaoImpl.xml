@@ -34,17 +34,47 @@
 	
 	<!-- 消息通知列表 -->
 	<select id="selectNoticeMessage" parameterType="java.util.Map" resultType="java.util.Map">
-		select id,msg_id,title,gmt_create,msg_type
-		from user_message
-		<trim prefix="WHERE" prefixOverrides="AND|OR">
-			receiver_id = #{userId}
-			<if test="condition==null">AND msg_type in(0,1)</if>
-			<if test="condition==3">AND msg_type in(0,1)</if>
-			<if test="condition==0">AND msg_type = 0</if>
-			<if test="condition==1">AND msg_type = 1</if>
-			and is_deleted = 0
-		</trim>
-		ORDER BY gmt_create DESC
+		
+		<!-- 全部 -->
+		<if test="condition==null||condition==3">
+			select * from(
+			select u.id,u.msg_id as fId,u.title,u.gmt_create,u.msg_type as msgType
+			from user_message u
+			<trim prefix="WHERE" prefixOverrides="AND|OR">
+				u.receiver_id = #{userId}
+				and msg_type in (0,1)
+				and u.is_deleted = 0
+			</trim>
+			ORDER BY u.gmt_create DESC)t1
+			union 
+			select * from(
+				select c.id,c.material_id,c.title,c.gmt_create,4 
+				from cms_content c
+				where c.is_deleted=0
+				ORDER BY c.gmt_create DESC
+			)t2
+		</if>
+	
+		<!--公告  -->
+		<if test="condition==4">
+			select c.id,c.material_id as fId,c.title,c.gmt_create,4 as msgType
+			from cms_content c
+			where c.is_deleted=0
+			ORDER BY c.gmt_create DESC
+		</if>
+		<!-- 系统消息 -->
+		<if test="condition==0">
+			select u.id,u.msg_id as fId,u.title,u.gmt_create,u.msg_type as msgType
+			from user_message u
+			<trim prefix="WHERE" prefixOverrides="AND|OR">
+				u.receiver_id = #{userId}
+				and msg_type in (0,1)
+				and u.is_deleted = 0
+			</trim>
+			ORDER BY u.gmt_create DESC
+		</if>
+		
+		
 		<if test="startPara!=null">limit #{startPara},8</if>	
 		
 	</select>
@@ -87,7 +117,7 @@
 		ON m.`id` = e.`material_id`
 		LEFT JOIN `material_contact` c
 		ON c.`material_id` = m.`id`
-		WHERE b.`msg_id`=#{messageId}
+		WHERE b.`id`=#{cmsId}
 	</select>
 	
 	<!-- 查询教材备注相关的附件 -->
@@ -110,4 +140,9 @@
 		   LEFT JOIN `material_contact` c  ON c.`material_id` = m.`id`
 		WHERE a.mid=#{messageId}
 	</select>
+	
+	<!-- 更新通知点击量 -->
+	<update id="updateNoticeClicks" parameterType="String" >
+		UPDATE `cms_content` SET clicks = clicks+1 WHERE id=#{cmsId}
+	</update>
 </mapper>

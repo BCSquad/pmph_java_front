@@ -369,6 +369,10 @@ color:#FFF;
     margin-left: 3px;
     margin-top: 19px;
     display: block;
+    text-align: center;
+    overflow: hidden;
+    word-break: break-all;
+    text-overflow: ellipsis;
 }
 
 .sctp {

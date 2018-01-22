@@ -113,6 +113,7 @@ public class MessageController extends BaseController{
 		paraMap.put("userId", userId);
 		List<Map<String,Object>> list = noticeMessageService.selectApplyMessage(paraMap);
 		mv.addObject("list",list);
+		mv.addObject("listSize",list.size());
 		mv.setViewName("commuser/message/applyMessage");
 		return mv;
 	}
@@ -140,6 +141,7 @@ public class MessageController extends BaseController{
 		mv.setViewName("commuser/message/noticeMessage");
 		return mv;
 	}
+	
 	//查询更多通知列表
 	@RequestMapping(value="/loadMore")
 	@ResponseBody
@@ -195,10 +197,12 @@ public class MessageController extends BaseController{
 	//查询公告详情
 	@RequestMapping(value="/noticeMessageDetail")
 	public ModelAndView toNoticeMessageDetail(HttpServletRequest request){
-		String messageId=request.getParameter("id");
+		String messageId=request.getParameter("msgId");
+		String cmsId=request.getParameter("cmsId");
 		ModelAndView mv = new ModelAndView();
 		Map<String,Object> paraMap = new HashMap<String,Object>();
 		paraMap.put("messageId", messageId);
+		paraMap.put("cmsId", cmsId);
 		//标题、时间、邮寄地址、备注
 		Map<String,Object> mapTitle =new HashMap<>();
 			mapTitle = noticeMessageService.queryNoticeMessageDetail(paraMap);
@@ -230,6 +234,9 @@ public class MessageController extends BaseController{
 		
 		//mongoDB查询通知内容
 		Message message = mssageService.get(messageId);
+		//更新通知点击量
+		noticeMessageService.updateNoticeClicks(cmsId);
+		
 		
 		mv.addObject("message",message);
 		mv.addObject("messageId",messageId);

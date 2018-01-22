@@ -120,6 +120,8 @@
     font-stretch: normal;
     letter-spacing: 0px;
     color: #333333;
+    overflow: hidden;
+    text-overflow:ellipsis;
 }
 
 .nameDiv {

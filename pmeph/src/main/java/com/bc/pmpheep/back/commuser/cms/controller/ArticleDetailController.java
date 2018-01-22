@@ -55,7 +55,7 @@ public class ArticleDetailController extends BaseController {
 		Map<String, Object> map = articleDetailService.queryTitle(map1);
 		// mongoDB查询内容
 		Content message = contentService.get(map.get("mid").toString());
-//		Content message = contentService.get("5a2ffd33879abeb3ebc91cdf");
+//		Content message = contentService.get("5a6544f290baad7f01b9bc52");
 		String UEContent="";
 		if (message==null||"".equals(message)) {
 			 UEContent = "没有内容！！！！！";

@@ -216,6 +216,14 @@
     left: 0px;
 }
 
+.body .nine-block-box-container div .btn-type-4{
+    color: #ff8500;
+    background-color: #ffffff;
+    border: solid 1.5px #fd9a2e;
+    left: 114px;
+    line-height: 15px;
+}
+
 .pagination-wrapper{
     float: right;
     margin: 0px -10px 0px 0px;

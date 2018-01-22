@@ -7,12 +7,12 @@ import java.util.Map;
 public interface HomeService {
 
 	/**
-	 * @Description: 查询前三条公文 
+	 * @Description: 查询前三条公告 
 	 * @return List<HomepageDocument>
 	 */
-	List<Map<String, Object>> queryDocument();
+	List<Map<String, Object>> queryDocument(String id);
 	/**
-	 * @Description: 查询前五条公告 
+	 * @Description: 查询前五条公告信息快报
 	 * @return List<HomepageDocument>
 	 */
 	List<Map<String, Object>> queryNotice();

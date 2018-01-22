@@ -30,17 +30,17 @@ function loadMore(){
 		               "<th rowspan='2' class='headPortrait'><img  class ='pictureNotice' src='"+projectName+"/statics/pictures/head.png'></th>"+
 		               "<td class='type1'><span>" ;
 					
-		               if(n.msg_type==1){
+		               if(n.msgType==4){
 		            	   str+= "公告";
 		               }
-		               if(n.msg_type==0){
+		               if(n.msgType==0||n.msgType==1){
 		            	   str+= "系统消息";
 		               }
 		              str+= "</span><span class='time1'>"+commonTime+"</span></td></tr><tr style='width: 30%'>"+
 		               "<td colspan='2' class='title'>"+n.title+"</td><td class='buttonDetail'>";
-		              if(n.msg_type==1){
-		            	 str+="<div class='buttonAccept'><a href='"+projectName+"/message/noticeMessageDetail.action?id="+n.msg_id+"'>查看详情</a></div>"; 
-		              }else if(n.msg_type==0){
+		              if(n.msgType==4){
+		            	 str+="<div class='buttonAccept'><a href='"+projectName+"/message/noticeMessageDetail.action?msgId="+n.fId+"&&cmsId="+n.id+"'>查看详情</a></div>"; 
+		              }else if(n.msgType==0||n.msgType==1){
 		            	  str+= "<span class='deleteButton' onclick='deleteNotice("+n.id+")'><span style='font-size:18px;'>×</span> 删除</span>";
 		              }
 		              
@@ -52,6 +52,7 @@ function loadMore(){
 			}
 		}); 
 	}
+
 //加载更多申请
 function loadMoreApply(){
 	var pathName=window.document.location.pathname;  
