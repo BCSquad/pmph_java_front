@@ -474,39 +474,51 @@ request.setAttribute("currentTime",datetime);
                     </ul>
                 </div>
                 
-                <div id="wdhy"><span id="hytb"></span> <span class="rlan">我的好友</span> <span
-                        id="qbhy"><a href="${ctx}/myFriend/listMyFriend.action" class="aright">全部好友>>&nbsp;</a></span>
+                <div id="wdhy">
+                <span id="hytb"></span> 
+                <span class="rlan">我的好友</span> 
+                <span id="qbhy">
+                	<a href="${ctx}/myFriend/listMyFriend.action" class="aright">全部好友>>&nbsp;</a>
+                </span>
                     <br/>
                     <ul class="scul">
                         <c:forEach items="${listmyfriend}" begin='0' end='11' var="listmyf" varStatus="status">
-                            <li class="hylb">
-                                <div class="hytxdiv">
-                                    <c:if test="${listmyf.avatar=='DEFAULT'||listmyf.avatar==''||listmyf.avatar== NULL}"><img
-                                            src="${ctx}/statics/image/haoyoutouxiang1.png" class="hytp"></c:if>
-                                    <c:if test="${listmyf.avatar!='DEFAULT'}"><img src="<%=path %>/image/${listmyf.avatar}.action"
-                                                                                   class="hytp"></c:if>
-                                </div>
-                                    ${listmyf.realname}
-                             </li>
+                            <a target="_blank" class="not-like-an-a" href="${ctx}/personalhomepage/tohomepage.action?userId=${listmyf.id}">
+	                            <li class="hylb">
+	                                <div class="hytxdiv">
+	                                    <c:if test="${listmyf.avatar=='DEFAULT'||listmyf.avatar==''||listmyf.avatar== NULL}"><img
+	                                            src="${ctx}/statics/image/haoyoutouxiang1.png" class="hytp"></c:if>
+	                                    <c:if test="${listmyf.avatar!='DEFAULT'}"><img src="<%=path %>/image/${listmyf.avatar}.action"
+	                                                                                   class="hytp"></c:if>
+	                                </div>
+	                                    ${listmyf.realname}
+	                             </li>
+                             </a>
                         </c:forEach>
                     </ul>
                 </div>
                 
-                <div id="wdsc"><span id="wdscx"></span> <span class="rlan">我的收藏</span> <span id="hyp">换一批</span><span
-                        id="jiantou"></span>
+                <div id="wdsc"><span id="wdscx"></span> <span class="rlan">我的收藏</span> 
+                <span id="qbhy">
+                	<a href="${ctx}/bookcollection/tobookcollection.action" class="aright">全部收藏>>&nbsp;</a>
+                </span>
+                <!-- <span id="hyp">换一批</span>
+                <span id="jiantou"></span> -->
                     <br/>
                     <ul class="scul">
                         <c:forEach items="${listmycol}" begin='0' end='5' var="list" varStatus="status">
-                            <li class="sclb">
-                                <div class="sctpdiv">
-                                    <c:if test="${list.image_url=='DEFAULT' }"><img
-                                            src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"
-                                            class="sctp"></c:if>
-                                    <c:if test="${list.image_url!='DEFAULT'}"><img src="${list.image_url}"
-                                                                                   class="sctp"></c:if>
-                                </div>
-                                    ${list.book_name}
-                            </li>
+                            <a target="_blank" class="not-like-an-a" href="${ctx}/readdetail/todetail.action?id=${list.book_id}">
+	                            <li class="sclb" title="${list.book_name}">
+	                                <div class="sctpdiv">
+	                                    <c:if test="${list.image_url=='DEFAULT' }"><img
+	                                            src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"
+	                                            class="sctp"></c:if>
+	                                    <c:if test="${list.image_url!='DEFAULT'}"><img src="${list.image_url}"
+	                                                                                   class="sctp"></c:if>
+	                                </div>
+	                                    ${list.book_name}
+	                            </li>
+                            </a>
                         </c:forEach>
                     </ul>
                 </div>

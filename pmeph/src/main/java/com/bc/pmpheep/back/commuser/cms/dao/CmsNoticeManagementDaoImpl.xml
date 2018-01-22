@@ -44,7 +44,8 @@
 		   and  wu.id=#{userid}
 		</if> -->
 		
-  select b.* from (SELECT
+  select b.* from 
+  (SELECT
 		cc.*
 		FROM
 		cms_content cc
@@ -57,7 +58,7 @@
 		ccg.category_name = '公告管理'
 		AND cc.auth_status = 2
 		AND cc.is_published =1
-    and m.is_public=0
+        <![CDATA[and m.is_public<>0]]>
 union 
 select 
      cc.*
@@ -75,7 +76,7 @@ select
 		AND cc.auth_status =2
 		AND cc.is_published =1
     and wu.id=#{userid}
-    and m.is_public=1
+    and m.is_public=0
 ) b 
 
 ORDER BY

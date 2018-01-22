@@ -22,13 +22,14 @@ import com.bc.pmpheep.back.commuser.writerArticle.service.WriterArticleServiceIm
 import com.bc.pmpheep.back.uncertainfieldcom.bean.CmsCategoryConfig;
 import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.general.pojo.Message;
+import com.bc.pmpheep.general.service.ContentService;
 import com.bc.pmpheep.general.service.FileService;
 import com.bc.pmpheep.general.service.MessageService;
 @RequestMapping("/writerArticle")
 @Controller
 public class WriterArticleController extends BaseController{
 	@Autowired
-	MessageService mssageService;
+	ContentService contentService;
 	@Autowired
     @Qualifier("com.bc.pmpheep.general.service.FileService")
     FileService fileService;
@@ -77,7 +78,7 @@ public class WriterArticleController extends BaseController{
 		}
 		
 		try {
-			String UEContent = mssageService.get(map2.get("mid").toString()).getContent();
+			String UEContent = contentService.get(map2.get("mid").toString()).getContent();
 			map2.put("UEContent", map2==null?"":UEContent);
 		} catch (Exception e) {
 			// TODO: handle exception
