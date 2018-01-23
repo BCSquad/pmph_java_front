@@ -27,6 +27,7 @@
 <script src="${ctx}/resources/authadmin/accountset/admininfo.js"
 	type="text/javascript"></script>
  <script src="${ctx}/resources/comm/jquery/jquery.calendar.js"></script>	
+     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js" type="text/javascript"></script>
 <link href="${ctx}/statics/css/base.css" rel="stylesheet"
 	type="text/css" />
 <link href="${ctx}/statics/authadmin/accountset/publicStyle.css"
@@ -100,9 +101,12 @@
 			<div style="height: 14px"></div>
 			<%--        <div class="div-content" style="height:25px;"></div>--%>
 			<div class="div-content">
+			<input type="hidden" id="id" value="${admininfo.id}">
 				<div class="he">
-					<img src="${ctx}/statics/image/putongyhtouxiang.png" alt="" /> <span
-						class="modify">修改头像</span>
+					<c:if test="${admininfo.avatar=='DEFAULT'}"><img id="sxy-img1" src="${ctx}/statics/image/putongyhtouxiang.png"/></c:if>
+                	<c:if test="${admininfo.avatar!='DEFAULT'}"><img id="sxy-img1" src="${ctx}/image/${admininfo.avatar}.action" ></c:if>
+                	<div class="modify" id="uploadFile">修改头像</div>
+					
 					<div class="links">
 						<a href="javascript:;" class="manager"
 							onclick="window.location='${ctx}/admininfocontroller/toadminattest.action'">学校管理员认证</a>

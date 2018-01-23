@@ -374,6 +374,12 @@ public class GroupServiceImpl implements GroupService{
 	public List<Map<String, Object>> fileList(Map<String, Object> map) {
 		return this.groupDao.fileList(map);
 	}
-
 	
+	@Override
+	public Integer updateName( Map<String, Object> map ){
+		if (null == map  || null ==  map.get("user_id") || null == map.get("is_writer") || null == map.get("display_name") ){
+			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP, CheckedExceptionResult.NULL_PARAM, "更新参数不能为空");
+		}
+		return this.groupDao.updateName(map);
+	}
 }

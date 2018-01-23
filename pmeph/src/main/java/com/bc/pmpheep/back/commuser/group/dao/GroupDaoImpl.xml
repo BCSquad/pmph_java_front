@@ -436,4 +436,22 @@
 			left join writer_user t2 on t1.member_id = t2.id
 		where t1.group_id = #{group_id} order by t1.gmt_create desc limit 0,#{pageSize} 
 	</select>
+	
+	<!-- 更新用户在小组里面的名字 -->
+	<update id="updateName" >
+		update  pmph_group_member set display_name = #{display_name} where user_id = #{user_id} and is_writer = #{is_writer} 
+	</update>
+	
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+

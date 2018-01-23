@@ -11,7 +11,7 @@
 <html>
 <head>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-    <title></title>
+    <title>我的小组</title>
     <script src="<%=path %>/resources/comm/jquery/jquery.js"></script>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/communication.css" type="text/css">

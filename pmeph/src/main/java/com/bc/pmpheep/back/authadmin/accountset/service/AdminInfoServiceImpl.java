@@ -41,4 +41,19 @@ public class AdminInfoServiceImpl implements AdminInfoService{
 		adminInfoDao.uploadProxy(map);
 		
 	}
+	
+	/**
+	 * 根据ID修改头像
+	 */
+	@Override
+	public Map<String, Object> updateavatar(Map<String, Object> map1) {
+		// TODO Auto-generated method stub
+		int count=adminInfoDao.updateavatar(map1);
+		Map<String, Object> map=new HashMap<String, Object>();
+		if(count>0){
+			map.put("returncode", "OK");
+		}
+		return map;
+	}
+	
 }

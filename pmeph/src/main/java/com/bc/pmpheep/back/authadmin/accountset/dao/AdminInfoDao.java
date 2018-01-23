@@ -1,6 +1,8 @@
 package com.bc.pmpheep.back.authadmin.accountset.dao;
 
 import com.bc.pmpheep.back.authadmin.accountset.bean.OrgAdminUser;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -35,4 +37,12 @@ public interface AdminInfoDao {
     
     //上传委托书
 	public void uploadProxy(Map<String, Object> map);
+	
+	/**
+	 * 根据ID修改头像
+	 * @param avatar 上传图片ID
+	 * @param id 主键
+	 * @return
+	 */
+	int updateavatar(Map<String, Object> map);
 }

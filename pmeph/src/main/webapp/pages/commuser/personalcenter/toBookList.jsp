@@ -41,7 +41,7 @@
                 <c:if test="${permap.rank==3}"><span id="zjrz"></span> <span class="grsx">专家用户</span></c:if>
             </div>
             <div class="headae">
-                 <c:if test="${permap.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/tx.png" alt="头像" height="164" width="165"></c:if>
+                 <c:if test="${permap.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/default_image.png" alt="头像" height="164" width="165"></c:if>
                                     <c:if test="${permap.avatar!='DEFAULT'}"><img src="${permap.avatar}" alt="头像" height="164" width="165"></c:if>
             </div>
         </div>

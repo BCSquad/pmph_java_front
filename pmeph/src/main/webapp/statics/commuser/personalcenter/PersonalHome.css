@@ -398,7 +398,7 @@ color:#FFF;
     font-size: 12px;
     color: #03717b;
     float: left;
-    max-height: 105px;
+    height: 105px;
     width: 65px;
     list-style-type: none;
     margin-top: 23px;
@@ -407,6 +407,7 @@ color:#FFF;
     text-align: center;
     word-break: break-all;
     line-height: 15px;
+    
 }
 
 .wdxz .group_name{

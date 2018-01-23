@@ -2,11 +2,10 @@ package com.bc.pmpheep.back.commuser.userinfo.service;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
-import com.bc.pmpheep.back.authadmin.accountset.bean.OrgAdminUser;
+import com.bc.pmpheep.back.commuser.group.service.GroupService;
 import com.bc.pmpheep.back.commuser.userinfo.dao.UserInfoDao;
 
 @Service("com.bc.pmpheep.back.commuser.userinfo.service.UserInfoServiceImpl")
@@ -14,6 +13,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 	
 	@Autowired
 	private UserInfoDao userinfoDao;
+	
+	@Autowired
+    @Qualifier("com.bc.pmpheep.back.commuser.group.service.GroupServiceImpl")
+    private GroupService groupService;
 
 	/**
 	 * 根据ID查询数据
@@ -31,6 +34,11 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public Map<String, Object> update(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		int count=userinfoDao.update(map);
+		map.put("display_name", map.get("realname"));
+		map.put("user_id"     , map.get("id")      );
+		map.put("is_writer"   , true);
+		//修改我在小组里面的名字
+		groupService.updateName(map);
 		Map<String, Object> rmap=new HashMap<String, Object>();
 		if(count>0){
 			rmap.put("returncode", "OK");

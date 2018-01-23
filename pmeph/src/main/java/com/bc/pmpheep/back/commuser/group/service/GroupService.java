@@ -211,5 +211,24 @@ public interface GroupService {
 	 */
 	public List<Map<String,Object>> fileList(Map<String,Object> map);
 	
+	/**
+	 * 更新下载数
+	 * @introduction 
+	 * @author Mryang
+	 * @createDate 2018年1月22日 下午3:29:33
+	 * @param groupId
+	 * @param fileId
+	 * @return
+	 */
 	Integer updateDownload(Long groupId,String fileId);
+	
+	/**
+	 * 根据用户user_id和is_writer 修改用户在小组里面的名字
+	 * @introduction 
+	 * @author Mryang
+	 * @createDate 2018年1月22日 下午3:31:12
+	 * @param map
+	 * @return
+	 */
+	Integer updateName( Map<String, Object> map );
 }
