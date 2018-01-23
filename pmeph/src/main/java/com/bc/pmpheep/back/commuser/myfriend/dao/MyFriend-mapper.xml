@@ -51,7 +51,7 @@
 	<!--获取用户好友列表  -->
 	<select id="listMyFriend" parameterType="java.lang.Long" resultType="java.util.Map">
 		select
-			b.realname as username
+			b.realname 
 			,b.position
 			,b.id 
 			,b.avatar

@@ -97,7 +97,7 @@ request.setAttribute("currentTime",datetime);
                 <a href="<c:url value="/userinfo/touser.action"/>"><span id="zhsz"></span><span class="grsx">账户设置</span></a>
             </div>
             <div class="headae">
-                <c:if test="${permap.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/tx.png" alt="头像" height="164"
+                <c:if test="${permap.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/default_image.png" alt="头像" height="164"
                                                               width="165"></c:if>
                 <c:if test="${permap.avatar!='DEFAULT'}"><img src="<%=path %>/image/${permap.avatar}.action" alt="头像" height="164"
                                                               width="165"></c:if>
