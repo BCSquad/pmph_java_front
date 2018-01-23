@@ -56,9 +56,9 @@ String contextpath=request.getContextPath();
                         <div id="select-search-status-wrapper">
 	                        <select class="search-condition" id="select-search-status">
 	                            <option value="">全部</option>
-	                            <option value="1">已提交</option>
-	                            <option value="2">被退回</option>
-	                            <option value="3">通过</option>
+	                            <option value="1">待验证</option>
+	                            <option value="2">已退回</option>
+	                            <option value="3">已通过</option>
 	                        </select>
                         </div>
                         <button id="btn-search" onclick="queryBtnClick()">查询</button>

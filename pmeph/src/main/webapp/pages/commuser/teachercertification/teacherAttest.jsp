@@ -173,14 +173,22 @@
 			},
 			done : function(filename, fileid) {
 				console.log("上传完成：name " + filename + " fileid " + fileid);
-				$("#cert").val(fileid);
-				$("#certName").val(filename);
-				$("#downLoad_a").html("下载: " + filename);
-				$("#downLoad_a").unbind().bind("click", function() {
-					downLoadProxy(fileid);
-				});
-
-				window.message.success(filename + "上传成功！");
+				var tail = filename.substring(filename.lastIndexOf("."));
+				
+				if ($.inArray(tail,['.bmp','.jpg','.gif','.jpge','.png'])!=-1) {
+					$("#cert").val(fileid);
+					$("#certName").val(filename);
+					$("#downLoad_a").html("下载: " + filename);
+					$("#downLoad_a").unbind().bind("click", function() {
+						downLoadProxy(fileid);
+					});
+					window.message.success(filename + "上传成功！");
+				}else{
+					window.message.warning("请上传bmp、jpg、gif、jpge、png格式的照片或扫描件!");
+				}
+				
+				
+				
 			},
 			progressall : function(loaded, total, bitrate) {
 				console.log("正在上传。。。" + loaded / total);
