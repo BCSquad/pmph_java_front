@@ -17,8 +17,7 @@
 		ON m.id = cc.material_id
 		WHERE
 		cc.is_deleted = 0
-		AND ccg.category_name =
-		'公告'
+		AND ccg.id =3
 		AND cc.auth_status = 2
 		AND cc.is_published = TRUE
 	</select>
@@ -50,12 +49,11 @@
 		FROM
 		cms_content cc
 		LEFT JOIN pmph_user pu ON cc.author_id =pu.id
-		LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
 		LEFT JOIN material m ON m.id = cc.material_id
 		WHERE
 		cc.is_deleted = 0
 		AND
-		ccg.category_name = '公告管理'
+		cc.category_id=3
 		AND cc.auth_status = 2
 		AND cc.is_published =1
         <![CDATA[and m.is_public<>0]]>
@@ -72,7 +70,7 @@ select
 		WHERE
 		cc.is_deleted = 0
 		AND
-		ccg.category_name = '公告管理'
+		cc.category_id=3
 		AND cc.auth_status =2
 		AND cc.is_published =1
     and wu.id=#{userid}

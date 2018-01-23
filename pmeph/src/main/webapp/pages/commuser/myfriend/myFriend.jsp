@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%String path = request.getContextPath();%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -522,9 +523,7 @@ a{
 
     </style>
 </head>
-<script type="text/javascript">
-        var contxtpath = '${pageContext.request.contextPath}';
-</script>
+
 <body>
 <jsp:include page="/pages/comm/head.jsp">
     <jsp:param value="homepage" name="pageTitle"/>
@@ -562,7 +561,7 @@ a{
     <input type="hidden" value="${more}" id="moreeee">
     <div class="items">
     	<c:choose>
-    		<c:when test="${listSize<1}">
+    		<c:when test="${more<1}">
     			<div class="no-more">
                    <img src="<c:url value="/statics/image/aaa4.png"></c:url>">
                    <span>木有内容呀~~</span>
@@ -628,17 +627,18 @@ a{
     	};
     	$.ajax({
             type:'post',
-            url :contxtpath+'/myFriend/more.action',
+            url :contextpath+'myFriend/more.action',
             async:false,
             dataType:'json',
             data:json,
             success:function(json){
             	var str='';
+            	str+='<div class="items">';
             	$.each(json,function(i,n){
             		$("#row").val(n.row);
                  	$("#id").val(n.queryid);
-                 	$("#moreeee").val(i);
-            		str+='<div class="items">'
+                 	$("#moreeee").val(n.remainCount);
+            		
                			if((i+1)%5==1){
                				str+='<div class="item1">'
                			}else{
@@ -646,20 +646,22 @@ a{
                			}; 
                	            <%-- <div><img src="${ctx}${friend.avatar}" class="img2"></div> --%>
                	       str+='<div><img src="${ctx}/statics/pictures/head.png" class="img2"></div><div class="div_txt1">'
-               	            +n.username
+               	            +n.realname
                	            +'</div><div class="div_txt2">'
                	            +n.position
                	            +'</div><div class="div_txt3"><div  class ="showTalk" id='
                	            +n.id
                	            +'>私信</div><input type="hidden" id="t_'
                	            +n.id 
-               	            +'value=' 
-               	            +n.username 
-               	            +'/></div></div></div></div>';
+               	            +'value=\"' 
+               	            +n.realname 
+               	            +'\"></div></div>';
             	});
+            	str+='</div></div>';
             	$("#more").append(str);
-            	if($("#moreeee").val()<15){
+            	if($("#moreeee").val()==0){
             		$("#mooorew").html('没有更多了~~');
+            		$("#mooorew").attr("onclick","");
             	}
             }
     	});

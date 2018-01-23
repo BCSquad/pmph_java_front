@@ -97,7 +97,7 @@ request.setAttribute("currentTime",datetime);
                 <a href="<c:url value="/userinfo/touser.action"/>"><span id="zhsz"></span><span class="grsx">账户设置</span></a>
             </div>
             <div class="headae">
-                <c:if test="${permap.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/tx.png" alt="头像" height="164"
+                <c:if test="${permap.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/default_image.png" alt="头像" height="164"
                                                               width="165"></c:if>
                 <c:if test="${permap.avatar!='DEFAULT'}"><img src="<%=path %>/image/${permap.avatar}.action" alt="头像" height="164"
                                                               width="165"></c:if>
@@ -464,8 +464,8 @@ request.setAttribute("currentTime",datetime);
                     <br/>
                     <ul class="scul">
                         <c:forEach items="${listmygroup}" begin='0' end='8' var="listmyg" varStatus="status">
-                        	<a style="display: block;" href="<%=path %>/group/toMyGroup.action?groupId=${listmyg.group_id}">
-	                            <li class="wdxz">
+                            <a target="_blank" class="not-like-an-a" href="${ctx}/group/toMyGroup.action?groupId=${listmyg.group_id}">
+	                            <li class="wdxz" title="${listmyg.group_name}">
 	                            	<img src="<%=path %>/image/${listmyg.group_image}.action" class="xztp">
 	                                <br/>
 	                                <span class="group_name">${listmyg.group_name}</span>
