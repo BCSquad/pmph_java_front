@@ -8,7 +8,7 @@
         var contextpath = '${pageContext.request.contextPath}/';
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-    <title>Insert title here</title>
+    <title>消息</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
     <script src="${ctx}/resources/comm/layer/layer.js"></script>

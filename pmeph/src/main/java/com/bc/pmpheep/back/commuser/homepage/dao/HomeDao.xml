@@ -77,7 +77,7 @@
         c.realname       
         from cms_content t
         left join writer_user c on t.author_id=c.id
-        where  t.category_id='1' and t.auth_status='2' 
+        where  t.category_id!='0' and t.auth_status='2' 
         and t.is_deleted='0' order by gmt_create desc limit 0,#{endrow}
   </select>
    <!-- 查询热门标签 -->

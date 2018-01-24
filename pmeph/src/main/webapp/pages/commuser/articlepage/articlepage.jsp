@@ -21,7 +21,9 @@
     <script src="${ctx}/resources/comm/base.js"></script>
 </head>
 <body>
-    <jsp:include page="/pages/comm/head.jsp"></jsp:include>
+    <jsp:include page="/pages/comm/head.jsp">
+    	<jsp:param value="articlepage" name="pageTitle" />
+    </jsp:include>
     <div class="body">
         <!-- <div class="apply-book"><div class="text">教材<br>申报</div></div> -->
         <div class="content-wrapper">
@@ -148,7 +150,7 @@
             <div class="notes" style="margin-top: 50px">
                 <div class="title">
                     <div class="line"></div>
-                    <div class="name">医学随笔  <a href="#">全部&gt;&gt;</a></div>
+                    <div class="name">医学随笔  <a  style="cursor: pointer;"  onclick="window.location.href='${ctx}/cms/list.action'">全部&gt;&gt;</a></div>
                 </div>
                 <c:forEach items="${listArt}" var="list" varStatus="status">
 	                <div class="${status.index==0 or status.index==4 ?'item' :'item behind'}" onclick="window.location.href='${ctx}/articledetail/toPage.action?wid=${list.id}'">
@@ -159,7 +161,7 @@
                         <div class="content-image">
                             <img src="${ctx}/statics/testfile/p2.png" />
                         </div>
-                        <p   class="content-title">${list.title}</p>
+                        <p   class="content-title" style="cursor: pointer;">${list.title}</p>
                         <p  class="content-text">${list.summary}</p>
                         <div  class="foot">
                             <div style="float:left">

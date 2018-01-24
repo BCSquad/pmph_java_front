@@ -70,7 +70,17 @@ public class CmsContentVO implements java.io.Serializable {
     // 医学随笔图片
     private String    cmsImg;
     
-    public String getRealname() {
+    // 审核通过时间
+    private String authdate;
+    
+
+	public String getAuthdate() {
+		return authdate;
+	}
+	public void setAuthdate(String authdate) {
+		this.authdate = authdate;
+	}
+	public String getRealname() {
 		return realname;
 	}
 	public void setRealname(String realname) {

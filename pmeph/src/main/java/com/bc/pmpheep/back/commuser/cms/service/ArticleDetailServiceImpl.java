@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -85,9 +86,9 @@ public class ArticleDetailServiceImpl implements ArticleDetailService{
 	 * 查询相关文章
 	 */
 	@Override
-	public List<Map<String, Object>> queryRecommendByE(int num) {
+	public List<Map<String, Object>> queryRecommendByE(@Param("x") int num,@Param("wid") String wid) {
 		// TODO Auto-generated method stub
-		List<Map<String, Object>> map=articleDetailDao.queryRecommendByE(num);
+		List<Map<String, Object>> map=articleDetailDao.queryRecommendByE(num,wid);
 		return map;
 	}
 

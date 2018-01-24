@@ -48,9 +48,10 @@ public interface  ArticleDetailDao{
 	
 	/**
 	 * 查询相关文章
+	 * @param wid 
 	 * @return List<Map<String, Object>>
 	 */
-	List<Map<String, Object>> queryRecommendByE(@Param("x") int num);
+	List<Map<String, Object>> queryRecommendByE(@Param("x") int num,@Param("wid") String wid);
 	
 	/**
 	 * 根据书籍ID查询评论

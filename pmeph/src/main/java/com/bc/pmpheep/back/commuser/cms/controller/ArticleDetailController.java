@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.cms.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,12 +72,13 @@ public class ArticleDetailController extends BaseController {
 				.get("author_id").toString());
 		// 相关文章换一换
 		List<Map<String, Object>> eMap = articleDetailService
-				.queryRecommendByE(0);
+				.queryRecommendByE(0,wid);
 		
 		
 		PageParameter<Map<String, Object>> pageParameter=new PageParameter<Map<String, Object>>(1,2);
 		pageParameter.setParameter(map1);
 		PageResult<Map<String, Object>> listCom=articleDetailService.queryComment(pageParameter);
+		
 		mv.addObject("listCom", listCom);
 		
 		 List<Map<String, Object>> listArtSix = articleDetailService.queryArticleSix();
@@ -153,17 +155,17 @@ public class ArticleDetailController extends BaseController {
 	@RequestMapping("/change")
 	@ResponseBody
 	public List<Map<String, Object>> change(HttpServletRequest request) {
-		List<Map<String, Object>> eMap = articleDetailService
-				.queryRecommendByE(-1);
+		String wid=request.getParameter("wid");
+		List<Map<String, Object>> eMap = articleDetailService.queryRecommendByE(-1,wid);
 		int num = eMap.size();
 		if (num > 5) {
 			int x = (int) (Math.random() * (num - 5));
-			List<Map<String, Object>> cMap = articleDetailService
-					.queryRecommendByE(x);
+			List<Map<String, Object>> cMap = articleDetailService.queryRecommendByE(x,wid);
 			return cMap;
-		} else {
-			return null;
-		}
+		}else {
+			return new ArrayList<Map<String,Object>>();
+		} 
+		
 	}
 	
 	/**
@@ -179,7 +181,7 @@ public class ArticleDetailController extends BaseController {
 //		String wid = "10";
 		String content=request.getParameter("content");
 		
-		Map<String, Object> user=getUserInfo();
+		Map<String, Object> user=this.getUserInfo();
 		/*map.put("score", request.getParameter("score"));*/
 		map.put("parent_id", wid); //上级id
 		map.put("category_id",0); //内容类型 0评论

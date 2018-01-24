@@ -115,7 +115,7 @@
 }
 
 #span_1{
-	background-image: url(/statics/image/css_sprites.png);
+	background-image: url(../../image/css_sprites.png);
     background-position: -415px -149px;
     background-repeat: no-repeat;
     height: 25px;
@@ -125,7 +125,7 @@
 }
 
 #span_2{
-	background-image: url(/statics/image/css_sprites.png);
+	background-image: url(../../image/css_sprites.png);
     background-position: -415px -195px;
     background-repeat: no-repeat;
     height: 25px;
@@ -135,7 +135,7 @@
 }
 
 #span_3{
-	background-image: url(/statics/image/css_sprites.png);
+	background-image: url(../../image/css_sprites.png);
     background-position: -415px -245px;
     background-repeat: no-repeat;
     height: 25px;
@@ -185,7 +185,7 @@
 	margin-right: 18px;
 }
 
-._load{
+/* ._load{
 	width: 1200px;
 	height: 25px;
 	margin-top: 30px;
@@ -198,4 +198,17 @@
 	letter-spacing: 0px;
 	color: #7d7d7d;
 	cursor: pointer;
+} */
+
+.js-load-more{
+  padding:0 15px;
+  width:120px;
+  height:30px;
+  line-height:30px;
+  text-align:center;
+  margin:20px auto;
+  border:0 none;
+  font-size:16px;
+  
+  display:none;/*默认不显示，ajax调用成功后才决定显示与否*/
 }

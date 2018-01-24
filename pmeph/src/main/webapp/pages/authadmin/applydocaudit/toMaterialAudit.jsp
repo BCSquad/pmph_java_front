@@ -475,15 +475,17 @@
 				</div>
 			</div>
 			<hr style=" height:1px;border:none;border-top:1px #999999 dashed;margin-top: 30px;">
-			<div class="button">
-			<div class="div_butt">
-				<%-- <div class="bt_tj" onclick="javascript:toAudit('${gezlList.id}','3')">通过</div>
-				<div class="bt_tj" onclick="javascript:toAudit('${gezlList.id}','2')">驳回</div> --%>
-				<div class="bt_tj" onclick="toAudit('${gezlList.id}','3')">通过</div>
-				<div class="bt_tj" onclick="toAudit('${gezlList.id}','2')">驳回</div>
+				<div class="button">
+				<c:if test="${view_audit=='audit'}">
+					<div class="div_butt">
+						<%-- <div class="bt_tj" onclick="javascript:toAudit('${gezlList.id}','3')">通过</div>
+						<div class="bt_tj" onclick="javascript:toAudit('${gezlList.id}','2')">驳回</div> --%>
+						<div class="bt_tj" onclick="toAudit('${gezlList.id}','3')">通过</div>
+						<div class="bt_tj" onclick="toAudit('${gezlList.id}','2')">驳回</div>
+					</div>
+				</c:if>
+				</div>
 			</div>
-		</div>
-		</div>
 	</div>
 </div>
 <div style="width: 100%;padding: 0;margin: auto;border:none;overflow: hidden;">

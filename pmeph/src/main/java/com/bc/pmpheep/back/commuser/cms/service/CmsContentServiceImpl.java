@@ -29,11 +29,16 @@ public class CmsContentServiceImpl implements CmsContentService{
 
 	@Override
 	public PageResult<CmsContentVO> listCms(PageParameter<CmsContentVO> pageParameter) {
-		PageResult<CmsContentVO> pageResult = new PageResult<>();
+		PageResult<CmsContentVO> pageResult = new PageResult<CmsContentVO>();
 		int total = cmsContentDao.getCmsContentCount(pageParameter);
         if (total > 0) {
             PageParameterUitl.CopyPageParameter(pageParameter, pageResult);
-            pageResult.setRows(cmsContentDao.listCmsContentVO(pageParameter));
+            List<CmsContentVO> list=cmsContentDao.listCmsContentVO(pageParameter);
+            for (CmsContentVO cmsContentVO : list) {
+				String authdate=cmsContentVO.getAuthdate().toString().substring(0, 10);
+				cmsContentVO.setAuthdate(authdate);
+			}
+            pageResult.setRows(list);
         }
         pageResult.setTotal(total);
         return pageResult;
