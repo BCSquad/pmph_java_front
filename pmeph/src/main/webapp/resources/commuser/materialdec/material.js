@@ -2,7 +2,7 @@
 var jsonStr = "";
 jsonStr = "{\"id\":\"realname\",\"content\":\"姓名不能为空\"}," +
 	"{\"id\":\"birthday\",\"content\":\"出生日期不能为空\"},{\"id\":\"experience\",\"content\":\"地址不能为空\"},"+
-	"{\"id\":\"handphone\",\"content\":\"手机号码不能为空\"},{\"id\":\"idcard\",\"content\":\"证件号码不能为空\"},";
+	"{\"id\":\"handphone\",\"content\":\"手机号码不能为空\"},{\"id\":\"idcard\",\"content\":\"证件号码不能为空\"},,{\"id\":\"sbdw_name\",\"content\":\"申报单位不能为空\"}";
 
 $(function () {
 	var id = $("#material_id").val();
@@ -551,4 +551,16 @@ function checkNull(jsonStr){
 		}
 	});
 	return b;
+}
+
+//机构选择
+function orgAdd(material_id){
+	layer.open({
+		  type: 2,
+		  area: ['800px', '600px'],
+		  fixed: false, //不固定
+		  title:'申报单位选择',
+		  maxmin: true,
+		  content: contextpath+"material/toSearchOrg.action?material_id="+material_id
+		});
 }

@@ -3,6 +3,8 @@ package com.bc.pmpheep.back.commuser.materialdec.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.bc.pmpheep.back.plugin.PageParameter;
+
 public interface MaterialDetailDao {
 		
 		//通过教材ID查出教材
@@ -72,4 +74,8 @@ public interface MaterialDetailDao {
 		
 		//申报审核
 		public int updateDeclaration(Map<String,Object> map);
+		
+		//查出机构列表
+		public List<Map<String,Object>> queryOrgList(PageParameter<Map<String, Object>> pageParameter);
+		public int queryOrgCount(PageParameter<Map<String, Object>> pageParameter);
 }

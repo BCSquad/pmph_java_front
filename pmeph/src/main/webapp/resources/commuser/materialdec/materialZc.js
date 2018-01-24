@@ -570,3 +570,15 @@ function checkNull(jsonStr){
 	});
 	return b;
 }
+
+//机构选择
+function orgAdd(material_id){
+	layer.open({
+		  type: 2,
+		  area: ['800px', '600px'],
+		  fixed: false, //不固定
+		  title:'申报单位选择',
+		  maxmin: true,
+		  content: contextpath+"material/toSearchOrg.action?material_id="+material_id
+		});
+}

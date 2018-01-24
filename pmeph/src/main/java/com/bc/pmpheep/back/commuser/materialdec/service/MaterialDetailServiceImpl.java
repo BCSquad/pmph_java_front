@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.commuser.materialdec.dao.MaterialDetailDao;
 import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
 @Service("com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailServiceImpl")
 public class MaterialDetailServiceImpl implements MaterialDetailService {
 	
@@ -178,6 +180,20 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 	@Override
 	public int updatePerson(Map<String, Object> map) {
 		return this.madd.updatePerson(map);
+	}
+	@Override
+	public PageResult<Map<String, Object>> selectOrgList(
+			PageParameter<Map<String, Object>> pageParameter) {
+		PageResult<Map<String, Object>> pageResult= new PageResult<Map<String,Object>>();
+		pageResult.setPageNumber(pageParameter.getPageNumber());
+		pageResult.setPageSize(pageParameter.getPageSize());
+		
+		List<Map<String, Object>> list = madd.queryOrgList(pageParameter);
+		int count = madd.queryOrgCount(pageParameter);
+		
+		pageResult.setRows(list);
+		pageResult.setTotal(count);
+		return pageResult;
 	}
 	
 }

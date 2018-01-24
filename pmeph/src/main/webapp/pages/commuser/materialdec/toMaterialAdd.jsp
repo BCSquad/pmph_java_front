@@ -35,10 +35,11 @@
 			<div>
 				<input type="hidden" id="select_nr" value="${bookSelects}"/>
 				<input type="hidden" id="material_id" name="material_id" value="${materialMap.id}"/>
+				<input type="hidden" id="is_multi_books" name="is_multi_books" value="${materialMap.is_multi_books}"/>
 				<span id="tsxz_span1"></span>
 				<span class="tsxz_title">图书选择(只能选择一本书籍，一本书籍只能选择一个职位。) </span>
 				<span class="tsxz_ts1"><img src="${ctx}/statics/image/btxx.png" /></span>
-				<div class="addBtn pull-right" onclick="javascript:addTsxz()"><span>增加</span></div>
+				<div class="addBtn pull-right" id="sjtj" onclick="javascript:addTsxz()"><span>增加</span></div>
 			</div>
 			<div class="item" id="xz1">
 				<span style="float: left;">图书：</span>
@@ -51,7 +52,9 @@
 							<td><input type="radio" name="zw_1" checked="checked" value="1"/>主编</td>
 							<td><input type="radio" name="zw_1" value="2"/>副主编</td>
 							<td><input type="radio" name="zw_1" value="3"/>编委</td>
-							<td><input type="radio" name="zw_1" value="4"/>数字编委</td>
+							<c:if test="${materialMap.is_digital_editor_optional =='1'}">
+								<td><input type="radio" name="zw_1" value="4"/>数字编委</td>
+							</c:if>
 						</tr>
 					</table>
 					<!-- 用于遍历radio中的值 -->
@@ -77,7 +80,8 @@
 				<table class="tab_1">
 					<tr>
 						<td><span class="btbs">*</span><span>姓&emsp;&emsp;名：</span>
-							<input class="cg_input" name="realname" id="realname" value="" onBlur="toisNah('姓名不能为空','realname')" maxlength="20"/>
+							<input class="cg_input" name="realname" id="realname" value="" maxlength="20"/>
+							
 							<input class="cg_input" name="user_id" type="hidden" value="${userMap.id}" />
 							</td>
 						<td><span class="btbs">*</span><span>性&emsp;&emsp;别：</span>
@@ -89,16 +93,16 @@
 						<td><span class="btbs">*</span><span>出生年月：</span> 
 							<input class="cg_input" calendar format="'yyyy-mm-dd'"  name="birthday" value=""  id="birthday"  /></td>
 						<td><span class="btbs">*</span><span>教&emsp;&emsp;龄：</span>
-							<input class="cg_input" name="experience" value="" id="experience" onBlur="toisNah('教龄不能为空','experience')"
+							<input class="cg_input" name="experience" value="" id="experience" 
 							 onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
 							 maxlength="2"
 							/></td>
 					</tr>
 					<tr>
 						<td><span class="btbs">*</span><span>工作单位：</span>
-							<input class="cg_input" name="org_name" value="" id="org_name" onBlur="toisNah('工作单位不能为空','org_name')" maxlength="50"/></td>
+							<input class="cg_input" name="org_name" value="" id="org_name"  maxlength="50"/></td>
 						<td><span class="btbs">*</span><span>职&emsp;&emsp;务：</span>
-							<input class="cg_input" name="position" value="" id="position" onBlur="toisNah('职务不能为空','position')" maxlength="35"/></td>
+							<input class="cg_input" name="position" value="" id="position"  maxlength="35"/></td>
 						<td><span class="btbs">*</span><span>职&emsp;&emsp;称：</span>
                             <select class="select-input" id="zc" name="title" >
                                 <option value="0">教授</option>
@@ -106,7 +110,7 @@
                                 <option value="3">副主任</option>
                             </select></td>
 						<td><span class="btbs">*</span><span>地&emsp;&emsp;址：</span>
-							<input class="cg_input" name="address" value="" id="address" onBlur="toisNah('地址不能为空','address')" maxlength="45"/></td>
+							<input class="cg_input" name="address" value="" id="address"  maxlength="45"/></td>
 					</tr>
 					<tr>
 						<td><span>&ensp;邮&emsp;&emsp;编：</span>
@@ -124,7 +128,7 @@
 					</tr>
 					<tr>
 						<td><span class="btbs">*</span><span style="width: 70px">E-mail：</span>
-							<input class="cg_input" name="email" value="" id="email" onBlur="toisNah('邮箱不能为空','email')" maxlength="40"/></td>
+							<input class="cg_input" name="email" value="" id="email"  maxlength="40"/></td>
 						<td><span class="btbs">*</span><span>证件类型：</span>
                             <select class="select-input" id="zjlx" name="idtype">
                                 <option value="0">身份证</option>
@@ -556,10 +560,12 @@
 				<span class="tsxz_title">请选择你的申报单位</span>
 			</div>
 			<div class="sbdw">
-				<span class="btbs">*</span><span>申报单位：</span>
-				<select id="apply-org" name="edu" class="st_2" >
+				<span class="btbs" style="color: red">*</span><span>申报单位：</span>
+				<%-- <select id="apply-org" name="edu" class="st_2" >
 				    ${orgSelects}
-				</select> 
+				</select>  --%>
+				<input class="cg_input" id="sbdw_name" name="sbdw_name" value="" style="width: 300px;" onclick="javascript:orgAdd('${materialMap.id}')" readonly="readonly"/>
+				<input type="hidden" id="sbdw_id" name="sbdw_id" value="" style="width: 300px;"/>
 			</div>
 		</div>
 		<hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">

@@ -50,7 +50,7 @@ public class BookDeclareController extends BaseController{
 				bankSelects.append("<option value='"+map.get("id")+"'>"+map.get("account_number")+"</option>");
 			}
 		}else{
-			bankSelects.append("<option value=''>暂无数据</option>");
+			bankSelects.append("<option value=''>暂无银行信息数据</option>");
 		}
 		mav.addObject("userMap", userMap);
 		mav.addObject("bankList", bankList);

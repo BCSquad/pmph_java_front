@@ -3,6 +3,9 @@ package com.bc.pmpheep.back.commuser.materialdec.service;
 import java.util.List;
 import java.util.Map;
 
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
+
 public interface MaterialDetailService {
 	
 	/**
@@ -153,4 +156,9 @@ public interface MaterialDetailService {
 	 * 申报审核
 	 */
 	public int updateDeclaration(Map<String,Object> map);
+	
+	/**
+	 * 机构选择
+	 */
+	PageResult<Map<String, Object>> selectOrgList(PageParameter<Map<String, Object>> pageParameter);
 }

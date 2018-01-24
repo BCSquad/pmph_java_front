@@ -1,5 +1,7 @@
 package com.bc.pmpheep.back.commuser.materialdec.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.authadmin.message.service.SendMessageServiceImpl;
 import com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailService;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.general.service.FileService;
 
@@ -144,7 +148,7 @@ public class MaterialDetailController extends BaseController{
 		perMap.put("email", request.getParameter("email"));
 		perMap.put("idtype", request.getParameter("idtype"));
 		perMap.put("idcard", request.getParameter("idcard"));
-		perMap.put("org_id", request.getParameter("edu"));
+		perMap.put("org_id", request.getParameter("sbdw_id"));
 		perMap.put("gmt_create", date);	
 		int count = this.mdService.insertPerson(perMap);
 		if(count>0){ //表示主表已添加
@@ -473,12 +477,12 @@ public class MaterialDetailController extends BaseController{
 			bookSelects.append("<option value='"+map.get("id")+"'>"+map.get("textbook_name")+"</option>");
 		}
 		//机构信息
-		List<Map<String,Object>> orgList = this.mdService.queryOrgById(material_id);
+	/*	List<Map<String,Object>> orgList = this.mdService.queryOrgById(material_id);
 		StringBuffer orgSelects = new StringBuffer();
 		if(orgList.size()>0){
 		for (Map<String, Object> map : orgList) {
 			orgSelects.append("<option value='"+map.get("org_id")+"'>"+map.get("org_name")+"</option>");
-		}}
+		}}*/
 		//下拉框选择
 		//职位选择
 		for (Map<String, Object> map : tssbList) {
@@ -493,7 +497,7 @@ public class MaterialDetailController extends BaseController{
 			map.put("bookSelect", bookSelect.toString());
 		}
 		//机构选择
-		for (Map<String, Object> map : gezlList) {
+		/*for (Map<String, Object> map : gezlList) {
 			StringBuffer orgSelect = new StringBuffer();
 			for (Map<String, Object> map2 : orgList) {
 				if(map.get("org_id").equals(map2.get("org_id"))){
@@ -503,11 +507,10 @@ public class MaterialDetailController extends BaseController{
 				}
 			}
 			map.put("orgSelect", orgSelect.toString());
-		}
+		}*/
 		
 		//填充
 		mav.addObject("bookSelects", bookSelects.toString());
-		mav.addObject("orgSelects", orgSelects.toString());
 		mav.addObject("gezlList", gezlList.get(0));
 		mav.addObject("tssbList", tssbList);
 		mav.addObject("stuList", stuList);
@@ -576,7 +579,7 @@ public class MaterialDetailController extends BaseController{
 		perMap.put("email", request.getParameter("email"));
 		perMap.put("idtype", request.getParameter("idtype"));
 		perMap.put("idcard", request.getParameter("idcard"));
-		perMap.put("org_id", request.getParameter("edu"));
+		perMap.put("org_id", request.getParameter("sbdw_id"));
 		perMap.put("gmt_create", date);	
 		int count = this.mdService.updatePerson(perMap);
 		if(count>0){ //表示主表已添加
@@ -894,7 +897,42 @@ public class MaterialDetailController extends BaseController{
 	@RequestMapping("toSearchOrg")
 	public ModelAndView toSearchOrg(HttpServletRequest request,
 			HttpServletResponse response){
-		ModelAndView mav = new ModelAndView("");
+		ModelAndView mav = new ModelAndView("commuser/materialdec/toOrgList");
+		//机构信息
+		String material_id = request.getParameter("material_id");
+		String  currentPageStr = (String) request.getParameter("currentPage");
+		String  pageSizeStr = request.getParameter("pageSize");
+		String  orgname = request.getParameter("orgname");
+		Map<String,Object> paraMap = new HashMap<String,Object>();
+		//分页查询
+		int currentPage = 1;
+		int pageSize = 10;
+		
+		if(null!=currentPageStr&&!currentPageStr.equals("")){
+			 currentPage = Integer.parseInt(currentPageStr);
+		}
+		if(null!=pageSizeStr&&!pageSizeStr.equals("")){
+			 pageSize = Integer.parseInt(pageSizeStr);
+		}
+		PageParameter<Map<String,Object>> pageParameter = new PageParameter<>(currentPage,pageSize);
+		
+		paraMap.put("material_id", material_id);
+		paraMap.put("endPage", pageSize);
+		paraMap.put("currentPage", currentPage);
+		if(orgname!=null && !orgname.equals("")){
+			try {
+				orgname = URLDecoder.decode(orgname,"UTF-8");
+				paraMap.put("org_name", "%"+orgname+"%");
+				paraMap.put("orgname", orgname);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+		pageParameter.setParameter(paraMap);
+		PageResult<Map<String,Object>> pageResult = this.mdService.selectOrgList(pageParameter);
+		//List<Map<String,Object>> orgList = this.mdService.queryOrgById(material_id);
+		mav.addObject("pageResult", pageResult);
+		mav.addObject("paraMap", paraMap);
 		return mav;
 	} 
 	

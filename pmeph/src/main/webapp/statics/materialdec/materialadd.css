@@ -362,3 +362,13 @@
 .radio_tb tr td{
 	border: 0;
 }
+
+.cg_input1{
+	width: 180px;
+	height: 26px;
+	line-height: 26px;
+	border: solid 1px red;
+	padding-left: 10px;
+	border-radius:3px;
+	
+}
