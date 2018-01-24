@@ -38,7 +38,7 @@
 		<!-- 全部 -->
 		<if test="condition==null||condition==3">
 			select * from(
-			select u.id,u.msg_id as fId,u.title,u.gmt_create,u.msg_type as msgType
+			select u.id,u.msg_id as fId,u.title,u.gmt_create as time,u.msg_type as msgType
 			from user_message u
 			<trim prefix="WHERE" prefixOverrides="AND|OR">
 				u.receiver_id = #{userId}
@@ -53,6 +53,7 @@
 				where c.is_deleted=0
 				ORDER BY c.gmt_create DESC
 			)t2
+			order by time desc 
 		</if>
 	
 		<!--公告  -->

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.community.service.CommunityService;
+import com.bc.pmpheep.general.controller.BaseController;
 
 /**
  * @author guoxiaobao
@@ -26,7 +27,7 @@ import com.bc.pmpheep.back.commuser.community.service.CommunityService;
 
 @Controller
 @RequestMapping("/community")
-public class CommunityController {
+public class CommunityController extends BaseController{
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.community.service.CommunityServiceImpl")
 	private CommunityService communityService;
@@ -48,10 +49,14 @@ public class CommunityController {
 	public List<Map<String,Object>> initList(HttpServletRequest request){ Integer pagenum=Integer.parseInt(request.getParameter("pageNumber"));
 		Integer size=Integer.parseInt(request.getParameter("pageSize"));
 		String searchText=request.getParameter("searchText");
+		Map<String, Object> map1 = getUserInfo();
+		
+		
 		int star=(pagenum-1)*size;
 		Map<String,Object> map=new HashMap<>();
 		map.put("startnum", star);
 		map.put("size", size);
+		map.put("id", (map1!=null? Long.valueOf(map1.get("id").toString()):0));
 		map.put("searchText", searchText==null || "".equals(searchText)?null:"%"+searchText+"%" );
 		List<Map<String,Object>> list=communityService.queryNoticeList(map);
 	    return list;

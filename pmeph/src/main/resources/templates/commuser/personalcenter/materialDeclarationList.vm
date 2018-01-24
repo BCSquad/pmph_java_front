@@ -49,7 +49,7 @@
                         <br/><span class="ybmcj1">已报名参加</span></div>
                 </div>
                 <div class="bmcj1">
-                    <a class="abmcj" href="$!{contextpath}declareCount/findDeclareCount.action?material_id=$!{c.material_id}"><div class="bmcjan1"><span>进度查询</span></div></a>
+                    <a class="abmcj" href="$!{contextpath}progress/listReportProgress.action?materialId=$!{c.material_id}"><div class="bmcjan1"><span>进度查询</span></div></a>
                     <a class="abmcj" href="$!{contextpath}material/toMaterialZc.action?declaration_id=$!{c.declaration_id}"><div class="cksbb1">
                     		修改申报表</div></a>
                 </div>

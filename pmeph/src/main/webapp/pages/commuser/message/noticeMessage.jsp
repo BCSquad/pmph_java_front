@@ -94,7 +94,7 @@
 			                    <span><c:if test="${message.msgType==4}">公告 </c:if>
 			                          <c:if test="${message.msgType==0||message.msgType==1}">系统消息</c:if>
 			                    </span>
-			                    <span class="time1" id="gmt_create"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${message.gmt_create}" /></span>
+			                    <span class="time1" id="time"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${message.time}" /></span>
 		                    </td>
 		                </tr>
 		                <tr style="width: 30%">

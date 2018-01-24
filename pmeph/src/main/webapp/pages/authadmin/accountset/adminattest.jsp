@@ -34,6 +34,55 @@
             
         })
         
+        $('#realName')
+				.validate(
+						{
+							debug : true,
+							onFocus : function() {
+								this.removeClass("input-error");
+								return false;
+							},
+							onBlur : function() {
+								var $parent = this.parent();
+								var _status = parseInt(this.attr('data-status'));
+								if (!_status) {
+									this.addClass("input-error");
+									return false;
+								}
+								return true;
+							},
+							type : {
+								maxLength : function(value, errorMsg, el){
+								var v = $.trim(value);
+								var n = '';
+								var b = 0;
+								var tooLong = false;
+								var param = 9;
+								　　for (var i = 0; i < v.length; i++) {
+								    　　var c = v.slice(i, i + 1);
+								    　　if (b <= param) {
+								         　　 n += c;
+								    　　}else{
+								    	tooLong = true;
+								    	break;
+								    　　}
+								    　　b++;
+								　　}
+								　　$(el).val(n);
+									if (tooLong) {
+										return errorMsg;
+									}
+								　　
+								}
+							}
+						/* ,
+						submitHandler:function(){
+							getElementById("certForm").submit();
+						    
+						} */
+						});
+        
+        
     </script>
     <style type="text/css">
         .select-wrapper{
@@ -101,7 +150,7 @@
                          	<div class="label-input">
                                 <label class="require">管理员姓名</label>
 	                        	<div class="input-wrapper">
-	                        		<input style="width: 258px" class="txt required" type="text" id="realName" value="${admininfo.realname}" data-valid="isNonEmpty//maxLength" data-length data-error="真实姓名不能为空//姓名不能超过20个字符"/>
+	                        		<input style="width: 258px" class="txt required" type="text" id="realName" value="${admininfo.realname}" data-valid="isNonEmpty||maxLength" data-length data-error="真实姓名不能为空||姓名不能超过10个中文字符"/>
 	                            </div>   
                             </div>    
                         </td ><!--   value="${admininfo.realname} -->
@@ -239,7 +288,7 @@
                          	<div class="label-input">
                                 <label class="require">邮编</label>
 	                        	<div class="input-wrapper">
-	                        		<input style="width: 258px" class="txt required" type="text" id="postCode" value="${admininfo.postcode}" data-valid="isNonEmpty//onlyInt" data-error="邮编不能为空//填写正确的邮编"/>
+	                        		<input style="width: 258px" class="txt required" type="text" id="postCode" value="${admininfo.postcode}" data-valid="isNonEmpty||onlyInt" data-error="邮编不能为空||请填写正确的邮编"/>
 	                            </div>   
                             </div>    
                         </td ><!--   value="${admininfo.email} -->
@@ -250,8 +299,10 @@
                     <tr>
                     	<td colspan="3"><div style="margin-left: 20px"><img alt="" src="${ctx}/statics/image/_cupline.jpg"/></div></td>
                     </tr>
-                    <tr>
+                    <tr>	
+                    	<c:if test="${(admininfo.progress!=0&&admininfo.progress!=1)}">
                         <td colspan="3" align="center"><div style="cursor: pointer;" class="btnSubmit" onclick="submit()">提交</div></td>
+                        </c:if>
                     </tr>
             </table>
             </form>
