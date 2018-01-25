@@ -175,5 +175,10 @@
 	<delete id="deleteMark" parameterType="java.util.Map" >
 	    delete from cms_user_mark where writer_id=#{writer_id} and  favorite_id=#{favorite_id} and content_id=#{wid}
 	</delete>
+	
+	<!-- 根据ID增加点击数 -->
+	<update id="changeClicks" parameterType="java.util.Map">
+	    update cms_content set clicks=#{clicks} where id=#{id}
+	</update>
 
 </mapper>

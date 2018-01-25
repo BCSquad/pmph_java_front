@@ -165,11 +165,14 @@
                         <p  class="content-text">${list.summary}</p>
                         <div  class="foot">
                             <div style="float:left">
-                                <img src="${ctx}/statics/testfile/mi.png" class="personicon"/>
+                                <c:if test="${list.avatar=='DEFAULT'}">
+                                <img src="${ctx}/statics/testfile/mi.png" class="personicon"></c:if>
+                				<c:if test="${list.avatar!='DEFAULT'}">
+                				<img src="${ctx}/image/${list.avatar}.action" class="personicon"></c:if>
                             </div>
                             <div  class="msg">
                                 <span  class="name">${list.realname}</span>
-                                <span  class="name">${list.gmt_create}</span>
+                                <span  class="name">${list.auth_date}</span>
                             </div>
                         </div>
                     </div>

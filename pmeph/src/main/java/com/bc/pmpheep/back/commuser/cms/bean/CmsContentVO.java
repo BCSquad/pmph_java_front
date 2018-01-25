@@ -72,8 +72,16 @@ public class CmsContentVO implements java.io.Serializable {
     
     // 审核通过时间
     private String authdate;
+    //头像路径 
+    private String avatar;
     
 
+	public String getAvatar() {
+		return avatar;
+	}
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
 	public String getAuthdate() {
 		return authdate;
 	}
