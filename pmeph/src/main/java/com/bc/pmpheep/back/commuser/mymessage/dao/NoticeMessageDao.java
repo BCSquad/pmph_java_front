@@ -56,6 +56,11 @@ public interface NoticeMessageDao {
 	
 	//更新通知点击量
 	void updateNoticeClicks(String cmsId);
+	
+	//查询系统消息数据总量
+	int selectNoticeMessageSysCount(Map<String, Object> paraMap);
+	//公告数量
+	int selectNoticeMessageCount(Map<String, Object> paraMap);
 
 	
 	

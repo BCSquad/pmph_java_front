@@ -77,6 +77,16 @@ public class NoticeMessageServiceImpl implements NoticeMessageService {
 		noticeMessageDao.updateNoticeClicks(cmsId);
 		
 	}
+	
+	//查询通知数据总量
+	@Override
+	public int selectNoticeMessageTotalCount(Map<String, Object> paraMap) {
+		//系统消息数量
+		int count1 = noticeMessageDao.selectNoticeMessageSysCount(paraMap);
+		//公告数量
+		int count2 = noticeMessageDao.selectNoticeMessageCount(paraMap);
+		return count1+count2;
+	}
 
 	
 	

@@ -23,7 +23,7 @@ function loadMore(){
 				$("#startPara").val(startPara);
 				var str='';
 				$.each(list,function(i,n){
-					var unixTimestamp = new Date(n.gmt_create) ;
+					var unixTimestamp = new Date(n.time) ;
 					commonTime = unixTimestamp.toLocaleString();
 					
 					str+= "<tr style='width: 70%'>"+

@@ -30,7 +30,7 @@
         </div>
         
         <c:choose>
-        	<c:when test="${messageId==null}">
+        	<c:when test="${materialId==null}">
         		<div class="no-more">
                     <img src="<c:url value='/statics/image/aaa4.png'></c:url>">
                     <span>木有内容呀~~</span>
@@ -39,7 +39,7 @@
         	<c:otherwise>
         		<div id="section">
 
-		            <span class="title">${map.material_name}</span>
+		            <span class="title">${map.title}</span>
 					<c:if test="${map.deadline !=null && map.deadline !=''}">
 		            <div class="time">
 		            <span >截止日期：${map.deadline}</span>
@@ -48,7 +48,7 @@
 		        </div>
 		        <div class="content">
 		            <p class="pSize">
-				               ${message.content}
+				               ${map.notice}
 		            </p>
 		        </div>
 		      <%--   <div align="center">
@@ -104,7 +104,7 @@
 		        </div>
 		
 		        <div class="registerDiv"  >
-		            <span class="button" onclick="register(${map.materialId})">报名参加</span>
+		            <span class="button" onclick="register(${materialId})">报名参加</span>
 		        </div>
         	
         	</c:otherwise>

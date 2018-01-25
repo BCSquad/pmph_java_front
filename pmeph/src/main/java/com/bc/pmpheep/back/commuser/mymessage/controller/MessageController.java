@@ -133,7 +133,10 @@ public class MessageController extends BaseController{
 		paraMap.put("userId",userId);
 		paraMap.put("startPara",0);
 		List<Map<String,Object>> list = noticeMessageService.selectNoticeMessage(paraMap);
+		//不带分页的数据总量
+		int count = noticeMessageService.selectNoticeMessageTotalCount(paraMap);
 		
+		mv.addObject("count",count);
 		mv.addObject("listSize",list.size());
 		mv.addObject("list",list);
 		mv.addObject("condition",condition);
@@ -197,11 +200,11 @@ public class MessageController extends BaseController{
 	//查询公告详情
 	@RequestMapping(value="/noticeMessageDetail")
 	public ModelAndView toNoticeMessageDetail(HttpServletRequest request){
-		String messageId=request.getParameter("msgId");
+		String materialId=request.getParameter("materialId");
 		String cmsId=request.getParameter("cmsId");
 		ModelAndView mv = new ModelAndView();
 		Map<String,Object> paraMap = new HashMap<String,Object>();
-		paraMap.put("messageId", messageId);
+		paraMap.put("materialId", materialId);
 		paraMap.put("cmsId", cmsId);
 		//标题、时间、邮寄地址、备注
 		Map<String,Object> mapTitle =new HashMap<>();
@@ -210,11 +213,11 @@ public class MessageController extends BaseController{
 			mv.addObject("secondtag", "消息通知");
 			mv.addObject("firstpath", "personalhomepage/tohomepage.action");
 			mv.addObject("secondpath", "message/noticeMessageList.action");
-		
+			mv.addObject("materialId",materialId);
 		
 		if(mapTitle!=null && mapTitle.size()>0){
 			paraMap.put("attachmentId", mapTitle.get("attachmentId"));
-			paraMap.put("materialId", mapTitle.get("materialId"));
+			paraMap.put("materialId", materialId);
 			//备注附件
 			List<Map<String,Object>> listAttachment = noticeMessageService.queryNoticeMessageDetailAttachment(paraMap);
 			//联系人
@@ -223,7 +226,6 @@ public class MessageController extends BaseController{
 			mv.addObject("map",mapTitle);
 			mv.addObject("listAttachment",listAttachment);
 			mv.addObject("listContact",listContact);
-			
 		}
 		
 		
@@ -233,13 +235,13 @@ public class MessageController extends BaseController{
 		mssageService.add(message);*/
 		
 		//mongoDB查询通知内容
-		Message message = mssageService.get(messageId);
+		//Message message = mssageService.get("5a68260c2d85aa4450c15ba5");
 		//更新通知点击量
 		noticeMessageService.updateNoticeClicks(cmsId);
 		
 		
-		mv.addObject("message",message);
-		mv.addObject("messageId",messageId);
+		//mv.addObject("message",message);
+		//mv.addObject("messageId",messageId);
 		
 		mv.setViewName("commuser/message/noticeMessageDetail");
 		return mv;
