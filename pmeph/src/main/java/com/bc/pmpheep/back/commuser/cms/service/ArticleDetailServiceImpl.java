@@ -206,5 +206,14 @@ public class ArticleDetailServiceImpl implements ArticleDetailService{
 		}
 		return map;
 	}
+	
+	/**
+	 * 根据ID改变点击数
+	 */
+	@Override
+	public void changeClicks(String id, int clicks) {
+		// TODO Auto-generated method stub
+		articleDetailDao.changeClicks(id, clicks);
+	}
 
 }

@@ -110,4 +110,11 @@ public interface ArticleDetailService {
 	 */
 	Map<String, Object> inserMark(long wid,long writer_id);
 	
+	/**
+	 * 根据ID编辑点击数
+	 * @param id 文章ID
+	 * @param clicks 点击数
+	 */
+	void changeClicks(String id,int clicks);
+	
 }

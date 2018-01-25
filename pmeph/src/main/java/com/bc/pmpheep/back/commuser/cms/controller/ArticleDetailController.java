@@ -81,6 +81,10 @@ public class ArticleDetailController extends BaseController {
 		
 		mv.addObject("listCom", listCom);
 		
+		//增加点击数
+		int clinum=(Integer.parseInt(map.get("clicks").toString())+1);
+		articleDetailService.changeClicks(wid, clinum);
+		
 		 List<Map<String, Object>> listArtSix = articleDetailService.queryArticleSix();
 		 //点赞
 		 Map<String, Object> user=getUserInfo();

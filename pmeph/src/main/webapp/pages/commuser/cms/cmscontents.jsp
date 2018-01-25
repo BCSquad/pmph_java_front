@@ -60,8 +60,11 @@
 	                    		</div>
 			                    <div class="ryxx">
 			                    	<div class="ryxx_foot">
-			                    		<img class="ryxx_tx" src="${ctx}/statics/testfile/mi.png" />
-			                    		<span class="ryxx_xm">${cms.realname }</span>
+			                    		<c:if test="${cms.avatar=='DEFAULT'}">
+		                                <img src="${ctx}/statics/testfile/mi.png" class="ryxx_tx"></c:if>
+		                				<c:if test="${cms.avatar!='DEFAULT'}">
+		                				<img src="${ctx}/image/${cms.avatar}.action" class="ryxx_tx"></c:if>
+					                    <span class="ryxx_xm">${cms.realname }</span>
 			                    		<span class="ryxx_sj">${cms.authdate }</span>
 			                    	</div>
 			                    </div>

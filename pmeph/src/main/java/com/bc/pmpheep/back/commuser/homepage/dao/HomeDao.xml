@@ -68,17 +68,18 @@
   </select>
    <!-- 查询最新医学随笔 -->
   <select id="queryArticle"  resultMap="Mapresult">
-      select  
-        t.title,
-        t.id,
-        t.mid,
-        t.summary,
-        t.gmt_create,
-        c.realname       
-        from cms_content t
-        left join writer_user c on t.author_id=c.id
-        where  t.category_id!='0' and t.auth_status='2' 
-        and t.is_deleted='0' order by gmt_create desc limit 0,#{endrow}
+     select cc.*,wu.avatar,
+		IFNULL(wu.realname,pu.realname) realname
+		from cms_content cc
+		left join pmph_user pu on pu.id=cc.author_id
+		left join writer_user wu on wu.id=cc.author_id
+		left join cms_category ccy on cc.category_id= ccy.id
+		where   ccy.category_name='医学随笔' 
+			and cc.is_deleted=0
+			and cc.auth_status=2 
+			and cc.is_published=1 
+        	order by  cc.`auth_date` desc
+        limit 0,#{endrow}
   </select>
    <!-- 查询热门标签 -->
   <select id="queryLabel" parameterType="string"  resultMap="Mapresult">

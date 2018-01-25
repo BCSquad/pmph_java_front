@@ -171,7 +171,10 @@ function DelMyComm(id) {
 }
 
 
-
+//点击图书标题进入详情页
+function cbook(id) { 
+    window.location.href = contextpath + 'readdetail/todetail.action?id=' + id;
+}
 
 
 

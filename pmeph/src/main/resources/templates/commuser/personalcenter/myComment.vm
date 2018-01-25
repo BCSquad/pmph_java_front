@@ -64,7 +64,7 @@
             
         </div>
         <div class="bookC_right">
-            <div class="bookC_right_title">$!{c.bookname}</div>
+            <div class="bookC_right_title" style="cursor: pointer;"  onclick="cbook('$!{c.book_id}')">$!{c.bookname}</div>
             <div class="bookC_right_name">$!{c.author} &nbsp;&nbsp;/&nbsp;&nbsp; $!{c.publish_date}</div>
             #foreach($o in $!{c.commentList})
             

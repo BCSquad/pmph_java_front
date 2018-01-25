@@ -142,4 +142,12 @@ public interface  ArticleDetailDao{
 	 */
 	void deleteMark(@Param("wid") long wid,@Param("favorite_id") long favorite_id,@Param("writer_id") long writer_id);
 	
+	/**
+	 * 根据ID修改点击数
+	 * @param id
+	 * @param clicks
+	 * @return
+	 */
+	void changeClicks(@Param("id") String id,@Param("clicks") int clicks);
+	
 }

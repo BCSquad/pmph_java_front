@@ -67,7 +67,7 @@
                     
                     <div class="title">
                         <div class="line"></div>
-                           <div class="rd_name">文章评论（共${ComNum}条）</div>
+                           <div class="rd_name">文章评论<%-- （共${ComNum}条） --%></div>
                         <!-- <div class="scorestar" id="star">
                              <div class="scorestar1" id="score1"></div>
                              <div class="scorestar1" id="score2"></div>
