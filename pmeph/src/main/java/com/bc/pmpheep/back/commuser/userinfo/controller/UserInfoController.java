@@ -112,7 +112,7 @@ public class UserInfoController extends BaseController {
         String postCode = request.getParameter("postcode");
         String birthday = request.getParameter("birthday");
         String email = request.getParameter("email");
-        String org_id = request.getParameter("org_id");
+       /* String org_id = request.getParameter("org_id");*/
         String position = request.getParameter("position");
         String address = request.getParameter("address");
         String note = request.getParameter("note");
@@ -130,7 +130,7 @@ public class UserInfoController extends BaseController {
                 StringUtils.isEmpty(postCode) ||
                 StringUtils.isEmpty(birthday) ||
                 StringUtils.isEmpty(email) ||
-                StringUtils.isEmpty(org_id) ||
+               /* StringUtils.isEmpty(org_id) ||*/
                 StringUtils.isEmpty(position) ||
                 StringUtils.isEmpty(address) ||
                 StringUtils.isEmpty(note) ||
@@ -149,7 +149,7 @@ public class UserInfoController extends BaseController {
             map.put("postcode", postCode);
             map.put("birthday", birthday);
             map.put("email", email);
-            map.put("org_id", org_id);
+           /* map.put("org_id", org_id);*/
             map.put("position", position);
             map.put("address", address);
             map.put("note", note);

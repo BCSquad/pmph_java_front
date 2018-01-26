@@ -142,6 +142,7 @@
                   <div style="width: 400px;padding:0px;margin-top:-25px;">
                     <label class="require" >职称</label>
                     <select class="sxy-select-td" id="title" name="title" >
+                    	<option value="" >-请选择-</option>
                         <option value="teacher1" ${map.title=='teacher1' ?'selected':''}>教授</option>
                         <option value="teacher2" ${map.title=='teacher2' ?'selected':''}>讲师</option>
                         <option value="teacher3" ${map.title=='teacher3' ?'selected':''}>副教授</option>
@@ -210,12 +211,10 @@
                 </td>
                 <td>
                 <div  style="width: 400px;padding:0px;margin-top:-25px;">
-                    <label class="require"  >所属机构</label>
-	                    <select id="edu1" name="edu1" class="sxy-select-td" >
-		                    <option value="0" ${map.org_id=='0' ?'selected':''}>申报单位0</option>
-		                    <option value="1" ${map.org_id=='1' ?'selected':''}>申报单位1</option>
-		                    <option value="2" ${map.org_id=='2' ?'selected':''}>申报单位2</option>
-	                    </select>
+                    <label >所属机构</label>
+	                <div class="input-wrapper">
+                          <input class="sxy-txt " data-valid="isNonEmpty" disabled="disabled"  type="text" id="org_id" name="org_id" value="${map.org_name }"/>
+                      </div> 
                 </div>
                 </td>
             </tr>
