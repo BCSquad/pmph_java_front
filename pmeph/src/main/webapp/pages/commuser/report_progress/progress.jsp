@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="body">
     <div class="content-wrapper">
         <div class="title">
-            <span><a class="alink" href="${ctx}/personalhomepage/tohomepage.action?">个人中心 ></a><a class="alink" href="${ctx}/personalhomepage/tohomepageone.action?bookname=${progress.materialName}"> 教材申报</a> > 申报进度</span>
+            <span><a class="alink" href="${ctx}/personalhomepage/tohomepage.action?">个人中心 ></a><a class="alink" href="${ctx}/personalhomepage/tohomepage.action?pagetag=jcsb"> 教材申报</a> > 申报进度</span>
             <h2>${progress.materialName}</h2>
         </div>
         	<c:choose>

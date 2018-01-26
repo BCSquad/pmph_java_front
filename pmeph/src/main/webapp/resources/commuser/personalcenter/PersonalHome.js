@@ -52,7 +52,7 @@ function queryMain(){
 		+$("#pagetag").val()
 		+"&pageNum="+$("#pageNum").val()
 		+"&pageSize="+$("#pageSize").val()
-		+"&userId="+$("#logUserId").val()
+		
 		+queryConditionStr;
 
 }
@@ -66,6 +66,9 @@ function queryConditionStrFun(){
 			Str+="&"+$t.attr("id")+"="+encodeURI(encodeURI($t.val()));//编码 到controller层再解码 避免乱码
 		}
 	});
+	if ($("#selfLog").val()=='false') {
+		Str = Str+"&userId="+$("#logUserId").val();
+	}
 	return Str;
 }
 
