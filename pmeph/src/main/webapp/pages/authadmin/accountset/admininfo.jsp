@@ -180,20 +180,21 @@
 									</div>
 								</div> --%>
 								
+								
+								
 								<div class="label-input">
-									<label class="require">职称</label>
-									<div class="input-wrapper">
-										<input type="hidden" id="title-hidden"
-											value="${admininfo.title}"> <select class="select-td"
-											name="title" id="title">
-											<option value="teacher1">教师1</option>
-											<option value="teacher2">教师2</option>
-											<option value="teacher3">教师3</option>
-											<option value="teacher4">教师4</option>
-											<option value="teacher5">教师5</option>
-										</select>
-									</div>
-								</div>
+				                    <label class="require" >职称</label>
+				                    <div class="input-wrapper">
+				                    <input type="hidden" id="title-hidden" value="${admininfo.title}"> 
+				                    <select class="sxy-select-td" name="title" id="title" >
+				                    	<option value="" >-请选择-</option>
+				                        <option value="teacher1" >教授</option>
+				                        <option value="teacher2" >讲师</option>
+				                        <option value="teacher3" >副教授</option>
+				                        <option value="teacher4" >院士</option>
+				                    </select>
+				                  </div>
+								 </div>
 								
 							</td>
 							<td>

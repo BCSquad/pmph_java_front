@@ -1,5 +1,6 @@
 <%@ page import="java.util.Map" %>
-<%@ page import="com.bc.pmpheep.back.util.Const" %><%--
+<%@ page import="com.bc.pmpheep.back.util.Const" %>
+<%@ page import="org.apache.commons.collections.MapUtils" %><%--
   Created by IntelliJ IDEA.
   User: SuiXinYang
   Date: 2017/11/21
@@ -62,14 +63,24 @@
                     <span class="sign"></span>
                     <img class="notice-icon" src="${ctx}/statics/image/message.png" alt=""
                          onclick="location.href='${ctx}/message/applyMessageList.action'">
-                    <img class="user-icon" src="${ctx}/statics/pictures/head.png" alt="">
+
+                    <img class="user-icon"
+                         src="<%
+                        if ("DEFAULT".equals(MapUtils.getString(userInfo, "avatar", "DEFAULT"))) {
+                            out.println(request.getContextPath() + "/statics/image/default_image.png");
+                        } else {
+                            out.println(request.getContextPath() + "/image/" + MapUtils.getString(userInfo, "avatar") + ".action");
+                        }
+                    %>"
+                         alt="">
                 </div>
                 <div class="user-select">
                     <img src="${ctx}/statics/image/userSelectbg.png" alt="">
                     <div class="select">
                         <a class="option" href='<c:url value="/personalhomepage/tohomepage.action"/>'>个人中心</a>
                         <a class="option" href="<c:url value='/group/list.action'/>">我的小组</a>
-                        <a class="option" href='<c:url value="/personalhomepage/tohomepage.action?pagetag=jcsb"/>'>教程申报</a>
+                        <a class="option"
+                           href='<c:url value="/personalhomepage/tohomepage.action?pagetag=jcsb"/>'>教程申报</a>
                         <a class="option out" href='<c:url value="/logout.action"/>'>退出</a>
                     </div>
                 </div>

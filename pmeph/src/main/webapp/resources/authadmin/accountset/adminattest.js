@@ -35,7 +35,16 @@ $(function () {
     
     $("#fileNameDiv").hide();
     $("#uploadFile").uploadFile({
-    	
+    	accept:	"image/jpeg,image/gif,image/png",
+    	valid:function(file){
+    		if(file.type=="image/jpeg"||file.type=="image/gif"||file.type=="image/png"){
+    			return true;
+    		}else{
+    			message.error("请选择jpg、gif、jpge、png格式的文件");
+    			return false;
+    		}
+    		
+    	},
         start: function () {
             console.log("开始上传。。。");
         },

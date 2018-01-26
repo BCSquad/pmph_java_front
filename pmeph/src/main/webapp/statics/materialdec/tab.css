@@ -1,0 +1,56 @@
+.pageDiv{
+    		width: 750px;
+    	}
+    	
+.qy_div{
+	margin-left: 10px;
+	width: 750px;
+	height: 400px;
+}
+
+.tab{
+	width:100%;
+	
+}
+
+.tab tr{
+	
+}
+
+.tab td{
+	border-bottom: 1px #dddddd solid;
+}
+
+.tab td.end{
+	border-bottom: none;
+}
+
+.cg_input{
+	width: 200px;
+	height: 26px;
+	line-height: 26px;
+	border: solid 1px #dedede;
+	padding-left: 10px;
+}
+.bt_tj{
+	width: 50px;
+	height: 24px;
+	background-color: #70bcc3;
+	border-radius: 2px;
+	margin:auto;
+	top:50%;
+	left:50%;
+	cursor: pointer;
+	color: #ffffff;
+}
+
+.bt_tj span{
+	margin-left: 5px;
+}
+
+.button2{
+	height: 30px;
+	width: 750px;
+	text-align: center;
+	margin-top: 10px;
+}

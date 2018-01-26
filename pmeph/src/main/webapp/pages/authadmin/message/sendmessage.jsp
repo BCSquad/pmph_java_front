@@ -8,7 +8,7 @@
         var contextpath = '${pageContext.request.contextPath}/';
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-    <title>Insert title here</title>
+    <title>发送消息</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
   <link rel="stylesheet" href="${ctx}/statics/authadmin/message/inforelease.css" type="text/css">

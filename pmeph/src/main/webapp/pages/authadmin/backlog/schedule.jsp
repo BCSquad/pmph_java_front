@@ -34,7 +34,7 @@
     <jsp:param name="pageTitle" value="backlog"></jsp:param>
 </jsp:include>
 <div class="body" style="background-color:#f6f6f6;float: left">
-	<input id="license" value="${map.license}" type="hidden"/>
+	<input id="license" value="${map.progress}" type="hidden"/>
     <div class="content-wrapper">
         <div class="big">
                 <div class="left">待办事项</div>
@@ -131,9 +131,9 @@
                     </ul>
                     <div style="display: inline-block;    vertical-align: top">
                         <select id="edu" name="edu" >
-                            <option value="2" ${map.pageResult.pageSize=='2' ?'selected':''}>每页2条</option>
-                            <option value="3" ${map.pageResult.pageSize=='3' ?'selected':''}>每页3条</option>
-                            <option value="4" ${map.pageResult.pageSize=='4' ?'selected':''}>每页4条</option>
+                            <option value="5" ${map.pageResult.pageSize=='5' ?'selected':''}>每页5条</option>
+                            <option value="10" ${map.pageResult.pageSize=='10' ?'selected':''}>每页10条</option>
+                            <option value="15" ${map.pageResult.pageSize=='15' ?'selected':''}>每页15条</option>
                         </select>
                     </div>
                     <div class="pageJump">
@@ -165,12 +165,12 @@
                     <span class="littleTitle">${map.org_name},欢迎您!</span>
                     <!-- <span class="littleTitle">阿打算大所大所大所大所大</span> -->
                 </div>
-                <c:if test="${map.license=='false'}">
+                <c:if test="${(map.progress==0||map.progress==2)}">
                 	<div>
 	                	<span class="littleTitle2" onclick="toAuthAudit(${map.userId})">未认证</span>
 	                </div>
                 </c:if>
-                <c:if test="${map.license=='true'}">
+                <c:if test="${map.progress==1}">
                 	<div>
 	                	<span class="littleTitle3">已认证</span>
 	                </div>
@@ -219,7 +219,7 @@
     })
     function toogleTip(val,type,auditId) {
     	var license = $("#license").val();
-    	if(license=='false'){
+    	if(license==0||license==2){
     		 $('.tip').css('display',val);
     	     $('.gray').css('display',val);
     	} else{ 

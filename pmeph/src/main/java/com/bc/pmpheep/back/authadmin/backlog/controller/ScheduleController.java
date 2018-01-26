@@ -112,13 +112,13 @@ public class ScheduleController extends BaseController{
 		//机构用户基本信息
 		Map<String,Object> map = scheduleService.selectOrgUser(userId);
 		if(null!=map&&map.size()>0){
-			boolean license =  (boolean) map.get("is_proxy_upload");
-			boolean progress = map.get("progress")=="1"?true:false;
+			/*boolean license =  (boolean) map.get("is_proxy_upload");
+			String progress = (String) map.get("progress");
 			if(license==true&&progress==true){
 				map.put("license","true");
 			}else{
 				map.put("license","false");
-			}
+			}*/
 			map.put("time", time);
 			map.put("userId", userId);
 			map.put("pageResult", pageResult);

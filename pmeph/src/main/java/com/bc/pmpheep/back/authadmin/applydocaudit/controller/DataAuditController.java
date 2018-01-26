@@ -64,11 +64,13 @@ public class DataAuditController extends BaseController{
 			throws UnsupportedEncodingException {
 		ModelAndView mv = new ModelAndView();
 		String material_id = request.getParameter("material_id");
+		String view_audit = request.getParameter("view_audit");
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("material_id", material_id);
 		//获取标题
 		String	material_name = dataAuditService.findTitleName(map);
 		mv.addObject("material_id", material_id);
+		mv.addObject("view_audit", view_audit);
 		mv.addObject("material_name", material_name);
 		mv.setViewName("authadmin/applydocaudit/dataaudit");
 		return mv;
@@ -132,6 +134,7 @@ public class DataAuditController extends BaseController{
 			//传参  user_id  material_id
 			String material_id = request.getParameter("material_id");
 			String declaration_id = request.getParameter("declaration_id");
+			String view_audit = request.getParameter("view_audit");
 			Map<String,Object> queryMap = new HashMap<String,Object>();
 			queryMap.put("material_id", material_id); 
 			queryMap.put("declaration_id", declaration_id); 
@@ -191,6 +194,7 @@ public class DataAuditController extends BaseController{
 			mav.addObject("zjkyList", zjkyList);
 			mav.addObject("zjxsList", zjxsList);
 			mav.addObject("zjkzqkList", zjkzqkList);
+			mav.addObject("view_audit", view_audit);
 			return mav;
 		}
 		

@@ -126,11 +126,14 @@
 					<tr>
 						<td><span>银行账户：</span></td>
 						<td>
-							<input class="cg_input" name="bank_account_id" id="bank_account_id" placeholder="银行账户" value=""/>
+							<!-- <input class="cg_input" name="bank_account_id" id="bank_account_id" placeholder="银行账户" value=""/> -->
+							<select id="yhxxid" name="bank_account_id">
+								${bankSelects}
+							</select>
 						</td>
 						<td><span>开户银行：</span></td>
 						<td>
-							<input class="cg_input" name="realname" id="realname" placeholder="开户银行" value=""/>
+							<input class="cg_input" name="realname" id="realname" placeholder="开户银行" value="" readonly="readonly"/>
 						</td>
 					</tr>
 					<!-- 选题情况 -->

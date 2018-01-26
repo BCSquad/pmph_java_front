@@ -28,6 +28,7 @@
 	<!-- 隐藏域 -->
 	<input type="hidden" id="page-num-temp" value="1">
 	<input type="hidden" id="material_id" value="${material_id }">
+	<input type="hidden" id="view_audit" value="${view_audit }">
 	
 	
 	<div

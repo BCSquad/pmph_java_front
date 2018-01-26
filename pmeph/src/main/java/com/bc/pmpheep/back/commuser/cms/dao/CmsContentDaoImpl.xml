@@ -208,7 +208,8 @@
 	<!-- 查询文章 -->
 	<select id="listCmsContentVO" parameterType="PageParameter"
 		resultType="CmsContentVO">
-		select cc.*,IFNULL(wu.realname,pu.realname) realname
+		select cc.*,wu.avatar,
+		IFNULL(wu.realname,pu.realname) realname
 		from cms_content cc
 		left join pmph_user pu on pu.id=cc.author_id
 		left join writer_user wu on wu.id=cc.author_id

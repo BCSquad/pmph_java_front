@@ -27,14 +27,14 @@
 <input type="hidden" id="wid" value="${wid}">
 <input type="hidden" id="marks" value="${map.bookmarks}">
 	<jsp:include page="/pages/comm/head.jsp">
-		<jsp:param value="homepage" name="pageTitle" />
+		<jsp:param value="articlepage" name="pageTitle" />
 	</jsp:include>
 	<div class="body">
 		<div class="cms-writer"><div class="text" onclick="window.location.href='${ctx}/writerArticle/initWriteArticle.action'">写文章</div></div>
 		<div class="content-wrapper">
 			<div class="area1">
 	    	<div class="_title">
-				<span>文章&gt; ${map.title }</span>
+				<span>文章&gt; 文章详情</span>
 			</div>
 				<div class="wz_title">
 					<span>${map.title }</span>
@@ -67,7 +67,7 @@
                     
                     <div class="title">
                         <div class="line"></div>
-                           <div class="rd_name">文章评论（共${ComNum}条）</div>
+                           <div class="rd_name">文章评论<%-- （共${ComNum}条） --%></div>
                         <!-- <div class="scorestar" id="star">
                              <div class="scorestar1" id="score1"></div>
                              <div class="scorestar1" id="score2"></div>
@@ -198,7 +198,7 @@
 	    				<span>最近文章</span>
 	    				<c:forEach items="${listArt}" var="art">
 	    				<ul>
-	    					<li><span id="right_3_bt">${art.title}</span></li>
+	    					<li><span id="right_3_bt" style="cursor: pointer;" onclick="todetail('${art.id}')">${art.title}</span></li>
 	    					<li><span id="right_3_sj">${art.gmt_create}</span></li>
 	    					<li><hr style=" height:1px;border:none;border-top:1px dashed #dedede;margin-top: 10px;"></li>
 	    				</ul>
@@ -208,7 +208,7 @@
     		</div>
     		<!--文章链接-->
     		<div class="right_4">
-    			<span>想要阅读更多文章？狠戳这里</span>
+    			<div style="cursor: pointer;"  onclick="window.location.href='${ctx}/cms/list.action'"><span>想要阅读更多文章？狠戳这里</span></div>
     		</div>
     		<!--相关文章-->
     		<div class="right_5">

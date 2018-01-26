@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="${ctx}/resources/comm/layui/css/layui.css">
     <link href="${ctx}/statics/commuser/readpage/readdetail.css" type="text/css" rel="stylesheet">
     <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery-validate.js" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
     <script src="${ctx}/resources/comm/base.js"></script>
@@ -32,33 +33,39 @@
         <input type="hidden" id="marks" value="${map.bookmarks}">
         <!-- 图书纠错悬浮框 -->
         <div class="bookmistake" id="bookmistake">
-            <div class="apache">
-                <div class="mistitle">图书纠错</div>
-                <div class="x" onclick="hideup()"></div>
-            </div>
-            <div class="input">
-                <label style="margin-left: 20px" class="labell require" >页码:</label>
-                <input type="text" class="text" id="page" />
-                <label style="margin-left: 10px" class="labell" >行数:</label>
-                <input type="text" class="text" id="line" />
-            </div>
-            <div class="info">
-                <label style="margin-left: 20px" class="labell" >纠错内容</label>
-                <textarea class="misarea" id="content"></textarea>
-            </div>
-            <div class="upload">
-                <label style="margin-left: 20px" class="labell">纠错内容附件</label>
-                <div style="position: relative">
-                    <div id="uploadFile" class="upbutten">选择文件</div>
+            <form id="bookmistakeform">
+                <div class="apache">
+                    <div class="mistitle">图书纠错</div>
+                    <div class="x" onclick="hideup()"></div>
                 </div>
-                <label class="uploadfile" id="upname">未选择任何文件!</label>
-                <input type="hidden" id="attachment"/>
-                <input type="hidden" id="attachment_name"/>
-                <input type="hidden" id="upload_status"/>
-            </div>
-            <div class="">
-                <button class="btn" type="button" onclick="correction()">确认</button>
-            </div>
+                <div class="input">
+                    <label style="margin-left: 20px" class="labell require">页码:</label>
+                    <input type="text" class="text required" id="page" data-valid="isNonEmpty||onlyInt"
+                           data-error="页码不能为空||页码只能是数字"/>
+                    <label style="margin-left: 10px" class="labell">行数:</label>
+                    <input type="text" class="text required" id="line" data-valid="isNonEmpty||onlyInt"
+                           data-error="行数不能为空||行数只能是数字"/>
+                </div>
+                <div class="info">
+                    <label style="margin-left: 20px" class="labell">纠错内容</label>
+                    <textarea class="misarea " id="content"></textarea>
+                </div>
+                <div class="upload">
+                    <label style="margin-left: 20px" class="labell">纠错内容附件</label>
+                    <div style="position: relative">
+                        <div id="uploadFile" class="upbutten  "><%--选择文件</div>--%>
+                            选择文件
+                        </div>
+                    </div>
+                    <label class="uploadfile" id="upname">未选择任何文件!</label>
+                    <input type="hidden" id="attachment"/>
+                    <input type="hidden" id="attachment_name"/>
+                    <input type="hidden" id="upload_status"/>
+                </div>
+                <div class="">
+                    <button class="btn" type="button" onclick="correction()">确认</button>
+                </div>
+            </form>
         </div>
         <!--左边区域-->
         <div class="leftarea">
@@ -69,8 +76,8 @@
                 <c:forEach items="${typeList}" var="list" varStatus="status">
                   <span class="span_2">${list.type_name }
                   	 <c:if test="${status.index < typeList.size()-1}">
-                    		>
-                   		</c:if>  
+                         >
+                     </c:if>
                   </span>
                 </c:forEach>
             </div>
@@ -196,35 +203,35 @@
             </div>
             <div class="block">
                 <div class="title">
-                   <div class="line"></div>
-                   <div class="rd_name">相关资源</div>
-               </div>
-               <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
-	           <div class="video" style="margin-left: 20px">
-	                <img src="${ctx}/statics/image/index.png" class="img-a">
-	                <div class="video-a">
-	                   <div class="video-btn">微视频</div>
-	                </div>
-	                <div class="play"></div>
-	                <div class="video-name">微视频</div>
-	           </div>
-	           <div class="video" style="margin-left: 40px">
-	               <img src="${ctx}/statics/image/index.png" class="img-a">
-	               <div class="video-a" >
-	                   <div class="video-btn">人卫慕课</div>
-	               </div>  
-	               <div class="play"></div>
-	               <div class="video-name">人卫慕课</div> 
-	           </div>
-	           <div class="video" style="margin-left: 40px">
-	                <img src="${ctx}/statics/image/index.png" class="img-a">
-	                <div class="video-a">
-	                   <div class="video-btn">考试</div>
-	                </div>
-	                <div class="play"></div>
-	                <div class="video-name">考试</div>
-	              </div>
-	           </div>
+                    <div class="line"></div>
+                    <div class="rd_name">相关资源</div>
+                </div>
+                <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
+                <div class="video" style="margin-left: 20px">
+                    <img src="${ctx}/statics/image/index.png" class="img-a">
+                    <div class="video-a">
+                        <div class="video-btn">微视频</div>
+                    </div>
+                    <div class="play"></div>
+                    <div class="video-name">微视频</div>
+                </div>
+                <div class="video" style="margin-left: 40px">
+                    <img src="${ctx}/statics/image/index.png" class="img-a">
+                    <div class="video-a">
+                        <div class="video-btn">人卫慕课</div>
+                    </div>
+                    <div class="play"></div>
+                    <div class="video-name">人卫慕课</div>
+                </div>
+                <div class="video" style="margin-left: 40px">
+                    <img src="${ctx}/statics/image/index.png" class="img-a">
+                    <div class="video-a">
+                        <div class="video-btn">考试</div>
+                    </div>
+                    <div class="play"></div>
+                    <div class="video-name">考试</div>
+                </div>
+            </div>
             <div class="block">
                 <div class="title">
                     <div class="line"></div>
@@ -243,142 +250,147 @@
                         <div class="scorestar1" id="score5"></div>
                     </div>
                     <div class="aticle">
-                    <div class="user_score">
-                        <!-- <span>评分：</span> -->
-                        <span style="color: #FFD200" id="last_score">10.0</span>
+                        <div class="user_score">
+                            <!-- <span>评分：</span> -->
+                            <span style="color: #FFD200" id="last_score">10.0</span>
+                        </div>
+                        <div class="button">
+                            <button id="span_4" onclick="insert()">发表</button>
+                        </div>
                     </div>
-                    <div class="button">
-                        <button id="span_4" onclick="insert()">发表</button>
+                </div>
+                <div class="block">
+                    <div id="changepage">
+                        <c:forEach items="${listCom}" var="list">
+                            <div class="item">
+                                <div class="item_title">
+                                    <div style="float: left;"><img src="${ctx}/statics/image/rwtx.png"
+                                                                   class="picturesize"/>
+                                    </div>
+                                    <div style="float: left;margin-left: 10px;margin-top: 5px;">${list.realname}</div>
+                                    <div style="float: left;margin-left: 10px;">
+                                        <c:if test="${list.score<=3}">
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx2"></span>
+                                            <span class="rwtx2"></span>
+                                            <span class="rwtx2"></span>
+                                            <span class="rwtx2"></span>
+                                        </c:if>
+                                        <c:if test="${list.score<=5 and list.score>3}">
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx2"></span>
+                                            <span class="rwtx2"></span>
+                                            <span class="rwtx2"></span>
+                                        </c:if>
+                                        <c:if test="${list.score<=7 and list.score>5}">
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx2"></span>
+                                            <span class="rwtx2"></span>
+                                        </c:if>
+                                        <c:if test="${list.score<=9 and list.score>7}">
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx2"></span>
+                                        </c:if>
+                                        <c:if test="${list.score>9}">
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx1"></span>
+                                        </c:if>
+                                    </div>
+                                    <div class="date_content">
+                                        <div class="date">${list.gmt_create}</div>
+                                    </div>
+                                </div>
+                                <div class="item_content">${list.content}</div>
+                                <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
+                            </div>
+                        </c:forEach>
+                    </div>
+                    <div class="morecon">
+                        <input type="hidden" value="${start}" id="start">
+                        <span class="moreothers" onclick="changepage()"
+                              id="moreothers">${shortcom=='nothing' ? '暂无评论':'加载更多...'}</span>
+                        <div class="morecom" style="display: none;"></div>
+                    </div>
+                    <div id="longcompage">
+                        <div class="comm">
+                            <div class="longcom">图书长评</div>
+                            <div class="writecom" onclick="writeablut()">写书评</div>
+                        </div>
+                        <c:forEach items="${longList}" var="list" varStatus="status">
+                            <div class="item">
+                                <div class="item_title">
+                                    <div style="float: left;"><img src="${ctx}/statics/image/rwtx.png"
+                                                                   class="picturesize"/>
+                                    </div>
+                                    <div style="float: left;margin-left: 10px;margin-top: 5px;">${list.nickname}</div>
+                                    <div style="float: left;margin-left: 10px;">
+                                        <c:if test="${list.score<=3}">
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx2"></span>
+                                            <span class="rwtx2"></span>
+                                            <span class="rwtx2"></span>
+                                            <span class="rwtx2"></span>
+                                        </c:if>
+                                        <c:if test="${list.score<=5 and list.score>3}">
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx2"></span>
+                                            <span class="rwtx2"></span>
+                                            <span class="rwtx2"></span>
+                                        </c:if>
+                                        <c:if test="${list.score<=7 and list.score>5}">
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx2"></span>
+                                            <span class="rwtx2"></span>
+                                        </c:if>
+                                        <c:if test="${list.score<=9 and list.score>7}">
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx2"></span>
+                                        </c:if>
+                                        <c:if test="${list.score>9}">
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx1"></span>
+                                            <span class="rwtx1"></span>
+                                        </c:if>
+                                    </div>
+                                    <div class="date_content">
+                                        <div class="date">${list.gmt_create}</div>
+                                    </div>
+                                </div>
+                                <div class="longcom_title">"${list.title}"</div>
+                                <div id="${status.index }con" class="item_content"
+                                     name="item_content">${list.content}</div>
+                                <span id="${status.index }more" style="cursor: pointer;color: #666666;display: none;"
+                                      onclick="more('${status.index }con','${status.index }more')">...(展开)</span>
+                                <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
+                                <input type="hidden" id="long-hidden" value="2">
+                            </div>
+                        </c:forEach>
+                    </div>
+                    <div class="morecon">
+                        <input type="hidden" value="${start}" id="longstart">
+                        <span class="moreothers" id="longothers"
+                              onclick="longcom()">${longcom=='nothing' ? '暂无长评':'加载更多...'}</span>
+                        <div class="morecom" style="display: none;"></div>
                     </div>
                 </div>
             </div>
-            <div class="block">
-                <div id="changepage">
-                    <c:forEach items="${listCom}" var="list">
-                        <div class="item">
-                            <div class="item_title">
-                                <div style="float: left;"><img src="${ctx}/statics/image/rwtx.png" class="picturesize"/>
-                                </div>
-                                <div style="float: left;margin-left: 10px;margin-top: 5px;">${list.realname}</div>
-                                <div style="float: left;margin-left: 10px;">
-                                    <c:if test="${list.score<=3}">
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx2"></span>
-                                        <span class="rwtx2"></span>
-                                        <span class="rwtx2"></span>
-                                        <span class="rwtx2"></span>
-                                    </c:if>
-                                    <c:if test="${list.score<=5 and list.score>3}">
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx2"></span>
-                                        <span class="rwtx2"></span>
-                                        <span class="rwtx2"></span>
-                                    </c:if>
-                                    <c:if test="${list.score<=7 and list.score>5}">
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx2"></span>
-                                        <span class="rwtx2"></span>
-                                    </c:if>
-                                    <c:if test="${list.score<=9 and list.score>7}">
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx2"></span>
-                                    </c:if>
-                                    <c:if test="${list.score>9}">
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx1"></span>
-                                    </c:if>
-                                </div>
-                                <div class="date_content">
-                                    <div class="date">${list.gmt_create}</div>
-                                </div>
-                            </div>
-                            <div class="item_content">${list.content}</div>
-                            <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
-                        </div>
-                    </c:forEach>
-                </div>
-                <div class="morecon">
-                    <input type="hidden" value="${start}" id="start">
-                    <span class="moreothers" onclick="changepage()" id="moreothers">${shortcom=='nothing' ? '暂无评论':'加载更多...'}</span>
-                    <div class="morecom" style="display: none;"></div>
-                </div>
-                <div id="longcompage">
-                    <div class="comm">
-                        <div class="longcom">图书长评</div>
-                        <div class="writecom" onclick="writeablut()">写书评</div>
-                    </div>
-                    <c:forEach items="${longList}" var="list" varStatus="status">
-                        <div class="item">
-                            <div class="item_title">
-                                <div style="float: left;"><img src="${ctx}/statics/image/rwtx.png" class="picturesize"/>
-                                </div>
-                                <div style="float: left;margin-left: 10px;margin-top: 5px;">${list.nickname}</div>
-                                <div style="float: left;margin-left: 10px;">
-                                    <c:if test="${list.score<=3}">
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx2"></span>
-                                        <span class="rwtx2"></span>
-                                        <span class="rwtx2"></span>
-                                        <span class="rwtx2"></span>
-                                    </c:if>
-                                    <c:if test="${list.score<=5 and list.score>3}">
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx2"></span>
-                                        <span class="rwtx2"></span>
-                                        <span class="rwtx2"></span>
-                                    </c:if>
-                                    <c:if test="${list.score<=7 and list.score>5}">
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx2"></span>
-                                        <span class="rwtx2"></span>
-                                    </c:if>
-                                    <c:if test="${list.score<=9 and list.score>7}">
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx2"></span>
-                                    </c:if>
-                                    <c:if test="${list.score>9}">
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx1"></span>
-                                        <span class="rwtx1"></span>
-                                    </c:if>
-                                </div>
-                                <div class="date_content">
-                                    <div class="date">${list.gmt_create}</div>
-                                </div>
-                            </div>
-                            <div class="longcom_title">"${list.title}"</div>
-                            <div id="${status.index }con" class="item_content" name="item_content">${list.content}</div>
-                            <span id="${status.index }more" style="cursor: pointer;color: #666666;display: none;" 
-                            onclick="more('${status.index }con','${status.index }more')" >...(展开)</span>
-                            <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
-                            <input type="hidden" id="long-hidden" value="2">
-                        </div>
-                    </c:forEach>
-                </div>
-                <div class="morecon">
-                    <input type="hidden" value="${start}" id="longstart">
-                    <span class="moreothers"  id="longothers" onclick="longcom()">${longcom=='nothing' ? '暂无长评':'加载更多...'}</span>
-                    <div class="morecom" style="display: none;"></div>
-                </div>
-            </div>
-        </div>
         </div>
         <!--右边区域-->
         <div class="rightarea">

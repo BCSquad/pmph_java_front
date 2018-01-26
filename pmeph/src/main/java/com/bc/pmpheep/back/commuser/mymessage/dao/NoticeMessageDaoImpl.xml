@@ -38,7 +38,7 @@
 		<!-- 全部 -->
 		<if test="condition==null||condition==3">
 			select * from(
-			select u.id,u.msg_id as fId,u.title,u.gmt_create,u.msg_type as msgType
+			select u.id,u.msg_id as fId,u.title,u.gmt_create as time,u.msg_type as msgType
 			from user_message u
 			<trim prefix="WHERE" prefixOverrides="AND|OR">
 				u.receiver_id = #{userId}
@@ -46,25 +46,71 @@
 				and u.is_deleted = 0
 			</trim>
 			ORDER BY u.gmt_create DESC)t1
-			union 
+			UNION
 			select * from(
-				select c.id,c.material_id,c.title,c.gmt_create,4 
-				from cms_content c
-				where c.is_deleted=0
-				ORDER BY c.gmt_create DESC
+				SELECT n.id,n.material_id,n.title,n.gmt_create,4
+				FROM 
+				(SELECT 
+		        t.*
+		        FROM cms_content t
+		        LEFT JOIN  material b ON t.material_id =b.id 
+		        WHERE  t.category_id=3 
+		        AND t.material_id IS NOT NULL 
+		        AND t.material_id >0
+                <![CDATA[AND b.is_public <> 0]]>
+		        AND t.auth_status=2
+		        AND t.is_deleted=0
+			    UNION
+			    SELECT 
+				t.*
+		        FROM cms_content t
+		        LEFT JOIN  material b ON t.material_id =b.id 
+		        LEFT JOIN material_org u ON b.id=u.material_id
+		        LEFT JOIN writer_user p ON p.org_id=u.org_id
+		        WHERE  t.category_id=3
+		        AND t.material_id IS NOT NULL 
+		        AND t.material_id >0
+		        AND b.is_public = 0
+		        AND t.auth_status=2
+		        AND t.is_deleted=0 
+		        AND p.id=#{userId}) n
 			)t2
+			order by time desc 
 		</if>
-	
-		<!--公告  -->
+		
+		<!-- 公告 -->
 		<if test="condition==4">
-			select c.id,c.material_id as fId,c.title,c.gmt_create,4 as msgType
-			from cms_content c
-			where c.is_deleted=0
-			ORDER BY c.gmt_create DESC
+				SELECT n.id,n.material_id as fId,n.title,n.gmt_create as time,4 as msgType
+				FROM 
+				(SELECT 
+		        t.*
+		        FROM cms_content t
+		        LEFT JOIN  material b ON t.material_id =b.id 
+		        WHERE  t.category_id=3 
+		        AND t.material_id IS NOT NULL 
+		        AND t.material_id >0
+                <![CDATA[AND b.is_public <> 0]]>
+		        AND t.auth_status=2
+		        AND t.is_deleted=0
+			    UNION
+			    SELECT 
+				t.*
+		        FROM cms_content t
+		        LEFT JOIN  material b ON t.material_id =b.id 
+		        LEFT JOIN material_org u ON b.id=u.material_id
+		        LEFT JOIN writer_user p ON p.org_id=u.org_id
+		        WHERE  t.category_id=3
+		        AND t.material_id IS NOT NULL 
+		        AND t.material_id >0
+		        AND b.is_public = 0
+		        AND t.auth_status=2
+		        AND t.is_deleted=0 
+		        AND p.id=#{userId}) n
+			ORDER BY n.gmt_create DESC
 		</if>
 		<!-- 系统消息 -->
 		<if test="condition==0">
-			select u.id,u.msg_id as fId,u.title,u.gmt_create,u.msg_type as msgType
+			select u.id,u.msg_id as fId,u.title,u.gmt_create as time,u.msg_type as msgType
 			from user_message u
 			<trim prefix="WHERE" prefixOverrides="AND|OR">
 				u.receiver_id = #{userId}
@@ -77,6 +123,49 @@
 		
 		<if test="startPara!=null">limit #{startPara},8</if>	
 		
+	</select>
+	<!-- 系统消息总量 -->
+	<select id="selectNoticeMessageSysCount" parameterType="java.util.Map" resultType="int">
+			select count(*) from(
+			select u.id
+			from user_message u
+			<trim prefix="WHERE" prefixOverrides="AND|OR">
+				u.receiver_id = #{userId}
+				and msg_type in (0,1)
+				and u.is_deleted = 0
+			</trim>
+			)t
+	</select>
+	<!-- 系统公告消息总量 -->
+	<select id="selectNoticeMessageCount" parameterType="java.util.Map" resultType="int">
+			SELECT COUNT(*) FROM(
+				SELECT n.id,n.material_id,n.title,n.gmt_create,4
+				FROM 
+				(SELECT 
+		        t.*
+		        FROM cms_content t
+		        LEFT JOIN  material b ON t.material_id =b.id 
+		        WHERE  t.category_id=3 
+		        AND t.material_id IS NOT NULL 
+		        AND t.material_id >0
+                <![CDATA[AND b.is_public <> 0]]>
+		        AND t.auth_status=2
+		        AND t.is_deleted=0
+			    UNION
+			    SELECT 
+				t.*
+		        FROM cms_content t
+		        LEFT JOIN  material b ON t.material_id =b.id 
+		        LEFT JOIN material_org u ON b.id=u.material_id
+		        LEFT JOIN writer_user p ON p.org_id=u.org_id
+		        WHERE  t.category_id=3
+		        AND t.material_id IS NOT NULL 
+		        AND t.material_id >0
+		        AND b.is_public = 0
+		        AND t.auth_status=2
+		        AND t.is_deleted=0 
+		        AND p.id=#{userId}) n
+		        )t
 	</select>
 	
 	<!-- 删除通知 -->
@@ -107,17 +196,13 @@
 	
 	<!-- 教材申报通知详情 -->
 	<select id="noticeMessageDetail" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT DISTINCT m.`material_name`,m.`id` AS materialId ,m.`deadline`,m.`mail_address`,e.`note`,e.id AS attachmentId
+		SELECT  a.title,m.`deadline`,m.`mail_address`,e.`note`,e.notice,e.id AS attachmentId
 		FROM cms_content a
-		LEFT JOIN user_message b
-		ON a.mid = b.`msg_id`
 		LEFT JOIN material m
 		ON a.`material_id` = m.`id`
 		LEFT JOIN material_extra e
 		ON m.`id` = e.`material_id`
-		LEFT JOIN `material_contact` c
-		ON c.`material_id` = m.`id`
-		WHERE b.`id`=#{cmsId}
+		WHERE a.`id`=#{cmsId}
 	</select>
 	
 	<!-- 查询教材备注相关的附件 -->

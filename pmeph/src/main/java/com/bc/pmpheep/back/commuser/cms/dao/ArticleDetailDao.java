@@ -48,9 +48,10 @@ public interface  ArticleDetailDao{
 	
 	/**
 	 * 查询相关文章
+	 * @param wid 
 	 * @return List<Map<String, Object>>
 	 */
-	List<Map<String, Object>> queryRecommendByE(@Param("x") int num);
+	List<Map<String, Object>> queryRecommendByE(@Param("x") int num,@Param("wid") String wid);
 	
 	/**
 	 * 根据书籍ID查询评论
@@ -140,5 +141,13 @@ public interface  ArticleDetailDao{
 	 * @param writerId    用户id
 	 */
 	void deleteMark(@Param("wid") long wid,@Param("favorite_id") long favorite_id,@Param("writer_id") long writer_id);
+	
+	/**
+	 * 根据ID修改点击数
+	 * @param id
+	 * @param clicks
+	 * @return
+	 */
+	void changeClicks(@Param("id") String id,@Param("clicks") int clicks);
 	
 }

@@ -35,6 +35,7 @@
 			<if test="null!=parameter.year">AND w.gmt_create >= #{parameter.year}</if>
 		</trim>
 		ORDER BY w.gmt_create DESC) t2
+		ORDER BY TIME DESC
 		limit #{start},#{pageSize}
 	</select>
 	<!-- 查询待办事项条数 -->

@@ -28,6 +28,8 @@ public interface NoticeMessageService {
 	
 	//更新通知点击量
 	void updateNoticeClicks(String cmsId);
+	//查询通知数据总量
+	int selectNoticeMessageTotalCount(Map<String, Object> paraMap);
 
 
 }

@@ -15,6 +15,11 @@ $(function () {
     	height: 30,
     	optionHeight: 30
     });
+    $('#yhxxid').selectlist({
+    	width: 308,
+    	height: 30,
+    	optionHeight: 30
+    });
 
 });
 //生成随机数

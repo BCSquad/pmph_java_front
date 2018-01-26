@@ -729,9 +729,11 @@
 			</div>
 			<div class="sbdw">
 				<span class="btbs">*</span><span>申报单位：</span>
-				<select id="apply-org" name="edu" class="st_2" >
+				<%-- <select id="apply-org" name="edu" class="st_2" >
 				    ${gezlList.orgSelect}
-				</select> 
+				</select>  --%>
+				<input class="cg_input" id="sbdw_name" name="sbdw_name" value="${gezlList.dwmc}" style="width: 300px;" onclick="javascript:orgAdd('${materialMap.material_id}')" readonly="readonly"/>
+				<input type="hidden" id="sbdw_id" name="sbdw_id" value="${gezlList.org_id}" style="width: 300px;"/>
 			</div>
 		</div>
 		<hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">

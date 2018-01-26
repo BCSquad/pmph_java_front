@@ -30,6 +30,8 @@ $(function(){
         	   changepage(n);
            }
        });
+	   
+	   changepage(1);
 });
 //分页前的初始化
 function beforechange(){
@@ -43,6 +45,7 @@ function changepage(n){
 	var json={
 			pageNumber:n,	
 			allppage:$('input[name=edu]').val(),
+			wid:$('#wid').val()
 			
 	};
 	 $.ajax({
@@ -120,12 +123,14 @@ function changepage(n){
 
 //1.新增评论
 function insert(){
+	debugger;
 	if($("#content").val()==''){
 		window.message.info("发表我的言论...");
 		return;
 	}
 	var json={
 		 content:$("#content").val(),
+		 wid:$("#wid").val()
 		/* score:$("#last_score").html(),*/
 	};
 	 $.ajax({
@@ -138,6 +143,7 @@ function insert(){
 				if(json.returncode=="OK"){
 					  $("#content").val(null);
 					  window.message.success("发表评论成功");
+					  
 				}
 			}
 		});
@@ -147,11 +153,15 @@ function insert(){
 
 //1.相关文章换一换
 function change(){
+	var json={
+			 wid:$("#wid").val()
+		};
 	 $.ajax({
 			type:'post',
 			url:contextpath+'articledetail/change.action',
 			async:false,
 			dataType:'json',
+			data:json,
 			success:function(json){
 				var ste='';
 				$.each(json,function(i,n){
@@ -165,12 +175,15 @@ function change(){
 
 //点赞
 function addlikes(){
-	/*var book_id=$("#book_id").val();*/
+	var json={
+			 wid:$("#wid").val()
+		};
 	 $.ajax({
 			type:'post',
 			url:contextpath+'articledetail/addlikes.action',
 			async:false,
 			dataType:'json',
+			data:json,
 			success:function(json){
 				if(json.returncode=="yes"){
 					$("#dz").attr("src",contextpath+"statics/image/dz02.png");

@@ -3,6 +3,8 @@ package com.bc.pmpheep.back.commuser.cms.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 
@@ -55,9 +57,10 @@ public interface ArticleDetailService {
 	
 	/**
 	 * 查询相关文章
+	 * @param wid 
 	 * @return List<Map<String, Object>>
 	 */
-	List<Map<String, Object>> queryRecommendByE(int num);
+	List<Map<String, Object>> queryRecommendByE(@Param("x") int num,@Param("wid") String wid);
 	
 	/**
 	 * 查询书籍相关评论
@@ -106,5 +109,12 @@ public interface ArticleDetailService {
 	 * @return
 	 */
 	Map<String, Object> inserMark(long wid,long writer_id);
+	
+	/**
+	 * 根据ID编辑点击数
+	 * @param id 文章ID
+	 * @param clicks 点击数
+	 */
+	void changeClicks(String id,int clicks);
 	
 }

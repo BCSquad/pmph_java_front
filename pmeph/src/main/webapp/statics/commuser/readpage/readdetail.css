@@ -860,14 +860,20 @@
 }
 
 .upbutten{
-	width:60px;
-	height:20px;
-	background-color: #E1E1E1;
-	border: none; 
-	text-align:center;
-	cursor: pointer;
-	border-radius:3px;
-	margin-left: 5px;
+    width: 70px;
+    height: 24px;
+    margin: 0px;
+    background-color: #03717b;
+    border-radius: 4px;
+    font-family: MicrosoftYaHei;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #ffffff;
+    line-height: 24px;
+    padding: 0;
+    text-align: center;
+    position: relative;
 }
 
 .video-btn{
@@ -1084,4 +1090,11 @@
 }
 .pop-upload .button-area button.submit{
     margin-right: 10px;
+}
+.input-error {
+    border: 1px solid red;
+}
+.valid_message{
+    color: red;
+    margin-left: 80px;
 }

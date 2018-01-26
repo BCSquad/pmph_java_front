@@ -341,7 +341,7 @@ body {
     height: 100%;
     right: 0px;
     top: 0;
-    z-index: 11;
+    z-index: 999;
 
 }
 
@@ -421,4 +421,8 @@ td {
 .float-menu .item.black{
     line-height: 44px;
     background: #383C48;
+}
+
+.input-error{
+    border:1px solid red;
 }

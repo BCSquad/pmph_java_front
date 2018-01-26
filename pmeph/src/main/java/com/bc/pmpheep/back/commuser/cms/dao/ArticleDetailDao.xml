@@ -36,7 +36,7 @@
 		t.category_id=b.id
 		left join writer_user c on t.author_id=c.id
 		WHERE
-		t.author_id=#{author_id}
+		t.author_id=#{author_id} and t.auth_status='2' and t.parent_id='0'
 		order by t.gmt_create desc
 	</select>
 
@@ -53,8 +53,8 @@
 		left join cms_category b on t.category_id=b.id
 		left join
 		writer_user c on t.author_id=c.id WHERE t.author_id=#{author_id}
-		order
-		by gmt_create desc LIMIT 0,3
+		and t.auth_status='2' and t.parent_id='0'
+		order by gmt_create desc LIMIT 0,3
 	</select>
 
 
@@ -62,11 +62,12 @@
 	<select id="queryRecommendByE" parameterType="java.util.Map"
 		resultType="java.util.Map">
 		select c.title,w.realname,c.id as wid
-		from cms_content c left join writer_user
-		w
+		from cms_content c 
+		right join cms_content tc on tc.material_id = c.material_id and tc.id = #{wid}
+		left join writer_user w
 		on c.author_id=w.id
-		where c.is_promote != 0 OR c.is_promote is not
-		null
+		where c.is_promote != 0 OR c.is_promote is not  null
+		and c.id != #{wid}
 		<if test="x >= 0">
 			limit #{x},5
 		</if>
@@ -174,5 +175,10 @@
 	<delete id="deleteMark" parameterType="java.util.Map" >
 	    delete from cms_user_mark where writer_id=#{writer_id} and  favorite_id=#{favorite_id} and content_id=#{wid}
 	</delete>
+	
+	<!-- 根据ID增加点击数 -->
+	<update id="changeClicks" parameterType="java.util.Map">
+	    update cms_content set clicks=#{clicks} where id=#{id}
+	</update>
 
 </mapper>

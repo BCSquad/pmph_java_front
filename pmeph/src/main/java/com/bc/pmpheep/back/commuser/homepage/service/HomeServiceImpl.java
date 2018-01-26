@@ -43,8 +43,8 @@ public class HomeServiceImpl implements HomeService {
 	public List<Map<String, Object>> queryArticle(int endrow){
 		List<Map<String, Object>> list=homeDao.queryArticle(endrow);
 		for (Map<String, Object> map : list) {
-			String time=map.get("gmt_create").toString().substring(0, 16);
-			map.put("gmt_create", time);
+			String time=map.get("auth_date").toString().substring(0, 10);
+			map.put("auth_date", time);
 		}
 		return list;
 	}

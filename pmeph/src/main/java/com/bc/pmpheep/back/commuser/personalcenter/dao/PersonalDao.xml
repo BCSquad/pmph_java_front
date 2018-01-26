@@ -471,10 +471,8 @@
 		b.image_url,
 		bc.id,
 		bc.book_id,
-		
 		bc.content,
 		bc.gmt_create,
-		
 		case 
 		when bc.gmt_update = '0000-00-00 00:00:00'
 		then DATE_FORMAT(bc.gmt_create,'%Y年%m月%d日')
