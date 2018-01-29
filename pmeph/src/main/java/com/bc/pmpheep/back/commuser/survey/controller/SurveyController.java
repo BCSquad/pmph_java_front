@@ -31,8 +31,8 @@ public class SurveyController extends BaseController {
     @RequestMapping(value = "/surveyList")
     public ModelAndView surveyList() {
         ModelAndView mv = new ModelAndView();
-        // Long userId = new Long(String.valueOf(writerUser.get("id")));
-        long userId = 3249L;
+        Map<String, Object> writerUser = this.getUserInfo();
+        Long userId = new Long(String.valueOf(writerUser.get("id")));
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String dateStr = sdf.format(date);
@@ -51,8 +51,7 @@ public class SurveyController extends BaseController {
     public ModelAndView writeSurvey(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
         String surveyIdStr = request.getParameter("surveyId");
-        long surveyId = 1L;
-        // long surveyId = new Long(surveyIdStr);
+        long surveyId = new Long(surveyIdStr);
         // 查询该调查包含的所有题目
         List<Map<String, Object>> list = surveyService.getSurvey(surveyId);
         List<Map<String, Object>> listResult = new ArrayList<Map<String, Object>>();
@@ -88,8 +87,7 @@ public class SurveyController extends BaseController {
     @ResponseBody
     public String addSurveyAnswers(HttpServletRequest request) {
         Map<String, Object> writerUser = this.getUserInfo();
-        // Long userId = new Long(String.valueOf(writerUser.get("id")));
-        long userId = 1L;
+        Long userId = new Long(String.valueOf(writerUser.get("id")));
         // 先删除用户回答
         surveyService.deleteUserAnswer(userId);
         String surveyId = request.getParameter("surveyId");
