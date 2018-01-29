@@ -118,9 +118,9 @@ public class PersonalCenterController extends BaseController {
 			List<Map<String,Object>> List_map = personalService.queryWriterUserTrendst(pageParameter);
 			count = personalService.queryWriterUserTrendstCount(pageParameter);
 			//分页数据代码块
-			String html = this.mergeToHtml("commuser/personalcenter/writerUserTrendst.vm",contextpath, pageParameter, List_map,vm_map);
+			//String html = this.mergeToHtml("commuser/personalcenter/writerUserTrendst.vm",contextpath, pageParameter, List_map,vm_map);
 			mv.addObject("List_map",List_map);//测试
-			mv.addObject("html",html);
+			//mv.addObject("html",html);
 			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
 		}else if("tsjc".equals(pagetag)){ //图书纠错 (我是第一主编)
 			//从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
