@@ -264,8 +264,12 @@
                         <c:forEach items="${listCom}" var="list">
                             <div class="item">
                                 <div class="item_title">
-                                    <div style="float: left;"><img src="${ctx}/statics/image/rwtx.png"
-                                                                   class="picturesize"/>
+                                    <div style="float: left;">
+                                    	<c:if test="${list.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/default_image.png" alt="头像" ></c:if>
+						                <c:if test="${list.avatar!='DEFAULT'}"><img src="${ctx}/image/${list.avatar}.action" class="picturesize" alt="头像" ></c:if>
+                                    
+                                    <%-- <img src="${ctx}/statics/image/rwtx.png"
+                                                                   class="picturesize"/> --%>
                                     </div>
                                     <div style="float: left;margin-left: 10px;margin-top: 5px;">${list.realname}</div>
                                     <div style="float: left;margin-left: 10px;">
@@ -330,7 +334,7 @@
                                 <div class="item_title">
                                     <div style="float: left;">
                                     
-						                <c:if test="${list.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/default_image.png" class="picturesize" alt="头像" ></c:if>
+						                <c:if test="${list.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/default_image.png" alt="头像" ></c:if>
 						                <c:if test="${list.avatar!='DEFAULT'}"><img src="${ctx}/image/${list.avatar}.action" class="picturesize" alt="头像" ></c:if>
 						           
                                     <%-- <img src="${ctx}/statics/image/rwtx.png"
