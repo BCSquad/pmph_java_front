@@ -10,6 +10,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -38,6 +39,20 @@ public class SSOLoginoutController extends BaseController {
 
     private static final CloseableHttpClient httpclient = HttpClients.createDefault();
 
+    private String serviceID;
+
+    private String url;
+
+    @Value("${sso.serviceID}")
+    public void setServiceID(String serviceID) {
+        this.serviceID = serviceID;
+    }
+
+    @Value("${sso.url}")
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     @RequestMapping("weblogin!main")
     public void login(HttpServletRequest request, HttpServletResponse response) {
         String username = null;
@@ -59,7 +74,7 @@ public class SSOLoginoutController extends BaseController {
 
         String ticket = request.getParameter("ST");
         try {
-            HttpGet httpget = new HttpGet("http://books123456789.ipmph.com/newsso/ServiceValidate.jsp?ServiceID=yiyaojiaohu&ST=" + ticket);
+            HttpGet httpget = new HttpGet(url + "ServiceValidate.jsp?ServiceID=" + serviceID + "&ST=" + ticket);
             CloseableHttpResponse closeableHttpResponse = httpclient.execute(httpget);
             HttpEntity entity = closeableHttpResponse.getEntity();
             String xmlString = EntityUtils.toString(entity);

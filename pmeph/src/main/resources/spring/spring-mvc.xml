@@ -18,14 +18,25 @@
     <context:component-scan base-package="com.bc.pmpheep.back;com.bc.pmpheep.general">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
+    <context:property-placeholder location="classpath:spring/spring.properties" ignore-unresolvable="true" />
+
+    <!-- 保存变量到application范围 -->
+    <bean class="org.springframework.web.context.support.ServletContextAttributeExporter">
+        <property name="attributes">
+            <map>
+                <entry key="redirectUrl" value="${sso.url}"/>
+                <entry key="serviceID" value="${sso.serviceID}"/>
+            </map>
+        </property>
+    </bean>
 
     <!--AXIOS跨域请求访问拦截 -->
     <mvc:interceptors>
         <bean class="com.bc.pmpheep.back.interceptor.ProcessInterceptor"></bean>
 
         <bean class="com.bc.pmpheep.back.interceptor.LoginInterceptor">
-            <property name="redirectUrl" value="http://books123456789.ipmph.com/newsso/"/>
-            <property name="serviceID" value="yiyaojiaohu"></property>
+            <property name="redirectUrl" value="${sso.url}"/>
+            <property name="serviceID" value="${sso.serviceID}"></property>
             <property name="pathWithUsertypeMaps">
                 <set>
 

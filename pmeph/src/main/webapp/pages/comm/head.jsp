@@ -48,9 +48,9 @@
             %>
             <c:if test="${userInfo == null}">
                 <div class="login-logout">
-                    <a onclick="window.location.href='http://books123456789.ipmph.com/newsso?ServiceID=yiyaojiaohu&Referer='+encodeURIComponent(window.location.href)" href='javascript:;'>登录</a>
+                    <a onclick="window.location.href='${redirectUrl}?ServiceID=${serviceID}&Referer='+encodeURIComponent(window.location.href)" href='javascript:;'>登录</a>
                     <span>/</span>
-                    <a onclick="window.location.href='http://books123456789.ipmph.com/newsso?ServiceID=yiyaojiaohu&Referer='+encodeURIComponent(window.location.href)" href='javascript:;'>注册</a>
+                    <a onclick="window.location.href='${redirectUrl}?ServiceID=${serviceID}&Referer='+encodeURIComponent(window.location.href)" href='javascript:;'>注册</a>
                     <img src="${ctx}/statics/image/question.png" alt="">
                 </div>
             </c:if>
