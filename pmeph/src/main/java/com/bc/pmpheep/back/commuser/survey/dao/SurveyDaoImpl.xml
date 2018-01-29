@@ -20,7 +20,7 @@
 		ON 
 			s.`id` = st.`survey_id` 
 		JOIN 
-			`writer_user` wu
+			`writer_user` wu 
 		ON 
 			st.`org_id` = wu.`org_id`
 		WHERE  
