@@ -396,6 +396,7 @@ $(function(){
                     "</div> ";
 		}
 		$(".iframe1").append(html);
+		$(".iframe1").scrollTop($($(".iframe1")[0]).height());
 	}
 	
 	//转换时间戳的方法
