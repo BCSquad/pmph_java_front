@@ -93,16 +93,16 @@
                 </div>
             </c:if>
         </div>
-        <c:if test="${map.pageResult.total>=1 }">
+        <c:if test="${map.pageResult.total>5 }">
         <div class="pageDiv">
                 <div style="float: right;">
                     <ul class="pagination" id="page1">
                     </ul>
                     <div style="display: inline-block;    vertical-align: top">
                         <select id="edu" name="edu" >
-                            <option value="2" ${map.pageResult.pageSize=='2' ?'selected':''}>每页2条</option>
-                            <option value="3" ${map.pageResult.pageSize=='3' ?'selected':''}>每页3条</option>
-                            <option value="4" ${map.pageResult.pageSize=='4' ?'selected':''}>每页4条</option>
+                            <option value="5" ${map.pageResult.pageSize=='5' ?'selected':''}>每页5条</option>
+                            <option value="10" ${map.pageResult.pageSize=='10' ?'selected':''}>每页10条</option>
+                            <option value="15" ${map.pageResult.pageSize=='15' ?'selected':''}>每页15条</option>
                         </select>
                     </div>
                     <div class="pageJump">

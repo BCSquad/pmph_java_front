@@ -1,5 +1,6 @@
 //加载更多通知公告
 function loadMore(){
+	
 	var pathName=window.document.location.pathname;  
 	var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
 		var para = $("#startPara").val();
@@ -12,14 +13,19 @@ function loadMore(){
 		
 		 $.ajax({
 			type:'post',
-			url:"loadMore.action?startPara="+startPara+"&condition="+$("input[name='select']") .val(),
-			async:false,
+			url:"loadMore.action?",
+			data:{"startPara":startPara,"condition":$("input[name='select']") .val()},
 			dataType:'json',
 			success:function(json){
 				var list = json;
-				if(list.size<8){
-					$("#loadMoreDiv").hide();
-				}
+				$.each(list,function(i,m){
+					if(i==0){
+						var count = m.count;
+						if(count<=0){
+							$("#loadMoreDiv").hide();
+						}
+					}
+				});
 				$("#startPara").val(startPara);
 				var str='';
 				$.each(list,function(i,n){

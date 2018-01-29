@@ -124,7 +124,7 @@
                 </div>
             </div>
             <div class="gray ie" onclick="toogleTip('none')"></div>
-            	<c:if test="${map.pageResult.total>=1 }">
+            	<c:if test="${map.pageResult.total>5 }">
             	<div class="pageDiv">
                 <div style="float: right;">
                     <ul class="pagination" id="page1">

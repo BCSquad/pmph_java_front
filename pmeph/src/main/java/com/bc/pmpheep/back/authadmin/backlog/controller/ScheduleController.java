@@ -90,8 +90,8 @@ public class ScheduleController extends BaseController{
              }
         }
         
-		int currentPage = 1;
-		int pageSize = 4;
+		int currentPage = 0;
+		int pageSize = 5;
 		
 		if(null!=currentPageStr&&!currentPageStr.equals("")){
 			 currentPage = Integer.parseInt(currentPageStr);
@@ -159,7 +159,7 @@ public class ScheduleController extends BaseController{
 		}*/
 		
 		int currentPage = 0;
-		int pageSize = 8;
+		int pageSize = 5;
 		if(null!=currentPageStr&&!currentPageStr.equals("")){
 			 currentPage = Integer.parseInt(currentPageStr);
 		}
