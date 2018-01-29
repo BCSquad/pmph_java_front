@@ -136,7 +136,7 @@ public class MessageController extends BaseController{
 		//不带分页的数据总量
 		int count = noticeMessageService.selectNoticeMessageTotalCount(paraMap);
 		
-		mv.addObject("count",count);
+		mv.addObject("count",count-list.size());
 		mv.addObject("listSize",list.size());
 		mv.addObject("list",list);
 		mv.addObject("condition",condition);
@@ -170,6 +170,17 @@ public class MessageController extends BaseController{
 		paraMap.put("userId",userId);
 		
 		List<Map<String,Object>> list = noticeMessageService.selectNoticeMessage(paraMap);
+		//不带分页的数据总量
+		int count = noticeMessageService.selectNoticeMessageTotalCount(paraMap);
+		//控制显示“加载更多”
+		if(list.size()>0){
+			for(int i = 0;i<=list.size();i++){
+				if(i==0){
+					list.get(0).put("count", count-(list.size()+startPara));
+				}
+				
+			}
+		}
 		
 		return list;
 	}

@@ -114,7 +114,7 @@
 					</c:forEach>
             	</c:when>
             	<c:otherwise>
-            		<div class="no-more">
+            		<div class="no-more" >
 	                    <img src="<c:url value="/statics/image/aaa4.png"></c:url>">
 	                    <span>木有内容呀~~</span>
                		</div>
@@ -122,7 +122,7 @@
             </c:choose>
             </table>
            
-            <c:if test="${listSize>=8}">
+            <c:if test="${count>0}">
             <div id="loadMoreDiv" class="load-more clearfix" onclick='loadMore()'>加载更多...</div>
             <input id="startPara" name="startPara" type="hidden">
             </c:if>
