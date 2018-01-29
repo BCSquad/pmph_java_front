@@ -37,6 +37,7 @@
 				<input type="hidden" id="select_nr" value="${bookSelects}"/>
 				<input type="hidden" id="declaration_id" name="declaration_id" value="${materialMap.declaration_id}"/>
 				<input type="hidden" id="material_id" name="material_id" value="${materialMap.material_id}"/> 
+				<input type="hidden" id="is_multi_books" name="is_multi_books" value="${materialMap.is_multi_books}"/>
 				<span id="tsxz_span1"></span>
 				<span class="tsxz_title">图书选择(只能选择一本书籍，一本书籍只能选择一个职位。) </span>
 				<span class="tsxz_ts1"><img src="${ctx}/statics/image/btxx.png" /></span>
@@ -55,7 +56,9 @@
 								<td><input type="radio" name="zw_1_${status.count}" value="1" ${list.preset_position=='1'?'checked':'' }/>主编</td>
 								<td><input type="radio" name="zw_1_${status.count}" value="2" ${list.preset_position=='2'?'checked':'' }/>副编委</td>
 								<td><input type="radio" name="zw_1_${status.count}" value="3" ${list.preset_position=='3'?'checked':'' }/>编委</td>
-								<td><input type="radio" name="zw_1_${status.count}" value="4" ${list.preset_position=='4'?'checked':'' }/>数字编委</td>
+								<c:if test="${materialMap.is_digital_editor_optional =='1'}">
+								<td><input type="radio" name="zw_1" value="4"/>数字编委</td>
+								</c:if>
 							</tr>
 						</table>
 						<!-- 用于遍历radio中的值 -->

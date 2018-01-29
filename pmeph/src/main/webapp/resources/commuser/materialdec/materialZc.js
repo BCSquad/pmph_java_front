@@ -2,7 +2,7 @@
 var jsonStr = "";
 jsonStr = "{\"id\":\"realname\",\"content\":\"姓名不能为空\"}," +
 	"{\"id\":\"birthday\",\"content\":\"出生日期不能为空\"},{\"id\":\"experience\",\"content\":\"地址不能为空\"},"+
-	"{\"id\":\"handphone\",\"content\":\"手机号码不能为空\"},{\"id\":\"idcard\",\"content\":\"证件号码不能为空\"},";
+	"{\"id\":\"handphone\",\"content\":\"手机号码不能为空\"},{\"id\":\"idcard\",\"content\":\"证件号码不能为空\"},{\"id\":\"sbdw_name\",\"content\":\"申报单位不能为空\"},";
 
 $(function () {
 	var id = $("#material_id").val();
@@ -277,7 +277,9 @@ function only(ele,arr){
 	//追加图书添加div
 	function addTsxz(){
 		var select_nr = $("#select_nr").val();
+		var sfbw = $("#sfbw").val();
 		var str = fnt();
+		if(sfbw == "1"){
 		$("#tsxz").append("<div class='item' id='xz_"+str+"'>"+
 					"<span style='float: left;'>图书：</span>"+
 					"<select id='edu_"+str+"' name='textbook_id' class='st book' style='float: left;'>"+
@@ -302,6 +304,31 @@ function only(ele,arr){
 					"</div>"+
 					"<div class='delBtn pull-right' onclick=\"javascript:delTsxz( 'xz_"+str+"')\"><span>删除</span></div>"+
 				"</div>");
+		}else{
+			$("#tsxz").append("<div class='item' id='xz_"+str+"'>"+
+					"<span style='float: left;'>图书：</span>"+
+					"<select id='edu_"+str+"' name='textbook_id' class='st book' style='float: left;'>"+
+						"<option value=''>请选择书籍</option>"+
+						select_nr+
+					"</select>"+
+					"<div style='float: left;margin-left: 30px;' class='ts_radio'>"+
+						"<table style='width: 280px;'><tr>"+
+							"<td><input type='radio' name='zw_"+str+"' checked='checked' value='1'/>主编</td>"+
+							"<td><input type='radio' name='zw_"+str+"' value='2'/>副主编</td>"+
+							"<td><input type='radio' name='zw_"+str+"' value='3'/>编委</td>"+
+						"</tr></table>"+
+						"<input type='hidden' name='preset_position' value='zw_"+str+"'>"+
+					"</div>"+
+					"<div style='float: left;margin-left: 30px;'>"+
+						"<span style='float: left;'>上传教学大纲：</span>"+
+						"<div id='fileNameDiv_"+str+"' class='fileNameDiv'></div>"+
+						"<input type='hidden' name='syllabus_id' id='syllabus_id_"+str+"'/>"+
+						"<input type='hidden' name='syllabus_name' id='syllabus_name_"+str+"'/>"+
+						"<div class='scys' id='scjxdg_"+str+"'><span>上传文件</span></div>"+
+					"</div>"+
+					"<div class='delBtn pull-right' onclick=\"javascript:delTsxz( 'xz_"+str+"')\"><span>删除</span></div>"+
+				"</div>");
+		}
 		$('#edu_'+str).selectlist({
 	        width: 200,
 	        height: 30,
