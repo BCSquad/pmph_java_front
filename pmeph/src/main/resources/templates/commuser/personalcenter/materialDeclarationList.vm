@@ -89,9 +89,11 @@
                 </div>
                 <div class="bmcj3">
                     <div class="bmcjan3"><span>已结束</span></div>
+                    #if($!{c.iamin}>0 && $!{c.online_progress}==3)
                     <a class="abmcj" href="$!{contextpath}">
                 		<div class="bmcjan4">查看编写进度</div>
                 	</a>
+                	#end
                 </div>
                 
             </div>

@@ -156,16 +156,31 @@
 	     is_long,
 	     score,
 	     content,
-	     title
+	     title,
+	     is_self_rating
 	     )values(
 	     #{book_id},
 	     #{writer_id},
 	     #{is_long},
 	     #{score},
 	     #{content},
-	     #{title}
+	     #{title},
+	     #{is_self_rating}
+	     
+	     
 	     );   
 	</insert>
+	
+	<select id="queryEditor" parameterType="java.util.Map" resultType="Map">
+		select 
+		 *
+	     from 
+	     book_editor be
+	     where book_id = #{book_id}
+	     group by book_id
+	</select>
+	
+	
 	<!-- 查询登录人是否写过长评 -->
 	<select id="queryLoginLong" parameterType="java.util.Map" resultType="java.util.Map">
 	    select * from book_user_comment where writer_id=#{writer_id} and book_id=#{book_id} and is_long=1
@@ -181,7 +196,8 @@
 	     b.avatar
 	     from book_user_comment t 
 	     left join writer_user b
-	     on t.writer_id=b.id where t.book_id=#{book_id} and t.is_long =1 and is_hide=0
+	     on t.writer_id=b.id 
+	     where t.book_id=#{book_id} and t.is_long =1 and is_hide=0 and t.is_auth = 1
 	     <if test="start >= 0">
 	        limit #{start},2
 	     </if> 

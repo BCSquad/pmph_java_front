@@ -221,6 +221,14 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 	@Override
 	public String insertlong(Map<String, Object> map) {
 		// TODO Auto-generated method stub
+		Map<String,Object> editro_map = readDetailDao.queryEditor(map);
+		if (editro_map!= null && editro_map.size()>0 && map.get("writer_id").equals(editro_map.get("author_id"))) {
+			map.put("is_self_rating", 1);
+		}else{
+			map.put("is_self_rating", 0);
+		}
+		
+		
 		String returncode="";
 		int count=readDetailDao.insertlong(map);
 		if(count>0){
