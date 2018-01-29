@@ -85,6 +85,7 @@ jQuery.fn.extend({
         function v() {
             $("#" + c.controlId).find(".tabY a").mouseup(function () {
                 if (!($("#" + c.controlId).find(".enabled > .tabM").length > 0)) {
+                    $("#" + c.controlId).find(".currentYear").text($(this).text());
                     var a = z(Number($("#" + c.controlId).find(".currentYear").text()));
                     E(a);
                     u()
