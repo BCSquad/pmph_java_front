@@ -73,6 +73,7 @@ request.setAttribute("currentTime",datetime);
 	<input type="hidden" class="" id="pageSize" value="${pageSize }">
 	<input type="hidden" class="" id="pageType" value="${pageType }">
 	<input type="hidden" class="" id="logUserId" value="${logUserId }">
+	<input type="hidden" class="" id="selfLog" value="${selfLog }">
 
     <div class="content-wrapper">
         <div class="wrapper">
@@ -107,7 +108,7 @@ request.setAttribute("currentTime",datetime);
         <div class="content">
             <div class="left">
                 <ul class="dhl">
-                    <!-- <li id="dt" class="dtl pagetag"><a class="aher paged" >动态</a></li> -->
+                    <li id="dt" class="dtl pagetag"><a class="aher paged" >动态</a></li>
                     <c:if test="${selfLog == true }">
                     	<li id="jcsb" class="dtl pagetag"><a class="aher paged" >教材申报</a></li>
                     </c:if>

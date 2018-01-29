@@ -171,10 +171,10 @@
 		c.is_staging,
 		a.deadline as age_deadline,
 		a.material_name,
-		COUNT(b.id) AS exmember,
+		COUNT(distinct b.id) AS exmember,
 		a.id as material_id,
 		(TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) AS datebase,
-		count(c.id) as iamin,
+		count(distinct c.id) as iamin,
 		c.id as declaration_id,
 		dp.id as
 		notNullIfFirstManager,
@@ -212,15 +212,7 @@
 		select count(*) from
 		(
 		SELECT
-		max(c.online_progress) as online_progress,
-		c.is_staging,
-		a.deadline as age_deadline,
-		a.material_name,
-		COUNT(b.id) AS exmember,
-		b.material_id,
-		(TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) AS datebase,
-		count(c.id) as iamin,
-		c.id as declaration_id
+		a.id
 		FROM
 		material a
 		left join material_org o on a.id = o.material_id
@@ -605,10 +597,106 @@
 	</select>
 
 
+	<!-- 新动态查询 detail存储了所需信息 以json格式保存 -->
+	<select id="queryWriterUserTrendst" parameterType="PageParameter" resultType="Map">
+		select 
+			t.id 
+			,t.user_id
+			,t.is_public
+			,t.type
+			,t.detail
+			,t.cms_content_id
+			,t.book_id
+			,t.book_comment_id
+			,DATE_FORMAT(t.gmt_create,'%Y-%m-%d %H:%i') AS trendst_date
+			,t.gmt_create
+			,u.realname
+			,c.id as c_id
+			,c.category_id as c_category_id
+			,c.title as c_title
+			,c.mid as c_mid
+			,c.is_deleted as c_is_deleted
+			,pc.id as p_id
+			,pc.category_id as p_category_id
+			,pc.title as p_title
+			,pc.mid as p_mid
+			,b.bookname as b_bookname
+			,b.author as b_author
+			,b.score as b_score
+			,b.image_url as b_image_url
+			,bc.is_long as bc_is_long
+			,bc.score as bc_score
+			,bc.title as bc_title
+			,bc.content as bc_content
+			,bc.is_deleted as bc_is_deleted 
+		from 
+		writer_user_trendst t
+		left join cms_content c on t.cms_content_id = c.id
+		left join cms_content pc on c.parent_id = pc.id
+		left join book b on t.book_id = b.id
+		left join book_user_comment bc on t.book_comment_id = bc.id 
+		left join writer_user u on t.user_id = u.id
+		<where>
+			(is_public = 0 or type != 0 or user_id = #{parameter.logUserId})
+		</where>
+		order by t.gmt_create desc
+		
+		
+	</select>
+	
+	<select id="queryWriterUserTrendstCount" parameterType="PageParameter" resultType="Integer">
+		select count(*) from writer_user_trendst
+	</select>
 
 
-	<!-- 动态查询 -->
-	<select id="queryWriterUserTrendst" parameterType="PageParameter"
+
+	<!-- 产生一条动态 -->
+	<insert id="saveUserTrendst" parameterType="Map">
+		insert into
+		writer_user_trendst
+		(table_name,table_id,trendst_type,writer_user_id)
+		values(#{TrendstName},#{tableId},#{trendstType},#{writer_user_id})
+	</insert>
+
+	<!-- 通过图书纠错表主键查询被纠错图书的第一主编id -->
+	<select id="queryFirstEditorByBookCorrectionId" parameterType="String"
+		resultType="String">
+		SELECT
+		be.author_id
+		FROM
+		book_correction AS bc
+		Inner Join
+		book_editor AS be ON bc.book_id = be.book_id
+		WHERE
+		bc.id = #{id}
+	</select>
+	
+	<!-- 伪删除我的纠错 同时根据纠错表主键和纠错人id 同时满足才删除 -->
+	<update id="deleteMyCorrection" parameterType="Map">
+		update book_correction
+		set is_deleted = 1
+		where 
+		id= #{id} and user_id = #{logUserId}
+	</update>
+	
+	<update id="deleteMyBookComment" parameterType="Map">
+		update book_user_comment
+		set is_deleted = 1
+		where 
+		id= #{id} and writer_id = #{logUserId}
+	</update>
+
+	<select id="queryUserById" parameterType="String" resultType="Map">
+		select * from writer_user 
+		where id = #{id}
+	</select>
+
+
+
+</mapper>
+
+<!-- 动态查询 -->
+	<!-- <select id="queryWriterUserTrendst" parameterType="PageParameter"
 		resultType="Map">
 		select
 		t.id,t.table_name,t.table_id
@@ -740,7 +828,7 @@
 			 from cms_content cc
 			 inner join cms_category ct on cc.category_id = ct.id and ct.category_name = '医学随笔'
 			 where cc.author_id=#{parameter.logUserId}
-				  <!-- and cc.is_deleted !='1' -->
+				  and cc.is_deleted !='1'
 		order by cc.gmt_create
 		)sbwz
 		on t.table_name = sbwz.sbwz_type and
@@ -825,7 +913,7 @@
 		left join book_detail bd on bd.book_id = b.id
 		WHERE
 		a.writer_id =  #{parameter.logUserId} 
-		<!-- AND a.is_deleted =  '0'  -->
+		AND a.is_deleted =  '0' 
 		) wdsp
 		on t.table_name = wdsp.wdsp_type and t.table_id=wdsp.wdsp_id
 
@@ -936,52 +1024,4 @@
 		on t.table_name = wdsp.wdsp_type and t.table_id=wdsp.wdsp_id
 		where t.writer_user_id = #{parameter.logUserId}
 		)t
-	</select>
-
-
-
-
-	<!-- 产生一条动态 -->
-	<insert id="saveUserTrendst" parameterType="Map">
-		insert into
-		writer_user_trendst
-		(table_name,table_id,trendst_type,writer_user_id)
-		values(#{TrendstName},#{tableId},#{trendstType},#{writer_user_id})
-	</insert>
-
-	<!-- 通过图书纠错表主键查询被纠错图书的第一主编id -->
-	<select id="queryFirstEditorByBookCorrectionId" parameterType="String"
-		resultType="String">
-		SELECT
-		be.author_id
-		FROM
-		book_correction AS bc
-		Inner Join
-		book_editor AS be ON bc.book_id = be.book_id
-		WHERE
-		bc.id = #{id}
-	</select>
-	
-	<!-- 伪删除我的纠错 同时根据纠错表主键和纠错人id 同时满足才删除 -->
-	<update id="deleteMyCorrection" parameterType="Map">
-		update book_correction
-		set is_deleted = 1
-		where 
-		id= #{id} and user_id = #{logUserId}
-	</update>
-	
-	<update id="deleteMyBookComment" parameterType="Map">
-		update book_user_comment
-		set is_deleted = 1
-		where 
-		id= #{id} and writer_id = #{logUserId}
-	</update>
-
-	<select id="queryUserById" parameterType="String" resultType="Map">
-		select * from writer_user 
-		where id = #{id}
-	</select>
-
-
-
-</mapper>
+	</select> -->

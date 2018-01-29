@@ -48,7 +48,7 @@ String contextpath=request.getContextPath();
             <div class="top1">
             	<a  onclick="bfRedirect('personalhomepage/tohomepage.action')">个人中心 </a>
             	> 
-            	<a onclick="bfRedirect('personalhomepage/tohomepageone.action')">教材申报 </a>
+            	<a onclick="bfRedirect('personalhomepage/tohomepage.action?pagetag=jcsb')">教材申报 </a>
             	> 
             	<a >申报进度</a>
             	>选择编委

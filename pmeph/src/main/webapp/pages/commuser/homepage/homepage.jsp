@@ -187,7 +187,7 @@
             <div class="doc"></div>
             <div class="title">
                 <span class="doc_content">医学随笔</span>
-                <span class="total">全部>></span>
+                <span class="total" style="cursor: pointer;"  onclick="window.location.href='${ctx}/cms/list.action'">全部>></span>
             </div>
             <c:forEach items="${listArt}" var="list" varStatus="status">
                 <c:if test="${status.index==0}">
@@ -198,10 +198,14 @@
                             <div class="tt"><span class="a6_content">${list.title}</span></div>
                             <div class="a6_div2">${list.summary}</div>
                             <div>
-                                <div class="a6_head_div"><img src="${ctx}/statics/testfile/a6_photo.png"
-                                                              class="a6_head"></div>
+                                <div class="a6_head_div">
+                                <c:if test="${list.avatar=='DEFAULT'}">
+                                <img src="${ctx}/statics/testfile/a6_photo.png" class="a6_head"></c:if>
+                				<c:if test="${list.avatar!='DEFAULT'}">
+                				<img src="${ctx}/image/${list.avatar}.action" class="a6_head"></c:if>
+                                </div>
                                 <div class="a6_name_div"><span>${list.realname}</span></div>
-                                <div class="a6_time_div"><span>${list.gmt_create}</span></div>
+                                <div class="a6_time_div"><span>${list.auth_date}</span></div>
                             </div>
                         </div>
                     </div>
@@ -216,9 +220,15 @@
                             <div class="tt"><span class="a6_content">${list.title}</span></div>
                             <div class="a6_div2">${list.summary}</div>
                             <div>
-                                <div class="a6_head_div"><img src="${ctx}/statics/testfile/a6_photo.png"class="a6_head"></div>
+                                <div class="a6_head_div">
+                                
+                                	<c:if test="${list.avatar=='DEFAULT'}">
+                                <img src="${ctx}/statics/testfile/a6_photo.png" class="a6_head"></c:if>
+                				<c:if test="${list.avatar!='DEFAULT'}">
+                				<img src="${ctx}/image/${list.avatar}.action" class="a6_head"></c:if>
+                                </div>
                                 <div class="a6_name_div"><span>${list.realname}</span></div>
-                                <div class="a6_time_div"><span>${list.gmt_create}</span></div>
+                                <div class="a6_time_div"><span>${list.auth_date}</span></div>
                             </div>
                         </div>
                     </div>

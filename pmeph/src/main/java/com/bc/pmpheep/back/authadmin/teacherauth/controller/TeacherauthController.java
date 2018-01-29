@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -55,11 +56,14 @@ public class TeacherauthController extends BaseController {
 	 */
 	@RequestMapping(value = "/queryTeacherAuth",method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> queryTeacherAuth(HttpServletRequest request){
+	public Map<String,Object> queryTeacherAuth(
+			@RequestParam(value="pageNum",defaultValue="1")Integer pageNum
+			,@RequestParam(value="pageSize",defaultValue="10")Integer pageSize
+			,HttpServletRequest request){
 		Map<String, Object> user = getUserInfo();
 		BigInteger orgUserId=(BigInteger) user.get("id");
-		Integer pageNum = Integer.parseInt(request.getParameter("pageNum"));
-		Integer pageSize = Integer.parseInt(request.getParameter("pageSize"));
+		//Integer pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		//Integer pageSize = Integer.parseInt(request.getParameter("pageSize"));
 		String queryName = request.getParameter("queryName");
 		String queryStatus = request.getParameter("queryStatus");
 		String contextpath = request.getParameter("contextpath");

@@ -486,7 +486,7 @@ function buttAdd(type){
 			dataType:"json",
 		    success: function(msg) {
 			    if(msg=='OK'){
-			    	window.location.href=contextpath+"personalhomepage/tohomepageone.action?pagetag=jcsb";
+			    	window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=jcsb";
 			    }
 		    }
 		});
@@ -495,7 +495,7 @@ function buttAdd(type){
 
 //放弃
 function buttGive(){
-	window.location.href=contextpath+"personalhomepage/tohomepageone.action?pagetag=jcsb";
+	window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=jcsb";
 }
 /**
  * 表单校验方法
