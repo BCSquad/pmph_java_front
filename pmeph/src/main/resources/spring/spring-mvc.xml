@@ -55,8 +55,8 @@
                     <value>/booksearch/likeSwitch* -> 1</value><!--书籍查询 -->
                     <value>/teacherCertification/* -> 1</value><!--学校教师认证 -->
                     <value>/bookdeclare/* -> 1</value><!--出书申报 -->
-                    <value>/survey/* -> 1</value><!--出书申报 -->
-
+                    <value>/survey/* -> 1</value><!-- 出书申报 -->
+                    
 
                     <!--机构用户-->
                     <value>/user/* -> 2</value><!--用户管理（机构用户） -->
