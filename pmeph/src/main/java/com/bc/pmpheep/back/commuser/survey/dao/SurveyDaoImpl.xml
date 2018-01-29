@@ -74,6 +74,10 @@
 		(user_id,question_id,option_content,survey_id)
 		values(#{userId},#{questionId},#{inputValue},#{surveyId})
 	</insert>
-
+	
+	<!-- 按用户ID删除 -->
+    <delete id="deleteUserAnswer" parameterType="java.lang.Long">
+    	DELETE FROM `survey_question_answer` WHERE `user_id`=#{userId};
+    </delete>
 
 </mapper>

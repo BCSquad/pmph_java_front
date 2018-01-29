@@ -90,7 +90,8 @@ public class SurveyController extends BaseController {
         Map<String, Object> writerUser = this.getUserInfo();
         // Long userId = new Long(String.valueOf(writerUser.get("id")));
         long userId = 1L;
-
+        // 先删除用户回答
+        surveyService.deleteUserAnswer(userId);
         String surveyId = request.getParameter("surveyId");
         // 先获取所有单选的name集合
         String radios[] = request.getParameterValues("radioValues");
