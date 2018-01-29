@@ -436,6 +436,10 @@ public class MaterialDetailController extends BaseController{
 		gezlList = this.mdService.queryPerson(queryMap);
 		String material_id = gezlList.get(0).get("material_id").toString();
 		queryMap.put("material_id", material_id);
+		//教材信息
+		Map<String,Object> materialMap = new HashMap<String,Object>();
+		materialMap = this.mdService.queryMaterialbyId(material_id);
+		queryMap.put("is_multi_books", materialMap.get("is_multi_books"));
 		//2.作家申报职位暂存
 		List<Map<String,Object>> tssbList = new ArrayList<Map<String,Object>>();
 		tssbList=this.mdService.queryTssbZc(queryMap);

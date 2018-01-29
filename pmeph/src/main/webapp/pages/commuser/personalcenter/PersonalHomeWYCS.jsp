@@ -465,7 +465,7 @@ request.setAttribute("currentTime",datetime);
                     <br/>
                     <ul class="scul">
                         <c:forEach items="${listmygroup}" begin='0' end='8' var="listmyg" varStatus="status">
-                            <a target="_blank" class="not-like-an-a" href="${ctx}/group/toMyGroup.action?groupId=${listmyg.group_id}">
+                            <a  class="not-like-an-a" href="${ctx}/group/toMyGroup.action?groupId=${listmyg.group_id}">
 	                            <li class="wdxz" title="${listmyg.group_name}">
 	                            	<img src="<%=path %>/image/${listmyg.group_image}.action" class="xztp">
 	                                <br/>
