@@ -48,7 +48,7 @@
 	                       			<img src="${ctx}/statics/testfile/p2.png" />
 	                   			</div>
 
-	                    		<p  class="content-title">${cms.title }</p>
+	                    		<p  class="content-title"  onclick="window.location.href='${ctx}/articledetail/toPage.action?wid=${cms.id }'">${cms.title }</p>
 	                    		<p  class="content-text">
 	                            		${cms.summary }
 	                    		<div  class="foot">
@@ -64,7 +64,7 @@
 		                                <img src="${ctx}/statics/testfile/mi.png" class="ryxx_tx"></c:if>
 		                				<c:if test="${cms.avatar!='DEFAULT'}">
 		                				<img src="${ctx}/image/${cms.avatar}.action" class="ryxx_tx"></c:if>
-					                    <span class="ryxx_xm">${cms.realname }</span>
+					                    <span class="ryxx_xm" style="cursor:pointer;" onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?userId=${cms.userId }'">${cms.realname }</span>
 			                    		<span class="ryxx_sj">${cms.authdate }</span>
 			                    	</div>
 			                    </div>

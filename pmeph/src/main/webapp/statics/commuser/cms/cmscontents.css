@@ -65,8 +65,9 @@
     position:absolute;
     top:10px;
     left:-6px;
-    color:white;
-    background-image:url("../statics/image/wenzhangtuijian.png");
+    color: #ffffff;
+    background-image:url("../../testfile/recommend.png");
+    cursor:pointer;
 }
 .notes .item .content{
     width:284px;
@@ -83,6 +84,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow:ellipsis;
+   	cursor: pointer;
 }
 .notes .item .content-text{
     padding-left: 10px;

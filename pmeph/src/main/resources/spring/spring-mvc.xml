@@ -57,6 +57,9 @@
                     <value>/teacherCertification/* -> 1</value><!--学校教师认证 -->
                     <value>/bookdeclare/* -> 1</value><!--出书申报 -->
                     <value>/survey/* -> 1</value><!--出书申报 -->
+                    <value>/articledetail/insertComment* -> 1</value><!--文章详情页面新增评论 -->
+                    <value>/articledetail/addmark* -> 1</value><!--文章详情页添加收藏 -->
+                    <value>/articledetail/addlikes* -> 1</value><!--文章详情页点赞 -->
 
 
                     <!--机构用户-->

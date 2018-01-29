@@ -78,10 +78,17 @@ function toAudit(id,type){
 			async: false,
 			dataType:"json",
 		    success: function(msg) {
-			    if(msg=='OK'){
+			    if(msg.msg=='OK'){
 			    	window.location.href=contextpath+"applyDocAudit/toPage.action";
 			    }
 		    }
 		});
+}
+
+
+function toMain(){
+	var material_id=$("#material_id").val();
+	var view_audit=$("#view_audit").val();
+	window.location.href=contextpath+"dataaudit/toPage.action?material_id="+material_id+"&view_audit="+view_audit;
 }
 

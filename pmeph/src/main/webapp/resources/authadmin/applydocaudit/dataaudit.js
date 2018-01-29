@@ -1,7 +1,4 @@
 $(function(){
-	
-	
-	
 	$('#page-size-select').selectlist({
         zIndex: 10,
         width: 110,
@@ -88,6 +85,11 @@ function queryBtnClick(){
 
 function exportExcel(){
     window.location.href =contextpath+'excel/download.action?service=dataAuditExcel&queryName='+$("#search-name-temp").val()+'&material_id='+$("#material_id").val();
+}
+
+//返回
+function return_on(){
+	window.location.href=contextpath+"applyDocAudit/toPage.action";
 }
 
 
