@@ -314,7 +314,7 @@
 									</div></td>
 								<td>
 									<div style="margin-bottom: 25px; margin-left: 20px">
-										<font class="td-font-3">请填写与与教师资格证上一致的真实姓名</font>
+										<font class="td-font-3">请填写与教师资格证上一致的真实姓名</font>
 									</div>
 								</td>
 							</tr>
