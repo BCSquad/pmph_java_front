@@ -62,15 +62,17 @@ $(document).ready(function () {
 
 
 //点击显示评论弹窗
-function showup(id,book_id,is_long) {
-	debugger;
-	if(is_long=='true'){
-		window.location.href=contextpath + 'readdetail/todetail.action?state=write&id='+book_id;
-	}else if(is_long=='false'){
-		 $("#comm_id").val(id);
-		 $("#bookmistake").show();
-	}
-	 
+function showup(id) {
+	 $.ajax({
+	        type: 'post',
+	        url: contextpath + 'personalhomepage/tologin.action',
+	        async: false,
+	        dataType: 'json',
+	        success: function (json) {
+	        	 $("#bookmistake").show();
+	        	 $("#comm_id").val(id);
+	        }
+	    });
 }
 
 //点击弹窗隐藏

@@ -28,7 +28,23 @@
 		
 		<li class="leftlb">
 		
-		#if($!{c.iamin}==0 && $!{c.datebase}<0 && $!{c.is_all_textbook_published}==false && $!{c.is_force_end}==false)
+		#if($!{c.datebase}>0 || $!{c.is_all_textbook_published}==true || $!{c.is_force_end}==true )
+        	<div class="mleft3">
+            <div class="ysbrs3">
+                <div class="baomingrenshu3"><span class="canjiarenshu3">$!{c.exmember}</span><span>人</span>
+                    <br/><span class="ybmcj3">已报名参加</span></div>
+                </div>
+                <div class="bmcj3">
+                    <div class="bmcjan3"><span>已结束</span></div>
+                    #if($!{c.iamin}>0 && $!{c.online_progress}==3)
+                    <a class="abmcj" href="$!{contextpath}">
+                		<div class="bmcjan4">查看编写进度</div>
+                	</a>
+                	#end
+                </div>
+                
+            </div>
+        #elseif($!{c.iamin}==0 && $!{c.datebase}<0 && $!{c.is_all_textbook_published}==false && $!{c.is_force_end}==false)
 			<div class="mleft">
                 <div class="ysbrs">
                     <div class="baomingrenshu"><span
@@ -81,22 +97,7 @@
                     		查看申报表</span></div></a>
                 </div>
             </div>
-        #elseif($!{c.datebase}>0 || $!{c.is_all_textbook_published}==true || $!{c.is_force_end}==true )
-        	<div class="mleft3">
-            <div class="ysbrs3">
-                <div class="baomingrenshu3"><span class="canjiarenshu3">$!{c.exmember}</span><span>人</span>
-                    <br/><span class="ybmcj3">已报名参加</span></div>
-                </div>
-                <div class="bmcj3">
-                    <div class="bmcjan3"><span>已结束</span></div>
-                    #if($!{c.iamin}>0 && $!{c.online_progress}==3)
-                    <a class="abmcj" href="$!{contextpath}">
-                		<div class="bmcjan4">查看编写进度</div>
-                	</a>
-                	#end
-                </div>
-                
-            </div>
+        
 		#end
 
             <div class="mright">
@@ -109,8 +110,12 @@
                 </div>
                 <div class="rxia">
                     <div class="rxian">截止日期：$!{c.age_deadline}</div>
-                    #if(${c.notNullIfFirstManager}&&$!{c.datebase}<0)
-	                	<div class="btn-chooseEditor" onclick="chooseEditor('$!{c.textbook_id}')">选编委>></div>
+                    #if(${c.notNullIfFirstManager})
+                    	#if($!{c.datebase}>0 || $!{c.is_all_textbook_published}==true || $!{c.is_force_end}==true )
+	                		<div class="btn-chooseEditor" onclick="chooseEditor('$!{c.textbook_id}')">查看编委>></div>
+	                	#else
+	                		<div class="btn-chooseEditor" onclick="chooseEditor('$!{c.textbook_id}')">选编委>></div>
+	                	#end
 	                #end
                 </div>
                 

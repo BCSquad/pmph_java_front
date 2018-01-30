@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.survey.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -55,5 +56,14 @@ public class SurveyServiceImpl implements SurveyService {
 	public void saveInputAnswer(Map<String, Object> map2) {
 		surveyDao.saveInputAnswer(map2);
 		
+	}
+
+	//获取调查基本信息
+	@Override
+	public Map<String, Object> getSurveyBaseInfo(long surveyId) {
+		 Map<String,Object> paraMap =  new HashMap<String,Object>();
+		 paraMap.put("surveyId", surveyId);
+		 Map<String, Object> map  = surveyDao.getSurveyBaseInfo(paraMap);
+		return map;
 	}
 }

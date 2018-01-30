@@ -346,3 +346,8 @@
     float: left;
     padding-left: 20px;
 }
+
+a {
+    text-decoration: blink;
+    color: #333333;
+}

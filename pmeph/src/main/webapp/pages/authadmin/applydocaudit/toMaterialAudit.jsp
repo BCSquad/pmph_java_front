@@ -17,8 +17,6 @@
 <script type="text/javascript" src="${ctx}/resources/authadmin/applydocaudit/materialAudit.js"></script>
 </head>
 <body>
-<input type="hidden" id="material_id" value="${material_id }">
-<input type="hidden" id="view_audit" value="${view_audit }">
 <div style="width: 100%;padding: 0;margin: 0;height: 110px;border: none;overflow: hidden;">
 	<jsp:include page="/pages/comm/headGreenBackGround.jsp"></jsp:include> 
 </div>
@@ -478,22 +476,14 @@
 			</div>
 			<hr style=" height:1px;border:none;border-top:1px #999999 dashed;margin-top: 30px;">
 				<div class="button">
-				<c:choose>
-					 <c:when test="${view_audit=='audit'}">
-						<div class="div_butt">
+				<c:if test="${view_audit=='audit'}">
+					<div class="div_butt">
 						<%-- <div class="bt_tj" onclick="javascript:toAudit('${gezlList.id}','3')">通过</div>
 						<div class="bt_tj" onclick="javascript:toAudit('${gezlList.id}','2')">驳回</div> --%>
 						<div class="bt_tj" onclick="toAudit('${gezlList.id}','3')">通过</div>
-						<div class="bt_tj" onclick="toAudit('${gezlList.id}','2')">退回</div>
-						<div class="bt_tj" onclick="toMain()">返回</div>
+						<div class="bt_tj" onclick="toAudit('${gezlList.id}','2')">驳回</div>
 					</div>
-					 </c:when>
-					 <c:otherwise>
-					 	<div class="div_butt">
-					 		<div class="bt_tj" onclick="toMain()">返回</div>
-					 	</div>
-					 </c:otherwise>	
-				</c:choose>
+				</c:if>
 				</div>
 			</div>
 	</div>

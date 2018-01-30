@@ -200,8 +200,8 @@
 			test="parameter.online_progress!=null and parameter.online_progress!= ''">AND c.online_progress=#{parameter.online_progress}</if>
 		<if test="parameter.bookname!=null and parameter.bookname!= ''">AND a.material_name like
 			CONCAT('%',#{parameter.bookname},'%')</if>
-		<if test="parameter.dateinfo!=null and parameter.dateinfo ==1 ">AND (TO_DAYS(NOW()) - TO_DAYS(a.deadline)) &lt; 0</if>
-		<if test="parameter.dateinfo!=null and parameter.dateinfo ==2 ">AND (TO_DAYS(NOW()) - TO_DAYS(a.deadline)) &gt; 0 </if>
+		<if test="parameter.dateinfo!=null and parameter.dateinfo ==1 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &lt; 0 and a.is_all_textbook_published = 0 and a.is_force_end = 0 )</if>
+		<if test="parameter.dateinfo!=null and parameter.dateinfo ==2 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &gt; 0 or a.is_all_textbook_published = 1 or a.is_force_end = 1 )</if>
 		GROUP BY
 		(a.id)
 		limit ${start},${pageSize}
@@ -231,8 +231,8 @@
 			test="parameter.online_progress!=null and parameter.online_progress!= ''">AND c.online_progress=#{parameter.online_progress}</if>
 		<if test="parameter.bookname!=null and parameter.bookname!= ''">AND a.material_name like
 			CONCAT('%',#{parameter.bookname},'%')</if>
-		<if test="parameter.dateinfo!=null and parameter.dateinfo ==1 ">AND (TO_DAYS(NOW()) - TO_DAYS(a.deadline)) &lt; 0</if>
-		<if test="parameter.dateinfo!=null and parameter.dateinfo ==2 ">AND (TO_DAYS(NOW()) - TO_DAYS(a.deadline)) &gt; 0 </if>
+		<if test="parameter.dateinfo!=null and parameter.dateinfo ==1 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &lt; 0 and a.is_all_textbook_published = 0 and a.is_force_end = 0 )</if>
+		<if test="parameter.dateinfo!=null and parameter.dateinfo ==2 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &gt; 0 or a.is_all_textbook_published = 1 or a.is_force_end = 1 )</if>
 		GROUP BY
 		(a.id)
 		)t

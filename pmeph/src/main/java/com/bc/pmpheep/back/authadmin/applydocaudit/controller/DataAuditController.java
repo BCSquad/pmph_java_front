@@ -201,7 +201,6 @@ public class DataAuditController extends BaseController{
 			mav.addObject("zjxsList", zjxsList);
 			mav.addObject("zjkzqkList", zjkzqkList);
 			mav.addObject("view_audit", view_audit);
-			mav.addObject("material_id", material_id);
 			return mav;
 		}
 		
