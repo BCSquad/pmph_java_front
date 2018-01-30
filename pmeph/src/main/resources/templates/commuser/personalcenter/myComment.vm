@@ -73,7 +73,7 @@
             <div id="read-more"></div>
 	           <div class="bookC_right_a">
 	                    <div class="time-a">$!{o.gmt_update}</div> 
-	                    <a class="link_a"  onclick="showup('$!{o.id}','$!{c.book_id}','$!{o.is_long}')">修改</a>
+	                    <a class="link_a"  onclick="showup('$!{o.id}')">修改</a>
 	                    <a class="link_a" onclick="DelMyComm('$!{o.id}');" >删除</a>
 	            </div> 
 		    </div>

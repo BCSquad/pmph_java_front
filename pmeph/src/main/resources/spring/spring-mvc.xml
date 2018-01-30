@@ -58,16 +58,13 @@
                     <value>/teacherCertification/* -> 1</value><!--学校教师认证 -->
                     <value>/bookdeclare/* -> 1</value><!--出书申报 -->
                     <value>/survey/* -> 1</value><!--出书申报 -->
-                    <value>/articledetail/insertComment* -> 1</value><!--文章详情页面新增评论 -->
-                    <value>/articledetail/addmark* -> 1</value><!--文章详情页添加收藏 -->
-                    <value>/articledetail/addlikes* -> 1</value><!--文章详情页点赞 -->
-
+					<value>/chooseEditor/* -> 1</value><!--第一主编选择编委 -->
 
                     <!--机构用户-->
                     <value>/user/* -> 2</value><!--用户管理（机构用户） -->
                     <value>/schedule/* -> 2</value><!--机构用户待办事项 -->
                     <value>/applyDocAudit/* -> 2</value><!--申报资料审核（机构用户） -->
-                    <value>/chooseEditor/* -> 2</value><!--第一主编选择编委 -->
+                    
                     <value>/teacherauth/* -> 2</value><!--教师认证 -->
 
                 </set>

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.commuser.articlepage.dao.ArticleSearchDao;
+import com.bc.pmpheep.back.plugin.PageParameter;
 
 @Service("com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService")
 public class ArticleSearchServiceImpl implements ArticleSearchService {
@@ -33,7 +34,7 @@ public class ArticleSearchServiceImpl implements ArticleSearchService {
 	}
 
 	/**
-	 * 查询移动多少条文章数据
+	 * 查询移动多少条文章数据 此方法废弃
 	 */
 	@Override
 	public List<Map<String, Object>> queryList() {
@@ -141,5 +142,17 @@ public class ArticleSearchServiceImpl implements ArticleSearchService {
 	public void del(String id) {
 		// TODO Auto-generated method stub
 		articleSearchDao.del(id);
+	}
+
+	@Override
+	public List<Map<String, Object>> queryArticleByAdi(PageParameter<Map<String, Object>> pageParameter) {
+		List<Map<String, Object>> result_list = articleSearchDao.queryArticleByAdi(pageParameter);
+		return result_list;
+	}
+
+	@Override
+	public int queryArticleByAdiCount(PageParameter<Map<String, Object>> pageParameter) {
+		int count = articleSearchDao.queryArticleByAdiCount(pageParameter);
+		return count;
 	}
 }

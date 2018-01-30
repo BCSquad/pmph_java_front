@@ -74,15 +74,8 @@ public class CmsContentVO implements java.io.Serializable {
     private String authdate;
     //头像路径 
     private String avatar;
-  //对应的用户id
-    private String userId;
+    
 
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
 	public String getAvatar() {
 		return avatar;
 	}
