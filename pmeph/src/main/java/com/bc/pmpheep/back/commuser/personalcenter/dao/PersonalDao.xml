@@ -178,6 +178,8 @@
 		c.id as declaration_id,
 		dp.id as
 		notNullIfFirstManager,
+		dp.rank,
+		dp.chosen_position,
 		dp.textbook_id
 		FROM
 		material a
@@ -187,7 +189,8 @@
 		LEFT JOIN declaration c ON a.id = c.material_id and c.user_id =
 		#{parameter.logUserId} and c.online_progress != 2
 		LEFT JOIN dec_position dp on c.id = dp.declaration_id and dp.chosen_position
-		in (4,12) and dp.rank=1
+		not in (0,1,8,9)
+		<!-- in (4,12) and dp.rank=1 -->
 
 		WHERE
 		a.is_deleted = '0'
@@ -200,7 +203,7 @@
 			test="parameter.online_progress!=null and parameter.online_progress!= ''">AND c.online_progress=#{parameter.online_progress}</if>
 		<if test="parameter.bookname!=null and parameter.bookname!= ''">AND a.material_name like
 			CONCAT('%',#{parameter.bookname},'%')</if>
-		<if test="parameter.dateinfo!=null and parameter.dateinfo ==1 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &lt; 0 and a.is_all_textbook_published = 0 and a.is_force_end = 0 )</if>
+		<if test="parameter.dateinfo!=null and parameter.dateinfo ==1 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &lt;= 0 and a.is_all_textbook_published = 0 and a.is_force_end = 0 )</if>
 		<if test="parameter.dateinfo!=null and parameter.dateinfo ==2 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &gt; 0 or a.is_all_textbook_published = 1 or a.is_force_end = 1 )</if>
 		GROUP BY
 		(a.id)
@@ -231,7 +234,7 @@
 			test="parameter.online_progress!=null and parameter.online_progress!= ''">AND c.online_progress=#{parameter.online_progress}</if>
 		<if test="parameter.bookname!=null and parameter.bookname!= ''">AND a.material_name like
 			CONCAT('%',#{parameter.bookname},'%')</if>
-		<if test="parameter.dateinfo!=null and parameter.dateinfo ==1 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &lt; 0 and a.is_all_textbook_published = 0 and a.is_force_end = 0 )</if>
+		<if test="parameter.dateinfo!=null and parameter.dateinfo ==1 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &lt;= 0 and a.is_all_textbook_published = 0 and a.is_force_end = 0 )</if>
 		<if test="parameter.dateinfo!=null and parameter.dateinfo ==2 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &gt; 0 or a.is_all_textbook_published = 1 or a.is_force_end = 1 )</if>
 		GROUP BY
 		(a.id)
