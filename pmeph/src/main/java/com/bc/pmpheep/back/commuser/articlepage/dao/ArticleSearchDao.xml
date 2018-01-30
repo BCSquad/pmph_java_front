@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bc.pmpheep.back.commuser.articlepage.dao.ArticleSearchDao" >
+
+<!-- 查询文章列表 20180129改 代替以下其他查询 -->
+<select id="queryArticleByAdi" parameterType="PageParameter" resultType="Map">
+	select 
+		    t.title, 
+		    t.summary,
+		    t.clicks,
+		    t.id,
+		    t.likes,
+		    t.mid,
+		    DATE_FORMAT(t.gmt_create,'%Y-%m-%d %H:%i') as gmt_create,
+		    t.comments,
+		    b.realname,
+		    b.avatar,
+		    a.id as cms_user_like
+		    from cms_content t
+		    left join writer_user b on t.author_id=b.id
+		    left join cms_user_like a on a.content_id=t.id
+		    where 
+		    t.category_id='1'
+		    and t.is_hide = 0 and t.is_published = 1 and t.auth_status = 2 and t.is_deleted = 0
+		    <if test="parameter.searchTextArray != null ">
+				<foreach collection="parameter.searchTextArray" open=" and( "  close=")" separator=" and "  item="searchText">
+					(
+					t.title like concat('%',#{searchText},'%')
+					or t.summary like concat('%',#{searchText},'%')
+					or b.realname like concat('%',#{searchText},'%')
+					)
+				</foreach>
+			</if>
+		    limit ${start},${pageSize}
+</select>
+
+<!-- 查询文章总数 20180129改 代替以下其他查询 -->
+<select id="queryArticleByAdiCount"  parameterType="PageParameter" resultType="Integer">
+		select 
+		    count(t.id)
+		     from cms_content t
+		    left join writer_user b on t.author_id=b.id
+		    left join cms_user_like a on a.content_id=t.id
+		    where 
+		    t.category_id='1'
+		    and t.is_hide = 0 and t.is_published = 1 and t.auth_status = 2 and t.is_deleted = 0
+		    <if test="parameter.searchTextArray != null ">
+				<foreach collection="parameter.searchTextArray" open=" and( "  close=")" separator=" and "  item="searchText">
+					(
+					t.title like concat('%',#{searchText},'%')
+					or t.summary like concat('%',#{searchText},'%')
+					or b.realname like concat('%',#{searchText},'%')
+					)
+				</foreach>
+			</if>
+</select>
+
+
+
 <!-- 初始化文章搜索页面 -->
  <select id="searchArticle" parameterType="java.util.Map" resultType="java.util.Map">
       select 
@@ -22,7 +78,7 @@
  </select>
  <!-- 查询一共有多少条数据 -->
  <select id="queryList" resultType="java.util.Map">
-   select * from cms_content
+   select * from cms_content where t.category_id='1'
  </select>
  <!-- 根据ID增加/取消点赞数 -->
  <update  id="changeLikes" parameterType="java.util.Map">
@@ -61,7 +117,11 @@
 		    from cms_content t
 		    left join writer_user b on t.author_id=b.id
 		    left join cms_user_like a on a.content_id=t.id
-		    where t.title like #{title} limit 0,5
+		    where 
+		    t.category_id='1'
+		    and t.is_hide = 0 and t.is_published = 1 and auth_status = 2 and is_deleted = 0
+		    and t.title like #{title} 
+		    limit #{startrow},#{endrow} 
  </select>
  <!-- 查询登录用户是否对指定的文章点过赞 -->
  <select id="querydExit" parameterType="java.util.Map" resultType="java.util.Map">

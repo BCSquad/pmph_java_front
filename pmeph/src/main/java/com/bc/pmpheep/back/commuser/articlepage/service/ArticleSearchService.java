@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.bc.pmpheep.back.plugin.PageParameter;
+
 public interface ArticleSearchService {
 
 	/**
@@ -66,4 +68,22 @@ public interface ArticleSearchService {
 	 * @param map
 	 */
 	void del(String id);
+	
+	/**
+	 * 查询文章列表 以上查询方法都不用 用此方法代替
+	 * @param pageParameter
+	 * @author liudi
+	 * @return
+	 */
+	List<Map<String, Object>> queryArticleByAdi(PageParameter<Map<String, Object>> pageParameter);
+	
+	/**
+	 * 查询文章总数 以上查询方法都不用 用此方法代替
+	 * @param pageParameter
+	 * @author liudi
+	 * @return
+	 */
+	int queryArticleByAdiCount(PageParameter<Map<String, Object>> pageParameter);
+	
+	
 }
