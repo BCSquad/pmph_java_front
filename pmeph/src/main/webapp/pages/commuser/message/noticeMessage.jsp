@@ -98,7 +98,7 @@
 		                    </td>
 		                </tr>
 		                <tr style="width: 30%">
-		                    <td colspan="2" class="title">${message.title}</td>
+		                    <td colspan="2" class="title">《${message.material_name}》请知悉</td>
 		                    <td class="buttonDetail">
 		                    	<c:if test="${message.msgType==4}">
 		                        <div class="buttonAccept"><a href="${ctx}/message/noticeMessageDetail.action?materialId=${message.fId}&&cmsId=${message.id}">查看详情</a></div>

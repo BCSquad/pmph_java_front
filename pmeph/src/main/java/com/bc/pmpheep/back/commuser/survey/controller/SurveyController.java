@@ -54,6 +54,8 @@ public class SurveyController extends BaseController{
 		ModelAndView mv = new ModelAndView();
 		String surveyIdStr = request.getParameter("surveyId");
 		long surveyId = new Long(surveyIdStr);
+		//获取调查基本信息
+		Map<String,Object> mapSurvey = surveyService.getSurveyBaseInfo(surveyId);
 		//查询该调查包含的所有题目
 		List<Map<String,Object>> list = surveyService.getSurvey(surveyId);
 		List<Map<String,Object>> listResult = new ArrayList<Map<String,Object>>();
@@ -76,6 +78,7 @@ public class SurveyController extends BaseController{
 			}
 		}
 		
+		mv.addObject("mapSurvey",mapSurvey);
 		mv.addObject("listSesult",listResult);
 		mv.addObject("surveyId",surveyId);
 		mv.addObject("listSize",listResult.size());

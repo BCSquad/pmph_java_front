@@ -15,10 +15,10 @@ $(function(){
 //		alert();
 //	});
 //	
-	function q1(id,username){
+	/*function q1(id,username){
 		alert(id);
 		alert(username);
-	}
+	}*/
 	
 	$(".showTalk").click(function(){
 		var frendid = this.id;
@@ -27,7 +27,7 @@ $(function(){
 		$(".personMessageTitle").html("你与"+username+"的私信窗口");
 		$.ajax({
 	        type:'get',
-	        url :contxtpath+'/mymessage/getDialogue.action',
+	        url :contextpath+'/mymessage/getDialogue.action',
 	        contentType: 'application/json',
 	        dataType:'json',
 	        data:{
@@ -47,7 +47,7 @@ $(function(){
 	        				html = 
 		        				"<div class='oneTalk'> "+
 		                        "<div class='headAndNameRight float_right'> "+
-		                            "<div class='headDiv'><img class='headPicture' src='"+contxtpath+responsebean[i].avatar+"'/></div> "+
+		                            "<div class='headDiv'><img class='headPicture' src='"+contextpath+responsebean[i].avatar+"'/></div> "+
 		                            "<div class='talkName'><text>"+responsebean[i].senderName+"</text></div> "+
 		                        "</div> "+
 		                        "<div class='talkDivRight float_right' > "+
@@ -63,7 +63,7 @@ $(function(){
 	        				html =
 	        				"<div class='oneTalk'> "+
 		                        "<div class='headAndNameLeft float_left'> "+
-		                            "<div class='headDiv'><img class='headPicture' src='"+contxtpath+"/"+responsebean[i].avatar+"'/></div> "+
+		                            "<div class='headDiv'><img class='headPicture' src='"+contextpath+"/"+responsebean[i].avatar+"'/></div> "+
 		                            "<div class='talkName'><text>"+responsebean[i].senderName+"</text></div> "+
 		                        "</div> "+
 	
@@ -86,7 +86,7 @@ $(function(){
 	        	//更新消息状态
 	        	$.ajax({
 	    	        type:'get',
-	    	        url :contxtpath+'/mymessage/updateMyTalk.action',
+	    	        url :contextpath+'/mymessage/updateMyTalk.action',
 	    	        contentType: 'application/json',
 	    	        dataType:'json',
 	    	        data:{
@@ -105,12 +105,12 @@ $(function(){
 	$(".inputBox").keypress(function (e){ 
 		var code = event.keyCode; 
 		if (13 == code) { 
-			sendNewMsg(addContent); 
+			sendNewMsg(); 
 		} 
 	}); 
 	//发送消息
 	$("#sendNewMsg").click(function(){
-		sendNewMsg (addContent) ;
+		sendNewMsg () ;
 	});
 	
 	function sendNewMsg (){
@@ -122,7 +122,7 @@ $(function(){
 			var frendId =$("#frendId").val();
 			$.ajax({
 		        type:'post',
-		        url :contxtpath+'/user/senNewMsg.action',
+		        url :contextpath+'/mymessage/senNewMsg.action',
 		        async:false,
 		        dataType:'json',
 		        data:{
@@ -130,19 +130,19 @@ $(function(){
 		        	content  : content,
 		        	title    : $(".personMessageTitle").html()
 		        },
-		        success:function(responsebean){
-		        	if(responsebean=='success'){
+		        success:function(map){
+		        	if(map.code=='success'){
 		        		//window.message.success('发送成功');
 		        		
-		        		var currentContent=$("#dialogue").html();
-		        		$("#dialogue").append(addContent);
+		        		//var currentContent=$("#dialogue").html();
+		        		//$("#dialogue").append(addContent);
 			        	//hide();
 		        		html = 
 	        				"<div class='oneTalk'> "+
 	                        "<div class='headAndNameRight float_right'> "+
-	                            "<div class='headDiv'><img class='headPicture' src='"+contxtpath+avatar+"'/></div> "+
-	                            "<div class='talkName'><text>"+senderName+"</text></div> "+
-/*	                            "<div class='headDiv'><img class='headPicture' src='"+contxtpath+responsebean.avatar+"'/></div> "+
+	                            "<div class='headDiv'><img class='headPicture' src='"+contextpath+map.avatar+"'/></div> "+
+	                            "<div class='talkName'><text>"+map.name+"</text></div> "+
+/*	                            "<div class='headDiv'><img class='headPicture' src='"+contextpath+responsebean.avatar+"'/></div> "+
 	                            "<div class='talkName'><text>"+responsebean.senderName+"</text></div> "+
 */	                        "</div> "+
 	                        "<div class='talkDivRight float_right' > "+
@@ -154,8 +154,8 @@ $(function(){
 	                            "<div class='talkTime talkTimeAlignRight'>"+formatDate(sendTime,'yyyy.MM.dd hh:ss:mm')+"</div> "+
 	                        "</div> "+
 	                        "</div> ";
-		        		currentContent+=html;
-		        		$("#dialogue").append(currentContent);
+		        		//currentContent+=html;
+		        		$("#dialogue").append(html);
 			        	$("#content").val('');
 		        	}
 		        }

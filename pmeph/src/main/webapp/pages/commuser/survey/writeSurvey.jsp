@@ -27,11 +27,11 @@
 				<div class="emptyDiv"></div>
 				<div class="whiteDiv">
 					<div class="titleDiv">
-						<span class="titleFont">图书问卷调查</span>
+						<span class="titleFont">${mapSurvey.title}</span>
 					</div>
 					<div class="bigContent">
 						<div class="tipDiv">
-							<span class="tipFont">此调查旨在了解用户的图书阅读习惯，希望参与者根据实际情况认真填写！</span>
+							<span class="tipFont">感谢参与，希望参与者根据实际情况认真填写！</span>
 						</div>
 						<form id="contentForm">
 						<div class="questions">

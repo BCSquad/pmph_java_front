@@ -23,4 +23,7 @@ public interface SurveyDao {
 	//保存输入框答案
 	void saveInputAnswer(Map<String, Object> map2);
 
+	//获取调查基本信息
+	Map<String, Object> getSurveyBaseInfo(Map<String, Object> paraMap);
+
 }

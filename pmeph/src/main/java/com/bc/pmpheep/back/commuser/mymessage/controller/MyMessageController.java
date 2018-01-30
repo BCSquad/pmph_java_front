@@ -133,10 +133,10 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 		}
 		 
 		String content = request.getParameter("content"); 
-		//Long thisId = new Long(String.valueOf(writerUser.get("id")));
-		//String name = writerUser.get("name");
-		Long thisId = new Long(24967);
-		String name = "测试";
+		Long thisId = new Long(String.valueOf(writerUser.get("id")));
+		String name = (String) writerUser.get("realname");
+		//Long thisId = new Long(24967);
+		//String name = "测试";
 		String avatar = "static/default_image.png";
 		myMessageService.senNewMsg(thisId, friendId, friendIdType, title, content);
 		
