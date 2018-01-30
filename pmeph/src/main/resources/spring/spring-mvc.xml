@@ -59,6 +59,9 @@
                     <value>/bookdeclare/* -> 1</value><!--出书申报 -->
                     <value>/survey/* -> 1</value><!--出书申报 -->
 					<value>/chooseEditor/* -> 1</value><!--第一主编选择编委 -->
+                    <value>/articledetail/insertComment* -> 1</value><!--文章详情页面新增评论 -->
+                    <value>/articledetail/addmark* -> 1</value><!--文章详情页添加收藏 -->
+                    <value>/articledetail/addlikes* -> 1</value><!--文章详情页点赞 -->
 
                     <!--机构用户-->
                     <value>/user/* -> 2</value><!--用户管理（机构用户） -->

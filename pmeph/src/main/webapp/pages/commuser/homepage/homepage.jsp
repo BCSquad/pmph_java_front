@@ -204,7 +204,7 @@
                 				<c:if test="${list.avatar!='DEFAULT'}">
                 				<img src="${ctx}/image/${list.avatar}.action" class="a6_head"></c:if>
                                 </div>
-                                <div class="a6_name_div"><span>${list.realname}</span></div>
+                                <div class="a6_name_div" style="cursor:pointer;" onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?userId=${list.userId }'"><span>${list.realname}</span></div>
                                 <div class="a6_time_div"><span>${list.auth_date}</span></div>
                             </div>
                         </div>
@@ -227,7 +227,7 @@
                 				<c:if test="${list.avatar!='DEFAULT'}">
                 				<img src="${ctx}/image/${list.avatar}.action" class="a6_head"></c:if>
                                 </div>
-                                <div class="a6_name_div"><span>${list.realname}</span></div>
+                                <div class="a6_name_div"  style="cursor:pointer;" onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?userId=${list.userId }'"><span>${list.realname}</span></div>
                                 <div class="a6_time_div"><span>${list.auth_date}</span></div>
                             </div>
                         </div>

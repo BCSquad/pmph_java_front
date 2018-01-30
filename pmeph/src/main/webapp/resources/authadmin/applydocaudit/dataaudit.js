@@ -88,7 +88,12 @@ function queryBtnClick(){
 //导出excel
 
 function exportExcel(){
-    window.location.href =contextpath+'excel/download.action?service=dataAuditExcel&queryName='+$("#search-name-temp").val()+'&material_id='+$("#material_id").val()+'&userId='+$("#userId").val();
+    window.location.href =contextpath+'excel/download.action?service=dataAuditExcel&queryName='+$("#search-name-temp").val()+'&material_id='+$("#material_id").val();
+}
+
+//返回
+function return_on(){
+	window.location.href=contextpath+"applyDocAudit/toPage.action";
 }
 
 
