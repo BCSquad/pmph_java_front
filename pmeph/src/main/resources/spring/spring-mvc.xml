@@ -47,6 +47,7 @@
                     <value>/inforeport/add* -> 1</value><!--信息快报详情点赞、收藏  -->
                     <value>/articlesearch/changelikes* -> 1</value><!--文章搜索点赞 -->
                     <value>/readdetail/insertComment* -> 1</value><!--读书详情页面新增评论 -->
+                    <value>/readdetail/insertlong* -> 1</value><!--读书详情页面新增长评 -->
                     <value>/readdetail/addmark* -> 1</value><!--读书详情页添加收藏 -->
                     <value>/readdetail/addlikes* -> 1</value><!--读书详情页点赞 -->
                     <value>/readdetail/correction* -> 1</value><!--读书详情页图书纠错 -->
