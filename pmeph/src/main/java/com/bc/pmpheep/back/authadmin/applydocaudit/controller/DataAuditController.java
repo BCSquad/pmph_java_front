@@ -113,6 +113,7 @@ public class DataAuditController extends BaseController{
 				.findDataAudit(pageParameter);
 		int totoal_count = dataAuditService.findDataAuditCount(pageParameter);
 
+		
 		Map<String, Object> vm_map = new HashMap<String, Object>();
 		vm_map.put("List_map", List_map);
 		vm_map.put("material_id", material_id);
