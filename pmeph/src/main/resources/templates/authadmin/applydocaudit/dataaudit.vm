@@ -8,11 +8,10 @@
 		<td>$!c.position</td>
 		<td>$!c.title</td>
 		
-		
 		#if($c.preset_position == 0)
 	    	<td>$!{c.textbook_name}-未选择</td>
 	    	
-	    #if($c.preset_position == 1||$c.preset_position == 3)
+	    #elseif($c.preset_position == 1)
 	    	<td>$!{c.textbook_name}-编委</td>
 	   	#elseif($c.preset_position == 2)
     	<td>$!{c.textbook_name}-主编 </td>
