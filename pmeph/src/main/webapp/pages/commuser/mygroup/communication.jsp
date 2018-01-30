@@ -64,7 +64,7 @@
                     </div>
                     <label></label>
                     <div class="top_tj2">
-                        <text class="top_tj1_text1">${fileTotal}</text>
+                        <text class="top_tj1_text1" id="fileTotal"  >${fileTotal}</text>
                         <br/>
                         <text class="top_tj1_text2">文件分享</text>
                     </div>
