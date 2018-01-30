@@ -19,6 +19,8 @@
 		declaration AS d
 		LEFT JOIN dec_position AS p ON d.id = p.declaration_id
 		LEFT JOIN textbook AS t ON p.textbook_id = t.id
+		LEFT JOIN org as o on d.org_id=o.id 
+		INNER JOIN org_user as  ou on  d.org_id=ou.org_id and d.online_progress!=0
 		<where>
 			1=1
 			<if test="queryName != null and queryName != '' ">
@@ -26,6 +28,9 @@
 			</if>
 			<if test="material_id != null and material_id != '' ">
 				and d.material_id = ${material_id}
+			</if>
+			<if test="userId != null and userId != '' ">
+				and ou.id = ${userId}
 			</if>
 		</where>
 		limit ${startNum},${pageSize}
@@ -38,9 +43,10 @@
 		COUNT(*)
 		FROM
 		declaration AS d
-		LEFT JOIN dec_position AS p ON d.id
-		= p.declaration_id
+		LEFT JOIN dec_position AS p ON d.id = p.declaration_id
 		LEFT JOIN textbook AS t ON p.textbook_id = t.id
+		LEFT JOIN org as o on d.org_id=o.id 
+		INNER JOIN org_user as  ou on  d.org_id=ou.org_id and d.online_progress!=0
 		<where>
 		1=1
 			<if test="queryName != null and queryName != '' ">
@@ -48,6 +54,9 @@
 			</if>
 			<if test="material_id != null and material_id != '' ">
 				and d.material_id = ${material_id}
+			</if>
+			<if test="userId != null and userId != '' ">
+				and ou.id = ${userId}
 			</if>
 		</where>
 	</select>
@@ -79,6 +88,8 @@
 		declaration AS d
 		LEFT JOIN dec_position AS p ON d.id = p.declaration_id
 		LEFT JOIN textbook AS t ON p.textbook_id = t.id
+		LEFT JOIN org as o on d.org_id=o.id 
+		INNER JOIN org_user as  ou on  d.org_id=ou.org_id and d.online_progress!=0
 		<where>
 			1=1
 			<if test="queryName != null and queryName != '' ">
@@ -86,6 +97,9 @@
 			</if>
 			<if test="material_id != null and material_id != '' ">
 				and d.material_id = ${material_id}
+			</if>
+			<if test="userId != null and userId != '' ">
+				and ou.id = ${userId}
 			</if>
 		</where>
 	</select>

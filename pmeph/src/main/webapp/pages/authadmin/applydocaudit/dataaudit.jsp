@@ -29,6 +29,7 @@
 	<input type="hidden" id="page-num-temp" value="1">
 	<input type="hidden" id="material_id" value="${material_id }">
 	<input type="hidden" id="view_audit" value="${view_audit }">
+	<input type="hidden" id="userId" value="${userId }">
 	
 	
 	<div
