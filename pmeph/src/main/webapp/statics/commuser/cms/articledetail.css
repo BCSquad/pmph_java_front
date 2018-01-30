@@ -23,7 +23,7 @@
 	color: #ffffff;
 	cursor: pointer;
 }
-/**×ó²àÇøÓò**/
+/**ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½**/
 .area1{
 	width: 890px;
 	float: left;
@@ -206,7 +206,7 @@
 	border-radius: 3px;
 	border: solid 1px #3996fa;
 	color:#tarea;
-	font-family: "Î¢ÈíÑÅºÚ";
+	font-family: "Î¢ï¿½ï¿½ï¿½Åºï¿½";
 }
 
 .rwtx1{
@@ -274,7 +274,7 @@
     margin-left: 4px;
 }
 
-/**ÓÒ²àÇøÓò**/
+/**ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½**/
 .area2{
 	float: left;
 	margin-left: 35px;
@@ -313,7 +313,7 @@
 	left:20px;
 	top:0px;
 	z-index:100;
-	width: 255px;	
+	width: 150px;
 }
 
 .right_2 img{

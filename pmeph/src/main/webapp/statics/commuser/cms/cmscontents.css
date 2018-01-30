@@ -65,8 +65,9 @@
     position:absolute;
     top:10px;
     left:-6px;
-    color:white;
-    background-image:url("../statics/image/wenzhangtuijian.png");
+    color: #ffffff;
+    background-image:url("../../testfile/recommend.png");
+    cursor:pointer;
 }
 .notes .item .content{
     width:284px;
@@ -83,6 +84,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow:ellipsis;
+   	cursor: pointer;
 }
 .notes .item .content-text{
     padding-left: 10px;
@@ -210,5 +212,5 @@
   border:0 none;
   font-size:16px;
   
-  display:none;/*Ä¬ÈÏ²»ÏÔÊ¾£¬ajaxµ÷ÓÃ³É¹¦ºó²Å¾ö¶¨ÏÔÊ¾Óë·ñ*/
+  display:none;/*Ä¬ï¿½Ï²ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ajaxï¿½ï¿½ï¿½Ã³É¹ï¿½ï¿½ï¿½Å¾ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½*/
 }
