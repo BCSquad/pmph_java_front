@@ -104,6 +104,9 @@ $(function(){
 	
 	
 	//-------------------------------
+    $("#filesgx_top").html('文件共享<span style="display: inline-block;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;'+
+    		'line-height: 13px;padding: 3px 6px;border-radius: 50%;">'+$("#fileTotal").html()+'</span>');
+    
 	var talkPagesize  = 5 ;
 	var talkPagenumber= 1  ;
 	var maxTime       = 0  ;
@@ -222,6 +225,10 @@ $(function(){
 	        	if(responsebean){
 	        		window.message.success("删除成功");
 		        	$("#item_"+id).remove();
+		        	var old = parseInt($("#fileTotal").html());
+		        	$("#fileTotal").html(old-1);
+			    	$("#filesgx_top").html('文件共享<span style="display: inline-block;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;'+
+			        		'line-height: 13px;padding: 3px 6px;border-radius: 50%;">'+(old-1)+'</span>');
 	        	}else{
 	        		window.message.error("删除失败");
 	        	}
@@ -478,6 +485,10 @@ $(function(){
 						initFile();
 				    	//推送消息
 				    	webSocket.send("{senderId:"+userId+",senderType:"+0+",content:'\""+$("#"+userId+"_2").val()+"\"上传了文件"+"',groupId:"+$("#groupId").val()+",sendType:0}");
+				    	var old = parseInt($("#fileTotal").html());
+				    	$("#fileTotal").html(old+1);
+				    	$("#filesgx_top").html('文件共享<span style="display: inline-block;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;'+
+				        		'line-height: 13px;padding: 3px 6px;border-radius: 50%;">'+(old+1)+'</span>');
 				    }else{
 				    	window.message.error("上传失败");
 				    }
