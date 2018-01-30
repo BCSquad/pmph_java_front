@@ -17,8 +17,9 @@
 		ON m.id = cc.material_id
 		WHERE
 		cc.is_deleted = 0
-		AND ccg.category_name =
-		'公告'
+		AND 
+			cc.`category_id`=3
+		<!-- ccg.category_name = '公告' -->
 		AND cc.auth_status = 2
 		AND cc.is_published = TRUE
 	</select>
@@ -36,7 +37,8 @@
 		WHERE
 		cc.is_deleted = 0
 		AND
-		ccg.category_name = '公告管理'
+			cc.`category_id`=3
+		<!-- ccg.category_name = '公告管理' -->
 		AND cc.auth_status = 2
 		AND cc.is_published =1
 		ORDER BY
