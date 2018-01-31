@@ -189,11 +189,11 @@
 				
 				
 				
-			},
+			}/* ,
 			progressall : function(loaded, total, bitrate) {
 				console.log("正在上传。。。" + loaded / total);
-				window.message.info("正在上传。。。" + loaded / total);
-			}
+				window.message.info("正在上传。。。" + loaded / total); 
+			} */
 		});
 
 	});

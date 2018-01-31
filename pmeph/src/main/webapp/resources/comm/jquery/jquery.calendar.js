@@ -279,14 +279,14 @@ jQuery.fn.extend({
             b.removeClass("reserve").addClass("enabled");
             d.removeClass("enabled").addClass("reserve");
             $("#" + c.controlId).css({
-                "z-index": 1
+                "z-index": 1000
             });
 
             b.css({
-                "z-index": -1
+                "z-index": 999
             });
             d.css({
-                "z-index": -1
+                "z-index": 999
             });
             b.css({
                 "margin-left": "0px",
@@ -304,13 +304,13 @@ jQuery.fn.extend({
                 function () {
                     d.empty();
                     $("#" + c.controlId).css({
-                        "z-index": 0
+                        "z-index": 1000
                     });
                     b.css({
-                        "z-index": 0
+                        "z-index": 1000
                     });
                     d.css({
-                        "z-index": 0
+                        "z-index": 1000
                     })
                 })
         }
@@ -323,13 +323,13 @@ jQuery.fn.extend({
             b.removeClass("reserve").addClass("enabled");
             d.removeClass("enabled").addClass("reserve");
             $("#" + c.controlId).css({
-                "z-index": 1
+                "z-index": 1000
             });
             b.css({
-                "z-index": -1
+                "z-index": 999
             });
             d.css({
-                "z-index": -1
+                "z-index": 999
             });
             b.css({
                 "margin-left": "0px",
@@ -347,13 +347,13 @@ jQuery.fn.extend({
                 function () {
                     d.empty();
                     $("#" + c.controlId).css({
-                        "z-index": 0
+                        "z-index": 1000
                     });
                     b.css({
-                        "z-index": 0
+                        "z-index": 1000
                     });
                     d.css({
-                        "z-index": 0
+                        "z-index": 1000
                     })
                 })
         }

@@ -47,11 +47,13 @@
                     <value>/inforeport/add* -> 1</value><!--信息快报详情点赞、收藏  -->
                     <value>/articlesearch/changelikes* -> 1</value><!--文章搜索点赞 -->
                     <value>/readdetail/insertComment* -> 1</value><!--读书详情页面新增评论 -->
+                    <value>/readdetail/queryLoginLong* -> 1</value><!--读书详情页面 查询登陆人是否写过长评 -->
+                    <value>/readdetail/insertlong* -> 1</value><!--读书详情页面新增长评 -->
+                    <value>/readdetail/todetail.action?state=write* -> 1</value><!--读书详情页面跳转到新增书评页面 -->
                     <value>/readdetail/addmark* -> 1</value><!--读书详情页添加收藏 -->
                     <value>/readdetail/addlikes* -> 1</value><!--读书详情页点赞 -->
                     <value>/readdetail/correction* -> 1</value><!--读书详情页图书纠错 -->
                     <value>/myFriend/* -> 1</value><!--我的好友（普通用户） -->
-                    <value>/articlesearch/changelikes* -> 1</value><!--读书详情页改变点赞数 -->
                     <value>/articlesearch/changelikes* -> 1</value><!--读书详情页改变点赞数 -->
                     <value>/addFriend/* -> 1</value><!--添加好友 -->
                     <value>/booksearch/likeSwitch* -> 1</value><!--书籍查询 -->

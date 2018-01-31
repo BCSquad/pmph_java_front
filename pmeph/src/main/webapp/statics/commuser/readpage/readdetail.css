@@ -401,7 +401,7 @@
 
 .bookmistake {
     width: 426px;
-    height: 309px;
+    /* height: 309px; */
     background-color: #FFFFFF;
     display: none;
     position: fixed;
@@ -472,6 +472,7 @@
     border: none;
     cursor: pointer;
     color: #FFFFFF;
+    margin-bottom: 10px;
 }
 
 .uploadfile {
@@ -493,11 +494,13 @@
     border: 1px solid #E0E0E0;
     margin-left: 20px;
     padding: 5px;
+    resize: vertical;
+    max-height: 350px;
 }
 
 .info {
     width: 426px;
-    height: 103px;
+    /* height: 103px; */
     float: left;
     margin-top: 25px;
 }
