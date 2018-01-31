@@ -428,7 +428,7 @@ function writeablut() {
         async: false,
         dataType: 'json',
         success: function (json) {
-            location.href = contextpath + 'readdetail/todetail.action?state=write&&id=' + $("#book_id").val();
+            location.href = contextpath + 'readdetail/todetail.action?id=' + $("#book_id").val()+"&state=write";
         }
     });
 }
