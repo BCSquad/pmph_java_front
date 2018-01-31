@@ -48,7 +48,14 @@ public class DeclareCountExcelService implements ExcelDownloadService {
         
         List<Map<String, Object>> resultList = declareCountDao
 				.selectAll(param);
-        
+        Map<String, Object> totalMap=new HashMap<String, Object>();
+        totalMap.put("textbook_name", "合计");
+        totalMap.put("dp1", 0);
+        totalMap.put("dp2", 0);
+        totalMap.put("dp3", 0);
+        totalMap.put("decid1", 0);
+        totalMap.put("decid2", 0);
+        totalMap.put("decid3", 0);
         for (int i = 0; i < resultList.size(); i++) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("textbook_name", resultList.get(i).get("textbook_name"));
@@ -58,9 +65,15 @@ public class DeclareCountExcelService implements ExcelDownloadService {
             map.put("decid1", resultList.get(i).get("decid1"));
             map.put("decid2", resultList.get(i).get("decid2"));
             map.put("decid3", resultList.get(i).get("decid3"));
-            
+            totalMap.put("dp1", Integer.valueOf(resultList.get(i).get("dp1").toString())+Integer.valueOf(totalMap.get("dp1").toString()));
+            totalMap.put("dp2", Integer.valueOf(resultList.get(i).get("dp2").toString())+Integer.valueOf(totalMap.get("dp2").toString()));
+            totalMap.put("dp3", Integer.valueOf(resultList.get(i).get("dp3").toString())+Integer.valueOf(totalMap.get("dp3").toString()));
+            totalMap.put("decid1", Integer.valueOf(resultList.get(i).get("decid1").toString())+Integer.valueOf(totalMap.get("decid1").toString()));
+            totalMap.put("decid2", Integer.valueOf(resultList.get(i).get("decid1").toString())+Integer.valueOf(totalMap.get("decid2").toString()));
+            totalMap.put("decid3", Integer.valueOf(resultList.get(i).get("decid1").toString())+Integer.valueOf(totalMap.get("decid3").toString()));
             list.add(map);
         }
+        list.add(totalMap);
 
         return list;
     }
