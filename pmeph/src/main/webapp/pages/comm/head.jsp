@@ -29,11 +29,11 @@
 
             <img class="search-icon" src="${ctx}/statics/image/search.png" alt="">
 
-            <span class="write" onclick="window.location.href='${ctx}/writerArticle/initWriteArticle.action'">写文章</span>
+   <%--         <span class="write" onclick="window.location.href='${ctx}/writerArticle/initWriteArticle.action'">写文章</span>
+--%>
+            <%--<span class="download">下载APP</span>
 
-            <span class="download">下载APP</span>
-
-            <img class="download-pic" src="${ctx}/statics/image/APP-download.png">
+            <img class="download-pic" src="${ctx}/statics/image/APP-download.png">--%>
 
             <%
                 Map<String, Object> userInfo = null;
@@ -48,17 +48,36 @@
                 }
             %>
             <c:if test="${userInfo == null}">
-                <div class="login-logout">
+                <%--<div class="login-logout">
                     <a onclick="window.location.href=contextpath+'pages/comm/login.jsp?refer='+encodeURIComponent(window.location.href)"
                        href="javascript:;">登录</a>
                     <span>/</span>
                     <a onclick="window.location.href=contextpath+'pages/comm/login.jsp?refer='+encodeURIComponent(window.location.href)"
                        href="javascript:;">注册</a>
                     <img src="${ctx}/statics/image/question.png" alt="">
+                </div>--%>
+
+                <div class="loginout" onclick="window.location.href=contextpath+'pages/comm/login.jsp?refer='+encodeURIComponent(window.location.href)">
+                    <span class="login">您好,请登录</span>
+                    <span class="logout">免费注册</span>
                 </div>
+                <span class="writing" onclick="window.location.href='${ctx}/writerArticle/initWriteArticle.action'">
+                    <span class="icon"></span>
+                    <span class="text">写文章</span>
+                </span>
+                <span class="help">
+                    <span class="icon"></span>
+                    <span class="text">帮助中心</span>
+                </span>
             </c:if>
 
             <c:if test="${userInfo != null}">
+
+                <span class="writing logined" onclick="window.location.href='${ctx}/writerArticle/initWriteArticle.action'">
+                    <span class="icon"></span>
+                    <span class="text">写文章</span>
+                </span>
+
                 <div class="user-info">
                     <span class="sign"></span>
                     <img class="notice-icon" src="${ctx}/statics/image/message.png" alt=""
