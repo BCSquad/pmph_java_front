@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.bc.pmpheep.back.commuser.homepage.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -54,6 +55,11 @@ public class CmsNoticeManagementController extends BaseController {
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.mymessage.service.NoticeMessageServiceImpl")
 	NoticeMessageService noticeMessageService;
+
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.homepage.service.HomeServiceImpl")
+	private HomeService homeService;
+
 	/**
 	 * 跳转到教材列表页面
 	 * @author Mryang
@@ -66,6 +72,8 @@ public class CmsNoticeManagementController extends BaseController {
 	@RequestMapping(value = "/tolist", method = RequestMethod.GET)
 	public ModelAndView tolistPage(Integer pageSize, Integer pageNumber, Boolean isHot) {
 		ModelAndView modelAndView = new ModelAndView();
+		Map<String, Object> adInfo = homeService.getPageAdInfo("信息快报和遴选公告列表 ");
+		modelAndView.addObject("adInfo", adInfo);
 		modelAndView.setViewName("commuser/focusAndSelect/materialNotice");
 		return  modelAndView;
 	}

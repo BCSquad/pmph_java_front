@@ -92,3 +92,9 @@ function toMain(){
 	window.location.href=contextpath+"dataaudit/toPage.action?material_id="+material_id+"&view_audit="+view_audit;
 }
 
+//文件下载
+function downLoadProxy(fileId){
+	window.location.href=contextpath+'file/download/'+fileId+'.action';
+}
+
+

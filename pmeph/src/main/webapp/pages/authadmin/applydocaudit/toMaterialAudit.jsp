@@ -480,7 +480,7 @@
 				<div class="button">
 				<c:choose>
 					 <c:when test="${view_audit=='audit'}">
-						<div class="div_butt">
+					<div class="div_butt">
 						<%-- <div class="bt_tj" onclick="javascript:toAudit('${gezlList.id}','3')">通过</div>
 						<div class="bt_tj" onclick="javascript:toAudit('${gezlList.id}','2')">驳回</div> --%>
 						<div class="bt_tj" onclick="toAudit('${gezlList.id}','3')">通过</div>
@@ -492,7 +492,7 @@
 					 	<div class="div_butt">
 					 		<div class="bt_tj" onclick="toMain()">返回</div>
 					 	</div>
-					 </c:otherwise>	
+					 </c:otherwise>
 				</c:choose>
 				</div>
 			</div>

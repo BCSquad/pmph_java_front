@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.bc.pmpheep.back.commuser.homepage.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -50,7 +51,12 @@ public class CmsInfoLettersManagementController extends BaseController{
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.collection.service.ArticleCollectionServiceImpl")
 	private ArticleCollectionService articleCollectionService;
-	
+
+
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.homepage.service.HomeServiceImpl")
+	private HomeService homeService;
+
 	@Autowired
 	private ArticleCollectionDao articleCollectionDao;
 	/**
@@ -108,6 +114,8 @@ public class CmsInfoLettersManagementController extends BaseController{
 	@RequestMapping(value = "/tolist", method = RequestMethod.GET)
 	public ModelAndView list(HttpServletRequest req,Integer pageSize, Integer pageNumber, Integer order) {
 		ModelAndView model = new ModelAndView();
+		Map<String, Object> adInfo = homeService.getPageAdInfo("信息快报和遴选公告列表 ");
+		model.addObject("adInfo", adInfo);
 		model.setViewName("commuser/focusAndSelect/newsReport");
 		model.addObject("materialId", req.getParameter("materialId"));
 		return model;

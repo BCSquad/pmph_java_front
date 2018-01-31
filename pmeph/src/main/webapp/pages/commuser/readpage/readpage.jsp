@@ -27,6 +27,8 @@
 <jsp:include page="/pages/comm/head.jsp">
     <jsp:param value="readpage" name="pageTitle"/>
 </jsp:include>
+<input type="hidden" id="auto_play" value="${adInfo.auto_play}">
+<input type="hidden" id="animation_interval" value="${adInfo.animation_interval}">
 <div class="body">
     <div class="content-wrapper">
         <div class="area1">
@@ -34,11 +36,11 @@
                 <!--广告轮播区域-->
                 <div class="move" id="move">
 	                <ul>
-		                <li><img src="${ctx}/statics/image/gg_01.png" class="img-move"/></li>
-		                <li><img src="${ctx}/statics/image/gg_01.png" class="img-move"/></li>
-		                <li><img src="${ctx}/statics/image/gg_01.png" class="img-move"/></li>
-		                <li><img src="${ctx}/statics/image/gg_01.png" class="img-move"/></li>
-		                <li><img src="${ctx}/statics/image/gg_01.png" class="img-move"/></li>
+                        <c:forEach var="ad" items="${adInfo.detailList}">
+                            <li><img src="${ctx}/image/${ad.image}.action" class="img-move"/></li>
+                        </c:forEach>
+
+
 	                </ul>
                 </div>
                 <div class="ctrl" id="ctrl"></div>

@@ -26,6 +26,11 @@
 		WHERE d.`id`=#{surveyId}
 	</select>
 	
+	<!-- 获取调查基本信息 -->
+	<select id="getSurveyBaseInfo" parameterType="map" resultType="map">
+		select * from survey where id=#{surveyId}
+	</select>
+	
 	<!-- 查询问题对应的选项 -->
 	<select id="getOptions" resultType="map">
 		SELECT * FROM `survey_question_option`

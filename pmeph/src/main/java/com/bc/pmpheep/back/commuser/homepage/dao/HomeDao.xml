@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.bc.pmpheep.back.commuser.homepage.dao.HomeDao" >
-  <resultMap id="Mapresult" type="java.util.Map"></resultMap>
-  <!-- 查询最新三条公告(所有人可见)-->
-  <select id="queryDocument"  parameterType="map" resultMap="Mapresult">   
+<mapper namespace="com.bc.pmpheep.back.commuser.homepage.dao.HomeDao">
+    <resultMap id="Mapresult" type="java.util.Map"></resultMap>
+    <!-- 查询最新三条公告(所有人可见)-->
+    <select id="queryDocument" parameterType="map" resultMap="Mapresult">
     select n.* from 
 		(select 
 		        t.*
@@ -31,43 +31,43 @@
 		        and p.id= #{id}) n
 		order by n.gmt_create desc limit 0,3     
   </select>
-   <!-- 查询最新五条信息快报 -->
-  <select id="queryNotice"  resultMap="Mapresult">
+    <!-- 查询最新五条信息快报 -->
+    <select id="queryNotice" resultMap="Mapresult">
      select  * from cms_content  where  category_id='2' and auth_status='2' 
      and is_deleted='0' order by gmt_create desc limit 0,5
   </select>
-   <!-- 查询书籍 -->
-  <select id="queryBook" parameterType="map" resultMap="Mapresult">
-		SELECT
-			t.type_name,
-			b.*
-			FROM
-			book AS b
-			INNER JOIN 
-			`material_type` t
-		ON
-			t.`id` = b.`type`
-			
-			and
-			(
-				SUBSTRING_INDEX(SUBSTRING_INDEX(CONCAT(t.path,'-',t.id),'-',
-										(select 
-											cast(
-													(CHAR_LENGTH(path)-CHAR_LENGTH(REPLACE(path,'-','')))/CHAR_LENGTH('-')+2
-														as decimal(9,2)
-											)
-											 from material_type 
-											where id = cast(#{type} as decimal(9,2)))
-								),'-',-1) = #{type}
-				or t.id = 	#{type}		
-			)
-		
-       <if test="startrows >= 0">
-				<![CDATA[limit ${startrows},10]]>
-	   </if>
-  </select>
-   <!-- 查询最新医学随笔 -->
-  <select id="queryArticle"  resultMap="Mapresult">
+    <!-- 查询书籍 -->
+    <select id="queryBook" parameterType="map" resultMap="Mapresult">
+        SELECT
+        t.type_name,
+        b.*
+        FROM
+        book AS b
+        INNER JOIN
+        `material_type` t
+        ON
+        t.`id` = b.`type`
+
+        and
+        (
+        SUBSTRING_INDEX(SUBSTRING_INDEX(CONCAT(t.path,'-',t.id),'-',
+        (select
+        cast(
+        (CHAR_LENGTH(path)-CHAR_LENGTH(REPLACE(path,'-','')))/CHAR_LENGTH('-')+2
+        as decimal(9,2)
+        )
+        from material_type
+        where id = cast(#{type} as decimal(9,2)))
+        ),'-',-1) = #{type}
+        or t.id = #{type}
+        )
+
+        <if test="startrows >= 0">
+            <![CDATA[limit ${startrows},10]]>
+        </if>
+    </select>
+    <!-- 查询最新医学随笔 -->
+    <select id="queryArticle" resultMap="Mapresult">
      select cc.*,wu.avatar,wu.id as userId,
 		IFNULL(wu.realname,pu.realname) realname
 		from cms_content cc
@@ -81,8 +81,8 @@
         	order by  cc.`auth_date` desc
         limit 0,#{endrow}
   </select>
-   <!-- 查询热门标签 -->
-  <select id="queryLabel" parameterType="string"  resultMap="Mapresult">
+    <!-- 查询热门标签 -->
+    <select id="queryLabel" parameterType="string" resultMap="Mapresult">
           SELECT
   max(b.type) type,t.note
 FROM
@@ -95,8 +95,8 @@ ORDER BY
   sum(b.clicks) desc,LENGTH(t.note)
 LIMIT 0,10
   </select>
-   <!-- 查询点击人数最多的最多的作者 -->
-  <select id="queryAuthor"  resultMap="Mapresult">
+    <!-- 查询点击人数最多的最多的作者 -->
+    <select id="queryAuthor" resultMap="Mapresult">
 	select  
 	       t.title,
 	       b.realname,
@@ -104,8 +104,8 @@ LIMIT 0,10
 	       from cms_content  t left join writer_user b on t.author_id=b.id
 	       where  category_id='58'  order by clicks desc limit 0,4
   </select>
-   <!-- 查询点击人数最多的书评的作者、书名以及评论内容 -->
-  <select id="queryComment"  resultMap="Mapresult">
+    <!-- 查询点击人数最多的书评的作者、书名以及评论内容 -->
+    <select id="queryComment" resultMap="Mapresult">
        SELECT
 			u.id,
 			b.id id1,
@@ -128,8 +128,8 @@ LIMIT 0,10
 			ORDER BY
 			b.comments ASC
   </select>
-   <!-- 根据书籍类型查询图书畅销榜 -->
-  <select id="querySale" parameterType="map" resultMap="Mapresult">
+    <!-- 根据书籍类型查询图书畅销榜 -->
+    <select id="querySale" parameterType="map" resultMap="Mapresult">
        SELECT
 		t.type_name,
 		b.*
@@ -150,8 +150,24 @@ LIMIT 0,10
 		ORDER BY
 		b.sales DESC limit 0,6 
   </select>
-   <!-- 查询书籍分类-->
-  <select id="queryBookType" parameterType="map" resultMap="Mapresult">
-       select * from material_type where  parent_id=#{parent_id} order by sort 
+
+    <!-- 查询书籍分类-->
+    <select id="queryBookType" parameterType="map" resultMap="Mapresult">
+		select * from material_type where  parent_id=#{parent_id} order by sort
+	</select>
+
+
+    <!-- 查询广告信息-->
+    <select id="getPageAdInfo" parameterType="string" resultType="map">
+       select * from cms_advertisement where  adname=#{adName} and is_disabled='0'
   </select>
+
+
+    <!-- 查询广告明细-->
+    <select id="getPageAdDetail" parameterType="string" resultType="map">
+		select i.* from
+		 cms_advertisement_image i join cms_advertisement a on i.advert_id=a.id
+		 where  a.adname=#{adName} and  a.is_disabled='0' and i.is_disabled='0' order by i.id
+	</select>
+
 </mapper>

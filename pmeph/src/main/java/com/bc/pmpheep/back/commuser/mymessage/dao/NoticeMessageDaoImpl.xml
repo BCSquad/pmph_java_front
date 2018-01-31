@@ -48,10 +48,10 @@
 			ORDER BY u.gmt_create DESC)t1
 			UNION
 			select * from(
-				SELECT n.id,n.material_id,n.title,n.gmt_create,4
+				SELECT n.id,n.material_id,n.material_name,n.gmt_create,4
 				FROM 
 				(SELECT 
-		        t.*
+		        t.*,b.material_name
 		        FROM cms_content t
 		        LEFT JOIN  material b ON t.material_id =b.id 
 		        WHERE  t.category_id=3 
@@ -60,9 +60,10 @@
                 <![CDATA[AND b.is_public <> 0]]>
 		        AND t.auth_status=2
 		        AND t.is_deleted=0
+		        AND t.is_published=1
 			    UNION
 			    SELECT 
-				t.*
+				t.*,b.material_name
 		        FROM cms_content t
 		        LEFT JOIN  material b ON t.material_id =b.id 
 		        LEFT JOIN material_org u ON b.id=u.material_id
@@ -73,6 +74,7 @@
 		        AND b.is_public = 0
 		        AND t.auth_status=2
 		        AND t.is_deleted=0 
+		        AND t.is_published=1
 		        AND p.id=#{userId}) n
 			)t2
 			order by time desc 
@@ -80,10 +82,10 @@
 		
 		<!-- 公告 -->
 		<if test="condition==4">
-				SELECT n.id,n.material_id as fId,n.title,n.gmt_create as time,4 as msgType
+				SELECT n.id,n.material_id as fId,n.material_name,n.gmt_create as time,4 as msgType
 				FROM 
 				(SELECT 
-		        t.*
+		        t.*,b.material_name
 		        FROM cms_content t
 		        LEFT JOIN  material b ON t.material_id =b.id 
 		        WHERE  t.category_id=3 
@@ -92,9 +94,10 @@
                 <![CDATA[AND b.is_public <> 0]]>
 		        AND t.auth_status=2
 		        AND t.is_deleted=0
+		        AND t.is_published=1
 			    UNION
 			    SELECT 
-				t.*
+				t.*,b.material_name
 		        FROM cms_content t
 		        LEFT JOIN  material b ON t.material_id =b.id 
 		        LEFT JOIN material_org u ON b.id=u.material_id
@@ -105,6 +108,7 @@
 		        AND b.is_public = 0
 		        AND t.auth_status=2
 		        AND t.is_deleted=0 
+		        AND t.is_published=1
 		        AND p.id=#{userId}) n
 			ORDER BY n.gmt_create DESC
 		</if>
@@ -151,6 +155,7 @@
                 <![CDATA[AND b.is_public <> 0]]>
 		        AND t.auth_status=2
 		        AND t.is_deleted=0
+		        AND t.is_published=1
 			    UNION
 			    SELECT 
 				t.*
@@ -163,7 +168,8 @@
 		        AND t.material_id >0
 		        AND b.is_public = 0
 		        AND t.auth_status=2
-		        AND t.is_deleted=0 
+		        AND t.is_deleted=0
+		        AND t.is_published=1 
 		        AND p.id=#{userId}) n
 		        )t
 	</select>
@@ -196,7 +202,7 @@
 	
 	<!-- 教材申报通知详情 -->
 	<select id="noticeMessageDetail" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT  a.title,m.`deadline`,m.`mail_address`,e.`note`,e.notice,e.id AS attachmentId
+		SELECT  a.title,m.`deadline`,m.`mail_address`,e.`note`,e.notice,e.id AS attachmentId,a.mid as mongoId
 		FROM cms_content a
 		LEFT JOIN material m
 		ON a.`material_id` = m.`id`

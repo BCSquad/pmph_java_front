@@ -28,60 +28,7 @@
 		
 		<li class="leftlb">
 		
-		#if($!{c.iamin}==0 && $!{c.datebase}<0 && $!{c.is_all_textbook_published}==false && $!{c.is_force_end}==false)
-			<div class="mleft">
-                <div class="ysbrs">
-                    <div class="baomingrenshu"><span
-                            class="canjiarenshu">$!{c.exmember}</span><span>人</span>
-                        <br/><span class="ybmcj">已报名参加</span></div>
-                </div>
-                <div class="bmcj">
-                    <a class="abmcj" href="$!{contextpath}material/toMaterialAdd.action?material_id=$!{c.material_id}"><div class="bmcjan"><span>
-                    		报名参加</span></div></a>
-                <!-- toMaterialZc暂存   showMaterial查看 -->
-                </div>
-            </div>
-        #elseif($!{c.iamin}>0 && ($!{c.online_progress}==0) && $!{c.datebase}<0 && $!{c.is_all_textbook_published}==false && $!{c.is_force_end}==false)  
-			<div class="mleft1">
-                <div class="ysbrs1">
-                    <div class="baomingrenshu1"><span
-                            class="canjiarenshu1">$!{c.exmember}</span><span>人</span>
-                        <br/><span class="ybmcj1">已报名参加</span></div>
-                </div>
-                <div class="bmcj2">
-                    <a class="abmcj" href="$!{contextpath}material/toMaterialZc.action?declaration_id=$!{c.declaration_id}"><div class="bmcjan1">
-                    		修改申报表</div></a>
-                    		
-                </div>
-            </div>
-		#elseif($!{c.iamin}>0 && ($!{c.online_progress}==2) && $!{c.datebase}<0 && $!{c.is_all_textbook_published}==false && $!{c.is_force_end}==false)  
-			<div class="mleft1">
-                <div class="ysbrs1">
-                    <div class="baomingrenshu1"><span
-                            class="canjiarenshu1">$!{c.exmember}</span><span>人</span>
-                        <br/><span class="ybmcj1">已报名参加</span></div>
-                </div>
-                <div class="bmcj1">
-                    <a class="abmcj" href="$!{contextpath}progress/listReportProgress.action?materialId=$!{c.material_id}"><div class="bmcjan1"><span>进度查询</span></div></a>
-                    <a class="abmcj" href="$!{contextpath}material/toMaterialZc.action?declaration_id=$!{c.declaration_id}"><div class="cksbb1">
-                    		修改申报表</div></a>
-                    		
-                </div>
-            </div>
-		#elseif($!{c.iamin}>0 && ($!{c.online_progress}==1||$!{c.online_progress}==3) && $!{c.datebase}<0 && $!{c.is_all_textbook_published}==false && $!{c.is_force_end}==false )
-			<div class="mleft1">
-                <div class="ysbrs1">
-                    <div class="baomingrenshu1"><span
-                            class="canjiarenshu1">$!{c.exmember}</span><span>人</span>
-                        <br/><span class="ybmcj1">已报名参加</span></div>
-                </div>
-                <div class="bmcj1">
-                	<a class="abmcj" href="$!{contextpath}declareCount/findDeclareCount.action?material_id=$!{c.material_id}"><div class="bmcjan1"><span>进度查询</span></div></a>
-                    <a class="abmcj" href="$!{contextpath}material/showMaterial.action?declaration_id=$!{c.declaration_id}"><div class="cksbb1"><span>
-                    		查看申报表</span></div></a>
-                </div>
-            </div>
-        #elseif($!{c.datebase}>0 || $!{c.is_all_textbook_published}==true || $!{c.is_force_end}==true )
+		#if($!{c.datebase}>0 || $!{c.is_all_textbook_published}==true || $!{c.is_force_end}==true )
         	<div class="mleft3">
             <div class="ysbrs3">
                 <div class="baomingrenshu3"><span class="canjiarenshu3">$!{c.exmember}</span><span>人</span>
@@ -97,6 +44,60 @@
                 </div>
                 
             </div>
+        #elseif($!{c.iamin}==0 && $!{c.datebase}<=0 && $!{c.is_all_textbook_published}==false && $!{c.is_force_end}==false)
+			<div class="mleft">
+                <div class="ysbrs">
+                    <div class="baomingrenshu"><span
+                            class="canjiarenshu">$!{c.exmember}</span><span>人</span>
+                        <br/><span class="ybmcj">已报名参加</span></div>
+                </div>
+                <div class="bmcj">
+                    <a class="abmcj" href="$!{contextpath}material/toMaterialAdd.action?material_id=$!{c.material_id}"><div class="bmcjan"><span>
+                    		报名参加</span></div></a>
+                <!-- toMaterialZc暂存   showMaterial查看 -->
+                </div>
+            </div>
+        #elseif($!{c.iamin}>0 && ($!{c.online_progress}==0) && $!{c.datebase}<=0 && $!{c.is_all_textbook_published}==false && $!{c.is_force_end}==false)  
+			<div class="mleft1">
+                <div class="ysbrs1">
+                    <div class="baomingrenshu1"><span
+                            class="canjiarenshu1">$!{c.exmember}</span><span>人</span>
+                        <br/><span class="ybmcj1">已报名参加</span></div>
+                </div>
+                <div class="bmcj2">
+                    <a class="abmcj" href="$!{contextpath}material/toMaterialZc.action?declaration_id=$!{c.declaration_id}"><div class="bmcjan1">
+                    		修改申报表</div></a>
+                    		
+                </div>
+            </div>
+		#elseif($!{c.iamin}>0 && ($!{c.online_progress}==2) && $!{c.datebase}<=0 && $!{c.is_all_textbook_published}==false && $!{c.is_force_end}==false)  
+			<div class="mleft1">
+                <div class="ysbrs1">
+                    <div class="baomingrenshu1"><span
+                            class="canjiarenshu1">$!{c.exmember}</span><span>人</span>
+                        <br/><span class="ybmcj1">已报名参加</span></div>
+                </div>
+                <div class="bmcj1">
+                    <a class="abmcj" href="$!{contextpath}progress/listReportProgress.action?materialId=$!{c.material_id}"><div class="bmcjan1"><span>进度查询</span></div></a>
+                    <a class="abmcj" href="$!{contextpath}material/toMaterialZc.action?declaration_id=$!{c.declaration_id}"><div class="cksbb1">
+                    		修改申报表</div></a>
+                    		
+                </div>
+            </div>
+		#elseif($!{c.iamin}>0 && ($!{c.online_progress}==1||$!{c.online_progress}==3) && $!{c.datebase}<=0 && $!{c.is_all_textbook_published}==false && $!{c.is_force_end}==false )
+			<div class="mleft1">
+                <div class="ysbrs1">
+                    <div class="baomingrenshu1"><span
+                            class="canjiarenshu1">$!{c.exmember}</span><span>人</span>
+                        <br/><span class="ybmcj1">已报名参加</span></div>
+                </div>
+                <div class="bmcj1">
+                	<a class="abmcj" href="$!{contextpath}declareCount/findDeclareCount.action?material_id=$!{c.material_id}"><div class="bmcjan1"><span>进度查询</span></div></a>
+                    <a class="abmcj" href="$!{contextpath}material/showMaterial.action?declaration_id=$!{c.declaration_id}"><div class="cksbb1"><span>
+                    		查看申报表</span></div></a>
+                </div>
+            </div>
+        
 		#end
 
             <div class="mright">
@@ -109,8 +110,12 @@
                 </div>
                 <div class="rxia">
                     <div class="rxian">截止日期：$!{c.age_deadline}</div>
-                    #if(${c.notNullIfFirstManager}&&$!{c.datebase}<0)
-	                	<div class="btn-chooseEditor" onclick="chooseEditor('$!{c.textbook_id}')">选编委>></div>
+                    #if(${c.notNullIfFirstManager})
+                    	#if(( $!{c.chosen_position}==4||$!{c.chosen_position}==12 ) && $!{c.rank}==1 && $!{c.datebase}<=0 && $!{c.is_all_textbook_published}==false && $!{c.is_force_end}==false )
+	                		<div class="btn-chooseEditor" onclick="chooseEditor('$!{c.textbook_id}')">选编委>></div>
+	                	#else
+	                		<div class="btn-chooseEditor" onclick="chooseEditor('$!{c.textbook_id}')">查看编委>></div>
+	                	#end
 	                #end
                 </div>
                 

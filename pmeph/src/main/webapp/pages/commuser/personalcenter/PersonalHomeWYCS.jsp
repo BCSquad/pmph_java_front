@@ -463,6 +463,11 @@ request.setAttribute("currentTime",datetime);
             	<div id="wdxz"><span id="xztb"></span><span class="rlan">我加入的小组</span><span
                         id="qbhy"><a href="${ctx}/group/list.action" class="aright">全部小组>>&nbsp;</a></span>
                     <br/>
+                    <c:if test="${listmygroup == null || listmygroup.size()==0  }">
+                		<div style="padding-top: 10px;">
+	                        <img src="<c:url value="/statics/image/no_group.png"></c:url>">
+	                    </div>
+                	</c:if>
                     <ul class="scul">
                         <c:forEach items="${listmygroup}" begin='0' end='8' var="listmyg" varStatus="status">
                             <a  class="not-like-an-a" href="${ctx}/group/toMyGroup.action?groupId=${listmyg.group_id}">
@@ -484,6 +489,11 @@ request.setAttribute("currentTime",datetime);
                 	<a href="${ctx}/myFriend/listMyFriend.action" class="aright">全部好友>>&nbsp;</a>
                 </span>
                     <br/>
+                    <c:if test="${listmyfriend == null || listmyfriend.size()==0  }">
+                		<div style="padding-top: 10px;">
+	                        <img src="<c:url value="/statics/image/no_friends.png"></c:url>">
+	                    </div>
+                	</c:if>
                     <ul class="scul">
                         <c:forEach items="${listmyfriend}" begin='0' end='11' var="listmyf" varStatus="status">
                             <a target="_blank" class="not-like-an-a" href="${ctx}/personalhomepage/tohomepage.action?userId=${listmyf.id}">
@@ -508,6 +518,11 @@ request.setAttribute("currentTime",datetime);
                 <!-- <span id="hyp">换一批</span>
                 <span id="jiantou"></span> -->
                     <br/>
+                    <c:if test="${listmycol == null || listmycol.size()==0  }">
+                		<div style="padding-top: 10px;">
+	                        <img src="<c:url value="/statics/image/no_collect.png"></c:url>">
+	                    </div>
+                	</c:if>
                     <ul class="scul">
                         <c:forEach items="${listmycol}" begin='0' end='5' var="list" varStatus="status">
                             <a target="_blank" class="not-like-an-a" href="${ctx}/readdetail/todetail.action?id=${list.book_id}">

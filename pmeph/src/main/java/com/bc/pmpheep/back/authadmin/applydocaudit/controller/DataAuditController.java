@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -65,6 +66,8 @@ public class DataAuditController extends BaseController{
 		ModelAndView mv = new ModelAndView();
 		String material_id = request.getParameter("material_id");
 		String view_audit = request.getParameter("view_audit");
+		Map<String,Object> userMap =  this.getUserInfo();
+		String user_id = userMap.get("id").toString();
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("material_id", material_id);
 		//获取标题
@@ -72,6 +75,7 @@ public class DataAuditController extends BaseController{
 		mv.addObject("material_id", material_id);
 		mv.addObject("view_audit", view_audit);
 		mv.addObject("material_name", material_name);
+		mv.addObject("userId", user_id);
 		mv.setViewName("authadmin/applydocaudit/dataaudit");
 		return mv;
 	}
@@ -100,6 +104,8 @@ public class DataAuditController extends BaseController{
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("queryName", queryName);
 		paraMap.put("material_id", material_id);
+		paraMap.put("userId", this.getUserInfo().get("id").toString());
+		
 		PageParameter<Map<String, Object>> pageParameter = new PageParameter<Map<String, Object>>(
 				pageNum, pageSize);
 		pageParameter.setParameter(paraMap);
@@ -107,6 +113,7 @@ public class DataAuditController extends BaseController{
 				.findDataAudit(pageParameter);
 		int totoal_count = dataAuditService.findDataAuditCount(pageParameter);
 
+		
 		Map<String, Object> vm_map = new HashMap<String, Object>();
 		vm_map.put("List_map", List_map);
 		vm_map.put("material_id", material_id);

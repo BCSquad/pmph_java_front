@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.mymessage.service.NoticeMessageService;
+import com.bc.pmpheep.general.pojo.Content;
 import com.bc.pmpheep.general.pojo.Message;
+import com.bc.pmpheep.general.service.ContentService;
 import com.bc.pmpheep.general.service.MessageService;
 
 
@@ -24,6 +26,9 @@ public class MessageController extends BaseController{
 	
 	@Autowired
 	MessageService mssageService;
+	
+	@Autowired
+	ContentService contentService;
 	
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.mymessage.service.NoticeMessageServiceImpl")
@@ -231,7 +236,7 @@ public class MessageController extends BaseController{
 			paraMap.put("materialId", materialId);
 			//备注附件
 			List<Map<String,Object>> listAttachment = noticeMessageService.queryNoticeMessageDetailAttachment(paraMap);
-			//联系人
+			//联系人z
 			List<Map<String,Object>> listContact = noticeMessageService.queryNoticeMessageDetailContact(paraMap);
 			
 			mv.addObject("map",mapTitle);
@@ -247,12 +252,14 @@ public class MessageController extends BaseController{
 		
 		//mongoDB查询通知内容
 		//Message message = mssageService.get("5a68260c2d85aa4450c15ba5");
+		
+		Content content = contentService.get("5a6a87912d855ccd8d3618d7");
 		//更新通知点击量
 		noticeMessageService.updateNoticeClicks(cmsId);
 		
 		
 		//mv.addObject("message",message);
-		//mv.addObject("messageId",messageId);
+		//mv.addObject("x",messageId);
 		
 		mv.setViewName("commuser/message/noticeMessageDetail");
 		return mv;

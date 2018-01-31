@@ -68,9 +68,9 @@ function showup(id,book_id,is_long) {
 		window.location.href=contextpath + 'readdetail/todetail.action?state=write&id='+book_id;
 	}else if(is_long=='false'){
 		 $("#comm_id").val(id);
-		 $("#bookmistake").show();
-	}
-	 
+	        	 $("#bookmistake").show();
+	        }
+
 }
 
 //点击弹窗隐藏

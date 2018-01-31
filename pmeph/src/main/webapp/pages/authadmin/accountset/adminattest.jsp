@@ -133,7 +133,22 @@
             <form>
             <table border="0" class="form-table">
                     <tr>
-                        <td colspan="6"><font class="td-title">机构管理员信息登记（<font color="#fd9a2e"><c:if test="${admininfo.progress==0}">已提交</c:if><c:if test="${admininfo.progress==1}">已通过</c:if><c:if test="${admininfo.progress==2}">已退回</c:if></font>）</font></td>
+                        <td colspan="6">
+                        <font class="td-title">机构管理员信息登记
+                                                                    （<font color="#fd9a2e">
+                        <c:choose>                                           
+	                        <c:when test="${admininfo.is_proxy_upload==false}">
+	                        	未提交
+	                        </c:when>
+	                        <c:otherwise>
+		                        <c:if test="${admininfo.progress==0}">已提交</c:if>
+		                        <c:if test="${admininfo.progress==1}">已通过</c:if>
+		                        <c:if test="${admininfo.progress==2}">已退回</c:if>
+	                        </c:otherwise>
+                        </c:choose>
+                        </font>）
+                        </font>
+                        </td>
                     </tr>
                     <tr>
                     	<td style="width:400px" >
