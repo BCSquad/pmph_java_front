@@ -39,7 +39,7 @@
 		   	<c:choose>
         		<c:when test="${not empty page}">
         			<c:forEach items="${page.rows}" var="cms" varStatus="vs">
-           			<div class="item behind" onclick="">
+           			<div class="item behind" onclick="window.location.href='${ctx}/articledetail/toPage.action?wid=${cms.id }'">
                 			<div class="command">
 			                   	<span style="margin-left: 5px">推荐</span>
 			               	</div>
@@ -48,7 +48,7 @@
 	                       			<img src="${ctx}/statics/testfile/p2.png" />
 	                   			</div>
 
-	                    		<p  class="content-title"  onclick="window.location.href='${ctx}/articledetail/toPage.action?wid=${cms.id }'">${cms.title }</p>
+	                    		<p  class="content-title"  >${cms.title }</p>
 	                    		<p  class="content-text">
 	                            		${cms.summary }
 	                    		<div  class="foot">
