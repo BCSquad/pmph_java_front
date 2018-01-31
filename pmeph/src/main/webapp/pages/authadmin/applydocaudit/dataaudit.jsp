@@ -32,6 +32,7 @@
 	<input type="hidden" id="userId" value="${userId }">
 	
 	
+	
 	<div
 		style="width: 100%; padding: 0; margin: 0; height: 100px; border: none; overflow: hidden;">
 		<jsp:include page="/pages/comm/headGreenBackGround.jsp"></jsp:include>
