@@ -19,7 +19,9 @@ import com.bc.pmpheep.back.commuser.cms.bean.CmsNoticeList;
 import com.bc.pmpheep.back.commuser.cms.service.CmsNoticeManagementService;
 import com.bc.pmpheep.back.commuser.mymessage.service.NoticeMessageService;
 import com.bc.pmpheep.general.controller.BaseController;
+import com.bc.pmpheep.general.pojo.Content;
 import com.bc.pmpheep.general.pojo.Message;
+import com.bc.pmpheep.general.service.ContentService;
 import com.bc.pmpheep.general.service.MessageService;
 
 /**
@@ -47,7 +49,8 @@ public class CmsNoticeManagementController extends BaseController {
 	CmsNoticeManagementService cmsNoticeManagementService;
 	@Autowired
 	MessageService mssageService;
-	
+	@Autowired
+	ContentService contentServioce;
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.mymessage.service.NoticeMessageServiceImpl")
 	NoticeMessageService noticeMessageService;
@@ -98,14 +101,24 @@ public class CmsNoticeManagementController extends BaseController {
 		public ModelAndView toNoticeMessageDetail(HttpServletRequest request){
 			String messageId=request.getParameter("id");
 			String tag=request.getParameter("tag");
+//			ModelAndView mv = new ModelAndView();
+//			Map<String,Object> paraMap = new HashMap<String,Object>();
+//			paraMap.put("messageId", messageId);
+			
+			String materialId=request.getParameter("materialId");
+			String cmsId=request.getParameter("cmsId");
 			ModelAndView mv = new ModelAndView();
 			Map<String,Object> paraMap = new HashMap<String,Object>();
-			paraMap.put("messageId", messageId);
+			paraMap.put("materialId", materialId);
+			paraMap.put("cmsId", cmsId);
+			
 			//标题、时间、邮寄地址、备注
 			Map<String,Object> mapTitle =new HashMap<>();
-			mapTitle=noticeMessageService.queryCMSNotice(paraMap);
+			mapTitle=noticeMessageService.queryNoticeMessageDetail(paraMap);
+			mv.addObject("firsttag", "首页");
 			mv.addObject("firsttag", "首页");
 			mv.addObject("firstpath", "homepage/tohomepage.action");
+			mv.addObject("materialId",materialId);
 			if(tag!=null && tag.equals("FromCommunityList")){
 				//来自教材社区列表的request
 				
@@ -118,10 +131,9 @@ public class CmsNoticeManagementController extends BaseController {
 				mv.addObject("secondpath", "cmsnotice/tolist.action");
 			}
 			
-			
 			if(mapTitle!=null && mapTitle.size()>0){
 				paraMap.put("attachmentId", mapTitle.get("attachmentId"));
-				paraMap.put("materialId", mapTitle.get("materialId"));
+				paraMap.put("materialId", materialId);
 				//备注附件
 				List<Map<String,Object>> listAttachment = noticeMessageService.queryNoticeMessageDetailAttachment(paraMap);
 				//联系人
@@ -130,15 +142,11 @@ public class CmsNoticeManagementController extends BaseController {
 				mv.addObject("map",mapTitle);
 				mv.addObject("listAttachment",listAttachment);
 				mv.addObject("listContact",listContact);
-				
 			}
-			
+				
 			//mongoDB查询通知内容
-			Message message = mssageService.get(messageId);
-			
+			Content message= contentServioce.get(messageId);
 			mv.addObject("message",message);
-			
-			
 			mv.setViewName("commuser/message/noticeMessageDetail");
 			return mv;
 		}

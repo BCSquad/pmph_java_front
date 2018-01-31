@@ -38,7 +38,13 @@ public interface CommunityService {
     List<Map<String,Object>> queryTextBookList(Long id );
     /**查询社区主页精选书评
      * @param id 教材id
+     * @param startnum  分也开始序号
+     * @param size 每页的数据数量
      * @return  List<Map<String,Object>>
      */
-    List<Map<String,Object>> querySomeComment(Long id);
+    List<Map<String,Object>> querySomeComment(Long id,int startnum ,int size);
+    /**查询社区主页精选书评
+     * @param id 教材id
+     */
+    int queryCommentCount(Long id);
 }

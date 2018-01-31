@@ -37,24 +37,30 @@ function  load(tag){
         		$("#nomore").hide();
         	}
         	var html='';
+        	var lastest='';
         	if(tag=="search"){
         		$("#changediv").html("");
         	}
         	$.each(json,function(i,n){
+        		if(pageNumber==1&&i<3){
+        			lastest='<div class="items_img">最新</div>';
+        		}else{
+        			lastest='';
+        		}
         		html='<div class="items" >'+
         					'<div class="left" >'+
-     		   					'<div class="items_img">最新</div>'+
+        					       lastest+
      		   					'<div class="item1 cutmore">'+ 
-     		   						'<a href="'+contextpath+'cmsnotice/noticeMessageDetail.action?id='+n.mid+'&&tag=FromCommunityList">'+n.title+'</a>'+  
+     		   						'<a href="'+contextpath+'cmsnotice/noticeMessageDetail.action?id='+n.mid+'&&materialId='+n.material_id+'&&cmsId='+n.id+'&&tag=FromCommunityList">'+n.title+'</a>'+  
      		   					'</div>'+
      		   					'<div class="item2 cutmore">'+
-     		   					    '<p style="margin:0">'+
-     		   						n.summary+
+     		   					    '<p style="margin:0;padding:0;height:40px">'+
+     		   						(n.content!=null? n.content:'(内容为空)')+
      		   						'</p>'+
      		   					'</div>'+
      		   				'</div>'+
      		   				'<div  class="right" style="text-align: center;line-height: 136px">'+
-     		   					'<a href="'+contextpath+'Community/tocommunity.action?id='+n.id+'" style="color:#43B0A5">进入社区</a>'+
+     		   					'<a href="'+contextpath+'community/toCommunity.action?id='+n.id+'" style="color:#43B0A5">进入社区</a>'+
      		   				'</div>'+               
      		   			'</div>'; 
         		$("#changediv").append(html);

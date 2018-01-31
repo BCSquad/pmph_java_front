@@ -8,7 +8,7 @@
 			success:function(json){
 				$("#comment").css({"border-bottom":"2px solid #5A9DA3","color":"#444544"});
 				  $("#smallvideo").css({"border-bottom":"2px solid #FFFFFF","color":"#9c9c9c"});
-				  $("#more").html('<a href="'+contextpath+'community/morecomments.action">查看更多精彩书评</a>');
+				  $("#more").html('<a href="'+contextpath+'community/morecomments.action?materialId='+$("#materialId").val()+'">查看更多精彩书评</a>');
 				  $("#ullist").html("");
 				  $.each(json.comments,function(i,n){
 					  $("#ullist").append('<li class="commentli"><p class="title">'+
@@ -25,30 +25,7 @@
 							    (n.score>=8.0 ? "yellowstar":"graystar")
 								  +'"></span><span class="scoreimg '+
 								    (n.score>=10.0 ? "yellowstar":"graystar")
-									  +'"></span></p><p  class="contentext" >'+n.content+'</p></li>');
-					  /* $("#ullist").append('<li style="border-bottom:1px dashed #CCCCCC;height:130px">'+
-			                  '<p style="font-size: 16px;margin: 10px auto 0px;color:#606060">'+n.bookname+'</p>'+
-			                  '<p  style="font-size: 12px;margin: 5px auto 5px;color:#AFAFAF">'+
-			                       '<span style="float:left;margin-right:10px">'+n.realname+'  发表了评论</span>'+
-			                       '<span style="background-image: url('+contextpath+'/statics/image/css_sprites.png);'+
-			                                     'background-position: -183px -169px; background-repeat: no-repeat;'+
-												'height: 24px;width: 15px;float: left;"></span>'+
-			                       '<span style="background-image: url('+contextpath+'/statics/image/css_sprites.png);'+
-							                     'background-position: -183px -169px; background-repeat: no-repeat;'+
-												'height: 24px;width: 15px;float: left;"></span>'+
-								   '<span style="background-image: url('+contextpath+'/statics/image/css_sprites.png);'+
-							                     'background-position: -183px -169px; background-repeat: no-repeat;'+
-												'height: 24px;width: 15px;float: left;"></span>'+
-									'<span style="background-image: url('+contextpath+'/statics/image/css_sprites.png);'+
-							                     'background-position: -183px -169px; background-repeat: no-repeat;'+
-												'height: 24px;width: 15px;float: left;"></span>'+
-									'<span style="background-image: url('+contextpath+'/statics/image/css_sprites.png);'+
-							                     'background-position: -183px -169px; background-repeat: no-repeat;'+
-												'height: 24px;width: 15px;float: left;"></span>'+
-			                  
-			                  '</p>'+
-			                  '<p  style="font-size: 14px;margin: 0;height:66px;width:230px;overflow: hidden;line-height: 22px;color:#5C6878">计算机上计算机技术进口机点击放大机房的进口发动机可放大尽快发的会计的房价负担的咖啡机说多少遍的速度高速的公司编号大航海时代</p>'+
-			              '</li>'); */
+									  +'"></span></p><p  class="contentext" >'+n.content+'</p></li>');  
 				  });	
 			}
 	  }); 
