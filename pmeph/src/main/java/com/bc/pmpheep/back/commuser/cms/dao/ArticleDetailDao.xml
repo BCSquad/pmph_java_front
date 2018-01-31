@@ -89,6 +89,7 @@
 		t.id,
 		t.mid,
 		c.realname,
+		c.avatar,
 		t.gmt_create,
 		<!-- t.score, -->
 		c.avatar
