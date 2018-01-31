@@ -21,6 +21,14 @@ import org.apache.ibatis.type.Alias;
  * @审核人 ：
  *
  */
+/**
+ * @author 
+ *@Title: 
+ * @Description: 
+ * @param 
+ * @return 
+ * @throws
+ */
 @Alias("CmsNoticeList")
 public class CmsNoticeList {
 	/**
@@ -60,6 +68,19 @@ public class CmsNoticeList {
      */
     private String mid;
     
+    /**
+     * 内容
+     */
+    private String contentxt;
+    
+	public String getContentxt() {
+		return contentxt;
+	}
+
+	public void setContentxt(String contentxt) {
+		this.contentxt = contentxt;
+	}
+
 	public String getMid() {
 		return mid;
 	}

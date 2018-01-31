@@ -67,7 +67,7 @@ $(function(){
 	                		    (responsebean[i].isPromote?"<div class='items_img'>推荐</div> ":"")+
 	        	                "<div class=\"item1 cutmore\">" +
 	        	                "<a href='"+contextpath+"cmsnotice/noticeMessageDetail.action?id="+responsebean[i].mid+"'>" +responsebean[i].title+"</a></div> "+
-	        	                "<div class=\"item2 cutmore\"><p style='margin:0;height:40px;line-height:20px'>"+(responsebean[i].summary==null?"（无摘要介绍）":responsebean[i].summary)+"</p></div> "+
+	        	                "<div class=\"item2 cutmore\"><p style='margin:0;height:40px;line-height:20px'>"+(responsebean[i].contentxt==null?"（内容为空）":responsebean[i].contentxt)+"</p></div> "+
 	        	                "<div class=\"item3\">  "+
 	        	                     deadline+
 	        	                    "<div style=\"float:right\">发布日期："+formatDate(responsebean[i].gmtCreate,"yyyy.MM.dd")+"</div> "+ 

@@ -4,6 +4,8 @@ package com.bc.pmpheep.back.commuser.cms.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -59,6 +61,8 @@ public class CmsNoticeManagementController extends BaseController {
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.homepage.service.HomeServiceImpl")
 	private HomeService homeService;
+	@Autowired
+	ContentService contentService;
 
 	/**
 	 * 跳转到教材列表页面
@@ -101,6 +105,12 @@ public class CmsNoticeManagementController extends BaseController {
 			userid=Long.valueOf(usermap.get("id").toString());
 		}
 		List<CmsNoticeList> cmsNoticeList =  cmsNoticeManagementService.list(pageSize, pageNumber, order,userid);
+		if(cmsNoticeList!=null && cmsNoticeList.size()>0){
+			for (CmsNoticeList cmsNotice : cmsNoticeList) {
+				Content content = contentService.get(cmsNotice.getMid());
+				cmsNotice.setContentxt(removeHtml(content.getContent()));
+			}
+		}
 		return cmsNoticeList ;
 	}
     
@@ -150,12 +160,19 @@ public class CmsNoticeManagementController extends BaseController {
 				mv.addObject("map",mapTitle);
 				mv.addObject("listAttachment",listAttachment);
 				mv.addObject("listContact",listContact);
-			}
-				
+			}	
 			//mongoDB查询通知内容
 			Content message= contentServioce.get(messageId);
 			mv.addObject("message",message);
 			mv.setViewName("commuser/message/noticeMessageDetail");
 			return mv;
+		}
+		//去掉字符串中的html标签
+		public String removeHtml(String str){
+			String regEx_html="<[^>]+>"; //定义HTML标签的正则表达式 
+			Pattern p_html=Pattern.compile(regEx_html,Pattern.CASE_INSENSITIVE); 
+			Matcher m_html=p_html.matcher(str); 
+			str=m_html.replaceAll(""); //过滤html标签 
+			return str;
 		}
 }
