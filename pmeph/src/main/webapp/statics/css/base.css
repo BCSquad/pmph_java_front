@@ -238,6 +238,97 @@ body {
     display: none;
 }
 
+.head .help {
+    position: absolute;
+    top: 36px;
+    right: 0px;
+    /*width: 80px;*/
+    color: #414141;
+    vertical-align: middle;
+    line-height: 16px;
+    height: 16px;
+}
+
+.head .help .icon {
+    background: url("../image/a.png");
+    background-position: -53px -16px;
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.head .help .text {
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+    width: 60px;
+    vertical-align: text-top;
+}
+
+.head .writing {
+    position: absolute;
+    top: 36px;
+    right: 80px;
+    /*width: 80px;*/
+    color: #414141;
+    vertical-align: middle;
+    line-height: 16px;
+    height: 16px;
+    cursor: pointer;
+    margin-right: 10px;
+    border-right: 1px solid #e1e1e1;
+}
+
+.head .writing.logined {
+    right: 100px;
+    border-right:none;
+    top: 30px;
+}
+
+.head .writing .icon {
+    background: url("../image/a.png");
+    background-position: -16px -15px;
+    height: 16px;
+    width: 14px;
+    display: inline-block;
+    cursor: pointer;
+
+}
+
+.head .writing .text {
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+    width: 50px;
+    vertical-align: text-top;
+}
+
+.head .loginout {
+    position: absolute;
+    top: 36px;
+    right: 160px;
+    /*width: 80px;*/
+    color: #414141;
+    vertical-align: middle;
+    line-height: 16px;
+    height: 16px;
+    cursor: pointer;
+    margin-right: 10px;
+    border-right: 1px solid #e1e1e1;
+}
+
+.head .loginout .login {
+    width: 80px;
+    display: inline-block;
+    color: #ff0000;
+}
+
+.head .loginout .logout {
+    width: 70px;
+    display: inline-block;
+}
+
 .tail {
     padding-bottom: 30px;
 }
@@ -394,8 +485,7 @@ td {
     top: 0;
 }
 
-
-.float-menu .item{
+.float-menu .item {
     display: block;
     width: 44px;
     height: 44px;
@@ -405,24 +495,25 @@ td {
     border-radius: 4px;
     text-align: center;
     padding: 4px;
-    text-decoration:none;
+    text-decoration: none;
     line-height: 22px;
     cursor: pointer;
     font-size: 15px;
 }
-.float-menu .item.orange{
+
+.float-menu .item.orange {
     background: #FF9C43;
 }
 
-.float-menu .item.blue{
+.float-menu .item.blue {
     background: #009EA3;
 }
 
-.float-menu .item.black{
+.float-menu .item.black {
     line-height: 44px;
     background: #383C48;
 }
 
-.input-error{
-    border:1px solid red;
+.input-error {
+    border: 1px solid red;
 }
