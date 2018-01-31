@@ -185,7 +185,7 @@
 		material a
 		left join material_org o on a.id = o.material_id
 		left join writer_user u on u.id = #{parameter.logUserId}
-		LEFT JOIN declaration b ON a.id = b.material_id
+		LEFT JOIN declaration b ON a.id = b.material_id and b.online_progress != 0
 		LEFT JOIN declaration c ON a.id = c.material_id and c.user_id =
 		#{parameter.logUserId} and c.online_progress != 2
 		LEFT JOIN dec_position dp on c.id = dp.declaration_id and dp.chosen_position
@@ -220,7 +220,7 @@
 		material a
 		left join material_org o on a.id = o.material_id
 		left join writer_user u on u.id = #{parameter.logUserId}
-		LEFT JOIN declaration b ON a.id = b.material_id
+		<!-- LEFT JOIN declaration b ON a.id = b.material_id -->
 		LEFT JOIN declaration c ON a.id = c.material_id and c.user_id =
 		#{parameter.logUserId} and c.online_progress != 2
 		WHERE
