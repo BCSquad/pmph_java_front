@@ -182,6 +182,7 @@ public class ArticleDetailController extends BaseController {
 	public Map<String, Object> insertComment(HttpServletRequest request){
 		Map<String, Object> map=new HashMap<String, Object>();
 		 String wid=request.getParameter("wid");
+		 String title=request.getParameter("title");
 //		String wid = "10";
 		String content=request.getParameter("content");
 		
@@ -193,6 +194,7 @@ public class ArticleDetailController extends BaseController {
 		map.put("author_id",user.get("id")); //作者id
 		map.put("is_staging",1); //提交
 		map.put("path",0); //根路径
+		map.put("title",title); //标题
 		
 		Map<String, Object> flagMap = articleDetailService.insertWriteArticle(map,content);
 		return flagMap;
