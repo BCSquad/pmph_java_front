@@ -29,17 +29,17 @@
 <jsp:include page="/pages/comm/head.jsp">
     <jsp:param value="homepage" name="pageTitle"/>
 </jsp:include>
+<input type="hidden" id="auto_play" value="${adInfo1.auto_play}">
+<input type="hidden" id="animation_interval" value="${adInfo1.animation_interval}">
 <div class="body">
     <div class="content-wrapper">
         <div class="area-1">
             <div class="banner">
                 <div class="move" id="move">
                     <ul>
-                        <li><img src="${ctx}/statics/testfile/index.png" style="width: 922px; height: 380px"></li>
-                        <li><img src="${ctx}/statics/testfile/index.png" style="width: 922px; height: 380px"></li>
-                        <li><img src="${ctx}/statics/testfile/index.png" style="width: 922px; height: 380px"></li>
-                        <li><img src="${ctx}/statics/testfile/index.png" style="width: 922px; height: 380px"></li>
-                        <li><img src="${ctx}/statics/testfile/index.png" style="width: 922px; height: 380px"></li>
+                        <c:forEach var="ad" items="${adInfo1.detailList}">
+                            <li><img src="${ctx}/image/${ad.image}.action" style="width: 922px; height: 380px"/></li>
+                        </c:forEach>
                     </ul>
                 </div>
                 <div class="ctrl" id="ctrl"></div>
@@ -74,9 +74,10 @@
                                                                       style="margin-left: 30px;margin-top: 42px"></div>
             </div>
             <c:forEach items="${listDou}" var="list" varStatus="status">
+                
                 <%-- <c:if test="${status.index==0}">
                     <div class="content-left" style="margin-left: 30px">
-                        <p class="content-size"><a href="${ctx}/message/noticeMessageDetail.action?id=${list.id }" class="astyle">${list.title}</a></p>
+                        <p class="content-size"><a href="${ctx}/message/noticeMessageDetail.action?cmsId=${list.id }&&materialId=${list.material_id}" class="astyle">${list.title}</a></p>
                         <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date" pattern="yyyy-MM-dd"/></p>
                         <div class="left_join"
                         onclick="window.location.href='${ctx}/material/toMaterialAdd.action?material_id=${list.material_id}'">报名参加</div>
@@ -84,7 +85,7 @@
                 </c:if> --%>
                 <%-- <c:if test="${status.index!=0}"> --%>
                   <div class="content-left">
-                      <p class="content-size"><a href="${ctx}/message/noticeMessageDetail.action?id=${list.id }" class="astyle">${list.title}</a></p>
+					  <p class="content-size"><a href="${ctx}/message/noticeMessageDetail.action?cmsId=${list.id }&&materialId=${list.material_id}" class="astyle">${list.title}</a></p>
                       <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date" pattern="yyyy-MM-dd"/></p>
                       
                       <c:if test="${list.notEnd ==1}">
@@ -95,6 +96,7 @@
 	                      <div class="left_join end">已结束</div>
                   	  </c:if>
                   </div>
+               
                 <%-- </c:if> --%>
             </c:forEach>
             <div class="more" onclick="top.location='${ctx}/cmsnotice/tolist.action'">全部>></div>
@@ -184,10 +186,9 @@
             </div>
         </div>
         <div class="area-5">
-            <div class="photo"><img src="${ctx}/statics/testfile/adv.png" class="book1"></div>
-            <div class="item"><img src="${ctx}/statics/testfile/adv.png" class="book1"></div>
-            <div class="item"><img src="${ctx}/statics/testfile/adv.png" class="book1"></div>
-            <div class="item"><img src="${ctx}/statics/testfile/adv.png" class="book1"></div>
+            <c:forEach var="ad" items="${adInfo2.detailList}">
+                <div class="item"><img src="${ctx}/image/${ad.image}.action" height="82" width="285" class="book1"></div>
+            </c:forEach>
         </div>
         <div class="area-6">
             <div class="doc"></div>

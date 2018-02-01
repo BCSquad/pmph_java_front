@@ -177,4 +177,19 @@ LIMIT 0,10
   <select id="queryBookType" parameterType="map" resultMap="Mapresult">
        select * from material_type where  parent_id=#{parent_id} order by sort 
   </select>
+
+
+    <!-- 查询广告信息-->
+    <select id="getPageAdInfo" parameterType="string" resultType="map">
+       select * from cms_advertisement where  adname=#{adName} and is_disabled='0'
+  </select>
+
+
+    <!-- 查询广告明细-->
+    <select id="getPageAdDetail" parameterType="string" resultType="map">
+		select i.* from
+		 cms_advertisement_image i join cms_advertisement a on i.advert_id=a.id
+		 where  a.adname=#{adName} and  a.is_disabled='0' and i.is_disabled='0' order by i.id
+	</select>
+
 </mapper>

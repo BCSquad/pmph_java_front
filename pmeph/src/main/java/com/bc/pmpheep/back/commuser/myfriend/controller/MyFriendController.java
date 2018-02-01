@@ -64,6 +64,13 @@ public class MyFriendController extends com.bc.pmpheep.general.controller.BaseCo
         try {
             int startrow = 0;
             List<Map<String, Object>> listFriends = myFriendService.listMyFriend(writerUser, startrow);
+            for(Map<String, Object> map:listFriends){
+            	if("DEFAULT".equals(map.get("avatar").toString())){
+    				map.put("avatar", "statics/pictures/head.png");
+    			}else{
+    				map.put("avatar", "file/download/"+map.get("avatar")+".action");
+    			}
+            }
             int remainCount = myFriendService.listMyFriendCount(writerUser, startrow+listFriends.size());
             model.setViewName(pageUrl);
             model.addObject("row", startrow);

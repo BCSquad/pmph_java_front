@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.mymessage.service.NoticeMessageService;
+import com.bc.pmpheep.general.pojo.Content;
 import com.bc.pmpheep.general.pojo.Message;
+import com.bc.pmpheep.general.service.ContentService;
 import com.bc.pmpheep.general.service.MessageService;
 
 
@@ -24,6 +26,9 @@ public class MessageController extends BaseController{
 	
 	@Autowired
 	MessageService mssageService;
+	
+	@Autowired
+	ContentService contentService;
 	
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.mymessage.service.NoticeMessageServiceImpl")
@@ -133,6 +138,19 @@ public class MessageController extends BaseController{
 		paraMap.put("userId",userId);
 		paraMap.put("startPara",0);
 		List<Map<String,Object>> list = noticeMessageService.selectNoticeMessage(paraMap);
+		for(int i =0;i<list.size();i++){
+			Map<String,Object> map1 = list.get(i); 
+			if(map1.get("msgType").toString().equals("1")||map1.get("msgType").toString().equals("0")){
+				Content content = contentService.get(map1.get("fId").toString());
+				if(null!=content){
+					map1.put("title",content.getContent());
+				}else{
+					map1.put("title","内容空!");
+				}
+				
+			}
+			
+		}
 		//不带分页的数据总量
 		int count = noticeMessageService.selectNoticeMessageTotalCount(paraMap);
 		
@@ -170,6 +188,18 @@ public class MessageController extends BaseController{
 		paraMap.put("userId",userId);
 		
 		List<Map<String,Object>> list = noticeMessageService.selectNoticeMessage(paraMap);
+		for(int i =0;i<list.size();i++){
+			Map<String,Object> map1 = list.get(i); 
+			if(map1.get("msgType").toString().equals("1")||map1.get("msgType").toString().equals("0")){
+				Content content = contentService.get(map1.get("fId").toString());
+				if(null!=content){
+					map1.put("title",content.getContent());
+				}else{
+					map1.put("title","内容空!");
+				}
+				
+			}
+		}
 		//不带分页的数据总量
 		int count = noticeMessageService.selectNoticeMessageTotalCount(paraMap);
 		//控制显示“加载更多”
@@ -231,7 +261,7 @@ public class MessageController extends BaseController{
 			paraMap.put("materialId", materialId);
 			//备注附件
 			List<Map<String,Object>> listAttachment = noticeMessageService.queryNoticeMessageDetailAttachment(paraMap);
-			//联系人
+			//联系人z
 			List<Map<String,Object>> listContact = noticeMessageService.queryNoticeMessageDetailContact(paraMap);
 			
 			mv.addObject("map",mapTitle);
@@ -247,12 +277,18 @@ public class MessageController extends BaseController{
 		
 		//mongoDB查询通知内容
 		//Message message = mssageService.get("5a68260c2d85aa4450c15ba5");
+		
+		Content content = contentService.get(mapTitle.get("mongoId").toString());
+		if(null!=content){
+			mv.addObject("content",content.getContent());
+		}
+		
 		//更新通知点击量
 		noticeMessageService.updateNoticeClicks(cmsId);
 		
 		
 		//mv.addObject("message",message);
-		//mv.addObject("messageId",messageId);
+		//mv.addObject("x",messageId);
 		
 		mv.setViewName("commuser/message/noticeMessageDetail");
 		return mv;

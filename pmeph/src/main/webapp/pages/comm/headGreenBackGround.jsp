@@ -36,14 +36,14 @@
             <div class="div-menu-child <%="teachercert".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
                  onclick="window.location.href='<c:url value="/teacherauth/toPage.action"/>'">教师认证
             </div>
+            <div class="div-menu-child <%="message".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
+                 onclick="window.location.href='<c:url value="/AllMessage/init.action"/>'">消息
+            </div>
             <div class="div-menu-child <%="usermanage".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
                  onclick="window.location.href='<c:url value="/user/writerLists.action"/>'">用户管理
             </div>
             <div class="div-menu-child <%="account".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
                  onclick="window.location.href='<c:url value="/admininfocontroller/toadmininfo.action"/>'">账户设置
-            </div>
-            <div class="div-menu-child <%="message".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
-                 onclick="window.location.href='<c:url value="/AllMessage/init.action"/>'">消息
             </div>
         </div>
     </div>

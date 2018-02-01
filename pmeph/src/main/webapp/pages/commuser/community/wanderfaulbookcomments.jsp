@@ -33,71 +33,51 @@ String contextpath=request.getContextPath();
             <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div style="background-color: #f6f6f6;padding-top:28px;padding-bottom:130px"> 
 <div class="content-wrapper">
+         <input type="hidden" id="pagenum" value="${pagenum }"/>
+         <input type="hidden" id="pagesize" value="${pagesize }"/>
+         <input type="hidden" id="total" value="${total }"/>
+         <input type="hidden" id="pagetotal" value="${pagetotal }"/>
     	<div class="area2">
         		<div class="namehead">
         		<span class="name" >精选书评</span>
         		</div>
    		</div>
      <div style="margin-top:25px">
+     
+     <c:forEach items="${comments }" var="comment" >
      <div class="collection">
         <div class="content">
             <div  class="content-img">
-                <img src="${article.imgpath }"/>
+                <img src="${comment.imagepath=='defualt'? 'statics/image/564f34b00cf2b738819e9c35_122x122!.jpg':comment.imagepath}"/>
             </div>
             <div  class="content-text">
                 <div class="text">
-                                                                             鸡蛋减肥法冬季减肥就发电机风机电机东方反对开口问哦饿哦我id到时看看地方看看疯狂的疯狂开发贷款房价跌哦日欸惹库房库管库管库管看看哥哥
+                        ${comment.title }
                 </div>
                 <div class="message">
                    <div class="personicon"></div>
-                   <div class="username">张三</div>
-                   <div class="staricon" >
+                   <div class="username">${comment.username }</div>
+                   <div style="float: left;height: 33px;width: 75px;">
+                   <div class="staricon ${comment.score>0.0 ? 'yellowstar':'graystar' }" >
+                   </div>
+    		        <div class="staricon ${comment.score>2.0 ? 'yellowstar':'graystar' }">
     		       </div>
-    		        <div class="staricon">
+    		        <div class="staricon ${comment.score>4.0? 'yellowstar':'graystar' }">
     		       </div>
-    		        <div class="staricon">
+    		        <div class="staricon ${comment.score>6.0? 'yellowstar':'graystar' }">
     		       </div>
-    		        <div class="staricon">
+    		        <div class="staricon ${comment.score>8.0 ? 'yellowstar':'graystar' }">
     		       </div>
-    		        <div class="staricon">
     		       </div>
                 </div>
                 <div class="end">
-                                                                健康水健康水等级考试的角色等级考试的健康都换积分兑换积分兑换积分兑换话费的环境黑胡椒粉的机会发动机发动机回家的话就是觉得和计算机和环境和精神上的
+                      ${comment.contentxt }                                         
                 </div>
             </div>
         </div>
     </div>
-    
-   <div class="collection">
-        <div class="content">
-            <div  class="content-img">
-                <img src="${article.imgpath }"/>
-            </div>
-            <div  class="content-text">
-                <div class="text">
-                                                                             鸡蛋减肥法冬季减肥就发电机风机电机东方反对开口问哦饿哦我id到时看看地方看看疯狂的疯狂开发贷款房价跌哦日欸惹库房库管库管库管看看哥哥
-                </div>
-                <div class="message">
-                   <div class="personicon"></div>
-                   <div class="username">张三</div>
-                   <div class="staricon" >
-    		       </div>
-    		        <div class="staricon">
-    		       </div>
-    		        <div class="staricon">
-    		       </div>
-    		        <div class="staricon">
-    		       </div>
-    		        <div class="staricon">
-    		       </div>
-                </div>
-                <div class="end">
-                                                                健康水健康水等级考试的角色等级考试的健康都换积分兑换积分兑换积分兑换话费的环境黑胡椒粉的机会发动机发动机回家的话就是觉得和计算机和环境和精神上的
-                </div>
-            </div>
-        </div>
-    </div>
+    </c:forEach>
+  
     </div>
     <div style="height:70px;padding-top:30px;background-color: #ffffff;">
     <div style="text-align: right;">
@@ -105,14 +85,14 @@ String contextpath=request.getContextPath();
 	        </ul>
 	        <div style="display: inline-block;vertical-align: top;text-align:left;">
 	            <select id="edu" name="edu">
-	                <option value="5"  >每页5条</option>
-	                <option value="10" >每页10条</option>
-	                <option value="15" >每页15条</option>
-	                <option value="20">每页20条</option>
+	                <option value="5"  ${pagesize=='5'? 'selected':'' }>每页5条</option>
+	                <option value="10" ${pagesize=='10'? 'selected':'' }>每页10条</option>
+	                <option value="15" ${pagesize=='15'? 'selected':'' } >每页15条</option>
+	                <option value="20" ${pagesize=='20'? 'selected':'' }>每页20条</option>
 	            </select>
 	        </div>
 	        <div class="pageJump">
-	            <span>共10页，共10条数据，跳转到</span>
+	            <span>共${pagetotal }页，共${total }条数据，跳转到</span>
 	            <input type="text"/>
 	            <span class="pp">页</span>
 	            <button type="button" class="button">确定</button>
@@ -126,9 +106,11 @@ String contextpath=request.getContextPath();
 </body>
 <script type="text/javascript">
 $(function(){
+	var startnum= parseInt($("#pagenum").val());
+	var  pagetotal=parseInt($("#pagetotal").val());
 	Page({
-        num:10,					
-        startnum: 1,
+        num:pagetotal,					
+        startnum: startnum,
         elem:$("#page1"),
         callback: function (n) {
         

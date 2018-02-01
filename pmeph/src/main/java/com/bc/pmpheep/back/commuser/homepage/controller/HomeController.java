@@ -49,6 +49,9 @@ public class HomeController extends BaseController{
         List<Map<String, Object>> listAut = homeService.queryAuthor();
         List<Map<String, Object>> listCom = homeService.queryComment();
 
+        Map<String,Object> adInfo1=homeService.getPageAdInfo("首页轮播");
+        Map<String,Object> adInfo2=homeService.getPageAdInfo("首页中部");
+
         //根据登录人查询可见公告，未登录查询所有人可见公告
         List<Map<String, Object>> listDou=new ArrayList<Map<String,Object>>();
         Map<String, Object> user=getUserInfo();
@@ -63,6 +66,8 @@ public class HomeController extends BaseController{
         modelAndView.addObject("listArt", listArt);
         modelAndView.addObject("listAut", listAut);
         modelAndView.addObject("listCom", listCom);
+        modelAndView.addObject("adInfo1", adInfo1);
+        modelAndView.addObject("adInfo2", adInfo2);
         //读取mongeldb里面的图片 
         for (Map<String, Object> pmap : listArt) {
 			Message message=messageService.get((String) pmap.get("mid"));

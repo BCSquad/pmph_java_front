@@ -91,7 +91,7 @@
 	                                </div>
 	                            </div>
 	                            <div class="rightButton">
-	                                <div onclick="toogleTip('block','${one.TYPE}',${one.auditId})" class="buttonDiv">
+	                                <div onclick="toogleTip('block','${one.TYPE}','${one.auditId}','${one.ID}')" class="buttonDiv">
 	                                        		办理
 	                                </div>
 	                            </div>
@@ -217,7 +217,7 @@
             
         });
     })
-    function toogleTip(val,type,auditId) {
+    function toogleTip(val,type,auditId,decId) {
     	var license = $("#license").val();
     	if(license==0||license==2){
     		 $('.tip').css('display',val);
@@ -227,7 +227,8 @@
     			//跳转教师资格认证页面
     			window.location.href="${ctx}/teacherauth/toPage.action?";
     		}else{
-    			window.location.href="${ctx}/dataaudit/toPage.action?material_id="+auditId;
+    			//dataaudit/toMaterialAudit.action?material_id=10&declaration_id=123&view_audit=audit
+    			window.location.href="${ctx}/dataaudit/toMaterialAudit.action?material_id="+auditId+"&declaration_id="+decId+"&view_audit=audit";
     		}
     	}	
     		

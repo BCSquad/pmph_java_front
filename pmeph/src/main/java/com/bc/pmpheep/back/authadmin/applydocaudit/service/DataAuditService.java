@@ -136,4 +136,7 @@ public interface DataAuditService {
 	 */
 	public Map<String,Object> queryMaterialbyId(String material_id);
 	
+	//更新Declaration修改时间
+	void updateDeclarationUpdateTime(Map<String, Object> queryMap);
+	
 }

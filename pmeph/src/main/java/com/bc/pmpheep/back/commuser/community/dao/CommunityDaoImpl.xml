@@ -24,6 +24,7 @@
 		        left join  material b on t.material_id =b.id 
 		        where  t.category_id=3 
 		        and t.material_id is not null 
+		        and t.is_published=1
 		        <![CDATA[and t.material_id >0]]>
                 <![CDATA[and b.is_public <> 0]]>
 		        and t.auth_status=2
@@ -37,6 +38,7 @@
 		        left join writer_user p on p.org_id=u.org_id
 		        where  t.category_id=3
 		        and t.material_id is not null 
+		        and t.is_published=1
 		        <![CDATA[and t.material_id >0]]>
 		        and b.is_public = 0
 		        and t.auth_status=2
@@ -61,7 +63,7 @@
         from  
             cms_content cc left join cms_category  ccg  on cc.category_id=ccg.id 
        where  
-       		cc.material_id=#{materialId} and ccg.category_name='快报管理'
+       		cc.material_id=#{materialId} and ccg.id=2 and cc.is_published=1  and cc.auth_status=2 and cc.is_deleted=0 
       order by 
             cc.gmt_create desc  
      limit 0,4
@@ -70,11 +72,11 @@
      <!--根据教材id查询本套教材的图书  -->
      <select id="queryTextBookList" parameterType="map" resultMap="baseMap">
         select 
-           material_id,b.bookname,b.gmt_create,b.image_url,b.id as bookId
+           b.*
         from 
-            book b 
+            textbook t left join book b on t.isbn=b.isbn
         where 
-            b.material_id=#{materialId}
+            t.material_id=#{materialId} and  <![CDATA[t.is_published<>0]]>
         order by 
             b.sort
         limit 0,10
@@ -82,16 +84,36 @@
      
      <!--查询社区主页精选书评  -->
      <select id="querySomeComment" parameterType="map" resultMap="baseMap">
-        select c.*,bk.bookname,w.realname  
-        from book_user_comment c left join book bk on c.book_id=bk.id   
-        left join  writer_user w on c.writer_id=w.id
-		where c.book_id in(
-			select b.id 
-			from material m left join book  b  on m.id=b.material_id
-			where m.id=#{materialId}
-		) and c.is_auth>0  and c.is_deleted=0 and c.is_long>0 and c.is_hide=0
-		ORDER BY
-		 c.score
-		limit 0,4
+		select buc.* ,b.bookname,wu.username 
+		from   book_user_comment buc
+		       left join writer_user wu on buc.writer_id=wu.id
+			   left join book b on buc.book_id=b.id
+			   LEFT JOIN textbook tb on b.isbn=tb.isbn
+			   LEFT JOIN  material m on m.id=tb.material_id
+		where 
+   			 m.id=#{materialId}
+			 and buc.is_hide=0
+			 and buc.is_long=1
+			 and buc.is_deleted=0
+			 and buc.is_auth=1
+	  ORDER BY
+		 buc.score
+	  limit #{startnum},#{size}
      </select>
+     <!--查询社区主页精选书评的总数量  -->
+     <select id="queryCommentCount" parameterType="map" resultType="int">
+		select count(1)
+		from   book_user_comment buc
+			   left join book b on buc.book_id=b.id
+			   LEFT JOIN textbook tb on b.isbn=tb.isbn
+			   LEFT JOIN  material m on m.id=tb.material_id
+		where 
+   			 m.id=#{materialId}
+			 and buc.is_hide=0
+			 and buc.is_long=1
+			 and buc.is_deleted=0
+			 and buc.is_auth=1
+     </select>
+     
+     
 </mapper>
