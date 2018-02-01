@@ -3,6 +3,7 @@ package com.bc.pmpheep.back.authadmin.applydocaudit.controller;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -145,6 +146,12 @@ public class DataAuditController extends BaseController{
 			Map<String,Object> queryMap = new HashMap<String,Object>();
 			queryMap.put("material_id", material_id); 
 			queryMap.put("declaration_id", declaration_id); 
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date d= new Date();
+			String d1 = format.format(d);
+			queryMap.put("time", d1); 
+			//更新declaration表的更新时间
+			dataAuditService.updateDeclarationUpdateTime(queryMap);
 			
 			//1.作家申报表
 			List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();

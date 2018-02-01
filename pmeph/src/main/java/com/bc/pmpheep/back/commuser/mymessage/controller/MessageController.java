@@ -138,6 +138,19 @@ public class MessageController extends BaseController{
 		paraMap.put("userId",userId);
 		paraMap.put("startPara",0);
 		List<Map<String,Object>> list = noticeMessageService.selectNoticeMessage(paraMap);
+		for(int i =0;i<list.size();i++){
+			Map<String,Object> map1 = list.get(i); 
+			if(map1.get("msgType").toString().equals("1")||map1.get("msgType").toString().equals("0")){
+				Content content = contentService.get(map1.get("fId").toString());
+				if(null!=content){
+					map1.put("title",content.getContent());
+				}else{
+					map1.put("title","内容空!");
+				}
+				
+			}
+			
+		}
 		//不带分页的数据总量
 		int count = noticeMessageService.selectNoticeMessageTotalCount(paraMap);
 		
@@ -175,6 +188,18 @@ public class MessageController extends BaseController{
 		paraMap.put("userId",userId);
 		
 		List<Map<String,Object>> list = noticeMessageService.selectNoticeMessage(paraMap);
+		for(int i =0;i<list.size();i++){
+			Map<String,Object> map1 = list.get(i); 
+			if(map1.get("msgType").toString().equals("1")||map1.get("msgType").toString().equals("0")){
+				Content content = contentService.get(map1.get("fId").toString());
+				if(null!=content){
+					map1.put("title",content.getContent());
+				}else{
+					map1.put("title","内容空!");
+				}
+				
+			}
+		}
 		//不带分页的数据总量
 		int count = noticeMessageService.selectNoticeMessageTotalCount(paraMap);
 		//控制显示“加载更多”
@@ -253,7 +278,11 @@ public class MessageController extends BaseController{
 		//mongoDB查询通知内容
 		//Message message = mssageService.get("5a68260c2d85aa4450c15ba5");
 		
-		Content content = contentService.get("5a6a87912d855ccd8d3618d7");
+		Content content = contentService.get(mapTitle.get("mongoId").toString());
+		if(null!=content){
+			mv.addObject("content",content.getContent());
+		}
+		
 		//更新通知点击量
 		noticeMessageService.updateNoticeClicks(cmsId);
 		

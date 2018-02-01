@@ -182,4 +182,8 @@
 			on t1.id=t2.material_id where t1.id = #{material_id}
 	</select>
 	
+	<!-- 更新改动时间 -->
+	<update id="updateDeclarationUpdateTime" parameterType="map">
+		update declaration set gmt_update = #{time} where id=#{declaration_id}
+	</update>
 </mapper>

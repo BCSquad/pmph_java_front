@@ -572,7 +572,7 @@ a{
 		    		<c:choose>
 		    		<c:when test="${status.last==false}">
 		  				<div class="${(st.index+1)%5 == 1? 'item1':'item1 item11'}" >
-				            <div><img src="${ctx}/statics/pictures/head.png" class="img2"></div>
+				            <div><img src="${ctx}/${friend.avatar}" class="img2"></div>
 				            <div class="div_txt1">${friend.realname}</div>
 				            <div class="div_txt2">${friend.position}</div>
 				            <div class="div_txt3">
@@ -583,8 +583,8 @@ a{
 		    		</c:when>
 		    		<c:otherwise>
 			  			<div class="${(st.index+1)%5 == 1? 'item1':'item1 item11'}" >
-				            <%-- <div><img src="${ctx}${friend.avatar}" class="img2"></div> --%>
-				            <div><img src="${ctx}/statics/pictures/head.png" class="img2"></div>
+				            <div><img src="${ctx}/${friend.avatar}" class="img2"></div>
+				           <%--  <div><img src="${ctx}/statics/pictures/head.png" class="img2"></div> --%>
 				            <div class="div_txt1">${friend.realname}</div>
 				            <div class="div_txt2">${friend.position}</div>
 				            <div class="div_txt3">
@@ -645,7 +645,7 @@ a{
                				str+='<div class="item1 item11">'
                			}; 
                	            <%-- <div><img src="${ctx}${friend.avatar}" class="img2"></div> --%>
-               	       str+='<div><img src="${ctx}/statics/pictures/head.png" class="img2"></div><div class="div_txt1">'
+               	       str+='<div><img src="${ctx}/${friend.avatar}" class="img2"></div><div class="div_txt1">'
                	            +n.realname
                	            +'</div><div class="div_txt2">'
                	            +n.position

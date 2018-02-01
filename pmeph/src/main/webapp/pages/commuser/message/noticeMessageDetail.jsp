@@ -47,9 +47,9 @@
 		            </c:if>
 		        </div>
 		        <div class="content">
-		            <p class="pSize">
-				               ${map.notice}
-		            </p>
+		            <div class="pSize">
+				               ${content}
+		            </div>
 		        </div>
 		      <%--   <div align="center">
 		            <img  class="pictureSizeBig" src="${ctx}/statics/pictures/1395ea09518bf0f9b1787e0ec8c7452c.jpg" />
