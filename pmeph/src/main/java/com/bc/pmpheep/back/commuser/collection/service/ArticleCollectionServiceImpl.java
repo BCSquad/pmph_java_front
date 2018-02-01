@@ -51,6 +51,11 @@ public class ArticleCollectionServiceImpl implements ArticleCollectionService {
 		for (Map<String, Object> map : list) {
 			int like=articleCollectionDao.queryLikes((BigInteger) map.get("cid"), (BigInteger) param.getParameter().get("writerId"));
 			map.put("like", like);
+			if("DEFAULT".equals(map.get("avatar").toString())){
+				map.put("avatar", "statics/image/deficon.png");
+			}else{
+				map.put("avatar", "file/download/"+map.get("avatar")+".action");
+			}
 			Message message=messageService.get((String) map.get("mid"));
 			if(message!=null){
 				List<String> imglist = getImgSrc(message.getContent());

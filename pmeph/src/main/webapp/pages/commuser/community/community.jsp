@@ -34,6 +34,7 @@ String contextpath=request.getContextPath();
            <div class="navigation">
                 <a href="homepage/tohomepage.action" >首页</a>&gt;${notice.title }
            </div>
+           <input type="hidden" id="materialId" value="${notice.material_id }"/>
            <div  class="pagecontent">
            <div class="report">
                 <div class="left">
@@ -72,11 +73,18 @@ String contextpath=request.getContextPath();
 		                  <div class="itemimg" style="width:126px;height:126px;margin:20px auto 0px;text-align: center">
 		                     <img alt="" src="${book.image_url=='DEFAULT'? 'statics/image/564f34b00cf2b738819e9c35_122x122!.jpg':book.image_url }" >
 		                  </div>
-                 	<div class="bookname"><a href="readdetail/todetail.action?id=${book.bookId }">${book.bookname }</a> </div>
-               </div>
-               
+                 	<div class="bookname"><a href="readdetail/todetail.action?id=${book.id }">${book.bookname }</a> </div>
+                  </div>
                </c:forEach>
-               </div>    
+               <c:if test="${booklist.size() ==0 }">
+                   <div style="float:left;text-align: center;width:100%;" id="nomore">
+	                  <div class="no-more"  >
+                       <img src="<c:url value="/statics/image/aaa4.png"></c:url>" style="display: block;margin: 0px auto 0px;">
+                       <span style="display: block;width: 100px;margin: 0px auto 0px;">木有内容呀~~</span>
+                     </div>
+	               </div>
+               </c:if>
+              </div>    
            </div>
            </div>
            <div class="pageright">
@@ -94,7 +102,7 @@ String contextpath=request.getContextPath();
                         <li class="commentli">
                           <p class="title">${comment.bookname }</p>
                           <p  class="message">
-	                           <span class="name" >${comment.realname }  发表了评论</span>
+	                           <span class="name" >${comment.username }  发表了评论</span>
 	                           <span class="scoreimg ${comment.score >=2.0 ? 'yellowstar':'graystar'}"></span>
 	                           <span class="scoreimg ${comment.score >=4.0 ? 'yellowstar':'graystar'}"></span>
 	                           <span class="scoreimg ${comment.score >=6.0 ? 'yellowstar':'graystar'}"></span>
@@ -102,13 +110,13 @@ String contextpath=request.getContextPath();
 	                           <span class="scoreimg ${comment.score >=10.0 ? 'yellowstar':'graystar'}"></span>
                           
                           </p>
-                          <p  class="contentext">${comment.content }</p>
+                          <p  class="contentext">${comment.contentxt }</p>
                       </li>
                      
                      </c:forEach>
                  </ul>
              </div>
-             <div class="more" id="more"><a href="community/morecomments.action">查看更多精彩书评</a></div>
+             <div class="more" id="more"><a href="community/morecomments.action?materialId=${notice.material_id}">查看更多精彩书评</a></div>
            </div> 
             <div style="clear:both;width:100%"></div>
        </div>

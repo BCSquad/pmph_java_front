@@ -37,8 +37,13 @@ public interface CommunityDao {
      */
     List<Map<String,Object>> queryTextBookList(@Param("materialId") Long id );
     /**查询社区主页精选书评
-     * @param id 教材id
+     * @param map
      * @return  List<Map<String,Object>>
      */
-    List<Map<String,Object>> querySomeComment(@Param("materialId") Long id);
+    List<Map<String,Object>> querySomeComment(Map<String,Object> map);
+    /**查询社区主页精选书评的总数量
+     * @param map
+     * @return  List<Map<String,Object>>
+     */
+    int queryCommentCount(Map<String,Object> map);
 }

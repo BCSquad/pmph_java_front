@@ -71,7 +71,7 @@ public class CommunityController extends BaseController{
 		Map<String,Object> notice=communityService.queryNoticeById(noticeId);
 		List<Map<String,Object>> reportlist=communityService.queryMaterialNoticeList(Long.valueOf(notice.get("material_id").toString()));
 		List<Map<String,Object>> booklist=communityService.queryTextBookList(Long.valueOf(notice.get("material_id").toString()));
-		List<Map<String,Object>> someComments=communityService.querySomeComment(Long.valueOf(notice.get("material_id").toString()));
+		List<Map<String,Object>> someComments=communityService.querySomeComment(Long.valueOf(notice.get("material_id").toString()),0,4);
 		Map<String,Object> map=new HashMap<>();
 		map.put("notice", notice);
 		map.put("reportlist", reportlist);
@@ -81,14 +81,14 @@ public class CommunityController extends BaseController{
 	}
 	
 	/**
-	 * 获取社区主页右边的精彩视屏列表
+	 * 获取社区主页右边的精彩评论列表
 	 */
 	@RequestMapping("/getComments")
 	@ResponseBody
 	public Map<String,Object> getComments(HttpServletRequest req){
 		Map<String,Object> map=new HashMap<String, Object>();
 		Long materialId=Long.valueOf(req.getParameter("materialId"));
-		List<Map<String,Object>> comments=communityService.querySomeComment(materialId);
+		List<Map<String,Object>> comments=communityService.querySomeComment(materialId,0,4);
 		map.put("comments", comments);
 		return map;
 	}
@@ -98,8 +98,30 @@ public class CommunityController extends BaseController{
 	@RequestMapping("/morecomments")
 	public ModelAndView getMoreComments(HttpServletRequest req){
 		Map<String,Object> map=new HashMap<String, Object>();
-		
-		return new ModelAndView("commuser/community/wanderfaulbookcomments");
+		String pagenum=req.getParameter("pagenum");
+		String pagesize=req.getParameter("size");
+		int startnum=0;
+		int size=5;
+		if(pagenum!=null && !"".equals(pagenum) && pagesize!=null && !"".equals(pagesize)){
+			startnum=(Integer.parseInt(pagenum)-1)*Integer.parseInt(pagesize);
+			size=Integer.parseInt(pagesize);
+		}else{
+			pagenum="1";
+			pagesize="5";
+		}
+		String materialId = req.getParameter("materialId");
+		List<Map<String, Object>> comments = communityService.querySomeComment(Long.valueOf(materialId),startnum,size);
+		int total=communityService.queryCommentCount(Long.valueOf(materialId));
+		int pagetotal=total/size;
+		if(total%size!=0){
+			pagetotal=pagetotal+1;
+		}
+		map.put("total", total);
+		map.put("pagetotal", pagetotal);
+		map.put("comments",comments);
+		map.put("pagenum", pagenum);
+		map.put("pagesize", pagesize);
+		return new ModelAndView("commuser/community/wanderfaulbookcomments",map);
 	}
 	
 	/**

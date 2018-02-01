@@ -91,7 +91,10 @@
                <c:forEach items="${listCom.rows}" var="list">
                     <div class="item" >
                         <div class="item_title">
-                        	<div style="float: left;"><img src="${ctx}/statics/image/rwtx.png" class="picturesize"/></div>
+                        	<div style="float: left;">
+                        		<c:if test="${list.avatar=='DEFAULT'}"><img  src="${ctx}/statics/image/putongyhtouxiang.png" height="30"  width="30"/></c:if>
+                				<c:if test="${list.avatar!='DEFAULT'}"><img  src="${ctx}/image/${list.avatar}.action" height="30"  width="30"></c:if>
+                        	</div>
                         	<div style="float: left;margin-left: 10px;margin-top: 5px;">${list.realname}</div>
                         	<%-- <div style="float: left;margin-left: 10px;">
                         	<c:if test="${list.score<=3}">

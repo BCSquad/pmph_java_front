@@ -29,18 +29,18 @@
 <jsp:include page="/pages/comm/head.jsp">
     <jsp:param value="homepage" name="pageTitle"/>
 </jsp:include>
+<input type="hidden" id="auto_play" value="${adInfo1.auto_play}">
+<input type="hidden" id="animation_interval" value="${adInfo1.animation_interval}">
 <div class="body">
     <div class="content-wrapper">
         <div class="area-1">
             <div class="banner">
                 <div class="move" id="move">
                     <ul>
-                        <li><img src="${ctx}/statics/testfile/index.png" style="width: 922px; height: 380px"></li>
-                        <li><img src="${ctx}/statics/testfile/index.png" style="width: 922px; height: 380px"></li>
-                        <li><img src="${ctx}/statics/testfile/index.png" style="width: 922px; height: 380px"></li>
-                        <li><img src="${ctx}/statics/testfile/index.png" style="width: 922px; height: 380px"></li>
-                        <li><img src="${ctx}/statics/testfile/index.png" style="width: 922px; height: 380px"></li>
-                    </ul>
+                        <c:forEach var="ad" items="${adInfo1.detailList}">
+                            <li><img src="${ctx}/image/${ad.image}.action" style="width: 922px; height: 380px"/></li>
+                        </c:forEach>
+                     </ul>
                 </div>
                 <div class="ctrl" id="ctrl"></div>
             </div>
@@ -178,10 +178,9 @@
             </div>
         </div>
         <div class="area-5">
-            <div class="photo"><img src="${ctx}/statics/testfile/adv.png" class="book1"></div>
-            <div class="item"><img src="${ctx}/statics/testfile/adv.png" class="book1"></div>
-            <div class="item"><img src="${ctx}/statics/testfile/adv.png" class="book1"></div>
-            <div class="item"><img src="${ctx}/statics/testfile/adv.png" class="book1"></div>
+            <c:forEach var="ad" items="${adInfo2.detailList}">
+                <div class="item"><img src="${ctx}/image/${ad.image}.action" height="82" width="285" class="book1"></div>
+            </c:forEach>
         </div>
         <div class="area-6">
             <div class="doc"></div>

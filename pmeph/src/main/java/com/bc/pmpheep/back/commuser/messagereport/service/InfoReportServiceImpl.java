@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.commuser.messagereport.dao.InfoReportDao;
+import com.bc.pmpheep.general.pojo.Content;
 import com.bc.pmpheep.general.pojo.Message;
+import com.bc.pmpheep.general.service.ContentService;
 import com.bc.pmpheep.general.service.MessageService;
 
 /**
@@ -34,6 +36,8 @@ public class InfoReportServiceImpl implements InfoReportService {
 	private InfoReportDao infoReportDao;
 	@Autowired
     private MessageService messageService;
+	@Autowired
+	ContentService contentService;
 	/* 
 	 * 根据信息id查询信息快报
 	 */
@@ -51,7 +55,7 @@ public class InfoReportServiceImpl implements InfoReportService {
 		map.put("likecount", likecount);
 		map.put("markcount", markcount);
 		if(map!=null){
-			Message message=messageService.get(map.get("mid").toString());
+			Content message=contentService.get(map.get("mid").toString());
 		    if(message!=null){
 			 map.put("cmsText", message.getContent());
 		    }else{

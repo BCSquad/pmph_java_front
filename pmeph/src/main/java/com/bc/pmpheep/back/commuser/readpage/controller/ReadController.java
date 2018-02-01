@@ -52,6 +52,9 @@ public class ReadController {
         zdtjXxjyList = readService.queryRmspReadList(zdtjXxjyMap);
         mv.addObject("rmspList", zdtjXxjyList);
 
+        Map<String, Object> adInfo = homeService.getPageAdInfo("读书首页轮播 ");
+        mv.addObject("adInfo", adInfo);
+
         List<Map<String, Object>> materialType = readService.queryMaterialType();
 
         List<Map<String, Object>> gradeMaterialType = new ArrayList<Map<String, Object>>();
@@ -80,7 +83,7 @@ public class ReadController {
         Collections.sort(types, new Comparator<Map<String, Object>>() {
             @Override
             public int compare(Map<String, Object> o1, Map<String, Object> o2) {
-                return MapUtils.getIntValue(o2,"sort")-MapUtils.getIntValue(o1,"sort");
+                return MapUtils.getIntValue(o2, "sort") - MapUtils.getIntValue(o1, "sort");
             }
         });
         mv.addObject("bookTypes", types);

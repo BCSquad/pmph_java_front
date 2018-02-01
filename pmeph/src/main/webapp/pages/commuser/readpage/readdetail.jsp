@@ -265,8 +265,8 @@
                             <div class="item">
                                 <div class="item_title">
                                     <div style="float: left;">
-                                    	<c:if test="${list.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/default_image.png" alt="头像" ></c:if>
-						                <c:if test="${list.avatar!='DEFAULT'}"><img src="${ctx}/image/${list.avatar}.action" class="picturesize" alt="头像" ></c:if>
+                                    	<c:if test="${list.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/default_image.png" class="picturesize" ></c:if>
+						                <c:if test="${list.avatar!='DEFAULT'}"><img src="${ctx}/image/${list.avatar}.action" class="picturesize" ></c:if>
                                     
                                     <%-- <img src="${ctx}/statics/image/rwtx.png"
                                                                    class="picturesize"/> --%>
