@@ -59,7 +59,16 @@ function btntype(btn_this){
 		        		$("#TitleValue").val(json.titleValue);
 		        		UE.getEditor('mText').setContent(json.UEContent);
 		        		window.message.error(json.isValidate);
-		        	}else {
+		        	} else if (data == '4'){
+		        		var word = json.value;
+		        		for (var i = 0 ; i < word.length; i++){
+		        			var titleHtml=$("#TitleValue").val()
+		        			.replace(/word/g,"<font color = 'red'>" + word + "</font>");
+		        			var contentHtml = $("#UEContent").val()
+		        			.replace(/word/g,"<font color = 'red'>" + word + "</font>");
+		        			window.message.error(json.isValidate);
+		        		}
+		        	} else {
 		        		if(data != '1'){
 			        		if(btn_this== '1'){
 				        		$("#submitTypeCode").val("1");

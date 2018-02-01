@@ -6,6 +6,8 @@ package com.bc.pmpheep.general.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,10 @@ import com.bc.pmpheep.service.exception.CheckedServiceException;
  */
 @Service("com.bc.pmpheep.general.service.SensitiveService")
 public class SensitiveService {
+	private static final String regexScript = "<script[^>]*?>[\\s\\S]*?<\\/script>"; //定义script的正则表达式
+	private static final String regexStyle = "<style[^>]*?>[\\s\\S]*?<\\/style>";//定义style的正则表达式
+	private static final String regexHTML = "<[^>]+>";//定义HTML标签的正则表达式
+	private static final String regexSpace = "\\s*|\t|\r|\n";//定义空格回车换行符
 
 	@Autowired
 	SensitiveDao sensitiveDao;
@@ -42,6 +48,7 @@ public class SensitiveService {
 			throw new CheckedServiceException(CheckedExceptionBusiness.CMS,
 					CheckedExceptionResult.NULL_PARAM, "内容不能为空");
 		}
+		content = delHTMLTag(content);
 		List<Map<String, Object>> sensitives = sensitiveDao.getSensitive();
 		for (Map<String,Object> map : sensitives){
 			String word = (String) map.get("word");
@@ -67,11 +74,13 @@ public class SensitiveService {
 			throw new CheckedServiceException(CheckedExceptionBusiness.CMS,
 					CheckedExceptionResult.NULL_PARAM, "内容不能为空");
 		}
+		content = delHTMLTag(content);
 		List<String> list = new ArrayList<>();
 		List<Map<String, Object>> sensitives = sensitiveDao.getSensitive();
         for (Map<String, Object> map : sensitives){
         	String word = (String) map.get("word");
         	if (StringUtil.notEmpty(title)){
+        		title = delHTMLTag(title);
         		if (title.indexOf(word) != -1){
         			list.add(word);
         		}
@@ -83,4 +92,33 @@ public class SensitiveService {
 		return list;
 	}
 
+	/**
+	 * 
+	 * Description:过滤内容中的HTML标签
+	 * @author:lyc
+	 * @date:2018年2月1日下午3:22:46
+	 * @param 
+	 * @return String
+	 */
+	public String delHTMLTag(String str){
+		Pattern pScript = Pattern.compile(regexScript,Pattern.CASE_INSENSITIVE);
+		Matcher mScript = pScript.matcher(str);
+		str = mScript.replaceAll("");
+		
+		Pattern pStyle = Pattern.compile(regexStyle, Pattern.CASE_INSENSITIVE);
+		Matcher mStyle = pStyle.matcher(regexStyle);
+		str = mStyle.replaceAll("");
+		
+		Pattern pHTML = Pattern.compile(regexHTML, Pattern.CASE_INSENSITIVE);
+		Matcher mHTML = pHTML.matcher(regexHTML);
+		str = mHTML.replaceAll("");
+		
+		Pattern pSpace = Pattern.compile(regexSpace, Pattern.CASE_INSENSITIVE);
+		Matcher mSpace = pSpace.matcher(regexSpace);
+		str = mSpace.replaceAll("");
+		
+		str = str.replaceAll(" ", "");
+		return str;
+	}
+	
 }

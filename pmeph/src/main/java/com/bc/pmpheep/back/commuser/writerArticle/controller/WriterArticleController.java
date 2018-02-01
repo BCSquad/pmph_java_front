@@ -1,7 +1,9 @@
 package com.bc.pmpheep.back.commuser.writerArticle.controller;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +26,7 @@ import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.general.pojo.Message;
 import com.bc.pmpheep.general.service.FileService;
 import com.bc.pmpheep.general.service.MessageService;
+import com.bc.pmpheep.general.service.SensitiveService;
 @RequestMapping("/writerArticle")
 @Controller
 public class WriterArticleController extends BaseController{
@@ -32,6 +35,9 @@ public class WriterArticleController extends BaseController{
 	@Autowired
     @Qualifier("com.bc.pmpheep.general.service.FileService")
     FileService fileService;
+	@Autowired
+	@Qualifier("com.bc.pmpheep.general.service.SensitiveService")
+	SensitiveService sensitiveService;
 	
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.writerArticle.service.WriterArticleServiceImpl")
@@ -122,6 +128,15 @@ public class WriterArticleController extends BaseController{
 			resultMap.put("flag","3");
 			resultMap.put("titleValue",titleValue);
 			resultMap.put("UEContent",UEContent);
+			return resultMap;
+		}
+		//验证敏感词汇
+		if (sensitiveService.confirmSensitive(titleValue) || sensitiveService.confirmSensitive(UEContent)){
+			List<String> sensitives = new ArrayList<>();
+			sensitives = (sensitiveService.getSensitives(titleValue, UEContent));
+			resultMap.put("isValidate", "提交内容包含敏感词汇，请修改后在提交");
+			resultMap.put("flag", "4");
+			resultMap.put("value", sensitives);
 			return resultMap;
 		}
 		//List list= new ArrayList();
