@@ -50,12 +50,12 @@ public class BookCollectionController  extends BaseController{
     	Map<String,Object> map=new HashMap<String, Object>();
     	Map<String,Object> userMap=getUserInfo();
     	
-//    	Long writerId=Long.valueOf(userMap.get("id").toString());
+    	Long writerId=Long.valueOf(userMap.get("id").toString());
 //查询用户是否存在默认的书籍收藏夹，如果没有，就常见一个书籍默认的收藏夹
-//    	Map<String,Object> dmap=readDetailDao.queryDedaultFavorite(writerId);
-//    	if(dmap==null){
-//    		readDetailDao.insertFavorite(writerId);
-//    	}
+    	Map<String,Object> dmap=readDetailDao.queryDedaultFavorite(writerId);
+   	    if(dmap==null){
+    		readDetailDao.insertFavorite(writerId);
+    	}
     	
     	List<Map<String, Object>> bookCollection =new ArrayList<>();
     	bookCollection = bookCollectionService.queryBookCollectionList((BigInteger) userMap.get("id"));
@@ -68,11 +68,17 @@ public class BookCollectionController  extends BaseController{
      */
     @RequestMapping(value="/tobookcollectionlist")
     public ModelAndView initBookList(HttpServletRequest request) throws UnsupportedEncodingException{
-    	Map<String,Object> map=new HashMap<String, Object>();
     	Map<String,Object> userMap=getUserInfo();
+    	Long writerId=Long.valueOf(userMap.get("id").toString());
+      //查询用户是否存在默认的书籍收藏夹，如果没有，就常见一个书籍默认的收藏夹
+    	Map<String,Object> dmap=readDetailDao.queryDedaultFavorite(writerId);
+   	    if(dmap==null){
+    		readDetailDao.insertFavorite(writerId);
+    	}
+    	Map<String,Object> map=new HashMap<String, Object>();
     	Map<String,Object> pmap=new HashMap<>();
     	request.setCharacterEncoding("utf-8");
-    	BigInteger favoriteId=new BigInteger(request.getParameter("favoriteId"));
+    	BigInteger favoriteId=new BigInteger(dmap.get("id").toString());
     	String pagenum=request.getParameter("pagenum");
     	String pagesize=request.getParameter("pagesize");
     	int curpage=1;

@@ -131,4 +131,11 @@ public class DataAuditServiceImpl implements DataAuditService {
 		return this.dataAuditDao.queryMaterialbyId(material_id);
 	}
 
+	//更新Declaration时间
+	@Override
+	public void updateDeclarationUpdateTime(Map<String, Object> queryMap) {
+		dataAuditDao.updateDeclarationUpdateTime(queryMap);
+		
+	}
+
 }

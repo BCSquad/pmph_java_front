@@ -102,7 +102,7 @@ String contextpath=request.getContextPath();
                         <li class="commentli">
                           <p class="title">${comment.bookname }</p>
                           <p  class="message">
-	                           <span class="name" >${comment.realname }  发表了评论</span>
+	                           <span class="name" >${comment.username }  发表了评论</span>
 	                           <span class="scoreimg ${comment.score >=2.0 ? 'yellowstar':'graystar'}"></span>
 	                           <span class="scoreimg ${comment.score >=4.0 ? 'yellowstar':'graystar'}"></span>
 	                           <span class="scoreimg ${comment.score >=6.0 ? 'yellowstar':'graystar'}"></span>

@@ -98,7 +98,13 @@
 		                    </td>
 		                </tr>
 		                <tr style="width: 30%">
-		                    <td colspan="2" class="title">《${message.material_name}》请知悉</td>
+		                	  <c:if test="${message.msgType==0||message.msgType==1}">
+		                	    <td colspan="2" class="title">${message.title}</td>
+		                	  </c:if>
+		                	  <c:if test="${message.msgType==4}">
+		                	    <td colspan="2" class="title">《${message.title}》已开始申报,请知悉</td>
+		                	  </c:if>
+		                  
 		                    <td class="buttonDetail">
 		                    	<c:if test="${message.msgType==4}">
 		                        <div class="buttonAccept"><a href="${ctx}/message/noticeMessageDetail.action?materialId=${message.fId}&&cmsId=${message.id}">查看详情</a></div>

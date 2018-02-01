@@ -166,7 +166,7 @@ function changepage() {
                 if (n.avatar == '' || n.avatar == 'DEFAULT' || n.avatar == null) {
                     str += contextpath + 'statics/image/rwtx.png';
                 } else {
-                    str += n.avatar;
+                	str+=contextpath+'image/'+n.avatar+'.action';
                 }
                 str += '" class="picturesize"/></div><div style="float: left;margin-left: 10px;margin-top: 5px;">' +
                     n.realname

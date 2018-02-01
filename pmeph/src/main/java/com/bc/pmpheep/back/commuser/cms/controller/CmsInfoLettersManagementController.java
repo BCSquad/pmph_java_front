@@ -5,6 +5,8 @@ import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,6 +24,8 @@ import com.bc.pmpheep.back.commuser.cms.service.CmsInfoLettersManagementService;
 import com.bc.pmpheep.back.commuser.collection.dao.ArticleCollectionDao;
 import com.bc.pmpheep.back.commuser.collection.service.ArticleCollectionService;
 import com.bc.pmpheep.general.controller.BaseController;
+import com.bc.pmpheep.general.pojo.Content;
+import com.bc.pmpheep.general.service.ContentService;
 
 
 /**
@@ -59,6 +63,9 @@ public class CmsInfoLettersManagementController extends BaseController{
 
 	@Autowired
 	private ArticleCollectionDao articleCollectionDao;
+	
+	@Autowired
+	ContentService contentService;
 	/**
 	 * 
 	 * 
@@ -94,6 +101,8 @@ public class CmsInfoLettersManagementController extends BaseController{
 			 if(writerId!=null){
 			    islike=articleCollectionDao.queryLikes(new BigInteger(cmsInfo.getId().toString()), writerId);
 			 }
+			 Content content=contentService.get(cmsInfo.getMid());
+			 map.put(cmsInfo.getTitle()+cmsInfo.getId(),removeHtml(content.getContent()));
 			 map.put("cms"+cmsInfo.getId().toString(), islike);
 			}
 		}
@@ -135,4 +144,13 @@ public class CmsInfoLettersManagementController extends BaseController{
 		map=articleCollectionService.updateLike(contentId, writerId);
 		return map;
 	}
+	
+	//去掉字符串中的html标签
+		public String removeHtml(String str){
+			String regEx_html="<[^>]+>"; //定义HTML标签的正则表达式 
+			Pattern p_html=Pattern.compile(regEx_html,Pattern.CASE_INSENSITIVE); 
+	        Matcher m_html=p_html.matcher(str); 
+	        str=m_html.replaceAll(""); //过滤html标签 
+			return str;
+		}
 }

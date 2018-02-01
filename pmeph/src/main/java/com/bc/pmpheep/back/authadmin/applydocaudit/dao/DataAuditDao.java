@@ -81,5 +81,7 @@ public interface DataAuditDao {
 	public int updateDeclaration(Map<String,Object> map);
 	//通过教材ID查出教材
 	public Map<String,Object> queryMaterialbyId(String material_id);
+	//更新Declaration时间
+	void updateDeclarationUpdateTime(Map<String, Object> queryMap);
 
 }

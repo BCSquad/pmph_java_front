@@ -14,7 +14,7 @@
 					  $("#ullist").append('<li class="commentli"><p class="title">'+
 					  n.bookname
 					  +'</p><p  class="message"><span class="name" >'+
-					    n.realname
+					    n.username
 					  +'  发表了评论</span><span class="scoreimg '+
 					    (n.score>=2.0 ? "yellowstar":"graystar")
 					  +'"></span><span class="scoreimg '+
@@ -25,7 +25,7 @@
 							    (n.score>=8.0 ? "yellowstar":"graystar")
 								  +'"></span><span class="scoreimg '+
 								    (n.score>=10.0 ? "yellowstar":"graystar")
-									  +'"></span></p><p  class="contentext" >'+n.content+'</p></li>');  
+									  +'"></span></p><p  class="contentext" >'+n.contentxt+'</p></li>');  
 				  });	
 			}
 	  }); 
