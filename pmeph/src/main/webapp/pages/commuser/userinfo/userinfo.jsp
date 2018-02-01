@@ -104,8 +104,8 @@
                   <div  style="width: 400px">
                        <label class="require">真实姓名</label>
                        <div class="input-wrapper">
-                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="真实姓名不能为空"
-                           placeholder="填写真实姓名" type="text" id="realname" name="realname" value="${map.realname }"/>
+                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="真实姓名不能为空"  onblur="javascript:LengthLimit(this,40);"
+                           placeholder="填写真实姓名" type="text" id="realname" name="realname"  value="${map.realname }"/>
                        </div>
                   </div>
                 </td>
@@ -113,8 +113,8 @@
                   <div  style="width: 400px">
                        <label class="require">教龄</label>
                        <div class="input-wrapper">
-                          <input class="sxy-txt required" data-valid="isNonEmpty||minLength:3"  data-error="教龄不能为空||教龄不能大于3位"
-                           placeholder="填写教龄" type="text" id="experience" name="experience" value="${map.experience }"
+                          <input class="sxy-txt required" data-valid="isNonEmpty||onlyInt||minLength:3"  data-error="教龄不能为空||教龄只能为整数||教龄不能大于3位"
+                           placeholder="填写教龄" type="text" id="experience" name="experience" value="${map.experience }" 
                            />
                        </div>
                   </div>
@@ -123,7 +123,7 @@
                   <div  style="width: 400px">
                        <label class="require">传真</label>
                        <div class="input-wrapper">
-                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="传真不能为空"
+                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="传真不能为空"  onblur="javascript:LengthLimit(this,50);"
                            placeholder="填写传真" type="text" id="fax" name="fax" value="${map.fax }"/>
                        </div>
                   </div>
@@ -175,7 +175,7 @@
                   <div  style="width: 400px">
                        <label class="require">邮编</label>
                        <div class="input-wrapper">
-                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="邮编不能为空"
+                          <input class="sxy-txt required" data-valid="isNonEmpty||onlyInt"  data-error="邮编不能为空||邮编只能是数字"  onblur="javascript:LengthLimit(this,20);"
                            placeholder="填写邮政编码" type="text" id="postcode" name="postcode" value="${map.postcode }"/>
                        </div>
                   </div>
@@ -195,7 +195,7 @@
                   <div  style="width: 400px">
                        <label class="require">工作单位</label>
                        <div class="input-wrapper">
-                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="工作单位不能为空"
+                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="工作单位不能为空" onblur="javascript:LengthLimit(this,36);"
                            placeholder="填写工作单位" type="text" id="workplace" name="workplace" value="${map.workplace }"/>
                        </div>
                   </div>
@@ -204,7 +204,7 @@
                   <div  style="width: 400px">
                        <label class="require">联系电话</label>
                        <div class="input-wrapper">
-                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="联系电话不能为空"
+                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="联系电话不能为空"  onblur="javascript:LengthLimit(this,26);"
                            placeholder="填写联系电话" type="text" id="telephone" name="telephone" value="${map.telephone }"/>
                        </div>
                   </div>
@@ -223,7 +223,7 @@
                   <div  style="width: 400px">
                        <label class="require">职务</label>
                        <div class="input-wrapper">
-                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="职务不能为空"
+                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="职务不能为空"  onblur="javascript:LengthLimit(this,30);"
                            placeholder="填写职务" type="text" id="position" name="position" value="${map.position }"/>
                        </div>
                   </div>

@@ -94,7 +94,7 @@ function save(){
             data:getform(),
             success:function(json){
                 if (json.returncode=="OK"){
- //               	message.success("保存成功!");
+                	 window.message.success("保存成功！");
                 	location.href=contextpath+'userinfo/touser.action?id='+json.id;
                 }else if(json.returncode=="DEFAULT"){
                 	message.error("错误，请填写所有必填项!");

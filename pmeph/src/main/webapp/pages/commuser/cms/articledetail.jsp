@@ -26,6 +26,7 @@
 <body>
 <input type="hidden" id="wid" value="${wid}">
 <input type="hidden" id="marks" value="${map.bookmarks}">
+<input type="hidden" id="title" value="${map.title}">
 	<jsp:include page="/pages/comm/head.jsp">
 		<jsp:param value="articlepage" name="pageTitle" />
 	</jsp:include>

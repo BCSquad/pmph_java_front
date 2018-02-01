@@ -87,7 +87,8 @@ function insert(){
 	}
 	var json={
 		 content:$("#content").val(),
-		 wid:$("#wid").val()
+		 wid:$("#wid").val(),
+		 title:$("#title").val()
 		/* score:$("#last_score").html(),*/
 	};
 	 $.ajax({
