@@ -219,7 +219,9 @@ public class PersonalServiceImpl implements PersonalService {
 	 */
 	@Override
 	public void deleteComment(Map<String, Object> map) {
+		
 		 personaldao.deleteComment(map);
+		 personaldao.recountBookCommentAfterdelete(map);
 	}
 
 	/**
