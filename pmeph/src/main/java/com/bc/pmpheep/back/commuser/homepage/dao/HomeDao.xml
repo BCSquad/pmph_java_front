@@ -4,7 +4,30 @@
   <resultMap id="Mapresult" type="java.util.Map"></resultMap>
   <!-- 查询最新三条公告(所有人可见)-->
   <select id="queryDocument"  parameterType="map" resultMap="Mapresult">   
-    select n.* from 
+    SELECT 
+	(TO_DAYS(NOW()) &lt;= TO_DAYS(m.actual_deadline ) and !m.is_deleted and !m.is_force_end and !m.is_all_textbook_published) as notEnd,
+	cc.*
+	FROM
+			cms_content cc
+			LEFT JOIN pmph_user pu ON cc.author_id =pu.id
+			LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
+			LEFT JOIN material m ON m.id = cc.material_id
+	    		left join material_org mo on mo.material_id=m.id
+			left join writer_user wu on wu.org_id=mo.org_id
+	WHERE
+			cc.is_deleted = 0
+			AND
+			cc.category_id=3
+			AND cc.auth_status =2
+			AND cc.is_published =1
+	
+	    		and ((wu.id=#{id} and m.is_public = 0)or m.is_public = 1 or cc.is_material_entry = 0 )
+	group by cc.id
+	ORDER BY
+		
+			    cc.auth_date DESC
+	limit 0,3
+    <!-- select n.* from 
 		(select 
 		        t.*
 		        from cms_content t
@@ -29,7 +52,7 @@
 		        and t.auth_status=2
 		        and t.is_deleted=0 
 		        and p.id= #{id}) n
-		order by n.gmt_create desc limit 0,3     
+		order by n.gmt_create desc limit 0,3  -->    
   </select>
    <!-- 查询最新五条信息快报 -->
   <select id="queryNotice"  resultMap="Mapresult">

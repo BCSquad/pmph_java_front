@@ -34,7 +34,7 @@ public interface CmsNoticeManagementDao {
 	 * @return
 	 *
 	 */
-	Integer getCmsNoticeListTotal();
+	Integer getCmsNoticeListTotal(Map<String,Object> map);
 
 	/**
 	 * 

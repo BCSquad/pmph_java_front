@@ -434,8 +434,8 @@ ul li {
     float: left;
     width: 252px;
     height: 100px;
-    margin: 20px 0;
-    margin-left: 89px;
+    margin: 20px 59px 20px 30px;
+    /* margin-left: 89px; */
 }
 
 .left_join{
@@ -451,6 +451,10 @@ ul li {
 	text-align: center;
 	line-height: 25px;
 	cursor: pointer;
+}
+
+.left_join.end {
+    background-color: #c3c3c3;
 }
 
 .area-2 .content-left .content-size {

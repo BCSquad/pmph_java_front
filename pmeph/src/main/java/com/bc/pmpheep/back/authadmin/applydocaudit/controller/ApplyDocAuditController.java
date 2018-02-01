@@ -1,6 +1,7 @@
 package com.bc.pmpheep.back.authadmin.applydocaudit.controller;
 
 import java.math.BigInteger;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -62,10 +63,12 @@ public class ApplyDocAuditController extends BaseController {
 		int totoal_count = applyDocAuditService.materialDeclareAuditListQueryCount(pageParameter);
 		String html ="";
 		String vm = "authadmin/applydocaudit/applydocaudit.vm";
+		SimpleDateFormat dt = new SimpleDateFormat("yyyyMMdd");
 		for (Map<String, Object> m : List_map) {
 			Date now = new Date();
 			if(m.get("actualDeadline") != null){
-				m.put("isEnd",now.getTime()>((Date)m.get("actualDeadline")).getTime()||(Boolean)m.get("is_all_textbook_published") || (Boolean)m.get("is_force_end")?1:0);
+				
+				m.put("isEnd",Integer.parseInt(dt.format(now))>Integer.parseInt(dt.format((Date)m.get("actualDeadline")))||(Boolean)m.get("is_all_textbook_published") || (Boolean)m.get("is_force_end")?1:0);
 				m.put("contextpath", contextpath);
 			}else{
 				m.put("isEnd", 0);
@@ -103,13 +106,16 @@ public class ApplyDocAuditController extends BaseController {
 		int totoal_count = applyDocAuditService.materialDeclareAuditListQueryCount(pageParameter);
 		String html ="";
 		String vm = "authadmin/applydocaudit/applydocaudit.vm";
+		SimpleDateFormat dt = new SimpleDateFormat("yyyyMMdd");
 		for (Map<String, Object> m : List_map) {
 			Date now = new Date();
 			if(m.get("actualDeadline") != null){
 				
-				m.put("isEnd",now.getTime()>((Date)m.get("actualDeadline")).getTime()||(Boolean)m.get("is_all_textbook_published") || (Boolean)m.get("is_force_end")?1:0);
+				m.put("isEnd",Integer.parseInt(dt.format(now))>Integer.parseInt(dt.format((Date)m.get("actualDeadline")))||(Boolean)m.get("is_all_textbook_published") || (Boolean)m.get("is_force_end")?1:0);
+				
 			}else{
 				m.put("isEnd", 0);
+				
 			}
 			html += templateService.mergeTemplateIntoString(vm, m);
 		}
