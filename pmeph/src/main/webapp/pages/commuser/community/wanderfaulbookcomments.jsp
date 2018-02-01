@@ -24,7 +24,7 @@ String contextpath=request.getContextPath();
     <script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js"></script>
     <script src="<%=path%>/resources/comm/jquery/jquery.pager.js"></script>
     <script src="<%=path%>/resources/comm/base.js"></script>
-    <%-- <script src="<%=path%>/resources/commuser/community/communitylist.js"></script> --%>
+    <script src="<%=path%>/resources/commuser/community/wanderfaulbookcomments.js"></script>
 </head>
 <style type="text/css">
   
@@ -33,6 +33,7 @@ String contextpath=request.getContextPath();
             <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div style="background-color: #f6f6f6;padding-top:28px;padding-bottom:130px"> 
 <div class="content-wrapper">
+         <input type="hidden" id="materialId" value="${materialId }"/>
          <input type="hidden" id="pagenum" value="${pagenum }"/>
          <input type="hidden" id="pagesize" value="${pagesize }"/>
          <input type="hidden" id="total" value="${total }"/>
@@ -105,28 +106,7 @@ String contextpath=request.getContextPath();
             <jsp:include page="/pages/comm/tail.jsp"></jsp:include> 
 </body>
 <script type="text/javascript">
-$(function(){
-	var startnum= parseInt($("#pagenum").val());
-	var  pagetotal=parseInt($("#pagetotal").val());
-	Page({
-        num:pagetotal,					
-        startnum: startnum,
-        elem:$("#page1"),
-        callback: function (n) {
-        
-        }
- });
-$('select').selectlist({
-    zIndex: 10,
-    width: 110,
-    height: 30,
-    optionHeight: 30,
-    onChange: function () {
-    	
-    }  //自定义模拟选择列表项chang
-});
-	
-});
+
 
 </script>
 </html>
