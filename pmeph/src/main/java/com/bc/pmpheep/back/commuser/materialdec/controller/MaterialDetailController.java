@@ -34,6 +34,7 @@ import com.bc.pmpheep.general.service.FileService;
  * @date 2017-11-27上午10:10:34
  */
 @Controller
+@SuppressWarnings("null")
 @RequestMapping("/material/")
 public class MaterialDetailController extends BaseController{
 
@@ -140,6 +141,7 @@ public class MaterialDetailController extends BaseController{
 		perMap.put("experience", request.getParameter("experience"));
 		perMap.put("org_name", request.getParameter("org_name"));
 		perMap.put("position", request.getParameter("position"));
+		perMap.put("fax", request.getParameter("fax"));
 		perMap.put("title", request.getParameter("title"));
 		perMap.put("address", request.getParameter("address"));
 		perMap.put("postcode", request.getParameter("postcode"));
@@ -254,11 +256,13 @@ public class MaterialDetailController extends BaseController{
 			String jc_material_name[] = request.getParameterValues("jc_material_name");
 			String jc_position[] = request.getParameterValues("jc_position");
 			String jc_note[] = request.getParameterValues("jc_note");
+			String jc_is_digital_editor[] = request.getParameterValues("jc_is_digital_editor");
 			for(int i=0;i<jc_material_name.length;i++) { //遍历数组
 				if(!jc_material_name[i].equals("")){ //判断是否存在
 					Map<String,Object> JcbjMap = new HashMap<String,Object>();
 					JcbjMap.put("declaration_id", declaration_id);
 					JcbjMap.put("material_name", jc_material_name[i]);
+					JcbjMap.put("is_digital_editor", request.getParameter(jc_is_digital_editor[i]));
 					JcbjMap.put("position", request.getParameter(jc_position[i]));
 					JcbjMap.put("note", jc_note[i]);
 					this.mdService.insertJcbj(JcbjMap);
@@ -275,7 +279,7 @@ public class MaterialDetailController extends BaseController{
 					GjkcjsMap.put("declaration_id", declaration_id);
 					GjkcjsMap.put("course_name", gj_course_name[i]);
 					GjkcjsMap.put("class_hour", gj_class_hour[i]);
-					GjkcjsMap.put("type", gj_type[i]);
+					GjkcjsMap.put("type", request.getParameter(gj_type[i]));
 					GjkcjsMap.put("note", gj_note[i]);
 					this.mdService.insertGjkcjs(GjkcjsMap);
 				}	
@@ -296,13 +300,14 @@ public class MaterialDetailController extends BaseController{
 					this.mdService.insertGjghjc(GjghjcMap);
 				}	
 			}
-			//作家教材编写情况
+			//作家教材编写情况及其他教材编写
 			String jcb_material_name[] = request.getParameterValues("jcb_material_name");
 			String jcb_rank[] = request.getParameterValues("jcb_rank");
 			String jcb_position[] = request.getParameterValues("jcb_position");
 			String jcb_publisher[] = request.getParameterValues("jcb_publisher");
 			String jcb_publish_date[] = request.getParameterValues("jcb_publish_date");
 			String jcb_isbn[] = request.getParameterValues("jcb_isbn");
+			String jcb_is_digital_editor[] = request.getParameterValues("jcb_is_digital_editor");
 			String jcb_note[] = request.getParameterValues("jcb_note");
 			for(int i=0;i<jcb_material_name.length;i++) { //遍历数组
 				if(!jcb_material_name[i].equals("")){ //判断是否存在
@@ -312,6 +317,7 @@ public class MaterialDetailController extends BaseController{
 					JcbxMap.put("rank", jcb_rank[i]);
 					JcbxMap.put("position", jcb_position[i]);
 					JcbxMap.put("publisher", jcb_publisher[i]);
+					JcbxMap.put("is_digital_editor", request.getParameter(jcb_is_digital_editor[i]));
 					JcbxMap.put("publish_date", jcb_publish_date[i]);
 					JcbxMap.put("isbn", jcb_isbn[i]);
 					JcbxMap.put("note", jcb_note[i]);
@@ -332,6 +338,103 @@ public class MaterialDetailController extends BaseController{
 					ZjkyqkMap.put("award", zjk_award[i]);
 					ZjkyqkMap.put("note", zjk_note[i]);
 					this.mdService.insertZjkyqk(ZjkyqkMap);
+				}
+			}
+			//个人成就
+			String gr_content = request.getParameter("gr_content");
+				if(gr_content!=null||!gr_content.equals("")){
+				Map<String,Object> grcjMap = new HashMap<String,Object>();
+				grcjMap.put("declaration_id", declaration_id);
+				grcjMap.put("gr_content", gr_content);
+				this.mdService.insertAchievement(grcjMap);
+			}
+			//主编学术专著情况
+			String zb_monograph_name[] = request.getParameterValues("zb_monograph_name");
+			String zb_publisher[] = request.getParameterValues("zb_publisher");
+			String zb_publish_date[] = request.getParameterValues("zb_publish_date");
+			String zb_note[] = request.getParameterValues("zb_note");
+			String is_self_paid[] = request.getParameterValues("is_self_paid");
+			for(int i=0;i<zb_monograph_name.length;i++) { //遍历数组
+				if(!zb_monograph_name[i].equals("")){ //判断是否存在
+					Map<String,Object> MonographMap = new HashMap<String,Object>();
+					MonographMap.put("declaration_id", declaration_id);
+					MonographMap.put("monograph_name", zb_monograph_name[i]);
+					MonographMap.put("is_self_paid", request.getParameter(is_self_paid[i]));
+					MonographMap.put("publisher", zb_publisher[i]);
+					MonographMap.put("publish_date", zb_publish_date[i]);
+					MonographMap.put("note", zb_note[i]);
+					MonographMap.put("sort", i);
+					this.mdService.insertMonograph(MonographMap);
+				}
+			}
+			//出版行业获奖情况表
+			String pu_reward_name[] = request.getParameterValues("zb_monograph_name");
+			String pu_award_unit[] = request.getParameterValues("pu_award_unit");
+			String pu_reward_date[] = request.getParameterValues("pu_reward_date");
+			String pu_note[] = request.getParameterValues("pu_note");
+			for(int i=0;i<pu_reward_name.length;i++) { //遍历数组
+				if(!pu_reward_name[i].equals("")){ //判断是否存在
+					Map<String,Object> MonographMap = new HashMap<String,Object>();
+					MonographMap.put("declaration_id", declaration_id);
+					MonographMap.put("reward_name", pu_reward_name[i]);
+					MonographMap.put("award_unit", pu_award_unit[i]);
+					MonographMap.put("reward_date", pu_reward_date[i]);
+					MonographMap.put("note", pu_note[i]);
+					MonographMap.put("sort", i);
+					this.mdService.insertPublish(MonographMap);
+				}
+			}
+			//SCI论文投稿及影响因子情况表
+			String sci_paper_name[] = request.getParameterValues("sci_paper_name");
+			String sci_journal_name[] = request.getParameterValues("sci_journal_name");
+			String sci_factor[] = request.getParameterValues("sci_factor");
+			String sci_publish_date[] = request.getParameterValues("sci_publish_date");
+			String sci_note[] = request.getParameterValues("sci_note");
+			for(int i=0;i<sci_paper_name.length;i++) { //遍历数组
+				if(!sci_paper_name[i].equals("")){ //判断是否存在
+					Map<String,Object> MonographMap = new HashMap<String,Object>();
+					MonographMap.put("declaration_id", declaration_id);
+					MonographMap.put("paper_name", sci_paper_name[i]);
+					MonographMap.put("journal_name", sci_journal_name[i]);
+					MonographMap.put("factor", sci_factor[i]);
+					MonographMap.put("publish_date", sci_publish_date[i]);
+					MonographMap.put("note", sci_note[i]);
+					MonographMap.put("sort", i);
+					this.mdService.insertSci(MonographMap);
+				}
+			}
+			//临床医学获奖情况表
+			String cl_reward_name[] = request.getParameterValues("cl_reward_name");
+			String cl_award_unit[] = request.getParameterValues("cl_award_unit");
+			String cl_reward_date[] = request.getParameterValues("cl_reward_date");
+			String cl_note[] = request.getParameterValues("cl_note");
+			for(int i=0;i<cl_reward_name.length;i++) { //遍历数组
+				if(!cl_reward_name[i].equals("")){ //判断是否存在
+					Map<String,Object> MonographMap = new HashMap<String,Object>();
+					MonographMap.put("declaration_id", declaration_id);
+					MonographMap.put("reward_name", cl_reward_name[i]);
+					MonographMap.put("award_unit", request.getParameter( cl_award_unit[i]));
+					MonographMap.put("reward_date", cl_reward_date[i]);
+					MonographMap.put("note", cl_note[i]);
+					MonographMap.put("sort", i);
+					this.mdService.insertClinicalreward(MonographMap);
+				}
+			}
+			//学术荣誉授予情况表
+			String ac_reward_name[] = request.getParameterValues("cl_reward_name");
+			String ac_award_unit[] = request.getParameterValues("cl_award_unit");
+			String ac_reward_date[] = request.getParameterValues("cl_reward_date");
+			String ac_note[] = request.getParameterValues("cl_note");
+			for(int i=0;i<cl_reward_name.length;i++) { //遍历数组
+				if(!cl_reward_name[i].equals("")){ //判断是否存在
+					Map<String,Object> MonographMap = new HashMap<String,Object>();
+					MonographMap.put("declaration_id", declaration_id);
+					MonographMap.put("reward_name", ac_reward_name[i]);
+					MonographMap.put("award_unit", request.getParameter( ac_award_unit[i]));
+					MonographMap.put("reward_date", ac_reward_date[i]);
+					MonographMap.put("note", ac_note[i]);
+					MonographMap.put("sort", i);
+					this.mdService.insertAcadereward(MonographMap);
 				}
 			}
 			msg = "OK";
@@ -440,6 +543,7 @@ public class MaterialDetailController extends BaseController{
 		Map<String,Object> materialMap = new HashMap<String,Object>();
 		materialMap = this.mdService.queryMaterialbyId(material_id);
 		queryMap.put("is_multi_books", materialMap.get("is_multi_books"));
+		queryMap.put("is_multi_position", materialMap.get("is_multi_position"));
 		//2.作家申报职位暂存
 		List<Map<String,Object>> tssbList = new ArrayList<Map<String,Object>>();
 		tssbList=this.mdService.queryTssbZc(queryMap);
@@ -473,7 +577,24 @@ public class MaterialDetailController extends BaseController{
 		//12.作家扩展项填报表
 		List<Map<String,Object>> zjkzqkList = new ArrayList<Map<String,Object>>();
 		zjkzqkList = this.mdService.queryZjkzbb(queryMap);
-		
+		//13.个人成就
+		Map<String,Object> achievementMap = new HashMap<String,Object>();
+		achievementMap = this.mdService.queryAchievement(queryMap);
+		//14.主编学术专著情况表
+		List<Map<String,Object>> monographList = new ArrayList<Map<String,Object>>();
+		monographList = this.mdService.queryMonograph(queryMap);
+		//15.出版行业获奖情况表
+		List<Map<String,Object>> publishList = new ArrayList<Map<String,Object>>();
+		publishList = this.mdService.queryPublish(queryMap);
+		//16.SCI论文投稿及影响因子情况表
+		List<Map<String,Object>> sciList = new ArrayList<Map<String,Object>>();
+		sciList = this.mdService.querySci(queryMap);
+		//17.临床医学获奖情况表
+		List<Map<String,Object>> clinicalList = new ArrayList<Map<String,Object>>();
+		clinicalList = this.mdService.queryClinicalreward(queryMap);
+		//18.学术荣誉授予情况表
+		List<Map<String,Object>> acadeList = new ArrayList<Map<String,Object>>();
+		acadeList = this.mdService.queryAcadereward(queryMap);
 		//书籍信息
 		List<Map<String,Object>> bookList = this.mdService.queryBookById(material_id);
 		StringBuffer bookSelects = new StringBuffer();
@@ -487,7 +608,6 @@ public class MaterialDetailController extends BaseController{
 		for (Map<String, Object> map : orgList) {
 			orgSelects.append("<option value='"+map.get("org_id")+"'>"+map.get("org_name")+"</option>");
 		}}*/
-		//下拉框选择
 		//职位选择
 		for (Map<String, Object> map : tssbList) {
 			StringBuffer bookSelect = new StringBuffer();
@@ -527,6 +647,12 @@ public class MaterialDetailController extends BaseController{
 		mav.addObject("zjkyList", zjkyList);
 		mav.addObject("zjxsList", zjxsList);
 		mav.addObject("zjkzqkList", zjkzqkList);
+		mav.addObject("achievementMap", achievementMap);
+		mav.addObject("monographList", monographList);
+		mav.addObject("publishList", publishList);
+		mav.addObject("sciList", sciList);
+		mav.addObject("clinicalList", clinicalList);
+		mav.addObject("acadeList", acadeList);
 		mav.addObject("materialMap", queryMap);
 		mav.addObject("userMap", userMap);
 		return mav;
@@ -553,6 +679,7 @@ public class MaterialDetailController extends BaseController{
 		//删除暂存内容
 		Map<String,Object> glMap = new HashMap<String,Object>();
 		glMap.put("declaration_id", declaration_id);
+		@SuppressWarnings("unused")
 		int scount = this.mdService.delGlxx(glMap);
 		//创建时间
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
@@ -581,6 +708,7 @@ public class MaterialDetailController extends BaseController{
 		perMap.put("telephone", request.getParameter("telephone"));
 		perMap.put("handphone", request.getParameter("handphone"));
 		perMap.put("email", request.getParameter("email"));
+		perMap.put("fax", request.getParameter("fax"));
 		perMap.put("idtype", request.getParameter("idtype"));
 		perMap.put("idcard", request.getParameter("idcard"));
 		perMap.put("org_id", request.getParameter("sbdw_id"));
@@ -687,11 +815,13 @@ public class MaterialDetailController extends BaseController{
 			String jc_material_name[] = request.getParameterValues("jc_material_name");
 			String jc_position[] = request.getParameterValues("jc_position");
 			String jc_note[] = request.getParameterValues("jc_note");
+			String jc_is_digital_editor[] = request.getParameterValues("jc_is_digital_editor");
 			for(int i=0;i<jc_material_name.length;i++) { //遍历数组
 				if(!jc_material_name[i].equals("")){ //判断是否存在
 					Map<String,Object> JcbjMap = new HashMap<String,Object>();
 					JcbjMap.put("declaration_id", declaration_id);
 					JcbjMap.put("material_name", jc_material_name[i]);
+					JcbjMap.put("is_digital_editor", request.getParameter(jc_is_digital_editor[i]));
 					JcbjMap.put("position", request.getParameter(jc_position[i]));
 					JcbjMap.put("note", jc_note[i]);
 					this.mdService.insertJcbj(JcbjMap);
@@ -708,7 +838,7 @@ public class MaterialDetailController extends BaseController{
 					GjkcjsMap.put("declaration_id", declaration_id);
 					GjkcjsMap.put("course_name", gj_course_name[i]);
 					GjkcjsMap.put("class_hour", gj_class_hour[i]);
-					GjkcjsMap.put("type", gj_type[i]);
+					GjkcjsMap.put("type", request.getParameter(gj_type[i]));
 					GjkcjsMap.put("note", gj_note[i]);
 					this.mdService.insertGjkcjs(GjkcjsMap);
 				}	
@@ -729,13 +859,14 @@ public class MaterialDetailController extends BaseController{
 					this.mdService.insertGjghjc(GjghjcMap);
 				}	
 			}
-			//作家教材编写情况
+			//作家教材编写情况及其他教材编写
 			String jcb_material_name[] = request.getParameterValues("jcb_material_name");
 			String jcb_rank[] = request.getParameterValues("jcb_rank");
 			String jcb_position[] = request.getParameterValues("jcb_position");
 			String jcb_publisher[] = request.getParameterValues("jcb_publisher");
 			String jcb_publish_date[] = request.getParameterValues("jcb_publish_date");
 			String jcb_isbn[] = request.getParameterValues("jcb_isbn");
+			String jcb_is_digital_editor[] = request.getParameterValues("jcb_is_digital_editor");
 			String jcb_note[] = request.getParameterValues("jcb_note");
 			for(int i=0;i<jcb_material_name.length;i++) { //遍历数组
 				if(!jcb_material_name[i].equals("")){ //判断是否存在
@@ -745,6 +876,7 @@ public class MaterialDetailController extends BaseController{
 					JcbxMap.put("rank", jcb_rank[i]);
 					JcbxMap.put("position", jcb_position[i]);
 					JcbxMap.put("publisher", jcb_publisher[i]);
+					JcbxMap.put("is_digital_editor", request.getParameter(jc_is_digital_editor[i]));
 					JcbxMap.put("publish_date", jcb_publish_date[i]);
 					JcbxMap.put("isbn", jcb_isbn[i]);
 					JcbxMap.put("note", jcb_note[i]);
@@ -765,6 +897,103 @@ public class MaterialDetailController extends BaseController{
 					ZjkyqkMap.put("award", zjk_award[i]);
 					ZjkyqkMap.put("note", zjk_note[i]);
 					this.mdService.insertZjkyqk(ZjkyqkMap);
+				}
+			}
+			//个人成就修改
+			String gr_content = request.getParameter("gr_content");
+				if(gr_content!=null||!gr_content.equals("")){
+				Map<String,Object> grcjMap = new HashMap<String,Object>();
+				grcjMap.put("declaration_id", declaration_id);
+				grcjMap.put("gr_content", gr_content);
+				this.mdService.updateAchievement(grcjMap);
+			}
+			//主编学术专著情况
+			String zb_monograph_name[] = request.getParameterValues("zb_monograph_name");
+			String zb_publisher[] = request.getParameterValues("zb_publisher");
+			String zb_publish_date[] = request.getParameterValues("zb_publish_date");
+			String zb_note[] = request.getParameterValues("zb_note");
+			String is_self_paid[] = request.getParameterValues("is_self_paid");
+			for(int i=0;i<zb_monograph_name.length;i++) { //遍历数组
+				if(!zb_monograph_name[i].equals("")){ //判断是否存在
+					Map<String,Object> MonographMap = new HashMap<String,Object>();
+					MonographMap.put("declaration_id", declaration_id);
+					MonographMap.put("monograph_name", zb_monograph_name[i]);
+					MonographMap.put("is_self_paid", request.getParameter(is_self_paid[i]));
+					MonographMap.put("publisher", zb_publisher[i]);
+					MonographMap.put("publish_date", zb_publish_date[i]);
+					MonographMap.put("note", zb_note[i]);
+					MonographMap.put("sort", i);
+					this.mdService.insertMonograph(MonographMap);
+				}
+			}
+			//出版行业获奖情况表
+			String pu_reward_name[] = request.getParameterValues("zb_monograph_name");
+			String pu_award_unit[] = request.getParameterValues("pu_award_unit");
+			String pu_reward_date[] = request.getParameterValues("pu_reward_date");
+			String pu_note[] = request.getParameterValues("pu_note");
+			for(int i=0;i<pu_reward_name.length;i++) { //遍历数组
+				if(!pu_reward_name[i].equals("")){ //判断是否存在
+					Map<String,Object> MonographMap = new HashMap<String,Object>();
+					MonographMap.put("declaration_id", declaration_id);
+					MonographMap.put("reward_name", pu_reward_name[i]);
+					MonographMap.put("award_unit", pu_award_unit[i]);
+					MonographMap.put("reward_date", pu_reward_date[i]);
+					MonographMap.put("note", pu_note[i]);
+					MonographMap.put("sort", i);
+					this.mdService.insertPublish(MonographMap);
+				}
+			}
+			//SCI论文投稿及影响因子情况表
+			String sci_paper_name[] = request.getParameterValues("sci_paper_name");
+			String sci_journal_name[] = request.getParameterValues("sci_journal_name");
+			String sci_factor[] = request.getParameterValues("sci_factor");
+			String sci_publish_date[] = request.getParameterValues("sci_publish_date");
+			String sci_note[] = request.getParameterValues("sci_note");
+			for(int i=0;i<sci_paper_name.length;i++) { //遍历数组
+				if(!sci_paper_name[i].equals("")){ //判断是否存在
+					Map<String,Object> MonographMap = new HashMap<String,Object>();
+					MonographMap.put("declaration_id", declaration_id);
+					MonographMap.put("paper_name", sci_paper_name[i]);
+					MonographMap.put("journal_name", sci_journal_name[i]);
+					MonographMap.put("factor", sci_factor[i]);
+					MonographMap.put("publish_date", sci_publish_date[i]);
+					MonographMap.put("note", sci_note[i]);
+					MonographMap.put("sort", i);
+					this.mdService.insertSci(MonographMap);
+				}
+			}
+			//临床医学获奖情况表
+			String cl_reward_name[] = request.getParameterValues("cl_reward_name");
+			String cl_award_unit[] = request.getParameterValues("cl_award_unit");
+			String cl_reward_date[] = request.getParameterValues("cl_reward_date");
+			String cl_note[] = request.getParameterValues("cl_note");
+			for(int i=0;i<cl_reward_name.length;i++) { //遍历数组
+				if(!cl_reward_name[i].equals("")){ //判断是否存在
+					Map<String,Object> MonographMap = new HashMap<String,Object>();
+					MonographMap.put("declaration_id", declaration_id);
+					MonographMap.put("reward_name", cl_reward_name[i]);
+					MonographMap.put("award_unit", request.getParameter( cl_award_unit[i]));
+					MonographMap.put("reward_date", cl_reward_date[i]);
+					MonographMap.put("note", cl_note[i]);
+					MonographMap.put("sort", i);
+					this.mdService.insertClinicalreward(MonographMap);
+				}
+			}
+			//学术荣誉授予情况表
+			String ac_reward_name[] = request.getParameterValues("cl_reward_name");
+			String ac_award_unit[] = request.getParameterValues("cl_award_unit");
+			String ac_reward_date[] = request.getParameterValues("cl_reward_date");
+			String ac_note[] = request.getParameterValues("cl_note");
+			for(int i=0;i<cl_reward_name.length;i++) { //遍历数组
+				if(!cl_reward_name[i].equals("")){ //判断是否存在
+					Map<String,Object> MonographMap = new HashMap<String,Object>();
+					MonographMap.put("declaration_id", declaration_id);
+					MonographMap.put("reward_name", ac_reward_name[i]);
+					MonographMap.put("award_unit", request.getParameter( ac_award_unit[i]));
+					MonographMap.put("reward_date", ac_reward_date[i]);
+					MonographMap.put("note", ac_note[i]);
+					MonographMap.put("sort", i);
+					this.mdService.insertAcadereward(MonographMap);
 				}
 			}
 			msg = "OK";

@@ -78,7 +78,8 @@ Page({
     startnum: parseInt("${pageResult.pageNumber}"),				//指定页码
     elem: $('#page1'),		//指定的元素
     callback: function (n) {	//回调函数
-        window.location.href="${ctx}/material/toSearchOrg.action?currentPage="+n+"&pageSize="+$("input[name='pageSize']").val()+"&material_id="+material_id; 
+    	var orgname =$("#orgname").val();
+        window.location.href="${ctx}/material/toSearchOrg.action?currentPage="+n+"&pageSize="+$("input[name='pageSize']").val()+"&material_id="+material_id+"&orgname="+encodeURI(encodeURI(orgname)); 
     }
 });
 $(function () {
@@ -87,7 +88,8 @@ $(function () {
         height: 30,
         optionHeight: 30,
         onChange:function (){
-        	window.location.href="${ctx}/material/toSearchOrg.action?currentPage="+n+"&pageSize="+$("input[name='pageSize']").val()+"&material_id="+material_id;
+        	var orgname =$("#orgname").val();
+        	window.location.href="${ctx}/material/toSearchOrg.action?currentPage="+n+"&pageSize="+$("input[name='pageSize']").val()+"&material_id="+material_id+"&orgname="+encodeURI(encodeURI(orgname));
         }
     });
     $('#org_tab tr:last').find('td').addClass('end'); 
@@ -100,7 +102,7 @@ function tojump(){
 //查询
 function query(){
 	var orgname =$("#orgname").val();
-	window.location.href="${ctx}/material/toSearchOrg.action?material_id="+material_id+"&orgname="+encodeURI(encodeURI(orgname));
+	window.location.href="${ctx}/material/toSearchOrg.action?material_id="+material_id+"&orgname="+encodeURI(encodeURI(orgname)); 
 }
 
 //确认选择
