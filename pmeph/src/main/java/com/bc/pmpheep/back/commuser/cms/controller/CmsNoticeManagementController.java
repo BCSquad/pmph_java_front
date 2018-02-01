@@ -124,7 +124,7 @@ public class CmsNoticeManagementController extends BaseController {
 //			paraMap.put("messageId", messageId);
 			
 			String materialId=request.getParameter("materialId");
-			String cmsId=request.getParameter("cmsId");
+			String cmsId=request.getParameter("csmId");
 			ModelAndView mv = new ModelAndView();
 			Map<String,Object> paraMap = new HashMap<String,Object>();
 			paraMap.put("materialId", materialId);
@@ -163,7 +163,7 @@ public class CmsNoticeManagementController extends BaseController {
 			}	
 			//mongoDB查询通知内容
 			Content message= contentServioce.get(messageId);
-			mv.addObject("message",message);
+			mv.addObject("content",message.getContent());
 			mv.setViewName("commuser/message/noticeMessageDetail");
 			return mv;
 		}

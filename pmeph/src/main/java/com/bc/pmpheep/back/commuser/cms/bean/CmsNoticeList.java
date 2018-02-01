@@ -72,7 +72,21 @@ public class CmsNoticeList {
      * 内容
      */
     private String contentxt;
+    /**
+     * 教材id
+     */
+    private Long materialId;
     
+    
+    
+	public Long getMaterialId() {
+		return materialId;
+	}
+
+	public void setMaterialId(Long materialId) {
+		this.materialId = materialId;
+	}
+
 	public String getContentxt() {
 		return contentxt;
 	}
