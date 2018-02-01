@@ -49,7 +49,7 @@
    height:33px;margin-top:5px
 }
 .collection .content .content-text .personicon{
-    float:left;background-image: url(../../image/rwtx.png);height:33px;width:33px
+    float:left;height:33px;width:33px
 }
 .collection .content .content-text .username{
    height:33px;line-height:33px;float:left;max-width: 100px;margin-left:10px;margin-right:10px;font-size: 16px;color:#333333
