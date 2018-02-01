@@ -68,15 +68,19 @@ String contextpath=request.getContextPath();
                <div class="headtext">本套教材图书</div>
            </div>
            <div class="booklist">
-               <c:forEach items="${booklist }" var="book">
-                    <div class="item">
-		                  <div class="itemimg" style="width:126px;height:126px;margin:20px auto 0px;text-align: center">
-		                     <img alt="" src="${book.image_url=='DEFAULT'? 'statics/image/564f34b00cf2b738819e9c35_122x122!.jpg':book.image_url }" >
-		                  </div>
-                 	<div class="bookname"><a href="readdetail/todetail.action?id=${book.id }">${book.bookname }</a> </div>
-                  </div>
+           <c:set var="count" value="${booklist.size() }" ></c:set>
+               <c:forEach items="${booklist }" var="book" >
+                    <c:if test="${book !=null }">
+	                    <div class="item">
+			                  <div class="itemimg" style="width:126px;height:126px;margin:20px auto 0px;text-align: center">
+			                     <img alt="" src="${book.image_url=='DEFAULT'? 'statics/image/564f34b00cf2b738819e9c35_122x122!.jpg':book.image_url }" >
+			                  </div>
+	                 	<div class="bookname"><a href="readdetail/todetail.action?id=${book.id }">${book.bookname }</a> </div>
+	                  </div>
+	                  <c:set var="count" value="${count-1 }" ></c:set>
+	               </c:if>
                </c:forEach>
-               <c:if test="${booklist.size() ==0 }">
+               <c:if test="${booklist.size() ==count }">
                    <div style="float:left;text-align: center;width:100%;" id="nomore">
 	                  <div class="no-more"  >
                        <img src="<c:url value="/statics/image/aaa4.png"></c:url>" style="display: block;margin: 0px auto 0px;">
