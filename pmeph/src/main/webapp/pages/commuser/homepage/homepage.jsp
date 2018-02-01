@@ -40,7 +40,7 @@
                         <c:forEach var="ad" items="${adInfo1.detailList}">
                             <li><img src="${ctx}/image/${ad.image}.action" style="width: 922px; height: 380px"/></li>
                         </c:forEach>
-                     </ul>
+                    </ul>
                 </div>
                 <div class="ctrl" id="ctrl"></div>
             </div>
@@ -74,22 +74,30 @@
                                                                       style="margin-left: 30px;margin-top: 42px"></div>
             </div>
             <c:forEach items="${listDou}" var="list" varStatus="status">
-                <c:if test="${status.index==0}">
+                
+                <%-- <c:if test="${status.index==0}">
                     <div class="content-left" style="margin-left: 30px">
                         <p class="content-size"><a href="${ctx}/message/noticeMessageDetail.action?cmsId=${list.id }&&materialId=${list.material_id}" class="astyle">${list.title}</a></p>
                         <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date" pattern="yyyy-MM-dd"/></p>
                         <div class="left_join"
                         onclick="window.location.href='${ctx}/material/toMaterialAdd.action?material_id=${list.material_id}'">报名参加</div>
                     </div>
-                </c:if>
-                <c:if test="${status.index!=0}">
-                    <div class="content-left">
-                        <p class="content-size"><a href="${ctx}/message/noticeMessageDetail.action?cmsId=${list.id }&&materialId=${list.material_id}" class="astyle">${list.title}</a></p>
-                        <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date" pattern="yyyy-MM-dd"/></p>
-                        <div class="left_join"
-                        onclick="window.location.href='${ctx}/material/toMaterialAdd.action?material_id=${list.material_id}'">报名参加</div>
-                    </div>
-                </c:if>
+                </c:if> --%>
+                <%-- <c:if test="${status.index!=0}"> --%>
+                  <div class="content-left">
+					  <p class="content-size"><a href="${ctx}/message/noticeMessageDetail.action?cmsId=${list.id }&&materialId=${list.material_id}" class="astyle">${list.title}</a></p>
+                      <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date" pattern="yyyy-MM-dd"/></p>
+                      
+                      <c:if test="${list.notEnd ==1}">
+	                      <div class="left_join"
+	                      onclick="window.location.href='${ctx}/material/toMaterialAdd.action?material_id=${list.material_id}'">报名参加</div>
+                  	  </c:if>
+                  	  <c:if test="${list.notEnd ==0}">
+	                      <div class="left_join end">已结束</div>
+                  	  </c:if>
+                  </div>
+               
+                <%-- </c:if> --%>
             </c:forEach>
             <div class="more" onclick="top.location='${ctx}/cmsnotice/tolist.action'">全部>></div>
         </div>

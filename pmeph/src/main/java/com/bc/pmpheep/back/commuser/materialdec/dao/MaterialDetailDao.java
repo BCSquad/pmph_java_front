@@ -70,7 +70,32 @@ public interface MaterialDetailDao {
 		//作家扩展项填报表
 		public List<Map<String,Object>> queryZjkzbb(Map<String,Object> map);
 		public int insertZjkzbb(Map<String,Object> map);
-	//	public int insertZjkzbb(Map<String,Object> map);
+		
+		//个人成就
+		public Map<String,Object> queryAchievement(Map<String,Object> map);
+		public int insertAchievement(Map<String,Object> map);
+		public int updateAchievement(Map<String,Object> map);
+		public int DelAchievement(Map<String,Object> map);
+		//主编学术专著情况
+		public List<Map<String,Object>> queryMonograph(Map<String,Object> map);
+		public int insertMonograph(Map<String,Object> map);
+		public int DelMonograph(Map<String,Object> map);
+		//出版行业获奖情况
+		public List<Map<String,Object>> queryPublish(Map<String,Object> map);
+		public int insertPublish(Map<String,Object> map);
+		public int DelPublish(Map<String,Object> map);
+		//SCI论文投稿及影响因子
+		public List<Map<String,Object>> querySci(Map<String,Object> map);
+		public int insertSci(Map<String,Object> map);
+		public int DelSci(Map<String,Object> map);
+		//临床医学获奖情况
+		public List<Map<String,Object>> queryClinicalreward(Map<String,Object> map);
+		public int insertClinicalreward(Map<String,Object> map);
+		public int DelClinicalreward(Map<String,Object> map);
+		//学术荣誉授予情况
+		public List<Map<String,Object>> queryAcadereward(Map<String,Object> map);
+		public int insertAcadereward(Map<String,Object> map);
+		public int DelAcadereward(Map<String,Object> map);
 		
 		//申报审核
 		public int updateDeclaration(Map<String,Object> map);
