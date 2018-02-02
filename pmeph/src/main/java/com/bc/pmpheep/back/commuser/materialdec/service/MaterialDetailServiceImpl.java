@@ -193,9 +193,22 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 		pageResult.setPageNumber(pageParameter.getPageNumber());
 		pageResult.setPageSize(pageParameter.getPageSize());
 		
-		List<Map<String, Object>> list = madd.queryOrgList(pageParameter);
-		int count = madd.queryOrgCount(pageParameter);
 		
+		int count = madd.queryOrgCount(pageParameter);
+		List<Map<String, Object>> list = null ;
+		if(0 == count){
+			list = new java.util.ArrayList<Map<String, Object>>(1);
+			Map<String, Object> map = new java.util.HashMap<String, Object>();
+			map.put("org_id", 0);
+			map.put("id", 0);
+			map.put("parent_id", 0);
+			map.put("material_id", pageParameter.getParameter().get("material_id"));
+			map.put("org_name", "人民卫生出版社");
+			list.add(map);
+		}else{
+			list = madd.queryOrgList(pageParameter);
+			
+		}
 		pageResult.setRows(list);
 		pageResult.setTotal(count);
 		return pageResult;
