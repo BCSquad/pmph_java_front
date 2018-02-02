@@ -48,7 +48,7 @@
     position: relative;
 }
 .behind{
-    margin-left: 20px;
+    margin-left: 15px;
 }
 .notes .item .inside{
     width:292px;
@@ -76,7 +76,7 @@
 }
 .notes .item .content-image{
     height: 182px;
-    width:284px
+    width:284px;
 }
 .notes .item .content-title{
     font-size: 18px;
@@ -187,30 +187,7 @@
 	margin-right: 18px;
 }
 
-/* ._load{
-	width: 1200px;
-	height: 25px;
-	margin-top: 30px;
-}
-
-._load span{
-	margin-left: 50%;
-	font-family: MicrosoftYaHei;
-	font-size: 16px;
-	letter-spacing: 0px;
-	color: #7d7d7d;
-	cursor: pointer;
-} */
-
-.js-load-more{
-  padding:0 15px;
-  width:120px;
-  height:30px;
-  line-height:30px;
-  text-align:center;
-  margin:20px auto;
-  border:0 none;
-  font-size:16px;
-  
-  display:none;/*Ĭ�ϲ���ʾ��ajax���óɹ���ž�����ʾ���*/
+.pagination-wrapper{
+	float:right;
+    margin: 30px 10px 30px 0px;
 }
