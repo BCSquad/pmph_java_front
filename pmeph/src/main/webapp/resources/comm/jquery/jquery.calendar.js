@@ -51,6 +51,7 @@ jQuery.fn.extend({
                     d == $(this).text() && !$(this).hasClass("prevD") && !$(this).hasClass("nextD") && $(this).addClass("select")
                 });
                 $("#" + c.controlId).hide();
+                $(n).trigger('timeChange', [a, c]);
                 c.callback.call(n[0], 'date', a, a.format(c.format))
             }).hover(function () {
                     $(this).addClass("hover")
@@ -71,6 +72,7 @@ jQuery.fn.extend({
                     $("#" + c.controlId).find(".currentMonth").text(Number($(this).attr("val")) + 1)
                     var a = new Date($("#" + c.controlId).find(".currentYear").text() + "/" + $("#" + c.controlId).find(".currentMonth").text() + "/1")
                     $("#" + c.controlId).hide();
+                    $(n).trigger('timeChange', [a, c]);
                     c.callback.call(n[0], 'month', a, a.format(c.format))
                 }
 
@@ -127,7 +129,7 @@ jQuery.fn.extend({
                 for (var y = 0; y < 7; y++) {
                     var j = x * 7 + y + 1 - m;
                     p = l = "";
-                    if (c.lowerLimit != NaN && c.lowerLimit > new Date(newDate.getFullYear(), newDate.getMonth(), j) || c.upperLimit != NaN && new Date(newDate.getFullYear(), newDate.getMonth(), j) > c.upperLimit) if (0 < j && j <= o) {
+                    if (c.lowerLimit != NaN && c.lowerLimit >= new Date(newDate.getFullYear(), newDate.getMonth(), j + 1) || c.upperLimit != NaN && new Date(newDate.getFullYear(), newDate.getMonth(), j) > c.upperLimit) if (0 < j && j <= o) {
                         if (newDate.getFullYear() == e && newDate.getMonth() == f && j == q) l = "current";
                         g += "<td><span class='" + l + "'>" + j + "</span></td>"
                     } else if (j <= 0) {
@@ -254,7 +256,7 @@ jQuery.fn.extend({
             b.removeClass("reserve").addClass("enabled");
             d.removeClass("enabled").addClass("reserve");
             b.css({
-                "margin-left": "-" + d.width() + "px",
+                "margin-left": "-" + 210 + "px",
                 "margin-top": "0px"
             });
             b.empty().append(a);
@@ -263,7 +265,7 @@ jQuery.fn.extend({
                 },
                 c.speed);
             d.animate({
-                    "margin-left": d.width() + "px"
+                    "margin-left": 210 + "px"
                 },
                 c.speed,
                 function () {
@@ -385,6 +387,25 @@ jQuery.fn.extend({
                 format: 'yyyy-mm-dd',
                 upperLimit: NaN,
                 lowerLimit: NaN,
+                refresh: function () {
+
+                    var a = $("#" + this.controlId).find(".currentYear"),
+                        b = $("#" + this.controlId).find(".currentMonth"),
+                        d = s(Number(a.text()), Number(b.text()) - 1);
+                    C(d);
+                    if (Number(b.text()) != 1) b.text(Number(b.text()));
+                    else {
+                        a.text(Number(a.text()) - 1);
+                        b.text("12")
+                    }
+                    r()
+
+
+                    /*var parent = $("#" + this.controlId).find(".tabD").parent();
+                     $("#" + this.controlId).find(".tabD").remove();
+                     var g = s(Number($("#" + this.controlId).find(".currentYear").text()), Number($("#" + this.controlId).find(".currentMonth").text()))
+                     parent.append(g);*/
+                },
                 callback: function (view, date, dateString) {
                     $(this).val(dateString);
                 }
@@ -492,6 +513,7 @@ jQuery.fn.extend({
                 v()
             }
         });
+        n.data("calendar-id", c);
         n.bind("click",
             function () {
                 if ($("#" + c.controlId + ":hidden").length != 0) {
@@ -569,13 +591,15 @@ $.fn.calendar = function () {
         $(this).mycalendar({
             view: options.view,
             format: options.format,
-            callback: options.onselected
+            callback: options.onselected,
         });
     })
 };
 $(function () {
     $("input[calendar]").each(function (i) {
         var options = {
+            'max': NaN,
+            'min': NaN,
             'view': 'date',
             'format': 'yyyy-mm-dd',
             'onselected': function (view, date, dateString) {
@@ -587,10 +611,46 @@ $(function () {
                 options[this.attributes[index].name] = eval("(" + this.attributes[index].value + ")");
             }
         }
-        $(this).mycalendar({
+
+        var can = $(this).mycalendar({
+            upperLimit: NaN,
+            lowerLimit: NaN,
             view: options.view,
             format: options.format,
             callback: options.onselected
         });
+
+        if (typeof(options.max) == "string") {
+            if (options.max.indexOf("$") == 0) {
+                var ele = options.max.substr(1, options.max.length - 1);
+                var that = this;
+                $(ele).on('timeChange', function (event, val) {
+                    calendar = $(that).data("calendar-id");
+                    calendar.upperLimit = val;
+                    calendar.refresh();
+                });
+            } else if (options.min.indexOf("$") == 0) {
+                var ele = options.min.substr(1, options.min.length - 1);
+                var that = this;
+                $(ele).on('timeChange', function (event, val) {
+                    calendar = $(that).data("calendar-id");
+                    calendar.lowerLimit = val;
+                    calendar.refresh();
+                });
+            }
+        }
+
+        if (typeof(options.min) == "string") {
+            if (options.min.indexOf("$") == 0) {
+                var ele = options.min.substr(1, options.min.length - 1);
+                var that = this;
+                $(ele).on('timeChange', function (event, val) {
+                    calendar = $(that).data("calendar-id");
+                    calendar.lowerLimit = val;
+                    calendar.refresh();
+                });
+            }
+        }
+
     });
 })
