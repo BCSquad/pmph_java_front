@@ -15,16 +15,19 @@
 	    <td class="">$!{c.dec_org_name}</td>
 	    <td class="">$!{c.position}</td>
 	    <td class="">$!{c.title}</td>
-	    #if($!{c.is_list_selected} == 1 || $!{c.is_list_selected} == true )
+	    #if($!{c.is_locked} == true || $!{c.editorAvaliable} == false )
 	    	<td class=""><input class="check editor" value="$!{c.dec_position_id}" type="checkbox" disabled="disabled"></td>
 	    #else
 	    	<td class=""><input class="check editor" value="$!{c.dec_position_id}" type="checkbox"></td>
 	    #end
-	    #if($!{c.is_list_selected} == 1 || $!{c.is_list_selected} == true )
-	    	<td class=""><input class="check numEditor" value="$!{c.dec_position_id}" type="checkbox" disabled="disabled"></td>
-	    #else
-	    	<td class=""><input class="check numEditor" value="$!{c.dec_position_id}" type="checkbox"></td>
-	    #end
+	    
+	    #if($!{is_digital_editor_optional}==true)
+		    #if($!{c.is_locked} == true )
+		    	<td class=""><input class="check numEditor" value="$!{c.dec_position_id}" type="checkbox" disabled="disabled"></td>
+		    #else
+		    	<td class=""><input class="check numEditor" value="$!{c.dec_position_id}" type="checkbox"></td>
+		    #end
+	    #end 
 	</tr>	
 	#set($ColNum = $ColNum + 1)
 			

@@ -43,7 +43,7 @@ public interface ChooseEditorService {
 
 	/**
 	 * 暂存 两步：1.删除本人本书籍的所有职位申报暂存 2.将现选择的职位暂存id对应数据复制入暂存表
-	 * @param paraMap 如此型：{selectedIds=1,2,3, logUserId=24966, textBookId=21524, is_background=0}
+	 * @param paraMap 如此型：{selectedIds=1,2,3, logUserId=24966, textBookId=21524, is_background=0,selectedNumIds=2,3,4}
 	 * @return
 	 */
 	Map<String, Object> tempSave(Map<String, Object> paraMap);
