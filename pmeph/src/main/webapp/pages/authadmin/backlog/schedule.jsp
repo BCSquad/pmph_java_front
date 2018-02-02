@@ -77,7 +77,7 @@
 	                            <div class="leftPictureAndName">
 	                                <div class="upContent">
 	                                        <div class="headPicture">
-	                                            <img class="picture1"  src="${ctx}/statics/pictures/head.png">
+	                                            <img class="picture1"  src="${ctx}/${one.avatar}">
 	                                            <%-- <img class="picture1"  src="${ctx}${one.avatar}"> --%>
 	                                        </div>
 	                                        <div class="username">
@@ -152,7 +152,7 @@
 			<c:otherwise>
 				<div class="info">
             <div class="topPictureDiv">
-                <img class="topPicture"src="${ctx}/statics/pictures/head.png">
+                <img class="topPicture"src="${ctx}/${map.avatar}">
             </div>
             <div class="firstRow">
                 <span>${map.org_name }</span>

@@ -1,4 +1,4 @@
-
+var avatar="";
 var addAvatar="";
 var addName="";
 var addhtml="";
@@ -63,47 +63,45 @@ $(function() {
 	        	$("#dialogue").html('');
 	        	if(null != responsebean && responsebean.length >= 0){
 	        		var content="";
-	        		for( var i= 0; i<responsebean.length ; i++ ){
+	        		$.each(responsebean,function(i,n){
 	        			var html ="";
-	        			if(responsebean[i].isMy){//我发送的
+	        			if(n.isMy){//我发送的
 	        				html = "<div class='oneTalk'> "+
 						                "<div class='headAndNameRight float_right'> "+
-						                /*"<div class='headDiv'><img class='headPicture' src='"+contextpath+'/'+responsebean[i].avatar+"'/></div> "+*/
-						                    "<div class='headDiv'><img class='headPicture' src='"+contextpath+"statics/image/putongyhtouxiang.png"+"'/></div> "+
-						                    "<div class='talkName'><text>"+responsebean[i].senderName+"</text></div> "+
+						                    "<div class='headDiv'><img class='headPicture' src='"+contextpath+avatar+"'/></div> "+
+						                    "<div class='talkName'><text>"+n.senderName+"</text></div> "+
 						                "</div> "+
 						
 						                "<div class='talkDivRight float_right' > "+
 						                    "<div class='sendMessage'> "+
 						                    	"<div class='textDiv float_right'> "+
-						                    	   responsebean[i].content+
+						                    	  n.content+
 						                        "</div> "+
 						                      "</div> "+
-						                    "<div class='talkTime talkTimeAlignRight'>"+formatDate(responsebean[i].sendTime)+"</div> "+
+						                    "<div class='talkTime talkTimeAlignRight'>"+formatDate(n.sendTime)+"</div> "+
 						                "</div> "+
 						            "</div> ";
 		        				
 	        			}else{
 	        				html = "<div class='oneTalk'> "+
 						                "<div class='headAndNameLeft float_left'> "+
-						                   /* "<div class='headDiv'><img class='headPicture' src='"+contextpath+'/'+responsebean[i].avatar+"'/></div> "+*/
-						                  "<div class='headDiv'><img class='headPicture' src='"+contextpath+"statics/image/putongyhtouxiang.png"+"'/></div> "+
-						                    "<div class='talkName'><text>"+responsebean[i].senderName+"</text></div> "+
+						                    "<div class='headDiv'><img class='headPicture' src='"+contextpath+n.avatar+"'/></div> "+
+						                    "<div class='talkName'><text>"+n.senderName+"</text></div> "+
 						                "</div> "+
 						                "<div class='talkDiv float_left'> "+
 						                    "<div class='sendMessage'> "+
 						                       "<div class='textDiv float_left'> "+
-						                       responsebean[i].content+
+						                       n.content+
 						                        "</div> "+
 						                    "</div> "+
-						                    "<div class='talkTime talkTimeAlignLeft'>"+formatDate(responsebean[i].sendTime)+"</div> "+
+						                    "<div class='talkTime talkTimeAlignLeft'>"+formatDate(n.sendTime)+"</div> "+
 						                "</div> "+
 						            "</div> ";
 	        			}
 	        			
 	        			$("#dialogue").append(html);
 	        			content+=html;
-	        		}
+	        		});
 	        		
 	        		addhtml=content;
 	        		//更新消息状态
@@ -169,23 +167,23 @@ $(function() {
 							}
 							if(res.length>0){
 								
-								for (var i = 0; i < res.length; i++) {
-									
+								$.each(res,function(i,n){
+									avatar=n.avatar;
 									var  html ="";
-									html += "<tr><th rowspan='2' class='headPortrait'><img class='pictureNotice' src='"+contextpath+"statics/image/putongyhtouxiang.png"
-											/*+ res[i].avatar*/
+									html += "<tr><th rowspan='2' class='headPortrait'><img class='pictureNotice' src='"+contextpath+n.avatar
+											
 											+ "'></th><td class='name'><span>"
-											+ res[i].name
+											+ n.name
 											+ "</span><span class='time1'>"
-											+ formatDate(res[i].sendTime, "")
+											+ formatDate(n.sendTime, "")
 											+ "</span></td></tr>";
 									html += "<tr><td colspan='2' class='personMessageContent'>私信内容："
-											+ res[i].content
-											+ '</td><td class="buttonDetail"><div class="buttonAccept" ><a class="a openTallk" id="'+res[i].talkId+'" href="javascript:" >查看详情</a></div></td></tr>';
+											+ n.content
+											+ '</td><td class="buttonDetail"><div class="buttonAccept" ><a class="a openTallk" id="'+n.talkId+'" href="javascript:" >查看详情</a></div></td></tr>';
 									html += "<tr><td colspan='4' align='center'><hr class='line'></td></tr>";
-									html +="<input id='name_"+res[i].talkId+"' type='hidden' value='"+res[i].name+"'/><input id='type_"+res[i].talkId+"' type='hidden'value='"+res[i].type+"' />";
+									html +="<input id='name_"+n.talkId+"' type='hidden' value='"+n.name+"'/><input id='type_"+n.talkId+"' type='hidden'value='"+n.type+"' />";
 									$("#list").append(html);
-								}
+								});
 							}else{
 								var  html ="";
 									 html+="<tr><td><div class='no-more'><img src='"+contextpath+"statics/image/aaa4.png'/><span>木有内容呀~~</span></div></td></tr>";
@@ -222,8 +220,8 @@ $(function() {
 		        		
 		        		html = "<div class='oneTalk'> "+
 		                "<div class='headAndNameRight float_right'> "+
-		                    /*"<div class='headDiv'><img class='headPicture' src='"+contextpath+'/'+map.avatar+"'/></div> "+*/
-		                	"<div class='headDiv'><img class='headPicture' src='"+contextpath+"statics/image/putongyhtouxiang.png'/></div>"+
+		                    "<div class='headDiv'><img class='headPicture' src='"+contextpath+'/'+avatar+"'/></div> "+
+		                	/*"<div class='headDiv'><img class='headPicture' src='"+contextpath+"statics/image/putongyhtouxiang.png'/></div>"+*/
 		                    "<div class='talkName'><text>"+map.name+"</text></div> "+
 		                "</div> "+
 		
@@ -240,6 +238,7 @@ $(function() {
 		        		$("#dialogue").append(addhtml);	
 		        		$("#dialogue").append(html);	
 			        	$("#content").val('');
+			        	$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);  
 		        	}
 		        }
 			});

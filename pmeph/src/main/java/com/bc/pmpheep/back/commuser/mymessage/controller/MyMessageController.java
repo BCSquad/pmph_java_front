@@ -67,6 +67,13 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 		Long userId = new Long(String.valueOf(writerUser.get("id")));
 		//Long userId =  new Long(1456);
 		List<MyMessageVO> list = myMessageService.listMyMessage(pageNumber,pageSize,state,userId);
+		 for(MyMessageVO message:list){
+	         	if("/image/DEFAULT.action".equals(message.getAvatar().toString())){
+	         		message.setAvatar("statics/pictures/head.png");
+	 			}else{
+	 				message.setAvatar("file/download"+message.getAvatar().replace("/image/","/"));
+	 			}
+	         }
 		return list;
 	}
 
@@ -110,8 +117,14 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 	public List<DialogueVO> getDialogue(@RequestParam(value = "friendId") Long friendId,Integer friendType) {
 		Map<String, Object> writerUser = this.getUserInfo();
 		Long thisId = new Long(String.valueOf(writerUser.get("id")));
-//		Long thisId = new Long(24967);
 		List<DialogueVO> lst = myMessageService.findMyDialogue(thisId, friendId,friendType);
+		 for(DialogueVO dialogueVO:lst){
+         	if("/image/DEFAULT.action".equals(dialogueVO.getAvatar().toString())){
+         		dialogueVO.setAvatar("statics/pictures/head.png");
+ 			}else{
+ 				dialogueVO.setAvatar("file/download"+dialogueVO.getAvatar().replace("/image/","/"));
+ 			}
+         }
 		return lst;
 	}
 
@@ -143,7 +156,6 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("code","success");
 		map.put("name",name);
-		map.put("avatar",avatar);
 		return map;
 	}
 	

@@ -570,7 +570,7 @@ a{
     		<c:otherwise>
     			<c:forEach var="friend" items="${listFriends}" varStatus="st" >
 		    		<c:choose>
-		    		<c:when test="${status.last==false}">
+		    		<c:when test="${st.last==false}">
 		  				<div class="${(st.index+1)%5 == 1? 'item1':'item1 item11'}" >
 				            <div><img src="${ctx}/${friend.avatar}" class="img2"></div>
 				            <div class="div_txt1">${friend.realname}</div>

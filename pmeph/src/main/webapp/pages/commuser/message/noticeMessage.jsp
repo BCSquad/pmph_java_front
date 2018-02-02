@@ -102,7 +102,7 @@
 		                	    <td colspan="2" class="title">${message.title}</td>
 		                	  </c:if>
 		                	  <c:if test="${message.msgType==4}">
-		                	    <td colspan="2" class="title">《${message.title}》已开始申报,请知悉</td>
+		                	    <td colspan="2" class="title">《${message.title}》已开始申报,请您留意</td>
 		                	  </c:if>
 		                  
 		                    <td class="buttonDetail">
