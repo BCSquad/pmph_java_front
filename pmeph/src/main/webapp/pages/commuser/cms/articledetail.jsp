@@ -41,12 +41,8 @@
 					<span>${map.title }</span>
 					<div style="width: 100%;">
         		<div class="dzsc">
-        		   <c:if test="${flag=='no'}">
-        		     <img src="${ctx}/statics/image/dz02.png" onclick="addlikes()" id="dz"/>
-        		   </c:if>
-        		   <c:if test="${flag=='yes'}">
-        			 <img src="${ctx}/statics/image/${mark=='yes' ? 'dz02.png':'dz01.png'}" onclick="addlikes()" id="dz"/>
-        		   </c:if>	  
+        			 <img src="${ctx}/statics/image/${like=='yes' ? 'dz01.png':'dz02.png'}" onclick="addlikes()" id="dz"/>
+        
         		      <img src="${ctx}/statics/image/${mark=='yes' ? 'sc101(1).png':'s102(1).png'}" onclick="addmark()" id="sc"/>
         			  <div style="display: inline-block;vertical-align: top;margin-right: 8px;text-align:left;">
                     </div>

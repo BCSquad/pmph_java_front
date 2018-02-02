@@ -53,6 +53,7 @@
 }
 .collection .title-text a{
     color: #000000;
+    text-decoration: underline;
 }
 .collection .author{
     height:25px;
