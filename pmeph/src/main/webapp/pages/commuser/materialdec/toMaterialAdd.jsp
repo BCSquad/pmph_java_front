@@ -122,11 +122,7 @@
 						<td><span class="btbs">*</span><span>职&emsp;&emsp;务：</span>
 							<input class="cg_input" name="position" value="" id="position"  maxlength="12"/></td>
 						<td><span class="btbs">*</span><span>职&emsp;&emsp;称：</span>
-                            <select class="select-input" id="zc" name="title" >
-                                <option value="0" selected="selected">教授</option>
-                                <option value="1">主任</option>
-                                <option value="3">副主任</option>
-                            </select></td>
+							<input class="cg_input" name="title" value="" id="zc"  maxlength="10"/></td>
 						<td><span class="btbs">*</span><span>地&emsp;&emsp;址：</span>
 							<input class="cg_input" name="address" value="" id="address"  maxlength="17"/></td>
 					</tr>

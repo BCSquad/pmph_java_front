@@ -130,11 +130,8 @@
 						<td><span class="btbs">*</span><span>职&emsp;&emsp;务：</span>
 							<input class="cg_input" name="position" value="${gezlList.position}" id="position"  maxlength="12"/></td>
 						<td><span class="btbs">*</span><span>职&emsp;&emsp;称：</span>
-                            <select class="select-input" id="zc" name="title" >
-                                <option value="0" ${gezlList.sex=='0'?'selected':'' }>教授</option>
-                                <option value="1" ${gezlList.sex=='1'?'selected':'' }>主任</option>
-                                <option value="3" ${gezlList.sex=='3'?'selected':'' }>一级教师</option>
-                            </select></td>
+							<input class="cg_input" name="title" value="${gezlList.title}" id="zc"  maxlength="10"/></td>
+                        </td>
 						<td><span class="btbs">*</span><span>地&emsp;&emsp;址：</span>
 							<input class="cg_input" name="address" value="${gezlList.address}" id="address"  maxlength="17"/></td>
 					</tr>
@@ -420,10 +417,10 @@
 							</td>
 							<td style="color: #333333;">
 								<table class="radio_tb" style="width: 80px;"><tr>
-									<td><input type="radio" name="jc_is_digital_editor_1" value="1" />是</td>
-					 				<td><input type="radio" name="jc_is_digital_editor_1" value="0" checked="checked"/>否</td>
+									<td><input type="radio" name="jc_is_digital_editor_a" value="1" />是</td>
+					 				<td><input type="radio" name="jc_is_digital_editor_a" value="0" checked="checked"/>否</td>
 								</tr></table>
-								<input type="hidden" name="jc_is_digital_editor" value="jc_is_digital_editor_1" />
+								<input type="hidden" name="jc_is_digital_editor" value="jc_is_digital_editor_a" />
 							</td>
 							<td><input class="cg_input" maxlength="33" name="jc_note" value="" style="width: 230px;" placeholder="备注"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jccb()"/></td>
@@ -443,7 +440,7 @@
 								<td style="color: #333333;">
 								<table class="radio_tb" style="width: 80px;"><tr>
 									<td><input type="radio" name="jc_is_digital_editor_${status.count}" value="1"  ${list.is_digital_editor=='1'?'checked':'' } />是</td>
-					 				<td><input type="radio" name="jc_is_digital_editor_${status.count}" value="0"  ${list.is_digital_editor=='1'?'checked':'' }/>否</td>
+					 				<td><input type="radio" name="jc_is_digital_editor_${status.count}" value="0"  ${list.is_digital_editor=='0'?'checked':'' }/>否</td>
 								</tr></table>
 								<input type="hidden" name="jc_is_digital_editor" value="jc_is_digital_editor_${status.count}" />
 							</td>
@@ -621,6 +618,7 @@
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jcbx()"/></td>
 						</tr>
 						<c:forEach var="list" items="${jcbxList}" varStatus="status">
+						<c:if test="${list.rank != '0'}">
 						<tr id="jcbx_${status.count}">
 							<td><input class="cg_input" name="jcb_material_name" id="jcb_material_name" value="${list.material_name}" style="width: 200px;" placeholder="教材名称"/></td>
 							<td>
@@ -653,7 +651,7 @@
 							<td><input class="cg_input" name="jcb_isbn" value="${list.isbn}" style="width: 100px;" placeholder="标准书号"/></td>
 							<td><input class="cg_input" name="jcb_note" value="${list.note}" style="width: 130px;" placeholder="备注"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('jcbx_${status.count}')"/></td>
-						</tr>
+						</tr></c:if>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -730,7 +728,9 @@
 								<td><input class="cg_input" name="jcb_publisher" value="${list.publisher}" style="width: 120px;" placeholder="出版社"/></td>
 								<td><input class="cg_input" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="jcb_publish_date" value="${list.publish_date}" style="width: 110px;"/></td>
 								<td><input class="cg_input" name="jcb_isbn" value="${list.isbn}" style="width: 110px;" placeholder="标准书号"/></td>
-								<td><input class="cg_input" name="jcb_note" value="${list.note}" placeholder="备注" style="width: 180px;"/></td>
+								<td><input class="cg_input" name="jcb_note" value="${list.note}" placeholder="备注" style="width: 180px;"/>
+									<input type="hidden" name="jcb_rank" value="0"/>
+								</td>
 								<td><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('qtjcbx_${status.count}')"/></td>
 							</tr>
 						</c:if>
@@ -1025,7 +1025,7 @@
 						</tr>
 						<c:forEach var="list" items="${acadeList}" varStatus="status">
 							<tr id="acade_${status.count}">
-								<td><input class="cg_input" name="ac_reward_name" maxlength="16" id="ac_reward_name" value="${list.reward_name}}" style="width: 300px;" placeholder="荣誉名称"/></td>
+								<td><input class="cg_input" name="ac_reward_name" maxlength="16" id="ac_reward_name" value="${list.reward_name}" style="width: 300px;" placeholder="荣誉名称"/></td>
 								<td style="color: #333333;">
 									<table class="radio_tb" style="width:280px;"><tr>
 										<td><input type="radio" name="ac_award_unit_${status.count}" value="0" ${list.award_unit=='0'?'checked':'' }/>无</td>
