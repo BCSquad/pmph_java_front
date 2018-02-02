@@ -71,7 +71,7 @@ $(function(){
 			return ;
 		}
 		webSocket.send("{senderId:"+$("#userId").val()+",senderType:"+2+",content:'"+content+"',groupId:"+$("#groupId").val()+",sendType:0}");
-		$("#msgContent").val(null);
+		$("#msgContent").val("");
 	}
 	
 	//回车发送消息
