@@ -101,13 +101,19 @@ public class ScheduleController extends BaseController{
 		}
 		
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<>(currentPage,pageSize);
-		
 		paraMap.put("userId", userId);
 		paraMap.put("endPage", pageSize);
 		
 		pageParameter.setParameter(paraMap);
 		//代办事项列表
 		PageResult<Map<String,Object>> pageResult = scheduleService.selectScheduleList(pageParameter);
+		for(Map<String, Object> map:pageResult.getRows()){
+         	if("DEFAULT".equals(map.get("avatar").toString())){
+ 				map.put("avatar", "statics/pictures/head.png");
+ 			}else{
+ 				map.put("avatar", "file/download/"+map.get("avatar")+".action");
+ 			}
+         }
 		ModelAndView mv = new ModelAndView();
 		//机构用户基本信息
 		Map<String,Object> map = scheduleService.selectOrgUser(userId);
@@ -119,6 +125,11 @@ public class ScheduleController extends BaseController{
 			}else{
 				map.put("license","false");
 			}*/
+			if("DEFAULT".equals(map.get("avatar").toString())||"/static/default_image.png".equals(map.get("avatar").toString())){
+				map.put("avatar", "statics/pictures/head.png");
+			}else{
+				map.put("avatar", "file/download/"+map.get("avatar").toString().replace("/image/","/")+".action");
+			}
 			map.put("time", time);
 			map.put("userId", userId);
 			map.put("pageResult", pageResult);
@@ -189,6 +200,15 @@ public class ScheduleController extends BaseController{
 		if(null!=map&&map.size()>0){
 			map.put("pageResult", pageResult);
 			map.put("userId", userId);
+			
+			if("DEFAULT".equals(map.get("avatar").toString())||"/static/default_image.png".equals(map.get("avatar").toString())){
+				map.put("avatar", "statics/pictures/head.png");
+			}else{
+				map.put("avatar", "file/download/"+map.get("avatar").toString().replace("/image/","/")+".action");
+			}
+			map.put("userId", userId);
+			map.put("pageResult", pageResult);
+			
 			mv.addObject("map",map);
 
 		}else{

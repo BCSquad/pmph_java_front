@@ -78,8 +78,8 @@
 	<insert id="insertWriteArticle" parameterType="java.util.Map">
 		insert into
 		cms_content
-		(mid,parent_id,category_id,author_type,author_id,is_staging,path)
-		values(#{mid},#{parent_id},#{category_id},#{author_type},#{author_id},#{is_staging},#{path})
+		(mid,parent_id,category_id,author_type,author_id,is_staging,path,title)
+		values(#{mid},#{parent_id},#{category_id},#{author_type},#{author_id},#{is_staging},#{path},#{title})
 	</insert>
 
 	<!-- 评论返回 -->
@@ -98,7 +98,7 @@
 		left join writer_user c
 		on t.author_id=c.id
 		where t.parent_id =#{parameter.id}
-		AND t.category_id = 0
+		AND t.category_id = 0  and t.auth_status='2'
 		order by
 		t.gmt_create desc limit #{start},#{pageSize}
 	</select>
@@ -111,7 +111,7 @@
 		t.category_id=b.id
 		left join writer_user c on t.author_id=c.id
 		where t.parent_id =#{id}
-		AND t.category_id = 0
+		AND t.category_id = 0  and t.auth_status='2'
 		order by t.gmt_create desc
 	</select>
 

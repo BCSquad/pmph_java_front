@@ -261,6 +261,9 @@ public class MessageController extends BaseController{
 			paraMap.put("materialId", materialId);
 			//备注附件
 			List<Map<String,Object>> listAttachment = noticeMessageService.queryNoticeMessageDetailAttachment(paraMap);
+			for(Map<String,Object> map :listAttachment){
+				map.put("attachmentId", "file/download/"+map.get("attachment")+".action");
+			}
 			//联系人z
 			List<Map<String,Object>> listContact = noticeMessageService.queryNoticeMessageDetailContact(paraMap);
 			

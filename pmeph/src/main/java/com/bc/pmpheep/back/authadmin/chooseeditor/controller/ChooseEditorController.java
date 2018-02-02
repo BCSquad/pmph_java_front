@@ -55,7 +55,8 @@ public class ChooseEditorController extends BaseController {
 		Map<String, Object> textBook = chooseEditorService.queryTextBookById(textBookId);
 		List<Map<String, Object>> OrgList = chooseEditorService.getOrgList();
 		String textBookName = (String) textBook.get("textbook_name");
-		Boolean is_list_selected = (Boolean) textBook.get("is_list_selected");
+		Boolean is_locked = (Boolean) textBook.get("is_locked");
+		Boolean is_digital_editor_optional = (Boolean) textBook.get("is_digital_editor_optional");
 		String tag ="editor";
 		String selectedIds = getTempSelectedIds(textBookId, logUserId,tag);
 		tag ="numEditor";
@@ -67,7 +68,8 @@ public class ChooseEditorController extends BaseController {
 		mv.addObject("textBookName",textBookName);
 		mv.addObject("OrgList",OrgList);
 		mv.addObject("textBookId",textBookId);
-		mv.addObject("is_list_selected",is_list_selected);
+		mv.addObject("is_locked",is_locked);
+		mv.addObject("is_digital_editor_optional",is_digital_editor_optional);
 		mv.setViewName("authadmin/chooseeditor/chooseeditor");
 		return mv;
 	}
@@ -93,9 +95,10 @@ public class ChooseEditorController extends BaseController {
 			//将暂存表中已选中的初始化入selectedIds
 			
 			for (Map<String, Object> m : total_List_map) {
-				if ("3".equals(""+m.get("chosen_position"))||"9".equals(""+m.get("chosen_position"))) {
+				if ("1".equals(""+m.get("chosen_position"))||"9".equals(""+m.get("chosen_position"))) {
 					selectedIds += ("'"+ m.get("dec_position_id") + "',");
 				}
+				
 			}
 			if (selectedIds.length()>0) {
 				selectedIds = selectedIds.substring(0,selectedIds.length()-1);
@@ -107,7 +110,8 @@ public class ChooseEditorController extends BaseController {
 			
 			//将暂存表中已选中的初始化入selectedIds
 			for (Map<String, Object> m : total_List_map) {
-				if ("8".equals(""+m.get("chosen_position"))||"9".equals(""+m.get("chosen_position"))) {
+				/*if ("8".equals(""+m.get("chosen_position"))||"9".equals(""+m.get("chosen_position"))) {*/
+				if(Integer.parseInt("0"+m.get("chosen_position"))>=8){
 					selectedIds += ("'"+ m.get("dec_position_id") + "',");
 				}
 			}

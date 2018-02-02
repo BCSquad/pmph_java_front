@@ -63,7 +63,7 @@ $(function(){
 	        				html =
 	        				"<div class='oneTalk'> "+
 		                        "<div class='headAndNameLeft float_left'> "+
-		                            "<div class='headDiv'><img class='headPicture' src='"+contextpath+"/"+responsebean[i].avatar+"'/></div> "+
+		                            "<div class='headDiv'><img class='headPicture' src='"+contextpath+responsebean[i].avatar+"'/></div> "+
 		                            "<div class='talkName'><text>"+responsebean[i].senderName+"</text></div> "+
 		                        "</div> "+
 	
@@ -140,7 +140,7 @@ $(function(){
 		        		html = 
 	        				"<div class='oneTalk'> "+
 	                        "<div class='headAndNameRight float_right'> "+
-	                            "<div class='headDiv'><img class='headPicture' src='"+contextpath+map.avatar+"'/></div> "+
+	                            "<div class='headDiv'><img class='headPicture' src='"+contextpath+avatar+"'/></div> "+
 	                            "<div class='talkName'><text>"+map.name+"</text></div> "+
 /*	                            "<div class='headDiv'><img class='headPicture' src='"+contextpath+responsebean.avatar+"'/></div> "+
 	                            "<div class='talkName'><text>"+responsebean.senderName+"</text></div> "+
@@ -157,6 +157,7 @@ $(function(){
 		        		//currentContent+=html;
 		        		$("#dialogue").append(html);
 			        	$("#content").val('');
+			        	$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);  
 		        	}
 		        }
 			});

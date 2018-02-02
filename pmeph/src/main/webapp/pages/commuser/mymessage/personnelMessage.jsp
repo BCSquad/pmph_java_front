@@ -46,18 +46,19 @@
 		</span>
 	</div>
 	<div class="message">
-		<c:choose>
-			<c:when test="${list== null || fn:length(list) == 0}">
+		<%-- <c:choose>
+			<c:when test="${list.size()> 0}"> --%>
+				<table id="list" class='table'>
+				</table>
+				
+			<%-- </c:when>
+			<c:otherwise>
 				<div class="no-more">
 	                    <img src="<c:url value="/statics/image/aaa4.png"></c:url>">
 	                    <span>木有内容呀~~</span>
                	</div>
-			</c:when>
-			<c:otherwise>
-				<table id="list" class='table'>
-				</table>
 			</c:otherwise>
-		</c:choose>
+		</c:choose> --%>
 		
 		<!--  <a class="a" href="javascript:void(0)" onclick="show()" style=" background:red">弹出</a>-->
 

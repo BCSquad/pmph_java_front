@@ -34,8 +34,8 @@ public class SurveyController extends BaseController{
 	@RequestMapping(value="/surveyList")
 	public ModelAndView surveyList(){
 		ModelAndView mv = new ModelAndView();
-		//Long userId = new Long(String.valueOf(writerUser.get("id")));
-		long userId = 2L;
+		Map<String, Object> writerUser = this.getUserInfo();
+		Long userId = new Long(String.valueOf(writerUser.get("id")));
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String dateStr = sdf.format(date);
@@ -91,8 +91,7 @@ public class SurveyController extends BaseController{
 	@ResponseBody
 	public String addSurveyAnswers(HttpServletRequest request){
 		Map<String, Object> writerUser = this.getUserInfo();
-		//Long userId = new Long(String.valueOf(writerUser.get("id")));
-		long userId = 1L;
+		Long userId = new Long(String.valueOf(writerUser.get("id")));
 		
 		String surveyId = request.getParameter("surveyId");
 		//先获取所有单选的name集合

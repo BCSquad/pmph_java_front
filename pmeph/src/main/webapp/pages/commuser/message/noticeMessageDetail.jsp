@@ -46,14 +46,14 @@
 		            </div>
 		            </c:if>
 		        </div>
-		        <div class="content">
+		        <%-- <div class="content">
 		            <div class="pSize">
-				               ${content}
+				               ${map.notice}
 		            </div>
-		        </div>
-		      <%--   <div align="center">
-		            <img  class="pictureSizeBig" src="${ctx}/statics/pictures/1395ea09518bf0f9b1787e0ec8c7452c.jpg" />
 		        </div> --%>
+		        <div align="center" style="margin-left: 80px;margin-right: 80px;">
+		            ${content}
+		        </div>
 		        
 		        		     
 		        <div class="liseDiv">
@@ -96,7 +96,7 @@
 		            </div>
 		            <div class="listContent">
 		            	<c:forEach items="${listAttachment}" var="attachment">
-		            	<span><a href="#"><img class="pictureSize" src="${ctx}/statics/pictures/attachment.png">&nbsp;&nbsp;${attachment.attachment_name}</a></span><br>
+		            	<span><a href="${ctx}/${attachment.attachmentId}"><img class="pictureSize" src="${ctx}/statics/pictures/attachment.png">&nbsp;&nbsp;${attachment.attachment_name}</a></span><br>
 		            	</c:forEach>
 		            </div>
 		        </div>

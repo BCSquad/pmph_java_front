@@ -60,7 +60,7 @@ public interface ChooseEditorDao {
 	Integer updateDecPositionBySelectIds(Map<String, Object> paraMap);
 
 	/**
-	 * 书籍表 is_list_selected 主编是否选定编委 字段改为1
+	 * 书籍表 is_list_selected 主编是否选定编委 1为提交状态0为暂存状态
 	 * @param paraMap
 	 * @return
 	 */
@@ -71,10 +71,10 @@ public interface ChooseEditorDao {
 			PageParameter<Map<String, Object>> pageParameter);
 	
 	//暂存数字编委
-	void updateTempBySelectedNumIds(Map<String, Object> paraMap);
+	/*void updateTempBySelectedNumIds(Map<String, Object> paraMap);*/
 	
 	//保存数字编委
-	void updateDecPositionBySelectNumIds(Map<String, Object> paraMap);
+	/*void updateDecPositionBySelectNumIds(Map<String, Object> paraMap);*/
 
 	
 }

@@ -125,7 +125,8 @@
 			and
 			a.is_withdraw = 0
 			and a.is_deleted =0
-			and ((a.sender_id = #{thisId}   and sender_type=2             and a.receiver_id = #{friendId} and receiver_type = #{friendType} ) 
+			and ((a.sender_id = #{thisId}   and sender_type=2             and a.receiver_id = #{friendId} and receiver_type = #{friendType} )
+				OR(a.sender_id = #{thisId}   AND sender_type=1             AND a.receiver_id =#{friendId} AND receiver_type = 2 )  
 	          or (a.sender_id = #{friendId} and sender_type=#{friendType} and a.receiver_id = #{thisId}   and receiver_type =2 ))
 		ORDER BY a.gmt_create asc
 	</select>

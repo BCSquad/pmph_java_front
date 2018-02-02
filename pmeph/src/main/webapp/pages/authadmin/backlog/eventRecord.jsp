@@ -121,7 +121,7 @@
     	<c:otherwise >
     		<div class="info">
             <div class="topPictureDiv">
-                <img class="topPicture"src="${ctx}/statics/pictures/head.png">
+                <img class="topPicture"src="${ctx}/${map.avatar}">
             </div>
             <div class="firstRow">
                 <span>${map.org_name }</span>

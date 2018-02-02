@@ -82,7 +82,7 @@
 		
 		<!-- 公告 -->
 		<if test="condition==4">
-				SELECT n.id,n.material_id as fId,n.material_name,n.gmt_create as time,4 as msgType
+				SELECT n.id,n.material_id as fId,n.material_name as title,n.gmt_create as time,4 as msgType
 				FROM 
 				(SELECT 
 		        t.*,b.material_name

@@ -8,13 +8,13 @@ $(function () {
 	var id = $("#material_id").val();
 	upload("1"); //附件上传
 	queryMaterialMap(id);  //执行查询方法
-    $('.select-input').selectlist({
-        zIndex: 10,
-        width: 192,
-        height: 30,
-        optionHeight: 30
-    });
-
+	
+	$('.select-input').selectlist({
+		zIndex: 10,
+		width: 192,
+		height: 30,
+		optionHeight: 30
+	});
     $('.book').selectlist({
         zIndex: 10,
         width: 200,
@@ -764,7 +764,11 @@ function checkNull(jsonStr){
 	var b = true;
 	$.each(objs, function(k, obj){
 	    var value = $("#"+obj.id).val();
-		if(value == ""){
+	    if(obj.id=="zjlx" && value=="0"){ //判断是否为身份证
+	    	checkIdCard("idcard");
+	    }else if(obj.id=="handphone"){ //手机号码
+	    	checkHandphone("handphone");
+	    }else if(value == ""){
 			layer.tips(obj.content, '#'+obj.id);
 			$("#"+obj.id)[0].focus();  //聚焦2
 			b = false;
