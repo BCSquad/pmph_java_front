@@ -74,6 +74,7 @@ public class BookCollectionController  extends BaseController{
     	Map<String,Object> dmap=readDetailDao.queryDedaultFavorite(writerId);
    	    if(dmap==null){
     		readDetailDao.insertFavorite(writerId);
+    		dmap=readDetailDao.queryDedaultFavorite(writerId);
     	}
     	Map<String,Object> map=new HashMap<String, Object>();
     	Map<String,Object> pmap=new HashMap<>();

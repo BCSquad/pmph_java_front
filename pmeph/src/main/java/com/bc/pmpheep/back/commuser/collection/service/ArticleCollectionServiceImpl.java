@@ -15,7 +15,9 @@ import org.springframework.stereotype.Service;
 import com.bc.pmpheep.back.commuser.collection.dao.ArticleCollectionDao;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
+import com.bc.pmpheep.general.pojo.Content;
 import com.bc.pmpheep.general.pojo.Message;
+import com.bc.pmpheep.general.service.ContentService;
 import com.bc.pmpheep.general.service.MessageService;
 
 /**
@@ -32,7 +34,8 @@ public class ArticleCollectionServiceImpl implements ArticleCollectionService {
     private ArticleCollectionDao articleCollectionDao;
     @Autowired
     private MessageService messageService;
-    
+    @Autowired
+	ContentService contentService;
     //查询文章收藏夹以及收藏夹中收藏文章的数量
 	@Override
 	public List<Map<String, Object>> queryArticleCollectionList(BigInteger writerId) {
@@ -56,18 +59,14 @@ public class ArticleCollectionServiceImpl implements ArticleCollectionService {
 			}else{
 				map.put("avatar", "file/download/"+map.get("avatar")+".action");
 			}
-			Message message=messageService.get((String) map.get("mid"));
-			if(message!=null){
-				List<String> imglist = getImgSrc(message.getContent());
-			    if(imglist.size()>0){
+			Content message=contentService.get((String) map.get("mid"));
+			List<String> imglist = getImgSrc(message.getContent());
+			    if(imglist!=null&&imglist.size()>0){
 			    	map.put("imgpath", imglist.get(0));
 			    }else{
 			    	map.put("imgpath", "statics/image/articon.png");
 			    }
-			}else{
-				map.put("imgpath", "statics/image/articon.png");
-			}
-		}
+		 }
 		}
 		result.setTotal(articlecont);
 		result.setRows(list);

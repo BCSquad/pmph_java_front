@@ -116,6 +116,7 @@ public class CommunityController extends BaseController{
 		if(total%size!=0){
 			pagetotal=pagetotal+1;
 		}
+		map.put("materialId", materialId);
 		map.put("total", total);
 		map.put("pagetotal", pagetotal);
 		map.put("comments",comments);

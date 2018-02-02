@@ -71,6 +71,7 @@ public class ArticleCollectionController extends BaseController{
      	Map<String, Object>  dmap = infoReportDao.queryDefaultFavorite(writerId);
       	if(dmap==null){
      		infoReportDao.insertDefaultFavorite(writerId);
+     		dmap = infoReportDao.queryDefaultFavorite(writerId);
   		}
     	Map<String,Object> map=new HashMap<String, Object>();
     	Map<String,Object> rmap=new HashMap<>();

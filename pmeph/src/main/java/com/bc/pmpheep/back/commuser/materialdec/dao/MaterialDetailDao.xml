@@ -180,11 +180,11 @@
 	</delete>
 	<!--上版教材编辑-->
 	<select id="queryJcbj" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from dec_last_position where declaration_id = #{declaration_id} ORDER BY sort 
+		select id,declaration_id,material_name,position,is_digital_editor*1 is_digital_editor,note,sort from dec_last_position where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
 	<insert id="insertJcbj" parameterType="java.util.Map">
-		insert into dec_last_position(declaration_id,material_name,position,note)
-		  values(#{declaration_id},#{material_name},#{position},#{note})
+		insert into dec_last_position(declaration_id,material_name,position,is_digital_editor,note)
+		  values(#{declaration_id},#{material_name},#{position},#{is_digital_editor},#{note})
 	</insert>
 	<delete id="DelJcbj" parameterType="java.util.Map">
 		delete from dec_last_position where declaration_id = #{declaration_id}
@@ -213,11 +213,13 @@
 	</delete>
 	<!-- 教材编写情况 -->
 	<select id="queryJcbx" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from dec_textbook where declaration_id = #{declaration_id} ORDER BY sort 
+		select id,declaration_id,material_name,rank,position,
+		is_digital_editor*1 is_digital_editor,publisher,publish_date,isbn,note,sort
+		 from dec_textbook where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
 	<insert id="insertJcbx" parameterType="java.util.Map">
-		insert into dec_textbook(declaration_id,material_name,rank,position,publisher,publish_date,isbn,note)
-		  values(#{declaration_id},#{material_name},#{rank},#{position},#{publisher},#{publish_date},#{isbn},#{note})
+		insert into dec_textbook(declaration_id,material_name,rank,position,publisher,publish_date,isbn,note,is_digital_editor)
+		  values(#{declaration_id},#{material_name},#{rank},#{position},#{publisher},#{publish_date},#{isbn},#{note},#{is_digital_editor})
 	</insert>
 	<delete id="DelJcbx" parameterType="java.util.Map">
 		delete from dec_textbook where declaration_id = #{declaration_id}
@@ -242,6 +244,77 @@
 	<select id="insertZjkzbb" resultType="java.util.Map" parameterType="java.util.Map">
 		insert into dec_extension(extension_id,declaration_id,content) values(#{extension_id},#{declaration_id},#{content})
 	</select>
+	
+	<!-- //个人成就 -->
+	<select id="queryAchievement" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_achievement where declaration_id = #{declaration_id}  
+	</select>
+	<insert id="insertAchievement" parameterType="java.util.Map">
+		insert into dec_achievement(declaration_id,content)
+		  values(#{declaration_id},#{content})
+	</insert>
+	<update id="updateAchievement" parameterType="java.util.Map">
+		update dec_achievement set content = #{content} 
+			where declaration_id = #{declaration_id}
+	</update>
+	<delete id="DelAchievement" parameterType="java.util.Map">
+		delete from dec_achievement where declaration_id = #{declaration_id}
+	</delete>
+	<!-- //主编学术专著情况 -->
+	<select id="queryMonograph" resultType="java.util.Map" parameterType="java.util.Map">
+		select id,declaration_id,monograph_name,is_self_paid*1 is_self_paid,publisher,publish_date,note,sort from dec_monograph where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+	<insert id="insertMonograph" parameterType="java.util.Map">
+		insert into dec_monograph(declaration_id,monograph_name,is_self_paid,publisher,publish_date,note,sort)
+		  values(#{declaration_id},#{monograph_name},#{is_self_paid},#{publisher},#{publish_date},#{note},#{sort})
+	</insert>
+	<delete id="DelMonograph" parameterType="java.util.Map">
+		delete from dec_monograph where declaration_id = #{declaration_id}
+	</delete>
+	<!-- //出版行业获奖情况 -->
+	<select id="queryPublish" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_publish_reward where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+	<insert id="insertPublish" parameterType="java.util.Map">
+		insert into dec_publish_reward(declaration_id,reward_name,award_unit,reward_date,note,sort)
+		  values(#{declaration_id},#{reward_name},#{award_unit},#{reward_date},#{note},#{sort})
+	</insert>
+	<delete id="DelPublish" parameterType="java.util.Map">
+		delete from dec_publish_reward where declaration_id = #{declaration_id}
+	</delete>
+	<!-- //SCI论文投稿及影响因子 -->
+	<select id="querySci" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_sci where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+	<insert id="insertSci" parameterType="java.util.Map">
+		insert into dec_sci(declaration_id,paper_name,journal_name,factor,publish_date,note,sort)
+		  values(#{declaration_id},#{paper_name},#{journal_name},#{factor},#{publish_date},#{note},#{sort})
+	</insert>
+	<delete id="DelSci" parameterType="java.util.Map">
+		delete from dec_sci where declaration_id = #{declaration_id}
+	</delete>
+	<!-- //临床医学获奖情况 -->
+	<select id="queryClinicalreward" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_clinical_reward where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+	<insert id="insertClinicalreward" parameterType="java.util.Map">
+		insert into dec_clinical_reward(declaration_id,reward_name,award_unit,reward_date,note,sort)
+		  values(#{declaration_id},#{reward_name},#{award_unit},#{reward_date},#{note},#{sort})
+	</insert>
+	<delete id="DelClinicalreward" parameterType="java.util.Map">
+		delete from dec_clinical_reward where declaration_id = #{declaration_id}
+	</delete>
+	<!-- //学术荣誉授予情况 -->
+	<select id="queryAcadereward" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_acade_reward where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+	<insert id="insertAcadereward" parameterType="java.util.Map">
+		insert into dec_acade_reward(declaration_id,reward_name,award_unit,reward_date,note,sort)
+		  values(#{declaration_id},#{reward_name},#{award_unit},#{reward_date},#{note},#{sort})
+	</insert>
+	<delete id="DelAcadereward" parameterType="java.util.Map">
+		delete from dec_acade_reward where declaration_id = #{declaration_id}
+	</delete>
 	
 	<!-- 申报审核 -->
 	<update id="updateDeclaration" parameterType="java.util.Map">

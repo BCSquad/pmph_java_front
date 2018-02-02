@@ -507,7 +507,6 @@ jQuery.fn.extend({
                     });
                     d = $("#" + c.controlId).width();
                     b = $("#" + c.controlId).height();
-                    $(this).var
                     var $this = $(this);
                     a.css({
                         left: $this.offset().left + 'px',

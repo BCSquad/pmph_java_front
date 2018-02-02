@@ -161,16 +161,21 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 	@Override
 	public int delGlxx(Map<String, Object> map) {
 		
-		this.madd.DelGjghjc(map);
-		this.madd.DelGjkcjs(map);
-		this.madd.DelJcbj(map);
-		this.madd.DelJcbx(map);
-		this.madd.DelTssbZc(map);
-		this.madd.DelStea(map);
-		this.madd.DelZjkyqk(map);
-		this.madd.DelZjxs(map);
-		this.madd.DelStu(map);
-		this.madd.DelWork(map);
+		this.madd.DelGjghjc(map); //作家主编国家级规划教材情况
+		this.madd.DelGjkcjs(map); //精品课程建设
+		this.madd.DelJcbj(map);  //上版教材编辑
+		this.madd.DelJcbx(map);  //教材编写情况
+		this.madd.DelTssbZc(map); //图书申报职位暂存
+		this.madd.DelStea(map);   //教学经历
+		this.madd.DelZjkyqk(map); //作家科研情况表
+		this.madd.DelZjxs(map);   //作家学术
+		this.madd.DelStu(map);    //学习经历
+		this.madd.DelWork(map);   //工作经历
+		this.madd.DelAcadereward(map); //学术荣誉授予情况
+		this.madd.DelMonograph(map); ////主编学术专著情况
+		this.madd.DelClinicalreward(map); //临床医学获奖情况
+		this.madd.DelPublish(map);  //出版行业获奖情况
+		this.madd.DelSci(map);   //SCI论文投稿及影响因子
 		return 1;
 	}
 	@Override
@@ -194,6 +199,58 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 		pageResult.setRows(list);
 		pageResult.setTotal(count);
 		return pageResult;
+	}
+	@Override
+	public Map<String,Object> queryAchievement(Map<String, Object> map) {
+		return this.madd.queryAchievement(map);
+	}
+	@Override
+	public int insertAchievement(Map<String, Object> map) {
+		return this.madd.insertAchievement(map);
+	}
+	@Override
+	public int updateAchievement(Map<String, Object> map) {
+		return this.madd.updateAchievement(map);
+	}
+	@Override
+	public List<Map<String, Object>> queryMonograph(Map<String, Object> map) {
+		return this.madd.queryMonograph(map);
+	}
+	@Override
+	public int insertMonograph(Map<String, Object> map) {
+		return this.madd.insertMonograph(map);
+	}
+	@Override
+	public List<Map<String, Object>> queryPublish(Map<String, Object> map) {
+		return this.madd.queryPublish(map);
+	}
+	@Override
+	public int insertPublish(Map<String, Object> map) {
+		return this.madd.insertPublish(map);
+	}
+	@Override
+	public List<Map<String, Object>> querySci(Map<String, Object> map) {
+		return this.madd.querySci(map);
+	}
+	@Override
+	public int insertSci(Map<String, Object> map) {
+		return this.madd.insertSci(map);
+	}
+	@Override
+	public List<Map<String, Object>> queryClinicalreward(Map<String, Object> map) {
+		return this.madd.queryClinicalreward(map);
+	}
+	@Override
+	public int insertClinicalreward(Map<String, Object> map) {
+		return this.madd.insertClinicalreward(map);
+	}
+	@Override
+	public List<Map<String, Object>> queryAcadereward(Map<String, Object> map) {
+		return this.madd.queryAcadereward(map);
+	}
+	@Override
+	public int insertAcadereward(Map<String, Object> map) {
+		return this.madd.insertAcadereward(map);
 	}
 	
 }

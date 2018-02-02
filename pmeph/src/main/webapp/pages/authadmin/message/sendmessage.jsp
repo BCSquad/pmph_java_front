@@ -55,10 +55,10 @@
             <div class="on-line"></div>
         </div>
     </a>
-    </div>
+    </div><!-- onsubmit="return getValue();"  -->
     <form class="message-list" id="theForm"
           action="${pageContext.request.contextPath}/authSendMessage/sendMessage.action" method="post"
-          onsubmit="return getValue();" enctype="multipart/form-data">
+          enctype="multipart/form-data">
         <div class="title">
             <span class="span1" style="margin-right: 25px;"><span class="span2">*</span>标题</span>
             <input type="text" name="titleValue" id="TitleValue" placeholder="请输入消息标题 30字以内"

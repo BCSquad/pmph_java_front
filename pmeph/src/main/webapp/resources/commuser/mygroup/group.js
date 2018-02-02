@@ -17,7 +17,11 @@ function ChangeDiv(type){
 
 
 $(function(){
-	var webSocket = webSocket = new WebSocket("ws:120.76.221.250:11000/pmpheep/websocket?userType=" +2+"&userId="+$("#userId").val());
+	if(!WebSocket){
+	      console.error('浏览器不支持websocket')
+	};
+	var userId    = $("#userId").val(); 
+	var webSocket = new WebSocket("ws:120.76.221.250:11000/pmpheep/websocket?userType=2&userId="+userId);
 	//var webSocket = new WebSocket("ws:127.0.0.1:8036/pmpheep/websocket?userType=" +2+"&userId="+$("#userId").val());
 	webSocket.onopen = function(event){
 	    console.log("连接成功");
@@ -71,7 +75,7 @@ $(function(){
 	}
 	
 	//回车发送消息
-	$("#msgContent").keypress(function (e){ 
+	$("#msgContent").keydown(function (event){ 
 		var code = event.keyCode; 
 		if (13 == code) { //回车
 			sendSocktMsg();
@@ -132,7 +136,7 @@ $(function(){
 		initFile();
 	});
 	//回车搜索文件
-	$("#fileName").keypress(function (e){ 
+	$("#fileName").keydown(function (event){ 
 		var code = event.keyCode; 
 		if (13 == code) { 
 			filePagenumber = 1  ;

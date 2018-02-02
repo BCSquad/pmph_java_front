@@ -20,7 +20,7 @@
 		d.title,
 		tb.is_list_selected,
 		case
-		when tb.is_list_selected = 1
+		when tb.is_list_selected = 1 or tb.is_locked = 1
 		then
 			dp.chosen_position
 		else	
@@ -60,7 +60,7 @@
 			dp.id as dec_position_id,
 			tb.is_list_selected,
 			case
-			when tb.is_list_selected = 1
+			when tb.is_list_selected = 1 or tb.is_locked = 1
 			then
 				dp.chosen_position
 			else	
@@ -99,7 +99,7 @@
 			dp.id as dec_position_id,
 			tb.is_list_selected,
 			case
-			when tb.is_list_selected = 1
+			when tb.is_list_selected = 1 or tb.is_locked = 1
 			then
 				dp.chosen_position
 			else	
@@ -119,7 +119,7 @@
 			Left Join org AS o ON d.org_id = o.id
 			<where>
 				case
-				when tb.is_list_selected = 1
+				when tb.is_list_selected = 1 or tb.is_locked = 1
 				then
 					dp.chosen_position > 8
 				else	
