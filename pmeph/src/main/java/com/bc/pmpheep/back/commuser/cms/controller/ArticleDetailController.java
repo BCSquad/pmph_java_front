@@ -93,6 +93,11 @@ public class ArticleDetailController extends BaseController {
 				zmap.put("content_id", wid);
 				zmap.put("writer_id", user.get("id"));
 				List<Map<String, Object>> list=articleDetailService.queryLikes(zmap);
+				if(list!=null&&list.size()>0 ){
+					mv.addObject("like", "yes");
+				}else{
+					mv.addObject("like", "no");
+				}
 				Map<String, Object> amap=articleDetailService.queryDedaultFavorite(user.get("id").toString());
 				if(amap==null){
 					mv.addObject("mark", "no");
@@ -113,6 +118,7 @@ public class ArticleDetailController extends BaseController {
 				mv.addObject("flag","no");
 				//mv.addObject("mark", "no");
 			}
+			
 		mv.addObject("wid", wid); 
 		mv.addObject("map", map);
 		mv.addObject("UEContent", UEContent);
