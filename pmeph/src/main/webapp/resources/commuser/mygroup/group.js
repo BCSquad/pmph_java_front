@@ -139,6 +139,7 @@ $(function(){
 	$("#fileName").keydown(function (event){ 
 		var code = event.keyCode; 
 		if (13 == code) { 
+			fileName = $("#fileName").val();
 			filePagenumber = 1  ;
 			$("#fileContent").html('');
 			initFile();
