@@ -175,11 +175,5 @@ public interface PersonalDao {
 	 */
 	public Map<String, Object> queryUserById(String userId);
 	
-	/**
-	 * 删除评论后，统计更新该图书评论数
-	 * @param map
-	 */
-	public void recountBookCommentAfterdelete(Map<String, Object> map);
-	
 	
 }
