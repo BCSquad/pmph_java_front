@@ -30,12 +30,11 @@
 				and t.material_id = ${material_id}
 			</if>
 			<if test="userId != null and userId != '' ">
-				and ou.id = ${userId}
+				and ou.id=${userId}
 			</if>
 		</where>
 		GROUP BY t.id
 		HAVING (decid1>=1 or decid2>=1 or decid3>=1)
-		limit 0,9
 	</select>
 
 
@@ -65,7 +64,7 @@
 				and t.material_id = ${material_id}
 			</if>
 			<if test="userId != null and userId != '' ">
-				and ou.id = ${userId}
+				and ou.id=${userId}
 			</if>
 		</where>
 		GROUP BY t.id
@@ -110,7 +109,7 @@
 				and t.material_id = ${material_id}
 			</if>
 			<if test="userId != null and userId != '' ">
-				and ou.id = ${userId}
+				and ou.id=${userId}
 			</if>
 		</where>
 		GROUP BY t.id
@@ -155,7 +154,7 @@
 				and t.material_id = ${material_id}
 			</if>
 			<if test="userId != null and userId != '' ">
-				and ou.id = ${userId}
+				and ou.id=${userId}
 			</if>
 		</where>
 		GROUP BY t.id

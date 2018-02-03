@@ -27,6 +27,7 @@
 
 </head>
 <body>
+	<input type="hidden" id="userId" value="${userId }">
 	<input type="hidden" id="material_id" value="${material_id }" />
 	<div
 		style="padding: 0; margin: 0; height: 110px; border: none; overflow: hidden;">

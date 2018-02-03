@@ -54,6 +54,8 @@ public class DataAuditExcelService implements ExcelDownloadService {
             map.put("realname", resultList.get(i).get("realname"));
             map.put("position", resultList.get(i).get("position"));
             map.put("title", resultList.get(i).get("title"));
+            
+            
             if( null !=resultList.get(i).get("preset_position")&&"0".equals(resultList.get(i).get("preset_position").toString())){
             	String aString=resultList.get(i).get("textbook_name").toString();
             	String textbook_name=aString+"-未选择";
@@ -64,15 +66,67 @@ public class DataAuditExcelService implements ExcelDownloadService {
             	map.put("textbook_name", textbook_name);
             }else if(null !=resultList.get(i).get("preset_position")&& "2".equals(resultList.get(i).get("preset_position").toString())){
             	String aString=resultList.get(i).get("textbook_name").toString();
-            	String textbook_name=aString+"-主编";
+            	String textbook_name=aString+"-副主编";
             	map.put("textbook_name", textbook_name);
             }else if(null !=resultList.get(i).get("preset_position")&& "3".equals(resultList.get(i).get("preset_position").toString())){
             	String aString=resultList.get(i).get("textbook_name").toString();
-            	String textbook_name=aString+"-副主编";
+            	String textbook_name=aString+"-副主编,编委";
+            	map.put("textbook_name", textbook_name);
+            }else if(null !=resultList.get(i).get("preset_position")&& "4".equals(resultList.get(i).get("preset_position").toString())){
+            	String aString=resultList.get(i).get("textbook_name").toString();
+            	String textbook_name=aString+"-主编";
+            	map.put("textbook_name", textbook_name);
+            }else if(null !=resultList.get(i).get("preset_position")&& "5".equals(resultList.get(i).get("preset_position").toString())){
+            	String aString=resultList.get(i).get("textbook_name").toString();
+            	String textbook_name=aString+"-主编,编委";
+            	map.put("textbook_name", textbook_name);
+            }else if(null !=resultList.get(i).get("preset_position")&& "6".equals(resultList.get(i).get("preset_position").toString())){
+            	String aString=resultList.get(i).get("textbook_name").toString();
+            	String textbook_name=aString+"-主编,副主编";
+            	map.put("textbook_name", textbook_name);
+            }else if(null !=resultList.get(i).get("preset_position")&& "7".equals(resultList.get(i).get("preset_position").toString())){
+            	String aString=resultList.get(i).get("textbook_name").toString();
+            	String textbook_name=aString+"-主编,副主编,编委";
+            	map.put("textbook_name", textbook_name);
+            }else if(null !=resultList.get(i).get("preset_position")&& "8".equals(resultList.get(i).get("preset_position").toString())){
+            	String aString=resultList.get(i).get("textbook_name").toString();
+            	String textbook_name=aString+"-数字编委";
+            	map.put("textbook_name", textbook_name);
+            }else if(null !=resultList.get(i).get("preset_position")&& "9".equals(resultList.get(i).get("preset_position").toString())){
+            	String aString=resultList.get(i).get("textbook_name").toString();
+            	String textbook_name=aString+"-数字编委,编委";
+            	map.put("textbook_name", textbook_name);
+            }else if(null !=resultList.get(i).get("preset_position")&& "10".equals(resultList.get(i).get("preset_position").toString())){
+            	String aString=resultList.get(i).get("textbook_name").toString();
+            	String textbook_name=aString+"-副主编,数字编委";
+            	map.put("textbook_name", textbook_name);
+            }else if(null !=resultList.get(i).get("preset_position")&& "11".equals(resultList.get(i).get("preset_position").toString())){
+            	String aString=resultList.get(i).get("textbook_name").toString();
+            	String textbook_name=aString+"-数字编委,副主编,编委";
+            	map.put("textbook_name", textbook_name);
+            }else if(null !=resultList.get(i).get("preset_position")&& "12".equals(resultList.get(i).get("preset_position").toString())){
+            	String aString=resultList.get(i).get("textbook_name").toString();
+            	String textbook_name=aString+"-主编,数字编委";
+            	map.put("textbook_name", textbook_name);
+            }else if(null !=resultList.get(i).get("preset_position")&& "13".equals(resultList.get(i).get("preset_position").toString())){
+            	String aString=resultList.get(i).get("textbook_name").toString();
+            	String textbook_name=aString+"-主编,数字编委,编委";
+            	map.put("textbook_name", textbook_name);
+            }else if(null !=resultList.get(i).get("preset_position")&& "14".equals(resultList.get(i).get("preset_position").toString())){
+            	String aString=resultList.get(i).get("textbook_name").toString();
+            	String textbook_name=aString+"-数字编委,主编,副主编";
+            	map.put("textbook_name", textbook_name);
+            }else if(null !=resultList.get(i).get("preset_position")&& "15".equals(resultList.get(i).get("preset_position").toString())){
+            	String aString=resultList.get(i).get("textbook_name").toString();
+            	String textbook_name=aString+"-数字编委,主编,副主编,编委";
             	map.put("textbook_name", textbook_name);
             }else {
 				map.put("textbook_name", "");
 			}
+            
+            
+            
+            
             
             if (null !=resultList.get(i).get("online_progress")&&"0".equals(resultList.get(i).get("online_progress").toString())) {
             	map.put("online_progress", "未提交");
@@ -96,14 +150,22 @@ public class DataAuditExcelService implements ExcelDownloadService {
             	map.put("offline_progress", "");
 			}
             
-            if (null !=resultList.get(i).get("chosen_position")&&"1".equals(resultList.get(i).get("chosen_position").toString())) {
-            	map.put("chosen_position", "主编");
-			}else if (null !=resultList.get(i).get("chosen_position")&&"2".equals(resultList.get(i).get("chosen_position").toString())) {
-            	map.put("chosen_position", "副主编");
-			}else if (null !=resultList.get(i).get("chosen_position")&&"3".equals(resultList.get(i).get("chosen_position").toString())) {
-            	map.put("chosen_position", "编委");
-			}else  {
+            if (null !=resultList.get(i).get("chosen_position")&&"0".equals(resultList.get(i).get("chosen_position").toString())) {
             	map.put("chosen_position", "无");
+			}else if (null !=resultList.get(i).get("chosen_position")&&"1".equals(resultList.get(i).get("chosen_position").toString())) {
+            	map.put("chosen_position", "编委");
+			}else if (null !=resultList.get(i).get("chosen_position")&&"2".equals(resultList.get(i).get("chosen_position").toString())) {
+            	map.put("chosen_position", "副主编  ");
+			}else if (null !=resultList.get(i).get("chosen_position")&&"4".equals(resultList.get(i).get("chosen_position").toString())) {
+            	map.put("chosen_position", "主编");
+			}else if (null !=resultList.get(i).get("chosen_position")&&"9".equals(resultList.get(i).get("chosen_position").toString())) {
+            	map.put("chosen_position", "编委,数字编委");
+			}else if (null !=resultList.get(i).get("chosen_position")&&"10".equals(resultList.get(i).get("chosen_position").toString())) {
+            	map.put("chosen_position", "副主编,数字编委");
+			}else if (null !=resultList.get(i).get("chosen_position")&&"12".equals(resultList.get(i).get("chosen_position").toString())) {
+            	map.put("chosen_position", "主编,数字编委");
+			}else  {
+            	map.put("chosen_position", "");
 			}
             list.add(map);
         }
