@@ -593,6 +593,39 @@ $.fn.calendar = function () {
             format: options.format,
             callback: options.onselected,
         });
+
+        if (typeof(options.max) == "string") {
+            if (options.max.indexOf("$") == 0) {
+                var ele = options.max.substr(1, options.max.length - 1);
+                var that = this;
+                $(ele).on('timeChange', function (event, val) {
+                    calendar = $(that).data("calendar-id");
+                    calendar.upperLimit = val;
+                    calendar.refresh();
+                });
+            } else if (options.min.indexOf("$") == 0) {
+                var ele = options.min.substr(1, options.min.length - 1);
+                var that = this;
+                $(ele).on('timeChange', function (event, val) {
+                    calendar = $(that).data("calendar-id");
+                    calendar.lowerLimit = val;
+                    calendar.refresh();
+                });
+            }
+        }
+
+        if (typeof(options.min) == "string") {
+            if (options.min.indexOf("$") == 0) {
+                var ele = options.min.substr(1, options.min.length - 1);
+                var that = this;
+                $(ele).on('timeChange', function (event, val) {
+                    calendar = $(that).data("calendar-id");
+                    calendar.lowerLimit = val;
+                    calendar.refresh();
+                });
+            }
+        }
+
     })
 };
 $(function () {
