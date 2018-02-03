@@ -55,7 +55,7 @@
     </script>
 </head>
 <body>
-
+<input type="hidden" id="fileid" >
 <jsp:include page="/pages/comm/head.jsp">
 		<jsp:param value="homepage" name="pageTitle" />
 	</jsp:include>

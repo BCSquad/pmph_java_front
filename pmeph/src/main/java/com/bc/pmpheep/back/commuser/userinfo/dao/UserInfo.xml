@@ -24,7 +24,8 @@
         address=#{address},
         note=#{note},
         signature=#{signature},
-        workplace=#{workplace}
+        workplace=#{workplace},
+        avatar=#{avatar}
         where id=#{id}
     </update>
     

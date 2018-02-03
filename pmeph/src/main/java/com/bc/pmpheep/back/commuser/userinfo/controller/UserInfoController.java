@@ -79,14 +79,15 @@ public class UserInfoController extends BaseController {
 	@ResponseBody	
 	public Map<String, Object> updateavatar(HttpServletRequest request){
 		Map<String, Object> map=new HashMap<String, Object>();
-		String avatar=request.getParameter("avatar");
-		String id=request.getParameter("id");
-		map=userinfoService.updateavatar(avatar, id);
-		 Map<String, Object> user=getUserInfo();
-		 user = userService.getUserInfo(MapUtils.getString(user, "username"), "1");
-		 HttpSession session = request.getSession();
-		 session.setAttribute(Const.SESSION_USER_CONST_WRITER, user);
-         session.setAttribute(Const.SESSION_USER_CONST_TYPE, "1");
+//		String avatar=request.getParameter("avatar");
+//		String id=request.getParameter("id");
+//		map=userinfoService.updateavatar(avatar, id);
+//		 Map<String, Object> user=getUserInfo();
+//		 user = userService.getUserInfo(MapUtils.getString(user, "username"), "1");
+//		 HttpSession session = request.getSession();
+//		 session.setAttribute(Const.SESSION_USER_CONST_WRITER, user);
+//         session.setAttribute(Const.SESSION_USER_CONST_TYPE, "1");
+        
 		return map;
 	}
 	
@@ -119,6 +120,7 @@ public class UserInfoController extends BaseController {
         String signature = request.getParameter("signature");
         String workplace = request.getParameter("workplace");
         String telephone = request.getParameter("telephone");
+        String fileid = request.getParameter("fileid");
         map.put("signature", signature);
         if (StringUtils.isEmpty(id) ||
                 StringUtils.isEmpty(realName) ||
@@ -155,6 +157,7 @@ public class UserInfoController extends BaseController {
             map.put("note", note);
             map.put("workplace", workplace);
             map.put("telephone", telephone);
+            map.put("avatar", fileid);
             zmap = userinfoService.update(map);
             Map<String, Object> user=getUserInfo();
    		 	user = userService.getUserInfo(MapUtils.getString(user, "username"), "1");
