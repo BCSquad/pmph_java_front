@@ -421,12 +421,12 @@ public class MaterialDetailController extends BaseController{
 				}
 			}
 			//学术荣誉授予情况表
-			String ac_reward_name[] = request.getParameterValues("cl_reward_name");
-			String ac_award_unit[] = request.getParameterValues("cl_award_unit");
-			String ac_reward_date[] = request.getParameterValues("cl_reward_date");
-			String ac_note[] = request.getParameterValues("cl_note");
-			for(int i=0;i<cl_reward_name.length;i++) { //遍历数组
-				if(!cl_reward_name[i].equals("")){ //判断是否存在
+			String ac_reward_name[] = request.getParameterValues("ac_reward_name");
+			String ac_award_unit[] = request.getParameterValues("ac_award_unit");
+			String ac_reward_date[] = request.getParameterValues("ac_reward_date");
+			String ac_note[] = request.getParameterValues("ac_note");
+			for(int i=0;i<ac_reward_name.length;i++) { //遍历数组
+				if(!ac_reward_name[i].equals("")){ //判断是否存在
 					Map<String,Object> MonographMap = new HashMap<String,Object>();
 					MonographMap.put("declaration_id", declaration_id);
 					MonographMap.put("reward_name", ac_reward_name[i]);
@@ -1008,12 +1008,12 @@ public class MaterialDetailController extends BaseController{
 				}
 			}
 			//学术荣誉授予情况表
-			String ac_reward_name[] = request.getParameterValues("cl_reward_name");
-			String ac_award_unit[] = request.getParameterValues("cl_award_unit");
-			String ac_reward_date[] = request.getParameterValues("cl_reward_date");
-			String ac_note[] = request.getParameterValues("cl_note");
-			for(int i=0;i<cl_reward_name.length;i++) { //遍历数组
-				if(!cl_reward_name[i].equals("")){ //判断是否存在
+			String ac_reward_name[] = request.getParameterValues("ac_reward_name");
+			String ac_award_unit[] = request.getParameterValues("ac_award_unit");
+			String ac_reward_date[] = request.getParameterValues("ac_reward_date");
+			String ac_note[] = request.getParameterValues("ac_note");
+			for(int i=0;i<ac_reward_name.length;i++) { //遍历数组
+				if(!ac_reward_name[i].equals("")){ //判断是否存在
 					Map<String,Object> MonographMap = new HashMap<String,Object>();
 					MonographMap.put("declaration_id", declaration_id);
 					MonographMap.put("reward_name", ac_reward_name[i]);

@@ -127,11 +127,12 @@
 					<tr>
 						<td><span>银行账户：</span></td>
 						<td>
-							<input class="cg_input" name="bank_account_id" id="bank_account_id" placeholder="银行账户" value="${topicMap.bank_account_id}"/>
+							<input class="cg_input" name="account_number" id="account_number" placeholder="银行账户" value="${BankMap.account_number}"/>
+							<input class="cg_input" name="bank_account_id" type="hidden" value="${topicMap.bank_account_id}"/>
 						</td>
 						<td><span>开户银行：</span></td>
 						<td>
-							<input class="cg_input" name="realname" id="realname" placeholder="开户银行" value="${topicMap.bookname}"/>
+							<input class="cg_input" name="bank" id="bank" placeholder="开户银行" value="${BankMap.bank}"/>
 						</td>
 					</tr>
 					<!-- 选题情况 -->

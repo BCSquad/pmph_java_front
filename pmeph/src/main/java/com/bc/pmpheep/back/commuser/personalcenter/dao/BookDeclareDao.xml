@@ -42,7 +42,7 @@
 	</select>
 	<!-- 额外信息修改 -->
 	<update id="updateTopicExtra" parameterType="java.util.Map">
-		update topic_extra set reason=#{reason},price=#{price},score=#{source} where id = #{extra_id}
+		update topic_extra set reason=#{reason},price=#{price},score=#{score} where id = #{extra_id}
 	</update>
 	<!-- 选题申报-编者情况 -->
 	<insert id="insertTopicWriter" parameterType="java.util.Map">
@@ -51,7 +51,7 @@
 	</insert>
 	<!-- 根据条件查询选题申报-编者情况 -->
 	<select id="queryTopicWriter" parameterType="java.util.Map" resultType="java.util.Map">
-		select * from topic_writer t1 where 1= 1 
+		select id,topic_id,realname,sex*1 sex,price,position,workplace from topic_writer t1 where 1= 1 
 		<if test="topic_id != null and topic_id != ''">
 			and t1.topic_id = #{topic_id} 
 		</if>
@@ -62,6 +62,26 @@
 	</delete>
 	<!-- 查询作家用户关联银行信息 -->
 	<select id="queryBank" parameterType="java.util.Map" resultType="java.util.Map">
-		select * from writer_bank_account where user_id = #{user_id}
+		select * from writer_bank_account t where 1=1 
+		<if test="id != null and id != ''">
+			and t.id  = #{id}
+		</if>
+		<if test="account_number != null and account_number != ''">
+			and t.account_number  = #{account_number}
+		</if>
+		<if test="user_id != null and user_id != ''">
+			and t.user_id  = #{user_id}
+		</if>
+		order by gmt_create asc 
 	</select>
+	<!-- 添加银行账户信息 -->
+	<insert id="insertBank" parameterType="java.util.Map">
+		insert into writer_bank_account(user_id,account_name,account_number,bank)
+			values(#{user_id},#{account_name},#{account_number},#{bank})
+	</insert>
+	<!-- 修改银行账户信息 -->
+	<update id="updateBank" parameterType="java.util.Map">
+		update writer_bank_account set account_number =#{account_number},bank=#{bank}
+		     where id = #{bank_account_id}
+	</update>
 </mapper>

@@ -56,4 +56,15 @@ public interface BookDeclareDao {
 	 * 查询作家用户关联银行信息
 	 */
 	public List<Map<String,Object>> queryBank(Map<String,Object> map);
+	
+	/**
+	 * 添加银行账号信息
+	 */
+	public int insertBank(Map<String,Object> map);
+	
+	/**
+	 * 添加银行账号信息
+	 */
+	public int updateBank(Map<String,Object> map);
+	
 }
