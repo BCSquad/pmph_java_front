@@ -60,7 +60,8 @@ public class DeclareCountController extends BaseController {
 			throws UnsupportedEncodingException {
 		String material_id = request.getParameter("material_id");
 		Map<String, Object> paraMap = new HashMap<String, Object>();
-		paraMap.put("userId", this.getUserInfo().get("id").toString());
+		String user_id = this.getUserInfo().get("id").toString();
+		paraMap.put("userId", user_id);
 		paraMap.put("material_id", material_id);
 		// 获取标题
 		String material_name = dataAuditService.findTitleName(paraMap);
@@ -73,6 +74,7 @@ public class DeclareCountController extends BaseController {
 		mv.addObject("material_id", material_id);
 		mv.addObject("material_name", material_name);
 		mv.addObject("listMap", list);
+		mv.addObject("userId", user_id);
 		mv.setViewName("authadmin/applydocaudit/declarecount");
 		return mv;
 	}

@@ -10,18 +10,8 @@ $(function () {
         },
         done: function (filename, fileid) {
             console.log("上传完成：name " + filename + " fileid " + fileid);
-            var id=$("#id").val();
-            $.ajax({
-                type:'post',
-                url:contextpath+'admininfocontroller/updateavatar.action?id='+id+'&&avatar='+fileid,
-                async:false,
-                dataType:'json',
-                success:function(json){
-                    if (json.returncode=="OK"){
-                    	$("#sxy-img1").attr("src",contextpath+"file/download/"+fileid+".action");
-                    }
-                }
-            });
+            $("#avatar").val(fileid);
+            
         },
         progressall: function (loaded, total, bitrate) {
             console.log("正在上传。。。" + loaded / total);
@@ -56,7 +46,6 @@ $(function () {
         }
     });
     function saveobject() {
-        alert(123);
     }
     /* $('form').on('submit', function (event) {
      alert(111);
@@ -70,6 +59,7 @@ $(function () {
 function getform(){
 
     var json={};
+    json.avatar=$("#avatar").val();
     json.realName=$("#realName").val();
     json.position=$("#position").val();
     json.telephone=$("#telephone").val();
@@ -100,12 +90,11 @@ function save(){
             /*data:JSON2.stringify(getform()),*/
             data:getform(),
             success:function(code){
-                /*if (responsebean.code==1){
-                    message.success("保存成功");
-                }*/
+               
                 if (code=="success"){
 	                message.success("提交成功");
-	                
+	                $("#sxy-img1").attr("src",contextpath+"file/download/"+fileid+".action");
+	                location.href=contextpath+'admininfocontroller/toadmininfo.action?id='+json.id;
 	            }else{
 	            	message.error("提交失败");
 	            }

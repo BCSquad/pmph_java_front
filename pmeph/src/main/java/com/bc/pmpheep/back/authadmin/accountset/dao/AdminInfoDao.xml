@@ -13,6 +13,7 @@
     <update id="updateOrgUserById" parameterType="com.bc.pmpheep.back.authadmin.accountset.bean.OrgAdminUser">
         UPDATE org_user
         <set>
+        <if test="avatar!=null and avatar!=''">avatar=#{avatar},</if>
             <if test="realName!=null and realName!=''">realname=#{realName},</if>
             <if test="sex!=null and sex!=''">sex=#{sex},</if>
             <if test="position!=null and position!=''">position=#{position},</if>

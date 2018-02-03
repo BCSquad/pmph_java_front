@@ -24,7 +24,7 @@
 		<where>
 			1=1
 			<if test="queryName != null and queryName != '' ">
-				and realname like concat("%",#{queryName},"%")
+				and d.realname like concat("%",#{queryName},"%")
 			</if>
 			<if test="material_id != null and material_id != '' ">
 				and d.material_id = ${material_id}
@@ -52,7 +52,7 @@
 		<where>
 		1=1
 			<if test="queryName != null and queryName != '' ">
-				and realname like concat("%",#{queryName},"%")
+				and d.realname like concat("%",#{queryName},"%")
 			</if>
 			<if test="material_id != null and material_id != '' ">
 				and d.material_id = ${material_id}
@@ -95,7 +95,7 @@
 		<where>
 			1=1
 			<if test="queryName != null and queryName != '' ">
-				and realname like concat("%",#{queryName},"%")
+				and d.realname like concat("%",#{queryName},"%")
 			</if>
 			<if test="material_id != null and material_id != '' ">
 				and d.material_id = ${material_id}
