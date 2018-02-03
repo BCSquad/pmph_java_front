@@ -38,10 +38,10 @@
 				<div class="item">
 					<span>图书：</span>
 					<span>${list.textbook_name} — 
-					<c:if test="${list.preset_position == '1'}">主编</c:if>
+					<c:if test="${list.preset_position == '4'}">主编</c:if>
 					<c:if test="${list.preset_position == '2'}">副主编</c:if>
-					<c:if test="${list.preset_position == '3'}">编委</c:if>
-					<c:if test="${list.preset_position == '4'}">数字编委</c:if>
+					<c:if test="${list.preset_position == '1'}">编委</c:if>
+					<c:if test="${list.preset_position == '8'}">数字编委</c:if>
 					</span>
 					<span>
 					<a href="javascript:" class="filename"  onclick="downLoadProxy('${list.syllabus_id}')">${list.syllabus_name}</a>
@@ -252,9 +252,9 @@
 								<tr>
 									<td>${list.material_name}</td>
 									<td>
-										<c:if test="${list.position == '1'}">主编</c:if>
+										<c:if test="${list.position == '4'}">主编</c:if>
 										<c:if test="${list.position == '2'}">副主编</c:if>
-										<c:if test="${list.position == '3'}">编委 </c:if>
+										<c:if test="${list.position == '1'}">编委 </c:if>
 										<c:if test="${list.position == '0'}">无</c:if>
 									</td>
 									<td>${list.note}</td>
@@ -415,9 +415,9 @@
 									<c:if test="${list.rank == '5'}">创新教材</c:if>
 								</td>
 								<td>
-									<c:if test="${list.position == '1'}">主编</c:if>
+									<c:if test="${list.position == '4'}">主编</c:if>
 									<c:if test="${list.position == '2'}">副主编</c:if>
-									<c:if test="${list.position == '3'}">编委 </c:if>
+									<c:if test="${list.position == '1'}">编委 </c:if>
 									<c:if test="${list.position == '0'}">无</c:if>
 								</td>
 								<td>${list.publisher}</td>
@@ -451,9 +451,9 @@
 								<tr>
 									<td>${list.research_name}</td>
 									<td>
-										<c:if test="${list.approval_unit == '1'}">主编</c:if>
+										<c:if test="${list.approval_unit == '4'}">主编</c:if>
 										<c:if test="${list.approval_unit == '2'}">副主编</c:if>
-										<c:if test="${list.approval_unit == '3'}">编委 </c:if>
+										<c:if test="${list.approval_unit == '1'}">编委 </c:if>
 										<c:if test="${list.approval_unit == '0'}">无</c:if>
 									</td>
 									<td>${list.award}</td>
@@ -477,12 +477,10 @@
 				</div>
 			</div>
 			<hr style=" height:1px;border:none;border-top:1px #999999 dashed;margin-top: 30px;">
-				<div class="button">
-				<c:choose>
+			<div class="button">
+			<c:choose>
 					 <c:when test="${view_audit=='audit'}">
 					<div class="div_butt">
-						<%-- <div class="bt_tj" onclick="javascript:toAudit('${gezlList.id}','3')">通过</div>
-						<div class="bt_tj" onclick="javascript:toAudit('${gezlList.id}','2')">驳回</div> --%>
 						<div class="bt_tj" onclick="toAudit('${gezlList.id}','3')">通过</div>
 						<div class="bt_tj" onclick="toAudit('${gezlList.id}','2')">退回</div>
 						<div class="bt_tj" onclick="toMain()">返回</div>
@@ -494,8 +492,12 @@
 					 	</div>
 					 </c:otherwise>
 				</c:choose>
-				</div>
-			</div>
+					<%-- <div class="div_butt">
+						<div class="bt_tj" onclick="javascript:toAudit('${gezlList.id}','3')">通过</div>
+						<div class="bt_tj" onclick="javascript:toAudit('${gezlList.id}','2')">驳回</div>
+					</div> --%>
+		</div>
+		</div>
 	</div>
 </div>
 <div style="width: 100%;padding: 0;margin: auto;border:none;overflow: hidden;">

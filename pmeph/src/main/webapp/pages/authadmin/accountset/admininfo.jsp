@@ -87,6 +87,7 @@
 </style>
 </head>
 <body>
+<input type="hidden" id="avatar" >
 	<jsp:include page="/pages/comm/headGreenBackGround.jsp">
 		<jsp:param name="pageTitle" value="account"></jsp:param>
 	</jsp:include>

@@ -70,7 +70,6 @@ function chooseModel(data){
 
 //提交   通过3 表示驳回  2 
 function toAudit(id,type){
-	
 		$.ajax({
 			type: "POST",
 			url:contextpath+'dataaudit/doMaterialAudit.action',
@@ -79,7 +78,9 @@ function toAudit(id,type){
 			dataType:"json",
 		    success: function(msg) {
 			    if(msg.msg=='OK'){
-			    	window.location.href=contextpath+"applyDocAudit/toPage.action";
+			    	 message.success("成功");
+//			    	window.location.href=contextpath+"applyDocAudit/toPage.action";
+			    	 toMain();
 			    }
 		    }
 		});

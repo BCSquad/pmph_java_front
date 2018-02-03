@@ -70,7 +70,20 @@ public class OrgAdminUser implements Serializable{
      */
     private String workplace;
     
-    public int getExperience() {
+    /**
+     * 头像
+     */
+    private String avatar;
+    
+    public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+	public int getExperience() {
 		return experience;
 	}
 

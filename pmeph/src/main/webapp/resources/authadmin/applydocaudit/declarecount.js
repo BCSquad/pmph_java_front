@@ -156,7 +156,7 @@ function selectResults() {
 function exportExcel() {
 	window.location.href = contextpath
 			+ 'excel/download.action?service=declareCountExcel&material_id='
-			+ $("#material_id").val();
+			+ $("#material_id").val()+'&userId='+$("#userId").val();
 }
 
 // 导出excel 最终结果名单
@@ -164,5 +164,5 @@ function exportExcel() {
 function exportResultExcel() {
 	window.location.href = contextpath
 			+ 'excel/download.action?service=declareResultExcel&material_id='
-			+ $("#material_id").val();
+			+ $("#material_id").val()+'&userId='+$("#userId").val();
 }

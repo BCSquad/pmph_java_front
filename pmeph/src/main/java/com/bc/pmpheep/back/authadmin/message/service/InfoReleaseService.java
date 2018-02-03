@@ -23,8 +23,7 @@ public interface InfoReleaseService {
 	 * @return List<Map<String,Object>> 返回类型
 	 * @throws
 	 */
-	List<Map<String, Object>> selectInfoRelease(
-			PageParameter<Map<String, Object>> pageParameter);
+	List<Map<String, Object>> selectInfoRelease(PageParameter<Map<String, Object>> pageParameter);
 
 	/**
 	 * 
