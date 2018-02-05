@@ -706,19 +706,6 @@
 		where 
 		id= #{id} and writer_id = #{logUserId}
 	</update>
-	
-	<!-- 删除/审批通过后重新统计图书评论数 唯一输入id为所审/删的评论的主键id -->
-	<update id="recountBookCommentAfterdelete" parameterType="Map">
-		update book t1 ,
-		(
-		select count(distinct c.id)as comments ,b.id as book_id from book b
-		inner join book_user_comment tc on tc.book_id = b.id and tc.id = #{id}
-		left join book_user_comment c on c.book_id = b.id
-		where c.is_deleted = 0 and c.is_auth = 1 
-		) t2
-		set t1.comments = t2.comments 
-		where t1.id = t2.book_id
-	</update>
 
 	<select id="queryUserById" parameterType="String" resultType="Map">
 		select * from writer_user 

@@ -114,9 +114,6 @@ public class HomeServiceImpl implements HomeService {
 
     /**
      * 获取页面广告，用名称匹配
-     *
-     * @param adName
-     * @return
      */
     @Override
     public Map<String, Object> getPageAdInfo(String adName) {
@@ -124,4 +121,28 @@ public class HomeServiceImpl implements HomeService {
         adInfo.put("detailList", homeDao.getPageAdDetail(adName));
         return adInfo;
     }
+
+    /**
+     * 添加好友
+     */
+	@Override
+	public String addfriend(String request_id, String target_id) {
+		// TODO Auto-generated method stub
+		String returncode="";
+		int count=homeDao.addfriend(request_id, target_id);
+		if(count>0){
+			returncode="OK";
+		}
+		return returncode;
+	}
+
+	/**
+	 * 查询教材社公告
+	 */
+	@Override
+	public List<Map<String, Object>> queryMaterial(String id) {
+		// TODO Auto-generated method stub
+		List<Map<String, Object>> list=homeDao.queryMaterial(id);
+		return list;
+	}
 }

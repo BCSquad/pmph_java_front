@@ -89,7 +89,7 @@
             	<c:when test="${listSize>0}">
             		<c:forEach items="${list}" var="message">
 		                <tr style="width: 70%">
-		                    <th rowspan="2" class="headPortrait"><img  class ="pictureNotice" src="${ctx}/statics/pictures/head.png"></th>
+		                    <th rowspan="2" class="headPortrait"><img  class ="pictureNotice" src="${ctx}/${message.avatar}"></th>
 		                    <td class="type1">
 			                    <span><c:if test="${message.msgType==4}">公告 </c:if>
 			                          <c:if test="${message.msgType==0||message.msgType==1}">系统消息</c:if>

@@ -428,6 +428,7 @@ a{
     width:44px;
     height:44px;
     border-radius: 50%;
+    margin-right:7px;
 }
 
 .talkName{
@@ -439,6 +440,7 @@ a{
     font-stretch: normal;
     letter-spacing: 1px;
     color: #999999;
+    margin-right:8px;
 }
 
 .talkDiv{
@@ -491,6 +493,79 @@ a{
     width: 6px;     /*高宽分别对应横竖滚动条的尺寸*/
     height: 1px;
 }
+
+scrollbar{
+-moz-appearance: none !important;
+background-color: transparent !important;/* 滚动条背景透明 */
+background-image: none !important; /* 滚动条背景图案不显示 */
+position: relative !important; /* 更改滚动条的定位方式为相对 */
+overflow: hidden !important;
+z-index: 999999999 !important; /* 把滚动条提到Z轴最上层 */
+}
+
+/* 滚动条按钮基本样式 */
+scrollbar thumb{
+-moz-appearance: none !important;
+background-color: rgba(0,100,255,.25) !important;
+border-radius: 0px !important;
+border: 1px !important; /* 滚动条按钮边框 */
+border-color: rgba(0,100,255,.1) !important;  /* 滚动条按钮边框颜色和透明度 */
+}
+
+/* 滚动条按钮:鼠标悬停与点击拖动时基本样式 */
+/* scrollbar:hover thumb,
+scrollbar thumb:hover,
+scrollbar thumb:active {
+background-color: rgba(0,100,255,.75) !important;
+border: 0px !important;
+} */
+
+/* 垂直滚动条 */
+/* 把滚动条位置移到屏幕外，这里的像素应该等于垂直滚动条宽度的负值 */
+/* scrollbar[orient="vertical"]{ margin-left: -5px !important; 
+min-width: 5px !important; max-width: 5px !important;
+}
+ */
+/* 垂直滚动条按钮的左边框样式 */
+scrollbar thumb[orient="vertical"]{
+border-style: none none none solid !important; 
+}
+
+/* 水平滚动条 */
+/* 把滚动条位置移到屏幕外，这里的像素应该等于垂直滚动条宽度的负值 */
+/* scrollbar[orient="horizontal"]{ margin-top: -5px !important; 
+min-height: 5px !important; max-height: 5px !important;
+} */
+
+/* 水平滚动条按钮的上边框样式 */
+/* scrollbar thumb[orient="horizontal"]{
+border-style: solid none none none !important; 
+}
+ */
+/* 去除垂直与水平滚动条相交汇的角落 */
+/* scrollbar scrollcorner{display: none ! important; } */
+
+/* 滚动条两端按钮不显示 */
+/* scrollbar scrollbarbutton { display: none ! important; }
+ */
+scrollbarbutton{ -moz-appearance: none !important;
+position: relative !important;
+overflow: hidden !important;
+background-color: rgba(0,100,255,.25) !important;
+border: none !important; 
+}
+scrollbar:hover scrollbarbutton, scrollbar scrollbarbutton:hover{
+background-color: rgba(0,100,255,.75) !important;
+}
+
+scrollbar[orient="vertical"] scrollbarbutton {
+max-height:10px !important; min-height:10px !important;
+}
+
+scrollbar[orient="horizontal"] scrollbarbutton {
+max-width: 10px !important; min-width: 10px !important;
+}
+
 .contentBox::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);

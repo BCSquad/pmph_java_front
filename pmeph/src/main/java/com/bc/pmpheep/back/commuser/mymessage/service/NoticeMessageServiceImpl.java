@@ -97,6 +97,13 @@ public class NoticeMessageServiceImpl implements NoticeMessageService {
 		}
 	}
 
+	//查询系统消息总量
+	@Override
+	public int selectSysMessageTotalCount(Map<String, Object> paraMap) {
+		int count = noticeMessageDao.selectSysMessageTotalCount(paraMap);
+		return count;
+	}
+
 	
 	
 	

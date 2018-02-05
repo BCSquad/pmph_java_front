@@ -381,6 +381,7 @@ a{
     width:44px;
     height:44px;
     border-radius: 50%;
+    margin-right:7px;
 }
 
 .talkName{
@@ -392,6 +393,7 @@ a{
     font-stretch: normal;
     letter-spacing: 1px;
     color: #999999;
+    margin-right:8px;
 }
 
 .talkDiv{
