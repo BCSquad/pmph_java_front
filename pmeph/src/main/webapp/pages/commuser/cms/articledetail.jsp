@@ -34,32 +34,28 @@
 		<div class="cms-writer"><div class="text" onclick="window.location.href='${ctx}/writerArticle/initWriteArticle.action'">写文章</div></div>
 		<div class="content-wrapper">
 			<div class="area1">
-	    	<div class="_title">
-				<span>文章&gt; 文章详情</span>
-			</div>
+		    	<div class="_title">
+					<span>文章&gt; 文章详情</span>
+				</div>
 				<div class="wz_title">
 					<span>${map.title }</span>
 					<div style="width: 100%;">
-        		<div class="dzsc">
-        			 <img src="${ctx}/statics/image/${like=='yes' ? 'dz01.png':'dz02.png'}" onclick="addlikes()" id="dz"/>
-        
-        		      <img src="${ctx}/statics/image/${mark=='yes' ? 'sc101(1).png':'s102(1).png'}" onclick="addmark()" id="sc"/>
-        			  <div style="display: inline-block;vertical-align: top;margin-right: 8px;text-align:left;">
-                    </div>
-        		</div>
-        	</div>
+	        		<div class="dzsc">
+	        			 <img src="${ctx}/statics/image/${like=='yes' ? 'dz01.png':'dz02.png'}" onclick="addlikes()" id="dz"/>
+	        		      <img src="${ctx}/statics/image/${mark=='yes' ? 'sc101(1).png':'s102(1).png'}" onclick="addmark()" id="sc"/>
+	        			  <div style="display: inline-block;vertical-align: top;margin-right: 8px;text-align:left;"></div>
+	        		</div>
+        			</div>
 				</div>
 				<div class="th_title">
-	    		<span>医学随笔</span>
-	    		<span>${map.gmt_create }</span>
-	    		<img style="float: left;margin-top: 5px;margin-right: 5px;" src="${ctx}/statics/image/scan.png"/>
-	    		<span id="img_span">${map.clicks }</span>
-	    	</div>
+	    			<span>医学随笔</span>
+	    			<span>${map.gmt_create }</span>
+	    			<img style="float: left;margin-top: 5px;margin-right: 5px;" src="${ctx}/statics/image/scan.png"/>
+	    			<span id="img_span">${map.clicks }</span>
+	    		</div>
 	    	<!--内容-->
 	    	
-	    	<div class="yxsb_content">
-				${UEContent }
-	    	</div>
+		    	<div class="yxsb_content"> ${UEContent } </div>
 	    	<div class="block">
                     
                     <div class="title">
@@ -141,8 +137,6 @@
 	                  <ul class="pagination" id="page1"></ul>
 	                  <div style="display: inline-block;    vertical-align: top;text-align: left">
 	                      <select id="edu" name="edu">
-	                          <option value="2" >每页2条</option>
-	                          <option value="5" >每页5条</option>
 	                          <option value="10">每页10条</option>
 	                          <option value="15">每页15条</option>
 	                          <option value="20">每页20条</option>
