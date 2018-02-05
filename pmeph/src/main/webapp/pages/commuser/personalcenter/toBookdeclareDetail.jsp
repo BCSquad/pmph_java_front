@@ -112,10 +112,10 @@
 					</tr>
 					<tr>
 						<td><span>银行账户：</span></td>
-						<td>${topicMap.bank_account_id}
+						<td>${BankMap.account_number}
 						</td>
 						<td><span>开户银行：</span></td>
-						<td>${topicMap.bookname}
+						<td>${BankMap.bank}
 						</td>
 					</tr>
 					<!-- 选题情况 -->
@@ -218,8 +218,8 @@
 							<tr id="sbbzqk_${status.count}">
 								<td>${list.realname}</td>
 								<td>
-									<c:if test="${topicMap.sex == '0'}">男</c:if>
-									<c:if test="${topicMap.sex == '1'}">女</c:if>
+									<c:if test="${list.sex == '0'}">男</c:if>
+									<c:if test="${list.sex == '1'}">女</c:if>
 								</td>
 								<td>${list.price}</td>
 								<td>${list.position}</td>
@@ -232,7 +232,7 @@
 		</div>	
 		<div style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;width: 1000px;"></div>
 		<div class="button">
-			<div class="div_butt">
+			<div class="div_butt1">
 				<div class="bt_tj" onclick="javascript:buttGive()">返回</div>
 			</div>
 

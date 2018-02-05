@@ -421,12 +421,12 @@ public class MaterialDetailController extends BaseController{
 				}
 			}
 			//学术荣誉授予情况表
-			String ac_reward_name[] = request.getParameterValues("cl_reward_name");
-			String ac_award_unit[] = request.getParameterValues("cl_award_unit");
-			String ac_reward_date[] = request.getParameterValues("cl_reward_date");
-			String ac_note[] = request.getParameterValues("cl_note");
-			for(int i=0;i<cl_reward_name.length;i++) { //遍历数组
-				if(!cl_reward_name[i].equals("")){ //判断是否存在
+			String ac_reward_name[] = request.getParameterValues("ac_reward_name");
+			String ac_award_unit[] = request.getParameterValues("ac_award_unit");
+			String ac_reward_date[] = request.getParameterValues("ac_reward_date");
+			String ac_note[] = request.getParameterValues("ac_note");
+			for(int i=0;i<ac_reward_name.length;i++) { //遍历数组
+				if(!ac_reward_name[i].equals("")){ //判断是否存在
 					Map<String,Object> MonographMap = new HashMap<String,Object>();
 					MonographMap.put("declaration_id", declaration_id);
 					MonographMap.put("reward_name", ac_reward_name[i]);
@@ -466,9 +466,13 @@ public class MaterialDetailController extends BaseController{
 		}else{
 			queryMap.put("declaration_id", declaration_id);
 		}
-		//2.作家申报职位
-		List<Map<String,Object>> tsxzList = new ArrayList<Map<String,Object>>();
-		tsxzList=this.mdService.queryTsxz(queryMap);
+		//2.作家申报职位暂存
+		List<Map<String,Object>> tssbList = new ArrayList<Map<String,Object>>();
+		if(gezlList.get(0).get("is_staging").equals("0")){ //表示暂存
+			tssbList=this.mdService.queryTssbZc(queryMap);
+		}else{
+			tssbList=this.mdService.queryTsxz(queryMap);
+		}
 		//3.作家学习经历表
 		List<Map<String,Object>> stuList = new ArrayList<Map<String,Object>>();
 		stuList=this.mdService.queryStu(queryMap);
@@ -499,10 +503,27 @@ public class MaterialDetailController extends BaseController{
 		//12.作家扩展项填报表
 		List<Map<String,Object>> zjkzqkList = new ArrayList<Map<String,Object>>();
 		zjkzqkList = this.mdService.queryZjkzbb(queryMap);
-
+		//13.个人成就
+		Map<String,Object> achievementMap = new HashMap<String,Object>();
+		achievementMap = this.mdService.queryAchievement(queryMap);
+		//14.主编学术专著情况表
+		List<Map<String,Object>> monographList = new ArrayList<Map<String,Object>>();
+		monographList = this.mdService.queryMonograph(queryMap);
+		//15.出版行业获奖情况表
+		List<Map<String,Object>> publishList = new ArrayList<Map<String,Object>>();
+		publishList = this.mdService.queryPublish(queryMap);
+		//16.SCI论文投稿及影响因子情况表
+		List<Map<String,Object>> sciList = new ArrayList<Map<String,Object>>();
+		sciList = this.mdService.querySci(queryMap);
+		//17.临床医学获奖情况表
+		List<Map<String,Object>> clinicalList = new ArrayList<Map<String,Object>>();
+		clinicalList = this.mdService.queryClinicalreward(queryMap);
+		//18.学术荣誉授予情况表
+		List<Map<String,Object>> acadeList = new ArrayList<Map<String,Object>>();
+		acadeList = this.mdService.queryAcadereward(queryMap);
 		//填充
 		mav.addObject("gezlList", gezlList.get(0));
-		mav.addObject("tsxzList", tsxzList);
+		mav.addObject("tssbList", tssbList);
 		mav.addObject("stuList", stuList);
 		mav.addObject("workList", workList);
 		mav.addObject("steaList", steaList);
@@ -513,6 +534,13 @@ public class MaterialDetailController extends BaseController{
 		mav.addObject("zjkyList", zjkyList);
 		mav.addObject("zjxsList", zjxsList);
 		mav.addObject("zjkzqkList", zjkzqkList);
+		mav.addObject("achievementMap", achievementMap);
+		mav.addObject("monographList", monographList);
+		mav.addObject("publishList", publishList);
+		mav.addObject("sciList", sciList);
+		mav.addObject("clinicalList", clinicalList);
+		mav.addObject("acadeList", acadeList);
+		mav.addObject("materialMap", queryMap);
 		return mav;
 	}
 	
@@ -796,15 +824,15 @@ public class MaterialDetailController extends BaseController{
 				}
 			}
 			//作家兼职学术
-			String org_name[] = request.getParameterValues("org_name");
+			String xs_org_name[] = request.getParameterValues("xs_org_name");
 			String xs_rank[] = request.getParameterValues("xs_rank");
 			String xs_position[] = request.getParameterValues("xs_position");
 			String xs_note[] = request.getParameterValues("xs_note");
-			for(int i=0;i<org_name.length;i++) { //遍历数组
-				if(!org_name[i].equals("")){ //判断是否存在
+			for(int i=0;i<xs_org_name.length;i++) { //遍历数组
+				if(!xs_org_name[i].equals("")){ //判断是否存在
 					Map<String,Object> xsjzMap = new HashMap<String,Object>();
 					xsjzMap.put("declaration_id", declaration_id);
-					xsjzMap.put("org_name", org_name[i]);
+					xsjzMap.put("org_name", xs_org_name[i]);
 					xsjzMap.put("rank", request.getParameter(xs_rank[i]));
 					xsjzMap.put("note", xs_note[i]);
 					xsjzMap.put("position", xs_position[i]);
@@ -876,7 +904,7 @@ public class MaterialDetailController extends BaseController{
 					JcbxMap.put("rank", jcb_rank[i]);
 					JcbxMap.put("position", jcb_position[i]);
 					JcbxMap.put("publisher", jcb_publisher[i]);
-					JcbxMap.put("is_digital_editor", request.getParameter(jc_is_digital_editor[i]));
+					JcbxMap.put("is_digital_editor", request.getParameter(jcb_is_digital_editor[i]));
 					JcbxMap.put("publish_date", jcb_publish_date[i]);
 					JcbxMap.put("isbn", jcb_isbn[i]);
 					JcbxMap.put("note", jcb_note[i]);
@@ -980,12 +1008,12 @@ public class MaterialDetailController extends BaseController{
 				}
 			}
 			//学术荣誉授予情况表
-			String ac_reward_name[] = request.getParameterValues("cl_reward_name");
-			String ac_award_unit[] = request.getParameterValues("cl_award_unit");
-			String ac_reward_date[] = request.getParameterValues("cl_reward_date");
-			String ac_note[] = request.getParameterValues("cl_note");
-			for(int i=0;i<cl_reward_name.length;i++) { //遍历数组
-				if(!cl_reward_name[i].equals("")){ //判断是否存在
+			String ac_reward_name[] = request.getParameterValues("ac_reward_name");
+			String ac_award_unit[] = request.getParameterValues("ac_award_unit");
+			String ac_reward_date[] = request.getParameterValues("ac_reward_date");
+			String ac_note[] = request.getParameterValues("ac_note");
+			for(int i=0;i<ac_reward_name.length;i++) { //遍历数组
+				if(!ac_reward_name[i].equals("")){ //判断是否存在
 					Map<String,Object> MonographMap = new HashMap<String,Object>();
 					MonographMap.put("declaration_id", declaration_id);
 					MonographMap.put("reward_name", ac_reward_name[i]);

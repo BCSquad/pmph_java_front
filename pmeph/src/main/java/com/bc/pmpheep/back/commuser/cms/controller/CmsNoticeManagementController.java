@@ -157,6 +157,9 @@ public class CmsNoticeManagementController extends BaseController {
 				//联系人
 				List<Map<String,Object>> listContact = noticeMessageService.queryNoticeMessageDetailContact(paraMap);
 				
+				for(Map<String,Object> map :listAttachment){
+					map.put("attachmentId", "file/download/"+map.get("attachment")+".action");
+				}
 				mv.addObject("map",mapTitle);
 				mv.addObject("listAttachment",listAttachment);
 				mv.addObject("listContact",listContact);

@@ -45,13 +45,12 @@ $(function () {
 	}
 	
 	queryMaterialMap(id);  //执行查询方法
-    $('.select-input').selectlist({
-        zIndex: 10,
-        width: 192,
-        height: 30,
-        optionHeight: 30
-    });
-
+	$('.select-input').selectlist({
+		zIndex: 10,
+		width: 192,
+		height: 30,
+		optionHeight: 30
+	});
     $('.book').selectlist({
         zIndex: 10,
         width: 200,
@@ -99,7 +98,14 @@ function upload(id){
 	    	$("#syllabus_id_"+id).val(fileid);
 	    	$("#syllabus_name_"+id).val(filename);
 	        console.log("上传完成：name " + filename + " fileid " + fileid);
-	    }
+	    },
+	    valid:function(file){
+	    	if(file.size/1024/1024>=100){ //判断文件上传大小
+	    		window.message.warning("不得上传100M以上文件!");
+	    		return false;
+	    	}
+	    	return true;
+	    }	
 	});
 }
 
@@ -125,7 +131,7 @@ function chooseModel(data){
 	//学习经历必填
 	if(data.is_edu_exp_used == "1"){
 		$("#zyxxjl_bt").css("display","inline");
-		jsonStr=jsonStr+"{\"id\":\"xx_kssj\",\"content\":\"学习经历必填\"},"; 
+	//	jsonStr=jsonStr+"{\"id\":\"xx_kssj\",\"content\":\"学习经历必填\"},"; 
 	}else{
 		$("#zyxxjl_xt").css("display","inline");
 	}
@@ -136,7 +142,7 @@ function chooseModel(data){
 	//工作经历必填
 	if(data.is_work_exp_required == "1"){
 		$("#gzjl_bt").css("display","inline");
-		jsonStr=jsonStr+"{\"id\":\"gz_kssj\",\"content\":\"工作经历必填\"},";
+	//	jsonStr=jsonStr+"{\"id\":\"gz_kssj\",\"content\":\"工作经历必填\"},";
 	}else{
 		$("#gzjl_xt").css("display","inline");
 	}
@@ -147,7 +153,7 @@ function chooseModel(data){
 	//教学经历必填
 	if(data.is_teach_exp_required == "1"){
 		$("#jxjl_bt").css("display","inline");
-		jsonStr=jsonStr+"{\"id\":\"jx_kssj\",\"content\":\"教学经历必填\"},";
+	//	jsonStr=jsonStr+"{\"id\":\"jx_kssj\",\"content\":\"教学经历必填\"},";
 	}else{
 		$("#jxjl_xt").css("display","inline");
 	}
@@ -158,7 +164,7 @@ function chooseModel(data){
 	//主要学术兼职必填
 	if(data.is_acade_required == "1"){
 		$("#xsjz_bt").css("display","inline");
-		jsonStr=jsonStr+"{\"id\":\"xs_org_name\",\"content\":\"主要学术必填\"},";
+	//	jsonStr=jsonStr+"{\"id\":\"xs_org_name\",\"content\":\"主要学术必填\"},";
 	}else{
 		$("#xsjz_xt").css("display","inline");
 	}
@@ -169,7 +175,7 @@ function chooseModel(data){
 	//上版教材参编情况必填
 	if(data.is_last_position_required == "1"){
 		$("#sbjccb_bt").css("display","inline");
-		jsonStr=jsonStr+"{\"id\":\"jc_material_name\",\"content\":\"上版教材参编情况必填\"},";
+	//	jsonStr=jsonStr+"{\"id\":\"jc_material_name\",\"content\":\"上版教材参编情况必填\"},";
 	}else{
 		$("#sbjccb_xt").css("display","inline");
 	}
@@ -180,7 +186,7 @@ function chooseModel(data){
 	//国家级课程建设情况必填
 	if(data.is_national_course_required == "1"){
 		$("#gjjpkcjs_bt").css("display","inline");
-		jsonStr=jsonStr+"{\"id\":\"gj_course_name\",\"content\":\"国家级精品课程建设情况\"},";
+	//	jsonStr=jsonStr+"{\"id\":\"gj_course_name\",\"content\":\"国家级精品课程建设情况\"},";
 	}else{
 		$("#gjjpkcjs_xt").css("display","inline");
 	}
@@ -191,7 +197,7 @@ function chooseModel(data){
 	//省部级课程建设情况必填
 	if(data.is_provincial_course_required == "1"){
 		$("#sbkcjs_bt").css("display","inline");
-		jsonStr=jsonStr+"{\"id\":\"sj_course_name\",\"content\":\"省部级课程建设情况\"},";
+	//	jsonStr=jsonStr+"{\"id\":\"sj_course_name\",\"content\":\"省部级课程建设情况\"},";
 	}else{
 		$("#sbkcjs_xt").css("display","inline");
 	}
@@ -202,7 +208,7 @@ function chooseModel(data){
 	//学校课程建设情况必填
 	if(data.is_school_course_required == "1"){
 		$("#xxkcjs_bt").css("display","inline");
-		jsonStr=jsonStr+"{\"id\":\"xx_course_name\",\"content\":\"学校课程建设情况必填\"},";
+	//	jsonStr=jsonStr+"{\"id\":\"xx_course_name\",\"content\":\"学校课程建设情况必填\"},";
 	}else{
 		$("#xxkcjs_xt").css("display","inline");
 	}
@@ -213,7 +219,7 @@ function chooseModel(data){
 	//主编国家规划教材情况必填
 	if(data.is_national_plan_required == "1"){
 		$("#zbgjjgh_bt").css("display","inline");
-		jsonStr=jsonStr+"{\"id\":\"hj_material_name\",\"content\":\"主编国家规划教材情况必填\"},";
+	//	jsonStr=jsonStr+"{\"id\":\"hj_material_name\",\"content\":\"主编国家规划教材情况必填\"},";
 	}else{
 		$("#zbgjjgh_xt").css("display","inline");
 	}
@@ -224,7 +230,7 @@ function chooseModel(data){
 	//教材编写情况必填
 	if(data.is_textbook_required == "1"){
 		$("#jcbxqk_bt").css("display","inline");
-		jsonStr=jsonStr+"{\"id\":\"jcb_material_name\",\"content\":\"教材编写情况\"},";
+	//	jsonStr=jsonStr+"{\"id\":\"jcb_material_name\",\"content\":\"教材编写情况\"},";
 	}else{
 		$("#jcbxqk_xt").css("display","inline");
 	}
@@ -246,7 +252,7 @@ function chooseModel(data){
 	//科研情况必填
 	if(data.is_research_required == "1"){
 		$("#zjkyqk_bt").css("display","inline");
-		jsonStr=jsonStr+"{\"id\":\"zjk_research_name\",\"content\":\"作家科研情况\"},";
+	//	jsonStr=jsonStr+"{\"id\":\"zjk_research_name\",\"content\":\"作家科研情况\"},";
 	}else{
 		$("#zjkyqk_xt").css("display","inline");
 	}
@@ -257,7 +263,7 @@ function chooseModel(data){
 	//个人成就必填
 	if(data.is_achievement_required == "1"){
 		$("#grcj_bt").css("display","inline");
-		jsonStr=jsonStr+"{\"id\":\"gr_content\",\"content\":\"个人成就必填\"},";
+	//	jsonStr=jsonStr+"{\"id\":\"gr_content\",\"content\":\"个人成就必填\"},";
 	}else{
 		$("#grcj_xt").css("display","inline");
 	}
@@ -268,7 +274,7 @@ function chooseModel(data){
 	//主编学术专著情况必填
 	if(data.is_monograph_required == "1"){
 		$("#zbxszz_bt").css("display","inline");
-		jsonStr=jsonStr+"{\"id\":\"zb_monograph_name\",\"content\":\"主编学术专著情况必填\"},";
+	//	jsonStr=jsonStr+"{\"id\":\"zb_monograph_name\",\"content\":\"主编学术专著情况必填\"},";
 	}else{
 		$("#zbxszz_xt").css("display","inline");
 	}
@@ -279,7 +285,7 @@ function chooseModel(data){
 	//出版行业获奖情况必填
 	if(data.is_publish_reward_required == "1"){
 		$("#publish_bt").css("display","inline");
-		jsonStr=jsonStr+"{\"id\":\"pu_reward_name\",\"content\":\"出版行业获奖情况必填\"},";
+	//	jsonStr=jsonStr+"{\"id\":\"pu_reward_name\",\"content\":\"出版行业获奖情况必填\"},";
 	}else{
 		$("#publish_xt").css("display","inline");
 	}
@@ -290,7 +296,7 @@ function chooseModel(data){
 	//SCI论文投稿及影响因子情况必填
 	if(data.is_sci_required == "1"){
 		$("#sci_bt").css("display","inline");
-		jsonStr=jsonStr+"{\"id\":\"sci_paper_name\",\"content\":\"SCI论文投稿及影响因子情况必填\"},";
+	//	jsonStr=jsonStr+"{\"id\":\"sci_paper_name\",\"content\":\"SCI论文投稿及影响因子情况必填\"},";
 	}else{
 		$("#sci_xt").css("display","inline");
 	}
@@ -301,7 +307,7 @@ function chooseModel(data){
 	//临床医学获奖情况必填
 	if(data.is_clinical_reward_required == "1"){
 		$("#clinical_bt").css("display","inline");
-		jsonStr=jsonStr+"{\"id\":\"cl_reward_name\",\"content\":\"临床医学获奖情况必填\"},";
+	//	jsonStr=jsonStr+"{\"id\":\"cl_reward_name\",\"content\":\"临床医学获奖情况必填\"},";
 	}else{
 		$("#clinical_xt").css("display","inline");
 	}
@@ -312,7 +318,7 @@ function chooseModel(data){
 	//学术荣誉授予情况必填
 	if(data.is_acade_reward_required == "1"){
 		$("#acade_bt").css("display","inline");
-		jsonStr=jsonStr+"{\"id\":\"ac_reward_name\",\"content\":\"学术荣誉授予情况必填\"},";
+	//	jsonStr=jsonStr+"{\"id\":\"ac_reward_name\",\"content\":\"学术荣誉授予情况必填\"},";
 	}else{
 		$("#acade_xt").css("display","inline");
 	}
@@ -426,8 +432,8 @@ function add_xxjl(){
 	var num = fnt();
 	var $table = $("#tab_xxjl");
 	var $tr = $("<tr id='xxjl_"+num+"'>"+
-		"<td><input class='cg_input' placeholder='开始时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100'  name='xx_kssj' value='' style='width: 80px;'/>"+
-	"- <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" z-index='100' name='xx_jssj' value='' style='width: 80px;'/></td>"+
+		"<td><input class='cg_input' placeholder='开始时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100' max=\"'$#xx_jssj_"+num+"'\" id='xx_kssj_"+num+"'  name='xx_kssj' value='' style='width: 80px;'/>"+
+	"- <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" z-index='100' min=\"'$#xx_kssj_"+num+"'\" id='xx_jssj_"+num+"' name='xx_jssj' value='' style='width: 80px;'/></td>"+
 	"<td><input class='cg_input' name='xx_school_name' value='' placeholder='学校名称'/></td>"+
 	"<td><input class='cg_input' name='xx_major' value='' placeholder='所学专业'/></td>"+
 	"<td><input class='cg_input' name='xx_degree' value='' style='width: 120px;' placeholder='学历'/></td>"+
@@ -443,8 +449,8 @@ function add_gzjl(){
 	var num = fnt();
 	var $table = $("#tab_gzjl");
 	var $tr = $("<tr id='gzjl_"+num+"'>"+
-		"<td><input class='cg_input' placeholder='开始时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100'  name='gz_kssj' value='' style='width: 80px;'/>"+
-	"- <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" z-index='100' name='gz_jssj' value='' style='width: 80px;'/></td>"+
+		"<td><input class='cg_input' placeholder='开始时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100' max=\"'$#gz_jssj_"+num+"'\" id='gz_kssj_"+num+"'  name='gz_kssj' value='' style='width: 80px;'/>"+
+	"- <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" z-index='100' min=\"'$#gz_kssj_"+num+"'\" id='gz_jssj_"+num+"'  name='gz_jssj' value='' style='width: 80px;'/></td>"+
 	"<td><input class='cg_input' name='gz_org_name' value='' placeholder='工作单位'/></td>"+
 	"<td><input class='cg_input' name='gz_position' value='' placeholder='职位'/></td>"+
 	"<td><input class='cg_input' name='gz_note' value='' style='width: 370px;' placeholder='备注'/></td>"+
@@ -459,8 +465,8 @@ function add_jxjl(){
 	var num = fnt();
 	var $table = $("#tab_jxjz");
 	var $tr = $("<tr id='jxjz_"+num+"'>"+
-		"<td><input class='cg_input' placeholder='开始时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100'  name='jx_kssj' value='' style='width: 80px;'/>"+
-	"- <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" z-index='100' name='jx_jssj' value='' style='width: 80px;'/></td>"+
+		"<td><input class='cg_input' placeholder='开始时间' calendar format=\"'yyyy-mm-dd'\" max=\"'$#jx_jssj_"+num+"'\" id='jx_kssj_"+num+"'   z-index='100'  name='jx_kssj' value='' style='width: 80px;'/>"+
+	"- <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" min=\"'$#jx_kssj_"+num+"'\" id='jx_jssj_"+num+"'  z-index='100' name='jx_jssj' value='' style='width: 80px;'/></td>"+
 	"<td><input class='cg_input' name='jx_school_name' value='' placeholder='学校名称'/></td>"+
 	"<td><input class='cg_input' name='jx_subject' value='' placeholder='教学科目'/></td>"+
 	"<td><input class='cg_input' name='jx_note' value='' style='width: 370px;' placeholder='备注'/></td>"+
@@ -748,7 +754,7 @@ function del_tr(trId){
 
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type){
-//	if(checkNull(jsonStr)){
+	if(checkNull(jsonStr)){
 		$.ajax({
 			type: "POST",
 			url:contextpath+'material/doMaterialUpdate.action?type='+type,
@@ -761,7 +767,7 @@ function buttAdd(type){
 			    }
 		    }
 		});
-//	}	
+	}	
 }
 
 //放弃
@@ -786,6 +792,7 @@ function checkTel(id){
 	if(!/^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/.test(value)){
 		layer.tips('固定电话有误，请重填', '#'+id);
 		$("#"+id)[0].focus();  //聚焦
+		return false; 
 		}
 }
 
@@ -795,6 +802,7 @@ function checkHandphone(id){
 	if(!(/^1(3|4|5|7|8)\d{9}$/.test(value))){ 
 		layer.tips('手机号码有误，请重填', '#'+id);
 		$("#"+id)[0].focus();  //聚焦
+		return false; 
     } 
 }
 //身份证号码校验
@@ -803,6 +811,7 @@ function checkIdCard(id){
 	if ( !(/(^\d{15}$)|(^\d{17}([0-9]|X)$)/.test(num)) ){
 		layer.tips('身份证号码错误，请重填', '#'+id);
 		$("#"+id)[0].focus();  //聚焦
+		return false; 
 	}
 }
 
@@ -813,7 +822,11 @@ function checkNull(jsonStr){
 	var b = true;
 	$.each(objs, function(k, obj){
 	    var value = $("#"+obj.id).val();
-		if(value == ""){
+	    if(obj.id=="zjlx" && value=="0"){ //判断是否为身份证
+	    	checkIdCard("idcard");
+	    }else if(obj.id=="handphone"){ //手机号码
+	    	checkHandphone("handphone");
+	    }else if(value == ""){
 			layer.tips(obj.content, '#'+obj.id);
 			$("#"+obj.id)[0].focus();  //聚焦2
 			b = false;

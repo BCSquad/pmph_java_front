@@ -1,69 +1,100 @@
-$(function() {
-	/* 初始化 */
-	var counter = 0; /* 计数器 */
-	var pageStart = 0; /* offset */
-	var pageSize = 10; /* size */
+$(function(){
 
-	/* 首次加载 最终名单初始化 */
-	getData(pageStart, pageSize);
-
-	/* 监听加载更多 */
-	$(document).on('click', '.js-load-more', function() {
-		counter++;
-		pageStart = counter * pageSize;
-
-		getData(pageStart, pageSize);
+	$('#page-size-select').selectlist({
+        zIndex: 10,
+        width: 110,
+        height: 30,
+        optionHeight: 30
+        
+    });
+	//切换分页每页数据数量时 刷新
+	$("#page-size-select").find("li").bind("click",function(){
+		
+		$("#page-num-temp").val(1);
+		queryMain();
 	});
+	queryMain();
 });
 
 
-
-function getData(offset, size) {
-	var material_id = $("#material_id").val();
+//条件设定完成后查询的实现  点击查询 翻页 更换查询条件等都要先设定条件 不能直接调用此实现
+function queryMain(){
+	data = {
+			pageNum:$("#page-num-temp").val(),
+			pageSize:$("#page-size-select").find($("input[name='page-size-select']")).val()
+			};
+	
 	$.ajax({
-				type : 'post',
-				url : "loadMore.action?material_id=" + material_id,
-				dataType : 'json',
-				success : function(json) {
-					
-					var data = json;
-					var sum = json.length;
-					if(sum==0){
-						$(".no-more").show();
-					}else{
-						$(".no-more").hide();
-					}
-					var result = '';
+		type:'post',
+		url:contextpath+'/cms/toPage.action?t='+new Date().getTime(),
+		async:false,
+		dataType:'json',
+		data:data,
+		success:function(json){
+			addColum(json.page);
+			$("#total").val(json.total);
+			
+			//刷新分页栏
+			 Page({
+                num: json.total,					//页码数
+                startnum: $("#page-num-temp").val(),//指定页码
+                elem: $('#page1'),
+                callback: function (n){     //点击页码后触发的回调函数
+                	$("#page-num-temp").val(n);
+                	queryMain();
+                }
+                });
+		}
+	});
+}
 
-					/** **业务逻辑块：实现拼接html内容并append到页面******** */
 
-					if (sum - offset < size) {
-						size = sum - offset;
-					}
-					/* 使用for循环模拟SQL里的limit(offset,size) */
-					for ( var i = offset; i < (offset + size); i++) {
-						result += "<tr><td   >"
-								+ (i + 1)
-								+ "</td><td   >"
-								+ (data[i].textbook_name ? data[i].textbook_name
-										: '--') + "</td><td   >"
-								+ (data[i].zb ? data[i].zb : '--')
-								+ "</td><td   >"
-								+ (data[i].fb ? data[i].fb : '--')
-								+ "</td><td   >"
-								+ (data[i].bw ? data[i].bw : '--')
-								+ "</td></tr>";
-					}
-					$("#messageTable").append(result);
-					/* 隐藏more按钮 */
-					if ((offset + size) >= sum) {
-						$(".js-load-more").hide();
-					} else {
-						$(".js-load-more").show();
-					}
-				},
-				error : function(xhr, type) {
+function addColum(list){
+	//清空
+	$("#tbody1").html("");
+	var str='';
+	$.each(list,function(i,n){
+		str+= '<div class="item behind" onclick="window.location.href=\''+contextpath+'articledetail/toPage.action?wid='+n.id+'\'">';
+		
+		str +='<div class="command">';
+			str +='<span style="margin-left: 5px">推荐</span>';
+				str +='</div>';
+					str +='<div  class="content" >';
+						str +='<div class="content-image">';
+							str +='<img src="'+contextpath+'statics/testfile/p2.png" />';
+							str +='</div>';
+								str +='<p  class="content-title"  >'+n.title+'</p>';
+								str +='<p  class="content-text">'+(n.summary?n.summary:'')+'';
+								str +='<div  class="foot">';
+									str +=' <div  class="msg">';
+										str +='<span id="span_1"></span><span id="span_4">'+n.clicks+'</span>';
+										str +='<span id="span_2"></span><span id="span_4">'+n.likes+'</span>';
+										str +='<span id="span_3"></span><span id="span_4">'+n.comments+'</span>';
+										str +='</div>';
+											str +='</div>';
+												str +='<div class="ryxx">';
+													str +='<div class="ryxx_foot"><img src="';
+            if (n.avatar == '' || n.avatar == 'DEFAULT' || n.avatar == null) {
+                str += contextpath + 'statics/image/rwtx.png';
+            } else {
+            	str+=contextpath+'image/'+n.avatar+'.action';
+            }
+            str += '" class="ryxx_tx"/>';
+		
+            	str +='<span class="ryxx_xm" style="cursor:pointer;" onclick="window.location.href='+contextpath+'personalhomepage/tohomepage.action?userId='+n.userId+'">'+n.realname+'</span>';
+            	str +='<span class="ryxx_sj">'+n.auth_date+'</span>';
+            	str +='</div>';
+            		str +='</div>';
+            			str +='</div>';
+            				str +='</div>';
+		
+	});
+	$("#tbody1").append(str);
+}
 
-				}
-			});
+
+
+//选择每页数据数量
+function selectPageSize(){
+	queryMain();
 }

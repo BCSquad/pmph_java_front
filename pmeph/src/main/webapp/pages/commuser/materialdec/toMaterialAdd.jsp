@@ -122,11 +122,7 @@
 						<td><span class="btbs">*</span><span>职&emsp;&emsp;务：</span>
 							<input class="cg_input" name="position" value="" id="position"  maxlength="12"/></td>
 						<td><span class="btbs">*</span><span>职&emsp;&emsp;称：</span>
-                            <select class="select-input" id="zc" name="title" >
-                                <option value="0" selected="selected">教授</option>
-                                <option value="1">主任</option>
-                                <option value="3">副主任</option>
-                            </select></td>
+							<input class="cg_input" name="title" value="" id="zc"  maxlength="10"/></td>
 						<td><span class="btbs">*</span><span>地&emsp;&emsp;址：</span>
 							<input class="cg_input" name="address" value="" id="address"  maxlength="17"/></td>
 					</tr>
@@ -183,9 +179,9 @@
 					<tbody>
 						<tr>
 							<td>
-								<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'" z-index="100"  name="xx_kssj" id="xx_kssj" value="" style="width: 80px;" maxlength="20"/>
+								<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'" z-index="100" max="'$#xx_jssj'" name="xx_kssj" id="xx_kssj" value="" style="width: 80px;" maxlength="20"/>
 								-
-								<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'" z-index="100" name="xx_jssj" id="xx_jssj" value="" style="width: 80px;" maxlength="20"/>
+								<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'" z-index="100" min="'$#xx_kssj'" name="xx_jssj" id="xx_jssj" value="" style="width: 80px;" maxlength="20"/>
 							</td>
 							<td><input class="cg_input" name="xx_school_name" value="" placeholder="学校名称" maxlength="36"/></td>
 							<td><input class="cg_input" name="xx_major" value="" placeholder="所学专业" maxlength="16"/></td>
@@ -219,9 +215,9 @@
 					<tbody>
 						<tr>
 							<td>
-								<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'" z-index="100"  name="gz_kssj" id="gz_kssj" value="" style="width: 80px;"maxlength="20"/>
+								<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'" z-index="100" max="'$#gz_jssj'" name="gz_kssj" id="gz_kssj" value="" style="width: 80px;"maxlength="20"/>
 								-
-								<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="gz_jssj" id="gz_jssj" value="" style="width: 80px;"maxlength="20"/>
+								<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  z-index="100" min="'$#gz_kssj'" name="gz_jssj" id="gz_jssj" value="" style="width: 80px;"maxlength="20"/>
 							</td>
 							<td><input class="cg_input" name="gz_org_name" value="" placeholder="工作单位"maxlength="33"/></td>
 							<td><input class="cg_input" name="gz_position" value="" placeholder="职位"maxlength="33" /></td>
@@ -254,9 +250,9 @@
 					<tbody>
 						<tr>
 							<td>
-								<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'"  z-index="100"  name="jx_kssj"  id="jx_kssj" value="" style="width: 80px;" maxlength="20"/>
+								<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'" max="'$#jx_jssj'"  z-index="100"  name="jx_kssj"  id="jx_kssj" value="" style="width: 80px;" maxlength="20"/>
 								-
-								<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="jx_jssj" value="" style="width: 80px;" maxlength="20"/>
+								<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  min="'$#jx_kssj'" id="jx_jssj" z-index="100" name="jx_jssj" value="" style="width: 80px;" maxlength="20"/>
 							</td>
 							<td><input class="cg_input" name="jx_school_name" value="" placeholder="学校名称" maxlength="33"/></td>
 							<td><input class="cg_input" name="jx_subject" value="" placeholder="教学科目" maxlength="50"/></td>

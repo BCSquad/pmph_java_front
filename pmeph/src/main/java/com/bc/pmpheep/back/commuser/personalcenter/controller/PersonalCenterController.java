@@ -25,7 +25,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService;
 import com.bc.pmpheep.back.commuser.personalcenter.bean.PersonalNewMessage;
 import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
-import com.bc.pmpheep.back.commuser.survey.service.SurveyService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.template.service.TemplateService;
 import com.bc.pmpheep.back.util.MD5;
@@ -38,9 +37,6 @@ import com.bc.pmpheep.general.service.MessageService;
 @RequestMapping("/personalhomepage")
 public class PersonalCenterController extends BaseController {
 
-	@Autowired
-	@Qualifier("com.bc.pmpheep.back.commuser.survey.service.SurveyServiceImpl")
-	SurveyService surveyService; 
 	
 	@Autowired
     @Qualifier("com.bc.pmpheep.back.template.service.TemplateService")
@@ -229,16 +225,7 @@ public class PersonalCenterController extends BaseController {
 			queryConditionOperation(names,namesChi,request, mv, paraMap,vm_map);
 			pageParameter.setParameter(paraMap);
 
-			/*List<Map<String,Object>> List_map = personalService.mySurvey(pageParameter);*/
-			Map<String, Object> writerUser = this.getUserInfo();
-			Long userId1 = new Long(String.valueOf(writerUser.get("id")));
-			Date date = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-			String dateStr = sdf.format(date);
-			Map<String,Object> map = new HashMap<String,Object>();
-			map.put("userId", userId1);
-			map.put("dateStr", dateStr);
-			List<Map<String,Object>> List_map = surveyService.surveyList(map);
+			List<Map<String,Object>> List_map = personalService.mySurvey(pageParameter);
 			count = personalService.myCommentCount(pageParameter);
 			
 			

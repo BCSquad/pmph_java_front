@@ -38,6 +38,7 @@
 		 LEFT JOIN  writer_user w on c.author_id=w.id 
     where
          m.favorite_id=#{parameter.favoriteId} and  m.writer_id=#{parameter.writerId}
+    order by  m.gmt_create desc
 	limit 
 	     #{start},#{pageSize}
 	</select>

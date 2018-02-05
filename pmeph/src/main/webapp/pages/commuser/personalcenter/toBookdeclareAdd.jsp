@@ -49,6 +49,7 @@
 						<td width="460px">
 							<input class="cg_input" name="bookname" id="bookname" placeholder="选题名称" value="" maxlength="100"/>
 							<input type="hidden" name="user_id" value="${userMap.id}"/>
+							<input type="hidden" name="realname" value="${userMap.realname}"/>
 						</td>
 						<td width="100px"><span class="btbs">*</span><span>读者对象：</span></td>
 						<td width="300px">
@@ -126,14 +127,14 @@
 					<tr>
 						<td><span>银行账户：</span></td>
 						<td>
-							<!-- <input class="cg_input" name="bank_account_id" id="bank_account_id" placeholder="银行账户" value=""/> -->
-							<select id="yhxxid" name="bank_account_id">
+							<input class="cg_input" name="account_number" id="account_number" placeholder="请填写银行账户" value=""/> 
+							<%-- <select id="yhxxid" name="bank_account_id">
 								${bankSelects}
-							</select>
+							</select> --%>
 						</td>
 						<td><span>开户银行：</span></td>
 						<td>
-							<input class="cg_input" name="realname" id="realname" placeholder="开户银行" value="" readonly="readonly"/>
+							<input class="cg_input" name="bank" id="bank" placeholder="开户银行" value="" />
 						</td>
 					</tr>
 					<!-- 选题情况 -->

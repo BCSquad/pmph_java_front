@@ -131,14 +131,11 @@ public class DataAuditController extends BaseController{
 		return data_map;
 	}
 	
-	
-	//申报审核页面
+		//申报审核页面
 		@RequestMapping("toMaterialAudit")
 		public ModelAndView toMaterialAudit(HttpServletRequest request,
 				HttpServletResponse response){
-			
 			ModelAndView mav = new ModelAndView("authadmin/applydocaudit/toMaterialAudit");
-			
 			//传参  user_id  material_id
 			String material_id = request.getParameter("material_id");
 			String declaration_id = request.getParameter("declaration_id");
@@ -146,12 +143,6 @@ public class DataAuditController extends BaseController{
 			Map<String,Object> queryMap = new HashMap<String,Object>();
 			queryMap.put("material_id", material_id); 
 			queryMap.put("declaration_id", declaration_id); 
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date d= new Date();
-			String d1 = format.format(d);
-			queryMap.put("time", d1); 
-			//更新declaration表的更新时间
-			dataAuditService.updateDeclarationUpdateTime(queryMap);
 			
 			//1.作家申报表
 			List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
@@ -213,6 +204,7 @@ public class DataAuditController extends BaseController{
 			return mav;
 		}
 		
+		
 		//申报审核
 		@RequestMapping("doMaterialAudit")
 		@ResponseBody
@@ -237,10 +229,10 @@ public class DataAuditController extends BaseController{
 				msg = "OK";
 			}
 			resultMap.put("msg", msg);
-			
 			return resultMap;
 		}
 		
+
 		
 		/**
 		 * 页面组合方法，主要js中通过ajax传值对新增页面模块进行初始化操作

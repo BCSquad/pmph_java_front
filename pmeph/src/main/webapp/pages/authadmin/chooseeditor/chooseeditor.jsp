@@ -38,7 +38,7 @@ String contextpath=request.getContextPath();
 <input type="hidden" id="textBookId" value="${textBookId }">
 <input type="hidden" id="selectedIds" value="${selectedIds }">
 <input type="hidden" id="selectedNumIds" value="${selectedNumIds}">
-<input type="hidden" id="is_list_selected" value="${is_list_selected }">
+<input type="hidden" id="is_locked" value="${is_locked }">
 
 
 
@@ -92,7 +92,9 @@ String contextpath=request.getContextPath();
                         <td class="td6">职位</td>
                         <td class="td7">职称</td>
                         <td class="td8">选择编委</td>
-                        <td class="td9">选择数字编委</td>
+                        <c:if test="${is_digital_editor_optional == true }">
+                        	<td class="td9">选择数字编委</td>
+                        </c:if>
                     </tr>
                     </thead>
                     <tbody id="userTbody">
