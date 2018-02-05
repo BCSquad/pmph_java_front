@@ -303,7 +303,7 @@ public class MessageController extends BaseController{
 	public ModelAndView toNoticeMessageDetail(HttpServletRequest request){
 		String materialId=request.getParameter("materialId");
 		String cmsId=request.getParameter("cmsId");
-		String flag=request.getParameter("flag");
+		//String flag=request.getParameter("flag");
 		ModelAndView mv = new ModelAndView();
 		Map<String,Object> paraMap = new HashMap<String,Object>();
 		paraMap.put("materialId", materialId);
@@ -349,7 +349,7 @@ public class MessageController extends BaseController{
 		
 		
 		//mv.addObject("message",message);
-		mv.addObject("flag",flag);
+		//mv.addObject("flag",flag);
 		
 		mv.setViewName("commuser/message/noticeMessageDetail");
 		return mv;
