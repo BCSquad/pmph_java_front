@@ -1,5 +1,5 @@
 $(function() {
-	$("#book_type").val(6);
+	$("#book_type").val(1);
 
 	$('.banner').scroll({
 		picElem : $('#move'), // 图片父级
