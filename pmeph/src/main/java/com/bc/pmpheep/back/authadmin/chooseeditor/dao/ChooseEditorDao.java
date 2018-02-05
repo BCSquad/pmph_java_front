@@ -1,7 +1,10 @@
 package com.bc.pmpheep.back.authadmin.chooseeditor.dao;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
 
 import com.bc.pmpheep.back.plugin.PageParameter;
 /**
@@ -69,6 +72,16 @@ public interface ChooseEditorDao {
 	//查询所有数字编委
 	List<Map<String, Object>> queryNumEditorToBeCount(
 			PageParameter<Map<String, Object>> pageParameter);
+
+	/**
+	 * 查询这样的第一主编公布id
+	 * @param logUserId
+	 * @param textBookId
+	 * @return
+	 */
+	Integer isFirstEditorLogIn(@Param("logUserId")BigInteger logUserId,@Param("textBookId") String textBookId);
+
+	
 	
 	//暂存数字编委
 	/*void updateTempBySelectedNumIds(Map<String, Object> paraMap);*/

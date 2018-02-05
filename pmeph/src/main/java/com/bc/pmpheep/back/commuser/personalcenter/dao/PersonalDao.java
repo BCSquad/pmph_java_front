@@ -3,6 +3,8 @@ package com.bc.pmpheep.back.commuser.personalcenter.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.bc.pmpheep.back.commuser.personalcenter.bean.PersonalNewMessage;
 import com.bc.pmpheep.back.plugin.PageParameter;
 
@@ -180,6 +182,14 @@ public interface PersonalDao {
 	 * @param map
 	 */
 	public void recountBookCommentAfterdelete(Map<String, Object> map);
+	
+	/**
+	 * 查询两人除拒绝（1）外最亲密的好友关系（0申请，2接收 取max）
+	 * @param userId
+	 * @param logUserId
+	 * @return
+	 */
+	public Map<String, Object> queryOurFriendShip(@Param("userId")String userId,@Param("logUserId")String logUserId);
 	
 	
 }

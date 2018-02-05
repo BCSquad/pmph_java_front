@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.authadmin.chooseeditor.service;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
@@ -58,6 +59,14 @@ public interface ChooseEditorService {
 
 	//查询所有数字编委
 	List<Map<String, Object>> queryNumEditorToBeCount(PageParameter<Map<String, Object>> pageParameter);
+
+	/**
+	 * 是否第一主编登录
+	 * @param logUserId
+	 * @param textBookId 
+	 * @return
+	 */
+	Boolean isFirstEditorLogIn(BigInteger logUserId, String textBookId);
 
 	
 

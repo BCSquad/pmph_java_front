@@ -34,6 +34,7 @@
 		<result column="textbook_id" property="textbook_id" />
 		<result column="is_all_textbook_published" property="is_all_textbook_published" />
 		<result column="is_force_end" property="is_force_end" />
+		<result column="textbook_list_str" property="textbook_list_str" />
 
 
 	</resultMap>
@@ -165,6 +166,7 @@
 	<select id="ListAllBookJoin" resultMap="BaseResultMap"
 		parameterType="PageParameter">
 		SELECT
+		group_concat(distinct concat_ws('_/_',tb.id,tb.textbook_name,tb.is_locked) SEPARATOR '_,_') as textbook_list_str,
 		max(c.online_progress) as online_progress,
 		a.is_all_textbook_published,
 		a.is_force_end,
@@ -176,8 +178,7 @@
 		(TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) AS datebase,
 		count(distinct c.id) as iamin,
 		c.id as declaration_id,
-		dp.id as
-		notNullIfFirstManager,
+		dp.id as notNullIfFirstManager,
 		dp.rank,
 		dp.chosen_position,
 		dp.textbook_id
@@ -185,11 +186,13 @@
 		material a
 		left join material_org o on a.id = o.material_id
 		left join writer_user u on u.id = #{parameter.logUserId}
-		LEFT JOIN declaration b ON a.id = b.material_id and b.online_progress != 0
-		LEFT JOIN declaration c ON a.id = c.material_id and c.user_id =
-		#{parameter.logUserId} and c.online_progress != 2
-		LEFT JOIN dec_position dp on c.id = dp.declaration_id and dp.chosen_position
+		LEFT JOIN declaration b ON a.id = b.material_id and b.online_progress != 0 <!-- 统计有多少人提交了申报（报名人数） -->
+		LEFT JOIN declaration c ON a.id = c.material_id and c.user_id = <!-- 登录人自己的申报 -->
+		#{parameter.logUserId} <!-- and c.online_progress != 2 -->
+		<!-- 登录人自己已经被公布的申报 排除编委 即只查询主编副主编 决定是否有权限查看编委遴选 -->
+		LEFT JOIN dec_position_published dp on c.id = dp.declaration_id and dp.chosen_position 
 		not in (0,1,8,9)
+		left join textbook tb on tb.id = dp.textbook_id
 		<!-- in (4,12) and dp.rank=1 -->
 
 		WHERE
@@ -200,7 +203,7 @@
 		<if test="parameter.s!=null and parameter.s!= ''">AND c.id is not null </if>
 		<if test="parameter.is_staging!=null and parameter.is_staging!= ''">AND c.is_staging =#{parameter.is_staging}</if>
 		<if
-			test="parameter.online_progress!=null and parameter.online_progress!= ''">AND c.online_progress=#{parameter.online_progress}</if>
+			test="parameter.online_progress!=null and parameter.online_progress!= ''">AND c.online_progress in ${parameter.online_progress}</if>
 		<if test="parameter.bookname!=null and parameter.bookname!= ''">AND a.material_name like
 			CONCAT('%',#{parameter.bookname},'%')</if>
 		<if test="parameter.dateinfo!=null and parameter.dateinfo ==1 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &lt;= 0 and a.is_all_textbook_published = 0 and a.is_force_end = 0 )</if>
@@ -231,7 +234,7 @@
 		<if test="parameter.s!=null and parameter.s!= ''">AND c.id is not null </if>
 		<if test="parameter.is_staging!=null and parameter.is_staging!= ''">AND c.is_staging =#{parameter.is_staging}</if>
 		<if
-			test="parameter.online_progress!=null and parameter.online_progress!= ''">AND c.online_progress=#{parameter.online_progress}</if>
+			test="parameter.online_progress!=null and parameter.online_progress!= ''">AND c.online_progress in ${parameter.online_progress}</if>
 		<if test="parameter.bookname!=null and parameter.bookname!= ''">AND a.material_name like
 			CONCAT('%',#{parameter.bookname},'%')</if>
 		<if test="parameter.dateinfo!=null and parameter.dateinfo ==1 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &lt;= 0 and a.is_all_textbook_published = 0 and a.is_force_end = 0 )</if>
@@ -258,10 +261,11 @@
 		FROM
 		topic t
 		<where>
-			<if
+			t.user_id = #{parameter.logUserId}
+			<!-- <if
 				test="parameter.isMine!=null and parameter.isMine!='' and parameter.logUserId != null and parameter.logUserId != '' ">
 				AND t.user_id = #{parameter.logUserId}
-			</if>
+			</if> -->
 			<if test="parameter.bookname != null and parameter.bookname!= '' ">
 				AND t.bookname LIKE concat('%',#{parameter.bookname},'%')
 			</if>
@@ -281,10 +285,11 @@
 		FROM
 		topic t
 		<where>
-			<if
+			t.user_id = #{parameter.logUserId}
+			<!-- <if
 				test="parameter.isMine!=null and parameter.isMine!='' and parameter.logUserId != null and parameter.logUserId != '' ">
 				AND t.user_id = #{parameter.logUserId}
-			</if>
+			</if> -->
 			<if test="parameter.bookname != null and parameter.bookname!= '' ">
 				AND t.bookname LIKE concat('%',#{parameter.bookname},'%')
 			</if>
@@ -417,6 +422,7 @@
 		</if>
 		<if test='parameter.selfLog == false '>
 			and bc.is_editor_replied = 1
+			and bc.result =1
 		</if>
 		order by bc.gmt_create desc
 		limit ${start},${pageSize}
@@ -436,6 +442,10 @@
 		AND bc.is_deleted = '0'
 		<if test="parameter.is_replied != null and parameter.is_replied != '' ">
 			AND bc.is_editor_replied = #{parameter.is_replied}
+		</if>
+		<if test='parameter.selfLog == false '>
+			and bc.is_editor_replied = 1
+			and bc.result =1
 		</if>
 		group by b.id
 		)t
@@ -475,6 +485,7 @@
 		bc.id,
 		bc.book_id,
 		bc.content,
+		bc.is_auth,
 		bc.gmt_create,
 		case 
 		when bc.gmt_update = '0000-00-00 00:00:00'
@@ -491,6 +502,10 @@
 		<if test="parameter.is_long != null and parameter.is_long != '' ">
 			AND bc.is_long = #{parameter.is_long}
 		</if>
+		<if test="parameter.selfLog = false ">
+			AND bc.is_auth = 1
+		</if>
+		
 		order by bc.gmt_create desc
 		limit ${start},${pageSize}
 	</select>
@@ -521,6 +536,9 @@
 		AND bc.is_deleted = '0'
 		<if test="parameter.is_long != null and parameter.is_long != '' ">
 			AND bc.is_long = #{parameter.is_long}
+		</if>
+		<if test="parameter.selfLog = false ">
+			AND bc.is_auth = 1
 		</if>
 		group by b.id
 
@@ -707,6 +725,19 @@
 		where id = #{id}
 	</select>
 
+	<!-- 查询两人除拒绝（1）外最亲密的好友关系（0申请，2接收 取max） -->
+	<select id="queryOurFriendShip" resultType="Map">
+		select 
+			t.id 
+			,t.status
+			,request_id = #{userId} and t.status = 0 as isBeenRequest
+			,target_id = #{userId} and t.status = 0 as hasRequest
+		from writer_friend t
+		where 
+			t.status != 1
+			and ((request_id = #{userId} and target_id = #{logUserId}) or (request_id = #{logUserId} and target_id = #{userId}))
+		order by t.status desc
+	</select>
 
 
 </mapper>

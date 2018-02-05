@@ -62,6 +62,9 @@ public class ChooseEditorController extends BaseController {
 		tag ="numEditor";
 		String selectedNumIds = getTempSelectedIds(textBookId, logUserId,tag);
 		
+		Boolean isFirstEditorLogIn = chooseEditorService.isFirstEditorLogIn(logUserId,textBookId);
+		
+		mv.addObject("isFirstEditorLogIn", isFirstEditorLogIn);
 		mv.addObject("selectedIds", selectedIds);
 		mv.addObject("selectedNumIds", selectedNumIds);
 		mv.addObject("logUserName",logUserName);
@@ -137,6 +140,8 @@ public class ChooseEditorController extends BaseController {
 		String queryName = request.getParameter("queryName");
 		String queryOrg = request.getParameter("queryOrg");
 		String textBookId = request.getParameter("textBookId");
+		String isFirstEditorLogIn = request.getParameter("isFirstEditorLogIn");
+		
 		
 		//查询条件封装入pageParameter的parameter
 		Map<String, Object> paraMap = new HashMap<String, Object>();
@@ -159,6 +164,8 @@ public class ChooseEditorController extends BaseController {
 		Map<String, Object> vm_map = new HashMap<String, Object>();
 		vm_map.put("List_map", List_map);
 		vm_map.put("startNum", pageParameter.getStart()+1);
+		vm_map.put("isFirstEditorLogIn", isFirstEditorLogIn);
+		
 		//vm_map.put("contextpath", contextpath);
 		String html ="";
 		String vm = "/authadmin/chooseeditor/chooseeditor.vm";

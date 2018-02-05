@@ -15,14 +15,14 @@
 	    <td class="">$!{c.dec_org_name}</td>
 	    <td class="">$!{c.position}</td>
 	    <td class="">$!{c.title}</td>
-	    #if($!{c.is_locked} == true || $!{c.editorAvaliable} == false )
+	    #if($!{c.is_locked} == true || $!{isFirstEditorLogIn} == "false" || $!{c.editorAvaliable} == false )
 	    	<td class=""><input class="check editor" value="$!{c.dec_position_id}" type="checkbox" disabled="disabled"></td>
 	    #else
 	    	<td class=""><input class="check editor" value="$!{c.dec_position_id}" type="checkbox"></td>
 	    #end
 	    
 	    #if($!{is_digital_editor_optional}==true)
-		    #if($!{c.is_locked} == true )
+		    #if($!{c.is_locked} == true || $!{isFirstEditorLogIn} == "false")
 		    	<td class=""><input class="check numEditor" value="$!{c.dec_position_id}" type="checkbox" disabled="disabled"></td>
 		    #else
 		    	<td class=""><input class="check numEditor" value="$!{c.dec_position_id}" type="checkbox"></td>

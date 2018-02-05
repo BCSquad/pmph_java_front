@@ -35,31 +35,77 @@
 				queryMain();
 			  }
 		});
+	  $("#btn_wdsbssk").click(function(event){
+		  $("#bookname").val($("#wdsbssk").val());
+			$("#pageNum").val(1);
+			queryMain();
+	  });
 
 });
+  
 
 function listoction(thisclicked,s){
-	window.location.href=contextpath+'personalhomepage/tohomepage.action?pagetag=jcsb&bookname='+$("#wdsbssk").val()+"&&s="+s+"&pageinfo1="+$(thisclicked).attr('id');
+	/*window.location.href=
+		contextpath+'personalhomepage/tohomepage.action?pagetag=jcsb&bookname='+$("#wdsbssk").val()
+		+"&&s="+s+"&pageinfo1="+$(thisclicked).attr('id');*/
+	$("#s").val(s);
+	$("#pageinfo1").val($(thisclicked).attr('id'));
+	$("#pageNum").val(1);
+	queryMain();
 }
-function listoction1(){
-	window.location.href=contextpath+'personalhomepage/tohomepage.action?pagetag=jcsb&bookname='+$("#wdsbssk").val()+"&&dateinfo=1&&pageinfo=1";
-	document.getElementById("sbzzjx").className = "jcsbsbztxz";
+function listoction1(pageinfo){
+	/*window.location.href=contextpath+'personalhomepage/tohomepage.action?pagetag=jcsb&bookname='+$("#wdsbssk").val()+"&&dateinfo=1&&pageinfo=1";
+	document.getElementById("sbzzjx").className = "jcsbsbztxz";*/
+	$("#is_staging").val("");
+	$("#online_progress").val("");
+	$("#dateinfo").val(pageinfo);
+	$("#pageinfo").val(pageinfo);
+	$("#pageNum").val(1);
+	queryMain();
 }
-function listoction2(){
+/*function listoction2(){
 	window.location.href=contextpath+'personalhomepage/tohomepage.action?pagetag=jcsb&bookname='+$("#wdsbssk").val()+"&&dateinfo=2&&pageinfo=2";
 	document.getElementById("sbyjs").className = "jcsbsbztxz";
-}
+}*/
 function listoction3(){
-	window.location.href=contextpath+'personalhomepage/tohomepage.action?pagetag=jcsb&bookname='+$("#wdsbssk").val()+"&&is_staging=1&&online_progress=0&&pageinfo=3&&s=1";
-	document.getElementById("sbzc").className = "jcsbsbztxz";
+/*	window.location.href=contextpath+'personalhomepage/tohomepage.action?pagetag=jcsb&bookname='+$("#wdsbssk").val()
+	+"&&is_staging=1&&online_progress=0&&pageinfo=3&&s=1";
+	document.getElementById("sbzc").className = "jcsbsbztxz";*/
+	$("#s").val(1);
+	$("#dateinfo").val("");
+	$("#is_staging").val(1);
+	$("#online_progress").val("(0)");
+	$("#pageinfo1").val("jcsbwdsb");
+	$("#pageinfo").val(3);
+	$("#pageNum").val(1);
+	queryMain();
 }
 function listoction4(){
-	window.location.href=contextpath+'personalhomepage/tohomepage.action?pagetag=jcsb&bookname='+$("#wdsbssk").val()+"&&online_progress=1&&pageinfo=4&&s=1";
-	document.getElementById("sbytj").className = "jcsbsbztxz";
+	/*window.location.href=contextpath+'personalhomepage/tohomepage.action?pagetag=jcsb&bookname='+$("#wdsbssk").val()
+	+"&&online_progress=1&&pageinfo=4&&s=1";
+	document.getElementById("sbytj").className = "jcsbsbztxz";*/
+	
+	$("#s").val(1);
+	$("#dateinfo").val("");
+	$("#is_staging").val("");
+	$("#online_progress").val("(1,2,3)");
+	$("#pageinfo1").val("jcsbwdsb");
+	$("#pageinfo").val(4);
+	$("#pageNum").val(1);
+	queryMain();
+	
 }
 function listoction5(){
-	window.location.href=contextpath+'personalhomepage/tohomepage.action?pagetag=jcsb&bookname='+$("#wdsbssk").val()+"&&pageinfo=5";
-	document.getElementById("qktj").className = "jcsbsbztxz";
+	/*window.location.href=contextpath+'personalhomepage/tohomepage.action?pagetag=jcsb&bookname='+$("#wdsbssk").val()+"&&pageinfo=5";
+	document.getElementById("qktj").className = "jcsbsbztxz";*/
+	
+	
+	$("#is_staging").val("");
+	$("#online_progress").val("");
+	$("#dateinfo").val("");
+	$("#pageinfo").val(5);
+	$("#pageNum").val(1);
+	queryMain();
 }
 
 /**

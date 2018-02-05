@@ -13,7 +13,7 @@ Array.prototype.removeByValue = function(val) {
 	};
 	
 $(function(){
-	if ($("#is_locked").val() == "true") {
+	if ($("#is_locked").val() == "true"||$("#isFirstEditorLogIn").val() == "false") {
 		$("#handleBtn").hide();
 	}else{
 		$("#handleBtn").show();
@@ -122,6 +122,7 @@ function queryMain(){
 			queryName:$("#search-name-temp").val(),
 			queryOrg:$("#select-search-org").find("input[name='select-search-org']").val(),
 			textBookId:$("#textBookId").val(),
+			isFirstEditorLogIn:$("#isFirstEditorLogIn").val(),
 			contextpath:contextpath
 			};
 	
