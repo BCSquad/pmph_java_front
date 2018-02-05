@@ -88,11 +88,11 @@
 					  <p class="content-size"><a href="${ctx}/message/noticeMessageDetail.action?cmsId=${list.id }&&materialId=${list.material_id}" class="astyle">${list.title}</a></p>
                       <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date" pattern="yyyy-MM-dd"/></p>
                       
-                      <c:if test="${list.notEnd ==1}">
+                      <c:if test="${list.notEnd ==1 and is_material_entry==true}">
 	                      <div class="left_join"
 	                      onclick="window.location.href='${ctx}/material/toMaterialAdd.action?material_id=${list.material_id}'">报名参加</div>
                   	  </c:if>
-                  	  <c:if test="${list.notEnd ==0}">
+                  	  <c:if test="${list.notEnd ==0 and is_material_entry==true}">
 	                      <div class="left_join end">已结束</div>
                   	  </c:if>
                   </div>
@@ -166,7 +166,7 @@
                     <div class="left_one">
                         <div class="textbook_left">教材社区</div>
                         <div class="all_left" onclick="window.location.href='${ctx}/community/tolist.action'">全部>></div>
-                        <c:forEach items="${listDou}" var="list" varStatus="status">
+                        <c:forEach items="${listM}" var="list" varStatus="status">
 	                      <c:if test="${status.index==0}">
 	                        <div class="left_con1" style="margin-top: 63px;" onclick="todou('${list.mid}')">${list.title}</div>
 	                      </c:if>
@@ -207,7 +207,7 @@
                             <div>
                                 <div class="a6_head_div">
                                 <c:if test="${list.avatar=='DEFAULT'}">
-                                <img src="${ctx}/statics/testfile/a6_photo.png" class="a6_head"></c:if>
+                                <img src="${ctx}/statics/pictures/head.png" class="a6_head"></c:if>
                 				<c:if test="${list.avatar!='DEFAULT'}">
                 				<img src="${ctx}/image/${list.avatar}.action" class="a6_head"></c:if>
                                 </div>
@@ -230,7 +230,7 @@
                                 <div class="a6_head_div">
                                 
                                 	<c:if test="${list.avatar=='DEFAULT'}">
-                                <img src="${ctx}/statics/testfile/a6_photo.png" class="a6_head"></c:if>
+                                <img src="${ctx}/statics/image/default_image.png" class="a6_head"></c:if>
                 				<c:if test="${list.avatar!='DEFAULT'}">
                 				<img src="${ctx}/image/${list.avatar}.action" class="a6_head"></c:if>
                                 </div>
@@ -249,7 +249,17 @@
                 <c:forEach items="${listAut}" var="list" varStatus="status">
                     <c:if test="${status.index==0}">
                         <div class="author1">
-                            <div class="a7_head_div"><img src="${ctx}/statics/testfile/a6_photo.png" class="a6_head">
+                            <div class="a7_head_div">
+
+                            <c:choose>
+                            	<c:when test="${list.avatar=='DEFAULT'}">
+                            		<img src="${ctx}/statics/image/default_image.png" class="a6_head">
+                            	</c:when>
+                            	<c:otherwise>
+                            		<img src="${ctx}/image/${list.avatar}.action" class="a6_head">
+                            	</c:otherwise>
+                            </c:choose>
+  
                             </div>
                             <div class="a7_name_div">
                                 <div class="a7_author">
@@ -261,7 +271,7 @@
                                 </div>
                             </div>
                             <div class="a7_friend">
-                                <span class="friend"><B>+</B>好友</span>
+                                <span class="friend" onclick="addfriend('${list.id}')" id="friend${list.id}"><B>+</B>好友</span>
                             </div>
                         </div>
                     </c:if>
@@ -269,7 +279,15 @@
                 <c:forEach items="${listAut}" var="list" varStatus="status">
                     <c:if test="${status.index!=0}">
                         <div class="author2">
-                            <div class="a7_head_div"><img src="${ctx}/statics/testfile/a6_photo.png" class="a6_head">
+                            <div class="a7_head_div">
+                            <c:choose>
+                            	<c:when test="${list.avatar=='DEFAULT'}">
+                            		<img src="${ctx}/statics/image/default_image.png" class="a6_head">
+                            	</c:when>
+                            	<c:otherwise>
+                            		<img src="${ctx}/image/${list.avatar}.action" class="a6_head">
+                            	</c:otherwise>
+                            </c:choose>
                             </div>
                             <div class="a7_name_div">
                                 <div class="a7_author">
@@ -281,7 +299,7 @@
                                 </div>
                             </div>
                             <div class="a7_friend">
-                                <span class="friend"><B>+</B>好友</span>
+                                <span class="friend" onclick="addfriend('${list.id}')" id="friend${list.id}"><B>+</B>好友</span>
                             </div>
                         </div>
                     </c:if>
