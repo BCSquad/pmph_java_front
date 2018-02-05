@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bc.pmpheep.back.commuser.homepage.dao.HomeDao" >
   <resultMap id="Mapresult" type="java.util.Map"></resultMap>
-  <!-- 查询最新三条公告(所有人可见)-->
+  <!-- 查询最新三条公告-->
   <select id="queryDocument"  parameterType="map" resultMap="Mapresult">   
     SELECT 
 	(TO_DAYS(NOW()) &lt;= TO_DAYS(m.actual_deadline ) and !m.is_deleted and !m.is_force_end and !m.is_all_textbook_published) as notEnd,
@@ -20,14 +20,22 @@
 			cc.category_id=3
 			AND cc.auth_status =2
 			AND cc.is_published =1
-	
-	    		and ((wu.id=#{id} and m.is_public = 0)or m.is_public = 1 or cc.is_material_entry = 0 )
+	        
+	    		and (
+	    		<if test="id != null and id != '' ">
+	    			(wu.id=#{id} and m.is_public = 0)or m.is_public = 1 or 
+	    		</if>
+	    		cc.is_material_entry = 0 )
 	group by cc.id
 	ORDER BY
 		
 			    cc.auth_date DESC
 	limit 0,3
-    <!-- select n.* from 
+  </select>
+  
+  <!-- 教材社区公告 -->
+  <select id="queryMaterial" parameterType="map" resultMap="Mapresult">
+   select n.* from 
 		(select 
 		        t.*
 		        from cms_content t
@@ -52,8 +60,9 @@
 		        and t.auth_status=2
 		        and t.is_deleted=0 
 		        and p.id= #{id}) n
-		order by n.gmt_create desc limit 0,3  -->    
+		order by n.gmt_create desc limit 0,3    
   </select>
+  
    <!-- 查询最新五条信息快报 -->
   <select id="queryNotice"  resultMap="Mapresult">
      select  * from cms_content  where  category_id='2' and auth_status='2' 
@@ -120,12 +129,10 @@ LIMIT 0,10
   </select>
    <!-- 查询点击人数最多的最多的作者 -->
   <select id="queryAuthor"  resultMap="Mapresult">
-	select  
-	       t.title,
-	       b.realname,
-	       b.avatar
-	       from cms_content  t left join writer_user b on t.author_id=b.id
-	       where  category_id='58'  order by clicks desc limit 0,4
+	select 
+    b.*
+    from cms_content t 
+    left join writer_user b on t.author_id=b.id group by t.clicks desc limit 0,4
   </select>
    <!-- 查询点击人数最多的书评的作者、书名以及评论内容 -->
   <select id="queryComment"  resultMap="Mapresult">
@@ -149,7 +156,7 @@ LIMIT 0,10
 			ON b.id = c.book_id
 			INNER JOIN writer_user AS u ON c.writer_id = u.id
 			ORDER BY
-			b.comments ASC
+			b.comments ASC limit 0,4
   </select>
    <!-- 根据书籍类型查询图书畅销榜 -->
   <select id="querySale" parameterType="map" resultMap="Mapresult">
@@ -192,4 +199,9 @@ LIMIT 0,10
 		 where  a.adname=#{adName} and  a.is_disabled='0' and i.is_disabled='0' order by i.id
 	</select>
 
+    <!-- 添加好友 -->
+    <insert id="addfriend" parameterType="map">
+        insert into writer_friend 
+        (request_id,target_id,status)values(#{request_id},#{target_id},0);
+    </insert>
 </mapper>

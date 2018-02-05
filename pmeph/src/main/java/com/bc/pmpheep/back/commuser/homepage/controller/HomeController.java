@@ -51,16 +51,9 @@ public class HomeController extends BaseController{
 
         Map<String,Object> adInfo1=homeService.getPageAdInfo("首页轮播");
         Map<String,Object> adInfo2=homeService.getPageAdInfo("首页中部");
-
         //根据登录人查询可见公告，未登录查询所有人可见公告
-        List<Map<String, Object>> listDou=new ArrayList<Map<String,Object>>();
         Map<String, Object> user=getUserInfo();
-        if(user!=null){
-        	 listDou = homeService.queryDocument(user.get("id").toString());
-        }else{
-        	 listDou = homeService.queryDocument("0");
-        }
-        
+        List<Map<String, Object>> listDou= homeService.queryDocument(user==null?"":user.get("id").toString());
         modelAndView.addObject("listDou", listDou);
         modelAndView.addObject("listNot", listNot);
         modelAndView.addObject("listArt", listArt);
@@ -68,6 +61,13 @@ public class HomeController extends BaseController{
         modelAndView.addObject("listCom", listCom);
         modelAndView.addObject("adInfo1", adInfo1);
         modelAndView.addObject("adInfo2", adInfo2);
+        List<Map<String, Object>> listM =new ArrayList<Map<String,Object>>();
+        if(user==null){
+        	listM = homeService.queryMaterial("0");
+        }else{
+        	listM = homeService.queryMaterial(user.get("id").toString());
+        }
+        modelAndView.addObject("listM", listM);
         //读取mongeldb里面的图片 
         for (Map<String, Object> pmap : listArt) {
 			Message message=messageService.get((String) pmap.get("mid"));
@@ -261,5 +261,19 @@ public class HomeController extends BaseController{
         List<Map<String, Object>> listSal = homeService.querySale(Integer.parseInt(type));
         map.put("type", listSal);
         return map;
+    }
+    
+    /**
+     * 添加好友
+     * @param request
+     * @return
+     */
+    @RequestMapping("addfriend")
+    @ResponseBody
+    public String addfriend(HttpServletRequest request){
+    	String target_id=request.getParameter("target_id");
+    	Map<String, Object> user=getUserInfo();
+    	String returncode=homeService.addfriend(user.get("id").toString(), target_id);
+    	return returncode;
     }
 }
