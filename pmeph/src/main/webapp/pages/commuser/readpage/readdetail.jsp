@@ -51,7 +51,7 @@
                 </div>
                 <div class="info">
                     <label style="margin-left: 20px" class="labell">纠错内容</label>
-                    <textarea class="misarea" id="content"  onblur="javascript:LengthLimit(this,6);"></textarea>
+                    <textarea class="misarea" id="content"  onblur="javascript:LengthLimit(this,500);"></textarea>
                 </div>
                 <div class="upload">
                     <label style="margin-left: 20px" class="labell">纠错内容附件</label>

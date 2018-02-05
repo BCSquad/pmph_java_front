@@ -147,6 +147,7 @@ public class DataAuditController extends BaseController{
 			//1.作家申报表
 			List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
 			gezlList = this.dataAuditService.queryPerson(queryMap);
+			
 			if(declaration_id == null){
 			queryMap.put("declaration_id", gezlList.get(0).get("id"));
 			}else{
@@ -201,6 +202,7 @@ public class DataAuditController extends BaseController{
 			mav.addObject("zjkzqkList", zjkzqkList);
 			mav.addObject("view_audit", view_audit);
 			mav.addObject("material_id", material_id);
+			mav.addObject("online_progress", gezlList.get(0).get("online_progress").toString());//判断审核通过、退回按钮是否隐藏
 			return mav;
 		}
 		

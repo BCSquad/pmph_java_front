@@ -531,7 +531,7 @@ function LengthLimit(obj,ml){
 	//把双字节的替换成两个单字节的然后再获得长度，与限制比较
 	if (va.replace(/[^\x00-\xff]/g,"aa").length > ml) {
 		obj.value=va.substring(0,maxStrlength);
-		window.message.warning("不可超过输入最大长度"+ml+"字节！");
+		window.message.warning("不可超过最大长度");
 	}
 }
 

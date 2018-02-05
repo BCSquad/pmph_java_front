@@ -131,11 +131,13 @@
             </tr>
             <tr class="sxy-tr">
                 <td >
-                  <div  style="width: 400px">
-                    <span class="gender">性别</span>
+                  <div  style="width: 400px;padding:0px;">
+                  <label class="require" >性别</label>
+                  <div class="input-wrapper" style="margin-top:10px;">
                     <input type="hidden" value="${map.sex }" id="sex_hidden">
                     <input type="radio" value="1" class="sxy-radio" name="radio-set" id="sex1"/>男&nbsp;&nbsp;
                     <input type="radio" value="2" class="sxy-radio" name="radio-set" id="sex2"/>女
+                  </div>
                   </div>
                 </td>
                 <td >
