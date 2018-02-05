@@ -64,4 +64,14 @@ public class BookDeclareServiceImpl implements BookDeclareService {
 		return this.bookDecdao.queryBank(map);
 	}
 
+	@Override
+	public int insertBank(Map<String, Object> map) {
+		return this.bookDecdao.insertBank(map);
+	}
+
+	@Override
+	public int updateBank(Map<String, Object> map) {
+		return this.bookDecdao.updateBank(map);
+	}
+
 }

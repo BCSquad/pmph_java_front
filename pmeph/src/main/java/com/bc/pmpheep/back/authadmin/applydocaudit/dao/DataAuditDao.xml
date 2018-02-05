@@ -106,7 +106,7 @@
 		</where>
 	</select>
 	
-	<!-- 专家信息 --> 
+		<!-- 专家信息 --> 
 	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
 		select t1.*,t2.org_name dwmc from declaration t1 left join org t2 on t1.org_id = t2.id
 		 where 1= 1 
@@ -123,8 +123,7 @@
 			and t1.realname = #{realname}
 		</if>
 	</select>
-	
-		<!-- 图书选择 -->
+			<!-- 图书选择 -->
 	<select id="queryTsxz" resultType="java.util.Map" parameterType="java.util.Map">
 		select t1.*,t2.textbook_name from dec_position t1 left join textbook t2
 		on t1.textbook_id = t2.id where t1.declaration_id = #{declaration_id} 
@@ -135,6 +134,7 @@
 	<select id="queryStu" resultType="java.util.Map" parameterType="java.util.Map">
 		select * from dec_edu_exp where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
+	
 		<!-- 工作经历 -->
 	<select id="queryWork" resultType="java.util.Map" parameterType="java.util.Map">
 		select * from dec_work_exp where declaration_id = #{declaration_id} ORDER BY sort 

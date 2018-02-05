@@ -49,6 +49,7 @@ $(function(){
 		                        "<div class='headAndNameRight float_right'> "+
 		                            "<div class='headDiv'><img class='headPicture' src='"+contextpath+responsebean[i].avatar+"'/></div> "+
 		                            "<div class='talkName'><text>"+responsebean[i].senderName+"</text></div> "+
+		                             /*"<div style=''><text>"+responsebean[i].senderName+"</text></div> "+*/
 		                        "</div> "+
 		                        "<div class='talkDivRight float_right' > "+
 		                            "<div class='sendMessage'> "+
@@ -77,6 +78,7 @@ $(function(){
 	                        "</div> ";
 	        			}
 	        			$("#dialogue").append(html);
+	        			$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);  
 	        			content+=html;
 	        		}
 	        		

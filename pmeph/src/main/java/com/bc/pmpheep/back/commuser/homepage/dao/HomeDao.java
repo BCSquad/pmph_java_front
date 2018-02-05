@@ -82,4 +82,17 @@ public interface HomeDao {
      * @return
      */
     public List<Map<String, Object>> getPageAdDetail(@Param("adName") String adName);
+    /**
+     * 添加好友
+     * @param request_id 申请人ID
+     * @param target_id 申请对象ID
+     * @return int
+     */
+    int addfriend(@Param("request_id") String request_id,@Param("target_id") String target_id);
+    /**
+     * 查询教材社区公告
+     * @param id 登陆人ID
+     * @return list
+     */
+    List<Map<String, Object>> queryMaterial(@Param("id") String id);
 }

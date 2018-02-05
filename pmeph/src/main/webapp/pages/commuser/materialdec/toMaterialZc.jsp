@@ -154,9 +154,9 @@
 							<input class="cg_input" name="email" value="${gezlList.email}" id="email" maxlength="40"/></td>
 						<td><span class="btbs">*</span><span>证件类型：</span>
                             <select class="select-input" id="zjlx" name="idtype">
-                                <option value="0" ${list.preset_position=='0'?'selected':'' }>身份证</option>
-                                <option value="1" ${list.preset_position=='1'?'selected':'' }>护照</option>
-                                <option value="2" ${list.preset_position=='2'?'selected':'' }>军官证</option>
+                                <option value="0" ${gezlList.idtype=='0'?'selected':'' }>身份证</option>
+                                <option value="1" ${gezlList.idtype=='1'?'selected':'' }>护照</option>
+                                <option value="2" ${gezlList.idtype=='2'?'selected':'' }>军官证</option>
                             </select></td>
 						<td><span class="btbs">*</span><span>证件号码：</span>
 							<input class="cg_input" name="idcard" value="${gezlList.idcard}" id="idcard" maxlength="18"/></td>
@@ -188,9 +188,9 @@
 					<tbody>
 						<tr>
 							<td>
-								<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'" z-index="100"  name="xx_kssj" id="xx_kssj" value="" style="width: 80px;" maxlength="20"/>
+								<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'" z-index="100" max="'$#xx_jssj'" name="xx_kssj" id="xx_kssj" value="" style="width: 80px;" maxlength="20"/>
 								-
-								<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'" z-index="100" name="xx_jssj" id="xx_jssj" value="" style="width: 80px;" maxlength="20"/>
+								<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'" z-index="100" min="'$#xx_kssj'" name="xx_jssj" id="xx_jssj" value="" style="width: 80px;" maxlength="20"/>
 							</td>
 							<td><input class="cg_input" name="xx_school_name" value="" placeholder="学校名称"  maxlength="36"/></td>
 							<td><input class="cg_input" name="xx_major" value="" placeholder="所学专业"  maxlength="16"/></td>
@@ -201,9 +201,9 @@
 						<c:forEach var="list" items="${stuList}" varStatus="status">
 							<tr id="xxjl_${status.count}">
 								<td>
-									<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'" z-index="100"  name="xx_kssj" id="xx_kssj" value="${list.date_begin}" style="width: 80px;"/>
+									<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'" z-index="100"  name="xx_kssj" max="'$#xx_jssj_${status.count}'" id="xx_kssj_${status.count}" value="${list.date_begin}" style="width: 80px;"/>
 									-
-									<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'" z-index="100" name="xx_jssj" id="xx_jssj" value="${list.date_end}" style="width: 80px;"/>
+									<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'" z-index="100" name="xx_jssj" min="'$#xx_kssj_${status.count}'" id="xx_jssj_${status.count}" value="${list.date_end}" style="width: 80px;"/>
 								</td>
 								<td><input class="cg_input" name="xx_school_name" value="${list.school_name}" placeholder="学校名称"  maxlength="36"/></td>
 								<td><input class="cg_input" name="xx_major" value="${list.major}" placeholder="所学专业"  maxlength="16"/></td>
@@ -238,9 +238,9 @@
 					<tbody>
 						<tr>
 							<td>
-								<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'" z-index="100"  name="gz_kssj" id="gz_kssj" value="" style="width: 80px;"/>
+								<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'" z-index="100"  name="gz_kssj" max="'$#gz_jssj'" id="gz_kssj" value="" style="width: 80px;"/>
 								-
-								<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="gz_jssj" id="gz_jssj" value="" style="width: 80px;"/>
+								<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="gz_jssj" min="'$#gz_kssj'" id="gz_jssj" value="" style="width: 80px;"/>
 							</td>
 							<td><input class="cg_input" name="gz_org_name" value="" placeholder="工作单位"  maxlength="33"/></td>
 							<td><input class="cg_input" name="gz_position" value="" placeholder="职位"  maxlength="33"/></td>
@@ -250,9 +250,9 @@
 						<c:forEach var="list" items="${workList}" varStatus="status">
 							<tr id="gzjl_${status.count}">
 								<td>
-									<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'" z-index="100"  name="gz_kssj" id="gz_kssj" value="${list.date_begin}" style="width: 80px;"/>
+									<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'" z-index="100"  name="gz_kssj" max="'$#gz_jssj_${status.count}'" id="gz_kssj_${status.count}" value="${list.date_begin}" style="width: 80px;"/>
 									-
-									<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="gz_jssj" id="gz_jssj" value="${list.date_end}" style="width: 80px;"/>
+									<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="gz_jssj" min="'$#gz_kssj_${status.count}'" id="gz_jssj_${status.count}" value="${list.date_end}" style="width: 80px;"/>
 								</td>
 								<td><input class="cg_input" name="gz_org_name" value="${list.org_name}" placeholder="工作单位" maxlength="33"/></td>
 								<td><input class="cg_input" name="gz_position" value="${list.position}" placeholder="职位"  maxlength="33"/></td>
@@ -286,9 +286,9 @@
 					<tbody>
 						<tr>
 							<td>
-								<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'"  z-index="100"  name="jx_kssj"  id="jx_kssj" value="" style="width: 80px;"/>
+								<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'"  z-index="100"  name="jx_kssj" max="'$#jx_jssj'"  id="jx_kssj" value="" style="width: 80px;"/>
 								-
-								<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="jx_jssj" value="" style="width: 80px;"/>
+								<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="jx_jssj" min="'#jx_kssj'" id="jx_jssj" value="" style="width: 80px;"/>
 							</td>
 							<td><input class="cg_input"  maxlength="33" name="jx_school_name" value="" placeholder="学校名称"/></td>
 							<td><input class="cg_input" maxlength="50" name="jx_subject" value="" placeholder="教学科目"/></td>
@@ -298,9 +298,9 @@
 						<c:forEach var="list" items="${steaList}" varStatus="status">
 							<tr id="jxjz_${status.count}">
 								<td>
-								<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'"  z-index="100"  name="jx_kssj"  id="jx_kssj" value="${list.date_begin}" style="width: 80px;"/>
+								<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'"  z-index="100"  name="jx_kssj" max="'$#jx_jssj_${status.count}'"  id="jx_kssj_${status.count}" value="${list.date_begin}" style="width: 80px;"/>
 								-
-								<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="jx_jssj" value="${list.date_end}" style="width: 80px;"/>
+								<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="jx_jssj" min="'$#jx_kssj_${status.count}'"  id="jx_jssj_${status.count}" value="${list.date_end}" style="width: 80px;"/>
 							</td>
 							<td><input class="cg_input" maxlength="33" name="jx_school_name" value="${list.school_name}" placeholder="学校名称"/></td>
 							<td><input class="cg_input" maxlength="50" name="jx_subject" value="${list.subject}" placeholder="教学科目"/></td>

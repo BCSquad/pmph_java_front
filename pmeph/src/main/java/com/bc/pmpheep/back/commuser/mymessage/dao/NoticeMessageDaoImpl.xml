@@ -24,6 +24,15 @@
 		<if test="startPara!=null">limit #{startPara},8</if>	
 	</select>
 	
+	<!-- 查询系统消息总量 -->
+	<select id="selectSysMessageTotalCount" parameterType="map" resultType="int">
+		SELECT count(*)
+		FROM writer_friend a
+		LEFT JOIN writer_user b
+		ON a.request_id = b.id
+		WHERE a.target_id = #{userId}
+	</select>
+	
 	<!-- 更新申请消息表 -->
 	<update id="updateApplyMessage" parameterType="java.util.Map">
 		update writer_friend set 
@@ -38,8 +47,10 @@
 		<!-- 全部 -->
 		<if test="condition==null||condition==3">
 			select * from(
-			select u.id,u.msg_id as fId,u.title,u.gmt_create as time,u.msg_type as msgType
+			select u.id,u.msg_id as fId,u.title,u.gmt_create as time,u.msg_type as msgType,o.avatar
 			from user_message u
+			LEFT JOIN pmph_user o
+			ON o.id= u.sender_id
 			<trim prefix="WHERE" prefixOverrides="AND|OR">
 				u.receiver_id = #{userId}
 				and msg_type in (0,1)
@@ -48,12 +59,13 @@
 			ORDER BY u.gmt_create DESC)t1
 			UNION
 			select * from(
-				SELECT n.id,n.material_id,n.material_name,n.gmt_create,4
+				SELECT n.id,n.material_id,n.material_name,n.gmt_create,4,n.avatar
 				FROM 
 				(SELECT 
-		        t.*,b.material_name
+		        t.*,b.material_name,p.avatar
 		        FROM cms_content t
 		        LEFT JOIN  material b ON t.material_id =b.id 
+		        LEFT JOIN pmph_user p ON t.author_id= p.id
 		        WHERE  t.category_id=3 
 		        AND t.material_id IS NOT NULL 
 		        AND t.material_id >0
@@ -63,11 +75,12 @@
 		        AND t.is_published=1
 			    UNION
 			    SELECT 
-				t.*,b.material_name
+				t.*,b.material_name,m.avatar
 		        FROM cms_content t
 		        LEFT JOIN  material b ON t.material_id =b.id 
 		        LEFT JOIN material_org u ON b.id=u.material_id
 		        LEFT JOIN writer_user p ON p.org_id=u.org_id
+		        LEFT JOIN pmph_user m ON t.author_id= m.id
 		        WHERE  t.category_id=3
 		        AND t.material_id IS NOT NULL 
 		        AND t.material_id >0
@@ -82,12 +95,13 @@
 		
 		<!-- 公告 -->
 		<if test="condition==4">
-				SELECT n.id,n.material_id as fId,n.material_name as title,n.gmt_create as time,4 as msgType
+				SELECT n.id,n.material_id as fId,n.material_name as title,n.gmt_create as time,4 as msgType,n.avatar
 				FROM 
 				(SELECT 
-		        t.*,b.material_name
+		        t.*,b.material_name,p.avatar
 		        FROM cms_content t
 		        LEFT JOIN  material b ON t.material_id =b.id 
+		        LEFT JOIN pmph_user p ON t.author_id= p.id
 		        WHERE  t.category_id=3 
 		        AND t.material_id IS NOT NULL 
 		        AND t.material_id >0
@@ -97,11 +111,12 @@
 		        AND t.is_published=1
 			    UNION
 			    SELECT 
-				t.*,b.material_name
+				t.*,b.material_name,m.avatar
 		        FROM cms_content t
 		        LEFT JOIN  material b ON t.material_id =b.id 
 		        LEFT JOIN material_org u ON b.id=u.material_id
 		        LEFT JOIN writer_user p ON p.org_id=u.org_id
+		        LEFT JOIN pmph_user m ON t.author_id= m.id
 		        WHERE  t.category_id=3
 		        AND t.material_id IS NOT NULL 
 		        AND t.material_id >0
@@ -114,8 +129,10 @@
 		</if>
 		<!-- 系统消息 -->
 		<if test="condition==0">
-			select u.id,u.msg_id as fId,u.title,u.gmt_create as time,u.msg_type as msgType
+			select u.id,u.msg_id as fId,u.title,u.gmt_create as time,u.msg_type as msgType,o.avatar
 			from user_message u
+			LEFT JOIN pmph_user o
+			ON o.id= u.sender_id
 			<trim prefix="WHERE" prefixOverrides="AND|OR">
 				u.receiver_id = #{userId}
 				and msg_type in (0,1)

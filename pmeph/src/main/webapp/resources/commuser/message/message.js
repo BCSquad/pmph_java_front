@@ -33,7 +33,7 @@ function loadMore(){
 					commonTime = unixTimestamp.toLocaleString();
 					
 					str+= "<tr style='width: 70%'>"+
-		               "<th rowspan='2' class='headPortrait'><img  class ='pictureNotice' src='"+projectName+"/statics/pictures/head.png'></th>"+
+		               "<th rowspan='2' class='headPortrait'><img  class ='pictureNotice' src='"+projectName+"/"+n.avatar+"'></th>"+
 		               "<td class='type1'><span>" ;
 					
 		               if(n.msgType==4){
@@ -64,8 +64,6 @@ function loadMoreApply(){
 	var pathName=window.document.location.pathname;  
 	var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
 	
-	
-	alert($("input[name='condition']") .val());
 		var para = $("#applyPara").val();
 		var startPara;
 		if(""==para){
@@ -80,13 +78,21 @@ function loadMoreApply(){
 			dataType:'json',
 			success:function(json){
 				var list = json;
+				$.each(list,function(i,m){
+					if(i==0){
+						var count = m.count;
+						if(count<=0){
+							$("#loadMoreDiv").hide();
+						}
+					}
+				});
 				$("#applyPara").val(startPara);
 				var str='';
 				$.each(list,function(i,n){
 					var unixTimestamp = new Date(n.gmt_create) ;
 					commonTime = unixTimestamp.toLocaleString();
 					
-					str+="<tr><th rowspan='2' class='headPortrait'><img src='"+projectName+"/statics/pictures/head.png' class='picture' ></th></tr>"+
+					str+="<tr><th rowspan='2' class='headPortrait'><img src='"+projectName+"/"+n.avatar+"' class='picture' ></th></tr>"+
 			        "<tr><td ><span class='apply'>"+n.realname+"申请加我为好友</span><span class='time'>"+commonTime+"</span></td>"+
 			            "<td class='buttonSpan'>";
 						if(n.status==0){

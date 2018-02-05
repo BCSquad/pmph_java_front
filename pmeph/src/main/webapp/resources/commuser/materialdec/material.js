@@ -376,8 +376,8 @@ function add_xxjl(){
 	var num = fnt();
 	var $table = $("#tab_xxjl");
 	var $tr = $("<tr id='xxjl_"+num+"'>"+
-		"<td><input class='cg_input' placeholder='开始时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100'  name='xx_kssj' value='' style='width: 80px;'/>"+
-	"- <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" z-index='100' name='xx_jssj' value='' style='width: 80px;'/></td>"+
+		"<td><input class='cg_input' placeholder='开始时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100' max=\"'$#xx_jssj_"+num+"'\" id='xx_kssj_"+num+"'  name='xx_kssj' value='' style='width: 80px;'/>"+
+	"- <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" z-index='100' min=\"'$#xx_kssj_"+num+"'\" id='xx_jssj_"+num+"' name='xx_jssj' value='' style='width: 80px;'/></td>"+
 	"<td><input class='cg_input' name='xx_school_name' value='' placeholder='学校名称'/></td>"+
 	"<td><input class='cg_input' name='xx_major' value='' placeholder='所学专业'/></td>"+
 	"<td><input class='cg_input' name='xx_degree' value='' style='width: 120px;' placeholder='学历'/></td>"+
@@ -393,8 +393,8 @@ function add_gzjl(){
 	var num = fnt();
 	var $table = $("#tab_gzjl");
 	var $tr = $("<tr id='gzjl_"+num+"'>"+
-		"<td><input class='cg_input' placeholder='开始时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100'  name='gz_kssj' value='' style='width: 80px;'/>"+
-	"- <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" z-index='100' name='gz_jssj' value='' style='width: 80px;'/></td>"+
+		"<td><input class='cg_input' placeholder='开始时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100' max=\"'$#gz_jssj_"+num+"'\" id='gz_kssj_"+num+"'  name='gz_kssj' value='' style='width: 80px;'/>"+
+	"- <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" z-index='100' min=\"'$#gz_kssj_"+num+"'\" id='gz_jssj_"+num+"'  name='gz_jssj' value='' style='width: 80px;'/></td>"+
 	"<td><input class='cg_input' name='gz_org_name' value='' placeholder='工作单位'/></td>"+
 	"<td><input class='cg_input' name='gz_position' value='' placeholder='职位'/></td>"+
 	"<td><input class='cg_input' name='gz_note' value='' style='width: 370px;' placeholder='备注'/></td>"+
@@ -409,8 +409,8 @@ function add_jxjl(){
 	var num = fnt();
 	var $table = $("#tab_jxjz");
 	var $tr = $("<tr id='jxjz_"+num+"'>"+
-		"<td><input class='cg_input' placeholder='开始时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100'  name='jx_kssj' value='' style='width: 80px;'/>"+
-	"- <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" z-index='100' name='jx_jssj' value='' style='width: 80px;'/></td>"+
+		"<td><input class='cg_input' placeholder='开始时间' calendar format=\"'yyyy-mm-dd'\" max=\"'$#jx_jssj_"+num+"'\" id='jx_kssj_"+num+"'   z-index='100'  name='jx_kssj' value='' style='width: 80px;'/>"+
+	"- <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" min=\"'$#jx_kssj_"+num+"'\" id='jx_jssj_"+num+"'  z-index='100' name='jx_jssj' value='' style='width: 80px;'/></td>"+
 	"<td><input class='cg_input' name='jx_school_name' value='' placeholder='学校名称'/></td>"+
 	"<td><input class='cg_input' name='jx_subject' value='' placeholder='教学科目'/></td>"+
 	"<td><input class='cg_input' name='jx_note' value='' style='width: 370px;' placeholder='备注'/></td>"+
@@ -737,6 +737,7 @@ function checkTel(id){
 	if(!/^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/.test(value)){
 		layer.tips('固定电话有误，请重填', '#'+id);
 		$("#"+id)[0].focus();  //聚焦
+		return false;
 		}
 }
 
@@ -746,6 +747,7 @@ function checkHandphone(id){
 	if(!(/^1(3|4|5|7|8)\d{9}$/.test(value))){ 
 		layer.tips('手机号码有误，请重填', '#'+id);
 		$("#"+id)[0].focus();  //聚焦
+		return false;
     } 
 }
 //身份证号码校验
@@ -754,6 +756,7 @@ function checkIdCard(id){
 	if ( !(/(^\d{15}$)|(^\d{17}([0-9]|X)$)/.test(num)) ){
 		layer.tips('身份证号码错误，请重填', '#'+id);
 		$("#"+id)[0].focus();  //聚焦
+		return false;
 	}
 }
 

@@ -30,6 +30,9 @@ public interface NoticeMessageService {
 	void updateNoticeClicks(String cmsId);
 	//查询通知数据总量
 	int selectNoticeMessageTotalCount(Map<String, Object> paraMap);
+	
+	//查询系统消息总量
+	int selectSysMessageTotalCount(Map<String, Object> paraMap);
 
 
 }

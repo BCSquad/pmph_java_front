@@ -3,6 +3,8 @@ package com.bc.pmpheep.back.commuser.homepage.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 
 public interface HomeService {
 
@@ -66,5 +68,17 @@ public interface HomeService {
      * @return
      */
     Map<String, Object> getPageAdInfo(String adName);
-
+    /**
+     * 添加好友
+     * @param request_id 申请人ID
+     * @param target_id 申请对象ID
+     * @return code=OK
+     */
+    String addfriend(String request_id,String target_id);
+    /**
+     * 查询教材社区公告
+     * @param id 登陆人ID
+     * @return list
+     */
+    List<Map<String, Object>> queryMaterial(String id);
 }
