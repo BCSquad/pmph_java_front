@@ -22,68 +22,71 @@ import com.bc.pmpheep.back.commuser.personalcenter.service.BookDeclareService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.general.controller.BaseController;
+
 /**
  * 我要出书-申报
+ * 
  * @author hqf
  * @timer 2017/12/26
  */
 @Controller
 @RequestMapping("/bookdeclare/")
-public class BookDeclareController extends BaseController{
-	
+public class BookDeclareController extends BaseController {
+
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.BookDeclareService")
 	private BookDeclareService bdecService;
-	
+
 	/**
 	 * 跳转到申报页面
+	 * 
 	 * @param request
 	 * @param response
 	 * @return
 	 */
 	@RequestMapping("toBookdeclareAdd")
-	public ModelAndView toBookdeclareAdd(HttpServletRequest request,
-			HttpServletResponse response){
-		ModelAndView mav= new ModelAndView("commuser/personalcenter/toBookdeclareAdd");
-		Map<String,Object> userMap =  this.getUserInfo();
-		Map<String,Object> queryMap = new HashMap<String,Object>();
+	public ModelAndView toBookdeclareAdd(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView("commuser/personalcenter/toBookdeclareAdd");
+		Map<String, Object> userMap = this.getUserInfo();
+		Map<String, Object> queryMap = new HashMap<String, Object>();
 		queryMap.put("user_id", userMap.get("id"));
 		mav.addObject("userMap", userMap);
 		return mav;
 	}
+
 	/**
 	 * 申报添加
 	 */
 	@RequestMapping("doBookdeclareAdd")
 	@ResponseBody
-	public String doBookdeclareAdd(HttpServletRequest request,
-			HttpServletResponse response){
+	public String doBookdeclareAdd(HttpServletRequest request, HttpServletResponse response) {
 		String msg = "";
-		//创建一个唯一标识
+		// 创建一个唯一标识
 		String ssid = UUID.randomUUID().toString().substring(0, 28);
-		String stype = request.getParameter("stype"); //申报信息存储方式
-		//插入银行信息
-		Map<String,Object> BankMap = new HashMap<String,Object>();
+		String stype = request.getParameter("stype"); // 申报信息存储方式
+		// 插入银行信息
+		Map<String, Object> BankMap = new HashMap<String, Object>();
 		BankMap.put("user_id", request.getParameter("user_id"));
 		BankMap.put("account_name", request.getParameter("realname"));
 		BankMap.put("account_number", request.getParameter("account_number"));
 		BankMap.put("bank", request.getParameter("bank"));
 		int bankCount = this.bdecService.insertBank(BankMap);
-		if(bankCount>0){
-			List<Map<String,Object>> BankList = new ArrayList<Map<String,Object>>();
+		if (bankCount > 0) {
+			List<Map<String, Object>> BankList = new ArrayList<Map<String, Object>>();
 			BankList = this.bdecService.queryBank(BankMap);
 			String bankid = "";
-			if(BankList.size()>0){
+			if (BankList.size() > 0) {
 				bankid = BankList.get(0).get("id").toString();
 			}
-			//获取申报信息
-			Map<String,Object> topicMap = new HashMap<String,Object>();
-			if(stype.equals("1")){ //表示提交
+			// 获取申报信息
+			Map<String, Object> topicMap = new HashMap<String, Object>();
+			if (stype.equals("1")) { // 表示提交
 				topicMap.put("is_staging", "0");
 				topicMap.put("auth_progress", "1");
-			}else{//2 表示暂存
-				topicMap.put("is_staging","1");
-				topicMap.put("auth_progress","0");
+				topicMap.put("is_opts_handling", "1");
+			} else {// 2 表示暂存
+				topicMap.put("is_staging", "1");
+				topicMap.put("auth_progress", "0");
 			}
 			topicMap.put("bookname", request.getParameter("bookname"));
 			topicMap.put("reader", request.getParameter("reader"));
@@ -99,36 +102,36 @@ public class BookDeclareController extends BaseController{
 			topicMap.put("purchase", request.getParameter("purchase"));
 			topicMap.put("sponsorship", request.getParameter("sponsorship"));
 			topicMap.put("original_bookname", request.getParameter("original_bookname"));
-			//判断是否为翻译书稿，若有值则表示为翻译书籍
-			if(request.getParameter("original_bookname").toString().equals("")){
-				topicMap.put("is_translation","0"); //表示原作
-			}else{
-				topicMap.put("is_translation","1"); //表示翻作
+			// 判断是否为翻译书稿，若有值则表示为翻译书籍
+			if (request.getParameter("original_bookname").toString().equals("")) {
+				topicMap.put("is_translation", "0"); // 表示原作
+			} else {
+				topicMap.put("is_translation", "1"); // 表示翻作
 			}
 			topicMap.put("original_author", request.getParameter("original_author"));
 			topicMap.put("nation", request.getParameter("nation"));
 			topicMap.put("edition", request.getParameter("edition"));
-			topicMap.put("vn",ssid);
+			topicMap.put("vn", ssid);
 			int count = this.bdecService.insertTopic(topicMap);
-			if(count>0){
-				Map<String,Object> topicLsit = this.bdecService.queryTopic(topicMap);
+			if (count > 0) {
+				Map<String, Object> topicLsit = this.bdecService.queryTopic(topicMap);
 				String topic_id = topicLsit.get("id").toString();
-				//选题申报额外信息topic_extra
-				Map<String,Object> extraMap = new HashMap<String,Object>();
+				// 选题申报额外信息topic_extra
+				Map<String, Object> extraMap = new HashMap<String, Object>();
 				extraMap.put("reason", request.getParameter("reason"));
 				extraMap.put("price", request.getParameter("price"));
 				extraMap.put("score", request.getParameter("extra_score"));
 				extraMap.put("topic_id", topic_id);
 				this.bdecService.insertTopicExtra(extraMap);
-				//申报编者情况
+				// 申报编者情况
 				String[] realnames = request.getParameterValues("write_realname");
 				String[] sexs = request.getParameterValues("sex");
 				String[] prices = request.getParameterValues("write_price");
 				String[] positions = request.getParameterValues("write_position");
 				String[] workplaces = request.getParameterValues("workplace");
-				for(int i=0;i<realnames.length;i++) { //遍历数组
-					if(!realnames[i].equals("")){
-						Map<String,Object> writeMap = new HashMap<String,Object>();
+				for (int i = 0; i < realnames.length; i++) { // 遍历数组
+					if (!realnames[i].equals("")) {
+						Map<String, Object> writeMap = new HashMap<String, Object>();
 						writeMap.put("topic_id", topic_id);
 						writeMap.put("realname", realnames[i]);
 						writeMap.put("sex", sexs[i]);
@@ -140,56 +143,54 @@ public class BookDeclareController extends BaseController{
 				}
 				msg = "OK";
 			}
-		}	
+		}
 		return msg;
 	}
-	
+
 	/**
 	 * 跳转到暂存页面
 	 */
 	@RequestMapping("toBookdeclareZc")
-	public ModelAndView toBookdeclareZc(HttpServletRequest request,
-			HttpServletResponse response){
-		ModelAndView mav= new ModelAndView("commuser/personalcenter/toBookdeclareZc");
-		Map<String,Object> queryMap = new HashMap<String,Object>();
+	public ModelAndView toBookdeclareZc(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView("commuser/personalcenter/toBookdeclareZc");
+		Map<String, Object> queryMap = new HashMap<String, Object>();
 		queryMap.put("topic_id", request.getParameter("topic_id"));
-		Map<String,Object> topicMap = this.bdecService.queryTopic(queryMap);
+		Map<String, Object> topicMap = this.bdecService.queryTopic(queryMap);
 		queryMap.put("bank_account_id", topicMap.get("bank_account_id"));
-		Map<String,Object> textraMap = this.bdecService.queryTopicExtra(queryMap);
-		List<Map<String,Object>> twriteList = this.bdecService.queryTopicWriter(queryMap);
-		List<Map<String,Object>> BankList = this.bdecService.queryBank(queryMap);
-		
-		if(BankList.size()>0){
+		Map<String, Object> textraMap = this.bdecService.queryTopicExtra(queryMap);
+		List<Map<String, Object>> twriteList = this.bdecService.queryTopicWriter(queryMap);
+		List<Map<String, Object>> BankList = this.bdecService.queryBank(queryMap);
+
+		if (BankList.size() > 0) {
 			mav.addObject("BankMap", BankList.get(0));
 		}
 		mav.addObject("topicMap", topicMap);
 		mav.addObject("textraMap", textraMap);
 		mav.addObject("twriteList", twriteList);
 		mav.addObject("twriteCount", twriteList.size());
-		
+
 		return mav;
 	}
-	
+
 	/**
 	 * 修改保存
 	 */
 	@RequestMapping("doBookdeclareZc")
 	@ResponseBody
-	public String doBookdeclareZc(HttpServletRequest request,
-			HttpServletResponse response){
-		String topic_id = request.getParameter("topic_id"); //主键id
-		String stype = request.getParameter("stype"); //申报信息存储方式
-		//获取申报信息
-		Map<String,Object> topicMap = new HashMap<String,Object>();
+	public String doBookdeclareZc(HttpServletRequest request, HttpServletResponse response) {
+		String topic_id = request.getParameter("topic_id"); // 主键id
+		String stype = request.getParameter("stype"); // 申报信息存储方式
+		// 获取申报信息
+		Map<String, Object> topicMap = new HashMap<String, Object>();
 		String msg = "";
-		if(stype.equals("1")){ //表示提交
+		if (stype.equals("1")) { // 表示提交
 			topicMap.put("is_staging", "0");
 			topicMap.put("auth_progress", "1");
-		}else{//2 表示暂存
-			topicMap.put("is_staging","1");
-			topicMap.put("auth_progress","0");
+		} else {// 2 表示暂存
+			topicMap.put("is_staging", "1");
+			topicMap.put("auth_progress", "0");
 		}
-		topicMap.put("topic_id",topic_id);
+		topicMap.put("topic_id", topic_id);
 		topicMap.put("bookname", request.getParameter("bookname"));
 		topicMap.put("reader", request.getParameter("reader"));
 		topicMap.put("user_id", request.getParameter("user_id"));
@@ -204,35 +205,35 @@ public class BookDeclareController extends BaseController{
 		topicMap.put("purchase", request.getParameter("purchase"));
 		topicMap.put("sponsorship", request.getParameter("sponsorship"));
 		topicMap.put("original_bookname", request.getParameter("original_bookname"));
-		//判断是否为翻译书稿，若有值则表示为翻译书籍
-		if(request.getParameter("original_bookname").toString().equals("")){
-			topicMap.put("is_translation","0"); //表示原作
-		}else{
-			topicMap.put("is_translation","1"); //表示翻作
+		// 判断是否为翻译书稿，若有值则表示为翻译书籍
+		if (request.getParameter("original_bookname").toString().equals("")) {
+			topicMap.put("is_translation", "0"); // 表示原作
+		} else {
+			topicMap.put("is_translation", "1"); // 表示翻作
 		}
 		topicMap.put("original_author", request.getParameter("original_author"));
 		topicMap.put("nation", request.getParameter("nation"));
 		topicMap.put("edition", request.getParameter("edition"));
 		int count = this.bdecService.updateTopic(topicMap);
-		if(count>0){
-			//修改选题申报额外信息topic_extra
-			Map<String,Object> extraMap = new HashMap<String,Object>();
+		if (count > 0) {
+			// 修改选题申报额外信息topic_extra
+			Map<String, Object> extraMap = new HashMap<String, Object>();
 			extraMap.put("extra_id", request.getParameter("extra_id"));
 			extraMap.put("reason", request.getParameter("reason"));
 			extraMap.put("price", request.getParameter("price"));
 			extraMap.put("score", request.getParameter("extra_score"));
 			extraMap.put("topic_id", topic_id);
 			this.bdecService.updateTopicExtra(extraMap);
-			//申报编者情况
+			// 申报编者情况
 			this.bdecService.delTopicWriter(topic_id);
 			String[] realnames = request.getParameterValues("write_realname");
 			String[] sexs = request.getParameterValues("sex");
 			String[] prices = request.getParameterValues("write_price");
 			String[] positions = request.getParameterValues("write_position");
 			String[] workplaces = request.getParameterValues("workplace");
-			for(int i=0;i<realnames.length;i++) { //遍历数组
-				if(!realnames[i].equals("")){
-					Map<String,Object> writeMap = new HashMap<String,Object>();
+			for (int i = 0; i < realnames.length; i++) { // 遍历数组
+				if (!realnames[i].equals("")) {
+					Map<String, Object> writeMap = new HashMap<String, Object>();
 					writeMap.put("topic_id", topic_id);
 					writeMap.put("realname", realnames[i]);
 					writeMap.put("sex", sexs[i]);
@@ -243,39 +244,37 @@ public class BookDeclareController extends BaseController{
 					msg = "OK";
 				}
 			}
-			//银行信息更改
-			Map<String,Object> bankMap = new HashMap<String,Object>();
+			// 银行信息更改
+			Map<String, Object> bankMap = new HashMap<String, Object>();
 			bankMap.put("bank_account_id", request.getParameter("bank_account_id"));
 			bankMap.put("account_number", request.getParameter("account_number"));
 			bankMap.put("bank", request.getParameter("bank"));
 		}
 		return msg;
 	}
-	
+
 	/**
 	 * 详情
 	 */
 	@RequestMapping("toBookdeclareDetail")
-	public ModelAndView toBookdeclareDetail(HttpServletRequest request,
-			HttpServletResponse response){
-		ModelAndView mav= new ModelAndView("commuser/personalcenter/toBookdeclareDetail");
-		Map<String,Object> queryMap = new HashMap<String,Object>();
+	public ModelAndView toBookdeclareDetail(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView("commuser/personalcenter/toBookdeclareDetail");
+		Map<String, Object> queryMap = new HashMap<String, Object>();
 		queryMap.put("topic_id", request.getParameter("topic_id"));
-		Map<String,Object> topicMap = this.bdecService.queryTopic(queryMap);
-		Map<String,Object> textraMap = this.bdecService.queryTopicExtra(queryMap);
-		List<Map<String,Object>> twriteList = this.bdecService.queryTopicWriter(queryMap);
-		//查询银行信息
+		Map<String, Object> topicMap = this.bdecService.queryTopic(queryMap);
+		Map<String, Object> textraMap = this.bdecService.queryTopicExtra(queryMap);
+		List<Map<String, Object>> twriteList = this.bdecService.queryTopicWriter(queryMap);
+		// 查询银行信息
 		queryMap.put("bank_account_id", topicMap.get("bank_account_id"));
-		List<Map<String,Object>> BankList = this.bdecService.queryBank(queryMap);
-		
-		if(BankList.size()>0){
+		List<Map<String, Object>> BankList = this.bdecService.queryBank(queryMap);
+
+		if (BankList.size() > 0) {
 			mav.addObject("BankMap", BankList.get(0));
 		}
-		
+
 		mav.addObject("topicMap", topicMap);
 		mav.addObject("textraMap", textraMap);
 		mav.addObject("twriteList", twriteList);
 		return mav;
 	}
 }
-	
