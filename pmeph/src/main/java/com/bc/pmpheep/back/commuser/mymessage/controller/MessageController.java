@@ -3,6 +3,9 @@ package com.bc.pmpheep.back.commuser.mymessage.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.bc.pmpheep.general.controller.BaseController;
@@ -55,8 +58,21 @@ public class MessageController extends BaseController{
 		paraMap.put("condition",condition);
 		paraMap.put("userId",userId);
 		paraMap.put("addPara",addPara);
-		
+		//数据列表
 		List<Map<String,Object>> list = noticeMessageService.selectApplyMessage(paraMap);
+		//不带分页的数据总量
+		int count = noticeMessageService.selectSysMessageTotalCount(paraMap);
+		//处理消息发送者头像
+		for(Map<String,Object> map1:list){
+			
+			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
+				map1.put("avatar", "statics/pictures/head.png");
+			}else{
+				map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
+			}
+		}
+		
+		mv.addObject("count",count-list.size());
 		mv.addObject("list",list);
 		mv.addObject("listSize",list.size());
 		mv.addObject("condition",condition);
@@ -92,6 +108,27 @@ public class MessageController extends BaseController{
 		paraMap.put("userId",userId);
 		
 		List<Map<String,Object>> list = noticeMessageService.selectApplyMessage(paraMap);
+		//不带分页的数据总量
+		int count = noticeMessageService.selectSysMessageTotalCount(paraMap);
+		//处理消息发送者头像
+		for(Map<String,Object> map1:list){
+			
+			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
+				map1.put("avatar", "statics/pictures/head.png");
+			}else{
+				map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
+			}
+		}
+		
+		//控制显示“加载更多”
+		if(list.size()>0){
+			for(int i = 0;i<=list.size();i++){
+				if(i==0){
+					list.get(0).put("count", count-(list.size()+startPara));
+				}
+				
+			}
+		}
 		return list;
 	}
 	
@@ -139,16 +176,32 @@ public class MessageController extends BaseController{
 		paraMap.put("startPara",0);
 		List<Map<String,Object>> list = noticeMessageService.selectNoticeMessage(paraMap);
 		for(int i =0;i<list.size();i++){
-			Map<String,Object> map1 = list.get(i); 
+			Map<String,Object> map1 = list.get(i);
+			//处理系统消息 消息内容
 			if(map1.get("msgType").toString().equals("1")||map1.get("msgType").toString().equals("0")){
-				Content content = contentService.get(map1.get("fId").toString());
-				if(null!=content){
-					map1.put("title",content.getContent());
+				//mongoDB查询通知内容
+				Message message = mssageService.get(map1.get("fId").toString());
+				//Content content = contentService.get(map1.get("fId").toString());
+				if(null!=message){
+					String str=message.getContent();
+					String regEx_html="<[^>]+>"; //定义HTML标签的正则表达式 
+					Pattern p_html=Pattern.compile(regEx_html,Pattern.CASE_INSENSITIVE); 
+			        Matcher m_html=p_html.matcher(str); 
+			        str=m_html.replaceAll(""); //过滤html标签 
+					map1.put("title",str);
 				}else{
 					map1.put("title","内容空!");
 				}
 				
 			}
+			
+			//处理消息发送者头像
+			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
+				map1.put("avatar", "statics/pictures/head.png");
+			}else{
+				map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
+			}
+			
 			
 		}
 		//不带分页的数据总量
@@ -199,6 +252,13 @@ public class MessageController extends BaseController{
 				}
 				
 			}
+			
+			//处理消息发送者头像
+			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
+				map1.put("avatar", "statics/pictures/head.png");
+			}else{
+				map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
+			}
 		}
 		//不带分页的数据总量
 		int count = noticeMessageService.selectNoticeMessageTotalCount(paraMap);
@@ -243,6 +303,7 @@ public class MessageController extends BaseController{
 	public ModelAndView toNoticeMessageDetail(HttpServletRequest request){
 		String materialId=request.getParameter("materialId");
 		String cmsId=request.getParameter("cmsId");
+		String flag=request.getParameter("flag");
 		ModelAndView mv = new ModelAndView();
 		Map<String,Object> paraMap = new HashMap<String,Object>();
 		paraMap.put("materialId", materialId);
@@ -278,9 +339,6 @@ public class MessageController extends BaseController{
 		message.setId("5a15c32dc5482247f0b8dca2");
 		mssageService.add(message);*/
 		
-		//mongoDB查询通知内容
-		//Message message = mssageService.get("5a68260c2d85aa4450c15ba5");
-		
 		Content content = contentService.get(mapTitle.get("mongoId").toString());
 		if(null!=content){
 			mv.addObject("content",content.getContent());
@@ -291,7 +349,7 @@ public class MessageController extends BaseController{
 		
 		
 		//mv.addObject("message",message);
-		//mv.addObject("x",messageId);
+		mv.addObject("flag",flag);
 		
 		mv.setViewName("commuser/message/noticeMessageDetail");
 		return mv;

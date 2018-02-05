@@ -102,11 +102,15 @@
 		        </div>
 		        </c:if>
 		        </div>
-		
+				<c:if test="${flag!='homepage'}">
 		        <div class="registerDiv"  >
 		            <span class="button" onclick="register(${materialId})">报名参加</span>
 		        </div>
-        	
+        		</c:if>
+				<c:if test="${flag=='homepage'}">
+		        <div class="registerDiv"  >
+		        </div>
+        		</c:if>
         	</c:otherwise>
         </c:choose>
         

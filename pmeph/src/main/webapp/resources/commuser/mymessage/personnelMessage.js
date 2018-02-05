@@ -101,6 +101,7 @@ $(function() {
 	        			
 	        			$("#dialogue").append(html);
 	        			content+=html;
+	        			$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);  
 	        		});
 	        		
 	        		addhtml=content;

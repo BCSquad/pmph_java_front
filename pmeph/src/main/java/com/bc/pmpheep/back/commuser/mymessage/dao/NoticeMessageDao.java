@@ -61,6 +61,9 @@ public interface NoticeMessageDao {
 	int selectNoticeMessageSysCount(Map<String, Object> paraMap);
 	//公告数量
 	int selectNoticeMessageCount(Map<String, Object> paraMap);
+	
+	//查询系统消息总量
+	int selectSysMessageTotalCount(Map<String, Object> paraMap);
 
 	
 	
