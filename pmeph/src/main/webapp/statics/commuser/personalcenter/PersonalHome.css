@@ -462,16 +462,49 @@ color:#FFF;
 
 #wdsbssk {
     border: 1px solid #81b8bd;
+    border-radius: 4px 0px 0px 4px;
+    border-right: none;
     font-size: 12px;
     color: #81b8bd;
     height: 26px;
     width: 208px;
-    background-image: url(../../image/sousuo-helpCenter.png);
-    background-repeat: no-repeat;
-    background-position: 212px;
+    
     float: right;
     padding-left: 5px;
-    padding-right: 30px;
+    /* padding-right: 30px; */
+}
+
+#btn_wdsbssk_div{
+	    border: 1px solid #81b8bd;
+    border-left: none;
+    border-radius: 0px 4px 4px 0px;
+    width: 30px;
+    height: 28px;
+    margin: 0px;
+    padding: 0px;
+    float: right;
+    overflow: hidden;
+    position: relative;
+}
+
+#btn_wdsbssk{
+	margin: 0px;
+    padding: 0px;
+    height: 106%;
+    width: 106%;
+    position: relative;
+    left: 0%;
+    top: -3%;
+    cursor: pointer;
+}
+
+#btn_wdsbssk div{
+	margin: 0px;
+    background-image: url(../../image/sousuo-helpCenter.png);
+    background-repeat: no-repeat;
+    background-position: 3px 3px;
+    height: 100%;
+    width: 100%;
 }
 
 #wdsbssk.wdsbssk{

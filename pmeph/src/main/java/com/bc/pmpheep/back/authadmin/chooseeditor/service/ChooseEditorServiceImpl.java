@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.authadmin.chooseeditor.service;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 
 import java.util.List;
@@ -112,6 +113,13 @@ public class ChooseEditorServiceImpl implements ChooseEditorService {
 			resultMap.put("msg", "保存失败！");
 		}
 		return resultMap;
+	}
+
+	@Override
+	public Boolean isFirstEditorLogIn(BigInteger logUserId, String textBookId) {
+		Integer id = chooseEditorDao.isFirstEditorLogIn(logUserId,textBookId);
+		Boolean result = id!=null;
+		return result;
 	}
 
 	

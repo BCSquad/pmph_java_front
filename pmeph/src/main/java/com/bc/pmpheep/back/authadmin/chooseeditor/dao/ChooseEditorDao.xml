@@ -142,7 +142,16 @@
 			</where>
 	</select>
 
-
+	<select id="isFirstEditorLogIn" resultType="Integer" >
+		select dpp.id from 
+		dec_position_published dpp
+		inner join declaration d on d.id = dpp.declaration_id
+		where 
+		textbook_id= #{textBookId}
+		and d.user_id = #{logUserId}
+		and dpp.preset_position in (4,12)
+		and dpp.rank = 1
+	</select>
 
 
 	<select id="queryTextBookById" parameterType="String" resultType="Map">

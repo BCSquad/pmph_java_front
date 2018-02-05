@@ -189,6 +189,14 @@ public interface PersonalService {
 	 */
 	public Map<String, Object> queryUserById(String userId);
 
+	/**
+	 * 查询两人除拒绝（1）外最亲密的好友关系（0申请，2接收 取max）
+	 * @param userId
+	 * @param logUserId
+	 * @return
+	 */
+	public Map<String, Object> queryOurFriendShip(String userId,String logUserId);
+
 	
 	
 	

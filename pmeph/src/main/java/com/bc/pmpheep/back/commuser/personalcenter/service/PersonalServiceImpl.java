@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.personalcenter.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,6 +75,29 @@ public class PersonalServiceImpl implements PersonalService {
 			PageParameter<Map<String, Object>> pageParameter) {
 		// 查询我的教材申报最新信息
 		List<Map<String, Object>> list7 = personaldao.ListAllBookJoin(pageParameter);
+		
+		for (Map<String, Object> m : list7) {
+			List<Map<String,Object>> textbook_list = new ArrayList<Map<String,Object>>();
+			String textbook_list_str = (String) m.get("textbook_list_str");
+			String[] textbook_arr = textbook_list_str.split("_,_");
+			if (!"".equals(textbook_list_str)) {
+				for (int i = 0; i < textbook_arr.length; i++) {
+					Map<String,Object> textbook = new HashMap<String,Object>();
+					String tb = textbook_arr[i];
+					textbook.put("id", tb.split("_/_")[0]);
+					textbook.put("textbook_name", tb.split("_/_")[1]);
+					textbook.put("is_locked", tb.split("_/_")[2]);
+					textbook_list.add(textbook);
+				}
+			}
+			
+			
+			m.put("textbook_list", textbook_list);
+			
+		}
+		
+		
+		
 		return list7;
 	}
 
@@ -335,6 +359,13 @@ public class PersonalServiceImpl implements PersonalService {
 		public Map<String, Object> queryUserById(String userId) {
 			Map<String, Object> result_map = personaldao.queryUserById(userId);
 			return result_map;
+		}
+
+		@Override
+		public Map<String, Object> queryOurFriendShip(String userId,String logUserId) {
+			Map<String,Object> friendShip = new HashMap<String,Object>();
+			//friendShip.putAll(personaldao.queryOurFriendShip(userId,logUserId));
+			return friendShip;
 		}
 
 

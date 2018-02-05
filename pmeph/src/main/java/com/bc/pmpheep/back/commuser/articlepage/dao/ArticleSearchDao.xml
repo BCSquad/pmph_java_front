@@ -31,13 +31,14 @@
 					)
 				</foreach>
 			</if>
+			group by t.id
 		    limit ${start},${pageSize}
 </select>
 
 <!-- 查询文章总数 20180129改 代替以下其他查询 -->
 <select id="queryArticleByAdiCount"  parameterType="PageParameter" resultType="Integer">
 		select 
-		    count(t.id)
+		    count(distinct t.id)
 		     from cms_content t
 		    left join writer_user b on t.author_id=b.id
 		    left join cms_user_like a on a.content_id=t.id

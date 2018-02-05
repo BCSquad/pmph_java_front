@@ -39,6 +39,7 @@ String contextpath=request.getContextPath();
 <input type="hidden" id="selectedIds" value="${selectedIds }">
 <input type="hidden" id="selectedNumIds" value="${selectedNumIds}">
 <input type="hidden" id="is_locked" value="${is_locked }">
+<input type="hidden" id="isFirstEditorLogIn" value="${isFirstEditorLogIn }">
 
 
 

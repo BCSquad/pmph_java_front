@@ -20,70 +20,73 @@
 </ul>
 <div class="listContent">
 	#foreach($c in $!{List_map})
-		<div class="book_correct_unit">
-			<div class="unit_left">
-				<div class="img_box">
-					#if(!$c.image_url || $c.image_url == "DEFAULT")
-			        	<img src="$!{contextpath}statics/image/564f34b00cf2b738819e9c35_122x122!.jpg">
-			        #else
-			        	<img src="$!{c.image_url}">
-			        #end
+		
+			<div class="book_correct_unit">
+				<div class="unit_left">
+					<div class="img_box">
+						#if(!$c.image_url || $c.image_url == "DEFAULT")
+				        	<img src="$!{contextpath}statics/image/564f34b00cf2b738819e9c35_122x122!.jpg">
+				        #else
+				        	<img src="$!{c.image_url}">
+				        #end
+					</div>
+					<div class="text_box">
+						<div>
+						作者：$!{c.author}
+						</div>
+						<div>
+						版次：$!{c.revision}
+						</div>
+					</div>
 				</div>
-				<div class="text_box">
-					<div>
-					作者：$!{c.author}
-					</div>
-					<div>
-					版次：$!{c.revision}
-					</div>
-				</div>
-			</div>
-			<div class="unit_right">
-			
-				<form id="form$!{c.id}">
-					<div class="title_line">
-						<a target="_blank" href="$!{contextpath}readdetail/todetail.action?id=$!{c.book_id}"><span class="bookname">$!{c.bookname}</span></a>
-						<span class="isbn">$!{c.isbn}</span>
-					</div>
-					
-					#foreach($o in $!{c.correctionList})
-						#if($velocityCount != 1) <span class="correction_between_line"></span> #end   
-						<div class="position_line">
-	    					<span>纠错信息：$!{o.page}页码
-	    						#if(!$!{o.is_editor_replied} && !$!{o.is_author_replied} )
-	    							<span class="myCorrectStatus toReply">未审核</span>
-	    						#elseif(!$!{o.is_editor_replied} && $!{o.is_author_replied} )
-	    							<span class="myCorrectStatus isReplying">审核中</span>
-	    						#elseif($!{o.result})
-	    							<span class="myCorrectStatus yes">审核通过</span>
-	    						#elseif(!$!{o.result})
-	    							<span class="myCorrectStatus no">审核未通过</span>
-	    						#end
-	    					</span>
-	    					<span class="line_span">$!{o.line}行</span>
+				<div class="unit_right">
+				
+					<form id="form$!{c.id}">
+						<div class="title_line">
+							<a target="_blank" href="$!{contextpath}readdetail/todetail.action?id=$!{c.book_id}"><span class="bookname">$!{c.bookname}</span></a>
+							<span class="isbn">$!{c.isbn}</span>
 						</div>
-						<div class="content_line">
-							<span>纠错内容：</span>
-							<span>$!{o.content}</span>
-						</div>
-						<div >
-							#if($!{o.attachment} && $!{o.attachment} != "")
-								附件：<a class="download-tag" onclick="downLoadProxy('$!{o.attachment}')">$!{o.attachment_name}-点击下载</a>
-							#else
-								附件：--
-							#end
-						</div>
-						#if($!{o.is_editor_replied})
-							<div class="">
-								<span>编辑回复：</span>
-								<span>$!{o.editor_reply}</span>
-							</div>
+						
+						#foreach($o in $!{c.correctionList})
+							
+								#if($velocityCount != 1) <span class="correction_between_line"></span> #end   
+								<div class="position_line">
+			    					<span>纠错信息：$!{o.page}页码
+			    						#if(!$!{o.is_editor_replied} && !$!{o.is_author_replied} )
+			    							<span class="myCorrectStatus toReply">未审核</span>
+			    						#elseif(!$!{o.is_editor_replied} && $!{o.is_author_replied} )
+			    							<span class="myCorrectStatus isReplying">审核中</span>
+			    						#elseif($!{o.result})
+			    							<span class="myCorrectStatus yes">审核通过</span>
+			    						#elseif(!$!{o.result})
+			    							<span class="myCorrectStatus no">审核未通过</span>
+			    						#end
+			    					</span>
+			    					<span class="line_span">$!{o.line}行</span>
+								</div>
+								<div class="content_line">
+									<span>纠错内容：</span>
+									<span>$!{o.content}</span>
+								</div>
+								<div >
+									#if($!{o.attachment} && $!{o.attachment} != "")
+										附件：<a class="download-tag" onclick="downLoadProxy('$!{o.attachment}')">$!{o.attachment_name}-点击下载</a>
+									#else
+										附件：--
+									#end
+								</div>
+								#if($!{o.is_editor_replied})
+									<div class="">
+										<span>编辑回复：</span>
+										<span>$!{o.editor_reply}</span>
+									</div>
+								#end
+							
 						#end
-					#end
-				</form>
+					</form>
+				</div>
 			</div>
-		</div>
 	
-	
+		
 	#end
 </div>
