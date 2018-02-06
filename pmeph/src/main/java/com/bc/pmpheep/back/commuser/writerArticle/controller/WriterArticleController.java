@@ -2,6 +2,7 @@ package com.bc.pmpheep.back.commuser.writerArticle.controller;
 
 import java.math.BigInteger;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +26,7 @@ import com.bc.pmpheep.general.pojo.Message;
 import com.bc.pmpheep.general.service.ContentService;
 import com.bc.pmpheep.general.service.FileService;
 import com.bc.pmpheep.general.service.MessageService;
+import com.bc.pmpheep.general.service.SensitiveService;
 @RequestMapping("/writerArticle")
 @Controller
 public class WriterArticleController extends BaseController{
@@ -33,6 +35,9 @@ public class WriterArticleController extends BaseController{
 	@Autowired
     @Qualifier("com.bc.pmpheep.general.service.FileService")
     FileService fileService;
+	@Autowired
+	@Qualifier("com.bc.pmpheep.general.service.SensitiveService")
+	SensitiveService sensitiveService;
 	
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.writerArticle.service.WriterArticleServiceImpl")
@@ -115,6 +120,13 @@ public class WriterArticleController extends BaseController{
 			resultMap.put("UEContent",UEContent);
 			return resultMap;
 		}
+		if (sensitiveService.confirmSensitive(titleValue) || sensitiveService.confirmSensitive(UEContent)){
+			List<String> sensitives = sensitiveService.getSensitives(titleValue, UEContent);
+			resultMap.put("flag", "4");
+			resultMap.put("value", sensitives);
+			resultMap.put("UEContent", sensitiveService.delHTMLTag(UEContent));
+			return resultMap;
+		}
 		//List list= new ArrayList();
 		try {
 			    int is_staging = "0".equals(btnType)?0:1;  //是否暂存  1 暂存  0不暂存 提交
@@ -159,6 +171,14 @@ public class WriterArticleController extends BaseController{
 		
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		String  flag="0";
+		if (sensitiveService.confirmSensitive(titleValue) || sensitiveService.confirmSensitive(UEContent)){
+			flag = "4";
+			List<String> sensitives = sensitiveService.getSensitives(titleValue, UEContent);
+			resultMap.put("flag", flag);
+			resultMap.put("value", sensitives);
+			resultMap.put("UEContent", sensitiveService.delHTMLTag(UEContent));
+			return resultMap;
+		}
 		Map<String, Object> user = this.getUserInfo();
 		BigInteger uid = (BigInteger) user.get("id");//用户的id
 		try {
