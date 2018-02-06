@@ -320,6 +320,17 @@ function insert() {
             if (json.returncode == "OK") {
                 $("#content_book").val(null);
                 window.message.success("评论成功");
+            } else if (json.returncode == "error"){
+            	var words = json.value;
+            	var content = document.getElementById("content_book");
+            	var contentValue = $("#content_book").val();
+            	for (var i = 0 ; i < words.length; i++){
+            		if (contentValue.indexOf(words[i]) > -1){
+            			content.style.border = '3px solid red';
+            			window.message.error("图书评论中含有敏感词,请修改后再保存或提交");
+            			return;
+            		}
+            	}
             }
         }
     });
@@ -535,5 +546,10 @@ function LengthLimit(obj,ml){
 	}
 }
 
-
+$(function(){
+	$("#content_book").focus(function(){
+		  $("#content_book").css("border","none");
+		});
+	
+});
 
