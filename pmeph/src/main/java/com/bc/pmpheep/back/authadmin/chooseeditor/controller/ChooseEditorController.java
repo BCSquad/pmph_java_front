@@ -141,6 +141,7 @@ public class ChooseEditorController extends BaseController {
 		String queryOrg = request.getParameter("queryOrg");
 		String textBookId = request.getParameter("textBookId");
 		String isFirstEditorLogIn = request.getParameter("isFirstEditorLogIn");
+		String is_digital_editor_optional = request.getParameter("is_digital_editor_optional");
 		
 		
 		//查询条件封装入pageParameter的parameter
@@ -165,6 +166,7 @@ public class ChooseEditorController extends BaseController {
 		vm_map.put("List_map", List_map);
 		vm_map.put("startNum", pageParameter.getStart()+1);
 		vm_map.put("isFirstEditorLogIn", isFirstEditorLogIn);
+		vm_map.put("is_digital_editor_optional", is_digital_editor_optional);
 		
 		//vm_map.put("contextpath", contextpath);
 		String html ="";
