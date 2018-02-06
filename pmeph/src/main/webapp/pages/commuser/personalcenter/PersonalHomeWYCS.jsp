@@ -90,6 +90,20 @@ request.setAttribute("currentTime",datetime);
                     <br/>
                     <span id="grqm"><c:if test="${permap.signature == null}">暂无个性签名</c:if>${permap.signature}</span>
                 </div>
+                <c:choose>
+                	<c:when test="${selfLog == false && friendShip.status == -1 }">
+                		<button class="btn_addFriend add" title="申请加为好友！" onclick="addFriendfun(${friendShip.logUserId},'${permap.realname}',0)">加好友</button>
+                	</c:when>
+                	<c:when test="${selfLog == false && friendShip.status == 0 && friendShip.hasRequest==1}">
+                		<button class="btn_addFriend hasRequest" title="已申请加为好友，请等待对方同意。">加好友</button>
+                	</c:when>
+                	<c:when test="${selfLog == false && friendShip.status == 0 && friendShip.isBeenRequest==1}">
+                		<button class="btn_addFriend isBeenRequest" title="对方也想加您为好友，点击马上成为好友！" onclick="addFriendfun(${friendShip.logUserId},'${permap.realname}',2)">加好友</button>
+                	</c:when>
+                	<c:when test="${selfLog == false && friendShip.status == 2 }">
+                		<button class="btn_addFriend isFriend" title="已是您的好友！">好友</button>
+                	</c:when>
+                </c:choose>
                 <br/>
                 <c:if test="${permap.rank==0}"><span id="zjrz"></span><span class="grsx">普通用户</span></c:if>
                 <c:if test="${permap.rank==1}"><span id="zjrz"></span><span class="grsx">教师用户</span></c:if>
@@ -98,6 +112,10 @@ request.setAttribute("currentTime",datetime);
                 <c:if test="${selfLog == true}">
                 	<a href="<c:url value="/userinfo/touser.action"/>"><span id="zhsz"></span><span class="grsx">账户设置</span></a>
                 </c:if>
+                
+                
+                
+                
                 
                 
             </div>
@@ -123,9 +141,9 @@ request.setAttribute("currentTime",datetime);
                     <c:if test="${selfLog == true }">
                     	<li id="wycs" class="dtl pagetag"><a class="aher paged"  >我要出书</a></li>
                     </c:if>
-					<li id="wdjc" class="dtl pagetag"><a class="aher paged" >我的纠错</a></li>
-                    <li id="wdpl" class="dtl pagetag"><a class="aher paged" >我的评论</a></li>
-                    <li id="wdwj" class="dtl pagetag"><a class="aher paged" >我的问卷</a></li>
+					<li id="wdjc" class="dtl pagetag"><a class="aher paged" >个人纠错</a></li>
+                    <li id="wdpl" class="dtl pagetag"><a class="aher paged" >个人评论</a></li>
+                    <li id="wdwj" class="dtl pagetag"><a class="aher paged" >个人问卷</a></li>
                     <%-- <li id="zxsp" class="dtl"><a class="aher"
                                                  href="${ctx}/personalhomepage/tohomepagethe.action">最新书评</a></li> --%>
                 </ul>
@@ -464,7 +482,7 @@ request.setAttribute("currentTime",datetime);
 
 
             <div class="right">
-            	<div id="wdxz"><span id="xztb"></span><span class="rlan">我加入的小组</span><span
+            	<div id="wdxz"><span id="xztb"></span><span class="rlan">加入的小组</span><span
                         id="qbhy"><a href="${ctx}/group/list.action" class="aright">全部小组>>&nbsp;</a></span>
                     <br/>
                     <c:if test="${listmygroup == null || listmygroup.size()==0  }">
@@ -488,7 +506,7 @@ request.setAttribute("currentTime",datetime);
                 
                 <div id="wdhy">
                 <span id="hytb"></span> 
-                <span class="rlan">我的好友</span> 
+                <span class="rlan">好友</span> 
                 <span id="qbhy">
                 	<a href="${ctx}/myFriend/listMyFriend.action" class="aright">全部好友>>&nbsp;</a>
                 </span>
@@ -515,7 +533,7 @@ request.setAttribute("currentTime",datetime);
                     </ul>
                 </div>
                 
-                <div id="wdsc"><span id="wdscx"></span> <span class="rlan">我的收藏</span> 
+                <div id="wdsc"><span id="wdscx"></span> <span class="rlan">个人收藏</span> 
                 <span id="qbhy">
                 	<a href="${ctx}/bookcollection/tobookcollection.action" class="aright">全部收藏>>&nbsp;</a>
                 </span>
@@ -553,7 +571,7 @@ request.setAttribute("currentTime",datetime);
                     <ul class="scul">
                         <li class="bzzxlb"><span id="dianhua"></span><span class="zzfw">自助服务</span></li>
                         <li class="bzzxlb"><span id="shou"></span><span class="zzfw">投诉举报</span></li>
-                        <li class="bzzxlb"><span id="kefu"></span><span class="zzfw">我的客服反馈</span></li>
+                        <li class="bzzxlb"><span id="kefu"></span><span class="zzfw">客服反馈</span></li>
                     </ul>
                 </div>
             </div>
