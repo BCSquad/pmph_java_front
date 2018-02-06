@@ -63,11 +63,11 @@
                 </div>
                 <span class="writing" onclick="window.location.href='${ctx}/writerArticle/initWriteArticle.action'">
                     <span class="icon"></span>
-                    <span class="text">写文章</span>
+                    <span class="wtext">写文章</span>
                 </span>
                 <span class="help">
                     <span class="icon"></span>
-                    <span class="text">帮助中心</span>
+                    <span class="wtext">帮助中心</span>
                 </span>
             </c:if>
 
@@ -75,7 +75,7 @@
 
                 <span class="writing logined" onclick="window.location.href='${ctx}/writerArticle/initWriteArticle.action'">
                     <span class="icon"></span>
-                    <span class="text">写文章</span>
+                    <span class="wtext">写文章</span>
                 </span>
 
                 <div class="user-info">
