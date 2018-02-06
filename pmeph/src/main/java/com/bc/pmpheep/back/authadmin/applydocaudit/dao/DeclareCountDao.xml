@@ -73,6 +73,7 @@
 	<!--最终结果名单列表 加载更多 -->
 	<select id="findNameList" resultType="java.util.Map"
 		parameterType="java.util.Map">
+			select t.*,COUNT(zb) as zbc,COUNT(fb) as fbc,COUNT(bw) as bwc from (	
 		SELECT
 		t.id,
 		t.textbook_name,
@@ -102,7 +103,6 @@
 		LEFT JOIN org as o on
 		d.org_id=o.id
 		INNER JOIN org_user as ou on d.org_id=ou.org_id and d.online_progress!=0
-
 		<where>
 			1=1
 			<if test="material_id != null and material_id != '' ">
@@ -113,7 +113,9 @@
 			</if>
 		</where>
 		GROUP BY t.id
-		HAVING (zb>=1 or fb>=1 or bw>=1)
+		
+		) t  GROUP BY t.textbook_name HAVING zbc>=1 or fbc>=1 or bwc>=1
+		
 	</select>
 
 
