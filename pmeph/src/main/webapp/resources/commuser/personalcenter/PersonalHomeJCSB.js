@@ -40,6 +40,22 @@
 			$("#pageNum").val(1);
 			queryMain();
 	  });
+	  
+	  /*$('#select_textbook').selectlist({
+	        zIndex: 5000,
+	        width: 240,
+	        height: 30,
+	        optionHeight: 30
+	    });*/
+	//选择书籍 选主编
+		/*$("#select_textbook").find("li").bind("click",function(){
+			window.open(contextpath+"chooseEditor/toPage.action?textBookId="+$(this).attr("data-value"));
+		});*/
+	  	$("#select_textbook").val("-1");
+		$("#select_textbook").change(function(){
+			window.open(contextpath+"chooseEditor/toPage.action?textBookId="+$("#select_textbook").val());
+			$("#select_textbook").val("-1");
+		});
 
 });
   
@@ -113,5 +129,6 @@ function listoction5(){
  * @param textbook_id
  */
 function chooseEditor(textbook_id){
-	window.open(contextpath+"chooseEditor/toPage.action?textBookId="+textbook_id);
+	$('#select_textbook').focus();
+	//window.open(contextpath+"chooseEditor/toPage.action?textBookId="+textbook_id);
 }

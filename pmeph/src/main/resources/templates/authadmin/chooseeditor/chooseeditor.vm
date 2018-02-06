@@ -21,7 +21,7 @@
 	    	<td class=""><input class="check editor" value="$!{c.dec_position_id}" type="checkbox"></td>
 	    #end
 	    
-	    #if($!{is_digital_editor_optional}==true)
+	    #if($!{is_digital_editor_optional}=="true")
 		    #if($!{c.is_locked} == true || $!{isFirstEditorLogIn} == "false")
 		    	<td class=""><input class="check numEditor" value="$!{c.dec_position_id}" type="checkbox" disabled="disabled"></td>
 		    #else

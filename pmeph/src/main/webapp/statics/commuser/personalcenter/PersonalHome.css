@@ -1352,4 +1352,19 @@ button.btn_addFriend.isFriend {
     color: #ffffff;
 }
 
+#select_textbook{
+	position: relative;
+    right: -138px;
+    height: 25px;
+    top: 10px;
+    z-index: 0;
+    border: none;
+    background: none;
+    opacity: 0;
+    width: 88px;
+}
+
+.choose_book{
+	font-size: 18px;
+}
 

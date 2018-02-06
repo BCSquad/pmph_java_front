@@ -123,6 +123,7 @@ function queryMain(){
 			queryOrg:$("#select-search-org").find("input[name='select-search-org']").val(),
 			textBookId:$("#textBookId").val(),
 			isFirstEditorLogIn:$("#isFirstEditorLogIn").val(),
+			is_digital_editor_optional:$("#is_digital_editor_optional").val(),
 			contextpath:contextpath
 			};
 	

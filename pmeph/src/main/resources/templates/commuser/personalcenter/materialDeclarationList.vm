@@ -112,16 +112,16 @@
                 <div class="rxia">
                     <div class="rxian">截止日期：$!{c.age_deadline}</div>
                     #if(${c.notNullIfFirstManager})
-                    	#if(( $!{c.chosen_position}==4||$!{c.chosen_position}==12 ) && $!{c.rank}==1 && $!{c.is_force_end}==false )
+                    	#if(( $!{c.chosen_position}==4||$!{c.chosen_position}==12 ) && $!{c.rank}==1 )
 	                		<div class="btn-chooseEditor" onclick="chooseEditor('$!{c.textbook_id}')">选编委>></div>
-	                		
 	                	#else
 	                		<div class="btn-chooseEditor" onclick="chooseEditor('$!{c.textbook_id}')">查看编委>></div>
 	                	#end
-	                	<select >
+	                	<select id="select_textbook" class="select_textbook" name="select_textbook">
                 			#foreach($t in $!{c.textbook_list})
-                				<option id="$t.id" class="choose_book">#if($!{t.is_locked}==true)查看-#else遴选-#end $t.textbook_name</option>
+                				<option value="$t.id" class="choose_book">#if($!{t.is_locked}==true)查看-#else遴选-#end《$!{t.textbook_name}》</option>
                 			#end
+                			<option style="display:none;" value ="-1"></option>
                 		</select>
 	                #end
                 </div>
