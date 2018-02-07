@@ -102,6 +102,17 @@ function insert(){
 					  $("#content").val(null);
 					  window.message.success("发表评论成功");
 					  
+				}else if (json.returncode == 'ERROR'){
+					var words = json.value;
+					var content = document.getElementById("content");
+					var contentValue = json.content;
+					for (var i = 0 ; i < words.length ; i++){
+						if (contentValue.indexOf(words[i]) > -1){
+							content.style.border = '3px solid red';
+							window.message.error("文章评论中含有敏感词“" + words[i] + "”,请修改后再保存或提交");
+	            			return;
+						}
+					}
 				}
 			}
 		});
@@ -182,5 +193,9 @@ function todetail(id) {
 }
 
 
-
+$(function(){
+	$("#content").focus(function(){
+		$("#content").css("border","none");
+	});
+});
 
