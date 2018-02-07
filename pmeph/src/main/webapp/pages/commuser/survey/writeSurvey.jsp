@@ -104,7 +104,7 @@
 					</div>
 					
 					<div style="width: 100%;height:50px;">
-						<div onclick="submit()" class="buttonDiv">
+						<div onclick="submit1()" class="buttonDiv">
 							<span class="submitFont">完成</span>
 						</div>
 					</div>

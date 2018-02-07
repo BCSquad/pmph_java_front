@@ -12,11 +12,11 @@
     <li id="replytag_toreply" class="replytag 
 		#if($!{is_long}==1) 
 	    	active
-	    #end ">我的长评</li>
+	    #end ">长评</li>
     <li id="replytag_replied" class="replytag 
 		#if($!{is_long}==0)
 	    	active
-	    #end ">我的评论</li>
+	    #end ">短评</li>
 </ul>
 
         <!--评论修改悬浮框 -->

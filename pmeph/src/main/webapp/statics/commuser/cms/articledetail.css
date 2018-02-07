@@ -325,6 +325,9 @@
 	color: #3996fa;
 	margin-top: 20px;
 	display: block;
+	width: 130px;
+	height: 30px;
+	overflow: hidden;
 }
 
 .right_3{

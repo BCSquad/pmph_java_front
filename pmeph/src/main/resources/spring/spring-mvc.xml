@@ -33,7 +33,8 @@
                     <!--作家用户-->
 
                     <value>/mymessage/* -> 1</value><!--作家用户消息模块 -->
-                    <value>/message/* -> 1</value><!--作家用户消息模块 -->
+                    <value>/message/deleteNoticeMessage* -> 1</value><!--作家用户消息通知删除模块 -->
+                     <value>/message/updateApplyMessage* -> 1</value><!--作家用户消息好友接受、忽略模块 -->
                     <value>/writerArticle/* -> 1</value><!--作家写文章 -->
                     <value>/personalhomepage/* -> 1</value><!--作家个人中心 -->
                     <value>/material/* -> 1</value><!--教材申报 -->
@@ -41,7 +42,6 @@
                     <value>/bookcollection/* -> 1</value><!--书籍收藏 -->
                     <value>/articlecollection/* -> 1</value><!--文章收藏 -->
                     <value>/myGroup/* -> 1</value><!--我的小组 -->
-                    <value>/group/* -> 1</value><!--我的小组 -->
                     <value>/group/* -> 1</value><!--我的小组 -->
                     <value>/cmsinfoletters/addlike.action -> 1</value><!--信息快报列表点赞 -->
                     <value>/inforeport/add* -> 1</value><!--信息快报详情点赞、收藏  -->
@@ -60,7 +60,8 @@
                     <value>/teacherCertification/* -> 1</value><!--学校教师认证 -->
                     <value>/bookdeclare/* -> 1</value><!--出书申报 -->
                     <value>/survey/* -> 1</value><!--出书申报 -->
-					<value>/chooseEditor/* -> 1</value><!--第一主编选择编委 -->
+                    <value>/chooseEditor/* -> 1</value><!--第一主编选择编委 -->
+					<value>/progress/listReportProgress.action* -> 1</value><!-- 教材申报进度 -->
                     <value>/articledetail/insertComment* -> 1</value><!--文章详情页面新增评论 -->
                     <value>/articledetail/addmark* -> 1</value><!--文章详情页添加收藏 -->
                     <value>/articledetail/addlikes* -> 1</value><!--文章详情页点赞 -->
