@@ -1362,6 +1362,7 @@ button.btn_addFriend.isFriend {
     background: none;
     opacity: 0;
     width: 88px;
+    cursor: pointer;
 }
 
 .choose_book{

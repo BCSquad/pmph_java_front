@@ -25,6 +25,7 @@ import com.bc.pmpheep.back.commuser.readpage.service.ReadDetailService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.general.controller.BaseController;
+import com.bc.pmpheep.general.service.SensitiveService;
 
 /**
  * @author xieming
@@ -43,6 +44,9 @@ public class ReadDetailController extends BaseController{
 	 @Autowired
 	 @Qualifier("com.bc.pmpheep.back.commuser.book.service.BookServiceImpl")
 	 private BookService bookService;
+	 @Autowired
+	@Qualifier("com.bc.pmpheep.general.service.SensitiveService")
+	 private SensitiveService sensitiveService;
 	/**
 	 * 根据图书ID初始化数据
 	 * @param request
@@ -204,7 +208,14 @@ public class ReadDetailController extends BaseController{
 		Map<String, Object> user=getUserInfo();
 		map.put("writer_id", user.get("id"));
 		map.put("avatar", user.get("avatar"));
-		Map<String, Object> rmap=readDetailService.insertComment(map);
+		Map<String, Object> rmap = new HashMap<String, Object>();
+		if (sensitiveService.confirmSensitive(request.getParameter("content"))){
+			List<String> sensitives = sensitiveService.getSensitives(null, request.getParameter("content"));
+			rmap.put("returncode", "error");
+			rmap.put("value", sensitives);
+			return rmap;
+		}
+		rmap = readDetailService.insertComment(map);
 		return rmap;
 	}
 	

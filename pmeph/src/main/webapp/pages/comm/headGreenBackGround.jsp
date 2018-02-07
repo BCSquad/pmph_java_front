@@ -57,7 +57,7 @@
 			<c:choose> 
      			<c:when test="${ SESSION_USER_CONST_ORGUSER.progress==1}">   
 	     			 	<div class="div-menu-child <%="message".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
-	                 	onclick="window.location.href='<c:url value="/teacherauth/toPage.action"/>'">消息
+	                 	onclick="window.location.href='<c:url value="/AllMessage/init.action"/>'">消息
 	            		</div>
  				</c:when>      
      			<c:otherwise>  
@@ -69,7 +69,7 @@
            <c:choose> 
      			<c:when test="${ SESSION_USER_CONST_ORGUSER.progress==1}">   
 	     			 	<div class="div-menu-child <%="usermanage".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
-	                 	onclick="window.location.href='<c:url value="/teacherauth/toPage.action"/>'">用户管理
+	                 	onclick="window.location.href='<c:url value="/user/writerLists.action"/>'">用户管理
 	            		</div>
  				</c:when>      
      			<c:otherwise>  
@@ -81,7 +81,7 @@
 			<c:choose> 
      			<c:when test="${ SESSION_USER_CONST_ORGUSER.progress==1}">   
 	     			 	<div class="div-menu-child <%="account".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
-	                 	onclick="window.location.href='<c:url value="/teacherauth/toPage.action"/>'">账户设置
+	                 	onclick="window.location.href='<c:url value="/admininfocontroller/toadmininfo.action"/>'">账户设置
 	            		</div>
  				</c:when>      
      			<c:otherwise>  

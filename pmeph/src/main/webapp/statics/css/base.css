@@ -258,7 +258,7 @@ body {
     cursor: pointer;
 }
 
-.head .help .text {
+.head .help .wtext {
     height: 16px;
     width: 16px;
     display: inline-block;
@@ -296,7 +296,7 @@ body {
 
 }
 
-.head .writing .text {
+.head .writing .wtext {
     height: 16px;
     width: 16px;
     display: inline-block;
