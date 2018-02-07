@@ -327,7 +327,7 @@ function insert() {
             	for (var i = 0 ; i < words.length; i++){
             		if (contentValue.indexOf(words[i]) > -1){
             			content.style.border = '3px solid red';
-            			window.message.error("图书评论中含有敏感词,请修改后再保存或提交");
+            			window.message.error("图书评论中含有敏感词“" + words[i] + "”,请修改后再保存或提交");
             			return;
             		}
             	}
