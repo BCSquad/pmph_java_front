@@ -468,7 +468,7 @@ public class MaterialDetailController extends BaseController{
 		}
 		//2.作家申报职位暂存
 		List<Map<String,Object>> tssbList = new ArrayList<Map<String,Object>>();
-		if(gezlList.get(0).get("is_staging").equals("0")){ //表示暂存
+		if(gezlList.get(0).get("is_staging").equals("1")){ //表示暂存
 			tssbList=this.mdService.queryTssbZc(queryMap);
 		}else{
 			tssbList=this.mdService.queryTsxz(queryMap);
@@ -574,7 +574,11 @@ public class MaterialDetailController extends BaseController{
 		queryMap.put("is_multi_position", materialMap.get("is_multi_position"));
 		//2.作家申报职位暂存
 		List<Map<String,Object>> tssbList = new ArrayList<Map<String,Object>>();
-		tssbList=this.mdService.queryTssbZc(queryMap);
+		if(gezlList.get(0).get("is_staging").equals("1")){ //表示暂存
+			tssbList=this.mdService.queryTssbZc(queryMap);
+		}else{
+			tssbList=this.mdService.queryTsxz(queryMap);
+		}
 		//3.作家学习经历表
 		List<Map<String,Object>> stuList = new ArrayList<Map<String,Object>>();
 		stuList=this.mdService.queryStu(queryMap);
