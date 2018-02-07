@@ -1,7 +1,5 @@
 package com.bc.pmpheep.back.commuser.personalcenter.controller;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,8 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.personalcenter.service.BookDeclareService;
-import com.bc.pmpheep.back.plugin.PageParameter;
-import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.general.controller.BaseController;
 
 /**
@@ -112,6 +108,7 @@ public class BookDeclareController extends BaseController {
 			topicMap.put("nation", request.getParameter("nation"));
 			topicMap.put("edition", request.getParameter("edition"));
 			topicMap.put("vn", ssid);
+			topicMap.put("is_opts_handling", "1"); //表示由运维管理
 			int count = this.bdecService.insertTopic(topicMap);
 			if (count > 0) {
 				Map<String, Object> topicLsit = this.bdecService.queryTopic(topicMap);
