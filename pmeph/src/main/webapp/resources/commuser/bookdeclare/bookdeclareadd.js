@@ -1,7 +1,7 @@
 //定义一个全局变量
 var jsonStr = "";
 jsonStr = "{\"id\":\"bookname\",\"content\":\"书名不能为空\"}," +
-	"{\"id\":\"account_number\",\"content\":\"银行账户不能为空\"},{\"id\":\"bank\",\"content\":\"开户银行不能为空\"}";
+	"{\"id\":\"account_number\",\"content\":\"银行账户不能为空\"},{\"id\":\"bank\",\"content\":\"开户银行不能为空\"},";
 $(function () {
     $('.dzdx').selectlist({
         width: 308,
