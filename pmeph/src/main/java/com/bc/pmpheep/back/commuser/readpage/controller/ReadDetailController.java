@@ -47,6 +47,8 @@ public class ReadDetailController extends BaseController{
 	 @Autowired
 	@Qualifier("com.bc.pmpheep.general.service.SensitiveService")
 	 private SensitiveService sensitiveService;
+	 
+	 
 	/**
 	 * 根据图书ID初始化数据
 	 * @param request
@@ -411,7 +413,8 @@ public class ReadDetailController extends BaseController{
 	 */
 	@RequestMapping("insertlong")
 	@ResponseBody
-	public String insertlong(HttpServletRequest request){
+	public Map<String, Object> insertlong(HttpServletRequest request){
+		Map<String, Object> result = new HashMap<String, Object>();
 		String returncode="";
 		String book_id=request.getParameter("book_id");
 		String score=request.getParameter("score");
@@ -422,17 +425,27 @@ public class ReadDetailController extends BaseController{
 		   StringUtils.isEmpty(content)||
 		   StringUtils.isEmpty(title)){
 		   returncode="NO";
-		}else{
-		   Map<String, Object> map=new HashMap<String, Object>();
-		   Map<String, Object> user=getUserInfo();
-		   map.put("book_id", book_id);
-		   map.put("score", score);
-		   map.put("content", content);
-		   map.put("title", title);
-		   map.put("is_long", "1");
-		   map.put("writer_id", user.get("id"));
-		   returncode=readDetailService.insertlong(map);
+		   result.put("state", returncode);
+		   return result;
 		}
-		return returncode;
+		if (sensitiveService.confirmSensitive(title) || sensitiveService.confirmSensitive(content)){
+			List<String> sensitives = sensitiveService.getSensitives(title, content);
+			returncode = "ERROR";
+			result.put("state", returncode);
+			result.put("value", sensitives);
+			result.put("UEContent", sensitiveService.delHTMLTag(content));
+			return result;
+		}
+		Map<String, Object> map=new HashMap<String, Object>();
+		Map<String, Object> user=getUserInfo();
+		map.put("book_id", book_id);
+		map.put("score", score);
+		map.put("content", content);
+		map.put("title", title);
+		map.put("is_long", "1");
+		map.put("writer_id", user.get("id"));
+		returncode=readDetailService.insertlong(map);
+		result.put("state", returncode);
+		return result;
 	}
 }
