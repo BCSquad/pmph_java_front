@@ -109,7 +109,7 @@ function insert(){
 					for (var i = 0 ; i < words.length ; i++){
 						if (contentValue.indexOf(words[i]) > -1){
 							content.style.border = '3px solid red';
-							window.message.error("文章评论中含有敏感词“" + words[i] + "”,请修改后再保存或提交");
+							window.message.error("文章评论中含有敏感词,请检查修改后再保存或提交");
 	            			return;
 						}
 					}
@@ -192,7 +192,7 @@ function todetail(id) {
     location.href = contextpath + 'articledetail/toPage.action?wid=' + id;
 }
 
-
+//评论检查出敏感词时，用户修改文本域获取焦点，则把红边去掉
 $(function(){
 	$("#content").focus(function(){
 		$("#content").css("border","none");

@@ -168,7 +168,7 @@ function btntype(btn_this){
 	//$("#form1").submit();
 }
 
-
+//评论检查出敏感词时，用户修改文本域获取焦点，则把红边去掉
 $(function(){
 	$("#TitleValue").focus(function(){
 		  $("#TitleValue").css("border","none");
