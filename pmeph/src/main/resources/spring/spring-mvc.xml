@@ -38,6 +38,8 @@
                     <value>/writerArticle/* -> 1</value><!--作家写文章 -->
                     <value>/personalhomepage/* -> 1</value><!--作家个人中心 -->
                     <value>/material/* -> 1</value><!--教材申报 -->
+                    <value>/integral/* -> 1</value><!--积分 -->
+                    
 
                     <value>/bookcollection/* -> 1</value><!--书籍收藏 -->
                     <value>/articlecollection/* -> 1</value><!--文章收藏 -->
