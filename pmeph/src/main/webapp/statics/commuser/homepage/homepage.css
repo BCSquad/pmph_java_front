@@ -1583,3 +1583,22 @@ ul li {
 	color: #999999;
 	font-size: 14px;
 }
+
+.friend.hasRequest{
+	
+	color: #d2d2d2;
+}
+
+.friend.isBeenRequest {
+    color: rgb(236, 154, 98);
+    cursor: pointer;
+}
+
+.friend.add {
+    color: #1abd44;
+    cursor: pointer;
+}
+
+.friend.isFriend {
+    color: #1abd44;
+}

@@ -58,7 +58,7 @@ String contextpath=request.getContextPath();
         </div>
         <div class="bt">
             <div class="top2"><a href="/books/list.action" target="_blank"><B>${textBookName }</B></a></div>
-            <div class="top3">编辑策划：${logUserName }</div>
+            <div class="top3">策划编辑：${planning_editor }</div>
         </div>
     </div>
     <div id="table">
@@ -133,7 +133,7 @@ String contextpath=request.getContextPath();
     </div>
 </div>
 	
-	<div style="width: 100%;height: 60px"></div>
+	<div style="width: 100%;height: 60px;clear: both;"></div>
 	<jsp:include page="/pages/comm/tail.jsp"></jsp:include> 
 
 </body>

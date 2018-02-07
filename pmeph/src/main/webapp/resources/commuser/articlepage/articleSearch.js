@@ -55,12 +55,13 @@ function changelikes(flag){
 				if(json.returncode=="OK"){
 					$("#likenum"+flag).html(json.likes);
 					if(str=='nohandPicture'){
-						$("#praise"+flag).removeClass("nohandPicture");
-						$("#praise"+flag).addClass("handPicture");
-						$("#likes"+flag).val("handPicture");
-					}else{
 						$("#praise"+flag).removeClass("handPicture");
 						$("#praise"+flag).addClass("nohandPicture");
+						$("#likes"+flag).val("handPicture");
+					}else{
+						$("#praise"+flag).removeClass("nohandPicture");
+						$("#praise"+flag).addClass("handPicture");
+						
 						$("#likes"+flag).val("nohandPicture");
 					}
 				}

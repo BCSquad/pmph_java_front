@@ -309,8 +309,9 @@ public class MessageController extends BaseController{
 		paraMap.put("materialId", materialId);
 		paraMap.put("cmsId", cmsId);
 		//标题、时间、邮寄地址、备注
-		Map<String,Object> mapTitle =new HashMap<>();
+		Map<String,Object> mapTitle =new HashMap<String,Object>();
 			mapTitle = noticeMessageService.queryNoticeMessageDetail(paraMap);
+			
 			mv.addObject("firsttag", "个人中心");
 			mv.addObject("secondtag", "消息通知");
 			mv.addObject("firstpath", "personalhomepage/tohomepage.action");
@@ -331,6 +332,8 @@ public class MessageController extends BaseController{
 			mv.addObject("map",mapTitle);
 			mv.addObject("listAttachment",listAttachment);
 			mv.addObject("listContact",listContact);
+			
+			
 		}
 		
 		
