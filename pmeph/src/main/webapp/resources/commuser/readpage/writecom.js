@@ -143,5 +143,5 @@ function insertlong(){
 $(function(){
 	$("#TitleValue").focus(function(){
 		$("#TitleValue").css("border","none");
-	})
-})
+	});
+});
