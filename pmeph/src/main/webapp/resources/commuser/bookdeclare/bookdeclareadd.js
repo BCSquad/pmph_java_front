@@ -1,4 +1,7 @@
-
+//定义一个全局变量
+var jsonStr = "";
+jsonStr = "{\"id\":\"bookname\",\"content\":\"书名不能为空\"}," +
+	"{\"id\":\"account_number\",\"content\":\"银行账户不能为空\"},{\"id\":\"bank\",\"content\":\"开户银行不能为空\"}";
 $(function () {
     $('.dzdx').selectlist({
         width: 308,
@@ -86,21 +89,41 @@ function del_tr(trId){
 }
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type){
-	$.ajax({
-		type: "POST",
-		url:contextpath+'bookdeclare/doBookdeclareAdd.action?stype='+type,
-		data:$('#objForm').serialize(),// 你的formid
-		async: false,
-		dataType:"json",
-	    success: function(msg) {
-		    if(msg=='OK'){
-		    	window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=wycs";
+	if(checkNull(jsonStr)){
+		$.ajax({
+			type: "POST",
+			url:contextpath+'bookdeclare/doBookdeclareAdd.action?stype='+type,
+			data:$('#objForm').serialize(),// 你的formid
+			async: false,
+			dataType:"json",
+		    success: function(msg) {
+			    if(msg=='OK'){
+			    	window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=wycs";
+			    }
 		    }
-	    }
-	});
+		});
+	}
 }	
 
 //放弃
 function buttGive(){
 	window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=wycs";
+}
+
+//判断是否为空
+function checkNull(jsonStr){
+	var s = "["+jsonStr.substring(0, jsonStr.length-1)+"]";
+	var objs = $.parseJSON(s);
+	var b = true;
+	$.each(objs, function(k, obj){
+	    var value = $("#"+obj.id).val();
+	    if(value == ""){
+			layer.tips(obj.content, '#'+obj.id);
+			$("#"+obj.id)[0].focus();  //聚焦2
+			b = false;
+			window.message.error(obj.content);
+			return false; 
+		}
+	});
+	return b;
 }

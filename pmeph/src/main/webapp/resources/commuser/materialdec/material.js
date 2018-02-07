@@ -1,8 +1,9 @@
 //定义一个全局变量
 var jsonStr = "";
-jsonStr = "{\"id\":\"realname\",\"content\":\"姓名不能为空\"}," +
-	"{\"id\":\"birthday\",\"content\":\"出生日期不能为空\"},{\"id\":\"experience\",\"content\":\"教龄不能为空\"},"+
-	"{\"id\":\"handphone\",\"content\":\"手机号码不能为空\"},{\"id\":\"idcard\",\"content\":\"证件号码不能为空\"},{\"id\":\"sbdw_name\",\"content\":\"申报单位不能为空\"},";
+jsonStr = "{\"id\":\"realname\",\"content\":\"姓名不能为空\"},{\"id\":\"birthday\",\"content\":\"出生日期不能为空\"}," +
+"{\"id\":\"experience\",\"content\":\"教龄不能为空\"},{\"id\":\"org_name\",\"content\":\"工作单位不能为空\"},{\"id\":\"position\",\"content\":\"职务不能为空\"},"+
+"{\"id\":\"zc\",\"content\":\"职称不能为空\"},{\"id\":\"address\",\"content\":\"地址不能为空\"},{\"id\":\"email\",\"content\":\"邮箱不能为空\"},"+
+"{\"id\":\"handphone\",\"content\":\"手机号码不能为空\"},{\"id\":\"zjlx\",\"content\":\"证件类型不能为空\"},{\"id\":\"idcard\",\"content\":\"证件号码不能为空\"},{\"id\":\"sbdw_name\",\"content\":\"申报单位不能为空\"},";
 
 $(function () {
 	var id = $("#material_id").val();
@@ -767,10 +768,24 @@ function checkNull(jsonStr){
 	var b = true;
 	$.each(objs, function(k, obj){
 	    var value = $("#"+obj.id).val();
-	    if(obj.id=="zjlx" && value=="0"){ //判断是否为身份证
-	    	checkIdCard("idcard");
+	    if(obj.id=="zjlx"){ //判断是否为身份证
+	    	if($("input[name='idtype']").val() == '0'){
+		    	var num = $("#idcard").val();
+		    	if ( !(/(^\d{15}$)|(^\d{17}([0-9]|X)$)/.test(num)) ){
+		    		layer.tips('身份证号码错误，请重填', '#idcard');
+		    		$("#idcard")[0].focus();  //聚焦
+		    		b = false;
+		    		return false;
+		    	}
+	    	}
 	    }else if(obj.id=="handphone"){ //手机号码
-	    	checkHandphone("handphone");
+	    	var num = $("#handphone").val();
+	    	if(!(/^1(3|4|5|7|8)\d{9}$/.test(num))){ 
+	    		layer.tips('手机号码有误，请重填', '#handphone');
+	    		$("#handphone")[0].focus();  //聚焦
+	    		b = false;
+	    		return false;
+	        } 
 	    }else if(value == ""){
 			layer.tips(obj.content, '#'+obj.id);
 			$("#"+obj.id)[0].focus();  //聚焦2
