@@ -108,10 +108,31 @@ function insertlong(){
 			data:json,
 			dataType:'json',
 			success:function(json){
-				window.message.success("保存成功！");
-				$(".sxy-btn").attr("disabled",true);
-				$("#TitleValue").attr("disabled",true);
-				ue.setDisabled();
+				var state = json.state;
+				if (state == 'OK'){
+					window.message.success("保存成功！");
+					$(".sxy-btn").attr("disabled",true);
+					$("#TitleValue").attr("disabled",true);
+					ue.setDisabled();
+				} else if (state == 'ERROR'){
+					var words = json.value;
+	        		var title = document.getElementById("TitleValue");
+	        		var TitleValue = $("#TitleValue").val();
+	        		var content = json.UEContent;
+	        		for (var i = 0 ; i < words.length ; i++){
+	        			var reg = new RegExp(words[i],'g');
+	        			if (TitleValue.indexOf(words[i]) > -1){
+	        				title.style.border = '3px solid red';
+	        			}
+	        			if (content.indexOf(words[i]) > -1){
+	        				content = content.replace(reg,'<span style="background : yellow">' + words[i] + '</span>');
+	        			}
+	        		}
+	        		ue.setContent(content);
+	        		window.message.error("标题或内容中含有敏感词,请修改后再保存或提交");
+				} else {
+					window.message.success("请填写完所有内容");
+				}
 			}
 		});
 	}else{
@@ -119,4 +140,8 @@ function insertlong(){
 	}
 }
 
-
+$(function(){
+	$("#TitleValue").focus(function(){
+		$("#TitleValue").css("border","none");
+	})
+})
