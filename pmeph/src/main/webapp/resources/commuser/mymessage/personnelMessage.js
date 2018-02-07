@@ -127,8 +127,10 @@ $(function() {
 	});
 	//回车事件
 	$(".inputBox").keypress(function (e){ 
-		var code = event.keyCode; 
-		if (13 == code) { 
+//		var code = event.keyCode; 
+		e = e || window.event;
+		var key = e ? (e.charCode || e.keyCode) : 0;
+		if (13 == key) { 
 			sendNewMsg(addhtml); 
 		} 
 	}); 

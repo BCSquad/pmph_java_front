@@ -219,12 +219,13 @@
 	
 	<!-- 教材申报通知详情 -->
 	<select id="noticeMessageDetail" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT  a.title,m.`deadline`,m.`mail_address`,e.`note`,e.notice,e.id AS attachmentId,a.mid as mongoId
+		SELECT  a.title,m.`deadline`,m.`mail_address`,e.`note`,e.notice,e.id AS attachmentId,a.mid as mongoId,ce.id as ceid,ce.attachment,ce.attachment_name
 		FROM cms_content a
 		LEFT JOIN material m
 		ON a.`material_id` = m.`id`
 		LEFT JOIN material_extra e
 		ON m.`id` = e.`material_id`
+		LEFT JOIN cms_extra ce ON ce.content_id=a.id
 		WHERE a.`id`=#{cmsId}
 	</select>
 	
