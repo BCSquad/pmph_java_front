@@ -105,9 +105,9 @@ function insert(){
 				}else if (json.returncode == 'ERROR'){
 					var words = json.value;
 					var content = document.getElementById("content");
-					var contentValue = json.content;
+					var contentValue = $("#content").val();
 					for (var i = 0 ; i < words.length ; i++){
-						if (contentValue.indexOf(words[i]) > -1){
+						if (json.content.indexOf(words[i]) > -1){
 							content.style.border = '3px solid red';
 							window.message.error("文章评论中含有敏感词,请检查修改后再保存或提交");
 	            			return;
