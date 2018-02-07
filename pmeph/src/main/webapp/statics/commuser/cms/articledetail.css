@@ -1,9 +1,11 @@
 .cms-writer {
     width: 40px;
     height: 70px;
-    position: absolute;
-    left: 1290px;
-    top: 660px;
+    position: fixed;
+    margin-top:-35px;
+    /* left: 1290px; */
+    right:10px;
+    top: 50%;
     background-color: #68d797;
     border-radius: 3px;
     font-size: 14px;
@@ -112,8 +114,16 @@
 	font-weight: bold;
 }
 
+
+
 .yxsb_content p{
 	/* text-indent: 2em;  */
+	max-width: 881px;
+    word-break: break-all;
+}
+
+.yxsb_content img{
+	max-width: 881px;
 }
 
 .block {

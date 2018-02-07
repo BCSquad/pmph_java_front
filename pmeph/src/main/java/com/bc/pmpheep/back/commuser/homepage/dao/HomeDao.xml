@@ -127,12 +127,45 @@ ORDER BY
   sum(b.clicks) desc,LENGTH(t.note)
 LIMIT 0,10
   </select>
+  
+  <!-- 查询点击人数最多的最多的作者  及与登录人的好友关系-->
+  <resultMap type="Map" id="HotAuthorMap">
+  	<id property="id" column="id" />
+  	<result property="realname" column="realname"/>
+  	<result property="title" column="title"/>
+  	<result property="avatar" column="avatar"/>
+  	<result property="status" column="status"/>
+  	<result property="hasRequest" column="hasRequest"/> <!-- 已申请加好友 -->
+  	<result property="isBeenRequest" column="isBeenRequest"/> <!-- 已被申请加好友 -->
+  	<result property="total_click" column="total_click"/>
+  </resultMap>
+  
    <!-- 查询点击人数最多的最多的作者 -->
-  <select id="queryAuthor"  resultMap="Mapresult">
-	select 
+  <select id="queryAuthor"  resultMap="HotAuthorMap">
+  	select u.* 
+	,f.request_id = u.id and f.target_id = #{logUserId} and f.status = 0 as isBeenRequest
+	,f.target_id = u.id and f.request_id = #{logUserId} and f.status = 0 as hasRequest
+	,max(f.status) as status
+	from 
+	(
+		select 
+		    sum(c.clicks) as total_click,u.id,u.realname,u.position,u.title,u.avatar
+		    from cms_content c 
+		    left join writer_user u on c.author_id=u.id 
+		    <if test="logUserId != null and logUserId !='' ">
+				where u.id != #{logUserId}
+			</if>
+		group by u.id 
+	)u
+	left join writer_friend f 
+	on ((f.request_id = u.id and f.target_id = #{logUserId} ) or (f.target_id = u.id and f.request_id = #{logUserId})) and f.status != 1
+	group by u.id 
+	order by u.total_click desc
+	limit 0,4
+	<!-- select 
     b.*
     from cms_content t 
-    left join writer_user b on t.author_id=b.id group by t.clicks desc limit 0,4
+    left join writer_user b on t.author_id=b.id group by t.clicks desc limit 0,4 -->
   </select>
    <!-- 查询点击人数最多的书评的作者、书名以及评论内容 -->
   <select id="queryComment"  resultMap="Mapresult">
@@ -199,7 +232,7 @@ LIMIT 0,10
 		 where  a.adname=#{adName} and  a.is_disabled='0' and i.is_disabled='0' order by i.id
 	</select>
 
-    <!-- 添加好友 -->
+    <!-- 添加好友 不对 废弃 不能用-->
     <insert id="addfriend" parameterType="map">
         insert into writer_friend 
         (request_id,target_id,status)values(#{request_id},#{target_id},0);
