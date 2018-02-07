@@ -66,7 +66,6 @@ function btntype(btn_this){
 		        		var content = json.UEContent;
 		        		for (var i = 0 ; i < words.length ; i++){
 		        			var reg = new RegExp(words[i],'g');
-		        		//	title.style.border = 'none';
 		        			if (TitleValue.indexOf(words[i]) > -1){
 		        				title.style.border = '3px solid red';
 		        			}
@@ -124,7 +123,6 @@ function btntype(btn_this){
 			        		var content = json.UEContent;
 			        		for (var i = 0 ; i < words.length ; i++){
 			        			var reg = new RegExp(words[i],'g');
-			        		//	title.style.border = 'none';
 			        			if (TitleValue.indexOf(words[i]) > -1){
 			        				title.style.border = '3px solid red';
 			        			}
