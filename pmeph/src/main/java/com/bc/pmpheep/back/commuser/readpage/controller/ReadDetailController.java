@@ -213,6 +213,7 @@ public class ReadDetailController extends BaseController{
 		Map<String, Object> rmap = new HashMap<String, Object>();
 		if (sensitiveService.confirmSensitive(request.getParameter("content"))){
 			List<String> sensitives = sensitiveService.getSensitives(null, request.getParameter("content"));
+			rmap.put("content", sensitiveService.delHTMLTag(request.getParameter("content")));
 			rmap.put("returncode", "error");
 			rmap.put("value", sensitives);
 			return rmap;
