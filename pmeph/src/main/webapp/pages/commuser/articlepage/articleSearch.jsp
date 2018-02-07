@@ -77,7 +77,7 @@
 	                                <div class="number2">${list.comments}</div>
                                     <div class="comment"></div>
                                     <div class="number2" id="likenum${list.id}">${list.likes}</div>
-                                    <input type="hidden" id="likes${list.id}" value="${list.cms_user_like==null?'handPicture':'nohandPicture'}">
+                                    <input type="hidden" id="likes${list.id}" value="${list.cms_user_like==null?'nohandPicture':'handPicture'}">
                                     <input type="hidden" id="mainid${list.id}" value="${list.id}">
                                     <div class="${list.cms_user_like !=null ?'nohandPicture':'handPicture'}" onclick="changelikes('${list.id}')" id="praise${list.id}"></div>
                                     <div class="number">${list.clicks}</div>
