@@ -184,6 +184,15 @@ color:#FFF;
     float: left;
 }
 
+#jftb {
+    background-image: url(../../image/jifeng.png);
+    background-position: 0px 4px;
+    height: 20px;
+    width: 16px;
+    background-repeat: no-repeat;
+    float: left;
+}
+
 .grsx {
     float: left;
     /*height: 32px;*/

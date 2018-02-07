@@ -53,14 +53,16 @@
 								#if($velocityCount != 1) <span class="correction_between_line"></span> #end   
 								<div class="position_line">
 			    					<span>纠错信息：$!{o.page}页码
-			    						#if(!$!{o.is_editor_replied} && !$!{o.is_author_replied} )
-			    							<span class="myCorrectStatus toReply">未审核</span>
-			    						#elseif(!$!{o.is_editor_replied} && $!{o.is_author_replied} )
-			    							<span class="myCorrectStatus isReplying">审核中</span>
-			    						#elseif($!{o.result})
-			    							<span class="myCorrectStatus yes">审核通过</span>
-			    						#elseif(!$!{o.result})
-			    							<span class="myCorrectStatus no">审核未通过</span>
+			    						#if($!{selfLog}==true)
+				    						#if(!$!{o.is_editor_replied} && !$!{o.is_author_replied} )
+				    							<span class="myCorrectStatus toReply">未审核</span>
+				    						#elseif(!$!{o.is_editor_replied} && $!{o.is_author_replied} )
+				    							<span class="myCorrectStatus isReplying">审核中</span>
+				    						#elseif($!{o.result})
+				    							<span class="myCorrectStatus yes">审核通过</span>
+				    						#elseif(!$!{o.result})
+				    							<span class="myCorrectStatus no">审核未通过</span>
+				    						#end
 			    						#end
 			    					</span>
 			    					<span class="line_span">$!{o.line}行</span>
