@@ -128,13 +128,17 @@
 					</tr>
 					<tr>
 						<td><span>&ensp;邮&emsp;&emsp;编：</span>
-							<input class="cg_input" name="postcode" value="" id="postcode" maxlength="20"/>
+							<input class="cg_input" name="postcode" value="" id="postcode"
+							onblur="LengthLimit(this,20)"
+							 maxlength="20"/>
 						</td>
 						<td><span>&ensp;联系电话：</span>
-							<input class="cg_input" name="telephone" value="" id="telephone" maxlength="13"/>
+							<input class="cg_input" name="telephone" value="" id="telephone"
+							onblur="LengthLimit(this,20)"
+							 maxlength="20"/>
 						</td>
 						<td><span>&ensp;传&emsp;&emsp;真：</span>
-							<input class="cg_input" name="fax" value="" id="fax" maxlength="45"/>
+							<input class="cg_input" name="fax" value="" id="fax" onblur="LengthLimit(this,45)" maxlength="45"/>
 						</td>
 						<td><span class="btbs">*</span><span>手&emsp;&emsp;机：</span>
 							<input class="cg_input" name="handphone" value="" id="handphone" maxlength="11"/>

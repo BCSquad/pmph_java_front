@@ -345,7 +345,7 @@ public class MaterialDetailController extends BaseController{
 				if(gr_content!=null||!gr_content.equals("")){
 				Map<String,Object> grcjMap = new HashMap<String,Object>();
 				grcjMap.put("declaration_id", declaration_id);
-				grcjMap.put("gr_content", gr_content);
+				grcjMap.put("content", gr_content);
 				this.mdService.insertAchievement(grcjMap);
 			}
 			//主编学术专著情况
@@ -368,7 +368,7 @@ public class MaterialDetailController extends BaseController{
 				}
 			}
 			//出版行业获奖情况表
-			String pu_reward_name[] = request.getParameterValues("zb_monograph_name");
+			String pu_reward_name[] = request.getParameterValues("pu_reward_name");
 			String pu_award_unit[] = request.getParameterValues("pu_award_unit");
 			String pu_reward_date[] = request.getParameterValues("pu_reward_date");
 			String pu_note[] = request.getParameterValues("pu_note");
@@ -574,7 +574,7 @@ public class MaterialDetailController extends BaseController{
 		queryMap.put("is_multi_position", materialMap.get("is_multi_position"));
 		//2.作家申报职位暂存
 		List<Map<String,Object>> tssbList = new ArrayList<Map<String,Object>>();
-		if(gezlList.get(0).get("is_staging").equals("1")){ //表示暂存
+		if(gezlList.get(0).get("is_staging").toString().equals("1")){ //表示暂存
 			tssbList=this.mdService.queryTssbZc(queryMap);
 		}else{
 			tssbList=this.mdService.queryTsxz(queryMap);
@@ -936,7 +936,7 @@ public class MaterialDetailController extends BaseController{
 				if(gr_content!=null||!gr_content.equals("")){
 				Map<String,Object> grcjMap = new HashMap<String,Object>();
 				grcjMap.put("declaration_id", declaration_id);
-				grcjMap.put("gr_content", gr_content);
+				grcjMap.put("content", gr_content);
 				this.mdService.updateAchievement(grcjMap);
 			}
 			//主编学术专著情况
@@ -959,7 +959,7 @@ public class MaterialDetailController extends BaseController{
 				}
 			}
 			//出版行业获奖情况表
-			String pu_reward_name[] = request.getParameterValues("zb_monograph_name");
+			String pu_reward_name[] = request.getParameterValues("pu_reward_name");
 			String pu_award_unit[] = request.getParameterValues("pu_award_unit");
 			String pu_reward_date[] = request.getParameterValues("pu_reward_date");
 			String pu_note[] = request.getParameterValues("pu_note");

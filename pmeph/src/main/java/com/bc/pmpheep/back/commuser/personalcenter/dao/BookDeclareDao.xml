@@ -4,9 +4,9 @@
 	
 	<!-- 选题申报信息插入 -->
 	<insert id="insertTopic" parameterType="java.util.Map">
-		insert into topic(user_id,bookname,deadline,source,word_number,picture_number,subject,rank,type,is_staging,auth_progress,
+		insert into topic(user_id,bookname,reader,deadline,source,word_number,picture_number,subject,rank,type,is_staging,auth_progress,
 		bank_account_id,purchase,sponsorship,is_translation,original_bookname,original_author,nation,edition,vn,is_opts_handling) values(
-		#{user_id},#{bookname},#{deadline},#{source},#{word_number},#{picture_number},#{subject},#{rank},#{type},#{is_staging},#{auth_progress},#{bank_account_id},
+		#{user_id},#{bookname},#{reader},#{deadline},#{source},#{word_number},#{picture_number},#{subject},#{rank},#{type},#{is_staging},#{auth_progress},#{bank_account_id},
 		#{purchase},#{sponsorship},#{is_translation},#{original_bookname},#{original_author},#{nation},#{edition},#{vn},#{is_opts_handling}
 		) 
 	</insert>
@@ -72,7 +72,7 @@
 		<if test="user_id != null and user_id != ''">
 			and t.user_id  = #{user_id}
 		</if>
-		order by gmt_create asc 
+		order by gmt_create desc 
 	</select>
 	<!-- 添加银行账户信息 -->
 	<insert id="insertBank" parameterType="java.util.Map">

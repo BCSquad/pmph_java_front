@@ -54,9 +54,9 @@
 						<td width="100px"><span class="btbs">*</span><span>读者对象：</span></td>
 						<td width="300px">
 							<select name="reader" id="dzdx" class="dzdx">
-								<option value="0" ${topicMap.reader=='0'?'selected':''}>医务工作者</option>
-								<option value="1" ${topicMap.reader=='1'?'selected':''}>医学院校师生</option>
-								<option value="2" ${topicMap.reader=='2'?'selected':''}>大众</option>
+								<option value="0" ${topicMap.reader=='0'?'checked':''}>医务工作者</option>
+								<option value="1" ${topicMap.reader=='1'?'checked':''}>医学院校师生</option>
+								<option value="2" ${topicMap.reader=='2'?'checked':''}>大众</option>
 							</select>
 						</td>
 					</tr>

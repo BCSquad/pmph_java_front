@@ -606,10 +606,10 @@ function add_zbxszz(){
 			"<td><input class='cg_input' name='zb_monograph_name' value='' style='width: 300px;' placeholder='教材名称' maxlength='16'/></td>"+
 			"<td style='color: #333333;'>"+
 				"<table class='radio_tb' style='width: 100px;'><tr>"+
-					"<td><input type='radio' name='is_self_paid_'"+num+" value='1' checked='checked'/>是</td>"+
-					"<td><input type='radio' name='is_self_paid_'"+num+" value='2' />否</td>"+
+					"<td><input type='radio' name='is_self_paid_"+num+"' value='1' checked='checked'/>是</td>"+
+					"<td><input type='radio' name='is_self_paid_"+num+"' value='2' />否</td>"+
 				"</tr></table>"+
-				"<input type='hidden' name='is_self_paid' value='is_self_paid_'"+num+" /></td>"+
+				"<input type='hidden' name='is_self_paid' value='is_self_paid_"+num+"' /></td>"+
 			"<td><input class='cg_input' name='zb_publisher' value='' style='width: 180px;' placeholder='出版单位'  maxlength='16'/></td>"+
 			"<td><input class='cg_input' name='zb_publish_date' value='' style='width: 120px;' calendar format=\"'yyyy-mm-dd'\" placeholder='出版时间'/></td>"+
 			"<td><input class='cg_input' name='zb_note' value='' style='width: 250px;' placeholder='备注'  maxlength='33'/></td>"+
@@ -657,11 +657,11 @@ function add_clinical(){
 	"<td><input class='cg_input' name='cl_reward_name' maxlength='16' value='' style='width: 300px;' placeholder='奖项名称'/></td>"+
 	"<td style='color: #333333;'>"+
 		"<table class='radio_tb' style='width: 180px;'><tr>"+
-			"<td><input type='radio' name='cl_award_unit_'"+num+" value='0' checked='checked'/>无</td>"+
-			"<td><input type='radio' name='cl_award_unit_'"+num+" value='1'/>国际</td>"+
-			"<td><input type='radio' name='cl_award_unit_'"+num+" value='2' />国家</td>"+
+			"<td><input type='radio' name='cl_award_unit_"+num+"' value='0' checked='checked'/>无</td>"+
+			"<td><input type='radio' name='cl_award_unit_"+num+"' value='1'/>国际</td>"+
+			"<td><input type='radio' name='cl_award_unit_"+num+"' value='2' />国家</td>"+
 		"</tr></table>"+
-		"<input type='hidden' name='cl_award_unit' value='cl_award_unit_'"+num+" /></td>"+
+		"<input type='hidden' name='cl_award_unit' value='cl_award_unit_"+num+"' /></td>"+
 	"<td><input class='cg_input' name='cl_reward_date' value='' style='width: 180px;' calendar format=\"'yyyy-mm-dd'\" placeholder='获奖时间'/></td>"+
 	"<td><input class='cg_input' name='cl_note' value='' style='width: 330px;' placeholder='备注' maxlength='33'/></td>"+
 	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('clinical_"+num+"')\"/></td>"+
@@ -677,13 +677,13 @@ function add_acade(){
 			"<td><input class='cg_input' name='ac_reward_name' maxlength='16' id='acade_reward_name' value='' style='width: 300px;' placeholder='荣誉名称'/></td>"+
 			"<td style='color: #333333;'>"+
 				"<table class='radio_tb' style='width:280px;'><tr>"+
-					"<td><input type='radio' name='ac_award_unit_'"+num+" value='0' checked='checked'/>无</td>"+
-					"<td><input type='radio' name='ac_award_unit_'"+num+" value='1'/>国际</td>"+
-					"<td><input type='radio' name='ac_award_unit_'"+num+" value='2'/>国家</td>"+
-					"<td><input type='radio' name='ac_award_unit_'"+num+" value='3'/>省部</td>"+
-					"<td><input type='radio' name='ac_award_unit_'"+num+" value='4' />市</td>"+
+					"<td><input type='radio' name='ac_award_unit_"+num+"' value='0' checked='checked'/>无</td>"+
+					"<td><input type='radio' name='ac_award_unit_"+num+"' value='1'/>国际</td>"+
+					"<td><input type='radio' name='ac_award_unit_"+num+"' value='2'/>国家</td>"+
+					"<td><input type='radio' name='ac_award_unit_"+num+"' value='3'/>省部</td>"+
+					"<td><input type='radio' name='ac_award_unit_"+num+"' value='4' />市</td>"+
 				"</tr></table>"+
-				"<input type='hidden' name='ac_award_unit' value='ac_award_unit_'"+num+" /></td>"+
+				"<input type='hidden' name='ac_award_unit' value='ac_award_unit_"+num+"' /></td>"+
 			"<td><input class='cg_input' name='ac_reward_date' value='' style='width: 150px;' calendar format=\"'yyyy-mm-dd'\" placeholder='授予时间'/></td>"+
 			"<td><input class='cg_input' name='ac_note' value='' style='width: 280px;' placeholder='备注' maxlength='33'/></td>"+
 			"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('acade_"+num+"')\"/></td>"+
@@ -807,4 +807,27 @@ function orgAdd(material_id){
 		  maxmin: true,
 		  content: contextpath+"material/toSearchOrg.action?material_id="+material_id
 		});
+}
+
+//输入长度限制校验，ml为最大字节长度
+function LengthLimit(obj,ml){
+	
+	var va = obj.value;
+	var vat = "";
+	for ( var i = 1; i <= va.length; i++) {
+		vat = va.substring(0,i);
+		//把双字节的替换成两个单字节的然后再获得长度，与限制比较
+		if (vat.replace(/[^\x00-\xff]/g,"aaa").length <= ml) {
+			maxStrlength=i;
+		}else{
+			
+			break;
+		}
+	}
+	obj.maxlength=maxStrlength;
+	//把双字节的替换成两个单字节的然后再获得长度，与限制比较
+	if (va.replace(/[^\x00-\xff]/g,"aaa").length > ml) {
+		obj.value=va.substring(0,maxStrlength);
+		//window.message.warning("不可超过输入最大长度"+ml+"字节！");
+	}
 }
