@@ -1,6 +1,7 @@
 package com.bc.pmpheep.back.commuser.personalcenter.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -80,9 +81,11 @@ public class BookDeclareController extends BaseController {
 				topicMap.put("is_staging", "0");
 				topicMap.put("auth_progress", "1");
 				topicMap.put("is_opts_handling", "1");
+				topicMap.put("submit_time", new Date());
 			} else {// 2 表示暂存
 				topicMap.put("is_staging", "1");
 				topicMap.put("auth_progress", "0");
+				topicMap.put("is_opts_handling", "0");
 			}
 			topicMap.put("bookname", request.getParameter("bookname"));
 			topicMap.put("reader", request.getParameter("reader"));
