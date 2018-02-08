@@ -264,7 +264,7 @@ ul li {
 }
 
 .labeling{
-	font: left;
+	float: left;
 	margin-top: 15px;
 	margin-left: 17px;
 	font-family: MicrosoftYaHei;
@@ -283,7 +283,7 @@ ul li {
 }
 
 .bin{
-	font: left;
+	float: left;
 	width: 94px;
 	height: 24px;
 	background-color: #4aceb2;
@@ -295,7 +295,7 @@ ul li {
 }
 
 .binone{
-	font: left;
+	float: left;
 	width: 94px;
 	height: 24px;
 	background-color: #F6B06B;
@@ -307,7 +307,7 @@ ul li {
 }
 
 .bintwo{
-	font: left;
+	float: left;
 	width: 94px;
 	height: 24px;
 	background-color: #0E9BAC;
