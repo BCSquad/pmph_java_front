@@ -107,8 +107,10 @@ public class BookDeclareController extends BaseController {
 			topicMap.put("rank", request.getParameter("rank"));
 			topicMap.put("type", request.getParameter("type"));
 			topicMap.put("bank_account_id", bankid);
-			topicMap.put("purchase", request.getParameter("purchase"));
-			topicMap.put("sponsorship", request.getParameter("sponsorship"));
+			topicMap.put("purchase",
+					"".equals(request.getParameter("purchase")) ? null : request.getParameter("purchase"));
+			topicMap.put("sponsorship",
+					"".equals(request.getParameter("sponsorship")) ? null : request.getParameter("sponsorship"));
 			topicMap.put("original_bookname", request.getParameter("original_bookname"));
 			// 判断是否为翻译书稿，若有值则表示为翻译书籍
 			if (request.getParameter("original_bookname").toString().equals("")) {
