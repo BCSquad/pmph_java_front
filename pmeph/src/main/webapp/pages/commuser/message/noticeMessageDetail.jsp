@@ -52,9 +52,18 @@
 		            </div>
 		        </div> --%>
 		        <div align="center" style="margin-left: 80px;margin-right: 80px;">
-		            ${content}
+		            <p>${content}</p>
 		        </div>
-		        
+		        <c:if test="${map.attachment !=null}">
+				        <div class="list">
+				            <div class="title2">
+				                	附件：
+				            </div>
+				            <div class="listContent">
+				            	<span ><a   href="${ctx}/file/download/${map.attachment}.action" ><img class="pictureSize" src="${ctx}/statics/pictures/attachment.png">&nbsp;&nbsp;${map.attachment_name}</a></span><br>
+				            </div>
+				        </div>
+		        	</c:if>
 		        		     
 		        <div class="liseDiv">
 		        <c:if test="${map.mail_address !=null && map.mail_address !=''}">
@@ -102,15 +111,9 @@
 		        </div>
 		        </c:if>
 		        </div>
-				<c:if test="${flag!='homepage'}">
 		        <div class="registerDiv"  >
-		            <span class="button" onclick="register(${materialId})">报名参加</span>
+		            <span class="button ${notEnd !=1 or is_material_entry==false}" onclick="register(${materialId})" >报名参加</span>
 		        </div>
-        		</c:if>
-				<c:if test="${flag=='homepage'}">
-		        <div class="registerDiv"  >
-		        </div>
-        		</c:if>
         	</c:otherwise>
         </c:choose>
         

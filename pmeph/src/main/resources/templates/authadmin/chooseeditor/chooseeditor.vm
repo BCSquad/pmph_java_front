@@ -15,13 +15,13 @@
 	    <td class="">$!{c.dec_org_name}</td>
 	    <td class="">$!{c.position}</td>
 	    <td class="">$!{c.title}</td>
-	    #if($!{c.is_locked} == true || $!{isFirstEditorLogIn} == "false" || $!{c.editorAvaliable} == false )
-	    	<td class=""><input class="check editor" value="$!{c.dec_position_id}" type="checkbox" disabled="disabled"></td>
+	    #if($!{c.is_locked} == true || $!{isFirstEditorLogIn} == "false" || $!{c.editorAvaliable} == 0 )
+	    	<td class=""><input class="check editor" value="$!{c.dec_position_id}" type="checkbox" disabled="disabled" #if($!{c.editorAvaliable} == 0) title="已被选定为主编或副主编，不能再参与编委遴选，若开放数字编委，可选为数字编委。" #end></td>
 	    #else
 	    	<td class=""><input class="check editor" value="$!{c.dec_position_id}" type="checkbox"></td>
 	    #end
 	    
-	    #if($!{is_digital_editor_optional}==true)
+	    #if($!{is_digital_editor_optional}=="true")
 		    #if($!{c.is_locked} == true || $!{isFirstEditorLogIn} == "false")
 		    	<td class=""><input class="check numEditor" value="$!{c.dec_position_id}" type="checkbox" disabled="disabled"></td>
 		    #else

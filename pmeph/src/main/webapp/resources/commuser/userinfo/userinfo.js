@@ -9,6 +9,7 @@ $(function () {
         done: function (filename, fileid) {
             console.log("上传完成：name " + filename + " fileid " + fileid);
              $("#fileid").val(fileid);
+             $("#sxy-img1").attr("src",contextpath+"file/download/"+fileid+".action");
         },
         progressall: function (loaded, total, bitrate) {
             console.log("正在上传。。。" + loaded / total);
@@ -88,8 +89,8 @@ function save(){
                 if (json.returncode=="OK"){
                 	 window.message.success("保存成功！");
                 	 $("#sxy-img1").attr("src",contextpath+"file/download/"+fileid+".action");
-                	location.href=contextpath+'userinfo/touser.action?id='+json.id;
-                }else if(json.returncode=="DEFAULT"){
+                	window.location.href=contextpath+'personalhomepage/tohomepage.action?userId='+json.id;
+                }else{
                 	message.error("错误，请填写所有必填项!");
                 }
             }

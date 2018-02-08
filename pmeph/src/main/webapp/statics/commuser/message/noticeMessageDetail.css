@@ -140,6 +140,9 @@ a{
     font-size: 14px;
     cursor: pointer;
 }
+.true{
+	display:none;
+}
 .registerDiv{
     clear:both;
     width: 100%;

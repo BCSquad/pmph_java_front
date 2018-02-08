@@ -30,7 +30,7 @@
 <jsp:include page="/pages/comm/headGreenBackGround.jsp">
     <jsp:param name="pageTitle" value="usermanage"></jsp:param>
 </jsp:include>
- <div class="b hidden" id="box" style="display: none">
+ <div class="b hidden" id="box" style="display: none;margin-left: -15%;margin-top: -10%">
          <div class="hiddenX hidden" id="close">
              <img onclick="hide()" style="width:100%;height:100%;cursor: pointer;" src="${ctx}/statics/image/closediv.png">
          </div>
@@ -39,7 +39,7 @@
          </div>
          <div class="inputBox">
              <div style="float: left;width: 80%;height: 100%">
-             <textarea id="content" style="width: 100%;height: 98%;border: none;outline:0;font-size:15px;" placeholder="请输入消息内容,按回车键发送" ></textarea>
+             <textarea id="content" class="inputBox" style="width: 100%;height: 98%;border: none;outline:0;font-size:15px;" placeholder="请输入消息内容,按回车键发送" ></textarea>
              </div>
              <div style="float: left;width: 20%;height: 100%">
              <div class="div_btn11" style="cursor: pointer;">
@@ -121,8 +121,9 @@
 <script type="text/javascript">
 //发送消息
 function sendNewMsg (){
+	debugger;
 	var content=$("#content").val();
-	if(!content || content.trim() ==''){
+	if(content =='' ||content==null ||content=='↵'){
 		window.message.warning("请键入消息");
 	}else{
 		var frendId =$("#frendId").val();
@@ -166,7 +167,7 @@ function refreshmessage(){
         				html = 
 	        				"<div class='oneTalk'> "+
 	                        "<div class='headAndNameRight float_right'> "+
-	                            "<div class='headDiv'><img class='headPicture' src=''/></div> "+
+	                            "<div class='headDiv'><img class='headPicture' src='"+contextpath+responsebean[i].avatar+"'/></div> "+
 	                            "<div class='talkName'><text>"+responsebean[i].senderName+"&nbsp;&nbsp;&nbsp;&nbsp;"+formatDate(responsebean[i].sendTime,'yyyy.MM.dd hh:ss:mm')+"</text></div> "+
 	                        "</div> "+
 	                        "<div class='talkDivRight float_right' > "+
@@ -179,7 +180,7 @@ function refreshmessage(){
         				html =
         				"<div class='oneTalk'> "+
 	                        "<div class='headAndNameLeft float_left'> "+
-	                            "<div class='headDiv'><img class='headPicture' src=''/></div> "+
+	                            "<div class='headDiv'><img class='headPicture' src='"+contextpath+responsebean[i].avatar+"'/></div> "+
 	                            "<div class='talkName'><text>"+responsebean[i].senderName+"</text></div> "+
 	                        "</div> "+
 	                        "<div class='talkDiv float_left' > "+
@@ -248,7 +249,7 @@ function formatDate(nS,str) {
 	//点击查询
 	function query(){
 		var username=encodeURI(encodeURI($("#ssk").val()));
-		window.location.href = '<%=basePath%>/user/writerLists.action?username='+username;
+		window.location.href = 'contextpath/user/writerLists.action?username='+username;
 	}
 	var pageSize =$("#pages").val();
             Page({
@@ -259,7 +260,14 @@ function formatDate(nS,str) {
                 	pageFun(pageSize,pageNumber);
                 }
             });
+            //初始化页面
             $(function () {
+            	$(".inputBox").keypress(function (event){ 
+           			if(event.which == 13) { 
+           			sendNewMsg(); 
+            		} 
+            	}); 
+            	
             	$('#sstj').selectlist({
                     zIndex: 10,
                     width: 208,

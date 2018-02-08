@@ -2,6 +2,7 @@ package com.bc.pmpheep.back.commuser.homepage.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -44,15 +45,27 @@ public class HomeController extends BaseController{
     public ModelAndView move(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         int flag = 0;
+        Map<String, Object> user=getUserInfo();
+        String logUserId= null;
+        if (user!=null && user.get("id")!=null && !"".equals(user.get("id"))) {
+        	logUserId = user.get("id").toString();
+		}
+        
         List<Map<String, Object>> listNot = homeService.queryNotice();
         List<Map<String, Object>> listArt = homeService.queryArticle(4);
-        List<Map<String, Object>> listAut = homeService.queryAuthor();
+        List<Map<String, Object>> listAut = homeService.queryAuthor(logUserId);
         List<Map<String, Object>> listCom = homeService.queryComment();
 
         Map<String,Object> adInfo1=homeService.getPageAdInfo("首页轮播");
         Map<String,Object> adInfo2=homeService.getPageAdInfo("首页中部");
+        for (Map<String, Object> map : listCom) {
+			String url=map.get("image_url").toString();
+			if(url.equals("DEFAULT")){
+				map.put("image_url", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+			}
+		}
         //根据登录人查询可见公告，未登录查询所有人可见公告
-        Map<String, Object> user=getUserInfo();
+        
         List<Map<String, Object>> listDou= homeService.queryDocument(user==null?"":user.get("id").toString());
         modelAndView.addObject("listDou", listDou);
         modelAndView.addObject("listNot", listNot);

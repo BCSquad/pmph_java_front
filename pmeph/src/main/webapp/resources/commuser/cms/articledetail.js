@@ -102,6 +102,17 @@ function insert(){
 					  $("#content").val(null);
 					  window.message.success("发表评论成功");
 					  
+				}else if (json.returncode == 'ERROR'){
+					var words = json.value;
+					var content = document.getElementById("content");
+					var contentValue = $("#content").val();
+					for (var i = 0 ; i < words.length ; i++){
+						if (json.content.indexOf(words[i]) > -1){
+							content.style.border = '3px solid red';
+							window.message.error("文章评论中含有敏感词,请检查修改后再保存或提交");
+	            			return;
+						}
+					}
 				}
 			}
 		});
@@ -181,6 +192,10 @@ function todetail(id) {
     location.href = contextpath + 'articledetail/toPage.action?wid=' + id;
 }
 
-
-
+//评论检查出敏感词时，用户修改文本域获取焦点，则把红边去掉
+$(function(){
+	$("#content").focus(function(){
+		$("#content").css("border","none");
+	});
+});
 

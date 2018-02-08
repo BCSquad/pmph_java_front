@@ -45,13 +45,13 @@
 						</td>
 					</tr>
 					<tr>
-						<td width="140px"><span class="btbs">*</span><span>选题名称：</span></td>
+						<td width="140px"><span class="btbs">*</span><span>书名：</span></td>
 						<td width="460px">
-							<input class="cg_input" name="bookname" id="bookname" placeholder="选题名称" value="" maxlength="100"/>
+							<input class="cg_input" name="bookname" id="bookname" placeholder="书名" value="" maxlength="33"/>
 							<input type="hidden" name="user_id" value="${userMap.id}"/>
 							<input type="hidden" name="realname" value="${userMap.realname}"/>
 						</td>
-						<td width="100px"><span class="btbs">*</span><span>读者对象：</span></td>
+						<td width="100px"><span>读者对象：</span></td>
 						<td width="300px">
 							<select name="reader" id="dzdx" class="dzdx">
 								<option value="0">医务工作者</option>
@@ -61,7 +61,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span class="btbs">*</span><span>预计交稿时间：</span></td>
+						<td><span>预计交稿时间：</span></td>
 						<td>
 							<input class="cg_input" name="deadline" id="deadline" calendar format="'yyyy-mm-dd'" value="" placeholder="预计交稿时间"/>
 						</td>
@@ -78,17 +78,17 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span class="btbs">*</span><span>预估字数：</span></td>
+						<td><span>预估字数：</span></td>
 						<td>
 							<input class="cg_input" name="word_number" id="word_number" value="" placeholder="单位千字"  maxlength="20"/>
 						</td>
-						<td><span class="btbs">*</span><span>预估图数：</span></td>
+						<td><span>预估图数：</span></td>
 						<td>
 							<input class="cg_input" name="picture_number" id="picture_number" value=""  maxlength="20"/>
 						</td>
 					</tr>
 						<tr>
-						<td><span class="btbs">*</span><span>学科及专业：</span></td>
+						<td><span>学科及专业：</span></td>
 						<td>
 							<input class="cg_input" name="subject" id="subject" placeholder="学科及专业" value="" />
 						</td>
@@ -125,14 +125,14 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span>银行账户：</span></td>
+						<td><span class="btbs">*</span><span>银行账户：</span></td>
 						<td>
 							<input class="cg_input" name="account_number" id="account_number" placeholder="请填写银行账户" value=""/> 
 							<%-- <select id="yhxxid" name="bank_account_id">
 								${bankSelects}
 							</select> --%>
 						</td>
-						<td><span>开户银行：</span></td>
+						<td><span class="btbs">*</span><span>开户银行：</span></td>
 						<td>
 							<input class="cg_input" name="bank" id="bank" placeholder="开户银行" value="" />
 						</td>
@@ -253,7 +253,7 @@
 							<td><input class="sb_input" style="width: 100px;" name="write_realname" placeholder="编者姓名" value=""/></td>
 							<td>
 								<select id="r_sex" name="sex">
-									<option value="0">男</option>
+									<option value="0" selected="selected">男</option>
 									<option value="1">女</option>
 								</select>
 							</td>

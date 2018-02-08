@@ -5,9 +5,9 @@
 .sbxq_title span{
 	font-family: MicrosoftYaHei;
 	letter-spacing: 0px;
-	color: #999999;
+	
 }
-/*医学随笔*/
+
 .notes {
     float:left;
     /*height: 830px;*/
@@ -56,17 +56,15 @@
     margin-top:30px
 }
 .notes .item .command{
-    height:30px;
+     height:30px;
     width: 40px;
     float:left;
     position:absolute;
     top:10px;
     margin-top: 10px;
-    position:absolute;
-    top:10px;
     left:-6px;
-    color: #ffffff;
-    background-image:url("../../testfile/recommend.png");
+    color:white;
+    background-image:url(../../image/wenzhangtuijian.png);
     cursor:pointer;
 }
 .notes .item .content{

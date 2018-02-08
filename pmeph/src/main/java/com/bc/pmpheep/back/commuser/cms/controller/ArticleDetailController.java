@@ -23,6 +23,7 @@ import com.bc.pmpheep.general.pojo.Content;
 import com.bc.pmpheep.general.pojo.Message;
 import com.bc.pmpheep.general.service.ContentService;
 import com.bc.pmpheep.general.service.MessageService;
+import com.bc.pmpheep.general.service.SensitiveService;
 
 /**
  * 医学随笔文章详情
@@ -38,6 +39,9 @@ public class ArticleDetailController extends BaseController {
 	private ArticleDetailService articleDetailService;
 	@Autowired
 	private ContentService contentService;
+	@Autowired
+	@Qualifier("com.bc.pmpheep.general.service.SensitiveService")
+	private SensitiveService sensitiveService;
 	
 
 	/**
@@ -191,7 +195,14 @@ public class ArticleDetailController extends BaseController {
 		 String title=request.getParameter("title");
 //		String wid = "10";
 		String content=request.getParameter("content");
-		
+		Map<String, Object> flagMap = new HashMap<String, Object>();
+		if (sensitiveService.confirmSensitive(content)){
+			List<String> sensitives = sensitiveService.getSensitives(null, content);
+			flagMap.put("returncode", "ERROR");
+			flagMap.put("content", sensitiveService.delHTMLTag(content));
+			flagMap.put("value", sensitives);
+			return flagMap;
+		}
 		Map<String, Object> user=this.getUserInfo();
 		/*map.put("score", request.getParameter("score"));*/
 		map.put("parent_id", wid); //上级id
@@ -202,7 +213,7 @@ public class ArticleDetailController extends BaseController {
 		map.put("path",0); //根路径
 		map.put("title",title); //标题
 		
-		Map<String, Object> flagMap = articleDetailService.insertWriteArticle(map,content);
+		flagMap = articleDetailService.insertWriteArticle(map,content);
 		return flagMap;
 	}
 	

@@ -363,8 +363,16 @@ public class PersonalServiceImpl implements PersonalService {
 
 		@Override
 		public Map<String, Object> queryOurFriendShip(String userId,String logUserId) {
+			//friendShip初始化为未申请好友状态
 			Map<String,Object> friendShip = new HashMap<String,Object>();
-			//friendShip.putAll(personaldao.queryOurFriendShip(userId,logUserId));
+			friendShip.put("id", 0);
+			friendShip.put("isBeenRequest", 0);
+			friendShip.put("hasRequest", 0);
+			friendShip.put("status", -1);
+			//查询数据库中两人好友状态
+			
+			List<Map<String,Object>> r= personaldao.queryOurFriendShip(userId,logUserId);
+			friendShip = r!=null&&r.size()>0?r.get(0):friendShip;
 			return friendShip;
 		}
 
