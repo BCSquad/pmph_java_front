@@ -162,6 +162,106 @@ request.setAttribute("currentTime",datetime);
                 		<c:forEach items="${List_map }" var="c">
                 			<div class="trendstWrapper"> 
                 			<c:choose>
+                				<%-- 0动态 0类  --%>
+                				<c:when test="${c.type == 0}">	
+                					<div class="issue_line"><span class="issue_name">${c.detail.title }</span><span class="issue_time">${c.trendst_date }</span></div>
+           							<div class="msg_line">
+           								<div class="msg_content">
+           									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
+           									${c.detail.content }					
+           								</div>
+           								<div class="${c.detail.img == 1?'success_smile ':'' + c.detail.img == 2?'fail_unhappy ':''}"></div>
+           							</div> 
+                				</c:when>
+                				<%-- 0动态 0类 end --%>
+                				
+                				<%-- 1动态 文章发表 --%>
+                				<c:when test="${c.type == 1}">	
+                					<div class="issue_line"><span class="issue_name">发表了随笔文章</span><img class="img_xiewenzhang" src="${ctx }/statics/image/xiewenzhang.png"><span class="issue_time">${c.trendst_date }</span></div>
+               							<div class="content_line">
+               								
+               								<c:if test="${c.cms.is_deleted ==false}">
+	               								<div class="img_wrapper ">
+	               									<img class="img_mongoDB" name="${c.cms.mid }" src="">
+	               								</div>
+               								</c:if>
+               								<div class="content_wrapper">
+               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new article_new"></div></c:if>
+               									<c:if test="${selfLog == true && c.cms.is_deleted==false && c.cms.is_staging== true}"><div class="status_tag toApply">未提交</div></c:if>
+            									<c:if test="${selfLog == true && c.cms.is_deleted==false && c.cms.is_staging== false && c.cms.auth_status ==0}"><div class="status_tag toAudit">待审核</div></c:if>
+            									<c:if test="${selfLog == true && c.cms.is_deleted==false && c.cms.is_staging== false && c.cms.auth_status ==1}"><div class="status_tag reject">未通过</div></c:if>
+            									<c:if test="${selfLog == true && c.cms.is_deleted==false && c.cms.is_staging== false && c.cms.auth_status ==2}"><div class="status_tag Audited">已通过</div></c:if>
+               									<c:if test="${selfLog == true && c.cms.is_deleted !=false}"><div class="status_tag reject">已删除</div></c:if>
+               									
+               									<c:if test="${c.cms.is_deleted == false}">
+               										<div class="article_title"><a class="not-like-an-a" target="_blank" href="/articledetail/toPage.action?wid=${c.cms.id}">${c.cms.title }</a></div>
+               									</c:if>
+               									<c:if test="${c.cms.is_deleted == true}">
+               										<div class="article_title">该文章已删除</div>
+               									</c:if>
+               									<div class="article_summary">${c.cms.is_deleted == "0"?c.cms.summary:"该文章已删除" } ...</div>
+               								</div>
+               							</div>
+               							<div class="operate_wrapper">
+               								<c:if test="${c.cms.is_deleted ==false && selfLog == true && c.cms.auth_status != 2}">
+	               								<a target="_blank" href="${ctx }/writerArticle/initWriteArticle.action?id=${c.cms.id}&userid=${logUserId}"><div class="img img_edit" ></div><div>编辑</div></a> 
+	               							</c:if>
+	               							<c:if test="${c.cms.is_deleted ==false && selfLog == true}">
+	               								<a onclick="deleteArticle('${c.cms.id}','${c.cms.title }','0')" ><div class="img img_delete"></div><div>删除</div></a>
+               								</c:if>
+               							</div>
+                				</c:when>
+                				<%-- 1动态 文章发表end --%>
+                				
+                				<%-- 2动态 文章评论 --%>
+                				<c:when test="${c.type == 2}">	
+                					<div class="issue_line"><span class="issue_name">评论了文章</span><span class="issue_time">${c.trendst_date }</span></div>
+               							<div class="content_line">
+											<c:if test="${c.p_cms.is_deleted ==false}">
+	               								<div class="img_wrapper ">
+	               									<img class="img_mongoDB" name="${c.p_cms.mid }" src="">
+	               								</div>
+               								</c:if>
+               								<div class="content_wrapper">
+               								
+               									
+               									<c:if test="${selfLog == true && c.p_cms.is_deleted !=false}"><div class="status_tag reject">已删除</div></c:if>
+               									
+               									<c:if test="${c.p_cms.is_deleted == false}">
+               										<div class="article_title"><a class="not-like-an-a" target="_blank" href="/articledetail/toPage.action?wid=${c.p_cms.id}">${c.p_cms.title }</a></div>
+               									</c:if>
+               									
+               									<c:if test="${c.p_cms.is_deleted == true}">
+               										<div class="article_title">该文章已删除</div>
+               									</c:if>
+               									
+               									<div class="sub_title">
+	               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
+	               									<c:if test="${selfLog == true && c.cms.is_deleted==false && c.cms.is_staging== true}"><div class="status_tag toApply">未提交</div></c:if>
+            										<c:if test="${selfLog == true && c.cms.is_deleted==false && c.cms.is_staging== false && c.cms.auth_status ==0}"><div class="status_tag toAudit">待审核</div></c:if>
+            										<c:if test="${selfLog == true && c.cms.is_deleted==false && c.cms.is_staging== false && c.cms.auth_status ==1}"><div class="status_tag reject">未通过</div></c:if>
+            										<c:if test="${selfLog == true && c.cms.is_deleted==false && c.cms.is_staging== false && c.cms.auth_status ==2}"><div class="status_tag Audited">已通过</div></c:if>
+	               									<c:if test="${c.cms.is_deleted !=false}"><div class="status_tag reject">已删除</div></c:if>
+		               								${c.realname } 评论了《${(c.p_cms.is_deleted ==false)?c.p_cms.title:'已删除'}》：“${(c.p_cms.is_deleted ==true || c.cms.is_deleted ==true)?'评论了:“该条评论已删除”。':c.cms.summary }”。
+               									</div>
+               									
+               									
+               									<div class="article_summary">${c.p_cms.is_deleted == false?c.p_cms.summary:"该文章已删除" } ...</div>
+               								</div>
+               							</div>
+               							<div class="operate_wrapper">
+	               							<c:if test="${(c.p_cms.is_deleted ==false && c.cms.is_deleted ==false) && selfLog == true}">
+	               								<a onclick="deleteArticle('${c.cms.id}','${c.p_cms.title }','1')" ><div class="img img_delete"></div><div>删除</div></a>
+               								</c:if>
+               							</div>
+                				</c:when>
+                				<%-- 2动态 文章评论 end --%>
+                			</c:choose>
+                			
+                			
+                			
+                			
+                			<c:choose>
                 				<%-- 通过动态 --%>
                						<c:when test="${c.table_name == 'jcsb' && c.trendst_type == 1} "><%-- 教材申报 通过 --%>
                							<div class="issue_line"><span class="issue_name">通过了审核</span><span class="issue_time">${c.trendst_date }</span></div>

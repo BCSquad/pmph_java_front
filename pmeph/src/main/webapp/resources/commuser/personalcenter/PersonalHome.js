@@ -157,11 +157,13 @@ function addFriendfun(uid,realname,status){
   }
   
   /**
-   * 删除文章
+   * 删除文章 cat 0 删文章 1删文章评论
    */
-  function deleteArticle(id,title){
+  function deleteArticle(id,title,cat){
+	  var msg ='';
+	  msg = cat=="0"?'确定要删除《'+title+'》吗？':'确定要删除这条对《'+title+'》的评论吗？';
 	  window.message.confirm(
-				'确定要删除《'+title+'》吗？'
+			  	msg
 				,{icon: 3, title:'提示',btn:["确定","取消"]}
 				,function(index){
 					layer.close(index);

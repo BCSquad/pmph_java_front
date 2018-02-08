@@ -1378,3 +1378,7 @@ button.btn_addFriend.isFriend {
 	font-size: 18px;
 }
 
+a{
+	text-decoration: blink;
+	color: inherit;
+}
