@@ -10,9 +10,9 @@ ul li {
     list-style: none;
 }
 
-/*轮播图样式*/
+/*杞挱鍥炬牱寮�/
 
-/*banner的长宽根据图片大小设置*/
+/*banner鐨勯暱瀹芥牴鎹浘鐗囧ぇ灏忚缃�/
 
 /*  .banner {
       position: relative;
@@ -70,7 +70,7 @@ ul li {
     margin-top: -30px;
     background-color: #333;
     cursor: pointer;
-    font-family: "宋体";
+    font-family: "瀹嬩綋";
     opacity: .2;
     line-height: 58px;
     color: #fff;
@@ -538,8 +538,8 @@ ul li {
     height: 28px;
     line-height: 28px;
     color: #333333;
-    text-overflow: ellipsis; /*超出部分省略号显示*/
-    white-space: nowrap; /*强制不换行*/
+    text-overflow: ellipsis; /*瓒呭嚭閮ㄥ垎鐪佺暐鍙锋樉绀�/
+    white-space: nowrap; /*寮哄埗涓嶆崲琛�/
     overflow: hidden;
 }
 
@@ -763,8 +763,8 @@ ul li {
     margin-top: 24px;
     color: #333333;
     overflow: hidden;
-    text-overflow: ellipsis; /*超出部分省略号显示*/
-    white-space: nowrap; /*强制不换行*/
+    text-overflow: ellipsis; /*瓒呭嚭閮ㄥ垎鐪佺暐鍙锋樉绀�/
+    white-space: nowrap; /*寮哄埗涓嶆崲琛�/
     text-align: center;
 
 }
@@ -883,7 +883,7 @@ ul li {
     margin-bottom: 15px;
     width: 252px;
     height: 73px;
-    text-overflow: ellipsis; /*超出部分省略号显示*/
+    text-overflow: ellipsis; /*瓒呭嚭閮ㄥ垎鐪佺暐鍙锋樉绀�/
     overflow: hidden;
 }
 
@@ -952,8 +952,8 @@ ul li {
     width: 252px;
     margin-left: 15px;
     overflow: hidden;
-    text-overflow: ellipsis; /*超出部分省略号显示*/
-    white-space: nowrap; /*强制不换行*/
+    text-overflow: ellipsis; /*瓒呭嚭閮ㄥ垎鐪佺暐鍙锋樉绀�/
+    white-space: nowrap; /*寮哄埗涓嶆崲琛�/
     height: 40px;
 }
 
@@ -1411,7 +1411,7 @@ ul li {
     line-height: 24px;
     letter-spacing: 0px;
     color: #333333;
-    height: 79px;
+    height: 66px;
     overflow: hidden;
 }
 

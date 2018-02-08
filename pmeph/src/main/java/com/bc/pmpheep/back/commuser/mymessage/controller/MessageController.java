@@ -178,7 +178,7 @@ public class MessageController extends BaseController{
 		for(int i =0;i<list.size();i++){
 			Map<String,Object> map1 = list.get(i);
 			//处理系统消息 消息内容
-			if(map1.get("msgType").toString().equals("1")||map1.get("msgType").toString().equals("0")){
+			/*if(map1.get("msgType").toString().equals("1")||map1.get("msgType").toString().equals("0")){
 				//mongoDB查询通知内容
 				Message message = mssageService.get(map1.get("fId").toString());
 				//Content content = contentService.get(map1.get("fId").toString());
@@ -193,7 +193,7 @@ public class MessageController extends BaseController{
 					map1.put("title","内容空!");
 				}
 				
-			}
+			}*/
 			
 			//处理消息发送者头像
 			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
@@ -243,7 +243,7 @@ public class MessageController extends BaseController{
 		List<Map<String,Object>> list = noticeMessageService.selectNoticeMessage(paraMap);
 		for(int i =0;i<list.size();i++){
 			Map<String,Object> map1 = list.get(i); 
-			if(map1.get("msgType").toString().equals("1")||map1.get("msgType").toString().equals("0")){
+			/*if(map1.get("msgType").toString().equals("1")||map1.get("msgType").toString().equals("0")){
 				Content content = contentService.get(map1.get("fId").toString());
 				if(null!=content){
 					map1.put("title",content.getContent());
@@ -251,7 +251,7 @@ public class MessageController extends BaseController{
 					map1.put("title","内容空!");
 				}
 				
-			}
+			}*/
 			
 			//处理消息发送者头像
 			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
