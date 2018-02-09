@@ -82,7 +82,8 @@
 	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
 		select t1.*,t2.org_name dwmc from (select id,material_id,user_id,realname,sex,birthday,experience,org_name,position,title,address,postcode,handphone,email,idtype,
 idcard,telephone,fax,org_id,online_progress,auth_user_id,auth_date,offline_progress,paper_date,is_staging*1 is_staging,is_deleted*1 is_deleted,
-gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,expertise,return_cause from declaration) t1 left join org t2 on t1.org_id = t2.id
+gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,expertise,return_cause from declaration) t1 left join (select id,org_name from org 
+	union select '0' id,'人民卫生出版社' org_name from dual) t2 on t1.org_id = t2.id
 		 where 1= 1 
 		<if test="user_id != null and user_id != ''">
 			and t1.user_id = #{user_id} 
@@ -328,25 +329,28 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 	<!-- 查询机构列表 -->
 	<select id="queryOrgList" parameterType="PageParameter" resultType="java.util.Map">
 		select * from (
-			select t1.material_id,t1.org_id,t2.* from material_org t1 LEFT JOIN org t2 on t1.org_id = t2.id where 1=1
+			select t1.material_id,t1.org_id,t2.org_name,t2.sort from material_org t1 LEFT JOIN org t2 on t1.org_id = t2.id where 1=1
 			<if test="parameter.material_id != null and parameter.material_id != ''">
 				and t1.material_id = #{parameter.material_id}
 			</if>
-			<if test="parameter.org_name != null and parameter.org_name != ''">
-				and t2.org_name like #{parameter.org_name}
+			UNION select '' material_id,'0' org_id,'人民卫生出版社' org_name,'0' sort from dual
+		)t 
+		<if test="parameter.org_name != null and parameter.org_name != ''">
+			where t.org_name like #{parameter.org_name}
 			</if>
-		)t order by sort asc limit #{start},#{pageSize}
+		 order by sort asc limit #{start},#{pageSize}
 	</select>
 	<!-- 机构数据总数 -->
 	<select id="queryOrgCount" parameterType="PageParameter" resultType="int">
 		select count(*) from (
-			select t1.material_id,t1.org_id,t2.* from material_org t1 LEFT JOIN org t2 on t1.org_id = t2.id where 1=1
+			select t1.material_id,t1.org_id,t2.org_name,t2.sort from material_org t1 LEFT JOIN org t2 on t1.org_id = t2.id where 1=1
 			<if test="parameter.material_id != null and parameter.material_id != ''">
 				and t1.material_id = #{parameter.material_id}
 			</if>
-			<if test="parameter.org_name != null and parameter.org_name != ''">
-				and t2.org_name like #{parameter.org_name}
-			</if>
+			UNION select '' material_id,'0' org_id,'人民卫生出版社' org_name,'0' sort from dual
 		)t
+			<if test="parameter.org_name != null and parameter.org_name != ''">
+				where t.org_name like #{parameter.org_name}
+			</if>
 	</select>
 </mapper>
