@@ -145,4 +145,9 @@ public class HomeServiceImpl implements HomeService {
 		List<Map<String, Object>> list=homeDao.queryMaterial(id);
 		return list;
 	}
+
+	@Override
+	public int countBookByType(String type) {
+		return this.homeDao.countBookByType(type);
+	}
 }

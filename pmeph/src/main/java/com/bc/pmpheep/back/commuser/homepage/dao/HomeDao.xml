@@ -76,9 +76,9 @@
 			FROM
 			book AS b
 			INNER JOIN 
-			`material_type` t
+			material_type t
 		ON
-			t.`id` = b.`type`
+			t.id = b.type
 			
 			and
 			(
@@ -237,4 +237,29 @@ LIMIT 0,10
         insert into writer_friend 
         (request_id,target_id,status)values(#{request_id},#{target_id},0);
     </insert>
+    <!--  根据分类查询书籍总数 -->
+    <select id="countBookByType" parameterType="java.lang.String" resultType="java.lang.Integer">
+    	SELECT
+			count(*) 
+			FROM
+			book AS b
+			INNER JOIN 
+			material_type t
+		ON
+			t.id = b.type
+			
+			and
+			(
+				SUBSTRING_INDEX(SUBSTRING_INDEX(CONCAT(t.path,'-',t.id),'-',
+										(select 
+											cast(
+													(CHAR_LENGTH(path)-CHAR_LENGTH(REPLACE(path,'-','')))/CHAR_LENGTH('-')+2
+														as decimal(9,2)
+											)
+											 from material_type 
+											where id = cast(#{type} as decimal(9,2)))
+								),'-',-1) = #{type}
+				or t.id = 	#{type}		
+			)
+    </select>
 </mapper>

@@ -111,7 +111,8 @@ public class HomeController extends BaseController{
         rowsmap.put("startrows", -1);
 //      rowsmap.put("type", MapUtils.getIntValue(types.get(0), "id"));
         rowsmap.put("type",1);
-        List<Map<String, Object>> listrows = homeService.queryBook(rowsmap);
+    //    List<Map<String, Object>> listrows = homeService.queryBook(rowsmap);
+        int listrows = homeService.countBookByType("1");
         //模板(首页默认显示学校教育下的书籍,从第一条开始显示，每页10条数据)
         Map<String, Object> pmap = new HashMap<String, Object>();
         pmap.put("startrows", 0);
@@ -137,10 +138,10 @@ public class HomeController extends BaseController{
         }
         html += templateService.mergeTemplateIntoString(vm, map2);
 
-        if (listrows.size() % 10 == 0) {
-            flag = listrows.size() / 10;
+        if (listrows % 10 == 0) {
+            flag = listrows / 10;
         } else {
-            flag = listrows.size() / 10 + 1;
+            flag = listrows / 10 + 1;
         }
         modelAndView.addObject("allrows", flag);
         modelAndView.addObject("thisrows", "1");
