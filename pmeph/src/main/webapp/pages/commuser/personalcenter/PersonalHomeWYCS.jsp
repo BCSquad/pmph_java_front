@@ -199,6 +199,7 @@ request.setAttribute("currentTime",datetime);
                									<c:if test="${c.cms.is_deleted == true}">
                										<div class="article_title">该文章已删除</div>
                									</c:if>
+               									${c.cms.Content.content }
                									<div class="article_summary">${c.cms.is_deleted == "0"?c.cms.summary:"该文章已删除" } ...</div>
                								</div>
                							</div>
