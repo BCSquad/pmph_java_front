@@ -96,4 +96,9 @@ public interface HomeDao {
      * @return list
      */
     List<Map<String, Object>> queryMaterial(@Param("id") String id);
+    
+    /**
+     * 根据分类查询书籍总数
+     */
+    int countBookByType(String type);
 }

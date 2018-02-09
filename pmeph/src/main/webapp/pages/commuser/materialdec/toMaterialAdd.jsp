@@ -597,7 +597,7 @@
 			</div>
 		</div>
 		<!--主编学术专著情况表-->
-		<div class="sbxq_item1" id="zbxszz">
+		<div class="sbxq_item" id="zbxszz">
 			<div>
 				<span id="tsxz_span7"></span>
 				<span class="tsxz_title">主编学术专著情况</span>
@@ -621,8 +621,8 @@
 							<td><input class="cg_input" name="zb_monograph_name" id="zb_monograph_name" value="" style="width: 300px;" placeholder="教材名称" maxlength="16"/></td>
 							<td style="color: #333333;">
 								<table class="radio_tb" style="width: 100px;"><tr>
-									<td><input type="radio" name="is_self_paid_1" value="1" checked="checked"/>是</td>
-									<td><input type="radio" name="is_self_paid_1" value="2" />否</td>
+									<td><input type="radio" name="is_self_paid_1" value="0" checked="checked"/>自费</td>
+									<td><input type="radio" name="is_self_paid_1" value="1" />公费</td>
 								</tr></table>
 								<input type="hidden" name="is_self_paid" value="is_self_paid_1" />
 							</td>
@@ -636,7 +636,7 @@
 			</div>
 		</div>
 		<!--出版行业获奖情况表-->
-		<div class="sbxq_item1" id="publish">
+		<div class="sbxq_item" id="publish">
 			<div>
 				<span id="tsxz_span7"></span>
 				<span class="tsxz_title">出版行业获奖情况</span>
@@ -669,7 +669,7 @@
 			</div>
 		</div>
 		<!--SCI论文投稿及影响因子情况表-->
-		<div class="sbxq_item1" id="sci">
+		<div class="sbxq_item" id="sci">
 			<div>
 				<span id="tsxz_span7"></span>
 				<span class="tsxz_title">SCI论文投稿及影响因子情况</span>
@@ -702,7 +702,7 @@
 			</div>
 		</div>
 		<!--临床医学获奖情况表-->
-		<div class="sbxq_item1" id="clinical">
+		<div class="sbxq_item" id="clinical">
 			<div>
 				<span id="tsxz_span7"></span>
 				<span class="tsxz_title">临床医学获奖情况表</span>
@@ -740,7 +740,7 @@
 			</div>
 		</div>
 		<!--学术荣誉授予情况表-->
-		<div class="sbxq_item1" id="acade">
+		<div class="sbxq_item" id="acade">
 			<div>
 				<span id="tsxz_span7"></span>
 				<span class="tsxz_title">学术荣誉授予情况</span>

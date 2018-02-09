@@ -662,8 +662,8 @@ function add_zbxszz(){
 			"<td><input class='cg_input' name='zb_monograph_name' value='' style='width: 300px;' placeholder='教材名称' maxlength='16'/></td>"+
 			"<td style='color: #333333;'>"+
 				"<table class='radio_tb' style='width: 100px;'><tr>"+
-					"<td><input type='radio' name='is_self_paid_"+num+"' value='1' checked='checked'/>是</td>"+
-					"<td><input type='radio' name='is_self_paid_"+num+"' value='2' />否</td>"+
+					"<td><input type='radio' name='is_self_paid_"+num+"' value='0' checked='checked'/>自费</td>"+
+					"<td><input type='radio' name='is_self_paid_"+num+"' value='1' />公费</td>"+
 				"</tr></table>"+
 				"<input type='hidden' name='is_self_paid' value='is_self_paid_"+num+"' /></td>"+
 			"<td><input class='cg_input' name='zb_publisher' value='' style='width: 180px;' placeholder='出版单位'  maxlength='16'/></td>"+
