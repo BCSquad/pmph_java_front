@@ -2,25 +2,53 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.bc.pmpheep.back.authadmin.applydocaudit.dao.DataAuditDao">
+	
 	<!--分页查询条件查询列表 -->
-	<select id="findDataAudit" parameterType="java.util.Map"
-		resultType="java.util.Map">
-		SELECT
-		d.id,
-		d.realname,
-		d.position,
-		d.title,
-		t.textbook_name,
-		p.preset_position,
-		d.online_progress,
-		d.offline_progress,
-		p.chosen_position
+	<select id="findDataAudit" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[SELECT
+		d.id as did,d.realname as drealname,d.position as dposition, d.title as dtitle,group_concat(concat(t.textbook_name,'-',(case  
+		when p.preset_position = 4 then '主编' 																															
+		when p.preset_position = 2 then '副主编' 
+		when p.preset_position = 1 then  '编委'
+		when p.preset_position = 8 then  '数字编委'
+		when p.preset_position = 3 then '副主编,编委'
+		when p.preset_position = 5 then '主编,编委'
+		when p.preset_position = 6 then '主编,副主编'
+		when p.preset_position = 12 then '主编,数字编委'
+		when p.preset_position = 9 then '数字编委,编委'
+		when p.preset_position = 10 then '数字编委,副主编'
+		when p.preset_position = 11 then '数字编委,编委,副主编'
+		when p.preset_position = 13 then '数字编委,主编,编委'
+		when p.preset_position = 14 then '数字编委,主编,副主编'
+		when p.preset_position = 15 then '数字编委,主编,编委,副主编'
+		else ''  end )) SEPARATOR '<br/>') as bpp,
+		(case  when d.online_progress=0  then '未提交'  
+		when d.online_progress=1  then '已提交但是待审核' 
+		when d.online_progress=2  then '被申报单位退回' 
+		when d.online_progress=3  then '申报单位通过' 
+		when d.online_progress=4  then '出版社退回申报单位'
+		when d.online_progress=5  then '出版社退回个人'	END)	as 	onlineprogress,
+		(case  when d.offline_progress=0  then '未收到'  
+		when d.offline_progress=1  then '' 
+		when d.offline_progress=2  then '已收到' 	END)	as 	offlineprogress,
+		group_concat(concat(t.textbook_name,'-',(case  
+		when t.is_published=0  then '审核中' 
+		when pp.chosen_position=0 OR t.is_published is NULL  then '遴选结束' 
+		when pp.chosen_position = 4 then '主编' 																															
+		when pp.chosen_position = 2 then '副主编' 
+		when pp.chosen_position = 1 then  '编委'
+		when pp.chosen_position = 8 then  '数字编委'
+		when pp.chosen_position = 12 then '主编,数字编委'
+		when pp.chosen_position = 9 then '数字编委,编委'
+		when pp.chosen_position = 10 then '数字编委,副主编'
+		else ''  end )) SEPARATOR '<br/>') as cp
 		FROM
 		declaration AS d
 		LEFT JOIN dec_position AS p ON d.id = p.declaration_id
-		LEFT JOIN textbook AS t ON p.textbook_id = t.id
+		LEFT JOIN dec_position_published AS pp ON d.id = pp.declaration_id
+		LEFT JOIN textbook AS t ON p.textbook_id = t.id 
 		LEFT JOIN org as o on d.org_id=o.id 
-		INNER JOIN org_user as  ou on  d.org_id=ou.org_id and d.online_progress!=0
+		INNER JOIN org_user as  ou on  d.org_id=ou.org_id ]]>
 		<where>
 			1=1
 			<if test="queryName != null and queryName != '' ">
@@ -33,7 +61,8 @@
 				and ou.id = ${userId}
 			</if>
 		</where>
-		limit ${startNum},${pageSize}
+		GROUP BY d.id
+		limit ${startNum},${pageSize}  
 	</select>
 	
 	
@@ -45,10 +74,7 @@
 		COUNT(*)
 		FROM
 		declaration AS d
-		LEFT JOIN dec_position AS p ON d.id = p.declaration_id
-		LEFT JOIN textbook AS t ON p.textbook_id = t.id
-		LEFT JOIN org as o on d.org_id=o.id 
-		INNER JOIN org_user as  ou on  d.org_id=ou.org_id and d.online_progress!=0
+		INNER JOIN org_user as  ou on  d.org_id=ou.org_id 
 		<where>
 		1=1
 			<if test="queryName != null and queryName != '' ">
@@ -61,6 +87,7 @@
 				and ou.id = ${userId}
 			</if>
 		</where>
+		
 	</select>
 	
 	<!--标题 -->

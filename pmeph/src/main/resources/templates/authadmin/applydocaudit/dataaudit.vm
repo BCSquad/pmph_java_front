@@ -4,86 +4,13 @@
 #foreach($c in $!{List_map})
 	<tr>
 	    <td>$teacherauthNum</td>
-	   	<td class="font_name" target="_blank" onclick="toName($!{material_id},$!{c.id})">$!{c.realname}</td>
-		<td>$!c.position</td>
-		<td>$!c.title</td>
-		
-		#if($c.preset_position == 0)
-	    	<td>$!{c.textbook_name}-未选择</td>
-	    #elseif($c.preset_position == 1)
-	    	<td>$!{c.textbook_name}-编委</td>
-	   	#elseif($c.preset_position == 2)
-    	<td>$!{c.textbook_name}-副主编 </td>
-    	#elseif($c.preset_position == 3)
-    	<td>$!{c.textbook_name}-副主编,编委</td>
-    	#elseif($c.preset_position == 4)
-    	<td>$!{c.textbook_name}-主编</td>
-    	#elseif($c.preset_position == 5)
-    	<td>$!{c.textbook_name}-主编,编委</td>
-    	#elseif($c.preset_position == 6)
-    	<td>$!{c.textbook_name}-主编,副主编</td>
-    	#elseif($c.preset_position == 7)
-    	<td>$!{c.textbook_name}-主编,副主编,编委</td>
-    	#elseif($c.preset_position == 8)
-    	<td>$!{c.textbook_name}-数字编委</td>
-    	#elseif($c.preset_position == 9)
-    	<td>$!{c.textbook_name}-数字编委,编委</td>
-    	#elseif($c.preset_position == 10)
-    	<td>$!{c.textbook_name}-副主编,数字编委</td>
-    	#elseif($c.preset_position == 11)
-    	<td>$!{c.textbook_name}-数字编委,副主编,编委</td>
-    	#elseif($c.preset_position == 12)
-    	<td>$!{c.textbook_name}-主编,数字编委</td>
-    	#elseif($c.preset_position == 13)
-    	<td>$!{c.textbook_name}-主编,数字编委,编委</td>
-    	#elseif($c.preset_position == 14)
-    	<td>$!{c.textbook_name}-数字编委,主编,副主编</td>
-    	#elseif($c.preset_position == 15)
-    	<td>$!{c.textbook_name}-数字编委,主编,副主编,编委</td>
-	    #else
-	    	<td></td>
-	    #end
-		
-		#if($c.online_progress == 0)
-	    	<td>未提交</td>
-	    #elseif($c.online_progress == 1)
-	    	<td>已提交</td>
-	   	#elseif($c.online_progress == 2)
-    	<td>被退回 </td>
-    	#elseif($c.online_progress == 3)
-    	<td>通过</td>
-	    #else
-	    	<td></td>
-	    #end
-		
-		 #if($c.offline_progress == 0)
-	    	<td>未收到</td>
-	    #elseif($c.offline_progress == 1)
-	    	<td>被退回</td>
-	   	#elseif($c.offline_progress == 2)
-	    	<td>已收到 </td>
-	    #else
-	    	<td></td>
-	    #end
-	    
-	    
-	    #if($c.chosen_position == 0)
-	    	<td>无</td>
-	    #elseif($c.chosen_position == 1)
-	    	<td>编委</td>
-	   	#elseif($c.chosen_position == 2)
-	    	<td>副主编  </td>
-	    #elseif($c.chosen_position == 4)
-	    	<td>主编</td>
-	    #elseif($c.chosen_position == 9)
-	    	<td>编委,数字编委</td>
-	    #elseif($c.chosen_position == 10)
-	    	<td>副主编,数字编委</td>
-	    #elseif($c.chosen_position == 12)
-	    	<td>主编,数字编委</td>
-	    #else
-	    	<td></td>
-	    #end
+	   	<td class="font_name" target="_blank" onclick="toName($!{material_id},$!{c.did})">$!{c.drealname}</td>
+		<td>$!c.dposition</td>
+		<td>$!c.dtitle</td>
+		<td>$!c.bpp</td>
+		<td>$!c.onlineprogress</td>
+		<td>$!c.offlineprogress</td>
+		<td>$!c.cp</td>
 	</tr>	
 	
 	#set($teacherauthNum = $teacherauthNum + 1)
