@@ -68,7 +68,7 @@ ul li {
     margin-top: -30px;
     background-color: #333;
     cursor: pointer;
-    font-family: "鐎瑰缍�;
+    font-family: "瀹嬩綋";
     opacity: .2;
     line-height: 58px;
     color: #fff;
@@ -159,7 +159,7 @@ ul li {
     line-height: 34px;
 }
 
-/**闂佹彃绉堕崑锝夊礂閾忣偅鏆�*/
+/**闁插秶鍋ｉ崗铏暈**/
 .content {
     width: 100%;
     margin-top: 20px;
@@ -191,13 +191,13 @@ ul li {
     height: 25px;
     margin: auto;
     margin-top: 10px;
-    text-overflow:ellipsis; 
+    text-overflow:ellipsis;
 	white-space:nowrap;
 	overflow: hidden;
 }
 
 .ir_02 span {
-	text-overflow:ellipsis; 
+	text-overflow:ellipsis;
 	white-space:nowrap;
 	overflow: hidden;
     font-family: MicrosoftYaHei;
@@ -210,7 +210,7 @@ ul li {
     width: 138px;
     margin: auto;
     margin-top: 0px;
-	text-overflow:ellipsis; 
+	text-overflow:ellipsis;
 	white-space:nowrap;
 	overflow: hidden;
 }
@@ -253,7 +253,7 @@ ul li {
     margin-top: 4px;
 }
 
-/**闁告帒妫濋妴锟�/
+/**閸掑棝銆�*/
 .tab-bar .type {
     color: #FC9C03;
     background: white;
@@ -304,7 +304,7 @@ ul li {
     float: left;
 }
 
-/**闁绘埈鍙冨Λ顒佺▕閿曚胶妲�*/
+/**閻戭參妫稊锕佺槑**/
 
 .block .title {
     height: 30px;
@@ -397,11 +397,11 @@ ul li {
     line-height: 24px;
     letter-spacing: 0px;
     color: #333333;
-    height: 66px;
+    height: 74px;
     overflow: hidden;
 }
 
-/**闁搞儱褰為崝鐔煎礆閸℃瑨顤�*/
+/**閸ュ彞鍔熼崚鍡欒**/
 .area4 {
     float: right;
 }
@@ -471,8 +471,8 @@ ul li {
     text-align: center;
     color: #333333;
     height:20px;
-    text-overflow:ellipsis; /*瓒呭嚭閮ㄥ垎鐪佺暐鍙锋樉绀�/
-	white-space:nowrap;/*寮哄埗涓嶆崲琛�/ 
+    text-overflow:ellipsis; /*超出部分省略号显示*/
+	white-space:nowrap;/*强制不换行*/
 	overflow: hidden;
 }
 
@@ -561,7 +561,7 @@ ul li {
     margin-top: 12px;
     margin-left: -3px;
 }
-/**鍥句功鐣呴攢**/
+/**图书畅销**/
 .tscx_type {
     background-color: #dbe9ea;
     height: 28px;

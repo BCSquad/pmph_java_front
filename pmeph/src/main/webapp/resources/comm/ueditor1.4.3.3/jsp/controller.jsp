@@ -33,10 +33,15 @@
                 String id = fileService.saveLocalFile(Thread.currentThread().getContextClassLoader().getResourceAsStream("../../" + url), FileType.CMS_ATTACHMENT, 0);
                 item.put("url", "/image/" + id + ".action");
             }
-        } else if (action.equals("uploadimage")||action.equals("uploadscrawl")) {//uploadscrawl 涂鸦图片 uploadimage 上传图片
+        } else if (action.equals("uploadimage") || action.equals("uploadscrawl")) {//uploadscrawl 涂鸦图片 uploadimage 上传图片
             String url = MapUtils.getString(resultMap, "url", "");
             String id = fileService.saveLocalFile(Thread.currentThread().getContextClassLoader().getResourceAsStream("../../" + url), FileType.CMS_ATTACHMENT, 0);
             resultMap.put("url", "/image/" + id + ".action");
+        } else if (action.equals("uploadfile")) {
+            String url = MapUtils.getString(resultMap, "url", "");
+            String id = fileService.saveLocalFile(Thread.currentThread().getContextClassLoader().getResourceAsStream("../../" + url),
+                    FileType.CMS_ATTACHMENT, MapUtils.getString(resultMap, "original", ""), 0);
+            resultMap.put("url", "/file/download/" + id + ".action");
         } else {
 
             if (action != null &&
@@ -51,7 +56,7 @@
     result = JSON.toJSONString(resultMap);
 
 
-    System.out.println(result);
+    // System.out.println(result);
     out.write(result);
     //out.write( new ActionEnter( request, rootPath ).exec() );
 
