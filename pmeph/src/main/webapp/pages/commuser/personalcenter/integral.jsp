@@ -7,6 +7,7 @@
 %>
 <html>
 <head>
+<title>积分</title>
 <script type="text/javascript">
 	var contextpath = '${pageContext.request.contextPath}/';
 </script>
