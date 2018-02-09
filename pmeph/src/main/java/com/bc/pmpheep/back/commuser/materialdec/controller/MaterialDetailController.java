@@ -466,6 +466,11 @@ public class MaterialDetailController extends BaseController{
 		}else{
 			queryMap.put("declaration_id", declaration_id);
 		}
+		if(material_id == null){
+			queryMap.put("material_id", gezlList.get(0).get("material_id"));
+		}else{
+			queryMap.put("material_id", material_id);
+		}
 		//2.作家申报职位暂存
 		List<Map<String,Object>> tssbList = new ArrayList<Map<String,Object>>();
 		if(gezlList.get(0).get("is_staging").equals("1")){ //表示暂存
