@@ -1,6 +1,8 @@
 package com.bc.pmpheep.back.commuser.personalcenter.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.personalcenter.service.BookDeclareService;
+import com.bc.pmpheep.back.util.StringUtil;
 import com.bc.pmpheep.general.controller.BaseController;
 
 /**
@@ -58,14 +61,20 @@ public class BookDeclareController extends BaseController {
 	public String doBookdeclareAdd(HttpServletRequest request, HttpServletResponse response) {
 		String msg = "";
 		// 创建一个唯一标识
-		String ssid = UUID.randomUUID().toString().substring(0, 28);
+		String editionnum = "10" + new SimpleDateFormat("yyyy").format(new Date());
+		String vn = bdecService.getMaxTopicVn();
+		if (StringUtil.isEmpty(vn)) {
+			vn = "000001";
+		} else {
+			vn = Integer.parseInt(vn.substring(7)) + 1000000 + 1 + "";
+		}
 		String stype = request.getParameter("stype"); // 申报信息存储方式
 		// 插入银行信息
 		Map<String, Object> BankMap = new HashMap<String, Object>();
 		BankMap.put("user_id", request.getParameter("user_id"));
 		BankMap.put("account_name", request.getParameter("realname"));
-		BankMap.put("account_number", request.getParameter("account_number"));
-		BankMap.put("bank", request.getParameter("bank"));
+		BankMap.put("account_number", request.getParameter("bank"));
+		BankMap.put("bank", request.getParameter("account_number"));
 		int bankCount = this.bdecService.insertBank(BankMap);
 		if (bankCount > 0) {
 			List<Map<String, Object>> BankList = new ArrayList<Map<String, Object>>();
@@ -80,9 +89,12 @@ public class BookDeclareController extends BaseController {
 				topicMap.put("is_staging", "0");
 				topicMap.put("auth_progress", "1");
 				topicMap.put("is_opts_handling", "1");
+				topicMap.put("submit_time", new Date());
 			} else {// 2 表示暂存
 				topicMap.put("is_staging", "1");
 				topicMap.put("auth_progress", "0");
+				topicMap.put("is_opts_handling", "0");
+				topicMap.put("submit_time", "");
 			}
 			topicMap.put("bookname", request.getParameter("bookname"));
 			topicMap.put("reader", request.getParameter("reader"));
@@ -95,8 +107,10 @@ public class BookDeclareController extends BaseController {
 			topicMap.put("rank", request.getParameter("rank"));
 			topicMap.put("type", request.getParameter("type"));
 			topicMap.put("bank_account_id", bankid);
-			topicMap.put("purchase", request.getParameter("purchase"));
-			topicMap.put("sponsorship", request.getParameter("sponsorship"));
+			topicMap.put("purchase",
+					"".equals(request.getParameter("purchase")) ? null : request.getParameter("purchase"));
+			topicMap.put("sponsorship",
+					"".equals(request.getParameter("sponsorship")) ? null : request.getParameter("sponsorship"));
 			topicMap.put("original_bookname", request.getParameter("original_bookname"));
 			// 判断是否为翻译书稿，若有值则表示为翻译书籍
 			if (request.getParameter("original_bookname").toString().equals("")) {
@@ -107,8 +121,7 @@ public class BookDeclareController extends BaseController {
 			topicMap.put("original_author", request.getParameter("original_author"));
 			topicMap.put("nation", request.getParameter("nation"));
 			topicMap.put("edition", request.getParameter("edition"));
-			topicMap.put("vn", ssid);
-			topicMap.put("is_opts_handling", "1"); //表示由运维管理
+			topicMap.put("vn", editionnum + vn);
 			int count = this.bdecService.insertTopic(topicMap);
 			if (count > 0) {
 				Map<String, Object> topicLsit = this.bdecService.queryTopic(topicMap);
@@ -183,9 +196,13 @@ public class BookDeclareController extends BaseController {
 		if (stype.equals("1")) { // 表示提交
 			topicMap.put("is_staging", "0");
 			topicMap.put("auth_progress", "1");
+			topicMap.put("is_opts_handling", "1");
+			topicMap.put("submit_time", new Date());
 		} else {// 2 表示暂存
 			topicMap.put("is_staging", "1");
 			topicMap.put("auth_progress", "0");
+			topicMap.put("is_opts_handling", "0");
+			topicMap.put("submit_time", "");
 		}
 		topicMap.put("topic_id", topic_id);
 		topicMap.put("bookname", request.getParameter("bookname"));

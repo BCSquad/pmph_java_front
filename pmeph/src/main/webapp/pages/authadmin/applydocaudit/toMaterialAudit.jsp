@@ -38,10 +38,18 @@
 				<div class="item">
 					<span>图书：</span>
 					<span>${list.textbook_name} — 
+					<c:if test="${list.preset_position == '7'}">主编,副主编,编委</c:if>
+					<c:if test="${list.preset_position == '6'}">主编,副主编</c:if>
+					<c:if test="${list.preset_position == '5'}">主编,编委</c:if>
 					<c:if test="${list.preset_position == '4'}">主编</c:if>
+					<c:if test="${list.preset_position == '3'}">副主编,编委</c:if>
 					<c:if test="${list.preset_position == '2'}">副主编</c:if>
 					<c:if test="${list.preset_position == '1'}">编委</c:if>
 					<c:if test="${list.preset_position == '8'}">数字编委</c:if>
+					<c:if test="${list.preset_position == '9'}">数字编委,编委</c:if>
+					<c:if test="${list.preset_position == '10'}">数字编委,副主编</c:if>
+					<c:if test="${list.preset_position == '12'}">数字编委,主编</c:if>
+					
 					</span>
 					<span>
 					<a href="javascript:" class="filename"  onclick="downLoadProxy('${list.syllabus_id}')">${list.syllabus_name}</a>
