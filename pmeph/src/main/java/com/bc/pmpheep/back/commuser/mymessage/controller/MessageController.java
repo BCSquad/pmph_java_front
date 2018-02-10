@@ -1,5 +1,8 @@
 package com.bc.pmpheep.back.commuser.mymessage.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -203,6 +206,32 @@ public class MessageController extends BaseController{
 				
 			}*/
 			
+			if(map1.get("msgType").toString().equals("4")){
+				String endTimeStr = map1.get("deadline").toString();
+				
+				
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				
+				Date currentTime = new Date();
+				
+				try {
+					
+					
+					Date date = sdf.parse(endTimeStr);
+					if(currentTime.before(date)){
+						mv.addObject("notEnd",1);
+					}else{
+						mv.addObject("notEnd",0);
+					}
+					
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			
+			
 			//处理消息发送者头像
 			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
 				map1.put("avatar", "statics/pictures/head.png");
@@ -261,6 +290,30 @@ public class MessageController extends BaseController{
 				
 			}*/
 			
+			if(map1.get("msgType").toString().equals("4")){
+				String endTimeStr = map1.get("deadline").toString();
+				
+				
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				
+				Date currentTime = new Date();
+				
+				try {
+					
+					
+					Date date = sdf.parse(endTimeStr);
+					if(currentTime.before(date)){
+						map1.put("notEnd",1);
+					}else{
+						map1.put("notEnd",0);
+					}
+					
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+			}
 			//处理消息发送者头像
 			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
 				map1.put("avatar", "statics/pictures/head.png");
@@ -312,6 +365,8 @@ public class MessageController extends BaseController{
 		String materialId=request.getParameter("materialId");
 		String cmsId=request.getParameter("cmsId");
 		//String flag=request.getParameter("flag");
+		String notEnd=request.getParameter("notEnd");
+		String is_material_entry=request.getParameter("is_material_entry");
 		ModelAndView mv = new ModelAndView();
 		Map<String,Object> paraMap = new HashMap<String,Object>();
 		paraMap.put("materialId", materialId);
@@ -340,6 +395,8 @@ public class MessageController extends BaseController{
 			mv.addObject("map",mapTitle);
 			mv.addObject("listAttachment",listAttachment);
 			mv.addObject("listContact",listContact);
+			mv.addObject("notEnd",notEnd);
+			mv.addObject("is_material_entry",is_material_entry);
 			
 			
 		}
