@@ -477,6 +477,7 @@
 			<result property="is_deleted" column="is_deleted" />
 			<result property="gmt_create" column="gmt_create" />
 			<result property="gmt_update" column="gmt_update" />
+			<result property="is_long" column="is_long" />
 		</collection>
 	</resultMap>
 
