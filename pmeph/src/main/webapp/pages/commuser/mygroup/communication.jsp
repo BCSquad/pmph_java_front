@@ -116,7 +116,7 @@
                 <div class="float_left"><span class="li_span1"></span>
                     <text class="font_size16">&ensp;小组成员</text>
                 </div>
-                <div class="float_right font_size14">邀请好友>></div>
+                <div class="float_right font_size14" > <a href="${ctx}/myFriend/listMyFriend.action?pageType=invite&groupId=${thisGroup.id}">邀请好友>></a></div>
             </div>
             <ul>
                 <c:if test="${gropuMemebers !=null }">
