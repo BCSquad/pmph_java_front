@@ -166,3 +166,19 @@ a{
     width: 1200px;
     height: 100%;
 }
+
+.con_css{
+	align:center;
+	margin-left: 80px;
+	margin-right: 80px; 
+}
+
+.con_css p{
+	max-width: 881px;
+	word-break: break-all;
+}
+
+.con_css p img{
+	max-width: 881px;
+	
+}

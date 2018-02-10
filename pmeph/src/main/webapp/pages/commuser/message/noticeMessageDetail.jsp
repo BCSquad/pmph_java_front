@@ -51,7 +51,7 @@
 				               ${map.notice}
 		            </div>
 		        </div> --%>
-		        <div align="center" style="margin-left: 80px;margin-right: 80px;">
+		        <div  class="con_css" >
 		            <p>${content}</p>
 		        </div>
 		        <c:if test="${map.attachment !=null}">
