@@ -1,6 +1,9 @@
 package com.bc.pmpheep.back.commuser.cms.controller;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -133,6 +136,8 @@ public class CmsNoticeManagementController extends BaseController {
 			//标题、时间、邮寄地址、备注
 			Map<String,Object> mapTitle =new HashMap<>();
 			mapTitle=noticeMessageService.queryNoticeMessageDetail(paraMap);
+			SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd");
+			mv.addObject("is_material_entry", mapTitle.get("is_material_entry"));
 			mv.addObject("firsttag", "首页");
 			mv.addObject("firsttag", "首页");
 			mv.addObject("firstpath", "homepage/tohomepage.action");
@@ -149,7 +154,20 @@ public class CmsNoticeManagementController extends BaseController {
 				mv.addObject("secondpath", "cmsnotice/tolist.action");
 			}
 			List<Map<String, Object>> cmsAttach = noticeMessageService.queryCMSAttach(paraMap);
+			mv.addObject("notEnd", 0);
 			if(mapTitle!=null && mapTitle.size()>0 && mapTitle.get("is_material_entry").toString()=="true"){
+				try {
+					Date newdate=new Date();
+					Date date = fmt.parse(mapTitle.get("deadline").toString());
+					if(newdate.before(date)){
+						mv.addObject("notEnd", 1);
+					}
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
 				paraMap.put("materialId", mapTitle.get("material_id"));
 				//备注附件
 				List<Map<String,Object>> listAttachment = noticeMessageService.queryNoticeMessageDetailAttachment(paraMap);
@@ -159,10 +177,10 @@ public class CmsNoticeManagementController extends BaseController {
 				for(Map<String,Object> map :listAttachment){
 					map.put("attachmentId", "file/download/"+map.get("attachment")+".action");
 				}
-				mv.addObject("map",mapTitle);
 				mv.addObject("listAttachment",listAttachment);
 				mv.addObject("listContact",listContact);
 			}	
+			mv.addObject("map",mapTitle);
 			//mongoDB查询通知内容
 			Content message= contentServioce.get(messageId);
 			mv.addObject("content",message.getContent());

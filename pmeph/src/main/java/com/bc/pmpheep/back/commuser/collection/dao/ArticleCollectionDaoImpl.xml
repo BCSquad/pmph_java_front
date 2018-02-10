@@ -17,7 +17,7 @@
 	  GROUP BY 
 	      f.favorite_name
 	</select>
-	<!--查询一个收藏夹下所有的书籍  -->
+	<!--查询一个收藏夹下所有的文章籍  -->
 	<select id="queryArticleList" parameterType="com.bc.pmpheep.back.plugin.PageParameter" resultMap="articleMap">
 	  select 
 		     c.id as cid,
@@ -32,7 +32,8 @@
 		     c.clicks,
 		     c.comments,
 		     c.bookmarks,
-		     m.id as markId
+		     m.id as markId,
+		     c.category_id
      from 
 	     cms_user_mark  m  LEFT JOIN cms_content c on m.content_id=c.id   
 		 LEFT JOIN  writer_user w on c.author_id=w.id 

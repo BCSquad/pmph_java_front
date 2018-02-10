@@ -85,10 +85,15 @@
     		</c:otherwise>
     	</c:choose>
     </div>
-    <c:if  test="${listSize>0 }">
+    <div style="clear: both"></div>
+    <c:if  test="${isover=='no'}">
         <div class="jzgd"><span onclick="javascript:doMore('${pageNumber}')">加载更多...</span></div>
         <div style="height: 30px;"></div>
-    </c:if>    
+    </c:if>
+    <c:if  test="${isover=='yes'}">
+        <div class="jzgd"><span>没有更多了...</span></div>
+        <div style="height: 30px;"></div>
+    </c:if>      
 </div>
 </div>
 		<div style="clear: both; background-color: #f6f6f6;">   
