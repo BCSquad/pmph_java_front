@@ -78,10 +78,10 @@ $(function(){
 	                        "</div> ";
 	        			}
 	        			$("#dialogue").append(html);
-	        			$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);  
+	        			
 	        			content+=html;
 	        		}
-	        		
+	        		$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);  
 	        		addContent=content;
 	        	}
 	        	show();
@@ -104,9 +104,9 @@ $(function(){
 		
 	});
 	//回车事件
-	$(".inputBox").keypress(function (e){ 
-		var code = event.keyCode; 
-		if (13 == code) { 
+	$(".inputBox").keydown(function (e){ 
+		var curkey = e.which; 
+		if (13 == curkey) { 
 			sendNewMsg(); 
 		} 
 	}); 

@@ -154,6 +154,14 @@ public class MessageController extends BaseController{
 		
 		paraMap.put("userId", userId);
 		List<Map<String,Object>> list = noticeMessageService.selectApplyMessage(paraMap);
+		for(Map<String,Object> map1:list){
+			
+			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
+				map1.put("avatar", "statics/pictures/head.png");
+			}else{
+				map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
+			}
+		}
 		mv.addObject("list",list);
 		mv.addObject("listSize",list.size());
 		mv.setViewName("commuser/message/applyMessage");

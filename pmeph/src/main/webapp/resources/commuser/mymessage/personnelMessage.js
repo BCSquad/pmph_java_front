@@ -68,7 +68,7 @@ $(function() {
 	        			if(n.isMy){//我发送的
 	        				html = "<div class='oneTalk'> "+
 						                "<div class='headAndNameRight float_right'> "+
-						                    "<div class='headDiv'><img class='headPicture' src='"+contextpath+avatar+"'/></div> "+
+						                    "<div class='headDiv'><img class='headPicture' src='"+contextpath+n.avatar+"'/></div> "+
 						                    "<div class='talkName'><text>"+n.senderName+"</text></div> "+
 						                "</div> "+
 						
@@ -127,9 +127,9 @@ $(function() {
 	});
 	//回车事件
 	$(".inputBox").keypress(function (e){ 
-		var code = event.keyCode; 
-		if (13 == code) { 
-			sendNewMsg(addhtml); 
+		var curkey = e.which; 
+		if (13 == curkey) { 
+			sendNewMsg(); 
 		} 
 	}); 
 	//发送信息

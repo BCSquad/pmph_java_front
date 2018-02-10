@@ -230,7 +230,7 @@
 	
 	<!-- 查询教材备注相关的附件 -->
 	<select id="queryNoticeMessageDetailAttachment" parameterType="java.util.Map" resultType="java.util.Map">
-		select * from `material_note_attachment` where material_extra_id = #{attachmentId}
+		select * from `cms_extra` where content_id = #{attachmentId}
 	</select>
 	
 	<!-- 查询教材相关的联系人 -->
