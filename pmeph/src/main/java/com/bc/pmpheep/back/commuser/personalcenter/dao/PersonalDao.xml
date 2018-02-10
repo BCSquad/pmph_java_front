@@ -95,32 +95,37 @@
 	<!-- 查最新文章动态 -->
 	<select id="ListMyWritingsTwo" resultMap="BaseResultMap"
 		parameterType="PageParameter">
-		SELECT
-		cc.id
-		,cc.title
-		,cc.summary
-		,cc.auth_status
-		,cc.is_staging
-		,
-		case 
-		when cc.gmt_update = '0000-00-00 00:00:00'
-		then DATE_FORMAT(cc.gmt_create,'%Y-%m-%d %H:%i')
-		else DATE_FORMAT(cc.gmt_update,'%Y-%m-%d %H:%i')
-		end as gmt_update
-		, '2' msg_type
-		from cms_content cc
-		inner join cms_category ct on cc.category_id = ct.id and ct.category_name =
-		'医学随笔'
-		where cc.author_id=#{parameter.logUserId} and cc.is_deleted !='1'
-		<if test="parameter.auth_status != null and parameter.auth_status != '' ">
-			and cc.auth_status = #{parameter.auth_status}
-		</if>
-		<if test="parameter.is_staging != null and parameter.is_staging != '' ">
-			and cc.is_staging = #{parameter.is_staging}
-		</if>
-		<if test='parameter.selfLog == false '>
-			and cc.auth_status = 2
-		</if>
+		select t.* from
+		(
+			SELECT
+			cc.id
+			,cc.title
+			,cc.summary
+			,cc.auth_status
+			,cc.is_staging
+			,
+			case 
+			when cc.gmt_update = '0000-00-00 00:00:00'
+			then DATE_FORMAT(cc.gmt_create,'%Y-%m-%d %H:%i')
+			else DATE_FORMAT(cc.gmt_update,'%Y-%m-%d %H:%i')
+			end as gmt_update
+			, '2' msg_type
+			from cms_content cc
+			inner join cms_category ct on cc.category_id = ct.id and ct.category_name =
+			'医学随笔'
+			where cc.author_id=#{parameter.logUserId} and cc.is_deleted !='1'
+			<if test="parameter.auth_status != null and parameter.auth_status != '' ">
+				and cc.auth_status = #{parameter.auth_status}
+			</if>
+			<if test="parameter.is_staging != null and parameter.is_staging != '' ">
+				and cc.is_staging = #{parameter.is_staging}
+			</if>
+			<if test='parameter.selfLog == false '>
+				and cc.auth_status = 2
+			</if>
+		)t
+		order by t.gmt_update desc
+		
 		limit ${start},${pageSize}
 	</select>
 
@@ -617,9 +622,62 @@
 		a.question_id=#{questionId} and a.user_id=#{logUserId}
 	</select>
 
+	<!-- 动态结果映射 -->
+	<resultMap type="Map" id="trendstMap">
+		<id property="id" column="id"/>
+		<result property="user_id" column="user_id"/>
+		<result property="is_public" column="is_public"/>
+		<result property="type" column="type"/>
+		<result property="detail" column="detail" typeHandler="com.bc.pmpheep.back.util.JsonTypeHandler"/>
+		<result property="cms_content_id" column="cms_content_id"/>
+		<result property="book_id" column="book_id"/>
+		<result property="book_comment_id" column="book_comment_id"/>
+		<result property="trendst_date" column="trendst_date"/>
+		<result property="trendst_date_num" column="trendst_date_num"/>
+		<result property="realname" column="realname"/>
+		<association property="cms" javaType="Map">
+			<id property="id" column="c_id"/>
+			<result property="category_id" column="c_category_id"/>
+			<result property="title" column="c_title"/>
+			<result property="mid" column="c_mid"/>
+			<result property="summary" column="c_summary"/>
+			<result property="auth_status" column="c_auth_status"/>
+			<result property="is_staging" column="c_is_staging"/>
+			<result property="is_deleted" column="c_is_deleted"/>
+		</association>
+		<association property="p_cms" javaType="Map">
+			<id property="id" column="p_id"/>
+			<result property="category_id" column="p_category_id"/>
+			<result property="title" column="p_title"/>
+			<result property="mid" column="p_mid"/>
+			<result property="summary" column="p_summary"/>
+			<result property="auth_status" column="p_auth_status"/>
+			<result property="is_staging" column="p_is_staging"/>
+			<result property="is_deleted" column="p_is_deleted"/>
+		</association>
+		<association property="book" javaType="Map">
+			<id property="id" column="b_id"/>
+			<result property="bookname" column="b_bookname"/>
+			<result property="author" column="b_author"/>
+			<result property="score" column="b_score"/>
+			<result property="image_url" column="b_image_url"/>
+			<result property="" column=""/>
+			<result property="" column=""/>
+		</association>
+		<association property="b_comment" javaType="Map">
+			<id property="id" column="bc_id"/>
+			<result property="is_long" column="bc_is_long"/>
+			<result property="is_auth" column="bc_is_auth"/>
+			<result property="score" column="bc_score"/>
+			<result property="title" column="bc_title"/>
+			<result property="content" column="bc_content"/>
+			<result property="is_deleted" column="bc_is_deleted"/>
+		</association>
+	</resultMap>
+	
 
 	<!-- 新动态查询 detail存储了所需信息 以json格式保存 -->
-	<select id="queryWriterUserTrendst" parameterType="PageParameter" resultType="Map">
+	<select id="queryWriterUserTrendst" parameterType="PageParameter" resultMap="trendstMap">
 		select 
 			t.id 
 			,t.user_id
@@ -630,22 +688,33 @@
 			,t.book_id
 			,t.book_comment_id
 			,DATE_FORMAT(t.gmt_create,'%Y-%m-%d %H:%i') AS trendst_date
-			,t.gmt_create
+			,DATE_FORMAT(t.gmt_create,'%Y%m%d%H%i') AS trendst_date_num
+			<!-- ,t.gmt_create -->
 			,u.realname
 			,c.id as c_id
 			,c.category_id as c_category_id
 			,c.title as c_title
 			,c.mid as c_mid
+			,c.summary as c_summary
+			,c.is_staging as c_is_staging
+			,c.auth_status as c_auth_status <!-- 0=待审核/1=审核未通过/2=通过 -->
 			,c.is_deleted as c_is_deleted
 			,pc.id as p_id
 			,pc.category_id as p_category_id
 			,pc.title as p_title
 			,pc.mid as p_mid
+			,pc.summary as p_summary
+			,pc.is_staging as p_is_staging
+			,pc.auth_status as p_auth_status <!-- 0=待审核/1=审核未通过/2=通过 -->
+			,pc.is_deleted as p_is_deleted
+			,b.id as b_id
 			,b.bookname as b_bookname
 			,b.author as b_author
 			,b.score as b_score
 			,b.image_url as b_image_url
+			,bc.id as bc_id
 			,bc.is_long as bc_is_long
+			,bc.is_auth as bc_is_auth
 			,bc.score as bc_score
 			,bc.title as bc_title
 			,bc.content as bc_content
@@ -658,7 +727,17 @@
 		left join book_user_comment bc on t.book_comment_id = bc.id 
 		left join writer_user u on t.user_id = u.id
 		<where>
-			(is_public = 0 or type != 0 or user_id = #{parameter.logUserId})
+			user_id = #{parameter.logUserId}
+			and (${parameter.selfLog}   
+					or(
+							(t.type = 0 and t.is_public = 1)
+						or(t.type = 1 and c.auth_status = 2)
+						or(t.type = 2 and c.auth_status = 2 and pc.auth_status = 2)
+						or(t.type = 5 and bc.is_auth = 1)
+						or(t.type in (3,4,6,7) )
+					)
+				)
+			
 		</where>
 		order by t.gmt_create desc
 		

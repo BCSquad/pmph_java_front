@@ -27,10 +27,11 @@ public interface HomeService {
     List<Map<String, Object>> queryArticle(int endrow);
 
     /**
+     * @param logUserId 
      * @return List<HomepageDocument>
      * @Description: 查询点击人数最多的随笔的作者
      */
-    List<Map<String, Object>> queryAuthor();
+    List<Map<String, Object>> queryAuthor(String logUserId);
 
     /**
      * @return List<Map<String, Object>>
@@ -81,4 +82,8 @@ public interface HomeService {
      * @return list
      */
     List<Map<String, Object>> queryMaterial(String id);
+    /**
+     * 根据分类查询书籍总数
+     */
+    int countBookByType(String type);
 }

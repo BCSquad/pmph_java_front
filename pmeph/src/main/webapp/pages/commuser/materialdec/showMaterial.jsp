@@ -461,7 +461,7 @@
 			</div>
 		</div>
 		<!--主编学术专著情况表-->
-		<div class="sbxq_item1" id="zbxszz">
+		<div class="sbxq_item" id="zbxszz">
 			<div>
 				<span id="tsxz_span7"></span>
 				<span class="tsxz_title">主编学术专著情况</span>
@@ -482,8 +482,8 @@
 						<tr>
 							<td>${list.monograph_name}</td>
 							<td>
-								<c:if test="${list.is_digital_editor == '1'}">是</c:if>
-								<c:if test="${list.is_digital_editor == '0'}">否</c:if>
+								<c:if test="${list.is_self_paid == '0'}">自费</c:if>
+								<c:if test="${list.is_self_paid == '1'}">公费</c:if>
 							</td>
 							<td>${list.publisher}</td>
 							<td>${list.publish_date}</td>
@@ -494,7 +494,7 @@
 			</div>
 		</div>
 		<!--出版行业获奖情况表-->
-		<div class="sbxq_item1" id="publish">
+		<div class="sbxq_item" id="publish">
 			<div>
 				<span id="tsxz_span7"></span>
 				<span class="tsxz_title">出版行业获奖情况</span>
@@ -521,7 +521,7 @@
 			</div>
 		</div>
 		<!--SCI论文投稿及影响因子情况表-->
-		<div class="sbxq_item1" id="sci">
+		<div class="sbxq_item" id="sci">
 			<div>
 				<span id="tsxz_span7"></span>
 				<span class="tsxz_title">SCI论文投稿及影响因子情况</span>
@@ -550,7 +550,7 @@
 			</div>
 		</div>
 		<!--临床医学获奖情况表-->
-		<div class="sbxq_item1" id="clinical">
+		<div class="sbxq_item" id="clinical">
 			<div>
 				<span id="tsxz_span7"></span>
 				<span class="tsxz_title">临床医学获奖情况表</span>
@@ -581,7 +581,7 @@
 			</div>
 		</div>
 		<!--学术荣誉授予情况表-->
-		<div class="sbxq_item1" id="acade">
+		<div class="sbxq_item" id="acade">
 			<div>
 				<span id="tsxz_span7"></span>
 				<span class="tsxz_title">学术荣誉授予情况</span>

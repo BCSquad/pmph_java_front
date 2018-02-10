@@ -149,18 +149,21 @@
 		where 
 		textbook_id= #{textBookId}
 		and d.user_id = #{logUserId}
-		and dpp.preset_position in (4,12)
+		and dpp.chosen_position in (4,12)
 		and dpp.rank = 1
 	</select>
 
 
 	<select id="queryTextBookById" parameterType="String" resultType="Map">
 		SELECT
-		t.*,m.is_digital_editor_optional <!-- 是否可选数字编委 -->
+		t.*
+		,m.is_digital_editor_optional <!-- 是否可选数字编委 -->
+		,u.realname
 		FROM
 		textbook t
 		inner join material m
 		on m.id = t.material_id
+		left join pmph_user u on t.planning_editor = u.id
 		WHERE
 		t.id =  #{textBookId}
 	</select>

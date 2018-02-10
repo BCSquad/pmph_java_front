@@ -79,13 +79,13 @@ public class PersonalCenterController extends BaseController {
         String userId = request.getParameter("userId");
         Boolean selfLog = null;
         Map<String,Object> friendShip = new HashMap<String,Object>();
+        friendShip = personalService.queryOurFriendShip(userId,logUserId);
         if (userId != null && !"".equals(userId.trim()) && !logUserId.equals(userId.trim())) {
         	paraMap.put("logUserId", userId);
 			vm_map.put("logUserId", userId);
 			mv.addObject("logUserId",userId);
 			permap = personalService.queryUserById(userId);
 			selfLog = false;
-			friendShip = personalService.queryOurFriendShip(userId,logUserId);
 			//真正的登录人real_logUserId， 而logUserId是主页主人，查询id
 	        friendShip.put("logUserId", userId);
 		}else{
@@ -103,7 +103,7 @@ public class PersonalCenterController extends BaseController {
         
         //真正的登录人real_logUserId， 而logUserId是主页主人，查询id
         friendShip.put("real_logUserId", logUserId);
-    	
+    	mv.addObject("friendShip", friendShip);
     	
       //查询个人主页共用部分 收藏 好友 小组
         queryPersonalRightPageInfo(mv, permap);

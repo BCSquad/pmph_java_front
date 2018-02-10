@@ -104,7 +104,7 @@
                   <div  style="width: 400px">
                        <label class="require">真实姓名</label>
                        <div class="input-wrapper">
-                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="真实姓名不能为空"  onblur="javascript:LengthLimit(this,40);"
+                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="真实姓名不能为空"  onblur="javascript:LengthLimit(this,20);"
                            placeholder="填写真实姓名" type="text" id="realname" name="realname"  value="${map.realname }"/>
                        </div>
                   </div>
@@ -131,11 +131,13 @@
             </tr>
             <tr class="sxy-tr">
                 <td >
-                  <div  style="width: 400px">
-                    <span class="gender">性别</span>
+                  <div  style="width: 400px;padding:0px;">
+                  <label class="require" >性别</label>
+                  <div class="input-wrapper" style="margin-top:10px;">
                     <input type="hidden" value="${map.sex }" id="sex_hidden">
                     <input type="radio" value="1" class="sxy-radio" name="radio-set" id="sex1"/>男&nbsp;&nbsp;
                     <input type="radio" value="2" class="sxy-radio" name="radio-set" id="sex2"/>女
+                  </div>
                   </div>
                 </td>
                 <td >
@@ -143,10 +145,10 @@
                     <label class="require" >职称</label>
                     <select class="sxy-select-td" id="title" name="title" >
                     	<option value="" >-请选择-</option>
-                        <option value="teacher1" ${map.title=='teacher1' ?'selected':''}>教授</option>
-                        <option value="teacher2" ${map.title=='teacher2' ?'selected':''}>讲师</option>
-                        <option value="teacher3" ${map.title=='teacher3' ?'selected':''}>副教授</option>
-                        <option value="teacher4" ${map.title=='teacher4' ?'selected':''}>院士</option>
+                        <option value="教授" ${map.title=='教授' ?'selected':''}>教授</option>
+                        <option value="讲师" ${map.title=='讲师' ?'selected':''}>讲师</option>
+                        <option value="副教授" ${map.title=='副教授' ?'selected':''}>副教授</option>
+                        <option value="院士" ${map.title=='院士' ?'selected':''}>院士</option>
                     </select>
                   </div>
                 </td>

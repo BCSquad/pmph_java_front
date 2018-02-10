@@ -78,9 +78,10 @@ function toAudit(id,type){
 			dataType:"json",
 		    success: function(msg) {
 			    if(msg.msg=='OK'){
-			    	 message.success("成功");
-//			    	window.location.href=contextpath+"applyDocAudit/toPage.action";
+			    	 message.success("成功！");
 			    	 toMain();
+			    }else{
+			    	message.success("失败了！");
 			    }
 		    }
 		});

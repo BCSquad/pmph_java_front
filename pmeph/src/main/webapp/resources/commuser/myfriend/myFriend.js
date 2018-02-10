@@ -78,7 +78,8 @@ $(function(){
 	                        "</div> ";
 	        			}
 	        			$("#dialogue").append(html);
-	        			
+//	        			$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);
+	        			$("#dialogue").animate({scrollTop: '700px'},500);
 	        			content+=html;
 	        		}
 	        		$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);  
@@ -104,9 +105,11 @@ $(function(){
 		
 	});
 	//回车事件
-	$(".inputBox").keydown(function (e){ 
-		var curkey = e.which; 
-		if (13 == curkey) { 
+	$(".inputBox").keypress(function (e){ 
+//		var code = event.keyCode;
+		var theEvent = window.event || e;
+		var code = theEvent.keyCode || theEvent.which; 
+		if (13 == code) { 
 			sendNewMsg(); 
 		} 
 	}); 
@@ -159,7 +162,8 @@ $(function(){
 		        		//currentContent+=html;
 		        		$("#dialogue").append(html);
 			        	$("#content").val('');
-			        	$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);  
+//			        	$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);  
+			        	$("#dialogue").animate({scrollTop: '700px'},500);
 		        	}
 		        }
 			});

@@ -1,9 +1,11 @@
 .cms-writer {
     width: 40px;
     height: 70px;
-    position: absolute;
-    left: 1290px;
-    top: 660px;
+    position: fixed;
+    margin-top:-35px;
+    /* left: 1290px; */
+    right:10px;
+    top: 50%;
     background-color: #68d797;
     border-radius: 3px;
     font-size: 14px;
@@ -23,7 +25,7 @@
 	color: #ffffff;
 	cursor: pointer;
 }
-/**锟斤拷锟斤拷锟斤拷锟�*/
+
 .area1{
 	width: 890px;
 	float: left;
@@ -112,8 +114,16 @@
 	font-weight: bold;
 }
 
+
+
 .yxsb_content p{
 	/* text-indent: 2em;  */
+	max-width: 881px;
+    word-break: break-all;
+}
+
+.yxsb_content img{
+	max-width: 881px;
 }
 
 .block {
@@ -206,7 +216,7 @@
 	border-radius: 3px;
 	border: solid 1px #3996fa;
 	color:#tarea;
-	font-family: "微锟斤拷锟脚猴拷";
+	font-family: "寰敓鏂ゆ嫹閿熻剼鐚存嫹";
 }
 
 .rwtx1{
@@ -274,7 +284,7 @@
     margin-left: 4px;
 }
 
-/**锟揭诧拷锟斤拷锟斤拷**/
+/**閿熸彮璇ф嫹閿熸枻鎷烽敓鏂ゆ嫹**/
 .area2{
 	float: left;
 	margin-left: 35px;
@@ -313,7 +323,7 @@
 	left:20px;
 	top:0px;
 	z-index:100;
-	width: 150px;
+	
 }
 
 .right_2 img{
@@ -322,14 +332,12 @@
 
 .right_2 span{
 	font-family: MicrosoftYaHei;
-	font-size: 14px;
-	letter-spacing: 0px;
 	color: #3996fa;
-	float: left;
-	margin-top: 37px;
-	margin-bottom: 9px;
-	margin-left: 15px;
-	
+	margin-top: 20px;
+	display: block;
+	width: 130px;
+	height: 30px;
+	overflow: hidden;
 }
 
 .right_3{

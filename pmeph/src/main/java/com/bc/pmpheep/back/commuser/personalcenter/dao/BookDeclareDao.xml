@@ -4,15 +4,56 @@
 	
 	<!-- 选题申报信息插入 -->
 	<insert id="insertTopic" parameterType="java.util.Map">
-		insert into topic(user_id,bookname,deadline,source,word_number,picture_number,subject,rank,type,is_staging,auth_progress,
-		bank_account_id,purchase,sponsorship,is_translation,original_bookname,original_author,nation,edition,vn) values(
-		#{user_id},#{bookname},#{deadline},#{source},#{word_number},#{picture_number},#{subject},#{rank},#{type},#{is_staging},#{auth_progress},#{bank_account_id},
-		#{purchase},#{sponsorship},#{is_translation},#{original_bookname},#{original_author},#{nation},#{edition},#{vn}
+		insert into topic(user_id,bookname,reader,deadline,source,word_number,picture_number,subject,rank,type,is_staging,auth_progress,
+		bank_account_id,purchase,sponsorship,is_translation,original_bookname,original_author,nation,edition,vn,is_opts_handling,submit_time) values(
+		#{user_id},#{bookname},#{reader},#{deadline},#{source},#{word_number},#{picture_number},#{subject},#{rank},#{type},#{is_staging},#{auth_progress},#{bank_account_id},
+		#{purchase},#{sponsorship},#{is_translation},#{original_bookname},#{original_author},#{nation},#{edition},#{vn},#{is_opts_handling},#{submit_time}
 		) 
 	</insert>
 	<!-- 根据条件查询申报信息 -->
 	<select id="queryTopic" parameterType="java.util.Map" resultType="java.util.Map">
-		select * from topic t1 where 1= 1 
+		select t1.id,
+			t1.user_id,
+			t1.bookname,
+			SUBSTR(t1.deadline,1,10) deadline,
+			t1.source,
+			t1.word_number,
+			t1.picture_number,
+			t1.subject,
+			t1.rank,
+			t1.type,
+			t1.bank_account_id,
+			t1.purchase,
+			t1.sponsorship,
+			t1.is_translation,
+			t1.original_bookname,
+			t1.original_author,
+			t1.nation,
+			t1.edition,
+			t1.auth_progress,
+			t1.auth_date,
+			t1.auth_feedback,
+			t1.is_opts_handling,
+			t1.opts_role_id,
+			t1.is_rejected_by_director,
+			t1.reason_director,
+			t1.is_director_handling,
+			t1.department_id,
+			t1.is_rejected_by_editor,
+			t1.reason_editor,
+			t1.is_editor_handling,
+			t1.editor_id,
+			t1.is_accepted,
+			t1.is_staging,
+			t1.is_deleted,
+			t1.note,
+			t1.gmt_create,
+			t1.gmt_update,
+			t1.reader,
+			t1.tn,
+			t1.vn,
+			t1.submit_time
+		from topic t1 where 1= 1 
 		<if test="vn != null and vn != ''">
 			and t1.vn = #{vn} 
 		</if>
@@ -63,8 +104,8 @@
 	<!-- 查询作家用户关联银行信息 -->
 	<select id="queryBank" parameterType="java.util.Map" resultType="java.util.Map">
 		select * from writer_bank_account t where 1=1 
-		<if test="id != null and id != ''">
-			and t.id  = #{id}
+		<if test="bank_account_id != null and bank_account_id != ''">
+			and t.id  = #{bank_account_id}
 		</if>
 		<if test="account_number != null and account_number != ''">
 			and t.account_number  = #{account_number}
@@ -72,7 +113,7 @@
 		<if test="user_id != null and user_id != ''">
 			and t.user_id  = #{user_id}
 		</if>
-		order by gmt_create asc 
+		order by gmt_create desc 
 	</select>
 	<!-- 添加银行账户信息 -->
 	<insert id="insertBank" parameterType="java.util.Map">

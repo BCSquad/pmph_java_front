@@ -72,6 +72,30 @@ function queryConditionStrFun(){
 	return Str;
 }
 
+//添加好友 按钮触发
+function addFriendfun(uid,realname,status){
+	var data={uid:uid
+			,status:status};
+	$.ajax({
+		type:'post',
+		url:contextpath+'addFriend/addFriendfun.action?t='+new Date().getTime(),
+		async:false,
+		dataType:'json',
+		data:data,
+		success:function(json){
+			if (status == 2) {
+				window.message.success("已和 "+realname+" 成为好友！");
+				$(".btn_addFriend").removeClass("isBeenRequest").addClass("isFriend").html("好友").attr("title","已是您的好友！").unbind();
+			} else {
+				window.message.success("已向 "+realname+" 发起好友申请！");
+				$(".btn_addFriend").removeClass("add").addClass("hasRequest").attr("title","已申请加为好友，请等待对方同意。").unbind();
+				
+			}
+			
+		}
+	});
+}
+
 //删除随笔文章
   function DelMyWriter(id){
 	  
@@ -133,11 +157,13 @@ function queryConditionStrFun(){
   }
   
   /**
-   * 删除文章
+   * 删除文章 cat 0 删文章 1删文章评论
    */
-  function deleteArticle(id,title){
+  function deleteArticle(id,title,cat){
+	  var msg ='';
+	  msg = cat=="0"?'确定要删除《'+title+'》吗？':'确定要删除这条对《'+title+'》的评论吗？';
 	  window.message.confirm(
-				'确定要删除《'+title+'》吗？'
+			  	msg
 				,{icon: 3, title:'提示',btn:["确定","取消"]}
 				,function(index){
 					layer.close(index);

@@ -1,6 +1,6 @@
 $(function () {
-	//var id = $("#material_id").val();
-	//queryMaterialMap(id);  //执行查询方法
+	var id = $("#material_id").val();
+	queryMaterialMap(id);  //执行查询方法
 });
 
 //页面组合方法

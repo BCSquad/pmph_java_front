@@ -54,9 +54,9 @@ public class HomeServiceImpl implements HomeService {
      * 查询推荐作者
      */
     @Override
-    @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName")
-    public List<Map<String, Object>> queryAuthor() {
-        List<Map<String, Object>> list = homeDao.queryAuthor();
+    //@Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName")
+    public List<Map<String, Object>> queryAuthor(String logUserId) {
+        List<Map<String, Object>> list = homeDao.queryAuthor(logUserId);
         return list;
     }
 
@@ -144,5 +144,10 @@ public class HomeServiceImpl implements HomeService {
 		// TODO Auto-generated method stub
 		List<Map<String, Object>> list=homeDao.queryMaterial(id);
 		return list;
+	}
+
+	@Override
+	public int countBookByType(String type) {
+		return this.homeDao.countBookByType(type);
 	}
 }

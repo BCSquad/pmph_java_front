@@ -5,18 +5,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.javassist.expr.Instanceof;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.commuser.personalcenter.bean.PersonalNewMessage;
 import com.bc.pmpheep.back.commuser.personalcenter.dao.PersonalDao;
 import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.general.pojo.Content;
+import com.bc.pmpheep.general.service.ContentService;
 
 @Service("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
 public class PersonalServiceImpl implements PersonalService {
 
 	@Autowired
 	private PersonalDao personaldao;
+	
+	@Autowired
+	private ContentService contentService;
 
 	@Override
 	public List<PersonalNewMessage> queryMyCol(Map<String, Object> permap) {
@@ -179,10 +185,25 @@ public class PersonalServiceImpl implements PersonalService {
 		return count;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, Object>> queryWriterUserTrendst(
 			PageParameter<Map<String, Object>> pageParameter) {
 		List<Map<String, Object>> result_list = personaldao.queryWriterUserTrendst(pageParameter);
+		for (Map<String, Object> map : result_list) {
+			if (map.get("cms")!=null && ((Map<?, ?>) map.get("cms")).get("mid")!=null) {
+				Content message = contentService.get(((Map<?, ?>) map.get("cms")).get("mid").toString());
+				Map<String, Object> n = ((Map<String, Object>) map.get("cms"));
+				n.put("Content", message);
+				map.put("cms", n) ;
+			}
+			if (map.get("p_cms")!=null && ((Map<?, ?>) map.get("p_cms")).get("mid")!=null) {
+				Content message = contentService.get(((Map<?, ?>) map.get("p_cms")).get("mid").toString());
+				Map<String, Object> n = ((Map<String, Object>) map.get("p_cms"));
+				n.put("Content", message);
+				map.put("p_cms", n) ;
+			}
+		}
 		return result_list;
 	}
 
@@ -363,8 +384,16 @@ public class PersonalServiceImpl implements PersonalService {
 
 		@Override
 		public Map<String, Object> queryOurFriendShip(String userId,String logUserId) {
+			//friendShip初始化为未申请好友状态
 			Map<String,Object> friendShip = new HashMap<String,Object>();
-			//friendShip.putAll(personaldao.queryOurFriendShip(userId,logUserId));
+			friendShip.put("id", 0);
+			friendShip.put("isBeenRequest", 0);
+			friendShip.put("hasRequest", 0);
+			friendShip.put("status", -1);
+			//查询数据库中两人好友状态
+			
+			List<Map<String,Object>> r= personaldao.queryOurFriendShip(userId,logUserId);
+			friendShip = r!=null&&r.size()>0?r.get(0):friendShip;
 			return friendShip;
 		}
 

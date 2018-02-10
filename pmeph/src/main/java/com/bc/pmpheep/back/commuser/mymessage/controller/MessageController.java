@@ -186,7 +186,7 @@ public class MessageController extends BaseController{
 		for(int i =0;i<list.size();i++){
 			Map<String,Object> map1 = list.get(i);
 			//处理系统消息 消息内容
-			if(map1.get("msgType").toString().equals("1")||map1.get("msgType").toString().equals("0")){
+			/*if(map1.get("msgType").toString().equals("1")||map1.get("msgType").toString().equals("0")){
 				//mongoDB查询通知内容
 				Message message = mssageService.get(map1.get("fId").toString());
 				//Content content = contentService.get(map1.get("fId").toString());
@@ -201,7 +201,7 @@ public class MessageController extends BaseController{
 					map1.put("title","内容空!");
 				}
 				
-			}
+			}*/
 			
 			//处理消息发送者头像
 			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
@@ -251,7 +251,7 @@ public class MessageController extends BaseController{
 		List<Map<String,Object>> list = noticeMessageService.selectNoticeMessage(paraMap);
 		for(int i =0;i<list.size();i++){
 			Map<String,Object> map1 = list.get(i); 
-			if(map1.get("msgType").toString().equals("1")||map1.get("msgType").toString().equals("0")){
+			/*if(map1.get("msgType").toString().equals("1")||map1.get("msgType").toString().equals("0")){
 				Content content = contentService.get(map1.get("fId").toString());
 				if(null!=content){
 					map1.put("title",content.getContent());
@@ -259,7 +259,7 @@ public class MessageController extends BaseController{
 					map1.put("title","内容空!");
 				}
 				
-			}
+			}*/
 			
 			//处理消息发送者头像
 			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
@@ -317,8 +317,9 @@ public class MessageController extends BaseController{
 		paraMap.put("materialId", materialId);
 		paraMap.put("cmsId", cmsId);
 		//标题、时间、邮寄地址、备注
-		Map<String,Object> mapTitle =new HashMap<>();
+		Map<String,Object> mapTitle =new HashMap<String,Object>();
 			mapTitle = noticeMessageService.queryNoticeMessageDetail(paraMap);
+			
 			mv.addObject("firsttag", "个人中心");
 			mv.addObject("secondtag", "消息通知");
 			mv.addObject("firstpath", "personalhomepage/tohomepage.action");
@@ -339,6 +340,8 @@ public class MessageController extends BaseController{
 			mv.addObject("map",mapTitle);
 			mv.addObject("listAttachment",listAttachment);
 			mv.addObject("listContact",listContact);
+			
+			
 		}
 		
 		

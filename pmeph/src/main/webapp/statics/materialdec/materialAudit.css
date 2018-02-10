@@ -24,6 +24,7 @@
 	clear: none;
 	margin-top: 20px;
 	width: 1150px;
+	display: none;
 } 
 
 .sbxq_item1{
@@ -169,6 +170,7 @@
 	color: #FFFFFF;
 	float: left;
 	margin-left: 15px;
+	text-align: center;
 }
 
 #tsxz_span4{

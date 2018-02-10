@@ -127,9 +127,11 @@ $(function() {
 	});
 	//回车事件
 	$(".inputBox").keypress(function (e){ 
-		var curkey = e.which; 
-		if (13 == curkey) { 
-			sendNewMsg(); 
+//		var code = event.keyCode; 
+		e = e || window.event;
+		var key = e ? (e.charCode || e.keyCode) : 0;
+		if (13 == key) { 
+			sendNewMsg(addhtml); 
 		} 
 	}); 
 	//发送信息

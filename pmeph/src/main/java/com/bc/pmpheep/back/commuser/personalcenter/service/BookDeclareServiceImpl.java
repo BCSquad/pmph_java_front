@@ -10,10 +10,10 @@ import com.bc.pmpheep.back.commuser.personalcenter.dao.BookDeclareDao;
 
 @Service("com.bc.pmpheep.back.commuser.personalcenter.service.BookDeclareService")
 public class BookDeclareServiceImpl implements BookDeclareService {
-	
+
 	@Autowired
 	private BookDeclareDao bookDecdao;
-	
+
 	@Override
 	public int insertTopic(Map<String, Object> map) {
 		return this.bookDecdao.insertTopic(map);
@@ -72,6 +72,11 @@ public class BookDeclareServiceImpl implements BookDeclareService {
 	@Override
 	public int updateBank(Map<String, Object> map) {
 		return this.bookDecdao.updateBank(map);
+	}
+
+	@Override
+	public String getMaxTopicVn() {
+		return this.bookDecdao.getMaxTopicVn();
 	}
 
 }

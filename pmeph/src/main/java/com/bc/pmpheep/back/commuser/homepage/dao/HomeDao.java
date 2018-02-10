@@ -32,10 +32,11 @@ public interface HomeDao {
 
     /**
      * 查询作者
+     * @param logUserId 
      *
      * @return List<Map<String, Object>>
      */
-    List<Map<String, Object>> queryAuthor();
+    List<Map<String, Object>> queryAuthor(@Param("logUserId")String logUserId);
 
     /**
      * @return List<HomepageDocument>
@@ -95,4 +96,9 @@ public interface HomeDao {
      * @return list
      */
     List<Map<String, Object>> queryMaterial(@Param("id") String id);
+    
+    /**
+     * 根据分类查询书籍总数
+     */
+    int countBookByType(String type);
 }

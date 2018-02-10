@@ -25,6 +25,7 @@ import com.bc.pmpheep.back.commuser.readpage.service.ReadDetailService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.general.controller.BaseController;
+import com.bc.pmpheep.general.service.SensitiveService;
 
 /**
  * @author xieming
@@ -43,6 +44,11 @@ public class ReadDetailController extends BaseController{
 	 @Autowired
 	 @Qualifier("com.bc.pmpheep.back.commuser.book.service.BookServiceImpl")
 	 private BookService bookService;
+	 @Autowired
+	@Qualifier("com.bc.pmpheep.general.service.SensitiveService")
+	 private SensitiveService sensitiveService;
+	 
+	 
 	/**
 	 * 根据图书ID初始化数据
 	 * @param request
@@ -204,7 +210,15 @@ public class ReadDetailController extends BaseController{
 		Map<String, Object> user=getUserInfo();
 		map.put("writer_id", user.get("id"));
 		map.put("avatar", user.get("avatar"));
-		Map<String, Object> rmap=readDetailService.insertComment(map);
+		Map<String, Object> rmap = new HashMap<String, Object>();
+		if (sensitiveService.confirmSensitive(request.getParameter("content"))){
+			List<String> sensitives = sensitiveService.getSensitives(null, request.getParameter("content"));
+			rmap.put("content", sensitiveService.delHTMLTag(request.getParameter("content")));
+			rmap.put("returncode", "error");
+			rmap.put("value", sensitives);
+			return rmap;
+		}
+		rmap = readDetailService.insertComment(map);
 		return rmap;
 	}
 	
@@ -400,7 +414,8 @@ public class ReadDetailController extends BaseController{
 	 */
 	@RequestMapping("insertlong")
 	@ResponseBody
-	public String insertlong(HttpServletRequest request){
+	public Map<String, Object> insertlong(HttpServletRequest request){
+		Map<String, Object> result = new HashMap<String, Object>();
 		String returncode="";
 		String book_id=request.getParameter("book_id");
 		String score=request.getParameter("score");
@@ -411,17 +426,27 @@ public class ReadDetailController extends BaseController{
 		   StringUtils.isEmpty(content)||
 		   StringUtils.isEmpty(title)){
 		   returncode="NO";
-		}else{
-		   Map<String, Object> map=new HashMap<String, Object>();
-		   Map<String, Object> user=getUserInfo();
-		   map.put("book_id", book_id);
-		   map.put("score", score);
-		   map.put("content", content);
-		   map.put("title", title);
-		   map.put("is_long", "1");
-		   map.put("writer_id", user.get("id"));
-		   returncode=readDetailService.insertlong(map);
+		   result.put("state", returncode);
+		   return result;
 		}
-		return returncode;
+		if (sensitiveService.confirmSensitive(title) || sensitiveService.confirmSensitive(content)){
+			List<String> sensitives = sensitiveService.getSensitives(title, content);
+			returncode = "ERROR";
+			result.put("state", returncode);
+			result.put("value", sensitives);
+			result.put("UEContent", sensitiveService.delHTMLTag(content));
+			return result;
+		}
+		Map<String, Object> map=new HashMap<String, Object>();
+		Map<String, Object> user=getUserInfo();
+		map.put("book_id", book_id);
+		map.put("score", score);
+		map.put("content", content);
+		map.put("title", title);
+		map.put("is_long", "1");
+		map.put("writer_id", user.get("id"));
+		returncode=readDetailService.insertlong(map);
+		result.put("state", returncode);
+		return result;
 	}
 }

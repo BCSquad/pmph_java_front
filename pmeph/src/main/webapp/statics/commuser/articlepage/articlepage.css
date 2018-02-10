@@ -1,7 +1,9 @@
 .news {
     padding-top: 40px;
 }
-/*焦点信息*/
+
+
+
 .focus-news {
     float: left;
     height: 830px;
@@ -85,7 +87,7 @@
     background-color: #ebebeb;
     margin-top: 20px
 }
-/*遴选公告*/
+/*閬撮�鍏憡*/
 .notice {
     float: left;
     width: 360px;
@@ -150,7 +152,7 @@
     line-height:25px;
     color:#999999
 }
-/*医学随笔*/
+/*鍖诲闅忕瑪*/
 .notes {
     float:left;
     /*height: 830px;*/
@@ -205,11 +207,10 @@
     position:absolute;
     top:10px;
     margin-top: 10px;
-    position:absolute;
-    top:10px;
     left:-6px;
     color:white;
     background-image:url(../../image/wenzhangtuijian.png);
+     cursor:pointer;
 }
 .notes .item .content{
     width:284px;
@@ -255,7 +256,7 @@
     height: 30px;
     color:#666666;
 }
-/*推荐作者*/
+/*鎺ㄨ崘浣滆�*/
 .writer {
     float: left;
     margin-top: 20px;
@@ -306,8 +307,8 @@
 .writer .item .msg .text{
     overflow: hidden;
     color: #999999;
-    text-overflow:ellipsis; /*超出部分省略号显示*/
-    white-space:nowrap;/*强制不换行*/
+    text-overflow:ellipsis; /*瓒呭嚭閮ㄥ垎鐪佺暐鍙锋樉绀�/
+    white-space:nowrap;/*寮哄埗涓嶆崲琛�/
 }
 .writer .item .add{
     width:53px;

@@ -247,38 +247,7 @@
             <div class="item">
                 <div class="can"><span class="author">推荐作者</span></div>
                 <c:forEach items="${listAut}" var="list" varStatus="status">
-                    <c:if test="${status.index==0}">
-                        <div class="author1">
-                            <div class="a7_head_div">
-
-                            <c:choose>
-                            	<c:when test="${list.avatar=='DEFAULT'}">
-                            		<img src="${ctx}/statics/image/default_image.png" class="a6_head">
-                            	</c:when>
-                            	<c:otherwise>
-                            		<img src="${ctx}/image/${list.avatar}.action" class="a6_head">
-                            	</c:otherwise>
-                            </c:choose>
-  
-                            </div>
-                            <div class="a7_name_div">
-                                <div class="a7_author">
-                                    <span class="a7_write">${list.realname}</span>
-                                </div>
-                                <br>
-                                <div class="a7_cont">
-                                    <span class="a7_cont">${list.title}</span>
-                                </div>
-                            </div>
-                            <div class="a7_friend">
-                                <span class="friend" onclick="addfriend('${list.id}')" id="friend${list.id}"><B>+</B>好友</span>
-                            </div>
-                        </div>
-                    </c:if>
-                </c:forEach>
-                <c:forEach items="${listAut}" var="list" varStatus="status">
-                    <c:if test="${status.index!=0}">
-                        <div class="author2">
+                        <div class="${status.index==0?'author1':'author2'}">
                             <div class="a7_head_div">
                             <c:choose>
                             	<c:when test="${list.avatar=='DEFAULT'}">
@@ -299,11 +268,25 @@
                                 </div>
                             </div>
                             <div class="a7_friend">
-                                <span class="friend" onclick="addfriend('${list.id}')" id="friend${list.id}"><B>+</B>好友</span>
+                            	<c:choose>
+				                	<c:when test="${list.status == null }">
+				                		<span class="friend add" title="申请加为好友！" onclick="addFriendfun(${list.id},'${list.realname}',0)" id="friend${list.id}"><B>+</B>好友</span>
+				                	</c:when>
+				                	<c:when test="${list.status  == 2 }">
+				                		<span class="friend isFriend" title="已是您的好友！" id="friend${list.id}"><B>好友</B></span>
+				                	</c:when>
+				                	<c:when test="${list.status == 0 && list.isBeenRequest==1}">
+				                		<span class="friend isBeenRequest" title="对方也想加您为好友，点击马上成为好友！" onclick="addFriendfun(${list.id},'${list.realname}',2)" id="friend${list.id}"><B>+</B>好友</span>
+				                	</c:when>
+				                	<c:when test="${list.status == 0 && list.hasRequest==1}">
+				                		<span class="friend hasRequest" title="已申请加为好友，请等待对方同意。" id="friend${list.id}"><B>+</B>好友</span>
+				                	</c:when>
+				                </c:choose>
+                                <%-- <span class="friend" onclick="addfriend('${list.id}')" id="friend${list.id}"><B>+</B>好友</span> --%>
                             </div>
                         </div>
-                    </c:if>
                 </c:forEach>
+                
             </div>
         </div>
         <div class="area-8">

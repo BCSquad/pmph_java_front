@@ -184,7 +184,7 @@ public interface PersonalDao {
 	 * @param logUserId
 	 * @return
 	 */
-	public Map<String, Object> queryOurFriendShip(@Param("userId")String userId,@Param("logUserId")String logUserId);
+	public List<Map<String, Object>> queryOurFriendShip(@Param("userId")String userId,@Param("logUserId")String logUserId);
 	
 	
 }

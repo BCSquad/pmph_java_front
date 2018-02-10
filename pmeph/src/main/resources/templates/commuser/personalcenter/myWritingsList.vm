@@ -25,14 +25,16 @@
 	                <div id="suibiwenzhangtp"></div>
 	                <div id="suibiwenzhanneirong">
 	                    <div class="suibibt">
-	                    	#if($!{c.is_staging}==true)
-	                    		<div class="status_tag toApply">未提交</div>
-	                    	#elseif($!{c.auth_status}==0&&$!{c.is_staging}==false)
-	                    		<div class="status_tag toAudit">待审核</div>
-	                    	#elseif($!{c.auth_status}==1&&$!{c.is_staging}==false)
-	                    		<div class="status_tag reject">未通过</div>
-	                    	#elseif($!{c.auth_status}==2&&$!{c.is_staging}==false)
-	                    		<div class="status_tag Audited">已通过</div>
+	                    	#if($!{selfLog}==true)
+		                    	#if($!{c.is_staging}==true)
+		                    		<div class="status_tag toApply">未提交</div>
+		                    	#elseif($!{c.auth_status}==0&&$!{c.is_staging}==false)
+		                    		<div class="status_tag toAudit">待审核</div>
+		                    	#elseif($!{c.auth_status}==1&&$!{c.is_staging}==false)
+		                    		<div class="status_tag reject">未通过</div>
+		                    	#elseif($!{c.auth_status}==2&&$!{c.is_staging}==false)
+		                    		<div class="status_tag Audited">已通过</div>
+		                    	#end
 	                    	#end
 	                        <a target="_blank" href="$!{contextpath}articledetail/toPage.action?wid=$!{c.id}" ><span class="suibibiaoti">$!{c.title}</span></div></a>
 	                        <div class="shangright">$!{c.gmt_update}</div>
@@ -41,14 +43,12 @@
 	                </div>
 	            </div>
 	            <div class="dtxia">
-	            	#if(false && $!{c.auth_status}!=2)
-	                	
-		                <span id="bianji"></span>
-		                <span class="dtxiawz"><a href="$!{contextpath}writerArticle/initWriteArticle.action?id=$!{c.id}&&userid=$!{permap.id}">编辑</a></span>
-	                #end
+	            	
 	                #if($!{selfLog}==true)
 	                <div class="operate_wrapper">
-		                <a target="_blank" href="$!{contextpath}writerArticle/initWriteArticle.action?id=$!{c.id}&userid=$!{logUserId}"><div class="img img_edit" ></div><div>编辑</div></a> 
+	                	#if($!{c.auth_status}!=2 || $!{c.is_staging}==true)
+		                	<a target="_blank" href="$!{contextpath}writerArticle/initWriteArticle.action?id=$!{c.id}&userid=$!{logUserId}"><div class="img img_edit" ></div><div>编辑</div></a> 
+				        #end
 				        <a onclick="deleteArticle('$!{c.id}','$!{c.title}')" ><div class="img img_delete"></div><div>删除</div></a>
 	                </div>
 	                #end

@@ -184,6 +184,15 @@ color:#FFF;
     float: left;
 }
 
+#jftb {
+    background-image: url(../../image/jifeng.png);
+    background-position: 0px 4px;
+    height: 20px;
+    width: 16px;
+    background-repeat: no-repeat;
+    float: left;
+}
+
 .grsx {
     float: left;
     /*height: 32px;*/
@@ -1315,4 +1324,61 @@ width: 76px;
     height: 20px;
     float: left;
     color: #a0b1c5;
+}
+
+button.btn_addFriend{
+	float: right;
+    border-radius: 4px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 36px;
+    letter-spacing: 0px;
+    border: none;
+    padding: 0px 10px;
+}
+
+button.btn_addFriend.hasRequest{
+	background-color: #d2d2d2;
+	color: #ffffff;
+}
+
+button.btn_addFriend.isBeenRequest {
+    color: #ffffff;
+    background-color: rgb(236, 154, 98);
+    cursor: pointer;
+}
+
+button.btn_addFriend.add {
+    background-color: #1abd44;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+button.btn_addFriend.isFriend {
+    background-color: #1abd44;
+    color: #ffffff;
+}
+
+#select_textbook{
+	position: relative;
+    right: -138px;
+    height: 25px;
+    top: 10px;
+    z-index: 0;
+    border: none;
+    background: none;
+    opacity: 0;
+    width: 88px;
+    cursor: pointer;
+}
+
+.choose_book{
+	font-size: 18px;
+}
+
+a{
+	text-decoration: blink;
+	color: inherit;
 }

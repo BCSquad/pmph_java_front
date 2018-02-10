@@ -42,16 +42,16 @@
                 	<div style="float:left;">
                 	  <label style="margin-left: 20px" class="labell require">页码:</label>
                     <input type="text" class="text required" id="page" data-valid="isNonEmpty||onlyInt"
-                         onblur="javascript:LengthLimit(this,11);"  data-error="页码不能为空||页码只能是数字"  />
+                         onblur="javascript:LengthLimit(this,4);"  data-error="页码不能为空||页码只能是数字"  />
                 	</div>
                   <div style="float:right;margin-right: 10px"> <label style="margin-left: 10px" class="labell">行数:</label>
                     <input type="text" class="text required" id="line" data-valid="isNonEmpty||onlyInt"
-                         onblur="javascript:LengthLimit(this,11);"  data-error="行数不能为空||行数只能是数字"/></div>
+                         onblur="javascript:LengthLimit(this,4);"  data-error="行数不能为空||行数只能是数字"/></div>
                    
                 </div>
                 <div class="info">
                     <label style="margin-left: 20px" class="labell">纠错内容</label>
-                    <textarea class="misarea" id="content"  onblur="javascript:LengthLimit(this,6);"></textarea>
+                    <textarea class="misarea" id="content" onkeyup="javascript:LengthLimit(this,500);"  onblur="javascript:LengthLimit(this,500);"></textarea>
                 </div>
                 <div class="upload">
                     <label style="margin-left: 20px" class="labell">纠错内容附件</label>

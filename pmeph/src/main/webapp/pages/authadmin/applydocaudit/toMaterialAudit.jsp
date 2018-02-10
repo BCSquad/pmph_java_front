@@ -38,10 +38,22 @@
 				<div class="item">
 					<span>图书：</span>
 					<span>${list.textbook_name} — 
+					<c:if test="${list.preset_position == '7'}">主编,副主编,编委</c:if>
+					<c:if test="${list.preset_position == '6'}">主编,副主编</c:if>
+					<c:if test="${list.preset_position == '5'}">主编,编委</c:if>
 					<c:if test="${list.preset_position == '4'}">主编</c:if>
+					<c:if test="${list.preset_position == '3'}">副主编,编委</c:if>
 					<c:if test="${list.preset_position == '2'}">副主编</c:if>
 					<c:if test="${list.preset_position == '1'}">编委</c:if>
 					<c:if test="${list.preset_position == '8'}">数字编委</c:if>
+					<c:if test="${list.preset_position == '9'}">数字编委,编委</c:if>
+					<c:if test="${list.preset_position == '10'}">数字编委,副主编</c:if>
+					<c:if test="${list.preset_position == '11'}">数字编委,副主编,编委</c:if>
+					<c:if test="${list.preset_position == '12'}">数字编委,主编</c:if>
+					<c:if test="${list.preset_position == '13'}">数字编委,主编,编委</c:if>
+					<c:if test="${list.preset_position == '14'}">数字编委,主编,副主编</c:if>
+					<c:if test="${list.preset_position == '15'}">数字编委,主编,副主编,编委</c:if>
+					
 					</span>
 					<span>
 					<a href="javascript:" class="filename"  onclick="downLoadProxy('${list.syllabus_id}')">${list.syllabus_name}</a>
@@ -481,8 +493,11 @@
 			<c:choose>
 					 <c:when test="${view_audit=='audit'}">
 					<div class="div_butt">
-						<div class="bt_tj" onclick="toAudit('${gezlList.id}','3')">通过</div>
-						<div class="bt_tj" onclick="toAudit('${gezlList.id}','2')">退回</div>
+						<input type="hidden" value="${online_progress}" />
+						<c:if test="${online_progress!=3&&online_progress!=2}">
+							<div id="passGo" class="bt_tj" onclick="toAudit('${gezlList.id}','3')">通过</div>
+							<div id="backGo" class="bt_tj" onclick="toAudit('${gezlList.id}','2')">退回</div>
+						</c:if>
 						<div class="bt_tj" onclick="toMain()">返回</div>
 					</div>
 					 </c:when>

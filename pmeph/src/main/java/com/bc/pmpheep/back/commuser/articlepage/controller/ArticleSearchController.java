@@ -72,7 +72,7 @@ public class ArticleSearchController extends BaseController{
 				pmap.put("imgpath", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
 			}
 		}
-		
+
 		modelAndView.addObject("artlist", artlist);
 		modelAndView.addObject("listCount", count);
 		modelAndView.addObject("pageNum", pageNum);
@@ -101,6 +101,8 @@ public class ArticleSearchController extends BaseController{
 		List<Map<String, Object>> tList=articleSearchService.queryPraise(pmap);
 		int likes=Integer.parseInt(lmap.get("likes").toString());
 		Map<String, Object> rmap=new HashMap<String, Object>();
+		
+		
 		if(tList.size()<1){
 			String str=articleSearchService.insertPraise(id, user.get("id").toString());
 			if(str.equals("OK")){
@@ -113,6 +115,7 @@ public class ArticleSearchController extends BaseController{
 			rmap.put("likes", likes-1);
 		}
 		return rmap;
+		
 	}
 }
 

@@ -258,6 +258,7 @@ $(function(){
 	
 	//初始化文件
 	function initFile(){
+		$("#fileMore").show();
 		var order =$("#order").val().split(':');
 		$.ajax({
 			type:'get',

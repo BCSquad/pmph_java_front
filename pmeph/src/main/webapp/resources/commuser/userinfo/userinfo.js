@@ -9,6 +9,7 @@ $(function () {
         done: function (filename, fileid) {
             console.log("上传完成：name " + filename + " fileid " + fileid);
              $("#fileid").val(fileid);
+             $("#sxy-img1").attr("src",contextpath+"file/download/"+fileid+".action");
         },
         progressall: function (loaded, total, bitrate) {
             console.log("正在上传。。。" + loaded / total);

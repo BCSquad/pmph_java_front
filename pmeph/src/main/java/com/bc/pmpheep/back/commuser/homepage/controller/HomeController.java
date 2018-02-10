@@ -45,9 +45,15 @@ public class HomeController extends BaseController{
     public ModelAndView move(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         int flag = 0;
+        Map<String, Object> user=getUserInfo();
+        String logUserId= null;
+        if (user!=null && user.get("id")!=null && !"".equals(user.get("id"))) {
+        	logUserId = user.get("id").toString();
+		}
+        
         List<Map<String, Object>> listNot = homeService.queryNotice();
         List<Map<String, Object>> listArt = homeService.queryArticle(4);
-        List<Map<String, Object>> listAut = homeService.queryAuthor();
+        List<Map<String, Object>> listAut = homeService.queryAuthor(logUserId);
         List<Map<String, Object>> listCom = homeService.queryComment();
 
         Map<String,Object> adInfo1=homeService.getPageAdInfo("首页轮播");
@@ -59,7 +65,7 @@ public class HomeController extends BaseController{
 			}
 		}
         //根据登录人查询可见公告，未登录查询所有人可见公告
-        Map<String, Object> user=getUserInfo();
+        
         List<Map<String, Object>> listDou= homeService.queryDocument(user==null?"":user.get("id").toString());
         modelAndView.addObject("listDou", listDou);
         modelAndView.addObject("listNot", listNot);
@@ -105,7 +111,8 @@ public class HomeController extends BaseController{
         rowsmap.put("startrows", -1);
 //      rowsmap.put("type", MapUtils.getIntValue(types.get(0), "id"));
         rowsmap.put("type",1);
-        List<Map<String, Object>> listrows = homeService.queryBook(rowsmap);
+    //    List<Map<String, Object>> listrows = homeService.queryBook(rowsmap);
+        int listrows = homeService.countBookByType("1");
         //模板(首页默认显示学校教育下的书籍,从第一条开始显示，每页10条数据)
         Map<String, Object> pmap = new HashMap<String, Object>();
         pmap.put("startrows", 0);
@@ -131,10 +138,10 @@ public class HomeController extends BaseController{
         }
         html += templateService.mergeTemplateIntoString(vm, map2);
 
-        if (listrows.size() % 10 == 0) {
-            flag = listrows.size() / 10;
+        if (listrows % 10 == 0) {
+            flag = listrows / 10;
         } else {
-            flag = listrows.size() / 10 + 1;
+            flag = listrows / 10 + 1;
         }
         modelAndView.addObject("allrows", flag);
         modelAndView.addObject("thisrows", "1");

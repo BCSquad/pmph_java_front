@@ -43,7 +43,7 @@
              </div>
              <div style="float: left;width: 20%;height: 100%">
              <div class="div_btn11" style="cursor: pointer;">
-                 <span class="button11" onclick="sendNewMsg()">发送</span>
+                 <span class="button11" onclick="sendxiaoxi()">发送</span>
              </div>
              </div>
          </div>
@@ -120,7 +120,7 @@
 </div>
 <script type="text/javascript">
 //发送消息
-function sendNewMsg (){
+function sendxiaoxi (){
 	debugger;
 	var content=$("#content").val();
 	if(content =='' ||content==null ||content=='↵'){
@@ -264,7 +264,7 @@ function formatDate(nS,str) {
             $(function () {
             	$(".inputBox").keypress(function (event){ 
            			if(event.which == 13) { 
-           			sendNewMsg(); 
+           			sendxiaoxi(); 
             		} 
             	}); 
             	

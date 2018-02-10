@@ -59,7 +59,23 @@ function btntype(btn_this){
 		        		$("#TitleValue").val(json.titleValue);
 		        		UE.getEditor('mText').setContent(json.UEContent);
 		        		window.message.error(json.isValidate);
-		        	}else {
+		        	}else if (data == '4'){
+		        		var words = json.value;
+		        		var title = document.getElementById("TitleValue");
+		        		var TitleValue = $("#TitleValue").val();
+		        		var content = $("#UEContent").val();
+		        		for (var i = 0 ; i < words.length ; i++){
+		        			var reg = new RegExp(words[i],'g');
+		        			if (TitleValue.indexOf(words[i]) > -1){
+		        				title.style.border = '3px solid red';
+		        			}
+		        			if (content.indexOf(words[i]) > -1){
+		        				content = content.replace(reg,'<span style="background : yellow">' + words[i] + '</span>');
+		        			}
+		        		}
+		        		UE.getEditor('mText').setContent(content);
+		        		window.message.error("标题或内容中含有敏感词,请修改后再保存或提交");
+		        	}else {		        	
 		        		if(data != '1'){
 			        		if(btn_this== '1'){
 				        		$("#submitTypeCode").val("1");
@@ -100,6 +116,22 @@ function btntype(btn_this){
 			        		$("#TitleValue").val(json.titleValue);
 			        		UE.getEditor('mText').setContent(json.UEContent);
 			        		window.message.error(json.isValidate);
+			        	}else if (data == '4'){
+			        		var words = json.value;
+			        		var title = document.getElementById("TitleValue");
+			        		var TitleValue = $("#TitleValue").val();
+			        		var content = json.UEContent;
+			        		for (var i = 0 ; i < words.length ; i++){
+			        			var reg = new RegExp(words[i],'g');
+			        			if (TitleValue.indexOf(words[i]) > -1){
+			        				title.style.border = '3px solid red';
+			        			}
+			        			if (json.UEContent.indexOf(words[i]) > -1){
+			        				content = content.replace(reg,'<span style="background : yellow">' + words[i] + '</span>');
+			        			}
+			        		}
+			        		UE.getEditor('mText').setContent(content);
+			        		window.message.error("标题或内容中含有敏感词,请修改后再保存或提交");
 			        	}else{
 			        		if(data != '1'){
 				        		if(btn_this== '1'){
@@ -135,3 +167,11 @@ function btntype(btn_this){
 	
 	//$("#form1").submit();
 }
+
+//评论检查出敏感词时，用户修改文本域获取焦点，则把红边去掉
+$(function(){
+	$("#TitleValue").focus(function(){
+		  $("#TitleValue").css("border","none");
+		});
+	
+});
