@@ -43,11 +43,11 @@
                 	<div style="float:left;">
                 	  <label style="margin-left: 20px" class="labell require">页码:</label>
                     <input type="text" class="text required" id="page" data-valid="isNonEmpty||onlyInt"
-                         onblur="javascript:LengthLimit(this,11);"  data-error="页码不能为空||页码只能是数字"  />
+                         onblur="javascript:LengthLimit(this,4);"  data-error="页码不能为空||页码只能是数字"  />
                 	</div>
                   <div style="float:right;margin-right: 10px"> <label style="margin-left: 10px" class="labell">行数:</label>
                     <input type="text" class="text required" id="line" data-valid="isNonEmpty||onlyInt"
-                         onblur="javascript:LengthLimit(this,11);"  data-error="行数不能为空||行数只能是数字"/></div>
+                         onblur="javascript:LengthLimit(this,4);"  data-error="行数不能为空||行数只能是数字"/></div>
                    
                 </div>
                 <div class="info">

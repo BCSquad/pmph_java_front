@@ -66,9 +66,9 @@ select b.* from
 		        left join  material b on t.material_id =b.id 
 		        where  t.category_id=3 
 		        and t.is_published=1
-                 <![CDATA[and b.is_public <> 0]]>
 		        and t.auth_status=2
 		        and t.is_deleted=0
+		        and ( <![CDATA[b.is_public <> 0 or t.material_id is null]]>)
 		 union
 		 select 
 		        t.*

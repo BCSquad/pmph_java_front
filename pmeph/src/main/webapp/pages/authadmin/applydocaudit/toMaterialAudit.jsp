@@ -48,7 +48,11 @@
 					<c:if test="${list.preset_position == '8'}">数字编委</c:if>
 					<c:if test="${list.preset_position == '9'}">数字编委,编委</c:if>
 					<c:if test="${list.preset_position == '10'}">数字编委,副主编</c:if>
+					<c:if test="${list.preset_position == '11'}">数字编委,副主编,编委</c:if>
 					<c:if test="${list.preset_position == '12'}">数字编委,主编</c:if>
+					<c:if test="${list.preset_position == '13'}">数字编委,主编,编委</c:if>
+					<c:if test="${list.preset_position == '14'}">数字编委,主编,副主编</c:if>
+					<c:if test="${list.preset_position == '15'}">数字编委,主编,副主编,编委</c:if>
 					
 					</span>
 					<span>
