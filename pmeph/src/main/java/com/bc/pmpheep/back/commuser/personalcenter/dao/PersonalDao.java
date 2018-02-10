@@ -144,6 +144,8 @@ public interface PersonalDao {
 
 	// 查询填空选项答案
 	public String getInpAnswers(Map<String, Object> map);
+	// 回显答案保存按钮判断是否消失
+	public Map<String, Object> btnSaveOrHidden(Map<String, Object> map);
 
 	/**
 	 * 生成动态

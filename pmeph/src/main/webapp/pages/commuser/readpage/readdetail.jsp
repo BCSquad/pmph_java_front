@@ -26,6 +26,7 @@
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
+<input type="hidden" id="bookname" value="${map.bookname}"/>
 <div class="body">
     <input type="hidden" value="${map.type}" id="type_id">
     <div class="content-wrapper">

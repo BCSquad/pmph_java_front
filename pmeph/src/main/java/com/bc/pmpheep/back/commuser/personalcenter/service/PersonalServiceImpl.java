@@ -321,6 +321,13 @@ public class PersonalServiceImpl implements PersonalService {
 		String slist = personaldao.getInpAnswers(map);
 		return slist;
 	}
+	
+	//回显答案保存按钮判断是否消失
+	@Override
+	public Map<String, Object> btnSaveOrHidden(Map<String, Object> map) {
+		Map<String, Object> sMap = personaldao.btnSaveOrHidden(map);
+		return sMap;
+	}
 
 	@Override
 	public void saveUserTrendst(String TrendstName, String tableId,int trendstType, String writer_user_id) {/*
@@ -396,6 +403,8 @@ public class PersonalServiceImpl implements PersonalService {
 			friendShip = r!=null&&r.size()>0?r.get(0):friendShip;
 			return friendShip;
 		}
+
+
 
 
 }

@@ -69,7 +69,7 @@
 			<span class="personMessageTitle"></span>
 			<input id='talk' type='hidden' value=''/>
             <div class="contentBox" id="dialogue">
-            	<!---->
+            	<div id="talkList"></div>
 	        </div>
 			<div class="inputBox">
                 <div style="float: left;width: 80%;height: 100%">

@@ -45,7 +45,7 @@ $(function() {
 		var frendid = this.id;
 		var type     = $("#type_"+frendid).val();
 		var username = $("#name_"+frendid).val();
-		$("#dialogue").html('');
+		$("#talkList").html('');
 		$(".personMessageTitle").html("你与"+username+"的私信窗口");
 		$("#box"  ).attr("class","b show");
 		$("#close").attr("class","hiddenX show");
@@ -60,15 +60,16 @@ $(function() {
 	        	friendType : type
 	        },
 	        success:function(responsebean){
-	        	$("#dialogue").html('');
+	        	$("#talkList").html('');
 	        	if(null != responsebean && responsebean.length >= 0){
 	        		var content="";
 	        		$.each(responsebean,function(i,n){
 	        			var html ="";
 	        			if(n.isMy){//我发送的
+	        				avatar=n.avatar;
 	        				html = "<div class='oneTalk'> "+
 						                "<div class='headAndNameRight float_right'> "+
-						                    "<div class='headDiv'><img class='headPicture' src='"+contextpath+avatar+"'/></div> "+
+						                    "<div class='headDiv'><img class='headPicture' src='"+contextpath+n.avatar+"'/></div> "+
 						                    "<div class='talkName'><text>"+n.senderName+"</text></div> "+
 						                "</div> "+
 						
@@ -99,9 +100,13 @@ $(function() {
 						            "</div> ";
 	        			}
 	        			
-	        			$("#dialogue").append(html);
+	        			$("#talkList").append(html);
 	        			content+=html;
-	        			$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);  
+	        			//$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);  
+	        			//$("#dialogue").animate({scrollTop: '700px'},500);
+	        			setTimeout(function(){
+		        			$("#dialogue").scrollTop($("#talkList").height());
+	        			},0);
 	        		});
 	        		
 	        		addhtml=content;
@@ -128,11 +133,18 @@ $(function() {
 	//回车事件
 	$(".inputBox").keypress(function (e){ 
 //		var code = event.keyCode; 
-		e = e || window.event;
+		/*e = e || window.event;
 		var key = e ? (e.charCode || e.keyCode) : 0;
 		if (13 == key) { 
 			sendNewMsg(addhtml); 
+		} */
+		
+		var theEvent = window.event || e;
+		var code = theEvent.keyCode || theEvent.which; 
+		if (13 == code) { 
+			sendNewMsg(); 
 		} 
+		
 	}); 
 	//发送信息
 	$("#sendNewMsg").click(function(){
@@ -148,6 +160,7 @@ $(function() {
 		//document.getElementById("close").setAttribute("class", "hiddenX hidden");
 		$("#box"  ).attr("class","b hidden");
 		$("#close").attr("class","hiddenX hidden");
+		$("#content").val("");
 	}
 	
 	function init() {
@@ -171,7 +184,6 @@ $(function() {
 							if(res.length>0){
 								
 								$.each(res,function(i,n){
-									avatar=n.avatar;
 									var  html ="";
 									html += "<tr><th rowspan='2' class='headPortrait'><img class='pictureNotice' src='"+contextpath+n.avatar
 											
@@ -198,7 +210,7 @@ $(function() {
 	}
 	
 	function sendNewMsg (addhtml){
-		$("#dialogue").html('');
+		//$("#talkList").html('');
 		var content=$("#content").val();
 		var sendTime = new Date();
 		if(!content || content.trim() ==''){
@@ -238,10 +250,14 @@ $(function() {
 		                "</div> "+
 		            "</div> ";
 		        		
-		        		$("#dialogue").append(addhtml);	
-		        		$("#dialogue").append(html);	
+		        		$("#talkList").append(addhtml);	
+		        		$("#talkList").append(html);	
 			        	$("#content").val('');
-			        	$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);  
+			        	//$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);  
+			        	//$("#dialogue").animate({scrollTop: '700px'},500);
+			        	setTimeout(function(){
+		        			$("#dialogue").scrollTop($("#talkList").height());
+	        			},0);
 		        	}
 		        }
 			});

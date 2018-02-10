@@ -84,6 +84,7 @@
                 </div>
     		</c:otherwise>
     	</c:choose>
+		<div class="clear"></div>
     </div>
     <div style="clear: both"></div>
     <c:if  test="${isover=='no'}">

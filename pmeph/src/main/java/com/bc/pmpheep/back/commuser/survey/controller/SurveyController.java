@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.commuser.survey.service.SurveyService;
 import com.bc.pmpheep.general.controller.BaseController;
 
@@ -28,8 +29,11 @@ public class SurveyController extends BaseController{
 	
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.survey.service.SurveyServiceImpl")
-	SurveyService surveyService; 
+	SurveyService surveyService;
 	
+    @Autowired
+    @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
+    private PersonalService personalService;	
 	
 	//问卷列表
 	@RequestMapping(value="/surveyList")
@@ -57,6 +61,10 @@ public class SurveyController extends BaseController{
 		long surveyId = new Long(surveyIdStr);
 		//获取调查基本信息
 		Map<String,Object> mapSurvey = surveyService.getSurveyBaseInfo(surveyId);
+		Map<String, Object> paraMap = new HashMap<String, Object>();
+        String logUserId = getUserInfo().get("id").toString();
+		paraMap.put("logUserId", logUserId);
+		paraMap.put("surveyId", surveyId);
 		//查询该调查包含的所有题目
 		List<Map<String,Object>> list = surveyService.getSurvey(surveyId);
 		List<Map<String,Object>> listResult = new ArrayList<Map<String,Object>>();
@@ -69,7 +77,39 @@ public class SurveyController extends BaseController{
 					if(null!=questionIdStr&&!questionIdStr.equals("")){
 						long questionId = Long.valueOf(questionIdStr).longValue();
 						List<Map<String,Object>> listOptions = surveyService.getOptions(questionId);
+						//查询单选答案
+						paraMap.put("questionId", questionId);
+						String answer = personalService.getAnswers(paraMap);
+						//查询多选答案
+						String che = personalService.getCheckAnswers(paraMap);
+						boolean flag=false;
+						  if (null!=che&&""!=che) {
+							  String[] checkAnswer=che.split(",");
+							  for (String ch : checkAnswer) {
+								  for (Map<String, Object> opt : listOptions) {
+									 
+									if (ch.equals(opt.get("id").toString())) {
+										flag=true;
+										opt.put("flag", flag);
+										
+									}else {
+										flag=false;
+									} 
+								}
+							}
+						}
 						question.put("listOptions", listOptions);
+						question.put("answer", answer);
+						listResult.add(question);
+					}
+				}else if(question.get("type").equals(4)||question.get("type").equals(5)){
+					//查询填空答案
+					String questionIdStr = question.get("id").toString();
+					if(null!=questionIdStr&&!questionIdStr.equals("")){
+						long questionId = Long.valueOf(questionIdStr).longValue();
+						paraMap.put("questionId", questionId);
+						 String inp = personalService.getInpAnswers(paraMap);
+						question.put("inp", inp);
 						listResult.add(question);
 					}
 				}else{
@@ -78,7 +118,9 @@ public class SurveyController extends BaseController{
 				
 			}
 		}
-		
+		Map<String, Object> btn =personalService.btnSaveOrHidden(paraMap);
+		mv.addObject("btn",btn);
+		mv.addObject("logUserId",logUserId);
 		mv.addObject("mapSurvey",mapSurvey);
 		mv.addObject("listSesult",listResult);
 		mv.addObject("surveyId",surveyId);

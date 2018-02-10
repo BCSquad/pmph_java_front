@@ -51,10 +51,10 @@
                     <div class="leftContentSmall">
                         <div class="pictureDiv">
                             <c:if test="${message.TYPE=='A'}">
-                        		<img  class="picture">
+                        		<img  class="pictureB" src="${ctx}/statics/image/pic3555.png">
                         	</c:if>
                             <c:if test="${message.TYPE=='B'}">
-                            	<img  class="pictureB" src="${ctx}/statics/image/pic3555.png">
+                            	<img  class="picture">
                             </c:if>
                         </div>
                     </div>
