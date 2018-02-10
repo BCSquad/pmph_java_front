@@ -264,7 +264,7 @@ ul li {
 }
 
 .labeling{
-	float: left;
+	/*float: left;*/
 	margin-top: 15px;
 	margin-left: 17px;
 	font-family: MicrosoftYaHei;
