@@ -114,7 +114,16 @@
 		        </c:if>
 		        </div>
 		        <div class="registerDiv"  >
-		            <span class="button ${notEnd !=1 or is_material_entry==false}" onclick="register(${materialId})" >报名参加</span>
+			        <c:if test="${is_material_entry==false}">
+			        	
+			        </c:if>
+		         	<c:if test="${notEnd ==1 and is_material_entry==true}">
+	                      <span class="button " onclick="register(${materialId})" >报名参加</span>
+                  	  </c:if>
+                  	  <c:if test="${notEnd ==0 and is_material_entry==true}">
+	                     <span class="button " >已结束</span> 
+                  	  </c:if>
+		           
 		        </div>
         	<%-- </c:otherwise> --%>
        <%--  </c:choose> --%>
