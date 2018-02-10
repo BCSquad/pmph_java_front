@@ -103,8 +103,14 @@ public class NoticeMessageServiceImpl implements NoticeMessageService {
 		int count = noticeMessageDao.selectSysMessageTotalCount(paraMap);
 		return count;
 	}
-
-	
-	
-	
+    
+	/**查询公告附件
+	 * @param paraMap
+	 * @return
+	 */
+	@Override
+	public List<Map<String, Object>> queryCMSAttach(Map<String, Object> paraMap) {
+		// TODO Auto-generated method stub
+		return noticeMessageDao.queryCMSAttach(paraMap);
+	}
 }
