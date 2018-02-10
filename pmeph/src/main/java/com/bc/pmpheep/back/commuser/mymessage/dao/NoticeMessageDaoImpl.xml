@@ -47,7 +47,7 @@
 		<!-- 全部 -->
 		<if test="condition==null||condition==3">
 			select * from(
-			select u.id,u.msg_id as fId,u.title,u.gmt_create as time,u.msg_type as msgType,o.avatar
+			select u.id,u.msg_id as fId,u.title,u.gmt_create as time,u.msg_type as msgType,o.avatar,u.gmt_update as deadline ,0 as is_material_entry
 			from user_message u
 			LEFT JOIN pmph_user o
 			ON o.id= u.sender_id
@@ -59,10 +59,10 @@
 			ORDER BY u.gmt_create DESC)t1
 			UNION
 			select * from(
-				SELECT n.id,n.material_id,n.material_name,n.gmt_create,4,n.avatar
+				SELECT n.id,n.material_id,n.material_name,n.gmt_create,4,n.avatar,n.deadline,n.is_material_entry
 				FROM 
 				(SELECT 
-		        t.*,b.material_name,p.avatar
+		        t.*,b.material_name,p.avatar,b.deadline
 		        FROM cms_content t
 		        LEFT JOIN  material b ON t.material_id =b.id 
 		        LEFT JOIN pmph_user p ON t.author_id= p.id
@@ -75,7 +75,7 @@
 		        AND t.is_published=1
 			    UNION
 			    SELECT 
-				t.*,b.material_name,m.avatar
+				t.*,b.material_name,m.avatar,b.deadline
 		        FROM cms_content t
 		        LEFT JOIN  material b ON t.material_id =b.id 
 		        LEFT JOIN material_org u ON b.id=u.material_id
@@ -95,10 +95,10 @@
 		
 		<!-- 公告 -->
 		<if test="condition==4">
-				SELECT n.id,n.material_id as fId,n.material_name as title,n.gmt_create as time,4 as msgType,n.avatar
+				SELECT n.id,n.material_id as fId,n.material_name as title,n.gmt_create as time,4 as msgType,n.avatar,n.deadline,n.is_material_entry
 				FROM 
 				(SELECT 
-		        t.*,b.material_name,p.avatar
+		        t.*,b.material_name,p.avatar,b.deadline
 		        FROM cms_content t
 		        LEFT JOIN  material b ON t.material_id =b.id 
 		        LEFT JOIN pmph_user p ON t.author_id= p.id
@@ -111,7 +111,7 @@
 		        AND t.is_published=1
 			    UNION
 			    SELECT 
-				t.*,b.material_name,m.avatar
+				t.*,b.material_name,m.avatar,b.deadline
 		        FROM cms_content t
 		        LEFT JOIN  material b ON t.material_id =b.id 
 		        LEFT JOIN material_org u ON b.id=u.material_id

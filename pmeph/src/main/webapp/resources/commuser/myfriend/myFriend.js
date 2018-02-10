@@ -8,6 +8,7 @@ function show(){
 function hide(){
         document.getElementById("box").setAttribute("class","b hidden");
         document.getElementById("close").setAttribute("class","hiddenX hidden");
+        $("#content").val("");
 }
 $(function(){
 	//点击按钮
@@ -35,7 +36,7 @@ $(function(){
 	        },
 	        success:function(responsebean){
 	        	var content="";
-	        	$("#dialogue").html('');
+	        	$("#talkList").html('');
 	        	if(null != responsebean && responsebean.length >= 0){
 	        		for( var i= 0; i<responsebean.length ; i++ ){
 	        			var html ="";
@@ -77,11 +78,17 @@ $(function(){
 		                        "</div> "+
 	                        "</div> ";
 	        			}
-	        			$("#dialogue").append(html);
-//	        			$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);
-	        			$("#dialogue").animate({scrollTop: '700px'},500);
+	        			$("#talkList").append(html);
+	        			//$("#dialogue").animate({scrollTop: '5000px'},500);
+	        			setTimeout(function(){
+		        			$("#dialogue").scrollTop($("#talkList").height());
+		        			//$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);  
+		        			console.log($("#talkList").height());
+	        			},0);
+
 	        			content+=html;
 	        		}
+	        			
 	        		
 	        		addContent=content;
 	        	}
@@ -160,10 +167,16 @@ $(function(){
 	                        "</div> "+
 	                        "</div> ";
 		        		//currentContent+=html;
-		        		$("#dialogue").append(html);
+		        		$("#talkList").append(html);
 			        	$("#content").val('');
-//			        	$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);  
-			        	$("#dialogue").animate({scrollTop: '700px'},500);
+			        	//$("#dialogue").animate({scrollTop: '700px'},500);
+			        	//$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);  
+			        	setTimeout(function(){
+		        			$("#dialogue").scrollTop($("#talkList").height());
+		        			//$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);  
+		        			console.log($("#talkList").height());
+	        			},0);
+			        	
 		        	}
 		        }
 			});
