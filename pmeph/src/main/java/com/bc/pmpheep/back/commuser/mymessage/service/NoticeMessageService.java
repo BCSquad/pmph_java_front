@@ -33,6 +33,10 @@ public interface NoticeMessageService {
 	
 	//查询系统消息总量
 	int selectSysMessageTotalCount(Map<String, Object> paraMap);
-
+	/**查询公告附件
+	 * @param paraMap
+	 * @return
+	 */
+	List<Map<String, Object>>queryCMSAttach(Map<String, Object> paraMap);
 
 }

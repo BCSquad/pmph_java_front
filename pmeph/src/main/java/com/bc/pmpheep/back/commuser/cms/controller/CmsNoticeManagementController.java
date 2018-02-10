@@ -148,10 +148,9 @@ public class CmsNoticeManagementController extends BaseController {
 				mv.addObject("secondtag", "遴选公告");
 				mv.addObject("secondpath", "cmsnotice/tolist.action");
 			}
-			
-			if(mapTitle!=null && mapTitle.size()>0){
-				paraMap.put("attachmentId", mapTitle.get("attachmentId"));
-				paraMap.put("materialId", materialId);
+			List<Map<String, Object>> cmsAttach = noticeMessageService.queryCMSAttach(paraMap);
+			if(mapTitle!=null && mapTitle.size()>0 && mapTitle.get("is_material_entry").toString()=="true"){
+				paraMap.put("materialId", mapTitle.get("material_id"));
 				//备注附件
 				List<Map<String,Object>> listAttachment = noticeMessageService.queryNoticeMessageDetailAttachment(paraMap);
 				//联系人
@@ -167,6 +166,7 @@ public class CmsNoticeManagementController extends BaseController {
 			//mongoDB查询通知内容
 			Content message= contentServioce.get(messageId);
 			mv.addObject("content",message.getContent());
+			mv.addObject("cmsAttach",cmsAttach);
 			mv.setViewName("commuser/message/noticeMessageDetail");
 			return mv;
 		}

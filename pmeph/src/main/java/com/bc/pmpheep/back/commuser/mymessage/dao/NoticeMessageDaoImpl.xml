@@ -219,19 +219,30 @@
 	
 	<!-- 教材申报通知详情 -->
 	<select id="noticeMessageDetail" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT  a.title,m.`deadline`,m.`mail_address`,e.`note`,e.notice,e.id AS attachmentId,a.mid as mongoId,ce.id as ceid,ce.attachment,ce.attachment_name
+		<!-- SELECT  a.title,m.`deadline`,m.`mail_address`,e.`note`,e.notice,e.id AS attachmentId,a.mid as mongoId,ce.id as ceid,ce.attachment,ce.attachment_name
 		FROM cms_content a
 		LEFT JOIN material m
 		ON a.`material_id` = m.`id`
 		LEFT JOIN material_extra e
 		ON m.`id` = e.`material_id`
 		LEFT JOIN cms_extra ce ON ce.content_id=a.id
+		WHERE a.`id`=#{cmsId} -->
+		
+		SELECT  a.title,m.`deadline`,m.`mail_address`,a.mid as mongoId,m.deadline, a.is_material_entry,a.material_id,e.`note`,e.notice,e.id AS attachmentId
+		FROM cms_content a
+		LEFT JOIN material m
+		ON a.`material_id` = m.`id`
+		LEFT JOIN material_extra e
+		ON m.`id` = e.`material_id`
 		WHERE a.`id`=#{cmsId}
 	</select>
 	
 	<!-- 查询教材备注相关的附件 -->
 	<select id="queryNoticeMessageDetailAttachment" parameterType="java.util.Map" resultType="java.util.Map">
-		select * from `cms_extra` where content_id = #{attachmentId}
+		<!-- select * from `material_note_attachment` where material_extra_id = #{attachmentId} -->
+		select * from `material_note_attachment` where material_extra_id in(
+		   select me.id from material_extra me left join  material m on m.id=me.material_id where m.id=#{materialId}
+		)
 	</select>
 	
 	<!-- 查询教材相关的联系人 -->
@@ -254,4 +265,9 @@
 	<update id="updateNoticeClicks" parameterType="String" >
 		UPDATE `cms_content` SET clicks = clicks+1 WHERE id=#{cmsId}
 	</update>
+	
+	<!--查询公告的附件  -->
+	<select id="queryCMSAttach" parameterType="java.util.Map" resultType="java.util.Map">
+	    select * from  cms_extra ce left join  cms_content c on c.id=ce.content_id  where c.id=#{cmsId}
+	</select>
 </mapper>
