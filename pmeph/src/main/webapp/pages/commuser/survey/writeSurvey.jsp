@@ -45,8 +45,16 @@
 												<div style="padding-left: 22px">
 														<c:forEach items="${question.listOptions }" var="option">
 															<div style="height: 40px">
-														    	<div style="float: left"><input type="radio" name="radio_${code.index+1}" value="${option.id}"/></div>
-														    	<div  style="float: left;marging-top: 10px;margin-left: 5px"><label>${option.option_content }</label></div><br/>
+														    	<c:choose>
+																	<c:when test="${(question.answer) ==(option.id)}">
+																		<div style="float: left"><input type="radio"  name="radio_${code.index+1}" value="${option.id}" checked="checked"  disabled="disabled"></div>
+															    		<div  style="float: left;marging-top: 10px;margin-left: 5px"><label>${option.option_content }</label></div><br/>
+																	</c:when>
+																	<c:otherwise>
+																		<div style="float: left"><input type="radio" name="radio_${code.index+1}" value="${option.id}"/></div>
+														    			<div  style="float: left;marging-top: 10px;margin-left: 5px"><label>${option.option_content }</label></div><br/>
+																	</c:otherwise>
+																</c:choose>
 													    	</div>
 														</c:forEach>
 														<input type="hidden" name="radioValues" value="radio_${code.index+1}">
@@ -60,8 +68,16 @@
 												<div style="padding-left: 22px" id="type">
 													<c:forEach items="${question.listOptions }" var="option">
 														<div style="height: 40px">
-															<input type='checkbox' name='checkbox_${code.index+1}' value="${option.id}"> 
-															<label>${option.option_content }</label> 
+														<c:choose>
+																	<c:when test="${(option.flag)==true}">
+																		<input type='checkbox'  name='checkbox_${code.index+1}' value="${option.id}" checked="checked"  disabled="disabled"> 
+																		<label>${option.option_content }</label>
+																	</c:when>
+																	<c:otherwise>
+																		<input   type='checkbox' name='checkbox_${code.index+1}' value="${option.id}" > 
+																		<label>${option.option_content }</label> 
+																	</c:otherwise>
+																</c:choose>
 														</div>
 													</c:forEach>
 													<input type="hidden" name="checkboxValues" value="checkbox_${code.index+1}">	
@@ -69,11 +85,11 @@
 												</div>							
 											</div>
 										</c:if>
-										<c:if test="${question.type==3}">
+										<c:if test="${question.type==4}">
 											<div class="oneQuestion">
 												<p>Q${code.index+1} : ${question.title}</p>
 												<div style="padding-left: 22px">
-													<input id="${question.id}" name="input_${code.index+1}" class="inputStyle">
+													<input id="${question.id}" name="input_${code.index+1}" class="inputStyle" value="${question.inp }"  >
 												</div>
 												<input type="hidden" name="inputValues" value="input_${code.index+1}">
 												<input type="hidden" name="inputQuestionIds" value="${question.id}">
@@ -83,7 +99,7 @@
 											<div class="oneQuestion">
 												<p>Q${code.index+1} : ${question.title}</p>
 												<div style="padding-left: 22px">
-													<textarea id="${question.id}" name="input_${code.index+1}" class="textAreaStyle"></textarea>
+													<textarea id="${question.id}" name="input_${code.index+1}" class="textAreaStyle"  >${question.inp }</textarea>
 												</div>
 												<input type="hidden" name="textValues" value="input_${code.index+1}">
 												<input type="hidden" name="textQuestionIds" value="${question.id}">
@@ -102,12 +118,13 @@
 						</div>
 						</form>
 					</div>
-					
+					<c:if test="${((btn.sid) !=surveyId) && ((btn.uid) !=logUserId)}">
 					<div style="width: 100%;height:50px;">
 						<div onclick="submit1()" class="buttonDiv">
 							<span class="submitFont">完成</span>
 						</div>
 					</div>
+					</c:if>
 				</div>
 				<div class="emptyDiv"></div>
 		</div>

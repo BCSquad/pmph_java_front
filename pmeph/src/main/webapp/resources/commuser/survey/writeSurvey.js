@@ -1,5 +1,4 @@
 function submit1(){
-	debugger;
 	var params = $('#contentForm').serializeArray();  
 	$.ajax({
 		type: "POST",
