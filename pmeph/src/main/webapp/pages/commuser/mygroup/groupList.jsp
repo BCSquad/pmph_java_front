@@ -84,6 +84,7 @@
                 </div>
     		</c:otherwise>
     	</c:choose>
+		<div class="clear"></div>
     </div>
     <c:if  test="${listSize>0 }">
         <div class="jzgd"><span onclick="javascript:doMore('${pageNumber}')">加载更多...</span></div>
