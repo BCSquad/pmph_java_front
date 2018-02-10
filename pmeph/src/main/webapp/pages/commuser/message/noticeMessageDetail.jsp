@@ -29,14 +29,14 @@
            	 <a href="${ctx }/${firstpath}">${firsttag } </a>&gt; <a href="${ctx }/${secondpath}">${secondtag }</a> &gt; 公告详情
         </div>
         
-        <c:choose>
+       <%-- <c:choose>
         	<c:when test="${materialId==null}">
         		<div class="no-more">
                     <img src="<c:url value='/statics/image/aaa4.png'></c:url>">
                     <span>木有内容呀~~</span>
                 </div>
         	</c:when>
-        	<c:otherwise>
+        	<c:otherwise> --%>
         		<div id="section">
 
 		            <span class="title">${map.title}</span>
@@ -54,13 +54,15 @@
 		        <div  class="con_css" >
 		            <p>${content}</p>
 		        </div>
-		        <c:if test="${map.attachment !=null}">
+		        <c:if test="${cmsAttach !=null}">
 				        <div class="list">
 				            <div class="title2">
-				                	附件：
+				                	公告附件：
 				            </div>
 				            <div class="listContent">
-				            	<span ><a   href="${ctx}/file/download/${map.attachment}.action" ><img class="pictureSize" src="${ctx}/statics/pictures/attachment.png">&nbsp;&nbsp;${map.attachment_name}</a></span><br>
+				                 <c:forEach items="${cmsAttach }" var="cattach">
+				            	  <span ><a   href="${ctx}/file/download/${cattach.attachment}.action" ><img class="pictureSize" src="${ctx}/statics/pictures/attachment.png">&nbsp;&nbsp;${cattach.attachment_name}</a></span><br>
+				                </c:forEach>
 				            </div>
 				        </div>
 		        	</c:if>
@@ -101,7 +103,7 @@
 		        <c:if test="${listAttachment.size()>0}">
 		        <div class="list">
 		            <div class="title2">
-		                	附件：
+		                	教材附件：
 		            </div>
 		            <div class="listContent">
 		            	<c:forEach items="${listAttachment}" var="attachment">
@@ -114,8 +116,8 @@
 		        <div class="registerDiv"  >
 		            <span class="button ${notEnd !=1 or is_material_entry==false}" onclick="register(${materialId})" >报名参加</span>
 		        </div>
-        	</c:otherwise>
-        </c:choose>
+        	<%-- </c:otherwise> --%>
+       <%--  </c:choose> --%>
         
         
 	</div>
