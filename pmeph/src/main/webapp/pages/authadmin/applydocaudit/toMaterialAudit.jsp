@@ -83,9 +83,8 @@
 							<td><span>工作单位：${gezlList.org_name}</span></td>
 							<td><span>职&emsp;&emsp;务：${gezlList.position}</span></td>
 							<td><span>职&emsp;&emsp;称：
-								<c:if test="${gezlList.title == '0'}">教授</c:if>
-								<c:if test="${gezlList.title == '1'}">主任</c:if>
-								<c:if test="${gezlList.title == '2'}">副主任</c:if>
+								${gezlList.title}
+								
 							</span></td>
 							<td><span>邮&emsp;&emsp;编：${gezlList.postcode}</span></td>
 						</tr>
