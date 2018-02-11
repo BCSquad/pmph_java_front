@@ -121,7 +121,6 @@
 <script type="text/javascript">
 //发送消息
 function sendxiaoxi (){
-	debugger;
 	var content=$("#content").val();
 	if(content =='' ||content==null ||content=='↵'){
 		window.message.warning("请键入消息");
@@ -129,7 +128,7 @@ function sendxiaoxi (){
 		var frendId =$("#frendId").val();
 		$.ajax({
 	        type:'post',
-	        url :contextpath+'/user/senNewMsg.action',
+	        url :contextpath+'/organizationuser/senNewMsg.action',
 	        async:false,
 	        dataType:'json',
 	        data:{
@@ -249,7 +248,7 @@ function formatDate(nS,str) {
 	//点击查询
 	function query(){
 		var username=encodeURI(encodeURI($("#ssk").val()));
-		window.location.href = 'contextpath/user/writerLists.action?username='+username;
+		window.location.href = 'contextpath/organizationuser/writerLists.action?username='+username;
 	}
 	var pageSize =$("#pages").val();
             Page({
