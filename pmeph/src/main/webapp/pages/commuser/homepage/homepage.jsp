@@ -47,23 +47,23 @@
             <div class="op-link">
                 <div class="transaction">
                     <div class="labeling">教材申报</div>
-                    <div class="bin consol"><div class="lab-pic1"></div>最新公告</div>
-                    <div class="bin marks" ><div class="lab-pic2"></div>专家申报</div>
-                    <div class="bin consol"><div class="lab-pic3"></div>学校审核</div>
-                    <div class="bin marks" ><div class="lab-pic4"></div>结果公布</div>
+                    <div class="bin consol" onclick="window.location.href='${ctx}/cmsnotice/tolist.action'"><div class="lab-pic1"></div>最新公告</div>
+                    <div class="bin marks" onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?pagetag=jcsb'"><div class="lab-pic2"></div>专家申报</div>
+                    <div class="bin consol" onclick="window.location.href='${ctx}/schedule/scheduleList.action'"><div class="lab-pic3"></div>学校审核</div>
+                    <div class="bin marks" onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?pagetag=jcsb'"><div class="lab-pic4"></div>结果公布</div>
                 <div class="transaction" style="margin-top: 18px;">
                     <div class="labeling">我要出书</div>
-                    <div class="binone consol"><div class="lab-pic5"></div>医学专著</div>
-                    <div class="binone marks" ><div class="lab-pic6"></div>科普图书</div>
-                    <div class="binone consol"><div class="lab-pic7"></div>创新教材</div>
-                    <div class="binone marks" ><div class="lab-pic8"></div>进度查询</div>
+                    <div class="binone consol" onclick="window.location.href='${ctx}/bookdeclare/toBookdeclareAdd.action'"><div class="lab-pic5"></div>医学专著</div>
+                    <div class="binone marks" onclick="window.location.href='${ctx}/bookdeclare/toBookdeclareAdd.action'"><div class="lab-pic6"></div>科普图书</div>
+                    <div class="binone consol" onclick="window.location.href='${ctx}/bookdeclare/toBookdeclareAdd.action'"><div class="lab-pic7"></div>创新教材</div>
+                    <div class="binone marks" onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?pagetag=wycs'"><div class="lab-pic8"></div>进度查询</div>
                 </div>
                 <div class="transaction" style="margin-top: 8px;">
                     <div class="labeling">交互服务</div>
-                    <div class="bintwo consol"><div class="lab-pic9"></div>医学小组</div>
-                    <div class="bintwo marks" ><div class="lab-pic10"></div>图书纠错</div>
-                    <div class="bintwo consol"><div class="lab-pic11"></div>问卷调查</div>
-                    <div class="bintwo marks" ><div class="lab-pic12"></div>经验交流</div>
+                    <div class="bintwo consol" onclick="window.location.href='${ctx}/group/list.action'"><div class="lab-pic9"></div>医学小组</div>
+                    <div class="bintwo marks"  onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?pagetag=wdjc'"><div class="lab-pic10"></div>图书纠错</div>
+                    <div class="bintwo consol" onclick="window.location.href='${ctx}/survey/surveyList.action'"><div class="lab-pic11"></div>问卷调查</div>
+                    <div class="bintwo marks"  onclick="window.location.href='${ctx}/writerArticle/initWriteArticle.action'"><div class="lab-pic12"></div>经验交流</div>
                 </div>
             </div>
         </div>
@@ -74,7 +74,7 @@
                                                                       style="margin-left: 30px;margin-top: 42px"></div>
             </div>
             <c:forEach items="${listDou}" var="list" varStatus="status">
-                
+
                 <%-- <c:if test="${status.index==0}">
                     <div class="content-left" style="margin-left: 30px">
                         <p class="content-size"><a href="${ctx}/message/noticeMessageDetail.action?cmsId=${list.id }&&materialId=${list.material_id}" class="astyle">${list.title}</a></p>
@@ -96,7 +96,7 @@
 	                      <div class="left_join end">已结束</div>
                   	  </c:if>
                   </div>
-               
+
                 <%-- </c:if> --%>
             </c:forEach>
             <div class="more" onclick="top.location='${ctx}/cmsnotice/tolist.action'">全部>></div>
@@ -176,7 +176,7 @@
                         </c:forEach>
                     </div>
                     <div class="left_two">
-                        <div class="textbook_left">重点学科推荐</div>  
+                        <div class="textbook_left">重点学科推荐</div>
                         <div class="all_left">全部>></div>
                         <div class="p1_left"></div>
                         <div class="p2_left"></div>
@@ -228,7 +228,7 @@
                             <div class="a6_div2">${list.summary}</div>
                             <div>
                                 <div class="a6_head_div">
-                                
+
                                 	<c:if test="${list.avatar=='DEFAULT'}">
                                 <img src="${ctx}/statics/image/default_image.png" class="a6_head"></c:if>
                 				<c:if test="${list.avatar!='DEFAULT'}">
@@ -286,7 +286,7 @@
                             </div>
                         </div>
                 </c:forEach>
-                
+
             </div>
         </div>
         <div class="area-8">
