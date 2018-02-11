@@ -35,7 +35,7 @@ public interface MyFriendDao {
      * @return WriterFriend 好友对象集合
      * </pre>
      */
-    List<Map<String, Object>> listMyFriend(@Param("userId") Long userId,@Param("startrow") int startrow);
+    List<Map<String, Object>> listMyFriend(@Param("groupId") String groupId,@Param("userId") Long userId,@Param("startrow") int startrow);
 
     /**
      * 查询剩余总数
@@ -43,5 +43,8 @@ public interface MyFriendDao {
      * @param startrow
      * @return
      */
-	int listMyFriendCount(@Param("userId") Long userId,@Param("startrow") int startrow);
+	int listMyFriendCount(@Param("groupId") String groupId,@Param("userId") Long userId,@Param("startrow") int startrow);
+
+	void invite(@Param("id") String id,@Param("groupId") String groupId);
+
 }

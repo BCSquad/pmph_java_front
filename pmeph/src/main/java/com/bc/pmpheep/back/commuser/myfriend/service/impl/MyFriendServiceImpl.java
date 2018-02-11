@@ -40,13 +40,13 @@ public class MyFriendServiceImpl implements MyFriendService {
     MyFriendDao myFriendDao;
 
     @Override
-    public List<Map<String, Object>> listMyFriend(CommuserWriterUser writerUser,int startrow) throws Exception {
+    public List<Map<String, Object>> listMyFriend(String groupId,CommuserWriterUser writerUser,int startrow) throws Exception {
         Long userId = writerUser.getId();
         if (ObjectUtil.isNull(userId)) {
             throw new CheckedServiceException(CheckedExceptionBusiness.WRITER_FRIEND,
                                               CheckedExceptionResult.NULL_PARAM, "用户Id为空");
         }
-        List<Map<String, Object>> lst  =  myFriendDao.listMyFriend(userId,startrow);
+        List<Map<String, Object>> lst  =  myFriendDao.listMyFriend(groupId,userId,startrow);
 //        for(WriterFriendVO writerFriendVO:  lst){
 //        	String avatar =  writerFriendVO.getAvatar();
 //        	writerFriendVO.setAvatar(RouteUtil.userAvatar(avatar));
@@ -55,13 +55,24 @@ public class MyFriendServiceImpl implements MyFriendService {
     }
 
 	@Override
-	public int listMyFriendCount(CommuserWriterUser writerUser, int startrow) {
+	public int listMyFriendCount(String groupId,CommuserWriterUser writerUser, int startrow) {
 		Long userId = writerUser.getId();
         if (ObjectUtil.isNull(userId)) {
             throw new CheckedServiceException(CheckedExceptionBusiness.WRITER_FRIEND,
                                               CheckedExceptionResult.NULL_PARAM, "用户Id为空");
         }
-        int count  =  myFriendDao.listMyFriendCount(userId,startrow);
+        int count  =  myFriendDao.listMyFriendCount(groupId,userId,startrow);
 		return count;
 	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public void invite(String id, String groupId) {
+		// TODO Auto-generated method stub
+		myFriendDao.invite(id,groupId);
+	}
+
+
 }
