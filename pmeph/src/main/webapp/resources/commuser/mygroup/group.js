@@ -1,4 +1,3 @@
-
 function ChangeDiv(type){
     if(type=='commnions'){
         document.getElementById("commnions_top").setAttribute("class","clicked");
@@ -21,12 +20,21 @@ function showAllGroupMember(){
 	$("#show_All_Memeber").text("");
 }
 $(function(){
-	if(!WebSocket){
+    /*if(!WebSocket){
 	      console.error('浏览器不支持websocket')
-	};
+     };*/
 	var userId    = $("#userId").val(); 
-	var webSocket = new WebSocket("ws:120.76.221.250:11000/pmpheep/websocket?userType=2&userId="+userId);
+    var webSocket = undefined;
+    try {
+        if (WebSocket) {
+            webSocket = new WebSocket("ws://120.76.221.250:11000/pmpheep/websocket?userType=2&userId=" + userId);
+        }
+    } catch (e) {
+
+    }
+
 	//var webSocket = new WebSocket("ws:127.0.0.1:8036/pmpheep/websocket?userType=" +2+"&userId="+$("#userId").val());
+    if (webSocket) {
 	webSocket.onopen = function(event){
 	    console.log("连接成功");
 	    console.log(event);
@@ -59,6 +67,8 @@ $(function(){
 	    	loadNewGroupMsg(sender,data.senderName,data.senderIcon,data.content,data.time);
 	    }
 	}
+    }
+
 	//按钮发送消息
 	$("#sendMsg").click(function(){
 		sendSocktMsg();
@@ -74,7 +84,9 @@ $(function(){
 			window.message.error("发送失败:键入消息过长");
 			return ;
 		}
+        if (webSocket) {
 		webSocket.send("{senderId:"+$("#userId").val()+",senderType:"+2+",content:'"+content+"',groupId:"+$("#groupId").val()+",sendType:0}");
+        }
 		$("#msgContent").val("");
 	}
 	
@@ -108,12 +120,9 @@ $(function(){
     });
 	
 	
-	
-	
-	
 	//-------------------------------
-    $("#filesgx_top").html('文件共享<span style="display: inline-block;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;'+
-    		'line-height: 13px;padding: 3px 6px;border-radius: 50%;">'+$("#fileTotal").html()+'</span>');
+    $("#filesgx_top").html('文件共享<span style="display: inline-block;position: absolute;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;' +
+        'line-height: 13px;padding: 3px 6px;border-radius: 50%;right: 0;top: 0">' + $("#fileTotal").html() + '</span>');
     
 	var talkPagesize  = 5 ;
 	var talkPagenumber= 1  ;
@@ -466,8 +475,6 @@ $(function(){
 		});
 	
 	
-	
-	
 	//文件上传方法
 	$("#scwj1").uploadFile({
 	    start: function () {
@@ -481,7 +488,8 @@ $(function(){
 					    groupId  : $("#groupId").val(),
 					    fileId   : fileId,
 					    fileSize : fileSize,
-					    fileName : fileName},// 你的form
+                    fileName: fileName
+                },// 你的form
 				async: false,
 				dataType:"json",
 			    success: function(msg) {
@@ -494,7 +502,9 @@ $(function(){
 						$("#fileContent").html('');
 						initFile();
 				    	//推送消息
+                        if (webSocket) {
 				    	webSocket.send("{senderId:"+userId+",senderType:"+0+",content:'\""+$("#"+userId+"_2").val()+"\"上传了文件"+"',groupId:"+$("#groupId").val()+",sendType:0}");
+                        }
 				    	var old = parseInt($("#fileTotal").html());
 				    	$("#fileTotal").html(old+1);
 				    	$("#filesgx_top").html('文件共享<span style="display: inline-block;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;'+

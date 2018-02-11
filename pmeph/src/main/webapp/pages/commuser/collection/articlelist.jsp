@@ -44,7 +44,7 @@ String basePath =path+"/";
     <div class="collection" >
         <div class="title">
                <div class="title-text">
-                   <a href="articledetail/toPage.action?wid=${article.cid }"> ${article.title }</a>
+                   <a href="${article.skip}"> ${article.title }</a>
                </div>
                <input type="hidden" id="cms${article.cid }" value="${article.cid }"/>
                <div class="tm">

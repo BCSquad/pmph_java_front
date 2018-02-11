@@ -638,7 +638,7 @@ request.setAttribute("currentTime",datetime);
                 
                 <div id="wdsc"><span id="wdscx"></span> <span class="rlan">个人收藏</span> 
                 <span id="qbhy">
-                	<a href="${ctx}/bookcollection/tobookcollection.action" class="aright">全部收藏>>&nbsp;</a>
+                	<a href="${ctx}/bookcollection/tobookcollectionlist.action" class="aright">全部收藏>>&nbsp;</a>
                 </span>
                 <!-- <span id="hyp">换一批</span>
                 <span id="jiantou"></span> -->

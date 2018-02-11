@@ -106,9 +106,14 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
         ModelAndView model = new ModelAndView();
         //加载更多
         List<GroupList> lst=groupService.groupList(0, pageSize, userId,"group_name") ;
+        String isover="no";
+        if(lst!=null&& lst.size()<pageSize){
+        	isover="yes";
+        }
         model.setViewName("commuser/mygroup/groupList");
         model.addObject("listgroup", lst);
         model.addObject("listSize", lst.size());
+        model.addObject("isover", isover);
         model.addObject("pageNumber", pageNumber);
         return model;
     }

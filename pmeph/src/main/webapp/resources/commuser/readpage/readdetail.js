@@ -1,3 +1,16 @@
+$.ajaxSetup({
+    type: "POST",
+    dataType: "json",
+    timeout: 10000,
+    async: true,
+    error: function (XMLHttpRequest, textStatus, errorThrown) {
+        var errmsg = XMLHttpRequest.responseText;
+        window.message.error("出错啦！");
+    },
+    beforeSend: function (xhr, global) {
+    }
+});
+
 $(function () {
     $('form').validate({
         onFocus: function () {
@@ -39,25 +52,36 @@ $(function () {
     });
 
     var $pop = $("<div id='video-upload'><div class='pop-body'>" +
-        "<div class='title'>当前上传：幼儿护理学</div>" +
-        "<div class='remark'>视频上传中，请勿关闭页面</div>" +
+        "<div class='title'>当前上传：" + $("#bookname").val() + "</div>" +
+        "<div class='remark' style='display: none'>视频上传中，请勿关闭页面</div>" +
         "<div class='layui-progress layui-progress-big' lay-filter='demo' lay-showPercent='true'>" +
         "   <div class='layui-progress-bar' lay-percent='0%'></div> </div> " +
         "<div class='relate-img'>" +
-        "   <img  alt=''/>" +
-        "   <div class='shade'></div> " +
+        "   <img  alt='' value='' />" +
+        "   <div class='shade'>请上传视频封面</div> " +
         "   <div class='add-icon' id='add-icon'>+</div> " +
         "</div>" +
         " <div class='lable-input title'><div class='label'>标 题</div><input class='input' type='text'></div>" +
-        " <div class='lable-input type'><div class='label'>分 类</div><select id='select'><option>教育</option><option>培训</option></select></div>" +
+        /*   " <div class='lable-input type'><div class='label'>分 类</div><select id='select'><option>教育</option><option>培训</option></select></div>" +*/
         "<div class='button-area'><button class='submit disable'>提交</button><button class='cancel' onclick='hidevideo()'>取消</button></div>" +
         "</div> </div>");
 
     var element;
-    $("#upload-video").fileupload({
-        url: contextpath + 'file/upload.action',
+    var $uploadvideo = $("#upload-video").fileupload({
+        url: 'http://120.76.221.250:11000/pmph_vedio/vedio/fileUp',
         dataType: 'json',
         autoUpload: true,
+        forceIframeTransport: true,
+        formData: function () {
+            return [
+                {name: 'userId', value: 1},
+                {name: 'userType', value: 1},
+                {name: 'bookId', value: 1},
+                {name: 'sn', value: 1},
+                {name: 'title', value: $(".pop-body").find("input[type='text']").val()},
+                {name: 'cover', value: $("#add-icon").parent().children("img").attr("value")}
+            ];
+        },
         replaceFileInput: false,
         singleFileUploads: true,
         limitMultiFileUploads: 1,
@@ -74,38 +98,64 @@ $(function () {
                     content: $pop.html()
                 });
 
+
                 layui.use('element', function () {
+
+                    var valid = function () {
+                        if ($("#add-icon").parent().children("img").attr("value") && $(".pop-body").find("input[type='text']").val()) {
+                            $(".pop-body").find("button.submit").removeClass("disable");
+                            return true;
+                        } else {
+                            $(".pop-body").find("button.submit").addClass("disable");
+                            return false;
+                        }
+                    }
+
+                    $(".pop-body").find("input[type='text']").change(function () {
+                        valid();
+                    });
+
+                    $(".pop-body").find("button.submit").click(function () {
+                        if (valid()) {
+                            var o = data.submit();
+                            $(".pop-body").find(".remark").css("display", "block");
+                        }
+                    })
+
+
                     element = layui.element;
                     $("#add-icon").uploadFile({
                         accept: 'image/png,image/gif,image/jpeg',
                         done: function (filename, fileid) {
                             // console.log("上传完成：name " + filename + " fileid " + fileid);
-                            $("#add-icon").parent().children("img").attr('src', contextpath + 'image/' + fileid + ".action")
-
+                            $("#add-icon").parent().children("img").attr('src', contextpath + 'image/' + fileid + ".action").attr("value", fileid);
+                            valid()
                         },
                         progressall: function (loaded, total, bitrate) {
                             // console.log("正在上传。。。" + loaded / total);
                         }
                     });
 
-                    $('.pop-body select').selectlist({
-                        zIndex: 10,
-                        width: 437,
-                        height: 30,
-                        optionHeight: 20
-                    });
+                    /* $('.pop-body select').selectlist({
+                     zIndex: 10,
+                     width: 437,
+                     height: 30,
+                     optionHeight: 20
+                     });*/
 
                 });
 
 
-                data.submit();
+                // data.submit();
             }
         },
         start: function (e) {
 
         },
-        done: function (e, data) {
+        done: function (e, data, b, c, d) {
+            if (!data) {
 
+            }
             if (data.result.code == '1') {
                 $(".pop-body .submit").removeClass("disable");
             } else {
@@ -166,7 +216,7 @@ function changepage() {
                 if (n.avatar == '' || n.avatar == 'DEFAULT' || n.avatar == null) {
                     str += contextpath + 'statics/image/rwtx.png';
                 } else {
-                	str+=contextpath+'image/'+n.avatar+'.action';
+                    str += contextpath + 'image/' + n.avatar + '.action';
                 }
                 str += '" class="picturesize"/></div><div style="float: left;margin-left: 10px;margin-top: 5px;">' +
                     n.realname
@@ -320,17 +370,17 @@ function insert() {
             if (json.returncode == "OK") {
                 $("#content_book").val(null);
                 window.message.success("评论成功");
-            } else if (json.returncode == "error"){
-            	var words = json.value;
-            	var content = document.getElementById("content_book");
-            	var contentValue = $("#content_book").val();
-            	for (var i = 0 ; i < words.length; i++){
-            		if (json.content.indexOf(words[i]) > -1){
-            			content.style.border = '3px solid red';
-            			window.message.error("图书评论中含有敏感词,请检查修改后再保存或提交");
-            			return;
-            		}
-            	}
+            } else if (json.returncode == "error") {
+                var words = json.value;
+                var content = document.getElementById("content_book");
+                var contentValue = $("#content_book").val();
+                for (var i = 0; i < words.length; i++) {
+                    if (json.content.indexOf(words[i]) > -1) {
+                        content.style.border = '3px solid red';
+                        window.message.error("图书评论中含有敏感词,请检查修改后再保存或提交");
+                        return;
+                    }
+                }
             }
         }
     });
@@ -439,7 +489,7 @@ function writeablut() {
         async: false,
         dataType: 'json',
         success: function (json) {
-            location.href = contextpath + 'readdetail/todetail.action?id=' + $("#book_id").val()+"&state=write";
+            location.href = contextpath + 'readdetail/todetail.action?id=' + $("#book_id").val() + "&state=write";
         }
     });
 }
@@ -524,33 +574,33 @@ function more(con, more) {
 
 
 //输入长度限制校验，ml为最大字节长度
-function LengthLimit(obj,ml){
-	
-	var va = obj.value;
-	var vat = "";
-	for ( var i = 1; i <= va.length; i++) {
-		vat = va.substring(0,i);
-		//把双字节的替换成两个单字节的然后再获得长度，与限制比较
-		if (vat.replace(/[^\x00-\xff]/g,"aa").length <= ml) {
-			maxStrlength=i;
-		}else{
-			
-			break;
-		}
-	}
-	obj.maxlength=maxStrlength;
-	//把双字节的替换成两个单字节的然后再获得长度，与限制比较
-	if (va.replace(/[^\x00-\xff]/g,"aa").length > ml) {
-		obj.value=va.substring(0,maxStrlength);
-		window.message.warning("不可超过最大长度");
-	}
+function LengthLimit(obj, ml) {
+
+    var va = obj.value;
+    var vat = "";
+    for (var i = 1; i <= va.length; i++) {
+        vat = va.substring(0, i);
+        //把双字节的替换成两个单字节的然后再获得长度，与限制比较
+        if (vat.replace(/[^\x00-\xff]/g, "aa").length <= ml) {
+            maxStrlength = i;
+        } else {
+
+            break;
+        }
+    }
+    obj.maxlength = maxStrlength;
+    //把双字节的替换成两个单字节的然后再获得长度，与限制比较
+    if (va.replace(/[^\x00-\xff]/g, "aa").length > ml) {
+        obj.value = va.substring(0, maxStrlength);
+        window.message.warning("不可超过最大长度");
+    }
 }
 
 //评论检查出敏感词时，用户修改文本域获取焦点，则把红边去掉
-$(function(){
-	$("#content_book").focus(function(){
-		  $("#content_book").css("border","none");
-		});
-	
+$(function () {
+    $("#content_book").focus(function () {
+        $("#content_book").css("border", "none");
+    });
+
 });
 

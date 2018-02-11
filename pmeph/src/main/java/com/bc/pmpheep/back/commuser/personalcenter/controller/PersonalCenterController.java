@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService;
 import com.bc.pmpheep.back.commuser.personalcenter.bean.PersonalNewMessage;
 import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
+import com.bc.pmpheep.back.commuser.survey.service.SurveyService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.template.service.TemplateService;
 import com.bc.pmpheep.back.util.MD5;
@@ -52,6 +53,10 @@ public class PersonalCenterController extends BaseController {
     @Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService")
 	private ArticleSearchService articleSearchService;
+    //我的问卷
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.survey.service.SurveyServiceImpl")
+	SurveyService surveyService; 
     
 
     @RequestMapping("/tohomepage")//个人中心动态
@@ -233,6 +238,10 @@ public class PersonalCenterController extends BaseController {
 			String[] names={};
 			String[] namesChi = {};
 			queryConditionOperation(names,namesChi,request, mv, paraMap,vm_map);
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			String dateStr = sdf.format(date);
+			paraMap.put("dateStr", dateStr);
 			pageParameter.setParameter(paraMap);
 
 			List<Map<String,Object>> List_map = personalService.mySurvey(pageParameter);
@@ -598,6 +607,8 @@ public class PersonalCenterController extends BaseController {
 			ModelAndView mv = new ModelAndView();
 			String surveyIdStr = request.getParameter("surveyId");
 			long surveyId = new Long(surveyIdStr);
+			//获取调查基本信息
+			Map<String,Object> mapSurvey = surveyService.getSurveyBaseInfo(surveyId);
 			 Map<String, Object> paraMap = new HashMap<String, Object>();
 		        String logUserId = getUserInfo().get("id").toString();
 				paraMap.put("logUserId", logUserId);
@@ -642,11 +653,12 @@ public class PersonalCenterController extends BaseController {
 							question.put("answer", answer);
 							listResult.add(question);
 						}
-					}else if(question.get("type").equals(3)||question.get("type").equals(5)){
+					}else if(question.get("type").equals(4)||question.get("type").equals(5)){
 						//查询填空答案
 						String questionIdStr = question.get("id").toString();
 						if(null!=questionIdStr&&!questionIdStr.equals("")){
 							long questionId = Long.valueOf(questionIdStr).longValue();
+							paraMap.put("questionId", questionId);
 							 String inp = personalService.getInpAnswers(paraMap);
 							question.put("inp", inp);
 							listResult.add(question);
@@ -657,8 +669,9 @@ public class PersonalCenterController extends BaseController {
 					
 				}
 			}
-			
+			mv.addObject("mapSurvey",mapSurvey);
 			mv.addObject("listSesult",listResult);
+			mv.addObject("surveyId",surveyId);
 			mv.addObject("listSize",listResult.size());
 			mv.setViewName("commuser/personalcenter/queryMySurvey");
 			return mv;

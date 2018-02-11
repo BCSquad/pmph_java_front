@@ -1028,6 +1028,8 @@
     left: 10px;
     background: black;
     position: absolute;
+    color: white;
+    text-align: center;
 }
 
 .pop-upload .relate-img .add-icon {
@@ -1074,6 +1076,7 @@
     height: 30px;
     width: 160px;
     margin: auto;
+    margin-top: 20px;
 }
 
 .pop-upload .button-area button.disable{
