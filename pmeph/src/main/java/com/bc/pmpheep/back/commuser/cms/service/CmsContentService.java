@@ -19,7 +19,7 @@ public interface CmsContentService {
 	 * @param pageParameter
 	 * @return
 	 */
-	List<Map<String, Object>> listCms(PageParameter<Map<String, Object>> pageParameter);
+	List<Map<String, Object>> listCms(PageParameter<Map<String, Object>> pageParameter,String contextpath);
 	
 	/**
 	 * 查询文章总条数

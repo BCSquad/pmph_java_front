@@ -6,8 +6,20 @@
 	<!-- 查询文章 -->
 	<select id="listCmsContentVO" parameterType="java.util.Map"
 		resultType="java.util.Map">
-		select cc.*,wu.avatar,wu.id as userId,
-		IFNULL(wu.realname,pu.realname) realname
+	select cc.*,wu.id as userId,
+		case 
+		when cc.author_type =1
+		then pu.realname
+		when  cc.author_type =2
+		then wu.realname
+		else '系统' end as realname,
+		case 
+		when cc.author_type =1
+		then pu.avatar
+		when  cc.author_type =2
+		then wu.avatar
+		else '系统' end as avatar,
+		cc.author_id
 		from cms_content cc
 		left join pmph_user pu on pu.id=cc.author_id
 		left join writer_user wu on wu.id=cc.author_id
