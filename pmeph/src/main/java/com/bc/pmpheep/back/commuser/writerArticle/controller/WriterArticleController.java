@@ -165,6 +165,9 @@ public class WriterArticleController extends BaseController{
 	public Map<String,Object> updateIsStaging(HttpServletRequest request){
 		String titleValue = request.getParameter("titleValue");
 		String UEContent = request.getParameter("UEContent");
+		UEContent = UEContent.replaceAll("\r\n", "");
+		
+		
 		String msg_id = request.getParameter("msg_id");
 		String btnType = request.getParameter("btnType");
 		String atrticle_id = request.getParameter("atrticle_id");
@@ -237,5 +240,7 @@ public class WriterArticleController extends BaseController{
 		resultMap.put("flag", flag);
 		return resultMap;
 	}
+	
+	
 
 }

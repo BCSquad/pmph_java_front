@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.bc.pmpheep.back.commuser.personalcenter.bean.PersonalNewMessage;
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
 import com.bc.pmpheep.back.plugin.PageParameter;
 
 public interface PersonalService {
@@ -160,11 +161,9 @@ public interface PersonalService {
 	
 	/**
 	 * 生成个人动态的方法
-	 * @param TrendstName 动态名称
-	 * @param tableId	  关联表主键
-	 * @param trendstType 动态类型：0生成，1通过，2未通过
+	 * @param writerUserTrendst
 	 */
-	public void saveUserTrendst(String TrendstName,String tableId,int trendstType,String writer_user_id);
+	public void saveUserTrendst(WriterUserTrendst writerUserTrendst);
 
 	/**
 	 * 伪删除我的纠错

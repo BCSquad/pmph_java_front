@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.ibatis.javassist.expr.Instanceof;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService;
 import com.bc.pmpheep.back.commuser.personalcenter.bean.PersonalNewMessage;
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
 import com.bc.pmpheep.back.commuser.personalcenter.dao.PersonalDao;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.general.pojo.Content;
@@ -23,6 +28,10 @@ public class PersonalServiceImpl implements PersonalService {
 	
 	@Autowired
 	private ContentService contentService;
+	
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService")
+	private ArticleSearchService articleSearchService;
 
 	@Override
 	public List<PersonalNewMessage> queryMyCol(Map<String, Object> permap) {
@@ -190,21 +199,44 @@ public class PersonalServiceImpl implements PersonalService {
 	public List<Map<String, Object>> queryWriterUserTrendst(
 			PageParameter<Map<String, Object>> pageParameter) {
 		List<Map<String, Object>> result_list = personaldao.queryWriterUserTrendst(pageParameter);
+		String contextpath = pageParameter.getParameter().get("contextpath").toString();
 		for (Map<String, Object> map : result_list) {
 			if (map.get("cms")!=null && ((Map<?, ?>) map.get("cms")).get("mid")!=null) {
-				Content message = contentService.get(((Map<?, ?>) map.get("cms")).get("mid").toString());
-				Map<String, Object> n = ((Map<String, Object>) map.get("cms"));
-				n.put("Content", message);
-				map.put("cms", n) ;
+				Content content = contentService.get(((Map<?, ?>) map.get("cms")).get("mid").toString());
+				Map<String, Object> cms = ((Map<String, Object>) map.get("cms"));
+				String content_text = removeHtml(content.getContent());
+				String img_url = getFirstImgUrlFromHtmlStr(contextpath, content);
+				cms.put("first_img_url", img_url);
+				cms.put("Content", content);
+				cms.put("content_text", content_text);
+				map.put("cms", cms) ;
 			}
 			if (map.get("p_cms")!=null && ((Map<?, ?>) map.get("p_cms")).get("mid")!=null) {
-				Content message = contentService.get(((Map<?, ?>) map.get("p_cms")).get("mid").toString());
-				Map<String, Object> n = ((Map<String, Object>) map.get("p_cms"));
-				n.put("Content", message);
-				map.put("p_cms", n) ;
+				Content content = contentService.get(((Map<?, ?>) map.get("p_cms")).get("mid").toString());
+				Map<String, Object> p_cms = ((Map<String, Object>) map.get("p_cms"));
+				String content_text = removeHtml(content.getContent());
+				String img_url = getFirstImgUrlFromHtmlStr(contextpath, content);
+				p_cms.put("first_img_url", img_url);
+				p_cms.put("Content", content);
+				p_cms.put("content_text", content_text);
+				map.put("p_cms", p_cms) ;
 			}
 		}
 		return result_list;
+	}
+
+	private String getFirstImgUrlFromHtmlStr(String contextpath, Content content) {
+		String img_url = contextpath +"statics/image/564f34b00cf2b738819e9c35_122x122!.jpg";
+		if(content!=null){
+			List<String> imglist = articleSearchService.getImgSrc(content.getContent());
+		    if(imglist.size()>0){
+		    	img_url = imglist.get(0);
+		    	if (img_url.length()>0) {
+		    		img_url = contextpath+img_url;
+				}
+		    }
+		}
+		return img_url;
 	}
 
 	@Override
@@ -323,7 +355,12 @@ public class PersonalServiceImpl implements PersonalService {
 	}
 
 	@Override
-	public void saveUserTrendst(String TrendstName, String tableId,int trendstType, String writer_user_id) {/*
+	public void saveUserTrendst(WriterUserTrendst writerUserTrendst) {
+		
+		
+		int count = personaldao.saveUserTrendst(writerUserTrendst);
+		
+		/*
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("TrendstName", TrendstName);
 		paraMap.put("tableId", tableId);
@@ -395,6 +432,15 @@ public class PersonalServiceImpl implements PersonalService {
 			List<Map<String,Object>> r= personaldao.queryOurFriendShip(userId,logUserId);
 			friendShip = r!=null&&r.size()>0?r.get(0):friendShip;
 			return friendShip;
+		}
+		
+		//去掉字符串中的html标签
+		public String removeHtml(String str){
+			String regEx_html="<[^>]+>"; //定义HTML标签的正则表达式 
+			Pattern p_html=Pattern.compile(regEx_html,Pattern.CASE_INSENSITIVE); 
+	        Matcher m_html=p_html.matcher(str); 
+	        str=m_html.replaceAll(""); //过滤html标签 
+			return str;
 		}
 
 

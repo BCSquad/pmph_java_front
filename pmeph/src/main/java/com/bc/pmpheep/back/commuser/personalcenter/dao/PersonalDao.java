@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.bc.pmpheep.back.commuser.personalcenter.bean.PersonalNewMessage;
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
 import com.bc.pmpheep.back.plugin.PageParameter;
 
 public interface PersonalDao {
@@ -147,10 +148,10 @@ public interface PersonalDao {
 
 	/**
 	 * 生成动态
-	 * @param paraMap
+	 * @param writerUserTrendst
 	 * @return
 	 */
-	public int saveUserTrendst(Map<String, Object> paraMap);
+	public int saveUserTrendst(WriterUserTrendst writerUserTrendst);
 	
 	/**
 	 * 通过图书纠错表主键查询被纠错图书的第一主编id

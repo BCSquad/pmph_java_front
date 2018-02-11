@@ -307,9 +307,10 @@
 .writer .item .msg .text{
     overflow: hidden;
     color: #999999;
-    text-overflow:ellipsis; /*瓒呭嚭閮ㄥ垎鐪佺暐鍙锋樉绀�/
-    white-space:nowrap;/*寮哄埗涓嶆崲琛�/
+    text-overflow:ellipsis; /*瓒呭嚭閮ㄥ垎鐪佺暐鍙锋樉绀*/
+    white-space:nowrap;/*寮哄埗涓嶆崲琛*/
 }
+
 .writer .item .add{
     width:53px;
     height:30px;
@@ -340,4 +341,34 @@
     height:54px;
     line-height: 18px;
     color:#F7FDFB;
+}
+
+span.friend {
+    float: right !important;
+    margin-top: 11px !important;
+    margin-right: 11px !important;
+    height: 44px !important;
+    line-height: 0px !important;
+    color: #35c974 !important;
+    display: inline-block !important;
+    cursor: pointer !important;
+}
+
+.friend.hasRequest{
+	
+	color: #d2d2d2 !important;
+}
+
+.friend.isBeenRequest {
+    color: rgb(236, 154, 98) !important;
+    cursor: pointer ;
+}
+
+.friend.add_btn {
+    color: #1abd44 !important;
+    cursor: pointer;
+}
+
+.friend.isFriend {
+    color: #1abd44 !important;
 }

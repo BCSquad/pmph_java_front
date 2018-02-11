@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.authadmin.message.bean.UserMessage;
 import com.bc.pmpheep.back.authadmin.message.dao.OrgMessageDao;
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
 import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.commuser.writerArticle.dao.WriterArticleDao;
 import com.bc.pmpheep.back.uncertainfieldcom.bean.CmsCategoryConfig;
@@ -45,9 +46,10 @@ public class WriterArticleServiceImpl implements WriterArticleService {
 		map.put("summary", summary);
 		map.put("category_id", cmsCategoryConfig.getId("医学随笔"));
 		writerArticleDao.insertWriteArticle(map);
-		/*if ("0".equals(map.get("is_staging").toString())) {
-			personalService.saveUserTrendst("sbwz", map.get("table_trendst_id").toString(), 0, map.get("author_id").toString());
-		}*/
+		if ("0".equals(map.get("is_staging").toString())) {
+		    WriterUserTrendst wut = new WriterUserTrendst(map.get("author_id").toString(), 1, map.get("table_trendst_id").toString());
+			personalService.saveUserTrendst(wut);
+		}
 		
 		Map<String,Object> result_map = new HashMap<String, Object>();
 		result_map.put("msg_id", msg_id);
@@ -68,9 +70,10 @@ public class WriterArticleServiceImpl implements WriterArticleService {
 		map.put("summary", summary);
 		map.put("category_id", cmsCategoryConfig.getId("医学随笔"));
 		writerArticleDao.updateIsStaging(map);
-		/*if ("0".equals(map.get("is_staging").toString())) {
-			personalService.saveUserTrendst("sbwz", map.get("atrticle_id").toString(), 0, map.get("author_id").toString());
-		}*/
+		if ("0".equals(map.get("is_staging").toString())) {
+			WriterUserTrendst wut = new WriterUserTrendst(map.get("author_id").toString(), 1, map.get("atrticle_id").toString());
+			personalService.saveUserTrendst(wut);
+		}
 		
 		return mid;
 	}

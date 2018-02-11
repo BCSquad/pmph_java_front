@@ -36,7 +36,12 @@
 		                    		<div class="status_tag Audited">已通过</div>
 		                    	#end
 	                    	#end
-	                        <a target="_blank" href="$!{contextpath}articledetail/toPage.action?wid=$!{c.id}" ><span class="suibibiaoti">$!{c.title}</span></div></a>
+	                    	
+	                    	#if($!{c.auth_status}==2&&$!{c.is_staging}==false)
+	                        	<a target="_blank" href="$!{contextpath}articledetail/toPage.action?wid=$!{c.id}" ><span class="suibibiaoti">$!{c.title}</span></div></a>
+	                        #else
+	                        	<span class="suibibiaoti">$!{c.title}</span></div>
+	                        #end
 	                        <div class="shangright">$!{c.gmt_update}</div>
 	                    <br/>
 	                    <span class="suibineirong">$!{c.summary}</span>

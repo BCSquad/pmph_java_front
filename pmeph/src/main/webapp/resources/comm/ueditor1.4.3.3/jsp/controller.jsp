@@ -31,12 +31,12 @@
             for (Map<String, Object> item : list) {
                 String url = MapUtils.getString(item, "url", "");
                 String id = fileService.saveLocalFile(Thread.currentThread().getContextClassLoader().getResourceAsStream("../../" + url), FileType.CMS_ATTACHMENT, 0);
-                item.put("url", "/image/" + id + ".action");
+                item.put("url", request.getContextPath()+"/image/" + id + ".action");
             }
         } else if (action.equals("uploadimage")||action.equals("uploadscrawl")) {//uploadscrawl 涂鸦图片 uploadimage 上传图片
             String url = MapUtils.getString(resultMap, "url", "");
             String id = fileService.saveLocalFile(Thread.currentThread().getContextClassLoader().getResourceAsStream("../../" + url), FileType.CMS_ATTACHMENT, 0);
-            resultMap.put("url", "/image/" + id + ".action");
+            resultMap.put("url", request.getContextPath()+"/image/" + id + ".action");
         } else {
 
             if (action != null &&

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
 import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.commuser.readpage.dao.ReadDetailDao;
 import com.bc.pmpheep.back.plugin.PageParameter;
@@ -77,7 +78,8 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		// TODO Auto-generated method stub
 		Map<String, Object> rmap=new HashMap<String, Object>();
 	    readDetailDao.insertComment(map);
-	    //personalService.saveUserTrendst("wdsp", map.get("table_trendst_id").toString(), 0, map.get("writer_id").toString());
+	    WriterUserTrendst wut = new WriterUserTrendst(map.get("writer_id").toString(), 5, map.get("table_trendst_id").toString());
+	    personalService.saveUserTrendst(wut);
 	    rmap.put("returncode", "OK");
 	    return rmap;
 	}
@@ -210,7 +212,8 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		int count=readDetailDao.correction(map);
 		if(count>0){
 			returncode="OK";
-			//personalService.saveUserTrendst("wdjc", map.get("table_trendst_id").toString(), 0, map.get("user_id").toString());
+		    /*WriterUserTrendst wut = new WriterUserTrendst((Long)map.get("user_id"), 10, (Long)map.get("table_trendst_id"));
+			personalService.saveUserTrendst(wut);*/
 		}
 		return returncode;
 	}
