@@ -11,6 +11,12 @@
 	      from book t 
 	      left join book_detail b  on t.id=b.book_id where t.id=#{id}		 
 	</select>
+	
+	<!-- 查询视频 -->
+	<select id="queryVideo" parameterType="java.util.Map" resultMap="readdetailmMap">
+	    select * from book_vedio where book_id=#{book_id} limit 0,3
+	</select>
+	
 	<!-- 根据书籍ID查询书籍评论信息 -->
 	<select id="queryComment" parameterType="java.util.Map" resultType="java.util.Map">
 	   select 

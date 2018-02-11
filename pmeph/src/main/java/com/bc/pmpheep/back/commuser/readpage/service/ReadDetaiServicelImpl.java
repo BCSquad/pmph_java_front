@@ -273,4 +273,14 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		// TODO Auto-generated method stub
 		readDetailDao.changeClicks(book_id, clicks);
 	}
+
+	/**
+	 * 查询视频
+	 */
+	@Override
+	public List<Map<String, Object>> queryVideo(String book_id) {
+		// TODO Auto-generated method stub
+		List<Map<String, Object>> list=readDetailDao.queryVideo(book_id);
+		return list;
+	}
 }
