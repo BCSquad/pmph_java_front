@@ -15,7 +15,11 @@ function ChangeDiv(type){
 
 }
 
-
+function showAllGroupMember(){
+	
+	$(".show_Allgroupmember").css({"display":"block"});
+	$("#show_All_Memeber").text("");
+}
 $(function(){
 	if(!WebSocket){
 	      console.error('浏览器不支持websocket')

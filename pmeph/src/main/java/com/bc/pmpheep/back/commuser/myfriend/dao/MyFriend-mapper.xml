@@ -49,7 +49,7 @@
 	</insert>
 	
 	<!--获取用户好友列表  -->
-	<select id="listMyFriend" parameterType="java.lang.Long" resultType="java.util.Map">
+	<select id="listMyFriend" parameterType="java.util.Map" resultType="java.util.Map">
 		select
 			b.realname 
 			,b.position
@@ -61,12 +61,15 @@
 			on a.target_id=b.id or a.request_id = b.id
 			WHERE (a.target_id= #{userId} or a.request_id = #{userId})
 			and b.id != #{userId}
+			<if test="groupId !='' and groupId !=null">
+			and not EXISTS(select * from pmph_group_member pgm where pgm.group_id =#{groupId} and pgm.user_id = b.id)
+			</if>
 			AND a.status=2
 			group by b.id
 			limit ${startrow},15
 	</select>
 	
-	<select id="listMyFriendCount"  parameterType="java.lang.Long" resultType="Integer" >
+	<select id="listMyFriendCount"  parameterType="java.util.Map" resultType="Integer" >
 	
 		select count(*)
 			from
@@ -82,6 +85,9 @@
 				on a.target_id=b.id or a.request_id = b.id
 				WHERE (a.target_id= #{userId} or a.request_id = #{userId})
 				and b.id != #{userId}
+				<if test="groupId !='' and groupId !=null">
+				and not EXISTS(select * from pmph_group_member pgm where pgm.group_id =#{groupId} and pgm.user_id = b.id)
+				</if>
 				AND a.status=2
 				group by b.id
 				limit ${startrow},15

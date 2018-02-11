@@ -129,11 +129,19 @@
 			                    </div>
 							</li>
 						 </c:if>
+						 <c:if test="${st.index > 11 }"><!-- 0-11  展示12位 -->
+	                		<li class="show_Allgroupmember">
+			                    <div class="init_center w65_h50"><img src="${pageContext.request.contextPath}/${gropuMemeber.avatar}" class="groupc_li"/></div>
+			                    <div class="init_center w65_h20_line20">
+			                        <text>${gropuMemeber.displayName}</text>
+			                    </div>
+							</li>
+						 </c:if>
 						 <input id="${gropuMemeber.userId}_${gropuMemeber.userType}" type="hidden" value="${gropuMemeber.displayName}"/>
 					</c:forEach>
                 </c:if>
             </ul>
-            <div class="show_all"><a href="#">>查看所有成员(${gropuMemebersNum}) </a></div>
+            <div class="show_all"><a href="#" id="show_All_Memeber" onclick="showAllGroupMember()">>查看所有成员(${gropuMemebersNum}) </a></div>
         </div>
         <div class="alwaysgroup">
             <div class="ul_top">
