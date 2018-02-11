@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.commuser.materialdec.dao.MaterialDetailDao;
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
 import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
@@ -95,7 +96,8 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 	@Override
 	public int insertTsxz(Map<String, Object> map) {
 		int result = this.madd.insertTsxz(map);
-		personalService.saveUserTrendst("jcsb", map.get("table_trendst_id").toString(), 0, map.get("author_id").toString());
+		/*WriterUserTrendst wut = new WriterUserTrendst((Long)map.get("author_id"), 8, (Long)map.get("table_trendst_id"));
+		personalService.saveUserTrendst(wut);*/
 		return result;
 	}
 	@Override

@@ -26,6 +26,7 @@
 		<!-- 图书选择-->
 		<div class="sbxq_item1">
 			<div>
+				<input type="hidden" id="material_id" name="material_id" value="${materialMap.material_id}"/>
 				<span id="tsxz_span1"></span>
 				<span class="tsxz_title">图书选择</span>
 			</div>
@@ -33,10 +34,10 @@
 			<div class="item">
 				<span>图书：</span>
 				<span>${list.textbook_name} — 
-					<c:if test="${list.preset_position == '1'}">主编</c:if>
+					<c:if test="${list.preset_position == '4'}">主编</c:if>
 					<c:if test="${list.preset_position == '2'}">副主编</c:if>
-					<c:if test="${list.preset_position == '3'}">编委</c:if>
-					<c:if test="${list.preset_position == '4'}">数字编委</c:if>
+					<c:if test="${list.preset_position == '1'}">编委</c:if>
+					<c:if test="${list.preset_position == '8'}">数字编委</c:if>
 					</span>
 				<span style="margin-left: 10px;">
 					<a href="javascript:" class="filename"  onclick="downLoadProxy('${list.syllabus_id}')">${list.syllabus_name}</a>
@@ -282,8 +283,8 @@
 							<td>${list.class_hour}</td>
 							<td>
 								<c:if test="${list.type == '1'}">国家</c:if>
-								<c:if test="${list.type == '1'}">省部</c:if>
-								<c:if test="${list.type == '1'}">学校</c:if>
+								<c:if test="${list.type == '2'}">省部</c:if>
+								<c:if test="${list.type == '3'}">学校</c:if>
 							</td>
 							<td>${list.note}</td>
 						</tr>

@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="${ctx}/statics/commuser/articlepage/articlepage.css" type="text/css">
     <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
     <script src="${ctx}/resources/comm/base.js"></script>
+    <script src="${ctx}/resources/articlepage/articlepage.js"></script>
 </head>
 <body>
     <jsp:include page="/pages/comm/head.jsp">
@@ -182,18 +183,41 @@
             <div class="writer">
                 <div class="title">推荐作者</div>
                 <div style="margin-top: 11px">
+                
                 <c:forEach items="${listAut}" var="list" varStatus="status">
                     <div class="item">
                         <div class="content">
                             <div class="content-img" >
-                                <img src="${ctx}/statics/testfile/mi.png" />
+                                <c:choose>
+	                            	<c:when test="${list.avatar=='DEFAULT'}">
+	                            		<img src="${ctx}/statics/image/default_image.png" class="a6_head">
+	                            	</c:when>
+	                            	<c:otherwise>
+	                            		<img src="${ctx}/image/${list.avatar}.action" class="a6_head">
+	                            	</c:otherwise>
+	                            </c:choose>
                             </div>
                             <div class="msg">
                                 <div class="name">${list.realname}</div>
                                 <div class="text">${list.title}</div>
                             </div>
                             <div class="add">
-                                <div><img src="${ctx}/statics/image/addcopy6.png"/> <span style="margin-left: 2px;color: #35c974;">好友</span></div>
+                                <div>
+                                	<c:choose>
+					                	<c:when test="${list.status == null }">
+					                		<span class="friend add_btn" title="申请加为好友！" onclick="addFriendfun(${list.id},'${list.realname}',0)" id="friend${list.id}"><B>+</B>好友</span>
+					                	</c:when>
+					                	<c:when test="${list.status  == 2 }">
+					                		<span class="friend isFriend" title="已是您的好友！" id="friend${list.id}"><B>好友</B></span>
+					                	</c:when>
+					                	<c:when test="${list.status == 0 && list.isBeenRequest==1}">
+					                		<span class="friend isBeenRequest" title="对方也想加您为好友，点击马上成为好友！" onclick="addFriendfun(${list.id},'${list.realname}',2)" id="friend${list.id}"><B>+</B>好友</span>
+					                	</c:when>
+					                	<c:when test="${list.status == 0 && list.hasRequest==1}">
+					                		<span class="friend hasRequest" title="已申请加为好友，请等待对方同意。" id="friend${list.id}"><B>+</B>好友</span>
+					                	</c:when>
+					                </c:choose>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -25,11 +25,11 @@
     	         <if test="userid !=0">
 		    	 (
 		    	  wu.id=#{userid}
-		    	  and m.is_public=1
+		    	  and m.is_public=0
 		    	  )
     	          or
     	          </if> 
-    	      m.is_public=0
+    	      m.is_public=1
     	      )
     	 and 
     	   cc.is_material_entry =1 
@@ -85,7 +85,7 @@ select b.* from
 		        and t.is_published=1
 		        and t.auth_status=2
 		        and t.is_deleted=0
-		        and ( <![CDATA[(b.is_public =1 and t.is_material_entry=1) or t.is_material_entry=0  ]]>)
+		        and ( <![CDATA[(b.is_public =0 and t.is_material_entry=1) or t.is_material_entry=0  ]]>)
 		 union
 		 select 
 		        t.*,b.deadline
@@ -95,7 +95,7 @@ select b.* from
 		        left join writer_user p on p.org_id=u.org_id
 		        where  t.category_id=3
 		        and t.is_published=1
-		        and b.is_public =0
+		        and b.is_public =1
 		        and t.auth_status=2
 		        and t.is_material_entry=1
 		        and t.is_deleted=0 

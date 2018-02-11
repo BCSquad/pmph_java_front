@@ -30,7 +30,9 @@ import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.template.service.TemplateService;
 import com.bc.pmpheep.back.util.MD5;
 import com.bc.pmpheep.general.controller.BaseController;
+import com.bc.pmpheep.general.pojo.Content;
 import com.bc.pmpheep.general.pojo.Message;
+import com.bc.pmpheep.general.service.ContentService;
 import com.bc.pmpheep.general.service.MessageService;
 
 //首页controller
@@ -48,7 +50,7 @@ public class PersonalCenterController extends BaseController {
     private PersonalService personalService;
     
     @Autowired
-	private MessageService messageService;
+	private ContentService contentService;
     
     @Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService")
@@ -78,7 +80,8 @@ public class PersonalCenterController extends BaseController {
         String logUserId = getUserInfo().get("id").toString();
         Map<String, Object> permap = new HashMap<String, Object>();
         
-        
+        //String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
+        paraMap.put("contextpath", contextpath);
         
         //所进入的是谁的主页
         String userId = request.getParameter("userId");
@@ -570,21 +573,14 @@ public class PersonalCenterController extends BaseController {
 		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
 		String img_url = basePath+"statics/image/564f34b00cf2b738819e9c35_122x122!.jpg";
 		if (!"".equals(mid)) {
-			Message message=messageService.get(mid);
-			if(message!=null){
-				List<String> imglist = articleSearchService.getImgSrc(message.getContent());
+			Content content = contentService.get(mid);
+			if(content!=null){
+				List<String> imglist = articleSearchService.getImgSrc(content.getContent());
 			    if(imglist.size()>0){
 			    	img_url = imglist.get(0);
 			    	if (img_url.length()>0) {
-			    		img_url=img_url.substring(img_url.indexOf("/ueditor/jsp/upload/image"), img_url.length());
-			    		//本地项目名和相对路径不一定一样 此处文章图片会保存到应用发布地址 如 pmeph1 而相对路径是pmeph 此处需拼接回真是应用的发布地址
-			    		String realpath = request.getRealPath("/");//D:\Program Files\apache-tomcat-7.0.78\webapps\pmeph1\
-			    		realpath = realpath.substring(0,realpath.length()-1);
-			    		realpath=realpath.substring(realpath.lastIndexOf("\\"), realpath.length());
-			    		img_url = realpath+img_url;
+			    		img_url = basePath+img_url;
 					}
-			    	
-			    	
 			    }
 			}
 		}

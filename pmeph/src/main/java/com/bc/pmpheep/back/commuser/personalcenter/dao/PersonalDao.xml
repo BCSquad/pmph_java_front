@@ -262,6 +262,7 @@
 		t.source,
 		t.type,
 		DATE_FORMAT(t.gmt_create,'%Y-%m-%d') as gmt_create,
+		DATE_FORMAT(t.submit_time,'%Y-%m-%d') as submit_time,
 		t.auth_progress
 		FROM
 		topic t
@@ -671,7 +672,7 @@
 			<result property="author" column="b_author"/>
 			<result property="score" column="b_score"/>
 			<result property="image_url" column="b_image_url"/>
-			<result property="" column=""/>
+			<result property="detail" column="bd_detail"/>
 			<result property="" column=""/>
 		</association>
 		<association property="b_comment" javaType="Map">
@@ -722,6 +723,7 @@
 			,b.author as b_author
 			,b.score as b_score
 			,b.image_url as b_image_url
+			,bd.detail as bd_detail
 			,bc.id as bc_id
 			,bc.is_long as bc_is_long
 			,bc.is_auth as bc_is_auth
@@ -733,8 +735,10 @@
 		writer_user_trendst t
 		left join cms_content c on t.cms_content_id = c.id
 		left join cms_content pc on c.parent_id = pc.id
-		left join book b on t.book_id = b.id
 		left join book_user_comment bc on t.book_comment_id = bc.id 
+		left join book b on t.book_id = b.id or bc.book_id = b.id
+		left join book_detail bd on b.id = bd.book_id
+		
 		left join writer_user u on t.user_id = u.id
 		<where>
 			user_id = #{parameter.logUserId}
@@ -749,23 +753,60 @@
 				)
 			
 		</where>
+		group by t.id
 		order by t.gmt_create desc
 		
-		
+		limit ${start},${pageSize}
 	</select>
 	
 	<select id="queryWriterUserTrendstCount" parameterType="PageParameter" resultType="Integer">
-		select count(*) from writer_user_trendst
+		select 
+			count(t.id )
+		from 
+		writer_user_trendst t
+		left join cms_content c on t.cms_content_id = c.id
+		left join cms_content pc on c.parent_id = pc.id
+		left join book_user_comment bc on t.book_comment_id = bc.id 
+		left join writer_user u on t.user_id = u.id
+		<where>
+			user_id = #{parameter.logUserId}
+			and (${parameter.selfLog}   
+					or(
+							(t.type = 0 and t.is_public = 1)
+						or(t.type = 1 and c.auth_status = 2)
+						or(t.type = 2 and c.auth_status = 2 and pc.auth_status = 2)
+						or(t.type = 5 and bc.is_auth = 1)
+						or(t.type in (3,4,6,7) )
+					)
+				)
+		</where>
+		
 	</select>
 
 
 
 	<!-- 产生一条动态 -->
-	<insert id="saveUserTrendst" parameterType="Map">
+	<insert id="saveUserTrendst" parameterType="com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst">
 		insert into
 		writer_user_trendst
-		(table_name,table_id,trendst_type,writer_user_id)
-		values(#{TrendstName},#{tableId},#{trendstType},#{writer_user_id})
+		(
+			user_id
+			,is_public
+			,type
+			,detail
+			,cms_content_id
+			,book_id
+			,book_comment_id
+		)
+		values(
+			#{user_id}
+			,#{is_public}
+			,#{type}
+			,#{detail}
+			,#{cms_content_id}
+			,#{book_id}
+			,#{book_comment_id}
+		)
 	</insert>
 
 	<!-- 通过图书纠错表主键查询被纠错图书的第一主编id -->

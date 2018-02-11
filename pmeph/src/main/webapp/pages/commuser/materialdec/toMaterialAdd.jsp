@@ -67,11 +67,11 @@
 				<div style="float: left;margin-left: 30px;" class="ts_radio">
 					<table style="width: 280px;">
 						<tr>
-							<td><input type="radio" name="zw_1" checked="checked" value="1"/>主编</td>
+							<td><input type="radio" name="zw_1" checked="checked" value="4"/>主编</td>
 							<td><input type="radio" name="zw_1" value="2"/>副主编</td>
-							<td><input type="radio" name="zw_1" value="3"/>编委</td>
+							<td><input type="radio" name="zw_1" value="1"/>编委</td>
 							<c:if test="${materialMap.is_digital_editor_optional =='1'}">
-								<td><input type="radio" name="zw_1" value="4"/>数字编委</td>
+								<td><input type="radio" name="zw_1" value="8"/>数字编委</td>
 							</c:if>
 						</tr>
 					</table>
@@ -394,7 +394,7 @@
 									<td><input type="radio" name="gj_type_1" value="2" />省部</td>
 									<td><input type="radio" name="gj_type_1" value="3" />学校</td>
 								</tr></table>
-								<input type="hidden" name="gj_type" value="jp_type_1" />
+								<input type="hidden" name="gj_type" value="gj_type_1" />
 							</td>
 							<td><input class="cg_input" name="gj_note" value="" style="width: 330px;" placeholder="备注" maxlength="33"/>
 							</td>

@@ -40,7 +40,7 @@ request.setAttribute("currentTime",datetime);
     <%-- <script src="${ctx}/resources/commuser/personalcenter/PersonalHomeJCSB.js"></script> --%>
     
 
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		$(function(){
 			$(".img_mongoDB").each(function(){
 				var $t = $(this);
@@ -58,7 +58,7 @@ request.setAttribute("currentTime",datetime);
 				
 			});
 		});
-	</script>
+	</script> -->
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp">
@@ -182,7 +182,7 @@ request.setAttribute("currentTime",datetime);
                								
                								<c:if test="${c.cms.is_deleted ==false}">
 	               								<div class="img_wrapper ">
-	               									<img class="img_mongoDB" name="${c.cms.mid }" src="">
+	               									<img class="img_mongoDB" name="${c.cms.mid }" src="${c.cms.first_img_url }">
 	               								</div>
                								</c:if>
                								<div class="content_wrapper">
@@ -199,8 +199,7 @@ request.setAttribute("currentTime",datetime);
                									<c:if test="${c.cms.is_deleted == true}">
                										<div class="article_title">该文章已删除</div>
                									</c:if>
-               									${c.cms.Content.content }
-               									<div class="article_summary">${c.cms.is_deleted == "0"?c.cms.summary:"该文章已删除" } ...</div>
+               									<div class="article_summary">${c.cms.is_deleted == "0"?c.cms.content_text:"该文章已删除" } ...</div>
                								</div>
                							</div>
                							<div class="operate_wrapper">
@@ -220,7 +219,7 @@ request.setAttribute("currentTime",datetime);
                							<div class="content_line">
 											<c:if test="${c.p_cms.is_deleted ==false}">
 	               								<div class="img_wrapper ">
-	               									<img class="img_mongoDB" name="${c.p_cms.mid }" src="">
+	               									<img class="img_mongoDB" name="${c.p_cms.mid }" src="${c.p_cms.first_img_url }">
 	               								</div>
                								</c:if>
                								<div class="content_wrapper">
@@ -243,11 +242,11 @@ request.setAttribute("currentTime",datetime);
             										<c:if test="${selfLog == true && c.cms.is_deleted==false && c.cms.is_staging== false && c.cms.auth_status ==1}"><div class="status_tag reject">未通过</div></c:if>
             										<c:if test="${selfLog == true && c.cms.is_deleted==false && c.cms.is_staging== false && c.cms.auth_status ==2}"><div class="status_tag Audited">已通过</div></c:if>
 	               									<c:if test="${c.cms.is_deleted !=false}"><div class="status_tag reject">已删除</div></c:if>
-		               								${c.realname } 评论了《${(c.p_cms.is_deleted ==false)?c.p_cms.title:'已删除'}》：“${(c.p_cms.is_deleted ==true || c.cms.is_deleted ==true)?'评论了:“该条评论已删除”。':c.cms.summary }”。
+		               								${c.realname } 评论了《${(c.p_cms.is_deleted ==false)?c.p_cms.title:'已删除'}》：“${(c.p_cms.is_deleted ==true || c.cms.is_deleted ==true)?'评论了:“该条评论已删除”。':c.cms.content_text }”。
                									</div>
                									
                									
-               									<div class="article_summary">${c.p_cms.is_deleted == false?c.p_cms.summary:"该文章已删除" } ...</div>
+               									<div class="article_summary">${c.p_cms.is_deleted == false?c.p_cms.content_text:"该文章已删除" } ...</div>
                								</div>
                							</div>
                							<div class="operate_wrapper">
@@ -257,6 +256,101 @@ request.setAttribute("currentTime",datetime);
                							</div>
                 				</c:when>
                 				<%-- 2动态 文章评论 end --%>
+                				
+                				<%-- 3 4 动态 文章收藏 文章点赞--%>
+                				<c:when test="${c.type == 3 || c.type == 4}">	
+                					<div class="issue_line"><span class="issue_name">${c.type == 3?'收藏':'点赞' }了随笔文章</span><span class="issue_time">${c.trendst_date }</span></div>
+               							<div class="content_line">
+               								
+               								<c:if test="${c.cms.is_deleted ==false}">
+	               								<div class="img_wrapper ">
+	               									<img class="img_mongoDB" name="${c.cms.mid }" src="${c.cms.first_img_url }">
+	               								</div>
+               								</c:if>
+               								<div class="content_wrapper">
+               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new article_new"></div></c:if>
+               									<c:if test="${selfLog == true && c.cms.is_deleted !=false}"><div class="status_tag reject">已删除</div></c:if>
+               									
+               									<c:if test="${c.cms.is_deleted == false}">
+               										<div class="article_title"><a class="not-like-an-a" target="_blank" href="/articledetail/toPage.action?wid=${c.cms.id}">${c.cms.title }</a></div>
+               									</c:if>
+               									<c:if test="${c.cms.is_deleted == true}">
+               										<div class="article_title">该文章已删除</div>
+               									</c:if>
+               									<div class="article_summary">${c.cms.is_deleted == "0"?c.cms.content_text:"该文章已删除" } ...</div>
+               								</div>
+               							</div>
+                				</c:when>
+                				<%-- 3 4 动态 文章收藏 文章点赞end--%>
+                				
+                				<%-- 5动态 发表书评 --%>
+                				<c:when test="${c.type == 5}">	
+                					<div class="issue_line"><span class="issue_name">评论了图书</span><span class="issue_time">${c.trendst_date }</span></div>
+               							<div class="content_line">
+               								<div class="img_wrapper">
+               									<c:if test="${c.book.image_url==null || c.book.image_url ==''||c.book.image_url=='default'||c.book.image_url=='DEFAULT' }">
+               										<img src="${ctx }/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg">
+               									</c:if>
+               									<c:if test="${c.book.image_url!=null && c.book.image_url !=''&& c.book.image_url!='default' && c.book.image_url!='DEFAULT'}">
+               										<img class="book_img" src="${c.book.image_url}">
+               									</c:if>
+               								</div>
+               								<div class="content_wrapper">
+               									<div class="bookc_title">
+	               									<a class="not-like-an-a" target="_blank" href="${ctx }/readdetail/todetail.action?id=${c.book.id }"
+	               											>${c.book.bookname }</a>
+               									</div>
+               									<div class="sub_title">
+	               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
+	               									<c:if test="${c.b_comment.is_deleted !=false}"><div class="status_tag reject">已删除</div></c:if>
+	               									${c.realname } 评论了《${c.book.bookname }》：“${c.b_comment.is_deleted !=false ?'该条评论已删除':c.b_comment.content }”。
+               									</div>
+               									<div class="rank_stars">
+               										<c:forEach begin="1" end="${c.b_comment.score/2}">
+               											<div class="scorestar1"></div>
+               										</c:forEach>
+               										<c:forEach begin="1" end="${5-c.b_comment.score/2}">
+               											<div class="scorestar2"></div>
+               										</c:forEach>
+               									</div>
+               									<div class="book_detail">${c.book.detail }</div>
+               								</div>
+               							</div>
+               							<c:if test="${c.b_comment.is_deleted == false && selfLog == true}">
+	               							<div class="operate_wrapper">
+		               							<a onclick="deleteMyBookComment(${c.b_comment.id})"><div class="img img_delete"></div><div>删除</div></a>
+	               							</div>
+               							</c:if>
+                				</c:when>
+                				<%-- 5动态 发表书评 end --%>
+                				
+                				<%-- 6动态 收藏图书 图书点赞--%>
+                				<c:when test="${c.type == 6 || c.type == 7}">	
+                					<div class="issue_line"><span class="issue_name">${c.type == 6?'收藏':'点赞' }了图书</span><span class="issue_time">${c.trendst_date }</span></div>
+               							<div class="content_line">
+               								<div class="img_wrapper">
+               									<c:if test="${c.book.image_url==null || c.book.image_url ==''||c.book.image_url=='default'||c.book.image_url=='DEFAULT' }">
+               										<img src="${ctx }/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg">
+               									</c:if>
+               									<c:if test="${c.book.image_url!=null && c.book.image_url !=''&& c.book.image_url!='default' && c.book.image_url!='DEFAULT'}">
+               										<img class="book_img" src="${c.book.image_url}">
+               									</c:if>
+               								</div>
+               								<div class="content_wrapper">
+               									<div class="bookc_title">
+	               									<a class="not-like-an-a" target="_blank" href="${ctx }/readdetail/todetail.action?id=${c.book.id }"
+	               											>${c.book.bookname }</a>
+               									</div>
+               									<div class="sub_title">
+	               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
+	               									${c.realname } ${c.type == 6?'收藏':'点赞' }了《${c.book.bookname }》。
+               									</div>
+               									<div class="book_detail">${c.book.detail }</div>
+               								</div>
+               							</div>
+                				</c:when>
+                				<%-- 6动态 收藏图书 图书点赞end --%>
+                				
                 			</c:choose>
                 			
                 			

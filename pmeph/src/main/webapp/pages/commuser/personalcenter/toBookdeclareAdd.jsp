@@ -80,11 +80,15 @@
 					<tr>
 						<td><span>预估字数：</span></td>
 						<td>
-							<input class="cg_input" name="word_number" id="word_number" value="" placeholder="单位千字"  maxlength="20"/>
+							<input class="cg_input" name="word_number" id="word_number" value="" placeholder="单位千字"
+								onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+							  maxlength="10"/>
 						</td>
 						<td><span>预估图数：</span></td>
 						<td>
-							<input class="cg_input" name="picture_number" id="picture_number" value=""  maxlength="20"/>
+							<input class="cg_input" name="picture_number" id="picture_number" value=""  
+							onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+							  maxlength="10"/>
 						</td>
 					</tr>
 						<tr>
@@ -127,14 +131,13 @@
 					<tr>
 						<td><span class="btbs">*</span><span>银行账户：</span></td>
 						<td>
-							<input class="cg_input" name="account_number" id="account_number" placeholder="请填写银行账户" value=""/> 
-							<%-- <select id="yhxxid" name="bank_account_id">
-								${bankSelects}
-							</select> --%>
+							<input class="cg_input" name="account_number" id="account_number" placeholder="请填写银行账户" value=""
+								 onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+							 maxlength="25"/> 
 						</td>
 						<td><span class="btbs">*</span><span>开户银行：</span></td>
 						<td>
-							<input class="cg_input" name="bank" id="bank" placeholder="开户银行" value="" />
+							<input class="cg_input" name="bank" id="bank" placeholder="开户银行" value="" maxlength="25"/>
 						</td>
 					</tr>
 					<!-- 选题情况 -->
@@ -151,7 +154,7 @@
 						<td><span>一、选题理由：</span></td>
 						<td colspan="3">
 							<div class="content">
-								<textarea class="text_cl" name="reason"></textarea>
+								<textarea class="text_cl" name="reason" ></textarea>
 							</div>
 						</td>
 					</tr>
@@ -183,11 +186,15 @@
 					<tr>
 						<td><span>作者购书：</span></td>
 						<td>
-							<input class="cg_input" name="purchase" id="purchase" placeholder="请输入作者购买册数" value=""/>
+							<input class="cg_input" name="purchase" id="purchase" placeholder="请输入作者购买册数" value=""
+							onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+							  maxlength="10"/>
 						</td>
 						<td><span>作者赞助：</span></td>
 						<td>
-							<input class="cg_input" name="sponsorship" id="sponsorship" placeholder="请输入预估金额" value=""/>
+							<input class="cg_input" name="sponsorship" id="sponsorship" placeholder="请输入预估金额" value=""
+							onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+							  maxlength="10"/>
 						</td>
 					</tr>
 				</table>
