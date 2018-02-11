@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.community.service.CommunityService;
 import com.bc.pmpheep.general.controller.BaseController;
+import com.mongodb.util.Hash;
 
 /**
  * @author guoxiaobao
@@ -125,13 +126,52 @@ public class CommunityController extends BaseController{
 		return new ModelAndView("commuser/community/wanderfaulbookcomments",map);
 	}
 	
+	
+	@RequestMapping("/videos")
+	@ResponseBody
+	public Map<String,Object> getVideos(HttpServletRequest req){
+		 Map<String,Object> param=new HashMap<String, Object>();
+		 param.put("startnum", 0);
+		 param.put("size", 2);
+		 String id=req.getParameter("materialId");
+		 param.put("materialId", req.getParameter("materialId"));
+		 List<Map<String, Object>> videolist = communityService.queryVidos(param);
+		 Map<String,Object>  result=new HashMap<String, Object>();
+		 result.put("result", videolist);
+		 return result;
+	}
 	/**
 	 * 更多精彩微视频
 	 */
 	@RequestMapping("/morevideo")
 	public ModelAndView getMoreVideo(HttpServletRequest req){
 		Map<String,Object> map=new HashMap<String, Object>();
-		
-		return new ModelAndView("commuser/community/wanderfaulvideos");
+		 Map<String,Object> param=new HashMap<String, Object>();
+		 String pagenum=req.getParameter("pagenum");
+		 String pagesize=req.getParameter("pagesize");
+		 int startnum=0;
+		 int size=6;
+		 int mpagenum=1;
+		 if(pagenum !=null && pagesize!=null){
+			 mpagenum=Integer.parseInt(pagenum);
+			 size=Integer.parseInt(pagesize);
+			 startnum=(mpagenum-1)*size;
+		 }
+		 param.put("startnum", startnum);
+		 param.put("size", size);
+		 param.put("materialId", req.getParameter("materialId"));
+		 List<Map<String, Object>> videolist = communityService.queryVidos(param);
+		 int total=communityService.queryVidoCount(param);
+		 int pagetotal=total/size;
+		 if(total%size!=0){
+			 pagetotal=pagetotal+1;
+		 }
+		 map.put("materialId", req.getParameter("materialId"));
+		 map.put("videolist", videolist);
+		 map.put("pagenum", mpagenum);
+		 map.put("pagesize", size);
+		 map.put("pagetotal", pagetotal);
+		 map.put("total", total);
+		return new ModelAndView("commuser/community/wanderfaulvideos",map);
 	}
 }

@@ -31,25 +31,54 @@
 	  }); 
   }
   function smallvideos(id){
-	  $("#comment").css({"border-bottom":"2px solid #FFFFFF","color":"#9c9c9c"});
-	  $("#smallvideo").css({"border-bottom":"2px solid #5A9DA3","color":"#444544"});
-	  $("#more").html('<a href="'+contextpath+'/community/morevideo.action?materialId='+id+'">查看更多微视频</a>');
-	  $("#ullist").html("");
-	  for(var i=0;i<2;i++){
-	  $("#ullist").append('<li><div class="play" ></div>'+
-	    '<div class="video-a">'+
-			  '<div id="popDiv" class="video-b"> </div>'+
-              '<div class="video-c">'+
-                 '<img src="'+contextpath+'/statics/testfile/testvideoimage.png"/>'+
-              '</div>'+
-              '<div class="video-d" >'+
-                               '解剖学讲解'+
-              '</div>'+
-              '<div  class="video-e">'+
-                 '<span class="video-f" >2017-12-22</span>'+
-                 '<span class="video-g" style="float:right;line-height:30px;margin-left:5px">98</span>'+
-                 '<span class="video-h"></span>'+
-              '</div>'+
-           '</div></li>');
-	  }
+
+	  $.ajax({
+			type:'post',
+			url:contextpath+'community/videos.action',
+			data:{materialId:id},
+			async:false,
+			dataType:'json',
+			success:function(json){
+			  $("#comment").css({"border-bottom":"2px solid #FFFFFF","color":"#9c9c9c"});
+			  $("#smallvideo").css({"border-bottom":"2px solid #5A9DA3","color":"#444544"});
+			  $("#more").html('<a href="'+contextpath+'community/morevideo.action?materialId='+id+'">查看更多微视频</a>');
+			  $("#ullist").html("");
+			 var html="";
+			  $.each(json.result,function(i,n){
+				  html+='<li>'+
+	              '<div class="video-c">'+
+	                 '<video src="http://120.76.221.250:11000/pmph_vedio/file/'+n.file_name+'" style="width:230px;height:184px" controls type="mp4"'+ 
+	              'poster="'+contextpath+'image/'+n.cover+'.action"></video>'+
+	              '</div>'+
+	              '<div class="video-d" >'+
+	                               n.title+
+	              '</div>'+
+	              '<div  class="video-e">'+
+	                 '<span class="video-f" >'+n.gmt_create+'</span>'+
+	                 '<span class="video-g" style="float:right;line-height:30px;margin-left:5px">'+n.clicks+'</span>'+
+	                 '<span class="video-h"></span>'+
+	              '</div>'+
+	           '</div></li>';
+			  });
+			
+
+			  $("#ullist").append(html);
+			  
+			 /* '<li>'+
+			              '<div class="video-c">'+
+			                 '<video src="" style="width:230px;height:184px" controls type="mp4"'+ 
+			              'poster="'+contextpath+'statics/testfile/testvideoimage.png"></video>'+
+			              '</div>'+
+			              '<div class="video-d" >'+
+			                               '解剖学讲解'+
+			              '</div>'+
+			              '<div  class="video-e">'+
+			                 '<span class="video-f" >2017-12-22</span>'+
+			                 '<span class="video-g" style="float:right;line-height:30px;margin-left:5px">98</span>'+
+			                 '<span class="video-h"></span>'+
+			              '</div>'+
+			      '</div></li>'*/
+			  
+			}
+	  });
   }

@@ -100,6 +100,26 @@ public class CommunityServiceImpl implements CommunityService {
 		map.put("materialId", id);
 		return communityDao.queryCommentCount(map);
 	}
+	/**查询教材中书籍微视频
+     * @param map  startnum:分页的开始的序号      size:分页的数据容量   materialId:教材id
+     * @return
+     */
+	@Override
+	public List<Map<String, Object>> queryVidos(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return communityDao.queryVidos(map);
+	}
+	
+	 /**查询教材中书籍微视频的总数
+     * @param map   materialId:教材id
+     * @return int
+     */
+	@Override
+	public int queryVidoCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return communityDao.queryVidoCount(map);
+	}
+	
 	
 	//去掉字符串中的html标签
 	public String removeHtml(String str){
@@ -134,4 +154,6 @@ public class CommunityServiceImpl implements CommunityService {
         }
         return pics;
     }
+
+    
 }

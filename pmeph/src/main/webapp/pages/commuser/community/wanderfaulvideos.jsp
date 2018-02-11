@@ -6,7 +6,7 @@ String path = request.getContextPath();
 String basePath = path+"/";
 String contextpath=request.getContextPath();
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
      <script>
@@ -46,6 +46,11 @@ String contextpath=request.getContextPath();
 </style>
 <body>
             <jsp:include page="/pages/comm/head.jsp"></jsp:include>
+            <input type="hidden" id="pagenum" value="${pagenum }"/>
+            <input type="hidden" id="pagesize" value="${materialId }"/>
+            <input type="hidden" id="total" value="${total }"/>
+             <input type="hidden" id="pagetotal" value="${pagetotal }"/>
+            <input type="hidden" id="materialId" value="${materialId }"/>
 			<div style="background-color: #f6f6f6;padding-top:28px;padding-bottom:130px"> 
 			<div class="content-wrapper">
     		<div class="area2">
@@ -55,7 +60,7 @@ String contextpath=request.getContextPath();
    			</div>
      		<div style="margin-top:25px;background-color: #ffffff;padding-top:10px">
      		
-     		<div style="width:1045px;margin:0px auto 0px">
+     		<%-- <div style="width:1045px;margin:0px auto 0px">
 		     		<div style="width:347px;float:left;margin-top: 40px">
 			          <div class="video-a" style="width:317px;height:275px;margin: 0px auto 0px;">
 			          <div class="play" style="margin:49px 0px 0px 118px"></div>
@@ -72,9 +77,33 @@ String contextpath=request.getContextPath();
 		                <span class="video-h"></span>
 		              </div>
 		          </div>
+		        </div> --%>
+		      <c:forEach items="${videolist }" var="video">
+		           <div style="width:1045px;margin:0px auto 0px">
+		     		<div style="width:347px;float:left;margin-top: 40px">
+			          <div class="video-a" style="width:317px;height:275px;margin: 0px auto 0px;">
+		              <div class="video-c" style="width:317px;height:178px;text-align: center;">
+		                   <%--  <img src="${ctx }/statics/testfile/testvideoimage.png" style="height:178px;"/> --%>
+		                    <video src="http://120.76.221.250:11000/pmph_vedio/file/${video.file_name }" style="width:317px;height:178px" controls type="mp4" 
+	                          poster="image/${video.cover }.action"></video>
+		              </div>
+		             <div class="video-d" style="width:297px">
+		                  ${video.title }
+		             </div>
+		            <div  class="video-e" style="width:297px">
+		                 <span class="video-f" >${video.gmt_create }</span>
+		                 <span class="video-g" style="float:right;line-height:30px;margin-left:5px">${video.clicks }</span>
+		                <span class="video-h"></span>
+		              </div>
+		          </div>
+		          <div style="clear:both"></div>
 		        </div>
-		      
-		      <div style="width:1045px;margin:0px auto 0px">
+
+		      </c:forEach>
+		     
+		        
+		        
+		       <%--  <div style="width:1045px;margin:0px auto 0px">
 		     		<div style="width:347px;float:left;margin-top: 40px">
 			          <div class="video-a" style="width:317px;height:275px;margin: 0px auto 0px;">
 			          <div class="play" style="margin:49px 0px 0px 118px"></div>
@@ -91,89 +120,9 @@ String contextpath=request.getContextPath();
 		                <span class="video-h"></span>
 		              </div>
 		          </div>
-		        </div>
+		        </div> --%>
 		        
-		        
-		        <div style="width:1045px;margin:0px auto 0px">
-		     		<div style="width:347px;float:left;margin-top: 40px">
-			          <div class="video-a" style="width:317px;height:275px;margin: 0px auto 0px;">
-			          <div class="play" style="margin:49px 0px 0px 118px"></div>
-					  <div id="popDiv" class="video-b" style="width:317px;height:178px"> </div>
-		              <div class="video-c" style="width:317px;height:178px;text-align: center;">
-		                    <img src="${ctx }/statics/testfile/testvideoimage.png" style="height:178px;"/>
-		              </div>
-		             <div class="video-d" style="width:297px">
-		                                               解剖学讲解
-		             </div>
-		            <div  class="video-e" style="width:297px">
-		                 <span class="video-f" >2017-12-22</span>
-		                 <span class="video-g" style="float:right;line-height:30px;margin-left:5px">98</span>
-		                <span class="video-h"></span>
-		              </div>
-		          </div>
-		        </div>
-		        
-		        
-		        <div style="width:1045px;margin:0px auto 0px">
-		     		<div style="width:347px;float:left;margin-top: 40px">
-			          <div class="video-a" style="width:317px;height:275px;margin: 0px auto 0px;">
-			          <div class="play" style="margin:49px 0px 0px 118px"></div>
-					  <div id="popDiv" class="video-b" style="width:317px;height:178px"> </div>
-		              <div class="video-c" style="width:317px;height:178px;text-align: center;">
-		                    <img src="${ctx }/statics/testfile/testvideoimage.png" style="height:178px;"/>
-		              </div>
-		             <div class="video-d" style="width:297px;">
-		                                               解剖学讲解
-		             </div>
-		            <div  class="video-e" style="width:297px">
-		                 <span class="video-f" >2017-12-22</span>
-		                 <span class="video-g" style="float:right;line-height:30px;margin-left:5px">98</span>
-		                <span class="video-h"></span>
-		              </div>
-		          </div>
-		        </div>
-		        
-		        
-		        <div style="width:1045px;margin:0px auto 0px">
-		     		<div style="width:347px;float:left;margin-top: 40px">
-			          <div class="video-a" style="width:317px;height:275px;margin: 0px auto 0px;">
-			          <div class="play" style="margin:49px 0px 0px 118px"></div>
-					  <div id="popDiv" class="video-b" style="width:317px;height:178px"> </div>
-		              <div class="video-c" style="width:317px;height:178px;text-align: center;">
-		                    <img src="${ctx }/statics/testfile/testvideoimage.png" style="height:178px;"/>
-		              </div>
-		             <div class="video-d" style="width:297px">
-		                                               解剖学讲解
-		             </div>
-		            <div  class="video-e" style="width:297px">
-		                 <span class="video-f" >2017-12-22</span>
-		                 <span class="video-g" style="float:right;line-height:30px;margin-left:5px">98</span>
-		                <span class="video-h"></span>
-		              </div>
-		          </div>
-		        </div>
-		        
-		        
-		        <div style="width:1045px;margin:0px auto 0px">
-		     		<div style="width:347px;float:left;margin-top: 40px">
-			          <div class="video-a" style="width:317px;height:275px;margin: 0px auto 0px;">
-			          <div class="play" style="margin:49px 0px 0px 118px"></div>
-					  <div id="popDiv" class="video-b" style="width:317px;height:178px"> </div>
-		              <div class="video-c" style="width:317px;height:178px;text-align: center;">
-		                    <img src="${ctx }/statics/testfile/testvideoimage.png" style="height:178px;"/>
-		              </div>
-		             <div class="video-d" style="width:297px">
-		                                               解剖学讲解
-		             </div>
-		            <div  class="video-e" style="width:297px">
-		                 <span class="video-f" >2017-12-22</span>
-		                 <span class="video-g" style="float:right;line-height:30px;margin-left:5px">98</span>
-		                <span class="video-h"></span>
-		              </div>
-		          </div>
-		        </div>
-		      
-		        
+   
         </div>
         <div style="clear:both"></div>
            </div>
@@ -184,14 +133,14 @@ String contextpath=request.getContextPath();
 	        </ul>
 	        <div style="display: inline-block;vertical-align: top;text-align:left;">
 	            <select id="edu" name="edu">
-	                <option value="5"  >每页5条</option>
-	                <option value="10" >每页10条</option>
-	                <option value="15" >每页15条</option>
-	                <option value="20">每页20条</option>
+	                <option value="6" ${pagesize=='6'?'selected':'' }>每页6条</option>
+	                <option value="12" ${pagesize=='12'?'selected':'' } >每页12条</option>
+	                <option value="18" ${pagesize=='18'?'selected':'' } >每页18条</option>
+	                <option value="24" ${pagesize=='24'?'selected':'' }>每页24条</option>
 	            </select>
 	        </div>
 	        <div class="pageJump">
-	            <span>共10页，共10条数据，跳转到</span>
+	            <span>共${pagetotal }页，共${total }条数据，跳转到</span>
 	            <input type="text"/>
 	            <span class="pp">页</span>
 	            <button type="button" class="button">确定</button>
@@ -206,21 +155,28 @@ String contextpath=request.getContextPath();
 </body>
 <script type="text/javascript">
 $(function(){
+	var pagetotal=parseInt($("#pagetotal").val());
+	var pagenum=parseInt($("#pagenum").val());
 	Page({
-        num:10,					
-        startnum: 1,
+        num:pagetotal,					
+        startnum: pagenum,
         elem:$("#page1"),
         callback: function (n) {
-        
+        	var pagesize=$("input[name=edu]").val();
+        	var materialId=$("#materialId").val();
+            window.location.href=contextpath+'community/morevideo.action?pagenum='+n+'&&pagesize='+pagesize+'&&materialId='+materialId;
         }
  });
+	
 $('select').selectlist({
     zIndex: 10,
     width: 110,
     height: 30,
     optionHeight: 30,
     onChange: function () {
-    	
+    	var pagesize=$("input[name=edu]").val();
+    	var materialId=$("#materialId").val();
+    	window.location.href=contextpath+'community/morevideo.action?pagenum=1&&pagesize='+pagesize+'&&materialId='+materialId;
     }  //自定义模拟选择列表项chang
 });
 	
