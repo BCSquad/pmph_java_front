@@ -20,6 +20,8 @@
     //rootPath ="D:\\Program Files\\apache-tomcat-7.0.78\\webapps\\pmeph1\\";
     String result = new ActionEnter(request, rootPath).exec();
 
+    String contextpath = "/".equals(request.getContextPath())||"\\".equals(request.getContextPath())?"":request.getContextPath();
+    
     Map<String, Object> resultMap = JSON.parseObject(result, Map.class);
     String action = request.getParameter("action");
     System.out.println(action + ":" + result);

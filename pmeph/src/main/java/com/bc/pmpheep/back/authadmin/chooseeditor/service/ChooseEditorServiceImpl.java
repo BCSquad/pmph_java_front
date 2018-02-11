@@ -97,6 +97,8 @@ public class ChooseEditorServiceImpl implements ChooseEditorService {
 			paraMap.put("selectedNumIds", selectedNumIds);
 		}
 		
+		Integer del_count = chooseEditorDao.deleteTempByAuthorIdAndTextbookId(paraMap);
+		Integer copy_count = chooseEditorDao.copyTempBySelectedIds(paraMap);
 		//保存编委和数字编委
 		Integer u_count = chooseEditorDao.updateDecPositionBySelectIds(paraMap);
 		//保存数字编委

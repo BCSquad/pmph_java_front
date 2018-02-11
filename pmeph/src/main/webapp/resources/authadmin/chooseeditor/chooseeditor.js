@@ -190,7 +190,7 @@ function tempSave(){
 //重置
 function selectReset(){
 	window.message.confirm(
-			'确定要重置吗？将回到最近一次暂存状态！'
+			'确定要重置吗？将回到最近一次保存后的状态！'
 			,{icon: 3, title:'提示',btn:["确定","取消"]}
 			,function(index){
 				selectedIds=eval($("#selectedIds").val());
