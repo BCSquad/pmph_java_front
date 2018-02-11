@@ -1,15 +1,4 @@
-$.ajaxSetup({
-    type: "POST",
-    dataType: "json",
-    timeout: 10000,
-    async: true,
-    error: function (XMLHttpRequest, textStatus, errorThrown) {
-        var errmsg = XMLHttpRequest.responseText;
-        window.message.error("出错啦！");
-    },
-    beforeSend: function (xhr, global) {
-    }
-});
+
 
 $(function () {
     $('form').validate({
