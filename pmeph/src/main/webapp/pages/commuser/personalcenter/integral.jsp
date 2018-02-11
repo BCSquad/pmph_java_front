@@ -7,6 +7,7 @@
 %>
 <html>
 <head>
+<title>积分</title>
 <script type="text/javascript">
 	var contextpath = '${pageContext.request.contextPath}/';
 </script>
@@ -40,7 +41,13 @@
 					<div class="top-three">
 						<div class="top4">积分记录：</div>
 						<div class="top5">筛选：</div>
-						<div class="top6" onclick='queryTime()'>三个月内<img src="${ctx}/statics/image/down.png"/></div>
+						<div class="top6" >
+							<select id="select" name="select" title="请选择" >
+			                    <option value="0" ${condition=='0' ?'selected':''}>一周内</option>
+			                    <option value="1" ${condition=='1' ?'selected':''}  onclick='queryTime()'>三月内</option>
+			                    <option value="2" ${condition=='2' ?'selected':''}>一年内</option>
+                			</select>
+						</div>
 					</div>
 					<div class="message">
 						<table class="table">

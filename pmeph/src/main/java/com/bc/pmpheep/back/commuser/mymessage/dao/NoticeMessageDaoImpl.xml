@@ -47,7 +47,7 @@
 		<!-- 全部 -->
 		<if test="condition==null||condition==3">
 			select * from(
-			select u.id,u.msg_id as fId,u.title,u.gmt_create as time,u.msg_type as msgType,o.avatar
+			select u.id,u.msg_id as fId,u.title,u.gmt_create as time,u.msg_type as msgType,o.avatar,u.gmt_update as deadline ,0 as is_material_entry
 			from user_message u
 			LEFT JOIN pmph_user o
 			ON o.id= u.sender_id
@@ -59,10 +59,10 @@
 			ORDER BY u.gmt_create DESC)t1
 			UNION
 			select * from(
-				SELECT n.id,n.material_id,n.material_name,n.gmt_create,4,n.avatar
+				SELECT n.id,n.material_id,n.material_name,n.gmt_create,4,n.avatar,n.deadline,n.is_material_entry
 				FROM 
 				(SELECT 
-		        t.*,b.material_name,p.avatar
+		        t.*,b.material_name,p.avatar,b.deadline
 		        FROM cms_content t
 		        LEFT JOIN  material b ON t.material_id =b.id 
 		        LEFT JOIN pmph_user p ON t.author_id= p.id
@@ -75,7 +75,7 @@
 		        AND t.is_published=1
 			    UNION
 			    SELECT 
-				t.*,b.material_name,m.avatar
+				t.*,b.material_name,m.avatar,b.deadline
 		        FROM cms_content t
 		        LEFT JOIN  material b ON t.material_id =b.id 
 		        LEFT JOIN material_org u ON b.id=u.material_id
@@ -95,10 +95,10 @@
 		
 		<!-- 公告 -->
 		<if test="condition==4">
-				SELECT n.id,n.material_id as fId,n.material_name as title,n.gmt_create as time,4 as msgType,n.avatar
+				SELECT n.id,n.material_id as fId,n.material_name as title,n.gmt_create as time,4 as msgType,n.avatar,n.deadline,n.is_material_entry
 				FROM 
 				(SELECT 
-		        t.*,b.material_name,p.avatar
+		        t.*,b.material_name,p.avatar,b.deadline
 		        FROM cms_content t
 		        LEFT JOIN  material b ON t.material_id =b.id 
 		        LEFT JOIN pmph_user p ON t.author_id= p.id
@@ -111,7 +111,7 @@
 		        AND t.is_published=1
 			    UNION
 			    SELECT 
-				t.*,b.material_name,m.avatar
+				t.*,b.material_name,m.avatar,b.deadline
 		        FROM cms_content t
 		        LEFT JOIN  material b ON t.material_id =b.id 
 		        LEFT JOIN material_org u ON b.id=u.material_id
@@ -219,19 +219,30 @@
 	
 	<!-- 教材申报通知详情 -->
 	<select id="noticeMessageDetail" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT  a.title,m.`deadline`,m.`mail_address`,e.`note`,e.notice,e.id AS attachmentId,a.mid as mongoId,ce.id as ceid,ce.attachment,ce.attachment_name
+		<!-- SELECT  a.title,m.`deadline`,m.`mail_address`,e.`note`,e.notice,e.id AS attachmentId,a.mid as mongoId,ce.id as ceid,ce.attachment,ce.attachment_name
 		FROM cms_content a
 		LEFT JOIN material m
 		ON a.`material_id` = m.`id`
 		LEFT JOIN material_extra e
 		ON m.`id` = e.`material_id`
 		LEFT JOIN cms_extra ce ON ce.content_id=a.id
+		WHERE a.`id`=#{cmsId} -->
+		
+		SELECT  a.title,m.`deadline`,m.`mail_address`,a.mid as mongoId,m.deadline, a.is_material_entry,a.material_id,e.`note`,e.notice,e.id AS attachmentId
+		FROM cms_content a
+		LEFT JOIN material m
+		ON a.`material_id` = m.`id`
+		LEFT JOIN material_extra e
+		ON m.`id` = e.`material_id`
 		WHERE a.`id`=#{cmsId}
 	</select>
 	
 	<!-- 查询教材备注相关的附件 -->
 	<select id="queryNoticeMessageDetailAttachment" parameterType="java.util.Map" resultType="java.util.Map">
-		select * from `material_note_attachment` where material_extra_id = #{attachmentId}
+		<!-- select * from `material_note_attachment` where material_extra_id = #{attachmentId} -->
+		select * from `material_note_attachment` where material_extra_id in(
+		   select me.id from material_extra me left join  material m on m.id=me.material_id where m.id=#{materialId}
+		)
 	</select>
 	
 	<!-- 查询教材相关的联系人 -->
@@ -254,4 +265,9 @@
 	<update id="updateNoticeClicks" parameterType="String" >
 		UPDATE `cms_content` SET clicks = clicks+1 WHERE id=#{cmsId}
 	</update>
+	
+	<!--查询公告的附件  -->
+	<select id="queryCMSAttach" parameterType="java.util.Map" resultType="java.util.Map">
+	    select * from  cms_extra ce left join  cms_content c on c.id=ce.content_id  where c.id=#{cmsId}
+	</select>
 </mapper>

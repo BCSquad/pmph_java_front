@@ -144,7 +144,8 @@ public interface PersonalService {
 	public String getCheckAnswers(Map<String, Object> map);
 	//查询填空选项答案
 	public String getInpAnswers(Map<String, Object> map);
-
+	// 回显答案保存按钮判断是否消失
+	public Map<String, Object> btnSaveOrHidden(Map<String, Object> map);
 	/**
 	 * 个人中心动态 汇总后面所有页签对应信息的新增、审批的动态
 	 * @param pageParameter
@@ -196,6 +197,8 @@ public interface PersonalService {
 	 */
 	public Map<String, Object> queryOurFriendShip(String userId,String logUserId);
 
+
+	
 	
 	
 	

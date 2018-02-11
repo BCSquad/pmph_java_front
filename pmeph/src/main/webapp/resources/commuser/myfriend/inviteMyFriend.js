@@ -1,15 +1,14 @@
 var addContent="";
 var senderName="";
 var avatar="";
-function show(){
+/*function show(){
 	    document.getElementById("box").setAttribute("class","b show");
         document.getElementById("close").setAttribute("class","hiddenX show");
 }
 function hide(){
         document.getElementById("box").setAttribute("class","b hidden");
         document.getElementById("close").setAttribute("class","hiddenX hidden");
-        $("#content").val("");
-}
+}*/
 $(function(){
 	//点击按钮
 //	$("#sendPersonalMsg").on("click",function(){
@@ -21,7 +20,7 @@ $(function(){
 		alert(username);
 	}*/
 	
-	$(".showTalk").click(function(){
+	/*$(".showTalk").click(function(){
 		var frendid = this.id;
 		$("#frendId").val(frendid);
 		var username = $("#t_"+frendid).val();
@@ -36,7 +35,7 @@ $(function(){
 	        },
 	        success:function(responsebean){
 	        	var content="";
-	        	$("#talkList").html('');
+	        	$("#dialogue").html('');
 	        	if(null != responsebean && responsebean.length >= 0){
 	        		for( var i= 0; i<responsebean.length ; i++ ){
 	        			var html ="";
@@ -50,7 +49,7 @@ $(function(){
 		                        "<div class='headAndNameRight float_right'> "+
 		                            "<div class='headDiv'><img class='headPicture' src='"+contextpath+responsebean[i].avatar+"'/></div> "+
 		                            "<div class='talkName'><text>"+responsebean[i].senderName+"</text></div> "+
-		                             /*"<div style=''><text>"+responsebean[i].senderName+"</text></div> "+*/
+		                             "<div style=''><text>"+responsebean[i].senderName+"</text></div> "+
 		                        "</div> "+
 		                        "<div class='talkDivRight float_right' > "+
 		                            "<div class='sendMessage'> "+
@@ -78,17 +77,11 @@ $(function(){
 		                        "</div> "+
 	                        "</div> ";
 	        			}
-	        			$("#talkList").append(html);
-	        			//$("#dialogue").animate({scrollTop: '5000px'},500);
-	        			setTimeout(function(){
-		        			$("#dialogue").scrollTop($("#talkList").height());
-		        			//$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);  
-		        			console.log($("#talkList").height());
-	        			},0);
-
+	        			$("#dialogue").append(html);
+//	        			$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);
+	        			$("#dialogue").animate({scrollTop: '700px'},500);
 	        			content+=html;
 	        		}
-	        			
 	        		
 	        		addContent=content;
 	        	}
@@ -154,9 +147,9 @@ $(function(){
 	                        "<div class='headAndNameRight float_right'> "+
 	                            "<div class='headDiv'><img class='headPicture' src='"+contextpath+avatar+"'/></div> "+
 	                            "<div class='talkName'><text>"+map.name+"</text></div> "+
-/*	                            "<div class='headDiv'><img class='headPicture' src='"+contextpath+responsebean.avatar+"'/></div> "+
+	                            "<div class='headDiv'><img class='headPicture' src='"+contextpath+responsebean.avatar+"'/></div> "+
 	                            "<div class='talkName'><text>"+responsebean.senderName+"</text></div> "+
-*/	                        "</div> "+
+	                        "</div> "+
 	                        "<div class='talkDivRight float_right' > "+
 	                            "<div class='sendMessage'> "+
 
@@ -167,21 +160,15 @@ $(function(){
 	                        "</div> "+
 	                        "</div> ";
 		        		//currentContent+=html;
-		        		$("#talkList").append(html);
+		        		$("#dialogue").append(html);
 			        	$("#content").val('');
-			        	//$("#dialogue").animate({scrollTop: '700px'},500);
-			        	//$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);  
-			        	setTimeout(function(){
-		        			$("#dialogue").scrollTop($("#talkList").height());
-		        			//$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);  
-		        			console.log($("#talkList").height());
-	        			},0);
-			        	
+//			        	$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);  
+			        	$("#dialogue").animate({scrollTop: '700px'},500);
 		        	}
 		        }
 			});
 		}
-	}
+	}*/
 	
 	function formatDate(nS,str) {
 		  if(!nS){

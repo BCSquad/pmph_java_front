@@ -577,6 +577,8 @@ $.fn.calendar = function () {
 
     $(this).find("input[calendar]").each(function (i) {
         var options = {
+            'max': NaN,
+            'min': NaN,
             'view': 'date',
             'format': 'yyyy-mm-dd',
             'onselected': function (view, date, dateString) {
@@ -588,10 +590,13 @@ $.fn.calendar = function () {
                 options[this.attributes[index].name] = eval("(" + this.attributes[index].value + ")");
             }
         }
-        $(this).mycalendar({
+
+        var can = $(this).mycalendar({
+            upperLimit: NaN,
+            lowerLimit: NaN,
             view: options.view,
             format: options.format,
-            callback: options.onselected,
+            callback: options.onselected
         });
 
         if (typeof(options.max) == "string") {

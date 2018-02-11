@@ -478,6 +478,7 @@
 			<result property="is_deleted" column="is_deleted" />
 			<result property="gmt_create" column="gmt_create" />
 			<result property="gmt_update" column="gmt_update" />
+			<result property="is_long" column="is_long" />
 		</collection>
 	</resultMap>
 
@@ -563,10 +564,12 @@
 
 	<!-- 我的问卷 -->
 	<select id="mySurvey" parameterType="PageParameter" resultType="java.util.Map">
-		select s.*, cast(DATE_FORMAT(s.end_date,'%Y%m%d%H%i%s') as decimal(16,0))  as enddate ,
-		cast(DATE_FORMAT(CURRENT_TIMESTAMP(),'%Y%m%d%H%i%s') as decimal(16,0))  as curdate   
-		from survey s   LEFT JOIN  survey_question_answer  a  on s.id=a.survey_id
- 		where a.user_id=#{parameter.logUserId} 
+		select s.* from survey s
+		left JOIN survey_target st ON st.survey_id=s.id  
+		LEFT JOIN writer_user wu on wu.org_id=st.org_id
+ 		where s.`status`=1 and s.is_deleted=0 and wu.id=#{parameter.logUserId}
+ 		AND #{parameter.dateStr} &gt;= s.`begin_date`
+		AND #{parameter.dateStr} &lt;= s.`end_date`
   		limit ${start},${pageSize}
 	</select>
 
@@ -621,6 +624,13 @@
 		a.option_content FROM survey_question_answer a
 		where
 		a.question_id=#{questionId} and a.user_id=#{logUserId}
+	</select>
+	
+	<!-- 回显答案保存按钮判断是否消失-->
+	<select id="btnSaveOrHidden" resultType="java.util.Map" parameterType="java.util.Map">
+		select  DISTINCT sqa.user_id as uid,sqa.survey_id as sid from survey_question_answer sqa 
+		WHERE sqa.survey_id=#{surveyId}   and sqa.user_id=#{logUserId} 
+	
 	</select>
 
 	<!-- 动态结果映射 -->

@@ -371,6 +371,19 @@ a{
     border-top:1px solid #dedede;
     clear: both;
 }
+.contentBox1{
+    width: 690px;
+    overflow-y:auto;
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid #dedede;
+    border-top:1px solid #dedede;
+    clear: both;
+}
 .inputBox{
     width: 690px;
     height:120px;
@@ -618,6 +631,8 @@ max-width: 10px !important; min-width: 10px !important;
             </div>
             <span class="personMessageTitle">私信窗口</span>
             <div class="contentBox" id="dialogue">
+            	<div id="talkList">
+            	</div>
             </div>
 			<div class="inputBox">
                 <div style="float: left;width: 80%;height: 100%">

@@ -237,15 +237,15 @@ public class MaterialDetailController extends BaseController{
 				}
 			}
 			//作家兼职学术
-			String org_name[] = request.getParameterValues("org_name");
+			String xs_org_name[] = request.getParameterValues("xs_org_name");
 			String xs_rank[] = request.getParameterValues("xs_rank");
 			String xs_position[] = request.getParameterValues("xs_position");
 			String xs_note[] = request.getParameterValues("xs_note");
-			for(int i=0;i<org_name.length;i++) { //遍历数组
-				if(!org_name[i].equals("")){ //判断是否存在
+			for(int i=0;i<xs_org_name.length;i++) { //遍历数组
+				if(!xs_org_name[i].equals("")){ //判断是否存在
 					Map<String,Object> xsjzMap = new HashMap<String,Object>();
 					xsjzMap.put("declaration_id", declaration_id);
-					xsjzMap.put("org_name", org_name[i]);
+					xsjzMap.put("org_name", xs_org_name[i]);
 					xsjzMap.put("rank", request.getParameter(xs_rank[i]));
 					xsjzMap.put("note", xs_note[i]);
 					xsjzMap.put("position", xs_position[i]);
@@ -465,6 +465,11 @@ public class MaterialDetailController extends BaseController{
 		queryMap.put("declaration_id", gezlList.get(0).get("id"));
 		}else{
 			queryMap.put("declaration_id", declaration_id);
+		}
+		if(material_id == null){
+			queryMap.put("material_id", gezlList.get(0).get("material_id"));
+		}else{
+			queryMap.put("material_id", material_id);
 		}
 		//2.作家申报职位暂存
 		List<Map<String,Object>> tssbList = new ArrayList<Map<String,Object>>();
@@ -1170,7 +1175,7 @@ public class MaterialDetailController extends BaseController{
 		String  orgname = request.getParameter("orgname");
 		Map<String,Object> paraMap = new HashMap<String,Object>();
 		//分页查询
-		int currentPage = 1;
+		int currentPage = 0;
 		int pageSize = 10;
 		
 		if(null!=currentPageStr&&!currentPageStr.equals("")){

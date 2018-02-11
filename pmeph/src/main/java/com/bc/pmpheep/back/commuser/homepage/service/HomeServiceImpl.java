@@ -94,7 +94,6 @@ public class HomeServiceImpl implements HomeService {
      * 查询书籍分类
      */
     @Override
-    @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName+#parent_id")
     public List<Map<String, Object>> queryBookType(int parent_id) {
         List<Map<String, Object>> list = homeDao.queryBookType(parent_id);
         return list;

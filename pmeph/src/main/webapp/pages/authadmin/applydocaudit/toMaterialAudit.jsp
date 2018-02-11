@@ -48,7 +48,11 @@
 					<c:if test="${list.preset_position == '8'}">数字编委</c:if>
 					<c:if test="${list.preset_position == '9'}">数字编委,编委</c:if>
 					<c:if test="${list.preset_position == '10'}">数字编委,副主编</c:if>
+					<c:if test="${list.preset_position == '11'}">数字编委,副主编,编委</c:if>
 					<c:if test="${list.preset_position == '12'}">数字编委,主编</c:if>
+					<c:if test="${list.preset_position == '13'}">数字编委,主编,编委</c:if>
+					<c:if test="${list.preset_position == '14'}">数字编委,主编,副主编</c:if>
+					<c:if test="${list.preset_position == '15'}">数字编委,主编,副主编,编委</c:if>
 					
 					</span>
 					<span>
@@ -79,9 +83,8 @@
 							<td><span>工作单位：${gezlList.org_name}</span></td>
 							<td><span>职&emsp;&emsp;务：${gezlList.position}</span></td>
 							<td><span>职&emsp;&emsp;称：
-								<c:if test="${gezlList.title == '0'}">教授</c:if>
-								<c:if test="${gezlList.title == '1'}">主任</c:if>
-								<c:if test="${gezlList.title == '2'}">副主任</c:if>
+								${gezlList.title}
+								
 							</span></td>
 							<td><span>邮&emsp;&emsp;编：${gezlList.postcode}</span></td>
 						</tr>

@@ -28,14 +28,15 @@
 				<div class="emptyDiv"></div>
 				<div class="whiteDiv">
 					<div class="titleDiv">
-						<span class="titleFont">图书问卷调查</span>
+						<span class="titleFont">${mapSurvey.title}</span>
 					</div>
 					<div class="bigContent">
 						<div class="tipDiv">
-							<span class="tipFont">此调查旨在了解用户的图书阅读习惯，希望参与者根据实际情况认真填写！</span>
+							<span class="tipFont">感谢参与，希望参与者根据实际情况认真填写！</span>
 						</div>
 						<form id="contentForm">
 						<div class="questions">
+						<input type="hidden" name="surveyId" value="${surveyId}">
 							<c:choose>
 								<c:when test="${listSize>0 }">
 									<c:forEach items="${listSesult}" var="question" varStatus="code">
@@ -47,12 +48,12 @@
 															<div  style="height: 40px">
 																<c:choose>
 																	<c:when test="${(question.answer) ==(option.id)}">
-																		<input type="radio"  name="radio_${code.index+1}" value="${option.id}" checked="checked"/>
-															    		<label>${option.option_content }</label><br/>
+																		<div style="float: left"><input type="radio"  name="radio_${code.index+1}" value="${option.id}" checked="checked"  disabled="disabled"/></div>
+															    		<div  style="float: left;marging-top: 10px;margin-left: 5px"><label>${option.option_content }</label></div><br/>
 																	</c:when>
 																	<c:otherwise>
-																		<input type="radio" name="radio_${code.index+1}" value="${option.id}"/>
-														    			<label>${option.option_content }</label><br/>
+																		<div style="float: left"><input type="radio" name="radio_${code.index+1}" value="${option.id}"/></div>
+														    			<div  style="float: left;marging-top: 10px;margin-left: 5px"><label>${option.option_content }</label></div><br/>
 																	</c:otherwise>
 																</c:choose>
 													    	</div>
@@ -69,9 +70,9 @@
 													<c:forEach items="${question.listOptions }" var="option" >
 														<div style="height: 40px">
 															
-															<c:choose>
+																<c:choose>
 																	<c:when test="${(option.flag)==true}">
-																		<input type='checkbox'  name='checkbox_${code.index+1}' value="${option.id}" checked="checked"> 
+																		<input type='checkbox'  name='checkbox_${code.index+1}' value="${option.id}" checked="checked"  disabled="disabled"> 
 																		<label>${option.option_content }</label>
 																	</c:when>
 																	<c:otherwise>
@@ -88,7 +89,7 @@
 												</div>							
 											</div>
 										</c:if>
-										<c:if test="${question.type==3}">
+										<c:if test="${question.type==4}">
 											<div class="oneQuestion">
 												<p>Q${code.index+1} : ${question.title}</p>
 												<div style="padding-left: 22px">

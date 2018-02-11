@@ -1,5 +1,8 @@
 package com.bc.pmpheep.back.commuser.mymessage.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -154,6 +157,14 @@ public class MessageController extends BaseController{
 		
 		paraMap.put("userId", userId);
 		List<Map<String,Object>> list = noticeMessageService.selectApplyMessage(paraMap);
+		for(Map<String,Object> map1:list){
+			
+			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
+				map1.put("avatar", "statics/pictures/head.png");
+			}else{
+				map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
+			}
+		}
 		mv.addObject("list",list);
 		mv.addObject("listSize",list.size());
 		mv.setViewName("commuser/message/applyMessage");
@@ -194,6 +205,32 @@ public class MessageController extends BaseController{
 				}
 				
 			}*/
+			
+			if(map1.get("msgType").toString().equals("4")){
+				String endTimeStr = map1.get("deadline").toString();
+				
+				
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				
+				Date currentTime = new Date();
+				
+				try {
+					
+					
+					Date date = sdf.parse(endTimeStr);
+					if(currentTime.before(date)){
+						mv.addObject("notEnd",1);
+					}else{
+						mv.addObject("notEnd",0);
+					}
+					
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			
 			
 			//处理消息发送者头像
 			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
@@ -253,6 +290,30 @@ public class MessageController extends BaseController{
 				
 			}*/
 			
+			if(map1.get("msgType").toString().equals("4")){
+				String endTimeStr = map1.get("deadline").toString();
+				
+				
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				
+				Date currentTime = new Date();
+				
+				try {
+					
+					
+					Date date = sdf.parse(endTimeStr);
+					if(currentTime.before(date)){
+						map1.put("notEnd",1);
+					}else{
+						map1.put("notEnd",0);
+					}
+					
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+			}
 			//处理消息发送者头像
 			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
 				map1.put("avatar", "statics/pictures/head.png");
@@ -304,6 +365,8 @@ public class MessageController extends BaseController{
 		String materialId=request.getParameter("materialId");
 		String cmsId=request.getParameter("cmsId");
 		//String flag=request.getParameter("flag");
+		String notEnd=request.getParameter("notEnd");
+		//String is_material_entry=request.getParameter("is_material_entry");
 		ModelAndView mv = new ModelAndView();
 		Map<String,Object> paraMap = new HashMap<String,Object>();
 		paraMap.put("materialId", materialId);
@@ -311,32 +374,34 @@ public class MessageController extends BaseController{
 		//标题、时间、邮寄地址、备注
 		Map<String,Object> mapTitle =new HashMap<String,Object>();
 			mapTitle = noticeMessageService.queryNoticeMessageDetail(paraMap);
-			
+			mv.addObject("is_material_entry",mapTitle.get("is_material_entry"));
 			mv.addObject("firsttag", "个人中心");
 			mv.addObject("secondtag", "消息通知");
 			mv.addObject("firstpath", "personalhomepage/tohomepage.action");
 			mv.addObject("secondpath", "message/noticeMessageList.action");
 			mv.addObject("materialId",materialId);
 		
-		if(mapTitle!=null && mapTitle.size()>0){
-			paraMap.put("attachmentId", mapTitle.get("attachmentId"));
+		if(mapTitle!=null && mapTitle.size()>0 && mapTitle.get("is_material_entry").toString()=="true"){
+			
 			paraMap.put("materialId", materialId);
 			//备注附件
 			List<Map<String,Object>> listAttachment = noticeMessageService.queryNoticeMessageDetailAttachment(paraMap);
 			for(Map<String,Object> map :listAttachment){
 				map.put("attachmentId", "file/download/"+map.get("attachment")+".action");
 			}
-			//联系人z
+			//联系人
 			List<Map<String,Object>> listContact = noticeMessageService.queryNoticeMessageDetailContact(paraMap);
 			
-			mv.addObject("map",mapTitle);
 			mv.addObject("listAttachment",listAttachment);
 			mv.addObject("listContact",listContact);
-			
+			mv.addObject("notEnd",notEnd);
 			
 		}
 		
-		
+		mv.addObject("map",mapTitle);
+		//cms附件
+		List<Map<String, Object>> cmsAttach = noticeMessageService.queryCMSAttach(paraMap);
+		mv.addObject("cmsAttach",cmsAttach);
 	/*	Message message = new Message();
 		message.setContent(" 人民卫生出版社建社50年来，累计出版图书2万余种，总印数约67000万册，每年出书1000余种，年发行量1000多万册， 年产值超过5亿元。出书品种主要包括： 医学教材、参考书和医学科普读物等，涉及现代医药学和中国传统医药学的所有领域， 体系完整，品种齐全。人卫社不断加强管理，优化选题，提高质量，多出精品，加强服务，已成为国内唯一涵盖医学各领域,各层次的出版机构,能满足不同读者的需求。使读者享受到一流的作者、一流的质量、一流的服务。人卫社的品牌已成为优质图书的代名词。人民卫生出版社出版医学教材有着优良的传统。 从建社伊始的20世纪50年代， 翻译前苏联的医学教材以满足国内教学需要， 到组织国内一流作者自编教材至今已有50年的历史。一代代的医学生都是伴随着人卫社出版的教材成长起来的。");
 		message.setId("5a15c32dc5482247f0b8dca2");

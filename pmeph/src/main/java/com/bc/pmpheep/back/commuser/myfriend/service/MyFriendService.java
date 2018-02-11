@@ -33,7 +33,7 @@ public interface MyFriendService {
      * @throws Exception
      * </pre>
      */
-    List<Map<String, Object>> listMyFriend(CommuserWriterUser writerUser,int startrow) throws Exception;
+    List<Map<String, Object>> listMyFriend(String groupId,CommuserWriterUser writerUser,int startrow) throws Exception;
 
     /**
      * 剩余未加载好友数量
@@ -41,5 +41,8 @@ public interface MyFriendService {
      * @param startrow
      * @return
      */
-	int listMyFriendCount(CommuserWriterUser writerUser, int startrow);
+	int listMyFriendCount(String groupId,CommuserWriterUser writerUser, int startrow);
+
+	void invite(String id, String groupId);
+
 }
