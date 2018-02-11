@@ -74,10 +74,10 @@ $(function () {
         forceIframeTransport: true,
         formData: function () {
             return [
-                {name: 'userId', value: 1},
-                {name: 'userType', value: 1},
-                {name: 'bookId', value: 1},
-                {name: 'sn', value: 1},
+                {name: 'userId', value: $("#userid").val()},
+                {name: 'userType', value: 2},
+                {name: 'bookId', value: $("#bookid").val()},
+                {name: 'sn', value: $("#booksn").val()},
                 {name: 'title', value: $(".pop-body").find("input[type='text']").val()},
                 {name: 'cover', value: $("#add-icon").parent().children("img").attr("value")}
             ];
@@ -88,7 +88,22 @@ $(function () {
         limitMultiFileUploadSize: 1048576000,
         add: function (e, data) {
             if (data.files[0].name) {
+                var videolist = ['aiv', 'mpg', 'wmv', '3gp', 'mov', 'mp4', 'asf', 'asx', 'flv'];
+                var arr = data.files[0].name.split(".");
+                var file_suffix = arr[arr.length - 1];
 
+                var f = false;
+                for (var i = 0; i < videolist.length; i++) {
+                    if (videolist[i] == file_suffix) {
+                        f = true;
+                        break;
+                    }
+                }
+                /*if (!f) {
+                 message.warning("您上传的文件格式不支持！");
+
+                    return;
+                }*/
                 layer.open({
                     type: 1,
                     title: false,
@@ -153,14 +168,19 @@ $(function () {
 
         },
         done: function (e, data, b, c, d) {
-            if (!data) {
-
-            }
-            if (data.result.code == '1') {
-                $(".pop-body .submit").removeClass("disable");
+            if (data.result) {
+                if (data.result.code == '1') {
+                   // $(".pop-body .submit").removeClass("disable");
+                    message.success("上传成功！");
+                    hidevideo()
+                } else {
+                    message.error("上传失败！");
+                }
             } else {
-                message.error("上传失败！");
+                message.success("上传成功！");
+                hidevideo()
             }
+
         },
         progressall: function (e, data) {
             // console.log(e.delegatedEvent, data);

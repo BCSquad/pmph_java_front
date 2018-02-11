@@ -1,3 +1,6 @@
+<%@ page import="java.util.Map" %>
+<%@ page import="com.bc.pmpheep.back.util.Const" %>
+<%@ page import="org.apache.commons.collections.MapUtils" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
 "http://www.w3.org/TR/html4/strict.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -27,6 +30,14 @@
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <input type="hidden" id="bookname" value="${map.bookname}"/>
+<input type="hidden" id="booksn" value="${map.sn}"/>
+<input type="hidden" id="bookid" value="${map.id}"/>
+<input type="hidden" id="userid" value="<%
+   Map<String, Object> userInfo  = (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_WRITER);
+   if(userInfo!=null){
+        out.print(MapUtils.getString(userInfo,"id"));
+   }
+%>"/>
 <div class="body">
     <input type="hidden" value="${map.type}" id="type_id">
     <div class="content-wrapper">
@@ -40,19 +51,21 @@
                     <div class="x" onclick="hideup()"></div>
                 </div>
                 <div class="input">
-                	<div style="float:left;">
-                	  <label style="margin-left: 20px" class="labell require">页码:</label>
-                    <input type="text" class="text required" id="page" data-valid="isNonEmpty||onlyInt"
-                         onblur="javascript:LengthLimit(this,4);"  data-error="页码不能为空||页码只能是数字"  />
-                	</div>
-                  <div style="float:right;margin-right: 10px"> <label style="margin-left: 10px" class="labell">行数:</label>
-                    <input type="text" class="text required" id="line" data-valid="isNonEmpty||onlyInt"
-                         onblur="javascript:LengthLimit(this,4);"  data-error="行数不能为空||行数只能是数字"/></div>
-                   
+                    <div style="float:left;">
+                        <label style="margin-left: 20px" class="labell require">页码:</label>
+                        <input type="text" class="text required" id="page" data-valid="isNonEmpty||onlyInt"
+                               onblur="javascript:LengthLimit(this,4);" data-error="页码不能为空||页码只能是数字"/>
+                    </div>
+                    <div style="float:right;margin-right: 10px"><label style="margin-left: 10px"
+                                                                       class="labell">行数:</label>
+                        <input type="text" class="text required" id="line" data-valid="isNonEmpty||onlyInt"
+                               onblur="javascript:LengthLimit(this,4);" data-error="行数不能为空||行数只能是数字"/></div>
+
                 </div>
                 <div class="info">
                     <label style="margin-left: 20px" class="labell">纠错内容</label>
-                    <textarea class="misarea" id="content" onkeyup="javascript:LengthLimit(this,500);"  onblur="javascript:LengthLimit(this,500);"></textarea>
+                    <textarea class="misarea" id="content" onkeyup="javascript:LengthLimit(this,500);"
+                              onblur="javascript:LengthLimit(this,500);"></textarea>
                 </div>
                 <div class="upload">
                     <label style="margin-left: 20px" class="labell">纠错内容附件</label>
@@ -181,7 +194,7 @@
                 <div class="mistake">
                     <div class="vid_pic"></div>
                     <div class="mis_content">上传微视频</div>
-                    <input id="upload-video" type="file" class='hidden-upload' name='file'
+                    <input id="upload-video" type="file" class='hidden-upload' name='file' accept="video/*"
                            style="width: 0px;height: 33px;padding-left: 100px;cursor: pointer;">
                 </div>
                 <div class="left1">
@@ -269,11 +282,13 @@
                             <div class="item">
                                 <div class="item_title">
                                     <div style="float: left;">
-                                    	<c:if test="${list.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/default_image.png" class="picturesize" ></c:if>
-						                <c:if test="${list.avatar!='DEFAULT'}"><img src="${ctx}/image/${list.avatar}.action" class="picturesize" ></c:if>
-                                    
-                                    <%-- <img src="${ctx}/statics/image/rwtx.png"
-                                                                   class="picturesize"/> --%>
+                                        <c:if test="${list.avatar=='DEFAULT'}"><img
+                                                src="${ctx}/statics/image/default_image.png" class="picturesize"></c:if>
+                                        <c:if test="${list.avatar!='DEFAULT'}"><img
+                                                src="${ctx}/image/${list.avatar}.action" class="picturesize"></c:if>
+
+                                            <%-- <img src="${ctx}/statics/image/rwtx.png"
+                                                                           class="picturesize"/> --%>
                                     </div>
                                     <div style="float: left;margin-left: 10px;margin-top: 5px;">${list.realname}</div>
                                     <div style="float: left;margin-left: 10px;">
@@ -337,12 +352,15 @@
                             <div class="item">
                                 <div class="item_title">
                                     <div style="float: left;">
-                                    
-						                <c:if test="${list.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/default_image.png" alt="头像" ></c:if>
-						                <c:if test="${list.avatar!='DEFAULT'}"><img src="${ctx}/image/${list.avatar}.action" class="picturesize" alt="头像" ></c:if>
-						           
-                                    <%-- <img src="${ctx}/statics/image/rwtx.png"
-                                                                   class="picturesize"/> --%>
+
+                                        <c:if test="${list.avatar=='DEFAULT'}"><img
+                                                src="${ctx}/statics/image/default_image.png" alt="头像"></c:if>
+                                        <c:if test="${list.avatar!='DEFAULT'}"><img
+                                                src="${ctx}/image/${list.avatar}.action" class="picturesize"
+                                                alt="头像"></c:if>
+
+                                            <%-- <img src="${ctx}/statics/image/rwtx.png"
+                                                                           class="picturesize"/> --%>
                                     </div>
                                     <div style="float: left;margin-left: 10px;margin-top: 5px;">${list.nickname}</div>
                                     <div style="float: left;margin-left: 10px;">
