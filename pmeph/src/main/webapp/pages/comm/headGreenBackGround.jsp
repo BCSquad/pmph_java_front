@@ -69,7 +69,7 @@
            <c:choose> 
      			<c:when test="${ SESSION_USER_CONST_ORGUSER.progress==1}">   
 	     			 	<div class="div-menu-child <%="usermanage".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
-	                 	onclick="window.location.href='<c:url value="/user/writerLists.action"/>'">用户管理
+	                 	onclick="window.location.href='<c:url value="/organizationuser/writerLists.action"/>'">用户管理
 	            		</div>
  				</c:when>      
      			<c:otherwise>  
