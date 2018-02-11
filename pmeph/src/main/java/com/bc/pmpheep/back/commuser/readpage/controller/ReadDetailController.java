@@ -73,7 +73,7 @@ public class ReadDetailController extends BaseController{
 		List<Map<String, Object>> eMap=readDetailService.queryRecommendByE(0);
 		List<Map<String, Object>> listCom=readDetailService.queryComment(id,0);
 		List<Map<String, Object>> ComNum=readDetailService.queryComment(id,-1);
-		List<Map<String, Object>> Video=readDetailService.queryVideo("2");
+		List<Map<String, Object>> Video=readDetailService.queryVideo(id);
 		List<Map<String, Object>> auList=readDetailService.queryAuthorType(author);
 		List<Map<String, Object>> longList=readDetailService.queryLong(id,0);
 		if(longList.size()==0){
