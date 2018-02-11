@@ -29,7 +29,7 @@ import java.util.Map;
  * 
  **/
 @Controller
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/organizationuser")
 public class OrgUserController extends  com.bc.pmpheep.general.controller.BaseController{
 	
 	@Autowired

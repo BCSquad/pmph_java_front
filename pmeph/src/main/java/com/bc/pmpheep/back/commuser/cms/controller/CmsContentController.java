@@ -67,9 +67,10 @@ public class CmsContentController extends com.bc.pmpheep.general.controller.Base
     public Map<String, Object> toPage( HttpServletRequest request) throws Exception {
         Integer pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		Integer pageSize = Integer.parseInt(request.getParameter("pageSize"));
+		String contextpath = request.getContextPath()+"/";
         PageParameter<Map<String,Object>> pageParameter = new PageParameter<>(pageNum, pageSize);
-       
-        List<Map<String, Object>> page = cmsContentService.listCms(pageParameter);
+        
+        List<Map<String, Object>> page = cmsContentService.listCms(pageParameter,contextpath);
         int total = cmsContentService.getCmsContentCount(pageParameter);
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("page", page);

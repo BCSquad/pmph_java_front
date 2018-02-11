@@ -26,7 +26,7 @@ function queryMain(){
 	
 	$.ajax({
 		type:'post',
-		url:contextpath+'/cms/toPage.action?t='+new Date().getTime(),
+		url:contextpath+'cms/toPage.action?t='+new Date().getTime(),
 		async:false,
 		dataType:'json',
 		data:data,
@@ -62,6 +62,7 @@ function addColum(list){
 					str +='<div  class="content" >';
 						str +='<div class="content-image">';
 							str +='<img src="'+contextpath+'statics/testfile/p2.png" />';
+						/*str +='<img src="'+n.first_img_url+'" />';*/
 							str +='</div>';
 								str +='<p  class="content-title"  >'+n.title+'</p>';
 								str +='<p  class="content-text">'+(n.summary?n.summary:'')+'';

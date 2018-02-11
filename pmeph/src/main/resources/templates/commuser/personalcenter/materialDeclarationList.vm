@@ -107,6 +107,9 @@
                     #if(($!{c.is_staging}==true || $!{c.is_staging}==1)&&$!{c.online_progress}==0)
                     	<img src="$!{contextpath}statics/image/zancun.png">
                     #end
+                    #if($!{c.online_progress}==2 || $!{c.online_progress}==5)
+                    	<img src="$!{contextpath}statics/image/tuihui.png">
+                    #end
                    </div>
                 </div>
                 <div class="rxia">

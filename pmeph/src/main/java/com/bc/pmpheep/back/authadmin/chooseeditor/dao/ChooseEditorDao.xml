@@ -17,7 +17,7 @@
 		o.id as dec_org_id,
 		o.org_name AS dec_org_name,
 		d.position,
-		dp.chosen_position NOT IN  (2, 4, 10, 12) as editorAvaliable,<!-- 未被选为主编副主编，还可以选编委，控制编委复选框disabled -->
+		(dp.chosen_position NOT IN  (2, 4, 10, 12) and dpp.chosen_position NOT IN  (2, 4, 10, 12)) as editorAvaliable,<!-- 未被选为主编副主编，还可以选编委，控制编委复选框disabled -->
 		d.title,
 		tb.is_list_selected,<!-- 第一主编提交1/暂存0 -->
 		tb.is_locked,       <!-- 锁定，等于1后就不能再选择了 -->
@@ -199,6 +199,7 @@
 	<insert id="copyTempBySelectedIds" parameterType="Map" >
 		
 		insert  into dec_position_temp   (
+		id,
 		author_id,
 		is_background,
 		declaration_id,
@@ -211,6 +212,7 @@
 		syllabus_name
 		 )
 		select 
+		d.id,
 		${logUserId},
 		${is_background},
 		d.declaration_id,
@@ -228,6 +230,7 @@
 		ON DUPLICATE KEY UPDATE author_id= values(author_id) , is_background = values(is_background) , gmt_update = now();
 	
 		insert  into dec_position_temp   (
+		id,
 		author_id,
 		is_background,
 		declaration_id,
@@ -240,13 +243,21 @@
 		syllabus_name
 		 )
 		select 
+		d.id,
 		${logUserId},
 		${is_background},
 		d.declaration_id,
 		d.textbook_id,
 		d.preset_position,
 		d.is_on_list,
-		8,
+		(case 
+			when d.chosen_position in (1,9) <!-- 原本已选中编委的 现不选编委 选数字编委 就固定更新为8 -->
+			then 8
+			when d.chosen_position &lt; 8 <!-- 有可能是主编和副主编也能选数字编委  加8-->
+			then d.chosen_position+8
+			else d.chosen_position
+			end
+		)as chosen_position,
 		d.rank,
 		d.syllabus_id,
 		d.syllabus_name
@@ -257,6 +268,7 @@
 		ON DUPLICATE KEY UPDATE author_id= values(author_id) , is_background = values(is_background) , gmt_update = now();
 		
 		insert  into dec_position_temp   (
+		id,
 		author_id,
 		is_background,
 		declaration_id,
@@ -269,6 +281,7 @@
 		syllabus_name
 		 )
 		select 
+		d.id,
 		${logUserId},
 		${is_background},
 		d.declaration_id,
@@ -284,6 +297,46 @@
 		where
 		d.id  in (${selectedIds}) and d.id in (${selectedNumIds})
 		ON DUPLICATE KEY UPDATE author_id= values(author_id) , is_background = values(is_background) , gmt_update = now();
+		
+		insert  into dec_position_temp   (
+		id,
+		author_id,
+		is_background,
+		declaration_id,
+		textbook_id,
+		preset_position,
+		is_on_list,
+		chosen_position,
+		rank,
+		syllabus_id,
+		syllabus_name
+		 )
+		select 
+		d.id,
+		${logUserId},
+		${is_background},
+		d.declaration_id,
+		d.textbook_id,
+		d.preset_position,
+		d.is_on_list,
+		(case <!-- 未选中编委也未选中数字编委  -->
+			when d.chosen_position in (1,9) 
+			then 0
+			when d.chosen_position &gt;= 8
+			then d.chosen_position -8
+			else d.chosen_position 
+			end
+		),
+		d.rank,
+		d.syllabus_id,
+		d.syllabus_name
+		
+		 from dec_position d
+		where
+		d.textbook_id = #{textBookId} and d.id not in (${selectedIds}) and d.id not in (${selectedNumIds}) 
+		ON DUPLICATE KEY UPDATE author_id= values(author_id) , is_background = values(is_background) , gmt_update = now();
+	
+		
 	</insert>
 	
 	<!-- 暂存数字编委 -->
@@ -307,14 +360,35 @@
 	
 	
 	<update id="updateDecPositionBySelectIds" parameterType="Map">
-		update dec_position set chosen_position = 1 
+		update dec_position_temp t , dec_position d
+		set
+		d.chosen_position =
+		( 
+		case 
+		when t.chosen_position in (1,9) <!-- 选了编委 直接覆盖 -->
+		then  t.chosen_position
+		
+		when t.chosen_position &gt;=8 and d.chosen_position &lt; 8 and d.chosen_position not in (1,9) <!-- 没选编委 选了数字编委 正式表未选编委  加上 数字编委-->
+		then d.chosen_position + 8
+		when t.chosen_position &gt;=8 and d.chosen_position in (1,9) <!-- 没选编委 选了数字编委 正式表选了编委  加上数字编委 去掉编委 -->
+		then 8
+		when t.chosen_position &lt; 8 and d.chosen_position &gt;=8 and d.chosen_position not in (1,9) <!-- 没选编委 没选数字编委 正式表有数字编委但没编委 减去数字编委 -->
+		then d.chosen_position - 8
+		when t.chosen_position &lt; 8 and d.chosen_position in (1,9)  <!-- 没选编委 没选数字编委 正式表选了编委 -->
+		then  0
+		else d.chosen_position
+		end
+		)
+		where d.id = t.id and d.textbook_id = #{textBookId} and t.author_id=${logUserId} and t.is_background = 0
+	
+		<!-- update dec_position set chosen_position = 1 
 		where id in (${selectedIds}) and id not in (${selectedNumIds});
 		
-		update dec_position set chosen_position = 8 
+		update dec_position set chosen_position = chosen_position + 8 
 		where id not in (${selectedIds}) and id in (${selectedNumIds});
 		
 		update dec_position set chosen_position = 9 
-		where id in (${selectedIds}) and id in (${selectedNumIds});
+		where id in (${selectedIds}) and id in (${selectedNumIds});  -->
 	</update>
 	
 	<update id="updateTextBookListSelected" parameterType="Map">

@@ -2,6 +2,7 @@ package com.bc.pmpheep.general.dao;
 
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -9,4 +10,11 @@ import java.util.Map;
  */
 public interface UserDao {
     public Map<String, Object> getUserInfo(@Param("username") String username, @Param("usertype") String usertype);
+
+    public int insertUserLoginLog(Map<String, Object> info);
+
+    public List<Map<String, Object>> getUserNeedAddScores(Map<String, Object> info);
+
+    public int insertUserScore(Map<String, Object> info);
+
 }

@@ -19,6 +19,8 @@ import com.bc.pmpheep.back.commuser.personalcenter.dao.PersonalDao;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.general.pojo.Content;
 import com.bc.pmpheep.general.service.ContentService;
+import com.bc.pmpheep.general.service.FileService;
+import com.mongodb.gridfs.GridFSDBFile;
 
 @Service("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
 public class PersonalServiceImpl implements PersonalService {
@@ -32,6 +34,10 @@ public class PersonalServiceImpl implements PersonalService {
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService")
 	private ArticleSearchService articleSearchService;
+	
+	@Autowired
+    @Qualifier("com.bc.pmpheep.general.service.FileService")
+    FileService fileService;
 
 	@Override
 	public List<PersonalNewMessage> queryMyCol(Map<String, Object> permap) {
@@ -226,12 +232,15 @@ public class PersonalServiceImpl implements PersonalService {
 	}
 
 	private String getFirstImgUrlFromHtmlStr(String contextpath, Content content) {
+		contextpath = "/".equals(contextpath)||"\\".equals(contextpath)?"":contextpath;
 		String img_url = contextpath +"statics/image/564f34b00cf2b738819e9c35_122x122!.jpg";
 		if(content!=null){
 			List<String> imglist = articleSearchService.getImgSrc(content.getContent());
+
 		    if(imglist.size()>0){
+		    
 		    	img_url = imglist.get(0);
-		    	if (img_url.length()>0) {
+		    	if (img_url.length()>0 && "/image/".equals(img_url.substring(0,7)) && ".action".equals(img_url.substring(img_url.lastIndexOf("."))) ) {
 		    		img_url = contextpath+img_url;
 				}
 		    }
