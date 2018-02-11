@@ -17,14 +17,27 @@
 		resultType="java.util.Map">
 		select
 		t.id,
-		t.author_id,
-		c.realname,
-		c.avatar
+		case 
+		when t.author_type =1
+		then pu.realname
+		when  t.author_type =2
+		then c.realname
+		else '系统' end as realname,
+		case 
+		when t.author_type =1
+		then pu.avatar
+		when  t.author_type =2
+		then c.avatar
+		else '系统' end as avatar,
+		t.author_id
 		from cms_content t
 		left
 		join cms_category b on t.category_id=b.id
 		left join writer_user c on
-		t.author_id=c.id WHERE t.id=#{id}
+		t.author_id=c.id 
+		left join pmph_user pu on
+		t.author_id=pu.id 
+		WHERE t.id=#{id}
 	</select>
 
 	<!-- 查询最近文章条数 -->
@@ -36,7 +49,7 @@
 		t.category_id=b.id
 		left join writer_user c on t.author_id=c.id
 		WHERE
-		t.author_id=#{author_id} and t.auth_status='2' and t.parent_id='0'
+		t.author_id=#{author_id} and t.auth_status='2' and t.parent_id='0'  and t.is_published=1
 		order by t.gmt_create desc
 	</select>
 
@@ -53,7 +66,7 @@
 		left join cms_category b on t.category_id=b.id
 		left join
 		writer_user c on t.author_id=c.id WHERE t.author_id=#{author_id}
-		and t.auth_status='2' and t.parent_id='0'
+		and t.auth_status='2' and t.parent_id='0'  and t.is_published=1
 		order by gmt_create desc LIMIT 0,3
 	</select>
 
@@ -98,7 +111,7 @@
 		left join writer_user c
 		on t.author_id=c.id
 		where t.parent_id =#{parameter.id}
-		AND t.category_id = 0  and t.auth_status='2'
+		AND t.category_id = 0  and t.auth_status='2' and t.is_published=1
 		order by
 		t.gmt_create desc limit #{start},#{pageSize}
 	</select>
@@ -111,7 +124,7 @@
 		t.category_id=b.id
 		left join writer_user c on t.author_id=c.id
 		where t.parent_id =#{id}
-		AND t.category_id = 0  and t.auth_status='2'
+		AND t.category_id = 0  and t.auth_status='2' and t.is_published=1
 		order by t.gmt_create desc
 	</select>
 
