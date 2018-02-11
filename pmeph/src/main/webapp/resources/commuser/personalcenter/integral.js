@@ -1,9 +1,23 @@
 $(function() {
+    	//积分筛选
+        $('#sele').selectlist({
+            zIndex: 10,
+            width: 100,
+            height: 20,
+            optionHeight: 20,
+            triangleColor:'#333333',
+            onChange:function (){
+//				window.location.href=contextpath +"integral/findPointByMonth.action?condition="+$("input[name='sele']") .val();
+            	queryTime();
+            }
+        });
+
+	
 	
 	/* 初始化 */
 	var counter = 0; /* 计数器 */
 	var pageStart = 0; /* offset */
-	var pageSize = 3; /* size */
+	var pageSize = 10; /* size */
 
 	/* 首次加载 最终名单初始化 */
 	getData(pageStart, pageSize);
@@ -18,10 +32,10 @@ $(function() {
 });
 
 function getData(offset, size) {
-	/*var material_id = $("#material_id").val();*/
+	var condition=$("input[name='sele']") .val();
 	$.ajax({
 				type : 'post',
-				url : "loadMore.action",
+				url : "loadMore.action?condition="+condition,
 				dataType : 'json',
 				success : function(json) {
 					
@@ -73,10 +87,10 @@ function getData(offset, size) {
 
 //查询三个月内的积分
 function queryTime(){
-
+	var condition=$("input[name='sele']") .val();
 	$.ajax({
 		type : 'post',
-		url : contextpath + "integral/findPointByMonth.action",
+		url : contextpath + "integral/findPointByMonth.action?condition="+condition,
 		async : false,
 		dataType : 'json',
 		success : function(json) {

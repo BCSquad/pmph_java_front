@@ -14,8 +14,25 @@
 		writer_point_log AS l
 		LEFT JOIN writer_point_rule AS r ON l.rule_id = r.id
 		LEFT JOIN writer_user AS u ON l.user_id = u.id 
-		where  l.user_id=#{userId}
+		where 1= 1 
+		<if test="userId != null and userId != ''">
+			and l.user_id = #{userId} 
+		</if>
+		<if test="condition == 0">
+			   ORDER BY l.gmt_create DESC    
+		</if>
+		<if test="condition == 1">
+			 and l.gmt_create>DATE_SUB(CURDATE(), INTERVAL 1 WEEK)         
+		</if>
+		<if test="condition == 2">
+			 and l.gmt_create>DATE_SUB(CURDATE(), INTERVAL 3 MONTH)         
+		</if>
+		<if test="condition == 3">
+			 and l.gmt_create>DATE_SUB(CURDATE(), INTERVAL 1 YEAR)         
+		</if>
+	   
 	</select>
+	
 
 <!--总积分 -->
 	<select id="findTotalPoint" resultType="java.util.Map"
@@ -41,7 +58,23 @@
 		writer_point_log AS l
 		LEFT JOIN writer_point_rule AS r ON l.rule_id = r.id
 		LEFT JOIN writer_user AS u ON l.user_id = u.id 
-		where  l.user_id=#{userId}
+		where 1= 1 
+		<if test="userId != null and userId != ''">
+			and l.user_id = #{userId} 
+		</if>
+		<if test="condition == 0">
+			   ORDER BY l.gmt_create DESC    
+		</if>
+		<if test="condition == 1">
+			 and l.gmt_create>DATE_SUB(CURDATE(), INTERVAL 1 WEEK)         
+		</if>
+		<if test="condition == 2">
+			 and l.gmt_create>DATE_SUB(CURDATE(), INTERVAL 3 MONTH)         
+		</if>
+		<if test="condition == 3">
+			 and l.gmt_create>DATE_SUB(CURDATE(), INTERVAL 1 YEAR)         
+		</if>
+	   
 	</select>
 
 </mapper>

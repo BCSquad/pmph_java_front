@@ -42,10 +42,11 @@
 						<div class="top4">积分记录：</div>
 						<div class="top5">筛选：</div>
 						<div class="top6" >
-							<select id="select" name="select" title="请选择" >
-			                    <option value="0" ${condition=='0' ?'selected':''}>一周内</option>
-			                    <option value="1" ${condition=='1' ?'selected':''}  onclick='queryTime()'>三月内</option>
-			                    <option value="2" ${condition=='2' ?'selected':''}>一年内</option>
+							<select id="sele" name="sele" title="请选择" >
+								<option value="0" ${condition=='0' ?'selected':''}>全部</option>
+			                    <option value="1" ${condition=='1' ?'selected':''}>一周内</option>
+			                    <option value="2" ${condition=='2' ?'selected':''}>三月内</option>
+			                    <option value="3" ${condition=='3' ?'selected':''}>一年内</option>
                 			</select>
 						</div>
 					</div>
