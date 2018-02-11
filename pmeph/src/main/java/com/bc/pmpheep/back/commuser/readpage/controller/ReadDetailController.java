@@ -73,6 +73,7 @@ public class ReadDetailController extends BaseController{
 		List<Map<String, Object>> eMap=readDetailService.queryRecommendByE(0);
 		List<Map<String, Object>> listCom=readDetailService.queryComment(id,0);
 		List<Map<String, Object>> ComNum=readDetailService.queryComment(id,-1);
+		List<Map<String, Object>> Video=readDetailService.queryVideo(id);
 		List<Map<String, Object>> auList=readDetailService.queryAuthorType(author);
 		List<Map<String, Object>> longList=readDetailService.queryLong(id,0);
 		if(longList.size()==0){
@@ -149,6 +150,7 @@ public class ReadDetailController extends BaseController{
 		modelAndView.addObject("map", map);
 		modelAndView.addObject("listCom", listCom);
 		modelAndView.addObject("frList", frList);
+		modelAndView.addObject("Video",Video);
 		modelAndView.addObject("longList", longList);
 		modelAndView.addObject("typeList", typeList);
 		modelAndView.addObject("start", 2);

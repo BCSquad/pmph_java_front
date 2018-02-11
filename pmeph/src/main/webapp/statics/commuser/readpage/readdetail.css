@@ -346,12 +346,13 @@
 	line-height: 30px;
 	color: #182d4c;
 	cursor: pointer;
+	margin-top: 5px;
 }
 
 .video-a{
 	width: 260px;
 	height: 165px;
-	opacity:0.5;
+	/* opacity:0.5; */
 	background-color: black;
 	position:absolute;
 	top:0px;
@@ -856,8 +857,8 @@
 	background-image: url("../../image/css_sprites.png");
     background-position: -220px -273px;
     background-repeat: no-repeat;
-    height: 84px;
-    width: 82px;
+    height: 65px;
+    width: 70px;
     margin-top: -115px;
     margin-left: 95px;
     position: absolute;

@@ -1,3 +1,5 @@
+
+
 $(function () {
     $('form').validate({
         onFocus: function () {
@@ -58,7 +60,6 @@ $(function () {
         url: 'http://120.76.221.250:11000/pmph_vedio/vedio/fileUp',
         dataType: 'json',
         autoUpload: true,
-/*        forceIframeTransport: true,*/
         formData: function () {
             return [
                 {name: 'userId', value: $("#userid").val()},

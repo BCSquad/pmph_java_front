@@ -224,30 +224,15 @@
                     <div class="rd_name">相关资源</div>
                 </div>
                 <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
-                <div class="video" style="margin-left: 20px">
-                    <img src="${ctx}/statics/image/index.png" class="img-a">
-                    <div class="video-a">
-                        <div class="video-btn">微视频</div>
-                    </div>
-                    <div class="play"></div>
-                    <div class="video-name">微视频</div>
+                <c:forEach items="${Video}" var="list" varStatus="status">
+                <div class="video" ${status.index=='0' ? 'style="margin-left: 20px"':'style="margin-left: 40px"'} >
+                    <video class="video-a" src="http://120.76.221.250:11000/pmph_vedio/file/${list.file_name};" 
+                    poster="${ctx}/image/${list.cover}.action" type="mp4" controls>
+                    </video>
+                    <div class="video-btn">微视频</div>
+                    <div class="video-name">(微视频)${list.title}</div>
                 </div>
-                <div class="video" style="margin-left: 40px">
-                    <img src="${ctx}/statics/image/index.png" class="img-a">
-                    <div class="video-a">
-                        <div class="video-btn">人卫慕课</div>
-                    </div>
-                    <div class="play"></div>
-                    <div class="video-name">人卫慕课</div>
-                </div>
-                <div class="video" style="margin-left: 40px">
-                    <img src="${ctx}/statics/image/index.png" class="img-a">
-                    <div class="video-a">
-                        <div class="video-btn">考试</div>
-                    </div>
-                    <div class="play"></div>
-                    <div class="video-name">考试</div>
-                </div>
+                </c:forEach>
             </div>
             <div class="block">
                 <div class="title">

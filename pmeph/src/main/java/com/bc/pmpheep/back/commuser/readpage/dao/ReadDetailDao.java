@@ -164,4 +164,9 @@ public interface ReadDetailDao {
 	 * @return
 	 */
 	Map<String, Object> queryEditor(Map<String, Object> map);
+	/**
+	 * 查询视频
+	 * @return List<Map<String, Object>>
+	 */
+	List<Map<String, Object>> queryVideo(@Param("book_id") String book_id);
 }

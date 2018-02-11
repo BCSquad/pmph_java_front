@@ -28,7 +28,7 @@ public class IntegralServiceImpl implements IntegralService {
 	}
 	
 	/**
-	 * 三个月内积分记录
+	 * 筛选一周、三个月内、一年积分记录
 	 */
 	@Override
 	public List<Map<String, Object>> findPointByMonth(Map<String, Object> paraMap) {

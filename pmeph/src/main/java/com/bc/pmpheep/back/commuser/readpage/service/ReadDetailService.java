@@ -125,4 +125,10 @@ public interface ReadDetailService {
 	 * @param clicks 点击数
 	 */
 	void changeClicks(String book_id,int clicks);
+	/**
+	 * 查询视频
+	 * @param book_id 书籍ID
+	 * @return List<Map<String, Object>>
+	 */
+	List<Map<String, Object>> queryVideo(String book_id);
 }

@@ -67,22 +67,22 @@
 }
 
 .top5{
-	float:left;
-	width: auto;
-	font-family: MicrosoftYaHei;
-	 font-size: 15px;
-	color: #999999;
-	margin-left:78%;
+		float: left;
+		width: auto;
+		font-family: MicrosoftYaHei;
+		font-size: 15px;
+		color: #999999;
+		margin-left: 77%;
 }
 
 .top6{
-	float:right;
-	width: auto;
+	float: right;
+	width: 80px;
 	font-family: MicrosoftYaHei;
 	font-size: 15px;
 	color: #333333;
-	margin-right:2%;
 	cursor: pointer;
+	margin-right: 2%;
 }
 
 #table {
