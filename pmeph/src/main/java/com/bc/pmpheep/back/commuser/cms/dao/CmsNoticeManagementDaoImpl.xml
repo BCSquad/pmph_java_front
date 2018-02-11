@@ -25,11 +25,11 @@
     	         <if test="userid !=0">
 		    	 (
 		    	  wu.id=#{userid}
-		    	  and m.is_public=1
+		    	  and m.is_public=0
 		    	  )
     	          or
     	          </if> 
-    	      m.is_public=0
+    	      m.is_public=1
     	      )
     	 and 
     	   cc.is_material_entry =1 
