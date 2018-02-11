@@ -2,15 +2,19 @@ $(function() {
     	//积分筛选
         $('#sele').selectlist({
             zIndex: 10,
-            width: 100,
+            width: 80,
             height: 20,
             optionHeight: 20,
-            triangleColor:'#333333',
-            onChange:function (){
+            triangleColor:'#333333'
+//            onChange:function (){
 //				window.location.href=contextpath +"integral/findPointByMonth.action?condition="+$("input[name='sele']") .val();
-            	queryTime();
-            }
+//            	queryTime();
+//            }
         });
+        
+        $("#sele").find("li").bind("click",function(){
+        	queryTime();
+    	});
 
 	
 	

@@ -12,14 +12,12 @@
 	var contextpath = '${pageContext.request.contextPath}/';
 </script>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-<link rel="stylesheet" href="${ctx}/statics/css/base.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${ctx}/statics/commuser/personalcenter/integral.css"
-	type="text/css">
-<script type="text/javascript"
-	src="${ctx}/resources/comm/jquery/jquery.js"></script>
+<link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
+<link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css" />
+<link rel="stylesheet" href="${ctx}/statics/commuser/personalcenter/integral.css" type="text/css">
+<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.js"></script>
 <script src="${ctx}/resources/comm/base.js"></script>
+<script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
 <script src="${ctx}/resources/commuser/personalcenter/integral.js"></script>
 </head>
 <body>
@@ -43,7 +41,7 @@
 						<div class="top5">筛选：</div>
 						<div class="top6" >
 							<select id="sele" name="sele" title="请选择" >
-								<option value="0" ${condition=='0' ?'selected':''}>全部</option>
+								<option value="0" ${condition=='0' ?'selected':''}>-全部-</option>
 			                    <option value="1" ${condition=='1' ?'selected':''}>一周内</option>
 			                    <option value="2" ${condition=='2' ?'selected':''}>三月内</option>
 			                    <option value="3" ${condition=='3' ?'selected':''}>一年内</option>
