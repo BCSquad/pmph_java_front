@@ -10,4 +10,44 @@
             select u.*,o.org_name from org_user u join org o on u.org_id=o.id where username=#{username}
         </if>
     </select>
+
+    <insert id="insertUserLoginLog" parameterType="map">
+        insert into sys_operation (user_id,user_name,user_real_name,operate_text,client_ip,business_type,device_type)
+        values (#{id},#{username},#{realname},'作家用户登录',#{clientip},'作家用户','PC')
+    </insert>
+
+    <select id="getUserNeedAddScores" resultType="map">
+       SELECT
+	count(1) pp
+FROM
+	sys_operation o
+WHERE
+	 o.user_id=#{id} and
+	o.operate_date >= CURDATE()
+UNION
+	SELECT
+		*
+	FROM
+		(
+			SELECT
+				datediff(CURDATE(), t.operate_date) pp
+			FROM
+				sys_operation t
+			WHERE
+				t.business_type = '作家用户'
+			AND t.operate_date &gt; date_add(CURDATE(), INTERVAL - 4 DAY)
+			AND t.operate_date &lt; CURDATE()  and t.user_id=#{id}
+			GROUP BY
+				datediff(CURDATE(), t.operate_date)
+			ORDER BY
+				datediff(CURDATE(), t.operate_date)
+		) t
+    </select>
+
+    <insert id="insertUserScore" parameterType="map">
+        update writer_point set total=total+#{scores},gain=gain+#{scores} where user_id=#{id};
+        insert into writer_point_log (user_id,rule_id,point) values (#{id},5,#{scores});
+    </insert>
+
+
 </mapper>
