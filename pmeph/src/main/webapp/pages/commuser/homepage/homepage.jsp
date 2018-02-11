@@ -243,52 +243,52 @@
             </c:forEach>
         </div>
         <div class="area-7">
-            <div class="title"></div>
-            <div class="item">
-                <div class="can"><span class="author">推荐作者</span></div>
-                <c:forEach items="${listAut}" var="list" varStatus="status">
-                        <div class="${status.index==0?'author1':'author2'}">
-                            <div class="a7_head_div">
-                            <c:choose>
-                            	<c:when test="${list.avatar=='DEFAULT'}">
-                            		<img src="${ctx}/statics/image/default_image.png" class="a6_head">
-                            	</c:when>
-                            	<c:otherwise>
-                            		<img src="${ctx}/image/${list.avatar}.action" class="a6_head">
-                            	</c:otherwise>
-                            </c:choose>
-                            </div>
-                            <div class="a7_name_div">
-                                <div class="a7_author">
-                                    <span class="a7_write">${list.realname}</span>
-                                </div>
-                                <br>
-                                <div class="a7_cont">
-                                    <span class="a7_cont">${list.title}</span>
-                                </div>
-                            </div>
-                            <div class="a7_friend">
-                            	<c:choose>
-				                	<c:when test="${list.status == null }">
-				                		<span class="friend add" title="申请加为好友！" onclick="addFriendfun(${list.id},'${list.realname}',0)" id="friend${list.id}"><B>+</B>好友</span>
-				                	</c:when>
-				                	<c:when test="${list.status  == 2 }">
-				                		<span class="friend isFriend" title="已是您的好友！" id="friend${list.id}"><B>好友</B></span>
-				                	</c:when>
-				                	<c:when test="${list.status == 0 && list.isBeenRequest==1}">
-				                		<span class="friend isBeenRequest" title="对方也想加您为好友，点击马上成为好友！" onclick="addFriendfun(${list.id},'${list.realname}',2)" id="friend${list.id}"><B>+</B>好友</span>
-				                	</c:when>
-				                	<c:when test="${list.status == 0 && list.hasRequest==1}">
-				                		<span class="friend hasRequest" title="已申请加为好友，请等待对方同意。" id="friend${list.id}"><B>+</B>好友</span>
-				                	</c:when>
-				                </c:choose>
-                                <%-- <span class="friend" onclick="addfriend('${list.id}')" id="friend${list.id}"><B>+</B>好友</span> --%>
-                            </div>
-                        </div>
-                </c:forEach>
-                
-            </div>
-        </div>
+		    <div class="title"></div>
+		    <div class="item">
+		        <div class="can"><span class="author">推荐作者</span></div>
+		        <c:forEach items="${listAut}" var="list" varStatus="status">
+		                <div class="${status.index==0?'author1':'author2'}">
+		                    <div class="a7_head_div">
+		                    <c:choose>
+		                    	<c:when test="${list.avatar=='DEFAULT'}">
+		                    		<img src="${ctx}/statics/image/default_image.png" class="a6_head">
+		                    	</c:when>
+		                    	<c:otherwise>
+		                    		<img src="${ctx}/image/${list.avatar}.action" class="a6_head">
+		                    	</c:otherwise>
+		                    </c:choose>
+		                    </div>
+		                    <div class="a7_name_div">
+		                        <div class="a7_author">
+		                            <span class="a7_write">${list.realname}</span>
+		                        </div>
+		                        <br>
+		                        <div class="a7_cont">
+		                            <span class="a7_cont">${list.title}</span>
+		                        </div>
+		                    </div>
+		                    <div class="a7_friend">
+		                    	<c:choose>
+		            	<c:when test="${list.status == null }">
+		            		<span class="friend add" title="申请加为好友！" onclick="addFriendfun(${list.id},'${list.realname}',0)" id="friend${list.id}"><B>+</B>好友</span>
+		            	</c:when>
+		            	<c:when test="${list.status  == 2 }">
+		            		<span class="friend isFriend" title="已是您的好友！" id="friend${list.id}"><B>好友</B></span>
+		            	</c:when>
+		            	<c:when test="${list.status == 0 && list.isBeenRequest==1}">
+		            		<span class="friend isBeenRequest" title="对方也想加您为好友，点击马上成为好友！" onclick="addFriendfun(${list.id},'${list.realname}',2)" id="friend${list.id}"><B>+</B>好友</span>
+		            	</c:when>
+		            	<c:when test="${list.status == 0 && list.hasRequest==1}">
+		            		<span class="friend hasRequest" title="已申请加为好友，请等待对方同意。" id="friend${list.id}"><B>+</B>好友</span>
+		            	</c:when>
+		            </c:choose>
+		                        <%-- <span class="friend" onclick="addfriend('${list.id}')" id="friend${list.id}"><B>+</B>好友</span> --%>
+		                    </div>
+		                </div>
+		        </c:forEach>
+		        
+		    </div>
+		</div>
         <div class="area-8">
             <div class="left">
                 <div class="title">
@@ -357,13 +357,13 @@
                                     <c:set var="default_url"
                                            value="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"></c:set>
                                     <img src='${list.image_url == "DEFAULT"?default_url:list.image_url}'
-                                         class="book_style" id="right_book1">
+                                         class="book_style" id="right_book${status.count}">
                                 </div>
                                 <div class="num${status.index>2?'4':status.index+1+''}">
                                     <div class="num_book">${status.index+1}</div>
                                 </div>
                                 <div class="last_right_content">
-                                    <div class="sale_book" id="sale_book1">${list.bookname}</div>
+                                    <div class="sale_book" id="sale_book${status.count}">${list.bookname}</div>
                                 </div>
                             </div>
                         </c:forEach>
@@ -381,3 +381,6 @@
 </div>
 </body>
 </html>
+
+        
+        

@@ -69,29 +69,11 @@ public class BookDeclareController extends BaseController {
 			vn = Integer.parseInt(vn.substring(7)) + 1000000 + 1 + "";
 		}
 		String stype = request.getParameter("stype"); // 申报信息存储方式
-		//int类型
-		String word_number = request.getParameter("word_number");
-		String picture_number = request.getParameter("picture_number");
-		String purchase = request.getParameter("purchase");
-		String sponsorship = request.getParameter("sponsorship");
-		if(word_number.equals("")){
-			word_number = "0";
-		}
-		if(picture_number.equals("")){
-			picture_number = "0";
-		}
-		if(purchase.equals("")){
-			purchase = "0";
-		}
-		if(sponsorship.equals("")){
-			sponsorship = "0";
-		}
-		
 		// 插入银行信息
 		Map<String, Object> BankMap = new HashMap<String, Object>();
 		BankMap.put("user_id", request.getParameter("user_id"));
-		BankMap.put("account_name", request.getParameter("realname"));
-		BankMap.put("account_number", request.getParameter("bank"));
+		BankMap.put("account_name", request.getParameter("bank"));
+		BankMap.put("account_number", request.getParameter("account_number"));
 		BankMap.put("bank", request.getParameter("account_number"));
 		int bankCount = this.bdecService.insertBank(BankMap);
 		if (bankCount > 0) {
@@ -114,25 +96,24 @@ public class BookDeclareController extends BaseController {
 				topicMap.put("is_staging", "1");
 				topicMap.put("auth_progress", "0");
 				topicMap.put("is_opts_handling", "0");
-				topicMap.put("submit_time", "");
 			}
 			topicMap.put("bookname", request.getParameter("bookname"));
 			topicMap.put("reader", request.getParameter("reader"));
 			topicMap.put("user_id", request.getParameter("user_id"));
 			topicMap.put("deadline", request.getParameter("deadline"));
 			topicMap.put("source", request.getParameter("source"));
-			topicMap.put("word_number", word_number);
-			topicMap.put("picture_number", picture_number);
+			topicMap.put("word_number",
+					"".equals(request.getParameter("word_number")) ? null : request.getParameter("word_number"));
+			topicMap.put("picture_number",
+					"".equals(request.getParameter("picture_number")) ? null : request.getParameter("picture_number"));
 			topicMap.put("subject", request.getParameter("subject"));
 			topicMap.put("rank", request.getParameter("rank"));
 			topicMap.put("type", request.getParameter("type"));
 			topicMap.put("bank_account_id", bankid);
-			topicMap.put("purchase", purchase);
-			topicMap.put("sponsorship", sponsorship);
-		//	topicMap.put("purchase",
-		//			"".equals(request.getParameter("purchase")) ? null : request.getParameter("purchase"));
-		//	topicMap.put("sponsorship",
-		//			"".equals(request.getParameter("sponsorship")) ? null : request.getParameter("sponsorship"));
+			topicMap.put("purchase",
+					"".equals(request.getParameter("purchase")) ? null : request.getParameter("purchase"));
+			topicMap.put("sponsorship",
+					"".equals(request.getParameter("sponsorship")) ? null : request.getParameter("sponsorship"));
 			topicMap.put("original_bookname", request.getParameter("original_bookname"));
 			// 判断是否为翻译书稿，若有值则表示为翻译书籍
 			if (request.getParameter("original_bookname").toString().equals("")) {
@@ -212,23 +193,6 @@ public class BookDeclareController extends BaseController {
 	public String doBookdeclareZc(HttpServletRequest request, HttpServletResponse response) {
 		String topic_id = request.getParameter("topic_id"); // 主键id
 		String stype = request.getParameter("stype"); // 申报信息存储方式
-		//int类型
-		String word_number = request.getParameter("word_number");
-		String picture_number = request.getParameter("picture_number");
-		String purchase = request.getParameter("purchase");
-		String sponsorship = request.getParameter("sponsorship");
-		if(word_number.equals("")){
-			word_number = "0";
-		}
-		if(picture_number.equals("")){
-			picture_number = "0";
-		}
-		if(purchase.equals("")){
-			purchase = "0";
-		}
-		if(sponsorship.equals("")){
-			sponsorship = "0";
-		}
 		
 		// 获取申报信息
 		Map<String, Object> topicMap = new HashMap<String, Object>();
@@ -244,7 +208,7 @@ public class BookDeclareController extends BaseController {
 			topicMap.put("is_staging", "1");
 			topicMap.put("auth_progress", "0");
 			topicMap.put("is_opts_handling", "0");
-			topicMap.put("submit_time", "");
+			//topicMap.put("submit_time", "");
 		}
 		topicMap.put("topic_id", topic_id);
 		topicMap.put("bookname", request.getParameter("bookname"));
@@ -252,14 +216,21 @@ public class BookDeclareController extends BaseController {
 		topicMap.put("user_id", request.getParameter("user_id"));
 		topicMap.put("deadline", request.getParameter("deadline"));
 		topicMap.put("source", request.getParameter("source"));
-		topicMap.put("word_number", word_number);
-		topicMap.put("picture_number", picture_number);
+		//topicMap.put("word_number", word_number);
+		//topicMap.put("picture_number", picture_number);
+		topicMap.put("word_number",
+				"".equals(request.getParameter("word_number")) ? null : request.getParameter("word_number"));
+		topicMap.put("picture_number",
+				"".equals(request.getParameter("picture_number")) ? null : request.getParameter("picture_number"));
+		topicMap.put("original_bookname", request.getParameter("original_bookname"));
 		topicMap.put("subject", request.getParameter("subject"));
 		topicMap.put("rank", request.getParameter("rank"));
 		topicMap.put("type", request.getParameter("type"));
 		topicMap.put("bank_account_id", request.getParameter("bank_account_id"));
-		topicMap.put("purchase", purchase);
-		topicMap.put("sponsorship", sponsorship);
+		topicMap.put("purchase",
+				"".equals(request.getParameter("purchase")) ? null : request.getParameter("purchase"));
+		topicMap.put("sponsorship",
+				"".equals(request.getParameter("sponsorship")) ? null : request.getParameter("sponsorship"));
 		topicMap.put("original_bookname", request.getParameter("original_bookname"));
 		// 判断是否为翻译书稿，若有值则表示为翻译书籍
 		if (request.getParameter("original_bookname").toString().equals("")) {

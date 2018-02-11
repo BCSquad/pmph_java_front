@@ -67,7 +67,7 @@
 		picture_number=#{picture_number},subject=#{subject},rank=#{rank},type=#{type},is_staging=#{is_staging},
 		auth_progress=#{auth_progress},bank_account_id=#{bank_account_id},purchase=#{purchase},sponsorship=#{sponsorship},
 		is_translation=#{is_translation},original_bookname=#{original_bookname},original_author=#{original_author},
-		nation=#{nation},edition=#{edition} where id = #{topic_id}
+		nation=#{nation},edition=#{edition},submit_time=#{submit_time} where id = #{topic_id}
 	</update>
 	<!-- 选题申报-额外信息 -->
 	<insert id="insertTopicExtra" parameterType="java.util.Map">
@@ -125,4 +125,9 @@
 		update writer_bank_account set account_number =#{account_number},bank=#{bank}
 		     where id = #{bank_account_id}
 	</update>
+	
+	<!-- 查询版本号 -->
+	<select id="getMaxTopicVn" resultType="java.lang.String">
+		select MAX(vn) from topic 
+	</select>
 </mapper>

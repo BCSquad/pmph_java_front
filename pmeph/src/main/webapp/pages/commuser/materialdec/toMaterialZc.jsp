@@ -71,11 +71,11 @@
 					<div style="float: left;margin-left: 30px;" class="ts_radio">
 						<table style="width: 280px;">
 							<tr>
-								<td><input type="radio" name="zw_1_${status.count}" value="1" ${list.preset_position=='1'?'checked':'' }/>主编</td>
+								<td><input type="radio" name="zw_1_${status.count}" value="4" ${list.preset_position=='4'?'checked':'' }/>主编</td>
 								<td><input type="radio" name="zw_1_${status.count}" value="2" ${list.preset_position=='2'?'checked':'' }/>副编委</td>
-								<td><input type="radio" name="zw_1_${status.count}" value="3" ${list.preset_position=='3'?'checked':'' }/>编委</td>
+								<td><input type="radio" name="zw_1_${status.count}" value="1" ${list.preset_position=='1'?'checked':'' }/>编委</td>
 								<c:if test="${materialMap.is_digital_editor_optional =='1'}">
-								<td><input type="radio" name="zw_1" value="4"/>数字编委</td>
+								<td><input type="radio" name="zw_1_${status.count}" value="8" ${list.preset_position=='8'?'checked':'' }/>数字编委</td>
 								</c:if>
 							</tr>
 						</table>
@@ -481,7 +481,7 @@
 									<td><input type="radio" name="gj_type_a" value="2" />省部</td>
 									<td><input type="radio" name="gj_type_a" value="3" />学校</td>
 								</tr></table>
-								<input type="hidden" name="gj_type" value="jp_type_a" />
+								<input type="hidden" name="gj_type" value="gj_type_a" />
 							</td>
 							<td><input class="cg_input" maxlength="20" name="gj_note" value="" style="width: 330px;" placeholder="备注"/>
 							</td>
@@ -493,13 +493,13 @@
 								<td><input class="cg_input" maxlength="20" name="gj_class_hour" value="${list.class_hour}" style="width: 130px;" placeholder="课时数"/></td>
 								<td style="color: #333333;">
 									<table class="radio_tb" style="width: 180px;"><tr>
-										<td><input type="radio" name="gj_type_${status.count}" value="1" ${list.position=='1'?'checked':'' }/>国家</td>
-										<td><input type="radio" name="gj_type_${status.count}" value="2" ${list.position=='2'?'checked':'' }/>省部</td>
-										<td><input type="radio" name="gj_type_${status.count}" value="3" ${list.position=='3'?'checked':'' }/>学校</td>
+										<td><input type="radio" name="gj_type_${status.count}" value="1" ${list.type=='1'?'checked':'' }/>国家</td>
+										<td><input type="radio" name="gj_type_${status.count}" value="2" ${list.type=='2'?'checked':'' }/>省部</td>
+										<td><input type="radio" name="gj_type_${status.count}" value="3" ${list.type=='3'?'checked':'' }/>学校</td>
 									</tr></table>
-									<input type="hidden" name="gj_type" value="jp_type_${status.count}" />
+									<input type="hidden" name="gj_type" value="gj_type_${status.count}" />
 								</td>
-								<td><input class="cg_input" maxlength="20" name="gj_note" value="" style="width: 330px;" placeholder="备注"/>
+								<td><input class="cg_input" maxlength="20" name="gj_note" value="${list.note}" style="width: 330px;" placeholder="备注"/>
 								</td>
 								<td><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('jpkcjs_${status.count}')"/></td>
 							</tr>
@@ -641,8 +641,8 @@
 							</td>
 							<td style="color: #333333;">
 								<table class="radio_tb" style="width: 80px;"><tr>
-									<td><input type="radio" name="jcb_is_digital_editor_${status.count}" value="1" />是</td>
-					 				<td><input type="radio" name="jcb_is_digital_editor_${status.count}" value="0" checked="checked"/>否</td>
+									<td><input type="radio" name="jcb_is_digital_editor_${status.count}" value="1" ${list.is_digital_editor=='1'?'checked':'' } />是</td>
+					 				<td><input type="radio" name="jcb_is_digital_editor_${status.count}" value="0" ${list.is_digital_editor=='0'?'checked':'' }/>否</td>
 								</tr></table>
 								<input type="hidden" name="jcb_is_digital_editor" value="jcb_is_digital_editor_${status.count}" />
 							</td>
@@ -720,8 +720,8 @@
 								</td>
 								<td style="color: #333333;">
 									<table class="radio_tb" style="width: 80px;"><tr>
-										<td><input type="radio" name="qtjcb_is_digital_editor_${status.count}" value="1" />是</td>
-						 				<td><input type="radio" name="qtjcb_is_digital_editor_${status.count}" value="0" checked="checked"/>否</td>
+										<td><input type="radio" name="qtjcb_is_digital_editor_${status.count}" value="1" ${list.is_digital_editor=='1'?'checked':'' }/>是</td>
+						 				<td><input type="radio" name="qtjcb_is_digital_editor_${status.count}" value="0" ${list.is_digital_editor=='0'?'checked':'' }/>否</td>
 									</tr></table>
 									<input type="hidden" name="jcb_is_digital_editor" value="qtjcb_is_digital_editor_${status.count}" />
 								</td>
@@ -816,8 +816,8 @@
 							<td><input class="cg_input" name="zb_monograph_name" id="zb_monograph_name" value="" style="width: 300px;" placeholder="教材名称" maxlength="16"/></td>
 							<td style="color: #333333;">
 								<table class="radio_tb" style="width: 100px;"><tr>
-									<td><input type="radio" name="is_self_paid_a" value="0" checked="checked"/>自费</td>
-									<td><input type="radio" name="is_self_paid_a" value="1" />公费</td>
+									<td><input type="radio" name="is_self_paid_a" value="0" ${list.is_self_paid=='0'?'checked':'' }/>自费</td>
+									<td><input type="radio" name="is_self_paid_a" value="1" ${list.is_self_paid=='1'?'checked':'' }/>公费</td>
 								</tr></table>
 								<input type="hidden" name="is_self_paid" value="is_self_paid_a" />
 							</td>

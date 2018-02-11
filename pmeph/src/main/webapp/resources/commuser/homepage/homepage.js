@@ -87,21 +87,46 @@ function changesale(type) {
 				if (i == 0) {
 					$("#sale_book1").html(x.bookname);
 					$("#right_book1").attr('src', x.image_url);
+					if(x.image_url=='DEFAULT'){
+						$("#right_book1").attr('src', contextpath+"/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+					}else{
+						$("#right_book1").attr('src', x.image_url);
+					}
 				} else if (i == 1) {
 					$("#sale_book2").html(x.bookname);
-					$("#right_book2").attr('src', x.image_url);
+					if(x.image_url=='DEFAULT'){
+						$("#right_book2").attr('src', contextpath+"/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+					}else{
+						$("#right_book2").attr('src', x.image_url);
+					}
 				} else if (i == 2) {
 					$("#sale_book3").html(x.bookname);
-					$("#right_book3").attr('src', x.image_url);
+					if(x.image_url=='DEFAULT'){
+						$("#right_book3").attr('src', contextpath+"/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+					}else{
+						$("#right_book3").attr('src', x.image_url);
+					}
 				} else if (i == 3) {
-					$("#sale_book4").html(x.bookname);
 					$("#right_book4").attr('src', x.image_url);
+					if(x.image_url=='DEFAULT'){
+						$("#right_book4").attr('src', contextpath+"/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+					}else{
+						$("#right_book4").attr('src', x.image_url);
+					}
 				} else if (i == 4) {
-					$("#sale_book5").html(x.bookname);
 					$("#right_book5").attr('src', x.image_url);
+					if(x.image_url=='DEFAULT'){
+						$("#right_book5").attr('src', contextpath+"/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+					}else{
+						$("#right_book5").attr('src', x.image_url);
+					}
 				} else if (i == 5) {
 					$("#sale_book6").html(x.bookname);
-					$("#right_book6").attr('src', x.image_url);
+					if(x.image_url=='DEFAULT'){
+						$("#right_book6").attr('src', contextpath+"/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+					}else{
+						$("#right_book6").attr('src', x.image_url);
+					}
 				}
 			});
 		}
