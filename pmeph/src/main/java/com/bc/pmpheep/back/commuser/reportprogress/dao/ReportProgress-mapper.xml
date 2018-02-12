@@ -70,7 +70,8 @@
 			d.`is_deleted` =0
 		AND
 			d.`receiver_id`=#{userId}
-		
+		AND 
+			d.`material_id`=#{materialId}
 		ORDER BY 
 			d.`gmt_create` DESC 
 		LIMIT 0,4

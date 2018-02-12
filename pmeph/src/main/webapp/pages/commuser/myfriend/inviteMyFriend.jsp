@@ -605,7 +605,7 @@ max-width: 10px !important; min-width: 10px !important;
 </jsp:include>
 <div class="content-body" id="more">
     <div class="div_top">
-        <div class="float_left">邀请我的好友</div>
+        <div class="float_left"><a href="${pageContext.request.contextPath}/group/toMyGroup.action?groupId=${groupId}" style="color:#1ab194;margin-right:10px;">返回</a>邀请我的好友</div>
         <div class="float_right" style="color: #1abd44;">
            <%--  <img src="${ctx}/statics/image/tjhy.png" class="img1"/>
             <label class="v_a" onclick = "window.location.href='${ctx}/addFriend/toPage.action'" style="cursor: pointer;">添加好友</label> --%>
