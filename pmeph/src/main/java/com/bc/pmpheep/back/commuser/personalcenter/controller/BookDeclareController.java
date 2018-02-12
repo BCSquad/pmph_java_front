@@ -72,9 +72,10 @@ public class BookDeclareController extends BaseController {
 		// 插入银行信息
 		Map<String, Object> BankMap = new HashMap<String, Object>();
 		BankMap.put("user_id", request.getParameter("user_id"));
-		BankMap.put("account_name", request.getParameter("realname"));
+		BankMap.put("account_name", request.getParameter("bank"));
 		BankMap.put("account_number", request.getParameter("account_number"));
-		BankMap.put("bank", request.getParameter("bank"));
+		BankMap.put("bank", request.getParameter("account_number"));
+
 		int bankCount = this.bdecService.insertBank(BankMap);
 		if (bankCount > 0) {
 			List<Map<String, Object>> BankList = new ArrayList<Map<String, Object>>();
