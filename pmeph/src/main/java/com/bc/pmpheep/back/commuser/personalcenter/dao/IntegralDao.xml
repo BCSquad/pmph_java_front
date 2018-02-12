@@ -5,30 +5,26 @@
 	<!--积分记录  加载更多 -->
 	<select id="findPointList" resultType="java.util.Map"
 		parameterType="java.util.Map">
-		SELECT
-		l.id,
-		r.rule_name,
-		l.point,
-		l.gmt_create
-		FROM
-		writer_point_log AS l
-		LEFT JOIN writer_point_rule AS r ON l.rule_id = r.id
-		LEFT JOIN writer_user AS u ON l.user_id = u.id 
+		select wpl.id, wpr.rule_name,wpl.point,wpl.gmt_create,wp.total
+		from writer_point_log  wpl 
+		LEFT JOIN writer_point_rule  wpr ON wpl.rule_id=wpr.id
+		LEFT JOIN writer_user  wu ON wpl.user_id=wu.id 
+		LEFT JOIN writer_point  wp ON wp.user_id=wu.id
 		where 1= 1 
 		<if test="userId != null and userId != ''">
-			and l.user_id = #{userId} 
+			and wu.id = #{userId} 
 		</if>
 		<if test="condition == 0">
-			   ORDER BY l.gmt_create DESC    
+			   ORDER BY wpl.gmt_create DESC    
 		</if>
 		<if test="condition == 1">
-			 and l.gmt_create>DATE_SUB(CURDATE(), INTERVAL 1 WEEK)         
+			 and wpl.gmt_create>DATE_SUB(CURDATE(), INTERVAL 1 WEEK)         
 		</if>
 		<if test="condition == 2">
-			 and l.gmt_create>DATE_SUB(CURDATE(), INTERVAL 3 MONTH)         
+			 and wpl.gmt_create>DATE_SUB(CURDATE(), INTERVAL 3 MONTH)         
 		</if>
 		<if test="condition == 3">
-			 and l.gmt_create>DATE_SUB(CURDATE(), INTERVAL 1 YEAR)         
+			 and wpl.gmt_create>DATE_SUB(CURDATE(), INTERVAL 1 YEAR)         
 		</if>
 	   
 	</select>
@@ -46,33 +42,29 @@
 		where  p.user_id=#{userId}
 	</select>
 
-	<!--查询三个月内积分记录数据 -->
+	<!--查询筛选积分记录数据 -->
 	<select id="findPointByMonth" resultType="java.util.Map"
 		parameterType="java.util.Map">
-		SELECT
-		l.id,
-		r.rule_name,
-		l.point,
-		l.gmt_create
-		FROM
-		writer_point_log AS l
-		LEFT JOIN writer_point_rule AS r ON l.rule_id = r.id
-		LEFT JOIN writer_user AS u ON l.user_id = u.id 
+		select wpl.id, wpr.rule_name,wpl.point,wpl.gmt_create,wp.total
+		from writer_point_log  wpl 
+		LEFT JOIN writer_point_rule  wpr ON wpl.rule_id=wpr.id
+		LEFT JOIN writer_user  wu ON wpl.user_id=wu.id 
+		LEFT JOIN writer_point  wp ON wp.user_id=wu.id
 		where 1= 1 
 		<if test="userId != null and userId != ''">
-			and l.user_id = #{userId} 
+			and wu.id = #{userId} 
 		</if>
 		<if test="condition == 0">
-			   ORDER BY l.gmt_create DESC    
+			   ORDER BY wpl.gmt_create DESC    
 		</if>
 		<if test="condition == 1">
-			 and l.gmt_create>DATE_SUB(CURDATE(), INTERVAL 1 WEEK)         
+			 and wpl.gmt_create>DATE_SUB(CURDATE(), INTERVAL 1 WEEK)         
 		</if>
 		<if test="condition == 2">
-			 and l.gmt_create>DATE_SUB(CURDATE(), INTERVAL 3 MONTH)         
+			 and wpl.gmt_create>DATE_SUB(CURDATE(), INTERVAL 3 MONTH)         
 		</if>
 		<if test="condition == 3">
-			 and l.gmt_create>DATE_SUB(CURDATE(), INTERVAL 1 YEAR)         
+			 and wpl.gmt_create>DATE_SUB(CURDATE(), INTERVAL 1 YEAR)         
 		</if>
 	   
 	</select>

@@ -60,11 +60,11 @@ function getData(offset, size) {
 					var $td = $("#messageTable").find('td');
 					/* 使用for循环模拟SQL里的limit(offset,size) */
 					for ( var i = offset; i < (offset + size); i++) {
-						if(data[i].point>0){
+						/*if(data[i].point>0){
 							$(".col").addClass("red");
 						}else{
 							$(".col").addClass("green");
-						}
+						}*/
 						result += "<tr><td   >"
 								+ (data[i].rule_name ? data[i].rule_name
 										: '--') + "</td><td  class='col' style='font-size: 18px;'>"
