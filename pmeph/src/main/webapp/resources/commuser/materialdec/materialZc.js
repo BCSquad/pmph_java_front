@@ -237,7 +237,6 @@ function chooseModel(data){
 	}
 	//主编学术专著情况
 	if(data.is_monograph_used == "1"){
-		alert(1);
 		$("#zbxszz").css("display","block");
 	}
 	//主编学术专著情况必填
@@ -337,10 +336,10 @@ function only(ele,arr){
 					"</select>"+
 					"<div style='float: left;margin-left: 30px;' class='ts_radio'>"+
 						"<table style='width: 280px;'><tr>"+
-							"<td><input type='radio' name='zw_"+str+"' checked='checked' value='1'/>主编</td>"+
+							"<td><input type='radio' name='zw_"+str+"' checked='checked' value='4'/>主编</td>"+
 							"<td><input type='radio' name='zw_"+str+"' value='2'/>副主编</td>"+
-							"<td><input type='radio' name='zw_"+str+"' value='3'/>编委</td>"+
-							"<td><input type='radio' name='zw_"+str+"' value='4'/>数字编委</td>"+
+							"<td><input type='radio' name='zw_"+str+"' value='1'/>编委</td>"+
+							"<td><input type='radio' name='zw_"+str+"' value='8'/>数字编委</td>"+
 						"</tr></table>"+
 						"<input type='hidden' name='preset_position' value='zw_"+str+"'>"+
 					"</div>"+
