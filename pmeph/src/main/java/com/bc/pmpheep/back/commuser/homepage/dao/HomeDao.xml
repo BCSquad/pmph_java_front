@@ -23,8 +23,9 @@
 	        
 	    		and (
 	    		<if test="id != null and id != '' ">
-	    			(wu.id=#{id} and m.is_public = 0)or m.is_public = 1 or 
+	    			(wu.id=#{id} and m.is_public = 0)or 
 	    		</if>
+	    		m.is_public = 1 or 
 	    		cc.is_material_entry = 0 )
 	group by cc.id
 	ORDER BY

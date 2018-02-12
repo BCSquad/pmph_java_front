@@ -51,10 +51,10 @@
 		/*$("#select_textbook").find("li").bind("click",function(){
 			window.open(contextpath+"chooseEditor/toPage.action?textBookId="+$(this).attr("data-value"));
 		});*/
-	  	$("#select_textbook").val("-1");
-		$("#select_textbook").change(function(){
-			window.open(contextpath+"chooseEditor/toPage.action?textBookId="+$("#select_textbook").val());
-			$("#select_textbook").val("-1");
+	  	$(".select_textbook").val("-1");
+		$(".select_textbook").change(function(){
+			window.open(contextpath+"chooseEditor/toPage.action?textBookId="+$(this).val());
+			$(".select_textbook").val("-1");
 		});
 
 });
