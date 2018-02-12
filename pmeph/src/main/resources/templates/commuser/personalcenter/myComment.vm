@@ -66,12 +66,12 @@
         <div class="bookC_right">
             <div class="bookC_right_title" style="cursor: pointer;"  onclick="cbook('$!{c.book_id}')">$!{c.bookname}</div>
             <div class="bookC_right_name">$!{c.author} &nbsp;&nbsp;/&nbsp;&nbsp; $!{c.publish_date}</div>
-            #foreach($o in $!{c.commentList})
             
+            #foreach($o in $!{c.commentList})
            <div id="container">   
-           <div id="wrap" >$!{o.content}</div>
-            <div id="read-more"></div>
-	           <div class="bookC_right_a">
+           		<div id="wrap" >$!{o.content}</div>
+            	<div id="read-more"></div>
+	           	<div class="bookC_right_a">
 	                    <div class="time-a">$!{o.gmt_update}</div> 
 	                    #if($!{selfLog}==true && $!{o.is_auth}==false )
 	                    	<a class="link_a"  onclick="showup('$!{o.id}','$!{c.book_id}','$!{o.is_long}')">修改</a>
@@ -81,8 +81,7 @@
 	                    #end
 	            </div> 
 		    </div>
-		   
-			#end
+			#end  
             
         </div>
         <div style="clear: both;"></div>

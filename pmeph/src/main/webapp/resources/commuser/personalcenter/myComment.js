@@ -22,7 +22,7 @@ $(function(){
 
 //评论展开收起样式
 $(function() {  
-    var slideHeight = 50; // px 定义折叠的最小高度  
+    var slideHeight = 40; // px 定义折叠的最小高度  
     var defHeight = $('#wrap').height();  
     if(defHeight >= slideHeight) {  
         $('#wrap').css('height', slideHeight + 'px');  

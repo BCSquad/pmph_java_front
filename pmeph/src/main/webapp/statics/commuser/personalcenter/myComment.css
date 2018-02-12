@@ -1361,7 +1361,7 @@
     border: 1px solid #3bb2d0;
     background-color: #F6F6F6;
     width: 740px;
-    margin-bottom: 5px;  
+    margin-bottom: 4px;  
 }  
   
 #wrap {  
@@ -1369,7 +1369,7 @@
     overflow: hidden;
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 10px;  
+    font-size: 14px;
 }  
   
 #read-more {  
