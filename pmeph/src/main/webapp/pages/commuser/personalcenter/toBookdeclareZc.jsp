@@ -45,13 +45,13 @@
 						</td>
 					</tr>
 					<tr>
-						<td width="140px"><span class="btbs">*</span><span>选题名称：</span></td>
+						<td width="140px"><span class="btbs">*</span><span>书名：</span></td>
 						<td width="460px">
-							<input class="cg_input" name="bookname" id="bookname" placeholder="选题名称" value="${topicMap.bookname}" maxlength="100"/>
+							<input class="cg_input" name="bookname" id="bookname" placeholder="书名" value="${topicMap.bookname}" maxlength="100"/>
 							<input type="hidden" name="user_id" value="${topicMap.user_id}"/>
 							<input type="hidden" name="topic_id" value="${topicMap.id}"/>
 						</td>
-						<td width="100px"><span class="btbs">*</span><span>读者对象：</span></td>
+						<td width="100px"><span>读者对象：</span></td>
 						<td width="300px">
 							<select name="reader" id="dzdx" class="dzdx">
 								<option value="0" ${topicMap.reader=='0'?'checked':''}>医务工作者</option>
@@ -61,7 +61,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span class="btbs">*</span><span>预计交稿时间：</span></td>
+						<td><span>预计交稿时间：</span></td>
 						<td>
 							<input class="cg_input" name="deadline" id="deadline" calendar format="'yyyy-mm-dd'" value="${topicMap.deadline}" />
 						</td>
@@ -78,13 +78,13 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span class="btbs">*</span><span>预估字数：</span></td>
+						<td><span>预估字数：</span></td>
 						<td>
 							<input class="cg_input" name="word_number" id="word_number" value="${topicMap.word_number}" placeholder="单位千字"  
 								onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
 							  maxlength="10"/>
 						</td>
-						<td><span class="btbs">*</span><span>预估图数：</span></td>
+						<td><span>预估图数：</span></td>
 						<td>
 							<input class="cg_input" name="picture_number" id="picture_number" value="${topicMap.picture_number}"  
 							onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
@@ -92,7 +92,7 @@
 						</td>
 					</tr>
 						<tr>
-						<td><span class="btbs">*</span><span>学科及专业：</span></td>
+						<td><span>学科及专业：</span></td>
 						<td>
 							<input class="cg_input" name="subject" id="subject" placeholder="学科及专业" value="${topicMap.subject}" />
 						</td>

@@ -86,6 +86,33 @@
 					<div class="scys" id="scjxdg_1"><span>上传文件</span></div>
 				</div>
 			</div>
+			 <%-- <div class="item" id="xz1">
+				<span style="float: left;">图书：</span>
+				<select id="edu1" name="textbook_id" class="st book" data-valid="isNonEmpty" data-error="书籍选择不能为空" style="float: left;">
+				    	${bookSelects}
+				</select>
+				<div style="float: left;margin-left: 30px;" class="ts_radio">
+					<table style="width: 280px;">
+						<tr>
+							<td>
+								<input type="checkbox" id="tsxzq" name="tsxzq" value="4"/>主编
+								<input type="checkbox" id="tsxzq" name="tsxzq" value="2" checked="checked"/>副主编
+								<input type="checkbox" id="tsxzq" name="tsxzq" value="1"/>编委
+								<input type="checkbox" id="tsxzq" name="tsxzq" value="8"/>数字编委
+							</td>
+						</tr>
+					</table>
+					<!-- 用于遍历radio中的值 -->
+					<input type="hidden" name="preset_position" value="zw_1">
+				</div>
+				<div style="float: left;margin-left: 30px;">
+					<span style="float: left;">上传教学大纲：</span>
+					<div id="fileNameDiv_1" class="fileNameDiv"></div>
+					<input type="hidden" name="syllabus_id" id="syllabus_id_1"/>
+					<input type="hidden" name="syllabus_name" id="syllabus_name_1"/>
+					<div class="scys" id="scjxdg_1"><span>上传文件</span></div>
+				</div>
+			</div>  --%>
 		</div> 
 		<!-- 专家信息-->
 		 <div class="sbxq_item1">
