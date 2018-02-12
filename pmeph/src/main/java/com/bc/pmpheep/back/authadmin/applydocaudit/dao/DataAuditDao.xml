@@ -33,7 +33,7 @@
 		when d.offline_progress=2  then '已收到' 	END)	as 	offlineprogress,
 		group_concat(concat(t.textbook_name,'-',(case  
 		when t.is_published=0  then '审核中' 
-		when pp.chosen_position=0 OR t.is_published is NULL  then '遴选结束' 
+		when pp.chosen_position=0 OR  pp.chosen_position IS NULL  then '遴选结束' 
 		when pp.chosen_position = 4 then '主编' 																															
 		when pp.chosen_position = 2 then '副主编' 
 		when pp.chosen_position = 1 then  '编委'
@@ -131,7 +131,7 @@
 		when d.offline_progress=2  then '已收到' 	END)	as 	offlineprogress,
 		group_concat(concat(t.textbook_name,'-',(case  
 		when t.is_published=0  then '审核中' 
-		when pp.chosen_position=0 OR t.is_published is NULL  then '遴选结束' 
+		when pp.chosen_position=0 OR pp.chosen_position IS NULL   then '遴选结束' 
 		when pp.chosen_position = 4 then '主编' 																															
 		when pp.chosen_position = 2 then '副主编' 
 		when pp.chosen_position = 1 then  '编委'

@@ -5,12 +5,12 @@
 	<tr>
 	    <td>$teacherauthNum</td>
 	   	<td class="font_name" target="_blank" onclick="toName($!{material_id},$!{c.did})">$!{c.drealname}</td>
-		<td>$!c.dposition</td>
-		<td>$!c.dtitle</td>
-		<td>$!c.bpp</td>
-		<td>$!c.onlineprogress</td>
-		<td>$!c.offlineprogress</td>
-		<td>$!c.cp</td>
+		<td height="38" title="$!{c.dposition}">$!c.dposition</td>
+		<td height="38" title="$!{c.dtitle}">$!c.dtitle</td>
+		<td height="38" title="$!{c.bpp}">$!c.bpp</td>
+		<td height="38" title="$!{c.onlineprogress}">$!c.onlineprogress</td>
+		<td height="38" title="$!{c.offlineprogress}">$!c.offlineprogress</td>
+		<td  height="38" title="$!{c.cp}">$!c.cp</td>
 	</tr>	
 	
 	#set($teacherauthNum = $teacherauthNum + 1)
