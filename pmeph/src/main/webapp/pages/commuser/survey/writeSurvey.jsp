@@ -31,7 +31,7 @@
 					</div>
 					<div class="bigContent">
 						<div class="tipDiv">
-							<span class="tipFont">感谢参与，希望参与者根据实际情况认真填写！</span>
+							<span class="tipFont">${mapSurvey.intro}</span>
 						</div>
 						<form id="contentForm">
 						<div class="questions">

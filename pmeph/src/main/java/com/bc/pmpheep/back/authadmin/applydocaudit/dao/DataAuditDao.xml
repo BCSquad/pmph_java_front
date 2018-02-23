@@ -21,7 +21,7 @@
 		when p.preset_position = 13 then '数字编委,主编,编委'
 		when p.preset_position = 14 then '数字编委,主编,副主编'
 		when p.preset_position = 15 then '数字编委,主编,编委,副主编'
-		else ''  end )) SEPARATOR '|') as bpp,
+		else ''  end )) SEPARATOR '\n') as bpp,
 		(case  when d.online_progress=0  then '未提交'  
 		when d.online_progress=1  then '已提交但是待审核' 
 		when d.online_progress=2  then '被申报单位退回' 
@@ -41,7 +41,7 @@
 		when pp.chosen_position = 12 then '主编,数字编委'
 		when pp.chosen_position = 9 then '数字编委,编委'
 		when pp.chosen_position = 10 then '数字编委,副主编'
-		else ''  end )) SEPARATOR '|') as cp
+		else ''  end )) SEPARATOR '\n') as cp
 		FROM
 		declaration AS d
 		LEFT JOIN dec_position AS p ON d.id = p.declaration_id
@@ -119,7 +119,7 @@
 		when p.preset_position = 13 then '数字编委,主编,编委'
 		when p.preset_position = 14 then '数字编委,主编,副主编'
 		when p.preset_position = 15 then '数字编委,主编,编委,副主编'
-		else ''  end )) SEPARATOR '|') as bpp,
+		else ''  end )) SEPARATOR '\n') as bpp,
 		(case  when d.online_progress=0  then '未提交'  
 		when d.online_progress=1  then '已提交但是待审核' 
 		when d.online_progress=2  then '被申报单位退回' 
@@ -139,7 +139,7 @@
 		when pp.chosen_position = 12 then '主编,数字编委'
 		when pp.chosen_position = 9 then '数字编委,编委'
 		when pp.chosen_position = 10 then '数字编委,副主编'
-		else ''  end )) SEPARATOR '|') as cp
+		else ''  end )) SEPARATOR '\n') as cp
 		FROM
 		declaration AS d
 		LEFT JOIN dec_position AS p ON d.id = p.declaration_id
