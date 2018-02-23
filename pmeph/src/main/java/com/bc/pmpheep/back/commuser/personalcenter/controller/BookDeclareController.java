@@ -210,7 +210,6 @@ public class BookDeclareController extends BaseController {
 			topicMap.put("is_staging", "1");
 			topicMap.put("auth_progress", "0");
 			topicMap.put("is_opts_handling", "0");
-			// topicMap.put("submit_time", "");
 		}
 		topicMap.put("topic_id", topic_id);
 		topicMap.put("bookname", request.getParameter("bookname"));
