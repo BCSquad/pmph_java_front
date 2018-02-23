@@ -591,7 +591,8 @@
 		LEFT JOIN `survey_template` c
 		ON b.`template_id` = c.id
 		LEFT JOIN survey d
-		ON d.`template_id` = c.`id`
+		ON d.`template_id` = c.`id` 
+		WHERE d.`id`=#{surveyId}
 	</select>
 
 	<!-- 查询问题对应的选项 -->
