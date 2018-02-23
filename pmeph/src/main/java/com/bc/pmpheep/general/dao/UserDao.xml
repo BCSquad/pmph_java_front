@@ -11,6 +11,14 @@
         </if>
     </select>
 
+
+    <select id="getPointRules" resultType="map">
+
+        select * from writer_point_rule where is_disabled = 0
+
+    </select>
+
+
     <insert id="insertUserLoginLog" parameterType="map">
         insert into sys_operation (user_id,user_name,user_real_name,operate_text,client_ip,business_type,device_type)
         values (#{id},#{username},#{realname},'作家用户登录',#{clientip},'作家用户','PC')
@@ -22,7 +30,7 @@
 FROM
 	sys_operation o
 WHERE
-	 o.user_id=#{id} and
+	 o.user_id=#{id} and o.user_name=#{username} and
 	o.operate_date >= CURDATE()
 UNION
 	SELECT
@@ -35,8 +43,8 @@ UNION
 				sys_operation t
 			WHERE
 				t.business_type = '作家用户'
-			AND t.operate_date &gt; date_add(CURDATE(), INTERVAL - 4 DAY)
-			AND t.operate_date &lt; CURDATE()  and t.user_id=#{id}
+			AND t.operate_date &gt; date_add(CURDATE(), INTERVAL - (select point-1 from writer_point_rule where rule_code='max_login_integral') DAY)
+			AND t.operate_date &lt; CURDATE()  and t.user_id=#{id} and t.user_name=#{username}
 			GROUP BY
 				datediff(CURDATE(), t.operate_date)
 			ORDER BY

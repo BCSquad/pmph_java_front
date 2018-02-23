@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,9 +33,15 @@ public class UserService {
 
         List<Map<String, Object>> list = userDao.getUserNeedAddScores(info);
 
+        List<Map<String, Object>> rulesList = userDao.getPointRules();
+        Map<String, Map<String, Object>> rules = new HashMap<String, Map<String, Object>>();
+        for (Map<String, Object> rule : rulesList) {
+            rules.put(MapUtils.getString(rule, "rule_code"), rule);
+        }
+
         int pp = MapUtils.getIntValue(list.get(0), "pp");
 
-        int score = 0;
+        int score = MapUtils.getIntValue(rules.get("logins"), "point", 0);
 
         if (pp > 0) {
             score = 0;
@@ -42,7 +49,7 @@ public class UserService {
             if (list.size() >= 2) {
                 for (int i = 1; i < list.size(); i++) {
                     if (MapUtils.getIntValue(list.get(i), "pp") == i) {
-                        score += 1;
+                        score += MapUtils.getIntValue(rules.get("login"), "point", 0);
                     } else {
                         break;
                     }

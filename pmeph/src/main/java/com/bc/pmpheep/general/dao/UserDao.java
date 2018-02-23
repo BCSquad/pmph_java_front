@@ -13,6 +13,8 @@ public interface UserDao {
 
     public int insertUserLoginLog(Map<String, Object> info);
 
+    public List<Map<String, Object>> getPointRules();
+
     public List<Map<String, Object>> getUserNeedAddScores(Map<String, Object> info);
 
     public int insertUserScore(Map<String, Object> info);
