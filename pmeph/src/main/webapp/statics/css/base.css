@@ -335,13 +335,18 @@ body {
 
 .tail .about {
     margin: 0 auto;
-    width: 400px;
-    height: 50px;
+    width: 1000px;
+    height: 40px;
 }
 
 .tail .about .item {
     float: left;
-    width: 99px;
+    display: inline-block;
+    /*width: 99px;*/
+    padding: 0 10px;
+    color: #999999;
+    margin: auto;
+    text-decoration:none;
     text-align: center;
     border-left: 1px solid #9A9691;
 }
