@@ -142,7 +142,7 @@ table tbody tr:nth-child(even){
 }
 
 td{
-	white-space:nowrap;
+	white-space:pre-line;
 	overflow:hidden;
 	text-overflow:ellipsis;
 	width: 50%;
@@ -163,7 +163,6 @@ td{
 
 .pg_right{
     float: right;
-
     margin-right: 15px;
 }
 

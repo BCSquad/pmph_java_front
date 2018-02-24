@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.personalcenter.service.BookDeclareService;
+import com.bc.pmpheep.back.util.ArrayUtil;
 import com.bc.pmpheep.back.util.StringUtil;
 import com.bc.pmpheep.general.controller.BaseController;
 
@@ -86,7 +87,7 @@ public class BookDeclareController extends BaseController {
 			}
 			// 获取申报信息
 			Map<String, Object> topicMap = new HashMap<String, Object>();
-			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
 			String currentDate = df.format(new Date());
 			if (stype.equals("1")) { // 表示提交
 				topicMap.put("is_staging", "0");
@@ -194,11 +195,11 @@ public class BookDeclareController extends BaseController {
 	public String doBookdeclareZc(HttpServletRequest request, HttpServletResponse response) {
 		String topic_id = request.getParameter("topic_id"); // 主键id
 		String stype = request.getParameter("stype"); // 申报信息存储方式
-		
+
 		// 获取申报信息
 		Map<String, Object> topicMap = new HashMap<String, Object>();
 		String msg = "";
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
 		String currentDate = df.format(new Date());
 		if (stype.equals("1")) { // 表示提交
 			topicMap.put("is_staging", "0");
@@ -209,7 +210,6 @@ public class BookDeclareController extends BaseController {
 			topicMap.put("is_staging", "1");
 			topicMap.put("auth_progress", "0");
 			topicMap.put("is_opts_handling", "0");
-			//topicMap.put("submit_time", "");
 		}
 		topicMap.put("topic_id", topic_id);
 		topicMap.put("bookname", request.getParameter("bookname"));
@@ -217,8 +217,8 @@ public class BookDeclareController extends BaseController {
 		topicMap.put("user_id", request.getParameter("user_id"));
 		topicMap.put("deadline", request.getParameter("deadline"));
 		topicMap.put("source", request.getParameter("source"));
-		//topicMap.put("word_number", word_number);
-		//topicMap.put("picture_number", picture_number);
+		// topicMap.put("word_number", word_number);
+		// topicMap.put("picture_number", picture_number);
 		topicMap.put("word_number",
 				"".equals(request.getParameter("word_number")) ? null : request.getParameter("word_number"));
 		topicMap.put("picture_number",
@@ -228,8 +228,7 @@ public class BookDeclareController extends BaseController {
 		topicMap.put("rank", request.getParameter("rank"));
 		topicMap.put("type", request.getParameter("type"));
 		topicMap.put("bank_account_id", request.getParameter("bank_account_id"));
-		topicMap.put("purchase",
-				"".equals(request.getParameter("purchase")) ? null : request.getParameter("purchase"));
+		topicMap.put("purchase", "".equals(request.getParameter("purchase")) ? null : request.getParameter("purchase"));
 		topicMap.put("sponsorship",
 				"".equals(request.getParameter("sponsorship")) ? null : request.getParameter("sponsorship"));
 		topicMap.put("original_bookname", request.getParameter("original_bookname"));
@@ -259,17 +258,19 @@ public class BookDeclareController extends BaseController {
 			String[] prices = request.getParameterValues("write_price");
 			String[] positions = request.getParameterValues("write_position");
 			String[] workplaces = request.getParameterValues("workplace");
-			for (int i = 0; i < realnames.length; i++) { // 遍历数组
-				if (!realnames[i].equals("")) {
-					Map<String, Object> writeMap = new HashMap<String, Object>();
-					writeMap.put("topic_id", topic_id);
-					writeMap.put("realname", realnames[i]);
-					writeMap.put("sex", sexs[i]);
-					writeMap.put("price", prices[i]);
-					writeMap.put("position", positions[i]);
-					writeMap.put("workplace", workplaces[i]);
-					this.bdecService.insertTopicWriter(writeMap);
-					msg = "OK";
+			if (ArrayUtil.isNotEmpty(realnames)) {
+				for (int i = 0; i < realnames.length; i++) { // 遍历数组
+					if (!realnames[i].equals("")) {
+						Map<String, Object> writeMap = new HashMap<String, Object>();
+						writeMap.put("topic_id", topic_id);
+						writeMap.put("realname", realnames[i]);
+						writeMap.put("sex", sexs[i]);
+						writeMap.put("price", prices[i]);
+						writeMap.put("position", positions[i]);
+						writeMap.put("workplace", workplaces[i]);
+						this.bdecService.insertTopicWriter(writeMap);
+						msg = "OK";
+					}
 				}
 			}
 			// 银行信息更改

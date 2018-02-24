@@ -10,14 +10,28 @@
 <div class="tail">
     <div style="height: 60px;width: 100%;"></div>
     <div class="about">
-        <div class="item" style="border-left:0px">关于平台</div>
-        <div class="item">联系我们</div>
-        <div class="item">投诉建议</div>
-        <div class="item">帮助中心</div>
+        <a class="item" style="border-left:0px" href="http://www.nhfpc.gov.cn/">中华人民共和国国家卫生和计划生育委员会</a>
+        <a class="item" href="http://www.nmec.org.cn/">国家医学考试网</a>
+        <a class="item" href="http://www.21wecan.com/">中国卫生人才网</a>
+        <a class="item" href="http://www.chinabookinternational.org/">中国图书对外推广网</a>
+        <a class="item" href="http://www.ipmph.com/journals-electronic">电子期刊</a>
+        <a class="item" href="http://www.ipmph.com/">人卫智网</a>
+    </div>
+    <div class="about">
+        <a class="item" style="border-left:0px" href="http://www.ipmph.com/exam">人卫智网考试</a>
+        <a class="item" href="http://lib.pmph.com/">人卫智网数据库</a>
+        <a class="item" href="http://www.ipmph.com/edu">人卫智网教育</a>
+        <a class="item" href="">全国高等医药教材建设研究会·人民卫生出版社专家咨询委员会</a>
+        <a class="item" href="">人卫医学网健康</a>
+    </div>
+    <div class="about">
+        <a class="item" style="border-left:0px" href="">人卫社美国分公司</a>
+        <a class="item" href="">人卫酒店</a>
+        <a class="item" href="">中国学生健康报</a>
+        <a class="item" href="">世界中医药学会联合会出版编辑专业委员会</a>
     </div>
     <div class="copyright">
-        北京创新乐知信息技术有限公司 版权所有|江苏知之为计算机有限公司|江苏乐知网络技术有限公司
-        京 ICP 证 09002463 号
+        京公网安备 11010502031111号 备案号：京ICP备05067302号 ©2007-2014 All Rights Reserved 版权所有 人民卫生出版社有限公司
     </div>
     <div class="copyright">
         基建工程监督电话：59787010 基建工程监督信箱：jjjd@pmph.com
