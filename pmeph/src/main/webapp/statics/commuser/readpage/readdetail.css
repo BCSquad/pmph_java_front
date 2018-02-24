@@ -646,6 +646,13 @@
     overflow: hidden;
 }
 
+.item_content img{
+	max-width: 100%;
+}
+.item_content p{
+	word-break: break-all;
+}
+
 .longcom_title{
 	width: 890px;
 	font-family: MicrosoftYaHei;

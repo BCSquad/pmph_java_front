@@ -197,6 +197,12 @@ public interface PersonalService {
 	 */
 	public Map<String, Object> queryOurFriendShip(String userId,String logUserId);
 
+	/**
+	 * 逻辑删除动态
+	 * @param writerUserTrendst
+	 */
+	void deleteUserTrendst(WriterUserTrendst writerUserTrendst);
+
 
 	
 	

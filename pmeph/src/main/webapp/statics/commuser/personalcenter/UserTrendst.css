@@ -194,6 +194,10 @@
 	margin-top: 1px;
 }
 
+.sub_title p{
+	display: inline;
+}
+
 .tag_new.article_new{
 	margin-top: 1.5px;
 	padding-left: 3px;

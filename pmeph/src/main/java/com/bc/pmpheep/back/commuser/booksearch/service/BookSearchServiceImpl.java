@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.commuser.booksearch.dao.BookSearchDao;
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
+import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.controller.bean.ResponseBean;
 /**
@@ -20,6 +23,10 @@ public class BookSearchServiceImpl implements BookSearchService {
 
 	@Autowired
 	BookSearchDao bookDao;
+	
+	@Autowired
+    @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
+    private PersonalService personalService;
 	
 	@Override
 	public List<Map<String, Object>> queryBookList(PageParameter<Map<String, Object>> pageParameter) {
@@ -47,6 +54,10 @@ public class BookSearchServiceImpl implements BookSearchService {
 				Integer like_count =bookDao.UserLikeTheBook(paraMap);
 				bookDao.increaseOneLike(bookId);
 				resultMap.put("switchResult", "active");
+				
+				WriterUserTrendst wut = new WriterUserTrendst(uid, 7, bookId);
+				personalService.saveUserTrendst(wut);
+				
 			}else{ //有删除 说明原为赞状态 现取消赞 按钮应切换为非激活状态
 				resultMap.put("switchResult", "non-active");
 				bookDao.decreaseOneLike(bookId);

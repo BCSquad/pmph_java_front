@@ -182,6 +182,7 @@ public class ChooseEditorController extends BaseController {
 		paraMap.put("queryName", queryName);
 		paraMap.put("queryOrg", queryOrg);
 		paraMap.put("logUserId", logUserId);
+		paraMap.put("isFirstEditorLogIn", isFirstEditorLogIn);
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<Map<String,Object>>(pageNum,pageSize);
 		pageParameter.setParameter(paraMap);
 		
@@ -200,7 +201,8 @@ public class ChooseEditorController extends BaseController {
 		vm_map.put("isFirstEditorLogIn", isFirstEditorLogIn);
 		vm_map.put("is_digital_editor_optional", is_digital_editor_optional);
 		
-		//vm_map.put("contextpath", contextpath);
+		String contextpath = request.getContextPath()+"/";
+		vm_map.put("contextpath", contextpath);
 		String html ="";
 		String vm = "/authadmin/chooseeditor/chooseeditor.vm";
 		html = templateService.mergeTemplateIntoString(vm, vm_map);

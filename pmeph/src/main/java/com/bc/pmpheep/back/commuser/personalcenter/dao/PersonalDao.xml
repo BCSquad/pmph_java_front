@@ -741,7 +741,8 @@
 		
 		left join writer_user u on t.user_id = u.id
 		<where>
-			user_id = #{parameter.logUserId}
+			<!-- is_delete = 0
+			and --> user_id = #{parameter.logUserId}
 			and (${parameter.selfLog}   
 					or(
 							(t.type = 0 and t.is_public = 1)
@@ -751,6 +752,7 @@
 						or(t.type in (3,4,6,7) )
 					)
 				)
+			
 			
 		</where>
 		group by t.id
@@ -769,7 +771,8 @@
 		left join book_user_comment bc on t.book_comment_id = bc.id 
 		left join writer_user u on t.user_id = u.id
 		<where>
-			user_id = #{parameter.logUserId}
+			<!-- is_delete = 0
+			and  -->user_id = #{parameter.logUserId}
 			and (${parameter.selfLog}   
 					or(
 							(t.type = 0 and t.is_public = 1)
@@ -783,7 +786,21 @@
 		
 	</select>
 
-
+	<update id="deleteUserTrendst" parameterType="com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst">
+		update writer_user_trendst set is_delete = 1
+		<where>
+			user_id= #{user_id} 
+			and type = #{type}
+			<if test="cms_content_id != null and cms_content_id != '' ">
+				and cms_content_id = #{cms_content_id}
+			</if>
+			<if test="book_id != null and book_id != '' ">
+				and book_id = #{book_id}
+			</if><if test="book_comment_id != null and book_comment_id != '' ">
+				and book_comment_id = #{book_comment_id}
+			</if>
+		</where>
+	</update>
 
 	<!-- 产生一条动态 -->
 	<insert id="saveUserTrendst" parameterType="com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst">

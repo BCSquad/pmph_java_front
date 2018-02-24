@@ -8,9 +8,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.commuser.articlepage.dao.ArticleSearchDao;
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
+import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 
 @Service("com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService")
@@ -18,6 +21,10 @@ public class ArticleSearchServiceImpl implements ArticleSearchService {
 
 	@Autowired
 	private ArticleSearchDao articleSearchDao;
+	
+	@Autowired
+    @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
+    private PersonalService personalService;
 	
 	/**
 	 * 初始化文章页面
@@ -129,6 +136,8 @@ public class ArticleSearchServiceImpl implements ArticleSearchService {
 		// TODO Auto-generated method stub
 		String code="";
 		int count=articleSearchDao.insertPraise(content_id, writer_id);
+		WriterUserTrendst wut = new WriterUserTrendst(writer_id, 4, content_id);
+		personalService.saveUserTrendst(wut);
 		if(count>0){
 			 code="OK";
 		}

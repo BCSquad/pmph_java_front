@@ -304,6 +304,7 @@ public class ReadDetailController extends BaseController{
 		if(list.size()>0){
 			Map<String, Object> iMap=new HashMap<String, Object>();
 			iMap.put("id", list.get(0).get("id"));
+			iMap.put("writer_id", user.get("id"));
 			iMap.put("book_id", id);
 			iMap.put("likes", likes-1);
 			iMap.put("flag", "del");

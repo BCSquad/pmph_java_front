@@ -189,5 +189,12 @@ public interface PersonalDao {
 	 */
 	public List<Map<String, Object>> queryOurFriendShip(@Param("userId")String userId,@Param("logUserId")String logUserId);
 	
+	/**
+	 * 删除旧动态 逻辑删除
+	 * @param writerUserTrendst
+	 * @return
+	 */
+	public int deleteUserTrendst(WriterUserTrendst writerUserTrendst);
+	
 	
 }

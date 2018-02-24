@@ -157,7 +157,7 @@
 	    );
 	</insert>
 	<!-- 新增图书长评 -->
-	<insert id="insertlong" parameterType="java.util.Map">
+	<insert id="insertlong" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="table_trendst_id">
 	     insert into book_user_comment(
 	     book_id,
 	     writer_id,

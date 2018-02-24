@@ -9,7 +9,7 @@ package com.bc.pmpheep.back.commuser.personalcenter.bean;
 public class WriterUserTrendst {
 	private String id = null;
 	private String user_id = null;
-	private Integer is_public = 0;
+	private Integer is_public = 1;
 	private Integer type = null;
 	private String detail = null;
 	private String cms_content_id = null;
@@ -33,8 +33,16 @@ public class WriterUserTrendst {
 			this.cms_content_id = content_id;
 		}else if(type==5){ //content_id 为图书评论id
 			this.book_comment_id = content_id;
-		}else if(type>=6&&type<=7){ //content_id 为图书id
+		}else if(type==6|| type==7){ //content_id 为图书id
 			this.book_id = content_id;
+		}
+		else if(type==10){ //content_id 为图书id
+			this.book_id = content_id;
+			
+		}
+		
+		if (type > 7) {
+			this.is_public = 0;
 		}
 	}
 	
@@ -72,7 +80,17 @@ public class WriterUserTrendst {
 	 * @param img 1 笑脸 2 哭脸
 	 */
 	public void setDetail(String title,String content,int img) {
-		this.detail = "{\"title\":"+title+",\"content\":"+content+",\"img\":"+img+"}";
+		this.detail = "{\"title\":\""+title+"\",\"content\":\""+content+"\",\"img\":"+img+"}";
+	}
+	/**
+	 * json格式的set方法
+	 * @param title 动态标题
+	 * @param content 动态内容
+	 * @param img 1 笑脸 2 哭脸
+	 * @param page 页 line 行
+	 */
+	public void setDetail(String title,String content,int img,int page,int line) {
+		this.detail = "{\"title\":\""+title+"\",\"content\":{\"page\":"+page+",\"line\":"+line+",\"content\":\""+content+"\"},\"img\":"+img+"}";
 	}
 	public String getCms_content_id() {
 		return cms_content_id;
