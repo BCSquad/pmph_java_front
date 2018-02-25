@@ -43,7 +43,7 @@
 		left join material_org o on m.id = o.material_id and o.org_id = #{parameter.org_id}
 		<where>
 		m.is_published = 1
-		and ((m.is_public = '0' and o.org_id = #{parameter.org_id}) or (m.is_public = '1'))
+		and ((m.is_public ='0' and o.org_id = #{parameter.org_id}) or (m.is_public ='1'))
 		</where>
 		GROUP BY
 		m.id
