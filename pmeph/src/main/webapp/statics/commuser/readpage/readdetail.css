@@ -327,42 +327,41 @@
     line-height: 31px;
 }
 
-
 .video {
     width: 260px;
     height: 230px;
     float: left;
-	position:relative;
+    position: relative;
 }
 
-.video-name{
-	width: 260px;
-	height: 30px;
-	background-color: #F5F5F5;
-	border-radius:2px;
-	text-align:center;
-	font-family: MicrosoftYaHei-Bold;
-	font-size: 14px;
-	line-height: 30px;
-	color: #182d4c;
-	cursor: pointer;
-	margin-top: 5px;
+.video-name {
+    width: 260px;
+    height: 30px;
+    background-color: #F5F5F5;
+    border-radius: 2px;
+    text-align: center;
+    font-family: MicrosoftYaHei-Bold;
+    font-size: 14px;
+    line-height: 30px;
+    color: #182d4c;
+    cursor: pointer;
+    margin-top: 5px;
 }
 
-.video-a{
-	width: 260px;
-	height: 165px;
-	/* opacity:0.5; */
-	background-color: black;
-	position:absolute;
-	top:0px;
-	cursor: pointer;
+.video-a {
+    width: 260px;
+    height: 165px;
+    /* opacity:0.5; */
+    background-color: black;
+    position: absolute;
+    top: 0px;
+    cursor: pointer;
 }
 
-.img-a{
-	width: 260px;
-	height: 165px;
-	cursor: pointer;
+.img-a {
+    width: 260px;
+    height: 165px;
+    cursor: pointer;
 }
 
 .longcom {
@@ -410,7 +409,7 @@
     top: 30%;
     box-shadow: 0px 0px 5px #888888;
     border-radius: 5px;
-   z-index: 999;
+    z-index: 999;
 }
 
 .mistitle {
@@ -434,8 +433,8 @@
 
 .x {
     width: 14px;
-    height:14px;
-    background-image:url(../../image/close.png);
+    height: 14px;
+    background-image: url(../../image/close.png);
     float: right;
     margin-right: 10px;
     cursor: pointer;
@@ -455,9 +454,11 @@
     padding: 5px;
     margin-left: 10px;
 }
-.input>div>span{
-	display:block;
+
+.input > div > span {
+    display: block;
 }
+
 .apache {
     width: 100%;
     height: 27px;
@@ -646,19 +647,20 @@
     overflow: hidden;
 }
 
-.item_content img{
-	max-width: 100%;
-}
-.item_content p{
-	word-break: break-all;
+.item_content img {
+    max-width: 100%;
 }
 
-.longcom_title{
-	width: 890px;
-	font-family: MicrosoftYaHei;
-	font-size: 16px;
-	line-height: 45px;
-	color: #3377aa;
+.item_content p {
+    word-break: break-all;
+}
+
+.longcom_title {
+    width: 890px;
+    font-family: MicrosoftYaHei;
+    font-size: 16px;
+    line-height: 45px;
+    color: #3377aa;
 }
 
 .rightarea {
@@ -672,7 +674,7 @@
     float: left;
     margin-top: 26px;
     width: 278px;
-   /*  height: 495px; */
+    /*  height: 495px; */
     border-top: 1px solid #EFEFEF;
 }
 
@@ -849,8 +851,8 @@
     margin-top: 1px;
 }
 
-.mis_pic{  
-	background-image: url("../../image/css_sprites.png");
+.mis_pic {
+    background-image: url("../../image/css_sprites.png");
     background-position: -373px -203px;
     background-repeat: no-repeat;
     height: 22px;
@@ -860,8 +862,8 @@
     margin-left: 15px;
 }
 
-.play{
-	background-image: url("../../image/css_sprites.png");
+.play {
+    background-image: url("../../image/css_sprites.png");
     background-position: -220px -273px;
     background-repeat: no-repeat;
     height: 65px;
@@ -872,7 +874,7 @@
     cursor: pointer;
 }
 
-.upbutten{
+.upbutten {
     width: 70px;
     height: 24px;
     margin: 0px;
@@ -889,16 +891,15 @@
     position: relative;
 }
 
-.video-btn{
-	margin-top: 136px;
-	margin-left: 9px;
-	font-family: MicrosoftYaHei;
-	font-size: 12px;
-	color: #ffffff;
+.video-btn {
+    margin-top: -24px;
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    color: #ffffff;
 }
 
-.vid_pic{  
-	background-image: url("../../image/css_sprites.png");
+.vid_pic {
+    background-image: url("../../image/css_sprites.png");
     background-position: -373px -232px;
     background-repeat: no-repeat;
     height: 23px;
@@ -908,8 +909,8 @@
     margin-left: 10px;
 }
 
-.right_6a{
-	background-image: url("../../image/css_sprites.png");
+.right_6a {
+    background-image: url("../../image/css_sprites.png");
     background-position: -416px -310px;
     background-repeat: no-repeat;
     height: 22px;
@@ -1087,7 +1088,7 @@
     margin-top: 20px;
 }
 
-.pop-upload .button-area button.disable{
+.pop-upload .button-area button.disable {
     cursor: not-allowed;
     background: gray;
 }
@@ -1098,19 +1099,22 @@
     background-color: #70bcc3;
     border-radius: 2px;
     text-align: center;
-    color:white;
+    color: white;
     cursor: pointer;
     border: none;
     padding-bottom: 1px;
     margin: auto;
 }
-.pop-upload .button-area button.submit{
+
+.pop-upload .button-area button.submit {
     margin-right: 10px;
 }
+
 .input-error {
     border: 1px solid red;
 }
-.valid_message{
+
+.valid_message {
     color: red;
     margin-left: 80px;
 }

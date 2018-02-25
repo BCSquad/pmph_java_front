@@ -158,7 +158,11 @@ public class ArticleDetailController extends BaseController {
 		PageResult<Map<String, Object>> listCom=articleDetailService.queryComment(pageParameter);
 		// mongoDB查询评论
 		for (Map<String, Object> pmap : listCom.getRows()) {
-			String comment = contentService.get((String) pmap.get("mid")).getContent();
+			Content content=contentService.get((String) pmap.get("mid"));
+			String comment="(内容为空)";
+			if(content!=null){
+				comment =content.getContent();	
+			}
 			pmap.put("mid", comment);
 		}
 		

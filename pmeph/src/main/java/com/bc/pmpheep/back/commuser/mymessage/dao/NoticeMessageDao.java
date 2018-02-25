@@ -69,4 +69,10 @@ public interface NoticeMessageDao {
 	 * @return
 	 */
 	List<Map<String, Object>>queryCMSAttach(Map<String, Object> paraMap);
+	
+	/**系统消息标题弹框回显
+	 * @param paraMap
+	 * @return
+	 */
+	Map<String, Object> queryTitleMessage(Map<String, Object> paraMap);
   }

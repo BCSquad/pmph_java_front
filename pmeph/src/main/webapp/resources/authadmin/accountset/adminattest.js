@@ -35,12 +35,12 @@ $(function () {
     
     $("#fileNameDiv").hide();
     $("#uploadFile").uploadFile({
-    	accept:	"image/jpeg,image/gif,image/png",
+    	accept:	"application/msword",
     	valid:function(file){
-    		if(file.type=="image/jpeg"||file.type=="image/gif"||file.type=="image/png"){
+    		if(file.type=="application/msword"){
     			return true;
     		}else{
-    			message.error("请选择jpg、gif、jpge、png格式的文件");
+    			message.error("请选择doc格式的文件");
     			return false;
     		}
     		
@@ -109,6 +109,7 @@ function submit(){
 	        success:function(code){
 	            if (code=="success"){
 	                message.success("提交成功");
+					window.location.reload();
 	            }else{
 	            	message.error("提交失败");
 	            }

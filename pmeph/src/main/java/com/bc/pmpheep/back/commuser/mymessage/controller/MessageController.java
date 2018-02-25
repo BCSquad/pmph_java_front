@@ -195,16 +195,15 @@ public class MessageController extends BaseController{
 			/*if(map1.get("msgType").toString().equals("1")||map1.get("msgType").toString().equals("0")){
 				//mongoDB查询通知内容
 				Message message = mssageService.get(map1.get("fId").toString());
-				//Content content = contentService.get(map1.get("fId").toString());
 				if(null!=message){
 					String str=message.getContent();
 					String regEx_html="<[^>]+>"; //定义HTML标签的正则表达式 
 					Pattern p_html=Pattern.compile(regEx_html,Pattern.CASE_INSENSITIVE); 
 			        Matcher m_html=p_html.matcher(str); 
 			        str=m_html.replaceAll(""); //过滤html标签 
-					map1.put("title",str);
+					map1.put("tcontent",str);
 				}else{
-					map1.put("title","内容空!");
+					map1.put("tcontent","内容空!");
 				}
 				
 			}*/
@@ -427,4 +426,33 @@ public class MessageController extends BaseController{
 		mv.setViewName("commuser/message/noticeMessageDetail");
 		return mv;
 	}
+	
+	
+	
+	//系统消息标题弹框回显
+			@RequestMapping(value="/queryTitleMessage")
+			@ResponseBody
+			public Map<String,Object> queryTitleMessage(HttpServletRequest  request){
+				String uid=request.getParameter("uid");
+				Map<String,Object> paraMap = new HashMap<String,Object>();
+					paraMap.put("id", uid);
+					Map<String,Object> map1 = noticeMessageService.queryTitleMessage(paraMap);
+					if(map1.get("msg_type").toString().equals("1")||map1.get("msg_type").toString().equals("0")){
+						//mongoDB查询通知内容
+						Message message = mssageService.get(map1.get("msg_id").toString());
+						if(null!=message){
+							String str=message.getContent();
+							String regEx_html="<[^>]+>"; //定义HTML标签的正则表达式 
+							Pattern p_html=Pattern.compile(regEx_html,Pattern.CASE_INSENSITIVE); 
+					        Matcher m_html=p_html.matcher(str); 
+					        str=m_html.replaceAll(""); //过滤html标签 
+							map1.put("tContent",str);
+						}else{
+							map1.put("tContent","内容空!");
+						}
+						return map1;
+					}
+					return map1;
+			}
+
 }

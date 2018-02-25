@@ -67,9 +67,19 @@ function showup(id,book_id,is_long) {
 	if(is_long=='true'){
 		window.location.href=contextpath + 'readdetail/todetail.action?state=write&id='+book_id;
 	}else if(is_long=='false'){
-		 $("#comm_id").val(id);
-	        	 $("#bookmistake").show();
+		$("#comm_id").val(id);
+		$.ajax({
+	        type: 'post',
+	        url: contextpath + 'personalhomepage/shortComment.action?uid='+id,
+	        async: false,
+	        dataType: 'json',
+	        success: function (json) {
+	            	$("#content").html(json.content);
+	                $("#bookmistake").show();
+	          
 	        }
+	    });
+	}
 
 }
 

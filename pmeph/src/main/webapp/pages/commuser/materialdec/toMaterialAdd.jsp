@@ -46,7 +46,7 @@
 					<c:if test="${materialMap.is_multi_books =='1'}">
 					可以选择多本书籍</c:if>
 					<c:if test="${materialMap.is_multi_books !='1'}">
-					，只能选择一本书籍</c:if>
+					只能选择一本书籍</c:if>
 					<c:if test="${materialMap.is_multi_position =='1'}">
 					，每本书籍可选多个职位</c:if>
 					<c:if test="${materialMap.is_multi_position !='1'}">
@@ -625,8 +625,8 @@
 					<thead>
 						<tr>
 							<td width="340px">教材名称</td>
-							<td width="120px">是否自费</td>
-							<td width="220px">出版单位</td>
+							<td width="140px">是否自费</td>
+							<td width="200px">出版单位</td>
 							<td width="150px">出版时间</td>
 							<td>备注</td>
 							<td width="78px">添加</td>
@@ -636,7 +636,7 @@
 						<tr>
 							<td><input class="cg_input" name="zb_monograph_name" id="zb_monograph_name" value="" style="width: 300px;" placeholder="教材名称" maxlength="16"/></td>
 							<td style="color: #333333;">
-								<table class="radio_tb" style="width: 100px;"><tr>
+								<table class="radio_tb" style="width: 140px;"><tr>
 									<td><input type="radio" name="is_self_paid_1" value="0" checked="checked"/>自费</td>
 									<td><input type="radio" name="is_self_paid_1" value="1" />公费</td>
 								</tr></table>
