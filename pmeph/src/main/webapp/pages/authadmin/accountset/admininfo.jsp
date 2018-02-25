@@ -187,8 +187,7 @@
 				                    <label class="require" >职称</label>
 				                    <div class="input-wrapper">
 				                    <input type="hidden" id="title-hidden" value="${admininfo.title}"> 
-				                    <select class="sxy-select-td" name="title" id="title" >
-				                    	<option value="" >-请选择-</option>
+				                    <select data-error="职称必选"   class="sxy-select-td" name="title" id="title"  title="请选择">
 				                        <option value="teacher1" >教授</option>
 				                        <option value="teacher2" >讲师</option>
 				                        <option value="teacher3" >副教授</option>

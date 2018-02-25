@@ -49,7 +49,7 @@
 					<c:if test="${materialMap.is_multi_books =='1'}">
 					可以选择多本书籍</c:if>
 					<c:if test="${materialMap.is_multi_books !='1'}">
-					，只能选择一本书籍</c:if>
+					只能选择一本书籍</c:if>
 					<c:if test="${materialMap.is_multi_position =='1'}">
 					，每本书籍可选多个职位</c:if>
 					<c:if test="${materialMap.is_multi_position !='1'}">
@@ -907,8 +907,8 @@
 					<thead>
 						<tr>
 							<td width="340px">教材名称</td>
-							<td width="120px">是否自费</td>
-							<td width="220px">出版单位</td>
+							<td width="140px">是否自费</td>
+							<td width="200px">出版单位</td>
 							<td width="150px">出版时间</td>
 							<td>备注</td>
 							<td width="78px">添加</td>
@@ -934,9 +934,9 @@
 							<tr id="zbxszz_${status.count}">
 								<td><input class="cg_input" name="zb_monograph_name" id="zb_monograph_name" value="${list.monograph_name}" style="width: 300px;" placeholder="教材名称" maxlength="16"/></td>
 								<td style="color: #333333;">
-									<table class="radio_tb" style="width: 100px;"><tr>
-										<td><input type="radio" name="is_self_paid_${status.count}" value="1" ${list.is_self_paid=='0'?'checked':'' }/>自费</td>
-										<td><input type="radio" name="is_self_paid_${status.count}" value="2"  ${list.is_self_paid=='1'?'checked':'' }/>公费</td>
+									<table class="radio_tb" style="width: 140px;"><tr>
+										<td><input type="radio" name="is_self_paid_${status.count}" value="0" ${list.is_self_paid=='0'?'checked':'' }/>自费</td>
+										<td><input type="radio" name="is_self_paid_${status.count}" value="1"  ${list.is_self_paid=='1'?'checked':'' }/>公费</td>
 									</tr></table>
 									<input type="hidden" name="is_self_paid" value="is_self_paid_${status.count}" />
 								</td>

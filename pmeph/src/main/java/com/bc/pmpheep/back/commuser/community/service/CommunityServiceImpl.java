@@ -39,7 +39,11 @@ public class CommunityServiceImpl implements CommunityService {
 		if(list!=null){
 			for (Map<String, Object> map : list) {
 				Content content = contentService.get(map.get("mid").toString());
-				map.put("content", removeHtml(content.getContent()));	
+				if(content!=null){
+					map.put("content", removeHtml(content.getContent()));
+				}else{
+					map.put("content", "(内容为空)");
+				}	
 			}
 		}
 		return list;

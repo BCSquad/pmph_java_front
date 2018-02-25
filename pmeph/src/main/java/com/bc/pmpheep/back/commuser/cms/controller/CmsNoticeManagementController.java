@@ -111,7 +111,11 @@ public class CmsNoticeManagementController extends BaseController {
 		if(cmsNoticeList!=null && cmsNoticeList.size()>0){
 			for (CmsNoticeList cmsNotice : cmsNoticeList) {
 				Content content = contentService.get(cmsNotice.getMid());
-				cmsNotice.setContentxt(removeHtml(content.getContent()));
+				if(content!=null){
+				 cmsNotice.setContentxt(removeHtml(content.getContent()));
+				}else{
+					 cmsNotice.setContentxt("(内容为空)");
+				}
 			}
 		}
 		return cmsNoticeList ;

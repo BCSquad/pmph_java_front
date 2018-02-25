@@ -70,7 +70,7 @@
     </script>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
-
+	
         <div class="messageList">
             <span id="selected"><b>通知</b></span>
             <span><a href="${ctx}/message/applyMessageList.action" class="unselected">申请</a></span>
@@ -83,6 +83,33 @@
                 </select>
             </span>
         </div>
+        
+        <!-- 系统消息标题悬浮框 -->
+        <div class="bookmistake" id="bookmistake">
+            <form id="bookmistakeform">
+                <div class="apache">
+                    <div class="mistitle">系统消息详情</div>
+                    <div class="x" onclick="hideup()"></div>
+                </div>
+                <div class="info">
+                    <label style="margin-left: 20px" class="labell">标题:<span id="titlec"></span></label>
+                    
+                </div>
+                <div class="info">
+                    <label style="margin-left: 20px" class="labell">发送人:<span id="sendc"></span></label>
+                </div>
+                <div class="info">
+                    <label style="margin-left: 20px" class="labell">发送时间:<span id="timec"></span></label>
+                </div>
+                
+                <div class="info">
+                    	<label style="margin-left: 20px" class="labell">内容:</label>
+                    <textarea class="misarea" id="tcontent" ></textarea>
+                </div>
+            </form>
+        </div>
+        
+        
         <div class="message">
             <table class="table" id="messageTable">
             <c:choose>
@@ -99,7 +126,7 @@
 		                </tr>
 		                <tr style="width: 30%">
 		                	  <c:if test="${message.msgType==0||message.msgType==1}">
-		                	    <td colspan="2" class="title">${message.title}</td>
+		                	    <td colspan="2" class="title" style="cursor: pointer;" onclick="showup('${message.id}')" >${message.title}</td>
 		                	  </c:if>
 		                	  <c:if test="${message.msgType==4}">
 		                	    <td colspan="2" class="title">《${message.title}》已开始申报,请您留意</td>

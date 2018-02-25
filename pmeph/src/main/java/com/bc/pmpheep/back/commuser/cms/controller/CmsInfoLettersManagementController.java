@@ -102,7 +102,11 @@ public class CmsInfoLettersManagementController extends BaseController{
 			    islike=articleCollectionDao.queryLikes(new BigInteger(cmsInfo.getId().toString()), writerId);
 			 }
 			 Content content=contentService.get(cmsInfo.getMid());
-			 map.put(cmsInfo.getTitle()+cmsInfo.getId(),removeHtml(content.getContent()));
+			 if(content!=null){
+				 map.put(cmsInfo.getTitle()+cmsInfo.getId(),removeHtml(content.getContent()));
+			 }else{
+				 map.put(cmsInfo.getTitle()+cmsInfo.getId(),"(内容为空)"); 
+			 }
 			 map.put("cms"+cmsInfo.getId().toString(), islike);
 			}
 		}

@@ -129,7 +129,7 @@
 		</if>
 		<!-- 系统消息 -->
 		<if test="condition==0">
-			select u.id,u.msg_id as fId,u.title,u.gmt_create as time,u.msg_type as msgType,o.avatar
+			select u.id,u.msg_id as fId,u.title,u.gmt_create as time,u.msg_type as msgType,o.avatar,o.realname
 			from user_message u
 			LEFT JOIN pmph_user o
 			ON o.id= u.sender_id
@@ -269,5 +269,13 @@
 	<!--查询公告的附件  -->
 	<select id="queryCMSAttach" parameterType="java.util.Map" resultType="java.util.Map">
 	    select * from  cms_extra ce left join  cms_content c on c.id=ce.content_id  where c.id=#{cmsId}
+	</select>
+	
+	    <!-- 系统消息标题弹框回显-->
+	<select id="queryTitleMessage" parameterType="java.util.Map" resultType="java.util.Map">
+			select u.id ,u.msg_id ,u.title,u.msg_type,o.realname,o.username,u.gmt_create
+			from user_message u
+			LEFT JOIN pmph_user o
+			ON o.id= u.sender_id  where u.id=#{id}
 	</select>
 </mapper>
