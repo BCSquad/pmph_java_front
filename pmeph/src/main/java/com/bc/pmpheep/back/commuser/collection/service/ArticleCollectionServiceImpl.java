@@ -65,12 +65,17 @@ public class ArticleCollectionServiceImpl implements ArticleCollectionService {
 				map.put("skip", "articledetail/toPage.action?wid="+map.get("cid"));
 			}
 			Content message=contentService.get((String) map.get("mid"));
-			List<String> imglist = getImgSrc(message.getContent());
+			if(message!=null){
+				List<String> imglist = getImgSrc(message.getContent());
 			    if(imglist!=null&&imglist.size()>0){
 			    	map.put("imgpath", imglist.get(0));
 			    }else{
 			    	map.put("imgpath", "statics/image/articon.png");
 			    }
+			}else{
+				map.put("imgpath", "statics/image/articon.png");
+			}
+			
 		 }
 		}
 		result.setTotal(articlecont);
