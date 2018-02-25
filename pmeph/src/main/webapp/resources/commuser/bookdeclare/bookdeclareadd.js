@@ -1,7 +1,8 @@
 //定义一个全局变量
 var jsonStr = "";
 jsonStr = "{\"id\":\"bookname\",\"content\":\"书名不能为空\"}," +
-	"{\"id\":\"account_number\",\"content\":\"银行账户不能为空\"},{\"id\":\"bank\",\"content\":\"开户银行不能为空\"},";
+"{\"id\":\"account_number\",\"content\":\"银行账户不能为空\"},{\"id\":\"bank\",\"content\":\"开户银行不能为空\"},"+
+"{\"id\":\"reason\",\"content\":\"选题理由不能为空\"},{\"id\":\"extra_score\",\"content\":\"出版内容不能为空\"},{\"id\":\"price\",\"content\":\"出版价值不能为空\"},";
 $(function () {
     $('.dzdx').selectlist({
         width: 308,
@@ -98,6 +99,7 @@ function buttAdd(type){
 			dataType:"json",
 		    success: function(msg) {
 			    if(msg=='OK'){
+			    	window.message.success("添加成功,正在跳转页面");
 			    	window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=wycs";
 			    }
 		    }

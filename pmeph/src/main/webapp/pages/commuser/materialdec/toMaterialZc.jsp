@@ -79,7 +79,7 @@
 									<c:if test="${materialMap.is_digital_editor_optional =='1'}">
 									<td><input type="checkbox" name="zw_1_${status.count}" value="8" ${list.pos_d=='1'?'checked':'' }/>数字编委</td>
 									</c:if>
-								</c:if>	
+								</c:if>
 								<c:if test="${materialMap.is_multi_position !='1'}">
 									<td><input type="radio" name="zw_1_${status.count}" value="4" ${list.preset_position=='4'?'checked':'' }/>主编</td>
 									<td><input type="radio" name="zw_1_${status.count}" value="2" ${list.preset_position=='2'?'checked':'' }/>副编委</td>
@@ -941,7 +941,9 @@
 									<input type="hidden" name="is_self_paid" value="is_self_paid_${status.count}" />
 								</td>
 								<td><input class="cg_input" name="zb_publisher" value="${list.publisher}" style="width: 180px;" placeholder="出版单位"  maxlength="16"/></td>
-								<td><input class="cg_input" name="zb_publish_date" value="${list.publish_date}" style="width: 120px;" calendar format="'yyyy-mm-dd'" placeholder="出版时间"/></td>
+								<td><input class="cg_input" name="zb_publish_date" id="zb_publish_date_${status.count}" value="${list.publish_date}" style="width: 120px;" 
+									onmouseout="toisNah('不能为空','b_publish_date_${status.count}')"
+								calendar format="'yyyy-mm-dd'" placeholder="出版时间"/></td>
 								<td><input class="cg_input" name="zb_note" value="${list.note}" style="width: 250px;" placeholder="备注"  maxlength="33"/></td>
 								<td><c:choose>
 									<c:when test="${status.count == 1}"> 
