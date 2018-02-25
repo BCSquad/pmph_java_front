@@ -131,6 +131,7 @@ public interface MaterialDetailService {
 	 * @return
 	 */
 	public List<Map<String,Object>> queryJcbx(Map<String,Object> map);
+	public List<Map<String,Object>> queryqtJcbx(Map<String,Object> map);
 	public int insertJcbx(Map<String,Object> map);
 	/**
 	 * 作家科研情况表

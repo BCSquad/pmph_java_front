@@ -44,13 +44,13 @@
 				<span id="tsxz_span1"></span>
 				<span class="tsxz_title">图书选择(
 					<c:if test="${materialMap.is_multi_books =='1'}">
-					可以选择多本书籍，</c:if>
+					可以选择多本书籍</c:if>
 					<c:if test="${materialMap.is_multi_books !='1'}">
-					只能选择一本书籍，</c:if>
+					，只能选择一本书籍</c:if>
 					<c:if test="${materialMap.is_multi_position =='1'}">
-					每本书籍可选多个职位，</c:if>
+					，每本书籍可选多个职位</c:if>
 					<c:if test="${materialMap.is_multi_position !='1'}">
-					每本书籍只能选择一个职位。
+					，每本书籍只能选择一个职位。
 					</c:if>
 					)
 				</span>
@@ -66,12 +66,22 @@
 				</select>
 				<div style="float: left;margin-left: 30px;" class="ts_radio">
 					<table style="width: 280px;">
-						<tr>
-							<td><input type="radio" name="zw_1" checked="checked" value="4"/>主编</td>
-							<td><input type="radio" name="zw_1" value="2"/>副主编</td>
-							<td><input type="radio" name="zw_1" value="1"/>编委</td>
-							<c:if test="${materialMap.is_digital_editor_optional =='1'}">
-								<td><input type="radio" name="zw_1" value="8"/>数字编委</td>
+					    <tr>
+							<c:if test="${materialMap.is_multi_position =='1'}">
+								<td><input type="checkbox" name="zw_1" checked="checked" value="4"/>主编</td>
+								<td><input type="checkbox" name="zw_1" value="2"/>副主编</td>
+								<td><input type="checkbox" name="zw_1" value="1"/>编委</td>
+								<c:if test="${materialMap.is_digital_editor_optional =='1'}">
+									<td><input type="checkbox" name="zw_1" value="8"/>数字编委</td>
+								</c:if>
+							</c:if>
+							<c:if test="${materialMap.is_multi_position !='1'}">
+									<td><input type="radio" name="zw_1" checked="checked" value="4"/>主编</td>
+									<td><input type="radio" name="zw_1" value="2"/>副主编</td>
+									<td><input type="radio" name="zw_1" value="1"/>编委</td>
+									<c:if test="${materialMap.is_digital_editor_optional =='1'}">
+										<td><input type="radio" name="zw_1" value="8"/>数字编委</td>
+									</c:if>
 							</c:if>
 						</tr>
 					</table>
@@ -86,33 +96,6 @@
 					<div class="scys" id="scjxdg_1"><span>上传文件</span></div>
 				</div>
 			</div>
-			 <%-- <div class="item" id="xz1">
-				<span style="float: left;">图书：</span>
-				<select id="edu1" name="textbook_id" class="st book" data-valid="isNonEmpty" data-error="书籍选择不能为空" style="float: left;">
-				    	${bookSelects}
-				</select>
-				<div style="float: left;margin-left: 30px;" class="ts_radio">
-					<table style="width: 280px;">
-						<tr>
-							<td>
-								<input type="checkbox" id="tsxzq" name="tsxzq" value="4"/>主编
-								<input type="checkbox" id="tsxzq" name="tsxzq" value="2" checked="checked"/>副主编
-								<input type="checkbox" id="tsxzq" name="tsxzq" value="1"/>编委
-								<input type="checkbox" id="tsxzq" name="tsxzq" value="8"/>数字编委
-							</td>
-						</tr>
-					</table>
-					<!-- 用于遍历radio中的值 -->
-					<input type="hidden" name="preset_position" value="zw_1">
-				</div>
-				<div style="float: left;margin-left: 30px;">
-					<span style="float: left;">上传教学大纲：</span>
-					<div id="fileNameDiv_1" class="fileNameDiv"></div>
-					<input type="hidden" name="syllabus_id" id="syllabus_id_1"/>
-					<input type="hidden" name="syllabus_name" id="syllabus_name_1"/>
-					<div class="scys" id="scjxdg_1"><span>上传文件</span></div>
-				</div>
-			</div>  --%>
 		</div> 
 		<!-- 专家信息-->
 		 <div class="sbxq_item1">
@@ -150,8 +133,8 @@
 							<input class="cg_input" name="position" value="" id="position"  maxlength="12"/></td>
 						<td><span class="btbs">*</span><span>职&emsp;&emsp;称：</span>
 							<input class="cg_input" name="title" value="" id="zc"  maxlength="10"/></td>
-						<td><span class="btbs">*</span><span>地&emsp;&emsp;址：</span>
-							<input class="cg_input" name="address" value="" id="address"  maxlength="17"/></td>
+						<td><span class="btbs">*</span><span style="width: 70px">E-mail：</span>
+							<input class="cg_input" name="email" value="" id="email"  maxlength="40"/></td>
 					</tr>
 					<tr>
 						<td><span>&ensp;邮&emsp;&emsp;编：</span>
@@ -172,8 +155,6 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span class="btbs">*</span><span style="width: 70px">E-mail：</span>
-							<input class="cg_input" name="email" value="" id="email"  maxlength="40"/></td>
 						<td><span class="btbs">*</span><span>证件类型：</span>
                             <select class="select-input" id="zjlx" name="idtype">
                                 <option value="0" selected="selected">身份证</option>
@@ -182,7 +163,8 @@
                             </select></td>
 						<td><span class="btbs">*</span><span>证件号码：</span>
 							<input class="cg_input" name="idcard" value="" id="idcard"  maxlength="18"/></td>
-						<td></td>
+						<td colspan="2"><span class="btbs">*</span><span>地&emsp;&emsp;址：</span>
+							<input class="cg_input" style="width: 488px;" name="address" value="" id="address"  maxlength="17"/></td>
 					</tr>
 				</table>
 			</div>
@@ -296,16 +278,23 @@
 		</div>
 		<!--扩展信息-->
 		<c:forEach var="zjkzxx" items="${zjkzxxList}">
-		 	<div class="sbxq_item">
+		 	<div class="sbxq_item1">
 				<div>
 					<span id="tsxz_span9"></span>
-					<span class="tsxz_title">${zjkzxx.extension_name}（选填）</span>
+					<span class="tsxz_title">${zjkzxx.extension_name}</span>
+					<c:choose>
+						<c:when test="${zjkzxx.is_required == true}">
+							<span class="tsxz_ts" style="display: inline;"><img src="${ctx}/statics/image/btxx.png" /></span>
+						</c:when>
+						<c:otherwise>
+							<span class="tsxz_xt" style="display: inline;">（选填）</span>
+						</c:otherwise>
+					</c:choose>
 					<input type="hidden" name="extension_id" value="${zjkzxx.id}"/>
 				</div>
 				<div class="content">
-					<textarea class="text_cl" name="content"></textarea>
+					<textarea class="text_cl" name="kz_content"></textarea>
 				</div>
-				<hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">
 			</div>
 		</c:forEach>
 		<!--主要学术兼职-->

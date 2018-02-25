@@ -54,9 +54,9 @@
 						<td width="100px"><span>读者对象：</span></td>
 						<td width="300px">
 							<select name="reader" id="dzdx" class="dzdx">
-								<option value="0" ${topicMap.reader=='0'?'checked':''}>医务工作者</option>
-								<option value="1" ${topicMap.reader=='1'?'checked':''}>医学院校师生</option>
-								<option value="2" ${topicMap.reader=='2'?'checked':''}>大众</option>
+								<option value="0" ${topicMap.reader=='0'?'selected':''}>医务工作者</option>
+								<option value="1" ${topicMap.reader=='1'?'selected':''}>医学院校师生</option>
+								<option value="2" ${topicMap.reader=='2'?'selected':''}>大众</option>
 							</select>
 						</td>
 					</tr>
@@ -156,7 +156,7 @@
 						<td colspan="3">
 							<input type="hidden" name="extra_id" value="${textraMap.id}"/>
 							<div class="content">
-								<textarea class="text_cl" name="reason">${textraMap.reason}</textarea>
+								<textarea class="text_cl" id="reason" name="reason">${textraMap.reason}</textarea>
 							</div>
 						</td>
 					</tr>
@@ -164,7 +164,7 @@
 						<td><span>二、出版价值：</span></td>
 						<td colspan="3">
 							<div class="content">
-								<textarea class="text_cl" name="price">${textraMap.price}</textarea>
+								<textarea class="text_cl" id="price" name="price">${textraMap.price}</textarea>
 							</div>
 						</td>
 					</tr>
@@ -172,7 +172,7 @@
 						<td><span>三、主要内容：</span></td>
 						<td colspan="3">
 							<div class="content">
-								<textarea class="text_cl" name="extra_score">${textraMap.score}</textarea>
+								<textarea class="text_cl" id="extra_score" name="extra_score">${textraMap.score}</textarea>
 							</div>
 						</td>
 					</tr>
@@ -213,21 +213,21 @@
 					<tr>
 						<td width="106px"><span>译稿原书名：</span></td>
 						<td width="400px">
-							<input class="cg_input" name="original_bookname" id="original_bookname" placeholder="" value="${topicMap.original_bookname}"/>
+							<input class="cg_input" name="original_bookname" maxlength="33" id="original_bookname" placeholder="" value="${topicMap.original_bookname}"/>
 						</td>
 						<td style="text-align: center;"><span>原编著者：</span></td>
 						<td width="308px">
-							<input class="cg_input" name="original_author" id="original_author" placeholder="" value="${topicMap.original_author}"/>
+							<input class="cg_input" name="original_author" maxlength="33" id="original_author" placeholder="" value="${topicMap.original_author}"/>
 						</td>
 					</tr>
 					<tr>
 						<td><span>国籍：</span></td>
 						<td>
-							<input class="cg_input" name="nation" id="nation" placeholder="" value="${topicMap.nation}"/>
+							<input class="cg_input" name="nation" maxlength="20" id="nation" placeholder="" value="${topicMap.nation}"/>
 						</td>
 						<td style="text-align: center;"><span>出版年代及版次：</span></td>
 						<td>
-							<input class="cg_input" name="edition" id="edition" placeholder="出版年代及版次" value="${topicMap.edition}"/>
+							<input class="cg_input" name="edition" maxlength="20" id="edition" placeholder="出版年代及版次" value="${topicMap.edition}"/>
 						</td>
 					</tr>
 				</table>
