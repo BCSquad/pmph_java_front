@@ -9,6 +9,8 @@ import java.security.MessageDigest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -729,5 +731,17 @@ public class PersonalCenterController extends BaseController {
 			resultMap.put("flag", flag);
 			return resultMap;
 		}
+		
+		//弹框回显短评内容
+		@RequestMapping(value="/shortComment")
+		@ResponseBody
+		public Map<String,Object> shortComment(HttpServletRequest  request){
+			String uid=request.getParameter("uid");
+			Map<String,Object> paraMap = new HashMap<String,Object>();
+				paraMap.put("id", uid);
+				Map<String,Object> map1 = personalService.shortComment(paraMap);
+				return map1;
+		}
+		
 	
 }

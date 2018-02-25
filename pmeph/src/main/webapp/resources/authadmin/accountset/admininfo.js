@@ -92,11 +92,11 @@ function save(){
             success:function(code){
                
                 if (code=="success"){
-	                message.success("提交成功");
+	                message.success("保存成功");
 	                $("#sxy-img1").attr("src",contextpath+"file/download/"+fileid+".action");
 	                location.href=contextpath+'admininfocontroller/toadmininfo.action?id='+json.id;
 	            }else{
-	            	message.error("提交失败");
+	            	message.error("保存失败");
 	            }
             }
         });

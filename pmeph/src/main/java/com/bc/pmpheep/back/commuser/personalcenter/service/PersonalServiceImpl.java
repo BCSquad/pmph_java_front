@@ -391,6 +391,13 @@ public class PersonalServiceImpl implements PersonalService {
 		Map<String, Object> sMap = personaldao.btnSaveOrHidden(map);
 		return sMap;
 	}
+	
+	//弹框回显短评内容
+	@Override
+	public Map<String, Object> shortComment(Map<String, Object> map) {
+		Map<String, Object> sMap = personaldao.shortComment(map);
+		return sMap;
+	}
 
 	@Override
 	public void deleteUserTrendst(WriterUserTrendst writerUserTrendst) {

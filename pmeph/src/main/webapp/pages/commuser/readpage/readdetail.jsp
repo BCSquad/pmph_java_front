@@ -25,6 +25,7 @@
     <script src="${ctx}/resources/comm/jquery/jquery.pager.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js"></script>
     <script src="${ctx}/resources/comm/layui/layui.js"></script>
+    <script type="text/javascript" src="${ctx}/resources/comm/ckplayer/ckplayer.js"></script>
     <script src="${ctx}/resources/commuser/readpage/readdetail.js"></script>
 </head>
 <body>
@@ -219,22 +220,44 @@
                 </div>
             </div>
             <c:if test="${ not empty Video}">
-            <div class="block" >
-                <div class="title">
-                    <div class="line"></div>
-                    <div class="rd_name">相关资源</div>
+                <div class="block">
+                    <div class="title">
+                        <div class="line"></div>
+                        <div class="rd_name">相关资源</div>
+                    </div>
+                    <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
+                    <c:forEach items="${Video}" var="list" varStatus="status">
+                        <div class="video" ${status.index=='0' ? 'style="margin-left: 20px"':'style="margin-left: 40px"'} >
+                                <%--<video class="video-a" src="http://120.76.221.250:11000/pmph_vedio/file/${list.file_name};"
+                                       poster="${ctx}/image/${list.cover}.action" type="mp4" controls>
+                                </video>--%>
+                            <div class="video-a" id="video-${list.id}"
+                                 src="http://120.76.221.250:11000/pmph_vedio/file/${list.file_name}"
+                                 poster="${ctx}/image/${list.cover}.action" type="mp4">
+
+                            </div>
+
+                            <div class="video-btn">微视频</div>
+                            <div class="video-name">(微视频)${list.title}</div>
+                        </div>
+                    </c:forEach>
+                    <script type="text/javascript">
+                        $(function () {
+                            $(".video-a").each(function () {
+                                var $this = $(this);
+                                var videoObject = {
+                                    container: "#" + $this.attr("id"),
+                                    variable: 'player',
+                                    autoplay: false,
+                                    video: $this.attr("src")/*,
+                                     poster: $this.attr("poster")*/
+                                };
+                                var player = new ckplayer(videoObject);
+                            })
+                        })
+
+                    </script>
                 </div>
-                <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
-                <c:forEach items="${Video}" var="list" varStatus="status">
-                <div class="video" ${status.index=='0' ? 'style="margin-left: 20px"':'style="margin-left: 40px"'} >
-                    <video class="video-a" src="http://120.76.221.250:11000/pmph_vedio/file/${list.file_name};" 
-                    poster="${ctx}/image/${list.cover}.action" type="mp4" controls>
-                    </video>
-                    <div class="video-btn">微视频</div>
-                    <div class="video-name">(微视频)${list.title}</div>
-                </div>
-                </c:forEach>
-            </div>
             </c:if>
             <div class="block">
                 <div class="title">
@@ -341,9 +364,9 @@
                                     <div style="float: left;">
 
                                         <c:if test="${list.avatar=='DEFAULT'}"><img
-                                                src="${ctx}/statics/image/default_image.png" ></c:if>
+                                                src="${ctx}/statics/image/default_image.png"></c:if>
                                         <c:if test="${list.avatar!='DEFAULT'}"><img
-                                                src="${ctx}/image/${list.avatar}.action" class="picturesize" ></c:if>
+                                                src="${ctx}/image/${list.avatar}.action" class="picturesize"></c:if>
 
                                             <%-- <img src="${ctx}/statics/image/rwtx.png"
                                                                            class="picturesize"/> --%>

@@ -36,7 +36,7 @@
     <span class="personMessageTitle" id="realname"></span>
     <div class="contentBox" id="dialogue">
     </div>
-    <div class="inputBox">
+    <div >
         <div style="float: left;width: 80%;height: 100%">
             <textarea id="content" class="inputBox"
                       style="width: 100%;height: 98%;border: none;outline:0;font-size:15px;"
@@ -123,7 +123,7 @@
     //发送消息
     function sendxiaoxi() {
         var content = $("#content").val();
-        if (content == '' || content == null || content == '↵') {
+        if (content == null || content.trim() == '') {
             window.message.warning("请键入消息");
         } else {
             var frendId = $("#frendId").val();
@@ -161,10 +161,11 @@
             success: function (responsebean) {
                 $("#dialogue").html('');
                 if (null != responsebean && responsebean.length >= 0) {
+                    var html = "<div id='dialogContent'>";
                     for (var i = 0; i < responsebean.length; i++) {
-                        var html = "";
+
                         if (responsebean[i].isMy) {//我发送的
-                            html =
+                            html +=
                                     "<div class='oneTalk'> " +
                                     "<div class='headAndNameRight float_right'> " +
                                     "<div class='headDiv'><img class='headPicture' src='" + contextpath + responsebean[i].avatar + "'/></div> " +
@@ -177,7 +178,7 @@
                                     "</div> " +
                                     "</div> ";
                         } else {
-                            html =
+                            html +=
                                     "<div class='oneTalk'> " +
                                     "<div class='headAndNameLeft float_left'> " +
                                     "<div class='headDiv'><img class='headPicture' src='" + contextpath + responsebean[i].avatar + "'/></div> " +
@@ -192,8 +193,11 @@
                                     "</div> " +
                                     "</div> ";
                         }
-                        $("#dialogue").append(html);
+
+
                     }
+                    html += "</div>"
+                    $("#dialogue").append(html);
                 }
                 //更新消息状态
                 $.ajax({
@@ -209,7 +213,14 @@
 
                     }
                 });
+                setTimeout(function () {
+                    var content = $("#dialogContent")[0];
+                    $("#dialogue")[0].scrollTop = content.scrollHeight;
+                }, 0);
+
             }
+
+            /*$("#dialogue").scrollTop = div.scrollHeight;*/
         });
     }
 
@@ -264,6 +275,7 @@
     $(function () {
         $(".inputBox").keypress(function (event) {
             if (event.which == 13) {
+                console.log(event)
                 sendxiaoxi();
             }
         });
