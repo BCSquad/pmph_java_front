@@ -227,6 +227,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow:ellipsis;
+    font-family: 微软雅黑;
 }
 .notes .item .content-text{
     padding-left: 10px;

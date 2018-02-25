@@ -330,25 +330,31 @@ body {
     display: inline-block;
 }
 
+.footer{
+    background: #F8F8F8;
+}
+
 .tail {
     padding-bottom: 30px;
+    margin: 0 auto;
+    width: 1200px;
+    text-align: center;
 }
 
 .tail .about {
-    margin: 0 auto;
-    width: 1000px;
+    margin-left: 130px;
     height: 40px;
 }
 
 .tail .about .item {
     float: left;
-    display: inline-block;
+    display: block;
     /*width: 99px;*/
     padding: 0 10px;
     color: #999999;
     margin: auto;
     text-decoration:none;
-    text-align: center;
+    text-align: right;
     border-left: 1px solid #9A9691;
 }
 
