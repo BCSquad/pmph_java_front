@@ -569,7 +569,7 @@
 		LEFT JOIN writer_user wu on wu.org_id=st.org_id
  		where s.`status`=1 and s.is_deleted=0 and wu.id=#{parameter.logUserId}
  		AND #{parameter.dateStr} &gt;= s.`begin_date`
-		AND #{parameter.dateStr} &lt;= s.`end_date`
+		AND #{parameter.dateStr} &lt;= s.`end_date`+1
   		limit ${start},${pageSize}
 	</select>
 
@@ -631,7 +631,11 @@
 	<select id="btnSaveOrHidden" resultType="java.util.Map" parameterType="java.util.Map">
 		select  DISTINCT sqa.user_id as uid,sqa.survey_id as sid from survey_question_answer sqa 
 		WHERE sqa.survey_id=#{surveyId}   and sqa.user_id=#{logUserId} 
+	</select>
 	
+	<!-- 弹框回显短评内容-->
+	<select id="shortComment" resultType="java.util.Map" parameterType="java.util.Map">
+		select  * from book_user_comment AS bc  where bc.id=#{id} 
 	</select>
 
 	<!-- 动态结果映射 -->

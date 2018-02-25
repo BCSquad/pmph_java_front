@@ -113,4 +113,11 @@ public class NoticeMessageServiceImpl implements NoticeMessageService {
 		// TODO Auto-generated method stub
 		return noticeMessageDao.queryCMSAttach(paraMap);
 	}
+	
+	//系统消息标题弹框回显
+	@Override
+	public Map<String, Object> queryTitleMessage(Map<String, Object> paraMap) {
+		// TODO Auto-generated method stub
+		return noticeMessageDao.queryTitleMessage(paraMap);
+	}
 }

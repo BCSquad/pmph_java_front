@@ -147,6 +147,9 @@ public interface PersonalDao {
 	public String getInpAnswers(Map<String, Object> map);
 	// 回显答案保存按钮判断是否消失
 	public Map<String, Object> btnSaveOrHidden(Map<String, Object> map);
+	
+	// 弹框回显短评内容
+		public Map<String, Object> shortComment(Map<String, Object> map);
 
 	/**
 	 * 生成动态
