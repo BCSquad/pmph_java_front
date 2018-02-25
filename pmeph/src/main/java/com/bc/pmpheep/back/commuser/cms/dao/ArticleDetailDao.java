@@ -149,5 +149,10 @@ public interface  ArticleDetailDao{
 	 * @return
 	 */
 	void changeClicks(@Param("id") String id,@Param("clicks") int clicks);
+	/**查询文章附件
+	 * @param paraMap
+	 * @return
+	 */
+	List<Map<String, Object>>queryCMSAttach(Map<String, Object> paraMap);
 	
 }

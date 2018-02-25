@@ -50,6 +50,7 @@ public class ReadController {
         zdtjXxjyMap.put("startrows", "0");
         zdtjXxjyMap.put("endrows", "4");
         zdtjXxjyList = readService.queryRmspReadList(zdtjXxjyMap);
+        
         mv.addObject("rmspList", zdtjXxjyList);
 
         Map<String, Object> adInfo = homeService.getPageAdInfo("读书首页轮播 ");

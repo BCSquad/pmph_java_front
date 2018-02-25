@@ -54,8 +54,20 @@
 	    			<span id="img_span">${map.clicks }</span>
 	    		</div>
 	    	<!--内容-->
-	    	
 		    	<div class="yxsb_content"> ${UEContent } </div>
+		    <!--文章附件-->
+		    	  <c:if test="${not empty cmsAttach}">
+				        <div class="attlist">
+				            <div class="atttitle2">
+				                	附件：
+				            </div>
+				            <div class="attlistContent">
+				                 <c:forEach items="${cmsAttach }" var="cattach">
+				            	  <span ><a   href="${ctx}/file/download/${cattach.attachment}.action" ><img class="pictureSize" src="${ctx}/statics/pictures/attachment.png">&nbsp;&nbsp;${cattach.attachment_name}</a></span><br>
+				                </c:forEach>
+				            </div>
+				        </div>
+		        	</c:if>
 	    	<div class="block">
                     
                     <div class="title">
@@ -88,7 +100,7 @@
                         		<c:if test="${list.avatar=='DEFAULT'}"><img  src="${ctx}/statics/image/putongyhtouxiang.png" height="30"  width="30"/></c:if>
                 				<c:if test="${list.avatar!='DEFAULT'}"><img  src="${ctx}/image/${list.avatar}.action" height="30"  width="30"></c:if>
                         	</div>
-                        	<div style="float: left;margin-left: 10px;margin-top: 5px;">${list.realname}</div>
+                        	<div style="float: left;margin-left: 10px;margin-top: 5px;">${list.nickname}</div>
                         	<%-- <div style="float: left;margin-left: 10px;">
                         	<c:if test="${list.score<=3}">
 	                        	<span class="rwtx1"></span>
@@ -159,24 +171,25 @@
                     </div>
                     <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
                     <c:forEach items="${listArtSix}" var="list" varStatus="status">
-                    <c:if test="${status.index!=0}">
-                    <div class="content" id="JKFYDiv_0">
-                        <div class="item">
-                            <div class="ir_01"> 
-                            <div class="tt"><div class="a6_content">${list.title}</div></div>
-                           </div>
+	                <div class="${status.index==0 or status.index==3 ?'item' :'item behind'}" onclick="window.location.href='${ctx}/articledetail/toPage.action?wid=${list.id}'">
+                    
+                    <div  class="content" >
+                        <div class="content-image">
+                            <img src="${ctx}/statics/testfile/p2.png" style="width:276px;height:170px;"/>
                         </div>
+                        <p   class="content-title" style="cursor: pointer;">${list.title}</p>
                     </div>
-                     </c:if>
-                    </c:forEach>
+                    </div>
+                </c:forEach>
+                    
             </div>
     	</div>
     	<div class="area2">
     		<div style="position:relative;width: 275px;height: 410px;">
     			<div class="right_2">
-	    			<c:if test="${Art.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/tx.png" alt="头像" height="60"
+	    			<c:if test="${Art.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg" height="60"
                                                               width="60"></c:if>
-                	<c:if test="${Art.avatar!='DEFAULT'}"><img src="${ctx}/image/${Art.avatar}.action" alt="头像" height="60"
+                	<c:if test="${Art.avatar!='DEFAULT'}"><img src="${ctx}/image/${Art.avatar}.action"  height="60"
                                                               width="60"></c:if>
 	    			
 	    			<span>作者：${Art.realname}</span>

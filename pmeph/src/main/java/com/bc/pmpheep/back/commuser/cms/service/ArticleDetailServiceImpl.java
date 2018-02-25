@@ -215,5 +215,15 @@ public class ArticleDetailServiceImpl implements ArticleDetailService{
 		// TODO Auto-generated method stub
 		articleDetailDao.changeClicks(id, clicks);
 	}
+	
+	/**查询附件
+	 * @param paraMap
+	 * @return
+	 */
+	@Override
+	public List<Map<String, Object>> queryCMSAttach(Map<String, Object> paraMap) {
+		// TODO Auto-generated method stub
+		return articleDetailDao.queryCMSAttach(paraMap);
+	}
 
 }

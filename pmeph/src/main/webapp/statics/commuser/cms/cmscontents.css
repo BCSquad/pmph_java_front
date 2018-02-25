@@ -168,21 +168,21 @@
 	width: 25px;
 	height: 25px;
 	margin-left: 15px;
+	border-radius: 50%;
 }
 
 .ryxx_xm{
-	font-family: MicrosoftYaHei;
-	color: #333333;
 	float: left;
-	margin-left: 9px;
-	font-weight: bold;
+	margin-left: 14px;
+	height: 30px;
+	color: #666666;
 }
 
 .ryxx_sj{
-	font-family: MicrosoftYaHei;
-	color: #bdbdbd;
-	float: right;
-	margin-right: 18px;
+	/* float: right; */
+	margin-left: 14px;
+	height: 30px;
+	color: #666666;
 }
 
 .pagination-wrapper{

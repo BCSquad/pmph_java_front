@@ -218,7 +218,8 @@
                     ${map.detail}
                 </div>
             </div>
-            <div class="block">
+            <c:if test="${ not empty Video}">
+            <div class="block" >
                 <div class="title">
                     <div class="line"></div>
                     <div class="rd_name">相关资源</div>
@@ -234,6 +235,7 @@
                 </div>
                 </c:forEach>
             </div>
+            </c:if>
             <div class="block">
                 <div class="title">
                     <div class="line"></div>
@@ -275,7 +277,7 @@
                                             <%-- <img src="${ctx}/statics/image/rwtx.png"
                                                                            class="picturesize"/> --%>
                                     </div>
-                                    <div style="float: left;margin-left: 10px;margin-top: 5px;">${list.realname}</div>
+                                    <div style="float: left;margin-left: 10px;margin-top: 5px;">${list.nickname}</div>
                                     <div style="float: left;margin-left: 10px;">
                                         <c:if test="${list.score<=3}">
                                             <span class="rwtx1"></span>
@@ -339,10 +341,9 @@
                                     <div style="float: left;">
 
                                         <c:if test="${list.avatar=='DEFAULT'}"><img
-                                                src="${ctx}/statics/image/default_image.png" alt="头像"></c:if>
+                                                src="${ctx}/statics/image/default_image.png" ></c:if>
                                         <c:if test="${list.avatar!='DEFAULT'}"><img
-                                                src="${ctx}/image/${list.avatar}.action" class="picturesize"
-                                                alt="头像"></c:if>
+                                                src="${ctx}/image/${list.avatar}.action" class="picturesize" ></c:if>
 
                                             <%-- <img src="${ctx}/statics/image/rwtx.png"
                                                                            class="picturesize"/> --%>

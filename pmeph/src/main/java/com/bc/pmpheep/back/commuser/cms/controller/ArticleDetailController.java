@@ -67,6 +67,10 @@ public class ArticleDetailController extends BaseController {
 		}else{
 			 UEContent = message.getContent();
 		}
+		
+		//cms附件
+				List<Map<String, Object>> cmsAttach = articleDetailService.queryCMSAttach(map1);
+				mv.addObject("cmsAttach",cmsAttach);
 		// 查看作者
 		Map<String, Object> Art = articleDetailService.queryAuthor(map1);
 		// 最近3条医学随笔
@@ -88,7 +92,7 @@ public class ArticleDetailController extends BaseController {
 		//增加点击数
 		int clinum=(Integer.parseInt(map.get("clicks").toString())+1);
 		articleDetailService.changeClicks(wid, clinum);
-		
+		//猜你喜欢
 		 List<Map<String, Object>> listArtSix = articleDetailService.queryArticleSix();
 		 //点赞
 		 Map<String, Object> user=getUserInfo();
