@@ -27,19 +27,19 @@
             <property name="redirectUrl" value="/pages/comm/login.jsp"/>
             <property name="pathWithUsertypeMaps">
                 <set>
-                
-                 <value>/dataaudit/toMaterialAudit.action -> 2</value><!--申报资料审核（机构用户） -->
-                 
+
+                    <value>/dataaudit/toMaterialAudit.action -> 2</value><!--申报资料审核（机构用户） -->
+
                     <!--作家用户-->
 
-                    <value>/mymessage/* -> 1</value><!--作家用户消息模块 -->
+                    <value>/mymessage/* -> 1,2</value><!--作家用户消息模块 -->
                     <value>/message/deleteNoticeMessage* -> 1</value><!--作家用户消息通知删除模块 -->
-                     <value>/message/updateApplyMessage* -> 1</value><!--作家用户消息好友接受、忽略模块 -->
+                    <value>/message/updateApplyMessage* -> 1</value><!--作家用户消息好友接受、忽略模块 -->
                     <value>/writerArticle/* -> 1</value><!--作家写文章 -->
                     <value>/personalhomepage/* -> 1</value><!--作家个人中心 -->
                     <value>/material/* -> 1</value><!--教材申报 -->
                     <value>/integral/* -> 1</value><!--积分 -->
-                    
+
 
                     <value>/bookcollection/* -> 1</value><!--书籍收藏 -->
                     <value>/articlecollection/* -> 1</value><!--文章收藏 -->
@@ -63,7 +63,7 @@
                     <value>/bookdeclare/* -> 1</value><!--出书申报 -->
                     <value>/survey/* -> 1</value><!--出书申报 -->
                     <value>/chooseEditor/* -> 1</value><!--第一主编选择编委 -->
-					<value>/progress/listReportProgress.action* -> 1</value><!-- 教材申报进度 -->
+                    <value>/progress/listReportProgress.action* -> 1</value><!-- 教材申报进度 -->
                     <value>/articledetail/insertComment* -> 1</value><!--文章详情页面新增评论 -->
                     <value>/articledetail/addmark* -> 1</value><!--文章详情页添加收藏 -->
                     <value>/articledetail/addlikes* -> 1</value><!--文章详情页点赞 -->
@@ -72,7 +72,6 @@
                     <value>/user/* -> 2</value><!--用户管理（机构用户） -->
                     <value>/schedule/* -> 2</value><!--机构用户待办事项 -->
                     <value>/applyDocAudit/* -> 2</value><!--申报资料审核（机构用户） -->
-                    
                     <value>/teacherauth/* -> 2</value><!--教师认证 -->
 
                 </set>

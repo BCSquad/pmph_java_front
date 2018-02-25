@@ -82,6 +82,7 @@ body {
 }
 
 .head .search-input {
+    box-sizing: content-box;
     width: 295px;
     height: 34px;
     position: absolute;

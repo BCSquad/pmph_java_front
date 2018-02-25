@@ -78,6 +78,7 @@ public class OrgUserController extends  com.bc.pmpheep.general.controller.BaseCo
             }
             model.addObject("pageNumber", pageNumber);
             model.addObject("pageSize", pageSize);
+			model.addObject("username", username);
         } catch (CheckedServiceException e) {
             throw new CheckedServiceException(e.getBusiness(), e.getResult(), e.getMessage(),
                                               pageUrl);

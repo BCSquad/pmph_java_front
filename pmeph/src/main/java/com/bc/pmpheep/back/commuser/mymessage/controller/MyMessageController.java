@@ -24,7 +24,7 @@ import com.bc.pmpheep.back.commuser.mymessage.service.MyMessageService;
 /**
  * @author 曾庆峰
  * @CreateDate 2017年11月26日 下午1:50:12
- * 
+ *
  **/
 @Controller
 @RequestMapping("/mymessage")
@@ -41,10 +41,10 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * 功能描述：获取我的消息列表
-	 * 
+	 *
 	 * @param pageSize
 	 *            当页条数
 	 * @param pageNumber
@@ -58,7 +58,7 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 	 * @param userType
 	 *            用户类型
 	 * @return
-	 * 
+	 *
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/tolist", method = RequestMethod.GET)
@@ -78,14 +78,12 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 	}
 
 	/**
-	 * 
-	 * 
 	 * 功能描述： 获取消息详情
-	 * 
-	 * @param id
-	 *            消息id
+	 * @param senderId
+	 * @param senderType
+	 * @param receiverId
+	 * @param receiverType
 	 * @return
-	 * 
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/todetail", method = RequestMethod.GET)
@@ -105,7 +103,7 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 
 	/**
 	 * 获取我和朋友的对话记录
-	 * 
+	 *
 	 * @introduction
 	 * @author Mryang
 	 * @createDate 2017年12月7日 下午2:30:29
@@ -137,34 +135,34 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
 		if(null!=idStr&&!idStr.equals("")){
 			 friendId = new Long(idStr);
 		}
-		
+
 		String title = request.getParameter("title");
 		String typeStr = request.getParameter("friendIdType");
 		Short friendIdType = null;
 		if(null!=typeStr&&!typeStr.equals("")){
-			friendIdType= new Short(typeStr); 
+			friendIdType= new Short(typeStr);
 		}
-		 
-		String content = request.getParameter("content"); 
+
+		String content = request.getParameter("content");
 		Long thisId = new Long(String.valueOf(writerUser.get("id")));
 		String name = (String) writerUser.get("realname");
 		//Long thisId = new Long(24967);
 		//String name = "测试";
 		String avatar = "static/default_image.png";
 		myMessageService.senNewMsg(thisId, friendId, friendIdType, title, content);
-		
+
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("code","success");
 		map.put("name",name);
 		return map;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/updateMyTalk", method = RequestMethod.GET)
 	public String senNewMsg(@RequestParam(value = "senderId") Long senderId, @RequestParam(value = "senderType")Short senderType ) {
 		Map<String, Object> writerUser = this.getUserInfo();
-		//Long  thisId = new Long(String.valueOf(writerUser.get("id")));
-		Long thisId = new Long(24967);
+		Long  thisId = new Long(String.valueOf(writerUser.get("id")));
+		/*Long thisId = new Long(24967);*/
 		myMessageService.updateMyTalk(senderId,senderType, thisId,new Short("2"));
 		return "success";
 	}

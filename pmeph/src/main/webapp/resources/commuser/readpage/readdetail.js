@@ -1,5 +1,3 @@
-
-
 $(function () {
     $('form').validate({
         onFocus: function () {
@@ -52,7 +50,7 @@ $(function () {
         "</div>" +
         " <div class='lable-input title'><div class='label'>标 题</div><input class='input' type='text'></div>" +
         /*   " <div class='lable-input type'><div class='label'>分 类</div><select id='select'><option>教育</option><option>培训</option></select></div>" +*/
-        "<div class='button-area'><button class='submit disable'>提交</button><button class='cancel' onclick='hidevideo()'>取消</button></div>" +
+        "<div class='button-area'><button class='submit disable'>开始上传</button><button class='cancel' onclick='hidevideo()'>取消</button></div>" +
         "</div> </div>");
 
     var element;
@@ -90,8 +88,8 @@ $(function () {
                 /*if (!f) {
                  message.warning("您上传的文件格式不支持！");
 
-                    return;
-                }*/
+                 return;
+                 }*/
                 layer.open({
                     type: 1,
                     title: false,
@@ -120,8 +118,14 @@ $(function () {
 
                     $(".pop-body").find("button.submit").click(function () {
                         if (valid()) {
-                            var o = data.submit();
+
+                            var o = data.submit()
+                            o.fail=function () {
+                                message.error("上传失败,请联系管理员！");
+                            }
+
                             $(".pop-body").find(".remark").css("display", "block");
+                            $(".pop-body").find("button.submit").text("正在上传");
                         }
                     })
 
@@ -155,10 +159,13 @@ $(function () {
         start: function (e) {
 
         },
+        /*always: function (e, data) {
+            message.error("上传失败,请联系管理员！");
+        },*/
         done: function (e, data, b, c, d) {
             if (data.result) {
                 if (data.result.code == '1') {
-                   // $(".pop-body .submit").removeClass("disable");
+                    // $(".pop-body .submit").removeClass("disable");
                     message.success("上传成功！");
                     hidevideo()
                 } else {

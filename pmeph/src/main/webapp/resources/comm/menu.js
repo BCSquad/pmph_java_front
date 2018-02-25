@@ -15,7 +15,9 @@ $(function () {
     var winHeight = 0;
 
     // 获取窗口高度
-    if (window.innerHeight) {
+    if($(window).height()){
+        winHeight = $(window).height();
+    }else if (window.innerHeight) {
         winHeight = window.innerHeight;
     } else if ((document.body) && (document.body.clientHeight)) {
         winHeight = document.body.clientHeight;

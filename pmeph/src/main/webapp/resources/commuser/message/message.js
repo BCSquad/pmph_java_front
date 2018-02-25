@@ -45,7 +45,7 @@ function loadMore(){
 		              str+= "</span><span class='time1'>"+commonTime+"</span></td></tr><tr style='width: 30%'>"+
 		               "<td colspan='2' class='title'>"+n.title+"</td><td class='buttonDetail'>";
 		              if(n.msgType==4){
-		            	 str+="<div class='buttonAccept'><a href='"+projectName+"/message/noticeMessageDetail.action?msgId="+n.fId+"&&cmsId="+n.id+"&&notEnd="n.notEnd+"&&is_material_entry="+n.is_material_entry+"'>查看详情</a></div>"; 
+		            	 str+="<div class='buttonAccept'><a href='"+projectName+"/message/noticeMessageDetail.action?msgId="+n.fId+"&&cmsId="+n.id+"&&notEnd="+n.notEnd+"&&is_material_entry="+n.is_material_entry+"'>查看详情</a></div>";
 		              }else if(n.msgType==0||n.msgType==1){
 		            	  str+= "<span class='deleteButton' onclick='deleteNotice("+n.id+")'><span style='font-size:18px;'>×</span> 删除</span>";
 		              }
