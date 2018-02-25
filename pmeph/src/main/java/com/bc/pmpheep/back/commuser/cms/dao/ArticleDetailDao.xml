@@ -49,7 +49,7 @@
 		t.category_id=b.id
 		left join writer_user c on t.author_id=c.id
 		WHERE
-		t.author_id=#{author_id} and t.auth_status='2' and t.parent_id='0'  and t.is_published=1
+		t.author_id=#{author_id} and t.auth_status='2' and t.parent_id='0'  and t.is_published=1 and b.category_name='医学随笔' 
 		order by t.gmt_create desc
 	</select>
 
@@ -66,7 +66,7 @@
 		left join cms_category b on t.category_id=b.id
 		left join
 		writer_user c on t.author_id=c.id WHERE t.author_id=#{author_id}
-		and t.auth_status='2' and t.parent_id='0'  and t.is_published=1
+		and t.auth_status='2' and t.parent_id='0'  and t.is_published=1 and b.category_name='医学随笔' 
 		order by gmt_create desc LIMIT 0,3
 	</select>
 
@@ -102,6 +102,7 @@
 		t.id,
 		t.mid,
 		c.realname,
+		c.nickname,
 		c.avatar,
 		t.gmt_create,
 		<!-- t.score, -->
@@ -130,15 +131,19 @@
 
 	<!-- 查询猜你喜欢 -->
 	<select id="queryArticleSix" resultType="java.util.Map">
-		select
+	select
+		t.id,
 		t.title,
 		t.summary,
 		t.gmt_create,
-		c.realname
+		c.realname,
+		t.clicks
 		from cms_content t
 		left join cms_category b on t.category_id=b.id
 		left join writer_user c on t.author_id=c.id
-		where t.category_id='0' limit 0,6
+		where t.is_deleted=0 and t.auth_status='2' and t.is_published=1 and b.category_name='医学随笔' 
+		order by t.clicks desc
+		 limit 0,6
 	</select>
 	
 	
@@ -187,12 +192,17 @@
 	</insert>
 	<!-- 删除一本书的收藏记录 -->
 	<delete id="deleteMark" parameterType="java.util.Map" >
-	    delete from cms_user_mark where writer_id=#{writer_id} and  favorite_id=#{favorite_id} and content_id=#{wid}
+	    delete from cms_user_mark where writer_id=#{writer_id} and  favorite_id=#{favorite_id} and content_id=#{id}
 	</delete>
 	
 	<!-- 根据ID增加点击数 -->
 	<update id="changeClicks" parameterType="java.util.Map">
 	    update cms_content set clicks=#{clicks} where id=#{id}
 	</update>
+	
+	<!--查询文章的附件  -->
+	<select id="queryCMSAttach" parameterType="java.util.Map" resultType="java.util.Map">
+	    select * from  cms_extra ce left join  cms_content c on c.id=ce.content_id  where c.id=#{id}
+	</select>
 
 </mapper>

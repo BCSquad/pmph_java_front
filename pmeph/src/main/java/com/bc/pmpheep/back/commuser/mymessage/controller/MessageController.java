@@ -71,7 +71,8 @@ public class MessageController extends BaseController{
 			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
 				map1.put("avatar", "statics/pictures/head.png");
 			}else{
-				map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
+				//map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
+				map1.put("avatar", "image/"+map1.get("avatar")+".action");
 			}
 		}
 		
@@ -119,7 +120,8 @@ public class MessageController extends BaseController{
 			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
 				map1.put("avatar", "statics/pictures/head.png");
 			}else{
-				map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
+				//map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
+				map1.put("avatar", "image/"+map1.get("avatar")+".action");
 			}
 		}
 		
@@ -162,7 +164,8 @@ public class MessageController extends BaseController{
 			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
 				map1.put("avatar", "statics/pictures/head.png");
 			}else{
-				map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
+				//map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
+				map1.put("avatar", "image/"+map1.get("avatar")+".action");
 			}
 		}
 		mv.addObject("list",list);
@@ -236,7 +239,8 @@ public class MessageController extends BaseController{
 			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
 				map1.put("avatar", "statics/pictures/head.png");
 			}else{
-				map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
+				//map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
+				map1.put("avatar", "image/"+map1.get("avatar")+".action");
 			}
 			
 			
@@ -318,7 +322,8 @@ public class MessageController extends BaseController{
 			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
 				map1.put("avatar", "statics/pictures/head.png");
 			}else{
-				map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
+				//map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
+				map1.put("avatar", "image/"+map1.get("avatar")+".action");
 			}
 		}
 		//不带分页的数据总量

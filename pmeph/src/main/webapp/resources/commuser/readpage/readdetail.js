@@ -553,7 +553,7 @@ function correction() {
                     dataType: 'json',
                     success: function (json) {
                         if (json == "OK") {
-                            window.message.info("数据已提交！");
+                            window.message.success("数据已提交！");
                             $("#bookmistake").hide();
                             $("#page").val(null);
                             $("#line").val(null);

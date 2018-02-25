@@ -90,6 +90,7 @@
 					<div style="display: inline-block; vertical-align: top">
 						<select id="page-size-select" name="page-size-select"
 							onchange="selectPageSize();">
+							<option value="12">每页12条</option>
 							<option value="10">每页10条</option>
 							<option value="20">每页20条</option>
 							<option value="50">每页50条</option>

@@ -116,5 +116,9 @@ public interface ArticleDetailService {
 	 * @param clicks 点击数
 	 */
 	void changeClicks(String id,int clicks);
-	
+	/**查询附件
+	 * @param paraMap
+	 * @return
+	 */
+	List<Map<String, Object>>queryCMSAttach(Map<String, Object> paraMap);
 }

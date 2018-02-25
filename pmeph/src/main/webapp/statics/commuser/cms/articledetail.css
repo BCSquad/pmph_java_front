@@ -284,7 +284,7 @@
     margin-left: 4px;
 }
 
-/**閿熸彮璇ф嫹閿熸枻鎷烽敓鏂ゆ嫹**/
+
 .area2{
 	float: left;
 	margin-left: 35px;
@@ -509,6 +509,96 @@
 	color: #ffffff;
     cursor:pointer; 
 }
+
+.block .item {
+    margin-top: 5px;
+    width: 280px;
+    float: left;
+    height: 210px;
+    position: relative;
+}
+
+.behind{
+    margin-left: 20px;
+}
+
+.block .item .content{
+    width: 280px;
+    border: 1px #EAEAEA solid;
+    height: 210px;
+}
+
+.block .item .content-image{
+	cursor: pointer;
+    height: 150px;
+    width: 276px;
+    margin: auto;
+}
+
+.block .item .content-title{
+    font-size: 18px;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+}
+
+
+.attlist{
+    padding-right: 100px;
+    height: auto;
+    width: auto;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 30px;
+    letter-spacing: 0px;
+    color: #666666;
+
+
+}
+.atttitle2{
+    margin-top: 10px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #666666;
+    padding: 0 auto;
+    width: 8%;
+    height:auto;
+    float: left;
+    text-align: right;
+}
+.attlistContent{
+    margin-top: 10px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #666666;
+    width: 88%;
+    float: left;
+    height: auto;
+}
+a{
+    text-decoration:none;
+    color: #03717b;
+    font-family: MicrosoftYaHei;
+
+}
+
+.pictureSize{
+    width: 16px;
+    height: 14px;
+}
+
+
+
+
 
 
 

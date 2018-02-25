@@ -120,7 +120,11 @@
                     <div class="items">
                         <c:forEach var="rmsp" items="${rmspList}">
                             <div class="item1" onclick="openUrl('${rmsp.id1}')">
-                                <div class="sp_01"><img src="${rmsp.image_url}"/></div>
+                                <div class="sp_01">
+                                	<%-- <img src="${rmsp.image_url}"/> --%>
+                                	<c:if test="${rmsp.image_url=='DEFAULT'}"><img src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg" ></c:if>
+                					<c:if test="${rmsp.image_url!='DEFAULT'}"><img src="${rmsp.image_url}"/></c:if>
+                                </div>
                                 <div class="sp_02">
                                     <div class="sp_title">${rmsp.bookname}</div>
                                     <div class="sp_pl">
@@ -180,7 +184,8 @@
                     <c:forEach items="${bookTypes}" var="type" varStatus="status">
                         <div class="tscx_type ${status.index==0?'tscx_type1':''}" id="CXDiv_${type.id}" typeid="${type.id}"
                              onclick="javaScript:ChangeCXDiv(${type.id})">
-                            <span>${type.type_name}</span></div>
+                            <span>${type.type_name}</span>
+                         </div>
                     </c:forEach>
                 </div>
                 <div style="clear: both;height: 14px;"></div>
