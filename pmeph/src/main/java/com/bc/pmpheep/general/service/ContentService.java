@@ -38,6 +38,7 @@ public class ContentService {
         }
         return contentDao.save(content);
     }
+
     /**
      * 根据id查找Content对象
      *
@@ -49,8 +50,13 @@ public class ContentService {
             throw new CheckedServiceException(CheckedExceptionBusiness.CMS,
                     CheckedExceptionResult.NULL_PARAM, "内容获取时ID为空");
         }
-        return contentDao.findOne(id);
+        Content content = contentDao.findOne(id);
+        if (content == null) {
+            return new Content("", "");
+        }
+        return content;
     }
+
     /**
      * 批量查找Content对象
      *
@@ -60,6 +66,7 @@ public class ContentService {
     public List<Content> list(List<String> ids) {
         return (List<Content>) contentDao.findAll(ids);
     }
+
     /**
      * 更新Content对象
      *
@@ -86,6 +93,7 @@ public class ContentService {
         ctn.setContent(content.getContent());
         contentDao.save(ctn);
     }
+
     /**
      * 删除给定id的Content对象
      *
@@ -98,6 +106,7 @@ public class ContentService {
         }
         contentDao.delete(id);
     }
+
     /**
      * 本方法在业务中不提供，仅用于测试
      */
