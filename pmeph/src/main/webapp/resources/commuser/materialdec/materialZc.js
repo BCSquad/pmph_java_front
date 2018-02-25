@@ -614,7 +614,7 @@ function add_zbxszz(){
 	var $tr = $("<tr id='zbxszz_"+num+"'>"+
 			"<td><input class='cg_input' name='zb_monograph_name' value='' style='width: 300px;' placeholder='教材名称' maxlength='16'/></td>"+
 			"<td style='color: #333333;'>"+
-				"<table class='radio_tb' style='width: 100px;'><tr>"+
+				"<table class='radio_tb' style='width: 140px;'><tr>"+
 					"<td><input type='radio' name='is_self_paid_"+num+"' value='0' checked='checked'/>自费</td>"+
 					"<td><input type='radio' name='is_self_paid_"+num+"' value='1' />公费</td>"+
 				"</tr></table>"+
@@ -711,7 +711,7 @@ function buttAdd(type){
 	if(checkNull(jsonStr)){
 		$.ajax({
 			type: "POST",
-			url:contextpath+'material/doMaterialUpdate.action?type='+type,
+			url:contextpath+'material/doMaterialAdd.action?sjump=2&type='+type,
 			data:$('#objForm').serialize(),// 你的formid
 			async: false,
 		    success: function(msg) {
