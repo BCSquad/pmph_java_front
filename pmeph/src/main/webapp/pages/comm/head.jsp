@@ -99,7 +99,7 @@
                         <a class="option" href='<c:url value="/personalhomepage/tohomepage.action"/>'>个人中心</a>
                         <a class="option" href="<c:url value='/group/list.action'/>">我的小组</a>
                         <a class="option"
-                           href='<c:url value="/personalhomepage/tohomepage.action?pagetag=jcsb"/>'>教程申报</a>
+                           href='<c:url value="/personalhomepage/tohomepage.action?pagetag=jcsb"/>'>教材申报</a>
                         <a class="option out" href='<c:url value="/logout.action"/>'>退出</a>
                     </div>
                 </div>

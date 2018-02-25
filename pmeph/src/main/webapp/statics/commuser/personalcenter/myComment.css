@@ -1007,7 +1007,7 @@
     margin: auto;
     margin-top: 4px;
     margin-bottom: 0px;
-    background-color: ff5722;
+    background-color: #ff5722;
     border-radius: 18px;
     line-height: 33px;
 }
@@ -1357,7 +1357,7 @@
 
 /* -----------����չ��������ʽ----------------------- */
 #container {  
-    margin: 10 auto;  
+    margin: 10px auto;
     border: 1px solid #3bb2d0;
     background-color: #F6F6F6;
     width: 740px;
@@ -1380,12 +1380,12 @@
   
 #read-more a {  
     padding-left: 20px;  
-    no-repeat 100% 50%;  
+    no-repeat: 100% 50%;
    /*  font-weight: bold;   */
     text-decoration: none;  
 }  
   
-#read-more a: hover {  
+#read-more a:hover {
     color: #000;  
 }
 

@@ -46,7 +46,7 @@
                 <div class="ctrl" id="ctrl"></div>
             </div>
             <div class="op-link">
-                <!--教程推荐-->
+                <!--教材推荐-->
                 <img src="${ctx}/statics/image/gg_02.png"/>
             </div>
         </div>
