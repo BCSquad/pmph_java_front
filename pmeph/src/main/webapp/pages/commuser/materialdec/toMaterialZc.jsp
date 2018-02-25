@@ -49,7 +49,7 @@
 					<c:if test="${materialMap.is_multi_books =='1'}">
 					可以选择多本书籍</c:if>
 					<c:if test="${materialMap.is_multi_books !='1'}">
-					，只能选择一本书籍</c:if>
+					只能选择一本书籍</c:if>
 					<c:if test="${materialMap.is_multi_position =='1'}">
 					，每本书籍可选多个职位</c:if>
 					<c:if test="${materialMap.is_multi_position !='1'}">
