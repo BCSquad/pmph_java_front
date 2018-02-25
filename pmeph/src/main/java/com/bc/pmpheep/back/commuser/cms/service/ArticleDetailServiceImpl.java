@@ -6,9 +6,12 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.commuser.cms.dao.ArticleDetailDao;
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
+import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.general.pojo.Content;
@@ -27,6 +30,10 @@ public class ArticleDetailServiceImpl implements ArticleDetailService{
 	private ArticleDetailDao articleDetailDao;
 	@Autowired
 	private ContentService contentService;
+	
+	@Autowired
+    @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
+    private PersonalService personalService;
 	
 	/**
 	 * 查询读书详情页信息
@@ -146,6 +153,8 @@ public class ArticleDetailServiceImpl implements ArticleDetailService{
 		}else{
 			articleDetailDao.addlikes(map);
 			articleDetailDao.insertlikes(map);
+			WriterUserTrendst wut = new WriterUserTrendst(map.get("writer_id").toString(), 4, map.get("content_id").toString());
+			personalService.saveUserTrendst(wut);
 			pmap.put("returncode", "no");
 		}
 		return pmap;
@@ -202,6 +211,8 @@ public class ArticleDetailServiceImpl implements ArticleDetailService{
 		}else{
 			articleDetailDao.insertMark(wid,favorite_id,writer_id);//向用户书籍收藏表中加入收藏记录
 			articleDetailDao.updateMarks(wid,bookmarks+1);//更新书籍表中的收藏数量
+			WriterUserTrendst wut = new WriterUserTrendst(String.valueOf(writer_id), 3, String.valueOf(wid));
+			personalService.saveUserTrendst(wut);
 			map.put("returncode", "OK");
 		}
 		return map;

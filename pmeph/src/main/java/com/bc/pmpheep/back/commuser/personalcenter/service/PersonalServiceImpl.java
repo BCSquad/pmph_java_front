@@ -209,6 +209,7 @@ public class PersonalServiceImpl implements PersonalService {
 		for (Map<String, Object> map : result_list) {
 			if (map.get("cms")!=null && ((Map<?, ?>) map.get("cms")).get("mid")!=null) {
 				Content content = contentService.get(((Map<?, ?>) map.get("cms")).get("mid").toString());
+				content = ifContentIsNullFun(map, content,"cms");
 				Map<String, Object> cms = ((Map<String, Object>) map.get("cms"));
 				String content_text = removeHtml(content.getContent());
 				String img_url = getFirstImgUrlFromHtmlStr(contextpath, content);
@@ -220,6 +221,7 @@ public class PersonalServiceImpl implements PersonalService {
 			if (map.get("p_cms")!=null && ((Map<?, ?>) map.get("p_cms")).get("mid")!=null) {
 				Content content = contentService.get(((Map<?, ?>) map.get("p_cms")).get("mid").toString());
 				Map<String, Object> p_cms = ((Map<String, Object>) map.get("p_cms"));
+				content = ifContentIsNullFun(map, content,"p_cms");
 				String content_text = removeHtml(content.getContent());
 				String img_url = getFirstImgUrlFromHtmlStr(contextpath, content);
 				p_cms.put("first_img_url", img_url);
@@ -229,6 +231,26 @@ public class PersonalServiceImpl implements PersonalService {
 			}
 		}
 		return result_list;
+	}
+
+	/**
+	 * 当content为空 返回摘要 若摘要也为空 返回没有内容
+	 * @param map
+	 * @param content
+	 * @param key
+	 * @return
+	 */
+	private Content ifContentIsNullFun(Map<String, Object> map, Content content,String key) {
+		if (content == null) {
+			content = new Content();
+			if (((Map<?, ?>)map.get(key)).get("summary")!=null) {
+				content.setContent(((Map<?, ?>)map.get(key)).get("summary").toString());
+			}else{
+				content.setContent("没有内容！");
+			}
+			content.setId(((Map<?, ?>) map.get(key)).get("mid").toString());
+		}
+		return content;
 	}
 
 	private String getFirstImgUrlFromHtmlStr(String contextpath, Content content) {
@@ -371,9 +393,16 @@ public class PersonalServiceImpl implements PersonalService {
 	}
 
 	@Override
+	public void deleteUserTrendst(WriterUserTrendst writerUserTrendst) {
+		//删除同类型同id动态
+		int dcount = personaldao.deleteUserTrendst(writerUserTrendst);
+	}
+	
+	
+	@Override
 	public void saveUserTrendst(WriterUserTrendst writerUserTrendst) {
-		
-		
+		//删除同类型同id动态
+		/*int dcount = personaldao.deleteUserTrendst(writerUserTrendst);*/
 		int count = personaldao.saveUserTrendst(writerUserTrendst);
 		
 		/*

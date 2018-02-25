@@ -351,6 +351,33 @@ request.setAttribute("currentTime",datetime);
                 				</c:when>
                 				<%-- 6动态 收藏图书 图书点赞end --%>
                 				
+                				<%-- 10动态 图书纠错 生成--%>
+                				<c:when test="${c.type == 10}">	
+                					<div class="issue_line"><span class="issue_name">纠正了图书</span><span class="issue_time">${c.trendst_date }</span></div>
+               							<div class="content_line">
+               								<div class="img_wrapper">
+               									<c:if test="${c.book.image_url==null || c.book.image_url ==''||c.book.image_url=='default'||c.book.image_url=='DEFAULT' }">
+               										<img src="${ctx }/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg">
+               									</c:if>
+               									<c:if test="${c.book.image_url!=null && c.book.image_url !=''&& c.book.image_url!='default' && c.book.image_url!='DEFAULT'}">
+               										<img class="book_img" src="${c.book.image_url}">
+               									</c:if>
+               								</div>
+               								<div class="content_wrapper">
+               									<div class="bookc_title">
+	               									<a class="not-like-an-a" target="_blank" href="${ctx }/readdetail/todetail.action?id=${c.book.id }"
+	               											>${c.book.bookname }</a>
+               									</div>
+               									<div class="sub_title">
+	               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
+	               									${c.realname } 纠正了《${c.book.bookname }》第${c.detail.content.page }页，第${c.detail.content.line }行:"${c.detail.content.content }"
+               									</div>
+               									<div class="book_detail">${c.book.detail }</div>
+               								</div>
+               							</div>
+                				</c:when>
+                				<%-- 10动态 图书纠错 生成 end--%>
+                				
                 			</c:choose>
                 			
                 			
@@ -666,7 +693,7 @@ request.setAttribute("currentTime",datetime);
 	                        </select>
 	                    </div>
 	                    <div class="pageJump">
-	                        <span>共<span id="totoal_count" >${totoal_count }</span>页，跳转到</span>
+	                        <span>共<span id="totoal_count" >${maxPageNum }</span>页，跳转到</span>
 	                        <input type="text"/>
 	                        <span class="pp">页</span>
 	                        <button type="button" class="button">确定</button>
