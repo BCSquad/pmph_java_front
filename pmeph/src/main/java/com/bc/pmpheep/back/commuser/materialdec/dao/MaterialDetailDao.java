@@ -70,6 +70,7 @@ public interface MaterialDetailDao {
 		//作家扩展项填报表
 		public List<Map<String,Object>> queryZjkzbb(Map<String,Object> map);
 		public int insertZjkzbb(Map<String,Object> map);
+		public int delZjkzbb(Map<String,Object> map);
 		
 		//个人成就
 		public Map<String,Object> queryAchievement(Map<String,Object> map);

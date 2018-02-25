@@ -67,22 +67,22 @@
 						<td><span>工作单位：${gezlList.org_name}</span></td>
 						<td><span>职&emsp;&emsp;务：${gezlList.position}</span></td>
 						<td><span>职&emsp;&emsp;称：${gezlList.title}</span></td>
-						<td><span>邮&emsp;&emsp;编：${gezlList.postcode}</span></td>
+						<td><span>E-mail：&emsp;${gezlList.email}</span></td>
 					</tr>
 					<tr>
-						<td colspan="2"><span>地&emsp;&emsp;址：${gezlList.address}</span></td>
+						<td><span>邮&emsp;&emsp;编：${gezlList.postcode}</span></td>
 						<td><span>联系电话：${gezlList.telephone}</span></td>
 						<td><span>传&emsp;&emsp;真：${gezlList.fax}</span></td>
+						<td><span>手&emsp;&emsp;机：${gezlList.handphone}</span></td>
 					</tr>
 					<tr>
-						<td><span>手&emsp;&emsp;机：${gezlList.handphone}</span></td>
-						<td><span style="width: 70px">E-mail：${gezlList.email}</span></td>
 						<td><span>证件类型：
 								<c:if test="${gezlList.idtype == '0'}">身份证</c:if>
 								<c:if test="${gezlList.idtype == '1'}">护照</c:if>
 								<c:if test="${gezlList.idtype == '2'}">军官证</c:if>
 							</span></td>
 						<td><span>证件号码：${gezlList.idcard}</span></td>
+						<td colspan="2"><span>地&emsp;&emsp;址：${gezlList.address}</span></td>
 					</tr>
 				</table>
 			</div>

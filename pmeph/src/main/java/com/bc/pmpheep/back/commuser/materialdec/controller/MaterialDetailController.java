@@ -163,10 +163,15 @@ public class MaterialDetailController extends BaseController{
 			String syllabus_names[] = request.getParameterValues("syllabus_name");
 			for(int i=0;i<preset_positions.length;i++) { //遍历数组
 				Map<String,Object> tsxzMap = new HashMap<String,Object>();
-				String preset_position = request.getParameter(preset_positions[i].toString());
+				String preset_position[] = request.getParameterValues(preset_positions[i].toString());
+				int k = 0;
+				//遍历职位信息
+				for (String st : preset_position) {
+					k+=Integer.parseInt(st);
+				}
 				tsxzMap.put("textbook_id", textbook_ids[i]);
 				tsxzMap.put("declaration_id", declaration_id);
-				tsxzMap.put("preset_position", preset_position);
+				tsxzMap.put("preset_position", k);
 				tsxzMap.put("is_on_list", "1"); //默认值
 				tsxzMap.put("author_id", user_id); //暂存人Id
 				tsxzMap.put("is_background", is_background); //是否为社内用户
@@ -347,6 +352,20 @@ public class MaterialDetailController extends BaseController{
 				grcjMap.put("declaration_id", declaration_id);
 				grcjMap.put("content", gr_content);
 				this.mdService.insertAchievement(grcjMap);
+			}
+			//扩展信息
+			String kz_content[] = request.getParameterValues("kz_content");
+			String extension_id[] = request.getParameterValues("extension_id");
+			if(extension_id!=null && extension_id.length>0){
+				for(int i=0;i<extension_id.length;i++) { //遍历数组
+					if(!extension_id[i].equals("")){ //判断是否存在
+						Map<String,Object> ExtensionMap = new HashMap<String,Object>();
+						ExtensionMap.put("declaration_id", declaration_id);
+						ExtensionMap.put("extension_id", extension_id[i]);
+						ExtensionMap.put("content", kz_content[i]);
+						this.mdService.insertZjZjkzbb(ExtensionMap);
+					}
+				}
 			}
 			//主编学术专著情况
 			String zb_monograph_name[] = request.getParameterValues("zb_monograph_name");
@@ -577,6 +596,7 @@ public class MaterialDetailController extends BaseController{
 		materialMap = this.mdService.queryMaterialbyId(material_id);
 		queryMap.put("is_multi_books", materialMap.get("is_multi_books"));
 		queryMap.put("is_multi_position", materialMap.get("is_multi_position"));
+		queryMap.put("is_digital_editor_optional", materialMap.get("is_digital_editor_optional"));
 		//2.作家申报职位暂存
 		List<Map<String,Object>> tssbList = new ArrayList<Map<String,Object>>();
 		if(gezlList.get(0).get("is_staging").toString().equals("1")){ //表示暂存
@@ -584,6 +604,42 @@ public class MaterialDetailController extends BaseController{
 		}else{
 			tssbList=this.mdService.queryTsxz(queryMap);
 		}
+		if(tssbList.size()>0){
+			for (Map<String, Object> map : tssbList) {
+				String pos_a = ""; //主编 4
+				String pos_b = ""; //副主编 2
+				String pos_c = ""; //编委 1
+				String pos_d = ""; //数字编委 8
+				if(map.get("preset_position").equals(3)){//
+					pos_a="";pos_b="1";pos_c="1";pos_d="";
+				}else if(map.get("preset_position").equals(5)){
+					pos_a="1";pos_b="";pos_c="1";pos_d="";
+				}else if(map.get("preset_position").equals(6)){
+					pos_a="1";pos_b="1";pos_c="";pos_d="";
+				}else if(map.get("preset_position").equals(9)){
+					pos_a="";pos_b="";pos_c="1";pos_d="1";
+				}else if(map.get("preset_position").equals(10)){
+					pos_a="";pos_b="1";pos_c="";pos_d="1";
+				}else if(map.get("preset_position").equals(12)){
+					pos_a="1";pos_b="";pos_c="";pos_d="1";
+				}else if(map.get("preset_position").equals(7)){
+					pos_a="1";pos_b="1";pos_c="1";pos_d="";
+				}else if(map.get("preset_position").equals(11)){
+					pos_a="";pos_b="1";pos_c="1";pos_d="1";
+				}else if(map.get("preset_position").equals(13)){
+					pos_a="1";pos_b="";pos_c="1";pos_d="1";
+				}else if(map.get("preset_position").equals(14)){
+					pos_a="1";pos_b="";pos_c="1";pos_d="1";
+				}else if(map.get("preset_position").equals(15)){
+					pos_a="1";pos_b="1";pos_c="1";pos_d="1";
+				}
+				map.put("pos_a", pos_a);
+				map.put("pos_b", pos_b);
+				map.put("pos_c", pos_c);
+				map.put("pos_d", pos_d);
+			}
+		}
+		
 		//3.作家学习经历表
 		List<Map<String,Object>> stuList = new ArrayList<Map<String,Object>>();
 		stuList=this.mdService.queryStu(queryMap);
@@ -607,7 +663,9 @@ public class MaterialDetailController extends BaseController{
 		gjghjcList = this.mdService.queryGjghjc(queryMap);
 		//10.作家教材编写情况表
 		List<Map<String,Object>> jcbxList = new ArrayList<Map<String,Object>>();
+		List<Map<String,Object>> jcbxqtList = new ArrayList<Map<String,Object>>();
 		jcbxList=this.mdService.queryJcbx(queryMap);
+		jcbxqtList=this.mdService.queryqtJcbx(queryMap);
 		//11.作家科研情况表
 		List<Map<String,Object>> zjkyList = new ArrayList<Map<String,Object>>();
 		zjkyList = this.mdService.queryZjkyqk(queryMap);
@@ -692,6 +750,7 @@ public class MaterialDetailController extends BaseController{
 		mav.addObject("acadeList", acadeList);
 		mav.addObject("materialMap", queryMap);
 		mav.addObject("userMap", userMap);
+		mav.addObject("jcbxqtList", jcbxqtList);
 		return mav;
 	}
 	
@@ -759,10 +818,15 @@ public class MaterialDetailController extends BaseController{
 			String syllabus_names[] = request.getParameterValues("syllabus_name");
 			for(int i=0;i<preset_positions.length;i++) { //遍历数组
 				Map<String,Object> tsxzMap = new HashMap<String,Object>();
-				String preset_position = request.getParameter(preset_positions[i].toString());
+				String preset_position[] = request.getParameterValues(preset_positions[i].toString());
+				int k = 0;
+				//遍历职位信息
+				for (String st : preset_position) {
+					k+=Integer.parseInt(st);
+				}
 				tsxzMap.put("textbook_id", textbook_ids[i]);
 				tsxzMap.put("declaration_id", declaration_id);
-				tsxzMap.put("preset_position", preset_position);
+				tsxzMap.put("preset_position", k);
 				tsxzMap.put("is_on_list", "1"); //默认值
 				tsxzMap.put("author_id", user_id); //暂存人Id
 				tsxzMap.put("is_background", is_background); //是否为社内用户
@@ -944,6 +1008,20 @@ public class MaterialDetailController extends BaseController{
 				grcjMap.put("content", gr_content);
 				this.mdService.updateAchievement(grcjMap);
 			}
+			//扩展信息
+			String kz_content[] = request.getParameterValues("kz_content");
+			String extension_id[] = request.getParameterValues("extension_id");
+			if(extension_id!=null && extension_id.length>0){
+				for(int i=0;i<extension_id.length;i++) { //遍历数组
+					if(!extension_id[i].equals("")){ //判断是否存在
+						Map<String,Object> ExtensionMap = new HashMap<String,Object>();
+						ExtensionMap.put("declaration_id", declaration_id);
+						ExtensionMap.put("extension_id", extension_id[i]);
+						ExtensionMap.put("content", kz_content[i]);
+						this.mdService.insertZjZjkzbb(ExtensionMap);
+					}
+				}
+			}	
 			//主编学术专著情况
 			String zb_monograph_name[] = request.getParameterValues("zb_monograph_name");
 			String zb_publisher[] = request.getParameterValues("zb_publisher");

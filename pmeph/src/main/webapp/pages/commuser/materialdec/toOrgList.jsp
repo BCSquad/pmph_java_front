@@ -22,28 +22,29 @@
 <body>
 	<!-- 查询栏 -->
 	<div class="qy_div">
-		<table style="margin-top: 15px;width: 100%">
-			<tr>
-				<td width="15%">单位名称:</td>
-				<td width="30%"><input class="cg_input" id="orgname" name="orgname" value="${paraMap.orgname}"/>
-				<input class="cg_input" type="hidden" id="material_id" value="${paraMap.material_id}" /></td>
-				<td align="center">
-					<div class="bt_tj" onclick="javascript:query()"><span>查询</span></div>
-				</td>
-			</tr>
-		</table>
+		<div style="width: 100%;margin-top: 20px;">
+			<span class="mc1">单位名称：</span>
+			<input type="hidden" name="material_id" value="${paraMap.material_id}">
+			<input class="cg_input" style="width: 457px;height: 36px;" id="orgname" name="orgname" value="${paraMap.orgname}" />
+			<div class="cxbutn" onclick="javascript:query()">
+				<span>查询</span>
+			</div>
+		</div>
 		<div style="height: 10px;"></div>
-		<table id="org_tab" class="tab" cellpadding="0" cellspacing="0">
-			<tr style="height: 35px;">
-				<td style="border-bottom: 2px #dddddd solid;width: 30px;"></td>
-				<td style="border-bottom: 2px #dddddd solid;font-weight: bold;"><span>机构名称</span></td>
-			</tr>
-			<c:forEach var="list" items="${pageResult.rows}">
-				<tr style="height: 35px;">
-					<td style="width: 30px;"><input type="radio" name="radio_id" value="${list.org_id}_${list.org_name}"/></td>
-					<td>${list.org_name}</td>
+		<table id="org_tab" class="tab_2" cellpadding="0" cellspacing="0">
+			<thead>
+				<tr>
+					<td style="border: 1px solid #dedede;"><span class="bt">机构名称</span></td> 
 				</tr>
-			</c:forEach>
+			</thead>
+			<tbody>
+				<c:forEach var="list" items="${pageResult.rows}">
+					<tr>
+						<td style="height: 45px;border: 1px solid #dedede;"><input type="radio" name="radio_id" value="${list.org_id}_${list.org_name}"/>
+							${list.org_name}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
 		</table>
 		<div class="pageDiv" style="margin-top: 20px;">
              <ul class="pagination" id="page1">

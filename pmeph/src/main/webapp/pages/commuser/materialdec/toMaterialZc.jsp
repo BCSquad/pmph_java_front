@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <%String path = request.getContextPath();%>
 <!DOCTYPE html>
 <html>
@@ -46,13 +47,13 @@
 				<span id="tsxz_span1"></span>
 				<span class="tsxz_title">图书选择(
 					<c:if test="${materialMap.is_multi_books =='1'}">
-					可以选择多本书籍，</c:if>
+					可以选择多本书籍</c:if>
 					<c:if test="${materialMap.is_multi_books !='1'}">
-					只能选择一本书籍，</c:if>
+					，只能选择一本书籍</c:if>
 					<c:if test="${materialMap.is_multi_position =='1'}">
-					每本书籍可选多个职位，</c:if>
+					，每本书籍可选多个职位</c:if>
 					<c:if test="${materialMap.is_multi_position !='1'}">
-					每本书籍只能选择一个职位。
+					，每本书籍只能选择一个职位。
 					</c:if>
 					)
 				</span>
@@ -71,12 +72,22 @@
 					<div style="float: left;margin-left: 30px;" class="ts_radio">
 						<table style="width: 280px;">
 							<tr>
-								<td><input type="radio" name="zw_1_${status.count}" value="4" ${list.preset_position=='4'?'checked':'' }/>主编</td>
-								<td><input type="radio" name="zw_1_${status.count}" value="2" ${list.preset_position=='2'?'checked':'' }/>副编委</td>
-								<td><input type="radio" name="zw_1_${status.count}" value="1" ${list.preset_position=='1'?'checked':'' }/>编委</td>
-								<c:if test="${materialMap.is_digital_editor_optional =='1'}">
-								<td><input type="radio" name="zw_1_${status.count}" value="8" ${list.preset_position=='8'?'checked':'' }/>数字编委</td>
-								</c:if>
+								<c:if test="${materialMap.is_multi_position =='1'}">
+									<td><input type="checkbox" name="zw_1_${status.count}" value="4" ${list.pos_a=='1'?'checked':'' }/>主编</td>
+									<td><input type="checkbox" name="zw_1_${status.count}" value="2" ${list.pos_b=='1'?'checked':'' }/>副编委</td>
+									<td><input type="checkbox" name="zw_1_${status.count}" value="1" ${list.pos_c=='1'?'checked':'' }/>编委</td>
+									<c:if test="${materialMap.is_digital_editor_optional =='1'}">
+									<td><input type="checkbox" name="zw_1_${status.count}" value="8" ${list.pos_d=='1'?'checked':'' }/>数字编委</td>
+									</c:if>
+								</c:if>	
+								<c:if test="${materialMap.is_multi_position !='1'}">
+									<td><input type="radio" name="zw_1_${status.count}" value="4" ${list.preset_position=='4'?'checked':'' }/>主编</td>
+									<td><input type="radio" name="zw_1_${status.count}" value="2" ${list.preset_position=='2'?'checked':'' }/>副编委</td>
+									<td><input type="radio" name="zw_1_${status.count}" value="1" ${list.preset_position=='1'?'checked':'' }/>编委</td>
+									<c:if test="${materialMap.is_digital_editor_optional =='1'}">
+									<td><input type="radio" name="zw_1_${status.count}" value="8" ${list.preset_position=='8'?'checked':'' }/>数字编委</td>
+									</c:if>
+								</c:if>	
 							</tr>
 						</table>
 						<!-- 用于遍历radio中的值 -->
@@ -132,8 +143,8 @@
 						<td><span class="btbs">*</span><span>职&emsp;&emsp;称：</span>
 							<input class="cg_input" name="title" value="${gezlList.title}" id="zc"  maxlength="10"/></td>
                         </td>
-						<td><span class="btbs">*</span><span>地&emsp;&emsp;址：</span>
-							<input class="cg_input" name="address" value="${gezlList.address}" id="address"  maxlength="17"/></td>
+						<td><span class="btbs">*</span><span style="width: 70px">E-mail：</span>
+							<input class="cg_input" name="email" value="${gezlList.email}" id="email" maxlength="40"/></td>
 					</tr>
 					<tr>
 						<td><span>&ensp;邮&emsp;&emsp;编：</span>
@@ -150,8 +161,6 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span class="btbs">*</span><span style="width: 70px">E-mail：</span>
-							<input class="cg_input" name="email" value="${gezlList.email}" id="email" maxlength="40"/></td>
 						<td><span class="btbs">*</span><span>证件类型：</span>
                             <select class="select-input" id="zjlx" name="idtype">
                                 <option value="0" ${gezlList.idtype=='0'?'selected':'' }>身份证</option>
@@ -160,7 +169,8 @@
                             </select></td>
 						<td><span class="btbs">*</span><span>证件号码：</span>
 							<input class="cg_input" name="idcard" value="${gezlList.idcard}" id="idcard" maxlength="18"/></td>
-						<td></td>
+						<td colspan="2"><span class="btbs">*</span><span>地&emsp;&emsp;址：</span>
+							<input class="cg_input" style="width: 488px;" name="address" value="${gezlList.address}" id="address"  maxlength="17"/></td>
 					</tr>
 				</table>
 			</div>
@@ -186,18 +196,20 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>
-								<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'" z-index="100" max="'$#xx_jssj'" name="xx_kssj" id="xx_kssj" value="" style="width: 80px;" maxlength="20"/>
-								-
-								<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'" z-index="100" min="'$#xx_kssj'" name="xx_jssj" id="xx_jssj" value="" style="width: 80px;" maxlength="20"/>
-							</td>
-							<td><input class="cg_input" name="xx_school_name" value="" placeholder="学校名称"  maxlength="36"/></td>
-							<td><input class="cg_input" name="xx_major" value="" placeholder="所学专业"  maxlength="16"/></td>
-							<td><input class="cg_input" name="xx_degree" value="" style="width: 120px;" placeholder="学历"  maxlength="10"/></td>
-							<td><input class="cg_input" name="xx_note" value="" style="width: 310px;" placeholder="备注"  maxlength="33"/></td>
-							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_xxjl()"/></td>
-						</tr>
+						<c:if test="${empty stuList[0]}">
+							<tr>
+								<td>
+									<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'" z-index="100" max="'$#xx_jssj'" name="xx_kssj" id="xx_kssj" value="" style="width: 80px;" maxlength="20"/>
+									-
+									<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'" z-index="100" min="'$#xx_kssj'" name="xx_jssj" id="xx_jssj" value="" style="width: 80px;" maxlength="20"/>
+								</td>
+								<td><input class="cg_input" name="xx_school_name" value="" placeholder="学校名称"  maxlength="36"/></td>
+								<td><input class="cg_input" name="xx_major" value="" placeholder="所学专业"  maxlength="16"/></td>
+								<td><input class="cg_input" name="xx_degree" value="" style="width: 120px;" placeholder="学历"  maxlength="10"/></td>
+								<td><input class="cg_input" name="xx_note" value="" style="width: 310px;" placeholder="备注"  maxlength="33"/></td>
+								<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_xxjl()"/></td>
+							</tr>
+						</c:if>
 						<c:forEach var="list" items="${stuList}" varStatus="status">
 							<tr id="xxjl_${status.count}">
 								<td>
@@ -209,7 +221,17 @@
 								<td><input class="cg_input" name="xx_major" value="${list.major}" placeholder="所学专业"  maxlength="16"/></td>
 								<td><input class="cg_input" name="xx_degree" value="${list.degree}" style="width: 120px;" placeholder="学历"  maxlength="10"/></td>
 								<td><input class="cg_input" name="xx_note" value="${list.note}" style="width: 310px;" placeholder="备注"  maxlength="33"/></td>
-								<td><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('xxjl_${status.count}')"/></td>
+								<td>
+									<c:choose>
+										<%-- <c:when test="${status.count == fn:length(stuList)}"> --%>
+										<c:when test="${status.count == 1}"> 
+											<img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_xxjl()"/>
+										</c:when>
+										<c:otherwise>
+											<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('xxjl_${status.count}')"/>
+										</c:otherwise>
+									</c:choose>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -236,17 +258,19 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>
-								<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'" z-index="100"  name="gz_kssj" max="'$#gz_jssj'" id="gz_kssj" value="" style="width: 80px;"/>
-								-
-								<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="gz_jssj" min="'$#gz_kssj'" id="gz_jssj" value="" style="width: 80px;"/>
-							</td>
-							<td><input class="cg_input" name="gz_org_name" value="" placeholder="工作单位"  maxlength="33"/></td>
-							<td><input class="cg_input" name="gz_position" value="" placeholder="职位"  maxlength="33"/></td>
-							<td><input class="cg_input" name="gz_note" value="" style="width: 370px;" placeholder="备注" maxlength="33"/></td>
-							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_gzjl()"/></td>
-						</tr>
+						<c:if test="${empty workList[0]}">
+							<tr>
+								<td>
+									<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'" z-index="100"  name="gz_kssj" max="'$#gz_jssj'" id="gz_kssj" value="" style="width: 80px;"/>
+									-
+									<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="gz_jssj" min="'$#gz_kssj'" id="gz_jssj" value="" style="width: 80px;"/>
+								</td>
+								<td><input class="cg_input" name="gz_org_name" value="" placeholder="工作单位"  maxlength="33"/></td>
+								<td><input class="cg_input" name="gz_position" value="" placeholder="职位"  maxlength="33"/></td>
+								<td><input class="cg_input" name="gz_note" value="" style="width: 370px;" placeholder="备注" maxlength="33"/></td>
+								<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_gzjl()"/></td>
+							</tr> 
+						</c:if>
 						<c:forEach var="list" items="${workList}" varStatus="status">
 							<tr id="gzjl_${status.count}">
 								<td>
@@ -257,7 +281,14 @@
 								<td><input class="cg_input" name="gz_org_name" value="${list.org_name}" placeholder="工作单位" maxlength="33"/></td>
 								<td><input class="cg_input" name="gz_position" value="${list.position}" placeholder="职位"  maxlength="33"/></td>
 								<td><input class="cg_input" name="gz_note" value="${list.note}" style="width: 370px;" placeholder="备注" maxlength="33"/></td>
-								<td><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('xxjl_${status.count}')"/></td>
+								<td><c:choose>
+									<c:when test="${status.count == 1}"> 
+										<img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_gzjl()"/>
+									</c:when>
+									<c:otherwise>
+										<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('gzjl_${status.count}')"/>
+									</c:otherwise>
+								</c:choose></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -284,17 +315,19 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>
-								<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'"  z-index="100"  name="jx_kssj" max="'$#jx_jssj'"  id="jx_kssj" value="" style="width: 80px;"/>
-								-
-								<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="jx_jssj" min="'#jx_kssj'" id="jx_jssj" value="" style="width: 80px;"/>
-							</td>
-							<td><input class="cg_input"  maxlength="33" name="jx_school_name" value="" placeholder="学校名称"/></td>
-							<td><input class="cg_input" maxlength="50" name="jx_subject" value="" placeholder="教学科目"/></td>
-							<td><input class="cg_input" maxlength="33" name="jx_note" value="" style="width: 370px;" placeholder="备注"/></td>
-							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jxjl()"/></td>
-						</tr>
+						<c:if test="${empty steaList[0]}">
+							 <tr>
+								<td>
+									<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'"  z-index="100"  name="jx_kssj" max="'$#jx_jssj'"  id="jx_kssj" value="" style="width: 80px;"/>
+									-
+									<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="jx_jssj" min="'#jx_kssj'" id="jx_jssj" value="" style="width: 80px;"/>
+								</td>
+								<td><input class="cg_input"  maxlength="33" name="jx_school_name" value="" placeholder="学校名称"/></td>
+								<td><input class="cg_input" maxlength="50" name="jx_subject" value="" placeholder="教学科目"/></td>
+								<td><input class="cg_input" maxlength="33" name="jx_note" value="" style="width: 370px;" placeholder="备注"/></td>
+								<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jxjl()"/></td>
+							</tr> 
+						</c:if>
 						<c:forEach var="list" items="${steaList}" varStatus="status">
 							<tr id="jxjz_${status.count}">
 								<td>
@@ -305,7 +338,14 @@
 							<td><input class="cg_input" maxlength="33" name="jx_school_name" value="${list.school_name}" placeholder="学校名称"/></td>
 							<td><input class="cg_input" maxlength="50" name="jx_subject" value="${list.subject}" placeholder="教学科目"/></td>
 							<td><input class="cg_input" maxlength="33" name="jx_note" value="${list.note}" style="width: 370px;" placeholder="备注"/></td>
-								<td><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('jxjz_${status.count}')"/></td>
+							<td><c:choose>
+									<c:when test="${status.count == 1}"> 
+										<img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jxjl()"/>
+									</c:when>
+									<c:otherwise>
+										<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('jxjz_${status.count}')"/>
+									</c:otherwise>
+								</c:choose></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -313,18 +353,25 @@
 			</div>
 		</div>
 		
-		<!--扩展信息-->
-		<c:forEach var="zjkzxx" items="${zjkzxxList}">
-		 	<div class="sbxq_item">
+		<!--扩展信息-->					
+		<c:forEach var="zjkzxx" items="${zjkzqkList}">
+		 	<div class="sbxq_item1">
 				<div>
 					<span id="tsxz_span9"></span>
-					<span class="tsxz_title">${zjkzxx.extension_name}（选填）</span>
-					<input type="hidden" name="extension_id" value="${zjkzxx.id}"/>
+					<span class="tsxz_title">${zjkzxx.extension_name}</span>
+					 <c:choose>
+						<c:when test="${zjkzxx.is_required == true}">
+							<span class="tsxz_ts" style="display: inline;"><img src="${ctx}/statics/image/btxx.png" /></span>
+						</c:when>
+						<c:otherwise>
+							<span class="tsxz_xt" style="display: inline;">（选填）</span>
+						</c:otherwise>
+					</c:choose>
+					<input type="hidden" name="extension_id" value="${zjkzxx.extension_id}"/>
 				</div>
 				<div class="content">
-					<textarea class="text_cl" name="content">${zjkzxx.content}</textarea>
+					<textarea class="text_cl" name="kz_content">${zjkzxx.content}</textarea> 
 				</div>
-				<hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">
 			</div>
 		</c:forEach>
 		
@@ -348,21 +395,23 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td><input class="cg_input" maxlength="33" name="xs_org_name" id="xs_org_name" value="" placeholder="学术组织"/></td>
-							<td style="color: #333333;">
-								<table class="radio_tb" style="width: 220px;"><tr>
-									<td><input type="radio" name="xs_rank_a" value="1" checked="checked"/>国际</td>
-									<td><input type="radio" name="xs_rank_a" value="2" />国家</td>
-									<td><input type="radio" name="xs_rank_a" value="3" />省部</td>
-									<td><input type="radio" name="xs_rank_a" value="4" />其他</td>
-								</tr></table>
-								<input type="hidden" name="xs_rank" value="xs_rank_a" />
-							</td>
-							<td><input class="cg_input" maxlength="16" name="xs_position" value="" placeholder="职务"/></td>
-							<td><input class="cg_input" maxlength="33" name="xs_note" value="" style="width: 370px;" placeholder="备注"/></td>
-							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_xsjz()"/></td>
-						</tr>
+						<c:if test="${empty zjxsList[0]}">
+							 <tr>
+								<td><input class="cg_input" maxlength="33" name="xs_org_name" id="xs_org_name" value="" placeholder="学术组织"/></td>
+								<td style="color: #333333;">
+									<table class="radio_tb" style="width: 220px;"><tr>
+										<td><input type="radio" name="xs_rank_a" value="1" checked="checked"/>国际</td>
+										<td><input type="radio" name="xs_rank_a" value="2" />国家</td>
+										<td><input type="radio" name="xs_rank_a" value="3" />省部</td>
+										<td><input type="radio" name="xs_rank_a" value="4" />其他</td>
+									</tr></table>
+									<input type="hidden" name="xs_rank" value="xs_rank_a" />
+								</td>
+								<td><input class="cg_input" maxlength="16" name="xs_position" value="" placeholder="职务"/></td>
+								<td><input class="cg_input" maxlength="33" name="xs_note" value="" style="width: 370px;" placeholder="备注"/></td>
+								<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_xsjz()"/></td>
+							</tr> 
+						</c:if>
 						<c:forEach var="list" items="${zjxsList}" varStatus="status">
 							<tr id="xsjz_${status.count}">
 								<td><input class="cg_input" maxlength="33" name="xs_org_name" id="xs_org_name" value="${list.org_name}" placeholder="学术组织"/></td>
@@ -377,7 +426,14 @@
 							</td>
 							<td><input class="cg_input" maxlength="16" name="xs_position" value="${list.position}" placeholder="职务"/></td>
 							<td><input class="cg_input" maxlength="33" name="xs_note" value="${list.note}" style="width: 370px;" placeholder="备注"/></td>
-							<td><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('xsjz_${status.count}')"/></td>
+							<td><c:choose>
+									<c:when test="${status.count == 1}"> 
+										<img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_xsjz()"/>
+									</c:when>
+									<c:otherwise>
+										<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('xsjz_${status.count}')"/>
+									</c:otherwise>
+								</c:choose></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -404,7 +460,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<c:if test="${empty jcbjList[0]}">
+						 <tr>
 							<td><input class="cg_input" maxlength="33" name="jc_material_name" id="jc_material_name" value="" style="width: 360px;" placeholder="教材名称"/></td>
 							<td style="color: #333333;">
 								<table class="radio_tb" style="width: 230px;"><tr>
@@ -424,7 +481,7 @@
 							</td>
 							<td><input class="cg_input" maxlength="33" name="jc_note" value="" style="width: 230px;" placeholder="备注"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jccb()"/></td>
-						</tr>
+						</tr></c:if>
 						<c:forEach var="list" items="${jcbjList}" varStatus="status">
 							<tr id="jccb_${status.count}">
 								<td><input class="cg_input" maxlength="33" name="jc_material_name" id="jc_material_name" value="${list.material_name}" style="width: 360px;" placeholder="教材名称"/></td>
@@ -445,7 +502,14 @@
 								<input type="hidden" name="jc_is_digital_editor" value="jc_is_digital_editor_${status.count}" />
 							</td>
 								<td><input class="cg_input" maxlength="33" name="jc_note" value="${list.note}" style="width: 230px;" placeholder="备注"/></td>
-							<td><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('jccb_${status.count}')"/></td>
+							<td><c:choose>
+									<c:when test="${status.count == 1}"> 
+										<img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jccb()"/>
+									</c:when>
+									<c:otherwise>
+										<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('jccb_${status.count}')"/>
+									</c:otherwise>
+								</c:choose></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -472,7 +536,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<c:if test="${empty gjkcjsList[0]}">
+						 <tr>
 							<td><input class="cg_input" maxlength="20" name="gj_course_name" id="gj_course_name" value="" style="width: 300px;" placeholder="课程名称"/></td>
 							<td><input class="cg_input" maxlength="20" name="gj_class_hour" value="" style="width: 130px;" placeholder="课时数"/></td>
 							<td style="color: #333333;">
@@ -486,7 +551,7 @@
 							<td><input class="cg_input" maxlength="20" name="gj_note" value="" style="width: 330px;" placeholder="备注"/>
 							</td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jpkcjs('tab_jpkcjs',1)"/></td>
-						</tr>
+						</tr> </c:if>
 						<c:forEach var="list" items="${gjkcjsList}" varStatus="status">
 							<tr id="jpkcjs_${status.count}">
 								<td><input class="cg_input" maxlength="20" name="gj_course_name" id="gj_course_name" value="${list.course_name}" style="width: 300px;" placeholder="课程名称"/></td>
@@ -501,7 +566,14 @@
 								</td>
 								<td><input class="cg_input" maxlength="20" name="gj_note" value="${list.note}" style="width: 330px;" placeholder="备注"/>
 								</td>
-								<td><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('jpkcjs_${status.count}')"/></td>
+								<td><c:choose>
+									<c:when test="${status.count == 1}"> 
+										<img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jpkcjs('tab_jpkcjs',1)"/>
+									</c:when>
+									<c:otherwise>
+										<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('jpkcjs_${status.count}')"/>
+									</c:otherwise>
+								</c:choose></td>
 							</tr>
 						</c:forEach>	
 					</tbody>
@@ -528,7 +600,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<c:if test="${empty gjghjcList[0]}">
+						 <tr>
 							<td><input class="cg_input" maxlength="33" name="hj_material_name" id="hj_material_name" value="" style="width: 300px;" placeholder="教材名称"/></td>
 							<td><input class="cg_input" maxlength="16" name="hj_isbn" value="" style="width: 110px;" placeholder="标准书号"/></td>
 							<td style="color: #333333;">
@@ -541,7 +614,7 @@
 							</td>
 							<td><input class="cg_input" maxlength="33" name="hj_note" value="" style="width: 250px;" placeholder="备注"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_gjghjc()"/></td>
-						</tr>
+						</tr> </c:if>
 						<c:forEach var="list" items="${gjghjcList}" varStatus="status">
 							<tr id="gjghjc_${status.count}">
 								<td><input class="cg_input" maxlength="33" name="hj_material_name" id="hj_material_name" value="${list.material_name}" style="width: 300px;" placeholder="教材名称"/></td>
@@ -555,7 +628,14 @@
 									<input type="hidden" name="hj_rank" value="hj_rank_${status.count}" />
 								</td>
 								<td><input class="cg_input" maxlength="33" name="hj_note" value="${list.note}" style="width: 250px;" placeholder="备注"/></td>
-								<td><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('gjghjc_${status.count}')"/></td>
+								<td><c:choose>
+									<c:when test="${status.count == 1}"> 
+										<img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_gjghjc()"/>
+									</c:when>
+									<c:otherwise>
+										<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('gjghjc_${status.count}')"/>
+									</c:otherwise>
+								</c:choose></td>
 							</tr>
 						</c:forEach>	
 					</tbody>
@@ -586,6 +666,7 @@
 						</tr>
 					</thead>
 					<tbody>
+						<c:if test="${empty jcbxList[0]}">
 						<tr>
 							<td><input class="cg_input" maxlength="33" name="jcb_material_name" id="jcb_material_name" value="" style="width: 200px;" placeholder="教材名称"/></td>
 							<td>
@@ -616,7 +697,7 @@
 							<td><input class="cg_input" maxlength="16" name="jcb_isbn" value="" style="width: 100px;" placeholder="标准书号"/></td>
 							<td><input class="cg_input" maxlength="33" name="jcb_note" value="" placeholder="备注" style="width: 130px;"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jcbx()"/></td>
-						</tr>
+						</tr> </c:if>
 						<c:forEach var="list" items="${jcbxList}" varStatus="status">
 						<c:if test="${list.rank != '0'}">
 						<tr id="jcbx_${status.count}">
@@ -650,7 +731,14 @@
 							<td><input class="cg_input" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="jcb_publish_date" value="${list.publish_date}" style="width: 100px;"/></td>
 							<td><input class="cg_input" name="jcb_isbn" value="${list.isbn}" style="width: 100px;" placeholder="标准书号"/></td>
 							<td><input class="cg_input" name="jcb_note" value="${list.note}" style="width: 130px;" placeholder="备注"/></td>
-							<td><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('jcbx_${status.count}')"/></td>
+							<td><c:choose>
+									<c:when test="${status.count == 1}"> 
+										<img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jcbx()"/>
+									</c:when>
+									<c:otherwise>
+										<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('jcbx_${status.count}')"/>
+									</c:otherwise>
+								</c:choose></td>
 						</tr></c:if>
 						</c:forEach>
 					</tbody>
@@ -680,7 +768,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<c:if test="${empty jcbxqtList[0]}">
+						 <tr>
 							<td><input class="cg_input" name="jcb_material_name" id="qt_jcb_material_name" value="" style="width: 210px;" placeholder="教材名称"/></td>
 							<td>
 								<select id="qtjcjb" name="jcb_position">
@@ -704,9 +793,8 @@
 								<input type="hidden" name="jcb_rank" value="0"/>
 							</td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_qtjcbx()"/></td>
-						</tr>
-						<c:forEach var="list" items="${jcbxList}" varStatus="status">
-						<c:if test="${list.rank == '0'}">
+						</tr></c:if>
+						<c:forEach var="list" items="${jcbxqtList}" varStatus="status">
 							<tr id="qtjcbx_${status.count}">
 								<td><input class="cg_input" name="jcb_material_name" id="jcb_material_name" value="${list.material_name}" style="width: 210px;" placeholder="教材名称"/></td>
 								<td>
@@ -731,9 +819,15 @@
 								<td><input class="cg_input" name="jcb_note" value="${list.note}" placeholder="备注" style="width: 180px;"/>
 									<input type="hidden" name="jcb_rank" value="0"/>
 								</td>
-								<td><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('qtjcbx_${status.count}')"/></td>
+								<td><c:choose>
+									<c:when test="${status.count == 1}"> 
+										<img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_qtjcbx()"/>
+									</c:when>
+									<c:otherwise>
+										<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('qtjcbx_${status.count}')"/>
+									</c:otherwise>
+								</c:choose></td>
 							</tr>
-						</c:if>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -759,20 +853,29 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td><input class="cg_input" maxlength="50" name="zjk_research_name" id="zjk_research_name" value="" style="width: 200px;" placeholder="课题名称"/></td>
-							<td><input class="cg_input" maxlength="33" name="zjk_approval_unit" value="" style="width: 200px;" placeholder="审批单位"/></td>
-							<td><input class="cg_input" maxlength="33" name="zjk_award" value="" style="width: 300px;" placeholder="获奖情况"/></td>
-							<td><input class="cg_input" maxlength="33" name="zjk_note" value="" style="width: 300px;" placeholder="备注"/></td>
-							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="add_zjky()"></td>
-						</tr>
+						<c:if test="${empty zjkyList[0]}">
+							 <tr>
+								<td><input class="cg_input" maxlength="50" name="zjk_research_name" id="zjk_research_name" value="" style="width: 200px;" placeholder="课题名称"/></td>
+								<td><input class="cg_input" maxlength="33" name="zjk_approval_unit" value="" style="width: 200px;" placeholder="审批单位"/></td>
+								<td><input class="cg_input" maxlength="33" name="zjk_award" value="" style="width: 300px;" placeholder="获奖情况"/></td>
+								<td><input class="cg_input" maxlength="33" name="zjk_note" value="" style="width: 300px;" placeholder="备注"/></td>
+								<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="add_zjky()"></td>
+							</tr> 
+						</c:if>
 						<c:forEach var="list" items="${zjkyList}" varStatus="status">
 							<tr id="zjky_${status.count}">
 								<td><input class="cg_input" maxlength="50" name="zjk_research_name" id="zjk_research_name" value="${list.research_name}" style="width: 200px;" placeholder="课题名称"/></td>
 								<td><input class="cg_input" maxlength="33" name="zjk_approval_unit" value="${list.approval_unit}" style="width: 200px;" placeholder="审批单位"/></td>
 								<td><input class="cg_input" maxlength="33" name="zjk_award" value="${list.award}" style="width: 300px;" placeholder="获奖情况"/></td>
 								<td><input class="cg_input" maxlength="33" name="zjk_note" value="${list.note}" style="width: 300px;" placeholder="备注"/></td>
-								<td><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('zjky_${status.count}')"></td>
+								<td><c:choose>
+									<c:when test="${status.count == 1}"> 
+										<img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_zjky()"/>
+									</c:when>
+									<c:otherwise>
+										<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('zjky_${status.count}')"/>
+									</c:otherwise>
+								</c:choose></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -812,7 +915,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<c:if test="${empty monographList[0]}">
+						 <tr>
 							<td><input class="cg_input" name="zb_monograph_name" id="zb_monograph_name" value="" style="width: 300px;" placeholder="教材名称" maxlength="16"/></td>
 							<td style="color: #333333;">
 								<table class="radio_tb" style="width: 100px;"><tr>
@@ -825,7 +929,7 @@
 							<td><input class="cg_input" name="zb_publish_date" value="" style="width: 120px;" calendar format="'yyyy-mm-dd'" placeholder="出版时间"/></td>
 							<td><input class="cg_input" name="zb_note" value="" style="width: 250px;" placeholder="备注"  maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_zbxszz()"/></td>
-						</tr>
+						</tr></c:if>
 						<c:forEach var="list" items="${monographList}" varStatus="status">
 							<tr id="zbxszz_${status.count}">
 								<td><input class="cg_input" name="zb_monograph_name" id="zb_monograph_name" value="${list.monograph_name}" style="width: 300px;" placeholder="教材名称" maxlength="16"/></td>
@@ -839,7 +943,14 @@
 								<td><input class="cg_input" name="zb_publisher" value="${list.publisher}" style="width: 180px;" placeholder="出版单位"  maxlength="16"/></td>
 								<td><input class="cg_input" name="zb_publish_date" value="${list.publish_date}" style="width: 120px;" calendar format="'yyyy-mm-dd'" placeholder="出版时间"/></td>
 								<td><input class="cg_input" name="zb_note" value="${list.note}" style="width: 250px;" placeholder="备注"  maxlength="33"/></td>
-								<td><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('zbxszz_${status.count}')"></td>
+								<td><c:choose>
+									<c:when test="${status.count == 1}"> 
+										<img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_zbxszz()"/>
+									</c:when>
+									<c:otherwise>
+										<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('zbxszz_${status.count}')"/>
+									</c:otherwise>
+								</c:choose></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -866,7 +977,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<c:if test="${empty publishList[0]}">
+						 <tr>
 							<td><input class="cg_input" name="pu_reward_name" id="pu_reward_name" value="" style="width: 300px;" placeholder="奖项名称" maxlength="16"/></td>
 							<td><input class="cg_input" name="pu_award_unit" value="" style="width: 300px;" placeholder="评奖单位" maxlength="16"/></td>
 							<td>
@@ -874,7 +986,7 @@
 							</td>
 							<td><input class="cg_input" name="pu_note" value="" style="width: 250px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_publish()"/></td>
-						</tr>
+						</tr> </c:if>
 						<c:forEach var="list" items="${publishList}" varStatus="status">
 							<tr id="publish_${status.count}">
 								<td><input class="cg_input" name="pu_reward_name" id="pu_reward_name" value="${list.reward_name}" style="width: 300px;" placeholder="奖项名称" maxlength="16"/></td>
@@ -883,7 +995,14 @@
 									<input class="cg_input" name="pu_reward_date" value="${list.reward_date}" style="width: 120px;" calendar format="'yyyy-mm-dd'"  placeholder="获奖时间"/>
 								</td>
 								<td><input class="cg_input" name="pu_note" value="${list.note}" style="width: 250px;" placeholder="备注" maxlength="33"/></td>
-								<td><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('publish_${status.count}')"></td>
+								<td><c:choose>
+									<c:when test="${status.count == 1}"> 
+										<img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_publish()"/>
+									</c:when>
+									<c:otherwise>
+										<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('publish_${status.count}')"/>
+									</c:otherwise>
+								</c:choose></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -911,14 +1030,15 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<c:if test="${empty sciList[0]}">
+						 <tr>
 							<td><input class="cg_input" name="sci_paper_name" id="sci_paper_name" value="" style="width: 300px;" placeholder="论文名称" maxlength="16"/></td>
 							<td><input class="cg_input" name="sci_journal_name" value="" style="width: 130px;" placeholder="期刊名称" maxlength="16"/></td>
 							<td><input class="cg_input" name="sci_factor" value="" style="width: 170px;" placeholder="期刊SCI影响因子" maxlength="7"/></td>
 							<td><input class="cg_input" name="sci_publish_date" value="" style="width: 110px;" calendar format="'yyyy-mm-dd'" placeholder="发表时间"/></td>
 							<td><input class="cg_input" name="sci_note" value="" style="width: 250px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_sci()"/></td>
-						</tr>
+						</tr> </c:if>
 						<c:forEach var="list" items="${sciList}" varStatus="status">
 							<tr id="sci_${status.count}">
 								<td><input class="cg_input" name="sci_paper_name" id="sci_paper_name" value="${list.paper_name}" style="width: 300px;" placeholder="论文名称" maxlength="16"/></td>
@@ -926,7 +1046,14 @@
 								<td><input class="cg_input" name="sci_factor" value="${list.factor}" style="width: 170px;" placeholder="期刊SCI影响因子" maxlength="7"/></td>
 								<td><input class="cg_input" name="sci_publish_date" value="${list.publish_date}" style="width: 110px;" calendar format="'yyyy-mm-dd'" placeholder="发表时间"/></td>
 								<td><input class="cg_input" name="sci_note" value="${list.note}" style="width: 250px;" placeholder="备注" maxlength="33"/></td>
-								<td><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('sci_${status.count}')"></td>
+								<td><c:choose>
+									<c:when test="${status.count == 1}"> 
+										<img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_sci()"/>
+									</c:when>
+									<c:otherwise>
+										<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('sci_${status.count}')"/>
+									</c:otherwise>
+								</c:choose></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -953,7 +1080,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<c:if test="${empty clinicalList[0]}">
+						 <tr>
 							<td><input class="cg_input" name="cl_reward_name" maxlength="16" id="cl_reward_name" value="" style="width: 300px;" placeholder="奖项名称"/></td>
 							<td style="color: #333333;">
 								<table class="radio_tb" style="width: 180px;"><tr>
@@ -966,7 +1094,7 @@
 							<td><input class="cg_input" name="cl_reward_date" value="" style="width: 180px;" calendar format="'yyyy-mm-dd'" placeholder="获奖时间"/></td>
 							<td><input class="cg_input" name="cl_note" value="" style="width: 330px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_clinical()"/></td>
-						</tr>
+						</tr> </c:if>
 						<c:forEach var="list" items="${clinicalList}" varStatus="status">
 							<tr id="clinical_${status.count}">
 								<td><input class="cg_input" name="cl_reward_name" maxlength="16" id="cl_reward_name" value="${list.reward_name}" style="width: 300px;" placeholder="奖项名称"/></td>
@@ -980,7 +1108,14 @@
 							</td>
 							<td><input class="cg_input" name="cl_reward_date" value="${list.reward_date}" style="width: 180px;" calendar format="'yyyy-mm-dd'" placeholder="获奖时间"/></td>
 							<td><input class="cg_input" name="cl_note" value="${list.note}" style="width: 330px;" placeholder="备注" maxlength="33"/></td>
-								<td><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('clinical_${status.count}')"></td>
+							<td><c:choose>
+									<c:when test="${status.count == 1}"> 
+										<img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_clinical()"/>
+									</c:when>
+									<c:otherwise>
+										<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('clinical_${status.count}')"/>
+									</c:otherwise>
+								</c:choose></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -1007,7 +1142,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<c:if test="${empty acadeList[0]}">
+						 <tr>
 							<td><input class="cg_input" name="ac_reward_name" maxlength="16" id="ac_reward_name" value="" style="width: 300px;" placeholder="荣誉名称"/></td>
 							<td style="color: #333333;">
 								<table class="radio_tb" style="width:280px;"><tr>
@@ -1022,7 +1158,7 @@
 							<td><input class="cg_input" name="ac_reward_date" value="" style="width: 150px;" calendar format="'yyyy-mm-dd'" placeholder="授予时间"/></td>
 							<td><input class="cg_input" name="ac_note" value="" style="width: 280px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_acade()"/></td>
-						</tr>
+						</tr> </c:if>
 						<c:forEach var="list" items="${acadeList}" varStatus="status">
 							<tr id="acade_${status.count}">
 								<td><input class="cg_input" name="ac_reward_name" maxlength="16" id="ac_reward_name" value="${list.reward_name}" style="width: 300px;" placeholder="荣誉名称"/></td>
@@ -1038,7 +1174,14 @@
 								</td>
 								<td><input class="cg_input" name="ac_reward_date" value="${list.reward_date }" style="width: 150px;" calendar format="'yyyy-mm-dd'" placeholder="授予时间"/></td>
 								<td><input class="cg_input" name="ac_note" value="${list.note }" style="width: 280px;" placeholder="备注" maxlength="33"/></td>
-								<td><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('acade_${status.count}')"></td>
+								<td><c:choose>
+									<c:when test="${status.count == 1}"> 
+										<img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_acade()"/>
+									</c:when>
+									<c:otherwise>
+										<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('acade_${status.count}')"/>
+									</c:otherwise>
+								</c:choose></td>
 							</tr>
 						</c:forEach>
 					</tbody>

@@ -59,9 +59,7 @@
 		t1.is_acade_reward_used*1 is_acade_reward_used,
 		t1.is_acade_reward_required*1 is_acade_reward_required, 
 		t1.is_published*1 is_published, 
-		t1.is_public*1 is_public, 
-		 t2.extension_name,t2.is_required from material t1 left join material_extension t2 
-			on t1.id=t2.material_id where t1.id = #{material_id}
+		t1.is_public*1 is_public from material t1 where t1.id = #{material_id}
 	</select>
 	
 	<!-- 通过教材ID查询所有书籍 -->
@@ -220,7 +218,11 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 	<select id="queryJcbx" resultType="java.util.Map" parameterType="java.util.Map">
 		select id,declaration_id,material_name,rank,position,
 		is_digital_editor*1 is_digital_editor,publisher,publish_date,isbn,note,sort
-		 from dec_textbook where declaration_id = #{declaration_id} ORDER BY sort 
+		 from dec_textbook where declaration_id = #{declaration_id}
+		 <if test="rank != null and rank != ''">
+		  and rank =#{rank} 
+		  </if>
+		  ORDER BY sort 
 	</select>
 	<insert id="insertJcbx" parameterType="java.util.Map">
 		insert into dec_textbook(declaration_id,material_name,rank,position,publisher,publish_date,isbn,note,is_digital_editor)
@@ -242,13 +244,16 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 	</delete>
 	<!-- 作家扩展项填报表 -->
 	<select id="queryZjkzbb" resultType="java.util.Map" parameterType="java.util.Map">
-		select t1.*,t2.extension_name from dec_extension t1 LEFT JOIN material_extension t2 ON 
+		select t1.*,t2.extension_name,t2.is_required from dec_extension t1 LEFT JOIN material_extension t2 ON 
 		   t1.extension_id = t2.id where t1.declaration_id = #{declaration_id}
 	</select>
 	<!-- 作家扩展项填报表新增 -->
 	<select id="insertZjkzbb" resultType="java.util.Map" parameterType="java.util.Map">
 		insert into dec_extension(extension_id,declaration_id,content) values(#{extension_id},#{declaration_id},#{content})
 	</select>
+	<delete id="delZjkzbb" parameterType="java.util.Map">
+		delete from dec_extension where declaration_id = #{declaration_id}
+	</delete>
 	
 	<!-- //个人成就 -->
 	<select id="queryAchievement" resultType="java.util.Map" parameterType="java.util.Map">

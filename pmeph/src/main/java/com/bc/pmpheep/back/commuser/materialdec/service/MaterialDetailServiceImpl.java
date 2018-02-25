@@ -88,6 +88,12 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 	public List<Map<String, Object>> queryJcbx(Map<String, Object> map) {
 		return this.madd.queryJcbx(map);
 	}
+	
+	@Override
+	public List<Map<String, Object>> queryqtJcbx(Map<String, Object> map) {
+		map.put("rank", "0");
+		return this.madd.queryJcbx(map);
+	}
 
 	@Override
 	public List<Map<String, Object>> queryTsxz(Map<String, Object> map) {
@@ -178,6 +184,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 		this.madd.DelClinicalreward(map); //临床医学获奖情况
 		this.madd.DelPublish(map);  //出版行业获奖情况
 		this.madd.DelSci(map);   //SCI论文投稿及影响因子
+		this.madd.delZjkzbb(map);   //扩展信息
 		return 1;
 	}
 	@Override

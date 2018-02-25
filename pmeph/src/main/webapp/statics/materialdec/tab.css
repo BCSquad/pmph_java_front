@@ -3,26 +3,9 @@
     	}
     	
 .qy_div{
-	margin-left: 10px;
-	width: 750px;
+	margin-left: 30px;
+	width: 730px;
 	height: 400px;
-}
-
-.tab{
-	width:100%;
-	
-}
-
-.tab tr{
-	
-}
-
-.tab td{
-	border-bottom: 1px #dddddd solid;
-}
-
-.tab td.end{
-	border-bottom: none;
 }
 
 .cg_input{
@@ -53,4 +36,77 @@
 	width: 750px;
 	text-align: center;
 	margin-top: 10px;
+}
+
+.mc1{
+	width: 64px;
+	height: 12px;
+	font-family: MicrosoftYaHei;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 44px;
+	letter-spacing: 0px;
+	color: #454545;
+}
+
+.cxbutn{
+	width: 148px;
+	height: 36px;
+	background-color: #70bcc3;
+	float: right;
+	text-align: center;
+	cursor: pointer;
+	margin-top: 5px;
+}
+
+.cxbutn span{
+	width: 37px;
+	height: 15px;
+	font-family: MicrosoftYaHei;
+	font-size: 16px;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 44px;
+	letter-spacing: 0px;
+	color: #ffffff;
+}
+
+.tab_2{
+	width: 100%;
+	margin-top: 15px;
+	border:1px solid #dedede;
+	empty-cells:show; 
+	border-collapse: collapse;
+}
+
+.tab_2 thead tr{
+	background-color: #dedede;
+	
+}
+
+.tab_2 thead td{
+	font-family: MicrosoftYaHei;
+	font-size: 17px;
+	line-height: 30px;
+	letter-spacing: 0px;
+	color: #000000;
+	border:1px solid #dedede; 
+	height: 40px;
+}
+.tab_2 tbody tr:nth-child(even){
+	background: #faf9f9;
+}
+}
+.tab_2 tbody td{
+	font-family: MicrosoftYaHei;
+	line-height: 30px;
+	letter-spacing: 0px;
+	color: #999999;
+	border:1px solid #dedede; 
+	height: 45px;
+}
+
+.bt{
+	margin-left: 10px;
 }

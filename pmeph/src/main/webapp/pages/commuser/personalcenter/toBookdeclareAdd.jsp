@@ -154,7 +154,7 @@
 						<td><span>一、选题理由：</span></td>
 						<td colspan="3">
 							<div class="content">
-								<textarea class="text_cl" name="reason" ></textarea>
+								<textarea class="text_cl" id="reason" name="reason" ></textarea>
 							</div>
 						</td>
 					</tr>
@@ -162,7 +162,7 @@
 						<td><span>二、出版价值：</span></td>
 						<td colspan="3">
 							<div class="content">
-								<textarea class="text_cl" name="price"></textarea>
+								<textarea class="text_cl" id="price" name="price"></textarea>
 							</div>
 						</td>
 					</tr>
@@ -170,7 +170,7 @@
 						<td><span>三、主要内容：</span></td>
 						<td colspan="3">
 							<div class="content">
-								<textarea class="text_cl" name="extra_score"></textarea>
+								<textarea class="text_cl" id="extra_score" name="extra_score"></textarea>
 							</div>
 						</td>
 					</tr>
@@ -211,21 +211,21 @@
 					<tr>
 						<td width="106px"><span>译稿原书名：</span></td>
 						<td width="400px">
-							<input class="cg_input" name="original_bookname" id="original_bookname" placeholder="" value=""/>
+							<input class="cg_input" name="original_bookname" maxlength="33" id="original_bookname" placeholder="" value=""/>
 						</td>
 						<td style="text-align: center;"><span>原编著者：</span></td>
 						<td width="308px">
-							<input class="cg_input" name="original_author" id="original_author" placeholder="" value=""/>
+							<input class="cg_input" name="original_author" maxlength="33" id="original_author" placeholder="" value=""/>
 						</td>
 					</tr>
 					<tr>
 						<td><span>国籍：</span></td>
 						<td>
-							<input class="cg_input" name="nation" id="nation" placeholder="" value=""/>
+							<input class="cg_input" name="nation" maxlength="20" id="nation" placeholder="" value=""/>
 						</td>
 						<td style="text-align: center;"><span>出版年代及版次：</span></td>
 						<td>
-							<input class="cg_input" name="edition" id="edition" placeholder="出版年代及版次" value=""/>
+							<input class="cg_input" name="edition" maxlength="20" id="edition" placeholder="出版年代及版次" value=""/>
 						</td>
 					</tr>
 				</table>

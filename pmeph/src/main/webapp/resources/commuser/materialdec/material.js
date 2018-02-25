@@ -4,8 +4,8 @@ jsonStr = "{\"id\":\"realname\",\"content\":\"姓名不能为空\"},{\"id\":\"bi
 "{\"id\":\"experience\",\"content\":\"教龄不能为空\"},{\"id\":\"org_name\",\"content\":\"工作单位不能为空\"},{\"id\":\"position\",\"content\":\"职务不能为空\"},"+
 "{\"id\":\"zc\",\"content\":\"职称不能为空\"},{\"id\":\"address\",\"content\":\"地址不能为空\"},{\"id\":\"email\",\"content\":\"邮箱不能为空\"},"+
 "{\"id\":\"handphone\",\"content\":\"手机号码不能为空\"},{\"id\":\"zjlx\",\"content\":\"证件类型不能为空\"},{\"id\":\"idcard\",\"content\":\"证件号码不能为空\"},{\"id\":\"sbdw_name\",\"content\":\"申报单位不能为空\"},";
-
 $(function () {
+	//tocheckbox();
 	var id = $("#material_id").val();
 	upload("1"); //附件上传
 	queryMaterialMap(id);  //执行查询方法
@@ -213,7 +213,6 @@ function chooseModel(data){
 	}
 	//主编学术专著情况
 	if(data.is_monograph_used == "1"){
-		alert(1);
 		$("#zbxszz").css("display","block");
 	}
 	//主编学术专著情况必填
@@ -306,60 +305,50 @@ function only(ele,arr){
 	};
 //追加图书添加div
 function addTsxz(){
+	//是否职位多选
+	var is_multi_position = $("#is_multi_position").val();
 	var select_nr = $("#select_nr").val();
 	var sfbw = $("#sfbw").val();
 	var str = fnt();
-	if(sfbw == "1"){
-		$("#tsxz").append("<div class='item' id='xz_"+str+"'>"+
-				"<span style='float: left;'>图书：</span>"+
-				"<select id='edu_"+str+"' name='textbook_id' class='st book' style='float: left;'>"+
-					"<option value=''>请选择书籍</option>"+
-					select_nr+
-				"</select>"+
-				"<div style='float: left;margin-left: 30px;' class='ts_radio'>"+
-				"<table style='width: 280px;'><tr>"+
-					"<td><input type='radio' name='zw_"+str+"' checked='checked' value='1'/>主编</td>"+
+	var thtml = "";
+	thtml=	"<div class='item' id='xz_"+str+"'>"+
+			"<span style='float: left;'>图书：</span>"+
+			"<select id='edu_"+str+"' name='textbook_id' class='st book' style='float: left;'>"+
+				"<option value=''>请选择书籍</option>"+
+				select_nr+
+			"</select>"+
+			"<div style='float: left;margin-left: 30px;' class='ts_radio'>"+
+			"<table style='width: 280px;'><tr>";
+				if(is_multi_position=='1'){
+					thtml += "<td><input type='checkbox' name='zw_"+str+"' checked='checked' value='4'/>主编</td>"+
+					"<td><input type='checkbox' name='zw_"+str+"' value='2'/>副主编</td>"+
+					"<td><input type='checkbox' name='zw_"+str+"' value='1'/>编委</td>";
+					if(sfbw == "1"){
+						thtml += "<td><input type='checkbox' name='zw_"+str+"' value='8'/>数字编委</td>";
+					}
+				}else{
+					thtml +=
+					"<td><input type='radio' name='zw_"+str+"' checked='checked' value='4'/>主编</td>"+
 					"<td><input type='radio' name='zw_"+str+"' value='2'/>副主编</td>"+
-					"<td><input type='radio' name='zw_"+str+"' value='3'/>编委</td>"+
-					"<td><input type='radio' name='zw_"+str+"' value='4'/>数字编委</td>"+
-				"</tr></table>"+
-					"<input type='hidden' name='preset_position' value='zw_"+str+"'>"+
-				"</div>"+
-				"<div style='float: left;margin-left: 30px;'>"+
-					"<span style='float: left;'>上传教学大纲：</span>"+
-					"<div id='fileNameDiv_"+str+"' class='fileNameDiv'></div>"+
-					"<input type='hidden' name='syllabus_id' id='syllabus_id_"+str+"'/>"+
-					"<input type='hidden' name='syllabus_name' id='syllabus_name_"+str+"'/>"+
-					"<div class='scys' id='scjxdg_"+str+"'><span>上传文件</span></div>"+
-				"</div>"+
-				"<div class='delBtn pull-right' onclick=\"javascript:delTsxz( 'xz_"+str+"')\"><span>删除</span></div>"+
-			"</div>");
-	}else{
-		$("#tsxz").append("<div class='item' id='xz_"+str+"'>"+
-				"<span style='float: left;'>图书：</span>"+
-				"<select id='edu_"+str+"' name='textbook_id' class='st book' style='float: left;'>"+
-					"<option value=''>请选择书籍</option>"+
-					select_nr+
-				"</select>"+
-				"<div style='float: left;margin-left: 30px;' class='ts_radio'>"+
-				"<table style='width: 280px;'><tr>"+
-					"<td><input type='radio' name='zw_"+str+"' checked='checked' value='1'/>主编</td>"+
-					"<td><input type='radio' name='zw_"+str+"' value='2'/>副主编</td>"+
-					"<td><input type='radio' name='zw_"+str+"' value='3'/>编委</td>"+
-				"</tr></table>"+
-					"<input type='hidden' name='preset_position' value='zw_"+str+"'>"+
-				"</div>"+
-				"<div style='float: left;margin-left: 30px;'>"+
-					"<span style='float: left;'>上传教学大纲：</span>"+
-					"<div id='fileNameDiv_"+str+"' class='fileNameDiv'></div>"+
-					"<input type='hidden' name='syllabus_id' id='syllabus_id_"+str+"'/>"+
-					"<input type='hidden' name='syllabus_name' id='syllabus_name_"+str+"'/>"+
-					"<div class='scys' id='scjxdg_"+str+"'><span>上传文件</span></div>"+
-				"</div>"+
-				"<div class='delBtn pull-right' onclick=\"javascript:delTsxz( 'xz_"+str+"')\"><span>删除</span></div>"+
-			"</div>");
-	}
-	
+					"<td><input type='radio' name='zw_"+str+"' value='1'/>编委</td>";
+					if(sfbw == "1"){
+						thtml += "<td><input type='radio' name='zw_"+str+"' value='8'/>数字编委</td>";
+					}
+				}
+			thtml +=
+			"</tr></table>"+
+				"<input type='hidden' name='preset_position' value='zw_"+str+"'>"+
+			"</div>"+
+			"<div style='float: left;margin-left: 30px;'>"+
+				"<span style='float: left;'>上传教学大纲：</span>"+
+				"<div id='fileNameDiv_"+str+"' class='fileNameDiv'></div>"+
+				"<input type='hidden' name='syllabus_id' id='syllabus_id_"+str+"'/>"+
+				"<input type='hidden' name='syllabus_name' id='syllabus_name_"+str+"'/>"+
+				"<div class='scys' id='scjxdg_"+str+"'><span>上传文件</span></div>"+
+			"</div>"+
+			"<div class='delBtn pull-right' onclick=\"javascript:delTsxz( 'xz_"+str+"')\"><span>删除</span></div>"+
+		"</div>";
+	$("#tsxz").append(thtml);
 	$('#edu_'+str).selectlist({
         width: 200,
         height: 30,
@@ -699,7 +688,7 @@ function del_tr(trId){
 
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type){
-	if(checkNull(jsonStr)){
+	if(checkEqual("textbook_id") && checkNull(jsonStr)){
 		$.ajax({
 			type: "POST",
 			url:contextpath+'material/doMaterialAdd.action?type='+type,
@@ -832,3 +821,32 @@ function LengthLimit(obj,ml){
 		//window.message.warning("不可超过输入最大长度"+ml+"字节！");
 	}
 }
+
+//单选
+function tocheckbox(){
+	$("input[name='tsxzq']").click(function(){
+		//alert($(this).attr("checked"));
+		if($(this).attr("checked") == undefined){ //如果不是checked状态，则变为checked状态，且清除checked状态
+			//清除其他checked状态
+			$("input[name='tsxzq']").attr("checked",false);
+			$(this).attr('checked', 'checked');
+		}else{
+			//清除其他checked状态
+		}
+	});
+ }
+
+//根据name判断获取的值是否有重复的
+function checkEqual(name){
+	//获取name属性的对象数组(节点数组) 
+	var luckElements = document.getElementsByName(name);  
+	var hash = {};
+	//遍历数组并比较是否存在相同值
+	for(var i in luckElements) {
+		if(hash[arr[i]])
+		return true;
+		hash[arr[i]] = true;
+	}
+	return false;
+}
+
