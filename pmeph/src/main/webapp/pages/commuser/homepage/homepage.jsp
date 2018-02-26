@@ -89,7 +89,7 @@
 					  <p class="content-size"><a href="${ctx}/message/noticeMessageDetail.action?cmsId=${list.id }&&materialId=${list.material_id}&&notEnd=${list.notEnd}&&is_material_entry=${is_material_entry}" class="astyle">${list.title}</a></p>
                       <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date" pattern="yyyy-MM-dd"/></p>
                       <input type="hidden" value="${list.notEnd}">
-                      <c:if test="${list.notEnd ==1 and list.is_material_entry==true}">
+                      <c:if test="${list.notEnd ==1 and list.is_material_entry==true and list.isapply=='no' }">
 	                      <div class="left_join"
 	                      onclick="window.location.href='${ctx}/material/toMaterialAdd.action?material_id=${list.material_id}'">报名参加</div>
                   	  </c:if>

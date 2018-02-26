@@ -67,7 +67,7 @@
 				and (
 				(m.is_all_textbook_published = 1)
 				or m.is_force_end =1
-				<![CDATA[ and DATE_FORMAT(m.actual_deadline,'%Y-%m-%d') < DATE_FORMAT(NOW(),'%Y-%m-%d')]]>
+				<![CDATA[ or DATE_FORMAT(m.actual_deadline,'%Y-%m-%d') < DATE_FORMAT(NOW(),'%Y-%m-%d')]]>
 				<!-- <![CDATA[ or m.actual_deadline < NOW()]]>  -->
 				)
 			</when>
@@ -112,7 +112,7 @@
 				and (
 				(m.is_all_textbook_published = 1)
 				or m.is_force_end =1
-				<![CDATA[ and DATE_FORMAT(m.actual_deadline,'%Y-%m-%d') < DATE_FORMAT(NOW(),'%Y-%m-%d')]]>
+				<![CDATA[ or DATE_FORMAT(m.actual_deadline,'%Y-%m-%d') < DATE_FORMAT(NOW(),'%Y-%m-%d')]]>
 				<!-- <![CDATA[ or m.actual_deadline < NOW()]]>  -->
 				)
 			</when>

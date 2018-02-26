@@ -137,7 +137,7 @@ public class ArticleSearchServiceImpl implements ArticleSearchService {
 		String code="";
 		int count=articleSearchDao.insertPraise(content_id, writer_id);
 		WriterUserTrendst wut = new WriterUserTrendst(writer_id, 4, content_id);
-		personalService.saveUserTrendst(wut);
+		personalService.saveUserTrendst(wut);//文章搜索界面的点赞 生成动态
 		if(count>0){
 			 code="OK";
 		}

@@ -55,20 +55,20 @@
 					)
 				</span>
 				<span class="tsxz_ts1"><img src="${ctx}/statics/image/btxx.png" /></span>
-				<c:if test="${materialMap.is_multi_books =='1' or materialMap.is_multi_position =='1'}">
+				<%-- <c:if test="${materialMap.is_multi_books =='1'}"> --%>
 				<div class="addBtn pull-right" id="sjtj" onclick="javascript:addTsxz()"><span>增加</span></div>
-				</c:if>
+				<%-- </c:if> --%>
 			</div>
 			<div class="item" id="xz1">
-				<span style="float: left;">图书：</span>
-				<select id="edu1" name="textbook_id" class="st book" data-valid="isNonEmpty" data-error="书籍选择不能为空" style="float: left;">
-				    	${bookSelects}
+				<span style="float: left;line-height: 30px;">图书：</span>
+				<select id="edu1" name="textbook_id" class="st book" data-valid="isNonEmpty" data-error="书籍选择不能为空" style="float: left;height: 40px;">
+				    	${bookSelects}.
 				</select>
 				<div style="float: left;margin-left: 30px;" class="ts_radio">
-					<table style="width: 280px;">
+					<table style="width: 280px;border:0" cellspacing="0" cellpadding="0">
 					    <tr>
 							<c:if test="${materialMap.is_multi_position =='1'}">
-								<td><input type="checkbox" name="zw_1" checked="checked" value="4"/>主编</td>
+								<td height="30px;"><input type="checkbox" name="zw_1" checked="checked" value="4"/>主编</td>
 								<td><input type="checkbox" name="zw_1" value="2"/>副主编</td>
 								<td><input type="checkbox" name="zw_1" value="1"/>编委</td>
 								<c:if test="${materialMap.is_digital_editor_optional =='1'}">
@@ -88,8 +88,8 @@
 					<!-- 用于遍历radio中的值 -->
 					<input type="hidden" name="preset_position" value="zw_1">
 				</div>
-				<div style="float: left;margin-left: 30px;">
-					<span style="float: left;">上传教学大纲：</span>
+				<div style="float: left;margin-left: 30px;height: 30px;">
+					<span style="float: left;line-height: 30px;">上传教学大纲：</span>
 					<div id="fileNameDiv_1" class="fileNameDiv"></div>
 					<input type="hidden" name="syllabus_id" id="syllabus_id_1"/>
 					<input type="hidden" name="syllabus_name" id="syllabus_name_1"/>

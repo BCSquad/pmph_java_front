@@ -217,7 +217,7 @@ public class ArticleDetailController extends BaseController {
 		map.put("category_id",0); //内容类型 0评论
 		map.put("author_type",2); //作者类型
 		map.put("author_id",user.get("id")); //作者id
-		map.put("is_staging",1); //提交
+		map.put("is_staging",0); //提交
 		map.put("path",0); //根路径
 		map.put("title",title); //标题
 		
