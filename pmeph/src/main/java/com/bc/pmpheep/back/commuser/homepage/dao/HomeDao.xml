@@ -97,7 +97,7 @@
 								),'-',-1) = #{type}
 				or t.id = 	#{type}		
 			)
-		
+	  		order by b.image_url desc
        <if test="startrows >= 0">
 				<![CDATA[limit ${startrows},10]]>
 	   </if>

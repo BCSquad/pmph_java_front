@@ -351,15 +351,15 @@ ul li {
 }
 
 .left_one{
-	width: 310px;
+	width: 314px;
 	height: 223px;
 	margin-top: 25px;
 	float: left;
-    background-image: url("../../testfile/rectangle.png"); 
+    background: url("../../testfile/rectangle.png") no-repeat;
 /*    border: 1px solid #F2F2F2;
     border-radius:6px;*/
    /* box-shadow: 1px 1px 3px #888888;*/
-    background-size:110%  110%; 
+   /* background-size:110%  110%; */
 }
 
 .p1_left{
@@ -381,20 +381,19 @@ ul li {
 }
 
 .left_two{
-	width: 310px;
+	width: 314px;
 	height: 250px;
-	margin-top: 25px;
+	margin-top: 5px;
 	float: left;
-	background-image: url("../../testfile/rectangle.png"); 
+	background: url("../../testfile/rectangle.png") no-repeat;
 	/*border: 1px solid #F2F2F2;
     border-radius:6px;
     box-shadow: 1px 1px 3px #888888;*/
-    background-size:110%  110%; 
 }
 
 .left_con1{
 	width: 280px;
-	height: 40px;
+	height: 20px;
 	margin-left: 15px;
 	margin-top: 18px;
 	font-family: MicrosoftYaHei;
@@ -412,6 +411,7 @@ ul li {
 	font-size: 18px;
 	color: #489299;
 	float: left;
+    margin-bottom: 20px;
 }
 
 .all_left{
@@ -670,8 +670,8 @@ ul li {
 }
 
 .area-4 .content .left .div_photo1 {
-    width: 311px;
-    height: 192px;
+    width: 314px;
+    height: 194px;
     margin-top: 24px;
     background-image: url("../../testfile/rectangle.png");
 }

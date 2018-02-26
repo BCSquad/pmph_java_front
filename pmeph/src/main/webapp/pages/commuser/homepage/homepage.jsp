@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <script type="text/javascript">
         var contextpath = '${pageContext.request.contextPath}/';
     </script>
@@ -167,12 +168,7 @@
                         <div class="textbook_left">教材社区</div>
                         <div class="all_left" onclick="window.location.href='${ctx}/community/tolist.action'">全部>></div>
                         <c:forEach items="${listM}" var="list" varStatus="status">
-	                      <c:if test="${status.index==0}">
-	                        <div class="left_con1" style="margin-top: 63px;" onclick="todou('${list.mid}')">${list.title}</div>
-	                      </c:if>
-	                      <c:if test="${status.index!=0}">
-	                        <div class="left_con1" onclick="todou('${list.mid}')">${list.title}</div>
-                          </c:if>
+                            <div class="left_con1"  onclick="todou('${list.mid}')">${list.title}</div>
                         </c:forEach>
                     </div>
                     <div class="left_two">

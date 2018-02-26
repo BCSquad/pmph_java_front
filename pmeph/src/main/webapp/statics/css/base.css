@@ -330,26 +330,29 @@ body {
     display: inline-block;
 }
 
+.footer{
+    background: #F8F8F8;
+}
+
 .tail {
     padding-bottom: 30px;
+    width: 100%;
+    text-align: center;
 }
 
 .tail .about {
-    margin: 0 auto;
-    width: 1000px;
     height: 40px;
+
 }
 
 .tail .about .item {
-    float: left;
-    display: inline-block;
     /*width: 99px;*/
-    padding: 0 10px;
+    padding: 0 5px;
     color: #999999;
     margin: auto;
     text-decoration:none;
     text-align: center;
-    border-left: 1px solid #9A9691;
+    /*border-left: 1px solid #9A9691;*/
 }
 
 .tail .copyright {

@@ -421,12 +421,13 @@ body
 .sxy-btn {
     border: none;
     width: 75px;
-    height: 25px;
+    height: 35px;
     background-color: #35C9A9;
     font-family: MicrosoftYaHei;
     color: #ffffff;
     font-size: 14px;
     border-radius: 2px;
+    cursor: pointer;
 }
 
 .leftarea {
