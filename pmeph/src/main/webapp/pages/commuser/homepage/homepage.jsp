@@ -207,7 +207,7 @@
                             <div>
                                 <div class="a6_head_div">
                                 <c:if test="${list.avatar=='DEFAULT'}">
-                                <img src="${ctx}/statics/pictures/head.png" class="a6_head"></c:if>
+                                <img src="${ctx}/statics/image/default_image.png" class="a6_head"></c:if>
                 				<c:if test="${list.avatar!='DEFAULT'}">
                 				<img src="${ctx}/image/${list.avatar}.action" class="a6_head"></c:if>
                                 </div>

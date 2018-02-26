@@ -249,6 +249,7 @@
                                     container: "#" + $this.attr("id"),
                                     variable: 'player',
                                     autoplay: false,
+                                    /*flashplayer: true,*/
                                     video: $this.attr("src")/*,
                                      poster: $this.attr("poster")*/
                                 };

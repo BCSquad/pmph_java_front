@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.bc.pmpheep.back.util.RouteUtil;
 import com.bc.pmpheep.general.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -67,13 +68,14 @@ public class MessageController extends BaseController{
 		int count = noticeMessageService.selectSysMessageTotalCount(paraMap);
 		//处理消息发送者头像
 		for(Map<String,Object> map1:list){
-			
-			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
+
+			map1.put("avatar",RouteUtil.userAvatar(map1.get("avatar").toString()));
+			/*if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
 				map1.put("avatar", "statics/pictures/head.png");
 			}else{
 				//map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
 				map1.put("avatar", "image/"+map1.get("avatar")+".action");
-			}
+			}*/
 		}
 		
 		mv.addObject("count",count-list.size());
@@ -116,13 +118,13 @@ public class MessageController extends BaseController{
 		int count = noticeMessageService.selectSysMessageTotalCount(paraMap);
 		//处理消息发送者头像
 		for(Map<String,Object> map1:list){
-			
-			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
+            map1.put("avatar",RouteUtil.userAvatar(map1.get("avatar").toString()));
+			/*if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
 				map1.put("avatar", "statics/pictures/head.png");
 			}else{
 				//map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
 				map1.put("avatar", "image/"+map1.get("avatar")+".action");
-			}
+			}*/
 		}
 		
 		//控制显示“加载更多”
@@ -160,13 +162,13 @@ public class MessageController extends BaseController{
 		paraMap.put("userId", userId);
 		List<Map<String,Object>> list = noticeMessageService.selectApplyMessage(paraMap);
 		for(Map<String,Object> map1:list){
-			
-			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
+            map1.put("avatar",RouteUtil.userAvatar(map1.get("avatar").toString()));
+			/*if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
 				map1.put("avatar", "statics/pictures/head.png");
 			}else{
 				//map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
 				map1.put("avatar", "image/"+map1.get("avatar")+".action");
-			}
+			}*/
 		}
 		mv.addObject("list",list);
 		mv.addObject("listSize",list.size());
@@ -235,13 +237,13 @@ public class MessageController extends BaseController{
 			
 			
 			//处理消息发送者头像
-			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
+			/*if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
 				map1.put("avatar", "statics/pictures/head.png");
 			}else{
 				//map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
 				map1.put("avatar", "image/"+map1.get("avatar")+".action");
-			}
-			
+			}*/
+            map1.put("avatar",RouteUtil.userAvatar(map1.get("avatar").toString()));
 			
 		}
 		//不带分页的数据总量
@@ -318,12 +320,13 @@ public class MessageController extends BaseController{
 			
 			}
 			//处理消息发送者头像
-			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
+			/*if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
 				map1.put("avatar", "statics/pictures/head.png");
 			}else{
 				//map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
 				map1.put("avatar", "image/"+map1.get("avatar")+".action");
-			}
+			}*/
+            map1.put("avatar",RouteUtil.userAvatar(map1.get("avatar").toString()));
 		}
 		//不带分页的数据总量
 		int count = noticeMessageService.selectNoticeMessageTotalCount(paraMap);

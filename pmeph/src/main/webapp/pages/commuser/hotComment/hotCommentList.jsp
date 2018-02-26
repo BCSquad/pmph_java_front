@@ -49,7 +49,7 @@
 								<div style="width: 88%;height: 100%;float:left;">
 									<div style="width: 100%;height: 30px;clear: both"><span style="font-size: 16px;font-weight:500">《${one.bookname}》</span></div>
 									<div class="top">
-										<div class="pic"><img style="width: 24px;height: 24px" src="${ctx}/statics/pictures/head.png"></div>
+										<div class="pic"><img style="width: 24px;height: 24px" src="${ctx}/statics/image/default_image.png"></div>
 										<div class="nameAndTime">
 											<div class="name">${one.userName}</div>
 											<div class="star">

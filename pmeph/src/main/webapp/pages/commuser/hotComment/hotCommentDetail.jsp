@@ -104,7 +104,7 @@
 			            </div>	
 			            <div style="width: 100%;height: auto;margin-top: 36px">
 			            	<div class="top">
-										<div class="pic"><img style="width: 32px;height: 32px" src="${ctx}/statics/pictures/head.png"></div>
+										<div class="pic"><img style="width: 32px;height: 32px" src="${ctx}/statics/image/default_image.png"></div>
 										<div class="nameAndTime">
 											<div class="name">${map.userName}</div>
 											<div class="commentStar">

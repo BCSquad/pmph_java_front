@@ -9,6 +9,7 @@
 <head>
     <script type="text/javascript">
         var contextpath = '${pageContext.request.contextPath}/';
+        var contextpath2 = '${pageContext.request.contextPath}';
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>用户管理</title>
@@ -168,7 +169,7 @@
                             html +=
                                     "<div class='oneTalk'> " +
                                     "<div class='headAndNameRight float_right'> " +
-                                    "<div class='headDiv'><img class='headPicture' src='" + contextpath + responsebean[i].avatar + "'/></div> " +
+                                    "<div class='headDiv'><img class='headPicture' src='" + contextpath2 + responsebean[i].avatar + "'/></div> " +
                                     "<div class='talkName'><text>" + responsebean[i].senderName + "&nbsp;&nbsp;&nbsp;&nbsp;" + formatDate(responsebean[i].sendTime, 'yyyy.MM.dd hh:ss:mm') + "</text></div> " +
                                     "</div> " +
                                     "<div class='talkDivRight float_right' > " +
@@ -181,7 +182,7 @@
                             html +=
                                     "<div class='oneTalk'> " +
                                     "<div class='headAndNameLeft float_left'> " +
-                                    "<div class='headDiv'><img class='headPicture' src='" + contextpath + responsebean[i].avatar + "'/></div> " +
+                                    "<div class='headDiv'><img class='headPicture' src='" + contextpath2 + ""+responsebean[i].avatar + "'/></div> " +
                                     "<div class='talkName'><text>" + responsebean[i].senderName + "</text></div> " +
                                     "</div> " +
                                     "<div class='talkDiv float_left' > " +
