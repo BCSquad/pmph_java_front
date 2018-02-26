@@ -78,7 +78,7 @@
 			    </div>
 			    <div id="sxy-return">
 			    	<input type="hidden" id="btn_type" name="btnType"  />
-			        <input class="sxy-btn" type="button" value="发表" onclick="insertlong()" />
+			        <input class="sxy-btn" style="display: none;" type="button" value="发表" onclick="insertlong()" />
 			    </div>
 			    </form>
 			    <div id="content" hidden="true"></div>

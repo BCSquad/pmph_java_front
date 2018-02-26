@@ -7,6 +7,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <script type="text/javascript">
         var contextpath = '${pageContext.request.contextPath}/';
     </script>
@@ -54,19 +55,21 @@
                 <div class="input">
                     <div style="float:left;">
                         <label style="margin-left: 20px" class="labell require">页码:</label>
-                        <input type="text" class="text required" id="page" data-valid="isNonEmpty||onlyInt"
+                        <input type="text" style="width: 150px;" class="text required" id="page" data-valid="isNonEmpty||onlyInt"
                                onblur="javascript:LengthLimit(this,4);" data-error="页码不能为空||页码只能是数字"/>
                     </div>
-                    <div style="float:right;margin-right: 10px"><label style="margin-left: 10px"
+                    <div style="float:right;margin-right: 50px"><label style="margin-left: 10px"
                                                                        class="labell">行数:</label>
-                        <input type="text" class="text required" id="line" data-valid="isNonEmpty||onlyInt"
+                        <input type="text" style="width: 150px;" class="text required" id="line" data-valid="isNonEmpty||onlyInt"
                                onblur="javascript:LengthLimit(this,4);" data-error="行数不能为空||行数只能是数字"/></div>
 
                 </div>
                 <div class="info">
-                    <label style="margin-left: 20px" class="labell">纠错内容</label>
-                    <textarea class="misarea" id="content" onkeyup="javascript:LengthLimit(this,500);"
-                              onblur="javascript:LengthLimit(this,500);"></textarea>
+                    <label style="margin-left: 20px;" class="labell">纠错内容</label>
+                    <div style="margin-top: 5px;">
+                         <textarea class="misarea" style="width:470px;" id="content" onkeyup="javascript:LengthLimit(this,500);"
+                                   onblur="javascript:LengthLimit(this,500);"></textarea>
+                    </div>
                 </div>
                 <div class="upload">
                     <label style="margin-left: 20px" class="labell">纠错内容附件</label>
@@ -364,7 +367,7 @@
                                     <div style="float: left;">
 
                                         <c:if test="${list.avatar=='DEFAULT'}"><img
-                                                src="${ctx}/statics/image/default_image.png"></c:if>
+                                                src="${ctx}/statics/image/default_image.png" class="picturesize"></c:if>
                                         <c:if test="${list.avatar!='DEFAULT'}"><img
                                                 src="${ctx}/image/${list.avatar}.action" class="picturesize"></c:if>
 

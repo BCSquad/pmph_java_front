@@ -32,7 +32,7 @@
 <body>
 	<jsp:include page="/pages/comm/head.jsp"></jsp:include>
 	<!--action="http://localhost:8080/pmeph/" method="post" enctype="multipart/form-data" onsubmit="return writeArticleValidate();"  target="targetIfr"  -->
-	<form id="form1" >
+	<form id="form1" style="margin-bottom: 15px;">
     <div class="sxy-div-content">
         <div class="sxy-div-content">
             <img src="${ctx}/statics/image/write_article1.png" alt="" />
@@ -64,8 +64,8 @@
     <input type="hidden" id="msg_id" name="msg_id" value="${mid}" />
     	<input type="hidden" id="btn_type" name="btnType"  />
     	<input type="hidden" id="submitTypeCode" name="submitTypeCode" value="${submitTypeCode }" />
-        <input class="sxy-btn" type="button" value="保存" onclick="btntype(1)" />
-        <input class="sxy-btn" type="button" value="提交" onclick="btntype(0)"  />
+        <input class="sxy-btn" type="button" value="发表" onclick="btntype(0)"  />&nbsp;&nbsp;
+        <input class="sxy-btn" type="button" value="暂存" onclick="btntype(1)" />
     </div>
     </form>
     <div id="content" hidden="true"></div>

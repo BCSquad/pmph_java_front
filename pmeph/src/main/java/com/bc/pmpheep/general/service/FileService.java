@@ -200,7 +200,7 @@ public class FileService {
      * @param id 文件在MongoDB中的主键
      * @return GridFSDBFile对象
      */
-    public GridFSDBFile get(String id) {
+    public GridFSDBFile get(String id) throws CheckedServiceException{
         if (null == id || id.isEmpty()) {
             throw new CheckedServiceException(CheckedExceptionBusiness.FILE,
                     CheckedExceptionResult.NULL_PARAM, "获取文件时ID为空");
