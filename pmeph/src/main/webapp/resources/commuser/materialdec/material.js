@@ -5,7 +5,6 @@ jsonStr = "{\"id\":\"realname\",\"content\":\"姓名不能为空\"},{\"id\":\"bi
 "{\"id\":\"zc\",\"content\":\"职称不能为空\"},{\"id\":\"address\",\"content\":\"地址不能为空\"},{\"id\":\"email\",\"content\":\"邮箱不能为空\"},"+
 "{\"id\":\"handphone\",\"content\":\"手机号码不能为空\"},{\"id\":\"zjlx\",\"content\":\"证件类型不能为空\"},{\"id\":\"idcard\",\"content\":\"证件号码不能为空\"},{\"id\":\"sbdw_name\",\"content\":\"申报单位不能为空\"},";
 $(function () {
-	//tocheckbox();
 	var id = $("#material_id").val();
 	upload("1"); //附件上传
 	queryMaterialMap(id);  //执行查询方法
@@ -312,15 +311,14 @@ function addTsxz(){
 	var str = fnt();
 	var thtml = "";
 	thtml=	"<div class='item' id='xz_"+str+"'>"+
-			"<span style='float: left;'>图书：</span>"+
+			"<span style='float: left;line-height: 30px;'>图书：</span>"+
 			"<select id='edu_"+str+"' name='textbook_id' class='st book' style='float: left;'>"+
-				"<option value=''>请选择书籍</option>"+
 				select_nr+
 			"</select>"+
 			"<div style='float: left;margin-left: 30px;' class='ts_radio'>"+
-			"<table style='width: 280px;'><tr>";
+			"<table style='width: 280px;border:0' cellspacing='0' cellpadding='0'><tr>";
 				if(is_multi_position=='1'){
-					thtml += "<td><input type='checkbox' name='zw_"+str+"' checked='checked' value='4'/>主编</td>"+
+					thtml += "<td height='30px'><input type='checkbox' name='zw_"+str+"' checked='checked' value='4'/>主编</td>"+
 					"<td><input type='checkbox' name='zw_"+str+"' value='2'/>副主编</td>"+
 					"<td><input type='checkbox' name='zw_"+str+"' value='1'/>编委</td>";
 					if(sfbw == "1"){
@@ -328,7 +326,7 @@ function addTsxz(){
 					}
 				}else{
 					thtml +=
-					"<td><input type='radio' name='zw_"+str+"' checked='checked' value='4'/>主编</td>"+
+					"<td height='30px'><input type='radio' name='zw_"+str+"' checked='checked' value='4'/>主编</td>"+
 					"<td><input type='radio' name='zw_"+str+"' value='2'/>副主编</td>"+
 					"<td><input type='radio' name='zw_"+str+"' value='1'/>编委</td>";
 					if(sfbw == "1"){
@@ -339,8 +337,8 @@ function addTsxz(){
 			"</tr></table>"+
 				"<input type='hidden' name='preset_position' value='zw_"+str+"'>"+
 			"</div>"+
-			"<div style='float: left;margin-left: 30px;'>"+
-				"<span style='float: left;'>上传教学大纲：</span>"+
+			"<div style='float: left;margin-left: 30px;height: 30px;'>"+
+				"<span style='float: left;line-height: 30px;'>上传教学大纲：</span>"+
 				"<div id='fileNameDiv_"+str+"' class='fileNameDiv'></div>"+
 				"<input type='hidden' name='syllabus_id' id='syllabus_id_"+str+"'/>"+
 				"<input type='hidden' name='syllabus_name' id='syllabus_name_"+str+"'/>"+
@@ -688,11 +686,10 @@ function del_tr(trId){
 
 //提交   类型1 表示提交  2 表示暂存  
 function buttAdd(type){
-	if(checkNull(jsonStr)){
+	if(checkEqual("textbook_id") && checkNull(jsonStr)){
 		$.ajax({
 			type: "POST",
 			url:contextpath+'material/doMaterialAdd.action?sjump=1&type='+type,
-		//	url:contextpath+'material/doMaterialTest.action',
 			data:$('#objForm').serialize(),// 你的formid
 			async: false,
 			dataType:"json",
@@ -839,14 +836,17 @@ function tocheckbox(){
 //根据name判断获取的值是否有重复的
 function checkEqual(name){
 	//获取name属性的对象数组(节点数组)
-	var luckElements = document.getElementsByName(name);
-	var hash = {};
+	var map = $('input[name^="textbook_id"]').map(
+			function(){return this.value
+		}).get();
 	//遍历数组并比较是否存在相同值
-	for(var i in luckElements) {
-		if(hash[arr[i]])
-		return true;
-		hash[arr[i]] = true;
-	}
-	return false;
+	var nary=map.sort(); 
+	for(var i=0;i<map.length;i++){ 
+		if (nary[i]==nary[i+1]){ 
+			window.message.warning("不能选择相同书籍!请重新选择书籍");
+			return false;
+		} 
+	}	
+	return true;
 }
 

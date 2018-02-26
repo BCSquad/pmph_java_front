@@ -20,7 +20,7 @@ import com.bc.pmpheep.back.plugin.PageResult;
  * @date 2017-12-5 上午9:29:34
  * 
  */
-@Service("com.bc.pmpheep.back.authadmin.applydocaudit.service.DataAuditServiceImpl")
+@Service("com.bc.pmpheep.back.authadmin.applydocaudit.service.DataAuditServiceImpl")  
 public class DataAuditServiceImpl implements DataAuditService {
 	@Autowired
 	DataAuditDao dataAuditDao;
@@ -214,9 +214,5 @@ public class DataAuditServiceImpl implements DataAuditService {
 		public List<Map<String, Object>> queryAcadereward(Map<String, Object> map) {
 			return this.dataAuditDao.queryAcadereward(map);
 		}
-		
-
-
-
 
 }

@@ -24,7 +24,7 @@
 	<div class="qy_div">
 		<div style="width: 100%;margin-top: 20px;">
 			<span class="mc1">单位名称：</span>
-			<input type="hidden" name="material_id" value="${paraMap.material_id}">
+			<input type="hidden" id="material_id" name="material_id" value="${paraMap.material_id}">
 			<input class="cg_input" style="width: 457px;height: 36px;" id="orgname" name="orgname" value="${paraMap.orgname}" />
 			<div class="cxbutn" onclick="javascript:query()">
 				<span>查询</span>
