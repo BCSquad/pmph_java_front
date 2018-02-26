@@ -176,6 +176,10 @@ public class MaterialDetailController extends BaseController{
 		perMap.put("user_id", user_id);
 		perMap.put("type", type);
 		perMap.put("material_id", material_id);
+		String sex = request.getParameter("sex");
+		if(sex != null || !sex.equals("")){
+			sex = "0";
+		}
 		perMap.put("sex", request.getParameter("sex"));
 		perMap.put("birthday", request.getParameter("birthday"));
 		perMap.put("experience", request.getParameter("experience"));
@@ -672,6 +676,14 @@ public class MaterialDetailController extends BaseController{
 				String pos_d = ""; //数字编委 8
 				if(map.get("preset_position").equals(3)){//
 					pos_a="";pos_b="1";pos_c="1";pos_d="";
+				}else if(map.get("preset_position").equals(1)){
+					pos_a="";pos_b="";pos_c="1";pos_d="";
+				}else if(map.get("preset_position").equals(2)){
+					pos_a="";pos_b="1";pos_c="";pos_d="";
+				}else if(map.get("preset_position").equals(4)){
+					pos_a="1";pos_b="";pos_c="";pos_d="";
+				}else if(map.get("preset_position").equals(8)){
+					pos_a="";pos_b="";pos_c="";pos_d="1";
 				}else if(map.get("preset_position").equals(5)){
 					pos_a="1";pos_b="";pos_c="1";pos_d="";
 				}else if(map.get("preset_position").equals(6)){
