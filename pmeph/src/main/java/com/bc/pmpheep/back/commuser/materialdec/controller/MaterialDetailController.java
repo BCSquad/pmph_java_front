@@ -176,6 +176,10 @@ public class MaterialDetailController extends BaseController{
 		perMap.put("user_id", user_id);
 		perMap.put("type", type);
 		perMap.put("material_id", material_id);
+		String sex = request.getParameter("sex");
+		if(sex != null || !sex.equals("")){
+			sex = "0";
+		}
 		perMap.put("sex", request.getParameter("sex"));
 		perMap.put("birthday", request.getParameter("birthday"));
 		perMap.put("experience", request.getParameter("experience"));
@@ -517,10 +521,45 @@ public class MaterialDetailController extends BaseController{
 		}
 		//2.作家申报职位暂存
 		List<Map<String,Object>> tssbList = new ArrayList<Map<String,Object>>();
-		if(gezlList.get(0).get("is_staging").equals("1")){ //表示暂存
+		if(gezlList.get(0).get("is_staging").toString().equals("1")){ //表示暂存
 			tssbList=this.mdService.queryTssbZc(queryMap);
 		}else{
 			tssbList=this.mdService.queryTsxz(queryMap);
+		}
+		if(tssbList.size()>0){
+			for (Map<String, Object> map : tssbList) {
+				if(map.get("preset_position").equals(3)){//
+					map.put("preset_position", "副主编,编委");
+				}else if(map.get("preset_position").equals(1)){
+					map.put("preset_position", "编委");
+				}else if(map.get("preset_position").equals(2)){
+					map.put("preset_position", "副主编");
+				}else if(map.get("preset_position").equals(4)){
+					map.put("preset_position", "主编");
+				}else if(map.get("preset_position").equals(8)){
+					map.put("preset_position", "数字编委");
+				}else if(map.get("preset_position").equals(5)){
+					map.put("preset_position", "主编,编委");
+				}else if(map.get("preset_position").equals(6)){
+					map.put("preset_position", "副主编,副主编");
+				}else if(map.get("preset_position").equals(9)){
+					map.put("preset_position", "数字编委,编委");
+				}else if(map.get("preset_position").equals(10)){
+					map.put("preset_position", "副主编,数字编委");
+				}else if(map.get("preset_position").equals(12)){
+					map.put("preset_position", "主编,数字编委");
+				}else if(map.get("preset_position").equals(7)){
+					map.put("preset_position", "主编,副主编,编委");
+				}else if(map.get("preset_position").equals(11)){
+					map.put("preset_position", "副主编,编委,数字编委");
+				}else if(map.get("preset_position").equals(13)){
+					map.put("preset_position", "主编,编委,数字编委");
+				}else if(map.get("preset_position").equals(14)){
+					map.put("preset_position", "主编,副主编,数字编委");
+				}else if(map.get("preset_position").equals(15)){
+					map.put("preset_position", "主编,副主编,编委,数字编委");
+				}
+			}
 		}
 		//3.作家学习经历表
 		List<Map<String,Object>> stuList = new ArrayList<Map<String,Object>>();
@@ -637,6 +676,14 @@ public class MaterialDetailController extends BaseController{
 				String pos_d = ""; //数字编委 8
 				if(map.get("preset_position").equals(3)){//
 					pos_a="";pos_b="1";pos_c="1";pos_d="";
+				}else if(map.get("preset_position").equals(1)){
+					pos_a="";pos_b="";pos_c="1";pos_d="";
+				}else if(map.get("preset_position").equals(2)){
+					pos_a="";pos_b="1";pos_c="";pos_d="";
+				}else if(map.get("preset_position").equals(4)){
+					pos_a="1";pos_b="";pos_c="";pos_d="";
+				}else if(map.get("preset_position").equals(8)){
+					pos_a="";pos_b="";pos_c="";pos_d="1";
 				}else if(map.get("preset_position").equals(5)){
 					pos_a="1";pos_b="";pos_c="1";pos_d="";
 				}else if(map.get("preset_position").equals(6)){

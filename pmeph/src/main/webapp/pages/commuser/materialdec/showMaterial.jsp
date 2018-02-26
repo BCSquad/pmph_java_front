@@ -33,12 +33,7 @@
 			<c:forEach var="list" items="${tssbList}">
 			<div class="item">
 				<span>图书：</span>
-				<span>${list.textbook_name} — 
-					<c:if test="${list.preset_position == '4'}">主编</c:if>
-					<c:if test="${list.preset_position == '2'}">副主编</c:if>
-					<c:if test="${list.preset_position == '1'}">编委</c:if>
-					<c:if test="${list.preset_position == '8'}">数字编委</c:if>
-					</span>
+				<span>${list.textbook_name} — ${list.preset_position}</span>
 				<span style="margin-left: 10px;">
 					<a href="javascript:" class="filename"  onclick="downLoadProxy('${list.syllabus_id}')">${list.syllabus_name}</a>
 				</span>

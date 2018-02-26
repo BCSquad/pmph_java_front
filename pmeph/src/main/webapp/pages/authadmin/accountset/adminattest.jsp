@@ -178,7 +178,7 @@
 
                             <td colspan="2">
                                 <div style="margin-bottom: 25px;margin-left: 20px">
-                                    <font class="td-font-3">请填写与上次委托书上一致的管理员真实姓名</font>
+                                    <font class="td-font-3">请填写与上传委托书上一致的管理员真实姓名</font>
                                 </div>
                             </td>
                         </tr>

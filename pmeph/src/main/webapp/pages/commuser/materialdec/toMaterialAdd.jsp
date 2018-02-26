@@ -114,9 +114,9 @@
 							</td>
 						<td><span class="btbs">*</span><span>性&emsp;&emsp;别：</span>
                             <select class="select-input" id="sex" name="sex">
-                                <option value="0" selected="selected">保密</option>
-                                <option value="1">男</option>
+                                <option value="1" selected="selected">男</option>
                                 <option value="2">女</option>
+                                <option value="0">保密</option>
                             </select></td>
 						<td><span class="btbs">*</span><span>出生年月：</span> 
 							<input class="cg_input" calendar format="'yyyy-mm-dd'"  name="birthday" value=""  id="birthday"  /></td>

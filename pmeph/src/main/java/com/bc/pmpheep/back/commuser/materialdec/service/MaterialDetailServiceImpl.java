@@ -455,7 +455,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 		if(tssbList!=null && !tssbList.isEmpty()){
 			for (Map<String, Object> map : tssbList) {
 				map.put("declaration_id", declaration_id);
-				if(perMap.get("type").equals(1)){ //提交					
+				if(perMap.get("type").equals("1")){ //提交					
 					this.madd.insertTsxz(map);
 				}else{ //暂存
 					this.madd.insertTssbZc(map);

@@ -56,7 +56,7 @@ public class BookSearchServiceImpl implements BookSearchService {
 				resultMap.put("switchResult", "active");
 				
 				WriterUserTrendst wut = new WriterUserTrendst(uid, 7, bookId);
-				personalService.saveUserTrendst(wut);
+				personalService.saveUserTrendst(wut);//图书搜索界面的图书点赞 生成动态
 				
 			}else{ //有删除 说明原为赞状态 现取消赞 按钮应切换为非激活状态
 				resultMap.put("switchResult", "non-active");
