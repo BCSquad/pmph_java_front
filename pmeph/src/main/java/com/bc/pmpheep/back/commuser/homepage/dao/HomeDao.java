@@ -101,4 +101,10 @@ public interface HomeDao {
      * 根据分类查询书籍总数
      */
     int countBookByType(String type);
+
+    /**
+     * 查询问卷调查总数
+     */
+    int countSurvey();
+
 }
