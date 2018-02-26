@@ -433,6 +433,7 @@ body {
     -khtml-opacity: 0;
     opacity: 0;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
 .upload-loading {
