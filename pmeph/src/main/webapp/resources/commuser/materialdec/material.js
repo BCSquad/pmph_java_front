@@ -9,7 +9,7 @@ $(function () {
 	var id = $("#material_id").val();
 	upload("1"); //附件上传
 	queryMaterialMap(id);  //执行查询方法
-	
+
 	$('.select-input').selectlist({
 		zIndex: 10,
 		width: 192,
@@ -71,7 +71,7 @@ function upload(id){
 	    	}
 	    	return true;
 	    }
-	    
+
 	});
 }
 
@@ -97,7 +97,7 @@ function chooseModel(data){
 	//学习经历必填
 	if(data.is_edu_exp_required == "1"){
 		$("#zyxxjl_bt").css("display","inline");
-		jsonStr=jsonStr+"{\"id\":\"xx_kssj\",\"content\":\"学习经历必填\"},"; 
+		jsonStr=jsonStr+"{\"id\":\"xx_kssj\",\"content\":\"学习经历必填\"},";
 	}else{
 		$("#zyxxjl_xt").css("display","inline");
 	}
@@ -269,39 +269,39 @@ function chooseModel(data){
 }
 
 //生成随机数
-function only(ele,arr){ 
-	 if(arr.length==0){ 
-	  return true; 
-	 } 
-	 for(var j=0;j<arr.length;j++){ 
-	  if(ele==arr[j]){ 
-	   return false; 
-	  }else{ 
-	   return true; 
-	  } 
-	 } 
-	} 
-	  
-	var arr=[0,1,2,3,4,5,6,"a","b","c","d","e","f","g"]; 
-	  
+function only(ele,arr){
+	 if(arr.length==0){
+	  return true;
+	 }
+	 for(var j=0;j<arr.length;j++){
+	  if(ele==arr[j]){
+	   return false;
+	  }else{
+	   return true;
+	  }
+	 }
+	}
+
+	var arr=[0,1,2,3,4,5,6,"a","b","c","d","e","f","g"];
+
 	function fnt(){
-	 var randNum=null; 
-	 var old=[]; 
-	 var str=""; 
-	 function done(){ 
-	  randNum=Math.floor(Math.random()*14); 
-	  if(only(randNum,old)){ 
-	   str=str+arr[randNum]; 
-	   old.push(randNum); 
-	  } 
-	  else{ 
-	   done(); 
-	  } 
-	 } 
-	 for(var index=0;index<4;index++){ 
-	  done(); 
-	 } 
-	 return str; 
+	 var randNum=null;
+	 var old=[];
+	 var str="";
+	 function done(){
+	  randNum=Math.floor(Math.random()*14);
+	  if(only(randNum,old)){
+	   str=str+arr[randNum];
+	   old.push(randNum);
+	  }
+	  else{
+	   done();
+	  }
+	 }
+	 for(var index=0;index<4;index++){
+	  done();
+	 }
+	 return str;
 	};
 //追加图书添加div
 function addTsxz(){
@@ -522,7 +522,7 @@ function add_jcbx(){
 	    		"<td><input type='radio' name='jcb_is_digital_editor_"+num+"' value='1' />是</td>"+
 	    		"<td><input type='radio' name='jcb_is_digital_editor_"+num+"' value='0' checked='checked'/>否</td>"+
 	    	"</tr></table>"+
-    	"<input type='hidden' name='jcb_is_digital_editor' value='jcb_is_digital_editor_"+num+"' /></td>"+	
+    	"<input type='hidden' name='jcb_is_digital_editor' value='jcb_is_digital_editor_"+num+"' /></td>"+
 		"<td><input class='cg_input' name='jcb_publisher' value='' style='width: 100px;' placeholder='出版社'/></td>"+
 		"<td><input class='cg_input' placeholder='出版时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100' name='jcb_publish_date' value='' style='width: 110px;'/></td>"+
 		"<td><input class='cg_input' name='jcb_isbn' value='' style='width: 100px;' placeholder='标准书号'/></td>"+
@@ -559,7 +559,7 @@ function add_qtjcbx(){
 	    		"<td><input type='radio' name='jcb_is_digital_editor_"+num+"' value='1' />是</td>"+
 	    		"<td><input type='radio' name='jcb_is_digital_editor_"+num+"' value='0' checked='checked'/>否</td>"+
 	    	"</tr></table>"+
-    	"<input type='hidden' name='jcb_is_digital_editor' value='jcb_is_digital_editor_"+num+"' /></td>"+	
+    	"<input type='hidden' name='jcb_is_digital_editor' value='jcb_is_digital_editor_"+num+"' /></td>"+
 			"<td><input class='cg_input' name='jcb_publisher' value='' style='width: 120px;' placeholder='出版社'/></td>"+
 			"<td><input class='cg_input' placeholder='出版时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100' name='jcb_publish_date' value='' style='width: 110px;'/></td>"+
 			"<td><input class='cg_input' name='jcb_isbn' value='' style='width: 110px;' placeholder='标准书号'/></td>"+
@@ -586,7 +586,7 @@ function add_zjky(){
 			"<td><input class='cg_input' name='zjk_note' value='' style='width: 300px;' placeholder='备注'/></td>"+
 	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('zjky_"+num+"')\"/></td>"+
 	"</tr>");
-	$table.append($tr);	
+	$table.append($tr);
 }
 //主编学术专著情况表
 function add_zbxszz(){
@@ -605,7 +605,7 @@ function add_zbxszz(){
 			"<td><input class='cg_input' name='zb_note' value='' style='width: 250px;' placeholder='备注'  maxlength='33'/></td>"+
 	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('zbxszz_"+num+"')\"/></td>"+
 	"</tr>");
-	$table.append($tr);	
+	$table.append($tr);
 	$tr.calendar();
 }
 //出版行业获奖情况表
@@ -620,7 +620,7 @@ function add_publish(){
 	"<td><input class='cg_input' name='pu_note' value='' style='width: 250px;' placeholder='备注' maxlength='33'/></td>"+
 	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('publish_"+num+"')\"/></td>"+
 	"</tr>");
-	$table.append($tr);	
+	$table.append($tr);
 	$tr.calendar();
 }
 //SCI论文投稿及影响因子情况表
@@ -635,7 +635,7 @@ function add_sci(){
 			"<td><input class='cg_input' name='sci_note' value='' style='width: 250px;' placeholder='备注' maxlength='33'/></td>"+
 	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('sci_"+num+"')\"/></td>"+
 	"</tr>");
-	$table.append($tr);	
+	$table.append($tr);
 	$tr.calendar();
 }
 
@@ -656,7 +656,7 @@ function add_clinical(){
 	"<td><input class='cg_input' name='cl_note' value='' style='width: 330px;' placeholder='备注' maxlength='33'/></td>"+
 	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('clinical_"+num+"')\"/></td>"+
 	"</tr>");
-	$table.append($tr);	
+	$table.append($tr);
 	$tr.calendar();
 }
 //学术荣誉授予情况表
@@ -688,7 +688,7 @@ function del_tr(trId){
 
 //提交   类型1 表示提交  2 表示暂存  
 function buttAdd(type){
-	if(checkEqual("textbook_id") && checkNull(jsonStr)){
+	if(checkNull(jsonStr)){
 		$.ajax({
 			type: "POST",
 			url:contextpath+'material/doMaterialAdd.action?sjump=1&type='+type,
@@ -703,13 +703,13 @@ function buttAdd(type){
 			    }
 		    }
 		});
-	}	
+	}
 }
 
 //放弃
 function buttGive(){
 	window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=jcsb";
-}									 
+}
 /**
  * 表单校验方法
  */
@@ -735,11 +735,11 @@ function checkTel(id){
 //手机号码校验
 function checkHandphone(id){
 	var value = $("#"+id).val();
-	if(!(/^1(3|4|5|7|8)\d{9}$/.test(value))){ 
+	if(!(/^1(3|4|5|7|8)\d{9}$/.test(value))){
 		layer.tips('手机号码有误，请重填', '#'+id);
 		$("#"+id)[0].focus();  //聚焦
 		return false;
-    } 
+    }
 }
 //身份证号码校验
 function checkIdCard(id){
@@ -770,18 +770,18 @@ function checkNull(jsonStr){
 	    	}
 	    }else if(obj.id=="handphone"){ //手机号码
 	    	var num = $("#handphone").val();
-	    	if(!(/^1(3|4|5|7|8)\d{9}$/.test(num))){ 
+	    	if(!(/^1(3|4|5|7|8)\d{9}$/.test(num))){
 	    		layer.tips('手机号码有误，请重填', '#handphone');
 	    		$("#handphone")[0].focus();  //聚焦
 	    		b = false;
 	    		return false;
-	        } 
+	        }
 	    }else if(value == ""){
 			layer.tips(obj.content, '#'+obj.id);
 			$("#"+obj.id)[0].focus();  //聚焦2
 			b = false;
 			window.message.error(obj.content);
-			return false; 
+			return false;
 		}
 	});
 	return b;
@@ -801,7 +801,7 @@ function orgAdd(material_id){
 
 //输入长度限制校验，ml为最大字节长度
 function LengthLimit(obj,ml){
-	
+
 	var va = obj.value;
 	var vat = "";
 	for ( var i = 1; i <= va.length; i++) {
@@ -810,7 +810,7 @@ function LengthLimit(obj,ml){
 		if (vat.replace(/[^\x00-\xff]/g,"aaa").length <= ml) {
 			maxStrlength=i;
 		}else{
-			
+
 			break;
 		}
 	}
@@ -838,8 +838,8 @@ function tocheckbox(){
 
 //根据name判断获取的值是否有重复的
 function checkEqual(name){
-	//获取name属性的对象数组(节点数组) 
-	var luckElements = document.getElementsByName(name);  
+	//获取name属性的对象数组(节点数组)
+	var luckElements = document.getElementsByName(name);
 	var hash = {};
 	//遍历数组并比较是否存在相同值
 	for(var i in luckElements) {

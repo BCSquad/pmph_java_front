@@ -78,4 +78,13 @@ public interface BookDeclareService {
 	 * 添加银行账号信息
 	 */
 	public int updateBank(Map<String, Object> map);
+	
+	/**
+	 * 新增出书
+	 */
+	public String insertBookDeclare(Map<String, Object> BankMap, List<Map<String, Object>> twriteList, Map<String, Object> topicMap, Map<String, Object> extraMap);
+	/**
+	 * 修改出书
+	 */
+	public String updateBookDeclare(Map<String, Object> BankMap, List<Map<String, Object>> twriteList, Map<String, Object> topicMap, Map<String, Object> extraMap);
 }
