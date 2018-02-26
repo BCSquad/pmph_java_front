@@ -6,6 +6,9 @@
   <select id="queryDocument"  parameterType="map" resultMap="Mapresult">   
     SELECT 
 	(TO_DAYS(NOW()) &lt;= TO_DAYS(m.actual_deadline ) and !m.is_deleted and !m.is_force_end and !m.is_all_textbook_published) as notEnd,
+	<if test="id != null and id != '' ">
+	   (select case when count(d.id) &gt;0 then 'yes' else 'no' end  from declaration  d where d.material_id=cc.material_id and d.user_id=#{id})as isapply,
+	</if>
 	cc.*
 	FROM
 			cms_content cc
