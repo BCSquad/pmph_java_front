@@ -255,7 +255,7 @@ $(function () {
                                 "<div class='talkTime talkTimeAlignRight'>" + formatDate(sendTime) + "</div> " +
                                 "</div> " +
                                 "</div> ";
-
+                            $("#talkList").html('');
                             $("#talkList").append(addhtml);
                             $("#talkList").append(html);
                             $("#content").val('');

@@ -46,7 +46,7 @@
 
     <!-- 热门书评 -->
     <select id="queryRmspReadList" parameterType="java.util.Map" resultType="java.util.Map">
-        SELECT u.id,b.id id1,b.bookname,b.image_url,c.content,c.score,u.realname
+        SELECT u.id,b.id id1,b.bookname,b.image_url,c.content,c.score,u.nickname
         FROM book AS b INNER JOIN
         (SELECT * from book_user_comment
         GROUP BY book_id
