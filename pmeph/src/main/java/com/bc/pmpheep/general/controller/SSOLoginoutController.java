@@ -118,12 +118,15 @@ public class SSOLoginoutController {
             String headReferer = request.getHeader("Referer");
             String refer = StringUtils.isEmpty(headReferer) ? request.getHeader("referer") : headReferer;
 
+            if (refer != null) {
+                refer = refer.substring(refer.indexOf(request.getContextPath()), refer.length());
+            }
+
             for (LoginInterceptor.PathWithUsertypeMap pathMap : pathWithUsertypeMaps) {
                 //需要拦截的URL
-                if (resolver.getPathMatcher().match(request.getContextPath() + pathMap.getPath(), request.getParameter("refer"))) {//路径匹配
+                if (resolver.getPathMatcher().match(request.getContextPath() + pathMap.getPath(), refer)) {//路径匹配
                     response.sendRedirect(request.getContextPath() + "/homepage/tohomepage.action");
                     return;
-
                 }
             }
 
@@ -134,7 +137,7 @@ public class SSOLoginoutController {
             String refer = StringUtils.isEmpty(headReferer) ? request.getHeader("referer") : headReferer;
             for (LoginInterceptor.PathWithUsertypeMap pathMap : pathWithUsertypeMaps) {
                 //需要拦截的URL
-                if (resolver.getPathMatcher().match(request.getContextPath() + pathMap.getPath(), request.getParameter("refer"))) {//路径匹配
+                if (resolver.getPathMatcher().match(request.getContextPath() + pathMap.getPath(), refer)) {//路径匹配
                     response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
                     return;
 

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.bc.pmpheep.back.commuser.user.bean.CommuserWriterUser;
 import com.bc.pmpheep.back.util.RouteUtil;
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -76,7 +77,7 @@ public class MyFriendController extends com.bc.pmpheep.general.controller.BaseCo
     			}else{
     				map.put("avatar", "file/download/"+map.get("avatar")+".action");
     			}*/
-                map.put("avatar", RouteUtil.userAvatar(map.get("avatar").toString()));
+                map.put("avatar", RouteUtil.userAvatar(MapUtils.getString(map, "avatar")));
             }
             int remainCount = myFriendService.listMyFriendCount(groupId,writerUser, startrow+listFriends.size());
             model.setViewName(pageUrl);
