@@ -154,7 +154,7 @@ public class ArticleDetailServiceImpl implements ArticleDetailService{
 			articleDetailDao.addlikes(map);
 			articleDetailDao.insertlikes(map);
 			WriterUserTrendst wut = new WriterUserTrendst(map.get("writer_id").toString(), 4, map.get("content_id").toString());
-			personalService.saveUserTrendst(wut);
+			personalService.saveUserTrendst(wut);//文章详情界面的文章点赞 生成动态
 			pmap.put("returncode", "no");
 		}
 		return pmap;
@@ -212,7 +212,7 @@ public class ArticleDetailServiceImpl implements ArticleDetailService{
 			articleDetailDao.insertMark(wid,favorite_id,writer_id);//向用户书籍收藏表中加入收藏记录
 			articleDetailDao.updateMarks(wid,bookmarks+1);//更新书籍表中的收藏数量
 			WriterUserTrendst wut = new WriterUserTrendst(String.valueOf(writer_id), 3, String.valueOf(wid));
-			personalService.saveUserTrendst(wut);
+			personalService.saveUserTrendst(wut);//文章详情界面的文章收藏 生成动态
 			map.put("returncode", "OK");
 		}
 		return map;

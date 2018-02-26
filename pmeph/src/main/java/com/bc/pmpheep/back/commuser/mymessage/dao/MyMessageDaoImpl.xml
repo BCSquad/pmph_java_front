@@ -61,9 +61,13 @@
 		update 
 			user_message 
 		set 
-			is_read =true 
-		where    receiver_id   = #{receiverId}  and receiver_type = #{receiverType} 
-			  and sender_id    = #{senderId}    and sender_type   = #{senderType}
+			is_read = 1 
+		where   
+			 (receiver_id   = #{receiverId}  and receiver_type = #{receiverType} 
+			  and sender_id    = #{senderId}    and sender_type   = #{senderType})
+			  or
+			  (receiver_id   =  #{senderId}  and receiver_type = #{senderType}
+			  and sender_id    = #{receiverId}   and sender_type   = #{receiverType} )
 	</update>
 
 	<select id="listMyMessageTotal" parameterType="PageParameter"
