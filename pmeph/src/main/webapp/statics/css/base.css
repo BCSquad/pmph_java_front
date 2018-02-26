@@ -336,26 +336,23 @@ body {
 
 .tail {
     padding-bottom: 30px;
-    margin: 0 auto;
-    width: 1200px;
+    width: 100%;
     text-align: center;
 }
 
 .tail .about {
-    margin-left: 130px;
     height: 40px;
+
 }
 
 .tail .about .item {
-    float: left;
-    display: block;
     /*width: 99px;*/
-    padding: 0 10px;
+    padding: 0 5px;
     color: #999999;
     margin: auto;
     text-decoration:none;
-    text-align: right;
-    border-left: 1px solid #9A9691;
+    text-align: center;
+    /*border-left: 1px solid #9A9691;*/
 }
 
 .tail .copyright {

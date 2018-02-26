@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <script type="text/javascript">
         var contextpath = '${pageContext.request.contextPath}/';
     </script>
