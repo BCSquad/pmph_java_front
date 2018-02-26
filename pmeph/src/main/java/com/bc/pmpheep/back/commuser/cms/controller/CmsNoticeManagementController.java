@@ -129,14 +129,14 @@ public class CmsNoticeManagementController extends BaseController {
 //			ModelAndView mv = new ModelAndView();
 //			Map<String,Object> paraMap = new HashMap<String,Object>();
 //			paraMap.put("messageId", messageId);
-			
+			Map<String, Object> user = getUserInfo();
 			String materialId=request.getParameter("materialId");
 			String cmsId=request.getParameter("csmId");
 			ModelAndView mv = new ModelAndView();
 			Map<String,Object> paraMap = new HashMap<String,Object>();
 			paraMap.put("materialId", materialId);
 			paraMap.put("cmsId", cmsId);
-			
+			paraMap.put("userid", (user!=null?user.get("id"):""));
 			//标题、时间、邮寄地址、备注
 			Map<String,Object> mapTitle =new HashMap<>();
 			mapTitle=noticeMessageService.queryNoticeMessageDetail(paraMap);
