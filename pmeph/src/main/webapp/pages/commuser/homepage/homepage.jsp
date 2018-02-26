@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <script type="text/javascript">
         var contextpath = '${pageContext.request.contextPath}/';
     </script>
@@ -88,7 +89,7 @@
 					  <p class="content-size"><a href="${ctx}/message/noticeMessageDetail.action?cmsId=${list.id }&&materialId=${list.material_id}&&notEnd=${list.notEnd}&&is_material_entry=${is_material_entry}" class="astyle">${list.title}</a></p>
                       <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date" pattern="yyyy-MM-dd"/></p>
                       <input type="hidden" value="${list.notEnd}">
-                      <c:if test="${list.notEnd ==1 and list.is_material_entry==true}">
+                      <c:if test="${list.notEnd ==1 and list.is_material_entry==true and list.isapply=='no' }">
 	                      <div class="left_join"
 	                      onclick="window.location.href='${ctx}/material/toMaterialAdd.action?material_id=${list.material_id}'">报名参加</div>
                   	  </c:if>
@@ -167,12 +168,7 @@
                         <div class="textbook_left">教材社区</div>
                         <div class="all_left" onclick="window.location.href='${ctx}/community/tolist.action'">全部>></div>
                         <c:forEach items="${listM}" var="list" varStatus="status">
-	                      <c:if test="${status.index==0}">
-	                        <div class="left_con1" style="margin-top: 63px;" onclick="todou('${list.mid}')">${list.title}</div>
-	                      </c:if>
-	                      <c:if test="${status.index!=0}">
-	                        <div class="left_con1" onclick="todou('${list.mid}')">${list.title}</div>
-                          </c:if>
+                            <div class="left_con1"  onclick="todou('${list.mid}')">${list.title}</div>
                         </c:forEach>
                     </div>
                     <div class="left_two">

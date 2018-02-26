@@ -58,22 +58,22 @@
 					)
 				</span>
 				<span class="tsxz_ts1"><img src="${ctx}/statics/image/btxx.png" /></span>
-				<c:if test="${materialMap.is_multi_books =='1' or materialMap.is_multi_position =='1'}">
+				<c:if test="${materialMap.is_multi_books =='1'}">
 				<div class="addBtn pull-right" id="sjtj" onclick="javascript:addTsxz()"><span>增加</span></div>
 				</c:if>
 			</div>
 			<c:forEach var="list" items="${tssbList}" varStatus="status">
 				<div class="item" id="xz1">
-					<span style="float: left;">图书：</span>
+					<span style="float: left;line-height: 30px;">图书：</span>
 					<select id="edu_${status.count}" name="textbook_id" class="st" data-valid="isNonEmpty" data-error="书籍选择不能为空" style="float: left;">
 					    	${list.bookSelect}
 					</select>
 					<input type="hidden" name="sjxz" value="edu_${status.count}" />
 					<div style="float: left;margin-left: 30px;" class="ts_radio">
-						<table style="width: 280px;">
+						<table style="width: 280px;border:0" cellspacing="0" cellpadding="0">
 							<tr>
 								<c:if test="${materialMap.is_multi_position =='1'}">
-									<td><input type="checkbox" name="zw_1_${status.count}" value="4" ${list.pos_a=='1'?'checked':'' }/>主编</td>
+									<td height="30px;"><input type="checkbox" name="zw_1_${status.count}" value="4" ${list.pos_a=='1'?'checked':'' }/>主编</td>
 									<td><input type="checkbox" name="zw_1_${status.count}" value="2" ${list.pos_b=='1'?'checked':'' }/>副编委</td>
 									<td><input type="checkbox" name="zw_1_${status.count}" value="1" ${list.pos_c=='1'?'checked':'' }/>编委</td>
 									<c:if test="${materialMap.is_digital_editor_optional =='1'}">
@@ -81,7 +81,7 @@
 									</c:if>
 								</c:if>
 								<c:if test="${materialMap.is_multi_position !='1'}">
-									<td><input type="radio" name="zw_1_${status.count}" value="4" ${list.preset_position=='4'?'checked':'' }/>主编</td>
+									<td height="30px;"><input type="radio" name="zw_1_${status.count}" value="4" ${list.preset_position=='4'?'checked':'' }/>主编</td>
 									<td><input type="radio" name="zw_1_${status.count}" value="2" ${list.preset_position=='2'?'checked':'' }/>副编委</td>
 									<td><input type="radio" name="zw_1_${status.count}" value="1" ${list.preset_position=='1'?'checked':'' }/>编委</td>
 									<c:if test="${materialMap.is_digital_editor_optional =='1'}">
@@ -93,8 +93,8 @@
 						<!-- 用于遍历radio中的值 -->
 						<input type="hidden" name="preset_position" value="zw_1_${status.count}">
 					</div>
-					<div style="float: left;margin-left: 30px;">
-						<span style="float: left;">上传教学大纲：</span>
+					<div style="float: left;margin-left: 30px;height: 30px;">
+						<span style="float: left;line-height: 30px;">上传教学大纲：</span>
 						<div id="fileNameDiv_${status.count}" class="fileNameDiv"></div>
 						<input type="hidden" name="syllabus_id" id="syllabus_id_${status.count}" value="${list.syllabus_id}"/>
 						<input type="hidden" name="syllabus_name" id="syllabus_name_${status.count}" value="${list.syllabus_name}"/>

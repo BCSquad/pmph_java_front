@@ -43,6 +43,7 @@ public class ImageController {
         response.setContentType("image/png");
         GridFSDBFile file = fileService.get(id);
         if (null == file) {
+
             //throw new IOException();
         }
         try (OutputStream out = response.getOutputStream()) {

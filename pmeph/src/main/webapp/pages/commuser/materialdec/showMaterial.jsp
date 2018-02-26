@@ -353,10 +353,10 @@
 								<c:if test="${list.rank == '4'}">创新教材</c:if>	
 							</td>
 							<td>
-								<c:if test="${list.position == '1'}">无</c:if>
-								<c:if test="${list.position == '2'}">主编</c:if>
-								<c:if test="${list.position == '3'}">副主编</c:if>
-								<c:if test="${list.position == '4'}">编委</c:if>
+								<c:if test="${list.position == '0'}">无</c:if>
+								<c:if test="${list.position == '1'}">主编</c:if>
+								<c:if test="${list.position == '2'}">副主编</c:if>
+								<c:if test="${list.position == '3'}">编委</c:if>
 							</td>
 							<td>
 								<c:if test="${list.is_digital_editor == '1'}">是</c:if>
@@ -400,10 +400,10 @@
 						<tr>
 							<td>${list.material_name}</td>
 							<td>
-								<c:if test="${list.position == '1'}">无</c:if>
-								<c:if test="${list.position == '2'}">主编</c:if>
-								<c:if test="${list.position == '3'}">副主编</c:if>
-								<c:if test="${list.position == '4'}">编委</c:if>
+								<c:if test="${list.position == '0'}">无</c:if>
+								<c:if test="${list.position == '1'}">主编</c:if>
+								<c:if test="${list.position == '2'}">副主编</c:if>
+								<c:if test="${list.position == '3'}">编委</c:if>
 							</td>
 							<td>
 								<c:if test="${list.is_digital_editor == '1'}">是</c:if>

@@ -74,7 +74,7 @@ function queryLoginLong(){
 			dataType:'json',
 			success:function(json){
 				if(json.returncode=="yes"){
-					$(".sxy-btn").attr("disabled",true);
+					//$(".sxy-btn").attr("disabled",true);
 					$("#TitleValue").attr("placeholder",null);
 					$("#TitleValue").attr("disabled",true);
 					$.each(json.list,function(i,n){
@@ -82,6 +82,8 @@ function queryLoginLong(){
 						$("#TitleValue").val(n.title);
 					});
 					ue.setDisabled();
+				} else {
+                    $(".sxy-btn").show();
 				}
 			}
 		});

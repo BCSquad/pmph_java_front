@@ -94,7 +94,7 @@
 						<tr>
 						<td><span>学科及专业：</span></td>
 						<td>
-							<input class="cg_input" name="subject" id="subject" placeholder="学科及专业" value="" />
+							<input class="cg_input" name="subject" id="subject" placeholder="学科及专业" maxlength="16" value="" />
 						</td>
 						<td><span class="btbs">*</span><span>级别：</span></td>
 						<td>

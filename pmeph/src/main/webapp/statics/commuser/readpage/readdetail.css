@@ -394,18 +394,18 @@
 .moreothers {
     cursor: pointer;
     font-family: MicrosoftYaHei;
-    font-size: 17px;
+    font-size: 14px;
     color: #666666;
     margin-left: 50%;
 }
 
 .bookmistake {
-    width: 426px;
+    width: 520px;
     /* height: 309px; */
     background-color: #FFFFFF;
     display: none;
     position: fixed;
-    left: 35%;
+    left: 30%;
     top: 30%;
     box-shadow: 0px 0px 5px #888888;
     border-radius: 5px;
@@ -751,7 +751,7 @@
     float: left;
     margin-top: 10px;
     width: 275px;
-    height: 228px;
+    height: 248px;
 }
 
 .right_15 {
