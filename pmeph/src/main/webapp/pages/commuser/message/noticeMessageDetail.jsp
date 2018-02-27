@@ -54,7 +54,7 @@
 		        <div  class="con_css" >
 		            <p>${content}</p>
 		        </div>
-		        <c:if test="${cmsAttach !=null}">
+		        <c:if test="${cmsAttach !=null && map.is_material_entry=='false'}">
 				        <div class="list">
 				            <div class="title2">
 				                	公告附件：
@@ -68,7 +68,7 @@
 		        	</c:if>
 		        		     
 		        <div class="liseDiv">
-		        <c:if test="${map.mail_address !=null && map.mail_address !=''}">
+		        <c:if test="${map.mail_address !=null && map.mail_address !=''&& map.is_material_entry=='true'}">
 		        <div class="list">
 		            <div class="title2">
 		               	 邮寄地址：
@@ -78,7 +78,7 @@
 		            </div>
 		        </div>
 		        </c:if>
-		        <c:if test="${listContact.size()>0}">
+		        <c:if test="${listContact.size()>0 && map.is_material_entry=='true'}">
 		        <div class="list">
 		        <div class="title2">
 		           	 联系人：
@@ -90,7 +90,7 @@
 		            </div>
 		        </div>
 		        </c:if>
-		        <c:if test="${map.note !=null && map.note !=''}">
+		        <c:if test="${map.note !=null && map.note !='' && map.is_material_entry=='true'} ">
 		        <div class="list">
 		            <div class="title2">
 		                	备注：
