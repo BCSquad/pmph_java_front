@@ -107,7 +107,7 @@ public class PersonalServiceImpl implements PersonalService {
 					String tb = textbook_arr[i];
 					textbook.put("id", tb.split("_/_")[0]);
 					textbook.put("textbook_name", tb.split("_/_")[1]);
-					textbook.put("is_locked", tb.split("_/_")[2]);
+					textbook.put("is_locked","1".equals(tb.split("_/_")[2]));
 					textbook_list.add(textbook);
 				}
 			}

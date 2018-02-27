@@ -68,6 +68,6 @@ public interface MyMessageService {
 	 * @param frendId
 	 * @param content
 	 */
-	void senNewMsg(Long thisId,Long frendId,Short friendIdType,String title,String content);
+	void senNewMsg(Long thisId,Short thisType,Long frendId,Short friendIdType,String title,String content);
 	
 }

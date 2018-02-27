@@ -14,6 +14,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Request;
 
+import com.bc.pmpheep.back.util.RouteUtil;
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -108,11 +110,12 @@ public class ScheduleController extends BaseController{
 		//代办事项列表
 		PageResult<Map<String,Object>> pageResult = scheduleService.selectScheduleList(pageParameter);
 		for(Map<String, Object> map:pageResult.getRows()){
-         	if("DEFAULT".equals(map.get("avatar").toString())){
+         	/*if("DEFAULT".equals(map.get("avatar").toString())){
  				map.put("avatar", "statics/pictures/head.png");
  			}else{
  				map.put("avatar", "file/download/"+map.get("avatar")+".action");
- 			}
+ 			}*/
+            map.put("avatar", RouteUtil.userAvatar(MapUtils.getString(map, "avatar")));
          }
 		ModelAndView mv = new ModelAndView();
 		//机构用户基本信息
@@ -125,11 +128,12 @@ public class ScheduleController extends BaseController{
 			}else{
 				map.put("license","false");
 			}*/
-			if("DEFAULT".equals(map.get("avatar").toString())||"/static/default_image.png".equals(map.get("avatar").toString())){
+			/*if("DEFAULT".equals(map.get("avatar").toString())||"/static/default_image.png".equals(map.get("avatar").toString())){
 				map.put("avatar", "statics/pictures/head.png");
 			}else{
 				map.put("avatar", "file/download/"+map.get("avatar").toString().replace("/image/","/")+".action");
-			}
+			}*/
+            map.put("avatar", RouteUtil.userAvatar(MapUtils.getString(map, "avatar")));
 			map.put("time", time);
 			map.put("userId", userId);
 			map.put("pageResult", pageResult);
@@ -201,11 +205,12 @@ public class ScheduleController extends BaseController{
 			map.put("pageResult", pageResult);
 			map.put("userId", userId);
 			
-			if("DEFAULT".equals(map.get("avatar").toString())||"/static/default_image.png".equals(map.get("avatar").toString())){
+			/*if("DEFAULT".equals(map.get("avatar").toString())||"/static/default_image.png".equals(map.get("avatar").toString())){
 				map.put("avatar", "statics/pictures/head.png");
 			}else{
 				map.put("avatar", "file/download/"+map.get("avatar").toString().replace("/image/","/")+".action");
-			}
+			}*/
+            map.put("avatar", RouteUtil.userAvatar(MapUtils.getString(map, "avatar")));
 			map.put("userId", userId);
 			map.put("pageResult", pageResult);
 			

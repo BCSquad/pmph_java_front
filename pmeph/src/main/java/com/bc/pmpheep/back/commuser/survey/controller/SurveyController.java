@@ -200,7 +200,7 @@ public class SurveyController extends BaseController{
 		
 		String input[] = request.getParameterValues("inputValues");
 		//输入框问题id集合
-		String inputQuestionIds[] = request.getParameterValues("inputQuestionIds");
+		String[] inputQuestionIds = request.getParameterValues("inputQuestionIds");
 		if(null!=inputQuestionIds){
 			for(int x=0;x<inputQuestionIds.length;x++){
 				map2.put("questionId", inputQuestionIds[x]);
@@ -215,9 +215,9 @@ public class SurveyController extends BaseController{
 		//获取所有文本框的name集合
 		String textValues[] = request.getParameterValues("textValues");
 		//输入框问题id集合
-		String textQuestionIds[] = request.getParameterValues("textQuestionIds");
-		if(null!=inputQuestionIds){
-			for(int x=0;x<inputQuestionIds.length;x++){
+		String[]  textQuestionIds = request.getParameterValues("textQuestionIds");
+		if(null!=textQuestionIds){
+			for(int x=0;x<textQuestionIds.length;x++){
 				map3.put("questionId", textQuestionIds[x]);
 				if(null!=textValues){
 					for(int y=0;y<textValues.length;y++){

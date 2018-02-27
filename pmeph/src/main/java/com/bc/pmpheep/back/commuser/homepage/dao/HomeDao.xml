@@ -280,4 +280,13 @@ LIMIT 0,10
 				or t.id = 	#{type}		
 			)
     </select>
+
+
+	<select id="countSurvey" resultType="int">
+		select count(1) c from survey
+		where end_date &gt; now()-1
+		and begin_date &lt; now()
+		and status='1'
+		and is_deleted='0'
+	</select>
 </mapper>

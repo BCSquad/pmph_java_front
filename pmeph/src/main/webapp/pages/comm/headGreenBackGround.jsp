@@ -10,16 +10,17 @@
         <div class="div-content">
             <div id="div-titletop">
                 <span class="top-lable1">欢迎访问人教e卫平台！</span>
-                <span class="top-lable2">∨</span>
+                <a class="top-lable2" href='<c:url value="/logout.action"/>'>[退出登录]</a>
                 <span class="top-lable2">&nbsp</span>
+				<%--<span class="top-lable2">退出登录</span>--%>
                 <span class="top-lable2">
                     <%
                         Map<String, Object> userInfo = (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_ORGUSER);
                         out.println(MapUtils.getString(userInfo, "org_name"));
                     %>
                 </span>
-                <span class="top-lable2">&nbsp&nbsp&nbsp&nbsp&nbsp</span>
-                <span class="top-lable2">下载手机客户端！</span>
+                <%--<span class="top-lable2">&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+                <span class="top-lable2">下载手机客户端！</span>--%>
             </div>
         </div>
     </div>

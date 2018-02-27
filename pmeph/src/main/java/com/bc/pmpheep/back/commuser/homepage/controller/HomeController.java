@@ -55,6 +55,7 @@ public class HomeController extends BaseController{
         List<Map<String, Object>> listArt = homeService.queryArticle(4);
         List<Map<String, Object>> listAut = homeService.queryAuthor(logUserId);
         List<Map<String, Object>> listCom = homeService.queryComment();
+        int countSurvey=homeService.countSurvey();
 
         Map<String,Object> adInfo1=homeService.getPageAdInfo("首页轮播");
         Map<String,Object> adInfo2=homeService.getPageAdInfo("首页中部");
@@ -74,6 +75,7 @@ public class HomeController extends BaseController{
         modelAndView.addObject("listCom", listCom);
         modelAndView.addObject("adInfo1", adInfo1);
         modelAndView.addObject("adInfo2", adInfo2);
+        modelAndView.addObject("countSurvey", countSurvey);
         List<Map<String, Object>> listM =new ArrayList<Map<String,Object>>();
         if(user==null){
         	listM = homeService.queryMaterial("0");

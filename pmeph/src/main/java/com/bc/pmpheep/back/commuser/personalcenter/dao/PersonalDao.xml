@@ -564,7 +564,7 @@
 
 	<!-- 我的问卷 -->
 	<select id="mySurvey" parameterType="PageParameter" resultType="java.util.Map">
-		select s.* from survey s
+		select s.*, DATE_FORMAT(s.begin_date,'%Y年%m月%d日') as gtime from survey s
 		left JOIN survey_target st ON st.survey_id=s.id  
 		LEFT JOIN writer_user wu on wu.org_id=st.org_id
  		where s.`status`=1 and s.is_deleted=0 and wu.id=#{parameter.logUserId}
