@@ -77,7 +77,7 @@
                 <c:if test="${map.avatar=='DEFAULT'}"><img id="sxy-img1" src="${ctx}/statics/image/putongyhtouxiang.png"/></c:if>
                 <c:if test="${map.avatar!='DEFAULT'}"><img id="sxy-img1" src="${ctx}/image/${map.avatar}.action" ></c:if>
                 
-                <div class="shade" id="uploadFile">修改头像</div>
+                <div class="shade" id="uploadFile" avatar="${map.avatar}">修改头像</div>
             </div>
             <div style="height:35px;"></div>
             <div style="height:120px;">

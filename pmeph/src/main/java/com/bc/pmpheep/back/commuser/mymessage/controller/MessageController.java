@@ -11,7 +11,9 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.bc.pmpheep.back.util.RouteUtil;
 import com.bc.pmpheep.general.controller.BaseController;
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -69,13 +71,14 @@ public class MessageController extends BaseController{
 		//处理消息发送者头像
 		for(Map<String,Object> map1:list){
 			
-			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
+            map1.put("avatar", RouteUtil.userAvatar(MapUtils.getString(map1, "avatar")));
+            /*if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
 				map1.put("avatar", "statics/pictures/head.png");
 			}else{
 				//map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
 				map1.put("avatar", "image/"+map1.get("avatar")+".action");
+			}*/
 			}
-		}
 		
 		mv.addObject("count",count-list.size());
 		mv.addObject("list",list);
@@ -117,14 +120,14 @@ public class MessageController extends BaseController{
 		int count = noticeMessageService.selectSysMessageTotalCount(paraMap);
 		//处理消息发送者头像
 		for(Map<String,Object> map1:list){
-			
-			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
+            map1.put("avatar", RouteUtil.userAvatar(MapUtils.getString(map1, "avatar")));
+			/*if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
 				map1.put("avatar", "statics/pictures/head.png");
 			}else{
 				//map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
 				map1.put("avatar", "image/"+map1.get("avatar")+".action");
+			}*/
 			}
-		}
 		
 		//控制显示“加载更多”
 		if(list.size()>0){
@@ -137,7 +140,6 @@ public class MessageController extends BaseController{
 		}
 		return list;
 	}
-	
 	
 	
 	//更新申请信息状态
@@ -161,14 +163,14 @@ public class MessageController extends BaseController{
 		paraMap.put("userId", userId);
 		List<Map<String,Object>> list = noticeMessageService.selectApplyMessage(paraMap);
 		for(Map<String,Object> map1:list){
-			
-			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
+            map1.put("avatar", RouteUtil.userAvatar(MapUtils.getString(map1, "avatar")));
+			/*if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
 				map1.put("avatar", "statics/pictures/head.png");
 			}else{
 				//map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
 				map1.put("avatar", "image/"+map1.get("avatar")+".action");
+			}*/
 			}
-		}
 		mv.addObject("list",list);
 		mv.addObject("listSize",list.size());
 		mv.setViewName("commuser/message/applyMessage");
@@ -236,13 +238,13 @@ public class MessageController extends BaseController{
 			
 			
 			//处理消息发送者头像
-			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
+			/*if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
 				map1.put("avatar", "statics/pictures/head.png");
 			}else{
 				//map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
 				map1.put("avatar", "image/"+map1.get("avatar")+".action");
-			}
-			
+			}*/
+            map1.put("avatar", RouteUtil.userAvatar(MapUtils.getString(map1, "avatar")));
 			
 		}
 		//不带分页的数据总量
@@ -319,13 +321,14 @@ public class MessageController extends BaseController{
 			
 			}
 			//处理消息发送者头像
-			if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
+			/*if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
 				map1.put("avatar", "statics/pictures/head.png");
 			}else{
 				//map1.put("avatar", "file/download/"+map1.get("avatar")+".action");
 				map1.put("avatar", "image/"+map1.get("avatar")+".action");
+			}*/
+            map1.put("avatar", RouteUtil.userAvatar(MapUtils.getString(map1, "avatar")));
 			}
-		}
 		//不带分页的数据总量
 		int count = noticeMessageService.selectNoticeMessageTotalCount(paraMap);
 		//控制显示“加载更多”
@@ -429,7 +432,6 @@ public class MessageController extends BaseController{
 		mv.setViewName("commuser/message/noticeMessageDetail");
 		return mv;
 	}
-	
 	
 	
 	//系统消息标题弹框回显

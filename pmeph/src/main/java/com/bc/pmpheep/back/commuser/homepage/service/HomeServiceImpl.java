@@ -149,4 +149,9 @@ public class HomeServiceImpl implements HomeService {
 	public int countBookByType(String type) {
 		return this.homeDao.countBookByType(type);
 	}
+
+    @Override
+    public int countSurvey() {
+        return homeDao.countSurvey();
+    }
 }

@@ -87,14 +87,18 @@ public class LoginInterceptor implements HandlerInterceptor {
         this.pathWithUsertypeMaps = pathWithUsertypeMaps;
     }
 
+    public Set<PathWithUsertypeMap> getPathWithUsertypeMaps() {
+        return pathWithUsertypeMaps;
+    }
+
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
 
         PathMatchingResourcePatternResolver resolver = getPathMatchingResourcePatternResolver();
-        for (PathWithUsertypeMap pathMap : pathWithUsertypeMaps) {
-            //需要拦截的URL
-            if (resolver.getPathMatcher().match(pathMap.getPath(), httpServletRequest.getServletPath())) {
 
+                for (PathWithUsertypeMap pathMap : pathWithUsertypeMaps) {
+                    //需要拦截的URL
+                    if (resolver.getPathMatcher().match(pathMap.getPath(), httpServletRequest.getServletPath())) {
                 HttpSession session = httpServletRequest.getSession();
                 Map<String, Object> userInfo = null;
                 if (pathMap.getUserType().split(",").length >= 1) {
