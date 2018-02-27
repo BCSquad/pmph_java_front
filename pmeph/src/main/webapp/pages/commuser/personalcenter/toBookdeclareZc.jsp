@@ -152,27 +152,27 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span>一、选题理由：</span></td>
+						<td><span class="btbs">*</span><span>一、选题理由：</span></td>
 						<td colspan="3">
 							<input type="hidden" name="extra_id" value="${textraMap.id}"/>
 							<div class="content">
-								<textarea class="text_cl" id="reason" name="reason">${textraMap.reason}</textarea>
+								<textarea class="text_cl" maxlength="300" id="reason" name="reason">${textraMap.reason}</textarea>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td><span>二、出版价值：</span></td>
+						<td><span class="btbs">*</span><span>二、出版价值：</span></td>
 						<td colspan="3">
 							<div class="content">
-								<textarea class="text_cl" id="price" name="price">${textraMap.price}</textarea>
+								<textarea class="text_cl" maxlength="300" id="price" name="price">${textraMap.price}</textarea>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td><span>三、主要内容：</span></td>
+						<td><span class="btbs">*</span><span>三、主要内容：</span></td>
 						<td colspan="3">
 							<div class="content">
-								<textarea class="text_cl" id="extra_score" name="extra_score">${textraMap.score}</textarea>
+								<textarea class="text_cl" maxlength="300" id="extra_score" name="extra_score">${textraMap.score}</textarea>
 							</div>
 						</td>
 					</tr>
@@ -260,7 +260,7 @@
 					<tbody>
 						<c:forEach var="list" items="${twriteList}" varStatus="status">
 							<tr id="sbbzqk_${status.count}">
-								<td><input class="sb_input" style="width: 100px;" name="write_realname" placeholder="编者姓名" value="${list.realname}"/></td>
+								<td><input class="sb_input" style="width: 100px;" name="write_realname" placeholder="编者姓名" maxlength="13" value="${list.realname}"/></td>
 								<td>
 									<select id="r_sex_${status.count}" name="sex">
 										<option value="0" ${list.sex=='0'?'selected':''}>男</option>
@@ -268,9 +268,11 @@
 									</select>
 									<input type="hidden" id="twriteCount" name="twriteCount" value="${twriteCount} "/>
 								</td>
-								<td><input class="sb_input" style="width: 80px;" name="write_price" placeholder="年龄" value="${list.price}"/></td>
-								<td><input class="sb_input" style="width: 320px;" name="write_position" placeholder="行政职务" value="${list.position}"/></td>
-								<td><input class="sb_input" style="width: 200px;" name="workplace" placeholder="工作单位" value="${list.workplace}"/></td>
+								<td><input class="sb_input" style="width: 80px;" name="write_price" placeholder="年龄" value="${list.price}"
+								onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+							  maxlength="3"/></td>
+								<td><input class="sb_input" style="width: 320px;" name="write_position" placeholder="行政职务" value="${list.position}" maxlength="12"/></td>
+								<td><input class="sb_input" style="width: 200px;" name="workplace" placeholder="工作单位" value="${list.workplace}" maxlength="12"/></td>
 								<td><div class="add_div"><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('sbbzqk_${status.count}')"></div></td>
 							</tr>
 						</c:forEach>
