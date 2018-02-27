@@ -20,66 +20,68 @@
     </context:component-scan>
 
     <!--AXIOS跨域请求访问拦截 -->
-    <bean id="loginInterceptor" class="com.bc.pmpheep.back.interceptor.LoginInterceptor">
-        <property name="redirectUrl" value="/pages/comm/login.jsp"/>
-        <property name="pathWithUsertypeMaps">
-            <set>
-
-                <value>/dataaudit/toMaterialAudit.action -> 2</value><!--申报资料审核（机构用户） -->
-
-                <!--作家用户-->
-
-                <value>/mymessage/* -> 1,2</value><!--作家用户消息模块 -->
-                <value>/message/deleteNoticeMessage* -> 1</value><!--作家用户消息通知删除模块 -->
-                <value>/message/updateApplyMessage* -> 1</value><!--作家用户消息好友接受、忽略模块 -->
-                <value>/writerArticle/* -> 1</value><!--作家写文章 -->
-                <value>/personalhomepage/* -> 1</value><!--作家个人中心 -->
-                <value>/material/* -> 1</value><!--教材申报 -->
-                <value>/integral/* -> 1</value><!--积分 -->
-
-
-                <value>/bookcollection/* -> 1</value><!--书籍收藏 -->
-                <value>/articlecollection/* -> 1</value><!--文章收藏 -->
-                <value>/myGroup/* -> 1</value><!--我的小组 -->
-                <value>/group/* -> 1</value><!--我的小组 -->
-                <value>/cmsinfoletters/addlike.action -> 1</value><!--信息快报列表点赞 -->
-                <value>/inforeport/add* -> 1</value><!--信息快报详情点赞、收藏  -->
-                <value>/articlesearch/changelikes* -> 1</value><!--文章搜索点赞 -->
-                <value>/readdetail/insertComment* -> 1</value><!--读书详情页面新增评论 -->
-                <value>/readdetail/queryLoginLong* -> 1</value><!--读书详情页面 查询登陆人是否写过长评 -->
-                <value>/readdetail/insertlong* -> 1</value><!--读书详情页面新增长评 -->
-                <value>/readdetail/todetail.action?state=write* -> 1</value><!--读书详情页面跳转到新增书评页面 -->
-                <value>/readdetail/addmark* -> 1</value><!--读书详情页添加收藏 -->
-                <value>/readdetail/addlikes* -> 1</value><!--读书详情页点赞 -->
-                <value>/readdetail/correction* -> 1</value><!--读书详情页图书纠错 -->
-                <value>/myFriend/* -> 1</value><!--我的好友（普通用户） -->
-                <value>/articlesearch/changelikes* -> 1</value><!--读书详情页改变点赞数 -->
-                <value>/addFriend/* -> 1</value><!--添加好友 -->
-                <value>/booksearch/likeSwitch* -> 1</value><!--书籍查询 -->
-                <value>/teacherCertification/* -> 1</value><!--学校教师认证 -->
-                <value>/bookdeclare/* -> 1</value><!--出书申报 -->
-                <value>/survey/* -> 1</value><!--出书申报 -->
-                <value>/chooseEditor/* -> 1</value><!--第一主编选择编委 -->
-                <value>/progress/listReportProgress.action* -> 1</value><!-- 教材申报进度 -->
-                <value>/articledetail/insertComment* -> 1</value><!--文章详情页面新增评论 -->
-                <value>/articledetail/addmark* -> 1</value><!--文章详情页添加收藏 -->
-                <value>/articledetail/addlikes* -> 1</value><!--文章详情页点赞 -->
-
-                <!--机构用户-->
-                <value>/user/* -> 2</value><!--用户管理（机构用户） -->
-                <value>/schedule/* -> 2</value><!--机构用户待办事项 -->
-                <value>/applyDocAudit/* -> 2</value><!--申报资料审核（机构用户） -->
-                <value>/teacherauth/* -> 2</value><!--教师认证 -->
-                <value>/organizationuser/* -> 2</value><!--机构用户管理-->
-                <value>/admininfocontroller/toadmininfo* -> 2</value><!--个人资料修改页面-->
-                <value>/admininfocontroller/toadminattest* -> 2</value><!--跳转到学校管理员认证界面-->
-                <value>/AllMessage/* -> 2</value>
-            </set>
-        </property>
-    </bean>
     <mvc:interceptors>
         <bean class="com.bc.pmpheep.back.interceptor.ProcessInterceptor"></bean>
-        <ref bean="loginInterceptor"></ref>
+
+        <bean class="com.bc.pmpheep.back.interceptor.LoginInterceptor">
+            <property name="redirectUrl" value="/pages/comm/login.jsp"/>
+            <property name="pathWithUsertypeMaps">
+                <set>
+
+                    <value>/dataaudit/toMaterialAudit.action -> 2</value><!--申报资料审核（机构用户） -->
+
+                    <!--作家用户-->
+
+                    <value>/mymessage/* -> 1,2</value><!--作家用户消息模块 -->
+                    <value>/message/deleteNoticeMessage* -> 1</value><!--作家用户消息通知删除模块 -->
+                    <value>/message/updateApplyMessage* -> 1</value><!--作家用户消息好友接受、忽略模块 -->
+                    <value>/writerArticle/* -> 1</value><!--作家写文章 -->
+                    <value>/personalhomepage/* -> 1</value><!--作家个人中心 -->
+                    <value>/material/* -> 1</value><!--教材申报 -->
+                    <value>/integral/* -> 1</value><!--积分 -->
+
+
+                    <value>/bookcollection/* -> 1</value><!--书籍收藏 -->
+                    <value>/articlecollection/* -> 1</value><!--文章收藏 -->
+                    <value>/myGroup/* -> 1</value><!--我的小组 -->
+                    <value>/group/* -> 1</value><!--我的小组 -->
+                    <value>/cmsinfoletters/addlike.action -> 1</value><!--信息快报列表点赞 -->
+                    <value>/inforeport/add* -> 1</value><!--信息快报详情点赞、收藏  -->
+                    <value>/articlesearch/changelikes* -> 1</value><!--文章搜索点赞 -->
+                    <value>/readdetail/insertComment* -> 1</value><!--读书详情页面新增评论 -->
+                    <value>/readdetail/queryLoginLong* -> 1</value><!--读书详情页面 查询登陆人是否写过长评 -->
+                    <value>/readdetail/insertlong* -> 1</value><!--读书详情页面新增长评 -->
+                    <value>/readdetail/todetail.action?state=write* -> 1</value><!--读书详情页面跳转到新增书评页面 -->
+                    <value>/readdetail/addmark* -> 1</value><!--读书详情页添加收藏 -->
+                    <value>/readdetail/addlikes* -> 1</value><!--读书详情页点赞 -->
+                    <value>/readdetail/correction* -> 1</value><!--读书详情页图书纠错 -->
+                    <value>/myFriend/* -> 1</value><!--我的好友（普通用户） -->
+                    <value>/articlesearch/changelikes* -> 1</value><!--读书详情页改变点赞数 -->
+                    <value>/addFriend/* -> 1</value><!--添加好友 -->
+                    <value>/booksearch/likeSwitch* -> 1</value><!--书籍查询 -->
+                    <value>/teacherCertification/* -> 1</value><!--学校教师认证 -->
+                    <value>/bookdeclare/* -> 1</value><!--出书申报 -->
+                    <value>/survey/* -> 1</value><!--出书申报 -->
+                    <value>/chooseEditor/* -> 1</value><!--第一主编选择编委 -->
+                    <value>/progress/listReportProgress.action* -> 1</value><!-- 教材申报进度 -->
+                    <value>/articledetail/insertComment* -> 1</value><!--文章详情页面新增评论 -->
+                    <value>/articledetail/addmark* -> 1</value><!--文章详情页添加收藏 -->
+                    <value>/articledetail/addlikes* -> 1</value><!--文章详情页点赞 -->
+                    <value>/message/noticeMessageList* -> 1</value><!--查询通知列表 -->
+                    <value>/message/applyMessageList* -> 1</value><!--查询申请列表 -->
+
+                    <!--机构用户-->
+                    <value>/user/* -> 2</value><!--用户管理（机构用户） -->
+                    <value>/schedule/* -> 2</value><!--机构用户待办事项 -->
+                    <value>/applyDocAudit/* -> 2</value><!--申报资料审核（机构用户） -->
+                    <value>/teacherauth/* -> 2</value><!--教师认证 -->
+                    <value>/organizationuser/* -> 2</value><!--机构用户管理-->
+                    <value>/admininfocontroller/toadmininfo* -> 2</value><!--个人资料修改页面-->
+					<value>/admininfocontroller/toadminattest* -> 2</value><!--跳转到学校管理员认证界面-->
+                    <value>/AllMessage/* -> 2</value>
+                </set>
+            </property>
+        </bean>
     </mvc:interceptors>
 
     <mvc:annotation-driven/>

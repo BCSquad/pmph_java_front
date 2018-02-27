@@ -32,7 +32,7 @@
 	     and t.is_auth='1' and t.is_deleted='0'
 	     order by t.gmt_create desc
 	     <if test="start >= 0">
-	        limit #{start},2
+	        limit #{start},3
 	     </if> 
 	     
 	</select>
@@ -209,7 +209,7 @@
 	     where t.book_id=#{book_id} and t.is_long =1 and is_hide=0 and t.is_auth = 1
 	     order by t.gmt_create desc
 	     <if test="start >= 0">
-	        limit #{start},2
+	        limit #{start},3
 	     </if> 
 	    
 	</select>

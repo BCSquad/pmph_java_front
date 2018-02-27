@@ -134,7 +134,7 @@
                         <li class="author">读者对象：${map.reader}</li>
                         <li class="author">版次：${map.revision}</li>
                         <li class="author">被浏览：${map.clicks}次</li>
-                        <div class="author">评分&nbsp;&nbsp;:</div>
+                        <div class="author">评分：</div>
                         <c:if test="${map.score<=3}">
                             <div class="star">
                                 <span class="rwtx1"></span>
@@ -292,7 +292,7 @@
                 </div>
                 <div class="block">
                     <div id="changepage">
-                        <c:forEach items="${listCom}" var="list">
+                        <c:forEach items="${listCom}" var="list" begin="1" end="2">
                             <div class="item">
                                 <div class="item_title">
                                     <div style="float: left;">
@@ -362,7 +362,7 @@
                             <div class="longcom">图书长评</div>
                             <div class="writecom" onclick="writeablut()">写书评</div>
                         </div>
-                        <c:forEach items="${longList}" var="list" varStatus="status">
+                        <c:forEach items="${longList}" var="list" varStatus="status" begin="1" end="2">
                             <div class="item">
                                 <div class="item_title">
                                     <div style="float: left;">

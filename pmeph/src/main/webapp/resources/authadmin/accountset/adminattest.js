@@ -94,7 +94,7 @@ function getform() {
     json.address=$("#address").val();
     json.id=$("#id").val();
     json.proxy=$("#fileid").val();
-    
+    json.isProxyUpload = 1; //提交 后台判断是否提交验证的标志
     /*json.birthday=$("#birthday").val();
     json.experience=$("#experience").val();
     json.workplace=$("#workplace").val();*/
@@ -115,7 +115,10 @@ function submit(){
 	        success:function(code){
 	            if (code=="success"){
 	                message.success("提交成功");
-					window.location.reload();
+					//window.location.reload();
+	                setTimeout(function(){
+	                	window.location.href = contextpath + "admininfocontroller/toadmininfo.action";
+	                }, 800);
 	            }else{
 	            	message.error("提交失败");
 	            }

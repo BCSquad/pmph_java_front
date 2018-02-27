@@ -41,7 +41,7 @@
 										<span class="newResearchContentFont" onclick="detail(${survey.id})">${survey.title}</span>
 									</div>
 									<div class="resaerchTime">
-										<span class="newTimeFont"><fmt:formatDate pattern="yyyy年MM月dd日" value="${survey.gmt_create}" /></span>
+										<span class="newTimeFont"><fmt:formatDate pattern="yyyy年MM月dd日" value="${survey.begin_date}" /></span>
 									</div>
 								</div>
 								</c:forEach>
