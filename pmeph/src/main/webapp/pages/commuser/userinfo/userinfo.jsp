@@ -245,7 +245,7 @@
             <tr class="sxy-tr">
                 <td colspan="3">
                   <div style="width: 400px">
-                      <label class="require">个人简介:</label>
+                      <label class="require">个人简介</label>
                       <div class="input-wrapper">
                           <input type="text" class="required" data-valid="isNonEmpty" data-error="个人简介不能为空" onblur="javascript:LengthLimit(this,100);"
                             placeholder="填写个人简介"  id="note" name="note" style="width: 1040px" value="${map.note }">
@@ -256,7 +256,7 @@
             <tr  class="sxy-tr">
                 <td colspan="3">
                    <div style="width: 400px">
-                       <span class="sxy_span">个性签名:</span>
+                       <span class="sxy_span">个性签名</span>
                        <div class="input-wrapper" style="margin-left: 20px">
                            <input type="text" placeholder="填写个人签名" id="signature"  onblur="javascript:LengthLimit(this,50);"
                            name="signature" style="width: 1040px" value="${map.signature }">
@@ -267,7 +267,7 @@
             <tr  class="sxy-tr" style="height: 0px">
                 <td colspan="7"  style="height: 0px">
                     <div style="width: 1200px;height: 30px">
-                        <span class="span_sign">我的标签:</span>
+                        <span class="span_sign">我的标签</span>
                         <div class="sxy-bottom-div" style="margin-left: 17px"><font class="sxy-bottom-font">心理学</font></div>
                         <div class="sxy-bottom-div"><font class="sxy-bottom-font">护理</font></div>
                         <div class="sxy-bottom-div"><font class="sxy-bottom-font">临床</font></div>

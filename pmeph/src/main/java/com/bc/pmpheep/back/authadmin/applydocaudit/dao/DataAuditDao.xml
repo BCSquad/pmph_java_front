@@ -169,7 +169,7 @@
 	</update>
 		<!-- 申报审核退回 -->
 	<update id="updateDeclaration" parameterType="java.util.Map">
-		update declaration set auth_user_id =#{auth_user_id} ,auth_date=#{auth_date} ,online_progress=#{online_progress},return_cause=#{return_cause} ,is_staging=1 where id= #{declaration_id}
+		update declaration set auth_user_id =#{auth_user_id} ,auth_date=#{auth_date} ,online_progress=#{online_progress},return_cause=#{return_cause}  where id= #{declaration_id}
 	</update>
 		
 	
