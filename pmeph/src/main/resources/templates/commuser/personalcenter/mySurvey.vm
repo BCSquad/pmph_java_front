@@ -10,7 +10,7 @@
         <div class="email_content">
 	            <div class="email_right" >
 		            <a style="cursor:pointer" class="a1" target="_blank" href="$!{contextpath}personalhomepage/queryMySurvey.action?surveyId=$!{c.id}">
-		            	&nbsp;&nbsp;&nbsp;&nbsp;$!{c.title}
+		            	&nbsp;&nbsp;&nbsp;&nbsp;$!{c.title}<span  class="newTimeFont">$!{c.gtime}</span>
 		            </a>
 	            </div>
 	      
