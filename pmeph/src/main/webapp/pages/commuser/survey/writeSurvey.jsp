@@ -118,13 +118,22 @@
 						</div>
 						</form>
 					</div>
-					<c:if test="${((btn.sid) !=surveyId) && ((btn.uid) !=logUserId)}">
-					<div style="width: 100%;height:50px;">
-						<div onclick="submit1()" class="buttonDiv">
-							<span class="submitFont">完成</span>
-						</div>
-					</div>
-					</c:if>
+					<c:choose>
+						<c:when test="${((btn.sid) !=surveyId) && ((btn.uid) !=logUserId)}">
+							<div style="width: 100%;height:50px;">
+								<div onclick="submit1()" class="buttonDiv">
+									<span class="submitFont">完成</span>
+								</div>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div style="width: 100%;height:50px;">
+								<div onclick="toList()" class="buttonDiv">
+									<span class="submitFont">返回</span>
+								</div>
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="emptyDiv"></div>
 		</div>
