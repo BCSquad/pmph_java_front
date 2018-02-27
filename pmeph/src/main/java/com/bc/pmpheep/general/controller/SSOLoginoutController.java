@@ -144,9 +144,10 @@ public class SSOLoginoutController {
                 }
             }
             response.sendRedirect(refer);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/homepage/tohomepage.action");
         }
 
-        response.sendRedirect(request.getContextPath() + "/homepage/tohomepage.action");
 
     }
 

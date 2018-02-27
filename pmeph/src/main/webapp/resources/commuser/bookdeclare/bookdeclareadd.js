@@ -71,9 +71,9 @@ function add_zjky(){
 					"<option value='0'>男</option>"+
 					"<option value='1'>女</option>"+
 				"</select></td>"+
-			"<td><input class='sb_input' style='width: 80px;' name='write_price' placeholder='年龄' value=''" +
+			"<td><input class='sb_input' style='width: 80px;' id='write_price_"+num+"' name='write_price' placeholder='年龄' value=''" +
 			"onkeyup='this.value=this.value.replace(/\\D/g,&#39;&#39;)' onafterpaste='this.value=this.value.replace(/\\D/g,&#39;&#39;)'"+
-							  "maxlength='3' /></td>"+
+				"onBlur='checkAge(this)' maxlength='3' /></td>"+
 			"<td><input class='sb_input' style='width: 320px;' maxlength='12' name='write_position' placeholder='行政职务' value=''/></td>"+
 			"<td><input class='sb_input' style='width: 200px;' maxlength='12' name='workplace' placeholder='工作单位' value=''/></td>"+
 			"<td><div class='add_div'><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('sbbz_"+num+"')\"></div></td>"+
@@ -130,4 +130,13 @@ function checkNull(jsonStr){
 		}
 	});
 	return b;
+}
+
+//判断年龄是否符合标准
+function checkAge(obj){
+	var va = obj.value;
+	if(va >= 200){
+		window.message.warning("请输入正确的年龄");
+		$("#"+obj.id)[0].focus();  //聚焦2
+	}
 }

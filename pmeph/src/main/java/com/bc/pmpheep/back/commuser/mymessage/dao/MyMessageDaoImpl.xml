@@ -30,8 +30,8 @@
 		from (
 			SELECT 
 			MAX(id) id ,
-			if(sum(if(is_read,1,0))>0,1,'') reade,                    
-			if(sum(if(id>0,1,0)) > sum(if(is_read,1,0)) ,1,'') noread  from (
+			if(sum(if(id>0,1,0)) > sum(if(is_read,1,0)) ,0,1) reade,
+			if(sum(if(id>0,1,0)) > sum(if(is_read,1,0)) ,1,0) noread  from (
 				select 
 				id,
 				is_read,
