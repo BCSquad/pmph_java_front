@@ -56,6 +56,7 @@ public class ChooseEditorController extends BaseController {
 		List<Map<String, Object>> OrgList = chooseEditorService.getOrgList();
 		String textBookName = (String) textBook.get("textbook_name");
 		Boolean is_locked = (Boolean) textBook.get("is_locked");
+		Boolean is_force_end = (Boolean) textBook.get("is_force_end");
 		Boolean is_digital_editor_optional = (Boolean) textBook.get("is_digital_editor_optional");
 		/*String tag ="editor";
 		String selectedIds = getTempSelectedIds(textBookId, logUserId,tag);
@@ -75,6 +76,7 @@ public class ChooseEditorController extends BaseController {
 		mv.addObject("OrgList",OrgList);
 		mv.addObject("textBookId",textBookId);
 		mv.addObject("is_locked",is_locked);
+		mv.addObject("is_force_end",is_force_end);
 		mv.addObject("is_digital_editor_optional",is_digital_editor_optional);
 		mv.setViewName("authadmin/chooseeditor/chooseeditor");
 		return mv;

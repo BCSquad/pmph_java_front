@@ -192,7 +192,7 @@
 	</insert>
 	<!-- 删除一本书的收藏记录 -->
 	<delete id="deleteMark" parameterType="java.util.Map" >
-	    delete from cms_user_mark where writer_id=#{writer_id} and  favorite_id=#{favorite_id} and content_id=#{id}
+	    delete from cms_user_mark where writer_id=#{writer_id} and  favorite_id=#{favorite_id} and content_id=#{wid}
 	</delete>
 	
 	<!-- 根据ID增加点击数 -->

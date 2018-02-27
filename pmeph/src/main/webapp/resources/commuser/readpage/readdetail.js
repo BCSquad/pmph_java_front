@@ -220,8 +220,10 @@ function changepage() {
         success: function (json) {
             $(".morecom").hide();
             $(".moreothers").show();
-            if (json.length < 2) {
+            if (json.length < 3) {
                 $("#moreothers").html('没有更多了~~~');
+            }else{
+            	json.remove(2);
             }
             var str = '';
             $.each(json, function (i, n) {
@@ -296,8 +298,11 @@ function longcom() {
         success: function (json) {
             $(".morecom").hide();
             $(".moreothers").show();
-            if (json.length < 2) {
+            
+            if (json.length < 3) {
                 $("#longothers").html('没有更多了~~~');
+            }else{
+            	json.remove(2);
             }
             var str = '';
             $.each(json, function (i, n) {

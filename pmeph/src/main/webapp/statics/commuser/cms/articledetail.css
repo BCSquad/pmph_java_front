@@ -132,10 +132,10 @@
     margin-bottom: 20px;
 }
 
-.block .item{
+/* .block .item{
 	width: 890px;
 	height: 110px;
-}
+} */
 
 .block .item .item_title{
 	width: 890px;
@@ -512,9 +512,9 @@
 
 .block .item {
     margin-top: 5px;
-    width: 280px;
+    /* width: 280px; */
     float: left;
-    height: 210px;
+    /* height: 210px; */
     position: relative;
 }
 
