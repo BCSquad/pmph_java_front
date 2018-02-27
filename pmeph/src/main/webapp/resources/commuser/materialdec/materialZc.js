@@ -715,7 +715,7 @@ function buttAdd(type){
 			async: false,
 		    success: function(msg) {
 			    if(msg=='OK'){
-			    	window.message.success("修改成功,正在跳转页面");
+			    	window.message.success("操作成功,正在跳转页面");
 			    	window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=jcsb";
 			    }
 		    }

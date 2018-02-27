@@ -82,13 +82,13 @@
 						<td>
 							<input class="cg_input" name="word_number" id="word_number" value="${topicMap.word_number}" placeholder="单位千字"  
 								onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
-							  maxlength="10"/>
+							  maxlength="9"/>
 						</td>
 						<td><span>预估图数：</span></td>
 						<td>
 							<input class="cg_input" name="picture_number" id="picture_number" value="${topicMap.picture_number}"  
 							onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
-							  maxlength="10"/>
+							  maxlength="9"/>
 						</td>
 					</tr>
 						<tr>
@@ -190,13 +190,13 @@
 						<td>
 							<input class="cg_input" name="purchase" id="purchase" placeholder="请输入作者购买册数" value="${topicMap.purchase}"
 							  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
-							  maxlength="10"/>
+							  maxlength="9"/>
 						</td>
 						<td><span>作者赞助：</span></td>
 						<td>
 							<input class="cg_input" name="sponsorship" id="sponsorship" placeholder="请输入预估金额" value="${topicMap.sponsorship}"
 								onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
-							  maxlength="10"/>
+							  maxlength="9"/>
 						</td>
 					</tr>
 				</table>
@@ -215,7 +215,7 @@
 						<td width="400px">
 							<input class="cg_input" name="original_bookname" maxlength="33" id="original_bookname" placeholder="" value="${topicMap.original_bookname}"/>
 						</td>
-						<td style="text-align: center;"><span>原编著者：</span></td>
+						<td style="text-align: center;"><span>&emsp;&emsp;&emsp;原编著者：</span></td>
 						<td width="308px">
 							<input class="cg_input" name="original_author" maxlength="33" id="original_author" placeholder="" value="${topicMap.original_author}"/>
 						</td>
@@ -268,8 +268,8 @@
 									</select>
 									<input type="hidden" id="twriteCount" name="twriteCount" value="${twriteCount} "/>
 								</td>
-								<td><input class="sb_input" style="width: 80px;" name="write_price" placeholder="年龄" value="${list.price}"
-								onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+								<td><input class="sb_input" style="width: 80px;" name="write_price" placeholder="年龄" id="write_price" value="${list.price}"
+								onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" onBlur="checkAge(this)"
 							  maxlength="3"/></td>
 								<td><input class="sb_input" style="width: 320px;" name="write_position" placeholder="行政职务" value="${list.position}" maxlength="12"/></td>
 								<td><input class="sb_input" style="width: 200px;" name="workplace" placeholder="工作单位" value="${list.workplace}" maxlength="12"/></td>

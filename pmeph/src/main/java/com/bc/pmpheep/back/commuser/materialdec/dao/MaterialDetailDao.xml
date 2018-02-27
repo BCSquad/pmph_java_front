@@ -122,7 +122,9 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 		insert into dec_position(declaration_id,textbook_id,preset_position,syllabus_id,syllabus_name,gmt_create)
 		  values(#{declaration_id},#{textbook_id},#{preset_position},#{syllabus_id},#{syllabus_name},#{gmt_create})
 	</insert>
-	
+	<delete id="DelTsxz" parameterType="java.util.Map">
+		delete from dec_position where declaration_id = #{declaration_id}
+	</delete>
 	<!--图书申报职位暂存 -->
 	<select id="queryTssbZc" resultType="java.util.Map" parameterType="java.util.Map">
 		select t1.id,t1.author_id,t1.is_background*1 is_background,t1.declaration_id,t1.textbook_id,t1.preset_position,t1.is_on_list*1 is_on_list,

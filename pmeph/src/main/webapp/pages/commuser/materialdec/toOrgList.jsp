@@ -31,21 +31,23 @@
 			</div>
 		</div>
 		<div style="height: 10px;"></div>
-		<table id="org_tab" class="tab_2" cellpadding="0" cellspacing="0">
-			<thead>
-				<tr>
-					<td style="border: 1px solid #dedede;"><span class="bt">机构名称</span></td> 
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="list" items="${pageResult.rows}">
+		<div style="height: 350px;">
+			<table id="org_tab" class="tab_2" cellpadding="0" cellspacing="0" >
+				<thead>
 					<tr>
-						<td style="height: 45px;border: 1px solid #dedede;"><input type="radio" name="radio_id" value="${list.org_id}_${list.org_name}"/>
-							${list.org_name}</td>
+						<td style="border: 1px solid #dedede;"><span class="bt">机构名称</span></td> 
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					<c:forEach var="list" items="${pageResult.rows}">
+						<tr>
+							<td style="height: 30px;border: 1px solid #dedede;"><input type="radio" name="radio_id" value="${list.org_id}_${list.org_name}"/>
+								${list.org_name}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 		<div class="pageDiv" style="margin-top: 20px;">
              <ul class="pagination" id="page1">
              </ul>
@@ -65,10 +67,7 @@
              </div>
          </div> 
          <div class="button2">
-			<div class="div_butt">
-				<div class="bt_tj" onclick="javascript:selectAdd()">确认</div>
-			</div>
-
+				<div class="bt_tj" onclick="javascript:selectAdd()"><span>确认</span></div>
 		</div>
 	</div>
 </body>
@@ -124,5 +123,12 @@ function selectAdd(){
      parent.layer.close(index);
      //--关闭 当前页面 结束--
 }
+
+//键盘监听
+$(document).keydown(function(event){ 
+	if(event.keyCode == 13){//回车键
+		query();
+	}
+}); 
 </script>
 </html>

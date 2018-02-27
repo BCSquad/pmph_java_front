@@ -243,7 +243,7 @@ public class BookDeclareController extends BaseController {
 					writeMap.put("topic_id", topic_id);
 					writeMap.put("realname", realnames[i]);
 					writeMap.put("sex", sexs[i]);
-					writeMap.put("price", prices[i]);
+					writeMap.put("price", "".equals(prices[i]) ? null:prices[i]);
 					writeMap.put("position", positions[i]);
 					writeMap.put("workplace", workplaces[i]);
 					twriteList.add(writeMap);
