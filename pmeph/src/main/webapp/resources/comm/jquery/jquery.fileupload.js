@@ -2286,7 +2286,7 @@ $.fn.uploadFile = function (option) {
             file_input = $("<input class='hidden-upload' name='file' type='file' id='" + $ele.attr("id") + "_upload'/>");
 
 
-            file_input.css("width", $ele.outerHeight());
+            file_input.css("width", $ele.outerWidth());
             file_input.css("height", $ele.outerHeight());
             file_input.css("padding-bottom", $ele.outerHeight());
             file_input.css("padding-left", $ele.outerWidth());
