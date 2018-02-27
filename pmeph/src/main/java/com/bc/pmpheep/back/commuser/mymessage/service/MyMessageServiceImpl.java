@@ -211,7 +211,7 @@ public class MyMessageServiceImpl implements MyMessageService {
     }
 
     @Override
-    public void senNewMsg(Long thisId, Long frendId, Short friendIdType, String title, String content) {
+    public void senNewMsg(Long thisId,Short thisType, Long frendId, Short friendIdType, String title, String content) {
         Message message = new Message();
         message.setContent(content);
         messageService.add(message);
@@ -220,13 +220,17 @@ public class MyMessageServiceImpl implements MyMessageService {
         userMessage.setMsgType(new Short("2"));
         userMessage.setTitle(title);
         userMessage.setSenderId(thisId);
-        if (null == friendIdType) {
+        if (null == thisType) {
             userMessage.setSenderType(new Short("2"));
         } else {
-            userMessage.setSenderType(friendIdType);
+            userMessage.setSenderType(thisType);
         }
         userMessage.setReceiverId(frendId);
-        userMessage.setReceiverType(new Short("2"));
+        if (null == friendIdType) {
+            userMessage.setReceiverType(new Short("2"));
+        } else {
+            userMessage.setReceiverType(friendIdType);
+        }
         myMessageDao.addUserMessage(userMessage);
     }
 }

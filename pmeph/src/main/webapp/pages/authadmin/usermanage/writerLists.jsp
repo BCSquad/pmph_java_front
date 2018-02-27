@@ -17,6 +17,7 @@
     <link href="${ctx}/statics/css/jquery.selectlist.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/authadmin/usermanage/writerLists.css" type="text/css">
+
     <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.pager.js"></script>
@@ -36,7 +37,7 @@
     <span class="personMessageTitle" id="realname"></span>
     <div class="contentBox" id="dialogue">
     </div>
-    <div >
+    <div>
         <div style="float: left;width: 80%;height: 100%">
             <textarea id="content" class="inputBox"
                       style="width: 100%;height: 98%;border: none;outline:0;font-size:15px;"
@@ -52,11 +53,12 @@
 <div class="content-wrapper">
     <div class="message">
         <div class="sousuokuang">
-            <select id="sstj" name="sstj">
-                <option value="0">姓名</option>
-                <option value="1">用户代码</option>
-            </select>
-            <input type="text" value="" placeholder='请输入' id="ssk" name="username">
+            <%--   <select id="sstj" name="sstj">
+                   <option value="0">姓名</option>
+                   <option value="1">用户代码</option>
+               </select>--%>
+            <div style="float: left;height: 42px;line-height: 42px;padding-right: 20px;color: #4e4e4e;">用户代码/姓名:</div>
+            <input type="text" value="${username}" placeholder='请输入' id="ssk" name="username">
             <input type="button" value="查询" id="cxan" onclick="query()">
             <!--  <div id="gjss"><a href="">高级搜素</a></div>-->
         </div>
@@ -133,13 +135,17 @@
                 async: false,
                 dataType: 'json',
                 data: {
+                    friendIdType: '2',
                     friendId: frendId,
                     content: content,
                     title: $(".personMessageTitle").html()
                 },
                 success: function (responsebean) {
                     if (responsebean == 'success') {
-                        $("#content").val(null);
+                        setTimeout(function () {
+                            $("#content").val("");
+                        },0);
+
                         refreshmessage();
                     }
                 }
@@ -157,45 +163,84 @@
             dataType: 'json',
             data: {
                 friendId: frendid,
+                friendType: '2'
             },
             success: function (responsebean) {
                 $("#dialogue").html('');
                 if (null != responsebean && responsebean.length >= 0) {
                     var html = "<div id='dialogContent'>";
-                    for (var i = 0; i < responsebean.length; i++) {
+                    /*for (var i = 0; i < responsebean.length; i++) {
 
-                        if (responsebean[i].isMy) {//我发送的
-                            html +=
-                                    "<div class='oneTalk'> " +
+                     if (responsebean[i].isMy) {//我发送的
+                     html +=
+                     "<div class='oneTalk'> " +
+                     "<div class='headAndNameRight float_right'> " +
+                     "<div class='headDiv'><img class='headPicture' src='" + contextpath2 + responsebean[i].avatar + "'/></div> " +
+                     "<div class='talkName'><text>" + responsebean[i].senderName + "&nbsp;&nbsp;&nbsp;&nbsp;" + formatDate(responsebean[i].sendTime, 'yyyy.MM.dd hh:ss:mm') + "</text></div> " +
+                     "</div> " +
+                     "<div class='talkDivRight float_right' > " +
+                     "<div class='sendMessage'> " +
+                     "<div class='textDiv float_right'> " + responsebean[i].content + "</div> " +
+                     "</div> " +
+                     "</div> " +
+                     "</div> ";
+                     } else {
+                     html +=
+                     "<div class='oneTalk'> " +
+                     "<div class='headAndNameLeft float_left'> " +
+                     "<div class='headDiv'><img class='headPicture' src='" + contextpath2 + "" + responsebean[i].avatar + "'/></div> " +
+                     "<div class='talkName'><text>" + responsebean[i].senderName + "</text></div> " +
+                     "</div> " +
+                     "<div class='talkDiv float_left' > " +
+                     "<div class='sendMessage'> " +
+                     "<!-- <div class='triangle leftTriangle float_left'></div>--> " +
+                     "<div class='textDiv float_left'> " + responsebean[i].content + "</div> " +
+                     "</div> " +
+                     "<div class='talkTime talkTimeAlignLeft'>" + formatDate(responsebean[i].sendTime, 'yyyy.MM.dd hh:ss:mm') + "</div> " +
+                     "</div> " +
+                     "</div> ";
+                     }
+
+
+                     }*/
+                    $.each(responsebean, function (i, n) {
+
+                        if (n.isMy) {//我发送的
+                            avatar = n.avatar;
+                            html += "<div class='oneTalk'> " +
                                     "<div class='headAndNameRight float_right'> " +
-                                    "<div class='headDiv'><img class='headPicture' src='" + contextpath2 + responsebean[i].avatar + "'/></div> " +
-                                    "<div class='talkName'><text>" + responsebean[i].senderName + "&nbsp;&nbsp;&nbsp;&nbsp;" + formatDate(responsebean[i].sendTime, 'yyyy.MM.dd hh:ss:mm') + "</text></div> " +
+                                    "<div class='headDiv'><img class='headPicture' src='" + contextpath + n.avatar + "'/></div> " +
+                                    "<div class='talkName'><text>" + n.senderName + "</text></div> " +
                                     "</div> " +
+
                                     "<div class='talkDivRight float_right' > " +
                                     "<div class='sendMessage'> " +
-                                    "<div class='textDiv float_right'> " + responsebean[i].content + "</div> " +
+                                    "<div class='textDiv float_right'> " +
+                                    n.content +
                                     "</div> " +
+                                    "</div> " +
+                                    "<div class='talkTime talkTimeAlignRight'>" + formatDate(n.sendTime) + "</div> " +
                                     "</div> " +
                                     "</div> ";
+
                         } else {
-                            html +=
-                                    "<div class='oneTalk'> " +
+                            html += "<div class='oneTalk'> " +
                                     "<div class='headAndNameLeft float_left'> " +
-                                    "<div class='headDiv'><img class='headPicture' src='" + contextpath2 + ""+responsebean[i].avatar + "'/></div> " +
-                                    "<div class='talkName'><text>" + responsebean[i].senderName + "</text></div> " +
+                                    "<div class='headDiv'><img class='headPicture' src='" + contextpath + n.avatar + "'/></div> " +
+                                    "<div class='talkName'><text>" + n.senderName + "</text></div> " +
                                     "</div> " +
-                                    "<div class='talkDiv float_left' > " +
+                                    "<div class='talkDiv float_left'> " +
                                     "<div class='sendMessage'> " +
-                                    "<!-- <div class='triangle leftTriangle float_left'></div>--> " +
-                                    "<div class='textDiv float_left'> " + responsebean[i].content + "</div> " +
+                                    "<div class='textDiv float_left'> " +
+                                    n.content +
                                     "</div> " +
-                                    "<div class='talkTime talkTimeAlignLeft'>" + formatDate(responsebean[i].sendTime, 'yyyy.MM.dd hh:ss:mm') + "</div> " +
+                                    "</div> " +
+                                    "<div class='talkTime talkTimeAlignLeft'>" + formatDate(n.sendTime) + "</div> " +
                                     "</div> " +
                                     "</div> ";
                         }
+                    });
 
-
-                    }
                     html += "</div>"
                     $("#dialogue").append(html);
                 }
@@ -280,12 +325,12 @@
             }
         });
 
-        $('#sstj').selectlist({
-            zIndex: 10,
-            width: 208,
-            height: 40,
-            optionHeight: 40
-        });
+        /*$('#sstj').selectlist({
+         zIndex: 10,
+         width: 208,
+         height: 40,
+         optionHeight: 40
+         });*/
 
         $('#pages').selectlist({
             zIndex: 10,
@@ -311,7 +356,7 @@
     });
     //分页
     function pageFun(pageSize, pageNumber) {
-        window.location.href =contextpath+ 'organizationuser/writerLists.action?pageSize=' + pageSize + '&pageNumber=' + pageNumber;
+        window.location.href = contextpath + 'organizationuser/writerLists.action?pageSize=' + pageSize + '&pageNumber=' + pageNumber + "&username=" + encodeURI(encodeURI($("#ssk").val()));
     }
 </script>
 <div style="background-color: white;width: 100%;padding: 0;margin: 0;height: 220px;border: none;overflow: hidden;">

@@ -146,6 +146,8 @@ public class SSOLoginoutController {
             response.sendRedirect(refer);
         }
 
+        response.sendRedirect(request.getContextPath() + "/homepage/tohomepage.action");
+
     }
 
 }

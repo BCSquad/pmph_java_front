@@ -41,16 +41,7 @@ $(function () {
          init();
          });*/
         //打开对话框
-
-        var openTallk = function () {
-            var frendid = this.id;
-            var type = $("#type_" + frendid).val();
-            var username = $("#name_" + frendid).val();
-            $("#talkList").html('');
-            $(".personMessageTitle").html("你与" + username + "的私信窗口");
-            $("#box").attr("class", "b show");
-            $("#close").attr("class", "hiddenX show");
-            $("#talk").val(frendid);
+        var updateDialog = function (frendid, type) {
             $.ajax({
                 type: 'get',
                 url: contextpath + 'mymessage/getDialogue.action',
@@ -128,6 +119,17 @@ $(function () {
                     }
                 }
             })
+        }
+        var openTallk = function () {
+            var frendid = this.id;
+            var type = $("#type_" + frendid).val();
+            var username = $("#name_" + frendid).val();
+            $("#talkList").html('');
+            $(".personMessageTitle").html("你与" + username + "的私信窗口");
+            $("#box").attr("class", "b show");
+            $("#close").attr("class", "hiddenX show");
+            $("#talk").val(frendid);
+            updateDialog(frendid, type);
         };
         //document.getElementById("box").setAttribute("class", "b show");
         //document.getElementById("close").setAttribute("class", "hiddenX show");
@@ -236,34 +238,40 @@ $(function () {
                     },
                     success: function (map) {
                         if (map.code == 'success') {
+
+                            updateDialog(frendId, $('#type_' + frendId).val());
+                            setTimeout(function () {
+                                $("#content").val("");
+                            }, 0);
+
                             //window.message.success('发送成功');
                             //hide();
 
-                            html = "<div class='oneTalk'> " +
-                                "<div class='headAndNameRight float_right'> " +
-                                "<div class='headDiv'><img class='headPicture' src='" + contextpath + '/' + avatar + "'/></div> " +
-                                /*"<div class='headDiv'><img class='headPicture' src='"+contextpath+"statics/image/putongyhtouxiang.png'/></div>"+*/
-                                "<div class='talkName'><text>" + map.name + "</text></div> " +
-                                "</div> " +
+                            /*html = "<div class='oneTalk'> " +
+                             "<div class='headAndNameRight float_right'> " +
+                             "<div class='headDiv'><img class='headPicture' src='" + contextpath + '/' + avatar + "'/></div> " +
+                             /!*"<div class='headDiv'><img class='headPicture' src='"+contextpath+"statics/image/putongyhtouxiang.png'/></div>"+*!/
+                             "<div class='talkName'><text>" + map.name + "</text></div> " +
+                             "</div> " +
 
-                                "<div class='talkDivRight float_right' > " +
-                                "<div class='sendMessage'> " +
-                                "<div class='textDiv float_right'> " +
-                                content +
-                                "</div> " +
-                                "</div> " +
-                                "<div class='talkTime talkTimeAlignRight'>" + formatDate(sendTime) + "</div> " +
-                                "</div> " +
-                                "</div> ";
-                            $("#talkList").html('');
-                            $("#talkList").append(addhtml);
-                            $("#talkList").append(html);
-                            $("#content").val('');
-                            //$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);
-                            //$("#dialogue").animate({scrollTop: '700px'},500);
-                            setTimeout(function () {
-                                $("#dialogue").scrollTop($("#talkList").height());
-                            }, 0);
+                             "<div class='talkDivRight float_right' > " +
+                             "<div class='sendMessage'> " +
+                             "<div class='textDiv float_right'> " +
+                             content +
+                             "</div> " +
+                             "</div> " +
+                             "<div class='talkTime talkTimeAlignRight'>" + formatDate(sendTime) + "</div> " +
+                             "</div> " +
+                             "</div> ";
+                             $("#talkList").html('');
+                             $("#talkList").append(addhtml);
+                             $("#talkList").append(html);
+                             $("#content").val('');
+                             //$("#dialogue").scrollTop($("#dialogue")[0].scrollHeight);
+                             //$("#dialogue").animate({scrollTop: '700px'},500);
+                             setTimeout(function () {
+                             $("#dialogue").scrollTop($("#talkList").height());
+                             }, 0);*/
                         }
                     }
                 });

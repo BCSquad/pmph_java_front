@@ -96,7 +96,7 @@
                 <div class="user-select">
                     <img src="${ctx}/statics/image/userSelectbg.png" alt="">
                     <div class="select">
-                        <a class="option" href='<c:url value="/personalhomepage/tohomepage.action"/>'>个人中心</a>
+                        <a class="option" href='<c:url value="/personalhomepage/tohomepage.action?pagetag=dt"/>'>个人中心</a>
                         <a class="option" href="<c:url value='/group/list.action'/>">我的小组</a>
                         <a class="option"
                            href='<c:url value="/personalhomepage/tohomepage.action?pagetag=jcsb"/>'>教材申报</a>
