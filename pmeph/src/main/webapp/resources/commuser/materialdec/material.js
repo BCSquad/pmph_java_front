@@ -367,7 +367,7 @@ function add_xxjl(){
 	var $table = $("#tab_xxjl");
 	var $tr = $("<tr id='xxjl_"+num+"'>"+
 		"<td><input class='cg_input' placeholder='开始时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100' max=\"'$#xx_jssj_"+num+"'\" id='xx_kssj_"+num+"'  name='xx_kssj' value='' style='width: 80px;'/>"+
-	"- <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" z-index='100' min=\"'$#xx_kssj_"+num+"'\" id='xx_jssj_"+num+"' name='xx_jssj' value='' style='width: 80px;'/></td>"+
+	" - <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" z-index='100' min=\"'$#xx_kssj_"+num+"'\" id='xx_jssj_"+num+"' name='xx_jssj' value='' style='width: 80px;'/></td>"+
 	"<td><input class='cg_input' name='xx_school_name' value='' placeholder='学校名称'/></td>"+
 	"<td><input class='cg_input' name='xx_major' value='' placeholder='所学专业'/></td>"+
 	"<td><input class='cg_input' name='xx_degree' value='' style='width: 120px;' placeholder='学历'/></td>"+
@@ -384,7 +384,7 @@ function add_gzjl(){
 	var $table = $("#tab_gzjl");
 	var $tr = $("<tr id='gzjl_"+num+"'>"+
 		"<td><input class='cg_input' placeholder='开始时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100' max=\"'$#gz_jssj_"+num+"'\" id='gz_kssj_"+num+"'  name='gz_kssj' value='' style='width: 80px;'/>"+
-	"- <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" z-index='100' min=\"'$#gz_kssj_"+num+"'\" id='gz_jssj_"+num+"'  name='gz_jssj' value='' style='width: 80px;'/></td>"+
+	" - <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" z-index='100' min=\"'$#gz_kssj_"+num+"'\" id='gz_jssj_"+num+"'  name='gz_jssj' value='' style='width: 80px;'/></td>"+
 	"<td><input class='cg_input' name='gz_org_name' value='' placeholder='工作单位'/></td>"+
 	"<td><input class='cg_input' name='gz_position' value='' placeholder='职位'/></td>"+
 	"<td><input class='cg_input' name='gz_note' value='' style='width: 370px;' placeholder='备注'/></td>"+
@@ -400,7 +400,7 @@ function add_jxjl(){
 	var $table = $("#tab_jxjz");
 	var $tr = $("<tr id='jxjz_"+num+"'>"+
 		"<td><input class='cg_input' placeholder='开始时间' calendar format=\"'yyyy-mm-dd'\" max=\"'$#jx_jssj_"+num+"'\" id='jx_kssj_"+num+"'   z-index='100'  name='jx_kssj' value='' style='width: 80px;'/>"+
-	"- <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" min=\"'$#jx_kssj_"+num+"'\" id='jx_jssj_"+num+"'  z-index='100' name='jx_jssj' value='' style='width: 80px;'/></td>"+
+	" - <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" min=\"'$#jx_kssj_"+num+"'\" id='jx_jssj_"+num+"'  z-index='100' name='jx_jssj' value='' style='width: 80px;'/></td>"+
 	"<td><input class='cg_input' name='jx_school_name' value='' placeholder='学校名称'/></td>"+
 	"<td><input class='cg_input' name='jx_subject' value='' placeholder='教学科目'/></td>"+
 	"<td><input class='cg_input' name='jx_note' value='' style='width: 370px;' placeholder='备注'/></td>"+
@@ -696,7 +696,7 @@ function buttAdd(type){
 			dataType:"json",
 		    success: function(msg) {
 			    if(msg=='OK'){
-			    	window.message.success("添加成功,正在跳转页面");
+			    	window.message.success("操作成功,正在跳转页面");
 			    	window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=jcsb";
 			    }
 		    }

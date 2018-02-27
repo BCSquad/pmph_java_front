@@ -38,6 +38,7 @@
 				<input type="hidden" id="select_nr" value="${bookSelects}"/>
 				<input type="hidden" id="material_id" name="material_id" value="${materialMap.material_id}"/>
 				<input type="hidden" id="declaration_id" name="declaration_id" value="${materialMap.declaration_id}"/>
+				<input type="hidden" id="online_progress" name="online_progress" value="${gezlList.online_progress}"/>
 				<!-- 是否编委 -->
 				<input type="hidden" id="sfbw" name="sfbw" value="${materialMap.is_digital_editor_optional}"/>
 				<!-- 是否书籍多选 -->

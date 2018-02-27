@@ -105,7 +105,7 @@ function loadMoreApply(){
 			               
 						 str+="</td></tr><tr> <td colspan='4'  ><hr class='line'></td></tr>";
 					
-				$("applyTable").append(str);
+				$("#applyTable").append(str);
 				
 			});
 			}	

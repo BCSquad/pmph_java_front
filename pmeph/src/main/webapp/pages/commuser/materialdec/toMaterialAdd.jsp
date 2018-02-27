@@ -55,9 +55,9 @@
 					)
 				</span>
 				<span class="tsxz_ts1"><img src="${ctx}/statics/image/btxx.png" /></span>
-				<%-- <c:if test="${materialMap.is_multi_books =='1'}"> --%>
+				 <c:if test="${materialMap.is_multi_books =='1'}"> 
 				<div class="addBtn pull-right" id="sjtj" onclick="javascript:addTsxz()"><span>增加</span></div>
-				<%-- </c:if> --%>
+				 </c:if> 
 			</div>
 			<div class="item" id="xz1">
 				<span style="float: left;line-height: 30px;">图书：</span>
@@ -147,7 +147,7 @@
 							onblur="LengthLimit(this,20)"
 							 maxlength="20"/>
 						</td>
-						<td><span>&ensp;传&emsp;&emsp;真：</span>
+						<td><span>&emsp;传&emsp;&emsp;真：</span>
 							<input class="cg_input" name="fax" value="" id="fax" onblur="LengthLimit(this,45)" maxlength="45"/>
 						</td>
 						<td><span class="btbs">*</span><span>手&emsp;&emsp;机：</span>
@@ -228,9 +228,9 @@
 					<tbody>
 						<tr>
 							<td>
-								<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'" z-index="100" max="'$#gz_jssj'" name="gz_kssj" id="gz_kssj" value="" style="width: 80px;"maxlength="20"/>
+								<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'" z-index="100" max="'$#gz_jssj'" name="gz_kssj" id="gz_kssj" value="" style="width: 80px;" maxlength="20"/>
 								-
-								<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  z-index="100" min="'$#gz_kssj'" name="gz_jssj" id="gz_jssj" value="" style="width: 80px;"maxlength="20"/>
+								<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  z-index="100" min="'$#gz_kssj'" name="gz_jssj" id="gz_jssj" value="" style="width: 80px;" maxlength="20"/>
 							</td>
 							<td><input class="cg_input" name="gz_org_name" value="" placeholder="工作单位"maxlength="33"/></td>
 							<td><input class="cg_input" name="gz_position" value="" placeholder="职位"maxlength="33" /></td>

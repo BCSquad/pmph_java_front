@@ -71,7 +71,7 @@
                     		
                 </div>
             </div>
-		#elseif($!{c.iamin}>0 && ($!{c.online_progress}==2) && $!{c.datebase}<=0 && $!{c.is_all_textbook_published}==false && $!{c.is_force_end}==false)  
+		#elseif($!{c.iamin}>0 && ($!{c.online_progress}==2||$!{c.online_progress}==5) && $!{c.datebase}<=0 && $!{c.is_all_textbook_published}==false && $!{c.is_force_end}==false)  
 			<div class="mleft1">
                 <div class="ysbrs1">
                     <div class="baomingrenshu1"><span
@@ -85,7 +85,7 @@
                     		
                 </div>
             </div>
-		#elseif($!{c.iamin}>0 && ($!{c.online_progress}==1||$!{c.online_progress}==3) && $!{c.datebase}<=0 && $!{c.is_all_textbook_published}==false && $!{c.is_force_end}==false )
+		#elseif($!{c.iamin}>0 && ($!{c.online_progress}==1||$!{c.online_progress}==3||$!{c.online_progress}==4) && $!{c.datebase}<=0 && $!{c.is_all_textbook_published}==false && $!{c.is_force_end}==false )
 			<div class="mleft1">
                 <div class="ysbrs1">
                     <div class="baomingrenshu1"><span

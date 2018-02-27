@@ -74,6 +74,10 @@
     box-shadow: 4px 4px 4px rgba(0,0,0,.1);
 }
 
+.items p{
+	word-break: break-all;
+}
+
 .items_img{
     position: absolute;
     top:4px;
