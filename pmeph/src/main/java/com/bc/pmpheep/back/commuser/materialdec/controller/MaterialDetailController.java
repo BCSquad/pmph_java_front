@@ -178,9 +178,9 @@ public class MaterialDetailController extends BaseController{
 		perMap.put("material_id", material_id);
 		String sex = request.getParameter("sex");
 		if(sex != null || !sex.equals("")){
-			sex = "0";
+			sex = "1";
 		}
-		perMap.put("sex", request.getParameter("sex"));
+		perMap.put("sex",sex);
 		perMap.put("birthday", request.getParameter("birthday"));
 		perMap.put("experience", request.getParameter("experience"));
 		perMap.put("org_name", request.getParameter("org_name"));

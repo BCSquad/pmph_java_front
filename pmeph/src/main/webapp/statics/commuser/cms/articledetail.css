@@ -111,7 +111,6 @@
 	letter-spacing: 1px;
 	color: #666666;
 	margin-top: 40px;
-	font-weight: bold;
 }
 
 
@@ -328,12 +327,14 @@
 
 .right_2 img{
 	float: left;
+	border-radius:50%;
 }
 
 .right_2 span{
 	font-family: MicrosoftYaHei;
 	color: #3996fa;
-	margin-top: 20px;
+	margin-top: 25px;
+	margin-left:70px;
 	display: block;
 	width: 130px;
 	height: 30px;
