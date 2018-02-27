@@ -61,6 +61,7 @@ public class MessageController extends BaseController{
 		paraMap.put("condition",condition);
 		paraMap.put("userId",userId);
 		paraMap.put("addPara",addPara);
+		paraMap.put("startPara",0);
 		//数据列表
 		List<Map<String,Object>> list = noticeMessageService.selectApplyMessage(paraMap);
 		//不带分页的数据总量

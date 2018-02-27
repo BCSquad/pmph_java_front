@@ -155,6 +155,10 @@ body
 	margin-bottom: 30px
 }
 
+.sxy-content p{
+	word-break:break-all;
+}
+
 tbody div{
 	cursor: pointer;
 }

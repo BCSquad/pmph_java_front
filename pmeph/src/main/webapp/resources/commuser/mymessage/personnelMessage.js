@@ -145,7 +145,7 @@ $(function () {
             var theEvent = window.event || e;
             var code = theEvent.keyCode || theEvent.which;
             if (13 == code) {
-                sendNewMsg();
+                sendNewMsg(addhtml);
             }
 
         });
@@ -206,9 +206,9 @@ $(function () {
                             });
                             $('#list .openTallk').click(openTallk);
                         } else {
-                            var html = "";
+                            /*var html = "";
                             html += "<tr><td><div class='no-more'><img src='" + contextpath + "statics/image/aaa4.png'/><span>木有内容呀~~</span></div></td></tr>";
-                            $("#list").append(html);
+                            $("#list").append(html);*/
                         }
                     }
                 }

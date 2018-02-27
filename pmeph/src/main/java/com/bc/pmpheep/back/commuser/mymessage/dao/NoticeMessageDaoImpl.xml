@@ -30,7 +30,13 @@
 		FROM writer_friend a
 		LEFT JOIN writer_user b
 		ON a.request_id = b.id
-		WHERE a.target_id = #{userId}
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			a.target_id = #{userId}
+			<if test="condition==null">AND status in(0,1,2)</if>
+			<if test="condition==3">AND status in(0,1,2)</if>
+			<if test="condition==1">AND status in(1,2)</if>
+			<if test="condition==2">AND status = 0</if>
+		</trim>
 	</select>
 	
 	<!-- 更新申请消息表 -->
