@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
     String path = request.getContextPath();
-    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
 %>
 <!DOCTYPE html>
 <html>
@@ -312,7 +311,7 @@
     });
     //分页
     function pageFun(pageSize, pageNumber) {
-        window.location.href = '<%=basePath%>/organizationuser/writerLists.action?pageSize=' + pageSize + '&pageNumber=' + pageNumber;
+        window.location.href =contextpath+ 'organizationuser/writerLists.action?pageSize=' + pageSize + '&pageNumber=' + pageNumber;
     }
 </script>
 <div style="background-color: white;width: 100%;padding: 0;margin: 0;height: 220px;border: none;overflow: hidden;">
