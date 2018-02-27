@@ -180,7 +180,7 @@ public class MaterialDetailController extends BaseController{
 		if(sex != null || !sex.equals("")){
 			sex = "1";
 		}
-		perMap.put("sex", sex);
+		perMap.put("sex",sex);
 		perMap.put("birthday", request.getParameter("birthday"));
 		perMap.put("experience", request.getParameter("experience"));
 		perMap.put("org_name", request.getParameter("org_name"));

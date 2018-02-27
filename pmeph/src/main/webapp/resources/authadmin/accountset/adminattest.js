@@ -37,7 +37,10 @@ $(function () {
     $("#uploadFile").uploadFile({
     	accept:	"application/msword",
     	valid:function(file){
-    		if(file.type=="application/msword"){
+    		console.log(file);
+    		console.log(file.name.substring(file.name.lastIndexOf("."),file.name.lastIndexOf(".")+4));
+    		/*if(file.type=="application/msword"){*/
+    		if(file.name.substring(file.name.lastIndexOf("."),file.name.lastIndexOf(".")+4)==".doc"){
     			return true;
     		}else{
     			message.error("请选择doc格式的文件");
@@ -52,7 +55,7 @@ $(function () {
         	$('#fileName').html(filename);
         	$("#fileNameDiv").show();
         	
-        	 $.ajax({
+        	 /*$.ajax({
         	        type:'post',
         	        url:contextpath+'admininfocontroller/uploadProxy.action?',
         	        async:false,
@@ -60,9 +63,10 @@ $(function () {
         	        success:function(code){
         	            if (code==1){
         	                message.success("上传成功");
+        	                $("#fileNameDiv").show();
         	            }
         	        }
-        	    });
+        	    });*/
         	 
         	$("#fileid").val(fileid);
         	$("#proxyDiv").hide();
@@ -89,6 +93,8 @@ function getform() {
     json.fax=$("#fax").val();
     json.address=$("#address").val();
     json.id=$("#id").val();
+    json.proxy=$("#fileid").val();
+    
     /*json.birthday=$("#birthday").val();
     json.experience=$("#experience").val();
     json.workplace=$("#workplace").val();*/

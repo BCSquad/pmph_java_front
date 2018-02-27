@@ -71,6 +71,8 @@
                 <value>/applyDocAudit/* -> 2</value><!--申报资料审核（机构用户） -->
                 <value>/teacherauth/* -> 2</value><!--教师认证 -->
                 <value>/organizationuser/* -> 2</value><!--机构用户管理-->
+                <value>/admininfocontroller/toadmininfo* -> 2</value><!--个人资料修改页面-->
+                <value>/admininfocontroller/toadminattest* -> 2</value><!--跳转到学校管理员认证界面-->
             </set>
         </property>
     </bean>

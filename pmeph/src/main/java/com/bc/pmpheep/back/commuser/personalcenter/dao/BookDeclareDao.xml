@@ -67,7 +67,7 @@
 	<!-- 申报信息修改 -->
 	<update id="updateTopic" parameterType="java.util.Map">
 		update topic set
-		bookname=#{bookname},deadline=#{deadline},source=#{source},word_number=#{word_number},
+		bookname=#{bookname},deadline=#{deadline},source=#{source},word_number=#{word_number},reader=#{reader},
 		picture_number=#{picture_number},subject=#{subject},rank=#{rank},type=#{type},is_staging=#{is_staging},
 		auth_progress=#{auth_progress},bank_account_id=#{bank_account_id},purchase=#{purchase},sponsorship=#{sponsorship},
 		is_translation=#{is_translation},original_bookname=#{original_bookname},original_author=#{original_author},

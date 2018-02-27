@@ -151,26 +151,26 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span>一、选题理由：</span></td>
+						<td><span class="btbs">*</span><span>一、选题理由：</span></td>
 						<td colspan="3">
 							<div class="content">
-								<textarea class="text_cl" id="reason" name="reason" ></textarea>
+								<textarea class="text_cl" id="reason" name="reason" maxlength="300"></textarea>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td><span>二、出版价值：</span></td>
+						<td><span class="btbs">*</span><span>二、出版价值：</span></td>
 						<td colspan="3">
 							<div class="content">
-								<textarea class="text_cl" id="price" name="price"></textarea>
+								<textarea class="text_cl" id="price" name="price" maxlength="300"></textarea>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td><span>三、主要内容：</span></td>
+						<td><span class="btbs">*</span><span>三、主要内容：</span></td>
 						<td colspan="3">
 							<div class="content">
-								<textarea class="text_cl" id="extra_score" name="extra_score"></textarea>
+								<textarea class="text_cl" id="extra_score" name="extra_score" maxlength="300"></textarea>
 							</div>
 						</td>
 					</tr>
@@ -257,16 +257,18 @@
 					</thead>
 					<tbody>
 						 <tr id="sbbz_1">
-							<td><input class="sb_input" style="width: 100px;" name="write_realname" placeholder="编者姓名" value=""/></td>
+							<td><input class="sb_input" style="width: 100px;" name="write_realname" placeholder="编者姓名" maxlength="13" value=""/></td>
 							<td>
 								<select id="r_sex" name="sex">
 									<option value="0" selected="selected">男</option>
 									<option value="1">女</option>
 								</select>
 							</td>
-							<td><input class="sb_input" style="width: 80px;" name="write_price" placeholder="年龄" value=""/></td>
-							<td><input class="sb_input" style="width: 320px;" name="write_position" placeholder="行政职务" value=""/></td>
-							<td><input class="sb_input" style="width: 200px;" name="workplace" placeholder="工作单位" value=""/></td>
+							<td><input class="sb_input" style="width: 80px;" name="write_price" placeholder="年龄" value="" 
+							onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+							  maxlength="3"/></td>
+							<td><input class="sb_input" style="width: 320px;" name="write_position" placeholder="行政职务" value="" maxlength="12"/></td>
+							<td><input class="sb_input" style="width: 200px;" name="workplace" placeholder="工作单位" value="" maxlength="12"/></td>
 							<td><div class="add_div"><img class="add_img" src="${ctx}/statics/image/del.png" onclick="del_tr('sbbz_1')"></div></td>
 						</tr> 
 					</tbody>

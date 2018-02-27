@@ -354,7 +354,7 @@
 		</div>
 		
 		<!--扩展信息-->					
-		<c:forEach var="zjkzxx" items="${zjkzqkList}">
+		<c:forEach var="zjkzxx" items="${zjkzqkList}" varStatus="status">
 		 	<div class="sbxq_item1">
 				<div>
 					<span id="tsxz_span9"></span>
@@ -370,7 +370,8 @@
 					<input type="hidden" name="extension_id" value="${zjkzxx.extension_id}"/>
 				</div>
 				<div class="content">
-					<textarea class="text_cl" name="kz_content">${zjkzxx.content}</textarea> 
+					<textarea class="text_cl" id="${zjkzxx.is_required}_${status.count}" name="kz_content">${zjkzxx.content}</textarea> 
+					<input type="hidden" name="zjkzxx" value="${zjkzxx.is_required}_${status.count}"/>
 				</div>
 			</div>
 		</c:forEach>

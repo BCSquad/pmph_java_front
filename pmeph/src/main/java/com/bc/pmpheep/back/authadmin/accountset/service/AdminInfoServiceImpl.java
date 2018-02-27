@@ -2,6 +2,10 @@ package com.bc.pmpheep.back.authadmin.accountset.service;
 
 import com.bc.pmpheep.back.authadmin.accountset.bean.OrgAdminUser;
 import com.bc.pmpheep.back.authadmin.accountset.dao.AdminInfoDao;
+import com.bc.pmpheep.back.util.StringUtil;
+import com.bc.pmpheep.general.service.FileService;
+import com.mongodb.gridfs.GridFSDBFile;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -20,6 +24,9 @@ public class AdminInfoServiceImpl implements AdminInfoService{
    
     @Autowired
     private AdminInfoDao adminInfoDao;
+    
+    @Autowired
+	private FileService fileService;
 	
 	@Override
     public void updatePassword(OrgAdminUser orgUser) {
@@ -29,6 +36,16 @@ public class AdminInfoServiceImpl implements AdminInfoService{
     @Override
     public Map<String, Object> getOrgUserById(Long id) {
         Map<String,Object> map=adminInfoDao.getOrgUserById(id);
+        
+        /*String cert = map.get("proxy").toString();
+		if (StringUtil.notEmpty(cert)) {
+			GridFSDBFile getFile = fileService.get(cert);
+			if (getFile!=null) {
+				String getFileName = getFile.getFilename();
+				map.put("proxyName",getFileName);
+			}
+		}*/
+        
         return map;
     }
 

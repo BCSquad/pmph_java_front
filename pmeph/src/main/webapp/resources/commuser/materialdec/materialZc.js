@@ -707,7 +707,7 @@ function del_tr(trId){
 
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type){
-	if(checkEqual("textbook_id") && checkNull(jsonStr)){
+	if(checkEqual("textbook_id") && checkNull(jsonStr) && checkExtra()){
 		$.ajax({
 			type: "POST",
 			url:contextpath+'material/doMaterialAdd.action?sjump=2&type='+type,
@@ -853,5 +853,27 @@ function checkEqual(name){
 			return false;
 		} 
 	}	
+	return true;
+}
+
+//验证扩展项必填
+function checkExtra(){
+	var map = $('input[name^="zjkzxx"]').map(
+			function(){return this.value
+		}).get();
+	if(map!=null){
+		for(var i=0;i<map.length;i++){ 
+			var strs= new Array(); //定义一数组 
+			strs=map[i].split("_"); //字符分割
+			if(strs[0] == "true"){ //说明必填
+				var value = $("#"+map[i]).val();
+				if(value == ""){
+					window.message.warning("该扩展项必填");
+					$("#"+map[i])[0].focus();  //聚焦
+					return false;
+				}
+			}
+		}	
+	}
 	return true;
 }

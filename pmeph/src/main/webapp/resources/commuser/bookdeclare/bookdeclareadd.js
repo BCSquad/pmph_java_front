@@ -66,14 +66,16 @@ function add_zjky(){
 	var num = fnt();
 	var $table = $("#sbbzqk");
 	var $tr = $("<tr id='sbbz_"+num+"'>"+
-			"<td><input class='sb_input' style='width: 100px;' name='write_realname' placeholder='编者姓名' value=''/></td>"+
+			"<td><input class='sb_input' style='width: 100px;' maxlength='13' name='write_realname' placeholder='编者姓名' value=''/></td>"+
 			"<td><select id='r_sex_"+num+"'  name='sex'>"+
 					"<option value='0'>男</option>"+
 					"<option value='1'>女</option>"+
 				"</select></td>"+
-			"<td><input class='sb_input' style='width: 80px;' name='write_price' placeholder='年龄' value=''/></td>"+
-			"<td><input class='sb_input' style='width: 320px;' name='write_position' placeholder='行政职务' value=''/></td>"+
-			"<td><input class='sb_input' style='width: 200px;' name='workplace' placeholder='工作单位' value=''/></td>"+
+			"<td><input class='sb_input' style='width: 80px;' name='write_price' placeholder='年龄' value=''" +
+			"onkeyup='this.value=this.value.replace(/\\D/g,&#39;&#39;)' onafterpaste='this.value=this.value.replace(/\\D/g,&#39;&#39;)'"+
+							  "maxlength='3' /></td>"+
+			"<td><input class='sb_input' style='width: 320px;' maxlength='12' name='write_position' placeholder='行政职务' value=''/></td>"+
+			"<td><input class='sb_input' style='width: 200px;' maxlength='12' name='workplace' placeholder='工作单位' value=''/></td>"+
 			"<td><div class='add_div'><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('sbbz_"+num+"')\"></div></td>"+
 		"</tr>");
 	$table.append($tr);
