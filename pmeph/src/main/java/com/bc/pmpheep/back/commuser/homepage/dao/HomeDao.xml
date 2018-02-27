@@ -194,7 +194,7 @@ LIMIT 0,10
 			b.image_url,
 			c.content,
 			c.score,
-			u.realname
+			u.nickname
 			FROM
 					book 
 			AS b

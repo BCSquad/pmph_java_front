@@ -23,6 +23,7 @@
             <if test="postCode!=null and postCode!=''">postcode=#{postCode},</if>
             <if test="email!=null and email!=''">email=#{email},</if>
             <if test="fax!=null and fax!=''">fax=#{fax},</if>
+            <if test="proxy !=null and proxy !=''">proxy=#{proxy},</if>
             <!-- <if test="birthday!=null">birthday = #{birthday},</if>
             <if test="experience!=null and experience!=''">experience=#{experience},</if>
             <if test="workplace!=null and workplace!=''">workplace=#{workplace},</if> -->

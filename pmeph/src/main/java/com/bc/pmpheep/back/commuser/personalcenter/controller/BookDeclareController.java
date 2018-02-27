@@ -93,7 +93,8 @@ public class BookDeclareController extends BaseController {
 		topicMap.put("bookname", request.getParameter("bookname"));
 		topicMap.put("reader", request.getParameter("reader"));
 		topicMap.put("user_id", request.getParameter("user_id"));
-		topicMap.put("deadline", request.getParameter("deadline"));
+		topicMap.put("deadline",
+				"".equals(request.getParameter("deadline")) ? null : request.getParameter("deadline"));
 		topicMap.put("source", request.getParameter("source"));
 		topicMap.put("word_number",
 				"".equals(request.getParameter("word_number")) ? null : request.getParameter("word_number"));
@@ -196,7 +197,8 @@ public class BookDeclareController extends BaseController {
 		topicMap.put("bookname", request.getParameter("bookname"));
 		topicMap.put("reader", request.getParameter("reader"));
 		topicMap.put("user_id", request.getParameter("user_id"));
-		topicMap.put("deadline", request.getParameter("deadline"));
+		topicMap.put("deadline",
+				"".equals(request.getParameter("deadline")) ? null : request.getParameter("deadline"));
 		topicMap.put("source", request.getParameter("source"));
 		topicMap.put("word_number",
 				"".equals(request.getParameter("word_number")) ? null : request.getParameter("word_number"));

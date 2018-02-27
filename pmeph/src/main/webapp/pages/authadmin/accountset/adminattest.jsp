@@ -123,7 +123,7 @@
                 </div>
                 <input type="hidden" id="titlehidden" name="titlehidden" value="${admininfo.title}">
                 <input type="hidden" id="id" value="${admininfo.id}"/>
-                <input type="hidden" id="fileid" name="fileid"/>
+                
                 <input type="hidden" id="proxy" value="${admininfo.proxy}"/>
                 <input type="hidden" id="sex" value="${admininfo.sex}"/>
                 <input type="hidden" id="handphone" value="${admininfo.handphone}"/>
@@ -224,45 +224,52 @@
                             <td style="width: 600px;height: 40px;padding-left: 15px" colspan="2">
 
                                 <div class="td-font-1" style="float: left;"><font color="#ff3d38">*</font>上传委托书</div>
-                                <div id="fileNameDiv" style="float: left;cursor: pointer;padding-left:10px;">
-                                    <div style="float:left">
-                                        <img alt="" src="${ctx}/statics/testfile/_al.jpg"/>
-                                    </div>
-                                    <div style="float:left;margin-left: 5px">
-                                        <a href="#javascript:" class="filename" onclick="downLoad()" id="fileName"></a>
-                                    </div>
-                                </div>
-                                <div style="float: left;" id="proxyDiv">
-                                    <c:if test="${admininfo.proxy!=null}">
-                                        <div class="td-font-2" style="float: left;" id="proxyName">
-                                            <div style="float:left">
-                                                <img alt="" src="${ctx}/statics/testfile/_al.jpg"/>
-                                            </div>
-                                            <div style="float:left;margin-left: 5px">
-                                                <a href="javascript:" class="filename"
-                                                   onclick="downLoadProxy('${admininfo.proxy}')">${admininfo.proxyName}</a>
-                                            </div>
-                                        </div>
-                                    </c:if>
-                                </div>
-                                <div class="td-font-2" style="float: left;">
-                                    <c:if test="${(admininfo.progress!=1)}">
-                                        <span style="cursor: pointer;" class="uploadClick" id="uploadFile">点击上传</span>
-                                    </c:if>
-                                </div>
-                                <div style="float:left;margin-left: 105px">
-                                    <div style="float:left">
-                                        <img style="margin-left: 20px" alt="暂无图片"
-                                             src="${ctx}/statics/testfile/a01.png"/>&nbsp;
-                                    </div>
-                                    <div style="float:left;">
-                                        <a href="${ctx}/statics/files/weituoshu.doc">
-	                                <span class="a-td">
-	                                    	委托书模板下载
-	                                </span>
-                                        </a>
-                                    </div>
-                                </div>
+                                <div class="input-wrapper">
+		                                <div id="fileNameDiv" style="float: left;cursor: pointer;padding-left:10px;">
+		                                    <div style="float:left">
+		                                        <img alt="" src="${ctx}/statics/testfile/_al.jpg"/>
+		                                    </div>
+		                                    <div style="float:left;margin-left: 5px">
+		                                        <a href="#javascript:" class="filename" onclick="downLoad()" id="fileName">${admininfo.proxyName}</a>
+		                                    </div>
+		                                </div>
+		                                <div style="float: left;" id="proxyDiv">
+		                                    <c:if test="${admininfo.proxy!=null}">
+		                                        <div class="td-font-2" style="float: left;" id="proxyName">
+		                                            <div style="float:left">
+		                                                <img alt="" src="${ctx}/statics/testfile/_al.jpg"/>
+		                                            </div>
+		                                            <div style="float:left;margin-left: 5px">
+		                                                <a href="javascript:" class="filename"
+		                                                   onclick="downLoadProxy('${admininfo.proxy}')">${admininfo.proxyName}</a>
+		                                            </div>
+		                                        </div>
+		                                    </c:if>
+		                                </div>
+		                                <div class="td-font-2" style="float: left;">
+		                                	
+		                                	<input type="hidden" id="fileid" name="fileid" class="required" data-valid="isNonEmpty"
+														data-error="请上传委托书!" value="${admininfo.proxy}"/>
+		                                    <c:if test="${(admininfo.progress!=1)}">
+		                                        <span style="cursor: pointer;" class="uploadClick" id="uploadFile">点击上传</span>
+		                                    </c:if>
+		                                    
+		                                </div>
+	                                </div>
+	                                <div style="float:left;margin-left: 105px">
+	                                    <div style="float:left">
+	                                        <img style="margin-left: 20px" alt="暂无图片"
+	                                             src="${ctx}/statics/testfile/a01.png"/>&nbsp;
+	                                    </div>
+	                                    <div style="float:left;">
+	                                        <a href="${ctx}/statics/files/weituoshu.doc">
+		                                <span class="a-td">
+		                                    	委托书模板下载
+		                                </span>
+	                                        </a>
+	                                    </div>
+	                                </div>
+                                
                             </td>
                         </tr>
                         <tr>
