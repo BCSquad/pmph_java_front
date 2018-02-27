@@ -11,6 +11,7 @@
  		where s.`status`=1 and s.is_deleted=0 and wu.id=#{userId}
  		AND #{dateStr} &gt;= s.`begin_date`
 		AND #{dateStr} &lt;= s.`end_date`+1
+		ORDER BY  s.begin_date DESC
 	</select>
 	
 	<!-- 查询单个调查对应的问题 -->
