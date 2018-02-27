@@ -366,7 +366,7 @@
                                 <div class="sp_02">
                                     <div class="sp_title">${list.bookname}</div>
                                     <div class="sp_pl">
-                                        <span style="float: left;">${list.realname} 评论了 《${list.bookname}》</span>
+                                        <span style="float: left;">${list.nickname} 评论了 《${list.bookname}》</span>
                                             <%--	<span class="rwtx1"></span>
                                                 <span class="rwtx1"></span>
                                                 <span class="rwtx1"></span>

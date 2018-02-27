@@ -73,7 +73,7 @@
             	<div id="read-more"></div>
 	           	<div class="bookC_right_a">
 	                    <div class="time-a">$!{o.gmt_update}</div> 
-	                    #if($!{selfLog}==true && $!{o.is_auth}==false )
+	                    #if($!{selfLog}==true && $!{o.is_auth}==false && $!{o.is_long}==false )
 	                    	<a class="link_a"  onclick="showup('$!{o.id}','$!{c.book_id}','$!{o.is_long}')">修改</a>
 	                    #end
 	                    #if($!{selfLog}==true )

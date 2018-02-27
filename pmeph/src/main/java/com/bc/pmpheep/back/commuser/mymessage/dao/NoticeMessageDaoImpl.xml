@@ -229,6 +229,9 @@
 		WHERE a.`id`=#{cmsId} -->
 		
 		SELECT  a.title,m.`deadline`,m.`mail_address`,a.mid as mongoId,m.deadline, a.is_material_entry,a.material_id,e.`note`,e.notice,e.id AS attachmentId
+		<if test="userid != null and userid != '' ">
+	     ,(select case when count(d.id) &gt;0 then 'yes' else 'no' end  from declaration  d where d.material_id=a.`material_id` and d.user_id=#{userid})as isapply
+	    </if>
 		FROM cms_content a
 		LEFT JOIN material m
 		ON a.`material_id` = m.`id`

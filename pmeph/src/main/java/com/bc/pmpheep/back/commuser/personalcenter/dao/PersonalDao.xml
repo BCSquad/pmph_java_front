@@ -570,6 +570,7 @@
  		where s.`status`=1 and s.is_deleted=0 and wu.id=#{parameter.logUserId}
  		AND #{parameter.dateStr} &gt;= s.`begin_date`
 		AND #{parameter.dateStr} &lt;= s.`end_date`+1
+		 ORDER BY  s.begin_date DESC
   		limit ${start},${pageSize}
 	</select>
 

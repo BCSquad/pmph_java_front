@@ -4,20 +4,14 @@
 <mapper namespace="com.bc.pmpheep.back.commuser.survey.dao.SurveyDao">
 	<!-- 调查列表 -->
 	<select id="surveyList" resultType="map" parameterType="map">
-		<!-- SELECT DISTINCT a.* FROM `survey` a
-		LEFT JOIN `survey_question_answer`  b
-		ON a.`id`= b.`survey_id`
-		WHERE a.is_deleted=0
-		AND b.`user_id` != #{userId}
-		AND #{dateStr} &gt;= a.`begin_date`
-		AND #{dateStr} &lt;= a.`end_date` -->
 		
 		select s.* from survey s
 		left JOIN survey_target st ON st.survey_id=s.id  
 		LEFT JOIN writer_user wu on wu.org_id=st.org_id
  		where s.`status`=1 and s.is_deleted=0 and wu.id=#{userId}
  		AND #{dateStr} &gt;= s.`begin_date`
-		AND #{dateStr} &lt;= s.`end_date`
+		AND #{dateStr} &lt;= s.`end_date`+1
+		ORDER BY  s.begin_date DESC
 	</select>
 	
 	<!-- 查询单个调查对应的问题 -->

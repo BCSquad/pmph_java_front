@@ -117,7 +117,7 @@
 			        <c:if test="${is_material_entry==false}">
 			        	
 			        </c:if>
-		         	<c:if test="${notEnd ==1 and is_material_entry==true}">
+		         	<c:if test="${notEnd ==1 and is_material_entry==true and map.isapply=='no'}">
 	                      <span class="button " onclick="register(${materialId})" >报名参加</span>
                	    </c:if>
                	    <c:if test="${notEnd ==0 and is_material_entry==true}">
