@@ -104,7 +104,7 @@
                 
                 <div class="info">
                     	<label style="margin-left: 20px" class="labell">内容:</label>
-                    <textarea class="misarea" id="tcontent" ></textarea>
+                    <textarea class="misarea" id="tcontent" disabled="disabled"></textarea>
                 </div>
             </form>
         </div>
