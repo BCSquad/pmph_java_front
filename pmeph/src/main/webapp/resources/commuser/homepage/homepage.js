@@ -107,14 +107,14 @@ function changesale(type) {
 						$("#right_book3").attr('src', x.image_url);
 					}
 				} else if (i == 3) {
-					$("#right_book4").attr('src', x.image_url);
+					$("#sale_book4").html(x.bookname);
 					if(x.image_url=='DEFAULT'){
 						$("#right_book4").attr('src', contextpath+"/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
 					}else{
 						$("#right_book4").attr('src', x.image_url);
 					}
 				} else if (i == 4) {
-					$("#right_book5").attr('src', x.image_url);
+					$("#sale_book5").html(x.bookname);
 					if(x.image_url=='DEFAULT'){
 						$("#right_book5").attr('src', contextpath+"/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
 					}else{

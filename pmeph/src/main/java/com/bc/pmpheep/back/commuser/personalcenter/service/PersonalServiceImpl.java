@@ -496,6 +496,12 @@ public class PersonalServiceImpl implements PersonalService {
 			return str;
 		}
 
+		@Override
+		public Map<String, Object> queryDeclarationById(String declaration_id) {
+			Map<String, Object> result_map = personaldao.queryDeclarationById(declaration_id);
+			return result_map;
+		}
+
 
 
 

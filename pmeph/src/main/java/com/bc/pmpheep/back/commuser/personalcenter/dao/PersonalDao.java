@@ -199,5 +199,12 @@ public interface PersonalDao {
 	 */
 	public int deleteUserTrendst(WriterUserTrendst writerUserTrendst);
 	
+	/**
+	 * 根据id查询申报情况
+	 * @param declaration_id
+	 * @return
+	 */
+	public Map<String, Object> queryDeclarationById(@Param("declaration_id")String declaration_id);
+	
 	
 }
