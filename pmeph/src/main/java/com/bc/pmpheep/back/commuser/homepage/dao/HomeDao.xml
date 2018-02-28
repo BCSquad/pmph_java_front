@@ -1,44 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.bc.pmpheep.back.commuser.homepage.dao.HomeDao" >
-  <resultMap id="Mapresult" type="java.util.Map"></resultMap>
-  <!-- 查询最新三条公告-->
-  <select id="queryDocument"  parameterType="map" resultMap="Mapresult">   
-    SELECT 
-	(TO_DAYS(NOW()) &lt;= TO_DAYS(m.actual_deadline ) and !m.is_deleted and !m.is_force_end and !m.is_all_textbook_published) as notEnd,
-	<if test="id != null and id != '' ">
-	   (select case when count(d.id) &gt;0 then 'yes' else 'no' end  from declaration  d where d.material_id=cc.material_id and d.user_id=#{id})as isapply,
-	</if>
-	cc.*
-	FROM
-			cms_content cc
-			LEFT JOIN pmph_user pu ON cc.author_id =pu.id
-			LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
-			LEFT JOIN material m ON m.id = cc.material_id
-	    		left join material_org mo on mo.material_id=m.id
-			left join writer_user wu on wu.org_id=mo.org_id
-	WHERE
-			cc.is_deleted = 0
-			AND
-			cc.category_id=3
-			AND cc.auth_status =2
-			AND cc.is_published =1
-	        
-	    		and (
-	    		<if test="id != null and id != '' ">
-	    			(wu.id=#{id} and m.is_public = 0)or 
-	    		</if>
-	    		m.is_public = 1 or 
-	    		cc.is_material_entry = 0 )
-	group by cc.id
-	ORDER BY
-		
-			    cc.auth_date DESC
-	limit 0,3
-  </select>
-  
-  <!-- 教材社区公告 -->
-  <select id="queryMaterial" parameterType="map" resultMap="Mapresult">
+<mapper namespace="com.bc.pmpheep.back.commuser.homepage.dao.HomeDao">
+    <resultMap id="Mapresult" type="java.util.Map"></resultMap>
+    <!-- 查询最新三条公告-->
+    <select id="queryDocument" parameterType="map" resultMap="Mapresult">
+        SELECT
+        (TO_DAYS(NOW()) &lt;= TO_DAYS(m.actual_deadline ) and !m.is_deleted and !m.is_force_end and
+        !m.is_all_textbook_published) as notEnd,
+        <if test="id != null and id != '' ">
+            (select case when count(d.id) &gt;0 then 'yes' else 'no' end from declaration d where
+            d.material_id=cc.material_id and d.user_id=#{id})as isapply,
+        </if>
+        cc.*
+        FROM
+        cms_content cc
+        LEFT JOIN pmph_user pu ON cc.author_id =pu.id
+        LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
+        LEFT JOIN material m ON m.id = cc.material_id
+        left join material_org mo on mo.material_id=m.id
+        left join writer_user wu on wu.org_id=mo.org_id
+        WHERE
+        cc.is_deleted = 0
+        AND
+        cc.category_id=3
+        AND cc.auth_status =2
+        AND cc.is_published =1
+
+        and (
+        <if test="id != null and id != '' ">
+            (wu.id=#{id} and m.is_public = 0)or
+        </if>
+        m.is_public = 1 or
+        cc.is_material_entry = 0 )
+        group by cc.id
+        ORDER BY
+
+        cc.auth_date DESC
+        limit 0,3
+    </select>
+
+    <!-- 教材社区公告 -->
+    <select id="queryMaterial" parameterType="map" resultMap="Mapresult">
    select n.* from 
 		(select 
 		        t.*
@@ -66,44 +68,44 @@
 		        and p.id= #{id}) n
 		order by n.gmt_create desc limit 0,3    
   </select>
-  
-   <!-- 查询最新五条信息快报 -->
-  <select id="queryNotice"  resultMap="Mapresult">
+
+    <!-- 查询最新五条信息快报 -->
+    <select id="queryNotice" resultMap="Mapresult">
      select  * from cms_content  where  category_id='2' and auth_status='2' 
      and is_deleted='0' order by gmt_create desc limit 0,5
   </select>
-   <!-- 查询书籍 -->
-  <select id="queryBook" parameterType="map" resultMap="Mapresult">
-		SELECT
-			t.type_name,
-			b.*
-			FROM
-			book AS b
-			INNER JOIN 
-			material_type t
-		ON
-			t.id = b.type
-			
-			and
-			(
-				SUBSTRING_INDEX(SUBSTRING_INDEX(CONCAT(t.path,'-',t.id),'-',
-										(select 
-											cast(
-													(CHAR_LENGTH(path)-CHAR_LENGTH(REPLACE(path,'-','')))/CHAR_LENGTH('-')+2
-														as decimal(9,2)
-											)
-											 from material_type 
-											where id = cast(#{type} as decimal(9,2)))
-								),'-',-1) = #{type}
-				or t.id = 	#{type}		
-			)
-	  		order by b.image_url desc
-       <if test="startrows >= 0">
-				<![CDATA[limit ${startrows},10]]>
-	   </if>
-  </select>
-   <!-- 查询最新医学随笔 -->
-  <select id="queryArticle"  resultMap="Mapresult">
+    <!-- 查询书籍 -->
+    <select id="queryBook" parameterType="map" resultMap="Mapresult">
+        SELECT
+        t.type_name,
+        b.*
+        FROM
+        book AS b
+        INNER JOIN
+        material_type t
+        ON
+        t.id = b.type
+
+        and
+        (
+        SUBSTRING_INDEX(SUBSTRING_INDEX(CONCAT(t.path,'-',t.id),'-',
+        (select
+        cast(
+        (CHAR_LENGTH(path)-CHAR_LENGTH(REPLACE(path,'-','')))/CHAR_LENGTH('-')+2
+        as decimal(9,2)
+        )
+        from material_type
+        where id = cast(#{type} as decimal(9,2)))
+        ),'-',-1) = #{type}
+        or t.id = #{type}
+        )
+        order by b.image_url desc
+        <if test="startrows >= 0">
+            <![CDATA[limit ${startrows},10]]>
+        </if>
+    </select>
+    <!-- 查询最新医学随笔 -->
+    <select id="queryArticle" resultMap="Mapresult">
 	select cc.*,wu.avatar,wu.id as userId,
 		case 
 		when cc.author_type =1
@@ -131,8 +133,8 @@
 				cc.`auth_date` desc
         limit 0,#{endrow}
   </select>
-   <!-- 查询热门标签 -->
-  <select id="queryLabel" parameterType="string"  resultMap="Mapresult">
+    <!-- 查询热门标签 -->
+    <select id="queryLabel" parameterType="string" resultMap="Mapresult">
           SELECT
   max(b.type) type,t.note
 FROM
@@ -145,48 +147,49 @@ ORDER BY
   sum(b.clicks) desc,LENGTH(t.note)
 LIMIT 0,10
   </select>
-  
-  <!-- 查询点击人数最多的最多的作者  及与登录人的好友关系-->
-  <resultMap type="Map" id="HotAuthorMap">
-  	<id property="id" column="id" />
-  	<result property="realname" column="realname"/>
-  	<result property="title" column="title"/>
-  	<result property="avatar" column="avatar"/>
-  	<result property="status" column="status"/>
-  	<result property="hasRequest" column="hasRequest"/> <!-- 已申请加好友 -->
-  	<result property="isBeenRequest" column="isBeenRequest"/> <!-- 已被申请加好友 -->
-  	<result property="total_click" column="total_click"/>
-  </resultMap>
-  
-   <!-- 查询点击人数最多的最多的作者 -->
-  <select id="queryAuthor"  resultMap="HotAuthorMap">
-  	select u.* 
-	,f.request_id = u.id and f.target_id = #{logUserId} and f.status = 0 as isBeenRequest
-	,f.target_id = u.id and f.request_id = #{logUserId} and f.status = 0 as hasRequest
-	,max(f.status) as status
-	from 
-	(
-		select 
-		    sum(c.clicks) as total_click,u.id,u.realname,u.position,u.title,u.avatar
-		    from cms_content c 
-		    left join writer_user u on c.author_id=u.id 
-		    <if test="logUserId != null and logUserId !='' ">
-				where u.id != #{logUserId}
-			</if>
-		group by u.id 
-	)u
-	left join writer_friend f 
-	on ((f.request_id = u.id and f.target_id = #{logUserId} ) or (f.target_id = u.id and f.request_id = #{logUserId})) and f.status != 1
-	group by u.id 
-	order by u.total_click desc
-	limit 0,4
-	<!-- select 
-    b.*
-    from cms_content t 
-    left join writer_user b on t.author_id=b.id group by t.clicks desc limit 0,4 -->
-  </select>
-   <!-- 查询点击人数最多的书评的作者、书名以及评论内容 -->
-  <select id="queryComment"  resultMap="Mapresult">
+
+    <!-- 查询点击人数最多的最多的作者  及与登录人的好友关系-->
+    <resultMap type="Map" id="HotAuthorMap">
+        <id property="id" column="id"/>
+        <result property="realname" column="realname"/>
+        <result property="title" column="title"/>
+        <result property="avatar" column="avatar"/>
+        <result property="status" column="status"/>
+        <result property="hasRequest" column="hasRequest"/> <!-- 已申请加好友 -->
+        <result property="isBeenRequest" column="isBeenRequest"/> <!-- 已被申请加好友 -->
+        <result property="total_click" column="total_click"/>
+    </resultMap>
+
+    <!-- 查询点击人数最多的最多的作者 -->
+    <select id="queryAuthor" resultMap="HotAuthorMap">
+        select u.*
+        ,f.request_id = u.id and f.target_id = #{logUserId} and f.status = 0 as isBeenRequest
+        ,f.target_id = u.id and f.request_id = #{logUserId} and f.status = 0 as hasRequest
+        ,max(f.status) as status
+        from
+        (
+        select
+        sum(c.clicks) as total_click,u.id,u.realname,u.position,u.title,u.avatar
+        from cms_content c
+        left join writer_user u on c.author_id=u.id
+        <if test="logUserId != null and logUserId !='' ">
+            where u.id != #{logUserId}
+        </if>
+        group by u.id
+        )u
+        left join writer_friend f
+        on ((f.request_id = u.id and f.target_id = #{logUserId} ) or (f.target_id = u.id and f.request_id =
+        #{logUserId})) and f.status != 1
+        group by u.id
+        order by u.total_click desc
+        limit 0,4
+        <!-- select
+        b.*
+        from cms_content t
+        left join writer_user b on t.author_id=b.id group by t.clicks desc limit 0,4 -->
+    </select>
+    <!-- 查询点击人数最多的书评的作者、书名以及评论内容 -->
+    <select id="queryComment" resultMap="Mapresult">
        SELECT
 			u.id,
 			b.id id1,
@@ -209,8 +212,8 @@ LIMIT 0,10
 			ORDER BY
 			b.comments ASC limit 0,4
   </select>
-   <!-- 根据书籍类型查询图书畅销榜 -->
-  <select id="querySale" parameterType="map" resultMap="Mapresult">
+    <!-- 根据书籍类型查询图书畅销榜 -->
+    <select id="querySale" parameterType="map" resultMap="Mapresult">
        SELECT
 		t.type_name,
 		b.*
@@ -231,8 +234,8 @@ LIMIT 0,10
 		ORDER BY
 		b.sales DESC limit 0,6 
   </select>
-   <!-- 查询书籍分类-->
-  <select id="queryBookType" parameterType="map" resultMap="Mapresult">
+    <!-- 查询书籍分类-->
+    <select id="queryBookType" parameterType="map" resultMap="Mapresult">
        select * from material_type where  parent_id=#{parent_id} order by sort 
   </select>
 
@@ -282,11 +285,48 @@ LIMIT 0,10
     </select>
 
 
-	<select id="countSurvey" resultType="int">
+    <select id="countSurvey" resultType="int">
 		select count(1) c from survey
-		where end_date &gt; now()-1
-		and begin_date &lt; now()
+		where end_date &gt; curdate()-1
+		and begin_date &lt; curdate()
 		and status='1'
 		and is_deleted='0'
 	</select>
+
+
+    <select id="queryNotReadMessages" resultType="map">
+					SELECT
+				count(1) a,
+				'notice' type
+			FROM
+				user_message u
+			WHERE
+				u.receiver_id = #{id}
+			AND u.receiver_type = '2'
+			AND msg_type IN (0, 1)
+			AND u.is_deleted = 0
+			AND u.is_read = '0'
+			UNION
+				SELECT
+					count(1) a,
+					'message' type
+				FROM
+					user_message u
+				WHERE
+					u.receiver_id = #{id}
+				AND u.receiver_type = '2'
+				AND msg_type IN (2)
+				AND u.is_deleted = 0
+				AND u.is_read = '0'
+				UNION
+					SELECT
+						count(1) a,
+						'apply' type
+					FROM
+						writer_friend a
+					WHERE
+						a.target_id = #{id}
+					AND STATUS = 0
+	</select>
+
 </mapper>

@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * 
  * @author liudi
@@ -21,7 +23,7 @@ public class JsonTypeHandler extends BaseTypeHandler<Object>{
 	public Object getNullableResult(ResultSet rs, String columnName)
 			throws SQLException {
 		if (rs.getString(columnName) != null) {
-			return JsonUtil.fromJson(rs.getString(columnName), Object.class);
+			return JSON.parseObject(rs.getString(columnName), Object.class);
 		}else{
 			return null;
 		}
@@ -33,7 +35,7 @@ public class JsonTypeHandler extends BaseTypeHandler<Object>{
 	public Object getNullableResult(ResultSet rs, int columnIndex)
 			throws SQLException {
 		if (rs.getString(columnIndex) != null) {
-			return JsonUtil.fromJson(rs.getString(columnIndex), Object.class);
+			return JSON.parseObject(rs.getString(columnIndex), Object.class);
 		}else{
 			return null;
 		}
@@ -43,7 +45,7 @@ public class JsonTypeHandler extends BaseTypeHandler<Object>{
 	public Object getNullableResult(CallableStatement cs, int columnIndex)
 			throws SQLException {
 		if (cs.getString(columnIndex) != null) {
-			return JsonUtil.fromJson(cs.getString(columnIndex), Object.class);
+			return JSON.parseObject(cs.getString(columnIndex), Object.class);
 		}else{
 			return null;
 		}
@@ -52,7 +54,7 @@ public class JsonTypeHandler extends BaseTypeHandler<Object>{
 	@Override
 	public void setNonNullParameter(PreparedStatement ps, int i,
 			Object parameter, JdbcType jdbcType) throws SQLException {
-		 ps.setString(i, JsonUtil.toJson(parameter));
+		 ps.setString(i, JSON.toJSONString(parameter));
 	}
 
 }

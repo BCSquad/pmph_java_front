@@ -154,4 +154,9 @@ public class HomeServiceImpl implements HomeService {
     public int countSurvey() {
         return homeDao.countSurvey();
     }
+
+    @Override
+    public List<Map<String, Object>> queryNotReadMessages(String id) {
+        return homeDao.queryNotReadMessages(id);
+    }
 }
