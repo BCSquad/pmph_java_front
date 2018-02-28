@@ -1,11 +1,21 @@
 package com.bc.pmpheep.back.commuser.personalcenter.bean;
 
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
+import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
+
 
 /**
  * 个人中心 用户动态表  writer_user_trendst 对应实体类 写入用
  * @author liudi
  *
  */
+
 public class WriterUserTrendst {
 	private String id = null;
 	private String user_id = null;
@@ -15,7 +25,6 @@ public class WriterUserTrendst {
 	private String cms_content_id = null;
 	private String book_id = null;
 	private String book_comment_id = null;
-	
 	
 	/**
 	 * 产生一条1到7类型的动态写入pojo
@@ -38,6 +47,8 @@ public class WriterUserTrendst {
 		}
 		else if(type==10){ //content_id 为图书id
 			this.book_id = content_id;
+			
+		}else if(type==0){ //content_id 不保存
 			
 		}
 		
@@ -92,6 +103,32 @@ public class WriterUserTrendst {
 	public void setDetail(String title,String content,int img,int page,int line) {
 		this.detail = "{\"title\":\""+title+"\",\"content\":{\"page\":"+page+",\"line\":"+line+",\"content\":\""+((content.length()>100)?content.substring(0, 99):content)+"\"},\"img\":"+img+"}";
 	}
+	
+	/**
+	 * 教材申报审核 的动态详情生成方法
+	 * @param dmap 申报
+	 * @param online_progress 0=未提交/1=已提交但是待审核/2=被申报单位退回/3=申报单位通过/4=出版社退回申报单位/5=出版社退回个人
+	 */
+	public void declarationAuditDetail(Map<String,Object> dmap,String online_progress) {
+		String title = "";
+		String content = "";
+		String img = "";
+		
+		if ("2".equals(online_progress)) { //被申报单位退回
+			title = "教材申报退回";
+			img = "2";
+			content = "抱歉！您于"+dmap.get("create_time").toString()+"申报的《"+dmap.get("material_name").toString()+"》被申报单位被退回。";
+		}else if("3".equals(online_progress)){ //申报单位通过
+			title = "教材申报通过单位审核";
+			img = "1";
+			content = "恭喜！您于"+dmap.get("create_time").toString()+"申报的《"+dmap.get("material_name").toString()+"》通过申报单位审核。";
+		}
+		
+		this.is_public = 0;
+		this.detail = "{\"title\":\""+title+"\",\"content\":\""+content+"\",\"img\":"+img+"}";
+		
+	}
+	
 	public String getCms_content_id() {
 		return cms_content_id;
 	}
@@ -110,6 +147,8 @@ public class WriterUserTrendst {
 	public void setBook_comment_id(String book_comment_id) {
 		this.book_comment_id = book_comment_id;
 	}
+
+	
 	
 	
 }

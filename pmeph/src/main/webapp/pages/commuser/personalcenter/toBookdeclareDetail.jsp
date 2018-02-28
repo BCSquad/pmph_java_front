@@ -45,13 +45,13 @@
 						</td>
 					</tr>
 					<tr>
-						<td width="140px"><span class="btbs">*</span><span>选题名称：</span></td>
+						<td width="140px"><span>选题名称：</span></td>
 						<td width="460px">
 							${topicMap.bookname}
 							<input type="hidden" name="user_id" value="${topicMap.user_id}"/>
 							<input type="hidden" name="topic_id" value="${topicMap.id}"/>
 						</td>
-						<td width="100px"><span class="btbs">*</span><span>读者对象：</span></td>
+						<td width="100px"><span>读者对象：</span></td>
 						<td width="300px">
 								<c:if test="${topicMap.reader == '0'}">医务工作者</c:if>
 								<c:if test="${topicMap.reader == '1'}">医学院校师生</c:if>
@@ -59,11 +59,11 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span class="btbs">*</span><span>预计交稿时间：</span></td>
+						<td><span>预计交稿时间：</span></td>
 						<td>
 							${topicMap.deadline}
 						</td>
-						<td><span class="btbs">*</span><span>选题来源：</span></td>
+						<td><span>选题来源：</span></td>
 						<td>
 								<c:if test="${topicMap.source == '0'}">社策划</c:if>
 								<c:if test="${topicMap.source == '1'}">编辑策划</c:if>
@@ -74,15 +74,15 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span class="btbs">*</span><span>预估字数：</span></td>
+						<td><span>预估字数：</span></td>
 						<td>${topicMap.word_number}</td>
-						<td><span class="btbs">*</span><span>预估图数：</span></td>
+						<td><span>预估图数：</span></td>
 						<td>${topicMap.picture_number}</td>
 					</tr>
 						<tr>
-						<td><span class="btbs">*</span><span>学科及专业：</span></td>
+						<td><span>学科及专业：</span></td>
 						<td>${topicMap.subject}</td>
-						<td><span class="btbs">*</span><span>级别：</span></td>
+						<td><span>级别：</span></td>
 						<td>
 							<c:if test="${topicMap.rank == '0'}">低</c:if>
 							<c:if test="${topicMap.rank == '1'}">中</c:if>
@@ -90,7 +90,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span class="btbs">*</span><span>图书类别：</span></td>
+						<td><span>图书类别：</span></td>
 						<td colspan="3">
 							<c:if test="${topicMap.type == '0'}">专著</c:if>
 							<c:if test="${topicMap.type == '1'}">基础理论</c:if>
