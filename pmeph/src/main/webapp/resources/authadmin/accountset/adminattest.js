@@ -44,7 +44,7 @@ $(function () {
     		if(file.name.substring(file.name.lastIndexOf("."),file.name.lastIndexOf(".")+4)==".doc"){
     			return true;
     		}else{
-    			//message.error("请选择doc格式的文件");
+    			message.error("请选择图片文件");
     			return false;
     		}
     		
