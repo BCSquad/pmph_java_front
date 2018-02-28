@@ -358,7 +358,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <c:if test="${(admininfo.progress!=1)}">
+                            <c:if test="${(admininfo.progress==2||admininfo.is_proxy_upload==false)}">
                                 <td colspan="3" align="center">
                                     <div style="cursor: pointer;" class="btnSubmit" onclick="submit()">提交</div>
                                 </td>

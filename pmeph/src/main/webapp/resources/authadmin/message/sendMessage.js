@@ -34,9 +34,19 @@ function send_init(){
  */
 function sending(){
 	//发送表单 请求
-	document.getElementById("theForm").submit();
-	document.getElementById("theForm").reset();
-	//window.message.success("发送成功");
+	try {
+		document.getElementById("theForm").submit();
+		document.getElementById("theForm").reset();
+		window.message.success("发送成功");
+	} catch (e) {
+		// TODO: handle exception
+		console.log(e.message);
+		window.message.error("发送失败");
+	}finally{
+		
+	}
+	
+	
 }
 /**
  * 选择的是教材报名者 点击发送后 显示教材选择界面
