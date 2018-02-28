@@ -24,10 +24,10 @@
 		m.is_digital_editor_optional,<!-- 是否可选数字编委 -->
 		m.is_force_end,     <!-- 教材是否强制结束 -->
 		(case
-		when tb.is_published = 1 or m.is_force_end =1
+		when tb.is_published = 1 or m.is_force_end =1 or #{parameter.isFirstEditorLogIn} = 'false'
 		then
 			dpp.chosen_position
-		when tb.is_list_selected = 1 or tb.is_locked =1 or #{parameter.isFirstEditorLogIn} = 'false'
+		when tb.is_list_selected = 1 or tb.is_locked =1 
 		then
 			dp.chosen_position
 		else	
@@ -73,10 +73,10 @@
 			dp.id as dec_position_id,
 			tb.is_list_selected ,
 			(case
-			when tb.is_published = 1 or m.is_force_end =1
+			when tb.is_published = 1 or m.is_force_end =1 or #{parameter.isFirstEditorLogIn} = 'false'
 			then
 				dpp.chosen_position
-			when tb.is_list_selected = 1 or tb.is_locked =1 or #{parameter.isFirstEditorLogIn} = 'false'
+			when tb.is_list_selected = 1 or tb.is_locked =1 
 			then
 				dp.chosen_position
 			else	

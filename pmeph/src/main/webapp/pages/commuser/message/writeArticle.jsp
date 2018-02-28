@@ -65,7 +65,7 @@
 
     <div class="sxy-div-content upload-image">
         <button> 上传封面图片</button>
-        <div class="fileinfo"><span class="filename"></span><span class="preview"> 预览</span></div>
+        <div class="fileinfo"><span class="filename">${coverName }</span><span class="preview"> 预览</span></div>
     </div>
 
     <div class="sxy-div-content3">
@@ -74,7 +74,7 @@
     <div id="sxy-return">
         <input type="hidden" id="msg_id" name="msg_id" value="${mid}"/>
         <input type="hidden" id="btn_type" name="btnType"/>
-        <input type="hidden" id="image" name="image"/>
+        <input type="hidden" id="image" name="image" value="${cover }"/>
         <input type="hidden" id="submitTypeCode" name="submitTypeCode" value="${submitTypeCode }"/>
         <input class="sxy-btn" type="button" value="发表" onclick="btntype(0)"/>&nbsp;&nbsp;
         <input class="sxy-btn" type="button" value="暂存" onclick="btntype(1)"/>

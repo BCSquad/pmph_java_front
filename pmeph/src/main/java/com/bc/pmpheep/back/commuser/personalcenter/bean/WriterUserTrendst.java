@@ -90,7 +90,7 @@ public class WriterUserTrendst {
 	 * @param page 页 line 行
 	 */
 	public void setDetail(String title,String content,int img,int page,int line) {
-		this.detail = "{\"title\":\""+title+"\",\"content\":{\"page\":"+page+",\"line\":"+line+",\"content\":\""+content+"\"},\"img\":"+img+"}";
+		this.detail = "{\"title\":\""+title+"\",\"content\":{\"page\":"+page+",\"line\":"+line+",\"content\":\""+((content.length()>100)?content.substring(0, 99):content)+"\"},\"img\":"+img+"}";
 	}
 	public String getCms_content_id() {
 		return cms_content_id;

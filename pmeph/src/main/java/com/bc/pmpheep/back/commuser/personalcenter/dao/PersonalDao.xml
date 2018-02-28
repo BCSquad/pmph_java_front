@@ -183,6 +183,7 @@
 		(TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) AS datebase,
 		count(distinct c.id) as iamin,
 		c.id as declaration_id,
+		c.return_cause,
 		dp.id as notNullIfFirstManager,
 		dp.rank,
 		dp.chosen_position,

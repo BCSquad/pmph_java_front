@@ -24,6 +24,11 @@ function writeArticleValidate() {
         //$('input[type="submit"]').prop('disabled', true);
         return false;
     }
+    if ($("#image").val().length == 0) {
+    	window.message.warning("请上传封面");
+        //$('input[type="submit"]').prop('disabled', true);
+        return false;
+	}
 
     return true;
 }
@@ -184,6 +189,11 @@ $(function () {
             $(".upload-image .fileinfo .preview").show();
         }
     });
+    
+    if ($("#image").val().length>0) {
+    	$(".upload-image .fileinfo .preview").show();
+	}
+    
     $(".upload-image .fileinfo .preview").click(function () {
         var image = new Image();
         image.src = contextpath + "image/" + $("#image").val() + ".action";
