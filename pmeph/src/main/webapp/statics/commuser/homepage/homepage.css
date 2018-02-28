@@ -352,8 +352,8 @@ ul li {
 
 .left_one{
 	width: 314px;
-	height: 223px;
-	margin-top: 25px;
+	height: 200px;
+	margin-top: 20px;
 	float: left;
     background: url("../../testfile/rectangle.png") no-repeat;
 /*    border: 1px solid #F2F2F2;
@@ -382,11 +382,11 @@ ul li {
 
 .left_two{
 	width: 314px;
-	height: 250px;
-	margin-top: 5px;
+	height: 262px;
+	margin-top: 0px;
 	float: left;
-	background: url("../../testfile/rectangle.png") no-repeat;
-	/*border: 1px solid #F2F2F2;
+    background: url("../../testfile/rectangle1.png") no-repeat;
+    /*border: 1px solid #F2F2F2;
     border-radius:6px;
     box-shadow: 1px 1px 3px #888888;*/
 }

@@ -224,7 +224,8 @@
                 </c:forEach>
                 </div>
             </div>
-            <div style="clear: both"></div>
+
+            <div style="clear: both; height: 10px;"></div>
         </div>
     </div>
     <jsp:include page="/pages/comm/tail.jsp">
