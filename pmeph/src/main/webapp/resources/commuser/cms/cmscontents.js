@@ -61,8 +61,12 @@ function addColum(list){
 				str +='</div>';
 					str +='<div  class="content" >';
 						str +='<div class="content-image">';
+						/*if (n.cover == '' || n.cover == 'DEFAULT' || n.cover == null) {
 							str +='<img src="'+contextpath+'statics/testfile/p2.png" />';
-						/*str +='<img src="'+n.first_img_url+'" />';*/
+			            } else {
+			            	str+='<img src="'+contextpath+'image/'+n.cover+'.action" />';
+			            }*/
+							str+='<img src="'+contextpath+''+n.cover+'" />';
 							str +='</div>';
 								str +='<p  class="content-title"  >'+n.title+'</p>';
 								str +='<p  class="content-text">'+(n.summary?n.summary:'')+'';

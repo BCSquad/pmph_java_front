@@ -84,7 +84,7 @@ public class HomeController extends BaseController{
         }
         modelAndView.addObject("listM", listM);
         //读取mongeldb里面的图片 
-        for (Map<String, Object> pmap : listArt) {
+        /*for (Map<String, Object> pmap : listArt) {
 			Message message=messageService.get((String) pmap.get("mid"));
 			if(message!=null){
 				List<String> imglist = articleSearchService.getImgSrc(message.getContent());
@@ -96,7 +96,7 @@ public class HomeController extends BaseController{
 			}else{//没有图片放置默认图片
 				pmap.put("imgpath", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
 			}
-		}
+		}*/
 
         List<Map<String, Object>> types = homeService.queryBookType(0);
         modelAndView.addObject("bookTypes", types);

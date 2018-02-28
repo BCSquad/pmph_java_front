@@ -160,7 +160,7 @@
                     </div>
                     <div  class="content" >
                         <div class="content-image">
-                            <img src="${ctx}/statics/testfile/p2.png" />
+                            <img src="${ctx}/${list.cover}" />
                         </div>
                         <p   class="content-title" style="cursor: pointer;">${list.title}</p>
                         <p  class="content-text">${list.summary}</p>

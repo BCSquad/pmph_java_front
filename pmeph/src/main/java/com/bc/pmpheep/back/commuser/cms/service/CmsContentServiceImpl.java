@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -53,7 +54,7 @@ public class CmsContentServiceImpl implements CmsContentService{
 		for (Map<String,Object> cmsContentVO : resultList) {
 			String authdate=cmsContentVO.get("auth_date").toString().substring(0, 10);
 			cmsContentVO.put("auth_date", authdate);
-			
+			cmsContentVO.put("cover", RouteUtil.articleAvatar(MapUtils.getString(cmsContentVO, "cover")));
 			//抓取文章图片
 			/*if (cmsContentVO.get("mid")!=null) {
 				Content content = contentService.get(cmsContentVO.get("mid").toString());

@@ -4,7 +4,7 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
 %>
-<script type="text/javascript">
+<script type="text/javascript" >
 	var contxtpath='${pageContext.request.contextPath}/';
 </script>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
@@ -29,12 +29,9 @@
 </head>
 <body>
 	<input type="hidden" id="page-num-temp" value="1">
-<div style="width: 100%;padding: 0;margin: 0;height: 81px;border: none;overflow: hidden;">
 	<jsp:include page="/pages/comm/head.jsp">
 		<jsp:param value="articlepage" name="pageTitle" />
 	</jsp:include> 
-</div>
-
 <div class="body">
     <div class="content-wrapper">
     	<div class="sbxq_title">

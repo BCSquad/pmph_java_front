@@ -253,7 +253,7 @@
                              onclick="window.location.href='${ctx}/articledetail/toPage.action?wid=${list.id}'">
                             <div class="big">
                                 <div class="small"><span class="recommend">推荐</span></div>
-                                <div class="pc1"><img src="${imgpath }"></div>
+                                <div class="pc1"><img  src="${ctx}/${list.cover}" /></div>
                                 <div class="tt"><span class="a6_content">${list.title}</span></div>
                                 <div class="a6_div2">${list.summary}</div>
                                 <div>
@@ -278,7 +278,7 @@
                              onclick="window.location.href='${ctx}/articledetail/toPage.action?wid=${list.id}'">
                             <div class="big">
                                 <div class="small"><span class="recommend">推荐</span></div>
-                                <div class="pc1"><img src="${imgpath }"></div>
+                                <div class="pc1"><img  src="${ctx}/${list.cover}"></div>
                                 <div class="tt"><span class="a6_content">${list.title}</span></div>
                                 <div class="a6_div2">${list.summary}</div>
                                 <div>
