@@ -129,23 +129,26 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span>一、选题理由：</span></td>
+						<td><span class="btbs">*</span><span>一、选题理由：</span></td>
 						<td colspan="3">
-							<div class="content">${textraMap.reason}
+							<div class="content">
+								<textarea class="text_cl" id="reason" name="reason" readonly="readonly">${textraMap.reason}</textarea>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td><span>二、出版价值：</span></td>
+						<td><span class="btbs">*</span><span>二、出版价值：</span></td>
 						<td colspan="3">
-							<div class="content">${textraMap.price}
+							<div class="content">
+								<textarea class="text_cl" id="price" name="price" readonly="readonly">${textraMap.price}</textarea>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td><span>三、主要内容：</span></td>
+						<td><span class="btbs">*</span><span>三、主要内容：</span></td>
 						<td colspan="3">
-							<div class="content">${textraMap.score}
+							<div class="content">
+								<textarea class="text_cl" id="extra_score" name="extra_score" readonly="readonly">${textraMap.score}</textarea>
 							</div>
 						</td>
 					</tr>
@@ -167,7 +170,7 @@
 						</td>
 					</tr>
 				</table>
-					<!-- 翻译书稿 -->
+				<!-- 翻译书稿 -->
 				<table class="tab_1">
 					<tr>
 						<td colspan="4">
@@ -181,7 +184,7 @@
 						<td width="106px"><span>译稿原书名：</span></td>
 						<td width="400px">${topicMap.original_bookname}
 						</td>
-						<td style="text-align: center;"><span>原编著者：</span></td>
+						<td style="text-align: center;"><span>&emsp;&emsp;&emsp;原编著者：</span></td>
 						<td width="308px">${topicMap.original_author}
 						</td>
 					</tr>

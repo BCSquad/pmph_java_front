@@ -147,7 +147,7 @@
 							onblur="LengthLimit(this,20)"
 							 maxlength="20"/>
 						</td>
-						<td><span>&emsp;传&emsp;&emsp;真：</span>
+						<td><span>&ensp;传&emsp;&emsp;真：</span>
 							<input class="cg_input" name="fax" value="" id="fax" onblur="LengthLimit(this,45)" maxlength="45"/>
 						</td>
 						<td><span class="btbs">*</span><span>手&emsp;&emsp;机：</span>
@@ -196,10 +196,10 @@
 								-
 								<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'" z-index="100" min="'$#xx_kssj'" name="xx_jssj" id="xx_jssj" value="" style="width: 80px;" maxlength="20"/>
 							</td>
-							<td><input class="cg_input" name="xx_school_name" value="" placeholder="学校名称" maxlength="36"/></td>
-							<td><input class="cg_input" name="xx_major" value="" placeholder="所学专业" maxlength="16"/></td>
-							<td><input class="cg_input" name="xx_degree" value="" style="width: 120px;" placeholder="学历" maxlength="10"/></td>
-							<td><input class="cg_input" name="xx_note" value="" style="width: 310px;" placeholder="备注" maxlength="33"/></td>
+							<td><input class="cg_input" name="xx_school_name" id="xx_school_name" value="" placeholder="学校名称" maxlength="36"/></td>
+							<td><input class="cg_input" name="xx_major" id="xx_major" value="" placeholder="所学专业" maxlength="16"/></td>
+							<td><input class="cg_input" name="xx_degree" id="xx_degree" value="" style="width: 120px;" placeholder="学历" maxlength="10"/></td>
+							<td><input class="cg_input" name="xx_note" id="xx_note" value="" style="width: 310px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_xxjl()"/></td>
 						</tr>
 					</tbody>
@@ -232,8 +232,8 @@
 								-
 								<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  z-index="100" min="'$#gz_kssj'" name="gz_jssj" id="gz_jssj" value="" style="width: 80px;" maxlength="20"/>
 							</td>
-							<td><input class="cg_input" name="gz_org_name" value="" placeholder="工作单位"maxlength="33"/></td>
-							<td><input class="cg_input" name="gz_position" value="" placeholder="职位"maxlength="33" /></td>
+							<td><input class="cg_input" name="gz_org_name" value="" id="gz_org_name" placeholder="工作单位"maxlength="33"/></td>
+							<td><input class="cg_input" name="gz_position" value="" id="gz_position" placeholder="职位"maxlength="33" /></td>
 							<td><input class="cg_input" name="gz_note" value="" style="width: 370px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_gzjl()"/></td>
 						</tr>
@@ -267,8 +267,8 @@
 								-
 								<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  min="'$#jx_kssj'" id="jx_jssj" z-index="100" name="jx_jssj" value="" style="width: 80px;" maxlength="20"/>
 							</td>
-							<td><input class="cg_input" name="jx_school_name" value="" placeholder="学校名称" maxlength="33"/></td>
-							<td><input class="cg_input" name="jx_subject" value="" placeholder="教学科目" maxlength="50"/></td>
+							<td><input class="cg_input" name="jx_school_name" id="jx_school_name" value="" placeholder="学校名称" maxlength="33"/></td>
+							<td><input class="cg_input" name="jx_subject" id="jx_subject" value="" placeholder="教学科目" maxlength="50"/></td>
 							<td><input class="cg_input" name="jx_note" value="" style="width: 370px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jxjl()"/></td>
 						</tr>
@@ -329,7 +329,7 @@
 								</tr></table>
 								<input type="hidden" name="xs_rank" value="xs_rank_1" />
 							</td>
-							<td><input class="cg_input" name="xs_position" value="" placeholder="职务" maxlength="16"/></td>
+							<td><input class="cg_input" name="xs_position" id="xs_position" value="" placeholder="职务" maxlength="16"/></td>
 							<td><input class="cg_input" name="xs_note" value="" style="width: 370px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_xsjz()"/></td>
 						</tr>
@@ -404,7 +404,7 @@
 					<tbody>
 						<tr>
 							<td><input class="cg_input" name="gj_course_name" id="gj_course_name" value="" style="width: 300px;" placeholder="课程名称" maxlength="16"/></td>
-							<td><input class="cg_input" name="gj_class_hour" value="" style="width: 130px;" placeholder="课时数" maxlength="3"/></td>
+							<td><input class="cg_input" name="gj_class_hour" id="gj_class_hour" value="" style="width: 130px;" placeholder="课时数" maxlength="3"/></td>
 							<td style="color: #333333;">
 								<table class="radio_tb" style="width: 180px;"><tr>
 									<td><input type="radio" name="gj_type_1" value="1" checked="checked"/>国家</td>
@@ -443,7 +443,7 @@
 					<tbody>
 						<tr>
 							<td><input class="cg_input" name="hj_material_name" id="hj_material_name" value="" style="width: 300px;" placeholder="教材名称" maxlength="33"/></td>
-							<td><input class="cg_input" name="hj_isbn" value="" style="width: 110px;" placeholder="标准书号" maxlength="16"/></td>
+							<td><input class="cg_input" name="hj_isbn" id="hj_isbn" value="" style="width: 110px;" placeholder="标准书号" maxlength="16"/></td>
 							<td style="color: #333333;">
 								<table class="radio_tb" style="width: 320px;"><tr>
 									<td><input type="radio" name="hj_rank_1" value="1" checked="checked"/>教育部十二五</td>
@@ -508,9 +508,9 @@
 								</tr></table>
 								<input type="hidden" name="jcb_is_digital_editor" value="jcb_is_digital_editor_1" />
 							</td>
-							<td><input class="cg_input" name="jcb_publisher" value="" style="width: 100px;" placeholder="出版社" maxlength="16"/></td>
-							<td><input class="cg_input" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="jcb_publish_date" value="" style="width: 100px;"/></td>
-							<td><input class="cg_input" name="jcb_isbn" value="" style="width: 100px;" placeholder="标准书号" maxlength="16"/></td>
+							<td><input class="cg_input" name="jcb_publisher" id="jcb_publisher" value="" style="width: 100px;" placeholder="出版社" maxlength="16"/></td>
+							<td><input class="cg_input" placeholder="出版时间" id="jcb_publish_date" calendar format="'yyyy-mm-dd'"  z-index="100" name="jcb_publish_date" value="" style="width: 100px;"/></td>
+							<td><input class="cg_input" name="jcb_isbn" id="jcb_isbn" value="" style="width: 100px;" placeholder="标准书号" maxlength="16"/></td>
 							<td><input class="cg_input" name="jcb_note" value="" style="width: 130px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jcbx()"/></td>
 						</tr>
@@ -558,9 +558,9 @@
 								</tr></table>
 								<input type="hidden" name="jcb_is_digital_editor" value="jcb_is_digital_editor_2" />
 							</td>
-							<td><input class="cg_input" name="jcb_publisher" value="" style="width: 120px;" placeholder="出版社" maxlength="16"/></td>
-							<td><input class="cg_input" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="jcb_publish_date" value="" style="width: 110px;"/></td>
-							<td><input class="cg_input" name="jcb_isbn" value="" style="width: 110px;" placeholder="标准书号" maxlength="16"/></td>
+							<td><input class="cg_input" name="jcb_publisher" id="qt_jcb_publisher" value="" style="width: 120px;" placeholder="出版社" maxlength="16"/></td>
+							<td><input class="cg_input" placeholder="出版时间" id="qt_jcb_publish_date" calendar format="'yyyy-mm-dd'"  z-index="100" name="jcb_publish_date" value="" style="width: 110px;"/></td>
+							<td><input class="cg_input" name="jcb_isbn" value="" id="qt_jcb_isbn" style="width: 110px;" placeholder="标准书号" maxlength="16"/></td>
 							<td><input class="cg_input" name="jcb_note" value="" placeholder="备注" style="width: 180px;" maxlength="33"/>
 								<input type="hidden" name="jcb_rank" value="0"/>
 							</td>
@@ -592,8 +592,8 @@
 					<tbody>
 						<tr>
 							<td><input class="cg_input" name="zjk_research_name" id="zjk_research_name" value="" style="width: 200px;" placeholder="课题名称" maxlength="50"/></td>
-							<td><input class="cg_input" name="zjk_approval_unit" value="" style="width: 200px;" placeholder="审批单位" maxlength="33"/></td>
-							<td><input class="cg_input" name="zjk_award" value="" style="width: 300px;" placeholder="获奖情况" maxlength="33"/></td>
+							<td><input class="cg_input" name="zjk_approval_unit" id="zjk_approval_unit" value="" style="width: 200px;" placeholder="审批单位" maxlength="33"/></td>
+							<td><input class="cg_input" name="zjk_award" value="" id="zjk_award" style="width: 300px;" placeholder="获奖情况" maxlength="33"/></td>
 							<td><input class="cg_input" name="zjk_note" value="" style="width: 300px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="add_zjky()"></td>
 						</tr>
@@ -643,8 +643,8 @@
 								</tr></table>
 								<input type="hidden" name="is_self_paid" value="is_self_paid_1" />
 							</td>
-							<td><input class="cg_input" name="zb_publisher" value="" style="width: 180px;" placeholder="出版单位"  maxlength="16"/></td>
-							<td><input class="cg_input" name="zb_publish_date" value="" style="width: 120px;" calendar format="'yyyy-mm-dd'" placeholder="出版时间"/></td>
+							<td><input class="cg_input" name="zb_publisher" id="zb_publisher" value="" style="width: 180px;" placeholder="出版单位"  maxlength="16"/></td>
+							<td><input class="cg_input" name="zb_publish_date" id="zb_publish_date" value="" style="width: 120px;" calendar format="'yyyy-mm-dd'" placeholder="出版时间"/></td>
 							<td><input class="cg_input" name="zb_note" value="" style="width: 250px;" placeholder="备注"  maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_zbxszz()"/></td>
 						</tr>
@@ -674,9 +674,9 @@
 					<tbody>
 						<tr>
 							<td><input class="cg_input" name="pu_reward_name" id="pu_reward_name" value="" style="width: 300px;" placeholder="奖项名称" maxlength="16"/></td>
-							<td><input class="cg_input" name="pu_award_unit" value="" style="width: 300px;" placeholder="评奖单位" maxlength="16"/></td>
+							<td><input class="cg_input" name="pu_award_unit" id="pu_award_unit" value="" style="width: 300px;" placeholder="评奖单位" maxlength="16"/></td>
 							<td>
-								<input class="cg_input" name="pu_reward_date" value="" style="width: 120px;" calendar format="'yyyy-mm-dd'"  placeholder="获奖时间"/>
+								<input class="cg_input" name="pu_reward_date" id="pu_reward_date" value="" style="width: 120px;" calendar format="'yyyy-mm-dd'"  placeholder="获奖时间"/>
 							</td>
 							<td><input class="cg_input" name="pu_note" value="" style="width: 250px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_publish()"/></td>
@@ -708,9 +708,9 @@
 					<tbody>
 						<tr>
 							<td><input class="cg_input" name="sci_paper_name" id="sci_paper_name" value="" style="width: 300px;" placeholder="论文名称" maxlength="16"/></td>
-							<td><input class="cg_input" name="sci_journal_name" value="" style="width: 130px;" placeholder="期刊名称" maxlength="16"/></td>
-							<td><input class="cg_input" name="sci_factor" value="" style="width: 170px;" placeholder="期刊SCI影响因子" maxlength="7"/></td>
-							<td><input class="cg_input" name="sci_publish_date" value="" style="width: 110px;" calendar format="'yyyy-mm-dd'" placeholder="发表时间"/></td>
+							<td><input class="cg_input" name="sci_journal_name" id="sci_journal_name"  value="" style="width: 130px;" placeholder="期刊名称" maxlength="16"/></td>
+							<td><input class="cg_input" name="sci_factor" id="sci_factor" value="" style="width: 170px;" placeholder="期刊SCI影响因子" maxlength="7"/></td>
+							<td><input class="cg_input" name="sci_publish_date" id="sci_publish_date" value="" style="width: 110px;" calendar format="'yyyy-mm-dd'" placeholder="发表时间"/></td>
 							<td><input class="cg_input" name="sci_note" value="" style="width: 250px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_sci()"/></td>
 						</tr>
@@ -748,7 +748,7 @@
 								</tr></table>
 								<input type="hidden" name="cl_award_unit" value="cl_award_unit_1" />
 							</td>
-							<td><input class="cg_input" name="cl_reward_date" value="" style="width: 180px;" calendar format="'yyyy-mm-dd'" placeholder="获奖时间"/></td>
+							<td><input class="cg_input" name="cl_reward_date" id="cl_reward_date" value="" style="width: 180px;" calendar format="'yyyy-mm-dd'" placeholder="获奖时间"/></td>
 							<td><input class="cg_input" name="cl_note" value="" style="width: 330px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_clinical()"/></td>
 						</tr>
@@ -788,7 +788,7 @@
 								</tr></table>
 								<input type="hidden" name="ac_award_unit" value="ac_award_unit_1" />
 							</td>
-							<td><input class="cg_input" name="ac_reward_date" value="" style="width: 150px;" calendar format="'yyyy-mm-dd'" placeholder="授予时间"/></td>
+							<td><input class="cg_input" id="ac_reward_date" name="ac_reward_date" value="" style="width: 150px;" calendar format="'yyyy-mm-dd'" placeholder="授予时间"/></td>
 							<td><input class="cg_input" name="ac_note" value="" style="width: 280px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_acade()"/></td>
 						</tr>
