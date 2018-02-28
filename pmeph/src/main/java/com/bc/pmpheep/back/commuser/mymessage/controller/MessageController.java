@@ -389,7 +389,11 @@ public class MessageController extends BaseController {
         mv.addObject("firstpath", "personalhomepage/tohomepage.action");
         mv.addObject("secondpath", "message/noticeMessageList.action");
         mv.addObject("materialId", materialId);
-
+        if("no".endsWith(mapTitle.get("ended").toString())){
+        	   mv.addObject("notEnd", 1);
+        }else{
+        	   mv.addObject("notEnd", 0);
+        }
         if (mapTitle != null && mapTitle.size() > 0 && mapTitle.get("is_material_entry").toString() == "true") {
 
             paraMap.put("materialId", materialId);
@@ -403,7 +407,7 @@ public class MessageController extends BaseController {
 
             mv.addObject("listAttachment", listAttachment);
             mv.addObject("listContact", listContact);
-            mv.addObject("notEnd", notEnd);
+//            mv.addObject("notEnd", notEnd);
 
         }
 

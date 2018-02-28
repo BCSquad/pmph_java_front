@@ -131,3 +131,7 @@ function checkNull(jsonStr){
 	});
 	return b;
 }
+
+function cleadate(){
+	$("#deadline").val(null);
+}

@@ -33,7 +33,7 @@
 	group by cc.id
 	ORDER BY
 		
-			    cc.auth_date DESC
+			    cc.gmt_update DESC
 	limit 0,3
   </select>
   
