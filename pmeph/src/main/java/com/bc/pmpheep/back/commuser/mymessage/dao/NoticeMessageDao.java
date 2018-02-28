@@ -75,4 +75,7 @@ public interface NoticeMessageDao {
 	 * @return
 	 */
 	Map<String, Object> queryTitleMessage(Map<String, Object> paraMap);
+	
+	//更新通知点击量
+	void updateTitleMessage(String id);
   }

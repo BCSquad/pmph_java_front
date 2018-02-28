@@ -126,7 +126,19 @@
 		                </tr>
 		                <tr style="width: 30%">
 		                	  <c:if test="${message.msgType==0||message.msgType==1}">
-		                	    <td colspan="2" class="title" style="cursor: pointer;" onclick="showup('${message.id}')" >${message.title}</td>
+		                	    <td colspan="2" class="title" style="cursor: pointer;" onclick="showup('${message.id}')" >
+		                	    <input type="hidden" id="messid" value="${message.id}"/>
+		                	    ${message.title}
+		                	    <c:choose>
+									<c:when test="${message.is_read==1}">
+										<img src="${ctx}/statics/image/readyes.png"  id="readyes"/>
+									</c:when>
+									<c:otherwise>
+										<img src="${ctx}/statics/image/readno.png"  id="readno"/>
+									</c:otherwise>
+								</c:choose>	
+		                	    
+		                	    </td>
 		                	  </c:if>
 		                	  <c:if test="${message.msgType==4}">
 		                	    <td colspan="2" class="title">《${message.title}》已开始申报,请您留意</td>
@@ -134,7 +146,7 @@
 		                  
 		                    <td class="buttonDetail">
 		                    	<c:if test="${message.msgType==4}">
-		                        <div class="buttonAccept"><a href="${ctx}/message/noticeMessageDetail.action?materialId=${message.fId}&&cmsId=${message.id}&&notEnd=${notEnd}&&is_material_entry=${is_material_entry}">查看详情</a></div>
+		                      	<div class="buttonAccept" ><a href="${ctx}/message/noticeMessageDetail.action?materialId=${message.fId}&&cmsId=${message.id}&&notEnd=${notEnd}&&is_material_entry=${is_material_entry}">查看详情</a></div>
 		                        </c:if>
 		                        <c:if test="${message.msgType==0||message.msgType==1}">
 		   					    <span class="deleteButton" onclick="deleteNotice(${message.id })"><span style="font-size:18px;">×</span> 删除</span>
