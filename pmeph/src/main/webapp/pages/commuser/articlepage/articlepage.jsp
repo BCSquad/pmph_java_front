@@ -75,12 +75,12 @@
                         </div>
                     </div>
                 </div>
-                
-                
-                
-                
-                
-                
+
+
+
+
+
+
                 <div class="notice ">
                     <div class="title">
                         <div class="line"></div>
@@ -183,7 +183,7 @@
             <div class="writer">
                 <div class="title">推荐作者</div>
                 <div style="margin-top: 11px">
-                
+
                 <c:forEach items="${listAut}" var="list" varStatus="status">
                     <div class="item">
                         <div class="content">
@@ -227,6 +227,17 @@
             <div style="clear: both"></div>
         </div>
     </div>
-    <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
+    <jsp:include page="/pages/comm/tail.jsp">
+        <jsp:param name="linked" value="linked"></jsp:param>
+    </jsp:include>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?c8927680e561788c668c5e891dfe322c";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
 </body>
 </html>

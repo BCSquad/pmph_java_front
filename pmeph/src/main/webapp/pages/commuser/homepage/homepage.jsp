@@ -443,9 +443,24 @@
         </c:if>
 
     </div>
-    <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
+    <jsp:include page="/pages/comm/tail.jsp">
+        <jsp:param name="linked" value="linked"></jsp:param>
+    </jsp:include>
 </div>
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?c8927680e561788c668c5e891dfe322c";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
 </body>
+
+
+
 </html>
 
 
