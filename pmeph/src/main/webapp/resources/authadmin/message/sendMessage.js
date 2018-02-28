@@ -36,7 +36,7 @@ function sending(){
 	//发送表单 请求
 	document.getElementById("theForm").submit();
 	document.getElementById("theForm").reset();
-	window.message.success("发送成功");
+	//window.message.success("发送成功");
 }
 /**
  * 选择的是教材报名者 点击发送后 显示教材选择界面
@@ -83,7 +83,7 @@ $(function(){
 
     })*/
 	if($("#validate").val()=="0"){
-		window.message.warning("必选项不为空");
+		window.message.warning("必填项不能为空");
 	}else if($("#validate").val()=="1"){
 		window.message.warning("标题长度不能超过30个字");
 	}

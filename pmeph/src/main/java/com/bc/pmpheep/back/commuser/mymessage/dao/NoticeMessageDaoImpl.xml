@@ -53,7 +53,7 @@
 		<!-- 全部 -->
 		<if test="condition==null||condition==3">
 			select * from(
-			select u.id,u.msg_id as fId,u.title,u.gmt_create as time,u.msg_type as msgType,o.avatar,u.gmt_update as deadline ,0 as is_material_entry
+			select u.id,u.msg_id as fId,u.title,u.gmt_create as time,u.msg_type as msgType,o.avatar,u.gmt_update as deadline ,0 as is_material_entry,u.is_read
 			from user_message u
 			LEFT JOIN pmph_user o
 			ON o.id= u.sender_id
@@ -65,7 +65,7 @@
 			ORDER BY u.gmt_create DESC)t1
 			UNION
 			select * from(
-				SELECT n.id,n.material_id,n.material_name,n.gmt_create,4,n.avatar,n.deadline,n.is_material_entry
+				SELECT n.id,n.material_id,n.material_name,n.gmt_create,4,n.avatar,n.deadline,n.is_material_entry,0
 				FROM 
 				(SELECT 
 		        t.*,b.material_name,p.avatar,b.deadline
@@ -135,7 +135,7 @@
 		</if>
 		<!-- 系统消息 -->
 		<if test="condition==0">
-			select u.id,u.msg_id as fId,u.title,u.gmt_create as time,u.msg_type as msgType,o.avatar,o.realname
+			select u.id,u.is_read*1 is_read,u.msg_id as fId,u.title,u.gmt_create as time,u.msg_type as msgType,o.avatar,o.realname
 			from user_message u
 			LEFT JOIN pmph_user o
 			ON o.id= u.sender_id
@@ -282,9 +282,15 @@
 	
 	    <!-- 系统消息标题弹框回显-->
 	<select id="queryTitleMessage" parameterType="java.util.Map" resultType="java.util.Map">
-			select u.id ,u.msg_id ,u.title,u.msg_type,o.realname,o.username,u.gmt_create
+			select u.id ,u.msg_id ,u.title,u.msg_type, IFNULL(o.realname,o.username)as realname,u.gmt_create
 			from user_message u
 			LEFT JOIN pmph_user o
 			ON o.id= u.sender_id  where u.id=#{id}
+			
 	</select>
+	
+		<!-- 点击标题后状态变为已读 -->
+	<update id="updateTitleMessage" parameterType="String" >
+		UPDATE `user_message` SET is_read =1 WHERE id=#{id}
+	</update>
 </mapper>
