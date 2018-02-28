@@ -107,4 +107,12 @@ public interface HomeDao {
      */
     int countSurvey();
 
+
+    /**
+     * 未读消息查询
+     * @param id
+     * @return
+     */
+    List<Map<String, Object>> queryNotReadMessages(@Param("id") String id);
+
 }

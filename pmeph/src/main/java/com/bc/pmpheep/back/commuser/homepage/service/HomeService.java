@@ -92,4 +92,11 @@ public interface HomeService {
      */
     int countSurvey();
 
+    /**
+     * 未读消息查询
+     * @param id
+     * @return
+     */
+    List<Map<String, Object>> queryNotReadMessages(String id);
+
 }
