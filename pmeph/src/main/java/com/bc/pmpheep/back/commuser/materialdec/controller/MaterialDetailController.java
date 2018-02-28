@@ -161,6 +161,7 @@ public class MaterialDetailController extends BaseController{
 		
 		String is_background = "0";
 		String msg = "";
+		String online_progress = request.getParameter("online_progress");
 		//创建时间
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String date = df.format(new Date());
@@ -168,16 +169,21 @@ public class MaterialDetailController extends BaseController{
 		if(type.equals("1")){ //提交
 			perMap.put("is_staging", "0");
 			perMap.put("online_progress", "1");
-		}else{ //暂存
-			perMap.put("is_staging", "1");
-			perMap.put("online_progress", "0");
+		}else{ 
+			if(online_progress.equals("2")){ //被退回
+				perMap.put("is_staging", "0");
+				perMap.put("online_progress", "2");
+			}else{//未提交
+				perMap.put("is_staging", "1");
+				perMap.put("online_progress", "0");
+			}
 		}
 		perMap.put("realname", request.getParameter("realname"));
 		perMap.put("user_id", user_id);
 		perMap.put("type", type);
 		perMap.put("material_id", material_id);
 		String sex = request.getParameter("sex");
-		if(sex != null || !sex.equals("")){
+		if(sex == null || sex.length() <= 0){
 			sex = "1";
 		}
 		perMap.put("sex",sex);
@@ -663,9 +669,9 @@ public class MaterialDetailController extends BaseController{
 		queryMap.put("is_digital_editor_optional", materialMap.get("is_digital_editor_optional"));
 		//2.作家申报职位暂存
 		List<Map<String,Object>> tssbList = new ArrayList<Map<String,Object>>();
-		if(gezlList.get(0).get("is_staging").toString().equals("1")){ //表示暂存
+		if(gezlList.get(0).get("online_progress").toString().equals("0")){ //表示未提交
 			tssbList=this.mdService.queryTssbZc(queryMap);
-		}else{
+		}else{//退回，通过，提交 都在正式申请表
 			tssbList=this.mdService.queryTsxz(queryMap);
 		}
 		if(tssbList.size()>0){
@@ -768,13 +774,6 @@ public class MaterialDetailController extends BaseController{
 		for (Map<String, Object> map : bookList) {
 			bookSelects.append("<option value='"+map.get("id")+"'>"+map.get("textbook_name")+"</option>");
 		}
-		//机构信息
-	/*	List<Map<String,Object>> orgList = this.mdService.queryOrgById(material_id);
-		StringBuffer orgSelects = new StringBuffer();
-		if(orgList.size()>0){
-		for (Map<String, Object> map : orgList) {
-			orgSelects.append("<option value='"+map.get("org_id")+"'>"+map.get("org_name")+"</option>");
-		}}*/
 		//职位选择
 		for (Map<String, Object> map : tssbList) {
 			StringBuffer bookSelect = new StringBuffer();
@@ -787,18 +786,6 @@ public class MaterialDetailController extends BaseController{
 			}
 			map.put("bookSelect", bookSelect.toString());
 		}
-		//机构选择
-		/*for (Map<String, Object> map : gezlList) {
-			StringBuffer orgSelect = new StringBuffer();
-			for (Map<String, Object> map2 : orgList) {
-				if(map.get("org_id").equals(map2.get("org_id"))){
-					orgSelect.append("<option value='"+map2.get("org_id")+"' selected='selected'>"+map2.get("org_name")+"</option>");
-				}else{
-					orgSelect.append("<option value='"+map2.get("org_id")+"'>"+map2.get("org_name")+"</option>");
-				}
-			}
-			map.put("orgSelect", orgSelect.toString());
-		}*/
 		
 		//填充
 		mav.addObject("bookSelects", bookSelects.toString());

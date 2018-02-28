@@ -19,6 +19,7 @@ public interface MaterialDetailDao {
 		//图书申报职位
 		public List<Map<String,Object>> queryTsxz(Map<String,Object> map);
 		public int insertTsxz(Map<String,Object> map);
+		public int DelTsxz(Map<String,Object> map);
 		
 		//图书申报职位暂存
 		public List<Map<String,Object>> queryTssbZc(Map<String,Object> map);

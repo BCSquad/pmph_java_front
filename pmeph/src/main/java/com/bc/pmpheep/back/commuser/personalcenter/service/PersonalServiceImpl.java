@@ -254,7 +254,7 @@ public class PersonalServiceImpl implements PersonalService {
 	}
 
 	private String getFirstImgUrlFromHtmlStr(String contextpath, Content content) {
-		contextpath = "/".equals(contextpath)||"\\".equals(contextpath)?"":contextpath;
+		
 		String img_url = contextpath +"statics/image/564f34b00cf2b738819e9c35_122x122!.jpg";
 		if(content!=null){
 			List<String> imglist = articleSearchService.getImgSrc(content.getContent());
@@ -263,6 +263,7 @@ public class PersonalServiceImpl implements PersonalService {
 		    
 		    	img_url = imglist.get(0);
 		    	if (img_url.length()>0 && "/image/".equals(img_url.substring(0,7)) && ".action".equals(img_url.substring(img_url.lastIndexOf("."))) ) {
+		    		contextpath = "/".equals(contextpath)||"\\".equals(contextpath)?"":contextpath;
 		    		img_url = contextpath+img_url;
 				}
 		    }

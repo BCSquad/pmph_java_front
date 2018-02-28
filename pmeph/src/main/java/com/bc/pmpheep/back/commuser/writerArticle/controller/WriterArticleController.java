@@ -27,6 +27,7 @@ import com.bc.pmpheep.general.service.ContentService;
 import com.bc.pmpheep.general.service.FileService;
 import com.bc.pmpheep.general.service.MessageService;
 import com.bc.pmpheep.general.service.SensitiveService;
+import com.mongodb.gridfs.GridFSDBFile;
 @RequestMapping("/writerArticle")
 @Controller
 public class WriterArticleController extends BaseController{
@@ -85,6 +86,8 @@ public class WriterArticleController extends BaseController{
 		try {
 			String UEContent = contentService.get(map2.get("mid").toString()).getContent();
 			map2.put("UEContent", map2==null?"":UEContent);
+			GridFSDBFile cover = fileService.get(map2.get("cover").toString());
+			map2.put("coverName", map2==null?"":cover.getFilename());
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -100,6 +103,7 @@ public class WriterArticleController extends BaseController{
 	public Map<String,Object> writeArticle(HttpServletRequest request){
 		String titleValue = request.getParameter("titleValue");
 		String UEContent = request.getParameter("UEContent");
+		String cover = request.getParameter("image");
 		String btnType = request.getParameter("btnType");
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		String flag = "0";
@@ -134,6 +138,7 @@ public class WriterArticleController extends BaseController{
 				map.put("parent_id", 0); //上级id
 				map.put("category_id",cmsCategoryConfig.getId("医学随笔")); //内容类型 >0 非评论
 				map.put("title",titleValue); //内容标题  
+				map.put("cover",cover); //封面mdb 的id
 				map.put("author_type",2); //作者类型
 				map.put("author_id",uid); //作者id
 				map.put("is_staging",is_staging); //是否暂存
@@ -165,6 +170,7 @@ public class WriterArticleController extends BaseController{
 	public Map<String,Object> updateIsStaging(HttpServletRequest request){
 		String titleValue = request.getParameter("titleValue");
 		String UEContent = request.getParameter("UEContent");
+		String cover = request.getParameter("image");
 		UEContent = UEContent.replaceAll("\r\n", "");
 		
 		
@@ -192,6 +198,7 @@ public class WriterArticleController extends BaseController{
 			map.put("parent_id", 0); //上级id
 			map.put("category_id",cmsCategoryConfig.getId("医学随笔")); //内容类型 >0 非评论
 			map.put("title",titleValue); //内容标题  
+			map.put("cover",cover); //封面mdb 的id
 			map.put("author_type",2); //作者类型
 			map.put("author_id",uid); //作者id
 			map.put("path",0); //根路径

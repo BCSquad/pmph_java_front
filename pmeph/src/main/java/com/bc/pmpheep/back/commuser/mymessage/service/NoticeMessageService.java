@@ -44,5 +44,6 @@ public interface NoticeMessageService {
 	 * @return
 	 */
 	Map<String, Object> queryTitleMessage(Map<String, Object> paraMap);
-
+	//点击标题已读
+	void updateTitleMessage(String id);
 }

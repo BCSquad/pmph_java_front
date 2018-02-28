@@ -105,7 +105,7 @@ function loadMoreApply(){
 			               
 						 str+="</td></tr><tr> <td colspan='4'  ><hr class='line'></td></tr>";
 					
-				$("applyTable").append(str);
+				$("#applyTable").append(str);
 				
 			});
 			}	
@@ -159,6 +159,7 @@ function showup(id) {
         async: false,
         dataType: 'json',
         success: function (json) {
+        	$("#messid").val(id);
             	$("#titlec").html(json.title);
             	$("#sendc").html(json.realname);
             	$("#timec").html(formatDate(json.gmt_create));
@@ -171,7 +172,23 @@ function showup(id) {
 
 //点击纠错弹窗隐藏
 function hideup() {
-    $("#bookmistake").hide();
+	var messid=$("#messid").val();
+	$.ajax({
+        type: 'post',
+        url: contextpath + 'message/updateTitleMessage.action?messid='+messid,
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+        		if(json=="OK"){
+        			$("#bookmistake").hide();
+        			toList();
+        		}
+        }
+    });
+}
+//刷新消息页
+function toList(){
+	location.replace(location.href);
 }
 
 //时间格式化

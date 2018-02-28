@@ -128,7 +128,7 @@
                     <select   class="st_2"  id="select-search-condition" >
                     	<option  value="" >请选择</option>
                     	<c:forEach items="${listMenu}" var="item">
-								<option value="${item.textbook_name}">${item.textbook_name}</option>
+								<option value="${item.material_name}">${item.material_name}</option>
 							</c:forEach>
                     </select>
                 </div>

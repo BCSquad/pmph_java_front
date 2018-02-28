@@ -166,7 +166,28 @@
 	background-color: rgb(236, 154, 98);
 }
 
+a.toMyFriend{
+	color: #1abd44;
+	float: right;
+	cursor: pointer;
+}
 
+span.toMyFriend_img{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -461px -127px;
+    height: 20px;
+    width: 20px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    float: left;
+    margin-right: 5px;
+}
+
+span.toMyFriend{
+	float: left;
+    height: 20px;
+    line-height: 20px;
+}
 
 .white-back-ground-float-box .pagination-wrapper{
     float: right;

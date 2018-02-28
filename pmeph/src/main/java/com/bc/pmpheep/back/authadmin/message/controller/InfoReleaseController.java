@@ -66,11 +66,15 @@ public class InfoReleaseController extends BaseController{
 	 */
 	@RequestMapping(value = "/infoRelease", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> infoRelease(
-			HttpServletRequest request) {
+	public Map<String, Object> infoRelease(HttpServletRequest request) {
 
 		Integer pageNum = Integer.parseInt(request.getParameter("pageNum"));
-		Integer pageSize = Integer.parseInt(request.getParameter("pageSize"));
+		Integer pageSize=10 ;
+		String ps=request.getParameter("pageSize");
+		 if(ps!=null&& !"".equals(ps) &&!"null".equals(ps)){
+			  pageSize = Integer.parseInt(ps);
+		 }
+		 
 		String queryName = request.getParameter("queryName");
 
 		Map<String, Object> paraMap = new HashMap<String, Object>();

@@ -27,7 +27,11 @@
     <ul class="scul">
     #foreach($c in $!{List_map})
 		
-		<li class="leftlb">
+		<li class="leftlb" 
+					#if($!{c.online_progress}==2 || $!{c.online_progress}==5)
+                    	title="退回原因：$!{c.return_cause}"
+                    #end
+       >
 		
 		#if($!{c.datebase}>0 || $!{c.is_all_textbook_published}==true || $!{c.is_force_end}==true )
         	<div class="mleft3">
@@ -71,7 +75,7 @@
                     		
                 </div>
             </div>
-		#elseif($!{c.iamin}>0 && ($!{c.online_progress}==2) && $!{c.datebase}<=0 && $!{c.is_all_textbook_published}==false && $!{c.is_force_end}==false)  
+		#elseif($!{c.iamin}>0 && ($!{c.online_progress}==2||$!{c.online_progress}==5) && $!{c.datebase}<=0 && $!{c.is_all_textbook_published}==false && $!{c.is_force_end}==false)  
 			<div class="mleft1">
                 <div class="ysbrs1">
                     <div class="baomingrenshu1"><span
@@ -85,7 +89,7 @@
                     		
                 </div>
             </div>
-		#elseif($!{c.iamin}>0 && ($!{c.online_progress}==1||$!{c.online_progress}==3) && $!{c.datebase}<=0 && $!{c.is_all_textbook_published}==false && $!{c.is_force_end}==false )
+		#elseif($!{c.iamin}>0 && ($!{c.online_progress}==1||$!{c.online_progress}==3||$!{c.online_progress}==4) && $!{c.datebase}<=0 && $!{c.is_all_textbook_published}==false && $!{c.is_force_end}==false )
 			<div class="mleft1">
                 <div class="ysbrs1">
                     <div class="baomingrenshu1"><span
@@ -108,7 +112,7 @@
                     	<img src="$!{contextpath}statics/image/zancun.png">
                     #end
                     #if($!{c.online_progress}==2 || $!{c.online_progress}==5)
-                    	<img src="$!{contextpath}statics/image/tuihui.png">
+                    	<img src="$!{contextpath}statics/image/tuihui.png" title="退回原因：$!{c.return_cause}">
                     #end
                    </div>
                 </div>

@@ -35,7 +35,8 @@ $(function () {
     
     $("#fileNameDiv").hide();
     $("#uploadFile").uploadFile({
-    	accept:	"application/msword",
+    	/*accept:	"application/msword",*/
+        accept : "image/*",  //限制上传类型只能为图片
     	valid:function(file){
     		console.log(file);
     		console.log(file.name.substring(file.name.lastIndexOf("."),file.name.lastIndexOf(".")+4));
@@ -43,7 +44,7 @@ $(function () {
     		if(file.name.substring(file.name.lastIndexOf("."),file.name.lastIndexOf(".")+4)==".doc"){
     			return true;
     		}else{
-    			message.error("请选择doc格式的文件");
+    			message.error("请选择图片文件");
     			return false;
     		}
     		
