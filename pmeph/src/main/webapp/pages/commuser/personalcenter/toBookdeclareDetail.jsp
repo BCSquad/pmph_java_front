@@ -129,7 +129,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span>一、选题理由：</span></td>
+						<td><span class="btbs">*</span><span>一、选题理由：</span></td>
 						<td colspan="3">
 							<div class="content">
 								<textarea class="text_cl" id="reason" name="reason" readonly="readonly">${textraMap.reason}</textarea>
@@ -137,7 +137,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span>二、出版价值：</span></td>
+						<td><span class="btbs">*</span><span>二、出版价值：</span></td>
 						<td colspan="3">
 							<div class="content">
 								<textarea class="text_cl" id="price" name="price" readonly="readonly">${textraMap.price}</textarea>
@@ -145,7 +145,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span>三、主要内容：</span></td>
+						<td><span class="btbs">*</span><span>三、主要内容：</span></td>
 						<td colspan="3">
 							<div class="content">
 								<textarea class="text_cl" id="extra_score" name="extra_score" readonly="readonly">${textraMap.score}</textarea>

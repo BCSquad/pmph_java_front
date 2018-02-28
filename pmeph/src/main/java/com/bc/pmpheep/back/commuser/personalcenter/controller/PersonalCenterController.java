@@ -250,7 +250,7 @@ public class PersonalCenterController extends BaseController {
 			pageParameter.setParameter(paraMap);
 
 			List<Map<String,Object>> List_map = personalService.mySurvey(pageParameter);
-			count = personalService.myCommentCount(pageParameter);
+			count = personalService.mySurveyCount(pageParameter);
 			
 			
 			//分页数据代码块

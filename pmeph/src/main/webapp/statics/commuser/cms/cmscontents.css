@@ -193,7 +193,7 @@
 
 .content .content-image  img{
 	max-width: 284px;
-    height: 180px;
+    max-height: 180px;
     margin: auto;
     display: block;
 }
