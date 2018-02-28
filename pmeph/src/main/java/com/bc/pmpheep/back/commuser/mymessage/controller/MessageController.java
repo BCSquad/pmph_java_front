@@ -459,5 +459,16 @@ public class MessageController extends BaseController{
 					}
 					return map1;
 			}
+			
+			
+			
+			//点击标题已读
+					@RequestMapping(value="/updateTitleMessage")
+					@ResponseBody
+					public String updateTitleMessage(HttpServletRequest  request){
+						String id=request.getParameter("messid");
+							 noticeMessageService.updateTitleMessage(id);
+							return "OK";
+					}		
 
 }

@@ -89,7 +89,7 @@
 											<div class="oneQuestion">
 												<p>Q${code.index+1} : ${question.title}</p>
 												<div style="padding-left: 22px">
-													<input id="${question.id}" name="input_${code.index+1}" class="inputStyle" value="${question.inp }"  >
+													<input id="${question.id}" name="input_${code.index+1}" class="inputStyle" maxlength="190"  value="${question.inp }"  >
 												</div>
 												<input type="hidden" name="inputValues" value="input_${code.index+1}">
 												<input type="hidden" name="inputQuestionIds" value="${question.id}">
@@ -99,7 +99,7 @@
 											<div class="oneQuestion">
 												<p>Q${code.index+1} : ${question.title}</p>
 												<div style="padding-left: 22px">
-													<textarea id="${question.id}" name="input_${code.index+1}" class="textAreaStyle"  >${question.inp }</textarea>
+													<textarea id="${question.id}" name="input_${code.index+1}" class="textAreaStyle" maxlength="190" >${question.inp }</textarea>
 												</div>
 												<input type="hidden" name="textValues" value="input_${code.index+1}">
 												<input type="hidden" name="textQuestionIds" value="${question.id}">
