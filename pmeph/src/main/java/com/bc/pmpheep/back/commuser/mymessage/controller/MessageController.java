@@ -390,7 +390,9 @@ public class MessageController extends BaseController{
         mv.addObject("firstpath", "personalhomepage/tohomepage.action");
         mv.addObject("secondpath", "message/noticeMessageList.action");
         mv.addObject("materialId", materialId);
-        if("no".endsWith(mapTitle.get("ended").toString())){
+        if("no".endsWith(mapTitle.get("ended").toString())&&
+           "false".equals(mapTitle.get("is_all_textbook_published").toString())&&
+           "false".equals(mapTitle.get("is_force_end").toString())){
         	   mv.addObject("notEnd", 1);
         }else{
         	   mv.addObject("notEnd", 0);
