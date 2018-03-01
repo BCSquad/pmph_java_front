@@ -920,3 +920,10 @@ function checkLb(){
 	}
 }
 
+//文件下载
+function downLoadProxy(fileId){
+	window.location.href=contextpath+'file/download/'+fileId+'.action';
+}
+
+
+
