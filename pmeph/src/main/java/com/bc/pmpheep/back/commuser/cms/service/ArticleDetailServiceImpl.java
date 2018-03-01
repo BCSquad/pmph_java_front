@@ -241,10 +241,10 @@ public class ArticleDetailServiceImpl implements ArticleDetailService {
 		return articleDetailDao.queryCMSAttach(paraMap);
 	}
 
-	@Override
-	public void updateComments(Long id) {
-		// TODO Auto-generated method stub
-		articleDetailDao.updateComments(id);
-	}
+//	@Override
+//	public void updateComments(Long id) {
+//		// TODO Auto-generated method stub
+//		articleDetailDao.updateComments(id);
+//	}
 
 }
