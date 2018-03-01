@@ -160,16 +160,13 @@ public class CmsNoticeManagementController extends BaseController {
 			List<Map<String, Object>> cmsAttach = noticeMessageService.queryCMSAttach(paraMap);
 			mv.addObject("notEnd", 0);
 			if(mapTitle!=null && mapTitle.size()>0 && mapTitle.get("is_material_entry").toString()=="true"){
-				try {
-					Date newdate=new Date();
-					Date date = fmt.parse(mapTitle.get("deadline").toString());
-					if(newdate.before(date)){
-						mv.addObject("notEnd", 1);
-					}
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				if("no".endsWith(mapTitle.get("ended").toString())&&
+						"false".equals(mapTitle.get("is_all_textbook_published").toString())
+						&&"false".equals(mapTitle.get("is_force_end").toString())){
+		        	   mv.addObject("notEnd", 1);
+		        }else{
+		        	   mv.addObject("notEnd", 0);
+		        }
 				
 				
 				paraMap.put("materialId", mapTitle.get("material_id"));

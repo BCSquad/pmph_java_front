@@ -1,4 +1,7 @@
 $(function () {
+	$("#start").val(2);//火狐浏览器点击刷新按钮 不刷新el表达式 此处用js初始化
+	$("#longstart").val(2);
+	
     $('form').validate({
         onFocus: function () {
             this.removeClass("input-error");
@@ -231,12 +234,12 @@ function changepage() {
                 str += '<div class="item"><div class="item_title">'
                     + '<div style="float: left;"><img src="';
                 if (n.avatar == '' || n.avatar == 'DEFAULT' || n.avatar == null) {
-                    str += contextpath + 'statics/image/rwtx.png';
+                    str += contextpath + 'statics/image/default_image.png';
                 } else {
                     str += contextpath + 'image/' + n.avatar + '.action';
                 }
                 str += '" class="picturesize"/></div><div style="float: left;margin-left: 10px;margin-top: 5px;">' +
-                    n.realname
+                    n.nickname
                     + '</div><div style="float: left;margin-left: 10px;">';
                 if (n.score <= 3) {
                     str += '<span class="rwtx1"></span>'
@@ -311,7 +314,7 @@ function longcom() {
                 str += '<div class="item"><div class="item_title">'
                     + '<div style="float: left;"><img src="';
                 if (n.avatar == '' || n.avatar == 'DEFAULT' || n.avatar == null) {
-                    str += contextpath + 'statics/image/rwtx.png';
+                    str += contextpath + 'statics/image/default_image.png';
                 } else {
                     str += n.avatar;
                 }

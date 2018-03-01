@@ -40,8 +40,9 @@ $(function () {
     	valid:function(file){
     		console.log(file);
     		console.log(file.name.substring(file.name.lastIndexOf("."),file.name.lastIndexOf(".")+4));
-    		/*if(file.type=="application/msword"){*/
-    		if(file.name.substring(file.name.lastIndexOf("."),file.name.lastIndexOf(".")+4)==".doc"){
+    		/*if(file.type=="application/msword"){ */
+    		var f=file.name.substring(file.name.lastIndexOf("."),file.name.lastIndexOf(".")+4);
+    		if(f==".gif"||f==".jpg"||f==".jpeg"||f==".png"||f==".GIF"||f==".PNG"){
     			return true;
     		}else{
     			message.error("请选择图片文件");

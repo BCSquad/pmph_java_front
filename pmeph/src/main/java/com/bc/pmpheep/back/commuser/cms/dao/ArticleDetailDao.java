@@ -206,6 +206,6 @@ public interface ArticleDetailDao {
 	 * @param id
 	 *
 	 */
-	void updateComments(@Param("id") Long id);
+	//void updateComments(@Param("id") Long id);
 
 }

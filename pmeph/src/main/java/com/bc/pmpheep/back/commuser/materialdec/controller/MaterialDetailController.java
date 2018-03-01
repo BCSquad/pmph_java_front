@@ -23,6 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.authadmin.message.service.SendMessageServiceImpl;
 import com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailService;
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
+import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.general.controller.BaseController;
@@ -50,6 +52,10 @@ public class MaterialDetailController extends BaseController{
 	@Autowired
     @Qualifier("com.bc.pmpheep.general.service.FileService")
     FileService fileService;
+	
+	@Autowired
+    @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
+    private PersonalService personalService;
 	
 	/**
 	 * 跳转到申报新增页面
@@ -169,6 +175,7 @@ public class MaterialDetailController extends BaseController{
 		if(type.equals("1")){ //提交
 			perMap.put("is_staging", "0");
 			perMap.put("online_progress", "1");
+			
 		}else{ 
 			if(online_progress != null && online_progress.equals("2")){ //被退回
 				perMap.put("is_staging", "0");
@@ -488,6 +495,17 @@ public class MaterialDetailController extends BaseController{
 				acadeList.add(MonographMap);
 			}
 		}
+		
+		if (type.equals("1")) { //提交 生成动态
+			//TODO 提交教材申报 动态生成
+			perMap.get("realname");
+			Map<String, Object> materialMap = this.mdService.queryMaterialbyId(material_id);
+			WriterUserTrendst wut = new WriterUserTrendst(user_id, 8, null);
+			wut.setDetail("提交教材申报", perMap.get("realname").toString()+" 提交了《"+materialMap.get("material_name").toString()+"》的教材申报。", 1);
+			personalService.saveUserTrendst(wut);//机构申报审核 生成动态
+		}
+		
+		
 		if(sjump.equals("1")){//表示从新增页面跳转来的
 			msg = this.mdService.insertJcsbxx(perMap, tssbList, stuList, workList, steaList, zjxsList, jcbjList, gjkcjsList, gjghjcList, jcbxList, zjkyList, zjkzqkList, achievementMap, monographList, publishList, sciList, clinicalList, acadeList);
 		}else{
@@ -549,7 +567,7 @@ public class MaterialDetailController extends BaseController{
 				}else if(map.get("preset_position").equals(5)){
 					map.put("preset_position", "主编,编委");
 				}else if(map.get("preset_position").equals(6)){
-					map.put("preset_position", "副主编,副主编");
+					map.put("preset_position", "主编,副主编");
 				}else if(map.get("preset_position").equals(9)){
 					map.put("preset_position", "数字编委,编委");
 				}else if(map.get("preset_position").equals(10)){

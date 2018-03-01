@@ -5,10 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.authadmin.applydocaudit.dao.DataAuditDao;
 import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
+import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 
@@ -25,6 +28,9 @@ public class DataAuditServiceImpl implements DataAuditService {
 	@Autowired
 	DataAuditDao dataAuditDao;
 
+	@Autowired
+    @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
+    private PersonalService personalService;
 	
 	/**
 	 * 查询列表
@@ -73,12 +79,20 @@ public class DataAuditServiceImpl implements DataAuditService {
 	//申报审核通过
 		@Override
 		public int updateDeclarationPass(Map<String, Object> map) {
+			Map<String,Object> dmap =personalService.queryDeclarationById(map.get("declaration_id").toString());
+			WriterUserTrendst wut = new WriterUserTrendst(dmap.get("user_id").toString(), 0, null);
+			wut.declarationAuditDetail(dmap,"3");
+			personalService.saveUserTrendst(wut);//机构申报审核 生成动态
 			return this.dataAuditDao.updateDeclarationPass(map);
 		}
 	
 	//申报审核退回
 	@Override
 	public int updateDeclaration(Map<String, Object> map) {
+		Map<String,Object> dmap =personalService.queryDeclarationById(map.get("declaration_id").toString());
+		WriterUserTrendst wut = new WriterUserTrendst(dmap.get("user_id").toString(), 0, null);
+		wut.declarationAuditDetail(dmap,"2");
+		personalService.saveUserTrendst(wut);//机构申报审核 生成动态
 		return this.dataAuditDao.updateDeclaration(map);
 	}
 	//通过教材ID查出教材

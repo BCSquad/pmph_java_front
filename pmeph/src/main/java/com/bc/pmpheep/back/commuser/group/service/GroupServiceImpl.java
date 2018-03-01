@@ -382,4 +382,12 @@ public class GroupServiceImpl implements GroupService{
 		}
 		return this.groupDao.updateName(map);
 	}
+    /**
+     * 根据文件id查询文件（小组文件）
+     */
+	@Override
+	public Map<String, Object> queryGroupFileByFileId(String id) {
+		// TODO Auto-generated method stub
+		return groupDao.queryGroupFileByFileId(id);
+	}
 }

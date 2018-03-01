@@ -234,7 +234,9 @@
 		LEFT JOIN cms_extra ce ON ce.content_id=a.id
 		WHERE a.`id`=#{cmsId} -->
 		
-		SELECT  a.title,m.`deadline`,m.`mail_address`,a.mid as mongoId,m.deadline, a.is_material_entry,a.material_id,e.`note`,e.notice,e.id AS attachmentId
+		SELECT  a.title,m.`deadline`,m.`mail_address`,m.is_force_end,m.is_all_textbook_published,a.mid as mongoId,m.deadline,m.actual_deadline, a.is_material_entry,a.material_id,e.`note`,e.notice,e.id AS attachmentId
+		,
+		(case when  date_format(CONCAT(date_format(m.actual_deadline, '%Y%m%d'),'235959'),'%Y-%m-%d %H:%i:%s')>NOW() then 'no' else 'yes' end) as ended
 		<if test="userid != null and userid != '' ">
 	     ,(select case when count(d.id) &gt;0 then 'yes' else 'no' end  from declaration  d where d.material_id=a.`material_id` and d.user_id=#{userid})as isapply
 	    </if>

@@ -1,46 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.bc.pmpheep.back.commuser.homepage.dao.HomeDao">
-    <resultMap id="Mapresult" type="java.util.Map"></resultMap>
-    <!-- 查询最新三条公告-->
-    <select id="queryDocument" parameterType="map" resultMap="Mapresult">
-        SELECT
-        (TO_DAYS(NOW()) &lt;= TO_DAYS(m.actual_deadline ) and !m.is_deleted and !m.is_force_end and
-        !m.is_all_textbook_published) as notEnd,
-        <if test="id != null and id != '' ">
-            (select case when count(d.id) &gt;0 then 'yes' else 'no' end from declaration d where
-            d.material_id=cc.material_id and d.user_id=#{id})as isapply,
-        </if>
-        cc.*
-        FROM
-        cms_content cc
-        LEFT JOIN pmph_user pu ON cc.author_id =pu.id
-        LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
-        LEFT JOIN material m ON m.id = cc.material_id
-        left join material_org mo on mo.material_id=m.id
-        left join writer_user wu on wu.org_id=mo.org_id
-        WHERE
-        cc.is_deleted = 0
-        AND
-        cc.category_id=3
-        AND cc.auth_status =2
-        AND cc.is_published =1
-
-        and (
-        <if test="id != null and id != '' ">
-            (wu.id=#{id} and m.is_public = 0)or
-        </if>
-        m.is_public = 1 or
-        cc.is_material_entry = 0 )
-        group by cc.id
-        ORDER BY
-
-        cc.auth_date DESC
-        limit 0,3
-    </select>
-
-    <!-- 教材社区公告 -->
-    <select id="queryMaterial" parameterType="map" resultMap="Mapresult">
+<mapper namespace="com.bc.pmpheep.back.commuser.homepage.dao.HomeDao" >
+  <resultMap id="Mapresult" type="java.util.Map"></resultMap>
+  <!-- 查询最新三条公告-->
+  <select id="queryDocument"  parameterType="map" resultMap="Mapresult">   
+    SELECT 
+	(TO_DAYS(NOW()) &lt;= TO_DAYS(m.actual_deadline ) and  !m.is_force_end and !m.is_all_textbook_published) as notEnd,
+	<if test="id != null and id != '' ">
+	   (select case when count(d.id) &gt;0 then 'yes' else 'no' end  from declaration  d where d.material_id=cc.material_id and d.user_id=#{id})as isapply,
+	</if>
+	cc.*
+	FROM
+			cms_content cc
+			LEFT JOIN pmph_user pu ON cc.author_id =pu.id
+			LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
+			LEFT JOIN material m ON m.id = cc.material_id
+	    		left join material_org mo on mo.material_id=m.id
+			left join writer_user wu on wu.org_id=mo.org_id
+	WHERE
+			cc.is_deleted = 0
+			AND
+			cc.category_id=3
+			AND cc.auth_status =2
+			AND cc.is_published =1
+	        
+	    		and (
+	    		<if test="id != null and id != '' ">
+	    			(wu.id=#{id} and m.is_public = 0 and cc.is_material_entry=1 and m.is_deleted=0)or 
+	    		</if>
+	    		    (m.is_public = 1 and cc.is_material_entry=1 and m.is_deleted=0) or 
+	    		cc.is_material_entry = 0 )
+	group by cc.id
+	ORDER BY
+		
+			    cc.gmt_update DESC
+	limit 0,3
+  </select>
+  
+  <!-- 教材社区公告 -->
+  <select id="queryMaterial" parameterType="map" resultMap="Mapresult">
    select n.* from 
 		(select 
 		        t.*

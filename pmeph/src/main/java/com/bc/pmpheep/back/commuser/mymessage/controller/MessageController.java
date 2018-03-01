@@ -332,15 +332,15 @@ public class MessageController extends BaseController{
 		//不带分页的数据总量
 		int count = noticeMessageService.selectNoticeMessageTotalCount(paraMap);
 		//控制显示“加载更多”
-		if(list.size()>0){
-			for(int i = 0;i<=list.size();i++){
-				if(i==0){
-					list.get(0).put("count", count-(list.size()+startPara));
+        if (list.size() > 0) {
+            for (int i = 0; i <= list.size(); i++) {
+                if (i == 0) {
+                    list.get(0).put("count", count - (list.size() + startPara));
 				}
-				
+
 			}
 		}
-		
+
 		return list;
 	}
 	
@@ -370,10 +370,10 @@ public class MessageController extends BaseController{
 	//查询公告详情
 	@RequestMapping(value="/noticeMessageDetail")
 	public ModelAndView toNoticeMessageDetail(HttpServletRequest request){
-		String materialId=request.getParameter("materialId");
-		String cmsId=request.getParameter("cmsId");
+        String materialId = request.getParameter("materialId");
+        String cmsId = request.getParameter("cmsId");
 		//String flag=request.getParameter("flag");
-		String notEnd=request.getParameter("notEnd");
+        String notEnd = request.getParameter("notEnd");
 		Map<String,Object> user=getUserInfo();
 		//String is_material_entry=request.getParameter("is_material_entry");
 		ModelAndView mv = new ModelAndView();
@@ -382,36 +382,42 @@ public class MessageController extends BaseController{
 		paraMap.put("cmsId", cmsId);
 		paraMap.put("userid", (user!=null?user.get("id"):""));
 		//标题、时间、邮寄地址、备注
-		Map<String,Object> mapTitle =new HashMap<String,Object>();
+        Map<String, Object> mapTitle = new HashMap<String, Object>();
 			mapTitle = noticeMessageService.queryNoticeMessageDetail(paraMap);
-			mv.addObject("is_material_entry",mapTitle.get("is_material_entry"));
+        mv.addObject("is_material_entry", mapTitle.get("is_material_entry"));
 			mv.addObject("firsttag", "个人中心");
 			mv.addObject("secondtag", "消息通知");
 			mv.addObject("firstpath", "personalhomepage/tohomepage.action");
 			mv.addObject("secondpath", "message/noticeMessageList.action");
-			mv.addObject("materialId",materialId);
+        mv.addObject("materialId", materialId);
+        if("no".endsWith(mapTitle.get("ended").toString())&&
+           "false".equals(mapTitle.get("is_all_textbook_published").toString())&&
+           "false".equals(mapTitle.get("is_force_end").toString())){
+        	   mv.addObject("notEnd", 1);
+        }else{
+        	   mv.addObject("notEnd", 0);
+        }
+        if (mapTitle != null && mapTitle.size() > 0 && mapTitle.get("is_material_entry").toString() == "true") {
 		
-		if(mapTitle!=null && mapTitle.size()>0 && mapTitle.get("is_material_entry").toString()=="true"){
-			
 			paraMap.put("materialId", materialId);
 			//备注附件
 			List<Map<String,Object>> listAttachment = noticeMessageService.queryNoticeMessageDetailAttachment(paraMap);
-			for(Map<String,Object> map :listAttachment){
-				map.put("attachmentId", "file/download/"+map.get("attachment")+".action");
+            for (Map<String, Object> map : listAttachment) {
+                map.put("attachmentId", "file/download/" + map.get("attachment") + ".action");
 			}
 			//联系人
 			List<Map<String,Object>> listContact = noticeMessageService.queryNoticeMessageDetailContact(paraMap);
 			
 			mv.addObject("listAttachment",listAttachment);
 			mv.addObject("listContact",listContact);
-			mv.addObject("notEnd",notEnd);
+//            mv.addObject("notEnd", notEnd);
 			
 		}
 		
-		mv.addObject("map",mapTitle);
+        mv.addObject("map", mapTitle);
 		//cms附件
 		List<Map<String, Object>> cmsAttach = noticeMessageService.queryCMSAttach(paraMap);
-		mv.addObject("cmsAttach",cmsAttach);
+        mv.addObject("cmsAttach", cmsAttach);
 	/*	Message message = new Message();
 		message.setContent(" 人民卫生出版社建社50年来，累计出版图书2万余种，总印数约67000万册，每年出书1000余种，年发行量1000多万册， 年产值超过5亿元。出书品种主要包括： 医学教材、参考书和医学科普读物等，涉及现代医药学和中国传统医药学的所有领域， 体系完整，品种齐全。人卫社不断加强管理，优化选题，提高质量，多出精品，加强服务，已成为国内唯一涵盖医学各领域,各层次的出版机构,能满足不同读者的需求。使读者享受到一流的作者、一流的质量、一流的服务。人卫社的品牌已成为优质图书的代名词。人民卫生出版社出版医学教材有着优良的传统。 从建社伊始的20世纪50年代， 翻译前苏联的医学教材以满足国内教学需要， 到组织国内一流作者自编教材至今已有50年的历史。一代代的医学生都是伴随着人卫社出版的教材成长起来的。");
 		message.setId("5a15c32dc5482247f0b8dca2");
