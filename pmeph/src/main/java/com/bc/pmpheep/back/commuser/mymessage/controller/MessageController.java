@@ -442,6 +442,7 @@ public class MessageController extends BaseController{
 				Map<String,Object> paraMap = new HashMap<String,Object>();
 					paraMap.put("id", uid);
 					Map<String,Object> map1 = noticeMessageService.queryTitleMessage(paraMap);
+					
 					if(map1.get("msg_type").toString().equals("1")||map1.get("msg_type").toString().equals("0")){
 						//mongoDB查询通知内容
 						Message message = mssageService.get(map1.get("msg_id").toString());
@@ -452,8 +453,16 @@ public class MessageController extends BaseController{
 					        Matcher m_html=p_html.matcher(str); 
 					        str=m_html.replaceAll(""); //过滤html标签 
 							map1.put("tContent",str);
+							//附件
+							paraMap.put("msg_id", map1.get("msg_id").toString());
+							List<Map<String, Object>> attaList = noticeMessageService.queryTitleMessageAttach(paraMap);
+							for (Map<String, Object> map : attaList) {
+								map.put("attachment", "file/download/"+map.get("attachment")+".action");
+							}
+							map1.put("attaList",attaList);
 						}else{
 							map1.put("tContent","内容空!");
+							//map1.put("attachmentId","附件空!");
 						}
 						return map1;
 					}

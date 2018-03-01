@@ -120,6 +120,15 @@ public class NoticeMessageServiceImpl implements NoticeMessageService {
 		// TODO Auto-generated method stub
 		return noticeMessageDao.queryTitleMessage(paraMap);
 	}
+	
+	/**查询统消息标题弹框回显的附件
+	 * @param paraMap
+	 * @return
+	 */
+	@Override
+	public List<Map<String, Object>> queryTitleMessageAttach(Map<String, Object> paraMap) {
+		return noticeMessageDao.queryTitleMessageAttach(paraMap);
+	}
 	//点击标题已读
 	@Override
 	public void updateTitleMessage(String id) {

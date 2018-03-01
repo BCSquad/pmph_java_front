@@ -6,7 +6,7 @@
 	<!--分页查询条件查询列表 -->
 	<select id="findDataAudit" parameterType="java.util.Map" resultType="java.util.Map">
 		<![CDATA[SELECT
-		d.id as did,d.realname as drealname,d.position as dposition, d.title as dtitle,group_concat(concat(t.textbook_name,'-',(case  
+		d.id as did,d.realname as drealname,d.position as dposition, d.title as dtitle,group_concat(DISTINCT concat(t.textbook_name,'-',(case  
 		when p.preset_position = 4 then '主编' 																															
 		when p.preset_position = 2 then '副主编' 
 		when p.preset_position = 1 then  '编委'
@@ -21,7 +21,7 @@
 		when p.preset_position = 13 then '数字编委,主编,编委'
 		when p.preset_position = 14 then '数字编委,主编,副主编'
 		when p.preset_position = 15 then '数字编委,主编,编委,副主编'
-		else ''  end )) SEPARATOR '\n') as bpp,
+		else '无'  end )) SEPARATOR '\n') as bpp,
 		(case  when d.online_progress=0  then '未提交'  
 		when d.online_progress=1  then '已提交但是待审核' 
 		when d.online_progress=2  then '被申报单位退回' 
@@ -31,7 +31,7 @@
 		(case  when d.offline_progress=0  then '未收到'  
 		when d.offline_progress=1  then '' 
 		when d.offline_progress=2  then '已收到' 	END)	as 	offlineprogress,
-		group_concat(concat(t.textbook_name,'-',(case  
+		group_concat(DISTINCT concat(t.textbook_name,'-',(case  
 		when t.is_published=0  then '审核中' 
 		when pp.chosen_position=0 OR  pp.chosen_position IS NULL  then '遴选结束' 
 		when pp.chosen_position = 4 then '主编' 																															
@@ -41,7 +41,7 @@
 		when pp.chosen_position = 12 then '主编,数字编委'
 		when pp.chosen_position = 9 then '数字编委,编委'
 		when pp.chosen_position = 10 then '数字编委,副主编'
-		else ''  end )) SEPARATOR '\n') as cp
+		else '遴选结束'  end )) SEPARATOR '\n') as cp
 		FROM
 		declaration AS d
 		LEFT JOIN dec_position AS p ON d.id = p.declaration_id
@@ -104,7 +104,7 @@
 	<select id="findDataAuditExcel" parameterType="java.util.Map"
 		resultType="java.util.Map">
 		<![CDATA[SELECT
-		d.id as did,d.realname as drealname,d.position as dposition, d.title as dtitle,group_concat(concat(t.textbook_name,'-',(case  
+		d.id as did,d.realname as drealname,d.position as dposition, d.title as dtitle,group_concat(DISTINCT concat(t.textbook_name,'-',(case  
 		when p.preset_position = 4 then '主编' 																															
 		when p.preset_position = 2 then '副主编' 
 		when p.preset_position = 1 then  '编委'
@@ -119,7 +119,7 @@
 		when p.preset_position = 13 then '数字编委,主编,编委'
 		when p.preset_position = 14 then '数字编委,主编,副主编'
 		when p.preset_position = 15 then '数字编委,主编,编委,副主编'
-		else ''  end )) SEPARATOR '\n') as bpp,
+		else '无'  end )) SEPARATOR '\n') as bpp,
 		(case  when d.online_progress=0  then '未提交'  
 		when d.online_progress=1  then '已提交但是待审核' 
 		when d.online_progress=2  then '被申报单位退回' 
@@ -129,7 +129,7 @@
 		(case  when d.offline_progress=0  then '未收到'  
 		when d.offline_progress=1  then '' 
 		when d.offline_progress=2  then '已收到' 	END)	as 	offlineprogress,
-		group_concat(concat(t.textbook_name,'-',(case  
+		group_concat(DISTINCT concat(t.textbook_name,'-',(case  
 		when t.is_published=0  then '审核中' 
 		when pp.chosen_position=0 OR pp.chosen_position IS NULL   then '遴选结束' 
 		when pp.chosen_position = 4 then '主编' 																															
@@ -139,7 +139,7 @@
 		when pp.chosen_position = 12 then '主编,数字编委'
 		when pp.chosen_position = 9 then '数字编委,编委'
 		when pp.chosen_position = 10 then '数字编委,副主编'
-		else ''  end )) SEPARATOR '\n') as cp
+		else '遴选结束'  end )) SEPARATOR '\n') as cp
 		FROM
 		declaration AS d
 		LEFT JOIN dec_position AS p ON d.id = p.declaration_id

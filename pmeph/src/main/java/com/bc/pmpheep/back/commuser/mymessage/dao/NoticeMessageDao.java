@@ -76,6 +76,12 @@ public interface NoticeMessageDao {
 	 */
 	Map<String, Object> queryTitleMessage(Map<String, Object> paraMap);
 	
+	/**查询统消息标题弹框回显的附件
+	 * @param paraMap
+	 * @return
+	 */
+	List<Map<String, Object>>queryTitleMessageAttach(Map<String, Object> paraMap);
+	
 	//更新通知点击量
 	void updateTitleMessage(String id);
   }

@@ -164,6 +164,12 @@ function showup(id) {
             	$("#sendc").html(json.realname);
             	$("#timec").html(formatDate(json.gmt_create));
             	$("#tcontent").html(json.tContent);
+            	var ste = '';
+                $.each(json.attaList, function (i, x) {
+                    ste += '<a  href="'+contextpath+'' +x.attachment+ '">' +x.attachment_name +'</a><br/>';
+                });
+            	
+            	$("#tattachment").html(ste);
                 $("#bookmistake").show();
           
         }

@@ -106,6 +106,9 @@
                     	<label style="margin-left: 20px" class="labell">内容:</label>
                     <textarea class="misarea" id="tcontent" disabled="disabled"></textarea>
                 </div>
+                <div class="info">
+                    <label style="margin-left: 20px" class="labell">附件:<span id="tattachment"  class="listContent"></span></label>
+                </div>
             </form>
         </div>
         
