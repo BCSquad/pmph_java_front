@@ -499,10 +499,11 @@ public class MaterialDetailController extends BaseController{
 		if (type.equals("1")) { //提交 生成动态
 			//TODO 提交教材申报 动态生成
 			perMap.get("realname");
+			Map<String, Object> userMap = this.getUserInfo();
 			Map<String, Object> materialMap = this.mdService.queryMaterialbyId(material_id);
 			WriterUserTrendst wut = new WriterUserTrendst(user_id, 8, null);
-			wut.setDetail("提交教材申报", perMap.get("realname").toString()+" 提交了《"+materialMap.get("material_name").toString()+"》的教材申报。", 1);
-			personalService.saveUserTrendst(wut);//机构申报审核 生成动态
+			wut.setDetail("提交教材申报", userMap.get("realname").toString()+" 提交了《"+materialMap.get("material_name").toString()+"》的教材申报。", 1);
+			personalService.saveUserTrendst(wut);//提交教材申报 生成动态
 		}
 		
 		
