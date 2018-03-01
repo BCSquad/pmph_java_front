@@ -55,9 +55,15 @@ public class PersonalServiceImpl implements PersonalService {
 	}
 
 	@Override
-	public List<PersonalNewMessage> queryMyGroup(Map<String, Object> permap) {
+	public List<Map<String,Object>> queryMyGroup(Map<String, Object> permap) {
 		// TODO 自动生成的方法存根 查询我的小组信息
-		List<PersonalNewMessage> list3 = personaldao.ListMyGroup(permap);
+		List<Map<String,Object>> list3 = personaldao.ListMyGroup(permap);
+		for (Map<String,Object> map: list3) {
+			String img=map.get("group_image").toString();
+			if(img.equals("/static/default_image.png")){
+				map.put("group_image","statics/image/default_image.png");
+			}
+		}
 		return list3;
 	}
 
