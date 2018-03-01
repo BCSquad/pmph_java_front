@@ -226,7 +226,7 @@
                         </div>
                         <div class="left_two">
                             <div class="textbook_left">重点学科推荐</div>
-                            <div class="all_left"><%--全部>>--%></div>
+                            <div class="all_left">全部>></div>
                             <div class="p1_left"></div>
                             <div class="p2_left"></div>
                         </div>
