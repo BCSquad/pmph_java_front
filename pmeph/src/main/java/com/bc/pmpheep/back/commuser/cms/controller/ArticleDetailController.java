@@ -219,8 +219,7 @@ public class ArticleDetailController extends BaseController {
 		map.put("title", title); // 标题
 
 		flagMap = articleDetailService.insertWriteArticle(map, content);
-		articleDetailService.updateComments(Long.valueOf(wid));
-
+		//articleDetailService.updateComments(Long.valueOf(wid));
 		return flagMap;
 	}
 

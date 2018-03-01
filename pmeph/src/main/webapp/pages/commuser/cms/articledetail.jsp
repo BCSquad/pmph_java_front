@@ -35,7 +35,7 @@
 		<div class="content-wrapper">
 			<div class="area1">
 		    	<div class="_title">
-					<span>文章&gt; 文章详情</span>
+					<span><a href="${ctx}/articlepage/toarticlepage.action" style="text-decoration: none;color:#999999">文章</a>&gt; ${map.title }</span>
 				</div>
 				<div class="wz_title">
 					<span>${map.title }</span>
@@ -187,7 +187,7 @@
     	<div class="area2">
     		<div style="position:relative;width: 275px;height: 410px;">
     			<div class="right_2">
-	    			<c:if test="${Art.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg" height="60"
+	    			<c:if test="${Art.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/default_image.png" height="60"
                                                               width="60"></c:if>
                 	<c:if test="${Art.avatar!='DEFAULT'}"><img src="${ctx}/image/${Art.avatar}.action"  height="60"
                                                               width="60"></c:if>

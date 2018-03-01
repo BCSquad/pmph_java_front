@@ -44,7 +44,7 @@
 .focus-content img{
     height:135px;
     width:200px;
-    margin-top: 3px
+    margin-top: 3px;
 }
 .focus-content .content-text{
     float:left;
@@ -59,7 +59,6 @@
     font-size:20px;
     line-height: 30px;
     font-weight: 400 ;
-    /*height: 50px;*/
     overflow: hidden;
     text-overflow:ellipsis;
 }
@@ -87,7 +86,7 @@
     background-color: #ebebeb;
     margin-top: 20px
 }
-/*閬撮�鍏憡*/
+
 .notice {
     float: left;
     width: 360px;
@@ -152,10 +151,9 @@
     line-height:25px;
     color:#999999
 }
-/*鍖诲闅忕瑪*/
+
 .notes {
     float:left;
-    /*height: 830px;*/
     width: 1200px;
 }
 
@@ -219,7 +217,15 @@
 }
 .notes .item .content-image{
     height: 182px;
-    width:284px
+    width:284px;
+    cursor: pointer;
+}
+
+.notes .item .content-image img{
+    max-height: 182px;
+    max-width:284px;
+    margin: auto;
+    display: block;
 }
 .notes .item .content-title{
     font-size: 18px;
@@ -227,7 +233,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow:ellipsis;
-    font-family: 微软雅黑;
+    font-family: MicrosoftYaHei;
 }
 .notes .item .content-text{
     padding-left: 10px;
@@ -257,7 +263,7 @@
     height: 30px;
     color:#666666;
 }
-/*鎺ㄨ崘浣滆�*/
+
 .writer {
     float: left;
     margin-top: 20px;
@@ -308,8 +314,8 @@
 .writer .item .msg .text{
     overflow: hidden;
     color: #999999;
-    text-overflow:ellipsis; /*瓒呭嚭閮ㄥ垎鐪佺暐鍙锋樉绀*/
-    white-space:nowrap;/*寮哄埗涓嶆崲琛*/
+    text-overflow:ellipsis; 
+    white-space:nowrap;
 }
 
 .writer .item .add{

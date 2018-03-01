@@ -83,7 +83,8 @@ public class ChooseEditorController extends BaseController {
 	}
 
 	/**
-	 * 通过输入 查询当前职务申报暂存表 中已选为编委的申报 所对应的正式申报表的id数组字符串
+	 * 通过输入 查询当前职务申报暂存表 中已选为编委的申报 所对应的正式申报表的id数组字符串 
+	 * 注：用于回填被选中的申报，必须不带额外的查询条件（姓名 机构） 查出该用户该书籍的所有申报 
 	 * @param textBookId
 	 * @param logUserId
 	 * @return
@@ -91,8 +92,11 @@ public class ChooseEditorController extends BaseController {
 	private Map<String,Object> getTempSelectedIds(String textBookId, BigInteger logUserId) {
 		//查询条件封装入pageParameter的parameter
 		Map<String, Object> paraMap = new HashMap<String, Object>();
+		Boolean isFirstEditorLogIn = chooseEditorService.isFirstEditorLogIn(logUserId,textBookId);
 		paraMap.put("textBookId", textBookId);
 		paraMap.put("logUserId", logUserId);
+		paraMap.put("isFirstEditorLogIn", isFirstEditorLogIn);
+		
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<Map<String,Object>>(0,10);
 		pageParameter.setParameter(paraMap);
 		Map<String, Object> resultMap = new HashMap<String, Object>();

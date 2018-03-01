@@ -170,7 +170,7 @@ public class MaterialDetailController extends BaseController{
 			perMap.put("is_staging", "0");
 			perMap.put("online_progress", "1");
 		}else{ 
-			if(online_progress.equals("2")){ //被退回
+			if(online_progress != null && online_progress.equals("2")){ //被退回
 				perMap.put("is_staging", "0");
 				perMap.put("online_progress", "2");
 			}else{//未提交
@@ -521,15 +521,17 @@ public class MaterialDetailController extends BaseController{
 			queryMap.put("declaration_id", declaration_id);
 		}
 		if(material_id == null){
-			queryMap.put("material_id", gezlList.get(0).get("material_id"));
-		}else{
-			queryMap.put("material_id", material_id);
+			material_id= gezlList.get(0).get("material_id").toString();
 		}
+		queryMap.put("material_id", material_id);
+		//教材信息
+		Map<String,Object> materialMap = new HashMap<String,Object>();
+		materialMap = this.mdService.queryMaterialbyId(material_id);
 		//2.作家申报职位暂存
 		List<Map<String,Object>> tssbList = new ArrayList<Map<String,Object>>();
-		if(gezlList.get(0).get("is_staging").toString().equals("1")){ //表示暂存
+		if(gezlList.get(0).get("online_progress").toString().equals("0")){ //表示未提交
 			tssbList=this.mdService.queryTssbZc(queryMap);
-		}else{
+		}else{//退回，通过，提交 都在正式申请表
 			tssbList=this.mdService.queryTsxz(queryMap);
 		}
 		if(tssbList.size()>0){
@@ -547,7 +549,7 @@ public class MaterialDetailController extends BaseController{
 				}else if(map.get("preset_position").equals(5)){
 					map.put("preset_position", "主编,编委");
 				}else if(map.get("preset_position").equals(6)){
-					map.put("preset_position", "副主编,副主编");
+					map.put("preset_position", "主编,副主编");
 				}else if(map.get("preset_position").equals(9)){
 					map.put("preset_position", "数字编委,编委");
 				}else if(map.get("preset_position").equals(10)){
@@ -616,6 +618,7 @@ public class MaterialDetailController extends BaseController{
 		List<Map<String,Object>> acadeList = new ArrayList<Map<String,Object>>();
 		acadeList = this.mdService.queryAcadereward(queryMap);
 		//填充
+		mav.addObject("material", materialMap);
 		mav.addObject("gezlList", gezlList.get(0));
 		mav.addObject("tssbList", tssbList);
 		mav.addObject("stuList", stuList);
@@ -634,7 +637,6 @@ public class MaterialDetailController extends BaseController{
 		mav.addObject("sciList", sciList);
 		mav.addObject("clinicalList", clinicalList);
 		mav.addObject("acadeList", acadeList);
-		mav.addObject("materialMap", queryMap);
 		return mav;
 	}
 	

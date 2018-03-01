@@ -9,7 +9,7 @@
 	    #elseif($!{c.sex} == 2)
 	   		 <td class="">女</td>
 	    #else
-	    	<td class="">未填写</td>
+	    	<td class="">保密</td>
 	    #end
 	    <td class="">$!{c.work_org_name}</td>
 	    <td class="">$!{c.dec_org_name}</td>

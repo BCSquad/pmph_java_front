@@ -565,23 +565,49 @@
 
 	<!-- 我的问卷 -->
 	<select id="mySurvey" parameterType="PageParameter" resultType="java.util.Map">
-		select s.*, DATE_FORMAT(s.begin_date,'%Y年%m月%d日') as gtime from survey s
+		select distinct s.id,s.title, DATE_FORMAT(s.begin_date,'%Y年%m月%d日') as gtime from survey s
+		left JOIN survey_target st ON st.survey_id=s.id  
+		LEFT JOIN writer_user wu on wu.org_id=st.org_id
+        left join survey_question_answer sqa on sqa.survey_id=s.id
+ 		where s.`status`=1 and s.is_deleted=0 and wu.id=#{parameter.logUserId}
+ 		AND (#{parameter.dateStr} &gt;= s.`begin_date`
+		AND 
+      (
+          #{parameter.dateStr}&lt;=DATE_ADD(s.`end_date`,INTERVAL 1 DAY)  or 
+            ( sqa.user_id=#{parameter.logUserId} and  #{parameter.dateStr} &gt; DATE_ADD(s.`end_date`,INTERVAL 1 DAY)) 
+      ))
+      ORDER BY  s.begin_date DESC
+      limit ${start},${pageSize}
+		
+		<!-- select s.*, DATE_FORMAT(s.begin_date,'%Y年%m月%d日') as gtime from survey s
 		left JOIN survey_target st ON st.survey_id=s.id  
 		LEFT JOIN writer_user wu on wu.org_id=st.org_id
  		where s.`status`=1 and s.is_deleted=0 and wu.id=#{parameter.logUserId}
  		AND #{parameter.dateStr} &gt;= s.`begin_date`
-		AND #{parameter.dateStr} &lt;= s.`end_date`+1
+		AND (#{parameter.dateStr} &lt;= s.`end_date`+1 or ())
 		 ORDER BY  s.begin_date DESC
-  		limit ${start},${pageSize}
+  		limit ${start},${pageSize} -->
 	</select>
 
 	<!-- 我的问卷总数 -->
 	<select id="mySurveyCount" parameterType="PageParameter"
-		resultType="Integer">
-		select count(*) from 
+		resultType="int">
+		select count(distinct s.id) from survey s
+		left JOIN survey_target st ON st.survey_id=s.id  
+		LEFT JOIN writer_user wu on wu.org_id=st.org_id
+        left join survey_question_answer sqa on sqa.survey_id=s.id
+ 		where s.`status`=1 and s.is_deleted=0 and wu.id=#{parameter.logUserId}
+ 		AND #{parameter.dateStr} &gt;= s.`begin_date`
+		AND 
+      (
+          #{parameter.dateStr}&lt;=DATE_ADD(s.`end_date`,INTERVAL 1 DAY)  or 
+            ( sqa.user_id=#{parameter.logUserId} and  #{parameter.dateStr} &gt; DATE_ADD(s.`end_date`,INTERVAL 1 DAY)) 
+      )
+		
+		<!-- select count(*) from 
 		survey s  LEFT JOIN 
 		survey_question_answer  a  on s.id=a.survey_id  
- 		where a.user_id=#{parameter.logUserId}
+ 		where a.user_id=#{parameter.logUserId} -->
 	</select>
 
 	<!-- 查询单个调查对应的问题 -->
@@ -880,6 +906,20 @@
 		order by t.status desc
 	</select>
 
+	<!-- 教材申报用 查询申报表 -->
+	<select id="queryDeclarationById" parameterType="String" resultType="Map">
+		SELECT
+		d.id AS did,
+		d.user_id,
+		m.material_name,
+		DATE_FORMAT(d.gmt_create,'%Y年%m月%d日') AS create_time,
+		d.online_progress as online_progress
+		FROM
+		declaration d
+		inner join material m on d.material_id = m.id
+		WHERE
+		d.id = #{declaration_id}
+	</select>
 
 </mapper>
 

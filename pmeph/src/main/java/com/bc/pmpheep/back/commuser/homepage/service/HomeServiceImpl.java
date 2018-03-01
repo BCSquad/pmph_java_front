@@ -3,11 +3,13 @@ package com.bc.pmpheep.back.commuser.homepage.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.commuser.homepage.dao.HomeDao;
+import com.bc.pmpheep.back.util.RouteUtil;
 
 
 @Service("com.bc.pmpheep.back.homepage.service.HomeServiceImpl")
@@ -46,6 +48,7 @@ public class HomeServiceImpl implements HomeService {
         for (Map<String, Object> map : list) {
             String time = map.get("auth_date").toString().substring(0, 10);
             map.put("auth_date", time);
+            map.put("cover", RouteUtil.articleAvatar(MapUtils.getString(map, "cover")));
         }
         return list;
     }

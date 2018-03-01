@@ -21,12 +21,12 @@
 <div class="body">
 	<div class="content-wrapper">
 		<div class="sbxq_title">
-			<span>个人中心 > 教材申报 > 填写申报表</span>
+			<span>个人中心 > 教材申报 > ${material.material_name}</span>
 		</div>
 		<!-- 图书选择-->
 		<div class="sbxq_item1">
 			<div>
-				<input type="hidden" id="material_id" name="material_id" value="${materialMap.material_id}"/>
+				<input type="hidden" id="material_id" name="material_id" value="${material.id}"/>
 				<span id="tsxz_span1"></span>
 				<span class="tsxz_title">图书选择</span>
 			</div>
@@ -173,13 +173,13 @@
 		</div>
 		<!--扩展信息-->
 		<c:forEach var="zjkzxx" items="${zjkzqkList}">
-		 	<div class="sbxq_item">
+		 	<div class="sbxq_item1">
 				<div>
 					<span id="tsxz_span9"></span>
 					<span class="tsxz_title">${zjkzxx.extension_name}</span>
 				</div>
 				<div class="content">
-					<div style="margin: 5px;">${zjkzxx.content}</div>
+					<textarea class="text_cl" name="kz_content" readonly="readonly">${zjkzxx.content}</textarea> 
 				</div>
 			</div>
 		</c:forEach>

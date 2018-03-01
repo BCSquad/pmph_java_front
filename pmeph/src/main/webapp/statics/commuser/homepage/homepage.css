@@ -352,8 +352,8 @@ ul li {
 
 .left_one{
 	width: 314px;
-	height: 223px;
-	margin-top: 25px;
+	height: 200px;
+	margin-top: 20px;
 	float: left;
     background: url("../../testfile/rectangle.png") no-repeat;
 /*    border: 1px solid #F2F2F2;
@@ -382,11 +382,11 @@ ul li {
 
 .left_two{
 	width: 314px;
-	height: 250px;
-	margin-top: 5px;
+	height: 262px;
+	margin-top: 0px;
 	float: left;
-	background: url("../../testfile/rectangle.png") no-repeat;
-	/*border: 1px solid #F2F2F2;
+    background: url("../../testfile/rectangle1.png") no-repeat;
+    /*border: 1px solid #F2F2F2;
     border-radius:6px;
     box-shadow: 1px 1px 3px #888888;*/
 }
@@ -933,6 +933,12 @@ ul li {
     width: 283px;
     height: 180px;
 }
+.pc1 img{
+    max-width: 283px;
+    max-height: 180px;
+    margin: auto;
+    display: block;
+}	
 
 .small {
     width: 40px;
@@ -955,6 +961,7 @@ ul li {
     text-overflow: ellipsis; /*超出部分省略号显示*/
     white-space: nowrap; /*强制不换行*/
     height: 40px;
+    text-align: center;
 }
 
 .a6_content {
