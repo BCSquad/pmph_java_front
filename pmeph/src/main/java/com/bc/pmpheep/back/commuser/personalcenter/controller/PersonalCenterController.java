@@ -527,7 +527,7 @@ public class PersonalCenterController extends BaseController {
 			Map<String, Object> permap) {
 		List<PersonalNewMessage> listmycol = personalService.queryMyCol(permap);//我的收藏
         List<PersonalNewMessage> listmyfriend = personalService.queryMyFriend(permap);//我的好友
-        List<PersonalNewMessage> listmygroup = personalService.queryMyGroup(permap);//我的小组
+        List<Map<String, Object>> listmygroup = personalService.queryMyGroup(permap);//我的小组
         modelAndView.addObject("listmycol", listmycol);
         modelAndView.addObject("listmyfriend", listmyfriend);
         modelAndView.addObject("listmygroup", listmygroup);
