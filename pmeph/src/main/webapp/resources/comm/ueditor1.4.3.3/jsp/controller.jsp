@@ -20,8 +20,8 @@
     //rootPath ="D:\\Program Files\\apache-tomcat-7.0.78\\webapps\\pmeph1\\";
     String result = new ActionEnter(request, rootPath).exec();
 
-    String contextpath = "/".equals(request.getContextPath())||"\\".equals(request.getContextPath())?"":request.getContextPath();
-    
+    String contextpath = "/".equals(request.getContextPath()) || "\\".equals(request.getContextPath()) ? "" : request.getContextPath();
+
     Map<String, Object> resultMap = JSON.parseObject(result, Map.class);
     String action = request.getParameter("action");
     System.out.println(action + ":" + result);
@@ -34,18 +34,18 @@
                 String url = MapUtils.getString(item, "url", "");
                 String id = fileService.saveLocalFile(Thread.currentThread().getContextClassLoader().getResourceAsStream("../../" + url), FileType.CMS_ATTACHMENT, 0);
 
-                item.put("url", request.getContextPath()+"/image/" + id + ".action");
+                item.put("url", "http://" + request.getHeader("Host") + request.getContextPath() + "/image/" + id + ".action");
             }
         } else if (action.equals("uploadimage") || action.equals("uploadscrawl")) {//uploadscrawl 涂鸦图片 uploadimage 上传图片
             String url = MapUtils.getString(resultMap, "url", "");
             String id = fileService.saveLocalFile(Thread.currentThread().getContextClassLoader().getResourceAsStream("../../" + url), FileType.CMS_ATTACHMENT, 0);
-            
-            resultMap.put("url", request.getContextPath()+"/image/" + id + ".action");
+
+            resultMap.put("url", "http://" + request.getHeader("Host") + request.getContextPath() + "/image/" + id + ".action");
         } else if (action.equals("uploadfile")) {
             String url = MapUtils.getString(resultMap, "url", "");
             String id = fileService.saveLocalFile(Thread.currentThread().getContextClassLoader().getResourceAsStream("../../" + url),
                     FileType.CMS_ATTACHMENT, MapUtils.getString(resultMap, "original", ""), 0);
-            resultMap.put("url", "/file/download/" + id + ".action");
+            resultMap.put("url", "http://" + request.getHeader("Host") + request.getContextPath() + "/file/download/" + id + ".action");
         } else {
 
             if (action != null &&
