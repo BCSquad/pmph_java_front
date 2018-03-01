@@ -252,7 +252,11 @@
                         <div class="item1"
                              onclick="window.location.href='${ctx}/articledetail/toPage.action?wid=${list.id}'">
                             <div class="big">
-                                <div class="small"><span class="recommend">推荐</span></div>
+                                <c:choose>
+                                    <c:when test="${list.is_promote!=false}">
+                                        <div class="small"><span class="recommend">推荐</span></div>
+                                    </c:when>
+                                </c:choose>
                                 <div class="pc1"><img  src="${ctx}/${list.cover}" /></div>
                                 <div class="tt"><span class="a6_content">${list.title}</span></div>
                                 <div class="a6_div2">${list.summary}</div>
@@ -277,7 +281,11 @@
                         <div class="item"
                              onclick="window.location.href='${ctx}/articledetail/toPage.action?wid=${list.id}'">
                             <div class="big">
-                                <div class="small"><span class="recommend">推荐</span></div>
+                                <c:choose>
+                                    <c:when test="${list.is_promote!=false}">
+                                        <div class="small"><span class="recommend">推荐</span></div>
+                                    </c:when>
+                                </c:choose>
                                 <div class="pc1"><img  src="${ctx}/${list.cover}"></div>
                                 <div class="tt"><span class="a6_content">${list.title}</span></div>
                                 <div class="a6_div2">${list.summary}</div>
