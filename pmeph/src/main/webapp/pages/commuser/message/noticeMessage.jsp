@@ -70,7 +70,7 @@
     </script>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
-	
+
         <div class="messageList">
             <span id="selected"><b>通知</b></span>
             <span><a href="${ctx}/message/applyMessageList.action" class="unselected">申请</a></span>
@@ -159,7 +159,7 @@
 					</c:forEach>
             	</c:when>
             	<c:otherwise>
-            		<div class="no-more" >
+            		<div class="no-more">
 	                    <img src="<c:url value="/statics/image/aaa4.png"></c:url>">
 	                    <span>木有内容呀~~</span>
                		</div>

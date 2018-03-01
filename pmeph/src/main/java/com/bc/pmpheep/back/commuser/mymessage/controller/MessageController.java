@@ -70,7 +70,7 @@ public class MessageController extends BaseController{
 		int count = noticeMessageService.selectSysMessageTotalCount(paraMap);
 		//处理消息发送者头像
 		for(Map<String,Object> map1:list){
-			
+		
             map1.put("avatar", RouteUtil.userAvatar(MapUtils.getString(map1, "avatar")));
             /*if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
 				map1.put("avatar", "statics/pictures/head.png");
@@ -208,7 +208,7 @@ public class MessageController extends BaseController{
 				}else{
 					map1.put("tcontent","内容空!");
 				}
-				
+		
 			}*/
 			
 			if(map1.get("msgType").toString().equals("4")){
@@ -293,7 +293,7 @@ public class MessageController extends BaseController{
 				}else{
 					map1.put("title","内容空!");
 				}
-				
+		
 			}*/
 			
 			if(map1.get("msgType").toString().equals("4")){
@@ -341,54 +341,54 @@ public class MessageController extends BaseController{
             }
         }
 
-        return list;
-    }
-
-    //更新申请信息状态(逻辑删除)
-    @RequestMapping(value = "/deleteNoticeMessage")
-    @ResponseBody
-    public String deleteNoticeMessage(HttpServletRequest request) {
-        String id = request.getParameter("nid");
-        Map<String, Object> map = getUserInfo();
-        Long userId = new Long(String.valueOf(map.get("id")));
-        //Long userId = (long) 1609;
-        Map<String, Object> paraMap = new HashMap<String, Object>();
-        if (null != id && !id.equals("")) {
-            long noticeId = Long.valueOf(id).longValue();
-            paraMap.put("noticeId", noticeId);
-            noticeMessageService.deleteNoticeMessage(paraMap);
-        }
-
-        paraMap.put("userId", userId);
-        //List<Map<String,Object>> list = OrgMessageService.selectNoticeMessage(paraMap);
-        //mv.addObject("list",list);
-        //mv.setViewName("authadmin/message/noticeMessage");
-        String code = "OK";
-        return code;
-    }
-
-    //查询公告详情
-    @RequestMapping(value = "/noticeMessageDetail")
-    public ModelAndView toNoticeMessageDetail(HttpServletRequest request) {
+		return list;
+	}
+	
+	//更新申请信息状态(逻辑删除)
+	@RequestMapping(value="/deleteNoticeMessage")
+	@ResponseBody
+	public String deleteNoticeMessage(HttpServletRequest  request){
+		String id=request.getParameter("nid");
+		Map<String, Object> map = getUserInfo();
+		Long userId = new Long(String.valueOf(map.get("id")));
+		//Long userId = (long) 1609;
+		Map<String,Object> paraMap = new HashMap<String,Object>();
+		if(null!=id&&!id.equals("")){
+			long noticeId = Long.valueOf(id).longValue();
+			paraMap.put("noticeId", noticeId);
+			noticeMessageService.deleteNoticeMessage(paraMap);
+		}
+		
+		paraMap.put("userId", userId);
+		//List<Map<String,Object>> list = OrgMessageService.selectNoticeMessage(paraMap);
+		//mv.addObject("list",list);
+		//mv.setViewName("authadmin/message/noticeMessage");
+		String code = "OK";
+		return code;
+	}
+	
+	//查询公告详情
+	@RequestMapping(value="/noticeMessageDetail")
+	public ModelAndView toNoticeMessageDetail(HttpServletRequest request){
         String materialId = request.getParameter("materialId");
         String cmsId = request.getParameter("cmsId");
         //String flag=request.getParameter("flag");
         String notEnd = request.getParameter("notEnd");
         Map<String,Object> user=getUserInfo();
         //String is_material_entry=request.getParameter("is_material_entry");
-        ModelAndView mv = new ModelAndView();
-        Map<String, Object> paraMap = new HashMap<String, Object>();
+		ModelAndView mv = new ModelAndView();
+		Map<String,Object> paraMap = new HashMap<String,Object>();
         paraMap.put("materialId", materialId);
         paraMap.put("cmsId", cmsId);
         paraMap.put("userid", (user!=null?user.get("id"):""));
-        //标题、时间、邮寄地址、备注
+		//标题、时间、邮寄地址、备注
         Map<String, Object> mapTitle = new HashMap<String, Object>();
-        mapTitle = noticeMessageService.queryNoticeMessageDetail(paraMap);
+			mapTitle = noticeMessageService.queryNoticeMessageDetail(paraMap);
         mv.addObject("is_material_entry", mapTitle.get("is_material_entry"));
-        mv.addObject("firsttag", "个人中心");
-        mv.addObject("secondtag", "消息通知");
-        mv.addObject("firstpath", "personalhomepage/tohomepage.action");
-        mv.addObject("secondpath", "message/noticeMessageList.action");
+			mv.addObject("firsttag", "个人中心");
+			mv.addObject("secondtag", "消息通知");
+			mv.addObject("firstpath", "personalhomepage/tohomepage.action");
+			mv.addObject("secondpath", "message/noticeMessageList.action");
         mv.addObject("materialId", materialId);
         if("no".endsWith(mapTitle.get("ended").toString())&&
            "false".equals(mapTitle.get("is_all_textbook_published").toString())&&
@@ -398,22 +398,22 @@ public class MessageController extends BaseController{
         	   mv.addObject("notEnd", 0);
         }
         if (mapTitle != null && mapTitle.size() > 0 && mapTitle.get("is_material_entry").toString() == "true") {
-
+		
             paraMap.put("materialId", materialId);
-            //备注附件
-            List<Map<String, Object>> listAttachment = noticeMessageService.queryNoticeMessageDetailAttachment(paraMap);
+			//备注附件
+			List<Map<String,Object>> listAttachment = noticeMessageService.queryNoticeMessageDetailAttachment(paraMap);
             for (Map<String, Object> map : listAttachment) {
                 map.put("attachmentId", "file/download/" + map.get("attachment") + ".action");
             }
-            //联系人
-            List<Map<String, Object>> listContact = noticeMessageService.queryNoticeMessageDetailContact(paraMap);
-
-            mv.addObject("listAttachment", listAttachment);
-            mv.addObject("listContact", listContact);
+			//联系人
+			List<Map<String,Object>> listContact = noticeMessageService.queryNoticeMessageDetailContact(paraMap);
+			
+			mv.addObject("listAttachment",listAttachment);
+			mv.addObject("listContact",listContact);
 //            mv.addObject("notEnd", notEnd);
-
-        }
-
+			
+		}
+		
         mv.addObject("map", mapTitle);
         //cms附件
         List<Map<String, Object>> cmsAttach = noticeMessageService.queryCMSAttach(paraMap);
@@ -460,7 +460,7 @@ public class MessageController extends BaseController{
 							map1.put("tContent",str);
 						}else{
 							map1.put("tContent","内容空!");
-						}
+}
 						return map1;
 					}
 					return map1;
