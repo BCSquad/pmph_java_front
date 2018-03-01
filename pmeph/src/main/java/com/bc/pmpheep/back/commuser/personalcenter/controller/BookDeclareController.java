@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
 import com.bc.pmpheep.back.commuser.personalcenter.service.BookDeclareService;
+import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.util.ArrayUtil;
 import com.bc.pmpheep.back.util.StringUtil;
 import com.bc.pmpheep.general.controller.BaseController;
@@ -36,6 +38,10 @@ public class BookDeclareController extends BaseController {
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.BookDeclareService")
 	private BookDeclareService bdecService;
+	
+	@Autowired
+    @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
+    private PersonalService personalService;
 
 	/**
 	 * 跳转到申报页面
@@ -142,6 +148,15 @@ public class BookDeclareController extends BaseController {
 				twriteList.add(writeMap);
 			}
 		}
+		
+		//TODO 选题申报 提交 时生成动态
+		if ("1".equals(stype)) {
+			Map<String, Object> userMap = this.getUserInfo();
+			WriterUserTrendst wut = new WriterUserTrendst(request.getParameter("user_id"), 9, null);
+			wut.setDetail("提交选题申报", userMap.get("realname").toString()+" 提交了选题申报《"+request.getParameter("bookname").toString()+"》。", 1);
+			personalService.saveUserTrendst(wut);//选题申报 生成动态
+		}
+		
 		return this.bdecService.insertBookDeclare(BankMap, twriteList, topicMap, extraMap);
 	}
 
@@ -255,6 +270,15 @@ public class BookDeclareController extends BaseController {
 		bankMap.put("bank_account_id", request.getParameter("bank_account_id"));
 		bankMap.put("account_number", request.getParameter("account_number"));
 		bankMap.put("bank", request.getParameter("bank"));
+		
+		//TODO 选题申报 提交 时生成动态
+		if ("1".equals(stype)) {
+			Map<String, Object> userMap = this.getUserInfo();
+			WriterUserTrendst wut = new WriterUserTrendst(request.getParameter("user_id"), 9, null);
+			wut.setDetail("提交选题申报", userMap.get("realname").toString()+" 提交了选题申报《"+request.getParameter("bookname").toString()+"》。", 1);
+			personalService.saveUserTrendst(wut);//选题申报 生成动态
+		}
+
 		return this.bdecService.updateBookDeclare(bankMap, twriteList, topicMap, extraMap);
 	}
 
