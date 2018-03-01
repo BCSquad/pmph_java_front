@@ -310,10 +310,10 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
             logger.warn("未找到id为'{}'的文件", id);
             return;
          }
-    	
+         Map<String,Object> filemap=groupService.queryGroupFileByFileId(id);
     	 String userAgent = request.getHeader("User-Agent");  
          String oraFileName = file.getFilename();  
-         String formFileName=oraFileName;  
+         String formFileName=filemap.get("file_name").toString();  
              
          
          if (userAgent.contains("MSIE") || userAgent.contains("Trident")) {  
