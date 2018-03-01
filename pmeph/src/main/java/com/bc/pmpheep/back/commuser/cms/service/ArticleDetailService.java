@@ -150,5 +150,5 @@ public interface ArticleDetailService {
 	 * @param id
 	 *
 	 */
-	void updateComments(@Param("id") Long id);
+	//void updateComments(@Param("id") Long id);
 }
