@@ -549,7 +549,7 @@ public class MaterialDetailController extends BaseController{
 				}else if(map.get("preset_position").equals(5)){
 					map.put("preset_position", "主编,编委");
 				}else if(map.get("preset_position").equals(6)){
-					map.put("preset_position", "副主编,副主编");
+					map.put("preset_position", "主编,副主编");
 				}else if(map.get("preset_position").equals(9)){
 					map.put("preset_position", "数字编委,编委");
 				}else if(map.get("preset_position").equals(10)){

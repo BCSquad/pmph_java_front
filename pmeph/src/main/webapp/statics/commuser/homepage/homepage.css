@@ -933,6 +933,12 @@ ul li {
     width: 283px;
     height: 180px;
 }
+.pc1 img{
+    max-width: 283px;
+    max-height: 180px;
+    margin: auto;
+    display: block;
+}	
 
 .small {
     width: 40px;
@@ -955,6 +961,7 @@ ul li {
     text-overflow: ellipsis; /*超出部分省略号显示*/
     white-space: nowrap; /*强制不换行*/
     height: 40px;
+    text-align: center;
 }
 
 .a6_content {

@@ -206,6 +206,13 @@ public interface PersonalService {
 	 */
 	void deleteUserTrendst(WriterUserTrendst writerUserTrendst);
 
+	/**
+	 * 根据id查询教材申报
+	 * @param declaration_id
+	 * @return
+	 */
+	public Map<String, Object> queryDeclarationById(String declaration_id);
+
 
 	
 	

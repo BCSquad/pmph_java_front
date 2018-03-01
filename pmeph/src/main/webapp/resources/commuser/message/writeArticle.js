@@ -68,7 +68,7 @@ function btntype(btn_this) {
                         var words = json.value;
                         var title = document.getElementById("TitleValue");
                         var TitleValue = $("#TitleValue").val();
-                        var content = $("#UEContent").val();
+                        var content = $("#UEContent").val().replace('<span style="background : yellow">','').replace('</span>','');
                         for (var i = 0; i < words.length; i++) {
                             var reg = new RegExp(words[i], 'g');
                             if (TitleValue.indexOf(words[i]) > -1) {
@@ -125,7 +125,7 @@ function btntype(btn_this) {
                         var words = json.value;
                         var title = document.getElementById("TitleValue");
                         var TitleValue = $("#TitleValue").val();
-                        var content = json.UEContent;
+                        var content = $("#UEContent").val().replace('<span style="background : yellow">','').replace('</span>','');
                         for (var i = 0; i < words.length; i++) {
                             var reg = new RegExp(words[i], 'g');
                             if (TitleValue.indexOf(words[i]) > -1) {
