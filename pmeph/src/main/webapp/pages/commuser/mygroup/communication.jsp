@@ -12,11 +12,12 @@
 <head>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>我的小组</title>
-    <script src="<%=path %>/resources/comm/jquery/jquery.js"></script>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/communication.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/chat.css" type="text/css">
+    <link rel="stylesheet" href="<%=path %>/statics/css/jquery.selectlist.css"/>
     <script src="<%=path %>/resources/comm/jquery/jquery.js"></script>
+    <script src="<%=path %>/resources/comm/jquery/jquery.selectlist.js"></script>
     <script type="text/javascript">
 		var contxtpath  = '${pageContext.request.contextPath}';
 		var contextpath = '${pageContext.request.contextPath}/';
@@ -87,6 +88,21 @@
                 </div>
                 <div class="hidden" id="filesgx">
                 	排序:
+                	<div style="display: inline-block;vertical-align: top;text-align:center;margin-top:20px">
+               <select id="edu" name="edu">
+                   	    <option value="gmt_create:asc" >上传时间升序</option>
+                		<option value="gmt_create:desc" selected="selected">上传时间降序</option>
+                		<option value="file_size:asc" >文件大小升序</option>
+                		<option value="file_size:desc">文件大小降序</option>
+                		
+                		<option value="file_name:asc" >文件名称升序</option>
+                		<option value="file_name:desc">文件名称降序</option>
+               </select>
+           </div>
+                	
+                	
+                	
+                	<!-- 
                 	<select id="order">
                 		
                 		<option value="gmt_create:asc"  >上传时间升序</option>
@@ -96,7 +112,7 @@
                 		
                 		<option value="file_name:asc" >文件名称升序</option>
                 		<option value="file_name:desc">文件名称降序</option>
-                	</select>
+                	</select> -->
                     <div class='search-wrapper'>
                     	<input type="text" placeholder="请输入文件名" id= "fileName" class="file_input"/>
                     	<img class="search" src="${ctx}/statics/image/sx1.png"/>
@@ -183,3 +199,5 @@
 </div>
 </body>
 </html>
+<script type="text/javascript">
+</script>

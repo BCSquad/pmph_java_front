@@ -234,7 +234,7 @@
 		LEFT JOIN cms_extra ce ON ce.content_id=a.id
 		WHERE a.`id`=#{cmsId} -->
 		
-		SELECT  a.title,m.`deadline`,m.`mail_address`,a.mid as mongoId,m.deadline,m.actual_deadline, a.is_material_entry,a.material_id,e.`note`,e.notice,e.id AS attachmentId
+		SELECT  a.title,m.`deadline`,m.`mail_address`,m.is_force_end,m.is_all_textbook_published,a.mid as mongoId,m.deadline,m.actual_deadline, a.is_material_entry,a.material_id,e.`note`,e.notice,e.id AS attachmentId
 		,
 		(case when  date_format(CONCAT(date_format(m.actual_deadline, '%Y%m%d'),'235959'),'%Y-%m-%d %H:%i:%s')>NOW() then 'no' else 'yes' end) as ended
 		<if test="userid != null and userid != '' ">
@@ -282,14 +282,20 @@
 	    select * from  cms_extra ce left join  cms_content c on c.id=ce.content_id  where c.id=#{cmsId}
 	</select>
 	
+	
+			
 	    <!-- 系统消息标题弹框回显-->
 	<select id="queryTitleMessage" parameterType="java.util.Map" resultType="java.util.Map">
 			select u.id ,u.msg_id ,u.title,u.msg_type, IFNULL(o.realname,o.username)as realname,u.gmt_create
 			from user_message u
 			LEFT JOIN pmph_user o
 			ON o.id= u.sender_id  where u.id=#{id}
-			
 	</select>
+		<!--查询统消息标题弹框回显的附件  -->
+	<select id="queryTitleMessageAttach" parameterType="java.util.Map" resultType="java.util.Map">
+	    select * from  message_attachment ma  where ma.msg_id=#{msg_id}
+	</select>
+	
 	
 		<!-- 点击标题后状态变为已读 -->
 	<update id="updateTitleMessage" parameterType="String" >

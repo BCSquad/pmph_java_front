@@ -231,4 +231,10 @@ public interface GroupService {
 	 * @return
 	 */
 	Integer updateName( Map<String, Object> map );
+    /**
+     * 根据文件id查询文件（小组文件）
+     * @param id
+     * @return
+     */
+	Map<String, Object> queryGroupFileByFileId(String id);
 }

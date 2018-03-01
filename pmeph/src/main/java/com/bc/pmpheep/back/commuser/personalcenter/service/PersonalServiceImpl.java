@@ -17,6 +17,7 @@ import com.bc.pmpheep.back.commuser.personalcenter.bean.PersonalNewMessage;
 import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
 import com.bc.pmpheep.back.commuser.personalcenter.dao.PersonalDao;
 import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.util.RouteUtil;
 import com.bc.pmpheep.general.pojo.Content;
 import com.bc.pmpheep.general.service.ContentService;
 import com.bc.pmpheep.general.service.FileService;
@@ -218,7 +219,8 @@ public class PersonalServiceImpl implements PersonalService {
 				content = ifContentIsNullFun(map, content,"cms");
 				Map<String, Object> cms = ((Map<String, Object>) map.get("cms"));
 				String content_text = removeHtml(content.getContent());
-				String img_url = getFirstImgUrlFromHtmlStr(contextpath, content);
+				String cover = ((Map<?, ?>) map.get("cms")).get("cover").toString();
+				String img_url = getFirstImgUrlFromHtmlStr(contextpath, cover);
 				cms.put("first_img_url", img_url);
 				cms.put("Content", content);
 				cms.put("content_text", content_text);
@@ -229,7 +231,8 @@ public class PersonalServiceImpl implements PersonalService {
 				Map<String, Object> p_cms = ((Map<String, Object>) map.get("p_cms"));
 				content = ifContentIsNullFun(map, content,"p_cms");
 				String content_text = removeHtml(content.getContent());
-				String img_url = getFirstImgUrlFromHtmlStr(contextpath, content);
+				String cover = ((Map<?, ?>) map.get("p_cms")).get("cover").toString();
+				String img_url = getFirstImgUrlFromHtmlStr(contextpath, cover);
 				p_cms.put("first_img_url", img_url);
 				p_cms.put("Content", content);
 				p_cms.put("content_text", content_text);
@@ -259,9 +262,12 @@ public class PersonalServiceImpl implements PersonalService {
 		return content;
 	}
 
-	private String getFirstImgUrlFromHtmlStr(String contextpath, Content content) {
+	private String getFirstImgUrlFromHtmlStr(String contextpath, String cover) {
+		//contextpath = "/".equals(contextpath)||"\\".equals(contextpath)?"":contextpath;
+		cover = RouteUtil.articleAvatar(cover);
+		"/".equals(cover.substring(0,1));
 		
-		String img_url = contextpath +"statics/image/564f34b00cf2b738819e9c35_122x122!.jpg";
+		/*String img_url = contextpath +"statics/image/564f34b00cf2b738819e9c35_122x122!.jpg";
 		if(content!=null){
 			List<String> imglist = articleSearchService.getImgSrc(content.getContent());
 
@@ -273,8 +279,8 @@ public class PersonalServiceImpl implements PersonalService {
 		    		img_url = contextpath+img_url;
 				}
 		    }
-		}
-		return img_url;
+		}*/
+		return contextpath + cover;
 	}
 
 	@Override

@@ -334,14 +334,14 @@ ul{
     clear: both;
 }
 
-ul li{
+.groupcomposition ul li{
     list-style-type: none;
     float: left;
     font-size: 12px;
     margin: 0 auto 10px auto;
     text-align: center;
 }
-ul li img{
+.groupcomposition ul li img{
     width: 44px;
     height: 44px;
 }

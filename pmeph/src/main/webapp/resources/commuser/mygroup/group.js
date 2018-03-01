@@ -68,7 +68,22 @@ $(function(){
 	    }
 	}
     }
-
+     
+    $('#edu').selectlist({
+        zIndex: 10,
+        width: 130,
+        height: 37,
+        triangleSize:3,
+        optionHeight: 30,
+        onChange: function () {
+        	var pagesize=$("input[name='edu']").val();
+        	filePagenumber = 1  ;
+    		$("#fileContent").html('');
+    		initFile();
+        }  //自定义模拟选择列表项chang
+       });
+    
+    
 	//按钮发送消息
 	$("#sendMsg").click(function(){
 		sendSocktMsg();
@@ -263,16 +278,16 @@ $(function(){
 		return ;
 	});
 	
-	$("#order").on('change',function(){
+	/*$("#order").on('change',function(){
 		filePagenumber = 1  ;
 		$("#fileContent").html('');
 		initFile();
-	});
+	});*/
 	
 	//初始化文件
 	function initFile(){
 		$("#fileMore").show();
-		var order =$("#order").val().split(':');
+		var order =$("input[name='edu']").val().split(':');
 		$.ajax({
 			type:'get',
 	        url :contxtpath+'/group/getFiles.action',
@@ -291,7 +306,7 @@ $(function(){
 	        		for(var i= 0 ; i< responsebean.length ;i++){
 	        			var html = "<div class='items' id='item_"+responsebean[i].id+"'> "+
 				                        "<div class='item1' style='clear:both;'> "+
-				                            "<span><img src='"+contxtpath+"/statics/image/word-(1).png' alt='文件类型' class='item_img1'/><text>"+responsebean[i].fileName+"</text></span> "+
+				                            "<span><img src='"+contxtpath+"/statics/image/word-(1).png' alt='文件类型' class='item_img1'/><text>"+responsebean[i].fileName+"</text></span> <span style='color:#70bcc3;margin-left:20px'>"+responsebean[i].fileSize+"KB</span>"+
 				                            "<span><img src='"+contxtpath+"/statics/image/xztp.png' id='img_"+responsebean[i].id+"' class='item_img2'/><text id='dw_"+responsebean[i].id+"' style='color: #70bcc3;'>"+responsebean[i].download+"</text></span> "+
 				                        "</div> "+
 				                        "<div class='item2' style='clear:both;'> "+

@@ -324,7 +324,7 @@ request.setAttribute("currentTime",datetime);
                 				</c:when>
                 				<%-- 5动态 发表书评 end --%>
                 				
-                				<%-- 6动态 收藏图书 图书点赞--%>
+                				<%-- 6 7动态 收藏图书 图书点赞--%>
                 				<c:when test="${c.type == 6 || c.type == 7}">	
                 					<div class="issue_line"><span class="issue_name">${c.type == 6?'收藏':'点赞' }了图书</span><span class="issue_time">${c.trendst_date }</span></div>
                							<div class="content_line">
@@ -349,7 +349,19 @@ request.setAttribute("currentTime",datetime);
                								</div>
                							</div>
                 				</c:when>
-                				<%-- 6动态 收藏图书 图书点赞end --%>
+                				<%-- 6 7动态 收藏图书 图书点赞end --%>
+                				
+                				<%-- 8 9动态 教材申报 选题申报 --%>
+                				<c:when test="${c.type == 8 || c.type == 9}">	
+                					<div class="issue_line"><span class="issue_name">${c.detail.title }</span><span class="issue_time">${c.trendst_date }</span></div>
+           							<div class="msg_line">
+           								<div class="msg_content">
+           									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
+           									${c.detail.content }					
+           								</div>
+           							</div> 
+                				</c:when>
+                				<%-- 8 9动态 教材申报 选题申报 end --%>
                 				
                 				<%-- 10动态 图书纠错 生成--%>
                 				<c:when test="${c.type == 10}">	
