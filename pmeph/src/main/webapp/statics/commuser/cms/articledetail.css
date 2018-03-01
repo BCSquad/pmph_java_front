@@ -523,7 +523,7 @@
     margin-left: 20px;
 }
 
-.block .item .content{
+.block .item .xihuan{
     width: 280px;
     border: 1px #EAEAEA solid;
     height: 210px;
@@ -532,11 +532,17 @@
 .block .item .content-image{
 	cursor: pointer;
     height: 150px;
-    width: 276px;
-    margin: auto;
+    width: 280px;
 }
 
-.block .item .content-title{
+.block .item .content-image  img{
+	max-width: 280px;
+    max-height: 170px;
+    margin: auto;
+    display: block;
+}
+
+.block .item  .xihuan .content-title{
     font-size: 18px;
     text-align: center;
     overflow: hidden;

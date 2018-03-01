@@ -206,13 +206,13 @@
 		</div>
 		<!--扩展信息-->
 		<c:forEach var="zjkzxx" items="${zjkzqkList}">
-		 	<div class="sbxq_item">
+		 	<div class="sbxq_item1">
 				<div>
 					<span id="tsxz_span9"></span>
 					<span class="tsxz_title">${zjkzxx.extension_name}</span>
 				</div>
 				<div class="content">
-					<div style="margin: 5px;">${zjkzxx.content}</div>
+					<textarea class="text_cl" name="kz_content" readonly="readonly">${zjkzxx.content}</textarea> 
 				</div>
 			</div>
 		</c:forEach>
