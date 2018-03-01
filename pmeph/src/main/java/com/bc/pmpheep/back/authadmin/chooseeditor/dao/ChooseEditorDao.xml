@@ -176,7 +176,9 @@
 		SELECT
 		t.*
 		,m.is_digital_editor_optional <!-- 是否可选数字编委 -->
+		,m.is_force_end
 		,u.realname
+		
 		FROM
 		textbook t
 		inner join material m

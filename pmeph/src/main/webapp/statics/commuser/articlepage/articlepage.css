@@ -218,6 +218,7 @@
 .notes .item .content-image{
     height: 182px;
     width:284px;
+    cursor: pointer;
 }
 
 .notes .item .content-image img{
