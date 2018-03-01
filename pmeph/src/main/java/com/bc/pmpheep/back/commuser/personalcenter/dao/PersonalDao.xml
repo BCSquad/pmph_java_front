@@ -688,6 +688,7 @@
 			<result property="auth_status" column="c_auth_status"/>
 			<result property="is_staging" column="c_is_staging"/>
 			<result property="is_deleted" column="c_is_deleted"/>
+			<result property="cover" column="c_cover"/>
 		</association>
 		<association property="p_cms" javaType="Map">
 			<id property="id" column="p_id"/>
@@ -698,6 +699,7 @@
 			<result property="auth_status" column="p_auth_status"/>
 			<result property="is_staging" column="p_is_staging"/>
 			<result property="is_deleted" column="p_is_deleted"/>
+			<result property="cover" column="p_cover"/>
 		</association>
 		<association property="book" javaType="Map">
 			<id property="id" column="b_id"/>
@@ -743,6 +745,7 @@
 			,c.is_staging as c_is_staging
 			,c.auth_status as c_auth_status <!-- 0=待审核/1=审核未通过/2=通过 -->
 			,c.is_deleted as c_is_deleted
+			,c.cover as c_cover
 			,pc.id as p_id
 			,pc.category_id as p_category_id
 			,pc.title as p_title
@@ -751,6 +754,7 @@
 			,pc.is_staging as p_is_staging
 			,pc.auth_status as p_auth_status <!-- 0=待审核/1=审核未通过/2=通过 -->
 			,pc.is_deleted as p_is_deleted
+			,pc.cover as p_cover
 			,b.id as b_id
 			,b.bookname as b_bookname
 			,b.author as b_author
