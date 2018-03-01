@@ -1,5 +1,6 @@
 //加载更多通知公告
 function loadMore(){
+	
 	var pathName=window.document.location.pathname;  
 	var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
 		var para = $("#startPara").val();
@@ -12,35 +13,40 @@ function loadMore(){
 		
 		 $.ajax({
 			type:'post',
-			url:"loadMore.action?startPara="+startPara+"&condition="+$("input[name='select']") .val(),
-			async:false,
+			url:"loadMore.action?",
+			data:{"startPara":startPara,"condition":$("input[name='select']") .val()},
 			dataType:'json',
 			success:function(json){
 				var list = json;
-				if(list.size<8){
-					$("#loadMoreDiv").hide();
-				}
+				$.each(list,function(i,m){
+					if(i==0){
+						var count = m.count;
+						if(count<=0){
+							$("#loadMoreDiv").hide();
+						}
+					}
+				});
 				$("#startPara").val(startPara);
 				var str='';
 				$.each(list,function(i,n){
-					var unixTimestamp = new Date(n.gmt_create) ;
+					var unixTimestamp = new Date(n.time) ;
 					commonTime = unixTimestamp.toLocaleString();
 					
 					str+= "<tr style='width: 70%'>"+
-		               "<th rowspan='2' class='headPortrait'><img  class ='pictureNotice' src='"+projectName+"/statics/pictures/head.png'></th>"+
+		               "<th rowspan='2' class='headPortrait'><img  class ='pictureNotice' src='"+projectName+"/"+n.avatar+"'></th>"+
 		               "<td class='type1'><span>" ;
 					
-		               if(n.msg_type==1){
+		               if(n.msgType==4){
 		            	   str+= "公告";
 		               }
-		               if(n.msg_type==0){
+		               if(n.msgType==0||n.msgType==1){
 		            	   str+= "系统消息";
 		               }
 		              str+= "</span><span class='time1'>"+commonTime+"</span></td></tr><tr style='width: 30%'>"+
 		               "<td colspan='2' class='title'>"+n.title+"</td><td class='buttonDetail'>";
-		              if(n.msg_type==1){
-		            	 str+="<div class='buttonAccept'><a href='"+projectName+"/message/noticeMessageDetail.action?id="+n.msg_id+"'>查看详情</a></div>"; 
-		              }else if(n.msg_type==0){
+		              if(n.msgType==4){
+		            	 str+="<div class='buttonAccept'><a href='"+projectName+"/message/noticeMessageDetail.action?msgId="+n.fId+"&&cmsId="+n.id+"&&notEnd="+n.notEnd+"&&is_material_entry="+n.is_material_entry+"'>查看详情</a></div>";
+		              }else if(n.msgType==0||n.msgType==1){
 		            	  str+= "<span class='deleteButton' onclick='deleteNotice("+n.id+")'><span style='font-size:18px;'>×</span> 删除</span>";
 		              }
 		              
@@ -52,13 +58,12 @@ function loadMore(){
 			}
 		}); 
 	}
+
 //加载更多申请
 function loadMoreApply(){
 	var pathName=window.document.location.pathname;  
 	var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
 	
-	
-	alert($("input[name='condition']") .val());
 		var para = $("#applyPara").val();
 		var startPara;
 		if(""==para){
@@ -73,13 +78,21 @@ function loadMoreApply(){
 			dataType:'json',
 			success:function(json){
 				var list = json;
+				$.each(list,function(i,m){
+					if(i==0){
+						var count = m.count;
+						if(count<=0){
+							$("#loadMoreDiv").hide();
+						}
+					}
+				});
 				$("#applyPara").val(startPara);
 				var str='';
 				$.each(list,function(i,n){
 					var unixTimestamp = new Date(n.gmt_create) ;
 					commonTime = unixTimestamp.toLocaleString();
 					
-					str+="<tr><th rowspan='2' class='headPortrait'><img src='"+projectName+"/statics/pictures/head.png' class='picture' ></th></tr>"+
+					str+="<tr><th rowspan='2' class='headPortrait'><img src='"+projectName+"/"+n.avatar+"' class='picture' ></th></tr>"+
 			        "<tr><td ><span class='apply'>"+n.realname+"申请加我为好友</span><span class='time'>"+commonTime+"</span></td>"+
 			            "<td class='buttonSpan'>";
 						if(n.status==0){
@@ -92,7 +105,7 @@ function loadMoreApply(){
 			               
 						 str+="</td></tr><tr> <td colspan='4'  ><hr class='line'></td></tr>";
 					
-				$("applyTable").append(str);
+				$("#applyTable").append(str);
 				
 			});
 			}	
@@ -135,3 +148,63 @@ function deleteNotice(id){
 	 
 	//window.location.href="${ctx}/message/deleteNoticeMessage.action?id="+id;
 }*/
+
+
+//系统消息title标题弹窗
+
+function showup(id) {
+	$.ajax({
+        type: 'post',
+        url: contextpath + 'message/queryTitleMessage.action?uid='+id,
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+        	$("#messid").val(id);
+            	$("#titlec").html(json.title);
+            	$("#sendc").html(json.realname);
+            	$("#timec").html(formatDate(json.gmt_create));
+            	$("#tcontent").html(json.tContent);
+                $("#bookmistake").show();
+          
+        }
+    });
+}
+
+//点击纠错弹窗隐藏
+function hideup() {
+	var messid=$("#messid").val();
+	$.ajax({
+        type: 'post',
+        url: contextpath + 'message/updateTitleMessage.action?messid='+messid,
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+        		if(json=="OK"){
+        			$("#bookmistake").hide();
+        			toList();
+        		}
+        }
+    });
+}
+//刷新消息页
+function toList(){
+	location.replace(location.href);
+}
+
+//时间格式化
+function formatDate(value) {
+	if (value) {
+		Number.prototype.padLeft = function(base, chr) {
+			var len = (String(base || 10).length - String(this).length) + 1;// 获取value值的长度，如果长度大于0，就创建一个同等长度的数组
+			return len > 0 ? new Array(len).join(chr || '0') + this : this;
+		}
+		var d = new Date(value), // 创建一个当前日期对象d
+		dformat = [ d.getFullYear(),// 把年格式化填充
+		(d.getMonth() + 1).padLeft(),// 把月格式化填充
+		d.getDate().padLeft() ].join('-') + // 把日格式化填充
+		' ' + [ d.getHours().padLeft(),// 把小时格式化填充
+		d.getMinutes().padLeft(),// 把分钟格式化填充
+		d.getSeconds().padLeft() ].join(':');// 把秒格式化填充
+		return dformat;// 最后返回格式化好的日期和时间
+	}
+}

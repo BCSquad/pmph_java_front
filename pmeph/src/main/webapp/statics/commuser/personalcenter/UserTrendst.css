@@ -4,7 +4,8 @@
 	width: 870px;
     border-bottom: 1px solid #f1f1f1;
     clear: both;
-    padding: 20px 0px 20px 0px;
+    padding: 20px 15px 20px 15px;
+    border-radius: 10px;
     float: left;
     clear: both;
     display: table;
@@ -193,6 +194,10 @@
 	margin-top: 1px;
 }
 
+.sub_title p{
+	display: inline;
+}
+
 .tag_new.article_new{
 	margin-top: 1.5px;
 	padding-left: 3px;
@@ -298,4 +303,10 @@
 	cursor: pointer;
 	text-decoration: blink;
 	color: inherit;
+}
+
+.trendstWrapper:hover{
+	background-color: #fdfdff;
+	border-left: 1px solid #f1f1f1;
+	border-right: 1px solid #f1f1f1;
 }

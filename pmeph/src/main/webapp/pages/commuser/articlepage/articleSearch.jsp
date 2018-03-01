@@ -23,12 +23,14 @@
     <jsp:param value="homepage" name="pageTitle"/>
 </jsp:include>
 <div class="body" style="background-color: #f6f6f6;padding-bottom:60px">
+
 <input type="hidden" id="allpage" value="${allpage}">
-<input type="hidden" id="n" value="${n}">
+<input type="hidden" id="n" value="${pageNum}">
+
       <div class="nav" style="background-color: white">
          	<div style="width:1200px;height: 85px;margin: 0 auto;">
             <div class="searchDiv">
-                <div class="searchInputLeft" onclick="queryall()">
+                <div class="searchInputLeft" onclick="queryall(1)">
                     <img src="../statics/image/sousuo-helpCenter.png">
                 </div>
                 <div class="searchInputRight">
@@ -55,11 +57,19 @@
                         <div class="articleUpDiv">
                             <div class="upLeft">
                                 <div class="bookName">
-                                    <div class="book-name-span">${list.title}</div>
+                                	<a href="${ctx}/articledetail/toPage.action?wid=${list.id }" target="_blank" >
+                                    	<div class="book-name-span" >${list.title}</div>
+                                    </a>
                                 </div>
                                 <div class="nameDiv">
-                                    <img class="headPicture" src="../statics/pictures/avatar.png"/>
-                                    <span class="name">${list.realname}</span><span class="time">${list.gmt_create }</span>
+                                	<c:if test="${list.avatar=='DEFAULT'}">
+                                	<img class="headPicture" src="${ctx}/statics/image/default_image.png">
+                                    </c:if>
+                					<c:if test="${list.avatar!='DEFAULT'}">
+                					<img class="headPicture" src="${ctx}/image/${list.avatar}.action" >
+                                    </c:if>
+                                    <!-- <img class="headPicture" src="../statics/pictures/avatar.png"/> -->
+                                    <span class="name book-name-span">${list.realname}</span><span class="time">${list.gmt_create }</span>
                                 </div>
                             </div>
                             <div class="upRight">
@@ -69,18 +79,24 @@
                                     <div class="number2" id="likenum${list.id}">${list.likes}</div>
                                     <input type="hidden" id="likes${list.id}" value="${list.cms_user_like==null?'handPicture':'nohandPicture'}">
                                     <input type="hidden" id="mainid${list.id}" value="${list.id}">
-                                    <div class="${list.cms_user_like==null?'handPicture':'nohandPicture'}" onclick="changelikes('${list.id}')" id="praise${list.id}"></div>
+                                    <div class="${list.cms_user_like !=null ?'handPicture':'nohandPicture'}" onclick="changelikes('${list.id}')" id="praise${list.id}"></div>
                                     <div class="number">${list.clicks}</div>
                                     <div class="eyePicture"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="downDiv">
-                        <span class="contentPage">${list.summary }</span>
+                        <span class="contentPage book-name-span">${list.summary }</span>
                         </div>
                     </div>
                  </div>
               </c:forEach>
+              <c:if test="${listCount == 0 }">
+	           		<div class="no-more">
+	                    <img src="<c:url value="/statics/image/aaa4.png"></c:url>">
+	                    <span>木有内容呀~~</span>
+	                </div>
+	           	</c:if>
               <div class="pageDiv">
 	                  <ul class="pagination" id="page1"></ul>
 	                  <div style="display: inline-block;    vertical-align: top;text-align: left">

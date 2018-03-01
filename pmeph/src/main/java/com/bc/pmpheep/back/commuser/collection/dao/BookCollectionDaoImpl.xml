@@ -24,7 +24,8 @@
 		   LEFT JOIN book b on m.book_id=b.id   
 		   LEFT JOIN  book_detail d on b.id=d.book_id
 	   where 
-	   	   m.favorite_id=#{parameter.favoriteId} and m.writer_id=#{parameter.writerId} 
+	   	   m.favorite_id=#{parameter.favoriteId} and m.writer_id=#{parameter.writerId}
+	   order by m.gmt_create desc 
 	   limit #{start},#{pageSize}
 	</select>
 	<!--查询用户是否对某一本书点赞  -->

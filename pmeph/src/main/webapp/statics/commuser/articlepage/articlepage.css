@@ -1,7 +1,9 @@
 .news {
     padding-top: 40px;
 }
-/*焦点信息*/
+
+
+
 .focus-news {
     float: left;
     height: 830px;
@@ -42,7 +44,7 @@
 .focus-content img{
     height:135px;
     width:200px;
-    margin-top: 3px
+    margin-top: 3px;
 }
 .focus-content .content-text{
     float:left;
@@ -57,7 +59,6 @@
     font-size:20px;
     line-height: 30px;
     font-weight: 400 ;
-    /*height: 50px;*/
     overflow: hidden;
     text-overflow:ellipsis;
 }
@@ -85,7 +86,7 @@
     background-color: #ebebeb;
     margin-top: 20px
 }
-/*遴选公告*/
+
 .notice {
     float: left;
     width: 360px;
@@ -150,10 +151,9 @@
     line-height:25px;
     color:#999999
 }
-/*医学随笔*/
+
 .notes {
     float:left;
-    /*height: 830px;*/
     width: 1200px;
 }
 
@@ -205,11 +205,10 @@
     position:absolute;
     top:10px;
     margin-top: 10px;
-    position:absolute;
-    top:10px;
     left:-6px;
     color:white;
     background-image:url(../../image/wenzhangtuijian.png);
+     cursor:pointer;
 }
 .notes .item .content{
     width:284px;
@@ -218,7 +217,15 @@
 }
 .notes .item .content-image{
     height: 182px;
-    width:284px
+    width:284px;
+    cursor: pointer;
+}
+
+.notes .item .content-image img{
+    max-height: 182px;
+    max-width:284px;
+    margin: auto;
+    display: block;
 }
 .notes .item .content-title{
     font-size: 18px;
@@ -226,6 +233,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow:ellipsis;
+    font-family: MicrosoftYaHei;
 }
 .notes .item .content-text{
     padding-left: 10px;
@@ -255,7 +263,7 @@
     height: 30px;
     color:#666666;
 }
-/*推荐作者*/
+
 .writer {
     float: left;
     margin-top: 20px;
@@ -306,9 +314,10 @@
 .writer .item .msg .text{
     overflow: hidden;
     color: #999999;
-    text-overflow:ellipsis; /*超出部分省略号显示*/
-    white-space:nowrap;/*强制不换行*/
+    text-overflow:ellipsis; 
+    white-space:nowrap;
 }
+
 .writer .item .add{
     width:53px;
     height:30px;
@@ -339,4 +348,34 @@
     height:54px;
     line-height: 18px;
     color:#F7FDFB;
+}
+
+span.friend {
+    float: right !important;
+    margin-top: 11px !important;
+    margin-right: 11px !important;
+    height: 44px !important;
+    line-height: 0px !important;
+    color: #35c974 !important;
+    display: inline-block !important;
+    cursor: pointer !important;
+}
+
+.friend.hasRequest{
+	
+	color: #d2d2d2 !important;
+}
+
+.friend.isBeenRequest {
+    color: rgb(236, 154, 98) !important;
+    cursor: pointer ;
+}
+
+.friend.add_btn {
+    color: #1abd44 !important;
+    cursor: pointer;
+}
+
+.friend.isFriend {
+    color: #1abd44 !important;
 }

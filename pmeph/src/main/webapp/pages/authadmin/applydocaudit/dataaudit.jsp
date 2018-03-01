@@ -28,6 +28,9 @@
 	<!-- 隐藏域 -->
 	<input type="hidden" id="page-num-temp" value="1">
 	<input type="hidden" id="material_id" value="${material_id }">
+	<input type="hidden" id="view_audit" value="${view_audit }">
+	<input type="hidden" id="userId" value="${userId }">
+	
 	
 	
 	<div
@@ -47,7 +50,7 @@
 					<div class="btn">
 						<button class="btn_1"  id="btn-search" onclick="queryBtnClick()">查 询</button>
 						<button class="btn_2" onclick="exportExcel();">导出Excel</button>
-						<button class="btn_3" onclick="history.go(-1);">返 回</button>
+						<button class="btn_3" onclick="return_on();">返 回</button>
 					</div>
 				</div>
 

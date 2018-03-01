@@ -1,15 +1,3 @@
-$(document).ready(function(){
-	 //为所有的class为scorestar1绑定mouseout和mouseover事件。bind({事件名：function(){},事件名：function(){}})的方法绑定多个事件
-	/* $(".scorestar1").bind({
-	  mouseover: function () {
-		  $(this).css("background-position", "-183px -174px").prevAll().css("background-position", "-183px -174px");
-		  $(this).nextAll().css({"background-position": "-183px -153px"});
-		  var score=parseInt($(this).attr("id").substring(5))*2+'.0';
-		  $("#last_score").html(score);
-	  }
-	  });*/
-});
-
 $(function(){
 	 Page({
 	        num: parseInt($("#allppage").html()),	//页码数
@@ -30,6 +18,8 @@ $(function(){
         	   changepage(n);
            }
        });
+	   
+	   changepage(1);
 });
 //分页前的初始化
 function beforechange(){
@@ -43,6 +33,7 @@ function changepage(n){
 	var json={
 			pageNumber:n,	
 			allppage:$('input[name=edu]').val(),
+			wid:$('#wid').val()
 			
 	};
 	 $.ajax({
@@ -58,44 +49,15 @@ function changepage(n){
 					+'<div style="float: left;"><img src="';
 					if(n.avatar==''||n.avatar=='DEFAULT'||n.avatar==null){
 						str+=contextpath+'statics/image/rwtx.png';
+						
 					}else{
-						str+=n.avatar;
+						str+=contextpath+'image/'+n.avatar+'.action';
 					}
-					str+='" class="picturesize"/></div><div style="float: left;margin-left: 10px;margin-top: 5px;">'+
+					str+='" height="30"  width="30"/></div><div style="float: left;margin-left: 10px;margin-top: 5px;">'+
 					n.realname
-					+'</div><div style="float: left;margin-left: 10px;">';
-           /*	if(n.score<=3){
-           		str+='<span class="rwtx1"></span>'
-           		+'<span class="rwtx2"></span>'
-           		+'<span class="rwtx2"></span>'
-           		+'<span class="rwtx2"></span>'
-           		+'<span class="rwtx2"></span>'
-           	}else if(n.score<=5){
-           		str+='<span class="rwtx1"></span>'
-           		+'<span class="rwtx1"></span>'
-           		+'<span class="rwtx2"></span>'
-           		+'<span class="rwtx2"></span>'
-           		+'<span class="rwtx2"></span>'
-           	}else if(n.score<=7){
-           		str+='<span class="rwtx1"></span>'
-           		+'<span class="rwtx1"></span>'
-           		+'<span class="rwtx1"></span>'
-           		+'<span class="rwtx2"></span>'
-           		+'<span class="rwtx2"></span>'
-           	}else if(n.score<=9){
-           		str+='<span class="rwtx1"></span>'
-           		+'<span class="rwtx1"></span>'
-           		+'<span class="rwtx1"></span>'
-           		+'<span class="rwtx1"></span>'
-           		+'<span class="rwtx2"></span>'
-           	}else if(n.score==10){
-           		str+='<span class="rwtx1"></span>'
-           		+'<span class="rwtx1"></span>'
-           		+'<span class="rwtx1"></span>'
-           		+'<span class="rwtx1"></span>'
-           		+'<span class="rwtx1"></span>'
-           	}*/
-           	str+='</div><div class="date_content"><div class="date">'
+					+'</div>';
+           
+           	str+='<div class="date_content"><div class="date">'
            	+n.gmt_create
            	+'</div></div></div><div class="item_content">'
            	+n.mid
@@ -108,11 +70,10 @@ function changepage(n){
 		        startnum: json.pageNumber,	//指定页码
 		        elem: $('#page1'),	        //指定的元素
 		        callback: function (n) {    //回调函数
-			          console.log(n);
 			          changepage(n);
-			        },
+			        }
 		    });
-		},
+		}
 	});
    
 };
@@ -126,6 +87,8 @@ function insert(){
 	}
 	var json={
 		 content:$("#content").val(),
+		 wid:$("#wid").val(),
+		 title:$("#title").val()
 		/* score:$("#last_score").html(),*/
 	};
 	 $.ajax({
@@ -138,6 +101,18 @@ function insert(){
 				if(json.returncode=="OK"){
 					  $("#content").val(null);
 					  window.message.success("发表评论成功");
+					  
+				}else if (json.returncode == 'ERROR'){
+					var words = json.value;
+					var content = document.getElementById("content");
+					var contentValue = $("#content").val();
+					for (var i = 0 ; i < words.length ; i++){
+						if (json.content.indexOf(words[i]) > -1){
+							content.style.border = '3px solid red';
+							window.message.error("文章评论中含有敏感词,请检查修改后再保存或提交");
+	            			return;
+						}
+					}
 				}
 			}
 		});
@@ -147,11 +122,15 @@ function insert(){
 
 //1.相关文章换一换
 function change(){
+	var json={
+			 wid:$("#wid").val()
+		};
 	 $.ajax({
 			type:'post',
 			url:contextpath+'articledetail/change.action',
 			async:false,
 			dataType:'json',
+			data:json,
 			success:function(json){
 				var ste='';
 				$.each(json,function(i,n){
@@ -165,12 +144,15 @@ function change(){
 
 //点赞
 function addlikes(){
-	/*var book_id=$("#book_id").val();*/
+	var json={
+			 wid:$("#wid").val()
+		};
 	 $.ajax({
 			type:'post',
 			url:contextpath+'articledetail/addlikes.action',
 			async:false,
 			dataType:'json',
+			data:json,
 			success:function(json){
 				if(json.returncode=="yes"){
 					$("#dz").attr("src",contextpath+"statics/image/dz02.png");
@@ -210,6 +192,10 @@ function todetail(id) {
     location.href = contextpath + 'articledetail/toPage.action?wid=' + id;
 }
 
-
-
+//评论检查出敏感词时，用户修改文本域获取焦点，则把红边去掉
+$(function(){
+	$("#content").focus(function(){
+		$("#content").css("border","none");
+	});
+});
 

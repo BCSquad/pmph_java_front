@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="body">
     <div class="content-wrapper">
         <div class="title">
-            <span><a class="alink" href="${ctx}/personalhomepage/tohomepage.action?">个人中心 ></a><a class="alink" href="${ctx}/personalhomepage/tohomepageone.action?bookname=${progress.materialName}"> 教材申报</a> > 申报进度</span>
+            <span><a class="alink" href="${ctx}/personalhomepage/tohomepage.action?">个人中心 ></a><a class="alink" href="${ctx}/personalhomepage/tohomepage.action?pagetag=jcsb"> 教材申报</a> > 申报进度</span>
             <h2>${progress.materialName}</h2>
         </div>
         	<c:choose>
@@ -109,9 +109,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			                    <c:forEach items="${textBookCheck}" var="books" varStatus="vs">
 				                    <div class="left-bom-2">
 				                            <span class="left-bom-21">${books.textbookName}</span>
-				                            <c:if test="${books.isPublished==true}">
+				                            <c:choose>
+				                            	<c:when test="${(books.rank==1 && (books.chosenPosition==4||books.chosenPosition==12))}">
+					                            	<span class="left-bom-24">已被遴选为第一主编</span>
+					                            	<button class="left-bom-23" style="cursor: pointer;" onclick="chooseEditor('${books.textbookId}')">${books.isLocked == false?'选择编委':'查看编委' }>></button>
+					                            </c:when>
+					                            <c:when test="${(books.chosenPosition==4||books.chosenPosition==12) }">
+					                            	<span class="left-bom-24">已被遴选为主编</span>
+					                            	<button class="left-bom-23" style="cursor: pointer;" onclick="chooseEditor('${books.textbookId}')">查看编委 >></button>
+					                            </c:when>
+					                            <c:when test="${(books.chosenPosition==2||books.chosenPosition==10)} ">
+					                            	<span class="left-bom-24">已被遴选为副主编</span>
+					                            	<button class="left-bom-23" style="cursor: pointer;" onclick="chooseEditor('${books.textbookId}')">查看编委 >></button>
+					                            </c:when>
+					                            <c:when test="${(books.onlineProgress==1||books.onlineProgress==4) }">
+					                            	<span class="left-bom-22">审核中...</span>
+					                            </c:when>
+					                             <c:when test="${(books.onlineProgress==2||books.onlineProgress==5) }">
+					                            	<span class="left-bom-22">被退回</span>
+					                            </c:when>
+					                            <c:otherwise>
+													<span class="left-bom-22">审核通过</span>
+												</c:otherwise>
+				                            </c:choose>
+				                            <%-- <c:if test="${books.isPublished==true}">
 				                            	<c:choose>
-													<c:when test="${books.isChiefChosen==true && books.rank=='1'}">
+													<c:when test="${books.rank=='1' && (books.chosenPosition=='4'||books.chosenPosition=='12') && books.isLocked == false} ">
 						                            	<span class="left-bom-24">已被遴选为第一主编</span>
 						                            	<button class="left-bom-23" style="cursor: pointer;" onclick="chooseEditor('${books.textbookId}')">选择编委>></button>
 						                            </c:when>
@@ -122,7 +145,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				                            </c:if>
 				                            <c:if test="${books.isPublished==false || books.isChiefChosen==false}">
 				                            	<span class="left-bom-22">审核中...</span>
-				                            </c:if>
+				                            </c:if> --%>
 				                    </div>
 			                    </c:forEach>
 		                    <!-- <div class="left-bom-2">

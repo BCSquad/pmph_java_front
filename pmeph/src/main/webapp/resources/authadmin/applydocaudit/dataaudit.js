@@ -1,6 +1,5 @@
 $(function(){
-	
-	
+
 	
 	$('#page-size-select').selectlist({
         zIndex: 10,
@@ -65,7 +64,7 @@ function queryMain(){
 //点击名字跳转页面
 function toName(material_id,declaration_id){
 	/*window.location.href = contextpath + 'material/toMaterialAudit.action?material_id='+material_id+'&declaration_id='+declaration_id;*/
-	window.location.href = contextpath + 'dataaudit/toMaterialAudit.action?material_id='+material_id+'&declaration_id='+declaration_id;
+	window.location.href = contextpath + 'dataaudit/toMaterialAudit.action?material_id='+material_id+'&declaration_id='+declaration_id+'&view_audit='+$("#view_audit").val();
 
 }
 
@@ -84,11 +83,22 @@ function queryBtnClick(){
 	
 }
 
+
 //导出excel
 
 function exportExcel(){
-    window.location.href =contextpath+'excel/download.action?service=dataAuditExcel&queryName='+$("#search-name-temp").val()+'&material_id='+$("#material_id").val();
+    window.location.href =contextpath+'excel/download.action?service=dataAuditExcel&queryName='+$("#search-name-temp").val()+'&material_id='+$("#material_id").val()+'&userId='+$("#userId").val();
 }
+
+//返回
+function return_on(){
+	window.location.href=contextpath+"applyDocAudit/toPage.action";
+}
+
+//鼠标悬停显示的内容
+
+
+
 
 
 

@@ -3,6 +3,9 @@ package com.bc.pmpheep.back.commuser.materialdec.service;
 import java.util.List;
 import java.util.Map;
 
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
+
 public interface MaterialDetailService {
 	
 	/**
@@ -128,6 +131,7 @@ public interface MaterialDetailService {
 	 * @return
 	 */
 	public List<Map<String,Object>> queryJcbx(Map<String,Object> map);
+	public List<Map<String,Object>> queryqtJcbx(Map<String,Object> map);
 	public int insertJcbx(Map<String,Object> map);
 	/**
 	 * 作家科研情况表
@@ -143,7 +147,49 @@ public interface MaterialDetailService {
 	 */
 	public List<Map<String,Object>> queryZjkzbb(Map<String,Object> map);
 	public int insertZjZjkzbb(Map<String,Object> map);
-	
+	/**
+	 * 个人成就
+	 * @param map
+	 * @return
+	 */
+	public Map<String,Object> queryAchievement(Map<String,Object> map);
+	public int insertAchievement(Map<String,Object> map);
+	public int updateAchievement(Map<String,Object> map);
+	/**
+	 * 主编学术专著情况
+	 * @param map
+	 * @return
+	 */
+	public List<Map<String,Object>> queryMonograph(Map<String,Object> map);
+	public int insertMonograph(Map<String,Object> map);
+	/**
+	 * 出版行业获奖情况
+	 * @param map
+	 * @return
+	 */
+	public List<Map<String,Object>> queryPublish(Map<String,Object> map);
+	public int insertPublish(Map<String,Object> map);
+	/**
+	 * SCI论文投稿及影响因子
+	 * @param map
+	 * @return
+	 */
+	public List<Map<String,Object>> querySci(Map<String,Object> map);
+	public int insertSci(Map<String,Object> map);
+	/**
+	 * 临床医学获奖情况
+	 * @param map
+	 * @return
+	 */
+	public List<Map<String,Object>> queryClinicalreward(Map<String,Object> map);
+	public int insertClinicalreward(Map<String,Object> map);
+	/**
+	 * 学术荣誉授予情况
+	 * @param map
+	 * @return
+	 */
+	public List<Map<String,Object>> queryAcadereward(Map<String,Object> map);
+	public int insertAcadereward(Map<String,Object> map);
 	/**
 	 * 清除所有关联表
 	 */
@@ -153,4 +199,24 @@ public interface MaterialDetailService {
 	 * 申报审核
 	 */
 	public int updateDeclaration(Map<String,Object> map);
+	
+	/**
+	 * 机构选择
+	 */
+	PageResult<Map<String, Object>> selectOrgList(PageParameter<Map<String, Object>> pageParameter);
+	
+	/**
+	 * 新增 申报信息
+	 */
+	public String insertJcsbxx(Map<String,Object> perMap,List<Map<String,Object>> tssbList,List<Map<String,Object>> stuList,List<Map<String,Object>> workList,
+			List<Map<String,Object>> steaList,List<Map<String,Object>> zjxsList,List<Map<String,Object>> jcbjList,List<Map<String,Object>> gjkcjsList,List<Map<String,Object>> gjghjcList,
+			List<Map<String,Object>> jcbxList,List<Map<String,Object>> zjkyList,List<Map<String,Object>> zjkzqkList,Map<String,Object> achievementMap,List<Map<String,Object>> monographList,
+			List<Map<String,Object>> publishList,List<Map<String,Object>> sciList,List<Map<String,Object>> clinicalList,List<Map<String,Object>> acadeList);
+	/**
+	 * 修改 申报信息
+	 */
+	public String updateJcsbxx(Map<String,Object> perMap,List<Map<String,Object>> tssbList,List<Map<String,Object>> stuList,List<Map<String,Object>> workList,String declaration_id,
+			List<Map<String,Object>> steaList,List<Map<String,Object>> zjxsList,List<Map<String,Object>> jcbjList,List<Map<String,Object>> gjkcjsList,List<Map<String,Object>> gjghjcList,
+			List<Map<String,Object>> jcbxList,List<Map<String,Object>> zjkyList,List<Map<String,Object>> zjkzqkList,Map<String,Object> achievementMap,List<Map<String,Object>> monographList,
+			List<Map<String,Object>> publishList,List<Map<String,Object>> sciList,List<Map<String,Object>> clinicalList,List<Map<String,Object>> acadeList);
 }

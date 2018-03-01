@@ -148,7 +148,7 @@
 	border:1px solid #dedede; 
 	height: 35px;
 }
-/**ÊäÈë¿ò**/
+/**ï¿½ï¿½ï¿½ï¿½ï¿½**/
 .cg_input{
 	clear:none;
 	width: 296px;
@@ -180,7 +180,7 @@
 	
 }
 
-/**ÄÚÈÝ¿ò**/
+/**ï¿½ï¿½ï¿½Ý¿ï¿½**/
 .content{
 	width: 100%;
 }
@@ -198,7 +198,7 @@
 	padding: 15px 20px;
 	margin-top: 20px;
 }
-/**Ìá½»°´Å¥**/
+/**ï¿½á½»ï¿½ï¿½Å¥**/
 .button{
 	height: 30px;
 	width: 1000px;
@@ -209,6 +209,14 @@
 
 .div_butt{
 	width: 270px;
+	height: 24px;
+	color: #FFFFFF;
+	margin:auto;
+	top:50%;
+	left:50%;
+}
+.div_butt1{
+	width: 70px;
 	height: 24px;
 	color: #FFFFFF;
 	margin:auto;
@@ -236,7 +244,7 @@
 	margin-left: 15px;
 }
 
-/**²Ù×÷°´Å¥**/
+/**ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¥**/
 .add_div{
 	width: 100px;
 	height: 32px;
@@ -266,4 +274,15 @@
 
 #wz_1{
 	float: left;
+}
+
+.dateclear{
+	position: absolute;
+	height: 34px;
+	line-height: 34px;
+	width: 20px;
+	left: 290px;
+	background-image: url(../../image/close.png);
+	background-repeat: no-repeat;
+	background-position: 0px 10px;
 }

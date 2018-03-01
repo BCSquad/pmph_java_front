@@ -13,7 +13,8 @@ $(function () {
 	        elem: $('#page1'),		    //指定的元素
 	        callback: function (n) {	//回调函数
 	           console.log(n);
-	           location.href=contextpath+'articlesearch/change.action?n='+n+'&&m='+$('input[name=edu]').val();
+	           queryall(n);
+	           //location.href=contextpath+'articlesearch/change.action?pageNum='+n+'&pageSize='+$('input[name=edu]').val();
 	        }
 	    });
 	   $('select').selectlist({
@@ -24,14 +25,15 @@ $(function () {
            onChange:function(){
         	   var m=$('input[name=edu]').val();
         	   var n=1;
-        	   location.href=contextpath+'articlesearch/change.action?n='+n+'&&m='+$('input[name=edu]').val();
+        	   queryall(n);
+        	   //location.href=contextpath+'articlesearch/change.action?pageNum='+n+'&pageSize='+$('input[name=edu]').val();
            }
        });
 	   
 	   redQuery();
 	   $("#selectall").keyup(function(event){
 			if(event.keyCode ==13){ //回车键弹起事件
-				queryall();
+				queryall(1);
 			  }
 		});
 });
@@ -42,29 +44,24 @@ function tobookpage(){
 
 //点赞/取消赞
 function changelikes(flag){
-	var status='';
 	var id=$("#mainid"+flag).val();
 	var str=$("#likes"+flag).val();
-	if($("#praise"+flag).hasClass("nohandPicture")){
-		status='no';
-	}else{
-		status='add';
-	}
 	   $.ajax({
 			type:'post',
-			url:contextpath+'articlesearch/changelikes.action?id='+id+'&&status='+status,
+			url:contextpath+'articlesearch/changelikes.action?id='+id,
 			async:false,
 			dataType:'json',
 			success:function(json){
 				if(json.returncode=="OK"){
 					$("#likenum"+flag).html(json.likes);
 					if(str=='nohandPicture'){
-						$("#praise"+flag).removeClass("nohandPicture");
-						$("#praise"+flag).addClass("handPicture");
-						$("#likes"+flag).val("handPicture");
-					}else{
 						$("#praise"+flag).removeClass("handPicture");
 						$("#praise"+flag).addClass("nohandPicture");
+						$("#likes"+flag).val("handPicture");
+					}else{
+						$("#praise"+flag).removeClass("nohandPicture");
+						$("#praise"+flag).addClass("handPicture");
+						
 						$("#likes"+flag).val("nohandPicture");
 					}
 				}
@@ -72,23 +69,23 @@ function changelikes(flag){
 		});
 }
 
-//跳转页面
+/*//跳转页面
 function jump(){
 	 var n=$("#jumpId").val();
 	 if(n>$("#allppage").html()){
 		 alert("超过了最大页数！");
 		 return;
 	 }
-	 location.href=contextpath+'articlesearch/change.action?n='+n+'&&m='+$('input[name=edu]').val();
-}
+	 location.href=contextpath+'articlesearch/change.action?pageNum='+n+'&pageSize='+$('input[name=edu]').val();
+}*/
 
 //模糊查询
-function queryall(){
+function queryall(n){
 	var title=encodeURI(encodeURI($("#selectall").val()));
-	location.href=contextpath+'articlesearch/queryall.action?title='+title;
+	location.href=contextpath+'articlesearch/queryall.action?title='+title+'&pageNum='+n+'&pageSize='+$('input[name=edu]').val();
 }
 
-//搜索条件在相应部位红色
+/*//搜索条件在相应部位红色
 function redQuery(){
 	var qs=$("#selectall").val();
 	var re=new RegExp(qs,"ig");
@@ -98,4 +95,18 @@ function redQuery(){
 		var fit_html = '<font style="color:red;">'+qs+'</font>';
 		$(this).html(html.replace(re,fit_html));
 	});
+}*/
+//搜索条件在相应部位红色
+function redQuery(){
+	var qsArray = $("#selectall").val().trim().split(" ");
+	for ( var i in qsArray) {
+		var re=new RegExp(qsArray[i],"ig");
+		var $tag= $(".book-name-span");
+		$tag.each(function(){
+			var html = $(this).html();
+			var fit_html = '<font style="color:red;">'+qsArray[i]+'</font>';
+			$(this).html(html.replace(re,fit_html));
+		});
+	}
+	
 }

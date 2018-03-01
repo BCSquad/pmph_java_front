@@ -1,8 +1,9 @@
-function submit(){
+function submit1(){
+	var params = $('#contentForm').serializeArray();  
 	$.ajax({
 		type: "POST",
-		url:contextpath+'survey/addSurveyAnswers.action?',
-		data:$('#contentForm').serialize(),
+		url:contextpath+'survey/addSurveyAnswers.action',
+		data:params,
 		async: false,
 		dataType:"json",
 	    success: function(code) {

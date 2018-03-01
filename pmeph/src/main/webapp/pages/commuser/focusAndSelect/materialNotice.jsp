@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -69,7 +70,7 @@
               </div>
         </div>
         <div class="right" style="width: 335px;float: right;">
-            <img src="${ctx}/statics/image/caode.png" style="width: 335px;height: 335px;"/>
+            <img src="${ctx}/image/${fn:length(adInfo.detailList)>1?adInfo.detailList[1].image:adInfo.detailList[0].image}.action" style="width: 335px;height: 335px;"/>
         </div>
     </div>
 </div>

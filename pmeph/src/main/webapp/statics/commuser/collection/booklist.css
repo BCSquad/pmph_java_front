@@ -15,6 +15,13 @@
 .area2 .name{
     font-size: 18px;
     color: #000000;
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    margin-left: 10px;
+}
+.selectdiv{
+	border-bottom: 2px solid green;
 }
 .area2 .del{
     font-size: 12px;
@@ -46,6 +53,7 @@
 }
 .collection .title-text a{
     color: #000000;
+    text-decoration: underline;
 }
 .collection .author{
     height:25px;

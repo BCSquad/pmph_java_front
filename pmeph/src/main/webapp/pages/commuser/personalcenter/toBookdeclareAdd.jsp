@@ -45,12 +45,13 @@
 						</td>
 					</tr>
 					<tr>
-						<td width="140px"><span class="btbs">*</span><span>选题名称：</span></td>
+						<td width="140px"><span class="btbs">*</span><span>书名：</span></td>
 						<td width="460px">
-							<input class="cg_input" name="bookname" id="bookname" placeholder="选题名称" value="" maxlength="100"/>
+							<input class="cg_input" name="bookname" id="bookname" placeholder="书名" value="" maxlength="33"/>
 							<input type="hidden" name="user_id" value="${userMap.id}"/>
+							<input type="hidden" name="realname" value="${userMap.realname}"/>
 						</td>
-						<td width="100px"><span class="btbs">*</span><span>读者对象：</span></td>
+						<td width="100px"><span>读者对象：</span></td>
 						<td width="300px">
 							<select name="reader" id="dzdx" class="dzdx">
 								<option value="0">医务工作者</option>
@@ -60,9 +61,10 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span class="btbs">*</span><span>预计交稿时间：</span></td>
-						<td>
+						<td><span>预计交稿时间：</span></td>
+						<td style="position:relative;">
 							<input class="cg_input" name="deadline" id="deadline" calendar format="'yyyy-mm-dd'" value="" placeholder="预计交稿时间"/>
+						    <span class="dateclear"onclick="cleadate()"></span>
 						</td>
 						<td><span class="btbs">*</span><span>选题来源：</span></td>
 						<td>
@@ -77,19 +79,23 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span class="btbs">*</span><span>预估字数：</span></td>
+						<td><span>预估字数：</span></td>
 						<td>
-							<input class="cg_input" name="word_number" id="word_number" value="" placeholder="单位千字"  maxlength="20"/>
+							<input class="cg_input" name="word_number" id="word_number" value="" placeholder="单位千字"
+								onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+							  maxlength="9"/>
 						</td>
-						<td><span class="btbs">*</span><span>预估图数：</span></td>
+						<td><span>预估图数：</span></td>
 						<td>
-							<input class="cg_input" name="picture_number" id="picture_number" value=""  maxlength="20"/>
+							<input class="cg_input" name="picture_number" id="picture_number" value=""  
+							onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+							  maxlength="9"/>
 						</td>
 					</tr>
 						<tr>
-						<td><span class="btbs">*</span><span>学科及专业：</span></td>
+						<td><span>学科及专业：</span></td>
 						<td>
-							<input class="cg_input" name="subject" id="subject" placeholder="学科及专业" value="" />
+							<input class="cg_input" name="subject" id="subject" placeholder="学科及专业" maxlength="16" value="" />
 						</td>
 						<td><span class="btbs">*</span><span>级别：</span></td>
 						<td>
@@ -124,13 +130,15 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span>银行账户：</span></td>
+						<td><span class="btbs">*</span><span>银行账户：</span></td>
 						<td>
-							<input class="cg_input" name="bank_account_id" id="bank_account_id" placeholder="银行账户" value=""/>
+							<input class="cg_input" name="account_number" id="account_number" placeholder="请填写银行账户" value=""
+								 onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+							 maxlength="25"/> 
 						</td>
-						<td><span>开户银行：</span></td>
+						<td><span class="btbs">*</span><span>开户银行：</span></td>
 						<td>
-							<input class="cg_input" name="realname" id="realname" placeholder="开户银行" value=""/>
+							<input class="cg_input" name="bank" id="bank" placeholder="开户银行" value="" maxlength="25"/>
 						</td>
 					</tr>
 					<!-- 选题情况 -->
@@ -144,26 +152,26 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span>一、选题理由：</span></td>
+						<td><span class="btbs">*</span><span>一、选题理由：</span></td>
 						<td colspan="3">
 							<div class="content">
-								<textarea class="text_cl" name="reason"></textarea>
+								<textarea class="text_cl" id="reason" name="reason" maxlength="300"></textarea>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td><span>二、出版价值：</span></td>
+						<td><span class="btbs">*</span><span>二、出版价值：</span></td>
 						<td colspan="3">
 							<div class="content">
-								<textarea class="text_cl" name="price"></textarea>
+								<textarea class="text_cl" id="price" name="price" maxlength="300"></textarea>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td><span>三、主要内容：</span></td>
+						<td><span class="btbs">*</span><span>三、主要内容：</span></td>
 						<td colspan="3">
 							<div class="content">
-								<textarea class="text_cl" name="extra_score"></textarea>
+								<textarea class="text_cl" id="extra_score" name="extra_score" maxlength="300"></textarea>
 							</div>
 						</td>
 					</tr>
@@ -179,11 +187,15 @@
 					<tr>
 						<td><span>作者购书：</span></td>
 						<td>
-							<input class="cg_input" name="purchase" id="purchase" placeholder="请输入作者购买册数" value=""/>
+							<input class="cg_input" name="purchase" id="purchase" placeholder="请输入作者购买册数" value=""
+							onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+							  maxlength="9"/>
 						</td>
 						<td><span>作者赞助：</span></td>
 						<td>
-							<input class="cg_input" name="sponsorship" id="sponsorship" placeholder="请输入预估金额" value=""/>
+							<input class="cg_input" name="sponsorship" id="sponsorship" placeholder="请输入预估金额" value=""
+							onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+							  maxlength="9"/>
 						</td>
 					</tr>
 				</table>
@@ -200,21 +212,21 @@
 					<tr>
 						<td width="106px"><span>译稿原书名：</span></td>
 						<td width="400px">
-							<input class="cg_input" name="original_bookname" id="original_bookname" placeholder="" value=""/>
+							<input class="cg_input" name="original_bookname" maxlength="33" id="original_bookname" placeholder="" value=""/>
 						</td>
-						<td style="text-align: center;"><span>原编著者：</span></td>
+						<td style="text-align: center;"><span>&emsp;&emsp;&emsp;原编著者：</span></td>
 						<td width="308px">
-							<input class="cg_input" name="original_author" id="original_author" placeholder="" value=""/>
+							<input class="cg_input" name="original_author" maxlength="33" id="original_author" placeholder="" value=""/>
 						</td>
 					</tr>
 					<tr>
 						<td><span>国籍：</span></td>
 						<td>
-							<input class="cg_input" name="nation" id="nation" placeholder="" value=""/>
+							<input class="cg_input" name="nation" maxlength="20" id="nation" placeholder="" value=""/>
 						</td>
 						<td style="text-align: center;"><span>出版年代及版次：</span></td>
 						<td>
-							<input class="cg_input" name="edition" id="edition" placeholder="出版年代及版次" value=""/>
+							<input class="cg_input" name="edition" maxlength="20" id="edition" placeholder="出版年代及版次" value=""/>
 						</td>
 					</tr>
 				</table>
@@ -246,16 +258,18 @@
 					</thead>
 					<tbody>
 						 <tr id="sbbz_1">
-							<td><input class="sb_input" style="width: 100px;" name="write_realname" placeholder="编者姓名" value=""/></td>
+							<td><input class="sb_input" style="width: 100px;" name="write_realname" placeholder="编者姓名" maxlength="13" value=""/></td>
 							<td>
 								<select id="r_sex" name="sex">
-									<option value="0">男</option>
+									<option value="0" selected="selected">男</option>
 									<option value="1">女</option>
 								</select>
 							</td>
-							<td><input class="sb_input" style="width: 80px;" name="write_price" placeholder="年龄" value=""/></td>
-							<td><input class="sb_input" style="width: 320px;" name="write_position" placeholder="行政职务" value=""/></td>
-							<td><input class="sb_input" style="width: 200px;" name="workplace" placeholder="工作单位" value=""/></td>
+							<td><input class="sb_input" style="width: 80px;" name="write_price" placeholder="年龄" value="" id="write_price"
+							onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" onBlur="checkAge(this)"
+							  maxlength="3"/></td>
+							<td><input class="sb_input" style="width: 320px;" name="write_position" placeholder="行政职务" value="" maxlength="12"/></td>
+							<td><input class="sb_input" style="width: 200px;" name="workplace" placeholder="工作单位" value="" maxlength="12"/></td>
 							<td><div class="add_div"><img class="add_img" src="${ctx}/statics/image/del.png" onclick="del_tr('sbbz_1')"></div></td>
 						</tr> 
 					</tbody>

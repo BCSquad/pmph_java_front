@@ -55,7 +55,7 @@
     </script>
 </head>
 <body>
-
+<input type="hidden" id="fileid" >
 <jsp:include page="/pages/comm/head.jsp">
 		<jsp:param value="homepage" name="pageTitle" />
 	</jsp:include>
@@ -77,7 +77,7 @@
                 <c:if test="${map.avatar=='DEFAULT'}"><img id="sxy-img1" src="${ctx}/statics/image/putongyhtouxiang.png"/></c:if>
                 <c:if test="${map.avatar!='DEFAULT'}"><img id="sxy-img1" src="${ctx}/image/${map.avatar}.action" ></c:if>
                 
-                <div class="shade" id="uploadFile">修改头像</div>
+                <div class="shade" id="uploadFile" avatar="${map.avatar}">修改头像</div>
             </div>
             <div style="height:35px;"></div>
             <div style="height:120px;">
@@ -104,8 +104,8 @@
                   <div  style="width: 400px">
                        <label class="require">真实姓名</label>
                        <div class="input-wrapper">
-                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="真实姓名不能为空"
-                           placeholder="填写真实姓名" type="text" id="realname" name="realname" value="${map.realname }"/>
+                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="真实姓名不能为空"  onblur="javascript:LengthLimit(this,20);"
+                           placeholder="填写真实姓名" type="text" id="realname" name="realname"  value="${map.realname }"/>
                        </div>
                   </div>
                 </td>
@@ -113,8 +113,8 @@
                   <div  style="width: 400px">
                        <label class="require">教龄</label>
                        <div class="input-wrapper">
-                          <input class="sxy-txt required" data-valid="isNonEmpty||minLength:3"  data-error="教龄不能为空||教龄不能大于3位"
-                           placeholder="填写教龄" type="text" id="experience" name="experience" value="${map.experience }"
+                          <input class="sxy-txt required" data-valid="isNonEmpty||onlyInt||minLength:3"  data-error="教龄不能为空||教龄只能为整数||教龄不能大于3位"
+                           placeholder="填写教龄" type="text" id="experience" name="experience" value="${map.experience }" 
                            />
                        </div>
                   </div>
@@ -123,7 +123,7 @@
                   <div  style="width: 400px">
                        <label class="require">传真</label>
                        <div class="input-wrapper">
-                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="传真不能为空"
+                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="传真不能为空"  onblur="javascript:LengthLimit(this,50);"
                            placeholder="填写传真" type="text" id="fax" name="fax" value="${map.fax }"/>
                        </div>
                   </div>
@@ -131,21 +131,24 @@
             </tr>
             <tr class="sxy-tr">
                 <td >
-                  <div  style="width: 400px">
-                    <span class="gender">性别</span>
+                  <div  style="width: 400px;padding:0px;">
+                  <label class="require" >性别</label>
+                  <div class="input-wrapper" style="margin-top:10px;">
                     <input type="hidden" value="${map.sex }" id="sex_hidden">
                     <input type="radio" value="1" class="sxy-radio" name="radio-set" id="sex1"/>男&nbsp;&nbsp;
                     <input type="radio" value="2" class="sxy-radio" name="radio-set" id="sex2"/>女
+                  </div>
                   </div>
                 </td>
                 <td >
                   <div style="width: 400px;padding:0px;margin-top:-25px;">
                     <label class="require" >职称</label>
                     <select class="sxy-select-td" id="title" name="title" >
-                        <option value="teacher1" ${map.title=='teacher1' ?'selected':''}>教授</option>
-                        <option value="teacher2" ${map.title=='teacher2' ?'selected':''}>讲师</option>
-                        <option value="teacher3" ${map.title=='teacher3' ?'selected':''}>副教授</option>
-                        <option value="teacher4" ${map.title=='teacher4' ?'selected':''}>院士</option>
+                    	<option value="" >-请选择-</option>
+                        <option value="教授" ${map.title=='教授' ?'selected':''}>教授</option>
+                        <option value="讲师" ${map.title=='讲师' ?'selected':''}>讲师</option>
+                        <option value="副教授" ${map.title=='副教授' ?'selected':''}>副教授</option>
+                        <option value="院士" ${map.title=='院士' ?'selected':''}>院士</option>
                     </select>
                   </div>
                 </td>
@@ -174,7 +177,7 @@
                   <div  style="width: 400px">
                        <label class="require">邮编</label>
                        <div class="input-wrapper">
-                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="邮编不能为空"
+                          <input class="sxy-txt required" data-valid="isNonEmpty||onlyInt"  data-error="邮编不能为空||邮编只能是数字"  onblur="javascript:LengthLimit(this,20);"
                            placeholder="填写邮政编码" type="text" id="postcode" name="postcode" value="${map.postcode }"/>
                        </div>
                   </div>
@@ -194,7 +197,7 @@
                   <div  style="width: 400px">
                        <label class="require">工作单位</label>
                        <div class="input-wrapper">
-                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="工作单位不能为空"
+                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="工作单位不能为空" onblur="javascript:LengthLimit(this,36);"
                            placeholder="填写工作单位" type="text" id="workplace" name="workplace" value="${map.workplace }"/>
                        </div>
                   </div>
@@ -203,19 +206,17 @@
                   <div  style="width: 400px">
                        <label class="require">联系电话</label>
                        <div class="input-wrapper">
-                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="联系电话不能为空"
+                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="联系电话不能为空"  onblur="javascript:LengthLimit(this,26);"
                            placeholder="填写联系电话" type="text" id="telephone" name="telephone" value="${map.telephone }"/>
                        </div>
                   </div>
                 </td>
                 <td>
                 <div  style="width: 400px;padding:0px;margin-top:-25px;">
-                    <label class="require"  >所属机构</label>
-	                    <select id="edu1" name="edu1" class="sxy-select-td" >
-		                    <option value="0" ${map.org_id=='0' ?'selected':''}>申报单位0</option>
-		                    <option value="1" ${map.org_id=='1' ?'selected':''}>申报单位1</option>
-		                    <option value="2" ${map.org_id=='2' ?'selected':''}>申报单位2</option>
-	                    </select>
+                    <label >所属机构</label>
+	                <div class="input-wrapper">
+                          <input class="sxy-txt " data-valid="isNonEmpty" disabled="disabled"  type="text" id="org_id" name="org_id" value="${map.org_name }"/>
+                      </div> 
                 </div>
                 </td>
             </tr>
@@ -224,7 +225,7 @@
                   <div  style="width: 400px">
                        <label class="require">职务</label>
                        <div class="input-wrapper">
-                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="职务不能为空"
+                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="职务不能为空"  onblur="javascript:LengthLimit(this,30);"
                            placeholder="填写职务" type="text" id="position" name="position" value="${map.position }"/>
                        </div>
                   </div>
@@ -244,7 +245,7 @@
             <tr class="sxy-tr">
                 <td colspan="3">
                   <div style="width: 400px">
-                      <label class="require">个人简介:</label>
+                      <label class="require">个人简介</label>
                       <div class="input-wrapper">
                           <input type="text" class="required" data-valid="isNonEmpty" data-error="个人简介不能为空" onblur="javascript:LengthLimit(this,100);"
                             placeholder="填写个人简介"  id="note" name="note" style="width: 1040px" value="${map.note }">
@@ -255,7 +256,7 @@
             <tr  class="sxy-tr">
                 <td colspan="3">
                    <div style="width: 400px">
-                       <span class="sxy_span">个性签名:</span>
+                       <span class="sxy_span">个性签名</span>
                        <div class="input-wrapper" style="margin-left: 20px">
                            <input type="text" placeholder="填写个人签名" id="signature"  onblur="javascript:LengthLimit(this,50);"
                            name="signature" style="width: 1040px" value="${map.signature }">
@@ -266,7 +267,7 @@
             <tr  class="sxy-tr" style="height: 0px">
                 <td colspan="7"  style="height: 0px">
                     <div style="width: 1200px;height: 30px">
-                        <span class="span_sign">我的标签:</span>
+                        <span class="span_sign">我的标签</span>
                         <div class="sxy-bottom-div" style="margin-left: 17px"><font class="sxy-bottom-font">心理学</font></div>
                         <div class="sxy-bottom-div"><font class="sxy-bottom-font">护理</font></div>
                         <div class="sxy-bottom-div"><font class="sxy-bottom-font">临床</font></div>

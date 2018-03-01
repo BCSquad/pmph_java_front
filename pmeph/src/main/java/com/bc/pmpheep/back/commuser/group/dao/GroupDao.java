@@ -308,4 +308,14 @@ public interface GroupDao {
 	 * 查询文件信息
 	 */
 	public List<Map<String,Object>> fileList(Map<String,Object> map);
+	
+	/**
+	 * 根据用户user_id和is_writer 修改用户在小组里面的名字
+	 * @introduction 
+	 * @author Mryang
+	 * @createDate 2018年1月22日 下午3:31:12
+	 * @param map
+	 * @return
+	 */
+	Integer updateName( Map<String, Object> map );
 }

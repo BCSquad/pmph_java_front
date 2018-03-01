@@ -26,48 +26,53 @@
 <body>
 <input type="hidden" id="wid" value="${wid}">
 <input type="hidden" id="marks" value="${map.bookmarks}">
+<input type="hidden" id="title" value="${map.title}">
 	<jsp:include page="/pages/comm/head.jsp">
-		<jsp:param value="homepage" name="pageTitle" />
+		<jsp:param value="articlepage" name="pageTitle" />
 	</jsp:include>
 	<div class="body">
 		<div class="cms-writer"><div class="text" onclick="window.location.href='${ctx}/writerArticle/initWriteArticle.action'">写文章</div></div>
 		<div class="content-wrapper">
 			<div class="area1">
-	    	<div class="_title">
-				<span>文章&gt; ${map.title }</span>
-			</div>
+		    	<div class="_title">
+					<span><a href="${ctx}/articlepage/toarticlepage.action" style="text-decoration: none;color:#999999">文章</a>&gt; ${map.title }</span>
+				</div>
 				<div class="wz_title">
 					<span>${map.title }</span>
 					<div style="width: 100%;">
-        		<div class="dzsc">
-        		   <c:if test="${flag=='no'}">
-        		     <img src="${ctx}/statics/image/dz02.png" onclick="addlikes()" id="dz"/>
-        		   </c:if>
-        		   <c:if test="${flag=='yes'}">
-        			 <img src="${ctx}/statics/image/${mark=='yes' ? 'dz02.png':'dz01.png'}" onclick="addlikes()" id="dz"/>
-        		   </c:if>	  
-        		      <img src="${ctx}/statics/image/${mark=='yes' ? 'sc101(1).png':'s102(1).png'}" onclick="addmark()" id="sc"/>
-        			  <div style="display: inline-block;vertical-align: top;margin-right: 8px;text-align:left;">
-                    </div>
-        		</div>
-        	</div>
+	        		<div class="dzsc">
+	        			 <img src="${ctx}/statics/image/${like=='yes' ? 'dz01.png':'dz02.png'}" onclick="addlikes()" id="dz"/>
+	        		      <img src="${ctx}/statics/image/${mark=='yes' ? 'sc101(1).png':'s102(1).png'}" onclick="addmark()" id="sc"/>
+	        			  <div style="display: inline-block;vertical-align: top;margin-right: 8px;text-align:left;"></div>
+	        		</div>
+        			</div>
 				</div>
 				<div class="th_title">
-	    		<span>医学随笔</span>
-	    		<span>${map.gmt_create }</span>
-	    		<img style="float: left;margin-top: 5px;margin-right: 5px;" src="${ctx}/statics/image/scan.png"/>
-	    		<span id="img_span">${map.clicks }</span>
-	    	</div>
+	    			<span>医学随笔</span>
+	    			<span>${map.gmt_create }</span>
+	    			<img style="float: left;margin-top: 5px;margin-right: 5px;" src="${ctx}/statics/image/scan.png"/>
+	    			<span id="img_span">${map.clicks }</span>
+	    		</div>
 	    	<!--内容-->
-	    	
-	    	<div class="yxsb_content">
-				${UEContent }
-	    	</div>
+		    	<div class="yxsb_content"> ${UEContent } </div>
+		    <!--文章附件-->
+		    	  <c:if test="${not empty cmsAttach}">
+				        <div class="attlist">
+				            <div class="atttitle2">
+				                	附件：
+				            </div>
+				            <div class="attlistContent">
+				                 <c:forEach items="${cmsAttach }" var="cattach">
+				            	  <span ><a   href="${ctx}/file/download/${cattach.attachment}.action" ><img class="pictureSize" src="${ctx}/statics/pictures/attachment.png">&nbsp;&nbsp;${cattach.attachment_name}</a></span><br>
+				                </c:forEach>
+				            </div>
+				        </div>
+		        	</c:if>
 	    	<div class="block">
                     
                     <div class="title">
                         <div class="line"></div>
-                           <div class="rd_name">文章评论（共${ComNum}条）</div>
+                           <div class="rd_name">文章评论<%-- （共${ComNum}条） --%></div>
                         <!-- <div class="scorestar" id="star">
                              <div class="scorestar1" id="score1"></div>
                              <div class="scorestar1" id="score2"></div>
@@ -91,8 +96,11 @@
                <c:forEach items="${listCom.rows}" var="list">
                     <div class="item" >
                         <div class="item_title">
-                        	<div style="float: left;"><img src="${ctx}/statics/image/rwtx.png" class="picturesize"/></div>
-                        	<div style="float: left;margin-left: 10px;margin-top: 5px;">${list.realname}</div>
+                        	<div style="float: left;">
+                        		<c:if test="${list.avatar=='DEFAULT'}"><img  src="${ctx}/statics/image/putongyhtouxiang.png" height="30"  width="30" /></c:if>
+                				<c:if test="${list.avatar!='DEFAULT'}"><img  src="${ctx}/image/${list.avatar}.action" height="30"  width="30" ></c:if>
+                        	</div>
+                        	<div style="float: left;margin-left: 10px;margin-top: 5px;">${list.nickname}</div>
                         	<%-- <div style="float: left;margin-left: 10px;">
                         	<c:if test="${list.score<=3}">
 	                        	<span class="rwtx1"></span>
@@ -141,8 +149,6 @@
 	                  <ul class="pagination" id="page1"></ul>
 	                  <div style="display: inline-block;    vertical-align: top;text-align: left">
 	                      <select id="edu" name="edu">
-	                          <option value="2" >每页2条</option>
-	                          <option value="5" >每页5条</option>
 	                          <option value="10">每页10条</option>
 	                          <option value="15">每页15条</option>
 	                          <option value="20">每页20条</option>
@@ -165,24 +171,25 @@
                     </div>
                     <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
                     <c:forEach items="${listArtSix}" var="list" varStatus="status">
-                    <c:if test="${status.index!=0}">
-                    <div class="content" id="JKFYDiv_0">
-                        <div class="item">
-                            <div class="ir_01"> 
-                            <div class="tt"><div class="a6_content">${list.title}</div></div>
-                           </div>
+	                <div class="${status.index==0 or status.index==3 ?'item' :'item behind'}" onclick="window.location.href='${ctx}/articledetail/toPage.action?wid=${list.id}'">
+                    
+                    <div  class="content" >
+                        <div class="content-image">
+                            <img src="${ctx}/statics/testfile/p2.png" style="width:276px;height:170px;"/>
                         </div>
+                        <p   class="content-title" style="cursor: pointer;">${list.title}</p>
                     </div>
-                     </c:if>
-                    </c:forEach>
+                    </div>
+                </c:forEach>
+                    
             </div>
     	</div>
     	<div class="area2">
     		<div style="position:relative;width: 275px;height: 410px;">
     			<div class="right_2">
-	    			<c:if test="${Art.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/tx.png" alt="头像" height="60"
+	    			<c:if test="${Art.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/default_image.png" height="60"
                                                               width="60"></c:if>
-                	<c:if test="${Art.avatar!='DEFAULT'}"><img src="${ctx}/image/${Art.avatar}.action" alt="头像" height="60"
+                	<c:if test="${Art.avatar!='DEFAULT'}"><img src="${ctx}/image/${Art.avatar}.action"  height="60"
                                                               width="60"></c:if>
 	    			
 	    			<span>作者：${Art.realname}</span>
@@ -198,7 +205,7 @@
 	    				<span>最近文章</span>
 	    				<c:forEach items="${listArt}" var="art">
 	    				<ul>
-	    					<li><span id="right_3_bt">${art.title}</span></li>
+	    					<li><span id="right_3_bt" style="cursor: pointer;" onclick="todetail('${art.id}')">${art.title}</span></li>
 	    					<li><span id="right_3_sj">${art.gmt_create}</span></li>
 	    					<li><hr style=" height:1px;border:none;border-top:1px dashed #dedede;margin-top: 10px;"></li>
 	    				</ul>
@@ -208,7 +215,7 @@
     		</div>
     		<!--文章链接-->
     		<div class="right_4">
-    			<span>想要阅读更多文章？狠戳这里</span>
+    			<div style="cursor: pointer;"  onclick="window.location.href='${ctx}/cms/list.action'"><span>想要阅读更多文章？狠戳这里</span></div>
     		</div>
     		<!--相关文章-->
     		<div class="right_5">

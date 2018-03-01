@@ -4,7 +4,7 @@ package com.bc.pmpheep.back.util;
  * 
  * 
  * 功能描述： 小组/用户默认路径与前缀
- * 
+ * 文章封面路径
  * 
  * 
  * @author (作者) 曾庆峰
@@ -19,9 +19,11 @@ package com.bc.pmpheep.back.util;
  */
 public class RouteUtil {
 	// 小组默认头像路径（现在没有数据没有路径，等有路径的时候加入）
-	public static final String DEFAULT_GROUP_IMAGE = "/static/default_image.png";
+	public static final String DEFAULT_GROUP_IMAGE = "/statics/image/default_image.png";
 	// 新建用户默认头像（现在没有数据没有路径，等有路径的时候加入）
-	public static final String DEFAULT_USER_AVATAR = "/static/default_image.png";
+	public static final String DEFAULT_USER_AVATAR = "/statics/image/default_image.png";
+	// 新建文章封面默认头像（现在没有数据没有路径，等有路径的时候加入）
+	public static final String DEFAULT_ARTICLE_AVATAR = "/statics/testfile/p2.png";
 	// mongoDB图片的前缀
 	public static final String MONGODB_IMAGE = "/image/";
 	// mongoDB文件的前缀(小组)
@@ -48,6 +50,9 @@ public class RouteUtil {
 		return gruopImage;
 	}
 
+
+	
+	
 	/**
 	 * 
 	 * 
@@ -58,13 +63,33 @@ public class RouteUtil {
 	 *
 	 */
 	public static String userAvatar(String avatar) {
-		if (StringUtil.isEmpty(avatar)) {
+		if (StringUtil.isEmpty(avatar)||"DEFAULT".equals(avatar)) {
 			avatar = DEFAULT_USER_AVATAR;
 		}
 		if (!DEFAULT_USER_AVATAR.equals(avatar)) {
 			avatar = MONGODB_IMAGE + avatar + ".action";
 		}
 		return avatar;
+	}
+	
+	
+	/**
+	 * 
+	 * 
+	 * 功能描述：判断文章封面是否是默认头像并为文章封面附上路径
+	 *
+	 * @param cover
+	 * @return
+	 *
+	 */
+	public static String articleAvatar(String cover) {
+		if (StringUtil.isEmpty(cover)||"DEFAULT".equals(cover)) {
+			cover = DEFAULT_ARTICLE_AVATAR;
+		}
+		if (!DEFAULT_ARTICLE_AVATAR.equals(cover)) {
+			cover = MONGODB_IMAGE + cover + ".action";
+		}
+		return cover;
 	}
 
 }

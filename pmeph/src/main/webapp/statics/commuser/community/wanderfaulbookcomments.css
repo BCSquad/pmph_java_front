@@ -49,14 +49,20 @@
    height:33px;margin-top:5px
 }
 .collection .content .content-text .personicon{
-    float:left;background-image: url(../../image/rwtx.png);height:33px;width:33px
+    float:left;height:33px;width:33px
 }
 .collection .content .content-text .username{
    height:33px;line-height:33px;float:left;max-width: 100px;margin-left:10px;margin-right:10px;font-size: 16px;color:#333333
 }
 .collection .content .content-text .staricon{
     background-image: url(../../image/css_sprites.png);background-repeat: no-repeat;
-    height: 33px;width: 15px;background-position: -183px -165px;float:left
+    height: 15px;width: 15px;float:left;margin-top: 8px
+}
+.yellowstar{
+	background-position: -183px -173px;
+}
+.graystar{
+	background-position: -183px -152px;
 }
 .collection .content .content-text .end{
   height:62px;line-height: 31px;overflow: hidden;font-size: 14px;color:#333333

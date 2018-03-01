@@ -6,8 +6,8 @@
 	
 	<!-- 写文章插入数据 -->
 	<insert id="insertWriteArticle" parameterType="java.util.Map"  useGeneratedKeys="true" keyProperty="table_trendst_id">
-		insert into cms_content (mid,parent_id,category_id,title,author_type,author_id,is_staging,path,summary,auth_status)
-		values(#{mid},#{parent_id},#{category_id},#{title},#{author_type},#{author_id},#{is_staging},#{path},#{summary},0
+		insert into cms_content (mid,parent_id,category_id,title,author_type,author_id,is_staging,path,summary,auth_status,cover)
+		values(#{mid},#{parent_id},#{category_id},#{title},#{author_type},#{author_id},#{is_staging},#{path},#{summary},0,#{cover}
 		)
 	</insert>
 	
@@ -19,6 +19,7 @@
 		parent_id = #{parent_id},
 		category_id = #{category_id},
 		title = #{title},
+		cover = #{cover},
 		author_type = #{author_type},
 		author_id = #{author_id},
 		is_staging = #{is_staging}, 
@@ -42,6 +43,7 @@
 			id as atrticle_id,
 			mid,
 			title,
+			cover,
 		max(gmt_update) 
 		FROM
 			cms_content

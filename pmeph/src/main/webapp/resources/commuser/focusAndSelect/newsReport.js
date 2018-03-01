@@ -64,7 +64,7 @@ $(function(){
 	                		   (list[i].isPromote?"<div class='items_img'>推荐</div> ":"")+
 	        	                "<div class=\"item1 cutmore\">" +
 	        	                "<a href='"+contextpath+"inforeport/toinforeport.action?id="+list[i].id+"'>"+list[i].title+"</a></div> "+
-	        	                "<div class=\"item2 cutmore\"><p style='margin:0'>"+(list[i].summary==null?"(无摘要介绍)":list[i].summary)+"</p></div> "+
+	        	                "<div class=\"item2 cutmore\"><p style='margin:0;height: 40px;line-height: 20px;'>"+(json[list[i].title+''+list[i].id]==null?"(内容为空)":json[list[i].title+''+list[i].id])+"</p></div> "+
 	        	                "<div class=\"item3\">  "+
 	        	                    "<div style=\"float: left;\">" +
 		        	                    "<div style='float:left;height:57px'><span class='cms-icon look'></span></div>" +
@@ -73,7 +73,7 @@ $(function(){
 		        	                    	"<span class='cms-icon "+(json[tarId]>0? "good":"nogood")+"' id='like"+list[i].id+"' onclick=\"addlike('"+list[i].id+"')\"></span></div>" +
 		        	                    "<div style='float:left;color:"+(json[tarId]>0? "#1abd44":"#b5b5b5")+"' id='likes"+list[i].id+"'>"+list[i].likes+"</div>" +
 	        	                    "</div>"+
-	        	                    "<div style='float:right'>创建日期："+formatDate(list[i].gmtCreate,'yyyy.MM.dd')+"</div> "+ 
+	        	                    "<div style='float:right'>发布时间："+formatDate(list[i].gmtCreate,'yyyy.MM.dd')+"</div> "+ 
 	        	                "</div> "+
 	                        "</div> ";
 	                	$("#content").append(html);

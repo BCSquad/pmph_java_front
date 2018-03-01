@@ -1,12 +1,18 @@
 package com.bc.pmpheep.back.commuser.cms.controller;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.bc.pmpheep.back.commuser.homepage.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -19,7 +25,9 @@ import com.bc.pmpheep.back.commuser.cms.bean.CmsNoticeList;
 import com.bc.pmpheep.back.commuser.cms.service.CmsNoticeManagementService;
 import com.bc.pmpheep.back.commuser.mymessage.service.NoticeMessageService;
 import com.bc.pmpheep.general.controller.BaseController;
+import com.bc.pmpheep.general.pojo.Content;
 import com.bc.pmpheep.general.pojo.Message;
+import com.bc.pmpheep.general.service.ContentService;
 import com.bc.pmpheep.general.service.MessageService;
 
 /**
@@ -47,10 +55,18 @@ public class CmsNoticeManagementController extends BaseController {
 	CmsNoticeManagementService cmsNoticeManagementService;
 	@Autowired
 	MessageService mssageService;
-	
+	@Autowired
+	ContentService contentServioce;
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.mymessage.service.NoticeMessageServiceImpl")
 	NoticeMessageService noticeMessageService;
+
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.homepage.service.HomeServiceImpl")
+	private HomeService homeService;
+	@Autowired
+	ContentService contentService;
+
 	/**
 	 * 跳转到教材列表页面
 	 * @author Mryang
@@ -63,6 +79,8 @@ public class CmsNoticeManagementController extends BaseController {
 	@RequestMapping(value = "/tolist", method = RequestMethod.GET)
 	public ModelAndView tolistPage(Integer pageSize, Integer pageNumber, Boolean isHot) {
 		ModelAndView modelAndView = new ModelAndView();
+		Map<String, Object> adInfo = homeService.getPageAdInfo("信息快报和遴选公告列表 ");
+		modelAndView.addObject("adInfo", adInfo);
 		modelAndView.setViewName("commuser/focusAndSelect/materialNotice");
 		return  modelAndView;
 	}
@@ -90,6 +108,16 @@ public class CmsNoticeManagementController extends BaseController {
 			userid=Long.valueOf(usermap.get("id").toString());
 		}
 		List<CmsNoticeList> cmsNoticeList =  cmsNoticeManagementService.list(pageSize, pageNumber, order,userid);
+		if(cmsNoticeList!=null && cmsNoticeList.size()>0){
+			for (CmsNoticeList cmsNotice : cmsNoticeList) {
+				Content content = contentService.get(cmsNotice.getMid());
+				if(content!=null){
+				 cmsNotice.setContentxt(removeHtml(content.getContent()));
+				}else{
+					 cmsNotice.setContentxt("(内容为空)");
+				}
+			}
+		}
 		return cmsNoticeList ;
 	}
     
@@ -98,14 +126,26 @@ public class CmsNoticeManagementController extends BaseController {
 		public ModelAndView toNoticeMessageDetail(HttpServletRequest request){
 			String messageId=request.getParameter("id");
 			String tag=request.getParameter("tag");
+//			ModelAndView mv = new ModelAndView();
+//			Map<String,Object> paraMap = new HashMap<String,Object>();
+//			paraMap.put("messageId", messageId);
+			Map<String, Object> user = getUserInfo();
+			String materialId=request.getParameter("materialId");
+			String cmsId=request.getParameter("csmId");
 			ModelAndView mv = new ModelAndView();
 			Map<String,Object> paraMap = new HashMap<String,Object>();
-			paraMap.put("messageId", messageId);
+			paraMap.put("materialId", materialId);
+			paraMap.put("cmsId", cmsId);
+			paraMap.put("userid", (user!=null?user.get("id"):""));
 			//标题、时间、邮寄地址、备注
 			Map<String,Object> mapTitle =new HashMap<>();
-			mapTitle=noticeMessageService.queryCMSNotice(paraMap);
+			mapTitle=noticeMessageService.queryNoticeMessageDetail(paraMap);
+			SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd");
+			mv.addObject("is_material_entry", mapTitle.get("is_material_entry"));
+			mv.addObject("firsttag", "首页");
 			mv.addObject("firsttag", "首页");
 			mv.addObject("firstpath", "homepage/tohomepage.action");
+			mv.addObject("materialId",materialId);
 			if(tag!=null && tag.equals("FromCommunityList")){
 				//来自教材社区列表的request
 				
@@ -117,29 +157,42 @@ public class CmsNoticeManagementController extends BaseController {
 				mv.addObject("secondtag", "遴选公告");
 				mv.addObject("secondpath", "cmsnotice/tolist.action");
 			}
-			
-			
-			if(mapTitle!=null && mapTitle.size()>0){
-				paraMap.put("attachmentId", mapTitle.get("attachmentId"));
-				paraMap.put("materialId", mapTitle.get("materialId"));
+			List<Map<String, Object>> cmsAttach = noticeMessageService.queryCMSAttach(paraMap);
+			mv.addObject("notEnd", 0);
+			if(mapTitle!=null && mapTitle.size()>0 && mapTitle.get("is_material_entry").toString()=="true"){
+				if("no".endsWith(mapTitle.get("ended").toString())){
+		        	   mv.addObject("notEnd", 1);
+		        }else{
+		        	   mv.addObject("notEnd", 0);
+		        }
+				
+				
+				paraMap.put("materialId", mapTitle.get("material_id"));
 				//备注附件
 				List<Map<String,Object>> listAttachment = noticeMessageService.queryNoticeMessageDetailAttachment(paraMap);
 				//联系人
 				List<Map<String,Object>> listContact = noticeMessageService.queryNoticeMessageDetailContact(paraMap);
 				
-				mv.addObject("map",mapTitle);
+				for(Map<String,Object> map :listAttachment){
+					map.put("attachmentId", "file/download/"+map.get("attachment")+".action");
+				}
 				mv.addObject("listAttachment",listAttachment);
 				mv.addObject("listContact",listContact);
-				
-			}
-			
+			}	
+			mv.addObject("map",mapTitle);
 			//mongoDB查询通知内容
-			Message message = mssageService.get(messageId);
-			
-			mv.addObject("message",message);
-			
-			
+			Content message= contentServioce.get(messageId);
+			mv.addObject("content",message.getContent());
+			mv.addObject("cmsAttach",cmsAttach);
 			mv.setViewName("commuser/message/noticeMessageDetail");
 			return mv;
+		}
+		//去掉字符串中的html标签
+		public String removeHtml(String str){
+			String regEx_html="<[^>]+>"; //定义HTML标签的正则表达式 
+			Pattern p_html=Pattern.compile(regEx_html,Pattern.CASE_INSENSITIVE); 
+			Matcher m_html=p_html.matcher(str); 
+			str=m_html.replaceAll(""); //过滤html标签 
+			return str;
 		}
 }

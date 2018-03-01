@@ -5,9 +5,9 @@
 .sbxq_title span{
 	font-family: MicrosoftYaHei;
 	letter-spacing: 0px;
-	color: #999999;
+	
 }
-/*医学随笔*/
+
 .notes {
     float:left;
     /*height: 830px;*/
@@ -48,7 +48,7 @@
     position: relative;
 }
 .behind{
-    margin-left: 20px;
+    margin-left: 15px;
 }
 .notes .item .inside{
     width:292px;
@@ -56,17 +56,16 @@
     margin-top:30px
 }
 .notes .item .command{
-    height:30px;
+     height:30px;
     width: 40px;
     float:left;
     position:absolute;
     top:10px;
     margin-top: 10px;
-    position:absolute;
-    top:10px;
     left:-6px;
     color:white;
-    background-image:url("../statics/image/wenzhangtuijian.png");
+    background-image:url(../../image/wenzhangtuijian.png);
+    cursor:pointer;
 }
 .notes .item .content{
     width:284px;
@@ -75,7 +74,7 @@
 }
 .notes .item .content-image{
     height: 182px;
-    width:284px
+    width:284px;
 }
 .notes .item .content-title{
     font-size: 18px;
@@ -83,6 +82,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow:ellipsis;
+   	cursor: pointer;
 }
 .notes .item .content-text{
     padding-left: 10px;
@@ -115,7 +115,7 @@
 }
 
 #span_1{
-	background-image: url(/statics/image/css_sprites.png);
+	background-image: url(../../image/css_sprites.png);
     background-position: -415px -149px;
     background-repeat: no-repeat;
     height: 25px;
@@ -125,7 +125,7 @@
 }
 
 #span_2{
-	background-image: url(/statics/image/css_sprites.png);
+	background-image: url(../../image/css_sprites.png);
     background-position: -415px -195px;
     background-repeat: no-repeat;
     height: 25px;
@@ -135,7 +135,7 @@
 }
 
 #span_3{
-	background-image: url(/statics/image/css_sprites.png);
+	background-image: url(../../image/css_sprites.png);
     background-position: -415px -245px;
     background-repeat: no-repeat;
     height: 25px;
@@ -168,34 +168,33 @@
 	width: 25px;
 	height: 25px;
 	margin-left: 15px;
+	border-radius: 50%;
 }
 
 .ryxx_xm{
-	font-family: MicrosoftYaHei;
-	color: #333333;
 	float: left;
-	margin-left: 9px;
-	font-weight: bold;
+	margin-left: 14px;
+	height: 30px;
+	color: #666666;
 }
 
 .ryxx_sj{
-	font-family: MicrosoftYaHei;
-	color: #bdbdbd;
-	float: right;
-	margin-right: 18px;
+	/* float: right; */
+	margin-left: 14px;
+	height: 30px;
+	color: #666666;
 }
 
-._load{
-	width: 1200px;
-	height: 25px;
-	margin-top: 30px;
+.pagination-wrapper{
+	float:right;
+    margin: 30px 10px 30px 0px;
 }
 
-._load span{
-	margin-left: 50%;
-	font-family: MicrosoftYaHei;
-	font-size: 16px;
-	letter-spacing: 0px;
-	color: #7d7d7d;
-	cursor: pointer;
+
+.content .content-image  img{
+	max-width: 284px;
+    max-height: 180px;
+    margin: auto;
+    display: block;
 }
+

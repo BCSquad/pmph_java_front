@@ -2,213 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.bc.pmpheep.back.commuser.cms.dao.CmsContentDao">
-	<sql id="key">
-		<!-- 去掉最后一个, -->
-		<trim suffixOverrides=",">
-			<if test="parentId != null">
-				parent_id,
-			</if>
-			<if test="path != null and path !=''" >
-				path,
-			</if>
-			<if test="mid != null and mid !=''">
-				mid,
-			</if>
-			<if test="categoryId != null">
-				category_id,
-			</if>
-			<if test="title != null and title !=''">
-				title,
-			</if>
-			<if test="summary != null and summary !=''">
-				summary,
-			</if>
-			<if test="keyword != null and keyword !=''">
-				keyword,
-			</if>
-			<if test="authorType != null">
-				author_type,
-			</if>
-			<if test="authorId != null">
-				author_id,
-			</if>
-			<if test="clicks != null">
-				clicks,
-			</if>
-			<if test="comments != null">
-				comments,
-			</if>
-			<if test="likes != null">
-				likes,
-			</if>
-			<if test="bookmarks != null">
-				bookmarks,
-			</if>
-			<if test="isStick != null">
-				is_stick,
-			</if>
-			<if test="sort != null">
-				sort,
-			</if>
-			<if test="deadlineStick != null and deadlineStick != ''">
-				deadline_stick,
-			</if>
-			<if test="isHot != null">
-				is_hot,
-			</if>
-			<if test="sortHot != null">
-				sort_hot,
-			</if>
-			<if test="deadlineHot != null and deadlineHot != ''">
-				deadline_hot,
-			</if>
-			<if test="isPromote != null">
-				is_promote,
-			</if>
-			<if test="sortPromote != null">
-				sort_promote,
-			</if>
-			<if test="deadlinePromote != null and deadlinePromote != ''">
-				deadline_promote,
-			</if>
-			<if test="isScheduled != null">
-				is_scheduled,
-			</if>
-			<if test="isHide != null">
-				is_hide,
-			</if>
-			<if test="isPublished != null">
-				is_published,
-			</if>
-			<if test="authStatus != null">
-				auth_status,
-			</if>
-			<if test="authUserId != null">
-				auth_user_id,
-			</if>
-			<if test="authDate != null and authDate != ''">
-				auth_date,
-			</if>
-			<if test="isDeleted != null">
-				is_deleted,
-			</if>
-			<if test="gmtReedit != null and gmtReedit != ''">
-				gmt_reedit,
-			</if>
-			<if test="materialId != null">
-				material_id,
-			</if>
-			<if test="isStaging != null">
-				is_staging,
-			</if>
-		</trim>
-	</sql>
-	<!-- sql片段对应?,id属性值任意 -->
-	<sql id="value">
-		<!-- 去掉最后一个, -->
-		<trim suffixOverrides=",">
-			<if test="parentId != null">
-				#{parentId},
-			</if>
-			<if test="path != null and path !=''" >
-				#{path},
-			</if>
-			<if test="mid != null and mid !=''">
-				#{mid},
-			</if>
-			<if test="categoryId != null">
-				#{categoryId},
-			</if>
-			<if test="title != null and title !=''">
-				#{title},
-			</if>
-			<if test="summary != null and summary !=''">
-				#{summary},
-			</if>
-			<if test="keyword != null and keyword !=''">
-				#{keyword},
-			</if>
-			<if test="authorType != null">
-				#{authorType},
-			</if>
-			<if test="authorId != null">
-				#{authorId},
-			</if>
-			<if test="clicks != null">
-				#{clicks},
-			</if>
-			<if test="comments != null">
-				#{comments},
-			</if>
-			<if test="likes != null">
-				#{likes},
-			</if>
-			<if test="bookmarks != null">
-				#{bookmarks},
-			</if>
-			<if test="isStick != null">
-				#{isStick},
-			</if>
-			<if test="sort != null">
-				#{sort},
-			</if>
-			<if test="deadlineStick != null and deadlineStick != '' ">
-				#{deadlineStick},
-			</if>
-			<if test="isHot != null">
-				#{isHot},
-			</if>
-			<if test="sortHot != null">
-				#{sortHot},
-			</if>
-			<if test="deadlineHot != null and deadlineHot != ''">
-				#{deadlineHot},
-			</if>
-			<if test="isPromote != null">
-				#{isPromote},
-			</if>
-			<if test="sortPromote != null">
-				#{sortPromote},
-			</if>
-			<if test="deadlinePromote != null and deadlinePromote != ''">
-				#{deadlinePromote},
-			</if>
-			<if test="isScheduled != null">
-				#{isScheduled},
-			</if>
-			<if test="isHide != null">
-				#{isHide},
-			</if>
-			<if test="isPublished != null">
-				#{isPublished},
-			</if>
-			<if test="authStatus != null">
-				#{authStatus},
-			</if>
-			<if test="authUserId != null">
-				#{authUserId},
-			</if>
-			<if test="authDate != null and authDate != '' ">
-				#{authDate},
-			</if>
-			<if test="isDeleted != null">
-				#{isDeleted},
-			</if>
-			<if test="gmtReedit != null">
-				#{gmtReedit},
-			</if>
-			<if test="materialId != null">
-				#{materialId},
-			</if>
-			<if test="isStaging != null">
-				#{isStaging},
-			</if>
-		</trim>
-	</sql>
+
 	<!-- 查询文章 -->
-	<select id="listCmsContentVO" parameterType="PageParameter"
-		resultType="CmsContentVO">
-		select cc.*,IFNULL(wu.realname,pu.realname) realname
+	<select id="listCmsContentVO" parameterType="java.util.Map"
+		resultType="java.util.Map">
+	select cc.*,wu.id as userId,
+		case 
+		when cc.author_type =1
+		then pu.realname
+		when  cc.author_type =2
+		then wu.realname
+		else '系统' end as realname,
+		case 
+		when cc.author_type =1
+		then pu.avatar
+		when  cc.author_type =2
+		then wu.avatar
+		else '系统' end as avatar,
+		cc.author_id
 		from cms_content cc
 		left join pmph_user pu on pu.id=cc.author_id
 		left join writer_user wu on wu.id=cc.author_id
@@ -217,18 +28,15 @@
 			and cc.is_deleted=0
 			and cc.auth_status=2 
 			and cc.is_published=1 
-		<if test="parameter.title != null and parameter.title != ''">
-			and cc.`title` like concat('%',#{parameter.title},'%')
-		</if>
+		
 		order by 
 				cc.`auth_date` desc
-		<if test="start !=null and pageNumber != null">
+		<if test="start !=null and pageSize != null">
 			limit #{start},#{pageSize}
 		</if>
 	</select>
 	<!-- 查询文章条数 -->
-	<select id="getCmsContentCount" parameterType="PageParameter"
-		resultType="java.lang.Integer">
+	<select id="getCmsContentCount"  resultType="java.lang.Integer">
 		select count(*)
 			from cms_content cc
 			left join pmph_user pu on pu.id=cc.author_id
@@ -238,8 +46,6 @@
 				and cc.is_deleted=0
 				and cc.auth_status=2 
 				and cc.is_published=1
-		<if test="parameter.title != null and parameter.title != ''">
-			and cc.`title` like concat('%',#{parameter.title},'%')
-		</if>
+		
 	</select>
 </mapper>

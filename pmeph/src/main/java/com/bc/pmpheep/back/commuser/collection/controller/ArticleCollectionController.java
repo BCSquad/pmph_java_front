@@ -46,12 +46,12 @@ public class ArticleCollectionController extends BaseController{
     	Map<String,Object> map=new HashMap<String, Object>();
     	Map<String,Object> userMap=getUserInfo();
     	
-//    	Long writerId=Long.valueOf(userMap.get("id").toString());
-//查询收是否有默认的文章收藏夹，如果没有，就新建一个文章的 默认收藏夹
-//    	Map<String, Object>  dmap = infoReportDao.queryDefaultFavorite(writerId);
-//    	if(dmap==null){
-//    		infoReportDao.insertDefaultFavorite(writerId);
-//		}
+    	Long writerId=Long.valueOf(userMap.get("id").toString());
+       //查询收是否有默认的文章收藏夹，如果没有，就新建一个文章的 默认收藏夹
+    	Map<String, Object>  dmap = infoReportDao.queryDefaultFavorite(writerId);
+     	if(dmap==null){
+    		infoReportDao.insertDefaultFavorite(writerId);
+ 		}
     	
     	List<Map<String, Object>> articleCollection=new ArrayList<>();
     	articleCollection = articleCollectionService.queryArticleCollectionList((BigInteger) userMap.get("id"));
@@ -65,11 +65,18 @@ public class ArticleCollectionController extends BaseController{
      */
     @RequestMapping(value="/toarticlecollectionlist")
     public ModelAndView initArticleList(HttpServletRequest request) throws UnsupportedEncodingException{
-    	Map<String,Object> map=new HashMap<String, Object>();
     	Map<String,Object> userMap=getUserInfo();
+    	Long writerId=Long.valueOf(userMap.get("id").toString());
+        //查询收是否有默认的文章收藏夹，如果没有，就新建一个文章的 默认收藏夹
+     	Map<String, Object>  dmap = infoReportDao.queryDefaultFavorite(writerId);
+      	if(dmap==null){
+     		infoReportDao.insertDefaultFavorite(writerId);
+     		dmap = infoReportDao.queryDefaultFavorite(writerId);
+  		}
+    	Map<String,Object> map=new HashMap<String, Object>();
     	Map<String,Object> rmap=new HashMap<>();
     	request.setCharacterEncoding("utf-8");
-    	BigInteger favoriteId=new BigInteger(request.getParameter("favoriteId")); 
+    	BigInteger favoriteId=new BigInteger(dmap.get("id").toString()); 
     	String pagenum=request.getParameter("pagenum");
     	String pagesize=request.getParameter("pagesize");
     	int curpage=1;

@@ -14,6 +14,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Request;
 
+import com.bc.pmpheep.back.util.RouteUtil;
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -90,8 +92,8 @@ public class ScheduleController extends BaseController{
              }
         }
         
-		int currentPage = 1;
-		int pageSize = 4;
+		int currentPage = 0;
+		int pageSize = 5;
 		
 		if(null!=currentPageStr&&!currentPageStr.equals("")){
 			 currentPage = Integer.parseInt(currentPageStr);
@@ -101,24 +103,37 @@ public class ScheduleController extends BaseController{
 		}
 		
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<>(currentPage,pageSize);
-		
 		paraMap.put("userId", userId);
 		paraMap.put("endPage", pageSize);
 		
 		pageParameter.setParameter(paraMap);
 		//代办事项列表
 		PageResult<Map<String,Object>> pageResult = scheduleService.selectScheduleList(pageParameter);
+		for(Map<String, Object> map:pageResult.getRows()){
+         	/*if("DEFAULT".equals(map.get("avatar").toString())){
+ 				map.put("avatar", "statics/pictures/head.png");
+ 			}else{
+ 				map.put("avatar", "file/download/"+map.get("avatar")+".action");
+ 			}*/
+            map.put("avatar", RouteUtil.userAvatar(MapUtils.getString(map, "avatar")));
+         }
 		ModelAndView mv = new ModelAndView();
 		//机构用户基本信息
 		Map<String,Object> map = scheduleService.selectOrgUser(userId);
 		if(null!=map&&map.size()>0){
-			boolean license =  (boolean) map.get("is_proxy_upload");
-			boolean progress = map.get("progress")=="1"?true:false;
+			/*boolean license =  (boolean) map.get("is_proxy_upload");
+			String progress = (String) map.get("progress");
 			if(license==true&&progress==true){
 				map.put("license","true");
 			}else{
 				map.put("license","false");
-			}
+			}*/
+			/*if("DEFAULT".equals(map.get("avatar").toString())||"/static/default_image.png".equals(map.get("avatar").toString())){
+				map.put("avatar", "statics/pictures/head.png");
+			}else{
+				map.put("avatar", "file/download/"+map.get("avatar").toString().replace("/image/","/")+".action");
+			}*/
+            map.put("avatar", RouteUtil.userAvatar(MapUtils.getString(map, "avatar")));
 			map.put("time", time);
 			map.put("userId", userId);
 			map.put("pageResult", pageResult);
@@ -159,7 +174,7 @@ public class ScheduleController extends BaseController{
 		}*/
 		
 		int currentPage = 0;
-		int pageSize = 8;
+		int pageSize = 5;
 		if(null!=currentPageStr&&!currentPageStr.equals("")){
 			 currentPage = Integer.parseInt(currentPageStr);
 		}
@@ -189,6 +204,16 @@ public class ScheduleController extends BaseController{
 		if(null!=map&&map.size()>0){
 			map.put("pageResult", pageResult);
 			map.put("userId", userId);
+			
+			/*if("DEFAULT".equals(map.get("avatar").toString())||"/static/default_image.png".equals(map.get("avatar").toString())){
+				map.put("avatar", "statics/pictures/head.png");
+			}else{
+				map.put("avatar", "file/download/"+map.get("avatar").toString().replace("/image/","/")+".action");
+			}*/
+            map.put("avatar", RouteUtil.userAvatar(MapUtils.getString(map, "avatar")));
+			map.put("userId", userId);
+			map.put("pageResult", pageResult);
+			
 			mv.addObject("map",map);
 
 		}else{

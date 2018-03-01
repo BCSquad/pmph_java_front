@@ -2,6 +2,7 @@ package com.bc.pmpheep.back.commuser.homepage.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -15,14 +16,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService;
 import com.bc.pmpheep.back.commuser.homepage.service.HomeService;
 import com.bc.pmpheep.back.template.service.TemplateService;
+import com.bc.pmpheep.general.controller.BaseController;
+import com.bc.pmpheep.general.pojo.Message;
+import com.bc.pmpheep.general.service.MessageService;
 
 
 //首页controller
 @Controller
 @RequestMapping("/homepage")
-public class HomeController {
+public class HomeController extends BaseController{
 
     @Autowired
     @Qualifier("com.bc.pmpheep.back.homepage.service.HomeServiceImpl")
@@ -30,22 +35,68 @@ public class HomeController {
     @Autowired
     @Qualifier("com.bc.pmpheep.back.template.service.TemplateService")
     private TemplateService templateService;
+	@Autowired
+	private MessageService messageService;
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService")
+	private ArticleSearchService articleSearchService;
 
     @RequestMapping("/tohomepage")
     public ModelAndView move(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         int flag = 0;
-        List<Map<String, Object>> listDou = homeService.queryDocument();
+        Map<String, Object> user=getUserInfo();
+        String logUserId= null;
+        if (user!=null && user.get("id")!=null && !"".equals(user.get("id"))) {
+        	logUserId = user.get("id").toString();
+		}
+        
         List<Map<String, Object>> listNot = homeService.queryNotice();
         List<Map<String, Object>> listArt = homeService.queryArticle(4);
-        List<Map<String, Object>> listAut = homeService.queryAuthor();
+        List<Map<String, Object>> listAut = homeService.queryAuthor(logUserId);
         List<Map<String, Object>> listCom = homeService.queryComment();
+        int countSurvey=homeService.countSurvey();
 
+        Map<String,Object> adInfo1=homeService.getPageAdInfo("首页轮播");
+        Map<String,Object> adInfo2=homeService.getPageAdInfo("首页中部");
+        for (Map<String, Object> map : listCom) {
+			String url=map.get("image_url").toString();
+			if(url.equals("DEFAULT")){
+				map.put("image_url", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+			}
+		}
+        //根据登录人查询可见公告，未登录查询所有人可见公告
+        
+        List<Map<String, Object>> listDou= homeService.queryDocument(user==null?"":user.get("id").toString());
         modelAndView.addObject("listDou", listDou);
         modelAndView.addObject("listNot", listNot);
         modelAndView.addObject("listArt", listArt);
         modelAndView.addObject("listAut", listAut);
         modelAndView.addObject("listCom", listCom);
+        modelAndView.addObject("adInfo1", adInfo1);
+        modelAndView.addObject("adInfo2", adInfo2);
+        modelAndView.addObject("countSurvey", countSurvey);
+        List<Map<String, Object>> listM =new ArrayList<Map<String,Object>>();
+        if(user==null){
+        	listM = homeService.queryMaterial("0");
+        }else{
+        	listM = homeService.queryMaterial(user.get("id").toString());
+        }
+        modelAndView.addObject("listM", listM);
+        //读取mongeldb里面的图片 
+        /*for (Map<String, Object> pmap : listArt) {
+			Message message=messageService.get((String) pmap.get("mid"));
+			if(message!=null){
+				List<String> imglist = articleSearchService.getImgSrc(message.getContent());
+			    if(imglist.size()>0){
+			    	pmap.put("imgpath", imglist.get(0));
+			    }else{//没有图片放置默认图片
+			    	pmap.put("imgpath",request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+			    }
+			}else{//没有图片放置默认图片
+				pmap.put("imgpath", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+			}
+		}*/
 
         List<Map<String, Object>> types = homeService.queryBookType(0);
         modelAndView.addObject("bookTypes", types);
@@ -60,8 +111,10 @@ public class HomeController {
 
         Map<String, Object> rowsmap = new HashMap<String, Object>();
         rowsmap.put("startrows", -1);
-        rowsmap.put("type", MapUtils.getIntValue(types.get(0), "id"));
-        List<Map<String, Object>> listrows = homeService.queryBook(rowsmap);
+//      rowsmap.put("type", MapUtils.getIntValue(types.get(0), "id"));
+        rowsmap.put("type",1);
+    //    List<Map<String, Object>> listrows = homeService.queryBook(rowsmap);
+        int listrows = homeService.countBookByType("1");
         //模板(首页默认显示学校教育下的书籍,从第一条开始显示，每页10条数据)
         Map<String, Object> pmap = new HashMap<String, Object>();
         pmap.put("startrows", 0);
@@ -87,10 +140,10 @@ public class HomeController {
         }
         html += templateService.mergeTemplateIntoString(vm, map2);
 
-        if (listrows.size() % 10 == 0) {
-            flag = listrows.size() / 10;
+        if (listrows % 10 == 0) {
+            flag = listrows / 10;
         } else {
-            flag = listrows.size() / 10 + 1;
+            flag = listrows / 10 + 1;
         }
         modelAndView.addObject("allrows", flag);
         modelAndView.addObject("thisrows", "1");
@@ -224,5 +277,19 @@ public class HomeController {
         List<Map<String, Object>> listSal = homeService.querySale(Integer.parseInt(type));
         map.put("type", listSal);
         return map;
+    }
+    
+    /**
+     * 添加好友
+     * @param request
+     * @return
+     */
+    @RequestMapping("addfriend")
+    @ResponseBody
+    public String addfriend(HttpServletRequest request){
+    	String target_id=request.getParameter("target_id");
+    	Map<String, Object> user=getUserInfo();
+    	String returncode=homeService.addfriend(user.get("id").toString(), target_id);
+    	return returncode;
     }
 }

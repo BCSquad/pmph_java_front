@@ -24,21 +24,28 @@
 	
 	<!-- 获取申报教材中书籍审核结果 -->
 	<select id="getTextBookCheckResult" parameterType="java.util.Map" resultType="TextBookCheckVO">
-		SELECT 
-			d.`material_id`, dp.`textbook_id`,
+		SELECT 			
+			d.`material_id`, dp1.`textbook_id`,d.online_progress,
 			tb.`textbook_name`,d.`user_id`,
 			dp.`chosen_position`,dp.`rank`,
 			tb.`is_chief_chosen`,tb.`is_published` 
+			,tb.is_locked
 		FROM 
-			`dec_position` dp 
-		LEFT JOIN 
 			`declaration` d
+		
+		LEFT JOIN 
+			`dec_position` dp1 
 		ON 
-			dp.`declaration_id` = d.`id` 
+			dp1.`declaration_id` = d.`id` 
+
 		LEFT JOIN 
 			`textbook` tb
 		ON 
-			tb.`id`= dp.`textbook_id`
+			tb.`id`= dp1.`textbook_id`
+		LEFT JOIN 
+			`dec_position_published` dp 
+		ON 
+			dp.`declaration_id` = d.`id` and tb.`id`= dp.`textbook_id`
 		LEFT JOIN 
 			`material` m
 		ON 
@@ -47,6 +54,8 @@
 			d.`user_id`=#{userId}
 		AND 
 			d.`material_id`=#{materialId}
+		and 
+			d.online_progress>0
 	</select>
 	
 	<!-- 获取作家用户申报教材消息 -->
@@ -61,7 +70,8 @@
 			d.`is_deleted` =0
 		AND
 			d.`receiver_id`=#{userId}
-		
+		AND 
+			d.`material_id`=#{materialId}
 		ORDER BY 
 			d.`gmt_create` DESC 
 		LIMIT 0,4

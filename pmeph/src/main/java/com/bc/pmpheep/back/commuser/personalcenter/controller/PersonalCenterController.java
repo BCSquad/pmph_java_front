@@ -9,6 +9,8 @@ import java.security.MessageDigest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,11 +27,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService;
 import com.bc.pmpheep.back.commuser.personalcenter.bean.PersonalNewMessage;
 import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
+import com.bc.pmpheep.back.commuser.survey.service.SurveyService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.template.service.TemplateService;
 import com.bc.pmpheep.back.util.MD5;
 import com.bc.pmpheep.general.controller.BaseController;
+import com.bc.pmpheep.general.pojo.Content;
 import com.bc.pmpheep.general.pojo.Message;
+import com.bc.pmpheep.general.service.ContentService;
 import com.bc.pmpheep.general.service.MessageService;
 
 //首页controller
@@ -47,11 +52,15 @@ public class PersonalCenterController extends BaseController {
     private PersonalService personalService;
     
     @Autowired
-	private MessageService messageService;
+	private ContentService contentService;
     
     @Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService")
 	private ArticleSearchService articleSearchService;
+    //我的问卷
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.survey.service.SurveyServiceImpl")
+	SurveyService surveyService; 
     
 
     @RequestMapping("/tohomepage")//个人中心动态
@@ -73,28 +82,39 @@ public class PersonalCenterController extends BaseController {
         String logUserId = getUserInfo().get("id").toString();
         Map<String, Object> permap = new HashMap<String, Object>();
         
-        
+        //String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
+        paraMap.put("contextpath", contextpath);
         
         //所进入的是谁的主页
         String userId = request.getParameter("userId");
         Boolean selfLog = null;
+        Map<String,Object> friendShip = new HashMap<String,Object>();
+        friendShip = personalService.queryOurFriendShip(userId,logUserId);
         if (userId != null && !"".equals(userId.trim()) && !logUserId.equals(userId.trim())) {
         	paraMap.put("logUserId", userId);
 			vm_map.put("logUserId", userId);
 			mv.addObject("logUserId",userId);
 			permap = personalService.queryUserById(userId);
 			selfLog = false;
+			//真正的登录人real_logUserId， 而logUserId是主页主人，查询id
+	        friendShip.put("logUserId", userId);
 		}else{
 			paraMap.put("logUserId", logUserId);
         	vm_map.put("logUserId", logUserId);
         	mv.addObject("logUserId",logUserId);
         	permap = this.getUserInfo();//个人信息
         	selfLog = true;
+        	//真正的登录人real_logUserId， 而logUserId是主页主人，查询id
+            friendShip.put("logUserId", logUserId);
 		}
         paraMap.put("selfLog", selfLog);
         mv.addObject("selfLog", selfLog);
         vm_map.put("selfLog", selfLog);
         
+        //真正的登录人real_logUserId， 而logUserId是主页主人，查询id
+        friendShip.put("real_logUserId", logUserId);
+    	mv.addObject("friendShip", friendShip);
+    	
       //查询个人主页共用部分 收藏 好友 小组
         queryPersonalRightPageInfo(mv, permap);
         
@@ -118,9 +138,9 @@ public class PersonalCenterController extends BaseController {
 			List<Map<String,Object>> List_map = personalService.queryWriterUserTrendst(pageParameter);
 			count = personalService.queryWriterUserTrendstCount(pageParameter);
 			//分页数据代码块
-			String html = this.mergeToHtml("commuser/personalcenter/writerUserTrendst.vm",contextpath, pageParameter, List_map,vm_map);
+			//String html = this.mergeToHtml("commuser/personalcenter/writerUserTrendst.vm",contextpath, pageParameter, List_map,vm_map);
 			mv.addObject("List_map",List_map);//测试
-			mv.addObject("html",html);
+			//mv.addObject("html",html);
 			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
 		}else if("tsjc".equals(pagetag)){ //图书纠错 (我是第一主编)
 			//从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
@@ -223,10 +243,14 @@ public class PersonalCenterController extends BaseController {
 			String[] names={};
 			String[] namesChi = {};
 			queryConditionOperation(names,namesChi,request, mv, paraMap,vm_map);
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			String dateStr = sdf.format(date);
+			paraMap.put("dateStr", dateStr);
 			pageParameter.setParameter(paraMap);
 
 			List<Map<String,Object>> List_map = personalService.mySurvey(pageParameter);
-			count = personalService.myCommentCount(pageParameter);
+			count = personalService.mySurveyCount(pageParameter);
 			
 			
 			//分页数据代码块
@@ -551,21 +575,14 @@ public class PersonalCenterController extends BaseController {
 		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
 		String img_url = basePath+"statics/image/564f34b00cf2b738819e9c35_122x122!.jpg";
 		if (!"".equals(mid)) {
-			Message message=messageService.get(mid);
-			if(message!=null){
-				List<String> imglist = articleSearchService.getImgSrc(message.getContent());
+			Content content = contentService.get(mid);
+			if(content!=null){
+				List<String> imglist = articleSearchService.getImgSrc(content.getContent());
 			    if(imglist.size()>0){
 			    	img_url = imglist.get(0);
 			    	if (img_url.length()>0) {
-			    		img_url=img_url.substring(img_url.indexOf("/ueditor/jsp/upload/image"), img_url.length());
-			    		//本地项目名和相对路径不一定一样 此处文章图片会保存到应用发布地址 如 pmeph1 而相对路径是pmeph 此处需拼接回真是应用的发布地址
-			    		String realpath = request.getRealPath("/");//D:\Program Files\apache-tomcat-7.0.78\webapps\pmeph1\
-			    		realpath = realpath.substring(0,realpath.length()-1);
-			    		realpath=realpath.substring(realpath.lastIndexOf("\\"), realpath.length());
-			    		img_url = realpath+img_url;
+			    		img_url = basePath+img_url;
 					}
-			    	
-			    	
 			    }
 			}
 		}
@@ -588,10 +605,12 @@ public class PersonalCenterController extends BaseController {
 			ModelAndView mv = new ModelAndView();
 			String surveyIdStr = request.getParameter("surveyId");
 			long surveyId = new Long(surveyIdStr);
-			 Map<String, Object> paraMap = new HashMap<String, Object>();
-		        String logUserId = getUserInfo().get("id").toString();
-				paraMap.put("logUserId", logUserId);
-				
+			//获取调查基本信息
+			Map<String,Object> mapSurvey = surveyService.getSurveyBaseInfo(surveyId);
+			Map<String, Object> paraMap = new HashMap<String, Object>();
+	        String logUserId = getUserInfo().get("id").toString();
+			paraMap.put("logUserId", logUserId);
+			paraMap.put("surveyId", surveyId);
 			//查询该调查包含的所有题目
 			List<Map<String,Object>> list = personalService.getSurvey(surveyId);
 			List<Map<String,Object>> listResult = new ArrayList<Map<String,Object>>();
@@ -603,15 +622,13 @@ public class PersonalCenterController extends BaseController {
 						String questionIdStr = question.get("id").toString();
 						if(null!=questionIdStr&&!questionIdStr.equals("")){
 							long questionId = Long.valueOf(questionIdStr).longValue();
-							List<Map<String,Object>> listOptions = personalService.getOptions(questionId);
-							
+							List<Map<String,Object>> listOptions = surveyService.getOptions(questionId);
 							//查询单选答案
 							paraMap.put("questionId", questionId);
-							  String answer = personalService.getAnswers(paraMap);
+							String answer = personalService.getAnswers(paraMap);
 							//查询多选答案
-							  String che = personalService.getCheckAnswers(paraMap);
-							
-							  boolean flag=false;
+							String che = personalService.getCheckAnswers(paraMap);
+							boolean flag=false;
 							  if (null!=che&&""!=che) {
 								  String[] checkAnswer=che.split(",");
 								  for (String ch : checkAnswer) {
@@ -627,16 +644,16 @@ public class PersonalCenterController extends BaseController {
 									}
 								}
 							}
-							
 							question.put("listOptions", listOptions);
 							question.put("answer", answer);
 							listResult.add(question);
 						}
-					}else if(question.get("type").equals(3)||question.get("type").equals(5)){
+					}else if(question.get("type").equals(4)||question.get("type").equals(5)){
 						//查询填空答案
 						String questionIdStr = question.get("id").toString();
 						if(null!=questionIdStr&&!questionIdStr.equals("")){
 							long questionId = Long.valueOf(questionIdStr).longValue();
+							paraMap.put("questionId", questionId);
 							 String inp = personalService.getInpAnswers(paraMap);
 							question.put("inp", inp);
 							listResult.add(question);
@@ -647,12 +664,17 @@ public class PersonalCenterController extends BaseController {
 					
 				}
 			}
-			
+			Map<String, Object> btn =personalService.btnSaveOrHidden(paraMap);
+			mv.addObject("btn",btn);
+			mv.addObject("logUserId",logUserId);
+			mv.addObject("mapSurvey",mapSurvey);
 			mv.addObject("listSesult",listResult);
+			mv.addObject("surveyId",surveyId);
 			mv.addObject("listSize",listResult.size());
 			mv.setViewName("commuser/personalcenter/queryMySurvey");
 			return mv;
 		}
+		
 		
 		
 		/**
@@ -710,5 +732,17 @@ public class PersonalCenterController extends BaseController {
 			resultMap.put("flag", flag);
 			return resultMap;
 		}
+		
+		//弹框回显短评内容
+		@RequestMapping(value="/shortComment")
+		@ResponseBody
+		public Map<String,Object> shortComment(HttpServletRequest  request){
+			String uid=request.getParameter("uid");
+			Map<String,Object> paraMap = new HashMap<String,Object>();
+				paraMap.put("id", uid);
+				Map<String,Object> map1 = personalService.shortComment(paraMap);
+				return map1;
+		}
+		
 	
 }

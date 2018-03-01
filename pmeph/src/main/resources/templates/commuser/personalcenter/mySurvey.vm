@@ -8,19 +8,11 @@
 	<div class="blank_space"></div>
 	#foreach($c in $!{List_map})
         <div class="email_content">
-        	#if(($c.curdate)<($c.enddate))  
-	            <div class="email_right">
-		            <a class="a1" target="_blank" href="$!{contextpath}personalhomepage/queryMySurvey.action?surveyId=$!{c.id}">
-		            	&nbsp;&nbsp;&nbsp;&nbsp;$!{c.title}已通过
+	            <div class="email_right" >
+		            <a style="cursor:pointer" class="a1" target="_blank" href="$!{contextpath}personalhomepage/queryMySurvey.action?surveyId=$!{c.id}">
+		            	&nbsp;&nbsp;&nbsp;&nbsp;$!{c.title}<span  class="newTimeFont">$!{c.gtime}</span>
 		            </a>
 	            </div>
-	       #else  
-	          <div class="email_right">
-		            <a class="a2" href="#">
-		            	&nbsp;&nbsp;&nbsp;&nbsp;$!{c.title}已通过
-		            </a>
-	            </div>   
-           #end  
 	      
         </div>
     #end    

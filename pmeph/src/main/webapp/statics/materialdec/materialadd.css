@@ -21,6 +21,7 @@
 }
 .ts_radio{
 	width: 280px;
+	height: 30px;
 }
 .ts_radio input{
 	vertical-align:middle;
@@ -52,6 +53,7 @@
 	border: solid 1px #dedede;
 }
 .add_img{
+	margin-top:7px;
 	cursor: pointer;
 }
 
@@ -305,12 +307,13 @@
 
 .scys{
 	width: 78px;
-	height: 24px;
+	height: 30px;
 	background-color: #70bcc3;
 	border-radius: 2px;
 	cursor: pointer;
 	float: left;
 	text-align: center;
+	line-height: 30px;
 }
 
 .scys span{
@@ -354,6 +357,7 @@
 .fileNameDiv{
 	float: left;
 	margin-right: 10px;
+	line-height: 30px;
 }
 
 .radio_tb{
@@ -361,4 +365,14 @@
 }
 .radio_tb tr td{
 	border: 0;
+}
+
+.cg_input1{
+	width: 180px;
+	height: 26px;
+	line-height: 26px;
+	border: solid 1px red;
+	padding-left: 10px;
+	border-radius:3px;
+	
 }

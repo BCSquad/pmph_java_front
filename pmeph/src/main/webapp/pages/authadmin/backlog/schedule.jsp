@@ -34,7 +34,7 @@
     <jsp:param name="pageTitle" value="backlog"></jsp:param>
 </jsp:include>
 <div class="body" style="background-color:#f6f6f6;float: left">
-	<input id="license" value="${map.license}" type="hidden"/>
+	<input id="license" value="${map.progress}" type="hidden"/>
     <div class="content-wrapper">
         <div class="big">
                 <div class="left">待办事项</div>
@@ -59,10 +59,10 @@
 	                        <div class="leftContentSmall">
 	                            <div class="pictureDiv">
 	                            	<c:if test="${one.TYPE=='A'}">
-	                            		<img  class="picture">
+	                            		<img  class="pictureB" src="${ctx}/statics/image/pic3555.png">
 	                            	</c:if>
 	                                <c:if test="${one.TYPE=='B'}">
-	                                	<img  class="pictureB" src="${ctx}/statics/image/pic3555.png">
+	                               		<img  class="picture">	
 	                                </c:if>
 	                            </div>
 	                        </div>
@@ -77,7 +77,7 @@
 	                            <div class="leftPictureAndName">
 	                                <div class="upContent">
 	                                        <div class="headPicture">
-	                                            <img class="picture1"  src="${ctx}/statics/pictures/head.png">
+	                                            <img class="picture1"  src="${ctx}/${one.avatar}">
 	                                            <%-- <img class="picture1"  src="${ctx}${one.avatar}"> --%>
 	                                        </div>
 	                                        <div class="username">
@@ -91,7 +91,7 @@
 	                                </div>
 	                            </div>
 	                            <div class="rightButton">
-	                                <div onclick="toogleTip('block','${one.TYPE}',${one.auditId})" class="buttonDiv">
+	                                <div onclick="toogleTip('block','${one.TYPE}','${one.auditId}','${one.ID}')" class="buttonDiv">
 	                                        		办理
 	                                </div>
 	                            </div>
@@ -124,16 +124,16 @@
                 </div>
             </div>
             <div class="gray ie" onclick="toogleTip('none')"></div>
-            	<c:if test="${map.pageResult.total>=1 }">
+            	<c:if test="${map.pageResult.total>5 }">
             	<div class="pageDiv">
                 <div style="float: right;">
                     <ul class="pagination" id="page1">
                     </ul>
                     <div style="display: inline-block;    vertical-align: top">
                         <select id="edu" name="edu" >
-                            <option value="2" ${map.pageResult.pageSize=='2' ?'selected':''}>每页2条</option>
-                            <option value="3" ${map.pageResult.pageSize=='3' ?'selected':''}>每页3条</option>
-                            <option value="4" ${map.pageResult.pageSize=='4' ?'selected':''}>每页4条</option>
+                            <option value="5" ${map.pageResult.pageSize=='5' ?'selected':''}>每页5条</option>
+                            <option value="10" ${map.pageResult.pageSize=='10' ?'selected':''}>每页10条</option>
+                            <option value="15" ${map.pageResult.pageSize=='15' ?'selected':''}>每页15条</option>
                         </select>
                     </div>
                     <div class="pageJump">
@@ -152,7 +152,7 @@
 			<c:otherwise>
 				<div class="info">
             <div class="topPictureDiv">
-                <img class="topPicture"src="${ctx}/statics/pictures/head.png">
+                <img class="topPicture"src="${ctx}/${map.avatar}">
             </div>
             <div class="firstRow">
                 <span>${map.org_name }</span>
@@ -165,12 +165,12 @@
                     <span class="littleTitle">${map.org_name},欢迎您!</span>
                     <!-- <span class="littleTitle">阿打算大所大所大所大所大</span> -->
                 </div>
-                <c:if test="${map.license=='false'}">
+                <c:if test="${(map.progress==0||map.progress==2)}">
                 	<div>
 	                	<span class="littleTitle2" onclick="toAuthAudit(${map.userId})">未认证</span>
 	                </div>
                 </c:if>
-                <c:if test="${map.license=='true'}">
+                <c:if test="${map.progress==1}">
                 	<div>
 	                	<span class="littleTitle3">已认证</span>
 	                </div>
@@ -217,9 +217,9 @@
             
         });
     })
-    function toogleTip(val,type,auditId) {
+    function toogleTip(val,type,auditId,decId) {
     	var license = $("#license").val();
-    	if(license=='false'){
+    	if(license==0||license==2){
     		 $('.tip').css('display',val);
     	     $('.gray').css('display',val);
     	} else{ 
@@ -227,7 +227,8 @@
     			//跳转教师资格认证页面
     			window.location.href="${ctx}/teacherauth/toPage.action?";
     		}else{
-    			window.location.href="${ctx}/dataaudit/toPage.action?material_id="+auditId;
+    			//dataaudit/toMaterialAudit.action?material_id=10&declaration_id=123&view_audit=audit
+    			window.location.href="${ctx}/dataaudit/toMaterialAudit.action?material_id="+auditId+"&declaration_id="+decId+"&view_audit=audit";
     		}
     	}	
     		

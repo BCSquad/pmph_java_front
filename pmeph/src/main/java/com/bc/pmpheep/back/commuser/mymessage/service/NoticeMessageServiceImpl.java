@@ -49,6 +49,7 @@ public class NoticeMessageServiceImpl implements NoticeMessageService {
 		return map;
 	}
 
+	
 	//查询教材备注相关的附件
 	@Override
 	public List<Map<String, Object>> queryNoticeMessageDetailAttachment(Map<String, Object> paraMap) {
@@ -70,7 +71,61 @@ public class NoticeMessageServiceImpl implements NoticeMessageService {
 		return noticeMessageDao.queryCMSNotice(paraMap);
 	}
 
+	//更新通知点击量
+	@Override
+	public void updateNoticeClicks(String cmsId) {
+		noticeMessageDao.updateNoticeClicks(cmsId);
+		
+	}
 	
+	//查询通知数据总量
+	@Override
+	public int selectNoticeMessageTotalCount(Map<String, Object> paraMap) {
+		//系统消息数量
+		int count1 = noticeMessageDao.selectNoticeMessageSysCount(paraMap);
+		//公告数量
+		int count2 = noticeMessageDao.selectNoticeMessageCount(paraMap);
+		String condition  = (String) paraMap.get("condition");
+		if(null==condition){
+			return count1+count2;
+		}else if(condition.equals("4")){
+			return count2;
+		}else if(condition.equals("1")||condition.equals("0")){
+			return count1;
+		}else{
+			return count1+count2;
+		}
+	}
+
+	//查询系统消息总量
+	@Override
+	public int selectSysMessageTotalCount(Map<String, Object> paraMap) {
+		int count = noticeMessageDao.selectSysMessageTotalCount(paraMap);
+		return count;
+	}
+    
+	/**查询公告附件
+	 * @param paraMap
+	 * @return
+	 */
+	@Override
+	public List<Map<String, Object>> queryCMSAttach(Map<String, Object> paraMap) {
+		// TODO Auto-generated method stub
+		return noticeMessageDao.queryCMSAttach(paraMap);
+	}
+	
+	//系统消息标题弹框回显
+	@Override
+	public Map<String, Object> queryTitleMessage(Map<String, Object> paraMap) {
+		// TODO Auto-generated method stub
+		return noticeMessageDao.queryTitleMessage(paraMap);
+	}
+	//点击标题已读
+	@Override
+	public void updateTitleMessage(String id) {
+		noticeMessageDao.updateTitleMessage(id);
+		
+	}
 	
 	
 }

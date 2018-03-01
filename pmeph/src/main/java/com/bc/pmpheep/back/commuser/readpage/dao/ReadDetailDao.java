@@ -157,4 +157,16 @@ public interface ReadDetailDao {
 	 * @return
 	 */
 	void changeClicks(@Param("book_id") String book_id,@Param("clicks") int clicks);
+	
+	/**
+	 * 查询主编
+	 * @param map
+	 * @return
+	 */
+	Map<String, Object> queryEditor(Map<String, Object> map);
+	/**
+	 * 查询视频
+	 * @return List<Map<String, Object>>
+	 */
+	List<Map<String, Object>> queryVideo(@Param("book_id") String book_id);
 }

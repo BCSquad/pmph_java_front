@@ -140,6 +140,9 @@ a{
     font-size: 14px;
     cursor: pointer;
 }
+.true{
+	display:none;
+}
 .registerDiv{
     clear:both;
     width: 100%;
@@ -162,4 +165,20 @@ a{
     margin-top: 10px;
     width: 1200px;
     height: 100%;
+}
+
+.con_css{
+	align:center;
+	margin-left: 100px;
+	margin-right: 80px; 
+}
+
+.con_css p{
+	max-width: 881px;
+	word-break: break-all;
+}
+
+.con_css p img{
+	max-width: 881px;
+	
 }

@@ -1,0 +1,114 @@
+.pageDiv{
+    		width: 750px;
+    	}
+    	
+.qy_div{
+	margin-left: 30px;
+	width: 730px;
+	height: 400px;
+}
+
+.cg_input{
+	width: 200px;
+	height: 26px;
+	line-height: 26px;
+	border: solid 1px #dedede;
+	padding-left: 10px;
+}
+.bt_tj{
+	width: 200px;
+	height: 30px;
+	background-color: #70bcc3;
+	border-radius: 2px;
+	margin:auto;
+	top:50%;
+	left:50%;
+	cursor: pointer;
+	color: #ffffff;
+	line-height: 30px;
+}
+
+.bt_tj span{
+	margin-left: 5px;
+}
+
+.button2{
+	height: 40px;
+	width: 750px;
+	text-align: center;
+	margin-top: 10px;
+}
+
+.mc1{
+	width: 64px;
+	height: 12px;
+	font-family: MicrosoftYaHei;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 44px;
+	letter-spacing: 0px;
+	color: #454545;
+}
+
+.cxbutn{
+	width: 148px;
+	height: 36px;
+	background-color: #70bcc3;
+	float: right;
+	border-radius: 2px;
+	text-align: center;
+	line-height:36px;
+	cursor: pointer;
+	margin-top: 5px;
+}
+
+.cxbutn span{
+	width: 37px;
+	height: 15px;
+	font-family: MicrosoftYaHei;
+	font-size: 16px;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0px;
+	color: #ffffff;
+}
+
+.tab_2{
+	width: 100%;
+	margin-top: 15px;
+	border:1px solid #dedede;
+	empty-cells:show; 
+	border-collapse: collapse;
+}
+
+.tab_2 thead tr{
+	background-color: #dedede;
+	
+}
+
+.tab_2 thead td{
+	font-family: MicrosoftYaHei;
+	font-size: 17px;
+	line-height: 30px;
+	letter-spacing: 0px;
+	color: #000000;
+	border:1px solid #dedede; 
+	height: 38px;
+}
+.tab_2 tbody tr:nth-child(even){
+	background: #faf9f9;
+}
+}
+.tab_2 tbody td{
+	font-family: MicrosoftYaHei;
+	line-height: 28px;
+	letter-spacing: 0px;
+	color: #999999;
+	border:1px solid #dedede; 
+	height: 30px;
+}
+
+.bt{
+	margin-left: 10px;
+}

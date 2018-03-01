@@ -53,7 +53,29 @@ public interface NoticeMessageDao {
 	 * @return
 	 */
 	Map<String, Object> queryCMSNotice(Map<String, Object> paraMap);
-
 	
+	//更新通知点击量
+	void updateNoticeClicks(String cmsId);
 	
+	//查询系统消息数据总量
+	int selectNoticeMessageSysCount(Map<String, Object> paraMap);
+	//公告数量
+	int selectNoticeMessageCount(Map<String, Object> paraMap);
+	
+	//查询系统消息总量
+	int selectSysMessageTotalCount(Map<String, Object> paraMap);
+	/**查询公告附件
+	 * @param paraMap
+	 * @return
+	 */
+	List<Map<String, Object>>queryCMSAttach(Map<String, Object> paraMap);
+	
+	/**系统消息标题弹框回显
+	 * @param paraMap
+	 * @return
+	 */
+	Map<String, Object> queryTitleMessage(Map<String, Object> paraMap);
+	
+	//更新通知点击量
+	void updateTitleMessage(String id);
   }

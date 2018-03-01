@@ -27,6 +27,8 @@
 <jsp:include page="/pages/comm/head.jsp">
     <jsp:param value="readpage" name="pageTitle"/>
 </jsp:include>
+<input type="hidden" id="auto_play" value="${adInfo.auto_play}">
+<input type="hidden" id="animation_interval" value="${adInfo.animation_interval}">
 <div class="body">
     <div class="content-wrapper">
         <div class="area1">
@@ -34,17 +36,17 @@
                 <!--广告轮播区域-->
                 <div class="move" id="move">
 	                <ul>
-		                <li><img src="${ctx}/statics/image/gg_01.png" class="img-move"/></li>
-		                <li><img src="${ctx}/statics/image/gg_01.png" class="img-move"/></li>
-		                <li><img src="${ctx}/statics/image/gg_01.png" class="img-move"/></li>
-		                <li><img src="${ctx}/statics/image/gg_01.png" class="img-move"/></li>
-		                <li><img src="${ctx}/statics/image/gg_01.png" class="img-move"/></li>
+                        <c:forEach var="ad" items="${adInfo.detailList}">
+                            <li><img src="${ctx}/image/${ad.image}.action" class="img-move"/></li>
+                        </c:forEach>
+
+
 	                </ul>
                 </div>
                 <div class="ctrl" id="ctrl"></div>
             </div>
             <div class="op-link">
-                <!--教程推荐-->
+                <!--教材推荐-->
                 <img src="${ctx}/statics/image/gg_02.png"/>
             </div>
         </div>
@@ -118,11 +120,15 @@
                     <div class="items">
                         <c:forEach var="rmsp" items="${rmspList}">
                             <div class="item1" onclick="openUrl('${rmsp.id1}')">
-                                <div class="sp_01"><img src="${rmsp.image_url}"/></div>
+                                <div class="sp_01">
+                                	<%-- <img src="${rmsp.image_url}"/> --%>
+                                	<c:if test="${rmsp.image_url=='DEFAULT'}"><img src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg" ></c:if>
+                					<c:if test="${rmsp.image_url!='DEFAULT'}"><img src="${rmsp.image_url}"/></c:if>
+                                </div>
                                 <div class="sp_02">
                                     <div class="sp_title">${rmsp.bookname}</div>
                                     <div class="sp_pl">
-                                        <span style="float: left;">${rmsp.realname} 评论了 《${rmsp.bookname}》</span>
+                                        <span style="float: left;">${rmsp.nickname} 评论了 《${rmsp.bookname}》</span>
                                             <%--	<span class="rwtx1"></span>
                                                 <span class="rwtx1"></span>
                                                 <span class="rwtx1"></span>
@@ -178,7 +184,8 @@
                     <c:forEach items="${bookTypes}" var="type" varStatus="status">
                         <div class="tscx_type ${status.index==0?'tscx_type1':''}" id="CXDiv_${type.id}" typeid="${type.id}"
                              onclick="javaScript:ChangeCXDiv(${type.id})">
-                            <span>${type.type_name}</span></div>
+                            <span>${type.type_name}</span>
+                         </div>
                     </c:forEach>
                 </div>
                 <div style="clear: both;height: 14px;"></div>
@@ -190,6 +197,17 @@
         </div>
     </div>
 </div>
-<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
+<jsp:include page="/pages/comm/tail.jsp">
+    <jsp:param name="linked" value="linked"></jsp:param>
+</jsp:include>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?c8927680e561788c668c5e891dfe322c";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
 </body>
 </html>

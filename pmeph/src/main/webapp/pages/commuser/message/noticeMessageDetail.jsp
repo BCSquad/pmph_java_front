@@ -29,31 +29,46 @@
            	 <a href="${ctx }/${firstpath}">${firsttag } </a>&gt; <a href="${ctx }/${secondpath}">${secondtag }</a> &gt; 公告详情
         </div>
         
-        <c:choose>
-        	<c:when test="${messageId==null}">
+       <%-- <c:choose>
+        	<c:when test="${materialId==null}">
         		<div class="no-more">
                     <img src="<c:url value='/statics/image/aaa4.png'></c:url>">
                     <span>木有内容呀~~</span>
                 </div>
         	</c:when>
-        	<c:otherwise>
+        	<c:otherwise> --%>
         		<div id="section">
 
-		            <span class="title">${map.material_name}</span>
-		
+		            <span class="title">${map.title}</span>
+					<c:if test="${map.deadline !=null && map.deadline !=''}">
 		            <div class="time">
-		            <span >截止日期：${map.deadline}</span>
+		            <span >截止日期：${map.actual_deadline}</span>
 		            </div>
+		            </c:if>
 		        </div>
-		        <div class="content">
-		            <p class="pSize">
-				               ${message.content}
-		            </p>
+		        <%-- <div class="content">
+		            <div class="pSize">
+				               ${map.notice}
+		            </div>
+		        </div> --%>
+		        <div  class="con_css" >
+		            <p>${content}</p>
 		        </div>
-		        <div align="center">
-		            <img  class="pictureSizeBig" src="${ctx}/statics/pictures/1395ea09518bf0f9b1787e0ec8c7452c.jpg" />
-		        </div>
+		        <c:if test="${cmsAttach !=null && map.is_material_entry=='false'}">
+				        <div class="list">
+				            <div class="title2">
+				                	公告附件：
+				            </div>
+				            <div class="listContent">
+				                 <c:forEach items="${cmsAttach }" var="cattach">
+				            	  <span ><a   href="${ctx}/file/download/${cattach.attachment}.action" ><img class="pictureSize" src="${ctx}/statics/pictures/attachment.png">&nbsp;&nbsp;${cattach.attachment_name}</a></span><br>
+				                </c:forEach>
+				            </div>
+				        </div>
+		        	</c:if>
+		        		     
 		        <div class="liseDiv">
+		        <c:if test="${map.mail_address !=null && map.mail_address !=''&& map.is_material_entry=='true'}">
 		        <div class="list">
 		            <div class="title2">
 		               	 邮寄地址：
@@ -62,6 +77,8 @@
 		            	${map.mail_address}
 		            </div>
 		        </div>
+		        </c:if>
+		        <c:if test="${listContact.size()>0 && map.is_material_entry=='true'}">
 		        <div class="list">
 		        <div class="title2">
 		           	 联系人：
@@ -72,7 +89,8 @@
 		                </c:forEach>
 		            </div>
 		        </div>
-		        <c:if test="${map.note !=null && map.note !=''}">
+		        </c:if>
+		        <c:if test="${map.note !=null && map.note !='' && map.is_material_entry=='true'} ">
 		        <div class="list">
 		            <div class="title2">
 		                	备注：
@@ -85,23 +103,29 @@
 		        <c:if test="${listAttachment.size()>0}">
 		        <div class="list">
 		            <div class="title2">
-		                	附件：
+		                	教材附件：
 		            </div>
 		            <div class="listContent">
 		            	<c:forEach items="${listAttachment}" var="attachment">
-		            	<span><a href="#"><img class="pictureSize" src="${ctx}/statics/pictures/attachment.png">&nbsp;&nbsp;${attachment.attachment_name}</a></span><br>
+		            	<span><a href="${ctx}/${attachment.attachmentId}"><img class="pictureSize" src="${ctx}/statics/pictures/attachment.png">&nbsp;&nbsp;${attachment.attachment_name}</a></span><br>
 		            	</c:forEach>
 		            </div>
 		        </div>
 		        </c:if>
 		        </div>
-		
 		        <div class="registerDiv"  >
-		            <span class="button" onclick="register(${map.materialId})">报名参加</span>
+			        <c:if test="${is_material_entry==false}">
+			        	
+			        </c:if>
+		         	<c:if test="${notEnd ==1 and is_material_entry==true and map.isapply=='no'}">
+	                      <span class="button " onclick="register(${materialId})" >报名参加</span>
+               	    </c:if>
+               	    <c:if test="${notEnd ==0 and is_material_entry==true}">
+                    <span class="button " >已结束</span> 
+               	    </c:if>
 		        </div>
-        	
-        	</c:otherwise>
-        </c:choose>
+        	<%-- </c:otherwise> --%>
+       <%--  </c:choose> --%>
         
         
 	</div>

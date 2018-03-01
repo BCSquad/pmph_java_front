@@ -52,34 +52,83 @@ public interface DataAuditDao {
 	 */
 	List<Map<String, Object>> findDataAuditExcel(Map<String, Object> paraMap);
 	
-	//查询专家信息
-	public List<Map<String,Object>> queryPerson(Map<String,Object> map);
-	
-	//图书申报职位
-	public List<Map<String,Object>> queryTsxz(Map<String,Object> map);
-	//查询学习经历
-	public List<Map<String,Object>> queryStu(Map<String,Object> map);
-	//查询工作经历
-	public List<Map<String,Object>> queryWork(Map<String,Object> map);
-	//查询教学经历
-	public List<Map<String,Object>> queryStea(Map<String,Object> map);
-	//作家学术
-	public List<Map<String,Object>> queryZjxs(Map<String,Object> map);
-	//查询上版教材编辑
-	public List<Map<String,Object>> queryJcbj(Map<String,Object> map);
-	//查询精品课程建设
-	public List<Map<String,Object>> queryGjkcjs(Map<String,Object> map);
-	//作家主编国家级规划教材情况
-	public List<Map<String,Object>> queryGjghjc(Map<String,Object> map);
-	//查询教材编写情况
-	public List<Map<String,Object>> queryJcbx(Map<String,Object> map);
-	//作家科研情况表
-	public List<Map<String,Object>> queryZjkyqk(Map<String,Object> map);
-	//作家扩展项填报表
-	public List<Map<String,Object>> queryZjkzbb(Map<String,Object> map);
-	//申报审核
+	//申报审核通过
+	public int updateDeclarationPass(Map<String,Object> map);
+	//申报审核退回
 	public int updateDeclaration(Map<String,Object> map);
+	
+	//更新Declaration时间
+	void updateDeclarationUpdateTime(Map<String, Object> queryMap);
+	
 	//通过教材ID查出教材
-	public Map<String,Object> queryMaterialbyId(String material_id);
+			public Map<String,Object> queryMaterialbyId(String material_id);
+			//通过教材ID查出所有教材下的书籍
+			public List<Map<String,Object>> queryBookById(String material_id);
+			//通过教材ID查出相关的机构信息
+			public List<Map<String,Object>> queryOrgById(String material_id);
+			//通过教材ID查出扩展信息
+			public List<Map<String,Object>> queryZjkzxxById(String material_id);
+			
+			//图书申报职位
+			public List<Map<String,Object>> queryTsxz(Map<String,Object> map);
+	
+			
+			//图书申报职位暂存
+			public List<Map<String,Object>> queryTssbZc(Map<String,Object> map);
+		
+			
+			//查询专家信息
+			public List<Map<String,Object>> queryPerson(Map<String,Object> map);
+		
+			
+			//查询学习经历
+			public List<Map<String,Object>> queryStu(Map<String,Object> map);
+		
+			//查询工作经历
+			public List<Map<String,Object>> queryWork(Map<String,Object> map);
+		
+			//查询教学经历
+			public List<Map<String,Object>> queryStea(Map<String,Object> map);
+		
+			//作家学术
+			public List<Map<String,Object>> queryZjxs(Map<String,Object> map);
+		
+			//查询上版教材编辑
+			public List<Map<String,Object>> queryJcbj(Map<String,Object> map);
+		
+			//查询精品课程建设
+			public List<Map<String,Object>> queryGjkcjs(Map<String,Object> map);
+		
+			//作家主编国家级规划教材情况
+			public List<Map<String,Object>> queryGjghjc(Map<String,Object> map);
+		
+			//查询教材编写情况
+			public List<Map<String,Object>> queryJcbx(Map<String,Object> map);
+		
+			//作家科研情况表
+			public List<Map<String,Object>> queryZjkyqk(Map<String,Object> map);
+	
+			//作家扩展项填报表
+			public List<Map<String,Object>> queryZjkzbb(Map<String,Object> map);
+		
+			
+			//个人成就
+			public Map<String,Object> queryAchievement(Map<String,Object> map);
+		
+			//主编学术专著情况
+			public List<Map<String,Object>> queryMonograph(Map<String,Object> map);
+		
+			//出版行业获奖情况
+			public List<Map<String,Object>> queryPublish(Map<String,Object> map);
+	
+			//SCI论文投稿及影响因子
+			public List<Map<String,Object>> querySci(Map<String,Object> map);
+	
+			//临床医学获奖情况
+			public List<Map<String,Object>> queryClinicalreward(Map<String,Object> map);
+	
+			//学术荣誉授予情况
+			public List<Map<String,Object>> queryAcadereward(Map<String,Object> map);
+
 
 }

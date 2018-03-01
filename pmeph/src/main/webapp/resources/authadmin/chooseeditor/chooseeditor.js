@@ -13,7 +13,7 @@ Array.prototype.removeByValue = function(val) {
 	};
 	
 $(function(){
-	if ($("#is_list_selected").val() == "true") {
+	if ($("#is_locked").val() == "true"||$("#is_force_end").val() == "true"||$("#isFirstEditorLogIn").val() == "false") {
 		$("#handleBtn").hide();
 	}else{
 		$("#handleBtn").show();
@@ -70,6 +70,7 @@ function queryBtnClick(){
 
 //选择每页数据数量
 function selectPageSize(){
+	$("#page-num-temp").val("1");
 	queryMain();
 }
 
@@ -121,6 +122,8 @@ function queryMain(){
 			queryName:$("#search-name-temp").val(),
 			queryOrg:$("#select-search-org").find("input[name='select-search-org']").val(),
 			textBookId:$("#textBookId").val(),
+			isFirstEditorLogIn:$("#isFirstEditorLogIn").val(),
+			is_digital_editor_optional:$("#is_digital_editor_optional").val(),
 			contextpath:contextpath
 			};
 	
@@ -187,7 +190,7 @@ function tempSave(){
 //重置
 function selectReset(){
 	window.message.confirm(
-			'确定要重置吗？将回到最近一次暂存状态！'
+			'确定要重置吗？将回到最近一次保存后的状态！'
 			,{icon: 3, title:'提示',btn:["确定","取消"]}
 			,function(index){
 				selectedIds=eval($("#selectedIds").val());
@@ -227,7 +230,7 @@ function selectRubmit(){
 							$("#selectedNumIds").val(json.selectedNumIds);
 							if (json.msg!=null) {
 								window.message.success(json.msg);
-								window.location.href=contextpath+'chooseEditor/toPage.action';
+								window.location.href=contextpath+'chooseEditor/toPage.action?textBookId='+$("#textBookId").val();
 							}
 						}
 					});

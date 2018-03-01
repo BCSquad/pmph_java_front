@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
 import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.commuser.readpage.dao.ReadDetailDao;
 import com.bc.pmpheep.back.plugin.PageParameter;
@@ -77,7 +78,8 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		// TODO Auto-generated method stub
 		Map<String, Object> rmap=new HashMap<String, Object>();
 	    readDetailDao.insertComment(map);
-	    //personalService.saveUserTrendst("wdsp", map.get("table_trendst_id").toString(), 0, map.get("writer_id").toString());
+	    /*WriterUserTrendst wut = new WriterUserTrendst(map.get("writer_id").toString(), 5, map.get("table_trendst_id").toString());
+	    personalService.saveUserTrendst(wut);*/
 	    rmap.put("returncode", "OK");
 	    return rmap;
 	}
@@ -122,6 +124,8 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		if(("del").equals(map.get("flag"))){
 			readDetailDao.addlikes(map);
 			int count=readDetailDao.dellikes(map);
+			/*WriterUserTrendst wut = new WriterUserTrendst(map.get("writer_id").toString(), 7, map.get("book_id").toString());
+			personalService.deleteUserTrendst(wut);*/
 			if(count>0){
 				pmap.put("returncode", "yes");
 			}
@@ -129,6 +133,8 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 			readDetailDao.addlikes(map);
 			readDetailDao.insertlikes(map);
 			pmap.put("returncode", "no");
+			WriterUserTrendst wut = new WriterUserTrendst(map.get("writer_id").toString(), 7, map.get("book_id").toString());
+			personalService.saveUserTrendst(wut);//图书点赞 动态生成
 		}
 		return pmap;
 	}
@@ -164,6 +170,8 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		}else{
 			readDetailDao.insertMark(bookId,favoriteId,writerId);//向用户书籍收藏表中加入收藏记录
 			readDetailDao.updateMarks(bookId,marks+1);//更新书籍表中的收藏数量啊
+			WriterUserTrendst wut = new WriterUserTrendst(String.valueOf(writerId), 6,String.valueOf(bookId));
+			personalService.saveUserTrendst(wut);//生成动态 收藏
 			map.put("returncode", "OK");
 		}
 		return map;
@@ -210,7 +218,9 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		int count=readDetailDao.correction(map);
 		if(count>0){
 			returncode="OK";
-			//personalService.saveUserTrendst("wdjc", map.get("table_trendst_id").toString(), 0, map.get("user_id").toString());
+		    WriterUserTrendst wut = new WriterUserTrendst(map.get("user_id").toString(), 10, map.get("book_id").toString());
+		    wut.setDetail("提交了图书纠错", map.get("content").toString(),1,Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("line").toString()));
+		    personalService.saveUserTrendst(wut);//生成动态 图书纠错 
 		}
 		return returncode;
 	}
@@ -221,8 +231,17 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 	@Override
 	public String insertlong(Map<String, Object> map) {
 		// TODO Auto-generated method stub
+		Map<String,Object> editro_map = readDetailDao.queryEditor(map);
+		if (editro_map!= null && editro_map.size()>0 && map.get("writer_id").equals(editro_map.get("author_id"))) {
+			map.put("is_self_rating", 1);
+		}else{
+			map.put("is_self_rating", 0);
+		}
 		String returncode="";
 		int count=readDetailDao.insertlong(map);
+		
+		/*WriterUserTrendst wut = new WriterUserTrendst(map.get("writer_id").toString(), 5, map.get("table_trendst_id").toString());
+	    personalService.saveUserTrendst(wut);//生成动态 写长评 */
 		if(count>0){
 			returncode="OK";
 		}
@@ -261,5 +280,15 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 	public void changeClicks(String book_id, int clicks) {
 		// TODO Auto-generated method stub
 		readDetailDao.changeClicks(book_id, clicks);
+	}
+
+	/**
+	 * 查询视频
+	 */
+	@Override
+	public List<Map<String, Object>> queryVideo(String book_id) {
+		// TODO Auto-generated method stub
+		List<Map<String, Object>> list=readDetailDao.queryVideo(book_id);
+		return list;
 	}
 }

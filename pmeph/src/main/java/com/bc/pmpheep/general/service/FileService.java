@@ -39,12 +39,13 @@ public class FileService {
     final String TYPE = "type";
     @Resource
     GridFsTemplate gridFsTemplate;
+
     /**
      * 保存图片
      *
-     * @param file 要保存的图片
+     * @param file      要保存的图片
      * @param imageType 图片所属类型
-     * @param pk 对应的实体类主键(id)
+     * @param pk        对应的实体类主键(id)
      * @return 返回由MongoDB自动生成的id字符串
      * @throws IOException IO读写错误
      */
@@ -64,12 +65,13 @@ public class FileService {
         }
         return gridFSFile.getId().toString();
     }
+
     /**
      * 保存文件
      *
-     * @param file 要保存的文件
+     * @param file     要保存的文件
      * @param fileType 文件所属类型
-     * @param pk 对应的实体类主键(id)
+     * @param pk       对应的实体类主键(id)
      * @return 返回由MongoDB自动生成的id字符串
      * @throws IOException IO读写错误
      */
@@ -89,8 +91,8 @@ public class FileService {
         }
         return gridFSFile.getId().toString();
     }
+
     /**
-     *
      * <pre>
      * 功能描述： 本地文件保存到MongoDB
      * 使用示范：
@@ -114,8 +116,60 @@ public class FileService {
         }
         return gridFSFile.getId().toString();
     }
+
     /**
+     * <pre>
+     * 功能描述： 本地文件保存到MongoDB
+     * 使用示范：
      *
+     * @param inputStream 要保存的文件
+     * @param fileType 文件所属类型
+     * @param pk 对应的实体类主键(id)
+     * @return 返回由MongoDB自动生成的id字符串
+     * @throws IOException IO读写错误
+     * </pre>
+     */
+    public String saveLocalFile(InputStream inputStream, FileType fileType, long pk) throws IOException {
+        DBObject metaData = new BasicDBObject();
+        metaData.put(IS_IMAGE, false);
+        metaData.put(TYPE, fileType.getType());
+        metaData.put(PK, pk);
+        GridFSFile gridFSFile;
+
+        gridFSFile = gridFsTemplate.store(inputStream, "", metaData);
+        inputStream.close();
+
+        return gridFSFile.getId().toString();
+    }
+
+    /**
+     * <pre>
+     * 功能描述： 本地文件保存到MongoDB
+     * 使用示范：
+     *
+     * @param inputStream 要保存的文件
+     * @param fileType 文件所属类型
+     * @param fileName 文件名
+     * @param pk 对应的实体类主键(id)
+     * @return 返回由MongoDB自动生成的id字符串
+     * @throws IOException IO读写错误
+     * </pre>
+     */
+    public String saveLocalFile(InputStream inputStream, FileType fileType, String fileName, long pk) throws IOException {
+        DBObject metaData = new BasicDBObject();
+        metaData.put(IS_IMAGE, false);
+        metaData.put(TYPE, fileType.getType());
+        metaData.put(PK, pk);
+        GridFSFile gridFSFile;
+
+        gridFSFile = gridFsTemplate.store(inputStream, fileName, metaData);
+        inputStream.close();
+
+        return gridFSFile.getId().toString();
+    }
+
+
+    /**
      * <pre>
      * 功能描述： 本地图片保存到MongoDB
      * 使用示范：
@@ -139,19 +193,21 @@ public class FileService {
         }
         return gridFSFile.getId().toString();
     }
+
     /**
      * 根据MySQL中存储的MongoDB主键获取指定文件
      *
      * @param id 文件在MongoDB中的主键
      * @return GridFSDBFile对象
      */
-    public GridFSDBFile get(String id) {
+    public GridFSDBFile get(String id) throws CheckedServiceException{
         if (null == id || id.isEmpty()) {
             throw new CheckedServiceException(CheckedExceptionBusiness.FILE,
                     CheckedExceptionResult.NULL_PARAM, "获取文件时ID为空");
         }
         return gridFsTemplate.findOne(Query.query(new GridFsCriteria("_id").is(id)));
     }
+
     /**
      * 根据MySQL中存储的一些MongoDB主键获取对应文件
      *
@@ -172,6 +228,7 @@ public class FileService {
         }
         return list;
     }
+
     /**
      * 根据MySQL中存储的MongoDB主键删除指定文件
      *

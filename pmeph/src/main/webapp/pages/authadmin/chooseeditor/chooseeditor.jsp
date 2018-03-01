@@ -38,7 +38,11 @@ String contextpath=request.getContextPath();
 <input type="hidden" id="textBookId" value="${textBookId }">
 <input type="hidden" id="selectedIds" value="${selectedIds }">
 <input type="hidden" id="selectedNumIds" value="${selectedNumIds}">
-<input type="hidden" id="is_list_selected" value="${is_list_selected }">
+<input type="hidden" id="is_locked" value="${is_locked }">
+<input type="hidden" id="is_force_end" value="${is_force_end }">
+
+<input type="hidden" id="isFirstEditorLogIn" value="${isFirstEditorLogIn }">
+<input type="hidden" id="is_digital_editor_optional" value="${is_digital_editor_optional }">
 
 
 
@@ -48,7 +52,7 @@ String contextpath=request.getContextPath();
             <div class="top1">
             	<a  onclick="bfRedirect('personalhomepage/tohomepage.action')">个人中心 </a>
             	> 
-            	<a onclick="bfRedirect('personalhomepage/tohomepageone.action')">教材申报 </a>
+            	<a onclick="bfRedirect('personalhomepage/tohomepage.action?pagetag=jcsb')">教材申报 </a>
             	> 
             	<a >申报进度</a>
             	>选择编委
@@ -56,7 +60,7 @@ String contextpath=request.getContextPath();
         </div>
         <div class="bt">
             <div class="top2"><a href="/books/list.action" target="_blank"><B>${textBookName }</B></a></div>
-            <div class="top3">编辑策划：${logUserName }</div>
+            <div class="top3">策划编辑：${planning_editor }</div>
         </div>
     </div>
     <div id="table">
@@ -92,7 +96,9 @@ String contextpath=request.getContextPath();
                         <td class="td6">职位</td>
                         <td class="td7">职称</td>
                         <td class="td8">选择编委</td>
-                        <td class="td9">选择数字编委</td>
+                        <c:if test="${is_digital_editor_optional == true }">
+                        	<td class="td9">选择数字编委</td>
+                        </c:if>
                     </tr>
                     </thead>
                     <tbody id="userTbody">
@@ -129,7 +135,7 @@ String contextpath=request.getContextPath();
     </div>
 </div>
 	
-	<div style="width: 100%;height: 60px"></div>
+	<div style="width: 100%;height: 60px;clear: both;"></div>
 	<jsp:include page="/pages/comm/tail.jsp"></jsp:include> 
 
 </body>

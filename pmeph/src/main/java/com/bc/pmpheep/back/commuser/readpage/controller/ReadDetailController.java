@@ -25,6 +25,7 @@ import com.bc.pmpheep.back.commuser.readpage.service.ReadDetailService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.general.controller.BaseController;
+import com.bc.pmpheep.general.service.SensitiveService;
 
 /**
  * @author xieming
@@ -43,6 +44,11 @@ public class ReadDetailController extends BaseController{
 	 @Autowired
 	 @Qualifier("com.bc.pmpheep.back.commuser.book.service.BookServiceImpl")
 	 private BookService bookService;
+	 @Autowired
+	@Qualifier("com.bc.pmpheep.general.service.SensitiveService")
+	 private SensitiveService sensitiveService;
+	 
+	 
 	/**
 	 * 根据图书ID初始化数据
 	 * @param request
@@ -67,6 +73,7 @@ public class ReadDetailController extends BaseController{
 		List<Map<String, Object>> eMap=readDetailService.queryRecommendByE(0);
 		List<Map<String, Object>> listCom=readDetailService.queryComment(id,0);
 		List<Map<String, Object>> ComNum=readDetailService.queryComment(id,-1);
+		List<Map<String, Object>> Video=readDetailService.queryVideo(id);
 		List<Map<String, Object>> auList=readDetailService.queryAuthorType(author);
 		List<Map<String, Object>> longList=readDetailService.queryLong(id,0);
 		if(longList.size()==0){
@@ -143,6 +150,7 @@ public class ReadDetailController extends BaseController{
 		modelAndView.addObject("map", map);
 		modelAndView.addObject("listCom", listCom);
 		modelAndView.addObject("frList", frList);
+		modelAndView.addObject("Video",Video);
 		modelAndView.addObject("longList", longList);
 		modelAndView.addObject("typeList", typeList);
 		modelAndView.addObject("start", 2);
@@ -204,7 +212,15 @@ public class ReadDetailController extends BaseController{
 		Map<String, Object> user=getUserInfo();
 		map.put("writer_id", user.get("id"));
 		map.put("avatar", user.get("avatar"));
-		Map<String, Object> rmap=readDetailService.insertComment(map);
+		Map<String, Object> rmap = new HashMap<String, Object>();
+		if (sensitiveService.confirmSensitive(request.getParameter("content"))){
+			List<String> sensitives = sensitiveService.getSensitives(null, request.getParameter("content"));
+			rmap.put("content", sensitiveService.delHTMLTag(request.getParameter("content")));
+			rmap.put("returncode", "error");
+			rmap.put("value", sensitives);
+			return rmap;
+		}
+		rmap = readDetailService.insertComment(map);
 		return rmap;
 	}
 	
@@ -288,6 +304,7 @@ public class ReadDetailController extends BaseController{
 		if(list.size()>0){
 			Map<String, Object> iMap=new HashMap<String, Object>();
 			iMap.put("id", list.get(0).get("id"));
+			iMap.put("writer_id", user.get("id"));
 			iMap.put("book_id", id);
 			iMap.put("likes", likes-1);
 			iMap.put("flag", "del");
@@ -400,7 +417,8 @@ public class ReadDetailController extends BaseController{
 	 */
 	@RequestMapping("insertlong")
 	@ResponseBody
-	public String insertlong(HttpServletRequest request){
+	public Map<String, Object> insertlong(HttpServletRequest request){
+		Map<String, Object> result = new HashMap<String, Object>();
 		String returncode="";
 		String book_id=request.getParameter("book_id");
 		String score=request.getParameter("score");
@@ -411,17 +429,27 @@ public class ReadDetailController extends BaseController{
 		   StringUtils.isEmpty(content)||
 		   StringUtils.isEmpty(title)){
 		   returncode="NO";
-		}else{
-		   Map<String, Object> map=new HashMap<String, Object>();
-		   Map<String, Object> user=getUserInfo();
-		   map.put("book_id", book_id);
-		   map.put("score", score);
-		   map.put("content", content);
-		   map.put("title", title);
-		   map.put("is_long", "1");
-		   map.put("writer_id", user.get("id"));
-		   returncode=readDetailService.insertlong(map);
+		   result.put("state", returncode);
+		   return result;
 		}
-		return returncode;
+		if (sensitiveService.confirmSensitive(title) || sensitiveService.confirmSensitive(content)){
+			List<String> sensitives = sensitiveService.getSensitives(title, content);
+			returncode = "ERROR";
+			result.put("state", returncode);
+			result.put("value", sensitives);
+			result.put("UEContent", sensitiveService.delHTMLTag(content));
+			return result;
+		}
+		Map<String, Object> map=new HashMap<String, Object>();
+		Map<String, Object> user=getUserInfo();
+		map.put("book_id", book_id);
+		map.put("score", score);
+		map.put("content", content);
+		map.put("title", title);
+		map.put("is_long", "1");
+		map.put("writer_id", user.get("id"));
+		returncode=readDetailService.insertlong(map);
+		result.put("state", returncode);
+		return result;
 	}
 }

@@ -35,7 +35,21 @@ $(function () {
     
     $("#fileNameDiv").hide();
     $("#uploadFile").uploadFile({
-    	
+    	/*accept:	"application/msword",*/
+        accept : "image/*",  //限制上传类型只能为图片
+    	valid:function(file){
+    		console.log(file);
+    		console.log(file.name.substring(file.name.lastIndexOf("."),file.name.lastIndexOf(".")+4));
+    		/*if(file.type=="application/msword"){ */
+    		var f=file.name.substring(file.name.lastIndexOf("."),file.name.lastIndexOf(".")+4);
+    		if(f==".gif"||f==".jpg"||f==".jpeg"||f==".png"||f==".GIF"||f==".PNG"){
+    			return true;
+    		}else{
+    			message.error("请选择图片文件");
+    			return false;
+    		}
+    		
+    	},
         start: function () {
             console.log("开始上传。。。");
         },
@@ -43,7 +57,7 @@ $(function () {
         	$('#fileName').html(filename);
         	$("#fileNameDiv").show();
         	
-        	 $.ajax({
+        	 /*$.ajax({
         	        type:'post',
         	        url:contextpath+'admininfocontroller/uploadProxy.action?',
         	        async:false,
@@ -51,9 +65,10 @@ $(function () {
         	        success:function(code){
         	            if (code==1){
         	                message.success("上传成功");
+        	                $("#fileNameDiv").show();
         	            }
         	        }
-        	    });
+        	    });*/
         	 
         	$("#fileid").val(fileid);
         	$("#proxyDiv").hide();
@@ -80,6 +95,8 @@ function getform() {
     json.fax=$("#fax").val();
     json.address=$("#address").val();
     json.id=$("#id").val();
+    json.proxy=$("#fileid").val();
+    json.isProxyUpload = 1; //提交 后台判断是否提交验证的标志
     /*json.birthday=$("#birthday").val();
     json.experience=$("#experience").val();
     json.workplace=$("#workplace").val();*/
@@ -100,6 +117,10 @@ function submit(){
 	        success:function(code){
 	            if (code=="success"){
 	                message.success("提交成功");
+					//window.location.reload();
+	                setTimeout(function(){
+	                	window.location.href = contextpath + "admininfocontroller/toadmininfo.action";
+	                }, 800);
 	            }else{
 	            	message.error("提交失败");
 	            }

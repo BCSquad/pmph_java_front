@@ -67,7 +67,7 @@
     		<c:when test="${listSize>0}">
     			<c:forEach items="${list}" var="message">
         <tr>
-            <th rowspan="2" class="headPortrait"><img src="${ctx}/statics/pictures/head.png" class="picture" ></th>
+            <th rowspan="2" class="headPortrait"><img src="${ctx}/${message.avatar}" class="picture" ></th>
         </tr>
         <tr>
             <td ><span class="apply">${message.realname}申请加我为好友</span><span class="time"><fmt:formatDate pattern="yyyy.MM.dd HH:mm" value="${message.gmt_create}" /></span></td>
@@ -97,9 +97,9 @@
     	</c:choose>
     	
     </table>
-    <c:if test="${listSize>=8}">
-    <div class="load-more clearfix" onclick="loadMoreApply()">加载更多...</div>
-    <input id="applyPara" name="applyPara" type="hidden">
+    <c:if test="${count>0}">
+	    <div id="loadMoreDiv" class="load-more clearfix" onclick="loadMoreApply()">加载更多...</div>
+	    <input id="applyPara" name="applyPara" type="hidden">
     </c:if>
 </div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>

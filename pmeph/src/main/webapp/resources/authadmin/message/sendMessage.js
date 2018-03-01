@@ -36,6 +36,7 @@ function sending(){
 	//发送表单 请求
 	document.getElementById("theForm").submit();
 	document.getElementById("theForm").reset();
+	//window.message.success("发送成功");
 }
 /**
  * 选择的是教材报名者 点击发送后 显示教材选择界面
@@ -56,6 +57,7 @@ function sendf(){
 		send_after();
 		queryMain();
 	}else{
+		getValue();
 		sending();
 	}
 }
@@ -81,7 +83,7 @@ $(function(){
 
     })*/
 	if($("#validate").val()=="0"){
-		window.message.warning("必选项不为空");
+		window.message.warning("必填项不能为空");
 	}else if($("#validate").val()=="1"){
 		window.message.warning("标题长度不能超过30个字");
 	}
@@ -205,10 +207,11 @@ $(function(){
 function getValue(){
 	
 	//var UEContent = UE.getEditor('mText').getContent();
-	var UEContent = $("UEContent").val();
+	var UEContent = $("#UEContent").val();
 	 var radioval=$('input:radio[name="sendObject"]:checked').val();
 	 if(radioval=='0'){
 		 $("#radioValue").val(radioval);
+		 return true;
 	 }
 	if($("#radioValue").val().length==0){
 		window.message.error("请选择教材报名者");

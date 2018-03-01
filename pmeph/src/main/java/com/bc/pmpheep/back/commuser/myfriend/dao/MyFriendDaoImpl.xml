@@ -24,4 +24,16 @@
         STATUS = '2'
         AND target_id = #{userId}
     </select>
+    <insert id="invite" parameterType="java.util.Map">
+    INSERT INTO pmph_group_member (
+	group_id,
+	user_id,
+	is_writer,
+	is_founder,
+	is_admin,
+	display_name,
+	is_deleted
+) SELECT
+	#{groupId},#{id},1,0,0,wu.realname,0 from writer_user wu where wu.id=#{id}
+    </insert>
 </mapper>

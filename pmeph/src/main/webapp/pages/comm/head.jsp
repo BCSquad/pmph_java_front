@@ -1,5 +1,11 @@
 <%@ page import="java.util.Map" %>
-<%@ page import="com.bc.pmpheep.back.util.Const" %><%--
+<%@ page import="com.bc.pmpheep.back.util.Const" %>
+<%@ page import="org.apache.commons.collections.MapUtils" %>
+<%@ page import="org.springframework.context.ApplicationContext" %>
+<%@ page import="org.springframework.web.context.support.WebApplicationContextUtils" %>
+<%@ page import="com.bc.pmpheep.back.commuser.homepage.service.HomeService" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.HashMap" %><%--
   Created by IntelliJ IDEA.
   User: SuiXinYang
   Date: 2017/11/21
@@ -28,11 +34,11 @@
 
             <img class="search-icon" src="${ctx}/statics/image/search.png" alt="">
 
-            <span class="write" onclick="window.location.href='${ctx}/writerArticle/initWriteArticle.action'">写文章</span>
+            <%--         <span class="write" onclick="window.location.href='${ctx}/writerArticle/initWriteArticle.action'">写文章</span>
+         --%>
+            <%--<span class="download">下载APP</span>
 
-            <span class="download">下载APP</span>
-
-            <img class="download-pic" src="${ctx}/statics/image/APP-download.png">
+            <img class="download-pic" src="${ctx}/statics/image/APP-download.png">--%>
 
             <%
                 Map<String, Object> userInfo = null;
@@ -47,29 +53,99 @@
                 }
             %>
             <c:if test="${userInfo == null}">
-                <div class="login-logout">
+                <%--<div class="login-logout">
                     <a onclick="window.location.href=contextpath+'pages/comm/login.jsp?refer='+encodeURIComponent(window.location.href)"
                        href="javascript:;">登录</a>
                     <span>/</span>
                     <a onclick="window.location.href=contextpath+'pages/comm/login.jsp?refer='+encodeURIComponent(window.location.href)"
                        href="javascript:;">注册</a>
                     <img src="${ctx}/statics/image/question.png" alt="">
+                </div>--%>
+
+                <div class="loginout"
+                     onclick="window.location.href=contextpath+'pages/comm/login.jsp?refer='+encodeURIComponent(window.location.href)">
+                    <span class="login">您好,请登录</span>
+                    <span class="logout">免费注册</span>
                 </div>
+                <span class="writing" onclick="window.location.href='${ctx}/writerArticle/initWriteArticle.action'">
+                    <span class="icon"></span>
+                    <span class="wtext">写文章</span>
+                </span>
+                <span class="help">
+                    <span class="icon"></span>
+                    <span class="wtext">帮助中心</span>
+                </span>
             </c:if>
 
+
+            <%
+                String type = "notice";
+                int messageNum = 0;
+                Map<String, String> typeUrl = new HashMap<String, String>();
+                typeUrl.put("notice", "/message/noticeMessageList.action");
+                typeUrl.put("apply", "/message/applyMessageList.action");
+                typeUrl.put("message", "/mymessage/listMyMessage.action");
+
+
+                if (userInfo != null) {
+                    ApplicationContext applicationContext =
+                            WebApplicationContextUtils.getRequiredWebApplicationContext(request.getSession().getServletContext());
+                    HomeService homeService = applicationContext.getBean("com.bc.pmpheep.back.homepage.service.HomeServiceImpl", HomeService.class);
+                    List<Map<String, Object>> list = homeService.queryNotReadMessages(MapUtils.getString(userInfo, "id"));
+
+                    for (Map<String, Object> item : list) {
+                        messageNum += MapUtils.getIntValue(item, "a");
+                    }
+
+                    for (Map<String, Object> item : list) {
+                        if (MapUtils.getIntValue(item, "a", 0) > 0) {
+                            type = MapUtils.getString(item, "type");
+                            break;
+                        }
+                    }
+
+
+                }
+                request.setAttribute("NOT_READ_MESSAGE_NUM", messageNum);
+                request.setAttribute("NOT_READ_MESSAGE_URL", typeUrl.get(type));
+
+            %>
+
             <c:if test="${userInfo != null}">
+
+                <span class="writing logined"
+                      onclick="window.location.href='${ctx}/writerArticle/initWriteArticle.action'">
+                    <span class="icon"></span>
+                    <span class="wtext">写文章</span>
+                </span>
+
                 <div class="user-info">
-                    <span class="sign"></span>
+
+                    <c:if test="${NOT_READ_MESSAGE_NUM>0}">
+                        <span class="sign"></span>
+                    </c:if>
+
                     <img class="notice-icon" src="${ctx}/statics/image/message.png" alt=""
-                         onclick="location.href='${ctx}/message/applyMessageList.action'">
-                    <img class="user-icon" src="${ctx}/statics/pictures/head.png" alt="">
+                         onclick="location.href='${ctx}${NOT_READ_MESSAGE_URL}'">
+
+                    <img class="user-icon"
+                         src="<%
+                        if ("DEFAULT".equals(MapUtils.getString(userInfo, "avatar", "DEFAULT"))) {
+                            out.println(request.getContextPath() + "/statics/image/default_image.png");
+                        } else {
+                            out.println(request.getContextPath() + "/image/" + MapUtils.getString(userInfo, "avatar") + ".action");
+                        }
+                    %>"
+                         alt="">
                 </div>
                 <div class="user-select">
                     <img src="${ctx}/statics/image/userSelectbg.png" alt="">
                     <div class="select">
-                        <a class="option" href='<c:url value="/personalhomepage/tohomepage.action"/>'>个人中心</a>
+                        <a class="option"
+                           href='<c:url value="/personalhomepage/tohomepage.action?pagetag=dt"/>'>个人中心</a>
                         <a class="option" href="<c:url value='/group/list.action'/>">我的小组</a>
-                        <a class="option" href='<c:url value="/personalhomepage/tohomepage.action?pagetag=jcsb"/>'>教程申报</a>
+                        <a class="option"
+                           href='<c:url value="/personalhomepage/tohomepage.action?pagetag=jcsb"/>'>教材申报</a>
                         <a class="option out" href='<c:url value="/logout.action"/>'>退出</a>
                     </div>
                 </div>

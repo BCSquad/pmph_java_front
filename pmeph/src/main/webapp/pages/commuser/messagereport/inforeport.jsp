@@ -40,7 +40,7 @@ String basePath =path+"/";
     <div style="height:30px"></div>
     <div class="sxy-div-content">
         <div id="sxy-div-left">
-            <div class="sxy-navigate"><a href="${ctx }/homepage/tohomepage.action">首页</a>〉信息快报〉${rmap.title }</div>
+            <div class="sxy-navigate"><a href="${ctx }/homepage/tohomepage.action">首页</a>〉<a href="${ctx }/cmsinfoletters/tolist.action">信息快报</a>〉信息快报详情</div>
             <div>
                 <div>
                     <div id="sxy-title">
@@ -84,7 +84,7 @@ String basePath =path+"/";
               </thead>
               <tbody id="trows">
                 <c:forEach items="${list }" var="report">
-	                <tr class="sxy-tr"><td><div onclick="lookDetail('${report.id}')">${report.title }</div></div></td></tr>
+	                <tr class="sxy-tr"><td><div onclick="lookDetail('${report.id}')" style="width:275px">${report.title }</div></div></td></tr>
 	                <tr class="sxy-tr"><td><img alt="" src="${ctx }/statics/image/cupline.jpg" /></td></tr>
                 </c:forEach>
               </tbody>

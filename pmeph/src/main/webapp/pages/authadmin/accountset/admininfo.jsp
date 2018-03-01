@@ -27,6 +27,7 @@
 <script src="${ctx}/resources/authadmin/accountset/admininfo.js"
 	type="text/javascript"></script>
  <script src="${ctx}/resources/comm/jquery/jquery.calendar.js"></script>	
+     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js" type="text/javascript"></script>
 <link href="${ctx}/statics/css/base.css" rel="stylesheet"
 	type="text/css" />
 <link href="${ctx}/statics/authadmin/accountset/publicStyle.css"
@@ -86,6 +87,7 @@
 </style>
 </head>
 <body>
+<input type="hidden" id="avatar" >
 	<jsp:include page="/pages/comm/headGreenBackGround.jsp">
 		<jsp:param name="pageTitle" value="account"></jsp:param>
 	</jsp:include>
@@ -100,9 +102,12 @@
 			<div style="height: 14px"></div>
 			<%--        <div class="div-content" style="height:25px;"></div>--%>
 			<div class="div-content">
+			<input type="hidden" id="id" value="${admininfo.id}">
 				<div class="he">
-					<img src="${ctx}/statics/image/putongyhtouxiang.png" alt="" /> <span
-						class="modify">修改头像</span>
+					<c:if test="${admininfo.avatar=='DEFAULT'}"><img id="sxy-img1" src="${ctx}/statics/image/putongyhtouxiang.png"/></c:if>
+                	<c:if test="${admininfo.avatar!='DEFAULT'}"><img id="sxy-img1" src="${ctx}/image/${admininfo.avatar}.action" ></c:if>
+                	<div class="modify" id="uploadFile">修改头像</div>
+					
 					<div class="links">
 						<a href="javascript:;" class="manager"
 							onclick="window.location='${ctx}/admininfocontroller/toadminattest.action'">学校管理员认证</a>
@@ -176,20 +181,20 @@
 									</div>
 								</div> --%>
 								
+								
+								
 								<div class="label-input">
-									<label class="require">职称</label>
-									<div class="input-wrapper">
-										<input type="hidden" id="title-hidden"
-											value="${admininfo.title}"> <select class="select-td"
-											name="title" id="title">
-											<option value="teacher1">教师1</option>
-											<option value="teacher2">教师2</option>
-											<option value="teacher3">教师3</option>
-											<option value="teacher4">教师4</option>
-											<option value="teacher5">教师5</option>
-										</select>
-									</div>
-								</div>
+				                    <label class="require" >职称</label>
+				                    <div class="input-wrapper">
+				                    <input type="hidden" id="title-hidden" value="${admininfo.title}"> 
+				                    <select data-error="职称必选"   class="sxy-select-td" name="title" id="title"  title="请选择">
+				                        <option value="teacher1" >教授</option>
+				                        <option value="teacher2" >讲师</option>
+				                        <option value="teacher3" >副教授</option>
+				                        <option value="teacher4" >院士</option>
+				                    </select>
+				                  </div>
+								 </div>
 								
 							</td>
 							<td>

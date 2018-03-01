@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%String path = request.getContextPath();%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -315,8 +316,8 @@ a{
     width: 50px;
     height: 50px;
     position:absolute;
-    top:-21px;
-    right:-50px;
+    top:-25px;
+    right:-25px;
     border-radius: 50%;
     -webkit-transition: all 0.3s ;
     -moz-transition: all 0.3s;
@@ -359,6 +360,19 @@ a{
 .contentBox{
     width: 690px;
     height: 321px;
+    overflow-y:auto;
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid #dedede;
+    border-top:1px solid #dedede;
+    clear: both;
+}
+.contentBox1{
+    width: 690px;
     overflow-y:auto;
     overflow-x: hidden;
     padding: 0;
@@ -427,6 +441,7 @@ a{
     width:44px;
     height:44px;
     border-radius: 50%;
+    margin-right:7px;
 }
 
 .talkName{
@@ -438,6 +453,7 @@ a{
     font-stretch: normal;
     letter-spacing: 1px;
     color: #999999;
+    margin-right:8px;
 }
 
 .talkDiv{
@@ -490,6 +506,79 @@ a{
     width: 6px;     /*高宽分别对应横竖滚动条的尺寸*/
     height: 1px;
 }
+
+scrollbar{
+-moz-appearance: none !important;
+background-color: transparent !important;/* 滚动条背景透明 */
+background-image: none !important; /* 滚动条背景图案不显示 */
+position: relative !important; /* 更改滚动条的定位方式为相对 */
+overflow: hidden !important;
+z-index: 999999999 !important; /* 把滚动条提到Z轴最上层 */
+}
+
+/* 滚动条按钮基本样式 */
+scrollbar thumb{
+-moz-appearance: none !important;
+background-color: rgba(0,100,255,.25) !important;
+border-radius: 0px !important;
+border: 1px !important; /* 滚动条按钮边框 */
+border-color: rgba(0,100,255,.1) !important;  /* 滚动条按钮边框颜色和透明度 */
+}
+
+/* 滚动条按钮:鼠标悬停与点击拖动时基本样式 */
+/* scrollbar:hover thumb,
+scrollbar thumb:hover,
+scrollbar thumb:active {
+background-color: rgba(0,100,255,.75) !important;
+border: 0px !important;
+} */
+
+/* 垂直滚动条 */
+/* 把滚动条位置移到屏幕外，这里的像素应该等于垂直滚动条宽度的负值 */
+/* scrollbar[orient="vertical"]{ margin-left: -5px !important; 
+min-width: 5px !important; max-width: 5px !important;
+}
+ */
+/* 垂直滚动条按钮的左边框样式 */
+scrollbar thumb[orient="vertical"]{
+border-style: none none none solid !important; 
+}
+
+/* 水平滚动条 */
+/* 把滚动条位置移到屏幕外，这里的像素应该等于垂直滚动条宽度的负值 */
+/* scrollbar[orient="horizontal"]{ margin-top: -5px !important; 
+min-height: 5px !important; max-height: 5px !important;
+} */
+
+/* 水平滚动条按钮的上边框样式 */
+/* scrollbar thumb[orient="horizontal"]{
+border-style: solid none none none !important; 
+}
+ */
+/* 去除垂直与水平滚动条相交汇的角落 */
+/* scrollbar scrollcorner{display: none ! important; } */
+
+/* 滚动条两端按钮不显示 */
+/* scrollbar scrollbarbutton { display: none ! important; }
+ */
+scrollbarbutton{ -moz-appearance: none !important;
+position: relative !important;
+overflow: hidden !important;
+background-color: rgba(0,100,255,.25) !important;
+border: none !important; 
+}
+scrollbar:hover scrollbarbutton, scrollbar scrollbarbutton:hover{
+background-color: rgba(0,100,255,.75) !important;
+}
+
+scrollbar[orient="vertical"] scrollbarbutton {
+max-height:10px !important; min-height:10px !important;
+}
+
+scrollbar[orient="horizontal"] scrollbarbutton {
+max-width: 10px !important; min-width: 10px !important;
+}
+
 .contentBox::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
@@ -522,9 +611,7 @@ a{
 
     </style>
 </head>
-<script type="text/javascript">
-        var contxtpath = '${pageContext.request.contextPath}';
-</script>
+
 <body>
 <jsp:include page="/pages/comm/head.jsp">
     <jsp:param value="homepage" name="pageTitle"/>
@@ -544,6 +631,8 @@ a{
             </div>
             <span class="personMessageTitle">私信窗口</span>
             <div class="contentBox" id="dialogue">
+            	<div id="talkList">
+            	</div>
             </div>
 			<div class="inputBox">
                 <div style="float: left;width: 80%;height: 100%">
@@ -562,7 +651,7 @@ a{
     <input type="hidden" value="${more}" id="moreeee">
     <div class="items">
     	<c:choose>
-    		<c:when test="${listSize<1}">
+    		<c:when test="${more<1}">
     			<div class="no-more">
                    <img src="<c:url value="/statics/image/aaa4.png"></c:url>">
                    <span>木有内容呀~~</span>
@@ -571,9 +660,9 @@ a{
     		<c:otherwise>
     			<c:forEach var="friend" items="${listFriends}" varStatus="st" >
 		    		<c:choose>
-		    		<c:when test="${status.last==false}">
+		    		<c:when test="${st.last==false}">
 		  				<div class="${(st.index+1)%5 == 1? 'item1':'item1 item11'}" >
-				            <div><img src="${ctx}/statics/pictures/head.png" class="img2"></div>
+				            <div><img src="${ctx}/${friend.avatar}" class="img2"></div>
 				            <div class="div_txt1">${friend.realname}</div>
 				            <div class="div_txt2">${friend.position}</div>
 				            <div class="div_txt3">
@@ -584,8 +673,8 @@ a{
 		    		</c:when>
 		    		<c:otherwise>
 			  			<div class="${(st.index+1)%5 == 1? 'item1':'item1 item11'}" >
-				            <%-- <div><img src="${ctx}${friend.avatar}" class="img2"></div> --%>
-				            <div><img src="${ctx}/statics/pictures/head.png" class="img2"></div>
+				            <div><img src="${ctx}/${friend.avatar}" class="img2"></div>
+				           <%--  <div><img src="${ctx}/statics/pictures/head.png" class="img2"></div> --%>
 				            <div class="div_txt1">${friend.realname}</div>
 				            <div class="div_txt2">${friend.position}</div>
 				            <div class="div_txt3">
@@ -628,38 +717,41 @@ a{
     	};
     	$.ajax({
             type:'post',
-            url :contxtpath+'/myFriend/more.action',
+            url :contextpath+'myFriend/more.action',
             async:false,
             dataType:'json',
             data:json,
             success:function(json){
             	var str='';
+            	str+='<div class="items">';
             	$.each(json,function(i,n){
             		$("#row").val(n.row);
                  	$("#id").val(n.queryid);
-                 	$("#moreeee").val(i);
-            		str+='<div class="items">'
+                 	$("#moreeee").val(n.remainCount);
+            		
                			if((i+1)%5==1){
                				str+='<div class="item1">'
                			}else{
                				str+='<div class="item1 item11">'
                			}; 
                	            <%-- <div><img src="${ctx}${friend.avatar}" class="img2"></div> --%>
-               	       str+='<div><img src="${ctx}/statics/pictures/head.png" class="img2"></div><div class="div_txt1">'
-               	            +n.username
+               	       str+='<div><img src="${ctx}/${friend.avatar}" class="img2"></div><div class="div_txt1">'
+               	            +n.realname
                	            +'</div><div class="div_txt2">'
                	            +n.position
                	            +'</div><div class="div_txt3"><div  class ="showTalk" id='
                	            +n.id
                	            +'>私信</div><input type="hidden" id="t_'
                	            +n.id 
-               	            +'value=' 
-               	            +n.username 
-               	            +'/></div></div></div></div>';
+               	            +'value=\"' 
+               	            +n.realname 
+               	            +'\"></div></div>';
             	});
+            	str+='</div></div>';
             	$("#more").append(str);
-            	if($("#moreeee").val()<15){
+            	if($("#moreeee").val()==0){
             		$("#mooorew").html('没有更多了~~');
+            		$("#mooorew").attr("onclick","");
             	}
             }
     	});

@@ -2,34 +2,70 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.bc.pmpheep.back.authadmin.applydocaudit.dao.DataAuditDao">
+	
 	<!--分页查询条件查询列表 -->
-	<select id="findDataAudit" parameterType="java.util.Map"
-		resultType="java.util.Map">
-		SELECT
-		d.id,
-		d.realname,
-		d.position,
-		d.title,
-		t.textbook_name,
-		p.preset_position,
-		d.online_progress,
-		d.offline_progress,
-		p.chosen_position
+	<select id="findDataAudit" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[SELECT
+		d.id as did,d.realname as drealname,d.position as dposition, d.title as dtitle,group_concat(concat(t.textbook_name,'-',(case  
+		when p.preset_position = 4 then '主编' 																															
+		when p.preset_position = 2 then '副主编' 
+		when p.preset_position = 1 then  '编委'
+		when p.preset_position = 8 then  '数字编委'
+		when p.preset_position = 3 then '副主编,编委'
+		when p.preset_position = 5 then '主编,编委'
+		when p.preset_position = 6 then '主编,副主编'
+		when p.preset_position = 12 then '主编,数字编委'
+		when p.preset_position = 9 then '数字编委,编委'
+		when p.preset_position = 10 then '数字编委,副主编'
+		when p.preset_position = 11 then '数字编委,编委,副主编'
+		when p.preset_position = 13 then '数字编委,主编,编委'
+		when p.preset_position = 14 then '数字编委,主编,副主编'
+		when p.preset_position = 15 then '数字编委,主编,编委,副主编'
+		else ''  end )) SEPARATOR '\n') as bpp,
+		(case  when d.online_progress=0  then '未提交'  
+		when d.online_progress=1  then '已提交但是待审核' 
+		when d.online_progress=2  then '被申报单位退回' 
+		when d.online_progress=3  then '申报单位通过' 
+		when d.online_progress=4  then '出版社退回申报单位'
+		when d.online_progress=5  then '出版社退回个人'	END)	as 	onlineprogress,
+		(case  when d.offline_progress=0  then '未收到'  
+		when d.offline_progress=1  then '' 
+		when d.offline_progress=2  then '已收到' 	END)	as 	offlineprogress,
+		group_concat(concat(t.textbook_name,'-',(case  
+		when t.is_published=0  then '审核中' 
+		when pp.chosen_position=0 OR  pp.chosen_position IS NULL  then '遴选结束' 
+		when pp.chosen_position = 4 then '主编' 																															
+		when pp.chosen_position = 2 then '副主编' 
+		when pp.chosen_position = 1 then  '编委'
+		when pp.chosen_position = 8 then  '数字编委'
+		when pp.chosen_position = 12 then '主编,数字编委'
+		when pp.chosen_position = 9 then '数字编委,编委'
+		when pp.chosen_position = 10 then '数字编委,副主编'
+		else ''  end )) SEPARATOR '\n') as cp
 		FROM
 		declaration AS d
 		LEFT JOIN dec_position AS p ON d.id = p.declaration_id
-		LEFT JOIN textbook AS t ON p.textbook_id = t.id
+		LEFT JOIN dec_position_published AS pp ON d.id = pp.declaration_id
+		LEFT JOIN textbook AS t ON p.textbook_id = t.id 
+		LEFT JOIN org as o on d.org_id=o.id 
+		INNER JOIN org_user as  ou on  d.org_id=ou.org_id ]]>
 		<where>
 			1=1
 			<if test="queryName != null and queryName != '' ">
-				and realname like concat("%",#{queryName},"%")
+				and d.realname like concat("%",#{queryName},"%")
 			</if>
 			<if test="material_id != null and material_id != '' ">
 				and d.material_id = ${material_id}
 			</if>
+			<if test="userId != null and userId != '' ">
+				and ou.id = ${userId}
+			</if>
 		</where>
-		limit ${startNum},${pageSize}
+		GROUP BY d.id
+		limit ${startNum},${pageSize}  
 	</select>
+	
+	
 	<!--查询条件查询条数 -->
 	<select id="findDataAuditCount" parameterType="java.util.Map"
 		resultType="int">
@@ -38,18 +74,20 @@
 		COUNT(*)
 		FROM
 		declaration AS d
-		LEFT JOIN dec_position AS p ON d.id
-		= p.declaration_id
-		LEFT JOIN textbook AS t ON p.textbook_id = t.id
+		INNER JOIN org_user as  ou on  d.org_id=ou.org_id 
 		<where>
 		1=1
 			<if test="queryName != null and queryName != '' ">
-				and realname like concat("%",#{queryName},"%")
+				and d.realname like concat("%",#{queryName},"%")
 			</if>
 			<if test="material_id != null and material_id != '' ">
 				and d.material_id = ${material_id}
 			</if>
+			<if test="userId != null and userId != '' ">
+				and ou.id = ${userId}
+			</if>
 		</where>
+		
 	</select>
 	
 	<!--标题 -->
@@ -65,34 +103,163 @@
 	
 	<select id="findDataAuditExcel" parameterType="java.util.Map"
 		resultType="java.util.Map">
-		SELECT
-		d.id,
-		d.realname,
-		d.position,
-		d.title,
-		t.textbook_name,
-		p.preset_position,
-		d.online_progress,
-		d.offline_progress,
-		p.chosen_position
+		<![CDATA[SELECT
+		d.id as did,d.realname as drealname,d.position as dposition, d.title as dtitle,group_concat(concat(t.textbook_name,'-',(case  
+		when p.preset_position = 4 then '主编' 																															
+		when p.preset_position = 2 then '副主编' 
+		when p.preset_position = 1 then  '编委'
+		when p.preset_position = 8 then  '数字编委'
+		when p.preset_position = 3 then '副主编,编委'
+		when p.preset_position = 5 then '主编,编委'
+		when p.preset_position = 6 then '主编,副主编'
+		when p.preset_position = 12 then '主编,数字编委'
+		when p.preset_position = 9 then '数字编委,编委'
+		when p.preset_position = 10 then '数字编委,副主编'
+		when p.preset_position = 11 then '数字编委,编委,副主编'
+		when p.preset_position = 13 then '数字编委,主编,编委'
+		when p.preset_position = 14 then '数字编委,主编,副主编'
+		when p.preset_position = 15 then '数字编委,主编,编委,副主编'
+		else ''  end )) SEPARATOR '\n') as bpp,
+		(case  when d.online_progress=0  then '未提交'  
+		when d.online_progress=1  then '已提交但是待审核' 
+		when d.online_progress=2  then '被申报单位退回' 
+		when d.online_progress=3  then '申报单位通过' 
+		when d.online_progress=4  then '出版社退回申报单位'
+		when d.online_progress=5  then '出版社退回个人'	END)	as 	onlineprogress,
+		(case  when d.offline_progress=0  then '未收到'  
+		when d.offline_progress=1  then '' 
+		when d.offline_progress=2  then '已收到' 	END)	as 	offlineprogress,
+		group_concat(concat(t.textbook_name,'-',(case  
+		when t.is_published=0  then '审核中' 
+		when pp.chosen_position=0 OR pp.chosen_position IS NULL   then '遴选结束' 
+		when pp.chosen_position = 4 then '主编' 																															
+		when pp.chosen_position = 2 then '副主编' 
+		when pp.chosen_position = 1 then  '编委'
+		when pp.chosen_position = 8 then  '数字编委'
+		when pp.chosen_position = 12 then '主编,数字编委'
+		when pp.chosen_position = 9 then '数字编委,编委'
+		when pp.chosen_position = 10 then '数字编委,副主编'
+		else ''  end )) SEPARATOR '\n') as cp
 		FROM
 		declaration AS d
 		LEFT JOIN dec_position AS p ON d.id = p.declaration_id
-		LEFT JOIN textbook AS t ON p.textbook_id = t.id
+		LEFT JOIN dec_position_published AS pp ON d.id = pp.declaration_id
+		LEFT JOIN textbook AS t ON p.textbook_id = t.id 
+		LEFT JOIN org as o on d.org_id=o.id 
+		INNER JOIN org_user as  ou on  d.org_id=ou.org_id ]]>
 		<where>
 			1=1
 			<if test="queryName != null and queryName != '' ">
-				and realname like concat("%",#{queryName},"%")
+				and d.realname like concat("%",#{queryName},"%")
 			</if>
 			<if test="material_id != null and material_id != '' ">
 				and d.material_id = ${material_id}
 			</if>
+			<if test="userId != null and userId != '' ">
+				and ou.id = ${userId}
+			</if>
 		</where>
+		GROUP BY d.id
+	</select>
+	
+	
+	<!-- 申报审核通过 -->
+	<update id="updateDeclarationPass" parameterType="java.util.Map">
+		update declaration set auth_user_id =#{auth_user_id} ,auth_date=#{auth_date} ,online_progress=#{online_progress} where id= #{declaration_id}
+	</update>
+		<!-- 申报审核退回 -->
+	<update id="updateDeclaration" parameterType="java.util.Map">
+		update declaration set auth_user_id =#{auth_user_id} ,auth_date=#{auth_date} ,online_progress=#{online_progress},return_cause=#{return_cause}  where id= #{declaration_id}
+	</update>
+		
+	
+	<!-- 更新改动时间 -->
+	<update id="updateDeclarationUpdateTime" parameterType="map">
+		update declaration set gmt_update = #{time} where id=#{declaration_id}
+	</update>
+	
+	
+	<!-- 通过教材ID查询出教材信息 -->
+	<select id="queryMaterialbyId" resultType="java.util.Map" parameterType="java.lang.String">
+		select 
+		t1.id,
+		t1.material_name,
+		t1.material_round,
+		t1.material_type,
+		t1.deadline,
+		t1.actual_deadline,
+		t1.age_deadline,
+		t1.mail_address,
+		t1.department_id,
+		t1.director,
+		t1.is_multi_books*1 is_multi_books,
+		t1.is_multi_position*1 is_multi_position, 
+		t1.is_edu_exp_used*1 is_edu_exp_used,
+		t1.is_edu_exp_required*1 is_edu_exp_required,
+		t1.is_work_exp_used*1 is_work_exp_used,
+		t1.is_work_exp_required*1 is_work_exp_required, 
+		t1.is_teach_exp_used*1 is_teach_exp_used, 
+		t1.is_teach_exp_required*1 is_teach_exp_required, 
+		t1.is_acade_used*1 is_acade_used, 
+		t1.is_acade_required*1 is_acade_required, 
+		t1.is_last_position_used*1 is_last_position_used,
+		t1.is_last_position_required*1 is_last_position_required,
+		t1.is_course_used*1 is_course_used,
+		t1.is_course_required*1 is_course_required,
+		t1.is_national_plan_used*1 is_national_plan_used, 
+		t1.is_national_plan_required*1 is_national_plan_required, 
+		t1.is_textbook_used*1 is_textbook_used,
+		t1.is_textbook_required*1 is_textbook_required,
+		t1.is_other_textbook_used*1 is_other_textbook_used, 
+		t1.is_other_textbook_required*1 is_other_textbook_required, 
+		t1.is_research_used*1 is_research_used,
+		t1.is_research_required*1 is_research_required,
+		t1.is_deleted*1 is_deleted,
+		t1.gmt_create,
+		t1.founder_id, 
+		t1.gmt_update,
+		t1.mender_id,
+		t1.is_all_textbook_published*1 is_all_textbook_published, 
+		t1.is_force_end*1 is_force_end,
+		t1.project_permission,
+		t1.plan_permission, 
+		t1.is_achievement_used*1 is_achievement_used,
+		t1.is_achievement_required*1 is_achievement_required, 
+		t1.is_digital_editor_optional* 1 is_digital_editor_optional, 
+		t1.is_monograph_used*1 is_monograph_used, 
+		t1.is_monograph_required*1 is_monograph_required, 
+		t1.is_publish_reward_used* 1 is_publish_reward_used, 
+		t1.is_publish_reward_required*1 is_publish_reward_required, 
+		t1.is_sci_used*1 is_sci_used, 
+		t1.is_sci_required*1 is_sci_required,
+		t1.is_clinical_reward_used*1 is_clinical_reward_used, 
+		t1.is_clinical_reward_required*1 is_clinical_reward_required, 
+		t1.is_acade_reward_used*1 is_acade_reward_used,
+		t1.is_acade_reward_required*1 is_acade_reward_required, 
+		t1.is_published*1 is_published, 
+		t1.is_public*1 is_public from material t1 where t1.id = #{material_id}
+	</select>
+	
+	<!-- 通过教材ID查询所有书籍 -->
+	<select id="queryBookById" resultType="java.util.Map" parameterType="java.lang.String">
+		select * from textbook where material_id = #{material_id} order by sort asc
+	</select>
+	<!-- 通过教材ID查出相关的机构信息 -->
+	<select id="queryOrgById" resultType="java.util.Map" parameterType="java.lang.String">
+		select * from material_org t1 LEFT JOIN org t2 on t1.org_id = t2.id
+			where t1.material_id = #{material_id}
+	</select>
+	<!-- 通过教材ID查出相关的扩展信息 -->
+	<select id="queryZjkzxxById" resultType="java.util.Map" parameterType="java.lang.String">
+		select id,material_id,extension_name,is_required from material_extension where material_id = #{material_id}
 	</select>
 	
 	<!-- 专家信息 --> 
 	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
-		select t1.*,t2.org_name dwmc from declaration t1 left join org t2 on t1.org_id = t2.id
+		select t1.*,t2.org_name dwmc from (select id,material_id,user_id,realname,sex,birthday,experience,org_name,position,title,address,postcode,handphone,email,idtype,
+idcard,telephone,fax,org_id,online_progress,auth_user_id,auth_date,offline_progress,paper_date,is_staging*1 is_staging,is_deleted*1 is_deleted,
+gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,expertise,return_cause from declaration) t1 left join (select id,org_name from org 
+	union select '0' id,'人民卫生出版社' org_name from dual) t2 on t1.org_id = t2.id
 		 where 1= 1 
 		<if test="user_id != null and user_id != ''">
 			and t1.user_id = #{user_id} 
@@ -107,63 +274,116 @@
 			and t1.realname = #{realname}
 		</if>
 	</select>
+
 	
-		<!-- 图书选择 -->
+	<!-- 图书选择 -->
 	<select id="queryTsxz" resultType="java.util.Map" parameterType="java.util.Map">
-		select t1.*,t2.textbook_name from dec_position t1 left join textbook t2
+		select t1.id,t1.declaration_id,t1.textbook_id,t1.preset_position,t1.is_on_list*1 is_on_list,
+			t1.chosen_position,t1.rank,t1.syllabus_id,t1.syllabus_name,t1.gmt_create,t1.gmt_update,t2.textbook_name from dec_position t1 left join textbook t2
+			on t1.textbook_id = t2.id where t1.declaration_id = #{declaration_id} 
+		ORDER BY t1.gmt_create desc
+	</select>
+
+	
+	<!--图书申报职位暂存 -->
+	<select id="queryTssbZc" resultType="java.util.Map" parameterType="java.util.Map">
+		select t1.id,t1.author_id,t1.is_background*1 is_background,t1.declaration_id,t1.textbook_id,t1.preset_position,t1.is_on_list*1 is_on_list,
+		t1.chosen_position,t1.rank,t1.syllabus_id,t1.syllabus_name,t1.gmt_create,t1.gmt_update,t2.textbook_name from dec_position_temp t1 left join textbook t2
 		on t1.textbook_id = t2.id where t1.declaration_id = #{declaration_id} 
 		ORDER BY t1.gmt_create desc
 	</select>
-	
-		<!-- 学习经历 -->
+
+	<!-- 学习经历 -->
 	<select id="queryStu" resultType="java.util.Map" parameterType="java.util.Map">
 		select * from dec_edu_exp where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
-		<!-- 工作经历 -->
+
+	<!-- 工作经历 -->
 	<select id="queryWork" resultType="java.util.Map" parameterType="java.util.Map">
 		select * from dec_work_exp where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
-		<!--教学经历-->
+
+	<!--教学经历-->
 	<select id="queryStea" resultType="java.util.Map" parameterType="java.util.Map">
 		select * from dec_teach_exp where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
-		<!-- //作家学术 -->
+
+	<!-- //作家学术 -->
 	<select id="queryZjxs" resultType="java.util.Map" parameterType="java.util.Map">
 		select * from dec_acade where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
-		<!--上版教材编辑-->
+
+	<!--上版教材编辑-->
 	<select id="queryJcbj" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from dec_last_position where declaration_id = #{declaration_id} ORDER BY sort 
+		select id,declaration_id,material_name,position,is_digital_editor*1 is_digital_editor,note,sort from dec_last_position where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
-		<!-- 精品课程建设 -->
+
+	<!-- 精品课程建设 -->
 	<select id="queryGjkcjs" resultType="java.util.Map" parameterType="java.util.Map">
 		select * from dec_course_construction where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
-		<!-- 作家主编国家级规划教材情况 -->
+
+	<!-- 作家主编国家级规划教材情况 -->
 	<select id="queryGjghjc" resultType="java.util.Map" parameterType="java.util.Map">
 		select * from dec_national_plan where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
-		<!-- 教材编写情况 -->
+
+	<!-- 教材编写情况 -->
 	<select id="queryJcbx" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from dec_textbook where declaration_id = #{declaration_id} ORDER BY sort 
+		select id,declaration_id,material_name,rank,position,
+		is_digital_editor*1 is_digital_editor,publisher,publish_date,isbn,note,sort
+		 from dec_textbook where declaration_id = #{declaration_id}
+		 <if test="rank != null and rank != ''">
+		  and rank =#{rank} 
+		  </if>
+		  ORDER BY sort 
 	</select>
-		<!-- //作家科研情况表 -->
+
+	<!-- //作家科研情况表 -->
 	<select id="queryZjkyqk" resultType="java.util.Map" parameterType="java.util.Map">
 		select * from dec_research where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
-		<!-- 作家扩展项填报表 -->
+
+	<!-- 作家扩展项填报表 -->
 	<select id="queryZjkzbb" resultType="java.util.Map" parameterType="java.util.Map">
-		select t1.*,t2.extension_name from dec_extension t1 LEFT JOIN material_extension t2 ON 
+		select t1.*,t2.extension_name,t2.is_required from dec_extension t1 LEFT JOIN material_extension t2 ON 
 		   t1.extension_id = t2.id where t1.declaration_id = #{declaration_id}
 	</select>
-		<!-- 申报审核 -->
-	<update id="updateDeclaration" parameterType="java.util.Map">
-		update declaration set auth_user_id =#{auth_user_id} ,auth_date=#{auth_date} ,online_progress=#{online_progress} where id= #{declaration_id}
-	</update>
-		<!-- 通过教材ID查询出教材信息 -->
-	<select id="queryMaterialbyId" resultType="java.util.Map" parameterType="java.lang.String">
-		select t1.*,t2.extension_name,t2.is_required from material t1 left join material_extension t2 
-			on t1.id=t2.material_id where t1.id = #{material_id}
+
+	
+	<!-- //个人成就 -->
+	<select id="queryAchievement" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_achievement where declaration_id = #{declaration_id}  
 	</select>
+	
+
+	<!-- //主编学术专著情况 -->
+	<select id="queryMonograph" resultType="java.util.Map" parameterType="java.util.Map">
+		select id,declaration_id,monograph_name,is_self_paid*1 is_self_paid,publisher,publish_date,note,sort from dec_monograph where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+
+	<!-- //出版行业获奖情况 -->
+	<select id="queryPublish" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_publish_reward where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+
+	<!-- //SCI论文投稿及影响因子 -->
+	<select id="querySci" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_sci where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+
+	<!-- //临床医学获奖情况 -->
+	<select id="queryClinicalreward" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_clinical_reward where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+
+	<!-- //学术荣誉授予情况 -->
+	<select id="queryAcadereward" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_acade_reward where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+
+
+	
+	
 	
 </mapper>

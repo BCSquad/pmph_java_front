@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.authadmin.message.bean.UserMessage;
 import com.bc.pmpheep.back.authadmin.message.dao.OrgMessageDao;
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
 import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.commuser.writerArticle.dao.WriterArticleDao;
 import com.bc.pmpheep.back.uncertainfieldcom.bean.CmsCategoryConfig;
-import com.bc.pmpheep.general.pojo.Message;
+import com.bc.pmpheep.general.pojo.Content;
+import com.bc.pmpheep.general.service.ContentService;
 import com.bc.pmpheep.general.service.MessageService;
 import com.bc.pmpheep.utils.SummaryUtil;
 
@@ -23,7 +25,7 @@ public class WriterArticleServiceImpl implements WriterArticleService {
 	@Autowired
 	WriterArticleDao writerArticleDao;
 	@Autowired
-	MessageService mssageService;
+	ContentService contentService;
 	@Autowired
     @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
     private PersonalService personalService;
@@ -34,9 +36,9 @@ public class WriterArticleServiceImpl implements WriterArticleService {
 	public Map<String, Object> insertWriteArticle(Map map,String UEContent) {
 		// TODO Auto-generated method stub
 		//发送消息 到MongoDB 
-		Message message = new Message();
-		message.setContent(UEContent);
-		Message messageResult = mssageService.add(message);
+		Content content = new Content();
+		content.setContent(UEContent);
+		Content messageResult = contentService.add(content);
 		String msg_id = messageResult.getId();
 		map.put("mid", msg_id); //内容id
 		String summary = SummaryUtil.htmlToText(UEContent);
@@ -45,7 +47,8 @@ public class WriterArticleServiceImpl implements WriterArticleService {
 		map.put("category_id", cmsCategoryConfig.getId("医学随笔"));
 		writerArticleDao.insertWriteArticle(map);
 		/*if ("0".equals(map.get("is_staging").toString())) {
-			personalService.saveUserTrendst("sbwz", map.get("table_trendst_id").toString(), 0, map.get("author_id").toString());
+		    WriterUserTrendst wut = new WriterUserTrendst(map.get("author_id").toString(), 1, map.get("table_trendst_id").toString());
+			personalService.saveUserTrendst(wut);
 		}*/
 		
 		Map<String,Object> result_map = new HashMap<String, Object>();
@@ -57,9 +60,9 @@ public class WriterArticleServiceImpl implements WriterArticleService {
 	public String  updateIsStaging(Map map,String UEContent) {
 		// TODO Auto-generated method stub
 		//发送消息 到MongoDB  根据传过去的msg_id 去找到写的这个文章
-		Message message = new Message();
-		message.setContent(UEContent);
-		Message messageResult = mssageService.add(message);
+		Content content = new Content();
+		content.setContent(UEContent);
+		Content messageResult = contentService.add(content);
 		String mid = messageResult.getId();
 		map.put("mid", mid); //内容id
 		String summary = SummaryUtil.htmlToText(UEContent);
@@ -68,7 +71,8 @@ public class WriterArticleServiceImpl implements WriterArticleService {
 		map.put("category_id", cmsCategoryConfig.getId("医学随笔"));
 		writerArticleDao.updateIsStaging(map);
 		/*if ("0".equals(map.get("is_staging").toString())) {
-			personalService.saveUserTrendst("sbwz", map.get("atrticle_id").toString(), 0, map.get("author_id").toString());
+			WriterUserTrendst wut = new WriterUserTrendst(map.get("author_id").toString(), 1, map.get("atrticle_id").toString());
+			personalService.saveUserTrendst(wut);
 		}*/
 		
 		return mid;

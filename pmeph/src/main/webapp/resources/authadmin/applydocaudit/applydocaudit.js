@@ -87,7 +87,7 @@ function resultStatistics(id,name){
 }
 
 //办理 按钮点击触发事件 跳转页面
-function dealWithAudit(id,name){
-	window.location.href = contextpath + "dataaudit/toPage.action?material_id="+id;
+function dealWithAudit(id,name,view_audit){
+	window.location.href = contextpath + "dataaudit/toPage.action?material_id="+id+"&view_audit="+view_audit;
 }
                

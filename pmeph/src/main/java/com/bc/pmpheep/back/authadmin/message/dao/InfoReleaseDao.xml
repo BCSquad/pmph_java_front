@@ -5,11 +5,11 @@
 	<!-- 选择消息发布对象(机构用户) 下拉菜单 -->
 	<select id="selectMenu" resultType="java.util.Map">
 		SELECT
-		t.id,
-		t.textbook_name,
-		t.textbook_round
+		m.id,
+		m.material_name,
+		m.material_round
 		FROM
-		textbook  t
+		material  m
 	</select>
 
 	<!-- 查询列表 -->
@@ -17,17 +17,19 @@
 		resultType="java.util.Map">
 		SELECT
 		c.user_id AS id,
-		textbook_name,
-		textbook_round
+		a.textbook_name,
+		a.textbook_round,
+		m.material_name
 		FROM
 		textbook a
+		JOIN material m ON  a.material_id= m.id
 		JOIN dec_position b ON b.textbook_id = a.id
 		JOIN declaration c ON b.declaration_id = c.id
 		JOIN org_user d on d.org_id = c.org_id
 		<where>
 		1=1
 			<if test="queryName != null and queryName != '' ">
-				and textbook_name like concat("%",#{queryName},"%")
+				and m.material_name like concat("%",#{queryName},"%")
 			</if>
 			<if test="userId != null and userId != '' ">
 				and d.id = ${userId}
@@ -41,13 +43,14 @@
 		resultType="java.lang.Integer">
 		select count(*)  FROM
 		textbook a
+		JOIN material m ON  a.material_id= m.id
 		JOIN dec_position b ON b.textbook_id = a.id
 		JOIN declaration c ON b.declaration_id = c.id
 		JOIN org_user d on d.org_id = c.org_id
 		<where>
 		1=1
 			<if test="queryName != null and queryName != '' ">
-				and textbook_name like concat("%",#{queryName},"%")
+				and m.material_name like concat("%",#{queryName},"%")
 			</if>
 			<if test="userId != null and userId != '' ">
 				and d.id = ${userId}

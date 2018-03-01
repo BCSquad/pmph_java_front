@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -59,6 +60,8 @@ public class DeclareCountController extends BaseController {
 			throws UnsupportedEncodingException {
 		String material_id = request.getParameter("material_id");
 		Map<String, Object> paraMap = new HashMap<String, Object>();
+		String user_id = this.getUserInfo().get("id").toString();
+		paraMap.put("userId", user_id);
 		paraMap.put("material_id", material_id);
 		// 获取标题
 		String material_name = dataAuditService.findTitleName(paraMap);
@@ -66,13 +69,12 @@ public class DeclareCountController extends BaseController {
 		// 我校统计情况
 		List<Map<String, Object>> list = declareCountService
 				.findDeclareCount(paraMap);
-		// 最终结果名单列表
-		// List<Map<String, Object>> listName = declareCountService
-		// .findNameList(paraMap);
+		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("material_id", material_id);
 		mv.addObject("material_name", material_name);
 		mv.addObject("listMap", list);
+		mv.addObject("userId", user_id);
 		mv.setViewName("authadmin/applydocaudit/declarecount");
 		return mv;
 	}
@@ -92,6 +94,7 @@ public class DeclareCountController extends BaseController {
 		String material_id = request.getParameter("material_id");
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("material_id", material_id);
+		paraMap.put("userId", this.getUserInfo().get("id").toString());
 		List<Map<String, Object>> list = declareCountService
 				.findNameList(paraMap);
 		return list;
@@ -112,6 +115,7 @@ public class DeclareCountController extends BaseController {
 	public List<Map<String, Object>> selectAll(HttpServletRequest request) {
 		String material_id = request.getParameter("material_id");
 		Map<String, Object> paraMap = new HashMap<String, Object>();
+		paraMap.put("userId", this.getUserInfo().get("id").toString());
 		paraMap.put("material_id", material_id);
 		List<Map<String, Object>> list = declareCountService.selectAll(paraMap);
 		return list;
@@ -133,6 +137,7 @@ public class DeclareCountController extends BaseController {
 		String material_id = request.getParameter("material_id");
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("material_id", material_id);
+		paraMap.put("userId", this.getUserInfo().get("id").toString());
 		List<Map<String, Object>> list = declareCountService
 				.selectResults(paraMap);
 		return list;

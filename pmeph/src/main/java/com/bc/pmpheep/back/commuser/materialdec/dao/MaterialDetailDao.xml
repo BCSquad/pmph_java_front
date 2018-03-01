@@ -3,8 +3,63 @@
 <mapper namespace="com.bc.pmpheep.back.commuser.materialdec.dao.MaterialDetailDao" >
 	<!-- 通过教材ID查询出教材信息 -->
 	<select id="queryMaterialbyId" resultType="java.util.Map" parameterType="java.lang.String">
-		select t1.*,t2.extension_name,t2.is_required from material t1 left join material_extension t2 
-			on t1.id=t2.material_id where t1.id = #{material_id}
+		select 
+		t1.id,
+		t1.material_name,
+		t1.material_round,
+		t1.material_type,
+		t1.deadline,
+		t1.actual_deadline,
+		t1.age_deadline,
+		t1.mail_address,
+		t1.department_id,
+		t1.director,
+		t1.is_multi_books*1 is_multi_books,
+		t1.is_multi_position*1 is_multi_position, 
+		t1.is_edu_exp_used*1 is_edu_exp_used,
+		t1.is_edu_exp_required*1 is_edu_exp_required,
+		t1.is_work_exp_used*1 is_work_exp_used,
+		t1.is_work_exp_required*1 is_work_exp_required, 
+		t1.is_teach_exp_used*1 is_teach_exp_used, 
+		t1.is_teach_exp_required*1 is_teach_exp_required, 
+		t1.is_acade_used*1 is_acade_used, 
+		t1.is_acade_required*1 is_acade_required, 
+		t1.is_last_position_used*1 is_last_position_used,
+		t1.is_last_position_required*1 is_last_position_required,
+		t1.is_course_used*1 is_course_used,
+		t1.is_course_required*1 is_course_required,
+		t1.is_national_plan_used*1 is_national_plan_used, 
+		t1.is_national_plan_required*1 is_national_plan_required, 
+		t1.is_textbook_used*1 is_textbook_used,
+		t1.is_textbook_required*1 is_textbook_required,
+		t1.is_other_textbook_used*1 is_other_textbook_used, 
+		t1.is_other_textbook_required*1 is_other_textbook_required, 
+		t1.is_research_used*1 is_research_used,
+		t1.is_research_required*1 is_research_required,
+		t1.is_deleted*1 is_deleted,
+		t1.gmt_create,
+		t1.founder_id, 
+		t1.gmt_update,
+		t1.mender_id,
+		t1.is_all_textbook_published*1 is_all_textbook_published, 
+		t1.is_force_end*1 is_force_end,
+		t1.project_permission,
+		t1.plan_permission, 
+		t1.is_achievement_used*1 is_achievement_used,
+		t1.is_achievement_required*1 is_achievement_required, 
+		t1.is_digital_editor_optional* 1 is_digital_editor_optional, 
+		t1.is_monograph_used*1 is_monograph_used, 
+		t1.is_monograph_required*1 is_monograph_required, 
+		t1.is_publish_reward_used* 1 is_publish_reward_used, 
+		t1.is_publish_reward_required*1 is_publish_reward_required, 
+		t1.is_sci_used*1 is_sci_used, 
+		t1.is_sci_required*1 is_sci_required,
+		t1.is_clinical_reward_used*1 is_clinical_reward_used, 
+		t1.is_clinical_reward_required*1 is_clinical_reward_required, 
+		t1.is_acade_reward_used*1 is_acade_reward_used,
+		t1.is_acade_reward_required*1 is_acade_reward_required, 
+		t1.is_published*1 is_published, 
+		t1.is_public*1 is_public from material t1 where t1.id = #{material_id}
 	</select>
 	
 	<!-- 通过教材ID查询所有书籍 -->
@@ -18,12 +73,15 @@
 	</select>
 	<!-- 通过教材ID查出相关的扩展信息 -->
 	<select id="queryZjkzxxById" resultType="java.util.Map" parameterType="java.lang.String">
-		select * from material_extension where material_id = #{material_id}
+		select id,material_id,extension_name,is_required from material_extension where material_id = #{material_id}
 	</select>
 	
 	<!-- 专家信息 --> 
 	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
-		select t1.*,t2.org_name dwmc from declaration t1 left join org t2 on t1.org_id = t2.id
+		select t1.*,t2.org_name dwmc from (select id,material_id,user_id,realname,sex,birthday,experience,org_name,position,title,address,postcode,handphone,email,idtype,
+idcard,telephone,fax,org_id,online_progress,auth_user_id,auth_date,offline_progress,paper_date,is_staging*1 is_staging,is_deleted*1 is_deleted,
+gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,expertise,return_cause from declaration) t1 left join (select id,org_name from org 
+	union select '0' id,'人民卫生出版社' org_name from dual) t2 on t1.org_id = t2.id
 		 where 1= 1 
 		<if test="user_id != null and user_id != ''">
 			and t1.user_id = #{user_id} 
@@ -47,7 +105,7 @@
 	</insert>
 	<update id="updatePerson" parameterType="java.util.Map">
 		update declaration set realname = #{realname},sex = #{sex},birthday = #{birthday},experience = #{experience},
-		org_name = #{org_name},position = #{position},title = #{title},address = #{address},
+		org_name = #{org_name},position = #{position},title = #{title},address = #{address},idcard=#{idcard},
 		postcode = #{postcode},handphone = #{handphone},email = #{email},idtype = #{idtype},is_staging = #{is_staging},
 		telephone = #{telephone},fax = #{fax},org_id = #{org_id},gmt_update = #{gmt_update},online_progress = #{online_progress}
 		 where id = #{declaration_id}
@@ -55,18 +113,22 @@
 	
 	<!-- 图书选择 -->
 	<select id="queryTsxz" resultType="java.util.Map" parameterType="java.util.Map">
-		select t1.*,t2.textbook_name from dec_position t1 left join textbook t2
-		on t1.textbook_id = t2.id where t1.declaration_id = #{declaration_id} 
+		select t1.id,t1.declaration_id,t1.textbook_id,t1.preset_position,t1.is_on_list*1 is_on_list,
+			t1.chosen_position,t1.rank,t1.syllabus_id,t1.syllabus_name,t1.gmt_create,t1.gmt_update,t2.textbook_name from dec_position t1 left join textbook t2
+			on t1.textbook_id = t2.id where t1.declaration_id = #{declaration_id} 
 		ORDER BY t1.gmt_create desc
 	</select>
 	<insert id="insertTsxz" parameterType="java.util.Map"  useGeneratedKeys="true" keyProperty="table_trendst_id">
 		insert into dec_position(declaration_id,textbook_id,preset_position,syllabus_id,syllabus_name,gmt_create)
 		  values(#{declaration_id},#{textbook_id},#{preset_position},#{syllabus_id},#{syllabus_name},#{gmt_create})
 	</insert>
-	
+	<delete id="DelTsxz" parameterType="java.util.Map">
+		delete from dec_position where declaration_id = #{declaration_id}
+	</delete>
 	<!--图书申报职位暂存 -->
 	<select id="queryTssbZc" resultType="java.util.Map" parameterType="java.util.Map">
-		select t1.*,t2.textbook_name from dec_position_temp t1 left join textbook t2
+		select t1.id,t1.author_id,t1.is_background*1 is_background,t1.declaration_id,t1.textbook_id,t1.preset_position,t1.is_on_list*1 is_on_list,
+		t1.chosen_position,t1.rank,t1.syllabus_id,t1.syllabus_name,t1.gmt_create,t1.gmt_update,t2.textbook_name from dec_position_temp t1 left join textbook t2
 		on t1.textbook_id = t2.id where t1.declaration_id = #{declaration_id} 
 		ORDER BY t1.gmt_create desc
 	</select>
@@ -123,11 +185,11 @@
 	</delete>
 	<!--上版教材编辑-->
 	<select id="queryJcbj" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from dec_last_position where declaration_id = #{declaration_id} ORDER BY sort 
+		select id,declaration_id,material_name,position,is_digital_editor*1 is_digital_editor,note,sort from dec_last_position where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
 	<insert id="insertJcbj" parameterType="java.util.Map">
-		insert into dec_last_position(declaration_id,material_name,position,note)
-		  values(#{declaration_id},#{material_name},#{position},#{note})
+		insert into dec_last_position(declaration_id,material_name,position,is_digital_editor,note)
+		  values(#{declaration_id},#{material_name},#{position},#{is_digital_editor},#{note})
 	</insert>
 	<delete id="DelJcbj" parameterType="java.util.Map">
 		delete from dec_last_position where declaration_id = #{declaration_id}
@@ -156,11 +218,17 @@
 	</delete>
 	<!-- 教材编写情况 -->
 	<select id="queryJcbx" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from dec_textbook where declaration_id = #{declaration_id} ORDER BY sort 
+		select id,declaration_id,material_name,rank,position,
+		is_digital_editor*1 is_digital_editor,publisher,publish_date,isbn,note,sort
+		 from dec_textbook where declaration_id = #{declaration_id}
+		 <if test="rank != null and rank != ''">
+		  and rank =#{rank} 
+		  </if>
+		  ORDER BY sort 
 	</select>
 	<insert id="insertJcbx" parameterType="java.util.Map">
-		insert into dec_textbook(declaration_id,material_name,rank,position,publisher,publish_date,isbn,note)
-		  values(#{declaration_id},#{material_name},#{rank},#{position},#{publisher},#{publish_date},#{isbn},#{note})
+		insert into dec_textbook(declaration_id,material_name,rank,position,publisher,publish_date,isbn,note,is_digital_editor)
+		  values(#{declaration_id},#{material_name},#{rank},#{position},#{publisher},#{publish_date},#{isbn},#{note},#{is_digital_editor})
 	</insert>
 	<delete id="DelJcbx" parameterType="java.util.Map">
 		delete from dec_textbook where declaration_id = #{declaration_id}
@@ -178,16 +246,118 @@
 	</delete>
 	<!-- 作家扩展项填报表 -->
 	<select id="queryZjkzbb" resultType="java.util.Map" parameterType="java.util.Map">
-		select t1.*,t2.extension_name from dec_extension t1 LEFT JOIN material_extension t2 ON 
+		select t1.*,t2.extension_name,t2.is_required from dec_extension t1 LEFT JOIN material_extension t2 ON 
 		   t1.extension_id = t2.id where t1.declaration_id = #{declaration_id}
 	</select>
 	<!-- 作家扩展项填报表新增 -->
-	<select id="insertZjkzbb" resultType="java.util.Map" parameterType="java.util.Map">
+	<insert id="insertZjkzbb" parameterType="java.util.Map">
 		insert into dec_extension(extension_id,declaration_id,content) values(#{extension_id},#{declaration_id},#{content})
+	</insert>
+	<delete id="delZjkzbb" parameterType="java.util.Map">
+		delete from dec_extension where declaration_id = #{declaration_id}
+	</delete>
+	
+	<!-- //个人成就 -->
+	<select id="queryAchievement" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_achievement where declaration_id = #{declaration_id}  
 	</select>
+	<insert id="insertAchievement" parameterType="java.util.Map">
+		insert into dec_achievement(declaration_id,content)
+		  values(#{declaration_id},#{content})
+	</insert>
+	<update id="updateAchievement" parameterType="java.util.Map">
+		update dec_achievement set content = #{content} 
+			where declaration_id = #{declaration_id}
+	</update>
+	<delete id="DelAchievement" parameterType="java.util.Map">
+		delete from dec_achievement where declaration_id = #{declaration_id}
+	</delete>
+	<!-- //主编学术专著情况 -->
+	<select id="queryMonograph" resultType="java.util.Map" parameterType="java.util.Map">
+		select id,declaration_id,monograph_name,is_self_paid*1 is_self_paid,publisher,publish_date,note,sort from dec_monograph where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+	<insert id="insertMonograph" parameterType="java.util.Map">
+		insert into dec_monograph(declaration_id,monograph_name,is_self_paid,publisher,publish_date,note,sort)
+		  values(#{declaration_id},#{monograph_name},#{is_self_paid},#{publisher},#{publish_date},#{note},#{sort})
+	</insert>
+	<delete id="DelMonograph" parameterType="java.util.Map">
+		delete from dec_monograph where declaration_id = #{declaration_id}
+	</delete>
+	<!-- //出版行业获奖情况 -->
+	<select id="queryPublish" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_publish_reward where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+	<insert id="insertPublish" parameterType="java.util.Map">
+		insert into dec_publish_reward(declaration_id,reward_name,award_unit,reward_date,note,sort)
+		  values(#{declaration_id},#{reward_name},#{award_unit},#{reward_date},#{note},#{sort})
+	</insert>
+	<delete id="DelPublish" parameterType="java.util.Map">
+		delete from dec_publish_reward where declaration_id = #{declaration_id}
+	</delete>
+	<!-- //SCI论文投稿及影响因子 -->
+	<select id="querySci" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_sci where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+	<insert id="insertSci" parameterType="java.util.Map">
+		insert into dec_sci(declaration_id,paper_name,journal_name,factor,publish_date,note,sort)
+		  values(#{declaration_id},#{paper_name},#{journal_name},#{factor},#{publish_date},#{note},#{sort})
+	</insert>
+	<delete id="DelSci" parameterType="java.util.Map">
+		delete from dec_sci where declaration_id = #{declaration_id}
+	</delete>
+	<!-- //临床医学获奖情况 -->
+	<select id="queryClinicalreward" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_clinical_reward where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+	<insert id="insertClinicalreward" parameterType="java.util.Map">
+		insert into dec_clinical_reward(declaration_id,reward_name,award_unit,reward_date,note,sort)
+		  values(#{declaration_id},#{reward_name},#{award_unit},#{reward_date},#{note},#{sort})
+	</insert>
+	<delete id="DelClinicalreward" parameterType="java.util.Map">
+		delete from dec_clinical_reward where declaration_id = #{declaration_id}
+	</delete>
+	<!-- //学术荣誉授予情况 -->
+	<select id="queryAcadereward" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_acade_reward where declaration_id = #{declaration_id} ORDER BY sort 
+	</select>
+	<insert id="insertAcadereward" parameterType="java.util.Map">
+		insert into dec_acade_reward(declaration_id,reward_name,award_unit,reward_date,note,sort)
+		  values(#{declaration_id},#{reward_name},#{award_unit},#{reward_date},#{note},#{sort})
+	</insert>
+	<delete id="DelAcadereward" parameterType="java.util.Map">
+		delete from dec_acade_reward where declaration_id = #{declaration_id}
+	</delete>
 	
 	<!-- 申报审核 -->
 	<update id="updateDeclaration" parameterType="java.util.Map">
 		update declaration set auth_user_id =#{auth_user_id} ,auth_date=#{auth_date} ,online_progress=#{online_progress} where id= #{declaration_id}
 	</update>
+	
+	<!-- 查询机构列表 -->
+	<select id="queryOrgList" parameterType="PageParameter" resultType="java.util.Map">
+		select * from (
+			select t1.material_id,t1.org_id,t2.org_name,t2.sort from material_org t1 LEFT JOIN org t2 on t1.org_id = t2.id where 1=1
+			<if test="parameter.material_id != null and parameter.material_id != ''">
+				and t1.material_id = #{parameter.material_id}
+			</if>
+			UNION select '' material_id,'0' org_id,'人民卫生出版社' org_name,'0' sort from dual
+		)t 
+		<if test="parameter.org_name != null and parameter.org_name != ''">
+			where t.org_name like #{parameter.org_name}
+			</if>
+		 order by sort asc limit #{start},#{pageSize}
+	</select>
+	<!-- 机构数据总数 -->
+	<select id="queryOrgCount" parameterType="PageParameter" resultType="int">
+		select count(*) from (
+			select t1.material_id,t1.org_id,t2.org_name,t2.sort from material_org t1 LEFT JOIN org t2 on t1.org_id = t2.id where 1=1
+			<if test="parameter.material_id != null and parameter.material_id != ''">
+				and t1.material_id = #{parameter.material_id}
+			</if>
+			UNION select '' material_id,'0' org_id,'人民卫生出版社' org_name,'0' sort from dual
+		)t
+			<if test="parameter.org_name != null and parameter.org_name != ''">
+				where t.org_name like #{parameter.org_name}
+			</if>
+	</select>
 </mapper>

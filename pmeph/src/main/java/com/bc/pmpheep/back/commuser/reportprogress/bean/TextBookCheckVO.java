@@ -48,6 +48,8 @@ public class TextBookCheckVO implements Serializable {
     private Boolean isChiefChosen;
     // 是否已公布
     private Boolean isPublished;
+    
+    private Boolean isLocked;
 
     /**
      * @return the materialId
@@ -216,5 +218,13 @@ public class TextBookCheckVO implements Serializable {
     public void setChosenPosition(Integer chosenPosition) {
         this.chosenPosition = chosenPosition;
     }
+
+	public Boolean getIsLocked() {
+		return isLocked;
+	}
+
+	public void setIsLocked(Boolean isLocked) {
+		this.isLocked = isLocked;
+	}
 
 }

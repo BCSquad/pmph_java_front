@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.bc.pmpheep.back.plugin.PageParameter;
+
 public interface ArticleSearchService {
 
 	/**
@@ -22,7 +24,7 @@ public interface ArticleSearchService {
 	 * 改变点赞数
 	 * @param map
 	 */
-	Map<String, Object> changeLikes(Map<String, Object> map);
+	Map<String, Object> changeLikes(int likes,String id);
 	/**
 	 * 根据ID查询
 	 * @param id
@@ -47,4 +49,41 @@ public interface ArticleSearchService {
 	 * @return List
 	 */
 	public List<String> getImgSrc(String html);
+	/**
+	 * 查询登陆人是否对指定文章点过赞
+	 * @param id 文章ID
+	 * @param writer_id 登陆人ID
+	 * @return
+	 */
+	List<Map<String, Object>> querydExit(String id,String writer_id);
+	/**
+	 * 根据用户ID和文章ID往点赞表里面添加数据
+	 * @param content_id 文章ID
+	 * @param writer_id 用户ID
+	 * @return 1，1>0说明数据添加成功
+	 */
+	String insertPraise(String content_id,String writer_id);
+	/**
+	 * 删除点赞表里面的数据
+	 * @param map
+	 */
+	void del(String id);
+	
+	/**
+	 * 查询文章列表 以上查询方法都不用 用此方法代替
+	 * @param pageParameter
+	 * @author liudi
+	 * @return
+	 */
+	List<Map<String, Object>> queryArticleByAdi(PageParameter<Map<String, Object>> pageParameter);
+	
+	/**
+	 * 查询文章总数 以上查询方法都不用 用此方法代替
+	 * @param pageParameter
+	 * @author liudi
+	 * @return
+	 */
+	int queryArticleByAdiCount(PageParameter<Map<String, Object>> pageParameter);
+	
+	
 }

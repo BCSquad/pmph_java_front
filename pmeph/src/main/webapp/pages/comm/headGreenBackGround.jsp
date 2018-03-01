@@ -10,16 +10,17 @@
         <div class="div-content">
             <div id="div-titletop">
                 <span class="top-lable1">欢迎访问人教e卫平台！</span>
-                <span class="top-lable2">∨</span>
+                <a class="top-lable2" href='<c:url value="/logout.action"/>'>[退出登录]</a>
                 <span class="top-lable2">&nbsp</span>
+				<%--<span class="top-lable2">退出登录</span>--%>
                 <span class="top-lable2">
                     <%
                         Map<String, Object> userInfo = (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_ORGUSER);
                         out.println(MapUtils.getString(userInfo, "org_name"));
                     %>
                 </span>
-                <span class="top-lable2">&nbsp&nbsp&nbsp&nbsp&nbsp</span>
-                <span class="top-lable2">下载手机客户端！</span>
+                <%--<span class="top-lable2">&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+                <span class="top-lable2">下载手机客户端！</span>--%>
             </div>
         </div>
     </div>
@@ -30,21 +31,67 @@
             <div class="div-menu-child <%="backlog".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
                  onclick="window.location.href='<c:url value="/schedule/scheduleList.action"/>'">待办事项
             </div>
-            <div class="div-menu-child <%="audit".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
-                 onclick="window.location.href='<c:url value="/applyDocAudit/toPage.action"/>'">申报资料审核
-            </div>
-            <div class="div-menu-child <%="teachercert".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
-                 onclick="window.location.href='<c:url value="/teacherauth/toPage.action"/>'">教师认证
-            </div>
-            <div class="div-menu-child <%="usermanage".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
-                 onclick="window.location.href='<c:url value="/user/writerLists.action"/>'">用户管理
-            </div>
-            <div class="div-menu-child <%="account".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
-                 onclick="window.location.href='<c:url value="/admininfocontroller/toadmininfo.action"/>'">账户设置
-            </div>
-            <div class="div-menu-child <%="message".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
-                 onclick="window.location.href='<c:url value="/AllMessage/init.action"/>'">消息
-            </div>
+            <c:choose> 
+     			<c:when test="${ SESSION_USER_CONST_ORGUSER.progress==1}">   
+	     			<div class="div-menu-child <%="audit".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
+	                 onclick="window.location.href='<c:url value="/applyDocAudit/toPage.action"/>'">申报资料审核
+	            	</div>
+ 				</c:when>      
+     			<c:otherwise>  
+     			<div class="div-menu-child <%="audit".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
+	                 onclick="window.location.href=contextpath+'pages/comm/no_access_to_authority.jsp?pageType=audit'">申报资料审核
+	            	</div>    
+  				</c:otherwise> 
+			</c:choose>
+            <c:choose> 
+     			<c:when test="${ SESSION_USER_CONST_ORGUSER.progress==1}">   
+	     			 	<div class="div-menu-child <%="teachercert".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
+	                 	onclick="window.location.href='<c:url value="/teacherauth/toPage.action"/>'">教师认证
+	            		</div>
+ 				</c:when>      
+     			<c:otherwise>  
+     			<div class="div-menu-child <%="teachercert".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
+	                 onclick="window.location.href=contextpath+'pages/comm/no_access_to_authority.jsp?pageType=teachercert'">教师认证
+	            	</div>    
+  				</c:otherwise> 
+			</c:choose>
+			<c:choose> 
+     			<c:when test="${ SESSION_USER_CONST_ORGUSER.progress==1}">   
+	     			 	<div class="div-menu-child <%="message".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
+	                 	onclick="window.location.href='<c:url value="/AllMessage/init.action"/>'">消息
+	            		</div>
+ 				</c:when>      
+     			<c:otherwise>  
+     			<div class="div-menu-child <%="message".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
+	                 onclick="window.location.href=contextpath+'pages/comm/no_access_to_authority.jsp?pageType=message'">消息
+	            	</div>    
+  				</c:otherwise> 
+			</c:choose>
+           <c:choose> 
+     			<c:when test="${ SESSION_USER_CONST_ORGUSER.progress==1}">   
+	     			 	<div class="div-menu-child <%="usermanage".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
+	                 	onclick="window.location.href='<c:url value="/organizationuser/writerLists.action"/>'">用户管理
+	            		</div>
+ 				</c:when>      
+     			<c:otherwise>  
+     			<div class="div-menu-child <%="usermanage".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
+	                 onclick="window.location.href=contextpath+'pages/comm/no_access_to_authority.jsp?pageType=usermanage'">用户管理
+	            	</div>    
+  				</c:otherwise> 
+			</c:choose>
+			<c:choose> 
+     			<c:when test="${ SESSION_USER_CONST_ORGUSER.progress==1}">   
+	     			 	<div class="div-menu-child <%="account".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
+	                 	onclick="window.location.href='<c:url value="/admininfocontroller/toadmininfo.action"/>'">账户设置
+	            		</div>
+ 				</c:when>      
+     			<c:otherwise>  
+     			<div class="div-menu-child <%="account".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
+	                 onclick="window.location.href=contextpath+'pages/comm/no_access_to_authority.jsp?pageType=account'">账户设置
+	            	</div>    
+  				</c:otherwise> 
+			</c:choose>
+       
         </div>
     </div>
 </div>

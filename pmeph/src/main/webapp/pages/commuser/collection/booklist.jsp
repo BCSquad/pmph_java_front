@@ -31,12 +31,14 @@ String basePath = path+"/";
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
    <div class="content-wrapper">
-       <div class="area1"> <a  href="personalhomepage/tohomepage.action" >个人中心</a> &gt;<a href="javascript:;"> 我的收藏</a> &gt; <a href="bookcollection/tobookcollection.action">书籍收藏夹</a> &gt; <a>${fmap.favorite_name }</a></div>
-       <div class="area2">
-           <span class="name" >${fmap.favorite_name }</span>
-            <input type="hidden" id="favoriteId" value="${fmap.id }"/>
-           <span class="del" onclick="delFavorite('${fmap.id }')">删除收藏夹</span>
+       <div class="area1"> <a  href="personalhomepage/tohomepage.action" >个人中心</a> &gt;<a href="javascript:;"> 我的收藏</a></div>
+        <div class="area2" style="background-color: #f8f8f8;height:50px">
+        <span class="name selectdiv" >书籍收藏夹</span>
+        <a href="articlecollection/toarticlecollectionlist.action" ><span class="name" style="margin-left: 20px">文章收藏夹</span></a>
+            <%-- <input type="hidden" id="favoriteId" value="${fmap.id }"/>
+           <span class="del" onclick="delFavorite('${fmap.id }')">删除收藏夹</span> --%>
        </div>
+       
        <c:forEach items="${booklist.rows}" var="book">
        <div class="collection">
            <div class="title" >

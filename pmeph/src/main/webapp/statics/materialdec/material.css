@@ -14,6 +14,7 @@
 	clear: none;
 	margin-top: 20px;
 	width: 1200px;
+	display: none;
 } 
 
 .sbxq_item1{
@@ -146,7 +147,7 @@
 	height: 24px;
 	background-color: #70bcc3;
 	border-radius: 2px;
-	margin:auto;/*閲嶈,IE鍏煎妯″紡*/
+	margin:auto;
 	top:50%;
 	left:50%;
 	cursor: pointer;
@@ -157,7 +158,7 @@
 	background-image: url(../image/css_sprites.png);
     background-position: -333px -109px;
     background-repeat: no-repeat;
-    height: 18px;
+    height: 20px;
     width: 20px;
     float: left;
 }
@@ -166,7 +167,7 @@
 	background-image: url(../image/css_sprites.png);
     background-position: -333px -56px;
     background-repeat: no-repeat;
-    height: 18px;
+    height: 20px;
     width: 20px;
     float: left;
 }
@@ -175,7 +176,7 @@
 	background-image: url(../image/css_sprites.png);
     background-position: -333px -31px;
     background-repeat: no-repeat;
-    height: 18px;
+    height: 20px;
     width: 20px;
     float: left;
 }
@@ -184,7 +185,7 @@
 	background-image: url(../image/css_sprites.png);
     background-position: -333px -163px;
     background-repeat: no-repeat;
-    height: 18px;
+    height: 20px;
     width: 20px;
     float: left;
 }
@@ -193,23 +194,41 @@
 	background-image: url(../image/css_sprites.png);
     background-position: -333px -191px;
     background-repeat: no-repeat;
-    height: 18px;
+    height: 20px;
     width: 20px;
     float: left;
 }
-/**附件样式**/
+
+#tsxz_span9{
+	background-image: url(../image/css_sprites.png);
+    background-position: -333px -191px;
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 20px;
+    float: left;
+}
+
+#tsxz_span10{
+	background-image: url(../image/css_sprites.png);
+    background-position: -333px -191px;
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 20px;
+    float: left;
+}
+/**闄勪欢鏍峰紡**/
 a.input {
 
     text-align:center;
-    display:inline-block;/*具有行内元素的视觉，块级元素的属性 宽高*/
-    overflow:hidden;/*去掉的话，输入框也可以点击*/
-    position:relative;/*相对定位，为 #file 的绝对定位准备*/
+    display:inline-block;
+    overflow:hidden;
+    position:relative;
 }
 .file {
-    opacity:0;/*设置此控件透明度为零，即完全透明*/
-    filter:alpha(opacity=0);/*设置此控件透明度为零，即完全透明针对IE*/
+    opacity:0;
+    filter:alpha(opacity=0);
     font-size:100px;
-    position:absolute;/*绝对定位，相对于 .input */
+    position:absolute;
     top:0;
     right:0;
 }
@@ -219,7 +238,7 @@ a.input {
     color: #03717b;
 }
 .icon{
-    background-image: url(/pmeph/statics/image/附件拷贝4.png);
+    background-image: url(/pmeph/statics/image/闄勪欢鎷疯礉4.png);
     background-position: 0px 2px;
     height: 30px;
     width: 16px;
@@ -229,4 +248,19 @@ a.input {
 .name{
     color: #333333;
     margin-right: 6px
+}
+
+.text_cl{
+	width: 1156px;
+	height: 60px;
+	background-color: #e8f1fa;
+	border-radius: 3px;
+	border: solid 1px #3996fa;
+	-moz-opacity: 0.3;
+	-khtml-opacity: 0.3;
+	-webkit-opacity: 0.3;
+	opacity: 0.3;
+	filter:alpha(opacity=30);
+	padding: 15px 20px;
+	margin-top: 20px;
 }

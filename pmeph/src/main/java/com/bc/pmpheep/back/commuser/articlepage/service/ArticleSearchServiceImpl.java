@@ -8,15 +8,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.commuser.articlepage.dao.ArticleSearchDao;
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
+import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
+import com.bc.pmpheep.back.plugin.PageParameter;
 
 @Service("com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService")
 public class ArticleSearchServiceImpl implements ArticleSearchService {
 
 	@Autowired
 	private ArticleSearchDao articleSearchDao;
+	
+	@Autowired
+    @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
+    private PersonalService personalService;
 	
 	/**
 	 * 初始化文章页面
@@ -33,7 +41,7 @@ public class ArticleSearchServiceImpl implements ArticleSearchService {
 	}
 
 	/**
-	 * 查询移动多少条文章数据
+	 * 查询移动多少条文章数据 此方法废弃
 	 */
 	@Override
 	public List<Map<String, Object>> queryList() {
@@ -46,15 +54,12 @@ public class ArticleSearchServiceImpl implements ArticleSearchService {
 	 * 改变点赞数
 	 */
 	@Override
-	public Map<String, Object> changeLikes(Map<String, Object> map) {
+	public Map<String, Object> changeLikes(int likes,String id) {
 		Map<String, Object> rmap=new HashMap<String, Object>();
-		articleSearchDao.changeLikes(map);
-		if(map.get("status").equals("down")){
-			articleSearchDao.del(map);
-		}else{
-			articleSearchDao.insertPraise(map);
+		int count=articleSearchDao.changeLikes(likes,id);
+		if(count>0){
+			rmap.put("returncode", "OK");
 		}
-		rmap.put("returncode", "OK");
 		return rmap;
 	}
 
@@ -112,4 +117,51 @@ public class ArticleSearchServiceImpl implements ArticleSearchService {
         }
         return pics;
     }
+
+    /**
+     * 查询登陆人是否对指定文章点过赞
+     */
+	@Override
+	public List<Map<String, Object>> querydExit(String id, String writer_id) {
+		// TODO Auto-generated method stub
+		List<Map<String, Object>> list=articleSearchDao.querydExit(id, writer_id);
+		return list;
+	}
+
+	/**
+	 * 根据用户ID和文章ID往点赞变里面添加数据
+	 */
+	@Override
+	public String insertPraise(String content_id, String writer_id) {
+		// TODO Auto-generated method stub
+		String code="";
+		int count=articleSearchDao.insertPraise(content_id, writer_id);
+		WriterUserTrendst wut = new WriterUserTrendst(writer_id, 4, content_id);
+		personalService.saveUserTrendst(wut);//文章搜索界面的点赞 生成动态
+		if(count>0){
+			 code="OK";
+		}
+		return code;
+	}
+
+	/**
+	 * 删除点赞表里面的数据
+	 */
+	@Override
+	public void del(String id) {
+		// TODO Auto-generated method stub
+		articleSearchDao.del(id);
+	}
+
+	@Override
+	public List<Map<String, Object>> queryArticleByAdi(PageParameter<Map<String, Object>> pageParameter) {
+		List<Map<String, Object>> result_list = articleSearchDao.queryArticleByAdi(pageParameter);
+		return result_list;
+	}
+
+	@Override
+	public int queryArticleByAdiCount(PageParameter<Map<String, Object>> pageParameter) {
+		int count = articleSearchDao.queryArticleByAdiCount(pageParameter);
+		return count;
+	}
 }

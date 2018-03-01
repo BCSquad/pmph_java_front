@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.bc.pmpheep.back.commuser.user.bean.CommuserWriterUser;
+import com.bc.pmpheep.back.util.RouteUtil;
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -49,7 +51,7 @@ public class MyFriendController extends com.bc.pmpheep.general.controller.BaseCo
      * </pre>
      */
     @RequestMapping(value = "/listMyFriend", method = RequestMethod.GET)
-    public ModelAndView listMyFriend() throws Exception {
+    public ModelAndView listMyFriend(HttpServletRequest request) throws Exception {
         // ModelAndView model = this.getModelAndView();
         ModelAndView model = new ModelAndView();
         // WriterUser writerUser =
@@ -58,13 +60,26 @@ public class MyFriendController extends com.bc.pmpheep.general.controller.BaseCo
         // 获取用户
         Map<String, Object> writerUserMap = this.getUserInfo();
         CommuserWriterUser writerUser = new CommuserWriterUser();
-        //writerUser.setId(Long.parseLong(writerUserMap.get("id").toString()));
-        writerUser.setId(645L);
+        writerUser.setId(Long.parseLong(writerUserMap.get("id").toString()));
+        //writerUser.setId(645L);
         String pageUrl = "commuser/myfriend/myFriend";
+        String groupId = request.getParameter("groupId");
+        if("invite".equals(request.getParameter("pageType"))){
+        	pageUrl = "commuser/myfriend/inviteMyFriend";
+        	 model.addObject("groupId", groupId);
+        }
         try {
             int startrow = 0;
-            List<Map<String, Object>> listFriends = myFriendService.listMyFriend(writerUser, startrow);
-            int remainCount = myFriendService.listMyFriendCount(writerUser, startrow+listFriends.size());
+            List<Map<String, Object>> listFriends = myFriendService.listMyFriend(groupId,writerUser, startrow);
+            for(Map<String, Object> map:listFriends){
+            	/*if("DEFAULT".equals(map.get("avatar").toString())){
+    				map.put("avatar", "statics/pictures/head.png");
+    			}else{
+    				map.put("avatar", "file/download/"+map.get("avatar")+".action");
+    			}*/
+                map.put("avatar", RouteUtil.userAvatar(MapUtils.getString(map, "avatar")));
+            }
+            int remainCount = myFriendService.listMyFriendCount(groupId,writerUser, startrow+listFriends.size());
             model.setViewName(pageUrl);
             model.addObject("row", startrow);
             model.addObject("id", writerUser.getId());
@@ -90,10 +105,11 @@ public class MyFriendController extends com.bc.pmpheep.general.controller.BaseCo
     public List<Map<String, Object>> more(HttpServletRequest request) throws Exception {
         int row = Integer.parseInt(request.getParameter("row"));
         String id = request.getParameter("id");
+        String groupId = request.getParameter("groupId");
         CommuserWriterUser writerUser = new CommuserWriterUser();
         writerUser.setId(Long.parseLong(id.toString()));
-        List<Map<String, Object>> listFriends = myFriendService.listMyFriend(writerUser, row + 15);
-        int remainCount = myFriendService.listMyFriendCount(writerUser, row+15+listFriends.size());
+        List<Map<String, Object>> listFriends = myFriendService.listMyFriend(groupId,writerUser, row + 15);
+        int remainCount = myFriendService.listMyFriendCount(groupId,writerUser, row+15+listFriends.size());
         for (int i = 0; i < listFriends.size(); i++) {
             listFriends.get(i).put("row", row + 15);
             listFriends.get(i).put("queryid", id);
@@ -101,5 +117,32 @@ public class MyFriendController extends com.bc.pmpheep.general.controller.BaseCo
         }
         
         return listFriends;
+    }
+    
+    /**
+     * 将好友拉入小组中
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("invite")
+    @ResponseBody
+    public String invite(HttpServletRequest request) throws Exception{
+    	String flag = "1";
+    	String id = request.getParameter("id");
+    	String groupId = request.getParameter("groupId");
+    	  // 获取用户
+        Map<String, Object> writerUserMap = this.getUserInfo();
+        CommuserWriterUser writerUser = new CommuserWriterUser();
+        writerUser.setId(Long.parseLong(writerUserMap.get("id").toString()));
+      try {
+    	  myFriendService.invite(id,groupId);
+	} catch (Exception e) {
+		// TODO: handle exception
+		e.printStackTrace();
+		flag= "0";
+	}
+    	 
+    	return flag;
     }
 }

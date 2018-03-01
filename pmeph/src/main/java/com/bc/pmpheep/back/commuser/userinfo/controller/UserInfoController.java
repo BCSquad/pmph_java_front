@@ -4,10 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.general.service.FileService;
 import com.bc.pmpheep.general.service.MessageService;
+import com.bc.pmpheep.general.service.UserService;
 
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.authadmin.accountset.bean.OrgAdminUser;
 import com.bc.pmpheep.back.commuser.userinfo.service.UserInfoService;
+import com.bc.pmpheep.back.util.Const;
 import com.bc.pmpheep.back.util.DesRun;
 import com.bc.pmpheep.controller.bean.ResponseBean;
 import com.mongodb.gridfs.GridFSDBFile;
@@ -39,6 +42,9 @@ public class UserInfoController extends BaseController {
     @Autowired
     private FileService fileService;
     
+    @Autowired
+    UserService userService;
+    
     /**
      * 根据ID查询作家相关信息
      *
@@ -48,19 +54,17 @@ public class UserInfoController extends BaseController {
     @RequestMapping("touser")
     public ModelAndView toperson(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        Map <String,Object> map1 = getUserInfo() ;
-
-
-        Map<String, Object> map = userinfoService.queryWriter(map1.get("id").toString());
+        Map <String,Object> map1 = getUserInfo();
+        Map<String, Object> map =new HashMap<String, Object>();
+        if (null!=map1) {
+        	 map = userinfoService.queryWriter(map1.get("id").toString());
+		}
         //头像回显
-        
         //图片为空则显示默认图片
-        if (("").equals(map.get("avatar"))) {
+        /*  if (("").equals(map.get("avatar"))) {
             map.put("avatar", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
-        }
+        }*/
         modelAndView.addObject("map", map);
-        
-        
         modelAndView.setViewName("commuser/userinfo/userinfo");
         return modelAndView;
     }
@@ -75,9 +79,15 @@ public class UserInfoController extends BaseController {
 	@ResponseBody	
 	public Map<String, Object> updateavatar(HttpServletRequest request){
 		Map<String, Object> map=new HashMap<String, Object>();
-		String avatar=request.getParameter("avatar");
-		String id=request.getParameter("id");
-		map=userinfoService.updateavatar(avatar, id);
+//		String avatar=request.getParameter("avatar");
+//		String id=request.getParameter("id");
+//		map=userinfoService.updateavatar(avatar, id);
+//		 Map<String, Object> user=getUserInfo();
+//		 user = userService.getUserInfo(MapUtils.getString(user, "username"), "1");
+//		 HttpSession session = request.getSession();
+//		 session.setAttribute(Const.SESSION_USER_CONST_WRITER, user);
+//         session.setAttribute(Const.SESSION_USER_CONST_TYPE, "1");
+        
 		return map;
 	}
 	
@@ -103,13 +113,14 @@ public class UserInfoController extends BaseController {
         String postCode = request.getParameter("postcode");
         String birthday = request.getParameter("birthday");
         String email = request.getParameter("email");
-        String org_id = request.getParameter("org_id");
+       /* String org_id = request.getParameter("org_id");*/
         String position = request.getParameter("position");
         String address = request.getParameter("address");
         String note = request.getParameter("note");
         String signature = request.getParameter("signature");
         String workplace = request.getParameter("workplace");
         String telephone = request.getParameter("telephone");
+        String fileid = request.getParameter("fileid");
         map.put("signature", signature);
         if (StringUtils.isEmpty(id) ||
                 StringUtils.isEmpty(realName) ||
@@ -121,7 +132,7 @@ public class UserInfoController extends BaseController {
                 StringUtils.isEmpty(postCode) ||
                 StringUtils.isEmpty(birthday) ||
                 StringUtils.isEmpty(email) ||
-                StringUtils.isEmpty(org_id) ||
+               /* StringUtils.isEmpty(org_id) ||*/
                 StringUtils.isEmpty(position) ||
                 StringUtils.isEmpty(address) ||
                 StringUtils.isEmpty(note) ||
@@ -140,13 +151,19 @@ public class UserInfoController extends BaseController {
             map.put("postcode", postCode);
             map.put("birthday", birthday);
             map.put("email", email);
-            map.put("org_id", org_id);
+           /* map.put("org_id", org_id);*/
             map.put("position", position);
             map.put("address", address);
             map.put("note", note);
             map.put("workplace", workplace);
             map.put("telephone", telephone);
+            map.put("avatar", fileid);
             zmap = userinfoService.update(map);
+            Map<String, Object> user=getUserInfo();
+   		 	user = userService.getUserInfo(MapUtils.getString(user, "username"), "1");
+   		 	HttpSession session = request.getSession();
+   		 	session.setAttribute(Const.SESSION_USER_CONST_WRITER, user);
+            session.setAttribute(Const.SESSION_USER_CONST_TYPE, "1");
         }
         return zmap;
     }

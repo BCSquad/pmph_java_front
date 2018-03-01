@@ -132,5 +132,24 @@
 		)
 	</insert>
 	
+	<!-- 查询两人除拒绝（1）外最亲密的好友关系（0申请，2接收 取max） -->
+	<select id="queryOurFriendShip" resultType="Map">
+		select 
+			t.id 
+			,t.status
+			,request_id = #{userId} and t.status = 0 as isBeenRequest
+			,target_id = #{userId} and t.status = 0 as hasRequest
+		from writer_friend t
+		where 
+			t.status != 1
+			and ((request_id = #{userId} and target_id = #{logUserId}) or (request_id = #{logUserId} and target_id = #{userId}))
+		order by t.status desc
+	</select>
+	
+	<!-- 同意好友申请 -->
+	<update id="updateToAgreeFriend">
+		update writer_friend set status = #{status}
+		where id = #{id}
+	</update>
 	
 </mapper>

@@ -1,843 +1,694 @@
-$(function () {
-    (function (factory) {
-        if (typeof define === 'function' && define.amd) {
-            define('calendar', ['jquery'], factory);
-        } else if (typeof exports === 'object') {
-            module.exports = factory(require('jquery'));
-        } else {
-            factory(jQuery);
+/*
+ * Author: ����־
+ */
+Date.prototype.format = function (fmt) {
+    var o = {
+        "m+": this.getMonth() + 1,                 //月份
+        "d+": this.getDate(),                    //日
+        "h+": this.getHours(),                   //小时
+        "M+": this.getMinutes(),                 //分
+        "s+": this.getSeconds(),                 //秒
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+        "S": this.getMilliseconds()             //毫秒
+    };
+    if (/(y+)/.test(fmt)) {
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    }
+    for (var k in o) {
+        if (new RegExp("(" + k + ")").test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         }
-    }(function ($) {
+    }
+    return fmt;
+}
 
-        // default config
-
-        var defaults = {
-
-                // 宽度
-                width: 210,
-                // 高度, 不包含头部，头部固定高度
-                height: 210,
-
-                zIndex: 100,//默认z-index设置100
-
-                // selector or element
-                // 设置触发显示的元素，为null时默认显示
-                trigger: null,
-
-                // 偏移位置，可设正负值
-                // trigger 设置时生效
-                offset: [0, 0],
-
-                // 自定义类，用于重写样式
-                customClass: '',
-
-                // 显示视图
-                // 可选：date, month
-                view: 'date',
-
-                // 默认日期为当前日期
-                date: new Date(),
-                format: 'yyyy/mm/dd',
-
-                // 一周的第一天
-                // 0表示周日，依次类推
-                startWeek: 0,
-
-                // 星期格式
-                weekArray: ['日', '一', '二', '三', '四', '五', '六'],
-
-                // 设置选择范围
-                // 格式：[开始日期, 结束日期]
-                // 开始日期为空，则无上限；结束日期为空，则无下限
-                // 如设置2015年11月23日以前不可选：[new Date(), null] or ['2015/11/23']
-                selectedRang: null,
-
-                // 日期关联数据 [{ date: string, value: object }, ... ]
-                // 日期格式与 format 一致
-                // 如 [ {date: '2015/11/23', value: '面试'} ]
-                data: null,
-
-                // 展示关联数据
-                // 格式化参数：{m}视图，{d}日期，{v}value
-                // 设置 false 表示不显示
-                label: '{d}\n{v}',
-
-                // 切换字符
-                prev: '&lt;',
-                next: '&gt;',
-
-                // 切换视图
-                // 参数：view, y, m
-                viewChange: $.noop,
-
-                // view: 视图
-                // date: 不同视图返回不同的值
-                // value: 日期关联数据
-                onselected: function (view, date, value) {
-                    // body...
-                    $(this).val(value);
+jQuery.fn.extend({
+    mycalendar: function (c) {
+        function r() {
+            $("#" + c.controlId).find(".tabD a").mouseup(function () {
+                var a = new Date($("#" + c.controlId).find(".currentYear").text() + "/" + $("#" + c.controlId).find(".currentMonth").text() + "/1");
+                if ($(this).hasClass("prevD")) {
+                    a.setMonth(a.getMonth() - 1);
+                    a.setDate($(this).text());
+                    var b = c.speed;
+                    c.speed = 0;
+                    $("#" + c.controlId).find(".prevMonth").triggerHandler("mouseup");
+                    c.speed = b
+                } else if ($(this).hasClass("nextD")) {
+                    a.setMonth(a.getMonth() + 1);
+                    a.setDate($(this).text());
+                    b = c.speed;
+                    c.speed = 0;
+                    $("#" + c.controlId).find(".nextMonth").triggerHandler("mouseup");
+                    c.speed = b
+                }
+                var d = $(this).text();
+                a.setDate(d);
+                //a = a.getFullYear() + "-" + (Number(a.getMonth() + 1) < 10 ? "0" + Number(a.getMonth() + 1) : Number(a.getMonth() + 1)) + "-" + (Number(d) < 10 ? "0" + d : d);
+                //n.val(a);
+                $("#" + c.controlId + " div table a").removeClass("select");
+                $("#" + c.controlId + " .tabD a:contains('" + d + "')").each(function () {
+                    d == $(this).text() && !$(this).hasClass("prevD") && !$(this).hasClass("nextD") && $(this).addClass("select")
+                });
+                $("#" + c.controlId).hide();
+                $(n).trigger('timeChange', [a, c]);
+                c.callback.call(n[0], 'date', a, a.format(c.format))
+            }).hover(function () {
+                    $(this).addClass("hover")
                 },
-
-                // 参数同上
-                onMouseenter: $.noop,
-
-                onClose: $.noop
-            },
-
-            // static variable
-
-            ACTION_NAMESPACE = 'data-calendar-',
-
-            DISPLAY_VD = '[' + ACTION_NAMESPACE + 'display-date]',
-            DISPLAY_VM = '[' + ACTION_NAMESPACE + 'display-month]',
-
-            ARROW_DATE = '[' + ACTION_NAMESPACE + 'arrow-date]',
-            ARROW_MONTH = '[' + ACTION_NAMESPACE + 'arrow-month]',
-
-            ITEM_DAY = ACTION_NAMESPACE + 'day',
-            ITEM_MONTH = ACTION_NAMESPACE + 'month',
-
-            DISABLED = 'disabled',
-            MARK_DATA = 'markData',
-
-            VIEW_CLASS = {
-                date: 'calendar-d',
-                month: 'calendar-m'
-            },
-
-            OLD_DAY_CLASS = 'old',
-            NEW_DAY_CLASS = 'new',
-            TODAY_CLASS = 'now',
-            SELECT_CLASS = 'selected',
-            MARK_DAY_HTML = '<i class="dot"></i>',
-            DATE_DIS_TPL = '{year}/<span class="m">{month}</span>',
-
-            ITEM_STYLE = 'style="width:{w}px;height:{h}px;line-height:{h}px"',
-            WEEK_ITEM_TPL = '<li ' + ITEM_STYLE + '>{wk}</li>',
-            DAY_ITEM_TPL = '<li ' + ITEM_STYLE + ' class="{class}" {action}>{value}</li>',
-            MONTH_ITEM_TPL = '<li ' + ITEM_STYLE + ' ' + ITEM_MONTH + '>{m}月</li>',
-
-            TEMPLATE = [
-                '<div class="calendar-inner">',
-                '<div class="calendar-views">',
-                '<div class="view view-date">',
-                '<div class="calendar-hd">',
-                '<a href="javascript:;" data-calendar-display-date class="calendar-display">',
-                '{yyyy}/<span class="m">{mm}</span>',
-                '</a>',
-                '<div class="calendar-arrow">',
-                '<span class="prev" title="上一月" data-calendar-arrow-date>{prev}</span>',
-                '<span class="next" title="下一月" data-calendar-arrow-date>{next}</span>',
-                '</div>',
-                '</div>',
-                '<div class="calendar-ct">',
-                '<ol class="week">{week}</ol>',
-                '<ul class="date-items"></ul>',
-                '</div>',
-                '</div>',
-                '<div class="view view-month">',
-                '<div class="calendar-hd">',
-                '<a href="javascript:;" data-calendar-display-month class="calendar-display">{yyyy}</a>',
-                '<div class="calendar-arrow">',
-                '<span class="prev" title="上一年" data-calendar-arrow-month>{prev}</span>',
-                '<span class="next" title="下一年" data-calendar-arrow-month>{next}</span>',
-                '</div>',
-                '</div>',
-                '<ol class="calendar-ct month-items">{month}</ol>',
-                '</div>',
-                '</div>',
-                '</div>',
-                '<div class="calendar-label"><p>HelloWorld</p><i></i></div>'
-            ],
-            OS = Object.prototype.toString;
-
-        // utils
-
-        function isDate(obj) {
-            return OS.call(obj) === '[object Date]';
+                function () {
+                    $(this).removeClass("hover")
+                })
         }
 
-        function isString(obj) {
-            return OS.call(obj) === '[object String]';
+        function u() {
+            $("#" + c.controlId).find(".tabM a").mouseup(function () {
+                if (c.view == 'date') {
+                    var a = s(Number($("#" + c.controlId).find(".currentYear").text()), Number($(this).attr("val")));
+                    D(a);
+                    r();
+                    $("#" + c.controlId).find(".currentMonth").text(Number($(this).attr("val")) + 1)
+                } else if (c.view == 'month') {
+                    $("#" + c.controlId).find(".currentMonth").text(Number($(this).attr("val")) + 1)
+                    var a = new Date($("#" + c.controlId).find(".currentYear").text() + "/" + $("#" + c.controlId).find(".currentMonth").text() + "/1")
+                    $("#" + c.controlId).hide();
+                    $(n).trigger('timeChange', [a, c]);
+                    c.callback.call(n[0], 'month', a, a.format(c.format))
+                }
+
+            }).hover(function () {
+                    $(this).addClass("hover")
+                },
+                function () {
+                    $(this).removeClass("hover")
+                })
         }
 
-
-        function getClass(el) {
-            return el.getAttribute('class') || el.getAttribute('className');
+        function v() {
+            $("#" + c.controlId).find(".tabY a").mouseup(function () {
+                if (!($("#" + c.controlId).find(".enabled > .tabM").length > 0)) {
+                    $("#" + c.controlId).find(".currentYear").text($(this).text());
+                    var a = z(Number($("#" + c.controlId).find(".currentYear").text()));
+                    E(a);
+                    u()
+                }
+                /* var a = s(Number($(this).text()), Number($("#" + c.controlId).find(".currentMonth").text()) - 1);
+                 D(a);
+                 r();
+                 $("#" + c.controlId).find(".currentYear").text(Number($(this).text()))*/
+            }).hover(function () {
+                    $(this).addClass("hover")
+                },
+                function () {
+                    $(this).removeClass("hover")
+                })
         }
 
-        // extension methods
-
-        String.prototype.repeat = function (data) {
-            return this.replace(/\{\w+\}/g, function (str) {
-                var prop = str.replace(/\{|\}/g, '');
-                return data[prop] || '';
-            });
-        }
-
-        String.prototype.toDate = function () {
-            var dt = new Date(),
-                dot = this.replace(/\d/g, '').charAt(0),
-                arr = this.split(dot);
-
-            dt.setFullYear(arr[0]);
-            dt.setMonth(arr[1] - 1);
-            dt.setDate(arr[2]);
-            return dt;
-        }
-
-        Date.prototype.format = function (exp) {
-            var y = this.getFullYear(),
-                m = this.getMonth() + 1,
-                d = this.getDate();
-
-            return exp.replace('yyyy', y).replace('mm', m).replace('dd', d);
-        }
-
-        Date.prototype.isSame = function (y, m, d) {
-            if (isDate(y)) {
-                var dt = y;
-                y = dt.getFullYear();
-                m = dt.getMonth() + 1;
-                d = dt.getDate();
-            }
-            return this.getFullYear() === y && this.getMonth() + 1 === m && this.getDate() === d;
-        }
-
-        Date.prototype.add = function (n) {
-            this.setDate(this.getDate() + n);
-        }
-
-        Date.prototype.minus = function (n) {
-            this.setDate(this.getDate() - n);
-        }
-
-        Date.prototype.clearTime = function (n) {
-            this.setHours(0);
-            this.setSeconds(0);
-            this.setMinutes(0);
-            this.setMilliseconds(0);
-            return this;
-        }
-
-        Date.isLeap = function (y) {
-            return (y % 100 !== 0 && y % 4 === 0) || (y % 400 === 0);
-        }
-
-        Date.getDaysNum = function (y, m) {
-            var num = 31;
-
-            switch (m) {
-                case 2:
-                    num = this.isLeap(y) ? 29 : 28;
-                    break;
-                case 4:
-                case 6:
-                case 9:
-                case 11:
-                    num = 30;
-                    break;
-            }
-            return num;
-        }
-
-        Date.getSiblingsMonth = function (y, m, n) {
-            var d = new Date(y, m - 1);
-            d.setMonth(m - 1 + n);
-            return {
-                y: d.getFullYear(),
-                m: d.getMonth() + 1
-            };
-        }
-
-        Date.getPrevMonth = function (y, m, n) {
-            return this.getSiblingsMonth(y, m, 0 - (n || 1));
-        }
-
-        Date.getNextMonth = function (y, m, n) {
-            return this.getSiblingsMonth(y, m, n || 1);
-        }
-
-        Date.tryParse = function (obj) {
-            if (!obj) {
-                return obj;
-            }
-            return isDate(obj) ? obj : obj.toDate();
-        }
-
-
-        // Calendar class
-
-        function Calendar(element, options) {
-            this.$element = $(element);
-            this.options = $.extend({}, defaults, options);
-            this.$element.addClass('calendar ' + this.options.customClass);
-            this.width = this.options.width;
-            this.height = this.options.height;
-            this.date = this.options.date;
-            this.selectedRang = this.options.selectedRang;
-            this.data = this.options.data;
-            this.init();
-        }
-
-        Calendar.prototype = {
-            constructor: Calendar,
-            getDayAction: function (day) {
-                var action = ITEM_DAY;
-                if (this.selectedRang) {
-                    var start = Date.tryParse(this.selectedRang[0]),
-                        end = Date.tryParse(this.selectedRang[1]);
-
-                    if ((start && day < start.clearTime()) || (end && day > end.clearTime())) {
-                        action = DISABLED;
-                    }
-                }
-
-                return action;
-            },
-            getDayData: function (day) {
-                var ret, data = this.data;
-
-                if (data) {
-
-                    for (var i = 0, len = data.length; i < len; i++) {
-                        var item = data[i];
-
-                        if (day.isSame(item.date.toDate())) {
-                            ret = item.value;
-                        }
-                    }
-                }
-
-                return ret;
-            },
-            getDayItem: function (y, m, d, f) {
-                var dt = this.date,
-                    idt = new Date(y, m - 1, d),
-                    data = {
-                        w: this.width / 7,
-                        h: this.height / 7,
-                        value: d
-                    },
-                    markData,
-                    $item;
-
-                var selected = dt.isSame(y, m, d) ? SELECT_CLASS : '';
-                if (f === 1) {
-                    data['class'] = OLD_DAY_CLASS;
-                } else if (f === 3) {
-                    data['class'] = NEW_DAY_CLASS;
-                } else {
-                    data['class'] = '';
-                }
-
-                if (dt.isSame(y, m, d)) {
-                    data['class'] += ' ' + TODAY_CLASS;
-                }
-
-                data.action = this.getDayAction(idt);
-                markData = this.getDayData(idt);
-
-                $item = $(DAY_ITEM_TPL.repeat(data));
-
-                if (markData) {
-                    $item.data(MARK_DATA, markData);
-                    $item.html(d + MARK_DAY_HTML);
-                }
-
-                return $item;
-            },
-            getDaysHtml: function (y, m) {
-                var year, month, firstWeek, daysNum, prevM, prevDiff,
-                    dt = this.date,
-                    $days = $('<ol class="days"></ol>');
-
-                if (isDate(y)) {
-                    year = y.getFullYear();
-                    month = y.getMonth() + 1;
-                } else {
-                    year = Number(y);
-                    month = Number(m);
-                }
-
-                firstWeek = new Date(year, month - 1, 1).getDay() || 7;
-                prevDiff = firstWeek - this.options.startWeek;
-                daysNum = Date.getDaysNum(year, month);
-                prevM = Date.getPrevMonth(year, month);
-                prevDaysNum = Date.getDaysNum(year, prevM.m);
-                nextM = Date.getNextMonth(year, month);
-                // month flag
-                var PREV_FLAG = 1,
-                    CURR_FLAG = 2,
-                    NEXT_FLAG = 3,
-                    count = 0;
-
-                for (var p = prevDaysNum - prevDiff + 1; p <= prevDaysNum; p++, count++) {
-
-                    $days.append(this.getDayItem(prevM.y, prevM.m, p, PREV_FLAG));
-                }
-
-                for (var c = 1; c <= daysNum; c++, count++) {
-                    $days.append(this.getDayItem(year, month, c, CURR_FLAG));
-                }
-
-                for (var n = 1, nl = 42 - count; n <= nl; n++) {
-
-                    $days.append(this.getDayItem(nextM.y, nextM.m, n, NEXT_FLAG));
-                }
-
-                return $('<li></li>').width(this.options.width).append($days);
-            },
-            getWeekHtml: function () {
-                var week = [],
-                    weekArray = this.options.weekArray,
-                    start = this.options.startWeek,
-                    len = weekArray.length,
-                    w = this.width / 7,
-                    h = this.height / 7;
-
-                for (var i = start; i < len; i++) {
-                    week.push(WEEK_ITEM_TPL.repeat({
-                        w: w,
-                        h: h,
-                        wk: weekArray[i]
-                    }));
-                }
-
-                for (var j = 0; j < start; j++) {
-                    week.push(WEEK_ITEM_TPL.repeat({
-                        w: w,
-                        h: h,
-                        wk: weekArray[j]
-                    }));
-                }
-
-                return week.join('');
-            },
-            getMonthHtml: function () {
-                var month = [],
-                    w = this.width / 4,
-                    h = this.height / 4,
-                    i = 1;
-
-                for (; i < 13; i++) {
-                    month.push(MONTH_ITEM_TPL.repeat({
-                        w: w,
-                        h: h,
-                        m: i
-                    }));
-                }
-
-                return month.join('');
-            },
-            setMonthAction: function (y) {
-                var m = this.date.getMonth() + 1;
-
-                this.$monthItems.children().removeClass(TODAY_CLASS);
-                if (y === this.date.getFullYear()) {
-                    this.$monthItems.children().eq(m - 1).addClass(TODAY_CLASS);
-                }
-            },
-            fillStatic: function () {
-                var staticData = {
-                    prev: this.options.prev,
-                    next: this.options.next,
-                    week: this.getWeekHtml(),
-                    month: this.getMonthHtml()
-                };
-
-                this.$element.html(TEMPLATE.join('').repeat(staticData));
-            },
-            updateDisDate: function (y, m) {
-                this.$disDate.html(DATE_DIS_TPL.repeat({
-                    year: y,
-                    month: m
-                }));
-            },
-            updateDisMonth: function (y) {
-                this.$disMonth.html(y);
-            },
-            fillDateItems: function (y, m) {
-                var ma = [
-                    Date.getPrevMonth(y, m), {
-                        y: y,
-                        m: m
-                    },
-                    Date.getNextMonth(y, m)
-                ];
-
-                this.$dateItems.html('');
-                for (var i = 0; i < 3; i++) {
-                    var $item = this.getDaysHtml(ma[i].y, ma[i].m);
-                    this.$dateItems.append($item);
-                }
-
-            },
-            hide: function (view, date, data) {
-                this.$trigger.val(date.format(this.options.format));
-                this.options.onClose.call(this, view, date, data);
-                this.$element.hide();
-            },
-            trigger: function () {
-
-                this.$trigger = this.options.trigger instanceof $ ? this.options.trigger : $(this.options.trigger);
-
-                var _this = this,
-                    $this = _this.$element,
-                    post = _this.$trigger.offset(),
-                    offs = _this.options.offset;
-
-                $this.addClass('calendar-modal').css({
-                    left: (_this.$trigger[0].offsetLeft + offs[0]) + 'px',
-                    top: (_this.$trigger[0].offsetTop + _this.$trigger.outerHeight() + offs[1]) + 'px',
-                    zIndex: _this.options.zIndex
-                });
-
-                _this.$trigger.click(function () {
-                    $this.addClass('calendar-modal').css({
-                        left: (_this.$trigger[0].offsetLeft + offs[0]) + 'px',
-                        top: (_this.$trigger[0].offsetTop + _this.$trigger.outerHeight() + offs[1]) + 'px',
-                    });
-                    $this.show();
-                });
-
-                $(document).click(function (e) {
-                    if (_this.$trigger[0] != e.target && !$.contains($this[0], e.target)) {
-                        $this.hide();
-                    }
-                });
-            },
-            render: function () {
-                this.$week = this.$element.find('.week');
-                this.$dateItems = this.$element.find('.date-items');
-                this.$monthItems = this.$element.find('.month-items');
-                this.$label = this.$element.find('.calendar-label');
-                this.$disDate = this.$element.find(DISPLAY_VD);
-                this.$disMonth = this.$element.find(DISPLAY_VM);
-
-                var y = this.date.getFullYear(),
-                    m = this.date.getMonth() + 1;
-
-                this.updateDisDate(y, m);
-                this.updateMonthView(y);
-
-                this.fillDateItems(y, m);
-
-                this.options.trigger && this.trigger();
-
-            },
-            setView: function (view) {
-                this.$element.removeClass(VIEW_CLASS.date + ' ' + VIEW_CLASS.month)
-                    .addClass(VIEW_CLASS[view]);
-                this.view = view;
-            },
-            updateDateView: function (y, m, dirc, cb) {
-                m = m || this.date.getMonth() + 1;
-
-                var _this = this,
-                    $dis = this.$dateItems,
-                    exec = {
-                        prev: function () {
-                            var pm = Date.getPrevMonth(y, m),
-                                ppm = Date.getPrevMonth(y, m, 2),
-                                $prevItem = _this.getDaysHtml(ppm.y, ppm.m);
-
-                            m = pm.m;
-                            y = pm.y;
-
-                            $dis.animate({
-                                marginLeft: 0
-                            }, 300, 'swing', function () {
-                                $dis.children(':last').remove();
-                                $dis.prepend($prevItem).css('margin-left', '-100%');
-
-                                $.isFunction(cb) && cb.call(_this);
-                            });
-                        },
-                        next: function () {
-                            var nm = Date.getNextMonth(y, m),
-                                nnm = Date.getNextMonth(y, m, 2),
-                                $nextItem = _this.getDaysHtml(nnm.y, nnm.m);
-
-                            m = nm.m;
-                            y = nm.y;
-
-                            $dis.animate({
-                                marginLeft: '-200%'
-                            }, 300, 'swing', function () {
-                                $dis.children(':first').remove();
-                                $dis.append($nextItem).css('margin-left', '-100%');
-
-                                $.isFunction(cb) && cb.call(_this);
-                            });
-
-                        }
-                    };
-
-
-                if (dirc) {
-                    exec[dirc]();
-                } else {
-                    this.fillDateItems(y, m);
-                }
-
-                this.updateDisDate(y, m);
-
-                this.setView('date');
-
-                return {
-                    y: y,
-                    m: m
-                };
-            },
-            updateMonthView: function (y) {
-                this.updateDisMonth(y);
-                this.setMonthAction(y);
-                this.setView('month');
-            },
-            getDisDateValue: function () {
-                var arr = this.$disDate.html().split('/'),
-                    y = Number(arr[0]),
-                    m = Number(arr[1].match(/\d{1,2}/)[0]);
-
-                return [y, m];
-            },
-            selectedDay: function (d, type) {
-                var arr = this.getDisDateValue(),
-                    y = arr[0],
-                    m = arr[1],
-                    toggleClass = function () {
-                        this.$dateItems.children(':eq(1)')
-                            .find('[' + ITEM_DAY + ']:not(.' + NEW_DAY_CLASS + ', .' + OLD_DAY_CLASS + ')')
-                            .removeClass(SELECT_CLASS)
-                            .filter(function (index) {
-                                return parseInt(this.innerHTML) === d;
-                            }).addClass(SELECT_CLASS);
-                    };
-
-                if (type) {
-                    var ret = this.updateDateView(y, m, {
-                        'old': 'prev',
-                        'new': 'next'
-                    }[type], toggleClass);
-                    y = ret.y;
-                    m = ret.m;
-                    this.options.viewChange('date', y, m);
-                } else {
-                    toggleClass.call(this);
-                }
-
-                return new Date(y, m - 1, d);
-            },
-            showLabel: function (event, view, date, data) {
-                var $lbl = this.$label;
-
-                $lbl.find('p').html(this.options.label.repeat({
-                    m: view,
-                    d: date.format(this.options.format),
-                    v: data
-                }).replace(/\n/g, '<br>'));
-
-                var w = $lbl.outerWidth(),
-                    h = $lbl.outerHeight();
-
-                $lbl.css({
-                    left: (event.pageX - w / 2) + 'px',
-                    top: (event.pageY - h - 20) + 'px'
-                }).show();
-            },
-            hasLabel: function () {
-                if (this.options.label) {
-                    $('body').append(this.$label);
-                    return true;
-                }
-                return false;
-            },
-            event: function () {
-                var _this = this,
-                    vc = _this.options.viewChange;
-
-                // view change
-                _this.$element.on('click', DISPLAY_VD, function () {
-                    var arr = _this.getDisDateValue();
-                    _this.updateMonthView(arr[0], arr[1]);
-
-                    vc('month', arr[0], arr[1]);
-
-                }).on('click', DISPLAY_VM, function () {
-
-                    if (_this.options.view != 'month') {
-                        var y = this.innerHTML;
-                        _this.updateDateView(y);
-                        vc('date', y);
-                    }
-
-                });
-
-                // arrow
-                _this.$element.on('click', ARROW_DATE, function () {
-                    var arr = _this.getDisDateValue(),
-                        type = getClass(this),
-                        y = arr[0],
-                        m = arr[1];
-
-                    var d = _this.updateDateView(y, m, type, function () {
-                        vc('date', d.y, d.m);
-                    });
-
-                }).on('click', ARROW_MONTH, function () {
-
-                    var y = Number(_this.$disMonth.html()),
-                        type = getClass(this);
-
-                    y = type === 'prev' ? y - 1 : y + 1;
-                    _this.updateMonthView(y);
-                    vc('month', y);
-                });
-
-                // selected
-                _this.$element.on('click', '[' + ITEM_DAY + ']', function () {
-                    var d = parseInt(this.innerHTML),
-                        cls = getClass(this),
-                        type = /new|old/.test(cls) ? cls.match(/new|old/)[0] : '';
-
-                    var day = _this.selectedDay(d, type);
-
-                    _this.options.onselected.call(this, 'date', day, $(this).data(MARK_DATA));
-
-                    _this.$trigger && _this.hide('date', day, $(this).data(MARK_DATA));
-
-                }).on('click', '[' + ITEM_MONTH + ']', function () {
-                    var y = Number(_this.$disMonth.html()),
-                        m = parseInt(this.innerHTML);
-                    if (_this.options.view != 'month') {
-                        _this.updateDateView(y, m);
-                        vc('date', y, m);
-                        _this.options.onselected.call(this, 'month', new Date(y, m - 1));
+        function s(a, b) {
+            newDate = new Date(a, b, 1);
+            newDate.setDate(0);
+            var d = 1,
+                h = newDate.getDate();
+            newDate.setDate(1);
+            newDate.setMonth(newDate.getMonth() + 1);
+            var m = newDate.getDay();
+            if (m == 0) m = 7;
+            h = h - m + 1;
+            newDate.setMonth(newDate.getMonth() + 1);
+            newDate.setDate(0);
+            var o = newDate.getDate(),
+                g = "<table class='tabD'>";
+            g += "<tr><th>\u65e5</th><th>\u4e00</th><th>\u4e8c</th><th>\u4e09</th><th>\u56db</th><th>\u4e94</th><th>\u516d</th></tr>";
+            var i = w(),
+                l = "",
+                p = "",
+                t = "";
+            c.complement || (t = "style='display:none'");
+            for (var x = 0; x < 6; x++) {
+                g += "<tr>";
+                for (var y = 0; y < 7; y++) {
+                    var j = x * 7 + y + 1 - m;
+                    p = l = "";
+                    if (c.lowerLimit != NaN && c.lowerLimit >= new Date(newDate.getFullYear(), newDate.getMonth(), j + 1) || c.upperLimit != NaN && new Date(newDate.getFullYear(), newDate.getMonth(), j) > c.upperLimit) if (0 < j && j <= o) {
+                        if (newDate.getFullYear() == e && newDate.getMonth() == f && j == q) l = "current";
+                        g += "<td><span class='" + l + "'>" + j + "</span></td>"
+                    } else if (j <= 0) {
+                        if (newDate.getFullYear() == e && newDate.getMonth() - 1 == f && h == q) l = "current";
+                        g += "<td><span class='" + l + "' " + t + ">" + h + "</span></td>";
+                        h++
                     } else {
-                        _this.options.onselected.call(this, 'month', new Date(y, m - 1));
-                        _this.$trigger && _this.hide('month', new Date(y, m - 1), $(this).data(MARK_DATA));
+                        if (j > o) {
+                            if (newDate.getFullYear() == e && newDate.getMonth() + 1 == f && d == q) l = "current";
+                            g += "<td><span class='" + l + "' " + t + ">" + d + "</span></td>";
+                            d++
+                        }
+                    } else if (0 < j && j <= o) {
+                        if (newDate.getFullYear() == e && newDate.getMonth() == f && j == q) l = "current";
+                        if (newDate.getFullYear() == i.getFullYear() && newDate.getMonth() == i.getMonth() && j == i.getDate()) p = "select";
+                        g += "<td><a class='" + p + " " + l + "'>" + j + "</a></td>"
+                    } else if (j <= 0) {
+                        if (newDate.getFullYear() == e && newDate.getMonth() - 1 == f && h == q) l = "current";
+                        if (newDate.getFullYear() == i.getFullYear() && newDate.getMonth() - 1 == i.getMonth() && h == i.getDate()) p = "select";
+                        g += "<td><a class='prevD " + p + " " + l + "' " + t + ">" + h + "</a></td>";
+                        h++
+                    } else if (j > o) {
+                        if (newDate.getFullYear() == e && newDate.getMonth() + 1 == f && d == q) l = "current";
+                        if (newDate.getFullYear() == i.getFullYear() && newDate.getMonth() + 1 == i.getMonth() && d == i.getDate()) p = "select";
+                        g += "<td><a class='nextD " + p + " " + l + "' " + t + ">" + d + "</a></td>";
+                        d++
                     }
+                    g = g.replace("class=' '", "")
+                }
+                g += "</tr>"
+            }
+            g += "</table>";
+            return g
+        }
 
-                });
+        function z(a) {
+            var b = w(),
+                d = "<table class='tabM'>";
+            d += "<tr>";
+            d += "<td><a val='0' " + (a == b.getFullYear() && 0 == b.getMonth() ? "class='select'" : "") + " " + (a == e && 0 == f ? "class='current'" : "") + ">1\u6708</a></td>";
+            d += "<td><a val='1' " + (a == b.getFullYear() && 1 == b.getMonth() ? "class='select'" : "") + " " + (a == e && 1 == f ? "class='current'" : "") + ">2\u6708</a></td>";
+            d += "<td><a val='2' " + (a == b.getFullYear() && 2 == b.getMonth() ? "class='select'" : "") + " " + (a == e && 2 == f ? "class='current'" : "") + ">3\u6708</a></td>";
+            d += "<td><a val='3' " + (a == b.getFullYear() && 3 == b.getMonth() ? "class='select'" : "") + " " + (a == e && 3 == f ? "class='current'" : "") + ">4\u6708</a></td>";
+            d += "</tr>";
+            d += "<tr>";
+            d += "<td><a val='4' " + (a == b.getFullYear() && 4 == b.getMonth() ? "class='select'" : "") + " " + (a == e && 4 == f ? "class='current'" : "") + ">5\u6708</a></td>";
+            d += "<td><a val='5' " + (a == b.getFullYear() && 5 == b.getMonth() ? "class='select'" : "") + " " + (a == e && 5 == f ? "class='current'" : "") + ">6\u6708</a></td>";
+            d += "<td><a val='6' " + (a == b.getFullYear() && 6 == b.getMonth() ? "class='select'" : "") + " " + (a == e && 6 == f ? "class='current'" : "") + ">7\u6708</a></td>";
+            d += "<td><a val='7' " + (a == b.getFullYear() && 7 == b.getMonth() ? "class='select'" : "") + " " + (a == e && 7 == f ? "class='current'" : "") + ">8\u6708</a></td>";
+            d += "</tr>";
+            d += "<tr>";
+            d += "<td><a val='8' " + (a == b.getFullYear() && 8 == b.getMonth() ? "class='select'" : "") + " " + (a == e && 8 == f ? "class='current'" : "") + ">9\u6708</a></td>";
+            d += "<td><a val='9' " + (a == b.getFullYear() && 9 == b.getMonth() ? "class='select'" : "") + " " + (a == e && 9 == f ? "class='current'" : "") + ">10\u6708</a></td>";
+            d += "<td><a val='10' " + (a == b.getFullYear() && 10 == b.getMonth() ? "class='select'" : "") + " " + (a == e && 10 == f ? "class='current'" : "") + ">11\u6708</a></td>";
+            d += "<td><a val='11' " + (a == b.getFullYear() && 11 == b.getMonth() ? "class='select'" : "") + " " + (a == e && 11 == f ? "class='current'" : "") + ">12\u6708</a></td>";
+            d += "</tr>";
+            d += "</table>";
+            return d
+        }
 
-                // hover
-                _this.$element.on('mouseenter', '[' + ITEM_DAY + ']', function (e) {
-                    var arr = _this.getDisDateValue(),
-                        day = new Date(arr[0], arr[1] - 1, parseInt(this.innerHTML));
-
-                    if (_this.hasLabel && $(this).data(MARK_DATA)) {
-                        $('body').append(_this.$label);
-                        _this.showLabel(e, 'date', day, $(this).data(MARK_DATA));
+        function A(a) {
+            a = Math.floor(a / 10) * 10;
+            var b = "<table class='tabY'>",
+                d = w(),
+                h = "",
+                m = "",
+                o = "";
+            c.complement || (o = "style='display:none'");
+            for (var g = 0; g < 3; g++) {
+                b += "<tr>";
+                for (var i = 0; i < 4; i++) {
+                    m = h = "";
+                    if (g + 1 * i + 1 != 1 && (g + 1) * (i + 1) != 12) {
+                        if (a == d.getFullYear()) h = "select";
+                        if (a == e) m = "current";
+                        b += "<td><a class='" + h + " " + m + "' >" + a + "</a></td>";
+                        a++
+                    } else if (g + 1 * i + 1 == 1) {
+                        if (a - 1 == d.getFullYear()) h = "select";
+                        if (a - 1 == e) m = "current";
+                        b += "<td><a class='prevY " + h + " " + m + "' " + o + ">" + (a - 1) + "</a></td>"
+                    } else {
+                        if (a == d.getFullYear()) h = "select";
+                        if (a == e) m = "current";
+                        b += "<td><a class='nextY " + h + " " + m + "' " + o + ">" + a + "</a></td>"
                     }
+                }
+                b += "</tr>"
+            }
+            b += "</table>";
+            return b
+        }
 
-                    _this.options.onMouseenter.call(this, 'date', day, $(this).data(MARK_DATA));
-                }).on('mouseleave', '[' + ITEM_DAY + ']', function () {
-                    _this.$label.hide();
-                });
-            },
-            resize: function () {
-                var w = this.width,
-                    h = this.height,
-                    hdH = this.$element.find('.calendar-hd').outerHeight();
+        function B(a) {
+            var b = $("#" + c.controlId).find(".reserve"),
+                d = $("#" + c.controlId).find(".enabled");
+            b.stop();
+            d.stop();
+            b.removeClass("reserve").addClass("enabled");
+            d.removeClass("enabled").addClass("reserve");
+            b.css({
+                "margin-left": d.width() + "px",
+                "margin-top": "0px"
+            });
+            b.empty().append(a);
+            b.animate({
+                    "margin-left": "0px"
+                },
+                c.speed);
+            d.animate({
+                    "margin-left": "-" + d.width() + "px"
+                },
+                c.speed,
+                function () {
+                    d.empty()
+                })
+        }
 
-                this.$element.width(w).height(h + hdH)
-                    .find('.calendar-inner, .view')
-                    .css('width', w + 'px');
+        function C(a) {
+            var b = $("#" + c.controlId).find(".reserve"),
+                d = $("#" + c.controlId).find(".enabled");
+            b.stop();
+            d.stop();
+            b.removeClass("reserve").addClass("enabled");
+            d.removeClass("enabled").addClass("reserve");
+            b.css({
+                "margin-left": "-" + 210 + "px",
+                "margin-top": "0px"
+            });
+            b.empty().append(a);
+            b.animate({
+                    "margin-left": "0px"
+                },
+                c.speed);
+            d.animate({
+                    "margin-left": 210 + "px"
+                },
+                c.speed,
+                function () {
+                    d.empty()
+                })
+        }
 
-                this.$element.find('.calendar-ct').width(w).height(h);
+        function D(a) {
+            var b = $("#" + c.controlId).find(".reserve"),
+                d = $("#" + c.controlId).find(".enabled");
+            b.stop();
+            d.stop();
+            b.removeClass("reserve").addClass("enabled");
+            d.removeClass("enabled").addClass("reserve");
+            $("#" + c.controlId).css({
+                "z-index": 1000
+            });
 
-            },
-            init: function () {
+            b.css({
+                "z-index": 999
+            });
+            d.css({
+                "z-index": 999
+            });
+            b.css({
+                "margin-left": "0px",
+                "margin-top": (d.height() + 50) + "px"
+            });
+            b.empty().append(a);
+            b.animate({
+                    "margin-top": "0px"
+                },
+                c.speed);
+            d.animate({
+                    "margin-top": "-" + (d.height() + 50) + "px"
+                },
+                c.speed,
+                function () {
+                    d.empty();
+                    $("#" + c.controlId).css({
+                        "z-index": 1000
+                    });
+                    b.css({
+                        "z-index": 1000
+                    });
+                    d.css({
+                        "z-index": 1000
+                    })
+                })
+        }
 
-                this.fillStatic();
-                this.resize();
-                this.render();
-                this.view = this.options.view;
-                this.setView(this.view);
-                this.event();
-            },
-            setData: function (data) {
-                this.data = data;
+        function E(a) {
+            var b = $("#" + c.controlId).find(".reserve"),
+                d = $("#" + c.controlId).find(".enabled");
+            b.stop();
+            d.stop();
+            b.removeClass("reserve").addClass("enabled");
+            d.removeClass("enabled").addClass("reserve");
+            $("#" + c.controlId).css({
+                "z-index": 1000
+            });
+            b.css({
+                "z-index": 999
+            });
+            d.css({
+                "z-index": 999
+            });
+            b.css({
+                "margin-left": "0px",
+                "margin-top": "-" + (d.height() + 50) + "px"
+            });
+            b.empty().append(a);
+            b.animate({
+                    "margin-top": "0px"
+                },
+                c.speed);
+            d.animate({
+                    "margin-top": (d.height() + 50) + "px"
+                },
+                c.speed,
+                function () {
+                    d.empty();
+                    $("#" + c.controlId).css({
+                        "z-index": 1000
+                    });
+                    b.css({
+                        "z-index": 1000
+                    });
+                    d.css({
+                        "z-index": 1000
+                    })
+                })
+        }
 
-                if (this.view === 'date') {
-                    var d = this.getDisDateValue();
-                    this.fillDateItems(d[0], d[1]);
-                } else if (this.view === 'month') {
-                    this.updateMonthView(this.$disMonth.html());
+        function w() {
+            re = /(\d\d\d\d)(\W)?(\d\d)(\W)?(\d\d)/g;
+            var a = n.val();
+            a = a.replace(re, "$1/$3/$5@").split("@")[0];
+            return new Date(a)
+        }
+
+        function F(a) {
+            var b = [];
+            b.x = a.offsetLeft;
+            for (b.y = a.offsetTop; a = a.offsetParent;) {
+                b.x += a.offsetLeft;
+                b.y += a.offsetTop
+            }
+            return b
+        }
+
+        var n = $(this);
+        c = jQuery.extend({
+                controlId: $(this).attr("id") + (parseInt(Math.random() * 10000000000000000, 10) + "") + "Calendar",
+                speed: 100,
+                complement: true,
+                readonly: true,
+                view: 'date',
+                format: 'yyyy-mm-dd',
+                upperLimit: NaN,
+                lowerLimit: NaN,
+                refresh: function () {
+
+                    var a = $("#" + this.controlId).find(".currentYear"),
+                        b = $("#" + this.controlId).find(".currentMonth"),
+                        d = s(Number(a.text()), Number(b.text()) - 1);
+                    C(d);
+                    if (Number(b.text()) != 1) b.text(Number(b.text()));
+                    else {
+                        a.text(Number(a.text()) - 1);
+                        b.text("12")
+                    }
+                    r()
+
+
+                    /*var parent = $("#" + this.controlId).find(".tabD").parent();
+                     $("#" + this.controlId).find(".tabD").remove();
+                     var g = s(Number($("#" + this.controlId).find(".currentYear").text()), Number($("#" + this.controlId).find(".currentMonth").text()))
+                     parent.append(g);*/
+                },
+                callback: function (view, date, dateString) {
+                    $(this).val(dateString);
                 }
             },
-            methods: function (name, args) {
-                if (OS.call(this[name]) === '[object Function]') {
-                    return this[name].apply(this, args);
+            c || {});
+        if (c.view == 'month' && c.format.lastIndexOf("mm") + 2 < c.format.length) {
+            c.format = 'yyyy-mm';
+        }
+        if (c.readonly) {
+            n.attr("readonly", true);
+            n.bind("keydown",
+                function () {
+                    if (event.keyCode == 8) event.keyCode = 0
+                })
+        }
+        today = new Date;
+        var e = today.getFullYear(),
+            f = today.getMonth(),
+            q = today.getDate(),
+            k = "";
+        k += "<div id='" + c.controlId + "'class='calendar'>";
+        k += "  <div class='calMain'>";
+        k += "    <div class='calTitle'>";
+        k += "      <a class='prevMonth'>&lt;</a><span class='t_date'><span class='currentYearText'><a class='currentYear'>" + e + "</a>\u5e74</span><span class='currentMonthText'><a class='currentMonth'>" + (f + 1) + "</a>\u6708</span></span><a class='nextMonth'>&gt;</a>";
+        k += "    </div>";
+        k += "    <div class='calContent'>";
+        k += "      <div class='reserve'>";
+        k += "      </div>";
+        k += "      <div class='enabled'>";
+        if (c.view == 'date') {
+            k += s(e, f);
+        } else if (c.view == 'month') {
+            k += z(e);
+        }
+        k += "      </div>";
+        k += "    </div>";
+        k += "  </div>";
+        k += "</div>";
+        $("body").append(k);
+        if (c.view == 'date') {
+            r();
+        } else if (c.view == 'month') {
+            u();
+        }
+
+        $("#" + c.controlId).find(".prevMonth").mouseup(function () {
+            if ($("#" + c.controlId).find(".enabled > .tabD").length > 0) {
+                var a = $("#" + c.controlId).find(".currentYear"),
+                    b = $("#" + c.controlId).find(".currentMonth"),
+                    d = s(Number(a.text()), Number(b.text()) - 2);
+                C(d);
+                if (Number(b.text()) != 1) b.text(Number(b.text()) - 1);
+                else {
+                    a.text(Number(a.text()) - 1);
+                    b.text("12")
                 }
+                r()
+            } else if ($("#" + c.controlId).find(".enabled > .tabM").length > 0) {
+                d = z(Number($("#" + c.controlId).find(".currentYear").text()) - 1);
+                C(d);
+                u();
+                $("#" + c.controlId).find(".currentYear").text(Number($("#" + c.controlId).find(".currentYear").text()) - 1)
+            } else if ($("#" + c.controlId).find(".enabled > .tabY").length > 0) {
+                d = A(Number($("#" + c.controlId).find(".currentYear").text()) - 10);
+                C(d);
+                v();
+                $("#" + c.controlId).find(".currentYear").text(Number($("#" + c.controlId).find(".currentYear").text()) - 10)
+            }
+        });
+        $("#" + c.controlId).find(".nextMonth").mouseup(function () {
+            if ($("#" + c.controlId).find(".enabled > .tabD").length > 0) {
+                var a = $("#" + c.controlId).find(".currentYear"),
+                    b = $("#" + c.controlId).find(".currentMonth"),
+                    d = s(Number(a.text()), Number(b.text()));
+                B(d);
+                if (Number(b.text()) != 12) b.text(Number(b.text()) + 1);
+                else {
+                    a.text(Number(a.text()) + 1);
+                    b.text("1")
+                }
+                r()
+            } else if ($("#" + c.controlId).find(".enabled > .tabM").length > 0) {
+                d = z(Number($("#" + c.controlId).find(".currentYear").text()) + 1);
+                B(d);
+                u();
+                $("#" + c.controlId).find(".currentYear").text(Number($("#" + c.controlId).find(".currentYear").text()) + 1)
+            } else if ($("#" + c.controlId).find(".enabled > .tabY").length > 0) {
+                d = A(Number($("#" + c.controlId).find(".currentYear").text()) + 10);
+                B(d);
+                v();
+                $("#" + c.controlId).find(".currentYear").text(Number($("#" + c.controlId).find(".currentYear").text()) + 10)
+            }
+        });
+        $("#" + c.controlId).find(".currentMonthText").mouseup(function () {
+            if (!($("#" + c.controlId).find(".enabled > .tabM").length > 0)) {
+                var a = z(Number($("#" + c.controlId).find(".currentYear").text()));
+                E(a);
+                u()
+            }
+        });
+        $("#" + c.controlId).find(".currentYearText").mouseup(function () {
+            if (!($("#" + c.controlId).find(".enabled > .tabY").length > 0)) {
+                var a = A(Number($("#" + c.controlId).find(".currentYear").text()));
+                E(a);
+                v()
+            }
+        });
+        n.data("calendar-id", c);
+        n.bind("click",
+            function () {
+                if ($("#" + c.controlId + ":hidden").length != 0) {
+                    $(".calendar").hide();
+
+                    var a = $("#" + c.controlId),
+                        b = F(n[0]),
+                        d = b.x + Number(n.attr("clientLeft")) - 1;
+                    b = b.y + Number(n.attr("clientTop")) + Number(n.attr("clientHeight")) - 1;
+                    a.css({
+                        top: b + "px",
+                        left: d + "px"
+                    });
+                    d = $("#" + c.controlId).width();
+                    b = $("#" + c.controlId).height();
+                    var $this = $(this);
+                    a.css({
+                        left: $this.offset().left + 'px',
+                        top: ($this.offset().top + $this.outerHeight()) + 'px',
+                    });
+                    /*a.css('left', '0px');
+                     a.css('top', '400px');*/
+                    a.css('z-index', '1000');
+                    /*a.width(0);*/
+                    /*a.height(0);*/
+
+
+                    a.show().height(260);
+
+                    /* if (c.view == 'month') {
+                     var aa = s(Number($("#" + c.controlId).find(".currentYear").text()), Number($(this).attr("val")));
+                     D(aa);
+                     r();
+                     $("#" + c.controlId).find(".currentMonth").text(Number($(this).attr("val")) + 1)
+                     }
+                     */
+                    /*.animate({
+                     height: 260 + "px"
+                     },
+                     c.speed);*/
+                    a.bind("selectstart",
+                        function () {
+                            return false
+                        }).bind("mousedown",
+                        function () {
+                            return false
+                        })
+                }
+            });
+        $("#" + c.controlId).mouseup(function (e) {
+            e.stopPropagation();
+        })
+        $(document).mouseup(function (a) {
+            $("#" + c.controlId).height(0);
+            $("#" + c.controlId).hide();
+        })
+    }
+});
+
+$.fn.calendar = function () {
+
+    $(this).find("input[calendar]").each(function (i) {
+        var options = {
+            'max': NaN,
+            'min': NaN,
+            'view': 'date',
+            'format': 'yyyy-mm-dd',
+            'onselected': function (view, date, dateString) {
+                $(this).val(dateString)
             }
         };
-
-        var init = function () {
-            var options = {};
-            options.trigger = this;
-            for (var index = 0; index < this.attributes.length; index++) {
-                if (defaults[this.attributes[index].name] !== undefined && this.attributes[index].value) {
-                    options[this.attributes[index].name] = eval("(" + this.attributes[index].value + ")");
-                }
-            }
-            $(this).attr("readonly", 'readonly');
-            var target = $("<div></div>");
-            $(this).after(target);
-            var thiz = target;
-
-            var calendar = thiz.data('calendar'),
-                fn,
-                args = [].slice.call(arguments);
-
-            if (!calendar) {
-                return thiz.each(function () {
-                    return $(thiz).data('calendar', new Calendar(thiz, options));
-                });
-            }
-            if (isString(options)) {
-                fn = options;
-                args.shift();
-                return calendar.methods(fn, args);
+        for (var index = 0; index < this.attributes.length; index++) {
+            if (options[this.attributes[index].name] !== undefined && this.attributes[index].value) {
+                options[this.attributes[index].name] = eval("(" + this.attributes[index].value + ")");
             }
         }
 
-        $("input[calendar]").each(function (i) {
-            init.call(this);
+        var can = $(this).mycalendar({
+            upperLimit: NaN,
+            lowerLimit: NaN,
+            view: options.view,
+            format: options.format,
+            callback: options.onselected
         });
-        $.fn.calendar = function () {
-            $(this).find("input[calendar]").each(function (i) {
-                init.call(this);
-            })
+
+        if (typeof(options.max) == "string") {
+            if (options.max.indexOf("$") == 0) {
+                var ele = options.max.substr(1, options.max.length - 1);
+                var that = this;
+                $(ele).on('timeChange', function (event, val) {
+                    calendar = $(that).data("calendar-id");
+                    calendar.upperLimit = val;
+                    calendar.refresh();
+                });
+            } else if (options.min.indexOf("$") == 0) {
+                var ele = options.min.substr(1, options.min.length - 1);
+                var that = this;
+                $(ele).on('timeChange', function (event, val) {
+                    calendar = $(that).data("calendar-id");
+                    calendar.lowerLimit = val;
+                    calendar.refresh();
+                });
+            }
+        }
+
+        if (typeof(options.min) == "string") {
+            if (options.min.indexOf("$") == 0) {
+                var ele = options.min.substr(1, options.min.length - 1);
+                var that = this;
+                $(ele).on('timeChange', function (event, val) {
+                    calendar = $(that).data("calendar-id");
+                    calendar.lowerLimit = val;
+                    calendar.refresh();
+                });
+            }
+        }
+
+    })
+};
+$(function () {
+    $("input[calendar]").each(function (i) {
+        var options = {
+            'max': NaN,
+            'min': NaN,
+            'view': 'date',
+            'format': 'yyyy-mm-dd',
+            'onselected': function (view, date, dateString) {
+                $(this).val(dateString)
+            }
         };
-        /*$.fn.calendar = function (options) {
-         //
-         options.trigger = this;
+        for (var index = 0; index < this.attributes.length; index++) {
+            if (options[this.attributes[index].name] !== undefined && this.attributes[index].value) {
+                options[this.attributes[index].name] = eval("(" + this.attributes[index].value + ")");
+            }
+        }
 
-         var target = $("<div></div>");
-         $(this).after(target);
-         var thiz = target;
+        var can = $(this).mycalendar({
+            upperLimit: NaN,
+            lowerLimit: NaN,
+            view: options.view,
+            format: options.format,
+            callback: options.onselected
+        });
 
-         var calendar = thiz.data('calendar'),
-         fn,
-         args = [].slice.call(arguments);
+        if (typeof(options.max) == "string") {
+            if (options.max.indexOf("$") == 0) {
+                var ele = options.max.substr(1, options.max.length - 1);
+                var that = this;
+                $(ele).on('timeChange', function (event, val) {
+                    calendar = $(that).data("calendar-id");
+                    calendar.upperLimit = val;
+                    calendar.refresh();
+                });
+            } else if (options.min.indexOf("$") == 0) {
+                var ele = options.min.substr(1, options.min.length - 1);
+                var that = this;
+                $(ele).on('timeChange', function (event, val) {
+                    calendar = $(that).data("calendar-id");
+                    calendar.lowerLimit = val;
+                    calendar.refresh();
+                });
+            }
+        }
 
-         if (!calendar) {
-         return thiz.each(function () {
-         return $(thiz).data('calendar', new Calendar(thiz, options));
-         });
-         }
-         if (isString(options)) {
-         fn = options;
-         args.shift();
-         return calendar.methods(fn, args);
-         }
+        if (typeof(options.min) == "string") {
+            if (options.min.indexOf("$") == 0) {
+                var ele = options.min.substr(1, options.min.length - 1);
+                var that = this;
+                $(ele).on('timeChange', function (event, val) {
+                    calendar = $(that).data("calendar-id");
+                    calendar.lowerLimit = val;
+                    calendar.refresh();
+                });
+            }
+        }
 
-         return this;
-         }
-
-         $.fn.calendar.defaults = defaults;*/
-
-    }))
-});
+    });
+})

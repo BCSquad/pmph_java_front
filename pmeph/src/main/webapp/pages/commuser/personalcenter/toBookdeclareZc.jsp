@@ -45,13 +45,13 @@
 						</td>
 					</tr>
 					<tr>
-						<td width="140px"><span class="btbs">*</span><span>选题名称：</span></td>
+						<td width="140px"><span class="btbs">*</span><span>书名：</span></td>
 						<td width="460px">
-							<input class="cg_input" name="bookname" id="bookname" placeholder="选题名称" value="${topicMap.bookname}" maxlength="100"/>
+							<input class="cg_input" name="bookname" id="bookname" placeholder="书名" value="${topicMap.bookname}" maxlength="100"/>
 							<input type="hidden" name="user_id" value="${topicMap.user_id}"/>
 							<input type="hidden" name="topic_id" value="${topicMap.id}"/>
 						</td>
-						<td width="100px"><span class="btbs">*</span><span>读者对象：</span></td>
+						<td width="100px"><span>读者对象：</span></td>
 						<td width="300px">
 							<select name="reader" id="dzdx" class="dzdx">
 								<option value="0" ${topicMap.reader=='0'?'selected':''}>医务工作者</option>
@@ -61,7 +61,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span class="btbs">*</span><span>预计交稿时间：</span></td>
+						<td><span>预计交稿时间：</span></td>
 						<td>
 							<input class="cg_input" name="deadline" id="deadline" calendar format="'yyyy-mm-dd'" value="${topicMap.deadline}" />
 						</td>
@@ -78,19 +78,23 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span class="btbs">*</span><span>预估字数：</span></td>
+						<td><span>预估字数：</span></td>
 						<td>
-							<input class="cg_input" name="word_number" id="word_number" value="${topicMap.word_number}" placeholder="单位千字"  maxlength="20"/>
+							<input class="cg_input" name="word_number" id="word_number" value="${topicMap.word_number}" placeholder="单位千字"  
+								onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+							  maxlength="9"/>
 						</td>
-						<td><span class="btbs">*</span><span>预估图数：</span></td>
+						<td><span>预估图数：</span></td>
 						<td>
-							<input class="cg_input" name="picture_number" id="picture_number" value="${topicMap.picture_number}"  maxlength="20"/>
+							<input class="cg_input" name="picture_number" id="picture_number" value="${topicMap.picture_number}"  
+							onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+							  maxlength="9"/>
 						</td>
 					</tr>
 						<tr>
-						<td><span class="btbs">*</span><span>学科及专业：</span></td>
+						<td><span>学科及专业：</span></td>
 						<td>
-							<input class="cg_input" name="subject" id="subject" placeholder="学科及专业" value="${topicMap.subject}" />
+							<input class="cg_input" name="subject" id="subject" placeholder="学科及专业" maxlength="16" value="${topicMap.subject}" />
 						</td>
 						<td><span class="btbs">*</span><span>级别：</span></td>
 						<td>
@@ -127,11 +131,14 @@
 					<tr>
 						<td><span>银行账户：</span></td>
 						<td>
-							<input class="cg_input" name="bank_account_id" id="bank_account_id" placeholder="银行账户" value="${topicMap.bank_account_id}"/>
+							<input class="cg_input" name="account_number" id="account_number" placeholder="银行账户" value="${BankMap.account_number}" 
+								 onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+							maxlength="25"/>
+							<input class="cg_input" name="bank_account_id" type="hidden" value="${topicMap.bank_account_id}"/>
 						</td>
 						<td><span>开户银行：</span></td>
 						<td>
-							<input class="cg_input" name="realname" id="realname" placeholder="开户银行" value="${topicMap.bookname}"/>
+							<input class="cg_input" name="bank" id="bank" placeholder="开户银行" value="${BankMap.bank}" maxlength="25"/>
 						</td>
 					</tr>
 					<!-- 选题情况 -->
@@ -145,27 +152,27 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span>一、选题理由：</span></td>
+						<td><span class="btbs">*</span><span>一、选题理由：</span></td>
 						<td colspan="3">
 							<input type="hidden" name="extra_id" value="${textraMap.id}"/>
 							<div class="content">
-								<textarea class="text_cl" name="reason">${textraMap.reason}</textarea>
+								<textarea class="text_cl" maxlength="300" id="reason" name="reason">${textraMap.reason}</textarea>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td><span>二、出版价值：</span></td>
+						<td><span class="btbs">*</span><span>二、出版价值：</span></td>
 						<td colspan="3">
 							<div class="content">
-								<textarea class="text_cl" name="price">${textraMap.price}</textarea>
+								<textarea class="text_cl" maxlength="300" id="price" name="price">${textraMap.price}</textarea>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td><span>三、主要内容：</span></td>
+						<td><span class="btbs">*</span><span>三、主要内容：</span></td>
 						<td colspan="3">
 							<div class="content">
-								<textarea class="text_cl" name="extra_score">${textraMap.score}</textarea>
+								<textarea class="text_cl" maxlength="300" id="extra_score" name="extra_score">${textraMap.score}</textarea>
 							</div>
 						</td>
 					</tr>
@@ -181,11 +188,15 @@
 					<tr>
 						<td><span>作者购书：</span></td>
 						<td>
-							<input class="cg_input" name="purchase" id="purchase" placeholder="请输入作者购买册数" value="${topicMap.purchase}"/>
+							<input class="cg_input" name="purchase" id="purchase" placeholder="请输入作者购买册数" value="${topicMap.purchase}"
+							  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+							  maxlength="9"/>
 						</td>
 						<td><span>作者赞助：</span></td>
 						<td>
-							<input class="cg_input" name="sponsorship" id="sponsorship" placeholder="请输入预估金额" value="${topicMap.sponsorship}"/>
+							<input class="cg_input" name="sponsorship" id="sponsorship" placeholder="请输入预估金额" value="${topicMap.sponsorship}"
+								onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+							  maxlength="9"/>
 						</td>
 					</tr>
 				</table>
@@ -202,21 +213,21 @@
 					<tr>
 						<td width="106px"><span>译稿原书名：</span></td>
 						<td width="400px">
-							<input class="cg_input" name="original_bookname" id="original_bookname" placeholder="" value="${topicMap.original_bookname}"/>
+							<input class="cg_input" name="original_bookname" maxlength="33" id="original_bookname" placeholder="" value="${topicMap.original_bookname}"/>
 						</td>
-						<td style="text-align: center;"><span>原编著者：</span></td>
+						<td style="text-align: center;"><span>&emsp;&emsp;&emsp;原编著者：</span></td>
 						<td width="308px">
-							<input class="cg_input" name="original_author" id="original_author" placeholder="" value="${topicMap.original_author}"/>
+							<input class="cg_input" name="original_author" maxlength="33" id="original_author" placeholder="" value="${topicMap.original_author}"/>
 						</td>
 					</tr>
 					<tr>
 						<td><span>国籍：</span></td>
 						<td>
-							<input class="cg_input" name="nation" id="nation" placeholder="" value="${topicMap.nation}"/>
+							<input class="cg_input" name="nation" maxlength="20" id="nation" placeholder="" value="${topicMap.nation}"/>
 						</td>
 						<td style="text-align: center;"><span>出版年代及版次：</span></td>
 						<td>
-							<input class="cg_input" name="edition" id="edition" placeholder="出版年代及版次" value="${topicMap.edition}"/>
+							<input class="cg_input" name="edition" maxlength="20" id="edition" placeholder="出版年代及版次" value="${topicMap.edition}"/>
 						</td>
 					</tr>
 				</table>
@@ -249,7 +260,7 @@
 					<tbody>
 						<c:forEach var="list" items="${twriteList}" varStatus="status">
 							<tr id="sbbzqk_${status.count}">
-								<td><input class="sb_input" style="width: 100px;" name="write_realname" placeholder="编者姓名" value="${list.realname}"/></td>
+								<td><input class="sb_input" style="width: 100px;" name="write_realname" placeholder="编者姓名" maxlength="13" value="${list.realname}"/></td>
 								<td>
 									<select id="r_sex_${status.count}" name="sex">
 										<option value="0" ${list.sex=='0'?'selected':''}>男</option>
@@ -257,9 +268,11 @@
 									</select>
 									<input type="hidden" id="twriteCount" name="twriteCount" value="${twriteCount} "/>
 								</td>
-								<td><input class="sb_input" style="width: 80px;" name="write_price" placeholder="年龄" value="${list.price}"/></td>
-								<td><input class="sb_input" style="width: 320px;" name="write_position" placeholder="行政职务" value="${list.position}"/></td>
-								<td><input class="sb_input" style="width: 200px;" name="workplace" placeholder="工作单位" value="${list.workplace}"/></td>
+								<td><input class="sb_input" style="width: 80px;" name="write_price" placeholder="年龄" id="write_price" value="${list.price}"
+								onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" onBlur="checkAge(this)"
+							  maxlength="3"/></td>
+								<td><input class="sb_input" style="width: 320px;" name="write_position" placeholder="行政职务" value="${list.position}" maxlength="12"/></td>
+								<td><input class="sb_input" style="width: 200px;" name="workplace" placeholder="工作单位" value="${list.workplace}" maxlength="12"/></td>
 								<td><div class="add_div"><img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('sbbzqk_${status.count}')"></div></td>
 							</tr>
 						</c:forEach>

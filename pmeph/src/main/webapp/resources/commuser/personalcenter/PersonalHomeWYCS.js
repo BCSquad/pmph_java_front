@@ -44,6 +44,11 @@
 				queryMain();
 			  }
 		});
+	  $("#btn_wdsbssk").click(function(event){
+		  $("#bookname").val($("#wdsbssk").val());
+			$("#pageNum").val(1);
+			queryMain();
+	  });
 
 });
 

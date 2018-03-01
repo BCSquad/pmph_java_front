@@ -327,41 +327,41 @@
     line-height: 31px;
 }
 
-
 .video {
     width: 260px;
     height: 230px;
     float: left;
-	position:relative;
+    position: relative;
 }
 
-.video-name{
-	width: 260px;
-	height: 30px;
-	background-color: #F5F5F5;
-	border-radius:2px;
-	text-align:center;
-	font-family: MicrosoftYaHei-Bold;
-	font-size: 14px;
-	line-height: 30px;
-	color: #182d4c;
-	cursor: pointer;
+.video-name {
+    width: 260px;
+    height: 30px;
+    background-color: #F5F5F5;
+    border-radius: 2px;
+    text-align: center;
+    font-family: MicrosoftYaHei-Bold;
+    font-size: 14px;
+    line-height: 30px;
+    color: #182d4c;
+    cursor: pointer;
+    margin-top: 5px;
 }
 
-.video-a{
-	width: 260px;
-	height: 165px;
-	opacity:0.5;
-	background-color: black;
-	position:absolute;
-	top:0px;
-	cursor: pointer;
+.video-a {
+    width: 260px;
+    height: 165px;
+    /* opacity:0.5; */
+    background-color: black;
+    position: absolute;
+    top: 0px;
+    cursor: pointer;
 }
 
-.img-a{
-	width: 260px;
-	height: 165px;
-	cursor: pointer;
+.img-a {
+    width: 260px;
+    height: 165px;
+    cursor: pointer;
 }
 
 .longcom {
@@ -394,22 +394,22 @@
 .moreothers {
     cursor: pointer;
     font-family: MicrosoftYaHei;
-    font-size: 17px;
+    font-size: 14px;
     color: #666666;
     margin-left: 50%;
 }
 
 .bookmistake {
-    width: 426px;
-    height: 309px;
+    width: 520px;
+    /* height: 309px; */
     background-color: #FFFFFF;
     display: none;
     position: fixed;
-    left: 35%;
+    left: 30%;
     top: 30%;
     box-shadow: 0px 0px 5px #888888;
     border-radius: 5px;
-   z-index: 999;
+    z-index: 999;
 }
 
 .mistitle {
@@ -433,8 +433,8 @@
 
 .x {
     width: 14px;
-    height:14px;
-    background-image:url(../../image/close.png);
+    height: 14px;
+    background-image: url(../../image/close.png);
     float: right;
     margin-right: 10px;
     cursor: pointer;
@@ -455,6 +455,10 @@
     margin-left: 10px;
 }
 
+.input > div > span {
+    display: block;
+}
+
 .apache {
     width: 100%;
     height: 27px;
@@ -472,6 +476,7 @@
     border: none;
     cursor: pointer;
     color: #FFFFFF;
+    margin-bottom: 10px;
 }
 
 .uploadfile {
@@ -493,11 +498,13 @@
     border: 1px solid #E0E0E0;
     margin-left: 20px;
     padding: 5px;
+    resize: vertical;
+    max-height: 350px;
 }
 
 .info {
     width: 426px;
-    height: 103px;
+    /* height: 103px; */
     float: left;
     margin-top: 25px;
 }
@@ -640,12 +647,20 @@
     overflow: hidden;
 }
 
-.longcom_title{
-	width: 890px;
-	font-family: MicrosoftYaHei;
-	font-size: 16px;
-	line-height: 45px;
-	color: #3377aa;
+.item_content img {
+    max-width: 100%;
+}
+
+.item_content p {
+    word-break: break-all;
+}
+
+.longcom_title {
+    width: 890px;
+    font-family: MicrosoftYaHei;
+    font-size: 16px;
+    line-height: 45px;
+    color: #3377aa;
 }
 
 .rightarea {
@@ -659,7 +674,7 @@
     float: left;
     margin-top: 26px;
     width: 278px;
-   /*  height: 495px; */
+    /*  height: 495px; */
     border-top: 1px solid #EFEFEF;
 }
 
@@ -736,7 +751,7 @@
     float: left;
     margin-top: 10px;
     width: 275px;
-    height: 228px;
+    height: 248px;
 }
 
 .right_15 {
@@ -836,8 +851,8 @@
     margin-top: 1px;
 }
 
-.mis_pic{  
-	background-image: url("../../image/css_sprites.png");
+.mis_pic {
+    background-image: url("../../image/css_sprites.png");
     background-position: -373px -203px;
     background-repeat: no-repeat;
     height: 22px;
@@ -847,39 +862,44 @@
     margin-left: 15px;
 }
 
-.play{
-	background-image: url("../../image/css_sprites.png");
+.play {
+    background-image: url("../../image/css_sprites.png");
     background-position: -220px -273px;
     background-repeat: no-repeat;
-    height: 84px;
-    width: 82px;
+    height: 65px;
+    width: 70px;
     margin-top: -115px;
     margin-left: 95px;
     position: absolute;
     cursor: pointer;
 }
 
-.upbutten{
-	width:60px;
-	height:20px;
-	background-color: #E1E1E1;
-	border: none; 
-	text-align:center;
-	cursor: pointer;
-	border-radius:3px;
-	margin-left: 5px;
+.upbutten {
+    width: 70px;
+    height: 24px;
+    margin: 0px;
+    background-color: #03717b;
+    border-radius: 4px;
+    font-family: MicrosoftYaHei;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #ffffff;
+    line-height: 24px;
+    padding: 0;
+    text-align: center;
+    position: relative;
 }
 
-.video-btn{
-	margin-top: 136px;
-	margin-left: 9px;
-	font-family: MicrosoftYaHei;
-	font-size: 12px;
-	color: #ffffff;
+.video-btn {
+    margin-top: -24px;
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    color: #ffffff;
 }
 
-.vid_pic{  
-	background-image: url("../../image/css_sprites.png");
+.vid_pic {
+    background-image: url("../../image/css_sprites.png");
     background-position: -373px -232px;
     background-repeat: no-repeat;
     height: 23px;
@@ -889,8 +909,8 @@
     margin-left: 10px;
 }
 
-.right_6a{
-	background-image: url("../../image/css_sprites.png");
+.right_6a {
+    background-image: url("../../image/css_sprites.png");
     background-position: -416px -310px;
     background-repeat: no-repeat;
     height: 22px;
@@ -1017,6 +1037,8 @@
     left: 10px;
     background: black;
     position: absolute;
+    color: white;
+    text-align: center;
 }
 
 .pop-upload .relate-img .add-icon {
@@ -1063,9 +1085,10 @@
     height: 30px;
     width: 160px;
     margin: auto;
+    margin-top: 20px;
 }
 
-.pop-upload .button-area button.disable{
+.pop-upload .button-area button.disable {
     cursor: not-allowed;
     background: gray;
 }
@@ -1076,12 +1099,22 @@
     background-color: #70bcc3;
     border-radius: 2px;
     text-align: center;
-    color:white;
+    color: white;
     cursor: pointer;
     border: none;
     padding-bottom: 1px;
     margin: auto;
 }
-.pop-upload .button-area button.submit{
+
+.pop-upload .button-area button.submit {
     margin-right: 10px;
+}
+
+.input-error {
+    border: 1px solid red;
+}
+
+.valid_message {
+    color: red;
+    margin-left: 80px;
 }

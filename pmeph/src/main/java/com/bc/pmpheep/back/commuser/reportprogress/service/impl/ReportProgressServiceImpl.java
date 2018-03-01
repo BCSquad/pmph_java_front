@@ -12,6 +12,8 @@ import com.bc.pmpheep.back.commuser.reportprogress.bean.UserMessageVO;
 import com.bc.pmpheep.back.commuser.reportprogress.dao.ReportProgressDao;
 import com.bc.pmpheep.back.commuser.reportprogress.service.ReportProgressService;
 import com.bc.pmpheep.back.util.ObjectUtil;
+import com.bc.pmpheep.general.pojo.Content;
+import com.bc.pmpheep.general.service.ContentService;
 import com.bc.pmpheep.service.exception.CheckedExceptionBusiness;
 import com.bc.pmpheep.service.exception.CheckedExceptionResult;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
@@ -37,6 +39,8 @@ import com.bc.pmpheep.service.exception.CheckedServiceException;
 public class ReportProgressServiceImpl implements ReportProgressService {
     @Autowired
     ReportProgressDao reportProgressDao;
+    @Autowired
+    ContentService contentService;
 
     @Override
     public TextBookCheckVO getMaterialProgress(Long userId, Long materialId) throws Exception {
@@ -77,6 +81,26 @@ public class ReportProgressServiceImpl implements ReportProgressService {
         List<UserMessageVO> userMessageList = new ArrayList<UserMessageVO>(4);
         List<UserMessageVO> lists =
         reportProgressDao.getUserMessageByMaterialId(userId, materialId);// 取近4条消息
+        List<String> listString = new ArrayList<String>();
+        for(UserMessageVO list:lists){
+        	listString.add(list.getMsgId());
+        	
+        }
+        List<Content> listContent = null;
+        try {
+        	listContent = contentService.list(listString);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("user_message中数据异常，未找到mongon对应消息");
+		}
+       
+        for(UserMessageVO list:lists){
+        	for(Content content:listContent){
+        		if(list.getMsgId().equals(content.getId())){
+        			list.setMsgContent(content.getContent());
+        		}
+        	}
+        }
         if (lists.size() == 4) {
             userMessageList.addAll(lists);
         } else {

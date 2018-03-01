@@ -4,8 +4,40 @@
 <mapper namespace="com.bc.pmpheep.back.commuser.cms.dao.CmsNoticeManagementDao">
 
 
-	<select id="getCmsNoticeListTotal" resultType="java.lang.Integer">
-		SELECT
+	<select id="getCmsNoticeListTotal" resultType="java.lang.Integer" parameterType="java.util.Map">
+		select 
+     	count(distinct cc.id)
+		FROM
+		cms_content cc
+		LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
+		LEFT JOIN material m ON m.id = cc.material_id
+    		left join material_org mo on mo.material_id=m.id
+		left join writer_user wu on wu.org_id=mo.org_id
+		WHERE
+		cc.is_deleted = 0
+		AND
+		cc.category_id=3
+		AND cc.auth_status =2
+		AND cc.is_published =1
+    	and (
+    	 (
+    	     (
+    	         <if test="userid !=0">
+		    	 (
+		    	  wu.id=#{userid}
+		    	  and m.is_public=0
+		    	  )
+    	          or
+    	          </if> 
+    	      m.is_public=1
+    	      )
+    	 and 
+    	   cc.is_material_entry =1 
+    	 )
+    	 or 
+    	   cc.is_material_entry = 0  
+    	 )
+		<!-- SELECT
 		COUNT(*)
 		FROM
 		cms_content cc
@@ -17,10 +49,9 @@
 		ON m.id = cc.material_id
 		WHERE
 		cc.is_deleted = 0
-		AND ccg.category_name =
-		'公告'
+		AND ccg.id =3
 		AND cc.auth_status = 2
-		AND cc.is_published = TRUE
+		AND cc.is_published = TRUE -->
 	</select>
 
 	<select id="list"  resultType="CmsNoticeList" parameterType="java.util.Map">
@@ -29,7 +60,8 @@
 		FROM
 		cms_content cc
 		LEFT JOIN pmph_user pu ON cc.author_id =pu.id
-		LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
+		LEFT JOIN cms_category ccg O
+		N cc.category_id = ccg.id
 		LEFT JOIN material m ON m.id = cc.material_id
 		left join material_org mo on mo.material_id=m.id
 		left join writer_user wu on wu.org_id=mo.id
@@ -44,38 +76,30 @@
 		   and  wu.id=#{userid}
 		</if> -->
 		
-  select b.* from (SELECT
-		cc.*
-		FROM
-		cms_content cc
-		LEFT JOIN pmph_user pu ON cc.author_id =pu.id
-		LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
-		LEFT JOIN material m ON m.id = cc.material_id
-		WHERE
-		cc.is_deleted = 0
-		AND
-		ccg.category_name = '公告管理'
-		AND cc.auth_status = 2
-		AND cc.is_published =1
-    and m.is_public=0
-union 
-select 
-     cc.*
-		FROM
-		cms_content cc
-		LEFT JOIN pmph_user pu ON cc.author_id =pu.id
-		LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
-		LEFT JOIN material m ON m.id = cc.material_id
-    left join material_org mo on mo.material_id=m.id
-		left join writer_user wu on wu.org_id=mo.id
-		WHERE
-		cc.is_deleted = 0
-		AND
-		ccg.category_name = '公告管理'
-		AND cc.auth_status =2
-		AND cc.is_published =1
-    and wu.id=#{userid}
-    and m.is_public=1
+select b.* from 
+  (select 
+		        t.*,b.deadline
+		        from cms_content t
+		        left join  material b on t.material_id =b.id 
+		        where  t.category_id=3 
+		        and t.is_published=1
+		        and t.auth_status=2
+		        and t.is_deleted=0
+		        and ( <![CDATA[(b.is_public =1 and t.is_material_entry=1) or t.is_material_entry=0  ]]>)
+		 union
+		 select 
+		        t.*,b.deadline
+		        from cms_content t
+		        left join  material b on t.material_id =b.id 
+		        left join material_org u on b.id=u.material_id
+		        left join writer_user p on p.org_id=u.org_id
+		        where  t.category_id=3
+		        and t.is_published=1
+		        and b.is_public =0
+		        and t.auth_status=2
+		        and t.is_material_entry=1
+		        and t.is_deleted=0 
+		        and p.id= #{userid}
 ) b 
 
 ORDER BY
@@ -90,6 +114,36 @@ ORDER BY
 		<if test="order == 3">
 			b.is_hot DESC,b.sort_hot
 		</if>
-		LIMIT #{start},#{pageSize}
+		LIMIT #{start},#{pageSize} 
+<!-- select 
+     	distinct cc.*
+		FROM
+		cms_content cc
+		LEFT JOIN pmph_user pu ON cc.author_id =pu.id
+		LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
+		LEFT JOIN material m ON m.id = cc.material_id
+    		left join material_org mo on mo.material_id=m.id
+		left join writer_user wu on wu.org_id=mo.org_id
+		WHERE
+		cc.is_deleted = 0
+		AND
+		cc.category_id=3
+		AND cc.auth_status =2
+		AND cc.is_published =1
+    	and ((wu.id=#{userid} and m.is_public=0)or m.is_public!=0 or cc.is_material_entry = 0  )
+    		
+ORDER BY
+		<if test="order == 1">
+			cc.is_promote desc,cc.sort_promote,
+			cc.is_hot DESC,cc.sort_hot,
+		    cc.auth_date DESC
+		</if>
+		<if test="order == 2">
+			cc.auth_date DESC
+		</if>
+		<if test="order == 3">
+			cc.is_hot DESC,cc.sort_hot
+		</if>
+		LIMIT #{start},#{pageSize} -->
 	</select>
 </mapper>

@@ -3,7 +3,7 @@
 <mapper namespace="com.bc.pmpheep.back.commuser.userinfo.dao.UserInfoDao">
     <!-- 根据ID查询作家表 -->
     <select id="queryWriter" parameterType="java.util.Map" resultType="java.util.Map">
-       select * from writer_user where id=#{id}
+       select w.*,o.org_name from writer_user w LEFT JOIN org o on w.org_id=o.id where w.id=#{id}
     </select>
     
     <!-- 根据ID编辑普通员工个人资料 -->
@@ -19,12 +19,13 @@
         postcode=#{postcode},
         email=#{email},
         telephone=#{telephone},
-        org_id=#{org_id},
+       <!--  org_id=#{org_id}, -->
         position=#{position},
         address=#{address},
         note=#{note},
         signature=#{signature},
-        workplace=#{workplace}
+        workplace=#{workplace},
+        avatar=#{avatar}
         where id=#{id}
     </update>
     

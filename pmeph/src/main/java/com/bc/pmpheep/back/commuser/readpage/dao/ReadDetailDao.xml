@@ -11,6 +11,12 @@
 	      from book t 
 	      left join book_detail b  on t.id=b.book_id where t.id=#{id}		 
 	</select>
+	
+	<!-- 查询视频 -->
+	<select id="queryVideo" parameterType="java.util.Map" resultMap="readdetailmMap">
+	    select * from book_vedio where book_id=#{book_id} limit 0,3
+	</select>
+	
 	<!-- 根据书籍ID查询书籍评论信息 -->
 	<select id="queryComment" parameterType="java.util.Map" resultType="java.util.Map">
 	   select 
@@ -18,14 +24,17 @@
 	     t.gmt_create,
 	     t.score,
 	     b.realname,
+	     b.nickname,
 	     b.avatar
 	     from book_user_comment t 
 	     left join book u on t.book_id=u.id
 	     left join writer_user b on b.id=t.writer_id where u.id=#{id} and t.is_long=0
-	     and is_auth='1' and is_deleted='0'
+	     and t.is_auth='1' and t.is_deleted='0'
+	     order by t.gmt_create desc
 	     <if test="start >= 0">
-	        limit #{start},2
+	        limit #{start},3
 	     </if> 
+	     
 	</select>
 	<!-- 查询一共有多少条数据 -->
 	<select id="querySize" parameterType="java.util.Map" resultType="int">
@@ -149,23 +158,38 @@
 	    );
 	</insert>
 	<!-- 新增图书长评 -->
-	<insert id="insertlong" parameterType="java.util.Map">
+	<insert id="insertlong" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="table_trendst_id">
 	     insert into book_user_comment(
 	     book_id,
 	     writer_id,
 	     is_long,
 	     score,
 	     content,
-	     title
+	     title,
+	     is_self_rating
 	     )values(
 	     #{book_id},
 	     #{writer_id},
 	     #{is_long},
 	     #{score},
 	     #{content},
-	     #{title}
+	     #{title},
+	     #{is_self_rating}
+	     
+	     
 	     );   
 	</insert>
+	
+	<select id="queryEditor" parameterType="java.util.Map" resultType="Map">
+		select 
+		 *
+	     from 
+	     book_editor be
+	     where book_id = #{book_id}
+	     group by book_id
+	</select>
+	
+	
 	<!-- 查询登录人是否写过长评 -->
 	<select id="queryLoginLong" parameterType="java.util.Map" resultType="java.util.Map">
 	    select * from book_user_comment where writer_id=#{writer_id} and book_id=#{book_id} and is_long=1
@@ -181,10 +205,13 @@
 	     b.avatar
 	     from book_user_comment t 
 	     left join writer_user b
-	     on t.writer_id=b.id where t.book_id=#{book_id} and t.is_long =1 and is_hide=0
+	     on t.writer_id=b.id 
+	     where t.book_id=#{book_id} and t.is_long =1 and is_hide=0 and t.is_auth = 1
+	     order by t.gmt_create desc
 	     <if test="start >= 0">
-	        limit #{start},2
+	        limit #{start},3
 	     </if> 
+	    
 	</select>
 	<!-- 根据ID增加点击数 -->
 	<update id="changeClicks" parameterType="java.util.Map">

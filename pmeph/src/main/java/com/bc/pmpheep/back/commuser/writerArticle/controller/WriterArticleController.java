@@ -2,6 +2,7 @@ package com.bc.pmpheep.back.commuser.writerArticle.controller;
 
 import java.math.BigInteger;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,16 +23,22 @@ import com.bc.pmpheep.back.commuser.writerArticle.service.WriterArticleServiceIm
 import com.bc.pmpheep.back.uncertainfieldcom.bean.CmsCategoryConfig;
 import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.general.pojo.Message;
+import com.bc.pmpheep.general.service.ContentService;
 import com.bc.pmpheep.general.service.FileService;
 import com.bc.pmpheep.general.service.MessageService;
+import com.bc.pmpheep.general.service.SensitiveService;
+import com.mongodb.gridfs.GridFSDBFile;
 @RequestMapping("/writerArticle")
 @Controller
 public class WriterArticleController extends BaseController{
 	@Autowired
-	MessageService mssageService;
+	ContentService contentService;
 	@Autowired
     @Qualifier("com.bc.pmpheep.general.service.FileService")
     FileService fileService;
+	@Autowired
+	@Qualifier("com.bc.pmpheep.general.service.SensitiveService")
+	SensitiveService sensitiveService;
 	
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.writerArticle.service.WriterArticleServiceImpl")
@@ -77,8 +84,10 @@ public class WriterArticleController extends BaseController{
 		}
 		
 		try {
-			String UEContent = mssageService.get(map2.get("mid").toString()).getContent();
+			String UEContent = contentService.get(map2.get("mid").toString()).getContent();
 			map2.put("UEContent", map2==null?"":UEContent);
+			GridFSDBFile cover = fileService.get(map2.get("cover").toString());
+			map2.put("coverName", map2==null?"":cover.getFilename());
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -94,6 +103,7 @@ public class WriterArticleController extends BaseController{
 	public Map<String,Object> writeArticle(HttpServletRequest request){
 		String titleValue = request.getParameter("titleValue");
 		String UEContent = request.getParameter("UEContent");
+		String cover = request.getParameter("image");
 		String btnType = request.getParameter("btnType");
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		String flag = "0";
@@ -114,6 +124,13 @@ public class WriterArticleController extends BaseController{
 			resultMap.put("UEContent",UEContent);
 			return resultMap;
 		}
+		if (sensitiveService.confirmSensitive(titleValue) || sensitiveService.confirmSensitive(UEContent)){
+			List<String> sensitives = sensitiveService.getSensitives(titleValue, UEContent);
+			resultMap.put("flag", "4");
+			resultMap.put("value", sensitives);
+			resultMap.put("UEContent", sensitiveService.delHTMLTag(UEContent));
+			return resultMap;
+		}
 		//List list= new ArrayList();
 		try {
 			    int is_staging = "0".equals(btnType)?0:1;  //是否暂存  1 暂存  0不暂存 提交
@@ -121,6 +138,7 @@ public class WriterArticleController extends BaseController{
 				map.put("parent_id", 0); //上级id
 				map.put("category_id",cmsCategoryConfig.getId("医学随笔")); //内容类型 >0 非评论
 				map.put("title",titleValue); //内容标题  
+				map.put("cover",cover); //封面mdb 的id
 				map.put("author_type",2); //作者类型
 				map.put("author_id",uid); //作者id
 				map.put("is_staging",is_staging); //是否暂存
@@ -152,12 +170,24 @@ public class WriterArticleController extends BaseController{
 	public Map<String,Object> updateIsStaging(HttpServletRequest request){
 		String titleValue = request.getParameter("titleValue");
 		String UEContent = request.getParameter("UEContent");
+		String cover = request.getParameter("image");
+		UEContent = UEContent.replaceAll("\r\n", "");
+		
+		
 		String msg_id = request.getParameter("msg_id");
 		String btnType = request.getParameter("btnType");
 		String atrticle_id = request.getParameter("atrticle_id");
 		
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		String  flag="0";
+		if (sensitiveService.confirmSensitive(titleValue) || sensitiveService.confirmSensitive(UEContent)){
+			flag = "4";
+			List<String> sensitives = sensitiveService.getSensitives(titleValue, UEContent);
+			resultMap.put("flag", flag);
+			resultMap.put("value", sensitives);
+			resultMap.put("UEContent", sensitiveService.delHTMLTag(UEContent));
+			return resultMap;
+		}
 		Map<String, Object> user = this.getUserInfo();
 		BigInteger uid = (BigInteger) user.get("id");//用户的id
 		try {
@@ -168,6 +198,7 @@ public class WriterArticleController extends BaseController{
 			map.put("parent_id", 0); //上级id
 			map.put("category_id",cmsCategoryConfig.getId("医学随笔")); //内容类型 >0 非评论
 			map.put("title",titleValue); //内容标题  
+			map.put("cover",cover); //封面mdb 的id
 			map.put("author_type",2); //作者类型
 			map.put("author_id",uid); //作者id
 			map.put("path",0); //根路径
@@ -216,5 +247,7 @@ public class WriterArticleController extends BaseController{
 		resultMap.put("flag", flag);
 		return resultMap;
 	}
+	
+	
 
 }

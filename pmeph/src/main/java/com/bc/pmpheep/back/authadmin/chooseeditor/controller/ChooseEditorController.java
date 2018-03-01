@@ -43,10 +43,10 @@ public class ChooseEditorController extends BaseController {
 	 * 跳转到第一主编选择编委界面
 	 */
 	@RequestMapping("toPage")
-	public ModelAndView toPage(/*@RequestParam(value="textBookId",required=true)String textBookId,*/ HttpServletRequest request){
+	public ModelAndView toPage(@RequestParam(value="textBookId",required=true)String textBookId, HttpServletRequest request){
 		ModelAndView mv = new ModelAndView();
-		String textBookId = request.getParameter("textBookId");
-		textBookId = "3141";
+		/*String textBookId = request.getParameter("textBookId");*/
+		//textBookId = "3141";
 		
 		Map<String, Object> user = getUserInfo();
 		BigInteger logUserId=(BigInteger) user.get("id");
@@ -55,47 +55,91 @@ public class ChooseEditorController extends BaseController {
 		Map<String, Object> textBook = chooseEditorService.queryTextBookById(textBookId);
 		List<Map<String, Object>> OrgList = chooseEditorService.getOrgList();
 		String textBookName = (String) textBook.get("textbook_name");
-		Boolean is_list_selected = (Boolean) textBook.get("is_list_selected");
-		String tag ="editor";
+		Boolean is_locked = (Boolean) textBook.get("is_locked");
+		Boolean is_force_end = (Boolean) textBook.get("is_force_end");
+		Boolean is_digital_editor_optional = (Boolean) textBook.get("is_digital_editor_optional");
+		/*String tag ="editor";
 		String selectedIds = getTempSelectedIds(textBookId, logUserId,tag);
 		tag ="numEditor";
-		String selectedNumIds = getTempSelectedIds(textBookId, logUserId,tag);
+		String selectedNumIds = getTempSelectedIds(textBookId, logUserId,tag);*/
 		
-		mv.addObject("selectedIds", selectedIds);
-		mv.addObject("selectedNumIds", selectedNumIds);
+		Map<String, Object> selectMap = getTempSelectedIds(textBookId, logUserId);
+		
+		Boolean isFirstEditorLogIn = chooseEditorService.isFirstEditorLogIn(logUserId,textBookId);
+		
+		mv.addObject("isFirstEditorLogIn", isFirstEditorLogIn);
+		mv.addObject("selectedIds", selectMap.get("selectedIds"));
+		mv.addObject("selectedNumIds", selectMap.get("selectedNumIds"));
 		mv.addObject("logUserName",logUserName);
+		mv.addObject("planning_editor",textBook.get("realname")!=null?textBook.get("realname").toString():"待分配");
 		mv.addObject("textBookName",textBookName);
 		mv.addObject("OrgList",OrgList);
 		mv.addObject("textBookId",textBookId);
-		mv.addObject("is_list_selected",is_list_selected);
+		mv.addObject("is_locked",is_locked);
+		mv.addObject("is_force_end",is_force_end);
+		mv.addObject("is_digital_editor_optional",is_digital_editor_optional);
 		mv.setViewName("authadmin/chooseeditor/chooseeditor");
 		return mv;
 	}
 
 	/**
-	 * 通过输入 查询当前职务申报暂存表 中已选为编委的申报 所对应的正式申报表的id数组字符串
+	 * 通过输入 查询当前职务申报暂存表 中已选为编委的申报 所对应的正式申报表的id数组字符串 
+	 * 注：用于回填被选中的申报，必须不带额外的查询条件（姓名 机构） 查出该用户该书籍的所有申报 
 	 * @param textBookId
 	 * @param logUserId
 	 * @return
 	 */
-	private String getTempSelectedIds(String textBookId, BigInteger logUserId,String tag) {
+	private Map<String,Object> getTempSelectedIds(String textBookId, BigInteger logUserId) {
 		//查询条件封装入pageParameter的parameter
 		Map<String, Object> paraMap = new HashMap<String, Object>();
+		Boolean isFirstEditorLogIn = chooseEditorService.isFirstEditorLogIn(logUserId,textBookId);
 		paraMap.put("textBookId", textBookId);
 		paraMap.put("logUserId", logUserId);
+		paraMap.put("isFirstEditorLogIn", isFirstEditorLogIn);
+		
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<Map<String,Object>>(0,10);
 		pageParameter.setParameter(paraMap);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		String selectedIds = "";
-		if(tag.equals("editor")){
+		String selectedNumIds = "";
+
+		//查询所有页的编委
+		List<Map<String, Object>> total_List_map = chooseEditorService.queryEditorToBeCount(pageParameter);
+		
+		//将暂存表中已选中的初始化入selectedIds
+		
+		for (Map<String, Object> m : total_List_map) {
+			if ("1".equals(""+m.get("chosen_position"))||"9".equals(""+m.get("chosen_position"))) {
+				selectedIds += ("'"+ m.get("dec_position_id") + "',");
+			}
+			if (Integer.parseInt(m.get("chosen_position")==null?"0":m.get("chosen_position").toString())>=8) {
+				selectedNumIds += ("'"+ m.get("dec_position_id") + "',");
+			}
+			
+		}
+		if (selectedIds.length()>0) {
+			selectedIds = selectedIds.substring(0,selectedIds.length()-1);
+		}
+		if (selectedNumIds.length()>0) {
+			selectedNumIds = selectedNumIds.substring(0,selectedNumIds.length()-1);
+		}
+		selectedIds = "["+selectedIds+"]";
+		selectedNumIds = "["+selectedNumIds+"]";
+	
+		resultMap.put("selectedIds", selectedIds);
+		resultMap.put("selectedNumIds", selectedNumIds);
+		
+		/*if(tag.equals("editor")){
 			//查询所有页的编委
 			List<Map<String, Object>> total_List_map = chooseEditorService.queryEditorToBeCount(pageParameter);
 			
 			//将暂存表中已选中的初始化入selectedIds
 			
 			for (Map<String, Object> m : total_List_map) {
-				if ("3".equals(""+m.get("chosen_position"))||"9".equals(""+m.get("chosen_position"))) {
+				if ("1".equals(""+m.get("chosen_position"))||"9".equals(""+m.get("chosen_position"))) {
 					selectedIds += ("'"+ m.get("dec_position_id") + "',");
 				}
+				
 			}
 			if (selectedIds.length()>0) {
 				selectedIds = selectedIds.substring(0,selectedIds.length()-1);
@@ -108,6 +152,7 @@ public class ChooseEditorController extends BaseController {
 			//将暂存表中已选中的初始化入selectedIds
 			for (Map<String, Object> m : total_List_map) {
 				if ("8".equals(""+m.get("chosen_position"))||"9".equals(""+m.get("chosen_position"))) {
+				if(Integer.parseInt("0"+m.get("chosen_position"))>=8){
 					selectedIds += ("'"+ m.get("dec_position_id") + "',");
 				}
 			}
@@ -115,9 +160,9 @@ public class ChooseEditorController extends BaseController {
 				selectedIds = selectedIds.substring(0,selectedIds.length()-1);
 			}
 			selectedIds = "["+selectedIds+"]";
-		}
+		}*/
 		
-		return selectedIds;
+		return resultMap;
 	}
 	
 	/**
@@ -133,6 +178,9 @@ public class ChooseEditorController extends BaseController {
 		String queryName = request.getParameter("queryName");
 		String queryOrg = request.getParameter("queryOrg");
 		String textBookId = request.getParameter("textBookId");
+		String isFirstEditorLogIn = request.getParameter("isFirstEditorLogIn");
+		String is_digital_editor_optional = request.getParameter("is_digital_editor_optional");
+		
 		
 		//查询条件封装入pageParameter的parameter
 		Map<String, Object> paraMap = new HashMap<String, Object>();
@@ -140,6 +188,7 @@ public class ChooseEditorController extends BaseController {
 		paraMap.put("queryName", queryName);
 		paraMap.put("queryOrg", queryOrg);
 		paraMap.put("logUserId", logUserId);
+		paraMap.put("isFirstEditorLogIn", isFirstEditorLogIn);
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<Map<String,Object>>(pageNum,pageSize);
 		pageParameter.setParameter(paraMap);
 		
@@ -155,7 +204,11 @@ public class ChooseEditorController extends BaseController {
 		Map<String, Object> vm_map = new HashMap<String, Object>();
 		vm_map.put("List_map", List_map);
 		vm_map.put("startNum", pageParameter.getStart()+1);
-		//vm_map.put("contextpath", contextpath);
+		vm_map.put("isFirstEditorLogIn", isFirstEditorLogIn);
+		vm_map.put("is_digital_editor_optional", is_digital_editor_optional);
+		
+		String contextpath = request.getContextPath()+"/";
+		vm_map.put("contextpath", contextpath);
 		String html ="";
 		String vm = "/authadmin/chooseeditor/chooseeditor.vm";
 		html = templateService.mergeTemplateIntoString(vm, vm_map);
@@ -194,12 +247,14 @@ public class ChooseEditorController extends BaseController {
 		Map<String,Object> resultMap= new HashMap<String,Object>();
 		
 		resultMap = chooseEditorService.tempSave(paraMap);
-		String tag = "editor";
+		/*String tag = "editor";
 		String result_selectedIds = getTempSelectedIds(textBookId, logUserId,tag);
 		tag="numEditor";
-		String result_selectedIdsNum = getTempSelectedIds(textBookId, logUserId,tag);
-		resultMap.put("selectedIds", result_selectedIds);
-		resultMap.put("selectedNumIds", result_selectedIdsNum);
+		String result_selectedIdsNum = getTempSelectedIds(textBookId, logUserId,tag);*/
+		Map<String, Object> selectMap = getTempSelectedIds(textBookId, logUserId);
+		/*resultMap.put("selectedIds", result_selectedIds);
+		resultMap.put("selectedNumIds", result_selectedIdsNum);*/
+		resultMap.putAll(selectMap);
 		
 		return resultMap;
 	}

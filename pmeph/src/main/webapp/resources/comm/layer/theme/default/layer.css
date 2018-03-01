@@ -32,7 +32,7 @@ html #layuicss-layer {
     background-color: #fff;
     -webkit-background-clip: content;
     border-radius: 2px;
-    box-shadow: 1px 1px 50px rgba(0, 0, 0, .3)
+/*    box-shadow: 1px 1px 50px rgba(0, 0, 0, .3)*/
 }
 
 .layui-layer-close {

@@ -3,28 +3,31 @@
 
 	<tr>
 	    <td class="">$!ColNum</td>
-	    <td class=""><a href="$!{contextpath}personalhomepage/tohomepageone.action?userId=$!{c.user_id}"  target="_blank">$!{c.realname}</a></td>
+	    <td class=""><a href="$!{contextpath}personalhomepage/tohomepage.action?userId=$!{c.user_id}"  target="_blank">$!{c.realname}</a></td>
 	    #if($!{c.sex} == 1)
 	    	<td class="">男</td>
 	    #elseif($!{c.sex} == 2)
 	   		 <td class="">女</td>
 	    #else
-	    	<td class="">未填写</td>
+	    	<td class="">保密</td>
 	    #end
 	    <td class="">$!{c.work_org_name}</td>
 	    <td class="">$!{c.dec_org_name}</td>
 	    <td class="">$!{c.position}</td>
 	    <td class="">$!{c.title}</td>
-	    #if($!{c.is_list_selected} == 1 || $!{c.is_list_selected} == true )
-	    	<td class=""><input class="check editor" value="$!{c.dec_position_id}" type="checkbox" disabled="disabled"></td>
+	    #if($!{c.is_locked} == true ||$!{c.is_force_end} == true || $!{isFirstEditorLogIn} == "false" || $!{c.editorAvaliable} == 0 )
+	    	<td class=""><input class="check editor" value="$!{c.dec_position_id}" type="checkbox" disabled="disabled" #if($!{c.editorAvaliable} == 0) title="已被选为主编或副主编，不能再参与编委遴选。" #end></td>
 	    #else
 	    	<td class=""><input class="check editor" value="$!{c.dec_position_id}" type="checkbox"></td>
 	    #end
-	    #if($!{c.is_list_selected} == 1 || $!{c.is_list_selected} == true )
-	    	<td class=""><input class="check numEditor" value="$!{c.dec_position_id}" type="checkbox" disabled="disabled"></td>
-	    #else
-	    	<td class=""><input class="check numEditor" value="$!{c.dec_position_id}" type="checkbox"></td>
-	    #end
+	    
+	    #if($!{is_digital_editor_optional}=="true")
+		    #if($!{c.is_locked} == true ||$!{c.is_force_end} == true|| $!{isFirstEditorLogIn} == "false")
+		    	<td class=""><input class="check numEditor" value="$!{c.dec_position_id}" type="checkbox" disabled="disabled"></td>
+		    #else
+		    	<td class=""><input class="check numEditor" value="$!{c.dec_position_id}" type="checkbox"></td>
+		    #end
+	    #end 
 	</tr>	
 	#set($ColNum = $ColNum + 1)
 			

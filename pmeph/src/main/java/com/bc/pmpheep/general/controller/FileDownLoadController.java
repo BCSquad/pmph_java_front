@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 
 /**
  * @Author: SuiXinYang
@@ -36,7 +37,7 @@ public class FileDownLoadController {
      * @param response 服务响应
      */
     @RequestMapping(value = "/file/download/{id}", method = RequestMethod.GET)
-    public void download(@PathVariable("id") String id, HttpServletResponse response) {
+    public void download(@PathVariable("id") String id, HttpServletResponse response) throws UnsupportedEncodingException {
 
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/force-download");
@@ -45,7 +46,7 @@ public class FileDownLoadController {
             logger.warn("未找到id为'{}'的文件", id);
             return;
         }
-        response.setHeader("Content-Disposition", "attachment;fileName=\" "+ file.getFilename()+"\"");
+        response.setHeader("Content-Disposition", "attachment;fileName=\" "+new String((file.getFilename()).getBytes("utf-8"), "ISO-8859-1") +"\"");
         try (OutputStream out = response.getOutputStream()) {
             file.writeTo(out);
             out.flush();

@@ -3,7 +3,10 @@ package com.bc.pmpheep.back.commuser.personalcenter.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.bc.pmpheep.back.commuser.personalcenter.bean.PersonalNewMessage;
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
 import com.bc.pmpheep.back.plugin.PageParameter;
 
 public interface PersonalDao {
@@ -142,13 +145,18 @@ public interface PersonalDao {
 
 	// 查询填空选项答案
 	public String getInpAnswers(Map<String, Object> map);
+	// 回显答案保存按钮判断是否消失
+	public Map<String, Object> btnSaveOrHidden(Map<String, Object> map);
+	
+	// 弹框回显短评内容
+		public Map<String, Object> shortComment(Map<String, Object> map);
 
 	/**
 	 * 生成动态
-	 * @param paraMap
+	 * @param writerUserTrendst
 	 * @return
 	 */
-	public int saveUserTrendst(Map<String, Object> paraMap);
+	public int saveUserTrendst(WriterUserTrendst writerUserTrendst);
 	
 	/**
 	 * 通过图书纠错表主键查询被纠错图书的第一主编id
@@ -174,6 +182,29 @@ public interface PersonalDao {
 	 * @return
 	 */
 	public Map<String, Object> queryUserById(String userId);
+	
+	
+	/**
+	 * 查询两人除拒绝（1）外最亲密的好友关系（0申请，2接收 取max）
+	 * @param userId
+	 * @param logUserId
+	 * @return
+	 */
+	public List<Map<String, Object>> queryOurFriendShip(@Param("userId")String userId,@Param("logUserId")String logUserId);
+	
+	/**
+	 * 删除旧动态 逻辑删除
+	 * @param writerUserTrendst
+	 * @return
+	 */
+	public int deleteUserTrendst(WriterUserTrendst writerUserTrendst);
+	
+	/**
+	 * 根据id查询申报情况
+	 * @param declaration_id
+	 * @return
+	 */
+	public Map<String, Object> queryDeclarationById(@Param("declaration_id")String declaration_id);
 	
 	
 }

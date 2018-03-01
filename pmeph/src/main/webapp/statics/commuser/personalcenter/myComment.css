@@ -59,14 +59,7 @@
 	height: 100%;
 
 }*/
-.headae img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    border: 10px solid white;
-    border-radius: 50%;
-}
+
 
 .content {
     background: white;
@@ -1014,7 +1007,7 @@
     margin: auto;
     margin-top: 4px;
     margin-bottom: 0px;
-    background-color: ff5722;
+    background-color: #ff5722;
     border-radius: 18px;
     line-height: 33px;
 }
@@ -1222,7 +1215,7 @@
 
 
 
-/*---------------------------ÎÒµÄÆÀÂÛ--------------------------------------------*/
+/*---------------------------ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½--------------------------------------------*/
 @CHARSET "UTF-8";
 
 .replytag_wrapper{
@@ -1313,6 +1306,7 @@
     margin-top: 40px;
     color:#0785d1;
     font-size: 18px;
+    cursor: pointer;
 }
 
 .bookC_right_name{
@@ -1361,13 +1355,13 @@
     height: 20px;
 }
 
-/* -----------ÆÀÂÛÕ¹¿ªÊÕËõÑùÊ½----------------------- */
+/* -----------ï¿½ï¿½ï¿½ï¿½Õ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½----------------------- */
 #container {  
-    margin: 10 auto;  
+    margin: 10px auto;
     border: 1px solid #3bb2d0;
     background-color: #F6F6F6;
     width: 740px;
-    margin-bottom: 5px;  
+    margin-bottom: 4px;  
 }  
   
 #wrap {  
@@ -1375,7 +1369,7 @@
     overflow: hidden;
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 10px;  
+    font-size: 14px;
 }  
   
 #read-more {  
@@ -1386,16 +1380,16 @@
   
 #read-more a {  
     padding-left: 20px;  
-    no-repeat 100% 50%;  
+    no-repeat: 100% 50%;
    /*  font-weight: bold;   */
     text-decoration: none;  
 }  
   
-#read-more a: hover {  
+#read-more a:hover {
     color: #000;  
 }
 
-/* -----------ÆÀÂÛµ¯³ö¿òÑùÊ½----------------------- */
+/* -----------ï¿½ï¿½ï¿½Ûµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½----------------------- */
 .bookmistake {
     height: 200px; 
     width: 600px;

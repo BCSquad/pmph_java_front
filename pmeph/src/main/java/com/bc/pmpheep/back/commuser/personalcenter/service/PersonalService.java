@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.bc.pmpheep.back.commuser.personalcenter.bean.PersonalNewMessage;
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
 import com.bc.pmpheep.back.plugin.PageParameter;
 
 public interface PersonalService {
@@ -143,7 +144,11 @@ public interface PersonalService {
 	public String getCheckAnswers(Map<String, Object> map);
 	//查询填空选项答案
 	public String getInpAnswers(Map<String, Object> map);
-
+	// 回显答案保存按钮判断是否消失
+	public Map<String, Object> btnSaveOrHidden(Map<String, Object> map);
+	
+	// 弹框回显短评内容
+	public Map<String, Object> shortComment(Map<String, Object> map);
 	/**
 	 * 个人中心动态 汇总后面所有页签对应信息的新增、审批的动态
 	 * @param pageParameter
@@ -160,11 +165,9 @@ public interface PersonalService {
 	
 	/**
 	 * 生成个人动态的方法
-	 * @param TrendstName 动态名称
-	 * @param tableId	  关联表主键
-	 * @param trendstType 动态类型：0生成，1通过，2未通过
+	 * @param writerUserTrendst
 	 */
-	public void saveUserTrendst(String TrendstName,String tableId,int trendstType,String writer_user_id);
+	public void saveUserTrendst(WriterUserTrendst writerUserTrendst);
 
 	/**
 	 * 伪删除我的纠错
@@ -189,6 +192,29 @@ public interface PersonalService {
 	 */
 	public Map<String, Object> queryUserById(String userId);
 
+	/**
+	 * 查询两人除拒绝（1）外最亲密的好友关系（0申请，2接收 取max）
+	 * @param userId
+	 * @param logUserId
+	 * @return
+	 */
+	public Map<String, Object> queryOurFriendShip(String userId,String logUserId);
+
+	/**
+	 * 逻辑删除动态
+	 * @param writerUserTrendst
+	 */
+	void deleteUserTrendst(WriterUserTrendst writerUserTrendst);
+
+	/**
+	 * 根据id查询教材申报
+	 * @param declaration_id
+	 * @return
+	 */
+	public Map<String, Object> queryDeclarationById(String declaration_id);
+
+
+	
 	
 	
 	

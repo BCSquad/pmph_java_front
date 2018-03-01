@@ -1,4 +1,3 @@
-
 function ChangeDiv(type){
     if(type=='commnions'){
         document.getElementById("commnions_top").setAttribute("class","clicked");
@@ -15,10 +14,27 @@ function ChangeDiv(type){
 
 }
 
-
+function showAllGroupMember(){
+	
+	$(".show_Allgroupmember").css({"display":"block"});
+	$("#show_All_Memeber").text("");
+}
 $(function(){
-	var webSocket = webSocket = new WebSocket("ws:120.76.221.250:11000/pmpheep/websocket?userType=" +2+"&userId="+$("#userId").val());
+    /*if(!WebSocket){
+	      console.error('浏览器不支持websocket')
+     };*/
+	var userId    = $("#userId").val(); 
+    var webSocket = undefined;
+    try {
+        if (WebSocket) {
+            webSocket = new WebSocket("ws://120.76.221.250:11000/pmpheep/websocket?userType=2&userId=" + userId);
+        }
+    } catch (e) {
+
+    }
+
 	//var webSocket = new WebSocket("ws:127.0.0.1:8036/pmpheep/websocket?userType=" +2+"&userId="+$("#userId").val());
+    if (webSocket) {
 	webSocket.onopen = function(event){
 	    console.log("连接成功");
 	    console.log(event);
@@ -33,7 +49,7 @@ $(function(){
 	};
 	//监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
     window.onbeforeunload = function(){
-        websocket.close();
+    	webSocket.close();
     };
 	webSocket.onmessage = function(event){
 	    //接受来自服务器的消息
@@ -51,6 +67,8 @@ $(function(){
 	    	loadNewGroupMsg(sender,data.senderName,data.senderIcon,data.content,data.time);
 	    }
 	}
+    }
+
 	//按钮发送消息
 	$("#sendMsg").click(function(){
 		sendSocktMsg();
@@ -62,18 +80,50 @@ $(function(){
 			window.message.warning("请键入消息");
 			return ;
 		}
+		if(content.length > 255){
+			window.message.error("发送失败:键入消息过长");
+			return ;
+		}
+        if (webSocket) {
 		webSocket.send("{senderId:"+$("#userId").val()+",senderType:"+2+",content:'"+content+"',groupId:"+$("#groupId").val()+",sendType:0}");
-		$("#msgContent").val(null);
+        }
+		$("#msgContent").val("");
 	}
 	
 	//回车发送消息
-	$("#msgContent").keypress(function (e){ 
+	$("#msgContent").keydown(function (event){ 
 		var code = event.keyCode; 
-		if (13 == code) { 
+		if (13 == code) { //回车
 			sendSocktMsg();
+		}else{
+			var content=$("#msgContent").val();
+			if(content && content.length > 255){
+				window.message.error("发送失败:键入消息过长");
+				$("#msgContent").val(content.substring(0,255));
+			}
 		} 
 	}); 
+	//粘贴
+    $(document).on("paste", "#msgContent", function () {
+    	var content=$("#msgContent").val();
+		if(content && content.length > 255){
+			window.message.error("发送失败:键入消息过长");
+			$("#msgContent").val(content.substring(0,255));
+		}
+    });
+    $(document).on("keyup input", "#msgContent",function (e) {
+    	var content=$("#msgContent").val();
+		if(content && content.length > 255){
+			window.message.error("发送失败:键入消息过长");
+			$("#msgContent").val(content.substring(0,255));
+		}
+    });
+	
+	
 	//-------------------------------
+    $("#filesgx_top").html('文件共享<span style="display: inline-block;position: absolute;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;' +
+        'line-height: 13px;padding: 3px 6px;border-radius: 50%;right: 0;top: 0">' + $("#fileTotal").html() + '</span>');
+    
 	var talkPagesize  = 5 ;
 	var talkPagenumber= 1  ;
 	var maxTime       = 0  ;
@@ -99,9 +149,10 @@ $(function(){
 		initFile();
 	});
 	//回车搜索文件
-	$("#fileName").keypress(function (e){ 
+	$("#fileName").keydown(function (event){ 
 		var code = event.keyCode; 
 		if (13 == code) { 
+			fileName = $("#fileName").val();
 			filePagenumber = 1  ;
 			$("#fileContent").html('');
 			initFile();
@@ -192,6 +243,10 @@ $(function(){
 	        	if(responsebean){
 	        		window.message.success("删除成功");
 		        	$("#item_"+id).remove();
+		        	var old = parseInt($("#fileTotal").html());
+		        	$("#fileTotal").html(old-1);
+			    	$("#filesgx_top").html('文件共享<span style="display: inline-block;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;'+
+			        		'line-height: 13px;padding: 3px 6px;border-radius: 50%;">'+(old-1)+'</span>');
 	        	}else{
 	        		window.message.error("删除失败");
 	        	}
@@ -216,6 +271,7 @@ $(function(){
 	
 	//初始化文件
 	function initFile(){
+		$("#fileMore").show();
 		var order =$("#order").val().split(':');
 		$.ajax({
 			type:'get',
@@ -366,6 +422,7 @@ $(function(){
                     "</div> ";
 		}
 		$(".iframe1").append(html);
+		$(".iframe1").scrollTop($($(".iframe1")[0]).height());
 	}
 	
 	//转换时间戳的方法
@@ -418,8 +475,6 @@ $(function(){
 		});
 	
 	
-	
-	
 	//文件上传方法
 	$("#scwj1").uploadFile({
 	    start: function () {
@@ -433,7 +488,8 @@ $(function(){
 					    groupId  : $("#groupId").val(),
 					    fileId   : fileId,
 					    fileSize : fileSize,
-					    fileName : fileName},// 你的form
+                    fileName: fileName
+                },// 你的form
 				async: false,
 				dataType:"json",
 			    success: function(msg) {
@@ -446,7 +502,13 @@ $(function(){
 						$("#fileContent").html('');
 						initFile();
 				    	//推送消息
+                        if (webSocket) {
 				    	webSocket.send("{senderId:"+userId+",senderType:"+0+",content:'\""+$("#"+userId+"_2").val()+"\"上传了文件"+"',groupId:"+$("#groupId").val()+",sendType:0}");
+                        }
+				    	var old = parseInt($("#fileTotal").html());
+				    	$("#fileTotal").html(old+1);
+				    	$("#filesgx_top").html('文件共享<span style="display: inline-block;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;'+
+				        		'line-height: 13px;padding: 3px 6px;border-radius: 50%;">'+(old+1)+'</span>');
 				    }else{
 				    	window.message.error("上传失败");
 				    }

@@ -22,7 +22,7 @@ $(function(){
 
 //评论展开收起样式
 $(function() {  
-    var slideHeight = 50; // px 定义折叠的最小高度  
+    var slideHeight = 40; // px 定义折叠的最小高度  
     var defHeight = $('#wrap').height();  
     if(defHeight >= slideHeight) {  
         $('#wrap').css('height', slideHeight + 'px');  
@@ -62,17 +62,25 @@ $(document).ready(function () {
 
 
 //点击显示评论弹窗
-function showup(id) {
-	 $.ajax({
+function showup(id,book_id,is_long) {
+	
+	if(is_long=='true'){
+		window.location.href=contextpath + 'readdetail/todetail.action?state=write&id='+book_id;
+	}else if(is_long=='false'){
+		$("#comm_id").val(id);
+		$.ajax({
 	        type: 'post',
-	        url: contextpath + 'personalhomepage/tologin.action',
+	        url: contextpath + 'personalhomepage/shortComment.action?uid='+id,
 	        async: false,
 	        dataType: 'json',
 	        success: function (json) {
-	        	 $("#bookmistake").show();
-	        	 $("#comm_id").val(id);
+	            	$("#content").html(json.content);
+	                $("#bookmistake").show();
+	          
 	        }
 	    });
+	}
+
 }
 
 //点击弹窗隐藏
@@ -81,8 +89,7 @@ function hideup() {
 }
 //弹出框修改提交
 function upd_comment() {
-	   
-	     if(!Empty(content)){//非空判断
+	     if(!Empty($("#content").val())){//非空判断
 	    	 var json = {
 	    			 	comm_id: $("#comm_id").val(),
 	    			 	score: score,
@@ -172,7 +179,10 @@ function DelMyComm(id) {
 }
 
 
-
+//点击图书标题进入详情页
+function cbook(id) { 
+    window.location.href = contextpath + 'readdetail/todetail.action?id=' + id;
+}
 
 
 

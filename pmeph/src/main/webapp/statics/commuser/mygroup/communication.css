@@ -51,6 +51,9 @@ a:active {color:yellow;}
 .span1{
     font-size: 24px;
     color: #333333;
+    display: inline-block;
+    width: 100%;
+    text-align: left;
 }
 .top_content2{
     margin:22px 0 24px 0;
@@ -199,7 +202,7 @@ a:active {color:yellow;}
     font-size: 14px;
 }
 .left_communions_files{
-    padding: 42px 0 7px 0;
+    padding: 42px 0 5px 0;
     width: 100%;
     margin: 0;
     border-bottom: 2px solid #489299;
@@ -245,6 +248,7 @@ a:active {color:yellow;}
     border: solid 1px #d5d5d5;
     margin: 20px 0 24px 0;
     padding-left: 15px;
+    padding-right:35px;
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -457,7 +461,7 @@ ul li img{
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
-	line-height: 16px;
+	line-height: 20px;
 	letter-spacing: 0px;
 	color: #489299;
 }
@@ -511,4 +515,7 @@ ul li img{
 }
 #order{
 	height:38px;
+}
+.show_Allgroupmember{
+	display:none;
 }

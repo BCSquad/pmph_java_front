@@ -3,6 +3,7 @@ package com.bc.pmpheep.back.commuser.group.controller;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -105,9 +106,14 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
         ModelAndView model = new ModelAndView();
         //加载更多
         List<GroupList> lst=groupService.groupList(0, pageSize, userId,"group_name") ;
+        String isover="no";
+        if(lst!=null&& lst.size()<pageSize){
+        	isover="yes";
+        }
         model.setViewName("commuser/mygroup/groupList");
         model.addObject("listgroup", lst);
         model.addObject("listSize", lst.size());
+        model.addObject("isover", isover);
         model.addObject("pageNumber", pageNumber);
         return model;
     }
@@ -298,16 +304,30 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
    
     
     @RequestMapping(value = "/download/{id}", method = RequestMethod.GET)
-    public void download(@PathVariable("id") String id,Long groupId,HttpServletResponse response) {
-
-        response.setCharacterEncoding("utf-8");
-        response.setContentType("application/force-download");
-        GridFSDBFile file = fileService.get(id);
-        if (null == file) {
+    public void download(@PathVariable("id") String id,Long groupId,HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException  {
+    	 GridFSDBFile file = fileService.get(id);
+         if (null == file) {
             logger.warn("未找到id为'{}'的文件", id);
             return;
-        }
-        response.setHeader("Content-Disposition", "attachment;fileName=\" "+ file.getFilename()+"\"");
+         }
+    	
+    	 String userAgent = request.getHeader("User-Agent");  
+         String oraFileName = file.getFilename();  
+         String formFileName=oraFileName;  
+             
+         
+         if (userAgent.contains("MSIE") || userAgent.contains("Trident")) {  
+        	// 针对IE或者以IE为内核的浏览器：  
+             formFileName = java.net.URLEncoder.encode(formFileName, "UTF-8");  
+         } else {  
+             // 非IE浏览器的处理：  
+             formFileName = new String(formFileName.getBytes("UTF-8"), "ISO-8859-1");  
+         }  
+         response.setHeader("Content-disposition",   String.format("attachment; filename=\"%s\"", formFileName));  
+         response.setCharacterEncoding("UTF-8");  
+       
+         response.setContentType("application/force-download");
+        
         try (OutputStream out = response.getOutputStream()) {
         	//更新文件次数
         	groupService.updateDownload(groupId,id);

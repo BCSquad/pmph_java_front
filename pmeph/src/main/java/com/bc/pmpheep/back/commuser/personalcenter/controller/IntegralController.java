@@ -59,6 +59,7 @@ public class IntegralController extends BaseController {
 		 Map<String, Object> usermap = this.getUserInfo();
     	Long userId = new Long(String.valueOf(usermap.get("id")));
         Map<String, Object> paraMap = new HashMap<String, Object>();
+        paraMap.put("condition", request.getParameter("condition"));
         paraMap.put("userId", userId);
 		List<Map<String, Object>> list = integralService.findPointList(paraMap);
 		return list;
@@ -79,6 +80,7 @@ public class IntegralController extends BaseController {
 		 Map<String, Object> usermap = this.getUserInfo();
 	    	Long userId = new Long(String.valueOf(usermap.get("id")));
 	        Map<String, Object> paraMap = new HashMap<String, Object>();
+	        paraMap.put("condition", request.getParameter("condition"));
 	        paraMap.put("userId", userId);
 		List<Map<String, Object>> list = integralService.findPointByMonth(paraMap);
 		return list;

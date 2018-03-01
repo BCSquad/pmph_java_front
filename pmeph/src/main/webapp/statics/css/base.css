@@ -82,6 +82,7 @@ body {
 }
 
 .head .search-input {
+    box-sizing: content-box;
     width: 295px;
     height: 34px;
     position: absolute;
@@ -238,21 +239,120 @@ body {
     display: none;
 }
 
+.head .help {
+    position: absolute;
+    top: 36px;
+    right: 0px;
+    /*width: 80px;*/
+    color: #414141;
+    vertical-align: middle;
+    line-height: 16px;
+    height: 16px;
+}
+
+.head .help .icon {
+    background: url("../image/a.png");
+    background-position: -53px -16px;
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.head .help .wtext {
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+    width: 60px;
+    vertical-align: top;
+}
+
+.head .writing {
+    position: absolute;
+    top: 36px;
+    right: 80px;
+    /*width: 80px;*/
+    color: #414141;
+    vertical-align: middle;
+    line-height: 16px;
+    height: 16px;
+    cursor: pointer;
+    margin-right: 10px;
+    border-right: 1px solid #e1e1e1;
+}
+
+.head .writing.logined {
+    right: 100px;
+    border-right:none;
+    top: 30px;
+}
+
+.head .writing .icon {
+    background: url("../image/a.png");
+    background-position: -16px -15px;
+    height: 16px;
+    width: 14px;
+    display: inline-block;
+    cursor: pointer;
+
+}
+
+.head .writing .wtext {
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+    width: 50px;
+    vertical-align: top;
+}
+
+.head .loginout {
+    position: absolute;
+    top: 36px;
+    right: 160px;
+    /*width: 80px;*/
+    color: #414141;
+    vertical-align: middle;
+    line-height: 16px;
+    height: 16px;
+    cursor: pointer;
+    margin-right: 10px;
+    border-right: 1px solid #e1e1e1;
+}
+
+.head .loginout .login {
+    width: 80px;
+    display: inline-block;
+    color: #ff0000;
+}
+
+.head .loginout .logout {
+    width: 70px;
+    display: inline-block;
+}
+
+.footer{
+    background: #F8F8F8;
+}
+
 .tail {
     padding-bottom: 30px;
+    width: 100%;
+    text-align: center;
 }
 
 .tail .about {
-    margin: 0 auto;
-    width: 400px;
-    height: 50px;
+    height: 40px;
+
 }
 
 .tail .about .item {
-    float: left;
-    width: 99px;
+    /*width: 99px;*/
+    padding: 0 5px;
+    color: #999999;
+    margin: auto;
+    text-decoration:none;
     text-align: center;
-    border-left: 1px solid #9A9691;
+    /*border-left: 1px solid #9A9691;*/
 }
 
 .tail .copyright {
@@ -333,6 +433,7 @@ body {
     -khtml-opacity: 0;
     opacity: 0;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
 .upload-loading {
@@ -341,7 +442,7 @@ body {
     height: 100%;
     right: 0px;
     top: 0;
-    z-index: 11;
+    z-index: 999;
 
 }
 
@@ -394,8 +495,7 @@ td {
     top: 0;
 }
 
-
-.float-menu .item{
+.float-menu .item {
     display: block;
     width: 44px;
     height: 44px;
@@ -405,20 +505,25 @@ td {
     border-radius: 4px;
     text-align: center;
     padding: 4px;
-    text-decoration:none;
+    text-decoration: none;
     line-height: 22px;
     cursor: pointer;
     font-size: 15px;
 }
-.float-menu .item.orange{
+
+.float-menu .item.orange {
     background: #FF9C43;
 }
 
-.float-menu .item.blue{
+.float-menu .item.blue {
     background: #009EA3;
 }
 
-.float-menu .item.black{
+.float-menu .item.black {
     line-height: 44px;
     background: #383C48;
+}
+
+.input-error {
+    border: 1px solid red;
 }

@@ -5,7 +5,7 @@
 	<!-- 查询待办事项列表 -->
 	<select id="selectScheduleList" parameterType="PageParameter" resultType="java.util.Map">
 		SELECT * FROM(
-		SELECT d.realname AS NAME,d.gmt_create AS TIME,m.`material_name` AS CONTENT,d.material_id as auditId,"A" as TYPE,w.avatar
+		SELECT d.id as ID,d.realname AS NAME,d.gmt_create AS TIME,m.`material_name` AS CONTENT,d.material_id as auditId,"A" as TYPE,w.avatar
 		FROM declaration d 
 		LEFT JOIN material m
 		ON d.`material_id` = m.`id`
@@ -22,7 +22,7 @@
 		ORDER BY d.gmt_create DESC) t1
 		UNION 
 		SELECT * FROM (
-		SELECT w1.username,w.gmt_create,"教师资格认证",w1.id,"B",w1.avatar 
+		SELECT w1.org_id,w1.username,w.gmt_create,"教师资格认证",w1.id,"B",w1.avatar 
 		FROM writer_user_certification w
 		LEFT JOIN org_user u1
 		ON w.org_id = u1.org_id
@@ -35,6 +35,7 @@
 			<if test="null!=parameter.year">AND w.gmt_create >= #{parameter.year}</if>
 		</trim>
 		ORDER BY w.gmt_create DESC) t2
+		ORDER BY TIME DESC
 		limit #{start},#{pageSize}
 	</select>
 	<!-- 查询待办事项条数 -->
@@ -82,7 +83,7 @@
 		left join writer_user w
 		on d.user_id = w.id
 		WHERE	u.`id` = #{parameter.userId} AND d.online_progress IN(2,3)
-		ORDER BY d.gmt_create DESC) t1
+		) t1
 		UNION 
 		SELECT * FROM (
 		SELECT w1.realname,w.gmt_create,"教师资格认证",w1.id,"B",w1.gmt_update,w.progress,w1.avatar 
@@ -92,7 +93,8 @@
 		LEFT JOIN writer_user w1		
 		ON w1.id= w.user_id 
 		WHERE u1.`id` = #{parameter.userId} AND w.progress IN(2,3)
-		ORDER BY w.gmt_create DESC) t2
+		) t2
+		ORDER BY TIME DESC
 		limit #{start},#{pageSize}
 	</select>
 	<!-- 查询已办事项条数 -->

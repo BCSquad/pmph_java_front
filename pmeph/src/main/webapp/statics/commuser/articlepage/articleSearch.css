@@ -120,6 +120,8 @@
     font-stretch: normal;
     letter-spacing: 0px;
     color: #333333;
+    overflow: hidden;
+    text-overflow:ellipsis;
 }
 
 .nameDiv {
@@ -203,7 +205,7 @@
     margin-right: 15px;
 }
 
-.handPicture {
+.nohandPicture {
     background-image: url("../../image/css_sprites.png");;
     background-position: -418px -194px;
     background-repeat: no-repeat;
@@ -213,7 +215,7 @@
     cursor: pointer;
 }
 
-.nohandPicture {
+.handPicture {
     background-image: url("../../image/css_sprites.png");;
     background-position: -418px -218px;
     background-repeat: no-repeat;
@@ -343,4 +345,9 @@
     height: 50%;
     float: left;
     padding-left: 20px;
+}
+
+a {
+    text-decoration: blink;
+    color: #333333;
 }

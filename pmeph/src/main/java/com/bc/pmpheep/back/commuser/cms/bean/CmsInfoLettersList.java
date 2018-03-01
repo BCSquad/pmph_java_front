@@ -21,6 +21,14 @@ import org.apache.ibatis.type.Alias;
  * @审核人 ：
  *
  */
+/**
+ * @author 
+ *@Title: 
+ * @Description: 
+ * @param 
+ * @return 
+ * @throws
+ */
 @Alias("CmsInfoLettersList")
 public class CmsInfoLettersList {
 	/**
@@ -63,6 +71,10 @@ public class CmsInfoLettersList {
      * 创建时间
      */
     private Timestamp gmtCreate;
+    /**
+     * 内容id
+     */
+    private String mid;
     
 	public Timestamp getGmtCreate() {
 		return gmtCreate;
@@ -144,4 +156,12 @@ public class CmsInfoLettersList {
 		this.authDate = authDate;
 	}
 
+	public String getMid() {
+		return mid;
+	}
+
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
+    
 }

@@ -8,7 +8,7 @@
         var contextpath = '${pageContext.request.contextPath}/';
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-    <title>Insert title here</title>
+    <title>发送消息</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
   <link rel="stylesheet" href="${ctx}/statics/authadmin/message/inforelease.css" type="text/css">
@@ -55,10 +55,10 @@
             <div class="on-line"></div>
         </div>
     </a>
-    </div>
+    </div><!-- onsubmit="return getValue();"  -->
     <form class="message-list" id="theForm"
           action="${pageContext.request.contextPath}/authSendMessage/sendMessage.action" method="post"
-          onsubmit="return getValue();" enctype="multipart/form-data">
+          enctype="multipart/form-data">
         <div class="title">
             <span class="span1" style="margin-right: 25px;"><span class="span2">*</span>标题</span>
             <input type="text" name="titleValue" id="TitleValue" placeholder="请输入消息标题 30字以内"
@@ -128,7 +128,7 @@
                     <select   class="st_2"  id="select-search-condition" >
                     	<option  value="" >请选择</option>
                     	<c:forEach items="${listMenu}" var="item">
-								<option value="${item.textbook_name}">${item.textbook_name}</option>
+								<option value="${item.material_name}">${item.material_name}</option>
 							</c:forEach>
                     </select>
                 </div>

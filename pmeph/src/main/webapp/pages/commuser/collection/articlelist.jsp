@@ -33,21 +33,22 @@ String basePath =path+"/";
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
    <div class="content-wrapper">
-        <div class="area1"><a href="personalhomepage/tohomepage.action">个人中心</a> &gt; <a href="javascript:;">我的收藏</a> &gt; <a href="articlecollection/toarticlecollection.action">文章收藏夹</a> &gt; ${fmap.favorite_name }</div>
-    <div class="area2">
-        <span class="name" >${fmap.favorite_name }</span>
-         <input type="hidden" id="favoriteId" value="${fmap.id }"/>
-        <span class="del" onclick="delFavorite('${fmap.id }')">删除收藏夹</span>
+    <div class="area1"><a href="personalhomepage/tohomepage.action">个人中心</a> &gt; <a href="javascript:;">我的收藏</a></div>
+    <div class="area2" style="background-color: #f8f8f8;height:50px">
+        <a href="bookcollection/tobookcollectionlist.action" ><span class="name" >书籍收藏夹</span></a>
+        <span class="name selectdiv" style="margin-left: 20px">文章收藏夹</span>
+         <%-- <input type="hidden" id="favoriteId" value="${fmap.id }"/>
+         <span class="del" onclick="delFavorite('${fmap.id }')">删除收藏夹</span>  --%>
     </div>
     <c:forEach items="${articlelist.rows }" var="article"> 
     <div class="collection" >
         <div class="title">
                <div class="title-text">
-                   <a href="articledetail/toPage.action?wid=${article.cid }"> ${article.title }</a>
+                   <a href="${article.skip}"> ${article.title }</a>
                </div>
                <input type="hidden" id="cms${article.cid }" value="${article.cid }"/>
                <div class="tm">
-                   <span class="author-icon" style="background-image: url(${article.avatar=='DEFAULT'?'statics/image/deficon.png':'/file/download/'+article.avatar+'.action'}); ">
+                   <span class="author-icon" ><img  src="${article.avatar}" style="width:25px;height:25px;border-radius: 50%;"/>
                    </span>
                    <span class="name">${article.realname }</span>
                    <span class="time"><fmt:formatDate  value="${article.gmt_create}" pattern="yyyy.MM.dd"/></span>

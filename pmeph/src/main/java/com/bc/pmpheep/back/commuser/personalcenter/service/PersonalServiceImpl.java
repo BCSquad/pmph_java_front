@@ -1,21 +1,43 @@
 package com.bc.pmpheep.back.commuser.personalcenter.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.apache.ibatis.javassist.expr.Instanceof;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService;
 import com.bc.pmpheep.back.commuser.personalcenter.bean.PersonalNewMessage;
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
 import com.bc.pmpheep.back.commuser.personalcenter.dao.PersonalDao;
 import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.general.pojo.Content;
+import com.bc.pmpheep.general.service.ContentService;
+import com.bc.pmpheep.general.service.FileService;
+import com.mongodb.gridfs.GridFSDBFile;
 
 @Service("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
 public class PersonalServiceImpl implements PersonalService {
 
 	@Autowired
 	private PersonalDao personaldao;
+	
+	@Autowired
+	private ContentService contentService;
+	
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService")
+	private ArticleSearchService articleSearchService;
+	
+	@Autowired
+    @Qualifier("com.bc.pmpheep.general.service.FileService")
+    FileService fileService;
 
 	@Override
 	public List<PersonalNewMessage> queryMyCol(Map<String, Object> permap) {
@@ -74,6 +96,29 @@ public class PersonalServiceImpl implements PersonalService {
 			PageParameter<Map<String, Object>> pageParameter) {
 		// 查询我的教材申报最新信息
 		List<Map<String, Object>> list7 = personaldao.ListAllBookJoin(pageParameter);
+		
+		for (Map<String, Object> m : list7) {
+			List<Map<String,Object>> textbook_list = new ArrayList<Map<String,Object>>();
+			String textbook_list_str = (String) m.get("textbook_list_str");
+			String[] textbook_arr = textbook_list_str.split("_,_");
+			if (!"".equals(textbook_list_str)) {
+				for (int i = 0; i < textbook_arr.length; i++) {
+					Map<String,Object> textbook = new HashMap<String,Object>();
+					String tb = textbook_arr[i];
+					textbook.put("id", tb.split("_/_")[0]);
+					textbook.put("textbook_name", tb.split("_/_")[1]);
+					textbook.put("is_locked","1".equals(tb.split("_/_")[2]));
+					textbook_list.add(textbook);
+				}
+			}
+			
+			
+			m.put("textbook_list", textbook_list);
+			
+		}
+		
+		
+		
 		return list7;
 	}
 
@@ -155,11 +200,75 @@ public class PersonalServiceImpl implements PersonalService {
 		return count;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, Object>> queryWriterUserTrendst(
 			PageParameter<Map<String, Object>> pageParameter) {
 		List<Map<String, Object>> result_list = personaldao.queryWriterUserTrendst(pageParameter);
+		String contextpath = pageParameter.getParameter().get("contextpath").toString();
+		for (Map<String, Object> map : result_list) {
+			if (map.get("cms")!=null && ((Map<?, ?>) map.get("cms")).get("mid")!=null) {
+				Content content = contentService.get(((Map<?, ?>) map.get("cms")).get("mid").toString());
+				content = ifContentIsNullFun(map, content,"cms");
+				Map<String, Object> cms = ((Map<String, Object>) map.get("cms"));
+				String content_text = removeHtml(content.getContent());
+				String img_url = getFirstImgUrlFromHtmlStr(contextpath, content);
+				cms.put("first_img_url", img_url);
+				cms.put("Content", content);
+				cms.put("content_text", content_text);
+				map.put("cms", cms) ;
+			}
+			if (map.get("p_cms")!=null && ((Map<?, ?>) map.get("p_cms")).get("mid")!=null) {
+				Content content = contentService.get(((Map<?, ?>) map.get("p_cms")).get("mid").toString());
+				Map<String, Object> p_cms = ((Map<String, Object>) map.get("p_cms"));
+				content = ifContentIsNullFun(map, content,"p_cms");
+				String content_text = removeHtml(content.getContent());
+				String img_url = getFirstImgUrlFromHtmlStr(contextpath, content);
+				p_cms.put("first_img_url", img_url);
+				p_cms.put("Content", content);
+				p_cms.put("content_text", content_text);
+				map.put("p_cms", p_cms) ;
+			}
+		}
 		return result_list;
+	}
+
+	/**
+	 * 当content为空 返回摘要 若摘要也为空 返回没有内容
+	 * @param map
+	 * @param content
+	 * @param key
+	 * @return
+	 */
+	private Content ifContentIsNullFun(Map<String, Object> map, Content content,String key) {
+		if (content == null) {
+			content = new Content();
+			if (((Map<?, ?>)map.get(key)).get("summary")!=null) {
+				content.setContent(((Map<?, ?>)map.get(key)).get("summary").toString());
+			}else{
+				content.setContent("没有内容！");
+			}
+			content.setId(((Map<?, ?>) map.get(key)).get("mid").toString());
+		}
+		return content;
+	}
+
+	private String getFirstImgUrlFromHtmlStr(String contextpath, Content content) {
+		
+		String img_url = contextpath +"statics/image/564f34b00cf2b738819e9c35_122x122!.jpg";
+		if(content!=null){
+			List<String> imglist = articleSearchService.getImgSrc(content.getContent());
+
+		    if(imglist.size()>0){
+		    
+		    	img_url = imglist.get(0);
+		    	if (img_url.length()>0 && "/image/".equals(img_url.substring(0,7)) && ".action".equals(img_url.substring(img_url.lastIndexOf("."))) ) {
+		    		contextpath = "/".equals(contextpath)||"\\".equals(contextpath)?"":contextpath;
+		    		img_url = contextpath+img_url;
+				}
+		    }
+		}
+		return img_url;
 	}
 
 	@Override
@@ -276,9 +385,35 @@ public class PersonalServiceImpl implements PersonalService {
 		String slist = personaldao.getInpAnswers(map);
 		return slist;
 	}
+	
+	//回显答案保存按钮判断是否消失
+	@Override
+	public Map<String, Object> btnSaveOrHidden(Map<String, Object> map) {
+		Map<String, Object> sMap = personaldao.btnSaveOrHidden(map);
+		return sMap;
+	}
+	
+	//弹框回显短评内容
+	@Override
+	public Map<String, Object> shortComment(Map<String, Object> map) {
+		Map<String, Object> sMap = personaldao.shortComment(map);
+		return sMap;
+	}
 
 	@Override
-	public void saveUserTrendst(String TrendstName, String tableId,int trendstType, String writer_user_id) {/*
+	public void deleteUserTrendst(WriterUserTrendst writerUserTrendst) {
+		//删除同类型同id动态
+		int dcount = personaldao.deleteUserTrendst(writerUserTrendst);
+	}
+	
+	
+	@Override
+	public void saveUserTrendst(WriterUserTrendst writerUserTrendst) {
+		//删除同类型同id动态
+		/*int dcount = personaldao.deleteUserTrendst(writerUserTrendst);*/
+		int count = personaldao.saveUserTrendst(writerUserTrendst);
+		
+		/*
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("TrendstName", TrendstName);
 		paraMap.put("tableId", tableId);
@@ -336,6 +471,38 @@ public class PersonalServiceImpl implements PersonalService {
 			Map<String, Object> result_map = personaldao.queryUserById(userId);
 			return result_map;
 		}
+
+		@Override
+		public Map<String, Object> queryOurFriendShip(String userId,String logUserId) {
+			//friendShip初始化为未申请好友状态
+			Map<String,Object> friendShip = new HashMap<String,Object>();
+			friendShip.put("id", 0);
+			friendShip.put("isBeenRequest", 0);
+			friendShip.put("hasRequest", 0);
+			friendShip.put("status", -1);
+			//查询数据库中两人好友状态
+			
+			List<Map<String,Object>> r= personaldao.queryOurFriendShip(userId,logUserId);
+			friendShip = r!=null&&r.size()>0?r.get(0):friendShip;
+			return friendShip;
+		}
+		
+		//去掉字符串中的html标签
+		public String removeHtml(String str){
+			String regEx_html="<[^>]+>"; //定义HTML标签的正则表达式 
+			Pattern p_html=Pattern.compile(regEx_html,Pattern.CASE_INSENSITIVE); 
+	        Matcher m_html=p_html.matcher(str); 
+	        str=m_html.replaceAll(""); //过滤html标签 
+			return str;
+		}
+
+		@Override
+		public Map<String, Object> queryDeclarationById(String declaration_id) {
+			Map<String, Object> result_map = personaldao.queryDeclarationById(declaration_id);
+			return result_map;
+		}
+
+
 
 
 }

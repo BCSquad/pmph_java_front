@@ -87,21 +87,36 @@ public class LoginInterceptor implements HandlerInterceptor {
         this.pathWithUsertypeMaps = pathWithUsertypeMaps;
     }
 
+    public Set<PathWithUsertypeMap> getPathWithUsertypeMaps() {
+        return pathWithUsertypeMaps;
+    }
+
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
 
         PathMatchingResourcePatternResolver resolver = getPathMatchingResourcePatternResolver();
-        for (PathWithUsertypeMap pathMap : pathWithUsertypeMaps) {
-            //需要拦截的URL
-            if (resolver.getPathMatcher().match(pathMap.getPath(), httpServletRequest.getServletPath())) {
 
+                for (PathWithUsertypeMap pathMap : pathWithUsertypeMaps) {
+                    //需要拦截的URL
+                    if (resolver.getPathMatcher().match(pathMap.getPath(), httpServletRequest.getServletPath())) {
                 HttpSession session = httpServletRequest.getSession();
                 Map<String, Object> userInfo = null;
-                if (pathMap.getUserType().equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE)) && pathMap.getUserType().equals("1")) {
-                    userInfo = (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_WRITER);
-                } else if (pathMap.getUserType().equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE)) && pathMap.getUserType().equals("2")) {
-                    userInfo = (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_ORGUSER);
+                if (pathMap.getUserType().split(",").length >= 1) {
+                    for (String s : pathMap.getUserType().split(",")) {
+                        if (s.trim().equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE)) && s.trim().equals("1")) {
+                            if (session.getAttribute(Const.SESSION_USER_CONST_WRITER) != null) {
+                                userInfo = (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_WRITER);
+                            }
+                        }
+                        if (s.trim().equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE)) && s.trim().equals("2")) {
+                            if (session.getAttribute(Const.SESSION_USER_CONST_ORGUSER) != null) {
+                                userInfo = (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_ORGUSER);
+                            }
+
+                        }
+                    }
                 }
+
 
                 boolean isAjax = "XMLHttpRequest".equalsIgnoreCase(httpServletRequest.getHeader("X-Requested-With"));
 

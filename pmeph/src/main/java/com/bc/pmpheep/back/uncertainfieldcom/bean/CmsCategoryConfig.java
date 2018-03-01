@@ -31,13 +31,13 @@ public class CmsCategoryConfig {
 			//id确定时解开，即使名称变动，后台java代码依然有一一对应关系，只用修改此一处的id
 			switch (CmsCategoryName) {
 			case "医学随笔":
-				id="3";
+				id="1";
 				break;
 			case "快报管理":
 				id="2";
 				break;
 			case "公告管理":
-				id="1";
+				id="3";
 				break;
 			default:
 				break;

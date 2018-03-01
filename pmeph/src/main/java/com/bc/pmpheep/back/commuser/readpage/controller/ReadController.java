@@ -50,7 +50,11 @@ public class ReadController {
         zdtjXxjyMap.put("startrows", "0");
         zdtjXxjyMap.put("endrows", "4");
         zdtjXxjyList = readService.queryRmspReadList(zdtjXxjyMap);
+        
         mv.addObject("rmspList", zdtjXxjyList);
+
+        Map<String, Object> adInfo = homeService.getPageAdInfo("读书首页轮播 ");
+        mv.addObject("adInfo", adInfo);
 
         List<Map<String, Object>> materialType = readService.queryMaterialType();
 
@@ -80,7 +84,7 @@ public class ReadController {
         Collections.sort(types, new Comparator<Map<String, Object>>() {
             @Override
             public int compare(Map<String, Object> o1, Map<String, Object> o2) {
-                return MapUtils.getIntValue(o2,"sort")-MapUtils.getIntValue(o1,"sort");
+                return MapUtils.getIntValue(o1, "sort") - MapUtils.getIntValue(o2, "sort");
             }
         });
         mv.addObject("bookTypes", types);
@@ -179,7 +183,7 @@ public class ReadController {
         //图书类型
         zdtjXxjyMap.put("type", type);
         //查询条数
-        zdtjXxjyMap.put("startrows", "1");
+        zdtjXxjyMap.put("startrows", "0");
         zdtjXxjyMap.put("endrows", "6");
         zdtjXxjyList = readService.queryTscxReadList(zdtjXxjyMap);
         for (int i = 0; i < zdtjXxjyList.size(); i++) {

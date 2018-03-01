@@ -35,6 +35,9 @@
     height: auto;
     margin-right: 5px;
 }
+.talkName{
+    font-size: 12px;
+}
 
 .headAndNameRight{
     margin:0 auto;
@@ -43,6 +46,7 @@
 }
 
 .sendMessage{
+    margin-top: 4px;
     clear: both;
     max-width: 510px;
     height: auto;
@@ -65,10 +69,21 @@
     background-color: #f8f8f8;
     margin-bottom: 10px;
     float: right;
-    margin-right: -132px;
+/*    margin-right: -132px;*/
     
     
 }
+
+.textDiv.float_left{
+    float: left;
+}
+
+.textDiv.float_right{
+    float: right;
+}
+
+
+
 .talkTimeAlignLeft{
     text-align: left;
 }
@@ -85,8 +100,8 @@
     width: 50px;
     height: 50px;
     position:absolute;
-    top:-21px;
-    right:-50px;
+    top:-25px;
+    right:-25px;
     border-radius: 50%;
     -webkit-transition: all 0.3s ;
     -moz-transition: all 0.3s;
@@ -352,4 +367,88 @@ table tbody tr:nth-child(even){
 }
 table tbody td a{
     text-decoration:none;
+}
+
+
+.talkTime{
+    clear: both;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #d5d5d5;
+}
+.talkTimeAlignLeft{
+    text-align: left;
+}
+.talkTimeAlignRight{
+    text-align: right;
+}
+.oneTalk{
+    clear:both;
+    margin:0 auto;
+    padding-left: 10px;
+    padding-top: 20px;
+    width: 680px;
+    height: auto;
+}
+
+.headAndNameLeft{
+    margin:0 auto;
+    text-align:center;
+}
+
+.headAndNameRight{
+    margin:0 auto;
+    text-align:center;
+    margin-right: 10px;
+}
+
+.headDiv{
+    min-width: 44px;
+    height:50px;
+}
+
+.headPicture{
+    width:44px;
+    height:44px;
+    border-radius: 50%;
+    margin-right:7px;
+}
+
+.talkName{
+    height:15px;
+    line-height: 15px;
+    min-width: 44px;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 1px;
+    color: #999999;
+    margin-right:8px;
+}
+
+.talkDiv{
+    padding-left: 20px;
+}
+.talkDivRight{
+    padding-right: 20px;
+}
+.sendMessage{
+    clear: both;
+    max-width: 510px;
+    height: auto;
+    min-height:34px;
+    min-width: 20px;
+    font-size: 12px;
+    position:  relative;
+}
+
+.float_left {
+    float: left;
+}
+
+.float_right {
+    float: right;
 }

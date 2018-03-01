@@ -1,38 +1,34 @@
-body 
-{
+body {
     margin: 0;
     padding: 0;
 }
 
-.sxy-div-content
-{
+.sxy-div-content {
     width: 1200px;
     margin: 0 auto;
-    background-color:White;
+    background-color: White;
 }
 
-.sxy-div-menu
-{
-	font-family: MicrosoftYaHei;
-	font-size: 16px;
-	font-weight: normal;
-	height:50px;
-	line-height: 50px;
-	letter-spacing: 0px;
-	color: #999999;
-	margin-left:20px;
-	cursor:pointer;
-	float:left;
-    }
-    
- /*��ɫҳͷ�����˵���������»���*/
- .sxy-span-menu{
-    border-bottom:2px solid #259980;
+.sxy-div-menu {
+    font-family: MicrosoftYaHei;
+    font-size: 16px;
+    font-weight: normal;
+    height: 50px;
+    line-height: 50px;
+    letter-spacing: 0px;
+    color: #999999;
+    margin-left: 20px;
+    cursor: pointer;
+    float: left;
+}
+
+/*��ɫҳͷ�����˵���������»���*/
+.sxy-span-menu {
+    border-bottom: 2px solid #259980;
 }
 
 /*********************************************/
-.sxy-txt2
-{
+.sxy-txt2 {
     width: 1180px;
     height: 40px;
     background-color: #f1f1f1;
@@ -42,55 +38,91 @@ body
     border-radius: 4px;
 }
 
-.sxy-div-content{
-	margin-top: 30px;
+.sxy-div-content {
+    margin-top: 30px;
 }
 
-.sxy-div-content2
-{
+.sxy-div-content2 {
     width: 1200px;
-    height:56px;
+    height: 56px;
     margin: 0 auto;
-    
+
 }
 
-.sxy-div-content3
-{
+.sxy-div-content3 {
     width: 1200px;
-    height:30px;
+    height: 30px;
     margin: 0 auto;
 }
 
-.sxy-div-content4
-{
+.sxy-div-content4 {
     width: 1200px;
-    height:40px;
+    height: 40px;
     margin: 0 auto;
 }
 
-.sxy-font1
-{
+.sxy-font1 {
     width: 73px;
-	height: 17px;
-	font-family: MicrosoftYaHei;
-	font-size: 16px;
-	font-weight: normal;
-	letter-spacing: 0px;
-	color: #666666;
+    height: 17px;
+    font-family: MicrosoftYaHei;
+    font-size: 16px;
+    font-weight: normal;
+    letter-spacing: 0px;
+    color: #666666;
 }
 
 .sxy-btn {
     border: none;
     width: 75px;
-    height: 25px;
+    height: 35px;
     background-color: #70bcc3;
     font-family: MicrosoftYaHei;
     color: #ffffff;
     font-size: 14px;
     border-radius: 2px;
+    cursor: pointer;
 }
 
-#sxy-return
-{
-    text-align:center;
+#sxy-return {
+    text-align: center;
+}
+
+.upload-image {
+    height: 60px;
+}
+
+.upload-image button {
+    width: 100px;
+    height: 36px;
+    margin: 0px;
+    background-color: #03717b;
+    border-radius: 4px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #ffffff;
+    line-height: 36px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    float: left;
+}
+
+.upload-image .fileinfo {
+    padding-left: 10px;
+    float: left;
+    height: 36px;
+    line-height: 36px;
+    text-align: left;
+}
+.upload-image .preview{
+    color: blue;
+    cursor: pointer;
+    display: none;
+    padding-left: 10px;
+}
+.layui-layer{
+    box-shadow:none;
 }

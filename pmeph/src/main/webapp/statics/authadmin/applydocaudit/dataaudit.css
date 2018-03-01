@@ -51,6 +51,7 @@
 }
 
 .btn_1{
+	 float: left;
     width: 80px;
     height: 33px;
     background-color: #1898dd;
@@ -64,10 +65,11 @@
 }
 
 .btn_2{
+	float:right;
     width: 100px;
     height: 33px;
     background-color: #f9be3e;
-    margin-left: 540px;
+  	margin-right:30px;
     border-radius: 1px;
     font-family: MicrosoftYaHei;
     color: #ffffff;
@@ -75,10 +77,11 @@
     border:none;
 }
 .btn_3{
+	float:right;
     width: 60px;
     height: 33px;
     background-color: #b0120e;
-    margin-left: 10px;
+   margin-right:10px;
     border-radius: 1px;
     font-family: MicrosoftYaHei;
     color: #ffffff;
@@ -139,9 +142,10 @@ table tbody tr:nth-child(even){
 }
 
 td{
-	white-space:nowrap;
+	white-space:pre-line;
 	overflow:hidden;
 	text-overflow:ellipsis;
+	width: 50%;
 }
 
 .font_name {
@@ -159,7 +163,6 @@ td{
 
 .pg_right{
     float: right;
-
     margin-right: 15px;
 }
 

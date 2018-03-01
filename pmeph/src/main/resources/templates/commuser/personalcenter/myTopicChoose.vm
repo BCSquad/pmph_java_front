@@ -10,13 +10,14 @@
 
 
     <div class="jcsbssl">
-        <span id="jcsbqb" onclick="listoction(this,'');" style="cursor:pointer">全部</span>
-        <span id="jcsbwdsb" onclick="listoction(this,1);" style="cursor:pointer">我的申报</span>
+        #*<span id="jcsbqb" onclick="listoction(this,'');" style="cursor:pointer">全部</span>
+        <span id="jcsbwdsb" onclick="listoction(this,1);" style="cursor:pointer">我的申报</span>*#
         <button class="jcsbsbzt" id="sbzzjx" value="0" style="cursor:pointer"><span class="yzc"></span>已暂存</button>
         <button class="jcsbsbzt" id="sbyjs"  value="1" style="cursor:pointer" ><span class="ytj"></span>已提交</button>
         <button class="jcsbsbzt" id="sbzc"  value="3" style="cursor:pointer"><span class="ytg"></span>已通过</button>
-        <button class="jcsbsbzt" id="sbytj" value="2" style="cursor:pointer"><span class="btg"></span>不通过</button>
+        <button class="jcsbsbzt" id="sbytj" value="2" style="cursor:pointer"><span class="btg"></span>未通过</button>
         <button class="jcsbsbzt" id="allStatus" value="" style="cursor:pointer"><span class=""></span>全部状态</button>
+        <div id="btn_wdsbssk_div"><button title="搜索" id="btn_wdsbssk"><div></div></button></div>
         <input type="text" id="wdsbssk" class="wdsbssk" value="$!{para.bookname}" placeholder="选题搜索">
         
     </div>
@@ -72,7 +73,7 @@
                			</td>
                		</tr>	
                		<tr>	
-               			<td><span class="left_time">提交时间：$!{c.gmt_create}</span></td>
+               			<td><span class="left_time">提交时间：#if($!{c.submit_time})$!{c.submit_time}#else - - - - -  #end </span></td>
                			<td><span class="left_time">预计交稿日期：$!{c.deadline}</span></td>
                		</tr>
                </table>
@@ -83,13 +84,15 @@
            		#elseif($!{c.auth_progress}==1)
            			<div><span class="ytj1"></span><span class="left_zt">已提交</span></div>
            		#elseif($!{c.auth_progress}==2)
-           			<div><span class="btg1"></span><span class="left_zt">被退回/</span></div>
+           			<div><span class="btg1"></span><span class="left_zt">未通过/</span></div>
            		#elseif($!{c.auth_progress}==3)
            			<div><span class="ytg1"></span><span class="left_zt">已通过</span></div>
            		#end
-               <a style="cursor: pointer;" onclick="viewTopic($!{c.id})"><div class="left_herf">进入查看</div></a>
-                <a style="cursor: pointer;" onclick="updateTopic($!{c.id})"><div class="left_herf2">修改</div></a>
-               
+           		#if($!{c.auth_progress}==1||$!{c.auth_progress}==2||$!{c.auth_progress}==3)
+               		<a style="cursor: pointer;" onclick="viewTopic($!{c.id})"><div class="left_herf">进入查看</div></a>
+                #else
+                	<a style="cursor: pointer;" onclick="updateTopic($!{c.id})"><div class="left_herf">修改</div></a>
+               	#end
            </div>
          </li>
          #end

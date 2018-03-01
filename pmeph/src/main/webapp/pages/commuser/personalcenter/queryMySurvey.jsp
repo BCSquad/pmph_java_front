@@ -20,7 +20,6 @@
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
 </head>
 <body>
-
 	<jsp:include page="/pages/comm/head.jsp"></jsp:include>
 	<div class="body" style="background-image: url('../statics/image/ypzj_bg.png');height:auto">
 	
@@ -28,14 +27,15 @@
 				<div class="emptyDiv"></div>
 				<div class="whiteDiv">
 					<div class="titleDiv">
-						<span class="titleFont">图书问卷调查</span>
+						<span class="titleFont">${mapSurvey.title}</span>
 					</div>
 					<div class="bigContent">
 						<div class="tipDiv">
-							<span class="tipFont">此调查旨在了解用户的图书阅读习惯，希望参与者根据实际情况认真填写！</span>
+							<span class="tipFont">${mapSurvey.intro}</span>
 						</div>
 						<form id="contentForm">
 						<div class="questions">
+							<input type="hidden" name="surveyId" value="${surveyId}">
 							<c:choose>
 								<c:when test="${listSize>0 }">
 									<c:forEach items="${listSesult}" var="question" varStatus="code">
@@ -44,15 +44,15 @@
 												<p>Q${code.index+1} : ${question.title}</p>
 												<div style="padding-left: 22px">
 														<c:forEach items="${question.listOptions }" var="option">
-															<div  style="height: 40px">
-																<c:choose>
+															<div style="height: 40px">
+														    	<c:choose>
 																	<c:when test="${(question.answer) ==(option.id)}">
-																		<input type="radio"  name="radio_${code.index+1}" value="${option.id}" checked="checked"/>
-															    		<label>${option.option_content }</label><br/>
+																		<div style="float: left"><input type="radio"  name="radio_${code.index+1}" value="${option.id}" checked="checked"  disabled="disabled"></div>
+															    		<div  style="float: left;marging-top: 10px;margin-left: 5px"><label>${option.option_content }</label></div><br/>
 																	</c:when>
 																	<c:otherwise>
-																		<input type="radio" name="radio_${code.index+1}" value="${option.id}"/>
-														    			<label>${option.option_content }</label><br/>
+																		<div style="float: left"><input type="radio" name="radio_${code.index+1}" value="${option.id}"/></div>
+														    			<div  style="float: left;marging-top: 10px;margin-left: 5px"><label>${option.option_content }</label></div><br/>
 																	</c:otherwise>
 																</c:choose>
 													    	</div>
@@ -66,12 +66,11 @@
 											<div class="oneQuestion">
 												<p>Q${code.index+1} : ${question.title}</p>
 												<div style="padding-left: 22px" id="type">
-													<c:forEach items="${question.listOptions }" var="option" >
+													<c:forEach items="${question.listOptions }" var="option">
 														<div style="height: 40px">
-															
-															<c:choose>
+														<c:choose>
 																	<c:when test="${(option.flag)==true}">
-																		<input type='checkbox'  name='checkbox_${code.index+1}' value="${option.id}" checked="checked"> 
+																		<input type='checkbox'  name='checkbox_${code.index+1}' value="${option.id}" checked="checked"  disabled="disabled"> 
 																		<label>${option.option_content }</label>
 																	</c:when>
 																	<c:otherwise>
@@ -79,8 +78,6 @@
 																		<label>${option.option_content }</label> 
 																	</c:otherwise>
 																</c:choose>
-															
-																
 														</div>
 													</c:forEach>
 													<input type="hidden" name="checkboxValues" value="checkbox_${code.index+1}">	
@@ -88,24 +85,21 @@
 												</div>							
 											</div>
 										</c:if>
-										<c:if test="${question.type==3}">
+										<c:if test="${question.type==4}">
 											<div class="oneQuestion">
 												<p>Q${code.index+1} : ${question.title}</p>
 												<div style="padding-left: 22px">
-												
-													<input id="${question.id}" name="input_${code.index+1}" class="inputStyle" value="${question.inp }">
-												
+													<input id="${question.id}" name="input_${code.index+1}" class="inputStyle" maxlength="190"  value="${question.inp }"  >
 												</div>
 												<input type="hidden" name="inputValues" value="input_${code.index+1}">
 												<input type="hidden" name="inputQuestionIds" value="${question.id}">
 											</div>
 										</c:if>
-										
 										<c:if test="${question.type==5}">
 											<div class="oneQuestion">
 												<p>Q${code.index+1} : ${question.title}</p>
 												<div style="padding-left: 22px">
-													<textarea id="${question.id}" name="input_${code.index+1}" class="textAreaStyle" >${question.inp }</textarea>
+													<textarea id="${question.id}" name="input_${code.index+1}" class="textAreaStyle" maxlength="190" >${question.inp }</textarea>
 												</div>
 												<input type="hidden" name="textValues" value="input_${code.index+1}">
 												<input type="hidden" name="textQuestionIds" value="${question.id}">
@@ -125,11 +119,22 @@
 						</form>
 					</div>
 					
-					<!-- <div style="width: 100%;height:50px;">
-						<div onclick="submit()" class="buttonDiv">
-							<span class="submitFont">完成</span>
-						</div>
-					</div> -->
+					<c:choose>
+						<c:when test="${((btn.sid) !=surveyId) && ((btn.uid) !=logUserId)}">
+							<div style="width: 100%;height:50px;">
+								<div onclick="submit1()" class="buttonDiv">
+									<span class="submitFont">完成</span>
+								</div>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div style="width: 100%;height:50px;">
+								<div onclick="toList()" class="buttonDiv">
+									<span class="submitFont">返回</span>
+								</div>
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="emptyDiv"></div>
 		</div>
