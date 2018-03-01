@@ -62,8 +62,9 @@
 					</tr>
 					<tr>
 						<td><span>预计交稿时间：</span></td>
-						<td>
+						<td style="position:relative;">
 							<input class="cg_input" name="deadline" id="deadline" calendar format="'yyyy-mm-dd'" value="" placeholder="预计交稿时间"/>
+						    <span class="dateclear"onclick="cleadate()"></span>
 						</td>
 						<td><span class="btbs">*</span><span>选题来源：</span></td>
 						<td>

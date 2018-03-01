@@ -132,6 +132,9 @@ function checkNull(jsonStr){
 	return b;
 }
 
+function cleadate(){
+	$("#deadline").val(null);
+}
 //判断年龄是否符合标准
 function checkAge(obj){
 	var va = obj.value;
