@@ -2,6 +2,7 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib  prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <script type="text/javascript">
@@ -51,7 +52,8 @@
                     height: 40,
                     optionHeight: 40
                 });
-            })
+            });
+          
     </script>
 </head>
 <body>
@@ -248,7 +250,7 @@
                       <label class="require">个人简介</label>
                       <div class="input-wrapper">
                           <input type="text" class="required" data-valid="isNonEmpty" data-error="个人简介不能为空" onblur="javascript:LengthLimit(this,100);"
-                            placeholder="填写个人简介"  id="note" name="note" style="width: 1040px" value="${map.note }">
+                            placeholder="填写个人简介"  id="note" name="note" style="width: 1040px" value="${map.profile }">
                       </div>
                   </div>
                 </td>
@@ -266,12 +268,19 @@
             </tr>
             <tr  class="sxy-tr" style="height: 0px">
                 <td colspan="7"  style="height: 0px">
-                    <div style="width: 1200px;height: 30px">
-                        <span class="span_sign">我的标签</span>
-                        <div class="sxy-bottom-div" style="margin-left: 17px"><font class="sxy-bottom-font">心理学</font></div>
-                        <div class="sxy-bottom-div"><font class="sxy-bottom-font">护理</font></div>
-                        <div class="sxy-bottom-div"><font class="sxy-bottom-font">临床</font></div>
-                        <!-- <div class="sxy-bottom-div"><font class="sxy-bottom-font">+新增</font></div> -->
+                    <div style="width: 1200px;">
+                        <span class="span_sign" style="margin-top:5px">我的标签</span>
+                        <input type="hidden" id="hastag" value="${map.hastag }"/>
+                        
+                        <div id="tags"> 
+                            <c:forEach items="${fn:split(map.tag,'%') }" var="yt">
+                             <c:if test="${yt !=null }">
+                                  <div class="sxy-bottom-div" style="margin-left: 17px;margin-top:5px"><span class="sxy-bottom-font" style="float:left">${yt }</span><span class="deltag" onclick="deltag(this.parentElement)"> </span></div>
+                             </c:if>
+                             </c:forEach>
+                         </div>
+                        <input type="text" placeholder="请输入标签名，10字以内" style="height:28px;margin-left: 20px;margin-top:5px" id="mytag" onkeyup="LengthLimit(this,20)"/>
+                        <span style="margin-top:5px;height: 30px;line-height: 30px;display: inline-block;border: 1px solid #f1f1f1;border-radius: 5px;cursor: pointer;" onclick="addtag()"><font class="sxy-bottom-font">添加</font></span>
                    </div>
                </td>
             </tr>
