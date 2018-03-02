@@ -426,6 +426,7 @@
                                     .prev().prev().val($selectedItem.attr('data-value'));
                                 if ($.isFunction(that.settings.onChange)) {
                                     that.settings.onChange.call(that, $selectedItem.attr('data-value'), $selectedItem.text());
+                                    $(selectID + ' li').css("display", "list-item");
                                 }
                                 break;
                             //Esc
@@ -483,6 +484,7 @@
 
                     if ($.isFunction(that.settings.onChange)) {
                         that.settings.onChange.call(that, $(this).attr('data-value'), $(this).text());
+                        $(selectID + ' li').css("display", "list-item");
                     }
 
                     return false;

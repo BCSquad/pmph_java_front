@@ -10,7 +10,54 @@
         <span class="behind"></span>
         <span class="behind"></span>
         <span class="behind"></span>
-        <span class="con">9</span>
+        <span class="con">10</span>
     </div>
+
+##    #if($book.score<=3)
+##        <div class="book_content_picture">
+##            <span class="yellow"></span>
+##            <span class="behind"></span>
+##            <span class="behind"></span>
+##            <span class="behind"></span>
+##            <span class="behind"></span>
+##            <div class="con">${book.score}</div>
+##        </div>
+##    #elseif($book.score<=5 && $book.score>3)
+##        <div class="book_content_picture">
+##            <span class="yellow"></span>
+##            <span class="yellow"></span>
+##            <span class="behind"></span>
+##            <span class="behind"></span>
+##            <span class="behind"></span>
+##            <div class="con">${book.score}</div>
+##        </div>
+##    #elseif($book.score<=7 && $book.score>5)
+##        <div class="book_content_picture">
+##            <span class="yellow"></span>
+##            <span class="yellow"></span>
+##            <span class="yellow"></span>
+##            <span class="behind"></span>
+##            <span class="behind"></span>
+##            <div class="con">${book.score}</div>
+##        </div>
+##    #elseif($book.score<=9 && $book.score>7)
+##        <div class="book_content_picture">
+##            <span class="yellow"></span>
+##            <span class="yellow"></span>
+##            <span class="yellow"></span>
+##            <span class="yellow"></span>
+##            <span class="behind"></span>
+##            <div class="con">${book.score}</div>
+##        </div>
+##    #else($book.score>9)
+##        <div class="book_content_picture">
+##            <span class="yellow"></span>
+##            <span class="yellow"></span>
+##            <span class="yellow"></span>
+##            <span class="yellow"></span>
+##            <span class="yellow"></span>
+##            <div class="con">${book.score}</div>
+##        </div>
+##    #end
 </div>
 #end

@@ -84,7 +84,7 @@ public class HomeController extends BaseController{
         }
         modelAndView.addObject("listM", listM);
         //读取mongeldb里面的图片 
-        /*for (Map<String, Object> pmap : listArt) {
+        for (Map<String, Object> pmap : listArt) {
 			Message message=messageService.get((String) pmap.get("mid"));
 			if(message!=null){
 				List<String> imglist = articleSearchService.getImgSrc(message.getContent());
@@ -96,7 +96,7 @@ public class HomeController extends BaseController{
 			}else{//没有图片放置默认图片
 				pmap.put("imgpath", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
 			}
-		}*/
+		}
 
         List<Map<String, Object>> types = homeService.queryBookType(0);
         modelAndView.addObject("bookTypes", types);
@@ -130,6 +130,7 @@ public class HomeController extends BaseController{
             map.put("id", listBok.get(i).get("id"));
             map.put("author", listBok.get(i).get("author"));
             map.put("bookname", listBok.get(i).get("bookname"));
+            map.put("score", listBok.get(i).get("score"));
             if (listBok.get(i).get("image_url").equals("DEFAULT")) {//显示默认图片
                 map.put("img", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
             } else {
@@ -180,6 +181,7 @@ public class HomeController extends BaseController{
                 map.put("id", listRow.get(i).get("id"));
                 map.put("author", listRow.get(i).get("author"));
                 map.put("bookname", listRow.get(i).get("bookname"));
+                map.put("score", listRow.get(i).get("score"));
                 if (listRow.get(i).get("image_url").equals("DEFAULT")) {//显示默认图片
                     map.put("img", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
                 } else {
@@ -234,6 +236,7 @@ public class HomeController extends BaseController{
             pmap.put("id", listrows.get(i).get("id"));
             pmap.put("author", listrows.get(i).get("author"));
             pmap.put("bookname", listrows.get(i).get("bookname"));
+            map.put("score", listrows.get(i).get("score"));
             if (listrows.get(i).get("image_url").equals("DEFAULT")) {//显示默认图片
                 pmap.put("img", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
             } else {

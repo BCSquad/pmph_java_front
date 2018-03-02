@@ -20,7 +20,7 @@
      * window.UEDITOR_HOME_URL = "/xxxx/xxxx/";
      */
 //    var URL = window.UEDITOR_HOME_URL || getUEBasePath();
-    var URL =contextpath+ "resources/comm/ueditor1.4.3.3/";
+    var URL = contextpath + "resources/comm/ueditor1.4.3.3/";
 
     /**
      * 配置项主体。注意，此处所有涉及到路径的配置别遗漏URL变量。
@@ -42,11 +42,12 @@
             'directionalityltr', 'directionalityrtl', 'indent', '|',
             'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
             'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
-            'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'map', 'gmap', 'insertframe', 'insertcode', 'webapp', 'pagebreak', 'template', 'background', '|',
+            'simpleupload', 'insertimage', 'attachment', '|',
             'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
             'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
-            'print', 'preview', 'searchreplace', 'drafts', 'help'
+            'preview', 'help'
         ]]
+
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
         //,labelMap:{
         //    'anchor':'', 'undo':''
@@ -248,7 +249,7 @@
 
         //elementPathEnabled
         //是否启用元素路径，默认是显示
-        ,elementPathEnabled : false
+        , elementPathEnabled: false
 
         //wordCount
         //,wordCount:true          //是否开启字数统计
@@ -275,10 +276,10 @@
         //,maxUndoCount:20
         //当输入的字符数超过该值时，保存一次现场
         //,maxInputCount:1
-        
+
         //autoHeightEnabled
         // 是否自动长高,默认true
-        ,autoHeightEnabled:false
+        , autoHeightEnabled: false
 
         //scaleEnabled
         //是否可以拉伸长高,默认true(当开启时，自动长高失效)
@@ -288,7 +289,7 @@
 
         //autoFloatEnabled
         //是否保持toolbar的位置不动,默认true
-        ,autoFloatEnabled:false
+        , autoFloatEnabled: false
         //浮动时工具栏距离浏览器顶部的高度，用于某些具有固定头部的页面
         //,topOffset:30
         //编辑器底部距离工具栏高度(如果参数大于等于编辑器高度，则设置无效)
@@ -326,7 +327,6 @@
         //,tableDragable: true
 
 
-
         //sourceEditor
         //源码的查看方式,codemirror 是代码高亮，textarea是文本框,默认是codemirror
         //注意默认codemirror只能在ie8+和非ie中使用
@@ -356,78 +356,78 @@
         //,allowDivTransToP:true      //允许进入编辑器的div标签自动变成p标签
         //,rgb2Hex:true               //默认产出的数据中的color自动从rgb格式变成16进制格式
 
-		// xss 过滤是否开启,inserthtml等操作
-		,xssFilterRules: true
-		//input xss过滤
-		,inputXssFilter: true
-		//output xss过滤
-		,outputXssFilter: true
-		// xss过滤白名单 名单来源: https://raw.githubusercontent.com/leizongmin/js-xss/master/lib/default.js
-		,whitList: {
-			a:      ['target', 'href', 'title', 'class', 'style'],
-			abbr:   ['title', 'class', 'style'],
-			address: ['class', 'style'],
-			area:   ['shape', 'coords', 'href', 'alt'],
-			article: [],
-			aside:  [],
-			audio:  ['autoplay', 'controls', 'loop', 'preload', 'src', 'class', 'style'],
-			b:      ['class', 'style'],
-			bdi:    ['dir'],
-			bdo:    ['dir'],
-			big:    [],
-			blockquote: ['cite', 'class', 'style'],
-			br:     [],
-			caption: ['class', 'style'],
-			center: [],
-			cite:   [],
-			code:   ['class', 'style'],
-			col:    ['align', 'valign', 'span', 'width', 'class', 'style'],
-			colgroup: ['align', 'valign', 'span', 'width', 'class', 'style'],
-			dd:     ['class', 'style'],
-			del:    ['datetime'],
-			details: ['open'],
-			div:    ['class', 'style'],
-			dl:     ['class', 'style'],
-			dt:     ['class', 'style'],
-			em:     ['class', 'style'],
-			font:   ['color', 'size', 'face'],
-			footer: [],
-			h1:     ['class', 'style'],
-			h2:     ['class', 'style'],
-			h3:     ['class', 'style'],
-			h4:     ['class', 'style'],
-			h5:     ['class', 'style'],
-			h6:     ['class', 'style'],
-			header: [],
-			hr:     [],
-			i:      ['class', 'style'],
-			img:    ['src', 'alt', 'title', 'width', 'height', 'id', '_src', 'loadingclass', 'class', 'data-latex'],
-			ins:    ['datetime'],
-			li:     ['class', 'style'],
-			mark:   [],
-			nav:    [],
-			ol:     ['class', 'style'],
-			p:      ['class', 'style'],
-			pre:    ['class', 'style'],
-			s:      [],
-			section:[],
-			small:  [],
-			span:   ['class', 'style'],
-			sub:    ['class', 'style'],
-			sup:    ['class', 'style'],
-			strong: ['class', 'style'],
-			table:  ['width', 'border', 'align', 'valign', 'class', 'style'],
-			tbody:  ['align', 'valign', 'class', 'style'],
-			td:     ['width', 'rowspan', 'colspan', 'align', 'valign', 'class', 'style'],
-			tfoot:  ['align', 'valign', 'class', 'style'],
-			th:     ['width', 'rowspan', 'colspan', 'align', 'valign', 'class', 'style'],
-			thead:  ['align', 'valign', 'class', 'style'],
-			tr:     ['rowspan', 'align', 'valign', 'class', 'style'],
-			tt:     [],
-			u:      [],
-			ul:     ['class', 'style'],
-			video:  ['autoplay', 'controls', 'loop', 'preload', 'src', 'height', 'width', 'class', 'style']
-		}
+        // xss 过滤是否开启,inserthtml等操作
+        , xssFilterRules: true
+        //input xss过滤
+        , inputXssFilter: true
+        //output xss过滤
+        , outputXssFilter: true
+        // xss过滤白名单 名单来源: https://raw.githubusercontent.com/leizongmin/js-xss/master/lib/default.js
+        , whitList: {
+            a: ['target', 'href', 'title', 'class', 'style'],
+            abbr: ['title', 'class', 'style'],
+            address: ['class', 'style'],
+            area: ['shape', 'coords', 'href', 'alt'],
+            article: [],
+            aside: [],
+            audio: ['autoplay', 'controls', 'loop', 'preload', 'src', 'class', 'style'],
+            b: ['class', 'style'],
+            bdi: ['dir'],
+            bdo: ['dir'],
+            big: [],
+            blockquote: ['cite', 'class', 'style'],
+            br: [],
+            caption: ['class', 'style'],
+            center: [],
+            cite: [],
+            code: ['class', 'style'],
+            col: ['align', 'valign', 'span', 'width', 'class', 'style'],
+            colgroup: ['align', 'valign', 'span', 'width', 'class', 'style'],
+            dd: ['class', 'style'],
+            del: ['datetime'],
+            details: ['open'],
+            div: ['class', 'style'],
+            dl: ['class', 'style'],
+            dt: ['class', 'style'],
+            em: ['class', 'style'],
+            font: ['color', 'size', 'face'],
+            footer: [],
+            h1: ['class', 'style'],
+            h2: ['class', 'style'],
+            h3: ['class', 'style'],
+            h4: ['class', 'style'],
+            h5: ['class', 'style'],
+            h6: ['class', 'style'],
+            header: [],
+            hr: [],
+            i: ['class', 'style'],
+            img: ['src', 'alt', 'title', 'width', 'height', 'id', '_src', 'loadingclass', 'class', 'data-latex'],
+            ins: ['datetime'],
+            li: ['class', 'style'],
+            mark: [],
+            nav: [],
+            ol: ['class', 'style'],
+            p: ['class', 'style'],
+            pre: ['class', 'style'],
+            s: [],
+            section: [],
+            small: [],
+            span: ['class', 'style'],
+            sub: ['class', 'style'],
+            sup: ['class', 'style'],
+            strong: ['class', 'style'],
+            table: ['width', 'border', 'align', 'valign', 'class', 'style'],
+            tbody: ['align', 'valign', 'class', 'style'],
+            td: ['width', 'rowspan', 'colspan', 'align', 'valign', 'class', 'style'],
+            tfoot: ['align', 'valign', 'class', 'style'],
+            th: ['width', 'rowspan', 'colspan', 'align', 'valign', 'class', 'style'],
+            thead: ['align', 'valign', 'class', 'style'],
+            tr: ['rowspan', 'align', 'valign', 'class', 'style'],
+            tt: [],
+            u: [],
+            ul: ['class', 'style'],
+            video: ['autoplay', 'controls', 'loop', 'preload', 'src', 'height', 'width', 'class', 'style']
+        }
     };
 
     function getUEBasePath(docUrl, confUrl) {
@@ -440,7 +440,7 @@
 
         var configPath = document.getElementsByTagName('script');
 
-        return configPath[ configPath.length - 1 ].src;
+        return configPath[configPath.length - 1].src;
 
     }
 
@@ -467,7 +467,7 @@
 
     function optimizationPath(path) {
 
-        var protocol = /^[a-z]+:\/\//.exec(path)[ 0 ],
+        var protocol = /^[a-z]+:\/\//.exec(path)[0],
             tmp = null,
             res = [];
 
@@ -475,7 +475,7 @@
 
         path = path.replace(/\\/g, '/').split(/\//);
 
-        path[ path.length - 1 ] = "";
+        path[path.length - 1] = "";
 
         while (path.length) {
 

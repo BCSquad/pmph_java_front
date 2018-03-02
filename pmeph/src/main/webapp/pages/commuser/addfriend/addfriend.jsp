@@ -39,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="content-wrapper">
         <div class="white-back-ground-float-box">
             <div class="add-friend-label">添加好友
-            	<a onclick="window.location.href='/myFriend/listMyFriend.action'" class="toMyFriend" >
+            	<a onclick="window.location.href='<%=path%>/myFriend/listMyFriend.action'" class="toMyFriend" >
             	<span class="toMyFriend_img"></span>
             	<span class="toMyFriend">我的好友</span>
             	</a>

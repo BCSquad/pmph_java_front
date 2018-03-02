@@ -362,12 +362,24 @@ ul li {
    /* background-size:110%  110%; */
 }
 
+
+.left_two{
+    width: 314px;
+    height: 262px;
+    margin-top: 0px;
+    float: left;
+    background: url("../../testfile/rectangle.png") no-repeat;
+    /*border: 1px solid #F2F2F2;
+    border-radius:6px;
+    box-shadow: 1px 1px 3px #888888;*/
+    background-size:100% 100%;
+}
+
 .p1_left{
 	width: 216px;
 	height: 89px;
 	margin-left: 42px;
 	margin-top: 55px;
-	background-image:url("../../image/adv1_left.jpg");
 	border-radius:6px;
 }
 
@@ -376,20 +388,9 @@ ul li {
 	height: 89px;
 	margin-left: 42px;
 	margin-top: 8px;
-	background-image:url("../../image/adv2_left.jpg");
 	border-radius:6px;
 }
 
-.left_two{
-	width: 314px;
-	height: 262px;
-	margin-top: 0px;
-	float: left;
-    background: url("../../testfile/rectangle1.png") no-repeat;
-    /*border: 1px solid #F2F2F2;
-    border-radius:6px;
-    box-shadow: 1px 1px 3px #888888;*/
-}
 
 .left_con1{
 	width: 280px;

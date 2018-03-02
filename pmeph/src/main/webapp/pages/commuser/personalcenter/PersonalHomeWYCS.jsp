@@ -382,7 +382,7 @@ request.setAttribute("currentTime",datetime);
                									</div>
                									<div class="sub_title">
 	               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
-	               									${c.realname } 纠正了《${c.book.bookname }》第${c.detail.content.page }页，第${c.detail.content.line }行:"${c.detail.content.content }"
+	               									${c.realname } 纠正了《${c.book.bookname }》第${c}页，第<%--${c.detail.content.line }行--%>:"${c.detail.content.content }"
                									</div>
                									<div class="book_detail">${c.book.detail }</div>
                								</div>

@@ -29,7 +29,7 @@
 			tb.`textbook_name`,d.`user_id`,
 			dp.`chosen_position`,dp.`rank`,
 			tb.`is_chief_chosen`,tb.`is_published` 
-			,tb.is_locked
+			,tb.is_locked,m.is_force_end
 		FROM 
 			`declaration` d
 		

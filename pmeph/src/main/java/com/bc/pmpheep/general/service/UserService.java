@@ -59,6 +59,7 @@ public class UserService {
 
         if (score != 0) {
             info.put("scores", score);
+            info.put("ruleid", MapUtils.getIntValue(rules.get("login"), "id"));
             userDao.insertUserScore(info);
         }
     }

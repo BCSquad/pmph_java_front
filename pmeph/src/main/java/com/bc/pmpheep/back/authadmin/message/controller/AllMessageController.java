@@ -6,9 +6,13 @@ package com.bc.pmpheep.back.authadmin.message.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.bc.pmpheep.general.pojo.Message;
+import com.bc.pmpheep.general.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -34,6 +38,9 @@ public class AllMessageController extends BaseController {
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.authadmin.message.service.AllMessageServiceImpl")
 	AllMessageServiceImpl allMessageServiceImpl;
+
+	@Autowired
+	private MessageService messageService;
 
 	/**
 	 * 
@@ -81,6 +88,19 @@ public class AllMessageController extends BaseController {
 		resultMap.put("listSize", list1.size());
 		return resultMap;
 	}
-	
+
+	//根据Mid查询系统消息详情
+	@RequestMapping("msg")
+	@ResponseBody
+	public Map<String,Object> msg(HttpServletRequest request){
+		Map<String,Object> map=new HashMap<>();
+		Message massage=messageService.get(request.getParameter("mid"));
+		String regEx_html="<[^>]+>";
+		Pattern p_html=Pattern.compile(regEx_html,Pattern.CASE_INSENSITIVE);
+		Matcher m_html=p_html.matcher(massage.getContent());
+		String msg=m_html.replaceAll("");
+		map.put("msg",msg);
+		return map;
+	};
 	
 }

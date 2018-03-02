@@ -47,12 +47,10 @@ function writeArticleValidate() {
  };  */
 //确定 点击的按钮类型
 function btntype(btn_this) {
-    debugger;
-//	contxtpath
     $("#btn_type").val(btn_this);
     if ($("#submitTypeCode").val() == '0') { //submitTypeCode 状态码为0表示新增 1表示修改
         if (writeArticleValidate()) {
-
+            $("#topub").attr("disabled",true);
             $.ajax({
                 url: contextpath + "writerArticle/writeArticle.action",
                 type: "post",
@@ -106,6 +104,7 @@ function btntype(btn_this) {
             });
         }
     } else if ($("#submitTypeCode").val() == '1') {
+        $("#topub").attr("disabled",true);
         /*if(btn_this=='0'){
          //window.message.info("您已保存过了，请不要重复保存");
          return false;

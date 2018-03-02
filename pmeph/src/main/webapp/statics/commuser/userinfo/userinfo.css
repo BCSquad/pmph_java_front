@@ -279,3 +279,11 @@ body
 	background: #f1f1f1;
 	padding-left: 20px;
 }
+.deltag{
+	width:20px;
+	height:30px;
+	float:left;
+	background-image: url(../../image/close.png);
+	background-repeat: no-repeat;
+	background-position: 0px 8px;
+}
