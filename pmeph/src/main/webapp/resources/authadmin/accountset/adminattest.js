@@ -42,7 +42,7 @@ $(function () {
     		console.log(file.name.substring(file.name.lastIndexOf("."),file.name.lastIndexOf(".")+4));
     		/*if(file.type=="application/msword"){ */
     		var f=file.name.substring(file.name.lastIndexOf("."),file.name.lastIndexOf(".")+4);
-    		if(f==".gif"||f==".jpg"||f==".jpeg"||f==".png"||f==".GIF"||f==".PNG"){
+    		if(f==".gif"||f==".jpg"||f==".jpeg"||f==".png"||f==".gif"||f==".png"||f=="bmp"||f=="jpge"){
     			return true;
     		}else{
     			message.error("请选择图片文件");
