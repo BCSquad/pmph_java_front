@@ -13,7 +13,7 @@ public interface PersonalDao {
 
 	public List<PersonalNewMessage> ListMyConlection(Map<String, Object> permap);
 	public List<PersonalNewMessage> ListMyFriend(Map<String, Object> permap);
-	public List<PersonalNewMessage> ListMyGroup(Map<String, Object> permap);
+	public List<Map<String,Object>> ListMyGroup(Map<String, Object> permap);
 	public List<PersonalNewMessage> ListMyOfeerTwo(Map<String, Object> permap);
 	
 	public List<Map<String,Object>> ListMyBookNewsTwo(PageParameter<Map<String, Object>> pageParameter);

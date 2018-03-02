@@ -173,9 +173,9 @@
                     <c:forEach items="${listArtSix}" var="list" varStatus="status">
 	                <div class="${status.index==0 or status.index==3 ?'item' :'item behind'}" onclick="window.location.href='${ctx}/articledetail/toPage.action?wid=${list.id}'">
                     
-                    <div  class="content" >
+                    <div  class="xihuan" >
                         <div class="content-image">
-                            <img src="${ctx}/statics/testfile/p2.png" style="width:276px;height:170px;"/>
+                            <img  src="${ctx}/${list.cover}" />
                         </div>
                         <p   class="content-title" style="cursor: pointer;">${list.title}</p>
                     </div>

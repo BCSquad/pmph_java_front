@@ -441,7 +441,10 @@
 	<update id="updateName" >
 		update  pmph_group_member set display_name = #{display_name} where user_id = #{user_id} and is_writer = #{is_writer} 
 	</update>
-	
+	<!-- 根据文件id查询文件（小组文件） -->
+	<select id="queryGroupFileByFileId" parameterType="map" resultType="java.util.Map">
+	   select * from pmph_group_file where file_id=#{id}
+	</select>
 </mapper>
 
 

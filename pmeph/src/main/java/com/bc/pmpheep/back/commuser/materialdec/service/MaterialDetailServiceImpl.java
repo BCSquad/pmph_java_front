@@ -56,6 +56,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 	
 	@Override
 	public int insertPerson(Map<String, Object> map) {
+		// TODO 动态生成
 		return this.madd.insertPerson(map);
 	}
 	
@@ -193,6 +194,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 	}
 	@Override
 	public int updatePerson(Map<String, Object> map) {
+		// TODO 动态生成
 		return this.madd.updatePerson(map);
 	}
 	@Override

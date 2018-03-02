@@ -164,15 +164,22 @@ function showup(id) {
             	$("#sendc").html(json.realname);
             	$("#timec").html(formatDate(json.gmt_create));
             	$("#tcontent").html(json.tContent);
+            	var ste = '';
+                $.each(json.attaList, function (i, x) {
+                    ste += '<a  href="'+contextpath+'' +x.attachment+ '">' +x.attachment_name +'</a><br/>';
+                });
+            	
+            	$("#tattachment").html(ste);
                 $("#bookmistake").show();
-          
+                $("#readno").attr('src',contextpath+"statics/image/readyes.png");
         }
     });
 }
 
 //点击纠错弹窗隐藏
 function hideup() {
-	var messid=$("#messid").val();
+	$("#bookmistake").hide();
+/*	var messid=$("#messid").val();
 	$.ajax({
         type: 'post',
         url: contextpath + 'message/updateTitleMessage.action?messid='+messid,
@@ -184,7 +191,7 @@ function hideup() {
         			toList();
         		}
         }
-    });
+    });*/
 }
 //刷新消息页
 function toList(){

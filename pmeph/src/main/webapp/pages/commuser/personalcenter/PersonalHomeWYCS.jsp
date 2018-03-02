@@ -324,7 +324,7 @@ request.setAttribute("currentTime",datetime);
                 				</c:when>
                 				<%-- 5动态 发表书评 end --%>
                 				
-                				<%-- 6动态 收藏图书 图书点赞--%>
+                				<%-- 6 7动态 收藏图书 图书点赞--%>
                 				<c:when test="${c.type == 6 || c.type == 7}">	
                 					<div class="issue_line"><span class="issue_name">${c.type == 6?'收藏':'点赞' }了图书</span><span class="issue_time">${c.trendst_date }</span></div>
                							<div class="content_line">
@@ -349,7 +349,19 @@ request.setAttribute("currentTime",datetime);
                								</div>
                							</div>
                 				</c:when>
-                				<%-- 6动态 收藏图书 图书点赞end --%>
+                				<%-- 6 7动态 收藏图书 图书点赞end --%>
+                				
+                				<%-- 8 9 11动态 教材申报 选题申报 问卷调查 --%>
+                				<c:when test="${c.type == 8 || c.type == 9 || c.type == 11}">	
+                					<div class="issue_line"><span class="issue_name">${c.detail.title }</span><span class="issue_time">${c.trendst_date }</span></div>
+           							<div class="msg_line">
+           								<div class="msg_content">
+           									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
+           									${c.detail.content }					
+           								</div>
+           							</div> 
+                				</c:when>
+                				<%-- 8 9 11动态 教材申报 选题申报 问卷调查  end --%>
                 				
                 				<%-- 10动态 图书纠错 生成--%>
                 				<c:when test="${c.type == 10}">	
@@ -711,14 +723,14 @@ request.setAttribute("currentTime",datetime);
                     <br/>
                     <c:if test="${listmygroup == null || listmygroup.size()==0  }">
                 		<div style="padding-top: 10px;">
-	                        <img src="<c:url value="/statics/image/no_group.png"></c:url>">
+	                        <img src="<c:url value="${ctx}/statics/image/no_group.png"></c:url>">
 	                    </div>
                 	</c:if>
                     <ul class="scul">
                         <c:forEach items="${listmygroup}" begin='0' end='8' var="listmyg" varStatus="status">
                             <a  class="not-like-an-a" href="${ctx}/group/toMyGroup.action?groupId=${listmyg.group_id}">
 	                            <li class="wdxz" title="${listmyg.group_name}">
-	                            	<img src="<%=path %>/image/${listmyg.group_image}.action" class="xztp">
+	                            	<img src="${ctx}/${listmyg.group_image}" class="xztp">
 	                                <br/>
 	                                <span class="group_name">${listmyg.group_name}</span>
 	                                <span class="xzrs">(${listmyg.grouppeo}人)</span>

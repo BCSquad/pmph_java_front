@@ -109,8 +109,7 @@ public class DataAuditController extends BaseController{
 		PageParameter<Map<String, Object>> pageParameter = new PageParameter<Map<String, Object>>(
 				pageNum, pageSize);
 		pageParameter.setParameter(paraMap);
-		List<Map<String, Object>> List_map = dataAuditService
-				.findDataAudit(pageParameter);
+		List<Map<String, Object>> List_map = dataAuditService.findDataAudit(pageParameter);
 		int totoal_count = dataAuditService.findDataAuditCount(pageParameter);
 
 		
