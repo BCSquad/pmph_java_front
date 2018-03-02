@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.authadmin.message.service;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,8 +31,8 @@ public class InfoReleaseServiceImpl implements InfoReleaseService {
 	 */
 
 	@Override
-	public List<Map<String, Object>> selectMenu() {
-		List<Map<String, Object>> list = infoReleaseDao.selectMenu();
+	public List<Map<String, Object>> selectMenu(BigInteger uid) {
+		List<Map<String, Object>> list = infoReleaseDao.selectMenu(uid);
 		return list;
 	}
 
