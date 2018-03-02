@@ -1,9 +1,11 @@
 package com.bc.pmpheep.back.authadmin.message.dao;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
 import com.bc.pmpheep.back.plugin.PageParameter;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 
@@ -36,7 +38,7 @@ public interface InfoReleaseDao {
 	 * @return List<Map<String,Object>> 返回类型
 	 * @throws
 	 */
-	List<Map<String, Object>> selectMenu();
+	List<Map<String, Object>> selectMenu(@Param("userId") BigInteger uid);
 
 	/**
 	 * 

@@ -48,8 +48,10 @@ public class TextBookCheckVO implements Serializable {
     private Boolean isChiefChosen;
     // 是否已公布
     private Boolean isPublished;
-    
+    //书籍被锁定
     private Boolean isLocked;
+    //教材被强制结束
+    private Boolean isForceEnd;
 
     /**
      * @return the materialId
@@ -225,6 +227,14 @@ public class TextBookCheckVO implements Serializable {
 
 	public void setIsLocked(Boolean isLocked) {
 		this.isLocked = isLocked;
+	}
+
+	public Boolean getIsForceEnd() {
+		return isForceEnd;
+	}
+
+	public void setIsForceEnd(Boolean isForceEnd) {
+		this.isForceEnd = isForceEnd;
 	}
 
 }

@@ -33,4 +33,9 @@ public interface UserInfoDao {
      * @param orgUser
      */
     public void updatePassword(Map<String, Object> map);
+	/**
+	 * 添加个人标签
+	 * @param map
+	 */
+    void updateMyTag(Map<String, Object> map);
 }

@@ -3,7 +3,12 @@
 <mapper namespace="com.bc.pmpheep.back.commuser.userinfo.dao.UserInfoDao">
     <!-- 根据ID查询作家表 -->
     <select id="queryWriter" parameterType="java.util.Map" resultType="java.util.Map">
-       select w.*,o.org_name from writer_user w LEFT JOIN org o on w.org_id=o.id where w.id=#{id}
+       select w.*,
+       o.org_name,
+       wp.tag,
+       count(wp.id) as hastag,
+       wp.profile 
+       from writer_user w LEFT JOIN org o on w.org_id=o.id left join writer_profile wp on w.id=wp.user_id where w.id=#{id}
     </select>
     
     <!-- 根据ID编辑普通员工个人资料 -->
@@ -41,5 +46,14 @@
             <if test="password!=null and password!=null">password=#{password}</if>
         </set>
         WHERE id=#{id}
+    </update>
+    <!--更新个人标签  -->
+    <update id="updateMyTag" parameterType="java.util.Map" >
+       <if test="hastag=='0'">
+          insert into writer_profile(user_id,tag,profile) values(#{id},#{tags},#{note})
+       </if>
+       <if test="hastag !='0'">
+           update writer_profile set tag=#{tags},profile=#{note} where user_id=${id}
+       </if>
     </update>
 </mapper>

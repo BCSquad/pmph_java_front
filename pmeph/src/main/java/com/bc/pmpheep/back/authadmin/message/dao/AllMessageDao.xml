@@ -11,7 +11,7 @@
 		'提交了《',
 		m.material_name,
 		"》申报资料,请尽快审核"
-	) AS TYPE
+	) AS TYPE,'' msg_id
 FROM
 	declaration d
  JOIN material m ON d.`material_id` = m.`id`
@@ -25,7 +25,7 @@ UNION ALL
 		CONCAT(
 			w1.username,
 			'提交了教师资格认证,请尽快审核'
-		) AS title
+		) AS title,'' msg_id
 	FROM
 		writer_user_certification w
 	 JOIN org_user u1 ON w.org_id = u1.org_id
@@ -36,7 +36,7 @@ UNION ALL
 		SELECT
 			'系统消息' AS NAME,
 			DATE_FORMAT(a.gmt_create,'%Y-%m-%d %h:%s') AS TIME ,
-			a.title AS title
+			a.title AS title, msg_id
 		FROM
 			user_message a
 		WHERE

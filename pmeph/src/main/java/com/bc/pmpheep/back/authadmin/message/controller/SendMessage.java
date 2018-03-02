@@ -57,7 +57,9 @@ public class SendMessage extends BaseController {
 	@RequestMapping("/init")
 	public ModelAndView init(){
 		ModelAndView mv = new ModelAndView();
-		List<Map<String, Object>> List_map = infoReleaseService.selectMenu();
+		Map<String, Object> user = this.getUserInfo();
+		BigInteger uid = (BigInteger) user.get("id");//用户的id
+		List<Map<String, Object>> List_map = infoReleaseService.selectMenu(uid);
 		mv.addObject("resultFlag", "2");
 		mv.addObject("titleValue", "");
 		mv.addObject("UEContent", "");

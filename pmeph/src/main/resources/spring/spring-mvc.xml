@@ -76,6 +76,8 @@
                 <value>/admininfocontroller/toadmininfo* -> 2</value><!--个人资料修改页面-->
                 <value>/admininfocontroller/toadminattest* -> 2</value><!--跳转到学校管理员认证界面-->
                 <value>/AllMessage/* -> 2</value>
+                <value>/authSendMessage/* -> 2</value> <!--机构管理员发送消息-->
+                <value>/dataaudit/* -> 2</value> <!--教材申报办理-->
             </set>
         </property>
     </bean>
