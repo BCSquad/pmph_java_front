@@ -39,6 +39,32 @@
                 </div >
             </a>
         </div>
+
+     <!-- 系统消息标题悬浮框 -->
+     <div class="bookmistake" id="bookmistake">
+         <form id="bookmistakeform">
+             <div class="apache">
+                 <div class="mistitle">系统消息详情</div>
+                 <div class="x" onclick="hideup()"></div>
+             </div>
+             <div class="info">
+                 <label style="margin-left: 20px" class="labell">标题:<span id="titlec"></span></label>
+
+             </div>
+             <div class="info">
+                 <label style="margin-left: 20px" class="labell">发送人:系统</label>
+             </div>
+             <div class="info">
+                 <label style="margin-left: 20px" class="labell">发送时间:<span id="timec"></span></label>
+             </div>
+
+             <div class="info">
+                 <label style="margin-left: 20px" class="labell">内容:</label>
+                 <textarea class="misarea" id="tcontent" disabled="disabled"></textarea>
+             </div>
+         </form>
+     </div>
+
         <div class="message-list"  >
             <div style="height: 20px;"></div>
             <div id="message-list">
@@ -52,7 +78,7 @@
                          <span class="msg">${item.NAME}</span>
                          <span class="time">${item.TIME}</span>
                      </p>
-                    <p class="text">
+                    <p class="text" onclick="system('${item.msg_id}','${item.NAME}','${item.TIME}')">
                         ${item.TYPE}
                     </p>
                 </div>

@@ -1,6 +1,11 @@
 $(function () {
 	var id = $("#material_id").val();
 	queryMaterialMap(id);  //执行查询方法
+	if ($("#return_cause_hidden").val().length>0) {
+		
+			$("#return_cause_div").fadeIn(800);
+		
+	}
 });
 
 //页面组合方法
@@ -59,7 +64,7 @@ function chooseModel(data){
 		$("#jcbxqk").css("display","block");
 	}
 	//其他教材编写情况
-	if(data.is_other_textbook_used == "1"){
+	if(data.is_pmph_textbook_used == "1"){
 		$("#qtjcbx").css("display","block");
 	}
 	//科研情况

@@ -466,6 +466,9 @@ public class MessageController extends BaseController{
 								map.put("attachment", "file/download/"+map.get("attachment")+".action");
 							}
 							map1.put("attaList",attaList);
+							
+							 noticeMessageService.updateTitleMessage(uid);
+							
 						}else{
 							map1.put("tContent","内容空!");
 							//map1.put("attachmentId","附件空!");
@@ -476,7 +479,7 @@ public class MessageController extends BaseController{
 			}
 			
 			
-			
+			/*
 			//点击标题已读
 					@RequestMapping(value="/updateTitleMessage")
 					@ResponseBody
@@ -484,6 +487,6 @@ public class MessageController extends BaseController{
 						String id=request.getParameter("messid");
 							 noticeMessageService.updateTitleMessage(id);
 							return "OK";
-					}		
+					}*/		
 
 }

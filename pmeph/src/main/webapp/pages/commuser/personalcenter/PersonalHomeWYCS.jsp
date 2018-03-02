@@ -351,8 +351,8 @@ request.setAttribute("currentTime",datetime);
                 				</c:when>
                 				<%-- 6 7动态 收藏图书 图书点赞end --%>
                 				
-                				<%-- 8 9动态 教材申报 选题申报 --%>
-                				<c:when test="${c.type == 8 || c.type == 9}">	
+                				<%-- 8 9 11动态 教材申报 选题申报 问卷调查 --%>
+                				<c:when test="${c.type == 8 || c.type == 9 || c.type == 11}">	
                 					<div class="issue_line"><span class="issue_name">${c.detail.title }</span><span class="issue_time">${c.trendst_date }</span></div>
            							<div class="msg_line">
            								<div class="msg_content">
@@ -361,7 +361,7 @@ request.setAttribute("currentTime",datetime);
            								</div>
            							</div> 
                 				</c:when>
-                				<%-- 8 9动态 教材申报 选题申报 end --%>
+                				<%-- 8 9 11动态 教材申报 选题申报 问卷调查  end --%>
                 				
                 				<%-- 10动态 图书纠错 生成--%>
                 				<c:when test="${c.type == 10}">	

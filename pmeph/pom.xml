@@ -62,6 +62,7 @@
         <!--poi -->
         <poi.ver>3.17</poi.ver>
         <!--ueditor -->
+        <ueditor.ver>1.1.2-offical</ueditor.ver>
     </properties>
     <dependencies>
         <dependency>
@@ -234,11 +235,11 @@
         </dependency>
 
         <!-- ueditor -->
-       <!--  <dependency>
-            <groupId>cn.songxinqiang</groupId>
-            <artifactId>com.baidu.ueditor</artifactId>
-            <version>${ueditor.ver}</version>
-        </dependency> -->
+       <dependency>
+        <groupId>cn.songxinqiang</groupId>
+        <artifactId>com.baidu.ueditor</artifactId>
+        <version>${ueditor.ver}</version>
+    </dependency>
         <!--websocket-->
         <dependency>
             <groupId>javax.websocket</groupId>

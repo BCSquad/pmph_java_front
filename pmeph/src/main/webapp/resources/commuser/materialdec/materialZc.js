@@ -206,11 +206,11 @@ function chooseModel(data){
 		$("#jcbxqk_xt").css("display","inline");
 	}
 	//其他教材编写情况
-	if(data.is_other_textbook_used == "1"){
+	if(data.is_pmph_textbook_used == "1"){
 		$("#qtjcbxqk").css("display","block");
 	}
 	//其他教材编写情况必填
-	if(data.is_other_textbook_required == "1"){
+	if(data.is_pmph_textbook_required == "1"){
 		$("#qtjcbx_bt").css("display","inline");
 	}else{
 		$("#qtjcbx_xt").css("display","inline");

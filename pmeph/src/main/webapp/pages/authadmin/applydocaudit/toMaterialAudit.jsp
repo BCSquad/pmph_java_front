@@ -27,7 +27,7 @@
 	<div class="content-wrapper">	
 		<div class="tsxz_title">资料审核</div>
 		<hr style=" height:1px;border:none;border-top:2px #999999 dashed;margin-top: 10px;">
-		 <!-- 退回原因悬浮框 -->
+		 <!-- 退回原因填写悬浮框 -->
         <div class="bookmistake" id="bookmistake">
             <form id="bookmistakeform">
             <input type="hidden"  id="return_id" value="">
@@ -47,6 +47,22 @@
                     <button class="btn" type="button" onclick="correction()">确认</button>
                 </div>
             </form>
+        </div>
+        <!-- 退回原因显示悬浮框 -->
+        <div class="bookmistake" id="return_cause_div">
+                <div class="apache">
+                    <div class="mistitle">退回原因:</div>
+                    <div class="xx" onclick="$('#return_cause_div').fadeOut(500);"></div>
+                </div>
+                
+                <div class="info">
+                	<input id="return_cause_hidden" type="hidden" value="${return_cause }">
+                    <textarea class="misarea" disabled="disabled">${return_cause }</textarea>
+                </div>
+          
+                <div class="">
+                    <button class="btn" type="button" onclick="$('#return_cause_div').fadeOut(500);">确认</button>
+                </div>
         </div>
 		
 		<!-- 参数 -->
