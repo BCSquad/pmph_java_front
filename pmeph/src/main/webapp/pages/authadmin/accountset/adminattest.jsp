@@ -14,7 +14,6 @@
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js" type="text/javascript"></script>
     <script src="${ctx}/resources/authadmin/accountset/adminattest.js" type="text/javascript"></script>
-
     <script src="${ctx}/resources/comm/json2.js" type="text/javascript"></script>
     <link href="${ctx}/statics/css/base.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/statics/authadmin/accountset/publicStyle.css" rel="stylesheet" type="text/css"/>
