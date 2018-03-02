@@ -94,8 +94,10 @@ $(function(){
     })*/
 	if($("#validate").val()=="0"){
 		window.message.warning("必填项不能为空");
+		return false;
 	}else if($("#validate").val()=="1"){
 		window.message.warning("标题长度不能超过30个字");
+		return false;
 	}
 	if($('input:radio[name="sendObject"]:checked').val()!='0'){
 		$("#send").val("下一步");

@@ -20,7 +20,8 @@
 	a.textbook_name,
 	a.textbook_round,
 		m.material_name,
-		m.id as mid
+		m.id as mid,
+		a.id as id
 		FROM  material m
 		LEFT JOIN  textbook a ON  a.material_id= m.id
 		LEFT JOIN dec_position b ON b.textbook_id = a.id
