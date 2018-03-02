@@ -19,7 +19,7 @@
 <body>
 <input type="hidden" id="material_id" value="${material_id }">
 <input type="hidden" id="view_audit" value="${view_audit }">
-     
+<input type="hidden" id="user_id" value="${gezlList.user_id }">     
 <div style="width: 100%;padding: 0;margin: 0;height: 110px;border: none;overflow: hidden;">
 	<jsp:include page="/pages/comm/headGreenBackGround.jsp"></jsp:include> 
 </div>

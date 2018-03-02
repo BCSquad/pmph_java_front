@@ -282,6 +282,7 @@ public class DataAuditController extends BaseController{
 					Map<String,Object> resultMap = new HashMap<String,Object>();
 					String declaration_id = request.getParameter("declaration_id");
 					String online_progress = request.getParameter("online_progress");  //类型
+					String writer_id = request.getParameter("user_id");  //作家用户Id
 					Map<String,Object> userMap =  this.getUserInfo();
 					String user_id = userMap.get("id").toString();
 					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
@@ -292,6 +293,9 @@ public class DataAuditController extends BaseController{
 					paramMap.put("online_progress", online_progress);
 					paramMap.put("auth_user_id", user_id);
 					paramMap.put("auth_date", date);
+					paramMap.put("writer_id", writer_id);
+					
+					
 					int count = this.dataAuditService.updateDeclarationPass(paramMap);
 					if(count>0){
 						msg = "OK";
@@ -311,6 +315,7 @@ public class DataAuditController extends BaseController{
 			String declaration_id = request.getParameter("declaration_id");
 			String online_progress = request.getParameter("online_progress");  //类型
 			String return_cause = request.getParameter("return_cause");  //退回原因
+			String writer_id = request.getParameter("user_id");  //作家用户Id
 			Map<String,Object> userMap =  this.getUserInfo();
 			String user_id = userMap.get("id").toString();
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
@@ -322,6 +327,7 @@ public class DataAuditController extends BaseController{
 			paramMap.put("auth_user_id", user_id);
 			paramMap.put("auth_date", date);
 			paramMap.put("return_cause", return_cause);
+			paramMap.put("writer_id", writer_id);
 			int count = this.dataAuditService.updateDeclaration(paramMap);
 			if(count>0){
 				msg = "OK";

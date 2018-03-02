@@ -94,10 +94,11 @@ function chooseModel(data){
 
 //提交   通过3 
 function toAudit(id,type){
+	var user_id=$("#user_id").val();
 		$.ajax({
 			type: "POST",
 			url:contextpath+'dataaudit/doMaterialAuditPass.action',
-			data:{declaration_id:id,online_progress:type},// 你的formid
+			data:{declaration_id:id,online_progress:type,user_id:user_id},// 你的formid
 			async: false,
 			dataType:"json",
 		    success: function(msg) {
@@ -136,14 +137,16 @@ function hideup() {
 
 //退回原因确认 
 function correction() {
-	declaration_id = $("#return_id").val();
-	online_progress = $("#return_type").val();//表示驳回  2 
-	return_cause = $("#return_cause").val();
+	var user_id=$("#user_id").val();
+	var declaration_id = $("#return_id").val();
+	var online_progress = $("#return_type").val();//表示驳回  2 
+	var return_cause = $("#return_cause").val();
             if (!Empty(return_cause)) {//非空判断
                 var json = {
                 		declaration_id: declaration_id,
                 		online_progress: online_progress,
-                		return_cause: return_cause
+                		return_cause: return_cause,
+                		user_id:user_id
                 };
                 $.ajax({
                     type: 'post',
@@ -180,6 +183,29 @@ function toMain(){
 //文件下载
 function downLoadProxy(fileId){
 	window.location.href=contextpath+'file/download/'+fileId+'.action';
+}
+
+//输入长度限制校验，ml为最大字节长度
+function LengthLimit(obj,ml){
+
+	var va = obj.value;
+	var vat = "";
+	for ( var i = 1; i <= va.length; i++) {
+		vat = va.substring(0,i);
+		//把双字节的替换成两个单字节的然后再获得长度，与限制比较
+		if (vat.replace(/[^\x00-\xff]/g,"aaa").length <= ml) {
+			maxStrlength=i;
+		}else{
+
+			break;
+		}
+	}
+	obj.maxlength=maxStrlength;
+	//把双字节的替换成两个单字节的然后再获得长度，与限制比较
+	if (va.replace(/[^\x00-\xff]/g,"aaa").length > ml) {
+		obj.value=va.substring(0,maxStrlength);
+		//window.message.warning("不可超过输入最大长度"+ml+"字节！");
+	}
 }
 
 
