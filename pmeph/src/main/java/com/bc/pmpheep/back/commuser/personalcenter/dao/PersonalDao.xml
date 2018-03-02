@@ -41,7 +41,8 @@
 
 	<!-- 查询最新收藏信息 -->
 	<select id="ListMyConlection" resultMap="BaseResultMap">
-		select * from book_user_mark a left join book b on a.book_id=b.id where
+		select * from
+		book_user_mark a left join book b on a.book_id=b.id where
 		a.writer_id=#{id}
 		limit 0,6
 	</select>
@@ -54,8 +55,10 @@
 		from
 		writer_friend a
 		left join writer_user b
-		on a.target_id=b.id or a.request_id = b.id
-		WHERE (a.target_id= #{id} or a.request_id = #{id})
+		on a.target_id=b.id
+		or a.request_id = b.id
+		WHERE (a.target_id= #{id} or a.request_id =
+		#{id})
 		and b.id != #{id}
 		AND a.status=2
 		group by b.id
@@ -63,15 +66,18 @@
 	</select>
 	<!-- 查小组信息 -->
 	<select id="ListMyGroup" resultMap="BaseResultMap">
-		SELECT c.group_id,c.group_name,c.group_image,d.grouppeo from (select
+		SELECT
+		c.group_id,c.group_name,c.group_image,d.grouppeo from (select
 		a.group_id,b.group_name,b.group_image from pmph_group_member a left
 		join pmph_group b on a.group_id=b.id WHERE a.user_id=#{id} ) c left
 		JOIN
-		(select a.group_id,b.group_name,b.group_image,COUNT(b.group_name ) AS
+		(select a.group_id,b.group_name,b.group_image,COUNT(b.group_name )
+		AS
 		grouppeo from pmph_group_member a left join pmph_group b on
 		a.group_id=b.id group BY a.group_id) d
 		on c.group_id=d.group_id
-		limit 0,9
+		limit
+		0,9
 	</select>
 	<!-- 查申报最新动态信息 -->
 	<select id="ListMyOfeerTwo" resultMap="BaseResultMap">
@@ -79,7 +85,8 @@
 		a.material_id,
 		a.user_id,
 		a.realname,
-		DATE_FORMAT(a.gmt_create,'%Y-%m-%d %H:%i') as gmt_create,
+		DATE_FORMAT(a.gmt_create,'%Y-%m-%d %H:%i') as
+		gmt_create,
 		a.online_progress,
 		b.material_name,
 		DATE_FORMAT(a.gmt_update,'%Y-%m-%d %H:%i') as gmt_update,
@@ -97,35 +104,40 @@
 		parameterType="PageParameter">
 		select t.* from
 		(
-			SELECT
-			cc.id
-			,cc.title
-			,cc.summary
-			,cc.auth_status
-			,cc.is_staging
-			,
-			case 
-			when cc.gmt_update = '0000-00-00 00:00:00'
-			then DATE_FORMAT(cc.gmt_create,'%Y-%m-%d %H:%i')
-			else DATE_FORMAT(cc.gmt_update,'%Y-%m-%d %H:%i')
-			end as gmt_update
-			, '2' msg_type
-			from cms_content cc
-			inner join cms_category ct on cc.category_id = ct.id and ct.category_name =
-			'医学随笔'
-			where cc.author_id=#{parameter.logUserId} and cc.is_deleted !='1'
-			<if test="parameter.auth_status != null and parameter.auth_status != '' ">
-				and cc.auth_status = #{parameter.auth_status}
-			</if>
-			<if test="parameter.is_staging != null and parameter.is_staging != '' ">
-				and cc.is_staging = #{parameter.is_staging}
-			</if>
-			<if test='parameter.selfLog == false '>
-				and cc.auth_status = 2
-			</if>
+		SELECT
+		cc.id
+		,cc.title
+		,cc.summary
+		,cc.auth_status
+		,cc.is_staging
+		,
+		case
+		when cc.gmt_update = '0000-00-00 00:00:00'
+		then
+		DATE_FORMAT(cc.gmt_create,'%Y-%m-%d %H:%i')
+		else
+		DATE_FORMAT(cc.gmt_update,'%Y-%m-%d %H:%i')
+		end as gmt_update
+		, '2'
+		msg_type
+		from cms_content cc
+		inner join cms_category ct on
+		cc.category_id = ct.id and ct.category_name =
+		'医学随笔'
+		where
+		cc.author_id=#{parameter.logUserId} and cc.is_deleted !='1'
+		<if test="parameter.auth_status != null and parameter.auth_status != '' ">
+			and cc.auth_status = #{parameter.auth_status}
+		</if>
+		<if test="parameter.is_staging != null and parameter.is_staging != '' ">
+			and cc.is_staging = #{parameter.is_staging}
+		</if>
+		<if test='parameter.selfLog == false '>
+			and cc.auth_status = 2
+		</if>
 		)t
 		order by t.gmt_update desc
-		
+
 		limit ${start},${pageSize}
 	</select>
 
@@ -136,9 +148,11 @@
 		(
 		SELECT cc.id
 		from cms_content cc
-		inner join cms_category ct on cc.category_id = ct.id and ct.category_name =
+		inner join
+		cms_category ct on cc.category_id = ct.id and ct.category_name =
 		'医学随笔'
-		where cc.author_id=#{parameter.logUserId} and cc.is_deleted !='1'
+		where cc.author_id=#{parameter.logUserId} and cc.is_deleted
+		!='1'
 		<if test="parameter.auth_status != null and parameter.auth_status != '' ">
 			and cc.auth_status = #{parameter.auth_status}
 		</if>
@@ -155,10 +169,13 @@
 	<select id="ListMyBookNewsTwo" resultMap="BaseResultMap"
 		parameterType="PageParameter">
 		select a.id,a.score,a.content,
-		case 
-		when a.gmt_update = '0000-00-00 00:00:00'
-		then DATE_FORMAT(a.gmt_create,'%Y-%m-%d %H:%i')
-		else DATE_FORMAT(a.gmt_update,'%Y-%m-%d %H:%i')
+		case
+		when a.gmt_update =
+		'0000-00-00 00:00:00'
+		then
+		DATE_FORMAT(a.gmt_create,'%Y-%m-%d %H:%i')
+		else
+		DATE_FORMAT(a.gmt_update,'%Y-%m-%d %H:%i')
 		end
 		as
 		gmt_update,b.bookname,b.image_url, '3' msg_type from book_user_comment
@@ -171,15 +188,19 @@
 	<select id="ListAllBookJoin" resultMap="BaseResultMap"
 		parameterType="PageParameter">
 		SELECT
-		group_concat(distinct concat_ws('_/_',tb.id,tb.textbook_name,tb.is_locked) SEPARATOR '_,_') as textbook_list_str,
+		group_concat(distinct
+		concat_ws('_/_',tb.id,tb.textbook_name,tb.is_locked) SEPARATOR '_,_')
+		as textbook_list_str,
 		max(c.online_progress) as online_progress,
 		a.is_all_textbook_published,
 		a.is_force_end,
 		c.is_staging,
-		a.deadline as age_deadline,
+		a.deadline as
+		age_deadline,
 		a.material_name,
 		COUNT(distinct b.id) AS exmember,
-		a.id as material_id,
+		a.id as
+		material_id,
 		(TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) AS datebase,
 		count(distinct c.id) as iamin,
 		c.id as declaration_id,
@@ -190,30 +211,39 @@
 		dp.textbook_id
 		FROM
 		material a
-		left join material_org o on a.id = o.material_id
+		left join material_org o on a.id =
+		o.material_id
 		left join writer_user u on u.id = #{parameter.logUserId}
-		LEFT JOIN declaration b ON a.id = b.material_id and b.online_progress != 0 <!-- 统计有多少人提交了申报（报名人数） -->
+		LEFT JOIN declaration b ON a.id = b.material_id and b.online_progress
+		!= 0 <!-- 统计有多少人提交了申报（报名人数） -->
 		LEFT JOIN declaration c ON a.id = c.material_id and c.user_id = <!-- 登录人自己的申报 -->
 		#{parameter.logUserId} <!-- and c.online_progress != 2 -->
 		<!-- 登录人自己已经被公布的申报 排除编委 即只查询主编副主编 决定是否有权限查看编委遴选 -->
-		LEFT JOIN dec_position_published dp on c.id = dp.declaration_id and dp.chosen_position 
+		LEFT JOIN dec_position_published dp on c.id = dp.declaration_id and
+		dp.chosen_position
 		not in (0,1,8,9)
-		left join textbook tb on tb.id = dp.textbook_id
+		left join textbook tb on tb.id =
+		dp.textbook_id
 		<!-- in (4,12) and dp.rank=1 -->
 
 		WHERE
 		a.is_deleted = '0'
-		AND ((a.is_public = '0' and o.org_id = u.org_id) or (a.is_public = '1'))
+		AND ((a.is_public = '0' and o.org_id =
+		u.org_id) or (a.is_public = '1'))
 		AND a.is_published = '1'
-<!-- 		AND b.online_progress not in (2) -->
+		<!-- AND b.online_progress not in (2) -->
 		<if test="parameter.s!=null and parameter.s!= ''">AND c.id is not null </if>
 		<if test="parameter.is_staging!=null and parameter.is_staging!= ''">AND c.is_staging =#{parameter.is_staging}</if>
 		<if
 			test="parameter.online_progress!=null and parameter.online_progress!= ''">AND c.online_progress in ${parameter.online_progress}</if>
 		<if test="parameter.bookname!=null and parameter.bookname!= ''">AND a.material_name like
 			CONCAT('%',#{parameter.bookname},'%')</if>
-		<if test="parameter.dateinfo!=null and parameter.dateinfo ==1 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &lt;= 0 and a.is_all_textbook_published = 0 and a.is_force_end = 0 )</if>
-		<if test="parameter.dateinfo!=null and parameter.dateinfo ==2 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &gt; 0 or a.is_all_textbook_published = 1 or a.is_force_end = 1 )</if>
+		<if test="parameter.dateinfo!=null and parameter.dateinfo ==1 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &lt;= 0
+			and a.is_all_textbook_published = 0 and a.is_force_end = 0 )
+		</if>
+		<if test="parameter.dateinfo!=null and parameter.dateinfo ==2 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &gt; 0
+			or a.is_all_textbook_published = 1 or a.is_force_end = 1 )
+		</if>
 		GROUP BY
 		(a.id)
 		limit ${start},${pageSize}
@@ -227,14 +257,18 @@
 		a.id
 		FROM
 		material a
-		left join material_org o on a.id = o.material_id
-		left join writer_user u on u.id = #{parameter.logUserId}
+		left join material_org o
+		on a.id = o.material_id
+		left join writer_user u on u.id =
+		#{parameter.logUserId}
 		<!-- LEFT JOIN declaration b ON a.id = b.material_id -->
 		LEFT JOIN declaration c ON a.id = c.material_id and c.user_id =
 		#{parameter.logUserId} and c.online_progress != 2
 		WHERE
-		a.is_deleted = '0'
-		AND ((a.is_public = '0' and o.org_id = u.org_id) or (a.is_public = '1'))
+		a.is_deleted =
+		'0'
+		AND ((a.is_public = '0' and o.org_id = u.org_id) or (a.is_public =
+		'1'))
 		AND a.is_published = '1'
 		<!-- AND b.online_progress not in (2) -->
 		<if test="parameter.s!=null and parameter.s!= ''">AND c.id is not null </if>
@@ -243,8 +277,12 @@
 			test="parameter.online_progress!=null and parameter.online_progress!= ''">AND c.online_progress in ${parameter.online_progress}</if>
 		<if test="parameter.bookname!=null and parameter.bookname!= ''">AND a.material_name like
 			CONCAT('%',#{parameter.bookname},'%')</if>
-		<if test="parameter.dateinfo!=null and parameter.dateinfo ==1 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &lt;= 0 and a.is_all_textbook_published = 0 and a.is_force_end = 0 )</if>
-		<if test="parameter.dateinfo!=null and parameter.dateinfo ==2 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &gt; 0 or a.is_all_textbook_published = 1 or a.is_force_end = 1 )</if>
+		<if test="parameter.dateinfo!=null and parameter.dateinfo ==1 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &lt;= 0
+			and a.is_all_textbook_published = 0 and a.is_force_end = 0 )
+		</if>
+		<if test="parameter.dateinfo!=null and parameter.dateinfo ==2 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &gt; 0
+			or a.is_all_textbook_published = 1 or a.is_force_end = 1 )
+		</if>
 		GROUP BY
 		(a.id)
 		)t
@@ -269,10 +307,9 @@
 		topic t
 		<where>
 			t.user_id = #{parameter.logUserId}
-			<!-- <if
-				test="parameter.isMine!=null and parameter.isMine!='' and parameter.logUserId != null and parameter.logUserId != '' ">
-				AND t.user_id = #{parameter.logUserId}
-			</if> -->
+			<!-- <if test="parameter.isMine!=null and parameter.isMine!='' and parameter.logUserId 
+				!= null and parameter.logUserId != '' "> AND t.user_id = #{parameter.logUserId} 
+				</if> -->
 			<if test="parameter.bookname != null and parameter.bookname!= '' ">
 				AND t.bookname LIKE concat('%',#{parameter.bookname},'%')
 			</if>
@@ -293,10 +330,9 @@
 		topic t
 		<where>
 			t.user_id = #{parameter.logUserId}
-			<!-- <if
-				test="parameter.isMine!=null and parameter.isMine!='' and parameter.logUserId != null and parameter.logUserId != '' ">
-				AND t.user_id = #{parameter.logUserId}
-			</if> -->
+			<!-- <if test="parameter.isMine!=null and parameter.isMine!='' and parameter.logUserId 
+				!= null and parameter.logUserId != '' "> AND t.user_id = #{parameter.logUserId} 
+				</if> -->
 			<if test="parameter.bookname != null and parameter.bookname!= '' ">
 				AND t.bookname LIKE concat('%',#{parameter.bookname},'%')
 			</if>
@@ -369,7 +405,8 @@
 		update book_correction
 		set is_author_replied = 1
 		,author_reply = #{author_reply}
-		where id = #{id}
+		where id =
+		#{id}
 	</update>
 
 	<!-- 我的纠错resultMap 主map为图书信息 -->
@@ -443,10 +480,12 @@
 		b.id
 		FROM
 		book AS b
-		Inner Join book_correction AS bc ON b.id = bc.book_id
+		Inner Join book_correction
+		AS bc ON b.id = bc.book_id
 		WHERE
 		bc.user_id = #{parameter.logUserId}
-		AND bc.is_deleted = '0'
+		AND
+		bc.is_deleted = '0'
 		<if test="parameter.is_replied != null and parameter.is_replied != '' ">
 			AND bc.is_editor_replied = #{parameter.is_replied}
 		</if>
@@ -487,7 +526,8 @@
 	<select id="myComment" parameterType="PageParameter" resultMap="MyBookCommentMap">
 		SELECT
 		b.bookname,
-		DATE_FORMAT(b.publish_date,'%Y年%m月%d日') AS publish_date,
+		DATE_FORMAT(b.publish_date,'%Y年%m月%d日') AS
+		publish_date,
 		b.author,
 		b.image_url,
 		bc.id,
@@ -495,10 +535,13 @@
 		bc.content,
 		bc.is_auth,
 		bc.gmt_create,
-		case 
-		when bc.gmt_update = '0000-00-00 00:00:00'
-		then DATE_FORMAT(bc.gmt_create,'%Y年%m月%d日')
-		else DATE_FORMAT(bc.gmt_update,'%Y年%m月%d日')
+		case
+		when bc.gmt_update = '0000-00-00
+		00:00:00'
+		then
+		DATE_FORMAT(bc.gmt_create,'%Y年%m月%d日')
+		else
+		DATE_FORMAT(bc.gmt_update,'%Y年%m月%d日')
 		end as gmt_update,
 		bc.is_long
 		FROM
@@ -513,7 +556,7 @@
 		<if test="parameter.selfLog = false ">
 			AND bc.is_auth = 1
 		</if>
-		
+
 		order by bc.gmt_create desc
 		limit ${start},${pageSize}
 	</select>
@@ -538,10 +581,12 @@
 		bc.is_long
 		FROM
 		book_user_comment AS bc
-		left Join book AS b ON b.id = bc.book_id
+		left Join book AS b ON b.id =
+		bc.book_id
 		WHERE
 		bc.writer_id = #{parameter.logUserId}
-		AND bc.is_deleted = '0'
+		AND bc.is_deleted
+		= '0'
 		<if test="parameter.is_long != null and parameter.is_long != '' ">
 			AND bc.is_long = #{parameter.is_long}
 		</if>
@@ -552,75 +597,98 @@
 
 		)t
 	</select>
-	
+
 	<!-- 我的评论修改 -->
-	<update id="updateComment" parameterType="java.util.Map"> 
-	   UPDATE book_user_comment AS bc SET score=#{score},content=#{content} where id=#{id} and writer_id=#{writer_id}
+	<update id="updateComment" parameterType="java.util.Map">
+		UPDATE
+		book_user_comment AS bc SET score=#{score},content=#{content} where
+		id=#{id} and writer_id=#{writer_id}
 	</update>
 	<!-- 我的评论删除 -->
 	<delete id="deleteComment" parameterType="Map">
-		delete from  book_user_comment where 
+		delete from
+		book_user_comment where
 		id= #{id} and writer_id = #{writer_id}
 	</delete>
-
+	<select id="getCommentById">
+		SELECT book_id from book_user_comment where id= #{id}
+	</select>
+	<update id="updateDownComments">
+		UPDATE book SET comments = comments-1 WHERE id =
+		#{id}
+	</update>
 	<!-- 我的问卷 -->
 	<select id="mySurvey" parameterType="PageParameter" resultType="java.util.Map">
-		select  s.id,s.title, DATE_FORMAT(s.begin_date,'%Y年%m月%d日') as gtime from survey s
-		left JOIN survey_target st ON st.survey_id=s.id  
-		LEFT JOIN writer_user wu on wu.org_id=st.org_id
-        left join survey_question_answer sqa on sqa.survey_id=s.id
- 		where s.`status`=1 and s.is_deleted=0 and wu.id=#{parameter.logUserId}
- 		AND (#{parameter.dateStr} &gt;= s.`begin_date`
-		AND 
-      (
-          #{parameter.dateStr}&lt;=DATE_ADD(s.`end_date`,INTERVAL 1 DAY)  or 
-            ( sqa.user_id=#{parameter.logUserId} and  #{parameter.dateStr} &gt; DATE_ADD(s.`end_date`,INTERVAL 1 DAY)) 
-      ))
-      group by s.id
-      ORDER BY  s.begin_date DESC
-      limit ${start},${pageSize}
-		
-		<!-- select s.*, DATE_FORMAT(s.begin_date,'%Y年%m月%d日') as gtime from survey s
-		left JOIN survey_target st ON st.survey_id=s.id  
-		LEFT JOIN writer_user wu on wu.org_id=st.org_id
- 		where s.`status`=1 and s.is_deleted=0 and wu.id=#{parameter.logUserId}
- 		AND #{parameter.dateStr} &gt;= s.`begin_date`
-		AND (#{parameter.dateStr} &lt;= s.`end_date`+1 or ())
-		 ORDER BY  s.begin_date DESC
-  		limit ${start},${pageSize} -->
+		select s.id,s.title, DATE_FORMAT(s.begin_date,'%Y年%m月%d日') as gtime
+		from survey s
+		left JOIN survey_target st ON st.survey_id=s.id
+		LEFT JOIN
+		writer_user wu on wu.org_id=st.org_id
+		left join survey_question_answer
+		sqa on sqa.survey_id=s.id
+		where s.`status`=1 and s.is_deleted=0 and
+		wu.id=#{parameter.logUserId}
+		AND (#{parameter.dateStr} &gt;=
+		s.`begin_date`
+		AND
+		(
+		#{parameter.dateStr}&lt;=DATE_ADD(s.`end_date`,INTERVAL 1 DAY) or
+		(
+		sqa.user_id=#{parameter.logUserId} and #{parameter.dateStr} &gt;
+		DATE_ADD(s.`end_date`,INTERVAL 1 DAY))
+		))
+		group by s.id
+		ORDER BY
+		s.begin_date DESC
+		limit ${start},${pageSize}
+
+		<!-- select s.*, DATE_FORMAT(s.begin_date,'%Y年%m月%d日') as gtime from survey 
+			s left JOIN survey_target st ON st.survey_id=s.id LEFT JOIN writer_user wu 
+			on wu.org_id=st.org_id where s.`status`=1 and s.is_deleted=0 and wu.id=#{parameter.logUserId} 
+			AND #{parameter.dateStr} &gt;= s.`begin_date` AND (#{parameter.dateStr} &lt;= 
+			s.`end_date`+1 or ()) ORDER BY s.begin_date DESC limit ${start},${pageSize} -->
 	</select>
 
 	<!-- 我的问卷总数 -->
 	<select id="mySurveyCount" parameterType="PageParameter"
 		resultType="int">
 		select count(distinct s.id) from survey s
-		left JOIN survey_target st ON st.survey_id=s.id  
+		left JOIN survey_target st
+		ON
+		st.survey_id=s.id
 		LEFT JOIN writer_user wu on wu.org_id=st.org_id
-        left join survey_question_answer sqa on sqa.survey_id=s.id
- 		where s.`status`=1 and s.is_deleted=0 and wu.id=#{parameter.logUserId}
- 		AND #{parameter.dateStr} &gt;= s.`begin_date`
-		AND 
-      (
-          #{parameter.dateStr}&lt;=DATE_ADD(s.`end_date`,INTERVAL 1 DAY)  or 
-            ( sqa.user_id=#{parameter.logUserId} and  #{parameter.dateStr} &gt; DATE_ADD(s.`end_date`,INTERVAL 1 DAY)) 
-      )
-		
-		<!-- select count(*) from 
-		survey s  LEFT JOIN 
-		survey_question_answer  a  on s.id=a.survey_id  
- 		where a.user_id=#{parameter.logUserId} -->
+		left
+		join survey_question_answer sqa on sqa.survey_id=s.id
+		where
+		s.`status`=1 and s.is_deleted=0 and wu.id=#{parameter.logUserId}
+		AND
+		#{parameter.dateStr} &gt;= s.`begin_date`
+		AND
+		(
+		#{parameter.dateStr}&lt;=DATE_ADD(s.`end_date`,INTERVAL 1 DAY) or
+		(
+		sqa.user_id=#{parameter.logUserId} and #{parameter.dateStr} &gt;
+		DATE_ADD(s.`end_date`,INTERVAL 1 DAY))
+		)
+
+		<!-- select count(*) from survey s LEFT JOIN survey_question_answer a on 
+			s.id=a.survey_id where a.user_id=#{parameter.logUserId} -->
 	</select>
 
 	<!-- 查询单个调查对应的问题 -->
 	<select id="getSurvey" resultType="map" parameterType="java.util.Map">
-		SELECT a.*,d.title AS surveyTitle ,d.id
+		SELECT
+		a.*,d.title AS surveyTitle ,d.id
 		FROM `survey_question` a
-		LEFT JOIN `survey_template_question` b
+		LEFT JOIN
+		`survey_template_question` b
 		ON a.id= b.`question_id`
-		LEFT JOIN `survey_template` c
+		LEFT JOIN
+		`survey_template` c
 		ON b.`template_id` = c.id
 		LEFT JOIN survey d
-		ON d.`template_id` = c.`id` 
+		ON
+		d.`template_id` = c.`id`
 		WHERE d.`id`=#{surveyId}
 	</select>
 
@@ -632,235 +700,277 @@
 	</select>
 
 	<!-- 查询单选对应的答案 -->
-	<select id="getAnswers" resultType="java.lang.String" parameterType="java.util.Map">
+	<select id="getAnswers" resultType="java.lang.String"
+		parameterType="java.util.Map">
 		select
 		a.option_id FROM survey_question_answer a
-		INNER JOIN
+		INNER
+		JOIN
 		survey_question_option o on o.id=a.option_id
 		where
 		a.question_id=#{questionId} and a.user_id=#{logUserId}
 	</select>
 
 	<!-- 查询多选对应的答案 -->
-	<select id="getCheckAnswers" resultType="java.lang.String" parameterType="java.util.Map">
+	<select id="getCheckAnswers" resultType="java.lang.String"
+		parameterType="java.util.Map">
 		select a.option_content FROM survey_question_answer a
 		where
 		a.question_id=#{questionId} and a.user_id=#{logUserId}
 	</select>
 
 	<!-- 查询填空对应的答案 -->
-	<select id="getInpAnswers" resultType="java.lang.String" parameterType="java.util.Map">
+	<select id="getInpAnswers" resultType="java.lang.String"
+		parameterType="java.util.Map">
 		select
 		a.option_content FROM survey_question_answer a
 		where
 		a.question_id=#{questionId} and a.user_id=#{logUserId}
 	</select>
-	
-	<!-- 回显答案保存按钮判断是否消失-->
-	<select id="btnSaveOrHidden" resultType="java.util.Map" parameterType="java.util.Map">
-		select  DISTINCT sqa.user_id as uid,sqa.survey_id as sid from survey_question_answer sqa 
-		WHERE sqa.survey_id=#{surveyId}   and sqa.user_id=#{logUserId} 
+
+	<!-- 回显答案保存按钮判断是否消失 -->
+	<select id="btnSaveOrHidden" resultType="java.util.Map"
+		parameterType="java.util.Map">
+		select DISTINCT sqa.user_id as uid,sqa.survey_id as sid
+		from
+		survey_question_answer sqa
+		WHERE sqa.survey_id=#{surveyId} and
+		sqa.user_id=#{logUserId}
 	</select>
-	
-	<!-- 弹框回显短评内容-->
-	<select id="shortComment" resultType="java.util.Map" parameterType="java.util.Map">
-		select  * from book_user_comment AS bc  where bc.id=#{id} 
+
+	<!-- 弹框回显短评内容 -->
+	<select id="shortComment" resultType="java.util.Map"
+		parameterType="java.util.Map">
+		select * from book_user_comment AS bc where bc.id=#{id}
 	</select>
 
 	<!-- 动态结果映射 -->
 	<resultMap type="Map" id="trendstMap">
-		<id property="id" column="id"/>
-		<result property="user_id" column="user_id"/>
-		<result property="is_public" column="is_public"/>
-		<result property="type" column="type"/>
-		<result property="detail" column="detail" typeHandler="com.bc.pmpheep.back.util.JsonTypeHandler"/>
-		<result property="cms_content_id" column="cms_content_id"/>
-		<result property="book_id" column="book_id"/>
-		<result property="book_comment_id" column="book_comment_id"/>
-		<result property="trendst_date" column="trendst_date"/>
-		<result property="trendst_date_num" column="trendst_date_num"/>
-		<result property="realname" column="realname"/>
+		<id property="id" column="id" />
+		<result property="user_id" column="user_id" />
+		<result property="is_public" column="is_public" />
+		<result property="type" column="type" />
+		<result property="detail" column="detail"
+			typeHandler="com.bc.pmpheep.back.util.JsonTypeHandler" />
+		<result property="cms_content_id" column="cms_content_id" />
+		<result property="book_id" column="book_id" />
+		<result property="book_comment_id" column="book_comment_id" />
+		<result property="trendst_date" column="trendst_date" />
+		<result property="trendst_date_num" column="trendst_date_num" />
+		<result property="realname" column="realname" />
 		<association property="cms" javaType="Map">
-			<id property="id" column="c_id"/>
-			<result property="category_id" column="c_category_id"/>
-			<result property="title" column="c_title"/>
-			<result property="mid" column="c_mid"/>
-			<result property="summary" column="c_summary"/>
-			<result property="auth_status" column="c_auth_status"/>
-			<result property="is_staging" column="c_is_staging"/>
-			<result property="is_deleted" column="c_is_deleted"/>
-			<result property="cover" column="c_cover"/>
+			<id property="id" column="c_id" />
+			<result property="category_id" column="c_category_id" />
+			<result property="title" column="c_title" />
+			<result property="mid" column="c_mid" />
+			<result property="summary" column="c_summary" />
+			<result property="auth_status" column="c_auth_status" />
+			<result property="is_staging" column="c_is_staging" />
+			<result property="is_deleted" column="c_is_deleted" />
+			<result property="cover" column="c_cover" />
 		</association>
 		<association property="p_cms" javaType="Map">
-			<id property="id" column="p_id"/>
-			<result property="category_id" column="p_category_id"/>
-			<result property="title" column="p_title"/>
-			<result property="mid" column="p_mid"/>
-			<result property="summary" column="p_summary"/>
-			<result property="auth_status" column="p_auth_status"/>
-			<result property="is_staging" column="p_is_staging"/>
-			<result property="is_deleted" column="p_is_deleted"/>
-			<result property="cover" column="p_cover"/>
+			<id property="id" column="p_id" />
+			<result property="category_id" column="p_category_id" />
+			<result property="title" column="p_title" />
+			<result property="mid" column="p_mid" />
+			<result property="summary" column="p_summary" />
+			<result property="auth_status" column="p_auth_status" />
+			<result property="is_staging" column="p_is_staging" />
+			<result property="is_deleted" column="p_is_deleted" />
+			<result property="cover" column="p_cover" />
 		</association>
 		<association property="book" javaType="Map">
-			<id property="id" column="b_id"/>
-			<result property="bookname" column="b_bookname"/>
-			<result property="author" column="b_author"/>
-			<result property="score" column="b_score"/>
-			<result property="image_url" column="b_image_url"/>
-			<result property="detail" column="bd_detail"/>
-			<result property="" column=""/>
+			<id property="id" column="b_id" />
+			<result property="bookname" column="b_bookname" />
+			<result property="author" column="b_author" />
+			<result property="score" column="b_score" />
+			<result property="image_url" column="b_image_url" />
+			<result property="detail" column="bd_detail" />
+			<result property="" column="" />
 		</association>
 		<association property="b_comment" javaType="Map">
-			<id property="id" column="bc_id"/>
-			<result property="is_long" column="bc_is_long"/>
-			<result property="is_auth" column="bc_is_auth"/>
-			<result property="score" column="bc_score"/>
-			<result property="title" column="bc_title"/>
-			<result property="content" column="bc_content"/>
-			<result property="is_deleted" column="bc_is_deleted"/>
+			<id property="id" column="bc_id" />
+			<result property="is_long" column="bc_is_long" />
+			<result property="is_auth" column="bc_is_auth" />
+			<result property="score" column="bc_score" />
+			<result property="title" column="bc_title" />
+			<result property="content" column="bc_content" />
+			<result property="is_deleted" column="bc_is_deleted" />
 		</association>
 	</resultMap>
-	
+
 
 	<!-- 新动态查询 detail存储了所需信息 以json格式保存 -->
-	<select id="queryWriterUserTrendst" parameterType="PageParameter" resultMap="trendstMap">
-		select 
-			t.id 
-			,t.user_id
-			,t.is_public
-			,t.type
-			,t.detail
-			,t.cms_content_id
-			,t.book_id
-			,t.book_comment_id
-			,DATE_FORMAT(t.gmt_create,'%Y-%m-%d %H:%i') AS trendst_date
-			,DATE_FORMAT(t.gmt_create,'%Y%m%d%H%i') AS trendst_date_num
-			<!-- ,t.gmt_create -->
-			,u.realname
-			,c.id as c_id
-			,c.category_id as c_category_id
-			,c.title as c_title
-			,c.mid as c_mid
-			,c.summary as c_summary
-			,c.is_staging as c_is_staging
-			,c.auth_status as c_auth_status <!-- 0=待审核/1=审核未通过/2=通过 -->
-			,c.is_deleted as c_is_deleted
-			,c.cover as c_cover
-			,pc.id as p_id
-			,pc.category_id as p_category_id
-			,pc.title as p_title
-			,pc.mid as p_mid
-			,pc.summary as p_summary
-			,pc.is_staging as p_is_staging
-			,pc.auth_status as p_auth_status <!-- 0=待审核/1=审核未通过/2=通过 -->
-			,pc.is_deleted as p_is_deleted
-			,pc.cover as p_cover
-			,b.id as b_id
-			,b.bookname as b_bookname
-			,b.author as b_author
-			,b.score as b_score
-			,b.image_url as b_image_url
-			,bd.detail as bd_detail
-			,bc.id as bc_id
-			,bc.is_long as bc_is_long
-			,bc.is_auth as bc_is_auth
-			,bc.score as bc_score
-			,bc.title as bc_title
-			,bc.content as bc_content
-			,bc.is_deleted as bc_is_deleted 
-		from 
+	<select id="queryWriterUserTrendst" parameterType="PageParameter"
+		resultMap="trendstMap">
+		select
+		t.id
+		,t.user_id
+		,t.is_public
+		,t.type
+		,t.detail
+		,t.cms_content_id
+		,t.book_id
+		,t.book_comment_id
+		,DATE_FORMAT(t.gmt_create,'%Y-%m-%d
+		%H:%i') AS
+		trendst_date
+		,DATE_FORMAT(t.gmt_create,'%Y%m%d%H%i') AS
+		trendst_date_num
+		<!-- ,t.gmt_create -->
+		,u.realname
+		,c.id as c_id
+		,c.category_id as c_category_id
+		,c.title as
+		c_title
+		,c.mid as c_mid
+		,c.summary as c_summary
+		,c.is_staging as
+		c_is_staging
+		,c.auth_status as c_auth_status <!-- 0=待审核/1=审核未通过/2=通过 -->
+		,c.is_deleted as c_is_deleted
+		,c.cover as c_cover
+		,pc.id as p_id
+		,pc.category_id as p_category_id
+		,pc.title as p_title
+		,pc.mid as p_mid
+		,pc.summary as p_summary
+		,pc.is_staging as p_is_staging
+		,pc.auth_status
+		as p_auth_status <!-- 0=待审核/1=审核未通过/2=通过 -->
+		,pc.is_deleted as p_is_deleted
+		,pc.cover as p_cover
+		,b.id as b_id
+		,b.bookname as b_bookname
+		,b.author as b_author
+		,b.score as b_score
+		,b.image_url as b_image_url
+		,bd.detail as bd_detail
+		,bc.id as bc_id
+		,bc.is_long as bc_is_long
+		,bc.is_auth as bc_is_auth
+		,bc.score as
+		bc_score
+		,bc.title as bc_title
+		,bc.content as bc_content
+		,bc.is_deleted
+		as bc_is_deleted
+		from
 		writer_user_trendst t
-		left join cms_content c on t.cms_content_id = c.id
-		left join cms_content pc on c.parent_id = pc.id
-		left join book_user_comment bc on t.book_comment_id = bc.id 
-		left join book b on t.book_id = b.id or bc.book_id = b.id
-		left join book_detail bd on b.id = bd.book_id
-		
-		left join writer_user u on t.user_id = u.id
+		left join cms_content c on
+		t.cms_content_id = c.id
+		left join cms_content pc on c.parent_id =
+		pc.id
+		left join book_user_comment bc on t.book_comment_id = bc.id
+		left
+		join
+		book b on t.book_id = b.id or bc.book_id = b.id
+		left join
+		book_detail bd
+		on b.id = bd.book_id
+
+		left join writer_user u on
+		t.user_id = u.id
 		<where>
-			<!-- is_delete = 0
-			and --> user_id = #{parameter.logUserId}
-			and (${parameter.selfLog}   
-					or(
-							(t.type = 0 and t.is_public = 1)
-						or(t.type = 1 and c.auth_status = 2)
-						or(t.type = 2 and c.auth_status = 2 and pc.auth_status = 2)
-						or(t.type = 5 and bc.is_auth = 1)
-						or(t.type in (3,4,6,7) )
-					)
-				)
-			
-			
+			<!-- is_delete = 0 and -->
+			user_id = #{parameter.logUserId}
+			and (${parameter.selfLog}
+			or(
+			(t.type
+			=
+			0 and t.is_public = 1)
+			or(t.type = 1 and c.auth_status = 2)
+			or(t.type =
+			2 and c.auth_status = 2 and pc.auth_status = 2)
+			or(t.type = 5 and
+			bc.is_auth = 1)
+			or(t.type in (3,4,6,7) )
+			)
+			)
+
+
 		</where>
 		group by t.id
 		order by t.gmt_create desc
-		
+
 		limit ${start},${pageSize}
 	</select>
-	
-	<select id="queryWriterUserTrendstCount" parameterType="PageParameter" resultType="Integer">
-		select 
-			count(t.id )
-		from 
+
+	<select id="queryWriterUserTrendstCount" parameterType="PageParameter"
+		resultType="Integer">
+		select
+		count(t.id )
+		from
 		writer_user_trendst t
-		left join cms_content c on t.cms_content_id = c.id
-		left join cms_content pc on c.parent_id = pc.id
-		left join book_user_comment bc on t.book_comment_id = bc.id 
-		left join writer_user u on t.user_id = u.id
+		left join cms_content c on
+		t.cms_content_id = c.id
+		left join cms_content pc on c.parent_id =
+		pc.id
+		left join book_user_comment bc on t.book_comment_id = bc.id
+		left
+		join
+		writer_user u on t.user_id = u.id
 		<where>
-			<!-- is_delete = 0
-			and  -->user_id = #{parameter.logUserId}
-			and (${parameter.selfLog}   
-					or(
-							(t.type = 0 and t.is_public = 1)
-						or(t.type = 1 and c.auth_status = 2)
-						or(t.type = 2 and c.auth_status = 2 and pc.auth_status = 2)
-						or(t.type = 5 and bc.is_auth = 1)
-						or(t.type in (3,4,6,7) )
-					)
-				)
+			<!-- is_delete = 0 and -->
+			user_id = #{parameter.logUserId}
+			and (${parameter.selfLog}
+			or(
+			(t.type
+			=
+			0 and t.is_public = 1)
+			or(t.type = 1 and c.auth_status = 2)
+			or(t.type =
+			2 and c.auth_status = 2 and pc.auth_status = 2)
+			or(t.type = 5 and
+			bc.is_auth = 1)
+			or(t.type in (3,4,6,7) )
+			)
+			)
 		</where>
-		
+
 	</select>
 
-	<update id="deleteUserTrendst" parameterType="com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst">
+	<update id="deleteUserTrendst"
+		parameterType="com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst">
 		update writer_user_trendst set is_delete = 1
 		<where>
-			user_id= #{user_id} 
+			user_id= #{user_id}
 			and type = #{type}
 			<if test="cms_content_id != null and cms_content_id != '' ">
 				and cms_content_id = #{cms_content_id}
 			</if>
 			<if test="book_id != null and book_id != '' ">
 				and book_id = #{book_id}
-			</if><if test="book_comment_id != null and book_comment_id != '' ">
+			</if>
+			<if test="book_comment_id != null and book_comment_id != '' ">
 				and book_comment_id = #{book_comment_id}
 			</if>
 		</where>
 	</update>
 
 	<!-- 产生一条动态 -->
-	<insert id="saveUserTrendst" parameterType="com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst">
+	<insert id="saveUserTrendst"
+		parameterType="com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst">
 		insert into
 		writer_user_trendst
 		(
-			user_id
-			,is_public
-			,type
-			,detail
-			,cms_content_id
-			,book_id
-			,book_comment_id
+		user_id
+		,is_public
+		,type
+		,detail
+		,cms_content_id
+		,book_id
+		,book_comment_id
 		)
 		values(
-			#{user_id}
-			,#{is_public}
-			,#{type}
-			,#{detail}
-			,#{cms_content_id}
-			,#{book_id}
-			,#{book_comment_id}
+		#{user_id}
+		,#{is_public}
+		,#{type}
+		,#{detail}
+		,#{cms_content_id}
+		,#{book_id}
+		,#{book_comment_id}
 		)
 	</insert>
 
@@ -876,43 +986,52 @@
 		WHERE
 		bc.id = #{id}
 	</select>
-	
+
 	<!-- 伪删除我的纠错 同时根据纠错表主键和纠错人id 同时满足才删除 -->
 	<update id="deleteMyCorrection" parameterType="Map">
-		update book_correction
+		update
+		book_correction
 		set is_deleted = 1
-		where 
-		id= #{id} and user_id = #{logUserId}
+		where
+		id= #{id} and user_id =
+		#{logUserId}
 	</update>
-	
+
 	<update id="deleteMyBookComment" parameterType="Map">
-		update book_user_comment
+		update
+		book_user_comment
 		set is_deleted = 1
-		where 
-		id= #{id} and writer_id = #{logUserId}
+		where
+		id= #{id} and writer_id =
+		#{logUserId}
 	</update>
 
 	<select id="queryUserById" parameterType="String" resultType="Map">
-		select * from writer_user 
+		select * from writer_user
 		where id = #{id}
 	</select>
 
 	<!-- 查询两人除拒绝（1）外最亲密的好友关系（0申请，2接收 取max） -->
 	<select id="queryOurFriendShip" resultType="Map">
-		select 
-			t.id 
-			,t.status
-			,request_id = #{userId} and t.status = 0 as isBeenRequest
-			,target_id = #{userId} and t.status = 0 as hasRequest
+		select
+		t.id
+		,t.status
+		,request_id = #{userId} and t.status = 0 as isBeenRequest
+		,target_id =
+		#{userId} and t.status = 0 as hasRequest
 		from writer_friend t
-		where 
-			t.status != 1
-			and ((request_id = #{userId} and target_id = #{logUserId}) or (request_id = #{logUserId} and target_id = #{userId}))
+		where
+		t.status != 1
+		and ((request_id = #{userId} and target_id =
+		#{logUserId}) or
+		(request_id = #{logUserId} and target_id =
+		#{userId}))
 		order by t.status desc
 	</select>
 
 	<!-- 教材申报用 查询申报表 -->
-	<select id="queryDeclarationById" parameterType="String" resultType="Map">
+	<select id="queryDeclarationById" parameterType="String"
+		resultType="Map">
 		SELECT
 		d.id AS did,
 		d.user_id,
@@ -921,7 +1040,8 @@
 		d.online_progress as online_progress
 		FROM
 		declaration d
-		inner join material m on d.material_id = m.id
+		inner join
+		material m on d.material_id = m.id
 		WHERE
 		d.id = #{declaration_id}
 	</select>
@@ -929,332 +1049,90 @@
 </mapper>
 
 <!-- 动态查询 -->
-	<!-- <select id="queryWriterUserTrendst" parameterType="PageParameter"
-		resultType="Map">
-		select
-		t.id,t.table_name,t.table_id
-		,DATE_FORMAT(t.trendst_date,'%Y-%m-%d %H:%i') AS trendst_date
-		,DATE_FORMAT(t.trendst_date,'%Y%m%d%H%i') AS trendst_date_num
-		,t.trendst_type
-		,tsjc.*,jcsb.*,sbwz.*,wdjc.*,wycs.*,wdsp.*
-		from
-		writer_user_trendst t
-		left join
-		(
-		SELECT
-		bc.id AS tsjc_id,
-		'tsjc' AS tsjc_type,
-		DATE_FORMAT(bc.gmt_create,'%Y年%m月%d日') AS tsjc_create_time,
-		b.bookname
-		AS tsjc_bookname,
-		b.image_url AS tsjc_image_url,
-		bc.book_id AS
-		tsjc_book_id,
-		bc.page AS tsjc_page,
-		bc.line AS tsjc_line,
-		bd.detail AS
-		tsjc_detail,
-		bc.content AS tsjc_content,
-		u.realname AS tsjc_realname,
-		bc.result AS tsjc_result,
-		bc.is_editor_replied AS
-		tsjc_is_editor_replied
-		FROM
-		book AS b
-		Inner Join book_editor AS be ON
-		b.id = be.book_id
-		Inner Join book_correction AS bc ON b.id = bc.book_id
-		Inner Join writer_user AS u ON bc.user_id = u.id
-		left Join book_detail
-		AS bd ON bd.book_id = b.id
-		WHERE
-		be.author_id = #{parameter.logUserId}
-		ORDER BY
-		bc.gmt_create DESC
-		)tsjc
-		on t.table_name = tsjc.tsjc_type and
-		t.table_id=tsjc.tsjc_id
-
-		left join
-		(
-		SELECT
-		dp.id AS jcsb_id,
-		'jcsb' AS jcsb_type,
-		DATE_FORMAT(dp.gmt_update,'%Y年%m月%d日') AS jcsb_update_time,
-		DATE_FORMAT(dp.gmt_create,'%Y年%m月%d日') AS jcsb_create_time,
-		tb.textbook_name as jcsb_textbook_name,
-		concat(
-		case
-		when dp.preset_position >= 8
-		then '数字编委 '
-		else ''
-		end
-		,
-		case
-		when dp.preset_position in (4,5,6,7,12,13,14,15)
-		then '主编 '
-		else ''
-		end
-		,
-		case
-		when dp.preset_position in (2,3,6,7,10,11,14,15)
-		then '副主编 '
-		else ''
-		end
-		,
-		case
-		when dp.preset_position in (1,3,5,7,9,11,13,15)
-		then '编委 '
-		else ''
-		end
-		) as jcsb_preset_position,
-		concat(
-		case
-		when dp.chosen_position >= 8
-		then '数字编委 '
-		else ''
-		end
-		,
-		case
-		when dp.chosen_position in (4,5,6,7,12,13,14,15)
-		then '主编 '
-		else ''
-		end
-		,
-		case
-		when dp.chosen_position in (2,3,6,7,10,11,14,15)
-		then '副主编 '
-		else ''
-		end
-		,
-		case
-		when dp.chosen_position in (1,3,5,7,9,11,13,15)
-		then '编委 '
-		else ''
-		end
-		) as jcsb_chosen_position,
-		d.online_progress as jcsb_online_progress,
-		dp.rank as jcsb_rank
-		FROM
-		dec_position AS dp
-		Inner Join declaration AS d
-		ON dp.declaration_id = d.id
-		Inner Join textbook AS tb ON dp.textbook_id
-		= tb.id
-		WHERE
-		d.user_id = #{parameter.logUserId}
-		order by dp.gmt_update
-		)jcsb
-		on t.table_name = jcsb.jcsb_type and t.table_id=jcsb.jcsb_id
-
-		left join
-		(
-			 SELECT 
-			cc.id  as sbwz_id
-			,'sbwz' as sbwz_type
-			,DATE_FORMAT(cc.gmt_create,'%Y年%m月%d日') AS sbwz_create_time
-			 ,cc.title AS sbwz_title
-			 ,cc.summary AS sbwz_summary
-			 ,cc.auth_status AS sbwz_auth_status
-			 ,cc.is_deleted AS sbwz_is_deleted
-			 ,cc.mid AS sbwz_mid
-			 from cms_content cc
-			 inner join cms_category ct on cc.category_id = ct.id and ct.category_name = '医学随笔'
-			 where cc.author_id=#{parameter.logUserId}
-				  and cc.is_deleted !='1'
-		order by cc.gmt_create
-		)sbwz
-		on t.table_name = sbwz.sbwz_type and
-		t.table_id=sbwz.sbwz_id
-
-		left join
-		(
-		SELECT
-		bc.id AS wdjc_id,
-		'wdjc' AS wdjc_type,
-		DATE_FORMAT(bc.gmt_create,'%Y年%m月%d日') AS wdjc_create_time,
-		b.bookname
-		AS wdjc_bookname,
-		b.image_url AS wdjc_image_url,
-		bc.book_id AS
-		wdjc_book_id,
-		bd.detail AS wdjc_detail,
-		bc.page AS wdjc_page,
-		bc.line AS
-		wdjc_line,
-		bc.content AS wdjc_content,
-		u.realname AS wdjc_realname,
-		bc.is_deleted AS wdjc_is_deleted,
-		bc.result AS wdjc_result,
-		bc.is_editor_replied AS wdjc_is_editor_replied
-				FROM
-				book AS b
-				Inner Join book_correction AS bc ON b.id = bc.book_id
-				Inner Join writer_user AS u ON bc.user_id = u.id
-				left  Join book_detail AS bd ON bd.book_id = b.id
-				WHERE
-				bc.user_id =  #{parameter.logUserId}
-				AND bc.is_deleted =  '0' 
-				
-				order by  bc.gmt_create desc
-		) wdjc
-		on t.table_name = wdjc.wdjc_type and
-		t.table_id=wdjc.wdjc_id
-
-		left join
-		(
-		SELECT
-		t.id AS wycs_id,
-		'wycs' AS wycs_type,
-		DATE_FORMAT(t.gmt_update,'%Y年%m月%d日') AS wycs_update_time,
-		DATE_FORMAT(t.gmt_create,'%Y年%m月%d日') AS wycs_create_time,
-		t.bookname
-		AS wycs_bookname,
-		t.auth_progress AS wycs_auth_progress
-		FROM
-		topic AS t
-		WHERE
-		t.user_id = #{parameter.logUserId} AND
-		t.is_deleted = '0' AND
-		t.auth_progress IN ('2', '3')
-
-		order by t.gmt_update
-		) wycs
-		on t.table_name = wycs.wycs_type and
-		t.table_id=wycs.wycs_id
-
-		left join
-		(
-		SELECT
-		a.id AS wdsp_id,
-		'wdsp' AS wdsp_type,
-		DATE_FORMAT(a.gmt_create,'%Y年%m月%d日') AS wdsp_create_time,
-		b.bookname
-		AS wdsp_bookname,
-		b.image_url AS wdsp_image_url,
-		b.id AS wdsp_book_id,
-		a.score AS wdsp_score,
-		a.content AS wdsp_content,
-		a.is_deleted AS wdsp_is_deleted,
-		bd.detail AS wdsp_detail,
-		u.realname AS wdsp_realname,
-		DATE_FORMAT(a.gmt_update,'%Y年%m月%d日') AS wdsp_update_time
-		from
-		book_user_comment a
-		left JOIN book b ON a.book_id=b.id
-		join writer_user u on a.writer_id = u.id
-		left join book_detail bd on bd.book_id = b.id
-		WHERE
-		a.writer_id =  #{parameter.logUserId} 
-		AND a.is_deleted =  '0' 
-		) wdsp
-		on t.table_name = wdsp.wdsp_type and t.table_id=wdsp.wdsp_id
-
-		where t.writer_user_id = #{parameter.logUserId}
-		order by t.trendst_date
-		desc
-		limit ${start},${pageSize}
-	</select>
-
-	<select id="queryWriterUserTrendstCount" parameterType="PageParameter"
-		resultType="Integer">
-		select count(*) from
-		(
-		select
-		t.*
-		from
-		writer_user_trendst t
-		left join
-		(
-		SELECT
-		bc.id AS tsjc_id,
-		'tsjc' AS tsjc_type
-		FROM
-		book AS b
-		Inner Join book_editor AS be ON b.id = be.book_id
-		Inner Join book_correction AS bc ON b.id = bc.book_id
-		Inner Join writer_user AS u ON bc.user_id = u.id
-		WHERE
-		be.author_id = #{parameter.logUserId}
-		ORDER BY
-		bc.gmt_create DESC
-		)tsjc
-		on t.table_name = tsjc.tsjc_type and t.table_id=tsjc.tsjc_id
-
-		left join
-		(
-		SELECT
-		dp.id AS jcsb_id,
-		'jcsb' AS jcsb_type
-		FROM
-		dec_position AS dp
-		Inner Join declaration AS d ON dp.declaration_id = d.id
-		Inner Join textbook AS tb ON dp.textbook_id = tb.id
-		WHERE
-		d.user_id = #{parameter.logUserId}
-		order by dp.gmt_update
-		)jcsb
-		on t.table_name = jcsb.jcsb_type and t.table_id=jcsb.jcsb_id
-
-		left join
-		(
-		SELECT
-		cc.id as sbwz_id
-		,'sbwz' as sbwz_type
-
-		from cms_content cc
-		inner join cms_category ct on cc.category_id = ct.id and ct.category_name =
-		'医学随笔'
-		where cc.author_id=#{parameter.logUserId}
-		and cc.is_deleted !='1'
-		order by cc.gmt_create
-		)sbwz
-		on t.table_name = sbwz.sbwz_type and t.table_id=sbwz.sbwz_id
-
-		left join
-		(
-		SELECT
-		bc.id AS wdjc_id,
-		'wdjc' AS wdjc_type
-		FROM
-		book AS b
-		Inner Join book_correction AS bc ON b.id = bc.book_id
-		Inner Join writer_user AS u ON bc.user_id = u.id
-		WHERE
-		bc.user_id = #{parameter.logUserId}
-		AND bc.is_deleted = '0'
-
-		order by bc.gmt_create desc
-		) wdjc
-		on t.table_name = wdjc.wdjc_type and t.table_id=wdjc.wdjc_id
-
-		left join
-		(
-		SELECT
-		t.id AS wycs_id,
-		'wycs' AS wycs_type
-		FROM
-		topic AS t
-		WHERE
-		t.user_id = #{parameter.logUserId} AND
-		t.is_deleted = '0' AND
-		t.auth_progress IN ('2', '3')
-
-		order by t.gmt_update
-		) wycs
-		on t.table_name = wycs.wycs_type and t.table_id=wycs.wycs_id
-
-		left join
-		(
-		SELECT
-		a.id AS wdsp_id,
-		'wdsp' AS wdsp_type
-		from book_user_comment a left JOIN book b ON a.book_id=b.id
-		WHERE
-		a.writer_id = #{parameter.logUserId} AND
-		a.is_deleted = '0'
-		) wdsp
-		on t.table_name = wdsp.wdsp_type and t.table_id=wdsp.wdsp_id
-		where t.writer_user_id = #{parameter.logUserId}
-		)t
-	</select> -->
+<!-- <select id="queryWriterUserTrendst" parameterType="PageParameter" resultType="Map"> 
+	select t.id,t.table_name,t.table_id ,DATE_FORMAT(t.trendst_date,'%Y-%m-%d 
+	%H:%i') AS trendst_date ,DATE_FORMAT(t.trendst_date,'%Y%m%d%H%i') AS trendst_date_num 
+	,t.trendst_type ,tsjc.*,jcsb.*,sbwz.*,wdjc.*,wycs.*,wdsp.* from writer_user_trendst 
+	t left join ( SELECT bc.id AS tsjc_id, 'tsjc' AS tsjc_type, DATE_FORMAT(bc.gmt_create,'%Y年%m月%d日') 
+	AS tsjc_create_time, b.bookname AS tsjc_bookname, b.image_url AS tsjc_image_url, 
+	bc.book_id AS tsjc_book_id, bc.page AS tsjc_page, bc.line AS tsjc_line, bd.detail 
+	AS tsjc_detail, bc.content AS tsjc_content, u.realname AS tsjc_realname, 
+	bc.result AS tsjc_result, bc.is_editor_replied AS tsjc_is_editor_replied 
+	FROM book AS b Inner Join book_editor AS be ON b.id = be.book_id Inner Join 
+	book_correction AS bc ON b.id = bc.book_id Inner Join writer_user AS u ON 
+	bc.user_id = u.id left Join book_detail AS bd ON bd.book_id = b.id WHERE 
+	be.author_id = #{parameter.logUserId} ORDER BY bc.gmt_create DESC )tsjc on 
+	t.table_name = tsjc.tsjc_type and t.table_id=tsjc.tsjc_id left join ( SELECT 
+	dp.id AS jcsb_id, 'jcsb' AS jcsb_type, DATE_FORMAT(dp.gmt_update,'%Y年%m月%d日') 
+	AS jcsb_update_time, DATE_FORMAT(dp.gmt_create,'%Y年%m月%d日') AS jcsb_create_time, 
+	tb.textbook_name as jcsb_textbook_name, concat( case when dp.preset_position 
+	>= 8 then '数字编委 ' else '' end , case when dp.preset_position in (4,5,6,7,12,13,14,15) 
+	then '主编 ' else '' end , case when dp.preset_position in (2,3,6,7,10,11,14,15) 
+	then '副主编 ' else '' end , case when dp.preset_position in (1,3,5,7,9,11,13,15) 
+	then '编委 ' else '' end ) as jcsb_preset_position, concat( case when dp.chosen_position 
+	>= 8 then '数字编委 ' else '' end , case when dp.chosen_position in (4,5,6,7,12,13,14,15) 
+	then '主编 ' else '' end , case when dp.chosen_position in (2,3,6,7,10,11,14,15) 
+	then '副主编 ' else '' end , case when dp.chosen_position in (1,3,5,7,9,11,13,15) 
+	then '编委 ' else '' end ) as jcsb_chosen_position, d.online_progress as jcsb_online_progress, 
+	dp.rank as jcsb_rank FROM dec_position AS dp Inner Join declaration AS d 
+	ON dp.declaration_id = d.id Inner Join textbook AS tb ON dp.textbook_id = 
+	tb.id WHERE d.user_id = #{parameter.logUserId} order by dp.gmt_update )jcsb 
+	on t.table_name = jcsb.jcsb_type and t.table_id=jcsb.jcsb_id left join ( 
+	SELECT cc.id as sbwz_id ,'sbwz' as sbwz_type ,DATE_FORMAT(cc.gmt_create,'%Y年%m月%d日') 
+	AS sbwz_create_time ,cc.title AS sbwz_title ,cc.summary AS sbwz_summary ,cc.auth_status 
+	AS sbwz_auth_status ,cc.is_deleted AS sbwz_is_deleted ,cc.mid AS sbwz_mid 
+	from cms_content cc inner join cms_category ct on cc.category_id = ct.id 
+	and ct.category_name = '医学随笔' where cc.author_id=#{parameter.logUserId} and 
+	cc.is_deleted !='1' order by cc.gmt_create )sbwz on t.table_name = sbwz.sbwz_type 
+	and t.table_id=sbwz.sbwz_id left join ( SELECT bc.id AS wdjc_id, 'wdjc' AS 
+	wdjc_type, DATE_FORMAT(bc.gmt_create,'%Y年%m月%d日') AS wdjc_create_time, b.bookname 
+	AS wdjc_bookname, b.image_url AS wdjc_image_url, bc.book_id AS wdjc_book_id, 
+	bd.detail AS wdjc_detail, bc.page AS wdjc_page, bc.line AS wdjc_line, bc.content 
+	AS wdjc_content, u.realname AS wdjc_realname, bc.is_deleted AS wdjc_is_deleted, 
+	bc.result AS wdjc_result, bc.is_editor_replied AS wdjc_is_editor_replied 
+	FROM book AS b Inner Join book_correction AS bc ON b.id = bc.book_id Inner 
+	Join writer_user AS u ON bc.user_id = u.id left Join book_detail AS bd ON 
+	bd.book_id = b.id WHERE bc.user_id = #{parameter.logUserId} AND bc.is_deleted 
+	= '0' order by bc.gmt_create desc ) wdjc on t.table_name = wdjc.wdjc_type 
+	and t.table_id=wdjc.wdjc_id left join ( SELECT t.id AS wycs_id, 'wycs' AS 
+	wycs_type, DATE_FORMAT(t.gmt_update,'%Y年%m月%d日') AS wycs_update_time, DATE_FORMAT(t.gmt_create,'%Y年%m月%d日') 
+	AS wycs_create_time, t.bookname AS wycs_bookname, t.auth_progress AS wycs_auth_progress 
+	FROM topic AS t WHERE t.user_id = #{parameter.logUserId} AND t.is_deleted 
+	= '0' AND t.auth_progress IN ('2', '3') order by t.gmt_update ) wycs on t.table_name 
+	= wycs.wycs_type and t.table_id=wycs.wycs_id left join ( SELECT a.id AS wdsp_id, 
+	'wdsp' AS wdsp_type, DATE_FORMAT(a.gmt_create,'%Y年%m月%d日') AS wdsp_create_time, 
+	b.bookname AS wdsp_bookname, b.image_url AS wdsp_image_url, b.id AS wdsp_book_id, 
+	a.score AS wdsp_score, a.content AS wdsp_content, a.is_deleted AS wdsp_is_deleted, 
+	bd.detail AS wdsp_detail, u.realname AS wdsp_realname, DATE_FORMAT(a.gmt_update,'%Y年%m月%d日') 
+	AS wdsp_update_time from book_user_comment a left JOIN book b ON a.book_id=b.id 
+	join writer_user u on a.writer_id = u.id left join book_detail bd on bd.book_id 
+	= b.id WHERE a.writer_id = #{parameter.logUserId} AND a.is_deleted = '0' 
+	) wdsp on t.table_name = wdsp.wdsp_type and t.table_id=wdsp.wdsp_id where 
+	t.writer_user_id = #{parameter.logUserId} order by t.trendst_date desc limit 
+	${start},${pageSize} </select> <select id="queryWriterUserTrendstCount" parameterType="PageParameter" 
+	resultType="Integer"> select count(*) from ( select t.* from writer_user_trendst 
+	t left join ( SELECT bc.id AS tsjc_id, 'tsjc' AS tsjc_type FROM book AS b 
+	Inner Join book_editor AS be ON b.id = be.book_id Inner Join book_correction 
+	AS bc ON b.id = bc.book_id Inner Join writer_user AS u ON bc.user_id = u.id 
+	WHERE be.author_id = #{parameter.logUserId} ORDER BY bc.gmt_create DESC )tsjc 
+	on t.table_name = tsjc.tsjc_type and t.table_id=tsjc.tsjc_id left join ( 
+	SELECT dp.id AS jcsb_id, 'jcsb' AS jcsb_type FROM dec_position AS dp Inner 
+	Join declaration AS d ON dp.declaration_id = d.id Inner Join textbook AS 
+	tb ON dp.textbook_id = tb.id WHERE d.user_id = #{parameter.logUserId} order 
+	by dp.gmt_update )jcsb on t.table_name = jcsb.jcsb_type and t.table_id=jcsb.jcsb_id 
+	left join ( SELECT cc.id as sbwz_id ,'sbwz' as sbwz_type from cms_content 
+	cc inner join cms_category ct on cc.category_id = ct.id and ct.category_name 
+	= '医学随笔' where cc.author_id=#{parameter.logUserId} and cc.is_deleted !='1' 
+	order by cc.gmt_create )sbwz on t.table_name = sbwz.sbwz_type and t.table_id=sbwz.sbwz_id 
+	left join ( SELECT bc.id AS wdjc_id, 'wdjc' AS wdjc_type FROM book AS b Inner 
+	Join book_correction AS bc ON b.id = bc.book_id Inner Join writer_user AS 
+	u ON bc.user_id = u.id WHERE bc.user_id = #{parameter.logUserId} AND bc.is_deleted 
+	= '0' order by bc.gmt_create desc ) wdjc on t.table_name = wdjc.wdjc_type 
+	and t.table_id=wdjc.wdjc_id left join ( SELECT t.id AS wycs_id, 'wycs' AS 
+	wycs_type FROM topic AS t WHERE t.user_id = #{parameter.logUserId} AND t.is_deleted 
+	= '0' AND t.auth_progress IN ('2', '3') order by t.gmt_update ) wycs on t.table_name 
+	= wycs.wycs_type and t.table_id=wycs.wycs_id left join ( SELECT a.id AS wdsp_id, 
+	'wdsp' AS wdsp_type from book_user_comment a left JOIN book b ON a.book_id=b.id 
+	WHERE a.writer_id = #{parameter.logUserId} AND a.is_deleted = '0' ) wdsp 
+	on t.table_name = wdsp.wdsp_type and t.table_id=wdsp.wdsp_id where t.writer_user_id 
+	= #{parameter.logUserId} )t </select> -->
