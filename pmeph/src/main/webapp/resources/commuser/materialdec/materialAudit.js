@@ -59,7 +59,7 @@ function chooseModel(data){
 		$("#jcbxqk").css("display","block");
 	}
 	//其他教材编写情况
-	if(data.is_other_textbook_used == "1"){
+	if(data.is_pmph_textbook_used == "1"){
 		$("#qtjcbx").css("display","block");
 	}
 	//科研情况
