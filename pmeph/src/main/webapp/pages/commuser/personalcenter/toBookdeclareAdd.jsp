@@ -258,7 +258,7 @@
 					</thead>
 					<tbody>
 						 <tr id="sbbz_1">
-							<td><input class="sb_input" style="width: 100px;" name="write_realname" placeholder="编者姓名" maxlength="13" value=""/></td>
+							<td><input class="sb_input" style="width: 100px;" id="write_realname" name="write_realname" placeholder="编者姓名" maxlength="13" value=""/></td>
 							<td>
 								<select id="r_sex" name="sex">
 									<option value="0" selected="selected">男</option>
@@ -268,8 +268,10 @@
 							<td><input class="sb_input" style="width: 80px;" name="write_price" placeholder="年龄" value="" id="write_price"
 							onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" onBlur="checkAge(this)"
 							  maxlength="3"/></td>
-							<td><input class="sb_input" style="width: 320px;" name="write_position" placeholder="行政职务" value="" maxlength="12"/></td>
-							<td><input class="sb_input" style="width: 200px;" name="workplace" placeholder="工作单位" value="" maxlength="12"/></td>
+							<td><input class="sb_input" style="width: 320px;" id="write_position"  name="write_position" placeholder="行政职务" value="" maxlength="12"/></td>
+							<td><input class="sb_input" style="width: 200px;" id="workplace" name="workplace" placeholder="工作单位" value="" maxlength="12"/>
+								<input type="hidden" name="checkbzqk" value="write_realname,write_price,write_position,workplace"/>
+							</td>
 							<td><div class="add_div"><img class="add_img" src="${ctx}/statics/image/del.png" onclick="del_tr('sbbz_1')"></div></td>
 						</tr> 
 					</tbody>

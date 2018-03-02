@@ -565,7 +565,7 @@
 
 	<!-- 我的问卷 -->
 	<select id="mySurvey" parameterType="PageParameter" resultType="java.util.Map">
-		select distinct s.id,s.title, DATE_FORMAT(s.begin_date,'%Y年%m月%d日') as gtime from survey s
+		select  s.id,s.title, DATE_FORMAT(s.begin_date,'%Y年%m月%d日') as gtime from survey s
 		left JOIN survey_target st ON st.survey_id=s.id  
 		LEFT JOIN writer_user wu on wu.org_id=st.org_id
         left join survey_question_answer sqa on sqa.survey_id=s.id
@@ -576,6 +576,7 @@
           #{parameter.dateStr}&lt;=DATE_ADD(s.`end_date`,INTERVAL 1 DAY)  or 
             ( sqa.user_id=#{parameter.logUserId} and  #{parameter.dateStr} &gt; DATE_ADD(s.`end_date`,INTERVAL 1 DAY)) 
       ))
+      group by s.id
       ORDER BY  s.begin_date DESC
       limit ${start},${pageSize}
 		

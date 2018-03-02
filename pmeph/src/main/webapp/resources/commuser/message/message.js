@@ -171,14 +171,15 @@ function showup(id) {
             	
             	$("#tattachment").html(ste);
                 $("#bookmistake").show();
-          
+                $("#readno").attr('src',contextpath+"statics/image/readyes.png");
         }
     });
 }
 
 //点击纠错弹窗隐藏
 function hideup() {
-	var messid=$("#messid").val();
+	$("#bookmistake").hide();
+/*	var messid=$("#messid").val();
 	$.ajax({
         type: 'post',
         url: contextpath + 'message/updateTitleMessage.action?messid='+messid,
@@ -190,7 +191,7 @@ function hideup() {
         			toList();
         		}
         }
-    });
+    });*/
 }
 //刷新消息页
 function toList(){
