@@ -723,14 +723,14 @@ request.setAttribute("currentTime",datetime);
                     <br/>
                     <c:if test="${listmygroup == null || listmygroup.size()==0  }">
                 		<div style="padding-top: 10px;">
-	                        <img src="<c:url value="/statics/image/no_group.png"></c:url>">
+	                        <img src="<c:url value="${ctx}/statics/image/no_group.png"></c:url>">
 	                    </div>
                 	</c:if>
                     <ul class="scul">
                         <c:forEach items="${listmygroup}" begin='0' end='8' var="listmyg" varStatus="status">
                             <a  class="not-like-an-a" href="${ctx}/group/toMyGroup.action?groupId=${listmyg.group_id}">
 	                            <li class="wdxz" title="${listmyg.group_name}">
-	                            	<img src="<%=path %>/image/${listmyg.group_image}.action" class="xztp">
+	                            	<img src="${ctx}/${listmyg.group_image}" class="xztp">
 	                                <br/>
 	                                <span class="group_name">${listmyg.group_name}</span>
 	                                <span class="xzrs">(${listmyg.grouppeo}人)</span>

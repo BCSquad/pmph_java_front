@@ -163,7 +163,8 @@
 		t.summary,
 		t.gmt_create,
 		c.realname,
-		t.clicks
+		t.clicks,
+		t.cover
 		from
 		cms_content t
 		left join

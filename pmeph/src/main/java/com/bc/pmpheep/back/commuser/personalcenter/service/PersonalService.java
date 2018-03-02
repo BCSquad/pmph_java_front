@@ -14,7 +14,7 @@ public interface PersonalService {
 
 	public List<PersonalNewMessage> queryMyFriend(Map<String, Object> permap);//我的好友
 
-	public List<PersonalNewMessage> queryMyGroup(Map<String, Object> permap);//我的小组
+	public List<Map<String,Object>> queryMyGroup(Map<String, Object> permap);//我的小组
 	
 	public List<PersonalNewMessage> queryMyOfeerNew(Map<String, Object> permap);//我的申请动态最新消息
 

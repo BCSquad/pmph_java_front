@@ -44,6 +44,12 @@ public interface NoticeMessageService {
 	 * @return
 	 */
 	Map<String, Object> queryTitleMessage(Map<String, Object> paraMap);
+	
+	/**查询统消息标题弹框回显的附件
+	 * @param paraMap
+	 * @return
+	 */
+	List<Map<String, Object>>  queryTitleMessageAttach(Map<String, Object> paraMap);
 	//点击标题已读
 	void updateTitleMessage(String id);
 }

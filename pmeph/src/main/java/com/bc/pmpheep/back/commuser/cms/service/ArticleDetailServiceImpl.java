@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.MapUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,6 +15,7 @@ import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
 import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
+import com.bc.pmpheep.back.util.RouteUtil;
 import com.bc.pmpheep.general.pojo.Content;
 import com.bc.pmpheep.general.pojo.Message;
 import com.bc.pmpheep.general.service.ContentService;
@@ -135,7 +137,9 @@ public class ArticleDetailServiceImpl implements ArticleDetailService {
 	@Override
 	public List<Map<String, Object>> queryArticleSix() {
 		List<Map<String, Object>> list = articleDetailDao.queryArticleSix();
-
+		for (Map<String, Object> map2 : list) {
+			map2.put("cover", RouteUtil.articleAvatar(MapUtils.getString(map2, "cover")));
+		}
 		return list;
 	}
 

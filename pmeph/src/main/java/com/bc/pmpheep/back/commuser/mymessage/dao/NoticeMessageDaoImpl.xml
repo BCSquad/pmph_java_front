@@ -282,14 +282,20 @@
 	    select * from  cms_extra ce left join  cms_content c on c.id=ce.content_id  where c.id=#{cmsId}
 	</select>
 	
+	
+			
 	    <!-- 系统消息标题弹框回显-->
 	<select id="queryTitleMessage" parameterType="java.util.Map" resultType="java.util.Map">
 			select u.id ,u.msg_id ,u.title,u.msg_type, IFNULL(o.realname,o.username)as realname,u.gmt_create
 			from user_message u
 			LEFT JOIN pmph_user o
 			ON o.id= u.sender_id  where u.id=#{id}
-			
 	</select>
+		<!--查询统消息标题弹框回显的附件  -->
+	<select id="queryTitleMessageAttach" parameterType="java.util.Map" resultType="java.util.Map">
+	    select * from  message_attachment ma  where ma.msg_id=#{msg_id}
+	</select>
+	
 	
 		<!-- 点击标题后状态变为已读 -->
 	<update id="updateTitleMessage" parameterType="String" >

@@ -65,29 +65,31 @@ function only(ele,arr){
 	 return str; 
 	};
 //
-function add_zjky(){
-	var num = fnt();
-	var $table = $("#sbbzqk");
-	var $tr = $("<tr id='sbbz_"+num+"'>"+
-			"<td><input class='sb_input' style='width: 100px;' maxlength='13' name='write_realname' placeholder='编者姓名' value=''/></td>"+
-			"<td><select id='r_sex_"+num+"'  name='sex'>"+
-					"<option value='0'>男</option>"+
-					"<option value='1'>女</option>"+
-				"</select></td>"+
-			"<td><input class='sb_input' style='width: 80px;' id='write_price_"+num+"' name='write_price' placeholder='年龄' value=''" +
-			"onkeyup='this.value=this.value.replace(/\\D/g,&#39;&#39;)' onafterpaste='this.value=this.value.replace(/\\D/g,&#39;&#39;)'"+
-				"onBlur='checkAge(this)' maxlength='3' /></td>"+
-			"<td><input class='sb_input' style='width: 320px;' maxlength='12' name='write_position' placeholder='行政职务' value=''/></td>"+
-			"<td><input class='sb_input' style='width: 200px;' maxlength='12' name='workplace' placeholder='工作单位' value=''/></td>"+
-			"<td><div class='add_div'><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('sbbz_"+num+"')\"></div></td>"+
-		"</tr>");
-	$table.append($tr);
-	  $('#r_sex_'+num).selectlist({
-		  	width: 90,
-	    	height: 30,
-	    	optionHeight: 30
-	    });
-}
+	function add_zjky(){
+		var num = fnt();
+		var $table = $("#sbbzqk");
+		var $tr = $("<tr id='sbbz_"+num+"'>"+
+				"<td><input class='sb_input' style='width: 100px;' maxlength='13' id='write_realname_"+num+"' name='write_realname' placeholder='编者姓名' value=''/></td>"+
+				"<td><select id='r_sex_"+num+"'  name='sex'>"+
+						"<option value='0'>男</option>"+
+						"<option value='1'>女</option>"+
+					"</select></td>"+
+				"<td><input class='sb_input' style='width: 80px;' id='write_price_"+num+"' name='write_price' placeholder='年龄' value=''" +
+				"onkeyup='this.value=this.value.replace(/\\D/g,&#39;&#39;)' onafterpaste='this.value=this.value.replace(/\\D/g,&#39;&#39;)'"+
+					"onBlur='checkAge(this)' maxlength='3' /></td>"+
+				"<td><input class='sb_input' style='width: 320px;' maxlength='12' id='write_position_"+num+"' name='write_position' placeholder='行政职务' value=''/></td>"+
+				"<td><input class='sb_input' style='width: 200px;' maxlength='12' id='workplace_"+num+"' name='workplace' placeholder='工作单位' value=''/>" +
+						"<input type='hidden' name='checkbzqk' value='write_realname_"+num+",write_price_"+num+",write_position_"+num+",workplace_"+num+"'/>" +
+						"</td>"+
+				"<td><div class='add_div'><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('sbbz_"+num+"')\"></div></td>"+
+			"</tr>");
+		$table.append($tr);
+		  $('#r_sex_'+num).selectlist({
+			  	width: 90,
+		    	height: 30,
+		    	optionHeight: 30
+		    });
+	}
 
 //删除表格tr
 function del_tr(trId){
@@ -95,6 +97,7 @@ function del_tr(trId){
 }
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type){
+	checkLb();
 	if(checkNull(jsonStr)){
 		$.ajax({
 			type: "POST",
@@ -128,7 +131,7 @@ function checkNull(jsonStr){
 			layer.tips(obj.content, '#'+obj.id);
 			$("#"+obj.id)[0].focus();  //聚焦2
 			b = false;
-			window.message.error(obj.content);
+			window.message.warning(obj.content);
 			return false; 
 		}
 	});
@@ -139,7 +142,32 @@ function checkNull(jsonStr){
 function checkAge(obj){
 	var va = obj.value;
 	if(va >= 200){
-		window.message.warning("请输入正确的年龄");
+		window.message.warning("年龄不能大于200，请输入正确的年龄");
 		$("#"+obj.id)[0].focus();  //聚焦2
+		$("#"+obj.id).val(null);
+	}
+}
+
+
+//列表填报校验
+function checkLb(){
+	var map = $('input[name^="checkbzqk"]').map(
+			function(){return this.value
+		}).get();
+	if(map!=null){
+		for(var i=0;i<map.length;i++){ 
+			var strs= new Array(); //定义一数组 
+			strs=map[i].split(","); //字符分割
+			
+			//遍历
+			for ( var j = 0; j < strs.length; j++) {
+				if($("#"+strs[j]).val() != ""){//表示有值，		
+					for(var k = 0; k < strs.length; k++){
+						jsonStr=jsonStr+"{\"id\":\""+strs[k]+"\",\"content\":\"该条数据请填写完整\"},";
+					}
+					break;
+				}
+			}
+		}
 	}
 }
