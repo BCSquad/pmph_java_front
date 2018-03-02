@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
 import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.commuser.survey.service.SurveyService;
 import com.bc.pmpheep.general.controller.BaseController;
@@ -228,6 +229,13 @@ public class SurveyController extends BaseController{
 				surveyService.saveInputAnswer(map3);
 			}
 		}
+		//TODO 填写问卷时 生成动态
+		Map<String,Object> mapSurvey = surveyService.getSurveyBaseInfo(Long.parseLong(surveyId,10));
+		Map<String, Object> userMap = this.getUserInfo();
+		WriterUserTrendst wut = new WriterUserTrendst(userMap.get("id").toString(), 11, null);
+		wut.setDetail("参加调查", userMap.get("realname").toString()+" 参加了问卷《"+mapSurvey.get("title").toString()+"》。", 1);
+		personalService.saveUserTrendst(wut);//填写问卷时 生成动态
+		
 		String code = "OK";
 		return code;
 	}
