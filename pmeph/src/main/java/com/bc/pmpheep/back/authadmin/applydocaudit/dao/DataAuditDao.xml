@@ -7,6 +7,7 @@
 	<select id="findDataAudit" parameterType="java.util.Map" resultType="java.util.Map">
 		<![CDATA[SELECT
 		d.id as did,d.realname as drealname,d.position as dposition, d.title as dtitle,group_concat(DISTINCT concat(t.textbook_name,'-',(case  
+		when p.preset_position=0 OR  p.preset_position IS NULL  then '无' 
 		when p.preset_position = 4 then '主编' 																															
 		when p.preset_position = 2 then '副主编' 
 		when p.preset_position = 1 then  '编委'
@@ -14,6 +15,7 @@
 		when p.preset_position = 3 then '副主编,编委'
 		when p.preset_position = 5 then '主编,编委'
 		when p.preset_position = 6 then '主编,副主编'
+		when p.preset_position = 7 then '主编,副主编,编委'
 		when p.preset_position = 12 then '主编,数字编委'
 		when p.preset_position = 9 then '数字编委,编委'
 		when p.preset_position = 10 then '数字编委,副主编'
@@ -31,7 +33,8 @@
 		(case  when d.offline_progress=0  then '未收到'  
 		when d.offline_progress=1  then '' 
 		when d.offline_progress=2  then '已收到' 	END)	as 	offlineprogress,
-		group_concat(DISTINCT concat(t.textbook_name,'-',(case  
+		group_concat(DISTINCT concat(t.textbook_name,'-',(case 
+		when m.is_force_end=1 then '遴选结束' 
 		when t.is_published=0  then '审核中' 
 		when pp.chosen_position=0 OR  pp.chosen_position IS NULL  then '遴选结束' 
 		when pp.chosen_position = 4 then '主编' 																															
@@ -44,6 +47,7 @@
 		else '遴选结束'  end )) SEPARATOR '\n') as cp
 		FROM
 		declaration AS d
+		LEFT JOIN  material m ON d.material_id=m.id
 		LEFT JOIN dec_position AS p ON d.id = p.declaration_id
 		LEFT JOIN dec_position_published AS pp ON d.id = pp.declaration_id
 		LEFT JOIN textbook AS t ON p.textbook_id = t.id 
@@ -105,6 +109,7 @@
 		resultType="java.util.Map">
 		<![CDATA[SELECT
 		d.id as did,d.realname as drealname,d.position as dposition, d.title as dtitle,group_concat(DISTINCT concat(t.textbook_name,'-',(case  
+		when p.preset_position=0 OR  p.preset_position IS NULL  then '无' 
 		when p.preset_position = 4 then '主编' 																															
 		when p.preset_position = 2 then '副主编' 
 		when p.preset_position = 1 then  '编委'
@@ -112,6 +117,7 @@
 		when p.preset_position = 3 then '副主编,编委'
 		when p.preset_position = 5 then '主编,编委'
 		when p.preset_position = 6 then '主编,副主编'
+		when p.preset_position = 7 then '主编,副主编,编委'
 		when p.preset_position = 12 then '主编,数字编委'
 		when p.preset_position = 9 then '数字编委,编委'
 		when p.preset_position = 10 then '数字编委,副主编'
@@ -129,7 +135,8 @@
 		(case  when d.offline_progress=0  then '未收到'  
 		when d.offline_progress=1  then '' 
 		when d.offline_progress=2  then '已收到' 	END)	as 	offlineprogress,
-		group_concat(DISTINCT concat(t.textbook_name,'-',(case  
+		group_concat(DISTINCT concat(t.textbook_name,'-',(case
+		when m.is_force_end=1 then '遴选结束'
 		when t.is_published=0  then '审核中' 
 		when pp.chosen_position=0 OR pp.chosen_position IS NULL   then '遴选结束' 
 		when pp.chosen_position = 4 then '主编' 																															
@@ -142,6 +149,7 @@
 		else '遴选结束'  end )) SEPARATOR '\n') as cp
 		FROM
 		declaration AS d
+		LEFT JOIN  material m ON d.material_id=m.id
 		LEFT JOIN dec_position AS p ON d.id = p.declaration_id
 		LEFT JOIN dec_position_published AS pp ON d.id = pp.declaration_id
 		LEFT JOIN textbook AS t ON p.textbook_id = t.id 
@@ -237,7 +245,14 @@
 		t1.is_acade_reward_used*1 is_acade_reward_used,
 		t1.is_acade_reward_required*1 is_acade_reward_required, 
 		t1.is_published*1 is_published, 
-		t1.is_public*1 is_public from material t1 where t1.id = #{material_id}
+		t1.is_public*1 is_public,
+		t1.is_clinical_reward_used*1 is_clinical_reward_used, 
+		t1.is_clinical_reward_required*1 is_clinical_reward_required, 
+		t1.is_acade_reward_used*1 is_acade_reward_used,
+		t1.is_acade_reward_required*1 is_acade_reward_required, 
+		t1.is_pmph_textbook_used*1 is_pmph_textbook_used, 
+		t1.is_pmph_textbook_required*1 is_pmph_textbook_required
+		 from material t1 where t1.id = #{material_id}
 	</select>
 	
 	<!-- 通过教材ID查询所有书籍 -->
