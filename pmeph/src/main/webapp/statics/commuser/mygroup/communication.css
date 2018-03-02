@@ -342,7 +342,19 @@ ul{
     text-align: center;
 }
 .groupcomposition ul li img{
-    width: 44px;
+    max-width: 44px;
+    height: 44px;
+}
+
+#anotherBatcH  a li {
+      list-style-type: none;
+    float: left;
+    font-size: 12px;
+    margin: 0 auto 10px auto;
+    text-align: center;
+}
+#anotherBatcH  a li img{
+    max-width: 44px;
     height: 44px;
 }
 

@@ -39,7 +39,7 @@
  				</c:when>      
      			<c:otherwise>  
      			<div class="div-menu-child <%="audit".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
-	                 onclick="window.location.href=contextpath+'pages/comm/no_access_to_authority.jsp?pageType=audit'">申报资料审核
+	                 onclick="window.location.href='<c:url value="/userinfo/toNoAccessToAuthority.action?pageType=audit"/>'">申报资料审核
 	            	</div>    
   				</c:otherwise> 
 			</c:choose>
@@ -51,7 +51,7 @@
  				</c:when>      
      			<c:otherwise>  
      			<div class="div-menu-child <%="teachercert".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
-	                 onclick="window.location.href=contextpath+'pages/comm/no_access_to_authority.jsp?pageType=teachercert'">教师认证
+	                 onclick="window.location.href='<c:url value="/userinfo/toNoAccessToAuthority.action?pageType=teachercert"/>'">教师认证
 	            	</div>    
   				</c:otherwise> 
 			</c:choose>
@@ -63,7 +63,7 @@
  				</c:when>      
      			<c:otherwise>  
      			<div class="div-menu-child <%="message".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
-	                 onclick="window.location.href=contextpath+'pages/comm/no_access_to_authority.jsp?pageType=message'">消息
+	                 onclick="window.location.href='<c:url value="/userinfo/toNoAccessToAuthority.action?pageType=message"/>'">消息
 	            	</div>    
   				</c:otherwise> 
 			</c:choose>
@@ -75,7 +75,7 @@
  				</c:when>      
      			<c:otherwise>  
      			<div class="div-menu-child <%="usermanage".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
-	                 onclick="window.location.href=contextpath+'pages/comm/no_access_to_authority.jsp?pageType=usermanage'">用户管理
+	                 onclick="window.location.href='<c:url value="/userinfo/toNoAccessToAuthority.action?pageType=usermanage"/>'">用户管理
 	            	</div>    
   				</c:otherwise> 
 			</c:choose>
@@ -87,7 +87,7 @@
  				</c:when>      
      			<c:otherwise>  
      			<div class="div-menu-child <%="account".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
-	                 onclick="window.location.href=contextpath+'pages/comm/no_access_to_authority.jsp?pageType=account'">账户设置
+	                 onclick="window.location.href='<c:url value="/userinfo/toNoAccessToAuthority.action?pageType=account"/>'">账户设置
 	            	</div>    
   				</c:otherwise> 
 			</c:choose>

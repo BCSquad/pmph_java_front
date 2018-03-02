@@ -101,16 +101,16 @@ public class ReportProgressServiceImpl implements ReportProgressService {
         		}
         	}
         }
-        if (lists.size() == 4) {
-            userMessageList.addAll(lists);
-        } else {
+//        if (lists.size() == 4) {
+//            userMessageList.addAll(lists);
+//        } else {
             Declaration declaration = this.getDeclarationByMaterialIdAndUserId(userId, materialId);
             if (ObjectUtil.notNull(declaration)) {
                 userMessageList.add(new UserMessageVO(materialId, "您的申报已提交，请耐心等待审核...",
                                                       declaration.getGmtCreate()));
             }
             userMessageList.addAll(lists);
-        }
+//        }
         return userMessageList;
     }
 

@@ -46,6 +46,18 @@ public class UserInfoController extends BaseController {
     UserService userService;
     
     /**
+     * 无权限 跳转地址
+     * @param request
+     * @return
+     */
+    @RequestMapping("toNoAccessToAuthority")
+    public ModelAndView toNoAccessToAuthority(HttpServletRequest request){
+    	ModelAndView modelAndView = new ModelAndView();
+    	modelAndView.addObject("pageType", request.getParameter("pageType"));
+    	modelAndView.setViewName("comm/no_access_to_authority");
+    	 return modelAndView;
+    }
+    /**
      * 根据ID查询作家相关信息
      *
      * @param request

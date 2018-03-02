@@ -188,6 +188,8 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
     	modelAndView.addObject("thisGroup",thisGroup);
     	//用户id
     	modelAndView.addObject("userId",userId);
+    	//用户名
+    	modelAndView.addObject("userName",map.get("realname"));
     	//其他小组
         modelAndView.addObject("otherGroup",otherGroupList);
         //角色

@@ -31,6 +31,7 @@ import com.bc.pmpheep.back.commuser.survey.service.SurveyService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.template.service.TemplateService;
 import com.bc.pmpheep.back.util.MD5;
+import com.bc.pmpheep.back.util.RouteUtil;
 import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.general.pojo.Content;
 import com.bc.pmpheep.general.pojo.Message;
@@ -530,6 +531,12 @@ public class PersonalCenterController extends BaseController {
         List<Map<String, Object>> listmygroup = personalService.queryMyGroup(permap);//我的小组
         modelAndView.addObject("listmycol", listmycol);
         modelAndView.addObject("listmyfriend", listmyfriend);
+        if(listmygroup.size()>0){
+        	for(Map<String, Object> map :listmygroup){
+            	map.put("group_image", RouteUtil.gruopImage(map.get("group_image").toString()));
+            }
+        }
+        
         modelAndView.addObject("listmygroup", listmygroup);
         
         /*modelAndView.addObject("listmyofeernew", listmyofeernew);
