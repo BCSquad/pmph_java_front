@@ -142,7 +142,7 @@ $(function(){
 	
 	//-------------------------------
     $("#filesgx_top").html('文件共享<span style="display: inline-block;position: absolute;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;' +
-        'line-height: 13px;padding: 3px 6px;border-radius: 50%;right: 0;top: 0">' + $("#fileTotal").html() + '</span>');
+        'line-height: 13px;padding: 3px 6px;border-radius: 50%;right: 0;top: 0">' + $("#file_count").val() + '</span>');
     
 	var talkPagesize  = 5 ;
 	var talkPagenumber= 1  ;
@@ -261,7 +261,7 @@ $(function(){
 	        data:{
 	        	groupId   : $("#groupId").val(),
 	        	id: id ,
-	        	fileId  : fileId ,
+	        	fileId  : fileId 
 	        },
 	        success:function(responsebean){
 	        	if(responsebean){

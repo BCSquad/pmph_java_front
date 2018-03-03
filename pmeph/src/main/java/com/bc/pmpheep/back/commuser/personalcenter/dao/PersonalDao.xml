@@ -1034,6 +1034,7 @@
 		resultType="Map">
 		SELECT
 		d.id AS did,
+		d.material_id as material_id,
 		d.user_id,
 		m.material_name,
 		DATE_FORMAT(d.gmt_create,'%Y年%m月%d日') AS create_time,

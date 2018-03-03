@@ -49,10 +49,10 @@
     </update>
     <!--更新个人标签  -->
     <update id="updateMyTag" parameterType="java.util.Map" >
-       <if test="hastag=='0'">
+       <if test="hastag==0">
           insert into writer_profile(user_id,tag,profile) values(#{id},#{tags},#{note})
        </if>
-       <if test="hastag !='0'">
+       <if test="hastag !=0">
            update writer_profile set tag=#{tags},profile=#{note} where user_id=${id}
        </if>
     </update>

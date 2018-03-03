@@ -83,6 +83,7 @@ public class MyFriendController extends com.bc.pmpheep.general.controller.BaseCo
             model.setViewName(pageUrl);
             model.addObject("row", startrow);
             model.addObject("id", writerUser.getId());
+            model.addObject("realname", writerUserMap.get("realname").toString());
             model.addObject("more", listFriends.size());
             model.addObject("listFriends", listFriends);
             model.addObject("listSize", remainCount);
