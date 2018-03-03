@@ -60,15 +60,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			                            </div>
 			                        </div>
 		                        </c:if>
-		                        <c:if test="${progress.onlineProgress=='1'}">
-			                        <div class="img_mid">
+		                        <c:if test="${progress.onlineSubmit=='1'}">
+		                        <c:choose>
+		                        <c:when test="${progress.onlineProgress=='3'}">
+		                         <div class="img_mid">
 			                            <div class="picture_mid"></div>
 			                            <div class="picture_bom">
 			                                <span class="span_bom_left">资料已审核</span>
-			                                <img   class="img_bom_right"  src="${ctx}/statics/image/yiwancheng.png">
+			                                <img   class="img_bom_right"  src="${ctx}/statics/image/yiwancheng.png" >
 			                            </div>
 			                        </div>
-			                    </c:if>
+		                        </c:when>
+		                        <c:otherwise>
+		                         <div class="img_mid">
+			                            <div class="picture_mid1"></div>
+			                            <div class="picture_bom">
+			                                <span class="span_bom_left" style="color: #999999">资料审核中</span>
+			                                <img   class="img_bom_right"  src="${ctx}/statics/image/shenhezhong.png" style="width:52px;">
+			                            </div>
+			                        </div>
+		                        </c:otherwise>
+		                        </c:choose>
+		                        </c:if>
+		                       
 		                        <c:if test="${progress.onlineProgress=='2'}">
 			                        <div class="img_mid">
 			                            <div class="picture_mid1"></div>

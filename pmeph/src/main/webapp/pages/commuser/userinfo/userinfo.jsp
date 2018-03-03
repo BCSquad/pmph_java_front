@@ -274,8 +274,10 @@
                         
                         <div id="tags"> 
                             <c:forEach items="${fn:split(map.tag,'%') }" var="yt">
-                             <c:if test="${yt !=null }">
-                                  <div class="sxy-bottom-div" style="margin-left: 17px;margin-top:5px"><span class="sxy-bottom-font" style="float:left">${yt }</span><span class="deltag" onclick="deltag(this.parentElement)"> </span></div>
+                             <c:if test="${yt !=null && yt !='' }">
+                                  <div class="sxy-bottom-div" style="margin-left: 17px;margin-top:5px"><span class="sxy-bottom-font" style="float:left">${yt }</span>
+                                      <span class="deltag" onclick="deltag(this.parentElement)"> </span>
+                                  </div>
                              </c:if>
                              </c:forEach>
                          </div>

@@ -217,7 +217,7 @@ public interface DataAuditService {
 	/**
 	 * 通过后发送消息给申报人员
 	 */
-	void senNewMsgPass(Long thisId,Short thisType,Long frendId,Short friendIdType,String title,String content);
+	void senNewMsgPass(Long material_id,Long thisId,Short thisType,Long frendId,Short friendIdType,String title,String content);
 	
 	/**
 	 * 申报审核退回
@@ -226,7 +226,7 @@ public interface DataAuditService {
 	/**
 	 * 退回后发送消息给申报人员
 	 */
-	void senNewMsgBack(Long thisId,Short thisType,Long frendId,Short friendIdType,String title,String content);
+	void senNewMsgBack(Long material_id,Long thisId,Short thisType,Long frendId,Short friendIdType,String title,String content);
 	
 	
 	

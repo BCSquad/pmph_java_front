@@ -304,8 +304,8 @@
     }
     //点击查询
     function query() {
-        var username = encodeURI(encodeURI($("#ssk").val()));
-        window.location.href = contextpath + 'organizationuser/writerLists.action?username=' + username;
+        var url = contextpath + 'organizationuser/writerLists.action?username=' + encodeURI($("#ssk").val());
+        window.location.href = url;
     }
     var pageSize = $("#pages").val();
     Page({
