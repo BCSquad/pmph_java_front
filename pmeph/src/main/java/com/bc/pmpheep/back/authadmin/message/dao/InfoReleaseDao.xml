@@ -10,8 +10,9 @@
 		m.material_round
 		FROM
 		material  m where m.id in (
-			select c.material_id from declaration c
-			where c.org_id=#{userId}
+			select c.material_id from material_org c
+			join org_user o on o.org_id=c.org_id
+			where o.id=#{userId}
 
 		)
 	</select>
@@ -35,9 +36,8 @@
 		1=1
 			<!--<if test="queryName != null and queryName != '' ">-->
 				and m.material_name = #{queryName}
-			and c.org_id=#{userId}
 			<!--</if>-->
-		</where>
+		</where>noticeMessageList
 		GROUP BY a.id
 		limit ${startNum},${pageSize}
 	</select>
@@ -60,7 +60,6 @@
 		<where>
 		1=1
 			and m.material_name = #{queryName}
-			and c.org_id=#{userId}
 		</where>
 		GROUP BY a.id	
 		)  t
