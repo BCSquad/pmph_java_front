@@ -272,7 +272,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4"><font style="margin-left: 110px;" class="td-font-3">请下载委托书模板，按要求填写后打印盖章，并上传bmp，jpg，gif，jpge，png的照片或者扫描件</font>
+                            <td colspan="4"><font style="margin-left: 110px;" class="td-font-3">请下载委托书模板，按要求填写后打印盖章，并上传bmp，jpg，gif，jpeg，png的照片或者扫描件</font>
                             </td>
                         </tr>
                         <tr>
