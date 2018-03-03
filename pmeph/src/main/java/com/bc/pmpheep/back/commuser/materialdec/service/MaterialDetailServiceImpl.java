@@ -86,8 +86,8 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 	}
 
 	@Override
-	public List<Map<String, Object>> queryJcbx(Map<String, Object> map) {
-		return this.madd.queryJcbx(map);
+	public List<Map<String, Object>> rwsjcList(Map<String, Object> map) {
+		return this.madd.queryRwsjc(map);
 	}
 	
 	@Override
@@ -281,7 +281,10 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 			List<Map<String, Object>> publishList,
 			List<Map<String, Object>> sciList,
 			List<Map<String, Object>> clinicalList,
-			List<Map<String, Object>> acadeList) {
+			List<Map<String, Object>> acadeList,
+			List<Map<String,Object>> pmphList,
+			Map<String,Object> digitalMap,
+			Map<String,Object> intentionlMap) {
 		//1.新增申报表
 		this.madd.insertPerson(perMap);
 		//查询上面新增的申报表ID
@@ -293,6 +296,15 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 				map.put("declaration_id", declaration_id);
 				if(perMap.get("type").equals("1")){ //提交					
 					this.madd.insertTsxz(map);
+					//若申报材料提交 则根据填写的专家信息对应更新个人资料，
+					//若申报单位在未进行教师认证之前需要更新个人的所属机构（选择人卫出版社不能更新个人所属机构）
+					if(perMap.get("org_id").equals("0")){ //表示人卫出版社  则不更新个人所属机构
+						perMap.put("org_id", "");
+					}
+					if(perMap.get("is_teacher").equals("1")){ //表示已经进行教师认证
+						perMap.put("org_id", "");
+					}
+					this.madd.updateWriter(perMap);
 				}else{ //暂存
 					this.madd.insertTssbZc(map);
 				}
@@ -408,6 +420,23 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 				this.madd.insertAcadereward(map);
 			}
 		}
+		//19.人卫社教材编写新增
+		if(pmphList!=null && !pmphList.isEmpty()){
+			for (Map<String, Object> map : pmphList) {
+				map.put("declaration_id", declaration_id);
+				this.madd.insertRwsjc(map);
+			}
+		}
+		//20.参加人卫慕课、数字教材编写情况
+		if(digitalMap!=null && !digitalMap.isEmpty()){
+			digitalMap.put("declaration_id", declaration_id);
+			this.madd.insertMoocdigital(digitalMap);
+		}
+		//21.编写内容意向表
+		if(intentionlMap!=null && !intentionlMap.isEmpty()){
+			intentionlMap.put("declaration_id", declaration_id);
+			this.madd.insertIntention(intentionlMap);
+		}
 		return "OK";
 	}
 	
@@ -429,10 +458,24 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 			List<Map<String, Object>> publishList,
 			List<Map<String, Object>> sciList,
 			List<Map<String, Object>> clinicalList,
-			List<Map<String, Object>> acadeList) {
+			List<Map<String, Object>> acadeList,
+			List<Map<String,Object>> pmphList,
+			Map<String,Object> digitalMap,
+			Map<String,Object> intentionlMap) {
 		//修改申报信息
 		perMap.put("declaration_id", declaration_id);
 		this.madd.updatePerson(perMap);
+		if(perMap.get("type").equals("1")){ //提交					
+			//若申报材料提交 则根据填写的专家信息对应更新个人资料，
+			//若申报单位在未进行教师认证之前需要更新个人的所属机构（选择人卫出版社不能更新个人所属机构）
+			if(perMap.get("org_id").equals("0")){ //表示人卫出版社  则不更新个人所属机构
+				perMap.put("org_id", "");
+			}
+			if(perMap.get("is_teacher").equals("1")){ //表示已经进行教师认证
+				perMap.put("org_id", "");
+			}
+			this.madd.updateWriter(perMap);
+		}
 		//删除暂存内容
 		Map<String,Object> glMap = new HashMap<String,Object>();
 		glMap.put("declaration_id", declaration_id);
@@ -454,6 +497,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 		this.madd.DelSci(glMap);   //SCI论文投稿及影响因子
 		this.madd.delZjkzbb(glMap);   //扩展信息
 		this.madd.DelAchievement(glMap);   //个人成就
+		this.madd.DelRwsjc(glMap);  //人卫社教材
 		//2.职位新增
 		if(tssbList!=null && !tssbList.isEmpty()){
 			for (Map<String, Object> map : tssbList) {
@@ -514,7 +558,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 				this.madd.insertGjghjc(map);
 			}
 		}
-		//10.作家教材编写新增
+		//10.其他社教材编写新增
 		if(jcbxList!=null && !jcbxList.isEmpty()){
 			for (Map<String, Object> map : jcbxList) {
 				map.put("declaration_id", declaration_id);
@@ -575,7 +619,32 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 				this.madd.insertAcadereward(map);
 			}
 		}
+		//19.人卫社教材编写新增
+		if(pmphList!=null && !pmphList.isEmpty()){
+			for (Map<String, Object> map : pmphList) {
+				map.put("declaration_id", declaration_id);
+				this.madd.insertRwsjc(map);
+			}
+		}
+		//20.参加人卫慕课、数字教材编写情况
+		if(digitalMap!=null && !digitalMap.isEmpty()){
+			digitalMap.put("declaration_id", declaration_id);
+			this.madd.updateMoocdigital(digitalMap);
+		}
+		//21.编写内容意向表
+		if(intentionlMap!=null && !intentionlMap.isEmpty()){
+			intentionlMap.put("declaration_id", declaration_id);
+			this.madd.updateIntention(intentionlMap);
+		}
 		return "OK";
+	}
+	@Override
+	public Map<String, Object> queryMoocdigital(Map<String, Object> map) {
+		return this.madd.queryMoocdigital(map);
+	}
+	@Override
+	public Map<String, Object> queryIntention(Map<String, Object> map) {
+		return this.madd.queryIntention(map);
 	}
 	
 }

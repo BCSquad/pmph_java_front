@@ -142,7 +142,15 @@
 						<td><span class="btbs">*</span><span>职&emsp;&emsp;务：</span>
 							<input class="cg_input" name="position" value="${gezlList.position}" id="position"  maxlength="12"/></td>
 						<td><span class="btbs">*</span><span>职&emsp;&emsp;称：</span>
-							<input class="cg_input" name="title" value="${gezlList.title}" id="zc"  maxlength="10"/></td>
+								<select id="zclx" name="title">
+	                                <option value="教授"  ${gezlList.title=='教授'?'selected':'' }>教授</option>
+	                                <option value="讲师" ${gezlList.title=='讲师'?'selected':'' }>讲师</option>
+	                                <option value="高级讲师" ${gezlList.title=='高级讲师'?'selected':'' }>高级讲师</option>
+	                                <option value="副教" ${gezlList.title=='副教'?'selected':'' }>副教</option>
+	                                <option value="院士" ${gezlList.title=='院士'?'selected':'' }>院士</option>
+	                                <option value="其他" ${gezlList.title=='其他'?'selected':'' }>其他</option>
+	                            </select>
+							</td>
                         </td>
 						<td><span class="btbs">*</span><span style="width: 70px">E-mail：</span>
 							<input class="cg_input" name="email" value="${gezlList.email}" id="email" maxlength="40"/></td>
@@ -172,6 +180,27 @@
 							<input class="cg_input" name="idcard" value="${gezlList.idcard}" id="idcard" maxlength="18"/></td>
 						<td colspan="2"><span class="btbs">*</span><span>地&emsp;&emsp;址：</span>
 							<input class="cg_input" style="width: 488px;" name="address" value="${gezlList.address}" id="address"  maxlength="17"/></td>
+					</tr>
+					<tr>
+						<td><span>&ensp;服从调剂：</span>
+							<input type="radio" name="is_dispensed" value="1" ${gezlList.is_dispensed=='1'?'checked':'' }/>是
+							<input type="radio" name="is_dispensed" value="0" ${gezlList.is_dispensed=='0'?'checked':'' }/>否
+						</td>
+						<td><span>&ensp;参与本科教学评估认证：</span>
+							<input type="radio" name="is_utec" value="1" ${gezlList.is_utec=='1'?'checked':'' }/>是
+							<input type="radio" name="is_utec" value="0" ${gezlList.is_utec=='0'?'checked':'' }/>否
+						</td>
+						<td><span>&ensp;学&emsp;&emsp;历：</span>
+							<select id="degree" name="degree">
+	                                <option value="0" ${gezlList.degree=='0'?'selected':'' }>无</option>
+	                                <option value="1" ${gezlList.degree=='1'?'selected':'' }>专科</option>
+	                                <option value="2" ${gezlList.degree=='2'?'selected':'' }>本科</option>
+	                                <option value="3" ${gezlList.degree=='3'?'selected':'' }>硕士</option>
+	                                <option value="4" ${gezlList.degree=='4'?'selected':'' }>博士</option>
+	                            </select></td>
+						<td><span>&ensp;专业特长：</span>
+							<input class="cg_input" name="expertise" value="${gezlList.expertise}" id="expertise" maxlength="50"/>
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -454,7 +483,7 @@
 		<div class="sbxq_item" id="sbjccb">
 			<div>
 				<span id="tsxz_span6"></span>
-				<span class="tsxz_title">上版教材参编情况</span>
+				<span class="tsxz_title">本套上版教材参编情况</span>
 				<span class="tsxz_ts" id="sbjccb_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
 				<span class="tsxz_xt" id="sbjccb_xt" >（选填）</span>
 			</div>
@@ -509,7 +538,7 @@
 									<td><input type="radio" name="jc_is_digital_editor_${status.count}" value="1"  ${list.is_digital_editor=='1'?'checked':'' } />是</td>
 					 				<td><input type="radio" name="jc_is_digital_editor_${status.count}" value="0"  ${list.is_digital_editor=='0'?'checked':'' }/>否</td>
 								</tr></table>
-								<input type="hidden" name="jc_is_digital_editor" value="jc_material_name_${status.count}" />
+								<input type="hidden" name="jc_is_digital_editor" value="jc_is_digital_editor_${status.count}" />
 							</td>
 								<td><input class="cg_input" maxlength="33" name="jc_note" value="${list.note}" style="width: 230px;" placeholder="备注"/>
 									<input type="hidden" name="zdjy" value="jc_material_name_${status.count}"/>
@@ -657,16 +686,121 @@
 				</table>
 			</div>
 		</div>
-			<!--教材编写情况-->
-		<div class="sbxq_item" id="jcbxqk">
+			<!--人卫社教材编写情况表-->
+		<div class="sbxq_item" id="rwsjcbx">
 			<div>
 				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">教材编写情况</span>
-				<span class="tsxz_ts" id="jcbxqk_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
-				<span class="tsxz_xt" id="jcbxqk_xt" >（选填）</span>
+				<span class="tsxz_title">人卫社教材编写情况表</span>
+				<span class="tsxz_ts" id="rwsjcbx_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_xt" id="rwsjcbx_xt" >（选填）</span>
 			</div>
 			<div class="content">
-				<table class="tab_2" id="tab_jcbx">
+				<table class="tab_2" id="tab_rwsjcbx">
+					<thead>
+						<tr>
+							<td width="230px">教材名称</td>
+							<td width="120px">教材级别</td>
+							<td width="120px">编写职务</td>
+							<td width="100px">是否数字编委</td>
+							<td width="120px">出版时间</td>
+							<td width="120px">标准书号</td>
+							<td>备注</td>
+							<td width="78px">添加</td>
+						</tr>
+					</thead>
+					<tbody>
+						<c:if test="${empty rwsjcList[0]}">
+						<tr>
+							<td><input class="cg_input" maxlength="33" name="pmph_material_name" id="pmph_material_name" value="" style="width: 200px;" placeholder="教材名称"/></td>
+							<td>
+								<select id="pmph_rank" name="pmph_rank">
+	                                <option value="0">无</option>
+	                                <option value="1">国家</option>
+	                                <option value="2">省部</option>
+	                                <option value="3">协编</option>
+	                                <option value="4">校本</option>
+	                                <option value="5">其他</option>
+                            	</select>
+							</td>
+							<td>
+								<select id="pmph_position" name="pmph_position">
+	                                <option value="0">无</option>
+	                                <option value="1">主编</option>
+	                                <option value="2">副主编</option>
+	                                <option value="3">编委</option>
+                            	</select>
+							</td>
+							<td style="color: #333333;">
+								<table class="radio_tb" style="width: 80px;"><tr>
+									<td><input type="radio" name="pmph_is_digital_editor_a" value="1" />是</td>
+					 				<td><input type="radio" name="pmph_is_digital_editor_a" value="0" checked="checked"/>否</td>
+								</tr></table>
+								<input type="hidden" name="pmph_is_digital_editor" value="pmph_is_digital_editor_a" />
+							</td>
+							<td><input class="cg_input" id="pmph_publish_date" name="pmph_publish_date" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  value="" style="width: 100px;"/></td>
+							<td><input class="cg_input" maxlength="16" id="pmph_isbn" name="pmph_isbn" value="" style="width: 100px;" placeholder="标准书号"/></td>
+							<td><input class="cg_input" maxlength="33" id="pmph_note" name="pmph_note" value="" placeholder="备注" style="width: 130px;"/></td>
+							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_rwsjcbx()"/></td>
+						</tr> </c:if>
+						<c:forEach var="list" items="${rwsjcList}" varStatus="status">
+						<tr id="rwsjcbx_${status.count}">
+							<td><input class="cg_input" name="pmph_material_name" id="pmph_material_name_${status.count}" value="${list.material_name}" style="width: 200px;" placeholder="教材名称"/></td>
+							<td>
+								<select id="pmph_rank_${status.count}" name="pmph_rank">
+	                                <option value="0" ${list.rank=='0'?'selected':'' }>无</option>
+	                                <option value="1" ${list.rank=='1'?'selected':'' }>国家</option>
+	                                <option value="2" ${list.rank=='2'?'selected':'' }>省部</option>
+	                                <option value="3" ${list.rank=='3'?'selected':'' }>协编</option>
+	                                <option value="4" ${list.rank=='4'?'selected':'' }>校本</option>
+	                                <option value="5" ${list.rank=='5'?'selected':'' }>其他</option>
+                            	</select>
+                            	<input type="hidden" id="pmph_rank_sl" name="pmph_rank_sl" value="pmph_rank_${status.count}" />
+							</td>
+							<td>
+								<select id="pmph_position_${status.count}" name="pmph_position">
+	                                <option value="0" ${list.position=='0'?'selected':'' }>无</option>
+	                                <option value="1" ${list.position=='1'?'selected':'' }>主编</option>
+	                                <option value="2" ${list.position=='2'?'selected':'' }>副主编</option>
+	                                <option value="3" ${list.position=='3'?'selected':'' }>编委</option>
+                            	</select>
+                            	<input type="hidden" id="pmph_sl" name="pmph_sl" value="pmph_position_${status.count}" />
+							</td>
+							<td style="color: #333333;">
+								<table class="radio_tb" style="width: 80px;"><tr>
+									<td><input type="radio" name="pmph_is_digital_editor_${status.count}" value="1" ${list.is_digital_editor=='1'?'checked':'' } />是</td>
+					 				<td><input type="radio" name="pmph_is_digital_editor_${status.count}" value="0" ${list.is_digital_editor=='0'?'checked':'' }/>否</td>
+								</tr></table>
+								<input type="hidden" name="pmph_is_digital_editor" value="pmph_is_digital_editor_${status.count}" />
+							</td>
+							<td><input class="cg_input" placeholder="出版时间" id="pmph_publish_date_${status.count}" calendar format="'yyyy-mm-dd'"  z-index="100" name="pmph_publish_date" value="${list.publish_date}" style="width: 100px;"/></td>
+							<td><input class="cg_input" name="pmph_isbn" id="pmph_isbn_${status.count}" value="${list.isbn}" style="width: 100px;" placeholder="标准书号"/></td>
+							<td><input class="cg_input" name="pmph_note" value="${list.note}" style="width: 260px;" placeholder="备注"/>
+								<input type="hidden" name="zdjy" value="pmph_material_name_${status.count},pmph_publish_date_${status.count},pmph_isbn_${status.count}"/>
+							</td>
+							<td><c:choose>
+									<c:when test="${status.count == 1}"> 
+										<img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_rwsjcbx()"/>
+									</c:when>
+									<c:otherwise>
+										<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('rwsjcbx_${status.count}')"/>
+									</c:otherwise>
+								</c:choose></td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+			<!--其他社教材编写情况-->
+		<div class="sbxq_item" id="qtjcbxqk">
+			<div>
+				<span id="tsxz_span7"></span>
+				<span class="tsxz_title">其他社教材编写情况</span>
+				<span class="tsxz_ts" id="qtjcbxqk_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_xt" id="qtjcbxqk_xt" >（选填）</span>
+			</div>
+			<div class="content">
+				<table class="tab_2" id="tab_qtjcbxqk">
 					<thead>
 						<tr>
 							<td width="230px">教材名称</td>
@@ -681,19 +815,21 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:if test="${empty jcbxList[0]}">
+						<c:if test="${empty jcbxqtList[0]}">
 						<tr>
 							<td><input class="cg_input" maxlength="33" name="jcb_material_name" id="jcb_material_name" value="" style="width: 200px;" placeholder="教材名称"/></td>
 							<td>
-								<select id="jcxz" name="jcb_rank">
-	                                <option value="1">教育部规划</option>
-	                                <option value="2">卫计委规划</option>
-	                                <option value="3">区域规划</option>
-	                                <option value="4">创新教材</option>
+								<select id="jcb_rank" name="jcb_rank">
+	                                <option value="0">无</option>
+	                                <option value="1">国家</option>
+	                                <option value="2">省部</option>
+	                                <option value="3">协编</option>
+	                                <option value="4">校本</option>
+	                                <option value="5">其他</option>
                             	</select>
 							</td>
 							<td>
-								<select id="jcjb" name="jcb_position">
+								<select id="jcb_position" name="jcb_position">
 	                                <option value="0">无</option>
 	                                <option value="1">主编</option>
 	                                <option value="2">副主编</option>
@@ -713,138 +849,50 @@
 							<td><input class="cg_input" maxlength="33" name="jcb_note" value="" placeholder="备注" style="width: 130px;"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jcbx()"/></td>
 						</tr> </c:if>
-						<c:forEach var="list" items="${jcbxList}" varStatus="status">
-						<c:if test="${list.rank != '0'}">
-						<tr id="jcbx_${status.count}">
-							<td><input class="cg_input" name="jcb_material_name" id="jcb_material_name_${status.count}" value="${list.material_name}" style="width: 200px;" placeholder="教材名称"/></td>
-							<td>
-								<select id="jcxz_${status.count}" name="jcb_rank">
-	                                <option value="1" ${list.rank=='1'?'selected':'' }>教育部规划</option>
-	                                <option value="2" ${list.rank=='2'?'selected':'' }>卫计委规划</option>
-	                                <option value="3" ${list.rank=='3'?'selected':'' }>区域规划</option>
-	                                <option value="4" ${list.rank=='4'?'selected':'' }>创新教材</option>
-                            	</select>
-                            	<input type="hidden" id="jcb_rank_sl" name="jcb_rank_sl" value="jcxz_${status.count}" />
-							</td>
-							<td>
-								<select id="jcjb_${status.count}" name="jcb_position">
-	                                <option value="0" ${list.position=='0'?'selected':'' }>无</option>
-	                                <option value="1" ${list.position=='1'?'selected':'' }>主编</option>
-	                                <option value="2" ${list.position=='2'?'selected':'' }>副主编</option>
-	                                <option value="3" ${list.position=='3'?'selected':'' }>编委</option>
-                            	</select>
-                            	<input type="hidden" id="jcjb_sl" name="jcjb_sl" value="jcjb_${status.count}" />
-							</td>
-							<td style="color: #333333;">
-								<table class="radio_tb" style="width: 80px;"><tr>
-									<td><input type="radio" name="jcb_is_digital_editor_${status.count}" value="1" ${list.is_digital_editor=='1'?'checked':'' } />是</td>
-					 				<td><input type="radio" name="jcb_is_digital_editor_${status.count}" value="0" ${list.is_digital_editor=='0'?'checked':'' }/>否</td>
-								</tr></table>
-								<input type="hidden" name="jcb_is_digital_editor" value="jcb_is_digital_editor_${status.count}" />
-							</td>
-							<td><input class="cg_input" name="jcb_publisher" id="jcb_publisher_${status.count}" value="${list.publisher}" style="width: 100px;" placeholder="出版社"/></td>
-							<td><input class="cg_input" placeholder="出版时间" id="jcb_publish_date_${status.count}" calendar format="'yyyy-mm-dd'"  z-index="100" name="jcb_publish_date" value="${list.publish_date}" style="width: 100px;"/></td>
-							<td><input class="cg_input" name="jcb_isbn" id="jcb_isbn_${status.count}" value="${list.isbn}" style="width: 100px;" placeholder="标准书号"/></td>
-							<td><input class="cg_input" name="jcb_note" value="${list.note}" style="width: 130px;" placeholder="备注"/>
-								<input type="hidden" name="zdjy" value="jcb_material_name_${status.count},jcb_publisher_${status.count},jcb_publish_date_${status.count},jcb_isbn_${status.count}"/>
-							</td>
-							<td><c:choose>
-									<c:when test="${status.count == 1}"> 
-										<img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jcbx()"/>
-									</c:when>
-									<c:otherwise>
-										<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('jcbx_${status.count}')"/>
-									</c:otherwise>
-								</c:choose></td>
-						</tr></c:if>
-						</c:forEach>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<!--其他教材编写情况-->
-		<div class="sbxq_item" id="qtjcbxqk">
-			<div>
-				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">其他教材编写情况</span>
-				<span class="tsxz_ts" id="qtjcbx_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
-				<span class="tsxz_xt" id="qtjcbx_xt" >（选填）</span>
-			</div>
-			<div class="content">
-				<table class="tab_2" id="tab_qtjcbx">
-					<thead>
-						<tr>
-							<td width="250px">教材名称</td>
-							<td width="120px">编写职务</td>
-							<td width="100px">是否数字编委</td>
-							<td width="150px">出版社</td>
-							<td width="130px">出版时间</td>
-							<td width="130px">标准书号</td>
-							<td>备注</td>
-							<td width="78px">添加</td>
-						</tr>
-					</thead>
-					<tbody>
-						<c:if test="${empty jcbxqtList[0]}">
-						 <tr>
-							<td><input class="cg_input" name="jcb_material_name" id="qt_jcb_material_name" value="" style="width: 210px;" placeholder="教材名称"/></td>
-							<td>
-								<select id="qtjcjb" name="jcb_position">
-	                                <option value="0">无</option>
-	                                <option value="1">主编</option>
-	                                <option value="2">副主编</option>
-	                                <option value="3">编委</option>
-                            	</select>
-							</td>
-							<td style="color: #333333;">
-								<table class="radio_tb" style="width: 80px;"><tr>
-									<td><input type="radio" name="jcb_is_digital_editor_b" value="1" />是</td>
-					 				<td><input type="radio" name="jcb_is_digital_editor_b" value="0" checked="checked"/>否</td>
-								</tr></table>
-								<input type="hidden" name="jcb_is_digital_editor" value="jcb_is_digital_editor_b" />
-							</td>
-							<td><input class="cg_input" name="jcb_publisher" value="" style="width: 120px;" placeholder="出版社"/></td>
-							<td><input class="cg_input" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="jcb_publish_date" value="" style="width: 110px;"/></td>
-							<td><input class="cg_input" name="jcb_isbn" value="" style="width: 110px;" placeholder="标准书号"/></td>
-							<td><input class="cg_input" name="jcb_note" value="" placeholder="备注" style="width: 180px;"/>
-								<input type="hidden" name="jcb_rank" value="0"/>
-							</td>
-							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_qtjcbx()"/></td>
-						</tr></c:if>
 						<c:forEach var="list" items="${jcbxqtList}" varStatus="status">
-							<tr id="qtjcbx_${status.count}">
-								<td><input class="cg_input" name="jcb_material_name" id="qt_jcb_material_name_${status.count}" value="${list.material_name}" style="width: 210px;" placeholder="教材名称"/></td>
+							<tr id="jcbx_${status.count}">
+								<td><input class="cg_input" name="jcb_material_name" id="jcb_material_name_${status.count}" value="${list.material_name}" style="width: 200px;" placeholder="教材名称"/></td>
 								<td>
-									<select id="qtjcjb_${status.count}" name="jcb_position">
+									<select id="jcb_rank_${status.count}" name="jcb_rank">
+		                                <option value="0" ${list.rank=='0'?'selected':'' }>无</option>
+		                                <option value="1" ${list.rank=='1'?'selected':'' }>国家</option>
+		                                <option value="2" ${list.rank=='2'?'selected':'' }>省部</option>
+		                                <option value="3" ${list.rank=='3'?'selected':'' }>协编</option>
+		                                <option value="4" ${list.rank=='4'?'selected':'' }>校本</option>
+		                                <option value="5" ${list.rank=='5'?'selected':'' }>其他</option>
+	                            	</select>
+	                            	<input type="hidden" id="jcb_rank_sl" name="jcb_rank_sl" value="jcb_rank_${status.count}" />
+								</td>
+								<td>
+									<select id="jcb_position_${status.count}" name="jcb_position">
 		                                <option value="0" ${list.position=='0'?'selected':'' }>无</option>
 		                                <option value="1" ${list.position=='1'?'selected':'' }>主编</option>
 		                                <option value="2" ${list.position=='2'?'selected':'' }>副主编</option>
 		                                <option value="3" ${list.position=='3'?'selected':'' }>编委</option>
 	                            	</select>
-	                            	<input type="hidden" id="qtjcjb_sl" name="qtjcjb_sl" value="qtjcjb_${status.count}" />
+	                            	<input type="hidden" id="jcjb_sl" name="jcjb_sl" value="jcb_position_${status.count}" />
 								</td>
 								<td style="color: #333333;">
 									<table class="radio_tb" style="width: 80px;"><tr>
-										<td><input type="radio" name="qtjcb_is_digital_editor_${status.count}" value="1" ${list.is_digital_editor=='1'?'checked':'' }/>是</td>
-						 				<td><input type="radio" name="qtjcb_is_digital_editor_${status.count}" value="0" ${list.is_digital_editor=='0'?'checked':'' }/>否</td>
+										<td><input type="radio" name="jcb_is_digital_editor_${status.count}" value="1" ${list.is_digital_editor=='1'?'checked':'' } />是</td>
+						 				<td><input type="radio" name="jcb_is_digital_editor_${status.count}" value="0" ${list.is_digital_editor=='0'?'checked':'' }/>否</td>
 									</tr></table>
-									<input type="hidden" name="jcb_is_digital_editor" value="qtjcb_is_digital_editor_${status.count}" />
+									<input type="hidden" name="jcb_is_digital_editor" value="jcb_is_digital_editor_${status.count}" />
 								</td>
-								<td><input class="cg_input" id="qt_jcb_publisher_${status.count}" name="jcb_publisher" value="${list.publisher}" style="width: 120px;" placeholder="出版社"/></td>
-								<td><input class="cg_input" id="qt_jcb_publish_date_${status.count}" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="jcb_publish_date" value="${list.publish_date}" style="width: 110px;"/></td>
-								<td><input class="cg_input" id="qt_jcb_isbn_${status.count}" name="jcb_isbn" value="${list.isbn}" style="width: 110px;" placeholder="标准书号"/></td>
-								<td><input class="cg_input" name="jcb_note" value="${list.note}" placeholder="备注" style="width: 180px;"/>
-									<input type="hidden" name="jcb_rank" value="0"/>
-									<input type="hidden" name="zdjy" value="qt_jcb_material_name_${status.count},qt_jcb_publisher_${status.count},qt_jcb_publish_date_${status.count},qt_jcb_isbn_${status.count}"/>
+								<td><input class="cg_input" name="jcb_publisher" id="jcb_publisher_${status.count}" value="${list.publisher}" style="width: 100px;" placeholder="出版社"/></td>
+								<td><input class="cg_input" placeholder="出版时间" id="jcb_publish_date_${status.count}" calendar format="'yyyy-mm-dd'"  z-index="100" name="jcb_publish_date" value="${list.publish_date}" style="width: 100px;"/></td>
+								<td><input class="cg_input" name="jcb_isbn" id="jcb_isbn_${status.count}" value="${list.isbn}" style="width: 100px;" placeholder="标准书号"/></td>
+								<td><input class="cg_input" name="jcb_note" value="${list.note}" style="width: 130px;" placeholder="备注"/>
+									<input type="hidden" name="zdjy" value="jcb_material_name_${status.count},jcb_publisher_${status.count},jcb_publish_date_${status.count},jcb_isbn_${status.count}"/>
 								</td>
 								<td><c:choose>
-									<c:when test="${status.count == 1}"> 
-										<img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_qtjcbx()"/>
-									</c:when>
-									<c:otherwise>
-										<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('qtjcbx_${status.count}')"/>
-									</c:otherwise>
-								</c:choose></td>
+										<c:when test="${status.count == 1}"> 
+											<img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jcbx()"/>
+										</c:when>
+										<c:otherwise>
+											<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('jcbx_${status.count}')"/>
+										</c:otherwise>
+									</c:choose></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -1219,6 +1267,30 @@
 				</table>
 			</div>
 		</div>
+		<!--参加人卫慕课、数字教材编写情况-->
+	 	<div class="sbxq_item" id="digital">
+			<div>
+				<span id="tsxz_span9"></span>
+				<span class="tsxz_title">参加人卫慕课、数字教材编写情况</span>
+				<span class="tsxz_ts" id="digital_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_xt" id="digital_xt" >（选填）</span>
+			</div>
+			<div class="content">
+				<textarea class="text_cl" name="mooc_content" id="mooc_content" maxlength="500">${digitalMap.content}</textarea>
+			</div>
+		</div>
+		<!--编写内容意向表-->
+	 	<div class="sbxq_item" id="intention">
+			<div>
+				<span id="tsxz_span9"></span>
+				<span class="tsxz_title">编写内容意向表</span>
+				<span class="tsxz_ts" id="intention_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_xt" id="intention_xt" >（选填）</span>
+			</div>
+			<div class="content">
+				<textarea class="text_cl" name="intention_content" id="intention_content" maxlength="500">${intentionMap.content}</textarea>
+			</div>
+		</div>
 		<!-- 申报单位-->
 		<div class="sbxq_item1">
 			<div>
@@ -1227,9 +1299,6 @@
 			</div>
 			<div class="sbdw">
 				<span class="btbs">*</span><span>申报单位：</span>
-				<%-- <select id="apply-org" name="edu" class="st_2" >
-				    ${gezlList.orgSelect}
-				</select>  --%>
 				<input class="cg_input" id="sbdw_name" name="sbdw_name" value="${gezlList.dwmc}" style="width: 300px;" onclick="javascript:orgAdd('${materialMap.material_id}')" readonly="readonly"/>
 				<input type="hidden" id="sbdw_id" name="sbdw_id" value="${gezlList.org_id}" style="width: 300px;"/>
 			</div>
@@ -1237,8 +1306,8 @@
 		<hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">
 		<div class="button">
 			<div class="div_butt">
-				<div class="bt_tj" onclick="javascript:buttAdd('1')">提交</div>
-				<div class="bt_tj" onclick="javascript:buttAdd('2')">暂存</div>
+				<div class="bt_tj" id="butj" onclick="javascript:buttAdd('1')">提交</div>
+				<div class="bt_tj" id="buzc" onclick="javascript:buttAdd('2')">暂存</div>
 				<div class="bt_tj" onclick="javascript:buttGive()">放弃</div>
 			</div>
 
