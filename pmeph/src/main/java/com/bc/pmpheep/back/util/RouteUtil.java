@@ -41,7 +41,7 @@ public class RouteUtil {
 	 *
 	 */
 	public static String gruopImage(String gruopImage) {
-		if (StringUtil.isEmpty(gruopImage)) {
+		if (StringUtil.isEmpty(gruopImage)||"DEFAULT".equals(gruopImage)|| gruopImage.contains("statics")||gruopImage.contains("default_image")||gruopImage.contains("png")) {
 			gruopImage = DEFAULT_GROUP_IMAGE;
 		}
 		if (!DEFAULT_GROUP_IMAGE.equals(gruopImage)) {

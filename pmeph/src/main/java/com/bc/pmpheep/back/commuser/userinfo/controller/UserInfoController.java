@@ -46,6 +46,18 @@ public class UserInfoController extends BaseController {
     UserService userService;
     
     /**
+     * 无权限 跳转地址
+     * @param request
+     * @return
+     */
+    @RequestMapping("toNoAccessToAuthority")
+    public ModelAndView toNoAccessToAuthority(HttpServletRequest request){
+    	ModelAndView modelAndView = new ModelAndView();
+    	modelAndView.addObject("pageType", request.getParameter("pageType"));
+    	modelAndView.setViewName("comm/no_access_to_authority");
+    	 return modelAndView;
+    }
+    /**
      * 根据ID查询作家相关信息
      *
      * @param request
@@ -121,6 +133,8 @@ public class UserInfoController extends BaseController {
         String workplace = request.getParameter("workplace");
         String telephone = request.getParameter("telephone");
         String fileid = request.getParameter("fileid");
+        String tags=request.getParameter("tags");
+        String hastag=request.getParameter("hastag");
         map.put("signature", signature);
         if (StringUtils.isEmpty(id) ||
                 StringUtils.isEmpty(realName) ||
@@ -158,6 +172,8 @@ public class UserInfoController extends BaseController {
             map.put("workplace", workplace);
             map.put("telephone", telephone);
             map.put("avatar", fileid);
+            map.put("tags", tags);
+            map.put("hastag", hastag);
             zmap = userinfoService.update(map);
             Map<String, Object> user=getUserInfo();
    		 	user = userService.getUserInfo(MapUtils.getString(user, "username"), "1");

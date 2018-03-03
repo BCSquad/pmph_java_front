@@ -54,7 +54,7 @@ UNION
 
     <insert id="insertUserScore" parameterType="map">
         update writer_point set total=total+#{scores},gain=gain+#{scores} where user_id=#{id};
-        insert into writer_point_log (user_id,rule_id,point) values (#{id},5,#{scores});
+        insert into writer_point_log (user_id,rule_id,point) values (#{id},#{ruleid},#{scores});
     </insert>
 
 

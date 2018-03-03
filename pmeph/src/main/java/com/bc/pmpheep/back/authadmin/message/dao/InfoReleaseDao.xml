@@ -9,7 +9,11 @@
 		m.material_name,
 		m.material_round
 		FROM
-		material  m
+		material  m where m.id in (
+			select c.material_id from declaration c
+			where c.org_id=#{userId}
+
+		)
 	</select>
 
 	<!-- 查询列表 -->
@@ -29,9 +33,10 @@
 		LEFT JOIN  org_user d on d.org_id = c.org_id	 
 		<where>
 		1=1
-			<if test="queryName != null and queryName != '' ">
-				and m.material_name like concat("%",#{queryName},"%")
-			</if>
+			<!--<if test="queryName != null and queryName != '' ">-->
+				and m.material_name = #{queryName}
+			and c.org_id=#{userId}
+			<!--</if>-->
 		</where>
 		GROUP BY a.id
 		limit ${startNum},${pageSize}
@@ -54,9 +59,8 @@
 		LEFT JOIN  org_user d on d.org_id = c.org_id	 
 		<where>
 		1=1
-			<if test="queryName != null and queryName != '' ">
-				and m.material_name like concat("%",#{queryName},"%")
-			</if>
+			and m.material_name = #{queryName}
+			and c.org_id=#{userId}
 		</where>
 		GROUP BY a.id	
 		)  t

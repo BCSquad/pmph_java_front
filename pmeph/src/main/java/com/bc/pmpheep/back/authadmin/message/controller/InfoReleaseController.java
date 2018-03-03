@@ -49,7 +49,9 @@ public class InfoReleaseController extends BaseController{
 	@RequestMapping("toPage")
 	public ModelAndView toPage(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
-		List<Map<String, Object>> List_map = infoReleaseService.selectMenu();
+		Map<String, Object> user = getUserInfo();
+		BigInteger uid = (BigInteger) user.get("id");
+		List<Map<String, Object>> List_map = infoReleaseService.selectMenu(uid);
 		mv.addObject("listMenu", List_map);
 		mv.setViewName("authadmin/message/inforelease");
 		return mv;

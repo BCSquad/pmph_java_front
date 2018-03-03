@@ -64,6 +64,11 @@ $(function(){
 	    }
 	    //是小组消息，小组id相同，类型是新增
 	    if(data.msgType == 3 && data.groupId == $("#groupId").val() && data.sendType == 0){
+	    	if(data.senderIcon==''||data.senderIcon=='DEFAULT'||data.senderIcon.indexOf('statics')!=-1||data.senderIcon.indexOf('default_image')!=-1||data.senderIcon.indexOf('png')!=-1){
+	    		data.senderIcon = contxtpath+'/statics/image/default_image.png';
+	    	}else{
+	    		data.senderIcon = contxtpath+'/image/'+senderIcon+'.action';
+	    	}
 	    	loadNewGroupMsg(sender,data.senderName,data.senderIcon,data.content,data.time);
 	    }
 	}
@@ -192,6 +197,10 @@ $(function(){
 	        success:function(responsebean){
 	        	if(responsebean){
 	        		window.message.success("退出成功");
+	        		//推送消息
+                    if (webSocket) {
+			    	webSocket.send("{senderId:"+userId+",senderType:"+0+",content:'\""+$("#userName").val()+"\"退出了小组"+"',groupId:"+$("#groupId").val()+",sendType:0}");
+                    }
 	        		setTimeout(function(){
 	        			window.location.href = contxtpath+'/group/list.action';
 	        		},800);
@@ -409,7 +418,7 @@ $(function(){
 			html = "<div class='chat_items mine'> "+
                         "<div class='chat_item1'> "+
                             "<div class='div_item1_img'> "+
-                                "<img src= '"+contxtpath+"/image/"+senderIcon+".action'  /> "+
+                                "<img src= '"+senderIcon+"'  /> "+
                                 "<text>"+senderName+"</text> "+
                             "</div> "+
                             "<div class='arrows'></div> "+
@@ -424,7 +433,7 @@ $(function(){
 			html = "<div class='chat_items other'> "+
                         "<div class='chat_item1'> "+
                             "<div class='div_item1_img'> "+
-                                "<img src= '"+contxtpath+"/image/"+senderIcon+".action' /> "+
+                            "<img src= '"+senderIcon+"'  /> "+
                                 "<text>"+senderName+"</text> "+
                             "</div> "+
                             "<div class='arrows'></div> "+

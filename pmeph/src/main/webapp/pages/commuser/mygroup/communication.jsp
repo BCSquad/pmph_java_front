@@ -41,6 +41,7 @@
                     <span class="span1">${thisGroup.groupName}</span>
                     <input id="groupId" type="hidden" value="${thisGroup.id}"/>
                     <input id="userId" type="hidden" value="${userId}"/>
+                    <input id="userName" type="hidden" value="${userName}"/>
                     <div class="top_content2">
                         <div class="top_content22">
                             <img src="${ctx}/statics/image/zjyh.png">

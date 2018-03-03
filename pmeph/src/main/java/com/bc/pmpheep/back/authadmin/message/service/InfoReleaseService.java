@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.authadmin.message.service;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +34,7 @@ public interface InfoReleaseService {
 	 * @return List<Map<String,Object>> 返回类型
 	 * @throws
 	 */
-	List<Map<String, Object>> selectMenu();
+	List<Map<String, Object>> selectMenu(BigInteger uid);
 
 	/**
 	 * 
