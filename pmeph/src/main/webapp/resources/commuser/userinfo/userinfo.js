@@ -84,7 +84,7 @@ function getform() {
 //普通用户信息编辑方法
 function save() {
     var mdata=getform();
-    var len=mdata.tags.length.replace(/[^\x00-\xff]/g, "aa").length;//个人标签的总长度
+    var len=mdata.tags.replace(/[^\x00-\xff]/g, "aa").length;//个人标签的总长度
     if(len>200){
     	 window.message.warning("标签的总长度过大！");
     	return; 
@@ -95,7 +95,7 @@ function save() {
             url: contextpath + 'userinfo/update.action',
             async: false,
             dataType: 'json',
-            data: mdate,
+            data: mdata,
             success: function (json) {
                 if (json.returncode == "OK") {
                     window.message.success("保存成功！");
@@ -146,6 +146,10 @@ function LengthLimit(obj, ml) {
 //添加个人标签
 function addtag(){
 	var newtag=$("#mytag").val().trim();
+	if(newtag==null||newtag==''){
+        window.message.warning("请输入标签名！");
+        return;
+    }
 	var isExist=false;
 	var a='护理';
 	$(".sxy-bottom-div").each(function(i){
@@ -156,13 +160,16 @@ function addtag(){
 		}
   	});
 	
-	if(newtag!=''&&!isExist){
-    	$("#tags").append( '<div class="sxy-bottom-div" style="margin-left: 17px;margin-top:5px">'+
-    	  '<span class="sxy-bottom-font" style="float:left">'+
-    	  newtag+'</span><span class="deltag" onclick="deltag(this.parentElement)"> </span></div>');
+	if(!isExist){
+	    if(newtag!=''){
+            $("#tags").append( '<div class="sxy-bottom-div" style="margin-left: 17px;margin-top:5px">'+
+                '<span class="sxy-bottom-font" style="float:left">'+
+                newtag+'</span><span class="deltag" onclick="deltag(this.parentElement)"> </span></div>');
+        }
 	}else{
 		 window.message.warning("此标签已存在！");
 	}
+
 	$("#mytag").val(null);
 }
 //删除个人标签
