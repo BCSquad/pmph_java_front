@@ -21,6 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.authadmin.message.service.SendMessageServiceImpl;
 import com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailService;
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
+import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.general.controller.BaseController;
@@ -47,6 +49,10 @@ public class MaterialDetailController extends BaseController{
 	@Autowired
     @Qualifier("com.bc.pmpheep.general.service.FileService")
     FileService fileService;
+	
+	@Autowired
+    @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
+    private PersonalService personalService;
 	
 	/**
 	 * 跳转到申报新增页面
@@ -538,6 +544,16 @@ public class MaterialDetailController extends BaseController{
 		}else{
 			msg=this.mdService.updateJcsbxx(perMap, tssbList, stuList, workList, declaration_id, steaList, zjxsList, jcbjList, gjkcjsList, gjghjcList, jcbxList, zjkyList, zjkzqkList, achievementMap, monographList, publishList, sciList, clinicalList, acadeList, pmphList, digitalMap, intentionlMap);
 		}
+		
+		if(type.equals("1")){ //提交
+			//TODO 教材申报提交 生成动态
+			Map<String, Object> materialMap = this.mdService.queryMaterialbyId(material_id);
+			WriterUserTrendst wut = new WriterUserTrendst(userMap.get("id").toString(), 8, material_id);
+			wut.setDetail("提交教材申报", userMap.get("realname").toString()+" 提交了教材申报《"+materialMap.get("material_name").toString()+"》。", 0);
+			personalService.saveUserTrendst(wut);//机构申报审核 生成动态
+		}
+		
+		
 		return msg;
 	}
 	/**
