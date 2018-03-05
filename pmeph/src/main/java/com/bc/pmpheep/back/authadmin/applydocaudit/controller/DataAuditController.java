@@ -250,6 +250,13 @@ public class DataAuditController extends BaseController{
 			//18.学术荣誉授予情况表
 			List<Map<String,Object>> acadeList = new ArrayList<Map<String,Object>>();
 			acadeList = this.dataAuditService.queryAcadereward(queryMap);
+			
+			//20.参加人卫慕课、数字教材编写情况
+			Map<String,Object> moocMap = new HashMap<String,Object>();
+			moocMap = this.dataAuditService.queryMoocdigital(queryMap);
+			//21.编写内容意向表
+			Map<String,Object> intentionMap = new HashMap<String,Object>();
+			intentionMap = this.dataAuditService.queryIntention(queryMap);
 
 			//填充
 			mav.addObject("gezlList", gezlList.get(0));
@@ -273,6 +280,8 @@ public class DataAuditController extends BaseController{
 			mav.addObject("materialMap", queryMap);
 			mav.addObject("view_audit", view_audit);
 			mav.addObject("material_id", material_id);
+			mav.addObject("digitalMap", moocMap);
+			mav.addObject("intentionMap", intentionMap);
 			mav.addObject("online_progress", gezlList.get(0).get("online_progress").toString());//判断审核通过、退回按钮是否隐藏
 			return mav;
 		}
