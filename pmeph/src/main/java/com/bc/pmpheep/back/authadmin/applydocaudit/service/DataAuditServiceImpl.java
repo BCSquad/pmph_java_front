@@ -80,7 +80,7 @@ public class DataAuditServiceImpl implements DataAuditService {
 		@Override
 		public int updateDeclarationPass(Map<String, Object> map) {
 			Map<String,Object> dmap =personalService.queryDeclarationById(map.get("declaration_id").toString());
-			WriterUserTrendst wut = new WriterUserTrendst(dmap.get("user_id").toString(), 0, null);
+			WriterUserTrendst wut = new WriterUserTrendst(dmap.get("user_id").toString(), 8, dmap.get("material_id").toString());
 			wut.declarationAuditDetail(dmap,"3");
 			personalService.saveUserTrendst(wut);//机构申报审核 生成动态
 			return this.dataAuditDao.updateDeclarationPass(map);
@@ -90,7 +90,7 @@ public class DataAuditServiceImpl implements DataAuditService {
 	@Override
 	public int updateDeclaration(Map<String, Object> map) {
 		Map<String,Object> dmap =personalService.queryDeclarationById(map.get("declaration_id").toString());
-		WriterUserTrendst wut = new WriterUserTrendst(dmap.get("user_id").toString(), 0, null);
+		WriterUserTrendst wut = new WriterUserTrendst(dmap.get("user_id").toString(), 8, dmap.get("material_id").toString());
 		wut.declarationAuditDetail(dmap,"2");
 		personalService.saveUserTrendst(wut);//机构申报审核 生成动态
 		return this.dataAuditDao.updateDeclaration(map);

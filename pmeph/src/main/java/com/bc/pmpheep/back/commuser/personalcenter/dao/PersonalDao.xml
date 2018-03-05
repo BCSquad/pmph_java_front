@@ -1036,6 +1036,7 @@
 		d.id AS did,
 		d.user_id,
 		m.material_name,
+		d.material_id,
 		DATE_FORMAT(d.gmt_create,'%Y年%m月%d日') AS create_time,
 		d.online_progress as online_progress
 		FROM
