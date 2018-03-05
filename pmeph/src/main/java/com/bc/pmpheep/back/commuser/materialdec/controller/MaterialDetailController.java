@@ -184,6 +184,9 @@ public class MaterialDetailController extends BaseController{
 				perMap.put("online_progress", "0");
 			}
 		}
+        Map<String, Object> materialMap = new HashMap<String, Object>();
+        materialMap = this.mdService.queryMaterialbyId(material_id);
+        perMap.put("materialName", MapUtils.getString(materialMap, "material_name"));
 		perMap.put("realname", request.getParameter("realname"));
 		perMap.put("user_id", user_id);
 		perMap.put("type", type);
