@@ -52,7 +52,7 @@
 		LEFT JOIN dec_position_published AS pp ON d.id = pp.declaration_id
 		LEFT JOIN textbook AS t ON p.textbook_id = t.id 
 		LEFT JOIN org as o on d.org_id=o.id 
-		INNER JOIN org_user as  ou on  d.org_id=ou.org_id ]]>
+		INNER JOIN org_user as  ou on  d.org_id=ou.org_id  and d.online_progress !=0]]>
 		<where>
 			1=1
 			<if test="queryName != null and queryName != '' ">
@@ -78,7 +78,7 @@
 		COUNT(*)
 		FROM
 		declaration AS d
-		INNER JOIN org_user as  ou on  d.org_id=ou.org_id 
+		INNER JOIN org_user as  ou on  d.org_id=ou.org_id and d.online_progress !=0
 		<where>
 		1=1
 			<if test="queryName != null and queryName != '' ">
@@ -154,7 +154,7 @@
 		LEFT JOIN dec_position_published AS pp ON d.id = pp.declaration_id
 		LEFT JOIN textbook AS t ON p.textbook_id = t.id 
 		LEFT JOIN org as o on d.org_id=o.id 
-		INNER JOIN org_user as  ou on  d.org_id=ou.org_id ]]>
+		INNER JOIN org_user as  ou on  d.org_id=ou.org_id and d.online_progress !=0]]>
 		<where>
 			1=1
 			<if test="queryName != null and queryName != '' ">

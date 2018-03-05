@@ -37,7 +37,7 @@
 			<!--<if test="queryName != null and queryName != '' ">-->
 				and m.material_name = #{queryName}
 			<!--</if>-->
-		</where>noticeMessageList
+		</where>
 		GROUP BY a.id
 		limit ${startNum},${pageSize}
 	</select>

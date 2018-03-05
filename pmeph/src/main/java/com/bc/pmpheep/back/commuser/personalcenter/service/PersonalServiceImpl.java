@@ -332,6 +332,12 @@ public class PersonalServiceImpl implements PersonalService {
 		Long bookId = personaldao.getCommentById(id);
 		personaldao.updateDownComments(bookId);
 	}
+	
+	@Override
+	public Long getCommentBycid(Long id) {
+		Long comm = personaldao.getCommentBycid(id);
+		return comm;
+	}
 
 	/**
 	 * 我的问卷
