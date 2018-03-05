@@ -34,7 +34,7 @@ public class DeclareCountExcelService implements ExcelDownloadService {
 
     @Override
     public String[][] getColTitle() {
-        return new String[][]{{"书名", "textbook_name"}, {"主编申报数", "decid1"}, {"副主编申报数", "decid2"}, {"编委申报数", "decid3"}, {"主编当选数", "dp1"}, {"副主编当选数", "dp2"}, {"编委当选数", "dp3"}};
+        return new String[][]{{"书名", "textbook_name"}, {"主编申报数", "decid1"}, {"副主编申报数", "decid2"}, {"编委申报数", "decid3"}, {"主编当选数", "dp1"}, {"副主编当选数", "dp2"}, {"编委当选数", "dp3"}, {"数字编委当选数", "dp4"}};
     }
 
     @Override
@@ -57,6 +57,7 @@ public class DeclareCountExcelService implements ExcelDownloadService {
         totalMap.put("dp1", 0);
         totalMap.put("dp2", 0);
         totalMap.put("dp3", 0);
+        totalMap.put("dp4", 0);
         for (int i = 0; i < resultList.size(); i++) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("textbook_name", resultList.get(i).get("textbook_name"));
@@ -67,13 +68,14 @@ public class DeclareCountExcelService implements ExcelDownloadService {
             map.put("dp1", resultList.get(i).get("dp1"));
             map.put("dp2", resultList.get(i).get("dp2"));
             map.put("dp3", resultList.get(i).get("dp3"));
-            
+            map.put("dp4", resultList.get(i).get("dp4"));
             totalMap.put("decid1", Integer.valueOf(resultList.get(i).get("decid1").toString())+Integer.valueOf(totalMap.get("decid1").toString()));
             totalMap.put("decid2", Integer.valueOf(resultList.get(i).get("decid2").toString())+Integer.valueOf(totalMap.get("decid2").toString()));
             totalMap.put("decid3", Integer.valueOf(resultList.get(i).get("decid3").toString())+Integer.valueOf(totalMap.get("decid3").toString()));
             totalMap.put("dp1", Integer.valueOf(resultList.get(i).get("dp1").toString())+Integer.valueOf(totalMap.get("dp1").toString()));
             totalMap.put("dp2", Integer.valueOf(resultList.get(i).get("dp2").toString())+Integer.valueOf(totalMap.get("dp2").toString()));
             totalMap.put("dp3", Integer.valueOf(resultList.get(i).get("dp3").toString())+Integer.valueOf(totalMap.get("dp3").toString()));
+            totalMap.put("dp4", Integer.valueOf(resultList.get(i).get("dp4").toString())+Integer.valueOf(totalMap.get("dp4").toString()));
             list.add(map);
         }
         list.add(totalMap);

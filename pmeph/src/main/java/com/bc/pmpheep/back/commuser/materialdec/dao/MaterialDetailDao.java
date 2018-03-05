@@ -60,10 +60,14 @@ public interface MaterialDetailDao {
 		public List<Map<String,Object>> queryGjghjc(Map<String, Object> map);
 		public int insertGjghjc(Map<String, Object> map);
 		public int DelGjghjc(Map<String, Object> map);
-		//查询教材编写情况
+		//查询其他社教材编写情况
 		public List<Map<String,Object>> queryJcbx(Map<String, Object> map);
 		public int insertJcbx(Map<String, Object> map);
 		public int DelJcbx(Map<String, Object> map);
+		//查询人卫社教材编写情况
+		public List<Map<String,Object>> queryRwsjc(Map<String, Object> map);
+		public int insertRwsjc(Map<String, Object> map);
+		public int DelRwsjc(Map<String, Object> map);
 		//作家科研情况表
 		public List<Map<String,Object>> queryZjkyqk(Map<String, Object> map);
 		public int insertZjkyqk(Map<String, Object> map);
@@ -98,11 +102,23 @@ public interface MaterialDetailDao {
 		public List<Map<String,Object>> queryAcadereward(Map<String, Object> map);
 		public int insertAcadereward(Map<String, Object> map);
 		public int DelAcadereward(Map<String, Object> map);
-		
+		//人卫慕课、数字教材编写情况
+		public Map<String,Object> queryMoocdigital(Map<String, Object> map);
+		public int insertMoocdigital(Map<String, Object> map);
+		public int updateMoocdigital(Map<String, Object> map);
+		//内容意向表情况
+		public Map<String,Object> queryIntention(Map<String, Object> map);
+		public int insertIntention(Map<String, Object> map);
+		public int updateIntention(Map<String, Object> map);
 		//申报审核
 		public int updateDeclaration(Map<String, Object> map);
 		
 		//查出机构列表
 		public List<Map<String,Object>> queryOrgList(PageParameter<Map<String, Object>> pageParameter);
 		public int queryOrgCount(PageParameter<Map<String, Object>> pageParameter);
+		
+		/**
+		 * 更新个人资料
+		 */
+		public int updateWriter(Map<String, Object> map);
 }

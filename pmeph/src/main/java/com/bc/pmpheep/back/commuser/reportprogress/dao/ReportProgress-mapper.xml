@@ -60,7 +60,22 @@
 	
 	<!-- 获取作家用户申报教材消息 -->
 	<select id="getUserMessageByMaterialId" parameterType="java.util.Map" resultType="UserMessageVO">
-		SELECT 
+	SELECT
+	d.id,
+	t1.user_id,
+	d.msg_id,
+	d.title,
+	t1.online_progress,
+	t1.gmt_update,
+	d.gmt_create
+FROM
+	user_message d
+JOIN declaration t1 ON d.material_id = t1.material_id
+WHERE
+	t1.material_id = #{materialId}
+AND d.receiver_id = #{userId}
+AND t1.user_id = #{userId} order by d.gmt_create desc
+		<!-- SELECT 
 			* 
 		FROM 
 			user_message d 
@@ -74,7 +89,7 @@
 			d.`material_id`=#{materialId}
 		ORDER BY 
 			d.`gmt_create` DESC 
-		LIMIT 0,4
+		LIMIT 0,4 -->
 	</select>
 	
 	<!-- 获取作家用户申报教材信息 -->

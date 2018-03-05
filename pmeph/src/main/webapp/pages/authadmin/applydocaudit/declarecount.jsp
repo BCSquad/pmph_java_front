@@ -79,6 +79,7 @@
 								<td class="">主编当选数</td>
 								<td class="">副主编当选数</td>
 								<td class="">编委当选数</td>
+								<td class="">数字编委当选数</td>
 							</tr>
 						</thead>
 						<tbody id="queryTable">
@@ -92,6 +93,7 @@
 									<td>${one.dp1}</td>
 									<td>${one.dp2}</td>
 									<td>${one.dp3}</td>
+									<td>${one.dp4}</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -126,6 +128,7 @@
 								<td>主编名单</td>
 								<td>副主编名单</td>
 								<td>编委名单</td>
+								<td>数字编委名单</td>
 							</tr>
 						</thead>
 						<tbody id="messageTable">

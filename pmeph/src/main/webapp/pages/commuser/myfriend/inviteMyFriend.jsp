@@ -633,6 +633,7 @@ max-width: 10px !important; min-width: 10px !important;
     <!-- 隐藏域 -->
     <input type="hidden" value="${row}" id="row">
     <input type="hidden" value="${id}" id="id">
+    <input type="hidden" value="${realname}" id="realname">
     <input type="hidden" value="${more}" id="moreeee">
     <input type="hidden" value="${groupId}" id="groupId">
     <div class="items">
@@ -652,7 +653,7 @@ max-width: 10px !important; min-width: 10px !important;
 				            <div class="div_txt1">${friend.realname}</div>
 				            <div class="div_txt2">${friend.position}</div>
 				            <div class="div_txt3">
-				                <div  class ="showTalk" id="${friend.id}" onclick="invite('${friend.id}')">邀请</div>
+				                <div  class ="showTalk" id="${friend.id}" onclick="invite('${friend.id}','${friend.realname}')">邀请</div>
 				                <input type="hidden" id="t_${friend.id}" value= "${friend.realname}" />
 				            </div>
 		            	</div>
@@ -664,7 +665,7 @@ max-width: 10px !important; min-width: 10px !important;
 				            <div class="div_txt1">${friend.realname}</div>
 				            <div class="div_txt2">${friend.position}</div>
 				            <div class="div_txt3">
-				                <div  class ="showTalk" id="${friend.id}" onclick="invite('${friend.id}')">邀请</div>
+				                <div  class ="showTalk" id="${friend.id}" onclick="invite('${friend.id}','${friend.realname}')">邀请</div>
 				                <input type="hidden" id="t_${friend.id}" value= "${friend.realname}" />
 				            </div>
 			            </div>
@@ -683,6 +684,35 @@ max-width: 10px !important; min-width: 10px !important;
 	<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </div>
 <script type="text/javascript">
+var webSocket = undefined;
+try {
+    if (WebSocket) {
+    	webSocket = new WebSocket("ws://120.76.221.250:11000/pmpheep/websocket?userType=2&userId=" + $("#id").val());
+    }
+} catch (e) {
+
+}
+if (webSocket) {
+	webSocket.onopen = function(event){
+	    console.log("连接成功");
+	    console.log(event);
+	};
+	webSocket.onerror = function(event){
+	    console.log("连接失败");
+	    console.log(event);
+	};
+	webSocket.onclose = function(event){
+	    console.log("Socket连接断开");
+	    console.log(event);
+	};
+	//监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+    window.onbeforeunload = function(){
+    	webSocket.close();
+    };
+}
+
+</script>
+<script type="text/javascript">
    /*  $(function() {
         $(window).scroll(function() {
             var top = $(window).scrollTop()+100;
@@ -695,7 +725,7 @@ max-width: 10px !important; min-width: 10px !important;
 		$("#span_more").hide();
 	}
     //邀请好友
-    function invite(id){
+    function invite(id,realname){
     	
     	var json = {id:id,groupId:$("#groupId").val()};
     	$.ajax({
@@ -708,9 +738,26 @@ max-width: 10px !important; min-width: 10px !important;
             	  if(json=="0"){
             		  window.message.error("邀请失败");
             	  }else{
-            		  window.message.success("邀请成功");
+            		 
             		  $("#"+id).css({"background-color":"#f2f2f2"});
             		  $("#"+id).attr("onclick","");
+            		  //推送消息
+            	   if (webSocket) {
+            			  try {
+            				 
+            				  webSocket.send("{senderId:"+$("#id").val()+",senderType:"+0+",content:'\""+$("#realname").val()+"\"邀请了\""+realname+"\"进群"+"',groupId:"+$("#groupId").val()+",sendType:0}");
+                              
+						} catch (e) {
+							// TODO: handle exception
+						}finally{
+							setTimeout("webSocket.close();",1000);
+							
+						}
+            	   }
+						 window.message.success("邀请成功");  
+            		  
+                     
+				    	
             	  }
               }
     		
@@ -749,7 +796,7 @@ max-width: 10px !important; min-width: 10px !important;
                	            +n.position
                	            +'</div><div class="div_txt3"><div  class ="showTalk" id='
                	            +n.id
-               	            +'>邀请</div><input type="hidden" onclick="invite('+n.id+')" id="t_'
+               	            +'>邀请</div><input type="hidden" onclick="invite('+n.id+','+n.realname+')" id="t_'
                	            +n.id 
                	            +'value=\"' 
                	            +n.realname 

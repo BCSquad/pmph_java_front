@@ -76,7 +76,7 @@
         <input type="hidden" id="btn_type" name="btnType"/>
         <input type="hidden" id="image" name="image" value="${cover }"/>
         <input type="hidden" id="submitTypeCode" name="submitTypeCode" value="${submitTypeCode }"/>
-        <input class="sxy-btn" type="button" value="发表" onclick="btntype(0)" id="topub" disabled/>&nbsp;&nbsp;
+        <input class="sxy-btn" type="button" value="发表" onclick="btntype(0)" id="topub" />&nbsp;&nbsp;
         <input class="sxy-btn" type="button" value="暂存" onclick="btntype(1)"/>
     </div>
 </form>

@@ -175,7 +175,7 @@
 				console.log("上传完成：name " + filename + " fileid " + fileid);
 				var tail = filename.substring(filename.lastIndexOf("."));
 				
-				if ($.inArray(tail,['.bmp','.jpg','.gif','.jpge','.png'])!=-1) {
+				if ($.inArray(tail,['.bmp','.jpg','.gif','.jpeg','.png'])!=-1) {
 					$("#cert").val(fileid);
 					$("#certName").val(filename);
 					$("#downLoad_a").html("下载: " + filename);
@@ -184,7 +184,7 @@
 					});
 					window.message.success(filename + "上传成功！");
 				}else{
-					window.message.warning("请上传bmp、jpg、gif、jpge、png格式的照片或扫描件!");
+					window.message.warning("请上传bmp、jpg、gif、jpeg、png格式的照片或扫描件!");
 				}
 				
 				

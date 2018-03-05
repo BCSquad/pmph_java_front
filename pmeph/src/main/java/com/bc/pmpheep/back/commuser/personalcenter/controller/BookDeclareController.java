@@ -78,10 +78,11 @@ public class BookDeclareController extends BaseController {
 		List<Map<String, Object>> twriteList = new ArrayList<Map<String, Object>>();
 		// 插入银行信息
 		Map<String, Object> BankMap = new HashMap<String, Object>();
+		Map<String, Object> user=getUserInfo();
 		BankMap.put("user_id", request.getParameter("user_id"));
-		BankMap.put("account_name", request.getParameter("bank"));
+		BankMap.put("account_name",user.get("realname"));
 		BankMap.put("account_number", request.getParameter("account_number"));
-		BankMap.put("bank", request.getParameter("account_number"));
+		BankMap.put("bank", request.getParameter("bank"));
 		// 获取申报信息
 		Map<String, Object> topicMap = new HashMap<String, Object>();
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式

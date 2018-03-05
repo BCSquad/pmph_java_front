@@ -55,16 +55,18 @@ public class OrgUserController extends com.bc.pmpheep.general.controller.BaseCon
      * @return
      */
     @RequestMapping(value = "/writerLists", method = RequestMethod.GET)
-    public ModelAndView writerLists(Integer pageSize, Integer pageNumber, String username)
+    public ModelAndView writerLists(Integer pageSize, Integer pageNumber, HttpServletRequest request)
             throws Exception {
         ModelAndView model = new ModelAndView();
         if (null == pageSize) {
             pageSize = 10;
         }
         PageParameter<WriterUser> pageParameter = new PageParameter<>(pageNumber, pageSize);
-        String userName = "";
+        String username = request.getParameter("username");
+        String name="";
         if (username != null) {
-            userName = java.net.URLDecoder.decode(username, "UTF-8");
+//            userName = java.net.URLDecoder.decode(username, "UTF-8");
+            name=new String(username.getBytes("ISO-8859-1"),"UTF-8");	
         }
         //获取当前用户
         Map<String, Object> writerUserMap = this.getUserInfo();
@@ -72,7 +74,7 @@ public class OrgUserController extends com.bc.pmpheep.general.controller.BaseCon
         WriterUser writerUser = new WriterUser();
         orgUser.setOrgId(Long.parseLong(writerUserMap.get("org_id").toString()));
         writerUser.setOrgId(orgUser.getOrgId());
-        writerUser.setName(userName);
+        writerUser.setName(name);
         pageParameter.setParameter(writerUser);
         String pageUrl = "authadmin/usermanage/writerLists";
         try {
@@ -84,7 +86,7 @@ public class OrgUserController extends com.bc.pmpheep.general.controller.BaseCon
             }
             model.addObject("pageNumber", pageNumber);
             model.addObject("pageSize", pageSize);
-            model.addObject("username", username);
+            model.addObject("username", name);
         } catch (CheckedServiceException e) {
             throw new CheckedServiceException(e.getBusiness(), e.getResult(), e.getMessage(),
                     pageUrl);

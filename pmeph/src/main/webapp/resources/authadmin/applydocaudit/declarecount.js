@@ -40,6 +40,7 @@ function selectAll() {
 								+ "</td><td   >" + (n.dp1 ? n.dp1 : '0')
 								+ "</td><td   >" + (n.dp2 ? n.dp2 : '0')
 								+ "</td><td   >" + (n.dp3 ? n.dp3 : '0')
+								+ "</td><td   >" + (n.dp4 ? n.dp4 : '0')
 								+ "</td></tr>";
 					});
 			$("#queryTable").html("");
@@ -104,6 +105,8 @@ function getData(offset, size) {
 								+ (data[i].fb ? data[i].fb : '--')
 								+ "</td><td   >"
 								+ (data[i].bw ? data[i].bw : '--')
+								+ "</td><td   >"
+								+ (data[i].szbw ? data[i].szbw : '--')
 								+ "</td></tr>";
 					}
 					$("#messageTable").append(result);
@@ -144,7 +147,8 @@ function selectResults() {
 						+ (n.textbook_name ? n.textbook_name : '--')
 						+ "</td><td   >" + (n.zb ? n.zb : '--')
 						+ "</td><td   >" + (n.fb ? n.fb : '--')
-						+ "</td><td   >" + (n.bw ? n.bw : '--') + "</td></tr>";
+						+ "</td><td   >" + (n.bw ? n.bw : '--')
+						+ "</td><td   >" + (n.szbw ? n.szbw : '--') + "</td></tr>";
 			});
 			$("#messageTable").append(str);
 		}

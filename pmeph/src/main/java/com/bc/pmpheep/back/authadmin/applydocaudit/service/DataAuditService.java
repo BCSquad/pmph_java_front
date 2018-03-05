@@ -215,9 +215,18 @@ public interface DataAuditService {
 	public int updateDeclarationPass(Map<String,Object> map);
 	
 	/**
+	 * 通过后发送消息给申报人员
+	 */
+	void senNewMsgPass(Long material_id,Long thisId,Short thisType,Long frendId,Short friendIdType,String title,String content);
+	
+	/**
 	 * 申报审核退回
 	 */
 	public int updateDeclaration(Map<String,Object> map);
+	/**
+	 * 退回后发送消息给申报人员
+	 */
+	void senNewMsgBack(Long material_id,Long thisId,Short thisType,Long frendId,Short friendIdType,String title,String content);
 	
 	
 	

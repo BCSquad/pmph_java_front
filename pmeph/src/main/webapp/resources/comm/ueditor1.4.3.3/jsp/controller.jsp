@@ -13,6 +13,8 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%
 
+    String serverAddress = "http://120.76.221.250/v/image/";
+
     request.setCharacterEncoding("utf-8");
     response.setHeader("Content-Type", "text/html");
 
@@ -34,18 +36,18 @@
                 String url = MapUtils.getString(item, "url", "");
                 String id = fileService.saveLocalFile(Thread.currentThread().getContextClassLoader().getResourceAsStream("../../" + url), FileType.CMS_ATTACHMENT, 0);
 
-                item.put("url", "http://" + request.getHeader("Host") + request.getContextPath() + "/image/" + id + ".action");
+                item.put("url", serverAddress + id);
             }
         } else if (action.equals("uploadimage") || action.equals("uploadscrawl")) {//uploadscrawl 涂鸦图片 uploadimage 上传图片
             String url = MapUtils.getString(resultMap, "url", "");
             String id = fileService.saveLocalFile(Thread.currentThread().getContextClassLoader().getResourceAsStream("../../" + url), FileType.CMS_ATTACHMENT, 0);
 
-            resultMap.put("url", "http://" + request.getHeader("Host") + request.getContextPath() + "/image/" + id + ".action");
+            resultMap.put("url", serverAddress + id);
         } else if (action.equals("uploadfile")) {
             String url = MapUtils.getString(resultMap, "url", "");
             String id = fileService.saveLocalFile(Thread.currentThread().getContextClassLoader().getResourceAsStream("../../" + url),
                     FileType.CMS_ATTACHMENT, MapUtils.getString(resultMap, "original", ""), 0);
-            resultMap.put("url", "http://" + request.getHeader("Host") + request.getContextPath() + "/file/download/" + id + ".action");
+            resultMap.put("url", serverAddress + id);
         } else {
 
             if (action != null &&

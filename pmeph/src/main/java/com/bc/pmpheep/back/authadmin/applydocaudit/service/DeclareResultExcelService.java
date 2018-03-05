@@ -33,7 +33,7 @@ public class DeclareResultExcelService implements ExcelDownloadService {
 
     @Override
     public String[][] getColTitle() {
-        return new String[][]{{"书名", "textbook_name"}, {"主编名单", "zb"}, {"副主编名单", "fb"}, {"编委名单", "bw"}};
+        return new String[][]{{"书名", "textbook_name"}, {"主编名单", "zb"}, {"副主编名单", "fb"}, {"编委名单", "bw"},{"数字编委名单", "szbw"}};
     }
 
     @Override
@@ -53,6 +53,7 @@ public class DeclareResultExcelService implements ExcelDownloadService {
             map.put("zb", resultList.get(i).get("zb"));
             map.put("fb", resultList.get(i).get("fb"));
             map.put("bw", resultList.get(i).get("bw"));
+            map.put("szbw", resultList.get(i).get("szbw"));
             list.add(map);
         }
 

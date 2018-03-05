@@ -42,8 +42,17 @@ public class MyMessage implements java.io.Serializable {
     private Timestamp gmtCreate;
     // 修改时间
     private Timestamp gmtUpdate;
+    // 教材id
+    private Long      material_id;
+    public Long getMaterial_id() {
+		return material_id;
+	}
 
-    public MyMessage() {
+	public void setMaterial_id(Long material_id) {
+		this.material_id = material_id;
+	}
+
+	public MyMessage() {
         super();
     }
 

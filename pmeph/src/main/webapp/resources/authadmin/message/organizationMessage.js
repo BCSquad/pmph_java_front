@@ -19,14 +19,14 @@ function loadMore(){
 			$.each(json.list,function(i,n){
 				str+='<div class="item">'+
     			'<div class="item-img">'+
-                '<img src="'+contextpath+'/statics/testfile/tttt.png" />'+
+                '<img src="'+contextpath+'statics/testfile/tttt.png" />'+
             '</div>'+
             '<div class="content" >'+
             ' <p class="title" >'+
             '<span class="msg">'+n.NAME+'</span>'+
             '<span class="time">'+n.TIME+'</span>'+
             ' </p>'+
-            '<p class="text">'+n.TYPE+'</p>' +
+            '<p class="text" onclick="system(\''+n.msg_id+'\',\''+n.NAME+'\',\''+n.TIME+'\')">'+n.TYPE+'</p>' +
             '</div>'+
         '</div>';
 		});
@@ -37,4 +37,27 @@ function loadMore(){
 			
 		}
 	});
+}
+
+//点击显示系统消息
+function system(str,name,time) {
+    if(str!=''&&str!=''){
+        $.ajax({
+            type:"post",
+            url:contextpath+"AllMessage/msg.action?mid="+str,
+            async:false,
+            dataType:'json',
+            success:function(json){
+                $("#titlec").html(name);
+                $("#timec").html(time);
+                $("#tcontent").html(json.msg);
+                $("#bookmistake").show();
+            }
+        });
+    }
+}
+
+//点击关闭消息详情窗口
+function hideup() {
+    $("#bookmistake").hide();
 }

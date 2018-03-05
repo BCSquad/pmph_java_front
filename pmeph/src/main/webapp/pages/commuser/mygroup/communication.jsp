@@ -26,6 +26,7 @@
     <script type="text/javascript" src="${ctx}/resources/comm/layer/layer.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js" type="text/javascript"></script>
     <script src="<%=path %>/resources/commuser/mygroup/group.js" type="text/javascript"></script>
+    
 </head>
 <body>
 	
@@ -41,6 +42,7 @@
                     <span class="span1">${thisGroup.groupName}</span>
                     <input id="groupId" type="hidden" value="${thisGroup.id}"/>
                     <input id="userId" type="hidden" value="${userId}"/>
+                    <input id="userName" type="hidden" value="${userName}"/>
                     <div class="top_content2">
                         <div class="top_content22">
                             <img src="${ctx}/statics/image/zjyh.png">
@@ -65,6 +67,7 @@
                     </div>
                     <label></label>
                     <div class="top_tj2">
+                    <input type="hidden" value="${fileTotal}" id="file_count" /> <!-- 解决ie8获取不到值的问题 -->
                         <text class="top_tj1_text1" id="fileTotal"  >${fileTotal}</text>
                         <br/>
                         <text class="top_tj1_text2">文件分享</text>
@@ -79,7 +82,7 @@
             <div class="left-content">
                 <div class="_show" id="commnions">
                     <div class="iframe1">
-						<a id ="history" style="cursor:pointer" >历史消息。。。</a>
+						<a id ="history" style="cursor:pointer;color:#999;font-size:14px;" >历史消息...</a>
                      </div>
                     <div class="iframe2">
                         <textarea  id="msgContent" type="text" placeholder="请输入消息内容,按回车键发送" ></textarea>

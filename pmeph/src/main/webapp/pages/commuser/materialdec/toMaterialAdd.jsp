@@ -62,7 +62,7 @@
 			<div class="item" id="xz1">
 				<span style="float: left;line-height: 30px;">图书：</span>
 				<select id="edu1" name="textbook_id" class="st book" data-valid="isNonEmpty" data-error="书籍选择不能为空" style="float: left;height: 40px;">
-				    	${bookSelects}.
+				    	${bookSelects}
 				</select>
 				<div style="float: left;margin-left: 30px;" class="ts_radio">
 					<table style="width: 280px;border:0" cellspacing="0" cellpadding="0">
@@ -108,50 +108,56 @@
 				<table class="tab_1">
 					<tr>
 						<td><span class="btbs">*</span><span>姓&emsp;&emsp;名：</span>
-							<input class="cg_input" name="realname" id="realname" value="" maxlength="6"/>
-							
+							<input class="cg_input" name="realname" id="realname" value="${userMap.realname}" maxlength="6"/>
 							<input class="cg_input" name="user_id" type="hidden" value="${userMap.id}" />
 							</td>
 						<td><span class="btbs">*</span><span>性&emsp;&emsp;别：</span>
                             <select class="select-input" id="sex" name="sex">
-                                <option value="1" selected="selected">男</option>
-                                <option value="2">女</option>
-                                <option value="0">保密</option>
+                                <option value="1" ${userMap.sex=='1'?'selected':'' }>男</option>
+                                <option value="2" ${userMap.sex=='2'?'selected':'' }>女</option>
+                                <option value="0" ${userMap.sex=='0'?'selected':'' }>保密</option>
                             </select></td>
 						<td><span class="btbs">*</span><span>出生年月：</span> 
-							<input class="cg_input" calendar format="'yyyy-mm-dd'"  name="birthday" value=""  id="birthday"  /></td>
+							<input class="cg_input" calendar format="'yyyy-mm-dd'"  name="birthday" value="${userMap.birthday}"  id="birthday"  /></td>
 						<td><span class="btbs">*</span><span>教&emsp;&emsp;龄：</span>
-							<input class="cg_input" name="experience" value="" id="experience" 
+							<input class="cg_input" name="experience" value="${userMap.experience}" id="experience" 
 							 onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
 							 maxlength="2"
 							/></td>
 					</tr>
 					<tr>
 						<td><span class="btbs">*</span><span>工作单位：</span>
-							<input class="cg_input" name="org_name" value="" id="org_name"  maxlength="20"/></td>
+							<input class="cg_input" name="org_name" value="${userMap.workplace}" id="org_name"  maxlength="20"/></td>
 						<td><span class="btbs">*</span><span>职&emsp;&emsp;务：</span>
-							<input class="cg_input" name="position" value="" id="position"  maxlength="12"/></td>
+							<input class="cg_input" name="position" value="${userMap.position}" id="position"  maxlength="12"/></td>
 						<td><span class="btbs">*</span><span>职&emsp;&emsp;称：</span>
-							<input class="cg_input" name="title" value="" id="zc"  maxlength="10"/></td>
-						<td><span class="btbs">*</span><span style="width: 70px">E-mail：</span>
-							<input class="cg_input" name="email" value="" id="email"  maxlength="40"/></td>
+							<select id="zclx" name="title">
+	                                 <option value="教授"  ${userMap.title=='教授'?'selected':'' }>教授</option>
+	                                <option value="讲师" ${userMap.title=='讲师'?'selected':'' }>讲师</option>
+	                                <option value="高级讲师" ${userMap.title=='高级讲师'?'selected':'' }>高级讲师</option>
+	                                <option value="副教" ${userMap.title=='副教'?'selected':'' }>副教</option>
+	                                <option value="院士" ${userMap.title=='院士'?'selected':'' }>院士</option>
+	                                <option value="其他" ${userMap.title=='其他'?'selected':'' }>其他</option>
+	                            </select></td>
+						<td><span class="btbs">*</span><span style="width: 70px">邮&emsp;&emsp;箱：</span>
+							<input class="cg_input" name="email" value="${userMap.email}" id="email"  maxlength="40"/></td>
 					</tr>
 					<tr>
 						<td><span>&ensp;邮&emsp;&emsp;编：</span>
-							<input class="cg_input" name="postcode" value="" id="postcode"
+							<input class="cg_input" name="postcode" value="${userMap.postcode}" id="postcode"
 							onblur="LengthLimit(this,20)"
 							 maxlength="20"/>
 						</td>
 						<td><span>&ensp;联系电话：</span>
-							<input class="cg_input" name="telephone" value="" id="telephone"
+							<input class="cg_input" name="telephone" value="${userMap.telephone}" id="telephone"
 							onblur="LengthLimit(this,20)"
 							 maxlength="20"/>
 						</td>
 						<td><span>&ensp;传&emsp;&emsp;真：</span>
-							<input class="cg_input" name="fax" value="" id="fax" onblur="LengthLimit(this,45)" maxlength="45"/>
+							<input class="cg_input" name="fax" value="${userMap.fax}" id="fax" onblur="LengthLimit(this,45)" maxlength="45"/>
 						</td>
 						<td><span class="btbs">*</span><span>手&emsp;&emsp;机：</span>
-							<input class="cg_input" name="handphone" value="" id="handphone" maxlength="11"/>
+							<input class="cg_input" name="handphone" value="${userMap.handphone}" id="handphone" maxlength="11"/>
 						</td>
 					</tr>
 					<tr>
@@ -162,9 +168,30 @@
                                 <option value="2">军官证</option>
                             </select></td>
 						<td><span class="btbs">*</span><span>证件号码：</span>
-							<input class="cg_input" name="idcard" value="" id="idcard"  maxlength="18"/></td>
+							<input class="cg_input" name="idcard" value="${userMap.idcard}" id="idcard"  maxlength="18"/></td>
 						<td colspan="2"><span class="btbs">*</span><span>地&emsp;&emsp;址：</span>
-							<input class="cg_input" style="width: 488px;" name="address" value="" id="address"  maxlength="17"/></td>
+							<input class="cg_input" style="width: 488px;" name="address" value="${userMap.address}" id="address"  maxlength="17"/></td>
+					</tr>
+					<tr>
+						<td><span>&ensp;服从调剂：</span>
+							<input type="radio" name="is_dispensed" value="1" checked="checked"/>是
+							<input type="radio" name="is_dispensed" value="0"/>否
+						</td>
+						<td><span>&ensp;参与本科教学评估认证：</span>
+							<input type="radio" name="is_utec" value="1" checked="checked"/>是
+							<input type="radio" name="is_utec" value="0"/>否
+						</td>
+						<td><span>&ensp;学&emsp;&emsp;历：</span>
+							<select id="degree" name="degree">
+	                                <option value="0" selected="selected">无</option>
+	                                <option value="1">专科</option>
+	                                <option value="2">本科</option>
+	                                <option value="3">硕士</option>
+	                                <option value="4">博士</option>
+	                            </select></td>
+						<td><span>&ensp;专业特长：</span>
+							<input class="cg_input" name="expertise" value="" id="expertise" maxlength="50"/>
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -337,11 +364,11 @@
 				</table>
 			</div>
 		</div>
-			<!--上版教材参编情况-->
+		<!--作家本套上版教材参编情况-->
 		<div class="sbxq_item" id="sbjccb">
 			<div>
 				<span id="tsxz_span6"></span>
-				<span class="tsxz_title">上版教材参编情况</span>
+				<span class="tsxz_title">本套上版教材参编情况</span>
 				<span class="tsxz_ts" id="sbjccb_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
 				<span class="tsxz_xt" id="sbjccb_xt" >（选填）</span>
 			</div>
@@ -382,7 +409,7 @@
 				</table>
 			</div>
 		</div>
-			<!--精品课程建设-->
+		<!--精品课程建设-->
 		<div class="sbxq_item" id="gjjpkcjs">
 			<div>
 				<span id="tsxz_span7"></span>
@@ -459,16 +486,75 @@
 				</table>
 			</div>
 		</div>
-			<!--教材编写情况-->
-		<div class="sbxq_item" id="jcbxqk">
+		<!--人卫社教材编写情况表-->
+		<div class="sbxq_item" id="rwsjcbx">
 			<div>
 				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">教材编写情况</span>
-				<span class="tsxz_ts" id="jcbxqk_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
-				<span class="tsxz_xt" id="jcbxqk_xt" >（选填）</span>
+				<span class="tsxz_title">人卫社教材编写情况</span>
+				<span class="tsxz_ts" id="rwsjcbx_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_xt" id="rwsjcbx_xt" >（选填）</span>
 			</div>
 			<div class="content">
-				<table class="tab_2" id="tab_jcbx">
+				<table class="tab_2" id="tab_rwsjcbx">
+					<thead>
+						<tr>
+							<td width="230px">教材名称</td>
+							<td width="120px">教材级别</td>
+							<td width="120px">编写职务</td>
+							<td width="100px">是否数字编委</td>
+							<td width="120px">出版时间</td>
+							<td width="120px">标准书号</td>
+							<td>备注</td>
+							<td width="78px">添加</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input class="cg_input" id="pmph_material_name" name="pmph_material_name" value="" style="width: 200px;" placeholder="教材名称" maxlength="33"/></td>
+							<td>
+								<select id="pmph_rank" name="pmph_rank">
+	                                <option value="0">无</option>
+	                                <option value="1">国家</option>
+	                                <option value="2">省部</option>
+	                                <option value="3">协编</option>
+	                                <option value="4">校本</option>
+	                                <option value="5">其他</option>
+                            	</select>
+							</td>
+							<td>
+								<select id="pmph_position" name="pmph_position">
+	                                <option value="0">无</option>
+	                                <option value="1">主编</option>
+	                                <option value="2">副主编</option>
+	                                <option value="3">编委</option>
+                            	</select>
+							</td>
+							<td style="color: #333333;">
+								<table class="radio_tb" style="width: 80px;"><tr>
+									<td><input type="radio" name="pmph_is_digital_editor_1" value="1" />是</td>
+					 				<td><input type="radio" name="pmph_is_digital_editor_1" value="0" checked="checked"/>否</td>
+								</tr></table>
+								<input type="hidden" name="pmph_is_digital_editor" value="pmph_is_digital_editor_1" />
+							</td>
+							<td><input class="cg_input" name="pmph_publish_date" id="pmph_publish_date" value="" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  style="width: 100px;"/></td>
+							<td><input class="cg_input" name="pmph_isbn" id="pmph_isbn" value="" style="width: 100px;" placeholder="标准书号" maxlength="16"/></td>
+							<td><input class="cg_input" name="pmph_note" id="pmph_note" value="" style="width: 260px;" placeholder="备注" maxlength="33"/></td>
+							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_rwsjcbx()"/></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!--其他社教材编写情况-->
+		<div class="sbxq_item" id="qtjcbxqk">
+			<div>
+				<span id="tsxz_span7"></span>
+				<span class="tsxz_title">其他社教材编写情况</span>
+				<span class="tsxz_ts" id="qtjcbxqk_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_xt" id="qtjcbxqk_xt" >（选填）</span>
+			</div>
+			<div class="content">
+				<table class="tab_2" id="tab_qtjcbxqk">
 					<thead>
 						<tr>
 							<td width="230px">教材名称</td>
@@ -487,10 +573,12 @@
 							<td><input class="cg_input" name="jcb_material_name" id="jcb_material_name" value="" style="width: 200px;" placeholder="教材名称" maxlength="33"/></td>
 							<td>
 								<select id="jcxz" name="jcb_rank">
-	                                <option value="1">教育部规划</option>
-	                                <option value="2">卫计委规划</option>
-	                                <option value="3">区域规划</option>
-	                                <option value="4">创新教材</option>
+	                                <option value="0">无</option>
+	                                <option value="1">国家</option>
+	                                <option value="2">省部</option>
+	                                <option value="3">协编</option>
+	                                <option value="4">校本</option>
+	                                <option value="5">其他</option>
                             	</select>
 							</td>
 							<td>
@@ -513,58 +601,6 @@
 							<td><input class="cg_input" name="jcb_isbn" id="jcb_isbn" value="" style="width: 100px;" placeholder="标准书号" maxlength="16"/></td>
 							<td><input class="cg_input" name="jcb_note" value="" style="width: 130px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jcbx()"/></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-			<!--其他教材编写情况-->
-		<div class="sbxq_item" id="qtjcbxqk">
-			<div>
-				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">其他教材编写情况</span>
-				<span class="tsxz_ts" id="qtjcbx_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
-				<span class="tsxz_xt" id="qtjcbx_xt" >（选填）</span>
-			</div>
-			<div class="content">
-				<table class="tab_2" id="tab_qtjcbx">
-					<thead>
-						<tr>
-							<td width="250px">教材名称</td>
-							<td width="120px">编写职务</td>
-							<td width="100px">是否数字编委</td>
-							<td width="150px">出版社</td>
-							<td width="130px">出版时间</td>
-							<td width="130px">标准书号</td>
-							<td>备注</td>
-							<td width="78px">添加</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><input class="cg_input" name="jcb_material_name" id="qt_jcb_material_name" value="" style="width: 210px;" placeholder="教材名称" maxlength="33"/></td>
-							<td>
-								<select id="qtjcjb" name="jcb_position">
-	                                <option value="0">无</option>
-	                                <option value="1">主编</option>
-	                                <option value="2">副主编</option>
-	                                <option value="3">编委</option>
-                            	</select>
-							</td>
-							<td style="color: #333333;">
-								<table class="radio_tb" style="width: 80px;"><tr>
-									<td><input type="radio" name="jcb_is_digital_editor_2" value="1" />是</td>
-					 				<td><input type="radio" name="jcb_is_digital_editor_2" value="0" checked="checked"/>否</td>
-								</tr></table>
-								<input type="hidden" name="jcb_is_digital_editor" value="jcb_is_digital_editor_2" />
-							</td>
-							<td><input class="cg_input" name="jcb_publisher" id="qt_jcb_publisher" value="" style="width: 120px;" placeholder="出版社" maxlength="16"/></td>
-							<td><input class="cg_input" placeholder="出版时间" id="qt_jcb_publish_date" calendar format="'yyyy-mm-dd'"  z-index="100" name="jcb_publish_date" value="" style="width: 110px;"/></td>
-							<td><input class="cg_input" name="jcb_isbn" value="" id="qt_jcb_isbn" style="width: 110px;" placeholder="标准书号" maxlength="16"/></td>
-							<td><input class="cg_input" name="jcb_note" value="" placeholder="备注" style="width: 180px;" maxlength="33"/>
-								<input type="hidden" name="jcb_rank" value="0"/>
-							</td>
-							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_qtjcbx()"/></td>
 						</tr>
 					</tbody>
 				</table>
@@ -796,6 +832,30 @@
 				</table>
 			</div>
 		</div>
+		<!--参加人卫慕课、数字教材编写情况-->
+	 	<div class="sbxq_item" id="digital">
+			<div>
+				<span id="tsxz_span9"></span>
+				<span class="tsxz_title">参加人卫慕课、数字教材编写情况</span>
+				<span class="tsxz_ts" id="digital_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_xt" id="digital_xt" >（选填）</span>
+			</div>
+			<div class="content">
+				<textarea class="text_cl" name="mooc_content" id="mooc_content" maxlength="1000"></textarea>
+			</div>
+		</div>
+		<!--编写内容意向表-->
+	 	<div class="sbxq_item" id="intention">
+			<div>
+				<span id="tsxz_span9"></span>
+				<span class="tsxz_title">编写内容意向表</span>
+				<span class="tsxz_ts" id="intention_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_xt" id="intention_xt" >（选填）</span>
+			</div>
+			<div class="content">
+				<textarea class="text_cl" name="intention_content" id="intention_content" maxlength="1000"></textarea>
+			</div>
+		</div>
 		<!-- 申报单位-->
 		<div class="sbxq_item1">
 			<div>
@@ -814,8 +874,8 @@
 		<hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">
 		<div class="button">
 			<div class="div_butt">
-				<div class="bt_tj" onclick="javascript:buttAdd('1')">提交</div>
-				<div class="bt_tj" onclick="javascript:buttAdd('2')">暂存</div>
+				<div class="bt_tj" id="butj" onclick="javascript:buttAdd('1')">提交</div>
+				<div class="bt_tj" id="buzc" onclick="javascript:buttAdd('2')">暂存</div>
 				<div class="bt_tj" onclick="javascript:buttGive()">放弃</div>
 			</div>
 

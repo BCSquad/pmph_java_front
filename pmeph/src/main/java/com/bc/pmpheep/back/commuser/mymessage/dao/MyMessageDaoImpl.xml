@@ -239,6 +239,9 @@
 			<if test="gmtUpdate != null ">
 				gmt_update,
 			</if>
+			<if test="material_id != null ">
+				material_id
+			</if>
 		</trim>
 	</sql>
 	<!-- sql片段对应?,id属性值任意 -->
@@ -280,6 +283,9 @@
 			</if>
 			<if test="gmtUpdate != null ">
 				#{gmtUpdate},
+			</if>
+			<if test="material_id != null ">
+				#{material_id}
 			</if>
 		</trim>
 	</sql>

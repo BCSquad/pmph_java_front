@@ -52,6 +52,10 @@ function choosesex() {
 }
 
 function getform() {
+	var mytag=[];
+	$(".sxy-bottom-div").each(function(i){
+		mytag[i]=$(this).text().trim();
+	});
     var json = {
         fileid: $("#uploadFile").attr("avatar"),
         realname: $("#realname").val(),
@@ -71,20 +75,27 @@ function getform() {
         signature: $("#signature").val(),
         workplace: $("#workplace").val(),
         id: $("#id").val(),
+        tags:(mytag.length==0?'':mytag.join('%')),
+        hastag:$("#hastag").val()
     };
     return json;
 }
 
 //普通用户信息编辑方法
 function save() {
-
+    var mdata=getform();
+    var len=mdata.tags.replace(/[^\x00-\xff]/g, "aa").length;//个人标签的总长度
+    if(len>200){
+    	 window.message.warning("标签的总长度过大！");
+    	return; 
+    }
     if ($("#orgForm").validate('submitValidate')) {
         $.ajax({
             type: 'post',
             url: contextpath + 'userinfo/update.action',
             async: false,
             dataType: 'json',
-            data: getform(),
+            data: mdata,
             success: function (json) {
                 if (json.returncode == "OK") {
                     window.message.success("保存成功！");
@@ -130,4 +141,38 @@ function LengthLimit(obj, ml) {
         obj.value = va.substring(0, maxStrlength);
         window.message.warning("不可超过输入最大长度" + ml + "字节！");
     }
+}
+
+//添加个人标签
+function addtag(){
+	var newtag=$("#mytag").val().trim();
+	if(newtag==null||newtag==''){
+        window.message.warning("请输入标签名！");
+        return;
+    }
+	var isExist=false;
+	var a='护理';
+	$(".sxy-bottom-div").each(function(i){
+		var t=$(this).text().trim();
+		if(newtag==t){
+			isExist=true;
+			return;
+		}
+  	});
+	
+	if(!isExist){
+	    if(newtag!=''){
+            $("#tags").append( '<div class="sxy-bottom-div" style="margin-left: 17px;margin-top:5px">'+
+                '<span class="sxy-bottom-font" style="float:left">'+
+                newtag+'</span><span class="deltag" onclick="deltag(this.parentElement)"> </span></div>');
+        }
+	}else{
+		 window.message.warning("此标签已存在！");
+	}
+
+	$("#mytag").val(null);
+}
+//删除个人标签
+function deltag(obj){
+	obj.remove();
 }

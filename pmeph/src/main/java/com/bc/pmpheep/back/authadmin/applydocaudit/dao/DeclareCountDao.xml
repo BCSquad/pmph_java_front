@@ -17,9 +17,10 @@
 		sum(case dp.chosen_position when '4' then 1 else 0 end) as
 		dp1,
 		sum(case dp.chosen_position when '2' then 1 else 0 end) as dp2,
-		sum(case dp.chosen_position when '1' then 1 else 0 end) as dp3
+		sum(case dp.chosen_position when '1' then 1 else 0 end) as dp3,
+		sum(case dp.chosen_position when '8' then 1 else 0 end) as dp4
 		from
-		textbook t LEFT JOIN dec_position dp ON t.id=dp.textbook_id
+		textbook t LEFT JOIN dec_position_published dp ON t.id=dp.textbook_id
 		LEFT JOIN declaration as d on dp.declaration_id=d.id
 		LEFT JOIN org as o on
 		d.org_id=o.id
@@ -51,9 +52,10 @@
 		sum(case dp.chosen_position when '4' then 1 else 0 end) as
 		dp1,
 		sum(case dp.chosen_position when '2' then 1 else 0 end) as dp2,
-		sum(case dp.chosen_position when '1' then 1 else 0 end) as dp3
+		sum(case dp.chosen_position when '1' then 1 else 0 end) as dp3,
+		sum(case dp.chosen_position when '8' then 1 else 0 end) as dp4
 		from
-		textbook t LEFT JOIN dec_position dp ON t.id=dp.textbook_id
+		textbook t LEFT JOIN dec_position_published dp ON t.id=dp.textbook_id
 		LEFT JOIN declaration as d on dp.declaration_id=d.id
 		LEFT JOIN org as o on
 		d.org_id=o.id
@@ -73,7 +75,7 @@
 	<!--最终结果名单列表 加载更多 -->
 	<select id="findNameList" resultType="java.util.Map"
 		parameterType="java.util.Map">
-			select t.*,COUNT(zb) as zbc,COUNT(fb) as fbc,COUNT(bw) as bwc from (	
+			select t.*,COUNT(zb) as zb,COUNT(fb) as fb,COUNT(bw) as bw ,COUNT(szbw) as szbw from (	
 		SELECT
 		t.id,
 		t.textbook_name,
@@ -96,9 +98,15 @@
 		WHEN '1' THEN
 		d.realname
 		END
-		) AS bw
+		) AS bw,
+		GROUP_CONCAT(
+		CASE dp.chosen_position
+		WHEN '8' THEN
+		d.realname
+		END
+		) AS szbw
 		FROM
-		textbook t LEFT JOIN dec_position dp ON t.id=dp.textbook_id
+		textbook t LEFT JOIN dec_position_published dp ON t.id=dp.textbook_id
 		LEFT JOIN declaration as d on dp.declaration_id=d.id
 		LEFT JOIN org as o on
 		d.org_id=o.id
@@ -114,7 +122,7 @@
 		</where>
 		GROUP BY t.id
 		
-		) t  GROUP BY t.textbook_name HAVING zbc>=1 or fbc>=1 or bwc>=1
+		) t  GROUP BY t.textbook_name HAVING zb>=1 or fb>=1 or bw>=1  or szbw>=1
 		
 	</select>
 
@@ -143,9 +151,15 @@
 		WHEN '1' THEN
 		d.realname
 		END
-		) AS bw
+		) AS bw,
+		GROUP_CONCAT(
+		CASE dp.chosen_position
+		WHEN '8' THEN
+		d.realname
+		END
+		) AS szbw
 		FROM
-		textbook t LEFT JOIN dec_position dp ON t.id=dp.textbook_id
+		textbook t LEFT JOIN dec_position_published dp ON t.id=dp.textbook_id
 		LEFT JOIN declaration as d on dp.declaration_id=d.id
 		LEFT JOIN org as o on
 		d.org_id=o.id
