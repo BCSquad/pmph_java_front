@@ -227,10 +227,13 @@
                         <div class="left_two">
                             <div class="textbook_left">重点学科推荐</div>
                             <div class="all_left"></div>
-                            <div class="p1_left">
-
-                            </div>
-                            <div class="p2_left"></div>
+                            <c:forEach var="ad3" items="${adInfo3.detailList}" varStatus="status">
+                                <c:if test="${status.index==0}">
+                                <div class="${status.index==0?'p1_left':'p2_left'}">
+                                    <img src="${ctx}/image/${ad3.image}.action" style="width: 216px;height: 89px">
+                                </div>
+                                </c:if>
+                            </c:forEach>
                         </div>
                     </div>
                     <div class="right" id="homepagebook" style="float: right;">${homepagebook}</div>
@@ -238,7 +241,8 @@
             </div>
             <div class="area-5">
                 <c:forEach var="ad" items="${adInfo2.detailList}">
-                    <div class="item"><img src="${ctx}/image/${ad.image}.action" height="82" width="285" class="book1">
+                    <div class="item">
+                        <img src="${ctx}/image/${ad.image}.action" height="82" width="285" class="book1">
                     </div>
                 </c:forEach>
             </div>

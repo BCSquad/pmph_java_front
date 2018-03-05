@@ -186,7 +186,16 @@ $(function () {
         }
     });
 
+    //隐藏/显示配套图书
+    if($("sup-hidden").val=='no'){
+
+    }else {
+        $(".right_1").hide();
+    }
+
     morecontent();
+
+
 
 });
 //展开、收起
