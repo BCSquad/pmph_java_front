@@ -291,8 +291,8 @@
                     </div>
                 </div>
                 <div class="block">
-                    <div id="changepage">
-                        <c:forEach items="${listCom}" var="list" begin="1" end="2">
+                    <divlistCom id="changepage">
+                        <c:forEach items="${listCom}" var="list">
                             <div class="item">
                                 <div class="item_title">
                                     <div style="float: left;">
@@ -350,7 +350,7 @@
                                 <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
                             </div>
                         </c:forEach>
-                    </div>
+                    </divlistCom>
                     <div class="morecon">
                         <input type="hidden" value="${start}" id="start">
                         <span class="moreothers" onclick="changepage()"

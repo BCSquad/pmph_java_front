@@ -224,7 +224,7 @@ function changepage() {
             $(".morecom").hide();
             $(".moreothers").show();
             if (json.length < 3) {
-                $("#moreothers").html('没有更多了~~~');
+                $("#moreothers").html('加载完毕');
             }else{
             	json.remove(2);
             }
