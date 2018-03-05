@@ -50,7 +50,7 @@ public class WriterArticleServiceImpl implements WriterArticleService {
 		    WriterUserTrendst wut = new WriterUserTrendst(map.get("author_id").toString(), 1, map.get("table_trendst_id").toString());
 			personalService.saveUserTrendst(wut);
 		}*/
-		
+		writerArticleDao.insertArticleCover(map);
 		Map<String,Object> result_map = new HashMap<String, Object>();
 		result_map.put("msg_id", msg_id);
 		result_map.put("atrticle_id", map.get("table_trendst_id"));
@@ -70,6 +70,7 @@ public class WriterArticleServiceImpl implements WriterArticleService {
 		map.put("summary", summary);
 		map.put("category_id", cmsCategoryConfig.getId("医学随笔"));
 		writerArticleDao.updateIsStaging(map);
+		writerArticleDao.updateArticleCover(map);
 		/*if ("0".equals(map.get("is_staging").toString())) {
 			WriterUserTrendst wut = new WriterUserTrendst(map.get("author_id").toString(), 1, map.get("atrticle_id").toString());
 			personalService.saveUserTrendst(wut);

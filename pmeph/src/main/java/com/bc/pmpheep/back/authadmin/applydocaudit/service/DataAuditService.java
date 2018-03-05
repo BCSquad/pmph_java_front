@@ -205,7 +205,14 @@ public interface DataAuditService {
 	 * @return
 	 */
 	public List<Map<String,Object>> queryAcadereward(Map<String,Object> map);
-	
+	/**
+	 * 查询参加人卫慕课、数字教材编写情况
+	 */
+	public Map<String,Object> queryMoocdigital(Map<String, Object> map);
+	/**
+	 * 编写内容意向表
+	 */
+	public Map<String,Object> queryIntention(Map<String, Object> map);
 	
 	
 	

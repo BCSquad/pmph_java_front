@@ -73,6 +73,12 @@ $(function () {
 	selectOption("jcb_rank_sl");
 	//其他社教材-职务
 	selectOption("jcjb_sl");
+	
+	if ($("#return_cause_hidden").val().length>0) {
+		
+		$("#return_cause_div").fadeIn(800);
+	
+	}
 });
 
 //下拉框格式优化

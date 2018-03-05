@@ -248,7 +248,9 @@ public interface PersonalDao {
 	public Map<String, Object> queryDeclarationById(@Param("declaration_id") String declaration_id);
 
 	Long getCommentById(@Param("id") Long id);
-
+	//查询评论并删除 
+	Long getCommentBycid(@Param("id") Long id);
+	
 	void updateDownComments(@Param("id") Long id);
 
 }

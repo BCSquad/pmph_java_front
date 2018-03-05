@@ -10,7 +10,7 @@
 	<select id="queryTitle" parameterType="java.util.Map"
 		resultType="java.util.Map">
 		SELECT c.mid,c.title, DATE_FORMAT(c.gmt_create,'%Y-%m-%d')
-		as gmt_create,c.clicks FROM cms_content c WHERE c.id=#{id}
+		as gmt_create,c.clicks,c.cover FROM cms_content c WHERE c.id=#{id}
 	</select>
 
 	<!-- 查询作者 -->
@@ -32,7 +32,7 @@
 		when t.author_type =2
 		then c.avatar
 		else
-		'系统' end as avatar,
+		'DEFAULT' end as avatar,
 		t.author_id
 		from cms_content t
 		left
