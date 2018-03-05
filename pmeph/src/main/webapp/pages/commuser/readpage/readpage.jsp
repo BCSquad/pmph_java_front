@@ -45,7 +45,8 @@
             </div>
             <div class="op-link">
                 <!--教程推荐-->
-                <img src="${ctx}/statics/image/gg_02.png"/>
+                <img src="${ctx}/statics/image/ad1.jpg" width="100%" />
+                <img src="${ctx}/statics/image/ad2.jpg" width="100%"/>
             </div>
         </div>
         <div class="area2">

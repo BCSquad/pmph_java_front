@@ -179,10 +179,14 @@
                         </c:forEach>
                     </div>
                     <div class="left_two">
-                        <div class="textbook_left">重点学科推荐</div>  
+                        <div class="textbook_left">重点学科推荐</div>
                         <div class="all_left">全部>></div>
-                        <div class="p1_left"></div>
-                        <div class="p2_left"></div>
+                        <div class="p1_left">
+                            <img src="${ctx}/statics/image/ad1.jpg"/>
+                        </div>
+                        <div class="p2_left">
+                            <img src="${ctx}/statics/image/ad2.jpg"/>
+                        </div>
                     </div>
                 </div>
                 <div class="right" id="homepagebook" style="float: right;">${homepagebook}</div>
