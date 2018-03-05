@@ -22,7 +22,7 @@ public class HomeServiceImpl implements HomeService {
      * 查询公告
      */
     @Override
-    @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName+#id")
+   /* @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName+#id")*/
     public List<Map<String, Object>> queryDocument(String id) {
         List<Map<String, Object>> list = homeDao.queryDocument(id);
         return list;
