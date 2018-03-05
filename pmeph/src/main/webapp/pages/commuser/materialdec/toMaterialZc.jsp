@@ -1315,6 +1315,24 @@
 		</form>
 	</div>
 </div>
+
+<!-- 退回原因显示悬浮框 -->
+ <div class="bookmistake" id="return_cause_div">
+         <div class="apache">
+             <div class="mistitle">退回原因:</div>
+             <div class="xx" onclick="$('#return_cause_div').fadeOut(500);"></div>
+         </div>
+         
+         <div class="info">
+         	<input id="return_cause_hidden" type="hidden" value="${return_cause }">
+             <textarea class="misarea" disabled="disabled">${return_cause }</textarea>
+         </div>
+   
+         <div class="">
+             <button class="btn" type="button" onclick="$('#return_cause_div').fadeOut(500);">确认</button>
+         </div>
+ </div>
+
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
 </html>
