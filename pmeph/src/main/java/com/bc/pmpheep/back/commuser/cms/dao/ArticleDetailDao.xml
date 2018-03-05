@@ -134,6 +134,7 @@
 		on t.author_id=c.id
 		where
 		t.parent_id =#{parameter.id}
+		and t.is_deleted=0
 		AND t.category_id = 0 and
 		t.auth_status='2' and t.is_published=1
 		order by
