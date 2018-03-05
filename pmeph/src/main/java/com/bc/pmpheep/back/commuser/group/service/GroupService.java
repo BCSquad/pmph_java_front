@@ -153,7 +153,7 @@ public interface GroupService {
 	 * @param:
 	 * @return:Boolean
 	 */
-	Boolean isFounderOrisAdmin(String groupId, String memberId) throws CheckedServiceException;
+	String isFounderOrisAdmin(String groupId, String memberId) throws CheckedServiceException;
 	
 	/**
 	 * 

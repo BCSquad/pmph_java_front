@@ -267,17 +267,20 @@ public class GroupServiceImpl implements GroupService{
      * 判断成员角色
      */
     @Override
-	public Boolean isFounderOrisAdmin(String groupId,String memberId) throws CheckedServiceException {
+	public String isFounderOrisAdmin(String groupId,String memberId) throws CheckedServiceException {
     	Map<String,Object> queryMap = new HashMap<String,Object>();
     	queryMap.put("group_id", groupId);
     	queryMap.put("user_id", memberId);
-		boolean flag = false;
+		String flag = "你是这个小组的普通用户";
 		Map<String,Object> map = groupDao.memberRole(queryMap);
 		if(null == map){
 			return flag;
 		}
-		if (map.get("is_founder").toString().equals("1") || map.get("is_admin").toString().equals("1")) {
-			flag = true;
+		if (((Boolean)map.get("is_founder")) ) {
+			flag = "你是这个小组的创建者";
+		}
+		if(((Boolean)map.get("is_admin"))){
+			flag = "你是这个小组的管理员";
 		}
 		return flag;
 	}

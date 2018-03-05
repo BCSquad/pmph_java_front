@@ -26,7 +26,7 @@
 </jsp:include>
  <div class="message-body" >
         <div class="message">
-           <a href="${pageContext.request.contextPath}/authSendMessage/initAllMessage.action">
+           <a href="${pageContext.request.contextPath}/AllMessage/init.action">
                 <div class="item">
                     <div class="on-text">全部消息</div>
                     <div class="on-line" ></div>

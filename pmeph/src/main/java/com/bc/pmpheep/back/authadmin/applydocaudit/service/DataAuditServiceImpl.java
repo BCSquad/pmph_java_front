@@ -93,7 +93,7 @@ public class DataAuditServiceImpl implements DataAuditService {
 		@Override
 		public int updateDeclarationPass(Map<String, Object> map) {
 			Map<String,Object> dmap =personalService.queryDeclarationById(map.get("declaration_id").toString());
-			WriterUserTrendst wut = new WriterUserTrendst(dmap.get("user_id").toString(), 0, null);
+			WriterUserTrendst wut = new WriterUserTrendst(dmap.get("user_id").toString(), 8, dmap.get("material_id").toString());
 			wut.declarationAuditDetail(dmap,"3");
 			personalService.saveUserTrendst(wut);//机构申报审核 生成动态
 			//通过后发送消息给申报人员
@@ -113,7 +113,7 @@ public class DataAuditServiceImpl implements DataAuditService {
 	@Override
 	public int updateDeclaration(Map<String, Object> map) {
 		Map<String,Object> dmap =personalService.queryDeclarationById(map.get("declaration_id").toString());
-		WriterUserTrendst wut = new WriterUserTrendst(dmap.get("user_id").toString(), 0, null);
+		WriterUserTrendst wut = new WriterUserTrendst(dmap.get("user_id").toString(), 8, dmap.get("material_id").toString());
 		wut.declarationAuditDetail(dmap,"2");
 		//机构申报审核 生成动态
 		personalService.saveUserTrendst(wut);
@@ -320,6 +320,13 @@ public class DataAuditServiceImpl implements DataAuditService {
 			return this.dataAuditDao.queryAcadereward(map);
 		}
 
-
+		@Override
+		public Map<String, Object> queryMoocdigital(Map<String, Object> map) {
+			return this.dataAuditDao.queryMoocdigital(map);
+		}
+		@Override
+		public Map<String, Object> queryIntention(Map<String, Object> map) {
+			return this.dataAuditDao.queryIntention(map);
+		}
 
 }
