@@ -47,8 +47,11 @@
                         <div  class="foot">
                             <div style="float:left">
                                 <c:if test="${list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null}">  
-                                <img src="${ctx}/statics/image/default_image.png" class="personicon"></c:if>
+                                	<img src="${ctx}/statics/image/default_image.png" class="personicon">
+                                </c:if>
                 				<c:if test="${!(list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null)}">
+                					<img src="${ctx}/image/${list.avatar}.action" class="personicon" />
+                				</c:if>
                             </div>
                             <div  class="msg">
                                 <span  class="name" style="cursor:pointer;" onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?userId=${list.userId }'">${list.realname}</span>
