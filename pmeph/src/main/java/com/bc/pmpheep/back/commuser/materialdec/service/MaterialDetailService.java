@@ -130,7 +130,7 @@ public interface MaterialDetailService {
 	 * @param map
 	 * @return
 	 */
-	public List<Map<String,Object>> queryJcbx(Map<String,Object> map);
+	public List<Map<String,Object>> rwsjcList(Map<String,Object> map);
 	public List<Map<String,Object>> queryqtJcbx(Map<String,Object> map);
 	public int insertJcbx(Map<String,Object> map);
 	/**
@@ -211,12 +211,22 @@ public interface MaterialDetailService {
 	public String insertJcsbxx(Map<String,Object> perMap,List<Map<String,Object>> tssbList,List<Map<String,Object>> stuList,List<Map<String,Object>> workList,
 			List<Map<String,Object>> steaList,List<Map<String,Object>> zjxsList,List<Map<String,Object>> jcbjList,List<Map<String,Object>> gjkcjsList,List<Map<String,Object>> gjghjcList,
 			List<Map<String,Object>> jcbxList,List<Map<String,Object>> zjkyList,List<Map<String,Object>> zjkzqkList,Map<String,Object> achievementMap,List<Map<String,Object>> monographList,
-			List<Map<String,Object>> publishList,List<Map<String,Object>> sciList,List<Map<String,Object>> clinicalList,List<Map<String,Object>> acadeList);
+			List<Map<String,Object>> publishList,List<Map<String,Object>> sciList,List<Map<String,Object>> clinicalList,List<Map<String,Object>> acadeList,
+			List<Map<String,Object>> pmphList,Map<String,Object> digitalMap,Map<String,Object> intentionlMap);
 	/**
 	 * 修改 申报信息
 	 */
 	public String updateJcsbxx(Map<String,Object> perMap,List<Map<String,Object>> tssbList,List<Map<String,Object>> stuList,List<Map<String,Object>> workList,String declaration_id,
 			List<Map<String,Object>> steaList,List<Map<String,Object>> zjxsList,List<Map<String,Object>> jcbjList,List<Map<String,Object>> gjkcjsList,List<Map<String,Object>> gjghjcList,
 			List<Map<String,Object>> jcbxList,List<Map<String,Object>> zjkyList,List<Map<String,Object>> zjkzqkList,Map<String,Object> achievementMap,List<Map<String,Object>> monographList,
-			List<Map<String,Object>> publishList,List<Map<String,Object>> sciList,List<Map<String,Object>> clinicalList,List<Map<String,Object>> acadeList);
+			List<Map<String,Object>> publishList,List<Map<String,Object>> sciList,List<Map<String,Object>> clinicalList,List<Map<String,Object>> acadeList,
+			List<Map<String,Object>> pmphList,Map<String,Object> digitalMap,Map<String,Object> intentionlMap);
+	/**
+	 * 查询参加人卫慕课、数字教材编写情况
+	 */
+	public Map<String,Object> queryMoocdigital(Map<String, Object> map);
+	/**
+	 * 编写内容意向表
+	 */
+	public Map<String,Object> queryIntention(Map<String, Object> map);
 }
