@@ -36,6 +36,10 @@
 		t1.is_pmph_textbook_required*1 is_pmph_textbook_required, 
 		t1.is_research_used*1 is_research_used,
 		t1.is_research_required*1 is_research_required,
+		t1.is_mooc_digital_used*1 is_mooc_digital_used,
+		t1.is_mooc_digital_required*1 is_mooc_digital_required,
+		t1.is_intention_used*1 is_intention_used,
+		t1.is_intention_required*1 is_intention_required,
 		t1.is_deleted*1 is_deleted,
 		t1.gmt_create,
 		t1.founder_id, 
@@ -97,14 +101,14 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 		</if>
 	</select>
 	<insert id="insertPerson" parameterType="java.util.Map">
-		insert into declaration(material_id,user_id,realname,sex,birthday,experience,org_name,position,
+		insert into declaration(material_id,user_id,realname,sex,birthday,experience,org_name,position,expertise,
 		title,address,postcode,handphone,email,idtype,idcard,telephone,fax,org_id,gmt_create,is_staging,online_progress
-		) values(#{material_id},#{user_id},#{realname},#{sex},#{birthday},#{experience},#{org_name},#{position},
+		) values(#{material_id},#{user_id},#{realname},#{sex},#{birthday},#{experience},#{org_name},#{position},#{expertise},
 		#{title},#{address},#{postcode},#{handphone},#{email},#{idtype},#{idcard},#{telephone},
 		#{fax},#{org_id},#{gmt_create},#{is_staging},#{online_progress})
 	</insert>
 	<update id="updatePerson" parameterType="java.util.Map">
-		update declaration set realname = #{realname},sex = #{sex},birthday = #{birthday},experience = #{experience},
+		update declaration set realname = #{realname},sex = #{sex},birthday = #{birthday},experience = #{experience},expertise = #{expertise},
 		org_name = #{org_name},position = #{position},title = #{title},address = #{address},idcard=#{idcard},
 		postcode = #{postcode},handphone = #{handphone},email = #{email},idtype = #{idtype},is_staging = #{is_staging},
 		telephone = #{telephone},fax = #{fax},org_id = #{org_id},gmt_update = #{gmt_update},online_progress = #{online_progress}
@@ -216,14 +220,25 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 	<delete id="DelGjghjc" parameterType="java.util.Map">
 		delete from dec_national_plan where declaration_id = #{declaration_id}
 	</delete>
-	<!-- 教材编写情况 -->
+	<!-- 人卫社教材编写情况 -->
+	<select id="queryRwsjc" resultType="java.util.Map" parameterType="java.util.Map">
+		select id,declaration_id,material_name,rank,position,
+		is_digital_editor*1 is_digital_editor,publish_date,isbn,note,sort
+		 from dec_textbook_pmph where declaration_id = #{declaration_id}
+		  ORDER BY sort 
+	</select>
+	<insert id="insertRwsjc" parameterType="java.util.Map">
+		insert into dec_textbook_pmph(declaration_id,material_name,rank,position,publish_date,isbn,note,is_digital_editor,sort)
+		  values(#{declaration_id},#{material_name},#{rank},#{position},#{publish_date},#{isbn},#{note},#{is_digital_editor},#{sort})
+	</insert>
+	<delete id="DelRwsjc" parameterType="java.util.Map">
+		delete from dec_textbook_pmph where declaration_id = #{declaration_id}
+	</delete>
+	<!-- 其他社教材编写情况 -->
 	<select id="queryJcbx" resultType="java.util.Map" parameterType="java.util.Map">
 		select id,declaration_id,material_name,rank,position,
 		is_digital_editor*1 is_digital_editor,publisher,publish_date,isbn,note,sort
 		 from dec_textbook where declaration_id = #{declaration_id}
-		 <if test="rank != null and rank != ''">
-		  and rank =#{rank} 
-		  </if>
 		  ORDER BY sort 
 	</select>
 	<insert id="insertJcbx" parameterType="java.util.Map">
@@ -327,7 +342,28 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 	<delete id="DelAcadereward" parameterType="java.util.Map">
 		delete from dec_acade_reward where declaration_id = #{declaration_id}
 	</delete>
-	
+	<!-- //人卫慕课、数字教材编写情况 -->
+	<select id="queryMoocdigital" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_mooc_digital where declaration_id = #{declaration_id} 
+	</select>
+	<insert id="insertMoocdigital" parameterType="java.util.Map">
+		insert into dec_mooc_digital(declaration_id,content)
+		  values(#{declaration_id},#{content})
+	</insert>
+	<update id="updateMoocdigital" parameterType="java.util.Map">
+		update dec_mooc_digital set content=#{content} where declaration_id = #{declaration_id}
+	</update>
+	<!-- //内容意向表情况 -->
+	<select id="queryIntention" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_intention where declaration_id = #{declaration_id} 
+	</select>
+	<insert id="insertIntention" parameterType="java.util.Map">
+		insert into dec_intention(declaration_id,content)
+		  values(#{declaration_id},#{content})
+	</insert>
+	<update id="updateIntention" parameterType="java.util.Map">
+		update dec_intention set content=#{content} where declaration_id = #{declaration_id}
+	</update>
 	<!-- 申报审核 -->
 	<update id="updateDeclaration" parameterType="java.util.Map">
 		update declaration set auth_user_id =#{auth_user_id} ,auth_date=#{auth_date} ,online_progress=#{online_progress} where id= #{declaration_id}
@@ -360,4 +396,106 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 				where t.org_name like #{parameter.org_name}
 			</if>
 	</select>
+	
+	<!-- 更新个人资料 -->
+	<update id="updateWriter" parameterType="java.util.Map" >
+		UPDATE writer_user
+		<set>
+			<if test="username != null and username!=''">
+				username = #{username},
+			</if>
+			<if test="password != null and password!='' ">
+				password = #{password},
+			</if>
+			<if test=" isDisabled!= null ">
+				is_disabled= #{isDisabled},
+			</if>
+			<if test="orgId != null and  orgId!=''">
+				org_id = #{orgId},
+			</if>
+			<if test=" nickname!= null and nickname !=''">
+				nickname= #{nickname},
+			</if>
+			<if test=" realname!= null and realname !=''">
+				realname= #{realname},
+			</if>
+			<if test=" sex!= null and  sex!=''">
+				sex= #{sex},
+			</if>
+			<if test=" birthday!= null">
+				birthday= #{birthday},
+			</if>
+			<if test=" experience!= null and  experience!=''">
+				experience = #{experience},
+			</if>
+			<if test=" position!= null and  position!=''">
+				position= #{position},
+			</if>
+			<if test=" title!= null and title !=''">
+				title= #{title},
+			</if>
+			<if test=" fax!= null and  fax!=''">
+				fax= #{fax},
+			</if>
+			<if test=" handphone!= null and handphone !=''">
+				handphone = #{handphone},
+			</if>
+			<if test=" telephone!= null and  telephone!=''">
+				telephone = #{telephone},
+			</if>
+			<if test=" idcard!= null and idcard !=''">
+				idcard= #{idcard},
+			</if>
+			<if test=" email!= null and email !=''">
+				email= #{email},
+			</if>
+			<if test=" address!= null and  address!=''">
+				address= #{address},
+			</if>
+			<if test=" postcode!= null and  postcode!=''">
+				postcode = #{postcode},
+			</if>
+			<if test=" rank!= null and  rank!=''">
+				rank = #{rank},
+			</if>
+			<if test=" isTeacher!= null ">
+				is_teacher= #{isTeacher},
+			</if>
+			<if test=" cert!= null and  cert!=''">
+				cert = #{cert},
+			</if>
+			<if test=" authTime!= null">
+				auth_time = #{authTime},
+			</if>
+			<if test=" authUserType!= null and  authUserType!=''">
+				auth_user_type= #{authUserType},
+			</if>
+			<if test=" authUserId!= null and  authUserId!=''">
+				auth_user_id= #{authUserId},
+			</if>
+			<if test=" isWriter!= null ">
+				is_writer= #{isWriter},
+			</if>
+			<if test=" isExpert!= null ">
+				is_expert = #{isExpert},
+			</if>
+			<if test=" avatar!= null and  avatar!=''">
+				avatar= #{avatar},
+			</if>
+			<if test=" signature!=null and signature!=''">
+				signature = #{signature},
+			</if>
+			<if test=" note!= null and  note!=''">
+				note = #{note},
+			</if>
+			<if test=" sort!= null and  sort!=''">
+				sort = #{sort},
+			</if>
+			<if test=" isDeleted!= null">
+				is_deleted= #{isDeleted},
+			</if>
+		</set>
+		WHERE
+		id = #{user_id}
+	</update>
 </mapper>

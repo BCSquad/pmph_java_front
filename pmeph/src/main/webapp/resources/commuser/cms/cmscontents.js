@@ -80,7 +80,7 @@ function addColum(list){
 												str +='<div class="ryxx">';
 													str +='<div class="ryxx_foot"><img src="';
             if (n.avatar == '' || n.avatar == 'DEFAULT' || n.avatar == null) {
-                str += contextpath + 'statics/image/rwtx.png';
+                str += contextpath + 'statics/image/default_image.png';
             } else {
             	str+=contextpath+'image/'+n.avatar+'.action';
             }
