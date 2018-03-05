@@ -97,8 +97,12 @@
                     <div class="item" >
                         <div class="item_title">
                         	<div style="float: left;">
-                        		<c:if test="${list.avatar=='DEFAULT'}"><img  src="${ctx}/statics/image/putongyhtouxiang.png" height="30"  width="30" /></c:if>
-                				<c:if test="${list.avatar!='DEFAULT'}"><img  src="${ctx}/image/${list.avatar}.action" height="30"  width="30" ></c:if>
+                        		<%--<c:if test="${list.avatar=='DEFAULT'}">
+									<img  src="${ctx}/statics/image/putongyhtouxiang.png" height="30"  width="30" />
+								</c:if>
+                				<c:if test="${list.avatar!='DEFAULT'}">
+									<img  src="${ctx}/image/${list.avatar}.action" height="30"  width="30" >
+								</c:if>--%>
                         	</div>
                         	<div style="float: left;margin-left: 10px;margin-top: 5px;">${list.nickname}</div>
                         	<%-- <div style="float: left;margin-left: 10px;">
