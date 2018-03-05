@@ -46,10 +46,11 @@
 		    t.bookname,
 		    t.image_url,
 	        t.author,
-		    b.detail
+		    b.detail,
+		    t.id
 		    from book t left join book_support c on  c.support_id=t.id 
 		    left join book_detail b on b.book_id=t.id 
-		    where t.id= (select support_id from book_support where book_id='8')
+		    where t.id= (select support_id from book_support where book_id=#{id})
 	</select>
 	<!-- 查询人卫推荐书籍 -->
 	<select id="queryRecommendByE" parameterType="java.util.Map" resultType="java.util.Map">
