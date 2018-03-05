@@ -1,6 +1,7 @@
 package com.bc.pmpheep.back.commuser.reportprogress.bean;
 
 import java.sql.Timestamp;
+import java.util.Map;
 
 import org.apache.ibatis.type.Alias;
 
@@ -41,12 +42,36 @@ public class UserMessageVO {
     private Short     receiverType;
     // 是否被逻辑删除 只有接收者可以删除
     private Boolean   isDeleted;
-    // 创建时间
+
+	// 创建时间
     private Timestamp gmtCreate;
     // 教材ID
     private Long      materialId;
     // MongoDB消息内容
     private String    msgContent;
+    // 动态类的消息
+    private Map<String,Object> msgMap;
+    
+    // 动态表的id
+    private Long trendstId;
+    
+    
+
+    public Long getTrendstId() {
+		return trendstId;
+	}
+
+	public void setTrendstId(Long trendstId) {
+		this.trendstId = trendstId;
+	}
+
+	public Map<String, Object> getMsgMap() {
+		return msgMap;
+	}
+
+	public void setMsgMap(Map<String, Object> msgMap) {
+		this.msgMap = msgMap;
+	}
 
     public UserMessageVO() {
     }
