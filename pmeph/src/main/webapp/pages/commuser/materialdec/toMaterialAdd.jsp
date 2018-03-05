@@ -610,7 +610,7 @@
 		<div class="sbxq_item" id="zjkyqk">
 			<div>
 				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">作家科研情况</span>
+				<span class="tsxz_title">科研情况</span>
 				<span class="tsxz_ts" id="zjkyqk_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
 				<span class="tsxz_xt" id="zjkyqk_xt" >（选填）</span>
 			</div>

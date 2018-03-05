@@ -903,7 +903,7 @@
 		<div class="sbxq_item" id="zjkyqk">
 			<div>
 				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">作家科研情况</span>
+				<span class="tsxz_title">科研情况</span>
 				<span class="tsxz_ts" id="zjkyqk_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
 				<span class="tsxz_xt" id="zjkyqk_xt" >（选填）</span>
 			</div>
@@ -987,9 +987,9 @@
 						 <tr>
 							<td><input class="cg_input" name="zb_monograph_name" id="zb_monograph_name" value="" style="width: 300px;" placeholder="教材名称" maxlength="16"/></td>
 							<td style="color: #333333;">
-								<table class="radio_tb" style="width: 100px;"><tr>
-									<td><input type="radio" name="is_self_paid_a" value="0" ${list.is_self_paid=='0'?'checked':'' }/>自费</td>
-									<td><input type="radio" name="is_self_paid_a" value="1" ${list.is_self_paid=='1'?'checked':'' }/>公费</td>
+								<table class="radio_tb" style="width: 140px;"><tr>
+									<td><input type="radio" name="is_self_paid_a" value="0" checked="checked"/>自费</td>
+									<td><input type="radio" name="is_self_paid_a" value="1" />公费</td>
 								</tr></table>
 								<input type="hidden" name="is_self_paid" value="is_self_paid_a" />
 							</td>
