@@ -6,7 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <head>
-    <title>申请列表</title>
+    <title>通知列表</title>
     <script>
         var contextpath='${pageContext.request.contextPath}/';
     </script>

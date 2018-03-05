@@ -549,7 +549,7 @@ a {
 }
 
 .bookmistake {
-    width: 900px;
+    width: 910px;
     /* height: 309px; */
     background-color: #FFFFFF;
     display: none;
@@ -604,7 +604,7 @@ a {
     margin-left: 20px;
     padding: 5px;
     resize: vertical;
-    max-height: 350px;
+/*    max-height: 350px;*/
 }
 
 .labell {
