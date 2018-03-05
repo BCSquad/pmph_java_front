@@ -63,7 +63,9 @@
 				            </div>
 				            <div class="attlistContent">
 				                 <c:forEach items="${cmsAttach }" var="cattach">
-				            	  <span ><a   href="${ctx}/file/download/${cattach.attachment}.action" ><img class="pictureSize" src="${ctx}/statics/pictures/attachment.png">&nbsp;&nbsp;${cattach.attachment_name}</a></span><br>
+				                 	<c:if test="${cattach.attachment!=map.cover}">
+				            	  		<span ><a   href="${ctx}/file/download/${cattach.attachment}.action" ><img class="pictureSize" src="${ctx}/statics/pictures/attachment.png">&nbsp;&nbsp;${cattach.attachment_name}</a></span><br>
+				                	</c:if>
 				                </c:forEach>
 				            </div>
 				        </div>
@@ -97,8 +99,12 @@
                     <div class="item" >
                         <div class="item_title">
                         	<div style="float: left;">
-                        		<c:if test="${list.avatar=='DEFAULT'}"><img  src="${ctx}/statics/image/putongyhtouxiang.png" height="30"  width="30" /></c:if>
-                				<c:if test="${list.avatar!='DEFAULT'}"><img  src="${ctx}/image/${list.avatar}.action" height="30"  width="30" ></c:if>
+                        		<c:if test="${list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null}">
+                        		<img  src="${ctx}/statics/image/default_image.png" height="30"  width="30" />
+                        		</c:if>
+                				<c:if test="${!(list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null)}">
+                				<img  src="${ctx}/image/${list.avatar}.action" height="30"  width="30" >
+                				</c:if>
                         	</div>
                         	<div style="float: left;margin-left: 10px;margin-top: 5px;">${list.nickname}</div>
                         	<%-- <div style="float: left;margin-left: 10px;">
@@ -187,9 +193,13 @@
     	<div class="area2">
     		<div style="position:relative;width: 275px;height: 410px;">
     			<div class="right_2">
-	    			<c:if test="${Art.avatar=='DEFAULT'}"><img src="${ctx}/statics/image/default_image.png" height="60"
-                                                              width="60"></c:if>
-                	<c:if test="${Art.avatar!='DEFAULT'}"><img src="${ctx}/image/${Art.avatar}.action"  height="60"
+	    			<c:if test="${Art.avatar == '' || Art.avatar == 'DEFAULT' || Art.avatar == null}">
+	    			
+	    			<img src="${ctx}/statics/image/default_image.png" height="60" width="60">
+	    			
+	    			</c:if>
+                	<c:if test="${!(Art.avatar == '' || Art.avatar == 'DEFAULT' || Art.avatar == null)}">
+                	<img src="${ctx}/image/${Art.avatar}.action"  height="60"
                                                               width="60"></c:if>
 	    			
 	    			<span>作者：${Art.realname}</span>

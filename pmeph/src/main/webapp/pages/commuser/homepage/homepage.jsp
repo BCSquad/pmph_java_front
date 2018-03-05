@@ -264,9 +264,9 @@
                                 <div class="a6_div2">${list.summary}</div>
                                 <div>
                                     <div class="a6_head_div">
-                                        <c:if test="${list.avatar=='DEFAULT'}">
+                                        <c:if test="${list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null}">
                                             <img src="${ctx}/statics/image/default_image.png" class="a6_head"></c:if>
-                                        <c:if test="${list.avatar!='DEFAULT'}">
+                                       <c:if test="${!(list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null)}">
                                             <img src="${ctx}/image/${list.avatar}.action" class="a6_head"></c:if>
                                     </div>
                                     <div class="a6_name_div" style="cursor:pointer;"
@@ -294,9 +294,9 @@
                                 <div>
                                     <div class="a6_head_div">
 
-                                        <c:if test="${list.avatar=='DEFAULT'}">
+                                        <c:if test="${list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null}">
                                             <img src="${ctx}/statics/image/default_image.png" class="a6_head"></c:if>
-                                        <c:if test="${list.avatar!='DEFAULT'}">
+                                        <c:if test="${!(list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null)}">
                                             <img src="${ctx}/image/${list.avatar}.action" class="a6_head"></c:if>
                                     </div>
                                     <div class="a6_name_div" style="cursor:pointer;"
@@ -317,7 +317,7 @@
                         <div class="${status.index==0?'author1':'author2'}">
                             <div class="a7_head_div">
                                 <c:choose>
-                                    <c:when test="${list.avatar=='DEFAULT'}">
+                                    <c:when test="${list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null}">
                                         <img src="${ctx}/statics/image/default_image.png" class="a6_head">
                                     </c:when>
                                     <c:otherwise>

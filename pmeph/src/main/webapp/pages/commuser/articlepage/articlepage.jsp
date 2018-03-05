@@ -166,9 +166,9 @@
                         <p  class="content-text">${list.summary}</p>
                         <div  class="foot">
                             <div style="float:left">
-                                <c:if test="${list.avatar=='DEFAULT'}">
-                                <img src="${ctx}/statics/testfile/mi.png" class="personicon"></c:if>
-                				<c:if test="${list.avatar!='DEFAULT'}">
+                                <c:if test="${list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null}">  
+                                <img src="${ctx}/statics/image/default_image.png" class="personicon"></c:if>
+                				<c:if test="${!(list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null)}">
                 				<img src="${ctx}/image/${list.avatar}.action" class="personicon"></c:if>
                             </div>
                             <div  class="msg">
@@ -189,7 +189,7 @@
                         <div class="content">
                             <div class="content-img" >
                                 <c:choose>
-	                            	<c:when test="${list.avatar=='DEFAULT'}">
+	                            	<c:when test="${list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null}">
 	                            		<img src="${ctx}/statics/image/default_image.png" class="a6_head">
 	                            	</c:when>
 	                            	<c:otherwise>
