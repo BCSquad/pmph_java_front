@@ -896,6 +896,8 @@ public class MaterialDetailController extends BaseController{
 		mav.addObject("jcbxqtList", jcbxqtList);
 		mav.addObject("digitalMap", moocMap);
 		mav.addObject("intentionMap", intentionMap);
+		mav.addObject("return_cause", gezlList.get(0).get("return_cause").toString());
+		
 		return mav;
 	}
 	
