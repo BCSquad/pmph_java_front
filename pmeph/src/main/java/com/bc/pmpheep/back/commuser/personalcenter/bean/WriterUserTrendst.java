@@ -85,6 +85,9 @@ public class WriterUserTrendst {
 	public String getDetail() {
 		return detail;
 	}
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
 	/**
 	 * json格式的set方法
 	 * @param title 动态标题
