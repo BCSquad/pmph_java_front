@@ -91,12 +91,14 @@ $(function(){
     
 	//按钮发送消息
 	$("#sendMsg").click(function(){
+        $('#wechat').scrollTop( $('#wechat')[0].scrollHeight );
 		sendSocktMsg();
 	});
 	
 	var sendSocktMsg = function(){
 		var content=$("#msgContent").val();
-		if(!content || content.trim() ==''){
+		var content2=content.replace(/(^\s*)|(\s*$)/g, "");//兼容ie8
+		if(!content || content2 ==''){
 			window.message.warning("请键入消息");
 			return ;
 		}
