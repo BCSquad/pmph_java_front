@@ -2,7 +2,9 @@ $(function () {
 	var id = $("#material_id").val();
 	queryMaterialMap(id);  //执行查询方法
 	if ($("#return_cause_hidden").val().length>0) {
+		
 			$("#return_cause_div").fadeIn(800);
+		
 	}
 });
 

@@ -253,7 +253,7 @@ public class DataAuditController extends BaseController{
 			//18.学术荣誉授予情况表
 			List<Map<String,Object>> acadeList = new ArrayList<Map<String,Object>>();
 			acadeList = this.dataAuditService.queryAcadereward(queryMap);
-			
+
 			//20.参加人卫慕课、数字教材编写情况
 			Map<String,Object> moocMap = new HashMap<String,Object>();
 			moocMap = this.dataAuditService.queryMoocdigital(queryMap);

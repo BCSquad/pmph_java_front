@@ -35,13 +35,9 @@ function send_init(){
 function sending(){
 	//发送表单 请求
 	try {
-		if(($("#TitleValue").val().length!=0) && ($("#UEContent").val().length!=0)){
-			document.getElementById("theForm").submit();
-			document.getElementById("theForm").reset();
-			window.message.success("发送成功");
-		}else{
-			window.message.warning("必填项不能为空");
-		}
+		document.getElementById("theForm").submit();
+		document.getElementById("theForm").reset();
+		window.message.success("发送成功");
 	} catch (e) {
 		// TODO: handle exception
 		console.log(e.message);

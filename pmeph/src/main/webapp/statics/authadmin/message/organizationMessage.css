@@ -183,6 +183,7 @@ a{
     width: 88%;
     float: left;
     height: auto;
+    margin-left: 20px;
 }
 .deltag{
 	background-image: url(../../image/close.png);

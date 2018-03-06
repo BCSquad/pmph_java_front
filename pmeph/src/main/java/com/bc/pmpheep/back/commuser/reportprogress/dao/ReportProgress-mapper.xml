@@ -3,11 +3,6 @@
 
 <mapper namespace="com.bc.pmpheep.back.commuser.reportprogress.dao.ReportProgressDao">
 	
-	<resultMap type="UserMessageVO" id="progress">
-		<id column="id" property="trendstId"/>
-		<result column="detail" property="msgMap" typeHandler="com.bc.pmpheep.back.util.JsonTypeHandler" />
-		<result column="gmt_create" property="gmtCreate"/>
-	</resultMap>
 	<!--获取教材审核进度  -->
 	<select id="getMaterialProgress" parameterType="java.util.Map" resultType="TextBookCheckVO">
 		SELECT 
@@ -64,12 +59,12 @@
 	</select>
 	
 	<!-- 获取作家用户申报教材消息 -->
-	<select id="getUserMessageByMaterialId" parameterType="java.util.Map" resultMap="progress">
-<!-- 	SELECT
+	<select id="getUserMessageByMaterialId" parameterType="java.util.Map" resultType="UserMessageVO">
+	SELECT
 	d.id,
 	t1.user_id,
 	d.msg_id,
-	d.title as msgContent,
+	d.title,
 	t1.online_progress,
 	t1.gmt_update,
 	d.gmt_create
@@ -78,10 +73,8 @@ FROM
 JOIN declaration t1 ON d.material_id = t1.material_id
 WHERE
 	t1.material_id = #{materialId}
-	
 AND d.receiver_id = #{userId}
-AND t1.user_id = #{userId} order by d.gmt_create desc -->
-select id,detail,gmt_create from writer_user_trendst where type = 8 and book_id =#{materialId} and user_id = #{userId} order by gmt_create ASC
+AND t1.user_id = #{userId} order by d.gmt_create desc
 		<!-- SELECT 
 			* 
 		FROM 
@@ -106,8 +99,8 @@ select id,detail,gmt_create from writer_user_trendst where type = 8 and book_id 
 		FROM 
 			`declaration` d 
 		WHERE 
-			 d.`online_progress`=1
-		AND 
+			d.`is_staging`=0
+		AND
 			d.`user_id`=#{userId}
 		AND 
 			d.`material_id`=#{materialId}

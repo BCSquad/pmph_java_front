@@ -73,25 +73,18 @@
             <div style="height: 20px;"></div>
             <div id="message-list">
             <c:forEach items="${list}" var="item" >
-            <div class="item" id="item${item.msg_id}">
+            <div class="item" onclick="system('${item.id}','${item.NAME}','${item.TIME}')">
                 <div class="item-img">
                     <img src="${ctx}/${item.avatar}" />
                 </div>
-                <div class="content" style="position: relative;">
+                <div class="content" >
                      <p class="title" >
                          <span class="msg">${item.title}</span>
                          <span class="time">${item.TIME}</span>
                      </p>
-                    <p class="text" onclick="system('${item.msg_id}','${item.NAME}','${item.TIME}')" id="txt${item.msg_id}" style="width:1000px">
-                        ${item.TYPE}
-                        <c:if test="${item.isread==1 }"> <img src="${ctx}/statics/image/readyes.png"  id="isread${item.msg_id}"/></c:if>
+                    <p class="text" >
+                        ${item.msg_content}
                     </p>
-                    <c:if test="${item.NAME=='系统消息'}">
-	                    <div style="position: absolute;bottom:0px;right: 0px;color: #999999;font-size: 14px;height:20px;" onclick="delmsg('${item.msg_id}')">
-	                        <span style="width:20px;height:20px;float:left;" class="deltag"></span>
-	                        <span style="line-height: 20px;">删除</span>
-	                    </div>
-                    </c:if>
                 </div>
             </div>
             </c:forEach>

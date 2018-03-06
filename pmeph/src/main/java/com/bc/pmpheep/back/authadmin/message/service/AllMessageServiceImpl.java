@@ -28,7 +28,11 @@ import com.bc.pmpheep.back.authadmin.message.dao.AllMessageDao;
  */
 @Service("com.bc.pmpheep.back.authadmin.message.service.AllMessageServiceImpl")
 public class AllMessageServiceImpl implements AllMessageService {
+
    @Autowired
+    AllMessageDao allMessageDao;
+
+    @Autowired
     MessageService messageService;
 
 

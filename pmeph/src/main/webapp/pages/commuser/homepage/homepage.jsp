@@ -227,13 +227,10 @@
                         <div class="left_two">
                             <div class="textbook_left">重点学科推荐</div>
                             <div class="all_left"></div>
-                            <c:forEach var="ad3" items="${adInfo3.detailList}" varStatus="status">
-                                <c:if test="${status.index==0}">
-                                <div class="${status.index==0?'p1_left':'p2_left'}">
-                                    <img src="${ctx}/image/${ad3.image}.action" style="width: 216px;height: 89px">
-                                </div>
-                                </c:if>
-                            </c:forEach>
+                            <div class="p1_left">
+
+                            </div>
+                            <div class="p2_left"></div>
                         </div>
                     </div>
                     <div class="right" id="homepagebook" style="float: right;">${homepagebook}</div>
@@ -241,8 +238,7 @@
             </div>
             <div class="area-5">
                 <c:forEach var="ad" items="${adInfo2.detailList}">
-                    <div class="item">
-                        <img src="${ctx}/image/${ad.image}.action" height="82" width="285" class="book1">
+                    <div class="item"><img src="${ctx}/image/${ad.image}.action" height="82" width="285" class="book1">
                     </div>
                 </c:forEach>
             </div>
@@ -268,9 +264,9 @@
                                 <div class="a6_div2">${list.summary}</div>
                                 <div>
                                     <div class="a6_head_div">
-                                        <c:if test="${list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null}">
+                                        <c:if test="${list.avatar=='DEFAULT'}">
                                             <img src="${ctx}/statics/image/default_image.png" class="a6_head"></c:if>
-                                       <c:if test="${!(list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null)}">
+                                        <c:if test="${list.avatar!='DEFAULT'}">
                                             <img src="${ctx}/image/${list.avatar}.action" class="a6_head"></c:if>
                                     </div>
                                     <div class="a6_name_div" style="cursor:pointer;"
@@ -298,9 +294,9 @@
                                 <div>
                                     <div class="a6_head_div">
 
-                                        <c:if test="${list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null}">
+                                        <c:if test="${list.avatar=='DEFAULT'}">
                                             <img src="${ctx}/statics/image/default_image.png" class="a6_head"></c:if>
-                                        <c:if test="${!(list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null)}">
+                                        <c:if test="${list.avatar!='DEFAULT'}">
                                             <img src="${ctx}/image/${list.avatar}.action" class="a6_head"></c:if>
                                     </div>
                                     <div class="a6_name_div" style="cursor:pointer;"
@@ -321,7 +317,7 @@
                         <div class="${status.index==0?'author1':'author2'}">
                             <div class="a7_head_div">
                                 <c:choose>
-                                    <c:when test="${list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null}">
+                                    <c:when test="${list.avatar=='DEFAULT'}">
                                         <img src="${ctx}/statics/image/default_image.png" class="a6_head">
                                     </c:when>
                                     <c:otherwise>

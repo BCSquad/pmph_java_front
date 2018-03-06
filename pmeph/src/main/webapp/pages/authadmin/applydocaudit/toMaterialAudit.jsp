@@ -412,6 +412,7 @@
 					</thead>
 					<tbody>
 					<c:forEach var="list" items="${jcbxList}">
+					<c:if test="${list.rank != '0'}">
 						<tr>
 							<td>${list.material_name}</td>
 							<td>
@@ -437,6 +438,7 @@
 							<td>${list.isbn}</td>
 							<td>${list.note}</td>
 						</tr>
+						</c:if>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -750,7 +752,7 @@
 		</div>
 		
 		
-			
+		
 			<!-- 申报单位-->
 			<div class="sbxq_item1">
 				<div>
