@@ -342,7 +342,7 @@
 			</div>
 		</div>
 		<!--人卫社教材编写情况表-->
-		<div class="sbxq_item1" id="rwsjcbx">
+		<div class="sbxq_item" id="rwsjcbx">
 			<div>
 				<span id="tsxz_span7"></span>
 				<span class="tsxz_title">人卫社教材编写情况表</span>
@@ -638,7 +638,7 @@
 			</div>
 		</div>
 		<!--参加人卫慕课、数字教材编写情况-->
-	 	<div class="sbxq_item1" >
+	 	<div class="sbxq_item" >
 			<div>
 				<span id="tsxz_span9"></span>
 				<span class="tsxz_title">参加人卫慕课、数字教材编写情况</span>
@@ -648,7 +648,7 @@
 			</div>
 		</div>
 		<!--编写内容意向表-->
-	 	<div class="sbxq_item1" >
+	 	<div class="sbxq_item" >
 			<div>
 				<span id="tsxz_span9"></span>
 				<span class="tsxz_title">编写内容意向表</span>

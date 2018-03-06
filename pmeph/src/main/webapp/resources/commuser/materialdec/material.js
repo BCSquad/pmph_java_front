@@ -765,7 +765,7 @@ function buttAdd(type){
         document.getElementById('butj').onclick=function(){window.message.warning("请不要重复点击");};
         $.ajax({
             type: "POST",
-            url:contextpath+'material/doMaterialAdd.action?sjump=2&type='+type,
+            url:contextpath+'material/doMaterialAdd.action?sjump=1&type='+type,
             data:$('#objForm').serialize(),// 你的formid
             async: false,
             success: function(msg) {
