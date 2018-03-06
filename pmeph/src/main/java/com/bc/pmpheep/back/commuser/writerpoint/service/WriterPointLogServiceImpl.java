@@ -1,4 +1,6 @@
 package com.bc.pmpheep.back.commuser.writerpoint.service;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +25,7 @@ public class WriterPointLogServiceImpl implements WriterPointLogService{
 	}
 
 	@Override
-	public WriterPointLog getWriterPointLogByUserId(Long userId) throws CheckedServiceException {
+	public List<WriterPointLog> getWriterPointLogByUserId(Long userId) throws CheckedServiceException {
 		return writerPointLogDao.getWriterPointLogByUserId(userId);
 	}
 

@@ -1,5 +1,7 @@
 package com.bc.pmpheep.back.commuser.writerpoint.dao;
 
+import java.util.List;
+
 import com.bc.pmpheep.back.commuser.writerpoint.bean.WriterPointLog;
 
 /**
@@ -24,5 +26,5 @@ public interface WriterPointLogDao {
 	 * @param writerId
 	 * @return
 	 */
-	WriterPointLog getWriterPointLogByUserId(Long userId);
+	List<WriterPointLog> getWriterPointLogByUserId(Long userId);
 }

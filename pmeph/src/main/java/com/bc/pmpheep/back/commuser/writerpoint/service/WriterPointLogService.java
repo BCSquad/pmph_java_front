@@ -1,4 +1,6 @@
 package com.bc.pmpheep.back.commuser.writerpoint.service;
+import java.util.List;
+
 import com.bc.pmpheep.back.commuser.writerpoint.bean.WriterPointLog;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 
@@ -25,5 +27,5 @@ public interface WriterPointLogService {
 	 * @return
 	 * @throws CheckedServiceException
 	 */
-	WriterPointLog getWriterPointLogByUserId(Long userId) throws CheckedServiceException;
+	List<WriterPointLog> getWriterPointLogByUserId(Long userId) throws CheckedServiceException;
 }
