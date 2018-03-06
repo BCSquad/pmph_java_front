@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bc.pmpheep.back.commuser.writerpoint.dao.WriterPointLogDao">
+	<sql id="key">
+		<!-- 去掉最后一个, -->
+		<trim suffixOverrides=",">
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="ruleId != null">
+				rule_id,
+			</if>
+			<if test=" point != null">
+				point,
+			</if>
+		</trim>
+	</sql>
+	<!-- sql片段对应?,id属性值任意 -->
+	<sql id="value">
+		<!-- 去掉最后一个, -->
+		<trim suffixOverrides=",">
+			<if test="userId != null">
+				#{userId},
+			</if>
+			<if test="ruleId != null">
+				#{ruleId},
+			</if>
+			<if test=" point != null">
+				#{point},
+			</if>
+		</trim>
+	</sql>
+	<!-- 新增 -->
+	<insert id="addWriterPointLog" parameterType="WriterPointLog">
+		<selectKey resultType="java.lang.Long" order="AFTER"
+			keyProperty="id"> <!-- order="AFTER"表示先执行插入语句，之后再执行查询语句 BEFORE 或 AFTER -->
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into writer_point_log (
+		<include refid="key" />
+		)
+		values(
+		<include refid="value" />
+		);
+	</insert>
+
+	<!-- 查询 -->
+	<select id="getWriterPointLogByUserId" parameterType="java.lang.Long"
+		resultType="WriterPointLog">
+		select * from writer_point_log where user_id=#{user_id};
+	</select>
+</mapper>

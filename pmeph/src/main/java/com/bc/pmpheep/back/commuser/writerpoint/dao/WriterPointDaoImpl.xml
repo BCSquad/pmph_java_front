@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bc.pmpheep.back.commuser.writerpoint.dao.WriterPointDao">
+	<sql id="key">
+		<!-- 去掉最后一个, -->
+		<trim suffixOverrides=",">
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="total != null">
+				total,
+			</if>
+			<if test=" gain != null">
+				gain,
+			</if>
+			<if test=" loss != null">
+				loss,
+			</if>
+		</trim>
+	</sql>
+	<!-- sql片段对应?,id属性值任意 -->
+	<sql id="value">
+		<!-- 去掉最后一个, -->
+		<trim suffixOverrides=",">
+			<if test="userId != null">
+				#{userId},
+			</if>
+			<if test="total != null">
+				#{total},
+			</if>
+			<if test=" gain != null">
+				#{gain},
+			</if>
+			<if test=" loss != null">
+				#{loss},
+			</if>
+		</trim>
+	</sql>
+	<!-- 新增 -->
+	<insert id="addWriterPoint" parameterType="WriterPoint">
+		<selectKey resultType="java.lang.Long" order="AFTER"
+			keyProperty="id"> <!-- order="AFTER"表示先执行插入语句，之后再执行查询语句 BEFORE 或 AFTER -->
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into writer_point (
+		<include refid="key" />
+		)
+		values(
+		<include refid="value" />
+		);
+	</insert>
+
+	<!-- 修改 -->
+	<update id="updateWriterPoint" parameterType="WriterPoint">
+		update writer_point
+		<set>
+			<if test="userId != null">
+				user_id=#{userId},
+			</if>
+			<if test="total != null">
+				total=#{total},
+			</if>
+			<if test=" gain != null">
+				gain=#{gain},
+			</if>
+			<if test=" loss != null">
+				loss=#{loss},
+			</if>
+		</set>
+		where
+		id=#{id};
+	</update>
+
+	<!-- 通过用户id查询积分 -->
+	<select id="getWriterPointByUserId" parameterType="java.lang.Long"
+		resultType="WriterPoint">
+		select * from writer_point where user_id=#{userId};
+	</select>
+</mapper>

@@ -17,6 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.survey.service.SurveyService;
+import com.bc.pmpheep.back.commuser.writerpoint.bean.WriterPoint;
+import com.bc.pmpheep.back.commuser.writerpoint.bean.WriterPointLog;
+import com.bc.pmpheep.back.commuser.writerpoint.bean.WriterPointRule;
+import com.bc.pmpheep.back.commuser.writerpoint.service.WriterPointLogService;
+import com.bc.pmpheep.back.commuser.writerpoint.service.WriterPointRuleService;
+import com.bc.pmpheep.back.commuser.writerpoint.service.WriterPointService;
 import com.bc.pmpheep.general.controller.BaseController;
 
 @Controller
@@ -26,7 +32,16 @@ public class SurveyController extends BaseController {
     @Autowired
     @Qualifier("com.bc.pmpheep.back.commuser.survey.service.SurveyServiceImpl")
     SurveyService surveyService;
-
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.writerpoint.service.WriterPointRuleServiceImpl")
+	WriterPointRuleService writerPointRuleService;
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.writerpoint.service.WriterPointLogServiceImpl")
+	WriterPointLogService writerPointLogService;
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.writerpoint.service.WriterPointServiceImpl")
+	WriterPointService writerPointService;
+    
     // 问卷列表
     @RequestMapping(value = "/surveyList")
     public ModelAndView surveyList() {
@@ -174,7 +189,40 @@ public class SurveyController extends BaseController {
             }
             surveyService.saveInputAnswer(map3);
         }
-
+        
+        //当用户回答问卷后，增加积分
+        String ruleName="问卷调查";
+		//获取积分规则
+		WriterPointRule writerPointRuleVOs=writerPointRuleService.getWriterPointRuleByName(ruleName);
+		if(null!=writerPointRuleVOs){
+			//查询用户评论之前的积分值
+			WriterPointLog writerPointLog2=writerPointLogService.getWriterPointLogByUserId(userId);
+			WriterPointLog writerPointLog=new WriterPointLog();
+			//现在的规则的积分值+以前的积分
+			Integer temp=0;
+			if(null!=writerPointLog2){
+				temp=writerPointRuleVOs.getPoint()+writerPointLog2.getPoint();
+				writerPointLog.setPoint(temp);
+			}else{
+				temp=writerPointRuleVOs.getPoint();
+				writerPointLog.setPoint(temp);
+			}
+			//积分规则id
+			writerPointLog.setRuleId(writerPointRuleVOs.getId());
+			writerPointLog.setUserId(userId);
+			//增加积分记录
+			writerPointLogService.add(writerPointLog);
+			WriterPoint point=writerPointService.getWriterPointByUserId(userId);
+			WriterPoint writerPoint=new WriterPoint();
+			//当前获取的总积分=评论积分+以前的积分
+			writerPoint.setGain(writerPointLog.getPoint());
+			writerPoint.setUserId(userId);
+			writerPoint.setTotal(writerPoint.getGain()+point.getLoss());
+			writerPoint.setLoss(point.getLoss());
+			writerPoint.setId(point.getId());
+			writerPointService.updateWriterPoint(writerPoint);
+		}
+        
         String code = "OK";
         return code;
     }

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bc.pmpheep.back.commuser.writerpoint.dao.WriterPointRuleDao">
+	<sql id="key">
+		<!-- 去掉最后一个, -->
+		<trim suffixOverrides=",">
+			<if test="ruleName != null and ruleName != ''">
+				rule_name,
+			</if>
+			<if test="ruleCode != null and ruleCode != ''">
+				rule_code,
+			</if>
+			<if test=" point != null">
+				point,
+			</if>
+			<if test=" isExchange != null and isExchange != ''">
+				is_exchange,
+			</if>
+			<if test=" thirdName != null and thirdName != ''">
+				third_name,
+			</if>
+			<if test=" exchangePoint != null">
+				exchange_point,
+			</if>
+			<if test=" description != null and description != ''">
+				description,
+			</if>
+			<if test=" isDisabled != null and isDisabled != ''">
+				is_disabled,
+			</if>
+		</trim>
+	</sql>
+	<!-- sql片段对应?,id属性值任意 -->
+	<sql id="value">
+		<!-- 去掉最后一个, -->
+		<trim suffixOverrides=",">
+			<if test="ruleName != null and ruleName != ''">
+				#{ruleName},
+			</if>
+			<if test="ruleCode != null and ruleCode != ''">
+				#{ruleCode},
+			</if>
+			<if test=" point != null">
+				#{point},
+			</if>
+			<if test=" isExchange != null and isExchange != ''">
+				#{isExchange},
+			</if>
+			<if test=" thirdName != null and thirdName != ''">
+				#{thirdName},
+			</if>
+			<if test=" exchangePoint != null">
+				#{exchangePoint},
+			</if>
+			<if test=" description != null and description != ''">
+				#{description},
+			</if>
+			<if test=" isDisabled != null and isDisabled != ''">
+				#{isDisabled},
+			</if>
+		</trim>
+	</sql>
+	<!-- 新增 -->
+	<insert id="addWriterPointRule" parameterType="WriterPointRule">
+		<selectKey resultType="java.lang.Long" order="AFTER"
+			keyProperty="id"> <!-- order="AFTER"表示先执行插入语句，之后再执行查询语句 BEFORE 或 AFTER -->
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into writer_point_rule (
+		<include refid="key" />
+		)
+		values(
+		<include refid="value" />
+		);
+	</insert>
+
+	<select id="getWriterPointRuleByRuleName" parameterType="java.lang.String" resultType="WriterPointRule">
+		select * from writer_point_rule where rule_name=#{ruleName};
+	</select>
+</mapper>
