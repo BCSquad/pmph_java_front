@@ -11,7 +11,7 @@
 		'提交了《',
 		m.material_name,
 		"》申报资料,请尽快审核"
-	) AS TYPE,'' msg_id
+	) AS TYPE,'' msg_id,0 as isread
 FROM
 	declaration d
  JOIN material m ON d.`material_id` = m.`id`
@@ -25,7 +25,7 @@ UNION ALL
 		CONCAT(
 			w1.username,
 			'提交了教师资格认证,请尽快审核'
-		) AS title,'' msg_id
+		) AS title,'' msg_id,0 as isread
 	FROM
 		writer_user_certification w
 	 JOIN org_user u1 ON w.org_id = u1.org_id
@@ -36,14 +36,22 @@ UNION ALL
 		SELECT
 			'系统消息' AS NAME,
 			DATE_FORMAT(a.gmt_create,'%Y-%m-%d %h:%s') AS TIME ,
-			a.title AS title, msg_id
+			a.title AS title, msg_id,a.is_read as isread
 		FROM
 			user_message a
 		WHERE
 			receiver_type = 3
+		and is_deleted=0
 		AND sender_type = 0
 		AND sender_id = 0 and receiver_id= #{id})t ORDER BY t.time DESC
 		<if test="startPara!=null">limit #{startPara},8</if>
 	</select>
-
+    <!--  根据系统消息内容id更改系统消息是否已读 -->
+    <update id="updateIsRead" parameterType="java.util.Map">
+       update user_message set is_read=1 where msg_id=#{mid} and receiver_id=#{userid}
+    </update>
+    <!-- 删除消息 -->
+    <update id="deletemsg" parameterType="java.util.Map">
+        update user_message set is_deleted=1 where msg_id=#{mid} and receiver_id=#{userid}
+    </update>
 </mapper>

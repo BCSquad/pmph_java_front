@@ -129,6 +129,7 @@ public interface DataAuditDao {
 	
 			//学术荣誉授予情况
 			public List<Map<String,Object>> queryAcadereward(Map<String,Object> map);
-
+			//人卫社教材编写情况
+			public List<Map<String,Object>> queryRwsBook(Map<String,Object> map);
 
 }

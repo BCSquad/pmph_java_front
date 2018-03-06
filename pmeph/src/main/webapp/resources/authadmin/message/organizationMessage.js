@@ -17,16 +17,22 @@ function loadMore(){
 			$("#startPara").val(startPara);
 			var str= '';
 			$.each(json.list,function(i,n){
-				str+='<div class="item">'+
+				str+='<div class="item" id="item'+n.msg_id+'">'+
     			'<div class="item-img">'+
                 '<img src="'+contextpath+'statics/testfile/tttt.png" />'+
             '</div>'+
-            '<div class="content" >'+
+            '<div class="content" style="position:relative;">'+
             ' <p class="title" >'+
             '<span class="msg">'+n.NAME+'</span>'+
             '<span class="time">'+n.TIME+'</span>'+
             ' </p>'+
-            '<p class="text" onclick="system(\''+n.msg_id+'\',\''+n.NAME+'\',\''+n.TIME+'\')">'+n.TYPE+'</p>' +
+            '<p class="text" id="txt'+n.msg_id+'" style="width:1000px" onclick="system(\''+n.msg_id+'\',\''+n.NAME+'\',\''+n.TIME+'\')">'+n.TYPE+
+            (n.isread==1?'<img src="'+contextpath+'/statics/image/readyes.png"  id="isread'+n.msg_id+'"/>':'')+
+            '</p>' +
+            (n.NAME=='系统消息'?'<div style="position: absolute;bottom:0px;right: 0px;color: #999999;font-size: 14px;height:20px;" onclick="delmsg(\''+n.msg_id+'\')">'+
+	                        '<span style="width:20px;height:20px;float:left;" class="deltag"></span>'+
+	                        '<span style="line-height: 20px;">删除</span>'+
+	                    '</div>':'')+
             '</div>'+
         '</div>';
 		});
@@ -51,6 +57,13 @@ function system(str,name,time) {
                 $("#titlec").html(name);
                 $("#timec").html(time);
                 $("#tcontent").html(json.msg);
+                var obj= document.getElementById('isread'+str);
+                if(!obj&&json.isread=="yes"){
+                  	$("#txt"+str).append('<img src="'+contextpath+'/statics/image/readyes.png"  id="isread'+str+'"/>');
+                }
+                if(json.isread=="yes"){
+                	
+                }
                 $("#bookmistake").show();
             }
         });
@@ -60,4 +73,17 @@ function system(str,name,time) {
 //点击关闭消息详情窗口
 function hideup() {
     $("#bookmistake").hide();
+}
+//
+function delmsg(id){
+	  $.ajax({
+          type:"post",
+          url:contextpath+"AllMessage/delmsg.action?mid="+id,
+          async:false,
+          dataType:'json',
+          success:function(json){
+        	  if(json.isdel=="yes"){
+        		  $("#item"+id).remove();
+        	  }
+          }});
 }

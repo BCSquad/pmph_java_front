@@ -232,5 +232,6 @@ public interface DataAuditService {
 	
 	//更新Declaration修改时间
 	void updateDeclarationUpdateTime(Map<String, Object> queryMap);
-	
+	//人卫社教材编写情况
+	public List<Map<String,Object>> queryRwsBook(Map<String,Object> map);
 }

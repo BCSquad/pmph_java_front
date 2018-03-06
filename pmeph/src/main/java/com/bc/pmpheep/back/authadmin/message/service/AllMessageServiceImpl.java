@@ -33,6 +33,26 @@ public class AllMessageServiceImpl implements AllMessageService {
 	public List<Map<String, Object>> getAllMessageInit(Map<String, Object> map) {
 		return allMessageDao.getAllMessageInit(map);
 	}
+    /**
+     * 根据系统消息内容id更改系统消息是否已读
+     * @param mid
+     * @param userid 
+     */
+	@Override
+	public int updateIsRead(String mid, String userid) {
+		// TODO Auto-generated method stub
+		return allMessageDao.updateIsRead(mid,userid);
+	}
+	/**
+	 * 删除消息
+	 * @param parameter
+	 * @param string
+	 */
+	@Override
+	public int deletemsg(String mid, String userid) {
+		// TODO Auto-generated method stub
+		return allMessageDao.deletemsg(mid,userid);
+	}
 
 
 }

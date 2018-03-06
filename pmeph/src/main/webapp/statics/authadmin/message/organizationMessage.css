@@ -179,3 +179,8 @@ a{
     float: left;
     height: auto;
 }
+.deltag{
+	background-image: url(../../image/close.png);
+	background-repeat: no-repeat;
+	background-position: 0px 4px;
+}
