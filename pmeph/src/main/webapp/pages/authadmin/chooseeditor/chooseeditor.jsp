@@ -76,11 +76,11 @@ String contextpath=request.getContextPath();
                 </select>
             </div>
             
-            <button class="div1" onclick="queryBtnClick();">查询</button>
+            <button class="div1" onclick="queryBtnClick();" style="cursor: pointer;">查询</button>
             <div id="handleBtn">
-	            <button class="div2" onclick="selectReset()">重置</button>
-	            <button class="div3" onclick="selectRubmit()">提交</button>
-	            <button class="div3" onclick="tempSave()">暂存</button>
+	            <button class="div2" onclick="selectReset()" style="cursor: pointer;">重置</button>
+	            <button class="div3" onclick="selectRubmit()" style="cursor: pointer;">提交</button>
+	            <button class="div3" onclick="tempSave()" style="cursor: pointer;">暂存</button>
             </div>
         </div>
         <div class="tb2">
