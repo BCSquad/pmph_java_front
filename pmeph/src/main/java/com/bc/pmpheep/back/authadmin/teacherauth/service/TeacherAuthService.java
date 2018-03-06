@@ -7,7 +7,7 @@ import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.controller.bean.ResponseBean;
 
 /**
- * 
+ *
  * @author liudi
  * 教师认证 服务层接口
  */
@@ -19,7 +19,7 @@ public interface TeacherAuthService {
 	 * @return
 	 */
 	List<Map<String, Object>> queryTeacherAuthList(PageParameter<Map<String, Object>> pageParameter);
-	
+
 	/**
 	 * 查询认证分页总页数
 	 * @param pageParameter
@@ -29,12 +29,12 @@ public interface TeacherAuthService {
 
 	/**
 	 * 修改主键为id的条目状态为status
-	 * @param id 
+	 * @param id
 	 * @param status
 	 * @return
 	 */
-	Map<String, Object> statusModify(String id, String status);
+	Map<String, Object> statusModify(String id, String status, String orgId);
 
-	
-	
+
+
 }

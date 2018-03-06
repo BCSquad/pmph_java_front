@@ -187,8 +187,8 @@ function showup(id) {
             layer.open({
                 type: 1,
                 title: false,
-                closeBtn: 0,
-                area: '940px',
+                closeBtn: 1,
+                area: '967px',
                 skin: 'layui-layer-nobg', //没有背景色
                 shadeClose: true,
                 content: $("#bookmistake")

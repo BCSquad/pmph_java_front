@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -21,8 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.authadmin.message.service.SendMessageServiceImpl;
 import com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailService;
-import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
-import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.general.controller.BaseController;
@@ -49,10 +48,6 @@ public class MaterialDetailController extends BaseController{
 	@Autowired
     @Qualifier("com.bc.pmpheep.general.service.FileService")
     FileService fileService;
-	
-	@Autowired
-    @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
-    private PersonalService personalService;
 	
 	/**
 	 * 跳转到申报新增页面
@@ -189,6 +184,9 @@ public class MaterialDetailController extends BaseController{
 				perMap.put("online_progress", "0");
 			}
 		}
+        Map<String, Object> materialMap = new HashMap<String, Object>();
+        materialMap = this.mdService.queryMaterialbyId(material_id);
+        perMap.put("materialName", MapUtils.getString(materialMap, "material_name"));
 		perMap.put("realname", request.getParameter("realname"));
 		perMap.put("user_id", user_id);
 		perMap.put("type", type);
@@ -213,9 +211,15 @@ public class MaterialDetailController extends BaseController{
 		perMap.put("idtype", request.getParameter("idtype"));
 		perMap.put("idcard", request.getParameter("idcard"));
 		perMap.put("org_id", request.getParameter("sbdw_id"));
+		perMap.put("is_dispensed", "".equals(request.getParameter("is_dispensed")) ? null:request.getParameter("is_dispensed"));
+		perMap.put("is_utec", "".equals(request.getParameter("is_utec")) ? null:request.getParameter("is_utec"));
+		perMap.put("degree", "".equals(request.getParameter("degree")) ? null:request.getParameter("degree"));
+//		perMap.put("is_dispensed", "1");
+//		perMap.put("is_utec", "1");
+//		perMap.put("degree", "2");
 		perMap.put("expertise", request.getParameter("expertise"));
-		perMap.put("gmt_create", date);	
-		//获取图书选择参数     
+		perMap.put("gmt_create", date);
+		//获取图书选择参数
 		String textbook_ids[] = request.getParameterValues("textbook_id");
 		String preset_positions[] = request.getParameterValues("preset_position");
 		String syllabus_ids[] = request.getParameterValues("syllabus_id");
@@ -313,7 +317,7 @@ public class MaterialDetailController extends BaseController{
 				xsjzMap.put("sort", i);
 				//作家兼职学术
 				zjxsList.add(xsjzMap);
-			}	
+			}
 		}
 		//上套教材参编情况
 		String jc_material_name[] = request.getParameterValues("jc_material_name");
@@ -330,7 +334,7 @@ public class MaterialDetailController extends BaseController{
 				JcbjMap.put("sort", i);
 				//作家上套教材参编
 				jcbjList.add(JcbjMap);
-			}	
+			}
 		}
 		//精品课程建设情况
 		String gj_course_name[] = request.getParameterValues("gj_course_name");
@@ -347,8 +351,8 @@ public class MaterialDetailController extends BaseController{
 				GjkcjsMap.put("sort", i);
 				//精品课程建设
 				gjkcjsList.add(GjkcjsMap);
-			}	
-		}	
+			}
+		}
 		//主编国家级规划教材情况
 		String hj_material_name[] = request.getParameterValues("hj_material_name");
 		String hj_isbn[] = request.getParameterValues("hj_isbn");
@@ -364,7 +368,7 @@ public class MaterialDetailController extends BaseController{
 				GjghjcMap.put("sort", i);
 				//主编国家级规划
 				gjghjcList.add(GjghjcMap);
-			}	
+			}
 		}
 		//其他社教材编写情况
 		String jcb_material_name[] = request.getParameterValues("jcb_material_name");
@@ -389,8 +393,8 @@ public class MaterialDetailController extends BaseController{
 				JcbxMap.put("sort", i);
 				//教材其他情况编写
 				jcbxList.add(JcbxMap);
-			}	
-		}	
+			}
+		}
 		//作家科研情况
 		String zjk_research_name[] = request.getParameterValues("zjk_research_name");
 		String zjk_approval_unit[] = request.getParameterValues("zjk_approval_unit");
@@ -531,8 +535,8 @@ public class MaterialDetailController extends BaseController{
 				JcbxMap.put("note", pmph_note[i]);
 				JcbxMap.put("sort", i);
 				pmphList.add(JcbxMap);
-			}	
-		}	
+			}
+		}
 		//参加人卫慕课、数字教材编写情况
 		String mooc_content = request.getParameter("mooc_content");
 		digitalMap.put("content", mooc_content);
@@ -544,16 +548,6 @@ public class MaterialDetailController extends BaseController{
 		}else{
 			msg=this.mdService.updateJcsbxx(perMap, tssbList, stuList, workList, declaration_id, steaList, zjxsList, jcbjList, gjkcjsList, gjghjcList, jcbxList, zjkyList, zjkzqkList, achievementMap, monographList, publishList, sciList, clinicalList, acadeList, pmphList, digitalMap, intentionlMap);
 		}
-		
-		if(type.equals("1")){ //提交
-			//TODO 教材申报提交 生成动态
-			Map<String, Object> materialMap = this.mdService.queryMaterialbyId(material_id);
-			WriterUserTrendst wut = new WriterUserTrendst(userMap.get("id").toString(), 8, material_id);
-			wut.setDetail("提交教材申报", userMap.get("realname").toString()+" 提交了教材申报《"+materialMap.get("material_name").toString()+"》。", 0);
-			personalService.saveUserTrendst(wut);//教材申报提交 生成动态
-		}
-		
-		
 		return msg;
 	}
 	/**
@@ -569,9 +563,9 @@ public class MaterialDetailController extends BaseController{
 		String material_id = request.getParameter("material_id");
 		String declaration_id = request.getParameter("declaration_id");
 		Map<String,Object> queryMap = new HashMap<String,Object>();
-		queryMap.put("material_id", material_id); 
-		queryMap.put("declaration_id", declaration_id); 
-		
+		queryMap.put("material_id", material_id);
+		queryMap.put("declaration_id", declaration_id);
+
 		//1.作家申报表
 		List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
 		gezlList = this.mdService.queryPerson(queryMap);
@@ -712,7 +706,7 @@ public class MaterialDetailController extends BaseController{
 		mav.addObject("intentionMap", intentionMap);
 		return mav;
 	}
-	
+
 	/**
 	 * 跳转到暂存页面
 	 * @param request
@@ -729,8 +723,8 @@ public class MaterialDetailController extends BaseController{
 		String user_id = userMap.get("id").toString();
 		Map<String,Object> queryMap = new HashMap<String,Object>();
 		queryMap.put("user_id", user_id);
-		queryMap.put("declaration_id", declaration_id); 
-		
+		queryMap.put("declaration_id", declaration_id);
+
 		//1.作家申报信息表
 		List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
 		gezlList = this.mdService.queryPerson(queryMap);
@@ -792,7 +786,7 @@ public class MaterialDetailController extends BaseController{
 				map.put("pos_d", pos_d);
 			}
 		}
-		
+
 		//3.作家学习经历表
 		List<Map<String,Object>> stuList = new ArrayList<Map<String,Object>>();
 		stuList=this.mdService.queryStu(queryMap);
@@ -851,7 +845,7 @@ public class MaterialDetailController extends BaseController{
 		//21.编写内容意向表
 		Map<String,Object> intentionMap = new HashMap<String,Object>();
 		intentionMap = this.mdService.queryIntention(queryMap);
-		
+
 		//书籍信息
 		List<Map<String,Object>> bookList = this.mdService.queryBookById(material_id);
 		StringBuffer bookSelects = new StringBuffer();
@@ -870,7 +864,7 @@ public class MaterialDetailController extends BaseController{
 			}
 			map.put("bookSelect", bookSelect.toString());
 		}
-		
+
 		//填充
 		mav.addObject("bookSelects", bookSelects.toString());
 		mav.addObject("gezlList", gezlList.get(0));
@@ -896,6 +890,8 @@ public class MaterialDetailController extends BaseController{
 		mav.addObject("jcbxqtList", jcbxqtList);
 		mav.addObject("digitalMap", moocMap);
 		mav.addObject("intentionMap", intentionMap);
+		mav.addObject("return_cause", gezlList.get(0).get("return_cause").toString());
+
 		return mav;
 	}
 	

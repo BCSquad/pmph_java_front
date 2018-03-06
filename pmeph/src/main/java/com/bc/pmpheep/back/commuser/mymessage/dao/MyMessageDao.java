@@ -1,6 +1,7 @@
 package com.bc.pmpheep.back.commuser.mymessage.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -85,5 +86,10 @@ public interface MyMessageDao {
      * 通过id 动态更新UserMessage
      */
     Integer updateUserMessage(MyMessage userMessage);
+
+
+	List<Map<String,Object>> getMaterialManagers(@Param("materialId")Long materialId);
+
+	List<Map<String,Object>> getOrgUser(@Param("orgId")Long orgId);
 
 }
