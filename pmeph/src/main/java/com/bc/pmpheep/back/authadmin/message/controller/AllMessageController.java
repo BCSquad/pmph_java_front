@@ -97,7 +97,7 @@ public class AllMessageController extends BaseController {
 		Map<String,Object> map=new HashMap<>();
 		Map<String, Object> user = getUserInfo();
 		Message massage=messageService.get(request.getParameter("mid"));
-		int count=allMessageServiceImpl.updateIsRead(request.getParameter("mid"),user.get("id").toString());
+		int count=allMessageServiceImpl.updateIsRead(request.getParameter("mid"));
 		String isread="no";
 		if(count>0){
 			isread="yes";
@@ -119,7 +119,7 @@ public class AllMessageController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> delmsg(HttpServletRequest req){
 		 Map<String, Object> user = getUserInfo();
-		 int count=allMessageServiceImpl.deletemsg(req.getParameter("mid"),user.get("id").toString());
+		 int count=allMessageServiceImpl.deletemsg(req.getParameter("mid"));
 		 String isdel="no";
 		 if(count==1){
 			 isdel="yes";

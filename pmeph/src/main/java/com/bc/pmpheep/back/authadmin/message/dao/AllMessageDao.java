@@ -26,16 +26,14 @@ public interface AllMessageDao {
     /**
      *  根据系统消息内容id更改系统消息是否已读
      * @param mid
-     * @param userid 
      * @return
      */
-	public int updateIsRead(@Param("mid") String mid,@Param("userid") String userid);
+	public int updateIsRead(@Param("mid") String mid);
 	/**
 	 * 删除消息
 	 * @param mid
-	 * @param userid
 	 * @return
 	 */
-	public int deletemsg(@Param("mid") String mid,@Param("userid")  String userid);
+	public int deletemsg(@Param("mid") String mid);
 
 }
