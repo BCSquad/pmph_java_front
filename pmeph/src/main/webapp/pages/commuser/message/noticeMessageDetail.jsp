@@ -68,7 +68,7 @@
 		        	</c:if>
 		        		     
 		        <div class="liseDiv">
-		        <c:if test="${map.mail_address !=null && map.mail_address !=''&& map.is_material_entry=='true'}">
+		        <%-- <c:if test="${map.mail_address !=null && map.mail_address !=''&& map.is_material_entry=='true'}">
 		        <div class="list">
 		            <div class="title2">
 		               	 邮寄地址：
@@ -99,7 +99,7 @@
 				               ${map.note}
 		            </div>
 		        </div>
-		        </c:if>
+		        </c:if> --%>
 		        <c:if test="${listAttachment.size()>0}">
 		        <div class="list">
 		            <div class="title2">
