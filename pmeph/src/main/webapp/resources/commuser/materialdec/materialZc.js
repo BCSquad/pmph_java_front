@@ -515,8 +515,8 @@ function add_jccb(){
 	"<table class='radio_tb' style='width: 230px;'><tr>"+
 		"<td><input type='radio' name='jc_position_"+num+"' checked='checked' value='0'/>无</td>"+
 		"<td><input type='radio' name='jc_position_"+num+"' value='1'/>主编</td>"+
-		"<td><input type='radio' name='jc_position_"+num+"' value='2'/>编委</td>"+
-		"<td><input type='radio' name='jc_position_"+num+"' value='3'/>副编委</td>"+
+		"<td><input type='radio' name='jc_position_"+num+"' value='2'/>副主编</td>"+
+		"<td><input type='radio' name='jc_position_"+num+"' value='3'/>编委</td>"+
 	"</tr></table>"+
 	"<input type='hidden' name='jc_position' value='jc_position_"+num+"'/></td>"+
 	"<td style='color: #333333;'>"+

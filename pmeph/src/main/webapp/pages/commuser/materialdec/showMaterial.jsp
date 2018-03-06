@@ -261,8 +261,8 @@
 							<td>
 								<c:if test="${list.position == '0'}">无</c:if>
 								<c:if test="${list.position == '1'}">主编</c:if>
-								<c:if test="${list.position == '2'}">编委</c:if>
-								<c:if test="${list.position == '3'}">副编委</c:if>
+								<c:if test="${list.position == '2'}">副主编</c:if>
+								<c:if test="${list.position == '3'}">编委</c:if>
 							</td>
 							<td>
 								<c:if test="${list.is_digital_editor == '1'}">是</c:if>
@@ -411,7 +411,6 @@
 							<td width="120px">出版时间</td>
 							<td width="120px">标准书号</td>
 							<td>备注</td>
-							<td width="78px">添加</td>
 						</tr>
 					</thead>
 					<tbody>

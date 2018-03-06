@@ -64,7 +64,7 @@ function upload(id){
 	    },
 	    done: function (filename, fileid) {
 	    	$("#fileNameDiv_"+id).empty(); //清楚内容
-	    	$("#fileNameDiv_"+id).append("<span><a href='javascript:' class='filename'  onclick='downLoadProxy('"+fileid+"')'>"+filename+"</a></span>");
+	    	$("#fileNameDiv_"+id).append("<span><a href='javascript:' class='filename'  onclick='downLoadProxy(\""+fileid+"\")'>"+filename+"</a></span>");
 	    	$("#fileNameDiv_"+id).css("display","inline");
 	    	$("#syllabus_id_"+id).val(fileid);
 	    	$("#syllabus_name_"+id).val(filename);
@@ -478,8 +478,8 @@ function add_jccb(){
 	"<table class='radio_tb' style='width: 230px;'><tr>"+
 		"<td><input type='radio' name='jc_position_"+num+"' checked='checked' value='0'/>无</td>"+
 		"<td><input type='radio' name='jc_position_"+num+"' value='1'/>主编</td>"+
-		"<td><input type='radio' name='jc_position_"+num+"' value='2'/>编委</td>"+
-		"<td><input type='radio' name='jc_position_"+num+"' value='3'/>副编委</td>"+
+		"<td><input type='radio' name='jc_position_"+num+"' value='2'/>副主编</td>"+
+		"<td><input type='radio' name='jc_position_"+num+"' value='3'/>编委</td>"+
 	"</tr></table>"+
 	"<input type='hidden' name='jc_position' value='jc_position_"+num+"'/></td>"+
 	"<td style='color: #333333;'>"+
