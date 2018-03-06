@@ -390,8 +390,8 @@
 								<table class="radio_tb" style="width: 230px;"><tr>
 									<td><input type="radio" name="jc_position_1" value="0" checked="checked"/>无</td>
 					 				<td><input type="radio" name="jc_position_1" value="1" />主编</td>
-									<td><input type="radio" name="jc_position_1" value="2" />编委</td>
-									<td><input type="radio" name="jc_position_1" value="3" />副编委</td>
+									<td><input type="radio" name="jc_position_1" value="2" />副主编</td>
+									<td><input type="radio" name="jc_position_1" value="3" />编委</td>
 								</tr></table>
 								<input type="hidden" name="jc_position" value="jc_position_1" />
 							</td>

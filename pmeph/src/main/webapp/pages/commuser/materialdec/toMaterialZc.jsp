@@ -75,7 +75,7 @@
 							<tr>
 								<c:if test="${materialMap.is_multi_position =='1'}">
 									<td height="30px;"><input type="checkbox" name="zw_1_${status.count}" value="4" ${list.pos_a=='1'?'checked':'' }/>主编</td>
-									<td><input type="checkbox" name="zw_1_${status.count}" value="2" ${list.pos_b=='1'?'checked':'' }/>副编委</td>
+									<td><input type="checkbox" name="zw_1_${status.count}" value="2" ${list.pos_b=='1'?'checked':'' }/>副主编</td>
 									<td><input type="checkbox" name="zw_1_${status.count}" value="1" ${list.pos_c=='1'?'checked':'' }/>编委</td>
 									<c:if test="${materialMap.is_digital_editor_optional =='1'}">
 									<td><input type="checkbox" name="zw_1_${status.count}" value="8" ${list.pos_d=='1'?'checked':'' }/>数字编委</td>
@@ -83,7 +83,7 @@
 								</c:if>
 								<c:if test="${materialMap.is_multi_position !='1'}">
 									<td height="30px;"><input type="radio" name="zw_1_${status.count}" value="4" ${list.preset_position=='4'?'checked':'' }/>主编</td>
-									<td><input type="radio" name="zw_1_${status.count}" value="2" ${list.preset_position=='2'?'checked':'' }/>副编委</td>
+									<td><input type="radio" name="zw_1_${status.count}" value="2" ${list.preset_position=='2'?'checked':'' }/>副主编</td>
 									<td><input type="radio" name="zw_1_${status.count}" value="1" ${list.preset_position=='1'?'checked':'' }/>编委</td>
 									<c:if test="${materialMap.is_digital_editor_optional =='1'}">
 									<td><input type="radio" name="zw_1_${status.count}" value="8" ${list.preset_position=='8'?'checked':'' }/>数字编委</td>
@@ -507,7 +507,7 @@
 									<td><input type="radio" name="jc_position_a" value="0" checked="checked"/>无</td>
 									<td><input type="radio" name="jc_position_a" value="1" />主编</td>
 									<td><input type="radio" name="jc_position_a" value="2" />编委</td>
-									<td><input type="radio" name="jc_position_a" value="3" />副编委</td>
+									<td><input type="radio" name="jc_position_a" value="3" />副主编</td>
 								</tr></table>	
 								<input type="hidden" name="jc_position" value="jc_position_a" />
 							</td>
@@ -528,8 +528,8 @@
 									<table class="radio_tb" style="width: 230px;"><tr>
 										<td><input type="radio" name="jc_position_${status.count}" value="0" ${list.position=='0'?'checked':'' }/>无</td>
 										<td><input type="radio" name="jc_position_${status.count}" value="1" ${list.position=='1'?'checked':'' }/>主编</td>
-										<td><input type="radio" name="jc_position_${status.count}" value="2" ${list.position=='2'?'checked':'' }/>编委</td>
-										<td><input type="radio" name="jc_position_${status.count}" value="3" ${list.position=='3'?'checked':'' }/>副编委</td>
+										<td><input type="radio" name="jc_position_${status.count}" value="2" ${list.position=='2'?'checked':'' }/>副主编</td>
+										<td><input type="radio" name="jc_position_${status.count}" value="3" ${list.position=='3'?'checked':'' }/>编委</td>
 									</tr></table>		
 									<input type="hidden" name="jc_position" value="jc_position_${status.count}" />
 								</td>

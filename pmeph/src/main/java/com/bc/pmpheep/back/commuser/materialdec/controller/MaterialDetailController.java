@@ -31,13 +31,13 @@ import com.bc.pmpheep.general.service.FileService;
 
 /**
  * 注释:教材申报
+ *
  * @Author:黄琼飞
  * @date 2017-11-27上午10:10:34
  */
 @Controller
 @RequestMapping("/material/")
 public class MaterialDetailController extends BaseController{
-
 
 
 	@Autowired
@@ -57,6 +57,7 @@ public class MaterialDetailController extends BaseController{
 	
 	/**
 	 * 跳转到申报新增页面
+     *
 	 * @param request
 	 * @return
 	 */
@@ -84,7 +85,8 @@ public class MaterialDetailController extends BaseController{
 		if(orgList.size()>0){
 		for (Map<String, Object> map : orgList) {
 			orgSelects.append("<option value='"+map.get("org_id")+"'>"+map.get("org_name")+"</option>");
-		}}
+            }
+        }
 		mav.addObject("bookSelects", bookSelects.toString());
 		mav.addObject("orgSelects", orgSelects.toString());
 		mav.addObject("materialMap", materialMap);
@@ -566,8 +568,10 @@ public class MaterialDetailController extends BaseController{
 		
 		return msg;
 	}
+
 	/**
 	 * 查看申报详情
+     *
 	 * @param request
 	 * @return
 	 */
@@ -725,6 +729,7 @@ public class MaterialDetailController extends BaseController{
 
 	/**
 	 * 跳转到暂存页面
+     *
 	 * @param request
 	 * @return
 	 */
@@ -766,35 +771,80 @@ public class MaterialDetailController extends BaseController{
 				String pos_c = ""; //编委 1
 				String pos_d = ""; //数字编委 8
 				if(map.get("preset_position").equals(3)){//
-					pos_a="";pos_b="1";pos_c="1";pos_d="";
+                    pos_a = "";
+                    pos_b = "1";
+                    pos_c = "1";
+                    pos_d = "";
 				}else if(map.get("preset_position").equals(1)){
-					pos_a="";pos_b="";pos_c="1";pos_d="";
+                    pos_a = "";
+                    pos_b = "";
+                    pos_c = "1";
+                    pos_d = "";
 				}else if(map.get("preset_position").equals(2)){
-					pos_a="";pos_b="1";pos_c="";pos_d="";
+                    pos_a = "";
+                    pos_b = "1";
+                    pos_c = "";
+                    pos_d = "";
 				}else if(map.get("preset_position").equals(4)){
-					pos_a="1";pos_b="";pos_c="";pos_d="";
+                    pos_a = "1";
+                    pos_b = "";
+                    pos_c = "";
+                    pos_d = "";
 				}else if(map.get("preset_position").equals(8)){
-					pos_a="";pos_b="";pos_c="";pos_d="1";
+                    pos_a = "";
+                    pos_b = "";
+                    pos_c = "";
+                    pos_d = "1";
 				}else if(map.get("preset_position").equals(5)){
-					pos_a="1";pos_b="";pos_c="1";pos_d="";
+                    pos_a = "1";
+                    pos_b = "";
+                    pos_c = "1";
+                    pos_d = "";
 				}else if(map.get("preset_position").equals(6)){
-					pos_a="1";pos_b="1";pos_c="";pos_d="";
+                    pos_a = "1";
+                    pos_b = "1";
+                    pos_c = "";
+                    pos_d = "";
 				}else if(map.get("preset_position").equals(9)){
-					pos_a="";pos_b="";pos_c="1";pos_d="1";
+                    pos_a = "";
+                    pos_b = "";
+                    pos_c = "1";
+                    pos_d = "1";
 				}else if(map.get("preset_position").equals(10)){
-					pos_a="";pos_b="1";pos_c="";pos_d="1";
+                    pos_a = "";
+                    pos_b = "1";
+                    pos_c = "";
+                    pos_d = "1";
 				}else if(map.get("preset_position").equals(12)){
-					pos_a="1";pos_b="";pos_c="";pos_d="1";
+                    pos_a = "1";
+                    pos_b = "";
+                    pos_c = "";
+                    pos_d = "1";
 				}else if(map.get("preset_position").equals(7)){
-					pos_a="1";pos_b="1";pos_c="1";pos_d="";
+                    pos_a = "1";
+                    pos_b = "1";
+                    pos_c = "1";
+                    pos_d = "";
 				}else if(map.get("preset_position").equals(11)){
-					pos_a="";pos_b="1";pos_c="1";pos_d="1";
+                    pos_a = "";
+                    pos_b = "1";
+                    pos_c = "1";
+                    pos_d = "1";
 				}else if(map.get("preset_position").equals(13)){
-					pos_a="1";pos_b="";pos_c="1";pos_d="1";
+                    pos_a = "1";
+                    pos_b = "";
+                    pos_c = "1";
+                    pos_d = "1";
 				}else if(map.get("preset_position").equals(14)){
-					pos_a="1";pos_b="";pos_c="1";pos_d="1";
+                    pos_a = "1";
+                    pos_b = "";
+                    pos_c = "1";
+                    pos_d = "1";
 				}else if(map.get("preset_position").equals(15)){
-					pos_a="1";pos_b="1";pos_c="1";pos_d="1";
+                    pos_a = "1";
+                    pos_b = "1";
+                    pos_c = "1";
+                    pos_d = "1";
 				}
 				map.put("pos_a", pos_a);
 				map.put("pos_b", pos_b);
@@ -906,7 +956,7 @@ public class MaterialDetailController extends BaseController{
 		mav.addObject("jcbxqtList", jcbxqtList);
 		mav.addObject("digitalMap", moocMap);
 		mav.addObject("intentionMap", intentionMap);
-		mav.addObject("return_cause", gezlList.get(0).get("return_cause").toString());
+        mav.addObject("return_cause", MapUtils.getString(gezlList.get(0), "return_cause"));
 
 		return mav;
 	}

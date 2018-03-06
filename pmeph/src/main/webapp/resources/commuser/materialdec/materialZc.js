@@ -515,8 +515,8 @@ function add_jccb(){
 	"<table class='radio_tb' style='width: 230px;'><tr>"+
 		"<td><input type='radio' name='jc_position_"+num+"' checked='checked' value='0'/>无</td>"+
 		"<td><input type='radio' name='jc_position_"+num+"' value='1'/>主编</td>"+
-		"<td><input type='radio' name='jc_position_"+num+"' value='2'/>编委</td>"+
-		"<td><input type='radio' name='jc_position_"+num+"' value='3'/>副编委</td>"+
+		"<td><input type='radio' name='jc_position_"+num+"' value='2'/>副主编</td>"+
+		"<td><input type='radio' name='jc_position_"+num+"' value='3'/>编委</td>"+
 	"</tr></table>"+
 	"<input type='hidden' name='jc_position' value='jc_position_"+num+"'/></td>"+
 	"<td style='color: #333333;'>"+
@@ -797,24 +797,46 @@ function del_tr(trId){
 
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type){
-	checkLb();
-	if(checkEqual("textbook_id") && checkNull(jsonStr) && checkExtra()){
-		//避免重复点击
-		document.getElementById('buzc').onclick=function(){window.message.warning("请不要重复点击");};
-		document.getElementById('butj').onclick=function(){window.message.warning("请不要重复点击");};
-		$.ajax({
-			type: "POST",
-			url:contextpath+'material/doMaterialAdd.action?sjump=2&type='+type,
-			data:$('#objForm').serialize(),// 你的formid
-			async: false,
-		    success: function(msg) {
-			    if(msg=='OK'){
-			    	window.message.success("操作成功,正在跳转页面");
-			    	window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=jcsb";
-			    }
-		    }
-		});
-	}
+		if(type == '2'){ //表示暂存
+        //避免重复点击
+        document.getElementById('buzc').onclick=function(){window.message.warning("请不要重复点击");};
+        document.getElementById('butj').onclick=function(){window.message.warning("请不要重复点击");};
+        $.ajax({
+            type: "POST",
+            url:contextpath+'material/doMaterialAdd.action?sjump=2&type='+type,
+            data:$('#objForm').serialize(),// 你的formid
+            async: false,
+            success: function(msg) {
+                if(msg=='OK'){
+                    window.message.success("操作成功,正在跳转页面");
+                    window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=jcsb";
+                }
+            }
+        });
+	}else{ //表示提交
+        checkLb();
+        if (checkEqual("textbook_id") && checkNull(jsonStr) && checkExtra()) {
+            //避免重复点击
+            document.getElementById('buzc').onclick = function () {
+                window.message.warning("请不要重复点击");
+            };
+            document.getElementById('butj').onclick = function () {
+                window.message.warning("请不要重复点击");
+            };
+            $.ajax({
+                type: "POST",
+                url: contextpath + 'material/doMaterialAdd.action?sjump=2&type=' + type,
+                data: $('#objForm').serialize(),// 你的formid
+                async: false,
+                success: function (msg) {
+                    if (msg == 'OK') {
+                        window.message.success("操作成功,正在跳转页面");
+                        window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
+                    }
+                }
+            });
+        }
+    }
 }
 
 //放弃
