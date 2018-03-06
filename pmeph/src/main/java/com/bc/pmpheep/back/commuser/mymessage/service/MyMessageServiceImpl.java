@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -211,7 +212,7 @@ public class MyMessageServiceImpl implements MyMessageService {
     }
 
     @Override
-    public void senNewMsg(Long thisId,Short thisType, Long frendId, Short friendIdType, String title, String content) {
+    public void senNewMsg(Long thisId, Short thisType, Long frendId, Short friendIdType, String title, String content) {
         Message message = new Message();
         message.setContent(content);
         messageService.add(message);
@@ -233,4 +234,58 @@ public class MyMessageServiceImpl implements MyMessageService {
         }
         myMessageDao.addUserMessage(userMessage);
     }
+
+    public void sendMsg(Short msgType, Short senderType, Long senderId, Short receiverType, Long receiverId, String title, String content) {
+        Message message = new Message();
+        message.setContent(content);
+        messageService.add(message);
+        MyMessage userMessage = new MyMessage();
+        userMessage.setMsgId(message.getId());
+        userMessage.setMsgType(msgType);
+        userMessage.setTitle(title);
+        userMessage.setSenderId(senderId);
+
+        userMessage.setSenderType(senderType);
+
+        userMessage.setReceiverId(receiverId);
+
+        userMessage.setReceiverType(receiverType);
+
+        if (myMessageDao.addUserMessage(userMessage) == 0) {
+            throw new RuntimeException("发送消息失败！");
+        }
+    }
+
+
+    @Override
+    public void sendNewMsgWriterToOrg(Long orgId, String teacherName, String materialName) {
+
+        for (Map<String, Object> item : myMessageDao.getOrgUser(orgId)) {
+            this.sendMsg(new Short("0"), new Short("0"), 0L, new Short("3"), MapUtils.getLong(item, "id"), "系统消息", "贵校老师[" + teacherName + "]提交了《" + materialName + "》申报表，请及时进行资料审核、打印并快递申报纸质表");
+        }
+    }
+
+    @Override
+    public void sendNewMsgWriterToPublisher(Long materialId, String teacherName, String materialName) {
+        List<Map<String, Object>> list = myMessageDao.getMaterialManagers(materialId);
+        for (Map<String, Object> item : list) {
+            this.sendMsg(new Short("0"), new Short("0"), 0L, new Short("1"), MapUtils.getLong(item, "director"), "系统消息", "[" + teacherName + "]提交了《" + materialName + "》申报表，请及时进行资料审核");
+        }
+    }
+
+    @Override
+    public void sendNewMsgOrgToWriter(Long senderOrgId, Long receiverWriterId, String title, String content) {
+        this.sendMsg(new Short("1"), new Short("3"), senderOrgId, new Short("2"), receiverWriterId, title, content);
+    }
+
+    @Override
+    public void sendNewNoticeOrgToWriter(String type, Long receiverWriterId, String schoolName) {
+        if (type.equals("1")) {
+            this.sendMsg(new Short("0"), new Short("0"), 0L, new Short("2"), receiverWriterId, "系统消息", "恭喜！您提交的教师认证资料已通过[" + schoolName + "]管理员审核");
+        } else {
+            this.sendMsg(new Short("0"), new Short("0"), 0L, new Short("2"), receiverWriterId, "系统消息", "抱歉，您提交的教师认证资料已被[" + schoolName + "]管理员退回，请您核对后重试");
+        }
+
+    }
+
 }

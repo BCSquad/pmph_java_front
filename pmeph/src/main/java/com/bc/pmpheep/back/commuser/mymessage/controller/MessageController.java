@@ -441,10 +441,10 @@ public class MessageController extends BaseController {
             Message message = mssageService.get(map1.get("msg_id").toString());
             if (null != message) {
                 String str = message.getContent();
-                String regEx_html = "<[^>]+>"; //定义HTML标签的正则表达式
+           /*     String regEx_html = "<[^>]+>"; //定义HTML标签的正则表达式
                 Pattern p_html = Pattern.compile(regEx_html, Pattern.CASE_INSENSITIVE);
                 Matcher m_html = p_html.matcher(str);
-                str = m_html.replaceAll(""); //过滤html标签
+                str = m_html.replaceAll(""); //过滤html标签*/
                 map1.put("tContent", str);
                 //附件
                 paraMap.put("msg_id", map1.get("msg_id").toString());

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.bc.pmpheep.back.plugin.PageParameter;
+import org.apache.ibatis.annotations.Param;
+
 /**
  * 教师认证dao接口
  * @author Administrator
@@ -30,5 +32,9 @@ public interface TeacherAuthDao {
 	 * @return
 	 */
 	Integer statusModify(Map<String, Object> paraMap);
-	
+
+
+	Map<String, Object> getSchoolInfo(@Param("orgId") String id);
+
+	Map<String, Object> getWriterId(@Param("id") String id);
 }

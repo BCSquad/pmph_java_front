@@ -55,7 +55,7 @@
 
 	<!-- 获取机构用户id和作家用户id -->
 	<select id="findOrgUserAndWriterUser" parameterType="java.util.Map" resultType="java.util.Map">
-		select d.id as receiver_id, 'writerUserId' as type from org_user c join writer_user d on c.org_id = d.org_id where c.id= #{userId} and is_teacher=1
+		select d.id as receiver_id, 'writerUserId' as type from org_user c join writer_user d on c.org_id = d.org_id where c.id= #{userId}
 	</select>
 
 	<!-- 批量插入消息 -->

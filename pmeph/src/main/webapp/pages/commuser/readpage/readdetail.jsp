@@ -362,7 +362,7 @@
                             <div class="longcom">图书长评</div>
                             <div class="writecom" onclick="writeablut()">写书评</div>
                         </div>
-                        <c:forEach items="${longList}" var="list" varStatus="status" begin="1" end="2">
+                        <c:forEach items="${longList}" var="list" varStatus="status">
                             <div class="item">
                                 <div class="item_title">
                                     <div style="float: left;">
