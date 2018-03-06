@@ -313,7 +313,6 @@ public class DataAuditController extends BaseController{
 					paramMap.put("auth_date", date);
 					paramMap.put("writer_id", writer_id);
 					
-					
 					int count = this.dataAuditService.updateDeclarationPass(paramMap);
 					if(count>0){
 						msg = "OK";
