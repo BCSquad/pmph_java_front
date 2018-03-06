@@ -78,6 +78,9 @@
                 <value>/AllMessage/* -> 2</value>
                 <value>/authSendMessage/* -> 2</value> <!--机构管理员发送消息-->
                 <value>/dataaudit/* -> 2</value> <!--教材申报办理-->
+                <value>/declareCount/* -> 2</value>
+                <value>/admininfocontroller/* -> 2</value>
+                <value>/userinfo/toNoAccessToAuthority* -> 2</value>
             </set>
         </property>
     </bean>
