@@ -34,5 +34,12 @@
 
 		<if test="startPara!=null">limit #{startPara},8</if>
 	</select>
-
+    <!--  根据系统消息内容id更改系统消息是否已读 -->
+    <update id="updateIsRead" parameterType="java.util.Map">
+       update user_message set is_read=1 where msg_id=#{mid} and receiver_id=#{userid}
+    </update>
+    <!-- 删除消息 -->
+    <update id="deletemsg" parameterType="java.util.Map">
+        update user_message set is_deleted=1 where msg_id=#{mid} and receiver_id=#{userid}
+    </update>
 </mapper>

@@ -81,34 +81,34 @@ public class ReportProgressServiceImpl implements ReportProgressService {
         List<UserMessageVO> userMessageList = new ArrayList<UserMessageVO>(4);
         List<UserMessageVO> lists =
         reportProgressDao.getUserMessageByMaterialId(userId, materialId);// 取近4条消息
-//        List<String> listString = new ArrayList<String>();
-//        for(UserMessageVO list:lists){
-//        	listString.add(list.getMsgId());
-//        	
-//        }
-//        List<Content> listContent = null;
-//        try {
-//        	listContent = contentService.list(listString);
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			System.out.println("user_message中数据异常，未找到mongon对应消息");
-//		}
-//       
-//        for(UserMessageVO list:lists){
-//        	for(Content content:listContent){
-//        		if(list.getMsgId().equals(content.getId())){
-//        			list.setMsgContent(content.getContent());
-//        		}
-//        	}
-//        }
+        List<String> listString = new ArrayList<String>();
+        for(UserMessageVO list:lists){
+        	listString.add(list.getMsgId());
+        	
+        }
+        List<Content> listContent = null;
+        try {
+        	listContent = contentService.list(listString);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("user_message中数据异常，未找到mongon对应消息");
+		}
+       
+        for(UserMessageVO list:lists){
+        	for(Content content:listContent){
+        		if(list.getMsgId().equals(content.getId())){
+        			list.setMsgContent(content.getContent());
+        		}
+        	}
+        }
 //        if (lists.size() == 4) {
 //            userMessageList.addAll(lists);
 //        } else {
-         /*   Declaration declaration = this.getDeclarationByMaterialIdAndUserId(userId, materialId);
+            Declaration declaration = this.getDeclarationByMaterialIdAndUserId(userId, materialId);
             if (ObjectUtil.notNull(declaration)) {
                 userMessageList.add(new UserMessageVO(materialId, "您的申报已提交，请耐心等待审核...",
                                                       declaration.getGmtCreate()));
-            }*/
+            }
             userMessageList.addAll(lists);
 //        }
         return userMessageList;

@@ -68,9 +68,9 @@
             <div class="bookC_right_name">$!{c.author} &nbsp;&nbsp;/&nbsp;&nbsp; $!{c.publish_date}</div>
             
             #foreach($o in $!{c.commentList})
-           <div id="container">   
-           		<div id="wrap" >$!{o.content}</div>
-            	<div id="read-more"></div>
+           <div class="container">   
+           		<div class= "wrap">$!{o.content}</div>
+            	<div class="read-more"></div>
 	           	<div class="bookC_right_a">
 	                    <div class="time-a">$!{o.gmt_update}</div> 
 	                    #if($!{selfLog}==true && $!{o.is_auth}==false && $!{o.is_long}==false )

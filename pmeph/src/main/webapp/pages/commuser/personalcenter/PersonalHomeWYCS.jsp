@@ -359,7 +359,6 @@ request.setAttribute("currentTime",datetime);
            									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
            									${c.detail.content }					
            								</div>
-           								<div class="${c.detail.img == 1?'success_smile ':'' + c.detail.img == 2?'fail_unhappy ':''}"></div>
            							</div> 
                 				</c:when>
                 				<%-- 8 9 10审 11动态 教材申报 选题申报 图书纠错审核 问卷调查  end --%>
@@ -759,7 +758,7 @@ request.setAttribute("currentTime",datetime);
 	                            <li class="hylb">
 	                                <div class="hytxdiv">
 	                                    <c:if test="${listmyf.avatar=='DEFAULT'||listmyf.avatar==''||listmyf.avatar== NULL}"><img
-	                                            src="${ctx}/statics/image/default_image.png" class="hytp"></c:if>
+	                                            src="${ctx}/statics/image/haoyoutouxiang1.png" class="hytp"></c:if>
 	                                    <c:if test="${listmyf.avatar!='DEFAULT'}"><img src="<%=path %>/image/${listmyf.avatar}.action"
 	                                                                                   class="hytp"></c:if>
 	                                </div>

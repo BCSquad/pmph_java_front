@@ -42,15 +42,24 @@ function loadMore() {
 
                 str += n.title;
 
-                str += "</span><span class='time1'>" + commonTime + "</span></td></tr><tr style='width: 30%'>" +
-                    "<td colspan='2' class='title' style='cursor: pointer;' onclick='showup(" + n.id + ")'>"
-                    + '<input type="hidden" id="messid" value="' + n.id + '"/>'
-                    +'<span class="fixwidth">'+ n.messageContent+'</span>';
-                if (n.is_read == 1) {
-                    str += '<img src="' + contextpath + 'statics/image/readyes.png"  id="readyes"/>'
-                } else {
-                    str += '<img src="' + contextpath + 'statics/image/readno.png"  id="readyes"/>'
+                str += "</span><span class='time1'>" + commonTime + "</span></td></tr><tr style='width: 30%'>";
+                console.log(n);
+                if ((n.msgType==0||n.msgType==1)&& n.material_id==0) {
+	                str += "<td colspan='2' class='title' style='cursor: pointer;' onclick='showup(" + n.id + ")'>"
+	                    + '<input type="hidden" id="messid" value="' + n.id + '"/>'
+	                    +'<span class="fixwidth">'+ n.messageContent+'</span>';
+	                if (n.is_read == 1) {
+	                    str += '<img src="' + contextpath + 'statics/image/readyes.png"  id="readyes"/>';
+	                } else {
+	                    str += '<img src="' + contextpath + 'statics/image/readno.png"  id="readno"/>';
+	                }
                 }
+                if ((n.msgType==0||n.msgType==4)&& n.material_id !=0) {
+	                str += "<td colspan='2' class='title' >"
+	                    + '<input type="hidden" id="messid" value="' + n.id + '"/>'
+	                    +'<span class="fixwidth">'+ n.messageContent+'</span>';
+                }
+                
                 str += "</td><td class='buttonDetail'>";
                 if (n.msgType == 0 && n.material_id != 0) {
                     str += "<div class='buttonAccept'><a href='" + contextpath + "message/noticeMessageDetail.action?materialId=" + n.material_id + "'>查看详情</a></div>";
