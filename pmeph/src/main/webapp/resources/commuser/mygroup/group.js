@@ -107,7 +107,7 @@ $(function(){
 			return ;
 		}
         if (webSocket) {
-		webSocket.send("{senderId:"+$("#userId").val()+",senderType:"+2+",content:'"+content+"',groupId:"+$("#groupId").val()+",sendType:0}");
+            webSocket.send("{senderId:"+$("#userId").val()+",senderType:"+2+",content:'"+content+"',groupId:"+$("#groupId").val()+",sendType:0}");
         }
 		$("#msgContent").val("");
 	}
@@ -447,8 +447,9 @@ $(function(){
                         "<div class='clear'></div> "+
                     "</div> ";
 		}
-		$(".iframe1").append(html);
-		$(".iframe1").scrollTop($($(".iframe1")[0]).height());
+        $(".iframe1").append(html);
+		var a=document.getElementsByClassName("chat_items mine");
+		$(".iframe1").scrollTop(100*a.length);
 	}
 	
 	//转换时间戳的方法
