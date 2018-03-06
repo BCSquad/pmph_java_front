@@ -445,7 +445,7 @@
 							</tr>
 
 							<tr class="sxy-tr">
-								<td colspan="2"><font class="td-font-last">请上传bmp、jpg、gif、jpge、png格式的照片或扫描件</font></td>
+								<td colspan="2"><font class="td-font-last">请上传bmp、jpg、gif、jpeg、png格式的照片或扫描件</font></td>
 							</tr>
 						</table>
 						<img class="cupline" alt=""

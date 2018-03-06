@@ -390,8 +390,8 @@
 								<table class="radio_tb" style="width: 230px;"><tr>
 									<td><input type="radio" name="jc_position_1" value="0" checked="checked"/>无</td>
 					 				<td><input type="radio" name="jc_position_1" value="1" />主编</td>
-									<td><input type="radio" name="jc_position_1" value="2" />编委</td>
-									<td><input type="radio" name="jc_position_1" value="3" />副编委</td>
+									<td><input type="radio" name="jc_position_1" value="2" />副主编</td>
+									<td><input type="radio" name="jc_position_1" value="3" />编委</td>
 								</tr></table>
 								<input type="hidden" name="jc_position" value="jc_position_1" />
 							</td>
@@ -610,7 +610,7 @@
 		<div class="sbxq_item" id="zjkyqk">
 			<div>
 				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">作家科研情况</span>
+				<span class="tsxz_title">科研情况</span>
 				<span class="tsxz_ts" id="zjkyqk_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
 				<span class="tsxz_xt" id="zjkyqk_xt" >（选填）</span>
 			</div>

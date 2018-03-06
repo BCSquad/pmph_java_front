@@ -75,7 +75,7 @@
 							<tr>
 								<c:if test="${materialMap.is_multi_position =='1'}">
 									<td height="30px;"><input type="checkbox" name="zw_1_${status.count}" value="4" ${list.pos_a=='1'?'checked':'' }/>主编</td>
-									<td><input type="checkbox" name="zw_1_${status.count}" value="2" ${list.pos_b=='1'?'checked':'' }/>副编委</td>
+									<td><input type="checkbox" name="zw_1_${status.count}" value="2" ${list.pos_b=='1'?'checked':'' }/>副主编</td>
 									<td><input type="checkbox" name="zw_1_${status.count}" value="1" ${list.pos_c=='1'?'checked':'' }/>编委</td>
 									<c:if test="${materialMap.is_digital_editor_optional =='1'}">
 									<td><input type="checkbox" name="zw_1_${status.count}" value="8" ${list.pos_d=='1'?'checked':'' }/>数字编委</td>
@@ -83,7 +83,7 @@
 								</c:if>
 								<c:if test="${materialMap.is_multi_position !='1'}">
 									<td height="30px;"><input type="radio" name="zw_1_${status.count}" value="4" ${list.preset_position=='4'?'checked':'' }/>主编</td>
-									<td><input type="radio" name="zw_1_${status.count}" value="2" ${list.preset_position=='2'?'checked':'' }/>副编委</td>
+									<td><input type="radio" name="zw_1_${status.count}" value="2" ${list.preset_position=='2'?'checked':'' }/>副主编</td>
 									<td><input type="radio" name="zw_1_${status.count}" value="1" ${list.preset_position=='1'?'checked':'' }/>编委</td>
 									<c:if test="${materialMap.is_digital_editor_optional =='1'}">
 									<td><input type="radio" name="zw_1_${status.count}" value="8" ${list.preset_position=='8'?'checked':'' }/>数字编委</td>
@@ -507,7 +507,7 @@
 									<td><input type="radio" name="jc_position_a" value="0" checked="checked"/>无</td>
 									<td><input type="radio" name="jc_position_a" value="1" />主编</td>
 									<td><input type="radio" name="jc_position_a" value="2" />编委</td>
-									<td><input type="radio" name="jc_position_a" value="3" />副编委</td>
+									<td><input type="radio" name="jc_position_a" value="3" />副主编</td>
 								</tr></table>	
 								<input type="hidden" name="jc_position" value="jc_position_a" />
 							</td>
@@ -528,8 +528,8 @@
 									<table class="radio_tb" style="width: 230px;"><tr>
 										<td><input type="radio" name="jc_position_${status.count}" value="0" ${list.position=='0'?'checked':'' }/>无</td>
 										<td><input type="radio" name="jc_position_${status.count}" value="1" ${list.position=='1'?'checked':'' }/>主编</td>
-										<td><input type="radio" name="jc_position_${status.count}" value="2" ${list.position=='2'?'checked':'' }/>编委</td>
-										<td><input type="radio" name="jc_position_${status.count}" value="3" ${list.position=='3'?'checked':'' }/>副编委</td>
+										<td><input type="radio" name="jc_position_${status.count}" value="2" ${list.position=='2'?'checked':'' }/>副主编</td>
+										<td><input type="radio" name="jc_position_${status.count}" value="3" ${list.position=='3'?'checked':'' }/>编委</td>
 									</tr></table>		
 									<input type="hidden" name="jc_position" value="jc_position_${status.count}" />
 								</td>
@@ -903,7 +903,7 @@
 		<div class="sbxq_item" id="zjkyqk">
 			<div>
 				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">作家科研情况</span>
+				<span class="tsxz_title">科研情况</span>
 				<span class="tsxz_ts" id="zjkyqk_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
 				<span class="tsxz_xt" id="zjkyqk_xt" >（选填）</span>
 			</div>
@@ -987,9 +987,9 @@
 						 <tr>
 							<td><input class="cg_input" name="zb_monograph_name" id="zb_monograph_name" value="" style="width: 300px;" placeholder="教材名称" maxlength="16"/></td>
 							<td style="color: #333333;">
-								<table class="radio_tb" style="width: 100px;"><tr>
-									<td><input type="radio" name="is_self_paid_a" value="0" ${list.is_self_paid=='0'?'checked':'' }/>自费</td>
-									<td><input type="radio" name="is_self_paid_a" value="1" ${list.is_self_paid=='1'?'checked':'' }/>公费</td>
+								<table class="radio_tb" style="width: 140px;"><tr>
+									<td><input type="radio" name="is_self_paid_a" value="0" checked="checked"/>自费</td>
+									<td><input type="radio" name="is_self_paid_a" value="1" />公费</td>
 								</tr></table>
 								<input type="hidden" name="is_self_paid" value="is_self_paid_a" />
 							</td>
@@ -1315,6 +1315,24 @@
 		</form>
 	</div>
 </div>
+
+<!-- 退回原因显示悬浮框 -->
+ <div class="bookmistake" id="return_cause_div">
+         <div class="apache">
+             <div class="mistitle">退回原因:</div>
+             <div class="xx" onclick="$('#return_cause_div').fadeOut(500);"></div>
+         </div>
+         
+         <div class="info">
+         	<input id="return_cause_hidden" type="hidden" value="${return_cause }">
+             <textarea class="misarea" disabled="disabled">${return_cause }</textarea>
+         </div>
+   
+         <div class="">
+             <button class="btn" type="button" onclick="$('#return_cause_div').fadeOut(500);">确认</button>
+         </div>
+ </div>
+
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
 </html>

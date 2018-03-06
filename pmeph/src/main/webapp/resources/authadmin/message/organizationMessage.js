@@ -46,8 +46,6 @@ function loadMore(){
 }
 
 //点击显示系统消息
-function system(str,name,time) {
-    if(str!=''&&str!=''){
         $.ajax({
             type:"post",
             url:contextpath+"AllMessage/msg.action?mid="+str,
@@ -87,3 +85,19 @@ function delmsg(id){
         	  }
           }});
 }
+//时间格式化
+function formatDate(value) {
+    if (value) {
+        Number.prototype.padLeft = function (base, chr) {
+            var len = (String(base || 10).length - String(this).length) + 1;// 获取value值的长度，如果长度大于0，就创建一个同等长度的数组
+            return len > 0 ? new Array(len).join(chr || '0') + this : this;
+        }
+        var d = new Date(value), // 创建一个当前日期对象d
+            dformat = [d.getFullYear(),// 把年格式化填充
+                    (d.getMonth() + 1).padLeft(),// 把月格式化填充
+                    d.getDate().padLeft()].join('-') + // 把日格式化填充
+                ' ' + [d.getHours().padLeft(),// 把小时格式化填充
+                    d.getMinutes().padLeft(),// 把分钟格式化填充
+                    d.getSeconds().padLeft()].join(':');// 把秒格式化填充
+        return dformat;// 最后返回格式化好的日期和时间
+    }

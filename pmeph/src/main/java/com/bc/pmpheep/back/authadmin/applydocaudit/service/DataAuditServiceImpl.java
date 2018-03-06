@@ -325,7 +325,13 @@ public class DataAuditServiceImpl implements DataAuditService {
 			// TODO Auto-generated method stub
 			return dataAuditDao.queryRwsBook(map);
 		}
-
-
+@Override
+		public Map<String, Object> queryMoocdigital(Map<String, Object> map) {
+			return this.dataAuditDao.queryMoocdigital(map);
+		}
+		@Override
+		public Map<String, Object> queryIntention(Map<String, Object> map) {
+			return this.dataAuditDao.queryIntention(map);
+		}
 
 }

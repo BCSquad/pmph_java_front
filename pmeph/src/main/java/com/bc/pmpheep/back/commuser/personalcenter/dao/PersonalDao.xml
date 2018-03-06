@@ -188,6 +188,79 @@
 	<select id="ListAllBookJoin" resultMap="BaseResultMap"
 		parameterType="PageParameter">
 		SELECT
+		count(b.id) AS exmember,
+		group_concat(
+			DISTINCT concat_ws(
+				'_/_',
+				tb.id,
+				tb.textbook_name,
+				tb.is_locked
+			) SEPARATOR '_,_'
+		) AS textbook_list_str,
+		c.online_progress AS online_progress,
+		a.is_all_textbook_published,
+		a.is_force_end,
+		c.is_staging,
+		a.deadline AS age_deadline,
+		a.material_name,
+		a.id AS material_id,
+		(
+			TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)
+		) AS datebase,
+		count(DISTINCT c.id) AS iamin,
+		c.id AS declaration_id,
+		c.return_cause,
+		dp.id AS notNullIfFirstManager,
+		dp.rank,
+		dp.chosen_position,
+		dp.textbook_id
+	FROM
+		material a 
+	LEFT JOIN declaration c ON a.id = c.material_id AND c.user_id = #{parameter.logUserId} <!-- 登录人自己的申报 -->
+	<!-- 登录人自己已经被公布的申报 排除编委 即只查询主编副主编 决定是否有权限查看编委遴选 -->
+	LEFT JOIN dec_position_published dp ON c.id = dp.declaration_id AND dp.chosen_position NOT IN (0, 1, 8, 9)
+	LEFT JOIN textbook tb ON tb.id = dp.textbook_id
+	LEFT JOIN declaration b ON a.id = b.material_id
+	AND b.online_progress != 0 
+	WHERE
+		a.is_deleted = '0'
+	AND a.is_published = '1'
+	AND (
+		a.is_public = '1'
+		OR (
+			a.is_public = '0'
+			AND EXISTS (
+				SELECT
+					*
+				FROM
+					writer_user u
+				JOIN material_org o ON o.org_id = u.org_id
+				WHERE
+					u.id = #{parameter.logUserId}
+				AND a.id = o.material_id
+			)
+		)
+	)
+	<if test="parameter.s!=null and parameter.s!= ''">AND c.id is not null </if>
+	<if test="parameter.is_staging!=null and parameter.is_staging!= ''">AND c.is_staging =#{parameter.is_staging}</if>
+	<if
+		test="parameter.online_progress!=null and parameter.online_progress!= ''">AND c.online_progress in ${parameter.online_progress}</if>
+	<if test="parameter.bookname!=null and parameter.bookname!= ''">AND a.material_name like
+		CONCAT('%',#{parameter.bookname},'%')</if>
+	<if test="parameter.dateinfo!=null and parameter.dateinfo ==1 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &lt;= 0
+		and a.is_all_textbook_published = 0 and a.is_force_end = 0 )
+	</if>
+	<if test="parameter.dateinfo!=null and parameter.dateinfo ==2 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &gt; 0
+		or a.is_all_textbook_published = 1 or a.is_force_end = 1 )
+	</if>
+	GROUP BY
+		(a.id)
+
+		
+		
+		
+		limit ${start},${pageSize}
+		<!-- SELECT
 		group_concat(distinct
 		concat_ws('_/_',tb.id,tb.textbook_name,tb.is_locked) SEPARATOR '_,_')
 		as textbook_list_str,
@@ -215,23 +288,23 @@
 		o.material_id
 		left join writer_user u on u.id = #{parameter.logUserId}
 		LEFT JOIN declaration b ON a.id = b.material_id and b.online_progress
-		!= 0 <!-- 统计有多少人提交了申报（报名人数） -->
-		LEFT JOIN declaration c ON a.id = c.material_id and c.user_id = <!-- 登录人自己的申报 -->
-		#{parameter.logUserId} <!-- and c.online_progress != 2 -->
-		<!-- 登录人自己已经被公布的申报 排除编委 即只查询主编副主编 决定是否有权限查看编委遴选 -->
+		!= 0 统计有多少人提交了申报（报名人数）
+		LEFT JOIN declaration c ON a.id = c.material_id and c.user_id = 登录人自己的申报
+		#{parameter.logUserId} and c.online_progress != 2
+		登录人自己已经被公布的申报 排除编委 即只查询主编副主编 决定是否有权限查看编委遴选
 		LEFT JOIN dec_position_published dp on c.id = dp.declaration_id and
 		dp.chosen_position
 		not in (0,1,8,9)
 		left join textbook tb on tb.id =
 		dp.textbook_id
-		<!-- in (4,12) and dp.rank=1 -->
+		in (4,12) and dp.rank=1
 
 		WHERE
 		a.is_deleted = '0'
 		AND ((a.is_public = '0' and o.org_id =
 		u.org_id) or (a.is_public = '1'))
 		AND a.is_published = '1'
-		<!-- AND b.online_progress not in (2) -->
+		AND b.online_progress not in (2)
 		<if test="parameter.s!=null and parameter.s!= ''">AND c.id is not null </if>
 		<if test="parameter.is_staging!=null and parameter.is_staging!= ''">AND c.is_staging =#{parameter.is_staging}</if>
 		<if
@@ -246,12 +319,52 @@
 		</if>
 		GROUP BY
 		(a.id)
-		limit ${start},${pageSize}
+		limit ${start},${pageSize} -->
 	</select>
 
 	<select id="queryMyBooksJoinCount" resultType="Integer"
 		parameterType="PageParameter">
-		select count(*) from
+		SELECT
+		count(a.id)
+		FROM
+			material a 
+		LEFT JOIN declaration c ON a.id = c.material_id AND c.user_id = #{parameter.logUserId} <!-- 登录人自己的申报 -->
+		<!-- 登录人自己已经被公布的申报 排除编委 即只查询主编副主编 决定是否有权限查看编委遴选 -->
+
+		
+		WHERE
+			a.is_deleted = '0'
+		AND a.is_published = '1'
+		AND (
+			a.is_public = '1'
+			OR (
+				a.is_public = '0'
+				AND EXISTS (
+					SELECT
+						*
+					FROM
+						writer_user u
+					JOIN material_org o ON o.org_id = u.org_id
+					WHERE
+						u.id = #{parameter.logUserId}
+					AND a.id = o.material_id
+				)
+			)
+		)
+		<if test="parameter.s!=null and parameter.s!= ''">AND c.id is not null </if>
+		<if test="parameter.is_staging!=null and parameter.is_staging!= ''">AND c.is_staging =#{parameter.is_staging}</if>
+		<if
+			test="parameter.online_progress!=null and parameter.online_progress!= ''">AND c.online_progress in ${parameter.online_progress}</if>
+		<if test="parameter.bookname!=null and parameter.bookname!= ''">AND a.material_name like
+			CONCAT('%',#{parameter.bookname},'%')</if>
+		<if test="parameter.dateinfo!=null and parameter.dateinfo ==1 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &lt;= 0
+			and a.is_all_textbook_published = 0 and a.is_force_end = 0 )
+		</if>
+		<if test="parameter.dateinfo!=null and parameter.dateinfo ==2 ">AND ((TO_DAYS(NOW()) - TO_DAYS(a.actual_deadline)) &gt; 0
+			or a.is_all_textbook_published = 1 or a.is_force_end = 1 )
+		</if>
+		
+		<!-- select count(*) from
 		(
 		SELECT
 		a.id
@@ -261,7 +374,7 @@
 		on a.id = o.material_id
 		left join writer_user u on u.id =
 		#{parameter.logUserId}
-		<!-- LEFT JOIN declaration b ON a.id = b.material_id -->
+		LEFT JOIN declaration b ON a.id = b.material_id
 		LEFT JOIN declaration c ON a.id = c.material_id and c.user_id =
 		#{parameter.logUserId} and c.online_progress != 2
 		WHERE
@@ -270,7 +383,7 @@
 		AND ((a.is_public = '0' and o.org_id = u.org_id) or (a.is_public =
 		'1'))
 		AND a.is_published = '1'
-		<!-- AND b.online_progress not in (2) -->
+		AND b.online_progress not in (2)
 		<if test="parameter.s!=null and parameter.s!= ''">AND c.id is not null </if>
 		<if test="parameter.is_staging!=null and parameter.is_staging!= ''">AND c.is_staging =#{parameter.is_staging}</if>
 		<if
@@ -285,7 +398,7 @@
 		</if>
 		GROUP BY
 		(a.id)
-		)t
+		)t -->
 	</select>
 
 

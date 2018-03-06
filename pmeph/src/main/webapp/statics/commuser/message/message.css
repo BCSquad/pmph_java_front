@@ -549,7 +549,7 @@ a {
 }
 
 .bookmistake {
-    width: 900px;
+    width: 910px;
     /* height: 309px; */
     background-color: #FFFFFF;
     display: none;
@@ -604,7 +604,7 @@ a {
     margin-left: 20px;
     padding: 5px;
     resize: vertical;
-    max-height: 350px;
+/*    max-height: 350px;*/
 }
 
 .labell {
@@ -630,10 +630,36 @@ a {
 }
 .fixwidth{
     max-width: 800px;
-    height: 18px;
+    height: 34px;
     overflow: hidden;
     display: inline-block;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+	text-align: center;
+	line-height: 24px;
 }
+.fixwidth  p{ 
+	 max-width: 800px;
+	 margin: 0px;
+	float:left; 
+}
+
+#readyes{
+	float: left;
+	display: block;
+	margin: 5px;
+	clear: right;
+}
+
+#readno{
+	float: left;
+	display: block;
+	margin: 5px;
+	clear: right;
+}
+
+
+
 .listContent a {
     text-decoration: none;
     color: #03717b;

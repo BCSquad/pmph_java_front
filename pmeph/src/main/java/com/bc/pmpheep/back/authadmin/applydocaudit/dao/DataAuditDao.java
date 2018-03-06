@@ -131,5 +131,10 @@ public interface DataAuditDao {
 			public List<Map<String,Object>> queryAcadereward(Map<String,Object> map);
 			//人卫社教材编写情况
 			public List<Map<String,Object>> queryRwsBook(Map<String,Object> map);
-
+		
+			//人卫慕课、数字教材编写情况
+			public Map<String,Object> queryMoocdigital(Map<String, Object> map);
+			
+			//内容意向表情况
+			public Map<String,Object> queryIntention(Map<String, Object> map);
 }

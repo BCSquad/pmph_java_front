@@ -18,12 +18,7 @@ public interface WriterArticleDao {
 		 * @return
 		 */
 		int updateDelWriter(Map<String, Object> map);
-		
-		/**
-		 * 插入文章封面信息
-		 * @param map
-		 */
-		void insertArticleCover(Map map);
+
 		
 		/**
 		 * 更新文章封面信息

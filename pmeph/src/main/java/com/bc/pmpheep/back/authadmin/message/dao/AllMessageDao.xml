@@ -38,7 +38,24 @@ UNION ALL
 			DATE_FORMAT(a.gmt_create,'%Y-%m-%d %h:%s') AS TIME ,
 			a.title AS title, msg_id,a.is_read as isread
 		FROM
-			user_message a
+		(
+		SELECT
+		DATE_FORMAT(
+		a.gmt_create,
+		'%Y-%m-%d %h:%s'
+		) AS TIME,
+		(CASE WHEN A.sender_type='0' THEN '系统消息' WHEN A.sender_type='1' THEN A.title END ) title,
+		(CASE WHEN A.sender_type='0' THEN 'DEFAULT' WHEN A.sender_type='1' THEN r1.avatar END ) avatar,
+		msg_id,
+		a.id
+		FROM
+		user_message a
+		LEFT JOIN writer_user s2 ON a.sender_id = s2.id
+		AND a.sender_type = 2
+		LEFT JOIN org_user s3 ON a.sender_id = s3.id
+		AND a.sender_type = 3
+		LEFT JOIN pmph_user r1 ON a.receiver_id = r1.id
+		AND a.sender_type = 1
 		WHERE
 			receiver_type = 3
 		and is_deleted=0
