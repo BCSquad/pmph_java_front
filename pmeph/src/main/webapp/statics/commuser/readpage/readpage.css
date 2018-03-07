@@ -584,12 +584,6 @@ ul li {
     color: white;
 }
 
-.recommend{
-    float: left;
-    width: 385px;
-    height: 400px;
-}
-
 .re_1{
     width: 308px;
     height: 129px;
@@ -640,5 +634,3 @@ ul li {
     font-size: 24px;
     color: #ffffff;
 }
-
-
