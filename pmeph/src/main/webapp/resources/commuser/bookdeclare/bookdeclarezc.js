@@ -99,6 +99,9 @@ function del_tr(trId){
 function buttAdd(type){
 	checkLb();
 	if(checkNull(jsonStr)){
+        //避免重复点击
+        document.getElementById('buzc').onclick=function(){window.message.warning("请不要重复点击");};
+        document.getElementById('butj').onclick=function(){window.message.warning("请不要重复点击");};
 		$.ajax({
 			type: "POST",
 			url:contextpath+'bookdeclare/doBookdeclareZc.action?stype='+type,
