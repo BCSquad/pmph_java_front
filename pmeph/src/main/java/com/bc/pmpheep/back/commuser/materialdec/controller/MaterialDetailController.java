@@ -562,7 +562,7 @@ public class MaterialDetailController extends BaseController{
 			//Map<String, Object> materialMap = this.mdService.queryMaterialbyId(material_id);
 			WriterUserTrendst wut = new WriterUserTrendst(userMap.get("id").toString(), 8, material_id);
 			wut.setDetail("提交教材申报", userMap.get("realname").toString()+" 提交了教材申报《"+materialMap.get("material_name").toString()+"》。", 0);
-			personalService.saveUserTrendst(wut);//教材申报提交 生成动态
+			personalService.saveUserTrendst(wut);//教材申报提交 生成动态 被覆盖两次了
 		}
 		
 		
