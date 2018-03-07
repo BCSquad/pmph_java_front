@@ -146,6 +146,9 @@ table tbody tr:nth-child(even) {
     border-radius: 2px;
 }
 
+/* input::-ms-clear{display: none;} */
+
+
 
 
 

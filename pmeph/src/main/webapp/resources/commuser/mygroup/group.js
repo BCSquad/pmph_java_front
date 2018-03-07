@@ -55,7 +55,7 @@ $(function(){
 	    //接受来自服务器的消息
 	    //...
 	    console.log("Socket新消息:"+event.data);
-	    var data = $.parseJSON(event.data); 
+	    var data = $.parseJSON(event.data);  
 	    var sender = 2 ; //他人的
 	    if(data.senderType == 0 || data.senderId == 0 ){//系统消息
 	    	sender = 0; 

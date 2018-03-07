@@ -52,6 +52,7 @@ a{
     clear: both;
     overflow: hidden;
     vertical-align: middle;
+    cursor: pointer;
 }
 .message-list .item .item-img{
     width: 70px;
@@ -87,6 +88,9 @@ a{
     font-size: 14px;
     line-height: 24px;
     cursor: pointer;
+    width: 900px;
+    overflow: hidden;
+    height: 24px;
 }
 
 .message-list  .load-more{
@@ -102,16 +106,17 @@ a{
 }
 
 .bookmistake {
-    width: 426px;
+    width: 910px;
     /* height: 309px; */
     background-color: #FFFFFF;
     display: none;
-    position: fixed;
-    left: 35%;
-    top: 30%;
-    box-shadow: 0px 0px 5px #888888;
-    border-radius: 5px;
-    z-index: 999;
+    padding: 15px 20px;
+    /* position: fixed;*/
+    /*  left: 35%;
+      top: 30%;
+      box-shadow: 0px 0px 5px #888888;
+      border-radius: 5px;
+     z-index: 999;*/
 }
 
 .apache {
@@ -144,9 +149,19 @@ a{
 .info {
     width: 426px;
     /* height: 103px; */
-    float: left;
+    /*    float: left;*/
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.misarea {
+    width: 880px;
+    min-height: 75px;
+    /* border: 1px solid #E0E0E0;*/
+    margin-left: 20px;
+    padding: 5px;
+    resize: vertical;
+    /*    max-height: 350px;*/
 }
 
 .labell {
@@ -157,17 +172,7 @@ a{
     font-size: 14px;
 }
 
-.misarea {
-    width: 374px;
-    height: 75px;
-    border: 1px solid #E0E0E0;
-    margin-left: 20px;
-    padding: 5px;
-    resize: vertical;
-    max-height: 350px;
-}
-
-.listContent{
+.listContent {
     margin-top: 10px;
     font-family: MicrosoftYaHei;
     font-size: 14px;
@@ -178,4 +183,10 @@ a{
     width: 88%;
     float: left;
     height: auto;
+    margin-left: 20px;
+}
+.deltag{
+	background-image: url(../../image/close.png);
+	background-repeat: no-repeat;
+	background-position: 0px 4px;
 }

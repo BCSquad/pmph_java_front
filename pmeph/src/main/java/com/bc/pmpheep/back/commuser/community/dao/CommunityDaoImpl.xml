@@ -118,7 +118,7 @@
      <select id="queryVidos" parameterType="map" resultType="java.util.Map">
          select 
            bv.title,bv.cover,bv.file_name,bv.gmt_create,bv.clicks
-         from book_vedio bv 
+         from book_video bv 
          left join book b on bv.book_id=b.id   
          left join textbook  tb on tb.isbn=b.isbn
          where tb.material_id=#{materialId} and is_auth=1
@@ -129,7 +129,7 @@
      <select id="queryVidoCount" parameterType="map" resultType="int">
          select 
            count(1)
-         from book_vedio bv 
+         from book_video bv 
          left join book b on bv.book_id=b.id   
          left join textbook  tb on tb.isbn=b.isbn
          where tb.material_id=#{materialId} and is_auth=1
