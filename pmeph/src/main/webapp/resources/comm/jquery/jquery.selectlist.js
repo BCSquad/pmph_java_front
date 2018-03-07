@@ -97,7 +97,7 @@
                 tempClassNameArray = [classNameArray[0]];
                 for (var i = 1; i < classNameArray.length; i++) {
                     if (classNameArray[i] !== tempClassNameArray[tempClassNameArray.length - 1]) {
-                        if(classNameArray[i]!='required'){
+                        if (classNameArray[i] != 'required') {
                             tempClassNameArray.push(classNameArray[i]);
                         }
 
@@ -324,7 +324,7 @@
                     }
                 },
                 'max-height': that.setStyleProperty(that.settings.showMaxHeight) + 'px',
-                'z-index': that.settings.zIndex+20
+                'z-index': that.settings.zIndex + 20
             });
 
             //设置设置模拟选择列表选项外层样式
@@ -366,6 +366,15 @@
 
                 if (that.settings.fiter) {
                     $(selectID).children(".select-button").bind('input propertychange', function () {
+                        if (!!window.ActiveXObject || "ActiveXObject" in window) {//IE浏览器
+                            $(this).data("triggerNum", -1);
+                        } else {
+                            $(this).data("triggerNum", 0);
+                        }
+                        $(this).data("triggerNum", $(this).data("triggerNum") + 1);
+                        if ($(this).data("triggerNum") < 1) {
+                            return;
+                        }
                         var $that = $(this);
                         console.log($that.val());
                         if ($.trim($that.val()) == '' || $that.val() == null) {
@@ -501,27 +510,27 @@
                 })
 
                 $(document).on('click', function () {
-                	//$(this).children(".select-button").val("");
-                	
+                    //$(this).children(".select-button").val("");
+
                     $(this).find('.select-list').slideUp(showSpeed);
                     if ($('.select-wrapper').hasClass('focus')) {
                         $('.select-wrapper').removeClass('focus');
                         var selectFixed = false;
-                        selectItem.each(function(i,n){
-                        	var $t = $(this);
-                        	if($t.html()==$('.select-button').val()){
-                        		$('input[name="'+selectName+'"]').val($t.attr("data-value"));
-                        		selectItem.removeClass("selected");
-                        		$t.addClass("selected");
-                        		selectFixed = true;
-                        		return true;
-                        	}
+                        selectItem.each(function (i, n) {
+                            var $t = $(this);
+                            if ($t.html() == $('.select-button').val()) {
+                                $('input[name="' + selectName + '"]').val($t.attr("data-value"));
+                                selectItem.removeClass("selected");
+                                $t.addClass("selected");
+                                selectFixed = true;
+                                return true;
+                            }
                         });
                         if (!selectFixed) {
-                        	$('input[name="'+selectName+'"]').val("");
-                        	selectItem.removeClass("selected");
-						}
-                        
+                            $('input[name="' + selectName + '"]').val("");
+                            selectItem.removeClass("selected");
+                        }
+
                     }
                 })
 

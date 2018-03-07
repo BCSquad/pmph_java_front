@@ -51,7 +51,7 @@
                <c:forEach items="${artlist }" var="list">
                 <div class="articleOneList">
                     <div class="articleLeftPicture">
-                        <img class="articlePictureSize" src="${list.imgpath}">
+                        <img class="articlePictureSize" src="${ctx}/${list.imgpath}">
                     </div>
                     <div class="articleRightContent">
                         <div class="articleUpDiv">
