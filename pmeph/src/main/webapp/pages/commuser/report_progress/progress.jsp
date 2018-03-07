@@ -75,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                         <div class="img_mid">
 			                            <div class="picture_mid1"></div>
 			                            <div class="picture_bom">
-			                                <span class="span_bom_left" style="color: #999999">申报单位审核中</span>
+			                                <span class="span_bom_left" style="color: #999999">申报单位</span>
 			                                <img   class="img_bom_right"  src="${ctx}/statics/image/shenhezhong.png" style="width:52px;">
 			                            </div>
 			                        </div>
