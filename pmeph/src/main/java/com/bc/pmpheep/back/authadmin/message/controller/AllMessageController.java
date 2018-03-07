@@ -95,11 +95,11 @@ public class AllMessageController extends BaseController {
 	public Map<String,Object> msg(HttpServletRequest request){
 		Map<String,Object> map=new HashMap<>();
 		Message massage=messageService.get(request.getParameter("mid"));
-		int count=allMessageServiceImpl.updateIsRead(request.getParameter("mid"));
-		String isread="no";
-		if(count>0){
-			isread="yes";
-		}
+//		int count=allMessageServiceImpl.updateIsRead(request.getParameter("mid"));
+//		String isread="no";
+//		if(count>0){
+//			isread="yes";
+//		}
 		String regEx_html="<[^>]+>";
 		Pattern p_html=Pattern.compile(regEx_html,Pattern.CASE_INSENSITIVE);
 		Matcher m_html=p_html.matcher(massage.getContent());
@@ -116,13 +116,13 @@ public class AllMessageController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> delmsg(HttpServletRequest req){
 		 Map<String, Object> user = getUserInfo();
-		 int count=allMessageServiceImpl.deletemsg(req.getParameter("mid"));
-		 String isdel="no";
-		 if(count==1){
-			 isdel="yes";
-		 }
+//		 int count=allMessageServiceImpl.deletemsg(req.getParameter("mid"));
+//		 String isdel="no";
+//		 if(count==1){
+//			 isdel="yes";
+//		 }
 		 Map<String,Object> map=new HashMap<String, Object>();
-		 map.put("isdel", isdel);
+//		 map.put("isdel", isdel);
 		return map;
 	}
 	
