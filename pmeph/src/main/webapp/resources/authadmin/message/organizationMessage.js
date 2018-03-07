@@ -27,7 +27,8 @@ function loadMore(){
                     '<span class="time">' + n.TIME + '</span>' +
                     ' </p>' +
                     '<div class="text" id="txt'+n.id+'">' + n.msg_content +
-                    (n.isread==true?'<img src="'+contextpath+'/statics/image/readyes.png"  id="isread'+n.id+'"/>':'') +'</div>' +
+                    (n.isread==true?'<img src="'+contextpath+'/statics/image/readyes.png"  id="readyes'+n.id+'"/>':'') +
+                    (n.isread==false?'<img src="'+contextpath+'/statics/image/readno.png"  id="readno'+n.id+'"/>':'') +'</div>' +
             '</div>'+
             (n.title=='系统消息'?'<div style="float:left;color: #999999;font-size: 14px;height:20px;margin-top: 45px;" onclick="delmsg(\''+n.id+'\')">'+
                     '<span style="width:20px;height:20px;float:left;" class="deltag"></span>'+
@@ -76,9 +77,13 @@ function system(str, name, time) {
                     content: $("#bookmistake")
                 });
                 
-                var obj= document.getElementById('isread'+str);
+                var obj= document.getElementById('readyes'+str);
+                var readno=document.getElementById('readno'+str);
                 if(!obj&&json.isread=="yes"){
-                  	$("#txt"+json.id).append('&nbsp;&nbsp;<img src="'+contextpath+'/statics/image/readyes.png"  id="isread'+str+'"/>');
+                	if(readno){
+                		$("#readno"+str).remove();
+                	}
+                  	$("#txt"+json.id).append('&nbsp;&nbsp;<img src="'+contextpath+'/statics/image/readyes.png"  id="readyes'+str+'"/>');
                 }
             }
         });
