@@ -226,6 +226,9 @@ public class DataAuditController extends BaseController{
 			//10.作家教材编写情况表
 			List<Map<String,Object>> jcbxList = new ArrayList<Map<String,Object>>();
 			jcbxList=this.dataAuditService.queryJcbx(queryMap);
+			//人卫社教材编写情况
+			List<Map<String,Object>> rwsList = new ArrayList<Map<String,Object>>();
+			rwsList=this.dataAuditService.queryRwsBook(queryMap);
 			//11.作家科研情况表
 			List<Map<String,Object>> zjkyList = new ArrayList<Map<String,Object>>();
 			zjkyList = this.dataAuditService.queryZjkyqk(queryMap);
@@ -265,6 +268,7 @@ public class DataAuditController extends BaseController{
 			mav.addObject("workList", workList);
 			mav.addObject("steaList", steaList);
 			mav.addObject("jcbjList", jcbjList);
+			mav.addObject("rwsList",rwsList);
 			mav.addObject("gjkcjsList", gjkcjsList);
 			mav.addObject("jcbxList", jcbxList);
 			mav.addObject("gjghjcList", gjghjcList);

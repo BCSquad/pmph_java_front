@@ -167,7 +167,7 @@
                         <div  class="foot">
                             <div style="float:left">
                                 <c:if test="${list.avatar=='DEFAULT'}">
-                                <img src="${ctx}/statics/testfile/mi.png" class="personicon"></c:if>
+                                <img src="${ctx}/statics/image/default_image.png" class="personicon"></c:if>
                 				<c:if test="${list.avatar!='DEFAULT'}">
                 				<img src="${ctx}/image/${list.avatar}.action" class="personicon"></c:if>
                             </div>

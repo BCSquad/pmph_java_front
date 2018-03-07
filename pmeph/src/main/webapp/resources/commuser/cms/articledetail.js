@@ -48,7 +48,7 @@ function changepage(n){
 				str+='<div class="item"><div class="item_title">'
 					+'<div style="float: left;"><img src="';
 					if(n.avatar==''||n.avatar=='DEFAULT'||n.avatar==null){
-						str+=contextpath+'statics/image/rwtx.png';
+						str+=contextpath+'statics/image/default_image.png';
 						
 					}else{
 						str+=contextpath+'image/'+n.avatar+'.action';

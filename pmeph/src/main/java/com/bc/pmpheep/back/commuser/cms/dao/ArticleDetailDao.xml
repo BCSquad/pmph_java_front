@@ -32,7 +32,7 @@
 		when t.author_type =2
 		then c.avatar
 		else
-		'系统' end as avatar,
+		'DEFAULT' end as avatar,
 		t.author_id
 		from cms_content t
 		left

@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.authadmin.message.service.AllMessageServiceImpl;
 import com.bc.pmpheep.general.controller.BaseController;
+import com.mongodb.util.Hash;
 
 
 /** 
@@ -94,8 +95,9 @@ public class AllMessageController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> msg(HttpServletRequest request){
 		Map<String,Object> map=new HashMap<>();
+		Map<String, Object> user = getUserInfo();
 		Message massage=messageService.get(request.getParameter("mid"));
-		int count=allMessageServiceImpl.updateIsRead(request.getParameter("mid"));
+		int count=allMessageServiceImpl.updateIsRead(request.getParameter("mid"),user.get("id").toString());
 		String isread="no";
 		if(count>0){
 			isread="yes";
@@ -105,6 +107,7 @@ public class AllMessageController extends BaseController {
 		Matcher m_html=p_html.matcher(massage.getContent());
 		String msg=m_html.replaceAll("");
 		map.put("msg",msg);
+		map.put("isread", isread);
 		return map;
 	};
 	/**
@@ -116,7 +119,7 @@ public class AllMessageController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> delmsg(HttpServletRequest req){
 		 Map<String, Object> user = getUserInfo();
-		 int count=allMessageServiceImpl.deletemsg(req.getParameter("mid"));
+		 int count=allMessageServiceImpl.deletemsg(req.getParameter("mid"),user.get("id").toString());
 		 String isdel="no";
 		 if(count==1){
 			 isdel="yes";
