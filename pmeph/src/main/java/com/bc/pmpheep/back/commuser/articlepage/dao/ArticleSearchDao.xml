@@ -15,6 +15,7 @@
 		    t.comments,
 		    b.realname,
 		    b.avatar,
+			t.cover,
 		    a.id as cms_user_like
 		    from cms_content t
 		    left join writer_user b on t.author_id=b.id

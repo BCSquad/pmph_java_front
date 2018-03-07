@@ -153,7 +153,7 @@ public interface GroupService {
 	 * @param:
 	 * @return:Boolean
 	 */
-	Boolean isFounderOrisAdmin(String groupId, String memberId) throws CheckedServiceException;
+	String isFounderOrisAdmin(String groupId, String memberId) throws CheckedServiceException;
 	
 	/**
 	 * 
@@ -237,4 +237,12 @@ public interface GroupService {
      * @return
      */
 	Map<String, Object> queryGroupFileByFileId(String id);
+
+	/**
+	 * 判断是否有全向删除文件
+	 * @param s
+	 * @param s1
+	 * @return
+	 */
+	boolean deleteFileAuthority(String s, String s1,Long fileid);
 }

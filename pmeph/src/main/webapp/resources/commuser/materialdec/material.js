@@ -453,10 +453,11 @@ function add_xsjz(){
 	"<td><input class='cg_input' name='xs_org_name' id='xs_org_name_"+num+"' value='' placeholder='学术组织'/></td>"+
 	"<td style='color: #333333;'>"+
 		"<table class='radio_tb' style='width: 220px;'><tr>"+
-			"<td><input type='radio' name='xs_rank_"+num+"' checked='checked' value='1'/>国际</td>"+
+			"<td><input type='radio' name='xs_rank_"+num+"' checked='checked' value='0'/>无</td>"+
+			"<td><input type='radio' name='xs_rank_"+num+"' value='1'/>国际</td>"+
 			"<td><input type='radio' name='xs_rank_"+num+"' value='2'/>国家</td>"+
 			"<td><input type='radio' name='xs_rank_"+num+"' value='3'/>省部</td>"+
-			"<td><input type='radio' name='xs_rank_"+num+"' value='4'/>其他</td>"+
+			"<td><input type='radio' name='xs_rank_"+num+"' value='4'/>市级</td>"+
 		"</tr></table>"+
 		"<input type='hidden' name='xs_rank' value='xs_rank_"+num+"' />"+
 	"<td><input class='cg_input' name='xs_position' id='xs_position_"+num+"' value='' placeholder='职务'/></td>"+
@@ -506,9 +507,9 @@ function add_jpkcjs(str,dim){
 	"<td style='color: #333333;'>"+
 	"<table class='radio_tb' style='width:100%;'><tr>"+
 		"<td><input type='radio' name='gj_type_"+num+"' checked='checked' value='0'/>无</td>"+
-		"<td><input type='radio' name='gj_type_"+num+"' value='1'/>国家</td>"+
-		"<td><input type='radio' name='gj_type_"+num+"' value='2'/>省部</td>"+
-		"<td><input type='radio' name='gj_type_"+num+"' value='3'/>学校</td>"+
+		"<td><input type='radio' name='gj_type_"+num+"' value='1'/>国际</td>"+
+		"<td><input type='radio' name='gj_type_"+num+"' value='2'/>国家</td>"+
+		"<td><input type='radio' name='gj_type_"+num+"' value='3'/>省部</td>"+
 	"</tr></table>"+
 		"<input type='hidden' name='gj_type' value='gj_type_"+num+"' /></td>"+
 	"<td><input class='cg_input' name='gj_note' value='' style='width: 330px;' placeholder='备注'/>" +

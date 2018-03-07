@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.bc.pmpheep.back.util.RouteUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,17 +65,18 @@ public class ArticleCollectionServiceImpl implements ArticleCollectionService {
 			}else{
 				map.put("skip", "articledetail/toPage.action?wid="+map.get("cid"));
 			}
-			Content message=contentService.get((String) map.get("mid"));
-			if(message!=null){
-				List<String> imglist = getImgSrc(message.getContent());
-			    if(imglist!=null&&imglist.size()>0){
-			    	map.put("imgpath", imglist.get(0));
-			    }else{
-			    	map.put("imgpath", "statics/image/articon.png");
-			    }
-			}else{
-				map.put("imgpath", "statics/image/articon.png");
-			}
+//			Content message=contentService.get((String) map.get("mid"));
+//			if(message!=null){
+//				List<String> imglist = getImgSrc(message.getContent());
+//			    if(imglist!=null&&imglist.size()>0){
+//			    	map.put("imgpath", imglist.get(0));
+//			    }else{
+//			    	map.put("imgpath", "statics/image/articon.png");
+//			    }
+//			}else{
+//				map.put("imgpath", "statics/image/articon.png");
+//			}
+			if(map !=null) map.put("imgpath", RouteUtil.articleAvatar(map.get("cover").toString()));
 			
 		 }
 		}

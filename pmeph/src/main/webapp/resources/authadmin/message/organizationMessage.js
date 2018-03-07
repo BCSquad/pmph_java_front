@@ -17,11 +17,11 @@ function loadMore(){
 			$("#startPara").val(startPara);
 			var str= '';
 			$.each(json.list,function(i,n){
-                str += '<div class="item" onclick="system(\'' + n.id + '\',\'' + n.NAME + '\',\'' + n.TIME + '\')">' +
+                str += '<div class="item" id="item'+n.id+'">' +
                     '<div class="item-img">' +
                     '<img src="' + contextpath + n.avatar + '" />' +
                     '</div>' +
-                    '<div class="content" >' +
+                    '<div class="content" onclick="system(\'' + n.id + '\',\'' + n.NAME + '\',\'' + n.TIME + '\')" style="width:1000px">' +
                     ' <p class="title" >' +
                     '<span class="msg">' + n.title + '</span>' +
                     '<span class="time">' + n.TIME + '</span>' +

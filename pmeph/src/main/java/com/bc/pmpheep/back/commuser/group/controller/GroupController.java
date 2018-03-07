@@ -292,14 +292,17 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
     
     @ResponseBody
     @RequestMapping(value = "/deleteFile", method = RequestMethod.GET)
-    public Boolean deleteFile(@RequestParam(value="groupId")Long groupId,@RequestParam(value="id")Long id,@RequestParam(value="fileId")String fileId)  {
+    public String deleteFile(@RequestParam(value="groupId")Long groupId,@RequestParam(value="id")Long id,@RequestParam(value="fileId")String fileId)  {
     	Map<String, Object> map = this.getUserInfo();
     	Long thisId = new Long (String.valueOf(map.get("id")));
+        if(!groupService.deleteFileAuthority(groupId.toString(),thisId.toString(),id)){
+            return "2";
+        }
     	Integer res= groupService.deleteFile(id,groupId,fileId,thisId);
     	if(null != res && 1 == res.intValue()){
-    		return true;
+    		return "0";
 		}else{
-			return false;
+			return "1";
 		}
     }
     

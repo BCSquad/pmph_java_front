@@ -67,7 +67,13 @@ $(function(){
 	                		    (responsebean[i].isPromote?"<div class='items_img'>推荐</div> ":"")+
 	        	                "<div class=\"item1 cutmore\">" +
 	        	                "<a href='"+contextpath+"cmsnotice/noticeMessageDetail.action?id="+responsebean[i].mid+"&&materialId="+responsebean[i].materialId+"&&csmId="+responsebean[i].id+"'>" +responsebean[i].title+"</a></div> "+
-	        	                "<div class=\"item2 cutmore\"><p style='margin:0;height:40px;line-height:20px'>"+(responsebean[i].contentxt==null?"（内容为空）":responsebean[i].contentxt)+"</p></div> "+
+	        	                "<div class=\"item2 cutmore\"><p style='margin:0;height:40px;line-height:20px'>";
+	        	                if(responsebean[i].isMaterialEntry==true){
+	        	                	html+=responsebean[i].notice;
+	        	                }else{
+	        	                	html+=(responsebean[i].contentxt==null || responsebean[i].contentxt==''?"（内容为空）":responsebean[i].contentxt);
+	        	                }
+	        			       html+="</p></div> "+
 	        	                "<div class=\"item3\">  "+
 	        	                     deadline+
 	        	                    "<div style=\"float:right\">发布日期："+formatDate(responsebean[i].gmtCreate,"yyyy.MM.dd")+"</div> "+ 

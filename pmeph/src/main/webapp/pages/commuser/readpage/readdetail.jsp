@@ -236,7 +236,7 @@
                                        poster="${ctx}/image/${list.cover}.action" type="mp4" controls>
                                 </video>--%>
                             <div class="video-a" id="video-${list.id}"
-                                 src="http://120.76.221.250:11000/pmph_vedio/file/${list.file_name}"
+                                 src="http://120.76.221.250/v/play/${list.file_name}"
                                  poster="${ctx}/image/${list.cover}.action" type="mp4">
 
                             </div>
@@ -254,8 +254,9 @@
                                     variable: 'player',
                                     autoplay: false,
                                     /*flashplayer: true,*/
-                                    video: $this.attr("src")/*,
-                                     poster: $this.attr("poster")*/
+                                    video:$this.attr("src"),
+                                    poster: $this.attr("poster")
+
                                 };
                                 var player = new ckplayer(videoObject);
                             })
@@ -271,7 +272,7 @@
                 </div>
                 <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 15px;">
                 <div class="pl_add">
-                    <textarea class="tarea" id="content_book"></textarea>
+                    <textarea class="tarea" id="content_book" onkeyup="javascript:LengthLimit(this,3000);" onblur="javascript:LengthLimit(this,3000);"></textarea>
                     <hr style="border:0.05px solid rgba(180, 239, 205, 0.5);margin-left: 16px;margin-rihgt: 16px;">
                     <div class="star_num">星级评分:</div>
                     <div class="scorestar" id="star">

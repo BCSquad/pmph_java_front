@@ -14,8 +14,12 @@
 		d.realname,
 		d.sex,
 		d.org_name AS work_org_name,
-		o.id as dec_org_id,
-		o.org_name AS dec_org_name,
+		d.org_id as dec_org_id,
+		(case
+		when d.org_id = 0
+		then '人民卫生出版社'
+		else o.org_name
+		end) AS dec_org_name,
 		d.position,
 		(dp.chosen_position NOT IN  (2, 4, 10, 12) and dpp.chosen_position NOT IN  (2, 4, 10, 12)) as editorAvaliable,<!-- 未被选为主编副主编，还可以选编委，控制编委复选框disabled -->
 		d.title,
