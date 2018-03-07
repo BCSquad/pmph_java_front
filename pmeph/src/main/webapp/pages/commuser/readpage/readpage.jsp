@@ -49,7 +49,12 @@
             <div class="op-link">
                 <c:forEach var="ad3" items="${adInfo3.detailList}" varStatus="status">
                     <c:if test="${status.index==0}">
-                        <div class="${status.index==0?'re_1':'re_2'}">
+                        <div class="re_1">
+                            <a href="${adInfo3.url}"><img src="${ctx}/image/${ad3.image}.action" style="width: 310px;height: 130px;border-radius: 5px"></a>
+                        </div>
+                    </c:if>
+                    <c:if test="${status.index==1}">
+                        <div class="re_2">
                             <a href="${adInfo3.url}"><img src="${ctx}/image/${ad3.image}.action" style="width: 310px;height: 130px;border-radius: 5px"></a>
                         </div>
                     </c:if>
