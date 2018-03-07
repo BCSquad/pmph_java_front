@@ -29,7 +29,7 @@
 <div class="body">
 	<div class="content-wrapper">
 		<div class="sbxq_title">
-			<span>个人中心 > 教材申报 > 填写申报表</span>
+			<span>个人中心 > 教材申报 > 修改申报表</span>
 		</div>
 		<!-- 图书选择-->
 		<form id="objForm">
@@ -46,7 +46,7 @@
 				<!-- 是否职位多选 -->
 				<input type="hidden" id="is_multi_position" name="is_multi_position" value="${materialMap.is_multi_position}"/>
 				<span id="tsxz_span1"></span>
-				<span class="tsxz_title">图书选择(
+				<span class="tsxz_title">作家申报职位选择(
 					<c:if test="${materialMap.is_multi_books =='1'}">
 					可以选择多本书籍</c:if>
 					<c:if test="${materialMap.is_multi_books !='1'}">
@@ -209,7 +209,7 @@
 		<div class="sbxq_item" id="zyxxjl">
 			<div>
 				<span id="tsxz_span3"></span>
-				<span class="tsxz_title">主要学习经历</span>
+				<span class="tsxz_title">学习经历</span>
 				<span class="tsxz_ts" id="zyxxjl_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
 				<span class="tsxz_xt" id="zyxxjl_xt">（选填）</span>
 			</div>
@@ -274,7 +274,7 @@
 		<div class="sbxq_item" id="gzjl">
 			<div>
 				<span id="tsxz_span4"></span>
-				<span class="tsxz_title">主要工作经历</span>
+				<span class="tsxz_title">工作经历</span>
 				<span class="tsxz_ts" id="gzjl_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
 				<span class="tsxz_xt" id="gzjl_xt" >（选填）</span>
 			</div>
@@ -333,7 +333,7 @@
 		<div class="sbxq_item" id="jxjl">
 			<div>
 				<span id="tsxz_span5"></span>
-				<span class="tsxz_title">主要教学经历</span>
+				<span class="tsxz_title">教学经历</span>
 				<span class="tsxz_ts" id="jxjl_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
 				<span class="tsxz_xt" id="jxjl_xt" >（选填）</span>
 			</div>
@@ -388,7 +388,18 @@
 				</table>
 			</div>
 		</div>
-		
+		<!--个人成就-->
+		<div class="sbxq_item" id="grcjqk">
+			<div>
+				<span id="tsxz_span9"></span>
+				<span class="tsxz_title">个人成就</span>
+				<span class="tsxz_ts" id="grcj_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_xt" id="grcj_xt" >（选填）</span>
+			</div>
+			<div class="content">
+				<textarea class="text_cl" maxlength="1000"  name="gr_content" id="gr_content" maxlength="1000">${achievementMap.content}</textarea>
+			</div>
+		</div>
 		<!--扩展信息-->					
 		<c:forEach var="zjkzxx" items="${zjkzqkList}" varStatus="status">
 		 	<div class="sbxq_item1">
@@ -416,7 +427,7 @@
 		<div class="sbxq_item" id="xsjz">
 			<div>
 				<span id="tsxz_span10"></span>
-				<span class="tsxz_title">主要学术兼职</span>
+				<span class="tsxz_title">学术兼职</span>
 				<span class="tsxz_ts" id="xsjz_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
 				<span id="xsjz_xt" class="tsxz_xt">（选填）</span>
 			</div>
@@ -492,7 +503,7 @@
 					<thead>
 						<tr>
 							<td width="420px">教材名称</td>
-							<td width="320px">编写职务</td>
+							<td width="260px">编写职务</td>
 							<td width="100px">是否数字编委</td>
 							<td>备注</td>
 							<td width="78px">添加</td>
@@ -503,11 +514,11 @@
 						 <tr>
 							<td><input class="cg_input" maxlength="33" name="jc_material_name" id="jc_material_name" value="" style="width: 360px;" placeholder="教材名称"/></td>
 							<td style="color: #333333;">
-								<table class="radio_tb" style="width: 230px;"><tr>
+								<table class="radio_tb" style="width: 100%;"><tr>
 									<td><input type="radio" name="jc_position_a" value="0" checked="checked"/>无</td>
 									<td><input type="radio" name="jc_position_a" value="1" />主编</td>
-									<td><input type="radio" name="jc_position_a" value="2" />编委</td>
-									<td><input type="radio" name="jc_position_a" value="3" />副主编</td>
+									<td><input type="radio" name="jc_position_a" value="2" />副主编</td>
+									<td><input type="radio" name="jc_position_a" value="3" />编委</td>
 								</tr></table>	
 								<input type="hidden" name="jc_position" value="jc_position_a" />
 							</td>
@@ -518,14 +529,14 @@
 								</tr></table>
 								<input type="hidden" name="jc_is_digital_editor" value="jc_is_digital_editor_a" />
 							</td>
-							<td><input class="cg_input" maxlength="33" name="jc_note" value="" style="width: 230px;" placeholder="备注"/></td>
+							<td><input class="cg_input" maxlength="33" name="jc_note" value="" style="width: 290px;" placeholder="备注"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jccb()"/></td>
 						</tr></c:if>
 						<c:forEach var="list" items="${jcbjList}" varStatus="status">
 							<tr id="jccb_${status.count}">
 								<td><input class="cg_input" maxlength="33" name="jc_material_name" id="jc_material_name_${status.count}" value="${list.material_name}" style="width: 360px;" placeholder="教材名称"/></td>
 								<td style="color: #333333;">
-									<table class="radio_tb" style="width: 230px;"><tr>
+									<table class="radio_tb" style="width: 100%;"><tr>
 										<td><input type="radio" name="jc_position_${status.count}" value="0" ${list.position=='0'?'checked':'' }/>无</td>
 										<td><input type="radio" name="jc_position_${status.count}" value="1" ${list.position=='1'?'checked':'' }/>主编</td>
 										<td><input type="radio" name="jc_position_${status.count}" value="2" ${list.position=='2'?'checked':'' }/>副主编</td>
@@ -540,7 +551,7 @@
 								</tr></table>
 								<input type="hidden" name="jc_is_digital_editor" value="jc_is_digital_editor_${status.count}" />
 							</td>
-								<td><input class="cg_input" maxlength="33" name="jc_note" value="${list.note}" style="width: 230px;" placeholder="备注"/>
+								<td><input class="cg_input" maxlength="33" name="jc_note" value="${list.note}" style="width: 290px;" placeholder="备注"/>
 									<input type="hidden" name="zdjy" value="jc_material_name_${status.count}"/>
 								</td>
 							<td><c:choose>
@@ -553,71 +564,6 @@
 								</c:choose></td>
 							</tr>
 						</c:forEach>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<!--精品课程建设-->
-		<div class="sbxq_item" id="gjjpkcjs">
-			<div>
-				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">精品课程建设情况</span>
-				<span class="tsxz_ts" id="gjjpkcjs_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
-				<span class="tsxz_xt" id="gjjpkcjs_xt" >（选填）</span>
-			</div>
-			<div class="content">
-				<table class="tab_2" id="tab_jpkcjs">
-					<thead>
-						<tr>
-							<td width="350px">课程名称</td>
-							<td width="180px">课程全年课时数</td>
-							<td width="200px">课程级别</td>
-							<td>备注</td>
-							<td width="78px">添加</td>
-						</tr>
-					</thead>
-					<tbody>
-						<c:if test="${empty gjkcjsList[0]}">
-						 <tr>
-							<td><input class="cg_input" maxlength="20" name="gj_course_name" id="gj_course_name" value="" style="width: 300px;" placeholder="课程名称"/></td>
-							<td><input class="cg_input" maxlength="20" name="gj_class_hour" value="" style="width: 130px;" placeholder="课时数"/></td>
-							<td style="color: #333333;">
-								<table class="radio_tb" style="width: 180px;"><tr>
-									<td><input type="radio" name="gj_type_a" value="1" checked="checked"/>国家</td>
-									<td><input type="radio" name="gj_type_a" value="2" />省部</td>
-									<td><input type="radio" name="gj_type_a" value="3" />学校</td>
-								</tr></table>
-								<input type="hidden" name="gj_type" value="gj_type_a" />
-							</td>
-							<td><input class="cg_input" maxlength="20" name="gj_note" value="" style="width: 330px;" placeholder="备注"/>
-							</td>
-							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jpkcjs('tab_jpkcjs',1)"/></td>
-						</tr> </c:if>
-						<c:forEach var="list" items="${gjkcjsList}" varStatus="status">
-							<tr id="jpkcjs_${status.count}">
-								<td><input class="cg_input" maxlength="20" name="gj_course_name" id="gj_course_name_${status.count}" value="${list.course_name}" style="width: 300px;" placeholder="课程名称"/></td>
-								<td><input class="cg_input" maxlength="20" name="gj_class_hour" id="gj_class_hour_${status.count}" value="${list.class_hour}" style="width: 130px;" placeholder="课时数"/></td>
-								<td style="color: #333333;">
-									<table class="radio_tb" style="width: 180px;"><tr>
-										<td><input type="radio" name="gj_type_${status.count}" value="1" ${list.type=='1'?'checked':'' }/>国家</td>
-										<td><input type="radio" name="gj_type_${status.count}" value="2" ${list.type=='2'?'checked':'' }/>省部</td>
-										<td><input type="radio" name="gj_type_${status.count}" value="3" ${list.type=='3'?'checked':'' }/>学校</td>
-									</tr></table>
-									<input type="hidden" name="gj_type" value="gj_type_${status.count}" />
-								</td>
-								<td><input class="cg_input" maxlength="20" name="gj_note" value="${list.note}" style="width: 330px;" placeholder="备注"/>
-									<input type="hidden" name="zdjy" value="gj_course_name_${status.count},gj_class_hour_${status.count}"/>
-								</td>
-								<td><c:choose>
-									<c:when test="${status.count == 1}"> 
-										<img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jpkcjs('tab_jpkcjs',1)"/>
-									</c:when>
-									<c:otherwise>
-										<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('jpkcjs_${status.count}')"/>
-									</c:otherwise>
-								</c:choose></td>
-							</tr>
-						</c:forEach>	
 					</tbody>
 				</table>
 			</div>
@@ -899,6 +845,83 @@
 				</table>
 			</div>
 		</div>
+		<!--参加人卫慕课、数字教材编写情况-->
+		<div class="sbxq_item" id="digital">
+			<div>
+				<span id="tsxz_span9"></span>
+				<span class="tsxz_title">参加人卫慕课、数字教材编写情况</span>
+				<span class="tsxz_ts" id="digital_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_xt" id="digital_xt" >（选填）</span>
+			</div>
+			<div class="content">
+				<textarea class="text_cl" name="mooc_content" id="mooc_content" maxlength="500">${digitalMap.content}</textarea>
+			</div>
+		</div>
+		<!--精品课程建设-->
+		<div class="sbxq_item" id="gjjpkcjs">
+			<div>
+				<span id="tsxz_span7"></span>
+				<span class="tsxz_title">精品课程建设情况</span>
+				<span class="tsxz_ts" id="gjjpkcjs_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_xt" id="gjjpkcjs_xt" >（选填）</span>
+			</div>
+			<div class="content">
+				<table class="tab_2" id="tab_jpkcjs">
+					<thead>
+					<tr>
+						<td width="350px">课程名称</td>
+						<td width="180px">课程全年课时数</td>
+						<td width="200px">课程级别</td>
+						<td>备注</td>
+						<td width="78px">添加</td>
+					</tr>
+					</thead>
+					<tbody>
+					<c:if test="${empty gjkcjsList[0]}">
+						<tr>
+							<td><input class="cg_input" maxlength="20" name="gj_course_name" id="gj_course_name" value="" style="width: 300px;" placeholder="课程名称"/></td>
+							<td><input class="cg_input" maxlength="20" name="gj_class_hour" value="" style="width: 130px;" placeholder="课时数"/></td>
+							<td style="color: #333333;">
+								<table class="radio_tb" style="width: 180px;"><tr>
+									<td><input type="radio" name="gj_type_a" value="1" checked="checked"/>国家</td>
+									<td><input type="radio" name="gj_type_a" value="2" />省部</td>
+									<td><input type="radio" name="gj_type_a" value="3" />学校</td>
+								</tr></table>
+								<input type="hidden" name="gj_type" value="gj_type_a" />
+							</td>
+							<td><input class="cg_input" maxlength="20" name="gj_note" value="" style="width: 330px;" placeholder="备注"/>
+							</td>
+							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jpkcjs('tab_jpkcjs',1)"/></td>
+						</tr> </c:if>
+					<c:forEach var="list" items="${gjkcjsList}" varStatus="status">
+						<tr id="jpkcjs_${status.count}">
+							<td><input class="cg_input" maxlength="20" name="gj_course_name" id="gj_course_name_${status.count}" value="${list.course_name}" style="width: 300px;" placeholder="课程名称"/></td>
+							<td><input class="cg_input" maxlength="20" name="gj_class_hour" id="gj_class_hour_${status.count}" value="${list.class_hour}" style="width: 130px;" placeholder="课时数"/></td>
+							<td style="color: #333333;">
+								<table class="radio_tb" style="width: 180px;"><tr>
+									<td><input type="radio" name="gj_type_${status.count}" value="1" ${list.type=='1'?'checked':'' }/>国家</td>
+									<td><input type="radio" name="gj_type_${status.count}" value="2" ${list.type=='2'?'checked':'' }/>省部</td>
+									<td><input type="radio" name="gj_type_${status.count}" value="3" ${list.type=='3'?'checked':'' }/>学校</td>
+								</tr></table>
+								<input type="hidden" name="gj_type" value="gj_type_${status.count}" />
+							</td>
+							<td><input class="cg_input" maxlength="20" name="gj_note" value="${list.note}" style="width: 330px;" placeholder="备注"/>
+								<input type="hidden" name="zdjy" value="gj_course_name_${status.count},gj_class_hour_${status.count}"/>
+							</td>
+							<td><c:choose>
+								<c:when test="${status.count == 1}">
+									<img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jpkcjs('tab_jpkcjs',1)"/>
+								</c:when>
+								<c:otherwise>
+									<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('jpkcjs_${status.count}')"/>
+								</c:otherwise>
+							</c:choose></td>
+						</tr>
+					</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
 		<!--作家科研情况-->
 		<div class="sbxq_item" id="zjkyqk">
 			<div>
@@ -950,18 +973,6 @@
 				</table>
 			</div>
 		</div>
-		<!--个人成就-->
-	 	<div class="sbxq_item" id="grcjqk">
-			<div>
-				<span id="tsxz_span9"></span>
-				<span class="tsxz_title">个人成就</span>
-				<span class="tsxz_ts" id="grcj_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
-				<span class="tsxz_xt" id="grcj_xt" >（选填）</span>
-			</div>
-			<div class="content">
-				<textarea class="text_cl" maxlength="1000"  name="gr_content" id="gr_content" maxlength="1000">${achievementMap.content}</textarea>
-			</div>
-		</div>
 		<!--主编学术专著情况表-->
 		<div class="sbxq_item" id="zbxszz">
 			<div>
@@ -975,7 +986,7 @@
 					<thead>
 						<tr>
 							<td width="340px">教材名称</td>
-							<td width="140px">是否自费</td>
+							<td width="140px">出版方式</td>
 							<td width="200px">出版单位</td>
 							<td width="150px">出版时间</td>
 							<td>备注</td>
@@ -1105,7 +1116,7 @@
 					<tbody>
 						<c:if test="${empty sciList[0]}">
 						 <tr>
-							<td><input class="cg_input" name="sci_paper_name" id="sci_paper_name" value="" style="width: 300px;" placeholder="论文名称" maxlength="16"/></td>
+							<td><input class="cg_input" name="sci_paper_name" id="sci_paper_name" value="" style="width: 300px;" placeholder="论文名称" maxlength="45"/></td>
 							<td><input class="cg_input" name="sci_journal_name" value="" style="width: 130px;" placeholder="期刊名称" maxlength="16"/></td>
 							<td><input class="cg_input" name="sci_factor" value="" style="width: 170px;" placeholder="期刊SCI影响因子" maxlength="7"/></td>
 							<td><input class="cg_input" name="sci_publish_date" value="" style="width: 110px;" calendar format="'yyyy-mm-dd'" placeholder="发表时间"/></td>
@@ -1265,18 +1276,6 @@
 						</c:forEach>
 					</tbody>
 				</table>
-			</div>
-		</div>
-		<!--参加人卫慕课、数字教材编写情况-->
-	 	<div class="sbxq_item" id="digital">
-			<div>
-				<span id="tsxz_span9"></span>
-				<span class="tsxz_title">参加人卫慕课、数字教材编写情况</span>
-				<span class="tsxz_ts" id="digital_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
-				<span class="tsxz_xt" id="digital_xt" >（选填）</span>
-			</div>
-			<div class="content">
-				<textarea class="text_cl" name="mooc_content" id="mooc_content" maxlength="500">${digitalMap.content}</textarea>
 			</div>
 		</div>
 		<!--编写内容意向表-->
