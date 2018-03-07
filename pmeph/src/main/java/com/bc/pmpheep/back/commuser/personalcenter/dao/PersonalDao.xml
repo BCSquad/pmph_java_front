@@ -723,19 +723,13 @@
 		book_user_comment where
 		id= #{id} and writer_id = #{writer_id}
 	</delete>
-	<select id="getCommentById"  resultType="java.lang.Long">
+	<select id="getCommentById">
 		SELECT book_id from book_user_comment where id= #{id}
 	</select>
-	<update id="updateDownComments" >
+	<update id="updateDownComments">
 		UPDATE book SET comments = comments-1 WHERE id =
 		#{id}
 	</update>
-	
-	<!-- 查询评论并删除 -->
-	<select id="getCommentBycid"  resultType="java.lang.Long">
-		SELECT comments from book_user_comment buc LEFT JOIN book b ON buc.book_id=b.id WHERE  buc.id= #{id} GROUP BY buc.id 
-	</select>
-	
 	<!-- 我的问卷 -->
 	<select id="mySurvey" parameterType="PageParameter" resultType="java.util.Map">
 		select s.id,s.title, DATE_FORMAT(s.begin_date,'%Y年%m月%d日') as gtime
@@ -1156,7 +1150,6 @@
 		d.material_id as material_id,
 		d.user_id,
 		m.material_name,
-		d.material_id,
 		DATE_FORMAT(d.gmt_create,'%Y年%m月%d日') AS create_time,
 		d.online_progress as online_progress
 		FROM

@@ -46,12 +46,11 @@ public class ReadController {
         //热门书评
         List<Map<String, Object>> zdtjXxjyList = new ArrayList<Map<String, Object>>();
         Map<String, Object> zdtjXxjyMap = new HashMap<String, Object>();
-        Map<String,Object> adInfo3=homeService.getPageAdInfo("首页原重点推荐");
         //查询条数
         zdtjXxjyMap.put("startrows", "0");
         zdtjXxjyMap.put("endrows", "4");
         zdtjXxjyList = readService.queryRmspReadList(zdtjXxjyMap);
-        mv.addObject("adInfo3",adInfo3);
+        
         mv.addObject("rmspList", zdtjXxjyList);
 
         Map<String, Object> adInfo = homeService.getPageAdInfo("读书首页轮播 ");

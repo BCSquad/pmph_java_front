@@ -416,10 +416,12 @@
 						<tr>
 							<td>${list.material_name}</td>
 							<td>
-								<c:if test="${list.rank == '1'}">教育部规划</c:if>
-								<c:if test="${list.rank == '2'}">卫计委规划</c:if>
-								<c:if test="${list.rank == '3'}">区域规划</c:if>
-								<c:if test="${list.rank == '4'}">创新教材</c:if>	
+								<c:if test="${list.rank == '0'}">无</c:if>
+								<c:if test="${list.rank == '1'}">国家</c:if>
+								<c:if test="${list.rank == '2'}">省部</c:if>
+								<c:if test="${list.rank == '3'}">协编</c:if>	
+								<c:if test="${list.rank == '4'}">校本</c:if>	
+								<c:if test="${list.rank == '5'}">其他</c:if>	
 							</td>
 							<td>
 								<c:if test="${list.position == '0'}">无</c:if>
@@ -437,6 +439,56 @@
 							<td>${list.note}</td>
 						</tr>
 						</c:if>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!--人卫社教材编写情况-->
+		<div class="sbxq_item" id="jcbxqk">
+			<div>
+				<span id="tsxz_span7"></span>
+				<span class="tsxz_title">人卫社教材编写情况</span>
+			</div>
+			<div class="content">
+				<table class="tab_2" id="tab_jcbx">
+					<thead>
+						<tr>
+							<td width="230px">教材名称</td>
+							<td width="120px">教材级别</td>
+							<td width="120px">编写职务</td>
+							<td width="100px">是否数字编委</td>
+							<td width="120px">出版时间</td>
+							<td width="120px">标准书号</td>
+							<td>备注</td>
+						</tr>
+					</thead>
+					<tbody>
+					<c:forEach var="rws" items="${rwsList}">
+						<tr>
+							<td>${rws.material_name}</td>
+							<td>
+								<c:if test="${rws.rank == '0'}">教无</c:if>
+								<c:if test="${rws.rank == '1'}">国家</c:if>
+								<c:if test="${rws.rank == '2'}">省部</c:if>
+								<c:if test="${rws.rank == '3'}">协编</c:if>	
+								<c:if test="${rws.rank == '4'}">校本</c:if>	
+								<c:if test="${rws.rank == '5'}">其他</c:if>	
+							</td>
+							<td>
+								<c:if test="${rws.position == '0'}">无</c:if>
+								<c:if test="${rws.position == '1'}">主编</c:if>
+								<c:if test="${rws.position == '2'}">副主编</c:if>
+								<c:if test="${rws.position == '3'}">编委</c:if>
+							</td>
+							<td>
+								<c:if test="${rws.is_digital_editor == '1'}">是</c:if>
+								<c:if test="${rws.is_digital_editor == '0'}">否</c:if>
+							</td>
+							<td>${rws.publish_date}</td>
+							<td>${rws.isbn}</td>
+							<td>${rws.note}</td>
+						</tr>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -700,7 +752,7 @@
 		</div>
 		
 		
-			
+		
 			<!-- 申报单位-->
 			<div class="sbxq_item1">
 				<div>

@@ -15,7 +15,8 @@
 		(CASE WHEN A.sender_type='0' THEN '系统消息' WHEN A.sender_type='1' THEN A.title END ) title,
 		(CASE WHEN A.sender_type='0' THEN 'DEFAULT' WHEN A.sender_type='1' THEN r1.avatar END ) avatar,
 		msg_id,
-		a.id
+		a.id,
+		a.is_read as isread
 		FROM
 		user_message a
 		LEFT JOIN writer_user s2 ON a.sender_id = s2.id
@@ -26,6 +27,7 @@
 		AND a.sender_type = 1
 		WHERE
 		receiver_type = 3
+		ANd a.is_deleted=0
 		AND A.msg_type IN (1, 0)
 		AND receiver_id = #{id}
 		) t
@@ -34,5 +36,12 @@
 
 		<if test="startPara!=null">limit #{startPara},8</if>
 	</select>
-
+    <!--  根据系统消息内容id更改系统消息是否已读 -->
+    <update id="updateIsRead" parameterType="java.util.Map">
+       update user_message set is_read=1 where id=#{mid}
+    </update>
+    <!-- 删除消息 -->
+    <update id="deletemsg" parameterType="java.util.Map">
+        update user_message set is_deleted=1 where id=#{mid}
+    </update>
 </mapper>

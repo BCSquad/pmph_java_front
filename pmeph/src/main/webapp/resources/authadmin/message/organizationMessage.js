@@ -1,42 +1,47 @@
-function loadMore() {
-    //var pathName=window.document.location.pathname;
-    var para = $("#startPara").val();
-    var startPara;
-    if ("" == para) {
-        startPara = 8;
-    } else {
-        startPara = parseInt(para) + 8;
-    }
-    $.ajax({
-        type: "post",
-        url: contextpath + "AllMessage/loadMore.action",
-        data: {"startPara": startPara},
-        async: false,
-        dataType: 'json',
-        success: function (json) {
-            $("#startPara").val(startPara);
-            var str = '';
-            $.each(json.list, function (i, n) {
-                str += '<div class="item" onclick="system(\'' + n.id + '\',\'' + n.NAME + '\',\'' + n.TIME + '\')">' +
+function loadMore(){
+	//var pathName=window.document.location.pathname;  
+	var para = $("#startPara").val();
+	var startPara;
+	if(""==para){
+		startPara=8;
+	}else{
+		startPara = parseInt(para)+8;
+	}
+	$.ajax({
+		type:"post",
+		url:contextpath+"AllMessage/loadMore.action",
+		data:{"startPara":startPara},
+		async:false,
+		dataType:'json',
+		success:function(json){
+			$("#startPara").val(startPara);
+			var str= '';
+			$.each(json.list,function(i,n){
+                str += '<div class="item" id="item'+n.id+'" >' +
                     '<div class="item-img">' +
                     '<img src="' + contextpath + n.avatar + '" />' +
                     '</div>' +
-                    '<div class="content" >' +
+                    '<div class="content" onclick="system(\'' + n.id + '\',\'' + n.NAME + '\',\'' + n.TIME + '\')" style="width:1000px" >' +
                     ' <p class="title" >' +
                     '<span class="msg">' + n.title + '</span>' +
                     '<span class="time">' + n.TIME + '</span>' +
                     ' </p>' +
-                    '<div class="text" >' + n.msg_content + '</div>' +
-                    '</div>' +
-                    '</div>';
-            });
-            $("#message-list").append(str);
-            if (json.listSize < 8) {
-                $("#load-more").hide();
-            }
-
-        }
-    });
+                    '<div class="text" id="txt'+n.id+'">' + n.msg_content+
+                    (n.isread==true?'<img src="'+contextpath+'/statics/image/readyes.png"  id="isread'+n.id+'"/>':'') + '</div>' +
+            '</div>'+
+            (n.title=='系统消息'?'<div style="float:left;color: #999999;font-size: 14px;height:20px;margin-top: 45px;" onclick="delmsg(\''+n.id+'\')">'+
+                    '<span style="width:20px;height:20px;float:left;" class="deltag"></span>'+
+                    '<span style="line-height: 20px;">删除</span>'+
+                '</div>':'')+
+        '</div>';
+		});
+			$("#message-list").append(str);
+			if(json.listSize<8){
+				$("#load-more").hide();
+			}
+			
+		}
+	});
 }
 
 //点击显示系统消息
@@ -70,6 +75,12 @@ function system(str, name, time) {
                     shadeClose: true,
                     content: $("#bookmistake")
                 });
+                
+                var obj= document.getElementById('isread'+str);
+                if(!obj&&json.isread=="yes"){
+                  	$("#txt"+json.id).append('<img src="'+contextpath+'/statics/image/readyes.png"  id="isread'+str+'"/>');
+                }
+                $("#bookmistake").show();
             }
         });
     }
@@ -79,7 +90,19 @@ function system(str, name, time) {
 function hideup() {
     $("#bookmistake").hide();
 }
-
+//
+function delmsg(id){
+	  $.ajax({
+          type:"post",
+          url:contextpath+"AllMessage/delmsg.action?mid="+id,
+          async:false,
+          dataType:'json',
+          success:function(json){
+        	  if(json.isdel=="yes"){
+        		  $("#item"+id).remove();
+        	  }
+          }});
+}
 //时间格式化
 function formatDate(value) {
     if (value) {
@@ -96,4 +119,4 @@ function formatDate(value) {
                     d.getSeconds().padLeft()].join(':');// 把秒格式化填充
         return dformat;// 最后返回格式化好的日期和时间
     }
-}
+    }

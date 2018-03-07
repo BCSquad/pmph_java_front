@@ -52,7 +52,9 @@ jQuery.fn.extend({
                 });
                 $("#" + c.controlId).hide();
                 $(n).trigger('timeChange', [a, c]);
-                c.callback.call(n[0], 'date', a, a.format(c.format))
+                c.callback.call(n[0], 'date', a, a.format(c.format));
+                $("#close" + c.controlId).remove();
+
             }).hover(function () {
                     $(this).addClass("hover")
                 },
@@ -73,7 +75,8 @@ jQuery.fn.extend({
                     var a = new Date($("#" + c.controlId).find(".currentYear").text() + "/" + $("#" + c.controlId).find(".currentMonth").text() + "/1")
                     $("#" + c.controlId).hide();
                     $(n).trigger('timeChange', [a, c]);
-                    c.callback.call(n[0], 'month', a, a.format(c.format))
+                    c.callback.call(n[0], 'month', a, a.format(c.format));
+                    $("#close" + c.controlId).remove();
                 }
 
             }).hover(function () {
@@ -421,6 +424,8 @@ jQuery.fn.extend({
                     if (event.keyCode == 8) event.keyCode = 0
                 })
         }
+
+
         today = new Date;
         var e = today.getFullYear(),
             f = today.getMonth(),
@@ -543,17 +548,27 @@ jQuery.fn.extend({
 
                     a.show().height(260);
 
-                    /* if (c.view == 'month') {
-                     var aa = s(Number($("#" + c.controlId).find(".currentYear").text()), Number($(this).attr("val")));
-                     D(aa);
-                     r();
-                     $("#" + c.controlId).find(".currentMonth").text(Number($(this).attr("val")) + 1)
-                     }
-                     */
-                    /*.animate({
-                     height: 260 + "px"
-                     },
-                     c.speed);*/
+
+                    var $clear = $("<img title='清除' id='close" + c.controlId + "' style='cursor: pointer;' src='" + contextpath + "statics/image/close.png'/>");
+                    $clear.css("position", "absolute");
+                    $clear.css("display", "block");
+                    $clear.css("height", "12px");
+                    $clear.css("width", "12px");
+                    $clear.css("left", (n.offset().left + n.outerWidth() - 20) + 'px');
+                    $clear.css("top", (n.offset().top + (n.outerHeight() - 12) / 2) + "px");
+                    $clear.appendTo("body");
+                    $clear.mouseup(function (e) {
+                        e.stopPropagation();
+                    });
+                    $clear.click(function (e) {
+                        $this.val("");
+                        $this.text("");
+                        $("#" + c.controlId).height(0);
+                        $("#" + c.controlId).hide();
+                        $("#close" + c.controlId).remove();
+                        //e.stopPropagation();
+                    })
+
                     a.bind("selectstart",
                         function () {
                             return false
@@ -569,6 +584,7 @@ jQuery.fn.extend({
         $(document).mouseup(function (a) {
             $("#" + c.controlId).height(0);
             $("#" + c.controlId).hide();
+            $("#close" + c.controlId).remove();
         })
     }
 });

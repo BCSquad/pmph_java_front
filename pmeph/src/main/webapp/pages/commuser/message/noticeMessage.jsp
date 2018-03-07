@@ -129,30 +129,36 @@
 		                    </td>
 		                </tr>
 		                <tr style="width: 30%">
-		                	  <c:if test="${message.msgType==0||message.msgType==1}">
+		                	  <c:if test="${(message.msgType==0||message.msgType==1)&& message.material_id==0}">
 		                	    <td colspan="2" class="title" style="cursor: pointer;" onclick="showup('${message.id}')" >
 		                	    <input type="hidden" id="messid" value="${message.id}"/>
                                 <span class="fixwidth">${message.messageContent}</span>
-
 		                	    <c:choose>
-									<c:when test="${message.is_read==1}">
-										<img src="${ctx}/statics/image/readyes.png"  id="readyes"/>
-									</c:when>
-									<c:otherwise>
-										<img src="${ctx}/statics/image/readno.png"  id="readno"/>
-									</c:otherwise>
-								</c:choose>	
-		                	    
+										<c:when test="${message.is_read==1}">
+											<img  src="${ctx}/statics/image/readyes.png"  id="readyes" />
+										</c:when>
+										<c:otherwise>
+											<img src="${ctx}/statics/image/readno.png"  id="readno"/>
+										</c:otherwise>
+									</c:choose>	
 		                	    </td>
+		                	  </c:if>
+		                	  <c:if test="${(message.msgType==0||message.msgType==4)&& message.material_id!=0}">
+			                	    <td colspan="2" class="title"  >
+			                	    <input type="hidden" id="messid" value="${message.id}"/>
+	                                <span class="fixwidth">${message.messageContent}</span>
+			                	    </td>
 		                	  </c:if>
 		                	<%--  <c:if test="${message.msgType==4}">
 		                	    <td colspan="2" class="title">《${message.title}》已开始申报,请您留意</td>
 		                	  </c:if>--%>
 		                  
 		                    <td class="buttonDetail">
+		                    		
 		                    	<c:if test="${message.msgType==0 && message.material_id!=0}">
 		                      	<div class="buttonAccept" ><a href="${ctx}/message/noticeMessageDetail.action?materialId=${message.material_id}">查看详情</a></div>
 		                        </c:if>
+		                        
 		                        <c:if test="${message.msgType==0||message.msgType==1}">
 		   					    <span class="deleteButton" onclick="deleteNotice(${message.id })"><span style="font-size:18px;">×</span> 删除</span>
 		                        </c:if>

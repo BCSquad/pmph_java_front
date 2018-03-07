@@ -55,7 +55,7 @@ $(function(){
 	    //接受来自服务器的消息
 	    //...
 	    console.log("Socket新消息:"+event.data);
-	    var data = $.parseJSON(event.data);  
+	    var data = $.parseJSON(event.data); 
 	    var sender = 2 ; //他人的
 	    if(data.senderType == 0 || data.senderId == 0 ){//系统消息
 	    	sender = 0; 
@@ -67,7 +67,7 @@ $(function(){
 	    	if(data.senderIcon==''||data.senderIcon=='DEFAULT'||data.senderIcon.indexOf('statics')!=-1||data.senderIcon.indexOf('default_image')!=-1||data.senderIcon.indexOf('png')!=-1){
 	    		data.senderIcon = contxtpath+'/statics/image/default_image.png';
 	    	}else{
-	    		data.senderIcon = contxtpath+'/image/'+data.senderIcon+'.action';
+	    		data.senderIcon = contxtpath+'/image/'+senderIcon+'.action';
 	    	}
 	    	loadNewGroupMsg(sender,data.senderName,data.senderIcon,data.content,data.time);
 	    }

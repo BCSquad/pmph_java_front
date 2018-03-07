@@ -185,4 +185,8 @@ a{
     height: auto;
     margin-left: 20px;
 }
-
+.deltag{
+	background-image: url(../../image/close.png);
+	background-repeat: no-repeat;
+	background-position: 0px 4px;
+}

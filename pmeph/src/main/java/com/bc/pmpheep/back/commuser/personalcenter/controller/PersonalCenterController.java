@@ -701,14 +701,8 @@ public class PersonalCenterController extends BaseController {
 			map.put("id", id);
 			Map<String, Object> user = getUserInfo();
 			map.put("writer_id", user.get("id").toString());
-			//查询评论数
-			Long comments = personalService.getCommentBycid(Long.valueOf(id));
-			if(comments>0){
-				personalService.deleteComment(map);
-				personalService.updateDownComments(Long.valueOf(id));
-			}else{
-				personalService.deleteComment(map);
-			}
+			personalService.updateDownComments(Long.valueOf(id));
+			personalService.deleteComment(map);
 		} catch (Exception e) {
 			// TODO: handle exception
 			flag = "1";
