@@ -630,7 +630,7 @@ a {
 }
 .fixwidth{
     max-width: 800px;
-    height: 34px;
+    height: 28px;
     overflow: hidden;
     display: inline-block;
     text-overflow: ellipsis;
