@@ -78,9 +78,10 @@
 		
 select b.* from 
   (select 
-		        t.*,b.deadline
+		        t.*,b.deadline,me.notice
 		        from cms_content t
 		        left join  material b on t.material_id =b.id 
+		        left join  material_extra me on me.material_id=b.id
 		        where  t.category_id=3 
 		        and t.is_published=1
 		        and t.auth_status=2
@@ -88,11 +89,12 @@ select b.* from
 		        and ( <![CDATA[(b.is_public =1 and t.is_material_entry=1 and b.is_deleted=0) or t.is_material_entry=0  ]]>)
 		 union
 		 select 
-		        t.*,b.deadline
+		        t.*,b.deadline,me.notice
 		        from cms_content t
 		        left join  material b on t.material_id =b.id 
 		        left join material_org u on b.id=u.material_id
 		        left join writer_user p on p.org_id=u.org_id
+		        left join  material_extra me on me.material_id=b.id
 		        where  t.category_id=3
 		        and t.is_published=1
 		        and b.is_public =0
