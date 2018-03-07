@@ -23,6 +23,10 @@
 		)
 	</delete>
 
+	<select id="getMemberId" parameterType="java.util.Map" resultType="String">
+		select member_id from pmph_group_file where id = #{id}
+	</select>
+
 
 	<!-- 查询我在这个小组上传的文件 -->
     <select id="getMyFiles" resultType="GroupFileVO"> 
