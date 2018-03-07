@@ -67,7 +67,7 @@ $(function(){
 	    	if(data.senderIcon==''||data.senderIcon=='DEFAULT'||data.senderIcon.indexOf('statics')!=-1||data.senderIcon.indexOf('default_image')!=-1||data.senderIcon.indexOf('png')!=-1){
 	    		data.senderIcon = contxtpath+'/statics/image/default_image.png';
 	    	}else{
-	    		data.senderIcon = contxtpath+'/image/'+senderIcon+'.action';
+	    		data.senderIcon = contxtpath+'/image/'+data.senderIcon+'.action';
 	    	}
 	    	loadNewGroupMsg(sender,data.senderName,data.senderIcon,data.content,data.time);
 	    }
