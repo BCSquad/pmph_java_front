@@ -193,7 +193,7 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
     	//其他小组
         modelAndView.addObject("otherGroup",otherGroupList);
         //角色
-        modelAndView.addObject("role", groupService.isFounderOrisAdmin(groupId.toString(),userId.toString()));
+        modelAndView.addObject("role", groupService.isFounderOrisAdmin(groupId.toString(),userId.toString())?"你是这个小组的管理员":"你是这个小组的普通用户");
         //小组用户
         List<PmphGroupMemberVO> gropuMemebers= groupService.listPmphGroupMember(groupId,userId);
         modelAndView.addObject("gropuMemebers",gropuMemebers);

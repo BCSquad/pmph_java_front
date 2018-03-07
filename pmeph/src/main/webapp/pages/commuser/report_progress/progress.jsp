@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                         <div class="img_mid">
 			                            <div class="picture_mid"></div>
 			                            <div class="picture_bom">
-			                                <span class="span_bom_left">资料已审核</span>
+			                                <span class="span_bom_left">申报单位已审核</span>
 			                                <img   class="img_bom_right"  src="${ctx}/statics/image/yiwancheng.png" >
 			                            </div>
 			                        </div>
@@ -75,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                         <div class="img_mid">
 			                            <div class="picture_mid1"></div>
 			                            <div class="picture_bom">
-			                                <span class="span_bom_left" style="color: #999999">资料审核中</span>
+			                                <span class="span_bom_left" style="color: #999999">申报单位审核中</span>
 			                                <img   class="img_bom_right"  src="${ctx}/statics/image/shenhezhong.png" style="width:52px;">
 			                            </div>
 			                        </div>
@@ -87,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			                        <div class="img_mid">
 			                            <div class="picture_mid1"></div>
 			                            <div class="picture_bom">
-			                                <span class="span_bom_left" style="color: #999999">资料被退回</span>
+			                                <span class="span_bom_left" style="color: #999999">申报单位退回</span>
 			                            </div>
 			                        </div>
 			                    </c:if>
@@ -124,17 +124,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				                    <div class="left-bom-2">
 				                            <span class="left-bom-21">${books.textbookName}</span>
 				                            <c:choose>
-				                            	<c:when test="${(books.rank==1 && (books.chosenPosition==4||books.chosenPosition==12))}">
+				                            	<c:when test="${(books.rank==1 && books.chosenPosition==4)}">
 					                            	<span class="left-bom-24">已被遴选为第一主编</span>
 					                            	<button class="left-bom-23" style="cursor: pointer;" onclick="chooseEditor('${books.textbookId}')">${books.isLocked == false?'选择编委':'查看编委' }>></button>
 					                            </c:when>
-					                            <c:when test="${(books.chosenPosition==4||books.chosenPosition==12) }">
+					                            <c:when test="${(books.rank==1 && books.chosenPosition==12)}">
+					                            	<span class="left-bom-24">已被遴选为第一主编兼数字编委</span>
+					                            	<button class="left-bom-23" style="cursor: pointer;" onclick="chooseEditor('${books.textbookId}')">${books.isLocked == false?'选择编委':'查看编委' }>></button>
+					                            </c:when>
+					                            <c:when test="${books.chosenPosition==4 }">
 					                            	<span class="left-bom-24">已被遴选为主编</span>
 					                            	<button class="left-bom-23" style="cursor: pointer;" onclick="chooseEditor('${books.textbookId}')">查看编委 >></button>
 					                            </c:when>
-					                            <c:when test="${(books.chosenPosition==2||books.chosenPosition==10)}">
+					                            <c:when test="${books.chosenPosition==12 }">
+					                            	<span class="left-bom-24">已被遴选为主编兼数字编委</span>
+					                            	<button class="left-bom-23" style="cursor: pointer;" onclick="chooseEditor('${books.textbookId}')">查看编委 >></button>
+					                            </c:when>
+					                            <c:when test="${books.chosenPosition==2}">
 					                            	<span class="left-bom-24">已被遴选为副主编</span>
 					                            	<button class="left-bom-23" style="cursor: pointer;" onclick="chooseEditor('${books.textbookId}')">查看编委 >></button>
+					                            </c:when>
+					                            <c:when test="${books.chosenPosition==10}">
+					                            	<span class="left-bom-24">已被遴选为副主编兼数字编委</span>
+					                            	<button class="left-bom-23" style="cursor: pointer;" onclick="chooseEditor('${books.textbookId}')">查看编委 >></button>
+					                            </c:when>
+					                            <c:when test="${books.chosenPosition==1}">
+					                            	<span class="left-bom-24">已被遴选为编委</span>
+					                            </c:when>
+					                            <c:when test="${books.chosenPosition==9}">
+					                            	<span class="left-bom-24">已被遴选为编委兼数字编委</span>
+					                            </c:when>
+					                            <c:when test="${books.chosenPosition==8}">
+					                            	<span class="left-bom-24">已被遴选为数字编委</span>
 					                            </c:when>
 					                            <c:when test="${(books.isPublished || books.isForceEnd) }">
 					                            	<span class="left-bom-22">遴选结束，未选中</span>

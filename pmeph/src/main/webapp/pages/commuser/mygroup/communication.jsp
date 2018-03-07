@@ -81,7 +81,7 @@
             </div>
             <div class="left-content">
                 <div class="_show" id="commnions">
-                    <div class="iframe1">
+                    <div class="iframe1" id="wechat">
 						<a id ="history" style="cursor:pointer;color:#999;font-size:14px;" >历史消息...</a>
                      </div>
                     <div class="iframe2">
@@ -122,7 +122,7 @@
                     </div>	
                     <span id ="fileContent"></span>
                     <div id ="fileMore">
-                    	<center style="cursor:pointer" >更多。。。</center>
+                    	<center style="cursor:pointer" >更多...</center>
                     </div>
 				</div>
 

@@ -134,7 +134,7 @@ public class SendMessage extends BaseController {
 				userMessage.setMsg_id(msg_id);
 				userMessage.setMsg_type(1);
 				userMessage.setReceiver_id(((BigInteger)userIdList.get(i).get("receiver_id")).longValue());
-				userMessage.setReceiver_type(3);
+				userMessage.setReceiver_type(2);
 				userMessage.setSender_id(uid);
 				userMessage.setSender_type(3);
 				userMessage.setTitle(titleValue);
@@ -155,7 +155,7 @@ public class SendMessage extends BaseController {
 				userMessage.setMsg_id(msg_id);
 				userMessage.setMsg_type(1);
 				userMessage.setReceiver_id(Long.parseLong(partSelect[i]));
-				userMessage.setReceiver_type(3);
+				userMessage.setReceiver_type(2);
 				userMessage.setSender_id(uid);
 				userMessage.setSender_type( 3);
 				userMessage.setTitle(titleValue);

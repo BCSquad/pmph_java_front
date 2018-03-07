@@ -219,7 +219,7 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		if(count>0){
 			returncode="OK";
 		    WriterUserTrendst wut = new WriterUserTrendst(map.get("user_id").toString(), 10, map.get("book_id").toString());
-		    wut.setDetail("提交了图书纠错", map.get("content").toString(),1,Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("line").toString()));
+		    wut.setDetail("提交了图书纠错", map.get("content").toString(),0,Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("line").toString()));
 		    personalService.saveUserTrendst(wut);//生成动态 图书纠错 
 		}
 		return returncode;

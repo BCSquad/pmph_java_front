@@ -34,7 +34,7 @@
 		when d.offline_progress=1  then '' 
 		when d.offline_progress=2  then '已收到' 	END)	as 	offlineprogress,
 		group_concat(DISTINCT concat(t.textbook_name,'-',(case 
-		when m.is_force_end=1 then '遴选结束' 
+		when m.is_force_end=1 and t.is_published=0 then '遴选结束' 
 		when t.is_published=0  then '审核中' 
 		when pp.chosen_position=0 OR  pp.chosen_position IS NULL  then '遴选结束' 
 		when pp.chosen_position = 4 then '主编' 																															
@@ -52,7 +52,7 @@
 		LEFT JOIN dec_position_published AS pp ON d.id = pp.declaration_id
 		LEFT JOIN textbook AS t ON p.textbook_id = t.id 
 		LEFT JOIN org as o on d.org_id=o.id 
-		INNER JOIN org_user as  ou on  d.org_id=ou.org_id ]]>
+		INNER JOIN org_user as  ou on  d.org_id=ou.org_id  and d.online_progress !=0]]>
 		<where>
 			1=1
 			<if test="queryName != null and queryName != '' ">
@@ -78,7 +78,7 @@
 		COUNT(*)
 		FROM
 		declaration AS d
-		INNER JOIN org_user as  ou on  d.org_id=ou.org_id 
+		INNER JOIN org_user as  ou on  d.org_id=ou.org_id and d.online_progress !=0
 		<where>
 		1=1
 			<if test="queryName != null and queryName != '' ">
@@ -154,7 +154,7 @@
 		LEFT JOIN dec_position_published AS pp ON d.id = pp.declaration_id
 		LEFT JOIN textbook AS t ON p.textbook_id = t.id 
 		LEFT JOIN org as o on d.org_id=o.id 
-		INNER JOIN org_user as  ou on  d.org_id=ou.org_id ]]>
+		INNER JOIN org_user as  ou on  d.org_id=ou.org_id and d.online_progress !=0]]>
 		<where>
 			1=1
 			<if test="queryName != null and queryName != '' ">
@@ -397,8 +397,25 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 		select * from dec_acade_reward where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
 
-
 	
+	<!-- //人卫慕课、数字教材编写情况 -->
+	<select id="queryMoocdigital" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_mooc_digital where declaration_id = #{declaration_id} 
+	</select>
+
+     <!-- 人卫社教材编写情况-->
+     <select id="queryRwsBook" resultType="java.util.Map" parameterType="java.util.Map">
+       select id,declaration_id,material_name,rank,position,
+		is_digital_editor*1 is_digital_editor,publish_date,isbn,note,sort
+		 from dec_textbook_pmph where declaration_id = #{declaration_id}
+		  ORDER BY sort 
+     </select> 
+
+		<!-- //内容意向表情况 -->
+	<select id="queryIntention" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_intention where declaration_id = #{declaration_id} 
+	</select>
+
 	
 	
 </mapper>

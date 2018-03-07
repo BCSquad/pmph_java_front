@@ -6,7 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <head>
-    <title>申请列表</title>
+    <title>通知列表</title>
     <script>
         var contextpath='${pageContext.request.contextPath}/';
     </script>
@@ -87,10 +87,10 @@
         <!-- 系统消息标题悬浮框 -->
         <div class="bookmistake" id="bookmistake">
             <form id="bookmistakeform">
-                <div class="apache">
-                    <div class="mistitle">系统消息详情</div>
-                    <div class="x" onclick="hideup()"></div>
-                </div>
+              <%--  <div class="apache">
+                    <div class="mistitle">消息详情</div>
+                   &lt;%&ndash; <div class="x" onclick="hideup()"></div>&ndash;%&gt;
+                </div>--%>
                 <div class="info">
                     <label style="margin-left: 20px" class="labell">标题:<span id="titlec"></span></label>
                     
@@ -104,11 +104,12 @@
                 
                 <div class="info">
                     	<label style="margin-left: 20px" class="labell">内容:</label>
-                    <textarea class="misarea" id="tcontent" disabled="disabled"></textarea>
+                    <div class="misarea" id="tcontent" ></div>
                 </div>
                 <div class="info">
                     <label style="margin-left: 20px" class="labell">附件:<span id="tattachment"  class="listContent"></span></label>
                 </div>
+                <div class="clear"></div>
             </form>
         </div>
         
@@ -121,36 +122,43 @@
 		                <tr style="width: 70%">
 		                    <th rowspan="2" class="headPortrait"><img  class ="pictureNotice" src="${ctx}/${message.avatar}"></th>
 		                    <td class="type1">
-			                    <span><c:if test="${message.msgType==4}">公告 </c:if>
-			                          <c:if test="${message.msgType==0||message.msgType==1}">系统消息</c:if>
+			                    <span>${message.title}<%--<c:if test="${message.msgType==4}">公告 </c:if>
+			                          <c:if test="${message.msgType==0||message.msgType==1}">系统消息</c:if>--%>
 			                    </span>
 			                    <span class="time1" id="time"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${message.time}" /></span>
 		                    </td>
 		                </tr>
 		                <tr style="width: 30%">
-		                	  <c:if test="${message.msgType==0||message.msgType==1}">
+		                	  <c:if test="${(message.msgType==0||message.msgType==1)&& message.material_id==0}">
 		                	    <td colspan="2" class="title" style="cursor: pointer;" onclick="showup('${message.id}')" >
 		                	    <input type="hidden" id="messid" value="${message.id}"/>
-		                	    ${message.title}
+                                <span class="fixwidth">${message.messageContent}</span>
 		                	    <c:choose>
-									<c:when test="${message.is_read==1}">
-										<img src="${ctx}/statics/image/readyes.png"  id="readyes"/>
-									</c:when>
-									<c:otherwise>
-										<img src="${ctx}/statics/image/readno.png"  id="readno"/>
-									</c:otherwise>
-								</c:choose>	
-		                	    
+										<c:when test="${message.is_read==1}">
+											<img  src="${ctx}/statics/image/readyes.png"  id="readyes" />
+										</c:when>
+										<c:otherwise>
+											<img src="${ctx}/statics/image/readno.png"  id="readno"/>
+										</c:otherwise>
+									</c:choose>	
 		                	    </td>
 		                	  </c:if>
-		                	  <c:if test="${message.msgType==4}">
-		                	    <td colspan="2" class="title">《${message.title}》已开始申报,请您留意</td>
+		                	  <c:if test="${(message.msgType==0||message.msgType==4)&& message.material_id!=0}">
+			                	    <td colspan="2" class="title"  >
+			                	    <input type="hidden" id="messid" value="${message.id}"/>
+	                                <span class="fixwidth">${message.messageContent}</span>
+			                	    </td>
 		                	  </c:if>
+		                	<%--  <c:if test="${message.msgType==4}">
+		                	    <td colspan="2" class="title">《${message.title}》已开始申报,请您留意</td>
+		                	  </c:if>--%>
 		                  
 		                    <td class="buttonDetail">
-		                    	<c:if test="${message.msgType==4}">
-		                      	<div class="buttonAccept" ><a href="${ctx}/message/noticeMessageDetail.action?materialId=${message.fId}&&cmsId=${message.id}&&notEnd=${notEnd}&&is_material_entry=${is_material_entry}">查看详情</a></div>
+		                    		
+		                    	<c:if test="${message.msgType==0 && message.material_id!=0}">
+		                      	<div class="buttonAccept" ><a href="${ctx}/message/noticeMessageDetail.action?materialId=${message.material_id}">查看详情</a></div>
 		                        </c:if>
+		                        
 		                        <c:if test="${message.msgType==0||message.msgType==1}">
 		   					    <span class="deleteButton" onclick="deleteNotice(${message.id })"><span style="font-size:18px;">×</span> 删除</span>
 		                        </c:if>

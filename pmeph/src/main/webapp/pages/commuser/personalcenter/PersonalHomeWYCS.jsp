@@ -194,7 +194,7 @@ request.setAttribute("currentTime",datetime);
                									<c:if test="${selfLog == true && c.cms.is_deleted !=false}"><div class="status_tag reject">已删除</div></c:if>
                									
                									<c:if test="${c.cms.is_deleted == false}">
-               										<div class="article_title"><a class="not-like-an-a" target="_blank" href="/articledetail/toPage.action?wid=${c.cms.id}">${c.cms.title }</a></div>
+               										<div class="article_title"><a class="not-like-an-a" target="_blank" href="${ctx }/articledetail/toPage.action?wid=${c.cms.id}">${c.cms.title }</a></div>
                									</c:if>
                									<c:if test="${c.cms.is_deleted == true}">
                										<div class="article_title">该文章已删除</div>
@@ -228,7 +228,7 @@ request.setAttribute("currentTime",datetime);
                									<c:if test="${selfLog == true && c.p_cms.is_deleted !=false}"><div class="status_tag reject">已删除</div></c:if>
                									
                									<c:if test="${c.p_cms.is_deleted == false}">
-               										<div class="article_title"><a class="not-like-an-a" target="_blank" href="/articledetail/toPage.action?wid=${c.p_cms.id}">${c.p_cms.title }</a></div>
+               										<div class="article_title"><a class="not-like-an-a" target="_blank" href="${ctx }/articledetail/toPage.action?wid=${c.p_cms.id}">${c.p_cms.title }</a></div>
                									</c:if>
                									
                									<c:if test="${c.p_cms.is_deleted == true}">
@@ -242,7 +242,7 @@ request.setAttribute("currentTime",datetime);
             										<c:if test="${selfLog == true && c.cms.is_deleted==false && c.cms.is_staging== false && c.cms.auth_status ==1}"><div class="status_tag reject">未通过</div></c:if>
             										<c:if test="${selfLog == true && c.cms.is_deleted==false && c.cms.is_staging== false && c.cms.auth_status ==2}"><div class="status_tag Audited">已通过</div></c:if>
 	               									<c:if test="${c.cms.is_deleted !=false}"><div class="status_tag reject">已删除</div></c:if>
-		               								${c.realname } 评论了《${(c.p_cms.is_deleted ==false)?c.p_cms.title:'已删除'}》：“${(c.p_cms.is_deleted ==true || c.cms.is_deleted ==true)?'评论了:“该条评论已删除”。':c.cms.content_text }”。
+		               								${c.realname } 评论了《${(c.p_cms.is_deleted ==false)?c.p_cms.title:'已删除'}》：“${(c.p_cms.is_deleted ==true || c.cms.is_deleted ==true)?'该条评论已删除':c.cms.content_text }”。
                									</div>
                									
                									
@@ -272,7 +272,7 @@ request.setAttribute("currentTime",datetime);
                									<c:if test="${selfLog == true && c.cms.is_deleted !=false}"><div class="status_tag reject">已删除</div></c:if>
                									
                									<c:if test="${c.cms.is_deleted == false}">
-               										<div class="article_title"><a class="not-like-an-a" target="_blank" href="/articledetail/toPage.action?wid=${c.cms.id}">${c.cms.title }</a></div>
+               										<div class="article_title"><a class="not-like-an-a" target="_blank" href="${ctx }/articledetail/toPage.action?wid=${c.cms.id}">${c.cms.title }</a></div>
                									</c:if>
                									<c:if test="${c.cms.is_deleted == true}">
                										<div class="article_title">该文章已删除</div>
@@ -351,8 +351,8 @@ request.setAttribute("currentTime",datetime);
                 				</c:when>
                 				<%-- 6 7动态 收藏图书 图书点赞end --%>
                 				
-                				<%-- 8 9 11动态 教材申报 选题申报 问卷调查 --%>
-                				<c:when test="${c.type == 8 || c.type == 9 || c.type == 11}">	
+                				<%-- 8 9 10审 11动态 教材申报 选题申报 图书纠错审核 问卷调查 --%>
+                				<c:when test="${c.type == 8 || c.type == 9 || c.type == 11 ||(c.type == 10 && c.detail.img != 0)}">	
                 					<div class="issue_line"><span class="issue_name">${c.detail.title }</span><span class="issue_time">${c.trendst_date }</span></div>
            							<div class="msg_line">
            								<div class="msg_content">
@@ -361,11 +361,11 @@ request.setAttribute("currentTime",datetime);
            								</div>
            							</div> 
                 				</c:when>
-                				<%-- 8 9 11动态 教材申报 选题申报 问卷调查  end --%>
+                				<%-- 8 9 10审 11动态 教材申报 选题申报 图书纠错审核 问卷调查  end --%>
                 				
                 				<%-- 10动态 图书纠错 生成--%>
-                				<c:when test="${c.type == 10}">	
-                					<div class="issue_line"><span class="issue_name">纠正了图书</span><span class="issue_time">${c.trendst_date }</span></div>
+                				<c:when test="${c.type == 10 && c.detail.img == 0}">	
+                					<div class="issue_line"><span class="issue_name">${c.detail.title }</span><span class="issue_time">${c.trendst_date }</span></div>
                							<div class="content_line">
                								<div class="img_wrapper">
                									<c:if test="${c.book.image_url==null || c.book.image_url ==''||c.book.image_url=='default'||c.book.image_url=='DEFAULT' }">
@@ -382,7 +382,7 @@ request.setAttribute("currentTime",datetime);
                									</div>
                									<div class="sub_title">
 	               									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
-	               									${c.realname } 纠正了《${c.book.bookname }》第${c}页，第<%--${c.detail.content.line }行--%>:"${c.detail.content.content }"
+	               									${c.realname } 纠正了《${c.book.bookname }》第${c.detail.content.page }页，第${c.detail.content.line }行:"${c.detail.content.content }"
                									</div>
                									<div class="book_detail">${c.book.detail }</div>
                								</div>
@@ -723,7 +723,7 @@ request.setAttribute("currentTime",datetime);
                     <br/>
                     <c:if test="${listmygroup == null || listmygroup.size()==0  }">
                 		<div style="padding-top: 10px;">
-	                        <img src="<c:url value="${ctx}/statics/image/no_group.png"></c:url>">
+	                        <img src="<c:url value="/statics/image/no_group.png"></c:url>">
 	                    </div>
                 	</c:if>
                     <ul class="scul">

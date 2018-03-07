@@ -55,7 +55,7 @@ $(function(){
 	    //接受来自服务器的消息
 	    //...
 	    console.log("Socket新消息:"+event.data);
-	    var data = $.parseJSON(event.data);  
+	    var data = $.parseJSON(event.data); 
 	    var sender = 2 ; //他人的
 	    if(data.senderType == 0 || data.senderId == 0 ){//系统消息
 	    	sender = 0; 
@@ -67,7 +67,7 @@ $(function(){
 	    	if(data.senderIcon==''||data.senderIcon=='DEFAULT'||data.senderIcon.indexOf('statics')!=-1||data.senderIcon.indexOf('default_image')!=-1||data.senderIcon.indexOf('png')!=-1){
 	    		data.senderIcon = contxtpath+'/statics/image/default_image.png';
 	    	}else{
-	    		data.senderIcon = contxtpath+'/image/'+data.senderIcon+'.action';
+	    		data.senderIcon = contxtpath+'/image/'+senderIcon+'.action';
 	    	}
 	    	loadNewGroupMsg(sender,data.senderName,data.senderIcon,data.content,data.time);
 	    }
@@ -91,12 +91,14 @@ $(function(){
     
 	//按钮发送消息
 	$("#sendMsg").click(function(){
+        $('#wechat').scrollTop( $('#wechat')[0].scrollHeight );
 		sendSocktMsg();
 	});
 	
 	var sendSocktMsg = function(){
 		var content=$("#msgContent").val();
-		if(!content || content.trim() ==''){
+		var content2=content.replace(/(^\s*)|(\s*$)/g, "");//兼容ie8
+		if(!content || content2 ==''){
 			window.message.warning("请键入消息");
 			return ;
 		}
@@ -105,7 +107,7 @@ $(function(){
 			return ;
 		}
         if (webSocket) {
-		webSocket.send("{senderId:"+$("#userId").val()+",senderType:"+2+",content:'"+content+"',groupId:"+$("#groupId").val()+",sendType:0}");
+            webSocket.send("{senderId:"+$("#userId").val()+",senderType:"+2+",content:'"+content+"',groupId:"+$("#groupId").val()+",sendType:0}");
         }
 		$("#msgContent").val("");
 	}
@@ -445,8 +447,9 @@ $(function(){
                         "<div class='clear'></div> "+
                     "</div> ";
 		}
-		$(".iframe1").append(html);
-		$(".iframe1").scrollTop($($(".iframe1")[0]).height());
+        $(".iframe1").append(html);
+		var a=document.getElementsByClassName("chat_items mine");
+		$(".iframe1").scrollTop(100*a.length);
 	}
 	
 	//转换时间戳的方法

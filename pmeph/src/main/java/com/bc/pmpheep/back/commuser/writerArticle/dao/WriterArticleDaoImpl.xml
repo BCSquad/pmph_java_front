@@ -11,10 +11,7 @@
 		)
 	</insert>
 	
-	<!-- 写文章附件——封面 -->
-	<insert id="insertArticleCover" parameterType="java.util.Map">
-		insert into cms_extra (content_id,attachment,attachment_name) values(#{table_trendst_id},#{mid},#{coverName})
-	</insert>
+
 	<!-- 更新文章状态 -->
 	<update id="updateIsStaging"  parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="table_trendst_id">
 		update cms_content set 

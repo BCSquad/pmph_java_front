@@ -205,7 +205,14 @@ public interface DataAuditService {
 	 * @return
 	 */
 	public List<Map<String,Object>> queryAcadereward(Map<String,Object> map);
-	
+	/**
+	 * 查询参加人卫慕课、数字教材编写情况
+	 */
+	public Map<String,Object> queryMoocdigital(Map<String, Object> map);
+	/**
+	 * 编写内容意向表
+	 */
+	public Map<String,Object> queryIntention(Map<String, Object> map);
 	
 	
 	
@@ -217,7 +224,7 @@ public interface DataAuditService {
 	/**
 	 * 通过后发送消息给申报人员
 	 */
-	void senNewMsgPass(Long thisId,Short thisType,Long frendId,Short friendIdType,String title,String content);
+	void senNewMsgPass(Long material_id,Long thisId,Short thisType,Long frendId,Short friendIdType,String title,String content);
 	
 	/**
 	 * 申报审核退回
@@ -226,11 +233,13 @@ public interface DataAuditService {
 	/**
 	 * 退回后发送消息给申报人员
 	 */
-	void senNewMsgBack(Long thisId,Short thisType,Long frendId,Short friendIdType,String title,String content);
+	void senNewMsgBack(Long material_id,Long thisId,Short thisType,Long frendId,Short friendIdType,String title,String content);
 	
 	
 	
 	//更新Declaration修改时间
 	void updateDeclarationUpdateTime(Map<String, Object> queryMap);
-	
+
+	//人卫社教材编写情况
+	public List<Map<String,Object>> queryRwsBook(Map<String,Object> map);
 }

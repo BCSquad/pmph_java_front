@@ -79,6 +79,26 @@
 						<td><span>证件号码：${gezlList.idcard}</span></td>
 						<td colspan="2"><span>地&emsp;&emsp;址：${gezlList.address}</span></td>
 					</tr>
+					<tr>
+						<td><span>&ensp;服从调剂：</span>
+							<c:if test="${gezlList.is_dispensed == '0'}">否</c:if>
+							<c:if test="${gezlList.is_dispensed == '1'}">是</c:if>
+						</td>
+						<td><span>&ensp;参与本科教学评估认证：</span>
+							<c:if test="${gezlList.is_utec == '0'}">否</c:if>
+							<c:if test="${gezlList.is_utec == '1'}">是</c:if>
+						</td>
+						<td><span>&ensp;学&emsp;&emsp;历：</span>
+	                                <c:if test="${gezlList.degree=='0'}">无</c:if>
+	                                <c:if test="${gezlList.degree=='1'}">专科</c:if>
+	                                <c:if test="${gezlList.degree=='2'}">本科</c:if>
+	                                <c:if test="${gezlList.degree=='3'}">硕士</c:if>
+	                                <c:if test="${gezlList.degree=='4'}">博士</c:if>
+	                    </td>
+						<td><span>&ensp;专业特长：</span>
+							${gezlList.expertise}
+						</td>
+					</tr>
 				</table>
 			</div>
 		</div>
@@ -222,7 +242,7 @@
 		<div class="sbxq_item" id="sbjccb">
 			<div>
 				<span id="tsxz_span6"></span>
-				<span class="tsxz_title">上版教材参编情况</span>
+				<span class="tsxz_title">本套上版教材参编情况</span>
 			</div>
 			<div class="content">
 				<table class="tab_2" id="tab_jccb">
@@ -241,8 +261,8 @@
 							<td>
 								<c:if test="${list.position == '0'}">无</c:if>
 								<c:if test="${list.position == '1'}">主编</c:if>
-								<c:if test="${list.position == '2'}">编委</c:if>
-								<c:if test="${list.position == '3'}">副编委</c:if>
+								<c:if test="${list.position == '2'}">副主编</c:if>
+								<c:if test="${list.position == '3'}">编委</c:if>
 							</td>
 							<td>
 								<c:if test="${list.is_digital_editor == '1'}">是</c:if>
@@ -321,14 +341,66 @@
 				</table>
 			</div>
 		</div>
-		<!--教材编写情况-->
-		<div class="sbxq_item" id="jcbxqk">
+		<!--人卫社教材编写情况表-->
+		<div class="sbxq_item" id="rwsjcbx">
 			<div>
 				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">教材编写情况</span>
+				<span class="tsxz_title">人卫社教材编写情况表</span>
+				<span class="tsxz_ts" id="rwsjcbx_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_xt" id="rwsjcbx_xt" >（选填）</span>
 			</div>
 			<div class="content">
-				<table class="tab_2" id="tab_jcbx">
+				<table class="tab_2" id="tab_rwsjcbx">
+					<thead>
+						<tr>
+							<td width="230px">教材名称</td>
+							<td width="120px">教材级别</td>
+							<td width="120px">编写职务</td>
+							<td width="100px">是否数字编委</td>
+							<td width="120px">出版时间</td>
+							<td width="120px">标准书号</td>
+							<td>备注</td>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="list" items="${rwsjcList}" varStatus="status">
+						<tr>
+							<td>${list.material_name}</td>
+							<td>
+								<c:if test="${list.rank == '0'}">无</c:if>
+								<c:if test="${list.rank == '1'}">国家</c:if>
+								<c:if test="${list.rank == '2'}">省部</c:if>
+								<c:if test="${list.rank == '3'}">协编</c:if>
+								<c:if test="${list.rank == '4'}">校本</c:if>
+								<c:if test="${list.rank == '5'}">其他</c:if>
+							</td>
+							<td>
+								<c:if test="${list.position == '0'}">无</c:if>
+								<c:if test="${list.position == '1'}">主编</c:if>
+								<c:if test="${list.position == '2'}">副主编</c:if>
+								<c:if test="${list.position == '3'}">编委</c:if>
+							</td>
+							<td style="color: #333333;">
+								<c:if test="${list.is_digital_editor == '1'}">是</c:if>
+								<c:if test="${list.is_digital_editor == '0'}">否</c:if>
+							</td>
+							<td>${list.publish_date}</td>
+							<td>${list.isbn}</td>
+							<td>${list.note}</td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+			<!--其他社教材编写情况-->
+		<div class="sbxq_item" id="qtjcbxqk">
+			<div>
+				<span id="tsxz_span7"></span>
+				<span class="tsxz_title">其他社教材编写情况</span>
+			</div>
+			<div class="content">
+				<table class="tab_2" id="tab_qtjcbxqk">
 					<thead>
 						<tr>
 							<td width="230px">教材名称</td>
@@ -342,15 +414,16 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:forEach var="list" items="${jcbxList}">
-					<c:if test="${list.rank != '0'}">
-						<tr>
+						<c:forEach var="list" items="${jcbxqtList}" varStatus="status">
+							<tr>
 							<td>${list.material_name}</td>
 							<td>
-								<c:if test="${list.rank == '1'}">教育部规划</c:if>
-								<c:if test="${list.rank == '2'}">卫计委规划</c:if>
-								<c:if test="${list.rank == '3'}">区域规划</c:if>
-								<c:if test="${list.rank == '4'}">创新教材</c:if>	
+								<c:if test="${list.rank == '0'}">无</c:if>
+								<c:if test="${list.rank == '1'}">国家</c:if>
+								<c:if test="${list.rank == '2'}">省部</c:if>
+								<c:if test="${list.rank == '3'}">协编</c:if>
+								<c:if test="${list.rank == '4'}">校本</c:if>
+								<c:if test="${list.rank == '5'}">其他</c:if>
 							</td>
 							<td>
 								<c:if test="${list.position == '0'}">无</c:if>
@@ -358,62 +431,16 @@
 								<c:if test="${list.position == '2'}">副主编</c:if>
 								<c:if test="${list.position == '3'}">编委</c:if>
 							</td>
-							<td>
+							<td style="color: #333333;">
 								<c:if test="${list.is_digital_editor == '1'}">是</c:if>
 								<c:if test="${list.is_digital_editor == '0'}">否</c:if>
 							</td>
-							<td>${list.publisher}</td>
-							<td>${list.publish_date}</td>
-							<td>${list.isbn}</td>
-							<td>${list.note}</td>
-						</tr>
-						</c:if>
+								<td>${list.publisher}</td>
+								<td>${list.publish_date}</td>
+								<td>${list.isbn}</td>
+								<td>${list.note}</td>
+							</tr>
 						</c:forEach>
-					</tbody>
-				</table>
-			</div>
-		</div>
-			<!--其他教材编写情况-->
-		<div class="sbxq_item" id="qtjcbxqk">
-			<div>
-				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">其他教材编写情况</span>
-			
-			</div>
-			<div class="content">
-				<table class="tab_2" id="tab_qtjcbx">
-					<thead>
-						<tr>
-							<td width="250px">教材名称</td>
-							<td width="120px">编写职务</td>
-							<td width="100px">是否数字编委</td>
-							<td width="150px">出版社</td>
-							<td width="130px">出版时间</td>
-							<td width="130px">标准书号</td>
-							<td>备注</td>
-					
-						</tr>
-					</thead>
-					<tbody>
-					<c:forEach var="list" items="${jcbxList}">
-					<c:if test="${list.rank == '0'}">
-						<tr>
-							<td>${list.material_name}</td>
-							<td>
-								<c:if test="${list.position == '0'}">无</c:if>
-								<c:if test="${list.position == '1'}">主编</c:if>
-								<c:if test="${list.position == '2'}">副主编</c:if>
-								<c:if test="${list.position == '3'}">编委</c:if>
-							</td>
-							<td>
-								<c:if test="${list.is_digital_editor == '1'}">是</c:if>
-								<c:if test="${list.is_digital_editor == '0'}">否</c:if>
-							</td>
-							<td>${list.publisher}</td>
-							<td>${list.publish_date}</td>
-							<td>${list.isbn}</td>
-							<td>${list.note}</td>
-						</tr></c:if></c:forEach>
 					</tbody>
 				</table>
 			</div>
@@ -607,6 +634,26 @@
 						</tr></c:forEach>
 					</tbody>
 				</table>
+			</div>
+		</div>
+		<!--参加人卫慕课、数字教材编写情况-->
+	 	<div class="sbxq_item" >
+			<div>
+				<span id="tsxz_span9"></span>
+				<span class="tsxz_title">参加人卫慕课、数字教材编写情况</span>
+			</div>
+			<div class="content">
+				<textarea class="text_cl" readonly="readonly">${digitalMap.content}</textarea>
+			</div>
+		</div>
+		<!--编写内容意向表-->
+	 	<div class="sbxq_item" >
+			<div>
+				<span id="tsxz_span9"></span>
+				<span class="tsxz_title">编写内容意向表</span>
+			</div>
+			<div class="content">
+				<textarea class="text_cl" readonly="readonly">${intentionMap.content}</textarea>
 			</div>
 		</div>
 		<!-- 申报单位-->

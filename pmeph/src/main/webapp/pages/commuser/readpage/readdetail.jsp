@@ -291,8 +291,8 @@
                     </div>
                 </div>
                 <div class="block">
-                    <div id="changepage">
-                        <c:forEach items="${listCom}" var="list" begin="1" end="2">
+                    <divlistCom id="changepage">
+                        <c:forEach items="${listCom}" var="list" begin="0" end="1">
                             <div class="item">
                                 <div class="item_title">
                                     <div style="float: left;">
@@ -350,7 +350,7 @@
                                 <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
                             </div>
                         </c:forEach>
-                    </div>
+                    </divlistCom>
                     <div class="morecon">
                         <input type="hidden" value="${start}" id="start">
                         <span class="moreothers" onclick="changepage()"
@@ -362,7 +362,7 @@
                             <div class="longcom">图书长评</div>
                             <div class="writecom" onclick="writeablut()">写书评</div>
                         </div>
-                        <c:forEach items="${longList}" var="list" varStatus="status" begin="1" end="2">
+                        <c:forEach items="${longList}" var="list" varStatus="status" begin="0" end="1">
                             <div class="item">
                                 <div class="item_title">
                                     <div style="float: left;">
@@ -445,15 +445,16 @@
                 </div>
                 <div style="margin-top: 20px;">
                     <div style="float: left;width: 90px;height: 116px">
-                        <img src="<%-- ${supMap.image_url} --%>${ctx}/statics/image/ts_06.png" class="righttopbook"/>
+                        <input type="hidden" id="sup-hidden" value="${supMap.code}">
+                        <img src="${supMap.image_url}" class="righttopbook"/>
                     </div>
                     <div style="float: left;width: 170px;margin-left: 10px;">
-                        <div class="ptts_sp1">${supMap.book_name}麻醉解剖学学习指导与习题集（第3版）</div>
-                        <div class="watch" onclick="todetail('<%-- ${supMap.id} --%>168')">
+                        <div class="ptts_sp1">${supMap.bookname}</div>
+                        <div class="watch" onclick="todetail('${supMap.id}')">
                             <div class="lookbook">去看看</div>
                         </div>
-                        <div class="ptts_sp2">${supMap.realname}张励才</div>
-                        <div class="ptts_sp3">${supMap.detail}全国高等学校麻醉学专业第四轮规划教材配套教材，根据麻醉...</div>
+                        <div class="ptts_sp2">${supMap.author}</div>
+                        <div class="ptts_sp3">${supMap.detail}</div>
                     </div>
                 </div>
             </div>
