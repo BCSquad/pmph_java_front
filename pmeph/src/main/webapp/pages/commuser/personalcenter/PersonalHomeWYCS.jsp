@@ -359,6 +359,7 @@ request.setAttribute("currentTime",datetime);
            									<c:if test="${c.trendst_date_num >= currentTime}"><div class="tag_new"></div></c:if>
            									${c.detail.content }					
            								</div>
+           								<div class="${c.detail.img == 1?'success_smile ':'' + c.detail.img == 2?'fail_unhappy ':''}"></div>
            							</div> 
                 				</c:when>
                 				<%-- 8 9 10审 11动态 教材申报 选题申报 图书纠错审核 问卷调查  end --%>
