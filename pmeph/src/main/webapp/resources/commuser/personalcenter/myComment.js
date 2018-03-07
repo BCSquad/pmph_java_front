@@ -83,6 +83,12 @@ function showup(id,book_id,is_long) {
 	        success: function (json) {
 	            	$("#content").html(json.content);
 	                $("#bookmistake").show();
+	                var score = json.score;
+	                var scoreStar = parseInt(score/2);
+	                $("#score"+scoreStar).css("background-position", "-183px -174px").prevAll().css("background-position", "-183px -174px");
+	                $("#score"+scoreStar).nextAll().css({"background-position": "-183px -153px"});
+	                score = score + '.0';
+	                $("#last_score").html(score);
 	          
 	        }
 	    });
