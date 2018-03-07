@@ -187,15 +187,10 @@ $(function () {
     });
 
     //隐藏/显示配套图书
-    if($("#sup-hidden").val()=='no'){
+    if($("sup-hidden").val=='no'){
 
     }else {
         $(".right_1").hide();
-    }
-
-    //隐藏PDF阅读按钮
-    if($("#pdf-hidden").val()=='no'){
-        $("#dpf").hide();
     }
 
     morecontent();
@@ -317,7 +312,7 @@ function longcom() {
             $(".moreothers").show();
             
             if (json.length < 3) {
-                $("#longothers").html('加载完毕');
+                $("#longothers").html('没有更多了~~~');
             }else{
             	json.remove(2);
             }

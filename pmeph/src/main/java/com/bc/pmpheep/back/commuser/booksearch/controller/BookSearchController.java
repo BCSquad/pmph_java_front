@@ -16,10 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
-import com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService;
 import com.bc.pmpheep.back.commuser.booksearch.service.BookSearchService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.template.service.TemplateService;
@@ -42,10 +40,6 @@ public class BookSearchController extends BaseController {
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.booksearch.service.BookSearchServiceImpl")
 	BookSearchService bookSearchService;
-	
-	@Autowired
-	@Qualifier("com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService")
-	private ArticleSearchService articleSearchService;
 	
 	/**
 	 * 跳转到查询页面
@@ -70,35 +64,13 @@ public class BookSearchController extends BaseController {
 		return mv;
 	}
 	
-	/**
-	 * 从头部搜索框 向 图书搜索和文章搜索的重定向
-	 * @param search
-	 * @param request
-	 * @param redirectAttributes
-	 * @return
-	 * @throws UnsupportedEncodingException
-	 */
 	@RequestMapping("bookOrArtSpliter")
-	public String bookOrArtSpliter(@RequestParam(value="search",defaultValue="")String search,HttpServletRequest request,RedirectAttributes redirectAttributes) throws UnsupportedEncodingException{
-		String redirectUrl = "redirect:/booksearch/toPage.action";
-		redirectAttributes.addAttribute("search",search);
-		String searchName = java.net.URLDecoder.decode(search.trim(),"UTF-8"); 
-		searchName = searchName !=null && !"".equals(searchName)? searchName.trim():"";
-        String[] searchTextArray = searchName.split(" ");
-        searchTextArray = searchTextArray.length>0?searchTextArray:null;
-		Map<String, Object> paraMap = new HashMap<String, Object>();
-		paraMap.put("searchTextArray",searchTextArray);
-		PageParameter<Map<String,Object>> pageParameter = new PageParameter<Map<String,Object>>(1,1);
-		pageParameter.setParameter(paraMap);
+	public int bookOrArtSpliter(@RequestParam(value="search",defaultValue="")String search,HttpServletRequest request) throws UnsupportedEncodingException{
 		
-		int bcount =bookSearchService.getBookTotal(pageParameter);
-		int acount =articleSearchService.queryArticleByAdiCount(pageParameter);
-		System.out.println("test"+bcount + "" + acount);
-		if (bcount==0 && acount >0) {
-			redirectAttributes.addAttribute("title",search);
-			redirectUrl = "redirect:/articlesearch/queryall.action";
-		}
-		return redirectUrl;
+		
+		
+		
+		return 1;
 	}
 	/**
 	 * 查询列表刷新

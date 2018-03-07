@@ -61,6 +61,7 @@ public class ReadDetailController extends BaseController{
 		Map<String, Object> supMap=readDetailService.querySupport(id);
 		Map<String, Object> map=readDetailService.queryReadBook(id);
 		String urlString=(String)map.get("pdf_url");
+		System.out.print(urlString);
 		if (urlString==null) {
 			map.put("pdf_url", null);
 			map.put("pdf_code", "no");

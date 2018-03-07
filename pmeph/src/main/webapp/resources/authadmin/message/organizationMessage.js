@@ -17,22 +17,17 @@ function loadMore(){
 			$("#startPara").val(startPara);
 			var str= '';
 			$.each(json.list,function(i,n){
-                str += '<div class="item" id="item'+n.id+'">' +
+                str += '<div class="item" onclick="system(\'' + n.id + '\',\'' + n.NAME + '\',\'' + n.TIME + '\')">' +
                     '<div class="item-img">' +
                     '<img src="' + contextpath + n.avatar + '" />' +
                     '</div>' +
-                    '<div class="content" onclick="system(\'' + n.id + '\',\'' + n.NAME + '\',\'' + n.TIME + '\')" style="width:1000px">' +
+                    '<div class="content" >' +
                     ' <p class="title" >' +
                     '<span class="msg">' + n.title + '</span>' +
                     '<span class="time">' + n.TIME + '</span>' +
                     ' </p>' +
-                    '<div class="text" id="txt'+n.id+'">' + n.msg_content +
-                    (n.isread==true?'<img src="'+contextpath+'/statics/image/readyes.png"  id="isread'+n.id+'"/>':'') +'</div>' +
+                    '<div class="text" >' + n.msg_content + '</div>' +
             '</div>'+
-            (n.title=='系统消息'?'<div style="float:left;color: #999999;font-size: 14px;height:20px;margin-top: 45px;" onclick="delmsg(\''+n.id+'\')">'+
-                    '<span style="width:20px;height:20px;float:left;" class="deltag"></span>'+
-                    '<span style="line-height: 20px;">删除</span>'+
-                '</div>':'')+
         '</div>';
 		});
 			$("#message-list").append(str);
@@ -75,11 +70,6 @@ function system(str, name, time) {
                     shadeClose: true,
                     content: $("#bookmistake")
                 });
-                
-                var obj= document.getElementById('isread'+str);
-                if(!obj&&json.isread=="yes"){
-                  	$("#txt"+json.id).append('&nbsp;&nbsp;<img src="'+contextpath+'/statics/image/readyes.png"  id="isread'+str+'"/>');
-                }
             }
         });
     }
@@ -91,7 +81,6 @@ function hideup() {
 }
 //
 function delmsg(id){
-	window.message.confirm("你确定删除此消息吗？",{btn:["确定","取消"]},function(index){
 	  $.ajax({
           type:"post",
           url:contextpath+"AllMessage/delmsg.action?mid="+id,
@@ -102,8 +91,6 @@ function delmsg(id){
         		  $("#item"+id).remove();
         	  }
           }});
-	  layer.close(index);
-	},function(){});
 }
 //时间格式化
 function formatDate(value) {

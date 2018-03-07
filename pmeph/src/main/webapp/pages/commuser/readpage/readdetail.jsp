@@ -201,9 +201,8 @@
                     <input id="upload-video" type="file" class='hidden-upload' name='file' accept="video/*"
                            style="width: 0px;height: 33px;padding-left: 100px;cursor: pointer;">
                 </div>
-                <div class="left1" id="dpf">
+                <div class="left1">
                     <div id="xsp3"></div>
-                    <input type="hidden" id="pdf-hidden" value="${map.pdf_code}">
                     <a href="${map.pdf_url}" style="text-decoration: none"><span class="xsp2">PDF试读</span>
                     </a>
                 </div>

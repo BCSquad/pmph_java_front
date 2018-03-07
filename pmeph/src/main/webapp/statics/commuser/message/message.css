@@ -630,37 +630,10 @@ a {
 }
 .fixwidth{
     max-width: 800px;
-    height: 34px;
+    height: 18px;
     overflow: hidden;
     display: inline-block;
-    text-overflow: ellipsis;
-    white-space:nowrap;
-	text-align: center;
-	line-height: 24px;
 }
-.fixwidth  p{ 
-	 max-width: 800px;
-	 margin: 0px;
-	float:left; 
-	height: inherit;
-}
-
-#readyes{
-	float: left;
-	display: block;
-	margin: 5px;
-	clear: right;
-}
-
-#readno{
-	float: left;
-	display: block;
-	margin: 5px;
-	clear: right;
-}
-
-
-
 .listContent a {
     text-decoration: none;
     color: #03717b;

@@ -187,13 +187,8 @@ public class DataAuditServiceImpl implements DataAuditService {
 
 	}
 
-	@Override
-	public List<Map<String, Object>> queryRwsBook(Map<String, Object> map) {
-		return null;
-	}
 
-
-	//通过教材ID查出所有教材下的书籍
+		//通过教材ID查出所有教材下的书籍
 		@Override
 		public List<Map<String, Object>> queryBookById(String material_id) {
 			return this.dataAuditDao.queryBookById(material_id);
