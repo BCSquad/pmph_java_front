@@ -4,7 +4,8 @@ $(function(){
 	UE.getEditor('mText');
 	ue.ready(function(){
 		//查询登陆人是否写过长评论
-		queryLoginLong();
+//		queryLoginLong();
+		$(".sxy-btn").show();
 	});
 	
 	//默认分数满分
@@ -113,9 +114,10 @@ function insertlong(){
 				var state = json.state;
 				if (state == 'OK'){
 					window.message.success("保存成功！");
-					$(".sxy-btn").attr("disabled",true);
-					$("#TitleValue").attr("disabled",true);
-					ue.setDisabled();
+//					$(".sxy-btn").attr("disabled",true);
+//					$("#TitleValue").attr("disabled",true);
+//					ue.setDisabled();
+					toPercen();
 				} else if (state == 'ERROR'){
 					var words = json.value;
 	        		var title = document.getElementById("TitleValue");
@@ -141,6 +143,12 @@ function insertlong(){
 		window.message.info("请填写完所有内容！");
 	}
 }
+
+//跳转到长评页面
+function toPercen() {
+	 window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=wdpl&is_long=1";
+}
+
 
 $(function(){
 	$("#TitleValue").focus(function(){

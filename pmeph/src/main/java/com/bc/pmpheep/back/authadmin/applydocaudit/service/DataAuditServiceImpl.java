@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -133,7 +134,6 @@ public class DataAuditServiceImpl implements DataAuditService {
 	@Override
 	public void senNewMsgPass(Long material_id,Long thisId, Short thisType, Long frendId,
 			Short friendIdType, String title, String content) {
-		// TODO
 		   Message message = new Message();
 	        message.setContent(content);
 	        messageService.add(message);
@@ -179,6 +179,7 @@ public class DataAuditServiceImpl implements DataAuditService {
 	public Map<String, Object> queryMaterialbyId(String material_id) {
 		return this.dataAuditDao.queryMaterialbyId(material_id);
 	}
+	
 
 	//更新Declaration时间
 	@Override
@@ -188,138 +189,156 @@ public class DataAuditServiceImpl implements DataAuditService {
 	}
 
 
-		//通过教材ID查出所有教材下的书籍
-		@Override
-		public List<Map<String, Object>> queryBookById(String material_id) {
-			return this.dataAuditDao.queryBookById(material_id);
-		}
-		@Override
-		public List<Map<String, Object>> queryZjkzxxById(String material_id) {
-			return this.dataAuditDao.queryZjkzxxById(material_id);
-		}
+    //通过教材ID查出所有教材下的书籍
+    @Override
+    public List<Map<String, Object>> queryBookById(String material_id) {
+        return this.dataAuditDao.queryBookById(material_id);
+    }
 
-		/**
-		 * 图书申报职位暂存
-		 */
-		@Override
-		public List<Map<String, Object>> queryTssbZc(Map<String, Object> map) {
-			return this.dataAuditDao.queryTssbZc(map);
-		}
+    @Override
+    public List<Map<String, Object>> queryZjkzxxById(String material_id) {
+        return this.dataAuditDao.queryZjkzxxById(material_id);
+    }
 
-
-		@Override
-		public List<Map<String, Object>> queryPerson(Map<String, Object> map) {
-			return this.dataAuditDao.queryPerson(map);
-		}
+    /**
+     * 图书申报职位暂存
+     */
+    @Override
+    public List<Map<String, Object>> queryTssbZc(Map<String, Object> map) {
+        return this.dataAuditDao.queryTssbZc(map);
+    }
 
 
-		@Override
-		public List<Map<String, Object>> queryStu(Map<String, Object> map) {
-			return this.dataAuditDao.queryStu(map);
-		}
+    @Override
+    public List<Map<String, Object>> queryPerson(Map<String, Object> map) {
+        return this.dataAuditDao.queryPerson(map);
+    }
 
-		@Override
-		public List<Map<String, Object>> queryWork(Map<String, Object> map) {
-			return this.dataAuditDao.queryWork(map);
-		}
 
-		@Override
-		public List<Map<String, Object>> queryStea(Map<String, Object> map) {
-			return this.dataAuditDao.queryStea(map);
-		}
 
-		@Override
-		public List<Map<String, Object>> queryJcbj(Map<String, Object> map) {
-			return this.dataAuditDao.queryJcbj(map);
-		}
+    @Override
+    public List<Map<String, Object>> queryStu(Map<String, Object> map) {
+        return this.dataAuditDao.queryStu(map);
+    }
 
-		@Override
-		public List<Map<String, Object>> queryGjkcjs(Map<String, Object> map) {
-			return this.dataAuditDao.queryGjkcjs(map);
-		}
+    @Override
+    public List<Map<String, Object>> queryWork(Map<String, Object> map) {
+        return this.dataAuditDao.queryWork(map);
+    }
 
-		@Override
-		public List<Map<String, Object>> queryJcbx(Map<String, Object> map) {
-			return this.dataAuditDao.queryJcbx(map);
-		}
+    @Override
+    public List<Map<String, Object>> queryStea(Map<String, Object> map) {
+        return this.dataAuditDao.queryStea(map);
+    }
 
-		@Override
-		public List<Map<String, Object>> queryqtJcbx(Map<String, Object> map) {
-			map.put("rank", "0");
-			return this.dataAuditDao.queryJcbx(map);
-		}
+    @Override
+    public List<Map<String, Object>> queryJcbj(Map<String, Object> map) {
+        return this.dataAuditDao.queryJcbj(map);
+    }
 
-		@Override
-		public List<Map<String, Object>> queryTsxz(Map<String, Object> map) {
-			return this.dataAuditDao.queryTsxz(map);
-		}
+    @Override
+    public List<Map<String, Object>> queryGjkcjs(Map<String, Object> map) {
+        return this.dataAuditDao.queryGjkcjs(map);
+    }
 
-		@Override
-		public List<Map<String, Object>> queryZjxs(Map<String, Object> map) {
-			return this.dataAuditDao.queryZjxs(map);
-		}
+    @Override
+    public List<Map<String, Object>> rwsjcList(Map<String, Object> map) {
+        return this.dataAuditDao.queryRwsjc(map);
+    }
 
-		@Override
-		public List<Map<String, Object>> queryZjkyqk(Map<String, Object> map) {
-			return this.dataAuditDao.queryZjkyqk(map);
-		}
+    @Override
+    public List<Map<String, Object>> queryqtJcbx(Map<String, Object> map) {
+        map.put("rank", "0");
+        return this.dataAuditDao.queryJcbx(map);
+    }
 
-		@Override
-		public List<Map<String, Object>> queryGjghjc(Map<String, Object> map) {
-			return this.dataAuditDao.queryGjghjc(map);
-		}
+    @Override
+    public List<Map<String, Object>> queryTsxz(Map<String, Object> map) {
+        return this.dataAuditDao.queryTsxz(map);
+    }
 
-		@Override
-		public List<Map<String, Object>> queryOrgById(String material_id) {
-			return this.dataAuditDao.queryOrgById(material_id);
-		}
-		@Override
-		public List<Map<String, Object>> queryZjkzbb(Map<String, Object> map) {
-			return this.dataAuditDao.queryZjkzbb(map);
-		}
 
-		@Override
-		public Map<String,Object> queryAchievement(Map<String, Object> map) {
-			return this.dataAuditDao.queryAchievement(map);
-		}
 
-		@Override
-		public List<Map<String, Object>> queryMonograph(Map<String, Object> map) {
-			return this.dataAuditDao.queryMonograph(map);
-		}
 
-		@Override
-		public List<Map<String, Object>> queryPublish(Map<String, Object> map) {
-			return this.dataAuditDao.queryPublish(map);
-		}
+    @Override
+    public List<Map<String, Object>> queryZjxs(Map<String, Object> map) {
+        return this.dataAuditDao.queryZjxs(map);
+    }
 
-		@Override
-		public List<Map<String, Object>> querySci(Map<String, Object> map) {
-			return this.dataAuditDao.querySci(map);
-		}
 
-		@Override
-		public List<Map<String, Object>> queryClinicalreward(Map<String, Object> map) {
-			return this.dataAuditDao.queryClinicalreward(map);
-		}
+    @Override
+    public List<Map<String, Object>> queryZjkyqk(Map<String, Object> map) {
+        return this.dataAuditDao.queryZjkyqk(map);
+    }
 
-		@Override
-		public List<Map<String, Object>> queryAcadereward(Map<String, Object> map) {
-			return this.dataAuditDao.queryAcadereward(map);
-		}
 
-		@Override
-		public List<Map<String, Object>> queryRwsBook(Map<String, Object> map) {
-			// TODO Auto-generated method stub
-			return dataAuditDao.queryRwsBook(map);
-		}
-		@Override
-		public Map<String, Object> queryMoocdigital(Map<String, Object> map) {
-			return this.dataAuditDao.queryMoocdigital(map);
-		}
-		@Override
-		public Map<String, Object> queryIntention(Map<String, Object> map) {
-			return this.dataAuditDao.queryIntention(map);
-		}
 
+    @Override
+    public List<Map<String, Object>> queryGjghjc(Map<String, Object> map) {
+        return this.dataAuditDao.queryGjghjc(map);
+    }
+
+
+
+    @Override
+    public List<Map<String, Object>> queryOrgById(String material_id) {
+        return this.dataAuditDao.queryOrgById(material_id);
+    }
+
+    @Override
+    public List<Map<String, Object>> queryZjkzbb(Map<String, Object> map) {
+        return this.dataAuditDao.queryZjkzbb(map);
+    }
+
+
+    @Override
+    public Map<String, Object> queryAchievement(Map<String, Object> map) {
+        return this.dataAuditDao.queryAchievement(map);
+    }
+
+
+
+    @Override
+    public List<Map<String, Object>> queryMonograph(Map<String, Object> map) {
+        return this.dataAuditDao.queryMonograph(map);
+    }
+
+
+    @Override
+    public List<Map<String, Object>> queryPublish(Map<String, Object> map) {
+        return this.dataAuditDao.queryPublish(map);
+    }
+
+
+    @Override
+    public List<Map<String, Object>> querySci(Map<String, Object> map) {
+        return this.dataAuditDao.querySci(map);
+    }
+
+
+
+    @Override
+    public List<Map<String, Object>> queryClinicalreward(Map<String, Object> map) {
+        return this.dataAuditDao.queryClinicalreward(map);
+    }
+
+
+    @Override
+    public List<Map<String, Object>> queryAcadereward(Map<String, Object> map) {
+        return this.dataAuditDao.queryAcadereward(map);
+    }
+
+   
+    @Override
+    public Map<String, Object> queryMoocdigital(Map<String, Object> map) {
+        return this.dataAuditDao.queryMoocdigital(map);
+    }
+
+    @Override
+    public Map<String, Object> queryIntention(Map<String, Object> map) {
+        return this.dataAuditDao.queryIntention(map);
+    }
+
+	
+	
 }

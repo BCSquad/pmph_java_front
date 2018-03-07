@@ -41,19 +41,11 @@ function chooseModel(data){
 	if(data.is_last_position_used == "1"){
 		$("#sbjccb").css("display","block");
 	}
-	//国家级课程建设情况
-	if(data.is_national_course_used == "1"){
+	//精品课程建设情况
+	if(data.is_course_used == "1"){
 		$("#gjjpkcjs").css("display","block");
 	}
-	//省部级课程建设情况
-	if(data.is_provincial_course_used == "1"){
-		$("#sbkcjs").css("display","block");
-	}
-	//学校课程建设情况
-	if(data.is_school_course_used == "1"){
-		$("#xxkcjs").css("display","block");
-	}
-	//主编国家规划教材情况 
+	//主编国家规划教材情况
 	if(data.is_national_plan_used == "1"){
 		$("#zbgjjgh").css("display","block");
 	}
@@ -63,7 +55,7 @@ function chooseModel(data){
 	}
 	//其他教材编写情况
 	if(data.is_pmph_textbook_used == "1"){
-		$("#qtjcbx").css("display","block");
+		$("#qtjcbxqk").css("display","block");
 	}
 	//科研情况
 	if(data.is_research_used == "1"){
@@ -94,6 +86,7 @@ function chooseModel(data){
 		$("#acade").css("display","block");
 	}
 }
+
 
 //提交   通过3 
 function toAudit(id,type){

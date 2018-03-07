@@ -145,26 +145,23 @@ public class DataAuditController extends BaseController{
 			//1.作家申报表
 			List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
 			gezlList = this.dataAuditService.queryPerson(queryMap);
-			String return_cause = "";
 			if(declaration_id == null){
-				queryMap.put("declaration_id", gezlList.get(0).get("id"));
+			queryMap.put("declaration_id", gezlList.get(0).get("id"));
 			}else{
 				queryMap.put("declaration_id", declaration_id);
-				if ("4".equals(gezlList.get(0).get("online_progress").toString())) {
-					return_cause = gezlList.get(0).get("return_cause").toString();
-					mav.addObject("return_cause", return_cause);
-				}
 			}
 			if(material_id == null){
-				queryMap.put("material_id", gezlList.get(0).get("material_id"));
-			}else{
-				queryMap.put("material_id", material_id);
+				material_id= gezlList.get(0).get("material_id").toString();
 			}
+			queryMap.put("material_id", material_id);
+			//教材信息
+			Map<String,Object> materialMap = new HashMap<String,Object>();
+			materialMap = this.dataAuditService.queryMaterialbyId(material_id);
 			//2.作家申报职位暂存
 			List<Map<String,Object>> tssbList = new ArrayList<Map<String,Object>>();
-			if(gezlList.get(0).get("is_staging").toString().equals("1")){ //表示暂存
+			if(gezlList.get(0).get("online_progress").toString().equals("0")){ //表示未提交
 				tssbList=this.dataAuditService.queryTssbZc(queryMap);
-			}else{
+			}else{//退回，通过，提交 都在正式申请表
 				tssbList=this.dataAuditService.queryTsxz(queryMap);
 			}
 			if(tssbList.size()>0){
@@ -182,7 +179,7 @@ public class DataAuditController extends BaseController{
 					}else if(map.get("preset_position").equals(5)){
 						map.put("preset_position", "主编,编委");
 					}else if(map.get("preset_position").equals(6)){
-						map.put("preset_position", "副主编,副主编");
+						map.put("preset_position", "主编,副主编");
 					}else if(map.get("preset_position").equals(9)){
 						map.put("preset_position", "数字编委,编委");
 					}else if(map.get("preset_position").equals(10)){
@@ -223,12 +220,12 @@ public class DataAuditController extends BaseController{
 			//9.作家主编国家级规划教材情况表
 			List<Map<String,Object>> gjghjcList = new ArrayList<Map<String,Object>>();
 			gjghjcList = this.dataAuditService.queryGjghjc(queryMap);
-			//10.作家教材编写情况表
-			List<Map<String,Object>> jcbxList = new ArrayList<Map<String,Object>>();
-			jcbxList=this.dataAuditService.queryJcbx(queryMap);
-			//人卫社教材编写情况
-			List<Map<String,Object>> rwsList = new ArrayList<Map<String,Object>>();
-			rwsList=this.dataAuditService.queryRwsBook(queryMap);
+			 //10.作家教材编写情况表
+			List<Map<String,Object>> rwsjcList = new ArrayList<Map<String,Object>>();
+			List<Map<String,Object>> jcbxqtList = new ArrayList<Map<String,Object>>();
+			//其他社教材编写情况
+			jcbxqtList=this.dataAuditService.queryqtJcbx(queryMap);
+			
 			//11.作家科研情况表
 			List<Map<String,Object>> zjkyList = new ArrayList<Map<String,Object>>();
 			zjkyList = this.dataAuditService.queryZjkyqk(queryMap);
@@ -253,7 +250,8 @@ public class DataAuditController extends BaseController{
 			//18.学术荣誉授予情况表
 			List<Map<String,Object>> acadeList = new ArrayList<Map<String,Object>>();
 			acadeList = this.dataAuditService.queryAcadereward(queryMap);
-
+			//19.人卫社编写情况
+			rwsjcList=this.dataAuditService.rwsjcList(queryMap);
 			//20.参加人卫慕课、数字教材编写情况
 			Map<String,Object> moocMap = new HashMap<String,Object>();
 			moocMap = this.dataAuditService.queryMoocdigital(queryMap);
@@ -261,16 +259,15 @@ public class DataAuditController extends BaseController{
 			Map<String,Object> intentionMap = new HashMap<String,Object>();
 			intentionMap = this.dataAuditService.queryIntention(queryMap);
 
-			//填充
+			mav.addObject("material", materialMap);
 			mav.addObject("gezlList", gezlList.get(0));
 			mav.addObject("tssbList", tssbList);
 			mav.addObject("stuList", stuList);
 			mav.addObject("workList", workList);
 			mav.addObject("steaList", steaList);
 			mav.addObject("jcbjList", jcbjList);
-			mav.addObject("rwsList",rwsList);
 			mav.addObject("gjkcjsList", gjkcjsList);
-			mav.addObject("jcbxList", jcbxList);
+			mav.addObject("rwsjcList", rwsjcList);
 			mav.addObject("gjghjcList", gjghjcList);
 			mav.addObject("zjkyList", zjkyList);
 			mav.addObject("zjxsList", zjxsList);
@@ -281,11 +278,13 @@ public class DataAuditController extends BaseController{
 			mav.addObject("sciList", sciList);
 			mav.addObject("clinicalList", clinicalList);
 			mav.addObject("acadeList", acadeList);
-			mav.addObject("materialMap", queryMap);
-			mav.addObject("view_audit", view_audit);
-			mav.addObject("material_id", material_id);
+			mav.addObject("jcbxqtList", jcbxqtList);
 			mav.addObject("digitalMap", moocMap);
 			mav.addObject("intentionMap", intentionMap);
+			
+			
+			mav.addObject("view_audit", view_audit);
+			mav.addObject("material_id", material_id);
 			mav.addObject("online_progress", gezlList.get(0).get("online_progress").toString());//判断审核通过、退回按钮是否隐藏
 			return mav;
 		}

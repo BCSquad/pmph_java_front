@@ -42,8 +42,7 @@ function loadMore() {
 
                 str += n.title;
 
-                str += "</span><span class='time1'>" + commonTime + "</span></td></tr><tr style='width: 30%'>"s +
-                console.log(n);
+                str += "</span><span class='time1'>" + commonTime + "</span></td></tr><tr style='width: 30%'>";
                 if ((n.msgType==0||n.msgType==1)&& n.material_id==0) {
 	                str += "<td colspan='2' class='title' style='cursor: pointer;' onclick='showup(" + n.id + ")'>"
 	                    + '<input type="hidden" id="messid" value="' + n.id + '"/>'
