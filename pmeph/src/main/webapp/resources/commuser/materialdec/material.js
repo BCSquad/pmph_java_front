@@ -284,11 +284,11 @@ function chooseModel(data){
 		$("#digital_xt").css("display","inline");
 	}
 	//编写内容意向表
-	if(data.is_mooc_digital_used == "1"){
+	if(data.is_intention_used == "1"){
 		$("#intention").css("display","block");
 	}
 	//编写内容意向表必填
-	if(data.is_mooc_digital_required == "1"){
+	if(data.is_intention_required == "1"){
 		$("#intention_bt").css("display","inline");
 		jsonStr=jsonStr+"{\"id\":\"intention_content\",\"content\":\"意向内容必填\"},";
 	}else{
@@ -754,8 +754,7 @@ function add_acade(){
 }
 //删除表格tr
 function del_tr(trId){
-	/*document.getElementById(trId).remove();*/
-	$("#"+trId).remove();
+	document.getElementById(trId).remove();
 }
 
 //提交   类型1 表示提交  2 表示暂存  

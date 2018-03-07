@@ -101,15 +101,15 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 		</if>
 	</select>
 	<insert id="insertPerson" parameterType="java.util.Map">
-		insert into declaration(material_id,user_id,realname,sex,birthday,experience,org_name,position,expertise,
+		insert into declaration(material_id,user_id,realname,sex,birthday,experience,org_name,position,expertise,is_dispensed,is_utec,degree,
 		title,address,postcode,handphone,email,idtype,idcard,telephone,fax,org_id,gmt_create,is_staging,online_progress
-		) values(#{material_id},#{user_id},#{realname},#{sex},#{birthday},#{experience},#{org_name},#{position},#{expertise},
+		) values(#{material_id},#{user_id},#{realname},#{sex},#{birthday},#{experience},#{org_name},#{position},#{expertise},#{is_dispensed},#{is_utec},#{degree},
 		#{title},#{address},#{postcode},#{handphone},#{email},#{idtype},#{idcard},#{telephone},
 		#{fax},#{org_id},#{gmt_create},#{is_staging},#{online_progress})
 	</insert>
 	<update id="updatePerson" parameterType="java.util.Map">
 		update declaration set realname = #{realname},sex = #{sex},birthday = #{birthday},experience = #{experience},expertise = #{expertise},
-		org_name = #{org_name},position = #{position},title = #{title},address = #{address},idcard=#{idcard},
+		org_name = #{org_name},position = #{position},title = #{title},address = #{address},idcard=#{idcard},is_dispensed=#{is_dispensed},is_utec=#{is_utec},degree=#{degree},
 		postcode = #{postcode},handphone = #{handphone},email = #{email},idtype = #{idtype},is_staging = #{is_staging},
 		telephone = #{telephone},fax = #{fax},org_id = #{org_id},gmt_update = #{gmt_update},online_progress = #{online_progress}
 		 where id = #{declaration_id}
@@ -410,8 +410,8 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 			<if test=" isDisabled!= null ">
 				is_disabled= #{isDisabled},
 			</if>
-			<if test="orgId != null and  orgId!=''">
-				org_id = #{orgId},
+			<if test="org_id != null and  org_id!=''">
+				org_id = #{org_id},
 			</if>
 			<if test=" nickname!= null and nickname !=''">
 				nickname= #{nickname},
@@ -490,6 +490,9 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 			</if>
 			<if test=" sort!= null and  sort!=''">
 				sort = #{sort},
+			</if>
+			<if test=" org_name!= null and  org_name!=''">
+				workplace = #{org_name},
 			</if>
 			<if test=" isDeleted!= null">
 				is_deleted= #{isDeleted},

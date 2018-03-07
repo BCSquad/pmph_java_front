@@ -184,6 +184,7 @@ $(function () {
         },
         done: function (filename, fileid) {
             $("#image").val(fileid);
+            $("#imageName").val(filename);
             $(".upload-image .fileinfo .filename").text(filename);
             $(".upload-image .fileinfo .preview").show();
         }

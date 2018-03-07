@@ -759,7 +759,7 @@ request.setAttribute("currentTime",datetime);
 	                            <li class="hylb">
 	                                <div class="hytxdiv">
 	                                    <c:if test="${listmyf.avatar=='DEFAULT'||listmyf.avatar==''||listmyf.avatar== NULL}"><img
-	                                            src="${ctx}/statics/image/haoyoutouxiang1.png" class="hytp"></c:if>
+	                                            src="${ctx}/statics/image/default_image.png" class="hytp"></c:if>
 	                                    <c:if test="${listmyf.avatar!='DEFAULT'}"><img src="<%=path %>/image/${listmyf.avatar}.action"
 	                                                                                   class="hytp"></c:if>
 	                                </div>
