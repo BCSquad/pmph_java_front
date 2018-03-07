@@ -26,7 +26,9 @@ function loadMore(){
                     '<span class="msg">' + n.title + '</span>' +
                     '<span class="time">' + n.TIME + '</span>' +
                     ' </p>' +
-                    '<div class="text" >' + n.msg_content + '</div>' +
+                    '<div class="text" id="txt'+n.id+'">' + n.msg_content +
+                    (n.isread==true?'<img src="'+contextpath+'/statics/image/readyes.png"  id="readyes'+n.id+'"/>':'') +
+                    (n.isread==false?'<img src="'+contextpath+'/statics/image/readno.png"  id="readno'+n.id+'"/>':'') +'</div>' +
             '</div>'+
         '</div>';
 		});
@@ -70,6 +72,15 @@ function system(str, name, time) {
                     shadeClose: true,
                     content: $("#bookmistake")
                 });
+                
+                var obj= document.getElementById('readyes'+str);
+                var readno=document.getElementById('readno'+str);
+                if(!obj&&json.isread=="yes"){
+                	if(readno){
+                		$("#readno"+str).remove();
+                	}
+                  	$("#txt"+json.id).append('&nbsp;&nbsp;<img src="'+contextpath+'/statics/image/readyes.png"  id="readyes'+str+'"/>');
+                }
             }
         });
     }
