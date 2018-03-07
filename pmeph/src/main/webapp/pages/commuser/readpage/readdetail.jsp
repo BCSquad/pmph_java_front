@@ -271,7 +271,7 @@
                 </div>
                 <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 15px;">
                 <div class="pl_add">
-                    <textarea class="tarea" id="content_book"></textarea>
+                    <textarea class="tarea" id="content_book" onkeyup="javascript:LengthLimit(this,3000);" onblur="javascript:LengthLimit(this,3000);"></textarea>
                     <hr style="border:0.05px solid rgba(180, 239, 205, 0.5);margin-left: 16px;margin-rihgt: 16px;">
                     <div class="star_num">星级评分:</div>
                     <div class="scorestar" id="star">
