@@ -56,7 +56,7 @@ String basePath =path+"/";
         </div>
         <div class="content">
             <div  class="content-img">
-                <img src="${article.imgpath }"/>
+                <img src="${ctx}/${article.imgpath }"/>
             </div>
             <div  class="content-text" >
                 <div class="text">
