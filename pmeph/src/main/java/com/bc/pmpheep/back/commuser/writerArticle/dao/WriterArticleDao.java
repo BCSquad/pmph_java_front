@@ -12,17 +12,6 @@ public interface WriterArticleDao {
 		
 		//
 		Map<String, Object>  queryWriteArticleInfo(Map<String, Object> map);
-		/**
-		 * 删除文章状态
-		 * @param map
-		 * @return
-		 */
-		int updateDelWriter(Map<String, Object> map);
 
-		
-		/**
-		 * 更新文章封面信息
-		 * @param map
-		 */
-		void updateArticleCover(Map map);
+		int updateDelWriter(Map<String, Object> map);
 }
