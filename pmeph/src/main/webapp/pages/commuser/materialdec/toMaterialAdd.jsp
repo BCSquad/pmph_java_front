@@ -135,7 +135,7 @@
 	                                 <option value="教授"  ${userMap.title=='教授'?'selected':'' }>教授</option>
 	                                <option value="讲师" ${userMap.title=='讲师'?'selected':'' }>讲师</option>
 	                                <option value="高级讲师" ${userMap.title=='高级讲师'?'selected':'' }>高级讲师</option>
-	                                <option value="副教" ${userMap.title=='副教'?'selected':'' }>副教</option>
+	                                <option value="副教" ${userMap.title=='副教'?'selected':'' }>副教授</option>
 	                                <option value="院士" ${userMap.title=='院士'?'selected':'' }>院士</option>
 	                                <option value="其他" ${userMap.title=='其他'?'selected':'' }>其他</option>
 	                            </select></td>
@@ -184,7 +184,7 @@
 						<td><span>&ensp;学&emsp;&emsp;历：</span>
 							<select id="degree" name="degree">
 	                                <option value="0" selected="selected">无</option>
-	                                <option value="1">专科</option>
+	                                <option value="1">大专</option>
 	                                <option value="2">本科</option>
 	                                <option value="3">硕士</option>
 	                                <option value="4">博士</option>
@@ -361,10 +361,11 @@
 							<td><input class="cg_input" name="xs_org_name" id="xs_org_name" value="" placeholder="学术组织" maxlength="33"/></td>
 							<td style="color: #333333;">
 								<table class="radio_tb" style="width: 220px;"><tr>
-									<td><input type="radio" name="xs_rank_1" value="1" checked="checked"/>国际</td>
+									<td><input type="radio" name="xs_rank_1" value="0" checked="checked"/>无</td>
+									<td><input type="radio" name="xs_rank_1" value="1" />国际</td>
 									<td><input type="radio" name="xs_rank_1" value="2" />国家</td>
 									<td><input type="radio" name="xs_rank_1" value="3" />省部</td>
-									<td><input type="radio" name="xs_rank_1" value="4" />其他</td>
+									<td><input type="radio" name="xs_rank_1" value="4" />市级</td>
 								</tr></table>
 								<input type="hidden" name="xs_rank" value="xs_rank_1" />
 							</td>
@@ -617,9 +618,9 @@
 						<td style="color: #333333;">
 							<table class="radio_tb" style="width: 100%;"><tr>
 								<td><input type="radio" name="gj_type_1" value="0" checked="checked"/>无</td>
-								<td><input type="radio" name="gj_type_1" value="1" />国家</td>
-								<td><input type="radio" name="gj_type_1" value="2" />省部</td>
-								<td><input type="radio" name="gj_type_1" value="3" />学校</td>
+								<td><input type="radio" name="gj_type_1" value="1" />国际</td>
+								<td><input type="radio" name="gj_type_1" value="2" />国家</td>
+								<td><input type="radio" name="gj_type_1" value="3" />省部</td>
 							</tr></table>
 							<input type="hidden" name="gj_type" value="gj_type_1" />
 						</td>
@@ -714,7 +715,7 @@
 					<thead>
 						<tr>
 							<td width="340px">奖项名称</td>
-							<td width="330px">评奖单位</td>
+							<td width="330px">评奖组织</td>
 							<td width="150px">获奖时间</td>
 							<td>备注</td>
 							<td width="78px">添加</td>
@@ -771,7 +772,7 @@
 		<div class="sbxq_item" id="clinical">
 			<div>
 				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">临床医学获奖情况表</span>
+				<span class="tsxz_title">临床医学获奖情况</span>
 				<span class="tsxz_ts" id="clinical_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
 				<span class="tsxz_xt" id="clinical_xt" >（选填）</span>
 			</div>
@@ -849,7 +850,7 @@
 	 	<div class="sbxq_item" id="intention">
 			<div>
 				<span id="tsxz_span9"></span>
-				<span class="tsxz_title">编写内容意向表</span>
+				<span class="tsxz_title">编写内容意向</span>
 				<span class="tsxz_ts" id="intention_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
 				<span class="tsxz_xt" id="intention_xt" >（选填）</span>
 			</div>

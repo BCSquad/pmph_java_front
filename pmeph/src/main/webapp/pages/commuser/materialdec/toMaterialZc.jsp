@@ -146,7 +146,7 @@
 	                                <option value="教授"  ${gezlList.title=='教授'?'selected':'' }>教授</option>
 	                                <option value="讲师" ${gezlList.title=='讲师'?'selected':'' }>讲师</option>
 	                                <option value="高级讲师" ${gezlList.title=='高级讲师'?'selected':'' }>高级讲师</option>
-	                                <option value="副教" ${gezlList.title=='副教'?'selected':'' }>副教</option>
+	                                <option value="副教" ${gezlList.title=='副教'?'selected':'' }>副教授</option>
 	                                <option value="院士" ${gezlList.title=='院士'?'selected':'' }>院士</option>
 	                                <option value="其他" ${gezlList.title=='其他'?'selected':'' }>其他</option>
 	                            </select>
@@ -448,10 +448,11 @@
 								<td><input class="cg_input" maxlength="33" name="xs_org_name" id="xs_org_name" value="" placeholder="学术组织"/></td>
 								<td style="color: #333333;">
 									<table class="radio_tb" style="width: 220px;"><tr>
-										<td><input type="radio" name="xs_rank_a" value="1" checked="checked"/>国际</td>
+										<td><input type="radio" name="xs_rank_a" value="0" checked="checked"/>无</td>
+										<td><input type="radio" name="xs_rank_a" value="1" />国际</td>
 										<td><input type="radio" name="xs_rank_a" value="2" />国家</td>
 										<td><input type="radio" name="xs_rank_a" value="3" />省部</td>
-										<td><input type="radio" name="xs_rank_a" value="4" />其他</td>
+										<td><input type="radio" name="xs_rank_a" value="4" />市级</td>
 									</tr></table>
 									<input type="hidden" name="xs_rank" value="xs_rank_a" />
 								</td>
@@ -870,7 +871,7 @@
 					<thead>
 					<tr>
 						<td width="350px">课程名称</td>
-						<td width="180px">课程全年课时数</td>
+						<td width="180px">全年课时</td>
 						<td width="200px">课程级别</td>
 						<td>备注</td>
 						<td width="78px">添加</td>
@@ -882,10 +883,11 @@
 							<td><input class="cg_input" maxlength="20" name="gj_course_name" id="gj_course_name" value="" style="width: 300px;" placeholder="课程名称"/></td>
 							<td><input class="cg_input" maxlength="20" name="gj_class_hour" value="" style="width: 130px;" placeholder="课时数"/></td>
 							<td style="color: #333333;">
-								<table class="radio_tb" style="width: 180px;"><tr>
-									<td><input type="radio" name="gj_type_a" value="1" checked="checked"/>国家</td>
-									<td><input type="radio" name="gj_type_a" value="2" />省部</td>
-									<td><input type="radio" name="gj_type_a" value="3" />学校</td>
+								<table class="radio_tb" style="width: 100%;"><tr>
+									<td><input type="radio" name="gj_type_a" value="0" checked="checked"/>无</td>
+									<td><input type="radio" name="gj_type_a" value="1" />国际</td>
+									<td><input type="radio" name="gj_type_a" value="2" />国家</td>
+									<td><input type="radio" name="gj_type_a" value="3" />省部</td>
 								</tr></table>
 								<input type="hidden" name="gj_type" value="gj_type_a" />
 							</td>
@@ -899,9 +901,10 @@
 							<td><input class="cg_input" maxlength="20" name="gj_class_hour" id="gj_class_hour_${status.count}" value="${list.class_hour}" style="width: 130px;" placeholder="课时数"/></td>
 							<td style="color: #333333;">
 								<table class="radio_tb" style="width: 180px;"><tr>
-									<td><input type="radio" name="gj_type_${status.count}" value="1" ${list.type=='1'?'checked':'' }/>国家</td>
-									<td><input type="radio" name="gj_type_${status.count}" value="2" ${list.type=='2'?'checked':'' }/>省部</td>
-									<td><input type="radio" name="gj_type_${status.count}" value="3" ${list.type=='3'?'checked':'' }/>学校</td>
+									<td><input type="radio" name="gj_type_${status.count}" value="0" ${list.type=='0'?'checked':'' }/>无</td>
+									<td><input type="radio" name="gj_type_${status.count}" value="1" ${list.type=='1'?'checked':'' }/>国际</td>
+									<td><input type="radio" name="gj_type_${status.count}" value="2" ${list.type=='2'?'checked':'' }/>国家</td>
+									<td><input type="radio" name="gj_type_${status.count}" value="3" ${list.type=='3'?'checked':'' }/>省部</td>
 								</tr></table>
 								<input type="hidden" name="gj_type" value="gj_type_${status.count}" />
 							</td>
@@ -1052,7 +1055,7 @@
 					<thead>
 						<tr>
 							<td width="340px">奖项名称</td>
-							<td width="330px">评奖单位</td>
+							<td width="330px">评奖组织</td>
 							<td width="150px">获奖时间</td>
 							<td>备注</td>
 							<td width="78px">添加</td>
@@ -1150,7 +1153,7 @@
 		<div class="sbxq_item" id="clinical">
 			<div>
 				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">临床医学获奖情况表</span>
+				<span class="tsxz_title">临床医学获奖情况</span>
 				<span class="tsxz_ts" id="clinical_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
 				<span class="tsxz_xt" id="clinical_xt" >（选填）</span>
 			</div>
@@ -1282,7 +1285,7 @@
 	 	<div class="sbxq_item" id="intention">
 			<div>
 				<span id="tsxz_span9"></span>
-				<span class="tsxz_title">编写内容意向表</span>
+				<span class="tsxz_title">编写内容意向</span>
 				<span class="tsxz_ts" id="intention_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
 				<span class="tsxz_xt" id="intention_xt" >（选填）</span>
 			</div>
