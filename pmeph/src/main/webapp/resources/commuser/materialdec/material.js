@@ -754,7 +754,8 @@ function add_acade(){
 }
 //删除表格tr
 function del_tr(trId){
-	document.getElementById(trId).remove();
+	/*document.getElementById(trId).remove();*/
+	$("#"+trId).remove();
 }
 
 //提交   类型1 表示提交  2 表示暂存  

@@ -235,7 +235,7 @@ function changepage() {
             if (json.length < 3) {
                 $("#moreothers").html('加载完毕');
             }else{
-            	json.remove(2);
+            	json = json.slice(0,2);
             }
             var str = '';
             $.each(json, function (i, n) {
@@ -314,7 +314,7 @@ function longcom() {
             if (json.length < 3) {
                 $("#longothers").html('没有更多了~~~');
             }else{
-            	json.remove(2);
+            	json = json.slice(0,2);
             }
             var str = '';
             $.each(json, function (i, n) {
