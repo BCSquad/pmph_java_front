@@ -116,7 +116,7 @@
     <!-- 统计小组成员数 -->
     <select id="getMemberTotal" parameterType="java.lang.Long"
         resultType="java.lang.Integer">
-        SELECT COUNT(user_id) FROM pmph_group_member WHERE group_id = #{groupId};
+        SELECT COUNT(user_id) FROM pmph_group_member WHERE group_id = #{groupId} and is_deleted=FALSE;
     </select>
     <!-- 统计小组文件数 -->
     <select id="getFileTotal" parameterType="java.lang.Long"
