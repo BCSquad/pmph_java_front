@@ -229,14 +229,9 @@
                             <div class="all_left"></div>
                             <c:forEach var="ad3" items="${adInfo3.detailList}" varStatus="status">
                                 <c:if test="${status.index==0}">
-                                    <div class="p1_left">
-                                        <a href="${adInfo3.url}"><img src="${ctx}/image/${ad3.image}.action" style="width: 216px;height: 89px;border-radius: 5px"></a>
-                                    </div>
-                                </c:if>
-                                <c:if test="${status.index==1}">
-                                    <div class="p2_left">
-                                        <a href="${adInfo3.url}"><img src="${ctx}/image/${ad3.image}.action" style="width: 216px;height: 89px;border-radius: 5px"></a>
-                                    </div>
+                                <div class="${status.index==0?'p1_left':'p2_left'}">
+                                    <img src="${ctx}/image/${ad3.image}.action" style="width: 216px;height: 89px">
+                                </div>
                                 </c:if>
                             </c:forEach>
                         </div>

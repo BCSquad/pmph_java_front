@@ -29,13 +29,13 @@ public interface AllMessageDao {
      * @param userid 
      * @return
      */
-	public int updateIsRead(@Param("mid") String mid);
+	public int updateIsRead(@Param("mid") String mid,@Param("userid") String userid);
 	/**
 	 * 删除消息
 	 * @param mid
 	 * @param userid
 	 * @return
 	 */
-	public int deletemsg(@Param("mid") String mid);
+	public int deletemsg(@Param("mid") String mid,@Param("userid")  String userid);
 
 }
