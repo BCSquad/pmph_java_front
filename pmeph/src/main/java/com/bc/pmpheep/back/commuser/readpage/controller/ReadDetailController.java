@@ -63,6 +63,7 @@ public class ReadDetailController extends BaseController{
 		String urlString=(String)map.get("pdf_url");
 		if (urlString==null) {
 			map.put("pdf_url", null);
+			map.put("pdf_code", "no");
 		}
 		
 		if(("DEFAULT").equals(map.get("image_url"))){
