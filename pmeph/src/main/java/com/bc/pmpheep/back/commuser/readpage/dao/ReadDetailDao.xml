@@ -14,7 +14,7 @@
 	
 	<!-- 查询视频 -->
 	<select id="queryVideo" parameterType="java.util.Map" resultMap="readdetailmMap">
-	    select * from book_video where book_id=#{book_id} limit 0,3
+	    select * from book_video where book_id=#{book_id} and is_auth=1 limit 0,3
 	</select>
 	
 	<!-- 根据书籍ID查询书籍评论信息 -->
