@@ -43,7 +43,7 @@ public class UserMessageVO {
     // 是否被逻辑删除 只有接收者可以删除
     private Boolean   isDeleted;
 
-	// 创建时间
+	// 创建时间   
     private Timestamp gmtCreate;
     // 教材ID
     private Long      materialId;
