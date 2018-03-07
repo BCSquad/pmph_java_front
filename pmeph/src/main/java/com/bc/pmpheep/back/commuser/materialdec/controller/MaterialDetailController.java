@@ -35,159 +35,158 @@ import com.bc.pmpheep.general.service.FileService;
  */
 @Controller
 @RequestMapping("/material/")
-public class MaterialDetailController extends BaseController {
+public class MaterialDetailController extends BaseController{
 
 
-    @Autowired
-    @Qualifier("com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailServiceImpl")
-    private MaterialDetailService mdService;
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailServiceImpl")
+	private MaterialDetailService mdService;
 
-    @Autowired
-    @Qualifier("com.bc.pmpheep.back.authadmin.message.service.SendMessageServiceImpl")
-    private SendMessageServiceImpl sendMessageServiceImpl;
-    @Autowired
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.authadmin.message.service.SendMessageServiceImpl")
+	private SendMessageServiceImpl sendMessageServiceImpl;
+	@Autowired
     @Qualifier("com.bc.pmpheep.general.service.FileService")
     FileService fileService;
 
-    /**
-     * 跳转到申报新增页面
+
+	/**
+	 * 跳转到申报新增页面
      *
-     * @param request
-     * @return
-     */
-    @RequestMapping("toMaterialAdd")
-    public ModelAndView toMaterialAdd(HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView("commuser/materialdec/toMaterialAdd");
-        Map<String, Object> userMap = this.getUserInfo();
-        String material_id = request.getParameter("material_id"); //教材ID
-        //教材信息
-        Map<String, Object> materialMap = new HashMap<String, Object>();
-        materialMap = this.mdService.queryMaterialbyId(material_id);
-        //作家扩展信息
-        List<Map<String, Object>> zjkzxxList = this.mdService.queryZjkzxxById(material_id);
-        //书籍信息
-        List<Map<String, Object>> bookList = this.mdService.queryBookById(material_id);
-        StringBuffer bookSelects = new StringBuffer();
-        if (bookList.size() > 0) {
-            for (Map<String, Object> map : bookList) {
-                bookSelects.append("<option value='" + map.get("id") + "'>" + map.get("textbook_name") + "</option>");
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("toMaterialAdd")
+	public ModelAndView toMaterialAdd(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("commuser/materialdec/toMaterialAdd");
+		Map<String,Object> userMap =  this.getUserInfo();
+		String material_id = request.getParameter("material_id"); //教材ID
+		//教材信息
+		Map<String,Object> materialMap = new HashMap<String,Object>();
+		materialMap = this.mdService.queryMaterialbyId(material_id);
+		//作家扩展信息
+		List<Map<String,Object>> zjkzxxList = this.mdService.queryZjkzxxById(material_id);
+		//书籍信息
+		List<Map<String,Object>> bookList = this.mdService.queryBookById(material_id);
+		StringBuffer bookSelects = new StringBuffer();
+		if(bookList.size()>0){
+			for (Map<String, Object> map : bookList) {
+				bookSelects.append("<option value='"+map.get("id")+"'>"+map.get("textbook_name")+"</option>");
+			}
+		}
+		//机构信息
+		List<Map<String,Object>> orgList = this.mdService.queryOrgById(material_id);
+		StringBuffer orgSelects = new StringBuffer();
+		if(orgList.size()>0){
+		for (Map<String, Object> map : orgList) {
+			orgSelects.append("<option value='"+map.get("org_id")+"'>"+map.get("org_name")+"</option>");
             }
         }
-        //机构信息
-        List<Map<String, Object>> orgList = this.mdService.queryOrgById(material_id);
-        StringBuffer orgSelects = new StringBuffer();
-        if (orgList.size() > 0) {
-            for (Map<String, Object> map : orgList) {
-                orgSelects.append("<option value='" + map.get("org_id") + "'>" + map.get("org_name") + "</option>");
-            }
-        }
-        mav.addObject("bookSelects", bookSelects.toString());
-        mav.addObject("orgSelects", orgSelects.toString());
-        mav.addObject("materialMap", materialMap);
-        mav.addObject("userMap", userMap);
-        mav.addObject("zjkzxxList", zjkzxxList);
-        mav.addObject("material_id", materialMap.get("id"));
-        return mav;
-    }
+		mav.addObject("bookSelects", bookSelects.toString());
+		mav.addObject("orgSelects", orgSelects.toString());
+		mav.addObject("materialMap", materialMap);
+		mav.addObject("userMap", userMap);
+		mav.addObject("zjkzxxList", zjkzxxList);
+		mav.addObject("material_id", materialMap.get("id"));
+		return mav;
+	}
 
-    /**
-     * 页面组合方法，主要js中通过ajax传值对新增页面模块进行初始化操作
-     *
-     * @param request
-     * @return
-     */
-    @RequestMapping("queryMaterialMap")
-    @ResponseBody
-    public Map<String, Object> queryMaterialMap(HttpServletRequest request) {
-        //教材信息
-        String material_id = request.getParameter("material_id");
-        Map<String, Object> materialMap = new HashMap<String, Object>();
-        materialMap = this.mdService.queryMaterialbyId(material_id);
-        return materialMap;
-    }
+	/**
+	 * 页面组合方法，主要js中通过ajax传值对新增页面模块进行初始化操作
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("queryMaterialMap")
+	@ResponseBody
+	public Map<String,Object> queryMaterialMap(HttpServletRequest request){
+		//教材信息
+		String material_id = request.getParameter("material_id");
+		Map<String,Object> materialMap = new HashMap<String,Object>();
+		materialMap = this.mdService.queryMaterialbyId(material_id);
+		return materialMap;
+	}
 
-    /**
-     * 添加申报信息
-     *
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping("doMaterialAdd")
-    @ResponseBody
-    public String doMaterialAdd(HttpServletRequest request,
-                                HttpServletResponse response) {
-        //公共参数
-        Map<String, Object> userMap = this.getUserInfo();
-        String material_id = request.getParameter("material_id");
-        String declaration_id = request.getParameter("declaration_id");
-        String user_id = request.getParameter("user_id"); //系统用户(暂存人)
-        String type = request.getParameter("type"); //类型
-        String sjump = request.getParameter("sjump"); //页面来源
-        //求出信息集合
-        //1.作家申报表
-        Map<String, Object> perMap = new HashMap<String, Object>();
-        //2.作家申报职位
-        List<Map<String, Object>> tssbList = new ArrayList<Map<String, Object>>();
-        //3.作家学习经历表
-        List<Map<String, Object>> stuList = new ArrayList<Map<String, Object>>();
-        //4.作家工作经历表
-        List<Map<String, Object>> workList = new ArrayList<Map<String, Object>>();
-        //5.作家教学经历表
-        List<Map<String, Object>> steaList = new ArrayList<Map<String, Object>>();
-        //6.作家兼职学术表
-        List<Map<String, Object>> zjxsList = new ArrayList<Map<String, Object>>();
-        //7.作家上套教材参编情况表
-        List<Map<String, Object>> jcbjList = new ArrayList<Map<String, Object>>();
-        //8.作家精品课程建设情况表
-        List<Map<String, Object>> gjkcjsList = new ArrayList<Map<String, Object>>();
-        //9.作家主编国家级规划教材情况表
-        List<Map<String, Object>> gjghjcList = new ArrayList<Map<String, Object>>();
-        //10.其他社教材编写情况
-        List<Map<String, Object>> jcbxList = new ArrayList<Map<String, Object>>();
-        //11.作家科研情况表
-        List<Map<String, Object>> zjkyList = new ArrayList<Map<String, Object>>();
-        //12.作家扩展项填报表
-        List<Map<String, Object>> zjkzqkList = new ArrayList<Map<String, Object>>();
-        //13.个人成就
-        Map<String, Object> achievementMap = new HashMap<String, Object>();
-        //14.主编学术专著情况表
-        List<Map<String, Object>> monographList = new ArrayList<Map<String, Object>>();
-        //15.出版行业获奖情况表
-        List<Map<String, Object>> publishList = new ArrayList<Map<String, Object>>();
-        //16.SCI论文投稿及影响因子情况表
-        List<Map<String, Object>> sciList = new ArrayList<Map<String, Object>>();
-        //17.临床医学获奖情况表
-        List<Map<String, Object>> clinicalList = new ArrayList<Map<String, Object>>();
-        //18.学术荣誉授予情况表
-        List<Map<String, Object>> acadeList = new ArrayList<Map<String, Object>>();
-        //19.人卫社教材编写情况表
-        List<Map<String, Object>> pmphList = new ArrayList<Map<String, Object>>();
-        //20.参加人卫慕课、数字教材编写情况
-        Map<String, Object> digitalMap = new HashMap<String, Object>();
-        //21.编写内容意向表
-        Map<String, Object> intentionlMap = new HashMap<String, Object>();
+	/**
+	 * 添加申报信息
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("doMaterialAdd")
+	@ResponseBody
+	public String doMaterialAdd(HttpServletRequest request,
+			HttpServletResponse response){
+		//公共参数
+		Map<String,Object> userMap =  this.getUserInfo();
+		String material_id = request.getParameter("material_id");
+		String declaration_id = request.getParameter("declaration_id");
+		String user_id = request.getParameter("user_id"); //系统用户(暂存人)
+		String type = request.getParameter("type"); //类型
+		String sjump = request.getParameter("sjump"); //页面来源
+		//求出信息集合
+		//1.作家申报表
+		Map<String,Object> perMap = new HashMap<String,Object>();
+		//2.作家申报职位
+		List<Map<String,Object>> tssbList = new ArrayList<Map<String,Object>>();
+		//3.作家学习经历表
+		List<Map<String,Object>> stuList = new ArrayList<Map<String,Object>>();
+		//4.作家工作经历表
+		List<Map<String,Object>> workList = new ArrayList<Map<String,Object>>();
+		//5.作家教学经历表
+		List<Map<String,Object>> steaList = new ArrayList<Map<String,Object>>();
+		//6.作家兼职学术表
+		List<Map<String,Object>> zjxsList = new ArrayList<Map<String,Object>>();
+		//7.作家上套教材参编情况表
+		List<Map<String,Object>> jcbjList = new ArrayList<Map<String,Object>>();
+		//8.作家精品课程建设情况表
+		List<Map<String,Object>> gjkcjsList = new ArrayList<Map<String,Object>>();
+		//9.作家主编国家级规划教材情况表
+		List<Map<String,Object>> gjghjcList = new ArrayList<Map<String,Object>>();
+		//10.其他社教材编写情况
+		List<Map<String,Object>> jcbxList = new ArrayList<Map<String,Object>>();
+		//11.作家科研情况表
+		List<Map<String,Object>> zjkyList = new ArrayList<Map<String,Object>>();
+		//12.作家扩展项填报表
+		List<Map<String,Object>> zjkzqkList = new ArrayList<Map<String,Object>>();
+		//13.个人成就
+		Map<String,Object> achievementMap = new HashMap<String,Object>();
+		//14.主编学术专著情况表
+		List<Map<String,Object>> monographList = new ArrayList<Map<String,Object>>();
+		//15.出版行业获奖情况表
+		List<Map<String,Object>> publishList = new ArrayList<Map<String,Object>>();
+		//16.SCI论文投稿及影响因子情况表
+		List<Map<String,Object>> sciList = new ArrayList<Map<String,Object>>();
+		//17.临床医学获奖情况表
+		List<Map<String,Object>> clinicalList = new ArrayList<Map<String,Object>>();
+		//18.学术荣誉授予情况表
+		List<Map<String,Object>> acadeList = new ArrayList<Map<String,Object>>();
+		//19.人卫社教材编写情况表
+		List<Map<String,Object>> pmphList = new ArrayList<Map<String,Object>>();
+		//20.参加人卫慕课、数字教材编写情况
+		Map<String,Object> digitalMap = new HashMap<String,Object>();
+		//21.编写内容意向表
+		Map<String,Object> intentionlMap = new HashMap<String,Object>();
 
-        String is_background = "0";
-        String msg = "";
-        String online_progress = request.getParameter("online_progress");
-        //创建时间
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-        String date = df.format(new Date());
+		String is_background = "0";
+		String msg = "";
+		String online_progress = request.getParameter("online_progress");
+		//创建时间
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+		String date = df.format(new Date());
 
-        //专家信息
-        if (type.equals("1")) { //提交
-            perMap.put("is_staging", "0");
-            perMap.put("online_progress", "1");
-        } else {
-            if (online_progress != null && online_progress.equals("2")) { //被退回
-                perMap.put("is_staging", "0");
-                perMap.put("online_progress", "2");
-            } else {//未提交
-                perMap.put("is_staging", "1");
-                perMap.put("online_progress", "0");
-            }
-        }
+		//专家信息
+		if(type.equals("1")){ //提交
+			perMap.put("is_staging", "0");
+			perMap.put("online_progress", "1");
+		}else{
+			if(online_progress != null && online_progress.equals("2")){ //被退回
+				perMap.put("is_staging", "0");
+				perMap.put("online_progress", "2");
+			}else{//未提交
+				perMap.put("is_staging", "1");
+				perMap.put("online_progress", "0");
+			}
+		}
         Map<String, Object> materialMap = new HashMap<String, Object>();
         materialMap = this.mdService.queryMaterialbyId(material_id);
         perMap.put("materialName", MapUtils.getString(materialMap, "material_name"));
@@ -552,163 +551,163 @@ public class MaterialDetailController extends BaseController {
         return msg;
     }
 
-    /**
-     * 查看申报详情
+	/**
+	 * 查看申报详情
      *
-     * @param request
-     * @return
-     */
-    @RequestMapping("showMaterial")
-    public ModelAndView showMaterial(HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView("commuser/materialdec/showMaterial");
-        //传参  user_id  material_id
-        //	String user_id = request.getParameter("user_id");
-        String material_id = request.getParameter("material_id");
-        String declaration_id = request.getParameter("declaration_id");
-        Map<String, Object> queryMap = new HashMap<String, Object>();
-        queryMap.put("material_id", material_id);
-        queryMap.put("declaration_id", declaration_id);
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("showMaterial")
+	public ModelAndView showMaterial(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("commuser/materialdec/showMaterial");
+		//传参  user_id  material_id
+		//	String user_id = request.getParameter("user_id");
+		String material_id = request.getParameter("material_id");
+		String declaration_id = request.getParameter("declaration_id");
+		Map<String,Object> queryMap = new HashMap<String,Object>();
+		queryMap.put("material_id", material_id);
+		queryMap.put("declaration_id", declaration_id);
 
-        //1.作家申报表
-        List<Map<String, Object>> gezlList = new ArrayList<Map<String, Object>>();
-        gezlList = this.mdService.queryPerson(queryMap);
-        if (declaration_id == null) {
-            queryMap.put("declaration_id", gezlList.get(0).get("id"));
-        } else {
-            queryMap.put("declaration_id", declaration_id);
-        }
-        if (material_id == null) {
-            material_id = gezlList.get(0).get("material_id").toString();
-        }
-        queryMap.put("material_id", material_id);
-        //教材信息
-        Map<String, Object> materialMap = new HashMap<String, Object>();
-        materialMap = this.mdService.queryMaterialbyId(material_id);
-        //2.作家申报职位暂存
-        List<Map<String, Object>> tssbList = new ArrayList<Map<String, Object>>();
-        if (gezlList.get(0).get("online_progress").toString().equals("0")) { //表示未提交
-            tssbList = this.mdService.queryTssbZc(queryMap);
-        } else {//退回，通过，提交 都在正式申请表
-            tssbList = this.mdService.queryTsxz(queryMap);
-        }
-        if (tssbList.size() > 0) {
-            for (Map<String, Object> map : tssbList) {
-                if (map.get("preset_position").equals(3)) {//
-                    map.put("preset_position", "副主编,编委");
-                } else if (map.get("preset_position").equals(1)) {
-                    map.put("preset_position", "编委");
-                } else if (map.get("preset_position").equals(2)) {
-                    map.put("preset_position", "副主编");
-                } else if (map.get("preset_position").equals(4)) {
-                    map.put("preset_position", "主编");
-                } else if (map.get("preset_position").equals(8)) {
-                    map.put("preset_position", "数字编委");
-                } else if (map.get("preset_position").equals(5)) {
-                    map.put("preset_position", "主编,编委");
-                } else if (map.get("preset_position").equals(6)) {
-                    map.put("preset_position", "主编,副主编");
-                } else if (map.get("preset_position").equals(9)) {
-                    map.put("preset_position", "数字编委,编委");
-                } else if (map.get("preset_position").equals(10)) {
-                    map.put("preset_position", "副主编,数字编委");
-                } else if (map.get("preset_position").equals(12)) {
-                    map.put("preset_position", "主编,数字编委");
-                } else if (map.get("preset_position").equals(7)) {
-                    map.put("preset_position", "主编,副主编,编委");
-                } else if (map.get("preset_position").equals(11)) {
-                    map.put("preset_position", "副主编,编委,数字编委");
-                } else if (map.get("preset_position").equals(13)) {
-                    map.put("preset_position", "主编,编委,数字编委");
-                } else if (map.get("preset_position").equals(14)) {
-                    map.put("preset_position", "主编,副主编,数字编委");
-                } else if (map.get("preset_position").equals(15)) {
-                    map.put("preset_position", "主编,副主编,编委,数字编委");
-                }
-            }
-        }
-        //3.作家学习经历表
-        List<Map<String, Object>> stuList = new ArrayList<Map<String, Object>>();
-        stuList = this.mdService.queryStu(queryMap);
-        //4.作家工作经历表
-        List<Map<String, Object>> workList = new ArrayList<Map<String, Object>>();
-        workList = this.mdService.queryWork(queryMap);
-        //5.作家教学经历表
-        List<Map<String, Object>> steaList = new ArrayList<Map<String, Object>>();
-        steaList = this.mdService.queryStea(queryMap);
-        //6.作家兼职学术表
-        List<Map<String, Object>> zjxsList = new ArrayList<Map<String, Object>>();
-        zjxsList = this.mdService.queryZjxs(queryMap);
-        //7.作家上套教材参编情况表
-        List<Map<String, Object>> jcbjList = new ArrayList<Map<String, Object>>();
-        jcbjList = this.mdService.queryJcbj(queryMap);
-        //8.作家精品课程建设情况表
-        List<Map<String, Object>> gjkcjsList = new ArrayList<Map<String, Object>>();
-        gjkcjsList = this.mdService.queryGjkcjs(queryMap);
-        //9.作家主编国家级规划教材情况表
-        List<Map<String, Object>> gjghjcList = new ArrayList<Map<String, Object>>();
-        gjghjcList = this.mdService.queryGjghjc(queryMap);
-        //10.作家教材编写情况表
-        List<Map<String, Object>> rwsjcList = new ArrayList<Map<String, Object>>();
-        List<Map<String, Object>> jcbxqtList = new ArrayList<Map<String, Object>>();
-        //其他社教材编写情况
-        jcbxqtList = this.mdService.queryqtJcbx(queryMap);
-        //19.人卫社编写情况
-        rwsjcList = this.mdService.rwsjcList(queryMap);
-        //11.作家科研情况表
-        List<Map<String, Object>> zjkyList = new ArrayList<Map<String, Object>>();
-        zjkyList = this.mdService.queryZjkyqk(queryMap);
-        //12.作家扩展项填报表
-        List<Map<String, Object>> zjkzqkList = new ArrayList<Map<String, Object>>();
-        zjkzqkList = this.mdService.queryZjkzbb(queryMap);
-        //13.个人成就
-        Map<String, Object> achievementMap = new HashMap<String, Object>();
-        achievementMap = this.mdService.queryAchievement(queryMap);
-        //14.主编学术专著情况表
-        List<Map<String, Object>> monographList = new ArrayList<Map<String, Object>>();
-        monographList = this.mdService.queryMonograph(queryMap);
-        //15.出版行业获奖情况表
-        List<Map<String, Object>> publishList = new ArrayList<Map<String, Object>>();
-        publishList = this.mdService.queryPublish(queryMap);
-        //16.SCI论文投稿及影响因子情况表
-        List<Map<String, Object>> sciList = new ArrayList<Map<String, Object>>();
-        sciList = this.mdService.querySci(queryMap);
-        //17.临床医学获奖情况表
-        List<Map<String, Object>> clinicalList = new ArrayList<Map<String, Object>>();
-        clinicalList = this.mdService.queryClinicalreward(queryMap);
-        //18.学术荣誉授予情况表
-        List<Map<String, Object>> acadeList = new ArrayList<Map<String, Object>>();
-        acadeList = this.mdService.queryAcadereward(queryMap);
-        //20.参加人卫慕课、数字教材编写情况
-        Map<String, Object> moocMap = new HashMap<String, Object>();
-        moocMap = this.mdService.queryMoocdigital(queryMap);
-        //21.编写内容意向表
-        Map<String, Object> intentionMap = new HashMap<String, Object>();
-        intentionMap = this.mdService.queryIntention(queryMap);
-        //填充
-        mav.addObject("material", materialMap);
-        mav.addObject("gezlList", gezlList.get(0));
-        mav.addObject("tssbList", tssbList);
-        mav.addObject("stuList", stuList);
-        mav.addObject("workList", workList);
-        mav.addObject("steaList", steaList);
-        mav.addObject("jcbjList", jcbjList);
-        mav.addObject("gjkcjsList", gjkcjsList);
-        mav.addObject("rwsjcList", rwsjcList);
-        mav.addObject("gjghjcList", gjghjcList);
-        mav.addObject("zjkyList", zjkyList);
-        mav.addObject("zjxsList", zjxsList);
-        mav.addObject("zjkzqkList", zjkzqkList);
-        mav.addObject("achievementMap", achievementMap);
-        mav.addObject("monographList", monographList);
-        mav.addObject("publishList", publishList);
-        mav.addObject("sciList", sciList);
-        mav.addObject("clinicalList", clinicalList);
-        mav.addObject("acadeList", acadeList);
-        mav.addObject("jcbxqtList", jcbxqtList);
-        mav.addObject("digitalMap", moocMap);
-        mav.addObject("intentionMap", intentionMap);
-        return mav;
-    }
+		//1.作家申报表
+		List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
+		gezlList = this.mdService.queryPerson(queryMap);
+		if(declaration_id == null){
+		queryMap.put("declaration_id", gezlList.get(0).get("id"));
+		}else{
+			queryMap.put("declaration_id", declaration_id);
+		}
+		if(material_id == null){
+			material_id= gezlList.get(0).get("material_id").toString();
+		}
+		queryMap.put("material_id", material_id);
+		//教材信息
+		Map<String,Object> materialMap = new HashMap<String,Object>();
+		materialMap = this.mdService.queryMaterialbyId(material_id);
+		//2.作家申报职位暂存
+		List<Map<String,Object>> tssbList = new ArrayList<Map<String,Object>>();
+		if(gezlList.get(0).get("online_progress").toString().equals("0")){ //表示未提交
+			tssbList=this.mdService.queryTssbZc(queryMap);
+		}else{//退回，通过，提交 都在正式申请表
+			tssbList=this.mdService.queryTsxz(queryMap);
+		}
+		if(tssbList.size()>0){
+			for (Map<String, Object> map : tssbList) {
+				if(map.get("preset_position").equals(3)){//
+					map.put("preset_position", "副主编,编委");
+				}else if(map.get("preset_position").equals(1)){
+					map.put("preset_position", "编委");
+				}else if(map.get("preset_position").equals(2)){
+					map.put("preset_position", "副主编");
+				}else if(map.get("preset_position").equals(4)){
+					map.put("preset_position", "主编");
+				}else if(map.get("preset_position").equals(8)){
+					map.put("preset_position", "数字编委");
+				}else if(map.get("preset_position").equals(5)){
+					map.put("preset_position", "主编,编委");
+				}else if(map.get("preset_position").equals(6)){
+					map.put("preset_position", "主编,副主编");
+				}else if(map.get("preset_position").equals(9)){
+					map.put("preset_position", "数字编委,编委");
+				}else if(map.get("preset_position").equals(10)){
+					map.put("preset_position", "副主编,数字编委");
+				}else if(map.get("preset_position").equals(12)){
+					map.put("preset_position", "主编,数字编委");
+				}else if(map.get("preset_position").equals(7)){
+					map.put("preset_position", "主编,副主编,编委");
+				}else if(map.get("preset_position").equals(11)){
+					map.put("preset_position", "副主编,编委,数字编委");
+				}else if(map.get("preset_position").equals(13)){
+					map.put("preset_position", "主编,编委,数字编委");
+				}else if(map.get("preset_position").equals(14)){
+					map.put("preset_position", "主编,副主编,数字编委");
+				}else if(map.get("preset_position").equals(15)){
+					map.put("preset_position", "主编,副主编,编委,数字编委");
+				}
+			}
+		}
+		//3.作家学习经历表
+		List<Map<String,Object>> stuList = new ArrayList<Map<String,Object>>();
+		stuList=this.mdService.queryStu(queryMap);
+		//4.作家工作经历表
+		List<Map<String,Object>> workList = new ArrayList<Map<String,Object>>();
+		workList=this.mdService.queryWork(queryMap);
+		//5.作家教学经历表
+		List<Map<String,Object>> steaList = new ArrayList<Map<String,Object>>();
+		steaList=this.mdService.queryStea(queryMap);
+		//6.作家兼职学术表
+		List<Map<String,Object>> zjxsList = new ArrayList<Map<String,Object>>();
+		zjxsList=this.mdService.queryZjxs(queryMap);
+		//7.作家上套教材参编情况表
+		List<Map<String,Object>> jcbjList = new ArrayList<Map<String,Object>>();
+		jcbjList=this.mdService.queryJcbj(queryMap);
+		//8.作家精品课程建设情况表
+		List<Map<String,Object>> gjkcjsList = new ArrayList<Map<String,Object>>();
+		gjkcjsList=this.mdService.queryGjkcjs(queryMap);
+		//9.作家主编国家级规划教材情况表
+		List<Map<String,Object>> gjghjcList = new ArrayList<Map<String,Object>>();
+		gjghjcList = this.mdService.queryGjghjc(queryMap);
+		 //10.作家教材编写情况表
+		List<Map<String,Object>> rwsjcList = new ArrayList<Map<String,Object>>();
+		List<Map<String,Object>> jcbxqtList = new ArrayList<Map<String,Object>>();
+		//其他社教材编写情况
+		jcbxqtList=this.mdService.queryqtJcbx(queryMap);
+		//19.人卫社编写情况
+		rwsjcList=this.mdService.rwsjcList(queryMap);
+		//11.作家科研情况表
+		List<Map<String,Object>> zjkyList = new ArrayList<Map<String,Object>>();
+		zjkyList = this.mdService.queryZjkyqk(queryMap);
+		//12.作家扩展项填报表
+		List<Map<String,Object>> zjkzqkList = new ArrayList<Map<String,Object>>();
+		zjkzqkList = this.mdService.queryZjkzbb(queryMap);
+		//13.个人成就
+		Map<String,Object> achievementMap = new HashMap<String,Object>();
+		achievementMap = this.mdService.queryAchievement(queryMap);
+		//14.主编学术专著情况表
+		List<Map<String,Object>> monographList = new ArrayList<Map<String,Object>>();
+		monographList = this.mdService.queryMonograph(queryMap);
+		//15.出版行业获奖情况表
+		List<Map<String,Object>> publishList = new ArrayList<Map<String,Object>>();
+		publishList = this.mdService.queryPublish(queryMap);
+		//16.SCI论文投稿及影响因子情况表
+		List<Map<String,Object>> sciList = new ArrayList<Map<String,Object>>();
+		sciList = this.mdService.querySci(queryMap);
+		//17.临床医学获奖情况表
+		List<Map<String,Object>> clinicalList = new ArrayList<Map<String,Object>>();
+		clinicalList = this.mdService.queryClinicalreward(queryMap);
+		//18.学术荣誉授予情况表
+		List<Map<String,Object>> acadeList = new ArrayList<Map<String,Object>>();
+		acadeList = this.mdService.queryAcadereward(queryMap);
+		//20.参加人卫慕课、数字教材编写情况
+		Map<String,Object> moocMap = new HashMap<String,Object>();
+		moocMap = this.mdService.queryMoocdigital(queryMap);
+		//21.编写内容意向表
+		Map<String,Object> intentionMap = new HashMap<String,Object>();
+		intentionMap = this.mdService.queryIntention(queryMap);
+		//填充
+		mav.addObject("material", materialMap);
+		mav.addObject("gezlList", gezlList.get(0));
+		mav.addObject("tssbList", tssbList);
+		mav.addObject("stuList", stuList);
+		mav.addObject("workList", workList);
+		mav.addObject("steaList", steaList);
+		mav.addObject("jcbjList", jcbjList);
+		mav.addObject("gjkcjsList", gjkcjsList);
+		mav.addObject("rwsjcList", rwsjcList);
+		mav.addObject("gjghjcList", gjghjcList);
+		mav.addObject("zjkyList", zjkyList);
+		mav.addObject("zjxsList", zjxsList);
+		mav.addObject("zjkzqkList", zjkzqkList);
+		mav.addObject("achievementMap", achievementMap);
+		mav.addObject("monographList", monographList);
+		mav.addObject("publishList", publishList);
+		mav.addObject("sciList", sciList);
+		mav.addObject("clinicalList", clinicalList);
+		mav.addObject("acadeList", acadeList);
+		mav.addObject("jcbxqtList", jcbxqtList);
+		mav.addObject("digitalMap", moocMap);
+		mav.addObject("intentionMap", intentionMap);
+		return mav;
+	}
 
     /**
      * 跳转到暂存页面
