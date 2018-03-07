@@ -236,7 +236,7 @@
                                        poster="${ctx}/image/${list.cover}.action" type="mp4" controls>
                                 </video>--%>
                             <div class="video-a" id="video-${list.id}"
-                                 src="http://120.76.221.250:11000/pmph_vedio/file/${list.file_name}"
+                                 src="http://120.76.221.250/v/play/${list.file_name}"
                                  poster="${ctx}/image/${list.cover}.action" type="mp4">
 
                             </div>
@@ -254,8 +254,9 @@
                                     variable: 'player',
                                     autoplay: false,
                                     /*flashplayer: true,*/
-                                    video: $this.attr("src")/*,
-                                     poster: $this.attr("poster")*/
+                                    video:$this.attr("src"),
+                                    poster: $this.attr("poster")
+
                                 };
                                 var player = new ckplayer(videoObject);
                             })
