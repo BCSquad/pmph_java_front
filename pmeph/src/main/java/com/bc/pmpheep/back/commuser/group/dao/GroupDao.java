@@ -324,4 +324,14 @@ public interface GroupDao {
      * @return
      */
 	Map<String, Object> queryGroupFileByFileId(@Param("id") String id);
+
+	/**
+	 *
+	 * @param id
+	 * @return
+	 */
+	List<Map<String, Object>> getAdminOrFounder(@Param("id") String id);
+
+
+	Map<String, Object> getUserAndGroupInfo(@Param("groupid") String groupid,@Param("userid") String userid);
 }

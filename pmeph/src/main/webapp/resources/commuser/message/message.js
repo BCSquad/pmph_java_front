@@ -184,6 +184,7 @@ function showup(id) {
             }
 
             $("#tattachment").html(ste);
+            $("#readno").attr('src', contextpath + "statics/image/readyes.png");
             layer.open({
                 type: 1,
                 title: false,
@@ -193,7 +194,6 @@ function showup(id) {
                 shadeClose: true,
                 content: $("#bookmistake")
             });
-            $("#readno").attr('src', contextpath + "statics/image/readyes.png");
         }
     });
 }

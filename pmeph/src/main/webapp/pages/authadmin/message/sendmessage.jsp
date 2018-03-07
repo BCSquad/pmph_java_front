@@ -32,8 +32,11 @@
     <script src="${ctx}/resources/authadmin/message/sendMessage.js" type="text/javascript"></script>
 
   <%--   <script src="${ctx}/resources/authadmin/message/inforelease.js"></script> --%>
-    
+   <!--  <style type="text/css">
+		input::-ms-clear{display: none;}
+    </style> -->
 </head>
+
 <body>
 <!-- 隐藏域 -->
 	<input type="hidden" id="validate" value="${resultFlag}">
@@ -126,7 +129,7 @@
                 <div class="item1">
                     <span  class="title2" >选择教材</span>
                     <select   class="st_2"  id="select-search-condition" >
-                    	<option  value="" >请选择</option>
+                    	<option value="">请选择</option> 
                     	<c:forEach items="${listMenu}" var="item">
 								<option value="${item.material_name}">${item.material_name}</option>
 							</c:forEach>

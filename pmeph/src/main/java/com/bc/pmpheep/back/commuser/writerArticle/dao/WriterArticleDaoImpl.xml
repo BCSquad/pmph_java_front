@@ -11,7 +11,6 @@
 		)
 	</insert>
 	
-
 	<!-- 更新文章状态 -->
 	<update id="updateIsStaging"  parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="table_trendst_id">
 		update cms_content set 
@@ -30,12 +29,6 @@
 		where mid = #{msg_id}
 	</update>
 	
-	<update id="updateArticleCover"  parameterType="java.util.Map">
-		update cms_extra set
-		attachment = #{mid},
-		attachment_name =  #{coverName} 
-		where attachment = #{msg_id}
-	</update>
 	<!-- 更新文章状态删除文章 -->
 	<update id="updateDelWriter"  parameterType="java.util.Map">
 		update cms_content set 

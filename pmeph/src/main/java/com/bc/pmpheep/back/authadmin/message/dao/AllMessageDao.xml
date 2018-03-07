@@ -3,9 +3,9 @@
 <mapper namespace="com.bc.pmpheep.back.authadmin.message.dao.AllMessageDao">
 
 	<select id="getAllMessageInit" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
+	SELECT
 		*
-		FROM
+	FROM
 		(
 		SELECT
 		DATE_FORMAT(
@@ -17,7 +17,7 @@
 		msg_id,
 		a.id
 		FROM
-		user_message a
+			user_message a
 		LEFT JOIN writer_user s2 ON a.sender_id = s2.id
 		AND a.sender_type = 2
 		LEFT JOIN org_user s3 ON a.sender_id = s3.id
@@ -25,7 +25,7 @@
 		LEFT JOIN pmph_user r1 ON a.receiver_id = r1.id
 		AND a.sender_type = 1
 		WHERE
-		receiver_type = 3
+			receiver_type = 3
 		AND A.msg_type IN (1, 0)
 		AND receiver_id = #{id}
 		) t
@@ -34,5 +34,12 @@
 
 		<if test="startPara!=null">limit #{startPara},8</if>
 	</select>
-
+    <!--  根据系统消息内容id更改系统消息是否已读 -->
+    <update id="updateIsRead" parameterType="java.util.Map">
+       update user_message set is_read=1 where msg_id=#{mid} and receiver_id=#{userid}
+    </update>
+    <!-- 删除消息 -->
+    <update id="deletemsg" parameterType="java.util.Map">
+        update user_message set is_deleted=1 where msg_id=#{mid} and receiver_id=#{userid}
+    </update>
 </mapper>

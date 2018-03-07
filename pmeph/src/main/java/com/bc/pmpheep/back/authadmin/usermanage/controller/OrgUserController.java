@@ -65,8 +65,8 @@ public class OrgUserController extends com.bc.pmpheep.general.controller.BaseCon
         String username = request.getParameter("username");
         String name="";
         if (username != null) {
-//            userName = java.net.URLDecoder.decode(username, "UTF-8");
-            name=new String(username.getBytes("ISO-8859-1"),"UTF-8");	
+            name = java.net.URLDecoder.decode(username, "UTF-8");
+//            name=new String(username.getBytes("ISO-8859-1"),"UTF-8");
         }
         //获取当前用户
         Map<String, Object> writerUserMap = this.getUserInfo();

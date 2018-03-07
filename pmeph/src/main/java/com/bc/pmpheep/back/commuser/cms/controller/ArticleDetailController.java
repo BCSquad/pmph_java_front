@@ -69,7 +69,6 @@ public class ArticleDetailController extends BaseController {
 
 		// cms附件
 		List<Map<String, Object>> cmsAttach = articleDetailService.queryCMSAttach(map1);
-		
 		mv.addObject("cmsAttach", cmsAttach);
 		// 查看作者
 		Map<String, Object> Art = articleDetailService.queryAuthor(map1);

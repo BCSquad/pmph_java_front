@@ -73,19 +73,26 @@
             <div style="height: 20px;"></div>
             <div id="message-list">
             <c:forEach items="${list}" var="item" >
-            <div class="item" onclick="system('${item.id}','${item.NAME}','${item.TIME}')">
+            <div class="item" id="item${item.id}">
                 <div class="item-img">
                     <img src="${ctx}/${item.avatar}" />
                 </div>
-                <div class="content" >
+                <div class="content" onclick="system('${item.id}','${item.NAME}','${item.TIME}')" style="width:1000px">
                      <p class="title" >
                          <span class="msg">${item.title}</span>
                          <span class="time">${item.TIME}</span>
                      </p>
-                    <p class="text" >
+                    <p class="text" id="txt${item.id }">
                         ${item.msg_content}
+                        <c:if test="${item.isread==true }"><img src="${ctx}/statics/image/readyes.png"  id="isread${item.id}"/></c:if>
                     </p>
                 </div>
+                 <c:if test="${item.title=='系统消息'}">
+	                    <div style="float:left;color: #999999;font-size: 14px;height:20px;margin-top: 45px;" onclick="delmsg('${item.id}')">
+	                        <span style="width:20px;height:20px;float:left;" class="deltag"></span>
+	                        <span style="line-height: 20px;">删除</span>
+	                    </div>
+                </c:if>
             </div>
             </c:forEach>
             </div>
