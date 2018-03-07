@@ -104,4 +104,16 @@ public interface MyMessageService {
      */
     void sendNewNoticeOrgToWriter(String type, Long receiverWriterId, String schoolName);
 
+
+    /**
+     * 申报表审核发送通知
+     *
+     * @param type
+     * @param receiverWriterId
+     * @param materialName
+     */
+    public void sendNewNoticeDeclare(String type, Long receiverWriterId, String materialName);
+
+    public void sendMsg(Short msgType, Short senderType, Long senderId, Short receiverType, Long receiverId, String title, String content);
+
 }

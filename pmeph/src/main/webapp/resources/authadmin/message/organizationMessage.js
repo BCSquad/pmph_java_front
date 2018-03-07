@@ -1,22 +1,22 @@
-function loadMore() {
-    //var pathName=window.document.location.pathname;
-    var para = $("#startPara").val();
-    var startPara;
-    if ("" == para) {
-        startPara = 8;
-    } else {
-        startPara = parseInt(para) + 8;
-    }
-    $.ajax({
-        type: "post",
-        url: contextpath + "AllMessage/loadMore.action",
-        data: {"startPara": startPara},
-        async: false,
-        dataType: 'json',
-        success: function (json) {
-            $("#startPara").val(startPara);
-            var str = '';
-            $.each(json.list, function (i, n) {
+function loadMore(){
+	//var pathName=window.document.location.pathname;  
+	var para = $("#startPara").val();
+	var startPara;
+	if(""==para){
+		startPara=8;
+	}else{
+		startPara = parseInt(para)+8;
+	}
+	$.ajax({
+		type:"post",
+		url:contextpath+"AllMessage/loadMore.action",
+		data:{"startPara":startPara},
+		async:false,
+		dataType:'json',
+		success:function(json){
+			$("#startPara").val(startPara);
+			var str= '';
+			$.each(json.list,function(i,n){
                 str += '<div class="item" onclick="system(\'' + n.id + '\',\'' + n.NAME + '\',\'' + n.TIME + '\')">' +
                     '<div class="item-img">' +
                     '<img src="' + contextpath + n.avatar + '" />' +
@@ -27,16 +27,16 @@ function loadMore() {
                     '<span class="time">' + n.TIME + '</span>' +
                     ' </p>' +
                     '<div class="text" >' + n.msg_content + '</div>' +
-                    '</div>' +
-                    '</div>';
-            });
-            $("#message-list").append(str);
-            if (json.listSize < 8) {
-                $("#load-more").hide();
-            }
-
-        }
-    });
+            '</div>'+
+        '</div>';
+		});
+			$("#message-list").append(str);
+			if(json.listSize<8){
+				$("#load-more").hide();
+			}
+			
+		}
+	});
 }
 
 //点击显示系统消息
@@ -79,7 +79,19 @@ function system(str, name, time) {
 function hideup() {
     $("#bookmistake").hide();
 }
-
+//
+function delmsg(id){
+	  $.ajax({
+          type:"post",
+          url:contextpath+"AllMessage/delmsg.action?mid="+id,
+          async:false,
+          dataType:'json',
+          success:function(json){
+        	  if(json.isdel=="yes"){
+        		  $("#item"+id).remove();
+        	  }
+          }});
+}
 //时间格式化
 function formatDate(value) {
     if (value) {
@@ -96,4 +108,4 @@ function formatDate(value) {
                     d.getSeconds().padLeft()].join(':');// 把秒格式化填充
         return dformat;// 最后返回格式化好的日期和时间
     }
-}
+    }

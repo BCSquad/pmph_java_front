@@ -21,30 +21,30 @@ import com.bc.pmpheep.general.pojo.Message;
 import com.bc.pmpheep.general.service.MessageService;
 
 /**
- * 
+ *
  * @ClassName: DataAuditServiceImpl
  * @Description: TODO
  * @author SunZhuoQun
  * @date 2017-12-5 上午9:29:34
- * 
+ *
  */
-@Service("com.bc.pmpheep.back.authadmin.applydocaudit.service.DataAuditServiceImpl")  
+@Service("com.bc.pmpheep.back.authadmin.applydocaudit.service.DataAuditServiceImpl")
 public class DataAuditServiceImpl implements DataAuditService {
 	@Autowired
 	DataAuditDao dataAuditDao;
-	
+
     @Autowired
     MyMessageDao myMessageDao;
 
 	@Autowired
     @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
     private PersonalService personalService;
-	
+
     @Autowired
     @Qualifier("com.bc.pmpheep.general.service.MessageService")
     MessageService messageService;
 
-	
+
 	/**
 	 * 查询列表
 	 */
@@ -77,7 +77,7 @@ public class DataAuditServiceImpl implements DataAuditService {
 				/ pageParameter.getPageSize());
 		return maxPageNum;
 	}
-	
+
 	/**
 	 * 标题
 	 */
@@ -86,9 +86,9 @@ public class DataAuditServiceImpl implements DataAuditService {
 		String resultList = dataAuditDao.findTitleName(map);
 		return resultList;
 	}
-	
-	
-	
+
+
+
 	//申报审核通过
 		@Override
 		public int updateDeclarationPass(Map<String, Object> map) {
@@ -97,18 +97,18 @@ public class DataAuditServiceImpl implements DataAuditService {
 			wut.declarationAuditDetail(dmap,"3");
 			personalService.saveUserTrendst(wut);//机构申报审核 生成动态
 			//通过后发送消息给申报人员
-			String uidString=String.valueOf(map.get("auth_user_id"));  
-			Long thisId=Long.valueOf(uidString); 
-			String writer_id=String.valueOf(map.get("writer_id"));  
+			String uidString=String.valueOf(map.get("auth_user_id"));
+			Long thisId=Long.valueOf(uidString);
+			String writer_id=String.valueOf(map.get("writer_id"));
 			Long frendId=Long.valueOf(writer_id);
-			String mid=String.valueOf(dmap.get("material_id"));  
+			String mid=String.valueOf(dmap.get("material_id"));
 			Long material_id=Long.valueOf(mid);
-			
+
 			//发送者id   发送者类型    接收者id  接收者类型   标题   内容
-			senNewMsgPass(material_id,thisId, new Short("3"), frendId, new Short("2"), "教材申报表审核通过", "恭喜！您提交的《"+dmap.get("material_name").toString()+"》申报表已通过[学校管理员/出版社]审核!");
+			senNewMsgPass(material_id,thisId, new Short("3"), frendId, new Short("2"), "系统消息", "恭喜！您提交的《"+dmap.get("material_name").toString()+"》申报表已通过[学校管理员/出版社]审核!");
 			return this.dataAuditDao.updateDeclarationPass(map);
 		}
-	
+
 	//申报审核退回
 	@Override
 	public int updateDeclaration(Map<String, Object> map) {
@@ -118,74 +118,62 @@ public class DataAuditServiceImpl implements DataAuditService {
 		//机构申报审核 生成动态
 		personalService.saveUserTrendst(wut);
 		//退回后发送消息给申报人员
-		String uidString=String.valueOf(map.get("auth_user_id"));  
-		Long thisId=Long.valueOf(uidString); 
-		String writer_id=String.valueOf(map.get("writer_id"));  
+		String uidString=String.valueOf(map.get("auth_user_id"));
+		Long thisId=Long.valueOf(uidString);
+		String writer_id=String.valueOf(map.get("writer_id"));
 		Long frendId=Long.valueOf(writer_id);
-		String mid=String.valueOf(dmap.get("material_id"));  
+		String mid=String.valueOf(dmap.get("material_id"));
 		Long material_id=Long.valueOf(mid);
-		
-		senNewMsgBack(material_id,thisId, new Short("3"), frendId, new Short("2"), "教材申报表被退回", " 	抱歉，您提交的《"+dmap.get("material_name").toString()+"》申报表被[学校管理员/出版社]退回，请您核对后重试!");
+
+		senNewMsgBack(material_id,thisId, new Short("3"), frendId, new Short("2"), "系统消息", " 	抱歉，您提交的《"+dmap.get("material_name").toString()+"》申报表被[学校管理员/出版社]退回，请您核对后重试!");
 		return this.dataAuditDao.updateDeclaration(map);
 	}
-	
+
 	//通过后发送消息给申报人员
 	@Override
 	public void senNewMsgPass(Long material_id,Long thisId, Short thisType, Long frendId,
 			Short friendIdType, String title, String content) {
-		// TODO 
+		// TODO
 		   Message message = new Message();
 	        message.setContent(content);
 	        messageService.add(message);
 	        MyMessage userMessage = new MyMessage();
 	        userMessage.setMaterial_id(material_id);
 	        userMessage.setMsgId(message.getId());
-	        userMessage.setMsgType(new Short("0"));
-	        userMessage.setTitle(title);
-	        userMessage.setSenderId(thisId);
-	        if (null == thisType) {
-	            userMessage.setSenderType(new Short("3"));
-	        } else {
-	            userMessage.setSenderType(thisType);
-	        }
-	        userMessage.setReceiverId(frendId);
-	        if (null == friendIdType) {
-	            userMessage.setReceiverType(new Short("2"));
-	        } else {
-	            userMessage.setReceiverType(friendIdType);
-	        }
+            userMessage.setMaterial_id(0L);
+            userMessage.setMsgType(new Short("0"));
+            userMessage.setTitle(title);
+            userMessage.setSenderId(0L);
+            userMessage.setSenderType(new Short("0"));
+            userMessage.setReceiverId(frendId);
+
+            userMessage.setReceiverType(new Short("2"));
 	        myMessageDao.addUserMessage(userMessage);
-		
+
 	}
 	//退回后发送消息给申报人员
 	@Override
 	public void senNewMsgBack(Long material_id,Long thisId, Short thisType, Long frendId,
 			Short friendIdType, String title, String content) {
-		// TODO 
+		// TODO
 		   Message message = new Message();
 	        message.setContent(content);
 	        messageService.add(message);
 	        MyMessage userMessage = new MyMessage();
 	        userMessage.setMsgId(message.getId());
-	        userMessage.setMaterial_id(material_id);
+	        userMessage.setMaterial_id(0L);
 	        userMessage.setMsgType(new Short("0"));
 	        userMessage.setTitle(title);
-	        userMessage.setSenderId(thisId);
-	        if (null == thisType) {
-	            userMessage.setSenderType(new Short("3"));
-	        } else {
-	            userMessage.setSenderType(thisType);
-	        }
+	        userMessage.setSenderId(0L);
+            userMessage.setSenderType(new Short("0"));
 	        userMessage.setReceiverId(frendId);
-	        if (null == friendIdType) {
-	            userMessage.setReceiverType(new Short("2"));
-	        } else {
-	            userMessage.setReceiverType(friendIdType);
-	        }
+
+	        userMessage.setReceiverType(new Short("2"));
+
 	        myMessageDao.addUserMessage(userMessage);
-		
+
 	}
-	
+
 	//通过教材ID查出教材
 	@Override
 	public Map<String, Object> queryMaterialbyId(String material_id) {
@@ -196,9 +184,9 @@ public class DataAuditServiceImpl implements DataAuditService {
 	@Override
 	public void updateDeclarationUpdateTime(Map<String, Object> queryMap) {
 		dataAuditDao.updateDeclarationUpdateTime(queryMap);
-		
+
 	}
-	
+
 
 		//通过教材ID查出所有教材下的书籍
 		@Override
@@ -209,7 +197,7 @@ public class DataAuditServiceImpl implements DataAuditService {
 		public List<Map<String, Object>> queryZjkzxxById(String material_id) {
 			return this.dataAuditDao.queryZjkzxxById(material_id);
 		}
-		
+
 		/**
 		 * 图书申报职位暂存
 		 */
@@ -217,14 +205,14 @@ public class DataAuditServiceImpl implements DataAuditService {
 		public List<Map<String, Object>> queryTssbZc(Map<String, Object> map) {
 			return this.dataAuditDao.queryTssbZc(map);
 		}
-		
-		
+
+
 		@Override
 		public List<Map<String, Object>> queryPerson(Map<String, Object> map) {
 			return this.dataAuditDao.queryPerson(map);
 		}
-		
-				
+
+
 		@Override
 		public List<Map<String, Object>> queryStu(Map<String, Object> map) {
 			return this.dataAuditDao.queryStu(map);
@@ -254,7 +242,7 @@ public class DataAuditServiceImpl implements DataAuditService {
 		public List<Map<String, Object>> queryJcbx(Map<String, Object> map) {
 			return this.dataAuditDao.queryJcbx(map);
 		}
-		
+
 		@Override
 		public List<Map<String, Object>> queryqtJcbx(Map<String, Object> map) {
 			map.put("rank", "0");
@@ -265,22 +253,22 @@ public class DataAuditServiceImpl implements DataAuditService {
 		public List<Map<String, Object>> queryTsxz(Map<String, Object> map) {
 			return this.dataAuditDao.queryTsxz(map);
 		}
-		
+
 		@Override
 		public List<Map<String, Object>> queryZjxs(Map<String, Object> map) {
 			return this.dataAuditDao.queryZjxs(map);
 		}
-		
+
 		@Override
 		public List<Map<String, Object>> queryZjkyqk(Map<String, Object> map) {
 			return this.dataAuditDao.queryZjkyqk(map);
 		}
-		
+
 		@Override
 		public List<Map<String, Object>> queryGjghjc(Map<String, Object> map) {
 			return this.dataAuditDao.queryGjghjc(map);
 		}
-		
+
 		@Override
 		public List<Map<String, Object>> queryOrgById(String material_id) {
 			return this.dataAuditDao.queryOrgById(material_id);
@@ -289,37 +277,42 @@ public class DataAuditServiceImpl implements DataAuditService {
 		public List<Map<String, Object>> queryZjkzbb(Map<String, Object> map) {
 			return this.dataAuditDao.queryZjkzbb(map);
 		}
-		
+
 		@Override
 		public Map<String,Object> queryAchievement(Map<String, Object> map) {
 			return this.dataAuditDao.queryAchievement(map);
 		}
-		
+
 		@Override
 		public List<Map<String, Object>> queryMonograph(Map<String, Object> map) {
 			return this.dataAuditDao.queryMonograph(map);
 		}
-		
+
 		@Override
 		public List<Map<String, Object>> queryPublish(Map<String, Object> map) {
 			return this.dataAuditDao.queryPublish(map);
 		}
-		
+
 		@Override
 		public List<Map<String, Object>> querySci(Map<String, Object> map) {
 			return this.dataAuditDao.querySci(map);
 		}
-		
+
 		@Override
 		public List<Map<String, Object>> queryClinicalreward(Map<String, Object> map) {
 			return this.dataAuditDao.queryClinicalreward(map);
 		}
-		
+
 		@Override
 		public List<Map<String, Object>> queryAcadereward(Map<String, Object> map) {
 			return this.dataAuditDao.queryAcadereward(map);
 		}
 
+		@Override
+		public List<Map<String, Object>> queryRwsBook(Map<String, Object> map) {
+			// TODO Auto-generated method stub
+			return dataAuditDao.queryRwsBook(map);
+		}
 		@Override
 		public Map<String, Object> queryMoocdigital(Map<String, Object> map) {
 			return this.dataAuditDao.queryMoocdigital(map);

@@ -235,6 +235,7 @@ public class MyMessageServiceImpl implements MyMessageService {
         myMessageDao.addUserMessage(userMessage);
     }
 
+    @Override
     public void sendMsg(Short msgType, Short senderType, Long senderId, Short receiverType, Long receiverId, String title, String content) {
         Message message = new Message();
         message.setContent(content);
@@ -287,5 +288,16 @@ public class MyMessageServiceImpl implements MyMessageService {
         }
 
     }
+
+    @Override
+    public void sendNewNoticeDeclare(String type, Long receiverWriterId, String materialName) {
+        if (type.equals("1")) {
+            this.sendMsg(new Short("0"), new Short("0"), 0L, new Short("2"), receiverWriterId, "系统消息", "恭喜！您提交的《" + materialName + "》申报表已通过[学校管理员/出版社]审核");
+        } else {
+            this.sendMsg(new Short("0"), new Short("0"), 0L, new Short("2"), receiverWriterId, "系统消息", " 抱歉，您提交的《" + materialName + "》申报表被[学校管理员/出版社]退回，请您核对后重试");
+        }
+
+    }
+
 
 }

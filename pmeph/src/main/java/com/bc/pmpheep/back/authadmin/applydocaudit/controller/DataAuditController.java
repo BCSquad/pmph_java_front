@@ -226,6 +226,9 @@ public class DataAuditController extends BaseController{
 			//10.作家教材编写情况表
 			List<Map<String,Object>> jcbxList = new ArrayList<Map<String,Object>>();
 			jcbxList=this.dataAuditService.queryJcbx(queryMap);
+			//人卫社教材编写情况
+			List<Map<String,Object>> rwsList = new ArrayList<Map<String,Object>>();
+			rwsList=this.dataAuditService.queryRwsBook(queryMap);
 			//11.作家科研情况表
 			List<Map<String,Object>> zjkyList = new ArrayList<Map<String,Object>>();
 			zjkyList = this.dataAuditService.queryZjkyqk(queryMap);
@@ -250,7 +253,7 @@ public class DataAuditController extends BaseController{
 			//18.学术荣誉授予情况表
 			List<Map<String,Object>> acadeList = new ArrayList<Map<String,Object>>();
 			acadeList = this.dataAuditService.queryAcadereward(queryMap);
-			
+
 			//20.参加人卫慕课、数字教材编写情况
 			Map<String,Object> moocMap = new HashMap<String,Object>();
 			moocMap = this.dataAuditService.queryMoocdigital(queryMap);
@@ -265,6 +268,7 @@ public class DataAuditController extends BaseController{
 			mav.addObject("workList", workList);
 			mav.addObject("steaList", steaList);
 			mav.addObject("jcbjList", jcbjList);
+			mav.addObject("rwsList",rwsList);
 			mav.addObject("gjkcjsList", gjkcjsList);
 			mav.addObject("jcbxList", jcbxList);
 			mav.addObject("gjghjcList", gjghjcList);
@@ -308,7 +312,6 @@ public class DataAuditController extends BaseController{
 					paramMap.put("auth_user_id", user_id);
 					paramMap.put("auth_date", date);
 					paramMap.put("writer_id", writer_id);
-					
 					
 					int count = this.dataAuditService.updateDeclarationPass(paramMap);
 					if(count>0){

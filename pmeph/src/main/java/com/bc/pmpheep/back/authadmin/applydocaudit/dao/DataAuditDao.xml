@@ -136,7 +136,7 @@
 		when d.offline_progress=1  then '' 
 		when d.offline_progress=2  then '已收到' 	END)	as 	offlineprogress,
 		group_concat(DISTINCT concat(t.textbook_name,'-',(case
-		when m.is_force_end=1 and t.is_published=0 then '遴选结束'
+		when m.is_force_end=1 then '遴选结束'
 		when t.is_published=0  then '审核中' 
 		when pp.chosen_position=0 OR pp.chosen_position IS NULL   then '遴选结束' 
 		when pp.chosen_position = 4 then '主编' 																															
@@ -271,7 +271,7 @@
 	
 	<!-- 专家信息 --> 
 	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
-			select t1.*,t2.org_name dwmc from (select id,material_id,user_id,realname,sex,birthday,experience,org_name,position,title,address,postcode,handphone,email,idtype,
+		select t1.*,t2.org_name dwmc from (select id,material_id,user_id,realname,sex,birthday,experience,org_name,position,title,address,postcode,handphone,email,idtype,
 idcard,telephone,fax,org_id,online_progress,auth_user_id,auth_date,offline_progress,paper_date,is_staging*1 is_staging,is_deleted*1 is_deleted,
 gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,expertise,return_cause from declaration) t1 left join (select id,org_name from org 
 	union select '0' id,'人民卫生出版社' org_name from dual) t2 on t1.org_id = t2.id
@@ -397,16 +397,25 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 		select * from dec_acade_reward where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
 
+	
 	<!-- //人卫慕课、数字教材编写情况 -->
 	<select id="queryMoocdigital" resultType="java.util.Map" parameterType="java.util.Map">
 		select * from dec_mooc_digital where declaration_id = #{declaration_id} 
 	</select>
-	
+
+     <!-- 人卫社教材编写情况-->
+     <select id="queryRwsBook" resultType="java.util.Map" parameterType="java.util.Map">
+       select id,declaration_id,material_name,rank,position,
+		is_digital_editor*1 is_digital_editor,publish_date,isbn,note,sort
+		 from dec_textbook_pmph where declaration_id = #{declaration_id}
+		  ORDER BY sort 
+     </select> 
+
 		<!-- //内容意向表情况 -->
 	<select id="queryIntention" resultType="java.util.Map" parameterType="java.util.Map">
 		select * from dec_intention where declaration_id = #{declaration_id} 
 	</select>
-	
+
 	
 	
 </mapper>

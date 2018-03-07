@@ -57,11 +57,6 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 	public Map<String, Object> querySupport(String id) {
 		// TODO Auto-generated method stub
 		Map<String, Object> map=readDetailDao.querySupport(id);
-		if(map == null){
-
-		}else {
-			map.put("code","no");
-		}
 		return map;
 	}
 
