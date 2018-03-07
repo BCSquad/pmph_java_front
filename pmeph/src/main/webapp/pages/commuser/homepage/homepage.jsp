@@ -276,7 +276,7 @@
                                     <div class="a6_name_div" style="cursor:pointer;"
                                          onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?userId=${list.userId }'">
                                         <span>${list.realname}</span></div>
-                                    <div class="a6_time_div"><span>${list.auth_date}</span></div>
+                                    <div class="a6_time_div"><span>${list.gmt_create}</span></div>
                                 </div>
                             </div>
                         </div>
@@ -306,7 +306,7 @@
                                     <div class="a6_name_div" style="cursor:pointer;"
                                          onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?userId=${list.userId }'">
                                         <span>${list.realname}</span></div>
-                                    <div class="a6_time_div"><span>${list.auth_date}</span></div>
+                                    <div class="a6_time_div"><span>${list.gmt_create}</span></div>
                                 </div>
                             </div>
                         </div>

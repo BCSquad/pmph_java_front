@@ -70,8 +70,8 @@
 				            </div>
 				        </div>
 		        	</c:if>
+	    	
 	    	<div class="block">
-                    
                     <div class="title">
                         <div class="line"></div>
                            <div class="rd_name">文章评论<%-- （共${ComNum}条） --%></div>
@@ -189,8 +189,8 @@
                 </c:forEach>
                     
             </div>
-    	</div>
-    	<div class="area2">
+    		</div>
+    		<div class="area2">
     		<div style="position:relative;width: 275px;height: 410px;">
     			<div class="right_2">
 	    			<c:if test="${Art.avatar == '' || Art.avatar == 'DEFAULT' || Art.avatar == null}">
@@ -245,7 +245,6 @@
 	            </div>
     		</div>
     	</div>	
-
 			<div style="clear: both"></div>
 		</div>
 	</div>
