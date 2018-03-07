@@ -64,6 +64,14 @@ public class BookSearchController extends BaseController {
 		return mv;
 	}
 	
+	@RequestMapping("bookOrArtSpliter")
+	public int bookOrArtSpliter(@RequestParam(value="search",defaultValue="")String search,HttpServletRequest request) throws UnsupportedEncodingException{
+		
+		
+		
+		
+		return 1;
+	}
 	/**
 	 * 查询列表刷新
 	 */
