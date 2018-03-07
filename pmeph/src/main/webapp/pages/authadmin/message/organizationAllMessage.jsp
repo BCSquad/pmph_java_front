@@ -84,7 +84,8 @@
                      </p>
                     <p class="text" id="txt${item.id }">
                         ${item.msg_content}
-                        <c:if test="${item.isread==true }"><img src="${ctx}/statics/image/readyes.png"  id="isread${item.id}"/></c:if>
+                        <c:if test="${item.isread==true }"><img src="${ctx}/statics/image/readyes.png"  id="readyes${item.id}"/></c:if>
+                        <c:if test="${item.isread==false }"><img src="${ctx}/statics/image/readno.png"  id="readno${item.id}"/></c:if>
                     </p>
                 </div>
                  <c:if test="${item.title=='系统消息'}">
