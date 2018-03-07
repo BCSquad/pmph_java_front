@@ -23,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.authadmin.message.service.AllMessageServiceImpl;
 import com.bc.pmpheep.general.controller.BaseController;
-import com.mongodb.util.Hash;
 
 
 /** 
@@ -95,7 +94,6 @@ public class AllMessageController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> msg(HttpServletRequest request){
 		Map<String,Object> map=new HashMap<>();
-		Map<String, Object> user = getUserInfo();
 		Message massage=messageService.get(request.getParameter("mid"));
 		int count=allMessageServiceImpl.updateIsRead(request.getParameter("mid"));
 		String isread="no";
@@ -107,7 +105,6 @@ public class AllMessageController extends BaseController {
 		Matcher m_html=p_html.matcher(massage.getContent());
 		String msg=m_html.replaceAll("");
 		map.put("msg",msg);
-		map.put("isread", isread);
 		return map;
 	};
 	/**

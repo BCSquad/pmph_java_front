@@ -309,11 +309,6 @@ public class DataAuditServiceImpl implements DataAuditService {
 		}
 
 		@Override
-		public List<Map<String, Object>> queryRwsBook(Map<String, Object> map) {
-			// TODO Auto-generated method stub
-			return dataAuditDao.queryRwsBook(map);
-		}
-		@Override
 		public Map<String, Object> queryMoocdigital(Map<String, Object> map) {
 			return this.dataAuditDao.queryMoocdigital(map);
 		}

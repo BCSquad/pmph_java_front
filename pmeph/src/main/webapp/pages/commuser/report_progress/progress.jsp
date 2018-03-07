@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                         <div class="img_mid">
 			                            <div class="picture_mid"></div>
 			                            <div class="picture_bom">
-			                                <span class="span_bom_left">申报单位已审核</span>
+			                                <span class="span_bom_left">资料已审核</span>
 			                                <img   class="img_bom_right"  src="${ctx}/statics/image/yiwancheng.png" >
 			                            </div>
 			                        </div>
@@ -75,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                         <div class="img_mid">
 			                            <div class="picture_mid1"></div>
 			                            <div class="picture_bom">
-			                                <span class="span_bom_left" style="color: #999999">申报单位审核中</span>
+			                                <span class="span_bom_left" style="color: #999999">资料审核中</span>
 			                                <img   class="img_bom_right"  src="${ctx}/statics/image/shenhezhong.png" style="width:52px;">
 			                            </div>
 			                        </div>
@@ -87,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			                        <div class="img_mid">
 			                            <div class="picture_mid1"></div>
 			                            <div class="picture_bom">
-			                                <span class="span_bom_left" style="color: #999999">申报单位退回</span>
+			                                <span class="span_bom_left" style="color: #999999">资料被退回</span>
 			                            </div>
 			                        </div>
 			                    </c:if>

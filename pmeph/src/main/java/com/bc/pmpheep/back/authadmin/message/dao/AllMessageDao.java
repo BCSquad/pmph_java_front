@@ -6,8 +6,6 @@ package com.bc.pmpheep.back.authadmin.message.dao;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
-
 /** 
  * @ClassName: AllMessageDao 
  * @Description: TODO
@@ -23,17 +21,5 @@ public interface AllMessageDao {
 	* @throws 
 	*/
 	public List<Map<String, Object>> getAllMessageInit(Map<String, Object> map);
-    /**
-     *  根据系统消息内容id更改系统消息是否已读
-     * @param mid
-     * @return
-     */
-	public int updateIsRead(@Param("mid") String mid);
-	/**
-	 * 删除消息
-	 * @param mid
-	 * @return
-	 */
-	public int deletemsg(@Param("mid") String mid);
 
 }
