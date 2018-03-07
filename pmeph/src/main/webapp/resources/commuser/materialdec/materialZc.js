@@ -512,7 +512,7 @@ function add_jccb(){
 	var $tr = $("<tr id='jccb_"+num+"'>"+
 	"<td><input class='cg_input' id='jc_material_name_"+num+"' name='jc_material_name' value='' style='width: 360px;' placeholder='教材名称'/></td>"+
 	"<td style='color: #333333;'>"+
-	"<table class='radio_tb' style='width: 230px;'><tr>"+
+	"<table class='radio_tb' style='width: 100%;'><tr>"+
 		"<td><input type='radio' name='jc_position_"+num+"' checked='checked' value='0'/>无</td>"+
 		"<td><input type='radio' name='jc_position_"+num+"' value='1'/>主编</td>"+
 		"<td><input type='radio' name='jc_position_"+num+"' value='2'/>副主编</td>"+
@@ -525,7 +525,7 @@ function add_jccb(){
 		"<td><input type='radio' name='jc_is_digital_editor_"+num+"' value='0' checked='checked'/>否</td>"+
 	"</tr></table>"+
 	"<input type='hidden' name='jc_is_digital_editor' value='jc_is_digital_editor_"+num+"' /></td>"+
-	"<td><input class='cg_input' name='jc_note' value='' style='width: 230px;' placeholder='备注'/>" +
+	"<td><input class='cg_input' name='jc_note' value='' style='width: 290px;' placeholder='备注'/>" +
 	"<input type='hidden' name='zdjy' value='jc_material_name_"+num+"' />" +
 	"</td>"+
 	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('jccb_"+num+"')\"/></td>"+

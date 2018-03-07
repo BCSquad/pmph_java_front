@@ -97,7 +97,7 @@ public class BookSearchController extends BaseController {
 		if (bcount==0 && acount >0) {
 			redirectAttributes.addAttribute("title",search);
 			redirectUrl = "redirect:/articlesearch/queryall.action";
-		}
+	}
 		return redirectUrl;
 	}
 	/**

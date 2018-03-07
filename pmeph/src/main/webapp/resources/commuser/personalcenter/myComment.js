@@ -28,28 +28,28 @@ $(function() {
     	var $c = $(this);
     	var $t = $(this).find(".wrap");
     	var defHeight = $t.height();  
-        if(defHeight >= slideHeight) {  
+    if(defHeight >= slideHeight) {  
             $t.css('height', slideHeight + 'px');  
             $c.find('.read-more').append('<a href="#">...(展开)</a>');  
             $c.find('.read-more a').click(function() {  
                 var curHeight = $t.height();  
-                if(curHeight == slideHeight) {  
+            if(curHeight == slideHeight) {  
                     $t.animate({  
                         height: "100%"
-                    }, "normal");  
+                }, "normal");  
                 	/*$t.css("height","auto");*/
                 	$c.find('.read-more a').html('收起');  
-                } else {  
+            } else {  
                     $t.animate({  
-                        height: slideHeight  
-                    }, "normal");  
+                    height: slideHeight  
+                }, "normal");  
                     $c.find('.read-more a').html('...(展开)');  
-                }  
-                return false;  
-            });  
-        }  
+            }  
+            return false;  
+        });  
+    }  
     	
-    });
+});  
 });  
 
 //评论弹出框
