@@ -441,7 +441,7 @@ public class MessageController extends BaseController {
         Map<String, Object> paraMap = new HashMap<String, Object>();
         paraMap.put("id", uid);
         Map<String, Object> map1 = noticeMessageService.queryTitleMessage(paraMap);
-        int count = 0;//allMessageServiceImpl.updateIsRead(uid);
+        int count = allMessageServiceImpl.updateIsRead(uid);
         String isread = "no";
         if (count > 0) {
             isread = "yes";

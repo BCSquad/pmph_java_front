@@ -91,7 +91,7 @@ public class AllMessageController extends BaseController {
 	}
 
 	//根据Mid查询系统消息详情
-	@RequestMapping("msg")
+	/*@RequestMapping("msg")
 	@ResponseBody
 	public Map<String,Object> msg(HttpServletRequest request){
 		Map<String,Object> map=new HashMap<>();
@@ -109,7 +109,7 @@ public class AllMessageController extends BaseController {
 		map.put("msg",msg);
 		map.put("isread", isread);
 		return map;
-	};
+	};*/
 	/**
 	 * 删除消息
 	 * @param req
@@ -119,7 +119,7 @@ public class AllMessageController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> delmsg(HttpServletRequest req){
 		 Map<String, Object> user = getUserInfo();
-		 int count=allMessageServiceImpl.deletemsg(req.getParameter("mid"),user.get("id").toString());
+		 int count=allMessageServiceImpl.deletemsg(req.getParameter("mid"));
 		 String isdel="no";
 		 if(count==1){
 			 isdel="yes";

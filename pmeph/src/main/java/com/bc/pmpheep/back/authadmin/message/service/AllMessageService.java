@@ -27,11 +27,11 @@ public interface AllMessageService {
      * @param mid
      */
 	
-	public int updateIsRead(String mid,String userid);
+	public int updateIsRead(String mid);
 	/**
 	 * 删除消息
 	 * @param parameter
 	 * @param string
 	 */
-	public int deletemsg(String mid, String userid);
+	public int deletemsg(String mid);
 }
