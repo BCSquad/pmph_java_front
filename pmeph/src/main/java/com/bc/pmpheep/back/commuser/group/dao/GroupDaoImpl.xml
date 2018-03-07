@@ -4,7 +4,7 @@
 
 <mapper namespace="com.bc.pmpheep.back.commuser.group.dao.GroupDao">
 
-    <!--  删除我能删除的文件 --> 
+    <!--  删除我能删除的文件 -->
 	<delete id="deleteMyPowerFile">
 		delete from pmph_group_file 
 		where id = #{id}
@@ -22,28 +22,28 @@
 			 )temp where temp.deletePower
 		)
 	</delete>
-	
-	
+
+
 	<!-- 查询我在这个小组上传的文件 -->
     <select id="getMyFiles" resultType="GroupFileVO"> 
     	select * from pmph_group_file where member_id in (select id from pmph_group_member where user_id =#{userId} ) and group_id =#{groupId};
     </select>
-	
+
 	<!-- 根据用户id删除文件 -->
 	<delete id="deletePmphGroupFile" >
 		delete from pmph_group_file where member_id in (select id from pmph_group_member where user_id =#{userId} ) and group_id =#{groupId};
 	</delete>
-	
+
 	<!--  根据用户id删除对话 -->
 	<delete id="deleteMessage" >
 		delete from pmph_group_message where member_id in (select id from pmph_group_member where user_id =#{userId}) and group_id =#{groupId};
 	</delete>
-	
+
 	<!--  根据用户id删除成员 -->
 	<delete id="deletePmphGroupMember" >
 		delete from pmph_group_member  where user_id =#{userId} and group_id =#{groupId} ;
 	</delete>
-    
+
     <!-- 获取小组讨论 -->
     <select id="getTalks" resultType="GroupMessageVO"> 
     	select 
@@ -82,11 +82,11 @@
 		true AND
 		is_deleted = FALSE
 		)
-		<if test="order == null "> 
+		<if test="order == null ">
 			order by rand()
 		</if>
-		<if test="order != null "> 
-			order by #{order} 
+		<if test="order != null ">
+			order by #{order}
 		</if>
 		limit #{start},#{pageSize}
 	</select>
@@ -114,17 +114,17 @@
 		group_name
 	</select>
     <!-- 统计小组成员数 -->
-    <select id="getMemberTotal" parameterType="java.lang.Long" 
+    <select id="getMemberTotal" parameterType="java.lang.Long"
         resultType="java.lang.Integer">
-        SELECT COUNT(user_id) FROM pmph_group_member WHERE group_id = #{groupId};
+        SELECT COUNT(user_id) FROM pmph_group_member WHERE group_id = #{groupId} and is_deleted=FALSE;
     </select>
     <!-- 统计小组文件数 -->
-    <select id="getFileTotal" parameterType="java.lang.Long" 
+    <select id="getFileTotal" parameterType="java.lang.Long"
         resultType="java.lang.Integer">
         SELECT COUNT(file_id) FROM pmph_group_file WHERE group_id = #{groupId};
     </select>
     <!-- 获取小组所有成员的头像 -->
-    <select id="getAvatars" parameterType="java.lang.Long" 
+    <select id="getAvatars" parameterType="java.lang.Long"
         resultType="String">
         SELECT IFNULL(b.avatar,c.avatar) 
 		FROM pmph_group_member a 
@@ -133,19 +133,19 @@
 		WHERE a.group_id = #{groupId};
     </select>
     <!-- 获取小组动态 -->
-    <select id="getMessages" parameterType="java.lang.Long" 
+    <select id="getMessages" parameterType="java.lang.Long"
         resultType="GroupMessageVO">
         SELECT * FROM pmph_group_message 
         WHERE  group_id = #{groupId} ORDER BY gmt_create DESC
     </select>
-    
+
     <!-- 查询小组总文件数目 -->
     <select id="getFilesTotal" resultType="java.lang.Integer">
-         SELECT 
+         SELECT
 	         count(a.id)
-		 FROM 
-		 	pmph_group_file a 
-		 LEFT JOIN 
+		 FROM
+		 	pmph_group_file a
+		 LEFT JOIN
 		 	pmph_group_member b on b.id = a.member_id ,
 		 (SELECT if(is_founder or is_admin,true,false ) po from pmph_group_member where user_id = #{thisId} and group_id = #{groupId} )p
 		 WHERE b.group_id = #{groupId}
@@ -153,16 +153,16 @@
 		 	and a.file_name like CONCAT('%',#{fileName},'%')
 		 </if>
 	</select>
-    
+
     <!-- 获取小组文件分页列表 -->
     <select id="getFiles"  resultType="GroupFileVO">
-         SELECT 
+         SELECT
 	         a.*,
 			 b.display_name ,
 			 if(p.po , true ,if(b.user_id = #{thisId} ,true,false))deletePower
-		 FROM 
-		 	pmph_group_file a 
-		 LEFT JOIN 
+		 FROM
+		 	pmph_group_file a
+		 LEFT JOIN
 		 	pmph_group_member b on b.id = a.member_id ,
 		 (SELECT if(is_founder or is_admin,true,false ) po from pmph_group_member where user_id = #{thisId} and group_id = #{groupId} )p
 		 WHERE b.group_id = #{groupId}
@@ -170,7 +170,7 @@
 		 	and a.file_name like CONCAT('%',#{fileName},'%')
 		 </if>
 		 <if test="order == null">
-		    ORDER BY a.gmt_create desc 
+		    ORDER BY a.gmt_create desc
 		 </if>
 		 <if test="order != null">
 		 	ORDER BY
@@ -180,7 +180,7 @@
 		 	<if test=" order == 'file_size' ">
 		 		file_size
 		 	</if>
-		 	<if test=" order == 'file_name' ">	
+		 	<if test=" order == 'file_name' ">
 		 		file_name
 		 	</if>
 		    <if test=" rank=='asc'  ">
@@ -192,11 +192,11 @@
 		 </if>
 		 limit #{start},#{pageSize}
     </select>
-    
+
     <delete id="deleteFile" parameterType="java.lang.Long">
         DELETE FROM pmph_group_file WHERE id = #{id};
     </delete>
-    
+
     <!-- 根据组员id查询PmphGroupMember -->
 	<select id="getPmphGroupMemberByMemberId" resultType="PmphGroupMemberVO">
 		select *
@@ -204,7 +204,7 @@
 		group_id=#{groupId} and
 		user_id= #{userId};
 	</select>
-	
+
 	<!-- 根据小组id查询小组所有成员 -->
 	<select id="listPmphGroupMember" parameterType="java.lang.Long"
 		resultType="PmphGroupMemberVO">
@@ -213,7 +213,7 @@
 		and is_deleted = false
 		order by is_founder DESC ,is_admin DESC;
 	</select>
-	
+
 	<sql id="key">
 		<!-- 去掉最后一个, -->
 		<trim suffixOverrides=",">
@@ -275,7 +275,7 @@
 		<include refid="value" />
 		) ;
 	</insert>
-	
+
 	<!-- 根据组员id查询PmphGroupMember -->
 	<select id="getGroupMember" resultType="GroupMember">
 		select *
@@ -284,7 +284,7 @@
 		user_id= #{userId}
 		;
 	</select>
-	
+
 	<!-- 更新 GroupFile -->
 	<update id="updateGroupFile" parameterType="GroupFileVO">
 		update  pmph_group_file
@@ -307,7 +307,7 @@
 		</set>
 		where id=#{id} ;
 	</update>
-	
+
 	<sql id="key1">
 		<!-- 去掉最后一个, -->
 		<trim suffixOverrides=",">
@@ -351,14 +351,14 @@
 		<include refid="value1" />
 		) ;
 	</insert>
-	
+
 	<!-- 根据id查询一个 GroupMessage -->
 	<select id="getGroupMessageById" parameterType="java.lang.Long"
 		resultType="GroupMessageVO">
 		select * from pmph_group_message where
 		id=#{id} ;
 	</select>
-	
+
 	<!-- 更新 Group -->
 	<update id="updateGroup" parameterType="Group">
 		update
@@ -385,12 +385,12 @@
 		</set>
 		where id=#{id} ;
 	</update>
-	
+
 	<!-- 更新 下载次数 -->
 	<update id="updateGroupFileOfDownload" >
 		update pmph_group_file set download=download+1  WHERE group_id = #{groupId} AND file_id = #{fileId}
 	</update>
-	
+
 	<!-- 查询小组消息 -->
 	<select id="messageList" parameterType="java.util.Map" resultType="java.util.Map">
 		select t1.*,t2.avatar from pmph_group_message t1 left join writer_user t2 on t1.member_id = t2.id where group_id = '630' 
@@ -436,7 +436,7 @@
 			left join writer_user t2 on t1.member_id = t2.id
 		where t1.group_id = #{group_id} order by t1.gmt_create desc limit 0,#{pageSize} 
 	</select>
-	
+
 	<!-- 更新用户在小组里面的名字 -->
 	<update id="updateName" >
 		update  pmph_group_member set display_name = #{display_name} where user_id = #{user_id} and is_writer = #{is_writer} 
@@ -445,6 +445,21 @@
 	<select id="queryGroupFileByFileId" parameterType="map" resultType="java.util.Map">
 	   select * from pmph_group_file where file_id=#{id}
 	</select>
+
+	<select id="getAdminOrFounder" resultType="map">
+		select t.user_id,t.is_writer from
+		 pmph_group_member t
+		 where (t.is_founder='1' or t.is_admin='1') and t.group_id=#{id} and t.is_deleted='0'
+	</select>
+
+	<select id="getUserAndGroupInfo" resultType="map">
+		select g.group_name,(CASE WHEN m.is_writer = '1' THEN u.username WHEN m.is_writer = '0' THEN p.username end ) username from pmph_group g
+		join pmph_group_member m on g.id=m.group_id
+		left join pmph_user p on p.id=m.user_id and m.is_writer='0'
+		left join writer_user u on u.id=m.user_id and m.is_writer='1'
+		where g.id=#{groupid} and m.user_id=#{userid}
+	</select>
+
 </mapper>
 
 

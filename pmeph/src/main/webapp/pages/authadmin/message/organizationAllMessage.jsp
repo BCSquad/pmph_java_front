@@ -43,16 +43,16 @@
      <!-- 系统消息标题悬浮框 -->
      <div class="bookmistake" id="bookmistake">
          <form id="bookmistakeform">
-             <%--  <div class="apache">
-                   <div class="mistitle">消息详情</div>
-                  &lt;%&ndash; <div class="x" onclick="hideup()"></div>&ndash;%&gt;
-               </div>--%>
+             <div class="apache">
+                 <div class="mistitle">系统消息详情</div>
+                 <div class="x" onclick="hideup()"></div>
+             </div>
              <div class="info">
                  <label style="margin-left: 20px" class="labell">标题:<span id="titlec"></span></label>
 
              </div>
              <div class="info">
-                 <label style="margin-left: 20px" class="labell">发送人:<span id="sendc"></span></label>
+                 <label style="margin-left: 20px" class="labell">发送人:系统</label>
              </div>
              <div class="info">
                  <label style="margin-left: 20px" class="labell">发送时间:<span id="timec"></span></label>
@@ -60,12 +60,8 @@
 
              <div class="info">
                  <label style="margin-left: 20px" class="labell">内容:</label>
-                 <div class="misarea" id="tcontent" ></div>
+                 <textarea class="misarea" id="tcontent" disabled="disabled"></textarea>
              </div>
-             <div class="info">
-                 <label style="margin-left: 20px" class="labell">附件:<span id="tattachment"  class="listContent"></span></label>
-             </div>
-             <div class="clear"></div>
          </form>
      </div>
 
@@ -73,17 +69,17 @@
             <div style="height: 20px;"></div>
             <div id="message-list">
             <c:forEach items="${list}" var="item" >
-            <div class="item" onclick="system('${item.id}','${item.NAME}','${item.TIME}')">
+            <div class="item">
                 <div class="item-img">
-                    <img src="${ctx}/${item.avatar}" />
+                    <img src="${ctx}/statics/testfile/tttt.png" />
                 </div>
                 <div class="content" >
                      <p class="title" >
-                         <span class="msg">${item.title}</span>
+                         <span class="msg">${item.NAME}</span>
                          <span class="time">${item.TIME}</span>
                      </p>
-                    <p class="text" >
-                        ${item.msg_content}
+                    <p class="text" onclick="system('${item.msg_id}','${item.NAME}','${item.TIME}')">
+                        ${item.TYPE}
                     </p>
                 </div>
             </div>

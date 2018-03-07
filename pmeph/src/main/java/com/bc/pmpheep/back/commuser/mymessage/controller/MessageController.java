@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bc.pmpheep.back.authadmin.message.service.AllMessageService;
+import com.bc.pmpheep.back.authadmin.message.service.AllMessageServiceImpl;
 import com.bc.pmpheep.back.commuser.mymessage.service.NoticeMessageService;
 import com.bc.pmpheep.general.pojo.Content;
 import com.bc.pmpheep.general.pojo.Message;
@@ -41,7 +43,10 @@ public class MessageController extends BaseController {
     @Autowired
     @Qualifier("com.bc.pmpheep.back.commuser.mymessage.service.NoticeMessageServiceImpl")
     NoticeMessageService noticeMessageService;
-
+     
+    @Autowired
+	@Qualifier("com.bc.pmpheep.back.authadmin.message.service.AllMessageServiceImpl")
+	AllMessageService allMessageServiceImpl;
     //查询申请列表
     @RequestMapping(value = "/applyMessageList")
     public ModelAndView toScheduleList(HttpServletRequest request) {
@@ -435,7 +440,12 @@ public class MessageController extends BaseController {
         Map<String, Object> paraMap = new HashMap<String, Object>();
         paraMap.put("id", uid);
         Map<String, Object> map1 = noticeMessageService.queryTitleMessage(paraMap);
-
+        int count=allMessageServiceImpl.updateIsRead(uid);
+		String isread="no";
+		if(count>0){
+			isread="yes";
+		}
+		map1.put("isread", isread);
         if (map1.get("msg_type").toString().equals("1") || map1.get("msg_type").toString().equals("0")) {
             //mongoDB查询通知内容
             Message message = mssageService.get(map1.get("msg_id").toString());

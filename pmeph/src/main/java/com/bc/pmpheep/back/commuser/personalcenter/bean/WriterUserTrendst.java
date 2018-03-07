@@ -44,9 +44,8 @@ public class WriterUserTrendst {
 			this.book_comment_id = content_id;
 		}else if(type==6|| type==7){ //content_id 为图书id
 			this.book_id = content_id;
-		}else if(type==8|| type==9 || type==11 ){ // content_id material topic survey 等的id
-			this.book_id = content_id;
-		}else if(type==10){ //content_id 为图书id
+		}
+		else if(type==10){ //content_id 为图书id
 			this.book_id = content_id;
 			
 		}else if(type==0){ //content_id 不保存
@@ -84,9 +83,6 @@ public class WriterUserTrendst {
 	}
 	public String getDetail() {
 		return detail;
-	}
-	public void setDetail(String detail) {
-		this.detail = detail;
 	}
 	/**
 	 * json格式的set方法

@@ -3,35 +3,46 @@
 <mapper namespace="com.bc.pmpheep.back.authadmin.message.dao.AllMessageDao">
 
 	<select id="getAllMessageInit" parameterType="java.util.Map" resultType="java.util.Map">
+		select * from (SELECT
+	"申报资料审核" AS NAME,
+		DATE_FORMAT(d.gmt_create,'%Y-%m-%d %h:%s')  AS TIME,
+	CONCAT(
+		d.realname,
+		'提交了《',
+		m.material_name,
+		"》申报资料,请尽快审核"
+	) AS TYPE,'' msg_id
+FROM
+	declaration d
+ JOIN material m ON d.`material_id` = m.`id`
+ JOIN org_user u ON d.`org_id` = u.`org_id`
+WHERE
+	u.`id` = #{id} AND d.online_progress = '1'
+UNION ALL
+	SELECT
+		"教师资格认证" AS NAME,
+				DATE_FORMAT(w.gmt_create,'%Y-%m-%d %h:%s') AS TIME ,
+		CONCAT(
+			w1.username,
+			'提交了教师资格认证,请尽快审核'
+		) AS title,'' msg_id
+	FROM
+		writer_user_certification w
+	 JOIN org_user u1 ON w.org_id = u1.org_id
+	 JOIN writer_user w1 ON w1.id = w.user_id
+	WHERE
+		u1.`id` = #{id} AND w.progress = '1'
+	UNION ALL
 		SELECT
-		*
+			'系统消息' AS NAME,
+			DATE_FORMAT(a.gmt_create,'%Y-%m-%d %h:%s') AS TIME ,
+			a.title AS title, msg_id
 		FROM
-		(
-		SELECT
-		DATE_FORMAT(
-		a.gmt_create,
-		'%Y-%m-%d %h:%s'
-		) AS TIME,
-		(CASE WHEN A.sender_type='0' THEN '系统消息' WHEN A.sender_type='1' THEN A.title END ) title,
-		(CASE WHEN A.sender_type='0' THEN 'DEFAULT' WHEN A.sender_type='1' THEN r1.avatar END ) avatar,
-		msg_id,
-		a.id
-		FROM
-		user_message a
-		LEFT JOIN writer_user s2 ON a.sender_id = s2.id
-		AND a.sender_type = 2
-		LEFT JOIN org_user s3 ON a.sender_id = s3.id
-		AND a.sender_type = 3
-		LEFT JOIN pmph_user r1 ON a.receiver_id = r1.id
-		AND a.sender_type = 1
+			user_message a
 		WHERE
-		receiver_type = 3
-		AND A.msg_type IN (1, 0)
-		AND receiver_id = #{id}
-		) t
-		ORDER BY
-		t.time DESC
-
+			receiver_type = 3
+		AND sender_type = 0
+		AND sender_id = 0 and receiver_id= #{id})t ORDER BY t.time DESC
 		<if test="startPara!=null">limit #{startPara},8</if>
 	</select>
 

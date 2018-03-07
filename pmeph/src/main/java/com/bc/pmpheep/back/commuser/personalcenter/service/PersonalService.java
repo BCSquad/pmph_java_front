@@ -249,8 +249,5 @@ public interface PersonalService {
 	 *
 	 */
 	void updateDownComments(Long id);
-	
-	//查询评论并删除 
-	public Long getCommentBycid(Long id);
 
 }

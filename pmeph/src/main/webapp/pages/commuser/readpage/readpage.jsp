@@ -45,22 +45,9 @@
                 </div>
                 <div class="ctrl" id="ctrl"></div>
             </div>
-            <!--重点学科推荐-->
             <div class="op-link">
-                <c:forEach var="ad3" items="${adInfo3.detailList}" varStatus="status">
-                    <c:if test="${status.index==0}">
-                        <div class="${status.index==0?'re_1':'re_2'}">
-                            <img src="${ctx}/image/${ad3.image}.action" style="width: 216px;height: 89px">
-                        </div>
-                    </c:if>
-                </c:forEach>
-                <div class="re_3">
-                    <div class="re_6">重点学科</div>
-                    <div style="margin-top: 17px">
-                        <div class="re_4">还在为资格考试烦恼？</div>
-                        <div class="re_5">去看看</div>
-                    </div>
-                </div>
+                <!--教材推荐-->
+                <img src="${ctx}/statics/image/gg_02.png"/>
             </div>
         </div>
         <div class="area2">
@@ -224,3 +211,4 @@
 </script>
 </body>
 </html>
+

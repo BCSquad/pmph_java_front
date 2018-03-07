@@ -129,7 +129,7 @@ public interface DataAuditDao {
 	
 			//学术荣誉授予情况
 			public List<Map<String,Object>> queryAcadereward(Map<String,Object> map);
-			
+		
 			//人卫慕课、数字教材编写情况
 			public Map<String,Object> queryMoocdigital(Map<String, Object> map);
 			
