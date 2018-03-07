@@ -230,7 +230,7 @@
                             <c:forEach var="ad3" items="${adInfo3.detailList}" varStatus="status">
                                 <c:if test="${status.index==0}">
                                 <div class="${status.index==0?'p1_left':'p2_left'}">
-                                    <img src="${ctx}/image/${ad3.image}.action" style="width: 216px;height: 89px">
+                                    <img src="${ctx}/image/${ad3.image}.action" style="width: 216px;height: 89px;border-radius: 5px">
                                 </div>
                                 </c:if>
                             </c:forEach>
