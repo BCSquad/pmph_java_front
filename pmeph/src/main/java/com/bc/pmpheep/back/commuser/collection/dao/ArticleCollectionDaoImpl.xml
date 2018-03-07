@@ -33,7 +33,8 @@
 		     c.comments,
 		     c.bookmarks,
 		     m.id as markId,
-		     c.category_id
+		     c.category_id,
+		     c.cover
      from 
 	     cms_user_mark  m  LEFT JOIN cms_content c on m.content_id=c.id   
 		 LEFT JOIN  writer_user w on c.author_id=w.id 

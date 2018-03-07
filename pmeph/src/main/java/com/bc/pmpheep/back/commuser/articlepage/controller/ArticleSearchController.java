@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.bc.pmpheep.back.util.RouteUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -59,18 +60,23 @@ public class ArticleSearchController extends BaseController{
 		int count =articleSearchService.queryArticleByAdiCount(pageParameter);
 		Integer maxPageNum = (int) Math.ceil(1.0*count/pageParameter.getPageSize());//总页数
 		//下面是小明的方法 没动
+		if(artlist.size()>0){
+
+
 		for (Map<String, Object> pmap : artlist) {
-			Message message=messageService.get((String) pmap.get("mid"));
-			if(message!=null){
-				List<String> imglist = articleSearchService.getImgSrc(message.getContent());
-			    if(imglist.size()>0){
-			    	pmap.put("imgpath", imglist.get(0));
-			    }else{//没有图片放置默认图片
-			    	pmap.put("imgpath",request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
-			    }
-			}else{//没有图片放置默认图片
-				pmap.put("imgpath", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
-			}
+//			Message message=messageService.get((String) pmap.get("mid"));
+//			if(message!=null){
+//				List<String> imglist = articleSearchService.getImgSrc(message.getContent());
+//			    if(imglist.size()>0){
+//			    	pmap.put("imgpath", imglist.get(0));
+//			    }else{//没有图片放置默认图片
+//			    	pmap.put("imgpath",request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+//			    }
+//			}else{//没有图片放置默认图片
+//				pmap.put("imgpath", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+//			}
+			pmap.put("imgpath", RouteUtil.articleAvatar(pmap.get("cover").toString()));
+		}
 		}
 
 		modelAndView.addObject("artlist", artlist);

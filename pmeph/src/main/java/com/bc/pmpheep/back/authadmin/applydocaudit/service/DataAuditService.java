@@ -241,5 +241,5 @@ public interface DataAuditService {
 	void updateDeclarationUpdateTime(Map<String, Object> queryMap);
 
 	//人卫社教材编写情况
-	public List<Map<String,Object>> queryRwsBook(Map<String,Object> map);
+//	public List<Map<String,Object>> queryRwsBook(Map<String,Object> map);
 }

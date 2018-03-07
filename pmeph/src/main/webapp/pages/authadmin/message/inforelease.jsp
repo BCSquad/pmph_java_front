@@ -39,7 +39,7 @@
                 <div class="item1">
                     <span  class="title2" >选择教材</span>
                     <select   class="st_2"  id="select-search-condition" >
-                    <option value="">请选择</option> 
+                    <%--<option value="">请选择</option> --%>
                     	<c:forEach items="${listMenu}" var="item">
 								<option value="${item.textbook_name}">${item.textbook_name}</option>
 							</c:forEach>
