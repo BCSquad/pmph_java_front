@@ -22,27 +22,34 @@ $(function(){
 
 //评论展开收起样式
 $(function() {  
-    var slideHeight = 40; // px 定义折叠的最小高度  
-    var defHeight = $('#wrap').height();  
+    var slideHeight = 44; // px 定义折叠的最小高度  
+    
+    $('.container').each(function(){
+    	var $c = $(this);
+    	var $t = $(this).find(".wrap");
+    	var defHeight = $t.height();  
     if(defHeight >= slideHeight) {  
-        $('#wrap').css('height', slideHeight + 'px');  
-        $('#read-more').append('<a href="#">...(展开)</a>');  
-        $('#read-more a').click(function() {  
-            var curHeight = $('#wrap').height();  
+            $t.css('height', slideHeight + 'px');  
+            $c.find('.read-more').append('<a href="#">...(展开)</a>');  
+            $c.find('.read-more a').click(function() {  
+                var curHeight = $t.height();  
             if(curHeight == slideHeight) {  
-                $('#wrap').animate({  
-                    height: defHeight  
+                    $t.animate({  
+                        height: "100%"
                 }, "normal");  
-                $('#read-more a').html('收起');  
+                	/*$t.css("height","auto");*/
+                	$c.find('.read-more a').html('收起');  
             } else {  
-                $('#wrap').animate({  
+                    $t.animate({  
                     height: slideHeight  
                 }, "normal");  
-                $('#read-more a').html('...(展开)');  
+                    $c.find('.read-more a').html('...(展开)');  
             }  
             return false;  
         });  
     }  
+    	
+});  
 });  
 
 //评论弹出框

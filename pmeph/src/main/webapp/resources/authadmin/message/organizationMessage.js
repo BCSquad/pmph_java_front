@@ -30,6 +30,10 @@ function loadMore(){
                     (n.isread==true?'<img src="'+contextpath+'/statics/image/readyes.png"  id="readyes'+n.id+'"/>':'') +
                     (n.isread==false?'<img src="'+contextpath+'/statics/image/readno.png"  id="readno'+n.id+'"/>':'') +'</div>' +
             '</div>'+
+            (n.title=='系统消息'?'<div style="float:left;color: #999999;font-size: 14px;height:20px;margin-top: 45px;" onclick="delmsg(\''+n.id+'\')">'+
+                    '<span style="width:20px;height:20px;float:left;" class="deltag"></span>'+
+                    '<span style="line-height: 20px;">删除</span>'+
+                '</div>':'')+
         '</div>';
 		});
 			$("#message-list").append(str);
@@ -92,6 +96,7 @@ function hideup() {
 }
 //
 function delmsg(id){
+	window.message.confirm("你确定删除此消息吗？",{btn:["确定","取消"]},function(index){
 	  $.ajax({
           type:"post",
           url:contextpath+"AllMessage/delmsg.action?mid="+id,
@@ -102,6 +107,8 @@ function delmsg(id){
         		  $("#item"+id).remove();
         	  }
           }});
+	  layer.close(index);
+	},function(){});
 }
 //时间格式化
 function formatDate(value) {

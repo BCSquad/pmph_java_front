@@ -42,9 +42,9 @@ public class AllMessageServiceImpl implements AllMessageService {
      * @param userid 
      */
 	@Override
-	public int updateIsRead(String mid, String userid) {
+	public int updateIsRead(String mid) {
 		// TODO Auto-generated method stub
-		return allMessageDao.updateIsRead(mid,userid);
+		return allMessageDao.updateIsRead(mid);
 	}
 	/**
 	 * 删除消息
@@ -52,9 +52,9 @@ public class AllMessageServiceImpl implements AllMessageService {
 	 * @param string
 	 */
 	@Override
-	public int deletemsg(String mid, String userid) {
+	public int deletemsg(String mid) {
 		// TODO Auto-generated method stub
-		return allMessageDao.deletemsg(mid,userid);
+		return allMessageDao.deletemsg(mid);
 	}
 
 
