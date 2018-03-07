@@ -187,10 +187,15 @@ $(function () {
     });
 
     //隐藏/显示配套图书
-    if($("sup-hidden").val=='no'){
+    if($("#sup-hidden").val()=='no'){
 
     }else {
         $(".right_1").hide();
+    }
+
+    //隐藏PDF阅读按钮
+    if($("#pdf-hidden").val()=='no'){
+        $("#dpf").hide();
     }
 
     morecontent();
