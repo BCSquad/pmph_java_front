@@ -412,7 +412,9 @@ $(function(){
 		}
         $(".iframe1").append(html);
 		var a=document.getElementsByClassName("chat_items mine");
-		$(".iframe1").scrollTop(100*a.length);
+        var b=document.getElementsByClassName("chat_items other");
+        var t=a.length+b.length;
+		$(".iframe1").scrollTop(100*t);
 	}
 	
 
