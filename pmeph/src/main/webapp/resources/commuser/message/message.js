@@ -37,13 +37,13 @@ function loadMore() {
                 commonTime = unixTimestamp.toLocaleString();
 
                 str += "<tr style='width: 70%'>" +
-                    "<th rowspan='2' class='headPortrait'><img  class ='pictureNotice' src='" + projectName + "/" + n.avatar + "'></th>" +
+                    "<th rowspan='2' class='headPortrait'><img  class ='pictureNotice' src='" + /*projectName + "/"*/ contextpath + n.avatar + "'></th>" +
                     "<td class='type1'><span>";
 
                 str += n.title;
 
-                str += "</span><span class='time1'>" + commonTime + "</span></td></tr><tr style='width: 30%'>"s +
-                console.log(n);
+                str += "</span><span class='time1'>" + commonTime + "</span></td></tr><tr style='width: 30%'>";
+                
                 if ((n.msgType==0||n.msgType==1)&& n.material_id==0) {
 	                str += "<td colspan='2' class='title' style='cursor: pointer;' onclick='showup(" + n.id + ")'>"
 	                    + '<input type="hidden" id="messid" value="' + n.id + '"/>'

@@ -74,10 +74,12 @@
 		LEFT JOIN org_user s3 ON u.sender_id = s3.id
 		AND u.sender_type = 3
 		WHERE
-		u.receiver_id = #{userId}
+		u.is_withdraw = 0
+		AND u.is_deleted = 0
+		AND u.receiver_id = #{userId}
 		AND u.receiver_type=2
 		AND msg_type IN (0, 1)
-		AND u.is_deleted = 0
+		
 		<!-- 公告 -->
 		<if test="condition==4">
 			AND u.material_id !=0
@@ -101,7 +103,8 @@
 			select u.id
 			from user_message u
 		WHERE
-		u.receiver_id = #{userId}
+		u.is_withdraw = 0
+		AND u.receiver_id = #{userId}
 		AND msg_type IN (0, 1)
 		AND u.is_deleted = 0
 		<!-- 公告 -->

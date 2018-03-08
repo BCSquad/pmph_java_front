@@ -77,8 +77,25 @@ public class CmsNoticeList {
      */
     private Long materialId;
     
+    private Boolean isMaterialEntry;
+    private String notice;
     
-    
+	public Boolean getIsMaterialEntry() {
+		return isMaterialEntry;
+	}
+
+	public void setIsMaterialEntry(Boolean isMaterialEntry) {
+		this.isMaterialEntry = isMaterialEntry;
+	}
+
+	public String getNotice() {
+		return notice;
+	}
+
+	public void setNotice(String notice) {
+		this.notice = notice;
+	}
+
 	public Long getMaterialId() {
 		return materialId;
 	}

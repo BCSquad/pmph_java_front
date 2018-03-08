@@ -26,7 +26,7 @@
 /**图书选择**/
 
 #tsxz_span1{
-	background-image: url(../image/css_sprites.png);
+	background-image: url(../../image/css_sprites.png);
     background-position: -333px -7px;
     background-repeat: no-repeat;
     height: 18px;
@@ -57,7 +57,7 @@
 }
 /**专家信息**/
 #tsxz_span2{
-	background-image: url(../image/css_sprites.png);
+	background-image: url(../../image/css_sprites.png);
     background-position: -333px -82px;
     background-repeat: no-repeat;
     height: 18px;
@@ -84,9 +84,9 @@
 	letter-spacing: 0px;
 	color: #666666;
 }
-
+/**主要学习经历**/
 #tsxz_span3{
-	background-image: url(../image/css_sprites.png);
+	background-image: url(../../image/css_sprites.png);
     background-position: -333px -135px;
     background-repeat: no-repeat;
     height: 18px;
@@ -144,20 +144,8 @@
 
 
 
-.bt_tj{
-	width: 74px;
-	height: 24px;
-	background-color: #70bcc3;
-	border-radius: 2px;
-	margin:auto;
-	cursor: pointer;
-	color: #ffffff;
-	float:left;
-	margin-left:10px;
-}
-
 #tsxz_span4{
-	background-image: url(../image/css_sprites.png);
+	background-image: url(../../image/css_sprites.png);
     background-position: -333px -109px;
     background-repeat: no-repeat;
     height: 20px;
@@ -166,7 +154,7 @@
 }
 
 #tsxz_span5{
-	background-image: url(../image/css_sprites.png);
+	background-image: url(../../image/css_sprites.png);
     background-position: -333px -56px;
     background-repeat: no-repeat;
     height: 20px;
@@ -175,7 +163,7 @@
 }
 
 #tsxz_span6{
-	background-image: url(../image/css_sprites.png);
+	background-image: url(../../image/css_sprites.png);
     background-position: -333px -31px;
     background-repeat: no-repeat;
     height: 20px;
@@ -184,7 +172,7 @@
 }
 
 #tsxz_span7{
-	background-image: url(../image/css_sprites.png);
+	background-image: url(../../image/css_sprites.png);
     background-position: -333px -163px;
     background-repeat: no-repeat;
     height: 20px;
@@ -193,7 +181,7 @@
 }
 
 #tsxz_span8{
-	background-image: url(../image/css_sprites.png);
+	background-image: url(../../image/css_sprites.png);
     background-position: -333px -191px;
     background-repeat: no-repeat;
     height: 20px;
@@ -202,7 +190,7 @@
 }
 
 #tsxz_span9{
-	background-image: url(../image/css_sprites.png);
+	background-image: url(../../image/css_sprites.png);
     background-position: -333px -191px;
     background-repeat: no-repeat;
     height: 20px;
@@ -211,14 +199,14 @@
 }
 
 #tsxz_span10{
-	background-image: url(../image/css_sprites.png);
+	background-image: url(../../image/css_sprites.png);
     background-position: -333px -191px;
     background-repeat: no-repeat;
     height: 20px;
     width: 20px;
     float: left;
 }
-
+/**附件样式**/
 a.input {
 
     text-align:center;
@@ -266,7 +254,19 @@ a.input {
 	padding: 15px 20px;
 	margin-top: 20px;
 }
+/* ------------------------------------------------- */
 
+.bt_tj{
+	width: 74px;
+	height: 24px;
+	background-color: #70bcc3;
+	border-radius: 2px;
+	margin:auto;
+	cursor: pointer;
+	color: #ffffff;
+	float:left;
+	margin-left:10px;
+}
 
 .bookmistake {
     width: 426px;

@@ -334,4 +334,11 @@ public interface GroupDao {
 
 
 	Map<String, Object> getUserAndGroupInfo(@Param("groupid") String groupid,@Param("userid") String userid);
+
+	/**
+	 * 获取文件上传者id
+	 * @param id
+	 * @return
+	 */
+	String getMemberId(@Param("id") Long id);
 }
