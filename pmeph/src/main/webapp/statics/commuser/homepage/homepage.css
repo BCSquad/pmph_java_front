@@ -777,12 +777,12 @@ ul li {
     height: 13px;
     width: 13px;
     float: left;
-    margin-left: 10px;
+    /*margin-left: 10px;*/
 }
 
 .behind {
-    background-image: url("../../testfile/sprites.png");
-    background-position: -183px -175px;
+    background-image: url(../../image/css_sprites.png);
+    background-position: -183px -154px;
     background-repeat: no-repeat;
     height: 13px;
     width: 13px;
