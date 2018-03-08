@@ -41,6 +41,7 @@ public class InfoReportController extends BaseController {
    public ModelAndView toInfoReport(HttpServletRequest request){
 	   Map<String,Object> map=new HashMap<>();
 	   Map<String, Object> usermap = getUserInfo();
+	   String materialId=request.getParameter("materialId");
 	   Pattern pattern = Pattern.compile("[0-9]*"); 
 	   long cmsid=Long.valueOf(request.getParameter("id"));
 	   String count=request.getParameter("count");

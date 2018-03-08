@@ -128,9 +128,10 @@ public class CmsInfoLettersManagementController extends BaseController{
 	public ModelAndView list(HttpServletRequest req,Integer pageSize, Integer pageNumber, Integer order) {
 		ModelAndView model = new ModelAndView();
 		Map<String, Object> adInfo = homeService.getPageAdInfo("信息快报和遴选公告列表 ");
+		String materialId=req.getParameter("materialId");
 		model.addObject("adInfo", adInfo);
 		model.setViewName("commuser/focusAndSelect/newsReport");
-		model.addObject("materialId", req.getParameter("materialId"));
+		model.addObject("materialId",materialId);
 		return model;
 	}
 	

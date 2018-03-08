@@ -41,12 +41,12 @@
 <input type="hidden" id="materialId" value="${materialId }"/>
 <div class="content-body">
     <div class="div_top">
-        <a href="${ctx }/homepage/tohomepage.action">首页</a>&gt;信息快报
+        <a href="${ctx }/homepage/tohomepage.action">首页</a>&gt;${materialId!=null && materialId!=''? '社区':'信息' }快报
     </div>
     <div class="div_content">
         <div class="div_content_left">
             <span class="clicked" id="infoReport" style="margin-right: 15px;"
-                  onclick="ChangeDiv('infoReport')">信息快报</span>
+                  onclick="ChangeDiv('infoReport')">${materialId!=null && materialId!=''? '社区':'信息' }快报</span>
             <span class="clickbefore mouse-gesture" id="selectAnnco" onclick="ChangeDiv('selectAnnco')">遴选公告</span>
         </div>
         <div class="div_content_right">
