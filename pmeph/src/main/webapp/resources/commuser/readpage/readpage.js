@@ -17,6 +17,13 @@ $(function () {
         playSpeed: 700, //图片切换速度
         effect: 'left' //轮播的改变方式 top(向上) left(向左) fade(淡入淡出)
     });
+
+    //当广告地址为空时，不跳转
+    for(i=2;i<5;i++){
+        if($("#a"+[i]).attr('href')==null || $("#a"+[i]).attr('href')==''){
+            $("#a"+[i]).attr("href","####")
+        }
+    }
 });
 
 //重点推荐表格切换

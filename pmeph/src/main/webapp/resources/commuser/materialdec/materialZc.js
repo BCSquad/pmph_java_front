@@ -489,7 +489,7 @@ function add_xsjz(){
 	var $tr = $("<tr id='xsjz_"+num+"'>"+
 	"<td><input class='cg_input' name='xs_org_name' id='xs_org_name_"+num+"' value='' placeholder='学术组织'/></td>"+
 	"<td style='color: #333333;'>"+
-		"<table class='radio_tb' style='width: 220px;'><tr>"+
+		"<table class='radio_tb' style='width: 100%;'><tr>"+
 			"<td><input type='radio' name='xs_rank_"+num+"' checked='checked' value='0'/>无</td>"+
 			"<td><input type='radio' name='xs_rank_"+num+"' value='1'/>国际</td>"+
 			"<td><input type='radio' name='xs_rank_"+num+"' value='2'/>国家</td>"+
