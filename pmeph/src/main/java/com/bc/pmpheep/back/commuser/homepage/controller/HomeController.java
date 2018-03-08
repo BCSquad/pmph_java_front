@@ -207,6 +207,7 @@ public class HomeController extends BaseController{
                 map.put("id", listRow.get(i).get("id"));
                 map.put("author", listRow.get(i).get("author"));
                 map.put("bookname", listRow.get(i).get("bookname"));
+                map.put("score", listRow.get(i).get("score"));
                 if (listRow.get(i).get("image_url").equals("DEFAULT")) {//显示默认图片
                     map.put("img", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
                 } else {
@@ -223,7 +224,7 @@ public class HomeController extends BaseController{
     }
 
     /**
-     * 查询下一页数据
+     * 查询不同类型的书籍
      *
      * @param request
      * @return map
@@ -246,7 +247,7 @@ public class HomeController extends BaseController{
             pmap.put("id", listrows.get(i).get("id"));
             pmap.put("author", listrows.get(i).get("author"));
             pmap.put("bookname", listrows.get(i).get("bookname"));
-            map.put("score", listrows.get(i).get("score"));
+            pmap.put("score", listrows.get(i).get("score"));
             if (listrows.get(i).get("image_url").equals("DEFAULT")) {//显示默认图片
                 pmap.put("img", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
             } else {

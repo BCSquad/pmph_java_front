@@ -4,7 +4,7 @@ function ChangeDiv(type){
 	        document.getElementById("selectAnnco").setAttribute("class","clickbefore");
 	        //document.getElementById("filesgx").setAttribute("class","hidden");
 	        //document.getElementById("commnions").setAttribute("class","show");
-	        window.location.href=contxtpath+"/cmsinfoletters/tolist.action";
+	        window.location.href=contxtpath+"/cmsinfoletters/tolist.action?materialId="+$("#materialId").val();
 	    }else{
 	        document.getElementById("selectAnnco").setAttribute("class","clicked");
 	        document.getElementById("infoReport").setAttribute("class","clickbefore");

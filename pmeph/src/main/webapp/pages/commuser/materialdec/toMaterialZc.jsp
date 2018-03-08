@@ -1300,7 +1300,7 @@
 				<span class="tsxz_title">请选择你的申报单位</span>
 			</div>
 			<div class="sbdw">
-				<span class="btbs">*</span><span>申报单位：</span>
+				<span class="btbs">*</span><span class="btmc">申报单位：</span>
 				<input class="cg_input" id="sbdw_name" name="sbdw_name" value="${gezlList.dwmc}" style="width: 300px;" onclick="javascript:orgAdd('${materialMap.material_id}')" readonly="readonly"/>
 				<input type="hidden" id="sbdw_id" name="sbdw_id" value="${gezlList.org_id}" style="width: 300px;"/>
 			</div>

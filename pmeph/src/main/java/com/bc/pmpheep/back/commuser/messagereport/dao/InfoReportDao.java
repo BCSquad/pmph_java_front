@@ -26,12 +26,12 @@ public interface InfoReportDao {
 	 * @param size  每页展示的数据量
 	 * @return
 	 */
-	List<Map<String, Object>> queryReportList(@Param("num") int num,@Param("size") int size);
+	List<Map<String, Object>> queryReportList(@Param("num") int num,@Param("size") int size,@Param("materialId") String materialId);
 
 	/** 查询信息快报的总数量
 	 * @return int
 	 */
-	int queryInfoReportCount();
+	int queryInfoReportCount(@Param("materialId") String materialId);
 
 	/**查询用户对信息快报的点赞的次数的次数
 	 * @param id  信息快报的id

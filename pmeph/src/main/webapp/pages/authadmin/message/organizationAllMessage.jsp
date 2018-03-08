@@ -83,17 +83,15 @@
                          <span class="time">${item.TIME}</span>
                      </p>
                     <p class="text" id="txt${item.id }">
-                        ${item.msg_content}
                         <c:if test="${item.isread==true }"><img src="${ctx}/statics/image/readyes.png"  id="readyes${item.id}"/></c:if>
                         <c:if test="${item.isread==false }"><img src="${ctx}/statics/image/readno.png"  id="readno${item.id}"/></c:if>
+                        ${item.msg_content}
                     </p>
                 </div>
-                 <c:if test="${item.title=='系统消息'}">
 	                    <div style="float:left;color: #999999;font-size: 14px;height:20px;margin-top: 45px;" onclick="delmsg('${item.id}')">
 	                        <span style="width:20px;height:20px;float:left;" class="deltag"></span>
 	                        <span style="line-height: 20px;">删除</span>
 	                    </div>
-                </c:if>
             </div>
             </c:forEach>
             </div>

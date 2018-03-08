@@ -865,7 +865,7 @@
 				<span class="tsxz_title">请选择你的申报单位</span>
 			</div>
 			<div class="sbdw">
-				<span class="btbs" style="color: red">*</span><span>申报单位：</span>
+				<span class="btbs" style="color: red">*</span><span class="btmc">申报单位：</span>
 				<%-- <select id="apply-org" name="edu" class="st_2" >
 				    ${orgSelects}
 				</select>  --%>
