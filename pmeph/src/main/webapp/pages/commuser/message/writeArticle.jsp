@@ -48,7 +48,7 @@
     <div class="sxy-div-content2">
         <input type="hidden" name="atrticle_id" id="atrticle_id" value="${atrticle_id }">
         <input type="text" class="sxy-txt2" id="TitleValue" name="titleValue" placeholder="输入文章标题请限100字以内.."
-               onblur="if(value.length>100){value=value.slice(0,100)}" value="${title}"/>
+               onblur="if($('#TitleValue').val().length>100){$('#TitleValue').val($('#TitleValue').val().slice(0,100))};" value="${title}"/>
     </div>
     <div class="sxy-div-content4">
         <div style="height:10px;"></div>
@@ -77,8 +77,8 @@
         <input type="hidden" id="image" name="image" value="${cover }"/>
          <input type="hidden" id="imageName" name="imageName" value="${coverName }"/>
         <input type="hidden" id="submitTypeCode" name="submitTypeCode" value="${submitTypeCode }"/>
-        <input class="sxy-btn" type="button" value="发表" onclick="btntype(0)" id="topub" />&nbsp;&nbsp;
-        <input class="sxy-btn" type="button" value="暂存" onclick="btntype(1)"/>
+        <input class="sxy-btn topub" type="button" value="发表" onclick="btntype(0)" id="topub0" />&nbsp;&nbsp;
+        <input class="sxy-btn topub" type="button" value="暂存" onclick="btntype(1)" id="topub1" />
     </div>
 </form>
 <div id="content" hidden="true"></div>

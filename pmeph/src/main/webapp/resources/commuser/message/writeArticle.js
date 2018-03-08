@@ -50,7 +50,7 @@ function btntype(btn_this) {
     $("#btn_type").val(btn_this);
     if ($("#submitTypeCode").val() == '0') { //submitTypeCode 状态码为0表示新增 1表示修改
         if (writeArticleValidate()) {
-            $("#topub").attr("disabled",true);
+            $("#topub"+btn_this).attr("disabled",true);
             $.ajax({
                 url: contextpath + "writerArticle/writeArticle.action",
                 type: "post",
@@ -62,6 +62,7 @@ function btntype(btn_this) {
                         $("#TitleValue").val(json.titleValue);
                         UE.getEditor('mText').setContent(json.UEContent);
                         window.message.error(json.isValidate);
+                        $(".topub").attr("disabled",false);
                     } else if (data == '4') {
                         var words = json.value;
                         var title = document.getElementById("TitleValue");
@@ -78,6 +79,7 @@ function btntype(btn_this) {
                         }
                         UE.getEditor('mText').setContent(content);
                         window.message.error("标题或内容中含有敏感词,请修改后再保存或提交");
+                        $(".topub").attr("disabled",false);
                     } else {
                         if (data != '1') {
                             if (btn_this == '1') {
@@ -96,6 +98,7 @@ function btntype(btn_this) {
                         } else {
                             $("#submitTypeCode").val("0");
                             window.message.error("失败");
+                            $(".topub").attr("disabled",false);
                         }
                     }
 
@@ -104,12 +107,12 @@ function btntype(btn_this) {
             });
         }
     } else if ($("#submitTypeCode").val() == '1') {
-        $("#topub").attr("disabled",true);
         /*if(btn_this=='0'){
          //window.message.info("您已保存过了，请不要重复保存");
          return false;
          }else if(btn_this=='1'){*/
         if (writeArticleValidate()) {
+        	$("#topub"+btn_this).attr("disabled",true);
             $.ajax({
                 url: contextpath + "writerArticle/updateIsStaging.action",
                 type: "post",
@@ -120,6 +123,7 @@ function btntype(btn_this) {
                         $("#TitleValue").val(json.titleValue);
                         UE.getEditor('mText').setContent(json.UEContent);
                         window.message.error(json.isValidate);
+                        $(".topub").attr("disabled",false);
                     } else if (data == '4') {
                         var words = json.value;
                         var title = document.getElementById("TitleValue");
@@ -136,6 +140,7 @@ function btntype(btn_this) {
                         }
                         UE.getEditor('mText').setContent(content);
                         window.message.error("标题或内容中含有敏感词,请修改后再保存或提交");
+                        $(".topub").attr("disabled",false);
                     } else {
                         if (data != '1') {
                             if (btn_this == '1') {
@@ -158,6 +163,7 @@ function btntype(btn_this) {
                         } else {
                             $("#submitTypeCode").val("1");
                             window.message.error("失败");
+                            $(".topub").attr("disabled",false);
                         }
                     }
 
