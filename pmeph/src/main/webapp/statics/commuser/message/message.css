@@ -247,7 +247,8 @@ accept{
     width: auto;
     text-align: right;
     height: 20px;
-    vertical-align: top;
+    vertical-align: middle;
+    white-space: nowrap;
 }
 
 .title {
@@ -287,6 +288,7 @@ a {
     color: #666666;
     align: left;
     width: auto;
+    word-break: break-all;
 }
 
 .deleteButton {

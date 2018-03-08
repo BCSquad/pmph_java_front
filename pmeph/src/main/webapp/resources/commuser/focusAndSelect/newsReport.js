@@ -9,7 +9,7 @@ function ChangeDiv(type){
 	        document.getElementById("infoReport").setAttribute("class","clickbefore");
 	        //document.getElementById("commnions").setAttribute("class","hidden");
 	        //document.getElementById("filesgx").setAttribute("class","show");
-	        window.location.href=contxtpath+"/cmsnotice/tolist.action"; 
+	        window.location.href=contxtpath+"/cmsnotice/tolist.action?materialId="+$("#materialId").val(); 
 	    }
 
 
@@ -40,6 +40,7 @@ $(function(){
 	});
 	
 	function loadData(){
+		var materialId=$("#materialId").val();
 		$.ajax({
 	        type:'get',
 	        url :contxtpath+'/cmsinfoletters/list.action',
@@ -63,7 +64,7 @@ $(function(){
 	                		"<div class=\"items\"> "+ 
 	                		   (list[i].isPromote?"<div class='items_img'>推荐</div> ":"")+
 	        	                "<div class=\"item1 cutmore\">" +
-	        	                "<a href='"+contextpath+"inforeport/toinforeport.action?id="+list[i].id+"'>"+list[i].title+"</a></div> "+
+	        	                "<a href='"+contextpath+"inforeport/toinforeport.action?id="+list[i].id+"'>"+list[i].title+',&&materialId='+materialId+"</a></div> "+
 	        	                "<div class=\"item2 cutmore\"><p style='margin:0;height: 40px;line-height: 20px;'>"+(json[list[i].title+''+list[i].id]==null?"(内容为空)":json[list[i].title+''+list[i].id])+"</p></div> "+
 	        	                "<div class=\"item3\">  "+
 	        	                    "<div style=\"float: left;\">" +

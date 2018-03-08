@@ -166,6 +166,10 @@
 			<if test="userId != null and userId != '' ">
 				and ou.id = ${userId}
 			</if>
+			<if test="selectedIds != null and selectedIds != '' ">
+				and d.id  in (${selectedIds})
+			</if>
+			
 		</where>
 		GROUP BY d.id
 	</select>
