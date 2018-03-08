@@ -627,6 +627,7 @@ ul li {
     line-height: 40px;
     margin-top: -20px;
     margin-left: 48px;
+    cursor: pointer;
 }
 
 .re_6{
