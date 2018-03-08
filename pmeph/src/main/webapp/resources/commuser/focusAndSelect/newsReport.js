@@ -64,7 +64,7 @@ $(function(){
 	                		"<div class=\"items\"> "+ 
 	                		   (list[i].isPromote?"<div class='items_img'>推荐</div> ":"")+
 	        	                "<div class=\"item1 cutmore\">" +
-	        	                "<a href='"+contextpath+"inforeport/toinforeport.action?id="+list[i].id+"'>"+list[i].title+',&&materialId='+materialId+"</a></div> "+
+	        	                "<a href='"+contextpath+"inforeport/toinforeport.action?id="+list[i].id+'&&materialId='+materialId+"'>"+list[i].title+"</a></div> "+
 	        	                "<div class=\"item2 cutmore\"><p style='margin:0;height: 40px;line-height: 20px;'>"+(json[list[i].title+''+list[i].id]==null?"(内容为空)":json[list[i].title+''+list[i].id])+"</p></div> "+
 	        	                "<div class=\"item3\">  "+
 	        	                    "<div style=\"float: left;\">" +
