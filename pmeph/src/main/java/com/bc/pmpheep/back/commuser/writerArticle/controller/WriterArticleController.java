@@ -118,8 +118,8 @@ public class WriterArticleController extends BaseController{
 			resultMap.put("titleValue",titleValue);
 			resultMap.put("UEContent",UEContent);
 			return resultMap;
-		}else if(titleValue.length()>30){
-			resultMap.put("isValidate","标题不能超过30个字");
+		}else if(titleValue.length()>100){
+			resultMap.put("isValidate","标题不能超过100个字");
 			resultMap.put("flag","3");
 			resultMap.put("titleValue",titleValue);
 			resultMap.put("UEContent",UEContent);

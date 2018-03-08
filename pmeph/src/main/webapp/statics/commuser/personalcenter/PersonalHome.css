@@ -707,7 +707,7 @@ color:#FFF;
     display: block;
     max-height: 68px;
     overflow: hidden;
-    
+    display: inline-block;
 }
 
 .suibibt {
