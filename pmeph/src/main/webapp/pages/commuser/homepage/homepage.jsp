@@ -256,7 +256,7 @@
                 <div class="title">
                     <span class="doc_content">医学随笔</span>
                     <span class="total" style="cursor: pointer;"
-                          onclick="window.location.href='${ctx}/cms/list.action'">全部>></span>
+                          onclick="window.location.href='${ctx}/articlepage/toarticlepage.action'">全部>></span>
                 </div>
                 <c:forEach items="${listArt}" var="list" varStatus="status">
                     <c:if test="${status.index==0}">
