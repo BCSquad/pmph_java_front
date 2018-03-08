@@ -58,8 +58,12 @@ public class HomeController extends BaseController{
         int countSurvey=homeService.countSurvey();
 
         Map<String,Object> adInfo1=homeService.getPageAdInfo("首页轮播");
-        Map<String,Object> adInfo2=homeService.getPageAdInfo("首页中部");
-        Map<String,Object> adInfo3=homeService.getPageAdInfo("首页原重点推荐");
+        Map<String,Object> adInfo2=homeService.getPageAdInfo("首页中部1");
+        Map<String,Object> adInfo3=homeService.getPageAdInfo("首页中部2");
+        Map<String,Object> adInfo4=homeService.getPageAdInfo("首页中部3");
+        Map<String,Object> adInfo5=homeService.getPageAdInfo("首页中部4");
+        Map<String,Object> adInfo6=homeService.getPageAdInfo("首页原重点推荐1");
+        Map<String,Object> adInfo7=homeService.getPageAdInfo("首页原重点推荐2");
         for (Map<String, Object> map : listCom) {
 			String url=map.get("image_url").toString();
 			if(url.equals("DEFAULT")){
@@ -77,6 +81,10 @@ public class HomeController extends BaseController{
         modelAndView.addObject("adInfo1", adInfo1);
         modelAndView.addObject("adInfo2", adInfo2);
         modelAndView.addObject("adInfo3", adInfo3);
+        modelAndView.addObject("adInfo4", adInfo4);
+        modelAndView.addObject("adInfo5", adInfo5);
+        modelAndView.addObject("adInfo6", adInfo6);
+        modelAndView.addObject("adInfo7", adInfo7);
         modelAndView.addObject("countSurvey", countSurvey);
         List<Map<String, Object>> listM =new ArrayList<Map<String,Object>>();
         if(user==null){

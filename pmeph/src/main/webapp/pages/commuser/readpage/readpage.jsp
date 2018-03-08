@@ -53,9 +53,11 @@
                             <a href="${adInfo3.url}"><img src="${ctx}/image/${ad3.image}.action" style="width: 310px;height: 130px;border-radius: 5px"></a>
                         </div>
                     </c:if>
-                    <c:if test="${status.index==1}">
+                </c:forEach>
+                <c:forEach var="ad3" items="${adInfo4.detailList}" varStatus="status">
+                    <c:if test="${status.index==0}">
                         <div class="re_2">
-                            <a href="${adInfo3.url}"><img src="${ctx}/image/${ad3.image}.action" style="width: 310px;height: 130px;border-radius: 5px"></a>
+                            <a href="${adInfo4.url}"><img src="${ctx}/image/${ad3.image}.action" style="width: 310px;height: 130px;border-radius: 5px"></a>
                         </div>
                     </c:if>
                 </c:forEach>
