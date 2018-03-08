@@ -8,67 +8,108 @@
 	
 	
 	<select id="queryEditorToBeList" parameterType="PageParameter" resultMap="editorToBeList">
-		SELECT
-		dp.id as dec_position_id,
-		d.user_id,
-		d.realname,
-		d.sex,
-		d.org_name AS work_org_name,
-		d.org_id as dec_org_id,
-		(case
-		when d.org_id = 0
-		then '人民卫生出版社'
-		else o.org_name
-		end) AS dec_org_name,
-		d.position,
-		(dp.chosen_position NOT IN  (2, 4, 10, 12) and dpp.chosen_position NOT IN  (2, 4, 10, 12)) as editorAvaliable,<!-- 未被选为主编副主编，还可以选编委，控制编委复选框disabled -->
-		d.title,
-		tb.is_list_selected,<!-- 第一主编提交1/暂存0 -->
-		tb.is_locked,       <!-- 锁定，等于1后就不能再选择了 -->
-		m.is_digital_editor_optional,<!-- 是否可选数字编委 -->
-		m.is_force_end,     <!-- 教材是否强制结束 -->
-		(case
-		when tb.is_published = 1 or m.is_force_end =1 or #{parameter.isFirstEditorLogIn} = 'false'
-		then
-			dpp.chosen_position
-		when tb.is_list_selected = 1 or tb.is_locked =1 
-		then
-			dp.chosen_position
-		else	
-			dpt.chosen_position
-		end)
-		as chosen_position
-		
-		FROM
-		declaration AS d 
-		Inner Join dec_position AS dp ON dp.declaration_id = d.id
-		left join textbook tb on tb.id = dp.textbook_id
-		left Join dec_position_temp AS dpt  
-			ON dpt.declaration_id = dp.declaration_id 
-			and dpt.textbook_id=dp.textbook_id
-		<if test="parameter.logUserId != null and parameter.logUserId != '' ">
-			and dpt.author_id =  #{parameter.logUserId}
-		</if>
-		left Join dec_position_published AS dpp  
-			ON dpp.declaration_id = dp.declaration_id 
-			and dpp.textbook_id=dp.textbook_id
-		
-		inner join material m on m.id = tb.material_id
-		
-		Left Join org AS o ON d.org_id = o.id
+		select t.* from 
+		(
+			SELECT
+			dp.id as dec_position_id,
+			d.user_id,
+			d.realname,
+			d.sex,
+			d.org_name AS work_org_name,
+			d.org_id as dec_org_id,
+			(case
+			when d.org_id = 0
+			then '人民卫生出版社'
+			else o.org_name
+			end) AS dec_org_name,
+			d.position,
+			(dp.chosen_position NOT IN  (2, 4, 10, 12) and dpp.chosen_position NOT IN  (2, 4, 10, 12)) as editorAvaliable,<!-- 未被选为主编副主编，还可以选编委，控制编委复选框disabled -->
+			d.title,
+			tb.is_list_selected,<!-- 第一主编提交1/暂存0 -->
+			tb.is_locked,       <!-- 锁定，等于1后就不能再选择了 -->
+			m.is_digital_editor_optional,<!-- 是否可选数字编委 -->
+			m.is_force_end,     <!-- 教材是否强制结束 -->
+			(case
+			when tb.is_published = 1 or m.is_force_end =1 or #{parameter.isFirstEditorLogIn} = 'false' <!-- 已公布 或 强制结束 或 非第一主编登录  -->
+			then      <!-- 显示发布表 -->
+				(case 
+					when dpp.chosen_position = 9 <!-- 同时被选为编委和数字编委 -->
+					then 1 
+					when dpp.chosen_position = 1  <!-- 被选为编委 -->
+					then 2 
+					when dpp.chosen_position >= 8 <!-- 被选为数字编委 -->
+					then 3 
+					when dpp.chosen_position = 2 or dpp.chosen_position = 4 <!-- 被选为主编或副主编 -->
+					then 5 
+					else 4 
+					end)
+			when tb.is_list_selected = 1 or tb.is_locked =1 <!-- 被锁定 或 主编已提交 -->
+			then      <!-- 显示正式表 -->
+				(case 
+					when dp.chosen_position = 9 <!-- 同时被选为编委和数字编委 -->
+					then 1 
+					when dp.chosen_position = 1  <!-- 被选为编委 -->
+					then 2 
+					when dp.chosen_position >= 8 <!-- 被选为数字编委 -->
+					then 3 
+					when dp.chosen_position = 2 or dp.chosen_position = 4 <!-- 被选为主编或副主编 -->
+					then 5 
+					else 4 
+					end)
+			else	<!-- 显示暂存表 -->
+				(case 
+					when dpt.chosen_position = 9 <!-- 同时被选为编委和数字编委 -->
+					then 1 
+					when dpt.chosen_position = 1  <!-- 被选为编委 -->
+					then 2 
+					when dpt.chosen_position >= 8 <!-- 被选为数字编委 -->
+					then 3 
+					when dpt.chosen_position = 2 or dpt.chosen_position = 4 <!-- 被选为主编或副主编 -->
+					then 5 
+					else 4 
+					end)
+			end)
+			as chosen_position
+
+			FROM
+			declaration AS d 
+			Inner Join dec_position AS dp ON dp.declaration_id = d.id
+			left join textbook tb on tb.id = dp.textbook_id
+			left Join dec_position_temp AS dpt  
+				ON dpt.declaration_id = dp.declaration_id 
+				and dpt.textbook_id=dp.textbook_id
+			<if test="parameter.logUserId != null and parameter.logUserId != '' ">
+				and dpt.author_id =  #{parameter.logUserId}
+			</if>
+			left Join dec_position_published AS dpp  
+				ON dpp.declaration_id = dp.declaration_id 
+				and dpp.textbook_id=dp.textbook_id
+			
+			inner join material m on m.id = tb.material_id
+			
+			Left Join org AS o ON d.org_id = o.id
+			<where>
+				<!-- dp.chosen_position NOT IN  (2, 4, 10, 12) -->
+				<if test="parameter.textBookId != null and parameter.textBookId != '' ">
+					and dp.textbook_id = ${parameter.textBookId}
+				</if>
+				<if test="parameter.queryName != null and parameter.queryName != '' ">
+					and d.realname like concat("%",#{parameter.queryName},"%")
+				</if>
+				<if test="parameter.queryOrg != null and parameter.queryOrg != '' and parameter.queryOrg != 'all' ">
+					and o.id = ${parameter.queryOrg}
+				</if>
+			</where>
+		)t
 		<where>
-			<!-- dp.chosen_position NOT IN  (2, 4, 10, 12) -->
-			<if test="parameter.textBookId != null and parameter.textBookId != '' ">
-				and dp.textbook_id = ${parameter.textBookId}
-			</if>
-			<if test="parameter.queryName != null and parameter.queryName != '' ">
-				and d.realname like concat("%",#{parameter.queryName},"%")
-			</if>
-			<if test="parameter.queryOrg != null and parameter.queryOrg != '' and parameter.queryOrg != 'all' ">
-				and o.id = ${parameter.queryOrg}
+			<if test="parameter.excelChoosen != null and parameter.excelChoosen != '' ">
+				and t.chosen_position &gt;=1 and t.chosen_position &lt;=3
 			</if>
 		</where>
-		limit ${start},${pageSize}
+		order by t.chosen_position asc
+		<if test="start >= 0 ">
+			limit ${start},${pageSize}
+		</if>
 	</select>
 	
 	<select id="queryEditorToBeCount" parameterType="PageParameter" resultType="java.util.Map">
