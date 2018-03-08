@@ -218,7 +218,7 @@ public class MaterialDetailController extends BaseController{
 		perMap.put("email", request.getParameter("email"));
 		perMap.put("idtype", request.getParameter("idtype"));
 		perMap.put("idcard", request.getParameter("idcard"));
-		perMap.put("org_id", request.getParameter("sbdw_id"));
+		perMap.put("org_id", "".equals(request.getParameter("sbdw_id")) ? null:request.getParameter("sbdw_id"));
 		perMap.put("is_dispensed", "".equals(request.getParameter("is_dispensed")) ? null:request.getParameter("is_dispensed"));
 		perMap.put("is_utec", "".equals(request.getParameter("is_utec")) ? null:request.getParameter("is_utec"));
 		perMap.put("degree", "".equals(request.getParameter("degree")) ? null:request.getParameter("degree"));
