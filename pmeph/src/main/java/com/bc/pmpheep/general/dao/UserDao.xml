@@ -14,7 +14,7 @@
 
     <select id="getPointRules" resultType="map">
 
-        select * from writer_point_rule where is_disabled = 0
+        select * from writer_point_rule where is_disabled = 1
 
     </select>
 

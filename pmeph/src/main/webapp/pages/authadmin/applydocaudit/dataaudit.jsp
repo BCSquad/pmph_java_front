@@ -30,7 +30,7 @@
 	<input type="hidden" id="material_id" value="${material_id }">
 	<input type="hidden" id="view_audit" value="${view_audit }">
 	<input type="hidden" id="userId" value="${userId }">
-	
+	<input type="hidden" id="selectedIds" value="${selectedIds}">
 	
 	
 	<div
@@ -58,6 +58,8 @@
 					<table class="table" >
 						<thead>
 							<tr>
+								
+								<td ><input class="check editor" type="checkbox" name="allChecked" id="allChecked" onclick="DoCheck()" value="0"/></td>
 								<td>序号</td>
 								<td>姓名</td>
 								<td>职务</td>

@@ -35,7 +35,7 @@
 		<where>
 		1=1
 			<!--<if test="queryName != null and queryName != '' ">-->
-				and m.material_name = #{queryName}
+				and m.material_name like CONCAT('%',#{queryName},'%')
 			<!--</if>-->
 		</where>
 		GROUP BY a.id
@@ -59,7 +59,7 @@
 		LEFT JOIN  org_user d on d.org_id = c.org_id	 
 		<where>
 		1=1
-			and m.material_name = #{queryName}
+			and m.material_name like CONCAT('%',#{queryName},'%')
 		</where>
 		GROUP BY a.id	
 		)  t

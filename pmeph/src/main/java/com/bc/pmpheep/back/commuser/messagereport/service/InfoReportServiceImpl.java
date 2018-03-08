@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -68,14 +69,14 @@ public class InfoReportServiceImpl implements InfoReportService {
 	 * 查询信息快报的列表
 	 */
 	@Override
-	public List<Map<String, Object>> queryReportList(int num, int size) {
+	public List<Map<String, Object>> queryReportList(int num, int size,String materialId) {
 		// TODO Auto-generated method stub
-		return infoReportDao.queryReportList(num,size);
+		return infoReportDao.queryReportList(num,size,materialId);
 	}
 	@Override
-	public int getInfoReportCount() {
+	public int getInfoReportCount(String materialId) {
 		// TODO Auto-generated method stub
-		return infoReportDao.queryInfoReportCount();
+		return infoReportDao.queryInfoReportCount(materialId);
 	}
 	
 	/* 

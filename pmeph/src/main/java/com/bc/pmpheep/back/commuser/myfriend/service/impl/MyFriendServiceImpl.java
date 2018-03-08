@@ -73,6 +73,22 @@ public class MyFriendServiceImpl implements MyFriendService {
 		// TODO Auto-generated method stub
 		myFriendDao.invite(id,groupId);
 	}
+    /**
+     * 过作家用户id查询小组中被删除的成员
+     */
+	@Override
+	public Map<String, Object> queryDelGMById(String id, String groupId) {
+		// TODO Auto-generated method stub
+		return myFriendDao.queryDelGMById(id,groupId);
+	}
+     /**
+      *恢复被小组删除的作家用户
+      */
+	@Override
+	public void recoverMember(String id, String groupId) {
+		// TODO Auto-generated method stub
+		myFriendDao.recoverMember(id,groupId);
+	}
 
 
 }

@@ -47,7 +47,7 @@ String contextpath=request.getContextPath();
 		                        <li>
 		                                <div>
 		                                <div class="tag">&gt;</div>
-		                                <a href="inforeport/toinforeport.action?id=${report.id }">
+		                                <a href="inforeport/toinforeport.action?id=${report.id }&&materialId=${notice.material_id }">
 		                                    <div class="inleft">${report.title}</div>
 		                                    <div style="float: left;width: 29px;height: 15px;background-image: url(${ctx}/statics/image/css_sprites.png); background-position: -45px -212px;margin: 10px;back"></div>
 		                                </a>

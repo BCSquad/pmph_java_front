@@ -36,11 +36,12 @@ String basePath =path+"/";
 <div style="background-color:White;">
    <jsp:include page="/pages/comm/head.jsp"></jsp:include>
    <input type="hidden" id="count" value="${count }"/>
+   <input type="hidden" id="materialId" value="${materialId}"/>
 </div>
     <div style="height:30px"></div>
     <div class="sxy-div-content">
         <div id="sxy-div-left">
-            <div class="sxy-navigate"><a href="${ctx }/homepage/tohomepage.action">首页</a>〉<a href="${ctx }/cmsinfoletters/tolist.action">信息快报</a>〉信息快报详情</div>
+            <div class="sxy-navigate"><a href="${ctx }/homepage/tohomepage.action">首页</a>〉<a href="${ctx }/cmsinfoletters/tolist.action?materialId=${materialId}">${materialId !=null && materialId !='' ? '社区':'信息'  }快报</a>〉${materialId !=null && materialId !='' ? '社区':'信息'  }快报详情</div>
             <div>
                 <div>
                     <div id="sxy-title">
@@ -72,7 +73,7 @@ String basePath =path+"/";
             <thead>
                 <tr>
                     <td style="height:65px;line-height:65px;">
-                        <div style="float:left"><img alt="" src="${ctx }/statics/image/zuixin.png" />&nbsp<font id="sxy-font-top1">最新快报</font></div>
+                        <div style="float:left"><img alt="" src="${ctx }/statics/image/zuixin.png" />&nbsp;<font id="sxy-font-top1">最新快报</font></div>
                         <div style="float:right;height:65px">
                            <div style="float:left;width:20px;height:20px;margin-top: 23px">
                               <img src="${ctx }/statics/image/refresh.png"/>
