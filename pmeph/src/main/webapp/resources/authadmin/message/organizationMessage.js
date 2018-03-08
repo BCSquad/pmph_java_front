@@ -26,14 +26,15 @@ function loadMore(){
                     '<span class="msg">' + n.title + '</span>' +
                     '<span class="time">' + n.TIME + '</span>' +
                     ' </p>' +
-                    '<div class="text" id="txt'+n.id+'">' + n.msg_content +
+                    '<div class="text" id="txt'+n.id+'">' +
                     (n.isread==true?'<img src="'+contextpath+'/statics/image/readyes.png"  id="readyes'+n.id+'"/>':'') +
-                    (n.isread==false?'<img src="'+contextpath+'/statics/image/readno.png"  id="readno'+n.id+'"/>':'') +'</div>' +
-            '</div>'+
-            (n.title=='系统消息'?'<div style="float:left;color: #999999;font-size: 14px;height:20px;margin-top: 45px;" onclick="delmsg(\''+n.id+'\')">'+
+                    (n.isread==false?'<img src="'+contextpath+'/statics/image/readno.png"  id="readno'+n.id+'"/>':'') +
+                    n.msg_content +
+                    '</div></div>'+
+            '<div style="float:left;color: #999999;font-size: 14px;height:20px;margin-top: 45px;" onclick="delmsg(\''+n.id+'\')">'+
                     '<span style="width:20px;height:20px;float:left;" class="deltag"></span>'+
                     '<span style="line-height: 20px;">删除</span>'+
-                '</div>':'')+
+                '</div>'+
         '</div>';
 		});
 			$("#message-list").append(str);
