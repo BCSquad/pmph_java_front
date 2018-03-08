@@ -116,7 +116,7 @@ function checkboxInit(){
 
 //条件设定完成后查询的实现  点击查询 翻页 更换查询条件等都要先设定条件 不能直接调用此实现
 function queryMain(){
-	data = {
+	var data = {
 			pageNum:$("#page-num-temp").val(),
 			pageSize:$("#page-size-select").find("input[name='page-size-select']").val(),
 			queryName:$("#search-name-temp").val(),
@@ -182,6 +182,7 @@ function tempSave(){
 			$("#selectedNumIds").val(json.selectedNumIds);
 			if (json.msg!=null) {
 				window.message.success(json.msg);
+				queryMain();
 			}
 		}
 	});
@@ -257,5 +258,21 @@ function bfRedirect(uri){
 				layer.close(index);
 			}
 	);
+}
+
+/**
+ * 导出excel表格
+ * @param coa 1被选中的 2全部
+ */
+function getExcel(coa){
+	var excelChoosen ="";
+	if (coa=='1') {
+		excelChoosen = 1;
+	}
+	window.location.href = contextpath+'excel/download.action?service=ChooseEditorExcelServiceImpl&t='+new Date().getTime()
+							+'&textBookId='+$("#textBookId").val()
+							+'&isFirstEditorLogIn='+$("#isFirstEditorLogIn").val()
+							+'&is_digital_editor_optional='+$("#is_digital_editor_optional").val()
+							+'&excelChoosen='+excelChoosen;
 }
 
