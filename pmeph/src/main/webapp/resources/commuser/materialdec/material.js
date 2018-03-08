@@ -103,7 +103,7 @@ function chooseModel(data){
 	//学习经历必填
 	if(data.is_edu_exp_required == "1"){
 		$("#zyxxjl_bt").css("display","inline");
-		jsonStr=jsonStr+"{\"id\":\"xx_kssj\",\"content\":\"学习经历必填\"},{\"id\":\"xx_major\",\"content\":\"专业不能为空\"},{\"id\":\"xx_degree\",\"content\":\"学习不能为空\"},";
+		jsonStr=jsonStr+"{\"id\":\"xx_kssj\",\"content\":\"学习经历起止时间必填\"},{\"id\":\"xx_major\",\"content\":\"专业不能为空\"},{\"id\":\"xx_degree\",\"content\":\"学习不能为空\"},";
 	}else{
 		$("#zyxxjl_xt").css("display","inline");
 	}
