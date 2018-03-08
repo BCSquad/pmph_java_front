@@ -348,7 +348,7 @@
 		where id = #{id} ;
 	</update>
 
-	<select id="getMaterialManagers">
+	<select id="getMaterialManagers" resultType="map">
 		select director from material where id=#{materialId}
 		UNION
 		select editor_id director from material_project_editor where material_id=#{materialId}

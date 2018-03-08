@@ -28,7 +28,7 @@
 			<div>
 				<input type="hidden" id="material_id" name="material_id" value="${material.id}"/>
 				<span id="tsxz_span1"></span>
-				<span class="tsxz_title">图书选择</span>
+				<span class="tsxz_title">作家申报职位选择</span>
 			</div>
 			<c:forEach var="list" items="${tssbList}">
 			<div class="item">
@@ -332,7 +332,7 @@
 					<thead>
 						<tr>
 							<td width="230px">教材名称</td>
-							<td width="120px">教材级别</td>
+							<td width="120px">级别</td>
 							<td width="120px">编写职务</td>
 							<td width="100px">是否数字编委</td>
 							<td width="120px">出版时间</td>
@@ -382,10 +382,10 @@
 					<thead>
 						<tr>
 							<td width="230px">教材名称</td>
-							<td width="120px">教材级别</td>
+							<td width="120px">级别</td>
 							<td width="120px">编写职务</td>
 							<td width="100px">是否数字编委</td>
-							<td width="130px">出版社</td>
+							<td width="130px">出版单位</td>
 							<td width="120px">出版时间</td>
 							<td width="120px">标准书号</td>
 							<td>备注</td>
@@ -505,7 +505,7 @@
 				<table class="tab_2" id="tab_zbxszz">
 					<thead>
 						<tr>
-							<td width="340px">教材名称</td>
+							<td width="340px">专著名称</td>
 							<td width="120px">出版方式</td>
 							<td width="220px">出版单位</td>
 							<td width="150px">出版时间</td>
