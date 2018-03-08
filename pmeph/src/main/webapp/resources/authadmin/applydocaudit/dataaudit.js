@@ -1,5 +1,9 @@
-$(function(){
+var selectedIds = [];
 
+$(function(){
+//	selectedIds=eval($("#selectedIds").val());//重置
+	
+	
 	
 	$('#page-size-select').selectlist({
         zIndex: 10,
@@ -16,8 +20,72 @@ $(function(){
 	queryMain();
 });
 
+// 复选框选中导出word、excel
+//全选
+function DoCheck() {
+	selectedIds=[];
+	var ch = document.getElementsByName("choose");
+	if (document.getElementsByName("allChecked")[0].checked == true) {
+		for ( var i = 0; i < ch.length; i++) {
+			ch[i].checked = true;
+			selectedIds.push(ch[i].value);
+		}
+	} else {
+		for ( var i = 0; i < ch.length; i++) {
+			ch[i].checked = false;
+			
+		}
+		
+	}
+	
+	
+	//子复选框有一个未选中时，去掉全选按钮的选中状态
+	for ( var i = 0; i < ch.length; i++) {
+		ch[i].onclick = function() {
+			if (!this.checked) {
+				document.getElementById("allChecked").checked = false;
+			}
+		};
+	}
+}
 
-//条件设定完成后查询的实现  点击查询 翻页 更换查询条件等都要先设定条件 不能直接调用此实现
+// 为数组对象增加删除某元素的方法
+Array.prototype.removeByValue = function(val) {
+	for ( var i = 0; i < this.length; i++) {
+		if (this[i] == val) {
+			this.splice(i, 1);
+			break;
+		}
+	}
+};
+
+// 初始化复选框的点击事件
+function checkboxInit() {
+	$("#zebra-table").find("input.editor").each(function(i, n) {
+		var $t = $(this);
+		// 刷新 搜索 翻页等后 根据selectedIds回填复选框
+		if ($.inArray($t.val(), selectedIds) > -1) {
+			$t.prop("checked", true);
+		} else {
+			$t.prop("checked", false);
+		}
+		// 复选框被点击
+		$t.unbind().bind("click", function() {
+			if ($t.prop("checked")) {
+				selectedIds.push($t.val());
+				
+			} else {
+				selectedIds.removeByValue($t.val());
+			}
+			
+			// alert(selectedIds);
+		});
+	});
+}
+
+
+
+// 条件设定完成后查询的实现 点击查询 翻页 更换查询条件等都要先设定条件 不能直接调用此实现
 function queryMain(){
 	data = {
 			pageNum:$("#page-num-temp").val(),
@@ -57,6 +125,7 @@ function queryMain(){
                 	queryMain();
                 }
                 });
+			 checkboxInit();
 		}
 	});
 }
@@ -86,16 +155,18 @@ function queryBtnClick(){
 
 //导出excel
 
-function exportExcel(){
-    window.location.href =contextpath+'excel/download.action?service=dataAuditExcel&queryName='+$("#search-name-temp").val()+'&material_id='+$("#material_id").val()+'&userId='+$("#userId").val();
+function exportExcel() {
+	window.location.href = contextpath
+			+ 'excel/download.action?service=dataAuditExcel&queryName='
+			+ $("#search-name-temp").val() + '&material_id='
+			+ $("#material_id").val() + '&userId=' + $("#userId").val()
+			+ '&selectedIds=' + selectedIds.toString();
 }
 
 //返回
 function return_on(){
 	window.location.href=contextpath+"applyDocAudit/toPage.action";
 }
-
-//鼠标悬停显示的内容
 
 
 

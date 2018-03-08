@@ -77,6 +77,8 @@ String contextpath=request.getContextPath();
             </div>
             
             <button class="div1" onclick="queryBtnClick();" style="cursor: pointer;">查询</button>
+            <button class="div1" onclick="getExcel(1);" style="cursor: pointer;">导出已选名单</button>
+            <button class="div1" onclick="getExcel(2);" style="cursor: pointer;">导出所有名单</button>
             <div id="handleBtn">
 	            <button class="div2" onclick="selectReset()" style="cursor: pointer;">重置</button>
 	            <button class="div3" onclick="selectRubmit()" style="cursor: pointer;">提交</button>

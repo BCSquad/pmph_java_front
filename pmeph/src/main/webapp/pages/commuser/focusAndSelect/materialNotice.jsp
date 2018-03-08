@@ -39,6 +39,7 @@
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
+<input type="hidden" id="materialId" value="${materialId }"/>
 <div class="content-body">
     <div class="div_top">
     <a href="${ctx }/homepage/tohomepage.action">首页</a>&gt;遴选公告
@@ -46,7 +47,7 @@
     <div class="div_content">
         <div class="div_content_left">
             <span class="clickbefore mouse-gesture" id="infoReport" 
-                  onclick="ChangeDiv('infoReport')">信息快报</span>
+                  onclick="ChangeDiv('infoReport')">${materialId!=null && materialId!=''? '社区':'信息' }快报</span>
             <span class="clicked"     style="margin-left: 15px;" id="selectAnnco" onclick="ChangeDiv('selectAnnco')">遴选公告</span>
         </div>
         <div class="div_content_right">

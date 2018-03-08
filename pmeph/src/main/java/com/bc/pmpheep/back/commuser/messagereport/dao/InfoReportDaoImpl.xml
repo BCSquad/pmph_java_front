@@ -8,11 +8,18 @@
    </select> 
    <!--查询信息快报的列表  -->
    <select id="queryReportList" parameterType="map" resultMap="infoReport">
-       select * from cms_content cc left join cms_category  ccg  on cc.category_id=ccg.id where ccg.category_name='快报管理'  order by cc.gmt_create desc  limit #{num},#{size}
+       select * from cms_content cc left join cms_category  ccg  on cc.category_id=ccg.id where ccg.id=2  
+       <if test="materialId!=null and  materialId!='' ">
+        and cc.material_id=#{materialId}
+       </if>
+       order by cc.gmt_create desc  limit #{num},#{size}
    </select>
    <!--查询信息快报的总数量  -->
-   <select id="queryInfoReportCount" resultType="int">
-     select count(1) from  cms_content cc left join cms_category  ccg  on cc.category_id=ccg.id where ccg.category_name='快报管理'
+   <select id="queryInfoReportCount" resultType="int" parameterType="java.util.Map">
+     select count(1) from  cms_content cc left join cms_category  ccg  on cc.category_id=ccg.id where ccg.id=2  
+     <if test="materialId!=null and  materialId!='' ">
+        and cc.material_id=#{materialId}
+     </if>
    </select>
    <!--查询用户对信息快报的点赞次数  -->
    <select id="queryLike" parameterType="map" resultType="int">

@@ -58,7 +58,7 @@ $(function () {
 
     var element;
     var $uploadvideo = $("#upload-video").fileupload({
-        url: 'http://120.76.221.250/v/play/fileUp',
+        url: 'http://120.76.221.250/v/upload',
         dataType: 'json',
         autoUpload: true,
         formData: function () {

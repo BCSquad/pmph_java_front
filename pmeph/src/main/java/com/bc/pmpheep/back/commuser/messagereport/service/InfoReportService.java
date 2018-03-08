@@ -3,6 +3,8 @@ package com.bc.pmpheep.back.commuser.messagereport.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 /**
  * @author guoxiaobao
  *@Title: 
@@ -24,12 +26,12 @@ public interface InfoReportService {
 	 * @param size 每页展示的数量
 	 * @return
 	 */
-	List<Map<String, Object>> queryReportList(int num, int size);
+	List<Map<String, Object>> queryReportList(int num, int size,String materialId);
 
 	/**查询信息快报的总数量
 	 * @return
 	 */
-	int getInfoReportCount();
+	int getInfoReportCount(String materialId);
 	/**添加点赞或取消点赞
 	 * @param id 信息快报id
 	 * @param userId 用户id

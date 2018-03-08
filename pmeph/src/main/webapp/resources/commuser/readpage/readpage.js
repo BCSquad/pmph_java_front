@@ -37,6 +37,10 @@ function ChangeDiv(typeid) {
 //显示当前层
 }
 
+function lookdetail() {
+    location.href=contextpath + "/books/list.action?pageSize=10&pageNumber=1&order=&type=4"
+}
+
 //新书推荐
 function ChangeFYDiv(typeid) {
     $(".tab.type").removeClass("active");
