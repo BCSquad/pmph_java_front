@@ -43,7 +43,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            <div class="conten-left">
 		                <div class="conten-left-top">
 		                    <div class="img-bg">
-		                    	<c:if test="${progress.onlineSubmit=='1'||progress.onlineProgress=='2'}">
+
+		                    	<c:if test="${progress.onlineProgress=='1'||progress.onlineProgress=='3'||progress.onlineProgress=='4'}">
 			                        <div class="img_left">
 			                            <div class="picture_top"></div>
 			                            <div class="picture_bom">
@@ -52,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			                            </div>
 			                        </div>
 		                        </c:if>
-		                    	<c:if test="${progress.onlineSubmit=='0'}">
+		                    	<c:if test="${progress.onlineProgress=='0'}">
 			                        <div class="img_left">
 			                            <div class="picture_top1"></div>
 			                            <div class="picture_bom1">
@@ -60,37 +61,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			                            </div>
 			                        </div>
 		                        </c:if>
-		                        <c:if test="${progress.onlineSubmit=='1'||progress.onlineProgress=='2'}">
-		                        <c:choose>
-		                        <c:when test="${progress.onlineProgress=='3'}">
-		                         <div class="img_mid">
-			                            <div class="picture_mid"></div>
-			                            <div class="picture_bom">
-			                                <span class="span_bom_left">申报单位已审核</span>
-			                                <img   class="img_bom_right"  src="${ctx}/statics/image/yiwancheng.png" >
-			                            </div>
-			                        </div>
-		                        </c:when>
-		                        <c:otherwise>
-		                         <div class="img_mid">
-			                            <div class="picture_mid1"></div>
-			                            <div class="picture_bom">
-			                                <span class="span_bom_left" style="color: #999999">申报单位</span>
-			                                <img   class="img_bom_right"  src="${ctx}/statics/image/shenhezhong.png" style="width:52px;">
-			                            </div>
-			                        </div>
-		                        </c:otherwise>
-		                        </c:choose>
-		                        </c:if>
-		                       
-		                        <c:if test="${progress.onlineProgress=='2'}">
-			                        <div class="img_mid">
-			                            <div class="picture_mid1"></div>
-			                            <div class="picture_bom">
-			                                <span class="span_bom_left" style="color: #999999">申报单位退回</span>
-			                            </div>
-			                        </div>
-			                    </c:if>
+								<c:if test="${progress.onlineProgress=='2'||progress.onlineProgress=='5'}">
+									<div class="img_left">
+										<div class="picture_top1"></div>
+										<div class="picture_bom1">
+											<span class="span_bom_left" style="color: #999999">已退回</span>
+										</div>
+									</div>
+								</c:if>
+								<c:if test="${progress.onlineProgress=='1'||progress.onlineProgress=='0'||progress.onlineProgress=='2'||progress.onlineProgress=='5'}">
+									<div class="img_mid">
+										<div class="picture_mid1"></div>
+										<div class="picture_bom" style="color: #999999;    margin-left: 0;">
+											<span class="span_bom_left">申报单位未审核</span>
+										</div>
+									</div>
+								</c:if>
+								<c:if test="${progress.onlineProgress=='3'}">
+									<div class="img_mid">
+										<div class="picture_mid"></div>
+										<div class="picture_bom">
+											<span class="span_bom_left">申报单位已审核</span>
+											<img   class="img_bom_right"  src="${ctx}/statics/image/yiwancheng.png" >
+										</div>
+									</div>
+								</c:if>
+								<c:if test="${progress.onlineProgress=='4'}">
+									<div class="img_mid">
+										<div class="picture_mid1"></div>
+										<div class="picture_bom">
+											<span class="span_bom_left" style="color: #999999">申报单位</span>
+											<img   class="img_bom_right"  src="${ctx}/statics/image/shenhezhong.png" style="width:52px;">
+										</div>
+									</div>
+								</c:if>
 		                        <c:if test="${progress.offlineProgress=='2'}">
 			                        <div class="img_right">
 			                            <div class="picture_right"></div>
