@@ -1,6 +1,4 @@
-var filePagesize  = 5 ;
-var filePagenumber = 1  ;
-var fileName  =  $("#fileName").val();
+
 
 
 
@@ -16,8 +14,7 @@ function ChangeDiv(type){
         document.getElementById("commnions").setAttribute("class","hidden");
         document.getElementById("filesgx").setAttribute("class","show");
 
-        //加载文件
-        initFile();
+
     }
 
 
@@ -163,7 +160,12 @@ $(function(){
 	//加载更对历史消息
 	$("#history").click(initTalk);
 
+    var filePagesize  = 5 ;
+    var filePagenumber = 1  ;
+    var fileName  =  $("#fileName").val();
 
+    //加载文件
+    initFile();
 	//加载更多文件
 	$("#fileMore").click(initFile);
 	//搜索文件
@@ -302,7 +304,50 @@ $(function(){
 	});*/
 	
 	//初始化文件
-
+    function initFile(){
+        $("#fileMore").show();
+        var order =$("input[name='edu']").val().split(':');
+        $.ajax({
+            type:'get',
+            url :contxtpath+'/group/getFiles.action',
+            contentType: 'application/json',
+            dataType:'json',
+            data:{
+                groupId   : $("#groupId").val(),
+                pageNumber: filePagenumber,
+                pageSize  : filePagesize ,
+                fileName  : fileName ,
+                order     : order[0],
+                rank      : order[1]
+            },
+            success:function(responsebean){
+                if(responsebean){
+                    for(var i= 0 ; i< responsebean.length ;i++){
+                        var html = "<div class='items' id='item_"+responsebean[i].id+"'> "+
+                            "<div class='item1' style='clear:both;'> "+
+                            "<span><img src='"+contxtpath+"/statics/image/word-(1).png' alt='文件类型' class='item_img1'/><text>"+responsebean[i].fileName+"</text></span> <span style='color:#70bcc3;margin-left:20px'>"+responsebean[i].fileSize+"KB</span>"+
+                            "<span><img src='"+contxtpath+"/statics/image/xztp.png' id='img_"+responsebean[i].id+"' class='item_img2'/><text id='dw_"+responsebean[i].id+"' style='color: #70bcc3;'>"+responsebean[i].download+"</text></span> "+
+                            "</div> "+
+                            "<div class='item2' style='clear:both;'> "+
+                            "<div class='item2_div1'>"+responsebean[i].displayName+" 于 "+formatDate(responsebean[i].gmtCreate,"yyyy.MM.dd hh:ss:mm")+"上传文件</div> "+
+                            "<div style='color: #b0b0b0;float: right;'> "+
+                            (responsebean[i].deletePower?'<span style=\"cursor:pointer\" class="del_span deleteThis" id="bt_'+responsebean[i].id+'" ></span> ':'') +
+                            "</div> "+
+                            "</div> "+
+                            "<input type='hidden' id='"+responsebean[i].id+"' value='"+responsebean[i].fileId+"' />"+
+                            "</div> ";
+                        $("#fileContent").append(html);
+                    }
+                    //判断是否还有下一页
+                    if(filePagesize > responsebean.length){
+                        $("#fileMore").hide();
+                    }else{
+                        filePagenumber ++ ;
+                    }
+                }
+            }
+        });
+    }
 	
 	//加载对话的方法
 	function initTalk (){
@@ -491,50 +536,7 @@ $(function(){
 	
 });
 
-function initFile(){
-    $("#fileMore").show();
-    var order =$("input[name='edu']").val().split(':');
-    $.ajax({
-        type:'get',
-        url :contxtpath+'/group/getFiles.action',
-        contentType: 'application/json',
-        dataType:'json',
-        data:{
-            groupId   : $("#groupId").val(),
-            pageNumber: filePagenumber,
-            pageSize  : filePagesize ,
-            fileName  : fileName ,
-            order     : order[0],
-            rank      : order[1]
-        },
-        success:function(responsebean){
-            if(responsebean){
-                for(var i= 0 ; i< responsebean.length ;i++){
-                    var html = "<div class='items' id='item_"+responsebean[i].id+"'> "+
-                        "<div class='item1' style='clear:both;'> "+
-                        "<span><img src='"+contxtpath+"/statics/image/word-(1).png' alt='文件类型' class='item_img1'/><text>"+responsebean[i].fileName+"</text></span> <span style='color:#70bcc3;margin-left:20px'>"+responsebean[i].fileSize+"KB</span>"+
-                        "<span><img src='"+contxtpath+"/statics/image/xztp.png' id='img_"+responsebean[i].id+"' class='item_img2'/><text id='dw_"+responsebean[i].id+"' style='color: #70bcc3;'>"+responsebean[i].download+"</text></span> "+
-                        "</div> "+
-                        "<div class='item2' style='clear:both;'> "+
-                        "<div class='item2_div1'>"+responsebean[i].displayName+" 于 "+formatDate(responsebean[i].gmtCreate,"yyyy.MM.dd hh:ss:mm")+"上传文件</div> "+
-                        "<div style='color: #b0b0b0;float: right;'> "+
-                        (responsebean[i].deletePower?'<span style=\"cursor:pointer\" class="del_span deleteThis" id="bt_'+responsebean[i].id+'" ></span> ':'') +
-                        "</div> "+
-                        "</div> "+
-                        "<input type='hidden' id='"+responsebean[i].id+"' value='"+responsebean[i].fileId+"' />"+
-                        "</div> ";
-                    $("#fileContent").append(html);
-                }
-                //判断是否还有下一页
-                if(filePagesize > responsebean.length){
-                    $("#fileMore").hide();
-                }else{
-                    filePagenumber ++ ;
-                }
-            }
-        }
-    });
-}
+
 
 //转换时间戳的方法
 function formatDate(nS,str) {
