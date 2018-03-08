@@ -53,13 +53,14 @@ public class InfoReportController extends BaseController {
 	   }else{
 		   map.put("count", "0");
 	   }
-	   List <Map<String,Object>> list=infoReportService.queryReportList(num,size);
+	   List <Map<String,Object>> list=infoReportService.queryReportList(num,size,materialId);
 	   Map<String,Object> rmap=infoReportService.queryInfoReportById(cmsid,usermap);
 	   long clicks=Long.valueOf(rmap.get("clicks").toString());
 	   infoReportService.updateClicks(cmsid,clicks+1);
 	   rmap.put("clicks", clicks+1);
 	   map.put("rmap", rmap);
 	   map.put("list", list);
+	   map.put("materialId", materialId);
 	   return new ModelAndView("commuser/messagereport/inforeport",map);
    }
 	
@@ -72,9 +73,10 @@ public class InfoReportController extends BaseController {
 		   Map<String,Object> map=new HashMap<>();
 		   Pattern pattern = Pattern.compile("[0-9]*");
 		   String count=request.getParameter("count");
+		   String materialId=request.getParameter("materialId");
 		   int num=0;
 		   int size=5;
-		   int total=infoReportService.getInfoReportCount();
+		   int total=infoReportService.getInfoReportCount(materialId);
 		   if(count!=null && !count.equals("")&&pattern.matcher(count).matches()){
 			   num=Integer.parseInt(count)*size;
 			   if(num>=total){
@@ -86,7 +88,7 @@ public class InfoReportController extends BaseController {
 		   }else{
 			   map.put("count", "0");
 		   }
-		   List <Map<String,Object>> list=infoReportService.queryReportList(num,size);
+		   List <Map<String,Object>> list=infoReportService.queryReportList(num,size,materialId);
 		   map.put("list", list);
 		   return map;
 	   }

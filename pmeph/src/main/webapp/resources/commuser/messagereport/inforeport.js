@@ -2,6 +2,7 @@
 //信息快报列表换一批
 function trychange(){
 	var x;
+	var materialId=$("#materialId").val();
 	var mvalue=$("#count").val();
 	if(mvalue==""||isNaN(mvalue)){
 		x=1;
@@ -11,7 +12,7 @@ function trychange(){
 	$.ajax({
 		type:'post',
 		url:contextpath+'inforeport/trychange.action',
-		data:{count:x},
+		data:{count:x,materialId:materialId},
 		async:false,
 		dataType:'json',
 		success:function(json){
@@ -23,6 +24,7 @@ function trychange(){
 			       contextpath+
 			       'statics/image/cupline.jpg" /></td></tr>';
 		   });
+		   
 		   $("#count").val(json.count);
 		   $("#trows").html(str);
 		}
@@ -36,7 +38,7 @@ function lookDetail(id){
 	if(!(mvalue==""||isNaN(mvalue))){
 		x=parseInt(mvalue);
 	}
-	location.href=contextpath+"inforeport/toinforeport.action?count="+x+"&&id="+id;
+	location.href=contextpath+"inforeport/toinforeport.action?count="+x+"&&id="+id+"&&materialId="+$("#materialId").val();
 }
 //添加或取消收藏
 function addlike(id){
