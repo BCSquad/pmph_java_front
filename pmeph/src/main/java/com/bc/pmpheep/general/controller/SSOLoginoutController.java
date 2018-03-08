@@ -121,6 +121,7 @@ public class SSOLoginoutController {
 
         if ("1".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
             session.removeAttribute(Const.SESSION_USER_CONST_WRITER);
+            session.removeAttribute(Const.SESSION_USER_CONST_TYPE);
             String headReferer = request.getHeader("Referer");
             String refer = StringUtils.isEmpty(headReferer) ? request.getHeader("referer") : headReferer;
 
@@ -139,6 +140,7 @@ public class SSOLoginoutController {
             response.sendRedirect(refer);
         } else if ("2".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
             session.removeAttribute(Const.SESSION_USER_CONST_ORGUSER);
+            session.removeAttribute(Const.SESSION_USER_CONST_TYPE);
             String headReferer = request.getHeader("Referer");
             String refer = StringUtils.isEmpty(headReferer) ? request.getHeader("referer") : headReferer;
             for (LoginInterceptor.PathWithUsertypeMap pathMap : pathWithUsertypeMaps) {
