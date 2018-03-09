@@ -106,7 +106,7 @@ public class DataAuditServiceImpl implements DataAuditService {
 			Long material_id=Long.valueOf(mid);
 
 			//发送者id   发送者类型    接收者id  接收者类型   标题   内容
-			senNewMsgPass(material_id,thisId, new Short("3"), frendId, new Short("2"), "系统消息", "恭喜！您提交的《"+dmap.get("material_name").toString()+"》申报表已通过[学校管理员/出版社]审核!");
+			senNewMsgPass(material_id,thisId, new Short("3"), frendId, new Short("2"), "系统消息", "恭喜！您提交的《"+dmap.get("material_name").toString()+"》申报表已通过[学校管理员]审核!");
 			return this.dataAuditDao.updateDeclarationPass(map);
 		}
 
@@ -126,7 +126,7 @@ public class DataAuditServiceImpl implements DataAuditService {
 		String mid=String.valueOf(dmap.get("material_id"));
 		Long material_id=Long.valueOf(mid);
 
-		senNewMsgBack(material_id,thisId, new Short("3"), frendId, new Short("2"), "系统消息", " 	抱歉，您提交的《"+dmap.get("material_name").toString()+"》申报表被[学校管理员/出版社]退回，请您核对后重试!");
+		senNewMsgBack(material_id,thisId, new Short("3"), frendId, new Short("2"), "系统消息", " 	抱歉，您提交的《"+dmap.get("material_name").toString()+"》申报表被[学校管理员]退回，请您核对后重试!");
 		return this.dataAuditDao.updateDeclaration(map);
 	}
 

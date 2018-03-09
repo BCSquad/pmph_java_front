@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.bc.pmpheep.back.util.Const;
 import com.bc.pmpheep.back.util.RouteUtil;
 import com.bc.pmpheep.general.controller.BaseController;
 import org.apache.commons.collections.MapUtils;
@@ -439,8 +440,15 @@ public class MessageController extends BaseController {
         String uid = request.getParameter("uid");
         Map<String, Object> paraMap = new HashMap<String, Object>();
         paraMap.put("id", uid);
+        Map<String, Object> user = getUserInfo();
+        String user_const_type = (String) request.getSession().getAttribute(Const.SESSION_USER_CONST_TYPE);
+        user_const_type = String.valueOf((Integer.parseInt(user_const_type)+1));
         Map<String, Object> map1 = noticeMessageService.queryTitleMessage(paraMap);
-        int count = allMessageServiceImpl.updateIsRead(uid);
+        int count = 0;
+        //只有接收者读了，才标记为已读。（发送者也可以查看）
+        if (user_const_type.equals(map1.get("receiver_type").toString())&&user.get("id").equals(map1.get("receiver_id"))) {
+        	count = allMessageServiceImpl.updateIsRead(uid);
+		}
         String isread = "no";
         if (count > 0) {
             isread = "yes";

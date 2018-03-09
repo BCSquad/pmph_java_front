@@ -256,7 +256,7 @@
 						ELSE '系统'
 						END
 					) realname
-					
+					,a.receiver_id,a.receiver_type
 				FROM
 					user_message a
 				LEFT JOIN pmph_user s1 ON a.sender_id = s1.id

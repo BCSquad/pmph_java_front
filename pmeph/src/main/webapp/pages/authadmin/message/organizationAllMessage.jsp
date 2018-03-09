@@ -26,10 +26,16 @@
 </jsp:include>
  <div class="message-body" >
         <div class="message">
-           <a href="${pageContext.request.contextPath}/AllMessage/init.action">
+           <a href="${pageContext.request.contextPath}/AllMessage/init.action?tag=receive">
                 <div class="item">
                     <div class="on-text">全部消息</div>
                     <div class="on-line" ></div>
+                </div>
+            </a>
+            <a href="${pageContext.request.contextPath}/AllMessage/init.action?tag=send">
+                <div class="item">
+                    <div class="off-text">发送历史</div>
+                    <div class="off-line" ></div>
                 </div>
             </a>
             <a href="${pageContext.request.contextPath}/authSendMessage/init.action">
@@ -97,7 +103,7 @@
             </div>
             <c:if test="${listSize>=8 }">
              <div class="load-more" id="load-more">
-                <a href="javascript:void(0);" onclick="loadMore()"><p class="load-text">加载更多...</p></a>
+                <a href="javascript:void(0);" onclick="loadMore('receive')"><p class="load-text">加载更多...</p></a>
             </div>
             </c:if>
              <input id="startPara" name="startPara"  type="hidden">
