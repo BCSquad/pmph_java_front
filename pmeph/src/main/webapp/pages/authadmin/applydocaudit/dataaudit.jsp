@@ -49,8 +49,9 @@
 					</div>
 					<div class="btn">
 						<button class="btn_1"  id="btn-search" onclick="queryBtnClick()">查 询</button>
-						<button class="btn_2" onclick="exportExcel();">导出Excel</button>
 						<button class="btn_3" onclick="return_on();">返 回</button>
+						<button class="btn_2" onclick="exportExcel();">导出Excel</button>
+						<button class="btn_2" style="background-color:#006400;" onclick="exportWord();">导出Word</button>
 					</div>
 				</div>
 

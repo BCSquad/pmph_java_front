@@ -372,7 +372,6 @@ public class MessageController extends BaseController {
         //String is_material_entry=request.getParameter("is_material_entry");
         ModelAndView mv = new ModelAndView();
         Map<String, Object> paraMap = new HashMap<String, Object>();
-        paraMap.put("materialId", materialId);
         paraMap.put("cmsId", cmsId);
         paraMap.put("userid", (user != null ? user.get("id") : ""));
         //标题、时间、邮寄地址、备注
@@ -383,7 +382,7 @@ public class MessageController extends BaseController {
         mv.addObject("secondtag", "消息通知");
         mv.addObject("firstpath", "personalhomepage/tohomepage.action");
         mv.addObject("secondpath", "message/noticeMessageList.action");
-        mv.addObject("materialId", materialId);
+        mv.addObject("materialId", mapTitle.get("material_id"));
         if ("no".endsWith(mapTitle.get("ended").toString()) &&
                 "false".equals(mapTitle.get("is_all_textbook_published").toString()) &&
                 "false".equals(mapTitle.get("is_force_end").toString())) {
@@ -393,7 +392,7 @@ public class MessageController extends BaseController {
         }
         if (mapTitle != null && mapTitle.size() > 0 && mapTitle.get("is_material_entry").toString() == "true") {
 
-            paraMap.put("materialId", materialId);
+            paraMap.put("materialId", mapTitle.get("material_id"));
             //备注附件
             List<Map<String, Object>> listAttachment = noticeMessageService.queryNoticeMessageDetailAttachment(paraMap);
             for (Map<String, Object> map : listAttachment) {
