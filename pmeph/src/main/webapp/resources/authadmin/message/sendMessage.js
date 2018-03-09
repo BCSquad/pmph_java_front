@@ -27,28 +27,79 @@ function send_init(){
 	//教材选择界面隐藏 表单显示
 	$("#message-body").show();
 	$("#selectBook").hide();
+    $("#send").attr("disabled",false);
+    $("#send2").attr("disabled",false);
 }
 
 /**
  * 发送请求
  */
-function sending(){
+function sending(varId){
 	//发送表单 请求
-	try {
-		if(($("#TitleValue").val().length!=0) && ($("#UEContent").val().length!=0)){
-			document.getElementById("theForm").submit();
-			document.getElementById("theForm").reset();
-			window.message.success("发送成功");
-		}else{
-			window.message.warning("必填项不能为空");
-		}
-	} catch (e) {
-		// TODO: handle exception
-		console.log(e.message);
-		window.message.error("发送失败");
-	}finally{
-		
+	if(getValue()){
+        $("#"+varId).attr("disabled",true); //防止重复点击
+        $.ajax({
+            url: contextpath + "authSendMessage/sendMessage.action",
+            type: "post",
+            data: $("#theForm").serialize(),
+            success: function (json) {
+                var data = json.flag;
+                if (data == '2' || data == '3') {
+                    $("#TitleValue").val(json.titleValue);
+                    UE.getEditor('mText').setContent(json.UEContent);
+                    window.message.error(json.isValidate);
+                    $("#"+varId).attr("disabled",false);
+                } else if (data == '4') {
+                    var words = json.value;
+                    var title = document.getElementById("TitleValue");
+                    var TitleValue = $("#TitleValue").val();
+                    var content = $("#UEContent").val().replace('<span style="background : yellow">','').replace('</span>','');
+                    for (var i = 0; i < words.length; i++) {
+                        var reg = new RegExp(words[i], 'g');
+                        if (TitleValue.indexOf(words[i]) > -1) {
+                            title.style.border = '3px solid red';
+                        }
+                        if (json.UEContent.indexOf(words[i]) > -1) {
+                            content = content.replace(reg, '<span style="background : yellow">' + words[i] + '</span>');
+                        }
+                    }
+                    UE.getEditor('mText').setContent(content);
+                    window.message.error("标题或内容中含有敏感词,请修改后再保存或提交");
+                    $("#"+varId).attr("disabled",false);
+				}else {
+                	if(data !='1'){
+                        document.getElementById("theForm").reset();
+                        $("#TitleValue").val("");
+                        UE.getEditor('mText').setContent("");
+                        setTimeout(function () {
+                            window.location.href = contextpath + "AllMessage/init.action";
+                        }, 800);
+                        window.message.success("成功");
+					}else{
+                        window.message.error("失败");
+                        $("#"+varId).attr("disabled",false);
+					}
+
+				}
+            }
+        })
+
 	}
+	// try {
+	// 	if(($("#TitleValue").val().length!=0) && ($("#UEContent").val().length!=0)){
+	// 		document.getElementById("theForm").submit();
+	// 		document.getElementById("theForm").reset();
+	// 		window.message.success("发送成功");
+	// 	}else{
+	// 		window.message.warning("必填项不能为空");
+	// 	}
+	// } catch (e) {
+	// 	// TODO: handle exception
+	// 	console.log(e.message);
+	// 	window.message.error("发送失败");
+	// }finally{
+	//
+	// }
 	
 	
 }
@@ -71,8 +122,7 @@ function sendf(){
 		send_after();
 		queryMain();
 	}else{
-		getValue();
-		sending();
+		sending('send');
 	}
 }
 
@@ -96,16 +146,10 @@ $(function(){
 
 
     })*/
-	if($("#validate").val()=="0"){
-		window.message.warning("必填项不能为空");
-		return false;
-	}else if($("#validate").val()=="1"){
-		window.message.warning("标题长度不能超过30个字");
-		return false;
-	}
-	if($('input:radio[name="sendObject"]:checked').val()!='0'){
-		$("#send").val("下一步");
-	}
+
+	 // if($('input:radio[name="sendObject"]:checked').val()!='0'){
+	 // 	$("#send").val("下一步");
+	 // }
 	$('input:radio[name="sendObject"]').change(function(){
     	if($('input:radio[name="sendObject"]:checked').val()!='0'){
     		$("#send").val("下一步");
@@ -124,14 +168,14 @@ $(function(){
 				return false;
 			}
 		    $('#radioValue').val(chk_value);
-		    sending();
-		    send_init();
+		    sending('send2');
+		    //send_init();
 		});
 
 	$('#backupdate').on('click', function(){
 		//教材选择界面隐藏 表单显示
 		send_init();
-		$("#send").val("下一步");
+		//$("#send").val("下一步");
 	});
 	
 	$('#page-size-select').selectlist({
@@ -221,18 +265,19 @@ $(function(){
 
 //表单提交前 给表单域中赋值
 function getValue(){
-	
-	//var UEContent = UE.getEditor('mText').getContent();
-	var UEContent = $("#UEContent").val();
+    debugger;
+	var UEContent = UE.getEditor('mText').getContent();
+	//var UEContent = $("#UEContent").val();
+    $("#UEContent").val(UEContent);
 	 var radioval=$('input:radio[name="sendObject"]:checked').val();
 	 if(radioval=='0'){
 		 $("#radioValue").val(radioval);
 		 return true;
 	 }
-	if($("#radioValue").val().length==0){
-		window.message.error("请选择教材报名者");
-		return false;
-	}
+	// if($("#radioValue").val().length==0){
+	// 	window.message.error("请选择教材报名者");
+	// 	return false;
+	// }
 	//$("#UEContent").val(UEContent);
 	
 	if($("#TitleValue").val().length==0){
@@ -245,6 +290,8 @@ function getValue(){
 		//$('input[type="submit"]').prop('disabled', true);
 		return false;
 	}
+
+	return true;
 	
 	
 }

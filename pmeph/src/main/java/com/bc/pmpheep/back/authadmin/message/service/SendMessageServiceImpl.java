@@ -44,6 +44,10 @@ public class SendMessageServiceImpl implements SendMessageService {
 		 orgMessageDao.insertAttachmentInfo(map);
 	}
 
-	
+	@Override
+	public List<Map<String, Object>> findApplyId(String bookId) {
+		return orgMessageDao.findApplyId(bookId);
+	}
+
 
 }

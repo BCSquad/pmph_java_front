@@ -89,7 +89,7 @@ textarea{
 .message-input{
     position: relative;
     width: 1200px;
-    height: 520px
+    height: 620px;
 }
 .message-list .message-input .tip{
     margin-left: 32px;
