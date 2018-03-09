@@ -253,4 +253,7 @@ public interface PersonalService {
 	//查询评论并删除 
 	public Long getCommentBycid(Long id);
 
+	//查询当前用户是否参加过调查问卷
+	List<Map<String,Object>> whetherSurvey(PageParameter pageParameter);
+
 }
