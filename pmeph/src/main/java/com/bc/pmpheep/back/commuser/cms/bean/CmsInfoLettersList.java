@@ -75,7 +75,19 @@ public class CmsInfoLettersList {
      * 内容id
      */
     private String mid;
+    /**
+     * cms类型id
+     */
+    private int categoryId;
     
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
+
 	public Timestamp getGmtCreate() {
 		return gmtCreate;
 	}

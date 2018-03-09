@@ -63,6 +63,7 @@
 		end) avatar,
 		u.gmt_update ,
 		u.material_id,
+	    (select cc.id from cms_content cc where cc.material_id=u.material_id and cc.is_material_entry=1) as cmsid,
 		u.is_read+'' is_read,
 		u.sender_id
 		FROM
@@ -201,7 +202,7 @@
 		ON a.`material_id` = m.`id`
 		LEFT JOIN material_extra e
 		ON m.`id` = e.`material_id`
-		WHERE a.`id`=#{cmsId} 
+		WHERE a.`material_id`=#{materialId}
 	</select>
 	
 	<!-- 查询教材备注相关的附件 -->
@@ -255,7 +256,7 @@
 						ELSE '系统'
 						END
 					) realname
-					
+					,a.receiver_id,a.receiver_type
 				FROM
 					user_message a
 				LEFT JOIN pmph_user s1 ON a.sender_id = s1.id

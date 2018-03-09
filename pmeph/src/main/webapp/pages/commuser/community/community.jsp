@@ -27,7 +27,11 @@ String contextpath=request.getContextPath();
     <script src="<%=path%>/resources/comm/base.js"></script>
     <script src="<%=path%>/resources/commuser/community/community.js"></script>
 </head>
-
+<style type="text/css">
+  .lastest{
+     background:url(${ctx}/statics/image/css_sprites.png) -45px -212px;
+  }
+</style>
 <body>
       <jsp:include page="/pages/comm/head.jsp"></jsp:include> 
        <div class="content-wrapper">
@@ -43,14 +47,24 @@ String contextpath=request.getContextPath();
                 </div>
                 <div class="center">
                      <ul style="list-style:none;">
-                        <c:forEach items="${reportlist}" var="report">
+                        <c:forEach items="${reportlist}"  var="report"  varStatus="status">
 		                        <li>
 		                                <div>
 		                                <div class="tag">&gt;</div>
-		                                <a href="inforeport/toinforeport.action?id=${report.id }&&materialId=${notice.material_id }">
-		                                    <div class="inleft">${report.title}</div>
-		                                    <div style="float: left;width: 29px;height: 15px;background-image: url(${ctx}/statics/image/css_sprites.png); background-position: -45px -212px;margin: 10px;back"></div>
-		                                </a>
+		                                <c:choose>
+		                                  <c:when test="${report.category_id==1 }">
+			                                   <a href="articledetail/toPage.action?wid=${report.id }&&materialId=${notice.material_id }">  
+		                                  </c:when>
+		                                  <c:when test="${report.category_id==2 }">
+		                                       <a href="inforeport/toinforeport.action?id=${report.id }&&materialId=${notice.material_id }">
+		                                  </c:when>
+		                                  <c:otherwise>
+		                                       <a href="cmsnotice/noticeMessageDetail.action?id=${notice.mid }&&materialId=${notice.material_id }&&csmId=${report.id }">
+		                                  </c:otherwise>
+		                                </c:choose> 
+		                                       <div class="inleft">${report.title}</div>
+		                                        <div class="${status.index==1 || status.index==0? 'lastest':''}" style="float: left;width: 29px;height: 15px;margin: 10px;back"></div>  
+			                                   </a>    
 		                                <div class="inright" >
 		         
 		                                <fmt:formatDate value="${report.gmt_create }" pattern="yyyy-MM-dd"/>

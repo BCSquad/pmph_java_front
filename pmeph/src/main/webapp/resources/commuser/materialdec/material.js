@@ -5,6 +5,7 @@ jsonStr = "{\"id\":\"realname\",\"content\":\"姓名不能为空\"},{\"id\":\"bi
 "{\"id\":\"zc\",\"content\":\"职称不能为空\"},{\"id\":\"address\",\"content\":\"地址不能为空\"},{\"id\":\"email\",\"content\":\"邮箱不能为空\"},"+
 "{\"id\":\"handphone\",\"content\":\"手机号码不能为空\"},{\"id\":\"zjlx\",\"content\":\"证件类型不能为空\"},{\"id\":\"idcard\",\"content\":\"证件号码不能为空\"},{\"id\":\"sbdw_name\",\"content\":\"申报单位不能为空\"},";
 $(function () {
+    setTimer();
 	var id = $("#material_id").val();
 	upload("1"); //附件上传
 	queryMaterialMap(id);  //执行查询方法
@@ -770,10 +771,10 @@ function buttAdd(type){
             url:contextpath+'material/doMaterialAdd.action?sjump=1&type='+type,
             data:$('#objForm').serialize(),// 你的formid
             async: false,
-            success: function(msg) {
-                if(msg=='OK'){
+            success: function (json) {
+                if (json.msg == 'OK') {
                     window.message.success("操作成功,正在跳转页面");
-                    window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=jcsb";
+                    window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
                 }
             }
         });
@@ -792,8 +793,8 @@ function buttAdd(type){
                 data: $('#objForm').serialize(),// 你的formid
                 async: false,
                 dataType: "json",
-                success: function (msg) {
-                    if (msg == 'OK') {
+                success: function (json) {
+                    if (json.msg == 'OK') {
                         window.message.success("操作成功,正在跳转页面");
                         window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
                     }
@@ -1000,13 +1001,13 @@ function setTimer(){
     window.setInterval(function(){
         $.ajax({
             type: "POST",
-            url:contextpath+'material/doMaterialAdd.action?sjump=1&type='+type,
+            url:contextpath+'material/doMaterialAdd.action?sjump=1&type=2',
             data:$('#objForm').serialize(),// 你的formid
             async: false,
-            success: function(msg) {
-                if(msg=='OK'){
-                    window.message.success("操作成功,正在跳转页面");
-                    window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=jcsb";
+            success: function(json) {
+            	$('#declaration_id').val(json.declaration_id);
+                if(json.msg=='OK'){
+                    window.message.success("自动暂存成功！");
                 }
             }
         });

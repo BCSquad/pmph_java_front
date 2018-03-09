@@ -14,9 +14,12 @@
 		LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
 		WHERE
 		cc.is_deleted = 0
-		AND ccg.category_name = '快报管理'
+		<if test="materialId==null">
+		  AND ccg.id = 2
+		</if>
 		<if test="materialId!=null">
 		    and material_id=#{materialId}
+		    AND ccg.id in (1,2)
 		</if>
 	</select>
 
@@ -29,9 +32,12 @@
 		LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
 		WHERE
 		cc.is_deleted = 0
-		AND ccg.category_name = '快报管理'
+		<if test="materialId==null">
+		  AND ccg.id = 2
+		</if>
 		<if test="materialId!=null">
 		    and material_id=#{materialId}
+		    AND ccg.id in (1,2)
 		</if>
 		ORDER BY
 		<if test="order == 1">

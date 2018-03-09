@@ -1,7 +1,11 @@
 package com.bc.pmpheep.back.commuser.survey.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.collections.MapUtils;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface SurveyService {
 	
@@ -25,6 +29,7 @@ public interface SurveyService {
 	
 	//获取调查基本信息
 	Map<String, Object> getSurveyBaseInfo(long surveyId);
-
+	//填写问卷增加积分
+    public void insertUserScores(Map<String, Object> info);
 
 }

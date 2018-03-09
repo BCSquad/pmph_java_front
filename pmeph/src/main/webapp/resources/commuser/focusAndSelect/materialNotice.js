@@ -10,7 +10,7 @@ function ChangeDiv(type){
 	        document.getElementById("infoReport").setAttribute("class","clickbefore");
 	        //document.getElementById("commnions").setAttribute("class","hidden");
 	        //document.getElementById("filesgx").setAttribute("class","show");
-	        window.location.href=contxtpath+"/cmsnotice/tolist.action"; 
+	        window.location.href=contxtpath+"/cmsnotice/tolist.action?materialId="+$("#materialId").val(); 
 	    }
 
 
@@ -43,6 +43,7 @@ $(function(){
 	});
 	
 	function loadData(){
+		
 		$.ajax({
 	        type:'get',
 	        url :contxtpath+'/cmsnotice/list.action',
@@ -52,7 +53,8 @@ $(function(){
 	        data:{
 	        	pageNumber : pageNumber,
 	        	pageSize   : pageSize,
-	        	order      : order
+	        	order      : order,
+	        	materialId:$("#materialId").val()
 	        },
 	        success:function(responsebean){
 	        	if(null != responsebean && responsebean.length >= 0){

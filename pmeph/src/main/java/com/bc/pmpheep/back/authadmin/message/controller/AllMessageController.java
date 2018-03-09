@@ -3,6 +3,7 @@
  */
 package com.bc.pmpheep.back.authadmin.message.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -52,15 +54,30 @@ public class AllMessageController extends BaseController {
 	 */
 	
 	@RequestMapping("/init")
-	public ModelAndView init(){
+	public ModelAndView init(@RequestParam(value="tag",defaultValue="receive")String tag){
 		Map<String,Object> param = this.getUserInfo();
 		param.put("startPara",0);
-		List<Map<String,Object>> list1 = allMessageServiceImpl.getAllMessageInit(param);
+		List<Map<String,Object>> list1 = new ArrayList<Map<String,Object>>();
+		if ("receive".equals(tag)) {
+			list1 = allMessageServiceImpl.getAllMessageInit(param);
+		}else if ("send".equals(tag)) {
+			list1 = allMessageServiceImpl.getSendMessage(param);
+		}else{
+			list1 = allMessageServiceImpl.getAllMessageInit(param);
+		}
+		
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		resultMap.put("list", list1);
 		resultMap.put("listSize", list1.size());
-		return new ModelAndView("/authadmin/message/organizationAllMessage",resultMap);
 		
+		if ("receive".equals(tag)) {
+			return new ModelAndView("/authadmin/message/organizationAllMessage",resultMap);
+		}else if ("send".equals(tag)) {
+			return new ModelAndView("/authadmin/message/organizationSentMessage",resultMap);
+		}else{
+			return new ModelAndView("/authadmin/message/organizationAllMessage",resultMap);
+		}
+
 	}
 	
 	/**
@@ -72,7 +89,7 @@ public class AllMessageController extends BaseController {
 	 */
 	@RequestMapping(value="/loadMore",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> loadMore(HttpServletRequest request){
+	public Map<String,Object> loadMore(HttpServletRequest request,@RequestParam(value="tag",defaultValue="receive")String tag){
 		Map<String,Object> param = this.getUserInfo();
 		String para=request.getParameter("startPara");
 		int startPara=0;
@@ -84,7 +101,15 @@ public class AllMessageController extends BaseController {
 			startPara=8;
 			param.put("startPara",startPara);
 		}
-		List<Map<String,Object>> list1 = allMessageServiceImpl.getAllMessageInit(param);
+		List<Map<String,Object>> list1 = new ArrayList<Map<String,Object>>();
+		if ("receive".equals(tag)) {
+			list1 =	allMessageServiceImpl.getAllMessageInit(param);
+		}else if ("send".equals(tag)) {
+			list1 =	allMessageServiceImpl.getSendMessage(param);
+		}else{
+			list1 =	allMessageServiceImpl.getAllMessageInit(param);
+		}
+
 		resultMap.put("list", list1);
 		resultMap.put("listSize", list1.size());
 		return resultMap;

@@ -308,7 +308,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
     }
 
     @Override
-    public String insertJcsbxx(Map<String, Object> perMap,
+    public Map<String,Object> insertJcsbxx(Map<String, Object> perMap,
                                List<Map<String, Object>> tssbList,
                                List<Map<String, Object>> stuList,
                                List<Map<String, Object>> workList,
@@ -334,28 +334,33 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //查询上面新增的申报表ID
         List<Map<String, Object>> perList = this.madd.queryPerson(perMap);
         Object declaration_id = perList.get(0).get("id");
-        //2.职位新增
-        if (tssbList != null && !tssbList.isEmpty()) {
-            for (Map<String, Object> map : tssbList) {
-                map.put("declaration_id", declaration_id);
-                if (perMap.get("type").equals("1")) { //提交
-                    this.madd.insertTsxz(map);
-                    if (perMap.get("org_id").equals("0")) {
-                        messageService.sendNewMsgWriterToPublisher(MapUtils.getLong(perMap, "material_id"), MapUtils.getString(perMap, "realname"), MapUtils.getString(perMap, "materialName"));
-                    } else {
-                        messageService.sendNewMsgWriterToOrg(MapUtils.getLong(perMap, "org_id"), MapUtils.getString(perMap, "realname"), MapUtils.getString(perMap, "materialName"));
-                    }
-                    //若申报材料提交 则根据填写的专家信息对应更新个人资料，
-                    //若申报单位在未进行教师认证之前需要更新个人的所属机构（选择人卫出版社不能更新个人所属机构）
-                    if (perMap.get("org_id").equals("0")||perMap.get("is_teacher").equals("1")) { //表示人卫出版社或者已经进行教师认证  则不更新个人所属机构
-                        perMap.put("org_id", null);
-                    }
-                    if(!perMap.get("idtype").equals("0")){ //证件类型不为身份证
-                        perMap.put("idcard","");
-                    }
-                    this.madd.updateWriter(perMap);
 
-                } else { //暂存
+        //2.职位新增
+        if (perMap.get("type").equals("1")) { //提交
+            if (tssbList != null && !tssbList.isEmpty()) {
+                for (Map<String, Object> map : tssbList) {
+                    map.put("declaration_id", declaration_id);
+                    this.madd.insertTsxz(map);
+                }
+            }
+            if (perMap.get("org_id").equals("0")) {
+                messageService.sendNewMsgWriterToPublisher(MapUtils.getLong(perMap, "material_id"), MapUtils.getString(perMap, "realname"), MapUtils.getString(perMap, "materialName"));
+            } else {
+                messageService.sendNewMsgWriterToOrg(MapUtils.getLong(perMap, "org_id"), MapUtils.getString(perMap, "realname"), MapUtils.getString(perMap, "materialName"));
+            }
+            //若申报材料提交 则根据填写的专家信息对应更新个人资料，
+            //若申报单位在未进行教师认证之前需要更新个人的所属机构（选择人卫出版社不能更新个人所属机构）
+            if (perMap.get("org_id").equals("0") || perMap.get("is_teacher").toString().equals("true")) { //表示人卫出版社或者已经进行教师认证  则不更新个人所属机构
+                perMap.put("org_id", null);
+            }
+            if (!perMap.get("idtype").equals("0")) { //证件类型不为身份证
+                perMap.put("idcard", "");
+            }
+            this.madd.updateWriter(perMap);
+        } else { //暂存
+            if (tssbList != null && !tssbList.isEmpty()) {
+                for (Map<String, Object> map : tssbList) {
+                    map.put("declaration_id", declaration_id);
                     this.madd.insertTssbZc(map);
                 }
             }
@@ -487,11 +492,14 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             intentionlMap.put("declaration_id", declaration_id);
             this.madd.insertIntention(intentionlMap);
         }
-        return "OK";
+        Map<String,Object> returnMap = new HashMap<String,Object>();
+        returnMap.put("msg","OK");
+        returnMap.put("declaration_id",declaration_id);
+        return returnMap;
     }
 
     @Override
-    public String updateJcsbxx(Map<String, Object> perMap,
+    public Map<String,Object> updateJcsbxx(Map<String, Object> perMap,
                                List<Map<String, Object>> tssbList,
                                List<Map<String, Object>> stuList,
                                List<Map<String, Object>> workList, String declaration_id,
@@ -523,7 +531,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             }
             //若申报材料提交 则根据填写的专家信息对应更新个人资料，
             //若申报单位在未进行教师认证之前需要更新个人的所属机构（选择人卫出版社不能更新个人所属机构）
-            if (perMap.get("org_id").equals("0")||perMap.get("is_teacher").equals("1")) { //表示人卫出版社或者已经进行教师认证  则不更新个人所属机构
+            if (perMap.get("org_id").equals("0")||perMap.get("is_teacher").toString().equals("true")) { //表示人卫出版社或者已经进行教师认证  则不更新个人所属机构
                 perMap.put("org_id", null);
             }
             if(!perMap.get("idtype").equals("0")){ //证件类型不为身份证
@@ -692,7 +700,10 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             intentionlMap.put("declaration_id", declaration_id);
             this.madd.updateIntention(intentionlMap);
         }
-        return "OK";
+        Map<String,Object> returnMap = new HashMap<String,Object>();
+        returnMap.put("msg","OK");
+        returnMap.put("declaration_id",declaration_id);
+        return returnMap;
     }
 
     @Override

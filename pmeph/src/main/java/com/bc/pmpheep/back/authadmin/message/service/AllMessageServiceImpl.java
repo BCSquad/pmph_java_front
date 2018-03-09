@@ -88,4 +88,27 @@ public class AllMessageServiceImpl implements AllMessageService {
 
         return messages;
     }
+    
+    @Override
+	public List<Map<String, Object>> getSendMessage(Map<String, Object> param) {
+    	List<Map<String, Object>> messages = allMessageDao.getSendMessage(param);
+        List<String> ids = new ArrayList<String>();
+        Map<String, Map<String, Object>> map = new HashMap<String, Map<String, Object>>();
+        for (Map<String, Object> message : messages) {
+            ids.add(MapUtils.getString(message, "msg_id"));
+            map.put(MapUtils.getString(message, "msg_id"), message);
+            message.put("avatar", RouteUtil.userAvatar(MapUtils.getString(message, "avatar")));
+        }
+
+        for (Message message : messageService.list(ids)) {
+            String str = message.getContent();
+            String regEx_html = "<[^>]+>"; //定义HTML标签的正则表达式
+            Pattern p_html = Pattern.compile(regEx_html, Pattern.CASE_INSENSITIVE);
+            Matcher m_html = p_html.matcher(str);
+            str = m_html.replaceAll(""); //过滤html标签
+            map.get(message.getId()).put("msg_content",str );
+        }
+
+        return messages;
+	}
 }

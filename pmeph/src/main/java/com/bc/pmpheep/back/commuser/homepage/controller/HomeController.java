@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.homepage.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -42,7 +43,7 @@ public class HomeController extends BaseController{
 	private ArticleSearchService articleSearchService;
 
     @RequestMapping("/tohomepage")
-    public ModelAndView move(HttpServletRequest request) {
+    public ModelAndView move(HttpServletRequest request)throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         int flag = 0;
         Map<String, Object> user=getUserInfo();
@@ -285,7 +286,7 @@ public class HomeController extends BaseController{
      */
     @RequestMapping("changesale")
     @ResponseBody
-    public Map<String, Object> changesale(HttpServletRequest request) {
+    public Map<String, Object> changesale(HttpServletRequest request) throws UnsupportedEncodingException{
         Map<String, Object> map = new HashMap<String, Object>();
         String type = request.getParameter("type");
         List<Map<String, Object>> listSal = homeService.querySale(Integer.parseInt(type));
