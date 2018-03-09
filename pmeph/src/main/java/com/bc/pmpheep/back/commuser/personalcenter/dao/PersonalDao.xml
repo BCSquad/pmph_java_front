@@ -69,7 +69,7 @@
 		SELECT
 		c.group_id,c.group_name,c.group_image,d.grouppeo from (select
 		a.group_id,b.group_name,b.group_image from pmph_group_member a left
-		join pmph_group b on a.group_id=b.id WHERE a.user_id=#{id} ) c left
+		join pmph_group b on a.group_id=b.id WHERE a.user_id=#{id} and a.is_writer=1 and a.is_deleted=0 ) c left
 		JOIN
 		(select a.group_id,b.group_name,b.group_image,COUNT(b.group_name )
 		AS

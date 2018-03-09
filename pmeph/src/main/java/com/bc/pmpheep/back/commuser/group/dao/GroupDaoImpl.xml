@@ -409,7 +409,7 @@
 	<!-- 查询小组成员角色-->
 	<select id="memberRole" parameterType="java.util.Map" resultType="java.util.Map">
 		select * from pmph_group_member t1
-		 where t1.group_id = #{group_id} and t1.user_id = #{user_id} 
+		 where t1.group_id = #{group_id} and t1.user_id = #{user_id} and is_writer=1
 	</select>
 	<!-- 查询成员总数 -->
 	<select id="countMember" parameterType="java.util.Map" resultType="java.lang.Integer">
