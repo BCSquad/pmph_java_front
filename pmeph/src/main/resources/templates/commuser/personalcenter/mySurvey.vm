@@ -1,7 +1,7 @@
 
 <link rel="stylesheet" href="$!{contextpath}statics/commuser/personalcenter/mySurvey.css" type="text/css">
 <script src="$!{contextpath}resources/commuser/personalcenter/mySurvey.js"></script>
-
+<input type="hidden" class="queryCondition" id="user_id" value="$!{user_id}">
 
 <div class="blank_space"></div>
 <div class="listContent">

@@ -736,9 +736,8 @@
 		SELECT comments from book_user_comment buc LEFT JOIN book b ON buc.book_id=b.id WHERE  buc.id= #{id} GROUP BY buc.id 
 	</select>
 	
-	<!-- 我的问卷 -->
-	<select id="mySurvey" parameterType="PageParameter" resultType="java.util.Map">
-		select s.id,s.title, DATE_FORMAT(s.begin_date,'%Y年%m月%d日') as gtime
+
+		<!--select s.id,s.title, DATE_FORMAT(s.begin_date,'%Y年%m月%d日') as gtime
 		from survey s
 		left JOIN survey_target st ON st.survey_id=s.id
 		LEFT JOIN
@@ -760,18 +759,27 @@
 		ORDER BY
 		s.begin_date DESC
 		limit ${start},${pageSize}
-
-		<!-- select s.*, DATE_FORMAT(s.begin_date,'%Y年%m月%d日') as gtime from survey 
+		 select s.*, DATE_FORMAT(s.begin_date,'%Y年%m月%d日') as gtime from survey
 			s left JOIN survey_target st ON st.survey_id=s.id LEFT JOIN writer_user wu 
 			on wu.org_id=st.org_id where s.`status`=1 and s.is_deleted=0 and wu.id=#{parameter.logUserId} 
 			AND #{parameter.dateStr} &gt;= s.`begin_date` AND (#{parameter.dateStr} &lt;= 
 			s.`end_date`+1 or ()) ORDER BY s.begin_date DESC limit ${start},${pageSize} -->
+
+	<!-- 我的问卷 -->
+	<select id="whetherSurvey" parameterType="PageParameter" resultType="java.util.Map">
+		<!--替换之前的SQL，现在个人中心-我的问卷只需要展示当前用户参加过的文件卷即可-->
+		<!--查询用户是否参加过调查问卷-->
+		select distinct(survey_id) from survey_question_answer where user_id=#{parameter.logUserId}
+		limit ${start},${pageSize}
 	</select>
 
-	<!-- 我的问卷总数 -->
-	<select id="mySurveyCount" parameterType="PageParameter"
-		resultType="int">
-		select count(distinct s.id) from survey s
+	<!--查询用户参加过的调查问卷-->
+	<select id="joinSurvey" parameterType="java.util.Map" resultType="java.util.Map">
+		select * from survey where id=#{id}
+	</select>
+
+
+		<!--select count(distinct s.id) from survey s
 		left JOIN survey_target st
 		ON
 		st.survey_id=s.id
@@ -790,8 +798,13 @@
 		DATE_ADD(s.`end_date`,INTERVAL 1 DAY))
 		)
 
-		<!-- select count(*) from survey s LEFT JOIN survey_question_answer a on 
+		select count(*) from survey s LEFT JOIN survey_question_answer a on
 			s.id=a.survey_id where a.user_id=#{parameter.logUserId} -->
+
+	<!-- 我的问卷总数 -->
+	<select id="mySurveyCount" parameterType="PageParameter"
+			resultType="int">
+		select count(id)  from survey_question_answer where user_id=#{parameter.logUserId}
 	</select>
 
 	<!-- 查询单个调查对应的问题 -->
