@@ -36,9 +36,10 @@
     <div class="content-wrapper">
         <div class="area-1">
             <div class="banner">
+                <!--广告轮播区域-->
                 <div class="move" id="move">
                     <ul>
-                        <c:forEach var="ad" items="${adInfo1.detail}">
+                        <c:forEach var="ad" items="${adInfo1.detailList}">
                             <li><img src="${ctx}/image/${ad.image}.action" style="width: 922px; height: 380px"/></li>
                         </c:forEach>
                     </ul>
@@ -112,6 +113,7 @@
                     </div>
                 </div>
             </div>
+        </div>
             <div class="notice area-2">
                 <div class="title" style="float: left">
                     <div class="line bgcolor-blue" style="float: left"></div>

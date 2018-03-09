@@ -72,8 +72,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<c:if test="${progress.onlineProgress=='1'||progress.onlineProgress=='0'||progress.onlineProgress=='2'||progress.onlineProgress=='5'}">
 									<div class="img_mid">
 										<div class="picture_mid1"></div>
-										<div class="picture_bom" style="color: #999999;    margin-left: 0;">
-											<span class="span_bom_left">申报单位未审核</span>
+										<div class="picture_bom" style="  margin-left: 0;">
+											<span class="span_bom_left" style="color: #999999;  ">申报单位未审核</span>
 										</div>
 									</div>
 								</c:if>
