@@ -82,6 +82,7 @@ public class MyFriendController extends com.bc.pmpheep.general.controller.BaseCo
             int remainCount = myFriendService.listMyFriendCount(groupId,writerUser, startrow+listFriends.size());
             model.setViewName(pageUrl);
             model.addObject("row", startrow);
+            model.addObject("userid", writerUserMap.get("id"));
             model.addObject("id", writerUser.getId());
             model.addObject("realname", writerUserMap.get("realname").toString());
             model.addObject("more", listFriends.size());
