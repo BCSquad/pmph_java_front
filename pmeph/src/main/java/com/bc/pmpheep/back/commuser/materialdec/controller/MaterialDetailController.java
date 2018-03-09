@@ -119,7 +119,7 @@ public class MaterialDetailController extends BaseController{
 	 */
 	@RequestMapping("doMaterialAdd")
 	@ResponseBody
-	public String doMaterialAdd(HttpServletRequest request,
+	public Map<String,Object> doMaterialAdd(HttpServletRequest request,
 			HttpServletResponse response){
 		//公共参数
 		Map<String,Object> userMap =  this.getUserInfo();
@@ -551,10 +551,11 @@ public class MaterialDetailController extends BaseController{
 		//编写内容意向表
 		String intention_content = request.getParameter("intention_content");
 		intentionlMap.put("content", intention_content);
-		if(sjump.equals("1")){//表示从新增页面跳转来的
-			msg = this.mdService.insertJcsbxx(perMap, tssbList, stuList, workList, steaList, zjxsList, jcbjList, gjkcjsList, gjghjcList, jcbxList, zjkyList, zjkzqkList, achievementMap, monographList, publishList, sciList, clinicalList, acadeList, pmphList, digitalMap, intentionlMap);
+        Map<String,Object> returnMap =  new HashMap<String,Object>();
+		if(declaration_id == null || declaration_id.length() <= 0){//表示新增
+            returnMap = this.mdService.insertJcsbxx(perMap, tssbList, stuList, workList, steaList, zjxsList, jcbjList, gjkcjsList, gjghjcList, jcbxList, zjkyList, zjkzqkList, achievementMap, monographList, publishList, sciList, clinicalList, acadeList, pmphList, digitalMap, intentionlMap);
 		}else{
-			msg=this.mdService.updateJcsbxx(perMap, tssbList, stuList, workList, declaration_id, steaList, zjxsList, jcbjList, gjkcjsList, gjghjcList, jcbxList, zjkyList, zjkzqkList, achievementMap, monographList, publishList, sciList, clinicalList, acadeList, pmphList, digitalMap, intentionlMap);
+            returnMap=this.mdService.updateJcsbxx(perMap, tssbList, stuList, workList, declaration_id, steaList, zjxsList, jcbjList, gjkcjsList, gjghjcList, jcbxList, zjkyList, zjkzqkList, achievementMap, monographList, publishList, sciList, clinicalList, acadeList, pmphList, digitalMap, intentionlMap);
 		}
 		
 		if(type.equals("1")){ //提交
@@ -565,8 +566,8 @@ public class MaterialDetailController extends BaseController{
 			personalService.saveUserTrendst(wut);//教材申报提交 生成动态 被覆盖两次了
 		}
 		
-		
-		return msg;
+
+		return returnMap;
 	}
 
 	/**

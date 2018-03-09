@@ -35,6 +35,7 @@
 			<div>
 				<input type="hidden" id="select_nr" value="${bookSelects}"/>
 				<input type="hidden" id="material_id" name="material_id" value="${materialMap.id}"/>
+				<input type="hidden" id="declaration_id" name="declaration_id" value=""/>
 				<!-- 是否编委 -->
 				<input type="hidden" id="sfbw" name="sfbw" value="${materialMap.is_digital_editor_optional}"/>
 				<!-- 是否书籍多选 -->
@@ -332,7 +333,7 @@
 					<input type="hidden" name="extension_id" value="${zjkzxx.id}"/>
 				</div>
 				<div class="content">
-					<textarea class="text_cl" id="${zjkzxx.is_required}_${status.count}" name="kz_content"></textarea>
+					<textarea class="text_cl" id="${zjkzxx.is_required}_${status.count}" name="kz_content" maxlength="1000"></textarea>
 					<input type="hidden" name="zjkzxx" value="${zjkzxx.is_required}_${status.count}"/>
 				</div>
 			</div>
