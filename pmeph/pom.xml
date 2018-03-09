@@ -62,7 +62,7 @@
         <!--poi -->
         <poi.ver>3.17</poi.ver>
         <!--ueditor -->
-        <ueditor.ver>1.1.2-offical</ueditor.ver>
+        <ueditor.ver>1.1.2-edit-1.0</ueditor.ver>
     </properties>
     <dependencies>
         <dependency>
