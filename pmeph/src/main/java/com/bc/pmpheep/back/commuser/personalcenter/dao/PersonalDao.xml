@@ -111,13 +111,13 @@
 		,cc.auth_status
 		,cc.is_staging
 		,
-		case
+		<!-- case
 		when cc.gmt_update = '0000-00-00 00:00:00'
-		then
+		then -->
 		DATE_FORMAT(cc.gmt_create,'%Y-%m-%d %H:%i')
-		else
+		<!-- else
 		DATE_FORMAT(cc.gmt_update,'%Y-%m-%d %H:%i')
-		end as gmt_update
+		end --> as gmt_update
 		, '2'
 		msg_type
 		from cms_content cc
