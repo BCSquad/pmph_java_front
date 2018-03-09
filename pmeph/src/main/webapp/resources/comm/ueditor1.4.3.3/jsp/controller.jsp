@@ -13,7 +13,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%
 
-    String serverAddress = "http://120.76.221.250/v/image/";
+    String serverAddress = "http://120.76.221.250/";
 
     request.setCharacterEncoding("utf-8");
     response.setHeader("Content-Type", "text/html");
@@ -36,18 +36,18 @@
                 String url = MapUtils.getString(item, "url", "");
                 String id = fileService.saveLocalFile(Thread.currentThread().getContextClassLoader().getResourceAsStream("../../" + url), FileType.CMS_ATTACHMENT, 0);
 
-                item.put("url", serverAddress + id);
+                item.put("url", "/v/image/" + id);
             }
         } else if (action.equals("uploadimage") || action.equals("uploadscrawl")) {//uploadscrawl 涂鸦图片 uploadimage 上传图片
             String url = MapUtils.getString(resultMap, "url", "");
             String id = fileService.saveLocalFile(Thread.currentThread().getContextClassLoader().getResourceAsStream("../../" + url), FileType.CMS_ATTACHMENT, 0);
 
-            resultMap.put("url", serverAddress + id);
+            resultMap.put("url", "/v/image/" + id);
         } else if (action.equals("uploadfile")) {
             String url = MapUtils.getString(resultMap, "url", "");
             String id = fileService.saveLocalFile(Thread.currentThread().getContextClassLoader().getResourceAsStream("../../" + url),
                     FileType.CMS_ATTACHMENT, MapUtils.getString(resultMap, "original", ""), 0);
-            resultMap.put("url", serverAddress + id);
+            resultMap.put("url", "/pmpheep/file/download/" + id);
         } else {
 
             if (action != null &&

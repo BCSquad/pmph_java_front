@@ -9,6 +9,8 @@ import com.bc.pmpheep.back.commuser.personalcenter.bean.PersonalNewMessage;
 import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
 import com.bc.pmpheep.back.plugin.PageParameter;
 
+import javax.swing.*;
+
 public interface PersonalDao {
 
 	public List<PersonalNewMessage> ListMyConlection(Map<String, Object> permap);
@@ -252,5 +254,11 @@ public interface PersonalDao {
 	Long getCommentBycid(@Param("id") Long id);
 	
 	void updateDownComments(@Param("id") Long id);
+
+	//查询用户参加过的问卷
+	Map<String,Object> joinSurvey(@Param("id") String id);
+
+	//查询当前用户是否参加过调查问卷
+	List<Map<String,Object>> whetherSurvey(PageParameter pageParameter );
 
 }

@@ -218,4 +218,17 @@
 	<update id="changeClicks" parameterType="java.util.Map">
 	    update book set clicks=#{clicks} where id=#{book_id}
 	</update>
+	
+		<!-- 查询我的长评 -->
+	<select id="queryMyLong" parameterType="java.util.Map" resultType="java.util.Map">
+	    select * from book_user_comment where  book_id=#{book_id} and is_long=1 and id=#{id}
+	</select>
+	
+	<!-- 我的长评修改 -->
+	<update id="updateCommentLong" parameterType="java.util.Map">
+		UPDATE
+		book_user_comment AS bc SET bc.score=#{score},bc.content=#{content},bc.title=#{title} where
+		id=#{id} and bc.is_long =1 and bc.is_auth = 0
+	</update>
+	
 </mapper>

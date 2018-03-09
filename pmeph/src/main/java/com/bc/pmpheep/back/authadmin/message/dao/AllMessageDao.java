@@ -37,5 +37,12 @@ public interface AllMessageDao {
 	 * @return
 	 */
 	public int deletemsg(@Param("mid") String mid);
+	
+	/**
+	 * 获取机构用户发送的消息
+	 * @param param
+	 * @return
+	 */
+	public List<Map<String, Object>> getSendMessage(Map<String, Object> param);
 
 }

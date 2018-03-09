@@ -34,4 +34,11 @@ public interface AllMessageService {
 	 * @param string
 	 */
 	public int deletemsg(String mid);
+	
+	/**
+	 * 获取机构用户全部发送的消息
+	 * @param param
+	 * @return
+	 */
+	List<Map<String, Object>> getSendMessage(Map<String, Object> param);
 }

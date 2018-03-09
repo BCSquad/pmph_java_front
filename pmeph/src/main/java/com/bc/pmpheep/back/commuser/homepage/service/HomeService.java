@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.homepage.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +25,7 @@ public interface HomeService {
      * @return List<HomepageDocument>
      * @Description: 查询最新四条医学随笔
      */
-    List<Map<String, Object>> queryArticle(int endrow);
+    List<Map<String, Object>> queryArticle(int endrow) throws Exception;
 
     /**
      * @param logUserId 
@@ -37,7 +38,7 @@ public interface HomeService {
      * @return List<Map<String, Object>>
      * @Description: 查询点击人数最多的书评
      */
-    List<Map<String, Object>> queryComment();
+    List<Map<String, Object>> queryComment() throws UnsupportedEncodingException;
 
     /**
      * @return List<Map<String, Object>>
@@ -49,7 +50,7 @@ public interface HomeService {
      * @return List<Map<String, Object>>
      * @Description: 查询销量最高的书籍
      */
-    List<Map<String, Object>> querySale(int type);
+    List<Map<String, Object>> querySale(int type) throws UnsupportedEncodingException;
 
     /**
      * @return List<Map<String, Object>>
@@ -98,5 +99,12 @@ public interface HomeService {
      * @return
      */
     List<Map<String, Object>> queryNotReadMessages(String id);
+
+    /**
+     * 超出部分省略号显示
+     * @param content
+     * @return
+     */
+    String omit(String content,int length) throws UnsupportedEncodingException;
 
 }
