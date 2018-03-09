@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.readpage.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.PUT;
 
+import com.bc.pmpheep.back.commuser.homepage.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -35,9 +37,9 @@ import com.bc.pmpheep.general.service.SensitiveService;
 @RequestMapping("readdetail")
 public class ReadDetailController extends BaseController{
 
-	@Autowired
-	@Qualifier("com.bc.pmpheep.back.commuser.readpage.service.ReadDetaiServicelImpl")
-	private ReadDetailService readDetailService;
+	 @Autowired
+	 @Qualifier("com.bc.pmpheep.back.commuser.readpage.service.ReadDetaiServicelImpl")
+	 private ReadDetailService readDetailService;
 	 @Autowired
 	 @Qualifier("com.bc.pmpheep.back.commuser.collection.service.BookCollectionServiceImpl")
 	 private BookCollectionService bookCollectionService;
@@ -45,8 +47,11 @@ public class ReadDetailController extends BaseController{
 	 @Qualifier("com.bc.pmpheep.back.commuser.book.service.BookServiceImpl")
 	 private BookService bookService;
 	 @Autowired
-	@Qualifier("com.bc.pmpheep.general.service.SensitiveService")
+	 @Qualifier("com.bc.pmpheep.general.service.SensitiveService")
 	 private SensitiveService sensitiveService;
+	 @Autowired
+	 @Qualifier("com.bc.pmpheep.back.homepage.service.HomeServiceImpl")
+	 private HomeService homeService;
 	 
 	 
 	/**
@@ -55,10 +60,17 @@ public class ReadDetailController extends BaseController{
 	 * @return modelAndView
 	 */
 	@RequestMapping("/todetail")
-	public ModelAndView move(HttpServletRequest request){
+	public ModelAndView move(HttpServletRequest request) throws Exception {
 		ModelAndView modelAndView=new ModelAndView();
 		String id=request.getParameter("id");
 		Map<String, Object> supMap=readDetailService.querySupport(id);
+		if(supMap!=null){
+			String detail=supMap.get("detail").toString();
+			if(!detail.equals(null)){
+				String returndetail=homeService.omit(detail,80);
+				supMap.put("detail",returndetail);
+			}
+		}
 		Map<String, Object> map=readDetailService.queryReadBook(id);
 		String urlString=(String)map.get("pdf_url");
 		System.out.print(urlString);
