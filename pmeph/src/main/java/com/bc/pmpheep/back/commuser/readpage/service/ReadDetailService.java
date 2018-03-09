@@ -131,4 +131,17 @@ public interface ReadDetailService {
 	 * @return List<Map<String, Object>>
 	 */
 	List<Map<String, Object>> queryVideo(String book_id);
+	
+	/**
+	 * 查询我的长评
+	 *
+	 */
+	Map<String, Object> queryMyLong(String book_id,String id);
+	
+	/**
+	 * 我的长评论修改
+	 * 
+	 * @param map
+	 */
+	Map<String, Object> updateCommentLong(Map<String, Object> map);
 }

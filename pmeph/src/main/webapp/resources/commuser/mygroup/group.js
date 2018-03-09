@@ -38,6 +38,9 @@ $(function(){
     } catch (e) {
 
     }
+    if(!webSocket){
+
+	}
 
 	//var webSocket = new WebSocket("ws:127.0.0.1:8036/pmpheep/websocket?userType=" +2+"&userId="+$("#userId").val());
     if (webSocket) {

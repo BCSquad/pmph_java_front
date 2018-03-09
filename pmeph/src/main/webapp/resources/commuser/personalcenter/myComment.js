@@ -72,7 +72,7 @@ $(document).ready(function () {
 function showup(id,book_id,is_long) {
 	
 	if(is_long=='true'){
-		window.location.href=contextpath + 'readdetail/todetail.action?state=write&id='+book_id;
+		window.location.href=contextpath+'readdetail/todetail.action?state=write&id='+book_id+'&comm_id='+id;
 	}else if(is_long=='false'){
 		$("#comm_id").val(id);
 		$.ajax({

@@ -153,6 +153,13 @@ function queryBtnClick(){
 }
 
 
+//导出word
+
+function exportWord() {
+//	window.location.href = contextpath+ 'word/declaration.action?selectedIds=' + selectedIds.toString();
+}
+
+
 //导出excel
 
 function exportExcel() {

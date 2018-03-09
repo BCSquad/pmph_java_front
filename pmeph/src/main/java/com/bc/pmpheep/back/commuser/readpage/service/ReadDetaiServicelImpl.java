@@ -296,4 +296,27 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		List<Map<String, Object>> list=readDetailDao.queryVideo(book_id);
 		return list;
 	}
+	
+	/**
+	 * 查询我的长评
+	 */
+	@Override
+	public Map<String, Object> queryMyLong(String book_id,String id) {
+		// TODO Auto-generated method stub
+		Map<String, Object> list=readDetailDao.queryMyLong(book_id,id);
+		return list;
+	}
+	
+	/**
+	 * 我的长评论修改
+	 */
+	@Override
+	public Map<String, Object> updateCommentLong(Map<String, Object> map) {
+		Map<String, Object> rmap = new HashMap<String, Object>();
+		String score_tem = map.get("score").toString();
+		map.put("score", score_tem != null && score_tem != "" ? score_tem : 10);
+		readDetailDao.updateCommentLong(map);
+		rmap.put("returncode", "OK");
+		return rmap;
+	}
 }
