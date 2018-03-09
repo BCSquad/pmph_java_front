@@ -38,6 +38,9 @@ $(function(){
     } catch (e) {
 
     }
+    if(!webSocket){
+
+	}
 
     if(!WebSocket){
 
