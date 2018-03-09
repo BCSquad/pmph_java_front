@@ -26,8 +26,8 @@ public class ArticlePageController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("toarticlepage")
-	public ModelAndView index(){
-		ModelAndView modelAndView=new ModelAndView();
+	public ModelAndView index() throws Exception{
+		ModelAndView modelAndView=new ModelAndView ();
 		Map<String, Object> user=getUserInfo();
 		String logUserId= null;
 	       if (user!=null && user.get("id")!=null && !"".equals(user.get("id"))) {

@@ -58,7 +58,7 @@ $(function () {
 
     var element;
     var $uploadvideo = $("#upload-video").fileupload({
-        url: 'http://120.76.221.250/v/play/fileUp',
+        url: 'http://120.76.221.250/v/upload',
         dataType: 'json',
         autoUpload: true,
         formData: function () {
@@ -240,7 +240,7 @@ function changepage() {
             if (json.length < 3) {
                 $("#moreothers").html('加载完毕');
             }else{
-            	json.remove(2);
+            	json=json.slice(0,2);
             }
             var str = '';
             $.each(json, function (i, n) {
@@ -319,7 +319,7 @@ function longcom() {
             if (json.length < 3) {
                 $("#longothers").html('加载完毕');
             }else{
-            	json.remove(2);
+            	json=json.slice(0,2);
             }
             var str = '';
             $.each(json, function (i, n) {

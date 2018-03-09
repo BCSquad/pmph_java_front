@@ -262,7 +262,7 @@ function queryMain(){
 	
 	$.ajax({
 		type:'post',
-		url:contextpath+'/info/infoRelease.action?t='+new Date().getTime(),
+		url:contextpath+'info/infoRelease.action?t='+new Date().getTime(),
 		async:false,
 		dataType:'json',
 		data:data,

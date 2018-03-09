@@ -134,25 +134,25 @@
 								},
 								maxLength : function(value, errorMsg, el){
 									var v = $.trim(value);
-								　　var n = '';
-								　　var b = 0;
+							        var n = '';
+								    var b = 0;
 									var tooLong = false;
 									var param = 9;
-								　　for (var i = 0; i < v.length; i++) {
-								    　　var c = v.slice(i, i + 1);
-								    　　if (b <= param) {
-								         　　 n += c;
-								    　　}else{
+								    for (var i = 0; i < v.length; i++) {
+								        var c = v.slice(i, i + 1);
+								        if (b <= param) {
+								        	 n += c;
+								    	}else{
 								    	tooLong = true;
 								    	break;
-								    　　}
-								    　　b++;
-								　　}
-								　　$(el).val(n);
+								    	}
+								     b++;
+								    }
+									$(el).val(n);
 									if (tooLong) {
 										return errorMsg;
 									}
-								　　
+									
 								}
 							}
 						/* ,

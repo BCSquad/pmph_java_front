@@ -207,8 +207,9 @@
                                     <div class="input-wrapper">
                                         <input ${(admininfo.progress!=1)?'class="txt required"':'class="txt" readonly="readonly"'}
                                                 style="width: 258px" type="text" id="telephone"
-                                                value="${admininfo.telephone}" data-valid="isNonEmpty||isMobile"
-                                                data-error="联系电话不能为空||请填写正确的电话格式"/>
+                                                value="${admininfo.telephone}" <%--data-valid="isNonEmpty||isMobile"
+                                                data-error="联系电话不能为空||请填写正确的电话格式"--%>/>
+                                                <!--暂时不能校验座机：取消电话号码校验-->
                                     </div>
                                 </div>
                             </td><!--   value="${admininfo.telephone} -->

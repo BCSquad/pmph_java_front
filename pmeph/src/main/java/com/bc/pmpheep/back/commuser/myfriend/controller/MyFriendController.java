@@ -82,6 +82,7 @@ public class MyFriendController extends com.bc.pmpheep.general.controller.BaseCo
             int remainCount = myFriendService.listMyFriendCount(groupId,writerUser, startrow+listFriends.size());
             model.setViewName(pageUrl);
             model.addObject("row", startrow);
+            model.addObject("userid", writerUserMap.get("id"));
             model.addObject("id", writerUser.getId());
             model.addObject("realname", writerUserMap.get("realname").toString());
             model.addObject("more", listFriends.size());
@@ -136,8 +137,13 @@ public class MyFriendController extends com.bc.pmpheep.general.controller.BaseCo
         Map<String, Object> writerUserMap = this.getUserInfo();
         CommuserWriterUser writerUser = new CommuserWriterUser();
         writerUser.setId(Long.parseLong(writerUserMap.get("id").toString()));
-      try {
-    	  myFriendService.invite(id,groupId);
+        Map<String, Object> mmap = myFriendService.queryDelGMById(id, groupId);
+    try {
+    	if(mmap==null){
+    		myFriendService.invite(id,groupId);
+    	}else{
+    		myFriendService.recoverMember(id,groupId);
+    	}
 	} catch (Exception e) {
 		// TODO: handle exception
 		e.printStackTrace();

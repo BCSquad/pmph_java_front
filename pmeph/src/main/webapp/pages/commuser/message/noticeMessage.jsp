@@ -157,7 +157,7 @@
 		                  
 		                    <td class="buttonDetail">
 		                    	<c:if test="${message.msgType==0 && message.material_id!=0}">
-		                      	<div class="buttonAccept" ><a href="${ctx}/message/noticeMessageDetail.action?materialId=${message.material_id}">查看详情</a></div>
+		                      	<div class="buttonAccept" ><a href="${ctx}/message/noticeMessageDetail.action?cmsId=${message.cmsid}">查看详情</a></div>
 		                        </c:if>
 		                        <c:if test="${message.msgType==0||message.msgType==1}">
 		   					    <span class="deleteButton" onclick="deleteNotice(${message.id })"><span style="font-size:18px;">×</span> 删除</span>

@@ -46,5 +46,17 @@ public interface MyFriendDao {
 	int listMyFriendCount(@Param("groupId") String groupId,@Param("userId") Long userId,@Param("startrow") int startrow);
 
 	void invite(@Param("id") String id,@Param("groupId") String groupId);
-
+    /**
+     * 通过作家用户id查询小组中被删除的成员
+     * @param id
+     * @param groupId
+     * @return
+     */
+	Map<String,Object> queryDelGMById(@Param("id") String id,@Param("groupId") String groupId);
+    /**
+     * 恢复被小组删除的作家用户
+     * @param id
+     * @param groupId
+     */
+	void recoverMember(@Param("id") String id,@Param("groupId") String groupId);
 }

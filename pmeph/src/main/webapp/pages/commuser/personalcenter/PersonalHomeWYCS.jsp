@@ -721,7 +721,7 @@ request.setAttribute("currentTime",datetime);
             <div class="right">
             	<div id="wdxz"><span id="xztb"></span><span class="rlan">加入的小组</span><span
                         id="qbhy"><a href="${ctx}/group/list.action" class="aright">全部小组>>&nbsp;</a></span>
-                    <br/>
+                    <br style="clear: both;"/>
                     <c:if test="${listmygroup == null || listmygroup.size()==0  }">
                 		<div style="padding-top: 10px;">
 	                        <img src="<c:url value="/statics/image/no_group.png"></c:url>">
@@ -747,7 +747,7 @@ request.setAttribute("currentTime",datetime);
                 <span id="qbhy">
                 	<a href="${ctx}/myFriend/listMyFriend.action" class="aright">全部好友>>&nbsp;</a>
                 </span>
-                    <br/>
+                    <br style="clear: both;"/>
                     <c:if test="${listmyfriend == null || listmyfriend.size()==0  }">
                 		<div style="padding-top: 10px;">
 	                        <img src="<c:url value="/statics/image/no_friends.png"></c:url>">

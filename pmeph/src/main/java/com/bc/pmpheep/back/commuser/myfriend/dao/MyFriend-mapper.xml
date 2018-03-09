@@ -60,6 +60,7 @@
 			left join writer_user b
 			on a.target_id=b.id or a.request_id = b.id
 			WHERE (a.target_id= #{userId} or a.request_id = #{userId})
+			and <![CDATA[b.id<>#{userId}]]>
 			<if test="groupId !='' and groupId !=null">
 			and not EXISTS(select * from pmph_group_member pgm where pgm.group_id =#{groupId} 
 			and pgm.user_id = b.id and pgm.is_deleted=0 and pgm.is_writer=1)

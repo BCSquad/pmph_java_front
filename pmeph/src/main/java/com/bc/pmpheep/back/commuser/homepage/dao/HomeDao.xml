@@ -186,7 +186,7 @@ LIMIT 0,10
         from cms_content t
         left join writer_user b on t.author_id=b.id group by t.clicks desc limit 0,4 -->
     </select>
-    <!-- 查询点击人数最多的书评的作者、书名以及评论内容 -->
+    <!-- 查询热门书评 -->
     <select id="queryComment" resultMap="Mapresult">
        SELECT
 			u.id,
@@ -204,7 +204,7 @@ LIMIT 0,10
 					GROUP BY book_id 
 					HAVING is_auth = 1 AND
 					is_hide = 0 AND
-					is_deleted = 0)AS c 
+					is_deleted = 0 AND is_long=0)AS c
 			ON b.id = c.book_id
 			INNER JOIN writer_user AS u ON c.writer_id = u.id
 			ORDER BY
