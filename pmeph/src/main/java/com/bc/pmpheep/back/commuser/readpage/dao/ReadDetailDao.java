@@ -169,4 +169,17 @@ public interface ReadDetailDao {
 	 * @return List<Map<String, Object>>
 	 */
 	List<Map<String, Object>> queryVideo(@Param("book_id") String book_id);
+	
+	/**
+	 * 查询我的长评
+	 *
+	 */
+	Map<String, Object> queryMyLong(@Param("book_id") String book_id,@Param("id") String id);
+	
+	/**
+	 * 我的长评论修改
+	 * 
+	 * @param map
+	 */
+	void updateCommentLong(Map<String, Object> map);
 }

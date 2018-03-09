@@ -1,13 +1,17 @@
 var ue='';
 $(function(){
-    ue = UE.getEditor('mText');
-	UE.getEditor('mText');
-	ue.ready(function(){
-		//查询登陆人是否写过长评论
-//		queryLoginLong();
-		$(".sxy-btn").show();
-	});
-	
+	ue = UE.getEditor('mText');
+	if (('${UEContent}').length != 0) {
+		UE.getEditor('mText');
+		ue.ready(function() {
+			// 查询登陆人是否写过长评论
+			// queryLoginLong();
+			ue.setContent($("#contentLongDIV").html());
+			$(".sxy-btn").show();
+		});
+		$("#submitTypeCode").val("1");
+	}
+       
 	//默认分数满分
 	$("#last_score").val(10);
 });
@@ -81,6 +85,7 @@ function queryLoginLong(){
 					$.each(json.list,function(i,n){
 						ue.setContent(n.content);
 						$("#TitleValue").val(n.title);
+						
 					});
 					ue.setDisabled();
 				} else {
@@ -104,41 +109,64 @@ function insertlong(){
 		content:content,
 		title:title,
 	};
-	 $.ajax({
+	//修改长评
+	 if ($("#submitTypeCode").val() == '1') { //submitTypeCode 状态码 1表示修改
+		 var id=$("#myid").val();
+		 $.ajax({
 			type:'post',
-			url:contextpath+'readdetail/insertlong.action',
+			url:contextpath+'readdetail/updateCommentLong.action?comm_id='+id,
 			async:false,
-			data:json,
 			dataType:'json',
+			data:json,
 			success:function(json){
-				var state = json.state;
-				if (state == 'OK'){
-					window.message.success("保存成功！");
-//					$(".sxy-btn").attr("disabled",true);
-//					$("#TitleValue").attr("disabled",true);
-//					ue.setDisabled();
+				if(json.returncode=="OK"){
+					window.message.success("成功！");
 					toPercen();
-				} else if (state == 'ERROR'){
-					var words = json.value;
-	        		var title = document.getElementById("TitleValue");
-	        		var TitleValue = $("#TitleValue").val();
-	        		var content = ue.getContent().replace('<span style="background : yellow">','').replace('</span>','');
-	        		for (var i = 0 ; i < words.length ; i++){
-	        			var reg = new RegExp(words[i],'g');
-	        			if (TitleValue.indexOf(words[i]) > -1){
-	        				title.style.border = '3px solid red';
-	        			}
-	        			if (json.UEContent.indexOf(words[i]) > -1){
-	        				content = content.replace(reg,'<span style="background : yellow">' + words[i] + '</span>');
-	        			}
-	        		}
-	        		ue.setContent(content);
-	        		window.message.error("标题或内容中含有敏感词,请修改后再保存或提交");
-				} else {
-					window.message.success("请填写完所有内容");
-				}
+				}else{
+					window.message.error("失败！");
+				} 
 			}
 		});
+	 }else{
+		 $.ajax({
+				type:'post',
+				url:contextpath+'readdetail/insertlong.action',
+				async:false,
+				data:json,
+				dataType:'json',
+				success:function(json){
+					var state = json.state;
+					if (state == 'OK'){
+						window.message.success("保存成功！");
+//						$(".sxy-btn").attr("disabled",true);
+//						$("#TitleValue").attr("disabled",true);
+//						ue.setDisabled();
+						toPercen();
+					} else if (state == 'ERROR'){
+						var words = json.value;
+		        		var title = document.getElementById("TitleValue");
+		        		var TitleValue = $("#TitleValue").val();
+		        		var content = ue.getContent().replace('<span style="background : yellow">','').replace('</span>','');
+		        		for (var i = 0 ; i < words.length ; i++){
+		        			var reg = new RegExp(words[i],'g');
+		        			if (TitleValue.indexOf(words[i]) > -1){
+		        				title.style.border = '3px solid red';
+		        			}
+		        			if (json.UEContent.indexOf(words[i]) > -1){
+		        				content = content.replace(reg,'<span style="background : yellow">' + words[i] + '</span>');
+		        			}
+		        		}
+		        		ue.setContent(content);
+		        		window.message.error("标题或内容中含有敏感词,请修改后再保存或提交");
+					} else {
+						window.message.success("请填写完所有内容");
+					}
+				}
+			});
+	 }
+	
+	
+	
 	}else{
 		window.message.info("请填写完所有内容！");
 	}
