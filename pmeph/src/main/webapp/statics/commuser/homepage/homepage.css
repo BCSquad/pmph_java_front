@@ -884,8 +884,11 @@ ul li {
     margin-bottom: 15px;
     width: 252px;
     height: 73px;
-    text-overflow: ellipsis; /*超出部分省略号显示*/
     overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 /*.a6_con2 {
@@ -1356,20 +1359,23 @@ ul li {
 
 .left .items {
     width: 100%;
+    margin-top: 17px;
 }
 
 .left .item1 {
     float: left;
     width: 416px;
-   /* height: 170px;*/
     cursor: pointer;
-    margin: 25px 0;
+    height: 180px;
+    background-color: white;
+    height: 200px;
 }
 
 .sp_01 {
     float: left;
     height: 132px;
     width: 120px;
+    margin-top: 30px;
 }
 
 .sp_01 img{
@@ -1384,21 +1390,16 @@ ul li {
     margin-left: 5px;
     height: 100%;
     width: 268px;
+    margin-top: 35px;
 }
 
-.sp_title {
-    font-family: MicrosoftYaHei;
-    font-size: 16px;
-    font-weight: normal;
-    font-stretch: normal;
-    line-height: 24px;
-    height: 24px;
+.co{
+    float: left;
+    height: 25px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     overflow: hidden;
-    letter-spacing: 0px;
-    color: #333333;
-}
-
-.sp_pl {
+    width: 70%;
     font-family: MicrosoftYaHei;
     font-size: 12px;
     font-weight: normal;
@@ -1406,9 +1407,24 @@ ul li {
     line-height: 30px;
     letter-spacing: 1px;
     color: #999999;
-    display: block;
-    height: 30px;
+}
+
+.sp_title {
+    font-family: MicrosoftYaHei;
+    font-size: 16px;
+    line-height: 24px;
+    height: 24px;
+    letter-spacing: 0px;
+    color: #333333;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     overflow: hidden;
+}
+
+.sp_pl {
+    margin-left: 10px;
+    float: left;
+    margin-top: 8px;
 }
 
 .sp_remark {
@@ -1421,7 +1437,12 @@ ul li {
     color: #333333;
     height: 66px;
     overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
+
 
 .last_content_font {
     margin-top: 16px;
@@ -1492,6 +1513,10 @@ ul li {
     color: #333333;
     line-height: 17px;
     overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     text-align: center;
 }
 
@@ -1565,6 +1590,7 @@ ul li {
     width: 360px;
     height: 400px;
     margin-top: 16px;
+    background-color: white;
 }
 
 .area-8 .right {

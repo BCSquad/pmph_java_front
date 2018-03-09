@@ -63,6 +63,7 @@
 		end) avatar,
 		u.gmt_update ,
 		u.material_id,
+	    (select cc.id from cms_content cc where cc.material_id=u.material_id and cc.is_material_entry=1) as cmsid,
 		u.is_read+'' is_read,
 		u.sender_id
 		FROM

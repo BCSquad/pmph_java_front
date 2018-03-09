@@ -29,6 +29,9 @@
 	            <input type="hidden" value="${map.type}" id="type_id">
 	            <input type="hidden" id="book_id" value="${id}">
 	            <input type="hidden" id="marks" value="${map.bookmarks}">
+	            <div style="display: none;" id="contentLongDIV">${myLong.content}</div>
+	            <input type="hidden" id="submitTypeCode"  value="${submitTypeCode }"/>
+	            <input type="hidden" id="myid"  value="${myLong.id }"/>
 				<div class="writearticle"><span>文章 > 写书评</span></div>
 				<div class="title" style="margin-top: 40px;float: left;">
 			       <div class="line"></div>
@@ -60,7 +63,7 @@
                 </div>
 			    <div class="">
 			        <div class="longcomtitle">长评标题：</div>
-			        <input type="text" class="sxy-txt2" id="TitleValue" name="titleValue" placeholder="输入长评标题请限50字节以内.."  onkeyup="LengthLimit(this,50);" onblur="LengthLimit(this,50);" />
+			        <input type="text" class="sxy-txt2" id="TitleValue" value="${myLong.title }"   name="titleValue" placeholder="输入长评标题请限100字以内.."  oninput="if(value.length>100){value=value.slice(0,100)}" />
 			    </div>
 			    <div class="sxy-div-content4">
 			        <div style="height:10px;"></div>

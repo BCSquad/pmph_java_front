@@ -344,7 +344,7 @@
 		where wuc.user_id=#{userId}
 	</select>
 	<select id="getOrgList" parameterType="list" resultType="CommuserOrg">
-		select id,org_name from org where org_type_id!=1
+		select id,org_name from org
 	</select>
 	<insert id="addCertification" parameterType="WriterUserCertification" useGeneratedKeys="true"
 		keyProperty="id">
