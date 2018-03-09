@@ -33,7 +33,15 @@
 	is_admin,
 	display_name,
 	is_deleted
-) SELECT
-	#{groupId},#{id},1,0,0,wu.realname,0 from writer_user wu where wu.id=#{id}
+   ) SELECT
+	#{groupId},id,1,0,0,wu.realname,0 from writer_user wu where wu.id=#{id}
     </insert>
+    <!--通过作家用户id查询小组中被删除的成员  -->
+    <select id="queryDelGMById"  parameterType="java.util.Map" resultType="java.util.Map">
+       select * from pmph_group_member where group_id=#{groupId}  and user_id=#{id} and is_deleted=1 and is_writer=1
+    </select>
+    <!--恢复被小组删除的作家用户  -->
+    <update id="recoverMember" parameterType="java.util.Map">
+       update pmph_group_member set is_deleted=0 where group_id=#{groupId}  and user_id=#{id} and is_writer=1
+    </update>
 </mapper>
