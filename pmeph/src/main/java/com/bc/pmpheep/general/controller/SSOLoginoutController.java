@@ -182,7 +182,6 @@ public class SSOLoginoutController extends BaseController {
                 Set<LoginInterceptor.PathWithUsertypeMap> pathWithUsertypeMaps = interceptor.getPathWithUsertypeMaps();
 
                 PathMatchingResourcePatternResolver resolver = getPathMatchingResourcePatternResolver();
-
                 for (LoginInterceptor.PathWithUsertypeMap pathMap : pathWithUsertypeMaps) {
                     //需要拦截的URL
                     if (resolver.getPathMatcher().match(request.getContextPath() + pathMap.getPath(), request.getParameter("refer"))
@@ -190,11 +189,22 @@ public class SSOLoginoutController extends BaseController {
 
                         response.sendRedirect(request.getParameter("refer"));
                         return;
+
+                    } else if (resolver.getPathMatcher().match(request.getContextPath() + pathMap.getPath(), request.getParameter("refer"))) {
+                        if ("1".equals(usertype)) {
+                            response.sendRedirect(request.getContextPath() + "/");
+                            return;
+                        } else if ("2".equals(usertype)) {
+                            response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
+                            return;
+                        }
                     }
+
+
                 }
 
                 if ("1".equals(usertype)) {
-                    response.sendRedirect(request.getContextPath() + "/homepage/tohomepage.action");
+                    response.sendRedirect(request.getParameter("refer"));
                 } else if ("2".equals(usertype)) {
                     response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
                 }
