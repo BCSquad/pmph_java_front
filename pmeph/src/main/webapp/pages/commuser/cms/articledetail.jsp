@@ -31,7 +31,7 @@
 		<jsp:param value="articlepage" name="pageTitle" />
 	</jsp:include>
 	<div class="body">
-		<div class="cms-writer"><div class="text" onclick="window.location.href='${ctx}/writerArticle/initWriteArticle.action'">写文章</div></div>
+		<div class="cms-writer"><div class="text00" onclick="window.location.href='${ctx}/writerArticle/initWriteArticle.action'">写文章</div></div>
 		<div class="content-wrapper">
 			<div class="area1">
 		    	<div class="_title">
@@ -190,7 +190,7 @@
                     
             </div>
     	</div>
-    	<div class="area2">
+    		<div class="area2">
     		<div style="position:relative;width: 275px;height: 410px;">
     			<div class="right_2">
 	    			<c:if test="${Art.avatar == '' || Art.avatar == 'DEFAULT' || Art.avatar == null}">

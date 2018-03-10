@@ -63,7 +63,7 @@
                 </div>
 			    <div class="">
 			        <div class="longcomtitle">长评标题：</div>
-			        <input type="text" class="sxy-txt2" id="TitleValue" value="${myLong.title }"   name="titleValue" placeholder="输入长评标题请限100字以内.."  oninput="if(value.length>100){value=value.slice(0,100)}" />
+			        <input type="text" class="sxy-txt2" id="TitleValue" value="${myLong.title }"   name="titleValue" placeholder="输入长评标题请限100字以内.."  onkeyup="LengthLimit(this,100);" onblur="LengthLimit(this,100);" />
 			    </div>
 			    <div class="sxy-div-content4">
 			        <div style="height:10px;"></div>

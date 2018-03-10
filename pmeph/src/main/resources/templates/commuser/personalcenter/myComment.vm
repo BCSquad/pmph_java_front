@@ -25,7 +25,7 @@
                 <div class="mistitle">我的评论</div>
                 <div class="x" onclick="hideup()"></div>
             </div>
-                    <textarea class="misarea" id="content"></textarea>
+                    <textarea class="misarea" id="content" onkeyup="LengthLimit(this,3000);" onblur="LengthLimit(this,3000);"></textarea>
                     <hr style="border:0.05px dotted #E0E0E0;margin-left: 16px;margin-rihgt: 16px;">
                     <div class="star_num">星级评分:</div>
                     <div class="scorestar" id="star">

@@ -177,14 +177,40 @@ public class SSOLoginoutController extends BaseController {
 
                 Set<LoginInterceptor.PathWithUsertypeMap> pathWithUsertypeMaps = interceptor.getPathWithUsertypeMaps();
 
+
+ /*       if ("1".equals(usertype)) {
+            response.sendRedirect(request.getContextPath() + "/homepage/tohomepage.action");
+        } else if ("2".equals(usertype)) {
+            response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
+        }*/
+
+
+        if (StringUtils.isEmpty(request.getParameter("refer"))) {
+            if ("1".equals(usertype)) {
+                response.sendRedirect(request.getContextPath() + "/");
+            } else if ("2".equals(usertype)) {
+                response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
+            }
+
+        } else {
+
+            Set<LoginInterceptor.PathWithUsertypeMap> pathWithUsertypeMaps = interceptor.getPathWithUsertypeMaps();
+
                 PathMatchingResourcePatternResolver resolver = getPathMatchingResourcePatternResolver();
                 for (LoginInterceptor.PathWithUsertypeMap pathMap : pathWithUsertypeMaps) {
                     //需要拦截的URL
                     if (resolver.getPathMatcher().match(request.getContextPath() + pathMap.getPath(), request.getParameter("refer"))
                             && pathMap.getUserType().equals(usertype)) {//路径匹配，并且用户身份一致可以跳转
+            PathMatchingResourcePatternResolver resolver = getPathMatchingResourcePatternResolver();
+            for (LoginInterceptor.PathWithUsertypeMap pathMap : pathWithUsertypeMaps) {
+                //需要拦截的URL
+                if (resolver.getPathMatcher().match(request.getContextPath() + pathMap.getPath(), request.getParameter("refer"))
+                        && pathMap.getUserType().equals(usertype)) {//路径匹配，并且用户身份一致可以跳转
 
                         response.sendRedirect(request.getParameter("refer"));
                         return;
+                    response.sendRedirect(request.getParameter("refer"));
+                    return;
 
                     }
                 }
@@ -195,6 +221,15 @@ public class SSOLoginoutController extends BaseController {
                     response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
                 }
             }
+                } else if (resolver.getPathMatcher().match(request.getContextPath() + pathMap.getPath(), request.getParameter("refer"))) {
+                    if ("1".equals(usertype)) {
+                        response.sendRedirect(request.getContextPath() + "/");
+                        return;
+                    } else if ("2".equals(usertype)) {
+                        response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
+                        return;
+                    }
+                }
 
 
         } catch (Exception e) {
@@ -202,6 +237,16 @@ public class SSOLoginoutController extends BaseController {
         }
     }
 
+            }
+
+            if ("1".equals(usertype)) {
+                response.sendRedirect(request.getParameter("refer"));
+            } else if ("2".equals(usertype)) {
+                response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
+            }
+
+        }
+    }
 
     @RequestMapping("logout")
     public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -213,6 +258,8 @@ public class SSOLoginoutController extends BaseController {
         if ("1".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
             session.removeAttribute(Const.SESSION_USER_CONST_WRITER);
             String headReferer = request.getHeader("Referer");
+            session.removeAttribute(Const.SESSION_USER_CONST_TYPE);
+           /* String headReferer = request.getHeader("Referer");
             String refer = StringUtils.isEmpty(headReferer) ? request.getHeader("referer") : headReferer;
 
 
@@ -228,12 +275,12 @@ public class SSOLoginoutController extends BaseController {
                         return;
                     }
                 }*/
-
+            response.sendRedirect(logouturl + "?ServiceID=" + serviceID + "Referer=" + request.getContextPath() + "/homepage/tohomepage.action");
         } else if ("2".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
             session.removeAttribute(Const.SESSION_USER_CONST_ORGUSER);
             String headReferer = request.getHeader("Referer");
             String refer = StringUtils.isEmpty(headReferer) ? request.getHeader("referer") : headReferer;
-            for (LoginInterceptor.PathWithUsertypeMap pathMap : pathWithUsertypeMaps) {
+           /* for (LoginInterceptor.PathWithUsertypeMap pathMap : pathWithUsertypeMaps) {
                 //需要拦截的URL
                 if (resolver.getPathMatcher().match(request.getContextPath() + pathMap.getPath(), refer)) {//路径匹配
 
@@ -241,8 +288,8 @@ public class SSOLoginoutController extends BaseController {
                     return;
 
                 }
-            }
-            response.sendRedirect(logouturl + "?ServiceID=" + serviceID + "Referer=" + refer);
+            }*/
+            response.sendRedirect(logouturl + "?ServiceID=" + serviceID + "Referer=" + request.getContextPath() + "/schedule/scheduleList.action");
         } else {
             response.sendRedirect(logouturl + "?ServiceID=" + serviceID + "Referer=" + request.getContextPath() + "/homepage/tohomepage.action");
         }

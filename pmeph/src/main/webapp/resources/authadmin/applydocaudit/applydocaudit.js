@@ -46,7 +46,7 @@ function applyDocAuditQuery(n,query_condition,status){
 		data:data,
 		success:function(json){
 			$("#nine-block-box-container").html(json.html);
-			if (json.html.trim() == "") {
+			if ($.trim(json.html) == "") {
 				$(".pagination-wrapper").hide();
 				$(".no-more").show();
 			}else{

@@ -1,4 +1,4 @@
-function loadMore(){
+function loadMore(tag){
 	//var pathName=window.document.location.pathname;  
 	var para = $("#startPara").val();
 	var startPara;
@@ -10,7 +10,7 @@ function loadMore(){
 	$.ajax({
 		type:"post",
 		url:contextpath+"AllMessage/loadMore.action",
-		data:{"startPara":startPara},
+		data:{"startPara":startPara,tag:tag},
 		async:false,
 		dataType:'json',
 		success:function(json){
@@ -84,7 +84,7 @@ function system(str, name, time) {
                 	if(readno){
                 		$("#readno"+str).remove();
                 	}
-                  	$("#txt"+json.id).append('&nbsp;&nbsp;<img src="'+contextpath+'/statics/image/readyes.png"  id="readyes'+str+'"/>');
+                  	$("#txt"+json.id).html('<img src="'+contextpath+'statics/image/readyes.png"  id="readyes'+str+'"/>'+$("#txt"+json.id).html());
                 }
             }
         });

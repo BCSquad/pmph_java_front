@@ -145,10 +145,15 @@ public class DataAuditController extends BaseController{
 			//1.作家申报表
 			List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
 			gezlList = this.dataAuditService.queryPerson(queryMap);
+			String return_cause = "";
 			if(declaration_id == null){
 			queryMap.put("declaration_id", gezlList.get(0).get("id"));
 			}else{
 				queryMap.put("declaration_id", declaration_id);
+				if ("4".equals(gezlList.get(0).get("online_progress").toString())) {
+					return_cause = gezlList.get(0).get("return_cause").toString();
+					mav.addObject("return_cause", return_cause);
+				}
 			}
 			if(material_id == null){
 				material_id= gezlList.get(0).get("material_id").toString();

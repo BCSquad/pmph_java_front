@@ -339,6 +339,8 @@ public class PersonalServiceImpl implements PersonalService {
 		return comm;
 	}
 
+
+
 	/**
 	 * 我的问卷
 	 */
@@ -501,6 +503,21 @@ public class PersonalServiceImpl implements PersonalService {
 	public Map<String, Object> queryDeclarationById(String declaration_id) {
 		Map<String, Object> result_map = personaldao.queryDeclarationById(declaration_id);
 		return result_map;
+	}
+
+
+	@Override
+	public List<Map<String, Object>> whetherSurvey(PageParameter pageParameter) {
+		List<Map<String, Object>> list=personaldao.whetherSurvey(pageParameter);
+		List<Map<String,Object>> mylist=new ArrayList<>();
+		if(list!=null){
+			Map<String,Object> map=new HashMap<>();
+			for (int i=0;i<list.size();i++){
+				map=personaldao.joinSurvey(list.get(i).get("survey_id").toString());
+				mylist.add(map);
+			}
+		}
+		return mylist;
 	}
 
 }

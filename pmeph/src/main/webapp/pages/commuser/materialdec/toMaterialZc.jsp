@@ -417,7 +417,7 @@
 					<input type="hidden" name="extension_id" value="${zjkzxx.extension_id}"/>
 				</div>
 				<div class="content">
-					<textarea class="text_cl" id="${zjkzxx.is_required}_${status.count}" name="kz_content">${zjkzxx.content}</textarea> 
+					<textarea class="text_cl" id="${zjkzxx.is_required}_${status.count}" name="kz_content" maxlength="1000">${zjkzxx.content}</textarea>
 					<input type="hidden" name="zjkzxx" value="${zjkzxx.is_required}_${status.count}"/>
 				</div>
 			</div>
