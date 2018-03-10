@@ -28,6 +28,7 @@
 <div class="body">
 <div class="content-wrapper">
     <div class="div_top">我加入的小组</div>
+    <input type="hidden" id="pageNumber" value="${pageNumber}">
     <div class="items">
     	<c:choose>
     		<c:when test="${listSize>0 }">

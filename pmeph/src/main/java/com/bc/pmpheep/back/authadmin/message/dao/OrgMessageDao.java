@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.bc.pmpheep.back.authadmin.message.bean.UserMessage;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @author guoxiaobao
@@ -88,6 +89,10 @@ public interface OrgMessageDao {
 	List<Map<String, Object>> queryNoticeMessageDetailContact(
 			Map<String, Object> paraMap);
 
-	
-	
-  }
+	/**
+	 * 查找申请人的id
+	 * @param bookId
+	 * @return
+	 */
+    List<Map<String,Object>> findApplyId(@Param("bookId") String bookId);
+}

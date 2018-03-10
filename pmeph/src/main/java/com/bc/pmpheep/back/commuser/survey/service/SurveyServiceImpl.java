@@ -4,10 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.commuser.survey.dao.SurveyDao;
+import com.bc.pmpheep.general.dao.UserDao;
 
 
 
@@ -16,6 +18,9 @@ public class SurveyServiceImpl implements SurveyService {
 	
 	@Autowired
 	SurveyDao surveyDao;
+	
+	@Autowired
+    UserDao userDao;
 	
 	//调查列表
 	@Override
@@ -66,4 +71,20 @@ public class SurveyServiceImpl implements SurveyService {
 		 Map<String, Object> map  = surveyDao.getSurveyBaseInfo(paraMap);
 		return map;
 	}
+
+	//填写问卷增加积分
+	@Override
+	public void insertUserScores(Map<String, Object> info) {
+
+        List<Map<String, Object>> rulesList = userDao.getPointRules();
+        Map<String, Map<String, Object>> rules = new HashMap<String, Map<String, Object>>();
+        for (Map<String, Object> rule : rulesList) {
+            rules.put(MapUtils.getString(rule, "rule_code"), rule);
+        }
+            info.put("scores", 1);
+            info.put("ruleid", MapUtils.getIntValue(rules.get("survey"), "id"));
+            userDao.insertUserScore(info);
+	}
+	
+	
 }

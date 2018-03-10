@@ -69,9 +69,13 @@ public class CommunityController extends BaseController{
 	@RequestMapping("/toCommunity")
 	public ModelAndView toCommunity(HttpServletRequest req){
 		Long noticeId=Long.valueOf(req.getParameter("id"));
+		
 		Map<String,Object> notice=communityService.queryNoticeById(noticeId);
+		//信息快报
 		List<Map<String,Object>> reportlist=communityService.queryMaterialNoticeList(Long.valueOf(notice.get("material_id").toString()));
+		//配套图书
 		List<Map<String,Object>> booklist=communityService.queryTextBookList(Long.valueOf(notice.get("material_id").toString()));
+		//精彩书评
 		List<Map<String,Object>> someComments=communityService.querySomeComment(Long.valueOf(notice.get("material_id").toString()),0,4);
 		Map<String,Object> map=new HashMap<>();
 		map.put("notice", notice);

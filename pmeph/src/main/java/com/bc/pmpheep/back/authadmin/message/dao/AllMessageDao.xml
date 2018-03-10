@@ -36,6 +36,35 @@
 
 		<if test="startPara!=null">limit #{startPara},8</if>
 	</select>
+	
+	<select id="getSendMessage" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+		m.id,
+		m.msg_id,
+		m.msg_type,
+		m.title,
+		m.is_withdraw,
+		DATE_FORMAT(
+				m.gmt_create,
+				'%Y-%m-%d %H:%i:%S'
+				) AS TIME,
+		m.material_id
+		FROM
+		user_message AS m
+		WHERE
+		m.sender_id =  #{id} AND
+		m.sender_type =  3 AND
+		m.is_deleted =  0 AND
+		m.msg_type =  1
+		GROUP BY
+		m.msg_id
+		ORDER BY
+		m.gmt_create DESC
+		
+		<if test="startPara!=null">limit #{startPara},8</if>
+	</select>
+	
+	
     <!--  根据系统消息内容id更改系统消息是否已读 -->
     <update id="updateIsRead" parameterType="java.util.Map">
        update user_message set is_read=1 where id=#{mid}

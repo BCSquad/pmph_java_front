@@ -235,7 +235,9 @@ public class SurveyController extends BaseController{
 		WriterUserTrendst wut = new WriterUserTrendst(userMap.get("id").toString(), 11, null);
 		wut.setDetail("参加调查", userMap.get("realname").toString()+" 参加了问卷《"+mapSurvey.get("title").toString()+"》。", 0);
 		personalService.saveUserTrendst(wut);//填写问卷时 生成动态
-		
+		//填写问卷增加积分
+		map.put("id", userId);
+		surveyService.insertUserScores(map);
 		String code = "OK";
 		return code;
 	}
