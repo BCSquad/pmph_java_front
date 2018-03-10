@@ -808,10 +808,10 @@ function buttAdd(type){
             url:contextpath+'material/doMaterialAdd.action?sjump=2&type='+type,
             data:$('#objForm').serialize(),// 你的formid
             async: false,
-            success: function(msg) {
-                if(msg=='OK'){
+            success: function (json) {
+                if (json.msg == 'OK') {
                     window.message.success("操作成功,正在跳转页面");
-                    window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=jcsb";
+                    window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
                 }
             }
         });
@@ -830,8 +830,8 @@ function buttAdd(type){
                 url: contextpath + 'material/doMaterialAdd.action?sjump=2&type=' + type,
                 data: $('#objForm').serialize(),// 你的formid
                 async: false,
-                success: function (msg) {
-                    if (msg == 'OK') {
+                success: function (json) {
+                    if (json.msg == 'OK') {
                         window.message.success("操作成功,正在跳转页面");
                         window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
                     }

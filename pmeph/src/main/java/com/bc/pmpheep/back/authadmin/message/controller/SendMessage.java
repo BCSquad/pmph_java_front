@@ -10,6 +10,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bc.pmpheep.back.authadmin.message.service.SendMessageService;
+import com.bc.pmpheep.general.service.SensitiveService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,11 +46,14 @@ public class SendMessage extends BaseController {
 	
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.authadmin.message.service.SendMessageServiceImpl")
-	private SendMessageServiceImpl sendMessageServiceImpl;
+	private SendMessageService sendMessageService;
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.authadmin.message.service.InfoReleaseServiceImpl")
 	InfoReleaseService infoReleaseService;
 	Logger logger = LoggerFactory.getLogger(SendMessage.class);
+	@Autowired
+	@Qualifier("com.bc.pmpheep.general.service.SensitiveService")
+	SensitiveService sensitiveService;
 	
 	/**
 	 * 发送新消息——机构用户 页面
@@ -60,9 +65,9 @@ public class SendMessage extends BaseController {
 		Map<String, Object> user = this.getUserInfo();
 		BigInteger uid = (BigInteger) user.get("id");//用户的id
 		List<Map<String, Object>> List_map = infoReleaseService.selectMenu(uid);
-		mv.addObject("resultFlag", "2");
-		mv.addObject("titleValue", "");
-		mv.addObject("UEContent", "");
+//		mv.addObject("resultFlag", "2");
+//		mv.addObject("titleValue", "");
+//		mv.addObject("UEContent", "");
 		mv.addObject("listMenu", List_map);
 		mv.setViewName("/authadmin/message/sendmessage");
 		return mv;
@@ -90,7 +95,7 @@ public class SendMessage extends BaseController {
 	
 	@RequestMapping(value="/sendMessage",method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView sendMessage(HttpServletRequest request/*,@RequestParam(value="file",required=false)MultipartFile file*/,HttpServletResponse response){
+	public Map<String,Object> sendMessage(HttpServletRequest request/*,@RequestParam(value="file",required=false)MultipartFile file*/,HttpServletResponse response){
 		
 		String resultFlag = "true";
 		//String fileName = file.getOriginalFilename(); //文件名
@@ -104,18 +109,28 @@ public class SendMessage extends BaseController {
 		String UEContent = request.getParameter("UEContent");
 		ModelAndView mv = new ModelAndView();
 		String address = "/authadmin/message/sendmessage";
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		String flag = "0";
 		if(titleValue.length()==0||UEContent.length()==0){
-			mv.addObject("resultFlag", "0");
-			mv.addObject("titleValue", titleValue);
-			mv.addObject("UEContent", UEContent);
-			mv.setViewName(address);
-			return mv;
+			resultMap.put("isValidate","必填项不为空");
+			resultMap.put("flag","2");
+			resultMap.put("titleValue",titleValue);
+			resultMap.put("UEContent",UEContent);
+			return resultMap;
 		}else if(titleValue.length()>=30){
-			mv.addObject("resultFlag", "1");
-			mv.addObject("titleValue", titleValue);
-			mv.addObject("UEContent", UEContent);
-			mv.setViewName(address);
-			return mv;
+			resultMap.put("isValidate","标题不能超过100个字");
+			resultMap.put("flag","3");
+			resultMap.put("titleValue",titleValue);
+			resultMap.put("UEContent",UEContent);
+			return resultMap;
+		}
+
+		if (sensitiveService.confirmSensitive(titleValue) || sensitiveService.confirmSensitive(UEContent)){
+			List<String> sensitives = sensitiveService.getSensitives(titleValue, UEContent);
+			resultMap.put("flag", "4");
+			resultMap.put("value", sensitives);
+			resultMap.put("UEContent", sensitiveService.delHTMLTag(UEContent));
+			return resultMap;
 		}
 		//发送消息 到MongoDB 
 		Message message = new Message();
@@ -128,7 +143,7 @@ public class SendMessage extends BaseController {
 		List<UserMessage> userMessageList = new ArrayList<UserMessage>();
 		//获取接受者的id
 		if("0".equals(radioValue)){
-			userIdList = sendMessageServiceImpl.findOrgUserAndWriterUser(paraMap);
+			userIdList = sendMessageService.findOrgUserAndWriterUser(paraMap);
 			for(int i =0;i<userIdList.size();i++){
 				UserMessage userMessage = new UserMessage();
 				userMessage.setMsg_id(msg_id);
@@ -148,25 +163,27 @@ public class SendMessage extends BaseController {
 			}else{
 				partSelect = radioValue.split(",");
 			}
-			
-			userIdList = new ArrayList<Map<String,Object>>();
+
 			for(int i =0;i<partSelect.length;i++){
-				UserMessage userMessage = new UserMessage();
-				userMessage.setMsg_id(msg_id);
-				userMessage.setMsg_type(1);
-				userMessage.setReceiver_id(Long.parseLong(partSelect[i]));
-				userMessage.setReceiver_type(2);
-				userMessage.setSender_id(uid);
-				userMessage.setSender_type( 3);
-				userMessage.setTitle(titleValue);
-				userMessageList.add(userMessage);
+				userIdList =sendMessageService.findApplyId(partSelect[i]);
+				for(int j =0;j<userIdList.size();j++) {
+					UserMessage userMessage = new UserMessage();
+					userMessage.setMsg_id(msg_id);
+					userMessage.setMsg_type(1);
+					userMessage.setReceiver_id(((BigInteger)userIdList.get(j).get("receiver_id")).longValue());
+					userMessage.setReceiver_type(2);
+					userMessage.setSender_id(uid);
+					userMessage.setSender_type(3);
+					userMessage.setTitle(titleValue);
+					userMessageList.add(userMessage);
+				}
 				
 			}
 		}
 			
 			try {
 				//批量操作
-				sendMessageServiceImpl.batchInsertMessage(userMessageList);
+				sendMessageService.batchInsertMessage(userMessageList);
 				//return new ModelAndView("redirect:/authSendMessage/init.action");
 				//文件上传  到MongoDB 
 				/*if(fileSize>0){
@@ -181,12 +198,15 @@ public class SendMessage extends BaseController {
 				//return new ModelAndView("/authadmin/message/sendmessage");
 			} catch (Exception e) {
 				// TODO: handle exception
-				
+				flag ="1";
+				e.printStackTrace();
+				resultMap.put("flag", flag);
+				return resultMap;
 			}
-			
-		
-		
-			return  new ModelAndView("redirect:/authSendMessage/init.action");
+
+
+		resultMap.put("flag", flag);
+		return resultMap;
 	}
 	
 	

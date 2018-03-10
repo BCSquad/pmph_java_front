@@ -58,6 +58,10 @@
 		select d.id as receiver_id, 'writerUserId' as type from org_user c join writer_user d on c.org_id = d.org_id where c.id= #{userId}
 	</select>
 
+	<!-- 根据申报的书的id 查找对应的申报人id-->
+	<select id="findApplyId" parameterType="java.util.Map" resultType="java.util.Map">
+		select t1.user_id as receiver_id from declaration t1 join dec_position t2 on t1.id = t2.declaration_id where t2.textbook_id = #{bookId}
+	</select>
 	<!-- 批量插入消息 -->
 	<insert id="batchInsertMessage" parameterType="java.util.List">
 	INSERT INTO user_message (msg_id,msg_type,title,sender_id,sender_type,receiver_id,receiver_type)

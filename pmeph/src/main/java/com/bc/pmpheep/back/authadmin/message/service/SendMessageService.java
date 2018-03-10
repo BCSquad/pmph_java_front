@@ -28,7 +28,12 @@ public interface SendMessageService {
 	 * @param map
 	 */
 	public void insertAttachmentInfo(Map map);
-	
-	
 
+
+	/**
+	 * 获取接受者id
+	 * @param s
+	 * @return
+	 */
+	List<Map<String,Object>> findApplyId(String s);
 }
