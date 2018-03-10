@@ -148,7 +148,7 @@ public class CmsNoticeManagementController extends BaseController {
 			mv.addObject("firsttag", "首页");
 			mv.addObject("firsttag", "首页");
 			mv.addObject("firstpath", "homepage/tohomepage.action");
-			mv.addObject("materialId",materialId);
+			mv.addObject("materialId",mapTitle.get("material_id"));
 			if(tag!=null && tag.equals("FromCommunityList")){
 				//来自教材社区列表的request
 				
