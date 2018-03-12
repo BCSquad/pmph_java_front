@@ -59,7 +59,7 @@ String contextpath=request.getContextPath();
             </div>
         </div>
         <div class="bt">
-            <div class="top2"><a href="/books/list.action" target="_blank"><B>${textBookName }</B></a></div>
+            <div class="top2"><!-- <a href="/books/list.action" target="_blank"> --><B>${textBookName }</B><!-- </a> --></div>
             <div class="top3">策划编辑：${planning_editor }</div>
         </div>
     </div>

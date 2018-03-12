@@ -67,6 +67,7 @@
             display: block;
             text-decoration: none;
             color: #999999;
+            cursor: pointer;
         }
 
         .list .item .time {
@@ -74,6 +75,15 @@
             height: 60px;
             line-height: 60px;
             margin-right: 10px;
+        }
+
+        .list .item .time a{
+           text-decoration: none;
+            color: black;
+        }
+
+        .list .item .time a:focus{
+            color:blue;
         }
     </style>
     <script >
@@ -93,6 +103,12 @@
             });
 
         });
+        
+        //问答详情页
+        function helpdetail(id) {
+            window.location.href=contextpath+'help/helpdetail.action?id='+id;
+        }
+        
     </script>
 </head>
 <body>
@@ -118,61 +134,23 @@
                 <div class="menu-item" id="download-title">操作手册下载</div>
             </div>
             <div class="list" id="questions">
+                <c:forEach items="${helpList}" var="list" varStatus="status">
                 <div class="item">
                     <div class="icon"></div>
-                    <a class="content" href="<c:url value="/pages/comm/helpdetail.jsp"/>">习近平主持政治局会议 决定召开十九届三中全会</a>
-                    <div class="time">[2018-2-25]</div>
+                    <a class="content" target="_blank" onclick="helpdetail('${list.id}')">${list.title}</a>
+                    <div class="time">[${list.gmt_create}]</div>
                 </div>
-                <div class="item">
-                    <div class="icon"></div>
-                    <a class="content">习近平主持政治局会议 决定召开十九届三中全会</a>
-                    <div class="time">[2018-2-25]</div>
-                </div>
-                <div class="item">
-                    <div class="icon"></div>
-                    <a class="content">习近平主持政治局会议 决定召开十九届三中全会</a>
-                    <div class="time">[2018-2-25]</div>
-                </div>
-                <div class="item">
-                    <div class="icon"></div>
-                    <a class="content">习近平主持政治局会议 决定召开十九届三中全会</a>
-                    <div class="time">[2018-2-25]</div>
-                </div>
-                <div class="item">
-                    <div class="icon"></div>
-                    <a class="content">习近平主持政治局会议 决定召开十九届三中全会</a>
-                    <div class="time">[2018-2-25]</div>
-                </div>
-
+                </c:forEach>
             </div>
 
             <div class="list" id="download" style="display: none">
+                <c:forEach items="${handbookList}" var="list" >
                 <div class="item">
                     <div class="icon"></div>
-                    <a class="content">习近平主持政治局会议 决定召开十九届三中全会</a>
-                    <div class="time">[下载]</div>
+                    <a class="content">${list.manual_name}</a>
+                    <div class="time"><a   href="${contextpath}/file/download/${list.attachment}.action" >[下载]</a></div>
                 </div>
-                <div class="item">
-                    <div class="icon"></div>
-                    <a class="content">习近平主持政治局会议 决定召开十九届三中全会</a>
-                    <div class="time">[下载]</div>
-                </div>
-                <div class="item">
-                    <div class="icon"></div>
-                    <a class="content">习近平主持政治局会议 决定召开十九届三中全会</a>
-                    <div class="time">[下载]</div>
-                </div>
-                <div class="item">
-                    <div class="icon"></div>
-                    <a class="content">习近平主持政治局会议 决定召开十九届三中全会</a>
-                    <div class="time">[下载]</div>
-                </div>
-                <div class="item">
-                    <div class="icon"></div>
-                    <a class="content">习近平主持政治局会议 决定召开十九届三中全会</a>
-                    <div class="time">[下载]</div>
-                </div>
-
+                </c:forEach>
             </div>
 
         </div>

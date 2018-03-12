@@ -245,4 +245,11 @@ public interface GroupService {
 	 * @return
 	 */
 	boolean deleteFileAuthority(String s, String s1,Long fileid);
+
+	/**
+	 * ie8不支持websocket 此方法代替其sent方法将数据存入pmph_group_message表
+	 * @param paraMap
+	 * @return
+	 */
+	Map<String, Object> webSocketSentForIE(Map<String, Object> paraMap);
 }
