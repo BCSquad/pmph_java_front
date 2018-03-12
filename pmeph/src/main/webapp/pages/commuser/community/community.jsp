@@ -25,6 +25,7 @@ String contextpath=request.getContextPath();
     <script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js"></script>
     <script src="<%=path%>/resources/comm/jquery/jquery.pager.js"></script>
     <script src="<%=path%>/resources/comm/base.js"></script>
+    <script type="text/javascript" src="${ctx}/resources/comm/ckplayer/ckplayer.js"></script>
     <script src="<%=path%>/resources/commuser/community/community.js"></script>
 </head>
 <style type="text/css">
