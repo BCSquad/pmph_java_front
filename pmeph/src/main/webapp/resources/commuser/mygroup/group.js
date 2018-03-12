@@ -31,17 +31,41 @@ $(function(){
      };*/
 	var userId    = $("#userId").val(); 
     var webSocket = undefined;
-
+    
     try {
-        if (WebSocket ) {
+        if (WebSocket) {
             webSocket = new WebSocket("ws://119.254.226.115:11000/pmpheep/websocket?userType=2&userId=" + userId);
         }
     } catch (e) {
+    	 //不支持websocket ie10以下版本
+    	webSocket = new Object();
+
+    	webSocket.send=function(sendJson){
+    		var data= eval('(' + sendJson + ')');
+    		$.ajax({
+    			type:'post',
+    	        url :contxtpath+'/group/webSocketSentForIE.action?t=' + new Date(),
+
+    	        dataType:'json',
+    	        data:data,
+    	        success:function(json){
+    	        	//{sender=1, content=1, logUserId=2, groupId=55, time=2018-03-12 21:21:47.0, senderName=曾若男, senderIcon=DEFAULT, senderType=2, msgId=4200, sendType=0, senderId=2, member_id=11181}
+    	        	if(json.senderIcon==''||json.senderIcon=='DEFAULT'||json.senderIcon.indexOf('statics')!=-1||json.senderIcon.indexOf('default_image')!=-1||json.senderIcon.indexOf('png')!=-1){
+    	        		json.senderIcon = contxtpath+'/statics/image/default_image.png';
+    		    	}else{
+    		    		json.senderIcon = contxtpath+'/image/'+json.senderIcon+'.action';
+    		    	}
+    	        	loadNewGroupMsg(json.sender,json.senderName,json.senderIcon,json.content,json.time);
+    	        }
+    	     });
+
+    	}
+    	webSocket.close = function(){};
+    	//("{senderId:"+userId+",senderType:"+0+",content:'\""+$("#userName").val()+"\"退出了小组"+"',groupId:"+$("#groupId").val()+",sendType:0}");
 
     }
-//    if(!webSocket){
-//
-//	}
+
+
 
 	//var webSocket = new WebSocket("ws:127.0.0.1:8036/pmpheep/websocket?userType=" +2+"&userId="+$("#userId").val());
     if (webSocket) {
@@ -460,9 +484,12 @@ $(function(){
                     "</div> ";
 		}
         $(".iframe1").append(html);
-		var a=document.getElementsByClassName("chat_items mine");
-        var b=document.getElementsByClassName("chat_items other");
-        var t=a.length+b.length;
+		//var a=document.getElementsByClassName("chat_items mine");
+		var $a = $(".chat_items.mine");
+		var $b = $(".chat_items.other");
+        //var b=document.getElementsByClassName("chat_items other");
+        //var t=a.length+b.length;
+		var t=$a.length+$b.length;
 		$(".iframe1").scrollTop(100*t);
 	}
 	

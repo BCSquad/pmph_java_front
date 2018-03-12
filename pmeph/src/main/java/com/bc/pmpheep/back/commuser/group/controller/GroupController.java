@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -342,6 +343,31 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
         } catch (IOException ex) {
             logger.error("文件下载时出现IO异常：{}", ex.getMessage());
         }
+    }
+    
+    @RequestMapping(value="/webSocketSentForIE" ,method=RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> webSocketSentForIE(HttpServletRequest request){
+    	//("{senderId:"+userId+",senderType:"+0+",content:'\""+$("#userName").val()+"\"退出了小组"+"',groupId:"+$("#groupId").val()+",sendType:0}");
+    	String senderId = request.getParameter("senderId");
+    	String senderType = request.getParameter("senderType");
+    	String content = request.getParameter("content");
+    	String groupId = request.getParameter("groupId");
+    	String sendType = request.getParameter("sendType");
+    	
+    	Map<String, Object> user = getUserInfo();
+    	
+    	Map<String,Object> paraMap = new HashMap<String,Object>();
+    	paraMap.put("senderId", senderId);
+    	paraMap.put("senderType", senderType);
+    	paraMap.put("content", content);
+    	paraMap.put("groupId", groupId);
+    	paraMap.put("sendType", sendType);
+    	paraMap.put("logUserId", user.get("id"));
+    	
+    	Map<String,Object> resultMap = groupService.webSocketSentForIE(paraMap);
+    	
+		return resultMap;
     }
 }
 

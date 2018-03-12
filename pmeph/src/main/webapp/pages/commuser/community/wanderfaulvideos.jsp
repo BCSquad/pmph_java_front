@@ -25,6 +25,7 @@ String contextpath=request.getContextPath();
     <script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js"></script>
     <script src="<%=path%>/resources/comm/jquery/jquery.pager.js"></script>
     <script src="<%=path%>/resources/comm/base.js"></script>
+    <script type="text/javascript" src="${ctx}/resources/comm/ckplayer/ckplayer.js"></script>
     <%-- <script src="<%=path%>/resources/commuser/community/communitylist.js"></script> --%>
 </head>
 <style type="text/css">
@@ -84,8 +85,8 @@ String contextpath=request.getContextPath();
 			          <div class="video-a" style="width:317px;height:275px;margin: 0px auto 0px;">
 		              <div class="video-c" style="width:317px;height:178px;text-align: center;">
 		                   <%--  <img src="${ctx }/statics/testfile/testvideoimage.png" style="height:178px;"/> --%>
-		                    <video src="http://119.254.226.115:11000/pmph_vedio/file/${video.file_name }" style="width:317px;height:178px" controls type="mp4"
-	                          poster="image/${video.cover }.action"></video>
+		                    <div class="videou" id="videou${video.id }" src="http://119.254.226.115/v/play/${video.file_name }" style="width:317px;height:178px" controls type="mp4"
+	                          poster="image/${video.cover }.action"></div>
 		              </div>
 		             <div class="video-d" style="width:297px">
 		                  ${video.title }
@@ -155,6 +156,19 @@ String contextpath=request.getContextPath();
 </body>
 <script type="text/javascript">
 $(function(){
+	$(".videou").each(function () {
+        var $this = $(this);
+        var videoObject = {
+            container: "#" + $this.attr("id"),
+            variable: 'player',
+            autoplay: false,
+            /*flashplayer: true,*/
+            video:$this.attr("src"),
+            poster: $this.attr("poster")
+
+        };
+        var player = new ckplayer(videoObject);
+    });
 	var pagetotal=parseInt($("#pagetotal").val());
 	var pagenum=parseInt($("#pagenum").val());
 	Page({

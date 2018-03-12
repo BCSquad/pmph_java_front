@@ -341,4 +341,25 @@ public interface GroupDao {
 	 * @return
 	 */
 	String getMemberId(@Param("id") Long id);
+
+	/**
+	 * ie8不支持websocket 此方法代替其sent方法将数据存入pmph_group_message表
+	 * @param paraMap
+	 * @return
+	 */
+	int webSocketSentForIE(Map<String, Object> paraMap);
+
+	/**
+	 * 通过id查询消息
+	 * @param msgId
+	 * @return
+	 */
+	Map<String, Object> getMsgById(String msgId);
+
+	/**
+	 * 根据主键查询小组成员
+	 * @param member_id
+	 * @return
+	 */
+	Map<String, Object> getMember(@Param("user_id")String user_id,@Param("group_id")String group_id);
 }
