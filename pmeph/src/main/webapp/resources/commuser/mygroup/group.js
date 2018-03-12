@@ -31,8 +31,7 @@ $(function(){
      };*/
 	var userId    = $("#userId").val(); 
     var webSocket = undefined;
-    alert(typeof(webSocket));
-    alert(webSocket);
+    
     try {
         if (webSocket ) {
             webSocket = new WebSocket("ws://120.76.221.250:11000/pmpheep/websocket?userType=2&userId=" + userId);
