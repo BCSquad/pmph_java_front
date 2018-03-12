@@ -276,7 +276,11 @@ public class SSOLoginoutController extends BaseController {
             String usertype = request.getParameter("usertype");
             Map<String, Object> user = userService.getUserInfo(username, usertype);
             if (user == null) {
-                response.sendRedirect(request.getContextPath() + "/pages/comm/login.jsp?refer=" + request.getParameter("refer") + "&msg=username is not exist");
+                if ("1".equals(usertype)) {
+                    response.sendRedirect(url + "?ServiceID=" + serviceID + "&Referer=" + request.getContextPath() + "/homepage/tohomepage.action");
+                } else if ("2".equals(usertype)) {
+                    response.sendRedirect(url + "?ServiceID=" + serviceID + "&Referer=" + request.getContextPath() + "/schedule/scheduleList.action");
+                }
                 return;
             }
             HttpSession session = request.getSession();
