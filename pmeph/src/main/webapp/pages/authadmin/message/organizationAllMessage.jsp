@@ -39,10 +39,10 @@
                 </div>
             </a>
             <a href="${pageContext.request.contextPath}/authSendMessage/init.action">
-                <div class="item" style="float: right;margin-right: 40px">
-                    <div class="off-text" >发送消息</div>
-                    <div class="off-line" ></div>
-                </div >
+                <div class="item" style="float: right;margin-right: 40px;width: 100px">
+                    <div class="off-text"><img style="float: left;margin-top: 2px" src="<c:url value="/statics/image/aaa.png"/>"/><div>发送消息</div></div>
+                    <div class="off-line"></div>
+                </div>
             </a>
         </div>
 
