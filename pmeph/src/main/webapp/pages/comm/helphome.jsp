@@ -148,7 +148,7 @@
                 <div class="item">
                     <div class="icon"></div>
                     <a class="content">${list.manual_name}</a>
-                    <div class="time"><a   href="${contextpath}/file/download/${list.attachment}.action" >[下载]</a></div>
+                    <div class="time"><a   href="${pageContext.request.contextPath}/file/download/${list.attachment}.action" >[下载]</a></div>
                 </div>
                 </c:forEach>
             </div>
