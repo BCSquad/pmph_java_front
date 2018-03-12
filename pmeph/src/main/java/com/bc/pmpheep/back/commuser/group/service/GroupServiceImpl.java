@@ -163,8 +163,10 @@ public class GroupServiceImpl implements GroupService {
             Integer members = groupDao.getMemberTotal(groupId);
             Integer files = groupDao.getFileTotal(groupId);
             List<String> avatars = groupDao.getAvatars(groupId);
-            for (String avatar : avatars) {
-                avatar = RouteUtil.userAvatar(avatar);
+            for (int i = 0;i<avatars.size();i++) {
+                String avatar = RouteUtil.userAvatar(avatars.get(i));
+                avatars.remove(i);
+                avatars.add(i,avatar);
             }
             List<GroupMessageVO> messages = groupDao.getMessages(groupId);
             String gruopImage = group.getGroupImage();

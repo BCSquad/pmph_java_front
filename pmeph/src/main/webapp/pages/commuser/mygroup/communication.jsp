@@ -16,8 +16,10 @@
     <link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/communication.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/chat.css" type="text/css">
     <link rel="stylesheet" href="<%=path %>/statics/css/jquery.selectlist.css"/>
+    <link rel="stylesheet" href="${ctx}/resources/comm/layui/css/layui.css"  media="all">
     <script src="<%=path %>/resources/comm/jquery/jquery.js"></script>
     <script src="<%=path %>/resources/comm/jquery/jquery.selectlist.js"></script>
+
     <script type="text/javascript">
 		var contxtpath  = '${pageContext.request.contextPath}';
 		var contextpath = '${pageContext.request.contextPath}/';
@@ -26,11 +28,24 @@
     <script type="text/javascript" src="${ctx}/resources/comm/layer/layer.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js" type="text/javascript"></script>
     <script src="<%=path %>/resources/commuser/mygroup/group.js" type="text/javascript"></script>
+    <script src="${ctx}/resources/comm/layui/layui.js" charset="utf-8"></script>
     
 </head>
 <body>
-	
-	
+<%--<script>--%>
+    <%--layui.use('element', function(){--%>
+        <%--var $ = layui.jquery--%>
+            <%--,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块--%>
+
+        <%--//触发事件--%>
+        <%--var active = {--%>
+                <%--setPercent: function(process){--%>
+                    <%--//设置50%进度--%>
+                    <%--element.progress('demo', process);--%>
+                <%--}--%>
+        <%--}--%>
+<%--</script>--%>
+	<%----%>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 
 <div class="content-body">
@@ -50,13 +65,22 @@
                         <text>${role}</text>
                         <span id='quitGroup' style="cursor:pointer" >退出小组</span>
                     </div>
-                                 
-                    <div class="top_content3">
-                        <div class="top_content33">
-                            <img src="${ctx}/statics/image/scz.png"/>
-                        </div>
-                        <span id="scwj1" class="scmsg">上传文件</span>
+                    <div style="clear:both;">
+                        <div class="top_content3">
+                            <div class="top_content33">
+                                <img src="${ctx}/statics/image/scz.png"/>
+                            </div>
+                            <span id="scwj1" class="scmsg">上传文件</span>
+
+                        </div><span id="uploadFileTips" style="color: #999;"></span>
                     </div>
+
+                    <%--<div class="flex-center" id="process" style="display: inline;margin-left: 30px;">--%>
+                            <%--<h3>文件上传中，请稍等...</h3>--%>
+                            <%--&lt;%&ndash;<span class="container">&ndash;%&gt;--%>
+                                <%--&lt;%&ndash;<span id="progressBar" class="h-100P bar"></span>&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;</span>&ndash;%&gt;--%>
+                   <%--</div>--%>
                     
                 </div>
                 <div class="top_tj">
@@ -140,21 +164,28 @@
             <ul>
                 <c:if test="${gropuMemebers !=null }">
                 	<c:forEach var="gropuMemeber" items="${gropuMemebers}" varStatus="st">
+
                 		<c:if test="${st.index <= 11 }"><!-- 0-11  展示12位 -->
-	                		<li>
+	                		<li >
+                                <a target="_blank" href="${ctx}/personalhomepage/tohomepage.action?userId=${gropuMemeber.userId}">
 			                    <div class="init_center w65_h50"><img src="${pageContext.request.contextPath}/${gropuMemeber.avatar}" class="groupc_li"/></div>
 			                    <div class="init_center w65_h20_line20">
 			                        <text>${gropuMemeber.displayName}</text>
 			                    </div>
+                                </a>
 							</li>
 						 </c:if>
 						 <c:if test="${st.index > 11 }"><!-- 0-11  展示12位 -->
+
 	                		<li class="show_Allgroupmember">
+                                <a target="_blank" href="${ctx}/personalhomepage/tohomepage.action?userId=${gropuMemeber.userId}">
 			                    <div class="init_center w65_h50"><img src="${pageContext.request.contextPath}/${gropuMemeber.avatar}" class="groupc_li"/></div>
 			                    <div class="init_center w65_h20_line20">
 			                        <text>${gropuMemeber.displayName}</text>
 			                    </div>
+                                </a>
 							</li>
+
 						 </c:if>
 						 <input id="${gropuMemeber.userId}_${gropuMemeber.userType}" type="hidden" value="${gropuMemeber.displayName}"/>
 					</c:forEach>
