@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bc.pmpheep.general.dao.UserDao">
 
+    <select id="getUserType" resultType="map">
+      select '1' type from writer_user where  username=#{username}
+      UNION
+      select '2' type from org_user where  username=#{username}
+    </select>
+
+
     <select id="getUserInfo" resultType="map">
         <if test="usertype == 1">
             select * from writer_user where username=#{username}

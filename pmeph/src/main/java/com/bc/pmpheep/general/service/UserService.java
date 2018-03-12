@@ -61,6 +61,11 @@ public class UserService {
         return userDao.getUserInfo(username, usertype);
     }
 
+
+    public Map<String, Object> getUserType(String username) {
+        return userDao.getUserType(username);
+    }
+
     @Transactional
     public int insertUserLoginLog(Map<String, Object> info) {
         return userDao.insertUserLoginLog(info);
@@ -148,7 +153,7 @@ public class UserService {
 
         } else {//修改失败
 
-            throw new RuntimeException("修改密码失败："+MapUtils.getString(result,"Message",""));
+            throw new RuntimeException("修改密码失败：" + MapUtils.getString(result, "Message", ""));
 
         }
     }

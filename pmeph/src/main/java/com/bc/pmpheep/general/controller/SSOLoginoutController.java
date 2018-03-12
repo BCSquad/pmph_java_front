@@ -5,6 +5,7 @@ import com.bc.pmpheep.back.util.Const;
 import com.bc.pmpheep.back.util.MD5;
 import com.bc.pmpheep.general.service.UserService;
 import com.bc.pmpheep.utils.HttpRequestUtil;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
@@ -93,12 +94,6 @@ public class SSOLoginoutController extends BaseController {
     @RequestMapping("weblogin")
     public void login(HttpServletRequest request, HttpServletResponse response) {
         String username = null;
-        String usertype;
-        if ("1".equals(request.getParameter("isOrganUserName"))) {
-            usertype = "2";
-        } else {
-            usertype = "1";
-        }
 
         StringBuilder builder = new StringBuilder("");
         Map<String, String[]> map = (Map<String, String[]>) request.getParameterMap();
@@ -140,7 +135,9 @@ public class SSOLoginoutController extends BaseController {
             if (!"OK".equals(status)) {
                 throw new RuntimeException("获取用户帐号失败:" + message);
             }
-            System.out.println("username:" + username);
+
+            String usertype = MapUtils.getString(userService.getUserType(username), "type");
+
             Map<String, Object> user = userService.getUserInfo(username, usertype);
             if (user == null) {
 

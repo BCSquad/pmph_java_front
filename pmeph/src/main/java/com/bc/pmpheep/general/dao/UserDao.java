@@ -10,12 +10,16 @@ import java.util.Map;
  */
 public interface UserDao {
 
+    public Map<String, Object> getUserType(@Param("username")String username);
+
     public Map<String, Object> getUserInfo(@Param("username") String username, @Param("usertype") String usertype);
 
     //添加新的用户
     public int addNewUser(@Param("username") String username, @Param("usertype") String usertype);
 
     public int insertUserLoginLog(Map<String, Object> info);
+
+
 
     public List<Map<String, Object>> getPointRules();
 
