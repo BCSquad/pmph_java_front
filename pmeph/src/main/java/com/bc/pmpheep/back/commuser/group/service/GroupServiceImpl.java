@@ -6,7 +6,9 @@ package com.bc.pmpheep.back.commuser.group.service;
 
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -446,4 +448,33 @@ public class GroupServiceImpl implements GroupService {
         // TODO Auto-generated method stub
         return groupDao.queryGroupFileByFileId(id);
     }
+
+	@Override
+	public Map<String, Object> webSocketSentForIE(Map<String, Object> paraMap) {
+
+		
+		Map<String, Object> memberMap = groupDao.getMember(paraMap.get("senderId").toString(),paraMap.get("groupId").toString());
+		paraMap.put("member_id", memberMap.get("id").toString());
+		int count = groupDao.webSocketSentForIE(paraMap);
+		String msgId = paraMap.get("msgId").toString();
+		//新生成的消息
+		Map<String, Object> msgMap = groupDao.getMsgById(msgId);
+		
+
+		if("0".equals(paraMap.get("senderType").toString()) || "0".equals(paraMap.get("senderId").toString()) ){
+			//系统消息
+			paraMap.put("sender", 0); 
+	    }else if("2".equals(paraMap.get("senderType").toString()) || paraMap.get("logUserId").toString().equals(paraMap.get("senderId").toString()) 
+	    		){//我自己的
+	    	paraMap.put("sender", 1); 
+	    }
+		
+		
+		paraMap.put("senderName", memberMap.get("display_name"));
+		paraMap.put("senderIcon", memberMap.get("avatar"));
+		paraMap.put("time", msgMap.get("gmt_create"));
+		
+		//loadNewGroupMsg(sender,data.senderName,data.senderIcon,data.content,data.time);
+		return paraMap;
+	}
 }
