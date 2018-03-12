@@ -33,15 +33,15 @@ $(function(){
     var webSocket = undefined;
     
     try {
-        if (webSocket ) {
+        if (WebSocket ) {
             webSocket = new WebSocket("ws://120.76.221.250:11000/pmpheep/websocket?userType=2&userId=" + userId);
         }
     } catch (e) {
 
     }
-    if(!webSocket){
-
-	}
+//    if(!webSocket){
+//
+//	}
 
 	//var webSocket = new WebSocket("ws:127.0.0.1:8036/pmpheep/websocket?userType=" +2+"&userId="+$("#userId").val());
     if (webSocket) {
@@ -153,7 +153,7 @@ $(function(){
 	
 	
 	//-------------------------------
-    $("#filesgx_top").html('文件共享<span style="display: inline-block;position: absolute;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;' +
+    $("#filesgx_top").html('文件共享<span style="display: inline-block;position:absolute;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;' +
         'line-height: 13px;padding: 3px 6px;border-radius: 50%;right: 0;top: 0">' + $("#file_count").val() + '</span>');
     
 	var talkPagesize  = 5 ;
