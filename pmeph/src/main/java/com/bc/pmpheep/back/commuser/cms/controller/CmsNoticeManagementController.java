@@ -103,13 +103,14 @@ public class CmsNoticeManagementController extends BaseController {
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	@ResponseBody
-	public List<CmsNoticeList> list(Integer pageSize, Integer pageNumber, Integer order) {
+	public List<CmsNoticeList> list(HttpServletRequest req,Integer pageSize, Integer pageNumber, Integer order) {
 		Long userid=0L;
 		Map<String,Object> usermap=getUserInfo();
+		String materialId=req.getParameter("materialId");
 		if(usermap !=null){
 			userid=Long.valueOf(usermap.get("id").toString());
 		}
-		List<CmsNoticeList> cmsNoticeList =  cmsNoticeManagementService.list(pageSize, pageNumber, order,userid);
+		List<CmsNoticeList> cmsNoticeList =  cmsNoticeManagementService.list(pageSize, pageNumber, order,userid,materialId);
 		if(cmsNoticeList!=null && cmsNoticeList.size()>0){
 			for (CmsNoticeList cmsNotice : cmsNoticeList) {
 				Content content = contentService.get(cmsNotice.getMid());
@@ -147,7 +148,7 @@ public class CmsNoticeManagementController extends BaseController {
 			mv.addObject("firsttag", "首页");
 			mv.addObject("firsttag", "首页");
 			mv.addObject("firstpath", "homepage/tohomepage.action");
-			mv.addObject("materialId",materialId);
+			mv.addObject("materialId",mapTitle.get("material_id"));
 			if(tag!=null && tag.equals("FromCommunityList")){
 				//来自教材社区列表的request
 				

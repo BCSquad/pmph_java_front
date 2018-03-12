@@ -18,12 +18,12 @@
     
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css"/>
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
-   <%--  <script type="text/javascript"
+     <script type="text/javascript"
             src="${ctx}/resources/comm/ueditor1.4.3.3/ueditor.config.js"></script>
     <script type="text/javascript"
             src="${ctx}/resources/comm/ueditor1.4.3.3/ueditor.all.min.js"></script>
     <script type="text/javascript"
-            src="${ctx}/resources/comm/ueditor1.4.3.3/lang/zh-cn/zh-cn.js"></script> --%>
+            src="${ctx}/resources/comm/ueditor1.4.3.3/lang/zh-cn/zh-cn.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.pager.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
@@ -39,7 +39,7 @@
 
 <body>
 <!-- 隐藏域 -->
-	<input type="hidden" id="validate" value="${resultFlag}">
+	<%--<input type="hidden" id="validate" value="${resultFlag}">--%>
 	<input type="hidden" id="search-name-temp" value="">
 	<input type="hidden" id="page-num-temp" value="1">
 <jsp:include page="/pages/comm/headGreenBackGround.jsp">
@@ -67,9 +67,10 @@
         </div>
     </a>
     </div><!-- onsubmit="return getValue();"  -->
-    <form class="message-list" id="theForm"
-          action="${pageContext.request.contextPath}/authSendMessage/sendMessage.action" method="post"
-          enctype="multipart/form-data">
+    <%--<form class="message-list" id="theForm"--%>
+          <%--action="${pageContext.request.contextPath}/authSendMessage/sendMessage.action" method="post"--%>
+          <%--enctype="multipart/form-data">--%>
+        <form class="message-list" id="theForm">
         <div class="title">
             <span class="span1" style="margin-right: 25px;"><span class="span2">*</span>标题</span>
             <input type="text" name="titleValue" id="TitleValue" placeholder="请输入消息标题 30字以内"
@@ -84,10 +85,12 @@
         </div>
         <div class="message-input">
             <div class="tip" style="float:left;"><span class="span2">*</span>消息内容</div>
-          <!--   <script type="text/plian" id="mText"
-                    style="width: 1060px; height:478px;position:absolute;left:126px;top:0px"></script> -->
-           <!--  <input type="hidden" name="UEContent" id="UEContent"/> -->
-           <div style="width: 1060px; height:500px;position:absolute;left:126px;top:0px">  <textarea rows="8" cols="50" placeholder="请输入内容" id="UEContent" name ="UEContent" value="${UEContent}" required></textarea></div>
+            <div style="height:auto !important;min-height:600px;height:600px;">
+                <script type="text/plian" id="mText"
+                        style="width: 1060px; height:478px;scorll-y:true;position:absolute;margin-left:0px;left:126px;"></script>
+                <input type="hidden" id="UEContent" name="UEContent" value=""/>
+                    </div>
+           <%--<div style="width: 1060px; height:500px;position:absolute;left:126px;top:0px">  <textarea rows="8" cols="50" placeholder="请输入内容" id="UEContent" name ="UEContent" value="${UEContent}" required></textarea></div>--%>
         </div>
        <!--  <div class="appendix">
                          <span class="span1">
@@ -113,7 +116,13 @@
     </form>
 </div>
 
+<script type="text/javascript">
+UE.getEditor('mText');
+var ue = UE.getEditor('mText');
+ue.ready(function () {
 
+})
+</script>
 
 
 
@@ -191,6 +200,4 @@
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
 </html>
-<!-- <script type="text/javascript">
-    UE.getEditor('mText');
-</script> -->
+

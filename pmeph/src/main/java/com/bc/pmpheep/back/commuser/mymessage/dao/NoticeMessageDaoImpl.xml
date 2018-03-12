@@ -53,7 +53,7 @@
 		SELECT
 		u.id,
 		u.msg_id AS fId,
-		IF (u.material_id = 0,'系统消息','公告') title,
+		IF (u.material_id = 0,u.title,'公告') title,
 		u.gmt_create AS time,
 		u.msg_type AS msgType,
 		(case when u.sender_type = 0 then 'DEFAULT'
@@ -202,7 +202,7 @@
 		ON a.`material_id` = m.`id`
 		LEFT JOIN material_extra e
 		ON m.`id` = e.`material_id`
-		WHERE a.`material_id`=#{materialId}
+		WHERE a.`id`=#{cmsId}
 	</select>
 	
 	<!-- 查询教材备注相关的附件 -->

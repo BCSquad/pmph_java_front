@@ -63,7 +63,7 @@
         from  
             cms_content cc left join cms_category  ccg  on cc.category_id=ccg.id 
        where  
-       		cc.material_id=#{materialId} and ccg.id=2 and cc.is_published=1  and cc.auth_status=2 and cc.is_deleted=0 
+       		cc.material_id=#{materialId} and  cc.is_published=1  and cc.auth_status=2 and cc.is_deleted=0 
       order by 
             cc.gmt_create desc  
      limit 0,4

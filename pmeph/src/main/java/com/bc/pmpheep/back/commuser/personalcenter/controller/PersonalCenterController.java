@@ -240,7 +240,7 @@ public class PersonalCenterController extends BaseController {
 		} else if ("wdwj".equals(pagetag)) { // 我的问卷
 			// 从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
 			// 设定条件名数组
-			String[] names = {};
+			String[] names = {"user_id"};
 			String[] namesChi = {};
 			queryConditionOperation(names, namesChi, request, mv, paraMap, vm_map);
 			Date date = new Date();
@@ -249,7 +249,7 @@ public class PersonalCenterController extends BaseController {
 			paraMap.put("dateStr", dateStr);
 			pageParameter.setParameter(paraMap);
 
-			List<Map<String, Object>> List_map = personalService.mySurvey(pageParameter);
+			List<Map<String, Object>> List_map = personalService.whetherSurvey(pageParameter);
 			count = personalService.mySurveyCount(pageParameter);
 
 			// 分页数据代码块
