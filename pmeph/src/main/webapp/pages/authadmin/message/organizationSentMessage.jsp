@@ -39,7 +39,7 @@
                 </div>
             </a>
             <a href="${pageContext.request.contextPath}/authSendMessage/init.action">
-                <div class="item">
+                <div class="item" style="float: right;margin-right: 40px">
                     <div class="off-text" >发送消息</div>
                     <div class="off-line" ></div>
                 </div >
