@@ -20,7 +20,7 @@
 
     String rootPath = application.getRealPath("/");
     //rootPath ="D:\\Program Files\\apache-tomcat-7.0.78\\webapps\\pmeph1\\";
-    String result = new ActionEnter(request, rootPath).exec();
+    String result = new ActionEnter(request, rootPath, rootPath + "resources/comm/ueditor1.4.3.3/jsp/config.json").exec();
 
     String contextpath = "/".equals(request.getContextPath()) || "\\".equals(request.getContextPath()) ? "" : request.getContextPath();
 

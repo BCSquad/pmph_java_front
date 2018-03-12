@@ -31,18 +31,15 @@ $(function(){
      };*/
 	var userId    = $("#userId").val(); 
     var webSocket = undefined;
+    
     try {
-        if (WebSocket) {
+        if (webSocket ) {
             webSocket = new WebSocket("ws://120.76.221.250:11000/pmpheep/websocket?userType=2&userId=" + userId);
         }
     } catch (e) {
 
     }
     if(!webSocket){
-
-	}
-
-    if(!WebSocket){
 
 	}
 
