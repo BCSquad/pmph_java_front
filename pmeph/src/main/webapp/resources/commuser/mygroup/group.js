@@ -33,7 +33,7 @@ $(function(){
     var webSocket = undefined;
     
     try {
-        if (webSocket ) {
+        if (WebSocket ) {
             webSocket = new WebSocket("ws://120.76.221.250:11000/pmpheep/websocket?userType=2&userId=" + userId);
         }
     } catch (e) {
