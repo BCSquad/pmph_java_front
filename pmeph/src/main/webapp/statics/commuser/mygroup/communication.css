@@ -493,7 +493,7 @@ ul{
     width: 88px;height: 36px;line-height: 18px
 }
 .scmsg{
-	width: 50px;
+	/* width: 50px; */
 	height: 13px;
 	font-family: MicrosoftYaHei;
 	font-size: 14px;

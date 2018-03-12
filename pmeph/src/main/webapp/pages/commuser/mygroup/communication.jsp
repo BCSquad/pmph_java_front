@@ -152,7 +152,7 @@
 
             </div>
         </div>
-    </div>
+    
     <div class="right">
         <div class="groupcomposition">
             <div class="ul_top">
@@ -225,7 +225,7 @@
             </ul>
         </div>
     </div>
-
+</div>
 </div>
 </div>
 <div style="background-color: white;width: 100%;padding: 0;margin: 0;height: 220px;border: none;overflow: hidden;">
