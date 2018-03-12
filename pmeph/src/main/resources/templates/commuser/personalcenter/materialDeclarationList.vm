@@ -41,9 +41,11 @@
                 </div>
                 <div class="bmcj3">
                     <div class="bmcjan3"><span>已结束</span></div>
+                    
                     #if($!{c.iamin}>0 && $!{c.online_progress}>0)
-                    <a class="abmcj" href="$!{contextpath}">
-                		<div class="bmcjan4">查看编写进度</div>
+                    <a class="abmcj" href="$!{contextpath}progress/listReportProgress.action?materialId=$!{c.material_id}">
+                		<div class="bmcjan4">查看申报进度</div>
+                		<!-- <div class="bmcjan4">查看编写进度</div> -->
                 	</a>
                 	#end
                 </div>
