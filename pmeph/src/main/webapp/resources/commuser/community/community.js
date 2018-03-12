@@ -45,16 +45,16 @@
 			  $("#ullist").html("");
 			 var html="";
 			  $.each(json.result,function(i,n){
-				  html+='<li>'+
+				  html+='<li style="margin-bottom:10px">'+
 	              '<div class="video-c">'+
-	                 '<video src="http://120.76.221.250:11000/pmph_vedio/file/'+n.file_name+'" style="width:230px;height:184px" controls type="mp4"'+ 
-	              'poster="'+contextpath+'image/'+n.cover+'.action"></video>'+
+	                 '<div class="videou" id="videou'+n.id+'" src="http://120.76.221.250/v/play/'+n.file_name+'" style="width:230px;height:184px" controls type="mp4"'+ 
+	              'poster="'+contextpath+'image/'+n.cover+'.action"></div>'+
 	              '</div>'+
 	              '<div class="video-d" >'+
 	                               n.title+
 	              '</div>'+
 	              '<div  class="video-e">'+
-	                 '<span class="video-f" >'+n.gmt_create+'</span>'+
+	                 '<span class="video-f" >'+getDate(n.gmt_create)+'</span>'+
 	                 '<span class="video-g" style="float:right;line-height:30px;margin-left:5px">'+n.clicks+'</span>'+
 	                 '<span class="video-h"></span>'+
 	              '</div>'+
@@ -64,21 +64,33 @@
 
 			  $("#ullist").append(html);
 			  
-			 /* '<li>'+
-			              '<div class="video-c">'+
-			                 '<video src="" style="width:230px;height:184px" controls type="mp4"'+ 
-			              'poster="'+contextpath+'statics/testfile/testvideoimage.png"></video>'+
-			              '</div>'+
-			              '<div class="video-d" >'+
-			                               '解剖学讲解'+
-			              '</div>'+
-			              '<div  class="video-e">'+
-			                 '<span class="video-f" >2017-12-22</span>'+
-			                 '<span class="video-g" style="float:right;line-height:30px;margin-left:5px">98</span>'+
-			                 '<span class="video-h"></span>'+
-			              '</div>'+
-			      '</div></li>'*/
+			  $(".videou").each(function () {
+			        var $this = $(this);
+			        var videoObject = {
+			            container: "#" + $this.attr("id"),
+			            variable: 'player',
+			            autoplay: false,
+			            /*flashplayer: true,*/
+			            video:$this.attr("src"),
+			            poster: $this.attr("poster")
+
+			        };
+			        var player = new ckplayer(videoObject);
+			    });
 			  
 			}
 	  });
   }
+  
+  function getDate(mtime) {  
+	  //shijianchuo是整数，否则要parseInt转换  
+	  var time = new Date(mtime);  
+	  var y = time.getFullYear();  
+	  var m = time.getMonth()+1;  
+	  var d = time.getDate();  
+	  var h = time.getHours();  
+	  var mm = time.getMinutes();  
+	  var s = time.getSeconds();  
+	  return y+'-'+add0(m)+'-'+add0(d)+' '+add0(h)+':'+add0(mm)+':'+add0(s);  
+	}
+  function add0(m){return m<10?'0'+m:m }; 
