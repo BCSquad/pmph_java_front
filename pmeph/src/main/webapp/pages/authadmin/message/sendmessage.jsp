@@ -47,12 +47,20 @@
 </jsp:include>
 <div class="message-body" id="message-body">
     <div class="message">
-        <a href="${pageContext.request.contextPath}/AllMessage/init.action">
+        <a href="${pageContext.request.contextPath}/AllMessage/init.action?tag=receive">
             <div class="item">
                 <div class="off-text">全部消息</div>
                 <div class="off-line"></div>
             </div>
-        </a> <a href="${pageContext.request.contextPath}/authSendMessage/init.action">
+        </a> 
+        <a href="${pageContext.request.contextPath}/AllMessage/init.action?tag=send">
+             <div class="item">
+                 <div class="off-text">发送历史</div>
+                 <div class="off-line" ></div>
+             </div>
+         </a>
+        
+        <a href="${pageContext.request.contextPath}/authSendMessage/init.action">
         <div class="item">
             <div class="on-text">发送消息</div>
             <div class="on-line"></div>
