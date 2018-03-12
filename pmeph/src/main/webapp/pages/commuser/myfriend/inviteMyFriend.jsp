@@ -687,7 +687,7 @@ max-width: 10px !important; min-width: 10px !important;
 var webSocket = undefined;
 try {
     if (WebSocket) {
-    	webSocket = new WebSocket("ws://120.76.221.250:11000/pmpheep/websocket?userType=2&userId=" + $("#id").val());
+    	webSocket = new WebSocket("ws://119.254.226.115:11000/pmpheep/websocket?userType=2&userId=" + $("#id").val());
     }
 } catch (e) {
 

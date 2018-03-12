@@ -47,7 +47,7 @@
 			  $.each(json.result,function(i,n){
 				  html+='<li>'+
 	              '<div class="video-c">'+
-	                 '<video src="http://120.76.221.250:11000/pmph_vedio/file/'+n.file_name+'" style="width:230px;height:184px" controls type="mp4"'+ 
+	                 '<video src="http://119.254.226.115:11000/pmph_vedio/file/'+n.file_name+'" style="width:230px;height:184px" controls type="mp4"'+
 	              'poster="'+contextpath+'image/'+n.cover+'.action"></video>'+
 	              '</div>'+
 	              '<div class="video-d" >'+

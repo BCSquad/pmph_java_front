@@ -13,7 +13,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%
 
-    String serverAddress = "http://120.76.221.250/";
+    String serverAddress = "http://119.254.226.115/";
 
     request.setCharacterEncoding("utf-8");
     response.setHeader("Content-Type", "text/html");
