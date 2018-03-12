@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.bc</groupId>
-    <artifactId>pmeph</artifactId>
+    <artifactId>medu</artifactId>
     <packaging>war</packaging>
     <version>0.0.1</version>
     <name>PMPH E-education Platform Front</name>
@@ -308,6 +308,14 @@
                 <directory>src/main/java</directory>
                 <includes>
                     <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.vm</include>
                 </includes>
             </resource>
         </resources>

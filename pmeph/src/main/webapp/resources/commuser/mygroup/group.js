@@ -510,6 +510,12 @@ $(function(){
                 },// 你的form
 				async: false,
 				dataType:"json",
+                complete:function () {
+
+                        setTimeout(function () {
+                            $("#uploadFileTips").hide();
+                        },2000)
+                },
 			    success: function(msg) {
 				    if(msg =='OK'){
 				    	window.message.success("上传成功");
@@ -534,7 +540,34 @@ $(function(){
 			});
 	    },
 	    progressall: function (loaded, total, bitrate) {
-	        console.log("正在上传。。。" + loaded / total);
+             var progress = parseInt(loaded /total * 100, 10);
+             var percentage = loaded / total;
+            // $('#progress .bar').css(
+            //     'width',
+            //     progress + '%'
+            // );
+            //layui.element.active.setPercent(progress);
+			//$('.layui-progress-bar').setAttribute("lay-percent",loaded / total);
+          //  var percentage = 0;
+          //   var interval = setInterval(function () {
+          //       if (percentage==1) {
+          //
+          //           var widthTemp = percentage.toFixed(1) + '%';
+          //           $('#progressBar').css('width', widthTemp);
+          //           $('#progressBar').text(widthTemp);
+          //       } else {
+          //           clearInterval(interval);
+          //           $('h3').text('上传完成');
+          //           setTimeout(function () {
+          //               $("#process").hide();
+          //           }, 500);
+          //       }
+          //   }, 10);
+            $("#uploadFileTips").text("正在上传...  "+((loaded / total).toFixed(2)*100)+'%');
+			//if
+			//}
+
+	        console.log(loaded+"  "+ total+"正在上传..." + loaded / total);
 	    }
 	});
 	

@@ -653,8 +653,14 @@ max-width: 10px !important; min-width: 10px !important;
 				            <div class="div_txt1">${friend.realname}</div>
 				            <div class="div_txt2">${friend.position}</div>
 				            <div class="div_txt3">
-				                <div  class ="showTalk" id="${friend.id}" onclick="invite('${friend.id}','${friend.realname}')">邀请</div>
-				                <input type="hidden" id="t_${friend.id}" value= "${friend.realname}" />
+								<c:if test="${friend.type=='notInvite'}">
+									<div  class ="showTalk" id="${friend.id}" onclick="invite('${friend.id}','${friend.realname}')">邀请</div>
+									<input type="hidden" id="t_${friend.id}" value= "${friend.realname}" />
+								</c:if>
+								<c:if test="${friend.type=='invited'}">
+									<div  class ="showTalk" id="${friend.id}" onclick="" style="background-color: #F2F2F2;">邀请</div>
+									<input type="hidden" id="t_${friend.id}" value= "${friend.realname}" />
+								</c:if>
 				            </div>
 		            	</div>
 		    		</c:when>
@@ -665,8 +671,14 @@ max-width: 10px !important; min-width: 10px !important;
 				            <div class="div_txt1">${friend.realname}</div>
 				            <div class="div_txt2">${friend.position}</div>
 				            <div class="div_txt3">
-				                <div  class ="showTalk" id="${friend.id}" onclick="invite('${friend.id}','${friend.realname}')">邀请</div>
-				                <input type="hidden" id="t_${friend.id}" value= "${friend.realname}" />
+								<c:if test="${friend.type=='notInvite'}">
+									<div  class ="showTalk" id="${friend.id}" onclick="invite('${friend.id}','${friend.realname}')">邀请</div>
+									<input type="hidden" id="t_${friend.id}" value= "${friend.realname}" />
+								</c:if>
+								<c:if test="${friend.type=='invited'}">
+									<div  class ="showTalk" id="${friend.id}" onclick="" style="background-color: #F2F2F2;">邀请</div>
+									<input type="hidden" id="t_${friend.id}" value= "${friend.realname}" />
+								</c:if>
 				            </div>
 			            </div>
 		            </c:otherwise>
@@ -790,17 +802,32 @@ if (webSocket) {
                				str+='<div class="item1 item11">'
                			}; 
                	            <%-- <div><img src="${ctx}${friend.avatar}" class="img2"></div> --%>
-               	       str+='<div><img src="${ctx}/${friend.avatar}" class="img2"></div><div class="div_txt1">'
-               	            +n.realname
-               	            +'</div><div class="div_txt2">'
-               	            +n.position
-               	            +'</div><div class="div_txt3"><div  class ="showTalk" id='
-               	            +n.id
-               	            +'>邀请</div><input type="hidden" onclick="invite('+n.id+','+n.realname+')" id="t_'
-               	            +n.id 
-               	            +'value=\"' 
-               	            +n.realname 
-               	            +'\"></div></div>';
+					if(n.type=='notInvite'){
+                        str+='<div><img src="${ctx}/${friend.avatar}" class="img2"></div><div class="div_txt1">'
+                            +n.realname
+                            +'</div><div class="div_txt2">'
+                            +n.position
+                            +'</div><div class="div_txt3"><div  class ="showTalk" id='
+                            +n.id
+                            +' onclick="invite(\'+n.id+\',\'+n.realname+\')">邀请</div><input type="hidden"  id="t_'
+                            +n.id
+                            +'value=\"'
+                            +n.realname
+                            +'\"></div></div>';
+					}else {
+                        str+='<div><img src="${ctx}/${friend.avatar}" class="img2"></div><div class="div_txt1">'
+                            +n.realname
+                            +'</div><div class="div_txt2">'
+                            +n.position
+                            +'</div><div class="div_txt3"><div  class ="showTalk" id='
+                            +n.id
+                            +'  style="background-color: #F2F2F2;">邀请</div><input type="hidden" id="t_'
+                            +n.id
+                            +'value=\"'
+                            +n.realname
+                            +'\"></div></div>';
+					}
+
             	});
             	str+='</div></div>';
             	$("#more").append(str);
