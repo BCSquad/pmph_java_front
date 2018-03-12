@@ -16,7 +16,7 @@
         var contextpath = '${pageContext.request.contextPath}/';
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-    <title>首页</title>
+    <title>人卫E教平台</title>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/homepage/homepage.css" type="text/css">
     <script src="${ctx}/resources/comm/jquery/jquery.js"></script>

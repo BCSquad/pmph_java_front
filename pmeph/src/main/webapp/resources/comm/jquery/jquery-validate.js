@@ -1,4 +1,4 @@
-(function(factory) {
+(function (factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD
         define(['jquery'], factory);
@@ -9,43 +9,55 @@
         // Browser globals
         factory(jQuery, window, document);
     }
-}(function($, window, document, undefined) {
+}(function ($, window, document, undefined) {
 
 
     /*************************策略对象*****************************/
 
     var RULES = {
-        isNonEmpty: function(value, errorMsg) {
+        isNonEmpty: function (value, errorMsg) {
             //不能为空
             if (!value.length) {
                 return errorMsg;
             }
         },
-        minLength: function(value, length, errorMsg) {
+        minLength: function (value, length, errorMsg) {
             //大于
             if (value.length > length) {
                 return errorMsg;
             }
         },
-        maxLength: function(value, length, errorMsg) {
+        maxLength: function (value, length, errorMsg) {
             //小于
             if (value.length < length) {
                 return errorMsg;
             }
         },
-        isMobile: function(value, errorMsg) {
+        isMobile: function (value, errorMsg) {
             //是否为手机号码
             if (!/(^1[3|5|8][0-9]{9}$)/.test(value)) {
                 return errorMsg;
             }
         },
-        isEmail: function(value, errorMsg) {
+        isPhone: function (value, errorMsg) {
+            //是否为电话号码
+            if (!/^0\d{2,3}-?\d{7,8}$/.test(value)) {
+                return errorMsg;
+            }
+        },
+        isPhoneOrMobile: function (value, errorMsg) {
+            //是否为电话号码
+            if (!/^0\d{2,3}-?\d{7,8}$/.test(value) && !/(^1[3|5|8][0-9]{9}$)/.test(value)) {
+                return errorMsg;
+            }
+        },
+        isEmail: function (value, errorMsg) {
             //是否为邮箱
             if (!/(^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$)/.test(value)) {
                 return errorMsg;
             }
         },
-        between: function(value, range, errorMsg) {
+        between: function (value, range, errorMsg) {
             //大于小于
             var min = parseInt(range.split('-')[0]);
             var max = parseInt(range.split('-')[1]);
@@ -53,34 +65,34 @@
                 return errorMsg;
             }
         },
-        onlyEn: function(value, errorMsg) {
+        onlyEn: function (value, errorMsg) {
             //纯英文
             if (!/^[A-Za-z]+$/.test(value)) {
 
             }
         },
-        onlyZh: function(value, errorMsg) {
+        onlyZh: function (value, errorMsg) {
             //纯中文
             if (!/^[\u4e00-\u9fa5]+$/.test(value)) {
                 return errorMsg;
             }
         },
-        onlyNum: function(value, errorMsg) {
+        onlyNum: function (value, errorMsg) {
             //数字包含小数
             if (!/^[0-9]+([.][0-9]+){0,1}$/.test(value)) {
                 return errorMsg;
             }
         },
-        onlyInt: function(value, errorMsg) {
+        onlyInt: function (value, errorMsg) {
             //整数
             if (!/^[0-9]*$/.test(value)) {
                 return errorMsg;
             }
         },
-        isChecked: function(value, errorMsg, el) {
+        isChecked: function (value, errorMsg, el) {
             var i = 0;
             var $collection = $(el).find('input:checked');
-            if(!$collection.length){
+            if (!$collection.length) {
                 return errorMsg;
             }
         }
@@ -96,17 +108,17 @@
         successTip: true
     };
 
-    var Validator = function() {
+    var Validator = function () {
         this.cache = [];
     };
 
-    Validator.prototype.add = function(dom, rules) {
+    Validator.prototype.add = function (dom, rules) {
         var self = this;
         for (var i = 0, rule; rule = rules[i++];) {
-            (function(rule) {
+            (function (rule) {
                 var strategyAry = rule.strategy.split(':');
                 var errorMsg = rule.errorMsg
-                self.cache.push(function() {
+                self.cache.push(function () {
                     var strategy = strategyAry.shift(); // 前删匹配方式并赋值
                     strategyAry.unshift(dom.value); // 前插value值
                     strategyAry.push(errorMsg); // 后插出错提示
@@ -123,7 +135,7 @@
         }
     };
 
-    Validator.prototype.start = function() {
+    Validator.prototype.start = function () {
         var result;
         for (var i = 0, validatorFunc; validatorFunc = this.cache[i++];) {
             var result = validatorFunc();
@@ -134,11 +146,12 @@
                 return result;
             }
 
-        };
+        }
+        ;
         return true;
     };
 
-    Validator.prototype.showMsg = function(target, msg, status, callback) {
+    Validator.prototype.showMsg = function (target, msg, status, callback) {
         //status
         // 0 : tip
         // 1 : success
@@ -148,11 +161,11 @@
         var $msg = $context.find('.valid_message');
         var _other = target.attr('data-type') || '';
         $msg.remove();
-        $context.removeClass('success tip error').addClass(_current+' '+_other).append('<span class="valid_message">' + msg + '</span>');
+        $context.removeClass('success tip error').addClass(_current + ' ' + _other).append('<span class="valid_message">' + msg + '</span>');
     };
 
     var plugin = {
-        init: function(options) {
+        init: function (options) {
             var $form = this;
             var $body = $('body');
             var $required = $form.find('.required');
@@ -165,16 +178,16 @@
             var validator = new Validator();
 
             $body.on({
-                focus: function(event) {
+                focus: function (event) {
                     var $this = $(this);
                     var _tipMsg = $this.attr('data-tip') || '';
                     var _status = $this.attr('data-status');
-                    if (_status === undefined ||!parseInt(_status)) {
+                    if (_status === undefined || !parseInt(_status)) {
                         validator.showMsg($this, _tipMsg);
                     }
                     setting.onFocus ? setting.onFocus.call($this, arguments) : '';
                 },
-                blur: function(event) {
+                blur: function (event) {
                     var $this = $(this);
                     var dataValid = $this.attr('data-valid');
                     var validLen = dataValid.split('||');
@@ -194,7 +207,8 @@
                             validator.showMsg($this, errMsg, 2);
                             break;
                         }
-                    };
+                    }
+                    ;
 
                     if (!errMsg) {
                         $this.attr('data-status', 1);
@@ -203,21 +217,21 @@
 
                     setting.onBlur ? setting.onBlur.call($this, arguments) : '';
                 },
-                change: function(event) {
+                change: function (event) {
                     setting.onChange ? setting.onChange.call($this, arguments) : '';
                 }
             }, '.required');
 
 
         },
-        submitValidate: function(options) {
+        submitValidate: function (options) {
             var $form = options || this;
             var $body = $('body');
             var $required = $form.find('.required');
             var validator = new Validator();
             var $target;
 
-            $.each($required, function(index, el) {
+            $.each($required, function (index, el) {
                 var $el = $(el);
                 var dataValid = $el.attr('data-valid');
                 var validLen = dataValid.split('||');
@@ -225,12 +239,13 @@
                 var errMsgAry = errCollection.split("||");
                 var ruleAry = [];
 
-                for (var i = 0; i < validLen.length; i++){
+                for (var i = 0; i < validLen.length; i++) {
                     ruleAry.push({
                         strategy: validLen[i],
                         errorMsg: errMsgAry[i]
                     });
-                };
+                }
+                ;
 
                 validator.add(el, ruleAry);
 
@@ -250,7 +265,7 @@
         }
     };
 
-    $.fn.validate = function() {
+    $.fn.validate = function () {
         var method = arguments[0];
         if (plugin[method]) {
             method = plugin[method];

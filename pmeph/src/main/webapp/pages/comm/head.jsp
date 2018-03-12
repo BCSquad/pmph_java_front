@@ -19,7 +19,7 @@
     <div class="content-wrapper">
         <div class="content">
             <div class="image">
-                <img src="${ctx}/statics/image/logo.png" alt="">
+                <img src="${ctx}/statics/image/logo.png" alt="" onclick="window.location='${ctx}/homepage/tohomepage.action'">
             </div>
             <div class="links">
                 <a class="link <%="homepage".equals(request.getParameter("pageTitle"))?"active":""%>"
