@@ -31,20 +31,41 @@ $(function(){
      };*/
 	var userId    = $("#userId").val(); 
     var webSocket = undefined;
+    
     try {
         if (WebSocket) {
             webSocket = new WebSocket("ws://120.76.221.250:11000/pmpheep/websocket?userType=2&userId=" + userId);
         }
     } catch (e) {
-
+    	 //不支持websocket ie10以下版本 
+    	webSocket = new Object();
+    	
+    	webSocket.send=function(sendJson){
+    		var data= eval('(' + sendJson + ')');
+    		$.ajax({
+    			type:'post',
+    	        url :contxtpath+'/group/webSocketSentForIE.action?t=' + new Date(),
+    	        
+    	        dataType:'json',
+    	        data:data,
+    	        success:function(json){
+    	        	//{sender=1, content=1, logUserId=2, groupId=55, time=2018-03-12 21:21:47.0, senderName=曾若男, senderIcon=DEFAULT, senderType=2, msgId=4200, sendType=0, senderId=2, member_id=11181}
+    	        	if(json.senderIcon==''||json.senderIcon=='DEFAULT'||json.senderIcon.indexOf('statics')!=-1||json.senderIcon.indexOf('default_image')!=-1||json.senderIcon.indexOf('png')!=-1){
+    	        		json.senderIcon = contxtpath+'/statics/image/default_image.png';
+    		    	}else{
+    		    		json.senderIcon = contxtpath+'/image/'+json.senderIcon+'.action';
+    		    	}
+    	        	loadNewGroupMsg(json.sender,json.senderName,json.senderIcon,json.content,json.time);
+    	        }
+    	     });
+    		
+    	}
+    	webSocket.close = function(){};
+    	//("{senderId:"+userId+",senderType:"+0+",content:'\""+$("#userName").val()+"\"退出了小组"+"',groupId:"+$("#groupId").val()+",sendType:0}");
+	
     }
-    if(!webSocket){
-
-	}
-
-    if(!WebSocket){
-
-	}
+    
+    
 
 	//var webSocket = new WebSocket("ws:127.0.0.1:8036/pmpheep/websocket?userType=" +2+"&userId="+$("#userId").val());
     if (webSocket) {
@@ -156,7 +177,7 @@ $(function(){
 	
 	
 	//-------------------------------
-    $("#filesgx_top").html('文件共享<span style="display: inline-block;position: absolute;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;' +
+    $("#filesgx_top").html('文件共享<span style="display: inline-block;position:absolute;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;' +
         'line-height: 13px;padding: 3px 6px;border-radius: 50%;right: 0;top: 0">' + $("#file_count").val() + '</span>');
     
 	var talkPagesize  = 5 ;
@@ -463,9 +484,12 @@ $(function(){
                     "</div> ";
 		}
         $(".iframe1").append(html);
-		var a=document.getElementsByClassName("chat_items mine");
-        var b=document.getElementsByClassName("chat_items other");
-        var t=a.length+b.length;
+		//var a=document.getElementsByClassName("chat_items mine");
+		var $a = $(".chat_items.mine");
+		var $b = $(".chat_items.other");
+        //var b=document.getElementsByClassName("chat_items other");
+        //var t=a.length+b.length;
+		var t=$a.length+$b.length;
 		$(".iframe1").scrollTop(100*t);
 	}
 	
@@ -513,6 +537,12 @@ $(function(){
                 },// 你的form
 				async: false,
 				dataType:"json",
+                complete:function () {
+
+                        setTimeout(function () {
+                            $("#uploadFileTips").hide();
+                        },2000)
+                },
 			    success: function(msg) {
 				    if(msg =='OK'){
 				    	window.message.success("上传成功");
@@ -537,7 +567,34 @@ $(function(){
 			});
 	    },
 	    progressall: function (loaded, total, bitrate) {
-	        console.log("正在上传。。。" + loaded / total);
+             var progress = parseInt(loaded /total * 100, 10);
+             var percentage = loaded / total;
+            // $('#progress .bar').css(
+            //     'width',
+            //     progress + '%'
+            // );
+            //layui.element.active.setPercent(progress);
+			//$('.layui-progress-bar').setAttribute("lay-percent",loaded / total);
+          //  var percentage = 0;
+          //   var interval = setInterval(function () {
+          //       if (percentage==1) {
+          //
+          //           var widthTemp = percentage.toFixed(1) + '%';
+          //           $('#progressBar').css('width', widthTemp);
+          //           $('#progressBar').text(widthTemp);
+          //       } else {
+          //           clearInterval(interval);
+          //           $('h3').text('上传完成');
+          //           setTimeout(function () {
+          //               $("#process").hide();
+          //           }, 500);
+          //       }
+          //   }, 10);
+            $("#uploadFileTips").text("正在上传...  "+((loaded / total).toFixed(2)*100)+'%');
+			//if
+			//}
+
+	        console.log(loaded+"  "+ total+"正在上传..." + loaded / total);
 	    }
 	});
 	

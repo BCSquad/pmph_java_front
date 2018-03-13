@@ -79,28 +79,16 @@ public class SSOLoginoutController {
         userService.insertUserLoginLog(params);
 
 
-        Set<LoginInterceptor.PathWithUsertypeMap> pathWithUsertypeMaps = interceptor.getPathWithUsertypeMaps();
 
-        PathMatchingResourcePatternResolver resolver = getPathMatchingResourcePatternResolver();
-        for (LoginInterceptor.PathWithUsertypeMap pathMap : pathWithUsertypeMaps) {
-            //需要拦截的URL
-            if (resolver.getPathMatcher().match(request.getContextPath() + pathMap.getPath(), request.getParameter("refer"))
-                    && pathMap.getUserType().equals(usertype)) {//路径匹配，并且用户身份一致可以跳转
 
-                response.sendRedirect(request.getParameter("refer"));
-                return;
-
-            }
-        }
-
-        if ("1".equals(usertype)) {
+ /*       if ("1".equals(usertype)) {
             response.sendRedirect(request.getContextPath() + "/homepage/tohomepage.action");
         } else if ("2".equals(usertype)) {
             response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
-        }
+        }*/
 
 
-        /*if (StringUtils.isEmpty(request.getParameter("refer")) || request.getParameter("refer").endsWith("/") || request.getParameter("refer").endsWith("tohomepage.action")) {
+        if (StringUtils.isEmpty(request.getParameter("refer"))) {
             if ("1".equals(usertype)) {
                 response.sendRedirect(request.getContextPath() + "/");
             } else if ("2".equals(usertype)) {
@@ -108,8 +96,38 @@ public class SSOLoginoutController {
             }
 
         } else {
-            response.sendRedirect(request.getParameter("refer"));
-        }*/
+
+            Set<LoginInterceptor.PathWithUsertypeMap> pathWithUsertypeMaps = interceptor.getPathWithUsertypeMaps();
+
+            PathMatchingResourcePatternResolver resolver = getPathMatchingResourcePatternResolver();
+            for (LoginInterceptor.PathWithUsertypeMap pathMap : pathWithUsertypeMaps) {
+                //需要拦截的URL
+                if (resolver.getPathMatcher().match(request.getContextPath() + pathMap.getPath(), request.getParameter("refer"))
+                        && pathMap.getUserType().equals(usertype)) {//路径匹配，并且用户身份一致可以跳转
+
+                    response.sendRedirect(request.getParameter("refer"));
+                    return;
+
+                } else if (resolver.getPathMatcher().match(request.getContextPath() + pathMap.getPath(), request.getParameter("refer"))) {
+                    if ("1".equals(usertype)) {
+                        response.sendRedirect(request.getContextPath() + "/");
+                        return;
+                    } else if ("2".equals(usertype)) {
+                        response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
+                        return;
+                    }
+                }
+
+
+            }
+
+            if ("1".equals(usertype)) {
+                response.sendRedirect(request.getParameter("refer"));
+            } else if ("2".equals(usertype)) {
+                response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
+            }
+
+        }
     }
 
     @RequestMapping("logout")
@@ -122,7 +140,7 @@ public class SSOLoginoutController {
         if ("1".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
             session.removeAttribute(Const.SESSION_USER_CONST_WRITER);
             session.removeAttribute(Const.SESSION_USER_CONST_TYPE);
-            String headReferer = request.getHeader("Referer");
+           /* String headReferer = request.getHeader("Referer");
             String refer = StringUtils.isEmpty(headReferer) ? request.getHeader("referer") : headReferer;
 
             if (refer != null) {
@@ -135,13 +153,13 @@ public class SSOLoginoutController {
                     response.sendRedirect(request.getContextPath() + "/homepage/tohomepage.action");
                     return;
                 }
-            }
+            }*/
 
-            response.sendRedirect(refer);
+            response.sendRedirect(request.getContextPath() + "/homepage/tohomepage.action");
         } else if ("2".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
             session.removeAttribute(Const.SESSION_USER_CONST_ORGUSER);
             session.removeAttribute(Const.SESSION_USER_CONST_TYPE);
-            String headReferer = request.getHeader("Referer");
+           /* String headReferer = request.getHeader("Referer");
             String refer = StringUtils.isEmpty(headReferer) ? request.getHeader("referer") : headReferer;
             for (LoginInterceptor.PathWithUsertypeMap pathMap : pathWithUsertypeMaps) {
                 //需要拦截的URL
@@ -150,8 +168,8 @@ public class SSOLoginoutController {
                     return;
 
                 }
-            }
-            response.sendRedirect(refer);
+            }*/
+            response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
         } else {
             response.sendRedirect(request.getContextPath() + "/homepage/tohomepage.action");
         }
@@ -182,9 +200,9 @@ public class SSOLoginoutController {
             }
 
 
-            if(!StringUtils.isEmpty(refer)){
+            if (!StringUtils.isEmpty(refer)) {
                 response.sendRedirect(refer);
-            }else if ("1".equals(usertype)) {
+            } else if ("1".equals(usertype)) {
                 response.sendRedirect(request.getContextPath() + "/homepage/tohomepage.action");
             } else if ("2".equals(usertype)) {
                 response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");

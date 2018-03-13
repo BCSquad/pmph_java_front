@@ -4,9 +4,6 @@ import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
-import com.bc.pmpheep.back.plugin.PageParameter;
-import com.sun.org.glassfish.gmbal.ParameterNames;
-
 public interface ReadDetailDao {
 
 	/**

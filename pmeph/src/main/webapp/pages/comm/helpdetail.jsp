@@ -85,17 +85,12 @@
         <div class="sxy-div-content" style="height: 60px">
             <div class="question">
                 <div class="icon">问</div>
-                <div class="title">习近平主持政治局会议 决定召开十九届三中全会</div>
+                <div class="title">${title}</div>
             </div>
         </div>
         <div class="answer">
             <div class="icon">答</div>
-            <div class="title">习近平主持政治局会议 决定召开十九届三中全会
-                习近平主持政治局会议 决定召开十九届三中全会
-                习近平主持政治局会议 决定召开十九届三中全会
-                习近平主持政治局会议 决定召开十九届三中全会
-                习近平主持政治局会议 决定召开十九届三中全会
-                习近平主持政治局会议 决定召开十九届三中全会习近平主持政治局会议 决定召开十九届三中全会
+            <div class="title">${dContent}
             </div>
         </div>
 

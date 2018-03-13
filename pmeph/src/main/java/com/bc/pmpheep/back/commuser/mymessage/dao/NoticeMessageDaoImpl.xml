@@ -202,7 +202,7 @@
 		ON a.`material_id` = m.`id`
 		LEFT JOIN material_extra e
 		ON m.`id` = e.`material_id`
-		WHERE a.`material_id`=#{materialId}
+		WHERE a.`id`=#{cmsId}
 	</select>
 	
 	<!-- 查询教材备注相关的附件 -->

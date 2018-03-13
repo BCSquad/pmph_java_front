@@ -50,21 +50,36 @@
 	
 	<!--获取用户好友列表  -->
 	<select id="listMyFriend" parameterType="java.util.Map" resultType="java.util.Map">
-		select
-			b.realname 
-			,b.position
-			,b.id 
-			,b.avatar
-			from
-			writer_friend a
-			left join writer_user b
-			on a.target_id=b.id or a.request_id = b.id
-			WHERE (a.target_id= #{userId} or a.request_id = #{userId})
+		SELECT
+		b.realname,
+		b.position,
+		b.id,
+		b.avatar,
+		CASE
+		WHEN EXISTS (
+		SELECT
+		*
+		FROM
+		pmph_group_member pgm
+		WHERE
+		pgm.group_id = #{groupId}
+		AND pgm.user_id = b.id
+		AND pgm.is_deleted = 0
+		AND pgm.is_writer = 1
+		) THEN
+		'invited'
+		ELSE
+		'notInvite'
+		END AS type
+
+		FROM
+		writer_friend a
+		LEFT JOIN writer_user b ON a.target_id = b.id
+		OR a.request_id = b.id
+		WHERE
+		(a.target_id = #{userId} or a.request_id = #{userId})
 			and <![CDATA[b.id<>#{userId}]]>
-			<if test="groupId !='' and groupId !=null">
-			and not EXISTS(select * from pmph_group_member pgm where pgm.group_id =#{groupId} 
-			and pgm.user_id = b.id and pgm.is_deleted=0 and pgm.is_writer=1)
-			</if>
+
 			AND a.status=2
 			group by b.id
 			limit ${startrow},15

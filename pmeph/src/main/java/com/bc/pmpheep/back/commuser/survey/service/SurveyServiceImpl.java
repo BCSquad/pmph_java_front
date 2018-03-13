@@ -81,9 +81,14 @@ public class SurveyServiceImpl implements SurveyService {
         for (Map<String, Object> rule : rulesList) {
             rules.put(MapUtils.getString(rule, "rule_code"), rule);
         }
-            info.put("scores", 1);
-            info.put("ruleid", MapUtils.getIntValue(rules.get("survey"), "id"));
-            userDao.insertUserScore(info);
+            
+            int ruleid = MapUtils.getIntValue(rules.get("survey"), "id");
+            if (ruleid>0) { //关闭的rule不应增加积分
+            	info.put("scores", 1);
+                info.put("ruleid", ruleid);
+                userDao.insertUserScore(info);
+			}
+            
 	}
 	
 	

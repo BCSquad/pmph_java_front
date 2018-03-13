@@ -44,15 +44,15 @@ public class HomeServiceImpl implements HomeService {
      */
     @Override
     @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName+#endrow")
-    public List<Map<String, Object>> queryArticle(int endrow) throws Exception{
+    public List<Map<String, Object>> queryArticle(int endrow) throws Exception {
         List<Map<String, Object>> list = homeDao.queryArticle(endrow);
         for (Map<String, Object> map : list) {
             String time = map.get("auth_date").toString().substring(0, 10);
             map.put("auth_date", time);
             map.put("cover", RouteUtil.articleAvatar(MapUtils.getString(map, "cover")));
-            String con=map.get("summary").toString();
-            String content=omit(con,208);
-            map.put("content",content);
+            String con = MapUtils.getString(map, "summary", "");
+            String content = omit(con, 208);
+            map.put("content", content);
         }
         return list;
     }
@@ -72,12 +72,12 @@ public class HomeServiceImpl implements HomeService {
      */
     @Override
     @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName")
-    public List<Map<String, Object>> queryComment() throws UnsupportedEncodingException{
+    public List<Map<String, Object>> queryComment() throws UnsupportedEncodingException {
         List<Map<String, Object>> list = homeDao.queryComment();
-        for (Map<String, Object> map:list) {
-            String con=map.get("content").toString();
-            String content=omit(con,200);
-            map.put("content",content);
+        for (Map<String, Object> map : list) {
+            String con = map.get("content").toString();
+            String content = omit(con, 200);
+            map.put("content", content);
         }
         return list;
     }
@@ -89,9 +89,9 @@ public class HomeServiceImpl implements HomeService {
     @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName+#map['type']+'_'+#map['startrows']")
     public List<Map<String, Object>> queryBook(Map<String, Object> map) {
         List<Map<String, Object>> list = homeDao.queryBook(map);
-        for (Map<String, Object> pmap: list) {
-            String score=pmap.get("score").toString().substring(0,1);
-            pmap.put("score",score);
+        for (Map<String, Object> pmap : list) {
+            String score = pmap.get("score").toString().substring(0, 1);
+            pmap.put("score", score);
         }
         return list;
     }
@@ -101,12 +101,12 @@ public class HomeServiceImpl implements HomeService {
      */
     @Override
     @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName+#type")
-    public List<Map<String, Object>> querySale(int type) throws UnsupportedEncodingException{
+    public List<Map<String, Object>> querySale(int type) throws UnsupportedEncodingException {
         List<Map<String, Object>> list = homeDao.querySale(type);
-        for (Map<String, Object> map:list) {
-            String a=map.get("bookname").toString();
-            String name=omit(a,52);
-            map.put("bookname",name);
+        for (Map<String, Object> map : list) {
+            String a = map.get("bookname").toString();
+            String name = omit(a, 52);
+            map.put("bookname", name);
         }
         return list;
     }
@@ -145,50 +145,51 @@ public class HomeServiceImpl implements HomeService {
     /**
      * 添加好友
      */
-	@Override
-	public String addfriend(String request_id, String target_id) {
-		// TODO Auto-generated method stub
-		String returncode="";
-		int count=homeDao.addfriend(request_id, target_id);
-		if(count>0){
-			returncode="OK";
-		}
-		return returncode;
-	}
+    @Override
+    public String addfriend(String request_id, String target_id) {
+        // TODO Auto-generated method stub
+        String returncode = "";
+        int count = homeDao.addfriend(request_id, target_id);
+        if (count > 0) {
+            returncode = "OK";
+        }
+        return returncode;
+    }
 
-	/**
-	 * 查询教材社公告
-	 */
-	@Override
-	public List<Map<String, Object>> queryMaterial(String id) {
-		// TODO Auto-generated method stub
-		List<Map<String, Object>> list=homeDao.queryMaterial(id);
-		return list;
-	}
+    /**
+     * 查询教材社公告
+     */
+    @Override
+    public List<Map<String, Object>> queryMaterial(String id) {
+        // TODO Auto-generated method stub
+        List<Map<String, Object>> list = homeDao.queryMaterial(id);
+        return list;
+    }
 
     /**
      * 超出部分省略号显示
+     *
      * @param content
      * @return
      */
     @Override
-    public String omit(String content,int length) throws UnsupportedEncodingException {
-        String returncontent="";
-        int le=content.getBytes("UTF-8").length;
-        if(le>length && !content.equals(null)){
-            int n=length/4;
-            returncontent=content.substring(0,n)+"...";
-        }else{
-            returncontent=content;
+    public String omit(String content, int length) throws UnsupportedEncodingException {
+        String returncontent = "";
+        int le = content.getBytes("UTF-8").length;
+        if (le > length && !content.equals(null)) {
+            int n = length / 4;
+            returncontent = content.substring(0, n) + "...";
+        } else {
+            returncontent = content;
         }
         return returncontent;
     }
 
 
-	@Override
-	public int countBookByType(String type) {
-		return this.homeDao.countBookByType(type);
-	}
+    @Override
+    public int countBookByType(String type) {
+        return this.homeDao.countBookByType(type);
+    }
 
     @Override
     public int countSurvey() {
@@ -199,8 +200,6 @@ public class HomeServiceImpl implements HomeService {
     public List<Map<String, Object>> queryNotReadMessages(String id) {
         return homeDao.queryNotReadMessages(id);
     }
-
-
 
 
 }
