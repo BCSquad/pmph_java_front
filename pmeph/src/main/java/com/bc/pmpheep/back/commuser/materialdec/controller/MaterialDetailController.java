@@ -439,6 +439,7 @@ public class MaterialDetailController extends BaseController{
 		}
 		//主编学术专著情况
 		String zb_monograph_name[] = request.getParameterValues("zb_monograph_name");
+		String zb_monograph_date[] = request.getParameterValues("zb_monograph_date");
 		String zb_publisher[] = request.getParameterValues("zb_publisher");
 		String zb_publish_date[] = request.getParameterValues("zb_publish_date");
 		String zb_note[] = request.getParameterValues("zb_note");
@@ -447,6 +448,7 @@ public class MaterialDetailController extends BaseController{
 			if(!zb_monograph_name[i].equals("")){ //判断是否存在
 				Map<String,Object> MonographMap = new HashMap<String,Object>();
 				MonographMap.put("monograph_name", zb_monograph_name[i]);
+				MonographMap.put("monograph_date", zb_monograph_date[i]);
 				MonographMap.put("is_self_paid", request.getParameter(is_self_paid[i]));
 				MonographMap.put("publisher", zb_publisher[i]);
 			//	MonographMap.put("publish_date", zb_publish_date[i]);

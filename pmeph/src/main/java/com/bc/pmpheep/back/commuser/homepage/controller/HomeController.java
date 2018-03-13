@@ -56,7 +56,7 @@ public class HomeController extends BaseController{
         List<Map<String, Object>> listArt = homeService.queryArticle(4);
         List<Map<String, Object>> listAut = homeService.queryAuthor(logUserId);
         List<Map<String, Object>> listCom = homeService.queryComment();
-        int countSurvey=homeService.countSurvey();
+        int countSurvey=homeService.countSurvey(logUserId);
 
         Map<String,Object> adInfo1=homeService.getPageAdInfo("首页轮播");
         Map<String,Object> adInfo2=homeService.getPageAdInfo("首页中部1");

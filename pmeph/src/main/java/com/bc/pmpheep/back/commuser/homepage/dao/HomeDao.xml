@@ -286,11 +286,22 @@ LIMIT 0,10
 
 
     <select id="countSurvey" resultType="int">
-		select count(1) c from survey
+    	SELECT
+			count(s.id)
+			FROM
+				survey_target st
+				inner join survey s on s.id = st.survey_id
+				inner join writer_user wu ON wu.org_id = st.org_id
+			WHERE
+			now() &gt;= s.`begin_date` AND now() &lt;= DATE_ADD(s.`end_date`, INTERVAL 1 DAY)
+			AND s.`status` = 1
+			AND s.is_deleted = 0
+			and wu.id = #{logUserId}
+		<!-- select count(1) c from survey
 		where end_date &gt; curdate()-1
 		and begin_date &lt; curdate()
 		and status='1'
-		and is_deleted='0'
+		and is_deleted='0' -->
 	</select>
 
 

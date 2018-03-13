@@ -137,7 +137,7 @@
 								<div class="label-input">
 									<label class="require">职务</label>
 									<div class="input-wrapper">
-										<input class="required" data-valid="isNonEmpty"
+										<input class="required" data-valid="isNonEmpty" ${admininfo.progress==1?'disabled="disabled"':''}
 											data-error="职务不能为空" placeholder="请填写职务" type="text"
 											id="position" value="${admininfo.position}">
 									</div>
@@ -187,12 +187,21 @@
 				                    <label class="require" >职称</label>
 				                    <div class="input-wrapper">
 				                    <input type="hidden" id="title-hidden" value="${admininfo.title}"> 
-				                    <select data-error="职称必选"   class="sxy-select-td" name="title" id="title"  title="请选择">
-				                        <option value="teacher1" >教授</option>
-				                        <option value="teacher2" >讲师</option>
-				                        <option value="teacher3" >副教授</option>
-				                        <option value="teacher4" >院士</option>
-				                    </select>
+				                    <c:choose>
+				                    	<c:when test="${admininfo.progress==1}">
+				                    		<input type="text" id="title" name="title" disabled="disabled"
+											value="${admininfo.title}">
+				                    	</c:when>
+				                    	<c:otherwise>
+					                    	<select data-error="职称必选"   class="sxy-select-td" name="title" id="title"  title="请选择" >
+						                        <option value="teacher1" >教授</option>
+						                        <option value="teacher2" >讲师</option>
+						                        <option value="teacher3" >副教授</option>
+						                        <option value="teacher4" >院士</option>
+						                    </select>
+				                    	</c:otherwise>
+				                    </c:choose>
+				                    
 				                  </div>
 								 </div>
 								
