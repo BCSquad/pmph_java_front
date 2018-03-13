@@ -46,14 +46,14 @@ function chooseModel(data){
 	if(data.is_national_plan_used == "1"){
 		$("#zbgjjgh").css("display","block");
 	}
-	//教材编写情况
-	if(data.is_textbook_used == "1"){
-		$("#jcbxqk").css("display","block");
-	}
 	//其他教材编写情况
-	if(data.is_pmph_textbook_used == "1"){
-		$("#qtjcbxqk").css("display","block");
+	if(data.is_textbook_used == "1"){
+        $("#qtjcbxqk").css("display","block");
 	}
+    //人卫教材编写情况
+    if(data.is_pmph_textbook_used == "1"){
+        $("#rwsjcbx").css("display","block");
+    }
 	//科研情况
 	if(data.is_research_used == "1"){
 		$("#zjkyqk").css("display","block");
@@ -82,6 +82,14 @@ function chooseModel(data){
 	if(data.is_acade_reward_used == "1"){
 		$("#acade").css("display","block");
 	}
+    //参加人卫慕课、数字教材编写情况
+    if(data.is_mooc_digital_used == "1"){
+        $("#digital").css("display","block");
+    }
+    //编写内容意向表
+    if(data.is_intention_used == "1"){
+        $("#intention").css("display","block");
+    }
 }
 
 //文件下载
