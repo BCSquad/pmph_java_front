@@ -104,7 +104,7 @@ function chooseModel(data){
 	//学习经历必填
 	if(data.is_edu_exp_required == "1"){
 		$("#zyxxjl_bt").css("display","inline");
-		jsonStr=jsonStr+"{\"id\":\"xx_kssj\",\"content\":\"学习经历起止时间必填\"},{\"id\":\"xx_major\",\"content\":\"所学专业不能为空\"},{\"id\":\"xx_degree\",\"content\":\"学历不能为空\"},";
+		jsonStr=jsonStr+"{\"id\":\"xx_kssj\",\"content\":\"学习经历起止时间必填\"},{\"id\":\"xx_school_name\",\"content\":\"学校名称不能为空\"},{\"id\":\"xx_major\",\"content\":\"所学专业不能为空\"},{\"id\":\"xx_degree\",\"content\":\"学历不能为空\"},";
 	}else{
 		$("#zyxxjl_xt").css("display","inline");
 	}
@@ -657,8 +657,9 @@ function add_zbxszz(){
 	var num = fnt();
 	var $table = $("#tab_zbxszz");
 	var $tr = $("<tr id='zbxszz_"+num+"'>"+
-			"<td><input class='cg_input' name='zb_monograph_name' id='zb_monograph_name_"+num+"' value='' style='width: 300px;' placeholder='教材名称' maxlength='16'/></td>"+
-			"<td style='color: #333333;'>"+
+			"<td><input class='cg_input' name='zb_monograph_name' id='zb_monograph_name_"+num+"' value='' style='width: 200px;' placeholder='教材名称' maxlength='16'/></td>"+
+		"<td><input class='cg_input' name='zb_monograph_date' id='zb_monograph_date_"+num+"' value='' style='width: 120px;' calendar format=\"'yyyy-mm-dd'\" placeholder='发表日期'/></td>"+
+		"<td style='color: #333333;'>"+
 				"<table class='radio_tb' style='width: 140px;'><tr>"+
 					"<td><input type='radio' name='is_self_paid_"+num+"' value='0' checked='checked'/>自费</td>"+
 					"<td><input type='radio' name='is_self_paid_"+num+"' value='1' />公费</td>"+
@@ -666,7 +667,7 @@ function add_zbxszz(){
 				"<input type='hidden' name='is_self_paid' value='is_self_paid_"+num+"' /></td>"+
 			"<td><input class='cg_input' name='zb_publisher' value='' id='zb_publisher_"+num+"' style='width: 180px;' placeholder='出版单位'  maxlength='16'/></td>"+
 			"<td><input class='cg_input' name='zb_publish_date' value='' id='zb_publish_date_"+num+"' style='width: 120px;' calendar format=\"'yyyy-mm-dd'\" placeholder='出版时间'/></td>"+
-			"<td><input class='cg_input' name='zb_note' value='' style='width: 250px;' placeholder='备注'  maxlength='33'/>" +
+			"<td><input class='cg_input' name='zb_note' value='' style='width: 200px;' placeholder='备注'  maxlength='33'/>" +
 			"<input type='hidden' name='zdjy' value='zb_monograph_name_"+num+",zb_publisher_"+num+",zb_publish_date_"+num+"' />" +
 			"</td>"+
 	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('zbxszz_"+num+"')\"/></td>"+

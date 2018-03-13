@@ -676,7 +676,8 @@
 				<table class="tab_2" id="tab_zbxszz">
 					<thead>
 						<tr>
-							<td width="340px">专著名称</td>
+							<td width="230px">专著名称</td>
+							<td width="150px">专著发表日期</td>
 							<td width="140px">出版方式</td>
 							<td width="200px">出版单位</td>
 							<td width="150px">出版时间</td>
@@ -686,7 +687,8 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><input class="cg_input" name="zb_monograph_name" id="zb_monograph_name" value="" style="width: 300px;" placeholder="教材名称" maxlength="16"/></td>
+							<td><input class="cg_input" name="zb_monograph_name" id="zb_monograph_name" value="" style="width: 200px;" placeholder="教材名称" maxlength="16"/></td>
+							<td><input class="cg_input" name="zb_monograph_date" id="zb_monograph_date" value="" style="width: 120px;" calendar format="'yyyy-mm-dd'" placeholder="发表日期"/></td>
 							<td style="color: #333333;">
 								<table class="radio_tb" style="width: 140px;"><tr>
 									<td><input type="radio" name="is_self_paid_1" value="0" checked="checked"/>自费</td>
@@ -696,7 +698,7 @@
 							</td>
 							<td><input class="cg_input" name="zb_publisher" id="zb_publisher" value="" style="width: 180px;" placeholder="出版单位"  maxlength="16"/></td>
 							<td><input class="cg_input" name="zb_publish_date" id="zb_publish_date" value="" style="width: 120px;" calendar format="'yyyy-mm-dd'" placeholder="出版时间"/></td>
-							<td><input class="cg_input" name="zb_note" value="" style="width: 250px;" placeholder="备注"  maxlength="33"/></td>
+							<td><input class="cg_input" name="zb_note" value="" style="width: 200px;" placeholder="备注"  maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_zbxszz()"/></td>
 						</tr>
 					</tbody>
