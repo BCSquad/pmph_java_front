@@ -102,17 +102,18 @@ public class NoticeMessageServiceImpl implements NoticeMessageService {
         //系统消息数量
         int count1 = noticeMessageDao.selectNoticeMessageSysCount(paraMap);
         //公告数量
-        int count2 = noticeMessageDao.selectNoticeMessageCount(paraMap);
+        //int count2 = noticeMessageDao.selectNoticeMessageCount(paraMap);
         String condition = (String) paraMap.get("condition");
-        if (null == condition) {
-            return count1 + count2;
-        } else if (condition.equals("4")) {
-            return count2;
-        } else if (condition.equals("1") || condition.equals("0")) {
+//        if (null == condition) {
+           // return count1 + count2;
             return count1;
-        } else {
-            return count1 + count2;
-        }
+//        } else if (condition.equals("4")) {
+//            return count2;
+//        } else if (condition.equals("1") || condition.equals("0")) {
+//            return count1;
+//        } else {
+//            return count1 + count2;
+//        }
     }
 
     //查询系统消息总量

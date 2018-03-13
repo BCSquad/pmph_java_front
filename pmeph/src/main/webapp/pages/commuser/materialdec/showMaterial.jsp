@@ -672,9 +672,12 @@
 			</div>
 		</div>
 		<hr style=" height:1px;border:none;border-top:1px #999999 dashed;margin-top: 30px;">
-		<div class="button">
-			<div class="bt_tj" onclick="javascript:buttGive()">返回申报列表</div>
-		</div>
+		<c:if test="${isSelfLog=='true' }">
+			<div class="button">
+				<div class="bt_tj" onclick="javascript:buttGive()">返回申报列表</div>
+			</div>
+		</c:if>
+		
 	</div>
 </div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>

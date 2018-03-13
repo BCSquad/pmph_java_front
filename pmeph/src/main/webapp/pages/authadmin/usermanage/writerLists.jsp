@@ -40,13 +40,11 @@
     <div>
         <div style="float: left;width: 80%;height: 100%">
             <textarea id="content" class="inputBox"
-                      style="width: 100%;height: 98%;border: none;outline:0;font-size:15px;"
+                      style="width: 100%;border: none;outline:0;font-size:15px;"
                       placeholder="请输入消息内容,按回车键发送"></textarea>
         </div>
         <div style="float: left;width: 20%;height: 100%">
-            <div class="div_btn11" style="cursor: pointer;">
-                <span class="button11" onclick="sendxiaoxi()">发送</span>
-            </div>
+            <button id="sendmsg" class="div_btn11" onclick="sendxiaoxi()">发送</button>
         </div>
     </div>
 </div>
@@ -129,6 +127,7 @@
             window.message.warning("请键入消息");
         } else {
             var frendId = $("#frendId").val();
+            $("#sendmsg").attr("disabled",true);
             $.ajax({
                 type: 'post',
                 url: contextpath + 'organizationuser/senNewMsg.action',
@@ -144,6 +143,8 @@
                     if (responsebean == 'success') {
                         setTimeout(function () {
                             $("#content").val("");
+                            $("#sendmsg").attr("disabled",false);
+                            $(".inputBox").attr("disabled",false);
                         },0);
 
                         refreshmessage();
@@ -306,6 +307,7 @@
     function query() {
         var url = contextpath + 'organizationuser/writerLists.action?username=' + encodeURI(encodeURI($("#ssk").val()));
         window.location.href = url;
+        $("#sendmsg").attr("disabled",false);
     }
     var pageSize = $("#pages").val();
     Page({
@@ -321,6 +323,7 @@
         $(".inputBox").keypress(function (event) {
             if (event.which == 13) {
                 console.log(event)
+                $(".inputBox").attr("disabled",true);
                 sendxiaoxi();
             }
         });
@@ -344,7 +347,7 @@
             }
         });
         $('#ssk').keyup(function (event) {
-            if (event.keyCode == 13) { //回车键弹起事件
+            if (event.keyCode == 13) {//回车键弹起事件
                 query();
             }
         });

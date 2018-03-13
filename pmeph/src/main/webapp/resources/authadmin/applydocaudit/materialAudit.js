@@ -162,7 +162,7 @@ function correction() {
 	    		    }
                 });
             } else {
-                window.message.info("错误，请填写完所有内容！");
+                window.message.info("请输入退回原因！");
             }
         
    

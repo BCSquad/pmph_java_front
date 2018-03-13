@@ -588,10 +588,16 @@ public class MaterialDetailController extends BaseController{
 		Map<String,Object> queryMap = new HashMap<String,Object>();
 		queryMap.put("material_id", material_id);
 		queryMap.put("declaration_id", declaration_id);
+		Map<String, Object> logUser = getUserInfo();
 
 		//1.作家申报表
 		List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
 		gezlList = this.mdService.queryPerson(queryMap);
+		Boolean isSelfLog = false;
+		if (logUser.get("id").toString().equals(gezlList.get(0).get("user_id").toString())) {
+			isSelfLog = true;
+		}
+		mav.addObject("isSelfLog", isSelfLog);
 		if(declaration_id == null){
 		queryMap.put("declaration_id", gezlList.get(0).get("id"));
 		}else{

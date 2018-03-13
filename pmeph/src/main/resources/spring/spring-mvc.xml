@@ -66,6 +66,9 @@
                 <value>/articledetail/addlikes* -> 1</value><!--文章详情页点赞 -->
                 <value>/message/noticeMessageList* -> 1</value><!--查询通知列表 -->
                 <value>/message/applyMessageList* -> 1</value><!--查询申请列表 -->
+                <value>/userinfo/touser.action -> 1</value>
+                <value>/userinfo/comchangepwd.action -> 1</value>
+
 
                 <!--机构用户-->
                 <value>/user/* -> 2</value><!--用户管理（机构用户） -->
@@ -81,6 +84,8 @@
                 <value>/declareCount/* -> 2</value>
                 <value>/admininfocontroller/* -> 2</value>
                 <value>/userinfo/toNoAccessToAuthority* -> 2</value>
+                <value>/admininfocontroller/tochangepwd.action -> 2</value>
+
             </set>
         </property>
     </bean>
@@ -109,6 +114,7 @@
             <map>
                 <entry key="com.bc.pmpheep.back.interceptor.LoginInterceptor.PathWithUsertypeMap"
                        value="com.bc.pmpheep.back.interceptor.LoginInterceptor.PathWithUsertypeMapPropertyEditor"></entry>
+
             </map>
         </property>
     </bean>

@@ -71,9 +71,9 @@
                     <span class="icon"></span>
                     <span class="wtext">写文章</span>
                 </span>
-                <span class="help" style="cursor: pointer">
+                <span class="help" onclick="window.location.href='${ctx}/help/helpList.action'">
                     <span class="icon"></span>
-                    <span class="wtext" onclick="window.location.href='${ctx}/help/helpList.action'">帮助中心</span>
+                    <span class="wtext" >帮助中心</span>
                 </span>
             </c:if>
 
