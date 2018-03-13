@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public interface UserDao {
 
-    public Map<String, Object> getUserType(@Param("username")String username);
+    public List<Map<String, Object>> getUserType(@Param("username")String username);
 
     public Map<String, Object> getUserInfo(@Param("username") String username, @Param("usertype") String usertype);
 

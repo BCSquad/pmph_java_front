@@ -62,7 +62,7 @@ public class UserService {
     }
 
 
-    public Map<String, Object> getUserType(String username) {
+    public List<Map<String, Object>> getUserType(String username) {
         return userDao.getUserType(username);
     }
 

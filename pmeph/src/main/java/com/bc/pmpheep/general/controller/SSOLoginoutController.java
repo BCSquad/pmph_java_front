@@ -37,10 +37,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by lihuan on 2017/12/14.
@@ -135,8 +132,13 @@ public class SSOLoginoutController extends BaseController {
             if (!"OK".equals(status)) {
                 throw new RuntimeException("获取用户帐号失败:" + message);
             }
-
-            String usertype = MapUtils.getString(userService.getUserType(username), "type", "1");
+            List<Map<String, Object>> types = userService.getUserType(username);
+            String usertype = "1";
+            if (types.size() == 0) {
+                usertype = "1";
+            } else {
+                usertype = MapUtils.getString(types.get(0), "type", "1");
+            }
 
             Map<String, Object> user = userService.getUserInfo(username, usertype);
             if (user == null) {
