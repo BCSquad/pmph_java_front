@@ -169,14 +169,17 @@ function exportWord() {
                     $.ajax({
                         type: 'get',
                         crossDomain: true,
-                        url: exportWordBaseUrl + '/word/progress?Id=' + wordId,
+                        url: exportWordBaseUrl + '/word/progress?id=' + wordId,
                         dataType: 'text',
                         success: function (json) {
                             var data = json.replace(/\"/g, "").replace("\\", "");
                             if (data.indexOf("{") == -1) {
-                                window.open(exportWordBaseUrl + "/zip/download?Id=" + wordId);
-                                layer.close(index);
-                                clearInterval(id);
+                                data = JSON.parse(data);
+                                if(data['state']==1){
+                                    window.open(exportWordBaseUrl + "/zip/download?id=" + wordId);
+                                    layer.close(index);
+                                    clearInterval(id);
+                                }
                             } else {
                                 message.error("出错啦");
                                 layer.close(index);
