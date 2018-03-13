@@ -136,7 +136,7 @@ public class SSOLoginoutController extends BaseController {
                 throw new RuntimeException("获取用户帐号失败:" + message);
             }
 
-            String usertype = MapUtils.getString(userService.getUserType(username), "type");
+            String usertype = MapUtils.getString(userService.getUserType(username), "type", "1");
 
             Map<String, Object> user = userService.getUserInfo(username, usertype);
             if (user == null) {
