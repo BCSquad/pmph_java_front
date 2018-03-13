@@ -157,7 +157,7 @@ function exportWord() {
     $.ajax({
         type: 'get',
         crossDomain: true,
-        url: exportWordBaseUrl + '/word/declaration?selectedIds=' + selectedIds.join(","),
+        url: exportWordBaseUrl + '/front/word/declaration?selectedIds=' + selectedIds.join(","),
         dataType: 'text',
         success: function (json) {
             var wordId = json.replace(/\"/g, "").replace("\\", "");
@@ -171,11 +171,11 @@ function exportWord() {
                         crossDomain: true,
                         url: exportWordBaseUrl + '/word/progress?id=' + wordId,
                         dataType: 'text',
-                        success: function (json) {
-                            var data = json.replace(/\"/g, "").replace("\\", "");
-                            if (data.indexOf("{") == -1) {
+                        success: function (data) {
+                            //var data = json.replace(/\"/g, "").replace("\\", "");
+                            if (data.indexOf("{") != -1) {
                                 data = JSON.parse(data);
-                                if(data['state']==1){
+                                if (data['state'] == 1) {
                                     window.open(exportWordBaseUrl + "/zip/download?id=" + wordId);
                                     layer.close(index);
                                     clearInterval(id);
