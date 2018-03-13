@@ -424,7 +424,7 @@
 			</div>
 		</div>
 		<!--参加人卫慕课、数字教材编写情况-->
-		<div class="sbxq_item" >
+		<div class="sbxq_item" id="digital">
 			<div>
 				<span id="tsxz_span9"></span>
 				<span class="tsxz_title">参加人卫慕课、数字教材编写情况</span>
@@ -649,7 +649,7 @@
 			</div>
 		</div>
 		<!--编写内容意向表-->
-	 	<div class="sbxq_item" >
+	 	<div class="sbxq_item" id="intention">
 			<div>
 				<span id="tsxz_span9"></span>
 				<span class="tsxz_title">编写内容意向表</span>
@@ -670,9 +670,12 @@
 			</div>
 		</div>
 		<hr style=" height:1px;border:none;border-top:1px #999999 dashed;margin-top: 30px;">
-		<div class="button">
-			<div class="bt_tj" onclick="javascript:buttGive()">返回申报列表</div>
-		</div>
+		<c:if test="${isSelfLog=='true' }">
+			<div class="button">
+				<div class="bt_tj" onclick="javascript:buttGive()">返回申报列表</div>
+			</div>
+		</c:if>
+		
 	</div>
 </div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
