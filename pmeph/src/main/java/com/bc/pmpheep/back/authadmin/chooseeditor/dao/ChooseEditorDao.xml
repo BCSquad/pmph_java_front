@@ -11,6 +11,7 @@
 		select t.* from 
 		(
 			SELECT
+			d.id as declaration_id,
 			dp.id as dec_position_id,
 			d.user_id,
 			d.realname,

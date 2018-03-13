@@ -32,6 +32,8 @@ $(function(){
 	var userId    = $("#userId").val(); 
     var webSocket = undefined;
     
+    
+    
     try {
         if (WebSocket) {
             webSocket = new WebSocket("ws://120.76.221.250:11000/pmpheep/websocket?userType=2&userId=" + userId);
@@ -59,7 +61,7 @@ $(function(){
     	        }
     	     });
     		
-    	}
+    	};
     	webSocket.close = function(){};
     	//("{senderId:"+userId+",senderType:"+0+",content:'\""+$("#userName").val()+"\"退出了小组"+"',groupId:"+$("#groupId").val()+",sendType:0}");
 	
@@ -75,10 +77,12 @@ $(function(){
 	};
 	webSocket.onerror = function(event){
 	    console.log("连接失败");
+	    window.message.error("连接失败");
 	    console.log(event);
 	};
 	webSocket.onclose = function(event){
-	    console.log("Socket连接断开");
+	    console.log("连接断开");
+	    window.message.warning("连接断开");
 	    console.log(event);
 	};
 	//监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
@@ -133,6 +137,7 @@ $(function(){
 		var content=$("#msgContent").val();
 		var content2=content.replace(/(^\s*)|(\s*$)/g, "");//兼容ie8
 		if(!content || content2 ==''){
+			$("#msgContent").val(content2);
 			window.message.warning("请键入消息");
 			return ;
 		}
@@ -151,6 +156,7 @@ $(function(){
 		var code = event.keyCode; 
 		if (13 == code) { //回车
 			sendSocktMsg();
+			$("#msgContent").val("");
 		}else{
 			var content=$("#msgContent").val();
 			if(content && content.length > 255){
