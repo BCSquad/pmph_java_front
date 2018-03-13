@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.bc.pmpheep.general.service.UserService;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -42,6 +43,9 @@ public class AdminInfoController extends BaseController {
     @Autowired
     @Qualifier("com.bc.pmpheep.general.service.FileService")
     FileService fileService;
+
+    @Autowired
+    UserService userService;
     /**
      * 个人资料修改页面
      * @param request
@@ -53,7 +57,7 @@ public class AdminInfoController extends BaseController {
         Map <String,Object> map = this.getUserInfo() ;
     	Long userId = new Long(String.valueOf(map.get("id")));
     	Map<String, Object> admininfo=adminInfoService.getOrgUserById(userId);
-        
+
         mv.addObject("admininfo",admininfo);
         mv.setViewName("authadmin/accountset/admininfo");
         return mv;
@@ -71,7 +75,7 @@ public class AdminInfoController extends BaseController {
         Map <String,Object> map1 = this.getUserInfo() ;
     	Long userId = new Long(String.valueOf(map1.get("id")));
         Map<String,Object> map = adminInfoService.getOrgUserById(userId);
-        
+
         if(null!=map&&map.size()>0){
         	String fileId = (String) map.get("proxy");
         	if(null!=fileId&&!fileId.equals("")){
@@ -79,10 +83,10 @@ public class AdminInfoController extends BaseController {
         		if(null!=file){
         			map.put("proxyName", file.getFilename());
         		}
-        	
+
         	}
         }
-        
+
         mv.addObject("admininfo",map);
         mv.setViewName("authadmin/accountset/adminattest");
         return mv;
@@ -117,20 +121,20 @@ public class AdminInfoController extends BaseController {
         	StringUtils.isEmpty(orgUser.getHandphone())||
         	StringUtils.isEmpty(orgUser.getPostCode())||
         	StringUtils.isEmpty(orgUser.getEmail())||
-        	StringUtils.isEmpty(orgUser.getFax())||	
-        	StringUtils.isEmpty(orgUser.getId())||	
+        	StringUtils.isEmpty(orgUser.getFax())||
+        	StringUtils.isEmpty(orgUser.getId())||
         	/*StringUtils.isEmpty(orgUser.getBirthday())||
         	StringUtils.isEmpty(orgUser.getExperience())||	
         	StringUtils.isEmpty(orgUser.getWorkplace())||	*/
         	StringUtils.isEmpty(orgUser.getAddress())){
-        	
+
         	code="fail";
-            
+
         }else{
         	 adminInfoService.updateOrgUser(orgUser);
              code="success";
         }
-       
+
         return code;
     }
 
@@ -141,20 +145,20 @@ public class AdminInfoController extends BaseController {
      */
     @RequestMapping(value = "/updateorguserpassword",method = RequestMethod.POST/*,consumes = "application/json"*/)
     @ResponseBody
-    public ResponseBean<OrgAdminUser> updateOrgUserPassword(/*@RequestBody*/ OrgAdminUser orgUser){
+    public ResponseBean<OrgAdminUser> updateOrgUserPassword(/*@RequestBody*/ OrgAdminUser orgUser,@RequestBody Map<String,Object> params) throws IOException {
         ResponseBean<OrgAdminUser> responseBean=new ResponseBean<>();
 //        orgUser.setId(Long.parseLong("1267"));
         Map <String,Object> map1 = this.getUserInfo() ;
     	Long userId = new Long(String.valueOf(map1.get("id")));
         orgUser.setId(userId);
-        DesRun desRun=new DesRun("",orgUser.getPassword());
-        orgUser.setPassword(desRun.enpsw);
-     
-        adminInfoService.updatePassword(orgUser);
-        
+      /*  DesRun desRun=new DesRun("",orgUser.getPassword());
+        orgUser.setPassword(desRun.enpsw);*/
+
+        //adminInfoService.updatePassword(orgUser);
+        userService.modifyUser(MapUtils.getString(map1,"username"),MapUtils.getString(params,"password"));
         return responseBean;
     }
-    
+
     //上传委托书
     @RequestMapping(value ="/uploadProxy",method = RequestMethod.POST)
     @ResponseBody
@@ -165,12 +169,12 @@ public class AdminInfoController extends BaseController {
     	Map<String,Object> map = new HashMap<String,Object>();
     	map.put("fileId", fileId);
     	map.put("id", id);
-    	
+
     	try{
     		adminInfoService.uploadProxy(map);
     		code="1";
     	}catch(Exception e){
-    		
+
     	}
         return code;
     }
@@ -181,20 +185,20 @@ public class AdminInfoController extends BaseController {
     	String id  = request.getParameter("id");
     	Map<String,Object> map = new HashMap<String,Object>();
     	map.put("id", id);
-    	
+
     	try{
     		adminInfoService.uploadProxy(map);
     	}catch(Exception e){
-    		
+
     	}
     }
-    
+
     /**
 	 * 根据ID修改头像
 	 * @param request
 	 */
 	@RequestMapping("updateavatar")
-	@ResponseBody	
+	@ResponseBody
 	public Map<String, Object> updateavatar(HttpServletRequest request){
 		Map<String, Object> map=new HashMap<String, Object>();
 		String avatar=request.getParameter("avatar");
@@ -209,6 +213,6 @@ public class AdminInfoController extends BaseController {
 //         session.setAttribute(Const.SESSION_USER_CONST_TYPE, "1");
 		return map;
 	}
-	 
-    
+
+
 }
