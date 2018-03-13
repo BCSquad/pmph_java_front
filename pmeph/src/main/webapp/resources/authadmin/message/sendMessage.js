@@ -119,8 +119,11 @@ function send_after(){
  */
 function sendf(){
 	if($('input:radio[name="sendObject"]:checked').val()!='0'){
-		send_after();
-		queryMain();
+		if(getValue()){
+            send_after();
+            queryMain();
+		}
+
 	}else{
 		sending('send');
 	}

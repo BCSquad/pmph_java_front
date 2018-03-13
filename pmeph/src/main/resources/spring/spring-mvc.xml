@@ -109,6 +109,7 @@
             <map>
                 <entry key="com.bc.pmpheep.back.interceptor.LoginInterceptor.PathWithUsertypeMap"
                        value="com.bc.pmpheep.back.interceptor.LoginInterceptor.PathWithUsertypeMapPropertyEditor"></entry>
+
             </map>
         </property>
     </bean>
