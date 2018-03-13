@@ -90,8 +90,9 @@ public interface HomeService {
 
     /**
      * 查询问卷调查总数
+     * @param logUserId 
      */
-    int countSurvey();
+    int countSurvey(String logUserId);
 
     /**
      * 未读消息查询

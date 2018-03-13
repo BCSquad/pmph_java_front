@@ -104,8 +104,9 @@ public interface HomeDao {
 
     /**
      * 查询问卷调查总数
+     * @param logUserId 
      */
-    int countSurvey();
+    int countSurvey(@Param("logUserId")String logUserId);
 
 
     /**

@@ -192,8 +192,13 @@ public class HomeServiceImpl implements HomeService {
     }
 
     @Override
-    public int countSurvey() {
-        return homeDao.countSurvey();
+    public int countSurvey(String logUserId) {
+    	if (logUserId == null) {
+    		return 0;
+		}else{
+			return homeDao.countSurvey(logUserId);
+		}
+        
     }
 
     @Override
