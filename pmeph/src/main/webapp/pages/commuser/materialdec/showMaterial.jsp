@@ -424,7 +424,7 @@
 			</div>
 		</div>
 		<!--参加人卫慕课、数字教材编写情况-->
-		<div class="sbxq_item" >
+		<div class="sbxq_item" id="digital">
 			<div>
 				<span id="tsxz_span9"></span>
 				<span class="tsxz_title">参加人卫慕课、数字教材编写情况</span>
@@ -649,7 +649,7 @@
 			</div>
 		</div>
 		<!--编写内容意向表-->
-	 	<div class="sbxq_item" >
+	 	<div class="sbxq_item" id="intention">
 			<div>
 				<span id="tsxz_span9"></span>
 				<span class="tsxz_title">编写内容意向表</span>
