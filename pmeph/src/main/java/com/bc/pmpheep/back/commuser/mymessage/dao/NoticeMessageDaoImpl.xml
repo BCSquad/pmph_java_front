@@ -108,6 +108,7 @@
 		AND u.receiver_id = #{userId}
 		AND msg_type IN (0, 1)
 		AND u.is_deleted = 0
+		AND u.receiver_type=2
 		<!-- 公告 -->
 		<if test="condition==4">
 			AND u.material_id !=0
