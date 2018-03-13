@@ -26,5 +26,13 @@ public interface WriterPointDao {
 	 * @return
 	 */
 	WriterPoint getWriterPointByUserId(Long userId);
+
+	
+	/**
+	 * 添加
+	 * @param writerPoint
+	 * @return
+	 */
+	Integer addWriterPoint(WriterPoint writerPoint);
 	
 }

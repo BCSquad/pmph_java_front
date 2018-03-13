@@ -23,6 +23,7 @@ import com.bc.pmpheep.back.commuser.writerpoint.bean.WriterPointRule;
 import com.bc.pmpheep.back.commuser.writerpoint.service.WriterPointLogService;
 import com.bc.pmpheep.back.commuser.writerpoint.service.WriterPointRuleService;
 import com.bc.pmpheep.back.commuser.writerpoint.service.WriterPointService;
+import com.bc.pmpheep.back.util.ObjectUtil;
 import com.bc.pmpheep.general.controller.BaseController;
 
 @Controller
@@ -189,7 +190,6 @@ public class SurveyController extends BaseController {
             }
             surveyService.saveInputAnswer(map3);
         }
-        
         //当用户回答问卷后，增加积分
         String ruleName="问卷调查";
 		//获取积分规则
@@ -212,17 +212,21 @@ public class SurveyController extends BaseController {
 			writerPointLog.setUserId(userId);
 			//增加积分记录
 			writerPointLogService.add(writerPointLog);
-			WriterPoint point=writerPointService.getWriterPointByUserId(userId);
-			WriterPoint writerPoint=new WriterPoint();
-			//当前获取的总积分=评论积分+以前的积分
-			writerPoint.setGain(writerPointLog.getPoint());
-			writerPoint.setUserId(userId);
-			writerPoint.setTotal(writerPoint.getGain()+point.getLoss());
-			writerPoint.setLoss(point.getLoss());
-			writerPoint.setId(point.getId());
-			writerPointService.updateWriterPoint(writerPoint);
+			WriterPoint point = writerPointService.getWriterPointByUserId(userId);
+			WriterPoint writerPoint = new WriterPoint();
+			if(ObjectUtil.isNull(point)){
+				writerPoint.setTotal(temp+point.getLoss());
+				writerPoint.setLoss(point.getLoss());
+				writerPoint.setId(point.getId());
+				//当前获取的总积分=评论积分+以前的积分
+				writerPoint.setGain(temp);
+				writerPoint.setUserId(userId);
+				writerPointService.updateWriterPoint(writerPoint);
+			}else{
+				writerPointService.addWriterPoint(new WriterPoint(userId, temp+point.getLoss(), temp, 0));
+			}
+			
 		}
-        
         String code = "OK";
         return code;
     }

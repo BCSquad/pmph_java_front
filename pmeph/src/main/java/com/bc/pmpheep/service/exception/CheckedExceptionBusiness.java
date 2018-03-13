@@ -60,4 +60,6 @@ public class CheckedExceptionBusiness {
     public final static String CMS                    = "内容管理";
 
     public final static String WRITER_FRIEND          = "好友";
+    
+	public final static String WRITER_POINT_MANAGEMENT = "积分管理";
 }

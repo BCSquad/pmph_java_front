@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.commuser.writerpoint.bean.WriterPoint;
 import com.bc.pmpheep.back.commuser.writerpoint.dao.WriterPointDao;
+import com.bc.pmpheep.back.util.ObjectUtil;
+import com.bc.pmpheep.service.exception.CheckedExceptionBusiness;
+import com.bc.pmpheep.service.exception.CheckedExceptionResult;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 
 /**
@@ -28,6 +31,21 @@ public class WriterPointServiceImpl implements WriterPointService{
 	@Override
 	public WriterPoint getWriterPointByUserId(Long userId) throws CheckedServiceException {
 		return writerPointDao.getWriterPointByUserId(userId);
+	}
+
+
+	@Override
+	public WriterPoint addWriterPoint(WriterPoint writerPoint) throws CheckedServiceException {
+		if(ObjectUtil.isNull(writerPoint)){
+			throw new CheckedServiceException(CheckedExceptionBusiness.WRITER_POINT_MANAGEMENT,
+					CheckedExceptionResult.NULL_PARAM, "参数为空");
+		}
+		if(ObjectUtil.isNull(writerPoint.getUserId())){
+			throw new CheckedServiceException(CheckedExceptionBusiness.WRITER_POINT_MANAGEMENT,
+					CheckedExceptionResult.NULL_PARAM, "用户id为空");
+		}
+		writerPointDao.addWriterPoint(writerPoint);
+		return writerPoint;
 	}
 
 }

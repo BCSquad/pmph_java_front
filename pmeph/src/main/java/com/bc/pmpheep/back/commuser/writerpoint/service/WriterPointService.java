@@ -25,4 +25,11 @@ public interface WriterPointService {
      * @throws CheckedServiceException
      */
 	WriterPoint getWriterPointByUserId(Long userId)throws CheckedServiceException;
+	/**
+	 * 添加用户积分
+	 * @param writerPoint
+	 * @return
+	 * @throws CheckedServiceException
+	 */
+	WriterPoint addWriterPoint(WriterPoint writerPoint)throws CheckedServiceException;
 }
