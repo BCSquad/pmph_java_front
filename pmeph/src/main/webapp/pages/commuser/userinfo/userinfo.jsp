@@ -147,10 +147,13 @@
                     <label class="require" >职称</label>
                     <select class="sxy-select-td" id="title" name="title" >
                     	<option value="" >-请选择-</option>
-                        <option value="教授" ${map.title=='教授' ?'selected':''}>教授</option>
+                        <option value="教授" ${map.title=='教授' ?'selected':''}>教授</option>t
                         <option value="讲师" ${map.title=='讲师' ?'selected':''}>讲师</option>
+                        <option value="高级讲师" ${map.title=='高级讲师' ?'selected':''}>高级讲师</option>
                         <option value="副教授" ${map.title=='副教授' ?'selected':''}>副教授</option>
                         <option value="院士" ${map.title=='院士' ?'selected':''}>院士</option>
+                        <option value="其他" ${map.title=='其他' ?'selected':''}>其他</option>
+
                     </select>
                   </div>
                 </td>

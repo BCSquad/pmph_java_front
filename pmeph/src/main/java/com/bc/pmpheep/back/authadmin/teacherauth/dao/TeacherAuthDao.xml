@@ -62,7 +62,7 @@
 	
 	<update id="statusModify" parameterType="java.util.Map">
 		update writer_user_certification set progress = ${status} 
-
+		where id = #{id}
 	</update>
 
 	<select id="getSchoolInfo" resultType="map">
