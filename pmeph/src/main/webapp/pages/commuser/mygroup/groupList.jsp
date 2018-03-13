@@ -34,7 +34,7 @@
     		<c:when test="${listSize>0 }">
     			<c:forEach var = 'group' items="${listgroup}" > 
 			        <div class="oneitem">
-		            <img src="${ctx}/${group.groupImage}" alt="暂无图片" class="img1"/>
+		            <img src="${ctx}/${group.groupImage}" class="img1"/>
 		           <%--  <img src="${pageContext.request.contextPath}${group.groupImage}" alt="暂无图片" class="img1"/> --%>
 		            <div class="item_content">
 		                <text class="txt1">${group.groupName}</text>
@@ -48,7 +48,7 @@
 		                		<c:if test="${o.index <=5 }"><!-- 展示6位 -->
 		                			<%-- <img src="${pageContext.request.contextPath}/${avatar}" alt="暂无图片"/> --%>
 
-		                			 <img src="${ctx}/${avatar}" alt="暂无图片"/>
+		                			 <img src="${ctx}/${avatar}" />
 		                		</c:if>
 		                	 </c:forEach>
 		                </div>

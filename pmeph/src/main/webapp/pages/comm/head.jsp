@@ -19,7 +19,7 @@
     <div class="content-wrapper">
         <div class="content">
             <div class="image">
-                <img src="${ctx}/statics/image/logo.png" alt="">
+                <img src="${ctx}/statics/image/logo.png" alt="" onclick="window.location='${ctx}/homepage/tohomepage.action'">
             </div>
             <div class="links">
                 <a class="link <%="homepage".equals(request.getParameter("pageTitle"))?"active":""%>"
@@ -71,9 +71,9 @@
                     <span class="icon"></span>
                     <span class="wtext">写文章</span>
                 </span>
-                <span class="help">
+                <span class="help" onclick="window.location.href='${ctx}/help/helpList.action'">
                     <span class="icon"></span>
-                    <span class="wtext">帮助中心</span>
+                    <span class="wtext" >帮助中心</span>
                 </span>
             </c:if>
 

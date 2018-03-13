@@ -401,6 +401,7 @@ ul{
 .show_all{
     clear: both;
     text-align: left;
+    padding-top: 15px;
 }
 
 .iframe1{

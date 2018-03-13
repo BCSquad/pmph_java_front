@@ -91,7 +91,7 @@ table tbody td {
     padding-left:20px;
 }
 
-table tbody tr {
+.table tbody tr {
     height: 46px;
     line-height: 30px;
     font-family: SimSun;

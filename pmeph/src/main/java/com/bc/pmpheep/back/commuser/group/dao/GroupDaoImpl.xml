@@ -463,6 +463,25 @@
 		left join writer_user u on u.id=m.user_id and m.is_writer='1'
 		where g.id=#{groupid} and m.user_id=#{userid}
 	</select>
+	
+	<insert id="webSocketSentForIE" parameterType="Map" useGeneratedKeys="true" keyProperty="msgId">
+		insert into pmph_group_message(group_id,member_id,msg_content) 
+		values(
+		#{groupId}
+		,#{member_id}
+		,#{content});
+	</insert>
+	
+	<select id="getMsgById" parameterType="String" resultType="Map">
+		select * from pmph_group_message where id = #{msgId}
+	</select>
+	
+	<select id="getMember" parameterType="String" resultType="Map">
+		select m.*,u.avatar from pmph_group_member m 
+		join writer_user u on m.user_id = u.id
+		 where m.is_writer=1 and m.user_id = #{user_id}  and m.group_id = #{group_id}
+	</select>
+	
 
 </mapper>
 
