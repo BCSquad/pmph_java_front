@@ -615,7 +615,7 @@ $(function(){
 	function webSocketSend(json){
 		if (webSocket != undefined) {
 	    	if (webSocket.readyState != 1) {
-	    		webSocket = new WebSocket("ws://120.76.221.250:11000/pmpheep/websocket?userType=2&userId=" + userId+"&t="+new Date());
+	    		webSocket = new WebSocket("ws://119.254.226.115:11000/pmpheep/websocket?userType=2&userId=" + userId+"&t="+new Date());
 			}
 	        webSocket.send(json);
 	    }

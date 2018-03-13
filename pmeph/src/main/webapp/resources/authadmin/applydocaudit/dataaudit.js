@@ -152,7 +152,7 @@ function queryBtnClick() {
 
 
 //导出word
-var exportWordBaseUrl = "http://120.76.221.250/pmpheep"
+var exportWordBaseUrl = "http://119.254.226.115/pmpheep"
 function exportWord() {
     $.ajax({
         type: 'get',
