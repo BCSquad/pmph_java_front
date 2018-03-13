@@ -36,13 +36,15 @@ $(function(){
     
     try {
         if (WebSocket) {
-            webSocket = new WebSocket("ws://120.76.221.250:11000/pmpheep/websocket?userType=2&userId=" + userId);
+            webSocket = new WebSocket("ws://120.76.221.250:11000/pmpheep/websocket?userType=2&userId=" + userId+"&t="+new Date());
         }
     } catch (e) {
     	 //不支持websocket ie10以下版本 
     	webSocket = new Object();
-    	
+    	webSocket.readyState = 1;
+    	$("#wechat").css("height","602px");
     	webSocket.send=function(sendJson){
+    		sendJson = sendJson.replace("\n"," ");
     		var data= eval('(' + sendJson + ')');
     		$.ajax({
     			type:'post',
@@ -145,9 +147,9 @@ $(function(){
 			window.message.error("发送失败:键入消息过长");
 			return ;
 		}
-        if (webSocket) {
-            webSocket.send("{senderId:"+$("#userId").val()+",senderType:"+2+",content:'"+content+"',groupId:"+$("#groupId").val()+",sendType:0}");
-        }
+		webSocketSend("{senderId:"+$("#userId").val()+",senderType:"+2+",content:'"+content+"',groupId:"+$("#groupId").val()+",sendType:0}");
+		
+        
 		$("#msgContent").val("");
 	}
 	
@@ -240,9 +242,10 @@ $(function(){
 	        	if(responsebean){
 	        		window.message.success("退出成功");
 	        		//推送消息
-                    if (webSocket) {
+	        		webSocketSend("{senderId:"+userId+",senderType:"+0+",content:'\""+$("#userName").val()+"\"退出了小组"+"',groupId:"+$("#groupId").val()+",sendType:0}");
+                    /*if (webSocket) {
 			    	webSocket.send("{senderId:"+userId+",senderType:"+0+",content:'\""+$("#userName").val()+"\"退出了小组"+"',groupId:"+$("#groupId").val()+",sendType:0}");
-                    }
+                    }*/
 	        		setTimeout(function(){
 	        			window.location.href = contxtpath+'/group/list.action';
 	        		},800);
@@ -559,9 +562,10 @@ $(function(){
 						$("#fileContent").html('');
 						initFile();
 				    	//推送消息
-                        if (webSocket) {
+						webSocketSend("{senderId:"+userId+",senderType:"+0+",content:'\""+$("#"+userId+"_2").val()+"\"上传了文件"+"',groupId:"+$("#groupId").val()+",sendType:0}");
+                        /*if (webSocket) {
 				    	webSocket.send("{senderId:"+userId+",senderType:"+0+",content:'\""+$("#"+userId+"_2").val()+"\"上传了文件"+"',groupId:"+$("#groupId").val()+",sendType:0}");
-                        }
+                        }*/
 				    	var old = parseInt($("#fileTotal").html());
                         $("#fileTotal").html(old+1);
                         $("#filesgx_top").html('文件共享<span style="display: inline-block;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;'+
@@ -603,6 +607,19 @@ $(function(){
 	        console.log(loaded+"  "+ total+"正在上传..." + loaded / total);
 	    }
 	});
+	
+	/**
+	 * webSocket发送方法 当断开连接时重连发送
+	 * @param json
+	 */
+	function webSocketSend(json){
+		if (webSocket != undefined) {
+	    	if (webSocket.readyState != 1) {
+	    		webSocket = new WebSocket("ws://120.76.221.250:11000/pmpheep/websocket?userType=2&userId=" + userId+"&t="+new Date());
+			}
+	        webSocket.send(json);
+	    }
+	}
 	
 });
 
