@@ -21,7 +21,8 @@
     <insert id="addNewUser" >
         <if test="usertype == 1">
             insert into  writer_user (username,password,nickname,realname,avatar)
-            VALUES (#{username},'B1:40:2F:CF:BD:1D:92:05',#{username},#{username},'DEFAULT')
+            VALUES (#{username},'B1:40:2F:CF:BD:1D:92:05',#{username},#{username},'DEFAULT');
+            insert into writer_point (user_id,total,gain,loss) values ((select id from writer_user where username=#{username} ),0,0,0);
         </if>
         <if test="usertype == 2">
             insert into  org_user (username,password,nickname,realname) values (#{username},'B1:40:2F:CF:BD:1D:92:05',#{username},#{username})
