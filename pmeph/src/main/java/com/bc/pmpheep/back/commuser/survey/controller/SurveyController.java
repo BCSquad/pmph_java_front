@@ -194,36 +194,38 @@ public class SurveyController extends BaseController {
         String ruleName="问卷调查";
 		//获取积分规则
 		WriterPointRule writerPointRuleVOs=writerPointRuleService.getWriterPointRuleByName(ruleName);
-		if(null!=writerPointRuleVOs){
-			//查询用户评论之前的积分值
-			List<WriterPointLog> writerPointLog2=writerPointLogService.getWriterPointLogByUserId(userId);
-			WriterPointLog writerPointLog=new WriterPointLog();
-			//现在的规则的积分值+以前的积分
-			Integer temp=0;
-			if(writerPointLog2.size()>0){
-				temp=writerPointRuleVOs.getPoint()+writerPointLog2.get(0).getPoint();
-				writerPointLog.setPoint(temp);
-			}else{
-				temp=writerPointRuleVOs.getPoint();
-				writerPointLog.setPoint(temp);
-			}
-			//积分规则id
-			writerPointLog.setRuleId(writerPointRuleVOs.getId());
-			writerPointLog.setUserId(userId);
-			//增加积分记录
-			writerPointLogService.add(writerPointLog);
-			WriterPoint point = writerPointService.getWriterPointByUserId(userId);
-			WriterPoint writerPoint = new WriterPoint();
-			if(ObjectUtil.isNull(point)){
-				writerPoint.setTotal(temp+point.getLoss());
-				writerPoint.setLoss(point.getLoss());
-				writerPoint.setId(point.getId());
-				//当前获取的总积分=评论积分+以前的积分
-				writerPoint.setGain(temp);
-				writerPoint.setUserId(userId);
-				writerPointService.updateWriterPoint(writerPoint);
-			}else{
-				writerPointService.addWriterPoint(new WriterPoint(userId, temp+point.getLoss(), temp, 0));
+		if(null!=writerPointRuleVOs){ 
+			if(writerPointRuleVOs.getIsDisabled()==false){
+				//查询用户评论之前的积分值
+				List<WriterPointLog> writerPointLog2=writerPointLogService.getWriterPointLogByUserId(userId);
+				WriterPointLog writerPointLog=new WriterPointLog();
+				//现在的规则的积分值+以前的积分
+				Integer temp=0;
+				if(writerPointLog2.size()>0){
+					temp=writerPointRuleVOs.getPoint()+writerPointLog2.get(0).getPoint();
+					writerPointLog.setPoint(temp);
+				}else{
+					temp=writerPointRuleVOs.getPoint();
+					writerPointLog.setPoint(temp);
+				}
+				//积分规则id
+				writerPointLog.setRuleId(writerPointRuleVOs.getId());
+				writerPointLog.setUserId(userId);
+				//增加积分记录
+				writerPointLogService.add(writerPointLog);
+				WriterPoint point = writerPointService.getWriterPointByUserId(userId);
+				WriterPoint writerPoint = new WriterPoint();
+				if(ObjectUtil.isNull(point)){
+					writerPoint.setTotal(temp+point.getLoss());
+					writerPoint.setLoss(point.getLoss());
+					writerPoint.setId(point.getId());
+					//当前获取的总积分=评论积分+以前的积分
+					writerPoint.setGain(temp);
+					writerPoint.setUserId(userId);
+					writerPointService.updateWriterPoint(writerPoint);
+				}else{
+					writerPointService.addWriterPoint(new WriterPoint(userId, temp+point.getLoss(), temp, 0));
+				}
 			}
 			
 		}
