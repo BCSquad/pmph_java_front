@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.bc.pmpheep.general.service.UserService;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -42,6 +43,9 @@ public class AdminInfoController extends BaseController {
     @Autowired
     @Qualifier("com.bc.pmpheep.general.service.FileService")
     FileService fileService;
+    @Autowired
+    UserService userService;
+
     /**
      * 个人资料修改页面
      * @param request
@@ -202,11 +206,11 @@ public class AdminInfoController extends BaseController {
 		map.put("id", id);
 		map.put("avatar", avatar);
 		map=adminInfoService.updateavatar(map);
-//		 Map<String, Object> user=getUserInfo();
-//		 user = userService.getUserInfo(MapUtils.getString(user, "username"), "1");
-//		 HttpSession session = request.getSession();
-//		 session.setAttribute(Const.SESSION_USER_CONST_WRITER, user);
-//         session.setAttribute(Const.SESSION_USER_CONST_TYPE, "1");
+		 Map<String, Object> user=getUserInfo();
+		 user = userService.getUserInfo(MapUtils.getString(user, "username"), "2");
+		 HttpSession session = request.getSession();
+		 session.setAttribute(Const.SESSION_USER_CONST_ORGUSER, user);
+         session.setAttribute(Const.SESSION_USER_CONST_TYPE, "2");
 		return map;
 	}
 	 

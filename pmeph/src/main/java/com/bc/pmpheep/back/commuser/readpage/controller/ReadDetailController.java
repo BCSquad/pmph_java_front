@@ -64,11 +64,10 @@ public class ReadDetailController extends BaseController{
 		ModelAndView modelAndView=new ModelAndView();
 		String id=request.getParameter("id");
 		String comm_id=request.getParameter("comm_id");
+		String submitCode=request.getParameter("submitCode");
 		Map<String, Object> myLong=readDetailService.queryMyLong(id,comm_id);
-//		if(comm_id!=null&&!"".equals(comm_id)){
-//			modelAndView.addObject("submitTypeCode", "1");
-//		}
-		modelAndView.addObject("submitTypeCode", request.getParameter("submitTypeCode"));
+
+		modelAndView.addObject("submitTypeCode", submitCode);
 		
 		Map<String, Object> supMap=readDetailService.querySupport(id);
 		if(supMap!=null){
