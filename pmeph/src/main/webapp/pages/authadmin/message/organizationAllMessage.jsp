@@ -94,7 +94,7 @@
                         ${item.msg_content}
                     </p>
                 </div>
-	                    <div style="float:left;color: #999999;font-size: 14px;height:20px;margin-top: 45px;" onclick="delmsg('${item.id}')">
+	                    <div style="float:left;color: #999999;font-size: 14px;height:20px;margin-top: 45px;" onclick="delmsg('${item.id}',1)">
 	                        <span style="width:20px;height:20px;float:left;" class="deltag"></span>
 	                        <span style="line-height: 20px;">删除</span>
 	                    </div>

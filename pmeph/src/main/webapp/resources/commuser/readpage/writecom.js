@@ -1,7 +1,6 @@
 var ue='';
 $(function(){
 	ue = UE.getEditor('mText');
-	if (('${UEContent}').length != 0) {
 		UE.getEditor('mText');
 		ue.ready(function() {
 			// 查询登陆人是否写过长评论
@@ -9,9 +8,6 @@ $(function(){
 			ue.setContent($("#contentLongDIV").html());
 			$(".sxy-btn").show();
 		});
-		$("#submitTypeCode").val("1");
-	}
-       
 	//默认分数满分
 	$("#last_score").val(10);
 });

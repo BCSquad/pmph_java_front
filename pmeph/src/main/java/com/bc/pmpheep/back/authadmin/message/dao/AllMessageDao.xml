@@ -71,6 +71,16 @@
     </update>
     <!-- 删除消息 -->
     <update id="deletemsg" parameterType="java.util.Map">
-        update user_message set is_deleted=1 where id=#{mid}
+        update user_message set is_deleted=1 
+        where 
+        <choose>
+        	<when test="tag==1">
+        		id=#{mid}
+        	</when>
+        	<otherwise>
+        		msg_id=#{mid}
+        	</otherwise>
+        </choose>
+        
     </update>
 </mapper>
