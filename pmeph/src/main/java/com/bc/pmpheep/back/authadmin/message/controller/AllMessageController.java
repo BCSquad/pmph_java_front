@@ -144,9 +144,12 @@ public class AllMessageController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> delmsg(HttpServletRequest req){
 		 Map<String, Object> user = getUserInfo();
-		 int count=allMessageServiceImpl.deletemsg(req.getParameter("mid"));
+		 //1删除收到的消息 根据主键id删除此条
+		 //2删除发送的信息 根据msg_id删除此次发送的消息 应该对多人发送所以有多条
+		 String tag = req.getParameter("tag");
+		 int count = allMessageServiceImpl.deletemsg(req.getParameter("mid"),tag);
 		 String isdel="no";
-		 if(count==1){
+		 if(count>0){
 			 isdel="yes";
 		 }
 		 Map<String,Object> map=new HashMap<String, Object>();

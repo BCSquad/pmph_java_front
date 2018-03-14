@@ -95,12 +95,17 @@ function system(str, name, time) {
 function hideup() {
     $("#bookmistake").hide();
 }
-//
-function delmsg(id){
+/**
+ * tag :
+ * 1删除收到的消息 根据主键id删除此条
+ * 2删除发送的信息 根据msg_id删除此次发送的消息 应该对多人发送所以有多条
+ */
+function delmsg(id,tag){
 	window.message.confirm("你确定删除此消息吗？",{btn:["确定","取消"]},function(index){
+		
 	  $.ajax({
           type:"post",
-          url:contextpath+"AllMessage/delmsg.action?mid="+id,
+          url:contextpath+"AllMessage/delmsg.action?mid="+id+"&tag="+tag,
           async:false,
           dataType:'json',
           success:function(json){

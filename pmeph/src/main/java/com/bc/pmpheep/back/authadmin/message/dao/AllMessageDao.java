@@ -33,10 +33,12 @@ public interface AllMessageDao {
 	/**
 	 * 删除消息
 	 * @param mid
-	 * @param userid
-	 * @return
+	 * @param tag
+	 * tag :
+	 * 1删除收到的消息 根据主键id删除此条
+	 * 2删除发送的信息 根据msg_id删除此次发送的消息 应该对多人发送所以有多条
 	 */
-	public int deletemsg(@Param("mid") String mid);
+	public int deletemsg(@Param("mid") String mid,@Param("tag") String tag);
 	
 	/**
 	 * 获取机构用户发送的消息

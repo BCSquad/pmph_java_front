@@ -48,13 +48,16 @@ public class AllMessageServiceImpl implements AllMessageService {
 	}
 	/**
 	 * 删除消息
-	 * @param parameter
-	 * @param string
+	 * @param mid
+	 * @param tag
+	 * tag :
+	 * 1删除收到的消息 根据主键id删除此条
+	 * 2删除发送的信息 根据msg_id删除此次发送的消息 应该对多人发送所以有多条
 	 */
 	@Override
-	public int deletemsg(String mid) {
+	public int deletemsg(String mid, String tag) {
 		// TODO Auto-generated method stub
-		return allMessageDao.deletemsg(mid);
+		return allMessageDao.deletemsg(mid,tag);
 	}
 
 
