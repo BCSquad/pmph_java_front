@@ -154,6 +154,10 @@ function queryBtnClick() {
 //导出word
 var exportWordBaseUrl = "http://120.76.221.250/pmpheep"
 function exportWord() {
+    if (!selectedIds || selectedIds.length <= 0) {
+        message.warning("请选择要导出的作家")
+        return;
+    }
     $.ajax({
         type: 'get',
         crossDomain: true,
