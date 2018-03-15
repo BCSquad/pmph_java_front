@@ -532,6 +532,8 @@ $(function(){
 	//文件上传方法
 	$("#scwj1").uploadFile({
 	    start: function () {
+            // $("#process_div").show();
+	    	// $("#uploadFileTips").css({'width':'0%'});
 	        console.log("开始上传。。。");
 	    },
 	    done: function (fileName, fileId,fileSize) {//
@@ -548,9 +550,9 @@ $(function(){
 				dataType:"json",
                 complete:function () {
 
-                        setTimeout(function () {
-                            $("#uploadFileTips").hide();
-                        },2000)
+                      //  setTimeout(function () {
+                      //      $("#process_div").hide();
+                      //  },2000)
                 },
 			    success: function(msg) {
 				    if(msg =='OK'){
@@ -575,37 +577,39 @@ $(function(){
 				    }
 			    }
 			});
-	    },
-	    progressall: function (loaded, total, bitrate) {
-             var progress = parseInt(loaded /total * 100, 10);
-             var percentage = loaded / total;
-            // $('#progress .bar').css(
-            //     'width',
-            //     progress + '%'
-            // );
-            //layui.element.active.setPercent(progress);
-			//$('.layui-progress-bar').setAttribute("lay-percent",loaded / total);
-          //  var percentage = 0;
-          //   var interval = setInterval(function () {
-          //       if (percentage==1) {
-          //
-          //           var widthTemp = percentage.toFixed(1) + '%';
-          //           $('#progressBar').css('width', widthTemp);
-          //           $('#progressBar').text(widthTemp);
-          //       } else {
-          //           clearInterval(interval);
-          //           $('h3').text('上传完成');
-          //           setTimeout(function () {
-          //               $("#process").hide();
-          //           }, 500);
-          //       }
-          //   }, 10);
-            $("#uploadFileTips").text("正在上传...  "+((loaded / total).toFixed(2)*100)+'%');
-			//if
-			//}
-
-	        console.log(loaded+"  "+ total+"正在上传..." + loaded / total);
 	    }
+	    // ,
+	    // progressall: function (loaded, total, bitrate) {
+         //     var progress = parseInt(loaded /total * 100, 10);
+         //     var percentage = loaded / total;
+         //    // $('#progress .bar').css(
+         //    //     'width',
+         //    //     progress + '%'
+         //    // );
+         //    //layui.element.active.setPercent(progress);
+			// //$('.layui-progress-bar').setAttribute("lay-percent",loaded / total);
+         //  //  var percentage = 0;
+         //  //   var interval = setInterval(function () {
+         //  //       if (percentage==1) {
+         //  //
+         //  //           var widthTemp = percentage.toFixed(1) + '%';
+         //  //           $('#progressBar').css('width', widthTemp);
+         //  //           $('#progressBar').text(widthTemp);
+         //  //       } else {
+         //  //           clearInterval(interval);
+         //  //           $('h3').text('上传完成');
+         //  //           setTimeout(function () {
+         //  //               $("#process").hide();
+         //  //           }, 500);
+         //  //       }
+         //  //   }, 10);
+         //    //$("#uploadFileTips").text("正在上传...  "+((loaded / total).toFixed(2)*100)+'%');
+         //    $("#uploadFileTips").css({'width':((loaded / total).toFixed(2)*100)+'%'});
+			// //if
+			// //}
+        //
+	    //     console.log(loaded+"  "+ total+"正在上传..." + loaded / total);
+	    // }
 	});
 	
 	/**
