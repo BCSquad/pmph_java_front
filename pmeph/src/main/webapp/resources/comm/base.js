@@ -1,5 +1,6 @@
 //定义全局变量远程调用地址
-var remoteUrl = "127.0.0.1";
+var remoteUrl = "120.76.221.250";
+
 
 /**
  * Created by lihuan on 2017/11/24.
@@ -232,18 +233,18 @@ $(function () {
     var input_open = false;
     $(".search-icon").click(function () {
         var search = function () {
-        	
-        	/*$.ajax({
-        		type:'post',
-        		url:contextpath+'booksearch/bookOrArtSpliter.action?search=' + encodeURI(encodeURI($("#search-input").val()))+'&t='+new Date().getTime(),
-        		async:false,
-        		dataType:'json',
-        		data:data,
-        		success:function(json){
-        			
-        		}
-        	});*/
-        	
+
+            /*$.ajax({
+             type:'post',
+             url:contextpath+'booksearch/bookOrArtSpliter.action?search=' + encodeURI(encodeURI($("#search-input").val()))+'&t='+new Date().getTime(),
+             async:false,
+             dataType:'json',
+             data:data,
+             success:function(json){
+
+             }
+             });*/
+
             window.location.href = contextpath + "booksearch/bookOrArtSpliter.action?search=" + encodeURI(encodeURI($("#search-input").val()));
         }
         if (!input_open) {

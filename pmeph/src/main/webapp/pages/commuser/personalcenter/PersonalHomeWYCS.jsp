@@ -804,7 +804,7 @@ request.setAttribute("currentTime",datetime);
                     <div id="bzxxherd"></div>
                     <span class="bzzxwz">帮助中心</span>
                     <div id="bzxxherd2"></div>
-                    <input type="text" id="bzzxcxk" value="请输入您要咨询的问题">
+                    <input type="text" id="bzzxcxk" placeholder="请输入您要咨询的问题">
                     <ul class="scul">
                         <li class="bzzxlb"><span id="dianhua"></span><span class="zzfw">自助服务</span></li>
                         <li class="bzzxlb"><span id="shou"></span><span class="zzfw">投诉举报</span></li>
