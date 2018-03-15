@@ -525,7 +525,7 @@ color:#FFF;
     font-size: 12px;
     color: #bcbcbc;
     height: 28px;
-    width: 231px;
+    width: 181px;
     margin-top: 20px;
     margin-right: 10px;
     margin-left: 10px;
@@ -534,6 +534,7 @@ color:#FFF;
     background-position: 200px;
     margin-bottom: 20px;
     border: 1px solid #dedede;
+    padding: 0px 40px 0px 10px;
 }
 
 .bzzxlb {
@@ -1392,3 +1393,16 @@ a{
 	text-decoration: blink;
 	color: inherit;
 }
+
+input::-webkit-input-placeholder { /* WebKit browsers */ 
+color: #bcbcbc; 
+} 
+input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
+color: #bcbcbc; 
+} 
+input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
+color: #bcbcbc; 
+} 
+input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
+color: #bcbcbc; 
+} 
