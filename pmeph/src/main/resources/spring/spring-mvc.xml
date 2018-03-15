@@ -64,6 +64,7 @@
                 <value>/readdetail/addmark* -> 1</value><!--读书详情页添加收藏 -->
                 <value>/readdetail/addlikes* -> 1</value><!--读书详情页点赞 -->
                 <value>/readdetail/correction* -> 1</value><!--读书详情页图书纠错 -->
+                <value>/readdetail/tologin* -> 1</value><!--必须登录 -->
                 <value>/myFriend/* -> 1</value><!--我的好友（普通用户） -->
                 <value>/articlesearch/changelikes* -> 1</value><!--读书详情页改变点赞数 -->
                 <value>/addFriend/* -> 1</value><!--添加好友 -->

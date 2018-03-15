@@ -158,7 +158,7 @@ public class AdminInfoController extends BaseController {
         userService.modifyUser(MapUtils.getString(map1,"username"),request.getParameter("password"));
         return responseBean;
     }
-
+    
     //上传委托书
     @RequestMapping(value ="/uploadProxy",method = RequestMethod.POST)
     @ResponseBody
@@ -169,12 +169,12 @@ public class AdminInfoController extends BaseController {
     	Map<String,Object> map = new HashMap<String,Object>();
     	map.put("fileId", fileId);
     	map.put("id", id);
-
+    	
     	try{
     		adminInfoService.uploadProxy(map);
     		code="1";
     	}catch(Exception e){
-
+    		
     	}
         return code;
     }
@@ -185,20 +185,20 @@ public class AdminInfoController extends BaseController {
     	String id  = request.getParameter("id");
     	Map<String,Object> map = new HashMap<String,Object>();
     	map.put("id", id);
-
+    	
     	try{
     		adminInfoService.uploadProxy(map);
     	}catch(Exception e){
-
+    		
     	}
     }
-
+    
     /**
 	 * 根据ID修改头像
 	 * @param request
 	 */
 	@RequestMapping("updateavatar")
-	@ResponseBody
+	@ResponseBody	
 	public Map<String, Object> updateavatar(HttpServletRequest request){
 		Map<String, Object> map=new HashMap<String, Object>();
 		String avatar=request.getParameter("avatar");
@@ -206,13 +206,13 @@ public class AdminInfoController extends BaseController {
 		map.put("id", id);
 		map.put("avatar", avatar);
 		map=adminInfoService.updateavatar(map);
-//		 Map<String, Object> user=getUserInfo();
-//		 user = userService.getUserInfo(MapUtils.getString(user, "username"), "1");
-//		 HttpSession session = request.getSession();
-//		 session.setAttribute(Const.SESSION_USER_CONST_WRITER, user);
-//         session.setAttribute(Const.SESSION_USER_CONST_TYPE, "1");
+		 Map<String, Object> user=getUserInfo();
+		 user = userService.getUserInfo(MapUtils.getString(user, "username"), "2");
+		 HttpSession session = request.getSession();
+		 session.setAttribute(Const.SESSION_USER_CONST_ORGUSER, user);
+         session.setAttribute(Const.SESSION_USER_CONST_TYPE, "2");
 		return map;
 	}
-
-
+	 
+    
 }

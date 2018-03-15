@@ -30,10 +30,13 @@ public interface AllMessageService {
 	public int updateIsRead(String mid);
 	/**
 	 * 删除消息
-	 * @param parameter
-	 * @param string
+	 * @param mid
+	 * @param tag
+	 * tag :
+	 * 1删除收到的消息 根据主键id删除此条
+	 * 2删除发送的信息 根据msg_id删除此次发送的消息 应该对多人发送所以有多条
 	 */
-	public int deletemsg(String mid);
+	public int deletemsg(String mid,String tag);
 	
 	/**
 	 * 获取机构用户全部发送的消息

@@ -86,11 +86,13 @@ public class HomeServiceImpl implements HomeService {
      * 查询书籍
      */
     @Override
-    @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName+#map['type']+'_'+#map['startrows']")
+    //@Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName+#map['type']+'_'+#map['startrows']")
     public List<Map<String, Object>> queryBook(Map<String, Object> map) {
         List<Map<String, Object>> list = homeDao.queryBook(map);
         for (Map<String, Object> pmap : list) {
-            String score = pmap.get("score").toString().substring(0, 1);
+        	
+            String scoreStr = pmap.get("score").toString();
+            int score = (int) Math.floor(Double.parseDouble(scoreStr));
             pmap.put("score", score);
         }
         return list;

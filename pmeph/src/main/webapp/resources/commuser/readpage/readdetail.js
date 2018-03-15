@@ -1,7 +1,7 @@
 $(function () {
-	$("#start").val(2);//火狐浏览器点击刷新按钮 不刷新el表达式 此处用js初始化
-	$("#longstart").val(2);
-	
+    $("#start").val(2);//火狐浏览器点击刷新按钮 不刷新el表达式 此处用js初始化
+    $("#longstart").val(2);
+
     $('form').validate({
         onFocus: function () {
             this.removeClass("input-error");
@@ -43,39 +43,56 @@ $(function () {
 
     var $pop = $("<div id='video-upload'><div class='pop-body'>" +
         "<div class='title'>当前上传：" + $("#bookname").val() + "</div>" +
-        "<div class='remark' style='display: none'>视频上传中，请勿关闭页面</div>" +
+        "<div class='remark' >视频上传中，请勿关闭页面</div>" +
         "<div class='layui-progress layui-progress-big' lay-filter='demo' lay-showPercent='true'>" +
         "   <div class='layui-progress-bar' lay-percent='0%'></div> </div> " +
         "<div class='relate-img'>" +
-        "   <img  alt='' value='' />" +
+        "  <div id='imgPreview'><img id='cover_image' alt='' value='' /></div>" +
         "   <div class='shade'>请上传视频封面</div> " +
         "   <div class='add-icon' id='add-icon'>+</div> " +
         "</div>" +
         " <div class='lable-input title'><div class='label'>标 题</div><input class='input' type='text'></div>" +
         /*   " <div class='lable-input type'><div class='label'>分 类</div><select id='select'><option>教育</option><option>培训</option></select></div>" +*/
-        "<div class='button-area'><button class='submit disable'>开始上传</button><button class='cancel' onclick='hidevideo()'>取消</button></div>" +
+        "<div class='button-area'><button class='submit disable'>保存</button><button class='cancel' onclick='hidevideo()'>取消</button></div>" +
         "</div> </div>");
 
     var element;
+    var returnInfo;
     var $uploadvideo = $("#upload-video").fileupload({
-        url: 'http://119.254.226.115/v/upload',
+        url: 'http://'+remoteUrl+'/v/upload',
         dataType: 'json',
         autoUpload: true,
-        formData: function () {
-            return [
-                {name: 'userId', value: $("#userid").val()},
-                {name: 'userType', value: 2},
-                {name: 'bookId', value: $("#bookid").val()},
-                {name: 'sn', value: $("#booksn").val()},
-                {name: 'title', value: $(".pop-body").find("input[type='text']").val()},
-                {name: 'cover', value: $("#add-icon").parent().children("img").attr("value")}
-            ];
-        },
+        /*    formData: function () {
+         return [
+         {name: 'userId', value: $("#userid").val()},
+         {name: 'userType', value: 2},
+         {name: 'bookId', value: $("#bookid").val()},
+         {name: 'sn', value: $("#booksn").val()},
+         {name: 'title', value: $(".pop-body").find("input[type='text']").val()},
+         {name: 'cover', value: $("#add-icon").parent().children("img").attr("value")}
+         ];
+         },*/
         replaceFileInput: false,
         singleFileUploads: true,
         limitMultiFileUploads: 1,
         limitMultiFileUploadSize: 1048576000,
         add: function (e, data) {
+
+            //校验登录情况
+            $.ajax({
+                type: 'post',
+                url: contextpath + 'readdetail/tologin.action',
+                async: false,
+                dataType: 'json',
+                success: function (json) {
+                    if (json == "OK") {
+
+                    }
+                }
+            });
+
+
+
             if (data.files[0].name) {
                 var videolist = ['aiv', 'mpg', 'wmv', '3gp', 'mov', 'mp4', 'asf', 'asx', 'flv'];
                 var arr = data.files[0].name.split(".");
@@ -88,11 +105,10 @@ $(function () {
                         break;
                     }
                 }
-                /*if (!f) {
-                 message.warning("您上传的文件格式不支持！");
-
-                 return;
-                 }*/
+                if (!f) {
+                    message.error("您上传的文件格式不支持！");
+                    return;
+                }
                 layer.open({
                     type: 1,
                     title: false,
@@ -105,46 +121,19 @@ $(function () {
 
                 layui.use('element', function () {
 
-                    var valid = function () {
-                        if ($("#add-icon").parent().children("img").attr("value") && $(".pop-body").find("input[type='text']").val()) {
-                            $(".pop-body").find("button.submit").removeClass("disable");
-                            return true;
-                        } else {
-                            $(".pop-body").find("button.submit").addClass("disable");
-                            return false;
-                        }
-                    }
-
-                    $(".pop-body").find("input[type='text']").change(function () {
-                        valid();
-                    });
-
-                    $(".pop-body").find("button.submit").click(function () {
-                        if (valid()) {
-
-                            var o = data.submit()
-                            o.fail=function () {
-                                message.error("上传失败,请联系管理员！");
-                            }
-
-                            $(".pop-body").find(".remark").css("display", "block");
-                            $(".pop-body").find("button.submit").text("正在上传");
-                        }
-                    })
-
 
                     element = layui.element;
-                    $("#add-icon").uploadFile({
-                        accept: 'image/png,image/gif,image/jpeg',
-                        done: function (filename, fileid) {
-                            // console.log("上传完成：name " + filename + " fileid " + fileid);
-                            $("#add-icon").parent().children("img").attr('src', contextpath + 'image/' + fileid + ".action").attr("value", fileid);
-                            valid()
-                        },
-                        progressall: function (loaded, total, bitrate) {
-                            // console.log("正在上传。。。" + loaded / total);
-                        }
-                    });
+                    /*  $("#add-icon").uploadFile({
+                     accept: 'image/png,image/gif,image/jpeg',
+                     done: function (filename, fileid) {
+                     // console.log("上传完成：name " + filename + " fileid " + fileid);
+                     $("#add-icon").parent().children("img").attr('src', contextpath + 'image/' + fileid + ".action").attr("value", fileid);
+                     valid()
+                     },
+                     progressall: function (loaded, total, bitrate) {
+                     // console.log("正在上传。。。" + loaded / total);
+                     }
+                     });*/
 
                     /* $('.pop-body select').selectlist({
                      zIndex: 10,
@@ -156,50 +145,164 @@ $(function () {
                 });
 
 
-                // data.submit();
+                data.submit();
             }
         },
         start: function (e) {
 
         },
         /*always: function (e, data) {
-            message.error("上传失败,请联系管理员！");
-        },*/
+         message.error("上传失败,请联系管理员！");
+         },*/
         done: function (e, data, b, c, d) {
             if (data.result) {
                 if (data.result.code == '1') {
                     // $(".pop-body .submit").removeClass("disable");
-                    message.success("上传成功！");
-                    hidevideo()
+                    //message.success("上传成功！");
+                    // hidevideo()
+                    $(".pop-body").find(".remark").text("正在压缩视频请稍后")
+                    var intervalId = setInterval(function () {
+                        $.ajax({
+                            type: 'get',
+                            url: "http://"+remoteUrl+"/v/query?key=" + data.result.data,
+                            async: false,
+                            dataType: 'json',
+                            beforeSend: function (xhr, global) {
+                            },
+                            success: function (json) {
+                                if (json.code == '1' && (json.data.error == 'true' || json.data.message == '转码成功')) {
+                                    clearInterval(intervalId);
+                                    if (json.data.error == 'true') {
+                                        message.error("上传失败！");
+                                    } else {
+
+                                        $(".pop-body").find(".remark").css("display", "none");
+
+                                        element.progress('demo', 100 + '%')
+                                        returnInfo = json.data;
+                                        var file_input;
+                                        var add_input = function ($ele) {
+                                            $ele.parent().find("#" + $ele.attr("id") + "_upload").remove();
+
+
+                                            file_input = $("<input class='hidden-upload' onchange='PreviewImage(this)' name='file' type='file' id='" + $ele.attr("id") + "_upload'/>");
+
+
+                                            file_input.css("width", $ele.outerWidth());
+                                            file_input.css("height", $ele.outerHeight());
+                                            file_input.css("padding-bottom", $ele.outerHeight());
+                                            file_input.css("padding-left", $ele.outerWidth());
+                                            file_input.css("top", $ele[0].offsetTop);
+                                            file_input.css("left", $ele[0].offsetLeft);
+                                            file_input.css("cursor", "pointer");
+                                            file_input.attr("accept", 'image/png,image/gif,image/jpeg');
+                                            file_input.appendTo($ele.parent());
+                                        }
+
+                                        add_input($("#add-icon"));
+
+
+                                        $("#add-icon_upload").fileupload({
+                                            url: 'http://'+remoteUrl+'/pmpheep/bookVideo/addVideo',
+                                            dataType: 'json',
+                                            type: 'post',
+                                            autoUpload: true,
+                                            paramName: 'cover',
+                                            formData: function () {
+                                                return [
+                                                    {name: 'userId', value: $("#userid").val()},
+                                                    /* {name: 'userType', value: 2},*/
+                                                    {name: 'bookId', value: $("#bookid").val()},
+                                                    {
+                                                        name: 'title',
+                                                        value: $(".pop-body").find("input[type='text']").val()
+                                                    },
+                                                    {name: 'origPath', value: json.data.origPath},
+                                                    {name: 'origFileName', value: json.data.origFileName},
+                                                    {name: 'origFileSize', value: json.data.origFileSize},
+                                                    {name: 'path', value: json.data.path},
+                                                    {name: 'fileName', value: json.data.fileName},
+                                                    {name: 'fileSize', value: json.data.fileSize}
+                                                ];
+                                            },
+                                            replaceFileInput: false,
+                                            singleFileUploads: true,
+                                            limitMultiFileUploads: 1,
+                                            limitMultiFileUploadSize: 1048576000,
+                                            add: function (e, data) {
+
+                                                var valid = function () {
+                                                    if ($(".pop-body").find("input[type='text']").val()) {
+                                                        $(".pop-body").find("button.submit").removeClass("disable");
+                                                        return true;
+                                                    } else {
+                                                        $(".pop-body").find("button.submit").addClass("disable");
+                                                        return false;
+                                                    }
+                                                }
+
+                                                $(".pop-body").find("input[type='text']").change(function () {
+                                                    valid();
+                                                });
+                                                $(".pop-body").find("button.submit").unbind("click")
+                                                $(".pop-body").find("button.submit").click(function () {
+                                                    if (valid()) {
+
+                                                        var o = data.submit()
+                                                        o.fail = function () {
+                                                            message.error("上传失败,请联系管理员！");
+                                                            hidevideo()
+                                                        }
+
+                                                    }
+                                                })
+                                            },
+                                            done: function (e, data) {
+                                                if (data.result.code == '1') {
+                                                    message.success("保存成功");
+                                                } else {
+                                                    message.error("保存失败");
+                                                }
+                                                hidevideo()
+                                            }
+                                        })
+
+                                    }
+                                }
+
+                            }
+                        })
+                    }, 3000);
+
                 } else {
                     message.error("上传失败！");
+                    hidevideo()
                 }
             } else {
-                message.success("上传成功！");
+                message.error("上传失败！");
                 hidevideo()
             }
 
         },
         progressall: function (e, data) {
             // console.log(e.delegatedEvent, data);
-            element.progress('demo', ( Math.round((data.loaded / data.total * 1000), 1) / 10).toFixed(1) + '%')
+            element.progress('demo', ( Math.round((data.loaded / (data.total + data.loaded / 10) * 1000), 1) / 10).toFixed(1) + '%')
         }
     });
 
     //隐藏/显示配套图书
-    if($("#sup-hidden").val()=='no'){
+    if ($("#sup-hidden").val() == 'no') {
 
-    }else {
+    } else {
         $(".right_1").hide();
     }
 
     //隐藏PDF阅读按钮
-    if($("#pdf-hidden").val()=='no'){
+    if ($("#pdf-hidden").val() == 'no') {
         $("#dpf").hide();
     }
 
     morecontent();
-
 
 
 });
@@ -239,8 +342,8 @@ function changepage() {
             $(".moreothers").show();
             if (json.length < 3) {
                 $("#moreothers").html('加载完毕');
-            }else{
-            	json=json.slice(0,2);
+            } else {
+                json = json.slice(0, 2);
             }
             var str = '';
             $.each(json, function (i, n) {
@@ -315,11 +418,11 @@ function longcom() {
         success: function (json) {
             $(".morecom").hide();
             $(".moreothers").show();
-            
+
             if (json.length < 3) {
                 $("#longothers").html('加载完毕');
-            }else{
-            	json=json.slice(0,2);
+            } else {
+                json = json.slice(0, 2);
             }
             var str = '';
             $.each(json, function (i, n) {
@@ -642,3 +745,28 @@ $(function () {
 
 });
 
+function PreviewImage(imgFile) {
+    var filextension = imgFile.value.substring(imgFile.value.lastIndexOf("."), imgFile.value.length);
+    filextension = filextension.toLowerCase();
+    if ((filextension != '.jpg') && (filextension != '.gif') && (filextension != '.jpeg') && (filextension != '.png') && (filextension != '.bmp')) {
+        message.error("对不起，系统仅支持标准格式的照片，请您调整格式后重新上传，谢谢 !");
+        imgFile.focus();
+    }
+    else {
+        var path;
+        if (document.all)//IE
+        {
+            imgFile.select();
+            path = document.selection.createRange().text;
+            document.getElementById("imgPreview").innerHTML = "";
+            document.getElementById("imgPreview").style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true',sizingMethod='scale',src=\"" + path + "\")";//使用滤镜效果
+        }
+        else//FF
+        {
+            path = window.URL.createObjectURL(imgFile.files[0]);// FF 7.0以上
+            //path = imgFile.files[0].getAsDataURL();// FF 3.0
+            document.getElementById("imgPreview").innerHTML = "<img id='cover_image' src='" + path + "'/>";
+            //document.getElementById("cover_image").src = path;
+        }
+    }
+}

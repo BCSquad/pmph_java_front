@@ -5,6 +5,7 @@
 
 
 	<select id="getCmsNoticeListTotal" resultType="java.lang.Integer" parameterType="java.util.Map">
+		<if test="materialId ==null or materialId==''">
 		select 
      	count(distinct cc.id)
 		FROM
@@ -37,11 +38,18 @@
     	 or 
     	   cc.is_material_entry = 0  
     	 )
+    	 </if>
+    	 <if test="materialId!=null and materialId!=''">
+			    select count(b.id)  from cms_content  b
+			     left join material m on b.material_id=m.id
+			     left join material_extra me on me.material_id=m.id
+			     where b.is_deleted=0 and b.is_hide=0 and b.material_id=#{materialId} and b.is_published=1 and b.auth_status=2 and b.category_id=3
+        </if>
 	</select>
 
 	<select id="list"  resultType="CmsNoticeList" parameterType="java.util.Map">
 	
-<if test="materialId==null or materialId=''">
+<if test="materialId ==null or materialId==''">
   select b.* from 
       (select 
 	 	        t.*,b.deadline,me.notice

@@ -85,7 +85,7 @@ String contextpath=request.getContextPath();
 			          <div class="video-a" style="width:317px;height:275px;margin: 0px auto 0px;">
 		              <div class="video-c" style="width:317px;height:178px;text-align: center;">
 		                   <%--  <img src="${ctx }/statics/testfile/testvideoimage.png" style="height:178px;"/> --%>
-		                    <div class="videou" id="videou${video.id }" src="http://119.254.226.115/v/play/${video.file_name }" style="width:317px;height:178px" controls type="mp4"
+		                    <div class="videou" id="videou${video.id }" src="http://${_remoteUrl}/v/play/${video.file_name }" style="width:317px;height:178px" controls type="mp4"
 	                          poster="image/${video.cover }.action"></div>
 		              </div>
 		             <div class="video-d" style="width:297px">

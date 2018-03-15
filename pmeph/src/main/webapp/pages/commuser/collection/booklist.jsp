@@ -35,8 +35,8 @@ String basePath = path+"/";
         <div class="area2" style="background-color: #f8f8f8;height:50px">
         <span class="name selectdiv" >书籍收藏夹</span>
         <a href="articlecollection/toarticlecollectionlist.action" ><span class="name" style="margin-left: 20px">文章收藏夹</span></a>
-            <%-- <input type="hidden" id="favoriteId" value="${fmap.id }"/>
-           <span class="del" onclick="delFavorite('${fmap.id }')">删除收藏夹</span> --%>
+            <input type="hidden" id="favoriteId" value="${fmap.id }"/>
+           <%--<span class="del" onclick="delFavorite('${fmap.id }')">删除收藏夹</span> --%>
        </div>
        
        <c:forEach items="${booklist.rows}" var="book">

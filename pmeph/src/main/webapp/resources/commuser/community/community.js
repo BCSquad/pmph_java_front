@@ -47,7 +47,7 @@
 			  $.each(json.result,function(i,n){
 				  html+='<li style="margin-bottom:10px">'+
 	              '<div class="video-c">'+
-	                 '<div class="videou" id="videou'+n.id+'" src="http://119.254.226.115/v/play/'+n.file_name+'" style="width:230px;height:184px" controls type="mp4"'+
+	                 '<div class="videou" id="videou'+n.id+'" src="http://'+remoteUrl+'/v/play/'+n.file_name+'" style="width:230px;height:184px" controls type="mp4"'+
 	              'poster="'+contextpath+'image/'+n.cover+'.action"></div>'+
 	              '</div>'+
 	              '<div class="video-d" >'+
@@ -81,16 +81,16 @@
 			}
 	  });
   }
-
-  function getDate(mtime) {
-	  //shijianchuo是整数，否则要parseInt转换
-	  var time = new Date(mtime);
-	  var y = time.getFullYear();
-	  var m = time.getMonth()+1;
-	  var d = time.getDate();
-	  var h = time.getHours();
-	  var mm = time.getMinutes();
-	  var s = time.getSeconds();
-	  return y+'-'+add0(m)+'-'+add0(d)+' '+add0(h)+':'+add0(mm)+':'+add0(s);
+  
+  function getDate(mtime) {  
+	  //shijianchuo是整数，否则要parseInt转换  
+	  var time = new Date(mtime);  
+	  var y = time.getFullYear();  
+	  var m = time.getMonth()+1;  
+	  var d = time.getDate();  
+	  var h = time.getHours();  
+	  var mm = time.getMinutes();  
+	  var s = time.getSeconds();  
+	  return y+'-'+add0(m)+'-'+add0(d)+' '+add0(h)+':'+add0(mm)+':'+add0(s);  
 	}
-  function add0(m){return m<10?'0'+m:m };
+  function add0(m){return m<10?'0'+m:m }; 
