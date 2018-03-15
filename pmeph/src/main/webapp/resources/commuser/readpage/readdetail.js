@@ -59,7 +59,7 @@ $(function () {
     var element;
     var returnInfo;
     var $uploadvideo = $("#upload-video").fileupload({
-        url: 'http://120.76.221.250/v/upload',
+        url: 'http://'+remoteUrl+'/v/upload',
         dataType: 'json',
         autoUpload: true,
         /*    formData: function () {
@@ -164,7 +164,7 @@ $(function () {
                     var intervalId = setInterval(function () {
                         $.ajax({
                             type: 'get',
-                            url: "http://120.76.221.250/v/query?key=" + data.result.data,
+                            url: "http://"+remoteUrl+"/v/query?key=" + data.result.data,
                             async: false,
                             dataType: 'json',
                             beforeSend: function (xhr, global) {
@@ -203,7 +203,7 @@ $(function () {
 
 
                                         $("#add-icon_upload").fileupload({
-                                            url: 'http://120.76.221.250/pmpheep/bookVideo/addVideo',
+                                            url: 'http://'+remoteUrl+'/pmpheep/bookVideo/addVideo',
                                             dataType: 'json',
                                             type: 'post',
                                             autoUpload: true,

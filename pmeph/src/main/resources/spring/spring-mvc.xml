@@ -12,6 +12,9 @@
           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd
           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 ">
+    <!-- 加载属性文件 -->
+    <context:property-placeholder location="classpath:spring/spring.properties" ignore-unresolvable="true" />
+
     <!-- 使用cglib进行动态代理 -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
@@ -21,6 +24,7 @@
 
 
     <bean id="loginInterceptor" class="com.bc.pmpheep.back.interceptor.LoginInterceptor">
+        <property name="remoteUrl" value="${remoteUrl}"></property>
         <property name="redirectUrl" value="/pages/comm/login.jsp"/>
         <property name="pathWithUsertypeMaps">
             <set>
