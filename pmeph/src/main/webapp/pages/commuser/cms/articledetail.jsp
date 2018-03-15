@@ -191,7 +191,7 @@
             </div>
     	</div>
     		<div class="area2">
-    		<div style="position:relative;width: 275px;height: 410px;">
+    		<div style="position:relative;width: 275px;/* height: 410px; */">
     			<div class="right_2">
 	    			<c:if test="${Art.avatar == '' || Art.avatar == 'DEFAULT' || Art.avatar == null}">
 	    			
@@ -204,7 +204,7 @@
 	    			
 	    			<span>作者：${Art.realname}</span>
 	    		</div>
-	    		<div class="right_1" style=" position:absolute;top:20px;">
+	    		<div class="right_1" style=" position:relative;top:20px;">
 	    			<div class="right_div1">
 	    				<div style="height: 40px;width: 100%;"></div>
 	    				<div class="right_div2">
