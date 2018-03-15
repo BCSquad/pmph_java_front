@@ -37,6 +37,7 @@ $(function(){
     try {
         if (WebSocket) {
             webSocket = new WebSocket("ws://"+remoteUrl+":11000/pmpheep/websocket?userType=2&userId=" + userId+"&t="+new Date());
+            webSock_init();
         }
     } catch (e) {
     	 //不支持websocket ie10以下版本 
@@ -72,47 +73,51 @@ $(function(){
     
 
 	//var webSocket = new WebSocket("ws:127.0.0.1:8036/pmpheep/websocket?userType=" +2+"&userId="+$("#userId").val());
-    if (webSocket) {
-	webSocket.onopen = function(event){
-	    console.log("连接成功");
-	    console.log(event);
-	};
-	webSocket.onerror = function(event){
-	    console.log("连接失败");
-	    window.message.error("连接失败");
-	    console.log(event);
-	};
-	webSocket.onclose = function(event){
-	    console.log("连接断开");
-	    window.message.warning("连接断开");
-	    console.log(event);
-	};
-	//监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
-    window.onbeforeunload = function(){
-    	webSocket.close();
-    };
-	webSocket.onmessage = function(event){
-	    //接受来自服务器的消息
-	    //...
-	    console.log("Socket新消息:"+event.data);
-	    var data = $.parseJSON(event.data);  
-	    var sender = 2 ; //他人的
-	    if(data.senderType == 0 || data.senderId == 0 ){//系统消息
-	    	sender = 0; 
-	    }else if(data.senderType == 2 && data.senderId == $("#userId").val()  ){//我自己的
-	    	sender = 1 ;
-	    }
-	    //是小组消息，小组id相同，类型是新增
-	    if(data.msgType == 3 && data.groupId == $("#groupId").val() && data.sendType == 0){
-	    	if(data.senderIcon==''||data.senderIcon=='DEFAULT'||data.senderIcon.indexOf('statics')!=-1||data.senderIcon.indexOf('default_image')!=-1||data.senderIcon.indexOf('png')!=-1){
-	    		data.senderIcon = contxtpath+'/statics/image/default_image.png';
-	    	}else{
-	    		data.senderIcon = contxtpath+'/image/'+data.senderIcon+'.action';
-	    	}
-	    	loadNewGroupMsg(sender,data.senderName,data.senderIcon,data.content,data.time);
-	    }
+	function webSock_init(){
+        if (webSocket) {
+            webSocket.onopen = function(event){
+                console.log("连接成功");
+                console.log(event);
+            };
+            webSocket.onerror = function(event){
+                console.log("连接失败");
+                window.message.error("连接失败");
+                console.log(event);
+            };
+            webSocket.onclose = function(event){
+                webSocket.readyState = 3;
+                console.log("连接断开");
+                window.message.warning("连接断开");
+                console.log(event);
+            };
+            //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+            window.onbeforeunload = function(){
+                webSocket.close();
+            };
+            webSocket.onmessage = function(event){
+                //接受来自服务器的消息
+                //...
+                console.log("Socket新消息:"+event.data);
+                var data = $.parseJSON(event.data);
+                var sender = 2 ; //他人的
+                if(data.senderType == 0 || data.senderId == 0 ){//系统消息
+                    sender = 0;
+                }else if(data.senderType == 2 && data.senderId == $("#userId").val()  ){//我自己的
+                    sender = 1 ;
+                }
+                //是小组消息，小组id相同，类型是新增
+                if(data.msgType == 3 && data.groupId == $("#groupId").val() && data.sendType == 0){
+                    if(data.senderIcon==''||data.senderIcon=='DEFAULT'||data.senderIcon.indexOf('statics')!=-1||data.senderIcon.indexOf('default_image')!=-1||data.senderIcon.indexOf('png')!=-1){
+                        data.senderIcon = contxtpath+'/statics/image/default_image.png';
+                    }else{
+                        data.senderIcon = contxtpath+'/image/'+data.senderIcon+'.action';
+                    }
+                    loadNewGroupMsg(sender,data.senderName,data.senderIcon,data.content,data.time);
+                }
+            }
+        }
 	}
-    }
+
      
     $('#edu').selectlist({
         zIndex: 10,
@@ -620,11 +625,12 @@ $(function(){
 		if (webSocket != undefined) {
 	    	if (webSocket.readyState != 1) {
 	    		webSocket = new WebSocket("ws://"+remoteUrl+":11000/pmpheep/websocket?userType=2&userId=" + userId+"&t="+new Date());
+                webSock_init();
 			}
 	        webSocket.send(json);
 	    }
 	}
-	
+
 });
 
 
