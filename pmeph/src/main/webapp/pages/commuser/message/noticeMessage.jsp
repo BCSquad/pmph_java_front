@@ -112,8 +112,8 @@
                 <div class="clear"></div>
             </form>
         </div>
-        
-        
+
+        <input type="hidden" id="messid" value="${message.id}"/>
         <div class="message">
             <table class="table" id="messageTable">
             <c:choose>
@@ -129,28 +129,27 @@
 		                    </td>
 		                </tr>
 		                <tr style="width: 30%">
-		                	  <c:if test="${(message.msgType==0||message.msgType==1)&& message.material_id==0}">
+		                	  <c:if test="${(message.msgType==0||message.msgType==1)}">
 		                	    <td colspan="2" class="title" style="cursor: pointer;" onclick="showup('${message.id}')" >
-		                	    <input type="hidden" id="messid" value="${message.id}"/>
-                                <span class="fixwidth">${message.messageContent}</span>
 
-		                	    <c:choose>
-									<c:when test="${message.is_read==1}">
-										<img src="${ctx}/statics/image/readyes.png"  id="readyes"/>
-									</c:when>
-									<c:otherwise>
-										<img src="${ctx}/statics/image/readno.png"  id="readno"/>
-									</c:otherwise>
-								</c:choose>	
-		                	    
+                                    <c:choose>
+                                        <c:when test="${message.is_read==1}">
+                                            <img src="${ctx}/statics/image/readyes.png"  id="readyes${message.id}"  class="readyes"/>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img src="${ctx}/statics/image/readno.png"  id="readno${message.id}" class="readyes"/>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <span class="fixwidth">${message.messageContent}</span>
+
 		                	    </td>
 		                	  </c:if>
-		                	  <c:if test="${(message.msgType==0||message.msgType==4)&& message.material_id!=0}">
+		                	  <%--<c:if test="${(message.msgType==0||message.msgType==4)&& message.material_id!=0}">
 			                	    <td colspan="2" class="title"  >
-			                	    <input type="hidden" id="messid" value="${message.id}"/>
+
 	                                <span class="fixwidth">${message.messageContent}</span>
 			                	    </td>
-		                	  </c:if>
+		                	  </c:if>--%>
 		                	<%--  <c:if test="${message.msgType==4}">
 		                	    <td colspan="2" class="title">《${message.title}》已开始申报,请您留意</td>
 		                	  </c:if>--%>

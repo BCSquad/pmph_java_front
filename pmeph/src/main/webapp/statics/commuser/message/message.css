@@ -646,21 +646,12 @@ a {
 	float:left; 
 }
 
-#readyes{
+.readyes{
 	float: left;
 	display: block;
 	margin: 5px;
 	clear: right;
 }
-
-#readno{
-	float: left;
-	display: block;
-	margin: 5px;
-	clear: right;
-}
-
-
 
 .listContent a {
     text-decoration: none;
