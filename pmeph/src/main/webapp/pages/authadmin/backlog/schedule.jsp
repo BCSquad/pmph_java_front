@@ -178,7 +178,7 @@
                
             </div>
             <div class="thirdRow">
-                <span>最近登录:  2017-09-27 16:12:07</span>
+                <span>最近登录:<fmt:formatDate value="${map.latest_login_time}" type="both" dateStyle="default" timeStyle="default"></fmt:formatDate></span>
             </div>
         </div>
 			</c:otherwise>

@@ -137,11 +137,13 @@ public class ScheduleController extends BaseController{
 			map.put("time", time);
 			map.put("userId", userId);
 			map.put("pageResult", pageResult);
+			map.put("latest_login_time",writerUser.get("latest_login_time"));
 			mv.addObject("map",map);
 		}else{
 			Map<String,Object> map1 = new HashMap<String,Object>();
 			map1.put("pageResult", pageResult);
 			map1.put("license", "no");
+			map1.put("latest_login_time",writerUser.get("latest_login_time"));
 			mv.addObject("map",map1);
 
 		}

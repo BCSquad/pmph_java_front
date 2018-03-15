@@ -720,7 +720,7 @@
 					 <c:when test="${view_audit=='audit'}">
 					<div class="div_butt">
 						<input type="hidden" value="${online_progress}" />
-						<c:if test="${online_progress!=3&&online_progress!=2}">
+						<c:if test="${online_progress!=3&&online_progress!=2&&online_progress!=5}">
 							<div id="passGo" class="bt_tj" onclick="toAudit('${gezlList.id}','3')">通过</div>
 							<div id="backGo" class="bt_tj" onclick="showup('${gezlList.id}','2')">退回</div>
 						</c:if>
