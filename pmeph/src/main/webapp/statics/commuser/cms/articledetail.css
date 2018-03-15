@@ -360,7 +360,7 @@
 	margin:0px;
 	padding:0px;
 	margin-top: 10px;
-	height: 60px;
+	/* height: 60px; */
 }
 
 .right_3 ul li{
@@ -387,6 +387,7 @@
 	border-radius: 2px;
 	text-align: center;
 	cursor: pointer;
+	margin-top: 50px;
 }
 
 .right_4 span{
