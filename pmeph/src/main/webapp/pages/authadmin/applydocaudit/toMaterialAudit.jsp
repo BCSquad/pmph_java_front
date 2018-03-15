@@ -66,6 +66,7 @@
         </div>
 		<!-- ------------------------------------------------------------------ -->
 		<!-- 图书选择-->
+		<!-- 图书选择-->
 		<div class="sbxq_item1">
 			<div>
 				<input type="hidden" id="material_id" name="material_id" value="${material.id}"/>
@@ -466,7 +467,7 @@
 			</div>
 		</div>
 		<!--参加人卫慕课、数字教材编写情况-->
-		<div class="sbxq_item" >
+		<div class="sbxq_item" id="digital">
 			<div>
 				<span id="tsxz_span9"></span>
 				<span class="tsxz_title">参加人卫慕课、数字教材编写情况</span>
@@ -547,7 +548,8 @@
 				<table class="tab_2" id="tab_zbxszz">
 					<thead>
 					<tr>
-						<td width="340px">专著名称</td>
+						<td width="240px">专著名称</td>
+						<td width="140px">专著发表日期</td>
 						<td width="120px">出版方式</td>
 						<td width="220px">出版单位</td>
 						<td width="150px">出版时间</td>
@@ -558,6 +560,7 @@
 					<c:forEach var="list" items="${monographList}">
 						<tr>
 							<td>${list.monograph_name}</td>
+							<td>${list.monograph_date}</td>
 							<td>
 								<c:if test="${list.is_self_paid == '0'}">自费</c:if>
 								<c:if test="${list.is_self_paid == '1'}">公费</c:if>
@@ -691,7 +694,7 @@
 			</div>
 		</div>
 		<!--编写内容意向表-->
-		<div class="sbxq_item" >
+		<div class="sbxq_item" id="intention">
 			<div>
 				<span id="tsxz_span9"></span>
 				<span class="tsxz_title">编写内容意向表</span>
