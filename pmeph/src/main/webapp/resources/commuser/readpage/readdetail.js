@@ -77,6 +77,22 @@ $(function () {
         limitMultiFileUploads: 1,
         limitMultiFileUploadSize: 1048576000,
         add: function (e, data) {
+
+            //校验登录情况
+            $.ajax({
+                type: 'post',
+                url: contextpath + 'readdetail/tologin.action',
+                async: false,
+                dataType: 'json',
+                success: function (json) {
+                    if (json == "OK") {
+
+                    }
+                }
+            });
+
+
+
             if (data.files[0].name) {
                 var videolist = ['aiv', 'mpg', 'wmv', '3gp', 'mov', 'mp4', 'asf', 'asx', 'flv'];
                 var arr = data.files[0].name.split(".");
@@ -187,14 +203,14 @@ $(function () {
 
 
                                         $("#add-icon_upload").fileupload({
-                                            url: 'http://120.76.221.250/pmpheep/bookVideo/addBookVideo',
+                                            url: 'http://120.76.221.250/pmpheep/bookVideo/addVideo',
                                             dataType: 'json',
                                             type: 'post',
                                             autoUpload: true,
                                             paramName: 'cover',
                                             formData: function () {
                                                 return [
-                                                    /*{name: 'userId', value: $("#userid").val()},*/
+                                                    {name: 'userId', value: $("#userid").val()},
                                                     /* {name: 'userType', value: 2},*/
                                                     {name: 'bookId', value: $("#bookid").val()},
                                                     {
