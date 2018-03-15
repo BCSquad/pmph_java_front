@@ -26,6 +26,12 @@ import java.util.Set;
 
 public class LoginInterceptor implements HandlerInterceptor {
 
+    private String remoteUrl;
+
+    public void setRemoteUrl(String remoteUrl) {
+        this.remoteUrl = remoteUrl;
+    }
+
     public static class PathWithUsertypeMap {
         private String path;
         private String userType;
@@ -96,9 +102,9 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         PathMatchingResourcePatternResolver resolver = getPathMatchingResourcePatternResolver();
 
-                for (PathWithUsertypeMap pathMap : pathWithUsertypeMaps) {
-                    //需要拦截的URL
-                    if (resolver.getPathMatcher().match(pathMap.getPath(), httpServletRequest.getServletPath())) {
+        for (PathWithUsertypeMap pathMap : pathWithUsertypeMaps) {
+            //需要拦截的URL
+            if (resolver.getPathMatcher().match(pathMap.getPath(), httpServletRequest.getServletPath())) {
                 HttpSession session = httpServletRequest.getSession();
                 Map<String, Object> userInfo = null;
                 if (pathMap.getUserType().split(",").length >= 1) {
@@ -156,7 +162,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object
             o, ModelAndView modelAndView) throws Exception {
-
+        httpServletRequest.getServletContext().setAttribute("_remoteUrl",remoteUrl);
     }
 
     @Override
