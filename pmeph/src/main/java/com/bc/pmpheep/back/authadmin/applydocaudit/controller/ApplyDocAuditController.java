@@ -68,7 +68,7 @@ public class ApplyDocAuditController extends BaseController {
 			Date now = new Date();
 			if(m.get("actualDeadline") != null){
 				
-				m.put("isEnd",Integer.parseInt(dt.format(now))>Integer.parseInt(dt.format((Date)m.get("actualDeadline")))||(Boolean)m.get("is_all_textbook_published") || (Boolean)m.get("is_force_end")?1:0);
+				m.put("isEnd",/*Integer.parseInt(dt.format(now))>Integer.parseInt(dt.format((Date)m.get("actualDeadline")))||*/((Boolean)m.get("is_all_textbook_published") || (Boolean)m.get("is_force_end"))?1:0);
 				m.put("contextpath", contextpath);
 			}else{
 				m.put("isEnd", 0);
@@ -111,7 +111,7 @@ public class ApplyDocAuditController extends BaseController {
 			Date now = new Date();
 			if(m.get("actualDeadline") != null){
 				
-				m.put("isEnd",Integer.parseInt(dt.format(now))>Integer.parseInt(dt.format((Date)m.get("actualDeadline")))||(Boolean)m.get("is_all_textbook_published") || (Boolean)m.get("is_force_end")?1:0);
+				m.put("isEnd",/*Integer.parseInt(dt.format(now))>Integer.parseInt(dt.format((Date)m.get("actualDeadline")))||*/((Boolean)m.get("is_all_textbook_published") || (Boolean)m.get("is_force_end"))?1:0);
 				
 			}else{
 				m.put("isEnd", 0);
