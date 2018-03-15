@@ -61,8 +61,12 @@ public class ArticleDetailController extends BaseController {
 		Content message = contentService.get(map.get("mid").toString());
 		// Content message = contentService.get("5a6544f290baad7f01b9bc52");
 		String UEContent = "";
-		if (message == null || "".equals(message)) {
-			UEContent = "没有内容！！！！！";
+		if (message == null || "".equals(message.getContent().trim())) {
+			if ("".equals(map.get("summary").toString().trim())) {
+				UEContent = "没有内容！！！！！";
+			}else{
+				UEContent = map.get("summary").toString();
+			}
 		} else {
 			UEContent = message.getContent();
 		}
