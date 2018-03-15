@@ -1,3 +1,6 @@
+//定义全局变量远程调用地址
+var remoteUrl = "127.0.0.1";
+
 /**
  * Created by lihuan on 2017/11/24.
  */
