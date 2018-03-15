@@ -11,11 +11,13 @@
         as decimal(9,2)
         )
         from material_type where id = cast('${type}' as decimal(9,2)))),'-',-1) = '${type}'
-        WHERE b.is_promote = 1  and  b.is_on_sale =1 AND b.deadline_promote > now()
+        WHERE b.is_promote = 1  and  b.is_on_sale =1
+        AND (b.deadline_promote > now() or b.deadline_promote is null)
         ORDER BY b.sort_promote ASC
         <if test="startrows != null and startrows != ''">
             <![CDATA[limit ${startrows},${endrows}]]>
         </if>
+
     </select>
 
 
@@ -37,7 +39,8 @@
         as decimal(9,2)
         )
         from material_type where id = cast('${type}' as decimal(9,2)))),'-',-1) = '${type}'
-        WHERE b.is_new = 1  and  b.is_on_sale =1  AND b.deadline_new > now()
+        WHERE b.is_new = 1  and  b.is_on_sale =1
+        AND (b.deadline_new > now() or b.deadline_new is null)
         ORDER BY b.sort_new ASC
         <if test="startrows != null and startrows != ''">
             <![CDATA[limit ${startrows},${endrows}]]>
