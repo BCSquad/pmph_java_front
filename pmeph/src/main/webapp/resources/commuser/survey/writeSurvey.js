@@ -34,18 +34,24 @@ function toList(){
 }
 
 function validate(){
-	var flag = false;
-    var radioval=$('input:radio:checked').val();
-    var str =[];
-    $("input:checkbox[name^='checkbox_']").each(function(i) {
+	var flag = true;
 
-        var val = $(this).val();
-        str.push(val);
+    $(".oneQuestion.q1").each(function () {
+       var val= $(this).find('input:radio:checked');
+       if(val.length<=0){
+           flag = false;
+       }
     });
-   if(radioval&&str.length>0){
-       flag = true;
+    $(".oneQuestion.q2").each(function () {
+        var val=$(this).find("input:checkbox:checked")
+        if(val.length<=0){
+            flag = false;
+        }
+    })
+
        $(".inputStyle").each(function(i) {
 			var val= $(this).val();
+			val = $.trim(val);
 			if(val.length<=0){
 				flag = false;
 				//alert(flag);
@@ -53,12 +59,13 @@ function validate(){
 	   })
        $(".textAreaStyle").each(function(i) {
            var val= $(this).val();
+           val = $.trim(val);
            if(val.length<=0){
                flag = false;
                //alert(flag);
            }
        })
-   }
+
    return flag;
 
 }

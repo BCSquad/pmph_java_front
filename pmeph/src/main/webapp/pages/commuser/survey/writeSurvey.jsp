@@ -40,7 +40,7 @@
 								<c:when test="${listSize>0 }">
 									<c:forEach items="${listSesult}" var="question" varStatus="code">
 										<c:if test="${question.type==1 }">
-											<div class="oneQuestion">
+											<div class="oneQuestion q1" >
 												<p>Q${code.index+1} : ${question.title}</p>
 												<div style="padding-left: 22px">
 														<c:forEach items="${question.listOptions }" var="option">
@@ -63,7 +63,7 @@
 											</div>
 										</c:if>
 										<c:if test="${question.type==2}">
-											<div class="oneQuestion">
+											<div class="oneQuestion q2">
 												<p>Q${code.index+1} : ${question.title}</p>
 												<div style="padding-left: 22px" id="type">
 													<c:forEach items="${question.listOptions }" var="option">
@@ -86,7 +86,7 @@
 											</div>
 										</c:if>
 										<c:if test="${question.type==4}">
-											<div class="oneQuestion">
+											<div class="oneQuestion q4">
 												<p>Q${code.index+1} : ${question.title}</p>
 												<div style="padding-left: 22px">
 													<input id="${question.id}" name="input_${code.index+1}" class="inputStyle"  maxlength="190"  value="${question.inp }"  >
@@ -96,7 +96,7 @@
 											</div>
 										</c:if>
 										<c:if test="${question.type==5}">
-											<div class="oneQuestion">
+											<div class="oneQuestion q5">
 												<p>Q${code.index+1} : ${question.title}</p>
 												<div style="padding-left: 22px">
 													<textarea id="${question.id}" name="input_${code.index+1}" class="textAreaStyle" maxlength="190" >${question.inp }</textarea>
