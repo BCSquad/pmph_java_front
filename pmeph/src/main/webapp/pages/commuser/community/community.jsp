@@ -43,7 +43,7 @@ String contextpath=request.getContextPath();
            <div  class="pagecontent">
            <div class="report">
                 <div class="left">
-                   <div style="background-image: url(${ctx}/statics/image/css_sprites.png);background-position:-10px -150px;width:25px;height:110px;
+                   <div style="background-image: url(${ctx}/statics/image/css_sprites.png);background-position:-291px -85px;width:25px;height:110px;
                    margin-left:10px;margin-top:34px"></div>
                 </div>
                 <div class="center">

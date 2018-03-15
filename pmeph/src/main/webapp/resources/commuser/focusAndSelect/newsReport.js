@@ -71,7 +71,7 @@ $(function(){
 	        			    	 html+="inforeport/toinforeport.action?id="+list[i].id+'&&materialId='+materialId;
 	        			     }
 	        			     html+="'>"+list[i].title+"</a></div> "+
-	        	                "<div class=\"item2 cutmore\"><p style='margin:0;height: 40px;line-height: 20px;'>"+(json[list[i].title+''+list[i].id]==null?"(内容为空)":json[list[i].title+''+list[i].id])+"</p></div> "+
+	        	                "<div class=\"item2 cutmore\"><p style='margin:0;height: 40px;line-height: 20px;'>"+(list[i].summary==null?"(摘要为空)":list[i].summary)+"</p></div> "+
 	        	                "<div class=\"item3\">  "+
 	        	                    "<div style=\"float: left;\">" +
 		        	                    "<div style='float:left;height:57px'><span class='cms-icon look'></span></div>" +

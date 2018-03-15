@@ -36,7 +36,7 @@ $(function(){
     
     try {
         if (WebSocket) {
-            webSocket = new WebSocket("ws://120.76.221.250:11000/pmpheep/websocket?userType=2&userId=" + userId+"&t="+new Date());
+            webSocket = new WebSocket("ws://"+remoteUrl+":11000/pmpheep/websocket?userType=2&userId=" + userId+"&t="+new Date());
         }
     } catch (e) {
     	 //不支持websocket ie10以下版本 
@@ -619,7 +619,7 @@ $(function(){
 	function webSocketSend(json){
 		if (webSocket != undefined) {
 	    	if (webSocket.readyState != 1) {
-	    		webSocket = new WebSocket("ws://120.76.221.250:11000/pmpheep/websocket?userType=2&userId=" + userId+"&t="+new Date());
+	    		webSocket = new WebSocket("ws://"+remoteUrl+":11000/pmpheep/websocket?userType=2&userId=" + userId+"&t="+new Date());
 			}
 	        webSocket.send(json);
 	    }
