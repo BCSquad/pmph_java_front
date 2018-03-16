@@ -1,6 +1,6 @@
 //定义全局变量远程调用地址
 // var remoteUrl = "120.76.221.250";
-var remoteUrl = "127.0.0.1";
+var remoteUrl = "39.107.80.79";
 
 
 /**
