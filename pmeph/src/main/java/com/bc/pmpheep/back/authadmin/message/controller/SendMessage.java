@@ -183,7 +183,12 @@ public class SendMessage extends BaseController {
 			
 			try {
 				//批量操作
-				sendMessageService.batchInsertMessage(userMessageList);
+				if(userMessageList.size()<=0){
+					flag ="5";
+				}else{
+					sendMessageService.batchInsertMessage(userMessageList);
+				}
+
 				//return new ModelAndView("redirect:/authSendMessage/init.action");
 				//文件上传  到MongoDB 
 				/*if(fileSize>0){

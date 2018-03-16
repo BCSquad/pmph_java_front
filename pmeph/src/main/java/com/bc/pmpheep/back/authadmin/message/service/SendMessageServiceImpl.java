@@ -3,6 +3,10 @@ package com.bc.pmpheep.back.authadmin.message.service;
 import java.util.List;
 import java.util.Map;
 
+import com.bc.pmpheep.back.util.ObjectUtil;
+import com.bc.pmpheep.service.exception.CheckedExceptionBusiness;
+import com.bc.pmpheep.service.exception.CheckedExceptionResult;
+import com.bc.pmpheep.service.exception.CheckedServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +36,10 @@ public class SendMessageServiceImpl implements SendMessageService {
 	 */
 	public void batchInsertMessage(List<UserMessage> userMessageList) {
 		// TODO Auto-generated method stub
+		if (ObjectUtil.isNull(userMessageList)) {
+			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,
+					CheckedExceptionResult.NULL_PARAM, "未查到有人申报改教材或改机构下未查到对应的作家");
+		}
 		orgMessageDao.batchInsertMessage(userMessageList);
 	}
 
