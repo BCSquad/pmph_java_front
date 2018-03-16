@@ -69,6 +69,7 @@ String contextpath=request.getContextPath();
             <div>
                 <select id="select-search-org" name="select-search-org" class="iu2">
                 	<option value="all">全部</option>
+                	<option value="0">人民卫生出版社</option>
                 	<c:forEach items="${OrgList }" var="org">
                 		<option value="${org.id }">${org.org_name }</option>
                 	</c:forEach>

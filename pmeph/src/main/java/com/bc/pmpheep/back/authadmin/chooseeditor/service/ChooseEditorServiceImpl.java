@@ -50,8 +50,8 @@ public class ChooseEditorServiceImpl implements ChooseEditorService {
 	}
 
 	@Override
-	public List<Map<String, Object>> getOrgList() {
-		List<Map<String, Object>> orgList = chooseEditorDao.getOrgList();
+	public List<Map<String, Object>> getOrgList(String material_id) {
+		List<Map<String, Object>> orgList = chooseEditorDao.getOrgList(material_id);
 		return orgList;
 	}
 

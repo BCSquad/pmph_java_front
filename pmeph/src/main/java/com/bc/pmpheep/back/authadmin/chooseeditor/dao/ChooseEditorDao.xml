@@ -235,9 +235,10 @@
 	</select>
 	
 	<select id="getOrgList" resultType="Map">
-		select id,org_name
+		select o.id,o.org_name
 		from 
-		org
+		material_org mo 
+		join org o on mo.org_id = o.id and material_id = #{material_id}
 	</select>
 	
 	<delete id="deleteTempByAuthorIdAndTextbookId" parameterType="Map">
