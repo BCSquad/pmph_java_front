@@ -27,11 +27,11 @@ function loadMore(tag){
                     '<span class="time">' + n.TIME + '</span>' +
                     ' </p>' +
                     '<div class="text" id="txt'+n.id+'">' +
-                    (n.isread==true?'<img src="'+contextpath+'/statics/image/readyes.png"  id="readyes'+n.id+'"/>':'') +
-                    (n.isread==false?'<img src="'+contextpath+'/statics/image/readno.png"  id="readno'+n.id+'"/>':'') +
-                    n.msg_content +
+                    (n.isread==true?'<img src="'+contextpath+'statics/image/readyes.png"  id="readyes'+n.id+'"/>':'') +
+                    (n.isread==false?'<img src="'+contextpath+'statics/image/readno.png"  id="readno'+n.id+'"/>':'') +
+                    (n.msg_content?n.msg_content:'') +
                     '</div></div>'+
-            '<div style="float:left;color: #999999;font-size: 14px;height:20px;margin-top: 45px;" onclick="delmsg(\''+n.id+'\')">'+
+            '<div style="float:left;color: #999999;font-size: 14px;height:20px;margin-top: 45px;" onclick="delmsg(\''+(tag=='receive'?n.id:n.msg_id)+'\','+(tag=='receive'?'1':'2')+')">'+
                     '<span style="width:20px;height:20px;float:left;" class="deltag"></span>'+
                     '<span style="line-height: 20px;">删除</span>'+
                 '</div>'+
