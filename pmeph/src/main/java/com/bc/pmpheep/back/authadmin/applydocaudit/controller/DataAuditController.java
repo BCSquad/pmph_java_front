@@ -2,12 +2,7 @@ package com.bc.pmpheep.back.authadmin.applydocaudit.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -300,7 +295,7 @@ public class DataAuditController extends BaseController{
 				@ResponseBody
 				public Map<String,Object> doMaterialAuditPass(HttpServletRequest request,
 						HttpServletResponse response){
-					Map<String,Object> paramMap = new HashMap<String,Object>();
+					Map<String,Object> paramMap = new Hashtable<String,Object>();
 					Map<String,Object> resultMap = new HashMap<String,Object>();
 					String declaration_id = request.getParameter("declaration_id");
 					String online_progress = request.getParameter("online_progress");  //类型
