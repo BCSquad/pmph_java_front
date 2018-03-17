@@ -261,7 +261,7 @@
 						<tr>
 							<td width="420px">教材名称</td>
 							<td width="320px">编写职务</td>
-							<td width="120px">是否数字编委</td>
+							<td width="120px">数字编委</td>
 							<td>备注</td>
 						</tr>
 					</thead>
@@ -307,11 +307,7 @@
 						<tr>
 							<td>${list.material_name}</td>
 							<td>${list.isbn}</td>
-							<td>
-								<c:if test="${list.rank == '1'}">教育部十二五</c:if>
-								<c:if test="${list.rank == '2'}">国家卫计委十二五</c:if>
-								<c:if test="${list.rank == '3'}">其他</c:if>
-							</td>
+							<td>${list.rank_text}</td>
 							<td>${list.note}</td>
 						</tr>
 					</c:forEach>	
@@ -334,7 +330,7 @@
 							<td width="230px">教材名称</td>
 							<td width="120px">级别</td>
 							<td width="120px">编写职务</td>
-							<td width="100px">是否数字编委</td>
+							<td width="100px">数字编委</td>
 							<td width="120px">出版时间</td>
 							<td width="120px">标准书号</td>
 							<td>备注</td>
@@ -384,7 +380,7 @@
 							<td width="230px">教材名称</td>
 							<td width="120px">级别</td>
 							<td width="120px">编写职务</td>
-							<td width="100px">是否数字编委</td>
+							<td width="100px">数字编委</td>
 							<td width="130px">出版单位</td>
 							<td width="120px">出版时间</td>
 							<td width="120px">标准书号</td>
