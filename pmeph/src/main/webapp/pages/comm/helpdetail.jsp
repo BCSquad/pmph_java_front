@@ -61,7 +61,18 @@
             margin-left: 15px;
             float: left;
         }
+        .div_btn11{
 
+            padding:5px 20px;
+            background-color: #70bcc3;
+            border-radius: 2px;
+            text-align: center;
+            /*position: absolute;*/
+            /*right:28px;*/
+            /*bottom:20px;*/
+            border: 1px solid #f2f2f2;
+            cursor: pointer;
+        }
 
     </style>
 </head>
@@ -95,7 +106,7 @@
         </div>
 
     </div>
-    <div style="height: 60px; width: 100%;"></div>
+    <div style="clear:both;height: 60px; width: 100%;margin:0 auto;line-height:60px;text-align:center"><span class="div_btn11" onclick="window.location.href='<c:url value="/help/helpList.action" />' ">返回</span></div>
 </div>
 <div style="clear: both"></div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
