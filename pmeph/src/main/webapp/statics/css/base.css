@@ -199,12 +199,15 @@ body {
     right: -40px;
     display: none;
 }
-
+.head .user-select img{
+    width: 148px;
+    height: 180px;
+}
 .head .user-select .select {
     position: absolute;
     top: 0;
-    left: 38px;
-    width: 68px;
+    left: 15px;
+    width: 114px;
     height: 110px;
     margin: auto;
     margin-top: 20px;
@@ -212,6 +215,7 @@ body {
 }
 
 .head .option {
+    display: inline-block;
     height: 28px;
     line-height: 28px;
     width: 100%;
@@ -219,6 +223,11 @@ body {
     color: #999999;
     cursor: pointer;
     text-decoration: none;
+}
+
+.head .option.wide{
+    cursor:default;
+    overflow: hidden;
 }
 
 .head .option.out {
