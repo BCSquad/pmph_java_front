@@ -28,9 +28,10 @@ public class DeclareCountExcelService implements ExcelDownloadService {
 	
 	
     @Override
-    public String getTitle() {
+    public String getTitle(Map<String, Object> param) {
         return "我校申报情况统计";
     }
+
 
     @Override
     public String[][] getColTitle() {

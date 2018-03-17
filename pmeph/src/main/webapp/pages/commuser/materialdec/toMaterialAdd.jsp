@@ -27,7 +27,7 @@
 <div class="body">
 	<div class="content-wrapper">
 		<div class="sbxq_title">
-			<span>个人中心 > 教材申报 > 填写申报表</span>
+			<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a style="text-decoration: none;color: #999999;" href="${contextpath}/personalhomepage/tohomepage.action?pagetag=jcsb&pageNum=1&pageSize=10"> 教材申报 </a> > 填写申报表</span>
 		</div>
 		<!-- 图书选择-->
 		<form id="objForm">
@@ -226,8 +226,8 @@
 							</td>
 							<td><input class="cg_input" name="xx_school_name" id="xx_school_name" value="" placeholder="学校名称" maxlength="36"/></td>
 							<td><input class="cg_input" name="xx_major" id="xx_major" value="" placeholder="所学专业" maxlength="16"/></td>
-							<td><input class="cg_input" name="xx_degree" id="xx_degree" value="" style="width: 120px;" placeholder="学历" maxlength="10"/></td>
-							<td><input class="cg_input" name="xx_note" id="xx_note" value="" style="width: 310px;" placeholder="备注" maxlength="33"/></td>
+							<td><input class="cg_input" name="xx_degree" id="xx_degree" value="" style="width: 110px;" placeholder="学历" maxlength="10"/></td>
+							<td><input class="cg_input" name="xx_note" id="xx_note" value="" style="width: 290px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_xxjl()"/></td>
 						</tr>
 					</tbody>
@@ -262,7 +262,7 @@
 							</td>
 							<td><input class="cg_input" name="gz_org_name" value="" id="gz_org_name" placeholder="工作单位"maxlength="33"/></td>
 							<td><input class="cg_input" name="gz_position" value="" id="gz_position" placeholder="职位"maxlength="33" /></td>
-							<td><input class="cg_input" name="gz_note" value="" style="width: 370px;" placeholder="备注" maxlength="33"/></td>
+							<td><input class="cg_input" name="gz_note" value="" style="width: 410px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_gzjl()"/></td>
 						</tr>
 					</tbody>
@@ -297,7 +297,7 @@
 							</td>
 							<td><input class="cg_input" name="jx_school_name" id="jx_school_name" value="" placeholder="学校名称" maxlength="33"/></td>
 							<td><input class="cg_input" name="jx_subject" id="jx_subject" value="" placeholder="教学科目" maxlength="50"/></td>
-							<td><input class="cg_input" name="jx_note" value="" style="width: 370px;" placeholder="备注" maxlength="33"/></td>
+							<td><input class="cg_input" name="jx_note" value="" style="width: 410px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jxjl()"/></td>
 						</tr>
 					</tbody>
@@ -368,9 +368,10 @@
 				<table class="tab_2" id="tab_jccb">
 					<thead>
 						<tr>
-							<td width="420px">教材名称</td>
+							<td width="400px">教材名称</td>
 							<td width="260px">编写职务</td>
 							<td width="100px">数字编委</td>
+							<td width="120px">出版时间</td>
 							<td>备注</td>
 							<td width="78px">添加</td>
 						</tr>
@@ -394,7 +395,8 @@
 								</tr></table>
 								<input type="hidden" name="jc_is_digital_editor" value="jc_is_digital_editor_1" />
 							</td>
-							<td><input class="cg_input" name="jc_note" value="" style="width: 290px;" placeholder="备注" maxlength="33"/></td>
+							<td><input class="cg_input" name="jc_publish_date" id="jc_publish_date" value="" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  style="width: 100px;"/></td>
+							<td><input class="cg_input" name="jc_note" value="" style="width: 190px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jccb()"/></td>
 						</tr>
 					</tbody>
@@ -536,7 +538,7 @@
                             	</select>
 							</td>
 							<td style="color: #333333;">
-								<table class="radio_tb" style="width: 80px;"><tr>
+								<table class="radio_tb" style="width: 100%;"><tr>
 									<td><input type="radio" name="jcb_is_digital_editor_1" value="1" />是</td>
 					 				<td><input type="radio" name="jcb_is_digital_editor_1" value="0" checked="checked"/>否</td>
 								</tr></table>

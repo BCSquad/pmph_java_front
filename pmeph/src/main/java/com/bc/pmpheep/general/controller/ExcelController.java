@@ -78,8 +78,9 @@ public class ExcelController {
         wcf_content.setBorder(Border.ALL, BorderLineStyle.THIN);
 
 
+        String excelTitle = excleService.getTitle(arrayMapToStringMap(param));
         //设置标题
-        jxl.write.Label title = new jxl.write.Label(0, 0, excleService.getTitle(), wcf_title);
+        jxl.write.Label title = new jxl.write.Label(0, 0, excelTitle, wcf_title);
         sheet.addCell(title);
 
         /**
@@ -112,7 +113,7 @@ public class ExcelController {
             }
         }
 
-        response.setHeader("Content-Disposition", "attachment;filename=\"" + new String((excleService.getTitle() + ".xls").getBytes("gbk"), "ISO-8859-1") + "\"");
+        response.setHeader("Content-Disposition", "attachment;filename=\"" + new String((excelTitle + ".xls").getBytes("gbk"), "ISO-8859-1") + "\"");
         //response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(excleService.getTitle() + ".xls", "UTF-8"));
         book.write();
         book.close();
