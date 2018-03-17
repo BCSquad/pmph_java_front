@@ -77,7 +77,6 @@ public class MessageController extends BaseController {
         int count = noticeMessageService.selectSysMessageTotalCount(paraMap);
         //处理消息发送者头像
         for (Map<String, Object> map1 : list) {
-
             map1.put("avatar", RouteUtil.userAvatar(MapUtils.getString(map1, "avatar")));
             /*if(null==map1.get("avatar")||"DEFAULT".equals(map1.get("avatar").toString())){
                 map1.put("avatar", "statics/pictures/head.png");
@@ -86,7 +85,6 @@ public class MessageController extends BaseController {
 				map1.put("avatar", "image/"+map1.get("avatar")+".action");
 			}*/
         }
-
         mv.addObject("count", count - list.size());
         mv.addObject("list", list);
         mv.addObject("listSize", list.size());

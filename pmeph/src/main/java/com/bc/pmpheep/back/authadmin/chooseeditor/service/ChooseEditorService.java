@@ -38,9 +38,10 @@ public interface ChooseEditorService {
 
 	/**
 	 * 获取机构列表 
+	 * @param material_id 
 	 * @return
 	 */
-	List<Map<String, Object>> getOrgList();
+	List<Map<String, Object>> getOrgList(String material_id);
 
 	/**
 	 * 暂存 两步：1.删除本人本书籍的所有职位申报暂存 2.将现选择的职位暂存id对应数据复制入暂存表

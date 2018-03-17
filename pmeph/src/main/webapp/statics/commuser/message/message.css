@@ -632,11 +632,11 @@ a {
 }
 .fixwidth{
     max-width: 800px;
-    height: 28px;
-    overflow: hidden;
-    display: inline-block;
+    min-height: 28px;
+    /*overflow: hidden;*/
+    /*display: inline-block;*/
     text-overflow: ellipsis;
-    white-space:nowrap;
+    /*white-space:nowrap;*/
 	text-align: center;
 	line-height: 24px;
 }
@@ -646,21 +646,12 @@ a {
 	float:left; 
 }
 
-#readyes{
+.readyes{
 	float: left;
 	display: block;
 	margin: 5px;
 	clear: right;
 }
-
-#readno{
-	float: left;
-	display: block;
-	margin: 5px;
-	clear: right;
-}
-
-
 
 .listContent a {
     text-decoration: none;

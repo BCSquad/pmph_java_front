@@ -189,7 +189,7 @@
                 <a name="001" id="001"></a>
                 <div class="xsp" style="float: left;">
                     <div id="xsp"></div>
-                    <a href="#001" style="text-decoration: none"><span id="xsp1">写书评</span></a>
+                    <a href="#001" onclick="writeablut()" style="text-decoration: none"><span id="xsp1">写书评</span></a>
                 </div>
                 <div class="mistake">
                     <div class="mis_pic" onclick="showup()"></div>

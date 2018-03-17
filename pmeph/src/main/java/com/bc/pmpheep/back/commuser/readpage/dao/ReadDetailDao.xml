@@ -50,7 +50,8 @@
 		    t.id
 		    from book t left join book_support c on  c.support_id=t.id 
 		    left join book_detail b on b.book_id=t.id 
-		    where t.id= (select support_id from book_support where book_id=#{id})
+		    where t.is_on_sale=1 and t.id in (select support_id from book_support where book_id=#{id}) 
+		    limit 0,1
 	</select>
 	<!-- 查询人卫推荐书籍 -->
 	<select id="queryRecommendByE" parameterType="java.util.Map" resultType="java.util.Map">

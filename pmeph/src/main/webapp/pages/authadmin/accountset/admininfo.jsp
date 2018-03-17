@@ -188,16 +188,16 @@
 				                    <div class="input-wrapper">
 				                    <input type="hidden" id="title-hidden" value="${admininfo.title}"> 
 				                    <c:choose>
-				                    	<c:when test="${admininfo.progress==1}">
+				                    	<c:when test="${admininfo.progress==1||(admininfo.progress==0 && admininfo.is_proxy_upload==true)}">
 				                    		<input type="text" id="title" name="title" disabled="disabled"
 											value="${admininfo.title}">
 				                    	</c:when>
 				                    	<c:otherwise>
 					                    	<select data-error="职称必选"   class="sxy-select-td" name="title" id="title"  title="请选择" >
-						                        <option value="teacher1" >教授</option>
-						                        <option value="teacher2" >讲师</option>
-						                        <option value="teacher3" >副教授</option>
-						                        <option value="teacher4" >院士</option>
+						                        <option value="教授" >教授</option>
+						                        <option value="讲师" >讲师</option>
+						                        <option value="副教授" >副教授</option>
+						                        <option value="院士" >院士</option>
 						                    </select>
 				                    	</c:otherwise>
 				                    </c:choose>

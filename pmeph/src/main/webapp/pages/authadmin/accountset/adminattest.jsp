@@ -28,7 +28,7 @@
                 width: 284,
                 height: 40,
                 optionHeight: 40,
-                initValue: $("#title").val()
+                initValue:$("#titlehidden").val()
             });
 
         })
@@ -128,6 +128,8 @@
                 <input type="hidden" id="handphone" value="${admininfo.handphone}"/>
                 <%-- <input type="hidden" id="postCode" value="${admininfo.postCode}"/> --%>
                 <input type="hidden" id="fax" value="${admininfo.fax}"/>
+                <!-- 已通过或已提交 全部输入框不可修改 -->
+                <input type="hidden" id="disabled_all" value="${admininfo.progress==1||(admininfo.progress==0 && admininfo.is_proxy_upload==true)}"/>
                 <%-- <input type="hidden" id="birthday" value="${admininfo.birthday}"/>
                 <input type="hidden" id="experience" value="${admininfo.experience}"/>
                 <input type="hidden" id="workplace" value="${admininfo.workplace}"/> --%>
@@ -250,7 +252,7 @@
 		                                	
 		                                	<input type="hidden" id="fileid" name="fileid" class="required" data-valid="isNonEmpty"
 														data-error="请上传委托书!" value="${admininfo.proxy}"/>
-		                                    <c:if test="${(admininfo.progress!=1)}">
+		                                    <c:if test="${admininfo.progress!=1&&!(admininfo.progress==0 && admininfo.is_proxy_upload==true)}">
 		                                        <span style="cursor: pointer;" class="uploadClick" id="uploadFile">点击上传</span>
 		                                    </c:if>
 		                                    
@@ -301,17 +303,26 @@
                                 <div class="label-input">
                                     <label class="require">职称</label>
                                     <div class="input-wrapper">
-                                        <select ${(admininfo.progress!=1)?"":"disabled='disabled'"} class="select-td" id="title" name="title" style="padding-left: 15px"
-                                                data-valid="isNonEmpty" data-error="职称不能为空">
-                                            <option value="teacher1" ${admininfo.title=='teacher1' ?'selected':''}>讲师
-                                            </option>
-                                            <option value="teacher2" ${admininfo.title=='teacher2' ?'selected':''}>副教授
-                                            </option>
-                                            <option value="teacher3" ${admininfo.title=='teacher3' ?'selected':''}>教授
-                                            </option>
-                                            <option value="teacher4" ${admininfo.title=='teacher4' ?'selected':''}>院士
-                                            </option>
-                                        </select>
+                                    	<c:choose>
+                                    		<c:when test="${admininfo.progress==1||(admininfo.progress==0 && admininfo.is_proxy_upload==true)}">
+                                    			<input type="text" class="txt" name="title" disabled="disabled" style="width: 258px;"
+													value="${admininfo.title}">
+                                    		</c:when>
+                                    		<c:otherwise>
+                                    			<select ${(admininfo.progress!=1)?"":"disabled='disabled'"} class="select-td" id="title" name="title" style="padding-left: 15px"
+		                                                data-valid="isNonEmpty" data-error="职称不能为空">
+		                                            <option value="讲师" ${admininfo.title=='讲师' ?'selected':''}>讲师
+		                                            </option>
+		                                            <option value="副教授" ${admininfo.title=='副教授' ?'selected':''}>副教授
+		                                            </option>
+		                                            <option value="教授" ${admininfo.title=='教授' ?'selected':''}>教授
+		                                            </option>
+		                                            <option value="院士" ${admininfo.title=='院士' ?'selected':''}>院士
+		                                            </option>
+		                                        </select>
+                                    		</c:otherwise>
+                                    	</c:choose>
+                                        
                                     </div>
                                 </div>
                             </td>

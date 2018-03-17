@@ -72,7 +72,9 @@
                             </div>
                             <span id="scwj1" class="scmsg">上传文件</span>
 
-                        </div><span id="uploadFileTips" style="color: #999;"></span>
+                        </div>
+                        <%--<div  id="process_div" style="display:none;float:left;margin-left:10px;width: 100px;height: 10px;border-radius: 4px;border: 2px solid #f2f2f2;"><span id="uploadFileTips" style="color: #999;height: 100%;border-radius: 4px;background-color: #0bc700;display:block;"></span></div>--%>
+
                     </div>
 
                     <%--<div class="flex-center" id="process" style="display: inline;margin-left: 30px;">--%>
