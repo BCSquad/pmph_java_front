@@ -63,7 +63,7 @@ String basePath = path+"/";
                            <div class="foot" style="height:24px;margin-top: 10px">
                                <span class="span1" onclick="cancelMark('${book.mid}','${book.bookmarks }','${book.id}')">取消收藏</span>
                                <span class="span2" >${book.comments }</span>
-                               <span class="smicon comment"></span>
+                               <span class="smicon comment" onclick="window.open('${ctx}/readdetail/todetail.action?id=${book.id }#001')"></span>
                                <span class="${book.like>0?'span3':'span2' }" id="like${book.id }">${book.likes }</span>
                                <span class="smicon ${book.like>0?'good':'nogood' }"  onclick="addlike('${book.id}')" id="good${book.id }"></span>
                                <span class="span2">${book.clicks }</span>

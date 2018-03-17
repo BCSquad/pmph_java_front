@@ -61,6 +61,7 @@
 #address {
 	width: 1045px;
 }
+
 /*input {
             color: #333333;
             height: 40px;

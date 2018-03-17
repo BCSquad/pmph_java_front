@@ -140,6 +140,7 @@
                         <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date"
                                                                   pattern="yyyy-MM-dd"/></p>
                         <input type="hidden" value="${list.notEnd}">
+
                         <c:if test="${list.notEnd ==1 and list.is_material_entry==true and list.isapply=='no' }">
                             <div class="left_join"
                                  onclick="window.location.href='${ctx}/material/toMaterialAdd.action?material_id=${list.material_id}'">
