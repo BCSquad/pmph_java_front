@@ -27,7 +27,7 @@ public class DeclareResultExcelService implements ExcelDownloadService {
 	
 	
     @Override
-    public String getTitle() {
+    public String getTitle(Map<String, Object> param) {
         return "最终结果名单";
     }
 

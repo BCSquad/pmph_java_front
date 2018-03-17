@@ -226,6 +226,7 @@ body {
 }
 
 .head .option.wide{
+    display: block;
     cursor:default;
     overflow: hidden;
 }
