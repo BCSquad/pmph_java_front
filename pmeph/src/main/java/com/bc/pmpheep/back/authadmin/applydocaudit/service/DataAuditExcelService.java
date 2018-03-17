@@ -1,6 +1,7 @@
 package com.bc.pmpheep.back.authadmin.applydocaudit.service;
 
 import jxl.format.Colour;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.collections.map.HashedMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +22,16 @@ import java.util.Set;
  */
 @Service("dataAuditExcel")
 public class DataAuditExcelService implements ExcelDownloadService {
-	
-	@Autowired
-	DataAuditDao dataAuditDao;
-	
-	
+
+    @Autowired
+    DataAuditDao dataAuditDao;
+
+
     @Override
-    public String getTitle() {
-        return "资料审核表格";
+    public String getTitle(Map<String, Object> param) {
+        Map<String, Object> material = dataAuditDao.queryMaterialbyId(MapUtils.getString(param, "material_id"));
+        String material_name = MapUtils.getString(material, "material_name");
+        return material_name + "教材资料申报表";
     }
 
     @Override
@@ -44,7 +47,7 @@ public class DataAuditExcelService implements ExcelDownloadService {
     @Override
     public List<Map<String, Object>> getData(Map<String, Object> param) throws Exception {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-        List<Map<String, Object>> resultList = dataAuditDao .findDataAuditExcel(param);
+        List<Map<String, Object>> resultList = dataAuditDao.findDataAuditExcel(param);
         for (int i = 0; i < resultList.size(); i++) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("drealname", resultList.get(i).get("drealname"));

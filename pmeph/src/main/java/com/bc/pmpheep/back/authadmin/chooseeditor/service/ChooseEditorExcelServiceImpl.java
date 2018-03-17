@@ -25,7 +25,7 @@ public class ChooseEditorExcelServiceImpl implements ExcelDownloadService {
 	ChooseEditorDao chooseEditorDao;
 	
 	@Override
-	public String getTitle() {
+	public String getTitle(Map<String, Object> param) {
 		return "编委遴选名单";
 	}
 

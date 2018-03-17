@@ -73,8 +73,11 @@
 	    	<div class="block">
                     
                     <div class="title">
+                    	
                         <div class="line"></div>
+                        
                            <div class="rd_name">文章评论<%-- （共${ComNum}条） --%></div>
+                        
                         <!-- <div class="scorestar" id="star">
                              <div class="scorestar1" id="score1"></div>
                              <div class="scorestar1" id="score2"></div>
@@ -89,7 +92,9 @@
                     </div>
                     <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
                     <div class="pl_add">
+                    	<a id="001" id="001"></a>
                     	<textarea class="tarea" id="content"></textarea>
+                    	
                     </div>
                     <div class="buttonb"><button id="span_4" onclick="insert()">发表</button></div>
             </div>  

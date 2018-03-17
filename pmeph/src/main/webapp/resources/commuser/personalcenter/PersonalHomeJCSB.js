@@ -51,11 +51,14 @@
 		/*$("#select_textbook").find("li").bind("click",function(){
 			window.open(contextpath+"chooseEditor/toPage.action?textBookId="+$(this).attr("data-value"));
 		});*/
-	  	$(".select_textbook").val("-1");
-		$(".select_textbook").change(function(){
-			window.open(contextpath+"chooseEditor/toPage.action?textBookId="+$(this).val());
-			$(".select_textbook").val("-1");
-		});
+	  if($(".select_textbook").length>0){
+		  $(".select_textbook").val("-1");
+			$(".select_textbook").change(function(){
+				window.open(contextpath+"chooseEditor/toPage.action?textBookId="+$(this).val());
+				$(".select_textbook").val("-1");
+			});
+	  }
+	  	
 
 });
   
@@ -128,7 +131,8 @@ function listoction5(){
  * 打开第一主编选择编委界面
  * @param textbook_id
  */
-function chooseEditor(textbook_id){
-	$('#select_textbook').focus();
-	//window.open(contextpath+"chooseEditor/toPage.action?textBookId="+textbook_id);
+function chooseEditor(textbook_id,btn){
+	//$('#select_textbook').focus();
+	window.open(contextpath+"chooseEditor/toPage.action?textBookId="+textbook_id);
+	
 }

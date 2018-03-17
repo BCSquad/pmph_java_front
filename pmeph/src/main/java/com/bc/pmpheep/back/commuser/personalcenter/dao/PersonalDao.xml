@@ -256,7 +256,14 @@
 	GROUP BY
 		(a.id)
 
-		
+		<choose>
+			<when test="parameter.s!=null and parameter.s!= ''">
+				order by c.gmt_create desc
+			</when>
+			<otherwise>
+				order by a.gmt_create desc
+			</otherwise>
+		</choose>
 		
 		
 		limit ${start},${pageSize}

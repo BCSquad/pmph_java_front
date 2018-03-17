@@ -14,7 +14,7 @@ public interface ExcelDownloadService {
      *
      * @return
      */
-    public String getTitle();
+    public String getTitle(Map<String, Object> param);
 
 
     /**
