@@ -100,12 +100,12 @@ function queryMain() {
         dataType: 'json',
         data: data,
         success: function (json) {
-            if (json.html.trim() == "") {
+            if (!json.html) {
                 $("#fenye").hide();
             } else {
                 $("#fenye").show();
             }
-            if (json.html.trim() != "") {
+            if (json.html) {
                 $(".no-more").hide();
             } else {
                 $(".no-more").show();
