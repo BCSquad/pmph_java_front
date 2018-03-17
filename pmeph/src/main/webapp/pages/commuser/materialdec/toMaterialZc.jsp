@@ -505,7 +505,7 @@
 						<tr>
 							<td width="420px">教材名称</td>
 							<td width="260px">编写职务</td>
-							<td width="100px">是否数字编委</td>
+							<td width="100px">数字编委</td>
 							<td>备注</td>
 							<td width="78px">添加</td>
 						</tr>
@@ -593,14 +593,7 @@
 						 <tr>
 							<td><input class="cg_input" maxlength="33" name="hj_material_name" id="hj_material_name" value="" style="width: 300px;" placeholder="教材名称"/></td>
 							<td><input class="cg_input" maxlength="16" name="hj_isbn" value="" style="width: 110px;" placeholder="标准书号"/></td>
-							<td style="color: #333333;">
-								<table class="radio_tb" style="width: 320px;"><tr>
-									<td><input type="radio" name="hj_rank_a" value="1" checked="checked" />教育部十二五</td>
-									<td><input type="radio" name="hj_rank_a" value="2" />国家卫计委十二五</td>
-									<td><input type="radio" name="hj_rank_a" value="3" />其他</td>
-								</tr></table>	
-								<input type="hidden" name="hj_rank" value="hj_rank_a" />
-							</td>
+							 <td><input class="cg_input" name="hj_rank_text" id="hj_rank_text" value="" style="width: 300px;" placeholder="教材级别" maxlength="50"/></td>
 							<td><input class="cg_input" maxlength="33" name="hj_note" value="" style="width: 250px;" placeholder="备注"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_gjghjc()"/></td>
 						</tr> </c:if>
@@ -608,14 +601,7 @@
 							<tr id="gjghjc_${status.count}">
 								<td><input class="cg_input" maxlength="33" name="hj_material_name" id="hj_material_name_${status.count}" value="${list.material_name}" style="width: 300px;" placeholder="教材名称"/></td>
 								<td><input class="cg_input" maxlength="16" name="hj_isbn" value="${list.isbn}" id="hj_isbn_${status.count}" style="width: 110px;" placeholder="标准书号"/></td>
-								<td style="color: #333333;">
-									<table class="radio_tb" style="width: 320px;"><tr>
-										<td><input type="radio" name="hj_rank_${status.count}" value="1" ${list.rank=='1'?'checked':'' } />教育部十二五</td>
-										<td><input type="radio" name="hj_rank_${status.count}" value="2" ${list.rank=='2'?'checked':'' } />国家卫计委十二五</td>
-										<td><input type="radio" name="hj_rank_${status.count}" value="3" ${list.rank=='3'?'checked':'' } />其他</td>
-									</tr></table>
-									<input type="hidden" name="hj_rank" value="hj_rank_${status.count}" />
-								</td>
+								<td><input class="cg_input" name="hj_rank_text" id="hj_rank_text_${status.count}" value="${list.rank_text}" style="width: 300px;" placeholder="教材级别" maxlength="50"/></td>
 								<td><input class="cg_input" maxlength="33" name="hj_note" value="${list.note}" style="width: 250px;" placeholder="备注"/>
 									<input type="hidden" name="zdjy" value="hj_material_name_${status.count},hj_isbn_${status.count}"/>
 								</td>
@@ -648,7 +634,7 @@
 							<td width="230px">教材名称</td>
 							<td width="120px">级别</td>
 							<td width="120px">编写职务</td>
-							<td width="100px">是否数字编委</td>
+							<td width="100px">数字编委</td>
 							<td width="120px">出版时间</td>
 							<td width="120px">标准书号</td>
 							<td>备注</td>
@@ -753,7 +739,7 @@
 							<td width="230px">教材名称</td>
 							<td width="120px">级别</td>
 							<td width="120px">编写职务</td>
-							<td width="100px">是否数字编委</td>
+							<td width="100px">数字编委</td>
 							<td width="130px">出版单位</td>
 							<td width="120px">出版时间</td>
 							<td width="120px">标准书号</td>
@@ -900,7 +886,7 @@
 							<td><input class="cg_input" maxlength="20" name="gj_course_name" id="gj_course_name_${status.count}" value="${list.course_name}" style="width: 300px;" placeholder="课程名称"/></td>
 							<td><input class="cg_input" maxlength="20" name="gj_class_hour" id="gj_class_hour_${status.count}" value="${list.class_hour}" style="width: 130px;" placeholder="课时数"/></td>
 							<td style="color: #333333;">
-								<table class="radio_tb" style="width: 180px;"><tr>
+								<table class="radio_tb" style="width: 100%;"><tr>
 									<td><input type="radio" name="gj_type_${status.count}" value="0" ${list.type=='0'?'checked':'' }/>无</td>
 									<td><input type="radio" name="gj_type_${status.count}" value="1" ${list.type=='1'?'checked':'' }/>国际</td>
 									<td><input type="radio" name="gj_type_${status.count}" value="2" ${list.type=='2'?'checked':'' }/>国家</td>

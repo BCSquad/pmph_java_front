@@ -91,78 +91,88 @@ function queryLoginLong(){
 		});
 }
 
+function validate(title,content){
+	if(title.length>50||content.length>3000){
 
+		return false;
+	}
+	return true;
+}
 //写长评
 function insertlong(){
 	var title=$("#TitleValue").val();
 	var book_id=$("#book_id").val();
 	var score=$("#last_score").val();
 	var content= ue.getContent();
-	if(!Empty(book_id)&&!Empty(score)&&!Empty(content)&&!Empty(title)){
-	var json={
-		book_id:book_id,
-		score:score,
-		content:content,
-		title:title,
-	};
-	//修改长评
-	 if ($("#submitTypeCode").val() == '1') { //submitTypeCode 状态码 1表示修改
-		 var id=$("#myid").val();
-		 $.ajax({
-			type:'post',
-			url:contextpath+'readdetail/updateCommentLong.action?comm_id='+id,
-			async:false,
-			dataType:'json',
-			data:json,
-			success:function(json){
-				if(json.returncode=="OK"){
-					window.message.success("成功！");
-					toPercen();
-				}else{
-					window.message.error("失败！");
-				} 
-			}
-		});
-	 }else{
-		 $.ajax({
-				type:'post',
-				url:contextpath+'readdetail/insertlong.action',
-				async:false,
-				data:json,
-				dataType:'json',
-				success:function(json){
-					var state = json.state;
-					if (state == 'OK'){
-						window.message.success("保存成功！");
+
+	if(!Empty(book_id)&&!Empty(score)&&!Empty(content)&&!Empty(title)) {
+        if (validate(title, content)){
+            var json = {
+                book_id: book_id,
+                score: score,
+                content: content,
+                title: title,
+            };
+        //修改长评
+        if ($("#submitTypeCode").val() == '1') { //submitTypeCode 状态码 1表示修改
+            var id = $("#myid").val();
+            $.ajax({
+                type: 'post',
+                url: contextpath + 'readdetail/updateCommentLong.action?comm_id=' + id,
+                async: false,
+                dataType: 'json',
+                data: json,
+                success: function (json) {
+                    if (json.returncode == "OK") {
+                        window.message.success("成功！");
+                        toPercen();
+                    } else {
+                        window.message.error("失败！");
+                    }
+                }
+            });
+        } else {
+            $.ajax({
+                type: 'post',
+                url: contextpath + 'readdetail/insertlong.action',
+                async: false,
+                data: json,
+                dataType: 'json',
+                success: function (json) {
+                    var state = json.state;
+                    if (state == 'OK') {
+                        window.message.success("保存成功！");
 //						$(".sxy-btn").attr("disabled",true);
 //						$("#TitleValue").attr("disabled",true);
 //						ue.setDisabled();
-						toPercen();
-					} else if (state == 'ERROR'){
-						var words = json.value;
-		        		var title = document.getElementById("TitleValue");
-		        		var TitleValue = $("#TitleValue").val();
-		        		var content = ue.getContent().replace('<span style="background : yellow">','').replace('</span>','');
-		        		for (var i = 0 ; i < words.length ; i++){
-		        			var reg = new RegExp(words[i],'g');
-		        			if (TitleValue.indexOf(words[i]) > -1){
-		        				title.style.border = '3px solid red';
-		        			}
-		        			if (json.UEContent.indexOf(words[i]) > -1){
-		        				content = content.replace(reg,'<span style="background : yellow">' + words[i] + '</span>');
-		        			}
-		        		}
-		        		ue.setContent(content);
-		        		window.message.error("标题或内容中含有敏感词,请修改后再保存或提交");
-					} else {
-						window.message.success("请填写完所有内容");
-					}
-				}
-			});
-	 }
-	
-	
-	
+                        toPercen();
+                    } else if (state == 'ERROR') {
+                        var words = json.value;
+                        var title = document.getElementById("TitleValue");
+                        var TitleValue = $("#TitleValue").val();
+                        var content = ue.getContent().replace('<span style="background : yellow">', '').replace('</span>', '');
+                        for (var i = 0; i < words.length; i++) {
+                            var reg = new RegExp(words[i], 'g');
+                            if (TitleValue.indexOf(words[i]) > -1) {
+                                title.style.border = '3px solid red';
+                            }
+                            if (json.UEContent.indexOf(words[i]) > -1) {
+                                content = content.replace(reg, '<span style="background : yellow">' + words[i] + '</span>');
+                            }
+                        }
+                        ue.setContent(content);
+                        window.message.error("标题或内容中含有敏感词,请修改后再保存或提交");
+                    } else {
+                        window.message.success("请填写完所有内容");
+                    }
+                }
+            });
+        }
+
+
+    }else{
+            window.message.warning("您的内容输入过长,请检查您输入的内容!");
+	}
 	}else{
 		window.message.info("请填写完所有内容！");
 	}

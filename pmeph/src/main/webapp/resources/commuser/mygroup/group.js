@@ -81,13 +81,13 @@ $(function(){
             };
             webSocket.onerror = function(event){
                 console.log("连接失败");
-                window.message.error("连接失败");
+               // window.message.error("连接失败");
                 console.log(event);
             };
             webSocket.onclose = function(event){
                 webSocket.readyState = 3;
                 console.log("连接断开");
-                window.message.warning("连接断开");
+               // window.message.warning("连接断开");
                 console.log(event);
             };
             //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。

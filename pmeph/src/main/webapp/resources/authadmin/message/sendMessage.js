@@ -66,6 +66,8 @@ function sending(varId){
                     UE.getEditor('mText').setContent(content);
                     window.message.error("标题或内容中含有敏感词,请修改后再保存或提交");
                     $("#"+varId).attr("disabled",false);
+				}else if(data == '5'){
+                    window.message.warning("您选中的书籍未被申请,请重新选择");
 				}else {
                 	if(data !='1'){
                         document.getElementById("theForm").reset();

@@ -528,15 +528,9 @@ function add_gjghjc(){
 	var $tr = $("<tr id='gjghjc_"+num+"'>"+
 	"<td><input class='cg_input' name='hj_material_name' id='hj_material_name_"+num+"' value='' style='width: 300px;' placeholder='教材名称'/></td>"+
 	"<td><input class='cg_input' name='hj_isbn' value='' id='hj_isbn_"+num+"' style='width: 110px;' placeholder='标准书号'/></td>"+
-	"<td style='color: #333333;'>"+
-	"<table class='radio_tb' style='width:320px;'><tr>"+
-		"<td><input type='radio' name='hj_rank_"+num+"' checked='checked' value='1'/>教育部十二五</td>"+
-		"<td><input type='radio' name='hj_rank_"+num+"' value='2'/>国家卫计委十二五</td>"+
-		"<td><input type='radio' name='hj_rank_"+num+"' value='3'/>其他</td>"+
-	"</tr></table>"+
-		"<input type='hidden' name='hj_rank' value='hj_rank_"+num+"' /></td>"+
+	"<td><input class='cg_input' name='hj_rank_text' id='hj_rank_text_"+num+"' value='' style='width: 300px;' placeholder='教材级别' maxlength='50'/></td>"+
 	"<td><input class='cg_input' name='hj_note' value='' style='width: 250px;' placeholder='备注'/>" +
-	"<input type='hidden' name='zdjy' value='hj_material_name_"+num+",hj_isbn_"+num+"' />" +
+	"<input type='hidden' name='zdjy' value='hj_material_name_"+num+",hj_isbn_"+num+",hj_rank_text_"+num+"' />" +
 	"</td>"+
 	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('gjghjc_"+num+"')\"/></td>"+
 	"</tr>");

@@ -162,8 +162,8 @@
 	left:50%;
 }
 .bt_tj{
-	width: 74px;
-	height: 24px;
+    width: 90px;
+    height: 32px;
 	background-color: #70bcc3;
 	border-radius: 2px;
 	cursor: pointer;
@@ -171,6 +171,7 @@
 	float: left;
 	margin-left: 15px;
 	text-align: center;
+    line-height: 32px;
 }
 
 #tsxz_span4{
