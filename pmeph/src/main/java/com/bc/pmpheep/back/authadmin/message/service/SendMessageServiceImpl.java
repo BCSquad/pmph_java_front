@@ -22,7 +22,6 @@ public class SendMessageServiceImpl implements SendMessageService {
 
 	/**
 	 * 获取到接受者id
-	 * @param userId
 	 */
 	@Override
 	public List<Map<String,Object>> findOrgUserAndWriterUser(Map<String, Object> map) {
@@ -49,6 +48,10 @@ public class SendMessageServiceImpl implements SendMessageService {
 	 */
 	public void insertAttachmentInfo(Map map) {
 		// TODO Auto-generated method stub
+		if (ObjectUtil.isNull(map)) {
+			throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,
+					CheckedExceptionResult.NULL_PARAM, "文件未空");
+		}
 		 orgMessageDao.insertAttachmentInfo(map);
 	}
 
