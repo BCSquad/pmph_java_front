@@ -3,6 +3,6 @@
 <mapper namespace="com.bc.pmpheep.general.dao.SensitiveDao">
 
     <select id="getSensitives" resultType="map">
-        SELECT * FROM `sensitive` WHERE is_disabled = 0 AND is_deleted = 0;
+        SELECT * FROM `sensitive` WHERE is_disabled = 0 ;
     </select>
 </mapper>
