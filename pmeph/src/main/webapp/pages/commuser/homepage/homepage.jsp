@@ -229,7 +229,7 @@
                         </div>
                         <div class="left_two">
                             <div class="textbook_left">重点学科推荐</div>
-                            <div class="all_left"></div>
+                            <div class="all_left" onclick="window.location.href='<c:url value="/books/promoteList.action?type=1" />'">更多>></div>
                             <c:forEach var="ad3" items="${adInfo6.detailList}" varStatus="status">
                                 <c:if test="${status.index==0}">
                                     <div class="p1_left">

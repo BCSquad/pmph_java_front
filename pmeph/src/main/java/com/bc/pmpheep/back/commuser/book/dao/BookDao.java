@@ -88,4 +88,18 @@ public interface BookDao {
      * @return
      */
 	Map<String, Object> queryMaterialTypeById(String id);
+
+    /**
+     * 推荐书的总数
+     * @param pageParameter
+     * @return
+     */
+    int getPromoteBookVOTotal(PageParameter<BookVO> pageParameter);
+
+    /**
+     * 推荐书详情
+     * @param pageParameter
+     * @return
+     */
+    List<BookVO> promoteListBookVO(PageParameter<BookVO> pageParameter);
 }
