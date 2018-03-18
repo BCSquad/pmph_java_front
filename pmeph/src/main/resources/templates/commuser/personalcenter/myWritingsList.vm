@@ -49,12 +49,14 @@
 	            </div>
 	            <div class="dtxia">
 	            	
-	                #if($!{selfLog}==true)
+	                #if($!{selfLog}==true )
 	                <div class="operate_wrapper">
-	                	#if($!{c.auth_status}!=2 || $!{c.is_staging}==true)
-		                	<a target="_blank" href="$!{contextpath}writerArticle/initWriteArticle.action?id=$!{c.id}&userid=$!{logUserId}"><div class="img img_edit" ></div><div>编辑</div></a> 
-				        #end
-				        <a onclick="deleteArticle('$!{c.id}','$!{c.title}')" ><div class="img img_delete"></div><div>删除</div></a>
+						##已经提交待审核的文章，不可以再次点发表，也不能编辑，删除，只能查看。只有暂存的文章才有重新编辑、删除和发表
+						##已经通过的文章不能删除
+	                	#if($!{c.is_staging}==true)
+		                	<a target="_blank" href="$!{contextpath}writerArticle/initWriteArticle.action?id=$!{c.id}&userid=$!{logUserId}"><div class="img img_edit" ></div><div>编辑</div></a>
+                            <a onclick="deleteArticle('$!{c.id}','$!{c.title}')" ><div class="img img_delete"></div><div>删除</div></a>
+						#end
 	                </div>
 	                #end
 	            </div>

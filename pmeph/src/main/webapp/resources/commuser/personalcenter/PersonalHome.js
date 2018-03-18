@@ -161,7 +161,7 @@ function addFriendfun(uid,realname,status){
    */
   function deleteArticle(id,title,cat){
 	  var msg ='';
-	  msg = cat=="0"?'确定要删除《'+title+'》吗？':'确定要删除这条对《'+title+'》的评论吗？';
+	  msg = cat=="0"?'确定要删除《'+title+'》吗？':'确定要删除这条《'+title+'》的文章吗？';
 	  window.message.confirm(
 			  	msg
 				,{icon: 3, title:'提示',btn:["确定","取消"]}
