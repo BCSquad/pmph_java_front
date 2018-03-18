@@ -71,6 +71,17 @@ public interface BookService {
     PageResult<BookVO> listBookVO(PageParameter<BookVO> pageParameter) throws Exception;
 
     /**
+     *
+     * 功能描述：分页初始化/查询图书详情
+     *
+     * @param pageParameter 分页参数 ，is_promote 是否推荐 0 不推荐 1推荐
+     * @return 分好页的结果集
+     * @throws CheckedServiceException
+     *
+     */
+    PageResult<BookVO> listPromoteBookVO(PageParameter<BookVO> pageParameter);
+
+    /**
      * 
      * 功能描述：批量/单个修改图书详情
      * 
@@ -111,5 +122,6 @@ public interface BookService {
 	 * @return
 	 */
 	String getMaterialTypeNameById(Long type);
+
 
 }

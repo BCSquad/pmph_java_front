@@ -83,6 +83,7 @@ public class PersonalCenterController extends BaseController {
 
 		// 所进入的是谁的主页
 		String userId = request.getParameter("userId");
+		//已经提交待审核的文章，不可以再次点发表，也不能编辑，删除，只能查看。只有暂存的文章才有重新编辑、删除和发表
 		Boolean selfLog = null;
 		Map<String, Object> friendShip = new HashMap<String, Object>();
 		friendShip = personalService.queryOurFriendShip(userId, logUserId);
