@@ -195,7 +195,7 @@ function chooseModel(data){
     //上版教材参编情况必填
     if(data.is_last_position_required == "1"){
         $("#sbjccb_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"jc_material_name\",\"content\":\"本套上板教材参编情况必填\"},,{\"id\":\"jc_publish_date\",\"content\":\"发版时间必填\"},";
+        jsonStr=jsonStr+"{\"id\":\"jc_material_name\",\"content\":\"本套上板教材参编情况必填\"},{\"id\":\"jc_publish_date\",\"content\":\"发版时间必填\"},";
     }else{
         $("#sbjccb_xt").css("display","inline");
     }
@@ -533,6 +533,7 @@ function add_jccb(){
 	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('jccb_"+num+"')\"/></td>"+
 	"</tr>");
 	$table.append($tr);
+    $tr.calendar();
 }
 
 //精品课程建设情况
