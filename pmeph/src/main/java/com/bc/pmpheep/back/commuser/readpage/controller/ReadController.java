@@ -154,7 +154,7 @@ public class ReadController {
         //查询条数
         zdtjXxjyMap.put("startrows", "1");
         zdtjXxjyMap.put("endrows", "10");
-        zdtjXxjyList = readService.queryZdtjReadList(zdtjXxjyMap);
+        zdtjXxjyList = readService.queryXstjReadList(zdtjXxjyMap);
         for (int i = 0; i < zdtjXxjyList.size(); i++) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("author", zdtjXxjyList.get(i).get("author"));
