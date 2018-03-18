@@ -78,6 +78,23 @@ public class BookServiceImpl extends BaseService implements BookService {
     }
 
     @Override
+    public PageResult<BookVO> listPromoteBookVO(PageParameter<BookVO> pageParameter) {
+        if (ObjectUtil.isNull(pageParameter.getParameter())) {
+            throw new CheckedServiceException(CheckedExceptionBusiness.BOOK,
+                    CheckedExceptionResult.NULL_PARAM, "参数为空");
+        }
+
+        int total = bookDao.getPromoteBookVOTotal(pageParameter);
+        PageResult<BookVO> pageResult = new PageResult<>();
+        if (total > 0) {
+            PageParameterUitl.CopyPageParameter(pageParameter, pageResult);
+            pageResult.setRows(bookDao.promoteListBookVO(pageParameter));
+        }
+        pageResult.setTotal(total);
+        return pageResult;
+    }
+
+    @Override
     public String updateBookById(Long[] ids, Long type, Boolean isOnSale, Boolean isNew,
     Boolean isPromote) throws Exception {
         if (ArrayUtil.isEmpty(ids)) {

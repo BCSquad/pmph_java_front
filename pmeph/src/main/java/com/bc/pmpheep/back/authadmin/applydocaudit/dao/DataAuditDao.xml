@@ -327,7 +327,7 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 	</select>
 	<!--上版教材编辑-->
 	<select id="queryJcbj" resultType="java.util.Map" parameterType="java.util.Map">
-		select id,declaration_id,material_name,position,is_digital_editor*1 is_digital_editor,note,sort from dec_last_position where declaration_id = #{declaration_id} ORDER BY sort 
+		select id,declaration_id,material_name,position,is_digital_editor*1 is_digital_editor,note,sort,publisher,publish_date from dec_last_position where declaration_id = #{declaration_id} ORDER BY sort
 	</select>
 	<!-- 精品课程建设 -->
 	<select id="queryGjkcjs" resultType="java.util.Map" parameterType="java.util.Map">

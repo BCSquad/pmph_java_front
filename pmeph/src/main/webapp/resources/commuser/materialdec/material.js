@@ -497,6 +497,7 @@ function add_jccb(){
 	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('jccb_"+num+"')\"/></td>"+
 	"</tr>");
 	$table.append($tr);
+    $tr.calendar();
 }
 
 //精品课程建设情况

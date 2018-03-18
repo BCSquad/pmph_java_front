@@ -5,10 +5,14 @@
 	<!--积分记录  加载更多 -->
 	<select id="findPointList" resultType="java.util.Map"
 		parameterType="java.util.Map">
-		select wpl.id, wpr.rule_name,wpl.point,wpl.gmt_create,wp.total
-		from writer_point_log  wpl 
+		select wpl.id, wpr.rule_name,
+		case 	when wpl.point  &gt;0  then CONCAT('+', wpl.point)
+		when wpl.point &lt;0  then wpl.point
+		ELSE 0 END point,
+		wpl.gmt_create,wp.total
+		from writer_point_log  wpl
 		LEFT JOIN writer_point_rule  wpr ON wpl.rule_id=wpr.id
-		LEFT JOIN writer_user  wu ON wpl.user_id=wu.id 
+		LEFT JOIN writer_user  wu ON wpl.user_id=wu.id
 		LEFT JOIN writer_point  wp ON wp.user_id=wu.id
 		where 1= 1 
 		<if test="userId != null and userId != ''">
@@ -45,10 +49,14 @@
 	<!--查询筛选积分记录数据 -->
 	<select id="findPointByMonth" resultType="java.util.Map"
 		parameterType="java.util.Map">
-		select wpl.id, wpr.rule_name,wpl.point,wpl.gmt_create,wp.total
-		from writer_point_log  wpl 
+		select wpl.id, wpr.rule_name,
+		case 	when wpl.point  &gt;0  then CONCAT('+', wpl.point)
+		when wpl.point &lt;0  then wpl.point
+		ELSE 0 END point,
+		wpl.gmt_create,wp.total
+		from writer_point_log  wpl
 		LEFT JOIN writer_point_rule  wpr ON wpl.rule_id=wpr.id
-		LEFT JOIN writer_user  wu ON wpl.user_id=wu.id 
+		LEFT JOIN writer_user  wu ON wpl.user_id=wu.id
 		LEFT JOIN writer_point  wp ON wp.user_id=wu.id
 		where 1= 1  
 		<if test="userId != null and userId != ''">

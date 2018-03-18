@@ -244,19 +244,6 @@
 				<textarea class="text_cl" name="gr_content" id="gr_content" maxlength="1000" readonly="readonly">${achievementMap.content}</textarea>
 			</div>
 		</div>
-		<!--扩展信息-->
-		<c:forEach var="zjkzxx" items="${zjkzqkList}">
-			<div class="sbxq_item1">
-				<div>
-					<span id="tsxz_span9"></span>
-					<span class="tsxz_title">${zjkzxx.extension_name}</span>
-				</div>
-				<div class="content">
-					<textarea class="text_cl" name="kz_content" readonly="readonly">${zjkzxx.content}</textarea>
-				</div>
-			</div>
-		</c:forEach>
-
 		<!--主要学术兼职-->
 		<div class="sbxq_item" id="xsjz">
 			<div>
@@ -302,9 +289,11 @@
 				<table class="tab_2" id="tab_jccb">
 					<thead>
 					<tr>
-						<td width="420px">教材名称</td>
-						<td width="320px">编写职务</td>
-						<td width="120px">是否数字编委</td>
+						<td width="340px">教材名称</td>
+						<td width="260px">编写职务</td>
+						<td width="120px">数字编委</td>
+						<td width="120px">出版单位</td>
+						<td width="120px">出版时间</td>
 						<td>备注</td>
 					</tr>
 					</thead>
@@ -322,6 +311,8 @@
 								<c:if test="${list.is_digital_editor == '1'}">是</c:if>
 								<c:if test="${list.is_digital_editor == '0'}">否</c:if>
 							</td>
+							<td>${list.publisher}</td>
+							<td>${list.publish_date}</td>
 							<td>${list.note}</td>
 						</tr>
 					</c:forEach>
@@ -377,7 +368,7 @@
 						<td width="230px">教材名称</td>
 						<td width="120px">级别</td>
 						<td width="120px">编写职务</td>
-						<td width="100px">是否数字编委</td>
+						<td width="100px">数字编委</td>
 						<td width="120px">出版时间</td>
 						<td width="120px">标准书号</td>
 						<td>备注</td>
@@ -427,7 +418,7 @@
 						<td width="230px">教材名称</td>
 						<td width="120px">级别</td>
 						<td width="120px">编写职务</td>
-						<td width="100px">是否数字编委</td>
+						<td width="100px">数字编委</td>
 						<td width="130px">出版单位</td>
 						<td width="120px">出版时间</td>
 						<td width="120px">标准书号</td>
@@ -703,8 +694,19 @@
 				<textarea class="text_cl" readonly="readonly">${intentionMap.content}</textarea>
 			</div>
 		</div>
-			
-		
+
+		<!--扩展信息-->
+		<c:forEach var="zjkzxx" items="${zjkzqkList}">
+			<div class="sbxq_item1">
+				<div>
+					<span id="tsxz_span9"></span>
+					<span class="tsxz_title">${zjkzxx.extension_name}</span>
+				</div>
+				<div class="content">
+					<textarea class="text_cl" name="kz_content" readonly="readonly">${zjkzxx.content}</textarea>
+				</div>
+			</div>
+		</c:forEach>
 		
 			<!-- 申报单位-->
 			<div class="sbxq_item1">
