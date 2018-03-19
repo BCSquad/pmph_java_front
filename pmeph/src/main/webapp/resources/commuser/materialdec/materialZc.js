@@ -166,6 +166,17 @@ function chooseModel(data){
     }else{
         $("#jxjl_xt").css("display","inline");
     }
+    //个人成就情况
+    if(data.is_achievement_used == "1"){
+        $("#grcjqk").css("display","block");
+    }
+    //个人成就必填
+    if(data.is_achievement_required == "1"){
+        $("#grcj_bt").css("display","inline");
+        jsonStr=jsonStr+"{\"id\":\"gr_content\",\"content\":\"个人成就必填\"},";
+    }else{
+        $("#grcj_xt").css("display","inline");
+    }
     //主要学术兼职
     if(data.is_acade_used == "1"){
         $("#xsjz").css("display","block");
@@ -184,20 +195,9 @@ function chooseModel(data){
     //上版教材参编情况必填
     if(data.is_last_position_required == "1"){
         $("#sbjccb_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"jc_material_name\",\"content\":\"本套上板教材参编情况必填\"},";
+        jsonStr=jsonStr+"{\"id\":\"jc_material_name\",\"content\":\"本套上板教材参编情况必填\"},{\"id\":\"jc_publish_date\",\"content\":\"发版时间必填\"},";
     }else{
         $("#sbjccb_xt").css("display","inline");
-    }
-    //精品课程建设情况
-    if(data.is_course_used == "1"){
-        $("#gjjpkcjs").css("display","block");
-    }
-    //精品课程建设情况必填
-    if(data.is_course_required == "1"){
-        $("#gjjpkcjs_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"gj_course_name\",\"content\":\"精品课程建设情况必填\"},{\"id\":\"gj_class_hour\",\"content\":\"课程全年课时不能为空\"},";
-    }else{
-        $("#gjjpkcjs_xt").css("display","inline");
     }
     //主编国家规划教材情况
     if(data.is_national_plan_used == "1"){
@@ -210,17 +210,6 @@ function chooseModel(data){
     }else{
         $("#zbgjjgh_xt").css("display","inline");
     }
-    //其他社教材编写情况
-    if(data.is_textbook_used == "1"){
-        $("#qtjcbxqk").css("display","block");
-    }
-    //其他社教材编写情况必填
-    if(data.is_textbook_required == "1"){
-        $("#qtjcbxqk_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"jcb_material_name\",\"content\":\"其他社教材名称不能为空\"},{\"id\":\"jcb_publisher\",\"content\":\"出版单位不能为空\"},{\"id\":\"jcb_publish_date\",\"content\":\"出版时间不能为空\"},{\"id\":\"jcb_isbn\",\"content\":\"教材标准书号不能为空\"},";
-    }else{
-        $("#qtjcbxqk_xt").css("display","inline");
-    }
     //人卫教材编写情况
     if(data.is_pmph_textbook_used == "1"){
         $("#rwsjcbx").css("display","block");
@@ -232,6 +221,39 @@ function chooseModel(data){
     }else{
         $("#rwsjcbx_xt").css("display","inline");
     }
+    //其他社教材编写情况
+    if(data.is_textbook_used == "1"){
+        $("#qtjcbxqk").css("display","block");
+    }
+    //其他社教材编写情况必填
+    if(data.is_textbook_required == "1"){
+        $("#qtjcbxqk_bt").css("display","inline");
+        jsonStr=jsonStr+"{\"id\":\"jcb_material_name\",\"content\":\"其他社教材名称不能为空\"},{\"id\":\"jcb_publisher\",\"content\":\"出版单位不能为空\"},{\"id\":\"jcb_publish_date\",\"content\":\"出版时间不能为空\"},{\"id\":\"jcb_isbn\",\"content\":\"教材标准书号不能为空\"},";
+    }else{
+        $("#qtjcbxqk_xt").css("display","inline");
+    }
+    //参加人卫慕课、数字教材编写情况
+    if(data.is_mooc_digital_used == "1"){
+        $("#digital").css("display","block");
+    }
+    //参加人卫慕课、数字教材编写情况必填
+    if(data.is_mooc_digital_required == "1"){
+        $("#digital_bt").css("display","inline");
+        jsonStr=jsonStr+"{\"id\":\"mooc_content\",\"content\":\"人卫慕课、数字教材编写情况必填\"},";
+    }else{
+        $("#digital_xt").css("display","inline");
+    }
+    //精品课程建设情况
+    if(data.is_course_used == "1"){
+        $("#gjjpkcjs").css("display","block");
+    }
+    //精品课程建设情况必填
+    if(data.is_course_required == "1"){
+        $("#gjjpkcjs_bt").css("display","inline");
+        jsonStr=jsonStr+"{\"id\":\"gj_course_name\",\"content\":\"精品课程建设情况必填\"},{\"id\":\"gj_class_hour\",\"content\":\"课程全年课时不能为空\"},";
+    }else{
+        $("#gjjpkcjs_xt").css("display","inline");
+    }
     //科研情况
     if(data.is_research_used == "1"){
         $("#zjkyqk").css("display","block");
@@ -242,17 +264,6 @@ function chooseModel(data){
         jsonStr=jsonStr+"{\"id\":\"zjk_research_name\",\"content\":\"科研情况必填\"},{\"id\":\"zjk_award\",\"content\":\"获奖情况不能为空\"},{\"id\":\"zjk_approval_unit\",\"content\":\"获奖审批单位不能为空\"},";
     }else{
         $("#zjkyqk_xt").css("display","inline");
-    }
-    //个人成就情况
-    if(data.is_achievement_used == "1"){
-        $("#grcjqk").css("display","block");
-    }
-    //个人成就必填
-    if(data.is_achievement_required == "1"){
-        $("#grcj_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"gr_content\",\"content\":\"个人成就必填\"},";
-    }else{
-        $("#grcj_xt").css("display","inline");
     }
     //主编学术专著情况
     if(data.is_monograph_used == "1"){
@@ -308,17 +319,6 @@ function chooseModel(data){
         jsonStr=jsonStr+"{\"id\":\"ac_reward_name\",\"content\":\"学术荣誉授予情况必填\"},{\"id\":\"ac_reward_date\",\"content\":\"荣誉授予时间不能为空\"},";
     }else{
         $("#acade_xt").css("display","inline");
-    }
-    //参加人卫慕课、数字教材编写情况
-    if(data.is_mooc_digital_used == "1"){
-        $("#digital").css("display","block");
-    }
-    //参加人卫慕课、数字教材编写情况必填
-    if(data.is_mooc_digital_required == "1"){
-        $("#digital_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"mooc_content\",\"content\":\"人卫慕课、数字教材编写情况必填\"},";
-    }else{
-        $("#digital_xt").css("display","inline");
     }
     //编写内容意向表
     if(data.is_intention_used == "1"){
@@ -436,8 +436,8 @@ function add_xxjl(){
 	" - <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" z-index='100' min=\"'$#xx_kssj_"+num+"'\" id='xx_jssj_"+num+"' name='xx_jssj' value='' style='width: 80px;'/></td>"+
 	"<td><input class='cg_input' name='xx_school_name' id='xx_school_name_"+num+"' value='' placeholder='学校名称'/></td>"+
 	"<td><input class='cg_input' name='xx_major' value='' id='xx_major_"+num+"' placeholder='所学专业'/></td>"+
-	"<td><input class='cg_input' name='xx_degree' value='' id='xx_degree_"+num+"' style='width: 120px;' placeholder='学历'/></td>"+
-	"<td><input class='cg_input' name='xx_note' value='' style='width: 310px;' placeholder='备注'/>" +
+	"<td><input class='cg_input' name='xx_degree' value='' id='xx_degree_"+num+"' style='width: 110px;' placeholder='学历'/></td>"+
+	"<td><input class='cg_input' name='xx_note' value='' style='width: 290px;' placeholder='备注'/>" +
 	"<input type='hidden' name='zdjy' value='xx_kssj_"+num+",xx_jssj_"+num+",xx_school_name_"+num+",xx_major_"+num+",xx_degree_"+num+"' />" +
 	"</td>"+
 	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('xxjl_"+num+"')\"/></td>"
@@ -455,7 +455,7 @@ function add_gzjl(){
 	" - <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" z-index='100' min=\"'$#gz_kssj_"+num+"'\" id='gz_jssj_"+num+"'  name='gz_jssj' value='' style='width: 80px;'/></td>"+
 	"<td><input class='cg_input' name='gz_org_name' id='gz_org_name_"+num+"' value='' placeholder='工作单位'/></td>"+
 	"<td><input class='cg_input' name='gz_position' id='gz_position_"+num+"' value='' placeholder='职位'/></td>"+
-	"<td><input class='cg_input' name='gz_note' value='' style='width: 370px;' placeholder='备注'/>" +
+	"<td><input class='cg_input' name='gz_note' value='' style='width: 410px;' placeholder='备注'/>" +
 	"<input type='hidden' name='zdjy' value='gz_kssj_"+num+",gz_jssj_"+num+",gz_org_name_"+num+",gz_position_"+num+"' />" +
 	"</td>"+
 	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('gzjl_"+num+"')\"/></td>"
@@ -473,7 +473,7 @@ function add_jxjl(){
 	" - <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" min=\"'$#jx_kssj_"+num+"'\" id='jx_jssj_"+num+"'  z-index='100' name='jx_jssj' value='' style='width: 80px;'/></td>"+
 	"<td><input class='cg_input' name='jx_school_name' id='jx_school_name_"+num+"' value='' placeholder='学校名称'/></td>"+
 	"<td><input class='cg_input' name='jx_subject' id='jx_subject_"+num+"' value='' placeholder='教学科目'/></td>"+
-	"<td><input class='cg_input' name='jx_note' value='' style='width: 370px;' placeholder='备注'/>" +
+	"<td><input class='cg_input' name='jx_note' value='' style='width: 410px;' placeholder='备注'/>" +
 	"<input type='hidden' name='zdjy' value='jx_kssj_"+num+",jx_jssj_"+num+",jx_school_name_"+num+",jx_subject_"+num+"' />" +
 	"</td>"+
 	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('jxjz_"+num+"')\"/></td>"
@@ -526,12 +526,14 @@ function add_jccb(){
 		"<td><input type='radio' name='jc_is_digital_editor_"+num+"' value='0' checked='checked'/>否</td>"+
 	"</tr></table>"+
 	"<input type='hidden' name='jc_is_digital_editor' value='jc_is_digital_editor_"+num+"' /></td>"+
-	"<td><input class='cg_input' name='jc_note' value='' style='width: 290px;' placeholder='备注'/>" +
+	"<td><input class='cg_input' name='jc_publish_date' id='jc_publish_date"+num+"' value='' placeholder='出版时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100'  style='width: 100px;'/></td>"+
+	"<td><input class='cg_input' name='jc_note' value='' style='width: 190px;' placeholder='备注'/>" +
 	"<input type='hidden' name='zdjy' value='jc_material_name_"+num+"' />" +
 	"</td>"+
 	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('jccb_"+num+"')\"/></td>"+
 	"</tr>");
 	$table.append($tr);
+    $tr.calendar();
 }
 
 //精品课程建设情况
@@ -549,7 +551,7 @@ function add_jpkcjs(str,dim){
         "<td><input type='radio' name='gj_type_"+num+"' value='3'/>省部</td>"+
         "</tr></table>"+
 		"<input type='hidden' name='gj_type' value='gj_type_"+num+"' /></td>"+
-	"<td><input class='cg_input' name='gj_note' value='' style='width: 330px;' placeholder='备注'/>" +
+	"<td><input class='cg_input' name='gj_note' value='' style='width: 340px;' placeholder='备注'/>" +
 	"<input type='hidden' name='zdjy' value='gj_course_name_"+num+",gj_class_hour_"+num+"' />" +
 	"</td>"+
 	"<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('jpkcjs_"+num+"')\"/></td>"+

@@ -241,7 +241,7 @@
 			)
 		)
 	)
-	<if test="parameter.s!=null and parameter.s!= ''">AND c.id is not null </if>
+	<if test="parameter.s == null ">AND c.id is not null </if>
 	<if test="parameter.is_staging!=null and parameter.is_staging!= ''">AND c.is_staging =#{parameter.is_staging}</if>
 	<if
 		test="parameter.online_progress!=null and parameter.online_progress!= ''">AND c.online_progress in ${parameter.online_progress}</if>
@@ -358,7 +358,7 @@
 				)
 			)
 		)
-		<if test="parameter.s!=null and parameter.s!= ''">AND c.id is not null </if>
+		<if test="parameter.s == null ">AND c.id is not null </if>
 		<if test="parameter.is_staging!=null and parameter.is_staging!= ''">AND c.is_staging =#{parameter.is_staging}</if>
 		<if
 			test="parameter.online_progress!=null and parameter.online_progress!= ''">AND c.online_progress in ${parameter.online_progress}</if>
@@ -725,17 +725,27 @@
 		id=#{id} and writer_id=#{writer_id}
 	</update>
 	<!-- 我的评论删除 -->
-	<delete id="deleteComment" parameterType="Map">
-		delete from
-		book_user_comment where
+	<update id="deleteComment" parameterType="Map">
+		update book_user_comment set is_deleted = 1
+		where
 		id= #{id} and writer_id = #{writer_id}
-	</delete>
+		<!-- delete from
+		book_user_comment where
+		id= #{id} and writer_id = #{writer_id} -->
+	</update>
 	<select id="getCommentById"  resultType="java.lang.Long">
 		SELECT book_id from book_user_comment where id= #{id}
 	</select>
 	<update id="updateDownComments" >
-		UPDATE book SET comments = comments-1 WHERE id =
-		#{id}
+		set @comments = (
+		select count(c.id) from book b
+		left join book_user_comment c 
+		on c.book_id = b.id and c.is_auth =1 and c.is_deleted =0 and c.is_hide = 0
+		WHERE b.id = #{id}
+		);
+		update book set comments = @comments where id = #{id};
+		<!-- UPDATE book SET comments = comments-1 WHERE id =
+		#{id} -->
 	</update>
 	
 	<!-- 查询评论并删除 -->

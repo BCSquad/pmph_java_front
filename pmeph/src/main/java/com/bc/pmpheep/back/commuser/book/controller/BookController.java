@@ -96,6 +96,52 @@ public class BookController extends BaseController {
         return model;
     }
 
+    @RequestMapping(value = "/promoteList", method = RequestMethod.GET)
+    public ModelAndView promoteList(@RequestParam(value="pageSize",defaultValue="10")Integer pageSize, Integer pageNumber, BookVO bookVO,@RequestParam(value="type",required=true)Long type) throws Exception {
+        ModelAndView model = new ModelAndView();
+        String pageUrl = "commuser/booklist/promoteBookList";
+        Map<String, Object> user = getUserInfo();
+        BigInteger uid = null;
+        if (user != null && getUserInfo().get("id")!=null && getUserInfo().get("id").toString() != null) {
+            uid = (BigInteger)getUserInfo().get("id");
+        }
+        bookVO.setLogUserId(uid);
+        PageParameter<BookVO> pageParameter = new PageParameter<>(pageNumber, pageSize);
+        //书籍的分类，将会查询该类及其所有子类的图书
+        bookVO.setType(type);
+        if (StringUtil.notEmpty(bookVO.getName())) {
+            bookVO.setName(bookVO.getName().replaceAll(" ", ""));// 去除空格
+        }
+        pageParameter.setParameter(bookVO);
+        try {
+            //获取某教材分类及其父类列表
+//            List<Map<String,Object>> parentTypeList = bookService.queryParentTypeListByTypeId(type);
+//            String materiaName = bookService.getMaterialTypeNameById(type);
+            PageResult<BookVO> page = bookService.listPromoteBookVO(pageParameter);
+            List<BookVO> bookList = page.getRows();
+            model.addObject("page", page);
+            if (null == pageNumber) {
+                pageNumber = 1;
+            }
+            if (bookList!=null && bookList.size()>0) {
+                model.addObject("listSize", bookList.size());
+            }else{
+                model.addObject("listSize", 0);
+            }
+//            model.addObject("parentTypeList", parentTypeList);
+//            model.addObject("materiaName", materiaName);
+            model.addObject("pageNumber", pageNumber);
+            model.addObject("pageSize", pageSize);
+            model.addObject("order", bookVO.getOrder());
+            model.addObject("materialType", type);
+            model.setViewName(pageUrl);
+        } catch (CheckedServiceException e) {
+            throw new CheckedServiceException(e.getBusiness(), e.getResult(), e.getMessage(),
+                    pageUrl);
+        }
+        return model;
+    }
+
     /**
      * 
      * 

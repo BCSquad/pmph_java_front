@@ -7,6 +7,7 @@ import com.bc.pmpheep.back.authadmin.usermanage.bean.WriterUserCertificationVO;
 import com.bc.pmpheep.back.authadmin.usermanage.dao.WriterUserDao;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
+import com.bc.pmpheep.back.util.MD5;
 import com.bc.pmpheep.back.util.ObjectUtil;
 import com.bc.pmpheep.back.util.PageParameterUitl;
 import com.bc.pmpheep.back.util.StringUtil;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -164,7 +166,13 @@ public class WriterUserServiceImpl implements WriterUserService {
         PageResult<WriterUser> pageResult = new PageResult<>();
         if (total > 0) {
             PageParameterUitl.CopyPageParameter(pageParameter, pageResult);
-            pageResult.setRows(writerUserDao.getOrg(pageParameter));
+
+			List<WriterUser> rows = writerUserDao.getOrg(pageParameter);
+			for(int i=0;i<rows.size();i++){
+				String value = MD5.md5(rows.get(i).getUsername() + "1005387596c57c2278f4f61058c78d1b" + new SimpleDateFormat("yyyyMMdd").format(new Date())).toLowerCase();
+				rows.get(i).setMd5(value);
+			}
+            pageResult.setRows(rows);
         }
         pageResult.setTotal(total);
         return pageResult;

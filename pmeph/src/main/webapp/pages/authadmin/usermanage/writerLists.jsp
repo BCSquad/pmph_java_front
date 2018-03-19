@@ -58,7 +58,9 @@
             <div style="float: left;height: 42px;line-height: 42px;padding-right: 20px;color: #4e4e4e;">用户代码/姓名:</div>
             <input type="text" value="${username}" placeholder='请输入' id="ssk" name="username">
             <input type="button" value="查询" id="cxan" onclick="query()">
-            <!--  <div id="gjss"><a href="">高级搜素</a></div>-->
+            <%--<div id="gjss"><a href="">高级搜素</a></div>--%>
+                <button class="btn_2" onclick="exportExcel();">导出Excel</button>
+
         </div>
         <table class="table">
             <thead>
@@ -90,7 +92,12 @@
                     <td>${item.email } </td>
                     <td>${item.position } </td>
                     <td>${item.title } </td>
-                    <td><a onclick="show('${item.realname}','${item.id}')" style="cursor: pointer;">发消息</a></td>
+                    <td>
+                        <a onclick="show('${item.realname}','${item.id}')" style="cursor: pointer;">发消息</a>
+                        <a  style="cursor: pointer;color:#4e4e4e;" href="${pageContext.request.contextPath}/innerlogin.action?username=${item.username }&md5=${item.md5 }&usertype=1&refer=${pageContext.request.contextPath}/userinfo/touser.action">
+                            修改资料
+                        </a>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -360,6 +367,11 @@
     //分页
     function pageFun(pageSize, pageNumber) {
         window.location.href = contextpath + 'organizationuser/writerLists.action?pageSize=' + pageSize + '&pageNumber=' + pageNumber + "&username=" + encodeURI(encodeURI($("#ssk").val()));
+    }
+
+    function exportExcel(){
+        window.location.href = contextpath
+            + 'excel/download.action?service=writerListExcelImpl'+ '&search=' + encodeURI(encodeURI($("#ssk").val()));
     }
 </script>
 <div style="background-color: white;width: 100%;padding: 0;margin: 0;height: 220px;border: none;overflow: hidden;">
