@@ -199,7 +199,7 @@
                             </div>${listmyf.realname}</li></c:forEach>
                     </ul>
                 </div>
-                <div id="bzzx">
+                <%--<div id="bzzx">
                     <div id="bzxxherd"></div>
                     <span class="bzzxwz">帮助中心</span>
                     <div id="bzxxherd2"></div>
@@ -209,7 +209,7 @@
                         <li class="bzzxlb"><span id="shou"></span><span class="zzfw">投诉举报</span></li>
                         <li class="bzzxlb"><span id="kefu"></span><span class="zzfw">我的客服反馈</span></li>
                     </ul>
-                </div>
+                </div>--%>
             </div>
             <div style="clear: both"></div>
         </div>
