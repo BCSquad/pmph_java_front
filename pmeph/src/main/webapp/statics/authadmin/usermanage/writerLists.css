@@ -153,7 +153,19 @@
     bottom:20px;
     border: 1px solid #f2f2f2;
 }
+.btn_2{
+    float:right;
+    width: 100px;
+    height: 33px;
+    background-color: #f9be3e;
 
+    margin-right:10px;
+    border-radius: 1px;
+    font-family: MicrosoftYaHei;
+    color: #ffffff;
+    font-size: 14px;
+    border:none;
+}
 .bigbox{
     width:1200px;
     height: auto;
