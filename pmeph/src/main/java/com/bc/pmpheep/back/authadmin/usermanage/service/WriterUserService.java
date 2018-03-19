@@ -69,4 +69,6 @@ public interface WriterUserService {
      * @return
      */
 	PageResult<WriterUser> getOrg(PageParameter<WriterUser> pageParameter) throws CheckedServiceException;
+
+
 }
