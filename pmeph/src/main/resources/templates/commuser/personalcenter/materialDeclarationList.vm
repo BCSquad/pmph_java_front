@@ -11,8 +11,8 @@
 
 <div class="jcsbssl">
 	<input type="hidden" id="pageinfo" value="$!{para.pageinfo}">
-    <span id="jcsbqb" class="active" onclick="listoction(this,'');" style="cursor:pointer">全部</span>
-    <span id="jcsbwdsb" class=""  onclick="listoction(this,1);" style="cursor:pointer">我的申报</span>
+    <span id="jcsbwdsb" class="active"  onclick="listoction(this,'');" style="cursor:pointer">我的申报</span>
+    <span id="jcsbqb" class="" onclick="listoction(this,1);" style="cursor:pointer">全部</span>
     <span class="jcsbsbzt" id="sbzzjx" onclick="listoction1(1);" style="cursor:pointer">正在进行</span>
     <span class="jcsbsbzt" id="sbyjs" style="cursor:pointer" onclick="listoction1(2);">已结束</span>
     <span class="jcsbsbzt" id="sbzc" onclick="listoction3();" style="cursor:pointer">暂存</span>

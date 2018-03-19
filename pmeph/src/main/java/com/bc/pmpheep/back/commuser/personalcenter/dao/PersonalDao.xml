@@ -241,7 +241,7 @@
 			)
 		)
 	)
-	<if test="parameter.s!=null and parameter.s!= ''">AND c.id is not null </if>
+	<if test="parameter.s == null ">AND c.id is not null </if>
 	<if test="parameter.is_staging!=null and parameter.is_staging!= ''">AND c.is_staging =#{parameter.is_staging}</if>
 	<if
 		test="parameter.online_progress!=null and parameter.online_progress!= ''">AND c.online_progress in ${parameter.online_progress}</if>
@@ -358,7 +358,7 @@
 				)
 			)
 		)
-		<if test="parameter.s!=null and parameter.s!= ''">AND c.id is not null </if>
+		<if test="parameter.s == null ">AND c.id is not null </if>
 		<if test="parameter.is_staging!=null and parameter.is_staging!= ''">AND c.is_staging =#{parameter.is_staging}</if>
 		<if
 			test="parameter.online_progress!=null and parameter.online_progress!= ''">AND c.online_progress in ${parameter.online_progress}</if>
