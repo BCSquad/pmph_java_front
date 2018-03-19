@@ -47,9 +47,9 @@ function loadMore() {
                 if ((n.msgType==0||n.msgType==1)) {
 	                str += "<td colspan='2' class='title' style='cursor: pointer;' onclick='showup(" + n.id + ")'>"
 	                if (n.is_read == 1) {
-	                    str += '<img src="' + contextpath + 'statics/image/readyes.png"  id="readyes\'+n.id+\'" class="readyes"/>';
+	                    str += '<img src="' + contextpath + 'statics/image/readyes.png"  id="readyes'+n.id+'" class="readyes"/>';
 	                } else {
-	                    str += '<img src="' + contextpath + 'statics/image/readno.png"  id="readno\'+n.id+\'" class="readyes"/>';
+	                    str += '<img src="' + contextpath + 'statics/image/readno.png"  id="readno'+n.id+'" class="readyes"/>';
 	                }
                     +'<span class="fixwidth">'+ n.messageContent+'</span>';
                 }

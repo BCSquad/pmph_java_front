@@ -87,7 +87,7 @@ body {
     height: 34px;
     position: absolute;
     padding-left: 25px;
-    left: 542px;
+    left: 502px;
     top: 23px;
     border-radius: 17px;
     border: solid 1px #1abd9b;
@@ -98,7 +98,7 @@ body {
     width: 18px;
     height: 18px;
     position: absolute;
-    left: 829px;
+    left: 789px;
     top: 33px;
     cursor: pointer;
 }
@@ -162,7 +162,7 @@ body {
     height: 28px;
     position: absolute;
     right: 70px;
-    top: 25px;
+    top: 27px;
     cursor: pointer;
 
 }
@@ -172,7 +172,7 @@ body {
     height: 36px;
     position: absolute;
     right: 0px;
-    top: 21px;
+    top: 23px;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -184,7 +184,7 @@ body {
     display: block;
     position: absolute;
     right: 67px;
-    top: 22px;
+    top: 24px;
     z-index: 4;
     border-radius: 50%;
 }
@@ -201,7 +201,7 @@ body {
 }
 .head .user-select img{
     width: 148px;
-    height: 180px;
+    height: 130px;
 }
 .head .user-select .select {
     position: absolute;
@@ -276,6 +276,52 @@ body {
     vertical-align: top;
 }
 
+.head .logininfo{
+    position: absolute;
+    top: 32px;
+    right: 250px;
+    width: 110px;
+    color: #ff0000;
+    vertical-align: middle;
+    line-height: 16px;
+    height: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.head .logininfoout{
+    position: absolute;
+    top: 32px;
+    right: 136px;
+    width: 110px;
+    vertical-align: middle;
+    line-height: 16px;
+    height: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+
+.head .logininfoout .icon {
+    background: url("../image/logout.png");
+    height: 16px;
+    width: 14px;
+    display: inline-block;
+    cursor: pointer;
+
+}
+
+.head .logininfoout .wtext {
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+    width: 50px;
+    vertical-align: top;
+}
+
 .head .writing {
     position: absolute;
     top: 36px;
@@ -293,7 +339,7 @@ body {
 .head .writing.logined {
     right: 100px;
     border-right:none;
-    top: 30px;
+    top: 32px;
 }
 
 .head .writing .icon {

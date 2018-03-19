@@ -112,6 +112,16 @@
             %>
 
             <c:if test="${userInfo != null}">
+                <span class="logininfo">
+                    您好,<%=MapUtils.getString(userInfo, "realname")%>
+                </span>
+
+                <span class="logininfoout"
+                      onclick="window.location.href='<c:url value="/logout.action"/>'">
+                    <span class="icon"></span>
+                    <span class="wtext">退出</span>
+                </span>
+
 
                 <span class="writing logined"
                       onclick="window.location.href='${ctx}/writerArticle/initWriteArticle.action'">
@@ -141,13 +151,13 @@
                 <div class="user-select">
                     <img src="${ctx}/statics/image/userSelectbg.png" alt="">
                     <div class="select">
-                        <a class="option wide" href="javascript:;">你好,<%=MapUtils.getString(userInfo, "realname")%></a>
+                      <%--  <a class="option wide" href="javascript:;">你好,<%=MapUtils.getString(userInfo, "realname")%></a>--%>
                         <a class="option"
                            href='<c:url value="/personalhomepage/tohomepage.action?pagetag=dt"/>'>个人中心</a>
                         <a class="option" href="<c:url value='/group/list.action'/>">我的小组</a>
                         <a class="option"
                            href='<c:url value="/personalhomepage/tohomepage.action?pagetag=jcsb"/>'>教材申报</a>
-                        <a class="option out" href='<c:url value="/logout.action"/>'>退出</a>
+                        <%--<a class="option out" href='<c:url value="/logout.action"/>'>退出</a>--%>
                     </div>
                 </div>
             </c:if>
