@@ -55,19 +55,22 @@
                 <div class="input">
                     <div style="float:left;">
                         <label style="margin-left: 20px" class="labell require">页码:</label>
-                        <input type="text" style="width: 150px;" class="text required" id="page" data-valid="isNonEmpty||onlyInt"
+                        <input type="text" style="width: 150px;" class="text required" id="page"
+                               data-valid="isNonEmpty||onlyInt"
                                onblur="javascript:LengthLimit(this,4);" data-error="页码不能为空||页码只能是数字"/>
                     </div>
                     <div style="float:right;margin-right: 50px"><label style="margin-left: 10px"
                                                                        class="labell">行数:</label>
-                        <input type="text" style="width: 150px;" class="text required" id="line" data-valid="isNonEmpty||onlyInt"
+                        <input type="text" style="width: 150px;" class="text required" id="line"
+                               data-valid="isNonEmpty||onlyInt"
                                onblur="javascript:LengthLimit(this,4);" data-error="行数不能为空||行数只能是数字"/></div>
 
                 </div>
                 <div class="info">
                     <label style="margin-left: 20px;" class="labell">纠错内容</label>
                     <div style="margin-top: 5px;">
-                         <textarea class="misarea" style="width:470px;" id="content" onkeyup="javascript:LengthLimit(this,500);"
+                         <textarea class="misarea" style="width:470px;" id="content"
+                                   onkeyup="javascript:LengthLimit(this,500);"
                                    onblur="javascript:LengthLimit(this,500);"></textarea>
                     </div>
                 </div>
@@ -186,7 +189,7 @@
                 </div>
             </div>
             <div class="xqbf2">
-                
+
                 <div class="xsp" style="float: left;">
                     <div id="xsp"></div>
                     <a href="#001" onclick="writeablut()" style="text-decoration: none"><span id="xsp1">写书评</span></a>
@@ -196,10 +199,25 @@
                     <div class="mis_content" onclick="showup()">图书纠错</div>
                 </div>
                 <div class="mistake">
+                    <%
+                        Map<String, Object> userInfo2 = null;
+                        if ("1".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
+                            userInfo2 = (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_WRITER);
+                        }
+
+                        if (userInfo2 == null || userInfo2.isEmpty()) {
+                            request.setAttribute("userInfo", null);
+                        } else {
+                            request.setAttribute("userInfo", userInfo2);
+                        }
+                    %>
                     <div class="vid_pic"></div>
-                    <div class="mis_content">上传微视频</div>
-                    <input id="upload-video" type="file" class='hidden-upload' name='file' accept="video/*"
-                           style="width: 0px;height: 33px;padding-left: 100px;cursor: pointer;">
+                    <div class="mis_content"  <c:if test="${userInfo==null}"> onclick="validLogin()" </c:if>>上传微视频</div>
+                    <c:if test="${userInfo!=null}">
+                        <input id="upload-video" type="file" class='hidden-upload' name='file' accept="video/*"
+                               style="width: 0px;height: 33px;padding-left: 100px;cursor: pointer;">
+                    </c:if>
+
                 </div>
                 <div class="left1" id="dpf">
                     <div id="xsp3"></div>
@@ -254,7 +272,7 @@
                                     variable: 'player',
                                     autoplay: false,
                                     /*flashplayer: true,*/
-                                    video:$this.attr("src"),
+                                    video: $this.attr("src"),
                                     poster: $this.attr("poster")
 
                                 };
@@ -272,8 +290,9 @@
                 </div>
                 <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 15px;">
                 <div class="pl_add">
-                	<a name="001" id="001"></a>
-                    <textarea class="tarea" id="content_book" onkeyup="javascript:LengthLimit(this,3000);" onblur="javascript:LengthLimit(this,3000);"></textarea>
+                    <a name="001" id="001"></a>
+                    <textarea class="tarea" id="content_book" onkeyup="javascript:LengthLimit(this,3000);"
+                              onblur="javascript:LengthLimit(this,3000);"></textarea>
                     <hr style="border:0.05px solid rgba(180, 239, 205, 0.5);margin-left: 16px;margin-rihgt: 16px;">
                     <div class="star_num">星级评分:</div>
                     <div class="scorestar" id="star">
