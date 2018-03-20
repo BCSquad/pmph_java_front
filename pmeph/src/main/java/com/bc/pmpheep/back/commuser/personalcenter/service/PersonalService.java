@@ -256,4 +256,19 @@ public interface PersonalService {
 	//查询当前用户是否参加过调查问卷
 	List<Map<String,Object>> whetherSurvey(PageParameter pageParameter);
 
+	/**
+	 * 我的收藏
+	 *
+	 * @param pageParameter
+	 * @return
+	 */
+	public List<Map<String, Object>> listMyFavorites(PageParameter<Map<String, Object>> pageParameter);
+
+	/**
+	 * 我的收藏总数
+	 *
+	 * @param pageParameter
+	 * @return
+	 */
+	public int listMyFavoritesCount(PageParameter<Map<String, Object>> pageParameter);
 }

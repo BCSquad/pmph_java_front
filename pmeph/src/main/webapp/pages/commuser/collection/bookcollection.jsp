@@ -50,13 +50,13 @@ String basePath = path+"/";
         </div>
         <div class="message-line"></div>
         <c:forEach items="${bookCollection }" var="collection" varStatus="status">
-          <a href="bookcollection/tobookcollectionlist.action?favoriteId=${collection.id}" target="_blank">
-           <div class="collection">
-            <p class="title" id="title${status.index }">${collection.favorite_name }</p>
-            <p class="count">共${collection.mcount }条内容</p>
-           </div>
-          </a>
-        </c:forEach>
+        <a href="bookcollection/tobookcollectionlist.action?favoriteId=${collection.id}" target="_blank">
+            <div class="collection">
+                <p class="title" id="title${status.index }">${collection.favorite_name }</p>
+                <p class="count">共${collection.mcount }条内容</p>
+            </div>
+        </a>
+    </c:forEach>
         <div class="no-more" style="display:${bookCollection.size()>0 ?'none':'block' }" id="nomore">
                     <img src="<c:url value="/statics/image/aaa4.png"></c:url>" style="display: block;margin: 0px auto 0px;">
                     <span style="display: block;width: 100px;margin: 0px auto 0px;">木有内容呀~~</span>
