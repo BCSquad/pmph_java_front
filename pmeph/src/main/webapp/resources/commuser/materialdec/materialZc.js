@@ -136,200 +136,200 @@ function chooseModel(data){
     //学习经历
     if(data.is_edu_exp_used == "1"){
         $("#zyxxjl").css("display","block");
-    }
-    //学习经历必填
-    if(data.is_edu_exp_required == "1"){
-        $("#zyxxjl_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"xx_kssj\",\"content\":\"学习经历起止时间必填\"},{\"id\":\"xx_major\",\"content\":\"所学专业不能为空\"},{\"id\":\"xx_degree\",\"content\":\"学历不能为空\"},";
-    }else{
-        $("#zyxxjl_xt").css("display","inline");
+        //学习经历必填
+        if(data.is_edu_exp_required == "1"){
+            $("#zyxxjl_bt").css("display","inline");
+            jsonStr=jsonStr+"{\"id\":\"xx_kssj\",\"content\":\"学习经历起止时间必填\"},{\"id\":\"xx_major\",\"content\":\"所学专业不能为空\"},{\"id\":\"xx_degree\",\"content\":\"学历不能为空\"},";
+        }else{
+            $("#zyxxjl_xt").css("display","inline");
+        }
     }
     //工作经历
     if(data.is_work_exp_used == "1"){
         $("#gzjl").css("display","block");
-    }
-    //工作经历必填
-    if(data.is_work_exp_required == "1"){
-        $("#gzjl_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"gz_kssj\",\"content\":\"工作经历必填\"},{\"id\":\"gz_jssj\",\"content\":\"工作起止时间不能为空\"},{\"id\":\"gz_org_name\",\"content\":\"工作单位不能为空\"},{\"id\":\"gz_position\",\"content\":\"工作职位不能为空\"},";
-    }else{
-        $("#gzjl_xt").css("display","inline");
+        //工作经历必填
+        if(data.is_work_exp_required == "1"){
+            $("#gzjl_bt").css("display","inline");
+            jsonStr=jsonStr+"{\"id\":\"gz_kssj\",\"content\":\"工作经历必填\"},{\"id\":\"gz_jssj\",\"content\":\"工作起止时间不能为空\"},{\"id\":\"gz_org_name\",\"content\":\"工作单位不能为空\"},{\"id\":\"gz_position\",\"content\":\"工作职位不能为空\"},";
+        }else{
+            $("#gzjl_xt").css("display","inline");
+        }
     }
     //教学经历
     if(data.is_teach_exp_used == "1"){
         $("#jxjl").css("display","block");
-    }
-    //教学经历必填
-    if(data.is_teach_exp_required == "1"){
-        $("#jxjl_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"jx_kssj\",\"content\":\"教学经历必填\"},{\"id\":\"jx_jssj\",\"content\":\"教学起止时间不能为空\"},{\"id\":\"jx_school_name\",\"content\":\"学校名称不能为空\"},{\"id\":\"jx_subject\",\"content\":\"教学科目不能为空\"},";
-    }else{
-        $("#jxjl_xt").css("display","inline");
+        //教学经历必填
+        if(data.is_teach_exp_required == "1"){
+            $("#jxjl_bt").css("display","inline");
+            jsonStr=jsonStr+"{\"id\":\"jx_kssj\",\"content\":\"教学经历必填\"},{\"id\":\"jx_jssj\",\"content\":\"教学起止时间不能为空\"},{\"id\":\"jx_school_name\",\"content\":\"学校名称不能为空\"},{\"id\":\"jx_subject\",\"content\":\"教学科目不能为空\"},";
+        }else{
+            $("#jxjl_xt").css("display","inline");
+        }
     }
     //个人成就情况
     if(data.is_achievement_used == "1"){
         $("#grcjqk").css("display","block");
-    }
-    //个人成就必填
-    if(data.is_achievement_required == "1"){
-        $("#grcj_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"gr_content\",\"content\":\"个人成就必填\"},";
-    }else{
-        $("#grcj_xt").css("display","inline");
+        //个人成就必填
+        if(data.is_achievement_required == "1"){
+            $("#grcj_bt").css("display","inline");
+            jsonStr=jsonStr+"{\"id\":\"gr_content\",\"content\":\"个人成就必填\"},";
+        }else{
+            $("#grcj_xt").css("display","inline");
+        }
     }
     //主要学术兼职
     if(data.is_acade_used == "1"){
         $("#xsjz").css("display","block");
-    }
-    //主要学术兼职必填
-    if(data.is_acade_required == "1"){
-        $("#xsjz_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"xs_org_name\",\"content\":\"学术兼职必填\"},{\"id\":\"xs_position\",\"content\":\"兼职职务不能为空\"},";
-    }else{
-        $("#xsjz_xt").css("display","inline");
+        //主要学术兼职必填
+        if(data.is_acade_required == "1"){
+            $("#xsjz_bt").css("display","inline");
+            jsonStr=jsonStr+"{\"id\":\"xs_org_name\",\"content\":\"学术兼职必填\"},{\"id\":\"xs_position\",\"content\":\"兼职职务不能为空\"},";
+        }else{
+            $("#xsjz_xt").css("display","inline");
+        }
     }
     //上版教材参编情况
     if(data.is_last_position_used == "1"){
         $("#sbjccb").css("display","block");
-    }
-    //上版教材参编情况必填
-    if(data.is_last_position_required == "1"){
-        $("#sbjccb_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"jc_material_name\",\"content\":\"本套上板教材参编情况必填\"},{\"id\":\"jc_publish_date\",\"content\":\"发版时间必填\"},";
-    }else{
-        $("#sbjccb_xt").css("display","inline");
+        //上版教材参编情况必填
+        if(data.is_last_position_required == "1"){
+            $("#sbjccb_bt").css("display","inline");
+            jsonStr=jsonStr+"{\"id\":\"jc_material_name\",\"content\":\"本套上板教材参编情况必填\"},{\"id\":\"jc_publish_date\",\"content\":\"发版时间必填\"},";
+        }else{
+            $("#sbjccb_xt").css("display","inline");
+        }
     }
     //主编国家规划教材情况
     if(data.is_national_plan_used == "1"){
         $("#zbgjjgh").css("display","block");
-    }
-    //主编国家规划教材情况必填
-    if(data.is_national_plan_required == "1"){
-        $("#zbgjjgh_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"hj_material_name\",\"content\":\"主编国家规划教材情况必填\"},{\"id\":\"hj_isbn\",\"content\":\"教材标准书号不能为空\"},";
-    }else{
-        $("#zbgjjgh_xt").css("display","inline");
+        //主编国家规划教材情况必填
+        if(data.is_national_plan_required == "1"){
+            $("#zbgjjgh_bt").css("display","inline");
+            jsonStr=jsonStr+"{\"id\":\"hj_material_name\",\"content\":\"主编国家规划教材情况必填\"},{\"id\":\"hj_isbn\",\"content\":\"教材标准书号不能为空\"},";
+        }else{
+            $("#zbgjjgh_xt").css("display","inline");
+        }
     }
     //人卫教材编写情况
     if(data.is_pmph_textbook_used == "1"){
         $("#rwsjcbx").css("display","block");
-    }
-    //人卫教材编写情况必填
-    if(data.is_pmph_textbook_required == "1"){
-        $("#rwsjcbx_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"pmph_material_name\",\"content\":\"人卫社教材编写情况必填\"},{\"id\":\"pmph_publish_date\",\"content\":\"出版时间不能为空\"},{\"id\":\"pmph_isbn\",\"content\":\"教材标准书号不能为空\"},";
-    }else{
-        $("#rwsjcbx_xt").css("display","inline");
+        //人卫教材编写情况必填
+        if(data.is_pmph_textbook_required == "1"){
+            $("#rwsjcbx_bt").css("display","inline");
+            jsonStr=jsonStr+"{\"id\":\"pmph_material_name\",\"content\":\"人卫社教材编写情况必填\"},{\"id\":\"pmph_publish_date\",\"content\":\"出版时间不能为空\"},{\"id\":\"pmph_isbn\",\"content\":\"教材标准书号不能为空\"},";
+        }else{
+            $("#rwsjcbx_xt").css("display","inline");
+        }
     }
     //其他社教材编写情况
     if(data.is_textbook_used == "1"){
         $("#qtjcbxqk").css("display","block");
-    }
-    //其他社教材编写情况必填
-    if(data.is_textbook_required == "1"){
-        $("#qtjcbxqk_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"jcb_material_name\",\"content\":\"其他社教材名称不能为空\"},{\"id\":\"jcb_publisher\",\"content\":\"出版单位不能为空\"},{\"id\":\"jcb_publish_date\",\"content\":\"出版时间不能为空\"},{\"id\":\"jcb_isbn\",\"content\":\"教材标准书号不能为空\"},";
-    }else{
-        $("#qtjcbxqk_xt").css("display","inline");
+        //其他社教材编写情况必填
+        if(data.is_textbook_required == "1"){
+            $("#qtjcbxqk_bt").css("display","inline");
+            jsonStr=jsonStr+"{\"id\":\"jcb_material_name\",\"content\":\"其他社教材名称不能为空\"},{\"id\":\"jcb_publisher\",\"content\":\"出版单位不能为空\"},{\"id\":\"jcb_publish_date\",\"content\":\"出版时间不能为空\"},{\"id\":\"jcb_isbn\",\"content\":\"教材标准书号不能为空\"},";
+        }else{
+            $("#qtjcbxqk_xt").css("display","inline");
+        }
     }
     //参加人卫慕课、数字教材编写情况
     if(data.is_mooc_digital_used == "1"){
         $("#digital").css("display","block");
-    }
-    //参加人卫慕课、数字教材编写情况必填
-    if(data.is_mooc_digital_required == "1"){
-        $("#digital_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"mooc_content\",\"content\":\"人卫慕课、数字教材编写情况必填\"},";
-    }else{
-        $("#digital_xt").css("display","inline");
+        //参加人卫慕课、数字教材编写情况必填
+        if(data.is_mooc_digital_required == "1"){
+            $("#digital_bt").css("display","inline");
+            jsonStr=jsonStr+"{\"id\":\"mooc_content\",\"content\":\"人卫慕课、数字教材编写情况必填\"},";
+        }else{
+            $("#digital_xt").css("display","inline");
+        }
     }
     //精品课程建设情况
     if(data.is_course_used == "1"){
         $("#gjjpkcjs").css("display","block");
-    }
-    //精品课程建设情况必填
-    if(data.is_course_required == "1"){
-        $("#gjjpkcjs_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"gj_course_name\",\"content\":\"精品课程建设情况必填\"},{\"id\":\"gj_class_hour\",\"content\":\"课程全年课时不能为空\"},";
-    }else{
-        $("#gjjpkcjs_xt").css("display","inline");
+        //精品课程建设情况必填
+        if(data.is_course_required == "1"){
+            $("#gjjpkcjs_bt").css("display","inline");
+            jsonStr=jsonStr+"{\"id\":\"gj_course_name\",\"content\":\"精品课程建设情况必填\"},{\"id\":\"gj_class_hour\",\"content\":\"课程全年课时不能为空\"},";
+        }else{
+            $("#gjjpkcjs_xt").css("display","inline");
+        }
     }
     //科研情况
     if(data.is_research_used == "1"){
         $("#zjkyqk").css("display","block");
-    }
-    //科研情况必填
-    if(data.is_research_required == "1"){
-        $("#zjkyqk_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"zjk_research_name\",\"content\":\"科研情况必填\"},{\"id\":\"zjk_award\",\"content\":\"获奖情况不能为空\"},{\"id\":\"zjk_approval_unit\",\"content\":\"获奖审批单位不能为空\"},";
-    }else{
-        $("#zjkyqk_xt").css("display","inline");
+        //科研情况必填
+        if(data.is_research_required == "1"){
+            $("#zjkyqk_bt").css("display","inline");
+            jsonStr=jsonStr+"{\"id\":\"zjk_research_name\",\"content\":\"科研情况必填\"},{\"id\":\"zjk_award\",\"content\":\"获奖情况不能为空\"},{\"id\":\"zjk_approval_unit\",\"content\":\"获奖审批单位不能为空\"},";
+        }else{
+            $("#zjkyqk_xt").css("display","inline");
+        }
     }
     //主编学术专著情况
     if(data.is_monograph_used == "1"){
         $("#zbxszz").css("display","block");
-    }
-    //主编学术专著情况必填
-    if(data.is_monograph_required == "1"){
-        $("#zbxszz_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"zb_monograph_name\",\"content\":\"主编学术专著情况必填\"},{\"id\":\"zb_publisher\",\"content\":\"专著出版单位不能为空\"},{\"id\":\"zb_publish_date\",\"content\":\"专著出版时间不能为空\"},";
-    }else{
-        $("#zbxszz_xt").css("display","inline");
+        //主编学术专著情况必填
+        if(data.is_monograph_required == "1"){
+            $("#zbxszz_bt").css("display","inline");
+            jsonStr=jsonStr+"{\"id\":\"zb_monograph_name\",\"content\":\"主编学术专著情况必填\"},{\"id\":\"zb_publisher\",\"content\":\"专著出版单位不能为空\"},{\"id\":\"zb_publish_date\",\"content\":\"专著出版时间不能为空\"},";
+        }else{
+            $("#zbxszz_xt").css("display","inline");
+        }
     }
     //出版行业获奖情况
     if(data.is_publish_reward_used == "1"){
         $("#publish").css("display","block");
-    }
-    //出版行业获奖情况必填
-    if(data.is_publish_reward_required == "1"){
-        $("#publish_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"pu_reward_name\",\"content\":\"出版行业获奖情况必填\"},{\"id\":\"pu_award_unit\",\"content\":\"评奖单位不能为空\"},{\"id\":\"pu_reward_date\",\"content\":\"获奖时间不能为空\"},";
-    }else{
-        $("#publish_xt").css("display","inline");
+        //出版行业获奖情况必填
+        if(data.is_publish_reward_required == "1"){
+            $("#publish_bt").css("display","inline");
+            jsonStr=jsonStr+"{\"id\":\"pu_reward_name\",\"content\":\"出版行业获奖情况必填\"},{\"id\":\"pu_award_unit\",\"content\":\"评奖单位不能为空\"},{\"id\":\"pu_reward_date\",\"content\":\"获奖时间不能为空\"},";
+        }else{
+            $("#publish_xt").css("display","inline");
+        }
     }
     //SCI论文投稿及影响因子情况
     if(data.is_sci_used == "1"){
         $("#sci").css("display","block");
-    }
-    //SCI论文投稿及影响因子情况必填
-    if(data.is_sci_required == "1"){
-        $("#sci_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"sci_paper_name\",\"content\":\"SCI论文投稿及影响因子情况必填\"},{\"id\":\"sci_journal_name\",\"content\":\"期刊名称不能为空\"},{\"id\":\"sci_factor\",\"content\":\"sci影响因子不能为空\"},{\"id\":\"sci_publish_date\",\"content\":\"发表时间不能为空\"},";
-    }else{
-        $("#sci_xt").css("display","inline");
+        //SCI论文投稿及影响因子情况必填
+        if(data.is_sci_required == "1"){
+            $("#sci_bt").css("display","inline");
+            jsonStr=jsonStr+"{\"id\":\"sci_paper_name\",\"content\":\"SCI论文投稿及影响因子情况必填\"},{\"id\":\"sci_journal_name\",\"content\":\"期刊名称不能为空\"},{\"id\":\"sci_factor\",\"content\":\"sci影响因子不能为空\"},{\"id\":\"sci_publish_date\",\"content\":\"发表时间不能为空\"},";
+        }else{
+            $("#sci_xt").css("display","inline");
+        }
     }
     //临床医学获奖情况
     if(data.is_clinical_reward_used == "1"){
         $("#clinical").css("display","block");
-    }
-    //临床医学获奖情况必填
-    if(data.is_clinical_reward_required == "1"){
-        $("#clinical_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"cl_reward_name\",\"content\":\"临床医学获奖情况必填\"},{\"id\":\"cl_reward_date\",\"content\":\"获奖时间不能为空\"},";
-    }else{
-        $("#clinical_xt").css("display","inline");
+        //临床医学获奖情况必填
+        if(data.is_clinical_reward_required == "1"){
+            $("#clinical_bt").css("display","inline");
+            jsonStr=jsonStr+"{\"id\":\"cl_reward_name\",\"content\":\"临床医学获奖情况必填\"},{\"id\":\"cl_reward_date\",\"content\":\"获奖时间不能为空\"},";
+        }else{
+            $("#clinical_xt").css("display","inline");
+        }
     }
     //学术荣誉授予情况
     if(data.is_acade_reward_used == "1"){
         $("#acade").css("display","block");
-    }
-    //学术荣誉授予情况必填
-    if(data.is_acade_reward_required == "1"){
-        $("#acade_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"ac_reward_name\",\"content\":\"学术荣誉授予情况必填\"},{\"id\":\"ac_reward_date\",\"content\":\"荣誉授予时间不能为空\"},";
-    }else{
-        $("#acade_xt").css("display","inline");
+        //学术荣誉授予情况必填
+        if(data.is_acade_reward_required == "1"){
+            $("#acade_bt").css("display","inline");
+            jsonStr=jsonStr+"{\"id\":\"ac_reward_name\",\"content\":\"学术荣誉授予情况必填\"},{\"id\":\"ac_reward_date\",\"content\":\"荣誉授予时间不能为空\"},";
+        }else{
+            $("#acade_xt").css("display","inline");
+        }
     }
     //编写内容意向表
     if(data.is_intention_used == "1"){
         $("#intention").css("display","block");
-    }
-    //编写内容意向表必填
-    if(data.is_intention_required == "1"){
-        $("#intention_bt").css("display","inline");
-        jsonStr=jsonStr+"{\"id\":\"intention_content\",\"content\":\"意向内容必填\"},";
-    }else{
-        $("#intention_xt").css("display","inline");
+        //编写内容意向表必填
+        if(data.is_intention_required == "1"){
+            $("#intention_bt").css("display","inline");
+            jsonStr=jsonStr+"{\"id\":\"intention_content\",\"content\":\"意向内容必填\"},";
+        }else{
+            $("#intention_xt").css("display","inline");
+        }
     }
 
 }
@@ -693,8 +693,8 @@ function add_zbxszz(){
         "<td><input class='cg_input' name='zb_monograph_date' id='zb_monograph_date_"+num+"' value='' style='width: 120px;' calendar format=\"'yyyy-mm-dd'\" placeholder='发表日期'/></td>"+
         "<td style='color: #333333;'>"+
         "<table class='radio_tb' style='width: 140px;'><tr>"+
-        "<td><input type='radio' name='is_self_paid_"+num+"' value='0' checked='checked'/>自费</td>"+
-        "<td><input type='radio' name='is_self_paid_"+num+"' value='1' />公费</td>"+
+        "<td><input type='radio' name='is_self_paid_"+num+"' value='0' checked='checked'/>公费</td>"+
+        "<td><input type='radio' name='is_self_paid_"+num+"' value='1' />自费</td>"+
         "</tr></table>"+
         "<input type='hidden' name='is_self_paid' value='is_self_paid_"+num+"' /></td>"+
         "<td><input class='cg_input' name='zb_publisher' value='' id='zb_publisher_"+num+"' style='width: 180px;' placeholder='出版单位'  maxlength='16'/></td>"+
