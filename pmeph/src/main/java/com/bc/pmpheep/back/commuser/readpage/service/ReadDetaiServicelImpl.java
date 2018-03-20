@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bc.pmpheep.back.util.RouteUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -61,6 +62,7 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 
 		}else {
 			map.put("code","no");
+			map.put("image_url", RouteUtil.bookAvatar(map.get("image_url")));
 		}
 		return map;
 	}
