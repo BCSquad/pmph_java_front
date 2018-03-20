@@ -572,8 +572,8 @@
 					<tbody>
 						<c:if test="${empty gjghjcList[0]}">
 						 <tr>
-							<td><input class="cg_input" maxlength="33" name="hj_material_name" id="hj_material_name" value="" style="width: 300px;" placeholder="教材名称"/></td>
-							<td><input class="cg_input" maxlength="16" name="hj_isbn" value="" style="width: 110px;" placeholder="标准书号"/></td>
+							<td><input class="cg_input" maxlength="80" name="hj_material_name" id="hj_material_name" value="" style="width: 300px;" placeholder="教材名称"/></td>
+							<td><input class="cg_input" maxlength="50" name="hj_isbn" value="" style="width: 110px;" placeholder="标准书号"/></td>
 							 <td><input class="cg_input" name="hj_rank_text" id="hj_rank_text" value="" style="width: 300px;" placeholder="教材级别" maxlength="50"/></td>
 							<td><input class="cg_input" maxlength="33" name="hj_note" value="" style="width: 250px;" placeholder="备注"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_gjghjc()"/></td>
@@ -581,7 +581,7 @@
 						<c:forEach var="list" items="${gjghjcList}" varStatus="status">
 							<tr id="gjghjc_${status.count}">
 								<td><input class="cg_input" maxlength="33" name="hj_material_name" id="hj_material_name_${status.count}" value="${list.material_name}" style="width: 300px;" placeholder="教材名称"/></td>
-								<td><input class="cg_input" maxlength="16" name="hj_isbn" value="${list.isbn}" id="hj_isbn_${status.count}" style="width: 110px;" placeholder="标准书号"/></td>
+								<td><input class="cg_input" maxlength="50" name="hj_isbn" value="${list.isbn}" id="hj_isbn_${status.count}" style="width: 110px;" placeholder="标准书号"/></td>
 								<td><input class="cg_input" name="hj_rank_text" id="hj_rank_text_${status.count}" value="${list.rank_text}" style="width: 300px;" placeholder="教材级别" maxlength="50"/></td>
 								<td><input class="cg_input" maxlength="33" name="hj_note" value="${list.note}" style="width: 250px;" placeholder="备注"/>
 									<input type="hidden" name="zdjy" value="hj_material_name_${status.count},hj_isbn_${status.count}"/>
@@ -652,7 +652,7 @@
 								<input type="hidden" name="pmph_is_digital_editor" value="pmph_is_digital_editor_a" />
 							</td>
 							<td><input class="cg_input" id="pmph_publish_date" name="pmph_publish_date" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  value="" style="width: 100px;"/></td>
-							<td><input class="cg_input" maxlength="16" id="pmph_isbn" name="pmph_isbn" value="" style="width: 100px;" placeholder="标准书号"/></td>
+							<td><input class="cg_input" maxlength="50" id="pmph_isbn" name="pmph_isbn" value="" style="width: 100px;" placeholder="标准书号"/></td>
 							<td><input class="cg_input" maxlength="33" id="pmph_note" name="pmph_note" value="" placeholder="备注" style="width: 260px;"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_rwsjcbx()"/></td>
 						</tr> </c:if>
@@ -687,7 +687,7 @@
 								<input type="hidden" name="pmph_is_digital_editor" value="pmph_is_digital_editor_${status.count}" />
 							</td>
 							<td><input class="cg_input" placeholder="出版时间" id="pmph_publish_date_${status.count}" calendar format="'yyyy-mm-dd'"  z-index="100" name="pmph_publish_date" value="${list.publish_date}" style="width: 100px;"/></td>
-							<td><input class="cg_input" name="pmph_isbn" id="pmph_isbn_${status.count}" value="${list.isbn}" style="width: 100px;" placeholder="标准书号"/></td>
+							<td><input class="cg_input" name="pmph_isbn" id="pmph_isbn_${status.count}" value="${list.isbn}" style="width: 100px;" placeholder="标准书号" maxlength="50"/></td>
 							<td><input class="cg_input" name="pmph_note" value="${list.note}" style="width: 260px;" placeholder="备注"/>
 								<input type="hidden" name="zdjy" value="pmph_material_name_${status.count},pmph_publish_date_${status.count},pmph_isbn_${status.count}"/>
 							</td>
@@ -759,7 +759,7 @@
 							</td>
 							<td><input class="cg_input" maxlength="16" name="jcb_publisher" value="" style="width: 100px;" placeholder="出版社"/></td>
 							<td><input class="cg_input" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="jcb_publish_date" value="" style="width: 100px;"/></td>
-							<td><input class="cg_input" maxlength="16" name="jcb_isbn" value="" style="width: 100px;" placeholder="标准书号"/></td>
+							<td><input class="cg_input" maxlength="50" name="jcb_isbn" value="" style="width: 100px;" placeholder="标准书号"/></td>
 							<td><input class="cg_input" maxlength="33" name="jcb_note" value="" placeholder="备注" style="width: 130px;"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jcbx()"/></td>
 						</tr> </c:if>
@@ -795,7 +795,7 @@
 								</td>
 								<td><input class="cg_input" name="jcb_publisher" id="jcb_publisher_${status.count}" value="${list.publisher}" style="width: 100px;" placeholder="出版社"/></td>
 								<td><input class="cg_input" placeholder="出版时间" id="jcb_publish_date_${status.count}" calendar format="'yyyy-mm-dd'"  z-index="100" name="jcb_publish_date" value="${list.publish_date}" style="width: 100px;"/></td>
-								<td><input class="cg_input" name="jcb_isbn" id="jcb_isbn_${status.count}" value="${list.isbn}" style="width: 100px;" placeholder="标准书号"/></td>
+								<td><input class="cg_input" name="jcb_isbn" id="jcb_isbn_${status.count}" value="${list.isbn}" style="width: 100px;" placeholder="标准书号" maxlength="50"/></td>
 								<td><input class="cg_input" name="jcb_note" value="${list.note}" style="width: 230px;" placeholder="备注"/>
 									<input type="hidden" name="zdjy" value="jcb_material_name_${status.count},jcb_publisher_${status.count},jcb_publish_date_${status.count},jcb_isbn_${status.count}"/>
 								</td>
@@ -971,8 +971,8 @@
 							 <td><input class="cg_input" name="zb_monograph_date" id="zb_monograph_date" value="" style="width: 120px;" calendar format="'yyyy-mm-dd'" placeholder="发表日期"/></td>
 							 <td style="color: #333333;">
 								<table class="radio_tb" style="width: 140px;"><tr>
-									<td><input type="radio" name="is_self_paid_a" value="0" checked="checked"/>自费</td>
-									<td><input type="radio" name="is_self_paid_a" value="1" />公费</td>
+									<td><input type="radio" name="is_self_paid_a" value="0" checked="checked"/>公费</td>
+									<td><input type="radio" name="is_self_paid_a" value="1" />自费</td>
 								</tr></table>
 								<input type="hidden" name="is_self_paid" value="is_self_paid_a" />
 							</td>
@@ -1089,8 +1089,8 @@
 					<tbody>
 						<c:if test="${empty sciList[0]}">
 						 <tr>
-							<td><input class="cg_input" name="sci_paper_name" id="sci_paper_name" value="" style="width: 300px;" placeholder="论文名称" maxlength="45"/></td>
-							<td><input class="cg_input" name="sci_journal_name" value="" style="width: 130px;" placeholder="期刊名称" maxlength="16"/></td>
+							<td><input class="cg_input" name="sci_paper_name" id="sci_paper_name" value="" style="width: 300px;" placeholder="论文名称" maxlength="50"/></td>
+							<td><input class="cg_input" name="sci_journal_name" value="" style="width: 130px;" placeholder="期刊名称" maxlength="50"/></td>
 							<td><input class="cg_input" name="sci_factor" value="" style="width: 170px;" placeholder="期刊SCI影响因子" maxlength="7"/></td>
 							<td><input class="cg_input" name="sci_publish_date" value="" style="width: 110px;" calendar format="'yyyy-mm-dd'" placeholder="发表时间"/></td>
 							<td><input class="cg_input" name="sci_note" value="" style="width: 250px;" placeholder="备注" maxlength="33"/></td>
@@ -1098,8 +1098,8 @@
 						</tr> </c:if>
 						<c:forEach var="list" items="${sciList}" varStatus="status">
 							<tr id="sci_${status.count}">
-								<td><input class="cg_input" name="sci_paper_name" id="sci_paper_name_${status.count}" value="${list.paper_name}" style="width: 300px;" placeholder="论文名称" maxlength="16"/></td>
-								<td><input class="cg_input" name="sci_journal_name" id="sci_journal_name_${status.count}" value="${list.journal_name}" style="width: 130px;" placeholder="期刊名称" maxlength="16"/></td>
+								<td><input class="cg_input" name="sci_paper_name" id="sci_paper_name_${status.count}" value="${list.paper_name}" style="width: 300px;" placeholder="论文名称" maxlength="50"/></td>
+								<td><input class="cg_input" name="sci_journal_name" id="sci_journal_name_${status.count}" value="${list.journal_name}" style="width: 130px;" placeholder="期刊名称" maxlength="50"/></td>
 								<td><input class="cg_input" name="sci_factor" id="sci_factor_${status.count}" value="${list.factor}" style="width: 170px;" placeholder="期刊SCI影响因子" maxlength="7"/></td>
 								<td><input class="cg_input" name="sci_publish_date" id="sci_publish_date_${status.count}" value="${list.publish_date}" style="width: 110px;" calendar format="'yyyy-mm-dd'" placeholder="发表时间"/></td>
 								<td><input class="cg_input" name="sci_note" value="${list.note}" style="width: 250px;" placeholder="备注" maxlength="33"/>

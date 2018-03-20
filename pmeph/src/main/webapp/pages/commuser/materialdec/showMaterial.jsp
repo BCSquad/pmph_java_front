@@ -504,8 +504,8 @@
 							<td>${list.monograph_name}</td>
 							<td>${list.monograph_date}</td>
 							<td>
-								<c:if test="${list.is_self_paid == '0'}">自费</c:if>
-								<c:if test="${list.is_self_paid == '1'}">公费</c:if>
+								<c:if test="${list.is_self_paid == '0'}">公费</c:if>
+								<c:if test="${list.is_self_paid == '1'}">自费</c:if>
 							</td>
 							<td>${list.publisher}</td>
 							<td>${list.publish_date}</td>

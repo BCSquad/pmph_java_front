@@ -424,8 +424,8 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><input class="cg_input" name="hj_material_name" id="hj_material_name" value="" style="width: 300px;" placeholder="教材名称" maxlength="33"/></td>
-							<td><input class="cg_input" name="hj_isbn" id="hj_isbn" value="" style="width: 110px;" placeholder="标准书号" maxlength="16"/></td>
+							<td><input class="cg_input" name="hj_material_name" id="hj_material_name" value="" style="width: 300px;" placeholder="教材名称" maxlength="80"/></td>
+							<td><input class="cg_input" name="hj_isbn" id="hj_isbn" value="" style="width: 110px;" placeholder="标准书号" maxlength="50"/></td>
 							<td><input class="cg_input" name="hj_rank_text" id="hj_rank_text" value="" style="width: 300px;" placeholder="教材级别" maxlength="50"/></td>
 							<td><input class="cg_input" name="hj_note" value="" style="width: 250px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_gjghjc()"/></td>
@@ -485,7 +485,7 @@
 								<input type="hidden" name="pmph_is_digital_editor" value="pmph_is_digital_editor_1" />
 							</td>
 							<td><input class="cg_input" name="pmph_publish_date" id="pmph_publish_date" value="" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  style="width: 100px;"/></td>
-							<td><input class="cg_input" name="pmph_isbn" id="pmph_isbn" value="" style="width: 100px;" placeholder="标准书号" maxlength="16"/></td>
+							<td><input class="cg_input" name="pmph_isbn" id="pmph_isbn" value="" style="width: 100px;" placeholder="标准书号" maxlength="50"/></td>
 							<td><input class="cg_input" name="pmph_note" id="pmph_note" value="" style="width: 260px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_rwsjcbx()"/></td>
 						</tr>
@@ -546,7 +546,7 @@
 							</td>
 							<td><input class="cg_input" name="jcb_publisher" id="jcb_publisher" value="" style="width: 100px;" placeholder="出版社" maxlength="16"/></td>
 							<td><input class="cg_input" placeholder="出版时间" id="jcb_publish_date" calendar format="'yyyy-mm-dd'"  z-index="100" name="jcb_publish_date" value="" style="width: 100px;"/></td>
-							<td><input class="cg_input" name="jcb_isbn" id="jcb_isbn" value="" style="width: 100px;" placeholder="标准书号" maxlength="16"/></td>
+							<td><input class="cg_input" name="jcb_isbn" id="jcb_isbn" value="" style="width: 100px;" placeholder="标准书号" maxlength="50"/></td>
 							<td><input class="cg_input" name="jcb_note" value="" style="width: 130px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jcbx()"/></td>
 						</tr>
@@ -664,8 +664,8 @@
 							<td><input class="cg_input" name="zb_monograph_date" id="zb_monograph_date" value="" style="width: 120px;" calendar format="'yyyy-mm-dd'" placeholder="发表日期"/></td>
 							<td style="color: #333333;">
 								<table class="radio_tb" style="width: 140px;"><tr>
-									<td><input type="radio" name="is_self_paid_1" value="0" checked="checked"/>自费</td>
-									<td><input type="radio" name="is_self_paid_1" value="1" />公费</td>
+									<td><input type="radio" name="is_self_paid_1" value="0" checked="checked"/>公费</td>
+									<td><input type="radio" name="is_self_paid_1" value="1" />自费</td>
 								</tr></table>
 								<input type="hidden" name="is_self_paid" value="is_self_paid_1" />
 							</td>
@@ -733,7 +733,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><input class="cg_input" name="sci_paper_name" id="sci_paper_name" value="" style="width: 300px;" placeholder="论文名称" maxlength="45"/></td>
+							<td><input class="cg_input" name="sci_paper_name" id="sci_paper_name" value="" style="width: 300px;" placeholder="论文名称" maxlength="50"/></td>
 							<td><input class="cg_input" name="sci_journal_name" id="sci_journal_name"  value="" style="width: 130px;" placeholder="期刊名称" maxlength="16"/></td>
 							<td><input class="cg_input" name="sci_factor" id="sci_factor" value="" style="width: 170px;" placeholder="期刊SCI影响因子" maxlength="7"/></td>
 							<td><input class="cg_input" name="sci_publish_date" id="sci_publish_date" value="" style="width: 110px;" calendar format="'yyyy-mm-dd'" placeholder="发表时间"/></td>

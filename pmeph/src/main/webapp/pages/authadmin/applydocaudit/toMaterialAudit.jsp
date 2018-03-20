@@ -341,11 +341,7 @@
 						<tr>
 							<td>${list.material_name}</td>
 							<td>${list.isbn}</td>
-							<td>
-								<c:if test="${list.rank == '1'}">教育部十二五</c:if>
-								<c:if test="${list.rank == '2'}">国家卫计委十二五</c:if>
-								<c:if test="${list.rank == '3'}">其他</c:if>
-							</td>
+							<td>${list.rank_text}</td>
 							<td>${list.note}</td>
 						</tr>
 					</c:forEach>
@@ -553,8 +549,8 @@
 							<td>${list.monograph_name}</td>
 							<td>${list.monograph_date}</td>
 							<td>
-								<c:if test="${list.is_self_paid == '0'}">自费</c:if>
-								<c:if test="${list.is_self_paid == '1'}">公费</c:if>
+								<c:if test="${list.is_self_paid == '1'}">自费</c:if>
+								<c:if test="${list.is_self_paid == '0'}">公费</c:if>
 							</td>
 							<td>${list.publisher}</td>
 							<td>${list.publish_date}</td>
