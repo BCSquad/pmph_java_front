@@ -311,8 +311,6 @@
 			<div>
 				<span id="tsxz_span7"></span>
 				<span class="tsxz_title">人卫社教材编写情况</span>
-				<span class="tsxz_ts" id="rwsjcbx_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
-				<span class="tsxz_xt" id="rwsjcbx_xt" >（选填）</span>
 			</div>
 			<div class="content">
 				<table class="tab_2" id="tab_rwsjcbx">
@@ -533,7 +531,8 @@
 							<td>备注</td>
 						</tr>
 					</thead>
-					<tbody><c:forEach var="list" items="${publishList}">
+					<tbody>
+					<c:forEach var="list" items="${publishList}">
 						<tr>
 							<td>${list.reward_name}</td>
 							<td>${list.award_unit}</td>
@@ -561,7 +560,8 @@
 							<td>备注</td>
 						</tr>
 					</thead>
-					<tbody><c:forEach var="list" items="${sciList}">
+					<tbody>
+					<c:forEach var="list" items="${sciList}">
 						<tr>
 							<td>${list.paper_name}</td>
 							<td>${list.journal_name}</td>
@@ -589,7 +589,8 @@
 							<td>备注</td>
 						</tr>
 					</thead>
-					<tbody><c:forEach var="list" items="${clinicalList}">
+					<tbody>
+					<c:forEach var="list" items="${clinicalList}">
 						<tr>
 							<td>${list.reward_name}</td>
 							<td>
@@ -620,7 +621,8 @@
 							<td>备注</td>
 						</tr>
 					</thead>
-					<tbody><c:forEach var="list" items="${acadeList}">
+					<tbody>
+					<c:forEach var="list" items="${acadeList}">
 						<tr>
 							<td>${list.reward_name}</td>
 							<td>

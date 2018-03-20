@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.personalcenter.service;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.bc.pmpheep.back.commuser.collection.dao.BookCollectionDao;
 import org.apache.ibatis.javassist.expr.Instanceof;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,6 +24,9 @@ import com.bc.pmpheep.general.pojo.Content;
 import com.bc.pmpheep.general.service.ContentService;
 import com.bc.pmpheep.general.service.FileService;
 import com.mongodb.gridfs.GridFSDBFile;
+import org.springframework.util.StringUtils;
+
+import javax.annotation.Resource;
 
 @Service("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
 public class PersonalServiceImpl implements PersonalService {
@@ -39,6 +44,8 @@ public class PersonalServiceImpl implements PersonalService {
 	@Autowired
 	@Qualifier("com.bc.pmpheep.general.service.FileService")
 	FileService fileService;
+
+
 
 	@Override
 	public List<PersonalNewMessage> queryMyCol(Map<String, Object> permap) {
@@ -519,5 +526,44 @@ public class PersonalServiceImpl implements PersonalService {
 		}
 		return mylist;
 	}
+
+	@Override
+	public List<Map<String, Object>> listMyFavorites(PageParameter<Map<String, Object>> pageParameter) {
+		// 查询我的收藏
+		List<Map<String, Object>> list = personaldao.listMyFavorites(pageParameter);
+		if(list.size()>0){
+			for (Map<String, Object> map : list) {
+				if("DEFAULT".equals(map.get("image_url"))){
+					map.put("image_url", "statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+				}
+				if(map.get("f_type")==1){
+					int like=personaldao.queryLikesb((BigInteger) map.get("id"),(BigInteger) pageParameter.getParameter().get("logUserId"));
+					map.put("like", like);
+				}else if(map.get("f_type")==2){
+					int like=personaldao.queryLikesc((BigInteger) map.get("id"),(BigInteger) pageParameter.getParameter().get("logUserId"));
+					map.put("like", like);
+				}
+				if("DEFAULT".equals(map.get("avatar"))||"".equals(map.get("avatar"))|| StringUtils.isEmpty(map.get("avatar"))){
+					map.put("avatar", "statics/image/deficon.png");
+				}else{
+					map.put("avatar", "file/download/"+map.get("avatar")+".action");
+				}
+				if(map.get("category_id")!=null&& "2".equals(map.get("category_id").toString())){
+					map.put("skip", "inforeport/toinforeport.action?id="+map.get("id"));
+				}else if(map.get("category_id")!=null&& "1".equals(map.get("category_id").toString())){
+					map.put("skip", "articledetail/toPage.action?wid="+map.get("id"));
+				}
+				if(null!=map.get("cover")) map.put("imgpath", RouteUtil.articleAvatar(map.get("cover").toString()));
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public int listMyFavoritesCount(PageParameter<Map<String, Object>> pageParameter) {
+		Integer count = personaldao.listMyFavoritesCount(pageParameter);
+		return count;
+	}
+
 
 }

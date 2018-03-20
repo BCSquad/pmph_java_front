@@ -125,7 +125,7 @@ public class DataAuditServiceImpl implements DataAuditService {
 		Long frendId=Long.valueOf(writer_id);
 		String mid=String.valueOf(dmap.get("material_id"));
 		Long material_id=Long.valueOf(mid);
-        String returnCause = dmap.get("return_cause").toString();
+        String returnCause = map.get("return_cause").toString();
 		senNewMsgBack(material_id,thisId, new Short("3"), frendId, new Short("2"), "系统消息", " 	抱歉，" +
                 "您提交的《"+dmap.get("material_name").toString()+"》申报表被[学校管理员]退回，退回原因：" +returnCause+
                 "，请您核对后重试!");
