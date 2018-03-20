@@ -47,19 +47,29 @@
         <div class="div_content_left">
             <span class="clicked" id="infoReport" style="margin-right: 15px;"
                   onclick="ChangeDiv('infoReport')">${materialId!=null && materialId!=''? '社区':'信息' }快报</span>
-            <span class="clickbefore mouse-gesture" id="selectAnnco" onclick="ChangeDiv('selectAnnco')">遴选公告</span>
+               <c:if test="${materialId==null || materialId==''}">
+                   <span class="clickbefore mouse-gesture" id="selectAnnco" onclick="ChangeDiv('selectAnnco')">遴选公告</span>
+               </c:if>
         </div>
         <div class="div_content_right">
-            <span style="color: #999999;">排序：</span>
+           <%-- <c:if test="${materialId!=null && materialId!=''}">
+
+            </c:if>
+            <c:if test="${materialId==null || materialId==''}">--%>
+            <span style="color: #999999;">${materialId!=null && materialId!=''? '分类':'排序' }：</span>
             <span style="color: #333333;">
             <div style="display: inline-block;text-align:left;color: #333333;">
                 <select id="sort-wrapper" name="sort-wrapper">
-				    <option value="1">综合</option>
-                	<option value="2">最新</option>
-               		 <option value="3">最热</option>
+				    <option value="0">${materialId!=null && materialId!=''? '全部':'综合' }</option>
+                	<option value="1">${materialId!=null && materialId!=''? '文章':'最新' }</option>
+                    <option value="2">${materialId!=null && materialId!=''? '信息快报':'最热' }</option>
+                    <c:if test="${materialId!=null && materialId!=''}">
+                        <option value="3">遴选公告</option>
+                    </c:if>
 				</select>
 			</div>
             </span>
+        <%-- </c:if>--%>
         </div>
     </div>
     <div style="margin-top:25px;">

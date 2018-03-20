@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.cms.bean;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import org.apache.ibatis.type.Alias;
@@ -79,7 +80,56 @@ public class CmsInfoLettersList {
      * cms类型id
      */
     private int categoryId;
-    
+
+	/**
+	 *是否是教材入口
+	 */
+	private boolean isMaterialEntry;
+	/**
+	 * 教材简介
+	 */
+	private  String  notice;
+	/**
+	 *教材的截止时间
+	 */
+	private Date deadline;
+	/**
+	 *教材id
+	 */
+    private Long  materialId;
+
+	public Long getMaterialId() {
+		return materialId;
+	}
+
+	public void setMaterialId(Long materialId) {
+		this.materialId = materialId;
+	}
+
+	public Date getDeadline() {
+		return deadline;
+	}
+
+	public void setDeadline(Date deadline) {
+		this.deadline = deadline;
+	}
+
+	public boolean isMaterialEntry() {
+		return isMaterialEntry;
+	}
+
+	public void setMaterialEntry(boolean materialEntry) {
+		isMaterialEntry = materialEntry;
+	}
+
+	public String getNotice() {
+		return notice;
+	}
+
+	public void setNotice(String notice) {
+		this.notice = notice;
+	}
+
 	public int getCategoryId() {
 		return categoryId;
 	}

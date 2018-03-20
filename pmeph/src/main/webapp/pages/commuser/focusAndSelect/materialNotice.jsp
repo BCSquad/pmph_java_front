@@ -54,9 +54,9 @@
             <span style="color: #999999;">排序：</span>
              <div style="display: inline-block;text-align:left;color: #333333;">
                 <select id="sort-wrapper" name="sort-wrapper">
-				    <option value="1">综合</option>
-                	<option value="2">最新</option>
-               		 <option value="3">最热</option>
+				    <option value="0">综合</option>
+                	<option value="1">最新</option>
+               		 <option value="2">最热</option>
 				</select>
              </div>
         </div>
