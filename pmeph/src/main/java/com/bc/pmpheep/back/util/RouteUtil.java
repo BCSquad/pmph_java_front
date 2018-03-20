@@ -1,5 +1,7 @@
 package com.bc.pmpheep.back.util;
 
+import org.springframework.util.StringUtils;
+
 /**
  * 
  * 
@@ -30,6 +32,8 @@ public class RouteUtil {
 	public static final String MONGODB_GROUP_FILE = "groupfile/download/";
 	// mongoDB文件的前缀(普通)
 	public static final String MONGODB_FILE = "file/download/";
+	//图书 默认图片
+	public static final String DEFAULT_BOOK = "statics/image/564f34b00cf2b738819e9c35_122x122!.jpg";
 
 	/**
 	 * 
@@ -90,6 +94,22 @@ public class RouteUtil {
 			cover = MONGODB_IMAGE + cover + ".action";
 		}
 		return cover;
+	}
+
+	/**
+	 * 功能描述: 默认图像
+	 * @param image
+	 * @return
+	 */
+	public static String bookAvatar(Object image){
+		String returnValue = "";
+		if (StringUtils.isEmpty(image)||"DEFAULT".equals(image.toString())) {
+			returnValue = DEFAULT_BOOK;
+		}
+		if (!DEFAULT_BOOK.equals(returnValue)) {
+			returnValue = MONGODB_IMAGE + image.toString() + ".action";
+		}
+		return returnValue;
 	}
 
 }

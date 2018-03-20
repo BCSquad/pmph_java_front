@@ -293,7 +293,13 @@ $(function () {
 
     //隐藏PDF阅读按钮
     if ($("#pdf-hidden").val() == 'no') {
-        $("#dpf").hide();
+        //$("#dpf").hide();
+        //$("#dpf").attr("disabled",true);
+        $('#pdf_a').removeAttr('href');//去掉a标签中的href属性
+        $('#pdf_a').removeAttr('onclick');//去掉a标签中的onclick事件
+        $('#pdf_a .xsp2').css({"color":"#999"});
+        $("#dpf").css({"background-color":"#f2f2f2"});
+
     }
 
     morecontent();
