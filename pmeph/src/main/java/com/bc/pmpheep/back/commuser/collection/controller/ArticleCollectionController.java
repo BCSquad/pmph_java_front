@@ -69,10 +69,10 @@ public class ArticleCollectionController extends BaseController{
     	Long writerId=Long.valueOf(userMap.get("id").toString());
         //查询收是否有默认的文章收藏夹，如果没有，就新建一个文章的 默认收藏夹
      	Map<String, Object>  dmap = infoReportDao.queryDefaultFavorite(writerId);
-      	if(dmap==null){
-     		infoReportDao.insertDefaultFavorite(writerId);
-     		dmap = infoReportDao.queryDefaultFavorite(writerId);
-  		}
+		if(dmap==null){
+			infoReportDao.insertDefaultFavorite(writerId);
+			dmap = infoReportDao.queryDefaultFavorite(writerId);
+		}
     	Map<String,Object> map=new HashMap<String, Object>();
     	Map<String,Object> rmap=new HashMap<>();
     	request.setCharacterEncoding("utf-8");

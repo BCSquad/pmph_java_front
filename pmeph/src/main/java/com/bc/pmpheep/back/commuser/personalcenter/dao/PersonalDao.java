@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.personalcenter.dao;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
@@ -260,5 +261,35 @@ public interface PersonalDao {
 
 	//查询当前用户是否参加过调查问卷
 	List<Map<String,Object>> whetherSurvey(PageParameter pageParameter );
+
+	/**
+	 * 我的收藏
+	 *
+	 * @param pageParameter
+	 * @return
+	 */
+	public List<Map<String, Object>> listMyFavorites(PageParameter<Map<String, Object>> pageParameter);
+
+	/**
+	 * 我的收藏总数
+	 *
+	 * @param pageParameter
+	 * @return
+	 */
+	public Integer listMyFavoritesCount(PageParameter<Map<String, Object>> pageParameter);
+
+	/**查询用户是否对某一本书点赞
+	 * @param bookId  BigInteger 书籍id
+	 * @param writerId BigInteger 用户id
+	 * @return
+	 */
+	int queryLikesb(@Param("id") BigInteger id,@Param("logUserId") BigInteger logUserId);
+
+	/**查询用户为某一文章是否点赞
+	 * @param contentId  文章id
+	 * @param writerId   用户id
+	 * @return
+	 */
+	int queryLikesc(@Param("id") BigInteger id,@Param("logUserId") BigInteger logUserId );
 
 }
