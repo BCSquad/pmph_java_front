@@ -27,7 +27,7 @@ a{text-decoration: none}
        float:left;max-width:590px;height:35px;line-height:35px;overflow: hidden;color:#4d4e4e
    }
    .report .center .inright{
-       float:right;width:80px;height:35px;line-height:35px
+       float:right;min-width:80px;height:35px;line-height:35px
    }
    .report .right{
        float:left;text-align: right;width:70px;height:168px;margin-top:10px
