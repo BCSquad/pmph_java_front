@@ -47,6 +47,7 @@
             </div>
             <!--重点学科推荐-->
             <div class="op-link">
+                <div class="re_6" style="margin-top: 10px;margin-left: 40px;">重点学科</div>
                 <c:forEach var="ad3" items="${adInfo3.detailList}" varStatus="status">
                     <c:if test="${status.index==0}">
                         <div class="re_1">
@@ -62,8 +63,7 @@
                     </c:if>
                 </c:forEach>
                 <div class="re_3">
-                    <div class="re_6">重点学科</div>
-                    <div style="margin-top: 17px">
+                    <div style="margin-top: 37px">
                         <div class="re_4">还在为资格考试烦恼？</div>
                         <div class="re_5" onclick="lookdetail()">去看看</div>
                     </div>
