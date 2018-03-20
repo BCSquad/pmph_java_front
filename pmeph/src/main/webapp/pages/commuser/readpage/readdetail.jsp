@@ -222,7 +222,7 @@
                 <div class="left1" id="dpf">
                     <div id="xsp3"></div>
                     <input type="hidden" id="pdf-hidden" value="${map.pdf_code}">
-                    <a href="${map.pdf_url}" style="text-decoration: none"><span class="xsp2">PDF试读</span>
+                    <a href="${map.pdf_url}" style="text-decoration: none" id="pdf_a"><span class="xsp2">PDF试读</span>
                     </a>
                 </div>
                 <div class="left1" style="margin-right: 10px;">
