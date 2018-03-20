@@ -1,0 +1,82 @@
+<link rel="stylesheet" href="$!{contextpath}statics/commuser/personalcenter/myfavorites.css" type="text/css">
+<script src="$!{contextpath}resources/commuser/personalcenter/myfavorites.js"></script>
+
+<div id="listContent">
+#foreach($c in $!{List_map})
+
+    ##书籍
+    #if($!{c.f_type}==1)
+        <div class="collection">
+            <div class="title" >
+                <div class="title-text" >
+                    <a href="$!{contextpath}readdetail/todetail.action?id=$!{c.id}">$!{c.title}</a>
+                </div>
+                <div class="author" >
+                    作者： $!{c.author}
+                </div>
+            </div>
+            <div class="content" style="width: 810px;" >
+                <div class="content-img">
+                    <img src="$!{c.image_url}" />
+                </div>
+                <div class="content-text" style="width: 690px;">
+                    <div class="text" >
+                        $!{c.detail}
+                    </div>
+                    <div class="end">
+                        <div class="foot" style="height:24px;margin-top: 10px">
+                            <span class="span1" onclick="cancelMark('$!{c.mid}','$!{c.bookmarks}','$!{c.id}','$!{c.favorite_id}')">取消收藏</span>
+                            <span class="span2" >$!{c.comments}</span>
+                            <a class="smicon comment" href="$!{contextpath}readdetail/todetail.action?id=$!{c.id}#001"></a>
+                            <span class="#if($!{c.like}>0) span3 #else span2 #end" id="like$!{c.id}">$!{c.likes}</span>
+                            <span  class="smicon #if($!{c.like}>0) good #else nogood #end " onclick="addlike('$!{c.id}')" id="good$!{c.id}"></span>
+                            <span class="span2">$!{c.clicks}</span>
+                            <span class="smicon look"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    #else
+        <div class="collection" >
+            <div class="title">
+                <div class="title-text">
+                    <a href="$!{contextpath}$!{c.skip}"> $!{c.title}</a>
+                </div>
+                <input type="hidden" id="cms$!{c.id}" value="$!{c.id}"/>
+                <div class="tm">
+                   <span class="author-icon" ><img  src="$!{c.avatar}" style="width:25px;height:25px;border-radius: 50%;"/>
+                   </span>
+                    <span class="name">$!{c.author}</span>
+                    <span class="time"><fmt:formatDate  value="$!{c.gmt_create}" pattern="yyyy.MM.dd"/></span>
+                </div>
+            </div>
+            <div class="content">
+                <div  class="content-imgc">
+                    <img src="$!{contextpath}$!{c.imgpath}"/>
+                </div>
+                <div  class="content-text" style="width: 640px;">
+                    <div class="text">
+                        $!{c.detail}
+                    </div>
+                    <div class="end">
+                        <div class="foot">
+                            <span class="span1" onclick="cancelMarkc('$!{c.mid}','$!{c.bookmarks}','$!{c.id}','$!{c.favorite_id}')">取消收藏</span>
+                            <span class="span2" >$!{c.comments}</span>
+                            <a class="smicon comment"  href="$!{contextpath}articledetail/toPage.action?wid=$!{c.id}#001"></a>
+                            <span class="#if($!{c.like}>0)span3 #else span2 #end" id="like$!{c.id}">$!{c.likes}</span>
+                            <span class="smicon #if($!{c.like}>0) good #else nogood #end "  onclick="addlikec('$!{c.id}')" id="good$!{c.id}"></span>
+                            <span class="span2">$!{c.clicks}</span>
+                            <span class="smicon look"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    #end
+
+
+
+#end
+</div>
+

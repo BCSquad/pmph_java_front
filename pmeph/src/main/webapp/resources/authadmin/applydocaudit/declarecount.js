@@ -37,6 +37,7 @@ function selectAll() {
 								+ "</td><td   >" + (n.decid1 ? n.decid1 : '0')
 								+ "</td><td   >" + (n.decid2 ? n.decid2 : '0')
 								+ "</td><td   >" + (n.decid3 ? n.decid3 : '0')
+								+ "</td><td   >" + (n.decid4 ? n.decid4 : '0')
 								+ "</td><td   >" + (n.dp1 ? n.dp1 : '0')
 								+ "</td><td   >" + (n.dp2 ? n.dp2 : '0')
 								+ "</td><td   >" + (n.dp3 ? n.dp3 : '0')

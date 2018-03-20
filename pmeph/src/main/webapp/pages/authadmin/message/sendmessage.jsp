@@ -94,7 +94,7 @@
         </div>
         <div class="appendix">
                          <span class="span1">
-                              <span class="span2">*</span>添加附件
+                             <%-- <span class="span2">*</span>--%>添加附件
                          </span>
             <div style="display: inline;">
                 <span class="icon"></span>

@@ -1198,7 +1198,7 @@
 		d.id = #{declaration_id}
 	</select>
 
-</mapper>
+
 
 <!-- 动态查询 -->
 <!-- <select id="queryWriterUserTrendst" parameterType="PageParameter" resultType="Map"> 
@@ -1288,3 +1288,127 @@
 	WHERE a.writer_id = #{parameter.logUserId} AND a.is_deleted = '0' ) wdsp 
 	on t.table_name = wdsp.wdsp_type and t.table_id=wdsp.wdsp_id where t.writer_user_id 
 	= #{parameter.logUserId} )t </select> -->
+
+<!-- 查看我的收藏 -->
+<select id="listMyFavorites" resultType="java.util.Map"  parameterType="PageParameter">
+	select t.* from
+(
+   (
+	SELECT
+		1 as f_type,
+		b.id AS id,
+		b.bookname AS title,
+		b.author AS author,
+		m.id AS mid,
+		d.detail AS detail,
+		b.bookmarks AS bookmarks,
+		b.comments AS comments,
+		b.likes AS likes,
+		b.clicks AS clicks,
+		m.gmt_create,
+		b.image_url as image_url,
+		m.favorite_id as favorite_id,
+		'' as category_id,
+		'' as cover
+	FROM
+		book_user_mark m
+	LEFT JOIN book b ON m.book_id = b.id
+	LEFT JOIN book_detail d ON b.id = d.book_id
+	WHERE
+		m.favorite_id = #{parameter.favoriteIdb}
+	AND m.writer_id = #{parameter.logUserId}
+
+    )
+UNION
+	(
+		SELECT
+			2 as f_type,
+			c.id AS id,
+			c.title AS title,
+			w.realname AS author,
+			m.id AS mid,
+			c.summary AS detail,
+			c.bookmarks AS bookmarks,
+			c.comments AS comments,
+			c.likes AS likes,
+			c.clicks AS clicks,
+			m.gmt_create,
+			'' as image_url,
+			m.favorite_id as favorite_id,
+			c.category_id as category_id,
+		    c.cover as cover
+		FROM
+			cms_user_mark m
+		LEFT JOIN cms_content c ON m.content_id = c.id
+		LEFT JOIN writer_user w ON c.author_id = w.id
+		WHERE
+			m.favorite_id = #{parameter.favoriteId}
+		AND m.writer_id = #{parameter.logUserId}
+
+	)
+)t
+ORDER BY gmt_create DESC  limit ${start},${pageSize}
+</select>
+
+	<!-- 查我的收藏总数 -->
+	<select id="listMyFavoritesCount" resultType="Integer"
+			parameterType="PageParameter">
+		select count(*) from (
+
+(
+	SELECT
+		b.id AS id,
+		b.bookname AS title,
+		b.author AS author,
+		m.id AS mid,
+		d.detail AS detail,
+		b.bookmarks AS bookmarks,
+		b.comments AS comments,
+		b.likes AS likes,
+		b.clicks AS clicks
+	FROM
+		book_user_mark m
+	LEFT JOIN book b ON m.book_id = b.id
+	LEFT JOIN book_detail d ON b.id = d.book_id
+	WHERE
+		m.favorite_id = #{parameter.favoriteIdb}
+		AND m.writer_id = #{parameter.logUserId}
+	ORDER BY
+		m.gmt_create DESC
+)
+UNION
+	(
+		SELECT
+			c.id AS id,
+			c.title AS title,
+			w.realname AS author,
+			m.id AS mid,
+			c.summary AS detail,
+			c.bookmarks AS bookmarks,
+			c.comments AS comments,
+			c.likes AS likes,
+			c.clicks AS clicks
+		FROM
+			cms_user_mark m
+		LEFT JOIN cms_content c ON m.content_id = c.id
+		LEFT JOIN writer_user w ON c.author_id = w.id
+		WHERE
+			m.favorite_id = #{parameter.favoriteId}
+		AND m.writer_id = #{parameter.logUserId}
+		ORDER BY
+			m.gmt_create DESC
+	) ) t
+	</select>
+
+	<!--查询用户是否对某一本书点赞  -->
+	<select id="queryLikesb" parameterType="map" resultType="int">
+		select count(id)  from book_user_like where book_id=#{id} and writer_id=#{logUserId}
+	</select>
+
+	<!--查询用户是否对某一文章点赞  -->
+	<select id="queryLikesc" parameterType="map" resultType="int">
+		select count(id)  from cms_user_like where content_id=#{id} and writer_id=#{logUserId}
+	</select>
+
+
+</mapper>

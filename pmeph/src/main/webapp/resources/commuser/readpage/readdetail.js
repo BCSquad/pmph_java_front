@@ -218,11 +218,17 @@ $(function () {
                                             add: function (e, data) {
 
                                                 var valid = function () {
-                                                    if ($(".pop-body").find("input[type='text']").val()) {
+                                                    if ($(".pop-body").find("input[type='text']").val()
+                                                        && $(".pop-body").find("input[type='text']").val().length <= 20) {
+
                                                         $(".pop-body").find("button.submit").removeClass("disable");
                                                         return true;
                                                     } else {
                                                         $(".pop-body").find("button.submit").addClass("disable");
+                                                        if ($(".pop-body").find("input[type='text']").val()
+                                                            && $(".pop-body").find("input[type='text']").val().length > 20) {
+                                                            message.warning("标题长度不能超过20个字符");
+                                                        }
                                                         return false;
                                                     }
                                                 }
@@ -287,7 +293,13 @@ $(function () {
 
     //隐藏PDF阅读按钮
     if ($("#pdf-hidden").val() == 'no') {
-        $("#dpf").hide();
+        //$("#dpf").hide();
+        //$("#dpf").attr("disabled",true);
+        $('#pdf_a').removeAttr('href');//去掉a标签中的href属性
+        $('#pdf_a').removeAttr('onclick');//去掉a标签中的onclick事件
+        $('#pdf_a .xsp2').css({"color":"#999"});
+        $("#dpf").css({"background-color":"#f2f2f2"});
+
     }
 
     morecontent();

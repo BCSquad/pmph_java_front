@@ -15,6 +15,9 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bc.pmpheep.back.commuser.collection.service.BookCollectionService;
+import com.bc.pmpheep.back.commuser.messagereport.dao.InfoReportDao;
+import com.bc.pmpheep.back.commuser.readpage.dao.ReadDetailDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -61,6 +64,12 @@ public class PersonalCenterController extends BaseController {
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.survey.service.SurveyServiceImpl")
 	SurveyService surveyService;
+	//我的收藏
+	@Autowired
+	private InfoReportDao infoReportDao;
+	@Autowired
+	private ReadDetailDao readDetailDao;
+
 
 	@RequestMapping("/tohomepage") // 个人中心动态
 	public ModelAndView move(@RequestParam(value = "pagetag", defaultValue = "sbwz") String pagetag,
@@ -259,7 +268,41 @@ public class PersonalCenterController extends BaseController {
 
 			mv.addObject("html", html);
 			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
-		} else {
+		}else if ("grsc".equals(pagetag)) { // 个人收藏
+			// 从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
+			// 设定条件名数组
+			String[] names = {};
+			String[] namesChi = {};
+			queryConditionOperation(names, namesChi, request, mv, paraMap, vm_map);
+
+			Map<String,Object> userMap=getUserInfo();
+			Long writerId=Long.valueOf(userMap.get("id").toString());
+			//查询收是否有默认的文章收藏夹，如果没有，就新建一个文章的 默认收藏夹
+			Map<String, Object>  dmap = infoReportDao.queryDefaultFavorite(writerId);
+			if(dmap==null){
+				infoReportDao.insertDefaultFavorite(writerId);
+				dmap = infoReportDao.queryDefaultFavorite(writerId);
+			}
+			BigInteger favoriteId=new BigInteger(dmap.get("id").toString());
+			//查询用户是否存在默认的书籍收藏夹，如果没有，就常见一个书籍默认的收藏夹
+			Map<String,Object> dmapb=readDetailDao.queryDedaultFavorite(writerId);
+			if(dmapb==null){
+				readDetailDao.insertFavorite(writerId);
+				dmapb=readDetailDao.queryDedaultFavorite(writerId);
+			}
+			BigInteger favoriteIdb=new BigInteger(dmapb.get("id").toString());
+			paraMap.put("favoriteId",favoriteId);
+			paraMap.put("favoriteIdb",favoriteIdb);
+			pageParameter.setParameter(paraMap);
+			List<Map<String, Object>> List_map = personalService.listMyFavorites(pageParameter);
+			count = personalService.listMyFavoritesCount(pageParameter);
+			// 分页数据代码块
+			String html = this.mergeToHtml("commuser/personalcenter/myFavorites.vm", contextpath, pageParameter,
+					List_map, vm_map);
+			/* mv.addObject("List_map",List_map); */// 测试
+			mv.addObject("html", html);
+			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
+		}else {
 
 		}
 
