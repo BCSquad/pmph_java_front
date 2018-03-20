@@ -120,7 +120,6 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:if test="${empty stuList[0]}"><tr><td colspan="5">暂无数据</td></tr></c:if>
 						<c:forEach var="stulist" items="${stuList}">
 							<tr>
 								<td>${stulist.date_begin}-${stulist.date_end}</td>
@@ -151,7 +150,6 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:if test="${empty workList[0]}"><tr><td colspan="4">暂无数据</td></tr></c:if>
 						<c:forEach var="list" items="${workList}">
 							<tr>
 								<td>${list.date_begin}-${list.date_end}</td>
@@ -181,7 +179,6 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:if test="${empty steaList[0]}"><tr><td colspan="4">暂无数据</td></tr></c:if>
 						<c:forEach var="list" items="${steaList}">
 							<tr>
 								<td>${list.date_begin}-${list.date_end}</td>
@@ -221,7 +218,6 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:if test="${empty zjxsList[0]}"><tr><td colspan="4">暂无数据</td></tr></c:if>
 						<c:forEach var="list" items="${zjxsList}">
 							<tr>
 								<td>${list.org_name}</td>
@@ -259,7 +255,6 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:if test="${empty jcbjList[0]}"><tr><td colspan="4">暂无数据</td></tr></c:if>
 					<c:forEach var="list" items="${jcbjList}">
 						<tr>
 							<td>${list.material_name}</td>
@@ -299,7 +294,6 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:if test="${empty gjghjcList[0]}"><tr><td colspan="4">暂无数据</td></tr></c:if>
 					<c:forEach var="list" items="${gjghjcList}">
 						<tr>
 							<td>${list.material_name}</td>
@@ -317,8 +311,6 @@
 			<div>
 				<span id="tsxz_span7"></span>
 				<span class="tsxz_title">人卫社教材编写情况</span>
-				<span class="tsxz_ts" id="rwsjcbx_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
-				<span class="tsxz_xt" id="rwsjcbx_xt" >（选填）</span>
 			</div>
 			<div class="content">
 				<table class="tab_2" id="tab_rwsjcbx">
@@ -334,7 +326,6 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:if test="${empty rwsjcList[0]}"><tr><td colspan="7">暂无数据</td></tr></c:if>
 						<c:forEach var="list" items="${rwsjcList}" varStatus="status">
 						<tr>
 							<td>${list.material_name}</td>
@@ -386,7 +377,6 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:if test="${empty jcbxqtList[0]}"><tr><td colspan="8">暂无数据</td></tr></c:if>
 						<c:forEach var="list" items="${jcbxqtList}" varStatus="status">
 							<tr>
 							<td>${list.material_name}</td>
@@ -445,7 +435,6 @@
 					</tr>
 					</thead>
 					<tbody>
-					<c:if test="${empty gjkcjsList[0]}"><tr><td colspan="4">暂无数据</td></tr></c:if>
 					<c:forEach var="list" items="${gjkcjsList}">
 						<tr>
 							<td>${list.course_name}</td>
@@ -480,7 +469,6 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:if test="${empty zjkyList[0]}"><tr><td colspan="4">暂无数据</td></tr></c:if>
 					<c:forEach var="list" items="${zjkyList}">
 						<tr>
 							<td>${list.research_name}</td>
@@ -511,7 +499,6 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:if test="${empty monographList[0]}"><tr><td colspan="6">暂无数据</td></tr></c:if>
 					<c:forEach var="list" items="${monographList}">
 						<tr>
 							<td>${list.monograph_name}</td>
@@ -545,7 +532,6 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:if test="${empty publishList[0]}"><tr><td colspan="4">暂无数据</td></tr></c:if>
 					<c:forEach var="list" items="${publishList}">
 						<tr>
 							<td>${list.reward_name}</td>
@@ -575,7 +561,6 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:if test="${empty sciList[0]}"><tr><td colspan="5">暂无数据</td></tr></c:if>
 					<c:forEach var="list" items="${sciList}">
 						<tr>
 							<td>${list.paper_name}</td>
@@ -605,7 +590,6 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:if test="${empty clinicalList[0]}"><tr><td colspan="4">暂无数据</td></tr></c:if>
 					<c:forEach var="list" items="${clinicalList}">
 						<tr>
 							<td>${list.reward_name}</td>
@@ -638,7 +622,6 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:if test="${empty acadeList[0]}"><tr><td colspan="4">暂无数据</td></tr></c:if>
 					<c:forEach var="list" items="${acadeList}">
 						<tr>
 							<td>${list.reward_name}</td>
