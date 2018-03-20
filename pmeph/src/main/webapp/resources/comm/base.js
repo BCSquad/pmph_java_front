@@ -1,8 +1,3 @@
-//定义全局变量远程调用地址
-// var remoteUrl = "120.76.221.250";
-var remoteUrl = "39.107.80.79";
-
-
 /**
  * Created by lihuan on 2017/11/24.
  */
@@ -231,18 +226,44 @@ $(function () {
 
 
     //搜索框效果
-    var search = function () {
-        window.location.href = contextpath + "booksearch/bookOrArtSpliter.action?search=" + encodeURI(encodeURI($("#search-input").val()));
-    }
+    var input_open = false;
     $(".search-icon").click(function () {
-        search();
-    });
+        var search = function () {
 
-    $(".search-input").bind('keydown', function (event) {
-        if (event.keyCode == "13") {
+            /*$.ajax({
+                type:'post',
+                url:contextpath+'booksearch/bookOrArtSpliter.action?search=' + encodeURI(encodeURI($("#search-input").val()))+'&t='+new Date().getTime(),
+                async:false,
+                dataType:'json',
+                data:data,
+                success:function(json){
+
+                }
+            });*/
+
+            window.location.href = contextpath + "booksearch/bookOrArtSpliter.action?search=" + encodeURI(encodeURI($("#search-input").val()));
+        }
+        if (!input_open) {
+            $(".delete").css("display", "block");
+            $(".search-input").css("display", "block");
+            input_open = true;
+
+            $(".search-input").bind('keydown', function (event) {
+                if (event.keyCode == "13") {
+                    search();
+                }
+            });
+
+        } else {
             search();
         }
     });
+    $(".delete").click(function () {
+        $(".delete").css("display", "none");
+        $(".search-input").css("display", "none");
+        $(".search-icon").unbind('keydown');
+    });
+
 
     //下载二维码
 
