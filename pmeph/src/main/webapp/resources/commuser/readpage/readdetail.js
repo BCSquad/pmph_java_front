@@ -218,11 +218,17 @@ $(function () {
                                             add: function (e, data) {
 
                                                 var valid = function () {
-                                                    if ($(".pop-body").find("input[type='text']").val()) {
+                                                    if ($(".pop-body").find("input[type='text']").val()
+                                                        && $(".pop-body").find("input[type='text']").val().length <= 20) {
+
                                                         $(".pop-body").find("button.submit").removeClass("disable");
                                                         return true;
                                                     } else {
                                                         $(".pop-body").find("button.submit").addClass("disable");
+                                                        if ($(".pop-body").find("input[type='text']").val()
+                                                            && $(".pop-body").find("input[type='text']").val().length > 20) {
+                                                            message.warning("标题长度不能超过20个字符");
+                                                        }
                                                         return false;
                                                     }
                                                 }
