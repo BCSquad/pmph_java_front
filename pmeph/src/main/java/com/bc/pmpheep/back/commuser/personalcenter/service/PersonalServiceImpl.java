@@ -536,10 +536,10 @@ public class PersonalServiceImpl implements PersonalService {
 				if("DEFAULT".equals(map.get("image_url"))){
 					map.put("image_url", "statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
 				}
-				if(map.get("f_type")==1){
+				if("1".equals(map.get("f_type").toString())){
 					int like=personaldao.queryLikesb((BigInteger) map.get("id"),(BigInteger) pageParameter.getParameter().get("logUserId"));
 					map.put("like", like);
-				}else if(map.get("f_type")==2){
+				}else if("2".equals(map.get("f_type").toString())){
 					int like=personaldao.queryLikesc((BigInteger) map.get("id"),(BigInteger) pageParameter.getParameter().get("logUserId"));
 					map.put("like", like);
 				}

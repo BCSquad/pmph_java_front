@@ -9,9 +9,9 @@
 		COUNT(*)
 		FROM
 		cms_content cc
-		LEFT JOIN pmph_user pu ON cc.author_id =
-		pu.id
+		LEFT JOIN pmph_user pu ON cc.author_id =pu.id
 		LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
+
 		WHERE
 		cc.is_deleted = 0
 		<if test="materialId==null">
@@ -25,31 +25,44 @@
 
 	<select id="list"  resultType="CmsInfoLettersList">
 		SELECT
-		*
+		cc.*,me.notice,m.deadline
 		FROM
 		cms_content cc
 		LEFT JOIN pmph_user pu ON cc.author_id =pu.id
 		LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
+		left join  material_extra me on me.material_id=cc.material_id
+		left join material m on m.id=cc.material_id
 		WHERE
-		cc.is_deleted = 0
+		cc.is_deleted = 0 and cc.is_published=1 and cc.auth_status=2
 		<if test="materialId==null">
 		  AND ccg.id = 2
 		</if>
 		<if test="materialId!=null">
-		    and material_id=#{materialId}
-		    AND ccg.id in (1,2)
+		    and cc.material_id=#{materialId}
+         <if test="order == 0">
+			 AND ccg.id in (1,2,3)
+		 </if>
+			<if test="order != 0">
+				AND ccg.id in (#{order})
+			</if>
 		</if>
+
 		ORDER BY
-		<if test="order == 1">
-			cc.is_promote desc,cc.sort_promote asc,
-			cc.is_hot desc,cc.sort_hot asc,
-		    cc.auth_date desc
+		<if test="materialId!=null">
+			cc.gmt_create desc
 		</if>
-		<if test="order == 2">
-			cc.auth_date DESC
-		</if>
-		<if test="order == 3">
-			cc.is_hot desc,cc.sort_hot asc
+		<if test="materialId==null">
+			<if test="order == 0">
+				cc.is_promote desc,cc.sort_promote asc,
+				cc.is_hot desc,cc.sort_hot asc,
+				cc.auth_date desc
+			</if>
+			<if test="order == 1">
+				cc.auth_date DESC
+			</if>
+			<if test="order == 2">
+				cc.is_hot desc,cc.sort_hot asc
+			</if>
 		</if>
 		LIMIT #{start},#{pageSize}
 	</select>

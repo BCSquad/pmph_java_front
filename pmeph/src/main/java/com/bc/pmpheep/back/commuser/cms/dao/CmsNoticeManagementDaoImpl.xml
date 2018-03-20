@@ -86,15 +86,15 @@
      where b.is_deleted=0 and b.is_hide=0 and b.material_id=#{materialId} and b.is_published=1 and b.auth_status=2 and b.category_id=3
 </if>
 ORDER BY
-		<if test="order == 1">
+		<if test="order == 0">
 			b.is_promote desc,b.sort_promote,
 			b.is_hot DESC,b.sort_hot,
 		    b.auth_date DESC
 		</if>
-		<if test="order == 2">
+		<if test="order == 1">
 			b.auth_date DESC
 		</if>
-		<if test="order == 3">
+		<if test="order == 2">
 			b.is_hot DESC,b.sort_hot
 		</if>
 		LIMIT #{start},#{pageSize} 

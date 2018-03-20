@@ -60,11 +60,11 @@ String contextpath=request.getContextPath();
 		                                       <a href="inforeport/toinforeport.action?id=${report.id }&&materialId=${notice.material_id }">
 		                                  </c:when>
 		                                  <c:otherwise>
-		                                       <a href="cmsnotice/noticeMessageDetail.action?id=${notice.mid }&&materialId=${notice.material_id }&&csmId=${report.id }">
+		                                       <a href="cmsnotice/noticeMessageDetail.action?id=${report.mid }&&materialId=${report.material_id }&&csmId=${report.id }">
 		                                  </c:otherwise>
 		                                </c:choose> 
 		                                       <div class="inleft">${report.title}</div>
-		                                        <div class="${status.index==1 || status.index==0? 'lastest':''}" style="float: left;width: 29px;height: 15px;margin: 10px;back"></div>  
+		                                        <div class="${status.index==1 || status.index==0? 'lastest':''}" style="float: left;width: 29px;height: 15px;margin: 10px;"></div>
 			                                   </a>    
 		                                <div class="inright" >
 		         

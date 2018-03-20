@@ -64,7 +64,7 @@
                 </c:forEach>
                 <div class="re_3">
                     <div style="margin-top: 37px">
-                        <div class="re_4">还在为资格考试烦恼？</div>
+                        <%--<div class="re_4">还在为资格考试烦恼？</div>--%>
                         <div class="re_5" onclick="lookdetail()">去看看</div>
                     </div>
                 </div>
