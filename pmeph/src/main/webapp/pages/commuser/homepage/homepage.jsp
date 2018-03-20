@@ -281,7 +281,7 @@
                 </c:forEach>
             </div>
     </div>
-    <div style="background-color: #F6F6F6">
+    <div style="background-color: #F6F6F6;margin-top: 60px;padding-top: 30px;">
         <div class="content-wrapper">
                 <div class="area-6">
                     <div class="doc"></div>

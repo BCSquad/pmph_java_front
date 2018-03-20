@@ -59,7 +59,7 @@ $(function () {
     var element;
     var returnInfo;
     var $uploadvideo = $("#upload-video").fileupload({
-        url: 'http://'+remoteUrl+'/v/upload',
+        url: 'http://' + remoteUrl + '/v/upload',
         dataType: 'json',
         autoUpload: true,
         /*    formData: function () {
@@ -77,20 +77,6 @@ $(function () {
         limitMultiFileUploads: 1,
         limitMultiFileUploadSize: 1048576000,
         add: function (e, data) {
-
-            //校验登录情况
-            $.ajax({
-                type: 'post',
-                url: contextpath + 'readdetail/tologin.action',
-                async: false,
-                dataType: 'json',
-                success: function (json) {
-                    if (json == "OK") {
-
-                    }
-                }
-            });
-
 
 
             if (data.files[0].name) {
@@ -164,16 +150,16 @@ $(function () {
                     var intervalId = setInterval(function () {
                         $.ajax({
                             type: 'get',
-                            url: "http://"+remoteUrl+"/v/query?key=" + data.result.data,
+                            url: "http://" + remoteUrl + "/v/query?key=" + data.result.data,
                             async: false,
                             dataType: 'json',
                             beforeSend: function (xhr, global) {
                             },
                             success: function (json) {
-                                if (json.code == '1' && (json.data.error == 'true' || json.data.message == '转码成功')) {
+                                if (json.code == '1' && (json.data.error == true || json.data.message == '转码成功')) {
                                     clearInterval(intervalId);
-                                    if (json.data.error == 'true') {
-                                        message.error("上传失败！");
+                                    if (json.data.error == true) {
+                                        message.error("转码失败,请联系管理员");
                                     } else {
 
                                         $(".pop-body").find(".remark").css("display", "none");
@@ -203,7 +189,7 @@ $(function () {
 
 
                                         $("#add-icon_upload").fileupload({
-                                            url: 'http://'+remoteUrl+'/pmpheep/bookVideo/addVideo',
+                                            url: 'http://' + remoteUrl + '/pmpheep/bookVideo/addVideo',
                                             dataType: 'json',
                                             type: 'post',
                                             autoUpload: true,
@@ -232,11 +218,17 @@ $(function () {
                                             add: function (e, data) {
 
                                                 var valid = function () {
-                                                    if ($(".pop-body").find("input[type='text']").val()) {
+                                                    if ($(".pop-body").find("input[type='text']").val()
+                                                        && $(".pop-body").find("input[type='text']").val().length <= 20) {
+
                                                         $(".pop-body").find("button.submit").removeClass("disable");
                                                         return true;
                                                     } else {
                                                         $(".pop-body").find("button.submit").addClass("disable");
+                                                        if ($(".pop-body").find("input[type='text']").val()
+                                                            && $(".pop-body").find("input[type='text']").val().length > 20) {
+                                                            message.warning("标题长度不能超过20个字符");
+                                                        }
                                                         return false;
                                                     }
                                                 }
@@ -286,7 +278,9 @@ $(function () {
         },
         progressall: function (e, data) {
             // console.log(e.delegatedEvent, data);
-            element.progress('demo', ( Math.round((data.loaded / (data.total + data.loaded / 10) * 1000), 1) / 10).toFixed(1) + '%')
+            if (element) {
+                element.progress('demo', ( Math.round((data.loaded / (data.total + data.loaded / 10) * 1000), 1) / 10).toFixed(1) + '%')
+            }
         }
     });
 
@@ -299,7 +293,13 @@ $(function () {
 
     //隐藏PDF阅读按钮
     if ($("#pdf-hidden").val() == 'no') {
-        $("#dpf").hide();
+        //$("#dpf").hide();
+        //$("#dpf").attr("disabled",true);
+        $('#pdf_a').removeAttr('href');//去掉a标签中的href属性
+        $('#pdf_a').removeAttr('onclick');//去掉a标签中的onclick事件
+        $('#pdf_a .xsp2').css({"color":"#999"});
+        $("#dpf").css({"background-color":"#f2f2f2"});
+
     }
 
     morecontent();
@@ -716,7 +716,7 @@ function more(con, more) {
 
 //输入长度限制校验，ml为最大字节长度
 function LengthLimit(obj, ml) {
-	var maxStrlength;
+    var maxStrlength;
     var va = obj.value;
     var vat = "";
     for (var i = 1; i <= va.length; i++) {
@@ -769,4 +769,19 @@ function PreviewImage(imgFile) {
             //document.getElementById("cover_image").src = path;
         }
     }
+}
+
+function validLogin() {
+    //校验登录情况
+    $.ajax({
+        type: 'post',
+        url: contextpath + 'readdetail/tologin.action',
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+            if (json == "OK") {
+
+            }
+        }
+    });
 }
