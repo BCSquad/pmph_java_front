@@ -108,4 +108,11 @@ public class WriterPoint implements java.io.Serializable{
 				+ total + ", gain=" + gain + ", loss=" + loss + ", gmtCreate="
 				+ gmtCreate + ", gmtUpdate=" + gmtUpdate + "]";
 	}
+	public WriterPoint(Long id, Long userId, Integer total, Integer gain, Integer loss) {
+        this.id = id;
+        this.userId = userId;
+        this.total = total;
+        this.gain = gain;
+        this.loss = loss;
+    }
 }
