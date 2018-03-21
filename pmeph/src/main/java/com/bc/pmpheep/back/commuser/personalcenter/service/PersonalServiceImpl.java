@@ -528,19 +528,19 @@ public class PersonalServiceImpl implements PersonalService {
 	}
 
 	@Override
-	public List<Map<String, Object>> listMyFavorites(PageParameter<Map<String, Object>> pageParameter) {
+	public List<Map<String, Object>> listMyFavorites(PageParameter<Map<String, Object>> pageParameter,String contextpath) {
 		// 查询我的收藏
 		List<Map<String, Object>> list = personaldao.listMyFavorites(pageParameter);
 		if(list.size()>0){
 			for (Map<String, Object> map : list) {
 				if("DEFAULT".equals(map.get("image_url"))){
-					map.put("image_url", "statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+					map.put("image_url", contextpath+"statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
 				}
-				if("1".equals(map.get("f_type").toString())){
-					int like=personaldao.queryLikesb((BigInteger) map.get("id"),(BigInteger) pageParameter.getParameter().get("logUserId"));
+				if((map.get("f_type").toString()).equals("1")){
+					int like=personaldao.queryLikesb(map.get("id").toString(),pageParameter.getParameter().get("logUserId").toString());
 					map.put("like", like);
-				}else if("2".equals(map.get("f_type").toString())){
-					int like=personaldao.queryLikesc((BigInteger) map.get("id"),(BigInteger) pageParameter.getParameter().get("logUserId"));
+				}else if((map.get("f_type").toString()).equals("2")){
+					int like=personaldao.queryLikesc(map.get("id").toString(),pageParameter.getParameter().get("logUserId").toString());
 					map.put("like", like);
 				}
 				if("DEFAULT".equals(map.get("avatar"))||"".equals(map.get("avatar"))|| StringUtils.isEmpty(map.get("avatar"))){
@@ -553,7 +553,9 @@ public class PersonalServiceImpl implements PersonalService {
 				}else if(map.get("category_id")!=null&& "1".equals(map.get("category_id").toString())){
 					map.put("skip", "articledetail/toPage.action?wid="+map.get("id"));
 				}
-				if(null!=map.get("cover")) map.put("imgpath", RouteUtil.articleAvatar(map.get("cover").toString()));
+				if(null!=map.get("cover")){
+					map.put("imgpath", RouteUtil.articleAvatar(map.get("cover").toString()));
+				}
 			}
 		}
 		return list;

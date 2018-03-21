@@ -20,7 +20,7 @@ $(function(){
 	var order;
 	 $('#sort-wrapper').selectlist({
          zIndex: 10,
-         width: 70,
+         width: 100,
          height: 20,
          optionHeight: 20,
          triangleColor: '#333333',
@@ -67,19 +67,31 @@ $(function(){
 	        	                "<a href='"+contextpath;
 	        			     if(list[i].categoryId==1){
 	        			    	 html+="articledetail/toPage.action?wid="+list[i].id;
-	        			     }else{
+	        			     }else if(list[i].categoryId==2){
 	        			    	 html+="inforeport/toinforeport.action?id="+list[i].id+'&&materialId='+materialId;
-	        			     }
+	        			     }else{
+                                 html+="cmsnotice/noticeMessageDetail.action?id="+list[i].mid+"&&materialId="+list[i].materialId+"&&csmId="+list[i].id ;
+							 }
 	        			     html+="'>"+list[i].title+"</a></div> "+
-	        	                "<div class=\"item2 cutmore\"><p style='margin:0;height: 40px;line-height: 20px;'>"+(list[i].summary==null?"(摘要为空)":list[i].summary)+"</p></div> "+
+	        	                "<div class=\"item2 cutmore\"><p style='margin:0;height: 40px;line-height: 20px;'>";
+                        if(list[i].categoryId==3 && list[i].isMaterialEntry){
+                            html+=list[i].notice;
+						}else{
+                            html+= (list[i].summary==null?"(摘要为空)":list[i].summary);
+						}
+                        html+="</p></div> "+
 	        	                "<div class=\"item3\">  "+
-	        	                    "<div style=\"float: left;\">" +
-		        	                    "<div style='float:left;height:57px'><span class='cms-icon look'></span></div>" +
-		        	                    "<div style='float:left;margin-right: 20px;'>"+list[i].clicks+"</div>" +
-		        	                    "<div style='float:left;height:57px'>" +
-		        	                    	"<span class='cms-icon "+(json[tarId]>0? "good":"nogood")+"' id='like"+list[i].id+"' onclick=\"addlike('"+list[i].id+"')\"></span></div>" +
-		        	                    "<div style='float:left;color:"+(json[tarId]>0? "#1abd44":"#b5b5b5")+"' id='likes"+list[i].id+"'>"+list[i].likes+"</div>" +
-	        	                    "</div>"+
+	        	                    "<div style=\"float: left;\">" ;
+                            if(list[i].categoryId==3 ){
+                                     html+="<div style='float:left;margin-right: 20px;'>截止时间："+list[i].deadline+"</div>";
+						    }else{
+                                html+= "<div style='float:left;height:57px'><span class='cms-icon look'></span></div>" +
+                                    "<div style='float:left;margin-right: 20px;'>"+list[i].clicks+"</div>" +
+                                    "<div style='float:left;height:57px'>" +
+                                    "<span class='cms-icon "+(json[tarId]>0? "good":"nogood")+"' id='like"+list[i].id+"' onclick=\"addlike('"+list[i].id+"')\"></span></div>" +
+                                    "<div style='float:left;color:"+(json[tarId]>0? "#1abd44":"#b5b5b5")+"' id='likes"+list[i].id+"'>"+list[i].likes+"</div>" ;
+							}
+	        	                  html+="</div>"+
 	        	                    "<div style='float:right'>发布时间："+formatDate(list[i].gmtCreate,'yyyy.MM.dd')+"</div> "+ 
 	        	                "</div> "+
 	                        "</div> ";
