@@ -450,7 +450,7 @@ ul li {
 	font-size: 13px;
 	color: #ffffff;
 	text-align: center;
-	line-height: 25px;
+	line-height: 27px;
 	cursor: pointer;
 }
 
@@ -546,7 +546,7 @@ ul li {
 
 .notice {
     position: relative;
-    top: 10px;
+    top: 20px;
     margin: 20px 0;
     height: 140px;
     background: #EFEEEC;
@@ -844,6 +844,7 @@ ul li {
 }
 
 .area-6 {
+    clear:both;
     height: 430px;
     margin-left: -6px;
 }
@@ -857,7 +858,7 @@ ul li {
 
 .area-6 .title {
     height: 27px;
-    margin-top: 132px;
+    /*margin-top: 132px;*/
     margin-left: 15px;
 }
 
@@ -1169,7 +1170,7 @@ ul li {
 
 .area-8 {
     clear: both;
-    margin-top: 170px;
+    margin-top: 140px;
     position: relative;
 }
 

@@ -44,7 +44,7 @@
 					then 5 
 					else 4 
 					end)
-			when tb.is_list_selected = 1 or tb.is_locked =1 <!-- 被锁定 或 主编已提交 -->
+			when tb.is_list_selected = 1 or tb.is_locked =1 <!-- 被锁定 或 主编已提交 --> or count(dpt.id) = 0
 			then      <!-- 显示正式表 -->
 				(case 
 					when dp.chosen_position = 9 <!-- 同时被选为编委和数字编委 -->
@@ -101,6 +101,7 @@
 					and o.id = ${parameter.queryOrg}
 				</if>
 			</where>
+			group by d.id <!-- 因为要统计暂存表里有没有数据来作为决定是否读暂存表的条件之一 必须group -->
 		)t
 		<where>
 			<if test="parameter.excelChoosen != null and parameter.excelChoosen != '' ">
@@ -122,7 +123,7 @@
 			when tb.is_published = 1 or m.is_force_end =1 or #{parameter.isFirstEditorLogIn} = 'false'
 			then
 				dpp.chosen_position
-			when tb.is_list_selected = 1 or tb.is_locked =1 
+			when tb.is_list_selected = 1 or tb.is_locked =1 or count(dpt.id) = 0
 			then
 				dp.chosen_position
 			else	
@@ -158,6 +159,7 @@
 					and o.id = ${parameter.queryOrg}
 				</if>
 			</where>
+			group by d.id <!-- 因为要统计暂存表里有没有数据来作为决定是否读暂存表的条件之一 必须group -->
 		
 	</select>
 	
@@ -235,9 +237,10 @@
 	</select>
 	
 	<select id="getOrgList" resultType="Map">
-		select id,org_name
+		select o.id,o.org_name
 		from 
-		org
+		material_org mo 
+		join org o on mo.org_id = o.id and material_id = #{material_id}
 	</select>
 	
 	<delete id="deleteTempByAuthorIdAndTextbookId" parameterType="Map">

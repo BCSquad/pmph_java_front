@@ -241,7 +241,7 @@
 			)
 		)
 	)
-	<if test="parameter.s!=null and parameter.s!= ''">AND c.id is not null </if>
+	<if test="parameter.s == null ">AND c.id is not null </if>
 	<if test="parameter.is_staging!=null and parameter.is_staging!= ''">AND c.is_staging =#{parameter.is_staging}</if>
 	<if
 		test="parameter.online_progress!=null and parameter.online_progress!= ''">AND c.online_progress in ${parameter.online_progress}</if>
@@ -256,7 +256,14 @@
 	GROUP BY
 		(a.id)
 
-		
+		<choose>
+			<when test="parameter.s == null">
+				order by c.gmt_create desc
+			</when>
+			<otherwise>
+				order by a.gmt_create desc
+			</otherwise>
+		</choose>
 		
 		
 		limit ${start},${pageSize}
@@ -351,7 +358,7 @@
 				)
 			)
 		)
-		<if test="parameter.s!=null and parameter.s!= ''">AND c.id is not null </if>
+		<if test="parameter.s == null ">AND c.id is not null </if>
 		<if test="parameter.is_staging!=null and parameter.is_staging!= ''">AND c.is_staging =#{parameter.is_staging}</if>
 		<if
 			test="parameter.online_progress!=null and parameter.online_progress!= ''">AND c.online_progress in ${parameter.online_progress}</if>
@@ -718,17 +725,27 @@
 		id=#{id} and writer_id=#{writer_id}
 	</update>
 	<!-- 我的评论删除 -->
-	<delete id="deleteComment" parameterType="Map">
-		delete from
-		book_user_comment where
+	<update id="deleteComment" parameterType="Map">
+		update book_user_comment set is_deleted = 1
+		where
 		id= #{id} and writer_id = #{writer_id}
-	</delete>
+		<!-- delete from
+		book_user_comment where
+		id= #{id} and writer_id = #{writer_id} -->
+	</update>
 	<select id="getCommentById"  resultType="java.lang.Long">
 		SELECT book_id from book_user_comment where id= #{id}
 	</select>
 	<update id="updateDownComments" >
-		UPDATE book SET comments = comments-1 WHERE id =
-		#{id}
+		set @comments = (
+		select count(c.id) from book b
+		left join book_user_comment c 
+		on c.book_id = b.id and c.is_auth =1 and c.is_deleted =0 and c.is_hide = 0
+		WHERE b.id = #{id}
+		);
+		update book set comments = @comments where id = #{id};
+		<!-- UPDATE book SET comments = comments-1 WHERE id =
+		#{id} -->
 	</update>
 	
 	<!-- 查询评论并删除 -->
@@ -1171,7 +1188,8 @@
 		m.material_name,
 		d.material_id,
 		DATE_FORMAT(d.gmt_create,'%Y年%m月%d日') AS create_time,
-		d.online_progress as online_progress
+		d.online_progress as online_progress,
+		d.return_cause as return_cause
 		FROM
 		declaration d
 		inner join
@@ -1180,7 +1198,7 @@
 		d.id = #{declaration_id}
 	</select>
 
-</mapper>
+
 
 <!-- 动态查询 -->
 <!-- <select id="queryWriterUserTrendst" parameterType="PageParameter" resultType="Map"> 
@@ -1270,3 +1288,127 @@
 	WHERE a.writer_id = #{parameter.logUserId} AND a.is_deleted = '0' ) wdsp 
 	on t.table_name = wdsp.wdsp_type and t.table_id=wdsp.wdsp_id where t.writer_user_id 
 	= #{parameter.logUserId} )t </select> -->
+
+<!-- 查看我的收藏 -->
+<select id="listMyFavorites" resultType="java.util.Map"  parameterType="PageParameter">
+	select t.* from
+(
+   (
+	SELECT
+		1 as f_type,
+		b.id AS id,
+		b.bookname AS title,
+		b.author AS author,
+		m.id AS mid,
+		d.detail AS detail,
+		b.bookmarks AS bookmarks,
+		b.comments AS comments,
+		b.likes AS likes,
+		b.clicks AS clicks,
+		m.gmt_create,
+		b.image_url as image_url,
+		m.favorite_id as favorite_id,
+		'' as category_id,
+		'' as cover
+	FROM
+		book_user_mark m
+	LEFT JOIN book b ON m.book_id = b.id
+	LEFT JOIN book_detail d ON b.id = d.book_id
+	WHERE
+		m.favorite_id = #{parameter.favoriteIdb}
+	AND m.writer_id = #{parameter.logUserId}
+
+    )
+UNION
+	(
+		SELECT
+			2 as f_type,
+			c.id AS id,
+			c.title AS title,
+			w.realname AS author,
+			m.id AS mid,
+			c.summary AS detail,
+			c.bookmarks AS bookmarks,
+			c.comments AS comments,
+			c.likes AS likes,
+			c.clicks AS clicks,
+			m.gmt_create,
+			'' as image_url,
+			m.favorite_id as favorite_id,
+			c.category_id as category_id,
+		    c.cover as cover
+		FROM
+			cms_user_mark m
+		LEFT JOIN cms_content c ON m.content_id = c.id
+		LEFT JOIN writer_user w ON c.author_id = w.id
+		WHERE
+			m.favorite_id = #{parameter.favoriteId}
+		AND m.writer_id = #{parameter.logUserId}
+
+	)
+)t
+ORDER BY gmt_create DESC  limit ${start},${pageSize}
+</select>
+
+	<!-- 查我的收藏总数 -->
+	<select id="listMyFavoritesCount" resultType="Integer"
+			parameterType="PageParameter">
+		select count(*) from (
+
+(
+	SELECT
+		b.id AS id,
+		b.bookname AS title,
+		b.author AS author,
+		m.id AS mid,
+		d.detail AS detail,
+		b.bookmarks AS bookmarks,
+		b.comments AS comments,
+		b.likes AS likes,
+		b.clicks AS clicks
+	FROM
+		book_user_mark m
+	LEFT JOIN book b ON m.book_id = b.id
+	LEFT JOIN book_detail d ON b.id = d.book_id
+	WHERE
+		m.favorite_id = #{parameter.favoriteIdb}
+		AND m.writer_id = #{parameter.logUserId}
+	ORDER BY
+		m.gmt_create DESC
+)
+UNION
+	(
+		SELECT
+			c.id AS id,
+			c.title AS title,
+			w.realname AS author,
+			m.id AS mid,
+			c.summary AS detail,
+			c.bookmarks AS bookmarks,
+			c.comments AS comments,
+			c.likes AS likes,
+			c.clicks AS clicks
+		FROM
+			cms_user_mark m
+		LEFT JOIN cms_content c ON m.content_id = c.id
+		LEFT JOIN writer_user w ON c.author_id = w.id
+		WHERE
+			m.favorite_id = #{parameter.favoriteId}
+		AND m.writer_id = #{parameter.logUserId}
+		ORDER BY
+			m.gmt_create DESC
+	) ) t
+	</select>
+
+	<!--查询用户是否对某一本书点赞  -->
+	<select id="queryLikesb" parameterType="map" resultType="int">
+		select count(id)  from book_user_like where book_id=#{id} and writer_id=#{logUserId}
+	</select>
+
+	<!--查询用户是否对某一文章点赞  -->
+	<select id="queryLikesc" parameterType="map" resultType="int">
+		select count(id)  from cms_user_like where content_id=#{id} and writer_id=#{logUserId}
+	</select>
+
+
+</mapper>

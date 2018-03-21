@@ -1,5 +1,8 @@
 $(function () {
-	
+	$("#disabled_all").val();
+	if ($("#disabled_all").val()=="true") {
+		$("input").attr("disabled",true);
+	}
 	/*var proxy = $("#proxy").val();
 	if(null!=proxy&&''!=proxy){
 		$.ajax({
@@ -34,50 +37,53 @@ $(function () {
     });
     
     $("#fileNameDiv").hide();
-    $("#uploadFile").uploadFile({
-    	/*accept:	"application/msword",*/
-        accept : "image/*",  //限制上传类型只能为图片
-    	valid:function(file){
-    		console.log(file);
-    		console.log(file.name.substring(file.name.lastIndexOf("."),file.name.lastIndexOf(".")+4));
-    		/*if(file.type=="application/msword"){ */
-    		var f=file.name.substring(file.name.lastIndexOf("."),file.name.lastIndexOf(".")+4);
-    		if(f==".gif"||f==".jpg"||f==".jpeg"||f==".gif"||f==".png"||f==".bmp"||f=='.jpe'){
-    			return true;
-    		}else{
-    			message.error("请选择图片文件");
-    			return false;
-    		}
-    		
-    	},
-        start: function () {
-            console.log("开始上传。。。");
-        },
-        done: function (filename, fileid) {
-        	$('#fileName').html(filename);
-        	$("#fileNameDiv").show();
-        	
-        	 /*$.ajax({
-        	        type:'post',
-        	        url:contextpath+'admininfocontroller/uploadProxy.action?',
-        	        async:false,
-        	        data:{"fileid":fileid,"id":$("#id").val()},
-        	        success:function(code){
-        	            if (code==1){
-        	                message.success("上传成功");
-        	                $("#fileNameDiv").show();
-        	            }
-        	        }
-        	    });*/
-        	 
-        	$("#fileid").val(fileid);
-        	$("#proxyDiv").hide();
-            console.log("上传完成：name " + filename + " fileid " + fileid);
-        },
-        progressall: function (loaded, total, bitrate) {
-            console.log("正在上传。。。" + loaded / total);
-        }
-    });
+    if ($("#uploadFile").length>0) {
+    	$("#uploadFile").uploadFile({
+        	/*accept:	"application/msword",*/
+            accept : "image/*",  //限制上传类型只能为图片
+        	valid:function(file){
+        		console.log(file);
+        		console.log(file.name.substring(file.name.lastIndexOf("."),file.name.lastIndexOf(".")+4));
+        		/*if(file.type=="application/msword"){ */
+        		var f=file.name.substring(file.name.lastIndexOf("."),file.name.lastIndexOf(".")+4);
+        		if(f==".gif"||f==".jpg"||f==".jpeg"||f==".gif"||f==".png"||f==".bmp"||f=='.jpe'){
+        			return true;
+        		}else{
+        			message.error("请选择图片文件");
+        			return false;
+        		}
+        		
+        	},
+            start: function () {
+                console.log("开始上传。。。");
+            },
+            done: function (filename, fileid) {
+            	$('#fileName').html(filename);
+            	$("#fileNameDiv").show();
+            	
+            	 /*$.ajax({
+            	        type:'post',
+            	        url:contextpath+'admininfocontroller/uploadProxy.action?',
+            	        async:false,
+            	        data:{"fileid":fileid,"id":$("#id").val()},
+            	        success:function(code){
+            	            if (code==1){
+            	                message.success("上传成功");
+            	                $("#fileNameDiv").show();
+            	            }
+            	        }
+            	    });*/
+            	 
+            	$("#fileid").val(fileid);
+            	$("#proxyDiv").hide();
+                console.log("上传完成：name " + filename + " fileid " + fileid);
+            },
+            progressall: function (loaded, total, bitrate) {
+                console.log("正在上传。。。" + loaded / total);
+            }
+        });
+	}
+    
 });
 function getform() {
 	
@@ -91,7 +97,7 @@ function getform() {
     json.handphone=$("#handphone").val();
     json.postCode=$("#postCode").val();
     json.email=$("#email").val();
-    json.title=$("#title").find("option:selected").val();
+    //json.title=$("#title").find("option:selected").val();
     json.fax=$("#fax").val();
     json.address=$("#address").val();
     json.id=$("#id").val();

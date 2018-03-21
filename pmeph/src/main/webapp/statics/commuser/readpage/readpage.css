@@ -1,3 +1,16 @@
+.no-more {
+    height: 300px;
+    width: 330px;
+    text-align: center;
+    margin: auto !important;
+    padding-top: 10px;
+    color: #333333;
+}
+
+.no-more img {
+    display: block;
+}
+
 .area1 {
     width: 100%;
     height: 412px;

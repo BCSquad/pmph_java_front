@@ -209,7 +209,7 @@ function selectReset(){
 //提交
 function selectRubmit(){
 	
-	if (selectedIds.length>0) {
+	if (selectedIds.length>0||selectedNumIds.length>0) {
 		window.message.confirm(
 				'确定要提交吗？'
 				,{icon: 3, title:'编委选定',btn:["确定","取消"]}

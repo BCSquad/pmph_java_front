@@ -50,8 +50,8 @@ public class ChooseEditorServiceImpl implements ChooseEditorService {
 	}
 
 	@Override
-	public List<Map<String, Object>> getOrgList() {
-		List<Map<String, Object>> orgList = chooseEditorDao.getOrgList();
+	public List<Map<String, Object>> getOrgList(String material_id) {
+		List<Map<String, Object>> orgList = chooseEditorDao.getOrgList(material_id);
 		return orgList;
 	}
 
@@ -109,6 +109,7 @@ public class ChooseEditorServiceImpl implements ChooseEditorService {
 			Integer b_count=chooseEditorDao.updateTextBookListSelected(paraMap);
 			
 			if (u_count >=0 && b_count>0) {
+				chooseEditorDao.deleteTempByAuthorIdAndTextbookId(paraMap);
 				resultMap.put("msg", "已提交,主编已选定编委");
 			}
 		}else{

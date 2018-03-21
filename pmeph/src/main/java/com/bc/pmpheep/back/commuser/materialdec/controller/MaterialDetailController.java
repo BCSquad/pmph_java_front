@@ -331,6 +331,7 @@ public class MaterialDetailController extends BaseController{
 		String jc_material_name[] = request.getParameterValues("jc_material_name");
 		String jc_position[] = request.getParameterValues("jc_position");
 		String jc_note[] = request.getParameterValues("jc_note");
+		String jc_publish_date[] = request.getParameterValues("jc_publish_date");
 		String jc_is_digital_editor[] = request.getParameterValues("jc_is_digital_editor");
 		for(int i=0;i<jc_material_name.length;i++) { //遍历数组
 			if(!jc_material_name[i].equals("")){ //判断是否存在
@@ -339,6 +340,8 @@ public class MaterialDetailController extends BaseController{
 				JcbjMap.put("is_digital_editor", request.getParameter(jc_is_digital_editor[i]));
 				JcbjMap.put("position", "".equals(request.getParameter(jc_position[i])) ? null:request.getParameter(jc_position[i]));
 				JcbjMap.put("note", jc_note[i]);
+				JcbjMap.put("publish_date", "".equals(jc_publish_date[i]) ? null:jc_publish_date[i]);
+
 				JcbjMap.put("sort", i);
 				//作家上套教材参编
 				jcbjList.add(JcbjMap);
@@ -364,14 +367,14 @@ public class MaterialDetailController extends BaseController{
 		//主编国家级规划教材情况
 		String hj_material_name[] = request.getParameterValues("hj_material_name");
 		String hj_isbn[] = request.getParameterValues("hj_isbn");
-		String hj_rank[] = request.getParameterValues("hj_rank");
+		String hj_rank_text[] = request.getParameterValues("hj_rank_text");
 		String hj_note[] = request.getParameterValues("hj_note");
 		for(int i=0;i<hj_material_name.length;i++) { //遍历数组
 			if(!hj_material_name[i].equals("")){ //判断是否存在
 				Map<String,Object> GjghjcMap = new HashMap<String,Object>();
 				GjghjcMap.put("material_name",hj_material_name[i]);
 				GjghjcMap.put("isbn",hj_isbn[i]);
-				GjghjcMap.put("rank", "".equals(request.getParameter(hj_rank[i])) ? null:request.getParameter(hj_rank[i]));
+				GjghjcMap.put("rank_text",hj_rank_text[i]);
 				GjghjcMap.put("note", hj_note[i]);
 				GjghjcMap.put("sort", i);
 				//主编国家级规划

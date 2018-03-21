@@ -146,6 +146,7 @@ request.setAttribute("currentTime",datetime);
 					<li id="wdjc" class="dtl pagetag"><a class="aher paged" >个人纠错</a></li>
                     <li id="wdpl" class="dtl pagetag"><a class="aher paged" >个人评论</a></li>
                     <li id="wdwj" class="dtl pagetag"><a class="aher paged" >个人问卷</a></li>
+					<%--<li id="grsc" class="dtl pagetag"><a class="aher paged" >个人收藏</a></li>--%>
                     <%-- <li id="zxsp" class="dtl"><a class="aher"
                                                  href="${ctx}/personalhomepage/tohomepagethe.action">最新书评</a></li> --%>
                 </ul>
@@ -800,17 +801,17 @@ request.setAttribute("currentTime",datetime);
                     </ul>
                 </div>
                 
-                <div id="bzzx">
+                <%--<div id="bzzx">
                     <div id="bzxxherd"></div>
                     <span class="bzzxwz">帮助中心</span>
                     <div id="bzxxherd2"></div>
-                    <input type="text" id="bzzxcxk" value="请输入您要咨询的问题">
+                    <input type="text" id="bzzxcxk" placeholder="请输入您要咨询的问题">
                     <ul class="scul">
                         <li class="bzzxlb"><span id="dianhua"></span><span class="zzfw">自助服务</span></li>
                         <li class="bzzxlb"><span id="shou"></span><span class="zzfw">投诉举报</span></li>
                         <li class="bzzxlb"><span id="kefu"></span><span class="zzfw">客服反馈</span></li>
                     </ul>
-                </div>
+                </div>--%>
             </div>
             <div style="clear: both"></div>
         </div>

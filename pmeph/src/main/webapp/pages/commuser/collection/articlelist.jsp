@@ -43,16 +43,16 @@ String basePath =path+"/";
     <c:forEach items="${articlelist.rows }" var="article"> 
     <div class="collection" >
         <div class="title">
-               <div class="title-text">
-                   <a href="${article.skip}"> ${article.title }</a>
-               </div>
-               <input type="hidden" id="cms${article.cid }" value="${article.cid }"/>
-               <div class="tm">
+            <div class="title-text">
+                <a href="${article.skip}"> ${article.title }</a>
+            </div>
+            <input type="hidden" id="cms${article.cid }" value="${article.cid }"/>
+            <div class="tm">
                    <span class="author-icon" ><img  src="${article.avatar}" style="width:25px;height:25px;border-radius: 50%;"/>
                    </span>
-                   <span class="name">${article.realname }</span>
-                   <span class="time"><fmt:formatDate  value="${article.gmt_create}" pattern="yyyy.MM.dd"/></span>
-               </div>
+                <span class="name">${article.realname }</span>
+                <span class="time"><fmt:formatDate  value="${article.gmt_create}" pattern="yyyy.MM.dd"/></span>
+            </div>
         </div>
         <div class="content">
             <div  class="content-img">
@@ -60,17 +60,17 @@ String basePath =path+"/";
             </div>
             <div  class="content-text" >
                 <div class="text">
-                ${article.summary }
+                        ${article.summary }
                 </div>
                 <div class="end">
                     <div class="foot">
                         <span class="span1" onclick="cancelMark('${article.markId}','${article.bookmarks }','${article.cid }')">取消收藏</span>
                         <span class="span2" >${article.comments }</span>
-                        <span class="smicon comment"></span>
+                        <span class="smicon comment" onclick="window.open('${ctx}/articledetail/toPage.action?wid=${article.cid }#001')"></span>
                         <span class="${article.like>0?'span3':'span2' }" id="like${article.cid}">${article.likes }</span>
                         <span class="smicon ${article.like>0?'good':'nogood' }"  onclick="addlike('${article.cid}')" id="good${article.cid}"></span>
                         <span class="span2">${article.clicks }</span>
-                        <span class="smicon look"></span>
+                        <span class="smicon look"></span>/
                     </div>
                 </div>
             </div>

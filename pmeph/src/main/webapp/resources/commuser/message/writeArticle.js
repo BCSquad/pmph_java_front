@@ -207,7 +207,7 @@ $(function () {
             layer.open({
                 type: 1,
                 title: false,
-                closeBtn: 0,
+                closeBtn: 1,
                 area: '800px',
                 offset: 'auto',
                 skin: 'layui-layer-nobg', //没有背景色

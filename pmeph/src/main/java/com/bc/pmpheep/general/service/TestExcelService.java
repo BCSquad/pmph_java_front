@@ -15,7 +15,7 @@ import java.util.Map;
 @Service("testExcel")
 public class TestExcelService implements ExcelDownloadService {
     @Override
-    public String getTitle() {
+    public String getTitle(Map<String, Object> param) {
         return "测试的";
     }
 

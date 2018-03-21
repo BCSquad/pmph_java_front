@@ -6,7 +6,7 @@
 
 	<!--帮助列表  -->
 	<select id="queryHelpList" parameterType="java.util.Map"  resultType="java.util.Map">
-		select  * from cms_content cc where cc.category_id= '4'
+		select  * from cms_content cc where cc.category_id= '4' and cc.is_deleted = 0
 	</select>
 
 	<!--帮助手册列表  -->

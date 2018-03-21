@@ -30,7 +30,7 @@
 	     left join book u on t.book_id=u.id
 	     left join writer_user b on b.id=t.writer_id where u.id=#{id} and t.is_long=0
 	     and t.is_auth='1' and t.is_deleted='0'
-	     order by t.gmt_create desc
+	     order by t.sort*t.is_stick desc , t.gmt_create desc
 	     <if test="start >= 0">
 	        limit #{start},3
 	     </if> 
@@ -50,7 +50,8 @@
 		    t.id
 		    from book t left join book_support c on  c.support_id=t.id 
 		    left join book_detail b on b.book_id=t.id 
-		    where t.id= (select support_id from book_support where book_id=#{id})
+		    where t.is_on_sale=1 and t.id in (select support_id from book_support where book_id=#{id}) 
+		    limit 0,1
 	</select>
 	<!-- 查询人卫推荐书籍 -->
 	<select id="queryRecommendByE" parameterType="java.util.Map" resultType="java.util.Map">

@@ -93,7 +93,6 @@ public class OrgUserController extends com.bc.pmpheep.general.controller.BaseCon
         }
         return model;
     }
-
     /**
      * 根据id和机构代码修改机构用户密码
      *

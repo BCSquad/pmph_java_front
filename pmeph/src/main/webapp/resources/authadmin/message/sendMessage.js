@@ -9,8 +9,8 @@ function DoCheck() {
 			ch[i].checked = false;
 		}
 	}
-	
-	
+
+
 	//子复选框有一个未选中时，去掉全选按钮的选中状态
 	for ( var i = 0; i < ch.length; i++) {
 		ch[i].onclick = function() {
@@ -42,6 +42,9 @@ function sending(varId){
             url: contextpath + "authSendMessage/sendMessage.action",
             type: "post",
             data: $("#theForm").serialize(),
+            complete:function(){
+                $("#"+varId).attr("disabled",false);
+            },
             success: function (json) {
                 var data = json.flag;
                 if (data == '2' || data == '3') {
@@ -66,6 +69,8 @@ function sending(varId){
                     UE.getEditor('mText').setContent(content);
                     window.message.error("标题或内容中含有敏感词,请修改后再保存或提交");
                     $("#"+varId).attr("disabled",false);
+				}else if(data == '5'){
+                    window.message.warning("您选中的书籍未被申请,请重新选择");
 				}else {
                 	if(data !='1'){
                         document.getElementById("theForm").reset();
@@ -100,8 +105,8 @@ function sending(varId){
 	// }finally{
 	//
 	// }
-	
-	
+
+
 }
 /**
  * 选择的是教材报名者 点击发送后 显示教材选择界面
@@ -110,7 +115,7 @@ function send_after(){
 	//发送请求 显示 教材选择界面 隐藏表单界面
 	//$("#message-body").hide();
 	//$("#selectBook").show();
-	
+
 	$("#message-body").css({"display":"none"});
 	$("#selectBook").css({"display":"block"});
 }
@@ -130,25 +135,44 @@ function sendf(){
 }
 
 $(function(){
-  /*  $(".icon").hide();
+
+    $(".icon").hide();
     $(".file-tip").hide();
-    $("#file_id").change(function(){  // 当 id 为 file 的对象发生变化时
-        if(($("#file_id").val()).length==0){
-            $("#file_name").text();  //将 #file 的值赋给 #a
-            $("#up_txt").text('重新上传');
-        }else{
-            $("#file_name").text($("#file_id").val());  //将 #file 的值赋给 #a
+    // $("#file_id").change(function(){  // 当 id 为 file 的对象发生变化时
+    //     if(($("#file_id").val()).length==0){
+    //         $("#file_name").text();
+    //         $("#up_txt").text('重新上传');
+    //     }else{
+    //         $("#file_name").text($("#file_id").val());  //将 #file 的值赋给 #a
+    //         $(".icon").show();
+    //         $("#up_txt").text('重新上传');
+    //
+    //         if(((this.files[0].size).toFixed(2))>=(100*1024*1024)){
+    //             			$(".file-tip").show();
+    //                             return false;
+    //                       }
+    //     }
+    //
+    //
+    // })
+    $("#up_txt").uploadFile({
+        start: function () {
+            //限制大小
+            var fileSize = document.getElementById("up_txt_upload").files[0].size;
+            if(fileSize.toFixed(2) >= (100 * 1024 * 1024)){
+                $(".file-tip").show();
+                return false;
+            }
+            console.log("开始上传。。。");
+        },
+        done: function (fileName, fileId, fileSize) {//
+            $("#file_name").text(fileName);
             $(".icon").show();
+            $("#messageFileId").val(fileId);
+            $("#messageFileName").val(fileName);
             $("#up_txt").text('重新上传');
-
-            if(((this.files[0].size).toFixed(2))>=(100*1024*1024)){
-                			$(".file-tip").show();
-                                return false;
-                          }
         }
-
-
-    })*/
+    })
 
 	 // if($('input:radio[name="sendObject"]:checked').val()!='0'){
 	 // 	$("#send").val("下一步");
@@ -162,10 +186,10 @@ $(function(){
     	});
 	send_init();
 	$('#send2').on('click', function(){
-		var chk_value =[]; 
-			$('input[name="choose"]:checked').each(function(){ 
-			chk_value.push($(this).val()); 
-			}); 
+		var chk_value =[];
+			$('input[name="choose"]:checked').each(function(){
+			chk_value.push($(this).val());
+			});
 			if(chk_value.length==0){
 				window.message.error("请选择教材报名者");
 				return false;
@@ -180,13 +204,13 @@ $(function(){
 		send_init();
 		//$("#send").val("下一步");
 	});
-	
+
 	$('#page-size-select').selectlist({
         zIndex: 10,
         width: 110,
         height: 30,
         optionHeight: 30
-        
+
     });
 	//切换分页每页数据数量时 刷新
 	$("#page-size-select").find("li").bind("click",function(){
@@ -204,11 +228,11 @@ $(function(){
         	var sel=$("#select-search-condition").find($("input[name='select-search-condition']")).val();
         	$("#search-name-temp").val(sel);
         	queryMain();
-        } 
+        }
     });
-   
-	
-	
+
+
+
     // 单选框 change时间
    /* $('input:radio[name="sendObject"]').change(function(){
     	if($('input:radio[name="sendObject"]:checked').val()!='0'){
@@ -221,14 +245,14 @@ $(function(){
     			  maxmin: true
     			});
     		layer.full(index);
-    		
+
     	}
     	});*/
 });
 
 
 //$("input[name='submit']").onclick =
-	
+
 /*	function message(){
 	var titleValue = $("#TitleValue").val();
 	var radioValue ; //获取单选按钮的值
@@ -282,7 +306,7 @@ function getValue(){
 	// 	return false;
 	// }
 	//$("#UEContent").val(UEContent);
-	
+
 	if($("#TitleValue").val().length==0){
 		window.message.warning("请输入标题");
 		//$('input[type="submit"]').prop('disabled', true);
@@ -295,8 +319,8 @@ function getValue(){
 	}
 
 	return true;
-	
-	
+
+
 }
 
 
@@ -309,7 +333,7 @@ function queryMain(){
 			queryName:$("#search-name-temp").val(),
 			contextpath:contextpath
 			};
-	
+
 	$.ajax({
 		type:'post',
 		url:contextpath+'info/infoRelease.action?t='+new Date().getTime(),

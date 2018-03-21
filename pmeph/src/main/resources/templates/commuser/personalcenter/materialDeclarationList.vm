@@ -11,8 +11,8 @@
 
 <div class="jcsbssl">
 	<input type="hidden" id="pageinfo" value="$!{para.pageinfo}">
-    <span id="jcsbqb" class="active" onclick="listoction(this,'');" style="cursor:pointer">全部</span>
-    <span id="jcsbwdsb" class=""  onclick="listoction(this,1);" style="cursor:pointer">我的申报</span>
+    <span id="jcsbwdsb" class="active"  onclick="listoction(this,'');" style="cursor:pointer">我的申报</span>
+    <span id="jcsbqb" class="" onclick="listoction(this,1);" style="cursor:pointer">全部</span>
     <span class="jcsbsbzt" id="sbzzjx" onclick="listoction1(1);" style="cursor:pointer">正在进行</span>
     <span class="jcsbsbzt" id="sbyjs" style="cursor:pointer" onclick="listoction1(2);">已结束</span>
     <span class="jcsbsbzt" id="sbzc" onclick="listoction3();" style="cursor:pointer">暂存</span>
@@ -122,16 +122,19 @@
                     <div class="rxian">截止日期：$!{c.age_deadline}</div>
                     #if(${c.notNullIfFirstManager})
                     	#if(( $!{c.chosen_position}==4||$!{c.chosen_position}==12 ) && $!{c.rank}==1 && $!{c.is_force_end}==false)
-	                		<div class="btn-chooseEditor" onclick="chooseEditor('$!{c.textbook_id}')">选编委>></div>
+	                		<div class="btn-chooseEditor" onclick="chooseEditor('$!{c.textbook_id}',this)">选编委>></div>
 	                	#else
-	                		<div class="btn-chooseEditor" onclick="chooseEditor('$!{c.textbook_id}')">查看编委>></div>
+	                		<div class="btn-chooseEditor" onclick="chooseEditor('$!{c.textbook_id}',this)">查看编委>></div>
 	                	#end
+	                	#set($textbook_list = $!{c.textbook_list})
+	                	#if($textbook_list.size() > 1)
 	                	<select id="select_textbook" class="select_textbook" name="select_textbook">
                 			#foreach($t in $!{c.textbook_list})
                 				<option value="$t.id" class="choose_book">#if(( $!{c.chosen_position}==4||$!{c.chosen_position}==12 ) && $!{c.rank}==1 && $!{c.is_force_end}==false && $!{t.is_locked}==false)遴选-#else查看-#end《$!{t.textbook_name}》</option>
                 			#end
                 			<option style="display:none;" value ="-1"></option>
                 		</select>
+                		#end
 	                #end
                 </div>
                 

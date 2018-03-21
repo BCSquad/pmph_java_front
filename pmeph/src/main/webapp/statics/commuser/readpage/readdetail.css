@@ -109,6 +109,8 @@
     font-family: MicrosoftYaHei;
     font-size: 14px;
     color: #999999;
+    max-height: 46px;
+    overflow: hidden;
 }
 
 #writer {
@@ -233,6 +235,8 @@
     list-style: none;
     padding: 0;
     margin: 21px 10px 10px 40px;
+    max-width: 335px;
+    max-height: 116px;
 }
 
 .xl4 li {
@@ -952,7 +956,7 @@
 }
 
 .righttopbook {
-    height: 116px;
+    height: 90px;
     margin: auto;
     display: block;
 }

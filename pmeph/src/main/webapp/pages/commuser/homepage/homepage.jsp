@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <script type="text/javascript">
         var contextpath = '${pageContext.request.contextPath}/';
@@ -139,6 +140,7 @@
                         <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date"
                                                                   pattern="yyyy-MM-dd"/></p>
                         <input type="hidden" value="${list.notEnd}">
+
                         <c:if test="${list.notEnd ==1 and list.is_material_entry==true and list.isapply=='no' }">
                             <div class="left_join"
                                  onclick="window.location.href='${ctx}/material/toMaterialAdd.action?material_id=${list.material_id}'">
@@ -228,7 +230,7 @@
                         </div>
                         <div class="left_two">
                             <div class="textbook_left">重点学科推荐</div>
-                            <div class="all_left"></div>
+                            <div class="all_left" onclick="window.location.href='<c:url value="/books/promoteList.action?type=1" />'">更多>></div>
                             <c:forEach var="ad3" items="${adInfo6.detailList}" varStatus="status">
                                 <c:if test="${status.index==0}">
                                     <div class="p1_left">
@@ -279,7 +281,7 @@
                 </c:forEach>
             </div>
     </div>
-    <div style="background-color: #F6F6F6">
+    <div style="background-color: #F6F6F6;margin-top: 60px;padding-top: 30px;">
         <div class="content-wrapper">
                 <div class="area-6">
                     <div class="doc"></div>

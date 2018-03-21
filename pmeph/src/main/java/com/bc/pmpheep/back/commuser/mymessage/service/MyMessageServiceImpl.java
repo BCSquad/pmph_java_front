@@ -192,15 +192,16 @@ public class MyMessageServiceImpl implements MyMessageService {
         for (DialogueVO dialogueVO : lst) {
             ids.add(dialogueVO.getMsgId());
             map.put(dialogueVO.getMsgId(), dialogueVO);
+            String avatar = dialogueVO.getAvatar();
+            dialogueVO.setAvatar(RouteUtil.userAvatar(avatar));
         }
-
-        for (Message message : messageService.list(ids)) {
+        List<Message>  messageLists = messageService.list(ids);
+        for (Message message : messageLists) {
             DialogueVO dialogueVO = map.get(message.getId());
             if (null != message) {
                 dialogueVO.setContent(message.getContent());
             }
-            String avatar = dialogueVO.getAvatar();
-            dialogueVO.setAvatar(RouteUtil.userAvatar(avatar));
+
         }
 
         return lst;

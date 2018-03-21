@@ -37,9 +37,10 @@ public interface ChooseEditorDao {
 	
 	/**
 	 * 获取机构列表 
+	 * @param material_id 
 	 * @return
 	 */
-	List<Map<String, Object>> getOrgList();
+	List<Map<String, Object>> getOrgList(@Param("material_id")String material_id);
 
 	/**
 	 * 通过记录人和书籍id删除暂存

@@ -27,7 +27,7 @@
 <div class="body">
 	<div class="content-wrapper">
 		<div class="sbxq_title">
-			<span>个人中心 > 教材申报 > 填写申报表</span>
+			<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a style="text-decoration: none;color: #999999;" href="${contextpath}/personalhomepage/tohomepage.action?pagetag=jcsb&pageNum=1&pageSize=10"> 教材申报 </a> > 填写申报表</span>
 		</div>
 		<!-- 图书选择-->
 		<form id="objForm">
@@ -226,8 +226,8 @@
 							</td>
 							<td><input class="cg_input" name="xx_school_name" id="xx_school_name" value="" placeholder="学校名称" maxlength="36"/></td>
 							<td><input class="cg_input" name="xx_major" id="xx_major" value="" placeholder="所学专业" maxlength="16"/></td>
-							<td><input class="cg_input" name="xx_degree" id="xx_degree" value="" style="width: 120px;" placeholder="学历" maxlength="10"/></td>
-							<td><input class="cg_input" name="xx_note" id="xx_note" value="" style="width: 310px;" placeholder="备注" maxlength="33"/></td>
+							<td><input class="cg_input" name="xx_degree" id="xx_degree" value="" style="width: 110px;" placeholder="学历" maxlength="10"/></td>
+							<td><input class="cg_input" name="xx_note" id="xx_note" value="" style="width: 290px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_xxjl()"/></td>
 						</tr>
 					</tbody>
@@ -262,7 +262,7 @@
 							</td>
 							<td><input class="cg_input" name="gz_org_name" value="" id="gz_org_name" placeholder="工作单位"maxlength="33"/></td>
 							<td><input class="cg_input" name="gz_position" value="" id="gz_position" placeholder="职位"maxlength="33" /></td>
-							<td><input class="cg_input" name="gz_note" value="" style="width: 370px;" placeholder="备注" maxlength="33"/></td>
+							<td><input class="cg_input" name="gz_note" value="" style="width: 410px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_gzjl()"/></td>
 						</tr>
 					</tbody>
@@ -297,7 +297,7 @@
 							</td>
 							<td><input class="cg_input" name="jx_school_name" id="jx_school_name" value="" placeholder="学校名称" maxlength="33"/></td>
 							<td><input class="cg_input" name="jx_subject" id="jx_subject" value="" placeholder="教学科目" maxlength="50"/></td>
-							<td><input class="cg_input" name="jx_note" value="" style="width: 370px;" placeholder="备注" maxlength="33"/></td>
+							<td><input class="cg_input" name="jx_note" value="" style="width: 410px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jxjl()"/></td>
 						</tr>
 					</tbody>
@@ -316,28 +316,6 @@
 				<textarea class="text_cl" name="gr_content" id="gr_content" maxlength="1000"></textarea>
 			</div>
 		</div>
-		<!--扩展信息-->
-		<c:forEach var="zjkzxx" items="${zjkzxxList}" varStatus="status">
-		 	<div class="sbxq_item1">
-				<div>
-					<span id="tsxz_span9"></span>
-					<span class="tsxz_title">${zjkzxx.extension_name}</span>
-					<c:choose>
-						<c:when test="${zjkzxx.is_required == true}">
-							<span class="tsxz_ts" style="display: inline;"><img src="${ctx}/statics/image/btxx.png" /></span>
-						</c:when>
-						<c:otherwise>
-							<span class="tsxz_xt" style="display: inline;">（选填）</span>
-						</c:otherwise>
-					</c:choose>
-					<input type="hidden" name="extension_id" value="${zjkzxx.id}"/>
-				</div>
-				<div class="content">
-					<textarea class="text_cl" id="${zjkzxx.is_required}_${status.count}" name="kz_content" maxlength="1000"></textarea>
-					<input type="hidden" name="zjkzxx" value="${zjkzxx.is_required}_${status.count}"/>
-				</div>
-			</div>
-		</c:forEach>
 		<!--主要学术兼职-->
 		<div class="sbxq_item" id="xsjz">
 			<div>
@@ -390,9 +368,10 @@
 				<table class="tab_2" id="tab_jccb">
 					<thead>
 						<tr>
-							<td width="420px">教材名称</td>
+							<td width="400px">教材名称</td>
 							<td width="260px">编写职务</td>
-							<td width="100px">是否数字编委</td>
+							<td width="100px">数字编委</td>
+							<td width="120px">出版时间</td>
 							<td>备注</td>
 							<td width="78px">添加</td>
 						</tr>
@@ -416,7 +395,8 @@
 								</tr></table>
 								<input type="hidden" name="jc_is_digital_editor" value="jc_is_digital_editor_1" />
 							</td>
-							<td><input class="cg_input" name="jc_note" value="" style="width: 290px;" placeholder="备注" maxlength="33"/></td>
+							<td><input class="cg_input" name="jc_publish_date" id="jc_publish_date" value="" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  style="width: 100px;"/></td>
+							<td><input class="cg_input" name="jc_note" value="" style="width: 190px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jccb()"/></td>
 						</tr>
 					</tbody>
@@ -444,16 +424,9 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><input class="cg_input" name="hj_material_name" id="hj_material_name" value="" style="width: 300px;" placeholder="教材名称" maxlength="33"/></td>
-							<td><input class="cg_input" name="hj_isbn" id="hj_isbn" value="" style="width: 110px;" placeholder="标准书号" maxlength="16"/></td>
-							<td style="color: #333333;">
-								<table class="radio_tb" style="width: 320px;"><tr>
-									<td><input type="radio" name="hj_rank_1" value="1" checked="checked"/>教育部十二五</td>
-									<td><input type="radio" name="hj_rank_1" value="2" />国家卫计委十二五</td>
-									<td><input type="radio" name="hj_rank_1" value="3" />其他</td>
-								</tr></table>
-								<input type="hidden" name="hj_rank" value="hj_rank_1" />
-							</td>
+							<td><input class="cg_input" name="hj_material_name" id="hj_material_name" value="" style="width: 300px;" placeholder="教材名称" maxlength="80"/></td>
+							<td><input class="cg_input" name="hj_isbn" id="hj_isbn" value="" style="width: 110px;" placeholder="标准书号" maxlength="50"/></td>
+							<td><input class="cg_input" name="hj_rank_text" id="hj_rank_text" value="" style="width: 300px;" placeholder="教材级别" maxlength="50"/></td>
 							<td><input class="cg_input" name="hj_note" value="" style="width: 250px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_gjghjc()"/></td>
 						</tr>
@@ -476,7 +449,7 @@
 							<td width="230px">教材名称</td>
 							<td width="120px">级别</td>
 							<td width="120px">编写职务</td>
-							<td width="100px">是否数字编委</td>
+							<td width="100px">数字编委</td>
 							<td width="120px">出版时间</td>
 							<td width="120px">标准书号</td>
 							<td>备注</td>
@@ -512,7 +485,7 @@
 								<input type="hidden" name="pmph_is_digital_editor" value="pmph_is_digital_editor_1" />
 							</td>
 							<td><input class="cg_input" name="pmph_publish_date" id="pmph_publish_date" value="" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  style="width: 100px;"/></td>
-							<td><input class="cg_input" name="pmph_isbn" id="pmph_isbn" value="" style="width: 100px;" placeholder="标准书号" maxlength="16"/></td>
+							<td><input class="cg_input" name="pmph_isbn" id="pmph_isbn" value="" style="width: 100px;" placeholder="标准书号" maxlength="50"/></td>
 							<td><input class="cg_input" name="pmph_note" id="pmph_note" value="" style="width: 260px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_rwsjcbx()"/></td>
 						</tr>
@@ -535,7 +508,7 @@
 							<td width="230px">教材名称</td>
 							<td width="120px">级别</td>
 							<td width="120px">编写职务</td>
-							<td width="100px">是否数字编委</td>
+							<td width="100px">数字编委</td>
 							<td width="130px">出版单位</td>
 							<td width="120px">出版时间</td>
 							<td width="120px">标准书号</td>
@@ -565,7 +538,7 @@
                             	</select>
 							</td>
 							<td style="color: #333333;">
-								<table class="radio_tb" style="width: 80px;"><tr>
+								<table class="radio_tb" style="width: 100%;"><tr>
 									<td><input type="radio" name="jcb_is_digital_editor_1" value="1" />是</td>
 					 				<td><input type="radio" name="jcb_is_digital_editor_1" value="0" checked="checked"/>否</td>
 								</tr></table>
@@ -573,7 +546,7 @@
 							</td>
 							<td><input class="cg_input" name="jcb_publisher" id="jcb_publisher" value="" style="width: 100px;" placeholder="出版社" maxlength="16"/></td>
 							<td><input class="cg_input" placeholder="出版时间" id="jcb_publish_date" calendar format="'yyyy-mm-dd'"  z-index="100" name="jcb_publish_date" value="" style="width: 100px;"/></td>
-							<td><input class="cg_input" name="jcb_isbn" id="jcb_isbn" value="" style="width: 100px;" placeholder="标准书号" maxlength="16"/></td>
+							<td><input class="cg_input" name="jcb_isbn" id="jcb_isbn" value="" style="width: 100px;" placeholder="标准书号" maxlength="50"/></td>
 							<td><input class="cg_input" name="jcb_note" value="" style="width: 130px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jcbx()"/></td>
 						</tr>
@@ -691,8 +664,8 @@
 							<td><input class="cg_input" name="zb_monograph_date" id="zb_monograph_date" value="" style="width: 120px;" calendar format="'yyyy-mm-dd'" placeholder="发表日期"/></td>
 							<td style="color: #333333;">
 								<table class="radio_tb" style="width: 140px;"><tr>
-									<td><input type="radio" name="is_self_paid_1" value="0" checked="checked"/>自费</td>
-									<td><input type="radio" name="is_self_paid_1" value="1" />公费</td>
+									<td><input type="radio" name="is_self_paid_1" value="0" checked="checked"/>公费</td>
+									<td><input type="radio" name="is_self_paid_1" value="1" />自费</td>
 								</tr></table>
 								<input type="hidden" name="is_self_paid" value="is_self_paid_1" />
 							</td>
@@ -760,7 +733,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><input class="cg_input" name="sci_paper_name" id="sci_paper_name" value="" style="width: 300px;" placeholder="论文名称" maxlength="45"/></td>
+							<td><input class="cg_input" name="sci_paper_name" id="sci_paper_name" value="" style="width: 300px;" placeholder="论文名称" maxlength="50"/></td>
 							<td><input class="cg_input" name="sci_journal_name" id="sci_journal_name"  value="" style="width: 130px;" placeholder="期刊名称" maxlength="16"/></td>
 							<td><input class="cg_input" name="sci_factor" id="sci_factor" value="" style="width: 170px;" placeholder="期刊SCI影响因子" maxlength="7"/></td>
 							<td><input class="cg_input" name="sci_publish_date" id="sci_publish_date" value="" style="width: 110px;" calendar format="'yyyy-mm-dd'" placeholder="发表时间"/></td>
@@ -861,6 +834,28 @@
 				<textarea class="text_cl" name="intention_content" id="intention_content" maxlength="1000"></textarea>
 			</div>
 		</div>
+		<!--扩展信息-->
+		<c:forEach var="zjkzxx" items="${zjkzxxList}" varStatus="status">
+			<div class="sbxq_item1">
+				<div>
+					<span id="tsxz_span9"></span>
+					<span class="tsxz_title">${zjkzxx.extension_name}</span>
+					<c:choose>
+						<c:when test="${zjkzxx.is_required == true}">
+							<span class="tsxz_ts" style="display: inline;"><img src="${ctx}/statics/image/btxx.png" /></span>
+						</c:when>
+						<c:otherwise>
+							<span class="tsxz_xt" style="display: inline;">（选填）</span>
+						</c:otherwise>
+					</c:choose>
+					<input type="hidden" name="extension_id" value="${zjkzxx.id}"/>
+				</div>
+				<div class="content">
+					<textarea class="text_cl" id="${zjkzxx.is_required}_${status.count}" name="kz_content" maxlength="1000"></textarea>
+					<input type="hidden" name="zjkzxx" value="${zjkzxx.is_required}_${status.count}"/>
+				</div>
+			</div>
+		</c:forEach>
 		<!-- 申报单位-->
 		<div class="sbxq_item1">
 			<div>
@@ -881,7 +876,7 @@
 			<div class="div_butt">
 				<div class="bt_tj" id="butj" onclick="javascript:buttAdd('1')">提交</div>
 				<div class="bt_tj" id="buzc" onclick="javascript:buttAdd('2')">暂存</div>
-				<div class="bt_tj" onclick="javascript:buttGive()">放弃</div>
+				<%--<div class="bt_tj" onclick="javascript:buttGive()">放弃</div>--%>
 			</div>
 
 		</div>

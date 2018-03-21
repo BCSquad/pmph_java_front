@@ -53,7 +53,7 @@ public class ChooseEditorController extends BaseController {
 		String logUserName=(String) user.get("realname");
 		
 		Map<String, Object> textBook = chooseEditorService.queryTextBookById(textBookId);
-		List<Map<String, Object>> OrgList = chooseEditorService.getOrgList();
+		List<Map<String, Object>> OrgList = chooseEditorService.getOrgList(textBook.get("material_id").toString());
 		String textBookName = (String) textBook.get("textbook_name");
 		Boolean is_locked = (Boolean) textBook.get("is_locked");
 		Boolean is_force_end = (Boolean) textBook.get("is_force_end");
