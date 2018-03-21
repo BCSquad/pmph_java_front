@@ -41,8 +41,8 @@
 					<span>${map.title }</span>
 					<div style="width: 100%;">
 	        		<div class="dzsc">
-	        			 <img src="${ctx}/statics/image/${like=='yes' ? 'dz01.png':'dz02.png'}" onclick="addlikes()" id="dz"/>
-	        		      <img src="${ctx}/statics/image/${mark=='yes' ? 'sc101(1).png':'s102(1).png'}" onclick="addmark()" id="sc"/>
+	        			 <img src="${ctx}/statics/image/${like=='yes' ? 'dz01.png':'dz02.png'}"  id="dz" ${is_audit=='false'?'disabled="disabled" style="opacity: 0.6;" title="文章未通过审核，仅供预览。" ':'onclick="addlikes()"'}/>
+	        		      <img src="${ctx}/statics/image/${mark=='yes' ? 'sc101(1).png':'s102(1).png'}"  id="sc" ${is_audit=='false'?'disabled="disabled" style="opacity: 0.6;" title="文章未通过审核，仅供预览。" ':'onclick="addmark()"'}/>
 	        			  <div style="display: inline-block;vertical-align: top;margin-right: 8px;text-align:left;"></div>
 	        		</div>
         			</div>
@@ -93,10 +93,11 @@
                     <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
                     <div class="pl_add">
                     	<a id="001" id="001"></a>
-                    	<textarea class="tarea" id="content"></textarea>
+                    	
+                    	<textarea class="tarea" id="content" ${is_audit=='false'?' style="background-color: #d0d0d0;" title="文章未通过审核，仅供预览。" ':''}></textarea>
                     	
                     </div>
-                    <div class="buttonb"><button id="span_4" onclick="insert()">发表</button></div>
+                    <div class="buttonb"><button id="span_4" onclick="insert()" ${is_audit=='false'?'disabled="disabled" style="background-color: #d0d0d0;" title="文章未通过审核，仅供预览。" ':''}>发表</button></div>
             </div>  
              <div class="block">
               <div id="changepage">
