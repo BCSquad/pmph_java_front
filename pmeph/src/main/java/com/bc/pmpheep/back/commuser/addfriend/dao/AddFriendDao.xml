@@ -12,7 +12,8 @@
 		u.realname
 		,u.id as uid
 		,u.rank
-		,u.avatar
+		<!-- 不符合24个英文字母加数字（mongdb的id都返回DEFAULT-->
+		,case when u.avatar REGEXP '[A-Za-z0-9]{24}' then u.avatar else 'DEFAULT' end as avatar
 		,f.id 
 		,MIN(f.status) as min_status
 		,Max(f.status) as max_status

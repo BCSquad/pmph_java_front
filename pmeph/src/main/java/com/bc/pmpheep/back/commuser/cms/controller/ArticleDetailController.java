@@ -70,6 +70,11 @@ public class ArticleDetailController extends BaseController {
 		} else {
 			UEContent = message.getContent();
 		}
+		//是否已通过审核
+		Boolean is_audit = false;
+		if("2".equals(map.get("auth_status").toString()) && "false".equals(map.get("is_staging").toString())){
+			is_audit = true;
+		}
 
 		// cms附件
 		List<Map<String, Object>> cmsAttach = articleDetailService.queryCMSAttach(map1);
@@ -88,9 +93,12 @@ public class ArticleDetailController extends BaseController {
 
 		mv.addObject("listCom", listCom);
 
-		// 增加点击数
-		int clinum = (Integer.parseInt(map.get("clicks").toString()) + 1);
-		articleDetailService.changeClicks(wid, clinum);
+		if (is_audit) {
+			// 增加点击数
+			int clinum = (Integer.parseInt(map.get("clicks").toString()) + 1);
+			articleDetailService.changeClicks(wid, clinum);
+		}
+		
 		// 猜你喜欢
 		List<Map<String, Object>> listArtSix = articleDetailService.queryArticleSix();
 		// 点赞
@@ -134,6 +142,7 @@ public class ArticleDetailController extends BaseController {
 		mv.addObject("numArt", numArt);
 		mv.addObject("eMap", eMap);
 		mv.addObject("listArtSix", listArtSix);
+		mv.addObject("is_audit", is_audit);
 		mv.setViewName("/commuser/cms/articledetail");
 		return mv;
 	}
