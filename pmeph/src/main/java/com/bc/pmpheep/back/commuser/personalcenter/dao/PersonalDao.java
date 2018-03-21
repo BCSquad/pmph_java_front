@@ -283,13 +283,13 @@ public interface PersonalDao {
 	 * @param writerId BigInteger 用户id
 	 * @return
 	 */
-	int queryLikesb(@Param("id") BigInteger id,@Param("logUserId") BigInteger logUserId);
+	int queryLikesb(@Param("id") String id,@Param("logUserId") String logUserId);
 
 	/**查询用户为某一文章是否点赞
 	 * @param contentId  文章id
 	 * @param writerId   用户id
 	 * @return
 	 */
-	int queryLikesc(@Param("id") BigInteger id,@Param("logUserId") BigInteger logUserId );
+	int queryLikesc(@Param("id") String id,@Param("logUserId") String logUserId );
 
 }
