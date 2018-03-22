@@ -121,7 +121,7 @@ public class WriterUserTrendst {
 		if ("2".equals(online_progress)) { //被申报单位退回
 			title = "教材申报退回";
 			img = "2";
-			content = "抱歉！您于"+dmap.get("create_time").toString()+"申报的《"+dmap.get("material_name").toString()+"》被申报单位被退回。";
+			content = "抱歉！您于"+dmap.get("create_time").toString()+"申报的《"+dmap.get("material_name").toString()+"》被申报单位被退回,退回原因："+dmap.get("return_cause").toString()+"，请您核对后重试!";
 		}else if("3".equals(online_progress)){ //申报单位通过
 			title = "教材申报通过单位审核";
 			img = "1";

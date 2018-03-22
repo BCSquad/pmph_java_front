@@ -195,18 +195,18 @@
             </div>
             <div class="area-4">
                 <div class="tab-bar">
-                    <%-- <c:forEach items="${bookTypes}" var="type" varStatus="status">
+                     <c:forEach items="${bookTypes}" var="type" varStatus="status">
                         <div class="tab ${status.index==0?'active':''}" id="${type.id}"
                              onclick='chooseType("${type.id}")'>${type.type_name}</div>
-                    </c:forEach> --%>
-                    <div class="tab active" id="1" onclick='chooseType("1")'>学校教育</div>
+                    </c:forEach> 
+                    <!-- <div class="tab active" id="1" onclick='chooseType("1")'>学校教育</div>
                     <div class="tab" id="2" onclick='chooseType("2")'>毕业后教育</div>
                     <div class="tab" id="3" onclick='chooseType("3")'>继续教育</div>
-                    <div class="tab" id="4" onclick='chooseType("4")'>考试用书</div>
+                    <div class="tab" id="4" onclick='chooseType("4")'>考试用书</div> -->
                     <div class="page ">
                         <div class="page-num">
                             <input type="hidden" id="book_type">
-                            <span class="beforepage" id="before">${thisrows}</span>
+                            <span class="beforepage" id="before">${thisrows}</span>/
                             <span class="beforepage" id="next">${allrows}</span>
                             <span class="icon-right" onclick='on("next")'></span>
                             <span class="icon-left" onclick='on("before")'></span>
@@ -231,7 +231,8 @@
                             <div class="all_left" onclick="window.location.href='${ctx}/community/tolist.action'">全部>>
                             </div>
                             <c:forEach items="${listM}" var="list" varStatus="status">
-                                <div class="left_con1" onclick="todou('${list.mid}','${list.material_id}','${list.id}')">${list.title}</div>
+                                <%--<div class="left_con1" onclick="todou('${list.mid}','${list.material_id}','${list.id}')">${list.title}</div>--%>
+                                <div class="left_con1" onclick="todou('${list.id}')">${list.title}</div>
                             </c:forEach>
                         </div>
                         <div class="left_two">

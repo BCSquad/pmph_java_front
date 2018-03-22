@@ -37,7 +37,8 @@ String contextpath=request.getContextPath();
       <jsp:include page="/pages/comm/head.jsp"></jsp:include> 
        <div class="content-wrapper">
            <div class="navigation">
-                <a href="homepage/tohomepage.action" >首页</a>&gt;${notice.title }
+                <a href="homepage/tohomepage.action" >首页</a>&gt;
+               <a href="community/tolist.action" >教材社区</a>&gt;${notice.title }
            </div>
            <input type="hidden" id="materialId" value="${notice.material_id }"/>
            <div  class="pagecontent">
@@ -103,7 +104,10 @@ String contextpath=request.getContextPath();
                      </div>
 	               </div>
                </c:if>
-              </div>    
+              </div>
+               <div class="div_butt">
+                   <div class="bt_tj" onclick="toMain()">返回</div>
+               </div>
            </div>
            </div>
            <div class="pageright">

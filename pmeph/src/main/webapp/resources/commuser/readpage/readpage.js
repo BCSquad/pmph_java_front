@@ -89,7 +89,15 @@ function searchBook(typeid) {
         dataType: 'json',
         success: function (json) {
             //alert(json.pagebook);
-            $("#JKDiv_0").html(json.pagebook);
+            
+            if(Empty(json.pagebook)){
+                $("#JKDiv_0").html('<div class="no-more">\n' +
+                    '                   <img src="'+contextpath+'statics/image/aaa4.png'+'">\n' +
+                    '                   <span>木有内容呀~~</span>\n' +
+                    '               \t</div>')
+            }else{
+            	$("#JKDiv_0").html(json.pagebook);
+            }
         }
     });
 }
@@ -105,7 +113,7 @@ function searchXstjBook(typeid) {
             //alert(json.pagebook);
             if(Empty(json.pagebook)){
                 $("#JKFYDiv_0").html('<div class="no-more">\n' +
-                    '                   <img src="'+contextpath+'/statics/image/aaa4.png'+'">\n' +
+                    '                   <img src="'+contextpath+'statics/image/aaa4.png'+'">\n' +
                     '                   <span>木有内容呀~~</span>\n' +
                     '               \t</div>')
             }else{

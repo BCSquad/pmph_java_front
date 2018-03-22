@@ -176,7 +176,7 @@
                     <c:forEach var="type1" items="${materialType}" varStatus="status">
                         <div class="ts_type ${status.index=='0'?'ts_type1':''}" id="FLDiv_${type1.id}"
                              onclick="javaScript:ChangeFLDiv('${type1.id}','ChangeFLDiv_',3)">
-                            <span>${type1.note}</span></div>
+                            <span>${type1.type_name}</span></div>
                     </c:forEach>
                 </div>
                 <div style="clear: both;height: 14px;"></div>
@@ -185,11 +185,11 @@
                          class="tsfl_1 ChangeFLDiv" ${status.index!='0'?'style="display: none;"':''}>
                         <c:forEach items="${type1.dataList}" var="type2">
                             <div class="part_1">
-                                <span>${type2.note}</span>
+                                <span>${type2.type_name}</span>
                             </div>
                             <div class="part_2">
                                 <c:forEach var="type3" items="${type2.dataList}">
-                                    <a target="_blank" href="<c:url value="/books/list.action?type=${type3.id}"/>">${type3.note}</a>
+                                    <a target="_blank" href="<c:url value="/books/list.action?type=${type3.id}"/>">${type3.type_name}</a>
                                 </c:forEach>
                             </div>
                         </c:forEach>

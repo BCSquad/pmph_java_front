@@ -118,8 +118,27 @@ a{text-decoration: none}
    .video-c{width:230px;background-color: #EEEEEE;height:184px}
    .video-d{width:210px;border-bottom:1px solid #EEEEEE;height:44px;margin:0px auto 0px;line-height: 44px;font-size: 16px;color:#333333}
    .video-e{height:30px;width:210px;margin:0px auto 0px;color:#999999;font-size: 14px}
-   .video-f{float:left;line-height: 30px};
+   .video-f{float:left;line-height: 30px}
    .video-g{float:right;line-height:30px;margin-left:5px}
    .video-h{float:right;width:20px;height:30px;
             background-image: url(../../image/css_sprites.png);
             background-position:-418px -144px;}
+
+.div_butt{
+    margin-left: 400px;
+
+}
+.bt_tj{
+    width: 90px;
+    height: 32px;
+    background-color: #70bcc3;
+    border-radius: 2px;
+    margin:auto;
+    cursor: pointer;
+    color: #ffffff;
+    float:left;
+    margin-left:10px;
+    line-height: 32px;
+    margin-top: 20px;
+    text-align: center;
+}
