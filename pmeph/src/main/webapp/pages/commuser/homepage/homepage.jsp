@@ -206,7 +206,7 @@
                     <div class="page ">
                         <div class="page-num">
                             <input type="hidden" id="book_type">
-                            <span class="beforepage" id="before">${thisrows}</span>
+                            <span class="beforepage" id="before">${thisrows}</span>/
                             <span class="beforepage" id="next">${allrows}</span>
                             <span class="icon-right" onclick='on("next")'></span>
                             <span class="icon-left" onclick='on("before")'></span>
@@ -231,7 +231,8 @@
                             <div class="all_left" onclick="window.location.href='${ctx}/community/tolist.action'">全部>>
                             </div>
                             <c:forEach items="${listM}" var="list" varStatus="status">
-                                <div class="left_con1" onclick="todou('${list.mid}','${list.material_id}','${list.id}')">${list.title}</div>
+                                <%--<div class="left_con1" onclick="todou('${list.mid}','${list.material_id}','${list.id}')">${list.title}</div>--%>
+                                <div class="left_con1" onclick="todou('${list.id}')">${list.title}</div>
                             </c:forEach>
                         </div>
                         <div class="left_two">

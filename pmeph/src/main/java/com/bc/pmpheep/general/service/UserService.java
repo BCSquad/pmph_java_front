@@ -41,15 +41,17 @@ public class UserService {
 
         int pp = MapUtils.getIntValue(list.get(0), "pp");
 
-        int score = MapUtils.getIntValue(rules.get("logins"), "point", 0);
+        int day = 5;
+        int score = MapUtils.getIntValue(rules.get("login"), "point", 0);
 
-        if (pp > 0) {
+        if (pp > 0) { // 今天
             score = 0;
         } else {
             if (list.size() >= 2) {
+
                 for (int i = 1; i < list.size(); i++) {
-                    if (MapUtils.getIntValue(list.get(i), "pp") == i) {
-                        score += MapUtils.getIntValue(rules.get("login"), "point", 0);
+                     if (MapUtils.getIntValue(list.get(i), "pp") == i) {
+                        score += MapUtils.getIntValue(rules.get("logins"), "point", 0);
                     } else {
                         break;
                     }
