@@ -512,7 +512,7 @@
 		ON
 		b.`id`= bd.`book_id`
 		WHERE
-		1 = 1 and b.is_promote =1
+		1 = 1 and b.is_key =1
 		and b.is_on_sale=1
 		ORDER BY
 		<if test="parameter.order !=null">
@@ -564,7 +564,7 @@
 		ON
 		b.`id`= bd.`book_id`
 		WHERE
-		1 = 1 and b.is_promote =1
+		1 = 1 and b.is_key =1
 		and b.is_on_sale=1
 		)t
 

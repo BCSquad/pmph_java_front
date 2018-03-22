@@ -29,6 +29,7 @@ $(function(){
         onChange: function () {
         	/*var sel=$("#select-search-org").find("input[name='select-search-org']").val();
         	$("#search-name-org").find("input[class='select-button']").val(sel);*/
+        	$("#page-num-temp").val(1);
         	queryMain();
         } 
     });
@@ -47,15 +48,16 @@ $(function(){
 		queryMain();
 	});
 	//切换机构时查询 刷新
-	$("#select-search-org").find("li").bind("click",function(){
+	/*$("#select-search-org").find("li").bind("click",function(){
 		$("#page-num-temp").val(1);
 		queryMain();
-	});
+	});*/
 	$("#search-name").keyup(function(event){
-		if(event.keyCode ==13){ //回车键弹起事件
+		if(event.keyCode ==13){ //姓名输入框 回车键弹起事件 查询
 			queryBtnClick();
 		  }
 	});
+	
 
 	
 });

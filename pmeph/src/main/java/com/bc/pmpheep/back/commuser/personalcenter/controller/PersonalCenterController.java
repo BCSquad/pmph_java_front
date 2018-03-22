@@ -271,7 +271,7 @@ public class PersonalCenterController extends BaseController {
 		}else if ("grsc".equals(pagetag)) { // 个人收藏
 			// 从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
 			// 设定条件名数组
-			String[] names = {};
+			String[] names = {"is_long"};
 			String[] namesChi = {};
 			queryConditionOperation(names, namesChi, request, mv, paraMap, vm_map);
 
@@ -294,7 +294,7 @@ public class PersonalCenterController extends BaseController {
 			paraMap.put("favoriteId",favoriteId);
 			paraMap.put("favoriteIdb",favoriteIdb);
 			pageParameter.setParameter(paraMap);
-			List<Map<String, Object>> List_map = personalService.listMyFavorites(pageParameter);
+			List<Map<String, Object>> List_map = personalService.listMyFavorites(pageParameter,contextpath);
 			count = personalService.listMyFavoritesCount(pageParameter);
 			// 分页数据代码块
 			String html = this.mergeToHtml("commuser/personalcenter/myFavorites.vm", contextpath, pageParameter,

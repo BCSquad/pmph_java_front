@@ -257,7 +257,7 @@
 		(a.id)
 
 		<choose>
-			<when test="parameter.s!=null and parameter.s!= ''">
+			<when test="parameter.s == null">
 				order by c.gmt_create desc
 			</when>
 			<otherwise>
@@ -1346,8 +1346,15 @@ UNION
 		AND m.writer_id = #{parameter.logUserId}
 
 	)
-)t
-ORDER BY gmt_create DESC  limit ${start},${pageSize}
+)t WHERE
+	1=1
+	<if test="parameter.is_long ==1 ">
+		AND t.f_type=1
+	</if>
+	<if test="parameter.is_long ==0 ">
+		AND t.f_type=2
+	</if>
+ORDER BY t.gmt_create DESC  limit ${start},${pageSize}
 </select>
 
 	<!-- 查我的收藏总数 -->
@@ -1357,6 +1364,7 @@ ORDER BY gmt_create DESC  limit ${start},${pageSize}
 
 (
 	SELECT
+		1 as f_type,
 		b.id AS id,
 		b.bookname AS title,
 		b.author AS author,
@@ -1379,6 +1387,7 @@ ORDER BY gmt_create DESC  limit ${start},${pageSize}
 UNION
 	(
 		SELECT
+			2 as f_type,
 			c.id AS id,
 			c.title AS title,
 			w.realname AS author,
@@ -1398,6 +1407,13 @@ UNION
 		ORDER BY
 			m.gmt_create DESC
 	) ) t
+		WHERE 1=1
+		<if test="parameter.is_long ==1 ">
+			AND t.f_type=1
+		</if>
+		<if test="parameter.is_long ==0 ">
+			AND t.f_type=2
+		</if>
 	</select>
 
 	<!--查询用户是否对某一本书点赞  -->

@@ -1,9 +1,26 @@
 <link rel="stylesheet" href="$!{contextpath}statics/commuser/personalcenter/myfavorites.css" type="text/css">
 <script src="$!{contextpath}resources/commuser/personalcenter/myfavorites.js"></script>
+##is_long =1 为书籍收藏夹，0 为文章收藏夹
+<input type="hidden" class="queryCondition" id="is_long" value="$!{is_long}">
+
+<ul class="replytag_wrapper">
+    <li id="replytag_all" class="replytag
+	    #if(!$!{is_long}||$!{is_long}=='')
+	    	active
+	    #end ">全部</li>
+    <li id="replytag_toreply" class="replytag
+		#if($!{is_long}==1)
+	    	active
+	    #end ">书籍收藏夹</li>
+    <li id="replytag_replied" class="replytag
+		#if($!{is_long}==0)
+	    	active
+	    #end ">文章收藏夹</li>
+</ul>
+
 
 <div id="listContent">
 #foreach($c in $!{List_map})
-
     ##书籍
     #if($!{c.f_type}==1)
         <div class="collection">
@@ -17,6 +34,7 @@
             </div>
             <div class="content" style="width: 810px;" >
                 <div class="content-img">
+
                     <img src="$!{c.image_url}" />
                 </div>
                 <div class="content-text" style="width: 690px;">
@@ -38,6 +56,7 @@
             </div>
         </div>
     #else
+    ##文章
         <div class="collection" >
             <div class="title">
                 <div class="title-text">
@@ -45,7 +64,7 @@
                 </div>
                 <input type="hidden" id="cms$!{c.id}" value="$!{c.id}"/>
                 <div class="tm">
-                   <span class="author-icon" ><img  src="$!{c.avatar}" style="width:25px;height:25px;border-radius: 50%;"/>
+                   <span class="author-icon" ><img  src="$!{contextpath}$!{c.avatar}" style="width:25px;height:25px;border-radius: 50%;"/>
                    </span>
                     <span class="name">$!{c.author}</span>
                     <span class="time"><fmt:formatDate  value="$!{c.gmt_create}" pattern="yyyy.MM.dd"/></span>
@@ -74,9 +93,6 @@
             </div>
         </div>
     #end
-
-
-
 #end
 </div>
 

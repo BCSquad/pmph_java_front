@@ -88,9 +88,9 @@
         <input type="hidden" name="refer"
                value="<%=request.getParameter("refer")== null ? "" : request.getParameter("refer")%>">
         <p><input type="text" name="username" id="user" placeholder="用户名"></p>
-        <p style="display: block;height: 50px;"><input type="radio" name="usertype" value="1">作家用户<input type="radio"
-                                                                                                         name="usertype"
-                                                                                                         value="2">机构用户
+        <p style="display: block;height: 50px;">
+            <input type="radio" name="usertype" checked  value="1">作家用户
+            <input type="radio" name="usertype"  value="2">机构用户
         </p>
         <%--<p><input type="password" name="passw0rd" id="pwd" placeholder="密码"></p>--%>
         <p><input type="submit" id="submit" value="登录"></p>
