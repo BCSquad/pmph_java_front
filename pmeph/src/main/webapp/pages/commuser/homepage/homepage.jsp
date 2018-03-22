@@ -206,7 +206,7 @@
                     <div class="page ">
                         <div class="page-num">
                             <input type="hidden" id="book_type">
-                            <span class="beforepage" id="before">${thisrows}</span>
+                            <span class="beforepage" id="before">${thisrows}</span>/
                             <span class="beforepage" id="next">${allrows}</span>
                             <span class="icon-right" onclick='on("next")'></span>
                             <span class="icon-left" onclick='on("before")'></span>
