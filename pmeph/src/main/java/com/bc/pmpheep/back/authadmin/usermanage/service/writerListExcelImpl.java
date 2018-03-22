@@ -61,7 +61,12 @@ public class writerListExcelImpl implements ExcelDownloadService {
         Map<String, Object> userInfo= (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_ORGUSER);
         orgUser.setOrgId(Long.parseLong(userInfo.get("org_id").toString()));
         writerUser.setOrgId(orgUser.getOrgId());
-        writerUser.setName( MapUtils.getString(param, "search"));
+         String username = request.getParameter("search");
+        String name="";
+        if (username != null) {
+            name = java.net.URLDecoder.decode(username, "UTF-8");
+        }
+        writerUser.setName(name);
         pageParameter.setParameter(writerUser);
         pageParameter.setStart(null);
         List<WriterUser>  exportWriterUser = writerUserDao.getOrg(pageParameter);
