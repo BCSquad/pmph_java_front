@@ -12,20 +12,28 @@
           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd
           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 ">
-    <!-- 加载属性文件 -->
-    <context:property-placeholder location="classpath:spring/spring.properties" ignore-unresolvable="true" />
-
     <!-- 使用cglib进行动态代理 -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <context:component-scan base-package="com.bc.pmpheep.back;com.bc.pmpheep.general">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
+    <context:property-placeholder location="classpath:spring/spring.properties" ignore-unresolvable="true" />
+
+    <!-- 保存变量到application范围 -->
+    <bean class="org.springframework.web.context.support.ServletContextAttributeExporter">
+        <property name="attributes">
+            <map>
+                <entry key="redirectUrl" value="${sso.url}"/>
+                <entry key="serviceID" value="${sso.serviceID}"/>
+            </map>
+        </property>
+    </bean>
 
 
     <bean id="loginInterceptor" class="com.bc.pmpheep.back.interceptor.LoginInterceptor">
-        <property name="remoteUrl" value="${remoteUrl}"></property>
-        <property name="redirectUrl" value="/pages/comm/login.jsp"/>
+        <property name="redirectUrl" value="${sso.url}"/>
+        <property name="serviceID" value="${sso.serviceID}"></property>
         <property name="pathWithUsertypeMaps">
             <set>
 

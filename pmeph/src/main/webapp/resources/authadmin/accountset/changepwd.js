@@ -55,6 +55,7 @@ function modpassword() {
         success: function (responsebean) {
             if (responsebean.code == 1) {
                 message.success("密码修改成功");
+                window.location = contextpath + 'admininfocontroller/toadmininfo.action'
             }
         }
     });
