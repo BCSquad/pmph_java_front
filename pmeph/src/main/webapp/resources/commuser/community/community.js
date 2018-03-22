@@ -93,4 +93,9 @@
 	  var s = time.getSeconds();  
 	  return y+'-'+add0(m)+'-'+add0(d)+' '+add0(h)+':'+add0(mm)+':'+add0(s);  
 	}
-  function add0(m){return m<10?'0'+m:m }; 
+  function add0(m){return m<10?'0'+m:m };
+
+ function toMain(){
+     window.location.href=contextpath+"community/tolist.action";
+ }
+
