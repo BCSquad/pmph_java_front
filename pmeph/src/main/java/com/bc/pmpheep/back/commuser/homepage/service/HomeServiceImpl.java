@@ -3,8 +3,9 @@ package com.bc.pmpheep.back.commuser.homepage.service;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
-
+import java.util.HashMap;
 import org.apache.commons.collections.MapUtils;
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -139,8 +140,11 @@ public class HomeServiceImpl implements HomeService {
      */
     @Override
     public Map<String, Object> getPageAdInfo(String adName) {
-        Map<String, Object> adInfo = homeDao.getPageAdInfo(adName);
-        adInfo.put("detailList", homeDao.getPageAdDetail(adName));
+        Map<String, Object> adInfo =new HashMap<String, Object>();
+        adInfo= homeDao.getPageAdInfo(adName);
+        if(adInfo!=null){
+            adInfo.put("detailList", homeDao.getPageAdDetail(adName));
+        }
         return adInfo;
     }
 

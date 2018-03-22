@@ -262,7 +262,7 @@ public interface PersonalService {
 	 * @param pageParameter
 	 * @return
 	 */
-	public List<Map<String, Object>> listMyFavorites(PageParameter<Map<String, Object>> pageParameter);
+	public List<Map<String, Object>> listMyFavorites(PageParameter<Map<String, Object>> pageParameter,String contextpath);
 
 	/**
 	 * 我的收藏总数

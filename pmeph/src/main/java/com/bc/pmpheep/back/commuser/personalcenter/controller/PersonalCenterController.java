@@ -294,7 +294,7 @@ public class PersonalCenterController extends BaseController {
 			paraMap.put("favoriteId",favoriteId);
 			paraMap.put("favoriteIdb",favoriteIdb);
 			pageParameter.setParameter(paraMap);
-			List<Map<String, Object>> List_map = personalService.listMyFavorites(pageParameter);
+			List<Map<String, Object>> List_map = personalService.listMyFavorites(pageParameter,contextpath);
 			count = personalService.listMyFavoritesCount(pageParameter);
 			// 分页数据代码块
 			String html = this.mergeToHtml("commuser/personalcenter/myFavorites.vm", contextpath, pageParameter,

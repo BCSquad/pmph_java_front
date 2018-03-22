@@ -118,7 +118,7 @@ public class ReadController {
             zdtjXxjyMap.put("type", 636); //考试用书
         }*/
         //查询条数
-        zdtjXxjyMap.put("startrows", "1");
+        zdtjXxjyMap.put("startrows", "0");
         zdtjXxjyMap.put("endrows", "10");
         zdtjXxjyList = readService.queryZdtjReadList(zdtjXxjyMap);
         for (int i = 0; i < zdtjXxjyList.size(); i++) {
@@ -152,7 +152,7 @@ public class ReadController {
         //图书类型
         zdtjXxjyMap.put("type", type);
         //查询条数
-        zdtjXxjyMap.put("startrows", "1");
+        zdtjXxjyMap.put("startrows", "0");
         zdtjXxjyMap.put("endrows", "10");
         zdtjXxjyList = readService.queryXstjReadList(zdtjXxjyMap);
         for (int i = 0; i < zdtjXxjyList.size(); i++) {
