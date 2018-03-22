@@ -231,7 +231,8 @@
                             <div class="all_left" onclick="window.location.href='${ctx}/community/tolist.action'">全部>>
                             </div>
                             <c:forEach items="${listM}" var="list" varStatus="status">
-                                <div class="left_con1" onclick="todou('${list.mid}','${list.material_id}','${list.id}')">${list.title}</div>
+                                <%--<div class="left_con1" onclick="todou('${list.mid}','${list.material_id}','${list.id}')">${list.title}</div>--%>
+                                <div class="left_con1" onclick="todou('${list.id}')">${list.title}</div>
                             </c:forEach>
                         </div>
                         <div class="left_two">

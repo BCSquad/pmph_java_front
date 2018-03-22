@@ -156,9 +156,11 @@ function tosurvey() {
 }
 
 // 跳转公告详情页面
-function todou(mid,material_id,id) {
-	// location.href = contextpath + 'community/tolist.action?id=' + mid;
-    location.href = contextpath +'cmsnotice/noticeMessageDetail.action?id='+mid+'&materialId='+material_id+'&csmId='+id+'&'+'&tag=FromCommunityList';
+// function todou(mid,material_id,id) {
+    // location.href = contextpath +'cmsnotice/noticeMessageDetail.action?id='+mid+'&materialId='+material_id+'&csmId='+id+'&'+'&tag=FromCommunityList';
+// }
+function todou(id) {
+location.href = contextpath + 'community/toCommunity.action?id=' + id;
 }
 
 //添加好友 按钮触发
