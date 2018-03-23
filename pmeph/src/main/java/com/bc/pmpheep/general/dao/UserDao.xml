@@ -79,6 +79,21 @@ FROM
         update writer_point set total=total+#{scores},gain=gain+#{scores} where user_id=#{id};
         insert into writer_point_log (user_id,rule_id,point) values (#{id},#{ruleid},#{scores});
     </insert>
+	<select id="getFriendInfo" parameterType="map" resultType="map">
+		SELECT
+			wu.id AS ID,
+			wu.nickname AS nickname,
+			wu.email,
+			wu.telephone
+		FROM
+			writer_friend wf
+		INNER JOIN writer_user wu ON wf.request_id = wu.id
+		WHERE
+			STATUS = '2'
+		AND target_id = 13942
+		AND wf.request_id = 13943
+		LIMIT 0,1
+	</select>
 
 
 </mapper>

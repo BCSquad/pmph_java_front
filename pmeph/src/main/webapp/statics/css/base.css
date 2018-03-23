@@ -215,6 +215,34 @@ body {
     margin-top: 20px;
     text-align: center;
 }
+
+.image_tips{
+    position: absolute;
+    min-width: 300px;
+/* max-width: 450px; */
+    width: 380px;
+    top: 50px;
+    height: 30px;
+    right: -10px;
+    background-color: #eee;
+    line-height: 30px;
+    opacity: 0.8;
+    border-radius: 4px;
+    color: #333;
+    font-size: 14px;
+}
+.image_tips span{
+    position: absolute;
+    border-bottom: 10px solid #eee;
+    border-top: 5px solid transparent;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    top: -12px;
+    right: 40px;
+    width: 0;
+    height: 0;
+    opacity: 0.8;
+}
 .btm-tips{
     position: fixed;
     bottom: -50px;
