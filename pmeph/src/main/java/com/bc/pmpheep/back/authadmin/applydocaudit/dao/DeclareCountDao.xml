@@ -31,7 +31,7 @@
 			</if>
 		</where>
 		GROUP BY t.id
-		HAVING (decid1>=1 or decid2>=1 or decid3>=1)
+		HAVING (decid1>=1 or decid2>=1 or decid3>=1 or decid4>=1)
 	</select>
 
 
