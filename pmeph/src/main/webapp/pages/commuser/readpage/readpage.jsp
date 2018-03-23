@@ -18,7 +18,9 @@
     <title>读书首页</title>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/readpage/readpage.css" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.js"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.scroll.js"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
     <script src="${ctx}/resources/commuser/readpage/readpage.js" type="text/javascript"></script>
@@ -170,31 +172,41 @@
             	<!--描述：图书分类-->
                 <div class="rg_content">
                     <span id="span_3" class="tsfl">图书分类</span>
+                    <select id="ts_type_0" name= "ts_type_0" style="float:right;">
+                    	<c:forEach items="${materialType}" var="type0">
+                    		<option value="${type0.id }">${type0.type_name }</option>
+                    	</c:forEach>
+                    </select>
                     <hr style=" height:1px;border:none;border-top:1px solid #f0f0f0;">
                 </div>
-                <div>
-                    <c:forEach var="type1" items="${materialType}" varStatus="status">
-                        <div class="ts_type ${status.index=='0'?'ts_type1':''}" id="FLDiv_${type1.id}"
-                             onclick="javaScript:ChangeFLDiv('${type1.id}','ChangeFLDiv_',3)">
-                            <span>${type1.type_name}</span></div>
-                    </c:forEach>
-                </div>
-                <div style="clear: both;height: 14px;"></div>
-                <c:forEach items="${materialType}" var="type1" varStatus="status">
-                    <div id="ChangeFLDiv_${type1.id}"
-                         class="tsfl_1 ChangeFLDiv" ${status.index!='0'?'style="display: none;"':''}>
-                        <c:forEach items="${type1.dataList}" var="type2">
-                            <div class="part_1">
-                                <span>${type2.type_name}</span>
-                            </div>
-                            <div class="part_2">
-                                <c:forEach var="type3" items="${type2.dataList}">
-                                    <a target="_blank" href="<c:url value="/books/list.action?type=${type3.id}"/>">${type3.type_name}</a>
-                                </c:forEach>
-                            </div>
-                        </c:forEach>
+                <c:forEach items="${materialType}" var="type0" varStatus="status">
+                    <div id="type0_div_${type0.id }" class="type0_div" ${status.index!='0'?'style="display: none;"':''}>
+                    	<div>
+		                    <c:forEach var="type1" items="${type0.dataList}" varStatus="status">
+		                        <div class="ts_type ${status.index=='0'?'ts_type1':''}" id="FLDiv_${type1.id}"
+		                             onclick="javaScript:ChangeFLDiv('${type1.id}','ChangeFLDiv_',3)">
+		                            <span>${type1.type_name}</span></div>
+		                    </c:forEach>
+		                </div>
+		                <div style="clear: both;height: 14px;"></div>
+		                <c:forEach items="${type0.dataList}" var="type1" varStatus="status">
+		                    <div id="ChangeFLDiv_${type1.id}"
+		                         class="tsfl_1 ChangeFLDiv" ${status.index!='0'?'style="display: none;"':''}>
+		                        <c:forEach items="${type1.dataList}" var="type2">
+		                            <div class="part_1">
+		                                <span>${type2.type_name}</span>
+		                            </div>
+		                            <div class="part_2">
+		                                <c:forEach var="type3" items="${type2.dataList}">
+		                                    <a target="_blank" href="<c:url value="/books/list.action?type=${type3.id}"/>">${type3.type_name}</a>
+		                                </c:forEach>
+		                            </div>
+		                        </c:forEach>
+		                    </div>
+		                </c:forEach>
                     </div>
                 </c:forEach>
+                
                 <!--描述：图书畅销-->
                 <div class="rg_content">
                     <span class="tsfl">图书畅销榜</span>
