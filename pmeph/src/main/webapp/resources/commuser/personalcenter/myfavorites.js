@@ -1,3 +1,24 @@
+//收藏夹切换
+$(function(){
+    $(".replytag").each(function(){
+        var $t = $(this);
+        $t.unbind().bind("click",function(){
+            var tid = $t.attr("id");
+            if (tid=="replytag_all") {
+                $("#is_long").val("");
+            }else if(tid=="replytag_toreply"){
+                $("#is_long").val("1");
+            }else if(tid=="replytag_replied"){
+                $("#is_long").val("0");
+            }
+            $(".replytag").removeClass("active");
+            $t.addClass("active");
+            $("#pageNum").val(1);
+            queryMain();
+        });
+    });
+});
+
 
     //文章点赞或取消点赞
     function addlikec(id){

@@ -108,7 +108,7 @@ table{
     width: 100%;
     border-spacing: 0px 0px;
     border-collapse: collapse;
-    table-layout: fixed;/*ÁÐ¿íÓÉ±í¸ñ¿í¶ÈºÍÁÐ¿í¶ÈÉè¶¨¡£*/  
+    table-layout: fixed;/*åˆ—å®½ç”±è¡¨æ ¼å®½åº¦å’Œåˆ—å®½åº¦è®¾å®šã€‚*/  
 }
 table thead tr{
     height: 46px;
@@ -146,7 +146,7 @@ td{
 	white-space:pre-line;
 	overflow:hidden;
 	text-overflow:ellipsis;
-	width: 50%;
+	/* width: 50%; */
 }
 
 .font_name {

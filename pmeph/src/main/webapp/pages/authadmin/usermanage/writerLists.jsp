@@ -371,7 +371,7 @@
 
     function exportExcel(){
         window.location.href = contextpath
-            + 'excel/download.action?service=writerListExcelImpl'+ '&search=' + encodeURI(encodeURI($("#ssk").val()));
+            + 'excel/download.action?service=writerListExcelImpl&search='+ encodeURI(encodeURI($("#ssk").val()));
     }
 </script>
 <div style="background-color: white;width: 100%;padding: 0;margin: 0;height: 220px;border: none;overflow: hidden;">

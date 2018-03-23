@@ -66,7 +66,8 @@
 		end) avatar,
 		u.gmt_update ,
 		u.material_id,
-	    (select cc.id from cms_content cc where cc.material_id=u.material_id and cc.is_material_entry=1) as cmsid,
+	    -- (select cc.id from cms_content cc where cc.material_id=u.material_id and cc.is_material_entry=1) as cmsid,
+		cc.id  as  cmsid,
 		u.is_read+'' is_read,
 		u.sender_id
 		FROM
@@ -77,6 +78,7 @@
 		AND u.sender_type = 2
 		LEFT JOIN org_user s3 ON u.sender_id = s3.id
 		AND u.sender_type = 3
+		left join cms_content cc on cc.material_id = u.material_id AND cc.is_material_entry = 1
 		WHERE
 		u.is_withdraw = 0
 		AND u.is_deleted = 0
@@ -89,7 +91,14 @@
 			AND u.material_id !=0
 		</if>
 
-
+		<if test="is_read!='' and is_read!=null">
+			<if test="is_read == 1">
+				and u.is_read = 1
+			</if>
+			<if test="is_read == 0">
+				and u.is_read = 0
+			</if>
+		</if>
 		<!-- 系统消息 -->
 		<if test="condition==0">
 			AND u.material_id =0
@@ -117,7 +126,14 @@
 			AND u.material_id !=0
 		</if>
 
-
+		<if test="is_read!='' and is_read!=null">
+			<if test="is_read == 1">
+				and u.is_read = 1
+			</if>
+			<if test="is_read == 0">
+				and u.is_read = 0
+			</if>
+		</if>
 		<!-- 系统消息 -->
 		<if test="condition==0">
 			AND u.material_id =0

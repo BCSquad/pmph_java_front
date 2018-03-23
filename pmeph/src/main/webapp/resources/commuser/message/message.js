@@ -1,3 +1,72 @@
+// 已读 未读
+function getMessage(is_read,id1,id2){
+    $("#"+id1).css({"background-color":"#1d8ca0","color":"#fff"});
+    $("#"+id2).css({"background-color":"#E6F1F3","color":"#03717b"});
+    $("#is_read_hidden").val(is_read);
+    $.ajax({
+        type: 'post',
+        url: "messageIsRead.action",
+        data: {"startPara": 0, "condition": $("input[name='select']").val(),"is_read":is_read},
+        dataType: 'json',
+        success: function (json) {
+            console.log(json);
+           document.getElementById("message_content").innerHTML='';
+            var tableHtml = " <table class=\"table\" id=\"messageTable\" ></table>";
+            $("#message_content").append(tableHtml);
+            var str = '';
+            var strMessage = '';
+            if(json.listSize>0){
+                $.each(json.list, function (i, n) {
+                    var unixTimestamp = new Date(n.time);
+                    commonTime = unixTimestamp.toLocaleString();
+
+                    str += "<tr style='width: 70%' class='tr_"+n.id +"'>" +
+                        "<th rowspan='2' class='headPortrait'><img  class ='pictureNotice' src='" + /*projectName + "/"*/ contextpath + n.avatar + "'></th>" +
+                        "<td class='type1'><span>";
+
+                    str += n.title;
+
+                    str += "</span><span class='time1'>" + commonTime + "</span></td></tr><tr style='width: 30%' class='tr_"+n.id +"'>";
+
+                    if ((n.msgType==0||n.msgType==1)) {
+                        str += "<td colspan='2' class='title' style='cursor: pointer;' onclick='showup(" + n.id + ")'>"
+                        if (n.is_read == 1) {
+                            str += '<img src="' + contextpath + 'statics/image/readyes.png"  id="readyes'+n.id+'" class="readyes"/>';
+                        } else {
+                            str += '<img src="' + contextpath + 'statics/image/readno.png"  id="readno'+n.id+'" class="readyes"/>';
+                        }
+                        +'<span class="fixwidth">'+ n.messageContent+'</span>';
+                    }
+
+                    str += "</td><td class='buttonDetail'>";
+                    if (n.msgType == 0 && n.material_id != 0) {
+                        /*str += "<div class='buttonAccept'><a href='" + contextpath + "message/noticeMessageDetail.action?materialId=" + n.material_id + "'>查看详情</a></div>";*/
+                        str += "<div class='buttonAccept'><a href='" + contextpath + "message/noticeMessageDetail.action?cmsId=" + n.cmsid + "'>查看详情</a></div>";
+                    }
+                    if (n.msgType == 0 || n.msgType == 1) {
+                        str += "<span class='deleteButton' onclick='deleteNotice(" + n.id + ")'><span style='font-size:18px;'>×</span> 删除</span>";
+                    }
+
+                    str += "</td></tr><tr class='tr_"+n.id +"'><td colspan='4' align='center' ><hr class='line'></td></tr>";
+                });
+            }else{
+                str +=" <div class=\"no-more\">\n" +
+                    "\t                    <img src='"+contextpath+"/statics/image/aaa4.png"+"'>\n" +
+                    "\t                    <span>木有内容呀~~</span>\n" +
+                    "               \t\t</div>";
+            }
+            $("#messageTable").append(str);
+
+            if(json.count>0){
+                strMessage+=" <div id=\"loadMoreDiv\" class=\"load-more clearfix\" onclick='loadMore()'>加载更多...</div>\n" +
+                    "            <input id=\"startPara\" name=\"startPara\" type=\"hidden\">";
+            }
+            $("#message_content").append(strMessage);
+
+        }
+    })
+}
+
 //加载更多通知公告
 function loadMore() {
 
@@ -14,7 +83,7 @@ function loadMore() {
     $.ajax({
         type: 'post',
         url: "loadMore.action?",
-        data: {"startPara": startPara, "condition": $("input[name='select']").val()},
+        data: {"startPara": startPara, "condition": $("input[name='select']").val(),"is_read":$("#is_read_hidden").val()},
         dataType: 'json',
         success: function (json) {
             var list = json;
@@ -36,13 +105,13 @@ function loadMore() {
                 var unixTimestamp = new Date(n.time);
                 commonTime = unixTimestamp.toLocaleString();
 
-                str += "<tr style='width: 70%'>" +
+                str += "<tr style='width: 70%' class='tr_"+n.id +"'>" +
                     "<th rowspan='2' class='headPortrait'><img  class ='pictureNotice' src='" + /*projectName + "/"*/ contextpath + n.avatar + "'></th>" +
                     "<td class='type1'><span>";
 
                 str += n.title;
 
-                str += "</span><span class='time1'>" + commonTime + "</span></td></tr><tr style='width: 30%'>";
+                str += "</span><span class='time1'>" + commonTime + "</span></td></tr><tr style='width: 30%' class='tr_"+n.id +"'>";
                 
                 if ((n.msgType==0||n.msgType==1)) {
 	                str += "<td colspan='2' class='title' style='cursor: pointer;' onclick='showup(" + n.id + ")'>"
@@ -67,7 +136,7 @@ function loadMore() {
                     str += "<span class='deleteButton' onclick='deleteNotice(" + n.id + ")'><span style='font-size:18px;'>×</span> 删除</span>";
                 }
 
-                str += "</td></tr><tr><td colspan='4' align='center' ><hr class='line'></td></tr>";
+                str += "</td></tr><tr class='tr_"+n.id +"'><td colspan='4' align='center' ><hr class='line'></td></tr>";
             });
             $("#messageTable").append(str);
 

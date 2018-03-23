@@ -233,7 +233,9 @@ function selectRubmit(){
 							$("#selectedNumIds").val(json.selectedNumIds);
 							if (json.msg!=null) {
 								window.message.success(json.msg);
-								window.location.href=contextpath+'chooseEditor/toPage.action?textBookId='+$("#textBookId").val();
+								setTimeout(function(){
+									window.location.href=contextpath+'chooseEditor/toPage.action?textBookId='+$("#textBookId").val();
+								}, 800);
 							}
 						}
 					});
