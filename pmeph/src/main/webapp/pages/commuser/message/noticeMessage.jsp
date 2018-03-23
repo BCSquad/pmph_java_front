@@ -57,13 +57,17 @@
        					async:false,
        					dataType:'json',
        					success:function(json){
-       						//window.message.success("删除成功");
-       						window.location.href="${ctx}/message/noticeMessageList.action?condition="+$("input[name='select']") .val();
+
+       						window.message.success("删除成功");
+       						layer.close(id);
+       						$(".tr_"+nid).remove();
+       						//window.location.href="${ctx}/message/noticeMessageList.action?condition="+$("input[name='select']") .val();
        					}
        					});
+                    layer.close(id);
        			},
-       			function(){
-       				
+       			function(id){
+                    layer.close(id);
        			}
        	);
         }
@@ -80,10 +84,16 @@
                     <option value="3" ${condition=='3' ?'selected':''}>全部</option>
                     <option value="4" ${condition=='4' ?'selected':''}>公告</option>
                     <option value="0" ${condition=='0' ?'selected':''}>系统消息</option>
+
                 </select>
             </span>
         </div>
-        
+
+        <div style="height: 26px;background-color: #fff;line-height: 26px;padding:0;" class="message">
+            <span class="jcsbsbzt" id="c_span1" onclick="getMessage('1','c_span1','c_span0')">已读</span>
+            <span class="jcsbsbzt" id="c_span0" onclick="getMessage('0','c_span0','c_span1')">未读</span>
+            <input type="hidden" value="" id="is_read_hidden"/>
+        </div>
         <!-- 系统消息标题悬浮框 -->
         <div class="bookmistake" id="bookmistake">
             <form id="bookmistakeform">
@@ -114,12 +124,13 @@
         </div>
 
         <input type="hidden" id="messid" value="${message.id}"/>
-        <div class="message">
-            <table class="table" id="messageTable">
+        <div class="message" id="message_content">
+            <table class="table" id="messageTable" >
             <c:choose>
             	<c:when test="${listSize>0}">
             		<c:forEach items="${list}" var="message">
-		                <tr style="width: 70%">
+
+		                <tr style="width: 70%" class="tr_${message.id }">
 		                    <th rowspan="2" class="headPortrait"><img  class ="pictureNotice" src="${ctx}/${message.avatar}"></th>
 		                    <td class="type1">
 			                    <span>${message.title}<%--<c:if test="${message.msgType==4}">公告 </c:if>
@@ -128,7 +139,7 @@
 			                    <span class="time1" id="time"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${message.time}" /></span>
 		                    </td>
 		                </tr>
-		                <tr style="width: 30%">
+		                <tr style="width: 30%" class="tr_${message.id }">
 		                	  <c:if test="${(message.msgType==0||message.msgType==1)}">
 		                	    <td colspan="2" class="title" style="cursor: pointer;" onclick="showup('${message.id}')" >
 
@@ -163,9 +174,10 @@
 		                        </c:if>
 		                    </td>
 		                </tr>
-		                <tr>
+		                <tr class="tr_${message.id }">
 		                    <td colspan="4" align="center" ><hr class="line"></td>
 		                </tr>
+
 					</c:forEach>
             	</c:when>
             	<c:otherwise>

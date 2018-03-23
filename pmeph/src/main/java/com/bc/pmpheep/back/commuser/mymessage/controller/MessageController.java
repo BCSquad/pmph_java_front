@@ -2,10 +2,7 @@ package com.bc.pmpheep.back.commuser.mymessage.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -251,6 +248,77 @@ public class MessageController extends BaseController {
         return mv;
     }
 
+    //查询通知列表
+    @RequestMapping(value = "/messageIsRead")
+    @ResponseBody
+    public Map<String,Object> messageIsRead(HttpServletRequest request) throws ParseException {
+       Map<String,Object>  returnMap = new HashMap<String,Object>();
+        Map<String, Object> map = getUserInfo();
+        Long userId = new Long(String.valueOf(map.get("id")));
+        //Long userId = (long) 1609;
+        String condition = request.getParameter("condition");
+        String is_read = request.getParameter("is_read");
+        Map<String, Object> paraMap = new HashMap<String, Object>();
+        ModelAndView mv = new ModelAndView();
+
+        paraMap.put("condition", condition);
+        paraMap.put("userId", userId);
+        paraMap.put("is_read", is_read);
+        paraMap.put("startPara", 0);
+        List<Map<String, Object>> list = noticeMessageService.selectNoticeMessage(paraMap);
+        for (int i = 0; i < list.size(); i++) {
+            Map<String, Object> map1 = list.get(i);
+            //处理系统消息 消息内容
+			/*if(map1.get("msgType").toString().equals("1")||map1.get("msgType").toString().equals("0")){
+				//mongoDB查询通知内容
+				Message message = mssageService.get(map1.get("fId").toString());
+				if(null!=message){
+					String str=message.getContent();
+					String regEx_html="<[^>]+>"; //定义HTML标签的正则表达式
+					Pattern p_html=Pattern.compile(regEx_html,Pattern.CASE_INSENSITIVE);
+			        Matcher m_html=p_html.matcher(str);
+			        str=m_html.replaceAll(""); //过滤html标签
+					map1.put("tcontent",str);
+				}else{
+					map1.put("tcontent","内容空!");
+				}
+
+			}*/
+
+            if (map1.get("msgType").toString().equals("4")) {
+                String endTimeStr = map1.get("deadline").toString();
+
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+                Date currentTime = new Date();
+
+
+                Date date = sdf.parse(endTimeStr);
+                if (currentTime.before(date)) {
+                    mv.addObject("notEnd", 1);
+                } else {
+                    mv.addObject("notEnd", 0);
+                }
+
+
+            }
+
+
+            map1.put("avatar", RouteUtil.userAvatar(MapUtils.getString(map1, "avatar")));
+
+        }
+        //不带分页的数据总量
+        int count = noticeMessageService.selectNoticeMessageTotalCount(paraMap);
+        count = count - list.size();
+        returnMap.put("count",count);
+        int listSize = list.size();
+        returnMap.put("listSize",listSize);
+        returnMap.put("list", list);
+        returnMap.put("condition",condition);
+        return returnMap;
+    }
+
     //查询更多通知列表
     @RequestMapping(value = "/loadMore")
     @ResponseBody
@@ -260,6 +328,7 @@ public class MessageController extends BaseController {
         //Long userId = (long) 1609;
         String condition = request.getParameter("condition");
         String para = request.getParameter("startPara");
+        String is_read = request.getParameter("is_read");
         int startPara = 0;
         Map<String, Object> paraMap = new HashMap<String, Object>();
         if (null != para && !para.equals("")) {
@@ -274,6 +343,7 @@ public class MessageController extends BaseController {
 
         paraMap.put("condition", condition);
         paraMap.put("userId", userId);
+        paraMap.put("is_read", is_read);
 
         List<Map<String, Object>> list = noticeMessageService.selectNoticeMessage(paraMap);
         for (int i = 0; i < list.size(); i++) {
