@@ -1,6 +1,18 @@
 button {
     outline: 0;
 }
+.jcsbsbzt {
+    width: 76px;
+    height: 26px;
+    line-height: 26px;
+    background-color: #E6F1F3;
+    float: left;
+    font-size: 14px;
+    text-align: center;
+    margin-left: 10px;
+    color: #03717b;
+    cursor: pointer;
+}
 
 .messageList {
     background-color: #F8F8F8;
@@ -18,7 +30,7 @@ button {
 
 .message {
     background-color: #F8F8F8;
-    margin-top: 15px;
+    margin-top: 10px;
     margin-right: auto;
     margin-left: auto;
     padding: 25px 20px;
