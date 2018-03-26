@@ -119,20 +119,20 @@
         }
     </style>
 <body>
-<%
-    Map<String, Object> userInfo = null;
-    if ("2".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
-        userInfo = (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_ORGUSER);
-    }
+<%--<%--%>
+    <%--Map<String, Object> userInfo = null;--%>
+    <%--if ("2".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {--%>
+        <%--userInfo = (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_ORGUSER);--%>
+    <%--}--%>
 
-    if (userInfo != null) {
-        ApplicationContext applicationContext =
-                WebApplicationContextUtils.getRequiredWebApplicationContext(request.getSession().getServletContext());
-        UserInfoService userInfoService = applicationContext.getBean("com.bc.pmpheep.back.commuser.userinfo.service.UserInfoServiceImpl", UserInfoService.class);
-        Map<String, Object> map = userInfoService.queryValidate(MapUtils.getString(userInfo, "id"));
-        request.setAttribute("progress", map.get("progress"));
-    }
-%>
+    <%--if (userInfo != null) {--%>
+        <%--ApplicationContext applicationContext =--%>
+                <%--WebApplicationContextUtils.getRequiredWebApplicationContext(request.getSession().getServletContext());--%>
+        <%--UserInfoService userInfoService = applicationContext.getBean("com.bc.pmpheep.back.commuser.userinfo.service.UserInfoServiceImpl", UserInfoService.class);--%>
+        <%--Map<String, Object> map = userInfoService.queryValidate(MapUtils.getString(userInfo, "id"));--%>
+        <%--request.setAttribute("progress", map.get("progress"));--%>
+    <%--}--%>
+<%--%>--%>
 <jsp:include page="/pages/comm/headGreenBackGround.jsp">
     <jsp:param name="pageTitle" value="<%=request.getParameter(\"pageType\")  %>"></jsp:param>
 </jsp:include>
@@ -142,12 +142,13 @@
                         <img src="${ctx}/statics/pictures/sad.png">
                     </div>
                     <div class="tipWords">
-                        <span>${progress==2?'抱歉,您提交的管理员认证资料已被退回,请您修改后重试':'您目前还不是机构管理员,快去认证吧'}</span>
+                        <span>${SESSION_USER_CONST_ORGUSER.progress==2?'抱歉,您提交的管理员认证资料已被退回,请您修改后重试':'您目前还不是机构管理员,快去认证吧'}</span>
                     </div>
                 </div>
                 <div class="downDiv">
                     <!-- <div class="leftButton" onclick="toogleTip('none')">知道了</div> -->
-                    <div class="checkButton" onclick="toAuthAudit(${ SESSION_USER_CONST_ORGUSER.id})">${progress==2?'重新认证':'马上认证'}</div>
+                    <%--<div class="checkButton" onclick="toAuthAudit(${ SESSION_USER_CONST_ORGUSER.id})">${progress==2?'重新认证':'马上认证'}</div>--%>
+                    <div class="checkButton" onclick="toAuthAudit(${ SESSION_USER_CONST_ORGUSER.id})">${ SESSION_USER_CONST_ORGUSER.progress==2?'重新认证':'马上认证'}</div>
                 </div>
                 <!-- <div class="close" id="close" onclick="toogleTip('none')">
                     <span>×</span>

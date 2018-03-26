@@ -35,7 +35,7 @@ function getMessage(is_read,id1,id2){
                         } else {
                             str += '<img src="' + contextpath + 'statics/image/readno.png"  id="readno'+n.id+'" class="readyes"/>';
                         }
-                        +'<span class="fixwidth">'+ n.messageContent+'</span>';
+                        str+='<span class="fixwidth">'+ n.messageContent+'</span>';
                     }
 
                     str += "</td><td class='buttonDetail'>";
@@ -120,7 +120,7 @@ function loadMore() {
 	                } else {
 	                    str += '<img src="' + contextpath + 'statics/image/readno.png"  id="readno'+n.id+'" class="readyes"/>';
 	                }
-                    +'<span class="fixwidth">'+ n.messageContent+'</span>';
+                    str+='<span class="fixwidth">'+ n.messageContent+'</span>';
                 }
                 /*if ((n.msgType==0||n.msgType==4)&& n.material_id !=0) {
 	                str += "<td colspan='2' class='title' >"
