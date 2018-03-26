@@ -66,7 +66,7 @@
 						${bookSelects}
 					</select>
 					<div style="float: left;margin-left: 30px;" class="ts_radio">
-						<table style="width: 280px;border:0" cellspacing="0" cellpadding="0">
+						<table style="width: 260px;border:0" cellspacing="0" cellpadding="0">
 							<tr>
 								<c:if test="${materialMap.is_multi_position =='1'}">
 									<td height="30px;"><input type="checkbox" name="zw_1" checked="checked" value="4"/>主编</td>
@@ -89,8 +89,8 @@
 						<!-- 用于遍历radio中的值 -->
 						<input type="hidden" name="preset_position" value="zw_1">
 					</div>
-					<div style="float: left;margin-left: 30px;height: 30px;">
-						<span style="float: left;line-height: 30px;">上传教学大纲：</span>
+					<div style="float: left;margin-left: 20px;height: 30px;">
+						<span style="float: left;line-height: 30px;">上传教学大纲(只能上传一个文件或压缩包)：</span>
 						<div id="fileNameDiv_1" class="fileNameDiv"></div>
 						<input type="hidden" name="syllabus_id" id="syllabus_id_1"/>
 						<input type="hidden" name="syllabus_name" id="syllabus_name_1"/>
@@ -132,12 +132,14 @@
 							<td><span class="btbs">*</span><span>职&emsp;&emsp;务：</span>
 								<input class="cg_input" name="position" value="${userMap.position}" id="position"  maxlength="12"/></td>
 							<td><span class="btbs">*</span><span>职&emsp;&emsp;称：</span>
-								<select id="zclx" name="title">
-									<option value="教授"  ${userMap.title=='教授'?'selected':'' }>教授</option>
-									<option value="讲师" ${userMap.title=='讲师'?'selected':'' }>讲师</option>
-									<option value="高级讲师" ${userMap.title=='高级讲师'?'selected':'' }>高级讲师</option>
-									<option value="副教" ${userMap.title=='副教'?'selected':'' }>副教授</option>
-									<option value="院士" ${userMap.title=='院士'?'selected':'' }>院士</option>
+                                <select id="zclx" name="title">
+                                    <option value="院士" ${userMap.title=='院士'?'selected':'' }>院士</option>
+                                    <option value="教授"  ${userMap.title=='教授'?'selected':'' }>教授</option>
+                                    <option value="教授"  ${userMap.title=='正高'?'selected':'' }>正高</option>
+                                    <option value="副教" ${userMap.title=='副教授'?'selected':'' }>副教授</option>
+                                    <option value="副教" ${userMap.title=='副高'?'selected':'' }>副高</option>
+                                    <option value="高级讲师" ${userMap.title=='高级讲师'?'selected':'' }>高级讲师</option>
+                                    <option value="讲师" ${userMap.title=='讲师'?'selected':'' }>讲师</option>
 									<option value="其他" ${userMap.title=='其他'?'selected':'' }>其他</option>
 								</select></td>
 							<td><span class="btbs">*</span><span style="width: 70px">邮&emsp;&emsp;箱：</span>
@@ -369,9 +371,10 @@
 					<table class="tab_2" id="tab_jccb">
 						<thead>
 						<tr>
-							<td width="400px">教材名称</td>
+							<td width="280px">教材名称</td>
 							<td width="260px">编写职务</td>
 							<td width="100px">数字编委</td>
+							<td width="120px">出版社</td>
 							<td width="120px">出版时间</td>
 							<td>备注</td>
 							<td width="78px">添加</td>
@@ -379,7 +382,7 @@
 						</thead>
 						<tbody>
 						<tr>
-							<td><input class="cg_input" name="jc_material_name" id="jc_material_name" value="" style="width: 360px;" placeholder="教材名称" maxlength="33"/></td>
+							<td><input class="cg_input" name="jc_material_name" id="jc_material_name" value="" style="width: 260px;" placeholder="教材名称" maxlength="33"/></td>
 							<td style="color: #333333;">
 								<table class="radio_tb" style="width: 100%;"><tr>
 									<td><input type="radio" name="jc_position_1" value="0" checked="checked"/>无</td>
@@ -396,6 +399,7 @@
 								</tr></table>
 								<input type="hidden" name="jc_is_digital_editor" value="jc_is_digital_editor_1" />
 							</td>
+                            <td><input class="cg_input" name="jc_publish" value="人民卫生出版社" disabled style="width: 100px;" maxlength="33"/></td>
 							<td><input class="cg_input" name="jc_publish_date" id="jc_publish_date" value="" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  style="width: 100px;"/></td>
 							<td><input class="cg_input" name="jc_note" value="" style="width: 190px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jccb()"/></td>

@@ -261,8 +261,8 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 	</delete>
 	<!-- 作家扩展项填报表 -->
 	<select id="queryZjkzbb" resultType="java.util.Map" parameterType="java.util.Map">
-		select t1.*,t2.extension_name,t2.is_required from dec_extension t1 LEFT JOIN material_extension t2 ON 
-		   t1.extension_id = t2.id where t1.declaration_id = #{declaration_id}
+		select t1.*,t2.declaration_id,t2.content from material_extension t1 LEFT JOIN dec_extension t2 ON
+		   t1.id = t2.extension_id where t2.declaration_id = #{declaration_id}
 	</select>
 	<!-- 作家扩展项填报表新增 -->
 	<insert id="insertZjkzbb" parameterType="java.util.Map">

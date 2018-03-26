@@ -139,7 +139,7 @@ function chooseModel(data){
         //学习经历必填
         if(data.is_edu_exp_required == "1"){
             $("#zyxxjl_bt").css("display","inline");
-            jsonStr=jsonStr+"{\"id\":\"xx_kssj\",\"content\":\"学习经历起止时间必填\"},{\"id\":\"xx_major\",\"content\":\"所学专业不能为空\"},{\"id\":\"xx_degree\",\"content\":\"学历不能为空\"},";
+            jsonStr=jsonStr+"{\"id\":\"xx_kssj\",\"content\":\"学习经历起止时间必填\"},{\"id\":\"xx_school_name\",\"content\":\"学校名称不能为空\"},{\"id\":\"xx_major\",\"content\":\"所学专业不能为空\"},{\"id\":\"xx_degree\",\"content\":\"学历不能为空\"},";
         }else{
             $("#zyxxjl_xt").css("display","inline");
         }
@@ -205,7 +205,7 @@ function chooseModel(data){
         //主编国家规划教材情况必填
         if(data.is_national_plan_required == "1"){
             $("#zbgjjgh_bt").css("display","inline");
-            jsonStr=jsonStr+"{\"id\":\"hj_material_name\",\"content\":\"主编国家规划教材情况必填\"},{\"id\":\"hj_isbn\",\"content\":\"教材标准书号不能为空\"},";
+            jsonStr=jsonStr+"{\"id\":\"hj_material_name\",\"content\":\"主编国家规划教材情况必填\"},{\"id\":\"hj_rank_text\",\"content\":\"教材级别不能为空\"},{\"id\":\"hj_isbn\",\"content\":\"教材标准书号不能为空\"},";
         }else{
             $("#zbgjjgh_xt").css("display","inline");
         }
@@ -383,7 +383,7 @@ function addTsxz(){
         select_nr+
         "</select>"+
         "<div style='float: left;margin-left: 30px;' class='ts_radio'>"+
-        "<table style='width: 280px;border:0' cellspacing='0' cellpadding='0'><tr>";
+        "<table style='width: 260px;border:0' cellspacing='0' cellpadding='0'><tr>";
     if(is_multi_position=='1'){
         thtml += "<td height='30px'><input type='checkbox' name='zw_"+str+"' checked='checked' value='4'/>主编</td>"+
             "<td><input type='checkbox' name='zw_"+str+"' value='2'/>副主编</td>"+
@@ -404,8 +404,8 @@ function addTsxz(){
         "</tr></table>"+
         "<input type='hidden' name='preset_position' value='zw_"+str+"'>"+
         "</div>"+
-        "<div style='float: left;margin-left: 30px;height: 30px;'>"+
-        "<span style='float: left;line-height: 30px;'>上传教学大纲：</span>"+
+        "<div style='float: left;margin-left: 20px;height: 30px;'>"+
+        "<span style='float: left;line-height: 30px;'>上传教学大纲(只能上传一个文件或压缩包)：</span>"+
         "<div id='fileNameDiv_"+str+"' class='fileNameDiv'></div>"+
         "<input type='hidden' name='syllabus_id' id='syllabus_id_"+str+"'/>"+
         "<input type='hidden' name='syllabus_name' id='syllabus_name_"+str+"'/>"+
@@ -511,7 +511,7 @@ function add_jccb(){
     var num = fnt();
     var $table = $("#tab_jccb");
     var $tr = $("<tr id='jccb_"+num+"'>"+
-        "<td><input class='cg_input' id='jc_material_name_"+num+"' name='jc_material_name' value='' style='width: 360px;' placeholder='教材名称'/></td>"+
+        "<td><input class='cg_input' id='jc_material_name_"+num+"' name='jc_material_name' value='' style='width: 260px;' placeholder='教材名称'/></td>"+
         "<td style='color: #333333;'>"+
         "<table class='radio_tb' style='width: 100%;'><tr>"+
         "<td><input type='radio' name='jc_position_"+num+"' checked='checked' value='0'/>无</td>"+
@@ -526,6 +526,7 @@ function add_jccb(){
         "<td><input type='radio' name='jc_is_digital_editor_"+num+"' value='0' checked='checked'/>否</td>"+
         "</tr></table>"+
         "<input type='hidden' name='jc_is_digital_editor' value='jc_is_digital_editor_"+num+"' /></td>"+
+        "<td><input maxlength='33' class='cg_input' name='jc_publish"+num+"' value='人民卫生出版社' disabled style='width: 100px;' /></td>" +
         "<td><input class='cg_input' name='jc_publish_date' id='jc_publish_date"+num+"' value='' placeholder='出版时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100'  style='width: 100px;'/></td>"+
         "<td><input maxlength='33' class='cg_input' name='jc_note' value='' style='width: 190px;' placeholder='备注'/>" +
         "<input type='hidden' name='zdjy' value='jc_material_name_"+num+"' />" +
