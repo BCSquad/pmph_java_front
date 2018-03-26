@@ -776,7 +776,7 @@ function add_acade(){
         "<td><input type='radio' name='ac_award_unit_"+num+"' value='1'/>国际</td>"+
         "<td><input type='radio' name='ac_award_unit_"+num+"' value='2'/>国家</td>"+
         "<td><input type='radio' name='ac_award_unit_"+num+"' value='3'/>省部</td>"+
-        "<td><input type='radio' name='ac_award_unit_"+num+"' value='4' />市</td>"+
+        "<td><input type='radio' name='ac_award_unit_"+num+"' value='4' />市级</td>"+
         "</tr></table>"+
         "<input type='hidden' name='ac_award_unit' value='ac_award_unit_"+num+"' /></td>"+
         "<td><input class='cg_input' name='ac_reward_date' id='ac_reward_date_"+num+"' value='' style='width: 150px;' calendar format=\"'yyyy-mm-dd'\" placeholder='授予时间'/></td>"+
