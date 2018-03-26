@@ -275,8 +275,70 @@ $(function () {
         $(".download-pic").css("display", "none");
 
     })
-})
 
+})
+var t_Time;
+// 鼠标 移动到头像上展示 提示语
+function getImageTips(id,htmlId){
+    // type 小组成员 --好友 非好友  非好友提示语 他还不是您的好友呢！
+    // 好友提示语 昵称：魏大勋 电话：13233427657 邮箱：123456@qq.com
+    // htmlId 是所属最上层的div 或li
+    var self = $(htmlId);
+   // va_id = id;
+    var str = ''
+    console.log(1111111);
+
+    if($(".image_tips").length>0){
+        $(".image_tips").remove();
+    }
+    var flag = true;
+    self.css({"position":"relative"});
+    self.append('<div class="image_tips" id="image_tips"><span></span></div>');
+
+        // if(var_id ==id )
+        if(flag){
+            flag = false;
+            t_Time = setTimeout(function(){ //为了防止 鼠标快速移动 发送多次请求 鼠标需要等待1s中 才发送 提示语 的请求
+                $.ajax({
+                type:'get',
+                url :contextpath+'myFriendInfo/'+id+'.action',
+                contentType: 'application/json',
+                dataType:'json',
+                beforeSend:function(){
+                    clearTimeout(t_Time);
+                },
+                complete:function(){
+                    flag = true;
+
+                },
+                success:function(responsebean){
+                    if(Empty(responsebean)){
+                        str += '他还不是您的好友呢！';
+
+                    }else{
+                        str += '昵称：'+responsebean.nickname+' 电话：'+responsebean.telephone+' 邮箱：'+responsebean.email;
+                    }
+
+                    $("#image_tips").append(str);
+
+                }
+            })
+        },1000);
+        }
+
+
+}
+
+
+
+
+// 鼠标离开 提示语 消失
+function removeImageTips(){
+    clearTimeout(t_Time);
+    if($(".image_tips").length>0){
+        setTimeout("$(\".image_tips\").remove()",300);
+    }
+}
 /*
  * 判断变量是否空值
  * undefined, null, '', false, 0, [], {} 均返回true，否则返回false 

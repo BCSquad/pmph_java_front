@@ -230,4 +230,20 @@
 }
 
 
+button.forXMirrorImg.selected{
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    transform: scaleX(-1);
+/*     filter: FlipH; */
+}
 
+button.forXMirrorImg.selected span.forXMirrorImg{
+	display: block;
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    transform: scaleX(-1);
+/*     filter: FlipH; */
+    height:14px;
+}

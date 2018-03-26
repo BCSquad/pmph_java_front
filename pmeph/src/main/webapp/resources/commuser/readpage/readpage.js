@@ -7,6 +7,20 @@ $(function () {
     //畅销
     searchTscxBook($(".tscx_type.tscx_type1").attr("typeid"));
     
+    //0级图书类型下拉菜单初始化
+    $("#ts_type_0").selectlist({
+        zIndex: 100,
+        width: 100,
+        height: 25,
+        optionHeight: 25,
+        onChange: function () {
+        	console.log($('input[name=ts_type_0]').val());
+        	$(".type0_div").hide();
+        	$("#type0_div_"+$('input[name=ts_type_0]').val()).show();
+        	$("#type0_div_"+$('input[name=ts_type_0]').val()).find(".ts_type:first").trigger("click");
+        } 
+    });
+    
     $('.banner').scroll({
         picElem: $('#move'), //图片父级
         ctrlElem: $('#ctrl'), //控制条父级(包括小圆点和左右箭头)
@@ -24,6 +38,8 @@ $(function () {
             $("#a"+[i]).attr("href","####")
         }
     }
+    
+    
 });
 
 //重点推荐表格切换
@@ -60,6 +76,9 @@ function ChangeCXDiv(typeid) {
     searchTscxBook(typeid);
     //显示当前层
 }
+
+
+
 
 //图书分类
 function ChangeFLDiv(divId, divName) {
