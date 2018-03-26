@@ -1,6 +1,8 @@
 package com.bc.pmpheep.general.controller;
 
+import com.bc.pmpheep.back.util.Const;
 import com.bc.pmpheep.general.service.FileService;
+import com.bc.pmpheep.general.service.UserService;
 import com.mongodb.gridfs.GridFSDBFile;
 
 import org.slf4j.Logger;
@@ -12,9 +14,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 
@@ -30,6 +37,9 @@ public class ImageController {
     @Autowired
     @Qualifier("com.bc.pmpheep.general.service.FileService")
     FileService fileService;
+
+    @Autowired
+    UserService userService;
     /**
      * 图片显示
      *
@@ -56,5 +66,22 @@ public class ImageController {
             // logger.error("文件下载时出现IO异常：{}", ex.getMessage());
         }
         return ;
+    }
+
+    /**
+     * 图片上显示好友信息的 提示语
+     * @param id 好友的id
+     * @param response
+     */
+    @ResponseBody
+    @RequestMapping(value = "/myFriendInfo/{id}", method = RequestMethod.GET)
+    public Map<String,Object> imageTips(@PathVariable("id") String id,HttpServletRequest request, HttpServletResponse response)  {
+        HttpSession session = request.getSession();
+        Map<String, Object> user = (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_WRITER);
+        String userId = user.get("id").toString();
+        if(id.equals(userId)){
+           return user;
+        }
+        return userService.getFriendInfo(id,userId);
     }
 }

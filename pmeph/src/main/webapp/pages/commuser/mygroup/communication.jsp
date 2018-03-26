@@ -168,7 +168,7 @@
                 	<c:forEach var="gropuMemeber" items="${gropuMemebers}" varStatus="st">
 
                 		<c:if test="${st.index <= 11 }"><!-- 0-11  展示12位 -->
-	                		<li >
+	                		<li   onmouseenter="getImageTips('${gropuMemeber.userId}',this)" onmouseleave="removeImageTips()">
                                 <a target="_blank" href="${ctx}/personalhomepage/tohomepage.action?userId=${gropuMemeber.userId}">
 			                    <div class="init_center w65_h50"><img src="${pageContext.request.contextPath}/${gropuMemeber.avatar}" class="groupc_li"/></div>
 			                    <div class="init_center w65_h20_line20">
@@ -179,7 +179,7 @@
 						 </c:if>
 						 <c:if test="${st.index > 11 }"><!-- 0-11  展示12位 -->
 
-	                		<li class="show_Allgroupmember">
+	                		<li  class="show_Allgroupmember"  onmouseenter="getImageTips('${gropuMemeber.userId}',this)" onmouseleave="removeImageTips()">
                                 <a target="_blank" href="${ctx}/personalhomepage/tohomepage.action?userId=${gropuMemeber.userId}">
 			                    <div class="init_center w65_h50"><img src="${pageContext.request.contextPath}/${gropuMemeber.avatar}" class="groupc_li"/></div>
 			                    <div class="init_center w65_h20_line20">

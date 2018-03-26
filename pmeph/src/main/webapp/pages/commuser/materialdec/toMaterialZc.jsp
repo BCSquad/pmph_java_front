@@ -1212,7 +1212,7 @@
                                         <td><input type="radio" name="ac_award_unit_a" value="1"/>国际</td>
                                         <td><input type="radio" name="ac_award_unit_a" value="2"/>国家</td>
                                         <td><input type="radio" name="ac_award_unit_a" value="3"/>省部</td>
-                                        <td><input type="radio" name="ac_award_unit_a" value="4" />市</td>
+                                        <td><input type="radio" name="ac_award_unit_a" value="4" />市级</td>
                                     </tr></table>
                                     <input type="hidden" name="ac_award_unit" value="ac_award_unit_a" />
                                 </td>
@@ -1229,7 +1229,7 @@
                                         <td><input type="radio" name="ac_award_unit_${status.count}" value="1" ${list.award_unit=='1'?'checked':'' }/>国际</td>
                                         <td><input type="radio" name="ac_award_unit_${status.count}" value="2" ${list.award_unit=='2'?'checked':'' }/>国家</td>
                                         <td><input type="radio" name="ac_award_unit_${status.count}" value="3" ${list.award_unit=='3'?'checked':'' }/>省部</td>
-                                        <td><input type="radio" name="ac_award_unit_${status.count}" value="4" ${list.award_unit=='4'?'checked':'' }/>市</td>
+                                        <td><input type="radio" name="ac_award_unit_${status.count}" value="4" ${list.award_unit=='4'?'checked':'' }/>市级</td>
                                     </tr></table>
                                     <input type="hidden" name="ac_award_unit" value="ac_award_unit_${status.count}" />
                                 </td>

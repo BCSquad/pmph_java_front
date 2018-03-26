@@ -811,7 +811,7 @@
 									<td><input type="radio" name="ac_award_unit_1" value="1"/>国际</td>
 									<td><input type="radio" name="ac_award_unit_1" value="2"/>国家</td>
 									<td><input type="radio" name="ac_award_unit_1" value="3"/>省部</td>
-									<td><input type="radio" name="ac_award_unit_1" value="4" />市</td>
+									<td><input type="radio" name="ac_award_unit_1" value="4" />市级</td>
 								</tr></table>
 								<input type="hidden" name="ac_award_unit" value="ac_award_unit_1" />
 							</td>
