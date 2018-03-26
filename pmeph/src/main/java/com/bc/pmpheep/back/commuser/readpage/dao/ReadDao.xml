@@ -49,46 +49,73 @@
 		,t1.id as id1,t1.path as path1 ,t1.type_name as type_name1
 		,t2.id as id2,t2.path as path2 ,t2.type_name as type_name2
 		,t3.id as id3,t3.path as path3 ,t3.type_name as type_name3
-		,p.*
+		
 		from
 		(
 		select * from 
 		material_type m 
-		where m.path = '0'
-		)t0 
-		
-		left join 
-		(
-		select * from material_type m 
-		where path REGEXP  '^0(-[^-]*){1}$'
-		)t1 
-		on t0.id = t1.parent_id
-		
-		left join
-		(
-		select * from material_type m 
-		where path REGEXP  '^0(-[^-]*){2}$'
-		)t2
-		on t1.id = t2.parent_id
-
-		left join 
-		(
-		select * from material_type m 
-		where path REGEXP  '^0(-[^-]*){3}$'
-		)t3
-		on t2.id = t3.parent_id
-		
 		inner join 
 		(
 		select concat(m.path,'-',m.id,'-') full_path from material_type m 
 		inner join book b on b.type = m.id and b.is_on_sale =1
 		group by m.id
 		)p
-		on p.full_path REGEXP concat('^.*-',t3.id,'-.*')
+		on p.full_path REGEXP concat('^.*-',m.id,'-.*')
+		where m.path = '0'
+		group by m.id
+		)t0 
+		
+		left join 
+		(
+		select * from material_type m 
+		inner join 
+		(
+		select concat(m.path,'-',m.id,'-') full_path from material_type m 
+		inner join book b on b.type = m.id and b.is_on_sale =1
+		group by m.id
+		)p
+		on p.full_path REGEXP concat('^.*-',m.id,'-.*')
+		where path REGEXP  '^0(-[^-]*){1}$'
+		group by m.id
+		)t1 
+		on t0.id = t1.parent_id
+		
+		left join
+		(
+		select * from material_type m 
+		inner join 
+		(
+		select concat(m.path,'-',m.id,'-') full_path from material_type m 
+		inner join book b on b.type = m.id and b.is_on_sale =1
+		group by m.id
+		)p
+		on p.full_path REGEXP concat('^.*-',m.id,'-.*')
+		where path REGEXP  '^0(-[^-]*){2}$'
+		group by m.id
+		)t2
+		on t1.id = t2.parent_id
+
+		left join 
+		(
+		select * from material_type m 
+		inner join 
+		(
+		select concat(m.path,'-',m.id,'-') full_path from material_type m 
+		inner join book b on b.type = m.id and b.is_on_sale =1
+		group by m.id
+		)p
+		on p.full_path REGEXP concat('^.*-',m.id,'-.*')
+		where path REGEXP  '^0(-[^-]*){3}$'
+		group by m.id
+		)t3
+		on t2.id = t3.parent_id
+		
+		
 
 		where t0.id in (${firstTypeIds})
-		
+		group by t3.id
 		order by t0.sort, t1.sort , t2.sort , t3.sort 
+		
 
 		<!-- <![CDATA[
 
