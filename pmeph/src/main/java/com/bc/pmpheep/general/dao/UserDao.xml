@@ -2,13 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bc.pmpheep.general.dao.UserDao">
 
-    <select id="getUserType" resultType="map">
-      select '1' type from writer_user where  username=#{username}
-      UNION
-      select '2' type from org_user where  username=#{username}
-    </select>
-
-
     <select id="getUserInfo" resultType="map">
         <if test="usertype == 1">
             select *,
@@ -21,17 +14,6 @@
             from org_user u join org o on u.org_id=o.id where username=#{username}
         </if>
     </select>
-
-    <insert id="addNewUser" >
-        <if test="usertype == 1">
-            insert into  writer_user (username,password,nickname,realname,avatar)
-            VALUES (#{username},'B1:40:2F:CF:BD:1D:92:05',#{username},#{username},'DEFAULT');
-            insert into writer_point (user_id,total,gain,loss) values ((select id from writer_user where username=#{username} ),0,0,0);
-        </if>
-        <if test="usertype == 2">
-            insert into  org_user (username,password,nickname,realname) values (#{username},'B1:40:2F:CF:BD:1D:92:05',#{username},#{username})
-        </if>
-    </insert>
 
 
     <select id="getPointRules" resultType="map">
@@ -65,26 +47,7 @@ UNION
 				sys_operation t
 			WHERE
 				t.business_type = '作家用户'
-			AND t.operate_date &gt; date_add(CURDATE(), INTERVAL - (
-			SELECT cast(m1.p1 / m2.p2 AS DECIMAL(9, 2)) - 1
-FROM
-	(
-		SELECT
-			t1.point p1
-		FROM
-			writer_point_rule t1
-		WHERE
-			t1.rule_code = 'max_login_integral'
-	) m1,
-	(
-		SELECT
-			t2.point p2
-		FROM
-			writer_point_rule t2
-		WHERE
-			t2.rule_code = 'logins'
-	) m2
-	) DAY)
+			AND t.operate_date &gt; date_add(CURDATE(), INTERVAL - (select point-1 from writer_point_rule where rule_code='max_login_integral') DAY)
 			AND t.operate_date &lt; CURDATE()  and t.user_id=#{id} and t.user_name=#{username}
 			GROUP BY
 				datediff(CURDATE(), t.operate_date)

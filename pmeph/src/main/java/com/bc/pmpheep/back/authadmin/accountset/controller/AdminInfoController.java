@@ -143,19 +143,19 @@ public class AdminInfoController extends BaseController {
      * @param orgUser
      * @return
      */
-    @RequestMapping(value = "/updateorguserpassword",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateorguserpassword",method = RequestMethod.POST/*,consumes = "application/json"*/)
     @ResponseBody
-    public ResponseBean<OrgAdminUser> updateOrgUserPassword(/*@RequestBody*/ OrgAdminUser orgUser,HttpServletRequest request) throws IOException {
+    public ResponseBean<OrgAdminUser> updateOrgUserPassword(/*@RequestBody*/ OrgAdminUser orgUser){
         ResponseBean<OrgAdminUser> responseBean=new ResponseBean<>();
 //        orgUser.setId(Long.parseLong("1267"));
         Map <String,Object> map1 = this.getUserInfo() ;
     	Long userId = new Long(String.valueOf(map1.get("id")));
         orgUser.setId(userId);
-      /*  DesRun desRun=new DesRun("",orgUser.getPassword());
-        orgUser.setPassword(desRun.enpsw);*/
+        DesRun desRun=new DesRun("",orgUser.getPassword());
+        orgUser.setPassword(desRun.enpsw);
      
-        //adminInfoService.updatePassword(orgUser);
-        userService.modifyUser(MapUtils.getString(map1,"username"),request.getParameter("password"));
+        adminInfoService.updatePassword(orgUser);
+
         return responseBean;
     }
     
