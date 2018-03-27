@@ -332,6 +332,7 @@ public class MaterialDetailController extends BaseController{
 		String jc_position[] = request.getParameterValues("jc_position");
 		String jc_note[] = request.getParameterValues("jc_note");
 		String jc_publish_date[] = request.getParameterValues("jc_publish_date");
+		String jc_publisher[] = request.getParameterValues("jc_publisher");
 		String jc_is_digital_editor[] = request.getParameterValues("jc_is_digital_editor");
 		for(int i=0;i<jc_material_name.length;i++) { //遍历数组
 			if(!jc_material_name[i].equals("")){ //判断是否存在
@@ -340,6 +341,7 @@ public class MaterialDetailController extends BaseController{
 				JcbjMap.put("is_digital_editor", request.getParameter(jc_is_digital_editor[i]));
 				JcbjMap.put("position", "".equals(request.getParameter(jc_position[i])) ? null:request.getParameter(jc_position[i]));
 				JcbjMap.put("note", jc_note[i]);
+				JcbjMap.put("publisher", jc_publisher[i]);
 				JcbjMap.put("publish_date", "".equals(jc_publish_date[i]) ? null:jc_publish_date[i]);
 
 				JcbjMap.put("sort", i);
@@ -567,7 +569,7 @@ public class MaterialDetailController extends BaseController{
 			//TODO 教材申报提交 生成动态
 			//Map<String, Object> materialMap = this.mdService.queryMaterialbyId(material_id);
 			WriterUserTrendst wut = new WriterUserTrendst(userMap.get("id").toString(), 8, material_id);
-			wut.setDetail("提交教材申报", userMap.get("realname").toString()+" 提交了教材申报《"+materialMap.get("material_name").toString()+"》。", 0);
+			wut.setDetail("提交教材申报", "您的申报《"+materialMap.get("material_name").toString()+"》已提交,请耐心等待 "+returnMap.get("org_name").toString()+" 审核。", 0);
 			personalService.saveUserTrendst(wut);//教材申报提交 生成动态 被覆盖两次了
 		}
 		

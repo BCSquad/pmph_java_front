@@ -512,7 +512,7 @@
                                     </tr></table>
                                     <input type="hidden" name="jc_is_digital_editor" value="jc_is_digital_editor_a" />
                                 </td>
-                                <td><input class="cg_input" name="jc_publish" value="人民卫生出版社" disabled style="width: 100px;" maxlength="33"/></td>
+                                <td><input class="cg_input" name="jc_publisher" value="人民卫生出版社" readonly="true" style="width: 100px;" maxlength="33"/></td>
                                 <td><input class="cg_input" name="jc_publish_date" id="jc_publish_date" value="" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  style="width: 100px;"/></td>
                                 <td><input class="cg_input" maxlength="33" name="jc_note" value="" style="width: 190px;" placeholder="备注"/></td>
                                 <td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jccb()"/></td>
@@ -536,7 +536,7 @@
                                     </tr></table>
                                     <input type="hidden" name="jc_is_digital_editor" value="jc_is_digital_editor_${status.count}" />
                                 </td>
-                                <td><input class="cg_input" name="jc_publish" value="人民卫生出版社" disabled style="width: 100px;" maxlength="33"/></td>
+                                <td><input class="cg_input" name="jc_publisher" value="人民卫生出版社" readonly="true" style="width: 100px;" maxlength="33"/></td>
                                 <td><input class="cg_input" name="jc_publish_date" id="jc_publish_date_${status.count}" value="${list.publish_date}" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  style="width: 100px;"/></td>
                                 <td><input class="cg_input" maxlength="33" name="jc_note" value="${list.note}" style="width: 190px;" placeholder="备注"/>
                                     <input type="hidden" name="zdjy" value="jc_material_name_${status.count}"/>
@@ -589,7 +589,7 @@
                                 <td><input class="cg_input" maxlength="50" name="hj_isbn" value="${list.isbn}" id="hj_isbn_${status.count}" style="width: 110px;" placeholder="标准书号"/></td>
                                 <td><input class="cg_input" name="hj_rank_text" id="hj_rank_text_${status.count}" value="${list.rank_text}" style="width: 300px;" placeholder="教材级别" maxlength="50"/></td>
                                 <td><input class="cg_input" maxlength="33" name="hj_note" value="${list.note}" style="width: 250px;" placeholder="备注"/>
-                                    <input type="hidden" name="zdjy" value="hj_material_name_${status.count},hj_isbn_${status.count}"/>
+                                    <input type="hidden" name="zdjy" value="hj_material_name_${status.count},hj_isbn_${status.count},hj_rank_text_${status.count}"/>
                                 </td>
                                 <td><c:choose>
                                     <c:when test="${status.count == 1}">
