@@ -526,8 +526,8 @@ function add_jccb(){
         "<td><input type='radio' name='jc_is_digital_editor_"+num+"' value='0' checked='checked'/>否</td>"+
         "</tr></table>"+
         "<input type='hidden' name='jc_is_digital_editor' value='jc_is_digital_editor_"+num+"' /></td>"+
-        "<td><input maxlength='33' class='cg_input' name='jc_publish"+num+"' value='人民卫生出版社' disabled style='width: 100px;' /></td>" +
-        "<td><input class='cg_input' name='jc_publish_date' id='jc_publish_date"+num+"' value='' placeholder='出版时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100'  style='width: 100px;'/></td>"+
+        "<td><input maxlength='33' class='cg_input' name='jc_publisher' value='人民卫生出版社' readonly='true' style='width: 100px;' /></td>" +
+        "<td><input class='cg_input' name='jc_publish_date' id='jc_publish_date_"+num+"' value='' placeholder='出版时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100'  style='width: 100px;'/></td>"+
         "<td><input maxlength='33' class='cg_input' name='jc_note' value='' style='width: 190px;' placeholder='备注'/>" +
         "<input type='hidden' name='zdjy' value='jc_material_name_"+num+"' />" +
         "</td>"+
@@ -652,7 +652,6 @@ function add_jcbx(){
         "<td><input class='cg_input' placeholder='出版时间' id='jcb_publish_date_"+num+"' calendar format=\"'yyyy-mm-dd'\"  z-index='100' name='jcb_publish_date' value='' style='width: 100px;'/></td>"+
         "<td><input class='cg_input' maxlength='50' name='jcb_isbn' id='jcb_isbn_"+num+"' value='' style='width: 100px;' placeholder='标准书号'/></td>"+
         "<td><input class='cg_input' maxlength='50' name='jcb_note' value='' placeholder='备注' style='width:130px;'/>" +
-        "<input type='hidden' name='jcb_rank' value='0'/>" +
         "<input type='hidden' name='zdjy' value='jcb_material_name_"+num+",jcb_publisher_"+num+",jcb_isbn_"+num+",jcb_publish_date_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('qtjcbxqk_"+num+"')\"/></td>"+
