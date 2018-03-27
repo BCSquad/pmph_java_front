@@ -106,7 +106,7 @@ function Page(opt) {
                 }else{
                 	var $t = $(this);
                 	var i = parseInt($t.val());
-                	$t.val($t.val().replace(/[^0-9]*/,""));
+                	$t.val($t.val().replace(/[^\d]*/,""));
                 	if (i<1) {
                 		$t.val(1);
 					}else if (i>set.num) {
