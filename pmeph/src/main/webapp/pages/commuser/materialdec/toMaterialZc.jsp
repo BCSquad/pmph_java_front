@@ -145,9 +145,9 @@
                                 <select id="zclx" name="title">
                                     <option value="院士" ${gezlList.title=='院士'?'selected':'' }>院士</option>
                                     <option value="教授"  ${gezlList.title=='教授'?'selected':'' }>教授</option>
-                                    <option value="教授"  ${gezlList.title=='正高'?'selected':'' }>正高</option>
-                                    <option value="副教" ${gezlList.title=='副教授'?'selected':'' }>副教授</option>
-                                    <option value="副教" ${gezlList.title=='副高'?'selected':'' }>副高</option>
+                                    <option value="正高"  ${gezlList.title=='正高'?'selected':'' }>正高</option>
+                                    <option value="副教授" ${gezlList.title=='副教授'?'selected':'' }>副教授</option>
+                                    <option value="副高" ${gezlList.title=='副高'?'selected':'' }>副高</option>
                                     <option value="高级讲师" ${gezlList.title=='高级讲师'?'selected':'' }>高级讲师</option>
                                     <option value="讲师" ${gezlList.title=='讲师'?'selected':'' }>讲师</option>
                                     <option value="其他" ${gezlList.title=='其他'?'selected':'' }>其他</option>
