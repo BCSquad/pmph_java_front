@@ -113,7 +113,7 @@ ul li {
 } */
 
 .op-link {
-    width: 385px;
+    width: 376px;
     height: 400px;
     background-color: #383837;
     opacity: 0.7;
@@ -409,7 +409,7 @@ ul li {
     font-stretch: normal;
     line-height: 24px;
     letter-spacing: 0px;
-    color: #333333;
+    color: #666;
     height: 66px;
     overflow: hidden;
 }
