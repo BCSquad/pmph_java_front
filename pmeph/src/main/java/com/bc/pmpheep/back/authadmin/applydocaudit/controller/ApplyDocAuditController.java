@@ -69,10 +69,10 @@ public class ApplyDocAuditController extends BaseController {
 			if(m.get("actualDeadline") != null){
 				
 				m.put("isEnd",/*Integer.parseInt(dt.format(now))>Integer.parseInt(dt.format((Date)m.get("actualDeadline")))||*/((Boolean)m.get("is_all_textbook_published") || (Boolean)m.get("is_force_end"))?1:0);
-				m.put("contextpath", contextpath);
+				m.put("contextpath", request.getContextPath() + "/");
 			}else{
 				m.put("isEnd", 0);
-				m.put("contextpath", contextpath);
+				m.put("contextpath", request.getContextPath() + "/");
 			}
 			html += templateService.mergeTemplateIntoString(vm, m);
 		}
@@ -112,10 +112,10 @@ public class ApplyDocAuditController extends BaseController {
 			if(m.get("actualDeadline") != null){
 				
 				m.put("isEnd",/*Integer.parseInt(dt.format(now))>Integer.parseInt(dt.format((Date)m.get("actualDeadline")))||*/((Boolean)m.get("is_all_textbook_published") || (Boolean)m.get("is_force_end"))?1:0);
-				
+				m.put("contextpath", request.getContextPath() + "/");
 			}else{
 				m.put("isEnd", 0);
-				
+				m.put("contextpath", request.getContextPath() + "/");
 			}
 			html += templateService.mergeTemplateIntoString(vm, m);
 		}
