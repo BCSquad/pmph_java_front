@@ -83,9 +83,10 @@ function Page(opt) {
             return clickpages.elem.children('li.active').text();
         },
         JumpPages: function () {
-            $(".pageJump input[type=\"text\"]").unbind().bind('keydown', function (event) {
+            $(".pageJump input[type=\"text\"]").unbind().bind('keyup', function (event) {
                 if (event.keyCode == "13") {
                     var i = parseInt($(this).val());
+                    
                     if (isNaN(i) || (i <= 0) || i > clickpages.num) {
                         return;
                     } else if (clickpages.num > 6) {
@@ -102,6 +103,16 @@ function Page(opt) {
                     if (clickpages.callback) {
                         clickpages.callback(i);
                     }
+                }else{
+                	var $t = $(this);
+                	var i = parseInt($t.val());
+                	$t.val($t.val().replace(/[^0-9]*/,""));
+                	if (i<1) {
+                		$t.val(1);
+					}else if (i>set.num) {
+                		$t.val(set.num);
+					}
+                	
                 }
             });
             /*this.elem.next().next('div.pageJump').children('input[type="text"]')
