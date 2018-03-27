@@ -336,7 +336,7 @@ function getImageTips(id,htmlId){
 function removeImageTips(){
     clearTimeout(t_Time);
     if($(".image_tips").length>0){
-        setTimeout("$(\".image_tips\").remove()",300);
+        setTimeout("$(\".image_tips\").remove()",1000);
     }
 }
 /*
