@@ -1,7 +1,8 @@
   $(document).ready(function () {
 //进行选中
 	  var page=$("#auth_progress").val();
-	  if(page!=null){
+	  var is_handled = $("#is_handled").val();
+	  if(page!=null && is_handled != "1"){
 		  if(page=='0'){
 			  document.getElementById("sbzzjx").className = "jcsbsbztxz";
 		  }
@@ -17,6 +18,8 @@
 		  if(page==""){
 			  document.getElementById("allStatus").className = "jcsbsbztxz";
 		  }
+	  }else{
+		  $("#sbysl").addClass("jcsbsbztxz");
 	  }
 	  
 	  if ($("#pageinfo1").val()!=null && $("#pageinfo1").val()!='') {
@@ -30,8 +33,16 @@
 	  $(".jcsbsbzt").each(function(){
 		  var $t = $(this);
 		  $t.unbind().bind("click",function(){
-			  
-			  $("#auth_progress").val($t.val());
+			if ($t.val()=="ysl") { //已受理按钮点击
+				$("#is_handled").val(1);
+				$("#auth_progress").val(1);
+			}else if($t.val()=="0"||$t.val()=="1"){ //暂存 提交 按钮点击
+				$("#auth_progress").val($t.val());
+				$("#is_handled").val(0);           //此时不能筛选已受理的数据
+			}else{
+				$("#auth_progress").val($t.val()); //通过未通过 无所谓是否受理
+				$("#is_handled").val("");
+			}
 			  $("#pageNum").val(1);
 			  queryMain();
 		  });

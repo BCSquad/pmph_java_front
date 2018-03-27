@@ -30,17 +30,23 @@
 		m.is_deleted,
 		m.is_all_textbook_published,
 		m.is_force_end,
-		case
+		(case
 		when o.org_id = #{parameter.org_id}
 		then 1
 		else 0
-		end as beenPublishTo
+		end) as beenPublishTo,
+		(case
+		when cc.id is null or cc.is_deleted =1
+		then 0
+		else cc.id
+		end) as cms_id
 		
 		FROM
 		material AS m
 		left Join declaration AS d ON m.id = d.material_id
 		left Join writer_user AS u ON u.id = d.user_id
 		left join material_org o on m.id = o.material_id and o.org_id = #{parameter.org_id}
+		left join cms_content cc on cc.is_material_entry = 1 and cc.material_id =m.id
 		<where>
 		m.is_published = 1
 		and ((m.is_public ='0' and o.org_id = #{parameter.org_id}) or (m.is_public ='1'))
