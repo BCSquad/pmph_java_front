@@ -214,14 +214,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				                <c:if test="${vs.last==false}" >
 				                <div class="rightContent-bom">
 				                
-				                <c:choose >
+				                <%-- <c:choose >
 				                	<c:when test="${message.msgMap.img==0}">
-				                	 <div class="wzContent"> 您的申报已提交，请耐心等待审核...</div>
+				                	 <div class="wzContent"> 您的申报《${progress.materialName}》已提交，请耐心等待审核...</div>
 				                	</c:when>
-				                	<c:otherwise> 
+				                	<c:otherwise>  --%>
 				                	   <div class="wzContent"> ${message.msgMap.content}</div>
-				                	</c:otherwise>
-				                </c:choose>
+				                	<%-- </c:otherwise>
+				                </c:choose> --%>
 				                   
 				                    <!-- <div class="wzContent">爱仕达开始打卡刷的卡刷的卡刷的卡合适的看哈上看到哈克斯电话卡睡得好卡视角大卡司哈上看到哈克斯电话卡睡得好卡视角大卡司</div> -->
 				                </div>

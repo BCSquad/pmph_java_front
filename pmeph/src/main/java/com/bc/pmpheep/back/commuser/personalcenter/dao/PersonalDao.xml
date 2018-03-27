@@ -1204,14 +1204,20 @@
 		d.material_id as material_id,
 		d.user_id,
 		m.material_name,
-		d.material_id,
 		DATE_FORMAT(d.gmt_create,'%Y年%m月%d日') AS create_time,
 		d.online_progress as online_progress,
-		d.return_cause as return_cause
+		d.return_cause as return_cause,
+		(case 
+		when o.id = 0
+		then '人民卫生出版社'
+		else o.org_name
+		end) as org_name
 		FROM
 		declaration d
-		inner join
+		inner join 
 		material m on d.material_id = m.id
+		left join 
+		org o on o.id = d.org_id
 		WHERE
 		d.id = #{declaration_id}
 	</select>
