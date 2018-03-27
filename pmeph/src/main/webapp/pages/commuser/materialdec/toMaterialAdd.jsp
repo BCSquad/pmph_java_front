@@ -399,7 +399,7 @@
 								</tr></table>
 								<input type="hidden" name="jc_is_digital_editor" value="jc_is_digital_editor_1" />
 							</td>
-                            <td><input class="cg_input" name="jc_publish" value="人民卫生出版社" disabled style="width: 100px;" maxlength="33"/></td>
+                            <td><input class="cg_input" name="jc_publisher" value="人民卫生出版社" readonly="true" style="width: 100px;" maxlength="33"/></td>
 							<td><input class="cg_input" name="jc_publish_date" id="jc_publish_date" value="" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  style="width: 100px;"/></td>
 							<td><input class="cg_input" name="jc_note" value="" style="width: 190px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jccb()"/></td>
