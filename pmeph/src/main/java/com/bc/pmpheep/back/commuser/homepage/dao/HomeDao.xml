@@ -6,17 +6,23 @@
   <select id="queryDocument"  parameterType="map" resultMap="Mapresult">   
     SELECT 
 	(TO_DAYS(NOW()) &lt;= TO_DAYS(m.actual_deadline ) and  !m.is_force_end and !m.is_all_textbook_published) as notEnd,
-	<if test="id != null and id != '' ">
-	   (select d.id from declaration  d where d.material_id=cc.material_id and d.user_id=#{id})as declaration_id,
-	</if>
+	d.id as declaration_id,
+	(case 
+	when d.online_progress REGEXP '^[520]{1}$'
+	then 1
+	else 0
+	end )as dec_editable,
 	cc.*
 	FROM
 			cms_content cc
 			LEFT JOIN pmph_user pu ON cc.author_id =pu.id
 			LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
 			LEFT JOIN material m ON m.id = cc.material_id
-	    		left join material_org mo on mo.material_id=m.id
-			left join writer_user wu on wu.org_id=mo.org_id
+			<if test="id != null and id != '' ">
+	    	left join material_org mo on mo.material_id=m.id
+			left join writer_user wu on wu.id= #{id} and  wu.org_id=mo.org_id
+			</if>
+			left join declaration d on d.user_id = #{id} and d.material_id=cc.material_id
 	WHERE
 			cc.is_deleted = 0
 			AND
