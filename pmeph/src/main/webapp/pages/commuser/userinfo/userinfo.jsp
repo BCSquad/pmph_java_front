@@ -125,7 +125,7 @@
                   <div  style="width: 400px">
                        <label class="require">传真</label>
                        <div class="input-wrapper">
-                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="传真不能为空"  onblur="javascript:LengthLimit(this,50);"
+                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="传真不能为空"  maxlength="20" onblur="javascript:LengthLimit(this,50);"
                            placeholder="填写传真" type="text" id="fax" name="fax" value="${map.fax }"/>
                        </div>
                   </div>
@@ -146,14 +146,15 @@
                   <div style="width: 400px;padding:0px;margin-top:-25px;">
                     <label class="require" >职称</label>
                     <select class="sxy-select-td" id="title" name="title" >
-                    	<option value="" >-请选择-</option>
-                        <option value="教授" ${map.title=='教授' ?'selected':''}>教授</option>t
-                        <option value="讲师" ${map.title=='讲师' ?'selected':''}>讲师</option>
-                        <option value="高级讲师" ${map.title=='高级讲师' ?'selected':''}>高级讲师</option>
+                    	<option value="" ><font color="red">-请选择-<font></option>
+                    	<option value="院士" ${map.title=='院士' ?'selected':''}>院士</option>
+                        <option value="教授" ${map.title=='教授' ?'selected':''}>教授</option>
+                        <option value="正高" ${map.title=='正高' ?'selected':''}>正高</option>
                         <option value="副教授" ${map.title=='副教授' ?'selected':''}>副教授</option>
-                        <option value="院士" ${map.title=='院士' ?'selected':''}>院士</option>
+                        <option value="副高" ${map.title=='副高' ?'selected':''}>副高</option>
+                        <option value="高级讲师" ${map.title=='高级讲师' ?'selected':''}>高级讲师</option>
+                        <option value="讲师" ${map.title=='讲师' ?'selected':''}>讲师</option>
                         <option value="其他" ${map.title=='其他' ?'selected':''}>其他</option>
-
                     </select>
                   </div>
                 </td>
@@ -192,7 +193,7 @@
                        <label class="require">E-mail</label>
                        <div class="input-wrapper">
                           <input class="sxy-txt required" data-valid="isNonEmpty||isEmail"  data-error="邮箱地址不能为空||请填写正确的邮箱地址"
-                           placeholder="填写邮箱地址" type="text" id="email" name="email" value="${map.email }"/>
+                           placeholder="填写邮箱地址" type="text" id="email" name="email" value="${map.email }" maxlength="40"/>
                        </div>
                   </div>
                 </td>
