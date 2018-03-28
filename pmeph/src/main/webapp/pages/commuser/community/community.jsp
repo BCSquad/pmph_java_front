@@ -105,10 +105,10 @@ String contextpath=request.getContextPath();
 	               </div>
                </c:if>
               </div>
+           </div>
                <div class="div_butt">
                    <div class="bt_tj" onclick="toMain()">返回</div>
                </div>
-           </div>
            </div>
            <div class="pageright">
              <div class="rhead">
