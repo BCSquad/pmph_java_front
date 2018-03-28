@@ -142,7 +142,7 @@ function chooseModel(data){
         //学习经历必填
         if(data.is_edu_exp_required == "1"){
             $("#zyxxjl_bt").css("display","inline");
-            jsonStr=jsonStr+"{\"id\":\"xx_kssj\",\"content\":\"学习经历起止时间必填\"},{\"id\":\"xx_school_name\",\"content\":\"学校名称不能为空\"},{\"id\":\"xx_major\",\"content\":\"所学专业不能为空\"},{\"id\":\"xx_degree\",\"content\":\"学历不能为空\"},";
+            jsonStr=jsonStr+"{\"id\":\"xx_kssj\",\"content\":\"学习经历起止时间必填\"},{\"id\":\"xx_jssj\",\"content\":\"学习经历起止时间必填\"},{\"id\":\"xx_school_name\",\"content\":\"学校名称不能为空\"},{\"id\":\"xx_major\",\"content\":\"所学专业不能为空\"},{\"id\":\"xx_degree\",\"content\":\"学历不能为空\"},";
         }else{
             $("#zyxxjl_xt").css("display","inline");
         }
@@ -279,7 +279,7 @@ function chooseModel(data){
         //主编学术专著情况必填
         if(data.is_monograph_required == "1"){
             $("#zbxszz_bt").css("display","inline");
-            jsonStr=jsonStr+"{\"id\":\"zb_monograph_name\",\"content\":\"主编学术专著情况必填\"},{\"id\":\"zb_publisher\",\"content\":\"专著出版单位不能为空\"},{\"id\":\"zb_publish_date\",\"content\":\"专著出版时间不能为空\"},";
+            jsonStr=jsonStr+"{\"id\":\"zb_monograph_name\",\"content\":\"专著名称必填\"},{\"id\":\"zb_monograph_date\",\"content\":\"专著发表日期必填\"},{\"id\":\"zb_publisher\",\"content\":\"专著出版单位不能为空\"},{\"id\":\"zb_publish_date\",\"content\":\"专著出版时间不能为空\"},";
         }else{
             $("#zbxszz_xt").css("display","inline");
         }
