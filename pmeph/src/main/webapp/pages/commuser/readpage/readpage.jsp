@@ -49,7 +49,7 @@
             </div>
             <!--重点学科推荐-->
             <div class="op-link">
-                <div class="re_6" style="margin-top: 10px;margin-left: 40px;">重点学科</div>
+                <div class="re_6" style="margin-top: 10px;margin-left: 32px;">重点学科</div>
                 <c:forEach var="ad3" items="${adInfo3.detailList}" varStatus="status">
                     <c:if test="${status.index==0}">
                         <div class="re_1">
