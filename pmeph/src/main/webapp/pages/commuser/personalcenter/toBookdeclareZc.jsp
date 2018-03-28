@@ -40,7 +40,7 @@
 							<div>
 								<span id="tsxz_span1"></span>
 								<span class="tsxz_title">图书书稿情况</span>
-								<span class="tsxz_ts1"><img src="${ctx}/statics/image/btxx.png" /></span>
+								<%--<span class="tsxz_ts1"><img src="${ctx}/statics/image/btxx.png" /></span>--%>
 							</div>
 						</td>
 					</tr>
@@ -147,7 +147,7 @@
 							<div>
 								<span id="tsxz_span3"></span>
 								<span class="tsxz_title">选题情况</span>
-								<span class="tsxz_ts1"><img src="${ctx}/statics/image/btxx.png" /></span>
+								<%--<span class="tsxz_ts1"><img src="${ctx}/statics/image/btxx.png" /></span>--%>
 							</div>
 						</td>
 					</tr>
