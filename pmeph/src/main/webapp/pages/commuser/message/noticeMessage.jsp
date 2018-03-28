@@ -151,7 +151,7 @@
                                             <img src="${ctx}/statics/image/readno.png"  id="readno${message.id}" class="readyes"/>
                                         </c:otherwise>
                                     </c:choose>
-                                    <span class="fixwidth">${message.messageContent}</span>
+                                    <span class="fixwidth">${message.tcontent}</span><!-- messageContent 为全内容  tcontent为去掉图片和转行/br>的内容 -->
 
 		                	    </td>
 		                	  </c:if>

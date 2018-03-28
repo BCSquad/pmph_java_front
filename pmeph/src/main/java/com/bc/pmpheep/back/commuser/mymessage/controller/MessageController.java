@@ -196,22 +196,8 @@ public class MessageController extends BaseController {
         List<Map<String, Object>> list = noticeMessageService.selectNoticeMessage(paraMap);
         for (int i = 0; i < list.size(); i++) {
             Map<String, Object> map1 = list.get(i);
-            //处理系统消息 消息内容
-			/*if(map1.get("msgType").toString().equals("1")||map1.get("msgType").toString().equals("0")){
-				//mongoDB查询通知内容
-				Message message = mssageService.get(map1.get("fId").toString());
-				if(null!=message){
-					String str=message.getContent();
-					String regEx_html="<[^>]+>"; //定义HTML标签的正则表达式 
-					Pattern p_html=Pattern.compile(regEx_html,Pattern.CASE_INSENSITIVE); 
-			        Matcher m_html=p_html.matcher(str); 
-			        str=m_html.replaceAll(""); //过滤html标签 
-					map1.put("tcontent",str);
-				}else{
-					map1.put("tcontent","内容空!");
-				}
-				
-			}*/
+            //取出内容，去掉图片后放置在tcontent中
+            delMsgContentToTcontent(map1,"(</?img[^>]*>)|(</br[^>]*>)");
 
             if (map1.get("msgType").toString().equals("4")) {
                 String endTimeStr = map1.get("deadline").toString();
@@ -248,6 +234,29 @@ public class MessageController extends BaseController {
         return mv;
     }
 
+    /**
+     * 取出map1中的fId，查monggdb内容，去掉内容中匹配regEx_to_replace的内容，存进map1，key为tcontent
+     * @param map1
+     * @param regEx_to_replace
+     */
+	private void delMsgContentToTcontent(Map<String, Object> map1,String regEx_to_replace) {
+		//处理消息 消息内容
+		//if(map1.get("msgType").toString().equals("1")||map1.get("msgType").toString().equals("0")){
+			//mongoDB查询通知内容
+			Message message = mssageService.get(map1.get("fId").toString());
+			if(null!=message){
+				String str=message.getContent();
+				//regEx_html="(</?img[^>]*>)|(</br[^>]*>)"; //定义HTML的img标签的正则表达式 
+				Pattern p_html=Pattern.compile(regEx_to_replace,Pattern.CASE_INSENSITIVE); 
+		        Matcher m_html=p_html.matcher(str); 
+		        str=m_html.replaceAll(""); //过滤标签 
+				map1.put("tcontent",str);
+			}else{
+				map1.put("tcontent","内容空!");
+			}
+		//}
+	}
+
     //查询通知列表
     @RequestMapping(value = "/messageIsRead")
     @ResponseBody
@@ -268,22 +277,8 @@ public class MessageController extends BaseController {
         List<Map<String, Object>> list = noticeMessageService.selectNoticeMessage(paraMap);
         for (int i = 0; i < list.size(); i++) {
             Map<String, Object> map1 = list.get(i);
-            //处理系统消息 消息内容
-			/*if(map1.get("msgType").toString().equals("1")||map1.get("msgType").toString().equals("0")){
-				//mongoDB查询通知内容
-				Message message = mssageService.get(map1.get("fId").toString());
-				if(null!=message){
-					String str=message.getContent();
-					String regEx_html="<[^>]+>"; //定义HTML标签的正则表达式
-					Pattern p_html=Pattern.compile(regEx_html,Pattern.CASE_INSENSITIVE);
-			        Matcher m_html=p_html.matcher(str);
-			        str=m_html.replaceAll(""); //过滤html标签
-					map1.put("tcontent",str);
-				}else{
-					map1.put("tcontent","内容空!");
-				}
-
-			}*/
+          //取出内容，去掉图片后放置在tcontent中
+            delMsgContentToTcontent(map1,"(</?img[^>]*>)|(</br[^>]*>)");
 
             if (map1.get("msgType").toString().equals("4")) {
                 String endTimeStr = map1.get("deadline").toString();
@@ -348,15 +343,8 @@ public class MessageController extends BaseController {
         List<Map<String, Object>> list = noticeMessageService.selectNoticeMessage(paraMap);
         for (int i = 0; i < list.size(); i++) {
             Map<String, Object> map1 = list.get(i);
-			/*if(map1.get("msgType").toString().equals("1")||map1.get("msgType").toString().equals("0")){
-				Content content = contentService.get(map1.get("fId").toString());
-				if(null!=content){
-					map1.put("title",content.getContent());
-				}else{
-					map1.put("title","内容空!");
-				}
-				
-			}*/
+          //取出内容，去掉图片后放置在tcontent中
+            delMsgContentToTcontent(map1,"(</?img[^>]*>)|(</br[^>]*>)");
 
             if (map1.get("msgType").toString().equals("4")) {
                 String endTimeStr = map1.get("deadline").toString();

@@ -49,7 +49,7 @@
             </div>
             <!--重点学科推荐-->
             <div class="op-link">
-                <div class="re_6" style="margin-top: 10px;margin-left: 40px;">重点学科</div>
+                <div class="re_6" style="margin-top: 10px;margin-left: 32px;">重点学科</div>
                 <c:forEach var="ad3" items="${adInfo3.detailList}" varStatus="status">
                     <c:if test="${status.index==0}">
                         <div class="re_1">
@@ -179,6 +179,7 @@
                     </select> --%>
                     <hr style=" height:1px;border:none;border-top:1px solid #f0f0f0;">
                 </div>
+                 <div style="clear: both;height: 14px;">
                  <c:forEach var="type1" items="${materialType}" varStatus="status">
                         <div class="ts_type ${status.index=='0'?'ts_type1':''}" id="FLDiv_${type1.id}"
                              onclick="javaScript:ChangeFLDiv('${type1.id}','ChangeFLDiv_',3)">

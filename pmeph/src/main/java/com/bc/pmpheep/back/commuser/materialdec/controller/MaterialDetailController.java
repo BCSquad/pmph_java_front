@@ -691,6 +691,7 @@ public class MaterialDetailController extends BaseController{
 		//12.作家扩展项填报表
 		List<Map<String,Object>> zjkzqkList = new ArrayList<Map<String,Object>>();
 		zjkzqkList = this.mdService.queryZjkzbb(queryMap);
+		List<Map<String,Object>> zjkzxxList = this.mdService.queryZjkzxxById(material_id);
 		//13.个人成就
 		Map<String,Object> achievementMap = new HashMap<String,Object>();
 		achievementMap = this.mdService.queryAchievement(queryMap);
@@ -729,6 +730,7 @@ public class MaterialDetailController extends BaseController{
 		mav.addObject("zjkyList", zjkyList);
 		mav.addObject("zjxsList", zjxsList);
 		mav.addObject("zjkzqkList", zjkzqkList);
+		mav.addObject("zjkzxxList", zjkzxxList);
 		mav.addObject("achievementMap", achievementMap);
 		mav.addObject("monographList", monographList);
 		mav.addObject("publishList", publishList);
@@ -901,6 +903,7 @@ public class MaterialDetailController extends BaseController{
 		//12.作家扩展项填报表
 		List<Map<String,Object>> zjkzqkList = new ArrayList<Map<String,Object>>();
 		zjkzqkList = this.mdService.queryZjkzbb(queryMap);
+		List<Map<String,Object>> zjkzxxList = this.mdService.queryZjkzxxById(material_id);
 		//13.个人成就
 		Map<String,Object> achievementMap = new HashMap<String,Object>();
 		achievementMap = this.mdService.queryAchievement(queryMap);
@@ -959,6 +962,7 @@ public class MaterialDetailController extends BaseController{
 		mav.addObject("zjkyList", zjkyList);
 		mav.addObject("zjxsList", zjxsList);
 		mav.addObject("zjkzqkList", zjkzqkList);
+		mav.addObject("zjkzxxList", zjkzxxList);
 		mav.addObject("achievementMap", achievementMap);
 		mav.addObject("monographList", monographList);
 		mav.addObject("publishList", publishList);

@@ -623,6 +623,10 @@ a {
     word-break: break-all;
 }
 
+.misarea p,img{
+	max-width: 880px;
+}
+
 .labell {
     font-family: MicrosoftYaHei;
     line-height: 18px;
@@ -646,20 +650,21 @@ a {
 }
 .fixwidth{
     max-width: 800px;
-    min-height: 28px;
-    /*overflow: hidden;*/
-    /*display: inline-block;*/
+    height: 28px;
+    overflow: hidden;
+    display: inline-block;
     text-overflow: ellipsis;
-    /*white-space:nowrap;*/
+    white-space:nowrap;
 	text-align: center;
 	line-height: 24px;
     word-wrap: break-word;
     word-break: break-all;
 }
 .fixwidth  p{ 
-	 max-width: 800px;
-	 margin: 0px;
+	max-width: 800px;
+	margin: 0px;
 	float:left; 
+	white-space: normal;
 }
 
 .readyes{
