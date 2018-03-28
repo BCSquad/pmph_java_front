@@ -292,7 +292,6 @@ $(function(){
 
 //表单提交前 给表单域中赋值
 function getValue(){
-    debugger;
 	var UEContent = UE.getEditor('mText').getContent();
 	//var UEContent = $("#UEContent").val();
     $("#UEContent").val(UEContent);
