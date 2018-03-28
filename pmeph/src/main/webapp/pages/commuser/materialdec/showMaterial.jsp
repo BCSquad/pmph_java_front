@@ -650,6 +650,19 @@
 			</div>
 		</div>
 		<!--扩展信息-->
+		<c:if test="${empty zjkzqkList[0]}">
+			<c:forEach var="zjkzxx" items="${zjkzxxList}" varStatus="status">
+				<div class="sbxq_item1">
+					<div>
+						<span id="tsxz_span9"></span>
+						<span class="tsxz_title">${zjkzxx.extension_name}</span>
+					</div>
+					<div class="content">
+						<textarea class="text_cl" readonly="readonly"></textarea>
+					</div>
+				</div>
+			</c:forEach>
+		</c:if>
 		<c:forEach var="zjkzxx" items="${zjkzqkList}">
 			<div class="sbxq_item1">
 				<div>
