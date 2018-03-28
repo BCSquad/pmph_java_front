@@ -490,7 +490,7 @@
 								<input type="hidden" name="pmph_is_digital_editor" value="pmph_is_digital_editor_1" />
 							</td>
 							<td><input class="cg_input" name="pmph_publish_date" id="pmph_publish_date" value="" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  style="width: 100px;"/></td>
-							<td><input class="cg_input" name="pmph_isbn" id="pmph_isbn" value="" style="width: 100px;" placeholder="标准书号" maxlength="50"/></td>
+							<td><input class="cg_input" name="pmph_isbn" id="pmph_isbn" value="978-7-117-" style="width: 100px;" placeholder="标准书号" maxlength="50"/></td>
 							<td><input class="cg_input" name="pmph_note" id="pmph_note" value="" style="width: 260px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_rwsjcbx()"/></td>
 						</tr>
@@ -551,7 +551,7 @@
 							</td>
 							<td><input class="cg_input" name="jcb_publisher" id="jcb_publisher" value="" style="width: 100px;" placeholder="出版社" maxlength="16"/></td>
 							<td><input class="cg_input" placeholder="出版时间" id="jcb_publish_date" calendar format="'yyyy-mm-dd'"  z-index="100" name="jcb_publish_date" value="" style="width: 100px;"/></td>
-							<td><input class="cg_input" name="jcb_isbn" id="jcb_isbn" value="" style="width: 100px;" placeholder="标准书号" maxlength="50"/></td>
+							<td><input class="cg_input" name="jcb_isbn" id="jcb_isbn" value="978-7-" style="width: 100px;" placeholder="标准书号" maxlength="50"/></td>
 							<td><input class="cg_input" name="jcb_note" value="" style="width: 130px;" placeholder="备注" maxlength="33"/></td>
 							<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jcbx()"/></td>
 						</tr>
