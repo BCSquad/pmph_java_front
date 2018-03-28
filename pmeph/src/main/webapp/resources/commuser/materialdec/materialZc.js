@@ -205,7 +205,7 @@ function chooseModel(data){
         //主编国家规划教材情况必填
         if(data.is_national_plan_required == "1"){
             $("#zbgjjgh_bt").css("display","inline");
-            jsonStr=jsonStr+"{\"id\":\"hj_material_name\",\"content\":\"主编国家规划教材情况必填\"},{\"id\":\"hj_rank_text\",\"content\":\"教材级别不能为空\"},{\"id\":\"hj_isbn\",\"content\":\"教材标准书号不能为空\"},";
+            jsonStr=jsonStr+"{\"id\":\"hj_material_name\",\"content\":\"主编国家规划教材情况必填\"},{\"id\":\"hj_isbn\",\"content\":\"教材标准书号不能为空\"},{\"id\":\"hj_rank_text\",\"content\":\"教材级别不能为空\"},";
         }else{
             $("#zbgjjgh_xt").css("display","inline");
         }

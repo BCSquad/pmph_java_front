@@ -354,9 +354,9 @@
                         <c:if test="${empty steaList[0]}">
                             <tr>
                                 <td>
-                                    <input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'"  z-index="100"  name="jx_kssj" max="'$#jx_jssj'"  id="jx_kssj" value="" style="width: 80px;"/>
-                                    -
-                                    <input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="jx_jssj" min="'#jx_kssj'" id="jx_jssj" value="" style="width: 80px;"/>
+                                <input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'"  z-index="100"  name="jx_kssj" max="'$#jx_jssj'"  id="jx_kssj" value="" style="width: 80px;"/>
+                                -
+                                <input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="jx_jssj" min="'#jx_kssj'" id="jx_jssj" value="" style="width: 80px;"/>
                                 </td>
                                 <td><input class="cg_input"  maxlength="33" id="jx_school_name" name="jx_school_name" value="" placeholder="学校名称"/></td>
                                 <td><input class="cg_input" maxlength="50" id="jx_subject" name="jx_subject" value="" placeholder="教学科目"/></td>
@@ -1269,6 +1269,29 @@
                 </div>
             </div>
             <!--扩展信息-->
+            <c:if test="${empty zjkzqkList[0]}">
+                <c:forEach var="zjkzxx" items="${zjkzxxList}" varStatus="status">
+                    <div class="sbxq_item1">
+                        <div>
+                            <span id="tsxz_span9"></span>
+                            <span class="tsxz_title">${zjkzxx.extension_name}</span>
+                            <c:choose>
+                                <c:when test="${zjkzxx.is_required == true}">
+                                    <span class="tsxz_ts" style="display: inline;"><img src="${ctx}/statics/image/btxx.png" /></span>
+                                </c:when>
+                                <c:otherwise>
+                                    <span class="tsxz_xt" style="display: inline;">（选填）</span>
+                                </c:otherwise>
+                            </c:choose>
+                            <input type="hidden" name="extension_id" value="${zjkzxx.id}"/>
+                        </div>
+                        <div class="content">
+                            <textarea class="text_cl" id="${zjkzxx.is_required}_${status.count}" name="kz_content" maxlength="1000"></textarea>
+                            <input type="hidden" name="zjkzxx" value="${zjkzxx.is_required}_${status.count}"/>
+                        </div>
+                    </div>
+                </c:forEach>
+            </c:if>
             <c:forEach var="zjkzxx" items="${zjkzqkList}" varStatus="status">
                 <div class="sbxq_item1">
                     <div>
