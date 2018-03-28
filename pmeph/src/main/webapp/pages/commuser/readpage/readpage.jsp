@@ -179,6 +179,7 @@
                     </select> --%>
                     <hr style=" height:1px;border:none;border-top:1px solid #f0f0f0;">
                 </div>
+                 <div style="clear: both;height: 14px;">
                  <c:forEach var="type1" items="${materialType}" varStatus="status">
                         <div class="ts_type ${status.index=='0'?'ts_type1':''}" id="FLDiv_${type1.id}"
                              onclick="javaScript:ChangeFLDiv('${type1.id}','ChangeFLDiv_',3)">
