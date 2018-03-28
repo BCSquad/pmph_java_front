@@ -235,9 +235,9 @@
                                     -
                                     <input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'" z-index="100" min="'$#xx_kssj'" name="xx_jssj" id="xx_jssj" value="" style="width: 80px;" maxlength="20"/>
                                 </td>
-                                <td><input class="cg_input" name="xx_school_name" value="" placeholder="学校名称"  maxlength="80"/></td>
-                                <td><input class="cg_input" name="xx_major" value="" placeholder="所学专业"  maxlength="50"/></td>
-                                <td><input class="cg_input" name="xx_degree" value="" style="width: 110px;" placeholder="学历"  maxlength="30"/></td>
+                                <td><input class="cg_input" id="xx_school_name" name="xx_school_name" value="" placeholder="学校名称"  maxlength="80"/></td>
+                                <td><input class="cg_input" id="xx_major" name="xx_major" value="" placeholder="所学专业"  maxlength="50"/></td>
+                                <td><input class="cg_input" id="xx_degree" name="xx_degree" value="" style="width: 110px;" placeholder="学历"  maxlength="30"/></td>
                                 <td><input class="cg_input" name="xx_note" value="" style="width: 290px;" placeholder="备注"  maxlength="100"/></td>
                                 <td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_xxjl()"/></td>
                             </tr>
@@ -657,7 +657,7 @@
                                     <input type="hidden" name="pmph_is_digital_editor" value="pmph_is_digital_editor_a" />
                                 </td>
                                 <td><input class="cg_input" id="pmph_publish_date" name="pmph_publish_date" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  value="" style="width: 100px;"/></td>
-                                <td><input class="cg_input" maxlength="50" id="pmph_isbn" name="pmph_isbn" value="" style="width: 100px;" placeholder="标准书号"/></td>
+                                <td><input class="cg_input" maxlength="50" id="pmph_isbn" name="pmph_isbn" value="978-7-117-" style="width: 100px;" placeholder="标准书号"/></td>
                                 <td><input class="cg_input" maxlength="100" id="pmph_note" name="pmph_note" value="" placeholder="备注" style="width: 260px;"/></td>
                                 <td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_rwsjcbx()"/></td>
                             </tr> </c:if>
@@ -762,9 +762,9 @@
                                     </tr></table>
                                     <input type="hidden" name="jcb_is_digital_editor" value="jcb_is_digital_editor_a" />
                                 </td>
-                                <td><input class="cg_input" maxlength="50" name="jcb_publisher" value="" style="width: 100px;" placeholder="出版社"/></td>
-                                <td><input class="cg_input" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="jcb_publish_date" value="" style="width: 100px;"/></td>
-                                <td><input class="cg_input" maxlength="50" name="jcb_isbn" value="" style="width: 100px;" placeholder="标准书号"/></td>
+                                <td><input class="cg_input" id="jcb_publisher" maxlength="50" name="jcb_publisher" value="" style="width: 100px;" placeholder="出版社"/></td>
+                                <td><input class="cg_input" id="jcb_publish_date" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="jcb_publish_date" value="" style="width: 100px;"/></td>
+                                <td><input class="cg_input" id="jcb_isbn" maxlength="50" name="jcb_isbn" id="jcb_isbn" value="978-7-" style="width: 100px;" placeholder="标准书号"/></td>
                                 <td><input class="cg_input" maxlength="100" name="jcb_note" value="" placeholder="备注" style="width: 130px;"/></td>
                                 <td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_jcbx()"/></td>
                             </tr> </c:if>
@@ -1155,7 +1155,7 @@
                                     </tr></table>
                                     <input type="hidden" name="cl_award_unit" value="cl_award_unit_a" />
                                 </td>
-                                <td><input class="cg_input" name="cl_reward_date" value="" style="width: 180px;" calendar format="'yyyy-mm-dd'" placeholder="获奖时间"/></td>
+                                <td><input class="cg_input" id="cl_reward_date" name="cl_reward_date" value="" style="width: 180px;" calendar format="'yyyy-mm-dd'" placeholder="获奖时间"/></td>
                                 <td><input class="cg_input" name="cl_note" value="" style="width: 330px;" placeholder="备注" maxlength="100"/></td>
                                 <td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_clinical()"/></td>
                             </tr> </c:if>
@@ -1221,7 +1221,7 @@
                                     </tr></table>
                                     <input type="hidden" name="ac_award_unit" value="ac_award_unit_a" />
                                 </td>
-                                <td><input class="cg_input" name="ac_reward_date" value="" style="width: 150px;" calendar format="'yyyy-mm-dd'" placeholder="授予时间"/></td>
+                                <td><input class="cg_input" id="ac_reward_date" name="ac_reward_date" value="" style="width: 150px;" calendar format="'yyyy-mm-dd'" placeholder="授予时间"/></td>
                                 <td><input class="cg_input" name="ac_note" value="" style="width: 280px;" placeholder="备注" maxlength="100"/></td>
                                 <td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_acade()"/></td>
                             </tr> </c:if>
@@ -1269,29 +1269,6 @@
                 </div>
             </div>
             <!--扩展信息-->
-            <c:if test="${empty zjkzqkList[0]}">
-                <c:forEach var="zjkzxx" items="${zjkzxxList}" varStatus="status">
-                    <div class="sbxq_item1">
-                        <div>
-                            <span id="tsxz_span9"></span>
-                            <span class="tsxz_title">${zjkzxx.extension_name}</span>
-                            <c:choose>
-                                <c:when test="${zjkzxx.is_required == true}">
-                                    <span class="tsxz_ts" style="display: inline;"><img src="${ctx}/statics/image/btxx.png" /></span>
-                                </c:when>
-                                <c:otherwise>
-                                    <span class="tsxz_xt" style="display: inline;">（选填）</span>
-                                </c:otherwise>
-                            </c:choose>
-                            <input type="hidden" name="extension_id" value="${zjkzxx.id}"/>
-                        </div>
-                        <div class="content">
-                            <textarea class="text_cl" id="${zjkzxx.is_required}_${status.count}" name="kz_content" maxlength="1000"></textarea>
-                            <input type="hidden" name="zjkzxx" value="${zjkzxx.is_required}_${status.count}"/>
-                        </div>
-                    </div>
-                </c:forEach>
-            </c:if>
             <c:forEach var="zjkzxx" items="${zjkzqkList}" varStatus="status">
                 <div class="sbxq_item1">
                     <div>
@@ -1305,7 +1282,7 @@
                                 <span class="tsxz_xt" style="display: inline;">（选填）</span>
                             </c:otherwise>
                         </c:choose>
-                        <input type="hidden" name="extension_id" value="${zjkzxx.extension_id}"/>
+                        <input type="hidden" name="extension_id" value="${zjkzxx.id}"/>
                     </div>
                     <div class="content">
                         <textarea class="text_cl" id="${zjkzxx.is_required}_${status.count}" name="kz_content" maxlength="1000">${zjkzxx.content}</textarea>

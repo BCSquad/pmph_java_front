@@ -5,6 +5,9 @@ jsonStr = "{\"id\":\"realname\",\"content\":\"姓名不能为空\"},{\"id\":\"bi
     "{\"id\":\"zc\",\"content\":\"职称不能为空\"},{\"id\":\"address\",\"content\":\"地址不能为空\"},{\"id\":\"email\",\"content\":\"邮箱不能为空\"},"+
     "{\"id\":\"handphone\",\"content\":\"手机号码不能为空\"},{\"id\":\"zjlx\",\"content\":\"证件类型不能为空\"},{\"id\":\"idcard\",\"content\":\"证件号码不能为空\"},{\"id\":\"sbdw_name\",\"content\":\"申报单位不能为空\"},";
 
+var is_pmph_textbook_required;
+var is_textbook_used;
+
 $(function () {
     var id = $("#material_id").val();
     queryMaterialMap(id);  //执行查询方法
@@ -139,7 +142,7 @@ function chooseModel(data){
         //学习经历必填
         if(data.is_edu_exp_required == "1"){
             $("#zyxxjl_bt").css("display","inline");
-            jsonStr=jsonStr+"{\"id\":\"xx_kssj\",\"content\":\"学习经历起止时间必填\"},{\"id\":\"xx_school_name\",\"content\":\"学校名称不能为空\"},{\"id\":\"xx_major\",\"content\":\"所学专业不能为空\"},{\"id\":\"xx_degree\",\"content\":\"学历不能为空\"},";
+            jsonStr=jsonStr+"{\"id\":\"xx_kssj\",\"content\":\"学习经历起止时间必填\"},{\"id\":\"xx_jssj\",\"content\":\"学习经历起止时间必填\"},{\"id\":\"xx_school_name\",\"content\":\"学校名称不能为空\"},{\"id\":\"xx_major\",\"content\":\"所学专业不能为空\"},{\"id\":\"xx_degree\",\"content\":\"学历不能为空\"},";
         }else{
             $("#zyxxjl_xt").css("display","inline");
         }
@@ -219,8 +222,11 @@ function chooseModel(data){
             jsonStr=jsonStr+"{\"id\":\"pmph_material_name\",\"content\":\"人卫社教材编写情况必填\"},{\"id\":\"pmph_publish_date\",\"content\":\"出版时间不能为空\"},{\"id\":\"pmph_isbn\",\"content\":\"教材标准书号不能为空\"},";
         }else{
             $("#rwsjcbx_xt").css("display","inline");
+            jsonStr=jsonStr+"{\"id\":\"pmph_isbn\",\"content\":\"教材标准书号格式：978-7-117-*****-* ,*代表数字或字母\"},";
         }
+        
     }
+    is_pmph_textbook_required = data.is_pmph_textbook_required;
     //其他社教材编写情况
     if(data.is_textbook_used == "1"){
         $("#qtjcbxqk").css("display","block");
@@ -230,8 +236,10 @@ function chooseModel(data){
             jsonStr=jsonStr+"{\"id\":\"jcb_material_name\",\"content\":\"其他社教材名称不能为空\"},{\"id\":\"jcb_publisher\",\"content\":\"出版单位不能为空\"},{\"id\":\"jcb_publish_date\",\"content\":\"出版时间不能为空\"},{\"id\":\"jcb_isbn\",\"content\":\"教材标准书号不能为空\"},";
         }else{
             $("#qtjcbxqk_xt").css("display","inline");
+            jsonStr=jsonStr+"{\"id\":\"jcb_isbn\",\"content\":\"教材标准书号格式：978-7-********* ,*代表数字或字母\"},";
         }
     }
+    is_textbook_used = data.is_textbook_used;
     //参加人卫慕课、数字教材编写情况
     if(data.is_mooc_digital_used == "1"){
         $("#digital").css("display","block");
@@ -271,7 +279,7 @@ function chooseModel(data){
         //主编学术专著情况必填
         if(data.is_monograph_required == "1"){
             $("#zbxszz_bt").css("display","inline");
-            jsonStr=jsonStr+"{\"id\":\"zb_monograph_name\",\"content\":\"主编学术专著情况必填\"},{\"id\":\"zb_publisher\",\"content\":\"专著出版单位不能为空\"},{\"id\":\"zb_publish_date\",\"content\":\"专著出版时间不能为空\"},";
+            jsonStr=jsonStr+"{\"id\":\"zb_monograph_name\",\"content\":\"专著名称必填\"},{\"id\":\"zb_monograph_date\",\"content\":\"专著发表日期必填\"},{\"id\":\"zb_publisher\",\"content\":\"专著出版单位不能为空\"},{\"id\":\"zb_publish_date\",\"content\":\"专著出版时间不能为空\"},";
         }else{
             $("#zbxszz_xt").css("display","inline");
         }
@@ -432,7 +440,7 @@ function add_xxjl(){
     var num = fnt();
     var $table = $("#tab_xxjl");
     var $tr = $("<tr id='xxjl_"+num+"'>"+
-        "<td><input class='cg_input' placeholder='开始时间'  calendar format=\"'yyyy-mm-dd'\"  z-index='100' max=\"'$#xx_jssj_"+num+"'\" id='xx_kssj_"+num+"'  name='xx_kssj' value='' style='width: 80px;'/>"+
+        "<td><input class='cg_input' placeholder='开始时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100' max=\"'$#xx_jssj_"+num+"'\" id='xx_kssj_"+num+"'  name='xx_kssj' value='' style='width: 80px;'/>"+
         " - <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" z-index='100' min=\"'$#xx_kssj_"+num+"'\" id='xx_jssj_"+num+"' name='xx_jssj' value='' style='width: 80px;'/></td>"+
         "<td><input class='cg_input' maxlength='80' name='xx_school_name' id='xx_school_name_"+num+"' value='' placeholder='学校名称'/></td>"+
         "<td><input class='cg_input' maxlength='50' name='xx_major' value='' id='xx_major_"+num+"' placeholder='所学专业'/></td>"+
@@ -603,7 +611,7 @@ function add_rwsjcbx(){
         "</tr></table>"+
         "<input type='hidden' name='pmph_is_digital_editor' value='pmph_is_digital_editor_"+num+"' /></td>"+
         "<td><input class='cg_input' id='pmph_publish_date_"+num+"' placeholder='出版时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100' name='pmph_publish_date' value='' style='width: 100px;'/></td>"+
-        "<td><input class='cg_input' maxlength='50' name='pmph_isbn' value='' id='pmph_isbn_"+num+"'  style='width: 100px;' placeholder='标准书号'/></td>"+
+        "<td><input class='cg_input' maxlength='50' name='pmph_isbn' value='978-7-117-' id='pmph_isbn_"+num+"'  style='width: 100px;' placeholder='标准书号'/></td>"+
         "<td><input class='cg_input' maxlength='100' name='pmph_note' value='' placeholder='备注' style='width: 260px;'/>" +
         "<input type='hidden' name='zdjy' value='pmph_material_name_"+num+",pmph_isbn_"+num+",pmph_publish_date_"+num+"' />" +
         "</td>"+
@@ -650,7 +658,7 @@ function add_jcbx(){
         "<input type='hidden' name='jcb_is_digital_editor' value='jcb_is_digital_editor_"+num+"' /></td>"+
         "<td><input class='cg_input' maxlength='50' name='jcb_publisher' id='jcb_publisher_"+num+"' value='' style='width: 100px;' placeholder='出版社'/></td>"+
         "<td><input class='cg_input' placeholder='出版时间' id='jcb_publish_date_"+num+"' calendar format=\"'yyyy-mm-dd'\"  z-index='100' name='jcb_publish_date' value='' style='width: 100px;'/></td>"+
-        "<td><input class='cg_input' maxlength='50' name='jcb_isbn' id='jcb_isbn_"+num+"' value='' style='width: 100px;' placeholder='标准书号'/></td>"+
+        "<td><input class='cg_input' maxlength='50' name='jcb_isbn' id='jcb_isbn_"+num+"' value='978-7-' style='width: 100px;' placeholder='标准书号'/></td>"+
         "<td><input class='cg_input' maxlength='100' name='jcb_note' value='' placeholder='备注' style='width:130px;'/>" +
         "<input type='hidden' name='zdjy' value='jcb_material_name_"+num+",jcb_publisher_"+num+",jcb_isbn_"+num+",jcb_publish_date_"+num+"' />" +
         "</td>"+
@@ -908,6 +916,16 @@ function checkNull(jsonStr){
                 b = false;
                 return false;
             }
+        }else if(/^pmph_isbn_?.*/.test(obj.id)){
+        	if (!check_pmph_isbn(obj.id)) {
+        		b = false;
+        		return false;
+			}
+        }else if(/^jcb_isbn_?.*/.test(obj.id)){
+        	if (!check_jcb_isbn(obj.id)) {
+        		b = false;
+        		return false;
+			}
         }else if(value == ""){
             layer.tips(obj.content, '#'+obj.id);
             $("#"+obj.id)[0].focus();  //聚焦2
@@ -917,6 +935,50 @@ function checkNull(jsonStr){
         }
     });
     return b;
+}
+
+
+/**
+ * 人卫社教材编写情况的标准书号，校验标准按照：978-7-117-*****-*的格式去校验，且默认加载出978-7-117-或者978-7-117-写定；
+ */
+function check_pmph_isbn(id){
+	var num = $("#"+id).val();
+	if(num != undefined){
+		if (is_pmph_textbook_required==1 && $.trim(num)=="") {
+			layer.tips("教材标准书号不能为空", '#'+id);
+	        $("#"+id)[0].focus();  //聚焦2
+	        b = false;
+	        window.message.warning("教材标准书号不能为空");
+	        return false;
+		}else if($.trim(num)!="" && !(/^978-7-117-(\d|[A-z])*$/.test(num))){
+	        layer.tips('教材标准书号格式：978-7-117-********* ,*代表数字或字母', "#"+id);
+	        $("#"+id)[0].focus();  //聚焦
+	        b = false;
+	        return false;
+	    }
+	}	
+	return true;
+}
+/**
+ * 其他社教材编写情况的标准书号，校验标准按照：978-7-*********的格式去校验，且默认加载出978-7-或者978-7-写定；
+ */
+function check_jcb_isbn(id){
+	var num = $("#"+id).val();
+	if(num != undefined){
+		if (is_textbook_used==1 && $.trim(num)=="") {
+			layer.tips("教材标准书号不能为空", '#'+id);
+	        $("#"+id)[0].focus();  //聚焦2
+	        b = false;
+	        window.message.warning("教材标准书号不能为空");
+	        return false;
+		}else if($.trim(num)!="" && !(/^978-7-(\d|[A-z])*$/.test(num))){
+	        layer.tips('教材标准书号格式：978-7-********* ,*代表数字或字母', "#"+id);
+	        $("#"+id)[0].focus();  //聚焦
+	        b = false;
+	        return false;
+	    }
+	}	
+	return true;
 }
 
 //机构选择
