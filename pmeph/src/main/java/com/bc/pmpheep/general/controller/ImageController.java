@@ -82,6 +82,11 @@ public class ImageController {
         if(id.equals(userId)){
            return user;
         }
-        return userService.getFriendInfo(id,userId);
+        Map<String,Object> returnMap =userService.getFriendInfo(id,userId);
+        if(returnMap==null){
+            returnMap = new HashMap<String,Object>();
+        }
+
+        return returnMap;
     }
 }
