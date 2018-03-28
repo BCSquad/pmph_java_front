@@ -623,6 +623,10 @@ a {
     word-break: break-all;
 }
 
+.misarea p,img{
+	max-width: 880px;
+}
+
 .labell {
     font-family: MicrosoftYaHei;
     line-height: 18px;
