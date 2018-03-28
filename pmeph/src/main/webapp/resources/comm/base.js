@@ -317,7 +317,7 @@ function getImageTips(id,htmlId){
 
                 },
                 success:function(responsebean){
-                    if(Empty(responsebean)){
+                    if($.isEmptyObject(responsebean)){
                         str += '他还不是您的好友呢！';
 
                     }else{
