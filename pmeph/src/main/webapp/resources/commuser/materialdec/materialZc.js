@@ -575,7 +575,7 @@ function add_gjghjc(){
     var $tr = $("<tr id='gjghjc_"+num+"'>"+
         "<td><input class='cg_input' maxlength='100' name='hj_material_name' id='hj_material_name_"+num+"' value='' style='width: 300px;' placeholder='教材名称'/></td>"+
         "<td><input class='cg_input' maxlength='50' name='hj_isbn' value='' id='hj_isbn_"+num+"' style='width: 110px;' placeholder='标准书号'/></td>"+
-        "<td><input class='cg_input' maxlength='100' name='hj_rank_text' id='hj_rank_text_"+num+"' value='' style='width: 300px;' placeholder='教材级别' maxlength='50'/></td>"+
+        "<td><input class='cg_input' maxlength='50' name='hj_rank_text' id='hj_rank_text_"+num+"' value='' style='width: 300px;' placeholder='教材级别'/></td>"+
         "<td><input class='cg_input' maxlength='100' name='hj_note' value='' style='width: 250px;' placeholder='备注'/>" +
         "<input type='hidden' name='zdjy' value='hj_material_name_"+num+",hj_isbn_"+num+",hj_rank_text_"+num+"' />" +
         "</td>"+
@@ -738,7 +738,7 @@ function add_sci(){
     var $table = $("#tab_sci");
     var $tr = $("<tr id='sci_"+num+"'>"+
         "<td><input class='cg_input' name='sci_paper_name' id='sci_paper_name_"+num+"' value='' style='width: 300px;' placeholder='论文名称' maxlength='100'/></td>"+
-        "<td><input class='cg_input' name='sci_journal_name' id='sci_journal_name_"+num+"' value='' style='width: 130px;' placeholder='期刊名称' maxlength='80'/></td>"+
+        "<td><input class='cg_input' name='sci_journal_name' id='sci_journal_name_"+num+"' value='' style='width: 130px;' placeholder='期刊名称' maxlength='50'/></td>"+
         "<td><input class='cg_input' name='sci_factor' id='sci_factor_"+num+"' value='' style='width: 170px;' placeholder='期刊SCI影响因子' maxlength='20'/></td>"+
         "<td><input class='cg_input' name='sci_publish_date' id='sci_publish_date_"+num+"' value='' style='width: 110px;' calendar format=\"'yyyy-mm-dd'\" placeholder='发表时间'/></td>"+
         "<td><input class='cg_input' name='sci_note' value='' style='width: 250px;' placeholder='备注' maxlength='100'/>" +
