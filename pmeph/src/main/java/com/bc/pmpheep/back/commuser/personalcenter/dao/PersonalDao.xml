@@ -424,7 +424,7 @@
 		t.id,
 		t.bookname,
 		DATE_FORMAT(t.deadline,'%Y-%m-%d') as deadline,
-		(t.is_opts_handling = 1 and t.is_director_handling = 1 and t.is_editor_handling = 1 )as is_handled,
+		(t.is_opts_handling = 1 and t.is_director_handling = 1 and t.is_editor_handling = 1 and t.is_accepted = 1)as is_handled,
 		t.source,
 		t.type,
 		DATE_FORMAT(t.gmt_create,'%Y-%m-%d') as gmt_create,
@@ -449,7 +449,7 @@
 				AND t.auth_progress = #{parameter.auth_progress}
 			</if>
 			<if test="parameter.is_handled != null and parameter.is_handled != '' ">
-				AND (t.is_opts_handling = 1 and t.is_director_handling = 1 and t.is_editor_handling = 1) = #{parameter.is_handled} 
+				AND (t.is_opts_handling = 1 and t.is_director_handling = 1 and t.is_editor_handling = 1 and t.is_accepted = 1) = #{parameter.is_handled} 
 			</if>
 		</where>
 		group by t.id
@@ -476,7 +476,7 @@
 				AND t.auth_progress = #{parameter.auth_progress}
 			</if>
 			<if test="parameter.is_handled != null and parameter.is_handled != '' ">
-				AND (t.is_opts_handling = 1 and t.is_director_handling = 1 and t.is_editor_handling = 1) = #{parameter.is_handled} 
+				AND (t.is_opts_handling = 1 and t.is_director_handling = 1 and t.is_editor_handling = 1 and t.is_accepted = 1) = #{parameter.is_handled} 
 			</if>
 		</where>
 
