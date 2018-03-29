@@ -71,8 +71,8 @@ String contextpath=request.getContextPath();
     		       </div>
     		       </div>
                 </div>
-                <div class="end">
-                      ${comment.contentxt }                                         
+                <div class="end" id="end">
+                    ${comment.contentxt }
                 </div>
             </div>
         </div>
@@ -105,8 +105,5 @@ String contextpath=request.getContextPath();
    </div>          
             <jsp:include page="/pages/comm/tail.jsp"></jsp:include> 
 </body>
-<script type="text/javascript">
 
-
-</script>
 </html>

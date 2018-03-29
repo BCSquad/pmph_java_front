@@ -288,12 +288,11 @@ function getImageTips(id,htmlId){
     var str = ''
     console.log(1111111);
 
-    if($(".image_tips").length>0){
+  /*  if($(".image_tips").length>0){
         $(".image_tips").remove();
-    }
+    }*/
     var flag = true;
     self.css({"position":"relative"});
-    self.append('<div class="image_tips" id="image_tips"><span></span></div>');
 
         // if(var_id ==id )
         if(flag){
@@ -316,8 +315,12 @@ function getImageTips(id,htmlId){
                         str += '他还不是您的好友呢！';
 
                     }else{
-                        str += '昵称：'+responsebean.nickname+' 电话：'+responsebean.telephone+' 邮箱：'+responsebean.email;
+                        str += '昵称：'+responsebean.nickname+'<br/>'+' 电话：'+responsebean.telephone+'<br/>'+' 邮箱：'+responsebean.email;
                     }
+                    if($(".image_tips").length>0) {
+                        $(".image_tips").remove();
+                    }
+                    self.append('<div class="image_tips" id="image_tips"><span></span></div>');
 
                     $("#image_tips").append(str);
 
@@ -336,7 +339,7 @@ function getImageTips(id,htmlId){
 function removeImageTips(){
     clearTimeout(t_Time);
     if($(".image_tips").length>0){
-        setTimeout("$(\".image_tips\").remove()",1000);
+        setTimeout("$(\".image_tips\").remove()",800);
     }
 }
 /*

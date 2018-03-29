@@ -43,7 +43,11 @@
     color: #333333;
     overflow: hidden;
     text-overflow: ellipsis;
-    height:30px;font-size: 20px;line-height: 30px
+    height:30px;
+    font-size: 20px;
+    line-height: 30px;
+    white-space: nowrap;
+    width: 900px;
 }
 .collection .content .content-text .message{
    height:33px;margin-top:5px
@@ -65,5 +69,12 @@
 	background-position: -183px -152px;
 }
 .collection .content .content-text .end{
-  height:62px;line-height: 31px;overflow: hidden;font-size: 14px;color:#333333
+    height:62px;
+    line-height: 31px;
+    overflow: hidden;
+    font-size: 14px;
+    color:#333333;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
 }

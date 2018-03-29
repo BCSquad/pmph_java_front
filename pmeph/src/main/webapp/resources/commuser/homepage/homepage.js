@@ -1,6 +1,6 @@
 $(function() {
     //渐入渐出
-    setTimeout(function(){
+    /*setTimeout(function(){
         $(".btm-tips").animate({bottom: '20px', opacity: 1}, 280, 'linear', function () {
             //驻留时间设为10s
             var self = this;
@@ -11,7 +11,7 @@ $(function() {
                 clearTimeout(tempTimer);
             }, 10000)
         });
-    },2000);
+    },2000);*/
 	$("#book_type").val(1);
 
 	$('.banner').scroll({
