@@ -37,7 +37,7 @@ $(function(){
 	
 	loadData();
 	
-	//加载更错
+	//加载更多
 	$("#loadMore").click(function(){
 		loadData();
 	});
@@ -69,7 +69,8 @@ $(function(){
 	                		    (responsebean[i].isPromote?"<div class='items_img'>推荐</div> ":"")+
 	        	                "<div class=\"item1 cutmore\">" +
 	        	                "<a href='"+contextpath+"cmsnotice/noticeMessageDetail.action?id="+responsebean[i].mid+"&&materialId="+responsebean[i].materialId+"&&csmId="+responsebean[i].id+"'>" +responsebean[i].title+"</a></div> "+
-	        	                "<div class=\"item2 cutmore\"><p style='margin:0;height:40px;line-height:20px'>";
+
+							"<div class=\"item2 cutmore\"><p style='margin:0;height:40px;line-height:20px'>";
 	        	                if(responsebean[i].isMaterialEntry==true){
 	        	                	html+=responsebean[i].notice;
 	        	                }else{
@@ -78,9 +79,26 @@ $(function(){
 	        			       html+="</p></div> "+
 	        	                "<div class=\"item3\">  "+
 	        	                     deadline+
-	        	                    "<div style=\"float:right\">发布日期："+formatDate(responsebean[i].gmtCreate,"yyyy.MM.dd")+"</div> "+ 
-	        	                "</div> "+
-	                        "</div> ";
+                                   "<div style=\"float:right\">发布日期：" + formatDate(responsebean[i].gmtCreate, "yyyy.MM.dd") + "</div> "
+                        if (responsebean[i].isMaterialEntry == true && responsebean[i].notEnd == '1' && responsebean[i].declarationId == null) {
+                            html+="<div class=\"gg\"\n" +
+                            "                                 onclick=\"window.location.href='" + contextpath + "material/toMaterialAdd.action?material_id=" + responsebean[i].materialId + "'\">\n" +
+                            "                                报名参加\n" +
+                            "                            </div>"
+                        } else if (responsebean[i].notEnd == '1' && responsebean[i].isMaterialEntry == true && responsebean[i].declarationId != null && responsebean[i].decEditable == '1') {
+                            html+="<div class=\"gg\"\n" +
+                            "                                 onclick=\"window.location.href='" + contextpath + "material/toMaterialZc.action?declaration_id=" + responsebean[i].declarationId + "'\">\n" +
+                            "                                编辑申报\n" +
+                            "                            </div>"
+                        } else if (responsebean[i].notEnd == '1' && responsebean[i].isMaterialEntry == true && responsebean[i].declarationId != null && responsebean[i].decEditable == '0') {
+                            html+="<div class=\"gg\" onclick=\"window.location.href='" + contextpath + "material/showMaterial.action?declaration_id=" + responsebean[i].declarationId + "'\">\n" +
+                            "                                                查看申报\n" +
+                            "                                                </div>"
+                        } else if (responsebean[i].notEnd == '0' && responsebean[i].isMaterialEntry == true) {
+                            html+="<div class=\"gg end\">报名结束</div>"
+                        }
+                        +"</div> " +
+                        "</div> ";
 	                	$("#content").append(html);
 	        		}
 	        		if(responsebean.length < pageSize){
