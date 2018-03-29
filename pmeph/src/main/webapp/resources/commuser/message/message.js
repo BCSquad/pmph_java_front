@@ -245,6 +245,22 @@ Date.prototype.toLocaleString = function () {
 
 function showup(id) {
 	var loaded = false;
+	var imgTimeOut = false;
+	var clickToEndLoad = false;
+	
+	//10秒不论是否加载完成，都跳出弹窗；
+	setTimeout(function(){
+		imgTimeOut = true;
+	}, 10000);
+	
+	//加载过程中点击window 阻止弹窗弹出（然而点不到window，只有加载图案的一小块有点击效果，问题待解决）
+	$(window).one("click",function(){
+		$(window).one("click",function(){
+			clickToEndLoad = true;
+		});
+	});
+    	
+   
     $.ajax({
         type: 'post',
         url: contextpath + 'message/queryTitleMessage.action?uid=' + id,
@@ -277,25 +293,34 @@ function showup(id) {
             function isImgLoad(loaded,id,callback) {
             	//清除延时
             	clearTimeout(imgTick);
-            	//是否所有图片加载完成
-            	$("#"+id).find("img").each(function(){
-            		var $t = $(this);
-            		if($t[0].complete){
-            			loaded = true;
-            		}else{
-            			loaded = false;
-            			return false; 
-            		}
-            	});
-            	
-            	if (loaded) { // 若已全部加载 执行回调
-            		callback();
-				}else{  //若还未全部加载完成 间隔每100秒再次轮询 直到加载完成执行回调 不再轮询0
-					imgTick = setTimeout(function(){
-						 layer.load(1); //加载图样载
-						 isImgLoad(loaded,id,callback); //轮询
-					}, 100);
+            	if ($("#"+id).find("img").length>0) { //有图片需要加载
+            		//是否所有图片加载完成
+                	$("#"+id).find("img").each(function(){
+                		var $t = $(this);
+                		if(imgTimeOut||$t[0].complete){
+                			loaded = true;
+                		}else{
+                			loaded = false;
+                			return false; 
+                		}
+                	});
+				}else{ //无图片需要加载
+					loaded = true;
 				}
+            	
+            	if (clickToEndLoad) {
+            		layer.closeAll("loading"); 
+				}else{
+					if (loaded) { // 若已全部加载 执行回调
+	            		callback();
+					}else{  //若还未全部加载完成 间隔每10毫秒再次轮询 直到加载完成执行回调 不再轮询0
+						imgTick = setTimeout(function(){
+							 layer.load(1); //加载图样载
+							 isImgLoad(loaded,id,callback); //轮询
+						}, 10);
+					}
+				}
+            	
             }
             
             //开始轮询
