@@ -227,12 +227,13 @@ body {
     right: -10px;
     background-color: #eee;
     line-height: 30px;
-    opacity: 0.8;
+    /*opacity: 0.8;*/
     border-radius: 4px;
     color: #333;
     font-size: 14px;
     text-align: left;
     white-space: nowrap;
+    z-index:100;
 }
 .image_tips span{
     position: absolute;
@@ -244,7 +245,7 @@ body {
     right: 40px;
     width: 0;
     height: 0;
-    opacity: 0.8;
+    /*opacity: 0.8;*/
 }
 .btm-tips{
     position: fixed;

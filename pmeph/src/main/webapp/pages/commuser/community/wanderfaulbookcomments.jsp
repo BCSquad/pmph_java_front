@@ -72,7 +72,7 @@ String contextpath=request.getContextPath();
     		       </div>
                 </div>
                 <div class="end" id="end">
-                    ${comment.contentxt }
+                    <div class="textp">${comment.contentxt }</div>
                 </div>
             </div>
         </div>
