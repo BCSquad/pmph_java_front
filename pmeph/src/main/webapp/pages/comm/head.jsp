@@ -131,9 +131,9 @@
 
                 <div class="user-info">
 
-                    <%--<c:if test="${NOT_READ_MESSAGE_NUM>0}">--%>
-                        <%--<span class="sign"></span>--%>
-                    <%--</c:if>--%>
+                    <c:if test="${NOT_READ_MESSAGE_NUM>0}">
+                        <span class="sign"></span>
+                    </c:if>
 
                     <img class="notice-icon" src="${ctx}${NOT_READ_MESSAGE_NUM>0?'/statics/image/message1.gif':'/statics/image/message.png'}" alt=""
                          onclick="location.href='${ctx}${NOT_READ_MESSAGE_URL}'">
