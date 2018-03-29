@@ -130,7 +130,7 @@
 									<div class="input-wrapper">
 										<input class="required" data-valid="isNonEmpty"
 											data-error="真实姓名不能为空" placeholder="请填写真实姓名" type="text"
-											id="realName" value="${admininfo.realname}">
+											id="realName" value="${admininfo.realname}" maxLength="20">
 									</div>
 								</div>
 							</td>
@@ -140,7 +140,7 @@
 									<div class="input-wrapper">
 										<input class="required" data-valid="isNonEmpty" ${admininfo.progress==1?'disabled="disabled"':''}
 											data-error="职务不能为空" placeholder="请填写职务" type="text"
-											id="position" value="${admininfo.position}">
+											id="position" value="${admininfo.position}" maxLength="35">
 									</div>
 								</div>
 							</td>
@@ -149,7 +149,7 @@
 									<label>联系电话</label>
 									<div class="input-wrapper">
 										<input type="text" id="telephone" placeholder="填写联系电话"
-											value="${admininfo.telephone}">
+											value="${admininfo.telephone}" maxLength="20">
 									</div>
 								</div>
 								
@@ -213,7 +213,7 @@
 									<div class="input-wrapper">
 										<input type="text" 
 											type="text" id="fax"
-											value="${admininfo.fax}">
+											value="${admininfo.fax}" maxLength="20">
 									</div>
 								</div>
 							</td>
@@ -245,7 +245,7 @@
 									<div class="input-wrapper">
 										<input type="text" class="required" data-valid="isNonEmpty"
 											data-error="邮编不能为空" type="text" id="postCode"
-											value="${admininfo.postcode}">
+											value="${admininfo.postcode}" maxLength="25">
 									</div>
 								</div>
 							</td>
@@ -256,7 +256,7 @@
 										<input type="text" class="required"
 											data-valid="isNonEmpty||isEmail"
 											data-error="E-mail不能为空||E-mail格式不正确" type="text" id="email"
-											value="${admininfo.email}">
+											value="${admininfo.email}" maxLength="40">
 									</div>
 								</div>
 							</td>
@@ -267,7 +267,7 @@
 									<label class="require">地址</label>
 									<div class="input-wrapper">
 										<input type="text" class="required" data-valid="isNonEmpty"
-											data-error="地址不能为空" id="address" value="${admininfo.address}">
+											data-error="地址不能为空" id="address" value="${admininfo.address}" maxLength="50">
 									</div>
 								</div>
 							</td>
