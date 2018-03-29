@@ -627,7 +627,7 @@
 
 .suibineirong {
     font-size: 12px;
-    color: #666666;
+    color: #333333;
     margin-top: 16px;
     display: block;
     max-height: 68px;
@@ -1419,10 +1419,9 @@
 .mistitle {
     width: 50%;
     float: left;
-    font-family: MicrosoftYaHei;
     line-height: 20px;
     letter-spacing: 1px;
-    color: #666666;
+    color: #333333;
     font-size: 16px;
     margin-left: 20px;
 }
@@ -1439,10 +1438,9 @@
 
 
 .labell {
-    font-family: MicrosoftYaHei;
     line-height: 20px;
     letter-spacing: 1px;
-    color: #666666;
+    color: #333333;
     font-size: 14px;
 }
 
@@ -1479,10 +1477,9 @@
 }
 
 .aticle {
-    font-family: MicrosoftYaHei;
     line-height: 24px;
     letter-spacing: 1px;
-    color: #666666;
+    color: #333333;
     width: 97%;
     margin-left: 20px;
 }
@@ -1500,7 +1497,6 @@
     float: right;
     width: 80px;
     height: 28px;
-    font-family: MicrosoftYaHei;
     font-size: 14px;
     color: #F7FCF6;
     cursor: pointer;

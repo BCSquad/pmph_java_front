@@ -144,7 +144,7 @@
 				<div class="right_1">
 	                <div>
 	                    <span id="ptts"></span>
-	                    <span style="font-family: MicrosoftYaHei;font-size: 16px;color: #000000;margin-left: 5px;"><B>配套图书</B></span>
+	                    <span style="font-size: 16px;color: #000000;margin-left: 5px;"><B>配套图书</B></span>
 	                </div>
 	                <div style="margin-top: 20px;">
 	                    <div style="float: left;width: 90px;height: 116px">

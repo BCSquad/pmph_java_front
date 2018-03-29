@@ -131,7 +131,6 @@ ul li {
 }
 
 .mkbt {
-    font-family: 'MicrosoftYaHei';
     font-size: 18px;
     color: #29355b;
 }
@@ -213,7 +212,6 @@ ul li {
 	text-overflow:ellipsis; 
 	white-space:nowrap;
 	overflow: hidden;
-    font-family: MicrosoftYaHei;
     font-size: 14px;
     color: #333333;
     letter-spacing: 1px;
@@ -229,7 +227,6 @@ ul li {
 }
 
 .ir_03 span {
-    font-family: MicrosoftYaHei;
     font-size: 12px;
     color: #999999;
     letter-spacing: 1px;
@@ -247,7 +244,6 @@ ul li {
 }
 
 .xs_02 span {
-    font-family: MicrosoftYaHei;
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -336,13 +332,12 @@ ul li {
     margin-left: 20px;
     width: 93px;
     height: 100%;
-    font-family: MicrosoftYaHei;
     font-size: 22px;
     font-weight: normal;
     font-stretch: normal;
     line-height: 24px;
     letter-spacing: 0px;
-    color: #666666;
+    color: #333333;
 }
 
 .block .items {
@@ -378,7 +373,6 @@ ul li {
 }
 
 .sp_title {
-    font-family: MicrosoftYaHei;
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -390,7 +384,6 @@ ul li {
 }
 
 .sp_pl {
-    font-family: MicrosoftYaHei;
     font-size: 12px;
     font-weight: normal;
     font-stretch: normal;
@@ -403,13 +396,12 @@ ul li {
 }
 
 .sp_remark {
-    font-family: MicrosoftYaHei;
     font-size: 12px;
     font-weight: normal;
     font-stretch: normal;
     line-height: 24px;
     letter-spacing: 0px;
-    color: #666;
+    color: #333333;
     height: 66px;
     overflow: hidden;
 }
@@ -421,7 +413,6 @@ ul li {
 }
 
 .tsfl {
-    font-family: MicrosoftYaHei;
     font-size: 18px;
     color: #29355b;
 }
@@ -523,7 +514,6 @@ ul li {
 }
 
 .part_1 span {
-    font-family: MicrosoftYaHei;
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -538,7 +528,6 @@ ul li {
 }
 
 .part_2 a {
-    font-family: MicrosoftYaHei;
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -623,14 +612,12 @@ ul li {
 
 .re_4{
     float: left;
-    font-family: MicrosoftYaHei;
     font-size: 14px;
     color: #ffffff;
 }
 
 .re_5{
     float: left;
-    font-family: MicrosoftYaHei;
     font-size: 14px;
     letter-spacing: 0px;
     color: #ffffff;
@@ -647,7 +634,6 @@ ul li {
 }
 
 .re_6{
-    font-family: MicrosoftYaHei;
     font-size: 24px;
     color: #ffffff;
 }

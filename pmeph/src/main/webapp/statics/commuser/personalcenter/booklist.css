@@ -492,7 +492,7 @@ width: 83px;
 }
 
 .left_title{
-	font-family: MicrosoftYaHei;
+
 	font-size: 16px;
 	font-weight: bold;
 	width: 300px;
@@ -503,13 +503,13 @@ width: 83px;
 }
 
 .left_content{
-	font-family: MicrosoftYaHei;
+
 	font-size:15px;
 	color: #848484;
 }
 
 .left_time{
-	font-family: MicrosoftYaHei;
+
 	font-size: 12px;
 	color: #848484;
 }
@@ -526,14 +526,14 @@ width: 83px;
 .left_herf{
 	text-align: center;
 	margin-top: 112px;
-	font-family: MicrosoftYaHei;
+
 	color: #73adad;
 }
 
 .left_herf2{
 	text-align: center;
 	margin-top: 20px;
-	font-family: MicrosoftYaHei;
+
 	color: #73adad;
 }
 

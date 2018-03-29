@@ -13,7 +13,7 @@ body
 
 .sxy-div-menu
 {
-	font-family: MicrosoftYaHei;
+
 	font-size: 16px;
 	font-weight: normal;
 	height:50px;
@@ -34,7 +34,7 @@ body
     width: 864px;
     height: 40px;
     background-color: #f1f1f1;
-    font-family: MicrosoftYaHei;
+
     border: none;
     padding-left: 20px;
     border-radius: 4px;
@@ -55,7 +55,7 @@ body
 }
 
 .writearticle{
-	font-family: MicrosoftYaHei;
+
 	font-size: 14px;
 	line-height: 45px;
 	color: #999999;
@@ -71,13 +71,13 @@ body
 }
 
 .bookname{
-	font-family: MicrosoftYaHei;
+
 	font-size: 16px;
 	color: #4286c1;
 }
 
 .publisher{
-	font-family: MicrosoftYaHei;
+
 	font-size: 14px;
 	color: #489299;
 }
@@ -102,14 +102,14 @@ body
 }
 
 .starfont{
-	font-family: MicrosoftYaHei;
+
 	font-size: 16px;
-	color: #666666;
+	color: #333333;
 	float: left;
 }
 
 .author{
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     color: #999999;
 } 
@@ -128,7 +128,7 @@ body
 
 .rd_name {
 	float: left;
-    font-family: MicrosoftYaHei;
+
 	font-size: 16px;
 	color: #9aaabf;
 	margin-left: 10px;
@@ -168,7 +168,7 @@ body
 }
 
 #span_3{
-    font-family: MicrosoftYaHei;
+
     font-size: 16px;
     color: #000000;
 }
@@ -194,7 +194,7 @@ body
     float: left;
     margin-top: -5px;
     margin-left: 4px;
-    font-family: MicrosoftYaHei;
+
     font-size: 12px;
     color: #999999;
     cursor:pointer;
@@ -273,7 +273,7 @@ body
     float: left;
     margin-top: 12px;
     margin-left: 5px;
-    font-family: MicrosoftYaHei;
+
     font-size: 16px;
     color: #000000;
 }
@@ -287,7 +287,7 @@ body
 .refresh1{
     float: left;
     margin-top: 12px;
-    font-family: MicrosoftYaHei;
+
     font-size: 12px;
     color: #999999;
     cursor:pointer;
@@ -317,7 +317,7 @@ body
 .right_21{
     height: 28px;
     float: left;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     overflow: hidden;
     color: #489299;
@@ -328,7 +328,7 @@ body
 }
 
 .right_22{
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     color: #999999;
     margin-top: 6px;
@@ -337,7 +337,7 @@ body
 
 .ptts_sp1{
 	float:left;
-	font-family: MicrosoftYaHei;
+
 	letter-spacing: 0px;
 	font-size: 14px;
 	color: #000000;
@@ -348,7 +348,7 @@ body
 }
 
 .ptts_sp2{
-	font-family: MicrosoftYaHei;
+
 	font-size: 12px;
 	letter-spacing: 0px;
 	color: #999999;
@@ -358,10 +358,10 @@ body
 }
 
 .ptts_sp3{
-	font-family: MicrosoftYaHei;
+
 	font-size: 12px;
 	letter-spacing: 0px;
-	color: #666666;
+	color: #333333;
 	margin-top: 18px;
 	height: 38px;
 	overflow: hidden;
@@ -395,7 +395,7 @@ body
 }
 
 .lookbook{
-	font-family: MicrosoftYaHei;
+
 	font-size: 12px;
 	letter-spacing: 0px;
 	color: #ffffff;
@@ -405,16 +405,16 @@ body
 
 .sxy-font1
 {
-	font-family: MicrosoftYaHei;
+
 	font-size: 16px;
-	color: #666666;
+	color: #333333;
 }
 
 .longcomtitle
 {
-	font-family: MicrosoftYaHei;
+
 	font-size: 16px;
-	color: #666666;
+	color: #333333;
 	margin-top: 210px;
 }
 
@@ -423,7 +423,7 @@ body
     width: 75px;
     height: 35px;
     background-color: #35C9A9;
-    font-family: MicrosoftYaHei;
+
     color: #ffffff;
     font-size: 14px;
     border-radius: 2px;

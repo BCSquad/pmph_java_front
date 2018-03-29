@@ -30,7 +30,7 @@
     text-align: center;
     width: 58px;
     height: 16px;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     color: #ffffff;
     margin-top: 40px;
@@ -52,7 +52,7 @@
 .midButton{
 	color:red;
 	text-decoration:none;
-	font-family: MicrosoftYaHei;
+
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -68,7 +68,7 @@
     color: #489299;
     border-bottom: solid 2px #489299;
     float: left;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     color: #999999;
 }
@@ -180,7 +180,7 @@
 .username{
     width: 200px;
     height: 28px;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -192,15 +192,15 @@
     margin-top: 0px;
 }
 .time{
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
     letter-spacing: 0px;
-    color: #666666;
+    color: #333333;
 }
 .event{
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     letter-spacing: 0px;
@@ -246,7 +246,7 @@
     text-align: center;
     margin-top: 38px;
     margin-bottom:10px;
-    font-family: MicrosoftYaHei;
+
     font-size: 24px;
     font-weight: normal;
     font-stretch: normal;
@@ -270,7 +270,7 @@
 .littleTitle{
     width: 140px;
     height: 18px;
-    font-family: MicrosoftYaHei;
+
     font-size: 12px;
     font-weight: normal;
     font-stretch: normal;
@@ -286,7 +286,7 @@
     
 }
 .littleTitle2{
-    font-family: MicrosoftYaHei;
+
     text-decoration: underline;
     font-size: 12px;
     font-weight: normal;
@@ -301,7 +301,7 @@
     cursor: pointer;
 }
 .littleTitle3{
-    font-family: MicrosoftYaHei;
+
     font-size: 12px;
     font-weight: normal;
     font-stretch: normal;
@@ -319,13 +319,13 @@
     text-align: center;
 }
 .thirdRow{
-    font-family: MicrosoftYaHei;
+
     font-size: 12px;
     font-weight: normal;
     font-stretch: normal;
     line-height: 0px;
     letter-spacing: 0px;
-    color: #666666;
+    color: #333333;
     margin-top: 28px;
     text-align: center;
 }
@@ -337,7 +337,7 @@
     text-align: center;
     width: 56px;
     height: 16px;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     color: #489299;
     margin-top: 40px;
@@ -368,7 +368,7 @@
     color: #489299;
     border-bottom: solid 2px #489299;
     float: left;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     color: #999999;
     text-align: right;
@@ -377,7 +377,7 @@
 .eventTypeAndTime{
     width: 500px;
     height: 22px;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -389,13 +389,13 @@
 }
 
 .timeEventFont{
-    font-family: MicrosoftYaHei;
+
     font-size: 12px;
     font-weight: normal;
     font-stretch: normal;
     line-height: 24px;
     letter-spacing: 0px;
-    color: #666666;
+    color: #333333;
 }
 
 .listEvent{
@@ -437,7 +437,7 @@
     float: left;
 }
 .eventType{
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -446,7 +446,7 @@
     color: #333333;
 }
 .eventTime{
-    font-family: MicrosoftYaHei;
+
     font-size: 12px;
     font-weight: normal;
     font-stretch: normal;
@@ -492,7 +492,7 @@
     width: 100%;
     text-align: center;
     margin-top: 44px;
-    font-family: MicrosoftYaHei;
+
     font-size: 24px;
     font-weight: normal;
     font-stretch: normal;
@@ -506,13 +506,13 @@
     text-align: center;
 }
 .thirdRowEvent{
-    font-family: MicrosoftYaHei;
+
     font-size: 12px;
     font-weight: normal;
     font-stretch: normal;
     line-height: 0px;
     letter-spacing: 0px;
-    color: #666666;
+    color: #333333;
     margin-top: 28px;
     text-align: center;
 }
@@ -591,7 +591,7 @@
 .tipWords{
     width: 170px;
     height: 37px;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -614,7 +614,7 @@
     padding: 0 10px;
     cursor: pointer;
     border: solid 1px #03717b;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -631,7 +631,7 @@
     /*height: 27px;*/
     background-color: #03717b;
     /*border-radius: 4px;*/
-    /*font-family: MicrosoftYaHei;*/
+    /**/
     /*font-size: 14px;*/
     /*font-weight: normal;*/
     /*font-stretch: normal;*/

@@ -28,12 +28,12 @@ body
 {
     width: 886px;
     height:328px;
-	font-family: MicrosoftYaHei;
+
 	font-size: 14px;
 	font-weight: normal;
 	line-height:1.6;
 	letter-spacing: 1px;
-	color: #666666;
+	color: #333333;
 	border: none;
 }
 
@@ -41,7 +41,7 @@ body
 .sxy-navigate
 {
 	height: 60px;
-	font-family: MicrosoftYaHei;
+
 	font-size: 14px;
 	font-weight: normal;
 	line-height:60px;
@@ -55,7 +55,7 @@ body
 #sxy-title
 {
 	height: 40px;
-	font-family: MicrosoftYaHei;
+
 	font-size: 24px;
 	font-weight: normal;
 	line-height:40px;
@@ -79,7 +79,7 @@ body
 #sxy-title2
 {
 	height: 22px;
-	font-family: MicrosoftYaHei;
+
 	font-size: 14px;
 	font-weight: normal;
 	line-height:22px;
@@ -91,7 +91,7 @@ body
 .sxy-tr
 {
 	height: 12px;
-	font-family: MicrosoftYaHei;
+
 	font-size: 14px;
 	font-weight: normal;
 	line-height: 12px;
@@ -112,7 +112,7 @@ body
 	border-radius: 2px;
 	opacity: 0.7;
 	color:White;
-	font-family: MicrosoftYaHei;
+
 	font-size: 14px;
 	margin-top:30px;
 	border: none;
@@ -123,7 +123,7 @@ body
 {
 	width: 64px;
 	height: 16px;
-	font-family: MicrosoftYaHei;
+
 	font-size: 16px;
 	font-weight: normal;
 	letter-spacing: 0px;
@@ -134,7 +134,7 @@ body
 {
 	width: 36px;
 	height: 13px;
-	font-family: MicrosoftYaHei;
+
 	font-size: 12px;
 	font-weight: normal;
 	letter-spacing: 0px;
@@ -145,13 +145,13 @@ body
 
 .sxy-content{
 	width: 892px;
-	font-family: MicrosoftYaHei;
+
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
 	line-height: 24px;
 	letter-spacing: 1px;
-	color: #666666;
+	color: #333333;
 	margin-bottom: 30px
 }
 
