@@ -233,6 +233,7 @@ body {
     font-size: 14px;
     text-align: left;
     white-space: nowrap;
+    z-index:100;
 }
 .image_tips span{
     position: absolute;
