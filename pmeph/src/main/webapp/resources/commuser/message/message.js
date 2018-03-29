@@ -46,7 +46,7 @@ function getMessage(is_read,id1,id2){
                     str += "</td><td class='buttonDetail'>";
                     if (n.msgType == 0 && n.material_id != 0) {
                         /*str += "<div class='buttonAccept'><a href='" + contextpath + "message/noticeMessageDetail.action?materialId=" + n.material_id + "'>查看详情</a></div>";*/
-                        str += "<div class='buttonAccept'><a href='" + contextpath + "message/noticeMessageDetail.action?cmsId=" + n.cmsid + "'>查看详情</a></div>";
+                        str += "<div class='buttonAccept'><a href='" + contextpath + "message/noticeMessageDetail.action?cmsId=" + n.cmsid + "&umid=" + n.id + "'>查看详情</a></div>";
                     }
                     if (n.msgType == 0 || n.msgType == 1) {
                         str += "<span class='deleteButton' onclick='deleteNotice(" + n.id + ")'><span style='font-size:18px;'>×</span> 删除</span>";
@@ -135,7 +135,7 @@ function loadMore() {
                 str += "</td><td class='buttonDetail'>";
                 if (n.msgType == 0 && n.material_id != 0) {
                     /*str += "<div class='buttonAccept'><a href='" + contextpath + "message/noticeMessageDetail.action?materialId=" + n.material_id + "'>查看详情</a></div>";*/
-                    str += "<div class='buttonAccept'><a href='" + contextpath + "message/noticeMessageDetail.action?cmsId=" + n.cmsid + "'>查看详情</a></div>";
+                    str += "<div class='buttonAccept'><a href='" + contextpath + "message/noticeMessageDetail.action?cmsId=" + n.cmsid + "&umid=" + n.id + "'>查看详情</a></div>";
                 }
                 if (n.msgType == 0 || n.msgType == 1) {
                     str += "<span class='deleteButton' onclick='deleteNotice(" + n.id + ")'><span style='font-size:18px;'>×</span> 删除</span>";
