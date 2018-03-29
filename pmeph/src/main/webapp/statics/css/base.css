@@ -218,11 +218,12 @@ body {
 
 .image_tips{
     position: absolute;
-    min-width: 300px;
-/* max-width: 450px; */
-    width: 380px;
+    /* min-width: 30px; */
+    /* max-width: 450px; */
+    /* width: 100px; */
+    padding: 5px;
     top: 50px;
-    height: 30px;
+    /* height: 30px; */
     right: -10px;
     background-color: #eee;
     line-height: 30px;
@@ -230,6 +231,8 @@ body {
     border-radius: 4px;
     color: #333;
     font-size: 14px;
+    text-align: left;
+    white-space: nowrap;
 }
 .image_tips span{
     position: absolute;
