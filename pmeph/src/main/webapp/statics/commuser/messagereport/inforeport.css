@@ -159,6 +159,10 @@ body
 	word-break:break-all;
 }
 
+.sxy-content img{
+	max-width:100%;
+}
+
 tbody div{
 	cursor: pointer;
 }
