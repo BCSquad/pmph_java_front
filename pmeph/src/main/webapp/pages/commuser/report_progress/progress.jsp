@@ -164,14 +164,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					                            <c:when test="${(books.isPublished || books.isForceEnd) }">
 					                            	<span class="left-bom-22">遴选结束，未选中</span>
 					                            </c:when>
-					                            <c:when test="${(books.onlineProgress==1||books.onlineProgress==4) }">
-					                            	<span class="left-bom-22">审核中...</span>
+					                            <c:when test="${(progress.offlineProgress=='2'&&books.onlineProgress==3)}">
+					                            	<span class="left-bom-22">遴选中</span>
 					                            </c:when>
-					                             <c:when test="${(books.onlineProgress==2||books.onlineProgress==5) }">
+					                            <c:when test="${(books.onlineProgress==1||books.onlineProgress==4) }">
+					                            	<span class="left-bom-22">${progress.orgName } 审核中</span>
+					                            </c:when>
+					                            <c:when test="${(books.onlineProgress==2||books.onlineProgress==5) }">
 					                            	<span class="left-bom-22">被退回</span>
 					                            </c:when>
 					                            <c:otherwise>
-													<span class="left-bom-22">审核通过</span>
+													<span class="left-bom-22">${progress.orgName } 审核通过</span>
 												</c:otherwise>
 				                            </c:choose>
 				                            <%-- <c:if test="${books.isPublished==true}">

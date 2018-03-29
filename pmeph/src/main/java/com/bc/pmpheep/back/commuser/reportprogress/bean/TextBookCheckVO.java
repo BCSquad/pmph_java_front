@@ -52,6 +52,9 @@ public class TextBookCheckVO implements Serializable {
     private Boolean isLocked;
     //教材被强制结束
     private Boolean isForceEnd;
+    
+    //申报单位名称
+    private String orgName;
 
     /**
      * @return the materialId
@@ -236,5 +239,15 @@ public class TextBookCheckVO implements Serializable {
 	public void setIsForceEnd(Boolean isForceEnd) {
 		this.isForceEnd = isForceEnd;
 	}
+
+	public String getOrgName() {
+		return orgName;
+	}
+
+	public void setOrgName(String orgName) {
+		this.orgName = orgName;
+	}
+
+
 
 }
