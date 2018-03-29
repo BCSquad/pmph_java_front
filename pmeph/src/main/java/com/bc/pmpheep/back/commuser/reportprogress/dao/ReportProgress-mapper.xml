@@ -14,13 +14,16 @@
 			dc.`material_id`,
 			m.`material_name`,
 			dc.`offline_progress`,
-			dc.`online_progress`
+			dc.`online_progress`,
+			o.org_name
 		FROM 
 			`declaration` dc 
 		LEFT JOIN 
 			`material` m 
     	ON 
     		dc.`material_id` = m.`id` 
+    	inner join org o 
+    	on o.id = dc.org_id
 		WHERE
 			 dc.`material_id` =#{materialId}
 		AND 
