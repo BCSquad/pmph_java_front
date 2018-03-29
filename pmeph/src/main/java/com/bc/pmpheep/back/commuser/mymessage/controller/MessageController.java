@@ -422,6 +422,7 @@ public class MessageController extends BaseController {
     public ModelAndView toNoticeMessageDetail(HttpServletRequest request) {
         String materialId = request.getParameter("materialId");
         String cmsId = request.getParameter("cmsId");
+        String umid = request.getParameter("umid");
         //String flag=request.getParameter("flag");
         String notEnd = request.getParameter("notEnd");
         Map<String, Object> user = getUserInfo();
@@ -479,7 +480,7 @@ public class MessageController extends BaseController {
 
         //更新通知点击量
         noticeMessageService.updateNoticeClicks(cmsId);
-
+        noticeMessageService.updateTitleMessage(umid);
 
         //mv.addObject("message",message);
         //mv.addObject("flag",flag);
