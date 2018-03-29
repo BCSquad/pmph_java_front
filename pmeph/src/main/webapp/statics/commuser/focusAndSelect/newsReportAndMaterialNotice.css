@@ -101,10 +101,11 @@
 }
 .item1 a{
     color:#333;
+    display: block;
 }
 
 a{
-	text-decoration: none
+	text-decoration: none;
 }
 
 .item2{
@@ -142,6 +143,8 @@ a{
 .cutmore{
 	overflow: hidden;
 	text-overflow: ellipsis;
+    white-space: nowrap;
+    /*width: 600px;*/
 }
 .cms-icon{
 	background-image: url(../../image/css_sprites.png);
@@ -162,4 +165,24 @@ a{
 .nogood{
 	background-position: -413px -194px;
 	cursor: pointer;
+}
+
+.gg {
+    float:right;
+    width: 67px;
+    height: 27px;
+    background-color: #33CAA9;
+    margin-top: 14px;
+    margin-right: 10px;
+    border-radius:3px;
+    font-family: MicrosoftYaHei;
+    font-size: 13px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 27px;
+    cursor: pointer;
+}
+
+.gg.end {
+    background-color: #c3c3c3;
 }
