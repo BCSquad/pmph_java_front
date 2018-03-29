@@ -189,7 +189,12 @@ a {
 .pageright .list .commentli .title {
     font-size: 16px;
     margin: 10px auto 0px;
-    color: #606060
+    color: #606060;
+    height: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 230px;
 }
 
 .pageright .list .commentli .message {
@@ -228,7 +233,10 @@ a {
     width: 230px;
     overflow: hidden;
     line-height: 22px;
-    color: #5C6878
+    color: #5C6878;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
 }
 
 .pageright .more {
