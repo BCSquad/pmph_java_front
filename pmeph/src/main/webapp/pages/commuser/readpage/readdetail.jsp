@@ -219,12 +219,23 @@
                     </c:if>
 
                 </div>
-                <div class="left1" id="dpf">
-                    <div id="xsp3"></div>
-                    <input type="hidden" id="pdf-hidden" value="${map.pdf_code}">
-                    <a href="${map.pdf_url}" style="text-decoration: none" id="pdf_a"><span class="xsp2">PDF试读</span>
-                    </a>
-                </div>
+                <c:choose>
+                    <c:when test="${empty map.pdf_url}">
+                        <div class="left1" id="dpf" style="cursor:not-allowed;">
+                            <div id="xsp3"></div>
+                            <input type="hidden" id="pdf-hidden" value="${map.pdf_code}">
+                            <a href="${map.pdf_url}" style="text-decoration: none" id="pdf_a"><span class="xsp2">PDF试读</span></a>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="left1" id="dpf">
+                            <div id="xsp3"></div>
+                            <input type="hidden" id="pdf-hidden" value="${map.pdf_code}">
+                            <a href="${map.pdf_url}" style="text-decoration: none" id="pdf_a"><span class="xsp2">PDF试读</span></a>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+
                 <div class="left1" style="margin-right: 10px;">
                     <div id="xsp4"></div>
                     <a href="${map.buy_url}" style="text-decoration: none"><span class="xsp2">立即购买</span>

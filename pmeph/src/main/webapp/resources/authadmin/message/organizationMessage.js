@@ -17,7 +17,7 @@ function loadMore(tag){
 			$("#startPara").val(startPara);
 			var str= '';
 			$.each(json.list,function(i,n){
-                str += '<div class="item" id="item'+n.id+'">' +
+                str += '<div class="item" id="item'+n.msg_id+'">' +
                     '<div class="item-img">' +
                     '<img src="' + contextpath + n.avatar + '" />' +
                     '</div>' +
