@@ -400,11 +400,11 @@
 			<!-- 外社同类书情况 -->
 			<div class="sbxq_item">
 				<div>
-					<span id="tsxz_span7"></span>
+					<span id="tsxz_span3"></span>
 					<span class="tsxz_title">外社同类书情况 </span>
 					<div class="sb_tj">
 						<div class="tj_div" onclick="add_similar()">
-							<span id="img_2"></span>
+							<span id="img_1"></span>
 							<span id="wz_2">添加</span>
 						</div>
 					</div>
