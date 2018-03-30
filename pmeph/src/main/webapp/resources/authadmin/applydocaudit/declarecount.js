@@ -140,6 +140,7 @@ function selectResults() {
 				$(".no-more").hide();
 			}
 			$("#messageTable").html("");
+            $(".js-load-more").hide();
 			var list = json;
 			var str = '';
 			$.each(list, function(i, n) {
