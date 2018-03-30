@@ -13,8 +13,17 @@
 <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
  <link rel="stylesheet" href="${ctx}/statics/authadmin/applydocaudit/materialAudit.css" type="text/css">
 <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.jqprint-0.3.js"></script>
+    <script src="http://www.jq22.com/jquery/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
 <script type="text/javascript" src="${ctx}/resources/authadmin/applydocaudit/materialAudit.js"></script>
+    <style media="print">
+        /*<!--media=print 这个属性可以在打印时有效-->*/
+            .bt_tj{
+                display:none !important;
+            }
+
+    </style>
 </head>
 <body>
 <input type="hidden" id="material_id" value="${material_id }">
@@ -24,7 +33,8 @@
 	<jsp:include page="/pages/comm/headGreenBackGround.jsp"></jsp:include> 
 </div>
 <div class="body">
-	<div class="content-wrapper">	
+	<div class="content-wrapper">
+		<div id="ddd">
 		<div class="tsxz_title">资料审核</div>
 		<hr style=" height:1px;border:none;border-top:2px #999999 dashed;margin-top: 10px;">
 		 <!-- 退回原因填写悬浮框 -->
@@ -716,6 +726,7 @@
 				</div>
 			</div>
 			<hr style=" height:1px;border:none;border-top:1px #999999 dashed;margin-top: 30px;">
+		</div>
 			<div class="button">
 			<c:choose>
 					 <c:when test="${view_audit=='audit'}">
@@ -725,11 +736,13 @@
 							<div id="passGo" class="bt_tj" onclick="toAudit('${gezlList.id}','3')">通过</div>
 							<div id="backGo" class="bt_tj" onclick="showup('${gezlList.id}','2')">退回</div>
 						</c:if>
+						<div class="bt_tj" onclick="toprint()">打印</div>
 						<div class="bt_tj" onclick="toMain()">返回</div>
 					</div>
 					 </c:when>
 					 <c:otherwise>
 					 	<div class="div_butt">
+							<div class="bt_tj" onclick="toprint()">打印</div>
 					 		<div class="bt_tj" onclick="toMain()">返回</div>
 					 	</div>
 					 </c:otherwise>
