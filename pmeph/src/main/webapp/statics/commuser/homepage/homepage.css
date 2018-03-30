@@ -513,8 +513,15 @@ ul li {
 .area-3 .content-photo .content-size {
     padding: 0px;
     margin: 0px;
+    height: 80px;
     font-size: 16px;
     color: #333333;
+}
+
+.area-3 .content-photo .content-size a{
+    max-height: 75px;
+    overflow: hidden;
+    display: block;
 }
 
 .area-3 .content-photo .time-size {

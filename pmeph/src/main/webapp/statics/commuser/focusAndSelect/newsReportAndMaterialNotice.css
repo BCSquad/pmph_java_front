@@ -75,7 +75,9 @@
 }
 
 .items p{
-	word-break: break-all;
+	text-overflow: ellipsis;
+    word-break: break-all;
+    overflow: hidden;
 }
 
 .items_img{
@@ -102,6 +104,9 @@
 .item1 a{
     color:#333;
     display: block;
+    width: 800px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 a{
