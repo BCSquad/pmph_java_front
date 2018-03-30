@@ -145,19 +145,18 @@ public class CmsNoticeManagementController extends BaseController {
 			mapTitle=noticeMessageService.queryNoticeMessageDetail(paraMap);
 			SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd");
 			mv.addObject("is_material_entry", mapTitle.get("is_material_entry"));
-			mv.addObject("firsttag", "首页");
-			mv.addObject("firsttag", "首页");
+			mv.addObject("firsttag", "首页>");
 			mv.addObject("firstpath", "homepage/tohomepage.action");
 			mv.addObject("materialId",mapTitle.get("material_id"));
 			if(tag!=null && tag.equals("FromCommunityList")){
 				//来自教材社区列表的request
 				
-				mv.addObject("secondtag", "教材社区");
+				mv.addObject("secondtag", "教材社区>");
 				mv.addObject("secondpath", "community/tolist.action");
 			}else{
 				//来遴选公告列表中通知的request
 				
-				mv.addObject("secondtag", "遴选公告");
+				mv.addObject("secondtag", "遴选公告>");
 				mv.addObject("secondpath", "cmsnotice/tolist.action");
 			}
 			List<Map<String, Object>> cmsAttach = noticeMessageService.queryCMSAttach(paraMap);

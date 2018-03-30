@@ -222,7 +222,7 @@ function chooseModel(data){
             jsonStr=jsonStr+"{\"id\":\"pmph_material_name\",\"content\":\"人卫社教材编写情况必填\"},{\"id\":\"pmph_publish_date\",\"content\":\"出版时间不能为空\"},{\"id\":\"pmph_isbn\",\"content\":\"教材标准书号不能为空\"},";
         }else{
             $("#rwsjcbx_xt").css("display","inline");
-            jsonStr=jsonStr+"{\"id\":\"pmph_isbn\",\"content\":\"教材标准书号格式：978-7-117-*****-* ,*代表数字或字母\"},";
+        //    jsonStr=jsonStr+"{\"id\":\"pmph_isbn\",\"content\":\"教材标准书号格式：978-7-117-*****-* ,*代表数字或字母\"},";
         }
         
     }
@@ -236,7 +236,7 @@ function chooseModel(data){
             jsonStr=jsonStr+"{\"id\":\"jcb_material_name\",\"content\":\"其他社教材名称不能为空\"},{\"id\":\"jcb_publisher\",\"content\":\"出版单位不能为空\"},{\"id\":\"jcb_publish_date\",\"content\":\"出版时间不能为空\"},{\"id\":\"jcb_isbn\",\"content\":\"教材标准书号不能为空\"},";
         }else{
             $("#qtjcbxqk_xt").css("display","inline");
-            jsonStr=jsonStr+"{\"id\":\"jcb_isbn\",\"content\":\"教材标准书号格式：978-7-********* ,*代表数字或字母\"},";
+         //   jsonStr=jsonStr+"{\"id\":\"jcb_isbn\",\"content\":\"教材标准书号格式：978-7-********* ,*代表数字或字母\"},";
         }
     }
     is_textbook_required = data.is_textbook_required;
@@ -611,7 +611,7 @@ function add_rwsjcbx(){
         "</tr></table>"+
         "<input type='hidden' name='pmph_is_digital_editor' value='pmph_is_digital_editor_"+num+"' /></td>"+
         "<td><input class='cg_input' id='pmph_publish_date_"+num+"' placeholder='出版时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100' name='pmph_publish_date' value='' style='width: 100px;'/></td>"+
-        "<td><input class='cg_input' maxlength='50' name='pmph_isbn' value='978-7-117-' id='pmph_isbn_"+num+"'  style='width: 100px;' placeholder='标准书号'/></td>"+
+        "<td><input class='cg_input' maxlength='50' name='pmph_isbn' value='' id='pmph_isbn_"+num+"'  style='width: 100px;' placeholder='978-7-117-'/></td>"+
         "<td><input class='cg_input' maxlength='100' name='pmph_note' value='' placeholder='备注' style='width: 260px;'/>" +
         "<input type='hidden' name='zdjy' value='pmph_material_name_"+num+",pmph_isbn_"+num+",pmph_publish_date_"+num+"' />" +
         "</td>"+
@@ -658,7 +658,7 @@ function add_jcbx(){
         "<input type='hidden' name='jcb_is_digital_editor' value='jcb_is_digital_editor_"+num+"' /></td>"+
         "<td><input class='cg_input' maxlength='50' name='jcb_publisher' id='jcb_publisher_"+num+"' value='' style='width: 100px;' placeholder='出版社'/></td>"+
         "<td><input class='cg_input' placeholder='出版时间' id='jcb_publish_date_"+num+"' calendar format=\"'yyyy-mm-dd'\"  z-index='100' name='jcb_publish_date' value='' style='width: 100px;'/></td>"+
-        "<td><input class='cg_input' maxlength='50' name='jcb_isbn' id='jcb_isbn_"+num+"' value='978-7-' style='width: 100px;' placeholder='标准书号'/></td>"+
+        "<td><input class='cg_input' maxlength='50' name='jcb_isbn' id='jcb_isbn_"+num+"' value='' style='width: 100px;' placeholder='978-7-'/></td>"+
         "<td><input class='cg_input' maxlength='100' name='jcb_note' value='' placeholder='备注' style='width:130px;'/>" +
         "<input type='hidden' name='zdjy' value='jcb_material_name_"+num+",jcb_publisher_"+num+",jcb_isbn_"+num+",jcb_publish_date_"+num+"' />" +
         "</td>"+

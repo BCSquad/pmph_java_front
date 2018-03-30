@@ -26,7 +26,7 @@
 <div class="body">
 	<div class="content-wrapper">
         <div class="navigator">
-           	 <a href="${ctx }/${firstpath}">${firsttag } </a>&gt; <a href="${ctx }/${secondpath}">${secondtag }</a> &gt; 公告详情
+           	 <a href="${ctx }/${firstpath}">${firsttag } </a> <a href="${ctx }/${secondpath}">${secondtag }</a>  公告详情
         </div>
         
        <%-- <c:choose>
