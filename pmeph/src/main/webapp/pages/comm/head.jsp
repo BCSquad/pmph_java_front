@@ -135,7 +135,7 @@
                         <span class="sign"></span>
                     </c:if>
 
-                    <img class="notice-icon" src="${ctx}/statics/image/message.png" alt=""
+                    <img class="notice-icon" src="${ctx}${NOT_READ_MESSAGE_NUM>0?'/statics/image/message1.gif':'/statics/image/message.png'}" alt=""
                          onclick="location.href='${ctx}${NOT_READ_MESSAGE_URL}'">
 
                     <img class="user-icon"
@@ -155,6 +155,7 @@
                         <a class="option"
                            href='<c:url value="/personalhomepage/tohomepage.action?pagetag=dt"/>'>个人中心</a>
                         <a class="option" href="<c:url value='/group/list.action'/>">我的小组</a>
+                          <a class="option" href="<c:url value='/myFriend/listMyFriend.action'/>">我的好友</a>
                         <a class="option"
                            href='<c:url value="/personalhomepage/tohomepage.action?pagetag=jcsb"/>'>教材申报</a>
                         <%--<a class="option out" href='<c:url value="/logout.action"/>'>退出</a>--%>
@@ -165,4 +166,10 @@
         </div>
     </div>
 </div>
+<c:if test="${NOT_READ_MESSAGE_NUM>0}">
+    <div class="btm-tips">
+        <div class="btm-text" onclick="location.href='${ctx}${NOT_READ_MESSAGE_URL}'">您有未读消息!!!</div>
+    </div>
+</c:if>
+
 

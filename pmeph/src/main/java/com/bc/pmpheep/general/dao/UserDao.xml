@@ -49,7 +49,26 @@ UNION
 				sys_operation t
 			WHERE
 				t.business_type = '作家用户'
-			AND t.operate_date &gt; date_add(CURDATE(), INTERVAL - (select point-1 from writer_point_rule where rule_code='max_login_integral') DAY)
+			AND t.operate_date &gt; date_add(CURDATE(), INTERVAL - (
+			SELECT cast(m1.p1 / m2.p2 AS DECIMAL(9, 2)) - 1
+FROM
+	(
+		SELECT
+			t1.point p1
+		FROM
+			writer_point_rule t1
+		WHERE
+			t1.rule_code = 'max_login_integral'
+	) m1,
+	(
+		SELECT
+			t2.point p2
+		FROM
+			writer_point_rule t2
+		WHERE
+			t2.rule_code = 'logins'
+	) m2
+	) DAY)
 			AND t.operate_date &lt; CURDATE()  and t.user_id=#{id} and t.user_name=#{username}
 			GROUP BY
 				datediff(CURDATE(), t.operate_date)
