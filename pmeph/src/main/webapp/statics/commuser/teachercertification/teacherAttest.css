@@ -9,7 +9,6 @@
 
 .sxy-div-menu
 {
-	font-family: MicrosoftYaHei;
 	font-size: 16px;
 	font-weight: normal;
 	height:50px;
@@ -35,7 +34,6 @@
 .sxy-tr
 {
 	height: 60px;
-	font-family: MicrosoftYaHei;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -53,7 +51,6 @@
     width: 258px;
     height: 40px;
     background-color: #f1f1f1;
-    font-family: MicrosoftYaHei;
     border: none;
     padding-left: 20px;
     border-radius: 4px;
@@ -64,7 +61,6 @@
     width: 100px;
     height: 25px;
     background-color: #70bcc3;
-    font-family: MicrosoftYaHei;
     color: #ffffff;
     font-size: 14px;
     border-radius: 2px;
@@ -75,7 +71,6 @@
 {
     float:right;
 	height: 14px;
-	font-family: MicrosoftYaHei;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -88,7 +83,6 @@
 {
 	width: 58px;
 	height: 15px;
-	font-family: MicrosoftYaHei;
 	font-size: 14px;
 	font-weight: normal;
 	line-height: 30px;
@@ -102,7 +96,6 @@
 {
     width:607px;
     height:65px;
-	font-family: MicrosoftYaHei;
 	font-size: 14px;
 	font-weight: normal;
 	line-height: 30px;
@@ -114,7 +107,6 @@
 .td-font-1
 {
 	height: 12px;
-	font-family: MicrosoftYaHei;
 	font-size: 14px;
 	font-weight: normal;
 	line-height: 26px;
@@ -126,7 +118,6 @@
 .td-font-2
 {
 	height: 12px;
-	font-family: MicrosoftYaHei;
 	font-size: 14px;
 	font-weight: normal;
 	line-height: 26px;
@@ -138,7 +129,6 @@
 .td-font-3
 {
 	height: 15px;
-	font-family: MicrosoftYaHei;
 	font-size: 14px;
 	font-weight: normal;
 	line-height: 30px;
@@ -150,7 +140,6 @@
 .td-font-4
 {
 	height: 15px;
-	font-family: MicrosoftYaHei;
 	font-size: 14px;
 	font-weight: normal;
 	line-height: 30px;
@@ -162,7 +151,6 @@
 {
     width: 98px;
 	height: 15px;
-	font-family: MicrosoftYaHei;
 	text-decoration: underline;
 	font-size: 14px;
 	font-weight: normal;
@@ -209,7 +197,6 @@
 	background-color: #f1f1f1;
 	border-radius: 4px;
 	border: none;
-	font-family: MicrosoftYaHei;
 	font-size: 14px;
 	font-weight: normal;
 	letter-spacing: 0px;
@@ -226,7 +213,6 @@
 	margin:0px;
 	background-color: #03717b;
 	border-radius: 4px;
-	font-family: MicrosoftYaHei;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -245,7 +231,6 @@
 .td-font-last
 {
 	height: 15px;
-	font-family: MicrosoftYaHei;
 	font-size: 14px;
 	font-weight: normal;
 	line-height: 30px;
@@ -259,7 +244,6 @@
     width: 75px;
     height: 25px;
     background-color: #70bcc3;
-    font-family: MicrosoftYaHei;
     color: #ffffff;
     font-size: 14px;
     border-radius: 2px;

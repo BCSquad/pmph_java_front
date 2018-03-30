@@ -58,7 +58,6 @@
 .tipWords{
     width: 170px;
     height: 37px;
-    font-family: MicrosoftYaHei;
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -82,7 +81,6 @@
     padding: 0 10px;
     cursor: pointer;
     border: solid 1px #03717b;
-    font-family: MicrosoftYaHei;
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -99,7 +97,7 @@
     /*height: 27px;*/
     background-color: #03717b;
     /*border-radius: 4px;*/
-    /*font-family: MicrosoftYaHei;*/
+    /**/
     /*font-size: 14px;*/
     /*font-weight: normal;*/
     /*font-stretch: normal;*/

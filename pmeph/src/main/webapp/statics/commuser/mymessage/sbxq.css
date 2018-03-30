@@ -4,7 +4,6 @@
 	width: 1200px;
 }
 .sbxq_title span{
-	font-family: MicrosoftYaHei;
 	letter-spacing: 0px;
 	color: #999999;
 }
@@ -26,7 +25,6 @@
 }
 
 .tsxz_title{
-	font-family: 微软雅黑;
 	letter-spacing: 0px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -40,10 +38,9 @@
 }
 
 .item span{
-	font-family: MicrosoftYaHei;
 	font-size: 14px;
 	letter-spacing: 0px;
-	color: #666666;
+	color: #333333;
 }
 /**专家信息**/
 #tsxz_span2{
@@ -65,14 +62,13 @@
 }
 
 .tab_1 tr td span{
-	font-family: MicrosoftYaHei;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
 	height: 32px;
 	line-height: 32px;
 	letter-spacing: 0px;
-	color: #666666;
+	color: #333333;
 }
 /**主要学习经历**/
 #tsxz_span3{
@@ -97,7 +93,6 @@
 }
 
 .tab_2 thead td{
-	font-family: MicrosoftYaHei;
 	line-height: 30px;
 	letter-spacing: 0px;
 	color: #333333;
@@ -106,7 +101,6 @@
 }
 
 .tab_2 tbody td{
-	font-family: MicrosoftYaHei;
 	line-height: 48px;
 	height: 48px;
 	letter-spacing: 0px;
@@ -119,7 +113,6 @@
 	margin-top: 15px;
 }
 .sbdw span{
-	font-family: MicrosoftYaHei;
 	line-height: 26px;
 	letter-spacing: 0px;
 	color: #333333;

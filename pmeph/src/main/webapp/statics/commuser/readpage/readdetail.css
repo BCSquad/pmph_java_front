@@ -57,7 +57,7 @@
 }
 
 .title span {
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -72,7 +72,7 @@
 }
 
 .bt span {
-    font-family: MicrosoftYaHei;
+
     font-size: 24px;
     line-height: 45px;
     letter-spacing: 0px;
@@ -85,14 +85,14 @@
 }
 
 .span_1 {
-    font-family: MicrosoftYaHei;
+
     line-height: 45px;
     letter-spacing: 0px;
-    color: #666666;
+    color: #333333;
 }
 
 .span_2 {
-    font-family: MicrosoftYaHei;
+
     letter-spacing: 0px;
     color: #b4b4b4;
 }
@@ -106,7 +106,7 @@
 }
 
 .author {
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     color: #999999;
     max-height: 46px;
@@ -114,7 +114,7 @@
 }
 
 #writer {
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     letter-spacing: 0px;
@@ -160,13 +160,13 @@
     float: left;
     margin-top: -25px;
     margin-left: 120px;
-    font-family: MicrosoftYaHei;
+
     font-size: 16px;
     color: #ffd200;
 }
 
 .date {
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -184,7 +184,7 @@
     float: left;
     margin-top: -24px;
     margin-left: 135px;
-    font-family: MicrosoftYaHei;
+
     font-size: 8px;
     color: #ffd200;
 }
@@ -289,7 +289,7 @@
 }
 
 .xsp2 {
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     color: #3996fa;
 }
@@ -315,7 +315,7 @@
 }
 
 #xsp1 {
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -325,7 +325,7 @@
 }
 
 .mis_content {
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     color: #489299;
     line-height: 31px;
@@ -344,7 +344,6 @@
     background-color: #F5F5F5;
     border-radius: 2px;
     text-align: center;
-    font-family: MicrosoftYaHei-Bold;
     font-size: 14px;
     line-height: 30px;
     color: #182d4c;
@@ -370,7 +369,7 @@
 
 .longcom {
     float: left;
-    font-family: MicrosoftYaHei;
+
     font-size: 16px;
     color: #9aaabf;
 }
@@ -390,16 +389,16 @@
     border-radius: 3px;
     text-align: center;
     cursor: pointer;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     color: #F7FCF6;
 }
 
 .moreothers {
     cursor: pointer;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
-    color: #666666;
+    color: #333333;
     margin-left: 50%;
 }
 
@@ -419,19 +418,19 @@
 .mistitle {
     width: 50%;
     float: left;
-    font-family: MicrosoftYaHei;
+
     line-height: 24px;
     letter-spacing: 1px;
-    color: #666666;
+    color: #333333;
     font-size: 20px;
     margin-left: 20px;
 }
 
 .labell {
-    font-family: MicrosoftYaHei;
+
     line-height: 24px;
     letter-spacing: 1px;
-    color: #666666;
+    color: #333333;
     font-size: 14px;
 }
 
@@ -540,7 +539,7 @@
 }
 
 .lookbook {
-    font-family: MicrosoftYaHei;
+
     font-size: 12px;
     letter-spacing: 0px;
     color: #ffffff;
@@ -554,7 +553,7 @@
     float: right;
     width: 80px;
     height: 28px;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     color: #F7FCF6;
     cursor: pointer;
@@ -576,17 +575,18 @@
 
 .block .title .rd_name {
     float: left;
-    font-family: MicrosoftYaHei;
+
     font-size: 16px;
     color: #9aaabf;
     margin-left: 10px;
 }
 
 .aticle {
-    font-family: MicrosoftYaHei;
+    text-indent:2em;
+
     line-height: 24px;
     letter-spacing: 1px;
-    color: #666666;
+    color: #333333;
     width: 97%;
     margin-left: 20px;
 }
@@ -597,7 +597,6 @@
     background-color: #f1fbf4;
     border-radius: 3px;
     color: #1abd44;
-    font-family: "微软雅黑";
     border: none;
     padding: 10px;
 }
@@ -645,9 +644,9 @@
 
 .block .item .item_content {
     width: 890px;
-    font-family: MicrosoftYaHei;
+
     letter-spacing: 1px;
-    color: #666666;
+    color: #333333;
     overflow: hidden;
 }
 
@@ -661,7 +660,7 @@
 
 .longcom_title {
     width: 890px;
-    font-family: MicrosoftYaHei;
+
     font-size: 16px;
     line-height: 45px;
     color: #3377aa;
@@ -705,7 +704,7 @@
     float: left;
     margin-top: -5px;
     margin-left: 4px;
-    font-family: MicrosoftYaHei;
+
     font-size: 12px;
     color: #999999;
     cursor: pointer;
@@ -728,7 +727,8 @@
 .right_11 {
     float: left;
     margin-bottom: 12px;
-    width: 100%;
+    width: 78px;
+    margin-left: 7px;
     height: 37px;
     text-overflow: ellipsis;
     font-size: 12px;
@@ -793,7 +793,7 @@
 .right_21 {
     height: 28px;
     float: left;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     overflow: hidden;
     color: #489299;
@@ -801,11 +801,11 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     cursor: pointer;
-    width: 100%;
+    width: 195px;
 }
 
 .right_22 {
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     color: #999999;
     margin-top: 6px;
@@ -815,7 +815,7 @@
 .refresh1 {
     float: left;
     margin-top: 10px;
-    font-family: MicrosoftYaHei;
+
     font-size: 12px;
     color: #999999;
     cursor: pointer;
@@ -841,7 +841,7 @@
     float: left;
     margin-top: 12px;
     margin-left: 5px;
-    font-family: MicrosoftYaHei;
+
     font-size: 16px;
     color: #000000;
 }
@@ -885,7 +885,7 @@
     margin: 0px;
     background-color: #03717b;
     border-radius: 4px;
-    font-family: MicrosoftYaHei;
+
     font-weight: normal;
     font-stretch: normal;
     letter-spacing: 0px;
@@ -898,7 +898,7 @@
 
 .video-btn {
     margin-top: -24px;
-    font-family: MicrosoftYaHei;
+
     font-size: 12px;
     color: #ffffff;
 }
@@ -929,7 +929,7 @@
 }
 
 #span_3 {
-    font-family: MicrosoftYaHei;
+
     font-size: 16px;
     color: #000000;
 }
@@ -945,7 +945,7 @@
 
 .ptts_sp1 {
     float: left;
-    font-family: MicrosoftYaHei;
+
     letter-spacing: 0px;
     font-size: 14px;
     color: #000000;
@@ -962,7 +962,7 @@
 }
 
 .ptts_sp2 {
-    font-family: MicrosoftYaHei;
+
     font-size: 12px;
     letter-spacing: 0px;
     color: #999999;
@@ -972,10 +972,10 @@
 }
 
 .ptts_sp3 {
-    font-family: MicrosoftYaHei;
+
     font-size: 12px;
     letter-spacing: 0px;
-    color: #666666;
+    color: #333333;
     margin-top: 18px;
     height: 38px;
     overflow: hidden;

@@ -34,7 +34,7 @@ div.white-out-div .search-condition{
     height: 40px;
     background-color: #ffffff;
     border: solid 1px #ededed;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -51,7 +51,7 @@ div.white-out-div .search-condition{
     height: 33px;
     margin:0px 15px 0px 15px;
     background-color: #1898dd;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -71,7 +71,7 @@ div.white-out-div .search-condition{
     height: 33px;
     margin:21px 10px 21px 15px;
     background-color: #1898dd;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -108,7 +108,7 @@ div.white-out-div .search-condition{
     height: 40px;
     background-color: #f0f0f0;
     padding:0px;margin:0px;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -135,7 +135,7 @@ div.white-out-div .search-condition{
     border-collapse: collapse;
     border:none;
     padding:0px;margin:0px;
-    font-family: SimSun;
+
     font-size: 12px;
     font-weight: normal;
     font-stretch: normal;
@@ -146,7 +146,7 @@ div.white-out-div .search-condition{
 }
 
 .body .table-area td .audit-status{
-    font-family: MicrosoftYaHei;
+
     width: 49px;
     height: 13px;
     font-weight: normal;
@@ -167,12 +167,12 @@ div.white-out-div .search-condition{
 }
 
 .body #zebra-table td .no-operate{
-    color: #666666;
+    color: #333333;
     letter-spacing: 0px;
 }
 
 .body #zebra-table td a.a-preview{
-    font-family: SimSun;
+
     font-size: 12px;
     font-weight: normal;
     font-stretch: normal;
@@ -184,7 +184,7 @@ div.white-out-div .search-condition{
 
 
 .body #zebra-table td a.a-pass{
-    font-family: SimSun;
+
     text-decoration: underline;
     font-size: 12px;
     font-weight: normal;
@@ -196,7 +196,7 @@ div.white-out-div .search-condition{
 }
 
 .body #zebra-table td a.a-reject{
-    font-family: SimSun;
+
     text-decoration: underline;
     font-size: 12px;
     font-weight: normal;

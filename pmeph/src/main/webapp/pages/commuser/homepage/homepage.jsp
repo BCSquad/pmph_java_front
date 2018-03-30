@@ -166,7 +166,7 @@
 
                     <%-- </c:if> --%>
                 </c:forEach>
-                <div class="more" onclick="top.location='${ctx}/cmsnotice/tolist.action'">全部>></div>
+                <div class="more" onclick="top.location='${ctx}/cmsnotice/tolist.action'">更多>></div>
             </div>
             <div class="notice area-3">
                 <div class="title" style="float: left">
@@ -181,7 +181,7 @@
                     <c:if test="${status.index==0}">
                         <div class="content-photo">
                             <p class="content-size"><a href="${ctx}/inforeport/toinforeport.action?id=${list.id}"
-                                                       class="astyle" style="color: #666">${list.title}</a></p>
+                                                       class="astyle" style="color: #333333">${list.title}</a></p>
                             <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date"
                                                                       pattern="yyyy-MM-dd"/></p>
                         </div>
@@ -192,12 +192,12 @@
                         <c:forEach items="${listNot}" var="list" varStatus="status">
                             <c:if test="${status.index!=0}">
                                 <li><a href="${ctx}/inforeport/toinforeport.action?id=${list.id}" class="astyle"
-                                       style="color: #666">> ${list.title}</a></li>
+                                       style="color: #333333">> ${list.title}</a></li>
                             </c:if>
                         </c:forEach>
                     </ul>
                 </div>
-                <div class="more" onclick="top.location='${ctx}/cmsinfoletters/tolist.action'">全部>></div>
+                <div class="more" onclick="top.location='${ctx}/cmsinfoletters/tolist.action'">更多>></div>
             </div>
             <div class="area-4">
                 <div class="tab-bar">
@@ -234,7 +234,7 @@
                     <div class="left">
                         <div class="left_one">
                             <div class="textbook_left">教材社区</div>
-                            <div class="all_left" onclick="window.location.href='${ctx}/community/tolist.action'">全部>>
+                            <div class="all_left" onclick="window.location.href='${ctx}/community/tolist.action'">更多>>
                             </div>
                             <c:forEach items="${listM}" var="list" varStatus="status">
                                 <%--<div class="left_con1" onclick="todou('${list.mid}','${list.material_id}','${list.id}')">${list.title}</div>--%>
@@ -301,7 +301,7 @@
                     <div class="title">
                         <span class="doc_content">医学随笔</span>
                         <span class="total" style="cursor: pointer;"
-                              onclick="window.location.href='${ctx}/cms/list.action'">全部>></span>
+                              onclick="window.location.href='${ctx}/cms/list.action'">更多>></span>
                     </div>
                     <c:forEach items="${listArt}" var="list" varStatus="status">
                         <c:if test="${status.index==0}">

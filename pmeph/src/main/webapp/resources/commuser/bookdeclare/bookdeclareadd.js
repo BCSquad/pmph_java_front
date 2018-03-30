@@ -4,23 +4,38 @@ jsonStr = "{\"id\":\"bookname\",\"content\":\"书名不能为空\"}," +
 "{\"id\":\"account_number\",\"content\":\"银行账户不能为空\"},{\"id\":\"bank\",\"content\":\"开户银行不能为空\"},"+
 "{\"id\":\"reason\",\"content\":\"选题理由不能为空\"},{\"id\":\"extra_score\",\"content\":\"出版内容不能为空\"},{\"id\":\"price\",\"content\":\"出版价值不能为空\"},";
 $(function () {
-    $('.dzdx').selectlist({
-        width: 308,
+    $('#dzdx').selectlist({
+        width: 213,
         height: 30,
         optionHeight: 30
     });
-    $('.xzly').selectlist({
-    	width: 308,
+    $('#xzly').selectlist({
+    	width: 213,
     	height: 30,
     	optionHeight: 30
     });
-    $('#r_sex').selectlist({
+    $('#sex').selectlist({
+    	width: 213,
+    	height: 30,
+    	optionHeight: 30
+    });
+    $('#position_profession').selectlist({
+    	width: 213,
+    	height: 30,
+    	optionHeight: 30
+    });
+    $('#degree').selectlist({
+    	width: 213,
+    	height: 30,
+    	optionHeight: 30
+    });
+    $('#write_sex').selectlist({
     	width: 90,
     	height: 30,
     	optionHeight: 30
     });
-    $('#yhxxid').selectlist({
-    	width: 308,
+    $('#write_degree').selectlist({
+    	width: 90,
     	height: 30,
     	optionHeight: 30
     });
@@ -66,26 +81,57 @@ function add_zjky(){
 	var num = fnt();
 	var $table = $("#sbbzqk");
 	var $tr = $("<tr id='sbbz_"+num+"'>"+
-			"<td><input class='sb_input' style='width: 100px;' maxlength='13' id='write_realname_"+num+"' name='write_realname' placeholder='编者姓名' value=''/></td>"+
-			"<td><select id='r_sex_"+num+"'  name='sex'>"+
+			"<td><input class='sb_input' style='width: 130px;' maxlength='40' id='write_realname_"+num+"' name='write_realname' placeholder='编者姓名' value=''/></td>"+
+			"<td><select id='write_sex_"+num+"'  name='write_sex'>"+
 					"<option value='0'>男</option>"+
 					"<option value='1'>女</option>"+
 				"</select></td>"+
 			"<td><input class='sb_input' style='width: 80px;' id='write_price_"+num+"' name='write_price' placeholder='年龄' value=''" +
 			"onkeyup='this.value=this.value.replace(/\\D/g,&#39;&#39;)' onafterpaste='this.value=this.value.replace(/\\D/g,&#39;&#39;)'"+
 				"onBlur='checkAge(this)' maxlength='3' /></td>"+
-			"<td><input class='sb_input' style='width: 320px;' maxlength='12' id='write_position_"+num+"' name='write_position' placeholder='行政职务' value=''/></td>"+
-			"<td><input class='sb_input' style='width: 200px;' maxlength='12' id='workplace_"+num+"' name='workplace' placeholder='工作单位' value=''/>" +
-					"<input type='hidden' name='checkbzqk' value='write_realname_"+num+",write_price_"+num+",write_position_"+num+",workplace_"+num+"'/>" +
+			"<td><input class='sb_input' style='width: 80px;' name='write_phone' placeholder='电话' value='' id='write_phone' maxlength='36'/></td>"+
+			"<td><select id='write_degree' name='write_degree'>" +
+					"<option value='0' selected='selected'>博士</option>" +
+					"<option value='1'>硕士</option>" +
+					"<option value='2'>学士</option>" +
+					"<option value='3'>其他</option>" +
+		         "</select></td>"+
+			"<td><input class='sb_input' style='width: 180px;' maxlength='36' id='write_position_"+num+"' name='write_position' placeholder='行政职务' value=''/></td>"+
+			"<td><input class='sb_input' style='width: 280px;' maxlength='36' id='write_workplace_"+num+"' name='write_workplace' placeholder='工作单位' value=''/>" +
+					"<input type='hidden' name='checkbzqk' value='write_realname_"+num+",write_price_"+num+",write_phone_"+num+",write_position_"+num+",write_workplace_"+num+"'/>" +
 					"</td>"+
 			"<td><div class='add_div'><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('sbbz_"+num+"')\"></div></td>"+
 		"</tr>");
-	$table.append($tr);
-	  $('#r_sex_'+num).selectlist({
+	  $table.append($tr);
+	  $('#write_sex_'+num).selectlist({
 		  	width: 90,
 	    	height: 30,
 	    	optionHeight: 30
 	    });
+	  $('#write_degree_'+num).selectlist({
+		  	width: 90,
+	    	height: 30,
+	    	optionHeight: 30
+	    });
+}
+
+//社外同类书情况表
+function add_similar(){
+    var num = fnt();
+    var $table = $("#similar");
+    var $tr = $("<tr id='similar_"+num+"'>"+
+        "<td><input class='sb_input' style='width: 230px;' id='similar_bookname_"+num+"' name='similar_bookname'  maxlength='40' value=''/></td>"+
+        "<td><input class='sb_input' style='width: 80px;' id='similar_edition_"+num+"' name='similar_edition'  maxlength='2' value=''/></td>"+
+        "<td><input class='sb_input' style='width: 80px;' id='similar_author_"+num+"' name='similar_author'  maxlength='100' value=''/></td>"+
+        "<td><input class='sb_input' style='width: 80px;' id='similar_booksize_"+num+"' name='similar_booksize'  maxlength='20' value=''/></td>"+
+        "<td><input class='sb_input' style='width: 160px;' id='similar_publisher_"+num+"' name='similar_publisher'  maxlength='100' value=''/></td>"+
+        "<td><input class='sb_input' style='width: 80px;' id='similar_print_number_"+num+"' name='similar_print_number'  maxlength='20' value=''/></td>"+
+        "<td><input class='sb_input' style='width: 80px;' id='similar_price_"+num+"' name='similar_price'  maxlength='20' value=''/></td>"+
+        "<td><input class='sb_input' style='width: 130px;' id='similar_publish_date_"+num+"' name='similar_publish_date'  calendar format=\"'yyyy-mm-dd'\" value=''/></td>"+
+		"<input type='hidden' name='checkbzqk' value='similar_bookname_"+num+",similar_edition_"+num+",similar_author_"+num+",similar_booksize_"+num+",write_workplace_"+num+"'/>" +
+        "<td><div class='add_div'><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('similar_"+num+"')\"></div></td>"+
+        "</tr>");
+    $table.append($tr);
 }
 
 //删除表格tr

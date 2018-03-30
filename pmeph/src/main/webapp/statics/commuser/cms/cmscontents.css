@@ -3,7 +3,6 @@
 	width: 1200px;
 }
 .sbxq_title span{
-	font-family: MicrosoftYaHei;
 	letter-spacing: 0px;
 	
 }
@@ -48,7 +47,7 @@
     position: relative;
 }
 .behind{
-    margin-left: 15px;
+    margin-right: 15px;
 }
 .notes .item .inside{
     width:292px;
@@ -106,12 +105,12 @@
 }
 .notes .item .msg{
     float:left;
-    color:#666666
+    color:#333333
 }
 .notes .item .msg .name{
     margin-left: 14px;
     height: 30px;
-    color:#666666;
+    color:#333333;
 }
 
 #span_1{
@@ -145,7 +144,6 @@
 }
 
 #span_4{
-	font-family: MicrosoftYaHei;
 	letter-spacing: 0px;
 	color: #b5b5b5;
 	margin-right: 15px;
@@ -175,14 +173,14 @@
 	float: left;
 	margin-left: 14px;
 	height: 30px;
-	color: #666666;
+	color: #333333;
 }
 
 .ryxx_sj{
 	/* float: right; */
 	margin-left: 14px;
 	height: 30px;
-	color: #666666;
+	color: #333333;
 }
 
 .pagination-wrapper{
@@ -198,3 +196,6 @@
     display: block;
 }
 
+.pageJump span{
+    vertical-align: baseline;
+}

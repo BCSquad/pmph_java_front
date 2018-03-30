@@ -1,5 +1,5 @@
 .content-body{
-    font-family: MicrosoftYaHei;
+
     width: 1200px;
     margin: 0 auto;
 
@@ -75,7 +75,9 @@
 }
 
 .items p{
-	word-break: break-all;
+	text-overflow: ellipsis;
+    word-break: break-all;
+    overflow: hidden;
 }
 
 .items_img{
@@ -102,6 +104,9 @@
 .item1 a{
     color:#333;
     display: block;
+    width: 800px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 a{
@@ -175,7 +180,7 @@ a{
     margin-top: 14px;
     margin-right: 10px;
     border-radius:3px;
-    font-family: MicrosoftYaHei;
+
     font-size: 13px;
     color: #ffffff;
     text-align: center;

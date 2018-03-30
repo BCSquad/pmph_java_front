@@ -11,7 +11,7 @@
 
 .nav{
 	margin-top:24px;
-	font-family: MicrosoftYaHei;
+
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -34,7 +34,7 @@
 
 .ptts_sp1 {
     float: left;
-    font-family: MicrosoftYaHei;
+
     letter-spacing: 0px;
     font-size: 14px;
     color: #000000;
@@ -70,7 +70,7 @@
 }
 
 .lookbook {
-    font-family: MicrosoftYaHei;
+
     font-size: 12px;
     letter-spacing: 0px;
     color: #ffffff;
@@ -79,7 +79,7 @@
 }
 
 .ptts_sp2 {
-    font-family: MicrosoftYaHei;
+
     font-size: 12px;
     letter-spacing: 0px;
     color: #999999;
@@ -89,10 +89,10 @@
 }
 
 .ptts_sp3 {
-    font-family: MicrosoftYaHei;
+
     font-size: 12px;
     letter-spacing: 0px;
-    color: #666666;
+    color: #333333;
     margin-top: 18px;
     height: 38px;
     overflow: hidden;
@@ -141,7 +141,7 @@
     float: left;
     margin-top: 12px;
     margin-left: 5px;
-    font-family: MicrosoftYaHei;
+
     font-size: 16px;
     color: #000000;
 }
@@ -163,7 +163,7 @@
 .refresh1 {
     float: left;
     margin-top: 10px;
-    font-family: MicrosoftYaHei;
+
     font-size: 12px;
     color: #999999;
     cursor: pointer;
@@ -183,7 +183,7 @@
 .right_21 {
     height: 28px;
     float: left;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     overflow: hidden;
     color: #489299;
@@ -194,7 +194,7 @@
 }
 
 .right_22 {
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     color: #999999;
     margin-top: 6px;
@@ -204,7 +204,7 @@
 .refresh1 {
     float: left;
     margin-top: 10px;
-    font-family: MicrosoftYaHei;
+
     font-size: 12px;
     color: #999999;
     cursor: pointer;
@@ -219,7 +219,7 @@
 }
 
 .author {
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     color: #999999;
 }
@@ -317,7 +317,7 @@
     float: left;
     margin-top: -25px;
     margin-left: 120px;
-    font-family: MicrosoftYaHei;
+
     font-size: 16px;
     color: #ffd200;
 }
@@ -343,7 +343,7 @@
 .name{
 	height:28px;
 	width:auto;
-	font-family: MicrosoftYaHei;
+
 	font-size: 13px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -365,7 +365,7 @@
 	margin-left:8px;
 	height:28px;
 	width:auto;
-	font-family: MicrosoftYaHei;
+
 	font-size: 12px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -385,7 +385,7 @@
 }
 
 .Bigcontent{
-	font-family: MicrosoftYaHei;
+
     font-weight: 400;
     font-style: normal;
     font-size: 13px;

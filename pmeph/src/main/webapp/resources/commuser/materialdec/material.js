@@ -105,6 +105,11 @@ function chooseModel(data){
         if(data.is_edu_exp_required == "1"){
             $("#zyxxjl_bt").css("display","inline");
             jsonStr=jsonStr+"{\"id\":\"xx_kssj\",\"content\":\"学习经历起止时间必填\"},{\"id\":\"xx_jssj\",\"content\":\"学习经历起止时间必填\"},{\"id\":\"xx_school_name\",\"content\":\"学校名称不能为空\"},{\"id\":\"xx_major\",\"content\":\"所学专业不能为空\"},{\"id\":\"xx_degree\",\"content\":\"学历不能为空\"},";
+            //给其他值默认为无
+            $("#xx_jssj").val(getNowFormatDate());
+            $("#xx_school_name").val("无");
+            $("#xx_major").val("无");
+            $("#xx_degree").val("无");
         }else{
             $("#zyxxjl_xt").css("display","inline");
             xtMap.set("zyxxjl","xx_kssj,xx_jssj,xx_school_name,xx_major,xx_degree");
@@ -118,6 +123,10 @@ function chooseModel(data){
         if(data.is_work_exp_required == "1"){
             $("#gzjl_bt").css("display","inline");
             jsonStr=jsonStr+"{\"id\":\"gz_kssj\",\"content\":\"工作经历必填\"},{\"id\":\"gz_jssj\",\"content\":\"工作起止时间不能为空\"},{\"id\":\"gz_org_name\",\"content\":\"工作单位不能为空\"},{\"id\":\"gz_position\",\"content\":\"工作职位不能为空\"},";
+            //给其他值默认为无
+            $("#gz_jssj").val(getNowFormatDate());
+            $("#gz_org_name").val("无");
+            $("#gz_position").val("无");
         }else{
             $("#gzjl_xt").css("display","inline");
             //      xtMap['gzjl']="gz_kssj,xx_jssj,gz_jssj,gz_org_name,gz_position";
@@ -131,6 +140,10 @@ function chooseModel(data){
         if(data.is_teach_exp_required == "1"){
             $("#jxjl_bt").css("display","inline");
             jsonStr=jsonStr+"{\"id\":\"jx_kssj\",\"content\":\"教学经历必填\"},{\"id\":\"jx_jssj\",\"content\":\"教学起止时间不能为空\"},{\"id\":\"jx_school_name\",\"content\":\"学校名称不能为空\"},{\"id\":\"jx_subject\",\"content\":\"教学科目不能为空\"},";
+            //给其他值默认为无
+            $("#jx_jssj").val(getNowFormatDate());
+            $("#jx_school_name").val("无");
+            $("#jx_subject").val("无");
         }else{
             $("#jxjl_xt").css("display","inline");
             //   xtMap['jxjl']="jx_kssj,jx_jssj,gz_jssj,jx_school_name,jx_subject";
@@ -155,6 +168,8 @@ function chooseModel(data){
         if(data.is_acade_required == "1"){
             $("#xsjz_bt").css("display","inline");
             jsonStr=jsonStr+"{\"id\":\"xs_org_name\",\"content\":\"学术兼职必填\"},{\"id\":\"xs_position\",\"content\":\"兼职职务不能为空\"},";
+            //给其他值默认为无
+            $("#xs_position").val("无");
         }else{
             $("#xsjz_xt").css("display","inline");
             xtMap.set("xsjz","xs_org_name,xs_position");
@@ -167,6 +182,8 @@ function chooseModel(data){
         if(data.is_last_position_required == "1"){
             $("#sbjccb_bt").css("display","inline");
             jsonStr=jsonStr+"{\"id\":\"jc_material_name\",\"content\":\"本套上板教材参编情况必填\"},{\"id\":\"jc_publish_date\",\"content\":\"发版时间必填\"},";
+            //给其他值默认为无
+            $("#jc_publish_date").val(getNowFormatDate());
         }else{
             $("#sbjccb_xt").css("display","inline");
             xtMap.set("sbjccb","jc_material_name,jc_publish_date");
@@ -179,6 +196,9 @@ function chooseModel(data){
         if(data.is_national_plan_required == "1"){
             $("#zbgjjgh_bt").css("display","inline");
             jsonStr=jsonStr+"{\"id\":\"hj_material_name\",\"content\":\"主编国家规划教材情况必填\"},{\"id\":\"hj_rank_text\",\"content\":\"教材级别不能为空\"},{\"id\":\"hj_isbn\",\"content\":\"教材标准书号不能为空\"},";
+            //给其他值默认为无
+            $("#hj_rank_text").val("无");
+            $("#hj_isbn").val("无");
         }else{
             $("#zbgjjgh_xt").css("display","inline");
             xtMap.set("zbgjjgh","hj_material_name,hj_isbn");
@@ -191,6 +211,9 @@ function chooseModel(data){
         if(data.is_pmph_textbook_required == "1"){
             $("#rwsjcbx_bt").css("display","inline");
             jsonStr=jsonStr+"{\"id\":\"pmph_material_name\",\"content\":\"人卫社教材编写情况必填\"},{\"id\":\"pmph_publish_date\",\"content\":\"出版时间不能为空\"},{\"id\":\"pmph_isbn\",\"content\":\"教材标准书号不能为空\"},";
+            //给其他值默认为无
+            $("#pmph_publish_date").val(getNowFormatDate());
+            $("#pmph_isbn").val("978-7-117-1");
         }else{
             $("#rwsjcbx_xt").css("display","inline");
             xtMap.set("rwsjcbx","pmph_material_name,pmph_publish_date,pmph_isbn");
@@ -205,13 +228,17 @@ function chooseModel(data){
         if(data.is_textbook_required == "1"){
             $("#qtjcbxqk_bt").css("display","inline");
             jsonStr=jsonStr+"{\"id\":\"jcb_material_name\",\"content\":\"其他社教材名称不能为空\"},{\"id\":\"jcb_publisher\",\"content\":\"出版单位不能为空\"},{\"id\":\"jcb_publish_date\",\"content\":\"出版时间不能为空\"},{\"id\":\"jcb_isbn\",\"content\":\"教材标准书号不能为空\"},";
+            //给其他值默认为无
+            $("#jcb_publish_date").val(getNowFormatDate());
+            $("#jcb_publisher").val("无");
+            $("#jcb_isbn").val("978-7-1");
         }else{
             $("#qtjcbxqk_xt").css("display","inline");
             xtMap.set("rwsjcbx","pmph_material_name,pmph_publish_date,pmph_isbn");
             jsonStr=jsonStr+"{\"id\":\"jcb_isbn\",\"content\":\"教材标准书号格式：978-7-********* ,*代表数字或字母\"},";
         }
     }
-    is_textbook_used = data.is_textbook_used;
+    is_textbook_required = data.is_textbook_required;
     //参加人卫慕课、数字教材编写情况
     if(data.is_mooc_digital_used == "1"){
         $("#digital").css("display","block");
@@ -230,6 +257,8 @@ function chooseModel(data){
         if(data.is_course_required == "1"){
             $("#gjjpkcjs_bt").css("display","inline");
             jsonStr=jsonStr+"{\"id\":\"gj_course_name\",\"content\":\"精品课程建设情况必填\"},{\"id\":\"gj_class_hour\",\"content\":\"课程全年课时不能为空\"},";
+            //给其他值默认为无
+            $("#gj_class_hour").val("无");
         }else{
             $("#gjjpkcjs_xt").css("display","inline");
             xtMap.set("rwsjcbx","gj_course_name,gj_class_hour");
@@ -242,6 +271,9 @@ function chooseModel(data){
         if(data.is_research_required == "1"){
             $("#zjkyqk_bt").css("display","inline");
             jsonStr=jsonStr+"{\"id\":\"zjk_research_name\",\"content\":\"科研情况必填\"},{\"id\":\"zjk_award\",\"content\":\"获奖情况不能为空\"},{\"id\":\"zjk_approval_unit\",\"content\":\"获奖审批单位不能为空\"},";
+            //给其他值默认为无
+            $("#zjk_award").val("无");
+            $("#zjk_approval_unit").val("无");
         }else{
             $("#zjkyqk_xt").css("display","inline");
             xtMap.set("rwsjcbx","zjk_research_name,zjk_award,zjk_approval_unit");
@@ -254,6 +286,10 @@ function chooseModel(data){
         if(data.is_monograph_required == "1"){
             $("#zbxszz_bt").css("display","inline");
             jsonStr=jsonStr+"{\"id\":\"zb_monograph_name\",\"content\":\"专著名称必填\"},{\"id\":\"zb_monograph_date\",\"content\":\"专著发表日期必填\"},{\"id\":\"zb_publisher\",\"content\":\"专著出版单位不能为空\"},{\"id\":\"zb_publish_date\",\"content\":\"专著出版时间不能为空\"},";
+            //给其他值默认为无
+            $("#zb_monograph_date").val(getNowFormatDate());
+            $("#zb_publish_date").val(getNowFormatDate());
+            $("#zb_publisher").val("无");
         }else{
             $("#zbxszz_xt").css("display","inline");
             xtMap.set("zbxszz","zb_monograph_name,zb_publisher,zb_publish_date");
@@ -266,6 +302,9 @@ function chooseModel(data){
         if(data.is_publish_reward_required == "1"){
             $("#publish_bt").css("display","inline");
             jsonStr=jsonStr+"{\"id\":\"pu_reward_name\",\"content\":\"出版行业获奖情况必填\"},{\"id\":\"pu_award_unit\",\"content\":\"评奖单位不能为空\"},{\"id\":\"pu_reward_date\",\"content\":\"获奖时间不能为空\"},";
+            //给其他值默认为无
+            $("#pu_reward_date").val(getNowFormatDate());
+            $("#pu_award_unit").val("无");
         }else{
             $("#publish_xt").css("display","inline");
             xtMap.set("publish","pu_reward_name,pu_award_unit,pu_reward_date");
@@ -278,6 +317,10 @@ function chooseModel(data){
         if(data.is_sci_required == "1"){
             $("#sci_bt").css("display","inline");
             jsonStr=jsonStr+"{\"id\":\"sci_paper_name\",\"content\":\"SCI论文投稿及影响因子情况必填\"},{\"id\":\"sci_journal_name\",\"content\":\"期刊名称不能为空\"},{\"id\":\"sci_factor\",\"content\":\"sci影响因子不能为空\"},{\"id\":\"sci_publish_date\",\"content\":\"发表时间不能为空\"},";
+            //给其他值默认为无
+            $("#sci_journal_name").val("无");
+            $("#sci_factor").val("无");
+            $("#sci_publish_date").val(getNowFormatDate());
         }else{
             $("#sci_xt").css("display","inline");
             xtMap.set("zbxszz","sci_paper_name,sci_journal_name,sci_factor,sci_publish_date");
@@ -290,6 +333,8 @@ function chooseModel(data){
         if(data.is_clinical_reward_required == "1"){
             $("#clinical_bt").css("display","inline");
             jsonStr=jsonStr+"{\"id\":\"cl_reward_name\",\"content\":\"临床医学获奖情况必填\"},{\"id\":\"cl_reward_date\",\"content\":\"获奖时间不能为空\"},";
+            //给其他值默认为无
+            $("#cl_reward_date").val(getNowFormatDate());
         }else{
             $("#clinical_xt").css("display","inline");
             xtMap.set("zbxszz","cl_reward_name,cl_reward_date");
@@ -302,6 +347,8 @@ function chooseModel(data){
         if(data.is_acade_reward_required == "1"){
             $("#acade_bt").css("display","inline");
             jsonStr=jsonStr+"{\"id\":\"ac_reward_name\",\"content\":\"学术荣誉授予情况必填\"},{\"id\":\"ac_reward_date\",\"content\":\"荣誉授予时间不能为空\"},";
+            //给其他值默认为无
+            $("#ac_reward_date").val(getNowFormatDate());
         }else{
             $("#acade_xt").css("display","inline");
             xtMap.set("acade","ac_reward_name,ac_reward_date");
@@ -942,7 +989,7 @@ function check_pmph_isbn(id){
 function check_jcb_isbn(id){
 	var num = $("#"+id).val();
 	if(num != undefined){
-		if (is_textbook_used==1 && $.trim(num)=="") {
+		if (is_textbook_required==1 && $.trim(num)=="") {
 			layer.tips("教材标准书号不能为空", '#'+id);
 	        $("#"+id)[0].focus();  //聚焦2
 	        b = false;
@@ -1097,4 +1144,21 @@ function setTimer(){
         });
     },300000);
 
+}
+
+//获取当前时间，格式YYYY-MM-DD
+function getNowFormatDate() {
+    var date = new Date();
+    var seperator1 = "-";
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = year + seperator1 + month + seperator1 + strDate;
+    return currentdate;
 }
