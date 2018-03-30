@@ -22,7 +22,7 @@
 			`material` m 
     	ON 
     		dc.`material_id` = m.`id` 
-    	inner join org o 
+    	left join org o
     	on o.id = dc.org_id
 		WHERE
 			 dc.`material_id` =#{materialId}
