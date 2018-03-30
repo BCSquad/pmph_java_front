@@ -37,14 +37,14 @@
 }
 
 .top1 {
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     color: #999999;
 }
 
 .top2 {
     float: left;
-    font-family: MicrosoftYaHei;
+
     font-size: 24px;
     color: #333333;
     margin-top: 5px;
@@ -52,7 +52,7 @@
 
 .top3 {
     float: left;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     color: #999999;
     margin-left: 20px;
@@ -125,7 +125,6 @@
     border-radius: 2px;
     font-size: 14px;
     color: #ffffff;
-    font-family: MicrosoftYaHei
 }
 
 .div2 {
@@ -139,7 +138,6 @@
     border-radius: 2px;
     font-size: 14px;
     color: #ffffff;
-    font-family: MicrosoftYaHei
 }
 
 .div3 {
@@ -153,7 +151,6 @@
     border-radius: 2px;
     font-size: 14px;
     color: #ffffff;
-    font-family: MicrosoftYaHei
 }
 
 table,tr,td{
@@ -190,7 +187,7 @@ table thead .td8 {
 }
 table thead td{
     text-align: center;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     border: 3px solid #fff;
     overflow: hidden;
@@ -201,7 +198,7 @@ table thead td{
 table tbody tr{
     height: 46px;
     line-height: 30px;
-    font-family: SimSun;
+
 }
 
 table tr:hover{background:#fff4e5;}

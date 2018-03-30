@@ -3,7 +3,6 @@
 	width: 1000px;
 }
 .sbxq_title span{
-	font-family: MicrosoftYaHei;
 	letter-spacing: 0px;
 	color: #999999;	
 }
@@ -24,7 +23,6 @@
 }
 
 .tsxz_title{
-	font-family: MicrosoftYaHei;
 	letter-spacing: 0px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -96,7 +94,6 @@
 	height: 53px;
 }
 .tab_1 tr td {
-	font-family: MicrosoftYaHei;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -135,7 +132,6 @@
 }
 
 .tab_2 thead td{
-	font-family: MicrosoftYaHei;
 	line-height: 35px;
 	letter-spacing: 0px;
 	color: #333333;
@@ -145,7 +141,6 @@
 }
 
 .tab_2 tbody td{
-	font-family: MicrosoftYaHei;
 	line-height: 30px;
 	letter-spacing: 0px;
 	color: #999999;

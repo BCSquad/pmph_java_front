@@ -1,13 +1,15 @@
 body {
     margin: 0;
     padding: 0;
+    font-family: "Microsoft Yahei", Tahoma, Verdana !important;
+    color: #333333;
 }
 
 .content-wrapper {
     width: 1200px;
     margin: 0 auto;
     min-height: 400px;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     line-height: 24px;
     font-weight: normal;
@@ -202,7 +204,7 @@ body {
 
 .head .user-select img {
     width: 148px;
-    height: 130px;
+    height: 150px;
 }
 
 .head .user-select .select {
@@ -216,7 +218,7 @@ body {
     text-align: center;
 }
 
-.image_tips{
+.image_tips {
     position: absolute;
     /* min-width: 30px; */
     /* max-width: 450px; */
@@ -235,7 +237,8 @@ body {
     white-space: nowrap;
     z-index:100;
 }
-.image_tips span{
+
+.image_tips span {
     position: absolute;
     border-bottom: 10px solid #eee;
     border-top: 5px solid transparent;
@@ -247,32 +250,35 @@ body {
     height: 0;
     /*opacity: 0.8;*/
 }
-.btm-tips{
+
+.btm-tips {
     position: fixed;
     bottom: -50px;
     right: 10px;
     max-width: 600px;
     height: 40px;
-    line-height:40px;
+    line-height: 40px;
     margin-left: -150px;
-    z-index:19999;
+    z-index: 19999;
 }
-.btm-text{
+
+.btm-text {
     min-width: 150px;
     height: 39px;
-    padding:0 8px;
-    background:#fff;
-    box-shadow: 2px 2px 2px rgba(0,0,0,.08);
+    padding: 0 8px;
+    background: #fff;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, .08);
     border-bottom: 1px solid #e1e1e1;
     border-right: 1px solid #e1e1e1;
     overflow: hidden;
-    text-overflow:ellipsis;
+    text-overflow: ellipsis;
     white-space: nowrap;
 }
+
 .head .option {
     display: inline-block;
-    height: 24px;
-    line-height: 24px;
+    height: 28px;
+    line-height: 28px;
     width: 100%;
     text-align: center;
     color: #999999;
@@ -349,7 +355,7 @@ body {
     position: absolute;
     top: 32px;
     right: 186px;
-    width: 60px;
+    width: 40px;
     vertical-align: middle;
     line-height: 16px;
     height: 16px;
@@ -483,7 +489,7 @@ body {
 
 .org-head .top-lable1 {
     height: 12px;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     line-height: 45px;
@@ -493,7 +499,7 @@ body {
 
 .org-head .top-lable2 {
     height: 12px;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     line-height: 45px;
@@ -509,7 +515,7 @@ body {
 }
 
 .org-head .div-menu-child {
-    font-family: MicrosoftYaHei;
+
     font-size: 16px;
     font-weight: normal;
     line-height: 70px;

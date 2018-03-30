@@ -118,7 +118,7 @@
 
                 <span class="logininfoout"
                       onclick="window.location.href='<c:url value="/logout.action"/>'">
-                    <span class="icon"></span>
+                    <%--<span class="icon"></span>--%>
                     <span class="wtext">退出</span>
                 </span>
 

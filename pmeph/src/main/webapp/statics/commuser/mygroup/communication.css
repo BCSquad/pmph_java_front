@@ -1,5 +1,5 @@
 body { margin: 0px;   padding: 0px;  text-align: center;  }
-a{color:#666666;} 
+a{color:#333333;}
 a:link {color:blue;} 
 a:visited {color:gray;} 
 a:hover {color:red;} 
@@ -7,7 +7,7 @@ a:active {color:yellow;}
 .content-body{
     width: 100%;
     margin: 0 auto;
-    font-family: MicrosoftYaHei;
+
 
 }
 .flex-center{
@@ -280,7 +280,7 @@ a:active {color:yellow;}
     font-stretch: normal;
     line-height: 38px;
     letter-spacing: 1px;
-    color: #666666;
+    color: #333333;
 }
 .search{
     width: 22px;
@@ -301,7 +301,6 @@ a:active {color:yellow;}
     vertical-align: middle;
 }
 .item1 span text{
-	font-family:MicrosoftYaHei;
     font-size: 16px;
     color: #000000;
     vertical-align: middle;
@@ -319,7 +318,7 @@ a:active {color:yellow;}
     margin-left: 10px;
 }
 .item2{
-	font-family: MicrosoftYaHei;
+
     font-size: 14px;
     height: 50px;
     line-height: 50px;
@@ -390,7 +389,7 @@ ul{
 .groupcomposition a{
     font-size: 14px;
     text-decoration: none;
-    color:#666666;
+    color:#333333;
 }
 
 .sx{
@@ -496,7 +495,7 @@ ul{
 .scmsg{
 	/* width: 50px; */
 	height: 13px;
-	font-family: MicrosoftYaHei;
+
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -510,7 +509,7 @@ ul{
 	width: 100%;
 	color: #999999;
 	letter-spacing: 1px;
-	font-family: MicrosoftYaHei;
+
 	height: 15px;
 }
 .jzgd span{

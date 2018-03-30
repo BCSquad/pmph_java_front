@@ -14,7 +14,7 @@
     margin-left: 20px;
     cursor: pointer;
     float: left;
-    border-bottom: 2px solid #666666;
+    border-bottom: 2px solid #333333;
 }
 
 table {
@@ -32,12 +32,12 @@ td.input {
 
 tr {
     height: 70px;
-    font-family: MicrosoftYaHei;
+
 }
 
 .td-font {
     height: 46px;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     line-height:46px;
@@ -50,7 +50,7 @@ tr {
 .td-title {
     width: 58px;
     height: 15px;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     line-height: 30px;

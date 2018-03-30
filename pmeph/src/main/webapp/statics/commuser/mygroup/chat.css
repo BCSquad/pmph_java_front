@@ -20,7 +20,7 @@
     word-break: break-all;
     line-height: 24px;
     border-radius: 7px;
-    color: #666666;
+    color: #333333;
     background-color: #dee6ed;
     width: auto;
     text-align: left;
@@ -52,7 +52,7 @@
     text-align: left;
     line-height: 24px;
     border-radius: 7px;
-    color: #666666;
+    color: #333333;
     background-color: #dee6ed;
 
 }
@@ -191,7 +191,7 @@
 }
 
 .color66 {
-    color: #666;
+    color: #333333;
 }
 
 .color99 {

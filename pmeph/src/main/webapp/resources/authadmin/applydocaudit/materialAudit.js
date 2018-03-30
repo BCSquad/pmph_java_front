@@ -213,4 +213,10 @@ function LengthLimit(obj,ml){
 	}
 }
 
+//打印按钮
+function toprint() {
+    // window.print();
+    $("#ddd").jqprint();
+}
+
 
