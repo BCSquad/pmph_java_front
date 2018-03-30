@@ -119,6 +119,10 @@ a{
      z-index: 999;*/
 }
 
+.bookmistake img{
+	max-width: 100%;
+}
+
 .apache {
     width: 100%;
     height: 27px;

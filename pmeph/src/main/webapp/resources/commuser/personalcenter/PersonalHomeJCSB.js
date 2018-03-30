@@ -90,7 +90,7 @@ function listoction3(){
 /*	window.location.href=contextpath+'personalhomepage/tohomepage.action?pagetag=jcsb&bookname='+$("#wdsbssk").val()
 	+"&&is_staging=1&&online_progress=0&&pageinfo=3&&s=1";
 	document.getElementById("sbzc").className = "jcsbsbztxz";*/
-	$("#s").val(1);
+	$("#s").val("");
 	$("#dateinfo").val("");
 	$("#is_staging").val(1);
 	$("#online_progress").val("(0)");
@@ -104,7 +104,7 @@ function listoction4(){
 	+"&&online_progress=1&&pageinfo=4&&s=1";
 	document.getElementById("sbytj").className = "jcsbsbztxz";*/
 	
-	$("#s").val(1);
+	$("#s").val("");
 	$("#dateinfo").val("");
 	$("#is_staging").val("");
 	$("#online_progress").val("(1,2,3)");
