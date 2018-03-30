@@ -109,7 +109,14 @@
 
             <div class="mright">
                 <div class="rshang">
-                    <div class="rshangn">$!{c.material_name}
+                    <div class="rshangn">
+                    	<a target="_blank" 
+                    		#if($!{c.cms_id}>0) href="$!{contextpath}message/noticeMessageDetail.action?cmsId=$!{c.cms_id}"
+                    		#else title = "抱歉，该教材公告详情已被删除。" 
+                    		#end
+                    	>
+                    		$!{c.material_name}
+                    	</a>
                     #if(($!{c.is_staging}==true || $!{c.is_staging}==1)&&$!{c.online_progress}==0)
                     	<img src="$!{contextpath}statics/image/zancun.png">
                     #end

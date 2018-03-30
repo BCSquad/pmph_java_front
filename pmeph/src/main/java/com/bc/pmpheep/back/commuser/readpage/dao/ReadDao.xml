@@ -24,7 +24,7 @@
     <select id="queryMaterialType" resultType="map">
 		<![CDATA[
 
-		select * from material_type where length(path) < 20 order by length(path),parent_id,length(note),sort
+		select * from material_type where length(path) < 20 order by length(path),parent_id,sort
 
         ]]>
 	</select>

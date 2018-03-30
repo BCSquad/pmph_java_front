@@ -218,7 +218,7 @@ public class PersonalCenterController extends BaseController {
 
 			// 从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView，放入模版空间
 			// 设定条件名数组
-			String[] names = { "auth_progress", "is_staging", "isMine", "pageinfo1" };
+			String[] names = { "auth_progress", "is_staging", "isMine", "pageinfo1","is_handled" };
 			String[] namesChi = { "bookname" };
 			queryConditionOperation(names, namesChi, request, mv, paraMap, vm_map);
 

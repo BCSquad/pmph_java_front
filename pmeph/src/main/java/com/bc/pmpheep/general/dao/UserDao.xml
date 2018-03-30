@@ -5,13 +5,15 @@
     <select id="getUserInfo" resultType="map">
         <if test="usertype == 1">
             select *,
-            (select max(operate_date) from sys_operation where operate_text='作家用户登录' and user_name=#{username} GROUP BY user_name) latest_login_time
-            from writer_user where username=#{username}
+            (select max(operate_date) from sys_operation where operate_text='作家用户登录' and user_name=#{username} GROUP BY
+            user_name) latest_login_time
+            from writer_user where username=#{username} and is_disabled=0
         </if>
         <if test="usertype == 2">
             select u.*,o.org_name,
-            (select max(operate_date) from sys_operation where operate_text='作家用户登录' and user_name=#{username} GROUP BY user_name) latest_login_time
-            from org_user u join org o on u.org_id=o.id where username=#{username}
+            (select max(operate_date) from sys_operation where operate_text='作家用户登录' and user_name=#{username} GROUP BY
+            user_name) latest_login_time
+            from org_user u join org o on u.org_id=o.id where username=#{username} and is_disabled=0
         </if>
     </select>
 
@@ -60,6 +62,30 @@ UNION
         update writer_point set total=total+#{scores},gain=gain+#{scores} where user_id=#{id};
         insert into writer_point_log (user_id,rule_id,point) values (#{id},#{ruleid},#{scores});
     </insert>
+    <select id="getFriendInfo" parameterType="map" resultType="map">
+	SELECT
+	*
+FROM
+	writer_user wu
+WHERE
+	wu.id = #{FriendId}
+AND EXISTS (
+	SELECT
+		*
+	FROM
+		writer_friend wf
+	WHERE
+		STATUS = '2'
+	AND (
+		(
+			target_id =  #{FriendId}
+			AND wf.request_id = #{userId}
+    )
+			or (target_id = #{userId}
+			AND wf.request_id =  #{FriendId})
+)
+)
+	</select>
 
 
 </mapper>

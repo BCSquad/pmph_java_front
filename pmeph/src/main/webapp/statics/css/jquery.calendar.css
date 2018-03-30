@@ -126,7 +126,6 @@
     LINE-HEIGHT: 30px;
     WIDTH: 30px;
     height: 30px;
-    font-family: MicrosoftYaHei;
     padding: 0;
 }
 
@@ -190,7 +189,6 @@
     TEXT-ALIGN: center;
     HEIGHT: 50px;
     WIDTH: 47px;
-    font-family: MicrosoftYaHei;
 }
 
 .calendar .calMain .calContent .tabM td a {
@@ -243,7 +241,6 @@
     TEXT-ALIGN: center;
     HEIGHT: 50px;
     WIDTH: 47px;
-    font-family: MicrosoftYaHei;
 }
 
 .calendar .calMain .calContent .tabY td a {

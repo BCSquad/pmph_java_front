@@ -151,7 +151,7 @@
                                             <img src="${ctx}/statics/image/readno.png"  id="readno${message.id}" class="readyes"/>
                                         </c:otherwise>
                                     </c:choose>
-                                    <span class="fixwidth">${message.messageContent}</span>
+                                    <span class="fixwidth">${message.tcontent}</span><!-- messageContent 为全内容  tcontent为去掉图片和转行/br>的内容 -->
 
 		                	    </td>
 		                	  </c:if>
@@ -167,7 +167,7 @@
 		                  
 		                    <td class="buttonDetail">
 		                    	<c:if test="${message.msgType==0 && message.material_id!=0}">
-		                      	<div class="buttonAccept" ><a href="${ctx}/message/noticeMessageDetail.action?cmsId=${message.cmsid}">查看详情</a></div>
+		                      	<div class="buttonAccept" ><a href="${ctx}/message/noticeMessageDetail.action?cmsId=${message.cmsid}&umid=${message.id}">查看详情</a></div>
 		                        </c:if>
 		                        <c:if test="${message.msgType==0||message.msgType==1}">
 		   					    <span class="deleteButton" onclick="deleteNotice(${message.id })"><span style="font-size:18px;">×</span> 删除</span>

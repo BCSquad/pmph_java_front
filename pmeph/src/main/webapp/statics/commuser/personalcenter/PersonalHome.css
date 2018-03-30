@@ -695,25 +695,33 @@ color:#FFF;
     margin-right: 30px;
 }
 
+.suibiwenzhangtp {
+    float: left;
+    width: 100%;
+}
+
 .suibibiaoti {
     font-size: 16px;
     color: #333333;
     padding-bottom: 16px;
 }
 
+.suibiwenzhanneirong {
+    float: left;
+    width: 100%;
+    margin-top: 16px;
+}
+
 .suibineirong {
     font-size: 12px;
-    color: #666666;
-    margin-top: 16px;
+    color: #333333;
     display: block;
     max-height: 68px;
     overflow: hidden;
-    /* display: inline-block; */
 }
 
 .suibibt {
     float: left;
-    margin-bottom: 14px;
     width: 650px;
     line-height: 18px;
 }
@@ -930,7 +938,7 @@ width: 76px;
     height: 170px;
     width: 136px;
     float: left;
-    background-color: #7acdd4;
+    background-color: #09a0ad;
     text-align: center;
 }
 
@@ -1045,17 +1053,17 @@ width: 76px;
 
 .ybmcj2 {
     font-size: 14px;
-    color: #7acdd4;
+    color: #09a0ad;
 }
 
 .ybmcj1 {
     font-size: 14px;
-    color: #7acdd4;
+    color: #09a0ad;
 }
 
 .ybmcj {
     font-size: 14px;
-    color: #489299;
+    color: #FFFFFF;
 }
 
 .bmcjan3 {
@@ -1101,7 +1109,7 @@ width: 76px;
     margin-right: 17px;
     margin-bottom: 31px;
     margin-left: 17px;
-    background-color: #7acdd4;
+    background-color: #09a0ad;
     border-radius: 18px;
     line-height:33px;
 }
@@ -1135,7 +1143,7 @@ width: 76px;
     margin-bottom: 0px;
     margin-left: 17px;
     padding-top: 3px;
-    background-color: #7acdd4;
+    background-color: #09a0ad;
     border-radius: 18px;
 }
 
@@ -1189,8 +1197,8 @@ width: 76px;
     width: 134px;
     float: left;
     font-size: 14px;
-    color: #7acdd4;
-    /* background-color: #7acdd4; */
+    color: #09a0ad;
+    /* background-color: #09a0ad; */
     margin-top: 10px;
 }
 
@@ -1340,7 +1348,6 @@ width: 76px;
 button.btn_addFriend{
 	float: right;
     border-radius: 4px;
-    font-family: MicrosoftYaHei;
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;

@@ -1,3 +1,8 @@
+
+	
+	
+
+
 // 已读 未读
 function getMessage(is_read,id1,id2){
     $("#"+id1).css({"background-color":"#1d8ca0","color":"#fff"});
@@ -35,13 +40,13 @@ function getMessage(is_read,id1,id2){
                         } else {
                             str += '<img src="' + contextpath + 'statics/image/readno.png"  id="readno'+n.id+'" class="readyes"/>';
                         }
-                        +'<span class="fixwidth">'+ n.messageContent+'</span>';
+                        str+='<span class="fixwidth">'+ n.tcontent+'</span>';
                     }
 
                     str += "</td><td class='buttonDetail'>";
                     if (n.msgType == 0 && n.material_id != 0) {
                         /*str += "<div class='buttonAccept'><a href='" + contextpath + "message/noticeMessageDetail.action?materialId=" + n.material_id + "'>查看详情</a></div>";*/
-                        str += "<div class='buttonAccept'><a href='" + contextpath + "message/noticeMessageDetail.action?cmsId=" + n.cmsid + "'>查看详情</a></div>";
+                        str += "<div class='buttonAccept'><a href='" + contextpath + "message/noticeMessageDetail.action?cmsId=" + n.cmsid + "&umid=" + n.id + "'>查看详情</a></div>";
                     }
                     if (n.msgType == 0 || n.msgType == 1) {
                         str += "<span class='deleteButton' onclick='deleteNotice(" + n.id + ")'><span style='font-size:18px;'>×</span> 删除</span>";
@@ -120,17 +125,17 @@ function loadMore() {
 	                } else {
 	                    str += '<img src="' + contextpath + 'statics/image/readno.png"  id="readno'+n.id+'" class="readyes"/>';
 	                }
-                    +'<span class="fixwidth">'+ n.messageContent+'</span>';
+                    str+='<span class="fixwidth">'+ n.tcontent+'</span>';
                 }
                 /*if ((n.msgType==0||n.msgType==4)&& n.material_id !=0) {
 	                str += "<td colspan='2' class='title' >"
-	                    +'<span class="fixwidth">'+ n.messageContent+'</span>';
+	                    +'<span class="fixwidth">'+ n.tcontent+'</span>';
                 }*/
                 
                 str += "</td><td class='buttonDetail'>";
                 if (n.msgType == 0 && n.material_id != 0) {
                     /*str += "<div class='buttonAccept'><a href='" + contextpath + "message/noticeMessageDetail.action?materialId=" + n.material_id + "'>查看详情</a></div>";*/
-                    str += "<div class='buttonAccept'><a href='" + contextpath + "message/noticeMessageDetail.action?cmsId=" + n.cmsid + "'>查看详情</a></div>";
+                    str += "<div class='buttonAccept'><a href='" + contextpath + "message/noticeMessageDetail.action?cmsId=" + n.cmsid + "&umid=" + n.id + "'>查看详情</a></div>";
                 }
                 if (n.msgType == 0 || n.msgType == 1) {
                     str += "<span class='deleteButton' onclick='deleteNotice(" + n.id + ")'><span style='font-size:18px;'>×</span> 删除</span>";
@@ -239,8 +244,23 @@ Date.prototype.toLocaleString = function () {
 //系统消息title标题弹窗
 
 function showup(id) {
-
-
+	var loaded = false;
+	var imgTimeOut = false;
+	var clickToEndLoad = false;
+	
+	//10秒不论是否加载完成，都跳出弹窗；
+	setTimeout(function(){
+		imgTimeOut = true;
+	}, 10000);
+	
+	//加载过程中点击window 阻止弹窗弹出（然而点不到window，只有加载图案的一小块有点击效果，问题待解决）
+	$(window).one("click",function(){
+		$(window).one("click",function(){
+			clickToEndLoad = true;
+		});
+	});
+    	
+   
     $.ajax({
         type: 'post',
         url: contextpath + 'message/queryTitleMessage.action?uid=' + id,
@@ -262,15 +282,61 @@ function showup(id) {
 
             }
             $("#tattachment").html(ste);
-            layer.open({
-                type: 1,
-                title: false,
-                closeBtn: 1,
-                area: '967px',
-                skin: 'layui-layer-nobg', //没有背景色
-                shadeClose: true,
-                content: $("#bookmistake")
-            });
+            
+            var imgTick;
+            /**
+             * 轮询$content下的图片是否加载完成，直到完成后回调
+             * @param loaded 是否加载完成
+             * @param id 所需判断的块的id
+             * @param callback  加载完成的回调函数 
+             */
+            function isImgLoad(loaded,id,callback) {
+            	//清除延时
+            	clearTimeout(imgTick);
+            	if ($("#"+id).find("img").length>0) { //有图片需要加载
+            		//是否所有图片加载完成
+                	$("#"+id).find("img").each(function(){
+                		var $t = $(this);
+                		if(imgTimeOut||$t[0].complete){
+                			loaded = true;
+                		}else{
+                			loaded = false;
+                			return false; 
+                		}
+                	});
+				}else{ //无图片需要加载
+					loaded = true;
+				}
+            	
+            	if (clickToEndLoad) {
+            		layer.closeAll("loading"); 
+				}else{
+					if (loaded) { // 若已全部加载 执行回调
+	            		callback();
+					}else{  //若还未全部加载完成 间隔每10毫秒再次轮询 直到加载完成执行回调 不再轮询0
+						imgTick = setTimeout(function(){
+							 layer.load(1); //加载图样载
+							 isImgLoad(loaded,id,callback); //轮询
+						}, 10);
+					}
+				}
+            	
+            }
+            
+            //开始轮询
+            isImgLoad(loaded,"bookmistake", function() {
+                        layer.closeAll("loading"); //关闭所有layer.load(2);加载图样载
+                        layer.open({
+                            type: 1,
+                            title: false,
+                            closeBtn: 1,
+                            area: '967px',
+                            skin: 'layui-layer-nobg', //没有背景色
+                            shadeClose: true,
+                            content: $("#bookmistake")
+                        });
+                    });
+            
         }
     });
 }

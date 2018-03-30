@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -41,7 +42,8 @@ public class ReadController {
     //首页跳转
     @RequestMapping("/main")
     public ModelAndView toreadMain(HttpServletRequest request,
-                                   HttpServletResponse res) {
+                                   HttpServletResponse res
+                                   ) {
         ModelAndView mv = new ModelAndView("commuser/readpage/readpage");
         //热门书评
         List<Map<String, Object>> zdtjXxjyList = new ArrayList<Map<String, Object>>();

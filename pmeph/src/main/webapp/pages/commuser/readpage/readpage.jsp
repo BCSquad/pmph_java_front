@@ -18,7 +18,9 @@
     <title>读书首页</title>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/readpage/readpage.css" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.js"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.scroll.js"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
     <script src="${ctx}/resources/commuser/readpage/readpage.js" type="text/javascript"></script>
@@ -35,30 +37,32 @@
             <div class="banner">
                 <!--广告轮播区域-->
                 <div class="move" id="move">
-	                <ul>
+                    <ul>
                         <c:forEach var="ad" items="${adInfo.detailList}">
                             <li><img src="${ctx}/image/${ad.image}.action" class="img-move"/></li>
                         </c:forEach>
 
 
-	                </ul>
+                    </ul>
                 </div>
                 <div class="ctrl" id="ctrl"></div>
             </div>
             <!--重点学科推荐-->
             <div class="op-link">
-                <div class="re_6" style="margin-top: 10px;margin-left: 40px;">重点学科</div>
+                <div class="re_6" style="margin-top: 10px;margin-left: 32px;">重点学科</div>
                 <c:forEach var="ad3" items="${adInfo3.detailList}" varStatus="status">
                     <c:if test="${status.index==0}">
                         <div class="re_1">
-                            <a href="${adInfo3.url}"><img src="${ctx}/image/${ad3.image}.action" style="width: 310px;height: 130px;border-radius: 5px"></a>
+                            <a href="${adInfo3.url}"><img src="${ctx}/image/${ad3.image}.action"
+                                                          style="width: 310px;height: 130px;border-radius: 5px"></a>
                         </div>
                     </c:if>
                 </c:forEach>
                 <c:forEach var="ad3" items="${adInfo4.detailList}" varStatus="status">
                     <c:if test="${status.index==0}">
                         <div class="re_2">
-                            <a href="${adInfo4.url}"><img src="${ctx}/image/${ad3.image}.action" style="width: 310px;height: 130px;border-radius: 5px"></a>
+                            <a href="${adInfo4.url}"><img src="${ctx}/image/${ad3.image}.action"
+                                                          style="width: 310px;height: 130px;border-radius: 5px"></a>
                         </div>
                     </c:if>
                 </c:forEach>
@@ -141,9 +145,10 @@
                         <c:forEach var="rmsp" items="${rmspList}">
                             <div class="item1" onclick="openUrl('${rmsp.id1}')">
                                 <div class="sp_01">
-                                	<%-- <img src="${rmsp.image_url}"/> --%>
-                                	<c:if test="${rmsp.image_url=='DEFAULT'}"><img src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg" ></c:if>
-                					<c:if test="${rmsp.image_url!='DEFAULT'}"><img src="${rmsp.image_url}"/></c:if>
+                                        <%-- <img src="${rmsp.image_url}"/> --%>
+                                    <c:if test="${rmsp.image_url=='DEFAULT'}"><img
+                                            src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"></c:if>
+                                    <c:if test="${rmsp.image_url!='DEFAULT'}"><img src="${rmsp.image_url}"/></c:if>
                                 </div>
                                 <div class="sp_02">
                                     <div class="sp_title">${rmsp.bookname}</div>
@@ -167,19 +172,23 @@
             </div>
             <!--描述：右侧区域-->
             <div class="area4">
-            	<!--描述：图书分类-->
+                <!--描述：图书分类-->
                 <div class="rg_content">
                     <span id="span_3" class="tsfl">图书分类</span>
                     <hr style=" height:1px;border:none;border-top:1px solid #f0f0f0;">
                 </div>
-                <div>
+                <div style="width: 350px;background: #F7F7F7;">
                     <c:forEach var="type1" items="${materialType}" varStatus="status">
                         <div class="ts_type ${status.index=='0'?'ts_type1':''}" id="FLDiv_${type1.id}"
-                             onclick="javaScript:ChangeFLDiv('${type1.id}','ChangeFLDiv_',3)">
-                            <span>${type1.type_name}</span></div>
+                             onclick="javaScript:ChangeFLDiv('${type1.id}','ChangeFLDiv_',3)"
+                             style="width: ${350/materialType.size()}px">
+                            <span>${type1.type_name}</span>
+                            <div class="arrow" style="left:${350/materialType.size()/2-5}px"></div>
+                        </div>
                     </c:forEach>
+                    <div style="clear: both;"></div>
                 </div>
-                <div style="clear: both;height: 14px;"></div>
+                <div style="clear: both;"></div>
                 <c:forEach items="${materialType}" var="type1" varStatus="status">
                     <div id="ChangeFLDiv_${type1.id}"
                          class="tsfl_1 ChangeFLDiv" ${status.index!='0'?'style="display: none;"':''}>
@@ -189,7 +198,8 @@
                             </div>
                             <div class="part_2">
                                 <c:forEach var="type3" items="${type2.dataList}">
-                                    <a target="_blank" href="<c:url value="/books/list.action?type=${type3.id}"/>">${type3.type_name}</a>
+                                    <a target="_blank"
+                                       href="<c:url value="/books/list.action?type=${type3.id}"/>">${type3.type_name}</a>
                                 </c:forEach>
                             </div>
                         </c:forEach>
@@ -202,10 +212,11 @@
                 </div>
                 <div>
                     <c:forEach items="${bookTypes}" var="type" varStatus="status">
-                        <div class="tscx_type ${status.index==0?'tscx_type1':''}" id="CXDiv_${type.id}" typeid="${type.id}"
+                        <div class="tscx_type ${status.index==0?'tscx_type1':''}" id="CXDiv_${type.id}"
+                             typeid="${type.id}"
                              onclick="javaScript:ChangeCXDiv(${type.id})">
                             <span>${type.type_name}</span>
-                         </div>
+                        </div>
                     </c:forEach>
                 </div>
                 <div style="clear: both;height: 14px;"></div>
@@ -222,7 +233,7 @@
 </jsp:include>
 <script>
     var _hmt = _hmt || [];
-    (function() {
+    (function () {
         var hm = document.createElement("script");
         hm.src = "https://hm.baidu.com/hm.js?c8927680e561788c668c5e891dfe322c";
         var s = document.getElementsByTagName("script")[0];

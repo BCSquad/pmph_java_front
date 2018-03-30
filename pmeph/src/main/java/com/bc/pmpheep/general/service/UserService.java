@@ -64,4 +64,14 @@ public class UserService {
         }
     }
 
+    /**
+     *  获取到好友的信息
+     * @param id
+     * @return
+     */
+    @Transactional
+    public Map<String,Object> getFriendInfo(String id,String userId){
+        return userDao.getFriendInfo(id,userId);
+    }
+
 }

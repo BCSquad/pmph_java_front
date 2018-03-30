@@ -94,8 +94,8 @@
 						</select>
 					</div>
 					<div class="pageJump">
-						<span>共<span><input type="text" id="total"
-								value="${total}"></span>页，跳转到
+						<span>共 <span><input type="text" id="total"
+								value="${total}"></span> 页，跳转到
 						</span> <input type="text" /> <span class="pp">页</span>
 						<button type="button" class="button">确定</button>
 					</div>

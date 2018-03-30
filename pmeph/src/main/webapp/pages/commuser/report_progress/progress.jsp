@@ -164,14 +164,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					                            <c:when test="${(books.isPublished || books.isForceEnd) }">
 					                            	<span class="left-bom-22">遴选结束，未选中</span>
 					                            </c:when>
-					                            <c:when test="${(books.onlineProgress==1||books.onlineProgress==4) }">
-					                            	<span class="left-bom-22">审核中...</span>
+					                            <c:when test="${(progress.offlineProgress=='2'&&books.onlineProgress==3)}">
+					                            	<span class="left-bom-22">遴选中</span>
 					                            </c:when>
-					                             <c:when test="${(books.onlineProgress==2||books.onlineProgress==5) }">
+					                            <c:when test="${(books.onlineProgress==1||books.onlineProgress==4) }">
+					                            	<span class="left-bom-22">${progress.orgName } 审核中</span>
+					                            </c:when>
+					                            <c:when test="${(books.onlineProgress==2||books.onlineProgress==5) }">
 					                            	<span class="left-bom-22">被退回</span>
 					                            </c:when>
 					                            <c:otherwise>
-													<span class="left-bom-22">审核通过</span>
+													<span class="left-bom-22">${progress.orgName } 审核通过</span>
 												</c:otherwise>
 				                            </c:choose>
 				                            <%-- <c:if test="${books.isPublished==true}">
@@ -214,14 +217,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				                <c:if test="${vs.last==false}" >
 				                <div class="rightContent-bom">
 				                
-				                <c:choose >
+				                <%-- <c:choose >
 				                	<c:when test="${message.msgMap.img==0}">
-				                	 <div class="wzContent"> 您的申报已提交，请耐心等待审核...</div>
+				                	 <div class="wzContent"> 您的申报《${progress.materialName}》已提交，请耐心等待审核...</div>
 				                	</c:when>
-				                	<c:otherwise> 
+				                	<c:otherwise>  --%>
 				                	   <div class="wzContent"> ${message.msgMap.content}</div>
-				                	</c:otherwise>
-				                </c:choose>
+				                	<%-- </c:otherwise>
+				                </c:choose> --%>
 				                   
 				                    <!-- <div class="wzContent">爱仕达开始打卡刷的卡刷的卡刷的卡合适的看哈上看到哈克斯电话卡睡得好卡视角大卡司哈上看到哈克斯电话卡睡得好卡视角大卡司</div> -->
 				                </div>

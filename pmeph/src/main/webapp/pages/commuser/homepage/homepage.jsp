@@ -122,6 +122,7 @@
                                                                           style="margin-left: 30px;margin-top: 42px">
                     </div>
                 </div>
+                
                 <c:forEach items="${listDou}" var="list" varStatus="status">
 
                     <%-- <c:if test="${status.index==0}">
@@ -135,7 +136,7 @@
                     <%-- <c:if test="${status.index!=0}"> --%>
                     <div class="content-left">
                         <p class="content-size"><a
-                                href="${ctx}/message/noticeMessageDetail.action?cmsId=${list.id }&&materialId=${list.material_id}&&notEnd=${list.notEnd}&&is_material_entry=${is_material_entry}"
+                                href="${ctx}/message/noticeMessageDetail.action?cmsId=${list.id }&&materialId=${list.material_id}&&notEnd=${list.notEnd}&&is_material_entry=${is_material_entry}&&tag=homepage"
                                 class="astyle">${list.title}</a></p>
                         <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date"
                                                                   pattern="yyyy-MM-dd"/></p>
@@ -147,20 +148,25 @@
                                 报名参加
                             </div>
                         </c:if>
-                        <c:if test="${list.notEnd ==1 and list.is_material_entry==true and list.declaration_id != null }">
+                        <c:if test="${list.notEnd ==1 and list.is_material_entry==true and list.declaration_id != null and list.dec_editable==1 }">
                             <div class="left_join"
-                                 onclick="window.location.href='${ctx}/material/showMaterial.action?declaration_id=${list.declaration_id}'">
+                                 onclick="window.location.href='${ctx}/material/toMaterialZc.action?declaration_id=${list.declaration_id}'">
+                                编辑申报
+                            </div>
+                        </c:if>
+                        <c:if test="${list.notEnd ==1 and list.is_material_entry==true and list.declaration_id != null and list.dec_editable==0}">
+                            <div class="left_join" onclick="window.location.href='${ctx}/material/showMaterial.action?declaration_id=${list.declaration_id}'">
                                 查看申报
                             </div>
                         </c:if>
                         <c:if test="${list.notEnd ==0 and list.is_material_entry==true}">
-                            <div class="left_join end">已结束</div>
+                            <div class="left_join end">报名结束</div>
                         </c:if>
                     </div>
 
                     <%-- </c:if> --%>
                 </c:forEach>
-                <div class="more" onclick="top.location='${ctx}/cmsnotice/tolist.action'">全部>></div>
+                <div class="more" onclick="top.location='${ctx}/cmsnotice/tolist.action'">更多>></div>
             </div>
             <div class="notice area-3">
                 <div class="title" style="float: left">
@@ -191,7 +197,7 @@
                         </c:forEach>
                     </ul>
                 </div>
-                <div class="more" onclick="top.location='${ctx}/cmsinfoletters/tolist.action'">全部>></div>
+                <div class="more" onclick="top.location='${ctx}/cmsinfoletters/tolist.action'">更多>></div>
             </div>
             <div class="area-4">
                 <div class="tab-bar">
@@ -228,7 +234,7 @@
                     <div class="left">
                         <div class="left_one">
                             <div class="textbook_left">教材社区</div>
-                            <div class="all_left" onclick="window.location.href='${ctx}/community/tolist.action'">全部>>
+                            <div class="all_left" onclick="window.location.href='${ctx}/community/tolist.action'">更多>>
                             </div>
                             <c:forEach items="${listM}" var="list" varStatus="status">
                                 <%--<div class="left_con1" onclick="todou('${list.mid}','${list.material_id}','${list.id}')">${list.title}</div>--%>
@@ -295,7 +301,7 @@
                     <div class="title">
                         <span class="doc_content">医学随笔</span>
                         <span class="total" style="cursor: pointer;"
-                              onclick="window.location.href='${ctx}/cms/list.action'">全部>></span>
+                              onclick="window.location.href='${ctx}/cms/list.action'">更多>></span>
                     </div>
                     <c:forEach items="${listArt}" var="list" varStatus="status">
                         <c:if test="${status.index==0}">

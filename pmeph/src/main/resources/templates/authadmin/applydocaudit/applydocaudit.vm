@@ -2,7 +2,15 @@
 #if($!{isEnd}==1)
 	<div>
 		<div class="right-up-tag">已结束</div>
-	    <div class="material-title">$!{materialName}</div>
+	    <div class="material-title">
+            <a target="_blank"  style="text-decoration: none;cursor: pointer;"
+				#if($!{cms_id}>0) href="$!{contextpath}message/noticeMessageDetail.action?cmsId=$!{cms_id}"
+				#else title = "抱歉，该教材公告详情已被删除。"
+				#end
+            >
+				$!{materialName}
+            </a>
+		</div>
 	    <div class="material-deadline">截止日期：$!{deadline}</div>
 	    #if($!{beenPublishTo}==1)
 	    	<button class="material-button btn-type-3 btn-result-statistics" onclick="resultStatistics($!{id},'$!{materialName}')">结果统计</button>
@@ -11,7 +19,15 @@
 	</div>
 #else
 	<div>
-	    <div class="material-title">$!{materialName}</div>
+	    <div class="material-title">
+            <a target="_blank"  style="text-decoration: none;cursor: pointer;"
+				#if($!{cms_id}>0) href="$!{contextpath}message/noticeMessageDetail.action?cmsId=$!{cms_id}"
+				#else title = "抱歉，该教材公告详情已被删除。"
+				#end
+            >
+				$!{materialName}
+            </a>
+		</div>
 	    <div class="material-deadline">截止日期：$!{deadline}</div>
 	    #if($!{beenPublishTo}==1)
 		    <button class="material-button btn-type-1 btn-result-statistics" onclick="resultStatistics($!{id},'$!{materialName}')">结果统计</button>

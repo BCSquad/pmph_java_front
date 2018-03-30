@@ -3,13 +3,13 @@ tr
 {
     height:60px;
     line-height:60px;
-    font-family: MicrosoftYaHei;
+
 }
 
 .td-lable-right
 {
     width:97px;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     letter-spacing: 0px;
@@ -19,7 +19,7 @@ tr
 
 .td-lable-left
 {
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     letter-spacing: 0px;
@@ -40,5 +40,5 @@ tr
     margin-left: 20px;
     cursor: pointer;
     float: left;
-    border-bottom: 2px solid #666666;
+    border-bottom: 2px solid #333333;
 }

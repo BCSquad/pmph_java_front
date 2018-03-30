@@ -627,7 +627,7 @@
 
 .suibineirong {
     font-size: 12px;
-    color: #666666;
+    color: #333333;
     margin-top: 16px;
     display: block;
     max-height: 68px;
@@ -1358,8 +1358,8 @@
 /* -----------����չ��������ʽ----------------------- */
 .container {  
     margin: 10px auto;
-    border: 1px solid #3bb2d0;
-    background-color: #F6F6F6;
+    border-bottom: 1px solid #F6F6F6;
+   /* background-color: #F6F6F6;*/
     width: 740px;
     margin-bottom: 4px;  
 }  
@@ -1419,10 +1419,9 @@
 .mistitle {
     width: 50%;
     float: left;
-    font-family: MicrosoftYaHei;
     line-height: 20px;
     letter-spacing: 1px;
-    color: #666666;
+    color: #333333;
     font-size: 16px;
     margin-left: 20px;
 }
@@ -1439,10 +1438,9 @@
 
 
 .labell {
-    font-family: MicrosoftYaHei;
     line-height: 20px;
     letter-spacing: 1px;
-    color: #666666;
+    color: #333333;
     font-size: 14px;
 }
 
@@ -1479,10 +1477,9 @@
 }
 
 .aticle {
-    font-family: MicrosoftYaHei;
     line-height: 24px;
     letter-spacing: 1px;
-    color: #666666;
+    color: #333333;
     width: 97%;
     margin-left: 20px;
 }
@@ -1500,12 +1497,20 @@
     float: right;
     width: 80px;
     height: 28px;
-    font-family: MicrosoftYaHei;
     font-size: 14px;
     color: #F7FCF6;
     cursor: pointer;
     background-color: #70D68A;
     border-radius: 3px;
+}
+
+.correction_between_line {
+    border-bottom: 0.5px solid #e5e5e5;
+    width: 725px;
+    height: 0px;
+    display: block;
+    margin-left: 20px;
+    margin-top: 20px;
 }
 
 

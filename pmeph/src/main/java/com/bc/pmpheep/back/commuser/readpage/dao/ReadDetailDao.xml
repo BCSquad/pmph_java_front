@@ -30,7 +30,7 @@
 	     left join book u on t.book_id=u.id
 	     left join writer_user b on b.id=t.writer_id where u.id=#{id} and t.is_long=0
 	     and t.is_auth='1' and t.is_deleted='0'
-	     order by t.sort*t.is_stick desc , t.gmt_create desc
+	     order by t.sort*t.is_stick DESC , t.gmt_create desc
 	     <if test="start >= 0">
 	        limit #{start},3
 	     </if> 
@@ -209,7 +209,7 @@
 	     left join writer_user b
 	     on t.writer_id=b.id 
 	     where t.book_id=#{book_id} and t.is_long =1 and is_hide=0 and t.is_auth = 1
-	     order by t.gmt_create desc
+	     order by t.sort*t.is_stick DESC , t.gmt_create desc
 	     <if test="start >= 0">
 	        limit #{start},3
 	     </if> 

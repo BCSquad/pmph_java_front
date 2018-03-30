@@ -14,7 +14,7 @@
 
 .status-tab{
     height: 26px;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -47,7 +47,7 @@
 
 .status-tab.selected{
     height: 30px;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -132,7 +132,7 @@
     float: right;
     width: 73px;
     height: 23px;
-    font-family: MicrosoftYaHei;
+
     font-size: 12px;
     font-weight: normal;
     font-stretch: normal;
@@ -154,7 +154,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-all;
-    font-family: MicrosoftYaHei;
+
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -168,7 +168,7 @@
     margin: 18px 0px 0px 16px;
     border: none;
     height: 14px;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -184,7 +184,7 @@
     height: 24px;
     border-radius: 12px;
     border: solid 0px #03717b;
-    font-family: MicrosoftYaHei;
+
     font-size: 12px;
     font-weight: normal;
     font-stretch: normal;
@@ -230,4 +230,20 @@
 }
 
 
+button.forXMirrorImg.selected{
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    transform: scaleX(-1);
+/*     filter: FlipH; */
+}
 
+button.forXMirrorImg.selected span.forXMirrorImg{
+	display: block;
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    transform: scaleX(-1);
+/*     filter: FlipH; */
+    height:14px;
+}

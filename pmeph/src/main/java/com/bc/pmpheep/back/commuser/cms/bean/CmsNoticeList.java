@@ -79,8 +79,38 @@ public class CmsNoticeList {
     
     private Boolean isMaterialEntry;
     private String notice;
-    
-	public Boolean getIsMaterialEntry() {
+	/**
+	 * 教材没有结束
+	 */
+	private String notEnd;
+	private String declarationId;
+	private String decEditable;
+
+	public String getNotEnd() {
+		return notEnd;
+	}
+
+	public void setNotEnd(String notEnd) {
+		this.notEnd = notEnd;
+	}
+
+    public String getDeclarationId() {
+        return declarationId;
+    }
+
+    public void setDeclarationId(String declarationId) {
+        this.declarationId = declarationId;
+    }
+
+    public String getDecEditable() {
+        return decEditable;
+    }
+
+    public void setDecEditable(String decEditable) {
+        this.decEditable = decEditable;
+    }
+
+    public Boolean getIsMaterialEntry() {
 		return isMaterialEntry;
 	}
 

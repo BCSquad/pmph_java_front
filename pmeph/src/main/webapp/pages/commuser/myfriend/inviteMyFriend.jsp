@@ -65,7 +65,7 @@
     width:auto;
     color:#999999;
     height:30px;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     padding-left: 12px;
 }
@@ -87,13 +87,13 @@
     margin-left: 28px;
 }
 .apply{
-    font-family: MicrosoftYaHei;
+
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
     line-height: 26px;
     letter-spacing: 0px;
-    color: #666666;
+    color: #333333;
     align:left;
     width:auto;
 }
@@ -123,7 +123,7 @@
 }
 
 #selected{
-    font-family: MicrosoftYaHei;
+
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -137,7 +137,7 @@
     color: #333333;
     width: 32px;
     height: 16px;
-    font-family: MicrosoftYaHei;
+
     font-size: 16px;
     border-bottom: 2px solid black;
     padding-bottom: 14px;
@@ -146,7 +146,7 @@
 .unselected{
     width: 32px;
     height: 16px;
-    font-family: MicrosoftYaHei;
+
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -158,7 +158,7 @@
 .otherOptions{
     width: 32px;
     height: 16px;
-    font-family: MicrosoftYaHei;
+
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -224,7 +224,7 @@ accept{
 }
 
 .more{
-    font-family: MicrosoftYaHei;
+
 	font-size: 16px;
 	line-height: 18px;
 	color: #7d7d7d;
@@ -260,7 +260,7 @@ accept{
 a{
     text-decoration:none;
     color: white;
-    font-family: MicrosoftYaHei;
+
 
 }
 
@@ -269,20 +269,20 @@ a{
     width:auto;
     color:#333333;
     height:30px;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     padding-left: 12px;
 }
 
 .personMessageContent{
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
     line-height: 26px;
     letter-spacing: 0px;
     padding-left: 12px;
-    color: #666666;
+    color: #333333;
     align:left;
     width:auto;
 }
@@ -332,7 +332,7 @@ a{
     display: none;
 }
 .personMessageTitle{
-    font-family: MicrosoftYaHei;
+
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -386,7 +386,7 @@ a{
 }
 .talkTime{
     clear: both;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -483,7 +483,7 @@ a{
     word-break:break-all;
     text-align: left;
     border-radius: 7px;
-    color: #666666;
+    color: #333333;
     background-color: #f8f8f8;
     margin-bottom: 10px;
     

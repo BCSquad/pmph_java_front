@@ -191,7 +191,7 @@ $(function(){
 	
 	//-------------------------------
     $("#filesgx_top").html('文件共享<span style="display: inline-block;position:absolute;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;' +
-        'line-height: 13px;padding: 3px 6px;border-radius: 50%;right: 0;top: 0">' + $("#file_count").val() + '</span>');
+        'line-height: 10px;padding: 3px 6px;border-radius: 50%;right: 0;top: 0">' + $("#file_count").val() + '</span>');
     
 	var talkPagesize  = 5 ;
 	var talkPagenumber= 1  ;
@@ -320,7 +320,7 @@ $(function(){
 		        	var old = parseInt($("#fileTotal").html());
 		        	$("#fileTotal").html(old-1);
 			    	$("#filesgx_top").html('文件共享<span style="display: inline-block;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;'+
-			        		'line-height: 13px;padding: 3px 6px;border-radius: 50%;">'+(old-1)+'</span>');
+			        		'line-height: 10px;padding: 3px 6px;border-radius: 50%;">'+(old-1)+'</span>');
 	        	}else if(responsebean=='2'){
                     window.message.warning("您没有权限");
 				}else {
@@ -576,7 +576,7 @@ $(function(){
 				    	var old = parseInt($("#fileTotal").html());
                         $("#fileTotal").html(old+1);
                         $("#filesgx_top").html('文件共享<span style="display: inline-block;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;'+
-                            'line-height: 13px;padding: 3px 6px;border-radius: 50%;">'+(old+1)+'</span>');
+                            'line-height: 10px;padding: 3px 6px;border-radius: 50%;">'+(old+1)+'</span>');
 				    }else{
 				    	window.message.error("上传失败");
 				    }

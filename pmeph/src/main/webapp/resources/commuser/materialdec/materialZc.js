@@ -5,6 +5,9 @@ jsonStr = "{\"id\":\"realname\",\"content\":\"姓名不能为空\"},{\"id\":\"bi
     "{\"id\":\"zc\",\"content\":\"职称不能为空\"},{\"id\":\"address\",\"content\":\"地址不能为空\"},{\"id\":\"email\",\"content\":\"邮箱不能为空\"},"+
     "{\"id\":\"handphone\",\"content\":\"手机号码不能为空\"},{\"id\":\"zjlx\",\"content\":\"证件类型不能为空\"},{\"id\":\"idcard\",\"content\":\"证件号码不能为空\"},{\"id\":\"sbdw_name\",\"content\":\"申报单位不能为空\"},";
 
+var is_pmph_textbook_required;
+var is_textbook_required;
+
 $(function () {
     var id = $("#material_id").val();
     queryMaterialMap(id);  //执行查询方法
@@ -139,7 +142,7 @@ function chooseModel(data){
         //学习经历必填
         if(data.is_edu_exp_required == "1"){
             $("#zyxxjl_bt").css("display","inline");
-            jsonStr=jsonStr+"{\"id\":\"xx_kssj\",\"content\":\"学习经历起止时间必填\"},{\"id\":\"xx_major\",\"content\":\"所学专业不能为空\"},{\"id\":\"xx_degree\",\"content\":\"学历不能为空\"},";
+            jsonStr=jsonStr+"{\"id\":\"xx_kssj\",\"content\":\"学习经历起止时间必填\"},{\"id\":\"xx_jssj\",\"content\":\"学习经历起止时间必填\"},{\"id\":\"xx_school_name\",\"content\":\"学校名称不能为空\"},{\"id\":\"xx_major\",\"content\":\"所学专业不能为空\"},{\"id\":\"xx_degree\",\"content\":\"学历不能为空\"},";
         }else{
             $("#zyxxjl_xt").css("display","inline");
         }
@@ -205,7 +208,7 @@ function chooseModel(data){
         //主编国家规划教材情况必填
         if(data.is_national_plan_required == "1"){
             $("#zbgjjgh_bt").css("display","inline");
-            jsonStr=jsonStr+"{\"id\":\"hj_material_name\",\"content\":\"主编国家规划教材情况必填\"},{\"id\":\"hj_isbn\",\"content\":\"教材标准书号不能为空\"},";
+            jsonStr=jsonStr+"{\"id\":\"hj_material_name\",\"content\":\"主编国家规划教材情况必填\"},{\"id\":\"hj_isbn\",\"content\":\"教材标准书号不能为空\"},{\"id\":\"hj_rank_text\",\"content\":\"教材级别不能为空\"},";
         }else{
             $("#zbgjjgh_xt").css("display","inline");
         }
@@ -219,8 +222,11 @@ function chooseModel(data){
             jsonStr=jsonStr+"{\"id\":\"pmph_material_name\",\"content\":\"人卫社教材编写情况必填\"},{\"id\":\"pmph_publish_date\",\"content\":\"出版时间不能为空\"},{\"id\":\"pmph_isbn\",\"content\":\"教材标准书号不能为空\"},";
         }else{
             $("#rwsjcbx_xt").css("display","inline");
+        //    jsonStr=jsonStr+"{\"id\":\"pmph_isbn\",\"content\":\"教材标准书号格式：978-7-117-*****-* ,*代表数字或字母\"},";
         }
+        
     }
+    is_pmph_textbook_required = data.is_pmph_textbook_required;
     //其他社教材编写情况
     if(data.is_textbook_used == "1"){
         $("#qtjcbxqk").css("display","block");
@@ -230,8 +236,10 @@ function chooseModel(data){
             jsonStr=jsonStr+"{\"id\":\"jcb_material_name\",\"content\":\"其他社教材名称不能为空\"},{\"id\":\"jcb_publisher\",\"content\":\"出版单位不能为空\"},{\"id\":\"jcb_publish_date\",\"content\":\"出版时间不能为空\"},{\"id\":\"jcb_isbn\",\"content\":\"教材标准书号不能为空\"},";
         }else{
             $("#qtjcbxqk_xt").css("display","inline");
+         //   jsonStr=jsonStr+"{\"id\":\"jcb_isbn\",\"content\":\"教材标准书号格式：978-7-********* ,*代表数字或字母\"},";
         }
     }
+    is_textbook_required = data.is_textbook_required;
     //参加人卫慕课、数字教材编写情况
     if(data.is_mooc_digital_used == "1"){
         $("#digital").css("display","block");
@@ -271,7 +279,7 @@ function chooseModel(data){
         //主编学术专著情况必填
         if(data.is_monograph_required == "1"){
             $("#zbxszz_bt").css("display","inline");
-            jsonStr=jsonStr+"{\"id\":\"zb_monograph_name\",\"content\":\"主编学术专著情况必填\"},{\"id\":\"zb_publisher\",\"content\":\"专著出版单位不能为空\"},{\"id\":\"zb_publish_date\",\"content\":\"专著出版时间不能为空\"},";
+            jsonStr=jsonStr+"{\"id\":\"zb_monograph_name\",\"content\":\"专著名称必填\"},{\"id\":\"zb_monograph_date\",\"content\":\"专著发表日期必填\"},{\"id\":\"zb_publisher\",\"content\":\"专著出版单位不能为空\"},{\"id\":\"zb_publish_date\",\"content\":\"专著出版时间不能为空\"},";
         }else{
             $("#zbxszz_xt").css("display","inline");
         }
@@ -383,7 +391,7 @@ function addTsxz(){
         select_nr+
         "</select>"+
         "<div style='float: left;margin-left: 30px;' class='ts_radio'>"+
-        "<table style='width: 280px;border:0' cellspacing='0' cellpadding='0'><tr>";
+        "<table style='width: 260px;border:0' cellspacing='0' cellpadding='0'><tr>";
     if(is_multi_position=='1'){
         thtml += "<td height='30px'><input type='checkbox' name='zw_"+str+"' checked='checked' value='4'/>主编</td>"+
             "<td><input type='checkbox' name='zw_"+str+"' value='2'/>副主编</td>"+
@@ -404,8 +412,8 @@ function addTsxz(){
         "</tr></table>"+
         "<input type='hidden' name='preset_position' value='zw_"+str+"'>"+
         "</div>"+
-        "<div style='float: left;margin-left: 30px;height: 30px;'>"+
-        "<span style='float: left;line-height: 30px;'>上传教学大纲：</span>"+
+        "<div style='float: left;margin-left: 20px;height: 30px;'>"+
+        "<span style='float: left;line-height: 30px;'>上传教学大纲(只能上传一个文件或压缩包)：</span>"+
         "<div id='fileNameDiv_"+str+"' class='fileNameDiv'></div>"+
         "<input type='hidden' name='syllabus_id' id='syllabus_id_"+str+"'/>"+
         "<input type='hidden' name='syllabus_name' id='syllabus_name_"+str+"'/>"+
@@ -434,10 +442,10 @@ function add_xxjl(){
     var $tr = $("<tr id='xxjl_"+num+"'>"+
         "<td><input class='cg_input' placeholder='开始时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100' max=\"'$#xx_jssj_"+num+"'\" id='xx_kssj_"+num+"'  name='xx_kssj' value='' style='width: 80px;'/>"+
         " - <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" z-index='100' min=\"'$#xx_kssj_"+num+"'\" id='xx_jssj_"+num+"' name='xx_jssj' value='' style='width: 80px;'/></td>"+
-        "<td><input class='cg_input' name='xx_school_name' id='xx_school_name_"+num+"' value='' placeholder='学校名称'/></td>"+
-        "<td><input class='cg_input' name='xx_major' value='' id='xx_major_"+num+"' placeholder='所学专业'/></td>"+
-        "<td><input class='cg_input' name='xx_degree' value='' id='xx_degree_"+num+"' style='width: 110px;' placeholder='学历'/></td>"+
-        "<td><input class='cg_input' name='xx_note' value='' style='width: 290px;' placeholder='备注'/>" +
+        "<td><input class='cg_input' maxlength='80' name='xx_school_name' id='xx_school_name_"+num+"' value='' placeholder='学校名称'/></td>"+
+        "<td><input class='cg_input' maxlength='50' name='xx_major' value='' id='xx_major_"+num+"' placeholder='所学专业'/></td>"+
+        "<td><input class='cg_input' maxlength='30' name='xx_degree' value='' id='xx_degree_"+num+"' style='width: 110px;' placeholder='学历'/></td>"+
+        "<td><input class='cg_input' maxlength='100' name='xx_note' value='' style='width: 290px;' placeholder='备注'/>" +
         "<input type='hidden' name='zdjy' value='xx_kssj_"+num+",xx_jssj_"+num+",xx_school_name_"+num+",xx_major_"+num+",xx_degree_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('xxjl_"+num+"')\"/></td>"
@@ -453,9 +461,9 @@ function add_gzjl(){
     var $tr = $("<tr id='gzjl_"+num+"'>"+
         "<td><input class='cg_input' placeholder='开始时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100' max=\"'$#gz_jssj_"+num+"'\" id='gz_kssj_"+num+"'  name='gz_kssj' value='' style='width: 80px;'/>"+
         " - <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" z-index='100' min=\"'$#gz_kssj_"+num+"'\" id='gz_jssj_"+num+"'  name='gz_jssj' value='' style='width: 80px;'/></td>"+
-        "<td><input class='cg_input' maxlength='33' name='gz_org_name' id='gz_org_name_"+num+"' value='' placeholder='工作单位'/></td>"+
-        "<td><input class='cg_input' maxlength='33' name='gz_position' id='gz_position_"+num+"' value='' placeholder='职位'/></td>"+
-        "<td><input class='cg_input' maxlength='33' name='gz_note' value='' style='width: 410px;' placeholder='备注'/>" +
+        "<td><input class='cg_input' maxlength='100' name='gz_org_name' id='gz_org_name_"+num+"' value='' placeholder='工作单位'/></td>"+
+        "<td><input class='cg_input' maxlength='100' name='gz_position' id='gz_position_"+num+"' value='' placeholder='职位'/></td>"+
+        "<td><input class='cg_input' maxlength='100' name='gz_note' value='' style='width: 410px;' placeholder='备注'/>" +
         "<input type='hidden' name='zdjy' value='gz_kssj_"+num+",gz_jssj_"+num+",gz_org_name_"+num+",gz_position_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('gzjl_"+num+"')\"/></td>"
@@ -471,9 +479,9 @@ function add_jxjl(){
     var $tr = $("<tr id='jxjz_"+num+"'>"+
         "<td><input class='cg_input' placeholder='开始时间' calendar format=\"'yyyy-mm-dd'\" max=\"'$#jx_jssj_"+num+"'\" id='jx_kssj_"+num+"'   z-index='100'  name='jx_kssj' value='' style='width: 80px;'/>"+
         " - <input class='cg_input' placeholder='结束时间' calendar format=\"'yyyy-mm-dd'\" min=\"'$#jx_kssj_"+num+"'\" id='jx_jssj_"+num+"'  z-index='100' name='jx_jssj' value='' style='width: 80px;'/></td>"+
-        "<td><input class='cg_input' maxlength='33' name='jx_school_name' id='jx_school_name_"+num+"' value='' placeholder='学校名称'/></td>"+
-        "<td><input class='cg_input' maxlength='33' name='jx_subject' id='jx_subject_"+num+"' value='' placeholder='教学科目'/></td>"+
-        "<td><input class='cg_input' maxlength='33' name='jx_note' value='' style='width: 410px;' placeholder='备注'/>" +
+        "<td><input class='cg_input' maxlength='100' name='jx_school_name' id='jx_school_name_"+num+"' value='' placeholder='学校名称'/></td>"+
+        "<td><input class='cg_input' maxlength='150' name='jx_subject' id='jx_subject_"+num+"' value='' placeholder='教学科目'/></td>"+
+        "<td><input class='cg_input' maxlength='100' name='jx_note' value='' style='width: 410px;' placeholder='备注'/>" +
         "<input type='hidden' name='zdjy' value='jx_kssj_"+num+",jx_jssj_"+num+",jx_school_name_"+num+",jx_subject_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('jxjz_"+num+"')\"/></td>"
@@ -487,7 +495,7 @@ function add_xsjz(){
     var num = fnt();
     var $table = $("#tab_xsjz");
     var $tr = $("<tr id='xsjz_"+num+"'>"+
-        "<td><input class='cg_input' name='xs_org_name' id='xs_org_name_"+num+"' value='' placeholder='学术组织'/></td>"+
+        "<td><input class='cg_input' name='xs_org_name' maxlength='100' id='xs_org_name_"+num+"' value='' placeholder='学术组织'/></td>"+
         "<td style='color: #333333;'>"+
         "<table class='radio_tb' style='width: 100%;'><tr>"+
         "<td><input type='radio' name='xs_rank_"+num+"' checked='checked' value='0'/>无</td>"+
@@ -497,8 +505,8 @@ function add_xsjz(){
         "<td><input type='radio' name='xs_rank_"+num+"' value='4'/>市级</td>"+
         "</tr></table>"+
         "<input type='hidden' name='xs_rank' value='xs_rank_"+num+"' />"+
-        "<td><input class='cg_input' maxlength='33' name='xs_position' id='xs_position_"+num+"' value='' placeholder='职务'/></td>"+
-        "<td><input maxlength='33' class='cg_input' maxlength='33' name='xs_note' value='' style='width: 370px;' placeholder='备注'/>" +
+        "<td><input class='cg_input' maxlength='50' name='xs_position' id='xs_position_"+num+"' value='' placeholder='职务'/></td>"+
+        "<td><input maxlength='33' class='cg_input' maxlength='100' name='xs_note' value='' style='width: 370px;' placeholder='备注'/>" +
         "<input type='hidden' name='zdjy' value='xs_org_name_"+num+",xs_position_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('xsjz_"+num+"')\"/></td>"+
@@ -511,7 +519,7 @@ function add_jccb(){
     var num = fnt();
     var $table = $("#tab_jccb");
     var $tr = $("<tr id='jccb_"+num+"'>"+
-        "<td><input class='cg_input' id='jc_material_name_"+num+"' name='jc_material_name' value='' style='width: 360px;' placeholder='教材名称'/></td>"+
+        "<td><input class='cg_input' maxlength='100' id='jc_material_name_"+num+"' name='jc_material_name' value='' style='width: 260px;' placeholder='教材名称'/></td>"+
         "<td style='color: #333333;'>"+
         "<table class='radio_tb' style='width: 100%;'><tr>"+
         "<td><input type='radio' name='jc_position_"+num+"' checked='checked' value='0'/>无</td>"+
@@ -526,9 +534,10 @@ function add_jccb(){
         "<td><input type='radio' name='jc_is_digital_editor_"+num+"' value='0' checked='checked'/>否</td>"+
         "</tr></table>"+
         "<input type='hidden' name='jc_is_digital_editor' value='jc_is_digital_editor_"+num+"' /></td>"+
-        "<td><input class='cg_input' name='jc_publish_date' id='jc_publish_date"+num+"' value='' placeholder='出版时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100'  style='width: 100px;'/></td>"+
-        "<td><input maxlength='33' class='cg_input' name='jc_note' value='' style='width: 190px;' placeholder='备注'/>" +
-        "<input type='hidden' name='zdjy' value='jc_material_name_"+num+"' />" +
+        "<td><input maxlength='20' class='cg_input' name='jc_publisher' value='人民卫生出版社' readonly='true' style='width: 100px;' /></td>" +
+        "<td><input class='cg_input' name='jc_publish_date' id='jc_publish_date_"+num+"' value='' placeholder='出版时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100'  style='width: 100px;'/></td>"+
+        "<td><input maxlength='100' class='cg_input' name='jc_note' value='' style='width: 190px;' placeholder='备注'/>" +
+        "<input type='hidden' name='zdjy' value='jc_material_name_"+num+",jc_publish_date_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('jccb_"+num+"')\"/></td>"+
         "</tr>");
@@ -541,8 +550,8 @@ function add_jpkcjs(str,dim){
     var num = fnt();
     var $table = $("#"+str);
     var $tr = $("<tr id='jpkcjs_"+num+"'>"+
-        "<td><input class='cg_input' maxlength='16' name='gj_course_name' id='gj_course_name_"+num+"' value='' style='width: 300px;' placeholder='课程名称'/></td>"+
-        "<td><input class='cg_input' maxlength='3' name='gj_class_hour'  id='gj_class_hour_"+num+"' value='' style='width: 130px;' placeholder='课时数'/></td>"+
+        "<td><input class='cg_input' maxlength='50' name='gj_course_name' id='gj_course_name_"+num+"' value='' style='width: 300px;' placeholder='课程名称'/></td>"+
+        "<td><input class='cg_input' maxlength='50' name='gj_class_hour'  id='gj_class_hour_"+num+"' value='' style='width: 130px;' placeholder='课时数'/></td>"+
         "<td style='color: #333333;'>"+
         "<table class='radio_tb' style='width:100%;'><tr>"+
         "<td><input type='radio' name='gj_type_"+num+"' checked='checked' value='0'/>无</td>"+
@@ -551,7 +560,7 @@ function add_jpkcjs(str,dim){
         "<td><input type='radio' name='gj_type_"+num+"' value='3'/>省部</td>"+
         "</tr></table>"+
         "<input type='hidden' name='gj_type' value='gj_type_"+num+"' /></td>"+
-        "<td><input maxlength='33' class='cg_input' name='gj_note' value='' style='width: 330px;' placeholder='备注'/>" +
+        "<td><input maxlength='100' class='cg_input' name='gj_note' value='' style='width: 330px;' placeholder='备注'/>" +
         "<input type='hidden' name='zdjy' value='gj_course_name_"+num+",gj_class_hour_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('jpkcjs_"+num+"')\"/></td>"+
@@ -564,10 +573,10 @@ function add_gjghjc(){
     var num = fnt();
     var $table = $("#tab_gjghjc");
     var $tr = $("<tr id='gjghjc_"+num+"'>"+
-        "<td><input class='cg_input' maxlength='33' name='hj_material_name' id='hj_material_name_"+num+"' value='' style='width: 300px;' placeholder='教材名称'/></td>"+
-        "<td><input class='cg_input' maxlength='33' name='hj_isbn' value='' id='hj_isbn_"+num+"' style='width: 110px;' placeholder='标准书号'/></td>"+
-        "<td><input class='cg_input' maxlength='33' name='hj_rank_text' id='hj_rank_text_"+num+"' value='' style='width: 300px;' placeholder='教材级别' maxlength='50'/></td>"+
-        "<td><input class='cg_input' maxlength='33' name='hj_note' value='' style='width: 250px;' placeholder='备注'/>" +
+        "<td><input class='cg_input' maxlength='100' name='hj_material_name' id='hj_material_name_"+num+"' value='' style='width: 300px;' placeholder='教材名称'/></td>"+
+        "<td><input class='cg_input' maxlength='50' name='hj_isbn' value='' id='hj_isbn_"+num+"' style='width: 110px;' placeholder='标准书号'/></td>"+
+        "<td><input class='cg_input' maxlength='50' name='hj_rank_text' id='hj_rank_text_"+num+"' value='' style='width: 300px;' placeholder='教材级别'/></td>"+
+        "<td><input class='cg_input' maxlength='100' name='hj_note' value='' style='width: 250px;' placeholder='备注'/>" +
         "<input type='hidden' name='zdjy' value='hj_material_name_"+num+",hj_isbn_"+num+",hj_rank_text_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('gjghjc_"+num+"')\"/></td>"+
@@ -580,7 +589,7 @@ function add_rwsjcbx(){
     var num = fnt();
     var $table = $("#tab_rwsjcbx");
     var $tr = $("<tr id='pmph_"+num+"'>"+
-        "<td><input class='cg_input' maxlength='33' name='pmph_material_name' id='pmph_material_name_"+num+"' value='' style='width: 200px;' placeholder='教材名称'/></td>"+
+        "<td><input class='cg_input' maxlength='100' name='pmph_material_name' id='pmph_material_name_"+num+"' value='' style='width: 200px;' placeholder='教材名称'/></td>"+
         "<td><select id='pmph_rank_"+num+"' name='pmph_rank'>"+
         "<option value='0'>无</option>"+
         "<option value='1'>国家</option>"+
@@ -602,8 +611,8 @@ function add_rwsjcbx(){
         "</tr></table>"+
         "<input type='hidden' name='pmph_is_digital_editor' value='pmph_is_digital_editor_"+num+"' /></td>"+
         "<td><input class='cg_input' id='pmph_publish_date_"+num+"' placeholder='出版时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100' name='pmph_publish_date' value='' style='width: 100px;'/></td>"+
-        "<td><input class='cg_input' maxlength='50' name='pmph_isbn' value='' id='pmph_isbn_"+num+"'  style='width: 100px;' placeholder='标准书号'/></td>"+
-        "<td><input class='cg_input' maxlength='33' name='pmph_note' value='' placeholder='备注' style='width: 260px;'/>" +
+        "<td><input class='cg_input' maxlength='50' name='pmph_isbn' value='' id='pmph_isbn_"+num+"'  style='width: 100px;' placeholder='978-7-117-'/></td>"+
+        "<td><input class='cg_input' maxlength='100' name='pmph_note' value='' placeholder='备注' style='width: 260px;'/>" +
         "<input type='hidden' name='zdjy' value='pmph_material_name_"+num+",pmph_isbn_"+num+",pmph_publish_date_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('pmph_"+num+"')\"/></td>"+
@@ -626,7 +635,7 @@ function add_jcbx(){
     var num = fnt();
     var $table = $("#tab_qtjcbxqk");
     var $tr = $("<tr id='qtjcbxqk_"+num+"'>"+
-        "<td><input class='cg_input' maxlength='33' name='jcb_material_name' id='jcb_material_name_"+num+"' value='' style='width: 200px;' placeholder='教材名称'/></td>"+
+        "<td><input class='cg_input' maxlength='100' name='jcb_material_name' id='jcb_material_name_"+num+"' value='' style='width: 200px;' placeholder='教材名称'/></td>"+
         "<td><select id='jcb_rank_"+num+"' name='jcb_rank'>"+
         "<option value='0'>无</option>"+
         "<option value='1'>国家</option>"+
@@ -647,11 +656,10 @@ function add_jcbx(){
         "<td><input type='radio' name='jcb_is_digital_editor_"+num+"' value='0' checked='checked'/>否</td>"+
         "</tr></table>"+
         "<input type='hidden' name='jcb_is_digital_editor' value='jcb_is_digital_editor_"+num+"' /></td>"+
-        "<td><input class='cg_input' maxlength='30' name='jcb_publisher' id='jcb_publisher_"+num+"' value='' style='width: 100px;' placeholder='出版社'/></td>"+
+        "<td><input class='cg_input' maxlength='50' name='jcb_publisher' id='jcb_publisher_"+num+"' value='' style='width: 100px;' placeholder='出版社'/></td>"+
         "<td><input class='cg_input' placeholder='出版时间' id='jcb_publish_date_"+num+"' calendar format=\"'yyyy-mm-dd'\"  z-index='100' name='jcb_publish_date' value='' style='width: 100px;'/></td>"+
-        "<td><input class='cg_input' maxlength='50' name='jcb_isbn' id='jcb_isbn_"+num+"' value='' style='width: 100px;' placeholder='标准书号'/></td>"+
-        "<td><input class='cg_input' maxlength='50' name='jcb_note' value='' placeholder='备注' style='width:130px;'/>" +
-        "<input type='hidden' name='jcb_rank' value='0'/>" +
+        "<td><input class='cg_input' maxlength='50' name='jcb_isbn' id='jcb_isbn_"+num+"' value='' style='width: 100px;' placeholder='978-7-'/></td>"+
+        "<td><input class='cg_input' maxlength='100' name='jcb_note' value='' placeholder='备注' style='width:130px;'/>" +
         "<input type='hidden' name='zdjy' value='jcb_material_name_"+num+",jcb_publisher_"+num+",jcb_isbn_"+num+",jcb_publish_date_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('qtjcbxqk_"+num+"')\"/></td>"+
@@ -674,10 +682,10 @@ function add_zjky(){
     var num = fnt();
     var $table = $("#tab_zjky");
     var $tr = $("<tr id='zjky_"+num+"'>"+
-        "<td><input class='cg_input' maxlength='50' name='zjk_research_name' value='' id='zjk_research_name_"+num+"' style='width: 200px;' placeholder='课题名称'/></td>"+
-        "<td><input class='cg_input' maxlength='50' name='zjk_approval_unit' value='' id='zjk_approval_unit_"+num+"' style='width: 200px;' placeholder='审批单位'/></td>"+
-        "<td><input class='cg_input' maxlength='50' name='zjk_award' value='' id='zjk_award_"+num+"' style='width: 300px;' placeholder='获奖情况'/></td>"+
-        "<td><input class='cg_input' maxlength='50' name='zjk_note' value='' style='width: 300px;' placeholder='备注'/>" +
+        "<td><input class='cg_input' maxlength='150' name='zjk_research_name' value='' id='zjk_research_name_"+num+"' style='width: 200px;' placeholder='课题名称'/></td>"+
+        "<td><input class='cg_input' maxlength='100' name='zjk_approval_unit' value='' id='zjk_approval_unit_"+num+"' style='width: 200px;' placeholder='审批单位'/></td>"+
+        "<td><input class='cg_input' maxlength='100' name='zjk_award' value='' id='zjk_award_"+num+"' style='width: 300px;' placeholder='获奖情况'/></td>"+
+        "<td><input class='cg_input' maxlength='100' name='zjk_note' value='' style='width: 300px;' placeholder='备注'/>" +
         "<input type='hidden' name='zdjy' value='zjk_research_name_"+num+",zjk_approval_unit_"+num+",zjk_award_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('zjky_"+num+"')\"/></td>"+
@@ -699,8 +707,8 @@ function add_zbxszz(){
         "<input type='hidden' name='is_self_paid' value='is_self_paid_"+num+"' /></td>"+
         "<td><input class='cg_input' maxlength='50' name='zb_publisher' value='' id='zb_publisher_"+num+"' style='width: 180px;' placeholder='出版单位'  maxlength='16'/></td>"+
         "<td><input class='cg_input' maxlength='50' name='zb_publish_date' value='' id='zb_publish_date_"+num+"' style='width: 120px;' calendar format=\"'yyyy-mm-dd'\" placeholder='出版时间'/></td>"+
-        "<td><input class='cg_input' maxlength='50' name='zb_note' value='' style='width: 200px;' placeholder='备注'  maxlength='33'/>" +
-        "<input type='hidden' name='zdjy' value='zb_monograph_name_"+num+",zb_publisher_"+num+",zb_publish_date_"+num+"' />" +
+        "<td><input class='cg_input' maxlength='100' name='zb_note' value='' style='width: 200px;' placeholder='备注'  maxlength='33'/>" +
+        "<input type='hidden' name='zdjy' value='zb_monograph_name_"+num+",zb_monograph_date_"+num+",zb_publisher_"+num+",zb_publish_date_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('zbxszz_"+num+"')\"/></td>"+
         "</tr>");
@@ -716,7 +724,7 @@ function add_publish(){
         "<td><input class='cg_input' maxlength='50' name='pu_award_unit' id='pu_award_unit_"+num+"' value='' style='width: 300px;' placeholder='评奖单位' maxlength='16'/></td>"+
         "<td><input class='cg_input' maxlength='50' name='pu_reward_date' id='pu_reward_date_"+num+"' value='' style='width: 120px;' calendar format=\"'yyyy-mm-dd'\"  placeholder='获奖时间'/>"+
         "</td>"+
-        "<td><input class='cg_input' maxlength='50' name='pu_note' value='' style='width: 250px;' placeholder='备注' maxlength='33'/>" +
+        "<td><input class='cg_input' maxlength='100' name='pu_note' value='' style='width: 250px;' placeholder='备注' maxlength='33'/>" +
         "<input type='hidden' name='zdjy' value='pu_reward_name_"+num+",pu_award_unit_"+num+",pu_reward_date_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('publish_"+num+"')\"/></td>"+
@@ -730,10 +738,10 @@ function add_sci(){
     var $table = $("#tab_sci");
     var $tr = $("<tr id='sci_"+num+"'>"+
         "<td><input class='cg_input' name='sci_paper_name' id='sci_paper_name_"+num+"' value='' style='width: 300px;' placeholder='论文名称' maxlength='100'/></td>"+
-        "<td><input class='cg_input' name='sci_journal_name' id='sci_journal_name_"+num+"' value='' style='width: 130px;' placeholder='期刊名称' maxlength='80'/></td>"+
-        "<td><input class='cg_input' name='sci_factor' id='sci_factor_"+num+"' value='' style='width: 170px;' placeholder='期刊SCI影响因子' maxlength='7'/></td>"+
+        "<td><input class='cg_input' name='sci_journal_name' id='sci_journal_name_"+num+"' value='' style='width: 130px;' placeholder='期刊名称' maxlength='50'/></td>"+
+        "<td><input class='cg_input' name='sci_factor' id='sci_factor_"+num+"' value='' style='width: 170px;' placeholder='期刊SCI影响因子' maxlength='20'/></td>"+
         "<td><input class='cg_input' name='sci_publish_date' id='sci_publish_date_"+num+"' value='' style='width: 110px;' calendar format=\"'yyyy-mm-dd'\" placeholder='发表时间'/></td>"+
-        "<td><input class='cg_input' name='sci_note' value='' style='width: 250px;' placeholder='备注' maxlength='33'/>" +
+        "<td><input class='cg_input' name='sci_note' value='' style='width: 250px;' placeholder='备注' maxlength='100'/>" +
         "<input type='hidden' name='zdjy' value='sci_paper_name_"+num+",sci_journal_name_"+num+",sci_factor_"+num+",sci_publish_date_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('sci_"+num+"')\"/></td>"+
@@ -747,7 +755,7 @@ function add_clinical(){
     var num = fnt();
     var $table = $("#tab_clinical");
     var $tr = $("<tr id='clinical_"+num+"'>"+
-        "<td><input class='cg_input' name='cl_reward_name' id='cl_reward_name_"+num+"' maxlength='16' value='' style='width: 300px;' placeholder='奖项名称'/></td>"+
+        "<td><input class='cg_input' name='cl_reward_name' id='cl_reward_name_"+num+"' maxlength='50' value='' style='width: 300px;' placeholder='奖项名称'/></td>"+
         "<td style='color: #333333;'>"+
         "<table class='radio_tb' style='width: 180px;'><tr>"+
         "<td><input type='radio' name='cl_award_unit_"+num+"' value='0' checked='checked'/>无</td>"+
@@ -756,7 +764,7 @@ function add_clinical(){
         "</tr></table>"+
         "<input type='hidden' name='cl_award_unit' value='cl_award_unit_"+num+"' /></td>"+
         "<td><input class='cg_input' name='cl_reward_date' id='cl_reward_date_"+num+"' value='' style='width: 180px;' calendar format=\"'yyyy-mm-dd'\" placeholder='获奖时间'/></td>"+
-        "<td><input class='cg_input' name='cl_note' value='' style='width: 330px;' placeholder='备注' maxlength='33'/>" +
+        "<td><input class='cg_input' name='cl_note' value='' style='width: 330px;' placeholder='备注' maxlength='100'/>" +
         "<input type='hidden' name='zdjy' value='cl_reward_name_"+num+",cl_reward_date_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('clinical_"+num+"')\"/></td>"+
@@ -769,18 +777,18 @@ function add_acade(){
     var num = fnt();
     var $table = $("#tab_acade");
     var $tr = $("<tr id='acade_"+num+"'>"+
-        "<td><input class='cg_input' name='ac_reward_name' id='ac_reward_name_"+num+"' maxlength='16' id='acade_reward_name' value='' style='width: 300px;' placeholder='荣誉名称'/></td>"+
+        "<td><input class='cg_input' name='ac_reward_name' id='ac_reward_name_"+num+"' maxlength='50' id='acade_reward_name' value='' style='width: 300px;' placeholder='荣誉名称'/></td>"+
         "<td style='color: #333333;'>"+
         "<table class='radio_tb' style='width:280px;'><tr>"+
         "<td><input type='radio' name='ac_award_unit_"+num+"' value='0' checked='checked'/>无</td>"+
         "<td><input type='radio' name='ac_award_unit_"+num+"' value='1'/>国际</td>"+
         "<td><input type='radio' name='ac_award_unit_"+num+"' value='2'/>国家</td>"+
         "<td><input type='radio' name='ac_award_unit_"+num+"' value='3'/>省部</td>"+
-        "<td><input type='radio' name='ac_award_unit_"+num+"' value='4' />市</td>"+
+        "<td><input type='radio' name='ac_award_unit_"+num+"' value='4' />市级</td>"+
         "</tr></table>"+
         "<input type='hidden' name='ac_award_unit' value='ac_award_unit_"+num+"' /></td>"+
         "<td><input class='cg_input' name='ac_reward_date' id='ac_reward_date_"+num+"' value='' style='width: 150px;' calendar format=\"'yyyy-mm-dd'\" placeholder='授予时间'/></td>"+
-        "<td><input class='cg_input' name='ac_note' value='' style='width: 280px;' placeholder='备注' maxlength='33'/>" +
+        "<td><input class='cg_input' name='ac_note' value='' style='width: 280px;' placeholder='备注' maxlength='100'/>" +
         "<input type='hidden' name='zdjy' value='ac_reward_date_"+num+",ac_reward_name_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('acade_"+num+"')\"/></td>"+
@@ -908,6 +916,16 @@ function checkNull(jsonStr){
                 b = false;
                 return false;
             }
+        }else if(/^pmph_isbn_?.*/.test(obj.id)){
+        	if (!check_pmph_isbn(obj.id)) {
+        		b = false;
+        		return false;
+			}
+        }else if(/^jcb_isbn_?.*/.test(obj.id)){
+        	if (!check_jcb_isbn(obj.id)) {
+        		b = false;
+        		return false;
+			}
         }else if(value == ""){
             layer.tips(obj.content, '#'+obj.id);
             $("#"+obj.id)[0].focus();  //聚焦2
@@ -917,6 +935,50 @@ function checkNull(jsonStr){
         }
     });
     return b;
+}
+
+
+/**
+ * 人卫社教材编写情况的标准书号，校验标准按照：978-7-117-*****-*的格式去校验，且默认加载出978-7-117-或者978-7-117-写定；
+ */
+function check_pmph_isbn(id){
+	var num = $("#"+id).val();
+	if(num != undefined){
+		if (is_pmph_textbook_required==1 && $.trim(num)=="") {
+			layer.tips("教材标准书号不能为空", '#'+id);
+	        $("#"+id)[0].focus();  //聚焦2
+	        b = false;
+	        window.message.warning("教材标准书号不能为空");
+	        return false;
+		}else if($.trim(num)!="" && !(/^978-7-117-(\d|[A-z])+$/.test(num))){
+	        layer.tips('教材标准书号格式：978-7-117-********* ,*代表数字或字母', "#"+id);
+	        $("#"+id)[0].focus();  //聚焦
+	        b = false;
+	        return false;
+	    }
+	}	
+	return true;
+}
+/**
+ * 其他社教材编写情况的标准书号，校验标准按照：978-7-*********的格式去校验，且默认加载出978-7-或者978-7-写定；
+ */
+function check_jcb_isbn(id){
+	var num = $("#"+id).val();
+	if(num != undefined){
+		if (is_textbook_required==1 && $.trim(num)=="") {
+			layer.tips("教材标准书号不能为空", '#'+id);
+	        $("#"+id)[0].focus();  //聚焦2
+	        b = false;
+	        window.message.warning("教材标准书号不能为空");
+	        return false;
+		}else if($.trim(num)!="" && !(/^978-7-(\d|[A-z])+$/.test(num))){
+	        layer.tips('教材标准书号格式：978-7-********* ,*代表数字或字母', "#"+id);
+	        $("#"+id)[0].focus();  //聚焦
+	        b = false;
+	        return false;
+	    }
+	}	
+	return true;
 }
 
 //机构选择
