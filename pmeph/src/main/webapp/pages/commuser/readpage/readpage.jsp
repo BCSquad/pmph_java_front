@@ -194,12 +194,12 @@
                          class="tsfl_1 ChangeFLDiv" ${status.index!='0'?'style="display: none;"':''}>
                         <c:forEach items="${type1.dataList}" var="type2">
                             <div class="part_1">
-                                <span>${type2.note}</span>
+                                <span>${type2.type_name}</span>
                             </div>
                             <div class="part_2">
                                 <c:forEach var="type3" items="${type2.dataList}">
                                     <a target="_blank"
-                                       href="<c:url value="/books/list.action?type=${type3.id}"/>">${type3.note}</a>
+                                       href="<c:url value="/books/list.action?type=${type3.id}"/>">${type3.type_name}</a>
                                 </c:forEach>
                             </div>
                         </c:forEach>
