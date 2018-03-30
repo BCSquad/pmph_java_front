@@ -40,7 +40,7 @@
 							<div>
 								<span id="tsxz_span1"></span>
 								<span class="tsxz_title">图书书稿情况</span>
-								<span class="tsxz_ts1"><img src="${ctx}/statics/image/btxx.png" /></span>
+								<%--<span class="tsxz_ts1"><img src="${ctx}/statics/image/btxx.png" /></span>--%>
 							</div>
 						</td>
 					</tr>
@@ -147,7 +147,7 @@
 							<div>
 								<span id="tsxz_span3"></span>
 								<span class="tsxz_title">选题情况</span>
-								<span class="tsxz_ts1"><img src="${ctx}/statics/image/btxx.png" /></span>
+								<%--<span class="tsxz_ts1"><img src="${ctx}/statics/image/btxx.png" /></span>--%>
 							</div>
 						</td>
 					</tr>
@@ -287,7 +287,7 @@
 			<div class="div_butt">
 				<div class="bt_tj" id="butj" onclick="javascript:buttAdd('1')">提交</div>
 				<div class="bt_tj" id="buzc" onclick="javascript:buttAdd('2')">暂存</div>
-				<div class="bt_tj" onclick="javascript:buttGive()">放弃</div>
+				<%--<div class="bt_tj" onclick="javascript:buttGive()">放弃</div>--%>
 			</div>
 
 		</div>

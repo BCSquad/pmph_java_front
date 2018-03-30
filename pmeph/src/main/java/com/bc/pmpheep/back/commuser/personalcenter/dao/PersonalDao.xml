@@ -213,7 +213,12 @@
 		dp.id AS notNullIfFirstManager,
 		dp.rank,
 		dp.chosen_position,
-		dp.textbook_id
+		dp.textbook_id,
+		(case 
+		when cc.id is null or cc.is_deleted =1
+		then 0 
+		else cc.id
+		end) as cms_id
 	FROM
 		material a 
 	LEFT JOIN declaration c ON a.id = c.material_id AND c.user_id = #{parameter.logUserId} <!-- 登录人自己的申报 -->
@@ -222,6 +227,7 @@
 	LEFT JOIN textbook tb ON tb.id = dp.textbook_id
 	LEFT JOIN declaration b ON a.id = b.material_id
 	AND b.online_progress != 0 
+	left join cms_content cc on cc.is_material_entry = 1 and cc.material_id =a.id 
 	WHERE
 		a.is_deleted = '0'
 	AND a.is_published = '1'
@@ -418,13 +424,19 @@
 		t.id,
 		t.bookname,
 		DATE_FORMAT(t.deadline,'%Y-%m-%d') as deadline,
+		(t.is_opts_handling = 1 and t.is_director_handling = 1 and t.is_editor_handling = 1 and t.is_accepted = 1)as is_handled,
 		t.source,
 		t.type,
 		DATE_FORMAT(t.gmt_create,'%Y-%m-%d') as gmt_create,
 		DATE_FORMAT(t.submit_time,'%Y-%m-%d') as submit_time,
-		t.auth_progress
+		t.auth_progress,
+		t.auth_feedback,
+		pu.realname as editor_realname,
+		pd.dp_name as editor_department
 		FROM
 		topic t
+		left join pmph_user pu on pu.id = t.editor_id 
+		left join pmph_department pd on pu.department_id = pd.id
 		<where>
 			t.user_id = #{parameter.logUserId}
 			<!-- <if test="parameter.isMine!=null and parameter.isMine!='' and parameter.logUserId 
@@ -433,11 +445,14 @@
 			<if test="parameter.bookname != null and parameter.bookname!= '' ">
 				AND t.bookname LIKE concat('%',#{parameter.bookname},'%')
 			</if>
-			<if
-				test="parameter.auth_progress != null and parameter.auth_progress != '' ">
+			<if test="parameter.auth_progress != null and parameter.auth_progress != '' ">
 				AND t.auth_progress = #{parameter.auth_progress}
 			</if>
+			<if test="parameter.is_handled != null and parameter.is_handled != '' ">
+				AND (t.is_opts_handling = 1 and t.is_director_handling = 1 and t.is_editor_handling = 1 and t.is_accepted = 1) = #{parameter.is_handled} 
+			</if>
 		</where>
+		group by t.id
 		limit ${start},${pageSize}
 
 	</select>
@@ -459,6 +474,9 @@
 			<if
 				test="parameter.auth_progress != null and parameter.auth_progress != '' ">
 				AND t.auth_progress = #{parameter.auth_progress}
+			</if>
+			<if test="parameter.is_handled != null and parameter.is_handled != '' ">
+				AND (t.is_opts_handling = 1 and t.is_director_handling = 1 and t.is_editor_handling = 1 and t.is_accepted = 1) = #{parameter.is_handled} 
 			</if>
 		</where>
 
@@ -1186,14 +1204,20 @@
 		d.material_id as material_id,
 		d.user_id,
 		m.material_name,
-		d.material_id,
 		DATE_FORMAT(d.gmt_create,'%Y年%m月%d日') AS create_time,
 		d.online_progress as online_progress,
-		d.return_cause as return_cause
+		d.return_cause as return_cause,
+		(case 
+		when o.id = 0
+		then '人民卫生出版社'
+		else o.org_name
+		end) as org_name
 		FROM
 		declaration d
-		inner join
+		inner join 
 		material m on d.material_id = m.id
+		left join 
+		org o on o.id = d.org_id
 		WHERE
 		d.id = #{declaration_id}
 	</select>
@@ -1346,8 +1370,15 @@ UNION
 		AND m.writer_id = #{parameter.logUserId}
 
 	)
-)t
-ORDER BY gmt_create DESC  limit ${start},${pageSize}
+)t WHERE
+	1=1
+	<if test="parameter.is_long ==1 ">
+		AND t.f_type=1
+	</if>
+	<if test="parameter.is_long ==0 ">
+		AND t.f_type=2
+	</if>
+ORDER BY t.gmt_create DESC  limit ${start},${pageSize}
 </select>
 
 	<!-- 查我的收藏总数 -->
@@ -1357,6 +1388,7 @@ ORDER BY gmt_create DESC  limit ${start},${pageSize}
 
 (
 	SELECT
+		1 as f_type,
 		b.id AS id,
 		b.bookname AS title,
 		b.author AS author,
@@ -1379,6 +1411,7 @@ ORDER BY gmt_create DESC  limit ${start},${pageSize}
 UNION
 	(
 		SELECT
+			2 as f_type,
 			c.id AS id,
 			c.title AS title,
 			w.realname AS author,
@@ -1398,6 +1431,13 @@ UNION
 		ORDER BY
 			m.gmt_create DESC
 	) ) t
+		WHERE 1=1
+		<if test="parameter.is_long ==1 ">
+			AND t.f_type=1
+		</if>
+		<if test="parameter.is_long ==0 ">
+			AND t.f_type=2
+		</if>
 	</select>
 
 	<!--查询用户是否对某一本书点赞  -->

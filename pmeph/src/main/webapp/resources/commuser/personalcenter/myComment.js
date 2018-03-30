@@ -22,7 +22,7 @@ $(function(){
 
 //评论展开收起样式
 $(function() {  
-    var slideHeight = 44; // px 定义折叠的最小高度  
+    var slideHeight = 42; // px 定义折叠的最小高度
     
     $('.container').each(function(){
     	var $c = $(this);

@@ -57,7 +57,7 @@
     background-color: #1898dd;
     margin-left: 20px;
     border-radius: 1px;
-    font-family: MicrosoftYaHei;
+
     color: #ffffff;
     font-size: 14px;
     border:none;
@@ -72,7 +72,7 @@
     
   	margin-right:10px;
     border-radius: 1px;
-    font-family: MicrosoftYaHei;
+
     color: #ffffff;
     font-size: 14px;
     border:none;
@@ -84,7 +84,7 @@
     background-color: #b0120e;
    margin-right:10px;
     border-radius: 1px;
-    font-family: MicrosoftYaHei;
+
     color: #ffffff;
     font-size: 14px;
     border:none;
@@ -108,7 +108,7 @@ table{
     width: 100%;
     border-spacing: 0px 0px;
     border-collapse: collapse;
-    table-layout: fixed;/*ÁÐ¿íÓÉ±í¸ñ¿í¶ÈºÍÁÐ¿í¶ÈÉè¶¨¡£*/  
+    table-layout: fixed;/*åˆ—å®½ç”±è¡¨æ ¼å®½åº¦å’Œåˆ—å®½åº¦è®¾å®šã€‚*/  
 }
 table thead tr{
     height: 46px;
@@ -117,14 +117,14 @@ table thead tr{
 }
 table thead td{
     text-align: center;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
    border: 3px solid #fff;
 }
 table tbody tr{
     height: 46px;
     line-height: 30px;
-    font-family: SimSun;
+
 }
 
 table tr:hover{background:#fff4e5;}
@@ -146,13 +146,13 @@ td{
 	white-space:pre-line;
 	overflow:hidden;
 	text-overflow:ellipsis;
-	width: 50%;
+	/* width: 50%; */
 }
 
 .font_name {
     width: auto;
     height: 12px;
-    font-family: SimSun;
+
     font-size: 12px;
     font-weight: normal;
     font-stretch: normal;

@@ -7,13 +7,14 @@
 <input type="hidden" class="queryCondition" id="bookname" value="$!{bookname}">
 <input type="hidden" class="queryCondition" id="is_staging" value="$!{is_staging}">
 <input type="hidden" class="queryCondition" id="pageinfo1" value="$!{pageinfo1}">
-
+<input type="hidden" class="queryCondition" id="is_handled" value="$!{is_handled}">
 
     <div class="jcsbssl">
         #*<span id="jcsbqb" onclick="listoction(this,'');" style="cursor:pointer">全部</span>
         <span id="jcsbwdsb" onclick="listoction(this,1);" style="cursor:pointer">我的申报</span>*#
         <button class="jcsbsbzt" id="sbzzjx" value="0" style="cursor:pointer"><span class="yzc"></span>已暂存</button>
         <button class="jcsbsbzt" id="sbyjs"  value="1" style="cursor:pointer" ><span class="ytj"></span>已提交</button>
+        <button class="jcsbsbzt" id="sbysl" value="ysl" style="cursor:pointer"><span class="ytg"></span>已受理</button>
         <button class="jcsbsbzt" id="sbzc"  value="3" style="cursor:pointer"><span class="ytg"></span>已通过</button>
         <button class="jcsbsbzt" id="sbytj" value="2" style="cursor:pointer"><span class="btg"></span>未通过</button>
         <button class="jcsbsbzt" id="allStatus" value="" style="cursor:pointer"><span class=""></span>全部状态</button>
@@ -25,7 +26,7 @@
        <ul class="scul">
        #foreach($c in $!{List_map})
        
-         <li class="leftlb">
+         <li class="leftlb" >
            <div class="leftlb_1">
                <table class="left_tab">
                		<tr>
@@ -79,15 +80,21 @@
                </table>
            </div>
            <div class="leftlb_2">
-           		#if($!{c.auth_progress}==0)
+           		#if($!{c.auth_progress}==3)
+           			<div><span class="ytg1"></span><span class="left_zt">已通过</span></div>
+           			<span class="handled_text" title="$!{c.auth_feedback}">审批意见：</br>$!{c.auth_feedback}</span>
+           		#elseif($!{c.auth_progress}==2)
+           			<div><span class="btg1"></span><span class="left_zt">未通过</span></div>
+           			<span class="handled_text" title="$!{c.auth_feedback}">退回原因：</br>$!{c.auth_feedback}</span>
+           		#elseif($!{c.is_handled}==1)
+           			<div><span class="btg1"></span><span class="left_zt">已受理</span></div>
+           			<span class="handled_text"><span>[$!{c.editor_department}]</span>[$!{c.editor_realname}]编辑</br>已受理。</span>
+           		#elseif($!{c.auth_progress}==0)
            			<div><span class="yzc1"></span><span class="left_zt">已暂存</span></div>
            		#elseif($!{c.auth_progress}==1)
            			<div><span class="ytj1"></span><span class="left_zt">已提交</span></div>
-           		#elseif($!{c.auth_progress}==2)
-           			<div><span class="btg1"></span><span class="left_zt">未通过/</span></div>
-           		#elseif($!{c.auth_progress}==3)
-           			<div><span class="ytg1"></span><span class="left_zt">已通过</span></div>
            		#end
+           		
            		#if($!{c.auth_progress}==1||$!{c.auth_progress}==2||$!{c.auth_progress}==3)
                		<a style="cursor: pointer;" onclick="viewTopic($!{c.id})"><div class="left_herf">进入查看</div></a>
                 #else

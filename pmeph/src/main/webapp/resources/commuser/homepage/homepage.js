@@ -1,4 +1,17 @@
 $(function() {
+    //渐入渐出
+    /*setTimeout(function(){
+        $(".btm-tips").animate({bottom: '20px', opacity: 1}, 280, 'linear', function () {
+            //驻留时间设为10s
+            var self = this;
+            var tempTimer = setTimeout(function () {
+                $(".btm-tips").animate({bottom: '-50px', opacity: 0}, 'fast', function () {
+                    self.remove();
+                });
+                clearTimeout(tempTimer);
+            }, 10000)
+        });
+    },2000);*/
 	$("#book_type").val(1);
 
 	$('.banner').scroll({
@@ -6,8 +19,8 @@ $(function() {
 		ctrlElem : $('#ctrl'), // 控制条父级(包括小圆点和左右箭头)
 		isLibs : true, // 是否创建底部小圆点(样式均可自定义调整),默认向lib添加单独类名，详情见调用后dom结构
 		isArrows : true, // 是否创建左右箭头(样式均可自定义调整)
-		autoPlay : $("auto_play").val(), // 是否自动播放
-		playTime : $("animation_interval").val(), // 自动播放间隔时间
+		autoPlay : $("#auto_play").val(), // 是否自动播放
+		playTime : $("#animation_interval").val(), // 自动播放间隔时间
 		playSpeed : 700, // 图片切换速度
 		effect : 'left' // 轮播的改变方式 top(向上) left(向左) fade(淡入淡出)
 	});
@@ -156,9 +169,11 @@ function tosurvey() {
 }
 
 // 跳转公告详情页面
-function todou(mid,material_id,id) {
-	// location.href = contextpath + 'community/tolist.action?id=' + mid;
-    location.href = contextpath +'cmsnotice/noticeMessageDetail.action?id='+mid+'&materialId='+material_id+'&csmId='+id+'&'+'&tag=FromCommunityList';
+// function todou(mid,material_id,id) {
+    // location.href = contextpath +'cmsnotice/noticeMessageDetail.action?id='+mid+'&materialId='+material_id+'&csmId='+id+'&'+'&tag=FromCommunityList';
+// }
+function todou(id) {
+location.href = contextpath + 'community/toCommunity.action?id=' + id;
 }
 
 //添加好友 按钮触发

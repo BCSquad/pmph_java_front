@@ -22,14 +22,16 @@
 			WHERE
 				s.id IN (
 					SELECT
-						st.survey_id
+					st.survey_id
 					FROM
 						survey_target st
+					join survey s on s.id = st.survey_id
 					JOIN writer_user wu ON wu.org_id = st.org_id
 					WHERE
 						wu.id = #{userId}
 				)
 			AND s.`status` = 1
+			AND s.`begin_date` &lt;= now()
 			AND s.is_deleted = 0
 			ORDER BY
 				s.begin_date DESC

@@ -44,7 +44,7 @@ String path = request.getContextPath();
         <div class="content-wrapper">
             <div class="material-body-wrapper">
                 <div id="status-tab-line">
-                    <button value="0" class="status-tab selected">全部</button>
+                    <button value="0" class="status-tab selected forXMirrorImg"><span class="forXMirrorImg">全部</span></button>
                     <button value="1" class="status-tab ">正在进行</button>
                     <button value="2" class="status-tab ">已结束</button>
                 </div>

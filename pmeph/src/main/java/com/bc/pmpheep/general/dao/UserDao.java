@@ -27,4 +27,10 @@ public interface UserDao {
 
     public int insertUserScore(Map<String, Object> info);
 
+    /**
+     * 获取到好友的信息
+     * @param id
+     * @return
+     */
+    Map<String,Object> getFriendInfo(@Param("FriendId") String id,@Param("userId") String userId);
 }

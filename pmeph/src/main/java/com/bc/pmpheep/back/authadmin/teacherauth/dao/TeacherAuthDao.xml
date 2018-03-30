@@ -62,7 +62,16 @@
 	
 	<update id="statusModify" parameterType="java.util.Map">
 		update writer_user_certification set progress = ${status} 
-		where id = #{id}
+		where id = #{id};
+		<if test='status =="3" '>
+			update writer_user 
+			set 
+			rank = (case rank when 0 then 1 else rank end) 
+			,is_teacher = 1 
+			where id= (select user_id from writer_user_certification where id=#{id}) 
+		</if>
+		
+		
 	</update>
 
 	<select id="getSchoolInfo" resultType="map">

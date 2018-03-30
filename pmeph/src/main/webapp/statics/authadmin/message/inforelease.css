@@ -75,7 +75,7 @@ table thead tr {
 }
 
 table thead td {
-    font-family: MicrosoftYaHei;
+
     color: #333333;
     font-size: 14px;
     border-right: 1px solid #fff;
@@ -84,9 +84,9 @@ table thead td {
 
 table tbody td {
 
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
-    color: #666666;
+    color: #333333;
     border: solid 1px #dedede;
     padding-left:20px;
 }
@@ -94,7 +94,7 @@ table tbody td {
 .table tbody tr {
     height: 46px;
     line-height: 30px;
-    font-family: SimSun;
+
 }
 
 table tbody tr:hover {
@@ -130,7 +130,6 @@ table tbody tr:nth-child(even) {
     width: 104px;
     height: 24px;
     background-color: #70bcc3;
-    font-family: MicrosoftYaHe;
     color: #ffffff;
     border: none;
     border-radius: 2px;
@@ -140,7 +139,6 @@ table tbody tr:nth-child(even) {
    	width: 74px;
     height: 24px;
     background-color: #70bcc3;
-    font-family: MicrosoftYaHe;
     color: #ffffff;
     border: none;
     border-radius: 2px;

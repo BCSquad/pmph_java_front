@@ -15,7 +15,6 @@
     margin-top: 28px;
     margin-left: auto;
     margin-right: auto;
-    font-family: MicrosoftYaHei;
     font-size: 14px;
 }
 .navigator a{
@@ -25,7 +24,6 @@
 .time{
     width: 100%;
     height: 14px;
-    font-family: MicrosoftYaHei;
     font-size: 14px;
     height: auto;
     color: #bdbdbd;
@@ -35,13 +33,11 @@
     padding: 0 auto;
 }
 #address{
-    color: #666666;
-    font-family: MicrosoftYaHei;
+    color: #333333;
     align: center;
 }
 .content{
 	width:100%;
-    font-family: MicrosoftYaHei;
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -62,7 +58,6 @@
     text-align: center;
 }
 .title{
-    font-family: MicrosoftYaHei;
     font-size: 24px;
     font-weight: normal;
     font-stretch: normal;
@@ -75,24 +70,22 @@
     padding-right: 100px;
     height: auto;
     width: 1000px;
-    font-family: MicrosoftYaHei;
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
     line-height: 30px;
     letter-spacing: 0px;
-    color: #666666;
+    color: #333333;
 
 
 }
 .title2{
     margin-top: 10px;
-    font-family: MicrosoftYaHei;
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
     letter-spacing: 0px;
-    color: #666666;
+    color: #333333;
     padding: 0 auto;
     width: 8%;
     height:auto;
@@ -101,12 +94,11 @@
 }
 .listContent{
     margin-top: 10px;
-    font-family: MicrosoftYaHei;
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
     letter-spacing: 0px;
-    color: #666666;
+    color: #333333;
     width: 88%;
     float: left;
     height: auto;
@@ -114,7 +106,6 @@
 a{
     text-decoration:none;
     color: #03717b;
-    font-family: MicrosoftYaHei;
 
 }
 
@@ -136,7 +127,6 @@ a{
     background-color: #70bcc3;
     border-radius: 2px;
     color: white;
-    font-family: MicrosoftYaHei;
     font-size: 14px;
     cursor: pointer;
 }
@@ -153,7 +143,6 @@ a{
 }
 
 .title{
-    font-family: MicrosoftYaHei;
     font-size: 24px;
     font-weight: normal;
     font-stretch: normal;
@@ -170,15 +159,15 @@ a{
 .con_css{
 	align:center;
 	margin-left: 100px;
-	margin-right: 80px; 
+	margin-right: 100px; 
 }
 
 .con_css p{
-	max-width: 881px;
+	max-width: 100%;
 	word-break: break-all;
 }
 
 .con_css p img{
-	max-width: 881px;
+	max-width: 100%;
 	
 }

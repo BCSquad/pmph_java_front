@@ -68,4 +68,13 @@ public class UserInfoServiceImpl implements UserInfoService {
     	userinfoDao.updatePassword(map);
     }
 
+
+	@Override
+	public Map<String, Object> queryValidate(String id) {
+		// TODO 学校管理员被退回
+		Map<String, Object> map=new HashMap<String, Object>();
+		 map=userinfoDao.queryValidate(id);
+		return map;
+	}
+
 }

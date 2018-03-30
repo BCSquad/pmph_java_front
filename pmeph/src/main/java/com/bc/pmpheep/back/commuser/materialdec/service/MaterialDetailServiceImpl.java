@@ -494,6 +494,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         }
         Map<String,Object> returnMap = new HashMap<String,Object>();
         returnMap.put("msg","OK");
+        returnMap.put("org_name", perList.get(0).get("dwmc"));
         returnMap.put("declaration_id",declaration_id);
         return returnMap;
     }
@@ -700,8 +701,10 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             intentionlMap.put("declaration_id", declaration_id);
             this.madd.updateIntention(intentionlMap);
         }
+        List<Map<String, Object>> perList = this.madd.queryPerson(perMap);
         Map<String,Object> returnMap = new HashMap<String,Object>();
         returnMap.put("msg","OK");
+        returnMap.put("org_name", perList.get(0).get("dwmc"));
         returnMap.put("declaration_id",declaration_id);
         return returnMap;
     }

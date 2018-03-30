@@ -101,7 +101,6 @@
 .span_bom_left{
     float: left;
     width: auto;
-    font-family: MicrosoftYaHei;
     color: #03717b;
     font-size: 16px;
     height: 16px;
@@ -146,7 +145,6 @@
 .left-bom-1{
     width: auto;
     height: 16px;
-    font-family: MicrosoftYaHei;
     font-size: 16px;
     color: #333333;
 }
@@ -176,7 +174,6 @@
     height: 30px;
     text-align: left;
     padding-left: 38px;
-    font-family: MicrosoftYaHei;
     font-size: 14px;
     color: #03717b;
     background-color: #f1f1f1;
@@ -202,9 +199,8 @@
     text-align: left;
     padding-left: 10px;
    padding-right: 10px;
-    font-family: MicrosoftYaHei;
     font-size: 14px;
-    color: #666666;
+    color: #333333;
     background-color: #f1f1f1;
 }
 
@@ -230,22 +226,21 @@
 .time{
     float: left;
     font-size: 12px;
-    font-family: MicrosoftYaHe;
     color: #999999;
 }
 
 .rightContent-bom{
-    height: 100px;
+    min-height: 100px;
     line-height: 100px;
     border-left: 4px solid #F2F2F2;
-    margin-left:9px;
+    margin-left:8px;
     padding-left:30px;
 }
 .rightContent-bom1{
-    height: 100px;
+    min-height: 100px;
     line-height: 100px;
     border-left: 4px solid white;
-    margin-left:9px;
+    margin-left:8px;
     padding-left:30px;
 }
 
@@ -257,14 +252,14 @@
 }
 
 .wzContent{
-    height: 50px;
+    /* height: 50px; */
     font-size: 14px;
     color: #777777;
-    line-height: 50px;
+    line-height: 28px;
     border-bottom: 1px dotted #999;
     width:560px;
     text-overflow:ellipsis; /*超出部分省略号显示*/
-    white-space:nowrap;/*强制不换行*/
+   /*  white-space:nowrap; *//*强制不换行*/
  	overflow: hidden;
     
 }

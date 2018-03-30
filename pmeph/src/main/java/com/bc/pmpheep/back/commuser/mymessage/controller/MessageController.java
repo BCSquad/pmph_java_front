@@ -2,10 +2,7 @@ package com.bc.pmpheep.back.commuser.mymessage.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -199,22 +196,8 @@ public class MessageController extends BaseController {
         List<Map<String, Object>> list = noticeMessageService.selectNoticeMessage(paraMap);
         for (int i = 0; i < list.size(); i++) {
             Map<String, Object> map1 = list.get(i);
-            //处理系统消息 消息内容
-			/*if(map1.get("msgType").toString().equals("1")||map1.get("msgType").toString().equals("0")){
-				//mongoDB查询通知内容
-				Message message = mssageService.get(map1.get("fId").toString());
-				if(null!=message){
-					String str=message.getContent();
-					String regEx_html="<[^>]+>"; //定义HTML标签的正则表达式 
-					Pattern p_html=Pattern.compile(regEx_html,Pattern.CASE_INSENSITIVE); 
-			        Matcher m_html=p_html.matcher(str); 
-			        str=m_html.replaceAll(""); //过滤html标签 
-					map1.put("tcontent",str);
-				}else{
-					map1.put("tcontent","内容空!");
-				}
-				
-			}*/
+            //取出内容，去掉图片后放置在tcontent中
+            delMsgContentToTcontent(map1,"(</?img[^>]*>)|(</br[^>]*>)");
 
             if (map1.get("msgType").toString().equals("4")) {
                 String endTimeStr = map1.get("deadline").toString();
@@ -251,6 +234,86 @@ public class MessageController extends BaseController {
         return mv;
     }
 
+    /**
+     * 取出map1中的fId，查monggdb内容，去掉内容中匹配regEx_to_replace的内容，存进map1，key为tcontent
+     * @param map1
+     * @param regEx_to_replace
+     */
+	private void delMsgContentToTcontent(Map<String, Object> map1,String regEx_to_replace) {
+		//处理消息 消息内容
+		//if(map1.get("msgType").toString().equals("1")||map1.get("msgType").toString().equals("0")){
+			//mongoDB查询通知内容
+			Message message = mssageService.get(map1.get("fId").toString());
+			if(null!=message){
+				String str=message.getContent();
+				//regEx_html="(</?img[^>]*>)|(</br[^>]*>)"; //定义HTML的img标签的正则表达式 
+				Pattern p_html=Pattern.compile(regEx_to_replace,Pattern.CASE_INSENSITIVE); 
+		        Matcher m_html=p_html.matcher(str); 
+		        str=m_html.replaceAll(""); //过滤标签 
+				map1.put("tcontent",str);
+			}else{
+				map1.put("tcontent","内容空!");
+			}
+		//}
+	}
+
+    //查询通知列表
+    @RequestMapping(value = "/messageIsRead")
+    @ResponseBody
+    public Map<String,Object> messageIsRead(HttpServletRequest request) throws ParseException {
+       Map<String,Object>  returnMap = new HashMap<String,Object>();
+        Map<String, Object> map = getUserInfo();
+        Long userId = new Long(String.valueOf(map.get("id")));
+        //Long userId = (long) 1609;
+        String condition = request.getParameter("condition");
+        String is_read = request.getParameter("is_read");
+        Map<String, Object> paraMap = new HashMap<String, Object>();
+        ModelAndView mv = new ModelAndView();
+
+        paraMap.put("condition", condition);
+        paraMap.put("userId", userId);
+        paraMap.put("is_read", is_read);
+        paraMap.put("startPara", 0);
+        List<Map<String, Object>> list = noticeMessageService.selectNoticeMessage(paraMap);
+        for (int i = 0; i < list.size(); i++) {
+            Map<String, Object> map1 = list.get(i);
+          //取出内容，去掉图片后放置在tcontent中
+            delMsgContentToTcontent(map1,"(</?img[^>]*>)|(</br[^>]*>)");
+
+            if (map1.get("msgType").toString().equals("4")) {
+                String endTimeStr = map1.get("deadline").toString();
+
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+                Date currentTime = new Date();
+
+
+                Date date = sdf.parse(endTimeStr);
+                if (currentTime.before(date)) {
+                    mv.addObject("notEnd", 1);
+                } else {
+                    mv.addObject("notEnd", 0);
+                }
+
+
+            }
+
+
+            map1.put("avatar", RouteUtil.userAvatar(MapUtils.getString(map1, "avatar")));
+
+        }
+        //不带分页的数据总量
+        int count = noticeMessageService.selectNoticeMessageTotalCount(paraMap);
+        count = count - list.size();
+        returnMap.put("count",count);
+        int listSize = list.size();
+        returnMap.put("listSize",listSize);
+        returnMap.put("list", list);
+        returnMap.put("condition",condition);
+        return returnMap;
+    }
+
     //查询更多通知列表
     @RequestMapping(value = "/loadMore")
     @ResponseBody
@@ -260,6 +323,7 @@ public class MessageController extends BaseController {
         //Long userId = (long) 1609;
         String condition = request.getParameter("condition");
         String para = request.getParameter("startPara");
+        String is_read = request.getParameter("is_read");
         int startPara = 0;
         Map<String, Object> paraMap = new HashMap<String, Object>();
         if (null != para && !para.equals("")) {
@@ -274,19 +338,13 @@ public class MessageController extends BaseController {
 
         paraMap.put("condition", condition);
         paraMap.put("userId", userId);
+        paraMap.put("is_read", is_read);
 
         List<Map<String, Object>> list = noticeMessageService.selectNoticeMessage(paraMap);
         for (int i = 0; i < list.size(); i++) {
             Map<String, Object> map1 = list.get(i);
-			/*if(map1.get("msgType").toString().equals("1")||map1.get("msgType").toString().equals("0")){
-				Content content = contentService.get(map1.get("fId").toString());
-				if(null!=content){
-					map1.put("title",content.getContent());
-				}else{
-					map1.put("title","内容空!");
-				}
-				
-			}*/
+          //取出内容，去掉图片后放置在tcontent中
+            delMsgContentToTcontent(map1,"(</?img[^>]*>)|(</br[^>]*>)");
 
             if (map1.get("msgType").toString().equals("4")) {
                 String endTimeStr = map1.get("deadline").toString();
@@ -364,7 +422,8 @@ public class MessageController extends BaseController {
     public ModelAndView toNoticeMessageDetail(HttpServletRequest request) {
         String materialId = request.getParameter("materialId");
         String cmsId = request.getParameter("cmsId");
-        //String flag=request.getParameter("flag");
+        String umid = request.getParameter("umid");
+        String tag=request.getParameter("tag");
         String notEnd = request.getParameter("notEnd");
         Map<String, Object> user = getUserInfo();
         //String is_material_entry=request.getParameter("is_material_entry");
@@ -375,12 +434,22 @@ public class MessageController extends BaseController {
         //标题、时间、邮寄地址、备注
         Map<String, Object> mapTitle = new HashMap<String, Object>();
         mapTitle = noticeMessageService.queryNoticeMessageDetail(paraMap);
-        mv.addObject("is_material_entry", mapTitle.get("is_material_entry"));
-        mv.addObject("firsttag", "个人中心");
-        mv.addObject("secondtag", "消息通知");
-        mv.addObject("firstpath", "personalhomepage/tohomepage.action");
-        mv.addObject("secondpath", "message/noticeMessageList.action");
-        mv.addObject("materialId", mapTitle.get("material_id"));
+        if(tag !=null && "homepage".equals(tag)){
+            mv.addObject("is_material_entry", mapTitle.get("is_material_entry"));
+            mv.addObject("firsttag", "首页>");
+            mv.addObject("secondtag", "");
+            mv.addObject("firstpath", "homepage/tohomepage.action");
+            mv.addObject("secondpath", "");
+            mv.addObject("materialId", mapTitle.get("material_id"));
+        }else{
+            mv.addObject("is_material_entry", mapTitle.get("is_material_entry"));
+            mv.addObject("firsttag", "个人中心>");
+            mv.addObject("secondtag", "消息通知>");
+            mv.addObject("firstpath", "personalhomepage/tohomepage.action");
+            mv.addObject("secondpath", "message/noticeMessageList.action");
+            mv.addObject("materialId", mapTitle.get("material_id"));
+        }
+
         if ("no".endsWith(mapTitle.get("ended").toString()) &&
                 "false".equals(mapTitle.get("is_all_textbook_published").toString()) &&
                 "false".equals(mapTitle.get("is_force_end").toString())) {
@@ -421,7 +490,7 @@ public class MessageController extends BaseController {
 
         //更新通知点击量
         noticeMessageService.updateNoticeClicks(cmsId);
-
+        noticeMessageService.updateTitleMessage(umid);
 
         //mv.addObject("message",message);
         //mv.addObject("flag",flag);

@@ -56,4 +56,9 @@
            update writer_profile set tag=#{tags},profile=#{note} where user_id=${id}
        </if>
     </update>
+
+    <!-- 学校管理员被退回 -->
+    <select id="queryValidate" parameterType="java.lang.String" resultType="java.util.Map">
+         SELECT * FROM  org_user o  WHERE  o.progress=2  and o.id=#{id}
+    </select>
 </mapper>

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -41,7 +42,8 @@ public class ReadController {
     //首页跳转
     @RequestMapping("/main")
     public ModelAndView toreadMain(HttpServletRequest request,
-                                   HttpServletResponse res) {
+                                   HttpServletResponse res
+                                   ) {
         ModelAndView mv = new ModelAndView("commuser/readpage/readpage");
         //热门书评
         List<Map<String, Object>> zdtjXxjyList = new ArrayList<Map<String, Object>>();
@@ -59,6 +61,11 @@ public class ReadController {
         Map<String, Object> adInfo = homeService.getPageAdInfo("读书首页轮播 ");
         mv.addObject("adInfo", adInfo);
 
+        
+        //图书分类树所展示的第一级分类下拉菜单中 所展示的第一级分类的id 用,隔开用
+        /*String firstTypeIds = "1,2";
+        List<Map<String, Object>> materialType = readService.queryMaterialType(firstTypeIds);*/
+        
         List<Map<String, Object>> materialType = readService.queryMaterialType();
 
         List<Map<String, Object>> gradeMaterialType = new ArrayList<Map<String, Object>>();

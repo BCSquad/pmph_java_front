@@ -20,13 +20,108 @@
 
     </select>
 
+	<!-- 将分类以层级包装成层层嵌套的List<Map<String, Object>> -->
+	<!-- <resultMap type="Map" id="CCMTMap">
+		<id property="id" column="id0"/>
+		<result property="path" column="path0"/>
+		<result property="type_name" column="type_name0"/>
+		<collection property="dataList" ofType="Map" javaType="ArrayList">
+			<id property="id" column="id1"/>
+			<result property="path" column="path1"/>
+			<result property="type_name" column="type_name1"/>
+			<collection property="dataList" ofType="Map" javaType="ArrayList">
+				<id property="id" column="id2"/>
+				<result property="path" column="path2"/>
+				<result property="type_name" column="type_name2"/>
+				<collection property="dataList" ofType="Map" javaType="ArrayList">
+					<id property="id" column="id3"/>
+					<result property="path" column="path3"/>
+					<result property="type_name" column="type_name3"/>
+				</collection>
+			</collection>
+		</collection>
+	</resultMap> -->
 
-    <select id="queryMaterialType" resultType="map">
-		<![CDATA[
+    <select id="queryMaterialType" resultType="Map"><!-- resultMap="CCMTMap"> -->
+
+		<!-- select 
+		t0.id as id0,t0.path as path0 ,t0.type_name as type_name0
+		,t1.id as id1,t1.path as path1 ,t1.type_name as type_name1
+		,t2.id as id2,t2.path as path2 ,t2.type_name as type_name2
+		,t3.id as id3,t3.path as path3 ,t3.type_name as type_name3
+
+		from
+		(
+		select * from 
+		material_type m 
+		inner join 
+		(
+		select concat(m.path,'-',m.id,'-') full_path from material_type m 
+		inner join book b on b.type = m.id and b.is_on_sale =1
+		group by m.id
+		)p
+		on p.full_path REGEXP concat('^.*-',m.id,'-.*')
+		where m.path = '0'
+		group by m.id
+		)t0 
+		
+		left join 
+		(
+		select * from material_type m 
+		inner join 
+		(
+		select concat(m.path,'-',m.id,'-') full_path from material_type m 
+		inner join book b on b.type = m.id and b.is_on_sale =1
+		group by m.id
+		)p
+		on p.full_path REGEXP concat('^.*-',m.id,'-.*')
+		where path REGEXP  '^0(-[^-]*){1}$'
+		group by m.id
+		)t1 
+		on t0.id = t1.parent_id
+		
+		left join
+		(
+		select * from material_type m 
+		inner join 
+		(
+		select concat(m.path,'-',m.id,'-') full_path from material_type m 
+		inner join book b on b.type = m.id and b.is_on_sale =1
+		group by m.id
+		)p
+		on p.full_path REGEXP concat('^.*-',m.id,'-.*')
+		where path REGEXP  '^0(-[^-]*){2}$'
+		group by m.id
+		)t2
+		on t1.id = t2.parent_id
+
+		left join 
+		(
+		select * from material_type m 
+		inner join 
+		(
+		select concat(m.path,'-',m.id,'-') full_path from material_type m 
+		inner join book b on b.type = m.id and b.is_on_sale =1
+		group by m.id
+		)p
+		on p.full_path REGEXP concat('^.*-',m.id,'-.*')
+		where path REGEXP  '^0(-[^-]*){3}$'
+		group by m.id
+		)t3
+		on t2.id = t3.parent_id
+		
+		
+
+		where t0.id in (${firstTypeIds})
+		group by t3.id
+		order by t0.sort, t1.sort , t2.sort , t3.sort  -->
+		
+
+		 <![CDATA[
 
 		select * from material_type where length(path) < 20 order by length(path),parent_id,length(note),sort
 
-        ]]>
+        ]]> 
 	</select>
 
     <!-- 根据某类下的新书推荐 -->

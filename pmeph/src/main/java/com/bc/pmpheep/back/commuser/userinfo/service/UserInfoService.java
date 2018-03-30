@@ -31,4 +31,11 @@ public interface UserInfoService {
      * @param orgUser
      */
     public void updatePassword(Map<String, Object> map);
+
+	/**
+	 *学校管理员被退回
+	 * @param id
+	 * @return
+	 */
+	Map<String, Object> queryValidate(String id);
 }

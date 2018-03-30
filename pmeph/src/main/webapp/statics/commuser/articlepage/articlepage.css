@@ -22,7 +22,7 @@
 }
 .focus-title .text3{
     font-size: 18px;
-    color: #666666;
+    color: #333333;
     margin-left: 20px
 }
 .focus-title a{
@@ -180,7 +180,7 @@
 .notes .title .name a{
     font-size: 14px;
     margin-left: 15px;
-    color: #999999;
+    color: #333333;
     text-decoration: none;
 }
 .notes .item {
@@ -233,7 +233,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow:ellipsis;
-    font-family: MicrosoftYaHei;
+    color:#333;
 }
 .notes .item .content-text{
     padding-left: 10px;
@@ -256,12 +256,12 @@
 }
 .notes .item .msg{
     float:left;
-    color:#666666
+    color:#333333
 }
 .notes .item .msg .name{
     margin-left: 14px;
     height: 30px;
-    color:#666666;
+    color:#333333;
 }
 
 .writer {
@@ -309,7 +309,7 @@
     line-height: 18px;
 }
 .writer .item .msg .name{
-    color: #666666;
+    color: #333333;
 }
 .writer .item .msg .text{
     overflow: hidden;

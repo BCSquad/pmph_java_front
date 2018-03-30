@@ -22,7 +22,7 @@ body {
 
 .top-lable1 {
     height: 12px;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     line-height: 45px;
@@ -32,7 +32,7 @@ body {
 
 .top-lable2 {
     height: 12px;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     font-weight: normal;
     line-height: 45px;
@@ -48,7 +48,7 @@ body {
 }
 
 .div-menu-child {
-    font-family: MicrosoftYaHei;
+
     font-size: 16px;
     font-weight: normal;
     line-height: 70px;
@@ -73,7 +73,7 @@ body {
 }
 
 .span-menu {
-    font-family: MicrosoftYaHei;
+
     font-size: 16px;
     font-weight: normal;
     height: 50px;
@@ -86,7 +86,7 @@ body {
 }
 
 .div-menu-main {
-    font-family: MicrosoftYaHei;
+
     font-size: 16px;
     font-weight: normal;
     height: 50px;
@@ -96,7 +96,7 @@ body {
     margin-left: 20px;
     cursor: pointer;
     float: left;
-    border-bottom: 1px solid #666666;
+    border-bottom: 1px solid #333333;
 }
 
 #span_1 {
@@ -119,7 +119,7 @@ table {
     width: 260px;
     height: 40px;
     background-color: #f1f1f1;
-    font-family: MicrosoftYaHei;
+
     margin: 10px 10px 10px;
     border: none;
     padding-left: 20px;
@@ -141,7 +141,7 @@ table {
     width: 650px;
     height: 40px;
     background-color: #f1f1f1;
-    font-family: MicrosoftYaHei;
+
     margin: 10px 10px 10px;
     border: none;
     padding-left: 20px;
@@ -154,7 +154,7 @@ table {
     width: 100px;
     height: 25px;
     background-color: #70bcc3;
-    font-family: MicrosoftYaHei;
+
     color: #ffffff;
     font-size: 14px;
     border-radius: 2px;
@@ -166,7 +166,7 @@ table {
     width: 75px;
     height: 25px;
     background-color: #70bcc3;
-    font-family: MicrosoftYaHei;
+
     color: #ffffff;
     font-size: 14px;
     border-radius: 2px;

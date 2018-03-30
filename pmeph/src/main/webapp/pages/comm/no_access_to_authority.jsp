@@ -1,9 +1,18 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="com.bc.pmpheep.back.util.Const" %>
+<%@ page import="org.apache.commons.collections.MapUtils" %>
+<%@ page import="org.springframework.context.ApplicationContext" %>
+<%@ page import="org.springframework.web.context.support.WebApplicationContextUtils" %>
+<%@ page import="com.bc.pmpheep.back.commuser.userinfo.service.UserInfoService" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.HashMap" %>
 <head>
 	<script>
         var contextpath='${pageContext.request.contextPath}/';
@@ -49,7 +58,6 @@
 .tipWords{
     width: 170px;
     height: 37px;
-    font-family: MicrosoftYaHei;
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -73,7 +81,6 @@
     padding: 0 10px;
     cursor: pointer;
     border: solid 1px #03717b;
-    font-family: MicrosoftYaHei;
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -90,7 +97,7 @@
     /*height: 27px;*/
     background-color: #03717b;
     /*border-radius: 4px;*/
-    /*font-family: MicrosoftYaHei;*/
+    /**/
     /*font-size: 14px;*/
     /*font-weight: normal;*/
     /*font-stretch: normal;*/
@@ -110,6 +117,20 @@
         }
     </style>
 <body>
+<%--<%--%>
+    <%--Map<String, Object> userInfo = null;--%>
+    <%--if ("2".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {--%>
+        <%--userInfo = (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_ORGUSER);--%>
+    <%--}--%>
+
+    <%--if (userInfo != null) {--%>
+        <%--ApplicationContext applicationContext =--%>
+                <%--WebApplicationContextUtils.getRequiredWebApplicationContext(request.getSession().getServletContext());--%>
+        <%--UserInfoService userInfoService = applicationContext.getBean("com.bc.pmpheep.back.commuser.userinfo.service.UserInfoServiceImpl", UserInfoService.class);--%>
+        <%--Map<String, Object> map = userInfoService.queryValidate(MapUtils.getString(userInfo, "id"));--%>
+        <%--request.setAttribute("progress", map.get("progress"));--%>
+    <%--}--%>
+<%--%>--%>
 <jsp:include page="/pages/comm/headGreenBackGround.jsp">
     <jsp:param name="pageTitle" value="<%=request.getParameter(\"pageType\")  %>"></jsp:param>
 </jsp:include>
@@ -119,12 +140,13 @@
                         <img src="${ctx}/statics/pictures/sad.png">
                     </div>
                     <div class="tipWords">
-                        <span>您目前还不是机构管理员，快去认证吧</span>
+                        <span>${SESSION_USER_CONST_ORGUSER.progress==2?'抱歉,您提交的管理员认证资料已被退回,请您修改后重试':'您目前还不是机构管理员,快去认证吧'}</span>
                     </div>
                 </div>
                 <div class="downDiv">
                     <!-- <div class="leftButton" onclick="toogleTip('none')">知道了</div> -->
-                    <div class="checkButton" onclick="toAuthAudit(${ SESSION_USER_CONST_ORGUSER.id})">马上认证</div>
+                    <%--<div class="checkButton" onclick="toAuthAudit(${ SESSION_USER_CONST_ORGUSER.id})">${progress==2?'重新认证':'马上认证'}</div>--%>
+                    <div class="checkButton" onclick="toAuthAudit(${ SESSION_USER_CONST_ORGUSER.id})">${ SESSION_USER_CONST_ORGUSER.progress==2?'重新认证':'马上认证'}</div>
                 </div>
                 <!-- <div class="close" id="close" onclick="toogleTip('none')">
                     <span>×</span>
@@ -135,6 +157,5 @@
 function toAuthAudit(userId){
 	window.location.href="${ctx}/admininfocontroller/toadminattest.action?userId="+userId;
 }
-
 </script>
 </html>

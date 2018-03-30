@@ -219,12 +219,23 @@
                     </c:if>
 
                 </div>
-                <div class="left1" id="dpf">
-                    <div id="xsp3"></div>
-                    <input type="hidden" id="pdf-hidden" value="${map.pdf_code}">
-                    <a href="${map.pdf_url}" style="text-decoration: none" id="pdf_a"><span class="xsp2">PDF试读</span>
-                    </a>
-                </div>
+                <c:choose>
+                    <c:when test="${empty map.pdf_url}">
+                        <div class="left1" id="dpf" style="cursor:not-allowed;">
+                            <div id="xsp3"></div>
+                            <input type="hidden" id="pdf-hidden" value="${map.pdf_code}">
+                            <a href="${map.pdf_url}" style="text-decoration: none" id="pdf_a"><span class="xsp2">PDF试读</span></a>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="left1" id="dpf">
+                            <div id="xsp3"></div>
+                            <input type="hidden" id="pdf-hidden" value="${map.pdf_code}">
+                            <a href="${map.pdf_url}" style="text-decoration: none" id="pdf_a"><span class="xsp2">PDF试读</span></a>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+
                 <div class="left1" style="margin-right: 10px;">
                     <div id="xsp4"></div>
                     <a href="${map.buy_url}" style="text-decoration: none"><span class="xsp2">立即购买</span>
@@ -442,7 +453,7 @@
                                 <div class="longcom_title">"${list.title}"</div>
                                 <div id="${status.index }con" class="item_content"
                                      name="item_content">${list.content}</div>
-                                <span id="${status.index }more" style="cursor: pointer;color: #666666;display: none;"
+                                <span id="${status.index }more" style="cursor: pointer;color: #333333;display: none;"
                                       onclick="more('${status.index }con','${status.index }more')">...(展开)</span>
                                 <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
                                 <input type="hidden" id="long-hidden" value="2">
@@ -463,7 +474,7 @@
             <div class="right_1">
                 <div>
                     <span id="ptts"></span>
-                    <span style="font-family: MicrosoftYaHei;font-size: 16px;color: #000000;margin-left: 5px;"><B>配套图书</B></span>
+                    <span style="font-size: 16px;color: #000000;margin-left: 5px;"><B>配套图书</B></span>
                 </div>
                 <div style="margin-top: 20px;">
                     <div style="float: left;width: 90px;height: 116px">
