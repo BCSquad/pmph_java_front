@@ -199,7 +199,7 @@
                             <div class="part_2">
                                 <c:forEach var="type3" items="${type2.dataList}">
                                     <a target="_blank"
-                                       href="<c:url value="/books/list.action?type=${type3.id}"/>">${type3.type_name}</a>
+                                       href="<c:url value="/booksearch/toPage.action?type=${type3.id}"/>">${type3.type_name}</a>
                                 </c:forEach>
                             </div>
                         </c:forEach>
