@@ -3,7 +3,7 @@ a{
 }
 a:visited {color:gray;} 
 .content-body{
-    font-family: MicrosoftYaHei;
+
     width: 1200px;
     margin: 0 auto;
 }
@@ -90,7 +90,7 @@ a:visited {color:gray;}
     margin:0 10px;
 }
 .txt30{
-    color: #666666;
+    color: #333333;
     padding-left: 7px;
 }
 .item_link{
@@ -123,6 +123,7 @@ a:visited {color:gray;}
     line-height: 15px;
     position: relative;
     text-align: left;
+    margin-bottom: 5px;
 
 }
 .item_bc_top text{
@@ -143,7 +144,7 @@ a:visited {color:gray;}
 
  p text{
     font-size: 14px;
-     color: #666666;
+     color: #333333;
 }
 
  .color64{
@@ -155,13 +156,13 @@ a:visited {color:gray;}
  }
 .pContent{
 	width: 300px;
-	font-family: MicrosoftYaHei;
+
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
 	line-height: 24px;
 	letter-spacing: 0px;
-	color: #666666;
+	color: #333333;
 	text-overflow:ellipsis; 
     white-space:nowrap;
  	overflow: hidden
@@ -173,7 +174,7 @@ a:visited {color:gray;}
 .jzgd span{
 	width: 80px;
 	height: 17px;
-	font-family: MicrosoftYaHei;
+
 	font-size: 18px;
 	font-weight: normal;
 	font-stretch: normal;

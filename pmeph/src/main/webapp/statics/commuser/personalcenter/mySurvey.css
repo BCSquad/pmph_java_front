@@ -26,7 +26,6 @@
 }
 
 .email_right .a1 {
-    font-family: MicrosoftYaHei ;
     text-decoration: none;
     color: #333;
    	cursor: default;
@@ -34,7 +33,6 @@
 }
 
 .email_right .a2{
-	font-family: MicrosoftYaHei ;
 	color: #C0C0C0;
 	cursor:not-allowed;
 	text-decoration: none;
@@ -44,7 +42,7 @@
 }
 
 
-/* ------------------Ìø×ªµ½¶ÔÓ¦µÄÎÊ¾í--------------------------------- */
+/* ------------------ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½Ê¾ï¿½--------------------------------- */
  input[type=radio],input[type=checkbox]  {  
     display: inline-block;  
     vertical-align: middle;  

@@ -225,6 +225,7 @@ public class MaterialDetailController extends BaseController{
 //		perMap.put("is_dispensed", "1");
 //		perMap.put("is_utec", "1");
 //		perMap.put("degree", "2");
+		perMap.put("rank","2");
 		perMap.put("expertise", request.getParameter("expertise"));
 		perMap.put("gmt_create", date);
 		//获取图书选择参数

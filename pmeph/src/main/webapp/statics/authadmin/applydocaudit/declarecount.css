@@ -54,7 +54,7 @@
 .span-w{
     width: 121px;
     height: 30px;
-    font-family: SimSun;
+
     font-size: 14px;
     color: #ffffff;
     margin-left: 20px;
@@ -68,7 +68,7 @@
     float: left;
     width: auto;
     height: 30px;
-    font-family: SimSun;
+
     font-size: 14px;
     color: #626262;
     margin-top: 16px;
@@ -79,7 +79,7 @@
 .span-1-2 a{
 	 text-decoration:none; 
     height: 30px;
-    font-family: SimSun;
+
     font-size: 14px;
     color: #626262;
     margin-top: 16px;
@@ -103,7 +103,7 @@
 }
 .excel_left-1{
     width: 121px;
-    font-family: SimSun;
+
     font-size: 14px;
     color: #ffffff;
     margin-left: 13px;
@@ -131,7 +131,7 @@
     float: left;
    /* width: 54px;*/
     height: 30px;
-    font-family: SimSun;
+
     font-size: 12px;
     color: #1c74c2;
     margin-right: 20px;
@@ -149,7 +149,7 @@
     float: left;
    /* width: 54px;*/
     height: 30px;
-    font-family: SimSun;
+
     font-size: 12px;
     color: #1c74c2;
     margin-top: 4px;
@@ -196,14 +196,14 @@ table thead tr{
 }
 table thead td{
     text-align: center;
-    font-family: MicrosoftYaHei;
+
     font-size: 14px;
     border: 3px solid #fff;
 }
 table tbody tr{
     height: 46px;
     line-height: 30px;
-    font-family: SimSun;
+
 }
 
 td{
@@ -249,7 +249,7 @@ table tbody tr:nth-child(even){
   border:0 none;
   font-size:16px;
   
-  display:none;/*Ä¬ÈÏ²»ÏÔÊ¾£¬ajaxµ÷ÓÃ³É¹¦ºó²Å¾ö¶¨ÏÔÊ¾Óë·ñ*/
+  display:none;/*Ä¬ï¿½Ï²ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ajaxï¿½ï¿½ï¿½Ã³É¹ï¿½ï¿½ï¿½Å¾ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½*/
 }
 
 

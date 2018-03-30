@@ -7,7 +7,7 @@
 }
 
 .span-menu {
-    font-family: MicrosoftYaHei;
+
     font-size: 16px;
     font-weight: normal;
     height: 50px;
@@ -42,7 +42,7 @@ table {
     height: 40px;
     line-height: 40px;
     background-color: #f1f1f1;
-    font-family: MicrosoftYaHei;
+
   /*  margin: 10px 10px 10px;*/
     border: 1px solid #f1f1f1;
     padding-left: 20px;
@@ -66,7 +66,7 @@ table {
     height: 40px;
     line-height: 40px;
     background-color: #f1f1f1;
-    font-family: MicrosoftYaHei;
+
     margin: 10px 10px 10px;
     border: none;
     padding-left: 20px;
@@ -79,7 +79,7 @@ table {
     width: 100px;
     height: 25px;
     background-color: #70bcc3;
-    font-family: MicrosoftYaHei;
+
     color: #ffffff;
     font-size: 14px;
     border-radius: 2px;
@@ -92,7 +92,7 @@ table {
     height: 25px;
     line-height: 25px;
     background-color: #70bcc3;
-    font-family: MicrosoftYaHei;
+
     color: #ffffff;
     font-size: 14px;
     border-radius: 2px;

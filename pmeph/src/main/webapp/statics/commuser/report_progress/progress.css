@@ -101,7 +101,6 @@
 .span_bom_left{
     float: left;
     width: auto;
-    font-family: MicrosoftYaHei;
     color: #03717b;
     font-size: 16px;
     height: 16px;
@@ -146,7 +145,6 @@
 .left-bom-1{
     width: auto;
     height: 16px;
-    font-family: MicrosoftYaHei;
     font-size: 16px;
     color: #333333;
 }
@@ -176,7 +174,6 @@
     height: 30px;
     text-align: left;
     padding-left: 38px;
-    font-family: MicrosoftYaHei;
     font-size: 14px;
     color: #03717b;
     background-color: #f1f1f1;
@@ -202,9 +199,8 @@
     text-align: left;
     padding-left: 10px;
    padding-right: 10px;
-    font-family: MicrosoftYaHei;
     font-size: 14px;
-    color: #666666;
+    color: #333333;
     background-color: #f1f1f1;
 }
 
@@ -230,7 +226,6 @@
 .time{
     float: left;
     font-size: 12px;
-    font-family: MicrosoftYaHe;
     color: #999999;
 }
 
