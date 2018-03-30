@@ -11,7 +11,7 @@
 .sbxq_item{
 	clear: none;
 	margin-top: 20px;
-	width: 1000px;
+	width: 1200px;
 }
 
 #tsxz_span1{
@@ -88,7 +88,6 @@
 /**tab1**/
 .tab_1{
 	width: 100%;
-	margin-top: 15px;
 }
 .tab_1 tr{
 	height: 53px;
@@ -107,10 +106,16 @@
 	text-align: left;
 }
 .tab_1 tr td span{
-	display: inline-block;
+	width: 100px;
 }
+/*td_span{
+	width: 100px;
+}*/
 .btbs{
 	color: red;
+}
+.btbs1{
+	color: white;
 }
 .tsxz_ts1{
 	margin-left: 5px;
@@ -148,14 +153,25 @@
 	border:1px solid #dedede; 
 	height: 35px;
 }
-/**�����**/
+/**常规输入框**/
 .cg_input{
 	clear:none;
-	width: 296px;
-	height: 30px;
+	width: 200px;
+	height: 26px;
 	line-height: 26px;
 	border: solid 1px #dedede;
 	padding-left: 10px;
+	border-radius: 2px;
+}
+/**加长输入框**/
+.jc_input{
+	clear:none;
+	width: 617px;
+	height: 26px;
+	line-height: 26px;
+	border: solid 1px #dedede;
+	padding-left: 10px;
+	border-radius: 2px;
 }
 .sb_input{
 	clear:none;
@@ -166,14 +182,14 @@
 	padding-left: 10px;
 }
 .tsjb{
-	width: 306px;
+	width: 250px;
 	height: 30px;
 	border: dashed 1px #dedede;
 	padding-top: 7px;
 }
 
 .tslb{
-	width: 100%;
+	width: 80%;
 	height: 30px;
 	border: dashed 1px #dedede;
 	padding-top: 7px;
@@ -185,7 +201,7 @@
 	width: 100%;
 }
 .text_cl{
-	width: 840px;
+	width: 900px;
 	height: 60px;
 	background-color: #e8f1fa;
 	border-radius: 3px;
@@ -201,7 +217,7 @@
 /**�ύ��ť**/
 .button{
 	height: 30px;
-	width: 1000px;
+	width: 1200px;
 	text-align: center;
 	margin-top: 40px;
 	
