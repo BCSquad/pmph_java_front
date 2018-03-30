@@ -6,7 +6,7 @@ jsonStr = "{\"id\":\"realname\",\"content\":\"姓名不能为空\"},{\"id\":\"bi
     "{\"id\":\"handphone\",\"content\":\"手机号码不能为空\"},{\"id\":\"zjlx\",\"content\":\"证件类型不能为空\"},{\"id\":\"idcard\",\"content\":\"证件号码不能为空\"},{\"id\":\"sbdw_name\",\"content\":\"申报单位不能为空\"},";
 
 var is_pmph_textbook_required;
-var is_textbook_used;
+var is_textbook_required;
 
 $(function () {
     var id = $("#material_id").val();
@@ -239,7 +239,7 @@ function chooseModel(data){
             jsonStr=jsonStr+"{\"id\":\"jcb_isbn\",\"content\":\"教材标准书号格式：978-7-********* ,*代表数字或字母\"},";
         }
     }
-    is_textbook_used = data.is_textbook_used;
+    is_textbook_required = data.is_textbook_required;
     //参加人卫慕课、数字教材编写情况
     if(data.is_mooc_digital_used == "1"){
         $("#digital").css("display","block");
@@ -950,7 +950,7 @@ function check_pmph_isbn(id){
 	        b = false;
 	        window.message.warning("教材标准书号不能为空");
 	        return false;
-		}else if($.trim(num)!="" && !(/^978-7-117-(\d|[A-z])*$/.test(num))){
+		}else if($.trim(num)!="" && !(/^978-7-117-(\d|[A-z])+$/.test(num))){
 	        layer.tips('教材标准书号格式：978-7-117-********* ,*代表数字或字母', "#"+id);
 	        $("#"+id)[0].focus();  //聚焦
 	        b = false;
@@ -965,13 +965,13 @@ function check_pmph_isbn(id){
 function check_jcb_isbn(id){
 	var num = $("#"+id).val();
 	if(num != undefined){
-		if (is_textbook_used==1 && $.trim(num)=="") {
+		if (is_textbook_required==1 && $.trim(num)=="") {
 			layer.tips("教材标准书号不能为空", '#'+id);
 	        $("#"+id)[0].focus();  //聚焦2
 	        b = false;
 	        window.message.warning("教材标准书号不能为空");
 	        return false;
-		}else if($.trim(num)!="" && !(/^978-7-(\d|[A-z])*$/.test(num))){
+		}else if($.trim(num)!="" && !(/^978-7-(\d|[A-z])+$/.test(num))){
 	        layer.tips('教材标准书号格式：978-7-********* ,*代表数字或字母', "#"+id);
 	        $("#"+id)[0].focus();  //聚焦
 	        b = false;
