@@ -79,4 +79,22 @@ public interface BookDeclareDao {
 	 */
 	public String getMaxTopicVn();
 
+	/**
+	 * 新增社外同类书情况
+	 */
+	public int insertSimilarBook(Map<String, Object> map);
+
+	/**
+	 * 删除社外同类书情况
+	 */
+	public int delSimilarBook(String id);
+
+	/**
+	 * 根据条件查询社外同类书情况
+	 *
+	 * @param map
+	 * @return
+	 */
+	public List<Map<String, Object>> querySimilarBook(Map<String, Object> map);
+
 }
