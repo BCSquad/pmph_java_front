@@ -160,7 +160,6 @@ function exportWord() {
     }
     $.ajax({
         type: 'get',
-        crossDomain: true,
         url: exportWordBaseUrl + '/front/word/declaration?selectedIds=' + selectedIds.join(","),
         dataType: 'text',
         success: function (json) {
@@ -172,7 +171,6 @@ function exportWord() {
                 var id = setInterval(function () {
                     $.ajax({
                         type: 'get',
-                        crossDomain: true,
                         url: exportWordBaseUrl + '/word/progress?id=' + wordId,
                         dataType: 'text',
                         success: function (data) {

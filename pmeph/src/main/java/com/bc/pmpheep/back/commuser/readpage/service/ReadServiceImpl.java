@@ -20,8 +20,8 @@ public class ReadServiceImpl implements ReadService {
 	}
 
 	@Override
-	public List<Map<String, Object>> queryMaterialType(String firstTypeId) {
-		return readDao.queryMaterialType(firstTypeId);
+	public List<Map<String, Object>> queryMaterialType() {
+		return readDao.queryMaterialType();
 	}
 
 	@Override

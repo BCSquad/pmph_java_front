@@ -11,6 +11,7 @@ $(function(){
 	var selId=$("#selected").val();
 	var mid=$("input[name='radio"+selId+"']:checked ").val();
 	getSort('',mid,selId,'sort');
+	
 	//切换分页每页数据数量时 刷新
 	$("#page-size-select").find("li").bind("click",function(){
 		$("#page-num-temp").val(1);
@@ -24,7 +25,13 @@ $(function(){
 			queryBtnClick();
 		  }
 	});
-
+	
+	var typeFromRedirectFullPath = $("#typeFromRedirectFullPath").val();
+	var selectedTypeChain = typeFromRedirectFullPath.split("-");
+	for ( var t in selectedTypeChain) {
+		
+		$("input.labelauty[type=radio][value="+selectedTypeChain[t]+"]").trigger("click");
+	}
 
 });
 
