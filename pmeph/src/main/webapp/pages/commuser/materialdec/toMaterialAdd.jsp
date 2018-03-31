@@ -27,7 +27,7 @@
 <div class="body">
 	<div class="content-wrapper">
 		<div class="sbxq_title">
-			<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a style="text-decoration: none;color: #999999;" href="${contextpath}/personalhomepage/tohomepage.action?pagetag=jcsb&pageNum=1&pageSize=10"> 教材申报 </a> > 填写申报表</span>
+			<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=jcsb&pageNum=1&pageSize=10"> 教材申报 </a> > 填写申报表</span>
 		</div>
 		<!-- 图书选择-->
 		<form id="objForm">
