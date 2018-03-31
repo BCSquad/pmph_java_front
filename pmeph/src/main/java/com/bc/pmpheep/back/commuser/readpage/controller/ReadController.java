@@ -60,12 +60,15 @@ public class ReadController {
 
         Map<String, Object> adInfo = homeService.getPageAdInfo("读书首页轮播 ");
         mv.addObject("adInfo", adInfo);
+
         
         //图书分类树所展示的第一级分类下拉菜单中 所展示的第一级分类的id 用,隔开用
-        String firstTypeIds = "1,2";
-        List<Map<String, Object>> materialType = readService.queryMaterialType(firstTypeIds);
+        /*String firstTypeIds = "1,2";
+        List<Map<String, Object>> materialType = readService.queryMaterialType(firstTypeIds);*/
+        
+        List<Map<String, Object>> materialType = readService.queryMaterialType();
 
-        /*List<Map<String, Object>> gradeMaterialType = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> gradeMaterialType = new ArrayList<Map<String, Object>>();
 
         //循环取出分类信息，按层次排列好
         for (Map<String, Object> type : materialType) {
@@ -86,7 +89,7 @@ public class ReadController {
                 }
                 gradeMaterialType.add(type);
             }
-        }*/
+        }
         List<Map<String, Object>> types = homeService.queryBookType(0);
         Collections.sort(types, new Comparator<Map<String, Object>>() {
             @Override
@@ -95,7 +98,7 @@ public class ReadController {
             }
         });
         mv.addObject("bookTypes", types);
-        mv.addObject("materialType", materialType);
+        mv.addObject("materialType", gradeMaterialType);
 
         return mv;
     }

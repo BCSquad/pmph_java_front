@@ -44,6 +44,7 @@ ul li {
     margin: 0;
     position: absolute;
 }
+
 .ctrl {
     position: absolute;
     width: 100%;
@@ -51,9 +52,9 @@ ul li {
     text-align: center;
 }
 
-.img-move{
-	width: 814px;
-	height: 400px;
+.img-move {
+    width: 814px;
+    height: 400px;
 }
 
 .ctrl .libs {
@@ -100,8 +101,6 @@ ul li {
 .ctrl .arrow:hover {
     opacity: 1;
 }
-
-
 
 /* .banner {
     width: 814px;
@@ -171,7 +170,6 @@ ul li {
     line-height: 34px;
 }
 
-
 .content {
     width: 100%;
     margin-top: 20px;
@@ -203,15 +201,15 @@ ul li {
     height: 25px;
     margin: auto;
     margin-top: 10px;
-    text-overflow:ellipsis; 
-	white-space:nowrap;
-	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .ir_02 span {
-	text-overflow:ellipsis; 
-	white-space:nowrap;
-	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     font-size: 14px;
     color: #333333;
     letter-spacing: 1px;
@@ -221,9 +219,9 @@ ul li {
     width: 138px;
     margin: auto;
     margin-top: 0px;
-	text-overflow:ellipsis; 
-	white-space:nowrap;
-	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .ir_03 span {
@@ -261,7 +259,6 @@ ul li {
     float: left;
     margin-top: 4px;
 }
-
 
 .tab-bar .type {
     color: #FC9C03;
@@ -313,8 +310,6 @@ ul li {
     float: left;
 }
 
-
-
 .block .title {
     height: 30px;
     line-height: 30px;
@@ -347,7 +342,7 @@ ul li {
 .block .item1 {
     float: left;
     width: 416px;
-   /* height: 170px;*/
+    /* height: 170px;*/
     margin: 25px 0;
     cursor: pointer;
 }
@@ -358,7 +353,7 @@ ul li {
     width: 120px;
 }
 
-.sp_01 img{
+.sp_01 img {
     height: 132px;
     max-width: 120px;
     display: block;
@@ -405,7 +400,6 @@ ul li {
     height: 66px;
     overflow: hidden;
 }
-
 
 .area4 {
     float: right;
@@ -475,29 +469,42 @@ ul li {
 .hot-list .item .name {
     text-align: center;
     color: #333333;
-    height:20px;
-    text-overflow:ellipsis; 
-	white-space:nowrap;
-	overflow: hidden;
+    height: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
-
 
 .ts_type {
     background-color: #dbe9ea;
-    height: 28px;
-    margin-right: 10px;
-    line-height: 28px;
-    padding: 0px 9px;
+    height: 40px;
+    line-height: 40px;
     float: left;
     display: inline-block;
     cursor: pointer;
-    border-radius: 2px;
     margin-bottom: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    position: relative;
 }
 
+.ts_type .arrow {
+    display: none;
+    height: 0;
+    width: 0;
+    position: absolute;
+    bottom: -8px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid #489399;
+}
 
 .ts_type1 {
     background-color: #489399;
+}
+
+.ts_type1 .arrow {
+    display: block;
 }
 
 .ts_type span {
@@ -509,7 +516,7 @@ ul li {
 }
 
 .part_1 {
-    margin-top: 20px;
+    padding-top: 20px;
     width: 100%;
 }
 
@@ -519,12 +526,15 @@ ul li {
     font-stretch: normal;
     line-height: 24px;
     letter-spacing: 1px;
+    color: #489299;
 }
 
 .part_2 {
     margin-top: 10px;
     width: 100%;
     word-wrap: break-word;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #E5E5E5;
 }
 
 .part_2 a {
@@ -533,19 +543,23 @@ ul li {
     font-stretch: normal;
     line-height: 24px;
     letter-spacing: 1px;
-    color: #489299;
-    margin-left: 10px;
+    color: #333333;
+    margin-right: 10px;
     display: inline-block;
     cursor: pointer;
-    text-decoration:none;
+    text-decoration: none;
 }
 
 .tsfl_1 {
     width: 350px;
+    box-sizing: border-box;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: #F7F7F7;
 }
 
-.rwtx1{
-	background-image: url(../../image/css_sprites.png);
+.rwtx1 {
+    background-image: url(../../image/css_sprites.png);
     background-position: -184px -176px;
     background-repeat: no-repeat;
     height: 15px;
@@ -555,8 +569,8 @@ ul li {
     margin-top: 12px;
 }
 
-.rwtx2{
-	background-image: url(../../image/css_sprites.png);
+.rwtx2 {
+    background-image: url(../../image/css_sprites.png);
     background-position: -184px -154px;
     background-repeat: no-repeat;
     height: 15px;
@@ -578,9 +592,11 @@ ul li {
     border-radius: 2px;
     margin-bottom: 10px;
 }
+
 .tscx_type1 {
     background-color: #489399;
 }
+
 .tscx_type span {
     color: #489399;
 }
@@ -589,7 +605,7 @@ ul li {
     color: white;
 }
 
-.re_1{
+.re_1 {
     width: 308px;
     height: 129px;
     border-radius: 3px;
@@ -597,7 +613,7 @@ ul li {
     margin-top: 21px;
 }
 
-.re_2{
+.re_2 {
     width: 308px;
     height: 129px;
     border-radius: 3px;
@@ -605,18 +621,18 @@ ul li {
     margin-top: 15px;
 }
 
-.re_3{
+.re_3 {
     margin-top: 17px;
     margin-left: 40px;
 }
 
-.re_4{
+.re_4 {
     float: left;
     font-size: 14px;
     color: #ffffff;
 }
 
-.re_5{
+.re_5 {
     float: left;
     font-size: 14px;
     letter-spacing: 0px;
@@ -633,11 +649,11 @@ ul li {
     cursor: pointer;
 }
 
-.re_6{
+.re_6 {
     font-size: 24px;
     color: #ffffff;
 }
 
-#ts_type_0{
-	float:right;
+#ts_type_0 {
+    float: right;
 }

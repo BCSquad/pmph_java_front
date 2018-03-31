@@ -85,10 +85,11 @@ body {
 
 .head .search-input {
     box-sizing: content-box;
-    width: 295px;
+    width: 270px;
     height: 34px;
     position: absolute;
     padding-left: 25px;
+    padding-right: 25px;
     left: 502px;
     top: 23px;
     border-radius: 17px;

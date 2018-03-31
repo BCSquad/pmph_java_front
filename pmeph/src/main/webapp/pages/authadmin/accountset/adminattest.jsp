@@ -172,7 +172,7 @@
                                         <input ${(admininfo.progress!=1)?"":"readonly='readonly'"}
                                                 style="width: 258px" class="txt required" type="text" id="realName"
                                                 value="${admininfo.realname}" data-valid="isNonEmpty||maxLength"
-                                                data-length data-error="真实姓名不能为空||姓名不能超过10个中文字符"/>
+                                                data-length data-error="真实姓名不能为空||姓名不能超过10个中文字符"  maxLength="20" />
                                     </div>
                                 </div>
                             </td><!--   value="${admininfo.realname} -->
@@ -191,7 +191,7 @@
                                         <input ${(admininfo.progress!=1)?"":"readonly='readonly'"}
                                                 style="width: 258px" class="txt required" type="text" id="email"
                                                 value="${admininfo.email}" data-valid="isNonEmpty||isEmail"
-                                                data-error="邮箱不能为空||请填写正确的邮箱格式"/>
+                                                data-error="邮箱不能为空||请填写正确的邮箱格式"  maxLength="40"/>
                                     </div>
                                 </div>
                             </td><!--   value="${admininfo.email} -->
@@ -210,7 +210,7 @@
                                         <input ${(admininfo.progress!=1)?'class="txt required"':'class="txt" readonly="readonly"'}
                                                 style="width: 258px" type="text" id="telephone"
                                                 value="${admininfo.telephone}" data-valid="isNonEmpty||isPhoneOrMobile"
-                                                data-error="联系电话不能为空||请填写正确的电话格式"/>
+                                                data-error="联系电话不能为空||请填写正确的电话格式"  maxLength="20"/>
                                                 <!--暂时不能校验座机：取消电话号码校验-->
                                     </div>
                                 </div>
@@ -286,7 +286,7 @@
                                         <input ${(admininfo.progress!=1)?"":"readonly='readonly'"}
                                                 style="width: 258px" class="txt required" type="text" id="position"
                                                 value="${admininfo.position}" data-valid="isNonEmpty"
-                                                data-error="职务不能为空"/>
+                                                data-error="职务不能为空"  maxLength="35" />
                                     </div>
                                 </div>
                             </td><!--   value="${admininfo.email} -->
@@ -340,7 +340,7 @@
                                         <input ${(admininfo.progress!=1)?"":"readonly='readonly'"}
                                                 style="width: 1050px" class="txt required" type="text" id="address"
                                                 value="${admininfo.address}" data-valid="isNonEmpty"
-                                                data-error="地址不能为空"/>
+                                                data-error="地址不能为空" maxLength="50" />
                                     </div>
                                 </div>
                             </td><!--   value="${admininfo.address} -->
@@ -354,7 +354,7 @@
                                         <input ${(admininfo.progress!=1)?"":"readonly='readonly'"}
                                                 style="width: 258px" class="txt required" type="text" id="postCode"
                                                 value="${admininfo.postcode}" data-valid="isNonEmpty||onlyInt"
-                                                data-error="邮编不能为空||请填写正确的邮编"/>
+                                                data-error="邮编不能为空||请填写正确的邮编" maxLength="25" />
                                     </div>
                                 </div>
                             </td><!--   value="${admininfo.email} -->
