@@ -52,7 +52,7 @@ function  load(tag){
         					       lastest+
      		   					'<div class="item1 cutmore">'+ 
      		   					/*	'<a href="'+contextpath+'cmsnotice/noticeMessageDetail.action?id='+n.mid+'&&materialId='+n.material_id+'&&csmId='+n.id+'&&'+'&&tag=FromCommunityList">'+n.title+'</a>'+ */
-                    			'<a href="'+contextpath+'community/toCommunity.action?id='+n.id+'">'+n.material_name+'</a>'+
+                    			'<a href="'+contextpath+'community/toCommunity.action?id='+n.id+'">'+(n.material_name!=null?n.material_name:n.title)+'</a>'+
      		   					'</div>'+
      		   					'<div class="item2 cutmore">'+
      		   					    '<p style="margin:0;padding:0;height:40px">'+

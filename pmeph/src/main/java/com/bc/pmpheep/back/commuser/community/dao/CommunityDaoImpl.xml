@@ -4,20 +4,39 @@
 <resultMap type="java.util.Map" id="baseMap"></resultMap>
      <!--查询公告列表  --> 
      <select id="queryNoticeList" parameterType="map" resultMap="baseMap">
-        <!--  select 
-            * 
-         from 
-            cms_content cc left join cms_category  ccg  on cc.category_id=ccg.id
-            left join material m on cc.material_id=m.id
-         where 
-            cc.category_id=3
+        select 
+		    t.*
+			,b.material_name
+			
+		        from cms_content t
+		        left join  material b on t.material_id =b.id 
+		        left join material_org u on b.id=u.material_id
+		        left join writer_user p on p.org_id=u.org_id
+		        where  t.category_id=3
+		        
+		        and t.is_published=1
+		        and t.material_id >0
+		        
+		        and t.auth_status=2
+		        and t.is_deleted=0 
+
+			and 
+			(b.id is null
+				or
+				b.is_public = 1
+				or
+		        ( p.id=  2
+			and b.is_public = 0))
+			group by t.id
+		        
             <if test="searchText !=null" >
-              and  cc.title like #{searchText}
+              where n.title like #{searchText}
             </if>
-         ORDER BY  cc.gmt_create  desc
-         limit #{startnum},#{size} -->
+	            
+			order by t.gmt_create desc 
+			limit #{startnum},#{size}
          
-          select n.* from 
+          <!-- select n.* from 
 		(select 
 		        t.*
 		        ,b.material_name
@@ -49,7 +68,7 @@
 		        <if test="searchText !=null" >
 	              where n.title like #{searchText}
 	            </if>
-			order by n.gmt_create desc limit #{startnum},#{size}
+			order by n.gmt_create desc limit #{startnum},#{size} -->
          
      </select>
      
