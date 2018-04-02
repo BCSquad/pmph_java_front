@@ -46,7 +46,7 @@ function getMessage(is_read,id1,id2){
                     str += "</td><td class='buttonDetail'>";
                     if (n.msgType == 0 && n.material_id != 0) {
                         /*str += "<div class='buttonAccept'><a href='" + contextpath + "message/noticeMessageDetail.action?materialId=" + n.material_id + "'>查看详情</a></div>";*/
-                        str += "<div class='buttonAccept'><a href='" + contextpath + "message/noticeMessageDetail.action?cmsId=" + n.cmsid + "&umid=" + n.id + "'>查看详情</a></div>";
+                        str += "<div class=\"buttonAccept\" ><a href=\"javascript:lookDetailInfo('" + n.id + "','" + n.cmsid + "','" + n.is_read + "')\">查看详情</a></div>";
                     }
                     if (n.msgType == 0 || n.msgType == 1) {
                         str += "<span class='deleteButton' onclick='deleteNotice(" + n.id + ")'><span style='font-size:18px;'>×</span> 删除</span>";
@@ -134,8 +134,8 @@ function loadMore() {
                 
                 str += "</td><td class='buttonDetail'>";
                 if (n.msgType == 0 && n.material_id != 0) {
-                    /*str += "<div class='buttonAccept'><a href='" + contextpath + "message/noticeMessageDetail.action?materialId=" + n.material_id + "'>查看详情</a></div>";*/
-                    str += "<div class='buttonAccept'><a href='" + contextpath + "message/noticeMessageDetail.action?cmsId=" + n.cmsid + "&umid=" + n.id + "'>查看详情</a></div>";
+                    /*str += "<div class='buttonAccept'><a href='javascript:lookDetailInfo('${message.id}','${message.cmsid}','${message.is_read}')'>查看详情</a></div>";*/
+                    str += "<div class=\"buttonAccept\" ><a href=\"javascript:lookDetailInfo('"+n.id+"','"+n.cmsid+"','"+n.is_read+"')\">查看详情</a></div>";
                 }
                 if (n.msgType == 0 || n.msgType == 1) {
                     str += "<span class='deleteButton' onclick='deleteNotice(" + n.id + ")'><span style='font-size:18px;'>×</span> 删除</span>";
@@ -240,7 +240,28 @@ Date.prototype.toLocaleString = function () {
  //window.location.href="${ctx}/message/deleteNoticeMessage.action?id="+id;
  }*/
 
+function lookDetailInfo(id,cmsid,is_read){
+    if(parseInt(is_read)==1){
+        location.href=contextpath+"message/noticeMessageDetail.action?cmsId="+cmsid+"&umid="+id;
+    }else{
+        $.ajax({
+            url:contextpath+"message/updateIsreaded.action?uid="+id,
+            type:'post',
+            dataType:'json',
+            async:false,
+            success:function(flag){
+                if(flag=='ok'){
+                    location.href=contextpath+"message/noticeMessageDetail.action?cmsId="+cmsid+"&umid="+id;
+                }else{
+                    window.message.error("出错了!");
+                }
+            }
+        })
 
+    }
+
+
+}
 //系统消息title标题弹窗
 
 function showup(id) {
