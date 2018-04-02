@@ -324,6 +324,7 @@ LIMIT 0,10
 			AND msg_type IN (0, 1)
 			AND u.is_deleted = 0
 			AND u.is_read = '0'
+			and u.is_withdraw = 0
 			UNION
 				SELECT
 					count(1) a,

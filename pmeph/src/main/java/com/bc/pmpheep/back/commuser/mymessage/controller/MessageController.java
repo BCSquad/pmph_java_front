@@ -489,6 +489,38 @@ public class MessageController extends BaseController {
         return mv;
     }
 
+    /**
+     * 点击详情 修改已读 未读
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/updateIsreaded")
+    @ResponseBody
+  public String updateIsreaded(HttpServletRequest request){
+      String uid = request.getParameter("uid");
+      Map<String, Object> paraMap = new HashMap<String, Object>();
+      paraMap.put("id", uid);
+      Map<String, Object> user = getUserInfo();
+      String user_const_type = (String) request.getSession().getAttribute(Const.SESSION_USER_CONST_TYPE);
+      user_const_type = String.valueOf((Integer.parseInt(user_const_type)+1));
+      Map<String, Object> map1 = noticeMessageService.queryTitleMessage(paraMap);
+      int count = 0;
+      String flag = "ok";
+      try {
+          //只有接收者读了，才标记为已读。（发送者也可以查看）
+          if (user_const_type.equals(map1.get("receiver_type").toString())&&user.get("id").equals(map1.get("receiver_id"))) {
+              count = allMessageServiceImpl.updateIsRead(uid);
+          }
+          String isread = "no";
+          if (count > 0) {
+              isread = "yes";
+          }
+      }catch (Exception e){
+          flag = "error";
+      }
+      return flag;
+
+  }
 
     //系统消息标题弹框回显
     @RequestMapping(value = "/queryTitleMessage")
