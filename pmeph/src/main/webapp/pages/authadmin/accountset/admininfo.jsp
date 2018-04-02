@@ -235,7 +235,7 @@
 									<div class="input-wrapper">
 										<input class="required" data-valid="isNonEmpty||isMobile"
 											data-error="手机不能为空||手机格式不正确" type="text" id="handphone"
-											value="${admininfo.handphone}" />
+											value="${admininfo.handphone}" maxLength="20"/>
 									</div>
 								</div>
 							</td>

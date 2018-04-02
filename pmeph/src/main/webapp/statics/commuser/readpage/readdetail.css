@@ -349,6 +349,9 @@
     color: #182d4c;
     cursor: pointer;
     margin-top: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .video-a {

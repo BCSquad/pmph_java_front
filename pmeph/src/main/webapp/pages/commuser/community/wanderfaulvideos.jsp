@@ -37,9 +37,19 @@ String contextpath=request.getContextPath();
    .video-a{width:230px;border:1px solid #CCCCCC;height:260px;margin-top:15px}
    .video-b{z-index:99;position:absolute;background-color: #000;height:184px;width:230px;opacity:0.5;}
    .video-c{width:230px;background-color: #EEEEEE;height:184px}
-   .video-d{width:210px;border-bottom:1px solid #EEEEEE;height:44px;margin:0px auto 0px;line-height: 44px;font-size: 16px;color:#333333}
+   .video-d{width:210px;
+	   border-bottom:1px solid #EEEEEE;
+	   height:44px;
+	   margin:0px auto 0px;
+	   line-height: 44px;
+	   font-size: 16px;
+	   color:#333333;
+	   overflow: hidden;
+	   white-space: nowrap;
+	   text-overflow: ellipsis;
+   }
    .video-e{height:30px;width:210px;margin:0px auto 0px;color:#999999;font-size: 14px}
-   .video-f{float:left;line-height: 30px};
+   .video-f{float:left;line-height: 30px}
    .video-g{float:right;line-height:30px;margin-left:5px}
    .video-h{float:right;width:20px;height:30px;
             background-image: url(${ctx}/statics/image/css_sprites.png);
@@ -167,6 +177,7 @@ $(function(){
             poster: $this.attr("poster")
 
         };
+
         var player = new ckplayer(videoObject);
     });
 	var pagetotal=parseInt($("#pagetotal").val());
@@ -195,6 +206,5 @@ $('select').selectlist({
 });
 	
 });
-
 </script>
 </html>

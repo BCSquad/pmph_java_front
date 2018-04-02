@@ -130,5 +130,16 @@
          where b.material_id=#{materialId} and is_auth=1
        
      </select>
+
+	<!--id查询视频播放量  -->
+	<select id="videoCount" parameterType="java.lang.String" resultType="java.util.Map">
+		select * from book_video bv   where  id=#{vid}
+	</select>
+
+	<!-- 根据ID增加播放量 -->
+	<update id="changeClicks" parameterType="java.util.Map">
+		update book_video set
+		clicks=clicks+1 where id=#{id}
+	</update>
      
 </mapper>
