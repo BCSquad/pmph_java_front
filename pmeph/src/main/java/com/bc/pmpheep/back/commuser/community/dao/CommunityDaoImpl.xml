@@ -20,6 +20,7 @@
           select n.* from 
 		(select 
 		        t.*
+		        ,b.material_name
 		        from cms_content t
 		        left join  material b on t.material_id =b.id 
 		        where  t.category_id=3 
@@ -32,6 +33,7 @@
 		 union
 		 select 
 		        t.*
+		        ,b.material_name
 		        from cms_content t
 		        left join  material b on t.material_id =b.id 
 		        left join material_org u on b.id=u.material_id
