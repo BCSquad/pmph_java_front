@@ -391,7 +391,7 @@
 							</td>
 							<td><input class="sb_input" style="width: 180px;" id="write_position"  name="write_position" placeholder="职务职称" value="" maxlength="36"/></td>
 							<td><input class="sb_input" style="width: 280px;" id="write_workplace" name="write_workplace" placeholder="工作单位" value="" maxlength="36"/>
-								<%--<input type="hidden" name="checkbzqk" value="write_realname,write_price,write_position,write_workplace"/>--%>
+								<input type="hidden" name="checkbzqk" value="write_realname,write_price,write_phone,write_position,write_workplace"/>
 							</td>
 							<td><div class="add_div"><img class="add_img" src="${ctx}/statics/image/del.png" onclick="del_tr('sbbz_1')"></div></td>
 						</tr>
@@ -436,6 +436,7 @@
 							<td><input class="sb_input" style="width: 80px;" id="similar_print_number" name="similar_print_number"  maxlength="20" value=""/></td>
 							<td><input class="sb_input" style="width: 80px;" id="similar_price" name="similar_price"  maxlength="20" value=""/></td>
 							<td><input class="sb_input" style="width: 130px;" id="similar_publish_date" name="similar_publish_date"  calendar format="'yyyy-mm-dd'" value=""/></td>
+							<input type="hidden" name="checkbzqk" value="similar_bookname,similar_edition,similar_author,similar_publisher,similar_print_number,similar_price,similar_publish_date"/>
 							<td><div class="add_div"><img class="add_img" src="${ctx}/statics/image/del.png" onclick="del_tr('sbbz_1')"></div></td>
 						</tr>
 						</tbody>
