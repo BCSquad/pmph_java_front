@@ -76,7 +76,7 @@
   </select>
 
     <!-- 查询最新五条信息快报 -->
-    <select id="queryNotice" resultMap="Mapresult">
+    <select id="queryNotice"  resultType="java.util.Map">
      select  * from cms_content  where  category_id='2' and auth_status='2' 
      and is_deleted='0' order by gmt_create desc limit 0,5
   </select>

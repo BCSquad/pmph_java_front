@@ -177,6 +177,7 @@ $(function(){
             poster: $this.attr("poster")
 
         };
+
         var player = new ckplayer(videoObject);
     });
 	var pagetotal=parseInt($("#pagetotal").val());
@@ -205,6 +206,5 @@ $('select').selectlist({
 });
 	
 });
-
 </script>
 </html>

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -170,6 +171,7 @@ public class CommunityController extends BaseController{
 		 if(total%size!=0){
 			 pagetotal=pagetotal+1;
 		 }
+
 		 map.put("materialId", req.getParameter("materialId"));
 		 map.put("videolist", videolist);
 		 map.put("pagenum", mpagenum);
@@ -177,5 +179,21 @@ public class CommunityController extends BaseController{
 		 map.put("pagetotal", pagetotal);
 		 map.put("total", total);
 		return new ModelAndView("commuser/community/wanderfaulvideos",map);
+	}
+
+	/**
+	 * 视频播放量
+	 *
+	 * @return
+	 */
+	@RequestMapping("/videoCount")
+	@ResponseBody
+	public Map<String, Object> videoCount(HttpServletRequest request) {
+		String vid = request.getParameter("vid");
+        Map<String,Object> map=new HashMap<String, Object>();
+        map.put("id",vid);
+        communityService.changeClicks(map);
+        Map<String, Object> videoCount = communityService.videoCount(vid);
+		return  videoCount;
 	}
 }

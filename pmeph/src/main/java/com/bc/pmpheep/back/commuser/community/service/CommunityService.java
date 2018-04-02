@@ -57,4 +57,15 @@ public interface CommunityService {
      * @return int
      */
     int queryVidoCount(Map<String,Object> map);
+
+    /**id查询视频播放量
+     * @param id
+     * @return
+     */
+    Map<String,Object> videoCount(String vid);
+
+    /**
+     * 根据ID编辑播放量
+     */
+    void changeClicks(Map<String,Object> map);
 }
