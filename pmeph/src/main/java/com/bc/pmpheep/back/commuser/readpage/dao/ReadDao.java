@@ -17,11 +17,6 @@ public interface ReadDao {
 	List<Map<String,Object>> queryZdtjReadList(Map<String,Object> map);
 
 	//获取图书分类信息
-	/**
-	 * 通过输入的第一级分类返回一个层层嵌套的教材分类list
-	 * @param firstTypeId 第一级分类的id
-	 * @return
-	 */
 	public List<Map<String,Object>> queryMaterialType(@Param("firstTypeIds")String firstTypeIds);
 
 	//新书推荐

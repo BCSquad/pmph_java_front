@@ -37,13 +37,13 @@
             <div class="banner">
                 <!--广告轮播区域-->
                 <div class="move" id="move">
-	                <ul>
+                    <ul>
                         <c:forEach var="ad" items="${adInfo.detailList}">
                             <li><img src="${ctx}/image/${ad.image}.action" class="img-move"/></li>
                         </c:forEach>
 
 
-	                </ul>
+                    </ul>
                 </div>
                 <div class="ctrl" id="ctrl"></div>
             </div>
@@ -53,14 +53,16 @@
                 <c:forEach var="ad3" items="${adInfo3.detailList}" varStatus="status">
                     <c:if test="${status.index==0}">
                         <div class="re_1">
-                            <a href="${adInfo3.url}"><img src="${ctx}/image/${ad3.image}.action" style="width: 310px;height: 130px;border-radius: 5px"></a>
+                            <a href="${adInfo3.url}"><img src="${ctx}/image/${ad3.image}.action"
+                                                          style="width: 310px;height: 130px;border-radius: 5px"></a>
                         </div>
                     </c:if>
                 </c:forEach>
                 <c:forEach var="ad3" items="${adInfo4.detailList}" varStatus="status">
                     <c:if test="${status.index==0}">
                         <div class="re_2">
-                            <a href="${adInfo4.url}"><img src="${ctx}/image/${ad3.image}.action" style="width: 310px;height: 130px;border-radius: 5px"></a>
+                            <a href="${adInfo4.url}"><img src="${ctx}/image/${ad3.image}.action"
+                                                          style="width: 310px;height: 130px;border-radius: 5px"></a>
                         </div>
                     </c:if>
                 </c:forEach>
@@ -76,6 +78,7 @@
             <div class="area3">
                 <div class="block">
                     <div class="tab-bar">
+                    	<div class="type_bar_float_right">
                         <c:forEach items="${bookTypes}" var="type" varStatus="status">
                             <%--<div class="tab ${status.index==0?'active':''}" id="${type.id}"
                                  onclick='chooseType("${type.id}")'>${type.type_name}</div>--%>
@@ -86,6 +89,7 @@
                                     ${type.type_name}
                             </div>
                         </c:forEach>
+                        </div>
                         <div class="remark">
                             <!--<img class="img_zdtj"/>-->
                             <span class="span_1"></span>
@@ -112,17 +116,18 @@
                          <div class="tab type" id="FYDiv_3" onclick="javaScript:ChangeFYDiv('3','JKFYDiv_',3)">
                              考试用书
                          </div>--%>
-                        <c:forEach items="${bookTypes}" var="type" varStatus="status">
-                            <%--<div class="tab ${status.index==0?'active':''}" id="${type.id}"
-                                 onclick='chooseType("${type.id}")'>${type.type_name}</div>--%>
-
-                            <div class="tab type ${status.index==bookTypes.size()-1?'active':''}"
-                                 typeid="${type.id}"
-                                 id="JKFYDiv_${type.id}" onclick="javaScript:ChangeFYDiv(${type.id})">
-                                    ${type.type_name}
-                            </div>
-                        </c:forEach>
-
+                         <div class="type_bar_float_right">
+	                        <c:forEach items="${bookTypes}" var="type" varStatus="status">
+	                            <%--<div class="tab ${status.index==0?'active':''}" id="${type.id}"
+	                                 onclick='chooseType("${type.id}")'>${type.type_name}</div>--%>
+	
+	                            <div class="tab type ${status.index==bookTypes.size()-1?'active':''}"
+	                                 typeid="${type.id}"
+	                                 id="JKFYDiv_${type.id}" onclick="javaScript:ChangeFYDiv(${type.id})">
+	                                    ${type.type_name}
+	                            </div>
+	                        </c:forEach>
+						</div>
                         <div class="remark">
                             <img class="span_1" src="${ctx}/statics/image/xstj.png"/>
                             <!--<span id="span_1"></span>-->
@@ -143,9 +148,10 @@
                         <c:forEach var="rmsp" items="${rmspList}">
                             <div class="item1" onclick="openUrl('${rmsp.id1}')">
                                 <div class="sp_01">
-                                	<%-- <img src="${rmsp.image_url}"/> --%>
-                                	<c:if test="${rmsp.image_url=='DEFAULT'}"><img src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg" ></c:if>
-                					<c:if test="${rmsp.image_url!='DEFAULT'}"><img src="${rmsp.image_url}"/></c:if>
+                                        <%-- <img src="${rmsp.image_url}"/> --%>
+                                    <c:if test="${rmsp.image_url=='DEFAULT'}"><img
+                                            src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"></c:if>
+                                    <c:if test="${rmsp.image_url!='DEFAULT'}"><img src="${rmsp.image_url}"/></c:if>
                                 </div>
                                 <div class="sp_02">
                                     <div class="sp_title">${rmsp.bookname}</div>
@@ -169,67 +175,55 @@
             </div>
             <!--描述：右侧区域-->
             <div class="area4">
-            	<!--描述：图书分类-->
+                <!--描述：图书分类-->
                 <div class="rg_content">
                     <span id="span_3" class="tsfl">图书分类</span>
-                    <%-- <select id="ts_type_0" name= "ts_type_0" style="float:right;">
-                    	<c:forEach items="${materialType}" var="type0">
-                    		<option value="${type0.id }">${type0.type_name }</option>
-                    	</c:forEach>
-                    </select> --%>
                     <hr style=" height:1px;border:none;border-top:1px solid #f0f0f0;">
                 </div>
-                 <div style="clear: both;height: 14px;">
-                 <c:forEach var="type1" items="${materialType}" varStatus="status">
+                <div style="width: 350px;background: #F7F7F7;">
+                    <c:forEach var="type1" items="${materialType}" varStatus="status">
                         <div class="ts_type ${status.index=='0'?'ts_type1':''}" id="FLDiv_${type1.id}"
-                             onclick="javaScript:ChangeFLDiv('${type1.id}','ChangeFLDiv_',3)">
-                            <span>${type1.type_name}</span></div>
+                             onclick="javaScript:ChangeFLDiv('${type1.id}','ChangeFLDiv_',3)"
+                             style="width: ${350/materialType.size()}px">
+                            <span>${type1.type_name}</span>
+                            <div class="arrow" style="left:${350/materialType.size()/2-5}px"></div>
+                        </div>
                     </c:forEach>
+                    <div style="clear: both;"></div>
                 </div>
-                <div style="clear: both;height: 14px;"></div>
+                <div style="clear: both;"></div>
                 <c:forEach items="${materialType}" var="type1" varStatus="status">
                     <div id="ChangeFLDiv_${type1.id}"
                          class="tsfl_1 ChangeFLDiv" ${status.index!='0'?'style="display: none;"':''}>
                         <c:forEach items="${type1.dataList}" var="type2">
                             <div class="part_1">
                                 <span>${type2.type_name}</span>
+                                
+	                                <c:if test="${type2.dataList.size()>0}">
+	                                
+		                                <div class="part_2">
+			                                <c:forEach var="type3" items="${type2.dataList}">
+			                                    <a target="_blank"
+			                                       href="<c:url value="/booksearch/toPage.action?type=${type3.id}"/>">${type3.type_name}</a>
+			                                	<c:if test="${type3.dataList.size()>0}">
+				                                	<%-- <div class="part_3">
+				                                		
+				                                		<c:forEach var="type4" items="${type3.dataList}">
+				                                			<a target="_blank"
+				                                       			href="<c:url value="/booksearch/toPage.action?type=${type4.id}"/>">${type4.type_name}</a>
+				                                		</c:forEach>
+				                                	</div> --%>
+			                                	</c:if>
+			                                </c:forEach>
+			                            </div>
+			                            
+		                            </c:if>
+	                            
                             </div>
-                            <div class="part_2">
-                                <c:forEach var="type3" items="${type2.dataList}">
-                                    <a target="_blank" href="<c:url value="/books/list.action?type=${type3.id}"/>">${type3.type_name}</a>
-                                </c:forEach>
-                            </div>
+                            
                         </c:forEach>
                     </div>
                 </c:forEach>
-                <%-- <c:forEach items="${materialType}" var="type0" varStatus="status">
-                    <div id="type0_div_${type0.id }" class="type0_div" ${status.index!='0'?'style="display: none;"':''}>
-                    	<div>
-		                    <c:forEach var="type1" items="${type0.dataList}" varStatus="status">
-		                        <div class="ts_type ${status.index=='0'?'ts_type1':''}" id="FLDiv_${type1.id}"
-		                             onclick="javaScript:ChangeFLDiv('${type1.id}','ChangeFLDiv_',3)">
-		                            <span>${type1.type_name}</span></div>
-		                    </c:forEach>
-		                </div>
-		                <div style="clear: both;height: 14px;"></div>
-		                <c:forEach items="${type0.dataList}" var="type1" varStatus="status">
-		                    <div id="ChangeFLDiv_${type1.id}"
-		                         class="tsfl_1 ChangeFLDiv" ${status.index!='0'?'style="display: none;"':''}>
-		                        <c:forEach items="${type1.dataList}" var="type2">
-		                            <div class="part_1">
-		                                <span>${type2.type_name}</span>
-		                            </div>
-		                            <div class="part_2">
-		                                <c:forEach var="type3" items="${type2.dataList}">
-		                                    <a target="_blank" href="<c:url value="/books/list.action?type=${type3.id}"/>">${type3.type_name}</a>
-		                                </c:forEach>
-		                            </div>
-		                        </c:forEach>
-		                    </div>
-		                </c:forEach>
-                    </div>
-                </c:forEach> --%>
-                
                 <!--描述：图书畅销-->
                 <div class="rg_content">
                     <span class="tsfl">图书畅销榜</span>
@@ -237,10 +231,11 @@
                 </div>
                 <div>
                     <c:forEach items="${bookTypes}" var="type" varStatus="status">
-                        <div class="tscx_type ${status.index==0?'tscx_type1':''}" id="CXDiv_${type.id}" typeid="${type.id}"
+                        <div class="tscx_type ${status.index==0?'tscx_type1':''}" id="CXDiv_${type.id}"
+                             typeid="${type.id}"
                              onclick="javaScript:ChangeCXDiv(${type.id})">
                             <span>${type.type_name}</span>
-                         </div>
+                        </div>
                     </c:forEach>
                 </div>
                 <div style="clear: both;height: 14px;"></div>
@@ -257,7 +252,7 @@
 </jsp:include>
 <script>
     var _hmt = _hmt || [];
-    (function() {
+    (function () {
         var hm = document.createElement("script");
         hm.src = "https://hm.baidu.com/hm.js?c8927680e561788c668c5e891dfe322c";
         var s = document.getElementsByTagName("script")[0];

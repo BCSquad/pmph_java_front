@@ -52,19 +52,29 @@ public class BookSearchController extends BaseController {
 	 * @throws UnsupportedEncodingException
 	 */
 	@RequestMapping("toPage")
-	public ModelAndView toPage(@RequestParam(value="search",defaultValue="")String search,HttpServletRequest request) throws UnsupportedEncodingException{
+	public ModelAndView toPage(@RequestParam(value="search",defaultValue="")String search
+								,@RequestParam(value="type",defaultValue="0")String type
+								,HttpServletRequest request) throws UnsupportedEncodingException{
 		ModelAndView mv = new ModelAndView();
 		/*String search = request.getParameter("search");*/
 		String real_search = request.getParameter("real_search");
 		//search = new String((search!=null?search:"").getBytes("iso8859-1"), "utf-8");
 		search = java.net.URLDecoder.decode(search.trim(),"UTF-8"); 
 		
+		long type_long = Long.parseLong(type);
+		Map<String, Object> mtMap = bookSearchService.querySortById(type_long);
+		String path = "";
+		if (mtMap!=null) {
+			path = mtMap.get("path").toString();
+		}
+		path = path + "-" + type_long;
 		real_search = new String((real_search!=null?real_search:"").getBytes("iso8859-1"), "utf-8");
 		Long id=0L;
 		List<Map<String,Object>> fistsort=bookSearchService.queryChildSort(id);
 		mv.addObject("fistsort",fistsort);
 		mv.addObject("search",search);
 		mv.addObject("real_search",search);
+		mv.addObject("typeFromRedirectFullPath",path);
 		mv.setViewName("commuser/booksearch/booksearch");
 		
 		return mv;

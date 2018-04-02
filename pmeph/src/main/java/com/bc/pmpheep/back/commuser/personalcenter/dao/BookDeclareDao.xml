@@ -4,58 +4,31 @@
 
 	<!-- 选题申报信息插入 -->
 	<insert id="insertTopic" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="table_trendst_id">
-		insert into
-		topic(user_id,bookname,reader,deadline,source,word_number,picture_number,subject,rank,type,is_staging,auth_progress,
-		bank_account_id,purchase,sponsorship,is_translation,original_bookname,original_author,nation,edition,vn,is_opts_handling,submit_time)
-		values(
-		#{user_id},#{bookname},#{reader},#{deadline},#{source},#{word_number},#{picture_number},#{subject},#{rank},#{type},#{is_staging},#{auth_progress},#{bank_account_id},
-		#{purchase},#{sponsorship},#{is_translation},#{original_bookname},#{original_author},#{nation},#{edition},#{vn},#{is_opts_handling},#{submit_time}
-		)
+		 insert into topic(user_id, bookname,reader, deadline, source, word_number, picture_number, subject, rank, type,reader_quantity,
+			purchase, campaign, sales_channel, lifecycle, sponsorship, print_advise, price_advise, print_number, cost, min_print_number,
+			benefit, is_revision, revision_bookname, revision_author, revision_publish_date, revision_print, revision_stock,
+			original_bookname, original_author, nation, edition,realname, sex, price, position, position_profession, degree, workplace,
+			phone, address, postcode, email,is_staging,auth_progress,vn,is_opts_handling,submit_time,bank_account_id)
+			values(#{user_id},#{bookname},#{reader},#{deadline},#{source},#{word_number},#{picture_number},#{subject},#{rank},#{type},#{reader_quantity},
+			#{purchase},#{campaign},#{sales_channel},#{lifecycle},#{sponsorship},#{print_advise},#{price_advise},#{print_number},#{cost},#{min_print_number},
+			#{benefit},#{is_revision},#{revision_bookname},#{revision_author},#{revision_publish_date},#{revision_print},#{revision_stock},
+			#{original_bookname},#{original_author},#{nation},#{edition},#{realname},#{sex},#{price},#{position},#{position_profession},#{degree},#{workplace},
+			#{phone},#{address},#{postcode},#{email},#{is_staging},#{auth_progress},#{vn},#{is_opts_handling},#{submit_time},#{bank_account_id}
+		  )
 	</insert>
 	<!-- 根据条件查询申报信息 -->
-	<select id="queryTopic" parameterType="java.util.Map"
-		resultType="java.util.Map">
-		select t1.id,
-		t1.user_id,
-		t1.bookname,
-		SUBSTR(t1.deadline,1,10) deadline,
-		t1.source,
-		t1.word_number,
-		t1.picture_number,
-		t1.subject,
-		t1.rank,
-		t1.type,
-		t1.bank_account_id,
-		t1.purchase,
-		t1.sponsorship,
-		t1.is_translation,
-		t1.original_bookname,
-		t1.original_author,
-		t1.nation,
-		t1.edition,
-		t1.auth_progress,
-		t1.auth_date,
-		t1.auth_feedback,
-		t1.is_opts_handling,
-		t1.opts_role_id,
-		t1.is_rejected_by_director,
-		t1.reason_director,
-		t1.is_director_handling,
-		t1.department_id,
-		t1.is_rejected_by_editor,
-		t1.reason_editor,
-		t1.is_editor_handling,
-		t1.editor_id,
-		t1.is_accepted,
-		t1.is_staging,
-		t1.is_deleted,
-		t1.note,
-		t1.gmt_create,
-		t1.gmt_update,
-		t1.reader,
-		t1.tn,
-		t1.vn,
-		t1.submit_time
+	<select id="queryTopic" parameterType="java.util.Map" resultType="java.util.Map">
+		select
+			t1.id,t1.user_id,t1.bookname,SUBSTR(t1.deadline,1,10) deadline,
+			t1.source,t1.word_number,t1.picture_number,t1.subject,t1.rank,t1.type,t1.phone,
+			t1.bank_account_id,t1.purchase,t1.sponsorship,t1.is_translation,t1.original_bookname,
+			t1.original_author,t1.nation,t1.edition,t1.auth_progress,t1.auth_date,t1.auth_feedback,
+			t1.is_opts_handling,t1.opts_role_id,t1.is_rejected_by_director,t1.reason_director,t1.is_director_handling,t1.department_id,
+			t1.is_rejected_by_editor,t1.reason_editor,t1.is_editor_handling,t1.editor_id,t1.is_accepted,t1.is_staging,t1.is_deleted,
+			t1.note,t1.gmt_create,t1.gmt_update,t1.reader,t1.tn,t1.vn,t1.submit_time,t1.reader_quantity,t1.campaign,t1.sales_channel,
+			t1.lifecycle,t1.print_advise,t1.price_advise,t1.print_number,t1.cost,t1.min_print_number,t1.benefit,
+			t1.is_revision,t1.revision_bookname,t1.revision_author,SUBSTR(t1.revision_publish_date,1,10) revision_publish_date,t1.revision_print,t1.revision_stock,
+			t1.realname,t1.sex,t1.price,t1.position,t1.position_profession,t1.degree,t1.workplace,t1.address,t1.postcode,t1.email
 		from topic t1 where 1= 1
 		<if test="vn != null and vn != ''">
 			and t1.vn = #{vn}
@@ -67,18 +40,24 @@
 	<!-- 申报信息修改 -->
 	<update id="updateTopic" parameterType="java.util.Map">
 		update topic set
-		bookname=#{bookname},deadline=#{deadline},source=#{source},word_number=#{word_number},reader=#{reader},
-		picture_number=#{picture_number},subject=#{subject},rank=#{rank},type=#{type},is_staging=#{is_staging},
-		auth_progress=#{auth_progress},bank_account_id=#{bank_account_id},purchase=#{purchase},sponsorship=#{sponsorship},
-		is_translation=#{is_translation},original_bookname=#{original_bookname},original_author=#{original_author},
-		nation=#{nation},edition=#{edition},is_opts_handling=#{is_opts_handling},submit_time=#{submit_time}
+		bookname=#{bookname},reader=#{reader},deadline=#{deadline},source=#{source},word_number=#{word_number},
+		picture_number=#{picture_number},subject=#{subject},rank=#{rank},type=#{type},
+		reader_quantity=#{reader_quantity},purchase=#{purchase},campaign=#{campaign},sales_channel=#{sales_channel},
+		lifecycle=#{lifecycle},sponsorship=#{sponsorship},print_advise=#{print_advise},price_advise=#{price_advise},
+		print_number=#{print_number},cost=#{cost},
+		min_print_number=#{min_print_number},benefit=#{benefit},is_revision=#{is_revision},revision_bookname=#{revision_bookname},
+		revision_author=#{revision_author},revision_publish_date=#{revision_publish_date},revision_print=#{revision_print},revision_stock=#{revision_stock},
+		original_bookname=#{original_bookname},original_author=#{original_author},nation=#{nation},edition=#{edition},
+		realname=#{realname},sex=#{sex},price=#{price},position=#{position},position_profession=#{position_profession},degree=#{degree},
+		workplace=#{workplace},phone=#{phone},address=#{address},postcode=#{postcode},email=#{email},is_staging=#{is_staging},
+		auth_progress=#{auth_progress},vn=#{vn},is_opts_handling=#{is_opts_handling},submit_time=#{submit_time}
 		where id = #{topic_id}
 	</update>
 	<!-- 选题申报-额外信息 -->
 	<insert id="insertTopicExtra" parameterType="java.util.Map">
 		insert into
-		topic_extra(topic_id,reason,price,score) values(#{topic_id},
-		#{reason},#{price},#{score})
+		topic_extra(topic_id,reason,achievement,score,ability)
+		values(#{topic_id},#{reason},#{achievement},#{score},#{ability})
 	</insert>
 	<!-- 根据条件查询选题申报-额外信息 -->
 	<select id="queryTopicExtra" parameterType="java.util.Map"
@@ -91,20 +70,18 @@
 	<!-- 额外信息修改 -->
 	<update id="updateTopicExtra" parameterType="java.util.Map">
 		update topic_extra
-		set reason=#{reason},price=#{price},score=#{score} where id =
-		#{extra_id}
+		set reason=#{reason},achievement=#{achievement},score=#{score},ability=#{ability} where id = #{extra_id}
 	</update>
 	<!-- 选题申报-编者情况 -->
 	<insert id="insertTopicWriter" parameterType="java.util.Map">
 		insert into
-		topic_writer(topic_id,realname,sex,price,position,workplace)
-		values(#{topic_id},
-		#{realname},#{sex},#{price},#{position},#{workplace})
+		topic_writer(topic_id,realname,sex,price,position,workplace,phone,degree)
+		values(#{topic_id},#{realname},#{sex},#{price},#{position},#{workplace},#{phone},#{degree})
 	</insert>
 	<!-- 根据条件查询选题申报-编者情况 -->
 	<select id="queryTopicWriter" parameterType="java.util.Map"
 		resultType="java.util.Map">
-		select id,topic_id,realname,sex*1 sex,price,position,workplace from
+		select id,topic_id,realname,sex*1 sex,price,position,workplace,phone,degree from
 		topic_writer t1 where 1= 1
 		<if test="topic_id != null and topic_id != ''">
 			and t1.topic_id = #{topic_id}
@@ -145,5 +122,28 @@
 	<!-- 查询版本号 -->
 	<select id="getMaxTopicVn" resultType="java.lang.String">
 		select MAX(vn) from topic
+	</select>
+
+	<!--社外同类书情况-->
+	<insert id="insertSimilarBook" parameterType="java.util.Map">
+		INSERT INTO topic_similar_book
+		(topic_id, bookname, edition, author, booksize, publisher, print_number, price, publish_date)
+ 		VALUES ( #{topic_id}, #{bookname}, #{edition}, #{author}, #{booksize}, #{publisher}, #{print_number}, #{price}, #{publish_date});
+	</insert>
+	<!--删除社外书籍-->
+	<delete id="delSimilarBook" parameterType="java.lang.String">
+		delete from topic_similar_book where topic_id = #{topic_id}
+	</delete>
+
+	<!-- 根据条件查询社外书籍 -->
+	<select id="querySimilarBook" parameterType="java.util.Map"
+			resultType="java.util.Map">
+		select
+		t1.id,t1.topic_id,t1.bookname,t1.edition,t1.author,t1.booksize,t1.publisher,t1.print_number,t1.price,SUBSTR(t1.publish_date,1,10) publish_date
+		from
+		topic_similar_book t1 where 1= 1
+		<if test="topic_id != null and topic_id != ''">
+			and t1.topic_id = #{topic_id}
+		</if>
 	</select>
 </mapper>

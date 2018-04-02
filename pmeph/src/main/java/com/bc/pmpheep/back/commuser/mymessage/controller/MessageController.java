@@ -423,7 +423,7 @@ public class MessageController extends BaseController {
         String materialId = request.getParameter("materialId");
         String cmsId = request.getParameter("cmsId");
         String umid = request.getParameter("umid");
-        //String flag=request.getParameter("flag");
+        String tag=request.getParameter("tag");
         String notEnd = request.getParameter("notEnd");
         Map<String, Object> user = getUserInfo();
         //String is_material_entry=request.getParameter("is_material_entry");
@@ -434,12 +434,22 @@ public class MessageController extends BaseController {
         //标题、时间、邮寄地址、备注
         Map<String, Object> mapTitle = new HashMap<String, Object>();
         mapTitle = noticeMessageService.queryNoticeMessageDetail(paraMap);
-        mv.addObject("is_material_entry", mapTitle.get("is_material_entry"));
-        mv.addObject("firsttag", "个人中心");
-        mv.addObject("secondtag", "消息通知");
-        mv.addObject("firstpath", "personalhomepage/tohomepage.action");
-        mv.addObject("secondpath", "message/noticeMessageList.action");
-        mv.addObject("materialId", mapTitle.get("material_id"));
+        if(tag !=null && "homepage".equals(tag)){
+            mv.addObject("is_material_entry", mapTitle.get("is_material_entry"));
+            mv.addObject("firsttag", "首页>");
+            mv.addObject("secondtag", "");
+            mv.addObject("firstpath", "homepage/tohomepage.action");
+            mv.addObject("secondpath", "");
+            mv.addObject("materialId", mapTitle.get("material_id"));
+        }else{
+            mv.addObject("is_material_entry", mapTitle.get("is_material_entry"));
+            mv.addObject("firsttag", "个人中心>");
+            mv.addObject("secondtag", "消息通知>");
+            mv.addObject("firstpath", "personalhomepage/tohomepage.action");
+            mv.addObject("secondpath", "message/noticeMessageList.action");
+            mv.addObject("materialId", mapTitle.get("material_id"));
+        }
+
         if ("no".endsWith(mapTitle.get("ended").toString()) &&
                 "false".equals(mapTitle.get("is_all_textbook_published").toString()) &&
                 "false".equals(mapTitle.get("is_force_end").toString())) {

@@ -159,5 +159,23 @@ public class CommunityServiceImpl implements CommunityService {
         return pics;
     }
 
+	/*
+	 * id查询视频播放量
+	 */
+	@Override
+	public Map<String, Object> videoCount(String vid) {
+		// TODO Auto-generated method stub
+		return communityDao.videoCount(vid);
+	}
+
+	/**
+	 * 根据ID改变播放量
+	 */
+	@Override
+	public void changeClicks(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		communityDao.changeClicks(map);
+	}
+
     
 }

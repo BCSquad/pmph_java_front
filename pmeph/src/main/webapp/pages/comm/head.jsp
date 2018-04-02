@@ -30,7 +30,7 @@
                    onclick="window.location='${ctx}/articlepage/toarticlepage.action'">文章</a>
             </div>
             <span class="delete"></span>
-            <input class="search-input" id="search-input" placeholder="图书/文章">
+            <input class="search-input" id="search-input" placeholder="图书/文章" maxlength="50">
 
             <img class="search-icon" src="${ctx}/statics/image/search.png" alt="">
 

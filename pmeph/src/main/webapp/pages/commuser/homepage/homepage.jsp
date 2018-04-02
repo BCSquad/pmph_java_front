@@ -136,7 +136,7 @@
                     <%-- <c:if test="${status.index!=0}"> --%>
                     <div class="content-left">
                         <p class="content-size"><a
-                                href="${ctx}/message/noticeMessageDetail.action?cmsId=${list.id }&&materialId=${list.material_id}&&notEnd=${list.notEnd}&&is_material_entry=${is_material_entry}"
+                                href="${ctx}/message/noticeMessageDetail.action?cmsId=${list.id }&&materialId=${list.material_id}&&notEnd=${list.notEnd}&&is_material_entry=${is_material_entry}&&tag=homepage"
                                 class="astyle">${list.title}</a></p>
                         <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date"
                                                                   pattern="yyyy-MM-dd"/></p>
@@ -201,10 +201,12 @@
             </div>
             <div class="area-4">
                 <div class="tab-bar">
-                     <c:forEach items="${bookTypes}" var="type" varStatus="status">
-                        <div class="tab ${status.index==0?'active':''}" id="${type.id}"
-                             onclick='chooseType("${type.id}")'>${type.type_name}</div>
-                    </c:forEach> 
+                	 <div class="type_bar_float_right">
+	                     <c:forEach items="${bookTypes}" var="type" varStatus="status">
+	                        <div class="tab ${status.index==0?'active':''}" id="${type.id}"
+	                             onclick='chooseType("${type.id}")'>${type.type_name}</div>
+	                    </c:forEach> 
+                    </div>
                     <!-- <div class="tab active" id="1" onclick='chooseType("1")'>学校教育</div>
                     <div class="tab" id="2" onclick='chooseType("2")'>毕业后教育</div>
                     <div class="tab" id="3" onclick='chooseType("3")'>继续教育</div>

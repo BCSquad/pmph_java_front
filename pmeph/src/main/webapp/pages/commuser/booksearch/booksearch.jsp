@@ -35,6 +35,7 @@ String contextpath=request.getContextPath();
 	<input type="hidden" id="search-name-temp" value="${real_search }">
 	<input type="hidden" id="page-num-temp" value="1">
     <input type="hidden" id="selected" value="" />
+    <input type="hidden" id="typeFromRedirectFullPath" value="${typeFromRedirectFullPath }" />
  
 	<jsp:include page="/pages/comm/head.jsp"></jsp:include> 
 
