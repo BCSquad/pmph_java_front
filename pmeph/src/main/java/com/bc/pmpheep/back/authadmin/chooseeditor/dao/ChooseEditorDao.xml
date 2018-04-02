@@ -98,7 +98,7 @@
 					and d.realname like concat("%",#{parameter.queryName},"%")
 				</if>
 				<if test="parameter.queryOrg != null and parameter.queryOrg != '' and parameter.queryOrg != 'all' ">
-					and o.id = ${parameter.queryOrg}
+					and d.org_id = ${parameter.queryOrg}
 				</if>
 			</where>
 			group by d.id <!-- 因为要统计暂存表里有没有数据来作为决定是否读暂存表的条件之一 必须group -->
@@ -156,7 +156,7 @@
 					and d.realname like concat("%",#{parameter.queryName},"%")
 				</if>
 				<if test="parameter.queryOrg != null and parameter.queryOrg != '' and parameter.queryOrg != 'all'  ">
-					and o.id = ${parameter.queryOrg}
+					and d.org_id = ${parameter.queryOrg}
 				</if>
 			</where>
 			group by d.id <!-- 因为要统计暂存表里有没有数据来作为决定是否读暂存表的条件之一 必须group -->
@@ -203,7 +203,7 @@
 					and d.realname like concat("%",#{parameter.queryName},"%")
 				</if>
 				<if test="parameter.queryOrg != null and parameter.queryOrg != '' and parameter.queryOrg != 'all'  ">
-					and o.id = ${parameter.queryOrg}
+					and d.org_id = ${parameter.queryOrg}
 				</if>
 			</where>
 	</select>
