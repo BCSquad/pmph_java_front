@@ -103,7 +103,7 @@ String contextpath=request.getContextPath();
 		             </div>
 		            <div  class="video-e" style="width:297px">
 		                 <span class="video-f" >${video.gmt_create }</span>
-		                 <span class="video-g" style="float:right;line-height:30px;margin-left:5px">${video.clicks }</span>
+		                 <span class="video-g" style="float:right;line-height:30px;margin-left:5px" id="c${video.id }">${video.clicks }</span>
 		                <span class="video-h"></span>
 		              </div>
 		          </div>
@@ -164,6 +164,7 @@ String contextpath=request.getContextPath();
    </div>          
             <jsp:include page="/pages/comm/tail.jsp"></jsp:include> 
 </body>
+
 <script type="text/javascript">
 $(function(){
 	$(".videou").each(function () {
@@ -177,7 +178,23 @@ $(function(){
             poster: $this.attr("poster")
 
         };
+
         var player = new ckplayer(videoObject);
+        player.addListener("play",function () {
+            var vid=$this.attr("id").substring(6);
+            $.ajax({
+                type:"post",
+                url:contextpath+'community/videoCount.action',
+                data:{vid:vid},
+                success:function(data){
+                    $("#c"+vid).text(data.clicks);
+                },
+                error:function(){
+                    alert('服务器错误');
+                }
+            });
+        });
+
     });
 	var pagetotal=parseInt($("#pagetotal").val());
 	var pagenum=parseInt($("#pagenum").val());
@@ -205,6 +222,5 @@ $('select').selectlist({
 });
 	
 });
-
 </script>
 </html>
