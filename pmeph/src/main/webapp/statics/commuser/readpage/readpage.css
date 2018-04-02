@@ -151,7 +151,7 @@ ul li {
     height: 20px;
     line-height: 20px;
     padding: 7px 12px;
-    float: right;
+    float: left;
     cursor: pointer;
 }
 
@@ -516,11 +516,13 @@ ul li {
 }
 
 .part_1 {
+	float:left;
     padding-top: 20px;
     width: 100%;
 }
 
 .part_1 span {
+	float:left;
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -530,14 +532,17 @@ ul li {
 }
 
 .part_2 {
+	margin: 0px 0px 0px 20px;
+    float: left;
     margin-top: 10px;
-    width: 100%;
+    width: 310px;
     word-wrap: break-word;
     padding-bottom: 10px;
     border-bottom: 1px solid #E5E5E5;
 }
 
 .part_2 a {
+	float: left;
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -550,12 +555,39 @@ ul li {
     text-decoration: none;
 }
 
+.part_3 {
+	float: left;
+    margin: 5px 0px 0px 20px;
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.part_3 a {
+	float: left;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 24px;
+    letter-spacing: 1px;
+    color: #333333;
+    margin-right: 10px;
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+}
+
 .tsfl_1 {
+	float: left;
     width: 350px;
     box-sizing: border-box;
     padding-left: 10px;
     padding-right: 10px;
     background: #F7F7F7;
+    margin-bottom: 20px;
+}
+
+.type_bar_float_right{
+	float:right;
 }
 
 .rwtx1 {
