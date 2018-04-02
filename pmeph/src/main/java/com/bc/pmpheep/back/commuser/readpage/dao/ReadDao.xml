@@ -21,7 +21,7 @@
     </select>
 
 	<!-- 将分类以层级包装成层层嵌套的List<Map<String, Object>> -->
-	<!-- <resultMap type="Map" id="CCMTMap">
+	<resultMap type="Map" id="CCMTMap">
 		<id property="id" column="id0"/>
 		<result property="path" column="path0"/>
 		<result property="type_name" column="type_name0"/>
@@ -40,11 +40,11 @@
 				</collection>
 			</collection>
 		</collection>
-	</resultMap> -->
+	</resultMap> 
 
-    <select id="queryMaterialType" resultType="Map"><!-- resultMap="CCMTMap"> -->
+    <select id="queryMaterialType" resultMap="CCMTMap"><!-- resultMap="CCMTMap"> -->
 
-		<!-- select 
+		select 
 		t0.id as id0,t0.path as path0 ,t0.type_name as type_name0
 		,t1.id as id1,t1.path as path1 ,t1.type_name as type_name1
 		,t2.id as id2,t2.path as path2 ,t2.type_name as type_name2
@@ -54,13 +54,13 @@
 		(
 		select * from 
 		material_type m 
-		inner join 
+		<!-- inner join 
 		(
 		select concat(m.path,'-',m.id,'-') full_path from material_type m 
 		inner join book b on b.type = m.id and b.is_on_sale =1
 		group by m.id
 		)p
-		on p.full_path REGEXP concat('^.*-',m.id,'-.*')
+		on p.full_path REGEXP concat('^.*-',m.id,'-.*') -->
 		where m.path = '0'
 		group by m.id
 		)t0 
@@ -112,16 +112,18 @@
 		
 		
 
+		<if test="firstTypeIds != null and firstTypeIds != '' ">
 		where t0.id in (${firstTypeIds})
+		</if>
 		group by t3.id
-		order by t0.sort, t1.sort , t2.sort , t3.sort  -->
+		order by t0.sort, t1.sort , t2.sort , t3.sort  
 		
 
-		 <![CDATA[
+		 <!-- <![CDATA[
 
 		select * from material_type where length(path) < 20 order by length(path),parent_id,length(note),sort
 
-        ]]> 
+        ]]>  -->
 	</select>
 
     <!-- 根据某类下的新书推荐 -->

@@ -243,7 +243,17 @@ LIMIT 0,10
   </select>
     <!-- 查询书籍分类-->
     <select id="queryBookType" parameterType="map" resultMap="Mapresult">
-       select * from material_type where  parent_id=#{parent_id} order by sort 
+       select m.* from material_type m
+       inner join 
+		(
+		select concat(m.path,'-',m.id,'-') full_path from material_type m 
+		inner join book b on b.type = m.id and b.is_on_sale =1
+		group by m.id
+		)p
+		on p.full_path REGEXP concat('^.*-',m.id,'-.*')
+       where  m.parent_id=#{parent_id} 
+       group by m.id
+       order by m.sort 
   </select>
 
 
