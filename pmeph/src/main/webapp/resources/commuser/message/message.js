@@ -288,6 +288,11 @@ function showup(id) {
         async: false,
         dataType: 'json',
         success: function (json) {
+            if(json.messageNum<=0){
+                if($(".sign"))$(".sign").hide();
+                $(".notice-icon").attr("src",contextpath+ "statics/image/message.png");
+            }
+
             $("#readno"+json.id).attr('src', contextpath + "statics/image/readyes.png");
             $("#messid").val(id);
             $("#titlec").html(json.title);
