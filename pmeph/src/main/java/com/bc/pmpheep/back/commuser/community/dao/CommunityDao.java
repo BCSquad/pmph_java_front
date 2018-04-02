@@ -56,4 +56,18 @@ public interface CommunityDao {
      * @return int
      */
     int queryVidoCount(Map<String,Object> map);
+    /**id查询视频播放量
+     * @param id
+     * @return
+     */
+    public Map<String,Object> videoCount(String vid);
+
+    /**
+     * 根据ID修改播放量
+     *
+     * @param id
+     * @param clicks
+     * @return
+     */
+    void changeClicks(Map<String,Object> map);
 }

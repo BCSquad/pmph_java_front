@@ -30,6 +30,7 @@
 			tb.is_locked,       <!-- 锁定，等于1后就不能再选择了 -->
 			m.is_digital_editor_optional,<!-- 是否可选数字编委 -->
 			m.is_force_end,     <!-- 教材是否强制结束 -->
+			m.is_all_textbook_published, <!-- 教材是完成发布而结束 -->
 			(case
 			when tb.is_published = 1 or m.is_force_end =1 or #{parameter.isFirstEditorLogIn} = 'false' <!-- 已公布 或 强制结束 或 非第一主编登录  -->
 			then      <!-- 显示发布表 -->
@@ -98,7 +99,7 @@
 					and d.realname like concat("%",#{parameter.queryName},"%")
 				</if>
 				<if test="parameter.queryOrg != null and parameter.queryOrg != '' and parameter.queryOrg != 'all' ">
-					and o.id = ${parameter.queryOrg}
+					and d.org_id = ${parameter.queryOrg}
 				</if>
 			</where>
 			group by d.id <!-- 因为要统计暂存表里有没有数据来作为决定是否读暂存表的条件之一 必须group -->
@@ -156,7 +157,7 @@
 					and d.realname like concat("%",#{parameter.queryName},"%")
 				</if>
 				<if test="parameter.queryOrg != null and parameter.queryOrg != '' and parameter.queryOrg != 'all'  ">
-					and o.id = ${parameter.queryOrg}
+					and d.org_id = ${parameter.queryOrg}
 				</if>
 			</where>
 			group by d.id <!-- 因为要统计暂存表里有没有数据来作为决定是否读暂存表的条件之一 必须group -->
@@ -203,7 +204,7 @@
 					and d.realname like concat("%",#{parameter.queryName},"%")
 				</if>
 				<if test="parameter.queryOrg != null and parameter.queryOrg != '' and parameter.queryOrg != 'all'  ">
-					and o.id = ${parameter.queryOrg}
+					and d.org_id = ${parameter.queryOrg}
 				</if>
 			</where>
 	</select>

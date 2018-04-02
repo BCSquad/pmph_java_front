@@ -62,11 +62,11 @@ public class ReadController {
         mv.addObject("adInfo", adInfo);
 
         
-        //图书分类树所展示的第一级分类下拉菜单中 所展示的第一级分类的id 用,隔开用
-        /*String firstTypeIds = "1,2";
-        List<Map<String, Object>> materialType = readService.queryMaterialType(firstTypeIds);*/
+        //图书分类树所展示的第一级分类下拉菜单中 所展示的第一级分类的id 用,隔开用 
+        String firstTypeIds = "";//"1,2";
+        List<Map<String, Object>> materialType = readService.queryMaterialType(firstTypeIds);
         
-        List<Map<String, Object>> materialType = readService.queryMaterialType();
+        /*List<Map<String, Object>> materialType = readService.queryMaterialType();
 
         List<Map<String, Object>> gradeMaterialType = new ArrayList<Map<String, Object>>();
 
@@ -89,7 +89,7 @@ public class ReadController {
                 }
                 gradeMaterialType.add(type);
             }
-        }
+        }*/
         List<Map<String, Object>> types = homeService.queryBookType(0);
         Collections.sort(types, new Comparator<Map<String, Object>>() {
             @Override
@@ -98,7 +98,7 @@ public class ReadController {
             }
         });
         mv.addObject("bookTypes", types);
-        mv.addObject("materialType", gradeMaterialType);
+        mv.addObject("materialType", materialType);
 
         return mv;
     }

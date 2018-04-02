@@ -161,7 +161,17 @@
 /**加长输入框**/
 .jc_input{
 	clear:none;
-	width: 617px;
+	width: 583px;
+	height: 26px;
+	line-height: 26px;
+	border: solid 1px #dedede;
+	padding-left: 10px;
+	border-radius: 2px;
+}
+/**通讯地址**/
+.tx_input{
+	clear:none;
+	width: 620px;
 	height: 26px;
 	line-height: 26px;
 	border: solid 1px #dedede;
@@ -196,7 +206,7 @@
 	width: 100%;
 }
 .text_cl{
-	width: 900px;
+	width: 892px;
 	height: 60px;
 	background-color: #e8f1fa;
 	border-radius: 3px;
@@ -257,7 +267,7 @@
 
 /**������ť**/
 .add_div{
-	width: 100px;
+	width: 80px;
 	height: 32px;
 	margin-top: 5px;
 	text-align: center;

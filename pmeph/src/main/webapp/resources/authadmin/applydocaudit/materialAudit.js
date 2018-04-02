@@ -216,6 +216,7 @@ function LengthLimit(obj,ml){
 //打印按钮
 function toprint() {
     // window.print();
+    console.log("111111")
     $("#ddd").jqprint();
 }
 

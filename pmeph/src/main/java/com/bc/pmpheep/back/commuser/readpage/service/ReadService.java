@@ -9,7 +9,7 @@ public interface ReadService {
 	public List<Map<String,Object>> queryZdtjReadList(Map<String,Object> map);
 
 	//获取图书分类信息
-	public List<Map<String,Object>> queryMaterialType();
+	public List<Map<String,Object>> queryMaterialType(String firstTypeIds);
 
 	//新书推荐查询
 	public List<Map<String,Object>> queryXstjReadList(Map<String,Object> map);
