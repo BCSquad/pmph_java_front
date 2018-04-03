@@ -156,7 +156,7 @@ public interface PersonalService {
 	public String getAnswers(Map<String, Object> map);
 
 	// 查询多选选项答案
-	public String getCheckAnswers(Map<String, Object> map);
+	List<Map<String, Object>> getCheckAnswers(Map<String, Object> map);
 
 	// 查询填空选项答案
 	public String getInpAnswers(Map<String, Object> map);

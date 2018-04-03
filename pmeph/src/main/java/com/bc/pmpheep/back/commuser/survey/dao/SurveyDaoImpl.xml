@@ -36,7 +36,7 @@
 			ORDER BY
 				s.begin_date DESC
 	</select>
-	
+
 	<!-- 查询单个调查对应的问题 -->
 	<select id="getSurvey" resultType="map">
 		SELECT a.*,d.title AS surveyTitle 
@@ -49,18 +49,18 @@
 		ON d.`template_id` = c.`id`
 		WHERE d.`id`=#{surveyId}
 	</select>
-	
+
 	<!-- 获取调查基本信息 -->
 	<select id="getSurveyBaseInfo" parameterType="map" resultType="map">
 		select * from survey where id=#{surveyId}
 	</select>
-	
+
 	<!-- 查询问题对应的选项 -->
 	<select id="getOptions" resultType="map">
 		SELECT * FROM `survey_question_option`
 		WHERE question_id=#{questionId}
 	</select>
-	
+
 	<!-- 保存单选答案 -->
 	<insert id="saveRadioAnswer" parameterType="map">
 		insert into survey_question_answer(
@@ -70,11 +70,17 @@
 
 	<!-- 保存多选答案 -->
 	<insert id="saveCheckboxAnswer" parameterType="map">
-		insert into survey_question_answer
+		<!-- insert into survey_question_answer
 		(user_id,question_id,option_content,survey_id)
-		values(#{userId},#{questionId},#{checkboxAnswer},#{surveyId})
+		values(#{userId},#{questionId},#{checkboxAnswer},#{surveyId}) -->
+		INSERT INTO
+		`survey_question_answer`(`user_id`,`question_id`,`option_id`,`survey_id`)
+		VALUES
+		<foreach collection="optionIds" item="optionId" index="index" separator=",">
+			( #{userId},#{questionId},#{optionId},#{surveyId})
+		</foreach>
 	</insert>
-	
+
 	<!-- 保存输入框答案 -->
 	<insert id="saveInputAnswer" parameterType="map">
 		insert into survey_question_answer
