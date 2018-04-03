@@ -364,8 +364,8 @@
 			<div>
 				<span id="tsxz_span7"></span>
 				<span class="tsxz_title">人卫社教材编写情况</span>
-				<span class="tsxz_ts" id="rwsjcbx_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
-				<span class="tsxz_xt" id="rwsjcbx_xt" >（选填）</span>
+				<%--<span class="tsxz_ts" id="rwsjcbx_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_xt" id="rwsjcbx_xt" >（选填）</span>--%>
 			</div>
 			<div class="content">
 				<table class="tab_2" id="tab_rwsjcbx">
@@ -726,7 +726,7 @@
 				</div>
 			</div>
 			<!-- 院校推荐意见-->
-			<div class="yijian">
+			<div class="yijian" style="display: none;">
 				<div class="tujian01">院校推荐意见:</div>
 				<div class="tujian02">
 					<div class="qianzi">负责人签字:</div>

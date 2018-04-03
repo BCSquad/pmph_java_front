@@ -101,6 +101,7 @@
 				<if test="parameter.queryOrg != null and parameter.queryOrg != '' and parameter.queryOrg != 'all' ">
 					and d.org_id = ${parameter.queryOrg}
 				</if>
+					and d.online_progress > 0 and d.is_staging = 0
 			</where>
 			group by d.id <!-- 因为要统计暂存表里有没有数据来作为决定是否读暂存表的条件之一 必须group -->
 		)t
@@ -159,6 +160,7 @@
 				<if test="parameter.queryOrg != null and parameter.queryOrg != '' and parameter.queryOrg != 'all'  ">
 					and d.org_id = ${parameter.queryOrg}
 				</if>
+					and d.online_progress > 0 and d.is_staging = 0
 			</where>
 			group by d.id <!-- 因为要统计暂存表里有没有数据来作为决定是否读暂存表的条件之一 必须group -->
 		

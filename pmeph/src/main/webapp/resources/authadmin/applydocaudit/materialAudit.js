@@ -216,8 +216,9 @@ function LengthLimit(obj,ml){
 //打印按钮
 function toprint() {
     // window.print();
-    console.log("111111")
+     $(".yijian").css("display","block");
     $("#ddd").jqprint();
+    $(".yijian").css("display","none");
 }
 
 

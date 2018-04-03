@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.bc.pmpheep.back.commuser.homepage.service.HomeService;
 import com.bc.pmpheep.back.util.Const;
 import com.bc.pmpheep.back.util.RouteUtil;
 import com.bc.pmpheep.general.controller.BaseController;
@@ -37,6 +38,10 @@ public class MessageController extends BaseController {
 
     @Autowired
     ContentService contentService;
+
+    @Autowired
+    @Qualifier("com.bc.pmpheep.back.homepage.service.HomeServiceImpl")
+    HomeService homeService;
 
     @Autowired
     @Qualifier("com.bc.pmpheep.back.commuser.mymessage.service.NoticeMessageServiceImpl")
@@ -499,6 +504,38 @@ public class MessageController extends BaseController {
         return mv;
     }
 
+    /**
+     * 点击详情 修改已读 未读
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/updateIsreaded")
+    @ResponseBody
+  public String updateIsreaded(HttpServletRequest request){
+      String uid = request.getParameter("uid");
+      Map<String, Object> paraMap = new HashMap<String, Object>();
+      paraMap.put("id", uid);
+      Map<String, Object> user = getUserInfo();
+      String user_const_type = (String) request.getSession().getAttribute(Const.SESSION_USER_CONST_TYPE);
+      user_const_type = String.valueOf((Integer.parseInt(user_const_type)+1));
+      Map<String, Object> map1 = noticeMessageService.queryTitleMessage(paraMap);
+      int count = 0;
+      String flag = "ok";
+      try {
+          //只有接收者读了，才标记为已读。（发送者也可以查看）
+          if (user_const_type.equals(map1.get("receiver_type").toString())&&user.get("id").equals(map1.get("receiver_id"))) {
+              count = allMessageServiceImpl.updateIsRead(uid);
+          }
+          String isread = "no";
+          if (count > 0) {
+              isread = "yes";
+          }
+      }catch (Exception e){
+          flag = "error";
+      }
+      return flag;
+
+  }
 
     //系统消息标题弹框回显
     @RequestMapping(value = "/queryTitleMessage")
@@ -511,6 +548,7 @@ public class MessageController extends BaseController {
         String user_const_type = (String) request.getSession().getAttribute(Const.SESSION_USER_CONST_TYPE);
         user_const_type = String.valueOf((Integer.parseInt(user_const_type)+1));
         Map<String, Object> map1 = noticeMessageService.queryTitleMessage(paraMap);
+
         int count = 0;
         //只有接收者读了，才标记为已读。（发送者也可以查看）
         if (user_const_type.equals(map1.get("receiver_type").toString())&&user.get("id").equals(map1.get("receiver_id"))) {
@@ -521,6 +559,13 @@ public class MessageController extends BaseController {
             isread = "yes";
         }
         map1.put("isread", isread);
+        int messageNum = 0;
+        List<Map<String, Object>> list = homeService.queryNotReadMessages(MapUtils.getString(user, "id"));
+
+        for (Map<String, Object> item : list) {
+            messageNum += MapUtils.getIntValue(item, "a");
+        }
+        map1.put("messageNum",messageNum);
         if (map1.get("msg_type").toString().equals("1") || map1.get("msg_type").toString().equals("0")) {
             //mongoDB查询通知内容
             Message message = mssageService.get(map1.get("msg_id").toString());
