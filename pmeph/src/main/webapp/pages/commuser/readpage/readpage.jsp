@@ -78,6 +78,7 @@
             <div class="area3">
                 <div class="block">
                     <div class="tab-bar">
+                    	<div class="type_bar_float_right">
                         <c:forEach items="${bookTypes}" var="type" varStatus="status">
                             <%--<div class="tab ${status.index==0?'active':''}" id="${type.id}"
                                  onclick='chooseType("${type.id}")'>${type.type_name}</div>--%>
@@ -88,6 +89,7 @@
                                     ${type.type_name}
                             </div>
                         </c:forEach>
+                        </div>
                         <div class="remark">
                             <!--<img class="img_zdtj"/>-->
                             <span class="span_1"></span>
@@ -114,17 +116,18 @@
                          <div class="tab type" id="FYDiv_3" onclick="javaScript:ChangeFYDiv('3','JKFYDiv_',3)">
                              考试用书
                          </div>--%>
-                        <c:forEach items="${bookTypes}" var="type" varStatus="status">
-                            <%--<div class="tab ${status.index==0?'active':''}" id="${type.id}"
-                                 onclick='chooseType("${type.id}")'>${type.type_name}</div>--%>
-
-                            <div class="tab type ${status.index==bookTypes.size()-1?'active':''}"
-                                 typeid="${type.id}"
-                                 id="JKFYDiv_${type.id}" onclick="javaScript:ChangeFYDiv(${type.id})">
-                                    ${type.type_name}
-                            </div>
-                        </c:forEach>
-
+                         <div class="type_bar_float_right">
+	                        <c:forEach items="${bookTypes}" var="type" varStatus="status">
+	                            <%--<div class="tab ${status.index==0?'active':''}" id="${type.id}"
+	                                 onclick='chooseType("${type.id}")'>${type.type_name}</div>--%>
+	
+	                            <div class="tab type ${status.index==bookTypes.size()-1?'active':''}"
+	                                 typeid="${type.id}"
+	                                 id="JKFYDiv_${type.id}" onclick="javaScript:ChangeFYDiv(${type.id})">
+	                                    ${type.type_name}
+	                            </div>
+	                        </c:forEach>
+						</div>
                         <div class="remark">
                             <img class="span_1" src="${ctx}/statics/image/xstj.png"/>
                             <!--<span id="span_1"></span>-->
@@ -195,13 +198,29 @@
                         <c:forEach items="${type1.dataList}" var="type2">
                             <div class="part_1">
                                 <span>${type2.type_name}</span>
+                                
+	                                <c:if test="${type2.dataList.size()>0}">
+	                                
+		                                <div class="part_2">
+			                                <c:forEach var="type3" items="${type2.dataList}">
+			                                    <a target="_blank"
+			                                       href="<c:url value="/booksearch/toPage.action?type=${type3.id}"/>">${type3.type_name}</a>
+			                                	<c:if test="${type3.dataList.size()>0}">
+				                                	<%-- <div class="part_3">
+				                                		
+				                                		<c:forEach var="type4" items="${type3.dataList}">
+				                                			<a target="_blank"
+				                                       			href="<c:url value="/booksearch/toPage.action?type=${type4.id}"/>">${type4.type_name}</a>
+				                                		</c:forEach>
+				                                	</div> --%>
+			                                	</c:if>
+			                                </c:forEach>
+			                            </div>
+			                            
+		                            </c:if>
+	                            
                             </div>
-                            <div class="part_2">
-                                <c:forEach var="type3" items="${type2.dataList}">
-                                    <a target="_blank"
-                                       href="<c:url value="/booksearch/toPage.action?type=${type3.id}"/>">${type3.type_name}</a>
-                                </c:forEach>
-                            </div>
+                            
                         </c:forEach>
                     </div>
                 </c:forEach>

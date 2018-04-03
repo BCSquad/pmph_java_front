@@ -35,7 +35,7 @@
 <div class="body">
 	<div class="content-wrapper">
 		<div id="ddd">
-		<div class="tsxz_title">资料审核</div>
+		<div class="tsxz_title" style="text-align: center;font-size: 20px;margin-top: 6px;">${material.material_name}</div>
 		<hr style=" height:1px;border:none;border-top:2px #999999 dashed;margin-top: 10px;">
 		 <!-- 退回原因填写悬浮框 -->
         <div class="bookmistake" id="bookmistake">
@@ -364,8 +364,8 @@
 			<div>
 				<span id="tsxz_span7"></span>
 				<span class="tsxz_title">人卫社教材编写情况</span>
-				<span class="tsxz_ts" id="rwsjcbx_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
-				<span class="tsxz_xt" id="rwsjcbx_xt" >（选填）</span>
+				<%--<span class="tsxz_ts" id="rwsjcbx_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+				<span class="tsxz_xt" id="rwsjcbx_xt" >（选填）</span>--%>
 			</div>
 			<div class="content">
 				<table class="tab_2" id="tab_rwsjcbx">
@@ -724,6 +724,15 @@
 					<span>申报单位：</span>
 					<span>${gezlList.dwmc}</span>
 				</div>
+			</div>
+			<!-- 院校推荐意见-->
+			<div class="yijian" style="display: none;">
+				<div class="tujian01">院校推荐意见:</div>
+				<div class="tujian02">
+					<div class="qianzi">负责人签字:</div>
+					<div class="gaizhang">(院校盖章)</div>
+				</div>
+				<div class="tujian03">年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</div>
 			</div>
 			<hr style=" height:1px;border:none;border-top:1px #999999 dashed;margin-top: 30px;">
 		</div>

@@ -139,7 +139,7 @@ function add_similar(){
         "<td><input class='sb_input' style='width: 80px;' id='similar_print_number_"+num+"' name='similar_print_number'  maxlength='20' value=''/></td>"+
         "<td><input class='sb_input' style='width: 80px;' id='similar_price_"+num+"' name='similar_price'  maxlength='20' value=''/></td>"+
         "<td><input class='sb_input' style='width: 130px;' id='similar_publish_date_"+num+"' name='similar_publish_date'  calendar format=\"'yyyy-mm-dd'\" value=''/></td>"+
-        "<input type='hidden' name='checkbzqk' value='similar_bookname_"+num+",similar_edition_"+num+",similar_author_"+num+",similar_booksize_"+num+",similar_publisher_"+num+",similar_publish_date_\"+num+\"'/>" +
+        "<input type='hidden' name='checkbzqk' value='similar_bookname_"+num+",similar_edition_"+num+",similar_author_"+num+",similar_booksize_"+num+",similar_publisher_"+num+",similar_publish_date_"+num+"'/>" +
         "<td><div class='add_div'><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('similar_"+num+"')\"></div></td>"+
         "</tr>");
     $table.append($tr);

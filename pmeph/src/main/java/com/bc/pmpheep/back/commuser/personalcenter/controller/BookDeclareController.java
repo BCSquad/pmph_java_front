@@ -200,7 +200,7 @@ public class BookDeclareController extends BaseController {
 		String[] print_numbers = request.getParameterValues("similar_print_number");
 		String[] similar_prices = request.getParameterValues("similar_price");
 		String[] publish_dates = request.getParameterValues("similar_publish_date");
-		for (int i = 0; i < realnames.length; i++) { // 遍历数组
+		for (int i = 0; i < booknames.length; i++) { // 遍历数组
 			if (!booknames[i].equals("")) {
 				Map<String, Object> similarMap = new HashMap<String, Object>();
 				similarMap.put("bookname", booknames[i]);

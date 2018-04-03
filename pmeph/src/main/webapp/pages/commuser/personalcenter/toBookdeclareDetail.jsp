@@ -49,9 +49,9 @@
 								${topicMap.bookname}
 							</td>
 							<td><span >读者对象：&emsp;&emsp;</span>
-									<c:if test="${topicMap.reader=='0'}">医务工作者</c:if>
-									<c:if test="${topicMap.reader=='1'}">医学院校师生</c:if>
-									<c:if test="${topicMap.reader=='2'}">大众</c:if>
+								<c:if test="${topicMap.reader=='0'}">医务工作者</c:if>
+								<c:if test="${topicMap.reader=='1'}">医学院校师生</c:if>
+								<c:if test="${topicMap.reader=='2'}">大众</c:if>
 							</td>
 						</tr>
 						<tr>
@@ -62,10 +62,11 @@
 							<td><span >选题来源：&emsp;&emsp;</span>
 								<c:if test="${topicMap.source=='0'}">社策划</c:if>
 								<c:if test="${topicMap.source=='1'}">编辑策划</c:if>
-								<c:if test="${topicMap.source=='2'}">专家策划</c:if>
+								<c:if test="${topicMap.source=='2'}">修订</c:if>
 								<c:if test="${topicMap.source=='3'}">离退休编审策划</c:if>
-								<c:if test="${topicMap.source=='4'}">上级交办</c:if>
-								<c:if test="${topicMap.source=='5'}">作者投稿</c:if>
+								<c:if test="${topicMap.source=='4'}">专家策划</c:if>
+								<c:if test="${topicMap.source=='5'}">上级交办</c:if>
+								<c:if test="${topicMap.source=='6'}">作者投稿</c:if>
 							</td>
 							<td><span >预估字数：&emsp;&emsp;</span>
 								${topicMap.word_number}
@@ -91,11 +92,14 @@
 								<%--<div class="tslb">&emsp;--%>
 								<c:if test="${topicMap.type=='0'}">专著</c:if>
 								<c:if test="${topicMap.type=='1'}">基础理论</c:if>
-								<c:if test="${topicMap.type=='2'}">论文集</c:if>
-								<c:if test="${topicMap.type=='3'}">科普</c:if>
-								<c:if test="${topicMap.type=='4'}">应用技术</c:if>
-								<c:if test="${topicMap.type=='5'}">工具书</c:if>
-								<c:if test="${topicMap.type=='6'}">其他</c:if>
+								<c:if test="${topicMap.type=='2'}">教材</c:if>
+								<c:if test="${topicMap.type=='3'}">论文集</c:if>
+								<c:if test="${topicMap.type=='4'}">图谱</c:if>
+								<c:if test="${topicMap.type=='5'}">科普</c:if>
+								<c:if test="${topicMap.type=='6'}">应用技术</c:if>
+								<c:if test="${topicMap.type=='7'}">教辅</c:if>
+								<c:if test="${topicMap.type=='8'}">工具书</c:if>
+								<c:if test="${topicMap.type=='9'}">其他</c:if>
 								<%--</div>--%>
 							</td>
 						</tr>
@@ -179,20 +183,20 @@
 								${topicMap.position}
 							</td>
 							<td><span>专业职务：&emsp;&emsp;</span>
-									<c:if test="${topicMap.position_profession=='0'}">中科院院士</c:if>
-									<c:if test="${topicMap.position_profession=='1'}">工程院院士</c:if>
-									<c:if test="${topicMap.position_profession=='2'}">博导</c:if>
-									<c:if test="${topicMap.position_profession=='3'}">硕导</c:if>
-									<c:if test="${topicMap.position_profession=='4'}">正高</c:if>
-									<c:if test="${topicMap.position_profession=='5'}">副高</c:if>
-									<c:if test="${topicMap.position_profession=='6'}">中级</c:if>
-									<c:if test="${topicMap.position_profession=='7'}">其他</c:if>
+								<c:if test="${topicMap.position_profession=='0'}">中科院院士</c:if>
+								<c:if test="${topicMap.position_profession=='1'}">工程院院士</c:if>
+								<c:if test="${topicMap.position_profession=='2'}">博导</c:if>
+								<c:if test="${topicMap.position_profession=='3'}">硕导</c:if>
+								<c:if test="${topicMap.position_profession=='4'}">正高</c:if>
+								<c:if test="${topicMap.position_profession=='5'}">副高</c:if>
+								<c:if test="${topicMap.position_profession=='6'}">中级</c:if>
+								<c:if test="${topicMap.position_profession=='7'}">其他</c:if>
 							</td>
 							<td><span>学&emsp;&emsp;历：&emsp;&emsp;</span>
-									<c:if test="${topicMap.degree=='0'}">博士</c:if>
-									<c:if test="${topicMap.degree=='1'}">硕士</c:if>
-									<c:if test="${topicMap.degree=='2'}">学士</c:if>
-									<c:if test="${topicMap.degree=='3'}">其他</c:if>
+								<c:if test="${topicMap.degree=='0'}">博士</c:if>
+								<c:if test="${topicMap.degree=='1'}">硕士</c:if>
+								<c:if test="${topicMap.degree=='2'}">学士</c:if>
+								<c:if test="${topicMap.degree=='3'}">其他</c:if>
 							</td>
 						</tr>
 						<tr>
@@ -345,10 +349,10 @@
 								<td>${list.price}</td>
 								<td>${list.phone}</td>
 								<td>
-										<c:if test="${list.degree=='0'}">博士</c:if>
-										<c:if test="${list.degree=='1'}">硕士</c:if>
-										<c:if test="${list.degree=='2'}">学士</c:if>
-										<c:if test="${list.degree=='3'}">其他</c:if>
+									<c:if test="${list.degree=='0'}">博士</c:if>
+									<c:if test="${list.degree=='1'}">硕士</c:if>
+									<c:if test="${list.degree=='2'}">学士</c:if>
+									<c:if test="${list.degree=='3'}">其他</c:if>
 								</td>
 								<td>${list.position}</td>
 								<td>${list.workplace}</td>
