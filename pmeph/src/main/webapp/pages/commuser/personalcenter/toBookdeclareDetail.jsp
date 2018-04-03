@@ -401,6 +401,31 @@
 			</div>
 		</form>
 	</div>
+	
+	<!-- 退回原因及审批意见 显示悬浮框 -->
+	<div class="bookmistake" id="return_cause_div">
+	    <div class="apache">
+	        <div class="mistitle">${topicMap.auth_progress==3?'审核意见':'' }${topicMap.auth_progress==2?'退回原因':'' }:</div>
+	        <div class="xx" onclick="$('#return_cause_div').fadeOut(500);"></div>
+	    </div>
+	
+	    <div class="info">
+	        <input id="return_cause_hidden" type="hidden" value="${topicMap.auth_feedback }">
+	        <textarea class="misarea" disabled="disabled">${topicMap.auth_feedback }</textarea>
+	    </div>
+	
+	    <div class="">
+	        <button class="btn" type="button" onclick="$('#return_cause_div').fadeOut(500);">确认</button>
+	    </div>
+	</div>
+	<script type="text/javascript">
+		if ("${(topicMap.auth_progress==3||topicMap.auth_progress==2)?'on':'off' }"=="on" && $("#return_cause_hidden").val().length>0) {
+	
+	        $("#return_cause_div").fadeIn(800);
+	
+	    }
+	</script>
+	
 </div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
