@@ -726,7 +726,7 @@
 				</div>
 			</div>
 			<!-- 院校推荐意见-->
-			<div class="yijian">
+			<div class="yijian" style="display: none;">
 				<div class="tujian01">院校推荐意见:</div>
 				<div class="tujian02">
 					<div class="qianzi">负责人签字:</div>
