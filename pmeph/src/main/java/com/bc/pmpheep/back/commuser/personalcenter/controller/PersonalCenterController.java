@@ -650,14 +650,13 @@ public class PersonalCenterController extends BaseController {
 						paraMap.put("questionId", questionId);
 						String answer = personalService.getAnswers(paraMap);
 						// 查询多选答案
-						String che = personalService.getCheckAnswers(paraMap);
+						List<Map<String, Object>> che = personalService.getCheckAnswers(paraMap);
 						boolean flag = false;
-						if (null != che && "" != che) {
-							String[] checkAnswer = che.split(",");
-							for (String ch : checkAnswer) {
+						if (null != che) {
+							for (Map<String, Object> ch : che) {
 								for (Map<String, Object> opt : listOptions) {
 
-									if (ch.equals(opt.get("id").toString())) {
+									if ((ch.get("option_id").toString()).equals(opt.get("id").toString())) {
 										flag = true;
 										opt.put("flag", flag);
 
