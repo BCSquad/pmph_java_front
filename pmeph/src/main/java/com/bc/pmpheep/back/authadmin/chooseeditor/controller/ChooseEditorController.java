@@ -58,6 +58,7 @@ public class ChooseEditorController extends BaseController {
 		Boolean is_locked = (Boolean) textBook.get("is_locked");
 		Boolean is_force_end = (Boolean) textBook.get("is_force_end");
 		Boolean is_digital_editor_optional = (Boolean) textBook.get("is_digital_editor_optional");
+		Boolean is_published = (Boolean) textBook.get("is_published");
 		/*String tag ="editor";
 		String selectedIds = getTempSelectedIds(textBookId, logUserId,tag);
 		tag ="numEditor";
@@ -77,6 +78,7 @@ public class ChooseEditorController extends BaseController {
 		mv.addObject("textBookId",textBookId);
 		mv.addObject("is_locked",is_locked);
 		mv.addObject("is_force_end",is_force_end);
+		mv.addObject("is_published",is_published);
 		mv.addObject("is_digital_editor_optional",is_digital_editor_optional);
 		mv.setViewName("authadmin/chooseeditor/chooseeditor");
 		return mv;
