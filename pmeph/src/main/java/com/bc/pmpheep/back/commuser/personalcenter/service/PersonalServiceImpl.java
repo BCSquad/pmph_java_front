@@ -390,9 +390,9 @@ public class PersonalServiceImpl implements PersonalService {
 
 	// 查询多选对应的选项答案
 	@Override
-	public String getCheckAnswers(Map<String, Object> map) {
-		String slist = personaldao.getCheckAnswers(map);
-		return slist;
+	public List<Map<String, Object>> getCheckAnswers(Map<String, Object> map) {
+		List<Map<String, Object>> list = personaldao.getCheckAnswers(map);
+		return list;
 	}
 
 	// 查询填空对应的选项答案
