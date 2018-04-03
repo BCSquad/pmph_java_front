@@ -105,15 +105,16 @@ function changesale(type) {
 		dataType : 'json',
 		success : function(json) {
 			$.each(json.type, function(i, x) {
-				if (i == 0) {
-					$("#sale_book1").html(x.bookname);
-					$("#right_book1").attr('src', x.image_url);
+				/*if (i == 0) {*/
+					$("#sale_book"+(i+1)).html(x.bookname);
+					$("#right_book"+(i+1)).attr('src', x.image_url);
+					$("#last_right_book_id_"+(i+1)).val(x.id);
 					if(x.image_url=='DEFAULT'){
-						$("#right_book1").attr('src', contextpath+"/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+						$("#right_book"+(i+1)).attr('src', contextpath+"/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
 					}else{
-						$("#right_book1").attr('src', x.image_url);
+						$("#right_book"+(i+1)).attr('src', x.image_url);
 					}
-				} else if (i == 1) {
+				/*} else if (i == 1) {
 					$("#sale_book2").html(x.bookname);
 					if(x.image_url=='DEFAULT'){
 						$("#right_book2").attr('src', contextpath+"/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
@@ -148,7 +149,7 @@ function changesale(type) {
 					}else{
 						$("#right_book6").attr('src', x.image_url);
 					}
-				}
+				}*/
 			});
 		}
 	});
