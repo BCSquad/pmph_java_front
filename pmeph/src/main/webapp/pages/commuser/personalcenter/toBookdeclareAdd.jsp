@@ -67,10 +67,11 @@
 								<select name="source" id="xzly" class="xzly">
 									<option value="0">社策划</option>
 									<option value="1">编辑策划</option>
-									<option value="2">专家策划</option>
+									<option value="2">修订</option>
 									<option value="3">离退休编审策划</option>
-									<option value="4">上级交办</option>
-									<option value="5">作者投稿</option>
+									<option value="4">专家策划</option>
+									<option value="5">上级交办</option>
+									<option value="6">作者投稿</option>
 								</select>
 							</td>
 							<td><span ><span class="btbs1">*</span>预估字数：&emsp;&emsp;</span>
@@ -101,11 +102,14 @@
 								<%--<div class="tslb">&emsp;--%>
 									<input type="radio" name="type" value="0" checked="checked"/>专著
 									<input type="radio" name="type" value="1" />基础理论
-									<input type="radio" name="type" value="2" />论文集
-									<input type="radio" name="type" value="3" />科普
-									<input type="radio" name="type" value="4" />应用技术
-									<input type="radio" name="type" value="5" />工具书
-									<input type="radio" name="type" value="6" />其他
+									<input type="radio" name="type" value="2" />教材
+									<input type="radio" name="type" value="3" />论文集
+									<input type="radio" name="type" value="4" />图普
+									<input type="radio" name="type" value="5" />科普
+									<input type="radio" name="type" value="6" />应用技术
+									<input type="radio" name="type" value="7" />教辅
+									<input type="radio" name="type" value="8" />工具书
+									<input type="radio" name="type" value="9" />其他
 								<%--</div>--%>
 							</td>
 						</tr>
