@@ -10,16 +10,17 @@ function  load(tag){
 	if(tag=="search"){
 		pageNumber = 1 ;	
 	}
+	var data = {
+        	pageNumber : pageNumber,
+        	pageSize   : pageSize,
+	        searchText:$("#search-name").val()
+        };
 	$.ajax({
         type:'post',
         url :contextpath+'community/list.action',
         async:false,
         dataType:'json',
-        data:{
-        	pageNumber : pageNumber,
-        	pageSize   : pageSize,
-	        searchText:$("#search-name").val()
-        },
+        data:data,
         success:function(json){
         	if(pageNumber==1&& json.length==0){
         		$("#more").hide();

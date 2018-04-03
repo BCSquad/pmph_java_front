@@ -4,37 +4,42 @@
 <resultMap type="java.util.Map" id="baseMap"></resultMap>
      <!--查询公告列表  --> 
      <select id="queryNoticeList" parameterType="map" resultMap="baseMap">
-        select 
-		    t.*
-			,b.material_name
-			
-		        from cms_content t
-		        left join  material b on t.material_id =b.id 
-		        left join material_org u on b.id=u.material_id
-		        left join writer_user p on p.org_id=u.org_id
-		        where  t.category_id=3
-		        
-		        and t.is_published=1
-		        and t.material_id >0
-		        
-		        and t.auth_status=2
-		        and t.is_deleted=0 
+	      select n.* from
+			(
+				select 
+					(case
+					when b.material_name is null
+					then t.title
+					else b.material_name
+					end) as material_name
+					,t.*
+			        from cms_content t
+			        left join  material b on t.material_id =b.id 
+			        left join material_org u on b.id=u.material_id
+			        left join writer_user p on p.org_id=u.org_id
+			        where  t.category_id=3
+			        
+			        and t.is_published=1
+			        and t.material_id >0
+			        
+			        and t.auth_status=2
+			        and t.is_deleted=0 
+	
+					and 
+					(b.id is null
+						or
+						b.is_public = 1
+						or
+				        ( p.id=  #{id}
+					and b.is_public = 0))
+					group by t.id
+				)n
+	           <if test="searchText !=null" >
+	              where n.material_name like #{searchText}
+	            </if>
+				order by n.gmt_create desc 
+				limit #{startnum},#{size}
 
-			and 
-			(b.id is null
-				or
-				b.is_public = 1
-				or
-		        ( p.id=  2
-			and b.is_public = 0))
-			group by t.id
-		        
-            <if test="searchText !=null" >
-              where n.title like #{searchText}
-            </if>
-	            
-			order by t.gmt_create desc 
-			limit #{startnum},#{size}
          
           <!-- select n.* from 
 		(select 
