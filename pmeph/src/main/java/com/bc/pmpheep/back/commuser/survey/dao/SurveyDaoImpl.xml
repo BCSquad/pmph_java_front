@@ -70,9 +70,15 @@
 
 	<!-- 保存多选答案 -->
 	<insert id="saveCheckboxAnswer" parameterType="map">
-		insert into survey_question_answer
+		<!-- insert into survey_question_answer
 		(user_id,question_id,option_content,survey_id)
-		values(#{userId},#{questionId},#{checkboxAnswer},#{surveyId})
+		values(#{userId},#{questionId},#{checkboxAnswer},#{surveyId}) -->
+		INSERT INTO 
+			`survey_question_answer`(`user_id`,`question_id`,`option_id`,`survey_id`)
+        VALUES
+        <foreach collection="optionIds" item="optionId" index="index" separator=",">
+            ( #{userId},#{questionId},#{optionId},#{surveyId})
+        </foreach>
 	</insert>
 	
 	<!-- 保存输入框答案 -->
