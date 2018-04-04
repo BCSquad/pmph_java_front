@@ -139,6 +139,7 @@ public class SSOLoginoutController extends BaseController {
             }
 
             Map<String, Object> user = userService.getUserInfo(username, usertype);
+
             if (user == null) {
 
                 //新建用户信息
@@ -149,8 +150,8 @@ public class SSOLoginoutController extends BaseController {
             }
 
             //接入微信登录：此处需要考虑微信SSO登录的情况，如果是微信来的请求把请求转发给微信服务器
-            if (StringUtils.isNotEmpty(request.getParameter("refer"))) {
-                String referUrl = request.getParameter("refer");
+            if (StringUtils.isNotEmpty(request.getParameter("Referer"))) {
+                String referUrl = request.getParameter("Referer");
                 //解析参数，判断是否是微信过来的
                 if (referUrl.split("\\?").length >= 2) {
                     String stringParams = referUrl.split("\\?")[1];
@@ -189,7 +190,7 @@ public class SSOLoginoutController extends BaseController {
             userService.insertUserLoginLog(params);
 
 
-            if (StringUtils.isEmpty(request.getParameter("refer"))) {
+            if (StringUtils.isEmpty(request.getParameter("Referer"))) {
                 if ("1".equals(usertype)) {
                     response.sendRedirect(request.getContextPath() + "/");
                 } else if ("2".equals(usertype)) {
@@ -203,13 +204,13 @@ public class SSOLoginoutController extends BaseController {
                 PathMatchingResourcePatternResolver resolver = getPathMatchingResourcePatternResolver();
                 for (LoginInterceptor.PathWithUsertypeMap pathMap : pathWithUsertypeMaps) {
                     //需要拦截的URL
-                    if (resolver.getPathMatcher().match(request.getContextPath() + pathMap.getPath(), request.getParameter("refer"))
+                    if (resolver.getPathMatcher().match(request.getContextPath() + pathMap.getPath(), request.getParameter("Referer"))
                             && pathMap.getUserType().equals(usertype)) {//路径匹配，并且用户身份一致可以跳转
 
-                        response.sendRedirect(request.getParameter("refer"));
+                        response.sendRedirect(request.getParameter("Referer"));
                         return;
 
-                    } else if (resolver.getPathMatcher().match(request.getContextPath() + pathMap.getPath(), request.getParameter("refer"))) {
+                    } else if (resolver.getPathMatcher().match(request.getContextPath() + pathMap.getPath(), request.getParameter("Referer"))) {
                         if ("1".equals(usertype)) {
                             response.sendRedirect(request.getContextPath() + "/");
                             return;
@@ -223,7 +224,7 @@ public class SSOLoginoutController extends BaseController {
                 }
 
                 if ("1".equals(usertype)) {
-                    response.sendRedirect(request.getParameter("refer"));
+                    response.sendRedirect(request.getContextPath() + "/");
                 } else if ("2".equals(usertype)) {
                     response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
                 }
