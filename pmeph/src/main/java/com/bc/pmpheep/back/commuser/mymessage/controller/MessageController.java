@@ -532,10 +532,25 @@ public class MessageController extends BaseController {
           }
       }catch (Exception e){
           flag = "error";
+          return flag;
       }
+
+        int messageNum = 0;
+        List<Map<String, Object>> list = homeService.queryNotReadMessages(MapUtils.getString(user, "id"));
+
+        for (Map<String, Object> item : list) {
+            messageNum += MapUtils.getIntValue(item, "a");
+        }
+        if(messageNum ==0){
+            flag = "0";
+        }else{
+            flag = "1";
+        }
+
       return flag;
 
   }
+
 
     //系统消息标题弹框回显
     @RequestMapping(value = "/queryTitleMessage")
