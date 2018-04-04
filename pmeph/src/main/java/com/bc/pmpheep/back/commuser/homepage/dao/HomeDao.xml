@@ -210,10 +210,10 @@ LIMIT 0,10
 			AS b
 			INNER JOIN 
 				(SELECT * from book_user_comment 
-					GROUP BY book_id 
-					HAVING is_auth = 1 AND
+					where is_auth = 1 AND
 					is_hide = 0 AND
-					is_deleted = 0 AND is_long=0)AS c
+					is_deleted = 0 AND is_long=0
+					 GROUP BY book_id )AS c
 			ON b.id = c.book_id
 			INNER JOIN writer_user AS u ON c.writer_id = u.id
 			ORDER BY
