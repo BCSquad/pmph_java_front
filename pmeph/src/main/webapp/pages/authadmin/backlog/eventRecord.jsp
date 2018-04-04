@@ -70,11 +70,11 @@
                     <div class="leftEvent">
                         <div class="upContentEvent">
                             <div class="eventTypeAndTime">
-                                <span class="eventType"><c:if test="${message.TYPE=='A'}">教材申报审核</c:if><c:if test="${message.TYPE=='B'}">教师资格认证</c:if></span>&nbsp;&nbsp;<span class="eventTime"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${message.UPDATETIME}" /></span>
+                                <span class="eventType"><c:if test="${message.TYPE=='A'}">教材申报审核</c:if><c:if test="${message.TYPE=='B'}">教师资格认证</c:if></span>&nbsp;&nbsp;<span class="eventTime"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${message.gmt_create}" /></span>
                             </div>
                         </div>
                         <div class="downContentEvent">
-                                <span class="timeEventFont">审核了${message.NAME}于<fmt:formatDate pattern="yyyy年MM月dd日" value="${message.TIME}" />提交的${message.CONTENT}</span>
+                                <span class="timeEventFont">审核了${message.NAME}于<fmt:formatDate pattern="yyyy年MM月dd日" value="${message.gmt_create}" />提交的${message.CONTENT}</span>
                         </div>
                     </div>
                     <div class="rightButtonEvent">
@@ -138,7 +138,7 @@
 	                </div>
             </div>
             <div class="thirdRow">
-                <span>最近登录:  2017-09-27 16:12:07</span>
+                <span>最近登录:<fmt:formatDate value="${map.latest_login_time}" type="both" dateStyle="default" timeStyle="default"></fmt:formatDate></span>
             </div>
         </div>
     	</c:otherwise>

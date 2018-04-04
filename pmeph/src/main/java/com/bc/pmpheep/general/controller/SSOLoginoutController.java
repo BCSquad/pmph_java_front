@@ -98,8 +98,6 @@ public class SSOLoginoutController extends BaseController {
             String[] values = map.get(name);
             builder.append(name + "=" + (values.length > 0 ? values[0] : "") + "&");
         }
-        System.out.println(builder);
-
 
         String ticket = request.getParameter("ST");
         try {
@@ -148,6 +146,28 @@ public class SSOLoginoutController extends BaseController {
                 userService.addNewUser(username, usertype);
                 user = userService.getUserInfo(username, usertype);
                 // throw new RuntimeException("获取用户帐号不存在");
+            }
+
+            //接入微信登录：此处需要考虑微信SSO登录的情况，如果是微信来的请求把请求转发给微信服务器
+            if (StringUtils.isNotEmpty(request.getParameter("refer"))) {
+                String referUrl = request.getParameter("refer");
+                //解析参数，判断是否是微信过来的
+                if (referUrl.split("\\?").length >= 2) {
+                    String stringParams = referUrl.split("\\?")[1];
+                    for (String stringParam : stringParams.split("&")) {
+                        String[] param = stringParam.split("=");
+                        if (param.length >= 2) {
+                            if (param[0].equals("weixinref")) {//此处可以判断为微信过来的请求,跳转到微信的内部登录
+                                response.sendRedirect(referUrl.split("\\?")[0] +
+                                        "?username=" + username +
+                                        "&usertype=" + usertype +
+                                        "&refer=" + param[1] +
+                                        "&md5=" + MD5.md5(username + "1005387596c57c2278f4f61058c78d1b" + new SimpleDateFormat("yyyyMMdd").format(new Date())).toLowerCase());
+                                return;
+                            }
+                        }
+                    }
+                }
             }
 
 

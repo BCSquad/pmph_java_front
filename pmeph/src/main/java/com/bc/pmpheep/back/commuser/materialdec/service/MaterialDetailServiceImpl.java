@@ -336,13 +336,13 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         Object declaration_id = perList.get(0).get("id");
 
         //2.职位新增
-        if (perMap.get("type").equals("1")) { //提交
-            if (tssbList != null && !tssbList.isEmpty()) {
-                for (Map<String, Object> map : tssbList) {
-                    map.put("declaration_id", declaration_id);
-                    this.madd.insertTsxz(map);
-                }
+        if (tssbList != null && !tssbList.isEmpty()) {
+            for (Map<String, Object> map : tssbList) {
+                map.put("declaration_id", declaration_id);
+                this.madd.insertTsxz(map);
             }
+        }
+        if (perMap.get("type").equals("1")) { //提交
             if (perMap.get("org_id").equals("0")) {
                 messageService.sendNewMsgWriterToPublisher(MapUtils.getLong(perMap, "material_id"), MapUtils.getString(perMap, "realname"), MapUtils.getString(perMap, "materialName"));
             } else {
@@ -357,14 +357,15 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
                 perMap.put("idcard", "");
             }
             this.madd.updateWriter(perMap);
-        } else { //暂存
+        }
+       /* else { //暂存
             if (tssbList != null && !tssbList.isEmpty()) {
                 for (Map<String, Object> map : tssbList) {
                     map.put("declaration_id", declaration_id);
                     this.madd.insertTssbZc(map);
                 }
             }
-        }
+        }*/
         //3.作家学习经历新增
         if (stuList != null && !stuList.isEmpty()) {
             for (Map<String, Object> map : stuList) {
@@ -567,11 +568,11 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         if (tssbList != null && !tssbList.isEmpty()) {
             for (Map<String, Object> map : tssbList) {
                 map.put("declaration_id", declaration_id);
-                if (perMap.get("online_progress").equals("0")) { //暂存
-                    this.madd.insertTssbZc(map);
-                } else { //提交，退回
+           //     if (perMap.get("online_progress").equals("0")) { //暂存
+          //         this.madd.insertTssbZc(map);
+          //      } else { //提交，退回
                     this.madd.insertTsxz(map);
-                }
+          //      }
             }
         }
         //3.作家学习经历新增

@@ -4,7 +4,7 @@
 <mapper namespace="com.bc.pmpheep.back.commuser.mymessage.dao.MyMessageDao">
 
 	<select id="listMyMessage" resultType="MyMessageVO">
-		select 
+		select a.id as id,
 			if((sender_id = #{thisUserId}  and sender_type =2 ), <!--  ? --> 
 				 b.receiver_id                                   <!--  如果消息是我发送的-->
 				,    
