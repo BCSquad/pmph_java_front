@@ -341,7 +341,7 @@ body {
 .head .logininfo {
     position: absolute;
     top: 32px;
-    right: 250px;
+    right: 240px;
     width: 110px;
     color: #ff0000;
     vertical-align: middle;
@@ -350,6 +350,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-align: right;
 }
 
 .head .logininfoout {
