@@ -37,9 +37,19 @@ String contextpath=request.getContextPath();
    .video-a{width:230px;border:1px solid #CCCCCC;height:260px;margin-top:15px}
    .video-b{z-index:99;position:absolute;background-color: #000;height:184px;width:230px;opacity:0.5;}
    .video-c{width:230px;background-color: #EEEEEE;height:184px}
-   .video-d{width:210px;border-bottom:1px solid #EEEEEE;height:44px;margin:0px auto 0px;line-height: 44px;font-size: 16px;color:#333333}
+   .video-d{width:210px;
+	   border-bottom:1px solid #EEEEEE;
+	   height:44px;
+	   margin:0px auto 0px;
+	   line-height: 44px;
+	   font-size: 16px;
+	   color:#333333;
+	   overflow: hidden;
+	   white-space: nowrap;
+	   text-overflow: ellipsis;
+   }
    .video-e{height:30px;width:210px;margin:0px auto 0px;color:#999999;font-size: 14px}
-   .video-f{float:left;line-height: 30px};
+   .video-f{float:left;line-height: 30px}
    .video-g{float:right;line-height:30px;margin-left:5px}
    .video-h{float:right;width:20px;height:30px;
             background-image: url(${ctx}/statics/image/css_sprites.png);
@@ -93,7 +103,7 @@ String contextpath=request.getContextPath();
 		             </div>
 		            <div  class="video-e" style="width:297px">
 		                 <span class="video-f" >${video.gmt_create }</span>
-		                 <span class="video-g" style="float:right;line-height:30px;margin-left:5px">${video.clicks }</span>
+		                 <span class="video-g" style="float:right;line-height:30px;margin-left:5px" id="c${video.id }">${video.clicks }</span>
 		                <span class="video-h"></span>
 		              </div>
 		          </div>
@@ -154,6 +164,7 @@ String contextpath=request.getContextPath();
    </div>          
             <jsp:include page="/pages/comm/tail.jsp"></jsp:include> 
 </body>
+
 <script type="text/javascript">
 $(function(){
 	$(".videou").each(function () {
@@ -167,7 +178,23 @@ $(function(){
             poster: $this.attr("poster")
 
         };
+
         var player = new ckplayer(videoObject);
+        player.addListener("play",function () {
+            var vid=$this.attr("id").substring(6);
+            $.ajax({
+                type:"post",
+                url:contextpath+'community/videoCount.action',
+                data:{vid:vid},
+                success:function(data){
+                    $("#c"+vid).text(data.clicks);
+                },
+                error:function(){
+                    alert('服务器错误');
+                }
+            });
+        });
+
     });
 	var pagetotal=parseInt($("#pagetotal").val());
 	var pagenum=parseInt($("#pagenum").val());
@@ -195,6 +222,5 @@ $('select').selectlist({
 });
 	
 });
-
 </script>
 </html>

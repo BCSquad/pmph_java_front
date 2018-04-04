@@ -55,7 +55,7 @@
 	              '</div>'+
 	              '<div  class="video-e">'+
 	                 '<span class="video-f" >'+getDate(n.gmt_create)+'</span>'+
-	                 '<span class="video-g" style="float:right;line-height:30px;margin-left:5px">'+n.clicks+'</span>'+
+	                 '<span class="video-g" style="float:right;line-height:30px;margin-left:5px" id="c'+n.id+'">'+n.clicks+'</span>'+
 	                 '<span class="video-h"></span>'+
 	              '</div>'+
 	           '</div></li>';
@@ -76,6 +76,21 @@
 
 			        };
 			        var player = new ckplayer(videoObject);
+                  player.addListener("play",function () {
+					  var vid=$this.attr("id").substring(6);
+                      $.ajax({
+                          type:"post",
+                          url:contextpath+'community/videoCount.action',
+                          data:{vid:vid},
+                          success:function(data){
+							// console.log(data.clicks);
+							$("#c"+vid).text(data.clicks);
+                          },
+                          error:function(){
+                              alert('服务器错误');
+                          }
+                      });
+                  });
 			    });
 			  
 			}

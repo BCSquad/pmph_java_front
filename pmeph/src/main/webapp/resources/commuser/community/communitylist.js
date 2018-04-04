@@ -9,17 +9,20 @@ $(function(){
 function  load(tag){
 	if(tag=="search"){
 		pageNumber = 1 ;	
+	}else if(pageNumber==1){ //若出现网络中断等原因使ajax请求失败，success中清空第一页的代码无法执行。除第一页进入页面时已经加载，需要从第二页开始加载，其他照常加载
+		pageNumber =2;
 	}
+	var data = {
+        	pageNumber : pageNumber,
+        	pageSize   : pageSize,
+	        searchText:$("#search-name").val()
+        };
 	$.ajax({
         type:'post',
         url :contextpath+'community/list.action',
         async:false,
         dataType:'json',
-        data:{
-        	pageNumber : pageNumber,
-        	pageSize   : pageSize,
-	        searchText:$("#search-name").val()
-        },
+        data:data,
         success:function(json){
         	if(pageNumber==1&& json.length==0){
         		$("#more").hide();
@@ -52,7 +55,7 @@ function  load(tag){
         					       lastest+
      		   					'<div class="item1 cutmore">'+ 
      		   					/*	'<a href="'+contextpath+'cmsnotice/noticeMessageDetail.action?id='+n.mid+'&&materialId='+n.material_id+'&&csmId='+n.id+'&&'+'&&tag=FromCommunityList">'+n.title+'</a>'+ */
-                    			'<a href="'+contextpath+'community/toCommunity.action?id='+n.id+'">'+n.title+'</a>'+
+                    			'<a href="'+contextpath+'community/toCommunity.action?id='+n.id+'">'+(n.material_name!=null?n.material_name:n.title)+'</a>'+
      		   					'</div>'+
      		   					'<div class="item2 cutmore">'+
      		   					    '<p style="margin:0;padding:0;height:40px">'+
@@ -67,7 +70,7 @@ function  load(tag){
         		$("#changediv").append(html);
         	});
         	pageNumber++;
-        }	
+        }
     });
 }
 

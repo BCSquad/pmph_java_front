@@ -4,22 +4,47 @@
 <resultMap type="java.util.Map" id="baseMap"></resultMap>
      <!--查询公告列表  --> 
      <select id="queryNoticeList" parameterType="map" resultMap="baseMap">
-        <!--  select 
-            * 
-         from 
-            cms_content cc left join cms_category  ccg  on cc.category_id=ccg.id
-            left join material m on cc.material_id=m.id
-         where 
-            cc.category_id=3
-            <if test="searchText !=null" >
-              and  cc.title like #{searchText}
-            </if>
-         ORDER BY  cc.gmt_create  desc
-         limit #{startnum},#{size} -->
+	      select n.* from
+			(
+				select 
+					(case
+					when b.material_name is null
+					then t.title
+					else b.material_name
+					end) as material_name
+					,t.*
+			        from cms_content t
+			        left join  material b on t.material_id =b.id 
+			        left join material_org u on b.id=u.material_id
+			        left join writer_user p on p.org_id=u.org_id
+			        where  t.category_id=3
+			        
+			        and t.is_published=1
+			        and t.material_id >0
+			        
+			        and t.auth_status=2
+			        and t.is_deleted=0 
+	
+					and 
+					(b.id is null
+						or
+						b.is_public = 1
+						or
+				        ( p.id=  #{id}
+					and b.is_public = 0))
+					group by t.id
+				)n
+	           <if test="searchText !=null" >
+	              where n.material_name like #{searchText}
+	            </if>
+				order by n.gmt_create desc 
+				limit #{startnum},#{size}
+
          
-          select n.* from 
+          <!-- select n.* from 
 		(select 
 		        t.*
+		        ,b.material_name
 		        from cms_content t
 		        left join  material b on t.material_id =b.id 
 		        where  t.category_id=3 
@@ -32,6 +57,7 @@
 		 union
 		 select 
 		        t.*
+		        ,b.material_name
 		        from cms_content t
 		        left join  material b on t.material_id =b.id 
 		        left join material_org u on b.id=u.material_id
@@ -47,7 +73,7 @@
 		        <if test="searchText !=null" >
 	              where n.title like #{searchText}
 	            </if>
-			order by n.gmt_create desc limit #{startnum},#{size}
+			order by n.gmt_create desc limit #{startnum},#{size} -->
          
      </select>
      
@@ -130,5 +156,16 @@
          where b.material_id=#{materialId} and is_auth=1
        
      </select>
+
+	<!--id查询视频播放量  -->
+	<select id="videoCount" parameterType="java.lang.String" resultType="java.util.Map">
+		select * from book_video bv   where  id=#{vid}
+	</select>
+
+	<!-- 根据ID增加播放量 -->
+	<update id="changeClicks" parameterType="java.util.Map">
+		update book_video set
+		clicks=clicks+1 where id=#{id}
+	</update>
      
 </mapper>

@@ -128,7 +128,7 @@
                 <div class="rxia">
                     <div class="rxian">截止日期：$!{c.age_deadline}</div>
                     #if(${c.notNullIfFirstManager})
-                    	#if(( $!{c.chosen_position}==4||$!{c.chosen_position}==12 ) && $!{c.rank}==1 && $!{c.is_force_end}==false)
+                    	#if(( $!{c.chosen_position}==4||$!{c.chosen_position}==12 ) && $!{c.rank}==1 && $!{c.is_force_end}==false && $!{c.is_all_textbook_published}==false)
 	                		<div class="btn-chooseEditor" onclick="chooseEditor('$!{c.textbook_id}',this)">选编委>></div>
 	                	#else
 	                		<div class="btn-chooseEditor" onclick="chooseEditor('$!{c.textbook_id}',this)">查看编委>></div>
