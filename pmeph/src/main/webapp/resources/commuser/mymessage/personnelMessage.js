@@ -113,6 +113,19 @@ $(function () {
                                 senderType: type
                             },
                             success: function (responsebean) {
+                                $.ajax({
+                                    type: 'get',
+                                    url: contextpath+"message/updateIsreaded.action?uid="+$("#msg_"+frendid).val(),
+                                    contentType: 'application/json',
+                                    dataType: 'json',
+                                    success: function (json) {
+                                        if(json<=0){
+                                            if($(".sign"))$(".sign").hide();
+                                            $(".notice-icon").attr("src",contextpath+ "statics/image/message.png");
+                                        }
+
+                                    }
+                                })
 
                             }
                         });
@@ -200,7 +213,9 @@ $(function () {
                                     + "</span></td></tr>";
                                 html += "<tr><td colspan='2' class='personMessageContent'>私信内容："
                                     + n.content
-                                    + '</td><td class="buttonDetail"><div class="buttonAccept" ><a class="a openTallk" id="' + n.talkId + '" href="javascript:" >查看详情</a></div></td></tr>';
+                                    + '</td><td class="buttonDetail"><div class="buttonAccept" ><a class="a openTallk" id="' + n.talkId + '" href="javascript:" >查看详情</a>' +
+                                    '<input type="hidden" value="'+n.id+'" id="msg_'+n.talkId+'">' +
+                                    '</div></td></tr>';
                                 html += "<tr><td colspan='4' align='center'><hr class='line'></td></tr>";
                                 html += "<input id='name_" + n.talkId + "' type='hidden' value='" + n.name + "'/><input id='type_" + n.talkId + "' type='hidden'value='" + n.type + "' />";
                                 $("#list").append(html);
