@@ -160,8 +160,8 @@ public class SSOLoginoutController extends BaseController {
                             if (param[0].equals("weixinref")) {//此处可以判断为微信过来的请求,跳转到微信的内部登录
                                 response.sendRedirect(referUrl.split("\\?")[0] +
                                         "?username=" + username +
-                                        "&usertype" + usertype +
-                                        "&refer" + param[1] +
+                                        "&usertype=" + usertype +
+                                        "&refer=" + param[1] +
                                         "&md5=" + MD5.md5(username + "1005387596c57c2278f4f61058c78d1b" + new SimpleDateFormat("yyyyMMdd").format(new Date())).toLowerCase());
                                 return;
                             }
