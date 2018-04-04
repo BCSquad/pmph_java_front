@@ -167,4 +167,6 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
         return "success";
     }
 
+
+
 }

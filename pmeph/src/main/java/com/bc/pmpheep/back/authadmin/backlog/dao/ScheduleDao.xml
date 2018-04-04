@@ -73,7 +73,7 @@
 	<!-- 查询已办事项列表 -->
 	<select id="selectDoneSchedule" parameterType="PageParameter" resultType="java.util.Map">
 		SELECT * FROM(
-		SELECT d.realname AS NAME,d.gmt_create AS TIME,m.`material_name` AS CONTENT,
+		SELECT d.realname AS NAME,d.gmt_create AS gmt_create,m.`material_name` AS CONTENT,
 		d.material_id AS AUDITID,"A" AS TYPE,d.gmt_update AS UPDATETIME,d.`online_progress` AS PROGRESS,w.avatar
 		FROM declaration d 
 		LEFT JOIN material m
@@ -86,7 +86,7 @@
 		) t1
 		UNION 
 		SELECT * FROM (
-		SELECT w1.realname,w.gmt_create,"教师资格认证",w1.id,"B",w1.gmt_update,w.progress,w1.avatar 
+		SELECT w1.realname,w.gmt_create AS gmt_create,"教师资格认证",w1.id,"B",w1.gmt_update,w.progress,w1.avatar
 		FROM writer_user_certification w
 		LEFT JOIN org_user u1
 		ON w.org_id = u1.org_id
@@ -94,14 +94,14 @@
 		ON w1.id= w.user_id 
 		WHERE u1.`id` = #{parameter.userId} AND w.progress IN(2,3)
 		) t2
-		ORDER BY TIME DESC
+		ORDER BY gmt_create DESC
 		limit #{start},#{pageSize}
 	</select>
 	<!-- 查询已办事项条数 -->
 	<select id="selectDoneScheduleCount" parameterType="java.util.Map" resultType="int" >
 		SELECT COUNT(*) FROM (
 		SELECT * FROM(
-		SELECT d.realname AS NAME,d.gmt_create AS TIME,m.`material_name` AS TYPE 
+		SELECT d.realname AS NAME,d.gmt_create AS gmt_create,m.`material_name` AS TYPE
 		FROM declaration d 
 		LEFT JOIN material m
 		ON d.`material_id` = m.`id`
@@ -111,7 +111,7 @@
 		ORDER BY d.gmt_create DESC) t1
 		UNION 
 		SELECT * FROM (
-		SELECT w1.username,w.gmt_create,"教师资格认证" FROM writer_user_certification w
+		SELECT w1.username,w.gmt_create AS gmt_create,"教师资格认证" FROM writer_user_certification w
 		LEFT JOIN org_user u1
 		ON w.org_id = u1.org_id
 		LEFT JOIN writer_user w1		

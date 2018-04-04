@@ -942,7 +942,7 @@ function checkNull(jsonStr){
  * 人卫社教材编写情况的标准书号，校验标准按照：978-7-117-*****-*的格式去校验，且默认加载出978-7-117-或者978-7-117-写定；
  */
 function check_pmph_isbn(id){
-	var num = $("#"+id).val();
+	/*var num = $("#"+id).val();
 	if(num != undefined){
 		if (is_pmph_textbook_required==1 && $.trim(num)=="") {
 			layer.tips("教材标准书号不能为空", '#'+id);
@@ -956,14 +956,14 @@ function check_pmph_isbn(id){
 	        b = false;
 	        return false;
 	    }
-	}	
+	}	*/
 	return true;
 }
 /**
  * 其他社教材编写情况的标准书号，校验标准按照：978-7-*********的格式去校验，且默认加载出978-7-或者978-7-写定；
  */
 function check_jcb_isbn(id){
-	var num = $("#"+id).val();
+	/*var num = $("#"+id).val();
 	if(num != undefined){
 		if (is_textbook_required==1 && $.trim(num)=="") {
 			layer.tips("教材标准书号不能为空", '#'+id);
@@ -977,7 +977,7 @@ function check_jcb_isbn(id){
 	        b = false;
 	        return false;
 	    }
-	}	
+	}	*/
 	return true;
 }
 

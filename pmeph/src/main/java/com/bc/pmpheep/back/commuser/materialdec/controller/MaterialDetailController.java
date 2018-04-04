@@ -618,11 +618,11 @@ public class MaterialDetailController extends BaseController{
 		materialMap = this.mdService.queryMaterialbyId(material_id);
 		//2.作家申报职位暂存
 		List<Map<String,Object>> tssbList = new ArrayList<Map<String,Object>>();
-		if(gezlList.get(0).get("online_progress").toString().equals("0")){ //表示未提交
-			tssbList=this.mdService.queryTssbZc(queryMap);
-		}else{//退回，通过，提交 都在正式申请表
+	//	if(gezlList.get(0).get("online_progress").toString().equals("0")){ //表示未提交
+	//		tssbList=this.mdService.queryTssbZc(queryMap);
+	//	}else{//退回，通过，提交 都在正式申请表
 			tssbList=this.mdService.queryTsxz(queryMap);
-		}
+	//	}
 		if(tssbList.size()>0){
 			for (Map<String, Object> map : tssbList) {
 				if(map.get("preset_position").equals(3)){//
@@ -776,11 +776,11 @@ public class MaterialDetailController extends BaseController{
 		queryMap.put("is_digital_editor_optional", materialMap.get("is_digital_editor_optional"));
 		//2.作家申报职位暂存
 		List<Map<String,Object>> tssbList = new ArrayList<Map<String,Object>>();
-		if(gezlList.get(0).get("online_progress").toString().equals("0")){ //表示未提交
-			tssbList=this.mdService.queryTssbZc(queryMap);
-		}else{//退回，通过，提交 都在正式申请表
+	//	if(gezlList.get(0).get("online_progress").toString().equals("0")){ //表示未提交
+	//		tssbList=this.mdService.queryTssbZc(queryMap);
+	//	}else{//退回，通过，提交 都在正式申请表
 			tssbList=this.mdService.queryTsxz(queryMap);
-		}
+	//	}
 		if(tssbList.size()>0){
 			for (Map<String, Object> map : tssbList) {
 				String pos_a = ""; //主编 4

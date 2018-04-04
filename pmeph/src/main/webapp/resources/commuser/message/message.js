@@ -250,9 +250,9 @@ function lookDetailInfo(id,cmsid,is_read){
             dataType:'json',
             async:false,
             success:function(flag){
-                if(flag=='ok'){
+                if(flag!='error'){
                     location.href=contextpath+"message/noticeMessageDetail.action?cmsId="+cmsid+"&umid="+id;
-                }else{
+                }else if(flag=='error'){
                     window.message.error("出错了!");
                 }
             }
