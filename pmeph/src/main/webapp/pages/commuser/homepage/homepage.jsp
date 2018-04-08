@@ -151,12 +151,12 @@
                         <c:if test="${list.notEnd ==1 and list.is_material_entry==true and list.declaration_id != null and list.dec_editable==1 }">
                             <div class="left_join"
                                  onclick="window.location.href='${ctx}/material/toMaterialZc.action?declaration_id=${list.declaration_id}'">
-                                编辑申报
+                                报名参加
                             </div>
                         </c:if>
                         <c:if test="${list.notEnd ==1 and list.is_material_entry==true and list.declaration_id != null and list.dec_editable==0}">
                             <div class="left_join" onclick="window.location.href='${ctx}/material/showMaterial.action?declaration_id=${list.declaration_id}'">
-                                查看申报
+                                报名参加
                             </div>
                         </c:if>
                         <c:if test="${list.notEnd ==0 and list.is_material_entry==true}">
@@ -169,14 +169,17 @@
                 <div class="more" onclick="top.location='${ctx}/cmsnotice/tolist.action'">更多>></div>
             </div>
             <div class="notice area-3">
-                <div class="title" style="float: left">
+                <div class="title" style="float: left;margin-right: 30px;">
                     <div class="line bgcolor-blue"></div>
                     <div class="name color-blue"><img src="${ctx}/statics/testfile/xx.png"
                                                       style="margin-left: 30px;margin-top: 15px"></div>
                 </div>
-                <div class="photo-size">
-                    <img src="${ctx}/statics/testfile/content.png">
-                </div>
+                <c:if test="${listNot[0].first_img_url != 'none' }">
+	                <div class="photo-size">
+	                	<img src="${ctx}/image/${listNot[0].first_img_url}.action">
+	                    <%-- <img src="${ctx}/statics/testfile/content.png"> --%>
+	                </div>
+                </c:if>
                 <c:forEach items="${listNot}" var="list" varStatus="status">
                     <c:if test="${status.index==0}">
                         <div class="content-photo">
