@@ -53,15 +53,15 @@
 		</if>
 		<if test="materialId==null">
 			<if test="order == 0">
-				cc.is_promote desc,cc.sort_promote asc,
-				cc.is_hot desc,cc.sort_hot asc,
+				cc.is_promote*cc.sort_promote desc,
+				cc.is_hot*cc.sort_hot desc,
 				cc.auth_date desc
 			</if>
 			<if test="order == 1">
 				cc.auth_date DESC
 			</if>
 			<if test="order == 2">
-				cc.is_hot desc,cc.sort_hot asc
+				(cc.clicks+cc.comments+cc.likes) desc
 			</if>
 		</if>
 		LIMIT #{start},#{pageSize}
