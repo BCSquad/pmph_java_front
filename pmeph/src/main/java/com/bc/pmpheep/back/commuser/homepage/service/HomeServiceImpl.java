@@ -1,17 +1,25 @@
 package com.bc.pmpheep.back.commuser.homepage.service;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService;
 import com.bc.pmpheep.back.commuser.homepage.dao.HomeDao;
 import com.bc.pmpheep.back.util.RouteUtil;
+import com.bc.pmpheep.general.pojo.Content;
+import com.bc.pmpheep.general.service.ContentService;
 
 
 @Service("com.bc.pmpheep.back.homepage.service.HomeServiceImpl")
@@ -19,6 +27,13 @@ public class HomeServiceImpl implements HomeService {
 
     @Autowired
     private HomeDao homeDao;
+    
+    @Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService")
+	private ArticleSearchService articleSearchService;
+    
+    @Autowired
+	private ContentService contentService;
 
     /**
      * 查询公告
@@ -34,11 +49,54 @@ public class HomeServiceImpl implements HomeService {
      * 查询信息快报
      */
     @Override
-    @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName")
+    //@Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName")
     public List<Map<String, Object>> queryNotice() {
         List<Map<String, Object>> list = homeDao.queryNotice();
+        if (list.size()>0) {
+        	String mid = list.get(0).get("mid").toString();
+        	//抓取文章图片
+			if (mid!=null) {
+				Content content = contentService.get(mid);
+				String img_url = getFirstImgUrlFromHtmlStr(content);
+				list.get(0).put("first_img_url", img_url);
+			}
+		}
         return list;
     }
+    
+ // 获取html图片
+ 	private String getFirstImgUrlFromHtmlStr(Content content) {
+ 		String img_url = 
+ 				"none";
+ 		if (content != null) {
+ 			List<String> imglist = this.getImgSrc(content
+ 					.getContent());
+ 			if (imglist.size() > 0) {
+ 				img_url = imglist.get(0);
+ 			}
+ 		}
+ 		return img_url;
+ 	}
+ 	
+ 	private List<String> getImgSrc(String html){
+ 		String img = "";
+        Pattern p_image;
+        Matcher m_image;
+        List<String> pics = new ArrayList<>(16);
+        //String regEx_img = "<img.*src=(.*?)[^>]*?>"; //图片链接地址  
+        String regEx_img = "<img.*src\\s*=\\s*(.*?)[^>]*?>";
+        p_image = Pattern.compile(regEx_img, Pattern.CASE_INSENSITIVE);
+        m_image = p_image.matcher(html);
+        while (m_image.find()) {
+            img = img + "," + m_image.group();
+            // Pattern.compile("src=\"?(.*?)(\"|>|\\s+)").matcher(img); //匹配src  
+            Matcher m = Pattern.compile("src\\s*=\\s*\".*?([A-z0-9]{24}?)").matcher(img);
+            while (m.find()) {
+                pics.add(m.group(1));
+            }
+        }
+        return pics;
+ 	}
 
     /**
      * 查询医学随笔

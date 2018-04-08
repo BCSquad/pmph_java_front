@@ -88,11 +88,11 @@ $(function(){
                         } else if (responsebean[i].notEnd == '1' && responsebean[i].isMaterialEntry == true && responsebean[i].declarationId != null && responsebean[i].decEditable == '1') {
                             html+="<div class=\"gg\"\n" +
                             "                                 onclick=\"window.location.href='" + contextpath + "material/toMaterialZc.action?declaration_id=" + responsebean[i].declarationId + "'\">\n" +
-                            "                                编辑申报\n" +
+                            "                                报名参加\n" +
                             "                            </div>"
                         } else if (responsebean[i].notEnd == '1' && responsebean[i].isMaterialEntry == true && responsebean[i].declarationId != null && responsebean[i].decEditable == '0') {
                             html+="<div class=\"gg\" onclick=\"window.location.href='" + contextpath + "material/showMaterial.action?declaration_id=" + responsebean[i].declarationId + "'\">\n" +
-                            "                                                查看申报\n" +
+                            "                                                报名参加\n" +
                             "                                                </div>"
                         } else if (responsebean[i].notEnd == '0' && responsebean[i].isMaterialEntry == true) {
                             html+="<div class=\"gg end\">报名结束</div>"
