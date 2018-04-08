@@ -4,7 +4,9 @@ body {
     font-family: "Microsoft Yahei", Tahoma, Verdana !important;
     color: #333333;
 }
-
+body image{
+    border: none;
+}
 .content-wrapper {
     width: 1200px;
     margin: 0 auto;
