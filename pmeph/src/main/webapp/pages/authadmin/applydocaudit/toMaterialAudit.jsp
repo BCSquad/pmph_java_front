@@ -757,7 +757,7 @@
 					 </c:otherwise>
 				</c:choose>
 			</div>
-		
+		<span style="color: #E31028;font-size: 14px;text-align: center;float: left;margin-left: 350px;">打印推荐使用浏览器：chrome、360浏览器极速模式、IE浏览器支持IE10及以上版本</span>
 	</div>
 </div>
 <div style="width: 100%;padding: 0;margin: auto;border:none;overflow: hidden;">
