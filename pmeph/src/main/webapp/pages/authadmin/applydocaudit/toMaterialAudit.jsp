@@ -75,7 +75,7 @@
                 </div>
         </div>
 		<!-- ------------------------------------------------------------------ -->
-		<!-- 图书选择-->
+
 		<!-- 图书选择-->
 		<div class="sbxq_item1">
 			<div>
@@ -175,7 +175,7 @@
 					<tbody>
 					<c:forEach var="stulist" items="${stuList}">
 						<tr>
-							<td>${stulist.date_begin}-${stulist.date_end}</td>
+							<td>${stulist.dbegin}- ${stulist.dend}</td>
 							<td>${stulist.school_name}</td>
 							<td>${stulist.major}</td>
 							<td>${stulist.degree}</td>
@@ -205,7 +205,7 @@
 					<tbody>
 					<c:forEach var="list" items="${workList}">
 						<tr>
-							<td>${list.date_begin}-${list.date_end}</td>
+							<td>${list.dbegin}-${list.dend}</td>
 							<td>${list.org_name}</td>
 							<td>${list.position}</td>
 							<td>${list.note}</td>
@@ -234,7 +234,7 @@
 					<tbody>
 					<c:forEach var="list" items="${steaList}">
 						<tr>
-							<td>${list.date_begin}-${list.date_end}</td>
+							<td>${list.dbegin}-${list.dend}</td>
 							<td>${list.school_name}</td>
 							<td>${list.subject}</td>
 							<td>${list.note}</td>
@@ -590,7 +590,7 @@
 						<tr>
 							<td>${list.reward_name}</td>
 							<td>${list.award_unit}</td>
-							<td>${list.reward_date}</td>
+							<td>${list.rewarddate}</td>
 							<td>${list.note}</td>
 						</tr></c:forEach>
 					</tbody>
@@ -619,7 +619,7 @@
 							<td>${list.paper_name}</td>
 							<td>${list.journal_name}</td>
 							<td>${list.factor}</td>
-							<td>${list.publish_date}</td>
+							<td>${list.publishdate}</td>
 							<td>${list.note}</td>
 						</tr></c:forEach>
 					</tbody>
@@ -650,7 +650,7 @@
 								<c:if test="${list.award_unit == '1'}">国际</c:if>
 								<c:if test="${list.award_unit == '2'}">国家</c:if>
 							</td>
-							<td>${list.reward_date}</td>
+							<td>${list.rewarddate}</td>
 							<td>${list.note}</td>
 						</tr></c:forEach>
 					</tbody>
@@ -683,7 +683,7 @@
 								<c:if test="${list.award_unit == '3'}">省部</c:if>
 								<c:if test="${list.award_unit == '4'}">市</c:if>
 							</td>
-							<td>${list.reward_date}</td>
+							<td>${list.rewarddate}</td>
 							<td>${list.note}</td>
 						</tr></c:forEach>
 					</tbody>
@@ -726,7 +726,7 @@
 				</div>
 			</div>
 			<!-- 院校推荐意见-->
-			<div class="yijian" style="display: none;">
+			<div class="yijian" style="display: block;">
 				<div class="tujian01">院校推荐意见:</div>
 				<div class="tujian02">
 					<div class="qianzi">负责人签字:</div>

@@ -66,7 +66,8 @@
 }
 
 .content{
-	width: 1080px;
+   /* width:1200px;*/
+	width: 1050px;
 }
 
 .tab_1{
@@ -241,7 +242,9 @@ a.input {
 }
 
 .text_cl{
-	width: 1156px;
+	/*width: 1156px;*/box-sizing: content-box;
+
+    width:1010px;
 	height: 60px;
 	background-color: #e8f1fa;
 	border-radius: 3px;
@@ -345,7 +348,7 @@ a.input {
 .yijian{
     border: 1px solid #0C0C0C;
     margin-top: 30px;
-    width: 1074px;
+    width: 1050px;
     height: 250px;
 }
 
@@ -371,5 +374,5 @@ a.input {
 
 .tujian03{
     margin-top: 200px;
-    margin-left: 960px;
+    margin-left: 940px;
 }

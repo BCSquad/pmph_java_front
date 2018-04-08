@@ -202,6 +202,7 @@ public class DataAuditController extends BaseController{
 			//3.作家学习经历表
 			List<Map<String,Object>> stuList = new ArrayList<Map<String,Object>>();
 			stuList=this.dataAuditService.queryStu(queryMap);
+
 			//4.作家工作经历表
 			List<Map<String,Object>> workList = new ArrayList<Map<String,Object>>();
 			workList=this.dataAuditService.queryWork(queryMap);
