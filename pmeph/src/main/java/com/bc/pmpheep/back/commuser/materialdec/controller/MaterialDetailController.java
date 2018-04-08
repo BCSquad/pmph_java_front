@@ -205,7 +205,7 @@ public class MaterialDetailController extends BaseController{
 			sex = "1";
 		}
 		perMap.put("sex",sex);
-		perMap.put("birthday", request.getParameter("birthday"));
+		perMap.put("birthday", "".equals(request.getParameter("birthday")) ? null:request.getParameter("birthday"));
 		perMap.put("experience", request.getParameter("experience"));
 		perMap.put("org_name", request.getParameter("org_name"));
 		perMap.put("position", request.getParameter("position"));
@@ -222,9 +222,6 @@ public class MaterialDetailController extends BaseController{
 		perMap.put("is_dispensed", "".equals(request.getParameter("is_dispensed")) ? null:request.getParameter("is_dispensed"));
 		perMap.put("is_utec", "".equals(request.getParameter("is_utec")) ? null:request.getParameter("is_utec"));
 		perMap.put("degree", "".equals(request.getParameter("degree")) ? null:request.getParameter("degree"));
-//		perMap.put("is_dispensed", "1");
-//		perMap.put("is_utec", "1");
-//		perMap.put("degree", "2");
 		perMap.put("rank","2");
 		perMap.put("expertise", request.getParameter("expertise"));
 		perMap.put("gmt_create", date);

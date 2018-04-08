@@ -57,7 +57,7 @@ public class AdminInfoController extends BaseController {
         Map <String,Object> map = this.getUserInfo() ;
     	Long userId = new Long(String.valueOf(map.get("id")));
     	Map<String, Object> admininfo=adminInfoService.getOrgUserById(userId);
-
+        
         mv.addObject("admininfo",admininfo);
         mv.setViewName("authadmin/accountset/admininfo");
         return mv;
@@ -75,7 +75,7 @@ public class AdminInfoController extends BaseController {
         Map <String,Object> map1 = this.getUserInfo() ;
     	Long userId = new Long(String.valueOf(map1.get("id")));
         Map<String,Object> map = adminInfoService.getOrgUserById(userId);
-
+        
         if(null!=map&&map.size()>0){
         	String fileId = (String) map.get("proxy");
         	if(null!=fileId&&!fileId.equals("")){
@@ -83,10 +83,10 @@ public class AdminInfoController extends BaseController {
         		if(null!=file){
         			map.put("proxyName", file.getFilename());
         		}
-
+        	
         	}
         }
-
+        
         mv.addObject("admininfo",map);
         mv.setViewName("authadmin/accountset/adminattest");
         return mv;
@@ -121,20 +121,20 @@ public class AdminInfoController extends BaseController {
         	StringUtils.isEmpty(orgUser.getHandphone())||
         	StringUtils.isEmpty(orgUser.getPostCode())||
         	StringUtils.isEmpty(orgUser.getEmail())||
-        	StringUtils.isEmpty(orgUser.getFax())||
-        	StringUtils.isEmpty(orgUser.getId())||
+        	StringUtils.isEmpty(orgUser.getFax())||	
+        	StringUtils.isEmpty(orgUser.getId())||	
         	/*StringUtils.isEmpty(orgUser.getBirthday())||
         	StringUtils.isEmpty(orgUser.getExperience())||	
         	StringUtils.isEmpty(orgUser.getWorkplace())||	*/
         	StringUtils.isEmpty(orgUser.getAddress())){
-
+        	
         	code="fail";
-
+            
         }else{
         	 adminInfoService.updateOrgUser(orgUser);
              code="success";
         }
-
+       
         return code;
     }
 
@@ -143,19 +143,19 @@ public class AdminInfoController extends BaseController {
      * @param orgUser
      * @return
      */
-    @RequestMapping(value = "/updateorguserpassword",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateorguserpassword",method = RequestMethod.POST/*,consumes = "application/json"*/)
     @ResponseBody
-    public ResponseBean<OrgAdminUser> updateOrgUserPassword(/*@RequestBody*/ OrgAdminUser orgUser,HttpServletRequest request) throws IOException {
+    public ResponseBean<OrgAdminUser> updateOrgUserPassword(/*@RequestBody*/ OrgAdminUser orgUser){
         ResponseBean<OrgAdminUser> responseBean=new ResponseBean<>();
 //        orgUser.setId(Long.parseLong("1267"));
         Map <String,Object> map1 = this.getUserInfo() ;
     	Long userId = new Long(String.valueOf(map1.get("id")));
         orgUser.setId(userId);
-      /*  DesRun desRun=new DesRun("",orgUser.getPassword());
-        orgUser.setPassword(desRun.enpsw);*/
+        DesRun desRun=new DesRun("",orgUser.getPassword());
+        orgUser.setPassword(desRun.enpsw);
+     
+        adminInfoService.updatePassword(orgUser);
 
-        //adminInfoService.updatePassword(orgUser);
-        userService.modifyUser(MapUtils.getString(map1,"username"),request.getParameter("password"));
         return responseBean;
     }
     

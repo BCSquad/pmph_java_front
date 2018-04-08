@@ -267,7 +267,7 @@
 				order by c.gmt_create desc
 			</when>
 			<otherwise>
-				order by a.gmt_create desc
+				order by a.deadline desc
 			</otherwise>
 		</choose>
 		

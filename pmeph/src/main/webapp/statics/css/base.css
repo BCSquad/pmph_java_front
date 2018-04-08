@@ -4,7 +4,9 @@ body {
     font-family: "Microsoft Yahei", Tahoma, Verdana !important;
     color: #333333;
 }
-
+body image{
+    border: none;
+}
 .content-wrapper {
     width: 1200px;
     margin: 0 auto;
@@ -205,7 +207,7 @@ body {
 
 .head .user-select img {
     width: 148px;
-    height: 150px;
+    height: 175px;
 }
 
 .head .user-select .select {
@@ -341,7 +343,7 @@ body {
 .head .logininfo {
     position: absolute;
     top: 32px;
-    right: 250px;
+    right: 240px;
     width: 110px;
     color: #ff0000;
     vertical-align: middle;
@@ -350,6 +352,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-align: right;
 }
 
 .head .logininfoout {
