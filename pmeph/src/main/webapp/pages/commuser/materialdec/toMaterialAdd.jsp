@@ -25,7 +25,8 @@
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="body">
-	<div class="content-wrapper">
+	<span class="content-wrapper">
+		<div style="color: red;font-size: 16px;margin-top: 28px;">提示：为确保填写成功，请用360极速浏览器或谷歌浏览器</div>
 		<div class="sbxq_title">
 			<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a style="text-decoration: none;color: #999999;" href="${contextpath}/personalhomepage/tohomepage.action?pagetag=jcsb&pageNum=1&pageSize=10"> 教材申报 </a> > 填写申报表</span>
 		</div>

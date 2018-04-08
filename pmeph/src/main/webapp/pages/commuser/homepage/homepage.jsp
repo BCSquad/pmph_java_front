@@ -151,12 +151,12 @@
                         <c:if test="${list.notEnd ==1 and list.is_material_entry==true and list.declaration_id != null and list.dec_editable==1 }">
                             <div class="left_join"
                                  onclick="window.location.href='${ctx}/material/toMaterialZc.action?declaration_id=${list.declaration_id}'">
-                                编辑申报
+                                报名参加
                             </div>
                         </c:if>
                         <c:if test="${list.notEnd ==1 and list.is_material_entry==true and list.declaration_id != null and list.dec_editable==0}">
                             <div class="left_join" onclick="window.location.href='${ctx}/material/showMaterial.action?declaration_id=${list.declaration_id}'">
-                                查看申报
+                                报名参加
                             </div>
                         </c:if>
                         <c:if test="${list.notEnd ==0 and list.is_material_entry==true}">
