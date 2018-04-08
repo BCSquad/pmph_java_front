@@ -169,7 +169,7 @@
                 <div class="more" onclick="top.location='${ctx}/cmsnotice/tolist.action'">更多>></div>
             </div>
             <div class="notice area-3">
-                <div class="title" style="float: left">
+                <div class="title" style="float: left;margin-right: 30px;">
                     <div class="line bgcolor-blue"></div>
                     <div class="name color-blue"><img src="${ctx}/statics/testfile/xx.png"
                                                       style="margin-left: 30px;margin-top: 15px"></div>

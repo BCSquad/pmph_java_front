@@ -3,7 +3,7 @@
 	<div>
 		<div class="right-up-tag">已结束</div>
 	    <div class="material-title">
-            <a target="_blank"  style="text-decoration: none;cursor: pointer;"
+            <a target="_blank"  style="text-decoration: none;cursor: pointer;color: #333333;"
 				#if($!{cms_id}>0) href="$!{contextpath}message/noticeMessageDetail.action?cmsId=$!{cms_id}"
 				#else title = "抱歉，该教材公告详情已被删除。"
 				#end
@@ -20,7 +20,7 @@
 #else
 	<div>
 	    <div class="material-title">
-            <a target="_blank"  style="text-decoration: none;cursor: pointer;"
+            <a target="_blank"  style="text-decoration: none;cursor: pointer;color: #333333;"
 				#if($!{cms_id}>0) href="$!{contextpath}message/noticeMessageDetail.action?cmsId=$!{cms_id}"
 				#else title = "抱歉，该教材公告详情已被删除。"
 				#end
