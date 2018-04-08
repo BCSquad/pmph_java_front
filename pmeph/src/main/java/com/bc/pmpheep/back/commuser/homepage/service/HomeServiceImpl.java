@@ -49,7 +49,7 @@ public class HomeServiceImpl implements HomeService {
      * 查询信息快报
      */
     @Override
-    //@Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName")
+    @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName")
     public List<Map<String, Object>> queryNotice() {
         List<Map<String, Object>> list = homeDao.queryNotice();
         if (list.size()>0) {
