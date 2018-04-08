@@ -133,22 +133,22 @@
 						<td colspan="2"><span>地&emsp;&emsp;址：${gezlList.address}</span></td>
 					</tr>
 					<tr>
-						<td><span>&ensp;服从调剂：</span>
+						<td><span>服从调剂：</span>
 							<c:if test="${gezlList.is_dispensed == '0'}">否</c:if>
 							<c:if test="${gezlList.is_dispensed == '1'}">是</c:if>
 						</td>
-						<td><span>&ensp;参与本科教学评估认证：</span>
+						<td><span>参与本科教学评估认证：</span>
 							<c:if test="${gezlList.is_utec == '0'}">否</c:if>
 							<c:if test="${gezlList.is_utec == '1'}">是</c:if>
 						</td>
-						<td><span>&ensp;学&emsp;&emsp;历：</span>
+						<td><span>学&emsp;&emsp;历：</span>
 							<c:if test="${gezlList.degree=='0'}">无</c:if>
 							<c:if test="${gezlList.degree=='1'}">大专</c:if>
 							<c:if test="${gezlList.degree=='2'}">本科</c:if>
 							<c:if test="${gezlList.degree=='3'}">硕士</c:if>
 							<c:if test="${gezlList.degree=='4'}">博士</c:if>
 						</td>
-						<td><span>&ensp;专业特长：</span>
+						<td><span>专业特长：</span>
 							${gezlList.expertise}
 						</td>
 					</tr>
