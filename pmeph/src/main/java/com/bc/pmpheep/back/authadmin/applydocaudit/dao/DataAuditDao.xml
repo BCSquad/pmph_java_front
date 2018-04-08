@@ -311,23 +311,24 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 	
 	<!-- 学习经历 -->
 	<select id="queryStu" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from dec_edu_exp where declaration_id = #{declaration_id} ORDER BY sort 
+
+select e.*, REPLACE(e.date_begin,'-','.') as dbegin,REPLACE(e.date_end,'-','.') as dend from dec_edu_exp  e where e.declaration_id = #{declaration_id} ORDER BY e.sort
 	</select>
 	<!-- 工作经历 -->
 	<select id="queryWork" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from dec_work_exp where declaration_id = #{declaration_id} ORDER BY sort 
+		select e.*, REPLACE(e.date_begin,'-','.') as dbegin,REPLACE(e.date_end,'-','.') as dend from dec_work_exp  e where e.declaration_id = #{declaration_id} ORDER BY e.sort
 	</select>
 	<!--教学经历-->
 	<select id="queryStea" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from dec_teach_exp where declaration_id = #{declaration_id} ORDER BY sort 
+		select e.*, REPLACE(e.date_begin,'-','.') as dbegin,REPLACE(e.date_end,'-','.') as dend from dec_teach_exp  e where e.declaration_id = #{declaration_id} ORDER BY e.sort
 	</select>
 	<!-- //作家学术 -->
 	<select id="queryZjxs" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from dec_acade where declaration_id = #{declaration_id} ORDER BY sort 
+		select * from dec_acade where declaration_id = #{declaration_id} ORDER BY sort
 	</select>
 	<!--上版教材编辑-->
 	<select id="queryJcbj" resultType="java.util.Map" parameterType="java.util.Map">
-		select id,declaration_id,material_name,position,is_digital_editor*1 is_digital_editor,note,sort,publisher,publish_date from dec_last_position where declaration_id = #{declaration_id} ORDER BY sort
+		select id,declaration_id,material_name,position,is_digital_editor*1 is_digital_editor,note,sort,publisher,REPLACE(publish_date,'-','.') as  publish_date  from dec_last_position where declaration_id = #{declaration_id} ORDER BY sort
 	</select>
 	<!-- 精品课程建设 -->
 	<select id="queryGjkcjs" resultType="java.util.Map" parameterType="java.util.Map">
@@ -335,13 +336,13 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 	</select>
 	<!-- 作家主编国家级规划教材情况 -->
 	<select id="queryGjghjc" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from dec_national_plan where declaration_id = #{declaration_id} ORDER BY sort 
+		select * from dec_national_plan where declaration_id = #{declaration_id} ORDER BY sort
 	</select>
 	
 	<!-- 人卫社教材编写情况 -->
 	<select id="queryRwsjc" resultType="java.util.Map" parameterType="java.util.Map">
 		select id,declaration_id,material_name,rank,position,
-		is_digital_editor*1 is_digital_editor,publish_date,isbn,note,sort
+		is_digital_editor*1 is_digital_editor,  REPLACE(publish_date,'-','.') as publish_date,isbn,note,sort
 		 from dec_textbook_pmph where declaration_id = #{declaration_id}
 		  ORDER BY sort 
 	</select>
@@ -349,7 +350,7 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 	<!-- 其他社教材编写情况 -->
 	<select id="queryJcbx" resultType="java.util.Map" parameterType="java.util.Map">
 		select id,declaration_id,material_name,rank,position,
-		is_digital_editor*1 is_digital_editor,publisher,publish_date,isbn,note,sort
+		is_digital_editor*1 is_digital_editor,publisher,REPLACE(publish_date,'-','.') as publish_date,isbn,note,sort
 		 from dec_textbook where declaration_id = #{declaration_id}
 		  ORDER BY sort 
 	</select>
@@ -372,23 +373,23 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 	
 	<!-- //主编学术专著情况 -->
 	<select id="queryMonograph" resultType="java.util.Map" parameterType="java.util.Map">
-		select id,declaration_id,monograph_date,monograph_name,is_self_paid*1 is_self_paid,publisher,publish_date,note,sort from dec_monograph where declaration_id = #{declaration_id} ORDER BY sort
+		select id,declaration_id,REPLACE(monograph_date,'-','.') as  monograph_date,monograph_name,is_self_paid*1 is_self_paid,publisher,REPLACE(publish_date,'-','.') as publish_date,note,sort from dec_monograph where declaration_id = #{declaration_id} ORDER BY sort
 	</select>
 	<!-- //出版行业获奖情况 -->
 	<select id="queryPublish" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from dec_publish_reward where declaration_id = #{declaration_id} ORDER BY sort 
+		select r.*, REPLACE(r.reward_date ,'-','.') as rewarddate  from dec_publish_reward  r where r.declaration_id = #{declaration_id} ORDER BY r.sort
 	</select>
 	<!-- //SCI论文投稿及影响因子 -->
 	<select id="querySci" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from dec_sci where declaration_id = #{declaration_id} ORDER BY sort 
+		select s.*,REPLACE(s.publish_date,'-','.') as publishdate from dec_sci  s where s.declaration_id = #{declaration_id} ORDER BY s.sort
 	</select>
 	<!-- //临床医学获奖情况 -->
 	<select id="queryClinicalreward" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from dec_clinical_reward where declaration_id = #{declaration_id} ORDER BY sort 
+		select r.*,REPLACE(r.reward_date,'-','.') as rewarddate from dec_clinical_reward  r where r.declaration_id = #{declaration_id} ORDER BY r.sort
 	</select>
 	<!-- //学术荣誉授予情况 -->
 	<select id="queryAcadereward" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from dec_acade_reward where declaration_id = #{declaration_id} ORDER BY sort 
+		select r.*,REPLACE(r.reward_date,'-','.') as rewarddate from dec_acade_reward r where r.declaration_id = #{declaration_id} ORDER BY r.sort
 	</select>
 	<!-- //人卫慕课、数字教材编写情况 -->
 	<select id="queryMoocdigital" resultType="java.util.Map" parameterType="java.util.Map">
