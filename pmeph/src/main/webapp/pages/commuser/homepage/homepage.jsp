@@ -174,9 +174,12 @@
                     <div class="name color-blue"><img src="${ctx}/statics/testfile/xx.png"
                                                       style="margin-left: 30px;margin-top: 15px"></div>
                 </div>
-                <div class="photo-size">
-                    <img src="${ctx}/statics/testfile/content.png">
-                </div>
+                <c:if test="${listNot[0].first_img_url != 'none' }">
+	                <div class="photo-size">
+	                	<img src="${ctx}/image/${listNot[0].first_img_url}.action">
+	                    <%-- <img src="${ctx}/statics/testfile/content.png"> --%>
+	                </div>
+                </c:if>
                 <c:forEach items="${listNot}" var="list" varStatus="status">
                     <c:if test="${status.index==0}">
                         <div class="content-photo">
