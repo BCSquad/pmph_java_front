@@ -720,4 +720,10 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         return this.madd.queryIntention(map);
     }
 
+	@Override
+	public Map<String, Object> queryDeclarationByUserIdAndMaterialIdOrDeclarationId(String user_id, String material_id, String declaration_id) {
+		Map<String, Object> map = madd.queryDeclarationByUserIdAndMaterialIdOrDeclarationId(user_id,material_id,declaration_id);
+		return map;
+	}
+
 }

@@ -2249,7 +2249,7 @@ var domUtils = dom.domUtils = {
      * @example
      * ```html
      * <div id="test">
-     *     <div id="child">你好</div>
+     *     <div id="child">您好</div>
      * </div>
      * <script>
      *     UE.dom.domUtils.remove( document.body, false );
@@ -2268,7 +2268,7 @@ var domUtils = dom.domUtils = {
      * @example
      * ```html
      * <div id="test">
-     *     <div id="child">你好</div>
+     *     <div id="child">您好</div>
      * </div>
      * <script>
      *     UE.dom.domUtils.remove( document.body, true );
@@ -7089,7 +7089,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
         /**
          * 同步数据到编辑器所在的form
          * 从编辑器的容器节点向上查找form元素，若找到，就同步编辑内容到找到的form里，为提交数据做准备，主要用于是手动提交的情况
-         * 后台取得数据的键值，使用你容器上的name属性，如果没有就使用参数里的textarea项
+         * 后台取得数据的键值，使用您容器上的name属性，如果没有就使用参数里的textarea项
          * @method sync
          * @example
          * ```javascript
@@ -7102,7 +7102,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * 根据传入的formId，在页面上查找要同步数据的表单，若找到，就同步编辑内容到找到的form里，为提交数据做准备
          * 后台取得数据的键值，该键值默认使用给定的编辑器容器的name属性，如果没有name属性则使用参数项里给定的“textarea”项
          * @method sync
-         * @param { String } formID 指定一个要同步数据的form的id,编辑器的数据会同步到你指定form下
+         * @param { String } formID 指定一个要同步数据的form的id,编辑器的数据会同步到您指定form下
          */
         sync: function (formId) {
             var me = this,

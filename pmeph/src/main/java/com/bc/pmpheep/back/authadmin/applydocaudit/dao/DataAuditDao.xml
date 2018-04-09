@@ -272,7 +272,7 @@
 	
 	<!-- 专家信息 --> 
 	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
-		select t1.*,t2.org_name dwmc from (select id,material_id,user_id,realname,sex,birthday,experience,org_name,position,title,address,postcode,handphone,email,idtype,
+		select t1.*,t2.org_name dwmc from (select id,material_id,user_id,realname,sex,REPLACE(birthday,'-','.') as birthday,experience,org_name,position,title,address,postcode,handphone,email,idtype,
 idcard,telephone,fax,org_id,online_progress,auth_user_id,auth_date,offline_progress,paper_date,is_staging*1 is_staging,is_deleted*1 is_deleted,
 gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,expertise,return_cause from declaration) t1 left join (select id,org_name from org 
 	union select '0' id,'人民卫生出版社' org_name from dual) t2 on t1.org_id = t2.id

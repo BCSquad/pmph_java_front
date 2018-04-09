@@ -229,4 +229,13 @@ public interface MaterialDetailService {
 	 * 编写内容意向表
 	 */
 	public Map<String,Object> queryIntention(Map<String, Object> map);
+	
+	/**
+	 * 通过以下参数查找已存在的申报
+	 * @param user_id
+	 * @param material_id
+	 * @param declaration_id
+	 * @return key：dec_editable 申报可编辑，notEnd 教材报名未结束
+	 */
+	public Map<String, Object> queryDeclarationByUserIdAndMaterialIdOrDeclarationId(String user_id, String material_id, String declaration_id);
 }

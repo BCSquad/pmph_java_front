@@ -3,6 +3,8 @@ package com.bc.pmpheep.back.commuser.materialdec.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.bc.pmpheep.back.plugin.PageParameter;
 
 public interface MaterialDetailDao {
@@ -121,4 +123,14 @@ public interface MaterialDetailDao {
 		 * 更新个人资料
 		 */
 		public int updateWriter(Map<String, Object> map);
+		
+		/**
+		 * 通过以下参数查找已存在的申报
+		 * @param user_id
+		 * @param material_id
+		 * @param declaration_id
+		 * @return key：dec_editable 申报可编辑，notEnd 教材报名未结束
+		 */
+		public Map<String, Object> queryDeclarationByUserIdAndMaterialIdOrDeclarationId(
+				@Param("user_id")String user_id, @Param("material_id")String material_id, @Param("declaration_id")String declaration_id);
 }
