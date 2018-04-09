@@ -65,7 +65,14 @@ public class MaterialDetailController extends BaseController{
 	public ModelAndView toMaterialAdd(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("commuser/materialdec/toMaterialAdd");
 		Map<String,Object> userMap =  this.getUserInfo();
-		String material_id = request.getParameter("material_id"); //教材ID
+        for (Map.Entry<String, Object> entry : userMap.entrySet()) {
+            String key = entry.getKey().toString();
+            String value = entry.getValue().toString();
+            if(value.equals("-")){
+				userMap.put(key,"");
+			}
+        }
+        String material_id = request.getParameter("material_id"); //教材ID
 		//教材信息
 		Map<String,Object> materialMap = new HashMap<String,Object>();
 		materialMap = this.mdService.queryMaterialbyId(material_id);
