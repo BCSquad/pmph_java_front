@@ -75,7 +75,7 @@ public interface ArticleDetailService {
 	PageResult<Map<String, Object>> queryComment(PageParameter<Map<String, Object>> pageParameter);
 
 	/**
-	 * @Description: 查询猜你喜欢
+	 * @Description: 查询猜您喜欢
 	 * @return List<Map<String, Object>>
 	 */
 	List<Map<String, Object>> queryArticleSix();

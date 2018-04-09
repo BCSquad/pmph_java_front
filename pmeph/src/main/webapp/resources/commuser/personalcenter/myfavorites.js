@@ -49,7 +49,7 @@ $(function(){
     //文章取消收藏
     function cancelMarkc(id,markes,cmsid,favorite_id){
     	// var cmsId=$("#cms"+cmsid).val();
-    	window.message.confirm("你确定取消收藏吗？",{btn:["确定","取消"]},function(){
+    	window.message.confirm("您确定取消收藏吗？",{btn:["确定","取消"]},function(){
     		$.ajax({
     			type:'post',
     			url:contextpath+'articlecollection/cancelmark.action',
@@ -97,7 +97,7 @@ $(function(){
     //取消书籍收藏
     function cancelMark(id,markes,bkid,favorite_id){
         // var bookId=$("#book"+bkid).val();
-        window.message.confirm("你确定取消收藏吗？",{btn:["确定","取消"]},function(){
+        window.message.confirm("您确定取消收藏吗？",{btn:["确定","取消"]},function(){
             $.ajax({
                 type:'post',
                 url:contextpath+'bookcollection/cancelmark.action',

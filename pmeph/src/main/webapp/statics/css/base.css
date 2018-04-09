@@ -479,6 +479,17 @@ body image{
     margin-top: 15px;
 }
 
+.copyright .bhh {
+    margin-top: -2px;
+    margin-right: 5px;
+}
+
+.copyright img {
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+}
+
 .org-head .div-content {
     width: 1200px;
     margin: 0 auto;

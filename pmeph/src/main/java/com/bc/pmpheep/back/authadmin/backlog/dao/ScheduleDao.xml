@@ -84,14 +84,14 @@
 		on d.user_id = w.id
 		WHERE	u.`id` = #{parameter.userId} AND d.online_progress IN(2,3)
 		) t1
-		UNION 
+		UNION
 		SELECT * FROM (
 		SELECT w1.realname,w.gmt_create AS gmt_create,"教师资格认证",w1.id,"B",w1.gmt_update,w.progress,w1.avatar
 		FROM writer_user_certification w
 		LEFT JOIN org_user u1
 		ON w.org_id = u1.org_id
-		LEFT JOIN writer_user w1		
-		ON w1.id= w.user_id 
+		LEFT JOIN writer_user w1
+		ON w1.id= w.user_id
 		WHERE u1.`id` = #{parameter.userId} AND w.progress IN(2,3)
 		) t2
 		ORDER BY gmt_create DESC

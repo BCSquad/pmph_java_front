@@ -550,7 +550,7 @@ $(function(){
 					    fileId   : fileId,
 					    fileSize : fileSize,
                     fileName: fileName
-                },// 你的form
+                },// 您的form
 				async: false,
 				dataType:"json",
                 complete:function () {
