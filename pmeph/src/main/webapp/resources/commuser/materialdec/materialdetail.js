@@ -8,7 +8,7 @@ function queryMaterialMap(id){
 	$.ajax({
 		type: "POST",
 		url:contextpath+'material/queryMaterialMap.action',
-		data:{material_id:id},// 你的formid
+		data:{material_id:id},// 您的formid
 		dataType:"json",
 	    success: function(json) {
 	    	chooseModel(json);

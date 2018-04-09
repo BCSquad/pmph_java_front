@@ -249,7 +249,7 @@ public class GroupServiceImpl implements GroupService {
         //以防万一所加的判断，但是前台功能正常来说是绝对不会走这个判断，用户点进这个小组页面是肯定属于此小组的
         if (ObjectUtil.isNull(groupMember)) {
             throw new CheckedServiceException(CheckedExceptionBusiness.GROUP,
-                    CheckedExceptionResult.NULL_PARAM, "你不是该小组成员");
+                    CheckedExceptionResult.NULL_PARAM, "您不是该小组成员");
         }
         return groupMember;
     }
@@ -323,16 +323,16 @@ public class GroupServiceImpl implements GroupService {
         Map<String,Object> queryMap = new HashMap<String,Object>();
         queryMap.put("group_id", groupId);
         queryMap.put("user_id", memberId);
-        String flag = "你是这个小组的普通用户";
+        String flag = "您是这个小组的普通用户";
         Map<String,Object> map = groupDao.memberRole(queryMap);
         if(null == map){
             return flag;
         }
         if (((Boolean)map.get("is_founder")) ) {
-            flag = "你是这个小组的创建者";
+            flag = "您是这个小组的创建者";
         }
         if(((Boolean)map.get("is_admin"))){
-            flag = "你是这个小组的管理员";
+            flag = "您是这个小组的管理员";
         }
         return flag;
     }

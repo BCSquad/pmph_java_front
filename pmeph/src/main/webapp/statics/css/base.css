@@ -4,7 +4,9 @@ body {
     font-family: "Microsoft Yahei", Tahoma, Verdana !important;
     color: #333333;
 }
-
+body image{
+    border: none;
+}
 .content-wrapper {
     width: 1200px;
     margin: 0 auto;
@@ -475,6 +477,17 @@ body {
 .tail .copyright {
     text-align: center;
     margin-top: 15px;
+}
+
+.copyright .bhh {
+    margin-top: -2px;
+    margin-right: 5px;
+}
+
+.copyright img {
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
 }
 
 .org-head .div-content {

@@ -257,7 +257,7 @@
         //字数统计提示，{#count}代表当前字数，{#leave}代表还可以输入多少字符数,留空支持多语言自动切换，否则按此配置显示
         //,wordCountMsg:''   //当前已输入 {#count} 个字符，您还可以输入{#leave} 个字符
         //超出字数限制提示  留空支持多语言自动切换，否则按此配置显示
-        //,wordOverFlowMsg:''    //<span style="color:red;">你输入的字符个数已经超出最大允许值，服务器可能会拒绝保存！</span>
+        //,wordOverFlowMsg:''    //<span style="color:red;">您输入的字符个数已经超出最大允许值，服务器可能会拒绝保存！</span>
 
         //tab
         //点击tab键时移动的距离,tabSize倍数，tabNode什么字符做为单位
