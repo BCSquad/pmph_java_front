@@ -196,7 +196,8 @@ color:#FFF;
 .grsx {
     float: left;
     /*height: 32px;*/
-    font-size: 12px;
+    font-size: 14px;
+    line-height:22px;
     text-align: justify;
     color: #03717b;
     margin-left: 11px;
