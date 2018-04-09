@@ -105,12 +105,12 @@ public class SSOLoginoutController extends BaseController {
             CloseableHttpResponse closeableHttpResponse = httpclient.execute(httpget);
             HttpEntity entity = closeableHttpResponse.getEntity();
             String xmlString = EntityUtils.toString(entity);
-            System.out.println(xmlString);
+         /*   System.out.println(xmlString);*/
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
             DocumentBuilder db = dbf.newDocumentBuilder();
             //通过DocumentBuilder对象的parser方法加载books.xml文件到当前项目下
-            Document document = db.parse(new ByteArrayInputStream(xmlString.getBytes()));
+            Document document = db.parse(new ByteArrayInputStream(xmlString.getBytes("utf-8")));
             NodeList bookList = document.getElementsByTagName("var");
             String status = null;
             String message = null;
@@ -130,6 +130,8 @@ public class SSOLoginoutController extends BaseController {
             if (!"OK".equals(status)) {
                 throw new RuntimeException("获取用户帐号失败:" + message);
             }
+
+
             List<Map<String, Object>> types = userService.getUserType(username);
             String usertype = "1";
             if (types.size() == 0) {
@@ -199,28 +201,31 @@ public class SSOLoginoutController extends BaseController {
 
             } else {
 
+                if ("1".equals(usertype)) {
+                    response.sendRedirect(request.getParameter("Referer"));
+                }
+
+
                 Set<LoginInterceptor.PathWithUsertypeMap> pathWithUsertypeMaps = interceptor.getPathWithUsertypeMaps();
 
                 PathMatchingResourcePatternResolver resolver = getPathMatchingResourcePatternResolver();
                 for (LoginInterceptor.PathWithUsertypeMap pathMap : pathWithUsertypeMaps) {
                     //需要拦截的URL
-                    if (resolver.getPathMatcher().match(request.getContextPath() + pathMap.getPath(), request.getParameter("Referer"))
-                            && pathMap.getUserType().equals(usertype)) {//路径匹配，并且用户身份一致可以跳转
+                    String comparePath = "";
+                    if (request.getParameter("Referer").startsWith(request.getScheme())) {
+                        comparePath = request.getScheme() + "://" + request.getServerName() +
+                                /*":" + request.getServerPort() +*/ request.getContextPath() + pathMap.getPath();
+                    } else {
+                        comparePath = request.getContextPath() + pathMap.getPath();
+                    }
+
+                    if (resolver.getPathMatcher().match(comparePath, request.getParameter("Referer"))
+                            && pathMap.getUserType().equals(usertype) && "2".equals(usertype)) {//路径匹配，并且用户身份一致可以跳转
 
                         response.sendRedirect(request.getParameter("Referer"));
                         return;
 
-                    } else if (resolver.getPathMatcher().match(request.getContextPath() + pathMap.getPath(), request.getParameter("Referer"))) {
-                        if ("1".equals(usertype)) {
-                            response.sendRedirect(request.getContextPath() + "/");
-                            return;
-                        } else if ("2".equals(usertype)) {
-                            response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
-                            return;
-                        }
                     }
-
-
                 }
 
                 if ("1".equals(usertype)) {
@@ -278,9 +283,9 @@ public class SSOLoginoutController extends BaseController {
 
                 }
             }*/
-            response.sendRedirect(logouturl + "?ServiceID=" + serviceID + "Referer=" + request.getContextPath() + "/schedule/scheduleList.action");
+            response.sendRedirect(logouturl + "?ServiceID=" + serviceID + "&Referer=" + request.getContextPath() + "/schedule/scheduleList.action");
         } else {
-            response.sendRedirect(logouturl + "?ServiceID=" + serviceID + "Referer=" + request.getContextPath() + "/homepage/tohomepage.action");
+            response.sendRedirect(logouturl + "?ServiceID=" + serviceID + "&Referer=" + request.getContextPath() + "/homepage/tohomepage.action");
         }
 
 

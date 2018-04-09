@@ -153,7 +153,7 @@ public class LoginInterceptor implements HandlerInterceptor {
                             builder.append(name + "=" + (values.length > 0 ? values[0] : "") + "&");
                         }
                         refer = URLEncoder.encode(httpServletRequest.getScheme() + "://" + httpServletRequest.getServerName() +
-                                ":" + httpServletRequest.getServerPort() + httpServletRequest.getContextPath() +
+                                /*":" + httpServletRequest.getServerPort() +*/ httpServletRequest.getContextPath() +
                                 httpServletRequest.getServletPath() + "?" + builder.toString(), "UTF-8");
 
                         httpServletResponse.sendRedirect(redirectUrl + "?ServiceID=" + serviceID + "&Referer=" + refer);
