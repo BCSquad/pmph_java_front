@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -1125,5 +1126,38 @@ public class MaterialDetailController extends BaseController{
 		mav.addObject("paraMap", paraMap);
 		return mav;
 	} 
+	
+	/**
+	 *  重定向方法，根据教材id或申报id及当前登录人判断重定向到新增或是修改或是查看申报，
+	 * @param material_id
+	 * @param declaration_id
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("MaterialDetailRedirect")
+	public ModelAndView MaterialDetailRedirect(
+			@RequestParam(value="material_id",defaultValue="")String material_id
+			,@RequestParam(value="declaration_id",defaultValue="")String declaration_id
+			,HttpServletRequest request){
+		ModelAndView mv = new ModelAndView();
+		Map<String, Object> user = getUserInfo();
+		String user_id = user.get("id").toString();
+		
+		Map<String, Object> dmap = mdService.queryDeclarationByUserIdAndMaterialIdOrDeclarationId(user_id,material_id,declaration_id);
+		if (dmap!=null) {
+			if ((boolean) dmap.get("notEnd")) {
+				if ((boolean) dmap.get("dec_editable")) {
+					mv.setViewName("redirect:/material/toMaterialZc.action?declaration_id="+declaration_id);
+				}else {
+					mv.setViewName("redirect:/material/showMaterial.action?declaration_id="+declaration_id);
+				}
+			}else{
+				mv.setViewName("redirect:/material/showMaterial.action?declaration_id="+declaration_id);
+			}
+		}else{
+			mv.setViewName("redirect:/material/toMaterialAdd.action?material_id="+material_id);
+		}
+		return mv;
+	}
 	
 }

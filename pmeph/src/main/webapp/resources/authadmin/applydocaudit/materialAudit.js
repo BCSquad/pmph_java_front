@@ -11,7 +11,7 @@ function queryMaterialMap(id){
 	$.ajax({
 		type: "POST",
 		url:contextpath+'dataaudit/queryMaterialMap.action',
-		data:{material_id:id},// 你的formid
+		data:{material_id:id},// 您的formid
 		dataType:"json",
 	    success: function(json) {
 	    	chooseModel(json);
@@ -103,7 +103,7 @@ function toAudit(id,type){
 		$.ajax({
 			type: "POST",
 			url:contextpath+'dataaudit/doMaterialAuditPass.action',
-			data:{declaration_id:id,online_progress:type,user_id:user_id},// 你的formid
+			data:{declaration_id:id,online_progress:type,user_id:user_id},// 您的formid
 			async: false,
 			dataType:"json",
 		    success: function(msg) {

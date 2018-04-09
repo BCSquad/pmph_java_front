@@ -138,7 +138,7 @@ $(function () {
             var type = $("#type_" + frendid).val();
             var username = $("#name_" + frendid).val();
             $("#talkList").html('');
-            $(".personMessageTitle").html("你与" + username + "的私信窗口");
+            $(".personMessageTitle").html("您与" + username + "的私信窗口");
             $("#box").attr("class", "b show");
             $("#close").attr("class", "hiddenX show");
             $("#talk").val(frendid);

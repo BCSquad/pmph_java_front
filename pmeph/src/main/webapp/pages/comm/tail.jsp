@@ -45,10 +45,10 @@
 
 
         <div class="copyright">
-            京公网安备 11010502031111号 备案号：京ICP备05067302号 ©2007-2014 All Rights Reserved 版权所有 人民卫生出版社有限公司
+            北京市朝阳区潘家园南里19号人卫大厦
         </div>
         <div class="copyright">
-            基建工程监督电话：59787010 基建工程监督信箱：jjjd@pmph.com
+            ©2014-2014  人民卫生出版社主办 京ICP备: 05067302号-2  <img class="bhh" width="20px" height="20px" src="${ctx}/statics/image/ghs.png" alt="">京公网安备 11010502031110号
         </div>
     </div>
 </div>

@@ -4502,7 +4502,7 @@
             },
     
             // 抽出来主要是为了解决android下面canvas.toDataUrl不支持jpeg.
-            // 你得到的结果是png.
+            // 您得到的结果是png.
             canvasToDataUrl: function( canvas, type, quality ) {
                 return canvas.toDataURL( type, quality / 100 );
             },
