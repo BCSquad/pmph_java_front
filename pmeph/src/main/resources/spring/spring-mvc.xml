@@ -32,6 +32,7 @@
 
 
     <bean id="loginInterceptor" class="com.bc.pmpheep.back.interceptor.LoginInterceptor">
+        <property name="remoteUrl" value="${remoteUrl}"></property>
         <property name="redirectUrl" value="${sso.url}"/>
         <property name="serviceID" value="${sso.serviceID}"></property>
         <property name="pathWithUsertypeMaps">
