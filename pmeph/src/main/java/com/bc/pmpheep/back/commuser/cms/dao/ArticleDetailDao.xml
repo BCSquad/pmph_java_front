@@ -156,7 +156,7 @@
 		order by t.gmt_create desc
 	</select>
 
-	<!-- 查询猜你喜欢 -->
+	<!-- 查询猜您喜欢 -->
 	<select id="queryArticleSix" resultType="java.util.Map">
 		select
 		t.id,

@@ -99,7 +99,7 @@ public class ArticleDetailController extends BaseController {
 			articleDetailService.changeClicks(wid, clinum);
 		}
 		
-		// 猜你喜欢
+		// 猜您喜欢
 		List<Map<String, Object>> listArtSix = articleDetailService.queryArticleSix();
 		// 点赞
 		Map<String, Object> user = getUserInfo();

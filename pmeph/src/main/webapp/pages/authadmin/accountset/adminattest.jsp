@@ -111,8 +111,8 @@
         <div class="div-content" style="width:1200px;background-color: #ffffff;margin-left: 76px">
             <div style="padding-top: 20px"><font class="td-title">机构管理员认证说明</font></div>
             <div id="divtop">
-                <div>如果你是机构管理员，为了更好保证你和广大平台用户的合法权益，请你认真填写以下信息。</div>
-                <div>认证信息审核通过后，你可以：</div>
+                <div>如果您是机构管理员，为了更好保证您和广大平台用户的合法权益，请您认真填写以下信息。</div>
+                <div>认证信息审核通过后，您可以：</div>
                 <div>1、协助平台管理自己学校的全体教师与学生；</div>
                 <div>2、协助平台管理自己学校的教师进行规划教材申报的资料审核；</div>
                 <div>3、享有机构管理员权限的其他功能。</div>
@@ -258,7 +258,7 @@
 		                                    
 		                                </div>
 	                                </div>
-	                                <div style="float:left;margin-left: 105px">
+	                                <div style="float:left;margin-left: 20px">
 	                                    <div style="float:left">
 	                                        <img style="margin-left: 20px" alt="暂无图片"
 	                                             src="${ctx}/statics/testfile/a01.png"/>&nbsp;
@@ -275,7 +275,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4"><font style="margin-left: 110px;" class="td-font-3">请下载委托书模板，按要求填写后打印盖章，并上传bmp，jpg，gif，jpeg，png的照片或者扫描件</font>
+                            <td colspan="4"><font style="margin-left: 422px;" class="td-font-3">请下载委托书模板，按要求填写后打印盖章，并上传bmp，jpg，gif，jpeg，png的照片或者扫描件</font>
                             </td>
                         </tr>
                         <tr>
@@ -338,7 +338,7 @@
                                     <label class="require">地址</label>
                                     <div class="input-wrapper">
                                         <input ${(admininfo.progress!=1)?"":"readonly='readonly'"}
-                                                style="width: 1050px" class="txt required" type="text" id="address"
+                                                style="width: 700px" class="txt required" type="text" id="address"
                                                 value="${admininfo.address}" data-valid="isNonEmpty"
                                                 data-error="地址不能为空" maxLength="50" />
                                     </div>

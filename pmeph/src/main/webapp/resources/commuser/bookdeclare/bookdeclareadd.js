@@ -143,7 +143,7 @@ function buttAdd(type){
         $.ajax({
             type: "POST",
             url:contextpath+'bookdeclare/doBookdeclareAdd.action?stype='+type,
-            data:$('#objForm').serialize(),// 你的formid
+            data:$('#objForm').serialize(),// 您的formid
             async: false,
             dataType:"json",
             success: function(json) {
@@ -166,7 +166,7 @@ function buttAdd(type){
             $.ajax({
                 type: "POST",
                 url:contextpath+'bookdeclare/doBookdeclareAdd.action?stype='+type,
-                data:$('#objForm').serialize(),// 你的formid
+                data:$('#objForm').serialize(),// 您的formid
                 async: false,
                 dataType:"json",
                 success: function(json) {

@@ -506,4 +506,29 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 		WHERE
 		id = #{user_id}
 	</update>
+	
+	<select id="queryDeclarationByUserIdAndMaterialIdOrDeclarationId" resultType="Map">
+		select 
+			d.id
+			,d.material_id
+			,(case 
+				when d.online_progress REGEXP '^[520]{1}$'
+				then 1
+				else 0
+				end )as dec_editable
+			,(TO_DAYS(NOW()) &lt;= TO_DAYS(m.actual_deadline ) and  !m.is_force_end and !m.is_all_textbook_published) as notEnd
+			
+		from 
+		declaration d 
+		join material m on m.id = d.material_id
+		where d.is_deleted =0 
+			and d.user_id = #{user_id}
+			<if test="material_id!=null and material_id != '' ">
+				and d.material_id = #{material_id}
+			</if>
+			<if test="declaration_id !=null and declaration_id != '' ">
+				and d.id = #{declaration_id}
+			</if>
+		group by d.id
+	</select>
 </mapper>

@@ -126,7 +126,7 @@ function queryMaterialMap(id){
     $.ajax({
         type: "POST",
         url:contextpath+'material/queryMaterialMap.action',
-        data:{material_id:id},// 你的formid
+        data:{material_id:id},// 您的formid
         dataType:"json",
         success: function(json) {
             chooseModel(json);
@@ -811,7 +811,7 @@ function buttAdd(type){
         $.ajax({
             type: "POST",
             url:contextpath+'material/doMaterialAdd.action?sjump=2&type='+type,
-            data:$('#objForm').serialize(),// 你的formid
+            data:$('#objForm').serialize(),// 您的formid
             async: false,
             success: function (json) {
                 if (json.msg == 'OK') {
@@ -833,7 +833,7 @@ function buttAdd(type){
             $.ajax({
                 type: "POST",
                 url: contextpath + 'material/doMaterialAdd.action?sjump=2&type=' + type,
-                data: $('#objForm').serialize(),// 你的formid
+                data: $('#objForm').serialize(),// 您的formid
                 async: false,
                 success: function (json) {
                     if (json.msg == 'OK') {
