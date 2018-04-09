@@ -678,7 +678,7 @@
 		<div class="sbxq_item1">
 			<div>
 				<span id="tsxz_span8"></span>
-				<span class="tsxz_title">请选择你的申报单位</span>
+				<span class="tsxz_title">请选择您的申报单位</span>
 			</div>
 			<div class="sbdw">
 				<span>申报单位：</span>

@@ -24,7 +24,7 @@ $(function(){
 		var frendid = this.id;
 		$("#frendId").val(frendid);
 		var username = $("#t_"+frendid).val();
-		$(".personMessageTitle").html("你与"+username+"的私信窗口");
+		$(".personMessageTitle").html("您与"+username+"的私信窗口");
 		$.ajax({
 	        type:'get',
 	        url :contextpath+'/mymessage/getDialogue.action',

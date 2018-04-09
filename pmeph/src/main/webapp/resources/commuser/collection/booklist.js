@@ -67,7 +67,7 @@
     function cancelMark(id,markes,bkid){
     	var favoriteId=$("#favoriteId").val();
     	var bookId=$("#book"+bkid).val();
-    	window.message.confirm("你确定取消收藏吗？",{btn:["确定","取消"]},function(){
+    	window.message.confirm("您确定取消收藏吗？",{btn:["确定","取消"]},function(){
     		$.ajax({
     			type:'post',
     			url:contextpath+'bookcollection/cancelmark.action',
@@ -85,7 +85,7 @@
     }
     //删除收藏夹
     function delFavorite(id){
-    	window.message.confirm("你确定删除吗？",{btn:["确定","取消"]},function(){
+    	window.message.confirm("您确定删除吗？",{btn:["确定","取消"]},function(){
     		location.href=contextpath+'bookcollection/delfavorite.action?favoriteId='+id;
    	    },function(){});
     }

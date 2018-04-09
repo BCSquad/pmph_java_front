@@ -175,11 +175,11 @@
 	                  </div>
                 </div>  
             </div> 
-        	<!--猜你喜欢-->
+        	<!--猜您喜欢-->
         	<div class="block">
                     <div class="title">
                         <div class="line"></div>
-                        <div class="rd_name">猜你喜欢</div>
+                        <div class="rd_name">猜您喜欢</div>
                     </div>
                     <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
                     <c:forEach items="${listArtSix}" var="list" varStatus="status">
