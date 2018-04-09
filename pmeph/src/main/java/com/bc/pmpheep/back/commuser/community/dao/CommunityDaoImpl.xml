@@ -121,8 +121,9 @@
 			 and buc.is_long=1
 			 and buc.is_deleted=0
 			 and buc.is_auth=1
+			 and buc.is_promote = 1
 	  ORDER BY
-		 buc.score
+	  	buc.sort_promote,buc.score desc
 	  limit #{startnum},#{size}
      </select>
      <!--查询社区主页精选书评的总数量  -->
@@ -135,6 +136,7 @@
 			 and buc.is_long=1
 			 and buc.is_deleted=0
 			 and buc.is_auth=1
+			 and buc.is_promote = 1
      </select>
      <!--查询教材中书籍微视频  -->
      <select id="queryVidos" parameterType="map" resultType="java.util.Map">
