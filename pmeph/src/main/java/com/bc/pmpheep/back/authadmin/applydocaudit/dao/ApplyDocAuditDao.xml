@@ -52,7 +52,8 @@
 			left join cms_content cc on cc.is_material_entry = 1 and cc.material_id =m.id
 			<where>
 			m.is_published = 1
-			and ((m.is_public ='0' and o.org_id = #{parameter.org_id}) or (m.is_public ='1'))
+			<!-- and ((m.is_public ='0' and o.org_id = #{parameter.org_id}) or (m.is_public ='1')) -->
+			and o.org_id = #{parameter.org_id}
 			</where>
 			GROUP BY
 			m.id
@@ -85,7 +86,7 @@
 			</choose>
 			)t
 		ORDER BY
-		notEnd desc,t.deadline desc
+		beenPublishTo desc,notEnd desc,t.deadline desc
 		LIMIT ${start}, ${pageSize}
 	</select>
 	
@@ -102,7 +103,8 @@
 		<where>
 			(m.is_deleted = 0 or m.is_deleted is null )
 			and m.is_published = 1
-			and((m.is_public = '0' and o.org_id = #{parameter.org_id}) or (m.is_public = '1'))
+			<!-- and((m.is_public = '0' and o.org_id = #{parameter.org_id}) or (m.is_public = '1')) -->
+			and o.org_id = #{parameter.org_id}
 			<if test="parameter.queryCon != null and parameter.queryCon != '' ">
 			and m.material_name LIKE CONCAT('%',#{parameter.queryCon },'%')
 			</if>
