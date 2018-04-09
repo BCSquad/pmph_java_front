@@ -258,7 +258,7 @@
 		                                    
 		                                </div>
 	                                </div>
-	                                <div style="float:left;margin-left: 105px">
+	                                <div style="float:left;margin-left: 20px">
 	                                    <div style="float:left">
 	                                        <img style="margin-left: 20px" alt="暂无图片"
 	                                             src="${ctx}/statics/testfile/a01.png"/>&nbsp;
@@ -275,7 +275,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4"><font style="margin-left: 110px;" class="td-font-3">请下载委托书模板，按要求填写后打印盖章，并上传bmp，jpg，gif，jpeg，png的照片或者扫描件</font>
+                            <td colspan="4"><font style="margin-left: 422px;" class="td-font-3">请下载委托书模板，按要求填写后打印盖章，并上传bmp，jpg，gif，jpeg，png的照片或者扫描件</font>
                             </td>
                         </tr>
                         <tr>
@@ -338,7 +338,7 @@
                                     <label class="require">地址</label>
                                     <div class="input-wrapper">
                                         <input ${(admininfo.progress!=1)?"":"readonly='readonly'"}
-                                                style="width: 1050px" class="txt required" type="text" id="address"
+                                                style="width: 700px" class="txt required" type="text" id="address"
                                                 value="${admininfo.address}" data-valid="isNonEmpty"
                                                 data-error="地址不能为空" maxLength="50" />
                                     </div>
