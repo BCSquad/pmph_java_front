@@ -146,7 +146,11 @@ public class DataAuditController extends BaseController{
 			}else{
 				queryMap.put("declaration_id", declaration_id);
 				if ("4".equals(gezlList.get(0).get("online_progress").toString())) {
-					return_cause = gezlList.get(0).get("return_cause").toString();
+					if(gezlList.get(0).get("return_cause")==null){
+						return_cause="";
+					}else{
+						return_cause = gezlList.get(0).get("return_cause").toString();
+					}
 					mav.addObject("return_cause", return_cause);
 				}
 			}
