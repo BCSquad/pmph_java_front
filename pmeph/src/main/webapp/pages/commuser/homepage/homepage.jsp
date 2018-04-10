@@ -265,7 +265,7 @@
                             </c:forEach>
                         </div>
                     </div>
-                    <div class="right" id="homepagebook" style="float: right;">${homepagebook}</div>
+                    <div class="right" id="homepagebook" style="float: left;">${homepagebook}</div>
                 </div>
             </div>
             <div class="area-5">
