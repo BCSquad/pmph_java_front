@@ -17,11 +17,11 @@
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>我的好友</title>
-    <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
-    <link rel="stylesheet" href="${ctx}/statics/commuser/myfriend/myFriend.css" type="text/css">
-    <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
-    <script type="text/javascript" src="${ctx}/resources/commuser/myfriend/inviteMyFriend.js"></script>
+    <link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/commuser/myfriend/myFriend.css?t=${_timestamp}" type="text/css">
+    <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js?t=${_timestamp}"></script>
+    <script type="text/javascript" src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+    <script type="text/javascript" src="${ctx}/resources/commuser/myfriend/inviteMyFriend.js?t=${_timestamp}"></script>
     <style>
     	#rightContent .select-button {
             background: #f6f6f6;

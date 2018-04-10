@@ -11,18 +11,18 @@
     <c:set var="ctx" value="${pageContext.request.contextPath}" />
     <title>个人资料</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
-    <link href="${ctx}/statics/authadmin/accountset/publicStyle.css" rel="stylesheet" type="text/css"/>
-    <link href="${ctx}/statics/css/jquery.selectlist.css" rel="stylesheet" type="text/css" />
-    <link href="${ctx}/statics/commuser/userinfo/userinfo.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="${ctx}/statics/css/jquery.calendar.css" type="text/css">
-    <script src="${ctx}/resources/comm/jquery/jquery.js" type="text/javascript"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery-validate.js" type="text/javascript"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js" type="text/javascript"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js" type="text/javascript"></script>
-    <script src="${ctx}/resources/comm/base.js"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.calendar.js"></script>
-    <script src="${ctx}/resources/commuser/userinfo/userinfo.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
+    <link href="${ctx}/statics/authadmin/accountset/publicStyle.css?t=${_timestamp}" rel="stylesheet" type="text/css"/>
+    <link href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}" rel="stylesheet" type="text/css" />
+    <link href="${ctx}/statics/commuser/userinfo/userinfo.css?t=${_timestamp}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.calendar.css?t=${_timestamp}" type="text/css">
+    <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}" type="text/javascript"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery-validate.js?t=${_timestamp}" type="text/javascript"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}" type="text/javascript"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}" type="text/javascript"></script>
+    <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.calendar.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/commuser/userinfo/userinfo.js?t=${_timestamp}" type="text/javascript"></script>
     <script type="text/javascript">
             $(function () {
                 $(".sxy-div-menu").bind("click", function () {

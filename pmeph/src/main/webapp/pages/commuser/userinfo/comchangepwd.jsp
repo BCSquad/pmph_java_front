@@ -8,13 +8,13 @@
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>修改密码(作家用户)</title>
-    <script src="${ctx}/resources/comm/jquery/jquery.js" type="text/javascript"></script>
-    <script src="${ctx}/resources/comm/base.js" type="text/javascript"></script>
-    <script src="${ctx}/resources/comm/json2.js" type="text/javascript"></script>
-    <script src="${ctx}/resources/commuser/userinfo/comchangepwd.js" type="text/javascript"></script>
-    <link href="${ctx}/statics/css/base.css" rel="stylesheet" type="text/css"/>
-    <link href="${ctx}/statics/authadmin/accountset/publicStyle.css" rel="stylesheet" type="text/css"/>
-    <link href="${ctx}/statics/authadmin/accountset/changepwd.css" rel="stylesheet" type="text/css" />
+    <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}" type="text/javascript"></script>
+    <script src="${ctx}/resources/comm/base.js?t=${_timestamp}" type="text/javascript"></script>
+    <script src="${ctx}/resources/comm/json2.js?t=${_timestamp}" type="text/javascript"></script>
+    <script src="${ctx}/resources/commuser/userinfo/comchangepwd.js?t=${_timestamp}" type="text/javascript"></script>
+    <link href="${ctx}/statics/css/base.css?t=${_timestamp}" rel="stylesheet" type="text/css"/>
+    <link href="${ctx}/statics/authadmin/accountset/publicStyle.css?t=${_timestamp}" rel="stylesheet" type="text/css"/>
+    <link href="${ctx}/statics/authadmin/accountset/changepwd.css?t=${_timestamp}" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp">
