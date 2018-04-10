@@ -9,10 +9,10 @@
     </script>
     <title>帮助</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" href="<c:url value="/statics/css/base.css"/>" type="text/css">
-    <link href="<c:url value="/statics/commuser/userinfo/userinfo.css"/>" rel="stylesheet" type="text/css"/>
-    <script src="<c:url value="/resources/comm/jquery/jquery.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/resources/comm/base.js"/>"></script>
+    <link rel="stylesheet" href="<c:url value="/statics/css/base.css?t=${_timestamp}"/>" type="text/css">
+    <link href="<c:url value="/statics/commuser/userinfo/userinfo.css?t=${_timestamp}"/>" rel="stylesheet" type="text/css"/>
+    <script src="<c:url value="/resources/comm/jquery/jquery.js?t=${_timestamp}"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/comm/base.js?t=${_timestamp}"/>"></script>
     <style type="text/css">
         .menus {
             height: 40px;

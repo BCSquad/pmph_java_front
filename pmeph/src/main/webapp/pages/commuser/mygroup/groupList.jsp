@@ -16,11 +16,11 @@
     <script>
         var contextpath='${pageContext.request.contextPath}/';
     </script>
-   	<link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
-    <link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/groupList.css" type="text/css">
-    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
-    <script src="${ctx}/resources/commuser/mygroup/groupList.js"></script>
-    <script src="${ctx}/resources/comm/base.js"></script>
+   	<link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/groupList.css?t=${_timestamp}" type="text/css">
+    <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/commuser/mygroup/groupList.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
     
 </head>
 <body>

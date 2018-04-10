@@ -83,13 +83,14 @@ public class CommunityServiceImpl implements CommunityService {
 		if(list!=null){
 			for (Map<String, Object> map : list) {
 				List<String> imglist = getImgSrc(map.get("content").toString());
-				map.put("imagepath",imglist.size()>0? imglist.get(0):"defualt" );
+				//map.put("imagepath",imglist.size()>0? imglist.get(0):"defualt" );
+				map.put("imagepath",map.get("image_url").toString() );
 				map.put("contentxt", removeHtml(map.get("content").toString()));
 				if(map.get("avatar") !=null && (map.get("avatar").equals("DEFAULT")
 				  ||map.get("avatar").equals(""))){
-					map.put("avatar", "statics/image/rwtx.png");
+					map.put("avatar", "statics/image/default_image.png");
 				}else{
-					map.put("avatar", "file/download/"+map.get("avatar")+".action");
+					map.put("avatar", "image/"+map.get("avatar")+".action");
 				}
 			}
 		}

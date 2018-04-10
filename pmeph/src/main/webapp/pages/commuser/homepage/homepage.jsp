@@ -18,14 +18,14 @@
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>人卫E教平台</title>
-    <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
-    <link rel="stylesheet" href="${ctx}/statics/commuser/homepage/homepage.css" type="text/css">
-    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.scroll.js"></script>
-    <script src="${ctx}/resources/comm/base.js"></script>
-    <script src="${ctx}/resources/comm/menu.js"></script>
+    <link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/commuser/homepage/homepage.css?t=${_timestamp}" type="text/css">
+    <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.scroll.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/menu.js?t=${_timestamp}"></script>
 
-    <script src="${ctx}/resources/commuser/homepage/homepage.js"></script>
+    <script src="${ctx}/resources/commuser/homepage/homepage.js?t=${_timestamp}"></script>
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp">
@@ -265,7 +265,7 @@
                             </c:forEach>
                         </div>
                     </div>
-                    <div class="right" id="homepagebook" style="float: right;">${homepagebook}</div>
+                    <div class="right" id="homepagebook" style="float: left;">${homepagebook}</div>
                 </div>
             </div>
             <div class="area-5">

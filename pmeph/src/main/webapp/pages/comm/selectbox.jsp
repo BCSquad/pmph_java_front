@@ -13,9 +13,9 @@
     <title>Title</title>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" type="text/css" href="<c:url value="/statics/css/jquery.selectlist.css"/>">
-    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/statics/css/jquery.selectlist.css?t=${_timestamp}"/>">
+    <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
 </head>
 <body>
 <select id="edu" name="edu">

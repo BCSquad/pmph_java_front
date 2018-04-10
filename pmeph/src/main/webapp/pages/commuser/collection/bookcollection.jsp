@@ -17,11 +17,11 @@ String basePath = path+"/";
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>书籍收藏</title>
- <link rel="stylesheet" href="<%=path %>/statics/css/base.css" type="text/css">
-    <link rel="stylesheet" href="<%=path %>/statics/commuser/collection/bookcollection.css" type="text/css">
-    <script src="<%=path %>/resources/comm/jquery/jquery.js"></script>
-    <script src="<%=path %>/resources/comm/base.js"></script>
-    <script src="${ctx }/resources/commuser/collection/bookcollection.js"></script>
+ <link rel="stylesheet" href="<%=path %>/statics/css/base.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="<%=path %>/statics/commuser/collection/bookcollection.css?t=${_timestamp}" type="text/css">
+    <script src="<%=path %>/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
+    <script src="<%=path %>/resources/comm/base.js?t=${_timestamp}"></script>
+    <script src="${ctx }/resources/commuser/collection/bookcollection.js?t=${_timestamp}"></script>
 </head>
 <style type="text/css">
 </style>

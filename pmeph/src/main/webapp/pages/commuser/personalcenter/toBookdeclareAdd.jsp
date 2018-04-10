@@ -10,17 +10,17 @@
 	<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 	<title>我要出书-申报</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
-	<link rel="stylesheet" href="${ctx}/statics/commuser/bookdeclare/bookdeclareadd.css" type="text/css">
-	<link rel="stylesheet" href="${ctx}/statics/css/jquery.calendar.css" type="text/css">
-	<link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css" type="text/css">
-	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.calendar.js"></script>
-	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
-	<script type="text/javascript" src="${ctx}/resources/comm/layer/layer.js"></script>
-	<script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
-	<script src="${ctx}/resources/comm/jquery/jquery.fileupload.js" type="text/javascript"></script>
-	<script type="text/javascript" src="${ctx}/resources/commuser/bookdeclare/bookdeclareadd.js"></script>
+	<link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
+	<link rel="stylesheet" href="${ctx}/statics/commuser/bookdeclare/bookdeclareadd.css?t=${_timestamp}" type="text/css">
+	<link rel="stylesheet" href="${ctx}/statics/css/jquery.calendar.css?t=${_timestamp}" type="text/css">
+	<link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}" type="text/css">
+	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js?t=${_timestamp}"></script>
+	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.calendar.js?t=${_timestamp}"></script>
+	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
+	<script type="text/javascript" src="${ctx}/resources/comm/layer/layer.js?t=${_timestamp}"></script>
+	<script type="text/javascript" src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+	<script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}" type="text/javascript"></script>
+	<script type="text/javascript" src="${ctx}/resources/commuser/bookdeclare/bookdeclareadd.js?t=${_timestamp}"></script>
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>

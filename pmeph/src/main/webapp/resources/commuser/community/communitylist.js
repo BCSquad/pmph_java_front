@@ -1,5 +1,5 @@
 var pageSize=10   ;
-var pageNumber;
+var pageNumber = 1;
 $(function(){
 	pageNumber=1;
 	load("");	
@@ -9,9 +9,9 @@ $(function(){
 function  load(tag){
 	if(tag=="search"){
 		pageNumber = 1 ;	
-	}else if(pageNumber==1){ //若出现网络中断等原因使ajax请求失败，success中清空第一页的代码无法执行。除第一页进入页面时已经加载，需要从第二页开始加载，其他照常加载
-		pageNumber =2;
+		$("#changediv").html("");
 	}
+	
 	var data = {
         	pageNumber : pageNumber,
         	pageSize   : pageSize,
@@ -41,9 +41,7 @@ function  load(tag){
         	}
         	var html='';
         	var lastest='';
-        	if(tag=="search"){
-        		$("#changediv").html("");
-        	}
+        	
         	$.each(json,function(i,n){
         		if(pageNumber==1&&i<3){
         			lastest='<div class="items_img">最新</div>';

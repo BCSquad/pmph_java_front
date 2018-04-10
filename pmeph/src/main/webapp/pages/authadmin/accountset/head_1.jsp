@@ -9,8 +9,8 @@
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>用户管理</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script src="${ctx }/resources/comm/jquery/jquery.min.js" type="text/javascript"></script>
-    <link href="${ctx }/statics/css/publicStyle.css" rel="stylesheet" type="text/css" />
+    <script src="${ctx }/resources/comm/jquery/jquery.min.js?t=${_timestamp}" type="text/javascript"></script>
+    <link href="${ctx }/statics/css/publicStyle.css?t=${_timestamp}" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
         $(function () {
             $(".div-menu-child").bind("click", function () {
