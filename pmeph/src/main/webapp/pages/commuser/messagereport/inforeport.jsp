@@ -19,16 +19,16 @@ String basePath =path+"/";
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>信息快报详情</title>
- <link rel="stylesheet" href="<%=path %>/statics/css/base.css" type="text/css">
-    <link rel="stylesheet" href="<%=path %>/statics/css/jquery.pager.css"/>
-    <link rel="stylesheet" href="<%=path %>/statics/css/jquery.selectlist.css"/>
-    <link rel="stylesheet" href="<%=path %>/statics/commuser/messagereport/inforeport.css"/>
-    <script src="<%=path %>/resources/comm/jquery/jquery.js"></script>
-    <script src="<%=path %>/resources/comm/jquery/jquery.selectlist.js"></script>
-    <script src="<%=path %>/resources/comm/jquery/jquery.pager.js"></script>
-    <script src="<%=path %>/resources/comm/layer/layer.js"></script>
-    <script src="<%=path %>/resources/comm/base.js"></script>
-     <script src="<%=path %>/resources/commuser/messagereport/inforeport.js"></script>
+ <link rel="stylesheet" href="<%=path %>/statics/css/base.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="<%=path %>/statics/css/jquery.pager.css?t=${_timestamp}"/>
+    <link rel="stylesheet" href="<%=path %>/statics/css/jquery.selectlist.css?t=${_timestamp}"/>
+    <link rel="stylesheet" href="<%=path %>/statics/commuser/messagereport/inforeport.css?t=${_timestamp}"/>
+    <script src="<%=path %>/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
+    <script src="<%=path %>/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
+    <script src="<%=path %>/resources/comm/jquery/jquery.pager.js?t=${_timestamp}"></script>
+    <script src="<%=path %>/resources/comm/layer/layer.js?t=${_timestamp}"></script>
+    <script src="<%=path %>/resources/comm/base.js?t=${_timestamp}"></script>
+     <script src="<%=path %>/resources/commuser/messagereport/inforeport.js?t=${_timestamp}"></script>
 
 
 </head>

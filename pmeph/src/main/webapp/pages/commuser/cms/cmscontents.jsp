@@ -17,15 +17,15 @@
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
-     <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css"/>
-        <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
-    <link rel="stylesheet" href="${ctx}/statics/commuser/cms/cmscontents.css" type="text/css">
-    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
-     <script src="${ctx}/resources/comm/base.js"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.pager.js"></script>
-	<script src="${ctx}/resources/commuser/cms/cmscontents.js"></script>
+    <link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
+     <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css?t=${_timestamp}"/>
+        <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}"/>
+    <link rel="stylesheet" href="${ctx}/statics/commuser/cms/cmscontents.css?t=${_timestamp}" type="text/css">
+    <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
+     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.pager.js?t=${_timestamp}"></script>
+	<script src="${ctx}/resources/commuser/cms/cmscontents.js?t=${_timestamp}"></script>
 </head>
 <body>
 	<input type="hidden" id="page-num-temp" value="1">

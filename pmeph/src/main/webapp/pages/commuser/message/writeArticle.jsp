@@ -13,23 +13,23 @@
     <title>写文章</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet"
-          href="${ctx}/statics/commuser/message/writeArticle.css"
+          href="${ctx}/statics/commuser/message/writeArticle.css?t=${_timestamp}"
           type="text/css">
     <script type="text/javascript"
-            src="${ctx}/resources/comm/ueditor1.4.3.3/ueditor.config.js"></script>
+            src="${ctx}/resources/comm/ueditor1.4.3.3/ueditor.config.js?t=${_timestamp}"></script>
     <script type="text/javascript"
-            src="${ctx}/resources/comm/ueditor1.4.3.3/ueditor.all.min.js"></script>
+            src="${ctx}/resources/comm/ueditor1.4.3.3/ueditor.all.min.js?t=${_timestamp}"></script>
     <script type="text/javascript"
-            src="${ctx}/resources/comm/ueditor1.4.3.3/lang/zh-cn/zh-cn.js"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.form.js"></script>
-    <script src="${ctx}/resources/comm/base.js"></script>
-    <script src="${ctx}/resources/commuser/message/writeArticle.js" type="text/javascript"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js"
+            src="${ctx}/resources/comm/ueditor1.4.3.3/lang/zh-cn/zh-cn.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.form.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/commuser/message/writeArticle.js?t=${_timestamp}" type="text/javascript"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}"
             type="text/javascript"></script>
 
 
-    <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
 </head>
 
 <body>

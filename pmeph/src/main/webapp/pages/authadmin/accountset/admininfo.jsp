@@ -16,27 +16,27 @@
 </script>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <title>个人资料修改(机构用户)</title>
-<script src="${ctx}/resources/comm/jquery/jquery.js"
+<script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"
 	type="text/javascript"></script>
-<script src="${ctx}/resources/comm/jquery/jquery-validate.js"
+<script src="${ctx}/resources/comm/jquery/jquery-validate.js?t=${_timestamp}"
 	type="text/javascript"></script>
-<script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"
+<script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"
 	type="text/javascript"></script>
-<script src="${ctx}/resources/comm/base.js" type="text/javascript"></script>
-<script src="${ctx}/resources/comm/json2.js" type="text/javascript"></script>
-<script src="${ctx}/resources/authadmin/accountset/admininfo.js"
+<script src="${ctx}/resources/comm/base.js?t=${_timestamp}" type="text/javascript"></script>
+<script src="${ctx}/resources/comm/json2.js?t=${_timestamp}" type="text/javascript"></script>
+<script src="${ctx}/resources/authadmin/accountset/admininfo.js?t=${_timestamp}"
 	type="text/javascript"></script>
- <script src="${ctx}/resources/comm/jquery/jquery.calendar.js"></script>	
-     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js" type="text/javascript"></script>
-<link href="${ctx}/statics/css/base.css" rel="stylesheet"
+ <script src="${ctx}/resources/comm/jquery/jquery.calendar.js?t=${_timestamp}"></script>	
+     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}" type="text/javascript"></script>
+<link href="${ctx}/statics/css/base.css?t=${_timestamp}" rel="stylesheet"
 	type="text/css" />
-<link href="${ctx}/statics/authadmin/accountset/publicStyle.css"
+<link href="${ctx}/statics/authadmin/accountset/publicStyle.css?t=${_timestamp}"
 	rel="stylesheet" type="text/css" />
-<link href="${ctx}/statics/authadmin/accountset/admininfo.css"
+<link href="${ctx}/statics/authadmin/accountset/admininfo.css?t=${_timestamp}"
 	rel="stylesheet" type="text/css" />
-<link href="${ctx}/statics/css/jquery.selectlist.css" rel="stylesheet"
+<link href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}" rel="stylesheet"
 	type="text/css" />
- <link rel="stylesheet" href="${ctx}/statics/css/jquery.calendar.css" type="text/css">	
+ <link rel="stylesheet" href="${ctx}/statics/css/jquery.calendar.css?t=${_timestamp}" type="text/css">	
 <script type="text/javascript">
 	
 </script>

@@ -17,16 +17,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<%-- <base href="<%=basePath%>"> --%>
     <title>添加好友</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" href="<%=path%>/statics/css/base.css" type="text/css">
-    <link rel="stylesheet" href="<%=path%>/statics/commuser/addfriend/addfriend.css" type="text/css">
-    <script type="text/javascript" src="<%=path%>/resources/comm/jquery/jquery.min.js"></script>
-    <link rel="stylesheet" href="<%=path%>/statics/css/jquery.pager.css"/>
-    <link rel="stylesheet" href="<%=path%>/statics/css/jquery.selectlist.css"/>
-    <script src="<%=path%>/resources/comm/jquery/jquery.js"></script>
-    <script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js"></script>
-    <script src="<%=path%>/resources/comm/jquery/jquery.pager.js"></script>
-    <script src="<%=path%>/resources/comm/base.js"></script>
-    <script src="<%=path%>/resources/commuser/addfriend/addfriend.js"></script>
+    <link rel="stylesheet" href="<%=path%>/statics/css/base.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="<%=path%>/statics/commuser/addfriend/addfriend.css?t=${_timestamp}" type="text/css">
+    <script type="text/javascript" src="<%=path%>/resources/comm/jquery/jquery.min.js?t=${_timestamp}"></script>
+    <link rel="stylesheet" href="<%=path%>/statics/css/jquery.pager.css?t=${_timestamp}"/>
+    <link rel="stylesheet" href="<%=path%>/statics/css/jquery.selectlist.css?t=${_timestamp}"/>
+    <script src="<%=path%>/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
+    <script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
+    <script src="<%=path%>/resources/comm/jquery/jquery.pager.js?t=${_timestamp}"></script>
+    <script src="<%=path%>/resources/comm/base.js?t=${_timestamp}"></script>
+    <script src="<%=path%>/resources/commuser/addfriend/addfriend.js?t=${_timestamp}"></script>
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
