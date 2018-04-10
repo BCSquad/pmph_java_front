@@ -279,9 +279,9 @@ public class SSOLoginoutController extends BaseController {
             session.removeAttribute(Const.SESSION_USER_CONST_ORGUSER);
             String headReferer = request.getHeader("Referer");
 
-            response.sendRedirect(logouturl + "?ServiceID=" + serviceID + "&Referer=" + request.getContextPath() + home2);
+            response.sendRedirect(logouturl + "?ServiceID=" + serviceID + "&Referer=" + home1);
         } else {
-            response.sendRedirect(logouturl + "?ServiceID=" + serviceID + "&Referer=" + request.getContextPath() + home1);
+            response.sendRedirect(logouturl + "?ServiceID=" + serviceID + "&Referer=" + home1);
         }
 
 
