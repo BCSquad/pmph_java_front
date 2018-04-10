@@ -10,19 +10,24 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <title>申报详情</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
- <link rel="stylesheet" href="${ctx}/statics/materialdec/material.css" type="text/css">
-<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
-<script type="text/javascript" src="${ctx}/resources/commuser/materialdec/materialdetail.js"></script>
+<link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
+ <link rel="stylesheet" href="${ctx}/statics/materialdec/material.css?t=${_timestamp}" type="text/css">
+<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js?t=${_timestamp}"></script>
+	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.jqprint-0.3.js?t=${_timestamp}"></script>
+	<script src="http://www.jq22.com/jquery/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+<script type="text/javascript" src="${ctx}/resources/commuser/materialdec/materialdetail.js?t=${_timestamp}"></script>
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="body">
 	<div class="content-wrapper">
+
 		<div class="sbxq_title">
 			<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a style="text-decoration: none;color: #999999;" href="${contextpath}/personalhomepage/tohomepage.action?pagetag=jcsb&pageNum=1&pageSize=10"> 教材申报 </a> > ${material.material_name}</span>
 		</div>
+		<div id="ddd">
+			<div class="tsxz_title" id="tnone" style="display: none;text-align: center;font-size: 20px;margin-top: 6px;">${material.material_name}</div>
 		<!-- 图书选择-->
 		<div class="sbxq_item1">
 			<div>
@@ -80,22 +85,22 @@
 						<td colspan="2"><span>地&emsp;&emsp;址：${gezlList.address}</span></td>
 					</tr>
 					<tr>
-						<td><span>&ensp;服从调剂：</span>
+						<td><span>服从调剂：</span>
 							<c:if test="${gezlList.is_dispensed == '0'}">否</c:if>
 							<c:if test="${gezlList.is_dispensed == '1'}">是</c:if>
 						</td>
-						<td><span>&ensp;参与本科教学评估认证：</span>
+						<td><span>参与本科教学评估认证：</span>
 							<c:if test="${gezlList.is_utec == '0'}">否</c:if>
 							<c:if test="${gezlList.is_utec == '1'}">是</c:if>
 						</td>
-						<td><span>&ensp;学&emsp;&emsp;历：</span>
+						<td><span>学&emsp;&emsp;历：</span>
 	                                <c:if test="${gezlList.degree=='0'}">无</c:if>
 	                                <c:if test="${gezlList.degree=='1'}">大专</c:if>
 	                                <c:if test="${gezlList.degree=='2'}">本科</c:if>
 	                                <c:if test="${gezlList.degree=='3'}">硕士</c:if>
 	                                <c:if test="${gezlList.degree=='4'}">博士</c:if>
 	                    </td>
-						<td><span>&ensp;专业特长：</span>
+						<td><span>专业特长：</span>
 							${gezlList.expertise}
 						</td>
 					</tr>
@@ -122,7 +127,7 @@
 					<tbody>
 						<c:forEach var="stulist" items="${stuList}">
 							<tr>
-								<td>${stulist.date_begin}-${stulist.date_end}</td>
+								<td>${stulist.dbegin}-${stulist.dend}</td>
 								<td>${stulist.school_name}</td>
 								<td>${stulist.major}</td>
 								<td>${stulist.degree}</td>
@@ -152,7 +157,7 @@
 					<tbody>
 						<c:forEach var="list" items="${workList}">
 							<tr>
-								<td>${list.date_begin}-${list.date_end}</td>
+								<td>${list.dbegin}-${list.dend}</td>
 								<td>${list.org_name}</td>
 								<td>${list.position}</td>
 								<td>${list.note}</td>
@@ -181,7 +186,7 @@
 					<tbody>
 						<c:forEach var="list" items="${steaList}">
 							<tr>
-								<td>${list.date_begin}-${list.date_end}</td>
+								<td>${list.dbegin}-${list.dend}</td>
 								<td>${list.school_name}</td>
 								<td>${list.subject}</td>
 								<td>${list.note}</td>
@@ -536,7 +541,7 @@
 						<tr>
 							<td>${list.reward_name}</td>
 							<td>${list.award_unit}</td>
-							<td>${list.reward_date}</td>
+							<td>${list.rewarddate}</td>
 							<td>${list.note}</td>
 						</tr></c:forEach>
 					</tbody>
@@ -566,7 +571,7 @@
 							<td>${list.paper_name}</td>
 							<td>${list.journal_name}</td>
 							<td>${list.factor}</td>
-							<td>${list.publish_date}</td>
+							<td>${list.publishdate}</td>
 							<td>${list.note}</td>
 						</tr></c:forEach>
 					</tbody>
@@ -598,7 +603,7 @@
 								<c:if test="${list.award_unit == '1'}">国际</c:if>
 								<c:if test="${list.award_unit == '2'}">国家</c:if>
 							</td>
-							<td>${list.reward_date}</td>
+							<td>${list.rewarddate}</td>
 							<td>${list.note}</td>
 						</tr></c:forEach>
 					</tbody>
@@ -632,7 +637,7 @@
 								<c:if test="${list.award_unit == '3'}">省部</c:if>
 								<c:if test="${list.award_unit == '4'}">市</c:if>
 							</td>
-							<td>${list.reward_date}</td>
+							<td>${list.rewarddate}</td>
 							<td>${list.note}</td>
 						</tr></c:forEach>
 					</tbody>
@@ -685,11 +690,24 @@
 				<span>${gezlList.dwmc}</span>
 			</div>
 		</div>
+
+			<!-- 院校推荐意见-->
+		<div class="yijian" style="display: none;">
+			<div class="tujian01">院校推荐意见:</div>
+			<div class="tujian02">
+				<div class="qianzi">负责人签字:</div>
+				<div class="gaizhang">(院校盖章)</div>
+			</div>
+			<div class="tujian03">年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</div>
+		</div>
 		<hr style=" height:1px;border:none;border-top:1px #999999 dashed;margin-top: 30px;">
+		</div>
 		<c:if test="${isSelfLog=='true' }">
 			<div class="button">
 				<div class="bt_tj" onclick="javascript:buttGive()">返回申报列表</div>
+				<div class="bt_tj" onclick="toprint()">打印</div>
 			</div>
+			<span style="color: #E31028;font-size: 14px;text-align: center;float: left;margin-left: 350px;">打印推荐使用浏览器：chrome、360浏览器极速模式、IE浏览器支持IE10及以上版本</span>
 		</c:if>
 		
 	</div>

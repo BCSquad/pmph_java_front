@@ -10,11 +10,11 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <title>教材申报审核</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
- <link rel="stylesheet" href="${ctx}/statics/materialdec/materialAudit.css" type="text/css">
-<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
-<script type="text/javascript" src="${ctx}/resources/commuser/materialdec/materialAudit.js"></script>
+<link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
+ <link rel="stylesheet" href="${ctx}/statics/materialdec/materialAudit.css?t=${_timestamp}" type="text/css">
+<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js?t=${_timestamp}"></script>
+<script type="text/javascript" src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+<script type="text/javascript" src="${ctx}/resources/commuser/materialdec/materialAudit.js?t=${_timestamp}"></script>
 </head>
 <body>
 <div style="width: 100%;padding: 0;margin: 0;height: 110px;border: none;overflow: hidden;">

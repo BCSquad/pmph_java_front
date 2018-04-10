@@ -22,15 +22,15 @@
 }
 .collection .content .content-img{
     width:150px;
-    height:90px;
+    height:140px;
     float: left;
     text-align: center;
     vertical-align: middle;
 }
 .collection .content img{
-    width:150px;
-    height:90px;
-    border-radius: 2px
+    width: 100%;
+    max-height: 100%;
+    border-radius: 2px;
 }
 
 .collection .content .content-text{

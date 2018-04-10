@@ -352,10 +352,10 @@ ul li {
 
 .left_one{
 	width: 314px;
-	height: 200px;
-	margin-top: 20px;
-	float: left;
-    background: url("../../testfile/rectangle.png") no-repeat;
+    height: 203px;
+    margin-top: 10px;
+    float: left;
+    background: url(../../testfile/rectangle.png) no-repeat;
 /*    border: 1px solid #F2F2F2;
     border-radius:6px;*/
    /* box-shadow: 1px 1px 3px #888888;*/
@@ -365,14 +365,11 @@ ul li {
 
 .left_two{
     width: 314px;
-    height: 262px;
+    height: 288px;
     margin-top: 0px;
     float: left;
-    background: url("../../testfile/rectangle.png") no-repeat;
-    /*border: 1px solid #F2F2F2;
-    border-radius:6px;
-    box-shadow: 1px 1px 3px #888888;*/
-    background-size:100% 100%;
+    background: url(../../testfile/rectangle.png) no-repeat;
+    background-size: 100% 100%;
 }
 
 .p1_left{
@@ -750,9 +747,16 @@ ul li {
 }
 
 .content .right {
-    float: right;
-    width: 880px;
-    height: 100%;
+    float: left;
+    border: 1px solid #ececec;
+    /* border-top: none; */
+    margin-top: 10px;
+    box-shadow: #ececec 1px 3px 5px;
+    /* background: url(../../testfile/rectangle.png) no-repeat; */
+    border-radius: 7px;
+    /* background-size: 100% 100%; */
+    width: 869px;
+    height: 485px;
 }
 
 .area-4 .content .right .book {
@@ -760,8 +764,9 @@ ul li {
     width: 147px;
     height: 223px;
     margin-left: 20px;
-    /*background-color: darkseagreen;*/
-    margin-top: 23px;
+    /* background-color: darkseagreen; */
+    margin-top: 8px;
+    margin-bottom: 8px;
     cursor: pointer;
 }
 

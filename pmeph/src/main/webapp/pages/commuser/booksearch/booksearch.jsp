@@ -18,17 +18,17 @@ String contextpath=request.getContextPath();
 	<%-- <base href="<%=basePath%>"> --%>
     <title>图书搜索</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" href="<%=path%>/statics/css/base.css" type="text/css">
-    <link rel="stylesheet" href="<%=path%>/statics/commuser/booksearch/booksearch.css" type="text/css">
-    <link rel="stylesheet" href="<%=path%>/statics/css/jquery.pager.css"/>
-    <link rel="stylesheet" href="<%=path%>/statics/css/jquery.selectlist.css"/>
+    <link rel="stylesheet" href="<%=path%>/statics/css/base.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="<%=path%>/statics/commuser/booksearch/booksearch.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="<%=path%>/statics/css/jquery.pager.css?t=${_timestamp}"/>
+    <link rel="stylesheet" href="<%=path%>/statics/css/jquery.selectlist.css?t=${_timestamp}"/>
     <link rel="stylesheet" href="<%=path%>/resources/comm/radiobox/css/jquery-labelauty.css">
-    <script src="<%=path%>/resources/comm/jquery/jquery.js"></script>
-    <script src="<%=path%>/resources/comm/radiobox/js/jquery-labelauty.js"></script>
-    <script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js"></script>
-    <script src="<%=path%>/resources/comm/jquery/jquery.pager.js"></script>
-    <script src="<%=path%>/resources/comm/base.js"></script>
-    <script src="<%=path%>/resources/commuser/booksearch/booksearch.js"></script>
+    <script src="<%=path%>/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
+    <script src="<%=path%>/resources/comm/radiobox/js/jquery-labelauty.js?t=${_timestamp}"></script>
+    <script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
+    <script src="<%=path%>/resources/comm/jquery/jquery.pager.js?t=${_timestamp}"></script>
+    <script src="<%=path%>/resources/comm/base.js?t=${_timestamp}"></script>
+    <script src="<%=path%>/resources/commuser/booksearch/booksearch.js?t=${_timestamp}"></script>
 </head>
 <body>
 	<!-- 隐藏域 -->

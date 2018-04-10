@@ -17,13 +17,13 @@
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>遴选公告列表</title>
-    <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
-    <link rel="stylesheet" href="${ctx}/statics/commuser/focusAndSelect/newsReportAndMaterialNotice.css" type="text/css">
-    <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
-    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
-    <script src="${ctx}/resources/comm/base.js"></script>
-    <script src="${ctx}/resources/commuser/focusAndSelect/materialNotice.js" ></script>
+    <link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/commuser/focusAndSelect/newsReportAndMaterialNotice.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}"/>
+    <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/commuser/focusAndSelect/materialNotice.js?t=${_timestamp}" ></script>
     
 
     

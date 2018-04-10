@@ -37,7 +37,7 @@
         	<div class="mleft3">
             <div class="ysbrs3">
                 <div class="baomingrenshu3"><span class="canjiarenshu3">$!{c.exmember}</span><span>人</span>
-                    <br/><span class="ybmcj3">已报名参加</span></div>
+                    <br/><span class="ybmcj3">已报名人数</span></div>
                 </div>
                 <div class="bmcj3">
                     <div class="bmcjan3"><span>已结束</span></div>
@@ -56,7 +56,7 @@
                 <div class="ysbrs">
                     <div class="baomingrenshu"><span
                             class="canjiarenshu">$!{c.exmember}</span><span>人</span>
-                        <br/><span class="ybmcj">已报名参加</span></div>
+                        <br/><span class="ybmcj"></span></div>
                 </div>
                 <div class="bmcj">
                     <a class="abmcj" href="$!{contextpath}material/toMaterialAdd.action?material_id=$!{c.material_id}"><div class="bmcjan"><span>
@@ -69,7 +69,7 @@
                 <div class="ysbrs1">
                     <div class="baomingrenshu1"><span
                             class="canjiarenshu1">$!{c.exmember}</span><span>人</span>
-                        <br/><span class="ybmcj1">已报名参加</span></div>
+                        <br/><span class="ybmcj1">已报名人数</span></div>
                 </div>
                 <div class="bmcj2">
                     <a class="abmcj" href="$!{contextpath}material/toMaterialZc.action?declaration_id=$!{c.declaration_id}"><div class="bmcjan1">
@@ -82,7 +82,7 @@
                 <div class="ysbrs1">
                     <div class="baomingrenshu1"><span
                             class="canjiarenshu1">$!{c.exmember}</span><span>人</span>
-                        <br/><span class="ybmcj1">已报名参加</span></div>
+                        <br/><span class="ybmcj1">已报名人数</span></div>
                 </div>
                 <div class="bmcj1">
                     <a class="abmcj" href="$!{contextpath}progress/listReportProgress.action?materialId=$!{c.material_id}"><div class="bmcjan1"><span>申报进度查询</span></div></a>
@@ -96,7 +96,7 @@
                 <div class="ysbrs1">
                     <div class="baomingrenshu1"><span
                             class="canjiarenshu1">$!{c.exmember}</span><span>人</span>
-                        <br/><span class="ybmcj1">已报名参加</span></div>
+                        <br/><span class="ybmcj1">已报名人数</span></div>
                 </div>
                 <div class="bmcj1">
                 	<a class="abmcj" href="$!{contextpath}progress/listReportProgress.action?materialId=$!{c.material_id}"><div class="bmcjan1"><span>申报进度查询</span></div></a>
