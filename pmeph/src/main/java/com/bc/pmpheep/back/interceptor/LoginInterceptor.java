@@ -5,6 +5,8 @@ import com.bc.pmpheep.back.util.Const;
 import com.bc.pmpheep.controller.bean.ResponseBean;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.BeansException;
+import org.springframework.context.*;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.util.Assert;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -24,13 +26,16 @@ import java.util.Set;
  * Created by lihuan on 2017/12/14.
  */
 
-public class LoginInterceptor implements HandlerInterceptor {
+public class LoginInterceptor implements HandlerInterceptor, ApplicationContextAware {
 
     private String remoteUrl;
+
+    private String _timestamp = "";
 
     public void setRemoteUrl(String remoteUrl) {
         this.remoteUrl = remoteUrl;
     }
+
 
     public static class PathWithUsertypeMap {
         private String path;
@@ -162,7 +167,8 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object
             o, ModelAndView modelAndView) throws Exception {
-        httpServletRequest.getServletContext().setAttribute("_remoteUrl",remoteUrl);
+        httpServletRequest.getServletContext().setAttribute("_remoteUrl", remoteUrl);
+        httpServletRequest.getServletContext().setAttribute("_timestamp", _timestamp);
     }
 
     @Override
@@ -170,4 +176,11 @@ public class LoginInterceptor implements HandlerInterceptor {
             httpServletResponse, Object o, Exception e) throws Exception {
 
     }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this._timestamp = System.currentTimeMillis() + "";
+    }
+
+
 }

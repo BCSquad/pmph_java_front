@@ -13,21 +13,21 @@
     </script>
     <title>读书详情</title>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-    <link href="${ctx}/statics/css/base.css" type="text/css" rel="stylesheet">
-    <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
-    <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css" type="text/css">
+    <link href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}"/>
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css?t=${_timestamp}" type="text/css">
     <link rel="stylesheet" href="${ctx}/resources/comm/layui/css/layui.css">
-    <link href="${ctx}/statics/commuser/readpage/readdetail.css" type="text/css" rel="stylesheet">
-    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery-validate.js" type="text/javascript"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js" type="text/javascript"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
-    <script src="${ctx}/resources/comm/base.js"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.pager.js"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js"></script>
-    <script src="${ctx}/resources/comm/layui/layui.js"></script>
-    <script type="text/javascript" src="${ctx}/resources/comm/ckplayer/ckplayer.js"></script>
-    <script src="${ctx}/resources/commuser/readpage/readdetail.js"></script>
+    <link href="${ctx}/statics/commuser/readpage/readdetail.css?t=${_timestamp}" type="text/css" rel="stylesheet">
+    <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery-validate.js?t=${_timestamp}" type="text/javascript"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}?t=${_timestamp}" type="text/javascript"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.pager.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/layui/layui.js?t=${_timestamp}"></script>
+    <script type="text/javascript" src="${ctx}/resources/comm/ckplayer/ckplayer.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/commuser/readpage/readdetail.js?t=${_timestamp}"></script>
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>

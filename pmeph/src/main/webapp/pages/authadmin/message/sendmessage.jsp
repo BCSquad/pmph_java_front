@@ -10,29 +10,29 @@
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>发送消息</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
-    <link rel="stylesheet" href="${ctx}/statics/authadmin/message/inforelease.css" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/authadmin/message/inforelease.css?t=${_timestamp}" type="text/css">
     <link rel="stylesheet"
-          href="${ctx}/statics/authadmin/message/sendmessage.css"
+          href="${ctx}/statics/authadmin/message/sendmessage.css?t=${_timestamp}"
           type="text/css">
 
-    <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css"/>
-    <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css?t=${_timestamp}"/>
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}"/>
     <script type="text/javascript"
-            src="${ctx}/resources/comm/ueditor1.4.3.3/ueditor.config.js"></script>
+            src="${ctx}/resources/comm/ueditor1.4.3.3/ueditor.config.js?t=${_timestamp}"></script>
     <script type="text/javascript"
-            src="${ctx}/resources/comm/ueditor1.4.3.3/ueditor.all.min.js"></script>
+            src="${ctx}/resources/comm/ueditor1.4.3.3/ueditor.all.min.js?t=${_timestamp}"></script>
     <script type="text/javascript"
-            src="${ctx}/resources/comm/ueditor1.4.3.3/lang/zh-cn/zh-cn.js"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.pager.js"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
-    <script src="${ctx}/resources/comm/layer/layer.js"></script>
-    <script src="${ctx}/resources/comm/base.js"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js" type="text/javascript"></script>
-    <script src="${ctx}/resources/authadmin/message/sendMessage.js" type="text/javascript"></script>
+            src="${ctx}/resources/comm/ueditor1.4.3.3/lang/zh-cn/zh-cn.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.pager.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/layer/layer.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}" type="text/javascript"></script>
+    <script src="${ctx}/resources/authadmin/message/sendMessage.js?t=${_timestamp}" type="text/javascript"></script>
 
-    <%--   <script src="${ctx}/resources/authadmin/message/inforelease.js"></script> --%>
+    <%--   <script src="${ctx}/resources/authadmin/message/inforelease.js?t=${_timestamp}"></script> --%>
     <!--  <style type="text/css">
          input::-ms-clear{display: none;}
      </style> -->

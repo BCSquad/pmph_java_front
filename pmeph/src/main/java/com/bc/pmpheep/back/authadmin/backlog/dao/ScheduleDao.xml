@@ -22,7 +22,7 @@
 		ORDER BY d.gmt_create DESC) t1
 		UNION 
 		SELECT * FROM (
-		SELECT w1.org_id,w1.username,w.gmt_create,"教师资格认证",w1.id,"B",w1.avatar, '8' as  online_progress
+		SELECT w1.org_id,w1.realname,w.gmt_create,"教师资格认证",w1.id,"B",w1.avatar, '8' as  online_progress
 		FROM writer_user_certification w
 		LEFT JOIN org_user u1
 		ON w.org_id = u1.org_id
@@ -57,7 +57,7 @@
 		ORDER BY d.gmt_create DESC) t1
 		UNION 
 		SELECT * FROM (
-		SELECT w1.username,w.gmt_create,"教师资格认证","B" FROM writer_user_certification w
+		SELECT w1.realname,w.gmt_create,"教师资格认证","B" FROM writer_user_certification w
 		LEFT JOIN org_user u1
 		ON w.org_id = u1.org_id
 		LEFT JOIN writer_user w1		

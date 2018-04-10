@@ -15,11 +15,11 @@
         var contextpath = '${pageContext.request.contextPath}/';
     </script>
     <title>文章首页</title>
-    <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
-    <link rel="stylesheet" href="${ctx}/statics/commuser/articlepage/articlepage.css" type="text/css">
-    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
-    <script src="${ctx}/resources/comm/base.js"></script>
-    <script src="${ctx}/resources/articlepage/articlepage.js"></script>
+    <link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/commuser/articlepage/articlepage.css?t=${_timestamp}" type="text/css">
+    <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/articlepage/articlepage.js?t=${_timestamp}"></script>
 </head>
 <body>
     <jsp:include page="/pages/comm/head.jsp">

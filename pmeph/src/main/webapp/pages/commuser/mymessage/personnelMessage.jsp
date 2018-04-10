@@ -11,14 +11,14 @@
     var contextpath='${pageContext.request.contextPath}/';
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
-<link rel="stylesheet" href="${ctx}/statics/commuser/mymessage/message.css" type="text/css">
-<link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/chat.css" type="text/css">
-<link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css" />
-<script src="${ctx}/resources/comm/jquery/jquery.js"></script>
-<script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
+<link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
+<link rel="stylesheet" href="${ctx}/statics/commuser/mymessage/message.css?t=${_timestamp}" type="text/css">
+<link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/chat.css?t=${_timestamp}" type="text/css">
+<link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}" />
+<script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
+<script type="text/javascript" src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
 <script src="${ctx}/statics/js/jquery/jquery.selectlist.js"></script>
-<script src="${ctx}/resources/commuser/mymessage/personnelMessage.js"></script>
+<script src="${ctx}/resources/commuser/mymessage/personnelMessage.js?t=${_timestamp}"></script>
 
 <style type="text/css">
 #rightContent .select-button {
