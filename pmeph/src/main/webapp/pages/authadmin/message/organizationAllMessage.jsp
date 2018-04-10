@@ -10,14 +10,14 @@
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>消息</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
-    <script src="${ctx}/resources/comm/layer/layer.js"></script>
-    <script src="${ctx}/resources/comm/base.js"></script>
-    <script src="${ctx}/resources/authadmin/message/organizationMessage.js" ></script>
-    <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
-    <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
+    <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/layer/layer.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/authadmin/message/organizationMessage.js?t=${_timestamp}" ></script>
+    <link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}?t=${_timestamp}" type="text/css">
     <link rel="stylesheet"
-          href="${ctx}/statics/authadmin/message/organizationMessage.css"
+          href="${ctx}/statics/authadmin/message/organizationMessage.css?t=${_timestamp}"
           type="text/css">
 </head>
 <body>

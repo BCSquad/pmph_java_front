@@ -10,8 +10,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%-- <base href="<%=basePath%>"> --%>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
-  <link rel="stylesheet" href="<%=path %>/statics/css/base.css" type="text/css">
-   <link rel="stylesheet" href="<%=path %>/statics/orgmessage/messagelist.css" type="text/css">
+  <link rel="stylesheet" href="<%=path %>/statics/css/base.css?t=${_timestamp}" type="text/css">
+   <link rel="stylesheet" href="<%=path %>/statics/orgmessage/messagelist.css?t=${_timestamp}" type="text/css">
 </head>
 
 <body>

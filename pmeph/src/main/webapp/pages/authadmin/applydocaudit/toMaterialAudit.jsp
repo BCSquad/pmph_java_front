@@ -10,13 +10,13 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <title>教材申报审核</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
- <link rel="stylesheet" href="${ctx}/statics/authadmin/applydocaudit/materialAudit.css" type="text/css">
-<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.jqprint-0.3.js"></script>
+<link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
+ <link rel="stylesheet" href="${ctx}/statics/authadmin/applydocaudit/materialAudit.css?t=${_timestamp}" type="text/css">
+<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js?t=${_timestamp}"></script>
+	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.jqprint-0.3.js?t=${_timestamp}"></script>
     <script src="http://www.jq22.com/jquery/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
-<script type="text/javascript" src="${ctx}/resources/authadmin/applydocaudit/materialAudit.js"></script>
+<script type="text/javascript" src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+<script type="text/javascript" src="${ctx}/resources/authadmin/applydocaudit/materialAudit.js?t=${_timestamp}"></script>
     <style media="print">
         /*<!--media=print 这个属性可以在打印时有效-->*/
             .bt_tj{

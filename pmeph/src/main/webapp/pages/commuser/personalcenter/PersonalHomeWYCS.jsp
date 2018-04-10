@@ -28,16 +28,16 @@ request.setAttribute("currentTime",datetime);
     
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     
-    <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
-    <link rel="stylesheet" href="<%=path%>/statics/css/jquery.selectlist.css"/>
-    <link rel="stylesheet" href="<%=path%>/statics/css/jquery.pager.css"/>
-    <link rel="stylesheet" href="${ctx}/statics/commuser/personalcenter/PersonalHome.css" type="text/css">
-    <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.js"></script>
-    <script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js"></script>
-    <script src="<%=path%>/resources/comm/jquery/jquery.pager.js"></script>
-    <script src="${ctx}/resources/comm/base.js"></script>
-    <script src="${ctx}/resources/commuser/personalcenter/PersonalHome.js"></script>
-    <%-- <script src="${ctx}/resources/commuser/personalcenter/PersonalHomeJCSB.js"></script> --%>
+    <link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="<%=path%>/statics/css/jquery.selectlist.css?t=${_timestamp}"/>
+    <link rel="stylesheet" href="<%=path%>/statics/css/jquery.pager.css?t=${_timestamp}"/>
+    <link rel="stylesheet" href="${ctx}/statics/commuser/personalcenter/PersonalHome.css?t=${_timestamp}" type="text/css">
+    <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
+    <script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
+    <script src="<%=path%>/resources/comm/jquery/jquery.pager.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/commuser/personalcenter/PersonalHome.js?t=${_timestamp}"></script>
+    <%-- <script src="${ctx}/resources/commuser/personalcenter/PersonalHomeJCSB.js?t=${_timestamp}"></script> --%>
     
 
 	<!-- <script type="text/javascript">
@@ -155,8 +155,8 @@ request.setAttribute("currentTime",datetime);
                 <div id="leftContent">
                 	${html }
                 	
-                	<link rel="stylesheet" href="${ctx}/statics/commuser/personalcenter/UserTrendst.css" type="text/css">
-                	<%-- <script src="${ctx}/resources/commuser/personalcenter/PersonalHomeDT.js"></script> --%>
+                	<link rel="stylesheet" href="${ctx}/statics/commuser/personalcenter/UserTrendst.css?t=${_timestamp}" type="text/css">
+                	<%-- <script src="${ctx}/resources/commuser/personalcenter/PersonalHomeDT.js?t=${_timestamp}"></script> --%>
                 	
                 	
                 	<div class="trendstListContent">

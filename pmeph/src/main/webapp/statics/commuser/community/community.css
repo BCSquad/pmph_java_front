@@ -140,7 +140,8 @@ a {
     height: 60px;
     line-height: 30px;
     text-align: center;
-    margin: 10px auto 0px
+    margin: 10px auto 0px;
+    overflow: hidden;
 }
 
 .book .booklist .item .bookname a {

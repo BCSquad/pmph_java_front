@@ -10,12 +10,12 @@
     </script>
     <title>热门书评列表</title>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-    <link href="${ctx}/statics/css/base.css" type="text/css" rel="stylesheet">
-    <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css" type="text/css">
-    <link rel="stylesheet" href="${ctx}/statics/commuser/hotComment/hotCommentDetail.css" type="text/css">
-    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
-    <script src="${ctx}/resources/comm/base.js"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.pager.js"></script>
+    <link href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/commuser/hotComment/hotCommentDetail.css?t=${_timestamp}" type="text/css">
+    <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.pager.js?t=${_timestamp}"></script>
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
