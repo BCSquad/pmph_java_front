@@ -28,8 +28,9 @@
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="body">
     <div class="content-wrapper">
+        <div style="color: red;font-size: 16px;margin-top: 28px;">（提示：为确保填写成功，请用360极速浏览器或谷歌浏览器）</div>
         <div class="sbxq_title">
-            <span><a style="text-decoration: none;color: #999999;" href="${contextpath}/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a style="text-decoration: none;color: #999999;" href="${contextpath}/personalhomepage/tohomepage.action?pagetag=jcsb&pageNum=1&pageSize=10"> 教材申报 </a> > 修改申报表</span>
+            <span><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=jcsb&pageNum=1&pageSize=10"> 教材申报 </a> > 修改申报表</span>
         </div>
         <!-- 图书选择-->
         <form id="objForm">
@@ -1295,7 +1296,7 @@
             <div class="sbxq_item1">
                 <div>
                     <span id="tsxz_span8"></span>
-                    <span class="tsxz_title">请选择你的申报单位</span>
+                    <span class="tsxz_title">请选择您的申报单位</span>
                 </div>
                 <div class="sbdw">
                     <span class="btbs">*</span><span class="btmc">申报单位：</span>
@@ -1310,7 +1311,7 @@
                     <div class="bt_tj" id="buzc" onclick="javascript:buttAdd('2')">暂存</div>
                     <%--<div class="bt_tj" onclick="javascript:buttGive()">放弃</div>--%>
                 </div>
-
+                <div style="color: red;font-size: 16px;">（提示：如暂存或提交不成功请使用360浏览器极速模式或谷歌浏览器）</div>
             </div>
         </form>
     </div>

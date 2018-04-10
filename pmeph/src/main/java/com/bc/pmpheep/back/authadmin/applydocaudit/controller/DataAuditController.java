@@ -146,7 +146,11 @@ public class DataAuditController extends BaseController{
 			}else{
 				queryMap.put("declaration_id", declaration_id);
 				if ("4".equals(gezlList.get(0).get("online_progress").toString())) {
-					return_cause = gezlList.get(0).get("return_cause").toString();
+					if(gezlList.get(0).get("return_cause")==null){
+						return_cause="";
+					}else{
+						return_cause = gezlList.get(0).get("return_cause").toString();
+					}
 					mav.addObject("return_cause", return_cause);
 				}
 			}
@@ -202,6 +206,7 @@ public class DataAuditController extends BaseController{
 			//3.作家学习经历表
 			List<Map<String,Object>> stuList = new ArrayList<Map<String,Object>>();
 			stuList=this.dataAuditService.queryStu(queryMap);
+
 			//4.作家工作经历表
 			List<Map<String,Object>> workList = new ArrayList<Map<String,Object>>();
 			workList=this.dataAuditService.queryWork(queryMap);

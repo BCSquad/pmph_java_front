@@ -4,43 +4,47 @@
   <resultMap id="Mapresult" type="java.util.Map"></resultMap>
   <!-- 查询最新三条公告-->
   <select id="queryDocument"  parameterType="map" resultMap="Mapresult">   
-    SELECT 
-	(TO_DAYS(NOW()) &lt;= TO_DAYS(m.actual_deadline ) and  !m.is_force_end and !m.is_all_textbook_published) as notEnd,
-	d.id as declaration_id,
-	(case 
-	when d.online_progress REGEXP '^[520]{1}$'
-	then 1
-	else 0
-	end )as dec_editable,
-	cc.*
-	FROM
-			cms_content cc
-			LEFT JOIN pmph_user pu ON cc.author_id =pu.id
-			LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
-			LEFT JOIN material m ON m.id = cc.material_id
-			<if test="id != null and id != '' ">
-	    	left join material_org mo on mo.material_id=m.id
-			left join writer_user wu on wu.id= #{id} and  wu.org_id=mo.org_id
-			</if>
-			left join declaration d on d.user_id = #{id} and d.material_id=cc.material_id
-	WHERE
-			cc.is_deleted = 0
-			AND
-			cc.category_id=3
-			AND cc.auth_status =2
-			AND cc.is_published =1
-	        
-	    		and (
-	    		<if test="id != null and id != '' ">
-	    			(wu.id=#{id} and m.is_public = 0 and cc.is_material_entry=1 and m.is_deleted=0)or 
-	    		</if>
-	    		    (m.is_public = 1 and cc.is_material_entry=1 and m.is_deleted=0) or 
-	    		cc.is_material_entry = 0 )
-	group by cc.id
-	ORDER BY
-		
-			    cc.auth_date DESC
-	limit 0,3
+	  select t.* from
+	  (
+	    SELECT 
+	    (TO_DAYS(NOW()) &lt;= TO_DAYS(m.actual_deadline ) and  !m.is_force_end and !m.is_all_textbook_published)*cc.is_material_entry as sortByEntryBtnOn,
+		(TO_DAYS(NOW()) &lt;= TO_DAYS(m.actual_deadline ) and  !m.is_force_end and !m.is_all_textbook_published) as notEnd,
+		d.id as declaration_id,
+		(case 
+		when d.online_progress REGEXP '^[520]{1}$'
+		then 1
+		else 0
+		end )as dec_editable,
+		m.deadline,
+		cc.*
+		FROM
+				cms_content cc
+				LEFT JOIN pmph_user pu ON cc.author_id =pu.id
+				LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
+				LEFT JOIN material m ON m.id = cc.material_id
+				<if test="id != null and id != '' ">
+		    	left join material_org mo on mo.material_id=m.id
+				left join writer_user wu on wu.id= #{id} and  wu.org_id=mo.org_id
+				</if>
+				left join declaration d on d.user_id = #{id} and d.material_id=cc.material_id
+		WHERE
+				cc.is_deleted = 0
+				AND
+				cc.category_id=3
+				AND cc.auth_status =2
+				AND cc.is_published =1
+		        
+		    		and (
+		    		<if test="id != null and id != '' ">
+		    			(wu.id=#{id} and m.is_public = 0 and cc.is_material_entry=1 and m.is_deleted=0)or 
+		    		</if>
+		    		    (m.is_public = 1 and cc.is_material_entry=1 and m.is_deleted=0) or 
+		    		cc.is_material_entry = 0 )
+		group by cc.id
+		)t
+		ORDER BY
+				   t.sortByEntryBtnOn desc , t.deadline DESC ,t.auth_date desc
+		limit 0,3
   </select>
   
   <!-- 教材社区公告 -->

@@ -1,6 +1,6 @@
 //定义一个全局变量
 var jsonStr = "";
-var xtMap =new Map();
+var xtMap ={};
 jsonStr = "{\"id\":\"realname\",\"content\":\"姓名不能为空\"},{\"id\":\"birthday\",\"content\":\"出生日期不能为空\"}," +
     "{\"id\":\"experience\",\"content\":\"教龄不能为空\"},{\"id\":\"org_name\",\"content\":\"工作单位不能为空\"},{\"id\":\"position\",\"content\":\"职务不能为空\"},"+
     "{\"id\":\"zc\",\"content\":\"职称不能为空\"},{\"id\":\"address\",\"content\":\"地址不能为空\"},{\"id\":\"email\",\"content\":\"邮箱不能为空\"},"+
@@ -88,7 +88,7 @@ function queryMaterialMap(id){
     $.ajax({
         type: "POST",
         url:contextpath+'material/queryMaterialMap.action',
-        data:{material_id:id},// 你的formid
+        data:{material_id:id},// 您的formid
         dataType:"json",
         success: function(json) {
             chooseModel(json);
@@ -836,7 +836,7 @@ function buttAdd(type){
         $.ajax({
             type: "POST",
             url:contextpath+'material/doMaterialAdd.action?sjump=1&type='+type,
-            data:$('#objForm').serialize(),// 你的formid
+            data:$('#objForm').serialize(),// 您的formid
             async: false,
             success: function (json) {
                 if (json.msg == 'OK') {
@@ -857,7 +857,7 @@ function buttAdd(type){
             $.ajax({
                 type: "POST",
                 url: contextpath + 'material/doMaterialAdd.action?sjump=1&type=' + type,
-                data: $('#objForm').serialize(),// 你的formid
+                data: $('#objForm').serialize(),// 您的formid
                 async: false,
                 dataType: "json",
                 success: function (json) {
@@ -1133,7 +1133,7 @@ function setTimer(){
         $.ajax({
             type: "POST",
             url:contextpath+'material/doMaterialAdd.action?sjump=1&type=2',
-            data:$('#objForm').serialize(),// 你的formid
+            data:$('#objForm').serialize(),// 您的formid
             async: false,
             success: function(json) {
                 $('#declaration_id').val(json.declaration_id);

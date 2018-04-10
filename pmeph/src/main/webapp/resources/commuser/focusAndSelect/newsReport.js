@@ -92,7 +92,7 @@ $(function(){
                                     "<div style='float:left;color:"+(json[tarId]>0? "#1abd44":"#b5b5b5")+"' id='likes"+list[i].id+"'>"+list[i].likes+"</div>" ;
 							}
 	        	                  html+="</div>"+
-	        	                    "<div style='float:right'>发布时间："+formatDate(list[i].gmtCreate,'yyyy.MM.dd')+"</div> "+ 
+	        	                    "<div style='float:right'>发布时间："+formatDate((list[i].authDate!=null?list[i].authDate:list[i].gmtCreate),'yyyy.MM.dd')+"</div> "+ 
 	        	                "</div> "+
 	                        "</div> ";
 	                	$("#content").append(html);

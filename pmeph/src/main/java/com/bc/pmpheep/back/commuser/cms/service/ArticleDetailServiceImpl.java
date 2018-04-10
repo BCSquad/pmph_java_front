@@ -132,7 +132,7 @@ public class ArticleDetailServiceImpl implements ArticleDetailService {
 	}
 
 	/**
-	 * 查询猜你喜欢
+	 * 查询猜您喜欢
 	 */
 	@Override
 	public List<Map<String, Object>> queryArticleSix() {

@@ -82,6 +82,9 @@
 	                                        </div>
 	                                        <div class="username">
 	                                             <span>${one.NAME}</span>
+                                                <c:if test="${one.online_progress==4}">
+                                                <span style="color: #b0120e">被出版社退回</span>
+                                                </c:if>
 	                                        </div>
 	                                </div>
 	                                <div class="downContent">
@@ -94,6 +97,7 @@
 	                                <div onclick="toogleTip('block','${one.TYPE}','${one.auditId}','${one.ID}')" class="buttonDiv">
 	                                        		办理
 	                                </div>
+
 	                            </div>
 	                    </div>
 	            </div>

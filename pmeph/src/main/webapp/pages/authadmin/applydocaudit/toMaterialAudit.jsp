@@ -75,7 +75,7 @@
                 </div>
         </div>
 		<!-- ------------------------------------------------------------------ -->
-		<!-- 图书选择-->
+
 		<!-- 图书选择-->
 		<div class="sbxq_item1">
 			<div>
@@ -133,22 +133,22 @@
 						<td colspan="2"><span>地&emsp;&emsp;址：${gezlList.address}</span></td>
 					</tr>
 					<tr>
-						<td><span>&ensp;服从调剂：</span>
+						<td><span>服从调剂：</span>
 							<c:if test="${gezlList.is_dispensed == '0'}">否</c:if>
 							<c:if test="${gezlList.is_dispensed == '1'}">是</c:if>
 						</td>
-						<td><span>&ensp;参与本科教学评估认证：</span>
+						<td><span>参与本科教学评估认证：</span>
 							<c:if test="${gezlList.is_utec == '0'}">否</c:if>
 							<c:if test="${gezlList.is_utec == '1'}">是</c:if>
 						</td>
-						<td><span>&ensp;学&emsp;&emsp;历：</span>
+						<td><span>学&emsp;&emsp;历：</span>
 							<c:if test="${gezlList.degree=='0'}">无</c:if>
 							<c:if test="${gezlList.degree=='1'}">大专</c:if>
 							<c:if test="${gezlList.degree=='2'}">本科</c:if>
 							<c:if test="${gezlList.degree=='3'}">硕士</c:if>
 							<c:if test="${gezlList.degree=='4'}">博士</c:if>
 						</td>
-						<td><span>&ensp;专业特长：</span>
+						<td><span>专业特长：</span>
 							${gezlList.expertise}
 						</td>
 					</tr>
@@ -175,7 +175,7 @@
 					<tbody>
 					<c:forEach var="stulist" items="${stuList}">
 						<tr>
-							<td>${stulist.date_begin}-${stulist.date_end}</td>
+							<td>${stulist.dbegin}- ${stulist.dend}</td>
 							<td>${stulist.school_name}</td>
 							<td>${stulist.major}</td>
 							<td>${stulist.degree}</td>
@@ -205,7 +205,7 @@
 					<tbody>
 					<c:forEach var="list" items="${workList}">
 						<tr>
-							<td>${list.date_begin}-${list.date_end}</td>
+							<td>${list.dbegin}-${list.dend}</td>
 							<td>${list.org_name}</td>
 							<td>${list.position}</td>
 							<td>${list.note}</td>
@@ -234,7 +234,7 @@
 					<tbody>
 					<c:forEach var="list" items="${steaList}">
 						<tr>
-							<td>${list.date_begin}-${list.date_end}</td>
+							<td>${list.dbegin}-${list.dend}</td>
 							<td>${list.school_name}</td>
 							<td>${list.subject}</td>
 							<td>${list.note}</td>
@@ -590,7 +590,7 @@
 						<tr>
 							<td>${list.reward_name}</td>
 							<td>${list.award_unit}</td>
-							<td>${list.reward_date}</td>
+							<td>${list.rewarddate}</td>
 							<td>${list.note}</td>
 						</tr></c:forEach>
 					</tbody>
@@ -619,7 +619,7 @@
 							<td>${list.paper_name}</td>
 							<td>${list.journal_name}</td>
 							<td>${list.factor}</td>
-							<td>${list.publish_date}</td>
+							<td>${list.publishdate}</td>
 							<td>${list.note}</td>
 						</tr></c:forEach>
 					</tbody>
@@ -650,7 +650,7 @@
 								<c:if test="${list.award_unit == '1'}">国际</c:if>
 								<c:if test="${list.award_unit == '2'}">国家</c:if>
 							</td>
-							<td>${list.reward_date}</td>
+							<td>${list.rewarddate}</td>
 							<td>${list.note}</td>
 						</tr></c:forEach>
 					</tbody>
@@ -683,7 +683,7 @@
 								<c:if test="${list.award_unit == '3'}">省部</c:if>
 								<c:if test="${list.award_unit == '4'}">市</c:if>
 							</td>
-							<td>${list.reward_date}</td>
+							<td>${list.rewarddate}</td>
 							<td>${list.note}</td>
 						</tr></c:forEach>
 					</tbody>
@@ -718,7 +718,7 @@
 			<div class="sbxq_item1">
 				<div>
 					<span id="tsxz_span8"></span>
-					<span class="tsxz_title">请选择你的申报单位</span>
+					<span class="tsxz_title">请选择您的申报单位</span>
 				</div>
 				<div class="sbdw">
 					<span>申报单位：</span>
@@ -757,7 +757,7 @@
 					 </c:otherwise>
 				</c:choose>
 			</div>
-		
+		<span style="color: #E31028;font-size: 14px;text-align: center;float: left;margin-left: 350px;">打印推荐使用浏览器：chrome、360浏览器极速模式、IE浏览器支持IE10及以上版本</span>
 	</div>
 </div>
 <div style="width: 100%;padding: 0;margin: auto;border:none;overflow: hidden;">

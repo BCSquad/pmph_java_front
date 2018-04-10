@@ -488,18 +488,23 @@ ul li {
 
 .area-3 .content-photo {
     float: left;
-    width: 307px;
+    width: 360px;
     height: 108px;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     margin-top: 20px;
 }
 
 .area-3 .photo-size {
     float: left;
     width: 137px;
-    height: 91px;
+    height: 103px;
     margin-top: 20px;
-    margin-left: 30px;
+    margin-right: 15px;
+}
+
+.area-3 .photo-size img{
+	width: 100%;
+	height: 100%;
 }
 
 .area-2 .content-left .time-size {
@@ -533,11 +538,12 @@ ul li {
 }
 
 .area-3 .content {
-    float: left;
+    float: right;
     width: 450px;
     height: 112px;
-    margin-left: 106px;
+    /* margin-left: 106px; */
     margin-top: 15px;
+    margin-right: 70px;
 }
 
 .area-3 .content .table {
@@ -1653,4 +1659,12 @@ ul li {
 
 .friend.isFriend {
     color: #1abd44;
+}
+
+.area-5 img{
+	border:none;
+}
+
+.left_two img{
+	border:none;
 }

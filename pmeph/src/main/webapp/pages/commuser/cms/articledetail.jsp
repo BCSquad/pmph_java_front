@@ -94,7 +94,7 @@
                     <div class="pl_add">
                     	<a id="001" id="001"></a>
                     	
-                    	<textarea class="tarea" id="content" ${is_audit=='false'?' style="background-color: #d0d0d0;" title="文章未通过审核，仅供预览。" ':''}></textarea>
+                    	<textarea class="tarea" id="content" ${is_audit=='false'?' style="background-color: #d0d0d0;" title="文章未通过审核，仅供预览。" ':''} maxlength="225760"></textarea>
                     	
                     </div>
                     <div class="buttonb"><button id="span_4" onclick="insert()" ${is_audit=='false'?'disabled="disabled" style="background-color: #d0d0d0;" title="文章未通过审核，仅供预览。" ':''}>发表</button></div>
@@ -175,11 +175,11 @@
 	                  </div>
                 </div>  
             </div> 
-        	<!--猜你喜欢-->
+        	<!--猜您喜欢-->
         	<div class="block">
                     <div class="title">
                         <div class="line"></div>
-                        <div class="rd_name">猜你喜欢</div>
+                        <div class="rd_name">猜您喜欢</div>
                     </div>
                     <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
                     <c:forEach items="${listArtSix}" var="list" varStatus="status">

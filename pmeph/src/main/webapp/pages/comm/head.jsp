@@ -149,13 +149,15 @@
                 <div class="user-select">
                     <img src="${ctx}/statics/image/userSelectbg.png" alt="">
                     <div class="select">
-                      <%--  <a class="option wide" href="javascript:;">你好,<%=MapUtils.getString(userInfo, "realname")%></a>--%>
+                      <%--  <a class="option wide" href="javascript:;">您好,<%=MapUtils.getString(userInfo, "realname")%></a>--%>
                         <a class="option"
                            href='<c:url value="/personalhomepage/tohomepage.action?pagetag=dt"/>'>个人中心</a>
                         <a class="option" href="<c:url value='/group/list.action'/>">我的小组</a>
                           <a class="option" href="<c:url value='/myFriend/listMyFriend.action'/>">我的好友</a>
                         <a class="option"
                            href='<c:url value="/personalhomepage/tohomepage.action?pagetag=jcsb"/>'>教材申报</a>
+                        <a class="option"
+                           href='<c:url value="/teacherCertification/showTeacherCertification.action"/>'>教师认证</a>
                         <%--<a class="option out" href='<c:url value="/logout.action"/>'>退出</a>--%>
                     </div>
                 </div>
