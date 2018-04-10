@@ -226,7 +226,7 @@
 .bt_tj{
 	width: 74px;
 	height: 24px;
-	background-color: #70bcc3;
+	background-color: #33caa9;
 	border-radius: 2px;
 	cursor: pointer;
 	color: #FFFFFF;
@@ -299,7 +299,7 @@
 .scys{
 	width: 78px;
 	height: 30px;
-	background-color: #70bcc3;
+	background-color: #33CAA9;
 	border-radius: 2px;
 	cursor: pointer;
 	float: left;
@@ -322,7 +322,7 @@
 .addBtn,.delBtn{
 	width: 60px;
 	height: 24px;
-	background-color: #70bcc3;
+	background-color: #33caa9;
 	border-radius: 2px;
 	cursor: pointer;
 	text-align: center;
