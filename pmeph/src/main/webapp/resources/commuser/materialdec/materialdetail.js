@@ -101,3 +101,12 @@ function downLoadProxy(fileId){
 function buttGive(){
 	window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=jcsb";
 }
+
+//打印按钮
+function toprint() {
+    $(".yijian").css("display","block");
+    $("#tnone").css("display","block");
+    $("#ddd").jqprint();
+    $(".yijian").css("display","none");
+    $("#tnone").css("display","none");
+}

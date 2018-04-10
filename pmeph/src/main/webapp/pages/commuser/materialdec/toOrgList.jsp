@@ -10,14 +10,14 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <title></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
-    <link rel="stylesheet" href="<%=path%>/statics/materialdec/tab.css"/>
-    <link rel="stylesheet" href="<%=path%>/statics/css/jquery.selectlist.css"/>
-    <link rel="stylesheet" href="<%=path%>/statics/css/jquery.pager.css"/>
-    <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.js"></script>
-    <script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js"></script>
-    <script src="<%=path%>/resources/comm/jquery/jquery.pager.js"></script>
-    <script src="${ctx}/resources/comm/base.js"></script>
+    <link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="<%=path%>/statics/materialdec/tab.css?t=${_timestamp}"/>
+    <link rel="stylesheet" href="<%=path%>/statics/css/jquery.selectlist.css?t=${_timestamp}"/>
+    <link rel="stylesheet" href="<%=path%>/statics/css/jquery.pager.css?t=${_timestamp}"/>
+    <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
+    <script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
+    <script src="<%=path%>/resources/comm/jquery/jquery.pager.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
 </head>
 <body>
 	<!-- 查询栏 -->

@@ -267,7 +267,7 @@
 				order by c.gmt_create desc
 			</when>
 			<otherwise>
-				order by a.deadline desc
+				order by (TO_DAYS(NOW()) &lt;= TO_DAYS(a.actual_deadline ) and  !a.is_force_end and !a.is_all_textbook_published) desc , a.deadline desc
 			</otherwise>
 		</choose>
 		

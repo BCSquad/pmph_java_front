@@ -15,13 +15,13 @@
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>个人资料修改(机构用户)</title>
-    <link href="${ctx}/statics/css/base.css" rel="stylesheet" type="text/css"/>
-    <link href="${ctx}/statics/authadmin/accountset/publicStyle.css" rel="stylesheet" type="text/css"/>
-    <link href="${ctx}/statics/authadmin/accountset/admininfo.css" rel="stylesheet" type="text/css"/>
-    <link href="${ctx}/statics/css/jquery.selectlist.css" rel="stylesheet" type="text/css"/>
-    <script src="${ctx}/resources/comm/jquery/jquery.js" type="text/javascript"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery-validate.js" type="text/javascript"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js" type="text/javascript"></script>
+    <link href="${ctx}/statics/css/base.css?t=${_timestamp}" rel="stylesheet" type="text/css"/>
+    <link href="${ctx}/statics/authadmin/accountset/publicStyle.css?t=${_timestamp}" rel="stylesheet" type="text/css"/>
+    <link href="${ctx}/statics/authadmin/accountset/admininfo.css?t=${_timestamp}" rel="stylesheet" type="text/css"/>
+    <link href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}" rel="stylesheet" type="text/css"/>
+    <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}" type="text/javascript"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery-validate.js?t=${_timestamp}" type="text/javascript"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}" type="text/javascript"></script>
     <script type="text/javascript">
         $(function () {
             $('select').selectlist({

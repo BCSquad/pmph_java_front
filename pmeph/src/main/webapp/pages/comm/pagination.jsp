@@ -13,8 +13,8 @@
     <title>Title</title>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css"/>
-    <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css?t=${_timestamp}"/>
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}"/>
     <script src="${ctx}/statics/js/jquery/jquery.js"></script>
     <script src="${ctx}/statics/js/jquery/jquery.selectlist.js"></script>
     <script src="${ctx}/statics/js/jquery/jquery.pager.js"></script>

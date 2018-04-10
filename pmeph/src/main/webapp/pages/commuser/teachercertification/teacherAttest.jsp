@@ -17,28 +17,28 @@
 <%-- <base href="<%=basePath%>"> --%>
 <title>个人资料</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="<%=path%>/statics/css/base.css" rel="stylesheet"
+<link href="<%=path%>/statics/css/base.css?t=${_timestamp}" rel="stylesheet"
 	type="text/css" />
-<%-- <link href="<%=path%>/statics/home/read.css" rel="stylesheet"
+<%-- <link href="<%=path%>/statics/home/read.css?t=${_timestamp}" rel="stylesheet"
 	type="text/css" /> --%>
-<link href="<%=path%>/statics/authadmin/accountset/publicStyle.css"
+<link href="<%=path%>/statics/authadmin/accountset/publicStyle.css?t=${_timestamp}"
 	rel="stylesheet" type="text/css" />
-<script src="<%=path%>/resources/comm/jquery/jquery.js"></script>
-<script src="<%=path%>/resources/comm/jquery/jquery.fileupload.js"
+<script src="<%=path%>/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
+<script src="<%=path%>/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}"
 	type="text/javascript"></script>
-<script src="<%=path%>/resources/comm/jquery/jquery-validate.js"
+<script src="<%=path%>/resources/comm/jquery/jquery-validate.js?t=${_timestamp}"
 	type="text/javascript"></script>
-<script src="<%=path%>/resources/comm/jquery/jquery.form.js"
+<script src="<%=path%>/resources/comm/jquery/jquery.form.js?t=${_timestamp}"
 	type="text/javascript"></script>
 <script src="<%=path%>/statics/js/main/read/read.js"
 	type="text/javascript"></script>
-<script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js"
+<script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"
 	type="text/javascript"></script>
-<link href="<%=path%>/statics/css/jquery.selectlist.css"
+<link href="<%=path%>/statics/css/jquery.selectlist.css?t=${_timestamp}"
 	rel="stylesheet" type="text/css" />
-<script src="<%=path%>/resources/comm/base.js"></script>
+<script src="<%=path%>/resources/comm/base.js?t=${_timestamp}"></script>
 <link
-	href="<%=path%>/statics/commuser/teachercertification/teacherAttest.css"
+	href="<%=path%>/statics/commuser/teachercertification/teacherAttest.css?t=${_timestamp}"
 	rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">

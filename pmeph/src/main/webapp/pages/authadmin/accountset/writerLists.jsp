@@ -12,17 +12,17 @@
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>用户管理</title>
-    <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css"/>
-    <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
-    <link href="${ctx}/statics/css/jquery.selectlist.css" rel="stylesheet" type="text/css" />
-    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js" type="text/javascript"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.pager.js"></script>
-    <script src="${ctx}/resources/comm/base.js"></script>
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css?t=${_timestamp}"/>
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}?t=${_timestamp}"/>
+    <link href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}?t=${_timestamp}" rel="stylesheet" type="text/css" />
+    <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}?t=${_timestamp}" type="text/javascript"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.pager.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
-    <link rel="stylesheet" href="${ctx}/statics/commuser/user/writerLists.css" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/commuser/user/writerLists.css?t=${_timestamp}" type="text/css">
     
     
 </head>

@@ -12,23 +12,23 @@
 <head>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>我的小组</title>
-    <link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
-    <link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/communication.css" type="text/css">
-    <link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/chat.css" type="text/css">
-    <link rel="stylesheet" href="<%=path %>/statics/css/jquery.selectlist.css"/>
+    <link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/communication.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/chat.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="<%=path %>/statics/css/jquery.selectlist.css?t=${_timestamp}"/>
     <link rel="stylesheet" href="${ctx}/resources/comm/layui/css/layui.css"  media="all">
-    <script src="<%=path %>/resources/comm/jquery/jquery.js"></script>
-    <script src="<%=path %>/resources/comm/jquery/jquery.selectlist.js"></script>
+    <script src="<%=path %>/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
+    <script src="<%=path %>/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
 
     <script type="text/javascript">
 		var contxtpath  = '${pageContext.request.contextPath}';
 		var contextpath = '${pageContext.request.contextPath}/';
 	</script>
-    <script type="text/javascript" src="${ctx}/resources/comm/base.js"></script>
-    <script type="text/javascript" src="${ctx}/resources/comm/layer/layer.js"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js" type="text/javascript"></script>
-    <script src="<%=path %>/resources/commuser/mygroup/group.js" type="text/javascript"></script>
-    <script src="${ctx}/resources/comm/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+    <script type="text/javascript" src="${ctx}/resources/comm/layer/layer.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}" type="text/javascript"></script>
+    <script src="<%=path %>/resources/commuser/mygroup/group.js?t=${_timestamp}" type="text/javascript"></script>
+    <script src="${ctx}/resources/comm/layui/layui.js?t=${_timestamp}" charset="utf-8"></script>
     
 </head>
 <body>

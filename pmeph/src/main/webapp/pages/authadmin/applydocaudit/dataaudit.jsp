@@ -10,17 +10,17 @@
 <script type="text/javascript">
 	var contextpath="${pageContext.request.contextPath}/"
 </script>
-	<link rel="stylesheet" href="${ctx}/statics/css/base.css" type="text/css">
-    <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css"/>
-    <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css"/>
-    <script src="${ctx}/resources/comm/jquery/jquery.js"></script>
-	<script src="${ctx}/resources/comm/base.js"></script>	
-    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.pager.js"></script>
+	<link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css?t=${_timestamp}"/>
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}"/>
+    <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
+	<script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>	
+    <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery.pager.js?t=${_timestamp}"></script>
 <link rel="stylesheet"
-	href="${ctx}/statics/authadmin/applydocaudit/dataaudit.css"
+	href="${ctx}/statics/authadmin/applydocaudit/dataaudit.css?t=${_timestamp}"
 	type="text/css">
-<script src="${ctx}/resources/authadmin/applydocaudit/dataaudit.js"
+<script src="${ctx}/resources/authadmin/applydocaudit/dataaudit.js?t=${_timestamp}"
 	type="text/javascript"></script>
 
 </head>

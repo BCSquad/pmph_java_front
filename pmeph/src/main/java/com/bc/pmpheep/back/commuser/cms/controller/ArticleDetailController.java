@@ -72,7 +72,7 @@ public class ArticleDetailController extends BaseController {
 		}
 		//是否已通过审核
 		Boolean is_audit = false;
-		if("2".equals(map.get("auth_status").toString()) && "false".equals(map.get("is_staging").toString())){
+		if("2".equals(map.get("auth_status").toString()) /*&& "false".equals(map.get("is_staging").toString())*/){
 			is_audit = true;
 		}
 
