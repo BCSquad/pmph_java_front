@@ -214,7 +214,7 @@ public class MaterialDetailController extends BaseController{
 		}
 		perMap.put("sex",sex);
 		perMap.put("birthday", "".equals(request.getParameter("birthday")) ? null:request.getParameter("birthday"));
-		perMap.put("experience", request.getParameter("experience"));
+		perMap.put("experience", "".equals(request.getParameter("experience")) ? null:request.getParameter("experience"));
 		perMap.put("org_name", request.getParameter("org_name"));
 		perMap.put("position", request.getParameter("position"));
 		perMap.put("fax", request.getParameter("fax"));
@@ -224,7 +224,7 @@ public class MaterialDetailController extends BaseController{
 		perMap.put("telephone", request.getParameter("telephone"));
 		perMap.put("handphone", request.getParameter("handphone"));
 		perMap.put("email", request.getParameter("email"));
-		perMap.put("idtype", request.getParameter("idtype"));
+        perMap.put("idtype", "".equals(request.getParameter("idtype")) ? null:request.getParameter("idtype"));
 		perMap.put("idcard", request.getParameter("idcard"));
 		perMap.put("org_id", "".equals(request.getParameter("sbdw_id")) ? null:request.getParameter("sbdw_id"));
 		perMap.put("is_dispensed", "".equals(request.getParameter("is_dispensed")) ? null:request.getParameter("is_dispensed"));
@@ -344,8 +344,8 @@ public class MaterialDetailController extends BaseController{
 			if(!jc_material_name[i].equals("")){ //判断是否存在
 				Map<String,Object> JcbjMap = new HashMap<String,Object>();
 				JcbjMap.put("material_name", jc_material_name[i]);
-				JcbjMap.put("is_digital_editor", request.getParameter(jc_is_digital_editor[i]));
-				JcbjMap.put("position", "".equals(request.getParameter(jc_position[i])) ? null:request.getParameter(jc_position[i]));
+                JcbjMap.put("is_digital_editor", "".equals(request.getParameter(jc_is_digital_editor[i])) ? null:request.getParameter(jc_is_digital_editor[i]));
+                JcbjMap.put("position", "".equals(request.getParameter(jc_position[i])) ? null:request.getParameter(jc_position[i]));
 				JcbjMap.put("note", jc_note[i]);
 				JcbjMap.put("publisher", jc_publisher[i]);
 				JcbjMap.put("publish_date", "".equals(jc_publish_date[i]) ? null:jc_publish_date[i]);
@@ -459,11 +459,11 @@ public class MaterialDetailController extends BaseController{
 			if(!zb_monograph_name[i].equals("")){ //判断是否存在
 				Map<String,Object> MonographMap = new HashMap<String,Object>();
 				MonographMap.put("monograph_name", zb_monograph_name[i]);
-				MonographMap.put("monograph_date", zb_monograph_date[i]);
-				MonographMap.put("is_self_paid", request.getParameter(is_self_paid[i]));
-				MonographMap.put("publisher", zb_publisher[i]);
-			//	MonographMap.put("publish_date", zb_publish_date[i]);
-				MonographMap.put("publish_date", "".equals(zb_publish_date[i]) ? null:zb_publish_date[i]);
+                MonographMap.put("monograph_date", "".equals(zb_monograph_date[i]) ? null:zb_monograph_date[i]);
+                MonographMap.put("is_self_paid", "".equals(request.getParameter(is_self_paid[i])) ? null:request.getParameter(is_self_paid[i]));
+                MonographMap.put("publisher", zb_publisher[i]);
+                //	MonographMap.put("publish_date", zb_publish_date[i]);
+                MonographMap.put("publish_date", "".equals(zb_publish_date[i]) ? null:zb_publish_date[i]);
 				MonographMap.put("note", zb_note[i]);
 				MonographMap.put("sort", i);
 				//主编学术
@@ -771,6 +771,13 @@ public class MaterialDetailController extends BaseController{
 		//1.作家申报信息表
 		List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
 		gezlList = this.mdService.queryPerson(queryMap);
+        for (Map.Entry<String, Object> entry : gezlList.get(0).entrySet()) {
+            String key = entry.getKey().toString();
+            String value = entry.getValue().toString();
+            if(value.equals("-")){
+                gezlList.get(0).put(key,"");
+            }
+        }
 		String material_id = gezlList.get(0).get("material_id").toString();
 		queryMap.put("material_id", material_id);
 		//教材信息

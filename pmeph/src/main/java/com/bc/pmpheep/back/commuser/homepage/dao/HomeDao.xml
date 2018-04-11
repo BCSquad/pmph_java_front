@@ -221,7 +221,7 @@ LIMIT 0,10
 			ON b.id = c.book_id
 			INNER JOIN writer_user AS u ON c.writer_id = u.id
 			ORDER BY
-			b.comments ASC limit 0,4
+			b.comments DESC limit 0,4
   </select>
     <!-- 根据书籍类型查询图书畅销榜 -->
     <select id="querySale" parameterType="map" resultMap="Mapresult">
