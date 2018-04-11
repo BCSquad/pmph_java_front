@@ -82,7 +82,7 @@
 	
 	<!-- 专家信息 --> 
 	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
-		select t1.*,t2.org_name dwmc from (select id,material_id,user_id,realname,sex,REPLACE(birthday,'-','.') as birthday,experience,org_name,position,title,address,postcode,handphone,email,idtype,
+		select t1.*,t2.org_name dwmc from (select id,material_id,user_id,realname,sex,birthday,REPLACE(birthday,'-','.') as birthday1,experience,org_name,position,title,address,postcode,handphone,email,idtype,
 idcard,telephone,fax,org_id,online_progress,auth_user_id,auth_date,offline_progress,paper_date,is_staging*1 is_staging,is_deleted*1 is_deleted,
 gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,expertise,return_cause from declaration) t1 left join (select id,org_name from org 
 	union select '0' id,'人民卫生出版社' org_name from dual) t2 on t1.org_id = t2.id
@@ -196,7 +196,7 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 	</delete>
 	<!--上版教材编辑-->
 	<select id="queryJcbj" resultType="java.util.Map" parameterType="java.util.Map">
-		select id,declaration_id,material_name,position,is_digital_editor*1 is_digital_editor,note,sort,publisher,REPLACE(publish_date,'-','.') as  publish_date from dec_last_position where declaration_id = #{declaration_id} ORDER BY sort
+		select id,declaration_id,material_name,position,is_digital_editor*1 is_digital_editor,note,sort,publisher,publish_date,REPLACE(publish_date,'-','.') as  publishdate from dec_last_position where declaration_id = #{declaration_id} ORDER BY sort
 	</select>
 	<insert id="insertJcbj" parameterType="java.util.Map">
 		insert into dec_last_position(declaration_id,material_name,position,is_digital_editor,publisher,publish_date,note,sort)
@@ -230,7 +230,7 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 	<!-- 人卫社教材编写情况 -->
 	<select id="queryRwsjc" resultType="java.util.Map" parameterType="java.util.Map">
 		select id,declaration_id,material_name,rank,position,
-		is_digital_editor*1 is_digital_editor,REPLACE(publish_date,'-','.') as publish_date,isbn,note,sort
+		is_digital_editor*1 is_digital_editor,publish_date,REPLACE(publish_date,'-','.') as publishdate,isbn,note,sort
 		 from dec_textbook_pmph where declaration_id = #{declaration_id}
 		  ORDER BY sort 
 	</select>
@@ -244,7 +244,7 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 	<!-- 其他社教材编写情况 -->
 	<select id="queryJcbx" resultType="java.util.Map" parameterType="java.util.Map">
 		select id,declaration_id,material_name,rank,position,
-		is_digital_editor*1 is_digital_editor, publisher,REPLACE(publish_date,'-','.') as publish_date,isbn,note,sort
+		is_digital_editor*1 is_digital_editor, publisher,publish_date,REPLACE(publish_date,'-','.') as publishdate,isbn,note,sort
 		 from dec_textbook where declaration_id = #{declaration_id}
 		  ORDER BY sort 
 	</select>
@@ -301,7 +301,7 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 	</delete>
 	<!-- //主编学术专著情况 -->
 	<select id="queryMonograph" resultType="java.util.Map" parameterType="java.util.Map">
-		select id,declaration_id,monograph_name,REPLACE(monograph_date,'-','.') as monograph_date,is_self_paid*1 is_self_paid,publisher,REPLACE(publish_date,'-','.') as publish_date,note,sort from dec_monograph where declaration_id = #{declaration_id} ORDER BY sort
+		select id,declaration_id,monograph_name,monograph_date,REPLACE(monograph_date,'-','.') as monographdate,is_self_paid*1 is_self_paid,publisher,publish_date,REPLACE(publish_date,'-','.') as publishdate,note,sort from dec_monograph where declaration_id = #{declaration_id} ORDER BY sort
 	</select>
 	<insert id="insertMonograph" parameterType="java.util.Map">
 		insert into dec_monograph(declaration_id,monograph_name,monograph_date,is_self_paid,publisher,publish_date,note,sort)

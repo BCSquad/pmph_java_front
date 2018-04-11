@@ -60,7 +60,7 @@
 								<c:if test="${gezlList.sex == '1'}">男</c:if>
 								<c:if test="${gezlList.sex == '2'}">女</c:if>
 							</span></td>
-						<td><span>出生年月：${gezlList.birthday}</span></td>
+						<td><span>出生年月：${gezlList.birthday1}</span></td>
 						<td><span>教&emsp;&emsp;龄：${gezlList.experience}</span></td>
 					</tr>
 					<tr>
@@ -274,7 +274,7 @@
 								<c:if test="${list.is_digital_editor == '0'}">否</c:if>
 							</td>
 							<td>${list.publisher}</td>
-							<td>${list.publish_date}</td>
+							<td>${list.publishdate}</td>
 							<td>${list.note}</td>
 						</tr>
 					</c:forEach>
@@ -352,7 +352,7 @@
 								<c:if test="${list.is_digital_editor == '1'}">是</c:if>
 								<c:if test="${list.is_digital_editor == '0'}">否</c:if>
 							</td>
-							<td>${list.publish_date}</td>
+							<td>${list.publishdate}</td>
 							<td>${list.isbn}</td>
 							<td>${list.note}</td>
 						</tr>
@@ -404,7 +404,7 @@
 								<c:if test="${list.is_digital_editor == '0'}">否</c:if>
 							</td>
 								<td>${list.publisher}</td>
-								<td>${list.publish_date}</td>
+								<td>${list.publishdate}</td>
 								<td>${list.isbn}</td>
 								<td>${list.note}</td>
 							</tr>
@@ -507,13 +507,13 @@
 					<c:forEach var="list" items="${monographList}">
 						<tr>
 							<td>${list.monograph_name}</td>
-							<td>${list.monograph_date}</td>
+							<td>${list.monographdate}</td>
 							<td>
 								<c:if test="${list.is_self_paid == '0'}">公费</c:if>
 								<c:if test="${list.is_self_paid == '1'}">自费</c:if>
 							</td>
 							<td>${list.publisher}</td>
-							<td>${list.publish_date}</td>
+							<td>${list.publishdate}</td>
 							<td>${list.note}</td>
 							</tr></c:forEach>
 					</tbody>
