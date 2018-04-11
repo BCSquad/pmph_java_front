@@ -63,6 +63,13 @@ public class CmsNoticeList {
 	 * 截止时间
 	 */
 	private Timestamp deadline;
+
+
+
+	/**
+	 * 实际截止时间
+	 */
+	private Timestamp actualDeadline;
     /**
      * 内容id
      */
@@ -85,6 +92,14 @@ public class CmsNoticeList {
 	private String notEnd;
 	private String declarationId;
 	private String decEditable;
+
+	public Timestamp getActualDeadline() {
+		return actualDeadline;
+	}
+
+	public void setActualDeadline(Timestamp actualDeadline) {
+		this.actualDeadline = actualDeadline;
+	}
 
 	public String getNotEnd() {
 		return notEnd;
