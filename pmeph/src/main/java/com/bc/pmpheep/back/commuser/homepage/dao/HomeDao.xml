@@ -215,8 +215,8 @@ LIMIT 0,10
 			INNER JOIN 
 				(SELECT * from book_user_comment 
 					where is_auth = 1 AND
-					is_hide = 0 AND
-					is_deleted = 0 AND is_long=0
+					is_hide = 0  AND
+					is_deleted = 0
 					 GROUP BY book_id )AS c
 			ON b.id = c.book_id
 			INNER JOIN writer_user AS u ON c.writer_id = u.id
@@ -361,6 +361,51 @@ LIMIT 0,10
 					WHERE
 						a.target_id = #{id}
 					AND STATUS = 0
+	</select>
+
+	<!--查询更多热门书评列表  -->
+	<select id="queryHotCommentList" parameterType="map" resultType="java.util.Map">
+		SELECT
+		buc.*,
+		b.bookname,
+		wu.username,
+		wu.avatar,
+		b.image_url,
+		IFNULL(buc.title, b.bookname) AS hottitle
+	FROM
+		book_user_comment buc
+	LEFT JOIN writer_user wu ON buc.writer_id = wu.id
+	LEFT JOIN book b ON buc.book_id = b.id
+	WHERE
+		buc.is_hide = 0
+	AND buc.is_deleted = 0
+	AND buc.is_auth = 1
+	ORDER BY
+		buc.sort_promote,
+		buc.score DESC
+		limit #{startnum},#{size}
+	</select>
+	<!--查询更多热门书评列表数量  -->
+	<select id="queryHotCommentListCount"  resultType="int">
+			SELECT
+		count(*)
+	FROM
+		(
+			SELECT
+				buc.*, b.bookname,
+				wu.username,
+				wu.avatar,
+				b.image_url,
+				IFNULL(buc.title, b.bookname) AS hottitle
+			FROM
+				book_user_comment buc
+			LEFT JOIN writer_user wu ON buc.writer_id = wu.id
+			LEFT JOIN book b ON buc.book_id = b.id
+			WHERE
+				buc.is_hide = 0
+			AND buc.is_deleted = 0
+			AND buc.is_auth = 1
+		) t
 	</select>
 
 </mapper>

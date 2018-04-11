@@ -242,9 +242,9 @@ public class HomeServiceImpl implements HomeService {
         int le = content.getBytes("UTF-8").length;
         if (le > length && !content.equals(null)) {
             int n = length / 4;
-            returncontent = content.substring(0, n) + "...";
+            returncontent =removeHtml(content).substring(0, n) + "...";
         } else {
-            returncontent = content;
+            returncontent = removeHtml(content);
         }
         return returncontent;
     }
@@ -268,6 +268,45 @@ public class HomeServiceImpl implements HomeService {
     @Override
     public List<Map<String, Object>> queryNotReadMessages(String id) {
         return homeDao.queryNotReadMessages(id);
+    }
+
+    @Override
+    public List<Map<String, Object>> queryHotCommentList(int startnum,int size) {
+        // TODO Auto-generated method stub
+        Map<String,Object> param=new HashMap<String, Object>();
+        param.put("startnum", startnum);
+        param.put("size", size);
+        List<Map<String, Object>> list = homeDao.queryHotCommentList(param);
+        if(list!=null){
+            for (Map<String, Object> map : list) {
+                List<String> imglist = getImgSrc(map.get("content").toString());
+                map.put("imagepath",map.get("image_url").toString() );
+                map.put("contentxt", removeHtml(map.get("content").toString()));
+                if(map.get("avatar") !=null && (map.get("avatar").equals("DEFAULT")
+                        ||map.get("avatar").equals(""))){
+                    map.put("avatar", "statics/image/default_image.png");
+                }else{
+                    map.put("avatar", "image/"+map.get("avatar")+".action");
+                }
+            }
+        }
+        return list;
+    }
+
+    //查询社区精彩书评的总数量
+    @Override
+    public int queryHotCommentListCount() {
+        // TODO Auto-generated method stub
+        return homeDao.queryHotCommentListCount();
+    }
+
+    //去掉字符串中的html标签
+    public String removeHtml(String str){
+        String regEx_html="<[^>]+>"; //定义HTML标签的正则表达式
+        Pattern p_html=Pattern.compile(regEx_html,Pattern.CASE_INSENSITIVE);
+        Matcher m_html=p_html.matcher(str);
+        str=m_html.replaceAll(""); //过滤html标签
+        return str;
     }
 
 
