@@ -1145,8 +1145,8 @@ public class MaterialDetailController extends BaseController{
 		
 		Map<String, Object> dmap = mdService.queryDeclarationByUserIdAndMaterialIdOrDeclarationId(user_id,material_id,declaration_id);
 		if (dmap!=null) {
-			if ((boolean) dmap.get("notEnd")) {
-				if ((boolean) dmap.get("dec_editable")) {
+			if ("1".equals(dmap.get("notEnd").toString()) ) {
+				if ("1".equals(dmap.get("dec_editable").toString())) {
 					mv.setViewName("redirect:/material/toMaterialZc.action?declaration_id="+declaration_id);
 				}else {
 					mv.setViewName("redirect:/material/showMaterial.action?declaration_id="+declaration_id);
