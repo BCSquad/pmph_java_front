@@ -98,7 +98,6 @@
     color:#333;
     font-size: 18px;
     padding:29px 0 0 15px;
-    height:25px;
     line-height: 24px;
 }
 .item1 a{
@@ -146,10 +145,11 @@ a{
 }
 #sort-wrapper input{color: #333333;}
 .cutmore{
-	overflow: hidden;
-	text-overflow: ellipsis;
+    /*overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
-    /*width: 600px;*/
+    width: 600px;*/
+    line-height: 20px; height:50px;max-height:50px;overflow: hidden;
 }
 .cms-icon{
 	background-image: url(../../image/css_sprites.png);
