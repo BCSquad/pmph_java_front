@@ -4,7 +4,7 @@
 <mapper namespace="com.bc.pmpheep.back.authadmin.applydocaudit.dao.DataAuditDao">
 	
 	<!--分页查询条件查询列表 -->
-	<select id="findDataAudit" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="findDataAudit" resultType="java.util.Map" parameterType="com.bc.pmpheep.back.plugin.PageParameter">
 		<![CDATA[SELECT
 		d.id as did,d.realname as drealname,d.position as dposition, d.title as dtitle,group_concat(DISTINCT concat(t.textbook_name,'-',(case  
 		when p.preset_position=0 OR  p.preset_position IS NULL  then '无' 
@@ -55,40 +55,60 @@
 		INNER JOIN org_user as  ou on  d.org_id=ou.org_id  and d.online_progress !=0]]>
 		<where>
 			1=1
-			<if test="queryName != null and queryName != '' ">
-				and d.realname like concat("%",#{queryName},"%")
+			<if test="parameter.realname != null and parameter.realname != '' ">
+				and d.realname like concat("%",#{parameter.realname},"%")
 			</if>
-			<if test="material_id != null and material_id != '' ">
-				and d.material_id = ${material_id}
+			<if test="parameter.textbook_name != null and parameter.textbook_name != '' ">
+				and t.textbook_name like concat("%",#{parameter.textbook_name},"%")
 			</if>
-			<if test="userId != null and userId != '' ">
-				and ou.id = ${userId}
+			<if test="parameter.title != null and parameter.title != '' ">
+				and d.title like concat("%",#{parameter.title},"%")
+			</if>
+			<if test="parameter.online_progress != null and parameter.online_progress != '' ">
+				and d.online_progress in (${parameter.online_progress})
+			</if>
+			<if test="parameter.material_id != null and parameter.material_id != '' ">
+				and d.material_id = ${parameter.material_id}
+			</if>
+			<if test="parameter.userId != null and parameter.userId != '' ">
+				and ou.id = ${parameter.userId}
 			</if>
 		</where>
 		GROUP BY d.id
-		limit ${startNum},${pageSize}  
+		limit ${start},${pageSize}
 	</select>
 	
 	
 	<!--查询条件查询条数 -->
-	<select id="findDataAuditCount" parameterType="java.util.Map"
+	<select id="findDataAuditCount" parameterType="com.bc.pmpheep.back.plugin.PageParameter"
 		resultType="int">
 
 		SELECT
-		COUNT(*)
+		COUNT(distinct d.id)
 		FROM
 		declaration AS d
-		INNER JOIN org_user as  ou on  d.org_id=ou.org_id and d.online_progress !=0
+		LEFT JOIN dec_position AS p ON d.id = p.declaration_id
+		LEFT JOIN textbook AS t ON p.textbook_id = t.id 
+		INNER JOIN org_user as  ou on  d.org_id=ou.org_id  and d.online_progress !=0
 		<where>
 		1=1
-			<if test="queryName != null and queryName != '' ">
-				and d.realname like concat("%",#{queryName},"%")
+			<if test="parameter.realname != null and parameter.realname != '' ">
+				and d.realname like concat("%",#{parameter.realname},"%")
 			</if>
-			<if test="material_id != null and material_id != '' ">
-				and d.material_id = ${material_id}
+			<if test="parameter.textbook_name != null and parameter.textbook_name != '' ">
+				and t.textbook_name like concat("%",#{parameter.textbook_name},"%")
 			</if>
-			<if test="userId != null and userId != '' ">
-				and ou.id = ${userId}
+			<if test="parameter.title != null and parameter.title != '' ">
+				and d.title like concat("%",#{parameter.title},"%")
+			</if>
+			<if test="parameter.online_progress != null and parameter.online_progress != '' ">
+				and d.online_progress in (${parameter.online_progress})
+			</if>
+			<if test="parameter.material_id != null and parameter.material_id != '' ">
+				and d.material_id = ${parameter.material_id}
+			</if>
+			<if test="parameter.userId != null and parameter.userId != '' ">
+				and ou.id = ${parameter.userId}
 			</if>
 		</where>
 		

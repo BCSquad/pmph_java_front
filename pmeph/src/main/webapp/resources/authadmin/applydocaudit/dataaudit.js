@@ -8,15 +8,41 @@ $(function () {
         zIndex: 10,
         width: 110,
         height: 30,
-        optionHeight: 30
+        optionHeight: 30,
+        onChange:function(){
+        	$("#page-num-temp").val(1);
+        	$("#page-size-select-hidden").val($("#page-size-select").find("input[name='page-size-select']").val());
+            queryMain();
+        }
     });
-    //切换分页每页数据数量时 刷新
-    $("#page-size-select").find("li").bind("click", function () {
-
-        $("#page-num-temp").val(1);
-        queryMain();
+    
+    
+    
+    $('#search-status-select').selectlist({
+        zIndex: 10,
+        width: 110,
+        height: 30,
+        optionHeight: 30,
+        onChange:function(){
+        	$("#page-num-temp").val(1);
+            $("#search-status").val($("#search-status-select").find("input[name='search-status-select']").val());
+            queryMain();
+        }
     });
+    
+    $("input.query_input").each(function(){
+    	var $t = $(this);
+    	$t.unbind().bind("keyup",function(event){
+    		if (event.keyCode=="13") {
+    			$("#page-num-temp").val(1);
+    			queryMain();
+			}
+    	});
+    });
+    
     queryMain();
+    
+    
 });
 
 // 复选框选中导出word、excel
@@ -87,12 +113,14 @@ function checkboxInit() {
 function queryMain() {
     data = {
         pageNum: $("#page-num-temp").val(),
-        pageSize: $("#page-size-select").find("input[name='page-size-select']").val(),
-        queryName: $("#search-name-temp").val(),
+        pageSize: $("#page-size-select-hidden").val(),
+        //queryName: $("#search-name-temp").val(),
         material_id: $("#material_id").val(),
         contextpath: contextpath
     };
 
+    data = queryConditionInitFun(data);
+    
     $.ajax({
         type: 'post',
         url: contextpath + 'dataaudit/findDataAudit.action?t=' + new Date().getTime(),
@@ -100,18 +128,20 @@ function queryMain() {
         dataType: 'json',
         data: data,
         success: function (json) {
-            if (!json.html) {
-                $("#fenye").hide();
-            } else {
-                $("#fenye").show();
-            }
-            if (json.html) {
-                $(".no-more").hide();
-            } else {
-                $(".no-more").show();
-            }
+            
+            if ($.trim(json.html) == "") {
+				$(".fenye").hide();
+				$(".no-more").show();
+			}else{
+				$(".no-more").hide();
+				$(".fenye").show();
+				$(".pagination").css("display","inline-block");
+				$(".pageJump").css("display","inline-block");
+				$(".pagination").next("div").css("display","inline-block");
+			}
+            
             $("#zebra-table").html(json.html);
-            $('#page1').html("");
+            //$('#page1').html("");
             $("#totoal_count").html(json.totoal_count);
             //刷新分页栏
             Page({
@@ -124,8 +154,25 @@ function queryMain() {
                 }
             });
             checkboxInit();
+            $(".btn_1").attr("disabled",false);
+        },
+        complete:function(){
+        	$(".btn_1").attr("disabled",false);
         }
     });
+}
+
+//将不为空的查询条件放入data
+function queryConditionInitFun(data){
+	$(".query_input").each(function(){
+		var $t=$(this);
+		//if ($t.val() != null && $t.val() != "") {
+		data[$t.attr("name")]=$.trim($t.val());
+		//data[$t.attr("name")]=encodeURI(encodeURI($t.val()));
+			//编码 到controller层再解码 避免乱码
+		//}
+	});
+	return data;
 }
 
 //点击名字跳转页面
@@ -141,13 +188,26 @@ function selectPageSize() {
     queryMain();
 }
 
+//清空条件重查询
+function queryClear(){
+	$(".btn_1").attr("disabled",true);
+	$("#page-num-temp").val(1);
+    
+    setTimeout(function(){
+    	$(".query_input").val("");
+	    $("#search-status-select").trigger("click");
+	    $("#search-status-select").find("li[data-value='']").trigger("click");
+    },100);
+    //queryMain();
+    
+}
+
 //查询按钮点击事件触发 
 function queryBtnClick() {
-
+	$(".btn_1").attr("disabled",true);
     $("#page-num-temp").val(1);
-    $("#search-name-temp").val();
+    
     queryMain();
-
 }
 
 

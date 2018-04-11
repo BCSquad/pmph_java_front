@@ -140,7 +140,7 @@ function queryMain(){
 			
 			$("#book-list-table").html(json.html);
 			
-			if (json.html.trim() == "") {
+			if ($.trim(json.html) == "") {
 				$(".pageDiv").hide();
 				$(".no-more").show();
 			}else{
