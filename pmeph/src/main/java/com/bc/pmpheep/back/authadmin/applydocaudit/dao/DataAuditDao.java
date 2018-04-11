@@ -17,7 +17,7 @@ public interface DataAuditDao {
 	 * @return List<Map<String,Object>> 返回类型
 	 * @throws
 	 */
-	List<Map<String, Object>> findDataAudit(Map<String, Object> paraMap);
+	List<Map<String, Object>> findDataAudit(PageParameter<Map<String, Object>> pageParameter);
 
 	/**
 	 * 
@@ -28,7 +28,7 @@ public interface DataAuditDao {
 	 * @return Integer 返回类型
 	 * @throws
 	 */
-	Integer findDataAuditCount(Map<String, Object> paraMap);
+	Integer findDataAuditCount(PageParameter<Map<String, Object>> pageParameter);
 
 	/**
 	 * 
