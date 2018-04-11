@@ -89,14 +89,14 @@
                 <c:set var="count" value="${booklist.size() }"></c:set>
                 <c:forEach items="${booklist }" var="book">
                     <c:if test="${book !=null }">
-                        <div class="item" onclick="window.location.href='<c:url
+                        <div title="${book.bookname }" class="item" onclick="window.location.href='<c:url
                                 value="/readdetail/todetail.action?id=${book.id }"/>'">
                             <div class="itemimg"
                                  style="width:126px;height:126px;margin:20px auto 0px;text-align: center">
                                 <img alt=""
                                      src="${book.image_url=='DEFAULT'? 'statics/image/564f34b00cf2b738819e9c35_122x122!.jpg':book.image_url }">
                             </div>
-                            <div class="bookname" title="${book.bookname }">${book.bookname } </div>
+                            <div class="bookname" >${book.bookname } </div>
                         </div>
                         <c:set var="count" value="${count-1 }"></c:set>
                     </c:if>

@@ -28,40 +28,46 @@
 .query_btn{
 	
     height: 80px;
+    padding-top: 25px;
     width: 100%;
 }
 .query00{
-	float:left;
-    padding-top: 15px;
+	float: left;
+    /* padding-top: 15px; */
     margin-left: 15px;
-    margin-top:10px;
+    /* margin-top: 10px; */
 }
 .query_input{
-    width: 310px;
+    padding: 0px 4px;
+    width: 108px;
     height: 30px;
-    border: solid 1px #ededed;
+    border: solid 1px #e4e4e4;
+    border-radius: 3.5px;
 }
 
 .btn{
-	 margin-top:10px;
     float: right;
-    width: 823px;
-    padding-top: 15px;
-
+    
 }
 
 .btn_1{
-	 float: left;
-    width: 80px;
+	float: left;
+    padding: 0px 15px;
     height: 33px;
-    background-color: #1898dd;
-    margin-left: 20px;
+    margin-left: 10px;
     border-radius: 1px;
-
     color: #ffffff;
     font-size: 14px;
-    border:none;
+    border: none;
+    border-radius: 4px;
+}
 
+#btn-clear{
+    background-color: #279e85;
+}
+
+#btn-search{
+    background-color: #1898dd;
 }
 
 .btn_2{

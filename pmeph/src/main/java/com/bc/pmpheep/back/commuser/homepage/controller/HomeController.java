@@ -307,4 +307,35 @@ public class HomeController extends BaseController{
     	String returncode=homeService.addfriend(user.get("id").toString(), target_id);
     	return returncode;
     }
+
+    /**
+     * 查询更多热门书评列表
+     */
+    @RequestMapping("/morecomments")
+    public ModelAndView getMoreComments(HttpServletRequest req){
+        Map<String,Object> map=new HashMap<String, Object>();
+        String pagenum=req.getParameter("pagenum");
+        String pagesize=req.getParameter("size");
+        int startnum=0;
+        int size=5;
+        if(pagenum!=null && !"".equals(pagenum) && pagesize!=null && !"".equals(pagesize)){
+            startnum=(Integer.parseInt(pagenum)-1)*Integer.parseInt(pagesize);
+            size=Integer.parseInt(pagesize);
+        }else{
+            pagenum="1";
+            pagesize="5";
+        }
+        List<Map<String, Object>> comments = homeService.queryHotCommentList(startnum,size);
+        int total=homeService.queryHotCommentListCount();
+        int pagetotal=total/size;
+        if(total%size!=0){
+            pagetotal=pagetotal+1;
+        }
+        map.put("total", total);
+        map.put("pagetotal", pagetotal);
+        map.put("comments",comments);
+        map.put("pagenum", pagenum);
+        map.put("pagesize", pagesize);
+        return new ModelAndView("commuser/homepage/hotbookcomments",map);
+    }
 }

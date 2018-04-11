@@ -751,7 +751,7 @@ request.setAttribute("currentTime",datetime);
                     <br style="clear: both;"/>
                     <c:if test="${listmyfriend == null || listmyfriend.size()==0  }">
                 		<div style="padding-top: 10px;">
-	                        <img src="<c:url value="/statics/image/no_friends.png"></c:url>">
+							<a  style="cursor: pointer;" href="${ctx}/addFriend/toPage.action"><img src="<c:url value="/statics/image/no_friends.png"></c:url>"></a>
 	                    </div>
                 	</c:if>
                     <ul class="scul">
