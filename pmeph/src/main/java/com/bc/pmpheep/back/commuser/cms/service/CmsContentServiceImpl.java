@@ -52,7 +52,10 @@ public class CmsContentServiceImpl implements CmsContentService{
 		List<Map<String, Object>> resultList = cmsContentDao.listCmsContentVO(paraMap);
 		
 		for (Map<String,Object> cmsContentVO : resultList) {
-			String authdate=cmsContentVO.get("auth_date").toString().substring(0, 10);
+			String authdate = "";
+			if(cmsContentVO.get("auth_date")!= null) {
+				 authdate = cmsContentVO.get("auth_date").toString().substring(0, 10);
+			}
 			cmsContentVO.put("auth_date", authdate);
 			cmsContentVO.put("cover", RouteUtil.articleAvatar(MapUtils.getString(cmsContentVO, "cover")));
 			//抓取文章图片
