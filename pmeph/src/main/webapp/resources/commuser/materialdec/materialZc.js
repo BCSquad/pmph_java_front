@@ -901,17 +901,17 @@ function buttAdd(type){
         var realname = $("#realname").val();
         if(username==realname){
             if(confirm("你的真实姓名和用户名一样，是否提交！")){
-                commit();
+                commit(type);
             }else{
                 $("#realname")[0].focus();
             }
         }else{
-            commit();
+            commit(type);
         }
     }
 }
 //提交
-function commit(){
+function commit(type){
     checkLb();
     if (checkEqual("textbook_id") && checkNull(jsonStr) && checkExtra()) {
         //避免重复点击
