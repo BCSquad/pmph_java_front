@@ -286,3 +286,7 @@ body
 	background-repeat: no-repeat;
 	background-position: 0px 8px;
 }
+
+div#title{
+	float: left;
+}

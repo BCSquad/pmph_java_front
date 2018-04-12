@@ -110,7 +110,7 @@
 					<table class="tab_1">
 						<tr>
 							<td><span class="btbs">*</span><span>姓&emsp;&emsp;名：</span>
-								<input class="cg_input" name="realname" id="realname" value="${userMap.realname}" maxlength="20"/>
+								<input class="cg_input" name="realname" id="realname" value="${userMap.writername}" maxlength="20"/>
 								<input class="cg_input" name="user_id" type="hidden" value="${userMap.id}" />
 							</td>
 							<td><span class="btbs">*</span><span>性&emsp;&emsp;别：</span>

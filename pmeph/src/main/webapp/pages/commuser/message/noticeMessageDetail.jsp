@@ -42,7 +42,7 @@
 		            <span class="title">${map.title}</span>
 					<c:if test="${map.deadline !=null && map.deadline !=''}">
 		            <div class="time">
-		            <span >截止日期：${map.actual_deadline}</span>
+		            <span >截止日期：${map.deadline}</span>
 		            </div>
 		            </c:if>
 		        </div>

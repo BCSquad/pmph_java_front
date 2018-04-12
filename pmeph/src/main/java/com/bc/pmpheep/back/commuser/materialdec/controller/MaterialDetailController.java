@@ -65,7 +65,8 @@ public class MaterialDetailController extends BaseController{
 	@RequestMapping("toMaterialAdd")
 	public ModelAndView toMaterialAdd(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("commuser/materialdec/toMaterialAdd");
-		Map<String,Object> userMap =  this.getUserInfo();
+		Map<String,Object> userinfo =  this.getUserInfo();
+		Map<String,Object> userMap =  this.mdService.queryUserInfo(userinfo.get("id").toString());
         for (Map.Entry<String, Object> entry : userMap.entrySet()) {
             String key = entry.getKey().toString();
             String value = entry.getValue().toString();
@@ -1151,7 +1152,11 @@ public class MaterialDetailController extends BaseController{
 		String user_id = user.get("id").toString();
 		
 		Map<String, Object> dmap = mdService.queryDeclarationByUserIdAndMaterialIdOrDeclarationId(user_id,material_id,declaration_id);
+		
 		if (dmap!=null) {
+			if ("".equals(declaration_id)) {
+				declaration_id = dmap.get("id").toString();
+			}
 			if ("1".equals(dmap.get("notEnd").toString()) ) {
 				if ("1".equals(dmap.get("dec_editable").toString())) {
 					mv.setViewName("redirect:/material/toMaterialZc.action?declaration_id="+declaration_id);

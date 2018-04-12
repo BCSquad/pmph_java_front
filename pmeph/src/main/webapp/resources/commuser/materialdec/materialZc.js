@@ -897,31 +897,44 @@ function buttAdd(type){
             }
         });
     }else{ //表示提交
-        checkLb();
-        if (checkEqual("textbook_id") && checkNull(jsonStr) && checkExtra()) {
-            //避免重复点击
-            document.getElementById('buzc').onclick = function () {
-                window.message.warning("请不要重复点击");
-            };
-            document.getElementById('butj').onclick = function () {
-                window.message.warning("请不要重复点击");
-            };
-            $.ajax({
-                type: "POST",
-                url: contextpath + 'material/doMaterialAdd.action?sjump=2&type=' + type,
-                data: $('#objForm').serialize(),// 您的formid
-                async: false,
-                success: function (json) {
-                    if (json.msg == 'OK') {
-                        window.message.success("操作成功,正在跳转页面");
-                        window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
-                    }
-                }
-            });
+        var username = $("#username").val();
+        var realname = $("#realname").val();
+        if(username==realname){
+            if(confirm("您填写的申报姓名和账号一致，是否已当前姓名提交申报！")){
+                commit(type);
+            }else{
+                $("#realname")[0].focus();
+            }
+        }else{
+            commit(type);
         }
     }
 }
-
+//提交
+function commit(type){
+    checkLb();
+    if (checkEqual("textbook_id") && checkNull(jsonStr) && checkExtra()) {
+        //避免重复点击
+        document.getElementById('buzc').onclick = function () {
+            window.message.warning("请不要重复点击");
+        };
+        document.getElementById('butj').onclick = function () {
+            window.message.warning("请不要重复点击");
+        };
+        $.ajax({
+            type: "POST",
+            url: contextpath + 'material/doMaterialAdd.action?sjump=2&type=' + type,
+            data: $('#objForm').serialize(),// 您的formid
+            async: false,
+            success: function (json) {
+                if (json.msg == 'OK') {
+                    window.message.success("操作成功,正在跳转页面");
+                    window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
+                }
+            }
+        });
+    }
+}
 //放弃
 function buttGive(){
     window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=jcsb";

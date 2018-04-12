@@ -138,11 +138,11 @@
                     <p class="content-size"><a
                             href="${ctx}/message/noticeMessageDetail.action?cmsId=${list.id }&&materialId=${list.material_id}&&notEnd=${list.notEnd}&&is_material_entry=${is_material_entry}&&tag=homepage"
                             class="astyle">${list.title}</a></p>
-                    <p class="time-size">发布时间：<fmt:formatDate value="${list.gmt_create}" type="date"
+                    <p class="time-size">截止日期：<fmt:formatDate value="${list.deadline}" type="date"
                                                               pattern="yyyy-MM-dd"/></p>
                     <input type="hidden" value="${list.notEnd}">
 
-                    <c:if test="${list.notEnd ==1 and list.is_material_entry==true and list.declaration_id==null }">
+                    <%-- <c:if test="${list.notEnd ==1 and list.is_material_entry==true and list.declaration_id==null }">
                         <div class="left_join"
                              onclick="window.location.href='${ctx}/material/toMaterialAdd.action?material_id=${list.material_id}'">
                             报名参加
@@ -161,7 +161,20 @@
                     </c:if>
                     <c:if test="${list.notEnd ==0 and list.is_material_entry==true}">
                         <div class="left_join end">报名结束</div>
-                    </c:if>
+                    </c:if> --%>
+                    <c:choose>
+                    	<c:when test="${list.is_material_entry!=true}"></c:when>
+                    	<c:when test="${list.notEnd ==0 and list.is_material_entry==true}">
+                    		<div class="left_join end">报名结束</div>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<div class="left_join" onclick="window.location.href='${ctx}/material/MaterialDetailRedirect.action?material_id=${list.material_id}'">
+                           		报名参加
+                        	</div>
+                    	</c:otherwise>
+                    </c:choose>
+                    
+                    
                 </div>
 
                 <%-- </c:if> --%>
@@ -224,16 +237,23 @@
                     </div>
                 </div>
                 <c:forEach items="${listType}" var="list" varStatus="status">
-                    <c:if test="${status.index==0}">
+                    <%-- <c:if test="${status.index==0}">
                         <div class="type" id="typeOne">${list.type_name}</div>
-                    </c:if>
+                    </c:if> --%>
+                    
+                   	<c:if test="${status.index!=0}">
+                   		<div class="point"></div>
+                   	</c:if>
+                   	<div class="type"  id="type_${list.id}" onclick="chooseTypeSecond(${list.id})">${list.type_name}</div>
+                   
+                    
                 </c:forEach>
-                <c:forEach items="${listType}" var="list" varStatus="status">
+                <%-- <c:forEach items="${listType}" var="list" varStatus="status">
                     <c:if test="${status.index==1 or status.index==2 }">
                         <div class="point"></div>
                         <div class="type" id="typeTwo">${list.type_name}</div>
                     </c:if>
-                </c:forEach>
+                </c:forEach> --%>
             </div>
             <div class="content">
                 <div class="left">
