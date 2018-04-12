@@ -63,7 +63,7 @@ $(function(){
 	        			var html =
 	                		"<div class=\"items\"> "+ 
 	                		   (list[i].isPromote?"<div class='items_img'>推荐</div> ":"")+
-	        	                "<div class=\"item1 cutmore\">"+
+	        	                "<div class=\"item1\">"+
 	        	                "<a href='"+contextpath;
 	        			     if(list[i].categoryId==1){
 	        			    	 html+="articledetail/toPage.action?wid="+list[i].id;
@@ -73,7 +73,7 @@ $(function(){
                                  html+="cmsnotice/noticeMessageDetail.action?id="+list[i].mid+"&&materialId="+list[i].materialId+"&&csmId="+list[i].id ;
 							 }
 	        			     html+="'>"+list[i].title+"</a></div> "+
-	        	                "<div class=\"item2 cutmore\"><p style='margin:0;height: 40px;line-height: 20px;'>";
+	        	                "<div class=\"item2 cutmore\"><p >";
                         if(list[i].categoryId==3 && list[i].isMaterialEntry){
                             html+=list[i].notice;
 						}else{

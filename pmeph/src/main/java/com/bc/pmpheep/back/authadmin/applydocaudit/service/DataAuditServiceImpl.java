@@ -52,14 +52,8 @@ public class DataAuditServiceImpl implements DataAuditService {
 	@Override
 	public List<Map<String, Object>> findDataAudit(
 			PageParameter<Map<String, Object>> pageParameter) {
-		Map<String, Object> paraMap = new HashMap<String, Object>();
-		paraMap.put("startNum", pageParameter.getStart());
-		paraMap.put("pageSize", pageParameter.getPageSize());
-		paraMap.put("material_id",pageParameter.getParameter().get("material_id"));
-		paraMap.put("queryName", pageParameter.getParameter().get("queryName"));
-		paraMap.put("userId", pageParameter.getParameter().get("userId"));
 		List<Map<String, Object>> resultList = dataAuditDao
-				.findDataAudit(paraMap);
+				.findDataAudit(pageParameter);
 		return resultList;
 	}
 
@@ -69,11 +63,7 @@ public class DataAuditServiceImpl implements DataAuditService {
 	@Override
 	public int findDataAuditCount(
 			PageParameter<Map<String, Object>> pageParameter) {
-		Map<String, Object> paraMap = pageParameter.getParameter();
-		paraMap.put("queryName", pageParameter.getParameter().get("queryName"));
-		paraMap.put("material_id",pageParameter.getParameter().get("material_id"));
-		paraMap.put("userId",pageParameter.getParameter().get("userId"));
-		Integer count = dataAuditDao.findDataAuditCount(paraMap);
+		Integer count = dataAuditDao.findDataAuditCount(pageParameter);
 		Integer maxPageNum = (int) Math.ceil(1.0 * count
 				/ pageParameter.getPageSize());
 		return maxPageNum;

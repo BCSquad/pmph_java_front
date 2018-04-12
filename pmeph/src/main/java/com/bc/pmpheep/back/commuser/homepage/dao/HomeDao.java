@@ -116,4 +116,16 @@ public interface HomeDao {
      */
     List<Map<String, Object>> queryNotReadMessages(@Param("id") String id);
 
+    /**查询更多热门书评列表
+     * @param map
+     * @return  List<Map<String,Object>>
+     */
+    List<Map<String,Object>> queryHotCommentList(Map<String,Object> map);
+
+    /**查询更多热门书评列表数量
+     * @param map
+     * @return  List<Map<String,Object>>
+     */
+    int queryHotCommentListCount();
+
 }

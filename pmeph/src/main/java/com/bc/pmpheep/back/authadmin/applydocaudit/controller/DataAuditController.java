@@ -92,12 +92,20 @@ public class DataAuditController extends BaseController{
 		ResponseBean<Map<String, Object>> rb = new ResponseBean<Map<String, Object>>();
 		Integer pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		Integer pageSize = Integer.parseInt(request.getParameter("pageSize"));
-		String queryName = request.getParameter("queryName");
+		//String queryName = request.getParameter("queryName");
+		String realname = request.getParameter("realname");
+		String textbook_name = request.getParameter("textbook_name");
+		String title = request.getParameter("title");
+		String online_progress = request.getParameter("online_progress");
+		
 		String material_id = request.getParameter("material_id");
 		String contextpath = request.getParameter("contextpath");
 
 		Map<String, Object> paraMap = new HashMap<String, Object>();
-		paraMap.put("queryName", queryName);
+		paraMap.put("realname", realname);
+		paraMap.put("textbook_name", textbook_name);
+		paraMap.put("title", title);
+		paraMap.put("online_progress", online_progress);
 		paraMap.put("material_id", material_id);
 		paraMap.put("userId", this.getUserInfo().get("id").toString());
 		

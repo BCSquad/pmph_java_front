@@ -178,7 +178,7 @@
     border-radius: 50%;
 }
 .username{
-    width: 200px;
+    max-width: 600px;
     height: 28px;
 
     font-size: 14px;

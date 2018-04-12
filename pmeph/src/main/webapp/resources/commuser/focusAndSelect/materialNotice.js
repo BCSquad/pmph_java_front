@@ -62,7 +62,7 @@ $(function(){
 	        		var i= 0;
 	        		for( ; i<responsebean.length ; i++ ){
 	        			var deadline =  responsebean[i].deadline != null ?
-	        					"<div style=\"float: left;\">截止日期:"+formatDate(responsebean[i].deadline,"yyyy-MM-dd")+"</div>  ":
+	        					"<div style=\"float: left;\">截止日期:"+formatDate(responsebean[i].actualDeadline,"yyyy-MM-dd")+"</div>  ":
 	        						"";
 	        			var html = 
 	                		"<div class=\"items\"> "+ 

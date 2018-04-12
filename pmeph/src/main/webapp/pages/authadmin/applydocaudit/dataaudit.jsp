@@ -45,10 +45,28 @@
 			<div class="box" >
 				<div class="query_btn">
 					<div class="query00">
-						姓名：<input class="query_input" id="search-name-temp"  />
+						姓名：<input class="query_input" id="search-name-temp" name="realname"  />
 					</div>
+					<div class="query00">
+						书名：<input class="query_input" id="search-book-name" name="textbook_name"  />
+					</div>
+					<div class="query00">
+						职称：<input class="query_input" id="search-title" name="title"  />
+					</div>
+					<div class="query00">
+						状态： 
+						<select id="search-status-select" name="search-status-select" onchange="selectPageSize();">
+                            <option value="">全部</option>
+                            <option value="1,4">未审核</option>
+                            <option value="2,5">已退回</option>
+                            <option value="3">已审核</option>
+                        </select> 
+						<input class="query_input" id="search-status" name="online_progress" type="hidden" value=""  />
+					</div>
+					<button class="btn_1"  id="btn-clear" onclick="queryClear()">清空</button>
+					<button class="btn_1"  id="btn-search" onclick="queryBtnClick()">查 询</button>
 					<div class="btn">
-						<button class="btn_1"  id="btn-search" onclick="queryBtnClick()">查 询</button>
+						
 						<button class="btn_3" onclick="return_on();">返 回</button>
 						<button class="btn_2" onclick="exportExcel();">导出Excel</button>
 						<button class="btn_2" style="background-color:#006400;" onclick="exportWord();">导出Word</button>
@@ -90,6 +108,7 @@
                                 <option value="20">每页20条</option>
                                 <option value="50">每页50条</option>
                             </select>
+                            <input id="page-size-select-hidden" type="hidden" value="10">
                         </div>
                         <div class="pageJump">
                             <span>共<span id="totoal_count" >${totoal_count }</span>页，跳转到</span>

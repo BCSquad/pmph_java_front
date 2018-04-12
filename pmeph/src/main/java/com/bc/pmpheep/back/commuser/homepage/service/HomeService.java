@@ -108,4 +108,17 @@ public interface HomeService {
      */
     String omit(String content,int length) throws UnsupportedEncodingException;
 
+    /**查询更多热门书评列表
+     * @param
+     * @param startnum  分也开始序号
+     * @param size 每页的数据数量
+     * @return  List<Map<String,Object>>
+     */
+    List<Map<String,Object>> queryHotCommentList(int startnum ,int size);
+
+    /**查询更多热门书评列表数量
+     *
+     */
+    int queryHotCommentListCount();
+
 }
