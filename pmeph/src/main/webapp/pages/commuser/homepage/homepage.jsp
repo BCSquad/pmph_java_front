@@ -237,16 +237,23 @@
                     </div>
                 </div>
                 <c:forEach items="${listType}" var="list" varStatus="status">
-                    <c:if test="${status.index==0}">
+                    <%-- <c:if test="${status.index==0}">
                         <div class="type" id="typeOne">${list.type_name}</div>
-                    </c:if>
+                    </c:if> --%>
+                    
+                   	<c:if test="${status.index!=0}">
+                   		<div class="point"></div>
+                   	</c:if>
+                   	<div class="type"  id="type_${list.id}" onclick="chooseTypeSecond(${list.id})">${list.type_name}</div>
+                   
+                    
                 </c:forEach>
-                <c:forEach items="${listType}" var="list" varStatus="status">
+                <%-- <c:forEach items="${listType}" var="list" varStatus="status">
                     <c:if test="${status.index==1 or status.index==2 }">
                         <div class="point"></div>
                         <div class="type" id="typeTwo">${list.type_name}</div>
                     </c:if>
-                </c:forEach>
+                </c:forEach> --%>
             </div>
             <div class="content">
                 <div class="left">

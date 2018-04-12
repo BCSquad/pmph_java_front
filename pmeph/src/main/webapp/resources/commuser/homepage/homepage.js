@@ -73,15 +73,53 @@ function chooseType(state) {
 		success : function(json) {
 			$("#homepagebook").html(json.homepagebook);
 			$("#next").html(json.allrows);
+			var listTypeHtmlStr = '';
 			$.each(json.listType, function(i, x) {
-				if (i == 0) {
+				$(".type").remove();
+				$(".point").remove();
+				if (i!=0) {
+					listTypeHtmlStr += '<div class="point"></div>';
+					
+				}
+				listTypeHtmlStr +='<div class="type"  id="type_'+x.id+'" onclick="chooseTypeSecond('+x.id+')">'+x.type_name+'</div>';
+				/*if (i == 0) {
 					$("#typeOne").html(x.type_name);
 				} else {
 					$("#typeTwo").html(x.type_name);
-				}
+				}*/
 			});
+			$(".page").after(listTypeHtmlStr);
 			$(".tab").removeClass("active");
 			$("#" + state).addClass("active");
+			$(".type").removeClass("active");
+			$("#book_type").val(state);
+			$("#before").html(1);
+			var labelHtml = "";
+			for ( var i = 0; i < json.listLabel.length; i++) {
+				labelHtml += '<a href="' + json.listLabel[i].type
+						+ '" class="little"><span class="little_content">'
+						+ json.listLabel[i].note + '</span></a>';
+			}
+			$(".div_photo1 .div1").html(labelHtml);
+		}
+	});
+}
+
+
+
+//书籍分类 次分类点击事件
+function chooseTypeSecond(state) {
+	$.ajax({
+		type : 'post',
+		url : contextpath + 'homepage/chooseType.action?state=' + state,
+		async : false,
+		dataType : 'json',
+		success : function(json) {
+			$("#homepagebook").html(json.homepagebook);
+			$("#next").html(json.allrows);
+			
+			$(".type").removeClass("active");
+			$("#type_" + state).addClass("active");
 			$("#book_type").val(state);
 			$("#before").html(1);
 			var labelHtml = "";

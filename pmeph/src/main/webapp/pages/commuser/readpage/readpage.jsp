@@ -83,7 +83,7 @@
                             <%--<div class="tab ${status.index==0?'active':''}" id="${type.id}"
                                  onclick='chooseType("${type.id}")'>${type.type_name}</div>--%>
 
-                            <div class="tab recommend ${status.index==bookTypes.size()-1?'active':''}"
+                            <div class="tab recommend ${status.index==0?'active':''}"
                                  typeid="${type.id}"
                                  id="ZKDiv_${type.id}" onclick="javaScript:ChangeDiv(${type.id})">
                                     ${type.type_name}
@@ -121,7 +121,7 @@
 	                            <%--<div class="tab ${status.index==0?'active':''}" id="${type.id}"
 	                                 onclick='chooseType("${type.id}")'>${type.type_name}</div>--%>
 	
-	                            <div class="tab type ${status.index==bookTypes.size()-1?'active':''}"
+	                            <div class="tab type ${status.index==0?'active':''}"
 	                                 typeid="${type.id}"
 	                                 id="JKFYDiv_${type.id}" onclick="javaScript:ChangeFYDiv(${type.id})">
 	                                    ${type.type_name}
