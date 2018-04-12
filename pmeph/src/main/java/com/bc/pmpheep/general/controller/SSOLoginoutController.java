@@ -15,6 +15,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.apache.struts.util.RequestUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.Cache;
@@ -47,6 +49,8 @@ import java.util.*;
  */
 @Controller
 public class SSOLoginoutController extends BaseController {
+
+    Logger logger = LoggerFactory.getLogger(SSOLoginoutController.class);
 
     @Autowired
     UserService userService;
@@ -138,12 +142,16 @@ public class SSOLoginoutController extends BaseController {
             }
             if (!"OK".equals(status)) {
                 if (cache.get(ticket) == null) {
+                    logger.warn("==========================STERROR:" + ticket);
+                    logger.warn(HttpRequestUtil.getClientIP(request) + ":" + xmlString);
+                    logger.warn("cache.getName:" + cache.getName());
                     throw new RuntimeException("获取用户帐号失败:" + message);
                 } else {
                     username = cache.get(ticket, String.class);
                 }
 
             } else {
+                logger.info("==========================STOK:" + ticket);
                 cache.put(ticket, username);
             }
 
