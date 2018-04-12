@@ -142,7 +142,7 @@
                                                               pattern="yyyy-MM-dd"/></p>
                     <input type="hidden" value="${list.notEnd}">
 
-                    <c:if test="${list.notEnd ==1 and list.is_material_entry==true and list.declaration_id==null }">
+                    <%-- <c:if test="${list.notEnd ==1 and list.is_material_entry==true and list.declaration_id==null }">
                         <div class="left_join"
                              onclick="window.location.href='${ctx}/material/toMaterialAdd.action?material_id=${list.material_id}'">
                             报名参加
@@ -161,7 +161,20 @@
                     </c:if>
                     <c:if test="${list.notEnd ==0 and list.is_material_entry==true}">
                         <div class="left_join end">报名结束</div>
-                    </c:if>
+                    </c:if> --%>
+                    <c:choose>
+                    	<c:when test="${list.is_material_entry!=true}"></c:when>
+                    	<c:when test="${list.notEnd ==0 and list.is_material_entry==true}">
+                    		<div class="left_join end">报名结束</div>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<div class="left_join" onclick="window.location.href='${ctx}/material/MaterialDetailRedirect.action?material_id=${list.material_id}'">
+                           		报名参加
+                        	</div>
+                    	</c:otherwise>
+                    </c:choose>
+                    
+                    
                 </div>
 
                 <%-- </c:if> --%>
