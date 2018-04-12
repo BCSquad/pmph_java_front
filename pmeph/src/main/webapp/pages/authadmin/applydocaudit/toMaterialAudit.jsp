@@ -104,7 +104,7 @@
 					<tr>
 						<td><span>姓&emsp;&emsp;名：${gezlList.realname}</span></td>
 						<td><span>性&emsp;&emsp;别：
-								<c:if test="${gezlList.sex == '0'}">保密</c:if>
+								<%--<c:if test="${gezlList.sex == '0'}">保密</c:if>--%>
 								<c:if test="${gezlList.sex == '1'}">男</c:if>
 								<c:if test="${gezlList.sex == '2'}">女</c:if>
 							</span></td>
@@ -251,7 +251,9 @@
 				<span class="tsxz_title">个人成就</span>
 			</div>
 			<div class="content">
-				<textarea class="text_cl" name="gr_content" id="gr_content" maxlength="1000" readonly="readonly">${achievementMap.content}</textarea>
+				<div class="text_dy">
+					${achievementMap.content}
+				</div>
 			</div>
 		</div>
 		<!--主要学术兼职-->
@@ -470,7 +472,10 @@
 				<span class="tsxz_title">参加人卫慕课、数字教材编写情况</span>
 			</div>
 			<div class="content">
-				<textarea class="text_cl" readonly="readonly">${digitalMap.content}</textarea>
+				<div class="text_dy">
+					${digitalMap.content}
+				</div>
+				<%--<textarea class="text_cl" readonly="readonly">${digitalMap.content}</textarea>--%>
 			</div>
 		</div>
 		<!--精品课程建设-->
@@ -697,7 +702,10 @@
 				<span class="tsxz_title">编写内容意向表</span>
 			</div>
 			<div class="content">
-				<textarea class="text_cl" readonly="readonly">${intentionMap.content}</textarea>
+				<div class="text_dy">
+					${intentionMap.content}
+				</div>
+				<%--<textarea class="text_cl" readonly="readonly">${intentionMap.content}</textarea>--%>
 			</div>
 		</div>
 
@@ -709,7 +717,9 @@
 					<span class="tsxz_title">${zjkzxx.extension_name}</span>
 				</div>
 				<div class="content">
-					<textarea class="text_cl" name="kz_content" readonly="readonly">${zjkzxx.content}</textarea>
+					<div class="text_dy">
+							${zjkzxx.content}
+					</div>
 				</div>
 			</div>
 		</c:forEach>

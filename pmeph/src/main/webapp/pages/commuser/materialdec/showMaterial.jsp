@@ -203,7 +203,10 @@
 				<span class="tsxz_title">个人成就</span>
 			</div>
 			<div class="content">
-				<textarea class="text_cl" name="gr_content" id="gr_content" maxlength="1000" readonly="readonly">${achievementMap.content}</textarea>
+				<div class="text_dy">
+					${achievementMap.content}
+				</div>
+				<%--<textarea class="text_cl" name="gr_content" id="gr_content" maxlength="1000" readonly="readonly">${achievementMap.content}</textarea>--%>
 			</div>
 		</div>
 		<!--主要学术兼职-->
@@ -420,7 +423,9 @@
 				<span class="tsxz_title">参加人卫慕课、数字教材编写情况</span>
 			</div>
 			<div class="content">
-				<textarea class="text_cl" readonly="readonly">${digitalMap.content}</textarea>
+                <div class="text_dy">
+                    ${digitalMap.content}
+                </div>
 			</div>
 		</div>
 		<!--精品课程建设-->
@@ -651,7 +656,10 @@
 				<span class="tsxz_title">编写内容意向表</span>
 			</div>
 			<div class="content">
-				<textarea class="text_cl" readonly="readonly">${intentionMap.content}</textarea>
+				<%--<textarea class="text_cl" readonly="readonly">${intentionMap.content}</textarea>--%>
+                <div class="text_dy">
+                    ${intentionMap.content}
+                </div>
 			</div>
 		</div>
 		<!--扩展信息-->
@@ -663,7 +671,8 @@
 						<span class="tsxz_title">${zjkzxx.extension_name}</span>
 					</div>
 					<div class="content">
-						<textarea class="text_cl" readonly="readonly"></textarea>
+						<%--<textarea class="text_cl" readonly="readonly"></textarea>--%>
+                        <div class="text_dy1"></div>
 					</div>
 				</div>
 			</c:forEach>
@@ -675,8 +684,10 @@
 					<span class="tsxz_title">${zjkzxx.extension_name}</span>
 				</div>
 				<div class="content">
-					<textarea class="text_cl" name="kz_content" readonly="readonly">${zjkzxx.content}</textarea>
-				</div>
+                    <div class="text_dy">
+                            ${zjkzxx.content}
+                    </div>
+                </div>
 			</div>
 		</c:forEach>
 		<!-- 申报单位-->
