@@ -138,7 +138,7 @@
                     <p class="content-size"><a
                             href="${ctx}/message/noticeMessageDetail.action?cmsId=${list.id }&&materialId=${list.material_id}&&notEnd=${list.notEnd}&&is_material_entry=${is_material_entry}&&tag=homepage"
                             class="astyle">${list.title}</a></p>
-                    <p class="time-size">截止日期：<fmt:formatDate value="${list.gmt_create}" type="date"
+                    <p class="time-size">截止日期：<fmt:formatDate value="${list.deadline}" type="date"
                                                               pattern="yyyy-MM-dd"/></p>
                     <input type="hidden" value="${list.notEnd}">
 
