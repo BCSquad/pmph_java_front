@@ -36,6 +36,17 @@ $(function () {
             }
             return false;
         },
+        type : {
+        	isSelected : function(value, errorMsg, el) {
+				var i = 0;
+				var $collection = $("#title").find(
+						"li[class='selected']");
+				var select_id = $("#title input[type='hidden']").val();
+				if (!$collection.length || select_id == "") {
+					return errorMsg;
+				}
+			}
+        }
     });
 
     choosesex();
@@ -48,7 +59,13 @@ function choosesex() {
         $("#sex1").attr("checked", true);
     } else if (ste == 2) {
         $("#sex2").attr("checked", true);
+    }else{
+    	$("#sex_hidden").val("");
     }
+    $(".sxy-radio[name='radio-set']").click(function(){
+    	var $t = $(this);
+    	$("#sex_hidden").val($t.val());
+    });
 }
 
 function getform() {

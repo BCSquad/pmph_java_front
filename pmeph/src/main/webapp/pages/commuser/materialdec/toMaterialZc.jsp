@@ -122,6 +122,7 @@
                             <td><span class="btbs">*</span><span>姓&emsp;&emsp;名：</span>
                                 <input class="cg_input" name="realname" id="realname" value="${gezlList.realname}" maxlength="20"/>
                                 <input class="cg_input" name="user_id" type="hidden" value="${userMap.id}" />
+                                <input class="cg_input" name="username" id="username" type="hidden" value="${userMap.username}" />
                             </td>
                             <td><span class="btbs">*</span><span>性&emsp;&emsp;别：</span>
                                 <select class="select-input" id="sex" name="sex">

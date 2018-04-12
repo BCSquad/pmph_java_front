@@ -113,7 +113,7 @@
 	letter-spacing: 0px;
 	color: #333333;
 	text-align: center;
-	border:1px solid #dedede; 
+	border:1px solid #000000;
 }
 
 .tab_2 tbody td{
@@ -121,9 +121,9 @@
 	line-height: 48px;
 	height: 48px;
 	letter-spacing: 0px;
-	color: #999999;
+	color: #000000;
 	text-align: center;
-	border:1px solid #dedede; 
+	border:1px solid #000000;
 }
 
 .sbdw{
@@ -261,7 +261,7 @@ a.input {
 .bt_tj{
     width: 90px;
     height: 32px;
-	background-color: #70bcc3;
+	background-color: #33CAA9;
 	border-radius: 2px;
 	margin:auto;
 	cursor: pointer;
@@ -374,4 +374,17 @@ a.input {
 .tujian03{
     margin-top: 200px;
     margin-left: 940px;
+}
+
+.text_dy{
+    width:1030px;
+    border: 1px #000000 solid;
+    padding: 10px;
+    min-height: 50px;
+}
+.text_dy1{
+    width:1030px;
+    border: 1px #000000 solid;
+    padding: 10px;
+    height: 50px;
 }

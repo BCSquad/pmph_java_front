@@ -10,7 +10,7 @@
 	<select id="queryTitle" parameterType="java.util.Map"
 		resultType="java.util.Map">
 		SELECT c.mid,c.title, DATE_FORMAT(c.gmt_create,'%Y-%m-%d')
-		as gmt_create,c.clicks,c.cover,c.summary,c.auth_status,c.is_staging FROM cms_content c WHERE c.id=#{id}
+		as gmt_create,c.clicks,c.cover,c.summary,c.auth_status,c.is_staging,c.auth_date FROM cms_content c WHERE c.id=#{id}
 	</select>
 
 	<!-- 查询作者 -->
