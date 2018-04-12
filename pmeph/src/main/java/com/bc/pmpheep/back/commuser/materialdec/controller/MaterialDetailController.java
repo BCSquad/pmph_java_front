@@ -65,7 +65,8 @@ public class MaterialDetailController extends BaseController{
 	@RequestMapping("toMaterialAdd")
 	public ModelAndView toMaterialAdd(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("commuser/materialdec/toMaterialAdd");
-		Map<String,Object> userMap =  this.getUserInfo();
+		Map<String,Object> userinfo =  this.getUserInfo();
+		Map<String,Object> userMap =  this.mdService.queryUserInfo(userinfo.get("id").toString());
         for (Map.Entry<String, Object> entry : userMap.entrySet()) {
             String key = entry.getKey().toString();
             String value = entry.getValue().toString();
