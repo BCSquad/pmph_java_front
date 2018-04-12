@@ -136,26 +136,30 @@
                   <div  style="width: 400px;padding:0px;">
                   <label class="require" >性别</label>
                   <div class="input-wrapper" style="margin-top:10px;">
-                    <input type="hidden" value="${map.sex }" id="sex_hidden">
+                    <input type="hidden" value="${map.sex }" id="sex_hidden" class="sxy-txt required" data-valid="isNonEmpty" data-error="请选择性别">
                     <input type="radio" value="1" class="sxy-radio" name="radio-set" id="sex1"/>男&nbsp;&nbsp;
                     <input type="radio" value="2" class="sxy-radio" name="radio-set" id="sex2"/>女
                   </div>
                   </div>
                 </td>
                 <td >
-                  <div style="width: 400px;padding:0px;margin-top:-25px;">
+                  <div style="width: 400px;padding:0px;">
                     <label class="require" >职称</label>
-                    <select class="sxy-select-td" id="title" name="title" >
-                    	<option value="" ><font color="red">-请选择-<font></option>
-                    	<option value="院士" ${map.title=='院士' ?'selected':''}>院士</option>
-                        <option value="教授" ${map.title=='教授' ?'selected':''}>教授</option>
-                        <option value="正高" ${map.title=='正高' ?'selected':''}>正高</option>
-                        <option value="副教授" ${map.title=='副教授' ?'selected':''}>副教授</option>
-                        <option value="副高" ${map.title=='副高' ?'selected':''}>副高</option>
-                        <option value="高级讲师" ${map.title=='高级讲师' ?'selected':''}>高级讲师</option>
-                        <option value="讲师" ${map.title=='讲师' ?'selected':''}>讲师</option>
-                        <option value="其他" ${map.title=='其他' ?'selected':''}>其他</option>
-                    </select>
+                    <div class="input-wrapper" >
+	                    <input type="hidden" class="sxy-txt required input-error" data-valid="isSelected"
+													data-error="请选择职称!" > 
+	                    <select class="sxy-select-td" id="title" name="title">
+	                    	<option value="" ><font color="red">-请选择-<font></option>
+	                    	<option value="院士" ${map.title=='院士' ?'selected':''}>院士</option>
+	                        <option value="教授" ${map.title=='教授' ?'selected':''}>教授</option>
+	                        <option value="正高" ${map.title=='正高' ?'selected':''}>正高</option>
+	                        <option value="副教授" ${map.title=='副教授' ?'selected':''}>副教授</option>
+	                        <option value="副高" ${map.title=='副高' ?'selected':''}>副高</option>
+	                        <option value="高级讲师" ${map.title=='高级讲师' ?'selected':''}>高级讲师</option>
+	                        <option value="讲师" ${map.title=='讲师' ?'selected':''}>讲师</option>
+	                        <option value="其他" ${map.title=='其他' ?'selected':''}>其他</option>
+	                    </select>
+                    </div>
                   </div>
                 </td>
                 <td >
@@ -218,7 +222,7 @@
                   </div>
                 </td>
                 <td>
-                <div  style="width: 400px;padding:0px;margin-top:-25px;">
+                <div  style="width: 400px;">
                     <label >所属机构</label>
 	                <div class="input-wrapper">
                           <input class="sxy-txt " data-valid="isNonEmpty" disabled="disabled"  type="text" id="org_id" name="org_id" value="${map.org_name }"/>

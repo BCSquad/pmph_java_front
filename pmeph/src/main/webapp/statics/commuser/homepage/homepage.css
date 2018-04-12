@@ -615,6 +615,11 @@ ul li {
     color: #29355b;
 }
 
+.tab-bar .type.active {
+    border-bottom: 3px solid #489299;
+    color: #29355b;
+}
+
 .tab-bar .type {
     float: right;
     padding: 10px;
@@ -635,6 +640,7 @@ ul li {
 .tab-bar .page {
     float: right;
     margin-right:365px;
+    margin-left: 10px;
     width: 110px;
     height: 100%;
     color: #999999
