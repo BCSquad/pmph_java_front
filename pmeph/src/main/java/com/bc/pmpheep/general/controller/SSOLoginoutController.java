@@ -211,14 +211,17 @@ public class SSOLoginoutController extends BaseController {
             if (StringUtils.isEmpty(request.getParameter("Referer"))) {
                 if ("1".equals(usertype)) {
                     response.sendRedirect(request.getContextPath() + "/");
+                    return;
                 } else if ("2".equals(usertype)) {
                     response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
+                    return;
                 }
 
             } else {
 
                 if ("1".equals(usertype)) {
                     response.sendRedirect(request.getParameter("Referer"));
+                    return;
                 }
 
 
@@ -246,8 +249,10 @@ public class SSOLoginoutController extends BaseController {
 
                 if ("1".equals(usertype)) {
                     response.sendRedirect(request.getContextPath() + "/");
+                    return;
                 } else if ("2".equals(usertype)) {
                     response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
+                    return;
                 }
             }
 
