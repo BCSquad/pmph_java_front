@@ -185,7 +185,7 @@ public class HomeController extends BaseController{
         Map<String, Object> map2 = new HashMap<String, Object>();
         map2.put("books", new ArrayList());
         if (state.equals("next")) {
-            typeMap.put("startrows", startrows * 10 + 1);
+            typeMap.put("startrows", startrows * 10 );
             List<Map<String, Object>> listRow = homeService.queryBook(typeMap);
             for (int i = 0; i < listRow.size(); i++) {
                 Map<String, Object> map = new HashMap<String, Object>();
