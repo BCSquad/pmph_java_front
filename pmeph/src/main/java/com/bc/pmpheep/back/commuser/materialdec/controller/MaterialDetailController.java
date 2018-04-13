@@ -66,7 +66,7 @@ public class MaterialDetailController extends BaseController{
 	public ModelAndView toMaterialAdd(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("commuser/materialdec/toMaterialAdd");
 		Map<String,Object> userinfo =  this.getUserInfo();
-		Map<String,Object> userMap =  this.mdService.queryUserInfo(userinfo.get("id").toString());
+		Map<String,Object> userMap =  this.mdService.queryUserInfo(MapUtils.getString(userinfo,"id",""));
         for (Map.Entry<String, Object> entry : userMap.entrySet()) {
             String key = entry.getKey().toString();
             String value = entry.getValue().toString();
@@ -305,7 +305,7 @@ public class MaterialDetailController extends BaseController{
 		String jx_subject[] = request.getParameterValues("jx_subject");
 		String jx_note[] = request.getParameterValues("jx_note");
 		for(int i=0;i<jx_kssj.length;i++) { //遍历数组
-			if(!jx_jssj[i].equals("")){ //判断是否存在
+			if(!jx_kssj[i].equals("")){ //判断是否存在
 				Map<String,Object> jxjlMap = new HashMap<String,Object>();
 				jxjlMap.put("school_name", jx_school_name[i]);
 				jxjlMap.put("subject", jx_subject[i]);
