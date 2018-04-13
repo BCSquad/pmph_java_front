@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.bc.pmpheep.back.commuser.collection.service.BookCollectionService;
 import com.bc.pmpheep.back.commuser.messagereport.dao.InfoReportDao;
 import com.bc.pmpheep.back.commuser.readpage.dao.ReadDetailDao;
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -551,7 +552,7 @@ public class PersonalCenterController extends BaseController {
 		modelAndView.addObject("listmyfriend", listmyfriend);
 		if(listmygroup.size()>0){
 			for(Map<String, Object> map : listmygroup){
-				map.put("group_image", RouteUtil.gruopImage(map.get("group_image").toString()));
+				map.put("group_image", RouteUtil.gruopImage(MapUtils.getString(map,"group_image","statics/image/default_image.png")));
 			}
 		}
 		modelAndView.addObject("listmygroup", listmygroup);
