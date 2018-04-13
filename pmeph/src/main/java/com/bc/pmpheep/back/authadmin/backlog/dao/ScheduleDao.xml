@@ -16,7 +16,7 @@
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			u.`id` = #{parameter.userId} AND (d.online_progress='1' or d.online_progress='4')
 			and m.is_all_textbook_published = 0 and m.is_force_end = 0
-			and DATE_FORMAT(m.actual_deadline,'%Y%m%d') &gt; '20180412'<!-- 过滤老系统中的数据 -->
+			and DATE_FORMAT(m.actual_deadline,'%Y%m%d') &gt;= '20180412'<!-- 过滤老系统中的数据 -->
 			<if test="null!=parameter.week">AND d.gmt_create >= #{parameter.week} </if>
 			<if test="null!=parameter.month">AND d.gmt_create >= #{parameter.month}</if>
 			<if test="null!=parameter.year">AND d.gmt_create >= #{parameter.year}</if>
@@ -53,7 +53,7 @@
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			u.`id` = #{parameter.userId} AND (d.online_progress='1' or d.online_progress='4')
 			and m.is_all_textbook_published = 0 and m.is_force_end = 0
-			and DATE_FORMAT(m.actual_deadline,'%Y%m%d') &gt; '20180412'<!-- 过滤老系统中的数据 -->
+			and DATE_FORMAT(m.actual_deadline,'%Y%m%d') &gt;= '20180412'<!-- 过滤老系统中的数据 -->
 			<if test="null!=parameter.week">AND d.gmt_create >= #{parameter.week} </if>
 			<if test="null!=parameter.month">AND d.gmt_create >= #{parameter.month}</if>
 			<if test="null!=parameter.year">AND d.gmt_create >= #{parameter.year}</if>

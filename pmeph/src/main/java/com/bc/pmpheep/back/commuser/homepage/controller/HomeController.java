@@ -66,7 +66,8 @@ public class HomeController extends BaseController{
         Map<String,Object> adInfo6=homeService.getPageAdInfo("首页原重点推荐1");
         Map<String,Object> adInfo7=homeService.getPageAdInfo("首页原重点推荐2");
         for (Map<String, Object> map : listCom) {
-			String url=map.get("image_url").toString();
+            String url=MapUtils.getString(map,"image_url","/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+		//	String url=map.get("image_url").toString();
 			if(url.equals("DEFAULT")){
 				map.put("image_url", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
 			}
