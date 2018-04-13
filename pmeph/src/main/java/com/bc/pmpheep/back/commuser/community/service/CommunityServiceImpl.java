@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -84,7 +85,7 @@ public class CommunityServiceImpl implements CommunityService {
 			for (Map<String, Object> map : list) {
 				List<String> imglist = getImgSrc(map.get("content").toString());
 				//map.put("imagepath",imglist.size()>0? imglist.get(0):"defualt" );
-				map.put("imagepath",map.get("image_url").toString() );
+				map.put("imagepath", MapUtils.getString(map,"image_url","/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"));
 				map.put("contentxt", removeHtml(map.get("content").toString()));
 				if(map.get("avatar") !=null && (map.get("avatar").equals("DEFAULT")
 				  ||map.get("avatar").equals(""))){
