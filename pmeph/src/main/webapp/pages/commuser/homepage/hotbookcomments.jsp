@@ -51,13 +51,16 @@ String contextpath=request.getContextPath();
      <div class="collection">
         <div class="content">
             <div  class="content-img">
-                <img src="${comment.imagepath=='defualt'? 'statics/image/564f34b00cf2b738819e9c35_122x122!.jpg':comment.imagepath}"/>
+                <span  style="cursor: pointer;"  onclick="window.location.href='${ctx}/readdetail/todetail.action?id=${comment.book_id }'">
+                    <img src="${comment.imagepath=='defualt'? 'statics/image/564f34b00cf2b738819e9c35_122x122!.jpg':comment.imagepath}"/>
+                </span>
             </div>
             <div  class="content-text">
 
                 <div class="text">
-                    <c:if test="${comment.ispromote=='1'}"><img style="width: 30px;height: 15px;"  src="${ctx}/statics/image/jx.png"/></c:if>&nbsp;
-                        ${comment.hottitle }
+                    <c:if test="${comment.ispromote=='1'}"><img style="width: 30px;height: 15px;"  src="${ctx}/statics/image/jx.png"/></c:if>
+                    <span  style="cursor: pointer;"  onclick="window.location.href='${ctx}/readdetail/todetail.action?id=${comment.book_id }'">${comment.hottitle }</span>
+
                 </div>
                 <div class="message">
                    <div class="personicon"><img src="${comment.avatar}" style="height:33px;width:33px"/></div>
