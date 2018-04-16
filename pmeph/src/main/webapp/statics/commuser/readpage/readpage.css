@@ -151,7 +151,7 @@ ul li {
     height: 20px;
     line-height: 20px;
     padding: 7px 12px;
-    float: right;
+    float: left;
     cursor: pointer;
 }
 
