@@ -159,6 +159,7 @@ public class SSOLoginoutController extends BaseController {
                     logger.error("===========================params:" + builder);
                     logger.error(HttpRequestUtil.getClientIP(request) + ":" + xmlString);
                     response.sendRedirect(request.getContextPath() + "/");
+                    return;
                 } else {
                     username = cache.get(ticket, String.class);
                 }
