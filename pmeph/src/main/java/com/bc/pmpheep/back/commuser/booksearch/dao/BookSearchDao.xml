@@ -262,7 +262,7 @@
 			in 
 			   (
 				SELECT
-				    SUBSTRING_INDEX(SUBSTRING_INDEX(t.path,'-',#{order}),'-',-1)
+				    SUBSTRING_INDEX(SUBSTRING_INDEX(concat(t.path,'-',t.id),'-',#{order}),'-',-1)
 				FROM
 					book b
 				JOIN material_type t ON t.id = b.type
@@ -289,7 +289,7 @@
 				  <if test="sortId !=null" >
 				     and m.parent_id=#{sortId}
 				  </if>
-				 	 group by  SUBSTRING_INDEX(t.path,'-',#{order})	
+				 	 group by t.id
 				)
 	</select>
 	
