@@ -120,7 +120,7 @@
     <div class="pageright">
         <div class="rhead">
             <div class="item select" id="comment" onclick="comments('${notice.material_id }')">
-                精彩书评
+                精选书评
             </div>
             <div class="item noselect" id="smallvideo" onclick="smallvideos('${notice.material_id }')">
                 微视频
@@ -147,7 +147,7 @@
             </ul>
         </div>
         <div class="more" id="more"><a
-                href="community/morecomments.action?materialId=${notice.material_id}">查看更多精彩书评</a></div>
+                href="community/morecomments.action?materialId=${notice.material_id}">查看更多精选书评</a></div>
     </div>
     <div style="clear:both;width:100%"></div>
 </div>
