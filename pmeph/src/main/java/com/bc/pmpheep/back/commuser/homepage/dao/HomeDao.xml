@@ -43,7 +43,7 @@
 		group by cc.id
 		)t
 		ORDER BY
-				   t.sortByEntryBtnOn desc , t.deadline DESC ,t.actual_deadline DESC ,t.auth_date desc
+				   t.sortByEntryBtnOn desc , t.deadline DESC ,t.auth_date desc
 		limit 0,3
   </select>
   

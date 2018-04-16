@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.bc.pmpheep.back.commuser.readpage.bean.MaterialType;
+
 /**
  * 
  * 注释:ReadDao类
@@ -17,7 +19,7 @@ public interface ReadDao {
 	List<Map<String,Object>> queryZdtjReadList(Map<String,Object> map);
 
 	//获取图书分类信息
-	public List<Map<String,Object>> queryMaterialType(@Param("firstTypeIds")String firstTypeIds);
+	public List<MaterialType> queryMaterialType(@Param("firstTypeIds")String firstTypeIds);
 
 	//新书推荐
 	List<Map<String,Object>> queryXstjReadList(Map<String,Object> map); 

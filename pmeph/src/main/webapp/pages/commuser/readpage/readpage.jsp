@@ -197,7 +197,9 @@
                          class="tsfl_1 ChangeFLDiv" ${status.index!='0'?'style="display: none;"':''}>
                         <c:forEach items="${type1.dataList}" var="type2">
                             <div class="part_1">
-                                <span>${type2.type_name}</span>
+                            	
+                                <span><a target="_blank"
+			                                       href="<c:url value="/booksearch/toPage.action?type=${type2.id}"/>">${type2.type_name}</a></span>
                                 
 	                                <c:if test="${type2.dataList.size()>0}">
 	                                
