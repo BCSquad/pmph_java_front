@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bc.pmpheep.back.commuser.readpage.bean.MaterialType;
 import com.bc.pmpheep.back.commuser.readpage.dao.ReadDao;
 
 @Service("com.bc.pmpheep.back.commuser.readpage.service.ReadServiceImpl")
@@ -20,7 +21,7 @@ public class ReadServiceImpl implements ReadService {
 	}
 
 	@Override
-	public List<Map<String, Object>> queryMaterialType(String firstTypeIds) {
+	public List<MaterialType> queryMaterialType(String firstTypeIds) {
 		return readDao.queryMaterialType(firstTypeIds);
 	}
 

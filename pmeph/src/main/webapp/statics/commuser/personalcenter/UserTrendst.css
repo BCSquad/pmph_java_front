@@ -84,7 +84,7 @@
     clear: right;
 }
 
-.msg_line .fail_unhappy{
+/* .msg_line .fail_unhappy{
 	background-image: url(../../image/css_sprites.png);
     background-position: -462px -218px;
     background-repeat: no-repeat;
@@ -93,7 +93,7 @@
     width: 17px;
     float: left;
     clear: right;
-}
+} */
 
 .trendstWrapper .content_line{
 	margin: 15px 0px 15px 0px;

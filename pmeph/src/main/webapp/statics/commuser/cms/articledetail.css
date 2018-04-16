@@ -50,6 +50,7 @@
 
 .wz_title{
 	width: 890px;
+	word-break: break-all;
 	margin-top: 10px;
 }
 .wz_title span{
