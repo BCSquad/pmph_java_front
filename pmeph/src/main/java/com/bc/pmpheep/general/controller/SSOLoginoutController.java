@@ -158,7 +158,7 @@ public class SSOLoginoutController extends BaseController {
                     logger.error("==========================STERROR:" + ticket);
                     logger.error("===========================params:" + builder);
                     logger.error(HttpRequestUtil.getClientIP(request) + ":" + xmlString);
-                    throw new RuntimeException("获取用户帐号失败:" + message);
+                    response.sendRedirect(request.getContextPath() + "/");
                 } else {
                     username = cache.get(ticket, String.class);
                 }
