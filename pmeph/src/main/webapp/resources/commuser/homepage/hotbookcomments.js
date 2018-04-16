@@ -8,7 +8,7 @@ $(function(){
         callback: function (n) {
           var size=$("input[name='edu']").val();
 
-           location.href=contextpath+"homepage/morecomments.action?pagenum="+n+"&&size="+size;
+           location.href=contextpath+"homepage/morecomments.action?pagenum="+n+"&size="+size;
         }
  });
 $('select').selectlist({

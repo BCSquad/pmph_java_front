@@ -313,7 +313,7 @@ public class HomeController extends BaseController{
      * 查询更多热门书评列表
      */
     @RequestMapping("/morecomments")
-    public ModelAndView getMoreComments(HttpServletRequest req){
+    public ModelAndView getMoreComments(HttpServletRequest req) throws UnsupportedEncodingException{
         Map<String,Object> map=new HashMap<String, Object>();
         String pagenum=req.getParameter("pagenum");
         String pagesize=req.getParameter("size");
