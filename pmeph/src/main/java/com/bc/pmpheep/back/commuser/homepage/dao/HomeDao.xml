@@ -367,6 +367,7 @@ LIMIT 0,10
 	<select id="queryHotCommentList" parameterType="map" resultType="java.util.Map">
 		SELECT
 		buc.*,
+		buc.is_promote*1 as ispromote,
 		b.bookname,
 		wu.username,
 		wu.avatar,

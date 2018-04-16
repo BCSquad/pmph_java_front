@@ -56,7 +56,7 @@ String contextpath=request.getContextPath();
             <div  class="content-text">
 
                 <div class="text">
-                  <%--  <c:if test="${comment.is_promote=='1'}"><img style="height: 20px;width: 20px;" src="${ctx}/statics/image/jx.png"/></c:if>--%>
+                    <c:if test="${comment.ispromote=='1'}"><img style="width: 30px;height: 15px;"  src="${ctx}/statics/image/jx.png"/></c:if>&nbsp;
                         ${comment.hottitle }
                 </div>
                 <div class="message">
