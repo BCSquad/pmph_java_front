@@ -8,7 +8,7 @@
 			success:function(json){
 				$("#comment").css({"border-bottom":"2px solid #5A9DA3","color":"#444544"});
 				  $("#smallvideo").css({"border-bottom":"2px solid #FFFFFF","color":"#9c9c9c"});
-				  $("#more").html('<a href="'+contextpath+'community/morecomments.action?materialId='+$("#materialId").val()+'">查看更多精彩书评</a>');
+				  $("#more").html('<a href="'+contextpath+'community/morecomments.action?materialId='+$("#materialId").val()+'">查看更多精选书评</a>');
 				  $("#ullist").html("");
 				  $.each(json.comments,function(i,n){
 					  $("#ullist").append('<li class="commentli"><p class="title">'+

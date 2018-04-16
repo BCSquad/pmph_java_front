@@ -114,7 +114,7 @@ public interface HomeService {
      * @param size 每页的数据数量
      * @return  List<Map<String,Object>>
      */
-    List<Map<String,Object>> queryHotCommentList(int startnum ,int size);
+    List<Map<String,Object>> queryHotCommentList(int startnum ,int size) throws UnsupportedEncodingException;
 
     /**查询更多热门书评列表数量
      *

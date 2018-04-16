@@ -271,7 +271,7 @@ public class HomeServiceImpl implements HomeService {
     }
 
     @Override
-    public List<Map<String, Object>> queryHotCommentList(int startnum,int size) {
+    public List<Map<String, Object>> queryHotCommentList(int startnum,int size) throws UnsupportedEncodingException  {
         // TODO Auto-generated method stub
         Map<String,Object> param=new HashMap<String, Object>();
         param.put("startnum", startnum);
@@ -281,7 +281,9 @@ public class HomeServiceImpl implements HomeService {
             for (Map<String, Object> map : list) {
                 List<String> imglist = getImgSrc(map.get("content").toString());
                 map.put("imagepath",map.get("image_url").toString() );
-                map.put("contentxt", removeHtml(map.get("content").toString()));
+                String con = map.get("content").toString();
+                String contentxt=omit(con,500);
+                map.put("contentxt", removeHtml(contentxt));
                 if(map.get("avatar") !=null && (map.get("avatar").equals("DEFAULT")
                         ||map.get("avatar").equals(""))){
                     map.put("avatar", "statics/image/default_image.png");
@@ -308,6 +310,5 @@ public class HomeServiceImpl implements HomeService {
         str=m_html.replaceAll(""); //过滤html标签
         return str;
     }
-
 
 }
