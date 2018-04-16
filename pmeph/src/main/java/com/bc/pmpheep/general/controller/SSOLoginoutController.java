@@ -120,6 +120,10 @@ public class SSOLoginoutController extends BaseController {
 
         String ticket = request.getParameter("ST");
 
+        if (StringUtils.isEmpty(ticket)) {
+            return;
+        }
+
         Cache cache = cacheCacheManager.getCache("shiro-pmph-authenticationCache");
 
         try {
