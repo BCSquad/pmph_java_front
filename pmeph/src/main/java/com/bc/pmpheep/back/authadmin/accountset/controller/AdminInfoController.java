@@ -43,9 +43,9 @@ public class AdminInfoController extends BaseController {
     @Autowired
     @Qualifier("com.bc.pmpheep.general.service.FileService")
     FileService fileService;
+
     @Autowired
     UserService userService;
-
     /**
      * 个人资料修改页面
      * @param request

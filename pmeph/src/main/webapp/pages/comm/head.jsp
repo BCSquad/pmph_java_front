@@ -61,9 +61,7 @@
                        href="javascript:;">注册</a>
                     <img src="${ctx}/statics/image/question.png" alt="">
                 </div>--%>
-
-                <div class="loginout"
-                     onclick="window.location.href=contextpath+'pages/comm/login.jsp?refer='+encodeURIComponent(window.location.href)">
+                <div class="loginout" onclick="window.location.href='${redirectUrl}?ServiceID=${serviceID}&Referer='+encodeURIComponent(window.location.href)">
                     <span class="login">您好,请登录</span>
                     <span class="logout">免费注册</span>
                 </div>
