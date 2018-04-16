@@ -115,7 +115,7 @@
 		<if test="firstTypeIds != null and firstTypeIds != '' ">
 		where t0.id in (${firstTypeIds})
 		</if>
-		group by t3.id
+		<!-- group by t3.id -->
 		order by t0.sort, t1.sort , t2.sort , t3.sort  
 		
 

@@ -16,10 +16,11 @@ public interface HomeService {
     List<Map<String, Object>> queryDocument(String id);
 
     /**
+     * @param contextpath 
      * @return List<HomepageDocument>
      * @Description: 查询前五条公告信息快报
      */
-    List<Map<String, Object>> queryNotice();
+    List<Map<String, Object>> queryNotice(String contextpath);
 
     /**
      * @return List<HomepageDocument>
@@ -114,7 +115,7 @@ public interface HomeService {
      * @param size 每页的数据数量
      * @return  List<Map<String,Object>>
      */
-    List<Map<String,Object>> queryHotCommentList(int startnum ,int size) throws UnsupportedEncodingException;
+    List<Map<String,Object>> queryHotCommentList(int startnum ,int size,String contextpath) throws UnsupportedEncodingException;
 
     /**查询更多热门书评列表数量
      *

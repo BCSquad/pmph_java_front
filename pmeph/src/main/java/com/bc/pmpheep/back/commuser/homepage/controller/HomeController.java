@@ -52,7 +52,7 @@ public class HomeController extends BaseController{
         	logUserId = user.get("id").toString();
 		}
         
-        List<Map<String, Object>> listNot = homeService.queryNotice();
+        List<Map<String, Object>> listNot = homeService.queryNotice(request.getContextPath());
         List<Map<String, Object>> listArt = homeService.queryArticle(4);
         List<Map<String, Object>> listAut = homeService.queryAuthor(logUserId);
         List<Map<String, Object>> listCom = homeService.queryComment();
@@ -326,7 +326,7 @@ public class HomeController extends BaseController{
             pagenum="1";
             pagesize="5";
         }
-        List<Map<String, Object>> comments = homeService.queryHotCommentList(startnum,size);
+        List<Map<String, Object>> comments = homeService.queryHotCommentList(startnum,size,req.getContextPath());
         int total=homeService.queryHotCommentListCount();
         int pagetotal=total/size;
         if(total%size!=0){

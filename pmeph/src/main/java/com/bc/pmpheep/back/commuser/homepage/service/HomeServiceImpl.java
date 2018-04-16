@@ -49,15 +49,15 @@ public class HomeServiceImpl implements HomeService {
      * 查询信息快报
      */
     @Override
-    @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName")
-    public List<Map<String, Object>> queryNotice() {
+    //@Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName")
+    public List<Map<String, Object>> queryNotice(String contextpath) {
         List<Map<String, Object>> list = homeDao.queryNotice();
         if (list.size()>0) {
         	String mid = list.get(0).get("mid").toString();
         	//抓取文章图片
 			if (mid!=null) {
 				Content content = contentService.get(mid);
-				String img_url = getFirstImgUrlFromHtmlStr(content);
+				String img_url = getFirstImgUrlFromHtmlStr(content,contextpath);
 				list.get(0).put("first_img_url", img_url);
 			}
 		}
@@ -65,12 +65,12 @@ public class HomeServiceImpl implements HomeService {
     }
     
  // 获取html图片
- 	private String getFirstImgUrlFromHtmlStr(Content content) {
+ 	private String getFirstImgUrlFromHtmlStr(Content content,String contextpath) {
  		String img_url = 
  				"none";
  		if (content != null) {
  			List<String> imglist = this.getImgSrc(content
- 					.getContent());
+ 					.getContent(),contextpath);
  			if (imglist.size() > 0) {
  				img_url = imglist.get(0);
  			}
@@ -78,7 +78,7 @@ public class HomeServiceImpl implements HomeService {
  		return img_url;
  	}
  	
- 	private List<String> getImgSrc(String html){
+ 	private List<String> getImgSrc(String html,String contextpath){
  		String img = "";
         Pattern p_image;
         Matcher m_image;
@@ -90,10 +90,21 @@ public class HomeServiceImpl implements HomeService {
         while (m_image.find()) {
             img = img + "," + m_image.group();
             // Pattern.compile("src=\"?(.*?)(\"|>|\\s+)").matcher(img); //匹配src  
-            Matcher m = Pattern.compile("src\\s*=\\s*\".*?([A-z0-9]{24}?)").matcher(img);
+            
+            Matcher m = Pattern.compile("src\\s*=\\s*\".*?\"").matcher(img);
             while (m.find()) {
-                pics.add(m.group(1));
+            	String first_src = m.group();
+            	Matcher mdb_src = Pattern.compile("src\\s*=\\s*\".*?([A-z0-9]{24}?)").matcher(first_src);
+            	Matcher http_src = Pattern.compile("src\\s*=\\s*\"(.*?)\"").matcher(first_src);
+            	if (mdb_src.find()) {
+            		pics.add(contextpath+"/image/"+mdb_src.group(1)+".action");
+				}else if(http_src.find()){
+					pics.add(http_src.group(1));
+				}else{
+					pics.add("");
             }
+                
+        }
         }
         return pics;
  	}
@@ -271,7 +282,7 @@ public class HomeServiceImpl implements HomeService {
     }
 
     @Override
-    public List<Map<String, Object>> queryHotCommentList(int startnum,int size) throws UnsupportedEncodingException  {
+    public List<Map<String, Object>> queryHotCommentList(int startnum,int size,String contextpath) throws UnsupportedEncodingException  {
         // TODO Auto-generated method stub
         Map<String,Object> param=new HashMap<String, Object>();
         param.put("startnum", startnum);
@@ -279,7 +290,7 @@ public class HomeServiceImpl implements HomeService {
         List<Map<String, Object>> list = homeDao.queryHotCommentList(param);
         if(list!=null){
             for (Map<String, Object> map : list) {
-                List<String> imglist = getImgSrc(map.get("content").toString());
+                //List<String> imglist = getImgSrc(map.get("content").toString(),contextpath);
                 map.put("imagepath",map.get("image_url").toString() );
                 String con = map.get("content").toString();
                 String contentxt=omit(con,500);
