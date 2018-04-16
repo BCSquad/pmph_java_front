@@ -15,6 +15,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.apache.struts.util.RequestUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.Cache;
@@ -48,6 +50,8 @@ import java.util.*;
 @Controller
 public class SSOLoginoutController extends BaseController {
 
+    Logger logger = LoggerFactory.getLogger(SSOLoginoutController.class);
+
     @Autowired
     UserService userService;
 
@@ -59,8 +63,11 @@ public class SSOLoginoutController extends BaseController {
 
     private static final ThreadLocal<PathMatchingResourcePatternResolver> resolvers;
 
+    private static final ThreadLocal<CloseableHttpClient> httpclients;
+
     static {
         resolvers = new ThreadLocal<PathMatchingResourcePatternResolver>();
+        httpclients = new ThreadLocal<CloseableHttpClient>();
     }
 
     private PathMatchingResourcePatternResolver getPathMatchingResourcePatternResolver() {
@@ -70,8 +77,14 @@ public class SSOLoginoutController extends BaseController {
         return resolvers.get();
     }
 
+    private CloseableHttpClient getCloseableHttpClient() {
+        if (httpclients.get() == null) {
+            httpclients.set(HttpClients.createDefault());
+        }
+        return httpclients.get();
+    }
 
-    private static final CloseableHttpClient httpclient = HttpClients.createDefault();
+   /* private static final CloseableHttpClient httpclient = HttpClients.createDefault();*/
 
     private String serviceID;
 
@@ -107,11 +120,15 @@ public class SSOLoginoutController extends BaseController {
 
         String ticket = request.getParameter("ST");
 
+        if (StringUtils.isEmpty(ticket)) {
+            return;
+        }
+
         Cache cache = cacheCacheManager.getCache("shiro-pmph-authenticationCache");
 
         try {
             HttpGet httpget = new HttpGet(url + "ServiceValidate.jsp?ServiceID=" + serviceID + "&ST=" + ticket);
-            CloseableHttpResponse closeableHttpResponse = httpclient.execute(httpget);
+            CloseableHttpResponse closeableHttpResponse = getCloseableHttpClient().execute(httpget);
             HttpEntity entity = closeableHttpResponse.getEntity();
             String xmlString = EntityUtils.toString(entity);
          /*   System.out.println(xmlString);*/
@@ -138,12 +155,16 @@ public class SSOLoginoutController extends BaseController {
             }
             if (!"OK".equals(status)) {
                 if (cache.get(ticket) == null) {
-                    throw new RuntimeException("获取用户帐号失败:" + message);
+                    logger.error("==========================STERROR:" + ticket);
+                    logger.error("===========================params:" + builder);
+                    logger.error(HttpRequestUtil.getClientIP(request) + ":" + xmlString);
+                    response.sendRedirect(request.getContextPath() + "/");
                 } else {
                     username = cache.get(ticket, String.class);
                 }
 
             } else {
+                logger.info("==========================STOK:" + ticket);
                 cache.put(ticket, username);
             }
 
@@ -211,14 +232,17 @@ public class SSOLoginoutController extends BaseController {
             if (StringUtils.isEmpty(request.getParameter("Referer"))) {
                 if ("1".equals(usertype)) {
                     response.sendRedirect(request.getContextPath() + "/");
+                    return;
                 } else if ("2".equals(usertype)) {
                     response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
+                    return;
                 }
 
             } else {
 
                 if ("1".equals(usertype)) {
                     response.sendRedirect(request.getParameter("Referer"));
+                    return;
                 }
 
 
@@ -246,8 +270,10 @@ public class SSOLoginoutController extends BaseController {
 
                 if ("1".equals(usertype)) {
                     response.sendRedirect(request.getContextPath() + "/");
+                    return;
                 } else if ("2".equals(usertype)) {
                     response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
+                    return;
                 }
             }
 
@@ -274,7 +300,7 @@ public class SSOLoginoutController extends BaseController {
             session.removeAttribute(Const.SESSION_USER_CONST_TYPE);
 
 
-            response.sendRedirect(logouturl + "?ServiceID=" + serviceID + "Referer=" + home1);
+            response.sendRedirect(logouturl + "?ServiceID=" + serviceID + "&Referer=" + home1);
         } else if ("2".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
             session.removeAttribute(Const.SESSION_USER_CONST_ORGUSER);
             String headReferer = request.getHeader("Referer");
