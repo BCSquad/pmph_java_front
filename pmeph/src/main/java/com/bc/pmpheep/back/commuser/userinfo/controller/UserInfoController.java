@@ -71,6 +71,13 @@ public class UserInfoController extends BaseController {
         Map<String, Object> map =new HashMap<String, Object>();
         if (null!=map1) {
         	 map = userinfoService.queryWriter(map1.get("id").toString());
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                String key = entry.getKey().toString();
+                String value = entry.getValue().toString();
+                if(value.equals("-")){
+                    map.put(key,"");
+                }
+            }
 		}
         //头像回显
         //图片为空则显示默认图片

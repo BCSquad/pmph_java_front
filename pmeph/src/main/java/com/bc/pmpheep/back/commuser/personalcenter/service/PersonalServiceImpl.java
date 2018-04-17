@@ -551,12 +551,20 @@ public class PersonalServiceImpl implements PersonalService {
 				}
 				if(map.get("category_id")!=null&& "2".equals(map.get("category_id").toString())){
 					map.put("skip", "inforeport/toinforeport.action?id="+map.get("id"));
+					Content content = contentService.get(map.get("mdbid").toString());
+					String img_url = RouteUtil.getFirstImgUrlFromHtmlStr(content,contextpath);
+					if(img_url!=null && !"".equals(img_url)){
+						map.put("imgpath", img_url);
+					}else{
+						map.put("imgpath", contextpath+"statics/testfile/p2.png");
+					}
 				}else if(map.get("category_id")!=null&& "1".equals(map.get("category_id").toString())){
 					map.put("skip", "articledetail/toPage.action?wid="+map.get("id"));
+					if(null!=map.get("cover")){
+						map.put("imgpath", contextpath+RouteUtil.articleAvatar(map.get("cover").toString()));
+					}
 				}
-				if(null!=map.get("cover")){
-					map.put("imgpath", RouteUtil.articleAvatar(map.get("cover").toString()));
-				}
+				
 			}
 		}
 		return list;

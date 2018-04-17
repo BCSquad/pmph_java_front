@@ -343,6 +343,12 @@
 .relative{
 	position: relative;
 }
+.filename{
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	max-width:245px ;
+}
 
 .fileNameDiv{
 	float: left;

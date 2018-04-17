@@ -221,7 +221,7 @@ public class BookDeclareController extends BaseController {
 			returnMap = this.bdecService.updateBookDeclare(similarList, twriteList, topicMap, extraMap,topic_id);
 		}
 		//TODO 选题申报 提交 时生成动态
-		if(returnMap.get("msg").toString().equals("ok")) {
+		if(returnMap.get("msg").toString().equals("OK")) {
 			if ("1".equals(stype)) {
 				Map<String, Object> userMap = this.getUserInfo();
 				WriterUserTrendst wut = new WriterUserTrendst(request.getParameter("user_id"), 9, topicMap.get("table_trendst_id").toString());

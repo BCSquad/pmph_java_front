@@ -65,7 +65,7 @@ function upload(id){
         },
         done: function (filename, fileid) {
             $("#fileNameDiv_"+id).empty(); //清楚内容
-            $("#fileNameDiv_"+id).append("<span><a href='javascript:' class='filename'  onclick='downLoadProxy(\""+fileid+"\")'>"+filename+"</a></span>");
+            $("#fileNameDiv_"+id).append("<span><div class=\"filename\"><a href='javascript:' class='filename'  onclick='downLoadProxy("+fileid+")' title='\"+filename+\"'>"+filename+"</a></div></span>");
             $("#fileNameDiv_"+id).css("display","inline");
             $("#syllabus_id_"+id).val(fileid);
             $("#syllabus_name_"+id).val(filename);
@@ -257,7 +257,7 @@ function chooseModel(data){
             $("#gj_class_hour").val("无");
         }else{
             $("#gjjpkcjs_xt").css("display","inline");
-            xtMap.set("rwsjcbx","gj_course_name,gj_class_hour");
+         //   xtMap.set("rwsjcbx","gj_course_name,gj_class_hour");
         }
     }
     //科研情况
@@ -273,7 +273,7 @@ function chooseModel(data){
             $("#zjk_approval_unit").val("无");
         }else{
             $("#zjkyqk_xt").css("display","inline");
-            xtMap.set("rwsjcbx","zjk_research_name,zjk_award,zjk_approval_unit");
+        //    xtMap.set("rwsjcbx","zjk_research_name,zjk_award,zjk_approval_unit");
         }
     }
     //主编学术专著情况
