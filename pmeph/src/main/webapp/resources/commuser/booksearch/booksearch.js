@@ -29,7 +29,6 @@ $(function(){
 	var typeFromRedirectFullPath = $("#typeFromRedirectFullPath").val();
 	var selectedTypeChain = typeFromRedirectFullPath.split("-");
 	for ( var t in selectedTypeChain) {
-		
 		$("input.labelauty[type=radio][value="+selectedTypeChain[t]+"]").trigger("click");
 	}
 

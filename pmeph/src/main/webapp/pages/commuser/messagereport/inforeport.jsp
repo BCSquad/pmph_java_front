@@ -54,7 +54,7 @@ String basePath =path+"/";
                 </div>
                 <div style="clear: both"></div>
                 <div id="sxy-title2">
-                   <span style="float:left">信息快报 <fmt:formatDate value="${rmap.gmt_create}" pattern="yyyy-MM-dd"/></span> 
+                   <span style="float:left">信息快报&emsp;<fmt:formatDate value="${rmap.auth_date}" pattern="yyyy-MM-dd"/></span>
                    <span style="background-image: url(${ctx }/statics/image/css_sprites.png);
                                background-position: -418px -170px;width:20px;height:20px;float:left;
                                margin-left:20px;margin-right:5px"></span>

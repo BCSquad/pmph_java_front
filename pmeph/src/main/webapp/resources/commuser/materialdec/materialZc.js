@@ -105,7 +105,7 @@ function upload(id){
         done: function (filename, fileid) {
             $("#fjxq_"+id).css("display","none");
             $("#fileNameDiv_"+id).empty(); //清楚内容
-            $("#fileNameDiv_"+id).append("<span><a href='javascript:' class='filename'  onclick='downLoadProxy("+fileid+")'>"+filename+"</a></span>");
+            $("#fileNameDiv_"+id).append("<span><div class=\"filename\"><a href='javascript:' class='filename'  onclick='downLoadProxy("+fileid+")' title='\"+filename+\"'>"+filename+"</a></div></span>");
             $("#fileNameDiv_"+id).css("display","inline");
             $("#syllabus_id_"+id).val(fileid);
             $("#syllabus_name_"+id).val(filename);
@@ -900,18 +900,18 @@ function buttAdd(type){
         var username = $("#username").val();
         var realname = $("#realname").val();
         if(username==realname){
-            if(confirm("你的真实姓名和用户名一样，是否提交！")){
-                commit();
+            if(confirm("您填写的申报姓名和账号一致，是否已当前姓名提交申报！")){
+                commit(type);
             }else{
                 $("#realname")[0].focus();
             }
         }else{
-            commit();
+            commit(type);
         }
     }
 }
 //提交
-function commit(){
+function commit(type){
     checkLb();
     if (checkEqual("textbook_id") && checkNull(jsonStr) && checkExtra()) {
         //避免重复点击

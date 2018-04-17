@@ -189,7 +189,8 @@
             </div>
             <c:if test="${listNot[0].first_img_url != 'none' }">
                 <div class="photo-size">
-                    <img src="${ctx}/image/${listNot[0].first_img_url}.action">
+                    <img src="${listNot[0].first_img_url}">
+                    <%-- <img src="${ctx}/image/${listNot[0].first_img_url}.action"> --%>
                         <%-- <img src="${ctx}/statics/testfile/content.png"> --%>
                 </div>
             </c:if>

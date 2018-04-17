@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.bc.pmpheep.back.commuser.collection.service.BookCollectionService;
 import com.bc.pmpheep.back.commuser.messagereport.dao.InfoReportDao;
 import com.bc.pmpheep.back.commuser.readpage.dao.ReadDetailDao;
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -72,7 +73,7 @@ public class PersonalCenterController extends BaseController {
 
 
 	@RequestMapping("/tohomepage") // 个人中心动态
-	public ModelAndView move(@RequestParam(value = "pagetag", defaultValue = "sbwz") String pagetag,
+	public ModelAndView move(@RequestParam(value = "pagetag", defaultValue = "dt") String pagetag,
 			HttpServletRequest request, @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
 			@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize)
 			throws UnsupportedEncodingException {
@@ -276,7 +277,8 @@ public class PersonalCenterController extends BaseController {
 			queryConditionOperation(names, namesChi, request, mv, paraMap, vm_map);
 
 			Map<String,Object> userMap=getUserInfo();
-			Long writerId=Long.valueOf(userMap.get("id").toString());
+			//Long writerId=Long.valueOf(userMap.get("id").toString());
+			Long writerId= Long.parseLong(permap.get("id").toString());
 			//查询收是否有默认的文章收藏夹，如果没有，就新建一个文章的 默认收藏夹
 			Map<String, Object>  dmap = infoReportDao.queryDefaultFavorite(writerId);
 			if(dmap==null){
@@ -551,7 +553,7 @@ public class PersonalCenterController extends BaseController {
 		modelAndView.addObject("listmyfriend", listmyfriend);
 		if(listmygroup.size()>0){
 			for(Map<String, Object> map : listmygroup){
-				map.put("group_image", RouteUtil.gruopImage(map.get("group_image").toString()));
+				map.put("group_image", RouteUtil.gruopImage(MapUtils.getString(map,"group_image","statics/image/default_image.png")));
 			}
 		}
 		modelAndView.addObject("listmygroup", listmygroup);

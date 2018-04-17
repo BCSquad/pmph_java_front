@@ -52,7 +52,7 @@ public class HomeController extends BaseController{
         	logUserId = user.get("id").toString();
 		}
         
-        List<Map<String, Object>> listNot = homeService.queryNotice();
+        List<Map<String, Object>> listNot = homeService.queryNotice(request.getContextPath());
         List<Map<String, Object>> listArt = homeService.queryArticle(4);
         List<Map<String, Object>> listAut = homeService.queryAuthor(logUserId);
         List<Map<String, Object>> listCom = homeService.queryComment();
@@ -66,7 +66,8 @@ public class HomeController extends BaseController{
         Map<String,Object> adInfo6=homeService.getPageAdInfo("首页原重点推荐1");
         Map<String,Object> adInfo7=homeService.getPageAdInfo("首页原重点推荐2");
         for (Map<String, Object> map : listCom) {
-			String url=map.get("image_url").toString();
+            String url=MapUtils.getString(map,"image_url","/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+		//	String url=map.get("image_url").toString();
 			if(url.equals("DEFAULT")){
 				map.put("image_url", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
 			}
@@ -312,7 +313,7 @@ public class HomeController extends BaseController{
      * 查询更多热门书评列表
      */
     @RequestMapping("/morecomments")
-    public ModelAndView getMoreComments(HttpServletRequest req){
+    public ModelAndView getMoreComments(HttpServletRequest req) throws UnsupportedEncodingException{
         Map<String,Object> map=new HashMap<String, Object>();
         String pagenum=req.getParameter("pagenum");
         String pagesize=req.getParameter("size");
@@ -325,7 +326,7 @@ public class HomeController extends BaseController{
             pagenum="1";
             pagesize="5";
         }
-        List<Map<String, Object>> comments = homeService.queryHotCommentList(startnum,size);
+        List<Map<String, Object>> comments = homeService.queryHotCommentList(startnum,size,req.getContextPath());
         int total=homeService.queryHotCommentListCount();
         int pagetotal=total/size;
         if(total%size!=0){

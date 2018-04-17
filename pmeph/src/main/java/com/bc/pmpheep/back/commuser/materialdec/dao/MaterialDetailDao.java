@@ -133,4 +133,9 @@ public interface MaterialDetailDao {
 		 */
 		public Map<String, Object> queryDeclarationByUserIdAndMaterialIdOrDeclarationId(
 				@Param("user_id")String user_id, @Param("material_id")String material_id, @Param("declaration_id")String declaration_id);
+
+		/**
+		 * 查看用户信息
+		 */
+		public Map<String, Object> queryUserInfo(String user_id);
 }

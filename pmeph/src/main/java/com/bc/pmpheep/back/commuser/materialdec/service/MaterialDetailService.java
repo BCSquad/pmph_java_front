@@ -238,4 +238,9 @@ public interface MaterialDetailService {
 	 * @return key：dec_editable 申报可编辑，notEnd 教材报名未结束
 	 */
 	public Map<String, Object> queryDeclarationByUserIdAndMaterialIdOrDeclarationId(String user_id, String material_id, String declaration_id);
+
+	/**
+	 * 查看用户信息
+	 */
+	public Map<String, Object> queryUserInfo(String user_id);
 }

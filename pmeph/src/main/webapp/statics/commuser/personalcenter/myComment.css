@@ -1365,6 +1365,7 @@
 }  
   
 .wrap {  
+	word-break: break-all;
     position: relative;  
     overflow: hidden;
     padding-left: 20px;

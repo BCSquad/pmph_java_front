@@ -49,7 +49,7 @@
 				</div>
 				<div class="th_title">
 	    			<span>医学随笔</span>
-	    			<span>${map.gmt_create }</span>
+	    			<span>${map.auth_date}</span>
 	    			<img style="float: left;margin-top: 5px;margin-right: 5px;" src="${ctx}/statics/image/scan.png"/>
 	    			<span id="img_span">${map.clicks }</span>
 	    		</div>

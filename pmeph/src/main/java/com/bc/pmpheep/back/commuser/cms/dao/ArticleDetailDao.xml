@@ -10,7 +10,7 @@
 	<select id="queryTitle" parameterType="java.util.Map"
 		resultType="java.util.Map">
 		SELECT c.mid,c.title, DATE_FORMAT(c.gmt_create,'%Y-%m-%d')
-		as gmt_create,c.clicks,c.cover,c.summary,c.auth_status,c.is_staging FROM cms_content c WHERE c.id=#{id}
+		as gmt_create,c.clicks,c.cover,c.summary,c.auth_status,c.is_staging,c.auth_date FROM cms_content c WHERE c.id=#{id}
 	</select>
 
 	<!-- 查询作者 -->
@@ -56,7 +56,7 @@
 		left join writer_user c on t.author_id=c.id
 		WHERE
 		t.author_id=#{author_id} and t.auth_status='2' and t.parent_id='0' and
-		t.is_published=1 and b.category_name='医学随笔'
+		t.is_published=1 and b.category_name='医学随笔' and  t.is_deleted=0
 		order by t.gmt_create desc
 	</select>
 
@@ -77,7 +77,7 @@
 		writer_user c on
 		t.author_id=c.id WHERE t.author_id=#{author_id}
 		and t.auth_status='2'
-		and t.parent_id='0' and t.is_published=1 and b.category_name='医学随笔'
+		and t.parent_id='0' and t.is_published=1 and b.category_name='医学随笔'  and  t.is_deleted=0
 		order by gmt_create desc LIMIT 0,3
 	</select>
 
@@ -94,7 +94,8 @@
 		on c.author_id=w.id
 		where c.is_promote !=
 		0 OR
-		c.is_promote is not null
+		c.is_promote is not null and c.auth_status='2'
+		and c.parent_id='0' and c.is_published=1   and  c.is_deleted=0
 		and c.id != #{wid}
 		<if test="x >= 0">
 			limit #{x},5
@@ -152,7 +153,7 @@
 		where
 		t.parent_id =#{id}
 		AND t.category_id = 0 and t.auth_status='2' and
-		t.is_published=1
+		t.is_published=1 and  t.is_deleted=0
 		order by t.gmt_create desc
 	</select>
 
@@ -260,7 +261,7 @@
 		resultType="java.util.Map">
 		select * from cms_extra ce left join cms_content c on
 		c.id=ce.content_id
-		where c.id=#{id}
+		where c.id=#{id} and  c.is_deleted=0
 	</select>
 
 </mapper>

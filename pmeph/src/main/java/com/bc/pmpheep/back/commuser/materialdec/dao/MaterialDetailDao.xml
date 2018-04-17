@@ -515,6 +515,11 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 		WHERE
 		id = #{user_id}
 	</update>
+
+	<!--查看个人信息-->
+	<select id="queryUserInfo" resultType="java.util.Map" parameterType="java.lang.String">
+		select * from writer_user where id = #{user_id}
+	</select>
 	
 	<select id="queryDeclarationByUserIdAndMaterialIdOrDeclarationId" resultType="Map">
 		select 
