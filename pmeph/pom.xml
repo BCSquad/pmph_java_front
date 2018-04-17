@@ -335,8 +335,11 @@
                 <configuration>
                     <source>${maven-source.ver}</source>
                     <target>${maven-source.ver}</target>
-                    <compilerArguments>
+                    <!--<compilerArguments>
                         <endorseddirs>${endorsed.dir}</endorseddirs>
+                    </compilerArguments>-->
+                    <compilerArguments>
+                        <extdirs>${project.basedir}/src/main/webapp/WEB-INF/lib</extdirs>
                     </compilerArguments>
                 </configuration>
             </plugin>
