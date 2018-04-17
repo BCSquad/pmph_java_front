@@ -101,7 +101,7 @@
                             <input type="hidden" name="syllabus_id" id="syllabus_id_${status.count}" value="${list.syllabus_id}"/>
                             <input type="hidden" name="syllabus_name" id="syllabus_name_${status.count}" value="${list.syllabus_name}"/>
                             <span style="float: left;margin-right: 10px;" id="fjxq_${status.count}">
-							<a href="javascript:" class="filename"  onclick="downLoadProxy('${list.syllabus_id}')">${list.syllabus_name}</a>
+							<div class="filename"><a href="javascript:"  onclick="downLoadProxy('${list.syllabus_id}')" title="${list.syllabus_name}">${list.syllabus_name}</a></div>
 						</span>
                             <div class="scys" id="scjxdg_${status.count}"><span>上传文件</span></div>
                             <input type="hidden" name="scfjb" id="scfjb" value="${status.count}">

@@ -1334,7 +1334,8 @@
 		b.image_url as image_url,
 		m.favorite_id as favorite_id,
 		'' as category_id,
-		'' as cover
+		'' as cover,
+		'' as mdbid
 	FROM
 		book_user_mark m
 	LEFT JOIN book b ON m.book_id = b.id
@@ -1361,7 +1362,8 @@ UNION
 			'' as image_url,
 			m.favorite_id as favorite_id,
 			c.category_id as category_id,
-		    c.cover as cover
+		    c.cover as cover,
+		    c.mid as mdbid
 		FROM
 			cms_user_mark m
 		LEFT JOIN cms_content c ON m.content_id = c.id

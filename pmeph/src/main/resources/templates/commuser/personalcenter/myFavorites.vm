@@ -72,7 +72,7 @@
             </div>
             <div class="content">
                 <div  class="content-imgc">
-                    <img src="$!{contextpath}$!{c.imgpath}"/>
+                    <img src="$!{c.imgpath}"/>
                 </div>
                 <div  class="content-text" style="width: 640px;">
                     <div class="text">
@@ -81,8 +81,10 @@
                     <div class="end">
                         <div class="foot">
                             <span class="span1" onclick="cancelMarkc('$!{c.mid}','$!{c.bookmarks}','$!{c.id}','$!{c.favorite_id}')">取消收藏</span>
+                            #if($!{c.category_id}==1)
                             <span class="span2" >$!{c.comments}</span>
                             <a class="smicon comment"  href="$!{contextpath}articledetail/toPage.action?wid=$!{c.id}#001"></a>
+                            #end
                             <span class="#if($!{c.like}>0)span3 #else span2 #end" id="like$!{c.id}">$!{c.likes}</span>
                             <span class="smicon #if($!{c.like}>0) good #else nogood #end "  onclick="addlikec('$!{c.id}')" id="good$!{c.id}"></span>
                             <span class="span2">$!{c.clicks}</span>

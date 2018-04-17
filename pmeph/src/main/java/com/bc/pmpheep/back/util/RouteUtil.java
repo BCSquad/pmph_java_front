@@ -1,6 +1,13 @@
 package com.bc.pmpheep.back.util;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.springframework.util.StringUtils;
+
+import com.bc.pmpheep.general.pojo.Content;
 
 /**
  * 
@@ -111,5 +118,71 @@ public class RouteUtil {
 		}
 		return returnValue;
 	}
+	
+	
+	/**
+	 * 获取html字符串中的第一张图片的全路径，包括mdb图片或其他网络图片，输入为Content
+	 * @param content
+	 * @param contextpath
+	 * @return
+	 */
+	 	public static String getFirstImgUrlFromHtmlStr(Content content,String contextpath) {
+	 		String img_url = 
+	 				"";
+	 		if (content != null) {
+	 			img_url = getFirstImgUrlFromHtmlStr(content
+	 					.getContent(),contextpath);
+	 			
+	 		}
+	 		return img_url;
+	 	}
+	 	
+	 	/**
+	 	 * 获取html字符串中的第一张图片的全路径，包括mdb图片或其他网络图片，输入为String张
+	 	 * @param html
+	 	 * @param contextpath
+	 	 * @return
+	 	 */
+	 	public static String getFirstImgUrlFromHtmlStr(String html,String contextpath){
+	 		String img_url = 
+	 				"";
+	 		if ("/".equals(contextpath.substring(contextpath.length()-1))) {
+    			contextpath = contextpath.substring(0,contextpath.length()-1);
+			}
+	 		String img = "";
+	        Pattern p_image;
+	        Matcher m_image;
+	        List<String> pics = new ArrayList<>(16);
+	        //String regEx_img = "<img.*src=(.*?)[^>]*?>"; //图片链接地址  
+	        String regEx_img = "<img.*src\\s*=\\s*(.*?)[^>]*?>";
+	        p_image = Pattern.compile(regEx_img, Pattern.CASE_INSENSITIVE);
+	        m_image = p_image.matcher(html);
+	        while (m_image.find()) {
+	            img = img + "," + m_image.group();
+	            // Pattern.compile("src=\"?(.*?)(\"|>|\\s+)").matcher(img); //匹配src  
+	            
+	            Matcher m = Pattern.compile("src\\s*=\\s*\".*?\"").matcher(img);
+	            while (m.find()) {
+	            	String first_src = m.group();
+	            	Matcher mdb_src = Pattern.compile("src\\s*=\\s*\".*?([A-z0-9]{24}?)").matcher(first_src);
+	            	Matcher http_src = Pattern.compile("src\\s*=\\s*\"(.*?)\"").matcher(first_src);
+	            	
+	            	if (mdb_src.find()) {
+	            		
+	            		pics.add(contextpath+"/image/"+mdb_src.group(1)+".action");
+					}else if(http_src.find()){
+						pics.add(http_src.group(1));
+					}else{
+						pics.add("");
+	            }
+	                
+	        }
+	        }
+	        
+	        if (pics.size()>0) {
+	        	img_url = pics.get(0);
+			}
+	        return img_url;
+	 	}
 
 }

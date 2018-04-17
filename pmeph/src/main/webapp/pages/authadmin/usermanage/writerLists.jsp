@@ -55,7 +55,7 @@
                    <option value="0">姓名</option>
                    <option value="1">用户代码</option>
                </select>--%>
-            <div style="float: left;height: 42px;line-height: 42px;padding-right: 20px;color: #4e4e4e;">用户代码/姓名:</div>
+            <div style="float: left;height: 42px;line-height: 42px;padding-right: 20px;color: #4e4e4e;">用户名/姓名:</div>
             <input type="text" value="${username}" placeholder='请输入' id="ssk" name="username">
             <input type="button" value="查询" id="cxan" onclick="query()">
             <%--<div id="gjss"><a href="">高级搜素</a></div>--%>
@@ -66,7 +66,7 @@
             <thead>
             <tr>
                 <td>序号</td>
-                <td>用户代码</td>
+                <td>用户名</td>
                 <td>姓名</td>
                 <td>手机</td>
                 <td>邮箱</td>
@@ -94,9 +94,9 @@
                     <td>${item.title } </td>
                     <td>
                         <a onclick="show('${item.realname}','${item.id}')" style="cursor: pointer;">发消息</a>
-                        <a  style="cursor: pointer;color:#4e4e4e;" href="${pageContext.request.contextPath}/innerlogin.action?username=${item.username }&md5=${item.md5 }&usertype=1&refer=${pageContext.request.contextPath}/userinfo/touser.action">
+                        <%--<a  style="cursor: pointer;color:#4e4e4e;" href="${pageContext.request.contextPath}/innerlogin.action?username=${item.username }&md5=${item.md5 }&usertype=1&refer=${pageContext.request.contextPath}/userinfo/touser.action">
                             修改资料
-                        </a>
+                        </a>--%>
                     </td>
                 </tr>
             </c:forEach>
