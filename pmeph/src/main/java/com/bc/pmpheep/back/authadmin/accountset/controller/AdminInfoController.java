@@ -57,7 +57,13 @@ public class AdminInfoController extends BaseController {
         Map <String,Object> map = this.getUserInfo() ;
     	Long userId = new Long(String.valueOf(map.get("id")));
     	Map<String, Object> admininfo=adminInfoService.getOrgUserById(userId);
-        
+        for (Map.Entry<String, Object> entry : admininfo.entrySet()) {
+            String key = entry.getKey().toString();
+            String value = entry.getValue().toString();
+            if(value.equals("-")){
+                admininfo.put(key,"");
+            }
+        }
         mv.addObject("admininfo",admininfo);
         mv.setViewName("authadmin/accountset/admininfo");
         return mv;

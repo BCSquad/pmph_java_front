@@ -158,6 +158,20 @@ public class WriterUser implements Serializable {
     // 修改用户信息
     private String md5;
 
+    /**
+     * 工作单位
+     */
+    private String  workplace;
+    public String getWorkplace() {
+        return workplace;
+    }
+
+    public void setWorkplace(String workplace) {
+        this.workplace = workplace;
+    }
+
+
+
     public String getMd5() {
         return md5;
     }
