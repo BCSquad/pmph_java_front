@@ -93,20 +93,20 @@ public class BookDeclareController extends BaseController {
 			topicMap.put("is_opts_handling", "0");
 		}
 		//选题申报表
-		topicMap.put("reader", request.getParameter("reader"));
+		topicMap.put("reader", "".equals(request.getParameter("reader")) ? null : request.getParameter("reader"));
 		topicMap.put("bookname", request.getParameter("bookname"));
-		topicMap.put("bank_account_id", "0");
+		topicMap.put("bank_account_id", "".equals(request.getParameter("bank_account_id")) ? null : request.getParameter("bank_account_id"));
 		topicMap.put("user_id", request.getParameter("user_id"));
 		topicMap.put("deadline",
 				"".equals(request.getParameter("deadline")) ? null : request.getParameter("deadline"));
-		topicMap.put("source", request.getParameter("source"));
+		topicMap.put("source", "".equals(request.getParameter("source")) ? null : request.getParameter("source"));
 		topicMap.put("word_number",
 				"".equals(request.getParameter("word_number")) ? null : request.getParameter("word_number"));
 		topicMap.put("picture_number",
 				"".equals(request.getParameter("picture_number")) ? null : request.getParameter("picture_number"));
 		topicMap.put("subject", request.getParameter("subject"));
-		topicMap.put("rank", request.getParameter("rank"));
-		topicMap.put("type", request.getParameter("type"));
+		topicMap.put("rank", "".equals(request.getParameter("rank")) ? null : request.getParameter("rank"));
+		topicMap.put("type", "".equals(request.getParameter("type")) ? null : request.getParameter("type"));
 		topicMap.put("reader_quantity", request.getParameter("reader_quantity"));
 		topicMap.put("purchase",
 				"".equals(request.getParameter("purchase")) ? null : request.getParameter("purchase"));
@@ -148,12 +148,12 @@ public class BookDeclareController extends BaseController {
 		topicMap.put("edition", request.getParameter("edition"));
 		//主编信息
 		topicMap.put("realname", request.getParameter("realname"));
-		topicMap.put("sex", request.getParameter("sex"));
+		topicMap.put("sex", "".equals(request.getParameter("sex")) ? null : request.getParameter("sex"));
 		topicMap.put("price",
 				"".equals(request.getParameter("price")) ? null : request.getParameter("price"));
 		topicMap.put("position", request.getParameter("position"));
-		topicMap.put("position_profession", request.getParameter("position_profession"));
-		topicMap.put("degree", request.getParameter("degree"));
+		topicMap.put("position_profession", "".equals(request.getParameter("position_profession")) ? null : request.getParameter("position_profession"));
+		topicMap.put("degree", "".equals(request.getParameter("degree")) ? null : request.getParameter("degree"));
 		topicMap.put("workplace", request.getParameter("workplace"));
 		topicMap.put("phone", request.getParameter("phone"));
 		topicMap.put("address", request.getParameter("address"));
@@ -177,20 +177,22 @@ public class BookDeclareController extends BaseController {
 		String[] workplaces = request.getParameterValues("write_workplace");
 		String[] phones = request.getParameterValues("write_phone");
 		String[] degrees = request.getParameterValues("write_degree");
-		for (int i = 0; i < realnames.length; i++) { // 遍历数组
-			if (!realnames[i].equals("")) {
-				Map<String, Object> writeMap = new HashMap<String, Object>();
-				writeMap.put("realname", realnames[i]);
-				writeMap.put("sex", sexs[i]);
-				writeMap.put("price", prices[i]);
-				writeMap.put("position", positions[i]);
-				writeMap.put("workplace", workplaces[i]);
-				writeMap.put("phone", phones[i]);
-				writeMap.put("degree", degrees[i]);
-				twriteList.add(writeMap);
+		if (realnames!=null) {
+			for (int i = 0; i < realnames.length; i++) { // 遍历数组
+				if (!realnames[i].equals("")) {
+					Map<String, Object> writeMap = new HashMap<String, Object>();
+					writeMap.put("realname", realnames[i]);
+					writeMap.put("sex", "".equals(sexs[i])?null:sexs[i]);
+					writeMap.put("price", "".equals(prices[i])?null:prices[i]);
+					writeMap.put("position", positions[i]);
+					writeMap.put("workplace", workplaces[i]);
+					writeMap.put("phone", phones[i]);
+					writeMap.put("degree", "".equals(degrees[i])?null:degrees[i]);
+					twriteList.add(writeMap);
+				}
 			}
 		}
-
+		
 		// 社外同类书情况表
 		String[] booknames = request.getParameterValues("similar_bookname");
 		String[] editions = request.getParameterValues("similar_edition");
@@ -200,20 +202,24 @@ public class BookDeclareController extends BaseController {
 		String[] print_numbers = request.getParameterValues("similar_print_number");
 		String[] similar_prices = request.getParameterValues("similar_price");
 		String[] publish_dates = request.getParameterValues("similar_publish_date");
-		for (int i = 0; i < booknames.length; i++) { // 遍历数组
-			if (!booknames[i].equals("")) {
-				Map<String, Object> similarMap = new HashMap<String, Object>();
-				similarMap.put("bookname", booknames[i]);
-				similarMap.put("edition", editions[i]);
-				similarMap.put("author", authors[i]);
-				similarMap.put("booksize", booksizes[i]);
-				similarMap.put("publisher", publishers[i]);
-				similarMap.put("print_number", print_numbers[i]);
-				similarMap.put("price", similar_prices[i]);
-				similarMap.put("publish_date", publish_dates[i]);
-				similarList.add(similarMap);
+		if (booknames!=null) {
+			for (int i = 0; i < booknames.length; i++) { // 遍历数组
+				if (!booknames[i].equals("")) {
+					Map<String, Object> similarMap = new HashMap<String, Object>();
+					similarMap.put("bookname", booknames[i]);
+					similarMap.put("edition", "".equals(editions[i])?null:editions[i]);
+					similarMap.put("author", authors[i]);
+					similarMap.put("booksize", booksizes[i]);
+					similarMap.put("publisher", publishers[i]);
+					similarMap.put("print_number", print_numbers[i]);
+					similarMap.put("price", similar_prices[i]);
+					similarMap.put("publish_date", "".equals(publish_dates[i])?null:publish_dates[i]);
+					similarList.add(similarMap);
+				}
 			}
 		}
+		
+		
 		Map<String,Object> returnMap =  new HashMap<String,Object>();
 		if(topic_id == null || topic_id.length() <= 0) {//表示新增
 			returnMap = this.bdecService.insertBookDeclare(similarList, twriteList, topicMap, extraMap);
@@ -224,7 +230,7 @@ public class BookDeclareController extends BaseController {
 		if(returnMap.get("msg").toString().equals("OK")) {
 			if ("1".equals(stype)) {
 				Map<String, Object> userMap = this.getUserInfo();
-				WriterUserTrendst wut = new WriterUserTrendst(request.getParameter("user_id"), 9, topicMap.get("table_trendst_id").toString());
+				WriterUserTrendst wut = new WriterUserTrendst(getUserInfo().get("id").toString(), 9, (topic_id != null && topic_id!="")?topic_id:topicMap.get("table_trendst_id").toString());
 				wut.setDetail("提交选题申报", userMap.get("realname").toString() + " 提交了选题申报《" + request.getParameter("bookname").toString() + "》。", 0);
 				personalService.saveUserTrendst(wut);//选题申报 生成动态
 			}

@@ -286,7 +286,9 @@
                 <div class="block">
                     <div class="title">
                         <div class="line"></div>
-                        <div class="rd_name">相关资源</div>
+                        <div class="rd_name">相关资源
+                            <div onclick="window.location.href='${ctx}/readdetail/morebookvideo.action?id=${id}'"  style="float: right;margin-left: 50px;color: #489299;font-size: 14px;cursor: pointer;">更多>></div>
+                        </div>
                     </div>
                     <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
                     <c:forEach items="${Video}" var="list" varStatus="status">

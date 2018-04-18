@@ -334,4 +334,24 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 */		}
 		return returncode;
 	}
+
+	/**查询籍微视频
+	 * @param map  startnum:分页的开始的序号      size:分页的数据容量
+	 * @return
+	 */
+	@Override
+	public List<Map<String, Object>> queryMoreBookVidos(Map<String, Object> map) {
+
+		return readDetailDao.queryMoreBookVidos(map);
+	}
+
+	/**查询书籍微视频的总数
+	 * @param map
+	 * @return int
+	 */
+	@Override
+	public int queryMoreBookVidosCount(Map<String, Object> map) {
+
+		return readDetailDao.queryMoreBookVidosCount(map);
+	}
 }
