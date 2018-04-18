@@ -105,7 +105,7 @@ function add_zjky(){
         "<td><input class='sb_input' style='width: 70px;' id='write_price_"+num+"' name='write_price' placeholder='年龄' value=''" +
         "onkeyup='this.value=this.value.replace(/\\D/g,&#39;&#39;)' onafterpaste='this.value=this.value.replace(/\\D/g,&#39;&#39;)'"+
         "onBlur='checkAge(this)' maxlength='3' /></td>"+
-		"<td><input class='sb_input' style='width: 120px;' name='write_phone' placeholder='电话' value='' id='write_phone"+num+"' maxlength='36'/></td>"+
+		"<td><input class='sb_input' style='width: 120px;' name='write_phone' placeholder='电话' value='' id='write_phone_"+num+"' maxlength='36'/></td>"+
         "<td><select id='write_degree_"+num+"' name='write_degree'>" +
         "<option value=''>-请选择-</option>" +
         "<option value='0'>博士</option>" +
