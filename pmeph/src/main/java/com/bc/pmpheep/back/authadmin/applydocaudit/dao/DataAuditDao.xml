@@ -44,7 +44,9 @@
 		when pp.chosen_position = 12 then '主编,数字编委'
 		when pp.chosen_position = 9 then '数字编委,编委'
 		when pp.chosen_position = 10 then '数字编委,副主编'
-		else '遴选结束'  end )) SEPARATOR '\n') as cp
+		else '遴选结束'  end )) SEPARATOR '\n') as cp,
+		(case  when d.isprint=0  then '未打印'
+		when d.isprint=1  then '已打印' 	END)	as 	isprint
 		FROM
 		declaration AS d
 		LEFT JOIN  material m ON d.material_id=m.id
@@ -419,5 +421,10 @@ select e.*, REPLACE(e.date_begin,'-','.') as dbegin,REPLACE(e.date_end,'-','.') 
 	<select id="queryIntention" resultType="java.util.Map" parameterType="java.util.Map">
 		select * from dec_intention where declaration_id = #{declaration_id} 
 	</select>
+
+	<!-- 点击标题后状态变为已读 -->
+	<update id="updPrintStatus" parameterType="String" >
+		UPDATE `declaration` SET isprint =1 WHERE id=#{id}
+	</update>
 
 </mapper>

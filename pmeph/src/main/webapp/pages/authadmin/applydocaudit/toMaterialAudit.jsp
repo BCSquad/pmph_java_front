@@ -755,13 +755,13 @@
 							<div id="passGo" class="bt_tj" onclick="toAudit('${gezlList.id}','3')">通过</div>
 							<div id="backGo" class="bt_tj" onclick="showup('${gezlList.id}','2')">退回</div>
 						</c:if>
-						<div class="bt_tj" onclick="toprint()">打印</div>
+						<div class="bt_tj" onclick="toprint('${gezlList.id}')">打印</div>
 						<div class="bt_tj" onclick="toMain()">返回</div>
 					</div>
 					 </c:when>
 					 <c:otherwise>
 					 	<div class="div_butt">
-							<div class="bt_tj" onclick="toprint()">打印</div>
+							<div class="bt_tj" onclick="toprint('${gezlList.id}')">打印</div>
 					 		<div class="bt_tj" onclick="toMain()">返回</div>
 					 	</div>
 					 </c:otherwise>
