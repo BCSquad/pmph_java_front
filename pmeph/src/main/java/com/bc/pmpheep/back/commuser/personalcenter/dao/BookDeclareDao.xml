@@ -28,7 +28,7 @@
 			t1.note,t1.gmt_create,t1.gmt_update,t1.reader,t1.tn,t1.vn,t1.submit_time,t1.reader_quantity,t1.campaign,t1.sales_channel,
 			t1.lifecycle,t1.print_advise,t1.price_advise,t1.print_number,t1.cost,t1.min_print_number,t1.benefit,
 			t1.is_revision,t1.revision_bookname,t1.revision_author,SUBSTR(t1.revision_publish_date,1,10) revision_publish_date,t1.revision_print,t1.revision_stock,
-			t1.realname,t1.sex,t1.price,t1.position,t1.position_profession,t1.degree,t1.workplace,t1.address,t1.postcode,t1.email
+			t1.realname,(case t1.sex when 1 then '1' when 0 then '0' else t1.sex end) as sex,t1.price,t1.position,t1.position_profession,t1.degree,t1.workplace,t1.address,t1.postcode,t1.email
 		from topic t1 where 1= 1
 		<if test="vn != null and vn != ''">
 			and t1.vn = #{vn}

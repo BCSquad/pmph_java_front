@@ -8,13 +8,16 @@ function ChangeDiv(type){
         document.getElementById("filesgx_top").setAttribute("class","clickbefore");
         document.getElementById("filesgx").setAttribute("class","hidden");
         document.getElementById("commnions").setAttribute("class","show");
-    }else{
+    }else if(type=='filesgx'){
         document.getElementById("filesgx_top").setAttribute("class","clicked");
         document.getElementById("commnions_top").setAttribute("class","clickbefore");
         document.getElementById("commnions").setAttribute("class","hidden");
         document.getElementById("filesgx").setAttribute("class","show");
-
-
+    }else if(type=='memberManager'){
+    	document.getElementById("memberManager_top").setAttribute("class","clicked");
+        document.getElementById("commnions_top").setAttribute("class","clickbefore");
+        document.getElementById("commnions").setAttribute("class","hidden");
+        document.getElementById("filesgx").setAttribute("class","show");
     }
 
 
