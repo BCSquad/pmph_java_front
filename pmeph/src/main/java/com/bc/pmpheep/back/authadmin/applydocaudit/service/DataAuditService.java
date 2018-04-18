@@ -231,7 +231,9 @@ public interface DataAuditService {
 	 * 编写内容意向表
 	 */
 	public Map<String,Object> queryIntention(Map<String, Object> map);
-	
+
+	//只要点过打印按钮，都算已打印
+	void updPrintStatus(String id);
 	
 
 }

@@ -179,4 +179,24 @@ public interface ReadDetailDao {
 	 * @param map
 	 */
 	void updateCommentLong(Map<String, Object> map);
+	
+	/**
+	 * 提交读者反馈
+	 * @param map
+	 * @return
+	 */
+	int bookfeedback(Map<String, Object> map);
+
+	/**查询书籍微视频
+	 * @param map  startnum:分页的开始的序号      size:分页的数据容量
+	 * @return
+	 */
+	List<Map<String,Object>> queryMoreBookVidos(Map<String,Object> map);
+	/**查询书籍微视频的总数
+	 * @param map
+	 * @return int
+	 */
+	int queryMoreBookVidosCount(Map<String,Object> map);
+
+
 }

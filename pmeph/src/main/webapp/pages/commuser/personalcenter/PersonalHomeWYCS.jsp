@@ -137,16 +137,17 @@ request.setAttribute("currentTime",datetime);
                     	<li id="jcsb" class="dtl pagetag"><a class="aher paged" >教材申报</a></li>
                     </c:if>
                     <li id="sbwz" class="dtl pagetag"><a class="aher paged">随笔文章</a></li>
-                    <c:if test="${selfLog == true }">
-                    	<li id="tsjc" class="dtl pagetag"><a class="aher paged">图书纠错</a></li>
-                    </c:if>
+                    
+                    <li id="wdjc" class="dtl pagetag"><a class="aher paged">图书纠错</a></li>
+                    
                     <c:if test="${selfLog == true }">
                     	<li id="wycs" class="dtl pagetag"><a class="aher paged"  >我要出书</a></li>
                     </c:if>
-					<li id="wdjc" class="dtl pagetag"><a class="aher paged" >个人纠错</a></li>
+					<!-- <li id="wdjc" class="dtl pagetag"><a class="aher paged" >个人纠错</a></li> -->
                     <li id="wdpl" class="dtl pagetag"><a class="aher paged" >个人评论</a></li>
                     <li id="wdwj" class="dtl pagetag"><a class="aher paged" >个人问卷</a></li>
 					<li id="grsc" class="dtl pagetag"><a class="aher paged" >个人收藏</a></li>
+					<li id="dzfk" class="dtl pagetag"><a class="aher paged" >读者反馈</a></li>
                     <%-- <li id="zxsp" class="dtl"><a class="aher"
                                                  href="${ctx}/personalhomepage/tohomepagethe.action">最新书评</a></li> --%>
                 </ul>

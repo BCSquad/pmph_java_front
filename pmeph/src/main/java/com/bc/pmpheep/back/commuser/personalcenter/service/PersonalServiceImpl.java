@@ -576,5 +576,17 @@ public class PersonalServiceImpl implements PersonalService {
 		return count;
 	}
 
+	@Override
+	public List<Map<String, Object>> queryMyBookFeedBack(PageParameter<Map<String, Object>> pageParameter) {
+		List<Map<String, Object>> result_list = personaldao.queryMyBookFeedBack(pageParameter);
+		return result_list;
+	}
+
+	@Override
+	public int queryMyBookFeedBackCount(PageParameter<Map<String, Object>> pageParameter) {
+		Integer count = personaldao.queryMyBookFeedBackCount(pageParameter);
+		return count;
+	}
+
 
 }

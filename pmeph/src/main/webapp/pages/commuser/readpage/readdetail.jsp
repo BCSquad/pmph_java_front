@@ -91,6 +91,31 @@
                 </div>
             </form>
         </div>
+        <!-- 图书纠错悬浮框 end -->
+        
+        <!-- 读者反馈悬浮框 -->
+        <div class="bookmistake" id="bookfeedback">
+            <form id="bookfeedbackform">
+                <div class="apache">
+                    <div class="mistitle">读者反馈</div>
+                    <div class="x" onclick="hideup()"></div>
+                </div>
+                
+                <div class="info">
+                    <div style="margin-top: 5px;">
+                         <textarea class="misarea" style="width:470px;" id="bookfeedback_content"
+                                   onkeyup="javascript:LengthLimit(this,500);"
+                                   onblur="javascript:LengthLimit(this,500);"></textarea>
+                    </div>
+                </div>
+                
+                <div class="">
+                    <button class="btn" type="button" onclick="bookfeedback()">确认</button>
+                </div>
+            </form>
+        </div>
+        <!-- 读者反馈悬浮框end -->
+        
         <!--左边区域-->
         <div class="leftarea">
             <div class="title" style="margin-top: -20px"><span>读书 >${map.bookname}</span></div>
@@ -194,9 +219,9 @@
                     <div id="xsp"></div>
                     <a href="#001" onclick="writeablut()" style="text-decoration: none"><span id="xsp1">写书评</span></a>
                 </div>
-                <div class="mistake">
-                    <div class="mis_pic" onclick="showup()"></div>
-                    <div class="mis_content" onclick="showup()">图书纠错</div>
+                <div class="mistake" onclick="showup(1)">
+                    <div class="mis_pic" ></div>
+                    <div class="mis_content">图书纠错</div>
                 </div>
                 <div class="mistake">
                     <%
@@ -219,6 +244,11 @@
                     </c:if>
 
                 </div>
+                <div class="mistake" onclick="showup(2)">
+                    <div class="feedback_pic" ></div>
+                    <div class="mis_content">读者反馈</div>
+                </div>
+                
                 <c:choose>
                     <c:when test="${empty map.pdf_url}">
                         <div class="left1" id="dpf" style="cursor:not-allowed;">
@@ -256,7 +286,9 @@
                 <div class="block">
                     <div class="title">
                         <div class="line"></div>
-                        <div class="rd_name">相关资源</div>
+                        <div class="rd_name">相关资源
+                            <div onclick="window.location.href='${ctx}/readdetail/morebookvideo.action?id=${id}'"  style="float: right;margin-left: 50px;color: #489299;font-size: 14px;cursor: pointer;">更多>></div>
+                        </div>
                     </div>
                     <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
                     <c:forEach items="${Video}" var="list" varStatus="status">
