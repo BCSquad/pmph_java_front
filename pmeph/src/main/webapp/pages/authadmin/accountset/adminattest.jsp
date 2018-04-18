@@ -130,9 +130,6 @@
                 <input type="hidden" id="fax" value="${admininfo.fax}"/>
                 <!-- 已通过或已提交 全部输入框不可修改 -->
                 <input type="hidden" id="disabled_all" value="${admininfo.progress==1||(admininfo.progress==0 && admininfo.is_proxy_upload==true)}"/>
-                <%-- <input type="hidden" id="birthday" value="${admininfo.birthday}"/>
-                <input type="hidden" id="experience" value="${admininfo.experience}"/>
-                <input type="hidden" id="workplace" value="${admininfo.workplace}"/> --%>
                 <form>
                     <table border="0" class="form-table">
                         <tr>
@@ -205,16 +202,16 @@
                         <tr>
                             <td style="width:400px">
                                 <div class="label-input">
-                                    <label class="require">联系电话</label>
+                                    <label class="require">手机</label>
                                     <div class="input-wrapper">
                                         <input ${(admininfo.progress!=1)?'class="txt required"':'class="txt" readonly="readonly"'}
                                                 style="width: 258px" type="text" id="telephone"
-                                                value="${admininfo.telephone}" data-valid="isNonEmpty||isPhoneOrMobile"
-                                                data-error="联系电话不能为空||请填写正确的电话格式"  maxLength="20"/>
-                                                <!--暂时不能校验座机：取消电话号码校验-->
+                                                value="${admininfo.handphone}"
+                                                data-valid="isNonEmpty||isMobile"
+                                                data-error="手机号码不能为空||请填写正确的电话格式"  maxLength="20"/>
                                     </div>
                                 </div>
-                            </td><!--   value="${admininfo.telephone} -->
+                            </td><!--   value="${admininfo.handphone} -->
 
                             <td colspan="2">
                                 <div style="margin-bottom: 25px;margin-left: 20px">

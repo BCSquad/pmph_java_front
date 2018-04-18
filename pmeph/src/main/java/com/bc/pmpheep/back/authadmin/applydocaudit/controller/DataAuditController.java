@@ -396,4 +396,13 @@ public class DataAuditController extends BaseController{
 			return returncode;
 		}
 
+	//点击打印按钮改变打印状态
+	@RequestMapping(value = "/updPrintStatus")
+	@ResponseBody
+	public String updPrintStatus(HttpServletRequest request) {
+		String id = request.getParameter("did");
+		this.dataAuditService.updPrintStatus(id);
+		return "OK";
+	}
+
 }

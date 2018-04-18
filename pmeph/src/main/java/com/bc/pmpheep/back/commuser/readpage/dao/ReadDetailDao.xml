@@ -12,10 +12,21 @@
 	      left join book_detail b  on t.id=b.book_id where t.id=#{id}		 
 	</select>
 	
-	<!-- 查询视频 -->
+	<!-- 查询视频3条 -->
 	<select id="queryVideo" parameterType="java.util.Map" resultMap="readdetailmMap">
 	    select * from book_video where book_id=#{book_id} and is_auth=1 limit 0,3
 	</select>
+
+	<!--查询书籍微视频  -->
+	<select id="queryMoreBookVidos" parameterType="map" resultType="java.util.Map">
+		 select * from book_video where book_id=#{id} and is_auth=1
+		limit #{startnum},#{size}
+	</select>
+	<!-- 查询教材微中书籍微视频的总数 -->
+	<select id="queryMoreBookVidosCount" parameterType="map" resultType="int">
+		select count(1) from book_video where book_id=#{id} and is_auth=1
+	</select>
+
 	
 	<!-- 根据书籍ID查询书籍评论信息 -->
 	<select id="queryComment" parameterType="java.util.Map" resultType="java.util.Map">
@@ -231,5 +242,10 @@
 		book_user_comment AS bc SET bc.score=#{score},bc.content=#{content},bc.title=#{title} where
 		id=#{id} and bc.is_long =1 and bc.is_auth = 0
 	</update>
+	
+	<insert id="bookfeedback" parameterType="Map">
+		insert into book_user_feedback (book_id,user_id,content)
+		values(#{book_id},#{user_id},#{content})
+	</insert>
 	
 </mapper>

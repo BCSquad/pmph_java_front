@@ -584,7 +584,7 @@
 <jsp:include page="/pages/comm/tail.jsp">
     <jsp:param name="linked" value="linked"></jsp:param>
 </jsp:include>
-</div>
+
 
 <script>
     var _hmt = _hmt || [];

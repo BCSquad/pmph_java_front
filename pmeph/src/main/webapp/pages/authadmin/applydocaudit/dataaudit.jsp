@@ -87,6 +87,7 @@
 								<td>学校审核</td>
 								<td>出版社审核</td>
 								<td>遴选结果</td>
+								<td>打印状态</td>
 							</tr>
 						</thead>
 						<tbody id="zebra-table">

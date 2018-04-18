@@ -144,4 +144,24 @@ public interface ReadDetailService {
 	 * @param map
 	 */
 	Map<String, Object> updateCommentLong(Map<String, Object> map);
+	
+	/**
+	 * 读者反馈
+	 * @param map
+	 * @return
+	 */
+	String bookfeedback(Map<String, Object> map);
+
+	/**查询书籍微视频
+	 * @param map  startnum:分页的开始的序号      size:分页的数据容量  
+	 * @return
+	 */
+	List<Map<String,Object>> queryMoreBookVidos(Map<String,Object> map);
+	/**查询微视频的总数
+	 * @param map   materialId:教材id
+	 * @return int
+	 */
+	int queryMoreBookVidosCount(Map<String,Object> map);
+
+
 }

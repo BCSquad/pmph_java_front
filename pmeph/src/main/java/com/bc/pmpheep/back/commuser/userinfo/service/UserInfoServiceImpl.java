@@ -32,7 +32,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 	 */
 	@Override
 	public Map<String, Object> update(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		int count=userinfoDao.update(map);
 		userinfoDao.updateMyTag(map);
 		map.put("display_name", map.get("realname"));

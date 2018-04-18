@@ -321,4 +321,37 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		rmap.put("returncode", "OK");
 		return rmap;
 	}
+
+	@Override
+	public String bookfeedback(Map<String, Object> map) {
+		String returncode="";
+		int count=readDetailDao.bookfeedback(map);
+		if(count>0){
+			returncode="OK";
+		   /* WriterUserTrendst wut = new WriterUserTrendst(map.get("user_id").toString(), 10, map.get("book_id").toString());
+		    wut.setDetail("提交了图书纠错", map.get("content").toString(),0,Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("line").toString()));
+		    personalService.saveUserTrendst(wut);//生成动态 图书纠错 
+*/		}
+		return returncode;
+	}
+
+	/**查询籍微视频
+	 * @param map  startnum:分页的开始的序号      size:分页的数据容量
+	 * @return
+	 */
+	@Override
+	public List<Map<String, Object>> queryMoreBookVidos(Map<String, Object> map) {
+
+		return readDetailDao.queryMoreBookVidos(map);
+	}
+
+	/**查询书籍微视频的总数
+	 * @param map
+	 * @return int
+	 */
+	@Override
+	public int queryMoreBookVidosCount(Map<String, Object> map) {
+
+		return readDetailDao.queryMoreBookVidosCount(map);
+	}
 }

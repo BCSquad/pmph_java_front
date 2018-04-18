@@ -521,8 +521,20 @@ ul li {
     width: 100%;
 }
 
-.part_1 span,a{
+.part_1 span{
 	float:left;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 24px;
+    letter-spacing: 1px;
+    color: #489299;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.part_1 a{
+    float:left;
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;

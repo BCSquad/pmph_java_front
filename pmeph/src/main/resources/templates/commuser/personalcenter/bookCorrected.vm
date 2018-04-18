@@ -3,7 +3,7 @@
 <script src="$!{contextpath}resources/commuser/personalcenter/PersonalHomeTSJC.js"></script>
 
 <input type="hidden" class="queryCondition" id="is_replied" value="$!{is_replied}">
-
+#if($!{selfLog}==true)
 <ul class="replytag_wrapper">
     <li id="replytag_all" class="replytag 
 	    #if(!$!{is_replied}||$!{is_replied}=='') 
@@ -17,7 +17,11 @@
 		#if($!{is_replied}==1)
 	    	active
 	    #end ">已回复</li>
+	    
+	<li class="whoTag active" tag="tsjc">我是主编</li>
+	<li class="whoTag" tag="wdjc">我是读者</li>    
 </ul>
+#end
 <div class="listContent">
 	#foreach($c in $!{List_map})
 		<div class="book_correct_unit">

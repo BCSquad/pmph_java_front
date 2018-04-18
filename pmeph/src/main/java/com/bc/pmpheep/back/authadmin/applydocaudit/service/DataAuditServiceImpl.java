@@ -332,6 +332,12 @@ public class DataAuditServiceImpl implements DataAuditService {
         return this.dataAuditDao.queryIntention(map);
     }
 
+    @Override
+    public void updPrintStatus(String id) {
+        this.dataAuditDao.updPrintStatus(id);
+
+    }
+
 	
 	
 }

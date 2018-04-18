@@ -328,12 +328,13 @@ public class GroupServiceImpl implements GroupService {
         if(null == map){
             return flag;
         }
-        if (((Boolean)map.get("is_founder")) ) {
-            flag = "您是这个小组的创建者";
-        }
         if(((Boolean)map.get("is_admin"))){
             flag = "您是这个小组的管理员";
         }
+        if (((Boolean)map.get("is_founder")) ) {
+            flag = "您是这个小组的创建者";
+        }
+        
         return flag;
     }
 

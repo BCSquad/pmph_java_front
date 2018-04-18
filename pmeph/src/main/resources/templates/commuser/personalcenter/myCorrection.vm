@@ -17,6 +17,9 @@
 		#if($!{is_replied}==1)
 	    	active
 	    #end ">已审核</li>
+	    
+	<li class="whoTag" tag="tsjc">我是主编</li>
+	<li class="whoTag active" tag="wdjc">我是读者</li>    
 </ul>
 #end
 <div class="listContent">
