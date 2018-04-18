@@ -123,9 +123,9 @@
                 </td>
                 <td>
                   <div  style="width: 400px">
-                       <label class="require">传真</label>
+                       <label >传真</label>
                        <div class="input-wrapper">
-                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="传真不能为空"  maxlength="20" onblur="javascript:LengthLimit(this,50);"
+                          <input class="sxy-txt " data-valid="isNonEmpty"  data-error="传真不能为空"  maxlength="20" onblur="javascript:LengthLimit(this,50);"
                            placeholder="填写传真" type="text" id="fax" name="fax" value="${map.fax }"/>
                        </div>
                   </div>
@@ -223,7 +223,7 @@
                 </td>
                 <td>
                 <div  style="width: 400px;">
-                    <label >所属机构</label>
+                    <label >申报单位</label>
 	                <div class="input-wrapper">
                           <input class="sxy-txt " data-valid="isNonEmpty" disabled="disabled"  type="text" id="org_id" name="org_id" value="${map.org_name }"/>
                       </div> 
