@@ -218,6 +218,31 @@ public class ReadDetailController extends BaseController{
 	}
 	
 	/**
+	 * 新增图书纠错
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/bookfeedback")
+	@ResponseBody
+	public String bookfeedback(HttpServletRequest request){
+		String returncode="";
+		Map<String, Object> map = new HashMap<String, Object>();
+		String book_id=request.getParameter("book_id");
+		String content=request.getParameter("content");
+		if(StringUtils.isEmpty(book_id)||
+			StringUtils.isEmpty(content)){
+			returncode="NO";
+		}else{
+			Map<String, Object> user=getUserInfo();
+			map.put("user_id", user.get("id"));
+			map.put("book_id", book_id);
+			map.put("content", content);
+			returncode=readDetailService.bookfeedback(map);
+		}
+		return returncode;
+	}
+	
+	/**
 	 * 根据图书ID新增评论
 	 * @param request
 	 * @return map

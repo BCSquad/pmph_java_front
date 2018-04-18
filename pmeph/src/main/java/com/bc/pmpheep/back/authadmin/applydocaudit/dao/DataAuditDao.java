@@ -119,4 +119,7 @@ public interface DataAuditDao {
 			//内容意向表情况
 			public Map<String,Object> queryIntention(Map<String, Object> map);
 
+			//打印状态改变
+			void updPrintStatus(String id);
+
 }
