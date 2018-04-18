@@ -223,7 +223,7 @@
                 </td>
                 <td>
                 <div  style="width: 400px;">
-                    <label >所属机构</label>
+                    <label >申报单位</label>
 	                <div class="input-wrapper">
                           <input class="sxy-txt " data-valid="isNonEmpty" disabled="disabled"  type="text" id="org_id" name="org_id" value="${map.org_name }"/>
                       </div> 
