@@ -125,7 +125,7 @@
                 
                 <input type="hidden" id="proxy" value="${admininfo.proxy}"/>
                 <input type="hidden" id="sex" value="${admininfo.sex}"/>
-                <input type="hidden" id="handphone" value="${admininfo.handphone}"/>
+                <input type="hidden" id="telephone" value="${admininfo.telephone}"/>
                 <%-- <input type="hidden" id="postCode" value="${admininfo.postCode}"/> --%>
                 <input type="hidden" id="fax" value="${admininfo.fax}"/>
                 <!-- 已通过或已提交 全部输入框不可修改 -->
@@ -205,7 +205,7 @@
                                     <label class="require">手机</label>
                                     <div class="input-wrapper">
                                         <input ${(admininfo.progress!=1)?'class="txt required"':'class="txt" readonly="readonly"'}
-                                                style="width: 258px" type="text" id="telephone"
+                                                style="width: 258px" type="text" id="handphone"
                                                 value="${admininfo.handphone}"
                                                 data-valid="isNonEmpty||isMobile"
                                                 data-error="手机号码不能为空||请填写正确的电话格式"  maxLength="20"/>
