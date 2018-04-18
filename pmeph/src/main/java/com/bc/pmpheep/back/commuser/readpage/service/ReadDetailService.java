@@ -144,4 +144,11 @@ public interface ReadDetailService {
 	 * @param map
 	 */
 	Map<String, Object> updateCommentLong(Map<String, Object> map);
+	
+	/**
+	 * 读者反馈
+	 * @param map
+	 * @return
+	 */
+	String bookfeedback(Map<String, Object> map);
 }

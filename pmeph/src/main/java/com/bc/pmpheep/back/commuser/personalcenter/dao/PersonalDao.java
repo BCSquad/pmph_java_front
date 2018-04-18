@@ -292,4 +292,20 @@ public interface PersonalDao {
 	 */
 	int queryLikesc(@Param("id") String id,@Param("logUserId") String logUserId );
 
+	/**
+	 * 查询读者反馈列表
+	 * @param pageParameter
+	 * @return
+	 */
+	public List<Map<String, Object>> queryMyBookFeedBack(PageParameter<Map<String, Object>> pageParameter);
+
+	/**
+	 * 查询读者反馈总数
+	 * @param pageParameter
+	 * @return
+	 */
+	public Integer queryMyBookFeedBackCount(PageParameter<Map<String, Object>> pageParameter);
+	
+	
+
 }

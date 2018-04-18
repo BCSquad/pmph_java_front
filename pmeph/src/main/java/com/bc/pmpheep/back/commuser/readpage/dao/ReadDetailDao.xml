@@ -232,4 +232,9 @@
 		id=#{id} and bc.is_long =1 and bc.is_auth = 0
 	</update>
 	
+	<insert id="bookfeedback" parameterType="Map">
+		insert into book_user_feedback (book_id,user_id,content)
+		values(#{book_id},#{user_id},#{content})
+	</insert>
+	
 </mapper>

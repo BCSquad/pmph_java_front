@@ -271,4 +271,17 @@ public interface PersonalService {
 	 * @return
 	 */
 	public int listMyFavoritesCount(PageParameter<Map<String, Object>> pageParameter);
+
+	/**
+	 * 读者反馈列表查询
+	 * @param pageParameter
+	 * @return
+	 */
+	public List<Map<String, Object>> queryMyBookFeedBack(PageParameter<Map<String, Object>> pageParameter);
+	/**
+	 * 读者反馈总数查询
+	 * @param pageParameter
+	 * @return
+	 */
+	public int queryMyBookFeedBackCount(PageParameter<Map<String, Object>> pageParameter);
 }

@@ -636,7 +636,7 @@ function writeablut() {
 }
 
 //点击显示纠错弹窗
-function showup() {
+function showup(tag) {
     $.ajax({
         type: 'post',
         url: contextpath + 'readdetail/tologin.action',
@@ -644,7 +644,12 @@ function showup() {
         dataType: 'json',
         success: function (json) {
             if (json == "OK") {
-                $("#bookmistake").show();
+            	if (tag==1) { //纠错
+            		$("#bookmistake").show();
+				}else if(tag==2){ //反馈
+					$("#bookfeedback").show();
+				}
+                
             }
         }
     });
@@ -652,7 +657,8 @@ function showup() {
 
 //点击纠错弹窗隐藏
 function hideup() {
-    $("#bookmistake").hide();
+    $(".bookmistake").hide();
+    
 }
 
 //图书纠错
@@ -699,6 +705,45 @@ function correction() {
         }
     }
 
+}
+
+function bookfeedback(){
+	
+    if ($("#bookfeedbackform").validate('submitValidate')) {
+            content = $("#bookfeedback_content").val();
+            if (!Empty(content)) {//非空判断
+            	$(".btn").attr("disabled",true);
+                var json = {
+                    book_id: $("#book_id").val(),
+                    content: content
+                };
+                $.ajax({
+                    type: 'post',
+                    url: contextpath + 'readdetail/bookfeedback.action',
+                    data: json,
+                    async: false,
+                    dataType: 'json',
+                    success: function (json) {
+                        if (json == "OK") {
+                            window.message.success("数据已提交！");
+                            $("#bookfeedback").hide();
+                            $("#bookfeedback_content").val(null);
+                        } else {
+                            window.message.info("反馈内容不能为空！");
+                        }
+                    },
+                    complete:function(){
+                    	$(".btn").attr("disabled",false);
+                    }
+                });
+            } else {
+                window.message.info("反馈内容不能为空！");
+            }
+        
+    }
+
+
+	
 }
 
 //展开功能

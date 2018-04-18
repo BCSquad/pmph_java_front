@@ -179,4 +179,11 @@ public interface ReadDetailDao {
 	 * @param map
 	 */
 	void updateCommentLong(Map<String, Object> map);
+	
+	/**
+	 * 提交读者反馈
+	 * @param map
+	 * @return
+	 */
+	int bookfeedback(Map<String, Object> map);
 }
