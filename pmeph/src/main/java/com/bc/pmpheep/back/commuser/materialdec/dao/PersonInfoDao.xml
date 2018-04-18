@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.commuser.materialdec.dao.PersonInfoDao" >
+	<!-- 学习经历 -->
+	<select id="queryPerStu" resultType="java.util.Map" parameterType="java.util.Map">
+		select e.*, REPLACE(e.date_begin,'-','.') as dbegin,REPLACE(e.date_end,'-','.') as dend
+		from dec_edu_exp  e where e.user_id = #{user_id} ORDER BY e.sort
+	</select>
+	<insert id="insertPerStu" parameterType="java.util.Map">
+		insert into dec_edu_exp(user_id,school_name,major,degree,note,date_begin,date_end,sort)
+		  values(#{user_id},#{school_name},#{major},#{degree},#{note},#{date_begin},#{date_end},#{sort})
+	</insert>
+	<delete id="DelPerStu" parameterType="java.util.Map">
+		delete from dec_edu_exp where user_id = #{user_id}
+	</delete>
+	<!-- 工作经历 -->
+	<select id="queryPerWork" resultType="java.util.Map" parameterType="java.util.Map">
+		select e.*, REPLACE(e.date_begin,'-','.') as dbegin,REPLACE(e.date_end,'-','.') as dend
+		from dec_work_exp  e where e.user_id = #{user_id} ORDER BY e.sort
+	</select>
+	<insert id="insertPerWork" parameterType="java.util.Map">
+		insert into dec_work_exp(user_id,org_name,position,note,date_begin,date_end,sort)
+		  values(#{user_id},#{org_name},#{position},#{note},#{date_begin},#{date_end},#{sort})
+	</insert>
+	<delete id="DelPerWork" parameterType="java.util.Map">
+		delete from dec_work_exp where user_id = #{user_id}
+	</delete>
+	<!--教学经历-->
+	<select id="queryPerStea" resultType="java.util.Map" parameterType="java.util.Map">
+		select e.*, REPLACE(e.date_begin,'-','.') as dbegin,REPLACE(e.date_end,'-','.') as dend
+		from dec_teach_exp  e where e.user_id = #{user_id} ORDER BY e.sort
+	</select>
+	<insert id="insertPerStea" parameterType="java.util.Map">
+		insert into dec_teach_exp(user_id,school_name,subject,note,date_begin,date_end,sort)
+		  values(#{user_id},#{school_name},#{subject},#{note},#{date_begin},#{date_end},#{sort})
+	</insert>
+	<delete id="DelPerStea" parameterType="java.util.Map">
+		delete from dec_teach_exp where user_id = #{user_id}
+	</delete>
+	<!-- //作家学术 -->
+	<select id="queryPerZjxs" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_acade where user_id = #{user_id} ORDER BY sort 
+	</select>
+	<insert id="insertPerZjxs" parameterType="java.util.Map">
+		insert into dec_acade(user_id,org_name,rank,position,note,sort)
+		  values(#{user_id},#{org_name},#{rank},#{position},#{note},#{sort})
+	</insert>
+	<delete id="DelPerZjxs" parameterType="java.util.Map">
+		delete from dec_acade where user_id = #{user_id}
+	</delete>
+	<!--上版教材编辑-->
+	<select id="queryPerJcbj" resultType="java.util.Map" parameterType="java.util.Map">
+		select id,user_id,material_name,position,is_digital_editor*1 is_digital_editor,note,sort,publisher,publish_date,REPLACE(publish_date,'-','.') as  publishdate from dec_last_position where user_id = #{user_id} ORDER BY sort
+	</select>
+	<insert id="insertPerJcbj" parameterType="java.util.Map">
+		insert into dec_last_position(user_id,material_name,position,is_digital_editor,publisher,publish_date,note,sort)
+		  values(#{user_id},#{material_name},#{position},#{is_digital_editor},#{publisher},#{publish_date},#{note},#{sort})
+	</insert>
+	<delete id="DelPerJcbj" parameterType="java.util.Map">
+		delete from dec_last_position where user_id = #{user_id}
+	</delete>
+	<!-- 精品课程建设 -->
+	<select id="queryPerGjkcjs" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_course_construction where user_id = #{user_id} ORDER BY sort 
+	</select>
+	<insert id="insertPerGjkcjs" parameterType="java.util.Map">
+		insert into dec_course_construction(user_id,course_name,class_hour,type,note,sort)
+		  values(#{user_id},#{course_name},#{class_hour},#{type},#{note},#{sort})
+	</insert>
+	<delete id="DelPerGjkcjs" parameterType="java.util.Map">
+		delete from dec_course_construction where user_id = #{user_id}
+	</delete>
+	<!-- 作家主编国家级规划教材情况 -->
+	<select id="queryPerGjghjc" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_national_plan where user_id = #{user_id} ORDER BY sort 
+	</select>
+	<insert id="insertPerGjghjc" parameterType="java.util.Map">
+		insert into dec_national_plan(user_id,material_name,isbn,rank_text,note,sort)
+		  values(#{user_id},#{material_name},#{isbn},#{rank_text},#{note},#{sort})
+	</insert>
+	<delete id="DelPerGjghjc" parameterType="java.util.Map">
+		delete from dec_national_plan where user_id = #{user_id}
+	</delete>
+	<!-- 人卫社教材编写情况 -->
+	<select id="queryPerRwsjc" resultType="java.util.Map" parameterType="java.util.Map">
+		select id,user_id,material_name,rank,position,
+		is_digital_editor*1 is_digital_editor,publish_date,REPLACE(publish_date,'-','.') as publishdate,isbn,note,sort
+		 from dec_textbook_pmph where user_id = #{user_id}
+		  ORDER BY sort 
+	</select>
+	<insert id="insertPerRwsjc" parameterType="java.util.Map">
+		insert into dec_textbook_pmph(user_id,material_name,rank,position,publish_date,isbn,note,is_digital_editor,sort)
+		  values(#{user_id},#{material_name},#{rank},#{position},#{publish_date},#{isbn},#{note},#{is_digital_editor},#{sort})
+	</insert>
+	<delete id="DelPerRwsjc" parameterType="java.util.Map">
+		delete from dec_textbook_pmph where user_id = #{user_id}
+	</delete>
+	<!-- 其他社教材编写情况 -->
+	<select id="queryPerJcbx" resultType="java.util.Map" parameterType="java.util.Map">
+		select id,user_id,material_name,rank,position,
+		is_digital_editor*1 is_digital_editor, publisher,publish_date,REPLACE(publish_date,'-','.') as publishdate,isbn,note,sort
+		 from dec_textbook where user_id = #{user_id}
+		  ORDER BY sort 
+	</select>
+	<insert id="insertPerJcbx" parameterType="java.util.Map">
+		insert into dec_textbook(user_id,material_name,rank,position,publisher,publish_date,isbn,note,is_digital_editor,sort)
+		  values(#{user_id},#{material_name},#{rank},#{position},#{publisher},#{publish_date},#{isbn},#{note},#{is_digital_editor},#{sort})
+	</insert>
+	<delete id="DelPerJcbx" parameterType="java.util.Map">
+		delete from dec_textbook where user_id = #{user_id}
+	</delete>
+	<!-- //作家科研情况表 -->
+	<select id="queryPerZjkyqk" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_research where user_id = #{user_id} ORDER BY sort 
+	</select>
+	<insert id="insertPerZjkyqk" parameterType="java.util.Map">
+		insert into dec_research(user_id,research_name,approval_unit,award,note,sort)
+		  values(#{user_id},#{research_name},#{approval_unit},#{award},#{note},#{sort})
+	</insert>
+	<delete id="DelPerZjkyqk" parameterType="java.util.Map">
+		delete from dec_research where user_id = #{user_id}
+	</delete>
+	<!-- //个人成就 -->
+	<select id="queryPerAchievement" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from dec_achievement where user_id = #{user_id}  
+	</select>
+	<insert id="insertPerAchievement" parameterType="java.util.Map">
+		insert into dec_achievement(user_id,content)
+		  values(#{user_id},#{content})
+	</insert>
+	<update id="updatePerAchievement" parameterType="java.util.Map">
+		update dec_achievement set content = #{content} 
+			where user_id = #{user_id}
+	</update>
+	<delete id="DelPerAchievement" parameterType="java.util.Map">
+		delete from dec_achievement where user_id = #{user_id}
+	</delete>
+	<!-- //主编学术专著情况 -->
+	<select id="queryPerMonograph" resultType="java.util.Map" parameterType="java.util.Map">
+		select id,user_id,monograph_name,monograph_date,REPLACE(monograph_date,'-','.') as monographdate,is_self_paid*1 is_self_paid,publisher,publish_date,REPLACE(publish_date,'-','.') as publishdate,note,sort from dec_monograph where user_id = #{user_id} ORDER BY sort
+	</select>
+	<insert id="insertPerMonograph" parameterType="java.util.Map">
+		insert into dec_monograph(user_id,monograph_name,monograph_date,is_self_paid,publisher,publish_date,note,sort)
+		  values(#{user_id},#{monograph_name},#{monograph_date},#{is_self_paid},#{publisher},#{publish_date},#{note},#{sort})
+	</insert>
+	<delete id="DelPerMonograph" parameterType="java.util.Map">
+		delete from dec_monograph where user_id = #{user_id}
+	</delete>
+	<!-- //出版行业获奖情况 -->
+	<select id="queryPerPublish" resultType="java.util.Map" parameterType="java.util.Map">
+		select r.*, REPLACE(r.reward_date ,'-','.') as rewarddate  from dec_publish_reward  r where r.user_id = #{user_id} ORDER BY r.sort
+
+	</select>
+	<insert id="insertPerPublish" parameterType="java.util.Map">
+		insert into dec_publish_reward(user_id,reward_name,award_unit,reward_date,note,sort)
+		  values(#{user_id},#{reward_name},#{award_unit},#{reward_date},#{note},#{sort})
+	</insert>
+	<delete id="DelPerPublish" parameterType="java.util.Map">
+		delete from dec_publish_reward where user_id = #{user_id}
+	</delete>
+	<!-- //SCI论文投稿及影响因子 -->
+	<select id="queryPerSci" resultType="java.util.Map" parameterType="java.util.Map">
+		select s.*,REPLACE(s.publish_date,'-','.') as publishdate from dec_sci  s where s.user_id = #{user_id} ORDER BY s.sort
+	</select>
+	<insert id="insertPerSci" parameterType="java.util.Map">
+		insert into dec_sci(user_id,paper_name,journal_name,factor,publish_date,note,sort)
+		  values(#{user_id},#{paper_name},#{journal_name},#{factor},#{publish_date},#{note},#{sort})
+	</insert>
+	<delete id="DelPerSci" parameterType="java.util.Map">
+		delete from dec_sci where user_id = #{user_id}
+	</delete>
+	<!-- //临床医学获奖情况 -->
+	<select id="queryPerClinicalreward" resultType="java.util.Map" parameterType="java.util.Map">
+		select r.*,REPLACE(r.reward_date,'-','.') as rewarddate from dec_clinical_reward  r where r.user_id = #{user_id} ORDER BY r.sort
+	</select>
+	<insert id="insertPerClinicalreward" parameterType="java.util.Map">
+		insert into dec_clinical_reward(user_id,reward_name,award_unit,reward_date,note,sort)
+		  values(#{user_id},#{reward_name},#{award_unit},#{reward_date},#{note},#{sort})
+	</insert>
+	<delete id="DelPerClinicalreward" parameterType="java.util.Map">
+		delete from dec_clinical_reward where user_id = #{user_id}
+	</delete>
+	<!-- //学术荣誉授予情况 -->
+	<select id="queryPerAcadereward" resultType="java.util.Map" parameterType="java.util.Map">
+		select r.*,REPLACE(r.reward_date,'-','.') as rewarddate from dec_acade_reward r where r.user_id = #{user_id} ORDER BY r.sort
+	</select>
+	<insert id="insertPerAcadereward" parameterType="java.util.Map">
+		insert into dec_acade_reward(user_id,reward_name,award_unit,reward_date,note,sort)
+		  values(#{user_id},#{reward_name},#{award_unit},#{reward_date},#{note},#{sort})
+	</insert>
+	<delete id="DelPerAcadereward" parameterType="java.util.Map">
+		delete from dec_acade_reward where user_id = #{user_id}
+	</delete>
+</mapper>
