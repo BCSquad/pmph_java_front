@@ -40,7 +40,7 @@ public class writerListExcelImpl implements ExcelDownloadService {
 
     @Override
     public String[][] getColTitle() {
-        return new String[][]{{"用户编码","username"},{"昵称","nickname"},{"真实姓名","realname"},{"职务","position"},{"职称","title"},{"手机","handphone"}};
+        return new String[][]{{"姓名","realname"},{"性别","sex"},{"手机号","handphone"},{"邮箱","email"},{"工作单位","workplace"},{"职务","position"},{"职称","title"}};
     }
 
     @Override
@@ -72,12 +72,19 @@ public class writerListExcelImpl implements ExcelDownloadService {
         List<WriterUser>  exportWriterUser = writerUserDao.getOrg(pageParameter);
         for(WriterUser writer:exportWriterUser){
             Map<String, Object> map = new HashMap<String, Object>();
-            map.put("username",writer.getUsername());
-            map.put("nickname",writer.getNickname());
-            map.put("realname",writer.getRealname());
-            map.put("position",writer.getPosition());
-            map.put("title",writer.getTitle());
-            map.put("handphone",writer.getHandphone());
+            map.put("realname",writer.getRealname());//姓名
+            if(writer.getSex()==1){
+                map.put("sex","男");//性别
+            }else if (writer.getSex()==2){
+                map.put("sex","女");//性别
+            }else {
+                map.put("sex","保密");//性别
+            }
+            map.put("handphone",writer.getHandphone());//手机号
+            map.put("email",writer.getEmail());//邮箱
+            map.put("workplace",writer.getWorkplace());//工作单位
+            map.put("position",writer.getPosition());//职务
+            map.put("title",writer.getTitle());//职称
             returnData.add(map);
         }
         return returnData;

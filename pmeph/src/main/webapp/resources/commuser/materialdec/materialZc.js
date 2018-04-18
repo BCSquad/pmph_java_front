@@ -105,7 +105,7 @@ function upload(id){
         done: function (filename, fileid) {
             $("#fjxq_"+id).css("display","none");
             $("#fileNameDiv_"+id).empty(); //清楚内容
-            $("#fileNameDiv_"+id).append("<span><a href='javascript:' class='filename'  onclick='downLoadProxy("+fileid+")'>"+filename+"</a></span>");
+            $("#fileNameDiv_"+id).append("<span><div class=\"filename\"><a href='javascript:' class='filename'  onclick='downLoadProxy("+fileid+")' title='\"+filename+\"'>"+filename+"</a></div></span>");
             $("#fileNameDiv_"+id).css("display","inline");
             $("#syllabus_id_"+id).val(fileid);
             $("#syllabus_name_"+id).val(filename);
