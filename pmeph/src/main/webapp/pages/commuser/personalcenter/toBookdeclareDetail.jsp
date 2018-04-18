@@ -49,6 +49,7 @@
 								${topicMap.bookname}
 							</td>
 							<td><span >读者对象：&emsp;&emsp;</span>
+								
 								<c:if test="${topicMap.reader=='0'}">医务工作者</c:if>
 								<c:if test="${topicMap.reader=='1'}">医学院校师生</c:if>
 								<c:if test="${topicMap.reader=='2'}">大众</c:if>
@@ -60,6 +61,7 @@
 								<%--<span class="dateclear"onclick="cleadate()"></span>--%>
 							</td>
 							<td><span >选题来源：&emsp;&emsp;</span>
+								
 								<c:if test="${topicMap.source=='0'}">社策划</c:if>
 								<c:if test="${topicMap.source=='1'}">编辑策划</c:if>
 								<c:if test="${topicMap.source=='2'}">修订</c:if>
@@ -81,6 +83,7 @@
 							</td>
 							<td><span>级&emsp;&emsp;别：&emsp;&emsp;</span>
 								<%--<div class="tsjb">&emsp;--%>
+								
 								<c:if test="${topicMap.rank=='0'}">低</c:if>
 								<c:if test="${topicMap.rank=='1'}">中</c:if>
 								<c:if test="${topicMap.rank=='2'}">高</c:if>

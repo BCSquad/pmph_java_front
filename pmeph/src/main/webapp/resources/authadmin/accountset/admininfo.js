@@ -47,12 +47,7 @@ $(function () {
     });
     function saveobject() {
     }
-    /* $('form').on('submit', function (event) {
-     alert(111);
-     //save();
-     /!* event.preventDefault();
-     $(this).validate('submitValidate'); //return boolean;*!/
-     });*/
+
 })
 
 
@@ -67,13 +62,10 @@ function getform(){
     json.title=$("input[name='title']").val();
     json.handphone=$("#handphone").val();
     json.postCode=$("#postCode").val();
-    json.email=$("#email").val();$("#tesetSelect").find("option:selected").text()
+    json.email=$("#email").val();
     json.fax=$("#fax").val();
     json.address=$("#address").val();
-    /*json.birthday=$("#birthday").val();
-    json.experience=$("#experience").val();
-    json.workplace=$("#workplace").val();*/
-    console.log(json);
+
     return json;
 
 }
@@ -85,12 +77,9 @@ function save(){
             type:'post',
             url:contextpath+'admininfocontroller/updateorguser.action',
             async:false,
-           /* contentType: 'application/json',*/
             dataType:'json',
-            /*data:JSON2.stringify(getform()),*/
             data:getform(),
             success:function(code){
-               
                 if (code=="success"){
 	                message.success("保存成功");
 	                $("#sxy-img1").attr("src",contextpath+"file/download/"+fileid+".action");

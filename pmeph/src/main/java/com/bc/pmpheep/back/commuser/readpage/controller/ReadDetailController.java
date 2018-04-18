@@ -218,6 +218,31 @@ public class ReadDetailController extends BaseController{
 	}
 	
 	/**
+	 * 新增图书纠错
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/bookfeedback")
+	@ResponseBody
+	public String bookfeedback(HttpServletRequest request){
+		String returncode="";
+		Map<String, Object> map = new HashMap<String, Object>();
+		String book_id=request.getParameter("book_id");
+		String content=request.getParameter("content");
+		if(StringUtils.isEmpty(book_id)||
+			StringUtils.isEmpty(content)){
+			returncode="NO";
+		}else{
+			Map<String, Object> user=getUserInfo();
+			map.put("user_id", user.get("id"));
+			map.put("book_id", book_id);
+			map.put("content", content);
+			returncode=readDetailService.bookfeedback(map);
+		}
+		return returncode;
+	}
+	
+	/**
 	 * 根据图书ID新增评论
 	 * @param request
 	 * @return map
@@ -506,6 +531,42 @@ public class ReadDetailController extends BaseController{
 		map.put("title", request.getParameter("title"));
 		Map<String, Object> rmap = readDetailService.updateCommentLong(map);
 		return rmap;
+	}
+
+	/**
+	 * 更多微视频
+	 */
+	@RequestMapping("/morebookvideo")
+	public ModelAndView getMoreBookVideo(HttpServletRequest req){
+		Map<String,Object> map=new HashMap<String, Object>();
+		Map<String,Object> param=new HashMap<String, Object>();
+		String pagenum=req.getParameter("pagenum");
+		String pagesize=req.getParameter("pagesize");
+		int startnum=0;
+		int size=6;
+		int mpagenum=1;
+		if(pagenum !=null && pagesize!=null){
+			mpagenum=Integer.parseInt(pagenum);
+			size=Integer.parseInt(pagesize);
+			startnum=(mpagenum-1)*size;
+		}
+		param.put("startnum", startnum);
+		param.put("size", size);
+		param.put("id", req.getParameter("id"));//图书id
+		List<Map<String, Object>> videolist = readDetailService.queryMoreBookVidos(param);
+		int total=readDetailService.queryMoreBookVidosCount(param);
+		int pagetotal=total/size;
+		if(total%size!=0){
+			pagetotal=pagetotal+1;
+		}
+
+		map.put("id", req.getParameter("id"));
+		map.put("videolist", videolist);
+		map.put("pagenum", mpagenum);
+		map.put("pagesize", size);
+		map.put("pagetotal", pagetotal);
+		map.put("total", total);
+		return new ModelAndView("commuser/readpage/morebookvideos",map);
 	}
 	
 	

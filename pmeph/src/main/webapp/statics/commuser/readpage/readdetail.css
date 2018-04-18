@@ -875,6 +875,17 @@
     margin-left: 15px;
 }
 
+.feedback_pic {
+    background-image: url("../../image/css_sprites.png");
+    background-position: -373px -262px;
+    background-repeat: no-repeat;
+    height: 22px;
+    width: 22px;
+    float: left;
+    margin-top: 5px;
+    margin-left: 15px;
+}
+
 .play {
     background-image: url("../../image/css_sprites.png");
     background-position: -220px -273px;

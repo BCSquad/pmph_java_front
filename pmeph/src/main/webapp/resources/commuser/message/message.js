@@ -56,8 +56,6 @@ function getMessage(is_read,id1,id2){
                 });
             }else{
                 str +=" <div class=\"no-more\">\n" +
-                    "\t                    <img src='"+contextpath+"/statics/image/aaa4.png"+"'>\n" +
-                    "\t                    <span>木有内容呀~~</span>\n" +
                     "               \t\t</div>";
             }
             $("#messageTable").append(str);

@@ -50,8 +50,9 @@
 								<input type="hidden" name="user_id" value="${userMap.id}"/>
 								<input type="hidden" name="topic_id" value="${topicMap.id}"/>
 							</td>
-							<td><span ><span class="btbs1">*</span>读者对象：&emsp;&emsp;</span>
+							<td><span ><span class="btbs">*</span>读者对象：&emsp;&emsp;</span>
 								<select name="reader" id="dzdx" class="dzdx">
+									<option value="">-请选择-</option>
 									<option value="0">医务工作者</option>
 									<option value="1">医学院校师生</option>
 									<option value="2">大众</option>
@@ -63,8 +64,9 @@
 								<input class="cg_input" name="deadline" id="deadline" calendar format="'yyyy-mm-dd'" value="" placeholder=""/>
 								<%--<span class="dateclear"onclick="cleadate()"></span>--%>
 							</td>
-							<td><span ><span class="btbs1">*</span>选题来源：&emsp;&emsp;</span>
+							<td><span ><span class="btbs">*</span>选题来源：&emsp;&emsp;</span>
 								<select name="source" id="xzly" class="xzly">
+									<option value="">-请选择-</option>
 									<option value="0">社策划</option>
 									<option value="1">编辑策划</option>
 									<option value="2">修订</option>
@@ -186,6 +188,7 @@
 							</td>
 							<td><span><span class="btbs1">*</span>性&emsp;&emsp;别：&emsp;&emsp;</span>
 								<select name="sex" id="sex">
+									<option value="">-请选择-</option>
 									<option value="0">男</option>
 									<option value="1">女</option>
 								</select>
@@ -202,6 +205,7 @@
 							</td>
 							<td><span><span class="btbs1">*</span>专业职务：&emsp;&emsp;</span>
 								<select name="position_profession" id="position_profession">
+									<option value="">-请选择-</option>
 									<option value="0">中科院院士</option>
 									<option value="1">工程院院士</option>
 									<option value="2">博导</option>
@@ -214,6 +218,7 @@
 							</td>
 							<td><span><span class="btbs1">*</span>学&emsp;&emsp;历：&emsp;&emsp;</span>
 								<select name="degree" id="degree">
+									<option value="">-请选择-</option>
 									<option value="0">博士</option>
 									<option value="1">硕士</option>
 									<option value="2">学士</option>
@@ -374,10 +379,11 @@
 						</thead>
 						<tbody>
 						<tr id="sbbz_1">
-							<td><input class="sb_input" style="width: 120px;" id="write_realname1" name="write_realname"  maxlength="40" value=""/></td>
+							<td><input class="sb_input" style="width: 120px;" id="write_realname" name="write_realname"  maxlength="40" value=""/></td>
 							<td>
 								<select id="write_sex" name="write_sex">
-									<option value="0" selected="selected">男</option>
+									<option value="" >-请选择-</option>
+									<option value="0" >男</option>
 									<option value="1">女</option>
 								</select>
 							</td>
@@ -387,7 +393,8 @@
 							<td><input class="sb_input" style="width: 120px;" name="write_phone" placeholder="电话" value="" id="write_phone" maxlength="36"/></td>
 							<td>
 								<select id="write_degree" name="write_degree">
-									<option value="0" selected="selected">博士</option>
+									<option value="">-请选择-</option>
+									<option value="0">博士</option>
 									<option value="1">硕士</option>
 									<option value="2">学士</option>
 									<option value="3">其他</option>
@@ -395,7 +402,7 @@
 							</td>
 							<td><input class="sb_input" style="width: 180px;" id="write_position"  name="write_position" placeholder="职务职称" value="" maxlength="36"/></td>
 							<td><input class="sb_input" style="width: 280px;" id="write_workplace" name="write_workplace" placeholder="工作单位" value="" maxlength="36"/>
-								<input type="hidden" name="checkbzqk" value="write_realname,write_price,write_phone,write_position,write_workplace"/>
+								<input type="hidden" name="checkbzqk" value="write_realname,write_sex,write_price,write_phone,write_degree,write_position,write_workplace"/>
 							</td>
 							<td><div class="add_div"><img class="add_img" src="${ctx}/statics/image/del.png" onclick="del_tr('sbbz_1')"></div></td>
 						</tr>
@@ -441,7 +448,7 @@
 							<td><input class="sb_input" style="width: 80px;" id="similar_price" name="similar_price"  maxlength="20" value=""/></td>
 							<td><input class="sb_input" style="width: 130px;" id="similar_publish_date" name="similar_publish_date"  calendar format="'yyyy-mm-dd'" value=""/></td>
 							<input type="hidden" name="checkbzqk" value="similar_bookname,similar_edition,similar_author,similar_publisher,similar_print_number,similar_price,similar_publish_date"/>
-							<td><div class="add_div"><img class="add_img" src="${ctx}/statics/image/del.png" onclick="del_tr('sbbz_1')"></div></td>
+							<td><div class="add_div"><img class="add_img" src="${ctx}/statics/image/del.png" onclick="del_tr('sbbz_2')"></div></td>
 						</tr>
 						</tbody>
 					</table>

@@ -304,6 +304,22 @@ public class PersonalCenterController extends BaseController {
 			/* mv.addObject("List_map",List_map); */// 测试
 			mv.addObject("html", html);
 			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
+		}else if ("dzfk".equals(pagetag)) { // 读者反馈
+			// 从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
+			// 设定条件名数组
+			String[] names = { "is_auth" };
+			String[] namesChi = {};
+			queryConditionOperation(names, namesChi, request, mv, paraMap, vm_map);
+			pageParameter.setParameter(paraMap);
+
+			List<Map<String, Object>> List_map = personalService.queryMyBookFeedBack(pageParameter);
+			count = personalService.queryMyBookFeedBackCount(pageParameter);
+			// 分页数据代码块
+			String html = this.mergeToHtml("commuser/personalcenter/myBookFeedBack.vm", contextpath, pageParameter,
+					List_map, vm_map);
+			/* mv.addObject("List_map",List_map); */// 测试
+			mv.addObject("html", html);
+			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
 		}else {
 
 		}

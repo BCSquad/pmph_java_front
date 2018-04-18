@@ -104,6 +104,7 @@
             <div class="left_communions_files">
                 <span id="commnions_top" class="clicked" onclick="ChangeDiv('commnions')">互动交流</span>
                 <span id="filesgx_top" class="clickbefore" style="position: relative" onclick="ChangeDiv('filesgx')">文件共享</span>
+            	<!-- <span id="memberManager_top" class="clickbefore" style="position: relative" onclick="ChangeDiv('memberManager')">成员管理</span> -->
             </div>
             <div class="left-content">
                 <div class="_show" id="commnions">
