@@ -123,15 +123,12 @@ public class AdminInfoController extends BaseController {
         orgUser.setId(userId);
         String code ="";
         if (StringUtils.isEmpty(orgUser.getPosition())||
-        	StringUtils.isEmpty(orgUser.getTelephone())||
+        	StringUtils.isEmpty(orgUser.getRealName())||
         	StringUtils.isEmpty(orgUser.getHandphone())||
         	StringUtils.isEmpty(orgUser.getPostCode())||
         	StringUtils.isEmpty(orgUser.getEmail())||
-        	StringUtils.isEmpty(orgUser.getFax())||	
+       	    StringUtils.isEmpty(orgUser.getSex())||
         	StringUtils.isEmpty(orgUser.getId())||	
-        	/*StringUtils.isEmpty(orgUser.getBirthday())||
-        	StringUtils.isEmpty(orgUser.getExperience())||	
-        	StringUtils.isEmpty(orgUser.getWorkplace())||	*/
         	StringUtils.isEmpty(orgUser.getAddress())){
         	
         	code="fail";

@@ -17,17 +17,12 @@
             <if test="realName!=null and realName!=''">realname=#{realName},</if>
             <if test="sex!=null and sex!=''">sex=#{sex},</if>
             <if test="position!=null and position!=''">position=#{position},</if>
-            <if test="telephone!=null and telephone!=''">telephone=#{telephone},</if>
             <if test="title!=null and title!=''">title=#{title},</if>
             <if test="handphone!=null and handphone!=''">handphone=#{handphone},</if>
             <if test="postCode!=null and postCode!=''">postcode=#{postCode},</if>
             <if test="email!=null and email!=''">email=#{email},</if>
-            <if test="fax!=null and fax!=''">fax=#{fax},</if>
             <if test="proxy !=null and proxy !=''">proxy=#{proxy},</if>
             <if test='isProxyUpload =="1" '>is_proxy_upload=#{isProxyUpload},</if>
-            <!-- <if test="birthday!=null">birthday = #{birthday},</if>
-            <if test="experience!=null and experience!=''">experience=#{experience},</if>
-            <if test="workplace!=null and workplace!=''">workplace=#{workplace},</if> -->
             <if test="address!=null and address!=''">address=#{address},</if>
             progress=0
         </set>
