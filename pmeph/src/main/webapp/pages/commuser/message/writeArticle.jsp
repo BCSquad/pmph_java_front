@@ -62,6 +62,16 @@
             <input type="hidden" id="UEContent" name="UEContent" value=""/>
         </div>
     </div>
+    
+    <div class="sxy-div-content2">
+        <div style="height:25px;"></div>
+        <font class="sxy-font1">作者姓名：</font>
+    </div>
+    <div class="sxy-div-content2">
+        <%-- <input type="hidden" name="author_name" id="author_name" value="${author_name }"> --%>
+        <input type="text" class="sxy-txt2" id="author_name" name="author_name" placeholder="请输入文章作者姓名"
+               onblur="if($('#author_name').val().length>40){$('#author_name').val($('#author_name').val().slice(0,39))};" value="${author_name}"/>
+    </div>
 
     <div class="sxy-div-content upload-image">
         <button disabled="disabled"> 上传封面图片</button>

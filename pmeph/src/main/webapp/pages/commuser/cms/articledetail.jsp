@@ -208,7 +208,7 @@
                 	<img src="${ctx}/image/${Art.avatar}.action"  height="60"
                                                               width="60"></c:if>
 	    			
-	    			<span>作者：${Art.realname}</span>
+	    			<span>作者：${Art.author_name}</span>
 	    		</div>
 	    		<div class="right_1" style=" position:relative;top:20px;">
 	    			<div class="right_div1">

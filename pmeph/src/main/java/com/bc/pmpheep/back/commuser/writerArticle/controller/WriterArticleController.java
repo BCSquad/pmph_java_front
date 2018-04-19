@@ -75,6 +75,8 @@ public class WriterArticleController extends BaseController{
 	    Map<String, Object> map1 = writerArticleServiceImpl.queryWriteArticleInfo(paraMap);
 		if (map1!=null) {
 			map2.putAll(map1);
+		}else{
+			map2.put("author_name", user.get("realname"));
 		}
 		
 		if(id!=null&&!"".equals(id)){
@@ -92,6 +94,8 @@ public class WriterArticleController extends BaseController{
 			// TODO: handle exception
 		}
 		
+		
+		
 		return new ModelAndView("/commuser/message/writeArticle",map2);
 	}
 	/**
@@ -105,6 +109,7 @@ public class WriterArticleController extends BaseController{
 		String UEContent = request.getParameter("UEContent");
 		String cover = request.getParameter("image");
 		String btnType = request.getParameter("btnType");
+		String author_name = request.getParameter("author_name");
 		String coverName = request.getParameter("imageName");
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		String flag = "0";
@@ -143,6 +148,7 @@ public class WriterArticleController extends BaseController{
 				map.put("coverName",coverName); //封面mdb 的名字
 				map.put("author_type",2); //作者类型
 				map.put("author_id",uid); //作者id
+				map.put("author_name",author_name); //作者姓名
 				map.put("is_staging",is_staging); //是否暂存
 				map.put("path",0); //根路径
 				Map<String, Object> insertMap = writerArticleServiceImpl.insertWriteArticle(map,UEContent);
@@ -172,6 +178,7 @@ public class WriterArticleController extends BaseController{
 	public Map<String,Object> updateIsStaging(HttpServletRequest request){
 		String titleValue = request.getParameter("titleValue");
 		String UEContent = request.getParameter("UEContent");
+		String author_name = request.getParameter("author_name");
 		String cover = request.getParameter("image");
 		String coverName = request.getParameter("imageName");
 		UEContent = UEContent.replaceAll("\r\n", "");
@@ -201,6 +208,7 @@ public class WriterArticleController extends BaseController{
 			map.put("parent_id", 0); //上级id
 			map.put("category_id",cmsCategoryConfig.getId("医学随笔")); //内容类型 >0 非评论
 			map.put("title",titleValue); //内容标题  
+			map.put("author_name",author_name); //作者姓名
 			map.put("cover",cover); //封面mdb 的id
 			map.put("coverName",coverName); //封面mdb 的名字
 			map.put("author_type",2); //作者类型
