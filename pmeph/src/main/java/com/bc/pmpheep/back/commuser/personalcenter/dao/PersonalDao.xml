@@ -871,9 +871,9 @@
 		parameterType="java.util.Map">
 		select
 		sqa.option_id FROM survey_question_answer  sqa
-		JOIN
+		inner JOIN
 		survey_question_option sqo on sqo.id=sqa.option_id
-		JOIN survey_question sq ON sq.id=sqa.question_id
+		inner JOIN survey_question sq ON sq.id=sqa.question_id
 		where
 		sqa.question_id=#{questionId} and sqa.user_id=#{logUserId} and sq.type=1
 	</select>
@@ -882,7 +882,7 @@
 	<select id="getCheckAnswers" resultType="java.util.Map"
 		parameterType="java.util.Map"  >
 		select sqa.option_id FROM survey_question_answer sqa
- 		JOIN survey_question sq ON sqa.question_id=sq.id
+ 		inner JOIN survey_question sq ON sqa.question_id=sq.id
 		where
 		sqa.question_id=#{questionId} and sqa.user_id=#{logUserId}  and sq.type=2
 	</select>
