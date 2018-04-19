@@ -55,7 +55,7 @@
 			    					<span>反馈时间：  $!{o.gmt_create}
 			    						#if($!{selfLog}==true)
 				    						#if(!$!{o.is_auth})
-				    							<span class="myCorrectStatus toReply">未审核</span>
+				    							<span class="myCorrectStatus toReply">待审核</span>
 				    						#elseif($!{o.is_auth})
 				    							<span class="myCorrectStatus yes">已审核</span>
 				    						#end
