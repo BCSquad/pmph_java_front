@@ -130,6 +130,7 @@
 		when  cc.author_type =2
 		then wu.avatar
 		else 'DEFAULT' end as avatar,
+		cc.author_name,
 		cc.author_id
 		from cms_content cc
 		left join pmph_user pu on pu.id=cc.author_id

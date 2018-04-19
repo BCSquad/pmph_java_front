@@ -15,7 +15,11 @@
     <update id="update" parameterType="java.util.Map">
         UPDATE writer_user
         <set>
-            <if test="realname !=null and realname !=''">realname=#{realname}, writername=#{realname},</if>
+            realname=#{realname}, writername=#{realname},
+            experience=#{experience},fax=#{fax},sex=#{sex},title=#{title},handphone=#{handphone},birthday=#{birthday},
+            postcode=#{postcode},email=#{email},telephone=#{telephone},position =#{position},address=#{address},
+            note=#{note},signature=#{signature},workplace=#{workplace},avatar=#{avatar}
+            <!--<if test="realname !=null and realname !=''">realname=#{realname}, writername=#{realname},</if>
             <if test="experience !=null and experience !=''"> experience=#{experience},</if>
             <if test="fax !=null and fax !=''"> fax=#{fax},</if>
             <if test="sex !=null and sex !=''"> sex=#{sex},</if>
@@ -30,7 +34,7 @@
             <if test="note !=null and note !=''">note=#{note},</if>
             <if test="signature !=null and signature !=''">signature=#{signature},</if>
             <if test="workplace !=null and workplace !=''">workplace=#{workplace},</if>
-            <if test="avatar !=null and avatar !=''">avatar=#{avatar}</if>
+            <if test="avatar !=null and avatar !=''">avatar=#{avatar}</if>-->
         </set>
         WHERE id=#{id}
     </update>

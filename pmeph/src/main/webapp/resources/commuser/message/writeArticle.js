@@ -29,6 +29,11 @@ function writeArticleValidate() {
         //$('input[type="submit"]').prop('disabled', true);
         return false;
 	}
+    if ($("#author_name").val().length == 0) {
+    	window.message.warning("请输入作者姓名");
+        //$('input[type="submit"]').prop('disabled', true);
+        return false;
+	}
 
     return true;
 }
