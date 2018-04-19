@@ -18,6 +18,7 @@
 		resultType="java.util.Map">
 		select
 		t.id,
+		t.author_name,
 		case
 		when t.author_type =1
 		then pu.realname

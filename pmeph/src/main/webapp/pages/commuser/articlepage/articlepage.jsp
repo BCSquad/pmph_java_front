@@ -54,7 +54,7 @@
                 				</c:if>
                             </div>
                             <div  class="msg">
-                                <span  class="name" style="cursor:pointer;" onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?userId=${list.userId }'">${list.realname}</span>
+                                <span  class="name" style="cursor:pointer;" onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?userId=${list.userId }'">${list.author_name}</span>
                                 <span  class="name">${list.auth_date}</span>
                             </div>
                         </div>
