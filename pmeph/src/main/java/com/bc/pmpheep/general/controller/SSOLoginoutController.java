@@ -5,6 +5,7 @@ import com.bc.pmpheep.back.util.Const;
 import com.bc.pmpheep.back.util.MD5;
 import com.bc.pmpheep.general.service.UserService;
 import com.bc.pmpheep.utils.HttpRequestUtil;
+import com.zving.zas.client.*;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
@@ -32,6 +33,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -120,6 +122,9 @@ public class SSOLoginoutController extends BaseController {
             builder.append(name + "=" + (values.length > 0 ? values[0] : "") + "&");
         }
 
+
+
+
         if (ticket != null && !ticket.equals("")) {
             ServiceTicketValidator stv = new ServiceTicketValidator();
             String data = request.getParameter("UserData");
@@ -141,6 +146,7 @@ public class SSOLoginoutController extends BaseController {
             logger.warn("错误的回调参数：" + builder);
             response.sendRedirect(request.getContextPath() + "/");
         }
+
 
 /*
 
@@ -193,115 +199,114 @@ public class SSOLoginoutController extends BaseController {
 */
 
 
-            List<Map<String, Object>> types = userService.getUserType(username);
-            String usertype = "1";
-            if (types.size() == 0) {
-                usertype = "1";
-            } else {
-                usertype = MapUtils.getString(types.get(0), "type", "1");
-            }
+        List<Map<String, Object>> types = userService.getUserType(username);
+        String usertype = "1";
+        if (types.size() == 0) {
+            usertype = "1";
+        } else {
+            usertype = MapUtils.getString(types.get(0), "type", "1");
+        }
 
-            Map<String, Object> user = userService.getUserInfo(username, usertype);
+        Map<String, Object> user = userService.getUserInfo(username, usertype);
 
-            if (user == null) {
+        if (user == null) {
 
-                //新建用户信息
+            //新建用户信息
 
-                userService.addNewUser(username, usertype);
-                user = userService.getUserInfo(username, usertype);
-                // throw new RuntimeException("获取用户帐号不存在");
-            }
+            userService.addNewUser(username, usertype);
+            user = userService.getUserInfo(username, usertype);
+            // throw new RuntimeException("获取用户帐号不存在");
+        }
 
-            //接入微信登录：此处需要考虑微信SSO登录的情况，如果是微信来的请求把请求转发给微信服务器
-            if (StringUtils.isNotEmpty(request.getParameter("Referer"))) {
-                String referUrl = request.getParameter("Referer");
-                //解析参数，判断是否是微信过来的
-                if (referUrl.split("\\?").length >= 2) {
-                    String stringParams = referUrl.split("\\?")[1];
-                    for (String stringParam : stringParams.split("&")) {
-                        String[] param = stringParam.split("=");
-                        if (param.length >= 2) {
-                            if (param[0].equals("weixinref")) {//此处可以判断为微信过来的请求,跳转到微信的内部登录
-                                response.sendRedirect(referUrl.split("\\?")[0] +
-                                        "?username=" + username +
-                                        "&usertype=" + usertype +
-                                        "&refer=" + param[1] +
-                                        "&md5=" + MD5.md5(username + "1005387596c57c2278f4f61058c78d1b" + new SimpleDateFormat("yyyyMMdd").format(new Date())).toLowerCase());
-                                return;
-                            }
+        //接入微信登录：此处需要考虑微信SSO登录的情况，如果是微信来的请求把请求转发给微信服务器
+        if (StringUtils.isNotEmpty(request.getParameter("Referer"))) {
+            String referUrl = request.getParameter("Referer");
+            //解析参数，判断是否是微信过来的
+            if (referUrl.split("\\?").length >= 2) {
+                String stringParams = referUrl.split("\\?")[1];
+                for (String stringParam : stringParams.split("&")) {
+                    String[] param = stringParam.split("=");
+                    if (param.length >= 2) {
+                        if (param[0].equals("weixinref")) {//此处可以判断为微信过来的请求,跳转到微信的内部登录
+                            response.sendRedirect(referUrl.split("\\?")[0] +
+                                    "?username=" + username +
+                                    "&usertype=" + usertype +
+                                    "&refer=" + param[1] +
+                                    "&md5=" + MD5.md5(username + "1005387596c57c2278f4f61058c78d1b" + new SimpleDateFormat("yyyyMMdd").format(new Date())).toLowerCase());
+                            return;
                         }
                     }
                 }
             }
+        }
 
 
-            HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
+        if ("1".equals(usertype)) {
+            session.setAttribute(Const.SESSION_USER_CONST_WRITER, user);
+            session.setAttribute(Const.SESSION_USER_CONST_TYPE, "1");
+        } else if ("2".equals(usertype)) {
+            session.setAttribute(Const.SESSION_USER_CONST_ORGUSER, user);
+            session.setAttribute(Const.SESSION_USER_CONST_TYPE, "2");
+        }
+
+
+        Map<String, Object> params = new HashMap<String, Object>(user);
+
+        params.put("clientip", HttpRequestUtil.getClientIP(request));
+
+        userService.insertUserScores(params);
+        userService.insertUserLoginLog(params);
+
+
+        if (StringUtils.isEmpty(request.getParameter("Referer"))) {
             if ("1".equals(usertype)) {
-                session.setAttribute(Const.SESSION_USER_CONST_WRITER, user);
-                session.setAttribute(Const.SESSION_USER_CONST_TYPE, "1");
+                response.sendRedirect(request.getContextPath() + "/");
+                return;
             } else if ("2".equals(usertype)) {
-                session.setAttribute(Const.SESSION_USER_CONST_ORGUSER, user);
-                session.setAttribute(Const.SESSION_USER_CONST_TYPE, "2");
+                response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
+                return;
+            }
+
+        } else {
+
+            if ("1".equals(usertype)) {
+                response.sendRedirect(request.getParameter("Referer"));
+                return;
             }
 
 
-            Map<String, Object> params = new HashMap<String, Object>(user);
+            Set<LoginInterceptor.PathWithUsertypeMap> pathWithUsertypeMaps = interceptor.getPathWithUsertypeMaps();
 
-            params.put("clientip", HttpRequestUtil.getClientIP(request));
-
-            userService.insertUserScores(params);
-            userService.insertUserLoginLog(params);
-
-
-            if (StringUtils.isEmpty(request.getParameter("Referer"))) {
-                if ("1".equals(usertype)) {
-                    response.sendRedirect(request.getContextPath() + "/");
-                    return;
-                } else if ("2".equals(usertype)) {
-                    response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
-                    return;
+            PathMatchingResourcePatternResolver resolver = getPathMatchingResourcePatternResolver();
+            for (LoginInterceptor.PathWithUsertypeMap pathMap : pathWithUsertypeMaps) {
+                //需要拦截的URL
+                String comparePath = "";
+                if (request.getParameter("Referer").startsWith(request.getScheme())) {
+                    comparePath = request.getScheme() + "://" + request.getServerName() +
+                                /*":" + request.getServerPort() +*/ request.getContextPath() + pathMap.getPath();
+                } else {
+                    comparePath = request.getContextPath() + pathMap.getPath();
                 }
 
-            } else {
+                if (resolver.getPathMatcher().match(comparePath, request.getParameter("Referer"))
+                        && pathMap.getUserType().equals(usertype) && "2".equals(usertype)) {//路径匹配，并且用户身份一致可以跳转
 
-                if ("1".equals(usertype)) {
                     response.sendRedirect(request.getParameter("Referer"));
                     return;
-                }
 
-
-                Set<LoginInterceptor.PathWithUsertypeMap> pathWithUsertypeMaps = interceptor.getPathWithUsertypeMaps();
-
-                PathMatchingResourcePatternResolver resolver = getPathMatchingResourcePatternResolver();
-                for (LoginInterceptor.PathWithUsertypeMap pathMap : pathWithUsertypeMaps) {
-                    //需要拦截的URL
-                    String comparePath = "";
-                    if (request.getParameter("Referer").startsWith(request.getScheme())) {
-                        comparePath = request.getScheme() + "://" + request.getServerName() +
-                                /*":" + request.getServerPort() +*/ request.getContextPath() + pathMap.getPath();
-                    } else {
-                        comparePath = request.getContextPath() + pathMap.getPath();
-                    }
-
-                    if (resolver.getPathMatcher().match(comparePath, request.getParameter("Referer"))
-                            && pathMap.getUserType().equals(usertype) && "2".equals(usertype)) {//路径匹配，并且用户身份一致可以跳转
-
-                        response.sendRedirect(request.getParameter("Referer"));
-                        return;
-
-                    }
-                }
-
-                if ("1".equals(usertype)) {
-                    response.sendRedirect(request.getContextPath() + "/");
-                    return;
-                } else if ("2".equals(usertype)) {
-                    response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
-                    return;
                 }
             }
 
 
+            if ("1".equals(usertype)) {
+                response.sendRedirect(request.getContextPath() + "/");
+                return;
+            } else if ("2".equals(usertype)) {
+                response.sendRedirect(request.getContextPath() + "/schedule/scheduleList.action");
+                return;
+            }
+        }
 
     }
 
