@@ -108,7 +108,9 @@ public class SSOLoginoutController extends BaseController {
     }
 
     @RequestMapping("weblogin")
-    public void login(HttpServletRequest request, HttpServletResponse response) {
+    public void login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        String ticket = request.getParameter("UserData");
         String username = null;
 
         StringBuilder builder = new StringBuilder("");
@@ -118,11 +120,29 @@ public class SSOLoginoutController extends BaseController {
             builder.append(name + "=" + (values.length > 0 ? values[0] : "") + "&");
         }
 
-        String ticket = request.getParameter("ST");
+        if (ticket != null && !ticket.equals("")) {
+            ServiceTicketValidator stv = new ServiceTicketValidator();
+            String data = request.getParameter("UserData");
+            System.out.println(data);
+            data = data.replaceAll("   ", "+");
+            System.out.println(data);
+            data = new String(ZASUtil.base64Decode(data), "GBK");
+            data = data.replaceAll("<\\?xml", "mark#1");
+            data = data.replaceAll("\"UTF-8\"\\?>", "mark#2");
+            data = data.replaceAll("\\?", ">");
+            data = data.replaceAll("mark#1", "<?xml");
+            data = data.replaceAll("mark#2", "\"UTF-8\"?>");
+            System.out.println(data);
+            stv.validateTrustMode(data);
 
-        if (StringUtils.isEmpty(ticket)) {
-            return;
+            ZASUserData userData = stv.getUser();
+            username = userData.getUserName();
+        } else {
+            logger.warn("错误的回调参数：" + builder);
+            response.sendRedirect(request.getContextPath() + "/");
         }
+
+/*
 
         Cache cache = cacheCacheManager.getCache("shiro-pmph-authenticationCache");
 
@@ -131,7 +151,9 @@ public class SSOLoginoutController extends BaseController {
             CloseableHttpResponse closeableHttpResponse = getCloseableHttpClient().execute(httpget);
             HttpEntity entity = closeableHttpResponse.getEntity();
             String xmlString = EntityUtils.toString(entity);
-         /*   System.out.println(xmlString);*/
+         */
+/*   System.out.println(xmlString);*//*
+
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
             DocumentBuilder db = dbf.newDocumentBuilder();
@@ -159,6 +181,7 @@ public class SSOLoginoutController extends BaseController {
                     logger.error("===========================params:" + builder);
                     logger.error(HttpRequestUtil.getClientIP(request) + ":" + xmlString);
                     response.sendRedirect(request.getContextPath() + "/");
+                    return;
                 } else {
                     username = cache.get(ticket, String.class);
                 }
@@ -167,6 +190,7 @@ public class SSOLoginoutController extends BaseController {
                 logger.info("==========================STOK:" + ticket);
                 cache.put(ticket, username);
             }
+*/
 
 
             List<Map<String, Object>> types = userService.getUserType(username);
@@ -277,9 +301,6 @@ public class SSOLoginoutController extends BaseController {
                 }
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
 
     }
