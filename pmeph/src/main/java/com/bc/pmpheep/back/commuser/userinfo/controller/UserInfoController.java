@@ -131,10 +131,10 @@ public class UserInfoController extends BaseController {
         map.put("signature", signature);
         if (StringUtils.isEmpty(id) ||
                 StringUtils.isEmpty(realName) ||
-                StringUtils.isEmpty(sex) ||
                 StringUtils.isEmpty(handphone) ||
                 StringUtils.isEmpty(workplace)
                 /* StringUtils.isEmpty(birthday) ||
+                 StringUtils.isEmpty(sex) ||
                 StringUtils.isEmpty(experience) ||
                 StringUtils.isEmpty(fax) ||
                 StringUtils.isEmpty(title) ||
