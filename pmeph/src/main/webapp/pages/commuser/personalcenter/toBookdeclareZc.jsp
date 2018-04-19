@@ -85,7 +85,7 @@
 						</tr>
 						<tr>
 							<td><span ><span class="btbs1">*</span>预估图数：&emsp;&emsp;</span>
-								<input class="cg_input" name="picture_number" id="picture_number" value="${topicMap.picture_number}" placeholder="单位千字"
+								<input class="cg_input" name="picture_number" id="picture_number" value="${topicMap.picture_number}" placeholder=""
 									   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
 									   maxlength="9"/>
 							</td>
@@ -283,7 +283,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td><span class="btbs1">*</span><span>主要内容特色及特色：</span></td>
+							<td><span class="btbs1">*</span><span>主要内容与特色：</span></td>
 							<td colspan="3">
 								<div class="content">
 									<textarea class="text_cl" id="extra_score" name="extra_score" maxlength="1000">${textraMap.score}</textarea>

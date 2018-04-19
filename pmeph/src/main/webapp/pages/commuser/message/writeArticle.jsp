@@ -65,7 +65,7 @@
     
     <div class="sxy-div-content2">
         <div style="height:25px;"></div>
-        <font class="sxy-font1">作者姓名：</font>
+        <font class="sxy-font1">文章来源:</font>
     </div>
     <div class="sxy-div-content2">
         <%-- <input type="hidden" name="author_name" id="author_name" value="${author_name }"> --%>
