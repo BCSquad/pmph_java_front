@@ -552,6 +552,7 @@
 		<id property="book_id" column="book_id" />
 		<result property="bookname" column="bookname" />
 		<result property="isbn" column="isbn" />
+		<result property="revision" column="revision" />
 		<result property="author" column="author" />
 		<result property="image_url" column="image_url" />
 		<!-- 该图书的多条纠错信息 -->
@@ -578,6 +579,7 @@
 		b.bookname,
 		b.isbn,
 		b.author,
+		b.revision,
 		b.image_url,
 		bc.id,
 		bc.book_id,
@@ -1457,6 +1459,7 @@ UNION
 	<resultMap type="Map" id="MyBookFeedBackMap">
 		<id property="book_id" column="book_id" />
 		<result property="bookname" column="bookname" />
+		<result property="revision" column="revision" />
 		<result property="isbn" column="isbn" />
 		<result property="author" column="author" />
 		<result property="image_url" column="image_url" />
@@ -1478,6 +1481,7 @@ UNION
 		SELECT
 		b.bookname,
 		b.isbn,
+		b.revision,
 		b.author,
 		b.image_url,
 		bc.id,
