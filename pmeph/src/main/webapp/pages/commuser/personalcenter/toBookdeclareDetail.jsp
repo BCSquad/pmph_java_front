@@ -257,7 +257,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td><span>主要内容特色及特色：</span></td>
+							<td><span>主要内容与特色：</span></td>
 							<td colspan="3">
 								<div class="content">
 									<textarea class="text_cl" disabled maxlength="1000">${textraMap.score}</textarea>
