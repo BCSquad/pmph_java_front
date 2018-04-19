@@ -194,3 +194,19 @@ function addtag(){
 function deltag(obj){
 	obj.remove();
 }
+
+
+function check( email_address )
+{
+    var regex = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
+    if ( regex.test( email_address ) )
+    {
+        var user_name = email_address.replace( regex, "$1");
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
