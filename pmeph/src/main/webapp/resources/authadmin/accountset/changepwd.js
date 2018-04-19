@@ -46,7 +46,7 @@ function modpassword() {
 
     $.ajax({
         type: 'post',
-        url: contextpath + 'admininfocontroller/updateorguserpassword.action',
+        url: contextpath + 'userinfo/updateorguserpassword.action',
         async: false,
         /* contentType: 'application/json',*/
         dataType: 'json',
