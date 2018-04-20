@@ -6,18 +6,24 @@ function ChangeDiv(type){
     if(type=='commnions'){
         document.getElementById("commnions_top").setAttribute("class","clicked");
         document.getElementById("filesgx_top").setAttribute("class","clickbefore");
+        document.getElementById("memberManager_top").setAttribute("class","clickbefore");
         document.getElementById("filesgx").setAttribute("class","hidden");
+        document.getElementById("memberManager").setAttribute("class","hidden");
         document.getElementById("commnions").setAttribute("class","show");
     }else if(type=='filesgx'){
         document.getElementById("filesgx_top").setAttribute("class","clicked");
         document.getElementById("commnions_top").setAttribute("class","clickbefore");
+        document.getElementById("memberManager_top").setAttribute("class","clickbefore");
         document.getElementById("commnions").setAttribute("class","hidden");
+        document.getElementById("memberManager").setAttribute("class","hidden");
         document.getElementById("filesgx").setAttribute("class","show");
     }else if(type=='memberManager'){
     	document.getElementById("memberManager_top").setAttribute("class","clicked");
         document.getElementById("commnions_top").setAttribute("class","clickbefore");
+        document.getElementById("filesgx_top").setAttribute("class","clickbefore");
         document.getElementById("commnions").setAttribute("class","hidden");
-        document.getElementById("filesgx").setAttribute("class","show");
+        document.getElementById("filesgx").setAttribute("class","hidden");
+        document.getElementById("memberManager").setAttribute("class","show");
     }
 
 
@@ -230,6 +236,111 @@ $(function(){
 			initFile();
 		} 
 	}); 
+	
+	var memberPagesize  = 10 ;
+    var memberPagenumber = 1  ;
+    var memberSearchName  =  $("#memberSearchName").val();
+	
+	//加载成员
+    initMember();
+	
+	//搜索成员
+	var memberSearchName = $("#memberSearchName").val();
+	$(".searchMember").click(function(){
+		memberSearchName = $("#memberSearchName").val();
+		filePagenumber = 1  ;
+		$("#memberContent").html('');
+		initMember();
+	});
+	//回车搜索成员
+	$("#memberSearchName").keydown(function (event){ 
+		var code = event.keyCode; 
+		if (13 == code) { 
+			memberSearchName = $("#memberSearchName").val();
+			memberPagenumber = 1  ;
+			$("#memberContent").html('');
+			initMember();
+		} 
+	}); 
+	
+	//分页
+    $('#page-size-select').selectlist({
+        zIndex: 10,
+        width: 110,
+        height: 30,
+        optionHeight: 30
+    });     
+  //切换分页每页数据数量时 刷新
+	$("#page-size-select").find("li").bind("click",function(){
+		$("#pageSize").val($(this).attr("data-value"));
+		$("#pageNum").val(1);
+		initMember();
+	});
+	
+	/**
+	 * 查询并输出成员列表
+	 */
+	function initMember(){
+		$.ajax({
+            type:'post',
+            url :contxtpath+'/group/getMembers.action',
+            //contentType: 'application/json',
+            dataType:'json',
+            data:{
+                groupId   : $("#groupId").val(),
+                pageNum: $("#pageNum").val(),
+                pageSize  : $("#pageSize").val(),
+                memberSearchName  : $.trim($("#memberSearchName").val())
+            },
+            success:function(json){
+            	var list = json.mlist;
+                if(list){
+                	$("#memberContent").html("");
+                    for(var i= 0 ; i< list.length ;i++){
+                        var html ='<tr>'
+										+'<td>'
+										+'	<div class="memberRealInfoDiv">'
+										+'<img src="'
+										+ contextpath + (list[i].avatar.search(/^[0-9A-z]{24}/g)>0?('image/'+list[i].avatar+'.action'):'statics/image/default_image.png')
+										+'">'
+										+'		<span>'+list[i].realname+'</span>'
+										+'	</div>'
+										+'</td>'
+										+'<td>'
+										+'	<input class="member_id" type="hidden" value="'+list[i].id+'">'
+										+'	<input class="display_name_hidden" type="hidden" value="'+list[i].display_name+'">'
+										+'	<input class="display_name" value="'+list[i].display_name+'" '+(list[i].editable==0?'disabled="disabled" title="无修改权限" ':' onblur="updateDisplayName(this)" ')+'>'
+										+'</td>'
+										+'<td>'
+										+'	<span>'+formatDate(list[i].gmt_create,'yyyy-MM-dd')+'</span>'
+										+'</td>'
+							   +'</tr>"';
+                       
+                        $("#memberContent").append(html);
+                    }
+                    
+                }
+                $("#totoal_count").html(json.maxPageNum);
+                $("#maxPageNum").val(json.maxPageNum);
+                
+              //刷新分页栏
+           	 Page({
+                  num: $("#maxPageNum").val(),					//页码数
+                  startnum: $("#pageNum").val(),				//指定页码
+                  elem: $('#page1'),
+                  callback: function (n){     //点击页码后触发的回调函数
+                  	$("#pageNum").val(n);
+                  	initMember();
+                  }
+                  });
+            
+
+
+            }
+        });
+    
+	}
+	
 	
 
 	//退出小组
@@ -636,6 +747,36 @@ $(function(){
 
 });
 
+
+/**
+ * 修改组内名称
+ */
+function updateDisplayName(t){
+	var $i = $(t);
+	var $hi = $i.parent("td").find(".display_name_hidden");
+	var $id = $i.parent("td").find(".member_id");
+	if ($i.val()!=$hi.val()) {
+		$.ajax({
+            type:'post',
+            url :contxtpath+'/group/updateDisplayName.action',
+            dataType:'json',
+            data:{
+               
+                member_id : $id.val(),
+                display_name:$i.val()
+            },
+            success:function(json){
+            	$hi.val($i.val());
+            	window.message.success("组内名称修改成功！");
+            },
+            error:function(){
+            	$i.val($hi.val());
+            	window.message.warning("组内名称修改失败！");
+            }
+		});
+	}
+	
+}
 
 
 //转换时间戳的方法
