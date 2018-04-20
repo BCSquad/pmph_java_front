@@ -1370,7 +1370,35 @@ UNION
 		LEFT JOIN writer_user w ON c.author_id = w.id
 		WHERE
 			m.favorite_id = #{parameter.favoriteId}
-		AND m.writer_id = #{parameter.logUserId}
+		AND m.writer_id = #{parameter.logUserId}  AND c.category_id=1
+
+	)
+	UNION
+	(
+	SELECT
+	3 as f_type,
+	c.id AS id,
+	c.title AS title,
+	w.realname AS author,
+	m.id AS mid,
+	c.summary AS detail,
+	c.bookmarks AS bookmarks,
+	c.comments AS comments,
+	c.likes AS likes,
+	c.clicks AS clicks,
+	m.gmt_create,
+	'' as image_url,
+	m.favorite_id as favorite_id,
+	c.category_id as category_id,
+	c.cover as cover,
+	c.mid as mdbid
+	FROM
+	cms_user_mark m
+	LEFT JOIN cms_content c ON m.content_id = c.id
+	LEFT JOIN writer_user w ON c.author_id = w.id
+	WHERE
+	m.favorite_id = #{parameter.favoriteId}
+	AND m.writer_id = #{parameter.logUserId}  AND c.category_id=2
 
 	)
 )t WHERE
@@ -1381,16 +1409,19 @@ UNION
 	<if test="parameter.is_long ==0 ">
 		AND t.f_type=2
 	</if>
+	<if test="parameter.is_long ==2 ">
+		AND t.f_type=3
+	</if>
 ORDER BY t.gmt_create DESC  limit ${start},${pageSize}
 </select>
 
 	<!-- 查我的收藏总数 -->
 	<select id="listMyFavoritesCount" resultType="Integer"
 			parameterType="PageParameter">
-		select count(*) from (
-
-(
-	SELECT
+		select COUNT(*) from
+		(
+		(
+		SELECT
 		1 as f_type,
 		b.id AS id,
 		b.bookname AS title,
@@ -1400,46 +1431,89 @@ ORDER BY t.gmt_create DESC  limit ${start},${pageSize}
 		b.bookmarks AS bookmarks,
 		b.comments AS comments,
 		b.likes AS likes,
-		b.clicks AS clicks
-	FROM
-		book_user_mark m
-	LEFT JOIN book b ON m.book_id = b.id
-	LEFT JOIN book_detail d ON b.id = d.book_id
-	WHERE
-		m.favorite_id = #{parameter.favoriteIdb}
-		AND m.writer_id = #{parameter.logUserId}
-	ORDER BY
-		m.gmt_create DESC
-)
-UNION
-	(
-		SELECT
-			2 as f_type,
-			c.id AS id,
-			c.title AS title,
-			w.realname AS author,
-			m.id AS mid,
-			c.summary AS detail,
-			c.bookmarks AS bookmarks,
-			c.comments AS comments,
-			c.likes AS likes,
-			c.clicks AS clicks
+		b.clicks AS clicks,
+		m.gmt_create,
+		b.image_url as image_url,
+		m.favorite_id as favorite_id,
+		'' as category_id,
+		'' as cover,
+		'' as mdbid
 		FROM
-			cms_user_mark m
+		book_user_mark m
+		LEFT JOIN book b ON m.book_id = b.id
+		LEFT JOIN book_detail d ON b.id = d.book_id
+		WHERE
+		m.favorite_id = #{parameter.favoriteId}
+		AND m.writer_id = #{parameter.logUserId}
+
+		)
+		UNION
+		(
+		SELECT
+		2 as f_type,
+		c.id AS id,
+		c.title AS title,
+		w.realname AS author,
+		m.id AS mid,
+		c.summary AS detail,
+		c.bookmarks AS bookmarks,
+		c.comments AS comments,
+		c.likes AS likes,
+		c.clicks AS clicks,
+		m.gmt_create,
+		'' as image_url,
+		m.favorite_id as favorite_id,
+		c.category_id as category_id,
+		c.cover as cover,
+		c.mid as mdbid
+		FROM
+		cms_user_mark m
 		LEFT JOIN cms_content c ON m.content_id = c.id
 		LEFT JOIN writer_user w ON c.author_id = w.id
 		WHERE
-			m.favorite_id = #{parameter.favoriteId}
-		AND m.writer_id = #{parameter.logUserId}
-		ORDER BY
-			m.gmt_create DESC
-	) ) t
+		m.favorite_id = #{parameter.favoriteId}
+		AND m.writer_id = #{parameter.logUserId} AND c.category_id=1
+
+		)
+		UNION
+		(
+		SELECT
+		3 as f_type,
+		c.id AS id,
+		c.title AS title,
+		w.realname AS author,
+		m.id AS mid,
+		c.summary AS detail,
+		c.bookmarks AS bookmarks,
+		c.comments AS comments,
+		c.likes AS likes,
+		c.clicks AS clicks,
+		m.gmt_create,
+		'' as image_url,
+		m.favorite_id as favorite_id,
+		c.category_id as category_id,
+		c.cover as cover,
+		c.mid as mdbid
+		FROM
+		cms_user_mark m
+		LEFT JOIN cms_content c ON m.content_id = c.id
+		LEFT JOIN writer_user w ON c.author_id = w.id
+		WHERE
+		m.favorite_id = #{parameter.favoriteId}
+		AND m.writer_id = #{parameter.logUserId} AND c.category_id=2
+
+		)
+		)t
+
 		WHERE 1=1
 		<if test="parameter.is_long ==1 ">
 			AND t.f_type=1
 		</if>
 		<if test="parameter.is_long ==0 ">
 			AND t.f_type=2
+		</if>
+		<if test="parameter.is_long ==2 ">
+			AND t.f_type=3
 		</if>
 	</select>
 
