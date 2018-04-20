@@ -11,6 +11,7 @@ import com.bc.pmpheep.back.commuser.group.bean.GroupList;
 import com.bc.pmpheep.back.commuser.group.bean.GroupMember;
 import com.bc.pmpheep.back.commuser.group.bean.GroupMessageVO;
 import com.bc.pmpheep.back.commuser.group.bean.PmphGroupMemberVO;
+import com.bc.pmpheep.back.plugin.PageParameter;
 
 
 
@@ -362,4 +363,30 @@ public interface GroupDao {
 	 * @return
 	 */
 	Map<String, Object> getMember(@Param("user_id")String user_id,@Param("group_id")String group_id);
+
+	/**
+	 * 查询成员列表，供成员管理功能使用
+	 * 功能要求：自己可以修改自己的组内名称，管理员可以修改非管理员的，创建人可以修改所有的
+	 * @param pageParameter
+	 * @return
+	 */
+	List<Map<String, Object>> queryMemberListForManage(
+			PageParameter<Map<String, Object>> pageParameter);
+
+	/**
+	 * 查询成员总数，供成员管理功能使用
+	 * 功能要求：自己可以修改自己的组内名称，管理员可以修改非管理员的，创建人可以修改所有的
+	 * @param pageParameter
+	 * @return
+	 */
+	int queryMemberListForManageCount(
+			PageParameter<Map<String, Object>> pageParameter);
+
+	/**
+	 * 修改群名片
+	 * @param paraMap
+	 * groupId ， member_id ， display_name
+	 * @return
+	 */
+	int updateDisplayName(Map<String, Object> paraMap);
 }

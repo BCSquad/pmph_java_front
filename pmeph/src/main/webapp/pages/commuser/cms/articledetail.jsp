@@ -197,7 +197,7 @@
             </div>
     	</div>
     		<div class="area2">
-    		<div style="position:relative;width: 275px;/* height: 410px; */">
+    		<%-- <div style="position:relative;width: 275px;/* height: 410px; */">
     			<div class="right_2">
 	    			<c:if test="${Art.avatar == '' || Art.avatar == 'DEFAULT' || Art.avatar == null}">
 	    			
@@ -208,7 +208,7 @@
                 	<img src="${ctx}/image/${Art.avatar}.action"  height="60"
                                                               width="60"></c:if>
 	    			
-	    			<span>文章来源：${Art.author_name}</span>
+	    			<span>发布人：${Art.realname}</span>
 	    		</div>
 	    		<div class="right_1" style=" position:relative;top:20px;">
 	    			<div class="right_div1">
@@ -228,11 +228,8 @@
 	    				</c:forEach>
 	    			</div>
 	    		</div>
-    		</div>
-    		<!--文章链接-->
-    		<div class="right_4">
-    			<div style="cursor: pointer;"  onclick="window.location.href='${ctx}/cms/list.action'"><span>想要阅读更多文章？狠戳这里</span></div>
-    		</div>
+    		</div> --%>
+    		
     		<!--相关文章-->
     		<div class="right_5">
     			<div style="width: 275px;height: 20px;margin-bottom: 20px;">
@@ -249,6 +246,10 @@
 			    		</div>
 	    		 </c:forEach>
 	            </div>
+    		</div>
+    		<!--文章链接-->
+    		<div class="right_4">
+    			<div style="cursor: pointer;"  onclick="window.location.href='${ctx}/cms/list.action'"><span>想要阅读更多文章？狠戳这里</span></div>
     		</div>
     	</div>	
 

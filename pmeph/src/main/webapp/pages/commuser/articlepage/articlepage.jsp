@@ -47,10 +47,13 @@
                         <div  class="foot">
                             <div style="float:left">
                                 <%-- <c:if test="${list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null}">
+                                <%-- <c:if test="${list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null}">
                                 	<img src="${ctx}/statics/image/default_image.png" class="personicon">
                                 </c:if>
                 				<c:if test="${!(list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null)}">
                 					<img src="${ctx}/image/${list.avatar}.action" class="personicon" />
+                				</c:if> --%>
+
                 				</c:if> --%>
 
                             </div>

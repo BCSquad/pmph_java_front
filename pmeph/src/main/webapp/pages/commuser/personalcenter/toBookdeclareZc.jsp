@@ -105,14 +105,14 @@
 								<%--<div class="tslb">&emsp;--%>
 								<input type="radio" name="type" value="0" ${topicMap.type=='0'?'checked':''}/>专著
 								<input type="radio" name="type" value="1" ${topicMap.type=='1'?'checked':''}/>基础理论
-								<input type="radio" name="type" value="1" ${topicMap.type=='2'?'checked':''}/>教材
-								<input type="radio" name="type" value="2" ${topicMap.type=='3'?'checked':''}/>论文集
-								<input type="radio" name="type" value="2" ${topicMap.type=='4'?'checked':''}/>图谱
-								<input type="radio" name="type" value="3" ${topicMap.type=='5'?'checked':''}/>科普
-								<input type="radio" name="type" value="4" ${topicMap.type=='6'?'checked':''}/>应用技术
-								<input type="radio" name="type" value="4" ${topicMap.type=='7'?'checked':''}/>教辅
-								<input type="radio" name="type" value="5" ${topicMap.type=='8'?'checked':''}/>工具书
-								<input type="radio" name="type" value="6" ${topicMap.type=='9'?'checked':''}/>其他
+								<input type="radio" name="type" value="2" ${topicMap.type=='2'?'checked':''}/>教材
+								<input type="radio" name="type" value="3" ${topicMap.type=='3'?'checked':''}/>论文集
+								<input type="radio" name="type" value="4" ${topicMap.type=='4'?'checked':''}/>图谱
+								<input type="radio" name="type" value="5" ${topicMap.type=='5'?'checked':''}/>科普
+								<input type="radio" name="type" value="6" ${topicMap.type=='6'?'checked':''}/>应用技术
+								<input type="radio" name="type" value="7" ${topicMap.type=='7'?'checked':''}/>教辅
+								<input type="radio" name="type" value="8" ${topicMap.type=='8'?'checked':''}/>工具书
+								<input type="radio" name="type" value="9" ${topicMap.type=='9'?'checked':''}/>其他
 								<%--</div>--%>
 							</td>
 						</tr>
@@ -445,7 +445,7 @@
 						<c:forEach var="list" items="${similarList}" varStatus="status">
 							<tr id="similar_${status.count}">
 								<td><input class="sb_input" style="width: 230px;" id="similar_bookname_${status.count}" name="similar_bookname"  maxlength="40" value="${list.bookname}"/></td>
-								<td><input class="sb_input" style="width: 80px;" id="similar_edition_${status.count}" name="similar_edition"  maxlength="2" value="${list.edition}"/></td>
+								<td><input class="sb_input" style="width: 80px;" id="similar_edition_${status.count}" name="similar_edition"  maxlength="2" value="${list.edition}" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/></td>
 								<td><input class="sb_input" style="width: 80px;" id="similar_author_${status.count}" name="similar_author"  maxlength="100" value="${list.author}"/></td>
 								<td><input class="sb_input" style="width: 80px;" id="similar_booksize_${status.count}" name="similar_booksize"  maxlength="20" value="${list.booksize}"/></td>
 								<td><input class="sb_input" style="width: 160px;" id="similar_publisher_${status.count}" name="similar_publisher"  maxlength="100" value="${list.publisher}"/></td>
