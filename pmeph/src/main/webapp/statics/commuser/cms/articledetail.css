@@ -374,6 +374,7 @@
 	text-align: center;
 	cursor: pointer;
 	margin-top: 50px;
+	float: left;
 }
 
 .right_4 span{
@@ -385,6 +386,11 @@
 .right_5{
 	width: 275px;
 	margin-top: 40px;
+	float: left;
+}
+
+#comment{
+	float: left;
 }
 
 #xgwz_1{

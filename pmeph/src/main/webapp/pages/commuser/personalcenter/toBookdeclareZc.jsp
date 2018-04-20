@@ -445,7 +445,7 @@
 						<c:forEach var="list" items="${similarList}" varStatus="status">
 							<tr id="similar_${status.count}">
 								<td><input class="sb_input" style="width: 230px;" id="similar_bookname_${status.count}" name="similar_bookname"  maxlength="40" value="${list.bookname}"/></td>
-								<td><input class="sb_input" style="width: 80px;" id="similar_edition_${status.count}" name="similar_edition"  maxlength="2" value="${list.edition}"/></td>
+								<td><input class="sb_input" style="width: 80px;" id="similar_edition_${status.count}" name="similar_edition"  maxlength="2" value="${list.edition}" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/></td>
 								<td><input class="sb_input" style="width: 80px;" id="similar_author_${status.count}" name="similar_author"  maxlength="100" value="${list.author}"/></td>
 								<td><input class="sb_input" style="width: 80px;" id="similar_booksize_${status.count}" name="similar_booksize"  maxlength="20" value="${list.booksize}"/></td>
 								<td><input class="sb_input" style="width: 160px;" id="similar_publisher_${status.count}" name="similar_publisher"  maxlength="100" value="${list.publisher}"/></td>

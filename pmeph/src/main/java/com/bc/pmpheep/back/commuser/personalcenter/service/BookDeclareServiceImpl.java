@@ -118,6 +118,7 @@ public class BookDeclareServiceImpl implements BookDeclareService {
 		//修改申报信息
 		topicMap.put("topic_id", topic_id);
 		this.bookDecdao.updateTopic(topicMap);
+		extraMap.put("topic_id", topic_id);
 		//修改选题申报额外信息topic_extra
 		this.bookDecdao.updateTopicExtra(extraMap);
 		//删除编者情况

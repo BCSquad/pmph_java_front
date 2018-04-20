@@ -197,7 +197,7 @@
             </div>
     	</div>
     		<div class="area2">
-    		<div style="position:relative;width: 275px;/* height: 410px; */">
+    		<%-- <div style="position:relative;width: 275px;/* height: 410px; */">
     			<div class="right_2">
 	    			<c:if test="${Art.avatar == '' || Art.avatar == 'DEFAULT' || Art.avatar == null}">
 	    			
@@ -228,11 +228,8 @@
 	    				</c:forEach>
 	    			</div>
 	    		</div>
-    		</div>
-    		<!--文章链接-->
-    		<div class="right_4">
-    			<div style="cursor: pointer;"  onclick="window.location.href='${ctx}/cms/list.action'"><span>想要阅读更多文章？狠戳这里</span></div>
-    		</div>
+    		</div> --%>
+    		
     		<!--相关文章-->
     		<div class="right_5">
     			<div style="width: 275px;height: 20px;margin-bottom: 20px;">
@@ -249,6 +246,10 @@
 			    		</div>
 	    		 </c:forEach>
 	            </div>
+    		</div>
+    		<!--文章链接-->
+    		<div class="right_4">
+    			<div style="cursor: pointer;"  onclick="window.location.href='${ctx}/cms/list.action'"><span>想要阅读更多文章？狠戳这里</span></div>
     		</div>
     	</div>	
 
