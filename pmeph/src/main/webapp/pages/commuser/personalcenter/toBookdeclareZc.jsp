@@ -85,7 +85,7 @@
 						</tr>
 						<tr>
 							<td><span ><span class="btbs1">*</span>预估图数：&emsp;&emsp;</span>
-								<input class="cg_input" name="picture_number" id="picture_number" value="${topicMap.picture_number}" placeholder="单位千字"
+								<input class="cg_input" name="picture_number" id="picture_number" value="${topicMap.picture_number}" placeholder=""
 									   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
 									   maxlength="9"/>
 							</td>
@@ -283,7 +283,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td><span class="btbs1">*</span><span>主要内容特色及特色：</span></td>
+							<td><span class="btbs1">*</span><span>主要内容与特色：</span></td>
 							<td colspan="3">
 								<div class="content">
 									<textarea class="text_cl" id="extra_score" name="extra_score" maxlength="1000">${textraMap.score}</textarea>
@@ -445,7 +445,7 @@
 						<c:forEach var="list" items="${similarList}" varStatus="status">
 							<tr id="similar_${status.count}">
 								<td><input class="sb_input" style="width: 230px;" id="similar_bookname_${status.count}" name="similar_bookname"  maxlength="40" value="${list.bookname}"/></td>
-								<td><input class="sb_input" style="width: 80px;" id="similar_edition_${status.count}" name="similar_edition"  maxlength="2" value="${list.edition}"/></td>
+								<td><input class="sb_input" style="width: 80px;" id="similar_edition_${status.count}" name="similar_edition"  maxlength="2" value="${list.edition}" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/></td>
 								<td><input class="sb_input" style="width: 80px;" id="similar_author_${status.count}" name="similar_author"  maxlength="100" value="${list.author}"/></td>
 								<td><input class="sb_input" style="width: 80px;" id="similar_booksize_${status.count}" name="similar_booksize"  maxlength="20" value="${list.booksize}"/></td>
 								<td><input class="sb_input" style="width: 160px;" id="similar_publisher_${status.count}" name="similar_publisher"  maxlength="100" value="${list.publisher}"/></td>

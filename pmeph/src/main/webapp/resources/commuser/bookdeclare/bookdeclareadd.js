@@ -134,7 +134,7 @@ function add_similar(){
     var $table = $("#similar");
     var $tr = $("<tr id='similar_"+num+"'>"+
         "<td><input class='sb_input' style='width: 230px;' id='similar_bookname_"+num+"' name='similar_bookname'  maxlength='40' value=''/></td>"+
-        "<td><input class='sb_input' style='width: 80px;' id='similar_edition_"+num+"' name='similar_edition'  maxlength='2' value=''/></td>"+
+        "<td><input class='sb_input' style='width: 80px;' id='similar_edition_"+num+"' name='similar_edition'  maxlength='2' value='' onkeyup=\"this.value=this.value.replace(/\\D/g,'')\" onafterpaste=\"this.value=this.value.replace(/\\D/g,'')\"/></td>"+
         "<td><input class='sb_input' style='width: 80px;' id='similar_author_"+num+"' name='similar_author'  maxlength='100' value=''/></td>"+
         "<td><input class='sb_input' style='width: 80px;' id='similar_booksize_"+num+"' name='similar_booksize'  maxlength='20' value=''/></td>"+
         "<td><input class='sb_input' style='width: 160px;' id='similar_publisher_"+num+"' name='similar_publisher'  maxlength='100' value=''/></td>"+

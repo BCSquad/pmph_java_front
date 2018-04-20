@@ -281,7 +281,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td><span class="btbs1">*</span><span>主要内容特色及特色：</span></td>
+							<td><span class="btbs1">*</span><span>主要内容与特色：</span></td>
 							<td colspan="3">
 								<div class="content">
 									<textarea class="text_cl" id="extra_score" name="extra_score" maxlength="1000"></textarea>
@@ -440,7 +440,7 @@
 						<tbody>
 						<tr id="sbbz_2">
 							<td><input class="sb_input" style="width: 230px;" id="similar_bookname" name="similar_bookname"  maxlength="40" value=""/></td>
-							<td><input class="sb_input" style="width: 80px;" id="similar_edition" name="similar_edition"  maxlength="2" value=""/></td>
+							<td><input class="sb_input" style="width: 80px;" id="similar_edition" name="similar_edition"  maxlength="2" value="" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/></td>
 							<td><input class="sb_input" style="width: 80px;" id="similar_author" name="similar_author"  maxlength="100" value=""/></td>
 							<td><input class="sb_input" style="width: 80px;" id="similar_booksize" name="similar_booksize"  maxlength="20" value=""/></td>
 							<td><input class="sb_input" style="width: 160px;" id="similar_publisher" name="similar_publisher"  maxlength="100" value=""/></td>
