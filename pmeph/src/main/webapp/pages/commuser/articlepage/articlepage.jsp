@@ -46,16 +46,17 @@
                         <p  class="content-text">${list.summary}</p>
                         <div  class="foot">
                             <div style="float:left">
-                                <c:if test="${list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null}">  
+                                <%-- <c:if test="${list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null}">  
                                 	<img src="${ctx}/statics/image/default_image.png" class="personicon">
                                 </c:if>
                 				<c:if test="${!(list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null)}">
                 					<img src="${ctx}/image/${list.avatar}.action" class="personicon" />
-                				</c:if>
+                				</c:if> --%>
+                				
                             </div>
                             <div  class="msg">
-                                <span  class="name" style="cursor:pointer;" onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?userId=${list.userId }'">${list.author_name}</span>
-                                <span  class="name">${list.auth_date}</span>
+                                <span  class="name" style="cursor:pointer;" onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?userId=${list.userId }'">文章来源：${list.author_name==null?list.realname:list.author_name}</span>
+                                <span  class="name" style="float:right;">${list.auth_date}</span>
                             </div>
                         </div>
                     </div>
