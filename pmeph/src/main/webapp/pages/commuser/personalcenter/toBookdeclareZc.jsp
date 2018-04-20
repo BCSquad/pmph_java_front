@@ -105,14 +105,14 @@
 								<%--<div class="tslb">&emsp;--%>
 								<input type="radio" name="type" value="0" ${topicMap.type=='0'?'checked':''}/>专著
 								<input type="radio" name="type" value="1" ${topicMap.type=='1'?'checked':''}/>基础理论
-								<input type="radio" name="type" value="1" ${topicMap.type=='2'?'checked':''}/>教材
-								<input type="radio" name="type" value="2" ${topicMap.type=='3'?'checked':''}/>论文集
-								<input type="radio" name="type" value="2" ${topicMap.type=='4'?'checked':''}/>图谱
-								<input type="radio" name="type" value="3" ${topicMap.type=='5'?'checked':''}/>科普
-								<input type="radio" name="type" value="4" ${topicMap.type=='6'?'checked':''}/>应用技术
-								<input type="radio" name="type" value="4" ${topicMap.type=='7'?'checked':''}/>教辅
-								<input type="radio" name="type" value="5" ${topicMap.type=='8'?'checked':''}/>工具书
-								<input type="radio" name="type" value="6" ${topicMap.type=='9'?'checked':''}/>其他
+								<input type="radio" name="type" value="2" ${topicMap.type=='2'?'checked':''}/>教材
+								<input type="radio" name="type" value="3" ${topicMap.type=='3'?'checked':''}/>论文集
+								<input type="radio" name="type" value="4" ${topicMap.type=='4'?'checked':''}/>图谱
+								<input type="radio" name="type" value="5" ${topicMap.type=='5'?'checked':''}/>科普
+								<input type="radio" name="type" value="6" ${topicMap.type=='6'?'checked':''}/>应用技术
+								<input type="radio" name="type" value="7" ${topicMap.type=='7'?'checked':''}/>教辅
+								<input type="radio" name="type" value="8" ${topicMap.type=='8'?'checked':''}/>工具书
+								<input type="radio" name="type" value="9" ${topicMap.type=='9'?'checked':''}/>其他
 								<%--</div>--%>
 							</td>
 						</tr>
