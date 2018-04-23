@@ -103,7 +103,7 @@
 }
 
 .yxsb_content{
-	width: 881px;
+	width: 800px;
 	line-height: 24px;
 	letter-spacing: 1px;
 	color: #333333;
@@ -114,7 +114,7 @@
 
 .yxsb_content p{
     text-indent: 2em;
-	max-width: 881px;
+	max-width: 800px;
     word-break: break-all;
 }
 
