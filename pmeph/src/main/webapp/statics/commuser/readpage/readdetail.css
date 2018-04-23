@@ -652,7 +652,7 @@
 
 .block .item .item_content {
     width: 890px;
-
+	word-break: break-all;
     letter-spacing: 1px;
     color: #333333;
     overflow: hidden;
