@@ -306,6 +306,13 @@ $(function(){
 										+'		<span>'+list[i].realname+'</span>'
 										+'	</div>'
 										+'</td>'
+										
+										+'<td>'
+										+(list[i].is_founder?'	<span>创建者</span>':'')
+										+(list[i].is_admin && !list[i].is_founder?'	<span>管理员</span>':'')
+										+(!list[i].is_admin && !list[i].is_founder?'	<span>组员</span>':'')
+										+'</td>'
+										
 										+'<td>'
 										+'	<input class="member_id" type="hidden" value="'+list[i].id+'">'
 										+'	<input class="display_name_hidden" type="hidden" value="'+list[i].display_name+'">'
