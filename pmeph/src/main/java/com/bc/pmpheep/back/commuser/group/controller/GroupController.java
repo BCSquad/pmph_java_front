@@ -371,6 +371,14 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
 		return resultMap;
     }
     
+    
+    /**
+     * 查询成员管理列表
+     * @param request
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     @RequestMapping(value="/getMembers",method=RequestMethod.POST)
     @ResponseBody
     public Map<Object,Object> getMembers(HttpServletRequest request
@@ -399,6 +407,11 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
     	return resultMap;
     }
     
+    /**
+     * 修改成员的组内名称 
+     * @param request
+     * @return
+     */
     @RequestMapping(value="/updateDisplayName",method=RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> updateDisplayName(HttpServletRequest request){

@@ -325,7 +325,7 @@ $(function(){
                        
                         $("#memberContent").append(html);
                     }
-                    
+                    $(".pageDiv").children().css('display','inline-block');
                 }
                 $("#totoal_count").html(json.maxPageNum);
                 $("#maxPageNum").val(json.maxPageNum);
@@ -340,8 +340,6 @@ $(function(){
                   	initMember();
                   }
                   });
-            
-
 
             }
         });
