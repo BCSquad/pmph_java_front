@@ -55,7 +55,7 @@ body
 #sxy-title
 {
 	height: 40px;
-
+	word-break: break-all;
 	font-size: 24px;
 	font-weight: normal;
 	line-height:40px;
@@ -66,11 +66,10 @@ body
 #sxy-like
 {
 	width: 140px;
-	height: 26px;
-    background-color:#f6f6f6;
-	float:right;
-	line-height:26px;
-	margin-top:7px;
+    height: 26px;
+    background-color: #f6f6f6;
+    float: right;
+    line-height: 26px;
 }
 #sxy-like img{
 	cursor: pointer;
@@ -78,14 +77,14 @@ body
 
 #sxy-title2
 {
-	height: 22px;
-
-	font-size: 14px;
-	font-weight: normal;
-	line-height:22px;
-	letter-spacing: 0px;
-	color: #999999;
-	margin-bottom:20px;
+	height: 26px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 26px;
+    letter-spacing: 0px;
+    color: #999999;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .sxy-tr
@@ -144,15 +143,14 @@ body
 }
 
 .sxy-content{
-	width: 892px;
-
+	width: 100%;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
 	line-height: 24px;
 	letter-spacing: 1px;
 	color: #333333;
-	margin-bottom: 30px
+	margin-bottom: 30px;
 }
 
 .sxy-content p{
@@ -160,7 +158,8 @@ body
 }
 
 .sxy-content img{
-	max-width:100%;
+	/*max-width:100%;*/
+	max-width: 800px;
 }
 
 tbody div{

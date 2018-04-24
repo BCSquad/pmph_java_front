@@ -171,16 +171,19 @@
 
 .ryxx_xm{
 	float: left;
-	margin-left: 14px;
-	height: 30px;
-	color: #333333;
+    margin-left: 14px;
+    height: 30px;
+    max-width: 168px;
+    max-height: 30px;
+    overflow: hidden;
+    color: #333333;
 }
 
 .ryxx_sj{
-	/* float: right; */
-	margin-left: 14px;
-	height: 30px;
-	color: #333333;
+	float: right;
+    margin-right: 14px;
+    height: 30px;
+    color: #333333;
 }
 
 .pagination-wrapper{

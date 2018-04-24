@@ -13,6 +13,7 @@
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>我的小组</title>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="<%=path%>/statics/css/jquery.pager.css?t=${_timestamp}"/>
     <link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/communication.css?t=${_timestamp}" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/chat.css?t=${_timestamp}" type="text/css">
     <link rel="stylesheet" href="<%=path %>/statics/css/jquery.selectlist.css?t=${_timestamp}"/>
@@ -24,6 +25,7 @@
 		var contxtpath  = '${pageContext.request.contextPath}';
 		var contextpath = '${pageContext.request.contextPath}/';
 	</script>
+	<script src="<%=path%>/resources/comm/jquery/jquery.pager.js?t=${_timestamp}"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/layer/layer.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}" type="text/javascript"></script>
@@ -104,7 +106,7 @@
             <div class="left_communions_files">
                 <span id="commnions_top" class="clicked" onclick="ChangeDiv('commnions')">互动交流</span>
                 <span id="filesgx_top" class="clickbefore" style="position: relative" onclick="ChangeDiv('filesgx')">文件共享</span>
-            	<!-- <span id="memberManager_top" class="clickbefore" style="position: relative" onclick="ChangeDiv('memberManager')">成员管理</span> -->
+            	<span id="memberManager_top" class="clickbefore" style="position: relative" onclick="ChangeDiv('memberManager')">成员管理</span>
             </div>
             <div class="left-content">
                 <div class="_show" id="commnions">
@@ -152,6 +154,53 @@
                     	<center style="cursor:pointer" >更多...</center>
                     </div>
 				</div>
+				
+				<!-- 成员管理 -->
+				<div class="hidden" id="memberManager">
+					<div class='search-wrapper'>
+                    	<input type="text" placeholder="请输入姓名或名片 " id= "memberSearchName" class="file_input"/>
+                    	<img class="searchMember" src="${ctx}/statics/image/sx1.png"/>
+                    </div>	
+				
+					<table id = "memberTable">
+					<thead>
+						<tr>
+							<th style="width:25%;">成员</th>
+							<th>身份</th>
+							<th style="width:40%;">组内名片</th>
+							<th>加入时间</th>
+						</tr>
+					</thead>
+					<tbody id="memberContent">
+						
+					
+					</tbody>
+					</table>
+					<div class="pageDiv" >
+	                    <ul class="pagination" id="page1">
+	                    </ul>
+	                    <div style="display: inline-block;    vertical-align: top">
+	                        <select id="page-size-select" name="page-size-select">
+	                            <option value="10"<c:if test ="${pageSize=='10'}" >selected</c:if> >每页10条</option>
+	                            <option value="15"<c:if test ="${pageSize=='15'}" >selected</c:if> >每页15条</option>
+	                            <option value="20"<c:if test ="${pageSize=='20'}" >selected</c:if> >每页20条</option>
+	                            <option value="50" <c:if test ="${pageSize=='50'}" >selected</c:if> >每页50条</option>
+	                        </select>
+	                    </div>
+	                    <input type="hidden" class="" id="pageNum" value="1">
+                    	<input type="hidden" class="" id="pageSize" value="10">
+                    	<input type="hidden" class="" id="maxPageNum" value="${maxPageNum }">
+	                    <div class="pageJump">
+	                    	
+	                        <span>共<span id="totoal_count" >${maxPageNum }</span>页，跳转到</span>
+	                        <input type="text"/>
+	                        <span class="pp">页</span>
+	                        <button type="button" class="button">确定</button>
+	                    </div>
+	                </div> 
+	                
+                </div>
+				<!-- 成员管理end -->
 
             </div>
         </div>

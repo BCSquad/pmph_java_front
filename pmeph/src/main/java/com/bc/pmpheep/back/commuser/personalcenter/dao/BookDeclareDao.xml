@@ -8,12 +8,12 @@
 			purchase, campaign, sales_channel, lifecycle, sponsorship, print_advise, price_advise, print_number, cost, min_print_number,
 			benefit, is_revision, revision_bookname, revision_author, revision_publish_date, revision_print, revision_stock,
 			original_bookname, original_author, nation, edition,realname, sex, price, position, position_profession, degree, workplace,
-			phone, address, postcode, email,is_staging,auth_progress,vn,is_opts_handling,submit_time,bank_account_id)
+			phone, address, postcode, email,is_staging,auth_progress,vn,is_opts_handling,submit_time,bank_account_id,original_publisher)
 			values(#{user_id},#{bookname},#{reader},#{deadline},#{source},#{word_number},#{picture_number},#{subject},#{rank},#{type},#{reader_quantity},
 			#{purchase},#{campaign},#{sales_channel},#{lifecycle},#{sponsorship},#{print_advise},#{price_advise},#{print_number},#{cost},#{min_print_number},
 			#{benefit},#{is_revision},#{revision_bookname},#{revision_author},#{revision_publish_date},#{revision_print},#{revision_stock},
 			#{original_bookname},#{original_author},#{nation},#{edition},#{realname},#{sex},#{price},#{position},#{position_profession},#{degree},#{workplace},
-			#{phone},#{address},#{postcode},#{email},#{is_staging},#{auth_progress},#{vn},#{is_opts_handling},#{submit_time},#{bank_account_id}
+			#{phone},#{address},#{postcode},#{email},#{is_staging},#{auth_progress},#{vn},#{is_opts_handling},#{submit_time},#{bank_account_id},#{original_publisher}
 		  )
 	</insert>
 	<!-- 根据条件查询申报信息 -->
@@ -28,7 +28,7 @@
 			t1.note,t1.gmt_create,t1.gmt_update,t1.reader,t1.tn,t1.vn,t1.submit_time,t1.reader_quantity,t1.campaign,t1.sales_channel,
 			t1.lifecycle,t1.print_advise,t1.price_advise,t1.print_number,t1.cost,t1.min_print_number,t1.benefit,
 			t1.is_revision,t1.revision_bookname,t1.revision_author,SUBSTR(t1.revision_publish_date,1,10) revision_publish_date,t1.revision_print,t1.revision_stock,
-			t1.realname,(case t1.sex when 1 then '1' when 0 then '0' else t1.sex end) as sex,t1.price,t1.position,t1.position_profession,t1.degree,t1.workplace,t1.address,t1.postcode,t1.email
+			t1.realname,(case t1.sex when 1 then '1' when 0 then '0' else t1.sex end) as sex,t1.price,t1.position,t1.position_profession,t1.degree,t1.workplace,t1.address,t1.postcode,t1.email,t1.original_publisher
 		from topic t1 where 1= 1
 		<if test="vn != null and vn != ''">
 			and t1.vn = #{vn}
@@ -50,7 +50,7 @@
 		original_bookname=#{original_bookname},original_author=#{original_author},nation=#{nation},edition=#{edition},
 		realname=#{realname},sex=#{sex},price=#{price},position=#{position},position_profession=#{position_profession},degree=#{degree},
 		workplace=#{workplace},phone=#{phone},address=#{address},postcode=#{postcode},email=#{email},is_staging=#{is_staging},
-		auth_progress=#{auth_progress},vn=#{vn},is_opts_handling=#{is_opts_handling},submit_time=#{submit_time}
+		auth_progress=#{auth_progress},vn=#{vn},is_opts_handling=#{is_opts_handling},submit_time=#{submit_time},original_publisher=#{original_publisher}
 		where id = #{topic_id}
 	</update>
 	<!-- 选题申报-额外信息 -->
@@ -70,7 +70,7 @@
 	<!-- 额外信息修改 -->
 	<update id="updateTopicExtra" parameterType="java.util.Map">
 		update topic_extra
-		set reason=#{reason},achievement=#{achievement},score=#{score},ability=#{ability} where id = #{extra_id}
+		set reason=#{reason},achievement=#{achievement},score=#{score},ability=#{ability} where topic_id = #{topic_id}
 	</update>
 	<!-- 选题申报-编者情况 -->
 	<insert id="insertTopicWriter" parameterType="java.util.Map">
