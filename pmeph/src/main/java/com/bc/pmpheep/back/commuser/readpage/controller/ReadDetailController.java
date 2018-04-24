@@ -560,7 +560,7 @@ public class ReadDetailController extends BaseController{
 			pagetotal=pagetotal+1;
 		}
 
-		map.put("id", req.getParameter("id"));
+		map.put("bbid", req.getParameter("id"));
 		map.put("videolist", videolist);
 		map.put("pagenum", mpagenum);
 		map.put("pagesize", size);
