@@ -55,7 +55,7 @@ body
 #sxy-title
 {
 	height: 40px;
-
+	word-break: break-all;
 	font-size: 24px;
 	font-weight: normal;
 	line-height:40px;
@@ -144,14 +144,14 @@ body
 }
 
 .sxy-content{
-	width: 800px;
+	width: 100%;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
 	line-height: 24px;
 	letter-spacing: 1px;
 	color: #333333;
-	margin-bottom: 30px
+	margin-bottom: 30px;
 }
 
 .sxy-content p{
