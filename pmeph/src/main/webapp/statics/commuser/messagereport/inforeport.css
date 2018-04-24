@@ -66,11 +66,10 @@ body
 #sxy-like
 {
 	width: 140px;
-	height: 26px;
-    background-color:#f6f6f6;
-	float:right;
-	line-height:26px;
-	margin-top:7px;
+    height: 26px;
+    background-color: #f6f6f6;
+    float: right;
+    line-height: 26px;
 }
 #sxy-like img{
 	cursor: pointer;
@@ -78,14 +77,14 @@ body
 
 #sxy-title2
 {
-	height: 22px;
-
-	font-size: 14px;
-	font-weight: normal;
-	line-height:22px;
-	letter-spacing: 0px;
-	color: #999999;
-	margin-bottom:20px;
+	height: 26px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 26px;
+    letter-spacing: 0px;
+    color: #999999;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .sxy-tr
