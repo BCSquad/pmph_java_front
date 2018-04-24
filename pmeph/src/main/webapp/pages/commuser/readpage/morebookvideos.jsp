@@ -58,11 +58,11 @@ String contextpath=request.getContextPath();
 <body>
             <jsp:include page="/pages/comm/head.jsp"></jsp:include>
             <input type="hidden" id="pagenum" value="${pagenum }"/>
-            <input type="hidden" id="pagesize" value="${materialId }"/>
+            <input type="hidden" id="pagesize" value="${pagesize}"/>
             <input type="hidden" id="total" value="${total }"/>
              <input type="hidden" id="pagetotal" value="${pagetotal }"/>
-            <input type="hidden" id="materialId" value="${materialId }"/>
-			<div style="background-color: #f6f6f6;padding-top:28px;padding-bottom:130px"> 
+            <input type="hidden" id="bbid" value="${bbid }"/>
+			<div style="background-color: #f6f6f6;padding-top:28px;padding-bottom:130px">
 			<div class="content-wrapper">
     		<div class="area2">
         		<div class="namehead" style="width:54px">
@@ -70,7 +70,7 @@ String contextpath=request.getContextPath();
         		</div>
    			</div>
      		<div style="margin-top:25px;background-color: #ffffff;padding-top:10px">
-     		
+
      		<%-- <div style="width:1045px;margin:0px auto 0px">
 		     		<div style="width:347px;float:left;margin-top: 40px">
 			          <div class="video-a" style="width:317px;height:275px;margin: 0px auto 0px;">
@@ -111,9 +111,9 @@ String contextpath=request.getContextPath();
 		        </div>
 
 		      </c:forEach>
-		     
-		        
-		        
+
+
+
 		       <%--  <div style="width:1045px;margin:0px auto 0px">
 		     		<div style="width:347px;float:left;margin-top: 40px">
 			          <div class="video-a" style="width:317px;height:275px;margin: 0px auto 0px;">
@@ -132,8 +132,8 @@ String contextpath=request.getContextPath();
 		              </div>
 		          </div>
 		        </div> --%>
-		        
-   
+
+
         </div>
         <div style="clear:both"></div>
            </div>
@@ -204,8 +204,8 @@ $(function(){
         elem:$("#page1"),
         callback: function (n) {
         	var pagesize=$("input[name=edu]").val();
-        	var materialId=$("#materialId").val();
-            window.location.href=contextpath+'readdetail/morebookvideo?pagenum='+n+'&pagesize='+pagesize+'&id='+id;
+            // var bbid=$("#bbid").val();
+            window.location.href=contextpath+'readdetail/morebookvideo.action?pagenum='+n+'&pagesize='+pagesize+'&id='+${bbid };
         }
  });
 	
@@ -216,8 +216,8 @@ $('select').selectlist({
     optionHeight: 30,
     onChange: function () {
     	var pagesize=$("input[name=edu]").val();
-    	var materialId=$("#materialId").val();
-    	window.location.href=contextpath+'readdetail/morebookvideo?pagenum=1&pagesize='+pagesize+'&id='+id;
+        // var bbid=$("#bbid").val();
+    	window.location.href=contextpath+'readdetail/morebookvideo.action?pagenum=1&pagesize='+pagesize+'&id='+${bbid };
     }  //自定义模拟选择列表项chang
 });
 	

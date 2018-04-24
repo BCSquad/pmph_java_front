@@ -524,6 +524,7 @@ ul li {
     max-height: 75px;
     overflow: hidden;
     display: block;
+    word-break: break-all;
 }
 
 .area-3 .content-photo .time-size {

@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="$!{contextpath}statics/commuser/personalcenter/myfavorites.css" type="text/css">
 <script src="$!{contextpath}resources/commuser/personalcenter/myfavorites.js"></script>
-##is_long =1 为书籍收藏夹，0 为文章收藏夹
+##is_long =1 为书籍收藏夹，0 为文章收藏夹,2为信息快报收藏夹
 <input type="hidden" class="queryCondition" id="is_long" value="$!{is_long}">
 
 <ul class="replytag_wrapper">
@@ -16,6 +16,10 @@
 		#if($!{is_long}==0)
 	    	active
 	    #end ">文章收藏夹</li>
+    <li id="replytag_replied2" class="replytag
+		#if($!{is_long}==2)
+	    	active
+	    #end ">信息快报收藏夹</li>
 </ul>
 
 
@@ -55,7 +59,7 @@
                 </div>
             </div>
         </div>
-    #else
+    #elseif($!{c.f_type}==2)
     ##文章
         <div class="collection" >
             <div class="title">
@@ -94,6 +98,42 @@
                 </div>
             </div>
         </div>
+    #elseif($!{c.f_type}==3)
+    ##信息快报
+        <div class="collection" >
+            <div class="title">
+                <div class="title-text">
+                    <a href="$!{contextpath}$!{c.skip}"> $!{c.title}</a>
+                </div>
+                <input type="hidden" id="cmsx$!{c.id}" value="$!{c.id}"/>
+                <div class="tm">
+                   <span class="author-icon" ><img  src="$!{contextpath}$!{c.avatar}" style="width:25px;height:25px;border-radius: 50%;"/>
+                   </span>
+                    <span class="name">$!{c.author}</span>
+                    <span class="time"><fmt:formatDate  value="$!{c.gmt_create}" pattern="yyyy.MM.dd"/></span>
+                </div>
+            </div>
+            <div class="content">
+                <div  class="content-imgc">
+                    <img src="$!{c.imgpath}"/>
+                </div>
+                <div  class="content-text" style="width: 640px;">
+                    <div class="text">
+                        $!{c.detail}
+                    </div>
+                    <div class="end">
+                        <div class="foot">
+                            <span class="span1" onclick="cancelMarkx('$!{c.mid}','$!{c.bookmarks}','$!{c.id}','$!{c.favorite_id}')">取消收藏</span>
+                            <span class="#if($!{c.like}>0)span3 #else span2 #end" id="likex$!{c.id}">$!{c.likes}</span>
+                            <span class="smicon #if($!{c.like}>0) good #else nogood #end "  onclick="addlikex('$!{c.id}')" id="goodx$!{c.id}"></span>
+                            <span class="span2">$!{c.clicks}</span>
+                            <span class="smicon look"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     #end
 #end
 </div>

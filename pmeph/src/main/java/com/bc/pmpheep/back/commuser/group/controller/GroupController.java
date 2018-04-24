@@ -29,6 +29,7 @@ import com.bc.pmpheep.back.commuser.group.bean.GroupList;
 import com.bc.pmpheep.back.commuser.group.bean.GroupMessageVO;
 import com.bc.pmpheep.back.commuser.group.bean.PmphGroupMemberVO;
 import com.bc.pmpheep.back.commuser.group.service.GroupService;
+import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.general.controller.FileDownLoadController;
 import com.bc.pmpheep.general.service.FileService;
 import com.bc.pmpheep.service.exception.CheckedExceptionBusiness;
@@ -369,6 +370,68 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
     	
 		return resultMap;
     }
+    
+    
+    /**
+     * 查询成员管理列表
+     * @param request
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping(value="/getMembers",method=RequestMethod.POST)
+    @ResponseBody
+    public Map<Object,Object> getMembers(HttpServletRequest request
+    		,@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum
+    		,@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize){
+    	Map<Object,Object> resultMap = new HashMap<Object, Object>();
+    	Map<String,Object> paraMap = new HashMap<String, Object>();
+    	PageParameter<Map<String, Object>> pageParameter = new PageParameter<Map<String, Object>>(pageNum, pageSize);
+    	String memberSearchName = request.getParameter("memberSearchName");
+    	String groupId = request.getParameter("groupId");
+    	Map<String, Object> user = getUserInfo();
+    	
+    	paraMap.put("groupId", groupId);
+    	paraMap.put("memberSearchName", memberSearchName);
+    	paraMap.put("logUserId", user.get("id"));
+    	pageParameter.setParameter(paraMap);
+    	
+    	List<Map<String,Object>> mlist = groupService.queryMemberListForManage(pageParameter);
+    	int count = groupService.queryMemberListForManageCount(pageParameter);
+    	
+    	Integer maxPageNum = (int) Math.ceil(1.0 * count / pageSize);
+    	resultMap.put("pageNum", pageNum);
+    	resultMap.put("maxPageNum", maxPageNum);
+    	resultMap.put("mlist", mlist);
+    	
+    	return resultMap;
+    }
+    
+    /**
+     * 修改成员的组内名称 
+     * @param request
+     * @return
+     */
+    @RequestMapping(value="/updateDisplayName",method=RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> updateDisplayName(HttpServletRequest request){
+    	Map<String,Object> resultMap = new HashMap<String, Object>();
+    	Map<String,Object> paraMap = new HashMap<String, Object>();
+    	String groupId = request.getParameter("groupId");
+    	String member_id = request.getParameter("member_id");
+    	String display_name = request.getParameter("display_name");
+    	
+    	
+    	paraMap.put("member_id", member_id);
+    	paraMap.put("display_name", display_name);
+    	
+    	int count = groupService.updateDisplayName(paraMap);
+    	
+    	
+    	return resultMap;
+    }
+    
+    
 }
 
 

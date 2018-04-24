@@ -482,6 +482,87 @@
 		 where m.is_writer=1 and m.user_id = #{user_id}  and m.group_id = #{group_id}
 	</select>
 	
+	<!-- 查询成员列表，供成员管理功能使用 -->
+	<select id="queryMemberListForManage" resultType="Map" parameterType="com.bc.pmpheep.back.plugin.PageParameter">
+		SELECT
+		gm.id,
+		gm.user_id,
+		gm.is_founder,
+		gm.is_admin,
+		gm.is_writer,
+		gm.display_name,
+		gm.gmt_create,
+		
+		(select (
+		case 
+		when gm.is_founder = 1
+		then 3
+		when gm.is_admin = 1 
+		then 2
+		else 1
+		end
+		)as rank 
+		from writer_user wu join pmph_group_member gm on gm.user_id = wu.id and gm.is_writer = 1 and group_id = #{parameter.groupId} and wu.id = #{parameter.logUserId}
+		) <!-- 登录人权级 3创建人 2管理员 1普通成员 -->
+		&gt;
+		( <!-- 列表各权级 3创建人 2管理员 1普通成员 0登录人 -->
+		case 
+		when wu.id = #{parameter.logUserId} 
+		then 0
+		when gm.is_founder = 1
+		then 3
+		when gm.is_admin = 1 
+		then 2
+		else 1
+		end
+		)as editable,
+		
+		(
+		case 
+		when wu.id = #{parameter.logUserId} 
+		then 0
+		when gm.is_founder = 1
+		then 1
+		when gm.is_admin = 1 
+		then 2
+		else 3
+		end
+		)as orderClause,
+		
+		ifnull(wu.realname,pu.realname) as realname,
+		ifnull(wu.avatar,pu.avatar) as avatar
+		
+		from pmph_group_member gm
+		left join writer_user wu on gm.user_id = wu.id and gm.is_writer = 1
+		left join pmph_user pu on gm.user_id = pu.id and gm.is_writer = 0
+		where gm.group_id = #{parameter.groupId} and gm.is_deleted = 0
+		<if test="parameter.memberSearchName != null and parameter.memberSearchName != '' ">
+			and (ifnull(wu.realname,pu.realname) like concat('%',#{parameter.memberSearchName},'%') or gm.display_name like concat('%',#{parameter.memberSearchName},'%'))
+		</if>
+		group by gm.id
+		order by orderClause asc
+		limit ${start},${pageSize}
+	</select>
+	
+	
+	<!-- 查询成员列表总数，供成员管理功能使用 -->
+	<select id="queryMemberListForManageCount" resultType="int" parameterType="com.bc.pmpheep.back.plugin.PageParameter">
+		SELECT
+		count(distinct gm.id)
+		from pmph_group_member gm
+		left join writer_user wu on gm.user_id = wu.id and gm.is_writer = 1
+		left join pmph_user pu on gm.user_id = pu.id and gm.is_writer = 0
+		where gm.group_id = #{parameter.groupId} and gm.is_deleted = 0
+		<if test="parameter.memberSearchName != null and parameter.memberSearchName != '' ">
+			and (ifnull(wu.realname,pu.realname) like concat('%',#{parameter.memberSearchName},'%') or gm.display_name like concat('%',#{parameter.memberSearchName},'%'))
+		</if>
+	</select>
+	
+	<!-- 修改群名片 -->
+	<update id="updateDisplayName" parameterType="Map">
+		update pmph_group_member set display_name = #{display_name}
+		where  id = #{member_id}
+	</update>
 
 </mapper>
 

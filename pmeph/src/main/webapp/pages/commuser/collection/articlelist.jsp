@@ -65,8 +65,11 @@ String basePath =path+"/";
                 <div class="end">
                     <div class="foot">
                         <span class="span1" onclick="cancelMark('${article.markId}','${article.bookmarks }','${article.cid }')">取消收藏</span>
+                        
+                        <c:if test="${article.category_id == 1}">
                         <span class="span2" >${article.comments }</span>
                         <span class="smicon comment" onclick="window.open('${ctx}/articledetail/toPage.action?wid=${article.cid }#001')"></span>
+                        </c:if>
                         <span class="${article.like>0?'span3':'span2' }" id="like${article.cid}">${article.likes }</span>
                         <span class="smicon ${article.like>0?'good':'nogood' }"  onclick="addlike('${article.cid}')" id="good${article.cid}"></span>
                         <span class="span2">${article.clicks }</span>

@@ -5,7 +5,7 @@
 		#else
 			<div class="head-portrait" style="background-image: url($!{contextpath}image/$!{c.avatar}.action);"></div>
 		#end
-        <div class="friend-name">$c.realname</div>
+        <div class="friend-name" title ="$!{c.realname}">$!{c.realname}</div>
         #if($c.rank == 0)
         	<div class="friend-job">普通用户</div>
         #elseif($c.rank == 1)
