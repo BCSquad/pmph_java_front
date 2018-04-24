@@ -489,6 +489,7 @@ ul{
 }
 .w65_h20_line20{
     width: 65px;height: 20px;line-height: 20px;
+    overflow: hidden;
 }
 
 .w85_h50{
