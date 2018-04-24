@@ -195,7 +195,7 @@
 							</td>
 							<td><span><span class="btbs1">*</span>年&emsp;&emsp;龄：&emsp;&emsp;</span>
 								<input class="cg_input" name="price" id="price" placeholder="" value=""
-									   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="3"
+									   onkeyup="this.value=this.value.replace(/(\D|^0+)/g,'');this.value=this.value.replace(/^[^0-1]\d{2}$/g,'199');" onafterpaste="this.value=this.value.replace(/(\D|^0+)/g,'');this.value=this.value.replace(/^[^0-1]\d{2}$/g,'199');" maxlength="3"
 								/>
 							</td>
 						</tr>
@@ -388,7 +388,8 @@
 								</select>
 							</td>
 							<td><input class="sb_input" style="width: 70px;" name="write_price" placeholder="年龄" value="" id="write_price"
-									   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" onBlur="checkAge(this)"
+									   onkeyup="this.value=this.value.replace(/(\D|^0+)/g,'');this.value=this.value.replace(/^[^0-1]\d{2}$/g,'199');" onafterpaste="this.value=this.value.replace(/(\D|^0+)/g,'');this.value=this.value.replace(/^[^0-1]\d{2}$/g,'199');"
+									   onBlur="checkAge(this)"
 									   maxlength="3"/></td>
 							<td><input class="sb_input" style="width: 120px;" name="write_phone" placeholder="电话" value="" id="write_phone" maxlength="36"/></td>
 							<td>
