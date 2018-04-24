@@ -277,6 +277,7 @@ function getExcel(coa){
 							+'&textBookId='+$("#textBookId").val()
 							+'&isFirstEditorLogIn='+$("#isFirstEditorLogIn").val()
 							+'&is_digital_editor_optional='+$("#is_digital_editor_optional").val()
-							+'&excelChoosen='+excelChoosen;
+							+'&excelChoosen='+excelChoosen
+							+'&textBookName='+encodeURI(encodeURI(($(".top2").text())));
 }
 
