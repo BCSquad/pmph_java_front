@@ -598,7 +598,7 @@ ul{
     height: 19px;
     border-radius: 100%;
     float: left;
-    margin-left: 60px;
+    margin-left: 55px;
 }
 
 input.display_name {
@@ -626,6 +626,7 @@ input.display_name:focus{
     text-overflow: ellipsis;
     overflow: hidden;
     float: left;
+    text-align: left;
     padding: 0px 10px;
 }
 
