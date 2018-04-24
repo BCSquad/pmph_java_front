@@ -303,7 +303,7 @@ $(function(){
 										+'<img src="'
 										+ contextpath + (list[i].avatar.search(/^[0-9A-z]{24}/g)>0?('image/'+list[i].avatar+'.action'):'statics/image/default_image.png')
 										+'">'
-										+'		<span>'+list[i].realname+'</span>'
+										+'		<span title="'+list[i].realname+'">'+list[i].realname+'</span>'
 										+'	</div>'
 										+'</td>'
 										
@@ -316,7 +316,7 @@ $(function(){
 										+'<td>'
 										+'	<input class="member_id" type="hidden" value="'+list[i].id+'">'
 										+'	<input class="display_name_hidden" type="hidden" value="'+list[i].display_name+'">'
-										+'	<input class="display_name" value="'+list[i].display_name+'" '+(list[i].editable==0?'disabled="disabled" title="无修改权限" ':' onblur="updateDisplayName(this)" ')+'>'
+										+'	<input class="display_name" maxLength="20" value="'+list[i].display_name+'" '+(list[i].editable==0?'disabled="disabled" title="无修改权限" ':' onblur="updateDisplayName(this)" ')+'>'
 										+'</td>'
 										+'<td>'
 										+'	<span>'+formatDate(list[i].gmt_create,'yyyy-MM-dd')+'</span>'
