@@ -651,7 +651,7 @@ max-width: 10px !important; min-width: 10px !important;
 		    		<c:when test="${st.last==false}">
 		  				<div class="${(st.index+1)%5 == 1? 'item1':'item1 item11'}" >
 				            <div><img src="${ctx}/${friend.avatar}" class="img2"></div>
-				            <div class="div_txt1">${friend.realname}</div>
+				            <div class="div_txt1" title="${friend.realname}">${friend.realname}</div>
 				            <div class="div_txt2">${friend.position}</div>
 				            <div class="div_txt3">
 				                <div  class ="showTalk" id="${friend.id}" >私信</div>
@@ -663,7 +663,7 @@ max-width: 10px !important; min-width: 10px !important;
 			  			<div class="${(st.index+1)%5 == 1? 'item1':'item1 item11'}" >
 				            <div><img src="${ctx}/${friend.avatar}" class="img2"></div>
 				           <%--  <div><img src="${ctx}/statics/pictures/head.png" class="img2"></div> --%>
-				            <div class="div_txt1">${friend.realname}</div>
+				            <div class="div_txt1" title="${friend.realname}">${friend.realname}</div>
 				            <div class="div_txt2">${friend.position}</div>
 				            <div class="div_txt3">
 				                <div  class ="showTalk" id="${friend.id}" >私信</div>
@@ -723,7 +723,7 @@ max-width: 10px !important; min-width: 10px !important;
                				str+='<div class="item1 item11">'
                			}; 
                	            <%-- <div><img src="${ctx}${friend.avatar}" class="img2"></div> --%>
-               	       str+='<div><img src="${ctx}/${friend.avatar}" class="img2"></div><div class="div_txt1">'
+               	       str+='<div><img src="'+contextpath+((/^[A-z0-9]{24}$/g).test(n.avatar)?('image/'+n.avatar+'.action'):'statics/image/default_image.png')+'" class="img2"></div><div class="div_txt1" title="'+n.realname+'">'
                	            +n.realname
                	            +'</div><div class="div_txt2">'
                	            +n.position
