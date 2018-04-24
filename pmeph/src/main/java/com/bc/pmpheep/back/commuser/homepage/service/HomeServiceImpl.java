@@ -250,12 +250,14 @@ public class HomeServiceImpl implements HomeService {
     @Override
     public String omit(String content, int length) throws UnsupportedEncodingException {
         String returncontent = "";
-        int le = content.getBytes("UTF-8").length;
-        if (le > length && !content.equals(null)) {
+        content = removeHtml(content);
+        //int le = content.getBytes("UTF-8").length;
+        int le = content.length();
+        if (le > length/4 && !content.equals(null)) {
             int n = length / 4;
-            returncontent =removeHtml(content).substring(0, n) + "...";
+            returncontent =content.substring(0, n) + "...";
         } else {
-            returncontent = removeHtml(content);
+            returncontent = content;
         }
         return returncontent;
     }
