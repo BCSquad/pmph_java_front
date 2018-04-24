@@ -8,98 +8,99 @@ import java.util.Map;
 @Service("com.bc.pmpheep.back.commuser.materialdec.service.PersonInfoServiceImpl")
 public class PersonInfoServiceImpl implements PersonInfoService {
 
+
     @Override
-    public List<Map<String, Object>> queryStu(Map<String, Object> map) {
+    public List<Map<String, Object>> queryPerStu(Map<String, Object> map) {
         return null;
     }
 
     @Override
-    public int insertStu(Map<String, Object> map) {
+    public int insertPerStu(Map<String, Object> map) {
         return 0;
     }
 
     @Override
-    public List<Map<String, Object>> queryWork(Map<String, Object> map) {
+    public List<Map<String, Object>> queryPerWork(Map<String, Object> map) {
         return null;
     }
 
     @Override
-    public int insertWork(Map<String, Object> map) {
+    public int insertPerWork(Map<String, Object> map) {
         return 0;
     }
 
     @Override
-    public List<Map<String, Object>> queryZjxs(Map<String, Object> map) {
+    public List<Map<String, Object>> queryPerZjxs(Map<String, Object> map) {
         return null;
     }
 
     @Override
-    public int insertZjxs(Map<String, Object> map) {
+    public int insertPerZjxs(Map<String, Object> map) {
         return 0;
     }
 
     @Override
-    public List<Map<String, Object>> queryStea(Map<String, Object> map) {
+    public List<Map<String, Object>> queryPerStea(Map<String, Object> map) {
         return null;
     }
 
     @Override
-    public int insertStea(Map<String, Object> map) {
+    public int insertPerStea(Map<String, Object> map) {
         return 0;
     }
 
     @Override
-    public List<Map<String, Object>> queryJcbj(Map<String, Object> map) {
+    public List<Map<String, Object>> queryPerJcbj(Map<String, Object> map) {
         return null;
     }
 
     @Override
-    public int insertJcbj(Map<String, Object> map) {
+    public int insertPerJcbj(Map<String, Object> map) {
         return 0;
     }
 
     @Override
-    public List<Map<String, Object>> queryGjkcjs(Map<String, Object> map) {
+    public List<Map<String, Object>> queryPerGjkcjs(Map<String, Object> map) {
         return null;
     }
 
     @Override
-    public int insertGjkcjs(Map<String, Object> map) {
+    public int insertPerGjkcjs(Map<String, Object> map) {
         return 0;
     }
 
     @Override
-    public List<Map<String, Object>> queryGjghjc(Map<String, Object> map) {
+    public List<Map<String, Object>> queryPerGjghjc(Map<String, Object> map) {
         return null;
     }
 
     @Override
-    public int insertGjghjc(Map<String, Object> map) {
+    public int insertPerGjghjc(Map<String, Object> map) {
         return 0;
     }
 
     @Override
-    public List<Map<String, Object>> rwsjcList(Map<String, Object> map) {
+    public List<Map<String, Object>> rwsjcPerList(Map<String, Object> map) {
         return null;
     }
 
     @Override
-    public List<Map<String, Object>> queryqtJcbx(Map<String, Object> map) {
+    public List<Map<String, Object>> queryqtPerJcbx(Map<String, Object> map) {
         return null;
     }
 
     @Override
-    public int insertJcbx(Map<String, Object> map) {
+    public int insertPerJcbx(Map<String, Object> map) {
         return 0;
     }
 
     @Override
-    public List<Map<String, Object>> queryZjkyqk(Map<String, Object> map) {
+    public List<Map<String, Object>> queryPerZjkyqk(Map<String, Object> map) {
         return null;
     }
 
     @Override
-    public int insertZjkyqk(Map<String, Object> map) {
+    public int insertPerZjkyqk(Map<String, Object> map) {
         return 0;
     }
 
@@ -119,62 +120,62 @@ public class PersonInfoServiceImpl implements PersonInfoService {
     }
 
     @Override
-    public List<Map<String, Object>> queryMonograph(Map<String, Object> map) {
+    public List<Map<String, Object>> queryPerMonograph(Map<String, Object> map) {
         return null;
     }
 
     @Override
-    public int insertMonograph(Map<String, Object> map) {
+    public int insertPerMonograph(Map<String, Object> map) {
         return 0;
     }
 
     @Override
-    public List<Map<String, Object>> queryPublish(Map<String, Object> map) {
+    public List<Map<String, Object>> queryPerPublish(Map<String, Object> map) {
         return null;
     }
 
     @Override
-    public int insertPublish(Map<String, Object> map) {
+    public int insertPerPublish(Map<String, Object> map) {
         return 0;
     }
 
     @Override
-    public List<Map<String, Object>> querySci(Map<String, Object> map) {
+    public List<Map<String, Object>> queryPerSci(Map<String, Object> map) {
         return null;
     }
 
     @Override
-    public int insertSci(Map<String, Object> map) {
+    public int insertPerSci(Map<String, Object> map) {
         return 0;
     }
 
     @Override
-    public List<Map<String, Object>> queryClinicalreward(Map<String, Object> map) {
+    public List<Map<String, Object>> queryPerClinicalreward(Map<String, Object> map) {
         return null;
     }
 
     @Override
-    public int insertClinicalreward(Map<String, Object> map) {
+    public int insertPerClinicalreward(Map<String, Object> map) {
         return 0;
     }
 
     @Override
-    public List<Map<String, Object>> queryAcadereward(Map<String, Object> map) {
+    public List<Map<String, Object>> queryPerAcadereward(Map<String, Object> map) {
         return null;
     }
 
     @Override
-    public int insertAcadereward(Map<String, Object> map) {
+    public int insertPerAcadereward(Map<String, Object> map) {
         return 0;
     }
 
     @Override
-    public Map<String, Object> queryMoocdigital(Map<String, Object> map) {
+    public Map<String, Object> queryPerMoocdigital(Map<String, Object> map) {
         return null;
     }
 
     @Override
-    public Map<String, Object> queryIntention(Map<String, Object> map) {
+    public Map<String, Object> queryPerIntention(Map<String, Object> map) {
         return null;
     }
 }
