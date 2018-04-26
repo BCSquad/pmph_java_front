@@ -80,7 +80,7 @@ function save(){
     			||$("#email_original").val()!=$("#email").val())) {
     		//修改了敏感项，若提交需要重审，询问是否提交
     		window.message.confirm(
-    				'<font color="red">真实姓名、手机、E-mail</font> 的修改将需要 人民卫生出版社 重新认证!</br><font color="red"><B>期间将暂时失去管理员权限！请慎重操作。</B></font>'
+    				'<font color="red">真实姓名、手机、E-mail</font> 的修改将需要重新进行管理员认证!</br><font color="red"></font>'
     				,{icon: 7, title:'敏感项修改警告',btn:["仅修改非敏感项(无需重新认证)","全部修改并提交(需要重新认证)"]}
     				
     				,function(index){
