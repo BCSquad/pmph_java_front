@@ -489,6 +489,7 @@ ul{
 }
 .w65_h20_line20{
     width: 65px;height: 20px;line-height: 20px;
+    overflow: hidden;
 }
 
 .w85_h50{
@@ -598,7 +599,7 @@ ul{
     height: 19px;
     border-radius: 100%;
     float: left;
-    margin-left: 60px;
+    margin-left: 55px;
 }
 
 input.display_name {
@@ -626,6 +627,7 @@ input.display_name:focus{
     text-overflow: ellipsis;
     overflow: hidden;
     float: left;
+    text-align: left;
     padding: 0px 10px;
 }
 

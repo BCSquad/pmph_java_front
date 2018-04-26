@@ -197,7 +197,8 @@
 							</td>
 							<td><span><span class="btbs1">*</span>年&emsp;&emsp;龄：&emsp;&emsp;</span>
 								<input class="cg_input" name="price" id="price" placeholder="" value="${topicMap.price}"
-									   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="3"
+									   onkeyup="this.value=this.value.replace(/(\D|^0+)/g,'');this.value=this.value.replace(/^[^0-1]\d{2}$/g,'199');" onafterpaste="this.value=this.value.replace(/(\D|^0+)/g,'');this.value=this.value.replace(/^[^0-1]\d{2}$/g,'199');"
+									   maxlength="3"
 								/>
 							</td>
 						</tr>

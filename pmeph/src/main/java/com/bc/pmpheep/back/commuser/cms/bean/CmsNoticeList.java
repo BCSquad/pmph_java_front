@@ -64,7 +64,7 @@ public class CmsNoticeList {
 	 */
 	private Timestamp deadline;
 
-
+	private Timestamp authDate;
 
 	/**
 	 * 实际截止时间
@@ -228,5 +228,15 @@ public class CmsNoticeList {
 	public void setDeadline(Timestamp deadline) {
 		this.deadline = deadline;
 	}
+
+	public Timestamp getAuthDate() {
+		return authDate;
+	}
+
+	public void setAuthDate(Timestamp authDate) {
+		this.authDate = authDate;
+	}
+	
+	
 
 }

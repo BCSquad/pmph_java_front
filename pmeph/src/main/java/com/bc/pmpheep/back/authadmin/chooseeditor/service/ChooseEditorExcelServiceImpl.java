@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.authadmin.chooseeditor.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,14 @@ public class ChooseEditorExcelServiceImpl implements ExcelDownloadService {
 	
 	@Override
 	public String getTitle(Map<String, Object> param) {
-		return "编委遴选名单";
+		String textBookName ="";
+		try {
+			textBookName = java.net.URLDecoder.decode(param.get("textBookName").toString(),"utf-8");
+		} catch (UnsupportedEncodingException e) {
+			
+			e.printStackTrace();
+		}
+		return "《"+textBookName+"》-编委遴选名单";
 	}
 
 	@Override

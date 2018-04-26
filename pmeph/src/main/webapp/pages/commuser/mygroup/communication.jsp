@@ -165,8 +165,9 @@
 					<table id = "memberTable">
 					<thead>
 						<tr>
-							<th>成员</th>
-							<th>组内名片</th>
+							<th style="width:25%;">成员</th>
+							<th>身份</th>
+							<th style="width:40%;">组内名片</th>
 							<th>加入时间</th>
 						</tr>
 					</thead>

@@ -80,7 +80,7 @@
 
 }
 
- .end .textp{position: relative; line-height: 31px; max-height:62px;overflow: hidden;}
+ .end .textp{position: relative; line-height: 31px; max-height:62px;overflow: hidden;word-break: break-all;}
 
  .textp:after{
 

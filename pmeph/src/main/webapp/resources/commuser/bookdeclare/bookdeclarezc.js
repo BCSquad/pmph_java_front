@@ -103,7 +103,7 @@ function add_zjky(){
         "<option value='1'>女</option>"+
         "</select></td>"+
         "<td><input class='sb_input' style='width: 70px;' id='write_price_"+num+"' name='write_price' placeholder='年龄' value=''" +
-        "onkeyup='this.value=this.value.replace(/\\D/g,&#39;&#39;)' onafterpaste='this.value=this.value.replace(/\\D/g,&#39;&#39;)'"+
+        "onkeyup='this.value=this.value.replace(/(\\D|^0+)/g,&#39;&#39;);this.value=this.value.replace(/^[^0-1]\\d{2}$/g,199);' onafterpaste='this.value=this.value.replace(/(\\D|^0+)/g,&#39;&#39;);this.value=this.value.replace(/^[^0-1]\\d{2}$/g,199);'"+
         "onBlur='checkAge(this)' maxlength='3' /></td>"+
 		"<td><input class='sb_input' style='width: 120px;' name='write_phone' placeholder='电话' value='' id='write_phone_"+num+"' maxlength='36'/></td>"+
         "<td><select id='write_degree_"+num+"' name='write_degree'>" +

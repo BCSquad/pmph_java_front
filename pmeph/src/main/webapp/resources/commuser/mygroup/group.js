@@ -303,13 +303,20 @@ $(function(){
 										+'<img src="'
 										+ contextpath + (list[i].avatar.search(/^[0-9A-z]{24}/g)>0?('image/'+list[i].avatar+'.action'):'statics/image/default_image.png')
 										+'">'
-										+'		<span>'+list[i].realname+'</span>'
+										+'		<span title="'+list[i].realname+'">'+list[i].realname+'</span>'
 										+'	</div>'
 										+'</td>'
+										
+										+'<td>'
+										+(list[i].is_founder?'	<span>创建者</span>':'')
+										+(list[i].is_admin && !list[i].is_founder?'	<span>管理员</span>':'')
+										+(!list[i].is_admin && !list[i].is_founder?'	<span>组员</span>':'')
+										+'</td>'
+										
 										+'<td>'
 										+'	<input class="member_id" type="hidden" value="'+list[i].id+'">'
 										+'	<input class="display_name_hidden" type="hidden" value="'+list[i].display_name+'">'
-										+'	<input class="display_name" value="'+list[i].display_name+'" '+(list[i].editable==0?'disabled="disabled" title="无修改权限" ':' onblur="updateDisplayName(this)" ')+'>'
+										+'	<input class="display_name" maxLength="20" value="'+list[i].display_name+'" '+(list[i].editable==0?'disabled="disabled" title="无修改权限" ':' onblur="updateDisplayName(this)" ')+'>'
 										+'</td>'
 										+'<td>'
 										+'	<span>'+formatDate(list[i].gmt_create,'yyyy-MM-dd')+'</span>'
@@ -318,7 +325,7 @@ $(function(){
                        
                         $("#memberContent").append(html);
                     }
-                    
+                    $(".pageDiv").children().css('display','inline-block');
                 }
                 $("#totoal_count").html(json.maxPageNum);
                 $("#maxPageNum").val(json.maxPageNum);
@@ -333,8 +340,6 @@ $(function(){
                   	initMember();
                   }
                   });
-            
-
 
             }
         });
