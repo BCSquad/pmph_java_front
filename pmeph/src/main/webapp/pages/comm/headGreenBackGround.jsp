@@ -82,12 +82,12 @@
 			<c:choose> 
      			<c:when test="${ SESSION_USER_CONST_ORGUSER.progress==1}">   
 	     			 	<div class="div-menu-child <%="account".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
-	                 	onclick="window.location.href='<c:url value="/admininfocontroller/toadmininfo.action"/>'">账户设置
+	                 	onclick="window.location.href='<c:url value="/admininfocontroller/toadmininfo.action"/>'">修改资料
 	            		</div>
  				</c:when>      
      			<c:otherwise>  
      			<div class="div-menu-child <%="account".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
-	                 onclick="window.location.href='<c:url value="/userinfo/toNoAccessToAuthority.action?pageType=account"/>'">账户设置
+	                 onclick="window.location.href='<c:url value="/userinfo/toNoAccessToAuthority.action?pageType=account"/>'">修改资料
 	            	</div>    
   				</c:otherwise> 
 			</c:choose>
