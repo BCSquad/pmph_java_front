@@ -72,23 +72,63 @@ function getform(){
 
 
 function save(){
-    if($("form").validate('submitValidate')){
-        $.ajax({
-            type:'post',
-            url:contextpath+'admininfocontroller/updateorguser.action',
-            async:false,
-            dataType:'json',
-            data:getform(),
-            success:function(code){
-                if (code=="success"){
-	                message.success("保存成功");
-	                $("#sxy-img1").attr("src",contextpath+"file/download/"+fileid+".action");
-	                location.href=contextpath+'admininfocontroller/toadmininfo.action?id='+json.id;
-	            }else{
-	            	message.error("保存失败");
-	            }
-            }
-        });
+	var data = getform();
+    if($("form").validate('submitValidate')){ //通过校验
+    	if ($("#progress_original").val()==1
+    			&&($("#realName_original").val()!=$("#realName").val()
+    			||$("#handphone_original").val()!=$("#handphone").val()
+    			||$("#email_original").val()!=$("#email").val())) {
+    		//修改了敏感项，若提交需要重审，询问是否提交
+    		window.message.confirm(
+    				'<font color="red">真实姓名、手机、E-mail</font> 的修改将需要重新进行管理员认证!</br><font color="red"></font>'
+    				,{icon: 7, title:'敏感项修改警告',btn:["仅修改非敏感项(无需重新认证)","全部修改并提交(需要重新认证)"]}
+    				
+    				,function(index){
+    					layer.close(index);
+    					//仅修改非敏感项
+    					data.realName=$("#realName_original").val();
+    					data.handphone=$("#handphone_original").val();
+    					data.email=$("#email_original").val();
+    					data.progress=-1;
+    					updateorguser(data);
+    					
+    				}
+    				,function(index){
+    					layer.close(index);
+    					//提交，我要重新认证
+    					data.progress=0;
+    					updateorguser(data);
+    					
+    				}
+    				);
+		}else{
+			//本来就未修改敏感项 直接修改
+			data.progress=-1;
+			updateorguser(data);
+		}
+    	//内部修改方法
+    	function updateorguser(data){
+    		$.ajax({
+                type:'post',
+                url:contextpath+'admininfocontroller/updateorguser.action',
+                async:false,
+                dataType:'json',
+                data:data,
+                success:function(code){
+                    if (code=="success"){
+    	                message.success("保存成功");
+    	                //$("#sxy-img1").attr("src",contextpath+"file/download/"+fileid+".action");
+    	                setTimeout(function(){
+    	                	location.href=contextpath+'admininfocontroller/toadmininfo.action';
+    	                }, 800);
+    	                
+    	            }else{
+    	            	message.error("保存失败");
+    	            }
+                }
+            });
+    	}
+        
     };
 
 }
