@@ -88,6 +88,13 @@
 </style>
 </head>
 <body>
+
+<!-- 隐藏域 修改后会再次提交待审的字段 原数据 -->
+<input type="hidden" id="realName_original" value="${admininfo.realname}">
+<input type="hidden" id="handphone_original" value="${admininfo.handphone}">
+<input type="hidden" id="email_original" value="${admininfo.email}">
+<input type="hidden" id="progress_original" value="${admininfo.progress}">
+
 <input type="hidden" id="avatar" >
 	<jsp:include page="/pages/comm/headGreenBackGround.jsp">
 		<jsp:param name="pageTitle" value="account"></jsp:param>

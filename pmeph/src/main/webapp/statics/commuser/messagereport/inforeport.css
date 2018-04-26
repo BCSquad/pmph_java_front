@@ -67,7 +67,7 @@ body
 {
 	width: 140px;
     height: 26px;
-    background-color: #f6f6f6;
+    /* background-color: #f6f6f6; */
     float: right;
     line-height: 26px;
 }

@@ -26,7 +26,7 @@
             <if test="proxy !=null and proxy !=''">proxy=#{proxy},</if>
             <if test='isProxyUpload =="1" '>is_proxy_upload=#{isProxyUpload},</if>
             <if test="address!=null and address!=''">address=#{address},</if>
-            progress=0
+            <if test="progress >=0 "> progress=0</if>
         </set>
         WHERE id=#{id}
     </update>
