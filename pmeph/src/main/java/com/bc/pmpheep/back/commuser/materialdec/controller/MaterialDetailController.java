@@ -1,17 +1,14 @@
 package com.bc.pmpheep.back.commuser.materialdec.controller;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.bc.pmpheep.back.authadmin.message.service.SendMessageServiceImpl;
+import com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailService;
+import com.bc.pmpheep.back.commuser.materialdec.service.PersonInfoService;
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
+import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
+import com.bc.pmpheep.general.controller.BaseController;
+import com.bc.pmpheep.general.service.FileService;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,14 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bc.pmpheep.back.authadmin.message.service.SendMessageServiceImpl;
-import com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailService;
-import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
-import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
-import com.bc.pmpheep.back.plugin.PageParameter;
-import com.bc.pmpheep.back.plugin.PageResult;
-import com.bc.pmpheep.general.controller.BaseController;
-import com.bc.pmpheep.general.service.FileService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * 注释:教材申报
@@ -44,7 +39,11 @@ public class MaterialDetailController extends BaseController{
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailServiceImpl")
 	private MaterialDetailService mdService;
-	
+
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.materialdec.service.PersonInfoServiceImpl")
+	private PersonInfoService perService;
+
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.authadmin.message.service.SendMessageServiceImpl")
 	private SendMessageServiceImpl sendMessageServiceImpl;
@@ -65,6 +64,42 @@ public class MaterialDetailController extends BaseController{
 	@RequestMapping("toMaterialAdd")
 	public ModelAndView toMaterialAdd(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("commuser/materialdec/toMaterialAdd");
+		//3.作家学习经历表
+		List<Map<String,Object>> perstuList = new ArrayList<Map<String,Object>>();
+		//4.作家工作经历表
+		List<Map<String,Object>> perworkList = new ArrayList<Map<String,Object>>();
+		//5.作家教学经历表
+		List<Map<String,Object>> persteaList = new ArrayList<Map<String,Object>>();
+		//6.作家兼职学术表
+		List<Map<String,Object>> perzjxsList = new ArrayList<Map<String,Object>>();
+		//7.作家上套教材参编情况表
+		List<Map<String,Object>> perjcbjList = new ArrayList<Map<String,Object>>();
+		//8.作家精品课程建设情况表
+		List<Map<String,Object>> pergjkcjsList = new ArrayList<Map<String,Object>>();
+		//9.作家主编国家级规划教材情况表
+		List<Map<String,Object>> pergjghjcList = new ArrayList<Map<String,Object>>();
+		//10.其他社教材编写情况
+		List<Map<String,Object>> perjcbxList = new ArrayList<Map<String,Object>>();
+		//11.作家科研情况表
+		List<Map<String,Object>> perzjkyList = new ArrayList<Map<String,Object>>();
+		//13.个人成就
+		Map<String,Object> perachievementMap = new HashMap<String,Object>();
+		//14.主编学术专著情况表
+		List<Map<String,Object>> permonographList = new ArrayList<Map<String,Object>>();
+		//15.出版行业获奖情况表
+		List<Map<String,Object>> perpublishList = new ArrayList<Map<String,Object>>();
+		//16.SCI论文投稿及影响因子情况表
+		List<Map<String,Object>> persciList = new ArrayList<Map<String,Object>>();
+		//17.临床医学获奖情况表
+		List<Map<String,Object>> perclinicalList = new ArrayList<Map<String,Object>>();
+		//18.学术荣誉授予情况表
+		List<Map<String,Object>> peracadeList = new ArrayList<Map<String,Object>>();
+		//19.人卫社教材编写情况表
+		List<Map<String,Object>> perpmphList = new ArrayList<Map<String,Object>>();
+
+		Map<String,Object> queryMap = new HashMap<String,Object>();
+		//查询个人信息库信息
+		//个人资料
 		Map<String,Object> userinfo =  this.getUserInfo();
 		Map<String,Object> userMap =  this.mdService.queryUserInfo(MapUtils.getString(userinfo,"id",""));
         for (Map.Entry<String, Object> entry : userMap.entrySet()) {
@@ -74,6 +109,26 @@ public class MaterialDetailController extends BaseController{
 				userMap.put(key,"");
 			}
         }
+        queryMap.put("user_id",userMap.get("id"));
+		//个人资料库信息
+		perstuList = this.perService.queryPerStu(queryMap);
+        perworkList= this.perService.queryPerWork(queryMap);
+        persteaList=this.perService.queryPerStea(queryMap);
+        perzjxsList=this.perService.queryPerZjxs(queryMap);
+        perjcbjList=this.perService.queryPerJcbj(queryMap);
+        pergjkcjsList=this.perService.queryPerGjkcjs(queryMap);
+        pergjghjcList=this.perService.queryPerGjghjc(queryMap);
+        perjcbxList=this.perService.queryPerZjxs(queryMap);
+        perzjkyList=this.perService.queryPerZjxs(queryMap);
+     //   perachievementMap=this.perService.queryPerZjxs(queryMap);
+        permonographList=this.perService.queryPerZjxs(queryMap);
+        perpublishList=this.perService.queryPerZjxs(queryMap);
+        persciList=this.perService.queryPerZjxs(queryMap);
+        perclinicalList=this.perService.queryPerZjxs(queryMap);
+        peracadeList=this.perService.queryPerZjxs(queryMap);
+        perpmphList=this.perService.queryPerZjxs(queryMap);
+
+
         String material_id = request.getParameter("material_id"); //教材ID
 		//教材信息
 		Map<String,Object> materialMap = new HashMap<String,Object>();
