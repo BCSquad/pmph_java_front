@@ -111,7 +111,7 @@ request.setAttribute("currentTime",datetime);
                 <c:if test="${permap.rank==2}"><span id="zjrz"></span><span class="grsx">作家用户</span></c:if>
                 <c:if test="${permap.rank==3}"><span id="zjrz"></span> <span class="grsx">专家用户</span></c:if>
                 <c:if test="${selfLog == true}">
-                	<a href="<c:url value="/userinfo/touser.action"/>"><span id="zhsz"></span><span class="grsx">账户设置</span></a>
+                	<a href="<c:url value="/userinfo/touser.action"/>"><span id="zhsz"></span><span class="grsx">修改资料</span></a>
                 	<a href="<c:url value="/integral/toPage.action"/>"><span id="jftb"></span><span class="grsx">积分</span></a>
                 </c:if>
                 
@@ -758,7 +758,7 @@ request.setAttribute("currentTime",datetime);
                     <ul class="scul">
                         <c:forEach items="${listmyfriend}" begin='0' end='11' var="listmyf" varStatus="status">
                             <a target="_blank" class="not-like-an-a" href="${ctx}/personalhomepage/tohomepage.action?userId=${listmyf.id}">
-	                            <li class="hylb">
+	                            <li class="hylb" title="${listmyf.realname}">
 	                                <div class="hytxdiv">
 	                                    <c:if test="${listmyf.avatar=='DEFAULT'||listmyf.avatar==''||listmyf.avatar== NULL}"><img
 	                                            src="${ctx}/statics/image/default_image.png" class="hytp"></c:if>
