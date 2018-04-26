@@ -758,7 +758,7 @@ request.setAttribute("currentTime",datetime);
                     <ul class="scul">
                         <c:forEach items="${listmyfriend}" begin='0' end='11' var="listmyf" varStatus="status">
                             <a target="_blank" class="not-like-an-a" href="${ctx}/personalhomepage/tohomepage.action?userId=${listmyf.id}">
-	                            <li class="hylb">
+	                            <li class="hylb" title="${listmyf.realname}">
 	                                <div class="hytxdiv">
 	                                    <c:if test="${listmyf.avatar=='DEFAULT'||listmyf.avatar==''||listmyf.avatar== NULL}"><img
 	                                            src="${ctx}/statics/image/default_image.png" class="hytp"></c:if>
