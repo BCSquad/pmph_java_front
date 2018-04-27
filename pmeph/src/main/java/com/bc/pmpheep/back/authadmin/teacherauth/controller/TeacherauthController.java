@@ -100,9 +100,10 @@ public class TeacherauthController extends BaseController {
     public Map<String, Object> statusModify(HttpServletRequest request) {
         String status = request.getParameter("status");
         String id = request.getParameter("id");
+        String backReason = request.getParameter("backReason");
         Map<String, Object> userInfo = getUserInfo();
 
-        Map<String, Object> rb = teacherAuthService.statusModify(id, status, MapUtils.getString(userInfo, "org_id"));
+        Map<String, Object> rb = teacherAuthService.statusModify(id, status, backReason,MapUtils.getString(userInfo, "org_id"));
 
         return rb;
     }
