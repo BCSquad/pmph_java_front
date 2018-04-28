@@ -1464,7 +1464,7 @@ ul li {
 }
 
 .sp_remark {
-
+	word-break: break-all;
     font-size: 12px;
     font-weight: normal;
     font-stretch: normal;

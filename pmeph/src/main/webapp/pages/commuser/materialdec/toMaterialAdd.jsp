@@ -14,13 +14,25 @@
 	<link rel="stylesheet" href="${ctx}/statics/materialdec/materialadd.css?t=${_timestamp}" type="text/css">
 	<link rel="stylesheet" href="${ctx}/statics/css/jquery.calendar.css?t=${_timestamp}" type="text/css">
 	<link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}" type="text/css">
+	<link rel="stylesheet" href="${ctx}/statics/css/jquery.tipso.css?t=${_timestamp}" type="text/css">
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js?t=${_timestamp}"></script>
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.calendar.js?t=${_timestamp}"></script>
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
+	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.tipso.js?t=${_timestamp}"></script>
 	<script type="text/javascript" src="${ctx}/resources/comm/layer/layer.js?t=${_timestamp}"></script>
 	<script type="text/javascript" src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
 	<script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}" type="text/javascript"></script>
 	<script type="text/javascript" src="${ctx}/resources/commuser/materialdec/material.js?t=${_timestamp}"></script>
+	<script>
+	/*	$(function () {
+	 //realname sex birthday experience
+	 $('#realname').tipso({content: "请输入起止时间"});
+	 $('#sex').tipso({content: "请输入起止时间"});
+	 $('#birthday').tipso({content: "请输入起止时间"});
+	 $('#experience').tipso({content: "请输入起止时间"});
+
+	 })*/
+	</script>
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>

@@ -461,6 +461,34 @@
 		</div>
 		<div style="height: 60px; width: 100%;"></div>
 	</div>
+	
+	<c:if test="${showWriterUserCertification.progress==2 && showWriterUserCertification.backReason !=null && showWriterUserCertification.backReason != '' }">
+		<!-- 退回原因及审批意见 显示悬浮框 -->
+		<div class="bookmistake" id="return_cause_div">
+		    <div class="apache">
+		        <div class="mistitle">退回原因:</div>
+		        <div class="xx" onclick="$('#return_cause_div').fadeOut(500);"></div>
+		    </div>
+		
+		    <div class="info">
+		        <input id="return_cause_hidden" type="hidden" value="${showWriterUserCertification.backReason }">
+		        <textarea class="misarea" disabled="disabled">${showWriterUserCertification.backReason }</textarea>
+		    </div>
+		
+		    <div class="">
+		        <button class="btn" type="button" onclick="$('#return_cause_div').fadeOut(500);">确认</button>
+		    </div>
+		</div>
+		<script type="text/javascript">
+			if ("${(showWriterUserCertification.progress==2 && showWriterUserCertification.backReason != null && showWriterUserCertification.backReason !='' )?'on':'off' }"=="on" && $("#return_cause_hidden").val().length>0) {
+		
+		        $("#return_cause_div").fadeIn(800);
+		
+		    }
+		</script>
+	</c:if>
+	
+	
 	<div style="clear: both"></div>
 	<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 
