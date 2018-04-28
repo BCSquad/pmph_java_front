@@ -407,7 +407,7 @@
                             </div>
                             <div class="a7_name_div">
                                 <div class="a7_author">
-                                    <span class="a7_write">${list.realname}</span>
+                                    <span class="a7_write" title="${list.realname}">${list.realname}</span>
                                 </div>
                                 <br>
                                 <div class="a7_cont">
