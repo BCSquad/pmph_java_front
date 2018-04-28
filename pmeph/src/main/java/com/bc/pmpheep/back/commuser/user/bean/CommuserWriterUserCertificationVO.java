@@ -44,8 +44,20 @@ public class CommuserWriterUserCertificationVO implements Serializable {
     private List<CommuserOrg> orgList;
     // 教师资格证名称
     private String certName;
+    //退回原因
+    private String backReason;
+    
+    
 
-    public String getCertName() {
+    public String getBackReason() {
+		return backReason;
+	}
+
+	public void setBackReason(String backReason) {
+		this.backReason = backReason;
+	}
+
+	public String getCertName() {
 		return certName;
 	}
 
