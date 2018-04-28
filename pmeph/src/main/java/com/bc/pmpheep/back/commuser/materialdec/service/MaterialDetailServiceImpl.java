@@ -1,19 +1,18 @@
 package com.bc.pmpheep.back.commuser.materialdec.service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.bc.pmpheep.back.commuser.materialdec.dao.MaterialDetailDao;
 import com.bc.pmpheep.back.commuser.mymessage.service.MyMessageService;
+import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.bc.pmpheep.back.commuser.materialdec.dao.MaterialDetailDao;
-import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
-import com.bc.pmpheep.back.plugin.PageParameter;
-import com.bc.pmpheep.back.plugin.PageResult;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service("com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailServiceImpl")
 public class MaterialDetailServiceImpl implements MaterialDetailService {
@@ -342,7 +341,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
                 this.madd.insertTsxz(map);
             }
         }
-        if (perMap.get("type").equals("1")) { //提交
+            if (perMap.get("type").equals("1")) { //提交
             if (perMap.get("org_id").equals("0")) {
                 messageService.sendNewMsgWriterToPublisher(MapUtils.getLong(perMap, "material_id"), MapUtils.getString(perMap, "realname"), MapUtils.getString(perMap, "materialName"));
             } else {
