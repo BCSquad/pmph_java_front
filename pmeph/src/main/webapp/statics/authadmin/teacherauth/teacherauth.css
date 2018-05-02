@@ -230,10 +230,13 @@ div.white-out-div .search-condition{
     border-radius:40px;
 }
 .body #zebra-table td div.head-portrait+div{
-    float:left;
+    float: left;
     width: 55px;
+    height: 46px;
     text-align: center;
-    white-space: nowrap;
+    white-space: normal;
+    overflow: hidden;
+    word-break: break-all;
 }
 
 .pagination-wrapper{
