@@ -20,7 +20,8 @@
 		c.idcard,
 		c.progress,
 		c.cert,
-		u.avatar
+		u.avatar,
+		c.backReason
 		
 		FROM
 		writer_user_certification AS c
@@ -62,6 +63,9 @@
 	
 	<update id="statusModify" parameterType="java.util.Map">
 		update writer_user_certification set progress = ${status} 
+		<if test="backReason != null and backReason != '' ">
+			,backReason = #{backReason}
+		</if>
 		where id = #{id};
 		<if test='status =="3" '>
 			update writer_user 

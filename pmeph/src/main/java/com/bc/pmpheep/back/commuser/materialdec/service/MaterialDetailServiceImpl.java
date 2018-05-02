@@ -1,25 +1,28 @@
 package com.bc.pmpheep.back.commuser.materialdec.service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.bc.pmpheep.back.commuser.materialdec.dao.MaterialDetailDao;
+import com.bc.pmpheep.back.commuser.materialdec.dao.PersonInfoDao;
 import com.bc.pmpheep.back.commuser.mymessage.service.MyMessageService;
+import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
+import com.bc.pmpheep.utils.UUIDTool;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.bc.pmpheep.back.commuser.materialdec.dao.MaterialDetailDao;
-import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
-import com.bc.pmpheep.back.plugin.PageParameter;
-import com.bc.pmpheep.back.plugin.PageResult;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service("com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailServiceImpl")
 public class MaterialDetailServiceImpl implements MaterialDetailService {
 
     @Autowired
     private MaterialDetailDao madd;
+    @Autowired
+    private PersonInfoDao peradd;
 
     @Autowired
     @Qualifier("com.bc.pmpheep.back.commuser.mymessage.service.MyMessageServiceImpl")
@@ -28,6 +31,8 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
     @Autowired
     @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
     private PersonalService personalService;
+
+    public UUIDTool utool = new UUIDTool();
 
     //通过教材ID查出教材
     @Override
@@ -334,7 +339,8 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //查询上面新增的申报表ID
         List<Map<String, Object>> perList = this.madd.queryPerson(perMap);
         Object declaration_id = perList.get(0).get("id");
-
+        //获取userid
+        String user_id = perMap.get("user_id").toString();
         //2.职位新增
         if (tssbList != null && !tssbList.isEmpty()) {
             for (Map<String, Object> map : tssbList) {
@@ -342,7 +348,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
                 this.madd.insertTsxz(map);
             }
         }
-        if (perMap.get("type").equals("1")) { //提交
+            if (perMap.get("type").equals("1")) { //提交
             if (perMap.get("org_id").equals("0")) {
                 messageService.sendNewMsgWriterToPublisher(MapUtils.getLong(perMap, "material_id"), MapUtils.getString(perMap, "realname"), MapUtils.getString(perMap, "materialName"));
             } else {
@@ -369,6 +375,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //3.作家学习经历新增
         if (stuList != null && !stuList.isEmpty()) {
             for (Map<String, Object> map : stuList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerStu(map);
+                    }else{
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerStu(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertStu(map);
             }
@@ -376,6 +392,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //4.作家工作经历新增
         if (workList != null && !workList.isEmpty()) {
             for (Map<String, Object> map : workList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerWork(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerWork(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertWork(map);
             }
@@ -383,6 +409,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //5.作家教学经历新增
         if (steaList != null && !steaList.isEmpty()) {
             for (Map<String, Object> map : steaList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerStea(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerStea(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertStea(map);
             }
@@ -390,6 +426,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //6.作家兼职学术新增
         if (zjxsList != null && !zjxsList.isEmpty()) {
             for (Map<String, Object> map : zjxsList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerZjxs(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerZjxs(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertZjxs(map);
             }
@@ -397,6 +443,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //7.上套教材参编新增
         if (jcbjList != null && !jcbjList.isEmpty()) {
             for (Map<String, Object> map : jcbjList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerJcbj(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerJcbj(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertJcbj(map);
             }
@@ -404,6 +460,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //8.精品课程建设新增
         if (gjkcjsList != null && !gjkcjsList.isEmpty()) {
             for (Map<String, Object> map : gjkcjsList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerGjkcjs(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerGjkcjs(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertGjkcjs(map);
             }
@@ -411,6 +477,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //9.主编国家级规划教材新增
         if (gjghjcList != null && !gjghjcList.isEmpty()) {
             for (Map<String, Object> map : gjghjcList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerGjghjc(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerGjghjc(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertGjghjc(map);
             }
@@ -418,6 +494,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //10.作家教材编写新增
         if (jcbxList != null && !jcbxList.isEmpty()) {
             for (Map<String, Object> map : jcbxList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerJcbx(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerJcbx(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertJcbx(map);
             }
@@ -425,6 +511,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //11.作家科研情况新增
         if (zjkyList != null && !zjkyList.isEmpty()) {
             for (Map<String, Object> map : zjkyList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerZjkyqk(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerZjkyqk(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertZjkyqk(map);
             }
@@ -444,6 +540,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //14.主编学术专著新增
         if (monographList != null && !monographList.isEmpty()) {
             for (Map<String, Object> map : monographList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerMonograph(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerMonograph(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertMonograph(map);
             }
@@ -451,6 +557,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //15.出版行业获奖情况新增
         if (publishList != null && !publishList.isEmpty()) {
             for (Map<String, Object> map : publishList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerPublish(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerPublish(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertPublish(map);
             }
@@ -458,6 +574,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //16.SCI论文投稿及影响因子新增
         if (sciList != null && !sciList.isEmpty()) {
             for (Map<String, Object> map : sciList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerSci(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerSci(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertSci(map);
             }
@@ -465,6 +591,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //17.临床医学获奖情况新增
         if (clinicalList != null && !clinicalList.isEmpty()) {
             for (Map<String, Object> map : clinicalList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerClinicalreward(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerClinicalreward(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertClinicalreward(map);
             }
@@ -472,6 +608,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //18.作家学术荣誉新增
         if (acadeList != null && !acadeList.isEmpty()) {
             for (Map<String, Object> map : acadeList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerAcadereward(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerAcadereward(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertAcadereward(map);
             }
@@ -479,6 +625,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //19.人卫社教材编写新增
         if (pmphList != null && !pmphList.isEmpty()) {
             for (Map<String, Object> map : pmphList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerRwsjc(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerRwsjc(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertRwsjc(map);
             }
@@ -525,6 +681,8 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //修改申报信息
         perMap.put("declaration_id", declaration_id);
         this.madd.updatePerson(perMap);
+        //获取userid
+        String user_id = perMap.get("user_id").toString();
         if (perMap.get("type").equals("1")) { //提交
             if (perMap.get("org_id").equals("0")) {
                 messageService.sendNewMsgWriterToPublisher(MapUtils.getLong(perMap, "material_id"), MapUtils.getString(perMap, "realname"), MapUtils.getString(perMap, "materialName"));
@@ -578,6 +736,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //3.作家学习经历新增
         if (stuList != null && !stuList.isEmpty()) {
             for (Map<String, Object> map : stuList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerStu(map);
+                    }else{
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerStu(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertStu(map);
             }
@@ -585,6 +753,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //4.作家工作经历新增
         if (workList != null && !workList.isEmpty()) {
             for (Map<String, Object> map : workList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerWork(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerWork(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertWork(map);
             }
@@ -592,6 +770,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //5.作家教学经历新增
         if (steaList != null && !steaList.isEmpty()) {
             for (Map<String, Object> map : steaList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerStea(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerStea(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertStea(map);
             }
@@ -599,6 +787,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //6.作家兼职学术新增
         if (zjxsList != null && !zjxsList.isEmpty()) {
             for (Map<String, Object> map : zjxsList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerZjxs(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerZjxs(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertZjxs(map);
             }
@@ -606,6 +804,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //7.上套教材参编新增
         if (jcbjList != null && !jcbjList.isEmpty()) {
             for (Map<String, Object> map : jcbjList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerJcbj(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerJcbj(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertJcbj(map);
             }
@@ -613,6 +821,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //8.精品课程建设新增
         if (gjkcjsList != null && !gjkcjsList.isEmpty()) {
             for (Map<String, Object> map : gjkcjsList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerGjkcjs(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerGjkcjs(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertGjkcjs(map);
             }
@@ -620,13 +838,33 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //9.主编国家级规划教材新增
         if (gjghjcList != null && !gjghjcList.isEmpty()) {
             for (Map<String, Object> map : gjghjcList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerGjghjc(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerGjghjc(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertGjghjc(map);
             }
         }
-        //10.其他社教材编写新增
+        //10.作家教材编写新增
         if (jcbxList != null && !jcbxList.isEmpty()) {
             for (Map<String, Object> map : jcbxList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerJcbx(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerJcbx(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertJcbx(map);
             }
@@ -634,6 +872,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //11.作家科研情况新增
         if (zjkyList != null && !zjkyList.isEmpty()) {
             for (Map<String, Object> map : zjkyList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerZjkyqk(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerZjkyqk(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertZjkyqk(map);
             }
@@ -653,6 +901,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //14.主编学术专著新增
         if (monographList != null && !monographList.isEmpty()) {
             for (Map<String, Object> map : monographList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerMonograph(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerMonograph(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertMonograph(map);
             }
@@ -660,6 +918,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //15.出版行业获奖情况新增
         if (publishList != null && !publishList.isEmpty()) {
             for (Map<String, Object> map : publishList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerPublish(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerPublish(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertPublish(map);
             }
@@ -667,6 +935,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //16.SCI论文投稿及影响因子新增
         if (sciList != null && !sciList.isEmpty()) {
             for (Map<String, Object> map : sciList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerSci(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerSci(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertSci(map);
             }
@@ -674,6 +952,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //17.临床医学获奖情况新增
         if (clinicalList != null && !clinicalList.isEmpty()) {
             for (Map<String, Object> map : clinicalList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerClinicalreward(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerClinicalreward(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertClinicalreward(map);
             }
@@ -681,6 +969,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //18.作家学术荣誉新增
         if (acadeList != null && !acadeList.isEmpty()) {
             for (Map<String, Object> map : acadeList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerAcadereward(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerAcadereward(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertAcadereward(map);
             }
@@ -688,6 +986,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         //19.人卫社教材编写新增
         if (pmphList != null && !pmphList.isEmpty()) {
             for (Map<String, Object> map : pmphList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerRwsjc(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerRwsjc(map);
+                    }
+                }
                 map.put("declaration_id", declaration_id);
                 this.madd.insertRwsjc(map);
             }

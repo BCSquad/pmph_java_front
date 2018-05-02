@@ -44,6 +44,18 @@ $(function () {
         height: 30,
         optionHeight: 30
     });
+    $('#jcb_rank').selectlist({
+        zIndex: 10,
+        width: 110,
+        height: 30,
+        optionHeight: 30
+    });
+    $('#jcb_position').selectlist({
+        zIndex: 10,
+        width: 110,
+        height: 30,
+        optionHeight: 30
+    });
     $('#pmph_rank').selectlist({
         width: 110,
         height: 30,
@@ -54,9 +66,28 @@ $(function () {
         height: 30,
         optionHeight: 30
     });
+    //人卫社教材编写-级别
+    selectOption("pmph_rank_sl");
+    //人卫社教材编写-职务
+    selectOption("pmph_sl");
+    //其他社教材-级别
+    selectOption("jcb_rank_sl");
+    //其他社教材-职务
+    selectOption("jcjb_sl");
 
 });
 
+//下拉框格式优化
+function selectOption(name){
+    var els =document.getElementsByName(name);
+    for (var i = 0, j = els.length; i < j; i++){
+        $('#'+els[i].value).selectlist({
+            width: 110,
+            height: 30,
+            optionHeight: 30
+        });
+    }
+}
 //附件上传方法
 function upload(id){
     $("#scjxdg_"+id).uploadFile({
@@ -470,6 +501,7 @@ function add_xxjl(){
         "<td><input class='cg_input' maxlength='30' name='xx_degree' value='' id='xx_degree_"+num+"' style='width: 110px;' placeholder='学历'/></td>"+
         "<td><input class='cg_input' maxlength='100' name='xx_note' value='' style='width: 240px;' placeholder='备注'/>" +
         "<input type='hidden' name='zdjy' value='xx_kssj_"+num+"' />" +
+        "<input type='hidden' name='xx_id' value=''>"+
        // "<input type='hidden' name='zdjy' value='xx_kssj_"+num+",xx_jssj_"+num+",xx_school_name_"+num+",xx_major_"+num+",xx_degree_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('xxjl_"+num+"')\"/></td>"
@@ -489,6 +521,7 @@ function add_gzjl(){
         "<td><input class='cg_input' maxlength='100' name='gz_position' id='gz_position_"+num+"' value='' placeholder='职位'/></td>"+
         "<td><input class='cg_input' maxlength='100' name='gz_note' value='' style='width: 230px;' placeholder='备注'/>" +
         "<input type='hidden' name='zdjy' value='gz_kssj_"+num+" '/>" +
+        "<input type='hidden' name='gz_id' value=''>"+
       //  "<input type='hidden' name='zdjy' value='gz_kssj_"+num+",gz_jssj_"+num+",gz_org_name_"+num+",gz_position_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('gzjl_"+num+"')\"/></td>"
@@ -508,6 +541,7 @@ function add_jxjl(){
         "<td><input class='cg_input' maxlength='150' style=\"width: 290px;\" name='jx_subject' id='jx_subject_"+num+"' value='' placeholder='教学科目'/></td>"+
         "<td><input class='cg_input' maxlength='100' name='jx_note' value='' style='width: 180px;' placeholder='备注'/>" +
         "<input type='hidden' name='zdjy' value='jx_kssj_"+num+"' />" +
+        "<input type='hidden' name='jx_id' value=''>"+
     //    "<input type='hidden' name='zdjy' value='jx_kssj_"+num+",jx_jssj_"+num+",jx_school_name_"+num+",jx_subject_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('jxjz_"+num+"')\"/></td>"
@@ -534,6 +568,7 @@ function add_xsjz(){
         "<td><input class='cg_input' maxlength='50' name='xs_position' id='xs_position_"+num+"' value='' placeholder='职务'/></td>"+
         "<td><input maxlength='33' class='cg_input' maxlength='100' name='xs_note' value='' style='width: 180px;' placeholder='备注'/>" +
         "<input type='hidden' name='zdjy' value='xs_org_name_"+num+"'/>" +
+        "<input type='hidden' name='xs_id' value=''>"+
     //   "<input type='hidden' name='zdjy' value='xs_org_name_"+num+",xs_position_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('xsjz_"+num+"')\"/></td>"+
@@ -565,6 +600,7 @@ function add_jccb(){
         "<td><input class='cg_input' name='jc_publish_date' id='jc_publish_date_"+num+"' value='' placeholder='出版时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100'  style='width: 100px;'/></td>"+
         "<td><input maxlength='100' class='cg_input' name='jc_note' value='' style='width: 100px;' placeholder='备注'/>" +
         "<input type='hidden' name='zdjy' value='jc_material_name_"+num+"' />" +
+        "<input type='hidden' name='jc_id' value=''>"+
     //    "<input type='hidden' name='zdjy' value='jc_material_name_"+num+",jc_publish_date_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('jccb_"+num+"')\"/></td>"+
@@ -590,6 +626,7 @@ function add_jpkcjs(str,dim){
         "<input type='hidden' name='gj_type' value='gj_type_"+num+"' /></td>"+
         "<td><input maxlength='100' class='cg_input' name='gj_note' value='' style='width: 240px;' placeholder='备注'/>" +
         "<input type='hidden' name='zdjy' value='gj_course_name_"+num+"' />" +
+        "<input type='hidden' name='gj_id' value=''>"+
     //    "<input type='hidden' name='zdjy' value='gj_course_name_"+num+",gj_class_hour_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('jpkcjs_"+num+"')\"/></td>"+
@@ -607,6 +644,7 @@ function add_gjghjc(){
         "<td><input class='cg_input' maxlength='50' name='hj_rank_text' id='hj_rank_text_"+num+"' value='' style='width: 300px;' placeholder='教材级别' /></td>"+
         "<td><input class='cg_input' maxlength='100' name='hj_note' value='' style='width: 250px;' placeholder='备注'/>" +
         "<input type='hidden' name='zdjy' value='hj_material_name_"+num+"' />" +
+        "<input type='hidden' name='hj_id' value=''>"+
      //   "<input type='hidden' name='zdjy' value='hj_material_name_"+num+",hj_isbn_"+num+",hj_rank_text_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('gjghjc_"+num+"')\"/></td>"+
@@ -644,6 +682,7 @@ function add_rwsjcbx(){
         "<td><input class='cg_input' maxlength='50' name='pmph_isbn' value='' id='pmph_isbn_"+num+"'  style='width: 100px;' placeholder='978-7-117-'/></td>"+
         "<td><input class='cg_input' maxlength='100' name='pmph_note' value='' placeholder='备注' style='width: 140px;'/>" +
         "<input type='hidden' name='zdjy' value='pmph_material_name_"+num+"' />" +
+        "<input type='hidden' name='pmph_id' value=''>"+
     //    "<input type='hidden' name='zdjy' value='pmph_material_name_"+num+",pmph_isbn_"+num+",pmph_publish_date_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('pmph_"+num+"')\"/></td>"+
@@ -692,6 +731,7 @@ function add_jcbx(){
         "<td><input class='cg_input' maxlength='50' name='jcb_isbn' id='jcb_isbn_"+num+"' value='' style='width: 100px;' placeholder='978-7-'/></td>"+
         "<td><input class='cg_input' maxlength='100' name='jcb_note' value='' placeholder='备注' style='width:130px;'/>" +
         "<input type='hidden' name='zdjy' value='jcb_material_name_"+num+"' />" +
+        "<input type='hidden' name='jcb_id' value=''>"+
     //    "<input type='hidden' name='zdjy' value='jcb_material_name_"+num+",jcb_publisher_"+num+",jcb_isbn_"+num+",jcb_publish_date_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('qtjcbxqk_"+num+"')\"/></td>"+
@@ -719,6 +759,7 @@ function add_zjky(){
         "<td><input class='cg_input' maxlength='100' name='zjk_award' value='' id='zjk_award_"+num+"' style='width: 300px;' placeholder='获奖情况'/></td>"+
         "<td><input class='cg_input' maxlength='100' name='zjk_note' value='' style='width: 90px;' placeholder='备注'/>" +
         "<input type='hidden' name='zdjy' value='zjk_research_name_"+num+"' />" +
+        "<input type='hidden' name='zjk_id' value=''>"+
      //   "<input type='hidden' name='zdjy' value='zjk_research_name_"+num+",zjk_approval_unit_"+num+",zjk_award_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('zjky_"+num+"')\"/></td>"+
@@ -742,6 +783,7 @@ function add_zbxszz(){
         "<td><input class='cg_input' maxlength='50' name='zb_publish_date' value='' id='zb_publish_date_"+num+"' style='width: 120px;' calendar format=\"'yyyy-mm-dd'\" placeholder='出版时间'/></td>"+
         "<td><input class='cg_input' maxlength='100' name='zb_note' value='' style='width: 200px;' placeholder='备注'  maxlength='33'/>" +
         "<input type='hidden' name='zdjy' value='zb_monograph_name_"+num+"' />" +
+        "<input type='hidden' name='zb_id' value=''>"+
     //    "<input type='hidden' name='zdjy' value='zb_monograph_name_"+num+",zb_monograph_date_"+num+",zb_publisher_"+num+",zb_publish_date_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('zbxszz_"+num+"')\"/></td>"+
@@ -760,6 +802,7 @@ function add_publish(){
         "</td>"+
         "<td><input class='cg_input' maxlength='100' name='pu_note' value='' style='width: 250px;' placeholder='备注' maxlength='33'/>" +
         "<input type='hidden' name='zdjy' value='pu_reward_name_"+num+"' />" +
+        "<input type='hidden' name='pu_id' value=''>"+
     //    "<input type='hidden' name='zdjy' value='pu_reward_name_"+num+",pu_award_unit_"+num+",pu_reward_date_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('publish_"+num+"')\"/></td>"+
@@ -778,6 +821,7 @@ function add_sci(){
         "<td><input class='cg_input' name='sci_publish_date' id='sci_publish_date_"+num+"' value='' style='width: 110px;' calendar format=\"'yyyy-mm-dd'\" placeholder='发表时间'/></td>"+
         "<td><input class='cg_input' name='sci_note' value='' style='width: 140px;' placeholder='备注' maxlength='100'/>" +
         "<input type='hidden' name='zdjy' value='sci_paper_name_"+num+"' />" +
+        "<input type='hidden' name='sci_id' value=''>"+
       //  "<input type='hidden' name='zdjy' value='sci_paper_name_"+num+",sci_journal_name_"+num+",sci_factor_"+num+",sci_publish_date_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('sci_"+num+"')\"/></td>"+
@@ -802,6 +846,7 @@ function add_clinical(){
         "<td><input class='cg_input' name='cl_reward_date' id='cl_reward_date_"+num+"' value='' style='width: 180px;' calendar format=\"'yyyy-mm-dd'\" placeholder='获奖时间'/></td>"+
         "<td><input class='cg_input' name='cl_note' value='' style='width: 230px;' placeholder='备注' maxlength='100'/>" +
         "<input type='hidden' name='zdjy' value='cl_reward_name_"+num+"' />" +
+        "<input type='hidden' name='cl_id' value=''>"+
   //      "<input type='hidden' name='zdjy' value='cl_reward_name_"+num+",cl_reward_date_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('clinical_"+num+"')\"/></td>"+
@@ -827,6 +872,7 @@ function add_acade(){
         "<td><input class='cg_input' name='ac_reward_date' id='ac_reward_date_"+num+"' value='' style='width: 150px;' calendar format=\"'yyyy-mm-dd'\" placeholder='授予时间'/></td>"+
         "<td><input class='cg_input' name='ac_note' value='' style='width: 180px;' placeholder='备注' maxlength='100'/>" +
         "<input type='hidden' name='zdjy' value='ac_reward_date_"+num+"' />" +
+        "<input type='hidden' name='ac_id' value=''>"+
   //      "<input type='hidden' name='zdjy' value='ac_reward_date_"+num+",ac_reward_name_"+num+"' />" +
         "</td>"+
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('acade_"+num+"')\"/></td>"+
@@ -841,37 +887,16 @@ function del_tr(trId){
 
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type){
-    if(type == '2') { //表示暂存
-        //避免重复点击
-        document.getElementById('buzc').onclick=function(){window.message.warning("请不要重复点击");};
-        document.getElementById('butj').onclick=function(){window.message.warning("请不要重复点击");};
-        $.ajax({
-            type: "POST",
-            url:contextpath+'material/doMaterialAdd.action?sjump=1&type='+type,
-            data:$('#objForm').serialize(),// 您的formid
-            async: false,
-            success: function (json) {
-                if (json.msg == 'OK') {
-                    window.message.success("操作成功,正在跳转页面");
-                    window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
-                }
-            }
-        });
-    }else {  //表示提交
-        checkLb();
-        if (checkEqual("textbook_id") && checkNull(jsonStr) && checkExtra()) {
-            document.getElementById('buzc').onclick = function () {
-                window.message.warning("请不要重复点击");
-            };
-            document.getElementById('butj').onclick = function () {
-                window.message.warning("请不要重复点击");
-            };
+    if(checkEqual("textbook_id")){
+        if(type == '2') { //表示暂存
+            //避免重复点击
+            document.getElementById('buzc').onclick=function(){window.message.warning("请不要重复点击");};
+            document.getElementById('butj').onclick=function(){window.message.warning("请不要重复点击");};
             $.ajax({
                 type: "POST",
-                url: contextpath + 'material/doMaterialAdd.action?sjump=1&type=' + type,
-                data: $('#objForm').serialize(),// 您的formid
+                url:contextpath+'material/doMaterialAdd.action?sjump=1&type='+type,
+                data:$('#objForm').serialize(),// 您的formid
                 async: false,
-                dataType: "json",
                 success: function (json) {
                     if (json.msg == 'OK') {
                         window.message.success("操作成功,正在跳转页面");
@@ -879,6 +904,29 @@ function buttAdd(type){
                     }
                 }
             });
+        }else {  //表示提交
+            checkLb();
+            if (checkNull(jsonStr) && checkExtra()) {
+               /* document.getElementById('buzc').onclick = function () {
+                    window.message.warning("请不要重复点击");
+                };
+                document.getElementById('butj').onclick = function () {
+                    window.message.warning("请不要重复点击");
+                };*/
+                $.ajax({
+                    type: "POST",
+                    url: contextpath + 'material/doMaterialAdd.action?sjump=1&type=' + type,
+                    data: $('#objForm').serialize(),// 您的formid
+                    async: false,
+                    dataType: "json",
+                    success: function (json) {
+                        if (json.msg == 'OK') {
+                            window.message.success("操作成功,正在跳转页面");
+                            window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
+                        }
+                    }
+                });
+            }
         }
     }
 }
@@ -1075,6 +1123,10 @@ function checkEqual(name){
     //遍历数组并比较是否存在相同值
     var nary=map.sort();
     for(var i=0;i<map.length;i++){
+        if(nary[i] == ""){
+            window.message.warning("申报书籍不能为空，请选择书籍");
+            return false;
+        }
         if (nary[i]==nary[i+1]){
             window.message.warning("不能选择相同书籍!请重新选择书籍");
             return false;

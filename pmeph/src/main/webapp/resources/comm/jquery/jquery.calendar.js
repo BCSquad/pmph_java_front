@@ -53,6 +53,7 @@ jQuery.fn.extend({
                 $("#" + c.controlId).hide();
                 $(n).trigger('timeChange', [a, c]);
                 c.callback.call(n[0], 'date', a, a.format(c.format));
+                $(n).trigger("change");
                 $("#close" + c.controlId).remove();
 
             }).hover(function () {
@@ -76,6 +77,7 @@ jQuery.fn.extend({
                     $("#" + c.controlId).hide();
                     $(n).trigger('timeChange', [a, c]);
                     c.callback.call(n[0], 'month', a, a.format(c.format));
+                    $(n).trigger("change");
                     $("#close" + c.controlId).remove();
                 }
 
