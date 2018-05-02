@@ -7,12 +7,12 @@
 		from per_edu_exp  e where e.user_id = #{user_id} ORDER BY e.sort
 	</select>
 	<insert id="insertPerStu" parameterType="java.util.Map">
-		insert into per_edu_exp(user_id,school_name,major,degree,note,date_begin,date_end,sort)
-		  values(#{user_id},#{school_name},#{major},#{degree},#{note},#{date_begin},#{date_end},#{sort})
+		insert into per_edu_exp(id,user_id,school_name,major,degree,note,date_begin,date_end,sort)
+		  values(#{per_id},#{user_id},#{school_name},#{major},#{degree},#{note},#{date_begin},#{date_end},#{sort})
 	</insert>
 	<update id="updatePerStu" parameterType="java.util.Map">
 		update per_edu_exp set school_name = #{school_name},major=#{major},degree=#{degree},
-		note=#{note},date_begin=#{date_begin},date_end=#{date_end},sort=#{sort} where id = #{id}
+		note=#{note},date_begin=#{date_begin},date_end=#{date_end},sort=#{sort} where id = #{per_id}
 	</update>
 	<delete id="DelPerStu" parameterType="java.util.Map">
 		delete from per_edu_exp where user_id = #{user_id}
@@ -23,12 +23,12 @@
 		from per_work_exp  e where e.user_id = #{user_id} ORDER BY e.sort
 	</select>
 	<insert id="insertPerWork" parameterType="java.util.Map">
-		insert into per_work_exp(user_id,org_name,position,note,date_begin,date_end,sort)
-		  values(#{user_id},#{org_name},#{position},#{note},#{date_begin},#{date_end},#{sort})
+		insert into per_work_exp(id,user_id,org_name,position,note,date_begin,date_end,sort)
+		  values(#{per_id},#{user_id},#{org_name},#{position},#{note},#{date_begin},#{date_end},#{sort})
 	</insert>
 	<update id="updatePerWork" parameterType="java.util.Map">
 		update per_work_exp set org_name = #{org_name},position=#{position},note=#{note},
-		date_begin=#{date_begin},date_end=#{date_end},sort=#{sort} where id = #{id}
+		date_begin=#{date_begin},date_end=#{date_end},sort=#{sort} where id = #{per_id}
 	</update>
 	<delete id="DelPerWork" parameterType="java.util.Map">
 		delete from per_work_exp where user_id = #{user_id}
@@ -39,12 +39,12 @@
 		from per_teach_exp  e where e.user_id = #{user_id} ORDER BY e.sort
 	</select>
 	<insert id="insertPerStea" parameterType="java.util.Map">
-		insert into per_teach_exp(user_id,school_name,subject,note,date_begin,date_end,sort)
-		  values(#{user_id},#{school_name},#{subject},#{note},#{date_begin},#{date_end},#{sort})
+		insert into per_teach_exp(id,user_id,school_name,subject,note,date_begin,date_end,sort)
+		  values(#{per_id},#{user_id},#{school_name},#{subject},#{note},#{date_begin},#{date_end},#{sort})
 	</insert>
 	<update id="updatePerStea" parameterType="java.util.Map">
 		update per_teach_exp set school_name = #{school_name},subject=#{subject},note=#{note},
-		date_begin=#{date_begin},date_end=#{date_end},sort=#{sort} where id = #{id}
+		date_begin=#{date_begin},date_end=#{date_end},sort=#{sort} where id = #{per_id}
 	</update>
 	<delete id="DelPerStea" parameterType="java.util.Map">
 		delete from per_teach_exp where user_id = #{user_id}
@@ -54,12 +54,12 @@
 		select * from per_acade where user_id = #{user_id} ORDER BY sort 
 	</select>
 	<insert id="insertPerZjxs" parameterType="java.util.Map">
-		insert into per_acade(user_id,org_name,rank,position,note,sort)
-		  values(#{user_id},#{org_name},#{rank},#{position},#{note},#{sort})
+		insert into per_acade(id,user_id,org_name,rank,position,note,sort)
+		  values(#{per_id},#{user_id},#{org_name},#{rank},#{position},#{note},#{sort})
 	</insert>
 	<update id="updatePerZjxs" parameterType="java.util.Map">
 		update per_acade set org_name = #{org_name},rank=#{rank},position=#{position},
-		note=#{note},sort=#{sort} where id = #{id}
+		note=#{note},sort=#{sort} where id = #{per_id}
 	</update>
 	<delete id="DelPerZjxs" parameterType="java.util.Map">
 		delete from per_acade where user_id = #{user_id}
@@ -69,12 +69,12 @@
 		select id,user_id,material_name,position,is_digital_editor*1 is_digital_editor,note,sort,publisher,publish_date,REPLACE(publish_date,'-','.') as  publishdate from per_last_position where user_id = #{user_id} ORDER BY sort
 	</select>
 	<insert id="insertPerJcbj" parameterType="java.util.Map">
-		insert into per_last_position(user_id,material_name,position,is_digital_editor,publisher,publish_date,note,sort)
-		  values(#{user_id},#{material_name},#{position},#{is_digital_editor},#{publisher},#{publish_date},#{note},#{sort})
+		insert into per_last_position(id,user_id,material_name,position,is_digital_editor,publisher,publish_date,note,sort)
+		  values(#{per_id},#{user_id},#{material_name},#{position},#{is_digital_editor},#{publisher},#{publish_date},#{note},#{sort})
 	</insert>
 	<update id="updatePerJcbj" parameterType="java.util.Map">
 		update per_last_position set material_name = #{material_name},position=#{position},is_digital_editor=#{is_digital_editor},
-		publisher=#{publisher},publish_date=#{publish_date},note=#{note},sort=#{sort} where id = #{id}
+		publisher=#{publisher},publish_date=#{publish_date},note=#{note},sort=#{sort} where id = #{per_id}
 	</update>
 	<delete id="DelPerJcbj" parameterType="java.util.Map">
 		delete from per_last_position where user_id = #{user_id}
@@ -84,8 +84,8 @@
 		select * from per_course_construction where user_id = #{user_id} ORDER BY sort 
 	</select>
 	<insert id="insertPerGjkcjs" parameterType="java.util.Map">
-		insert into per_course_construction(user_id,course_name,class_hour,type,note,sort)
-		  values(#{user_id},#{course_name},#{class_hour},#{type},#{note},#{sort})
+		insert into per_course_construction(id,user_id,course_name,class_hour,type,note,sort)
+		  values(#{per_id},#{user_id},#{course_name},#{class_hour},#{type},#{note},#{sort})
 	</insert>
 	<update id="updatePerGjkcjs" parameterType="java.util.Map">
 		update per_course_construction set course_name = #{course_name},class_hour=#{class_hour},type=#{type},
@@ -99,12 +99,12 @@
 		select * from per_national_plan where user_id = #{user_id} ORDER BY sort 
 	</select>
 	<insert id="insertPerGjghjc" parameterType="java.util.Map">
-		insert into per_national_plan(user_id,material_name,isbn,rank_text,note,sort)
-		  values(#{user_id},#{material_name},#{isbn},#{rank_text},#{note},#{sort})
+		insert into per_national_plan(id,user_id,material_name,isbn,rank_text,note,sort)
+		  values(#{per_id},#{user_id},#{material_name},#{isbn},#{rank_text},#{note},#{sort})
 	</insert>
 	<update id="updatePerGjghjc" parameterType="java.util.Map">
 		update per_national_plan set material_name = #{material_name},isbn=#{isbn},rank_text=#{rank_text},
-		note=#{note},sort=#{sort} where id = #{id}
+		note=#{note},sort=#{sort} where id = #{per_id}
 	</update>
 	<delete id="DelPerGjghjc" parameterType="java.util.Map">
 		delete from per_national_plan where user_id = #{user_id}
@@ -117,12 +117,12 @@
 		  ORDER BY sort 
 	</select>
 	<insert id="insertPerRwsjc" parameterType="java.util.Map">
-		insert into per_textbook_pmph(user_id,material_name,rank,position,publish_date,isbn,note,is_digital_editor,sort)
-		  values(#{user_id},#{material_name},#{rank},#{position},#{publish_date},#{isbn},#{note},#{is_digital_editor},#{sort})
+		insert into per_textbook_pmph(id,user_id,material_name,rank,position,publish_date,isbn,note,is_digital_editor,sort)
+		  values(#{per_id},#{user_id},#{material_name},#{rank},#{position},#{publish_date},#{isbn},#{note},#{is_digital_editor},#{sort})
 	</insert>
 	<update id="updatePerRwsjc" parameterType="java.util.Map">
 		update per_national_plan set material_name = #{material_name},rank=#{rank},position=#{position},publish_date=#{publish_date},
-		isbn=#{isbn},is_digital_editor=#{is_digital_editor},note=#{note},sort=#{sort} where id = #{id}
+		isbn=#{isbn},is_digital_editor=#{is_digital_editor},note=#{note},sort=#{sort} where id = #{per_id}
 	</update>
 	<delete id="DelPerRwsjc" parameterType="java.util.Map">
 		delete from per_textbook_pmph where user_id = #{user_id}
@@ -135,12 +135,12 @@
 		  ORDER BY sort 
 	</select>
 	<insert id="insertPerJcbx" parameterType="java.util.Map">
-		insert into per_textbook(user_id,material_name,rank,position,publisher,publish_date,isbn,note,is_digital_editor,sort)
-		  values(#{user_id},#{material_name},#{rank},#{position},#{publisher},#{publish_date},#{isbn},#{note},#{is_digital_editor},#{sort})
+		insert into per_textbook(id,user_id,material_name,rank,position,publisher,publish_date,isbn,note,is_digital_editor,sort)
+		  values(#{per_id},#{user_id},#{material_name},#{rank},#{position},#{publisher},#{publish_date},#{isbn},#{note},#{is_digital_editor},#{sort})
 	</insert>
 	<update id="updatePerJcbx" parameterType="java.util.Map">
 		update per_textbook set material_name = #{material_name},rank=#{rank},position=#{position},publisher=#{publisher},publish_date=#{publish_date},
-		isbn=#{isbn},is_digital_editor=#{is_digital_editor},note=#{note},sort=#{sort} where id = #{id}
+		isbn=#{isbn},is_digital_editor=#{is_digital_editor},note=#{note},sort=#{sort} where id = #{per_id}
 	</update>
 	<delete id="DelPerJcbx" parameterType="java.util.Map">
 		delete from per_textbook where user_id = #{user_id}
@@ -150,12 +150,12 @@
 		select * from per_research where user_id = #{user_id} ORDER BY sort 
 	</select>
 	<insert id="insertPerZjkyqk" parameterType="java.util.Map">
-		insert into per_research(user_id,research_name,approval_unit,award,note,sort)
-		  values(#{user_id},#{research_name},#{approval_unit},#{award},#{note},#{sort})
+		insert into per_research(id,user_id,research_name,approval_unit,award,note,sort)
+		  values(#{per_id},#{user_id},#{research_name},#{approval_unit},#{award},#{note},#{sort})
 	</insert>
 	<update id="updatePerZjkyqk" parameterType="java.util.Map">
 		update per_research set research_name = #{research_name},approval_unit=#{approval_unit},award=#{award},
-		note=#{note},sort=#{sort} where id = #{id}
+		note=#{note},sort=#{sort} where id = #{per_id}
 	</update>
 	<delete id="DelPerZjkyqk" parameterType="java.util.Map">
 		delete from per_research where user_id = #{user_id}
@@ -165,8 +165,8 @@
 		select * from per_achievement where user_id = #{user_id}  
 	</select>
 	<insert id="insertPerAchievement" parameterType="java.util.Map">
-		insert into per_achievement(user_id,content)
-		  values(#{user_id},#{content})
+		insert into per_achievement(id,user_id,content)
+		  values(#{per_id},#{user_id},#{content})
 	</insert>
 	<update id="updatePerAchievement" parameterType="java.util.Map">
 		update per_achievement set content = #{content} 
@@ -180,8 +180,8 @@
 		select id,user_id,monograph_name,monograph_date,REPLACE(monograph_date,'-','.') as monographdate,is_self_paid*1 is_self_paid,publisher,publish_date,REPLACE(publish_date,'-','.') as publishdate,note,sort from per_monograph where user_id = #{user_id} ORDER BY sort
 	</select>
 	<insert id="insertPerMonograph" parameterType="java.util.Map">
-		insert into per_monograph(user_id,monograph_name,monograph_date,is_self_paid,publisher,publish_date,note,sort)
-		  values(#{user_id},#{monograph_name},#{monograph_date},#{is_self_paid},#{publisher},#{publish_date},#{note},#{sort})
+		insert into per_monograph(id,user_id,monograph_name,monograph_date,is_self_paid,publisher,publish_date,note,sort)
+		  values(#{per_id},#{user_id},#{monograph_name},#{monograph_date},#{is_self_paid},#{publisher},#{publish_date},#{note},#{sort})
 	</insert>
 	<update id="updatePerMonograph" parameterType="java.util.Map">
 		update per_monograph set monograph_name = #{monograph_name},monograph_date=#{monograph_date},is_self_paid=#{is_self_paid},
@@ -195,12 +195,12 @@
 		select r.*, REPLACE(r.reward_date ,'-','.') as rewarddate  from per_publish_reward  r where r.user_id = #{user_id} ORDER BY r.sort
 	</select>
 	<insert id="insertPerPublish" parameterType="java.util.Map">
-		insert into per_publish_reward(user_id,reward_name,award_unit,reward_date,note,sort)
-		  values(#{user_id},#{reward_name},#{award_unit},#{reward_date},#{note},#{sort})
+		insert into per_publish_reward(id,user_id,reward_name,award_unit,reward_date,note,sort)
+		  values(#{per_id},#{user_id},#{reward_name},#{award_unit},#{reward_date},#{note},#{sort})
 	</insert>
 	<update id="updatePerPublish" parameterType="java.util.Map">
 		update per_publish_reward set reward_name = #{reward_name},award_unit=#{award_unit},reward_date=#{reward_date},
-		note=#{note},sort=#{sort} where id = #{id}
+		note=#{note},sort=#{sort} where id = #{per_id}
 	</update>
 	<delete id="DelPerPublish" parameterType="java.util.Map">
 		delete from per_publish_reward where user_id = #{user_id}
@@ -210,12 +210,12 @@
 		select s.*,REPLACE(s.publish_date,'-','.') as publishdate from per_sci  s where s.user_id = #{user_id} ORDER BY s.sort
 	</select>
 	<insert id="insertPerSci" parameterType="java.util.Map">
-		insert into per_sci(user_id,paper_name,journal_name,factor,publish_date,note,sort)
-		  values(#{user_id},#{paper_name},#{journal_name},#{factor},#{publish_date},#{note},#{sort})
+		insert into per_sci(id,user_id,paper_name,journal_name,factor,publish_date,note,sort)
+		  values(#{per_id},#{user_id},#{paper_name},#{journal_name},#{factor},#{publish_date},#{note},#{sort})
 	</insert>
 	<update id="updatePerSci" parameterType="java.util.Map">
 		update per_sci set paper_name = #{paper_name},journal_name=#{journal_name},factor=#{factor},publish_date=#{publish_date},
-		note=#{note},sort=#{sort} where id = #{id}
+		note=#{note},sort=#{sort} where id = #{per_id}
 	</update>
 	<delete id="DelPerSci" parameterType="java.util.Map">
 		delete from per_sci where user_id = #{user_id}
@@ -225,12 +225,12 @@
 		select r.*,REPLACE(r.reward_date,'-','.') as rewarddate from per_clinical_reward  r where r.user_id = #{user_id} ORDER BY r.sort
 	</select>
 	<insert id="insertPerClinicalreward" parameterType="java.util.Map">
-		insert into per_clinical_reward(user_id,reward_name,award_unit,reward_date,note,sort)
-		  values(#{user_id},#{reward_name},#{award_unit},#{reward_date},#{note},#{sort})
+		insert into per_clinical_reward(id,user_id,reward_name,award_unit,reward_date,note,sort)
+		  values(#{per_id},#{user_id},#{reward_name},#{award_unit},#{reward_date},#{note},#{sort})
 	</insert>
 	<update id="updatePerClinicalreward" parameterType="java.util.Map">
 		update per_clinical_reward set reward_name = #{reward_name},award_unit=#{award_unit},reward_date=#{reward_date},
-		note=#{note},sort=#{sort} where id = #{id}
+		note=#{note},sort=#{sort} where id = #{per_id}
 	</update>
 	<delete id="DelPerClinicalreward" parameterType="java.util.Map">
 		delete from per_clinical_reward where user_id = #{user_id}
@@ -240,12 +240,12 @@
 		select r.*,REPLACE(r.reward_date,'-','.') as rewarddate from per_acade_reward r where r.user_id = #{user_id} ORDER BY r.sort
 	</select>
 	<insert id="insertPerAcadereward" parameterType="java.util.Map">
-		insert into per_acade_reward(user_id,reward_name,award_unit,reward_date,note,sort)
-		  values(#{user_id},#{reward_name},#{award_unit},#{reward_date},#{note},#{sort})
+		insert into per_acade_reward(id,user_id,reward_name,award_unit,reward_date,note,sort)
+		  values(#{per_id},#{user_id},#{reward_name},#{award_unit},#{reward_date},#{note},#{sort})
 	</insert>
 	<update id="updatePerAcadereward" parameterType="java.util.Map">
 		update per_acade_reward set reward_name = #{reward_name},award_unit=#{award_unit},reward_date=#{reward_date},
-		note=#{note},sort=#{sort} where id = #{id}
+		note=#{note},sort=#{sort} where id = #{per_id}
 	</update>
 	<delete id="DelPerAcadereward" parameterType="java.util.Map">
 		delete from per_acade_reward where user_id = #{user_id}

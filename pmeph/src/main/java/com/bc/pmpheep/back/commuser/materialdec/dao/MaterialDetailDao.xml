@@ -150,8 +150,8 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 
 	</select>
 	<insert id="insertStu" parameterType="java.util.Map">
-		insert into dec_edu_exp(declaration_id,school_name,major,degree,note,date_begin,date_end,sort)
-		  values(#{declaration_id},#{school_name},#{major},#{degree},#{note},#{date_begin},#{date_end},#{sort})
+		insert into dec_edu_exp(per_id,declaration_id,school_name,major,degree,note,date_begin,date_end,sort)
+		  values(#{per_id},#{declaration_id},#{school_name},#{major},#{degree},#{note},#{date_begin},#{date_end},#{sort})
 	</insert>
 	<delete id="DelStu" parameterType="java.util.Map">
 		delete from dec_edu_exp where declaration_id = #{declaration_id}
@@ -164,8 +164,8 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 
 	</select>
 	<insert id="insertWork" parameterType="java.util.Map">
-		insert into dec_work_exp(declaration_id,org_name,position,note,date_begin,date_end,sort)
-		  values(#{declaration_id},#{org_name},#{position},#{note},#{date_begin},#{date_end},#{sort})
+		insert into dec_work_exp(per_id,declaration_id,org_name,position,note,date_begin,date_end,sort)
+		  values(#{per_id},#{declaration_id},#{org_name},#{position},#{note},#{date_begin},#{date_end},#{sort})
 	</insert>
 	<delete id="DelWork" parameterType="java.util.Map">
 		delete from dec_work_exp where declaration_id = #{declaration_id}
@@ -177,8 +177,8 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 
 	</select>
 	<insert id="insertStea" parameterType="java.util.Map">
-		insert into dec_teach_exp(declaration_id,school_name,subject,note,date_begin,date_end,sort)
-		  values(#{declaration_id},#{school_name},#{subject},#{note},#{date_begin},#{date_end},#{sort})
+		insert into dec_teach_exp(per_id,declaration_id,school_name,subject,note,date_begin,date_end,sort)
+		  values(#{per_id},#{declaration_id},#{school_name},#{subject},#{note},#{date_begin},#{date_end},#{sort})
 	</insert>
 	<delete id="DelStea" parameterType="java.util.Map">
 		delete from dec_teach_exp where declaration_id = #{declaration_id}
@@ -188,8 +188,8 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 		select * from dec_acade where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
 	<insert id="insertZjxs" parameterType="java.util.Map">
-		insert into dec_acade(declaration_id,org_name,rank,position,note,sort)
-		  values(#{declaration_id},#{org_name},#{rank},#{position},#{note},#{sort})
+		insert into dec_acade(per_id,declaration_id,org_name,rank,position,note,sort)
+		  values(#{per_id},#{declaration_id},#{org_name},#{rank},#{position},#{note},#{sort})
 	</insert>
 	<delete id="DelZjxs" parameterType="java.util.Map">
 		delete from dec_acade where declaration_id = #{declaration_id}
@@ -199,8 +199,8 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 		select id,declaration_id,material_name,position,is_digital_editor*1 is_digital_editor,note,sort,publisher,publish_date,REPLACE(publish_date,'-','.') as  publishdate from dec_last_position where declaration_id = #{declaration_id} ORDER BY sort
 	</select>
 	<insert id="insertJcbj" parameterType="java.util.Map">
-		insert into dec_last_position(declaration_id,material_name,position,is_digital_editor,publisher,publish_date,note,sort)
-		  values(#{declaration_id},#{material_name},#{position},#{is_digital_editor},#{publisher},#{publish_date},#{note},#{sort})
+		insert into dec_last_position(per_id,declaration_id,material_name,position,is_digital_editor,publisher,publish_date,note,sort)
+		  values(#{per_id},#{declaration_id},#{material_name},#{position},#{is_digital_editor},#{publisher},#{publish_date},#{note},#{sort})
 	</insert>
 	<delete id="DelJcbj" parameterType="java.util.Map">
 		delete from dec_last_position where declaration_id = #{declaration_id}
@@ -210,8 +210,8 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 		select * from dec_course_construction where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
 	<insert id="insertGjkcjs" parameterType="java.util.Map">
-		insert into dec_course_construction(declaration_id,course_name,class_hour,type,note,sort)
-		  values(#{declaration_id},#{course_name},#{class_hour},#{type},#{note},#{sort})
+		insert into dec_course_construction(per_id,declaration_id,course_name,class_hour,type,note,sort)
+		  values(#{per_id},#{declaration_id},#{course_name},#{class_hour},#{type},#{note},#{sort})
 	</insert>
 	<delete id="DelGjkcjs" parameterType="java.util.Map">
 		delete from dec_course_construction where declaration_id = #{declaration_id}
@@ -221,8 +221,8 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 		select * from dec_national_plan where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
 	<insert id="insertGjghjc" parameterType="java.util.Map">
-		insert into dec_national_plan(declaration_id,material_name,isbn,rank_text,note,sort)
-		  values(#{declaration_id},#{material_name},#{isbn},#{rank_text},#{note},#{sort})
+		insert into dec_national_plan(per_id,declaration_id,material_name,isbn,rank_text,note,sort)
+		  values(#{per_id},#{declaration_id},#{material_name},#{isbn},#{rank_text},#{note},#{sort})
 	</insert>
 	<delete id="DelGjghjc" parameterType="java.util.Map">
 		delete from dec_national_plan where declaration_id = #{declaration_id}
@@ -235,8 +235,8 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 		  ORDER BY sort 
 	</select>
 	<insert id="insertRwsjc" parameterType="java.util.Map">
-		insert into dec_textbook_pmph(declaration_id,material_name,rank,position,publish_date,isbn,note,is_digital_editor,sort)
-		  values(#{declaration_id},#{material_name},#{rank},#{position},#{publish_date},#{isbn},#{note},#{is_digital_editor},#{sort})
+		insert into dec_textbook_pmph(per_id,declaration_id,material_name,rank,position,publish_date,isbn,note,is_digital_editor,sort)
+		  values(#{per_id},#{declaration_id},#{material_name},#{rank},#{position},#{publish_date},#{isbn},#{note},#{is_digital_editor},#{sort})
 	</insert>
 	<delete id="DelRwsjc" parameterType="java.util.Map">
 		delete from dec_textbook_pmph where declaration_id = #{declaration_id}
@@ -249,8 +249,8 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 		  ORDER BY sort 
 	</select>
 	<insert id="insertJcbx" parameterType="java.util.Map">
-		insert into dec_textbook(declaration_id,material_name,rank,position,publisher,publish_date,isbn,note,is_digital_editor,sort)
-		  values(#{declaration_id},#{material_name},#{rank},#{position},#{publisher},#{publish_date},#{isbn},#{note},#{is_digital_editor},#{sort})
+		insert into dec_textbook(per_id,declaration_id,material_name,rank,position,publisher,publish_date,isbn,note,is_digital_editor,sort)
+		  values(#{per_id},#{declaration_id},#{material_name},#{rank},#{position},#{publisher},#{publish_date},#{isbn},#{note},#{is_digital_editor},#{sort})
 	</insert>
 	<delete id="DelJcbx" parameterType="java.util.Map">
 		delete from dec_textbook where declaration_id = #{declaration_id}
@@ -260,8 +260,8 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 		select * from dec_research where declaration_id = #{declaration_id} ORDER BY sort 
 	</select>
 	<insert id="insertZjkyqk" parameterType="java.util.Map">
-		insert into dec_research(declaration_id,research_name,approval_unit,award,note,sort)
-		  values(#{declaration_id},#{research_name},#{approval_unit},#{award},#{note},#{sort})
+		insert into dec_research(per_id,declaration_id,research_name,approval_unit,award,note,sort)
+		  values(#{per_id},#{declaration_id},#{research_name},#{approval_unit},#{award},#{note},#{sort})
 	</insert>
 	<delete id="DelZjkyqk" parameterType="java.util.Map">
 		delete from dec_research where declaration_id = #{declaration_id}
@@ -289,8 +289,8 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 		select * from dec_achievement where declaration_id = #{declaration_id}  
 	</select>
 	<insert id="insertAchievement" parameterType="java.util.Map">
-		insert into dec_achievement(declaration_id,content)
-		  values(#{declaration_id},#{content})
+		insert into dec_achievement(per_id,declaration_id,content)
+		  values(#{per_id},#{declaration_id},#{content})
 	</insert>
 	<update id="updateAchievement" parameterType="java.util.Map">
 		update dec_achievement set content = #{content} 
@@ -304,8 +304,8 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 		select id,declaration_id,monograph_name,monograph_date,REPLACE(monograph_date,'-','.') as monographdate,is_self_paid*1 is_self_paid,publisher,publish_date,REPLACE(publish_date,'-','.') as publishdate,note,sort from dec_monograph where declaration_id = #{declaration_id} ORDER BY sort
 	</select>
 	<insert id="insertMonograph" parameterType="java.util.Map">
-		insert into dec_monograph(declaration_id,monograph_name,monograph_date,is_self_paid,publisher,publish_date,note,sort)
-		  values(#{declaration_id},#{monograph_name},#{monograph_date},#{is_self_paid},#{publisher},#{publish_date},#{note},#{sort})
+		insert into dec_monograph(per_id,declaration_id,monograph_name,monograph_date,is_self_paid,publisher,publish_date,note,sort)
+		  values(#{per_id},#{declaration_id},#{monograph_name},#{monograph_date},#{is_self_paid},#{publisher},#{publish_date},#{note},#{sort})
 	</insert>
 	<delete id="DelMonograph" parameterType="java.util.Map">
 		delete from dec_monograph where declaration_id = #{declaration_id}
@@ -316,8 +316,8 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 
 	</select>
 	<insert id="insertPublish" parameterType="java.util.Map">
-		insert into dec_publish_reward(declaration_id,reward_name,award_unit,reward_date,note,sort)
-		  values(#{declaration_id},#{reward_name},#{award_unit},#{reward_date},#{note},#{sort})
+		insert into dec_publish_reward(per_id,declaration_id,reward_name,award_unit,reward_date,note,sort)
+		  values(#{per_id},#{declaration_id},#{reward_name},#{award_unit},#{reward_date},#{note},#{sort})
 	</insert>
 	<delete id="DelPublish" parameterType="java.util.Map">
 		delete from dec_publish_reward where declaration_id = #{declaration_id}
@@ -327,8 +327,8 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 		select s.*,REPLACE(s.publish_date,'-','.') as publishdate from dec_sci  s where s.declaration_id = #{declaration_id} ORDER BY s.sort
 	</select>
 	<insert id="insertSci" parameterType="java.util.Map">
-		insert into dec_sci(declaration_id,paper_name,journal_name,factor,publish_date,note,sort)
-		  values(#{declaration_id},#{paper_name},#{journal_name},#{factor},#{publish_date},#{note},#{sort})
+		insert into dec_sci(per_id,declaration_id,paper_name,journal_name,factor,publish_date,note,sort)
+		  values(#{per_id},#{declaration_id},#{paper_name},#{journal_name},#{factor},#{publish_date},#{note},#{sort})
 	</insert>
 	<delete id="DelSci" parameterType="java.util.Map">
 		delete from dec_sci where declaration_id = #{declaration_id}
@@ -338,8 +338,8 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 		select r.*,REPLACE(r.reward_date,'-','.') as rewarddate from dec_clinical_reward  r where r.declaration_id = #{declaration_id} ORDER BY r.sort
 	</select>
 	<insert id="insertClinicalreward" parameterType="java.util.Map">
-		insert into dec_clinical_reward(declaration_id,reward_name,award_unit,reward_date,note,sort)
-		  values(#{declaration_id},#{reward_name},#{award_unit},#{reward_date},#{note},#{sort})
+		insert into dec_clinical_reward(per_id,declaration_id,reward_name,award_unit,reward_date,note,sort)
+		  values(#{per_id},#{declaration_id},#{reward_name},#{award_unit},#{reward_date},#{note},#{sort})
 	</insert>
 	<delete id="DelClinicalreward" parameterType="java.util.Map">
 		delete from dec_clinical_reward where declaration_id = #{declaration_id}
@@ -349,8 +349,8 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 		select r.*,REPLACE(r.reward_date,'-','.') as rewarddate from dec_acade_reward r where r.declaration_id = #{declaration_id} ORDER BY r.sort
 	</select>
 	<insert id="insertAcadereward" parameterType="java.util.Map">
-		insert into dec_acade_reward(declaration_id,reward_name,award_unit,reward_date,note,sort)
-		  values(#{declaration_id},#{reward_name},#{award_unit},#{reward_date},#{note},#{sort})
+		insert into dec_acade_reward(per_id,declaration_id,reward_name,award_unit,reward_date,note,sort)
+		  values(#{per_id},#{declaration_id},#{reward_name},#{award_unit},#{reward_date},#{note},#{sort})
 	</insert>
 	<delete id="DelAcadereward" parameterType="java.util.Map">
 		delete from dec_acade_reward where declaration_id = #{declaration_id}

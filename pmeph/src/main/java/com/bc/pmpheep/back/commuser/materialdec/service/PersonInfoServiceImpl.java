@@ -141,6 +141,126 @@ public class PersonInfoServiceImpl implements PersonInfoService {
                             List<Map<String, Object>> pmphList,
                             Map<String, Object> digitalMap,
                             Map<String, Object> intentionlMap) {
+        //获取userid
+        String user_id = perMap.get("user_id").toString();
+
+        //3.作家学习经历新增
+        if (stuList != null && !stuList.isEmpty()) {
+            for (Map<String, Object> map : stuList) {
+                map.put("user_id", user_id);
+                this.peradd.insertPerStu(map);
+            }
+        }
+        //4.作家工作经历新增
+        if (workList != null && !workList.isEmpty()) {
+            for (Map<String, Object> map : workList) {
+                map.put("user_id", user_id);
+                this.peradd.insertPerWork(map);
+            }
+        }
+        //5.作家教学经历新增
+        if (steaList != null && !steaList.isEmpty()) {
+            for (Map<String, Object> map : steaList) {
+                map.put("user_id", user_id);
+                this.peradd.insertPerStea(map);
+            }
+        }
+        //6.作家兼职学术新增
+        if (zjxsList != null && !zjxsList.isEmpty()) {
+            for (Map<String, Object> map : zjxsList) {
+                map.put("user_id", user_id);
+                this.peradd.insertPerZjxs(map);
+            }
+        }
+        //7.上套教材参编新增
+        if (jcbjList != null && !jcbjList.isEmpty()) {
+            for (Map<String, Object> map : jcbjList) {
+                map.put("user_id", user_id);
+                this.peradd.insertPerJcbj(map);
+            }
+        }
+        //8.精品课程建设新增
+        if (gjkcjsList != null && !gjkcjsList.isEmpty()) {
+            for (Map<String, Object> map : gjkcjsList) {
+                map.put("user_id", user_id);
+                this.peradd.insertPerGjkcjs(map);
+            }
+        }
+        //9.主编国家级规划教材新增
+        if (gjghjcList != null && !gjghjcList.isEmpty()) {
+            for (Map<String, Object> map : gjghjcList) {
+                map.put("user_id", user_id);
+                this.peradd.insertPerGjghjc(map);
+            }
+        }
+        //10.其他社教材编写新增
+        if (jcbxList != null && !jcbxList.isEmpty()) {
+            for (Map<String, Object> map : jcbxList) {
+                map.put("user_id", user_id);
+                this.peradd.insertPerJcbx(map);
+            }
+        }
+        //11.作家科研情况新增
+        if (zjkyList != null && !zjkyList.isEmpty()) {
+            for (Map<String, Object> map : zjkyList) {
+                map.put("user_id", user_id);
+                this.peradd.insertPerZjkyqk(map);
+            }
+        }
+        //12.作家扩展项新增
+        if (zjkzqkList != null && !zjkzqkList.isEmpty()) {
+            for (Map<String, Object> map : zjkzqkList) {
+                map.put("user_id", user_id);
+             //   this.peradd.insertPerZjkzbb(map);
+            }
+        }
+        //13.个人成就新增
+        if (achievementMap != null && !achievementMap.isEmpty()) {
+            achievementMap.put("user_id", user_id);
+            this.peradd.insertPerAchievement(achievementMap);
+        }
+        //14.主编学术专著新增
+        if (monographList != null && !monographList.isEmpty()) {
+            for (Map<String, Object> map : monographList) {
+                map.put("user_id", user_id);
+                this.peradd.insertPerMonograph(map);
+            }
+        }
+        //15.出版行业获奖情况新增
+        if (publishList != null && !publishList.isEmpty()) {
+            for (Map<String, Object> map : publishList) {
+                map.put("user_id", user_id);
+                this.peradd.insertPerPublish(map);
+            }
+        }
+        //16.SCI论文投稿及影响因子新增
+        if (sciList != null && !sciList.isEmpty()) {
+            for (Map<String, Object> map : sciList) {
+                map.put("user_id", user_id);
+                this.peradd.insertPerSci(map);
+            }
+        }
+        //17.临床医学获奖情况新增
+        if (clinicalList != null && !clinicalList.isEmpty()) {
+            for (Map<String, Object> map : clinicalList) {
+                map.put("user_id", user_id);
+                this.peradd.insertPerClinicalreward(map);
+            }
+        }
+        //18.作家学术荣誉新增
+        if (acadeList != null && !acadeList.isEmpty()) {
+            for (Map<String, Object> map : acadeList) {
+                map.put("user_id", user_id);
+                this.peradd.insertPerAcadereward(map);
+            }
+        }
+        //19.人卫社教材编写新增
+        if (pmphList != null && !pmphList.isEmpty()) {
+            for (Map<String, Object> map : pmphList) {
+                map.put("user_id", user_id);
+                this.peradd.insertPerRwsjc(map);
+            }
+        }
         return 0;
     }
 }

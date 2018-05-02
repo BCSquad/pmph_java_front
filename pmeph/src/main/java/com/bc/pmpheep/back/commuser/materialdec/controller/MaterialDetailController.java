@@ -344,7 +344,7 @@ public class MaterialDetailController extends BaseController{
 				xxjlMap.put("date_begin", "".equals(xx_kssj[i]) ? null:xx_kssj[i]);
 				xxjlMap.put("date_end", "".equals(xx_jssj[i]) ? null:xx_jssj[i]);
 				xxjlMap.put("sort", i);
-				xxjlMap.put("xxkid", xx_id[i]);
+				xxjlMap.put("per_id", xx_id[i]);
 				//学习经历
 				stuList.add(xxjlMap);
 			}
@@ -365,7 +365,7 @@ public class MaterialDetailController extends BaseController{
 				workjlMap.put("date_begin", "".equals(gz_kssj[i]) ? null:gz_kssj[i]);
 				workjlMap.put("date_end", "".equals(gz_jssj[i]) ? null:gz_jssj[i]);
 				workjlMap.put("sort", i);
-				workjlMap.put("xxkid", gz_id[i]);
+				workjlMap.put("per_id", gz_id[i]);
 				//工作经历
 				workList.add(workjlMap);
 			}
@@ -386,7 +386,7 @@ public class MaterialDetailController extends BaseController{
 				jxjlMap.put("date_begin", "".equals(jx_kssj[i]) ? null:jx_kssj[i]);
 				jxjlMap.put("date_end", "".equals(jx_jssj[i]) ? null:jx_jssj[i]);
 				jxjlMap.put("sort", i);
-				jxjlMap.put("xxkid", jx_id[i]);
+				jxjlMap.put("per_id", jx_id[i]);
 				//教学经历
 				steaList.add(jxjlMap);
 			}
@@ -405,7 +405,7 @@ public class MaterialDetailController extends BaseController{
 				xsjzMap.put("note", xs_note[i]);
 				xsjzMap.put("position", xs_position[i]);
 				xsjzMap.put("sort", i);
-				xsjzMap.put("xxkid", xs_id[i]);
+				xsjzMap.put("per_id", xs_id[i]);
 				//作家兼职学术
 				zjxsList.add(xsjzMap);
 			}
@@ -429,7 +429,7 @@ public class MaterialDetailController extends BaseController{
 				JcbjMap.put("publish_date", "".equals(jc_publish_date[i]) ? null:jc_publish_date[i]);
 
 				JcbjMap.put("sort", i);
-				JcbjMap.put("xxkid", jc_id[i]);
+				JcbjMap.put("per_id", jc_id[i]);
 				//作家上套教材参编
 				jcbjList.add(JcbjMap);
 			}
@@ -448,7 +448,7 @@ public class MaterialDetailController extends BaseController{
 				GjkcjsMap.put("type", "".equals(request.getParameter(gj_type[i])) ? null:request.getParameter(gj_type[i]));
 				GjkcjsMap.put("note", gj_note[i]);
 				GjkcjsMap.put("sort", i);
-				GjkcjsMap.put("xxkid", gj_id[i]);
+				GjkcjsMap.put("per_id", gj_id[i]);
 				//精品课程建设
 				gjkcjsList.add(GjkcjsMap);
 			}
@@ -467,7 +467,7 @@ public class MaterialDetailController extends BaseController{
 				GjghjcMap.put("rank_text",hj_rank_text[i]);
 				GjghjcMap.put("note", hj_note[i]);
 				GjghjcMap.put("sort", i);
-				GjghjcMap.put("xxkid",  hj_id[i]);
+				GjghjcMap.put("per_id",  hj_id[i]);
 				//主编国家级规划
 				gjghjcList.add(GjghjcMap);
 			}
@@ -494,7 +494,7 @@ public class MaterialDetailController extends BaseController{
 				JcbxMap.put("isbn", jcb_isbn[i]);
 				JcbxMap.put("note", jcb_note[i]);
 				JcbxMap.put("sort", i);
-				JcbxMap.put("xxkid", jcb_id[i]);
+				JcbxMap.put("per_id", jcb_id[i]);
 				//教材其他情况编写
 				jcbxList.add(JcbxMap);
 			}
@@ -513,7 +513,7 @@ public class MaterialDetailController extends BaseController{
 				ZjkyqkMap.put("award", zjk_award[i]);
 				ZjkyqkMap.put("note", zjk_note[i]);
 				ZjkyqkMap.put("sort", i);
-				ZjkyqkMap.put("xxkid", zjk_id[i]);
+				ZjkyqkMap.put("per_id", zjk_id[i]);
 				//作家科研情况
 				zjkyList.add(ZjkyqkMap);
 			}
@@ -554,7 +554,7 @@ public class MaterialDetailController extends BaseController{
                 MonographMap.put("publish_date", "".equals(zb_publish_date[i]) ? null:zb_publish_date[i]);
 				MonographMap.put("note", zb_note[i]);
 				MonographMap.put("sort", i);
-				MonographMap.put("xxkid", zb_id[i]);
+				MonographMap.put("per_id", zb_id[i]);
 				//主编学术
 				monographList.add(MonographMap);
 			}
@@ -573,7 +573,7 @@ public class MaterialDetailController extends BaseController{
 				MonographMap.put("reward_date", "".equals(pu_reward_date[i]) ? null:pu_reward_date[i]);
 				MonographMap.put("note", pu_note[i]);
 				MonographMap.put("sort", i);
-				MonographMap.put("xxkid", pu_id[i]);
+				MonographMap.put("per_id", pu_id[i]);
 				publishList.add(MonographMap);
 			}
 		}
@@ -593,7 +593,7 @@ public class MaterialDetailController extends BaseController{
 				MonographMap.put("publish_date", "".equals(sci_publish_date[i]) ? null:sci_publish_date[i]);
 				MonographMap.put("note", sci_note[i]);
 				MonographMap.put("sort", i);
-				MonographMap.put("xxkid", sci_id[i]);
+				MonographMap.put("per_id", sci_id[i]);
 				sciList.add(MonographMap);
 			}
 		}
@@ -611,7 +611,7 @@ public class MaterialDetailController extends BaseController{
 				MonographMap.put("reward_date", "".equals(cl_reward_date[i]) ? null:cl_reward_date[i]);
 				MonographMap.put("note", cl_note[i]);
 				MonographMap.put("sort", i);
-				MonographMap.put("xxkid", cl_id[i]);
+				MonographMap.put("per_id", cl_id[i]);
 				clinicalList.add(MonographMap);
 			}
 		}
@@ -629,7 +629,7 @@ public class MaterialDetailController extends BaseController{
 				MonographMap.put("reward_date", "".equals(ac_reward_date[i]) ? null:ac_reward_date[i]);
 				MonographMap.put("note", ac_note[i]);
 				MonographMap.put("sort", i);
-				MonographMap.put("xxkid", ac_id[i]);
+				MonographMap.put("per_id", ac_id[i]);
 				acadeList.add(MonographMap);
 			}
 		}
@@ -652,7 +652,7 @@ public class MaterialDetailController extends BaseController{
 				JcbxMap.put("publish_date", "".equals(pmph_publish_date[i]) ? null:pmph_publish_date[i]);
 				JcbxMap.put("isbn", pmph_isbn[i]);
 				JcbxMap.put("note", pmph_note[i]);
-				JcbxMap.put("xxkid", pmph_id[i]);
+				JcbxMap.put("per_id", pmph_id[i]);
 				JcbxMap.put("sort", i);
 				pmphList.add(JcbxMap);
 			}
