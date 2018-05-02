@@ -112,8 +112,9 @@
 			<div class="div-content">
 			<input type="hidden" id="id" value="${admininfo.id}">
 				<div class="he">
-					<c:if test="${admininfo.avatar=='DEFAULT'}"><img id="sxy-img1" src="${ctx}/statics/image/putongyhtouxiang.png"/></c:if>
-                	<c:if test="${admininfo.avatar!='DEFAULT'}"><img id="sxy-img1" src="${ctx}/image/${admininfo.avatar}.action" ></c:if>
+					<%-- <c:if test="${admininfo.avatar=='DEFAULT'}"><img id="sxy-img1" src="${ctx}/statics/image/putongyhtouxiang.png"/></c:if>
+                	<c:if test="${admininfo.avatar!='DEFAULT'}"><img id="sxy-img1" src="${ctx}/image/${admininfo.avatar}.action" ></c:if> --%>
+                	<img id="sxy-img1" src="${ctx}/${admininfo.avatar}" >
                 	<div class="modify" id="uploadFile">修改头像</div>
 					
 					<div class="links">
