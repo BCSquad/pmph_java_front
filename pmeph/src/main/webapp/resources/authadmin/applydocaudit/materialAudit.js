@@ -214,11 +214,22 @@ function LengthLimit(obj,ml){
 }
 
 //打印按钮
-function toprint() {
+function toprint(did) {
     // window.print();
      $(".yijian").css("display","block");
     $("#ddd").jqprint();
     $(".yijian").css("display","none");
+
+    //打印状态
+    $.ajax({
+        type: 'post',
+        url: contextpath + 'dataaudit/updPrintStatus.action?t=' + new Date().getTime()+'&did=' + did ,
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+
+        }
+    });
 }
 
 

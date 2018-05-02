@@ -142,15 +142,16 @@ function LengthLimit(obj, ml) {
 
     var va = obj.value;
     var vat = "";
+    if(va !=null){
     for (var i = 1; i <= va.length; i++) {
         vat = va.substring(0, i);
         //把双字节的替换成两个单字节的然后再获得长度，与限制比较
         if (vat.replace(/[^\x00-\xff]/g, "aa").length <= ml) {
-            maxStrlength = i;
+           var maxStrlength = i;
         } else {
 
             break;
-        }
+        }}
     }
     obj.maxlength = maxStrlength;
     //把双字节的替换成两个单字节的然后再获得长度，与限制比较
@@ -193,3 +194,19 @@ function addtag(){
 function deltag(obj){
 	obj.remove();
 }
+
+
+function check( email_address )
+{
+    var regex = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
+    if ( regex.test( email_address ) )
+    {
+        var user_name = email_address.replace( regex, "$1");
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+

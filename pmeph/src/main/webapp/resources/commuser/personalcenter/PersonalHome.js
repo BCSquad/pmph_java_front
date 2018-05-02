@@ -40,6 +40,7 @@ $(document).ready(function () {
 			$("#pageNum").val(1);
 			queryMain();
 		});
+		
             
 });
   

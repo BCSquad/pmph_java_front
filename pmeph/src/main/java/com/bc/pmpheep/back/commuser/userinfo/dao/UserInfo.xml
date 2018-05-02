@@ -13,26 +13,30 @@
     
     <!-- 根据ID编辑普通员工个人资料 -->
     <update id="update" parameterType="java.util.Map">
-      update writer_user set
-        realname=#{realname},
-        writername=#{realname},
-        experience=#{experience},
-        fax=#{fax},
-        sex=#{sex},
-        title=#{title},
-        handphone=#{handphone},
-        birthday=#{birthday},
-        postcode=#{postcode},
-        email=#{email},
-        telephone=#{telephone},
-       <!--  org_id=#{org_id}, -->
-        position=#{position},
-        address=#{address},
-        note=#{note},
-        signature=#{signature},
-        workplace=#{workplace},
-        avatar=#{avatar}
-        where id=#{id}
+        UPDATE writer_user
+        <set>
+            realname=#{realname}, writername=#{realname},
+            experience=#{experience},fax=#{fax},sex=#{sex},title=#{title},handphone=#{handphone},birthday=#{birthday},
+            postcode=#{postcode},email=#{email},telephone=#{telephone},position =#{position},address=#{address},
+            note=#{note},signature=#{signature},workplace=#{workplace},avatar=#{avatar}
+            <!--<if test="realname !=null and realname !=''">realname=#{realname}, writername=#{realname},</if>
+            <if test="experience !=null and experience !=''"> experience=#{experience},</if>
+            <if test="fax !=null and fax !=''"> fax=#{fax},</if>
+            <if test="sex !=null and sex !=''"> sex=#{sex},</if>
+            <if test="title !=null and title !=''">title=#{title},</if>
+            <if test="handphone !=null and handphone !=''">handphone=#{handphone},</if>
+            <if test="birthday !=null and birthday !=''"> birthday=#{birthday},</if>
+            <if test="postcode !=null and postcode !=''"> postcode=#{postcode},</if>
+            <if test="email !=null and email !=''">email=#{email},</if>
+            <if test="telephone !=null and telephone !=''">telephone=#{telephone},</if>
+            <if test="position !=null and position !=''"> position =#{position},</if>
+            <if test="address !=null and address !=''"> address=#{address},</if>
+            <if test="note !=null and note !=''">note=#{note},</if>
+            <if test="signature !=null and signature !=''">signature=#{signature},</if>
+            <if test="workplace !=null and workplace !=''">workplace=#{workplace},</if>
+            <if test="avatar !=null and avatar !=''">avatar=#{avatar}</if>-->
+        </set>
+        WHERE id=#{id}
     </update>
     
     <!-- 根据ID更改作者头像 -->
@@ -44,7 +48,7 @@
     <update id="updatePassword" parameterType="java.util.Map">
         UPDATE writer_user
         <set>
-            <if test="password!=null and password!=null">password=#{password}</if>
+            <if test="password !=null and password !=null">password=#{password}</if>
         </set>
         WHERE id=#{id}
     </update>

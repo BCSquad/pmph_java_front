@@ -1,0 +1,85 @@
+
+<link rel="stylesheet" href="$!{contextpath}statics/commuser/personalcenter/bookCorrected.css" type="text/css">
+<script src="$!{contextpath}resources/commuser/personalcenter/PersonalHomeTSFK.js"></script>
+
+<input type="hidden" class="queryCondition" id="is_auth" value="$!{is_auth}">
+#if($!{selfLog}==true)
+<ul class="replytag_wrapper">
+    <li id="replytag_all" class="replytag
+	    #if(!$!{is_auth}||$!{is_auth}=='') 
+	    	active
+	    #end ">全部</li>
+    <li id="replytag_toreply" class="replytag 
+		#if($!{is_auth}==0) 
+	    	active
+	    #end ">待审核</li>
+    <li id="replytag_replied" class="replytag 
+		#if($!{is_auth}==1)
+	    	active
+	    #end ">已审核</li>
+</ul>
+#end
+<div class="listContent">
+	#foreach($c in $!{List_map})
+		
+			<div class="book_correct_unit">
+				<div class="unit_left">
+					<div class="img_box">
+						#if(!$c.image_url || $c.image_url == "DEFAULT")
+				        	<img src="$!{contextpath}statics/image/564f34b00cf2b738819e9c35_122x122!.jpg">
+				        #else
+				        	<img src="$!{c.image_url}">
+				        #end
+					</div>
+					<div class="text_box">
+						<div>
+						作者：$!{c.author}
+						</div>
+						<div>
+						版次：$!{c.revision}
+						</div>
+					</div>
+				</div>
+				<div class="unit_right">
+				
+					<form id="form$!{c.id}">
+						<div class="title_line">
+							<a target="_blank" href="$!{contextpath}readdetail/todetail.action?id=$!{c.book_id}"><span class="bookname">$!{c.bookname}</span></a>
+							<span class="isbn">$!{c.isbn}</span>
+						</div>
+						
+						#foreach($o in $!{c.feedBackList})
+							
+								#if($velocityCount != 1) <span class="correction_between_line"></span> #end   
+								<div class="position_line">
+			    					<span>反馈时间：  $!{o.gmt_create}
+			    						#if($!{selfLog}==true)
+				    						#if(!$!{o.is_auth})
+				    							<span class="myCorrectStatus toReply">待审核</span>
+				    						#elseif($!{o.is_auth})
+				    							<span class="myCorrectStatus yes">已审核</span>
+				    						#end
+			    						#end
+			    					</span>
+			    					
+								</div>
+								<div class="content_line">
+									<span>反馈内容：</span>
+									<span>$!{o.content}</span>
+								</div>
+								
+								#if($!{o.author_reply})
+									<div class="">
+										<span>编辑回复：</span>
+										<span>$!{o.author_reply}</span>
+									</div>
+								#end
+							
+						#end
+					</form>
+				</div>
+			</div>
+	
+		
+	#end
+</div>

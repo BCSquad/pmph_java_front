@@ -37,7 +37,8 @@
 	    #if($c.progress == 1)
 	    	<td>
 		        <a class="a-pass" onclick="passCertification($c.id,'$c.realname')">通过验证</a>
-		        <a class="a-reject" onclick="rejectCertification($c.id,'$c.realname')">退回</a>
+		        <a class="a-reject" onclick="showup($c.id,'$c.realname')">退回</a>
+		        <input type="hidden" id = "backReason_$!{c.id}" value="$!{c.backReason}">
 		    </td>
 	    #elseif($c.progress == 3 || $c.progress == 2)
 	    	<td>

@@ -552,6 +552,7 @@
 		<id property="book_id" column="book_id" />
 		<result property="bookname" column="bookname" />
 		<result property="isbn" column="isbn" />
+		<result property="revision" column="revision" />
 		<result property="author" column="author" />
 		<result property="image_url" column="image_url" />
 		<!-- 该图书的多条纠错信息 -->
@@ -578,6 +579,7 @@
 		b.bookname,
 		b.isbn,
 		b.author,
+		b.revision,
 		b.image_url,
 		bc.id,
 		bc.book_id,
@@ -871,9 +873,9 @@
 		parameterType="java.util.Map">
 		select
 		sqa.option_id FROM survey_question_answer  sqa
-		JOIN
+		inner JOIN
 		survey_question_option sqo on sqo.id=sqa.option_id
-		JOIN survey_question sq ON sq.id=sqa.question_id
+		inner JOIN survey_question sq ON sq.id=sqa.question_id
 		where
 		sqa.question_id=#{questionId} and sqa.user_id=#{logUserId} and sq.type=1
 	</select>
@@ -882,7 +884,7 @@
 	<select id="getCheckAnswers" resultType="java.util.Map"
 		parameterType="java.util.Map"  >
 		select sqa.option_id FROM survey_question_answer sqa
- 		JOIN survey_question sq ON sqa.question_id=sq.id
+ 		inner JOIN survey_question sq ON sqa.question_id=sq.id
 		where
 		sqa.question_id=#{questionId} and sqa.user_id=#{logUserId}  and sq.type=2
 	</select>
@@ -1370,7 +1372,35 @@ UNION
 		LEFT JOIN writer_user w ON c.author_id = w.id
 		WHERE
 			m.favorite_id = #{parameter.favoriteId}
-		AND m.writer_id = #{parameter.logUserId}
+		AND m.writer_id = #{parameter.logUserId}  AND c.category_id=1
+
+	)
+	UNION
+	(
+	SELECT
+	3 as f_type,
+	c.id AS id,
+	c.title AS title,
+	w.realname AS author,
+	m.id AS mid,
+	c.summary AS detail,
+	c.bookmarks AS bookmarks,
+	c.comments AS comments,
+	c.likes AS likes,
+	c.clicks AS clicks,
+	m.gmt_create,
+	'' as image_url,
+	m.favorite_id as favorite_id,
+	c.category_id as category_id,
+	c.cover as cover,
+	c.mid as mdbid
+	FROM
+	cms_user_mark m
+	LEFT JOIN cms_content c ON m.content_id = c.id
+	LEFT JOIN writer_user w ON c.author_id = w.id
+	WHERE
+	m.favorite_id = #{parameter.favoriteId}
+	AND m.writer_id = #{parameter.logUserId}  AND c.category_id=2
 
 	)
 )t WHERE
@@ -1381,16 +1411,19 @@ UNION
 	<if test="parameter.is_long ==0 ">
 		AND t.f_type=2
 	</if>
+	<if test="parameter.is_long ==2 ">
+		AND t.f_type=3
+	</if>
 ORDER BY t.gmt_create DESC  limit ${start},${pageSize}
 </select>
 
 	<!-- 查我的收藏总数 -->
 	<select id="listMyFavoritesCount" resultType="Integer"
 			parameterType="PageParameter">
-		select count(*) from (
-
-(
-	SELECT
+		select COUNT(*) from
+		(
+		(
+		SELECT
 		1 as f_type,
 		b.id AS id,
 		b.bookname AS title,
@@ -1400,46 +1433,89 @@ ORDER BY t.gmt_create DESC  limit ${start},${pageSize}
 		b.bookmarks AS bookmarks,
 		b.comments AS comments,
 		b.likes AS likes,
-		b.clicks AS clicks
-	FROM
-		book_user_mark m
-	LEFT JOIN book b ON m.book_id = b.id
-	LEFT JOIN book_detail d ON b.id = d.book_id
-	WHERE
-		m.favorite_id = #{parameter.favoriteIdb}
-		AND m.writer_id = #{parameter.logUserId}
-	ORDER BY
-		m.gmt_create DESC
-)
-UNION
-	(
-		SELECT
-			2 as f_type,
-			c.id AS id,
-			c.title AS title,
-			w.realname AS author,
-			m.id AS mid,
-			c.summary AS detail,
-			c.bookmarks AS bookmarks,
-			c.comments AS comments,
-			c.likes AS likes,
-			c.clicks AS clicks
+		b.clicks AS clicks,
+		m.gmt_create,
+		b.image_url as image_url,
+		m.favorite_id as favorite_id,
+		'' as category_id,
+		'' as cover,
+		'' as mdbid
 		FROM
-			cms_user_mark m
+		book_user_mark m
+		LEFT JOIN book b ON m.book_id = b.id
+		LEFT JOIN book_detail d ON b.id = d.book_id
+		WHERE
+		m.favorite_id = #{parameter.favoriteId}
+		AND m.writer_id = #{parameter.logUserId}
+
+		)
+		UNION
+		(
+		SELECT
+		2 as f_type,
+		c.id AS id,
+		c.title AS title,
+		w.realname AS author,
+		m.id AS mid,
+		c.summary AS detail,
+		c.bookmarks AS bookmarks,
+		c.comments AS comments,
+		c.likes AS likes,
+		c.clicks AS clicks,
+		m.gmt_create,
+		'' as image_url,
+		m.favorite_id as favorite_id,
+		c.category_id as category_id,
+		c.cover as cover,
+		c.mid as mdbid
+		FROM
+		cms_user_mark m
 		LEFT JOIN cms_content c ON m.content_id = c.id
 		LEFT JOIN writer_user w ON c.author_id = w.id
 		WHERE
-			m.favorite_id = #{parameter.favoriteId}
-		AND m.writer_id = #{parameter.logUserId}
-		ORDER BY
-			m.gmt_create DESC
-	) ) t
+		m.favorite_id = #{parameter.favoriteId}
+		AND m.writer_id = #{parameter.logUserId} AND c.category_id=1
+
+		)
+		UNION
+		(
+		SELECT
+		3 as f_type,
+		c.id AS id,
+		c.title AS title,
+		w.realname AS author,
+		m.id AS mid,
+		c.summary AS detail,
+		c.bookmarks AS bookmarks,
+		c.comments AS comments,
+		c.likes AS likes,
+		c.clicks AS clicks,
+		m.gmt_create,
+		'' as image_url,
+		m.favorite_id as favorite_id,
+		c.category_id as category_id,
+		c.cover as cover,
+		c.mid as mdbid
+		FROM
+		cms_user_mark m
+		LEFT JOIN cms_content c ON m.content_id = c.id
+		LEFT JOIN writer_user w ON c.author_id = w.id
+		WHERE
+		m.favorite_id = #{parameter.favoriteId}
+		AND m.writer_id = #{parameter.logUserId} AND c.category_id=2
+
+		)
+		)t
+
 		WHERE 1=1
 		<if test="parameter.is_long ==1 ">
 			AND t.f_type=1
 		</if>
 		<if test="parameter.is_long ==0 ">
 			AND t.f_type=2
+		</if>
+		<if test="parameter.is_long ==2 ">
+			AND t.f_type=3
 		</if>
 	</select>
 
@@ -1451,6 +1527,85 @@ UNION
 	<!--查询用户是否对某一文章点赞  -->
 	<select id="queryLikesc" parameterType="map" resultType="int">
 		select count(id)  from cms_user_like where content_id=#{id} and writer_id=#{logUserId}
+	</select>
+	
+	<!-- 我的纠错resultMap 主map为图书信息 -->
+	<resultMap type="Map" id="MyBookFeedBackMap">
+		<id property="book_id" column="book_id" />
+		<result property="bookname" column="bookname" />
+		<result property="revision" column="revision" />
+		<result property="isbn" column="isbn" />
+		<result property="author" column="author" />
+		<result property="image_url" column="image_url" />
+		<!-- 该图书的多条纠错信息 -->
+		<collection property="feedBackList" javaType="ArrayList"
+			ofType="Map">
+			<id property="id" column="id" />
+			<result property="content" column="content" />
+			<result property="is_auth" column="is_auth" />
+			<result property="author_id" column="author_id" />
+			<result property="author_reply" column="author_reply" />
+			<result property="auth_date" column="auth_date" />
+			<result property="gmt_create" column="gmt_create" />
+		</collection>
+	</resultMap>
+	
+	<select id="queryMyBookFeedBack"  parameterType="PageParameter"
+		resultMap="MyBookFeedBackMap">
+		SELECT
+		b.bookname,
+		b.isbn,
+		b.revision,
+		b.author,
+		b.image_url,
+		bc.id,
+		bc.book_id,
+		bc.content,
+		bc.is_auth,
+		bc.author_id,
+		bc.author_reply,
+		bc.auth_date,
+		DATE_FORMAT(bc.gmt_create,'%Y-%m-%d %H:%i') as gmt_create
+		FROM
+		book AS b
+		Inner Join book_user_feedback AS bc ON
+		b.id = bc.book_id
+		WHERE
+		bc.user_id = #{parameter.logUserId}
+		AND
+		bc.is_deleted = '0'
+		<if test="parameter.is_auth != null and parameter.is_auth != '' ">
+			AND bc.is_auth = #{parameter.is_auth}
+		</if>
+		<if test='parameter.selfLog == false '>
+			and bc.is_auth =1
+		</if>
+		order by bc.is_auth desc, bc.gmt_create desc
+		limit ${start},${pageSize}
+	</select>
+	
+	<select id="queryMyBookFeedBackCount" parameterType="PageParameter"
+		resultType="Integer">
+		select count(*) from
+		(
+		SELECT
+		b.id
+		FROM
+		book AS b
+		Inner Join book_user_feedback
+		AS bc ON b.id = bc.book_id
+		WHERE
+		bc.user_id = #{parameter.logUserId}
+		AND
+		bc.is_deleted = '0'
+		<if test="parameter.is_auth != null and parameter.is_auth != '' ">
+			AND bc.is_auth = #{parameter.is_auth}
+		</if>
+		<if test='parameter.selfLog == false '>
+			and bc.is_auth =1
+		</if>
+		group by b.id
+		)t
 	</select>
 
 

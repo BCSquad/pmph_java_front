@@ -652,7 +652,7 @@
 
 .block .item .item_content {
     width: 890px;
-
+	word-break: break-all;
     letter-spacing: 1px;
     color: #333333;
     overflow: hidden;
@@ -867,6 +867,17 @@
 .mis_pic {
     background-image: url("../../image/css_sprites.png");
     background-position: -373px -203px;
+    background-repeat: no-repeat;
+    height: 22px;
+    width: 22px;
+    float: left;
+    margin-top: 5px;
+    margin-left: 15px;
+}
+
+.feedback_pic {
+    background-image: url("../../image/css_sprites.png");
+    background-position: -373px -262px;
     background-repeat: no-repeat;
     height: 22px;
     width: 22px;

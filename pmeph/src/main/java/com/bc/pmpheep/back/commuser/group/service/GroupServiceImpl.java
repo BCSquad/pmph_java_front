@@ -31,6 +31,7 @@ import com.bc.pmpheep.back.commuser.group.bean.GroupMember;
 import com.bc.pmpheep.back.commuser.group.bean.GroupMessageVO;
 import com.bc.pmpheep.back.commuser.group.bean.PmphGroupMemberVO;
 import com.bc.pmpheep.back.commuser.group.dao.GroupDao;
+import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.util.Const;
 import com.bc.pmpheep.back.util.ObjectUtil;
 import com.bc.pmpheep.back.util.RouteUtil;
@@ -328,12 +329,13 @@ public class GroupServiceImpl implements GroupService {
         if(null == map){
             return flag;
         }
-        if (((Boolean)map.get("is_founder")) ) {
-            flag = "您是这个小组的创建者";
-        }
         if(((Boolean)map.get("is_admin"))){
             flag = "您是这个小组的管理员";
         }
+        if (((Boolean)map.get("is_founder")) ) {
+            flag = "您是这个小组的创建者";
+        }
+        
         return flag;
     }
 
@@ -476,5 +478,25 @@ public class GroupServiceImpl implements GroupService {
 		
 		//loadNewGroupMsg(sender,data.senderName,data.senderIcon,data.content,data.time);
 		return paraMap;
+	}
+
+	@Override
+	public List<Map<String, Object>> queryMemberListForManage(
+			PageParameter<Map<String, Object>> pageParameter) {
+		List<Map<String, Object>> list = groupDao.queryMemberListForManage(pageParameter);
+		return list;
+	}
+
+	@Override
+	public int queryMemberListForManageCount(
+			PageParameter<Map<String, Object>> pageParameter) {
+		int count = groupDao.queryMemberListForManageCount(pageParameter);
+		return count;
+	}
+
+	@Override
+	public int updateDisplayName(Map<String, Object> paraMap) {
+		int count = groupDao.updateDisplayName(paraMap);
+		return count;
 	}
 }

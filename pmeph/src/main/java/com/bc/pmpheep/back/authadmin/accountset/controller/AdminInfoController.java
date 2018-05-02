@@ -81,7 +81,13 @@ public class AdminInfoController extends BaseController {
         Map <String,Object> map1 = this.getUserInfo() ;
     	Long userId = new Long(String.valueOf(map1.get("id")));
         Map<String,Object> map = adminInfoService.getOrgUserById(userId);
-        
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            String key = entry.getKey().toString();
+            String value = entry.getValue().toString();
+            if(value.equals("-")){
+                map.put(key,"");
+            }
+        }
         if(null!=map&&map.size()>0){
         	String fileId = (String) map.get("proxy");
         	if(null!=fileId&&!fileId.equals("")){
@@ -123,15 +129,12 @@ public class AdminInfoController extends BaseController {
         orgUser.setId(userId);
         String code ="";
         if (StringUtils.isEmpty(orgUser.getPosition())||
-        	StringUtils.isEmpty(orgUser.getTelephone())||
+        	StringUtils.isEmpty(orgUser.getRealName())||
         	StringUtils.isEmpty(orgUser.getHandphone())||
         	StringUtils.isEmpty(orgUser.getPostCode())||
         	StringUtils.isEmpty(orgUser.getEmail())||
-        	StringUtils.isEmpty(orgUser.getFax())||	
+       	    StringUtils.isEmpty(orgUser.getSex())||
         	StringUtils.isEmpty(orgUser.getId())||	
-        	/*StringUtils.isEmpty(orgUser.getBirthday())||
-        	StringUtils.isEmpty(orgUser.getExperience())||	
-        	StringUtils.isEmpty(orgUser.getWorkplace())||	*/
         	StringUtils.isEmpty(orgUser.getAddress())){
         	
         	code="fail";

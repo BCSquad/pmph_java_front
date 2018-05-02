@@ -17,6 +17,23 @@ $(function(){
 			queryMain();
 		});
 	});
+	
+	//第一主编和读者切换
+	$(".whoTag").each(function(){
+		var $t = $(this);
+		$t.unbind().bind("click",function(){
+			var tag = $t.attr("tag");
+			
+			$("#pageNum").val(1);
+			$("#pagetag").val(tag);
+			queryMain();
+		});
+	});
+	
+	$(".whoTag").removeClass("active");
+	$(".whoTag[tag='"+$("#pagetag").val()+"']").addClass("active");
+	$("#wdjc").addClass("xz");
+	
 });
 
 

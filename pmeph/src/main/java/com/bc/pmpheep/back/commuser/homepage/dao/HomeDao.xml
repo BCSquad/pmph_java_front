@@ -130,6 +130,7 @@
 		when  cc.author_type =2
 		then wu.avatar
 		else 'DEFAULT' end as avatar,
+		cc.author_name,
 		cc.author_id
 		from cms_content cc
 		left join pmph_user pu on pu.id=cc.author_id
@@ -171,7 +172,7 @@ LIMIT 0,10
         <result property="total_click" column="total_click"/>
     </resultMap>
 
-    <!-- 查询点击人数最多的最多的作者 -->
+    <!-- 查询点击人数最多的最多的作者  已改变为 ： 业务逻辑改为查询被推荐的作者 -->
     <select id="queryAuthor" resultMap="HotAuthorMap">
         select u.*
         ,f.request_id = u.id and f.target_id = #{logUserId} and f.status = 0 as isBeenRequest
@@ -180,7 +181,7 @@ LIMIT 0,10
         from
         (
         select
-        sum(c.clicks) as total_click,u.id,u.realname,u.position,u.title,u.avatar
+        sum(c.clicks) as total_click,u.id,u.realname,u.position,u.title,u.avatar,u.is_top*u.top_sort as topSort
         from cms_content c
         left join writer_user u on c.author_id=u.id
         <if test="logUserId != null and logUserId !='' ">
@@ -192,13 +193,11 @@ LIMIT 0,10
         on ((f.request_id = u.id and f.target_id = #{logUserId} ) or (f.target_id = u.id and f.request_id =
         #{logUserId})) and f.status != 1
         group by u.id
-        order by u.total_click desc
+        order by u.topSort desc , u.total_click desc
         limit 0,4
-        <!-- select
-        b.*
-        from cms_content t
-        left join writer_user b on t.author_id=b.id group by t.clicks desc limit 0,4 -->
+        
     </select>
+    
     <!-- 查询热门书评 -->
     <select id="queryComment" resultMap="Mapresult">
        SELECT

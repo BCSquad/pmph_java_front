@@ -69,7 +69,7 @@
                 					<img class="headPicture" src="${ctx}/image/${list.avatar}.action" >
                                     </c:if>
                                     <!-- <img class="headPicture" src="../statics/pictures/avatar.png"/> -->
-                                    <span class="name book-name-span">${list.realname}</span><span class="time">${list.gmt_create }</span>
+                                    <span class="name book-name-span">${list.author_name}</span><span class="time">${list.gmt_create }</span>
                                 </div>
                             </div>
                             <div class="upRight">

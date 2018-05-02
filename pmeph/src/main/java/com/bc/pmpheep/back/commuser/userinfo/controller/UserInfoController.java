@@ -78,11 +78,6 @@ public class UserInfoController extends BaseController {
                 }
             }
 		}
-        //头像回显
-        //图片为空则显示默认图片
-        /*  if (("").equals(map.get("avatar"))) {
-            map.put("avatar", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
-        }*/
         modelAndView.addObject("map", map);
         modelAndView.setViewName("commuser/userinfo/userinfo");
         return modelAndView;
@@ -98,15 +93,6 @@ public class UserInfoController extends BaseController {
 	@ResponseBody	
 	public Map<String, Object> updateavatar(HttpServletRequest request){
 		Map<String, Object> map=new HashMap<String, Object>();
-//		String avatar=request.getParameter("avatar");
-//		String id=request.getParameter("id");
-//		map=userinfoService.updateavatar(avatar, id);
-//		 Map<String, Object> user=getUserInfo();
-//		 user = userService.getUserInfo(MapUtils.getString(user, "username"), "1");
-//		 HttpSession session = request.getSession();
-//		 session.setAttribute(Const.SESSION_USER_CONST_WRITER, user);
-//         session.setAttribute(Const.SESSION_USER_CONST_TYPE, "1");
-        
 		return map;
 	}
 	
@@ -132,7 +118,6 @@ public class UserInfoController extends BaseController {
         String postCode = request.getParameter("postcode");
         String birthday = request.getParameter("birthday");
         String email = request.getParameter("email");
-       /* String org_id = request.getParameter("org_id");*/
         String position = request.getParameter("position");
         String address = request.getParameter("address");
         String note = request.getParameter("note");
@@ -145,42 +130,40 @@ public class UserInfoController extends BaseController {
         map.put("signature", signature);
         if (StringUtils.isEmpty(id) ||
                 StringUtils.isEmpty(realName) ||
+                StringUtils.isEmpty(handphone) ||
+                StringUtils.isEmpty(workplace)
+                /* StringUtils.isEmpty(birthday) ||
+                 StringUtils.isEmpty(sex) ||
                 StringUtils.isEmpty(experience) ||
                 StringUtils.isEmpty(fax) ||
-                StringUtils.isEmpty(sex) ||
                 StringUtils.isEmpty(title) ||
-                StringUtils.isEmpty(handphone) ||
                 StringUtils.isEmpty(postCode) ||
-                StringUtils.isEmpty(birthday) ||
                 StringUtils.isEmpty(email) ||
-               /* StringUtils.isEmpty(org_id) ||*/
                 StringUtils.isEmpty(position) ||
                 StringUtils.isEmpty(address) ||
                 StringUtils.isEmpty(note) ||
-                StringUtils.isEmpty(workplace) ||
-                StringUtils.isEmpty(telephone)
+                StringUtils.isEmpty(telephone)*/
                 ) {
             zmap.put("returncode", "DEFAULT");
         } else {
             map.put("id", id);
-            map.put("realname", realName);
-            map.put("experience", experience);
-            map.put("fax", fax);
-            map.put("sex", sex);
-            map.put("title", title);
-            map.put("handphone", handphone);
-            map.put("postcode", postCode);
-            map.put("birthday", birthday);
-            map.put("email", email);
-           /* map.put("org_id", org_id);*/
-            map.put("position", position);
-            map.put("address", address);
-            map.put("note", note);
-            map.put("workplace", workplace);
-            map.put("telephone", telephone);
-            map.put("avatar", fileid);
-            map.put("tags", tags);
-            map.put("hastag", hastag);
+            map.put("realname", "".equals(realName) ? null:realName);
+            map.put("experience", "".equals(experience) ? null:experience);
+            map.put("fax", "".equals(fax) ? null:fax);
+            map.put("sex", "".equals(sex) ? null:sex);
+            map.put("title", "".equals(title) ? null:title);
+            map.put("handphone", "".equals(handphone) ? null:handphone);
+            map.put("postcode", "".equals(postCode) ? null:postCode);
+            map.put("birthday", "".equals(birthday) ? null:birthday);
+            map.put("email", "".equals(email) ? null:email);
+            map.put("position", "".equals(position) ? null:position);
+            map.put("address", "".equals(address) ? null:address);
+            map.put("note", "".equals(note) ? null:note);
+            map.put("workplace", "".equals(workplace) ? null:workplace);
+            map.put("telephone", "".equals(telephone) ? null:telephone);
+            map.put("avatar", "".equals(fileid) ? null:fileid);
+            map.put("tags", "".equals(tags) ? null:tags);
+            map.put("hastag", "".equals(hastag) ? null:hastag);
             zmap = userinfoService.update(map);
             Map<String, Object> user=getUserInfo();
    		 	user = userService.getUserInfo(MapUtils.getString(user, "username"), "1");

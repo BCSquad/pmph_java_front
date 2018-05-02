@@ -86,15 +86,15 @@
     margin-bottom: 12px;
     background-image: url("../image/putongyhtouxiang.png");
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: 100% 100%;
     background-position:center;
     border-radius: 40px;
 }
 
 .content-wrapper .friend-box .friend-name{
-    margin:auto;
+    margin: auto;
     width: 100%;
-    text-align:center;
+    text-align: center;
     height: 18px;
     font-size: 18px;
     font-weight: normal;
@@ -102,6 +102,11 @@
     line-height: 18px;
     letter-spacing: 0px;
     color: #333333;
+    overflow: hidden;
+    word-break: break-all;
+    white-space: normal;
+    box-sizing: border-box;
+    padding: 0px 10px;
 }
 
 .content-wrapper .friend-box .friend-job{

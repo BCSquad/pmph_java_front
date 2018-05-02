@@ -88,6 +88,13 @@
 </style>
 </head>
 <body>
+
+<!-- 隐藏域 修改后会再次提交待审的字段 原数据 -->
+<input type="hidden" id="realName_original" value="${admininfo.realname}">
+<input type="hidden" id="handphone_original" value="${admininfo.handphone}">
+<input type="hidden" id="email_original" value="${admininfo.email}">
+<input type="hidden" id="progress_original" value="${admininfo.progress}">
+
 <input type="hidden" id="avatar" >
 	<jsp:include page="/pages/comm/headGreenBackGround.jsp">
 		<jsp:param name="pageTitle" value="account"></jsp:param>
@@ -148,12 +155,10 @@
 								<div class="label-input">
 									<label>联系电话</label>
 									<div class="input-wrapper">
-										<input type="text" id="telephone" placeholder="填写联系电话"
+										<input type="text" id="telephone"
 											value="${admininfo.telephone}" maxLength="20">
 									</div>
 								</div>
-								
-								
 							</td>
 						</tr>
 						<tr>
@@ -172,18 +177,7 @@
 								</div>
 							</td>
 							<td>
-								<%-- <div style="width: 400px">
-									<label class="require">教龄</label>
-									<div class="input-wrapper">
-										<input class="sxy-txt required"
-											data-valid="isNonEmpty||minLength:3"
-											data-error="教龄不能为空||教龄不能大于3位" placeholder="填写教龄" type="text"
-											id="experience" name="experience" value="${admininfo.experience }" />
-									</div>
-								</div> --%>
-								
-								
-								
+
 								<div class="label-input">
 				                    <label class="require" >职称</label>
 				                    <div class="input-wrapper">
@@ -221,15 +215,7 @@
 						
 						<tr>
 							<td>
-								<%-- <div style="width: 400px">
-									<label class="require">工作单位</label>
-									<div class="input-wrapper">
-										<input class="sxy-txt required" data-valid="isNonEmpty"
-											data-error="工作单位不能为空" placeholder="填写工作单位" type="text"
-											id="workplace" name="workplace" value="${admininfo.workplace }" />
-									</div>
-								</div> --%>
-								
+
 								<div class="label-input">
 									<label class="require">手机</label>
 									<div class="input-wrapper">
@@ -279,8 +265,6 @@
 						<tr>
 							<td colspan="3" align="center"><input class="button"
 								type="button" value="保存" onclick="save()" /> 
-								<!-- <input class="button" type="button" value="提交" onclick="submit()" /> -->
-								<!-- <input class="button" type="button" value="取消"  /> -->
 							</td>
 						</tr>
 					</table>

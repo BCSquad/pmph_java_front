@@ -10,6 +10,8 @@ $(function(){
                 $("#is_long").val("1");
             }else if(tid=="replytag_replied"){
                 $("#is_long").val("0");
+            }else if(tid=="replytag_replied2"){
+                $("#is_long").val("2");
             }
             $(".replytag").removeClass("active");
             $t.addClass("active");
@@ -112,3 +114,50 @@ $(function(){
             });
         },function(){});
     }
+
+//信息快报点赞或取消点赞
+function addlikex(id){
+    var likes=$("#likex"+id).text();
+    $.ajax({
+        type:'post',
+        url:contextpath+'articlecollection/changelike.action',
+        data:{contentId:id,likes:likes},
+        async:false,
+        dataType:'json',
+        success:function(json){
+            if(json.returncode=="OK"){
+                if($("#goodx"+id).hasClass("good")){
+                    $("#goodx"+id).removeClass("good");
+                    $("#goodx"+id).addClass("nogood");
+                    $("#likex"+id).css({"color":"#b5b5b5"});
+                }else{
+                    $("#goodx"+id).removeClass("nogood");
+                    $("#goodx"+id).addClass("good");
+                    $("#likex"+id).css({"color":"#1abd44"});
+                }
+                $("#likex"+id).text(json.likes);
+            }
+
+        }
+    });
+}
+//信息快报取消收藏
+function cancelMarkx(id,markes,cmsid,favorite_id){
+    // var cmsId=$("#cms"+cmsid).val();
+    window.message.confirm("您确定取消收藏吗？",{btn:["确定","取消"]},function(){
+        $.ajax({
+            type:'post',
+            url:contextpath+'articlecollection/cancelmark.action',
+            data:{markId:id,favoriteId:favorite_id,contentId:cmsid,markes:markes},
+            async:false,
+            dataType:'json',
+            success:function(json){
+                var pagesize=$("#pageSize").val();
+                // window.location.href=contextpath+'articlecollection/toarticlecollectionlist.action?pagenum=1&pagesize='+pagesize+
+                //'&favoriteId='+favorite_id;
+                window.location.href=contextpath+'personalhomepage/tohomepage.action?pagetag=grsc&pageNum=1&pagesize='+pagesize+
+                    '&favoriteId='+favorite_id;
+            }
+        });
+    },function(){});
+}

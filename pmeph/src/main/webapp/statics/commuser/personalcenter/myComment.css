@@ -225,11 +225,7 @@
     width: 255px;
 }
 
-#wdxz {
-    background-color: #FFFFFF;
-    height: 420px;
-    width: 255px;
-}
+
 
 #bzzx {
     height: 235px;
@@ -268,22 +264,6 @@
     border-bottom-color: #03717b;
 }
 
-.dtl {
-    font-size: 16px;
-    color: #333333;
-    float: left;
-    list-style-type: none;
-    width: auto;
-    text-align: center;
-    margin-right: 30px;
-    padding-bottom: 16px;
-}
-
-.dtl.active {
-    border-bottom-width: 3px;
-    border-bottom-style: solid;
-    border-bottom-color: #03717b;
-}
 
 .rlan {
     font-size: 16px;

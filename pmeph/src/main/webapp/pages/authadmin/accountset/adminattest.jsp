@@ -125,14 +125,11 @@
                 
                 <input type="hidden" id="proxy" value="${admininfo.proxy}"/>
                 <input type="hidden" id="sex" value="${admininfo.sex}"/>
-                <input type="hidden" id="handphone" value="${admininfo.handphone}"/>
+                <input type="hidden" id="telephone" value="${admininfo.telephone}"/>
                 <%-- <input type="hidden" id="postCode" value="${admininfo.postCode}"/> --%>
                 <input type="hidden" id="fax" value="${admininfo.fax}"/>
                 <!-- 已通过或已提交 全部输入框不可修改 -->
                 <input type="hidden" id="disabled_all" value="${admininfo.progress==1||(admininfo.progress==0 && admininfo.is_proxy_upload==true)}"/>
-                <%-- <input type="hidden" id="birthday" value="${admininfo.birthday}"/>
-                <input type="hidden" id="experience" value="${admininfo.experience}"/>
-                <input type="hidden" id="workplace" value="${admininfo.workplace}"/> --%>
                 <form>
                     <table border="0" class="form-table">
                         <tr>
@@ -205,16 +202,16 @@
                         <tr>
                             <td style="width:400px">
                                 <div class="label-input">
-                                    <label class="require">联系电话</label>
+                                    <label class="require">手机</label>
                                     <div class="input-wrapper">
                                         <input ${(admininfo.progress!=1)?'class="txt required"':'class="txt" readonly="readonly"'}
-                                                style="width: 258px" type="text" id="telephone"
-                                                value="${admininfo.telephone}" data-valid="isNonEmpty||isPhoneOrMobile"
-                                                data-error="联系电话不能为空||请填写正确的电话格式"  maxLength="20"/>
-                                                <!--暂时不能校验座机：取消电话号码校验-->
+                                                style="width: 258px" type="text" id="handphone"
+                                                value="${admininfo.handphone}"
+                                                data-valid="isNonEmpty||isMobile"
+                                                data-error="手机号码不能为空||请填写正确的电话格式"  maxLength="20"/>
                                     </div>
                                 </div>
-                            </td><!--   value="${admininfo.telephone} -->
+                            </td><!--   value="${admininfo.handphone} -->
 
                             <td colspan="2">
                                 <div style="margin-bottom: 25px;margin-left: 20px">
@@ -384,5 +381,30 @@
     </div>
 </div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
+<c:if test="${admininfo.progress==2 && admininfo.backReason != null && admininfo.backReason !='' }">
+	<!-- 退回原因及审批意见 显示悬浮框 -->
+	<div class="bookmistake" id="return_cause_div">
+	    <div class="apache">
+	        <div class="mistitle">退回原因:</div>
+	        <div class="xx" onclick="$('#return_cause_div').fadeOut(500);"></div>
+	    </div>
+	
+	    <div class="info">
+	        <input id="return_cause_hidden" type="hidden" value="${admininfo.backReason }">
+	        <textarea class="misarea" disabled="disabled">${admininfo.backReason }</textarea>
+	    </div>
+	
+	    <div class="">
+	        <button class="btn" type="button" onclick="$('#return_cause_div').fadeOut(500);">确认</button>
+	    </div>
+	</div>
+	<script type="text/javascript">
+		if ("${(admininfo.progress==2 && admininfo.backReason != null && admininfo.backReason !='' )?'on':'off' }"=="on" && $("#return_cause_hidden").val().length>0) {
+	
+	        $("#return_cause_div").fadeIn(800);
+	
+	    }
+	</script>
+</c:if>
 </body>
 </html>

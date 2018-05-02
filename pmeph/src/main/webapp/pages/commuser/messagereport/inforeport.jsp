@@ -45,15 +45,16 @@ String basePath =path+"/";
             <div>
                 <div>
                     <div id="sxy-title">
-                        <div style="float:left;width:750px">${rmap.title }</div>
-                        <div id="sxy-like">
-                            <span style="float:left;"><img alt="" src="${ctx}/statics/image/${rmap.likecount gt 0 ? 'dz01.png':'dz02.png'}" onclick="addlike('${rmap.id}')" id="like"/></span>
-                            <span style="float:right;"><img alt="" src="${ctx }/statics/image/${rmap.markcount gt 0 ? 'sc101(1).png':'s102(1).png' }" onclick="addmark('${rmap.id}')" id="mark"/></span>
-                        </div>
+                        <div style="float:left">${rmap.title }</div>
+                        
                     </div>
                 </div>
                 <div style="clear: both"></div>
                 <div id="sxy-title2">
+                	<div id="sxy-like">
+                       <span style="float:left;"><img alt="" src="${ctx}/statics/image/${rmap.likecount gt 0 ? 'dz01.png':'dz02.png'}" onclick="addlike('${rmap.id}')" id="like"/></span>
+                       <span style="float:right;"><img alt="" src="${ctx }/statics/image/${rmap.markcount gt 0 ? 'sc101(1).png':'s102(1).png' }" onclick="addmark('${rmap.id}')" id="mark"/></span>
+                   </div>
                    <span style="float:left">信息快报&emsp;<fmt:formatDate value="${rmap.auth_date}" pattern="yyyy-MM-dd"/></span>
                    <span style="background-image: url(${ctx }/statics/image/css_sprites.png);
                                background-position: -418px -170px;width:20px;height:20px;float:left;

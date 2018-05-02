@@ -1,6 +1,14 @@
 //定义一个全局变量
-var jsonStr = "";
-jsonStr = "{\"id\":\"bookname\",\"content\":\"选题名称不能为空\"}," ;
+//var jsonStr = "";
+//jsonStr = "{\"id\":\"bookname\",\"content\":\"选题名称不能为空\"}," ;
+
+var jsonRequiredEleId = [
+                         {id:"bookname",content:"选题名称不能为空"}
+                         ];
+		
+		
+
+
 $(function () {
     $('#dzdx').selectlist({
         width: 213,
@@ -38,6 +46,11 @@ $(function () {
     	optionHeight: 30
     });
 
+    
+    
+    
+    
+    
 });
 //生成随机数
 function only(ele,arr){ 
@@ -81,22 +94,24 @@ function add_zjky(){
 	var $tr = $("<tr id='sbbz_"+num+"'>"+
 			"<td><input class='sb_input' style='width: 120px;' maxlength='40' id='write_realname_"+num+"' name='write_realname' placeholder='编者姓名' value=''/></td>"+
 			"<td><select id='write_sex_"+num+"'  name='write_sex'>"+
+					"<option value=''>-请选择-</option>" +
 					"<option value='0'>男</option>"+
 					"<option value='1'>女</option>"+
 				"</select></td>"+
 			"<td><input class='sb_input' style='width: 70px;' id='write_price_"+num+"' name='write_price' placeholder='年龄' value=''" +
-			"onkeyup='this.value=this.value.replace(/\\D/g,&#39;&#39;)' onafterpaste='this.value=this.value.replace(/\\D/g,&#39;&#39;)'"+
+			"onkeyup='this.value=this.value.replace(/(\\D|^0+)/g,&#39;&#39;);this.value=this.value.replace(/^[^0-1]\\d{2}$/g,199);' onafterpaste='this.value=this.value.replace(/(\\D|^0+)/g,&#39;&#39;);this.value=this.value.replace(/^[^0-1]\\d{2}$/g,199);'"+
 				"onBlur='checkAge(this)' maxlength='3' /></td>"+
-			"<td><input class='sb_input' style='width: 120px;' name='write_phone' placeholder='电话' value='' id='write_phone' maxlength='36'/></td>"+
+			"<td><input class='sb_input' style='width: 120px;' name='write_phone' placeholder='电话' value='' id='write_phone_"+num+"' maxlength='36'/></td>"+
 			"<td><select id='write_degree_"+num+"' name='write_degree'>" +
-					"<option value='0' selected='selected'>博士</option>" +
+					"<option value=''>-请选择-</option>" +
+					"<option value='0'>博士</option>" +
 					"<option value='1'>硕士</option>" +
 					"<option value='2'>学士</option>" +
 					"<option value='3'>其他</option>" +
 		         "</select></td>"+
 			"<td><input class='sb_input' style='width: 180px;' maxlength='36' id='write_position_"+num+"' name='write_position' placeholder='行政职务' value=''/></td>"+
 			"<td><input class='sb_input' style='width: 280px;' maxlength='36' id='write_workplace_"+num+"' name='write_workplace' placeholder='工作单位' value=''/>" +
-					"<input type='hidden' name='checkbzqk' value='write_realname_"+num+",write_price_"+num+",write_phone_"+num+",write_position_"+num+",write_workplace_"+num+"'/>" +
+	        		"<input type='hidden' name='checkbzqk' value='write_realname_"+num+",write_sex_"+num+",write_price_"+num+",write_phone_"+num+",write_degree_"+num+",write_position_"+num+",write_workplace_"+num+"'/>" +
 					"</td>"+
 			"<td><div class='add_div'><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('sbbz_"+num+"')\"></div></td>"+
 		"</tr>");
@@ -119,7 +134,7 @@ function add_similar(){
     var $table = $("#similar");
     var $tr = $("<tr id='similar_"+num+"'>"+
         "<td><input class='sb_input' style='width: 230px;' id='similar_bookname_"+num+"' name='similar_bookname'  maxlength='40' value=''/></td>"+
-        "<td><input class='sb_input' style='width: 80px;' id='similar_edition_"+num+"' name='similar_edition'  maxlength='2' value=''/></td>"+
+        "<td><input class='sb_input' style='width: 80px;' id='similar_edition_"+num+"' name='similar_edition'  maxlength='2' value='' onkeyup=\"this.value=this.value.replace(/\\D/g,'')\" onafterpaste=\"this.value=this.value.replace(/\\D/g,'')\"/></td>"+
         "<td><input class='sb_input' style='width: 80px;' id='similar_author_"+num+"' name='similar_author'  maxlength='100' value=''/></td>"+
         "<td><input class='sb_input' style='width: 80px;' id='similar_booksize_"+num+"' name='similar_booksize'  maxlength='20' value=''/></td>"+
         "<td><input class='sb_input' style='width: 160px;' id='similar_publisher_"+num+"' name='similar_publisher'  maxlength='100' value=''/></td>"+
@@ -159,7 +174,7 @@ function buttAdd(type){
         });
     }else{
         checkLb();
-        if(checkNull(jsonStr)){
+        if(checkNull(jsonRequiredEleId)){
             //避免重复点击
             document.getElementById('buzc').onclick=function(){window.message.warning("请不要重复点击");};
             document.getElementById('butj').onclick=function(){window.message.warning("请不要重复点击");};
@@ -186,12 +201,20 @@ function buttGive(){
 }
 
 //判断是否为空
-function checkNull(jsonStr){
-	var s = "["+jsonStr.substring(0, jsonStr.length-1)+"]";
-	var objs = $.parseJSON(s);
+function checkNull(jsonRequiredEleId){
+	/*var s = "["+jsonStr.substring(0, jsonStr.length-1)+"]";
+	var objs = $.parseJSON(s);*/
+	var objs = jsonRequiredEleId;
 	var b = true;
 	$.each(objs, function(k, obj){
-	    var value = $("#"+obj.id).val();
+		var $t = $("#"+obj.id);
+		var value = "";
+		if ($t.hasClass("select-button")) { //selectlist插件生成的显性input，仅作定位
+			value = $t.siblings("input").val(); //取值应从同级的隐藏input里取
+		}else{
+			value = $("#"+obj.id).val();
+		}
+	    
 	    if(value == ""){
 			layer.tips(obj.content, '#'+obj.id);
 			$("#"+obj.id)[0].focus();  //聚焦2
@@ -218,6 +241,27 @@ function checkAge(obj){
 
 //列表填报校验
 function checkLb(){
+	
+	//下拉类必填项的name数组
+    var mustSelectEleName = ['reader','source']/*,'sex','write_sex','position_profession','degree','write_degree']*/;
+    for ( var i in mustSelectEleName) {
+    	//找到使用过selectlist插件后生成的外包div
+    	var $div = $("input[name='"+mustSelectEleName[i]+"']").parent("div.select-wrapper");
+    	//可能有多个外包，循环遍历
+    	if ($div.length>0) {
+    		$div.each(function(){
+        		var $t = $(this); //单个div
+        		//找到其中的可见的input作为提示框定位元素
+        		$t.find("input[type='button']").attr("id",$t.attr('id')+"_input");
+        		//找到label的名字
+        		var label = $.trim($t.parent("td").find(".btbs,.btbs1").parent("span").text().replace(/[：|\*|\s]*/g,""));
+        		//将定位元素id放入非空判断json组，在调用非空判断时，若为selectlist类的input，其value值将从隐藏input而非此定位input取
+        		//jsonStr=jsonStr+"{\"id\":\""+($t.attr('id')+"_input")+"\",\"content\":\"请选择"+label+"！\"},";
+        		jsonRequiredEleId.push({id:($t.attr('id')+"_input"),content:"请选择"+label+"！"});
+        	});
+		}
+	}
+	
 	var map = $('input[name^="checkbzqk"]').map(
 			function(){return this.value
 		}).get();
@@ -228,13 +272,23 @@ function checkLb(){
 			
 			//遍历
 			for ( var j = 0; j < strs.length; j++) {
-				if($("#"+strs[j]).val() != ""){//表示有值，		
-					for(var k = 0; k < strs.length; k++){
-						jsonStr=jsonStr+"{\"id\":\""+strs[k]+"\",\"content\":\"该项不能为空,请填写完整\"},";
-					}
-					break;
-				}
-			}
+                if($("#"+strs[j]).length>0 && $("#"+strs[j]).val().length>0){//表示有值，
+                    for(var k = 0; k < strs.length; k++){
+                    	//判断是否是下拉选择框
+                    	var $selec = $("#"+strs[k]).find("input.select-button");
+                    	$selec.attr("id",strs[k]+"_input");
+                    	if ($selec.length>0) {
+                    		jsonRequiredEleId.push({id:$selec.attr("id"),content:"请选择"});
+						}else{
+							jsonRequiredEleId.push({id:strs[k],content:"该项不能为空,请填写完整"});
+						}
+                    }
+                    break;
+                }
+            }
 		}
 	}
+	
+	
+    
 }

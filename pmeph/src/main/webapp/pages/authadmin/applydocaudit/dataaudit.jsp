@@ -78,15 +78,16 @@
 						<thead>
 							<tr>
 								
-								<td ><input class="check editor" type="checkbox" name="allChecked" id="allChecked" onclick="DoCheck()" value="0"/></td>
-								<td>序号</td>
-								<td>姓名</td>
+								<td style="width: 50px;"><input class="check editor" type="checkbox" name="allChecked" id="allChecked" onclick="DoCheck()" value="0"/></td>
+								<td style="width: 50px;">序号</td>
+								<td style="width: 50px;">姓名</td>
 								<td>职务</td>
 								<td>职称</td>
 								<td>所选书籍与职务</td>
 								<td>学校审核</td>
 								<td>出版社审核</td>
 								<td>遴选结果</td>
+								<td>打印状态</td>
 							</tr>
 						</thead>
 						<tbody id="zebra-table">

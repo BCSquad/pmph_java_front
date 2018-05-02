@@ -247,7 +247,11 @@
 }
 .notes .item .foot{
     margin-left: 10px;
-    line-height: 30px
+    line-height: 30px;
+    float: left;
+    width: 100%;
+    margin: 0px;
+    box-sizing: border-box;
 }
 .notes .item .personicon{
     width:30px;
@@ -255,13 +259,21 @@
     border-radius: 50%
 }
 .notes .item .msg{
-    float:left;
-    color:#333333
+    float: left;
+    color: #333333;
+    width: 100%;
+    padding: 0px 15px;
+    box-sizing: border-box;
 }
 .notes .item .msg .name{
-    margin-left: 14px;
+    /* margin-left: 14px; */
     height: 30px;
-    color:#333333;
+    color: #333333;
+    max-width: 169px;
+    /* overflow: hidden; */
+    overflow: hidden;
+    display: inline-block;
+    word-break: break-all;
 }
 
 .writer {

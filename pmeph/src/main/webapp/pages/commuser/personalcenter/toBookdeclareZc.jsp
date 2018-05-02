@@ -53,6 +53,7 @@
 							</td>
 							<td><span ><span class="btbs1">*</span>读者对象：&emsp;&emsp;</span>
 								<select name="reader" id="dzdx" class="dzdx">
+									<option value="">-请选择-</option>
 									<option value="0" ${topicMap.reader=='0'?'selected':''}>医务工作者</option>
 									<option value="1" ${topicMap.reader=='1'?'selected':''}>医学院校师生</option>
 									<option value="2" ${topicMap.reader=='2'?'selected':''}>大众</option>
@@ -66,6 +67,7 @@
 							</td>
 							<td><span ><span class="btbs1">*</span>选题来源：&emsp;&emsp;</span>
 								<select name="source" id="xzly" class="xzly">
+									<option value="">-请选择-</option>
 									<option value="0" ${topicMap.source=='0'?'selected':''}>社策划</option>
 									<option value="1" ${topicMap.source=='1'?'selected':''}>编辑策划</option>
 									<option value="1" ${topicMap.source=='2'?'selected':''}>修订</option>
@@ -83,7 +85,7 @@
 						</tr>
 						<tr>
 							<td><span ><span class="btbs1">*</span>预估图数：&emsp;&emsp;</span>
-								<input class="cg_input" name="picture_number" id="picture_number" value="${topicMap.picture_number}" placeholder="单位千字"
+								<input class="cg_input" name="picture_number" id="picture_number" value="${topicMap.picture_number}" placeholder=""
 									   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
 									   maxlength="9"/>
 							</td>
@@ -103,14 +105,14 @@
 								<%--<div class="tslb">&emsp;--%>
 								<input type="radio" name="type" value="0" ${topicMap.type=='0'?'checked':''}/>专著
 								<input type="radio" name="type" value="1" ${topicMap.type=='1'?'checked':''}/>基础理论
-								<input type="radio" name="type" value="1" ${topicMap.type=='2'?'checked':''}/>教材
-								<input type="radio" name="type" value="2" ${topicMap.type=='3'?'checked':''}/>论文集
-								<input type="radio" name="type" value="2" ${topicMap.type=='4'?'checked':''}/>图谱
-								<input type="radio" name="type" value="3" ${topicMap.type=='5'?'checked':''}/>科普
-								<input type="radio" name="type" value="4" ${topicMap.type=='6'?'checked':''}/>应用技术
-								<input type="radio" name="type" value="4" ${topicMap.type=='7'?'checked':''}/>教辅
-								<input type="radio" name="type" value="5" ${topicMap.type=='8'?'checked':''}/>工具书
-								<input type="radio" name="type" value="6" ${topicMap.type=='9'?'checked':''}/>其他
+								<input type="radio" name="type" value="2" ${topicMap.type=='2'?'checked':''}/>教材
+								<input type="radio" name="type" value="3" ${topicMap.type=='3'?'checked':''}/>论文集
+								<input type="radio" name="type" value="4" ${topicMap.type=='4'?'checked':''}/>图谱
+								<input type="radio" name="type" value="5" ${topicMap.type=='5'?'checked':''}/>科普
+								<input type="radio" name="type" value="6" ${topicMap.type=='6'?'checked':''}/>应用技术
+								<input type="radio" name="type" value="7" ${topicMap.type=='7'?'checked':''}/>教辅
+								<input type="radio" name="type" value="8" ${topicMap.type=='8'?'checked':''}/>工具书
+								<input type="radio" name="type" value="9" ${topicMap.type=='9'?'checked':''}/>其他
 								<%--</div>--%>
 							</td>
 						</tr>
@@ -188,13 +190,15 @@
 							</td>
 							<td><span><span class="btbs1">*</span>性&emsp;&emsp;别：&emsp;&emsp;</span>
 								<select name="sex" id="sex">
+									<option value="">-请选择-</option>
 									<option value="0" ${topicMap.sex=='0'?'selected':''}>男</option>
 									<option value="1" ${topicMap.sex=='1'?'selected':''}>女</option>
 								</select>
 							</td>
 							<td><span><span class="btbs1">*</span>年&emsp;&emsp;龄：&emsp;&emsp;</span>
 								<input class="cg_input" name="price" id="price" placeholder="" value="${topicMap.price}"
-									   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="3"
+									   onkeyup="this.value=this.value.replace(/(\D|^0+)/g,'');this.value=this.value.replace(/^[^0-1]\d{2}$/g,'199');" onafterpaste="this.value=this.value.replace(/(\D|^0+)/g,'');this.value=this.value.replace(/^[^0-1]\d{2}$/g,'199');"
+									   maxlength="3"
 								/>
 							</td>
 						</tr>
@@ -204,6 +208,7 @@
 							</td>
 							<td><span><span class="btbs1">*</span>专业职务：&emsp;&emsp;</span>
 								<select name="position_profession" id="position_profession">
+									<option value="">-请选择-</option>
 									<option value="0" ${topicMap.position_profession=='0'?'selected':''}>中科院院士</option>
 									<option value="1" ${topicMap.position_profession=='1'?'selected':''}>工程院院士</option>
 									<option value="2" ${topicMap.position_profession=='2'?'selected':''}>博导</option>
@@ -216,6 +221,7 @@
 							</td>
 							<td><span><span class="btbs1">*</span>学&emsp;&emsp;历：&emsp;&emsp;</span>
 								<select name="degree" id="degree">
+									<option value="">-请选择-</option>
 									<option value="0" ${topicMap.degree=='0'?'selected':''}>博士</option>
 									<option value="1" ${topicMap.degree=='1'?'selected':''}>硕士</option>
 									<option value="2" ${topicMap.degree=='2'?'selected':''}>学士</option>
@@ -278,7 +284,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td><span class="btbs1">*</span><span>主要内容特色及特色：</span></td>
+							<td><span class="btbs1">*</span><span>主要内容与特色：</span></td>
 							<td colspan="3">
 								<div class="content">
 									<textarea class="text_cl" id="extra_score" name="extra_score" maxlength="1000">${textraMap.score}</textarea>
@@ -380,6 +386,7 @@
 								<td><input class="sb_input" style="width: 120px;" id="write_realname_${status.count}" name="write_realname"  maxlength="40" value="${list.realname}"/></td>
 								<td>
 									<select id="write_sex_${status.count}" name="write_sex">
+										<option value="">-请选择-</option>
 										<option value="0" ${list.sex=='0'?'selected':''}>男</option>
 										<option value="1" ${list.sex=='1'?'selected':''}>女</option>
 									</select>
@@ -390,6 +397,7 @@
 								<td><input class="sb_input" style="width: 120px;" name="write_phone" placeholder="电话" value="${list.phone}" id="write_phone_${status.count}" maxlength="36"/></td>
 								<td>
 									<select id="write_degree_${status.count}" name="write_degree">
+										<option value="">-请选择-</option>
 										<option value="0" ${list.degree=='0'?'selected':''}>博士</option>
 										<option value="1" ${list.degree=='1'?'selected':''}>硕士</option>
 										<option value="2" ${list.degree=='2'?'selected':''}>学士</option>
@@ -398,7 +406,7 @@
 								</td>
 								<td><input class="sb_input" style="width: 180px;" id="write_position_${status.count}"  name="write_position" placeholder="职务职称" value="${list.position}" maxlength="36"/></td>
 								<td><input class="sb_input" style="width: 280px;" id="write_workplace_${status.count}" name="write_workplace" placeholder="工作单位" value="${list.workplace}" maxlength="36"/>
-									<input type="hidden" name="checkbzqk" value="write_realname_${status.count},write_price_${status.count},write_phone_${status.count},write_position_${status.count}"/>
+									<input type="hidden" name="checkbzqk" value="write_realname_${status.count},write_sex_${status.count},write_price_${status.count},write_phone_${status.count},write_degree_${status.count},write_position_${status.count}"/>
 								</td>
 								<td><div class="add_div"><img class="add_img" src="${ctx}/statics/image/del.png" onclick="del_tr('sbbz_${status.count}')"></div></td>
 							</tr>
@@ -438,7 +446,7 @@
 						<c:forEach var="list" items="${similarList}" varStatus="status">
 							<tr id="similar_${status.count}">
 								<td><input class="sb_input" style="width: 230px;" id="similar_bookname_${status.count}" name="similar_bookname"  maxlength="40" value="${list.bookname}"/></td>
-								<td><input class="sb_input" style="width: 80px;" id="similar_edition_${status.count}" name="similar_edition"  maxlength="2" value="${list.edition}"/></td>
+								<td><input class="sb_input" style="width: 80px;" id="similar_edition_${status.count}" name="similar_edition"  maxlength="2" value="${list.edition}" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/></td>
 								<td><input class="sb_input" style="width: 80px;" id="similar_author_${status.count}" name="similar_author"  maxlength="100" value="${list.author}"/></td>
 								<td><input class="sb_input" style="width: 80px;" id="similar_booksize_${status.count}" name="similar_booksize"  maxlength="20" value="${list.booksize}"/></td>
 								<td><input class="sb_input" style="width: 160px;" id="similar_publisher_${status.count}" name="similar_publisher"  maxlength="100" value="${list.publisher}"/></td>
@@ -446,9 +454,11 @@
 								<td><input class="sb_input" style="width: 80px;" id="similar_price_${status.count}" name="similar_price"  maxlength="20" value="${list.price}"/></td>
 								<td><input class="sb_input" style="width: 130px;" id="similar_publish_date_${status.count}" name="similar_publish_date"
 										   calendar format="'yyyy-mm-dd'" value="${list.publish_date}"/></td>
+								<input type="hidden" name="checkbzqk" value="similar_bookname,similar_edition,similar_author,similar_publisher,similar_print_number,similar_price,similar_publish_date"/>
 								<td><div class="add_div"><img class="add_img" src="${ctx}/statics/image/del.png" onclick="del_tr('similar_${status.count}')"></div></td>
 							</tr>
 						</c:forEach>
+						<input type="hidden" name="checkbzqk" value="similar_bookname,similar_edition,similar_author,similar_publisher,similar_print_number,similar_price,similar_publish_date"/>
 						</tbody>
 					</table>
 				</div>

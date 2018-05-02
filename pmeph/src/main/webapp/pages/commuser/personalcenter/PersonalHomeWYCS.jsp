@@ -111,7 +111,7 @@ request.setAttribute("currentTime",datetime);
                 <c:if test="${permap.rank==2}"><span id="zjrz"></span><span class="grsx">作家用户</span></c:if>
                 <c:if test="${permap.rank==3}"><span id="zjrz"></span> <span class="grsx">专家用户</span></c:if>
                 <c:if test="${selfLog == true}">
-                	<a href="<c:url value="/userinfo/touser.action"/>"><span id="zhsz"></span><span class="grsx">账户设置</span></a>
+                	<a href="<c:url value="/userinfo/touser.action"/>"><span id="zhsz"></span><span class="grsx">修改资料</span></a>
                 	<a href="<c:url value="/integral/toPage.action"/>"><span id="jftb"></span><span class="grsx">积分</span></a>
                 </c:if>
                 
@@ -137,16 +137,17 @@ request.setAttribute("currentTime",datetime);
                     	<li id="jcsb" class="dtl pagetag"><a class="aher paged" >教材申报</a></li>
                     </c:if>
                     <li id="sbwz" class="dtl pagetag"><a class="aher paged">随笔文章</a></li>
-                    <c:if test="${selfLog == true }">
-                    	<li id="tsjc" class="dtl pagetag"><a class="aher paged">图书纠错</a></li>
-                    </c:if>
+                    
+                    <li id="wdjc" class="dtl pagetag"><a class="aher paged">图书纠错</a></li>
+                    
                     <c:if test="${selfLog == true }">
                     	<li id="wycs" class="dtl pagetag"><a class="aher paged"  >我要出书</a></li>
                     </c:if>
-					<li id="wdjc" class="dtl pagetag"><a class="aher paged" >个人纠错</a></li>
+					<!-- <li id="wdjc" class="dtl pagetag"><a class="aher paged" >个人纠错</a></li> -->
                     <li id="wdpl" class="dtl pagetag"><a class="aher paged" >个人评论</a></li>
                     <li id="wdwj" class="dtl pagetag"><a class="aher paged" >个人问卷</a></li>
 					<li id="grsc" class="dtl pagetag"><a class="aher paged" >个人收藏</a></li>
+					<li id="dzfk" class="dtl pagetag"><a class="aher paged" >读者反馈</a></li>
                     <%-- <li id="zxsp" class="dtl"><a class="aher"
                                                  href="${ctx}/personalhomepage/tohomepagethe.action">最新书评</a></li> --%>
                 </ul>
@@ -757,7 +758,7 @@ request.setAttribute("currentTime",datetime);
                     <ul class="scul">
                         <c:forEach items="${listmyfriend}" begin='0' end='11' var="listmyf" varStatus="status">
                             <a target="_blank" class="not-like-an-a" href="${ctx}/personalhomepage/tohomepage.action?userId=${listmyf.id}">
-	                            <li class="hylb">
+	                            <li class="hylb" title="${listmyf.realname}">
 	                                <div class="hytxdiv">
 	                                    <c:if test="${listmyf.avatar=='DEFAULT'||listmyf.avatar==''||listmyf.avatar== NULL}"><img
 	                                            src="${ctx}/statics/image/default_image.png" class="hytp"></c:if>

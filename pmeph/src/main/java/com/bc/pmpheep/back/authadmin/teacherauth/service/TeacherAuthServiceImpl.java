@@ -42,11 +42,12 @@ public class TeacherAuthServiceImpl implements TeacherAuthService {
     }
 
     @Override
-    public Map<String, Object> statusModify(String id, String status, String orgId) {
+    public Map<String, Object> statusModify(String id, String status, String backReason, String orgId) {
         Map<String, Object> rb = new HashMap<String, Object>();
         Map<String, Object> paraMap = new HashMap<String, Object>();
         paraMap.put("id", id);
         paraMap.put("status", status);
+        paraMap.put("backReason", backReason);
         Integer count = teacherAuthDao.statusModify(paraMap);
         Map<String, Object> orgInfo = teacherAuthDao.getSchoolInfo(orgId);
         Map<String, Object> writerId = teacherAuthDao.getWriterId(id);

@@ -10,7 +10,8 @@
 	<select id="queryTitle" parameterType="java.util.Map"
 		resultType="java.util.Map">
 		SELECT c.mid,c.title, DATE_FORMAT(c.gmt_create,'%Y-%m-%d')
-		as gmt_create,c.clicks,c.cover,c.summary,c.auth_status,c.is_staging,c.auth_date FROM cms_content c WHERE c.id=#{id}
+		as gmt_create,c.clicks,c.cover,c.summary,c.auth_status,c.is_staging,DATE_FORMAT(c.auth_date,'%Y-%m-%d')
+		as auth_date FROM cms_content c WHERE c.id=#{id}
 	</select>
 
 	<!-- 查询作者 -->
@@ -18,6 +19,7 @@
 		resultType="java.util.Map">
 		select
 		t.id,
+		t.author_name,
 		case
 		when t.author_type =1
 		then pu.realname
@@ -95,7 +97,7 @@
 		where c.is_promote !=
 		0 OR
 		c.is_promote is not null and c.auth_status='2'
-		and c.parent_id='0' and c.is_published=1   and  c.is_deleted=0
+		and c.parent_id='0' and c.is_published=1   and  c.is_deleted=0 and c.category_id=1
 		and c.id != #{wid}
 		<if test="x >= 0">
 			limit #{x},5

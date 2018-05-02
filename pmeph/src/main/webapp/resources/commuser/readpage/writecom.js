@@ -1,6 +1,6 @@
 var ue='';
 $(function(){
-	ue = UE.getEditor('mText');
+	ue = UE.getEditor('mText',{maximumWords:10000});
 		UE.getEditor('mText');
 		ue.ready(function() {
 			// 查询登陆人是否写过长评论
@@ -92,7 +92,7 @@ function queryLoginLong(){
 }
 
 function validate(title,content){
-	if(title.length>50||content.length>3000){
+	if(title.length>50||content.length>21845){
 
 		return false;
 	}
@@ -171,7 +171,7 @@ function insertlong(){
 
 
     }else{
-            window.message.warning("您的内容输入过长,请检查您输入的内容!");
+            window.message.warning("您的内容不能输入更多了!");
 	}
 	}else{
 		window.message.info("请填写完所有内容！");
