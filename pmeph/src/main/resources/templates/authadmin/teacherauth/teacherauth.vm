@@ -9,7 +9,7 @@
 	    		#else
 	    			<div class="head-portrait" style="background-image: url($!{contextpath}image/$!{c.avatar}.action);"></div>
 	    		#end
-	    		<div>$c.realname</div>
+	    		<div title="$c.realname">$c.realname</div>
 	    	</div>
 	    </td>
 	    <td>$c.idcard</td>

@@ -23,6 +23,7 @@ import com.bc.pmpheep.back.authadmin.accountset.bean.OrgAdminUser;
 import com.bc.pmpheep.back.authadmin.accountset.service.AdminInfoService;
 import com.bc.pmpheep.back.util.Const;
 import com.bc.pmpheep.back.util.DesRun;
+import com.bc.pmpheep.back.util.RouteUtil;
 import com.bc.pmpheep.controller.bean.ResponseBean;
 import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.general.service.FileService;
@@ -64,6 +65,9 @@ public class AdminInfoController extends BaseController {
                 admininfo.put(key,"");
             }
         }
+        String avatar = RouteUtil.userAvatar(MapUtils.getString(admininfo, "avatar"));
+        admininfo.put("avatar", avatar);
+        
         mv.addObject("admininfo",admininfo);
         mv.setViewName("authadmin/accountset/admininfo");
         return mv;
