@@ -135,6 +135,7 @@ public class MaterialDetailController extends BaseController{
 		//书籍信息
 		List<Map<String,Object>> bookList = this.mdService.queryBookById(material_id);
 		StringBuffer bookSelects = new StringBuffer();
+		bookSelects.append("<option value=''>-请选择-</option>");
 		if(bookList.size()>0){
 			for (Map<String, Object> map : bookList) {
 				bookSelects.append("<option value='"+map.get("id")+"'>"+map.get("textbook_name")+"</option>");

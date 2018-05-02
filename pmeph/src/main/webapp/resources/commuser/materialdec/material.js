@@ -887,37 +887,16 @@ function del_tr(trId){
 
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type){
-    if(type == '2') { //表示暂存
-        //避免重复点击
-        document.getElementById('buzc').onclick=function(){window.message.warning("请不要重复点击");};
-        document.getElementById('butj').onclick=function(){window.message.warning("请不要重复点击");};
-        $.ajax({
-            type: "POST",
-            url:contextpath+'material/doMaterialAdd.action?sjump=1&type='+type,
-            data:$('#objForm').serialize(),// 您的formid
-            async: false,
-            success: function (json) {
-                if (json.msg == 'OK') {
-                    window.message.success("操作成功,正在跳转页面");
-                    window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
-                }
-            }
-        });
-    }else {  //表示提交
-        checkLb();
-        if (checkEqual("textbook_id") && checkNull(jsonStr) && checkExtra()) {
-           /* document.getElementById('buzc').onclick = function () {
-                window.message.warning("请不要重复点击");
-            };
-            document.getElementById('butj').onclick = function () {
-                window.message.warning("请不要重复点击");
-            };*/
+    if(checkEqual("textbook_id")){
+        if(type == '2') { //表示暂存
+            //避免重复点击
+            document.getElementById('buzc').onclick=function(){window.message.warning("请不要重复点击");};
+            document.getElementById('butj').onclick=function(){window.message.warning("请不要重复点击");};
             $.ajax({
                 type: "POST",
-                url: contextpath + 'material/doMaterialAdd.action?sjump=1&type=' + type,
-                data: $('#objForm').serialize(),// 您的formid
+                url:contextpath+'material/doMaterialAdd.action?sjump=1&type='+type,
+                data:$('#objForm').serialize(),// 您的formid
                 async: false,
-                dataType: "json",
                 success: function (json) {
                     if (json.msg == 'OK') {
                         window.message.success("操作成功,正在跳转页面");
@@ -925,6 +904,29 @@ function buttAdd(type){
                     }
                 }
             });
+        }else {  //表示提交
+            checkLb();
+            if (checkNull(jsonStr) && checkExtra()) {
+               /* document.getElementById('buzc').onclick = function () {
+                    window.message.warning("请不要重复点击");
+                };
+                document.getElementById('butj').onclick = function () {
+                    window.message.warning("请不要重复点击");
+                };*/
+                $.ajax({
+                    type: "POST",
+                    url: contextpath + 'material/doMaterialAdd.action?sjump=1&type=' + type,
+                    data: $('#objForm').serialize(),// 您的formid
+                    async: false,
+                    dataType: "json",
+                    success: function (json) {
+                        if (json.msg == 'OK') {
+                            window.message.success("操作成功,正在跳转页面");
+                            window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
+                        }
+                    }
+                });
+            }
         }
     }
 }
@@ -1121,6 +1123,10 @@ function checkEqual(name){
     //遍历数组并比较是否存在相同值
     var nary=map.sort();
     for(var i=0;i<map.length;i++){
+        if(nary[i] == ""){
+            window.message.warning("申报书籍不能为空，请选择书籍");
+            return false;
+        }
         if (nary[i]==nary[i+1]){
             window.message.warning("不能选择相同书籍!请重新选择书籍");
             return false;
