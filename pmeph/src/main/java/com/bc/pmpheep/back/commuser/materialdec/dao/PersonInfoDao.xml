@@ -121,7 +121,7 @@
 		  values(#{per_id},#{user_id},#{material_name},#{rank},#{position},#{publish_date},#{isbn},#{note},#{is_digital_editor},#{sort})
 	</insert>
 	<update id="updatePerRwsjc" parameterType="java.util.Map">
-		update per_national_plan set material_name = #{material_name},rank=#{rank},position=#{position},publish_date=#{publish_date},
+		update per_textbook_pmph set material_name = #{material_name},rank=#{rank},position=#{position},publish_date=#{publish_date},
 		isbn=#{isbn},is_digital_editor=#{is_digital_editor},note=#{note},sort=#{sort} where id = #{per_id}
 	</update>
 	<delete id="DelPerRwsjc" parameterType="java.util.Map">

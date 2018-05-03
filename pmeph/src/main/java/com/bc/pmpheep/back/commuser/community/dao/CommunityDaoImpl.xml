@@ -37,7 +37,7 @@
 	           <if test="searchText !=null" >
 	              where n.material_name like #{searchText}
 	            </if>
-				order by n.gmt_create desc 
+				order by n.sort asc
 				limit #{startnum},#{size}
 
          

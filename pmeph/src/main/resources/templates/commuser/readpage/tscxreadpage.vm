@@ -11,10 +11,10 @@
     <div class="flag yellow">
         $!{ordernum}
     </div>
-    #else
+    #*#else
     <div class="flag grey">
         $!{ordernum}
-    </div>
+    </div>*#
     #end
     <img class="pic" src="$!{img}" alt="">
     <div class="name" title="$!{bookname}">$!{bookname}</div>
