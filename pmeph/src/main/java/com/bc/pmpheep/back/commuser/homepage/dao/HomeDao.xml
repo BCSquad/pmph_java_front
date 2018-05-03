@@ -76,7 +76,7 @@
 	  and t.auth_status=2
 	  and t.is_deleted=0
 	  and p.id= #{id}) n
-		order by n.gmt_create desc limit 0,3    
+		order by n.sort asc limit 0,3
   </select>
 
     <!-- 查询最新五条信息快报 -->
