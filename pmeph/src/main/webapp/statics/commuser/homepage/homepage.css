@@ -1597,7 +1597,7 @@ ul li {
 }
 
 .num4 {
-    background-image: url("../../testfile/sprites.png");
+ /*   background-image: url("../../testfile/sprites.png");*/
     background-position: -374px -126px;
     background-repeat: no-repeat;
 /*    height: 27px;
