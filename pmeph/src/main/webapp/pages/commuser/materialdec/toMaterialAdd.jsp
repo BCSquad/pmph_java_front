@@ -82,19 +82,19 @@
 						<table style="width: 260px;border:0" cellspacing="0" cellpadding="0">
 							<tr>
 								<c:if test="${materialMap.is_multi_position =='1'}">
-									<td height="30px;"><input type="checkbox" name="zw_1" checked="checked" value="4"/>主编</td>
-									<td><input type="checkbox" name="zw_1" value="2"/>副主编</td>
-									<td><input type="checkbox" name="zw_1" value="1"/>编委</td>
+									<td height="30px;"><input type="checkbox" id="zw_1" name="zw_1" value="4"/>主编</td>
+									<td><input type="checkbox" id="zw_1" name="zw_1" value="2"/>副主编</td>
+									<td><input type="checkbox" id="zw_1" name="zw_1" value="1"/>编委</td>
 									<c:if test="${materialMap.is_digital_editor_optional =='1'}">
-										<td><input type="checkbox" name="zw_1" value="8"/>数字编委</td>
+										<td><input type="checkbox" id="zw_1" name="zw_1" value="8"/>数字编委</td>
 									</c:if>
 								</c:if>
 								<c:if test="${materialMap.is_multi_position !='1'}">
-									<td><input type="radio" name="zw_1" checked="checked" value="4"/>主编</td>
-									<td><input type="radio" name="zw_1" value="2"/>副主编</td>
-									<td><input type="radio" name="zw_1" value="1"/>编委</td>
+									<td><input type="radio" id="zw_1" name="zw_1" value="4"/>主编</td>
+									<td><input type="radio" id="zw_1" name="zw_1" value="2"/>副主编</td>
+									<td><input type="radio" id="zw_1" name="zw_1" value="1"/>编委</td>
 									<c:if test="${materialMap.is_digital_editor_optional =='1'}">
-										<td><input type="radio" name="zw_1" value="8"/>数字编委</td>
+										<td><input type="radio" id="zw_1" name="zw_1" value="8"/>数字编委</td>
 									</c:if>
 								</c:if>
 							</tr>

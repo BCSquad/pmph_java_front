@@ -240,7 +240,7 @@
                     <div class="mis_content"  <c:if test="${userInfo==null}"> onclick="validLogin()" </c:if>>上传微视频</div>
                     <c:if test="${userInfo!=null}">
                         <input id="upload-video" type="file" class='hidden-upload' name='file' accept="video/*"
-                               style="width: 0px;height: 33px;padding-left: 100px;cursor: pointer;">
+                               style="width: 0px;height: 33px;padding-left: 100px;cursor: pointer;margin-left: -20px;">
                     </c:if>
 
                 </div>
