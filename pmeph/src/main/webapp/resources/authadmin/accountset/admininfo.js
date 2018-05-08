@@ -81,7 +81,7 @@ function save(){
     		//修改了敏感项，若提交需要重审，询问是否提交
     		window.message.confirm(
     				'<font color="red">真实姓名、手机、E-mail</font> 的修改将需要重新进行管理员认证!</br><font color="red"></font>'
-    				,{icon: 7, title:'资料修改提醒',btn:["是","否"]}
+    				,{icon: 7, title:'资料修改提醒',btn:["确定","取消"]}
     				
     				,function(index){
     					layer.close(index);
