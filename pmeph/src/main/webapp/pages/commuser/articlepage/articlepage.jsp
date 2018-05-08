@@ -35,9 +35,11 @@
                 </div>
                 <c:forEach items="${listArt}" var="list" varStatus="status">
 	                <div class="${status.index==0 or status.index==4 ?'item' :'item behind'}" onclick="window.location.href='${ctx}/articledetail/toPage.action?wid=${list.id}'">
-                    <div class="command">
+                    <c:if test="${status.count < 4 }">
+                        <div class="command">
                         <span style="margin-left: 5px">推荐</span>
-                    </div>
+                        </div>
+                    </c:if>
                     <div  class="content" >
                         <div class="content-image">
                             <img src="${ctx}/${list.cover}" />
