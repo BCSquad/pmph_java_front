@@ -223,7 +223,7 @@
                     <div class="mis_pic" ></div>
                     <div class="mis_content">图书纠错</div>
                 </div>
-                <div class="mistake">
+                <div class="mistake" style="cursor: pointer">
                     <%
                         Map<String, Object> userInfo2 = null;
                         if ("1".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
@@ -240,7 +240,7 @@
                     <div class="mis_content"  <c:if test="${userInfo==null}"> onclick="validLogin()" </c:if>>上传微视频</div>
                     <c:if test="${userInfo!=null}">
                         <input id="upload-video" type="file" class='hidden-upload' name='file' accept="video/*"
-                               style="width: 0px;height: 33px;padding-left: 100px;cursor: pointer;">
+                               style="cursor: pointer">
                     </c:if>
 
                 </div>
@@ -423,8 +423,9 @@
                         <div class="morecom" style="display: none;"></div>
                     </div>
                     <div id="longcompage">
-                        <div class="comm">
-                            <div class="longcom">图书长评</div>
+                        <div class="title">
+                            <div class="line"></div>
+                            <div class="rd_name">图书长评</div>
                             <div class="writecom" onclick="writeablut()">写书评</div>
                         </div>
                         <c:forEach items="${longList}" var="list" varStatus="status" begin="0" end="1">

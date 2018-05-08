@@ -130,7 +130,9 @@ public class HomeController extends BaseController{
         //模板(首页默认显示学校教育下的书籍,从第一条开始显示，每页10条数据)
         Map<String, Object> pmap = new HashMap<String, Object>();
         pmap.put("startrows", 0);
-        pmap.put("type", MapUtils.getIntValue(types.get(0), "id"));
+        if(types.size()>0) {
+            pmap.put("type", MapUtils.getIntValue(types.get(0), "id"));
+        }
         List<Map<String, Object>> listBok = homeService.queryBook(pmap);
         String html = "";
         String vm = "commuser/homepage/homepage.vm";

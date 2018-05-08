@@ -81,24 +81,23 @@ function save(){
     		//修改了敏感项，若提交需要重审，询问是否提交
     		window.message.confirm(
     				'<font color="red">真实姓名、手机、E-mail</font> 的修改将需要重新进行管理员认证!</br><font color="red"></font>'
-    				,{icon: 7, title:'敏感项修改警告',btn:["仅修改非敏感项(无需重新认证)","全部修改并提交(需要重新认证)"]}
+    				,{icon: 7, title:'资料修改提醒',btn:["确定","取消"]}
     				
     				,function(index){
     					layer.close(index);
-    					//仅修改非敏感项
-    					data.realName=$("#realName_original").val();
-    					data.handphone=$("#handphone_original").val();
-    					data.email=$("#email_original").val();
-    					data.progress=-1;
-    					updateorguser(data);
+                        //提交，我要重新认证
+                        data.progress=0;
+                        updateorguser(data);
     					
     				}
     				,function(index){
     					layer.close(index);
-    					//提交，我要重新认证
-    					data.progress=0;
-    					updateorguser(data);
-    					
+                        //仅修改非敏感项
+                        // data.realName=$("#realName_original").val();
+                        // data.handphone=$("#handphone_original").val();
+                        // data.email=$("#email_original").val();
+                        // data.progress=-1;
+                        // updateorguser(data);
     				}
     				);
 		}else{
