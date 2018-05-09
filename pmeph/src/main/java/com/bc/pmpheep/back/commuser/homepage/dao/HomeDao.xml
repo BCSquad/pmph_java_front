@@ -183,7 +183,7 @@ LIMIT 0,10
         select
         sum(c.clicks) as total_click,u.id,u.realname,u.position,u.title,u.avatar,u.is_top*u.top_sort as topSort
         from cms_content c
-        left join writer_user u on c.author_id=u.id
+        right join writer_user u on c.author_id=u.id
         <if test="logUserId != null and logUserId !='' ">
             where u.id != #{logUserId}
         </if>
