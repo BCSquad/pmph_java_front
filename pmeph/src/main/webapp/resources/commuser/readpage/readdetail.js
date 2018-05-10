@@ -341,7 +341,7 @@ function changepage() {
             $(".morecom").hide();
             $(".moreothers").show();
             if (json.length < 3) {
-                $("#moreothers").html('加载完毕');
+                $("#moreothers").html('');
             } else {
                 json = json.slice(0, 2);
             }
@@ -420,7 +420,7 @@ function longcom() {
             $(".moreothers").show();
 
             if (json.length < 3) {
-                $("#longothers").html('加载完毕');
+                $("#longothers").html('');
             } else {
                 json = json.slice(0, 2);
             }
