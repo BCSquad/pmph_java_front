@@ -36,7 +36,7 @@
 		        
 		    		and (
 		    		<if test="id != null and id != '' ">
-		    			(wu.id=#{id} and m.is_public = 0 and cc.is_material_entry=1 and m.is_deleted=0)or 
+		    			(wu.id=#{id} and m.is_public = 0 and wu.is_teacher =1 and cc.is_material_entry=1 and m.is_deleted=0)or
 		    		</if>
 		    		    (m.is_public = 1 and cc.is_material_entry=1 and m.is_deleted=0) or 
 		    		cc.is_material_entry = 0 )

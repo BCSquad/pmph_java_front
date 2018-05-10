@@ -452,7 +452,7 @@
 				AND (t.is_opts_handling = 1 and t.is_director_handling = 1 and t.is_editor_handling = 1 and t.is_accepted = 1) = #{parameter.is_handled} 
 			</if>
 		</where>
-		group by t.id
+		group by t.id order by gmt_create
 		limit ${start},${pageSize}
 
 	</select>
