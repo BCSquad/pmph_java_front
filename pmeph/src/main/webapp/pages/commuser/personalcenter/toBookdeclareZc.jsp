@@ -65,16 +65,16 @@
 								<input class="cg_input" name="deadline" id="deadline" calendar format="'yyyy-mm-dd'" value="${topicMap.deadline}" placeholder=""/>
 								<%--<span class="dateclear"onclick="cleadate()"></span>--%>
 							</td>
-							<td><span ><span class="btbs1">*</span>选题来源：&emsp;&emsp;</span>
+							<td><span ><span class="btbs1">*</span>选题来源：${topicMap.source} &emsp;&emsp;</span>
 								<select name="source" id="xzly" class="xzly">
 									<option value="">-请选择-</option>
 									<option value="0" ${topicMap.source=='0'?'selected':''}>社策划</option>
 									<option value="1" ${topicMap.source=='1'?'selected':''}>编辑策划</option>
-									<option value="1" ${topicMap.source=='2'?'selected':''}>修订</option>
+									<option value="2" ${topicMap.source=='2'?'selected':''}>修订</option>
 									<option value="3" ${topicMap.source=='3'?'selected':''}>离退休编审策划</option>
-									<option value="2" ${topicMap.source=='4'?'selected':''}>专家策划</option>
-									<option value="4" ${topicMap.source=='5'?'selected':''}>上级交办</option>
-									<option value="5" ${topicMap.source=='6'?'selected':''}>作者投稿</option>
+									<option value="4" ${topicMap.source=='4'?'selected':''}>专家策划</option>
+									<option value="5" ${topicMap.source=='5'?'selected':''}>上级交办</option>
+									<option value="6" ${topicMap.source=='6'?'selected':''}>作者投稿</option>
 								</select>
 							</td>
 							<td><span ><span class="btbs1">*</span>预估字数：&emsp;&emsp;</span>
