@@ -65,7 +65,7 @@
 								<input class="cg_input" name="deadline" id="deadline" calendar format="'yyyy-mm-dd'" value="${topicMap.deadline}" placeholder=""/>
 								<%--<span class="dateclear"onclick="cleadate()"></span>--%>
 							</td>
-							<td><span ><span class="btbs1">*</span>选题来源：${topicMap.source} &emsp;&emsp;</span>
+							<td><span ><span class="btbs1">*</span>选题来源： &emsp;&emsp;</span>
 								<select name="source" id="xzly" class="xzly">
 									<option value="">-请选择-</option>
 									<option value="0" ${topicMap.source=='0'?'selected':''}>社策划</option>
