@@ -82,11 +82,13 @@ select tt.* from
 		        left join  material b on t.material_id =b.id 
 		        left join material_org u on b.id=u.material_id
 		        left join writer_user p on p.org_id=u.org_id
+				left join (select wc.*,wc.progress wc_progress from writer_user wt
+						LEFT JOIN writer_user_certification wc on wt.id = wc.user_id)s on t.author_id = s.id
 		        left join  material_extra me on me.material_id=b.id
 		        where  t.category_id=3
 		        and t.is_published=1
 		        and b.is_public =0
-				and p.is_teacher=1
+				and s.wc_progress=3
 		        and b.is_deleted=0
 		        and t.auth_status=2
 		        and t.is_material_entry=1
