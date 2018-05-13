@@ -48,7 +48,7 @@
 	</select>
 
 	<select id="list"  resultType="CmsNoticeList" parameterType="java.util.Map">
-	
+       <!---->
 <if test="materialId ==null or materialId==''">
 select tt.* from
 (
@@ -81,12 +81,13 @@ select tt.* from
 		        from cms_content t
 		        left join  material b on t.material_id =b.id 
 		        left join material_org u on b.id=u.material_id
-		        left join writer_user p on p.org_id=u.org_id
+						left join (select tu.*,wuc.progress from writer_user tu LEFT JOIN
+						writer_user_certification wuc on tu.id = wuc.user_id where tu.id = #{userid}) p on p.org_id=u.org_id
 		        left join  material_extra me on me.material_id=b.id
 		        where  t.category_id=3
 		        and t.is_published=1
 		        and b.is_public =0
-				and p.is_teacher =1
+						and p.progress =3
 		        and b.is_deleted=0
 		        and t.auth_status=2
 		        and t.is_material_entry=1
