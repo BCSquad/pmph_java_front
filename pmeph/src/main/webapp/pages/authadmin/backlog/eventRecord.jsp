@@ -190,7 +190,7 @@
 	function detail(type,auditId){
 		 if(type=='A'){
 			window.location.href="${ctx}/dataaudit/toPage.action?material_id="+auditId;
-		}else if(type=B){
+		}else if(type='B'){
     		//跳转教师资格认证页面
 			window.location.href="${ctx}/teacherauth/toPage.action?";	
 		} 

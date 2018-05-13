@@ -54,7 +54,7 @@ function changepage(n){
 						str+=contextpath+'image/'+n.avatar+'.action';
 					}
 					str+='" height="30"  width="30"/></div><div style="float: left;margin-left: 10px;margin-top: 5px;">'+
-					n.realname
+					n.nickname
 					+'</div>';
            
            	str+='<div class="date_content"><div class="date">'

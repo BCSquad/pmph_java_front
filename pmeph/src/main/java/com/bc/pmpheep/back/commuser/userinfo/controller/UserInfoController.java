@@ -1,6 +1,5 @@
 package com.bc.pmpheep.back.commuser.userinfo.controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,10 +41,10 @@ public class UserInfoController extends BaseController {
     private UserInfoService userinfoService;
     @Autowired
     private FileService fileService;
-    
+
     @Autowired
     UserService userService;
-    
+
     /**
      * 无权限 跳转地址
      * @param request
@@ -53,10 +52,10 @@ public class UserInfoController extends BaseController {
      */
     @RequestMapping("toNoAccessToAuthority")
     public ModelAndView toNoAccessToAuthority(HttpServletRequest request){
-    	ModelAndView modelAndView = new ModelAndView();
-    	modelAndView.addObject("pageType", request.getParameter("pageType"));
-    	modelAndView.setViewName("comm/no_access_to_authority");
-    	 return modelAndView;
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("pageType", request.getParameter("pageType"));
+        modelAndView.setViewName("comm/no_access_to_authority");
+        return modelAndView;
     }
     /**
      * 根据ID查询作家相关信息
@@ -70,7 +69,7 @@ public class UserInfoController extends BaseController {
         Map <String,Object> map1 = getUserInfo();
         Map<String, Object> map =new HashMap<String, Object>();
         if (null!=map1) {
-        	 map = userinfoService.queryWriter(map1.get("id").toString());
+            map = userinfoService.queryWriter(map1.get("id").toString());
             for (Map.Entry<String, Object> entry : map.entrySet()) {
                 String key = entry.getKey().toString();
                 String value = entry.getValue().toString();
@@ -78,25 +77,25 @@ public class UserInfoController extends BaseController {
                     map.put(key,"");
                 }
             }
-		}
+        }
         modelAndView.addObject("map", map);
         modelAndView.setViewName("commuser/userinfo/userinfo");
         return modelAndView;
     }
 
 
-	
-	/**
-	 * 根据ID修改头像
-	 * @param request
-	 */
-	@RequestMapping("updateavatar")
-	@ResponseBody	
-	public Map<String, Object> updateavatar(HttpServletRequest request){
-		Map<String, Object> map=new HashMap<String, Object>();
-		return map;
-	}
-	
+
+    /**
+     * 根据ID修改头像
+     * @param request
+     */
+    @RequestMapping("updateavatar")
+    @ResponseBody
+    public Map<String, Object> updateavatar(HttpServletRequest request){
+        Map<String, Object> map=new HashMap<String, Object>();
+        return map;
+    }
+
 
     /**
      * 根据ID改变普通作家信息
@@ -128,6 +127,7 @@ public class UserInfoController extends BaseController {
         String fileid = request.getParameter("fileid");
         String tags=request.getParameter("tags");
         String hastag=request.getParameter("hastag");
+        String nickname=request.getParameter("nickname");
         map.put("signature", signature);
         if (StringUtils.isEmpty(id) ||
                 StringUtils.isEmpty(realName) ||
@@ -165,17 +165,18 @@ public class UserInfoController extends BaseController {
             map.put("avatar", "".equals(fileid) ? null:fileid);
             map.put("tags", "".equals(tags) ? null:tags);
             map.put("hastag", "".equals(hastag) ? null:hastag);
+            map.put("nickname", "".equals(nickname) ? null:nickname);
             zmap = userinfoService.update(map);
             Map<String, Object> user=getUserInfo();
-   		 	user = userService.getUserInfo(MapUtils.getString(user, "username"), "1");
-   		 	HttpSession session = request.getSession();
-   		 	session.setAttribute(Const.SESSION_USER_CONST_WRITER, user);
+            user = userService.getUserInfo(MapUtils.getString(user, "username"), "1");
+            HttpSession session = request.getSession();
+            session.setAttribute(Const.SESSION_USER_CONST_WRITER, user);
             session.setAttribute(Const.SESSION_USER_CONST_TYPE, "1");
         }
         return zmap;
     }
-    
-    
+
+
     /**
      * 跳转到修改密码页面
      * @param request
@@ -187,7 +188,7 @@ public class UserInfoController extends BaseController {
         mv.setViewName("commuser/userinfo/comchangepwd");
         return mv;
     }
-    
+
     /**
      * 机构用户修改密码
      * @param orgUser
@@ -195,17 +196,16 @@ public class UserInfoController extends BaseController {
      */
     @RequestMapping(value = "/updateorguserpassword",method = RequestMethod.POST/*,consumes = "application/json"*/)
     @ResponseBody
-    public ResponseBean<Map<String, Object>> updateOrgUserPassword(HttpServletRequest request) throws IOException {
+    public ResponseBean<Map<String, Object>> updateOrgUserPassword(HttpServletRequest request){
         ResponseBean<Map<String, Object>> responseBean=new ResponseBean<Map<String, Object>>();
         Map <String,Object> map = new HashMap<String, Object>();
         Map <String,Object> map1 = this.getUserInfo() ;
-    	Long userId = new Long(String.valueOf(map1.get("id")));
-    	map.put("id", userId);
-    	String password=request.getParameter("password");
-     /*   DesRun desRun=new DesRun("",password);
+        Long userId = new Long(String.valueOf(map1.get("id")));
+        map.put("id", userId);
+        String password=request.getParameter("password");
+        DesRun desRun=new DesRun("",password);
         map.put("password", desRun.enpsw);
-        userinfoService.updatePassword(map);*/
-        userService.modifyUser(MapUtils.getString(map1,"username"),password);
+        userinfoService.updatePassword(map);
         return responseBean;
     }
 }

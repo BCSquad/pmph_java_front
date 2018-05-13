@@ -91,6 +91,7 @@ function getform() {
         note: $("#note").val(),
         signature: $("#signature").val(),
         workplace: $("#workplace").val(),
+        nickname: $("#nickname").val(),
         id: $("#id").val(),
         tags:(mytag.length==0?'':mytag.join('%')),
         hastag:$("#hastag").val()

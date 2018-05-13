@@ -15,7 +15,7 @@
     <update id="update" parameterType="java.util.Map">
         UPDATE writer_user
         <set>
-            realname=#{realname}, writername=#{realname},
+            realname=#{realname}, writername=#{realname},nickname=#{nickname},
             experience=#{experience},fax=#{fax},sex=#{sex},title=#{title},handphone=#{handphone},birthday=#{birthday},
             postcode=#{postcode},email=#{email},telephone=#{telephone},position =#{position},address=#{address},
             note=#{note},signature=#{signature},workplace=#{workplace},avatar=#{avatar}
