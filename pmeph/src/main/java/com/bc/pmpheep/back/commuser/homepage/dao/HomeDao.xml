@@ -24,9 +24,9 @@
 				LEFT JOIN material m ON m.id = cc.material_id
 				<if test="id != null and id != '' ">
 		    	left join material_org mo on mo.material_id=m.id
-				left join writer_user wu on wu.id= #{id} and  wu.org_id=mo.org_id
-				left join (select wc.*,wc.progress wc_progress from writer_user wt
-					LEFT JOIN writer_user_certification wc on wt.id = wc.user_id)s on cc.author_id =s.id
+				left join (select tu.*,wuc.progress from writer_user tu LEFT JOIN
+                    writer_user_certification wuc on tu.id = wuc.user_id where tu.id = #{id}) wu on wu.id= #{id}
+                and  wu.org_id=mo.org_id
 				</if>
 				left join declaration d on d.user_id = #{id} and d.material_id=cc.material_id
 		WHERE
@@ -38,7 +38,7 @@
 		        
 		    		and (
 		    		<if test="id != null and id != '' ">
-		    			(wu.id=#{id} and m.is_public = 0 and s.wc_progress =3 and cc.is_material_entry=1 and m.is_deleted=0)or
+		    			(wu.id=#{id} and m.is_public = 0 and wu.progress =3 and cc.is_material_entry=1 and m.is_deleted=0)or
 		    		</if>
 		    		    (m.is_public = 1 and cc.is_material_entry=1 and m.is_deleted=0) or 
 		    		cc.is_material_entry = 0 )

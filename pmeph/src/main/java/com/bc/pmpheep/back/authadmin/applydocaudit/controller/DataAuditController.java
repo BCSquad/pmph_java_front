@@ -405,4 +405,11 @@ public class DataAuditController extends BaseController{
 		return "OK";
 	}
 
+	//机构用户认证审核
+	@RequestMapping(value = "/checkAuthen")
+	@ResponseBody
+	public String checkAuthen(HttpServletRequest request) {
+		return "OK";
+	}
+
 }

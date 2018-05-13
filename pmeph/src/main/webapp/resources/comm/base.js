@@ -168,8 +168,16 @@ var remoteUrl="39.107.80.79";
                 if (data && data.code) {
                     if (data.code == '100') {
                         window.location.href = data.data;
-                    } else if (data.code != '1') {
-                        window.message.error(data.msg);
+                    } else if (data.code == '250') {
+                        if(data.msg=='0'){
+                            alert("待审核！");
+                        }else if(data.msg=='2'){
+                            alert("被退回！");
+                        }else if(data.msg!='0' && data.msg!='1' && data.msg!='2'){
+                            alert("未认证！");
+                        }
+                    } else if (data.code != '') {
+                      //  window.message.error(data.msg);
                     } else {
                         if (global_copy.success) {
                             global_copy.success(data.data, textStatus);
