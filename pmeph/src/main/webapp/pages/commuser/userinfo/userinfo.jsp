@@ -240,6 +240,15 @@
                        </div>
                   </div>
                 </td>
+               <td>
+                  <div  style="width: 400px">
+                       <label >昵称</label>
+                       <div class="input-wrapper">
+                          <input class="sxy-txt"  onblur="javascript:LengthLimit(this,30);"
+                            type="text" id="nickname" name="nickname" value="${map.nickname }"/>
+                       </div>
+                  </div>
+                </td>
             </tr>
             <tr class="sxy-tr">
                 <td>

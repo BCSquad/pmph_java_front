@@ -24,7 +24,9 @@
 				LEFT JOIN material m ON m.id = cc.material_id
 				<if test="id != null and id != '' ">
 		    	left join material_org mo on mo.material_id=m.id
-				left join writer_user wu on wu.id= #{id} and  wu.org_id=mo.org_id
+				left join (select tu.*,wuc.progress from writer_user tu LEFT JOIN
+                    writer_user_certification wuc on tu.id = wuc.user_id where tu.id = #{id}) wu on wu.id= #{id}
+                and  wu.org_id=mo.org_id
 				</if>
 				left join declaration d on d.user_id = #{id} and d.material_id=cc.material_id
 		WHERE
@@ -36,7 +38,7 @@
 		        
 		    		and (
 		    		<if test="id != null and id != '' ">
-		    			(wu.id=#{id} and m.is_public = 0 and cc.is_material_entry=1 and m.is_deleted=0)or 
+		    			(wu.id=#{id} and m.is_public = 0 and wu.progress =3 and cc.is_material_entry=1 and m.is_deleted=0)or
 		    		</if>
 		    		    (m.is_public = 1 and cc.is_material_entry=1 and m.is_deleted=0) or 
 		    		cc.is_material_entry = 0 )
@@ -183,7 +185,7 @@ LIMIT 0,10
         select
         sum(c.clicks) as total_click,u.id,u.realname,u.position,u.title,u.avatar,u.is_top*u.top_sort as topSort
         from cms_content c
-        left join (select * from writer_user where is_top = '1') u on c.author_id=u.id
+        right join writer_user u on c.author_id=u.id
         <if test="logUserId != null and logUserId !='' ">
             where u.id != #{logUserId}
         </if>
