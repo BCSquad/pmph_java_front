@@ -108,6 +108,12 @@
     <mvc:interceptors>
         <bean class="com.bc.pmpheep.back.interceptor.ProcessInterceptor"></bean>
         <ref bean="loginInterceptor"></ref>
+        <!--机构用户未认证拦截-->
+        <mvc:interceptor>
+            <!--机构用户没有认证所有需要认证的方法都访问此方法-->
+            <mvc:mapping path="/dataaudit/checkAuthen*"/>
+            <bean class="com.bc.pmpheep.back.interceptor.AuthenticationInterceptor"></bean>
+        </mvc:interceptor>
     </mvc:interceptors>
 
     <mvc:annotation-driven/>

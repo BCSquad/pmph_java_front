@@ -381,7 +381,7 @@
     </div>
 </div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
-<c:if test="${admininfo.progress==2 && admininfo.backReason != null && admininfo.backReason !='' }">
+<%--<c:if test="${admininfo.progress==2 && admininfo.backReason != null && admininfo.backReason !='' }">
 	<!-- 退回原因及审批意见 显示悬浮框 -->
 	<div class="bookmistake" id="return_cause_div">
 	    <div class="apache">
@@ -405,6 +405,6 @@
 	
 	    }
 	</script>
-</c:if>
+</c:if>--%>
 </body>
 </html>

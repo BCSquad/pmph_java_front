@@ -94,7 +94,7 @@
 	                                </div>
 	                            </div>
 	                            <div class="rightButton">
-	                                <div onclick="toogleTip('block','${one.TYPE}','${one.auditId}','${one.ID}')" class="buttonDiv">
+	                                <div onclick="checkAuthen('block','${one.TYPE}','${one.auditId}','${one.ID}')" class="buttonDiv">
 	                                        		办理
 	                                </div>
 
@@ -240,7 +240,20 @@
     function toAuthAudit(userId){
     	window.location.href="${ctx}/admininfocontroller/toadminattest.action?userId="+userId;
     }
-    
+
+
+    function checkAuthen(val,type,auditId,decId){
+        $.ajax({
+            type: "POST",
+            url:contextpath+'dataaudit/checkAuthen.action',
+            dataType:"json",
+            success: function(json) {
+                if(json=="OK"){
+                    toogleTip(val,type,auditId,decId);
+                }
+            }
+        });
+    }
 </script>
 </body>
 </html>

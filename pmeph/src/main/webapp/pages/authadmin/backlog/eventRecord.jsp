@@ -195,6 +195,19 @@
 			window.location.href="${ctx}/teacherauth/toPage.action?";	
 		} 
 	}
+
+   /* function checkAuthen(type,auditId){
+        $.ajax({
+            type: "POST",
+            url:contextpath+'dataaudit/checkAuthen.action',
+            dataType:"json",
+            success: function(json) {
+                if(json=="OK"){
+                    detail(type,auditId);
+                }
+            }
+        });
+    }*/
 </script>
 </body>
 </html>
