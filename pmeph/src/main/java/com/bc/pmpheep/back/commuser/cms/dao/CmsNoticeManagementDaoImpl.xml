@@ -52,7 +52,7 @@
 <if test="materialId ==null or materialId==''">
 select tt.* from
 (
-  select 
+  select
   	b.* ,
   	(select count(d.id) from declaration d where d.material_id=b.material_id and d.online_progress >0) as jcount,
   	(TO_DAYS(NOW()) &lt;= TO_DAYS(b.actual_deadline ) and  !b.is_force_end and !b.is_all_textbook_published)*b.is_material_entry as sortByEntryBtnOn,
@@ -65,21 +65,21 @@ select tt.* from
 	end )as decEditable
 
 	from
-      (select 
+      (select
 	 	        t.*,b.deadline,me.notice,b.actual_deadline,b.is_force_end,b.is_all_textbook_published
 		        from cms_content t
-		        left join  material b on t.material_id =b.id 
+		        left join  material b on t.material_id =b.id
 		        left join  material_extra me on me.material_id=b.id
-		        where  t.category_id=3 
+		        where  t.category_id=3
 		        and t.is_published=1
 		        and t.auth_status=2
 		        and t.is_deleted=0
 		        and ( <![CDATA[(b.is_public =1 and t.is_material_entry=1 and b.is_deleted=0) or t.is_material_entry=0  ]]>)
 		 union
-		 select 
+		 select
 		        t.*,b.deadline,me.notice,b.actual_deadline,b.is_force_end,b.is_all_textbook_published
 		        from cms_content t
-		        left join  material b on t.material_id =b.id 
+		        left join  material b on t.material_id =b.id
 		        left join material_org u on b.id=u.material_id
 						left join (select tu.*,wuc.progress from writer_user tu LEFT JOIN
 						writer_user_certification wuc on tu.id = wuc.user_id where tu.id = #{userid}) p on p.org_id=u.org_id

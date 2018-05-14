@@ -4,7 +4,7 @@
     <resultMap id="adminInfoBaseMap" type="java.util.Map"></resultMap>
     <!--通过机构用户ID获取机构用户信息-->
     <select id="getOrgUserById" parameterType="java.lang.Long" resultMap="adminInfoBaseMap">
-        SELECT u.*,o.org_name AS org_name FROM org_user u
+        SELECT u.*,o.org_name AS org_name,is_proxy_upload*1 proxy_upload FROM org_user u
         LEFT JOIN org o
         ON u.org_id=o.id
         WHERE u.id=#{id}

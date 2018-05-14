@@ -42,7 +42,7 @@ String basePath =path+"/";
     <div class="sxy-div-content">
         <div id="sxy-div-left">
             <div class="sxy-navigate"><a href="${ctx }/homepage/tohomepage.action">首页</a>〉<a href="${ctx }/cmsinfoletters/tolist.action?materialId=${materialId}">${materialId !=null && materialId !='' ? '社区':'信息'  }快报</a>〉${materialId !=null && materialId !='' ? '社区':'信息'  }快报详情</div>
-            <div>
+            <div style="width: 800px;">
                 <div>
                     <div id="sxy-title">
                         <div style="float:left">${rmap.title }</div>
@@ -64,7 +64,7 @@ String basePath =path+"/";
                 </div>
             </div>
 
-        <div class="sxy-content">
+        <div class="sxy-content" style="width: 800px;">
              ${rmap.cmsText }
         </div>
 
