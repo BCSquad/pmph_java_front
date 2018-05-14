@@ -112,7 +112,7 @@ String contextpath=request.getContextPath();
         </div>
     </div>
     
-     <!-- 退回原因填写悬浮框 -->
+    <%-- <!-- 退回原因填写悬浮框 -->
         <div class="bookmistake" id="bookmistake" style="display: none;">
             <form id="bookmistakeform">
             <input type="hidden"  id="return_id" value="">
@@ -131,7 +131,7 @@ String contextpath=request.getContextPath();
                     <button class="btn" type="button" onclick="rejectCertification()">确认</button>
                 </div>
             </form>
-        </div>
+        </div>--%>
 	
 		<jsp:include page="/pages/comm/tail.jsp"></jsp:include> 
 	
