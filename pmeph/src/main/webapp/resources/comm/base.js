@@ -1,7 +1,7 @@
 /**
  * 定义全局变量远程调用地址
  */
-var remoteUrl="39.107.80.79";
+var remoteUrl="120.76.221.250";
 
 /**
  * Created by lihuan on 2017/11/24.
