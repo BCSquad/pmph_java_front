@@ -71,6 +71,7 @@ public class ResponseBean<T> implements Serializable {
 
     private String          backReason;
     private String          userid;
+    private String          proxy;
 
     public ResponseBean() {
         super();
@@ -130,4 +131,11 @@ public class ResponseBean<T> implements Serializable {
     }
 
 
+    public String getProxy() {
+        return proxy;
+    }
+
+    public void setProxy(String proxy) {
+        this.proxy = proxy;
+    }
 }

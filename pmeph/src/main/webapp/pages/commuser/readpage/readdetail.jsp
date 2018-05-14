@@ -419,7 +419,7 @@
                     <div class="morecon">
                         <input type="hidden" value="${start}" id="start">
                         <span class="moreothers" onclick="changepage()"
-                              id="moreothers">${shortcom=='nothing' ? '暂无评论':'加载更多...'}</span>
+                              id="moreothers">${shortcom=='nothing' ? '[暂无评论]':'加载更多...'}</span>
                         <div class="morecom" style="display: none;"></div>
                     </div>
                     <div id="longcompage">
@@ -495,7 +495,7 @@
                     <div class="morecon">
                         <input type="hidden" value="${start}" id="longstart">
                         <span class="moreothers" id="longothers"
-                              onclick="longcom()">${longcom=='nothing' ? '暂无长评':'加载更多...'}</span>
+                              onclick="longcom()">${longcom=='nothing' ? '[暂无长评]':'加载更多...'}</span>
                         <div class="morecom" style="display: none;"></div>
                     </div>
                 </div>
