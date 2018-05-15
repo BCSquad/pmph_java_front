@@ -197,8 +197,6 @@ var remoteUrl="119.254.226.115";
                         );
                     } else if (data.code != '1') {
                         window.message.error(data.msg);
-                    } else if (data.code != '1') {
-                        window.message.error(data.msg);
                     } else {
                         if (global_copy.success) {
                             global_copy.success(data.data, textStatus);
