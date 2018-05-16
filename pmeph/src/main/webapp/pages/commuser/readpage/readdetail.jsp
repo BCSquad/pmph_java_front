@@ -422,7 +422,7 @@
                               id="moreothers">${shortcom=='nothing' ? '[暂无评论]':'加载更多...'}</span>
                         <div class="morecom" style="display: none;"></div>
                     </div>
-                    <div id="longcompage">
+                    <%--<div id="longcompage">
                         <div class="comm">
                             <div class="longcom">图书长评</div>
                             <div class="writecom" onclick="writeablut()">写书评</div>
@@ -437,8 +437,8 @@
                                         <c:if test="${list.avatar!='DEFAULT'}"><img
                                                 src="${ctx}/image/${list.avatar}.action" class="picturesize"></c:if>
 
-                                            <%-- <img src="${ctx}/statics/image/rwtx.png"
-                                                                           class="picturesize"/> --%>
+                                            &lt;%&ndash; <img src="${ctx}/statics/image/rwtx.png"
+                                                                           class="picturesize"/> &ndash;%&gt;
                                     </div>
                                     <div style="float: left;margin-left: 10px;margin-top: 5px;">${list.nickname}</div>
                                     <div style="float: left;margin-left: 10px;">
@@ -497,7 +497,7 @@
                         <span class="moreothers" id="longothers"
                               onclick="longcom()">${longcom=='nothing' ? '[暂无长评]':'加载更多...'}</span>
                         <div class="morecom" style="display: none;"></div>
-                    </div>
+                    </div>--%>
                 </div>
             </div>
         </div>
