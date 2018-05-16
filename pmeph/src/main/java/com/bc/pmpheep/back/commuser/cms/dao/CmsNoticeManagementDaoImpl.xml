@@ -49,87 +49,88 @@
 
 	<select id="list"  resultType="CmsNoticeList" parameterType="java.util.Map">
        <!---->
-		<if test="materialId ==null or materialId==''">
-		select tt.* from
-		(
-		  select
-			b.* ,
-			(select count(d.id) from declaration d where d.material_id=b.material_id and d.online_progress >0) as jcount,
-			(TO_DAYS(NOW()) &lt;= TO_DAYS(b.actual_deadline ) and  !b.is_force_end and !b.is_all_textbook_published)*b.is_material_entry as sortByEntryBtnOn,
-			(TO_DAYS(NOW()) &lt;= TO_DAYS(b.actual_deadline ) and  !b.is_force_end and !b.is_all_textbook_published) as notEnd,
-			d.id as declarationId,
-			(case
-			when d.online_progress REGEXP '^[520]{1}$'
-			then 1
-			else 0
-			end )as decEditable
-			from
-			  (select
-						t.*,b.deadline,me.notice,b.actual_deadline,b.is_force_end,b.is_all_textbook_published
-						from cms_content t
-						left join  material b on t.material_id =b.id
-						left join  material_extra me on me.material_id=b.id
-						where  t.category_id=3
-						and t.is_published=1
-						and t.auth_status=2
-						and t.is_deleted=0
-						and ( <![CDATA[(b.is_public =1 and t.is_material_entry=1 and b.is_deleted=0) or t.is_material_entry=0  ]]>)
-				 union
-				 select
-						t.*,b.deadline,me.notice,b.actual_deadline,b.is_force_end,b.is_all_textbook_published
-						from cms_content t
-						left join  material b on t.material_id =b.id
-						left join material_org u on b.id=u.material_id
+<if test="materialId ==null or materialId==''">
+select tt.* from
+(
+  select
+  	b.* ,
+  	(select count(d.id) from declaration d where d.material_id=b.material_id and d.online_progress >0) as jcount,
+  	(TO_DAYS(NOW()) &lt;= TO_DAYS(b.actual_deadline ) and  !b.is_force_end and !b.is_all_textbook_published)*b.is_material_entry as sortByEntryBtnOn,
+  	(TO_DAYS(NOW()) &lt;= TO_DAYS(b.actual_deadline ) and  !b.is_force_end and !b.is_all_textbook_published) as notEnd,
+	d.id as declarationId,
+	(case
+	when d.online_progress REGEXP '^[520]{1}$'
+	then 1
+	else 0
+	end )as decEditable
+
+	from
+      (select
+	 	        t.*,b.deadline,me.notice,b.actual_deadline,b.is_force_end,b.is_all_textbook_published
+		        from cms_content t
+		        left join  material b on t.material_id =b.id
+		        left join  material_extra me on me.material_id=b.id
+		        where  t.category_id=3
+		        and t.is_published=1
+		        and t.auth_status=2
+		        and t.is_deleted=0
+		        and ( <![CDATA[(b.is_public =1 and t.is_material_entry=1 and b.is_deleted=0) or t.is_material_entry=0  ]]>)
+		 union
+		 select
+		        t.*,b.deadline,me.notice,b.actual_deadline,b.is_force_end,b.is_all_textbook_published
+		        from cms_content t
+		        left join  material b on t.material_id =b.id
+		        left join material_org u on b.id=u.material_id
 						left join (select tu.*,wuc.progress from writer_user tu LEFT JOIN
 						writer_user_certification wuc on tu.id = wuc.user_id where tu.id = #{userid}) p on p.org_id=u.org_id
-						left join  material_extra me on me.material_id=b.id
-						where  t.category_id=3
-						and t.is_published=1
-						and b.is_public =0
+		        left join  material_extra me on me.material_id=b.id
+		        where  t.category_id=3
+		        and t.is_published=1
+		        and b.is_public =0
 						and p.progress =3
-						and b.is_deleted=0
-						and t.auth_status=2
-						and t.is_material_entry=1
-						and t.is_deleted=0
-						and p.id= #{userid}
-		) b left join declaration d on d.user_id = #{userid} and d.material_id=b.material_id
-
-		)tt
-		ORDER BY
-				<if test="order == 0">
-					<!-- b.is_promote desc,b.sort_promote,
-					b.is_hot DESC,b.sort_hot,
-					b.auth_date DESC -->
-					tt.sortByEntryBtnOn desc ,tt.deadline DESC , tt.actual_deadline DESC ,tt.auth_date desc
-				</if>
-				<if test="order == 1">
-					tt.auth_date DESC
-				</if>
-				<if test="order == 2">
-					tt.jcount DESC
-				</if>
-				LIMIT #{start},#{pageSize}
+		        and b.is_deleted=0
+		        and t.auth_status=2
+		        and t.is_material_entry=1
+		        and t.is_deleted=0 
+		        and p.id= #{userid}
+) b left join declaration d on d.user_id = #{userid} and d.material_id=b.material_id
+	
+)tt
+ORDER BY
+		<if test="order == 0">
+			<!-- b.is_promote desc,b.sort_promote,
+			b.is_hot DESC,b.sort_hot,
+		    b.auth_date DESC -->
+		    tt.sortByEntryBtnOn desc ,tt.deadline DESC , tt.actual_deadline DESC ,tt.auth_date desc
 		</if>
-
-		<if test="materialId!=null and materialId!=''">
-			select b.*,m.deadline,m.actual_deadline,me.notice  from cms_content  b
-			 left join material m on b.material_id=m.id
-			 left join material_extra me on me.material_id=m.id
-			 where b.is_deleted=0 and b.is_hide=0 and b.material_id=#{materialId} and b.is_published=1 and b.auth_status=2 and b.category_id=3
-			 ORDER BY
-				<if test="order == 0">
-					 b.is_promote desc,b.sort_promote,
-					b.is_hot DESC,b.sort_hot,
-					b.auth_date DESC
-				</if>
-				<if test="order == 1">
-					b.auth_date DESC
-				</if>
-				<if test="order == 2">
-					b.is_hot DESC,b.sort_hot
-				</if>
-				LIMIT #{start},#{pageSize}
+		<if test="order == 1">
+			tt.auth_date DESC
 		</if>
+		<if test="order == 2">
+			tt.jcount DESC
+		</if>
+		LIMIT #{start},#{pageSize} 
+</if>
+
+<if test="materialId!=null and materialId!=''">
+    select b.*,m.deadline,m.actual_deadline,me.notice  from cms_content  b
+     left join material m on b.material_id=m.id
+     left join material_extra me on me.material_id=m.id
+     where b.is_deleted=0 and b.is_hide=0 and b.material_id=#{materialId} and b.is_published=1 and b.auth_status=2 and b.category_id=3
+     ORDER BY
+		<if test="order == 0">
+			 b.is_promote desc,b.sort_promote,
+			b.is_hot DESC,b.sort_hot,
+		    b.auth_date DESC 
+		</if>
+		<if test="order == 1">
+			b.auth_date DESC
+		</if>
+		<if test="order == 2">
+			b.is_hot DESC,b.sort_hot
+		</if>
+		LIMIT #{start},#{pageSize} 
+</if>
 
 
 	</select>

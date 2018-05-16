@@ -115,3 +115,7 @@ tr {
 .he > .links .password {
     color: #e52e2e;
 }
+
+.layui-layer-btn{
+    text-align: center;
+}

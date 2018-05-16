@@ -75,16 +75,16 @@ public class RouteUtil {
 	 */
 	public static String userAvatar(String avatar) {
 		
-		if (StringUtil.isEmpty(avatar)) {
-			avatar = DEFAULT_USER_AVATAR;
-		}else{
-			Pattern pattern = Pattern.compile("^[A-z0-9]{24}$");
+		Pattern pattern = Pattern.compile("^[A-z0-9]{24}$");
+		if(avatar != null) {
 			Matcher matcher = pattern.matcher(avatar);
 			if (matcher.matches()) {
 				avatar = MONGODB_IMAGE + avatar + ".action";
-			}else{
+			} else {
 				avatar = DEFAULT_USER_AVATAR;
 			}
+		}else{
+			avatar = DEFAULT_USER_AVATAR;
 		}
 		
 		/*if (StringUtil.isEmpty(avatar)||"DEFAULT".equals(avatar)) {

@@ -35,9 +35,11 @@
                 </div>
                 <c:forEach items="${listArt}" var="list" varStatus="status">
 	                <div class="${status.index==0 or status.index==4 ?'item' :'item behind'}" onclick="window.location.href='${ctx}/articledetail/toPage.action?wid=${list.id}'">
-                    <div class="command">
+                    <c:if test="${status.count < 4 }">
+                        <div class="command">
                         <span style="margin-left: 5px">推荐</span>
-                    </div>
+                        </div>
+                    </c:if>
                     <div  class="content" >
                         <div class="content-image">
                             <img src="${ctx}/${list.cover}" />
@@ -46,13 +48,13 @@
                         <p  class="content-text">${list.summary}</p>
                         <div  class="foot">
                             <div style="float:left">
-                                <%-- <c:if test="${list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null}">  
+                                <%-- <c:if test="${list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null}">
                                 	<img src="${ctx}/statics/image/default_image.png" class="personicon">
                                 </c:if>
                 				<c:if test="${!(list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null)}">
                 					<img src="${ctx}/image/${list.avatar}.action" class="personicon" />
                 				</c:if> --%>
-                				
+
                             </div>
                             <div  class="msg">
                                 <span  class="name" style="cursor:pointer;" onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?userId=${list.userId }'">文章来源：${list.author_name==null?list.realname:list.author_name}</span>

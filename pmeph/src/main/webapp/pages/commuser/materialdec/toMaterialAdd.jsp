@@ -40,7 +40,7 @@
 	<div class="content-wrapper">
 		<div style="color: red;font-size: 16px;margin-top: 28px;">（提示：为确保填写成功，请用360极速浏览器或谷歌浏览器）</div>
 		<div class="sbxq_title">
-			<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a style="text-decoration: none;color: #999999;" href="${contextpath}/personalhomepage/tohomepage.action?pagetag=jcsb&pageNum=1&pageSize=10"> 教材申报 </a> > 填写申报表</span>
+			<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=jcsb&pageNum=1&pageSize=10"> 教材申报 </a> > 填写申报表</span>
 		</div>
 		<!-- 图书选择-->
 		<form id="objForm">
@@ -82,19 +82,19 @@
 						<table style="width: 260px;border:0" cellspacing="0" cellpadding="0">
 							<tr>
 								<c:if test="${materialMap.is_multi_position =='1'}">
-									<td height="30px;"><input type="checkbox" name="zw_1" checked="checked" value="4"/>主编</td>
-									<td><input type="checkbox" name="zw_1" value="2"/>副主编</td>
-									<td><input type="checkbox" name="zw_1" value="1"/>编委</td>
+									<td height="30px;"><input type="checkbox" id="zw_1" name="zw_1" value="4"/>主编</td>
+									<td><input type="checkbox" id="zw_1" name="zw_1" value="2"/>副主编</td>
+									<td><input type="checkbox" id="zw_1" name="zw_1" value="1"/>编委</td>
 									<c:if test="${materialMap.is_digital_editor_optional =='1'}">
-										<td><input type="checkbox" name="zw_1" value="8"/>数字编委</td>
+										<td><input type="checkbox" id="zw_1" name="zw_1" value="8"/>数字编委</td>
 									</c:if>
 								</c:if>
 								<c:if test="${materialMap.is_multi_position !='1'}">
-									<td><input type="radio" name="zw_1" checked="checked" value="4"/>主编</td>
-									<td><input type="radio" name="zw_1" value="2"/>副主编</td>
-									<td><input type="radio" name="zw_1" value="1"/>编委</td>
+									<td><input type="radio" id="zw_1" name="zw_1" value="4"/>主编</td>
+									<td><input type="radio" id="zw_1" name="zw_1" value="2"/>副主编</td>
+									<td><input type="radio" id="zw_1" name="zw_1" value="1"/>编委</td>
 									<c:if test="${materialMap.is_digital_editor_optional =='1'}">
-										<td><input type="radio" name="zw_1" value="8"/>数字编委</td>
+										<td><input type="radio" id="zw_1" name="zw_1" value="8"/>数字编委</td>
 									</c:if>
 								</c:if>
 							</tr>
