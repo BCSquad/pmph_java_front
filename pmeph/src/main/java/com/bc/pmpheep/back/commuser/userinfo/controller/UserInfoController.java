@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.userinfo.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -196,16 +197,18 @@ public class UserInfoController extends BaseController {
      */
     @RequestMapping(value = "/updateorguserpassword",method = RequestMethod.POST/*,consumes = "application/json"*/)
     @ResponseBody
-    public ResponseBean<Map<String, Object>> updateOrgUserPassword(HttpServletRequest request){
+    public ResponseBean<Map<String, Object>> updateOrgUserPassword(HttpServletRequest request) throws IOException {
         ResponseBean<Map<String, Object>> responseBean=new ResponseBean<Map<String, Object>>();
         Map <String,Object> map = new HashMap<String, Object>();
         Map <String,Object> map1 = this.getUserInfo() ;
         Long userId = new Long(String.valueOf(map1.get("id")));
         map.put("id", userId);
         String password=request.getParameter("password");
-        DesRun desRun=new DesRun("",password);
+        /*   DesRun desRun=new DesRun("",password);
         map.put("password", desRun.enpsw);
-        userinfoService.updatePassword(map);
+        userinfoService.updatePassword(map);*/
+        userService.modifyUser(MapUtils.getString(map1,"username"),password);
         return responseBean;
+
     }
 }
