@@ -36,7 +36,7 @@
 	    
 	    #if($c.progress == 1)
 	    	<td>
-		        <a class="a-pass" onclick="passCertification($c.id,'$c.realname')">通过验证</a>
+		        <a class="a-pass" onclick="checkAuthen($c.id,'$c.realname')">通过验证</a>
 		        <a class="a-reject" onclick="showup($c.id,'$c.realname')">退回</a>
 		        <input type="hidden" id = "backReason_$!{c.id}" value="$!{c.backReason}">
 		    </td>

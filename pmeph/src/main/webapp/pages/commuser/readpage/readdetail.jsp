@@ -217,7 +217,9 @@
 
                 <div class="xsp" style="float: left;">
                     <div id="xsp"></div>
-                    <a href="#001" onclick="writeablut()" style="text-decoration: none"><span id="xsp1">写书评</span></a>
+                    <%--<a href="#001" onclick="writeablut()" style="text-decoration: none"><span id="xsp1">写书评</span></a>  --%>
+                    <a  style="text-decoration: none;cursor: pointer;" onclick="$('#content_book').focus()" ><span id="xsp1">写书评</span></a>
+
                 </div>
                 <div class="mistake" onclick="showup(1)">
                     <div class="mis_pic" ></div>

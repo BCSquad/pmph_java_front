@@ -219,3 +219,15 @@ function hideup() {
     $("#bookmistake").hide();
 }
 
+function checkAuthen(id,realname){
+    $.ajax({
+        type: "POST",
+        url:contextpath+'dataaudit/checkAuthen.action',
+        dataType:"json",
+        success: function(json) {
+            if(json=="OK"){
+                passCertification(id,realname);
+            }
+        }
+    });
+}
