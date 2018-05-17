@@ -14,7 +14,7 @@
 					  $("#ullist").append('<li class="commentli"><p class="title">'+
 					  n.bookname
 					  +'</p><p  class="message"><span class="name" >'+
-					    n.username
+					    n.nickname
 					  +'  发表了评论</span><span class="scoreimg '+
 					    (n.score>=2.0 ? "yellowstar":"graystar")
 					  +'"></span><span class="scoreimg '+
