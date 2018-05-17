@@ -217,13 +217,15 @@
 
                 <div class="xsp" style="float: left;">
                     <div id="xsp"></div>
-                    <a href="#001" onclick="writeablut()" style="text-decoration: none"><span id="xsp1">写书评</span></a>
+                    <%--<a href="#001" onclick="writeablut()" style="text-decoration: none"><span id="xsp1">写书评</span></a>  --%>
+                    <a  style="text-decoration: none;cursor: pointer;" onclick="$('#content_book').focus()" ><span id="xsp1">写书评</span></a>
+
                 </div>
                 <div class="mistake" onclick="showup(1)">
                     <div class="mis_pic" ></div>
                     <div class="mis_content">图书纠错</div>
                 </div>
-                <div class="mistake" style="cursor: pointer">
+                <div class="mistake">
                     <%
                         Map<String, Object> userInfo2 = null;
                         if ("1".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
@@ -240,7 +242,7 @@
                     <div class="mis_content"  <c:if test="${userInfo==null}"> onclick="validLogin()" </c:if>>上传微视频</div>
                     <c:if test="${userInfo!=null}">
                         <input id="upload-video" type="file" class='hidden-upload' name='file' accept="video/*"
-                               style="cursor: pointer">
+                               style="width: 0px;height: 33px;padding-left: 100px;cursor: pointer;">
                     </c:if>
 
                 </div>
@@ -422,10 +424,9 @@
                               id="moreothers">${shortcom=='nothing' ? '[暂无评论]':'加载更多...'}</span>
                         <div class="morecom" style="display: none;"></div>
                     </div>
-                    <div id="longcompage">
-                        <div class="title">
-                            <div class="line"></div>
-                            <div class="rd_name">图书长评</div>
+                    <%--<div id="longcompage">
+                        <div class="comm">
+                            <div class="longcom">图书长评</div>
                             <div class="writecom" onclick="writeablut()">写书评</div>
                         </div>
                         <c:forEach items="${longList}" var="list" varStatus="status" begin="0" end="1">
@@ -438,8 +439,8 @@
                                         <c:if test="${list.avatar!='DEFAULT'}"><img
                                                 src="${ctx}/image/${list.avatar}.action" class="picturesize"></c:if>
 
-                                            <%-- <img src="${ctx}/statics/image/rwtx.png"
-                                                                           class="picturesize"/> --%>
+                                            &lt;%&ndash; <img src="${ctx}/statics/image/rwtx.png"
+                                                                           class="picturesize"/> &ndash;%&gt;
                                     </div>
                                     <div style="float: left;margin-left: 10px;margin-top: 5px;">${list.nickname}</div>
                                     <div style="float: left;margin-left: 10px;">
@@ -498,7 +499,7 @@
                         <span class="moreothers" id="longothers"
                               onclick="longcom()">${longcom=='nothing' ? '[暂无长评]':'加载更多...'}</span>
                         <div class="morecom" style="display: none;"></div>
-                    </div>
+                    </div>--%>
                 </div>
             </div>
         </div>

@@ -57,7 +57,7 @@ String contextpath=request.getContextPath();
                 </div>
                 <div class="message">
                    <div class="personicon"><img src="${comment.avatar}" style="height:33px;width:33px"/></div>
-                   <div class="username">${comment.username }</div>
+                   <div class="username">${comment.nickname }</div>
                    <div style="float: left;height: 33px;width: 75px;">
                    <div class="staricon ${comment.score>0.0 ? 'yellowstar':'graystar' }" >
                    </div>

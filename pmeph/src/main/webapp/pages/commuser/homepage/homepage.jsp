@@ -409,10 +409,10 @@
                                 <div class="a7_author">
                                     <span class="a7_write" title="${list.realname}">${list.realname}</span>
                                 </div>
-                                <br>
-                                <div class="a7_cont">
-                                    <span class="a7_cont">${list.title}</span>
-                                </div>
+                                    <%--    <br>
+                                        <div class="a7_cont">
+                                            <span class="a7_cont">${list.title}</span>
+                                        </div>--%>
                             </div>
                             <div class="a7_friend">
                                 <c:choose>
