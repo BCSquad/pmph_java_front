@@ -165,3 +165,38 @@ body
 tbody div{
 	cursor: pointer;
 }
+
+.list{
+	height: auto;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 30px;
+	letter-spacing: 0px;
+	color: #333333;
+}
+
+.title2{
+	margin-top: 10px;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0px;
+	color: #333333;
+	padding: 0 auto;
+	width: 8%;
+	height:auto;
+	float: left;
+	text-align: right;
+}
+.listContent{
+	margin-top: 10px;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0px;
+	color: #333333;
+	width: 88%;
+	float: left;
+	height: auto;
+}
