@@ -447,7 +447,7 @@ function addTsxz(){
         "<div style='float: left;margin-left: 30px;' class='ts_radio'>"+
         "<table style='width: 260px;border:0' cellspacing='0' cellpadding='0'><tr>";
     if(is_multi_position=='1'){
-        thtml += "<td height='30px'><input type='checkbox' name='zw_"+str+"' checked='checked' value='4'/>主编</td>"+
+        thtml += "<td height='30px'><input type='checkbox' name='zw_"+str+"' value='4'/>主编</td>"+
             "<td><input type='checkbox' name='zw_"+str+"' value='2'/>副主编</td>"+
             "<td><input type='checkbox' name='zw_"+str+"' value='1'/>编委</td>";
         if(sfbw == "1"){
@@ -455,7 +455,7 @@ function addTsxz(){
         }
     }else{
         thtml +=
-            "<td height='30px'><input type='radio' name='zw_"+str+"' checked='checked' value='4'/>主编</td>"+
+            "<td height='30px'><input type='radio' name='zw_"+str+"' value='4'/>主编</td>"+
             "<td><input type='radio' name='zw_"+str+"' value='2'/>副主编</td>"+
             "<td><input type='radio' name='zw_"+str+"' value='1'/>编委</td>";
         if(sfbw == "1"){
@@ -1239,7 +1239,7 @@ function checkBoxInfo() {
 
 //判断radio是否被选中
 function radioInfo(){
-    alert(document.getElementById("zw_1").checked);
+  //  alert(document.getElementById("zw_1").checked);
     var list= $('input:radio[name="zw_1"]:checked').val();
     if(list==null){
         window.message.warning("请选择申报的职位！");

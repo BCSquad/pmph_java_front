@@ -186,7 +186,7 @@ var remoteUrl = "medu.ipmph.com";
                             ,function(index){
                                 layer.close(index);
                                 //进行认证
-                                window.location.href="/admininfocontroller/toadminattest.action";
+                                window.location.href=contextpath+"admininfocontroller/toadminattest.action";
 
                             }
                             ,function(index){

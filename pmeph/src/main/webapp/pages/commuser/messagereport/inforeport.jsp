@@ -67,7 +67,18 @@ String basePath =path+"/";
         <div class="sxy-content" style="width: 800px;">
              ${rmap.cmsText }
         </div>
-
+        <c:if test="${cmsAttach !=null }">
+            <div class="list">
+                <div class="title2">
+                    快报附件：
+                </div>
+                <div class="listContent">
+                    <c:forEach items="${cmsAttach }" var="cattach">
+                        <span ><a   href="${ctx}/file/download/${cattach.attachment}.action" ><img class="pictureSize" src="${ctx}/statics/pictures/attachment.png">&nbsp;&nbsp;${cattach.attachment_name}</a></span><br>
+                    </c:forEach>
+                </div>
+            </div>
+        </c:if>
         </div>
         <div id="sxy-div-right">
             <table border="0" style="width:100%;">

@@ -309,23 +309,25 @@ public class MaterialDetailController extends BaseController{
 		String syllabus_ids[] = request.getParameterValues("syllabus_id");
 		String syllabus_names[] = request.getParameterValues("syllabus_name");
 		for(int i=0;i<preset_positions.length;i++) { //遍历数组
-			Map<String,Object> tsxzMap = new HashMap<String,Object>();
-			String preset_position[] = request.getParameterValues(preset_positions[i].toString());
-			int k = 0;
-			//遍历职位信息
-			for (String st : preset_position) {
-				k+=Integer.parseInt(st);
+			if(!textbook_ids[i].equals("")) {
+				Map<String, Object> tsxzMap = new HashMap<String, Object>();
+				String preset_position[] = request.getParameterValues(preset_positions[i].toString());
+				int k = 0;
+				//遍历职位信息
+				for (String st : preset_position) {
+					k += Integer.parseInt(st);
+				}
+				tsxzMap.put("textbook_id", textbook_ids[i]);
+				tsxzMap.put("preset_position", k);
+				tsxzMap.put("is_on_list", "1"); //默认值
+				tsxzMap.put("author_id", user_id); //暂存人Id
+				tsxzMap.put("is_background", is_background); //是否为社内用户
+				tsxzMap.put("syllabus_id", syllabus_ids[i]);
+				tsxzMap.put("syllabus_name", syllabus_names[i]);
+				tsxzMap.put("gmt_create", date);
+				//图书申报
+				tssbList.add(tsxzMap);
 			}
-			tsxzMap.put("textbook_id", textbook_ids[i]);
-			tsxzMap.put("preset_position", k);
-			tsxzMap.put("is_on_list", "1"); //默认值
-			tsxzMap.put("author_id", user_id); //暂存人Id
-			tsxzMap.put("is_background", is_background); //是否为社内用户
-			tsxzMap.put("syllabus_id", syllabus_ids[i]);
-			tsxzMap.put("syllabus_name", syllabus_names[i]);
-			tsxzMap.put("gmt_create", date);
-			//图书申报
-			tssbList.add(tsxzMap);
 		}
 		//主要学习经历
 		String xx_kssj[] = request.getParameterValues("xx_kssj");

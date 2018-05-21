@@ -338,7 +338,8 @@
                     <a name="001" id="001"></a>
                     <textarea class="tarea" id="content_book" onkeyup="javascript:LengthLimit(this,500);"
                               onblur="javascript:LengthLimit(this,500);"></textarea>
-                    <hr style="border:0.05px solid rgba(180, 239, 205, 0.5);margin-left: 16px;margin-rihgt: 16px;">
+                    <div style="border-top:1px solid rgba(180, 239, 205, 0.5);margin-left: 16px;margin-rihgt: 16px;text-align: right;font-size: 12px;width: 870px;">
+                     评论最多500字</div>
                     <div class="star_num">星级评分:</div>
                     <div class="scorestar" id="star">
                         <div class="scorestar1" id="score1"></div>
