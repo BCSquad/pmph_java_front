@@ -98,7 +98,7 @@ function checkAuthen(id,name,view_audit){
         dataType:"json",
         success: function(json) {
             if(json=="OK"){
-                dealWithAudit(val,type,auditId,decId);
+                dealWithAudit(id,name,view_audit);
             }
         }
     });

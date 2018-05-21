@@ -239,10 +239,12 @@
 				SELECT
 					*
 				FROM
-					writer_user u
+					(select tu.*,wuc.progress from writer_user tu LEFT JOIN
+		writer_user_certification wuc on tu.id = wuc.user_id where tu.id = #{parameter.logUserId}) u
 				JOIN material_org o ON o.org_id = u.org_id
 				WHERE
 					u.id = #{parameter.logUserId}
+					and u.progress = 3
 				AND a.id = o.material_id
 			)
 		)
@@ -356,10 +358,12 @@
 					SELECT
 						*
 					FROM
-						writer_user u
+		(select tu.*,wuc.progress from writer_user tu LEFT JOIN
+		writer_user_certification wuc on tu.id = wuc.user_id where tu.id = #{parameter.logUserId}) u
 					JOIN material_org o ON o.org_id = u.org_id
 					WHERE
 						u.id = #{parameter.logUserId}
+						and u.progress =3
 					AND a.id = o.material_id
 				)
 			)

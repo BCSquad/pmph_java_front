@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.bc.pmpheep.back.commuser.mymessage.service.NoticeMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -34,6 +35,9 @@ public class InfoReportController extends BaseController {
    private InfoReportService infoReportService;
    @Autowired
    private MessageService messageservice;
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.mymessage.service.NoticeMessageServiceImpl")
+	NoticeMessageService noticeMessageService;
     /** 
 	 * 到信息快报详情界面
 	 */
@@ -54,6 +58,9 @@ public class InfoReportController extends BaseController {
 		   map.put("count", "0");
 	   }
 	   List <Map<String,Object>> list=infoReportService.queryReportList(num,size,materialId);
+	   Map<String,Object> paraMap = new HashMap<String,Object>();
+	   paraMap.put("cmsId", cmsid);
+	   List<Map<String, Object>> cmsAttach = noticeMessageService.queryCMSAttach(paraMap);
 	   Map<String,Object> rmap=infoReportService.queryInfoReportById(cmsid,usermap);
 	   long clicks=Long.valueOf(rmap.get("clicks").toString());
 	   infoReportService.updateClicks(cmsid,clicks+1);
@@ -61,6 +68,7 @@ public class InfoReportController extends BaseController {
 	   map.put("rmap", rmap);
 	   map.put("list", list);
 	   map.put("materialId", materialId);
+	   map.put("cmsAttach", cmsAttach);
 	   return new ModelAndView("commuser/messagereport/inforeport",map);
    }
 	

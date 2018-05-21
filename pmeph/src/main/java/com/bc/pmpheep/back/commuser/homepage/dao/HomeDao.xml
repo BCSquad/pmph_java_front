@@ -176,7 +176,7 @@ LIMIT 0,10
 
     <!-- 查询点击人数最多的最多的作者  已改变为 ： 业务逻辑改为查询被推荐的作者 -->
     <select id="queryAuthor" resultMap="HotAuthorMap">
-        select u.*
+       <!-- select u.*
         ,f.request_id = u.id and f.target_id = #{logUserId} and f.status = 0 as isBeenRequest
         ,f.target_id = u.id and f.request_id = #{logUserId} and f.status = 0 as hasRequest
         ,max(f.status) as status
@@ -196,9 +196,18 @@ LIMIT 0,10
         #{logUserId})) and f.status != 1
         group by u.id
         order by u.topSort desc , u.total_click desc
-        limit 0,4
-        
-    </select>
+        limit 0,4-->
+		select u.*
+		,f.request_id = u.id and f.target_id = #{logUserId} and f.status = 0 as isBeenRequest
+		,f.target_id = u.id and f.request_id = #{logUserId} and f.status = 0 as hasRequest
+		,f.status
+		from writer_user u
+		left join writer_friend f
+		on ((f.request_id = u.id and f.target_id = #{logUserId} ) or (f.target_id = u.id and f.request_id =#{logUserId}))
+		where u.is_top = 1 order by top_sort desc
+		limit 0,4
+
+	</select>
     
     <!-- 查询热门书评 -->
     <select id="queryComment" resultMap="Mapresult">

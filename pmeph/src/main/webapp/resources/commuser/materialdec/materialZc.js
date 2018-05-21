@@ -453,7 +453,7 @@ function addTsxz(){
         "<div style='float: left;margin-left: 30px;' class='ts_radio'>"+
         "<table style='width: 260px;border:0' cellspacing='0' cellpadding='0'><tr>";
     if(is_multi_position=='1'){
-        thtml += "<td height='30px'><input type='checkbox' name='zw_"+str+"' checked='checked' value='4'/>主编</td>"+
+        thtml += "<td height='30px'><input type='checkbox' name='zw_"+str+"' value='4'/>主编</td>"+
             "<td><input type='checkbox' name='zw_"+str+"' value='2'/>副主编</td>"+
             "<td><input type='checkbox' name='zw_"+str+"' value='1'/>编委</td>";
         if(sfbw == "1"){
@@ -461,7 +461,7 @@ function addTsxz(){
         }
     }else{
         thtml +=
-            "<td height='30px'><input type='radio' name='zw_"+str+"' checked='checked' value='4'/>主编</td>"+
+            "<td height='30px'><input type='radio' name='zw_"+str+"' value='4'/>主编</td>"+
             "<td><input type='radio' name='zw_"+str+"' value='2'/>副主编</td>"+
             "<td><input type='radio' name='zw_"+str+"' value='1'/>编委</td>";
         if(sfbw == "1"){
