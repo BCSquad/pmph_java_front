@@ -51,7 +51,9 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                 responseBean.setCode(ResponseBean.NO_AUTH);
                 responseBean.setMsg(admininfo.get("progress").toString());
                 responseBean.setProxy(admininfo.get("proxy_upload").toString());
-                responseBean.setBackReason(admininfo.get("backReason").toString());
+                if(progress == 2) {
+                    responseBean.setBackReason(admininfo.get("backReason").toString());
+                }
                 responseBean.setUserid(user.get("id").toString());
                 //responseBean.setData(httpServletRequest.getContextPath() + redirectUrl + "?refer=" + refer);
                 httpServletResponse.getWriter().write(JSON.toJSONString(responseBean));

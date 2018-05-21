@@ -1239,7 +1239,7 @@ function checkBoxInfo() {
 
 //判断radio是否被选中
 function radioInfo(){
-    alert(document.getElementById("zw_1").checked);
+  //  alert(document.getElementById("zw_1").checked);
     var list= $('input:radio[name="zw_1"]:checked').val();
     if(list==null){
         window.message.warning("请选择申报的职位！");
