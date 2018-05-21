@@ -187,7 +187,7 @@ var remoteUrl="120.76.221.250";
                             ,function(index){
                                 layer.close(index);
                                 //进行认证
-                                window.location.href=contextpath+"/admininfocontroller/toadminattest.action";
+                                window.location.href=contextpath+"admininfocontroller/toadminattest.action";
 
                             }
                             ,function(index){
