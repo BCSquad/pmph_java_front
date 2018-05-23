@@ -171,7 +171,7 @@ public class GroupServiceImpl implements GroupService {
                 avatars.remove(i);
                 avatars.add(i,avatar);
             }
-            List<GroupMessageVO> messages = groupDao.getMessages(groupId);
+            List<GroupMessageVO> messages = groupDao.getMessages(groupId,id);
             String gruopImage = group.getGroupImage();
             group.setGroupImage(RouteUtil.gruopImage(gruopImage));
             group.setGmtCreate(createTime);

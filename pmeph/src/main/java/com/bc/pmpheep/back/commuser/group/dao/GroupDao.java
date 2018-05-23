@@ -143,7 +143,7 @@ public interface GroupDao {
 	 * @param 
 	 * @return List<String>
 	 */
-	List<GroupMessageVO> getMessages(@Param("groupId") Long groupId);
+	List<GroupMessageVO> getMessages(@Param("groupId") Long groupId,@Param("thisId")Long thisId);
 	
 	/**
 	 * 

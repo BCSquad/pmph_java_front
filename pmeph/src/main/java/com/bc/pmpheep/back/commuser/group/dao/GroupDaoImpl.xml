@@ -138,10 +138,11 @@
 		WHERE a.group_id = #{groupId};
     </select>
     <!-- 获取小组动态 -->
-    <select id="getMessages" parameterType="java.lang.Long"
+    <select id="getMessages"
         resultType="GroupMessageVO">
         SELECT * FROM pmph_group_message 
-        WHERE  group_id = #{groupId} ORDER BY gmt_create DESC
+        WHERE  group_id = #{groupId} and gmt_create >= (select max(gmt_create) gmt_create from
+		pmph_group_member where user_id = #{thisId} and group_id = #{groupId}) ORDER BY gmt_create DESC
     </select>
 
     <!-- 查询小组总文件数目 -->
