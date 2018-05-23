@@ -324,16 +324,17 @@ public class GroupServiceImpl implements GroupService {
         Map<String,Object> queryMap = new HashMap<String,Object>();
         queryMap.put("group_id", groupId);
         queryMap.put("user_id", memberId);
-        String flag = "您是这个小组的普通用户";
+       // String flag = "您是这个小组的普通用户";
+        String flag = "普通用户";
         Map<String,Object> map = groupDao.memberRole(queryMap);
         if(null == map){
             return flag;
         }
         if(((Boolean)map.get("is_admin"))){
-            flag = "您是这个小组的管理员";
+            flag = "管理员";
         }
         if (((Boolean)map.get("is_founder")) ) {
-            flag = "您是这个小组的创建者";
+            flag = "创建者";
         }
         
         return flag;
