@@ -119,7 +119,7 @@ public class DataAuditServiceImpl implements DataAuditService {
 		Long material_id=Long.valueOf(mid);
 		senNewMsgBack(material_id,thisId, new Short("3"), frendId, new Short("2"), "系统消息", " 	抱歉，" +
                 "您提交的《"+dmap.get("material_name").toString()+"》申报表被[学校管理员]退回，退回原因：" +returnCause+
-                "，请您核对后重试!");
+                "，请您核对后重新提交!");
 		return this.dataAuditDao.updateDeclaration(map);
 	}
 
