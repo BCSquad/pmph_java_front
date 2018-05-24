@@ -1376,7 +1376,7 @@
 
 /* -----------���۵�������ʽ----------------------- */
 .bookmistake {
-    height: 200px; 
+    height: 300px;
     width: 600px;
     
    background-color: #fff;
@@ -1427,7 +1427,7 @@
 
 .misarea {
     width: 550px;
-    height: 90px;
+    height: 180px;
     border: 1px solid #E0E0E0;
     margin-left: 20px;
     padding: 5px;

@@ -155,7 +155,7 @@
 		 	pmph_group_member b on b.id = a.member_id ,
 		 (SELECT if(is_founder or is_admin,true,false ) po from pmph_group_member where user_id = #{thisId} and group_id = #{groupId} )p
 		 WHERE b.group_id = #{groupId}
-		/*and b.gmt_create >= (select gmt_create from pmph_group_member where user_id = #{thisId} and group_id = #{groupId})*/
+		<!--and b.gmt_create >= (select gmt_create from pmph_group_member where user_id = #{thisId} and group_id = #{groupId})-->
 		 <if test="fileName != null and fileName != '' ">
 		 	and a.file_name like CONCAT('%',#{fileName},'%')
 		 </if>
@@ -173,7 +173,7 @@
 		 	pmph_group_member b on b.id = a.member_id ,
 		 (SELECT if(is_founder or is_admin,true,false ) po from pmph_group_member where user_id = #{thisId} and group_id = #{groupId} )p
 		 WHERE b.group_id = #{groupId}
-		/*and b.gmt_create >= (select gmt_create from pmph_group_member where user_id = #{thisId} and group_id = #{groupId})*/
+		<!--and b.gmt_create >= (select gmt_create from pmph_group_member where user_id = #{thisId} and group_id = #{groupId})-->
 		 <if test="fileName != null and fileName != '' ">
 		 	and a.file_name like CONCAT('%',#{fileName},'%')
 		 </if>

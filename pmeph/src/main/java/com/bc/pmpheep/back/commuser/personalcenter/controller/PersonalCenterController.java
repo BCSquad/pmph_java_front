@@ -1,23 +1,17 @@
 package com.bc.pmpheep.back.commuser.personalcenter.controller;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.bc.pmpheep.back.commuser.collection.service.BookCollectionService;
+import com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService;
 import com.bc.pmpheep.back.commuser.messagereport.dao.InfoReportDao;
+import com.bc.pmpheep.back.commuser.personalcenter.bean.PersonalNewMessage;
+import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.commuser.readpage.dao.ReadDetailDao;
+import com.bc.pmpheep.back.commuser.survey.service.SurveyService;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.template.service.TemplateService;
+import com.bc.pmpheep.back.util.RouteUtil;
+import com.bc.pmpheep.general.controller.BaseController;
+import com.bc.pmpheep.general.pojo.Content;
+import com.bc.pmpheep.general.service.ContentService;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,19 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService;
-import com.bc.pmpheep.back.commuser.personalcenter.bean.PersonalNewMessage;
-import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
-import com.bc.pmpheep.back.commuser.survey.service.SurveyService;
-import com.bc.pmpheep.back.plugin.PageParameter;
-import com.bc.pmpheep.back.template.service.TemplateService;
-import com.bc.pmpheep.back.util.MD5;
-import com.bc.pmpheep.back.util.RouteUtil;
-import com.bc.pmpheep.general.controller.BaseController;
-import com.bc.pmpheep.general.pojo.Content;
-import com.bc.pmpheep.general.pojo.Message;
-import com.bc.pmpheep.general.service.ContentService;
-import com.bc.pmpheep.general.service.MessageService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 //首页controller
 @Controller
@@ -784,7 +771,7 @@ public class PersonalCenterController extends BaseController {
 	// 弹框回显短评内容
 	@RequestMapping(value = "/shortComment")
 	@ResponseBody
-	public Map<String, Object> shortComment(HttpServletRequest request) {
+	public Map<String, Object> dd(HttpServletRequest request) {
 		String uid = request.getParameter("uid");
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("id", uid);
