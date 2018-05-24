@@ -116,4 +116,8 @@ public interface MyMessageService {
 
     public void sendMsg(Short msgType, Short senderType, Long senderId, Short receiverType, Long receiverId, String title, String content);
 
+    /**
+     * 教师认证发送通知
+     */
+    public void sendTeacherMsg(Long orgId, String teacherName,String date);
 }

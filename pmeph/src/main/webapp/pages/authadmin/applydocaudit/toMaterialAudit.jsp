@@ -753,7 +753,7 @@
 						<input type="hidden" value="${online_progress}" />
 						<c:if test="${online_progress!=3&&online_progress!=2&&online_progress!=5}">
 							<div id="passGo" class="bt_tj" onclick="toAudit('${gezlList.id}','3')">通过</div>
-							<div id="backGo" class="bt_tj" onclick="showup('${gezlList.id}','2')">退回</div>
+							<div id="backGo" class="bt_tj" onclick="showup('${gezlList.id}','2')">退回给个人</div>
 						</c:if>
 						<div class="bt_tj" onclick="toprint('${gezlList.id}')">打印</div>
 						<div class="bt_tj" onclick="toMain()">返回</div>

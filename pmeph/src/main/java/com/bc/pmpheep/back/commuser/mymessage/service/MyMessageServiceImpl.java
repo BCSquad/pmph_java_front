@@ -300,5 +300,11 @@ public class MyMessageServiceImpl implements MyMessageService {
 
     }
 
+    @Override
+    public void sendTeacherMsg(Long orgId, String teacherName,String date) {
+        for (Map<String, Object> item : myMessageDao.getOrgUser(orgId)) {
+            this.sendMsg(new Short("0"), new Short("0"), 0L, new Short("3"), MapUtils.getLong(item, "id"), "系统消息",  teacherName + "于"+date+"提交了教师资格认证，请您尽快审核。");
+        }
+    }
 
 }
