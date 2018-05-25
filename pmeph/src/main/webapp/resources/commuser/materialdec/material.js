@@ -1229,23 +1229,28 @@ function getNowFormatDate() {
 
 //判断checkbox是否被选中
 function checkBoxInfo() {
-    var a = $("input[name='zw_1']:checked").val();
-    if(a == undefined){
-        window.message.warning("请选择申报的职位！");
-        return false;
+    var els =document.getElementsByName("preset_position");
+    for (var i = 0, j = els.length; i < j; i++){
+        var a = $("input[name='"+els[i].value+"']:checked").val();
+        if(a == undefined){
+            window.message.warning("请选择申报的职位！");
+            return false;
+        }
     }
     return true;
 }
 
 //判断radio是否被选中
 function radioInfo(){
-  //  alert(document.getElementById("zw_1").checked);
-    var list= $('input:radio[name="zw_1"]:checked').val();
-    if(list==null){
-        window.message.warning("请选择申报的职位！");
-        return false;
-    }else{
-        return true;
-
+    //  alert(document.getElementById("zw_1").checked);
+    var els =document.getElementsByName("preset_position");
+    for (var i = 0, j = els.length; i < j; i++) {
+        var zw = els[i].value;
+        var list = $('input:radio[name='+zw+']:checked').val();
+        if (list == null) {
+            window.message.warning("请选择申报的职位！");
+            return false;
+        }
     }
+    return true;
 }

@@ -207,7 +207,7 @@
                                 <input class="cg_input" name="telephone" value="${gezlList.telephone}" id="telephone" onblur="LengthLimit(this,30)" maxlength="30"/>
                             </td>
                             <td><span>&ensp;传&emsp;&emsp;真：</span>
-                                <input class="cg_input" name="fax" value="${gezlList.fax}" id="fax" maxlength="50" onblur="LengthLimit(this,50)"/>
+                                <input class="cg_input" name="fax" value="${gezlList.fax}" id="fax" maxlength="20" onblur="LengthLimit(this,20)"/>
                             </td>
                             <td><span class="btbs">*</span><span>手&emsp;&emsp;机：</span>
                                 <input class="cg_input" name="handphone" value="${gezlList.handphone}" id="handphone" onblur="LengthLimit(this,30)"  maxlength="30"/>

@@ -895,7 +895,7 @@ function del_tr(trId){
 
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type){
-    if(checkEqual("textbook_id")) {
+    //if(checkEqual("textbook_id")) {
         if (type == '2') { //表示暂存
             //避免重复点击
             document.getElementById('buzc').onclick = function () {
@@ -919,17 +919,19 @@ function buttAdd(type){
         } else { //表示提交
             var username = $("#username").val();
             var realname = $("#realname").val();
-            if (username == realname) {
-                if (confirm("您填写的申报姓名和账号一致，是否已当前姓名提交申报！")) {
-                    commit(type);
+            if(checkEqual("textbook_id")&&checkBoxInfo()){
+                if (username == realname) {
+                    if (confirm("您填写的申报姓名和账号一致，是否已当前姓名提交申报！")) {
+                        commit(type);
+                    } else {
+                        $("#realname")[0].focus();
+                    }
                 } else {
-                    $("#realname")[0].focus();
+                    commit(type);
                 }
-            } else {
-                commit(type);
             }
         }
-    }
+//    }
 }
 //提交
 function commit(type){
@@ -1211,7 +1213,6 @@ function getNowFormatDate() {
 function checkBoxInfo() {
     var els =document.getElementsByName("preset_position");
     for (var i = 0, j = els.length; i < j; i++){
-        alert(els[i].value);
         var a = $("input[name='"+els[i].value+"']:checked").val();
         if(a == undefined){
             window.message.warning("请选择申报的职位！");
