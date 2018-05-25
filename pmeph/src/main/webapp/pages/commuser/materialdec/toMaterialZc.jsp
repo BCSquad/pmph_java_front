@@ -64,6 +64,45 @@
                         <div class="addBtn pull-right" id="sjtj" onclick="javascript:addTsxz()"><span>增加</span></div>
                     </c:if>
                 </div>
+                <c:if test="${empty tssbList[0]}">
+                <div class="item" id="xz1">
+                    <span style="float: left;line-height: 30px;">图书：</span>
+                    <select id="edu1" name="textbook_id" class="st book" data-valid="isNonEmpty" data-error="书籍选择不能为空" style="float: left;height: 40px;">
+                            ${bookSelects}
+                    </select>
+                    <div style="float: left;margin-left: 30px;" class="ts_radio">
+                        <table style="width: 260px;border:0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <c:if test="${materialMap.is_multi_position =='1'}">
+                                    <td height="30px;"><input type="checkbox" id="zw_1" name="zw_1" value="4"/>主编</td>
+                                    <td><input type="checkbox" id="zw_1" name="zw_1" value="2"/>副主编</td>
+                                    <td><input type="checkbox" id="zw_1" name="zw_1" value="1"/>编委</td>
+                                    <c:if test="${materialMap.is_digital_editor_optional =='1'}">
+                                        <td><input type="checkbox" id="zw_1" name="zw_1" value="8"/>数字编委</td>
+                                    </c:if>
+                                </c:if>
+                                <c:if test="${materialMap.is_multi_position !='1'}">
+                                    <td><input type="radio" id="zw_1" name="zw_1" value="4"/>主编</td>
+                                    <td><input type="radio" id="zw_1" name="zw_1" value="2"/>副主编</td>
+                                    <td><input type="radio" id="zw_1" name="zw_1" value="1"/>编委</td>
+                                    <c:if test="${materialMap.is_digital_editor_optional =='1'}">
+                                        <td><input type="radio" id="zw_1" name="zw_1" value="8"/>数字编委</td>
+                                    </c:if>
+                                </c:if>
+                            </tr>
+                        </table>
+                        <!-- 用于遍历radio中的值 -->
+                        <input type="hidden" name="preset_position" value="zw_1">
+                    </div>
+                    <div style="float: left;margin-left: 20px;height: 30px;">
+                        <span style="float: left;line-height: 30px;">上传教学大纲(只能上传一个文件或压缩包)：</span>
+                        <div id="fileNameDiv_1" class="fileNameDiv"></div>
+                        <input type="hidden" name="syllabus_id" id="syllabus_id_1"/>
+                        <input type="hidden" name="syllabus_name" id="syllabus_name_1"/>
+                        <div class="scys" id="scjxdg_1"><span>上传文件</span></div>
+                    </div>
+                </div>
+            </c:if>
                 <c:forEach var="list" items="${tssbList}" varStatus="status">
                     <div class="item" id="xz1">
                         <span style="float: left;line-height: 30px;">图书：</span>
@@ -90,6 +129,7 @@
                                             <td><input type="radio" name="zw_1_${status.count}" value="8" ${list.preset_position=='8'?'checked':'' }/>数字编委</td>
                                         </c:if>
                                     </c:if>
+
                                 </tr>
                             </table>
                             <!-- 用于遍历radio中的值 -->
@@ -167,7 +207,7 @@
                                 <input class="cg_input" name="telephone" value="${gezlList.telephone}" id="telephone" onblur="LengthLimit(this,30)" maxlength="30"/>
                             </td>
                             <td><span>&ensp;传&emsp;&emsp;真：</span>
-                                <input class="cg_input" name="fax" value="${gezlList.fax}" id="fax" maxlength="50" onblur="LengthLimit(this,50)"/>
+                                <input class="cg_input" name="fax" value="${gezlList.fax}" id="fax" maxlength="20" onblur="LengthLimit(this,20)"/>
                             </td>
                             <td><span class="btbs">*</span><span>手&emsp;&emsp;机：</span>
                                 <input class="cg_input" name="handphone" value="${gezlList.handphone}" id="handphone" onblur="LengthLimit(this,30)"  maxlength="30"/>

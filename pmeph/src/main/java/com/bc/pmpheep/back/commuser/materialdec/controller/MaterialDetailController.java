@@ -314,8 +314,10 @@ public class MaterialDetailController extends BaseController{
 				String preset_position[] = request.getParameterValues(preset_positions[i].toString());
 				int k = 0;
 				//遍历职位信息
-				for (String st : preset_position) {
-					k += Integer.parseInt(st);
+				if(preset_position == null){}else{
+					for (String st : preset_position) {
+						k += Integer.parseInt(st);
+					}
 				}
 				tsxzMap.put("textbook_id", textbook_ids[i]);
 				tsxzMap.put("preset_position", k);
@@ -1047,6 +1049,7 @@ public class MaterialDetailController extends BaseController{
 		//书籍信息
 		List<Map<String,Object>> bookList = this.mdService.queryBookById(material_id);
 		StringBuffer bookSelects = new StringBuffer();
+		bookSelects.append("<option value=''>-请选择-</option>");
 		for (Map<String, Object> map : bookList) {
 			bookSelects.append("<option value='"+map.get("id")+"'>"+map.get("textbook_name")+"</option>");
 		}
