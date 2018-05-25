@@ -887,7 +887,7 @@ function del_tr(trId){
 
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type){
-    if(checkEqual("textbook_id") && checkBoxInfo()){
+  //  if(checkEqual("textbook_id") && checkBoxInfo()){
         if(type == '2') { //表示暂存
             //避免重复点击
             document.getElementById('buzc').onclick=function(){window.message.warning("请不要重复点击");};
@@ -906,7 +906,7 @@ function buttAdd(type){
             });
         }else {  //表示提交
             checkLb();
-            if (checkNull(jsonStr) && checkExtra()) {
+            if (checkEqual("textbook_id") && checkBoxInfo() && checkNull(jsonStr) && checkExtra()) {
                /* document.getElementById('buzc').onclick = function () {
                     window.message.warning("请不要重复点击");
                 };
@@ -928,7 +928,7 @@ function buttAdd(type){
                 });
             }
         }
-    }
+  //  }
 }
 
 //放弃

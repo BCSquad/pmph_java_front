@@ -192,13 +192,13 @@ function selectPageSize() {
 function queryClear(){
 	$(".btn_1").attr("disabled",true);
 	$("#page-num-temp").val(1);
- //   var options = document.getElementById('search-status-select').children;
- //   options[0].selected=true;
+    // var options = document.getElementById('search-status-select').children;
+    // options[0].selected=true;
     setTimeout(function(){
         $(".query_input").val("");
-
+     //   $("#search-status-select option:first").prop("selected", 'selected');
          $("#search-status-select").trigger("click");
-	    $("#search-status-select").find("li[data-value='']").trigger("click");
+	     $("#search-status-select").find("li[data-value='']").trigger("click");
     },100);
     //queryMain();
     

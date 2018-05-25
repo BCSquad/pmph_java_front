@@ -314,8 +314,10 @@ public class MaterialDetailController extends BaseController{
 				String preset_position[] = request.getParameterValues(preset_positions[i].toString());
 				int k = 0;
 				//遍历职位信息
-				for (String st : preset_position) {
-					k += Integer.parseInt(st);
+				if(preset_position == null){}else{
+					for (String st : preset_position) {
+						k += Integer.parseInt(st);
+					}
 				}
 				tsxzMap.put("textbook_id", textbook_ids[i]);
 				tsxzMap.put("preset_position", k);
@@ -677,7 +679,7 @@ public class MaterialDetailController extends BaseController{
 			//TODO 教材申报提交 生成动态
 			//Map<String, Object> materialMap = this.mdService.queryMaterialbyId(material_id);
 			WriterUserTrendst wut = new WriterUserTrendst(userMap.get("id").toString(), 8, material_id);
-			wut.setDetail("提交教材申报", "您申报的《"+materialMap.get("material_name").toString()+"》申报表已提交,请耐心等待 \""+returnMap.get("org_name").toString()+"\" 审核。", 0);
+			wut.setDetail("提交教材申报", "您申报的《"+materialMap.get("material_name").toString()+"》申报表已提交,请耐心等待 '"+returnMap.get("org_name").toString()+"' 审核。", 0);
 			personalService.saveUserTrendst(wut);//教材申报提交 生成动态 被覆盖两次了
 		}
 		
@@ -1047,6 +1049,7 @@ public class MaterialDetailController extends BaseController{
 		//书籍信息
 		List<Map<String,Object>> bookList = this.mdService.queryBookById(material_id);
 		StringBuffer bookSelects = new StringBuffer();
+		bookSelects.append("<option value=''>-请选择-</option>");
 		for (Map<String, Object> map : bookList) {
 			bookSelects.append("<option value='"+map.get("id")+"'>"+map.get("textbook_name")+"</option>");
 		}
