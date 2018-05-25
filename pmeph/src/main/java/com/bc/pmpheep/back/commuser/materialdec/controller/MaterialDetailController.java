@@ -677,7 +677,7 @@ public class MaterialDetailController extends BaseController{
 			//TODO 教材申报提交 生成动态
 			//Map<String, Object> materialMap = this.mdService.queryMaterialbyId(material_id);
 			WriterUserTrendst wut = new WriterUserTrendst(userMap.get("id").toString(), 8, material_id);
-			wut.setDetail("提交教材申报", "您申报的《"+materialMap.get("material_name").toString()+"》申报表已提交,请耐心等待 \""+returnMap.get("org_name").toString()+"\" 审核。", 0);
+			wut.setDetail("提交教材申报", "您申报的《"+materialMap.get("material_name").toString()+"》申报表已提交,请耐心等待 '"+returnMap.get("org_name").toString()+"' 审核。", 0);
 			personalService.saveUserTrendst(wut);//教材申报提交 生成动态 被覆盖两次了
 		}
 		
