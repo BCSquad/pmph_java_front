@@ -141,7 +141,7 @@
 						</tr>
 						<tr>
 							<td><span class="btbs">*</span><span>工作单位：</span>
-								<input class="cg_input" name="org_name" value="${userMap.workplace}" id="org_name"  maxlength="60"/></td>
+								<input class="cg_input" name="org_name" value="${userMap.workplace}" id="org_name"  maxlength="36"/></td>
 							<td><span class="btbs">*</span><span>职&emsp;&emsp;务：</span>
 								<input class="cg_input" name="position" value="${userMap.position}" id="position"  maxlength="36"/></td>
 							<td><span class="btbs">*</span><span>职&emsp;&emsp;称：</span>
