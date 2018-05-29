@@ -887,7 +887,7 @@ function del_tr(trId){
 
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type){
-    if(checkEqual("textbook_id") && checkBoxInfo()){
+  //  if(checkEqual("textbook_id") && checkBoxInfo()){
         if(type == '2') { //表示暂存
             //避免重复点击
             document.getElementById('buzc').onclick=function(){window.message.warning("请不要重复点击");};
@@ -906,7 +906,7 @@ function buttAdd(type){
             });
         }else {  //表示提交
             checkLb();
-            if (checkNull(jsonStr) && checkExtra()) {
+            if (checkEqual("textbook_id") && checkBoxInfo() && checkNull(jsonStr) && checkExtra()) {
                /* document.getElementById('buzc').onclick = function () {
                     window.message.warning("请不要重复点击");
                 };
@@ -928,7 +928,7 @@ function buttAdd(type){
                 });
             }
         }
-    }
+  //  }
 }
 
 //放弃
@@ -1229,23 +1229,28 @@ function getNowFormatDate() {
 
 //判断checkbox是否被选中
 function checkBoxInfo() {
-    var a = $("input[name='zw_1']:checked").val();
-    if(a == undefined){
-        window.message.warning("请选择申报的职位！");
-        return false;
+    var els =document.getElementsByName("preset_position");
+    for (var i = 0, j = els.length; i < j; i++){
+        var a = $("input[name='"+els[i].value+"']:checked").val();
+        if(a == undefined){
+            window.message.warning("请选择申报的职位！");
+            return false;
+        }
     }
     return true;
 }
 
 //判断radio是否被选中
 function radioInfo(){
-  //  alert(document.getElementById("zw_1").checked);
-    var list= $('input:radio[name="zw_1"]:checked').val();
-    if(list==null){
-        window.message.warning("请选择申报的职位！");
-        return false;
-    }else{
-        return true;
-
+    //  alert(document.getElementById("zw_1").checked);
+    var els =document.getElementsByName("preset_position");
+    for (var i = 0, j = els.length; i < j; i++) {
+        var zw = els[i].value;
+        var list = $('input:radio[name='+zw+']:checked').val();
+        if (list == null) {
+            window.message.warning("请选择申报的职位！");
+            return false;
+        }
     }
+    return true;
 }
