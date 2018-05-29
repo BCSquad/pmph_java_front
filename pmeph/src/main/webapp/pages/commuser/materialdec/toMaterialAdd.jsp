@@ -141,7 +141,7 @@
 						</tr>
 						<tr>
 							<td><span class="btbs">*</span><span>工作单位：</span>
-								<input class="cg_input" name="org_name" value="${userMap.workplace}" id="org_name"  maxlength="60"/></td>
+								<input class="cg_input" name="org_name" value="${userMap.workplace}" id="org_name"  maxlength="36"/></td>
 							<td><span class="btbs">*</span><span>职&emsp;&emsp;务：</span>
 								<input class="cg_input" name="position" value="${userMap.position}" id="position"  maxlength="36"/></td>
 							<td><span class="btbs">*</span><span>职&emsp;&emsp;称：</span>
@@ -170,7 +170,7 @@
 									   maxlength="30"/>
 							</td>
 							<td><span>&ensp;传&emsp;&emsp;真：</span>
-								<input class="cg_input" name="fax" value="${userMap.fax}" id="fax" onblur="LengthLimit(this,50)" maxlength="50"/>
+								<input class="cg_input" name="fax" value="${userMap.fax}" id="fax" onblur="LengthLimit(this,20)" maxlength="20"/>
 							</td>
 							<td><span class="btbs">*</span><span>手&emsp;&emsp;机：</span>
 								<input class="cg_input" name="handphone" value="${userMap.handphone}" id="handphone" maxlength="30"/>
