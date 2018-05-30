@@ -74,7 +74,18 @@
                             </div>
                         </div>
                         <div class="downContentEvent">
-                                <span class="timeEventFont">审核了${message.NAME}于<fmt:formatDate pattern="yyyy年MM月dd日" value="${message.gmt_create}" />提交的${message.CONTENT}</span>
+                            <c:choose>
+                                <c:when test="${message.PROGRESS==3}">
+                                    <span class="timeEventFont">审核通过了${message.NAME}于<fmt:formatDate pattern="yyyy年MM月dd日" value="${message.gmt_create}" />提交的${message.CONTENT}</span>
+                                </c:when>
+                                <c:when test="${message.PROGRESS==2}">
+                                    <span class="timeEventFont">退回了${message.NAME}于<fmt:formatDate pattern="yyyy年MM月dd日" value="${message.gmt_create}" />提交的${message.CONTENT}</span>
+                                </c:when>
+                                <c:otherwise>
+                                    <span class="timeEventFont">审核了${message.NAME}于<fmt:formatDate pattern="yyyy年MM月dd日" value="${message.gmt_create}" />提交的${message.CONTENT}</span>
+                                </c:otherwise>
+                            </c:choose>
+
                         </div>
                     </div>
                     <div class="rightButtonEvent">
