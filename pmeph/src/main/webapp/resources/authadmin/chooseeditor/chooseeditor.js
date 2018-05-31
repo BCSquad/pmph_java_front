@@ -233,9 +233,32 @@ function selectRubmit(){
 							$("#selectedNumIds").val(json.selectedNumIds);
 							if (json.msg!=null) {
 								window.message.success(json.msg);
-								setTimeout(function(){
-									window.location.href=contextpath+'chooseEditor/toPage.action?textBookId='+$("#textBookId").val();
-								}, 800);
+								
+								var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
+								var textBookId = $("#textBookId").val();
+								var logUserId= $("#logUserId").val();
+								
+		                    	$.ajax({
+		                            type: 'get',
+		                            url: exportWordBaseUrl + '/frontWxMsg/firstEditorChooseSubmit/'+textBookId+"/"+logUserId,
+		                            dataType: 'jsonp',
+		                            success:function(wxResult){
+		                            	if(wxResult){
+		                            		window.message.success("微信消息发送成功");
+		                            		setTimeout(function(){
+		    									window.location.href=contextpath+'chooseEditor/toPage.action?textBookId='+$("#textBookId").val();
+		    								}, 800);
+		                            	}
+		                            },
+		                            error:function(XMLHttpRequest, textStatus){
+		                            	setTimeout(function(){
+											window.location.href=contextpath+'chooseEditor/toPage.action?textBookId='+$("#textBookId").val();
+										}, 800);
+		                            }
+		                            });
+								
+								
+								
 							}
 						}
 					});
