@@ -11,6 +11,13 @@
     float: left;
 }
 
+.book-name-span{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
 .selectDiv {
     height: 100%;
     float: right;
