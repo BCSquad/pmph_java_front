@@ -61,7 +61,7 @@
 			LEFT JOIN pmph_user c on c.id = b.user_id
 			LEFT JOIN writer_user d on d.id = b.user_id
 		where a.group_id = #{groupId} and a.gmt_create >= (select gmt_create from
-		pmph_group_member where user_id = #{thisId} and group_id = #{groupId})
+		pmph_group_member where user_id = #{thisId} and group_id = #{groupId} and is_writer = 1)
 		ORDER BY a.gmt_create desc
 		limit #{start} , #{pageSize}
     </select>
@@ -141,8 +141,8 @@
     <select id="getMessages"
         resultType="GroupMessageVO">
         SELECT * FROM pmph_group_message 
-        WHERE  group_id = #{groupId} and gmt_create >= (select max(gmt_create) gmt_create from
-		pmph_group_member where user_id = #{thisId} and group_id = #{groupId}) ORDER BY gmt_create DESC
+        WHERE  group_id = #{groupId} and gmt_create >= (select gmt_create from
+		pmph_group_member where user_id = #{thisId} and group_id = #{groupId} and is_writer = 1) ORDER BY gmt_create DESC
     </select>
 
     <!-- 查询小组总文件数目 -->

@@ -34,18 +34,18 @@
 				AND
 				cc.category_id=3
 				AND cc.auth_status =2
-				AND cc.is_published =1
-		        
-		    		and (
-		    		<if test="id != null and id != '' ">
-		    			(wu.id=#{id} and m.is_public = 0 and wu.progress =3 and cc.is_material_entry=1 and m.is_deleted=0)or
-		    		</if>
-		    		    (m.is_public = 1 and cc.is_material_entry=1 and m.is_deleted=0) or 
-		    		cc.is_material_entry = 0 )
-		group by cc.id
-		)t
+	  AND cc.is_published =1
+
+	  and (
+	  <if test="id != null and id != '' ">
+		  (wu.id=#{id} and m.is_public = 0 and wu.progress =3 and cc.is_material_entry=1 and m.is_deleted=0)or
+	  </if>
+	  (m.is_public = 1 and cc.is_material_entry=1 and m.is_deleted=0) or
+	  cc.is_material_entry = 0 )
+	  group by cc.id
+	  )t
 		ORDER BY
-				   t.sortByEntryBtnOn desc , t.deadline DESC ,t.auth_date desc
+				   t.sortByEntryBtnOn desc , t.auth_date DESC ,t.deadline desc
 		limit 0,3
   </select>
   
