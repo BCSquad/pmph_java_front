@@ -89,7 +89,7 @@
                         </div>
                     </div>
                     <div class="rightButtonEvent">
-                        <div class="buttonDiv" onclick="detail('${message.TYPE}',${message.AUDITID})">
+                        <div class="buttonDiv" onclick="detail('${message.TYPE}',${message.AUDITID},${message.declaration_id})">
                             	查看
                         </div>
                     </div>
@@ -198,13 +198,14 @@
 		window.location.href="${ctx}/schedule/eventRecord.action";
 	}
 	
-	function detail(type,auditId){
+	function detail(type,auditId,declaration_id){
 		 if(type=='A'){
-			window.location.href="${ctx}/dataaudit/toPage.action?material_id="+auditId;
+			<%--window.location.href="${ctx}/dataaudit/toPage.action?material_id="+auditId;--%>
+             window.location.href = contextpath + 'dataaudit/toMaterialAudit.action?material_id=' + auditId + '&declaration_id=' + declaration_id;
 		}else if(type='B'){
     		//跳转教师资格认证页面
-			window.location.href="${ctx}/teacherauth/toPage.action?";	
-		} 
+			window.location.href="${ctx}/teacherauth/toPage.action?";
+		}
 	}
 
    /* function checkAuthen(type,auditId){
