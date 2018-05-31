@@ -72,6 +72,7 @@ public class ChooseEditorController extends BaseController {
 		mv.addObject("selectedIds", selectMap.get("selectedIds"));
 		mv.addObject("selectedNumIds", selectMap.get("selectedNumIds"));
 		mv.addObject("logUserName",logUserName);
+		mv.addObject("logUserId",logUserId);
 		mv.addObject("planning_editor",textBook.get("realname")!=null?textBook.get("realname").toString():"待分配");
 		mv.addObject("textBookName",textBookName);
 		mv.addObject("OrgList",OrgList);
