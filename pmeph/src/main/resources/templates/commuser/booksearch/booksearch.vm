@@ -14,10 +14,10 @@
 	        <div class="upDiv">
 	            <div class="upLeft">
 	                <div class="bookName">
-	                    <a class="not-like-an-a" target="_blank" href="$!{contextpath}readdetail/todetail.action?id=$!{c.bookId}"><span class="book-name-span">$!{c.bookname}</span></a>
+	                    <a class="not-like-an-a" target="_blank" href="$!{contextpath}readdetail/todetail.action?id=$!{c.bookId}"><div class="book-name-span">$!{c.bookname}</div></a>
 	                </div>
 	                <div class="name">
-	                    <span class="book-name-span">$!{c.author} 丨 $!{c.publisher} 丨 $!{c.isbn}</span>
+	                    <div class="book-name-span">$!{c.author} 丨 $!{c.publisher} 丨 $!{c.isbn}</div>
 	                </div>
 	
 	            </div>
