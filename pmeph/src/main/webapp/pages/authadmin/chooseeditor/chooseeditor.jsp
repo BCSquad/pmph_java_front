@@ -41,6 +41,8 @@ String contextpath=request.getContextPath();
 <input type="hidden" id="is_locked" value="${is_locked }">
 <input type="hidden" id="is_force_end" value="${is_force_end }">
 <input type="hidden" id="is_published" value="${is_published }">
+<input type="hidden" id="logUserId" value="${logUserId }">
+<input type="hidden" id="logUserName" value="${logUserName }">
 
 <input type="hidden" id="isFirstEditorLogIn" value="${isFirstEditorLogIn }">
 <input type="hidden" id="is_digital_editor_optional" value="${is_digital_editor_optional }">
