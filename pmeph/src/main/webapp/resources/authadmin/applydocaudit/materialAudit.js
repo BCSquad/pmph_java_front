@@ -109,7 +109,25 @@ function toAudit(id,type){
 		    success: function(msg) {
 			    if(msg.msg=='OK'){
 			    	 message.success("成功！");
-			    	 toMain();
+			    	 if(type=='3'){
+                    	var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
+                    	$.ajax({
+                            type: 'get',
+                            url: exportWordBaseUrl + '/frontWxMsg/projectEditorPleaseAdit/'+id,
+                            dataType: 'jsonp',
+                            success:function(wxResult){
+                            	if(wxResult){
+                            		window.message.success("微信消息发送成功");
+                            	}
+                            	toMain();
+                            },
+                            error:function(XMLHttpRequest, textStatus){
+                            	toMain();
+                            }
+                            });
+                    	
+			    	 }
+			    	 
 			    }else{
 			    	message.success("失败了！");
 			    }
