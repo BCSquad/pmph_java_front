@@ -169,7 +169,7 @@
 							<td><span><span class="btbs1">*</span>原出版者：&emsp;&emsp;</span>
 								<input class="cg_input" name="original_publisher" id="original_publisher" placeholder="" value="" maxlength="100"/>
 							</td>
-							<td><span><span class="btbs1">*</span>出版年代/版次：</span>
+							<td><span><span class="btbs1">*</span>出版年代版次：</span>
 								<input class="cg_input" name="edition" id="edition" placeholder="" value="" maxlength="20"/>
 							</td>
 						</tr>
@@ -379,7 +379,7 @@
 						</thead>
 						<tbody>
 						<tr id="sbbz_1">
-							<td><input class="sb_input" style="width: 120px;" id="write_realname" name="write_realname"  maxlength="40" value=""/></td>
+							<td><input class="sb_input" style="width: 120px;" id="write_realname" name="write_realname" placeholder="姓名" maxlength="40" value=""/></td>
 							<td>
 								<select id="write_sex" name="write_sex">
 									<option value="" >-请选择-</option>

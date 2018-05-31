@@ -75,7 +75,7 @@
     width: 100px;
     height: 33px;
     background-color: #f9be3e;
-    
+    cursor: pointer;
   	margin-right:10px;
     border-radius: 1px;
 
@@ -90,7 +90,7 @@
     background-color: #b0120e;
    margin-right:10px;
     border-radius: 1px;
-
+    cursor: pointer;
     color: #ffffff;
     font-size: 14px;
     border:none;

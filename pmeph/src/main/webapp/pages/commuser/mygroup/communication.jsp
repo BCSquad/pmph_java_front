@@ -60,6 +60,7 @@
                     <input id="groupId" type="hidden" value="${thisGroup.id}"/>
                     <input id="userId" type="hidden" value="${userId}"/>
                     <input id="userName" type="hidden" value="${userName}"/>
+                    <input id="admin" type="hidden" value="${admin}"/>
                     <div class="top_content2">
                         <div class="top_content22">
                             <img src="${ctx}/statics/image/zjyh.png">
@@ -67,17 +68,7 @@
                         <text>${role}</text>
                         <span id='quitGroup' style="cursor:pointer" >退出小组</span>
                     </div>
-                    <div style="clear:both;">
-                        <div class="top_content3">
-                            <div class="top_content33">
-                                <img src="${ctx}/statics/image/scz.png"/>
-                            </div>
-                            <span id="scwj1" class="scmsg">上传文件</span>
 
-                        </div>
-                        <%--<div  id="process_div" style="display:none;float:left;margin-left:10px;width: 100px;height: 10px;border-radius: 4px;border: 2px solid #f2f2f2;"><span id="uploadFileTips" style="color: #999;height: 100%;border-radius: 4px;background-color: #0bc700;display:block;"></span></div>--%>
-
-                    </div>
 
                     <%--<div class="flex-center" id="process" style="display: inline;margin-left: 30px;">--%>
                             <%--<h3>文件上传中，请稍等...</h3>--%>
@@ -100,6 +91,7 @@
                         <br/>
                         <text class="top_tj1_text2">文件分享</text>
                     </div>
+
                 </div>
             </div>
 
@@ -148,7 +140,17 @@
                     <div class='search-wrapper'>
                     	<input type="text" placeholder="请输入文件名" id= "fileName" class="file_input"/>
                     	<img class="search" src="${ctx}/statics/image/sx1.png"/>
-                    </div>	
+                    </div>
+                    <div style="clear:both;position: relative;margin-left: 500px;margin-top: -50px;margin-bottom: 40px">
+                        <div class="top_content3" id="scwj1">
+                            <div class="top_content33">
+                                <img src="${ctx}/statics/image/scz.png"/>
+                            </div>
+                            <span  class="scmsg">上传文件</span>
+
+                        </div>
+                        <%--<div  id="process_div" style="display:none;float:left;margin-left:10px;width: 100px;height: 10px;border-radius: 4px;border: 2px solid #f2f2f2;"><span id="uploadFileTips" style="color: #999;height: 100%;border-radius: 4px;background-color: #0bc700;display:block;"></span></div>--%>
+                    </div>
                     <span id ="fileContent"></span>
                     <div id ="fileMore">
                     	<center style="cursor:pointer" >更多...</center>
@@ -160,15 +162,21 @@
 					<div class='search-wrapper'>
                     	<input type="text" placeholder="请输入姓名或名片 " id= "memberSearchName" class="file_input"/>
                     	<img class="searchMember" src="${ctx}/statics/image/sx1.png"/>
+                        <c:if test="${admin==1}">
+                         <div class="delnum" id="removemember" onclick="deletePmphGroupMemberById()">移除成员</div>
+                        </c:if>
                     </div>	
-				
+
 					<table id = "memberTable">
 					<thead>
 						<tr>
 							<th style="width:25%;">成员</th>
 							<th>身份</th>
-							<th style="width:40%;">组内名片</th>
+							<th style="width:35%;">组内名片</th>
 							<th>加入时间</th>
+                            <c:if test="${admin==1}">
+                              <th>操作</th>
+                            </c:if>
 						</tr>
 					</thead>
 					<tbody id="memberContent">

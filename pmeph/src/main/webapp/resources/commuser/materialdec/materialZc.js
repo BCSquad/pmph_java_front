@@ -952,6 +952,20 @@ function commit(type){
             success: function (json) {
                 if (json.msg == 'OK') {
                     window.message.success("操作成功,正在跳转页面");
+                    if (json.org_name=="人民卫生出版社") {
+                    	var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
+                    	$.ajax({
+                            type: 'get',
+                            url: exportWordBaseUrl + '/frontWxMsg/projectEditorPleaseAdit/'+json.declaration_id,
+                            dataType: 'jsonp',
+                            success:function(wxResult){
+                            	if(wxResult){
+                            		window.message.success("微信消息发送成功");
+                            	}
+                            	window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
+                            }
+                            });
+					}
                     window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
                 }
             }

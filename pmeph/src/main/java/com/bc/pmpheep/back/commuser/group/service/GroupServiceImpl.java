@@ -500,4 +500,17 @@ public class GroupServiceImpl implements GroupService {
 		int count = groupDao.updateDisplayName(paraMap);
 		return count;
 	}
+
+    @Override
+    public String deletePmphGroupMemberById(String id) {
+        String returncode ="OK";
+        int count=groupDao.deletePmphGroupMemberById(id);
+        return returncode;
+    }
+
+    @Override
+    public Map<String, Object> queryAdmin(String user_id, Long group_id) {
+        Map<String, Object> map=groupDao.queryAdmin(user_id,group_id);
+        return map;
+    }
 }

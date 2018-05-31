@@ -365,9 +365,9 @@
 						<c:if test="${empty persteaList[0]}">
 							<tr>
 								<td>
-									<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'"  z-index="100"  name="jx_kssj" max="'$#jx_jssj'"  id="jx_kssj" value="" style="width: 80px;"/>
+									<input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'" z-index="100"  name="jx_kssj" max="'$#jx_jssj'" id="jx_kssj" value="" style="width: 80px;"/>
 									-
-									<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="jx_jssj" min="'#jx_kssj'" id="jx_jssj" value="" style="width: 80px;"/>
+									<input class="cg_input" placeholder="结束时间" calendar format="'yyyy-mm-dd'"  z-index="100" name="jx_jssj" min="'$#jx_kssj'" id="jx_jssj" value="" style="width: 80px;"/>
 								</td>
 								<td><input class="cg_input"  maxlength="100" style="width: 320px" id="jx_school_name" name="jx_school_name" value="" placeholder="学校名称"/></td>
 								<td><input class="cg_input" maxlength="150" style="width: 290px" id="jx_subject" name="jx_subject" value="" placeholder="教学科目"/></td>

@@ -278,4 +278,19 @@ public interface GroupService {
 	 * @return
 	 */
 	int updateDisplayName(Map<String, Object> paraMap);
+
+	/**
+	 * 根据ID删除成员
+	 * @param id
+	 * @return
+	 */
+	String deletePmphGroupMemberById(@Param("id")String id);
+
+	/**
+	 * 查询当前用户在小组中是否是管理员
+	 * @param user_id
+	 * @param group_id
+	 * @return
+	 */
+	Map<String,Object> queryAdmin(String user_id,Long group_id);
 }
