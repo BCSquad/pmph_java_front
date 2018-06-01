@@ -1275,5 +1275,8 @@ public class MaterialDetailController extends BaseController{
 		}
 		return mv;
 	}
-	
+
+	/**
+	 * 跳转到个人资料库
+	 */
 }
