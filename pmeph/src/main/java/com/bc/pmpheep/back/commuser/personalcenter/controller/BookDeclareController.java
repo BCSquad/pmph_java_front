@@ -226,15 +226,18 @@ public class BookDeclareController extends BaseController {
 		}else{
 			returnMap = this.bdecService.updateBookDeclare(similarList, twriteList, topicMap, extraMap,topic_id);
 		}
+		Map<String, Object> userMap = this.getUserInfo();
 		//TODO 选题申报 提交 时生成动态
 		if(returnMap.get("msg").toString().equals("OK")) {
 			if ("1".equals(stype)) {
-				Map<String, Object> userMap = this.getUserInfo();
+				
 				WriterUserTrendst wut = new WriterUserTrendst(getUserInfo().get("id").toString(), 9, (topic_id != null && topic_id!="")?topic_id:topicMap.get("table_trendst_id").toString());
 				wut.setDetail("提交选题申报", userMap.get("realname").toString() + " 提交了选题申报《" + request.getParameter("bookname").toString() + "》。", 0);
 				personalService.saveUserTrendst(wut);//选题申报 生成动态
 			}
 		}
+		returnMap.put("topic_id", (topic_id != null && topic_id!="")?topic_id:topicMap.get("table_trendst_id").toString());
+		returnMap.put("user_id", userMap.get("id"));
 		return returnMap;
 	}
 
