@@ -799,8 +799,8 @@ function initMember(){
 
                         +'<td>'
                         +(list[i].is_founder?'	<span>创建者</span>':'')
-                        +(list[i].is_admin && !list[i].is_founder?'	<span>管理员</span>':'')
-                        +(!list[i].is_admin && !list[i].is_founder?'	<span>组员</span>':'')
+                        +(list[i].admin && !list[i].is_founder?'	<span>管理员</span>':'')
+                        +(!list[i].admin && !list[i].is_founder?'	<span>组员</span>':'')
                         +'</td>'
 
                         +'<td>'
@@ -812,9 +812,13 @@ function initMember(){
                         +'	<span>'+formatDate(list[i].gmt_create,'yyyy-MM-dd')+'</span>'
                         +'</td>';
                         if($("#admin").val()==1){
-                            html+='<td>'
-                                +'<input type="checkbox" class="checkid" id="'+list[i].id+'">'
-                                +'</td>'
+                            html+='<td>';
+                                if(list[i].admin==1){
+                                    html+='<input type="checkbox" disabled class="checkid" id="'+list[i].id+'">';
+								}else{
+                                    html+='<input type="checkbox" class="checkid" id="'+list[i].id+'">';
+								}
+                                html+='</td>'
                                 +'</tr>"';
 						}
                     $("#memberContent").append(html);
