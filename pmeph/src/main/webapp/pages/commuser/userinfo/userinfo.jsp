@@ -69,7 +69,7 @@
     <div class="sxy-div-content">
         <div style="height:50px;">
             <span style="width:20px;"></span>
-            <span class="sxy-div-menu">个人资料</span>
+            <span class="sxy-div-menu">个人资料</span><span class="sxy-div-menu1"><a onclick="testOne()">个人申报信息</a></span>
         </div>
     </div>
     <div style="height:14px"></div>

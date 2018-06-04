@@ -209,5 +209,9 @@ function check( email_address )
     {
         return false;
     }
+
 }
 
+function testOne(){
+   window.location.href=contextpath+"material/toperInformation.action";
+}
