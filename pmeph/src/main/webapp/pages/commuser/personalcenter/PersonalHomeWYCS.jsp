@@ -722,7 +722,7 @@ request.setAttribute("currentTime",datetime);
 
             <div class="right">
             	<div id="wdxz"><span id="xztb"></span><span class="rlan">加入的小组</span><span
-                        id="qbhy"><a href="${ctx}/group/list.action" class="aright">全部小组>>&nbsp;</a></span>
+                        id="qbhy"><a href="${ctx}/group/list.action" class="aright">${selfLog ==true?'全部小组>>':''}&nbsp;</a></span>
                     <br style="clear: both;"/>
                     <c:if test="${listmygroup == null || listmygroup.size()==0  }">
                 		<div style="padding-top: 10px;">
@@ -731,7 +731,9 @@ request.setAttribute("currentTime",datetime);
                 	</c:if>
                     <ul class="scul">
                         <c:forEach items="${listmygroup}" begin='0' end='8' var="listmyg" varStatus="status">
-                            <a  class="not-like-an-a" href="${ctx}/group/toMyGroup.action?groupId=${listmyg.group_id}">
+							<c:if test="${selfLog ==true}">
+								<a  class="not-like-an-a" href="${ctx}/group/toMyGroup.action?groupId=${listmyg.group_id}">
+						    </c:if>
 	                            <li class="wdxz" title="${listmyg.group_name}">
 	                            	<img src="${ctx}/${listmyg.group_image}" class="xztp">
 	                                <br/>
@@ -747,7 +749,7 @@ request.setAttribute("currentTime",datetime);
                 <span id="hytb"></span> 
                 <span class="rlan">好友</span> 
                 <span id="qbhy">
-                	<a href="${ctx}/myFriend/listMyFriend.action" class="aright">全部好友>>&nbsp;</a>
+                	<a href="${ctx}/myFriend/listMyFriend.action" class="aright">${selfLog ==true?'全部好友>>':''}&nbsp;</a>
                 </span>
                     <br style="clear: both;"/>
                     <c:if test="${listmyfriend == null || listmyfriend.size()==0  }">

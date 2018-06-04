@@ -191,7 +191,28 @@ function buttAdd(type){
                 success: function(json) {
                     if(json.msg=='OK'){
                         window.message.success("添加成功,正在跳转页面");
-                        window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=wycs";
+                        
+                        var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
+                    	$.ajax({
+                            type: 'get',
+                            url: exportWordBaseUrl + '/frontWxMsg/topicSubmit/'+json.topic_id+"/"+json.user_id,
+                            dataType: 'jsonp',
+                            success:function(wxResult){
+                            	if(wxResult){
+                            		window.message.success("微信消息发送成功");
+                            		setTimeout(function(){
+                                        window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=wycs";
+    								}, 800);
+                            	}
+                            },
+                            error:function(XMLHttpRequest, textStatus){
+                            	setTimeout(function(){
+                                    window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=wycs";
+								}, 800);
+                            }
+                            });
+                    	
+                        
                     }
                 }
             });
