@@ -315,6 +315,11 @@ public class HomeServiceImpl implements HomeService {
         return homeDao.queryHotCommentListCount();
     }
 
+    @Override
+    public int querySize(String type) {
+        return homeDao.querySize(type);
+    }
+
     //去掉字符串中的html标签
     public String removeHtml(String str){
         String regEx_html="<[^>]+>"; //定义HTML标签的正则表达式
