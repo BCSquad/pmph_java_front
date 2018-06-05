@@ -380,6 +380,7 @@ LIMIT 0,10
 		buc.is_promote*1 as ispromote,
 		b.bookname,
 		wu.username,
+		wu.nickname,
 		wu.avatar,
 		b.image_url,
 		IFNULL(buc.title, b.bookname) AS hottitle
