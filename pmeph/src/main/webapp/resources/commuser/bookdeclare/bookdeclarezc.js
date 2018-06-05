@@ -137,14 +137,14 @@ function add_similar(){
     var num = fnt();
     var $table = $("#similar");
     var $tr = $("<tr id='similar_"+num+"'>"+
-        "<td><input class='sb_input' style='width: 230px;' id='similar_bookname_"+num+"' name='similar_bookname'  maxlength='40' value=''/></td>"+
-        "<td><input class='sb_input' style='width: 80px;' id='similar_edition_"+num+"' name='similar_edition'  maxlength='2' value='' onkeyup=\"this.value=this.value.replace(/\\D/g,'')\" onafterpaste=\"this.value=this.value.replace(/\\D/g,'')\"/></td>"+
-        "<td><input class='sb_input' style='width: 80px;' id='similar_author_"+num+"' name='similar_author'  maxlength='100' value=''/></td>"+
-        "<td><input class='sb_input' style='width: 80px;' id='similar_booksize_"+num+"' name='similar_booksize'  maxlength='20' value=''/></td>"+
-        "<td><input class='sb_input' style='width: 160px;' id='similar_publisher_"+num+"' name='similar_publisher'  maxlength='100' value=''/></td>"+
-        "<td><input class='sb_input' style='width: 80px;' id='similar_print_number_"+num+"' name='similar_print_number'  maxlength='20' value=''/></td>"+
-        "<td><input class='sb_input' style='width: 80px;' id='similar_price_"+num+"' name='similar_price'  maxlength='20' value=''/></td>"+
-        "<td><input class='sb_input' style='width: 130px;' id='similar_publish_date_"+num+"' name='similar_publish_date'  calendar format=\"'yyyy-mm-dd'\" value=''/></td>"+
+        "<td><input class='sb_input' style='width: 230px;' placeholder=\"书名\" id='similar_bookname_"+num+"' name='similar_bookname'  maxlength='40' value=''/></td>"+
+        "<td><input class='sb_input' style='width: 80px;' placeholder=\"版次\" id='similar_edition_"+num+"' name='similar_edition'  maxlength='2' value='' onkeyup=\"this.value=this.value.replace(/\\D/g,'')\" onafterpaste=\"this.value=this.value.replace(/\\D/g,'')\"/></td>"+
+        "<td><input class='sb_input' style='width: 80px;' placeholder=\"作者\" id='similar_author_"+num+"' name='similar_author'  maxlength='100' value=''/></td>"+
+        "<td><input class='sb_input' style='width: 80px;' placeholder=\"开本\" id='similar_booksize_"+num+"' name='similar_booksize'  maxlength='20' value=''/></td>"+
+        "<td><input class='sb_input' style='width: 160px;' placeholder=\"出版单位\" id='similar_publisher_"+num+"' name='similar_publisher'  maxlength='100' value=''/></td>"+
+        "<td><input class='sb_input' style='width: 80px;' placeholder=\"印数\" id='similar_print_number_"+num+"' name='similar_print_number'  maxlength='20' value=''/></td>"+
+        "<td><input class='sb_input' style='width: 80px;' placeholder=\"定价\" id='similar_price_"+num+"' name='similar_price'  maxlength='20' value=''/></td>"+
+        "<td><input class='sb_input' style='width: 130px;' placeholder=\"出版时间\" id='similar_publish_date_"+num+"' name='similar_publish_date'  calendar format=\"'yyyy-mm-dd'\" value=''/></td>"+
         "<input type='hidden' name='checkbzqk' value='similar_bookname_"+num+",similar_edition_"+num+",similar_author_"+num+",similar_booksize_"+num+",similar_publisher_"+num+",similar_publish_date_"+num+"'/>" +
         "<td><div class='add_div'><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('similar_"+num+"')\"></div></td>"+
         "</tr>");
@@ -191,7 +191,28 @@ function buttAdd(type){
                 success: function(json) {
                     if(json.msg=='OK'){
                         window.message.success("添加成功,正在跳转页面");
-                        window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=wycs";
+                        
+                        var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
+                    	$.ajax({
+                            type: 'get',
+                            url: exportWordBaseUrl + '/frontWxMsg/topicSubmit/'+json.topic_id+"/"+json.user_id,
+                            dataType: 'jsonp',
+                            success:function(wxResult){
+                            	if(wxResult){
+                            		window.message.success("微信消息发送成功");
+                            		setTimeout(function(){
+                                        window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=wycs";
+    								}, 800);
+                            	}
+                            },
+                            error:function(XMLHttpRequest, textStatus){
+                            	setTimeout(function(){
+                                    window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=wycs";
+								}, 800);
+                            }
+                            });
+                    	
+                        
                     }
                 }
             });

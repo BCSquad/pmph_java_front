@@ -4,6 +4,7 @@
 $(function () {
 
     var $menu = $("<div class='float-menu '>" +
+        "<a class='item blue' style='font-size: 14px;' onmouseover='showEWM()' onmouseout='hideEWM()'>微信公众号</a>" +
         "<a class='item' href='" + contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb'>教材申报</a>" +
         "<a class='item orange' href='" + contextpath + "bookdeclare/toBookdeclareAdd.action'>我要出书</a>" +
         "<a class='item blue' href='" + contextpath + "group/list.action'>交互服务</a>" +

@@ -1279,4 +1279,90 @@ public class MaterialDetailController extends BaseController{
 	/**
 	 * 跳转到个人资料库
 	 */
+    @RequestMapping("toperInformation")
+    public ModelAndView toperInformation(HttpServletRequest request,
+                                         HttpServletResponse response){
+        ModelAndView mav = new ModelAndView("commuser/materialdec/toPerInfomation");
+        //3.作家学习经历表
+        List<Map<String,Object>> perstuList = new ArrayList<Map<String,Object>>();
+        //4.作家工作经历表
+        List<Map<String,Object>> perworkList = new ArrayList<Map<String,Object>>();
+        //5.作家教学经历表
+        List<Map<String,Object>> persteaList = new ArrayList<Map<String,Object>>();
+        //6.作家兼职学术表
+        List<Map<String,Object>> perzjxsList = new ArrayList<Map<String,Object>>();
+        //7.作家上套教材参编情况表
+        List<Map<String,Object>> perjcbjList = new ArrayList<Map<String,Object>>();
+        //8.作家精品课程建设情况表
+        List<Map<String,Object>> pergjkcjsList = new ArrayList<Map<String,Object>>();
+        //9.作家主编国家级规划教材情况表
+        List<Map<String,Object>> pergjghjcList = new ArrayList<Map<String,Object>>();
+        //10.其他社教材编写情况
+        List<Map<String,Object>> perjcbxList = new ArrayList<Map<String,Object>>();
+        //11.作家科研情况表
+        List<Map<String,Object>> perzjkyList = new ArrayList<Map<String,Object>>();
+        //14.主编学术专著情况表
+        List<Map<String,Object>> permonographList = new ArrayList<Map<String,Object>>();
+        //15.出版行业获奖情况表
+        List<Map<String,Object>> perpublishList = new ArrayList<Map<String,Object>>();
+        //16.SCI论文投稿及影响因子情况表
+        List<Map<String,Object>> persciList = new ArrayList<Map<String,Object>>();
+        //17.临床医学获奖情况表
+        List<Map<String,Object>> perclinicalList = new ArrayList<Map<String,Object>>();
+        //18.学术荣誉授予情况表
+        List<Map<String,Object>> peracadeList = new ArrayList<Map<String,Object>>();
+        //19.人卫社教材编写情况表
+        List<Map<String,Object>> perpmphList = new ArrayList<Map<String,Object>>();
+
+        Map<String,Object> queryMap = new HashMap<String,Object>();
+        //查询个人信息库信息
+        //个人资料
+        Map<String,Object> userinfo =  this.getUserInfo();
+        Map<String,Object> userMap =  this.mdService.queryUserInfo(MapUtils.getString(userinfo,"id",""));
+        for (Map.Entry<String, Object> entry : userMap.entrySet()) {
+            String key = entry.getKey().toString();
+            String value = entry.getValue().toString();
+            if(value.equals("-")){
+                userMap.put(key,"");
+            }
+        }
+        queryMap.put("user_id",userMap.get("id"));
+        //个人资料库信息
+        perstuList = this.perService.queryPerStu(queryMap);
+        perworkList= this.perService.queryPerWork(queryMap);
+        persteaList=this.perService.queryPerStea(queryMap);
+        perzjxsList=this.perService.queryPerZjxs(queryMap);
+        perjcbjList=this.perService.queryPerJcbj(queryMap);
+        pergjkcjsList=this.perService.queryPerGjkcjs(queryMap);
+        pergjghjcList=this.perService.queryPerGjghjc(queryMap);
+        perjcbxList=this.perService.queryqtPerJcbx(queryMap);
+        perzjkyList=this.perService.queryPerZjkyqk(queryMap);
+        permonographList=this.perService.queryPerMonograph(queryMap);
+        perpublishList=this.perService.queryPerPublish(queryMap);
+        persciList=this.perService.queryPerSci(queryMap);
+        perclinicalList=this.perService.queryPerClinicalreward(queryMap);
+        peracadeList=this.perService.queryPerAcadereward(queryMap);
+        perpmphList=this.perService.rwsjcPerList(queryMap);
+
+    //    mav.addObject("zjkzxxList", zjkzxxList);
+    //    mav.addObject("material_id", materialMap.get("id"));
+        mav.addObject("userMap",userMap);
+        mav.addObject("perstuList",perstuList);
+        mav.addObject("perstuList",perstuList);
+        mav.addObject("perworkList",perworkList);
+        mav.addObject("persteaList",persteaList);
+        mav.addObject("perzjxsList",perzjxsList);
+        mav.addObject("perjcbjList",perjcbjList);
+        mav.addObject("pergjkcjsList",pergjkcjsList);
+        mav.addObject("pergjghjcList",pergjghjcList);
+        mav.addObject("perjcbxList",perjcbxList);
+        mav.addObject("perzjkyList",perzjkyList);
+        mav.addObject("permonographList",permonographList);
+        mav.addObject("perpublishList",perpublishList);
+        mav.addObject("perclinicalList",perclinicalList);
+        mav.addObject("peracadeList",peracadeList);
+        mav.addObject("persciList",persciList);
+        mav.addObject("perpmphList",perpmphList);
+        return mav;
+    }
 }

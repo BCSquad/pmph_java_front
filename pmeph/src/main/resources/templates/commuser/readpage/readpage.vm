@@ -1,4 +1,4 @@
-<div class="item" onclick="openUrl('$!{id}')">
+<div class="item newbook" onclick="window.open(contextpath+'readdetail/todetail.action?id=$!{id}')">
     <div class="ir_01"><img src="$!{img}"/></div>
     <div class="ir_02" title="$!{bookname}"><span>$!{bookname}</span></div>
     <div class="ir_03" title="$!{author}"><span>$!{author}</span></div>

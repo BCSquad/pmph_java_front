@@ -707,6 +707,11 @@ $(function () {
                 });
             }
         }
-
     });
+    setTimeout(function () {
+        $("input[calendar]").each(function (i) {
+            $(this).trigger('timeChange');
+        })
+    },0)
+
 })
