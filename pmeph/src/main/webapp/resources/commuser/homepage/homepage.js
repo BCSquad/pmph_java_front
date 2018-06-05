@@ -32,6 +32,9 @@ $(function() {
 		}
 	}
 
+	//查询新书推荐，默认显示第一类
+    searchXstjBook($("#typeid").val());
+
 });
 // 下一页
 function on(state) {
@@ -61,6 +64,29 @@ function on(state) {
 			$("#before").html(json.thisrows);
 		}
 	});
+}
+
+//新书推荐
+function searchXstjBook(typeid) {
+    $(".new").removeClass("active");
+    $("#new"+typeid).addClass("active");
+    $.ajax({
+        type: 'post',
+        url: contextpath + 'readpage/searchXstjBook.action?type=' + typeid,
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+            if(Empty(json.pagebook)){
+                $("#JKFYDiv_0").html('<div class="no-more-book">\n' +
+                    '                   <img src="'+contextpath+'statics/image/aaa4.png'+'">\n' +
+                    '                   <span>木有内容呀~~</span>\n' +
+                    '               \t</div>')
+            }else{
+                $("#JKFYDiv_0").html(json.pagebook);
+            }
+
+        }
+    });
 }
 
 // 书籍分类
