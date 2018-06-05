@@ -440,14 +440,14 @@
 						</thead>
 						<tbody>
 						<tr id="sbbz_2">
-							<td><input class="sb_input" style="width: 230px;" id="similar_bookname" name="similar_bookname"  maxlength="40" value=""/></td>
-							<td><input class="sb_input" style="width: 80px;" id="similar_edition" name="similar_edition"  maxlength="2" value="" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/></td>
-							<td><input class="sb_input" style="width: 80px;" id="similar_author" name="similar_author"  maxlength="100" value=""/></td>
-							<td><input class="sb_input" style="width: 80px;" id="similar_booksize" name="similar_booksize"  maxlength="20" value=""/></td>
-							<td><input class="sb_input" style="width: 160px;" id="similar_publisher" name="similar_publisher"  maxlength="100" value=""/></td>
-							<td><input class="sb_input" style="width: 80px;" id="similar_print_number" name="similar_print_number"  maxlength="20" value=""/></td>
-							<td><input class="sb_input" style="width: 80px;" id="similar_price" name="similar_price"  maxlength="20" value=""/></td>
-							<td><input class="sb_input" style="width: 130px;" id="similar_publish_date" name="similar_publish_date"  calendar format="'yyyy-mm-dd'" value=""/></td>
+							<td><input class="sb_input" style="width: 230px;" id="similar_bookname" placeholder="书名" name="similar_bookname"  maxlength="40" value=""/></td>
+							<td><input class="sb_input" style="width: 80px;" id="similar_edition" placeholder="版次" name="similar_edition"  maxlength="2" value="" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/></td>
+							<td><input class="sb_input" style="width: 80px;" id="similar_author" placeholder="作者" name="similar_author"  maxlength="100" value=""/></td>
+							<td><input class="sb_input" style="width: 80px;" id="similar_booksize" placeholder="开本" name="similar_booksize"  maxlength="20" value=""/></td>
+							<td><input class="sb_input" style="width: 160px;" id="similar_publisher" placeholder="出版单位" name="similar_publisher"  maxlength="100" value=""/></td>
+							<td><input class="sb_input" style="width: 80px;" id="similar_print_number" placeholder="印数" name="similar_print_number"  maxlength="20" value=""/></td>
+							<td><input class="sb_input" style="width: 80px;" id="similar_price" name="similar_price" placeholder="定价"  maxlength="20" value=""/></td>
+							<td><input class="sb_input" style="width: 130px;" id="similar_publish_date" placeholder="出版时间" name="similar_publish_date"  calendar format="'yyyy-mm-dd'" value=""/></td>
 							<input type="hidden" name="checkbzqk" value="similar_bookname,similar_edition,similar_author,similar_publisher,similar_print_number,similar_price,similar_publish_date"/>
 							<td><div class="add_div"><img class="add_img" src="${ctx}/statics/image/del.png" onclick="del_tr('sbbz_2')"></div></td>
 						</tr>

@@ -692,6 +692,27 @@ function correction() {
                             $("#content").val(null);
                             $("#upname").html('未选择任何文件!');
                             $("#upload_status").val(null);
+                            
+                            var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
+                            var bookId = $("#book_id").val();
+                            var userId = $("#userid").val();
+                            $.ajax({
+                                type: 'get',
+                                url: exportWordBaseUrl + '/frontWxMsg/bookError/'+bookId+"/"+userId,
+                                dataType: 'jsonp',
+                                success:function(wxResult){
+                                	if(wxResult){
+                                		window.message.success("微信消息发送成功");
+                                		
+                                	}
+                                },
+                                error:function(XMLHttpRequest, textStatus){
+                                	
+                                }
+                                });
+                            
+                            
+                            
                         } else {
                             window.message.info("错误，请填写完所有内容！");
                         }
