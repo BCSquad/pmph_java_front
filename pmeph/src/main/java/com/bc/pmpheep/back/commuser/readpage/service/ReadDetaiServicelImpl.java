@@ -62,7 +62,7 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 
 		}else {
 			map.put("code","no");
-			map.put("image_url", RouteUtil.bookAvatar(map.get("image_url")));
+			//map.put("image_url", RouteUtil.bookAvatar(map.get("image_url")));
 		}
 		return map;
 	}
@@ -219,17 +219,19 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 	 * 新增图书纠错
 	 */
 	@Override
-	public String correction(Map<String, Object> map) {
+	public Map<String, Object> correction(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		String returncode="";
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
 		int count=readDetailDao.correction(map);
 		if(count>0){
-			returncode="OK";
 		    WriterUserTrendst wut = new WriterUserTrendst(map.get("user_id").toString(), 10, map.get("book_id").toString());
 		    wut.setDetail("提交了图书纠错", map.get("content").toString(),0,Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("line").toString()));
 		    personalService.saveUserTrendst(wut);//生成动态 图书纠错 
+		    returnMap.put("returnCode", "OK");
+		    returnMap.put("correctId", map.get("table_trendst_id"));
 		}
-		return returncode;
+		return returnMap;
 	}
 
 	/**

@@ -114,9 +114,38 @@
         where b.is_on_sale = 1
         order by b.image_url desc
         <if test="startrows >= 0">
-            <![CDATA[limit ${startrows},10]]>
+            <![CDATA[limit ${startrows},14]]>
         </if>
     </select>
+
+    <!--根据书籍类型查询总条数-->
+    <select id="querySize" resultType="int" parameterType="map">
+    select count(*) from (
+	SELECT
+			t.type_name,
+			b.id
+			FROM
+			book AS b
+			INNER JOIN
+			material_type t
+			ON
+			t.id = b.type
+			and
+			(
+			SUBSTRING_INDEX(SUBSTRING_INDEX(CONCAT(t.path,'-',t.id),'-',
+			(select
+			cast(
+			(CHAR_LENGTH(path)-CHAR_LENGTH(REPLACE(path,'-','')))/CHAR_LENGTH('-')+2
+			as decimal(9,2)
+			)
+			from material_type
+			where id = cast(#{type} as decimal(9,2)))
+			),'-',-1) = #{type}
+			or t.id = #{type}
+			)
+			where b.is_on_sale = 1) as cc
+    </select>
+
     <!-- 查询最新医学随笔 -->
     <select id="queryArticle" resultMap="Mapresult">
 	select cc.*,wu.avatar,wu.id as userId,
@@ -380,6 +409,7 @@ LIMIT 0,10
 		buc.is_promote*1 as ispromote,
 		b.bookname,
 		wu.username,
+		wu.nickname,
 		wu.avatar,
 		b.image_url,
 		IFNULL(buc.title, b.bookname) AS hottitle

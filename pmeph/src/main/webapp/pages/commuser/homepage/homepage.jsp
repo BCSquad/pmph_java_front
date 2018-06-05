@@ -217,46 +217,20 @@
             <div class="more" onclick="top.location='${ctx}/cmsinfoletters/tolist.action'">更多>></div>
         </div>
         <div class="area-4">
-            <div class="tab-bar">
-                <div class="type_bar_float_right">
-                    <c:forEach items="${bookTypes}" var="type" varStatus="status">
-                        <div class="tab ${status.index==0?'active':''}" id="${type.id}"
-                             onclick='chooseType("${type.id}")'>${type.type_name}</div>
-                    </c:forEach>
-                </div>
-                <!-- <div class="tab active" id="1" onclick='chooseType("1")'>学校教育</div>
-                <div class="tab" id="2" onclick='chooseType("2")'>毕业后教育</div>
-                <div class="tab" id="3" onclick='chooseType("3")'>继续教育</div>
-                <div class="tab" id="4" onclick='chooseType("4")'>考试用书</div> -->
-                <div class="page ">
-                    <div class="page-num">
-                        <input type="hidden" id="book_type">
-                        <span class="beforepage" id="before">${thisrows}</span>/
-                        <span class="beforepage" id="next">${allrows}</span>
-                        <span class="icon-right" onclick='on("next")'></span>
-                        <span class="icon-left" onclick='on("before")'></span>
+            <div class="content">
+                <div class="tab-bar" style="margin-top: 0px;">
+                    <div class="type_bar_float_right typebar">新书推荐</div>
+                    <div class="page" style="width: auto;float: right;margin-right: 327px;margin-left: 10px;
+                        height: 100%;color: #999999;">
+                        <c:forEach items="${bookTypes}" var="type" varStatus="status">
+                            <div class="new tab ${status.index==0?'active':''}" id="new${type.id}"
+                                 onclick='searchXstjBook("${type.id}")'>${type.type_name}</div>
+                            <c:if test="${bookTypes !=null && status.index==0}">
+                                <input type="hidden" id="typeid" value="${type.id}">
+                            </c:if>
+                        </c:forEach>
                     </div>
                 </div>
-                <c:forEach items="${listType}" var="list" varStatus="status">
-                    <%-- <c:if test="${status.index==0}">
-                        <div class="type" id="typeOne">${list.type_name}</div>
-                    </c:if> --%>
-                    
-                   	<c:if test="${status.index!=0}">
-                   		<div class="point"></div>
-                   	</c:if>
-                   	<div class="type"  id="type_${list.id}" onclick="chooseTypeSecond(${list.id})">${list.type_name}</div>
-                   
-                    
-                </c:forEach>
-                <%-- <c:forEach items="${listType}" var="list" varStatus="status">
-                    <c:if test="${status.index==1 or status.index==2 }">
-                        <div class="point"></div>
-                        <div class="type" id="typeTwo">${list.type_name}</div>
-                    </c:if>
-                </c:forEach> --%>
-            </div>
-            <div class="content">
                 <div class="left">
                     <div class="left_one">
                         <div class="textbook_left">教材社区</div>
@@ -286,9 +260,49 @@
                         </c:forEach>
                     </div>
                 </div>
-                <div class="right" id="homepagebook" style="float: left;">${homepagebook}</div>
+                <div class="content" id="JKFYDiv_0">${pMap}</div>
             </div>
         </div>
+        <div class="tab-bar">
+            <div class="type_bar_float_right">
+                <c:forEach items="${bookTypes}" var="type" varStatus="status">
+                    <div class="oldtab tab ${status.index==0?'active':''}" id="${type.id}"
+                         onclick='chooseType("${type.id}")'>${type.type_name}</div>
+                </c:forEach>
+            </div>
+            <!-- <div class="tab active" id="1" onclick='chooseType("1")'>学校教育</div>
+            <div class="tab" id="2" onclick='chooseType("2")'>毕业后教育</div>
+            <div class="tab" id="3" onclick='chooseType("3")'>继续教育</div>
+            <div class="tab" id="4" onclick='chooseType("4")'>考试用书</div> -->
+            <div class="page  asdf">
+                <div class="page-num">
+                    <input type="hidden" id="book_type">
+                    <span class="beforepage" id="before">${thisrows}</span>/
+                    <span class="beforepage" id="next">${allrows}</span>
+                    <span class="icon-right" onclick='on("next")'></span>
+                    <span class="icon-left" onclick='on("before")'></span>
+                </div>
+            </div>
+            <c:forEach items="${listType}" var="list" varStatus="status">
+                <%-- <c:if test="${status.index==0}">
+                    <div class="type" id="typeOne">${list.type_name}</div>
+                </c:if> --%>
+
+                <c:if test="${status.index!=0}">
+                    <div class="point"></div>
+                </c:if>
+                <div class="type"  id="type_${list.id}" onclick="chooseTypeSecond(${list.id})">${list.type_name}</div>
+
+
+            </c:forEach>
+            <%-- <c:forEach items="${listType}" var="list" varStatus="status">
+                <c:if test="${status.index==1 or status.index==2 }">
+                    <div class="point"></div>
+                    <div class="type" id="typeTwo">${list.type_name}</div>
+                </c:if>
+            </c:forEach> --%>
+        </div>
+        <div class="right" id="homepagebook">${homepagebook}</div>
         <div class="area-5">
             <c:forEach var="ad" items="${adInfo2.detailList}">
                 <div class="item">
@@ -320,7 +334,7 @@
             </c:forEach>
         </div>
     </div>
-    <div style="background-color: #F6F6F6;margin-top: 60px;padding-top: 30px;">
+    <div style="background-color: #F6F6F6;margin-top: 630px;padding-top: 30px;">
         <div class="content-wrapper">
             <div class="area-6">
                 <div class="doc"></div>
@@ -580,6 +594,8 @@
         </div>
     </c:if>
 
+    <!--公众号悬浮框-->
+    <div id="EWM" class="emw"><img src="${ctx}/statics/image/wxgzh.jpg"></div>
 </div>
 <jsp:include page="/pages/comm/tail.jsp">
     <jsp:param name="linked" value="linked"></jsp:param>
