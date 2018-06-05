@@ -514,7 +514,7 @@
                 <div style="margin-top: 20px;">
                     <div style="float: left;width: 90px;height: 116px">
                         <input type="hidden" id="sup-hidden" value="${supMap.code}">
-                        <img src="${ctx}/${supMap.image_url}" class="righttopbook"/>
+                        <img src="${supMap.image_url}" class="righttopbook"/>
                     </div>
                     <div style="float: left;width: 170px;margin-left: 10px;">
                         <div class="ptts_sp1">${supMap.bookname}</div>
