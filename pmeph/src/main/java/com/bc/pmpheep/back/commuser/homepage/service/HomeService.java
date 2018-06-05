@@ -121,5 +121,10 @@ public interface HomeService {
      *
      */
     int queryHotCommentListCount();
+    /**
+     * 根据书籍类型查询总条数
+     * @return
+     */
+    int querySize(String type);
 
 }

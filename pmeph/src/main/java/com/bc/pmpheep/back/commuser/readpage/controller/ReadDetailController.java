@@ -189,8 +189,8 @@ public class ReadDetailController extends BaseController{
 	 */
 	@RequestMapping("/correction")
 	@ResponseBody
-	public String correction(HttpServletRequest request){
-		String returncode="";
+	public Map<String,Object> correction(HttpServletRequest request){
+		Map<String,Object> returnMap= new HashMap<String,Object>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		String book_id=request.getParameter("book_id");
 		String page=request.getParameter("page");
@@ -202,7 +202,7 @@ public class ReadDetailController extends BaseController{
 			StringUtils.isEmpty(page)||
 			StringUtils.isEmpty(line)||
 			StringUtils.isEmpty(content)){
-			returncode="NO";
+			returnMap.put("returnCode","NO");
 		}else{
 			Map<String, Object> user=getUserInfo();
 			map.put("user_id", user.get("id"));
@@ -212,9 +212,10 @@ public class ReadDetailController extends BaseController{
 			map.put("content", content);
 			map.put("attachment", attachment);
 			map.put("attachment_name", attachment_name);
-			returncode=readDetailService.correction(map);
+			returnMap = readDetailService.correction(map);
+			returnMap.put("returnCode","OK");
 		}
-		return returncode;
+		return returnMap;
 	}
 	
 	/**
