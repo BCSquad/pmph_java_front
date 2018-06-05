@@ -266,7 +266,7 @@
         <div class="tab-bar">
             <div class="type_bar_float_right">
                 <c:forEach items="${bookTypes}" var="type" varStatus="status">
-                    <div class="tab ${status.index==0?'active':''}" id="${type.id}"
+                    <div class="oldtab tab ${status.index==0?'active':''}" id="${type.id}"
                          onclick='chooseType("${type.id}")'>${type.type_name}</div>
                 </c:forEach>
             </div>
@@ -274,7 +274,7 @@
             <div class="tab" id="2" onclick='chooseType("2")'>毕业后教育</div>
             <div class="tab" id="3" onclick='chooseType("3")'>继续教育</div>
             <div class="tab" id="4" onclick='chooseType("4")'>考试用书</div> -->
-            <div class="page ">
+            <div class="page  asdf">
                 <div class="page-num">
                     <input type="hidden" id="book_type">
                     <span class="beforepage" id="before">${thisrows}</span>/
