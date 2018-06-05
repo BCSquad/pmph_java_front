@@ -546,6 +546,7 @@ width: 83px;
     display: block;
     max-height: 80px;
     overflow: hidden;
+    word-break: break-all;
 }
 
 .handled_text span{

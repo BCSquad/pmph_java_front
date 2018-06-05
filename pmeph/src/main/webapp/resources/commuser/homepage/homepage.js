@@ -32,6 +32,9 @@ $(function() {
 		}
 	}
 
+	//查询新书推荐，默认显示第一类
+    searchXstjBook($("#typeid").val());
+
 });
 // 下一页
 function on(state) {
@@ -63,6 +66,29 @@ function on(state) {
 	});
 }
 
+//新书推荐
+function searchXstjBook(typeid) {
+    $(".new").removeClass("active");
+    $("#new"+typeid).addClass("active");
+    $.ajax({
+        type: 'post',
+        url: contextpath + 'readpage/searchXstjBook.action?type=' + typeid,
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+            if(Empty(json.pagebook)){
+                $("#JKFYDiv_0").html('<div class="no-more-book">\n' +
+                    '                   <img src="'+contextpath+'statics/image/aaa4.png'+'">\n' +
+                    '                   <span>木有内容呀~~</span>\n' +
+                    '               \t</div>')
+            }else{
+                $("#JKFYDiv_0").html(json.pagebook);
+            }
+
+        }
+    });
+}
+
 // 书籍分类
 function chooseType(state) {
 	$.ajax({
@@ -88,8 +114,8 @@ function chooseType(state) {
 					$("#typeTwo").html(x.type_name);
 				}*/
 			});
-			$(".page").after(listTypeHtmlStr);
-			$(".tab").removeClass("active");
+			$(".asdf").after(listTypeHtmlStr);
+			$(".oldtab").removeClass("active");
 			$("#" + state).addClass("active");
 			$(".type").removeClass("active");
 			$("#book_type").val(state);
@@ -256,3 +282,11 @@ function addfriend(target_id) {
 		}
 	});
 }*/
+
+//微信公众号悬浮
+function showEWM(){
+    document.getElementById("EWM").style.display = 'block';
+}
+function hideEWM(){
+    document.getElementById("EWM").style.display = 'none';
+}

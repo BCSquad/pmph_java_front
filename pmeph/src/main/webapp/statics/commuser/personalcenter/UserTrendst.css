@@ -5,7 +5,7 @@
     
     clear: both;
     padding: 20px 15px 20px 15px;
-    
+    box-sizing: border-box;
     float: left;
     clear: both;
     display: table;

@@ -684,7 +684,7 @@ function correction() {
                     async: false,
                     dataType: 'json',
                     success: function (json) {
-                        if (json == "OK") {
+                        if (json.returnCode == "OK") {
                             window.message.success("数据已提交！");
                             $("#bookmistake").hide();
                             $("#page").val(null);
@@ -696,9 +696,10 @@ function correction() {
                             var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
                             var bookId = $("#book_id").val();
                             var userId = $("#userid").val();
+                            var correctId = json.correctId;
                             $.ajax({
                                 type: 'get',
-                                url: exportWordBaseUrl + '/frontWxMsg/bookError/'+bookId+"/"+userId,
+                                url: exportWordBaseUrl + '/frontWxMsg/bookError/'+bookId+"/"+userId+"/"+correctId,
                                 dataType: 'jsonp',
                                 success:function(wxResult){
                                 	if(wxResult){

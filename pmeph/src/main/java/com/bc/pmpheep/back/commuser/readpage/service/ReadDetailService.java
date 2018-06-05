@@ -34,7 +34,7 @@ public interface ReadDetailService {
 	 * @param map
 	 * @return
 	 */
-	String correction(Map<String, Object> map);
+	Map<String, Object> correction(Map<String, Object> map);
 	/**
 	 * 查询人卫推荐书籍
 	 * @return List<Map<String, Object>>
