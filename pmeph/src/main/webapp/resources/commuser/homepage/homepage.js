@@ -114,8 +114,8 @@ function chooseType(state) {
 					$("#typeTwo").html(x.type_name);
 				}*/
 			});
-			$(".page").after(listTypeHtmlStr);
-			$(".tab").removeClass("active");
+			$(".asdf").after(listTypeHtmlStr);
+			$(".oldtab").removeClass("active");
 			$("#" + state).addClass("active");
 			$(".type").removeClass("active");
 			$("#book_type").val(state);
