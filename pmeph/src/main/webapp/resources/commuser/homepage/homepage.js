@@ -256,3 +256,11 @@ function addfriend(target_id) {
 		}
 	});
 }*/
+
+//微信公众号悬浮
+function showEWM(){
+    document.getElementById("EWM").style.display = 'block';
+}
+function hideEWM(){
+    document.getElementById("EWM").style.display = 'none';
+}
