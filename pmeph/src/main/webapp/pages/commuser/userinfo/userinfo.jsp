@@ -90,10 +90,10 @@
                 <div class="sxy-userinfo-row"></div>
 
                 <div class="sxy-userinfo-row">
-                	<a id="sxy-font-1" style="cursor: pointer;" onclick="window.location='${ctx}/teacherCertification/showTeacherCertification.action'">教师认证</a>
+                	<div id="sxy-font-1"  onclick="window.location='${ctx}/teacherCertification/showTeacherCertification.action'">教师认证</div>
                 </div>
-                <div class="sxy-userinfo-row">
-                	<a id="sxy-font-2" style="cursor: pointer;" onclick="window.location='${ctx}/userinfo/comchangepwd.action'">修改密码</a>
+                <div class="sxy-userinfo-row" style="margin-top: 15px">
+                	<a id="sxy-font-2" style="cursor: pointer;margin-left: 35px" onclick="window.location='${ctx}/userinfo/comchangepwd.action'">修改密码</a>
                 </div>
             </div>
             <div style="height:35px;"></div>
