@@ -69,7 +69,7 @@
     <div class="sxy-div-content">
         <div style="height:50px;">
             <span style="width:20px;"></span>
-            <span class="sxy-div-menu">个人资料</span>
+            <span class="sxy-div-menu">个人资料</span><span class="sxy-div-menu1"><a onclick="testOne()">个人申报信息</a></span>
         </div>
     </div>
     <div style="height:14px"></div>
@@ -298,7 +298,7 @@
                              </c:if>
                              </c:forEach>
                          </div>
-                        <input type="text" placeholder="请输入标签名，10字以内" style="height:28px;margin-left: 20px;margin-top:5px" id="mytag" onkeyup="LengthLimit(this,20)"/>
+                        <input type="text" placeholder="请输入标签名，10字以内" style="height:28px;margin-left: 20px;margin-top:5px" id="mytag" onkeyup="LengthLimit(this,10)"/>
                         <span style="margin-top:5px;height: 30px;line-height: 30px;display: inline-block;border: 1px solid #f1f1f1;border-radius: 5px;cursor: pointer;" onclick="addtag()"><font class="sxy-bottom-font">添加</font></span>
                    </div>
                </td>
