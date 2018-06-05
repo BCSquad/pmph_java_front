@@ -41,7 +41,20 @@ body
 	float:left;
 	border-bottom:2px solid #333333;
     }
-    
+
+.sxy-div-menu1
+{
+
+	font-size: 16px;
+	font-weight: normal;
+	height:50px;
+	line-height: 50px;
+	letter-spacing: 0px;
+	color: #999999;
+	margin-left:20px;
+	cursor:pointer;
+	float:left;
+}
  /*深色页头二级菜单点击出现下划线*/
  .sxy-span-menu{
     border-bottom:2px solid #333333;
