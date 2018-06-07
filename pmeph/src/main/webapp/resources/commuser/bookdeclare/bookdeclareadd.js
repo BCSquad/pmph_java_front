@@ -3,7 +3,17 @@
 //jsonStr = "{\"id\":\"bookname\",\"content\":\"选题名称不能为空\"}," ;
 
 var jsonRequiredEleId = [
-                         {id:"bookname",content:"选题名称不能为空"}
+	                        {id:"bookname",content:"选题名称不能为空"},
+	                        {id:"realname",content:"主编姓名不能为空"},
+							{id:"price",content:"年龄不能为空"},
+							{id:"position",content:"行政职务不能为空"},
+							{id:"workplace",content:"工作单位不能为空"},
+							{id:"phone",content:"电话不能为空"},
+							{id:"email",content:"邮箱不能为空"},
+							{id:"address",content:"通讯地址不能为空"},
+	                        {id:"extra_achievement",content:"主要专业成就及学术地位不能为空"},
+                            {id:"extra_reason",content:"选题理由及出版价值不能为空"},
+                            {id:"extra_score",content:"主要内及特色不能为空"},
                          ];
 		
 		
@@ -223,6 +233,7 @@ function buttGive(){
 
 //判断是否为空
 function checkNull(jsonRequiredEleId){
+	debugger
 	/*var s = "["+jsonStr.substring(0, jsonStr.length-1)+"]";
 	var objs = $.parseJSON(s);*/
 	var objs = jsonRequiredEleId;
