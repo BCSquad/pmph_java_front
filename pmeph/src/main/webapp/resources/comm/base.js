@@ -170,7 +170,7 @@ var remoteUrl="120.76.221.250";
                     } else if (data.code == '250') {
                         var text;
                         var btn;
-                        if(data.msg=='0'){
+                        if(data.msg=='0' && data.proxy=='1'){
                             text="您的认证已提交，请耐心等待审核！";
                             btn="查看认证"
                         }else if(data.msg=='2'){

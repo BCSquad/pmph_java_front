@@ -34,10 +34,10 @@
 			<div class="sbxq_item">
 
 				<div class="content">
-					<table class="tab_1">
+					<table class="tab_1 tab_4">
 						<tr>
 							<td colspan="3">
-								<div>
+								<div style="text-align: left">
 									<span id="tsxz_span1"></span>
 									<span class="tsxz_title">图书书稿情况</span>
 									<%--<span class="tsxz_ts1"><img src="${ctx}/statics/image/btxx.png" /></span>--%>
@@ -92,7 +92,7 @@
 							<td><span><span class="btbs1">*</span>学科及专业：&emsp;</span>
 								<input class="cg_input" name="subject" id="subject" placeholder="" maxlength="50" value="${topicMap.subject}" />
 							</td>
-							<td><span><span class="btbs">*</span>级&emsp;&emsp;别：&emsp;&emsp;</span>
+							<td style="text-align: -webkit-center"><span><span class="btbs">*</span>级&emsp;&emsp;别：&emsp;&emsp;</span>
 								<%--<div class="tsjb">&emsp;--%>
 								<input type="radio" name="rank" value="0" ${topicMap.rank=='0'?'checked':''}/>低
 								<input type="radio" name="rank" value="1" ${topicMap.rank=='1'?'checked':''}/>中
@@ -101,7 +101,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td colspan="3"><span><span class="btbs">*</span>图书类别：&emsp;&emsp;</span>
+							<td colspan="3" style="text-align: left"><span><span class="btbs">*</span>图书类别：&emsp;&emsp;</span>
 								<%--<div class="tslb">&emsp;--%>
 								<input type="radio" name="type" value="0" ${topicMap.type=='0'?'checked':''}/>专著
 								<input type="radio" name="type" value="1" ${topicMap.type=='1'?'checked':''}/>基础理论
@@ -119,7 +119,7 @@
 						<!--修订书稿-->
 						<tr>
 							<td colspan="3">
-								<div>
+								<div style="text-align: left">
 									<span id="tsxz_span2"></span>
 									<span class="tsxz_title">修订书稿</span>
 								</div>
@@ -150,7 +150,7 @@
 						<!-- 翻译书稿 -->
 						<tr>
 							<td colspan="3">
-								<div>
+								<div style="text-align: left">
 									<span id="tsxz_span2"></span>
 									<span class="tsxz_title">翻译书稿</span>
 								</div>
@@ -178,24 +178,24 @@
 						<!--作（译）者简况 -->
 						<tr>
 							<td colspan="3">
-								<div>
+								<div style="text-align: left">
 									<span id="tsxz_span5"></span>
 									<span class="tsxz_title">作（译）者简况</span>
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<td><span><span class="btbs1">*</span>主编姓名：&emsp;&emsp;</span>
+							<td><span><span class="btbs">*</span>主编姓名：&emsp;&emsp;</span>
 								<input class="cg_input" name="realname" maxlength="40" id="realname" placeholder="" value="${topicMap.realname}"/>
 							</td>
-							<td><span><span class="btbs1">*</span>性&emsp;&emsp;别：&emsp;&emsp;</span>
+							<td><span><span class="btbs">*</span>性&emsp;&emsp;别：&emsp;&emsp;</span>
 								<select name="sex" id="sex">
 									<option value="">-请选择-</option>
 									<option value="0" ${topicMap.sex=='0'?'selected':''}>男</option>
 									<option value="1" ${topicMap.sex=='1'?'selected':''}>女</option>
 								</select>
 							</td>
-							<td><span><span class="btbs1">*</span>年&emsp;&emsp;龄：&emsp;&emsp;</span>
+							<td><span><span class="btbs">*</span>年&emsp;&emsp;龄：&emsp;&emsp;</span>
 								<input class="cg_input" name="price" id="price" placeholder="" value="${topicMap.price}"
 									   onkeyup="this.value=this.value.replace(/(\D|^0+)/g,'');this.value=this.value.replace(/^[^0-1]\d{2}$/g,'199');" onafterpaste="this.value=this.value.replace(/(\D|^0+)/g,'');this.value=this.value.replace(/^[^0-1]\d{2}$/g,'199');"
 									   maxlength="3"
@@ -203,10 +203,10 @@
 							</td>
 						</tr>
 						<tr>
-							<td><span><span class="btbs1">*</span>行政职务：&emsp;&emsp;</span>
+							<td><span><span class="btbs">*</span>行政职务：&emsp;&emsp;</span>
 								<input class="cg_input" name="position" maxlength="36" id="position" placeholder="" value="${topicMap.position}"/>
 							</td>
-							<td><span><span class="btbs1">*</span>专业职务：&emsp;&emsp;</span>
+							<td><span><span class="btbs">*</span>专业职务：&emsp;&emsp;</span>
 								<select name="position_profession" id="position_profession">
 									<option value="">-请选择-</option>
 									<option value="0" ${topicMap.position_profession=='0'?'selected':''}>中科院院士</option>
@@ -219,7 +219,7 @@
 									<option value="7" ${topicMap.position_profession=='7'?'selected':''}>其他</option>
 								</select>
 							</td>
-							<td><span><span class="btbs1">*</span>学&emsp;&emsp;历：&emsp;&emsp;</span>
+							<td><span><span class="btbs">*</span>学&emsp;&emsp;历：&emsp;&emsp;</span>
 								<select name="degree" id="degree">
 									<option value="">-请选择-</option>
 									<option value="0" ${topicMap.degree=='0'?'selected':''}>博士</option>
@@ -230,29 +230,29 @@
 							</td>
 						</tr>
 						<tr>
-							<td><span><span class="btbs1">*</span>工作单位：&emsp;&emsp;</span>
+							<td><span><span class="btbs">*</span>工作单位：&emsp;&emsp;</span>
 								<input class="cg_input" name="workplace" maxlength="50" id="workplace" placeholder="" value="${topicMap.workplace}"/>
 							</td>
-							<td><span><span class="btbs1">*</span>电&emsp;&emsp;话：&emsp;&emsp;</span>
+							<td><span><span class="btbs">*</span>电&emsp;&emsp;话：&emsp;&emsp;</span>
 								<input class="cg_input" name="phone" maxlength="50" id="phone" placeholder="" value="${topicMap.phone}"/>
 							</td>
-							<td><span><span class="btbs1">*</span>邮&emsp;&emsp;箱：&emsp;&emsp;</span>
+							<td><span><span class="btbs">*</span>邮&emsp;&emsp;箱：&emsp;&emsp;</span>
 								<input class="cg_input" name="email" maxlength="50" id="email" placeholder="" value="${topicMap.email}"/>
 							</td>
 						</tr>
 						<tr>
-							<td><span><span class="btbs1">*</span>邮&emsp;&emsp;编：&emsp;&emsp;</span>
+							<td><span><span class="btbs">*</span>邮&emsp;&emsp;编：&emsp;&emsp;</span>
 								<input class="cg_input" name="postcode" maxlength="36" id="postcode" placeholder="" value="${topicMap.postcode}"/>
 							</td>
-							<td colspan="2"><span><span class="btbs1">*</span>通讯地址：&emsp;&emsp;</span>
-								<input class="tx_input" name="address" maxlength="100" id="address" placeholder="" value="${topicMap.address}"/>
+							<td colspan="2"><span><span class="btbs">*</span>通讯地址：&emsp;&emsp;</span>
+								<input class="tx_input" name="address" maxlength="100" id="address" placeholder="" value="${topicMap.address}" style="width: 680px"/>
 							</td>
 						</tr>
 					</table>
 					<table class="tab_1">
 						<!-- 选题情况 -->
 						<tr>
-							<td><span class="btbs1">*</span><span>主要专业成就及学术地位：</span></td>
+							<td><span class="btbs">*</span><span>主要专业成就及学术地位：</span></td>
 							<td colspan="3">
 								<div class="content">
 									<textarea class="text_cl" id="extra_achievement" name="extra_achievement" maxlength="1000">${textraMap.achievement}</textarea>
@@ -268,7 +268,7 @@
 					</tr>
 						<tr>
 							<td colspan="4">
-								<div>
+								<div style="text-align: left">
 									<span id="tsxz_span3"></span>
 									<span class="tsxz_title">选题情况</span>
 									<%--<span class="tsxz_ts1"><img src="${ctx}/statics/image/btxx.png" /></span>--%>
@@ -276,7 +276,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td><span class="btbs1">*</span><span>选题理由及出版价值：</span></td>
+							<td><span class="btbs">*</span><span>选题理由及出版价值：</span></td>
 							<td colspan="3">
 								<div class="content">
 									<textarea class="text_cl" id="extra_reason" name="extra_reason" maxlength="1000">${textraMap.reason}</textarea>
@@ -284,7 +284,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td><span class="btbs1">*</span><span>主要内容与特色：</span></td>
+							<td><span class="btbs">*</span><span>主要内容与特色：</span></td>
 							<td colspan="3">
 								<div class="content">
 									<textarea class="text_cl" id="extra_score" name="extra_score" maxlength="1000">${textraMap.score}</textarea>
@@ -292,11 +292,11 @@
 							</td>
 						</tr>
 					</table>
-					<table class="tab_1">
+					<table class="tab_1 tab_3">
 						<!-- 读者情况及印制预测  -->
 						<tr>
 							<td colspan="3">
-								<div>
+								<div style="text-align: left">
 									<span id="tsxz_span4"></span>
 									<span class="tsxz_title">读者情况及印制预测 </span>
 								</div>
@@ -373,10 +373,10 @@
 							<td width="140px">姓名</td>
 							<td width="100px">性别</td>
 							<td width="90px">年龄 </td>
-							<td width="140px">电话</td>
-							<td width="100px">学历</td>
-							<td width="200px">职务职称</td>
 							<td width="300px">工作单位</td>
+							<td width="140px">电话</td>
+							<td width="200px">职务职称</td>
+							<td width="100px">学历</td>
 							<td width="80px">操作</td>
 						</tr>
 						</thead>
@@ -394,6 +394,9 @@
 								<td><input class="sb_input" style="width: 70px;" name="write_price" placeholder="年龄" value="${list.price}" id="write_price_${status.count}"
 										   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" onBlur="checkAge(this)"
 										   maxlength="3"/></td>
+								<td><input class="sb_input" style="width: 280px;" id="write_workplace_${status.count}" name="write_workplace" placeholder="工作单位" value="${list.workplace}" maxlength="36"/>
+									<input type="hidden" name="checkbzqk" value="write_realname_${status.count},write_sex_${status.count},write_price_${status.count},write_phone_${status.count},write_degree_${status.count},write_position_${status.count}"/>
+								</td>
 								<td><input class="sb_input" style="width: 120px;" name="write_phone" placeholder="电话" value="${list.phone}" id="write_phone_${status.count}" maxlength="36"/></td>
 								<td>
 									<select id="write_degree_${status.count}" name="write_degree">
@@ -405,9 +408,6 @@
 									</select>
 								</td>
 								<td><input class="sb_input" style="width: 180px;" id="write_position_${status.count}"  name="write_position" placeholder="职务职称" value="${list.position}" maxlength="36"/></td>
-								<td><input class="sb_input" style="width: 280px;" id="write_workplace_${status.count}" name="write_workplace" placeholder="工作单位" value="${list.workplace}" maxlength="36"/>
-									<input type="hidden" name="checkbzqk" value="write_realname_${status.count},write_sex_${status.count},write_price_${status.count},write_phone_${status.count},write_degree_${status.count},write_position_${status.count}"/>
-								</td>
 								<td><div class="add_div"><img class="add_img" src="${ctx}/statics/image/del.png" onclick="del_tr('sbbz_${status.count}')"></div></td>
 							</tr>
 						</c:forEach>
