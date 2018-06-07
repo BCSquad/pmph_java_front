@@ -1,0 +1,381 @@
+.sbxq_title{
+	margin-top: 28px;	
+	width: 1000px;
+}
+.sbxq_title span{
+	letter-spacing: 0px;
+	color: #999999;	
+}
+
+.sbxq_item{
+	clear: none;
+	margin-top: 20px;
+	width: 1200px;
+}
+
+#tsxz_span1{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -333px -7px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 20px;
+    float: left;
+}
+
+.tsxz_title{
+	letter-spacing: 0px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-weight: bold;
+	color: #333333;
+	margin-left: 10px;
+}
+
+#tsxz_span1{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -333px -309px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 20px;
+    float: left;
+}
+#tsxz_span2{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -333px -332px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 20px;
+    float: left;
+}
+#tsxz_span3{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -333px -354px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 20px;
+    float: left;
+}
+#tsxz_span4{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -333px -379px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 20px;
+    float: left;
+}
+#tsxz_span5{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -333px -400px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 20px;
+    float: left;
+}
+#tsxz_span6{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -333px -423px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 20px;
+    float: left;
+}
+
+.content{
+	width: 1000px;
+}
+/**tab1**/
+.tab_1{
+	width: 100%;
+}
+.tab_1 tr{
+	height: 53px;
+}
+.tab_1 tr td{
+	height: 53px;
+}
+.tab_1 tr td {
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 26px;
+	letter-spacing: 0px;
+	color: #666666;
+	/*text-align: left;*/
+}
+.tab_1 tr td span{
+	width: 100px;
+}
+/*td_span{
+	width: 100px;
+}*/
+.btbs{
+	color: red;
+}
+.btbs1{
+	color: white;
+}
+.tsxz_ts1{
+	margin-left: 5px;
+}
+/**table2**/
+.tab_2{
+	width: 100%;
+	margin-top: 15px;
+	border:1px solid #dedede;
+	empty-cells:show; 
+	border-collapse: collapse;
+}
+
+.tab_2 thead tr{
+	background-color: #d4d9dd;
+	
+}
+
+.tab_2 thead td{
+	line-height: 35px;
+	letter-spacing: 0px;
+	color: #333333;
+	text-align: center;
+	border:1px solid #dedede; 
+	height: 40px;
+}
+
+.tab_2 tbody td{
+	line-height: 30px;
+	letter-spacing: 0px;
+	color: #999999;
+	text-align: center;
+	border:1px solid #dedede; 
+	height: 35px;
+}
+/**常规输入框**/
+.cg_input{
+	clear:none;
+	width: 200px;
+	height: 26px;
+	line-height: 26px;
+	border: solid 1px #dedede;
+	padding-left: 10px;
+	border-radius: 2px;
+}
+/**加长输入框**/
+.jc_input{
+	clear:none;
+	width: 595px;
+	height: 26px;
+	line-height: 26px;
+	border: solid 1px #dedede;
+	padding-left: 10px;
+	border-radius: 2px;
+}
+/**通讯地址**/
+.tx_input{
+	clear:none;
+	width: 668px;
+	height: 26px;
+	line-height: 26px;
+	border: solid 1px #dedede;
+	padding-left: 10px;
+	border-radius: 2px;
+}
+.sb_input{
+	clear:none;
+	width:90%;
+	height: 30px;
+	line-height: 26px;
+	border: solid 1px #dedede;
+	padding-left: 10px;
+}
+.tsjb{
+	width: 250px;
+	height: 30px;
+	border: dashed 1px #dedede;
+	padding-top: 7px;
+}
+
+.tslb{
+	width: 80%;
+	height: 30px;
+	border: dashed 1px #dedede;
+	padding-top: 7px;
+	
+}
+
+/**���ݿ�**/
+.content{
+	width: 100%;
+}
+.text_cl{
+	width: 990px;
+	height: 60px;
+	background-color: #e8f1fa;
+	border-radius: 3px;
+	border: solid 1px #3996fa;
+	-moz-opacity: 0.3;
+	-khtml-opacity: 0.3;
+	-webkit-opacity: 0.3;
+	opacity: 0.3;
+	filter:alpha(opacity=30);
+	padding: 15px 20px;
+	margin-top: 20px;
+}
+/**�ύ��ť**/
+.button{
+	height: 30px;
+	width: 1200px;
+	text-align: center;
+	margin-top: 40px;
+	
+}
+
+.div_butt{
+	width: 270px;
+	height: 24px;
+	color: #FFFFFF;
+	margin:auto;
+	top:50%;
+	left:50%;
+}
+.div_butt1{
+	width: 70px;
+	height: 24px;
+	color: #FFFFFF;
+	margin:auto;
+	top:50%;
+	left:50%;
+}
+.bt_tj{
+	width: 74px;
+	height: 24px;
+	background-color: #70bcc3;
+	border-radius: 2px;
+	cursor: pointer;
+	color: #FFFFFF;
+	float: left;
+	margin-left: 15px;
+}
+.sb_tj{
+	width: 74px;
+	height: 28px;
+	background-color: #1cb194;
+	border-radius: 2px;
+	cursor: pointer;
+	color: #FFFFFF;
+	float: right;
+	margin-left: 15px;
+}
+
+/**������ť**/
+.add_div{
+	width: 80px;
+	height: 32px;
+	margin-top: 5px;
+	text-align: center;
+}
+
+.add_img{
+	cursor: pointer;
+	
+}
+.tj_div{
+	width: 55px;
+	height: 22px;
+	margin-top: 3px;
+	margin-left: 10px;
+}
+
+#img_1{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -262px -101px;
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 20px;
+    float: left;
+}
+
+#wz_1{
+	float: left;
+}
+
+.dateclear{
+	position: absolute;
+	height: 34px;
+	line-height: 34px;
+	width: 20px;
+	left: 290px;
+	background-image: url(../../image/close.png);
+	background-repeat: no-repeat;
+	background-position: 0px 10px;
+}
+
+.bookmistake {
+    width: 426px;
+    background-color: #FFFFFF;
+    display: none;
+    position: fixed;
+    left: 35%;
+    top: 30%;
+    box-shadow: 0px 0px 5px #888888;
+    border-radius: 5px;
+    z-index: 999;
+}
+
+.apache {
+    width: 100%;
+    height: 27px;
+    float: left;
+    margin-top: 16px;
+}
+
+.mistitle {
+    width: 50%;
+    float: left;
+    line-height: 24px;
+    letter-spacing: 1px;
+    color: #333333;
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+.xx {
+    width: 14px;
+    height: 14px;
+    background-image: url(../../image/close.png);
+    float: right;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.info {
+    width: 426px;
+    /* height: 103px; */
+    float: left;
+    margin-top: 25px;
+}
+
+.misarea {
+    width: 374px;
+    height: 75px;
+    border: 1px solid #E0E0E0;
+    margin-left: 20px;
+    padding: 5px;
+    resize: vertical;
+    max-height: 350px;
+}
+
+.btn {
+    float: right;
+    margin-right: 27px;
+    width: 84px;
+    height: 31px;
+    background-color: #1CB394;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+}
+
+
+
+

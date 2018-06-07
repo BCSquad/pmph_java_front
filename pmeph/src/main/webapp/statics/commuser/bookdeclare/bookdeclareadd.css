@@ -13,6 +13,24 @@
 	width: 1200px;
 }
 
+ td{
+	text-align: center;
+}
+.tab_3 td:first-child{
+	text-align: left;
+}
+.tab_3 td:last-child{
+	text-align: right;
+}
+
+
+.tab_4 td:first-child{
+	text-align: left;
+}
+.tab_4 td:last-child{
+	text-align: right;
+}
+
 #tsxz_span1{
 	background-image: url(../../image/css_sprites.png);
     background-position: -333px -7px;
@@ -100,7 +118,7 @@
 	line-height: 26px;
 	letter-spacing: 0px;
 	color: #666666;
-	text-align: left;
+	/*text-align: left;*/
 }
 .tab_1 tr td span{
 	width: 100px;
@@ -161,7 +179,7 @@
 /**加长输入框**/
 .jc_input{
 	clear:none;
-	width: 583px;
+	width: 595px;
 	height: 26px;
 	line-height: 26px;
 	border: solid 1px #dedede;
@@ -171,7 +189,7 @@
 /**通讯地址**/
 .tx_input{
 	clear:none;
-	width: 620px;
+	width: 668px;
 	height: 26px;
 	line-height: 26px;
 	border: solid 1px #dedede;
@@ -206,7 +224,7 @@
 	width: 100%;
 }
 .text_cl{
-	width: 892px;
+	width: 990px;
 	height: 60px;
 	background-color: #e8f1fa;
 	border-radius: 3px;
@@ -375,3 +393,7 @@
     color: #FFFFFF;
     margin-bottom: 10px;
 }
+
+
+
+
