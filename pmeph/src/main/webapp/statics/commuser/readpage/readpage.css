@@ -399,6 +399,7 @@ ul li {
     color: #333333;
     height: 66px;
     overflow: hidden;
+    word-break: break-all;
 }
 
 .area4 {
