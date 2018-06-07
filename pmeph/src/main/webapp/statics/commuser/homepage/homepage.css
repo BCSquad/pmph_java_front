@@ -1788,3 +1788,16 @@ ul li {
 .left_two img{
 	border:none;
 }
+
+.emw{
+    z-index: 9999;
+    position: fixed ! important;
+    right: 15px;
+    top: 90px;
+    display: none;
+}
+
+.emw img{
+    width: 140px;
+    height: 140px;
+}
