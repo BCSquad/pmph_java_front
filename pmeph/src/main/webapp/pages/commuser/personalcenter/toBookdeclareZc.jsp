@@ -373,10 +373,10 @@
 							<td width="140px">姓名</td>
 							<td width="100px">性别</td>
 							<td width="90px">年龄 </td>
-							<td width="140px">电话</td>
-							<td width="100px">学历</td>
-							<td width="200px">职务职称</td>
 							<td width="300px">工作单位</td>
+							<td width="140px">电话</td>
+							<td width="200px">职务职称</td>
+							<td width="100px">学历</td>
 							<td width="80px">操作</td>
 						</tr>
 						</thead>
@@ -394,6 +394,9 @@
 								<td><input class="sb_input" style="width: 70px;" name="write_price" placeholder="年龄" value="${list.price}" id="write_price_${status.count}"
 										   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" onBlur="checkAge(this)"
 										   maxlength="3"/></td>
+								<td><input class="sb_input" style="width: 280px;" id="write_workplace_${status.count}" name="write_workplace" placeholder="工作单位" value="${list.workplace}" maxlength="36"/>
+									<input type="hidden" name="checkbzqk" value="write_realname_${status.count},write_sex_${status.count},write_price_${status.count},write_phone_${status.count},write_degree_${status.count},write_position_${status.count}"/>
+								</td>
 								<td><input class="sb_input" style="width: 120px;" name="write_phone" placeholder="电话" value="${list.phone}" id="write_phone_${status.count}" maxlength="36"/></td>
 								<td>
 									<select id="write_degree_${status.count}" name="write_degree">
@@ -405,9 +408,6 @@
 									</select>
 								</td>
 								<td><input class="sb_input" style="width: 180px;" id="write_position_${status.count}"  name="write_position" placeholder="职务职称" value="${list.position}" maxlength="36"/></td>
-								<td><input class="sb_input" style="width: 280px;" id="write_workplace_${status.count}" name="write_workplace" placeholder="工作单位" value="${list.workplace}" maxlength="36"/>
-									<input type="hidden" name="checkbzqk" value="write_realname_${status.count},write_sex_${status.count},write_price_${status.count},write_phone_${status.count},write_degree_${status.count},write_position_${status.count}"/>
-								</td>
 								<td><div class="add_div"><img class="add_img" src="${ctx}/statics/image/del.png" onclick="del_tr('sbbz_${status.count}')"></div></td>
 							</tr>
 						</c:forEach>
