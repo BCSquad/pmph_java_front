@@ -40,8 +40,12 @@
                     <br/><span class="ybmcj3">已报名人数</span></div>
                 </div>
                 <div class="bmcj3">
-                    <div class="bmcjan3"><span>已结束</span></div>
-                    
+                    #if( $!{c.is_all_textbook_published}==true)
+                       <div class="bmcjan3"><span>报名结束</span></div>
+                    #end
+                    #if($!{c.datebase}>0 || $!{c.is_force_end}==true )
+                        <div class="bmcjan3"><span>遴选结束</span></div>
+                    #end
                     #if($!{c.iamin}>0 && $!{c.online_progress}>0)
                    <!-- <a class="abmcj" href="$!{contextpath}progress/listReportProgress.action?materialId=$!{c.material_id}">
                 		<div class="bmcjan4">查看申报进度</div>
