@@ -17,11 +17,13 @@
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}"/>
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css?t=${_timestamp}" type="text/css">
     <link rel="stylesheet" href="${ctx}/resources/comm/layui/css/layui.css">
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.tipso.css?t=${_timestamp}" type="text/css">
     <link href="${ctx}/statics/commuser/readpage/readdetail.css?t=${_timestamp}" type="text/css" rel="stylesheet">
     <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/jquery/jquery-validate.js?t=${_timestamp}" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}?t=${_timestamp}" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
+    <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.tipso.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.pager.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}?t=${_timestamp}"></script>
@@ -69,9 +71,9 @@
                 <div class="info">
                     <label style="margin-left: 20px;" class="labell">纠错内容</label>
                     <div style="margin-top: 5px;">
-                         <textarea class="misarea" style="width:470px;" id="content"
-                                   onkeyup="javascript:LengthLimit(this,500);"
-                                   onblur="javascript:LengthLimit(this,500);"></textarea>
+                         <textarea class="misarea required" style="width:470px;" id="content"
+                                   onkeyup="javascript:LengthLimit(this,500);"  data-valid="isNonEmpty"
+                                   onblur="javascript:LengthLimit(this,500);" data-error="纠错内容不能为空"></textarea>
                     </div>
                 </div>
                 <div class="upload">
@@ -103,7 +105,8 @@
                 
                 <div class="info">
                     <div style="margin-top: 5px;">
-                         <textarea class="misarea" style="width:470px;" id="bookfeedback_content"
+                         <textarea class="misarea required" style="width:470px;" id="bookfeedback_content"
+                                   data-valid="isNonEmpty"   data-error="反馈内容不能为空"
                                    onkeyup="javascript:LengthLimit(this,500);"
                                    onblur="javascript:LengthLimit(this,500);"></textarea>
                     </div>
