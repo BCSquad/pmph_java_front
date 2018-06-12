@@ -271,6 +271,13 @@ public class DataAuditController extends BaseController{
 			//21.编写内容意向表
 			Map<String,Object> intentionMap = new HashMap<String,Object>();
 			intentionMap = this.dataAuditService.queryIntention(queryMap);
+			
+			//是否已被遴选，用于退回前提示。
+			declaration_id = queryMap.get("declaration_id").toString();
+			List<Map<String,Object>> choosenList = dataAuditService.queryChoosenListByDeclarationId(declaration_id);
+			Boolean expertChoosen = choosenList!=null&&choosenList.size()>0;
+			mav.addObject("choosenList", choosenList);
+			mav.addObject("expertChoosen", expertChoosen);
 
 			mav.addObject("material", materialMap);
 			mav.addObject("gezlList", gezlList.get(0));
