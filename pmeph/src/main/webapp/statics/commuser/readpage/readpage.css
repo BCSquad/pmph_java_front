@@ -114,7 +114,7 @@ ul li {
 .op-link {
     width: 376px;
     height: 400px;
-    background-color: #383837;
+    background-color: #a2a39f;
     opacity: 0.7;
     /*    background: chartreuse;*/
     float: right;
@@ -399,6 +399,7 @@ ul li {
     color: #333333;
     height: 66px;
     overflow: hidden;
+    word-break: break-all;
 }
 
 .area4 {

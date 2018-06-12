@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -181,11 +182,15 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
     			otherGroupList.add(group);
     		}
     	}
+    	//查询当前用户在指定小组中是否是管理员
+		Map<String,Object> pmap=groupService.queryAdmin(String.valueOf(map.get("id")),groupId);
     	//没有当前小组的权限
     	if(null == thisGroup){
     		modelAndView.setViewName("/comm/error");
             return modelAndView;
     	}
+    	//管理员判定
+		modelAndView.addObject("admin",pmap.get("admin"));
     	//当前小组
     	modelAndView.addObject("thisGroup",thisGroup);
     	//用户id
@@ -254,8 +259,6 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
      * @introduction 
      * @author Mryang
      * @createDate 2017年12月13日 上午10:28:14
-     * @param pageNumber
-     * @param pageSize
      * @param groupId
      * @return
      */
@@ -272,8 +275,6 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
      * @introduction 
      * @author Mryang
      * @createDate 2017年12月13日 上午10:28:14
-     * @param pageNumber
-     * @param pageSize
      * @param groupId
      * @return
      * @throws IOException 
@@ -430,7 +431,23 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
     	
     	return resultMap;
     }
-    
+
+	/**
+	 * 根据ID删除小组成员
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/deletePmphGroupMemberById",method=RequestMethod.POST)
+	@ResponseBody
+	public String deletePmphGroupMemberById(HttpServletRequest request){
+		String str=request.getParameter("removememberIds");
+		String returncode="";
+		List<String> list = JSONArray.fromObject(str);
+		for(int i=0;i<list.size();i++){
+			returncode=groupService.deletePmphGroupMemberById(list.get(i));
+		}
+		return returncode;
+	 };
     
 }
 

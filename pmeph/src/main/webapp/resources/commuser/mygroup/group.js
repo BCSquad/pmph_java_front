@@ -1,6 +1,6 @@
 
 
-
+var removememberIds=[];//存放选中ID值的数组
 
 function ChangeDiv(type){
     if(type=='commnions'){
@@ -276,77 +276,10 @@ $(function(){
 		$("#pageNum").val(1);
 		initMember();
 	});
-	
-	/**
-	 * 查询并输出成员列表
-	 */
-	function initMember(){
-		$.ajax({
-            type:'post',
-            url :contxtpath+'/group/getMembers.action',
-            //contentType: 'application/json',
-            dataType:'json',
-            data:{
-                groupId   : $("#groupId").val(),
-                pageNum: $("#pageNum").val(),
-                pageSize  : $("#pageSize").val(),
-                memberSearchName  : $.trim($("#memberSearchName").val())
-            },
-            success:function(json){
-            	var list = json.mlist;
-                if(list){
-                	$("#memberContent").html("");
-                    for(var i= 0 ; i< list.length ;i++){
-                        var html ='<tr>'
-										+'<td>'
-										+'	<div class="memberRealInfoDiv">'
-										+'<img src="'
-										+ contextpath + (list[i].avatar.search(/^[0-9A-z]{24}/g)>0?('image/'+list[i].avatar+'.action'):'statics/image/default_image.png')
-										+'">'
-										+'		<span title="'+list[i].realname+'">'+list[i].realname+'</span>'
-										+'	</div>'
-										+'</td>'
-										
-										+'<td>'
-										+(list[i].is_founder?'	<span>创建者</span>':'')
-										+(list[i].is_admin && !list[i].is_founder?'	<span>管理员</span>':'')
-										+(!list[i].is_admin && !list[i].is_founder?'	<span>组员</span>':'')
-										+'</td>'
-										
-										+'<td>'
-										+'	<input class="member_id" type="hidden" value="'+list[i].id+'">'
-										+'	<input class="display_name_hidden" type="hidden" value="'+list[i].display_name+'">'
-										+'	<input class="display_name" maxLength="20" value="'+list[i].display_name+'" '+(list[i].editable==0?'disabled="disabled" title="无修改权限" ':' onblur="updateDisplayName(this)" ')+'>'
-										+'</td>'
-										+'<td>'
-										+'	<span>'+formatDate(list[i].gmt_create,'yyyy-MM-dd')+'</span>'
-										+'</td>'
-							   +'</tr>"';
-                       
-                        $("#memberContent").append(html);
-                    }
-                    $(".pageDiv").children().css('display','inline-block');
-                }
-                $("#totoal_count").html(json.maxPageNum);
-                $("#maxPageNum").val(json.maxPageNum);
-                
-              //刷新分页栏
-           	 Page({
-                  num: $("#maxPageNum").val(),					//页码数
-                  startnum: $("#pageNum").val(),				//指定页码
-                  elem: $('#page1'),
-                  callback: function (n){     //点击页码后触发的回调函数
-                  	$("#pageNum").val(n);
-                  	initMember();
-                  }
-                  });
 
-            }
-        });
-    
-	}
-	
-	
+
+    initMember();
+
 
 	//退出小组
 	$("#quitGroup").click(function(){
@@ -487,7 +420,7 @@ $(function(){
                         var html = "<div class='items' id='item_"+responsebean[i].id+"'> "+
                             "<div class='item1' style='clear:both;'> "+
                             "<span><img src='"+contxtpath+"/statics/image/word-(1).png' alt='文件类型' class='item_img1'/><text>"+responsebean[i].fileName+"</text></span> <span style='color:#70bcc3;margin-left:20px'>"+responsebean[i].fileSize+"KB</span>"+
-                            "<span><img src='"+contxtpath+"/statics/image/xztp.png' id='img_"+responsebean[i].id+"' class='item_img2'/><text id='dw_"+responsebean[i].id+"' style='color: #70bcc3;'>"+responsebean[i].download+"</text></span> "+
+                            "<span><img src='"+contxtpath+"/statics/image/xztp.png' id='img_"+responsebean[i].id+"' class='item_img2'/><text id='dw_"+responsebean[i].id+"' style='color: #70bcc3;'>下载"+responsebean[i].download+"</text></span> "+
                             "</div> "+
                             "<div class='item2' style='clear:both;'> "+
                             "<div class='item2_div1'>"+responsebean[i].displayName+" 于 "+formatDate(responsebean[i].gmtCreate,"yyyy.MM.dd hh:ss:mm")+"上传文件</div> "+
@@ -808,5 +741,119 @@ function formatDate(nS,str) {
 
 }
 
+//删除小组成员
+function deletePmphGroupMemberById() {
+	if(removememberIds.length>0){
+        $.ajax({
+            type:'post',
+            url :contxtpath+'/group/deletePmphGroupMemberById.action',
+            dataType:'json',
+			data:{"removememberIds":JSON.stringify(removememberIds)},
+            success:function(json){
+                if(json=="OK"){
+                    window.message.success("操作成功！");
+                    // window.location.href=contxtpath+"/group/toMyGroup.action?groupId="+$("#groupId").val();
+                    // ChangeDiv('memberManager');
+                    initMember();
+                }else{
+                    window.message.error("移除成员失败！");
+                }
+            }
+        });
+	}else{
+        window.message.warning("请选择需要移除的成员！");
+	}
 
+}
+
+
+/**
+ * 查询并输出成员列表
+ */
+function initMember(){
+    $.ajax({
+        type:'post',
+        url :contxtpath+'/group/getMembers.action',
+        //contentType: 'application/json',
+        dataType:'json',
+        data:{
+            groupId   : $("#groupId").val(),
+            pageNum: $("#pageNum").val(),
+            pageSize  : $("#pageSize").val(),
+            memberSearchName  : $.trim($("#memberSearchName").val())
+        },
+        success:function(json){
+            var list = json.mlist;
+            if(list){
+                $("#memberContent").html("");
+                for(var i= 0 ; i< list.length ;i++){
+                    var html ='<tr>'
+                        +'<td>'
+                        +'	<div class="memberRealInfoDiv">'
+                        +'<img src="'
+                        + contextpath + (list[i].avatar.search(/^[0-9A-z]{24}/g)>0?('image/'+list[i].avatar+'.action'):'statics/image/default_image.png')
+                        +'">'
+                        +'		<span title="'+list[i].realname+'">'+list[i].realname+'</span>'
+                        +'	</div>'
+                        +'</td>'
+
+                        +'<td>'
+                        +(list[i].is_founder?'	<span>创建者</span>':'')
+                        +(list[i].admin && !list[i].is_founder?'	<span>管理员</span>':'')
+                        +(!list[i].admin && !list[i].is_founder?'	<span>组员</span>':'')
+                        +'</td>'
+
+                        +'<td>'
+                        +'	<input class="member_id" type="hidden" value="'+list[i].id+'">'
+                        +'	<input class="display_name_hidden" type="hidden" value="'+list[i].display_name+'">'
+                        +'	<input class="display_name" maxLength="20" value="'+list[i].display_name+'" '+(list[i].editable==0?'disabled="disabled" title="无修改权限" ':' onblur="updateDisplayName(this)" ')+'>'
+                        +'</td>'
+                        +'<td>'
+                        +'	<span>'+formatDate(list[i].gmt_create,'yyyy-MM-dd')+'</span>'
+                        +'</td>';
+                        if($("#admin").val()==1){
+                            html+='<td>';
+                                if(list[i].admin==1){
+                                    html+='<input type="checkbox" disabled class="checkid" id="'+list[i].id+'">';
+								}else{
+                                    html+='<input type="checkbox" class="checkid" id="'+list[i].id+'">';
+								}
+                                html+='</td>'
+                                +'</tr>"';
+						}
+                    $("#memberContent").append(html);
+                }
+                $(".pageDiv").children().css('display','inline-block');
+            }
+            $("#totoal_count").html(json.maxPageNum);
+            $("#maxPageNum").val(json.maxPageNum);
+
+            //刷新分页栏
+            Page({
+                num: $("#maxPageNum").val(),					//页码数
+                startnum: $("#pageNum").val(),				//指定页码
+                elem: $('#page1'),
+                callback: function (n){     //点击页码后触发的回调函数
+                    $("#pageNum").val(n);
+                    initMember();
+                }
+            });
+            if(removememberIds!=null && removememberIds.length>0){
+                var a=document.getElementsByClassName("checkid");
+                for(var i=0;i<removememberIds.length;i++){
+                    for(var j=0;j<a.length;j++){
+                        if(removememberIds[i]==a[j].id){
+                            $("#"+removememberIds[i]).prop("checked",true);
+                        }
+                    }
+                }
+            }
+            $('input.checkid').click(function(){
+                this.checked?removememberIds.push(this.id):removememberIds.pop(this.id);
+            });
+
+        }
+    });
+
+}
 

@@ -37,7 +37,7 @@
 	           <if test="searchText !=null" >
 	              where n.material_name like #{searchText}
 	            </if>
-				order by n.gmt_create desc 
+				order by n.sort asc
 				limit #{startnum},#{size}
 
          
@@ -111,7 +111,7 @@
      
      <!--查询社区主页精选书评  -->
      <select id="querySomeComment" parameterType="map" resultMap="baseMap">
-			select buc.* ,b.bookname,wu.username,wu.avatar,b.image_url
+			select buc.* ,b.bookname,wu.username,wu.nickname,wu.avatar,b.image_url
 			from   book_user_comment buc
 				   left join writer_user wu on buc.writer_id=wu.id
 				   left join book b on buc.book_id=b.id

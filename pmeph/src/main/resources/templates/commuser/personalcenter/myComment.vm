@@ -9,10 +9,10 @@
 	    #if(!$!{is_long}||$!{is_long}=='') 
 	    	active
 	    #end ">全部</li>
-    <li id="replytag_toreply" class="replytag 
+    #*<li id="replytag_toreply" class="replytag
 		#if($!{is_long}==1) 
 	    	active
-	    #end ">长评</li>
+	    #end ">长评</li>*#
     <li id="replytag_replied" class="replytag 
 		#if($!{is_long}==0)
 	    	active
@@ -25,8 +25,8 @@
                 <div class="mistitle">我的评论</div>
                 <div class="x" onclick="hideup()"></div>
             </div>
-                    <textarea class="misarea" id="content" onkeyup="LengthLimit(this,3000);" onblur="LengthLimit(this,3000);"></textarea>
-                    <hr style="border:0.05px dotted #E0E0E0;margin-left: 16px;margin-rihgt: 16px;">
+                    <textarea class="misarea" id="content" onkeyup="LengthLimit(this,500);" onblur="LengthLimit(this,500);"></textarea>
+                    <div style="border-top:0.05px dotted #E0E0E0;margin-left: 16px;font-size: 12px;text-align: right;margin-right: 16px;">该评论最多500字</div>
                     <div class="star_num">星级评分:</div>
                     <div class="scorestar" id="star">
                         <div class="scorestar1" id="score1"></div>

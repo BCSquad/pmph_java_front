@@ -128,4 +128,10 @@ public interface HomeDao {
      */
     int queryHotCommentListCount();
 
+    /**
+     * 根据书籍类型查询总条数
+     * @return
+     */
+    int querySize(@Param("type") String type);
+
 }

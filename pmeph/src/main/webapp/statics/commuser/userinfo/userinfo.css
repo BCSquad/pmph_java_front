@@ -15,6 +15,7 @@ body
     background-color:White;
 }
 
+
 .sxy_span{
 	float: left;
 	margin-left: 32px;
@@ -41,7 +42,20 @@ body
 	float:left;
 	border-bottom:2px solid #333333;
     }
-    
+
+.sxy-div-menu1
+{
+
+	font-size: 16px;
+	font-weight: normal;
+	height:50px;
+	line-height: 50px;
+	letter-spacing: 0px;
+	color: #999999;
+	margin-left:20px;
+	cursor:pointer;
+	float:left;
+}
  /*深色页头二级菜单点击出现下划线*/
  .sxy-span-menu{
     border-bottom:2px solid #333333;
@@ -82,14 +96,19 @@ body
 	line-height: 120px;
 	color: #fff;
 }
-#sxy-font-1
-{
-    float:left;
 
-	text-decoration: none;
+#sxy-font-1{
+	cursor: pointer;
+	margin-top: -20px;
+	width: 88px;
+	height: 26px;
+	background-color: #1CB99B;
+	border: none;
+	border-radius: 2px;
 	font-size: 14px;
-	letter-spacing: 0px;
-	color: #333333;
+	color: white;
+	text-align: center;
+	margin-left: 180px;
 }
 
 #sxy-font-2

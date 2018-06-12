@@ -27,6 +27,8 @@
 		AND a.sender_type = 1
 		WHERE
 			receiver_type = 3
+			and a.is_withdraw = 0
+			
 		AND a.is_deleted=0
 		AND A.msg_type IN (1, 0)
 		AND receiver_id = #{id}

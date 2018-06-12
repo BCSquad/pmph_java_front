@@ -31,66 +31,66 @@
             <div class="div-menu-child <%="backlog".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
                  onclick="window.location.href='<c:url value="/schedule/scheduleList.action"/>'">待办事项
             </div>
-            <c:choose> 
-     			<c:when test="${ SESSION_USER_CONST_ORGUSER.progress==1}">   
-	     			<div class="div-menu-child <%="audit".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
-	                 onclick="window.location.href='<c:url value="/applyDocAudit/toPage.action"/>'">申报资料审核
-	            	</div>
- 				</c:when>      
-     			<c:otherwise>  
+            <%--<c:choose>
+     			<c:when test="${ SESSION_USER_CONST_ORGUSER.progress==1}">--%>
+				<div class="div-menu-child <%="audit".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
+					 onclick="window.location.href='<c:url value="/applyDocAudit/toPage.action"/>'">申报资料审核
+				</div>
+			<%--</c:when>
+				<c:otherwise>
      			<div class="div-menu-child <%="audit".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
 	                 onclick="window.location.href='<c:url value="/userinfo/toNoAccessToAuthority.action?pageType=audit"/>'">申报资料审核
 	            	</div>    
-  				</c:otherwise> 
-			</c:choose>
-            <c:choose> 
-     			<c:when test="${ SESSION_USER_CONST_ORGUSER.progress==1}">   
+  				</c:otherwise>
+			</c:choose>--%>
+            <%--<c:choose>
+     			<c:when test="${ SESSION_USER_CONST_ORGUSER.progress==1}">   --%>
 	     			 	<div class="div-menu-child <%="teachercert".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
 	                 	onclick="window.location.href='<c:url value="/teacherauth/toPage.action"/>'">教师认证
 	            		</div>
- 				</c:when>      
+ 				<%--</c:when>
      			<c:otherwise>  
      			<div class="div-menu-child <%="teachercert".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
 	                 onclick="window.location.href='<c:url value="/userinfo/toNoAccessToAuthority.action?pageType=teachercert"/>'">教师认证
 	            	</div>    
   				</c:otherwise> 
-			</c:choose>
-			<c:choose> 
-     			<c:when test="${ SESSION_USER_CONST_ORGUSER.progress==1}">   
+			</c:choose>--%>
+			<%--<c:choose>
+     			<c:when test="${ SESSION_USER_CONST_ORGUSER.progress==1}"> --%>
 	     			 	<div class="div-menu-child <%="message".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
 	                 	onclick="window.location.href='<c:url value="/AllMessage/init.action"/>'">消息
 	            		</div>
- 				</c:when>      
+ 				<%--</c:when>
      			<c:otherwise>  
      			<div class="div-menu-child <%="message".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
 	                 onclick="window.location.href='<c:url value="/userinfo/toNoAccessToAuthority.action?pageType=message"/>'">消息
 	            	</div>    
   				</c:otherwise> 
-			</c:choose>
-           <c:choose> 
-     			<c:when test="${ SESSION_USER_CONST_ORGUSER.progress==1}">   
+			</c:choose>--%>
+           <%--<c:choose>
+     			<c:when test="${ SESSION_USER_CONST_ORGUSER.progress==1}">   --%>
 	     			 	<div class="div-menu-child <%="usermanage".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
 	                 	onclick="window.location.href='<c:url value="/organizationuser/writerLists.action"/>'">用户管理
 	            		</div>
- 				</c:when>      
+ 				<%--</c:when>
      			<c:otherwise>  
      			<div class="div-menu-child <%="usermanage".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
 	                 onclick="window.location.href='<c:url value="/userinfo/toNoAccessToAuthority.action?pageType=usermanage"/>'">用户管理
 	            	</div>    
   				</c:otherwise> 
-			</c:choose>
-			<c:choose> 
-     			<c:when test="${ SESSION_USER_CONST_ORGUSER.progress==1}">   
+			</c:choose>--%>
+			<%--<c:choose>
+     			<c:when test="${ SESSION_USER_CONST_ORGUSER.progress==1}">   --%>
 	     			 	<div class="div-menu-child <%="account".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
-	                 	onclick="window.location.href='<c:url value="/admininfocontroller/toadmininfo.action"/>'">账户设置
+	                 	onclick="window.location.href='<c:url value="/admininfocontroller/toadmininfo.action"/>'">修改资料
 	            		</div>
- 				</c:when>      
+ 				<%--</c:when>
      			<c:otherwise>  
      			<div class="div-menu-child <%="account".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
-	                 onclick="window.location.href='<c:url value="/userinfo/toNoAccessToAuthority.action?pageType=account"/>'">账户设置
+	                 onclick="window.location.href='<c:url value="/userinfo/toNoAccessToAuthority.action?pageType=account"/>'">修改资料
 	            	</div>    
   				</c:otherwise> 
-			</c:choose>
+			</c:choose>--%>
        
         </div>
     </div>

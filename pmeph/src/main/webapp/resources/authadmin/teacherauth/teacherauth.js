@@ -162,7 +162,10 @@ function passCertification(id,realname){
 	);
 }
 //退回验证 输入为writer_user_certification	的id
-function rejectCertification(id,realname){
+function rejectCertification(){
+	var id = $("#return_id").val();
+	var realname = $("#return_realname").val();
+	var backReason = $("#return_cause").val();
 	window.message.confirm(
 			'确定要退回 '+realname+' 的教师认证吗？'
 			,{icon: 3, title:'退回认证',btn:["确定","取消"]}
@@ -170,7 +173,8 @@ function rejectCertification(id,realname){
 	
 				var data={id:id
 						,status:2
-						,contextpath:contextpath};
+						,contextpath:contextpath
+						,backReason:backReason};
 				$.ajax({
 					type:'post',
 					url:contextpath+'teacherauth/statusModify.action?t='+new Date().getTime(),
@@ -182,12 +186,48 @@ function rejectCertification(id,realname){
 					}
 				});
 				layer.close(index);
+				$("#bookmistake").hide();
 			}
 			,function(index){
 				layer.close(index);
+				$("#bookmistake").hide();
 			}
 	);
 }
 
+//点击显示退回弹窗
+function showup(id,realname) {
+	$("#return_id").val(id);
+	$("#return_realname").val(realname);
+	$("#return_cause").val($("#backReason_"+id).val());
+	$("#return_cause_title").html("<div>认证-"+realname+"</div> 退回原因:");
+    $.ajax({
+        type: 'post',
+        url: contextpath + 'dataaudit/tologin.action',
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+            if (json == "OK") {
+                $("#bookmistake").show();
+            }
+        }
+    });
+}
 
+//点击弹窗隐藏
+function hideup() {
+    $("#bookmistake").hide();
+}
 
+function checkAuthen(id,realname){
+    $.ajax({
+        type: "POST",
+        url:contextpath+'dataaudit/checkAuthen.action',
+        dataType:"json",
+        success: function(json) {
+            if(json=="OK"){
+                passCertification(id,realname);
+            }
+        }
+    });
+}

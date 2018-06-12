@@ -48,6 +48,11 @@
 		delete from pmph_group_member  where user_id =#{userId} and group_id =#{groupId} ;
 	</delete>
 
+	<!--  根据主键删除成员 -->
+	<delete id="deletePmphGroupMemberById" >
+		delete from pmph_group_member  where id =#{id};
+	</delete>
+
     <!-- 获取小组讨论 -->
     <select id="getTalks" resultType="GroupMessageVO"> 
     	select 
@@ -60,7 +65,8 @@
 			LEFT JOIN pmph_group_member b on b.id =a.member_id 
 			LEFT JOIN pmph_user c on c.id = b.user_id
 			LEFT JOIN writer_user d on d.id = b.user_id
-		where a.group_id = #{groupId} 
+		where a.group_id = #{groupId} and a.gmt_create >= (select gmt_create from
+		pmph_group_member where user_id = #{thisId} and group_id = #{groupId} and is_writer = 1)
 		ORDER BY a.gmt_create desc
 		limit #{start} , #{pageSize}
     </select>
@@ -137,10 +143,11 @@
 		WHERE a.group_id = #{groupId};
     </select>
     <!-- 获取小组动态 -->
-    <select id="getMessages" parameterType="java.lang.Long"
+    <select id="getMessages"
         resultType="GroupMessageVO">
         SELECT * FROM pmph_group_message 
-        WHERE  group_id = #{groupId} ORDER BY gmt_create DESC
+        WHERE  group_id = #{groupId} and gmt_create >= (select gmt_create from
+		pmph_group_member where user_id = #{thisId} and group_id = #{groupId} and is_writer = 1) ORDER BY gmt_create DESC
     </select>
 
     <!-- 查询小组总文件数目 -->
@@ -153,6 +160,7 @@
 		 	pmph_group_member b on b.id = a.member_id ,
 		 (SELECT if(is_founder or is_admin,true,false ) po from pmph_group_member where user_id = #{thisId} and group_id = #{groupId} )p
 		 WHERE b.group_id = #{groupId}
+		<!--and b.gmt_create >= (select gmt_create from pmph_group_member where user_id = #{thisId} and group_id = #{groupId})-->
 		 <if test="fileName != null and fileName != '' ">
 		 	and a.file_name like CONCAT('%',#{fileName},'%')
 		 </if>
@@ -170,6 +178,7 @@
 		 	pmph_group_member b on b.id = a.member_id ,
 		 (SELECT if(is_founder or is_admin,true,false ) po from pmph_group_member where user_id = #{thisId} and group_id = #{groupId} )p
 		 WHERE b.group_id = #{groupId}
+		<!--and b.gmt_create >= (select gmt_create from pmph_group_member where user_id = #{thisId} and group_id = #{groupId})-->
 		 <if test="fileName != null and fileName != '' ">
 		 	and a.file_name like CONCAT('%',#{fileName},'%')
 		 </if>
@@ -488,7 +497,7 @@
 		gm.id,
 		gm.user_id,
 		gm.is_founder,
-		gm.is_admin,
+		gm.is_admin *1 as admin,
 		gm.is_writer,
 		gm.display_name,
 		gm.gmt_create,
@@ -564,6 +573,10 @@
 		where  id = #{member_id}
 	</update>
 
+	<!--查询当前用户在指定小组中是否是管理员-->
+	<select id="queryAdmin" parameterType="java.util.Map" resultType="java.util.Map">
+		select is_admin *1 as admin from pmph_group_member where user_id = #{user_id}  and group_id = #{group_id}
+	</select>
 </mapper>
 
 

@@ -220,7 +220,9 @@
 
                 <div class="xsp" style="float: left;">
                     <div id="xsp"></div>
-                    <a href="#001" onclick="writeablut()" style="text-decoration: none"><span id="xsp1">写书评</span></a>
+                    <%--<a href="#001" onclick="writeablut()" style="text-decoration: none"><span id="xsp1">写书评</span></a>  --%>
+                    <a  style="text-decoration: none;cursor: pointer;" onclick="$('#content_book').focus()" ><span id="xsp1">写书评</span></a>
+
                 </div>
                 <div class="mistake" onclick="showup(1)">
                     <div class="mis_pic" ></div>
@@ -339,7 +341,8 @@
                     <a name="001" id="001"></a>
                     <textarea class="tarea" id="content_book" onkeyup="javascript:LengthLimit(this,500);"
                               onblur="javascript:LengthLimit(this,500);"></textarea>
-                    <hr style="border:0.05px solid rgba(180, 239, 205, 0.5);margin-left: 16px;margin-rihgt: 16px;">
+                    <div style="border-top:1px solid rgba(180, 239, 205, 0.5);margin-left: 16px;margin-rihgt: 16px;text-align: right;font-size: 12px;width: 870px;">
+                     评论最多500字</div>
                     <div class="star_num">星级评分:</div>
                     <div class="scorestar" id="star">
                         <div class="scorestar1" id="score1"></div>
@@ -422,10 +425,10 @@
                     <div class="morecon">
                         <input type="hidden" value="${start}" id="start">
                         <span class="moreothers" onclick="changepage()"
-                              id="moreothers">${shortcom=='nothing' ? '暂无评论':'加载更多...'}</span>
+                              id="moreothers">${shortcom=='nothing' ? '[暂无评论]':'加载更多...'}</span>
                         <div class="morecom" style="display: none;"></div>
                     </div>
-                    <div id="longcompage">
+                    <%--<div id="longcompage">
                         <div class="comm">
                             <div class="longcom">图书长评</div>
                             <div class="writecom" onclick="writeablut()">写书评</div>
@@ -440,8 +443,8 @@
                                         <c:if test="${list.avatar!='DEFAULT'}"><img
                                                 src="${ctx}/image/${list.avatar}.action" class="picturesize"></c:if>
 
-                                            <%-- <img src="${ctx}/statics/image/rwtx.png"
-                                                                           class="picturesize"/> --%>
+                                            &lt;%&ndash; <img src="${ctx}/statics/image/rwtx.png"
+                                                                           class="picturesize"/> &ndash;%&gt;
                                     </div>
                                     <div style="float: left;margin-left: 10px;margin-top: 5px;">${list.nickname}</div>
                                     <div style="float: left;margin-left: 10px;">
@@ -498,9 +501,9 @@
                     <div class="morecon">
                         <input type="hidden" value="${start}" id="longstart">
                         <span class="moreothers" id="longothers"
-                              onclick="longcom()">${longcom=='nothing' ? '暂无长评':'加载更多...'}</span>
+                              onclick="longcom()">${longcom=='nothing' ? '[暂无长评]':'加载更多...'}</span>
                         <div class="morecom" style="display: none;"></div>
-                    </div>
+                    </div>--%>
                 </div>
             </div>
         </div>
@@ -514,7 +517,7 @@
                 <div style="margin-top: 20px;">
                     <div style="float: left;width: 90px;height: 116px">
                         <input type="hidden" id="sup-hidden" value="${supMap.code}">
-                        <img src="${ctx}/${supMap.image_url}" class="righttopbook"/>
+                        <img src="${supMap.image_url}" class="righttopbook"/>
                     </div>
                     <div style="float: left;width: 170px;margin-left: 10px;">
                         <div class="ptts_sp1">${supMap.bookname}</div>

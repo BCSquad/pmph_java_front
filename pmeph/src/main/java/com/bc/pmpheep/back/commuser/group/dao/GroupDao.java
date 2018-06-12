@@ -62,6 +62,16 @@ public interface GroupDao {
 	 * @return
 	 */
 	Integer deletePmphGroupMember(@Param("groupId")Long groupId, @Param("userId")Long userId);
+
+	/**
+	 * 根据用户id删除成员
+	 * @introduction
+	 * @author Mryang
+	 * @createDate 2017年12月13日 上午11:39:06
+	 * @param id 主键
+	 * @return
+	 */
+	Integer deletePmphGroupMemberById(@Param("id")String id);
 	
 	/**
 	 * 
@@ -143,7 +153,7 @@ public interface GroupDao {
 	 * @param 
 	 * @return List<String>
 	 */
-	List<GroupMessageVO> getMessages(@Param("groupId") Long groupId);
+	List<GroupMessageVO> getMessages(@Param("groupId") Long groupId,@Param("thisId")Long thisId);
 	
 	/**
 	 * 
@@ -389,4 +399,12 @@ public interface GroupDao {
 	 * @return
 	 */
 	int updateDisplayName(Map<String, Object> paraMap);
+
+	/**
+	 * 查询当前用户在小组中是否是管理员
+	 * @param user_id
+	 * @param group_id
+	 * @return
+	 */
+	Map<String,Object> queryAdmin(@Param("user_id")String user_id,@Param("group_id")Long group_id);
 }

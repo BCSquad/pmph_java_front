@@ -112,6 +112,26 @@ String contextpath=request.getContextPath();
         </div>
     </div>
     
+     <!-- 退回原因填写悬浮框 -->
+        <div class="bookmistake" id="bookmistake" style="display: none;">
+            <form id="bookmistakeform">
+            <input type="hidden"  id="return_id" value="">
+            <input type="hidden"  id="return_realname" value="">
+                <div class="apache">
+                    <div class="mistitle" id="return_cause_title">退回原因:</div>
+                    <div class="xx" onclick="hideup()"></div>
+                </div>
+                
+                <div class="info">
+                    <textarea class="misarea" id="return_cause" maxLength="40" ></textarea>
+                </div>
+          
+                <div class="">
+                	<button class="btn" type="button" onclick="hideup()">取消</button>
+                    <button class="btn" type="button" onclick="rejectCertification()">确认</button>
+                </div>
+            </form>
+        </div>
 	
 		<jsp:include page="/pages/comm/tail.jsp"></jsp:include> 
 	

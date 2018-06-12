@@ -106,12 +106,14 @@ request.setAttribute("currentTime",datetime);
                 	
                 </c:choose>
                 <br/>
+				<c:if test="${selfLog == true}">
+					<a href="<c:url value="/userinfo/touser.action"/>"><span id="zhsz"></span><span class="grsx">修改资料</span></a>
+				</c:if>
                 <c:if test="${permap.rank==0}"><span id="zjrz"></span><span class="grsx">普通用户</span></c:if>
                 <c:if test="${permap.rank==1}"><span id="zjrz"></span><span class="grsx">教师用户</span></c:if>
                 <c:if test="${permap.rank==2}"><span id="zjrz"></span><span class="grsx">作家用户</span></c:if>
                 <c:if test="${permap.rank==3}"><span id="zjrz"></span> <span class="grsx">专家用户</span></c:if>
                 <c:if test="${selfLog == true}">
-                	<a href="<c:url value="/userinfo/touser.action"/>"><span id="zhsz"></span><span class="grsx">账户设置</span></a>
                 	<a href="<c:url value="/integral/toPage.action"/>"><span id="jftb"></span><span class="grsx">积分</span></a>
                 </c:if>
                 
@@ -722,7 +724,7 @@ request.setAttribute("currentTime",datetime);
 
             <div class="right">
             	<div id="wdxz"><span id="xztb"></span><span class="rlan">加入的小组</span><span
-                        id="qbhy"><a href="${ctx}/group/list.action" class="aright">全部小组>>&nbsp;</a></span>
+                        id="qbhy"><a href="${ctx}/group/list.action" class="aright">${selfLog ==true?'全部小组>>':''}&nbsp;</a></span>
                     <br style="clear: both;"/>
                     <c:if test="${listmygroup == null || listmygroup.size()==0  }">
                 		<div style="padding-top: 10px;">
@@ -731,7 +733,9 @@ request.setAttribute("currentTime",datetime);
                 	</c:if>
                     <ul class="scul">
                         <c:forEach items="${listmygroup}" begin='0' end='8' var="listmyg" varStatus="status">
-                            <a  class="not-like-an-a" href="${ctx}/group/toMyGroup.action?groupId=${listmyg.group_id}">
+							<c:if test="${selfLog ==true}">
+								<a  class="not-like-an-a" href="${ctx}/group/toMyGroup.action?groupId=${listmyg.group_id}">
+						    </c:if>
 	                            <li class="wdxz" title="${listmyg.group_name}">
 	                            	<img src="${ctx}/${listmyg.group_image}" class="xztp">
 	                                <br/>
@@ -747,7 +751,7 @@ request.setAttribute("currentTime",datetime);
                 <span id="hytb"></span> 
                 <span class="rlan">好友</span> 
                 <span id="qbhy">
-                	<a href="${ctx}/myFriend/listMyFriend.action" class="aright">全部好友>>&nbsp;</a>
+                	<a href="${ctx}/myFriend/listMyFriend.action" class="aright">${selfLog ==true?'全部好友>>':''}&nbsp;</a>
                 </span>
                     <br style="clear: both;"/>
                     <c:if test="${listmyfriend == null || listmyfriend.size()==0  }">

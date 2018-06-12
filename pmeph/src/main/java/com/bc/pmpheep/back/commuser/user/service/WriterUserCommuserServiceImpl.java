@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.user.service;
 
+import com.bc.pmpheep.back.commuser.mymessage.service.MyMessageService;
 import com.bc.pmpheep.back.commuser.user.bean.CommuserOrg;
 import com.bc.pmpheep.back.commuser.user.bean.CommuserWriterUser;
 import com.bc.pmpheep.back.commuser.user.bean.CommuserWriterUserCertification;
@@ -16,9 +17,12 @@ import com.bc.pmpheep.service.exception.CheckedExceptionResult;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
 import com.mongodb.gridfs.GridFSDBFile;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,6 +48,10 @@ public class WriterUserCommuserServiceImpl implements WriterUserCommuserService 
 	private WriterUserCommuserDao writerUserDao;
 	@Autowired
 	private FileService fileService;
+
+    @Autowired
+    @Qualifier("com.bc.pmpheep.back.commuser.mymessage.service.MyMessageServiceImpl")
+    MyMessageService messageService;
 
 	@Override
 	public CommuserWriterUser get(Long id) throws CheckedServiceException {
@@ -136,6 +144,11 @@ public class WriterUserCommuserServiceImpl implements WriterUserCommuserService 
 			w_result = writerUserDao.updateWriterUser(writerUser);
 		}
 		writerUserCertification.setOperatCount(w_result*c_result);
+		/**发送系统消息**/
+        Date date=new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy年MM月dd日");
+        String createdate  = df.format(date);
+        messageService.sendTeacherMsg(orgId,realName,createdate);
 		return writerUserCertification;
 	}
 

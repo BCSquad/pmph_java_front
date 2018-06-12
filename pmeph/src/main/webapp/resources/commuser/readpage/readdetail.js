@@ -343,7 +343,7 @@ function changepage() {
             $(".morecom").hide();
             $(".moreothers").show();
             if (json.length < 3) {
-                $("#moreothers").html('加载完毕');
+                $("#moreothers").html('');
             } else {
                 json = json.slice(0, 2);
             }
@@ -422,7 +422,7 @@ function longcom() {
             $(".moreothers").show();
 
             if (json.length < 3) {
-                $("#longothers").html('加载完毕');
+                $("#longothers").html('');
             } else {
                 json = json.slice(0, 2);
             }
@@ -684,7 +684,7 @@ function correction() {
                     async: false,
                     dataType: 'json',
                     success: function (json) {
-                        if (json == "OK") {
+                        if (json.returnCode == "OK") {
                             window.message.success("数据已提交！");
                             $("#bookmistake").hide();
                             $("#page").val(null);
@@ -692,6 +692,28 @@ function correction() {
                             $("#content").val(null);
                             $("#upname").html('未选择任何文件!');
                             $("#upload_status").val(null);
+                            
+                            var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
+                            var bookId = $("#book_id").val();
+                            var userId = $("#userid").val();
+                            var correctId = json.correctId;
+                            $.ajax({
+                                type: 'get',
+                                url: exportWordBaseUrl + '/frontWxMsg/bookError/'+bookId+"/"+userId+"/"+correctId,
+                                dataType: 'jsonp',
+                                success:function(wxResult){
+                                	if(wxResult){
+                                		window.message.success("微信消息发送成功");
+                                		
+                                	}
+                                },
+                                error:function(XMLHttpRequest, textStatus){
+                                	
+                                }
+                                });
+                            
+                            
+                            
                         } else {
                             window.message.info("错误，请填写完所有内容！");
                         }

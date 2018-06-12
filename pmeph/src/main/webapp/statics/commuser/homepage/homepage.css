@@ -230,12 +230,97 @@ ul li {
     margin-left: 9px;
 }
 
+.newbook{
+    width: 166px;
+    float: left;
+    height: 230px;
+    cursor: pointer;
+    margin-top: 14px;
+}
+
+#homepagebook{
+    float: left;
+    margin-bottom: 30px;
+    border: 1px solid #ececec;
+    box-shadow: #ececec 1px 3px 5px;
+    border-radius: 7px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.no-more-book{
+    height: 300px;
+    width: 330px;
+    text-align: center;
+    /* margin: auto !important; */
+    padding-top: 10px;
+    color: #333333;
+    margin-left: 270px;
+}
+
 #radio {
     width: 830px;
     height: 382px;
     background-image: url("../testfile/change.png");
     transform: translate(0px, 0px);
 }
+
+.typebar{
+    float: left;
+    margin-top: 17px;
+    font-size: 18px;
+    color: #489299;
+    float: left;
+    margin-bottom: 20px;
+}
+
+.ir_01 {
+    width: 138px;
+    height: 160px;
+    margin: auto;
+}
+
+.ir_01 img {
+    max-width: 138px;
+    display: block;
+    margin: auto;
+    height: 160px;
+}
+
+.ir_02 {
+    width: 138px;
+    height: 25px;
+    margin: auto;
+    margin-top: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.ir_02 span {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 14px;
+    color: #333333;
+    letter-spacing: 1px;
+}
+
+.ir_03 {
+    width: 138px;
+    margin: auto;
+    margin-top: 0px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.ir_03 span {
+    font-size: 12px;
+    color: #999999;
+    letter-spacing: 1px;
+}
+
 
 .op-link {
     width: 278px;
@@ -400,6 +485,8 @@ ul li {
 	color: #333333;
 	cursor: pointer;
 	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .textbook_left{
@@ -594,10 +681,11 @@ ul li {
 
 }
 
-.area-4 .tab-bar {
+.tab-bar {
     height: 40px;
     border-bottom: 1px solid #E5E3DF;
     overflow: hidden;
+    margin-top: 100px;
 }
 
 .tab-bar .tab {
@@ -640,7 +728,7 @@ ul li {
 
 .tab-bar .page {
     float: right;
-    margin-right:365px;
+    /*margin-right:365px;*/
     margin-left: 10px;
     width: 110px;
     height: 100%;
@@ -673,6 +761,14 @@ ul li {
     cursor: pointer;
 }
 
+#JKFYDiv_0{
+    box-shadow: #ececec 1px 3px 5px;
+    width: 860px;
+    margin-top: 10px;
+    border-radius: 7px;
+    border: 1px solid #ececec;
+}
+
 .tab-bar .page .icon-right {
     float: right;
     background: url("../../image/css_sprites.png");
@@ -683,9 +779,9 @@ ul li {
 }
 
 .area-4 .content {
-    height: 492px;
+    height: 485px;
     width: 100%;
-    clear: both;
+    /*clear: both;*/
 }
 
 .content .left {
@@ -766,7 +862,7 @@ ul li {
     height: 485px;
 }
 
-.area-4 .content .right .book {
+.book {
     float: left;
     width: 147px;
     height: 223px;
@@ -784,6 +880,14 @@ ul li {
 }
 
 .area-4 .content .right .book .bk {
+    margin: auto;
+    margin-top: 11px;
+    max-width: 140px;
+    height: 140px;
+    display: block;
+}
+
+.bk {
     margin: auto;
     margin-top: 11px;
     max-width: 140px;
@@ -856,7 +960,7 @@ ul li {
 }
 
 .area-5 {
-    height: 100px;
+    /*height: 100px;*/
 
 }
 
@@ -864,7 +968,7 @@ ul li {
     float: left;
     width: 285px;
     height: 82px;
-    margin-top: 60px;
+    /*margin-top: 60px;*/
     margin-left: 10px;
 }
 
@@ -1125,9 +1229,13 @@ ul li {
 
 .a7_write {
     margin-left: 7px;
-
     font-size: 12px;
     color: #333333;
+    display: block;
+    width: 160px;
+    height: 24px;
+    overflow: hidden;
+    word-break: break-all;
 }
 
 .a7_cont {
@@ -1199,7 +1307,7 @@ ul li {
 .a7_author {
     float: left;
     height: 12px;
-    margin-top: 2px;
+    margin-top: 10px;
     margin-left: 4px;
 }
 
@@ -1464,7 +1572,7 @@ ul li {
 }
 
 .sp_remark {
-
+	word-break: break-all;
     font-size: 12px;
     font-weight: normal;
     font-stretch: normal;
@@ -1491,7 +1599,7 @@ ul li {
 .area-8 .left {
     float: left;
     width: 840px;
-    height: 100%;
+    height: 400px;
 }
 
 .last_right_head {
@@ -1593,7 +1701,7 @@ ul li {
 }
 
 .num4 {
-    background-image: url("../../testfile/sprites.png");
+ /*   background-image: url("../../testfile/sprites.png");*/
     background-position: -374px -126px;
     background-repeat: no-repeat;
 /*    height: 27px;
@@ -1679,4 +1787,17 @@ ul li {
 
 .left_two img{
 	border:none;
+}
+
+.emw{
+    z-index: 9999;
+    position: fixed ! important;
+    right: 15px;
+    top: 90px;
+    display: none;
+}
+
+.emw img{
+    width: 140px;
+    height: 140px;
 }

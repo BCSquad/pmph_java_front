@@ -47,10 +47,31 @@ public class ResponseBean<T> implements Serializable {
      * 没有操作权限
      */
     public static final int NO_PERMISSION       = 100;
+    public static final int NO_AUTH             = 250;
 
     private int             code                = SUCCESS;
     private String          msg                 = "success";
     private T               data;
+
+    public String getBackReason() {
+        return backReason;
+    }
+
+    public void setBackReason(String backReason) {
+        this.backReason = backReason;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    private String          backReason;
+    private String          userid;
+    private String          proxy;
 
     public ResponseBean() {
         super();
@@ -107,5 +128,14 @@ public class ResponseBean<T> implements Serializable {
      */
     public void setData(T data) {
         this.data = data;
+    }
+
+
+    public String getProxy() {
+        return proxy;
+    }
+
+    public void setProxy(String proxy) {
+        this.proxy = proxy;
     }
 }

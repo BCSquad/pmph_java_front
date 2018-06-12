@@ -75,6 +75,10 @@
                     <span class="icon"></span>
                     <span class="wtext" >帮助中心</span>
                 </span>
+                <%--<span class="wxgzh" onclick="window.location.href='${ctx}/help/helpList.action'">
+                    <span class="icon"></span>
+                    <span class="wtext" >微信公众号</span>
+                </span>--%>
             </c:if>
 
 
@@ -112,8 +116,8 @@
             %>
 
             <c:if test="${userInfo != null}">
-                <span class="logininfo">
-                    您好,<%=MapUtils.getString(userInfo, "realname")%>
+                <span class="logininfo" style="cursor: pointer" onclick="window.location.href='<c:url value="/userinfo/touser.action"/>'">
+                    您好,<%=MapUtils.getString(userInfo, "nickname")%>
                 </span>
 
                 <span class="logininfoout"

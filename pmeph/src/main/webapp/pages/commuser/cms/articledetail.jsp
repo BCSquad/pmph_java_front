@@ -113,43 +113,6 @@
                 				</c:if>
                         	</div>
                         	<div style="float: left;margin-left: 10px;margin-top: 5px;">${list.nickname}</div>
-                        	<%-- <div style="float: left;margin-left: 10px;">
-                        	<c:if test="${list.score<=3}">
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx2"></span>
-	                        	<span class="rwtx2"></span>
-	                        	<span class="rwtx2"></span>
-	                        	<span class="rwtx2"></span>
-	                        </c:if>
-	                        <c:if test="${list.score<=5 and list.score>3}">
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx2"></span>
-	                        	<span class="rwtx2"></span>
-	                        	<span class="rwtx2"></span>
-	                        </c:if>
-	                        <c:if test="${list.score<=7 and list.score>5}">
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx2"></span>
-	                        	<span class="rwtx2"></span>
-	                        </c:if>
-	                        <c:if test="${list.score<=9 and list.score>7}">
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx2"></span>
-	                        </c:if>
-	                        <c:if test="${list.score>9}">
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx1"></span>
-	                        </c:if>
-                        	</div> --%>
                             <div class="date_content"><div class="date">${list.gmt_create}</div></div>
                         </div>
                         <div class="item_content">${list.content}</div>

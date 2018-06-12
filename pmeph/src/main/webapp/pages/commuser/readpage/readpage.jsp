@@ -248,10 +248,10 @@
             <div style="clear: both"></div>
         </div>
     </div>
+    <jsp:include page="/pages/comm/tail.jsp">
+        <jsp:param name="linked" value="linked"></jsp:param>
+    </jsp:include>
 </div>
-<jsp:include page="/pages/comm/tail.jsp">
-    <jsp:param name="linked" value="linked"></jsp:param>
-</jsp:include>
 <script>
     var _hmt = _hmt || [];
     (function () {

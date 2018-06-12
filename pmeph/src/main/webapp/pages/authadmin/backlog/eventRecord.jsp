@@ -74,11 +74,22 @@
                             </div>
                         </div>
                         <div class="downContentEvent">
-                                <span class="timeEventFont">审核了${message.NAME}于<fmt:formatDate pattern="yyyy年MM月dd日" value="${message.gmt_create}" />提交的${message.CONTENT}</span>
+                            <c:choose>
+                                <c:when test="${message.PROGRESS==3}">
+                                    <span class="timeEventFont">审核通过了${message.NAME}于<fmt:formatDate pattern="yyyy年MM月dd日" value="${message.gmt_create}" />提交的${message.CONTENT}</span>
+                                </c:when>
+                                <c:when test="${message.PROGRESS==2}">
+                                    <span class="timeEventFont">退回了${message.NAME}于<fmt:formatDate pattern="yyyy年MM月dd日" value="${message.gmt_create}" />提交的${message.CONTENT}</span>
+                                </c:when>
+                                <c:otherwise>
+                                    <span class="timeEventFont">审核了${message.NAME}于<fmt:formatDate pattern="yyyy年MM月dd日" value="${message.gmt_create}" />提交的${message.CONTENT}</span>
+                                </c:otherwise>
+                            </c:choose>
+
                         </div>
                     </div>
                     <div class="rightButtonEvent">
-                        <div class="buttonDiv" onclick="detail('${message.TYPE}',${message.AUDITID})">
+                        <div class="buttonDiv" onclick="detail('${message.TYPE}',${message.AUDITID},${message.declaration_id})">
                             	查看
                         </div>
                     </div>
@@ -187,14 +198,28 @@
 		window.location.href="${ctx}/schedule/eventRecord.action";
 	}
 	
-	function detail(type,auditId){
+	function detail(type,auditId,declaration_id){
 		 if(type=='A'){
-			window.location.href="${ctx}/dataaudit/toPage.action?material_id="+auditId;
-		}else if(type=B){
+			<%--window.location.href="${ctx}/dataaudit/toPage.action?material_id="+auditId;--%>
+             window.location.href = contextpath + 'dataaudit/toMaterialAudit.action?material_id=' + auditId + '&declaration_id=' + declaration_id;
+		}else if(type='B'){
     		//跳转教师资格认证页面
-			window.location.href="${ctx}/teacherauth/toPage.action?";	
-		} 
+			window.location.href="${ctx}/teacherauth/toPage.action?";
+		}
 	}
+
+   /* function checkAuthen(type,auditId){
+        $.ajax({
+            type: "POST",
+            url:contextpath+'dataaudit/checkAuthen.action',
+            dataType:"json",
+            success: function(json) {
+                if(json=="OK"){
+                    detail(type,auditId);
+                }
+            }
+        });
+    }*/
 </script>
 </body>
 </html>

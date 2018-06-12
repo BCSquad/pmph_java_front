@@ -90,4 +90,16 @@ function resultStatistics(id,name){
 function dealWithAudit(id,name,view_audit){
 	window.location.href = contextpath + "dataaudit/toPage.action?material_id="+id+"&view_audit="+view_audit;
 }
-               
+
+function checkAuthen(id,name,view_audit){
+    $.ajax({
+        type: "POST",
+        url:contextpath+'dataaudit/checkAuthen.action',
+        dataType:"json",
+        success: function(json) {
+            if(json=="OK"){
+                dealWithAudit(id,name,view_audit);
+            }
+        }
+    });
+}

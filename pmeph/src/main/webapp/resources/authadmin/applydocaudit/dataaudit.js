@@ -192,14 +192,12 @@ function selectPageSize() {
 function queryClear(){
 	$(".btn_1").attr("disabled",true);
 	$("#page-num-temp").val(1);
-    
     setTimeout(function(){
-    	$(".query_input").val("");
-	    $("#search-status-select").trigger("click");
-	    $("#search-status-select").find("li[data-value='']").trigger("click");
+        $(".query_input").val("");
+       //  $("#search-status-select").trigger("click");
+	     $("#search-status-select").find("li[data-value='']").trigger("click");
     },100);
-    //queryMain();
-    
+
 }
 
 //查询按钮点击事件触发 

@@ -3,14 +3,7 @@
  */
 package com.bc.pmpheep.back.authadmin.message.service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import com.bc.pmpheep.back.commuser.mymessage.bean.DialogueVO;
+import com.bc.pmpheep.back.authadmin.message.dao.AllMessageDao;
 import com.bc.pmpheep.back.util.RouteUtil;
 import com.bc.pmpheep.general.pojo.Message;
 import com.bc.pmpheep.general.service.MessageService;
@@ -18,7 +11,12 @@ import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bc.pmpheep.back.authadmin.message.dao.AllMessageDao;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author xcy
@@ -29,7 +27,7 @@ import com.bc.pmpheep.back.authadmin.message.dao.AllMessageDao;
 @Service("com.bc.pmpheep.back.authadmin.message.service.AllMessageServiceImpl")
 public class AllMessageServiceImpl implements AllMessageService {
 
-   @Autowired
+    @Autowired
     AllMessageDao allMessageDao;
 
     @Autowired
@@ -39,26 +37,26 @@ public class AllMessageServiceImpl implements AllMessageService {
     /**
      * 根据系统消息内容id更改系统消息是否已读
      * @param mid
-     * @param userid 
+     * @param userid
      */
-	@Override
-	public int updateIsRead(String mid) {
-		// TODO Auto-generated method stub
-		return allMessageDao.updateIsRead(mid);
-	}
-	/**
-	 * 删除消息
-	 * @param mid
-	 * @param tag
-	 * tag :
-	 * 1删除收到的消息 根据主键id删除此条
-	 * 2删除发送的信息 根据msg_id删除此次发送的消息 应该对多人发送所以有多条
-	 */
-	@Override
-	public int deletemsg(String mid, String tag) {
-		// TODO Auto-generated method stub
-		return allMessageDao.deletemsg(mid,tag);
-	}
+    @Override
+    public int updateIsRead(String mid) {
+        // TODO Auto-generated method stub
+        return allMessageDao.updateIsRead(mid);
+    }
+    /**
+     * 删除消息
+     * @param mid
+     * @param tag
+     * tag :
+     * 1删除收到的消息 根据主键id删除此条
+     * 2删除发送的信息 根据msg_id删除此次发送的消息 应该对多人发送所以有多条
+     */
+    @Override
+    public int deletemsg(String mid, String tag) {
+        // TODO Auto-generated method stub
+        return allMessageDao.deletemsg(mid,tag);
+    }
 
 
     /**
@@ -91,10 +89,10 @@ public class AllMessageServiceImpl implements AllMessageService {
 
         return messages;
     }
-    
+
     @Override
-	public List<Map<String, Object>> getSendMessage(Map<String, Object> param) {
-    	List<Map<String, Object>> messages = allMessageDao.getSendMessage(param);
+    public List<Map<String, Object>> getSendMessage(Map<String, Object> param) {
+        List<Map<String, Object>> messages = allMessageDao.getSendMessage(param);
         List<String> ids = new ArrayList<String>();
         Map<String, Map<String, Object>> map = new HashMap<String, Map<String, Object>>();
         for (Map<String, Object> message : messages) {
@@ -113,5 +111,5 @@ public class AllMessageServiceImpl implements AllMessageService {
         }
 
         return messages;
-	}
+    }
 }

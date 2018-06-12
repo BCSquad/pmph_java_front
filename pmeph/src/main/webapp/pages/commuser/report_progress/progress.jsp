@@ -162,7 +162,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					                            	<span class="left-bom-24">已被遴选为数字编委</span>
 					                            </c:when>
 					                            <c:when test="${(books.isPublished || books.isForceEnd) }">
-					                            	<span class="left-bom-22">遴选结束，未选中</span>
+					                            	<span class="left-bom-22">遴选结束</span>
 					                            </c:when>
 					                            <c:when test="${(progress.offlineProgress=='2'&&books.onlineProgress==3)}">
 					                            	<span class="left-bom-22">遴选中</span>
