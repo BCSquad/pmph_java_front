@@ -197,6 +197,25 @@ public interface ReadDetailDao {
 	 * @return int
 	 */
 	int queryMoreBookVidosCount(Map<String,Object> map);
+	
+	/**
+	 * 查询关联图书总数
+	 * @param id
+	 * @param type
+	 * @return
+	 */
+	int queryRelatedBookListCount(Map<String,Object> map);
+	
+	/**
+	 * 查询关联图书列表
+	 * @param id
+	 * @param type
+	 * @param start
+	 * @param pageSize
+	 * @param nextPage
+	 * @return
+	 */
+	List<Map<String, Object>> queryRelatedBookList(Map<String,Object> map);
 
 
 }

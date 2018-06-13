@@ -43,6 +43,7 @@
 <div class="body">
     <input type="hidden" value="${map.type}" id="type_id">
     <div class="content-wrapper">
+    	<div class="content">
         <input type="hidden" id="book_id" value="${id}">
         <input type="hidden" id="marks" value="${map.bookmarks}">
         <!-- 图书纠错悬浮框 -->
@@ -534,12 +535,15 @@
                             <span id="span_3">教材关联图书</span>
                         </div>
                     </div>
-                    <div class="right_8">
+                    <div class="right_8 relatiedBookPageSwitchWrapper 1" style="display: none;">
                         <img src="../statics/image/refresh.png" style="float:left;margin-left:80px">
-                        <div class="refresh" onclick='fresh("6")'>换一批</div>
+                        <!-- <div class="refresh" onclick='fresh("6")'>换一批</div> -->
+                        <div class="refresh" onclick='relatiedBookPageSwitch("1")'>换一批</div>
                     </div>
                 </div>
                 <div id="about">
+                	<input class="relation_page" value="0" type="hidden"></input>
+                	<input class="relation_totalPage" value="-1" type="hidden" ></input>
                     <c:forEach items="${frList}" var="list">
                         <div class="right_9" onclick="todetail('${list.id}')">
                             <div class="right_10">
@@ -558,12 +562,14 @@
                             <span id="span_3">相关推荐</span>
                         </div>
                     </div>
-                    <div class="right_8">
+                    <div class="right_8 relatiedBookPageSwitchWrapper 2" style="display: none;">
                         <img src="../statics/image/refresh.png" style="float:left;margin-left:80px">
-                        <div class="refresh" onclick='fresh("9")'>换一批</div>
+                        <div class="refresh" onclick='relatiedBookPageSwitch("2")'>换一批</div>
                     </div>
                 </div>
                 <div id="change">
+                	<input class="relation_page" value="0" type="hidden"></input>
+                	<input class="relation_totalPage" value="-1" type="hidden" ></input>
                     <c:forEach items="${auList}" var="list">
                         <div class="right_9" onclick="todetail('${list.id}')">
                             <div class="right_10">
@@ -590,11 +596,13 @@
                         <div class="right_18">人卫推荐</div>
                     </div>
                 </div>
-                <div class="right_19">
+                <div class="right_19 relatiedBookPageSwitchWrapper 3" style="display: none;">
                     <div class="picture1"></div>
-                    <div class="refresh1" onclick="change()">换一批</div>
+                    <div class="refresh1" onclick="relatiedBookPageSwitch('3')">换一批</div>
                 </div>
                 <div id="comment">
+                	<input class="relation_page" value="0" type="hidden"></input>
+                	<input class="relation_totalPage" value="-1" type="hidden" ></input>
                     <c:forEach items="${eMap}" var="list">
                         <div class="right_20">
                             <div class="right_21" onclick="todetail('${list.id}')">${list.bookname}</div>
@@ -605,6 +613,7 @@
             </div>
         </div>
     </div>
+	</div>
 </div>
 <div style="clear:both;"></div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
