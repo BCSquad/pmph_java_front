@@ -76,7 +76,7 @@
 			return false;
 			//document.getElementById("certForm").submit();
 		}else{
-			window.message.error("请按要求填写必填信息！");
+			//window.message.error("请按要求填写必填信息！");
 			return false;
 		}
 	}
