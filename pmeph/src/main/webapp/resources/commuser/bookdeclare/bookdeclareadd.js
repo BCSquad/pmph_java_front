@@ -233,7 +233,6 @@ function buttGive(){
 
 //判断是否为空
 function checkNull(jsonRequiredEleId){
-	debugger
 	/*var s = "["+jsonStr.substring(0, jsonStr.length-1)+"]";
 	var objs = $.parseJSON(s);*/
 	var objs = jsonRequiredEleId;
@@ -248,10 +247,11 @@ function checkNull(jsonRequiredEleId){
 		}
 	    
 	    if(value == ""){
+			debugger
 			layer.tips(obj.content, '#'+obj.id);
 			$("#"+obj.id)[0].focus();  //聚焦2
 			b = false;
-			window.message.warning(obj.content);
+			//window.message.warning(obj.content);
 			return false; 
 		}
 	});
