@@ -247,7 +247,6 @@ function checkNull(jsonRequiredEleId){
 		}
 	    
 	    if(value == ""){
-			debugger
 			layer.tips(obj.content, '#'+obj.id);
 			$("#"+obj.id)[0].focus();  //聚焦2
 			b = false;
