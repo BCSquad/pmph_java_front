@@ -576,7 +576,7 @@
                                         <div class="num_book">${status.index+1}</div>
                                     </div>
                                     <div class="last_right_content">
-                                        <div class="sale_book" id="sale_book${status.count}">${list.bookname}</div>
+                                        <div class="sale_book" id="sale_book${status.count}" title="${list.bookname}">${list.bookname}</div>
                                     </div>
                                 </div>
                             </c:forEach>
