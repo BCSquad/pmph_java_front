@@ -576,6 +576,7 @@
 	<!--查询当前用户在指定小组中是否是管理员-->
 	<select id="queryAdmin" parameterType="java.util.Map" resultType="java.util.Map">
 		select is_admin *1 as admin from pmph_group_member where user_id = #{user_id}  and group_id = #{group_id}
+		and is_writer=0
 	</select>
 </mapper>
 
