@@ -84,7 +84,7 @@
                             </div>
                             <div class="msg">
                                 <div class="name">${list.realname}</div>
-                                <div class="text">${list.title}</div>
+                                <%--<div class="text">${list.title}</div>--%>
                             </div>
                             <div class="add">
                                 <div>

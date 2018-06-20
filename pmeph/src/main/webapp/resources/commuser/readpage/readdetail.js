@@ -307,6 +307,9 @@ $(function () {
     morecontent();
 
 
+    relatiedBookPageSwitch('1');
+    relatiedBookPageSwitch('2');
+    relatiedBookPageSwitch('3');
 });
 //展开、收起
 function morecontent() {
@@ -549,6 +552,95 @@ function fresh(row) {
             } else {
                 $("#change").html(str);
             }
+        }
+    });
+}
+
+/**
+ * 后台配置相关图书的"换一批按钮触发"
+ * relation_type ： 1.教材关联图书 2.相关推荐 3.人卫推荐
+ * nextPage: 换到第几页
+ */
+function relatiedBookPageSwitch(relation_type){
+	var id =$('#bookid').val();
+	var tagetElId= "";
+	var nextPage = 0;
+	var totalPage = 100;
+	if (relation_type == '1' ) {
+		tagetElId = "about";
+		if($("#"+tagetElId).children(".relation_totalPage").length==0
+				||$("#"+tagetElId).children(".relation_totalPage").val()==0){
+			fresh("6");
+			return;
+		}
+	}else if(relation_type == '2' ){
+		tagetElId = "change";
+		if($("#"+tagetElId).children(".relation_totalPage").length==0
+				||$("#"+tagetElId).children(".relation_totalPage").val()==0){
+			fresh("9");
+			return;
+		}
+	}else if(relation_type == '3'){
+		tagetElId = "comment";
+		if($("#"+tagetElId).children(".relation_totalPage").length==0
+				||$("#"+tagetElId).children(".relation_totalPage").val()==0){
+			change();
+			return;
+		}
+	}
+	nextPage = $("#"+tagetElId).children(".relation_page").val();
+	totalPage = $("#"+tagetElId).children(".relation_totalPage").val();
+	var str="";
+	$.ajax({
+        type: 'post',
+        url: contextpath + 'readdetail/relatiedBookPageSwitch.action?type=' + relation_type + '&page=' + nextPage+'&id='+id+'&t='+new Date(),
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+        	str += '<input class="relation_page" value="'+json.nextPage+'" type="hidden"></input>';
+        	str += '<input class="relation_totalPage" value="'+json.totalPage+'" type="hidden"></input>';
+        	if (relation_type == '1'||relation_type == '2') {
+        		$.each(json.list, function (i, x) {
+                    str += '<div class="right_9" onclick="todetail(' + x.id + ')"> <div class="right_10"><img class="right_12" src=' +
+                        x.image_url +
+                        '></div><div class="right_11">' +
+                        x.bookname +
+                        '</div></div>';
+                });
+			}else if(relation_type == '3'){
+				$.each(json.list, function (i, x) {
+	                str += '<div class="right_20"><div class="right_21" onclick="todetail(' +
+	                    x.id
+	                    + ')">' +
+	                    x.bookname +
+	                    '</div><div class="right_22">（' +
+	                    x.author +
+	                    '）</div></div>';
+	            });
+			}
+
+        	if (json.totalPage==0) {
+        		$(".relatiedBookPageSwitchWrapper."+relation_type).show();
+        		if (relation_type == '1' ) {
+        				fresh("6");
+        				return;
+        		}else if(relation_type == '2' ){
+        				fresh("9");
+        				return;
+        		}else if(relation_type == '3'){
+        				change();
+        				return;
+        		}
+			}
+
+
+            $("#"+tagetElId).html(str);
+            if (json.totalPage==1) {
+				$(".relatiedBookPageSwitchWrapper."+relation_type).hide();
+			}else{
+				$(".relatiedBookPageSwitchWrapper."+relation_type).show();
+
+			}
         }
     });
 }

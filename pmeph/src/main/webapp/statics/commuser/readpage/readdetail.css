@@ -1147,3 +1147,6 @@
     color: red;
     margin-left: 80px;
 }
+img.no_relation {
+    width: 100%;
+}

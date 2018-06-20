@@ -112,7 +112,7 @@
         or t.id = #{type}
         )
         where b.is_on_sale = 1
-        order by b.image_url desc
+        order by b.is_stick*b.sort desc, b.image_url desc
         <if test="startrows >= 0">
             <![CDATA[limit ${startrows},14]]>
         </if>
