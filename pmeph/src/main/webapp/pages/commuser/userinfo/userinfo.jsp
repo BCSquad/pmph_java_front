@@ -65,13 +65,6 @@
 		<div class="content-wrapper" >
 			<div style="height: 30px"></div>
 			<input type="hidden" id="id" value="${map.id}">
-
-    <div class="sxy-div-content">
-        <div style="height:50px;">
-            <span style="width:20px;"></span>
-            <span class="sxy-div-menu">个人资料</span><span class="sxy-div-menu1"><a onclick="testOne()">个人申报信息</a></span>
-        </div>
-    </div>
     <div style="height:14px"></div>
     <div class="sxy-div-content">
         <div>
@@ -87,13 +80,10 @@
                 <div class="sxy-userinfo-row"></div>
                 <div class="sxy-userinfo-row"></div>
                 <div class="sxy-userinfo-row"></div>
-                <div class="sxy-userinfo-row"></div>
-
-                <div class="sxy-userinfo-row">
-                	<div id="sxy-font-1"  onclick="window.location='${ctx}/teacherCertification/showTeacherCertification.action'">教师认证</div>
-                </div>
                 <div class="sxy-userinfo-row" style="margin-top: 15px">
-                	<a id="sxy-font-2" style="cursor: pointer;margin-left: 35px" onclick="window.location='${ctx}/userinfo/comchangepwd.action'">修改密码</a>
+                    <div id="person_SB" style="cursor: pointer;margin-left: 35px" onclick="testOne()">&nbsp;&nbsp;个人申报信息</div>
+                    <div id="sxy-font-1"  onclick="window.location='${ctx}/teacherCertification/showTeacherCertification.action'">教师认证</div>
+                    <div id="sxy-font-2" style="cursor: pointer;margin-left: 288px" onclick="window.location='${ctx}/userinfo/comchangepwd.action'">&nbsp;&nbsp;修改密码</div>
                 </div>
             </div>
             <div style="height:35px;"></div>
