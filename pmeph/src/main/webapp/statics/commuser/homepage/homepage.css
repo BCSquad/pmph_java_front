@@ -992,6 +992,14 @@ ul li {
     background-color: #35c974;
 }
 
+.newdoc{
+    float: left;
+    width: 6px;
+    height: 24px;
+    background-color: #2A385D;
+    margin-top: 10px;
+}
+
 .area-6 .title {
     height: 27px;
     /*margin-top: 132px;*/
@@ -1054,7 +1062,7 @@ ul li {
     font-size: 24px;
     font-weight: normal;
     font-stretch: normal;
-    line-height: 24px;
+    line-height: 22px;
     letter-spacing: 0px;
     color: #333333;
 }
@@ -1324,9 +1332,10 @@ ul li {
 
 .area-8 .title .line {
     float: left;
-    width: 7px;
-    height: 100%;
-    background: #35C974;
+    width: 6px;
+    height: 24px;
+    background: red;
+    margin-top: 4px;
 }
 
 .area-8 .title .name {
