@@ -11,7 +11,7 @@
 	<title>我要出书-申报</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
-	<link rel="stylesheet" href="${ctx}/statics/commuser/bookdeclare/bookdeclareadd.css?t=${_timestamp}" type="text/css">
+	<link rel="stylesheet" href="${ctx 	}/statics/commuser/bookdeclare/bookdeclareadd.css?t=${_timestamp}" type="text/css">
 	<link rel="stylesheet" href="${ctx}/statics/css/jquery.calendar.css?t=${_timestamp}" type="text/css">
 	<link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}" type="text/css">
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js?t=${_timestamp}"></script>
@@ -306,8 +306,8 @@
 							</td>
 							<td><span>作者购书：&emsp;&emsp;</span>
 								<input class="cg_input" name="purchase" id="purchase" placeholder="" value=""
-									   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
-									   <%--maxlength="9"--%>/>
+									   <%--onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"--%>
+									   maxlength="9"/>
 							</td>
 							<td><span>作者赞助：</span>
 								<input class="cg_input" name="sponsorship" id="sponsorship" placeholder="" value=""
@@ -351,11 +351,11 @@
 					</table>
 				</div>
 			</div>
-			<!-- 申报编者情况 -->
+			<!-- 主要参编者 -->
 			<div class="sbxq_item">
 				<div>
 					<span id="tsxz_span6"></span>
-					<span class="tsxz_title">申报编者情况 </span>
+					<span class="tsxz_title">主要参编者 </span>
 					<div class="sb_tj">
 						<div class="tj_div" onclick="add_zjky()">
 							<span id="img_1"></span>
