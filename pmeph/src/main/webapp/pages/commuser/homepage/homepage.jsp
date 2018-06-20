@@ -474,7 +474,7 @@
                                  onclick="window.open(contextpath+'readdetail/todetail.action?id=${list.id1}')">
                                 <div class="sp_01"><img src="${list.image_url}"/></div>
                                 <div class="sp_02">
-                                    <div class="sp_title">${list.bookname}</div>
+                                    <div class="sp_title" title="${list.bookname}">${list.bookname}</div>
                                     <div style="float: left;" class="co">${list.nickname} 评论了 《${list.bookname}》</div>
                                     <div class="sp_pl">
                                         <c:if test="${list.score<=3}">
