@@ -496,10 +496,7 @@ function longcom() {
 
 //新增评论
 function insert() {
-    if ($("#content_book").val() == '' || $("#content_book").val() == null) {
-        window.message.info("请输入评论！");
-        return;
-    }
+    if ($.fireValidator()) {
     var json = {
         content: $("#content_book").val(),
         score: $("#last_score").html(),
@@ -529,6 +526,7 @@ function insert() {
             }
         }
     });
+}
 }
 
 
