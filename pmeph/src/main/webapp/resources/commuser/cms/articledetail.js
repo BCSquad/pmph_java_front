@@ -1,4 +1,7 @@
 $(function(){
+
+    $('#content').tipso({validator: "isNonEmpty", message: "评论内容不能为空"});
+
 	 Page({
 	        num: parseInt($("#allppage").html()),	//页码数
 	        startnum: parseInt($("#pageNumber").val()),	//指定页码
@@ -81,10 +84,7 @@ function changepage(n){
 
 //1.新增评论
 function insert(){
-	if($("#content").val()==''){
-		window.message.info("发表我的言论...");
-		return;
-	}
+	if($.fireValidator()){
 	var json={
 		 content:$("#content").val(),
 		 wid:$("#wid").val(),
@@ -116,6 +116,7 @@ function insert(){
 				}
 			}
 		});
+    }
 }
 
 

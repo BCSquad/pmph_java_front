@@ -938,7 +938,7 @@ ul li {
     white-space: nowrap;
     overflow: hidden;
     float: left;
-    width: 50px;
+    width: 100%;
 }
 
 .book_content_name {
@@ -1326,7 +1326,7 @@ ul li {
     float: left;
     width: 7px;
     height: 100%;
-    background: red;
+    background: #35C974;
 }
 
 .area-8 .title .name {
@@ -1661,7 +1661,6 @@ ul li {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    text-align: center;
 }
 
 .num1 {

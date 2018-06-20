@@ -17,10 +17,12 @@
 	type="text/css">
 <link rel="stylesheet"
 	href="${ctx}/statics/commuser/cms/articledetail.css?t=${_timestamp}" type="text/css">
+<link rel="stylesheet" href="${ctx}/statics/css/jquery.tipso.css?t=${_timestamp}" type="text/css">
 <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
 <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
 <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
 <script src="${ctx}/resources/comm/jquery/jquery.pager.js?t=${_timestamp}"></script>
+<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.tipso.js?t=${_timestamp}"></script>
 <script src="${ctx}/resources/commuser/cms/articledetail.js?t=${_timestamp}"></script>
 </head>
 <body>
