@@ -228,7 +228,8 @@
                 </c:forEach>
                 <!--描述：图书畅销-->
                 <div class="rg_content">
-                    <span class="tsfl">图书畅销榜</span>
+                    <div class="doc"></div>
+                    <span class="tsfl" style="margin-left: 10px">图书畅销榜</span>
                     <%--<hr style=" height:1px;border:none;border-top:1px solid #f0f0f0;">--%>
                 </div>
                 <div style="float: left;width: 360px;border-bottom: 1px solid #DEDEDE;margin-top: 15px;height: 28px">
