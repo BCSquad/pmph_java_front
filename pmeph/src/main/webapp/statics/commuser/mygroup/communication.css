@@ -145,6 +145,7 @@ a:active {color:yellow;}
     cursor: pointer;
     /*clear: both;*/
     float: left;
+    margin-left: 40px;
 }
 
 .top_content33{
