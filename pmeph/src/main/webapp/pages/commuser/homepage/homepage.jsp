@@ -220,7 +220,7 @@
             <div class="content">
                 <div class="tab-bar" style="margin-top: 0px;">
                     <div class="newdoc"></div>
-                    <div class="type_bar_float_right typebar doc_content" style="margin-left: 15px;margin-top: 10px">新书推荐</div>
+                    <div class="type_bar_float_right typebar doc_content" style="margin-left: 13px;margin-top: 10px">新书推荐</div>
                     <div class="page" style="width: auto;float: right;margin-right: 327px;margin-left: 10px;
                         height: 100%;color: #999999;">
                         <c:forEach items="${bookTypes}" var="type" varStatus="status">
