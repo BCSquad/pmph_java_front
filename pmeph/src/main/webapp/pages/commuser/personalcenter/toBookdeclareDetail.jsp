@@ -326,7 +326,7 @@
 			<div class="sbxq_item">
 				<div>
 					<span id="tsxz_span6"></span>
-					<span class="tsxz_title">申报编者情况 </span>
+					<span class="tsxz_title">主要参编者 </span>
 				</div>
 				<div class="content">
 					<table class="tab_2" id="sbbzqk">
