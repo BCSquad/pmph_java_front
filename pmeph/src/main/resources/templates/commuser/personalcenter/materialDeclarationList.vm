@@ -40,13 +40,11 @@
                     <br/><span class="ybmcj3">已报名人数</span></div>
                 </div>
                 <div class="bmcj3">
-                    #if( $!{c.is_all_textbook_published}==true&&$!{c.datebase}>0 && $!{c.is_force_end}==true)
+                    #if( $!{c.is_all_textbook_published}==true && ($!{c.datebase}>0 || $!{c.is_force_end}==true))
                         <div class="bmcjan3"><span>遴选结束</span></div>
-                    #end
-                    #if( $!{c.is_all_textbook_published}==true)
+                    #elseif( $!{c.is_all_textbook_published}==true)
                        <div class="bmcjan3"><span>报名结束</span></div>
-                    #end
-                    #if($!{c.datebase}>0 || $!{c.is_force_end}==true )
+                    #elseif($!{c.datebase}>0 || $!{c.is_force_end}==true )
                         <div class="bmcjan3"><span>遴选结束</span></div>
                     #end
                     #if($!{c.iamin}>0 && $!{c.online_progress}>=0)
