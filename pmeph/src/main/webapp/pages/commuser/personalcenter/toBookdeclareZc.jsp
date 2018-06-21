@@ -309,7 +309,7 @@
 							</td>
 							<td><span>作者购书：&emsp;&emsp;</span>
 								<input class="cg_input" name="purchase" id="purchase" placeholder="" value="${topicMap.purchase}"
-									   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+									   <%--onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"--%>
 									   maxlength="9"/>
 							</td>
 							<td><span>作者赞助：</span>
