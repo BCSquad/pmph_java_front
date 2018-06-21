@@ -23,6 +23,8 @@ $(function(){
        });
 	   
 	   changepage(1);
+
+       change();
 });
 //分页前的初始化
 function beforechange(){
@@ -121,23 +123,33 @@ function insert(){
 
 
 
-//1.相关文章换一换
+//1.相关文章
 function change(){
+	var count=0;
+	var startrow=$("#startrow").val();
 	var json={
-			 wid:$("#wid").val()
+			 wid:$("#wid").val(),
+		     startrow:startrow,
 		};
 	 $.ajax({
 			type:'post',
 			url:contextpath+'articledetail/change.action',
 			async:false,
-			dataType:'json',
 			data:json,
 			success:function(json){
 				var ste='';
 				$.each(json,function(i,n){
-					ste+='<div class="right_20"><div class="right_21">'+n.title+'</div><div class="right_22">'+n.realname+'</div></div>';
+					ste+='<div class="right_20"><div class="right_21">'+n.title+'</div><div class="right_22">'+n.author_name+'</div></div>';
+				    count=n.end;
 				});
 				$("#comment").html(ste);
+				var newrow=parseInt(startrow)+5;
+				debugger
+				if(newrow>count){
+                    $("#startrow").val(0);
+				}else{
+                    $("#startrow").val(newrow);
+				}
 			}
 		});
 }
