@@ -309,7 +309,7 @@
 							</td>
 							<td><span>作者购书：&emsp;&emsp;</span>
 								<input class="cg_input" name="purchase" id="purchase" placeholder="" value="${topicMap.purchase}"
-									   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+									   <%--onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"--%>
 									   maxlength="9"/>
 							</td>
 							<td><span>作者赞助：</span>
@@ -358,7 +358,7 @@
 			<div class="sbxq_item">
 				<div>
 					<span id="tsxz_span6"></span>
-					<span class="tsxz_title">申报编者情况 </span>
+					<span class="tsxz_title">主要参编者 </span>
 					<div class="sb_tj">
 						<div class="tj_div" onclick="add_zjky()">
 							<span id="img_1"></span>

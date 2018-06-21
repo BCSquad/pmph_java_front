@@ -783,8 +783,8 @@
     height: 15px;
     background-image: url("../../image/refresh.png");
     float: left;
-    margin-top: 16px;
-    margin-left: 80px;
+    margin-top: 14px;
+    margin-left: 75px;
 }
 
 .right_20 {
@@ -823,7 +823,7 @@
 .refresh1 {
     float: left;
     margin-top: 10px;
-
+    margin-left: 5px;
     font-size: 12px;
     color: #999999;
     cursor: pointer;

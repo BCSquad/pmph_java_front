@@ -203,14 +203,8 @@
                     <div id="xgwz_4" onclick="change()">换一批</div>
                     <div id="xgwz_3"></div>
     			</div>
-    			<div  id="comment">
-	                <c:forEach items="${eMap}" var="list">
-		    			<div class="right_20" >
-			    			<div class="right_21" onclick="todetail('${list.wid}')">${list.title}</div>
-			    			<div class="right_22">（${list.realname}）</div>
-			    		</div>
-	    		 </c:forEach>
-	            </div>
+				<input type="hidden" id="startrow" value="0">
+    			<div  id="comment"></div>
     		</div>
     		<!--文章链接-->
     		<div class="right_4">
