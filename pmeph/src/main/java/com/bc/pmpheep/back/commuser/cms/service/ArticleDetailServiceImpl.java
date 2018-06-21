@@ -254,11 +254,6 @@ public class ArticleDetailServiceImpl implements ArticleDetailService {
 		return articleDetailDao.QueryShipByID(id,startrow);
 	}
 
-	@Override
-	public Map<String, Object> QueryShipDetailByID(String id,int startrow) {
-		Map<String,Object> map=articleDetailDao.QueryShipDerailByID(id,startrow);
-		return map;
-	}
 
     @Override
     public int QueryAllShip(String id) {
