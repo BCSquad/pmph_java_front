@@ -190,7 +190,9 @@ public class GroupController extends com.bc.pmpheep.general.controller.BaseContr
             return modelAndView;
     	}
     	//管理员判定
-		modelAndView.addObject("admin",pmap.get("admin"));
+		if(pmap!=null){
+			modelAndView.addObject("admin",pmap.get("admin"));
+		}
     	//当前小组
     	modelAndView.addObject("thisGroup",thisGroup);
     	//用户id
