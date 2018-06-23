@@ -1,12 +1,10 @@
 $(function () {
 
     $('#realname').tipso({validator: "isNonEmpty", message: "姓名不能为空"});
-    $('#position').tipso({validator: "isNonEmpty", message: "职务不能为空"});
-    $('#title').tipso({validator: "isNonEmpty", message: "职称不能为空"});
     $('#handphone').tipso({validator: "isNonEmpty|isMobile", message: "手机号码不能为空|手机号码格式不正确"});
     $('#postCode').tipso({validator: "isNonEmpty", message: "邮编不能为空"});
     $('#email').tipso({validator: "isNonEmpty|isEmail", message: "邮箱不能为空|邮箱格式不正确"});
-    $('#address').tipso({validator: "isNonEmpty", message: "地址不能为空"});
+
 
 	
 	//文件上传
