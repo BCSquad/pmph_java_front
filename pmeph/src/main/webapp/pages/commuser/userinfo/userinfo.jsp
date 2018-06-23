@@ -16,10 +16,12 @@
     <link href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}" rel="stylesheet" type="text/css" />
     <link href="${ctx}/statics/commuser/userinfo/userinfo.css?t=${_timestamp}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.calendar.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.tipso.css?t=${_timestamp}" type="text/css">
     <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery-validate.js?t=${_timestamp}" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}" type="text/javascript"></script>
+    <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.tipso.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.calendar.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/commuser/userinfo/userinfo.js?t=${_timestamp}" type="text/javascript"></script>
@@ -89,14 +91,13 @@
             <div style="height:35px;"></div>
         </div>
            <span class="sxy-font-3" style="margin-left: 20px"><B>基本信息</B></span>
-        <form id="orgForm">
         <table border="0" class="form-table">
             <tr class="sxy-tr">
                 <td>
                   <div  style="width: 400px">
                        <label class="require">真实姓名</label>
                        <div class="input-wrapper">
-                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="真实姓名不能为空"  onblur="javascript:LengthLimit(this,20);"
+                          <input class="sxy-txt"onblur="javascript:LengthLimit(this,20);"
                            placeholder="真实姓名必填" type="text" id="realname" name="realname"  value="${map.realname }"/>
                        </div>
                   </div>
@@ -155,8 +156,7 @@
                   <div  style="width: 400px">
                        <label class="require">手机</label>
                        <div class="input-wrapper">
-                          <input class="sxy-txt required" data-valid="isNonEmpty||isMobile"  
-                          data-error="手机号码不能为空||请填写正确的手机号码" placeholder="手机号码必填" type="text" id="handphone"
+                          <input class="sxy-txt" placeholder="手机号码必填" type="text" id="handphone"
                           name="handphone" value="${map.handphone}"/>
                        </div>
                   </div>
@@ -197,7 +197,7 @@
                   <div  style="width: 400px">
                        <label class="require">工作单位</label>
                        <div class="input-wrapper">
-                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="工作单位不能为空" onblur="javascript:LengthLimit(this,36);"
+                          <input class="sxy-txt" onblur="javascript:LengthLimit(this,36);"
                            placeholder="工作单位必填" type="text" id="workplace" name="workplace" value="${map.workplace }"/>
                        </div>
                   </div>
@@ -303,7 +303,6 @@
                 <td colspan="9"></td>
             </tr>
         </table>
-        </form>
     </div>
 			
 		</div>
