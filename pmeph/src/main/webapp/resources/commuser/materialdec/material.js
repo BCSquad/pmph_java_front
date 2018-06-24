@@ -1,9 +1,9 @@
 //定义一个全局变量
-var jsonStr = "";
-jsonStr = "{\"id\":\"realname\",\"content\":\"姓名不能为空\"},{\"id\":\"birthday\",\"content\":\"出生日期不能为空\"}," +
-    "{\"id\":\"experience\",\"content\":\"教龄不能为空\"},{\"id\":\"org_name\",\"content\":\"工作单位不能为空\"},{\"id\":\"position\",\"content\":\"职务不能为空\"},"+
-    "{\"id\":\"zc\",\"content\":\"职称不能为空\"},{\"id\":\"address\",\"content\":\"地址不能为空\"},{\"id\":\"email\",\"content\":\"邮箱不能为空\"},"+
-    "{\"id\":\"handphone\",\"content\":\"手机号码不能为空\"},{\"id\":\"zjlx\",\"content\":\"证件类型不能为空\"},{\"id\":\"idcard\",\"content\":\"证件号码不能为空\"},{\"id\":\"sbdw_name\",\"content\":\"申报单位不能为空\"},";
+// var jsonStr = "";
+// jsonStr = "{\"id\":\"realname\",\"content\":\"姓名不能为空\"},{\"id\":\"birthday\",\"content\":\"出生日期不能为空\"}," +
+//     "{\"id\":\"experience\",\"content\":\"教龄不能为空\"},{\"id\":\"org_name\",\"content\":\"工作单位不能为空\"},{\"id\":\"position\",\"content\":\"职务不能为空\"},"+
+//     "{\"id\":\"zc\",\"content\":\"职称不能为空\"},{\"id\":\"address\",\"content\":\"地址不能为空\"},{\"id\":\"email\",\"content\":\"邮箱不能为空\"},"+
+//     "{\"id\":\"handphone\",\"content\":\"手机号码不能为空\"},{\"id\":\"zjlx\",\"content\":\"证件类型不能为空\"},{\"id\":\"idcard\",\"content\":\"证件号码不能为空\"},{\"id\":\"sbdw_name\",\"content\":\"申报单位不能为空\"},";
 $(function () {
     $('#realname').tipso({validator: "isNonEmpty", message: "姓名不能为空"});
     $('#birthday').tipso({validator: "isNonEmpty", message: "出生日期不能为空"});
