@@ -139,12 +139,16 @@ function change(){
 			success:function(json){
 				var ste='';
 				$.each(json,function(i,n){
-					ste+='<div class="right_20"><div class="right_21">'+n.title+'</div><div class="right_22">'+n.author_name+'</div></div>';
+					ste+='<div class="right_20"><div class="right_21">'+n.title+'</div>';
+						if(n.author_name==null){
+                            ste+='<div class="right_22">未知</div></div>';
+						}else{
+                            ste+='<div class="right_22">'+n.author_name+'</div></div>';
+						}
 				    count=n.end;
 				});
 				$("#comment").html(ste);
 				var newrow=parseInt(startrow)+5;
-				debugger
 				if(newrow>count){
                     $("#startrow").val(0);
 				}else{
