@@ -14,12 +14,13 @@
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}" type="text/javascript"></script>
     <script src="${ctx}/resources/authadmin/accountset/adminattest.js?t=${_timestamp}" type="text/javascript"></script>
+    <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.tipso.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/json2.js?t=${_timestamp}" type="text/javascript"></script>
     <link href="${ctx}/statics/css/base.css?t=${_timestamp}" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/statics/authadmin/accountset/publicStyle.css?t=${_timestamp}" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/statics/authadmin/accountset/adminattest.css?t=${_timestamp}" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}" rel="stylesheet" type="text/css"/>
-
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.tipso.css?t=${_timestamp}" type="text/css">
     <script type="text/javascript">
         $(function () {
 
@@ -130,7 +131,6 @@
                 <input type="hidden" id="fax" value="${admininfo.fax}"/>
                 <!-- 已通过或已提交 全部输入框不可修改 -->
                 <input type="hidden" id="disabled_all" value="${admininfo.progress==1||(admininfo.progress==0 && admininfo.is_proxy_upload==true)}"/>
-                <form>
                     <table border="0" class="form-table">
                         <tr>
                             <td colspan="6">
@@ -164,12 +164,11 @@
                         <tr>
                             <td style="width:400px">
                                 <div class="label-input">
-                                    <label class="require">管理员姓名</label>
+                                    <label class="">管理员姓名</label>
                                     <div class="input-wrapper">
                                         <input ${(admininfo.progress!=1)?"":"readonly='readonly'"}
-                                                style="width: 258px" class="txt required" type="text" id="realName"
-                                                value="${admininfo.realname}" data-valid="isNonEmpty||maxLength"
-                                                data-length data-error="真实姓名不能为空||姓名不能超过10个中文字符"  maxLength="20" />
+                                                style="width: 258px" class="txt" type="text" id="realName"
+                                                value="${admininfo.realname}" maxLength="20" />
                                     </div>
                                 </div>
                             </td><!--   value="${admininfo.realname} -->
@@ -183,12 +182,11 @@
                         <tr>
                             <td style="width:400px">
                                 <div class="label-input">
-                                    <label class="require">邮箱地址</label>
+                                    <label class="">邮箱地址</label>
                                     <div class="input-wrapper">
                                         <input ${(admininfo.progress!=1)?"":"readonly='readonly'"}
-                                                style="width: 258px" class="txt required" type="text" id="email"
-                                                value="${admininfo.email}" data-valid="isNonEmpty||isEmail"
-                                                data-error="邮箱不能为空||请填写正确的邮箱格式"  maxLength="40"/>
+                                                style="width: 258px" class="txt" type="text" id="email"
+                                                value="${admininfo.email}"  maxLength="40"/>
                                     </div>
                                 </div>
                             </td><!--   value="${admininfo.email} -->
@@ -202,13 +200,11 @@
                         <tr>
                             <td style="width:400px">
                                 <div class="label-input">
-                                    <label class="require">手机</label>
+                                    <label class="">手机</label>
                                     <div class="input-wrapper">
-                                        <input ${(admininfo.progress!=1)?'class="txt required"':'class="txt" readonly="readonly"'}
+                                        <input ${(admininfo.progress!=1)?'class="txt"':'class="txt" readonly="readonly"'}
                                                 style="width: 258px" type="text" id="handphone"
-                                                value="${admininfo.handphone}"
-                                                data-valid="isNonEmpty||isMobile"
-                                                data-error="手机号码不能为空||请填写正确的电话格式"  maxLength="20"/>
+                                                value="${admininfo.handphone}"maxLength="20"/>
                                     </div>
                                 </div>
                             </td><!--   value="${admininfo.handphone} -->
@@ -278,12 +274,11 @@
                         <tr>
                             <td style="width:260px">
                                 <div class="label-input">
-                                    <label class="require">职务</label>
+                                    <label class="">职务</label>
                                     <div class="input-wrapper">
                                         <input ${(admininfo.progress!=1)?"":"readonly='readonly'"}
-                                                style="width: 258px" class="txt required" type="text" id="position"
-                                                value="${admininfo.position}" data-valid="isNonEmpty"
-                                                data-error="职务不能为空"  maxLength="35" />
+                                                style="width: 258px" class="txt " type="text" id="position"
+                                                value="${admininfo.position}" maxLength="35" />
                                     </div>
                                 </div>
                             </td><!--   value="${admininfo.email} -->
@@ -335,9 +330,8 @@
                                     <label class="require">地址</label>
                                     <div class="input-wrapper">
                                         <input ${(admininfo.progress!=1)?"":"readonly='readonly'"}
-                                                style="width: 700px" class="txt required" type="text" id="address"
-                                                value="${admininfo.address}" data-valid="isNonEmpty"
-                                                data-error="地址不能为空" maxLength="50" />
+                                                style="width: 700px" class="txt" type="text" id="address"
+                                                value="${admininfo.address}"maxLength="50" />
                                     </div>
                                 </div>
                             </td><!--   value="${admininfo.address} -->
@@ -346,12 +340,11 @@
                         <tr>
                             <td style="width:400px">
                                 <div class="label-input">
-                                    <label class="require">邮编</label>
+                                    <label class="">邮编</label>
                                     <div class="input-wrapper">
                                         <input ${(admininfo.progress!=1)?"":"readonly='readonly'"}
-                                                style="width: 258px" class="txt required" type="text" id="postCode"
-                                                value="${admininfo.postcode}" data-valid="isNonEmpty||onlyInt"
-                                                data-error="邮编不能为空||请填写正确的邮编" maxLength="25" />
+                                                style="width: 258px" class="txt " type="text" id="postCode"
+                                                value="${admininfo.postcode}" maxLength="25" />
                                     </div>
                                 </div>
                             </td><!--   value="${admininfo.email} -->
@@ -373,7 +366,6 @@
                             </c:if>
                         </tr>
                     </table>
-                </form>
             </div>
         </div>
         <div style="background-color: #f6f6f6;height: 60px">
