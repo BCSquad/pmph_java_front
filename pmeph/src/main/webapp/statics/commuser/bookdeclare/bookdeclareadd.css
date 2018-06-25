@@ -228,11 +228,11 @@
 	height: 60px;
 	background-color: #e8f1fa;
 	border-radius: 3px;
-	border: solid 1px #3996fa;
+	border: solid 1px #C8D5F8;
 	-moz-opacity: 0.3;
 	-khtml-opacity: 0.3;
 	-webkit-opacity: 0.3;
-	opacity: 0.3;
+	opacity: 1;
 	filter:alpha(opacity=30);
 	padding: 15px 20px;
 	margin-top: 20px;
