@@ -155,7 +155,7 @@ $(function(){
 		if(!content || content2 ==''){
 			$("#msgContent").val(content2);
 			//window.message.warning("请键入消息");
-            layer.msg('发送消息不能为空');
+            layer.msg('请输入消息');
 			return ;
 		}
 		if(content.length > 255){
