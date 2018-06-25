@@ -88,7 +88,7 @@
 
         setTimeout(function () {
             $('#realName').tipso({validator: "isNonEmpty", message: "姓名不能为空"});
-            $('#idcard').tipso({validator: "isNonEmpty", message: "身份证号不能为空"});
+            $('#idcard').tipso({validator: "isNonEmpty|isCard", message: "身份证号不能为空|请输入正确的身份证号码"});
             $('#Select1').tipso({validator: "isNonEmpty", message: "请选择学校"});
             $('#certName').tipso({validator: "isNonEmpty", message: "请上传教师资格证"});
             $('#handphone').tipso({validator: "isNonEmpty|isMobile", message: "手机号码不能为空|手机号码格式不正确"});
