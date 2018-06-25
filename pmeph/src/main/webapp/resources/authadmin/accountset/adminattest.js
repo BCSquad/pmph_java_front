@@ -1,4 +1,12 @@
 $(function () {
+
+    $('#realName').tipso({validator: "isNonEmpty", message: "管理员姓名不能为空"});
+    $('#email').tipso({validator: "isNonEmpty|isEmail", message: "邮箱地址不能为空|邮箱格式不正确"});
+    $('#handphone').tipso({validator: "isNonEmpty|isMobile", message: "手机号码不能为空|手机号码格式不正确"});
+    $('#position').tipso({validator: "isNonEmpty", message: "职务不能为空"});
+    $('#address').tipso({validator: "isNonEmpty", message: "地址不能为空"});
+    $('#postCode').tipso({validator: "isNonEmpty", message: "邮编不能为空"});
+
 	$("#disabled_all").val();
 	if ($("#disabled_all").val()=="true") {
 		$("input").attr("disabled",true);
@@ -111,7 +119,7 @@ function getform() {
 
 }
 function submit(){
-	if($("form").validate('submitValidate')){
+	if($.fireValidator()){
 	    $.ajax({
 	        type:'post',
 	        url:contextpath+'admininfocontroller/updateorguser.action',
