@@ -67,12 +67,12 @@
                     <a href="$!{contextpath}$!{c.skip}"> $!{c.title}</a>
                 </div>
                 <input type="hidden" id="cms$!{c.id}" value="$!{c.id}"/>
-                <div class="tm">
+                #*<div class="tm">
                    <span class="author-icon" ><img  src="$!{contextpath}$!{c.avatar}" style="width:25px;height:25px;border-radius: 50%;"/>
                    </span>
                     <span class="name">$!{c.author}</span>
                     <span class="time"><fmt:formatDate  value="$!{c.gmt_create}" pattern="yyyy.MM.dd"/></span>
-                </div>
+                </div>*#
             </div>
             <div class="content">
                 <div  class="content-imgc">
