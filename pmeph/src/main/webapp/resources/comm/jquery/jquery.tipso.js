@@ -133,6 +133,24 @@
         }
     });
 
+    $.addValidatRule("isPassword", function (value) {
+        //校验密码  只能为数字和字母
+        if (!/^[A-Za-z0-9!@#$%^&*]{6,16}$/.test(value)) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+
+    $.addValidatRule("isCard", function (value) {
+        //校验身份证号码
+        if (!/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(value)) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+
     $.extend(Plugin.prototype, {
         init: function () {
             var obj = this,
