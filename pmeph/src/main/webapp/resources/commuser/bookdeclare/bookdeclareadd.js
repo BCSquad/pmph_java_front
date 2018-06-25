@@ -32,6 +32,7 @@ $(function () {
     $('#extra_achievement').tipso({validator: "isNonEmpty", message: "主要专业成就及学术地位不能为空"});
     $('#extra_reason').tipso({validator: "isNonEmpty", message: "选题理由及出版价值不能为空"});
     $('#extra_score').tipso({validator: "isNonEmpty", message: "主要内及特色不能为空"});
+    $('#phone').tipso({validator: "isNonEmpty", message: "电话号码不能为空"})
 
 
     $('#dzdx').selectlist({
