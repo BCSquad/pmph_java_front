@@ -49,8 +49,8 @@ public class ReadController {
         //热门书评
         List<Map<String, Object>> zdtjXxjyList = new ArrayList<Map<String, Object>>();
         Map<String, Object> zdtjXxjyMap = new HashMap<String, Object>();
-        Map<String,Object> adInfo3=homeService.getPageAdInfo("首页原重点推荐1");
-        Map<String,Object> adInfo4=homeService.getPageAdInfo("首页原重点推荐2");
+        Map<String,Object> adInfo3=homeService.getPageAdInfo("pc首页原重点推荐1");
+        Map<String,Object> adInfo4=homeService.getPageAdInfo("pc首页原重点推荐2");
         //查询条数
         zdtjXxjyMap.put("startrows", "0");
         zdtjXxjyMap.put("endrows", "4");
@@ -59,7 +59,7 @@ public class ReadController {
         mv.addObject("adInfo4",adInfo4);
         mv.addObject("rmspList", zdtjXxjyList);
 
-        Map<String, Object> adInfo = homeService.getPageAdInfo("读书首页轮播 ");
+        Map<String, Object> adInfo = homeService.getPageAdInfo("pc读书首页轮播");
         mv.addObject("adInfo", adInfo);
 
         

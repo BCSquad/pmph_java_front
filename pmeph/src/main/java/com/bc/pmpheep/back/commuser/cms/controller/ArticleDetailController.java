@@ -53,7 +53,6 @@ public class ArticleDetailController extends BaseController {
 	public ModelAndView list(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		String wid = request.getParameter("wid");
-		// String wid = "10";
 		Map<String, Object> map1 = new HashMap<String, Object>();
 		map1.put("id", wid);
 		Map<String, Object> map = articleDetailService.queryTitle(map1);
@@ -84,9 +83,6 @@ public class ArticleDetailController extends BaseController {
 		// 最近3条医学随笔
 		List<Map<String, Object>> listArt = articleDetailService.queryArticle(Art.get("author_id").toString());
 		int numArt = articleDetailService.queryArticleCount(Art.get("author_id").toString());
-		// 相关文章换一换
-		List<Map<String, Object>> eMap = articleDetailService.queryRecommendByE(0, wid);
-
 		PageParameter<Map<String, Object>> pageParameter = new PageParameter<Map<String, Object>>(1, 2);
 		pageParameter.setParameter(map1);
 		PageResult<Map<String, Object>> listCom = articleDetailService.queryComment(pageParameter);
@@ -140,7 +136,6 @@ public class ArticleDetailController extends BaseController {
 		mv.addObject("listArt", listArt);
 		mv.addObject("Art", Art);
 		mv.addObject("numArt", numArt);
-		mv.addObject("eMap", eMap);
 		mv.addObject("listArtSix", listArtSix);
 		mv.addObject("is_audit", is_audit);
 		mv.setViewName("/commuser/cms/articledetail");
@@ -187,16 +182,19 @@ public class ArticleDetailController extends BaseController {
 	@ResponseBody
 	public List<Map<String, Object>> change(HttpServletRequest request) {
 		String wid = request.getParameter("wid");
-		List<Map<String, Object>> eMap = articleDetailService.queryRecommendByE(-1, wid);
-		int num = eMap.size();
-		if (num > 5) {
-			int x = (int) (Math.random() * (num - 5));
-			List<Map<String, Object>> cMap = articleDetailService.queryRecommendByE(x, wid);
-			return cMap;
-		} else {
-			return new ArrayList<Map<String, Object>>();
+		int startrow = Integer.parseInt(request.getParameter("startrow"));
+		List<Map<String, Object>> list=new ArrayList<Map<String, Object>>();
+		//查询后台是否配置了相关文章
+		list=articleDetailService.QueryShipByID(wid,startrow);
+		if(list.size()>0){
+			for (Map<String, Object> map: list) {
+				map.put("startrow",startrow);
+				map.put("end",list.size());
+			}
+		}else{
+			list = articleDetailService.queryRecommendByE(startrow, wid);
 		}
-
+		return list;
 	}
 
 	/**

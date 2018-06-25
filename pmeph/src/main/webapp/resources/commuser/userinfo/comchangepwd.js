@@ -1,3 +1,9 @@
+$(function () {
+    $('#newpassword').tipso({validator: "isNonEmpty", message: "密码不能为空"});
+    $('#confirmpassword').tipso({validator: "isNonEmpty", message: "密码不能为空"});
+})
+
+
 function confirupd() {
 
 	// 获取到密码值
@@ -10,21 +16,34 @@ function confirupd() {
 	var flagconformedPwd = reg.test(conformedPassword);
 	var flagnewPwd = reg.test(newPassword);
 
-	if (flagconformedPwd == false || flagnewPwd == false) {
-		message.warning('密码必须由 6-16位字母、数字组成.');
-		return;
-	} else {
-		if (newPassword != "" && conformedPassword != "") {
-			if (newPassword != conformedPassword) {
-				message.error('“新密码”与“确认密码”不一致！');
-				return;
-			} else {
-				modpassword();
-			}
-		} else {
-			message.warning('录入信息不完整，无法修改！');
-			return;
-		}
+	// if (flagconformedPwd == false || flagnewPwd == false) {
+	// 	message.warning('密码必须由 6-16位字母、数字组成.');
+	// 	return;
+	// } else {
+	// 	if ($.fireValidator()) {
+	// 		if (newPassword != conformedPassword) {
+	// 			message.error('“新密码”与“确认密码”不一致！');
+	// 			return;
+	// 		} else {
+	// 			modpassword();
+	// 		}
+	// 	} else {
+	// 		message.warning('录入信息不完整，无法修改！');
+	// 		return;
+	// 	}
+	// }
+
+
+	if($.fireValidator()){
+		if(flagconformedPwd == false || flagnewPwd == false){
+            message.error('密码必须由 6-16位字母、数字组成');
+            return;
+		} else if(newPassword != conformedPassword){
+            message.error('“新密码”与“确认密码”不一致！');
+            return;
+        }else{
+            modpassword();
+	    }
 	}
 }
 

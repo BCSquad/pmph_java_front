@@ -12,9 +12,11 @@
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/json2.js?t=${_timestamp}" type="text/javascript"></script>
     <script src="${ctx}/resources/commuser/userinfo/comchangepwd.js?t=${_timestamp}" type="text/javascript"></script>
+    <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.tipso.js?t=${_timestamp}"></script>
     <link href="${ctx}/statics/css/base.css?t=${_timestamp}" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/statics/authadmin/accountset/publicStyle.css?t=${_timestamp}" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/statics/authadmin/accountset/changepwd.css?t=${_timestamp}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.tipso.css?t=${_timestamp}" type="text/css">
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp">

@@ -1,4 +1,6 @@
-$(function () {	
+$(function () {
+    $('#content_book').tipso({validator: "isNonEmpty", message: "图书评论不能为空"});
+
     $("#start").val(2);//火狐浏览器点击刷新按钮 不刷新el表达式 此处用js初始化
     $("#longstart").val(2);
 
@@ -304,7 +306,7 @@ $(function () {
 
     morecontent();
 
-    
+
     relatiedBookPageSwitch('1');
     relatiedBookPageSwitch('2');
     relatiedBookPageSwitch('3');
@@ -494,10 +496,7 @@ function longcom() {
 
 //新增评论
 function insert() {
-    if ($("#content_book").val() == '' || $("#content_book").val() == null) {
-        window.message.info("请输入评论！");
-        return;
-    }
+    if ($.fireValidator()) {
     var json = {
         content: $("#content_book").val(),
         score: $("#last_score").html(),
@@ -527,6 +526,7 @@ function insert() {
             }
         }
     });
+}
 }
 
 
@@ -618,7 +618,7 @@ function relatiedBookPageSwitch(relation_type){
 	                    '）</div></div>';
 	            });
 			}
-        	
+
         	if (json.totalPage==0) {
         		$(".relatiedBookPageSwitchWrapper."+relation_type).show();
         		if (relation_type == '1' ) {
@@ -626,20 +626,20 @@ function relatiedBookPageSwitch(relation_type){
         				return;
         		}else if(relation_type == '2' ){
         				fresh("9");
-        				return;			
+        				return;
         		}else if(relation_type == '3'){
         				change();
         				return;
         		}
 			}
-        	
-        	
+
+
             $("#"+tagetElId).html(str);
             if (json.totalPage==1) {
 				$(".relatiedBookPageSwitchWrapper."+relation_type).hide();
 			}else{
 				$(".relatiedBookPageSwitchWrapper."+relation_type).show();
-				
+
 			}
         }
     });

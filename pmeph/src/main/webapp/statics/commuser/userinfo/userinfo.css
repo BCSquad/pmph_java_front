@@ -99,29 +99,54 @@ body
 
 #sxy-font-1{
 	cursor: pointer;
-	margin-top: -20px;
+	margin-top: -25px;
 	width: 88px;
 	height: 26px;
-	background-color: #1CB99B;
 	border: none;
 	border-radius: 2px;
 	font-size: 14px;
-	color: white;
+	color: black;
 	text-align: center;
-	margin-left: 180px;
+	margin-left: 320px;
 }
+
+#sxy-font-1:before{
+	float: left;
+	content: '';
+	background-image: url("../../image/a2.png");
+	background-size: 100%;
+	width: 20px;
+	height: 20px;
+}
+
+#person_SB:before{
+	content: '';
+	background-image: url("../../image/a1.png");
+	float: left;
+	background-size: 100%;
+	width: 20px;
+	height: 20px;
+}
+
+#sxy-font-2:before{
+	content: '';
+	background-image: url("../../image/a3.png");
+	float: left;
+	width: 20px;
+	height: 23px;
+	background-size: 100%;
+}
+
 
 #sxy-font-2
 {
 	float:left;
-	margin-top:10px;
+	margin-top:-27px;
 	margin-left:-56px;
-
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
 	letter-spacing: 0px;
-	color: #e52e2e;
 }
 /*基本信息几个字样式*/
 #sxy-font-3

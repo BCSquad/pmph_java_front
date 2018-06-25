@@ -97,9 +97,13 @@ public class ArticleDetailServiceImpl implements ArticleDetailService {
 	 * 查询相关文章
 	 */
 	@Override
-	public List<Map<String, Object>> queryRecommendByE(@Param("x") int num, @Param("wid") String wid) {
+	public List<Map<String, Object>> queryRecommendByE(int num,String wid) {
 		// TODO Auto-generated method stub
 		List<Map<String, Object>> map = articleDetailDao.queryRecommendByE(num, wid);
+		int count=articleDetailDao.QueryAllShip(wid);
+        for (Map<String, Object> smap: map ) {
+            smap.put("end",count);
+        }
 		return map;
 	}
 
@@ -244,6 +248,17 @@ public class ArticleDetailServiceImpl implements ArticleDetailService {
 		// TODO Auto-generated method stub
 		return articleDetailDao.queryCMSAttach(paraMap);
 	}
+
+	@Override
+	public List<Map<String, Object>> QueryShipByID(String id,int startrow) {
+		return articleDetailDao.QueryShipByID(id,startrow);
+	}
+
+
+    @Override
+    public int QueryAllShip(String id) {
+        return articleDetailDao.QueryAllShip(id);
+    }
 
 //	@Override
 //	public void updateComments(Long id) {
