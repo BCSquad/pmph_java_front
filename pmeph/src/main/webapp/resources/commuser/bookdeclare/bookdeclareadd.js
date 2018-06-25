@@ -2,24 +2,38 @@
 //var jsonStr = "";
 //jsonStr = "{\"id\":\"bookname\",\"content\":\"选题名称不能为空\"}," ;
 
-var jsonRequiredEleId = [
-	                        {id:"bookname",content:"选题名称不能为空"},
-	                        {id:"realname",content:"主编姓名不能为空"},
-							{id:"price",content:"年龄不能为空"},
-							{id:"position",content:"行政职务不能为空"},
-							{id:"workplace",content:"工作单位不能为空"},
-							{id:"phone",content:"电话不能为空"},
-							{id:"email",content:"邮箱不能为空"},
-							{id:"address",content:"通讯地址不能为空"},
-	                        {id:"extra_achievement",content:"主要专业成就及学术地位不能为空"},
-                            {id:"extra_reason",content:"选题理由及出版价值不能为空"},
-                            {id:"extra_score",content:"主要内及特色不能为空"},
-                         ];
+// var jsonRequiredEleId = [
+// 	                        {id:"bookname",content:"选题名称不能为空"},
+// 	                        {id:"realname",content:"主编姓名不能为空"},
+// 							{id:"price",content:"年龄不能为空"},
+// 							{id:"position",content:"行政职务不能为空"},
+// 							{id:"workplace",content:"工作单位不能为空"},
+// 							{id:"phone",content:"电话不能为空"},
+// 							{id:"email",content:"邮箱不能为空"},
+// 							{id:"address",content:"通讯地址不能为空"},
+// 	                        {id:"extra_achievement",content:"主要专业成就及学术地位不能为空"},
+//                             {id:"extra_reason",content:"选题理由及出版价值不能为空"},
+//                             {id:"extra_score",content:"主要内及特色不能为空"},
+//                          ];
 		
 		
 
 
 $(function () {
+
+    $('#bookname').tipso({validator: "isNonEmpty", message: "选题名称不能为空"});
+    $('#realname').tipso({validator: "isNonEmpty", message: "主编姓名不能为空"});
+    $('#price').tipso({validator: "isNonEmpty", message: "年龄不能为空"});
+    $('#position').tipso({validator: "isNonEmpty", message: "行政职务不能为空"});
+    $('#workplace').tipso({validator: "isNonEmpty", message: "工作单位不能为空"});
+    $('#phone').tipso({validator: "isNonEmpty|isEmail", message: "邮箱不能为空|邮箱格式不正确"});
+    $('#postcode').tipso({validator: "isNonEmpty", message: "邮编不能为空"});
+    $('#address').tipso({validator: "isNonEmpty", message: "姓名不能为空"});
+    $('#extra_achievement').tipso({validator: "isNonEmpty", message: "主要专业成就及学术地位不能为空"});
+    $('#extra_reason').tipso({validator: "isNonEmpty", message: "选题理由及出版价值不能为空"});
+    $('#extra_score').tipso({validator: "isNonEmpty", message: "主要内及特色不能为空"});
+
+
     $('#dzdx').selectlist({
         width: 213,
         height: 30,
@@ -183,8 +197,9 @@ function buttAdd(type){
             }
         });
     }else{
-        checkLb();
-        if(checkNull(jsonRequiredEleId)){
+        //checkLb();
+        // if(checkNull(jsonRequiredEleId)){
+        if($.fireValidator()){
             //避免重复点击
             document.getElementById('buzc').onclick=function(){window.message.warning("请不要重复点击");};
             document.getElementById('butj').onclick=function(){window.message.warning("请不要重复点击");};
