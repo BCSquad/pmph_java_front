@@ -25,6 +25,7 @@
     <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/reload.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/commuser/focusAndSelect/newsReport.js?t=${_timestamp}"></script>
     <style type="text/css">
         .div_content_right .select-button {

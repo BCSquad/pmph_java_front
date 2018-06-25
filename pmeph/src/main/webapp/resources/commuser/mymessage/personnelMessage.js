@@ -2,10 +2,10 @@ var avatar = "";
 var addAvatar = "";
 var addName = "";
 var addhtml = "";
-$(function () {
+var pageSize = 5;
+var pageNumber = 1;
 
-        var pageSize = 5;
-        var pageNumber = 1;
+$(function () {
 
 
         $(window).scroll(function () {
@@ -182,55 +182,7 @@ $(function () {
             $("#content").val("");
         }
 
-        function init() {
-            $.ajax({
-                type: 'get',
-                url: contextpath + 'mymessage/tolist.action',
-                async: false,
-                contentType: 'application/json',
-                dataType: 'json',
-                data: {
-                    pageNumber: pageNumber,
-                    pageSize: pageSize,
-                    state: $("input[name='select']").val()
-                },
-                success: function (res) {
-                    if (res) {
-                        pageNumber++;
-                        if (res.length < pageSize) {
-                            $("#loadMore").hide();
-                        }
-                        if (res.length > 0) {
 
-                            $.each(res, function (i, n) {
-                                var html = "";
-                                html += "<tr><th rowspan='2' class='headPortrait'><img class='pictureNotice' src='" + contextpath + n.avatar
-
-                                    + "'></th><td class='name'><span>"
-                                    + n.name
-                                    + "</span><span class='time1'>"
-                                    + formatDate(n.sendTime, "")
-                                    + "</span></td></tr>";
-                                html += "<tr><td colspan='2' class='personMessageContent'>私信内容："
-                                    + n.content
-                                    + '</td><td class="buttonDetail"><div class="buttonAccept" ><a class="a openTallk" id="' + n.talkId + '" href="javascript:" >查看详情</a>' +
-                                    '<input type="hidden" value="'+n.id+'" id="msg_'+n.talkId+'">' +
-                                    '</div></td></tr>';
-                                html += "<tr><td colspan='4' align='center'><hr class='line'></td></tr>";
-                                html += "<input id='name_" + n.talkId + "' type='hidden' value='" + n.name + "'/><input id='type_" + n.talkId + "' type='hidden'value='" + n.type + "' />";
-                                $("#list").append(html);
-
-                            });
-                            $('#list .openTallk').click(openTallk);
-                        } else {
-                            /*var html = "";
-                            html += "<tr><td><div class='no-more'><img src='" + contextpath + "statics/image/aaa4.png'/><span>木有内容呀~~</span></div></td></tr>";
-                            $("#list").append(html);*/
-                        }
-                    }
-                }
-            })
-        }
 
         function sendNewMsg(addhtml) {
             //$("#talkList").html('');
@@ -322,4 +274,57 @@ $(function () {
     }
 );
 
+function init() {
+    $.ajax({
+        type: 'get',
+        url: contextpath + 'mymessage/tolist.action',
+        async: false,
+        contentType: 'application/json',
+        dataType: 'json',
+        data: {
+            pageNumber: pageNumber,
+            pageSize: pageSize,
+            state: $("input[name='select']").val()
+        },
+        success: function (res) {
+            if (res) {
+                pageNumber++;
+                if (res.length < pageSize) {
+                    $("#loadMore").hide();
+                }
+                if (res.length > 0) {
 
+                    $.each(res, function (i, n) {
+                        var html = "";
+                        html += "<tr><th rowspan='2' class='headPortrait'><img class='pictureNotice' src='" + contextpath + n.avatar
+
+                            + "'></th><td class='name'><span>"
+                            + n.name
+                            + "</span><span class='time1'>"
+                            + formatDate(n.sendTime, "")
+                            + "</span></td></tr>";
+                        html += "<tr><td colspan='2' class='personMessageContent'>私信内容："
+                            + n.content
+                            + '</td><td class="buttonDetail"><div class="buttonAccept" ><a class="a openTallk" id="' + n.talkId + '" href="javascript:" >查看详情</a>' +
+                            '<input type="hidden" value="'+n.id+'" id="msg_'+n.talkId+'">' +
+                            '</div></td></tr>';
+                        html += "<tr><td colspan='4' align='center'><hr class='line'></td></tr>";
+                        html += "<input id='name_" + n.talkId + "' type='hidden' value='" + n.name + "'/><input id='type_" + n.talkId + "' type='hidden'value='" + n.type + "' />";
+                        $("#list").append(html);
+
+                    });
+                    $('#list .openTallk').click(openTallk);
+                } else {
+                    /*var html = "";
+                    html += "<tr><td><div class='no-more'><img src='" + contextpath + "statics/image/aaa4.png'/><span>木有内容呀~~</span></div></td></tr>";
+                    $("#list").append(html);*/
+                }
+            }
+        }
+    })
+}
+
+//下拉加载
+function loadData(){
+    init();
+}
