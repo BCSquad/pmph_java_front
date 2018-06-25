@@ -98,7 +98,7 @@
 .trendstWrapper .content_line{
 	margin: 15px 0px 15px 0px;
 	float: left;
-    clear: right;
+    /*clear: right;*/
     width: 100%;
     display: table-row;
 }
