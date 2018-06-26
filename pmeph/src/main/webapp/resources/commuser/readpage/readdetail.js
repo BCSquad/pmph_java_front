@@ -1,5 +1,9 @@
 $(function () {
-    $('#content_book').tipso({validator: "isNonEmpty", message: "图书评论不能为空"});
+    $('#content_book').tipso({validator: "isNonEmpty", message: "图书评论不能为空",group:1});
+    $('#page').tipso({validator: "isNonEmpty|onlyInt", message: "页码不能为空|页码必须是数字",group:2})
+    $('#line').tipso({validator: "isNonEmpty|onlyInt", message: "行数不能为空|行数必须是数字",group:2})
+    $('#content').tipso({validator: "isNonEmpty", message: "纠错内容不能为空",group:2})
+    $('#bookfeedback_content').tipso({validator: "isNonEmpty", message: "读者反馈不能为空",group:3})
 
     $("#start").val(2);//火狐浏览器点击刷新按钮 不刷新el表达式 此处用js初始化
     $("#longstart").val(2);
@@ -496,7 +500,7 @@ function longcom() {
 
 //新增评论
 function insert() {
-    if ($.fireValidator()) {
+    if ($.fireValidator(1)) {
     var json = {
         content: $("#content_book").val(),
         score: $("#last_score").html(),
@@ -749,13 +753,14 @@ function showup(tag) {
 
 //点击纠错弹窗隐藏
 function hideup() {
+    //隐藏弹窗给值是是因为校验的时候页面上所有的输入框都会校验
     $(".bookmistake").hide();
     
 }
 
 //图书纠错
 function correction() {
-    if ($("#bookmistakeform").validate('submitValidate')) {
+    if ($.fireValidator(2)) {
         if ($("#upload_status").val() == '') {
             page = $("#page").val();
             line = $("#line").val();
@@ -823,7 +828,7 @@ function correction() {
 
 function bookfeedback(){
 	
-    if ($("#bookfeedbackform").validate('submitValidate')) {
+    if ($.fireValidator(3)) {
             content = $("#bookfeedback_content").val();
             if (!Empty(content)) {//非空判断
             	$(".btn").attr("disabled",true);
