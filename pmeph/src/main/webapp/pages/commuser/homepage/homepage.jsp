@@ -118,11 +118,10 @@
         <div class="notice area-2">
             <div class="title" style="float: left">
                 <div class="line bgcolor-blue" style="float: left"></div>
-                <div class="name color-blue" style="float: left"><img src="${ctx}/statics/testfile/gg.png"
-                                                                      style="margin-left: 30px;margin-top: 42px">
+                <div class="name color-blue" style="float: left">
+                    <div class="ggpng"style="margin-left: 30px;margin-top: 42px"></div>
                 </div>
             </div>
-
             <c:forEach items="${listDou}" var="list" varStatus="status">
 
                 <%-- <c:if test="${status.index==0}">
@@ -184,8 +183,9 @@
         <div class="notice area-3">
             <div class="title" style="float: left;margin-right: 30px;">
                 <div class="line bgcolor-blue"></div>
-                <div class="name color-blue"><img src="${ctx}/statics/testfile/xx.png"
-                                                  style="margin-left: 30px;margin-top: 15px"></div>
+                <div class="name color-blue">
+                    <div class="xxkb" style="margin-left: 36px;margin-top: 15px"></div>
+                </div>
             </div>
             <c:if test="${listNot[0].first_img_url != 'none' }">
                 <div class="photo-size">
