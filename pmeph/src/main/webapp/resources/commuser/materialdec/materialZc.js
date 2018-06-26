@@ -1037,15 +1037,6 @@ function checkLb(){
 
 //提交
 function commit(type){
-    checkLb();
-    if (checkNull(jsonStr) && checkExtra()) {
-        //避免重复点击
-        document.getElementById('buzc').onclick = function () {
-            window.message.warning("请不要重复点击");
-        };
-        document.getElementById('butj').onclick = function () {
-            window.message.warning("请不要重复点击");
-        };
         $.ajax({
             type: "POST",
             url: contextpath + 'material/doMaterialAdd.action?sjump=2&type=' + type,
@@ -1072,7 +1063,6 @@ function commit(type){
                 }
             }
         });
-    }
 }
 //放弃
 function buttGive(){
