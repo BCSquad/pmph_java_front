@@ -22,8 +22,8 @@
             useTitle: false,
             onBeforeShow: null,
             onShow: null,
-            onHide: null
-
+            onHide: null,
+            group:0
         };
 
     function Plugin(element, options) {
@@ -41,14 +41,23 @@
     var rules = {};
 
     $.extend({
-        fireValidator: function () {
+        fireValidator: function (group) {
             var isshow = false;
+            if(group>0){
+
+            }else{
+                group=0;
+            }
             for (var i = 0; i < list.length; i++) {
                 var item = list[i];
                 console.log(item);
+
                 item.hideStyle();
                 item.hide();
 
+                if(item.settings.group!=group){
+                    continue;
+                }
 
                 var value = "";
                 if (item.element.find("input[type='hidden']").length > 0) {
