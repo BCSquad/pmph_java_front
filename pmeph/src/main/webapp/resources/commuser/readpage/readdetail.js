@@ -686,9 +686,9 @@ function addlikes() {
         dataType: 'json',
         success: function (json) {
             if (json.returncode == "yes") {
-                $("#dz").attr("src", contextpath + "statics/image/dz02.png");
+                $("#dz").attr("class", "addlike");
             } else {
-                $("#dz").attr("src", contextpath + "statics/image/dz01.png");
+                $("#dz").attr("class", "left2");
             }
         }
     });
@@ -710,9 +710,9 @@ function addmark() {
         dataType: 'json',
         success: function (json) {
             if (json.returncode == "OK") {
-                $("#sc").attr("src", contextpath + "statics/image/sc101(1).png");
+                $("#sc").attr("class", "left3");
             } else {
-                $("#sc").attr("src", contextpath + "statics/image/s102(1).png");
+                $("#sc").attr("class", "left4");
             }
         }
     });
