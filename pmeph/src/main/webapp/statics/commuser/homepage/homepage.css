@@ -1684,6 +1684,24 @@ ul li {
     z-index: 10;
 }
 
+.ggpng{
+    background-image: url("../../testfile/sprites.png");
+    background-position: -40px -153px;
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 31px;
+    height: 50px;
+}
+
+.xxkb{
+    background-image: url("../../testfile/sprites.png");
+    background-position: -5px -150px;
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 31px;
+    height: 110px;
+}
+
 .num2 {
     background-image: url("../../testfile/sprites.png");
     background-position: -374px -50px;
