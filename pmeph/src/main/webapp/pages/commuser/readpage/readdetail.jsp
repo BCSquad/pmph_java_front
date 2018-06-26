@@ -50,31 +50,27 @@
         <input type="hidden" id="marks" value="${map.bookmarks}">
         <!-- 图书纠错悬浮框 -->
         <div class="bookmistake" id="bookmistake">
-            <form id="bookmistakeform">
                 <div class="apache">
                     <div class="mistitle">图书纠错</div>
                     <div class="x" onclick="hideup()"></div>
                 </div>
                 <div class="input">
                     <div style="float:left;">
-                        <label style="margin-left: 20px" class="labell require">页码:</label>
+                        <label style="margin-left: 20px" class="labell">页码:</label>
                         <input type="text" style="width: 150px;" class="text required" id="page"
-                               data-valid="isNonEmpty||onlyInt"
-                               onblur="javascript:LengthLimit(this,4);" data-error="页码不能为空||页码只能是数字"/>
+                               onblur="javascript:LengthLimit(this,4);"/>
                     </div>
-                    <div style="float:right;margin-right: 50px"><label style="margin-left: 10px"
-                                                                       class="labell">行数:</label>
-                        <input type="text" style="width: 150px;" class="text required" id="line"
-                               data-valid="isNonEmpty||onlyInt"
-                               onblur="javascript:LengthLimit(this,4);" data-error="行数不能为空||行数只能是数字"/></div>
+                    <div style="float:right;margin-right: 50px"><label style="margin-left: 10px"class="labell">行数:</label>
+                        <input type="text" style="width: 150px;" class="text" id="line"
+                               onblur="javascript:LengthLimit(this,4);"/></div>
 
                 </div>
                 <div class="info">
                     <label style="margin-left: 20px;" class="labell">纠错内容</label>
                     <div style="margin-top: 5px;">
-                         <textarea class="misarea required" style="width:470px;" id="content"
-                                   onkeyup="javascript:LengthLimit(this,500);"  data-valid="isNonEmpty"
-                                   onblur="javascript:LengthLimit(this,500);" data-error="纠错内容不能为空"></textarea>
+                         <textarea class="misarea" style="width:470px;" id="content"
+                                   onkeyup="javascript:LengthLimit(this,500);"
+                                   onblur="javascript:LengthLimit(this,500);"></textarea>
                     </div>
                 </div>
                 <div class="upload">
@@ -92,7 +88,6 @@
                 <div class="">
                     <button class="btn" type="button" onclick="correction()">确认</button>
                 </div>
-            </form>
         </div>
         <!-- 图书纠错悬浮框 end -->
         
@@ -107,7 +102,6 @@
                 <div class="info">
                     <div style="margin-top: 5px;">
                          <textarea class="misarea required" style="width:470px;" id="bookfeedback_content"
-                                   data-valid="isNonEmpty"   data-error="反馈内容不能为空"
                                    onkeyup="javascript:LengthLimit(this,500);"
                                    onblur="javascript:LengthLimit(this,500);"></textarea>
                     </div>
@@ -340,7 +334,7 @@
                 <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 15px;">
                 <div class="pl_add">
                     <a name="001" id="001"></a>
-                    <textarea class="tarea" id="content_book" onkeyup="javascript:LengthLimit(this,500);"
+                    <textarea class="tarea textarea_content" id="content_book" onkeyup="javascript:LengthLimit(this,500);"
                               onblur="javascript:LengthLimit(this,500);"></textarea>
                     <div style="border-top:1px solid rgba(180, 239, 205, 0.5);margin-left: 16px;margin-rihgt: 16px;text-align: right;font-size: 12px;width: 870px;">
                      评论最多500字</div>
