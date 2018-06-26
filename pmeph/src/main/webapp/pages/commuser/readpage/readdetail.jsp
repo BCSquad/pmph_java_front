@@ -130,14 +130,24 @@
             </div>
             <div style="width: 100%;">
                 <div class="dzsc">
-                    <c:if test="${flag=='no'}">
-                        <img src="${ctx}/statics/image/dz02.png" onclick="addlikes()" id="dz"/>
-                    </c:if>
-                    <c:if test="${flag=='yes'}">
-                        <img src="${ctx}/statics/image/dz01.png" onclick="addlikes()" id="dz"/>
-                    </c:if>
-                    <img src="${ctx}/statics/image/${mark=='yes' ? 'sc101(1).png':'s102(1).png'}" onclick="addmark()"
-                         id="sc"/>
+                    <div class="addlikediv" onclick="addlikes()">
+                        <c:if test="${flag=='no'}">
+                            <div class="addlike"  id="dz"/></div>
+                            <div class="addliketext">点赞</div>
+                         </c:if>
+                    </div>
+
+                    <div class="addlikediv" onclick="addlikes()">
+                        <c:if test="${flag=='yes'}">
+                            <div class="left2"  id="dz"/></div>
+                            <div class="addliketext">点赞</div>
+                        </c:if>
+                    </div>
+
+                    <div class="addlikediv" style="margin-left: 10px" onclick="addmark()">
+                        <div class="${mark=='yes' ? 'left3':'left4'}"  id="sc"/></div>
+                        <div class="addliketext">收藏</div>
+                    </div>
                     <div style="display: inline-block;vertical-align: top;margin-right: 8px;text-align:left;">
                     </div>
                 </div>
