@@ -153,7 +153,7 @@
                         <tr>
                             <td style="width:400px">
                                 <div class="label-input">
-                                    <label>学校名称</label>
+                                    <label><font style="color: red">*</font>学校名称</label>
                                     <div class="input-wrapper">
                                         <input style="width: 258px;" class="txt" type="text"
                                                value="${admininfo.org_name}" readonly="readonly"/>
@@ -164,7 +164,7 @@
                         <tr>
                             <td style="width:400px">
                                 <div class="label-input">
-                                    <label class="">管理员姓名</label>
+                                    <label class=""><font style="color: red">*</font>管理员姓名</label>
                                     <div class="input-wrapper">
                                         <input ${(admininfo.progress!=1)?"":"readonly='readonly'"}
                                                 style="width: 258px" class="txt" type="text" id="realName"
@@ -182,7 +182,7 @@
                         <tr>
                             <td style="width:400px">
                                 <div class="label-input">
-                                    <label class="">邮箱地址</label>
+                                    <label class=""><font style="color: red">*</font>邮箱地址</label>
                                     <div class="input-wrapper">
                                         <input ${(admininfo.progress!=1)?"":"readonly='readonly'"}
                                                 style="width: 258px" class="txt" type="text" id="email"
@@ -200,7 +200,7 @@
                         <tr>
                             <td style="width:400px">
                                 <div class="label-input">
-                                    <label class="">手机</label>
+                                    <label class=""><font style="color: red">*</font>手机</label>
                                     <div class="input-wrapper">
                                         <input ${(admininfo.progress!=1)?'class="txt"':'class="txt" readonly="readonly"'}
                                                 style="width: 258px" type="text" id="handphone"
@@ -274,7 +274,7 @@
                         <tr>
                             <td style="width:260px">
                                 <div class="label-input">
-                                    <label class="">职务</label>
+                                    <label class=""><font style="color: red">*</font>职务</label>
                                     <div class="input-wrapper">
                                         <input ${(admininfo.progress!=1)?"":"readonly='readonly'"}
                                                 style="width: 258px" class="txt " type="text" id="position"
@@ -340,7 +340,7 @@
                         <tr>
                             <td style="width:400px">
                                 <div class="label-input">
-                                    <label class="">邮编</label>
+                                    <label class=""><font color="#ff3d38">*</font>邮编</label>
                                     <div class="input-wrapper">
                                         <input ${(admininfo.progress!=1)?"":"readonly='readonly'"}
                                                 style="width: 258px" class="txt " type="text" id="postCode"
