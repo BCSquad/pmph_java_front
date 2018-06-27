@@ -1,5 +1,5 @@
 //定义一个全局变量
-// var jsonStr = "";
+ var jsonStr = "";
 // jsonStr = "{\"id\":\"realname\",\"content\":\"姓名不能为空\"},{\"id\":\"birthday\",\"content\":\"出生日期不能为空\"}," +
 //     "{\"id\":\"experience\",\"content\":\"教龄不能为空\"},{\"id\":\"org_name\",\"content\":\"工作单位不能为空\"},{\"id\":\"position\",\"content\":\"职务不能为空\"},"+
 //     "{\"id\":\"zc\",\"content\":\"职称不能为空\"},{\"id\":\"address\",\"content\":\"地址不能为空\"},{\"id\":\"email\",\"content\":\"邮箱不能为空\"},"+
@@ -1037,15 +1037,6 @@ function checkLb(){
 
 //提交
 function commit(type){
-    checkLb();
-    if (checkNull(jsonStr) && checkExtra()) {
-        //避免重复点击
-        document.getElementById('buzc').onclick = function () {
-            window.message.warning("请不要重复点击");
-        };
-        document.getElementById('butj').onclick = function () {
-            window.message.warning("请不要重复点击");
-        };
         $.ajax({
             type: "POST",
             url: contextpath + 'material/doMaterialAdd.action?sjump=2&type=' + type,
@@ -1072,7 +1063,6 @@ function commit(type){
                 }
             }
         });
-    }
 }
 //放弃
 function buttGive(){
