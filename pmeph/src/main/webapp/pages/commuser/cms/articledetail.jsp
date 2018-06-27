@@ -43,9 +43,17 @@
 					<span>${map.title }</span>
 					<div style="width: 100%;">
 	        		<div class="dzsc">
-	        			 <img src="${ctx}/statics/image/${like=='yes' ? 'dz01.png':'dz02.png'}"  id="dz" ${is_audit=='false'?'disabled="disabled" style="opacity: 0.6;" title="文章未通过审核，仅供预览。" ':'onclick="addlikes()"'}/>
-	        		      <img src="${ctx}/statics/image/${mark=='yes' ? 'sc101(1).png':'s102(1).png'}"  id="sc" ${is_audit=='false'?'disabled="disabled" style="opacity: 0.6;" title="文章未通过审核，仅供预览。" ':'onclick="addmark()"'}/>
-	        			  <div style="display: inline-block;vertical-align: top;margin-right: 8px;text-align:left;"></div>
+						<div class="addlikediv" ${is_audit=='false'?'disabled="disabled" style="opacity: 0.6;" title="文章未通过审核，仅供预览。" ':'onclick="addlikes()"'}>
+							<div class="${like=='yes' ? 'left2':'addlike'}"  id="dz"></div>
+							<div class="addliketext">点赞</div>
+						</div>
+
+						<div class="addlikediv" style="margin-left: 10px" ${is_audit=='false'?'disabled="disabled" style="opacity: 0.6;" title="文章未通过审核，仅供预览。" ':'onclick="addmark()"'}>
+							<div class="${mark=='yes' ? 'left3':'left4'}"  id="sc"></div>
+							<div class="addliketext">收藏</div>
+						</div>
+
+						<div style="display: inline-block;vertical-align: top;margin-right: 8px;text-align:left;"></div>
 	        		</div>
         			</div>
 				</div>
