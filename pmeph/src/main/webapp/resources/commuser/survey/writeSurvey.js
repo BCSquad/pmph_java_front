@@ -1,6 +1,6 @@
 function submit1(){
 	var params = $('#contentForm').serializeArray();
-	if(validate()){
+	   validate();
 		$(".buttonDiv").attr("onclick","");
         $.ajax({
             type: "POST",
@@ -23,10 +23,6 @@ function submit1(){
                 $(".buttonDiv").attr("onclick","submit1()");
 			}
         });
-        }else{
-        message.warning("您有问题没有填!");
-	}
-
 }
 
 function toList(){
@@ -34,18 +30,20 @@ function toList(){
 }
 
 function validate(){
-	var flag = true;
+	var flag ;
 
     $(".oneQuestion.q1").each(function () {
        var val= $(this).find('input:radio:checked');
        if(val.length<=0){
-           flag = false;
+           flag = '请选择完单选题';
+           return flag;
        }
     });
     $(".oneQuestion.q2").each(function () {
         var val=$(this).find("input:checkbox:checked")
         if(val.length<=0){
-            flag = false;
+            flag = '请选择完多选题';
+            return flag;
         }
     })
 
@@ -53,16 +51,16 @@ function validate(){
 			var val= $(this).val();
 			val = $.trim(val);
 			if(val.length<=0){
-				flag = false;
-				//alert(flag);
+				flag = '请填写完单行文本题';
+                return flag;
 			}
 	   })
        $(".textAreaStyle").each(function(i) {
            var val= $(this).val();
            val = $.trim(val);
            if(val.length<=0){
-               flag = false;
-               //alert(flag);
+               flag = '请填写完多行文本题';
+               return flag;
            }
        })
 

@@ -56,17 +56,17 @@
                 </div>
                 <div class="input">
                     <div style="float:left;">
-                        <label style="margin-left: 20px" class="labell">页码:</label>
+                        <label style="margin-left: 20px" class="labell"><font style="color: red">*</font>页码:</label>
                         <input type="text" style="width: 150px;" class="text required" id="page"
                                onblur="javascript:LengthLimit(this,4);"/>
                     </div>
-                    <div style="float:right;margin-right: 50px"><label style="margin-left: 10px"class="labell">行数:</label>
+                    <div style="float:right;margin-right: 50px"><label style="margin-left: 10px"class="labell"><font style="color: red">*</font>行数:</label>
                         <input type="text" style="width: 150px;" class="text" id="line"
                                onblur="javascript:LengthLimit(this,4);"/></div>
 
                 </div>
                 <div class="info">
-                    <label style="margin-left: 20px;" class="labell">纠错内容</label>
+                    <label style="margin-left: 20px;" class="labell"><font style="color: red">*</font>纠错内容</label>
                     <div style="margin-top: 5px;">
                          <textarea class="misarea" style="width:470px;" id="content"
                                    onkeyup="javascript:LengthLimit(this,500);"
