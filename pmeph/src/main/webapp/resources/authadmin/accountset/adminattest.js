@@ -6,7 +6,6 @@ $(function () {
     $('#position').tipso({validator: "isNonEmpty", message: "职务不能为空"});
     $('#address').tipso({validator: "isNonEmpty", message: "地址不能为空"});
     $('#postCode').tipso({validator: "isNonEmpty", message: "邮编不能为空"});
-
 	$("#disabled_all").val();
 	if ($("#disabled_all").val()=="true") {
 		$("input").attr("disabled",true);
@@ -120,6 +119,10 @@ function getform() {
 }
 function submit(){
 	if($.fireValidator()){
+	    debugger
+	    if($("#fileid").val()==null){
+	        window.message.info("请长传委托书！")
+        }
 	    $.ajax({
 	        type:'post',
 	        url:contextpath+'admininfocontroller/updateorguser.action',
