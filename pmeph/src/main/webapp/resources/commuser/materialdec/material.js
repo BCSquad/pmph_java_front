@@ -19,6 +19,7 @@ $(function () {
         $('#idcard').tipso({validator: "isNonEmpty", message: "证件号码不能为空"})
         $('#address').tipso({validator: "isNonEmpty", message: "地址不能为空"});
         $('#sbdw_name').tipso({validator: "isNonEmpty", message: "申报单位不能为空"})
+        checkExtra();
     },0)
 
     setTimer();
@@ -152,7 +153,8 @@ function chooseModel(data){
             $("#zyxxjl_bt").css("display","inline");
           //  jsonStr=jsonStr+"{\"id\":\"xx_kssj\",\"content\":\"学习经历起止时间必填\"},{\"id\":\"xx_jssj\",\"content\":\"学习经历起止时间必填\"},{\"id\":\"xx_school_name\",\"content\":\"学校名称不能为空\"},{\"id\":\"xx_major\",\"content\":\"所学专业不能为空\"},{\"id\":\"xx_degree\",\"content\":\"学历不能为空\"},";
             jsonStr=jsonStr+"{\"id\":\"xx_kssj\",\"content\":\"学习经历起止时间必填\"},";
-            $('#xx_kssj').tipso({validator: "isNonEmpty", message: "学习经历起止时间必填"})
+            $('#xx_kssj').tipso({validator: "isNonEmpty", message: "学习开始时间必填"})
+            $('#xx_jssj').tipso({validator: "isNonEmpty", message: "学习结束时间必填"})
             //给其他值默认为无
             $("#xx_jssj").val(getNowFormatDate());
             $("#xx_school_name").val("无");
@@ -171,7 +173,8 @@ function chooseModel(data){
             $("#gzjl_bt").css("display","inline");
          //   jsonStr=jsonStr+"{\"id\":\"gz_kssj\",\"content\":\"工作经历必填\"},{\"id\":\"gz_jssj\",\"content\":\"工作起止时间不能为空\"},{\"id\":\"gz_org_name\",\"content\":\"工作单位不能为空\"},{\"id\":\"gz_position\",\"content\":\"工作职位不能为空\"},";
             jsonStr=jsonStr+"{\"id\":\"gz_kssj\",\"content\":\"工作经历必填\"},";
-            $('#gz_kssj').tipso({validator: "isNonEmpty", message: "工作经历必填"})
+            $('#gz_kssj').tipso({validator: "isNonEmpty", message: "工作开始时间必填"})
+            $('#gz_jssj').tipso({validator: "isNonEmpty", message: "工作结束时间必填"})
             //给其他值默认为无
             $("#gz_jssj").val(getNowFormatDate());
             $("#gz_org_name").val("无");
@@ -188,7 +191,8 @@ function chooseModel(data){
             $("#jxjl_bt").css("display","inline");
          //   jsonStr=jsonStr+"{\"id\":\"jx_kssj\",\"content\":\"教学经历必填\"},{\"id\":\"jx_jssj\",\"content\":\"教学起止时间不能为空\"},{\"id\":\"jx_school_name\",\"content\":\"学校名称不能为空\"},{\"id\":\"jx_subject\",\"content\":\"教学科目不能为空\"},";
             jsonStr=jsonStr+"{\"id\":\"jx_kssj\",\"content\":\"教学经历必填\"},";
-            $('#jx_kssj').tipso({validator: "isNonEmpty", message: "教学经历必填"})
+            $('#jx_kssj').tipso({validator: "isNonEmpty", message: "教学开始时间必填"})
+            $('#jx_jssj').tipso({validator: "isNonEmpty", message: "教学结束时间必填"})
             //给其他值默认为无
             $("#jx_jssj").val(getNowFormatDate());
             $("#jx_school_name").val("无");
@@ -544,6 +548,8 @@ function add_xxjl(){
     );
     $table.append($tr);
     $tr.calendar();
+    $('#xx_kssj_'+num).tipso({validator: "isNonEmpty", message: "学习开始时间必填"});
+    $('#xx_jssj_'+num).tipso({validator: "isNonEmpty", message: "学习结束时间必填"});
 }
 
 //追加工作经历tr
@@ -564,6 +570,8 @@ function add_gzjl(){
     );
     $table.append($tr);
     $tr.calendar();
+    $('#gz_kssj_'+num).tipso({validator: "isNonEmpty", message: "工作开始时间必填"});
+    $('#gz_jssj_'+num).tipso({validator: "isNonEmpty", message: "工作开始时间必填"});
 }
 
 //追加教学经历
@@ -584,6 +592,8 @@ function add_jxjl(){
     );
     $table.append($tr);
     $tr.calendar();
+    $('#jx_kssj_'+num).tipso({validator: "isNonEmpty", message: "教学开始时间必填"});
+    $('#jx_jssj_'+num).tipso({validator: "isNonEmpty", message: "教学开始时间必填"});
 }
 
 //追加学术兼职
@@ -610,6 +620,7 @@ function add_xsjz(){
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('xsjz_"+num+"')\"/></td>"+
         "</tr>");
     $table.append($tr);
+    $('#xs_org_name_'+num).tipso({validator: "isNonEmpty", message: "学术兼职必填"});
 }
 
 //上版教材参编情况
@@ -643,6 +654,7 @@ function add_jccb(){
         "</tr>");
     $table.append($tr);
     $tr.calendar();
+    $('#jc_material_name_'+num).tipso({validator: "isNonEmpty", message: "本套上版教材参编情况必填"});
 }
 
 //精品课程建设情况
@@ -668,6 +680,7 @@ function add_jpkcjs(str,dim){
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('jpkcjs_"+num+"')\"/></td>"+
         "</tr>");
     $table.append($tr);
+    $('#gj_course_name_'+num).tipso({validator: "isNonEmpty", message: "精品课程建设情况必填"});
 }
 
 //主编国家级规划教材
@@ -686,6 +699,7 @@ function add_gjghjc(){
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('gjghjc_"+num+"')\"/></td>"+
         "</tr>");
     $table.append($tr);
+    $('#hj_material_name_'+num).tipso({validator: "isNonEmpty", message: "主编国家级规划教材必填"});
 }
 
 //人卫社教材编写情况
@@ -735,6 +749,7 @@ function add_rwsjcbx(){
         optionHeight: 30
     });
     $tr.calendar();
+    $('#pmph_material_name_'+num).tipso({validator: "isNonEmpty", message: "人卫社教材编写情况必填"});
 }
 //其他社教材编写情况
 function add_jcbx(){
@@ -784,6 +799,7 @@ function add_jcbx(){
         optionHeight: 30
     });
     $tr.calendar();
+    $('#jcb_material_name_'+num).tipso({validator: "isNonEmpty", message: "其他社教材编写情况必填"});
 }
 //作家科研
 function add_zjky(){
@@ -801,6 +817,7 @@ function add_zjky(){
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('zjky_"+num+"')\"/></td>"+
         "</tr>");
     $table.append($tr);
+    $('#zjk_research_name_'+num).tipso({validator: "isNonEmpty", message: "科研情况必填"});
 }
 //主编学术专著情况表
 function add_zbxszz(){
@@ -826,6 +843,7 @@ function add_zbxszz(){
         "</tr>");
     $table.append($tr);
     $tr.calendar();
+    $('#zb_monograph_name_'+num).tipso({validator: "isNonEmpty", message: "专著名称必填"});
 }
 //出版行业获奖情况表
 function add_publish(){
@@ -845,6 +863,7 @@ function add_publish(){
         "</tr>");
     $table.append($tr);
     $tr.calendar();
+    $('#pu_reward_name_'+num).tipso({validator: "isNonEmpty", message: "出版行业获奖情况必填"});
 }
 //SCI论文投稿及影响因子情况表
 function add_sci(){
@@ -864,6 +883,7 @@ function add_sci(){
         "</tr>");
     $table.append($tr);
     $tr.calendar();
+    $('#sci_paper_name_'+num).tipso({validator: "isNonEmpty", message: "SCI论文投稿及影响因子情况必填"});
 }
 
 //临床医学获奖情况表
@@ -889,6 +909,7 @@ function add_clinical(){
         "</tr>");
     $table.append($tr);
     $tr.calendar();
+    $('#cl_reward_name_'+num).tipso({validator: "isNonEmpty", message: "临床医学获奖情况必填"});
 }
 //学术荣誉授予情况表
 function add_acade(){
@@ -915,6 +936,7 @@ function add_acade(){
         "</tr>");
     $table.append($tr);
     $tr.calendar();
+    $('#ac_reward_name_'+num).tipso({validator: "isNonEmpty", message: "术荣誉授予情况必填"});
 }
 //删除表格tr
 function del_tr(trId){
@@ -1188,24 +1210,16 @@ function checkEqual(name){
 
 //验证扩展项必填
 function checkExtra(){
-    var map = $('input[name^="zjkzxx"]').map(
-        function(){return this.value
-        }).get();
-    if(map!=null){
-        for(var i=0;i<map.length;i++){
-            var strs= new Array(); //定义一数组
-            strs=map[i].split("_"); //字符分割
-            if(strs[0] == "true"){ //说明必填
-                var value = $("#"+map[i]).val();
-                if(value == ""){
-                    window.message.warning("该扩展项必填");
-                    $("#"+map[i])[0].focus();  //聚焦
-                    return false;
-                }
-            }
+    var a=document.getElementsByName("zjkzxx");
+    var b;
+    var c;
+    for(var i=0;i<a.length;i++){
+        b=a[i].value;
+        c=b.split("_");
+        if(c[0]=="true"){
+            $('#true_'+(i+1)).tipso({validator: "isNonEmpty", message: "拓展项必填"});
         }
     }
-    return true;
 }
 
 //列表填报校验
