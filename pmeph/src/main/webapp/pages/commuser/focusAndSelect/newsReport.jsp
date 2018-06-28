@@ -60,7 +60,7 @@
             <span style="color: #999999;">${materialId!=null && materialId!=''? '分类':'排序' }：</span>
             <span style="color: #333333;">
             <div style="display: inline-block;text-align:left;color: #333333;">
-                <select id="sort-wrapper" name="sort-wrapper">
+                <select id="sort-wrapper" name="sort-wrapper" style="width: 68px">
 				    <option value="0">${materialId!=null && materialId!=''? '全部':'综合' }</option>
                 	<option value="1">${materialId!=null && materialId!=''? '文章':'最新' }</option>
                     <option value="2">${materialId!=null && materialId!=''? '信息快报':'最热' }</option>
