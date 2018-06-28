@@ -5,16 +5,12 @@ import com.bc.pmpheep.back.util.Const;
 import com.bc.pmpheep.back.util.MD5;
 import com.bc.pmpheep.general.service.UserService;
 import com.bc.pmpheep.utils.HttpRequestUtil;
-import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.struts.util.RequestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -75,6 +71,7 @@ public class SSOLoginoutController {
 
         params.put("clientip", HttpRequestUtil.getClientIP(request));
 
+        //插入积分
         userService.insertUserScores(params);
         userService.insertUserLoginLog(params);
 
