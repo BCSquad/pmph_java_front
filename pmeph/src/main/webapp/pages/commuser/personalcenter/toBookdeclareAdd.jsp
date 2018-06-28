@@ -328,7 +328,7 @@
 							</td>
 							<td><span>作者赞助：</span>
 								<input class="cg_input" name="sponsorship" id="sponsorship" placeholder="" value=""
-									   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+									   onafterpaste="this.value=this.value.replace(/\D/g,'')"
 									   maxlength="9"/>
 							</td>
 						</tr>
@@ -458,7 +458,7 @@
 						<tbody>
 						<tr id="sbbz_2">
 							<td><input class="sb_input" style="width: 230px;" id="similar_bookname" placeholder="书名" name="similar_bookname"  maxlength="40" value=""/></td>
-							<td><input class="sb_input" style="width: 80px;" id="similar_edition" placeholder="版次" name="similar_edition"  maxlength="2" value="" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/></td>
+							<td><input class="sb_input" style="width: 80px;" id="similar_edition" placeholder="版次" name="similar_edition"  maxlength="2" value="" onafterpaste="this.value=this.value.replace(/\D/g,'')"/></td>
 							<td><input class="sb_input" style="width: 80px;" id="similar_author" placeholder="作者" name="similar_author"  maxlength="100" value=""/></td>
 							<td><input class="sb_input" style="width: 80px;" id="similar_booksize" placeholder="开本" name="similar_booksize"  maxlength="20" value=""/></td>
 							<td><input class="sb_input" style="width: 160px;" id="similar_publisher" placeholder="出版单位" name="similar_publisher"  maxlength="100" value=""/></td>
