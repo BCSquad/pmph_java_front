@@ -1837,7 +1837,7 @@
 </div>
 
 <!-- 退回原因显示悬浮框 -->
-<div class="bookmistake" id="return_cause_div">
+<%--<div class="bookmistake" id="return_cause_div">
     <div class="apache">
         <div class="mistitle">退回原因:</div>
         <div class="xx" onclick="$('#return_cause_div').fadeOut(500);"></div>
@@ -1851,7 +1851,7 @@
     <div class="">
         <button class="btn" type="button" onclick="$('#return_cause_div').fadeOut(500);">确认</button>
     </div>
-</div>
+</div>--%>
 
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>

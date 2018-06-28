@@ -237,8 +237,9 @@ function selectRubmit(){
 								var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
 								var textBookId = $("#textBookId").val();
 								var logUserId= $("#logUserId").val();
-								
-		                    	$.ajax({
+
+                                /**企业微信消息**/
+		                    	/*$.ajax({
 		                            type: 'get',
 		                            url: exportWordBaseUrl + '/frontWxMsg/firstEditorChooseSubmit/'+textBookId+"/"+logUserId,
 		                            dataType: 'jsonp',
@@ -255,9 +256,9 @@ function selectRubmit(){
 											window.location.href=contextpath+'chooseEditor/toPage.action?textBookId='+$("#textBookId").val();
 										}, 800);
 		                            }
-		                            });
-								
-								
+		                            });*/
+
+                                window.location.href=contextpath+'chooseEditor/toPage.action?textBookId='+$("#textBookId").val();
 								
 							}
 						}

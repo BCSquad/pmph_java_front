@@ -417,7 +417,7 @@
 			</div>
 		</div>
 		<!--参加人卫慕课、数字教材编写情况-->
-		<div class="sbxq_item1" id="digital">
+		<%--<div class="sbxq_item1" id="digital">
 			<div>
 				<span id="tsxz_span9"></span>
 				<span class="tsxz_title">参加人卫慕课、数字教材编写情况</span>
@@ -427,7 +427,7 @@
                     ${digitalMap.content}
                 </div>
 			</div>
-		</div>
+		</div>--%>
 		<!--精品课程建设-->
 		<div class="sbxq_item" id="gjjpkcjs">
 			<div>
@@ -650,18 +650,18 @@
 			</div>
 		</div>
 		<!--编写内容意向表-->
-	 	<div class="sbxq_item1" id="intention">
+	 	<%--<div class="sbxq_item1" id="intention">
 			<div>
 				<span id="tsxz_span9"></span>
 				<span class="tsxz_title">编写内容意向表</span>
 			</div>
 			<div class="content">
-				<%--<textarea class="text_cl" readonly="readonly">${intentionMap.content}</textarea>--%>
+				&lt;%&ndash;<textarea class="text_cl" readonly="readonly">${intentionMap.content}</textarea>&ndash;%&gt;
                 <div class="text_dy">
                     ${intentionMap.content}
                 </div>
 			</div>
-		</div>
+		</div>--%>
 	</div>
 </div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>

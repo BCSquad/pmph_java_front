@@ -789,8 +789,9 @@ function correction() {
                             $("#content").val(null);
                             $("#upname").html('未选择任何文件!');
                             $("#upload_status").val(null);
-                            
-                            var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
+
+                            /**企业微信消息**/
+                            /*var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
                             var bookId = $("#book_id").val();
                             var userId = $("#userid").val();
                             var correctId = json.correctId;
@@ -807,7 +808,7 @@ function correction() {
                                 error:function(XMLHttpRequest, textStatus){
                                 	
                                 }
-                                });
+                                });*/
                             
                             
                             
@@ -948,4 +949,8 @@ function validLogin() {
             }
         }
     });
+}
+//下拉自动加载
+function loadData(){
+    changepage();
 }

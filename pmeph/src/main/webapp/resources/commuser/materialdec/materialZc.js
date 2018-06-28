@@ -1045,7 +1045,8 @@ function commit(type){
             success: function (json) {
                 if (json.msg == 'OK') {
                     window.message.success("操作成功,正在跳转页面");
-                    if (json.org_name=="人民卫生出版社") {
+                    /**企业微信消息**/
+                    /*if (json.org_name=="人民卫生出版社") {
                     	var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
                     	$.ajax({
                             type: 'get',
@@ -1058,7 +1059,7 @@ function commit(type){
                             	window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
                             }
                             });
-					}
+					}*/
                     window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
                 }
             }
