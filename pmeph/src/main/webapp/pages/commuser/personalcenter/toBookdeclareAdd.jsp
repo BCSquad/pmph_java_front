@@ -372,10 +372,10 @@
 							<td width="140px">姓名</td>
 							<td width="100px">性别</td>
 							<td width="90px">年龄 </td>
-							<td width="300px">工作单位</td>
 							<td width="140px">电话</td>
-							<td width="200px">职务职称</td>
 							<td width="100px">学历</td>
+							<td width="200px">职务职称</td>
+							<td width="300px">工作单位</td>
 							<td width="80px">操作</td>
 						</tr>
 						</thead>
@@ -393,11 +393,7 @@
 									   onkeyup="this.value=this.value.replace(/(\D|^0+)/g,'');this.value=this.value.replace(/^[^0-1]\d{2}$/g,'199');" onafterpaste="this.value=this.value.replace(/(\D|^0+)/g,'');this.value=this.value.replace(/^[^0-1]\d{2}$/g,'199');"
 									   onBlur="checkAge(this)"
 									   maxlength="3"/></td>
-							<td><input class="sb_input" style="width: 280px;" id="write_workplace" name="write_workplace" placeholder="工作单位" value="" maxlength="36"/>
-								<input type="hidden" name="checkbzqk" value="write_realname,write_sex,write_price,write_phone,write_degree,write_position,write_workplace"/>
-							</td>
 							<td><input class="sb_input" style="width: 120px;" name="write_phone" placeholder="电话" value="" id="write_phone" maxlength="36"/></td>
-							<td><input class="sb_input" style="width: 180px;" id="write_position"  name="write_position" placeholder="职务职称" value="" maxlength="36"/></td>
 							<td>
 								<select id="write_degree" name="write_degree">
 									<option value="">-请选择-</option>
@@ -406,6 +402,10 @@
 									<option value="2">学士</option>
 									<option value="3">其他</option>
 								</select>
+							</td>
+							<td><input class="sb_input" style="width: 180px;" id="write_position"  name="write_position" placeholder="职务职称" value="" maxlength="36"/></td>
+							<td><input class="sb_input" style="width: 280px;" id="write_workplace" name="write_workplace" placeholder="工作单位" value="" maxlength="36"/>
+								<input type="hidden" name="checkbzqk" value="write_realname,write_sex,write_price,write_phone,write_degree,write_position,write_workplace"/>
 							</td>
 							<td><div class="add_div"><img class="add_img" src="${ctx}/statics/image/del.png" onclick="del_tr('sbbz_1')"></div></td>
 						</tr>
