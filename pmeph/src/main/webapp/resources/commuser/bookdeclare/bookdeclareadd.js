@@ -167,7 +167,7 @@ function add_similar(){
     var $table = $("#similar");
     var $tr = $("<tr id='similar_"+num+"'>"+
         "<td><input class='sb_input' style='width: 230px;' placeholder=\"书名\" id='similar_bookname_"+num+"' name='similar_bookname'  maxlength='40' value=''/></td>"+
-        "<td><input class='sb_input' style='width: 80px;' placeholder=\"版次\" id='similar_edition_"+num+"' name='similar_edition'  maxlength='2' value='' onkeyup=\"this.value=this.value.replace(/\\D/g,'')\" onafterpaste=\"this.value=this.value.replace(/\\D/g,'')\"/></td>"+
+        "<td><input class='sb_input' style='width: 80px;' placeholder=\"版次\" id='similar_edition_"+num+"' name='similar_edition'  maxlength='2' value='' onafterpaste=\"this.value=this.value.replace(/\\D/g,'')\"/></td>"+
         "<td><input class='sb_input' style='width: 80px;' placeholder=\"作者\" id='similar_author_"+num+"' name='similar_author'  maxlength='100' value=''/></td>"+
         "<td><input class='sb_input' style='width: 80px;' placeholder=\"开本\" id='similar_booksize_"+num+"' name='similar_booksize'  maxlength='20' value=''/></td>"+
         "<td><input class='sb_input' style='width: 160px;' placeholder=\"出版单位\" id='similar_publisher_"+num+"' name='similar_publisher'  maxlength='100' value=''/></td>"+
