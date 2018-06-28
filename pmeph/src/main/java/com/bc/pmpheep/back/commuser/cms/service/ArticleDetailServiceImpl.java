@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.cms.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -251,7 +252,9 @@ public class ArticleDetailServiceImpl implements ArticleDetailService {
 
 	@Override
 	public List<Map<String, Object>> QueryShipByID(String id,int startrow) {
-		return articleDetailDao.QueryShipByID(id,startrow);
+		List<Map<String, Object>> list=new ArrayList<>();
+		list=articleDetailDao.QueryShipByID(id,startrow);
+		return list;
 	}
 
 

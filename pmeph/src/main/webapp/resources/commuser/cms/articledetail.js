@@ -139,9 +139,9 @@ function change(){
 			success:function(json){
 				var ste='';
 				$.each(json,function(i,n){
-					ste+='<div class="right_20"><div class="right_21">'+n.title+'</div>';
+					ste+='<div class="right_20" onclick="articledetail('+n.id+')"><div class="right_21">'+n.title+'</div>';
 						if(n.author_name==null){
-                            ste+='<div class="right_22">未知</div></div>';
+                            ste+='<div class="right_22"></div></div>';
 						}else{
                             ste+='<div class="right_22">'+n.author_name+'</div></div>';
 						}
@@ -158,6 +158,9 @@ function change(){
 		});
 }
 
+function articledetail(id) {
+	location.href=contextpath+'articledetail/toPage.action?wid='+id;
+}
 
 //点赞
 function addlikes(){

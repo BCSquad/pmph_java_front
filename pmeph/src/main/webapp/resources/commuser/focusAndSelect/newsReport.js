@@ -18,6 +18,10 @@ var pageSize   = 10;
 var pageNumber = 1 ;
 var order;
 $(function(){
+    setTimeout(function () {
+        $("#sort-wrapper").attr("style","width:68px;height:20px");
+    },0)
+
 	 $('#sort-wrapper').selectlist({
          zIndex: 10,
          width: 100,
