@@ -964,7 +964,7 @@ function buttAdd(type){
             });
         }else {  //表示提交
             checkLb();
-            if ($.fireValidator()&& checkEqual("textbook_id") && checkBoxInfo()) {
+            if (checkEqual("textbook_id") && checkBoxInfo()&& $.fireValidator() ) {
                /*if (checkEqual("textbook_id") && checkBoxInfo() && checkNull(jsonStr) && checkExtra()) {*/
                /* document.getElementById('buzc').onclick = function () {
                     window.message.warning("请不要重复点击");

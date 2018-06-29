@@ -954,7 +954,7 @@ function buttAdd(type){
             });
         } else { //表示提交
             checkLb();
-            if($.fireValidator()&& checkEqual("textbook_id") && checkBoxInfo()){
+            if(checkEqual("textbook_id") && checkBoxInfo() && $.fireValidator()){
                 var username = $("#username").val();
                 var realname = $("#realname").val();
                 if(checkEqual("textbook_id")&&checkBoxInfo()){
