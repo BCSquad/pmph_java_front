@@ -225,14 +225,19 @@
 					<table class="tab_1">
 						<!-- 选题情况 -->
 						<tr>
-							<td><span>主要专业成就及学术地位：</span></td>
+							<td colspan="4"><div style="text-align: left">主要专业成就及学术地位：</div></td>
+						</tr>
+						<tr>
 							<td colspan="3">
 								<div class="content">
 									<textarea class="text_cl" disabled maxlength="1000">${textraMap.achievement}</textarea>
 								</div>
 							</td>
-						</tr><tr>
-						<td><span>写作、外语水平：</span></td>
+						</tr>
+						<tr>
+							<td colspan="4"><div style="text-align: left">写作、外语水平：</div></td>
+						</tr>
+						<tr>
 						<td colspan="3">
 							<div class="content">
 								<textarea class="text_cl" disabled maxlength="1000">${textraMap.ability}</textarea>
@@ -249,7 +254,9 @@
 							</td>
 						</tr>
 						<tr>
-							<td><span>选题理由及出版价值：</span></td>
+							<td colspan="4"><div style="text-align: left">选题理由及出版价值：</div></td>
+						</tr>
+						<tr>
 							<td colspan="3">
 								<div class="content">
 									<textarea class="text_cl" disabled maxlength="1000">${textraMap.reason}</textarea>
@@ -257,7 +264,9 @@
 							</td>
 						</tr>
 						<tr>
-							<td><span>主要内容与特色：</span></td>
+							<td colspan="4"><div style="text-align: left">主要内容与特色：</div></td>
+						</tr>
+						<tr>
 							<td colspan="3">
 								<div class="content">
 									<textarea class="text_cl" disabled maxlength="1000">${textraMap.score}</textarea>
