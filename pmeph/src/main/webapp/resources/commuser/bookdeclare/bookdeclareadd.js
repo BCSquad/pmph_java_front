@@ -29,7 +29,7 @@ $(function () {
         $('#workplace').tipso({validator: "isNonEmpty", message: "工作单位不能为空"});
         $('#email').tipso({validator: "isNonEmpty|isEmail", message: "邮箱不能为空|邮箱格式不正确"});
         $('#postcode').tipso({validator: "isNonEmpty", message: "邮编不能为空"});
-        $('#address').tipso({validator: "isNonEmpty", message: "姓名不能为空"});
+        $('#address').tipso({validator: "isNonEmpty", message: "通讯地址不能为空"});
         $('#extra_achievement').tipso({validator: "isNonEmpty", message: "主要专业成就及学术地位不能为空"});
         $('#extra_reason').tipso({validator: "isNonEmpty", message: "选题理由及出版价值不能为空"});
         $('#extra_score').tipso({validator: "isNonEmpty", message: "主要内及特色不能为空"});
@@ -125,7 +125,7 @@ function add_zjky(){
 	var num = fnt();
 	var $table = $("#sbbzqk");
 	var $tr = $("<tr id='sbbz_"+num+"'>"+
-			"<td><input class='sb_input' style='width: 120px;' maxlength='40' id='write_realname_"+num+"' name='write_realname' placeholder='编者姓名' value=''/></td>"+
+			"<td><input class='sb_input' style='width: 120px;' maxlength='40' id='write_realname_"+num+"' name='write_realname' placeholder='姓名' value=''/></td>"+
 			"<td><select id='write_sex_"+num+"'  name='write_sex'>"+
 					"<option value=''>-请选择-</option>" +
 					"<option value='0'>男</option>"+
