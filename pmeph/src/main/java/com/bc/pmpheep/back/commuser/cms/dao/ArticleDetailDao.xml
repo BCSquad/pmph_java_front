@@ -99,7 +99,7 @@
         select c.title,c.author_name,c.id
         from cms_content c
         where  c.auth_status='2'
-        and  c.is_published=1   and  c.is_deleted=0 and c.category_id=1
+        and  c.is_published=1   and  c.is_deleted=0 and c.category_id=1 and c.apporpc != 2
         and c.id != #{wid}
 		<if test="x >= 0">
 			limit #{x},5
@@ -280,6 +280,7 @@
 			 left join cms_content b on b.id=t.main_cms_id
 			 where b.is_published=1   and  b.is_deleted=0 and b.id=#{id}) cc
 			 on c.id = cc.related_cms_id
+			 where c.apporpc != 2
 			 order by cc.gmt_create desc
 			 limit #{startrow},5
 	</select>
