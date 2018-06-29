@@ -221,8 +221,9 @@ function buttAdd(type){
                 success: function(json) {
                     if(json.msg=='OK'){
                         window.message.success("添加成功,正在跳转页面");
-                        
-                        var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
+
+                        /**企业微信消息**/
+                        /*var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
                     	$.ajax({
                             type: 'get',
                             url: exportWordBaseUrl + '/frontWxMsg/topicSubmit/'+json.topic_id+"/"+json.user_id,
@@ -240,9 +241,9 @@ function buttAdd(type){
                                     window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=wycs";
 								}, 800);
                             }
-                            });
-                    	
-                        
+                            });*/
+
+                        window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=wycs";
                     }
                 }
             });
