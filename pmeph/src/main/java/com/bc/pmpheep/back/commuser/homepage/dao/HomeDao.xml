@@ -174,7 +174,7 @@
 			and cc.is_deleted=0
 			and cc.auth_status=2 
 			and cc.is_published=1 
-		
+		    and cc.apporpc != 2
 		order by 
 				cc.`auth_date` desc
         limit 0,#{endrow}

@@ -218,21 +218,22 @@
 
 .div_butt{
 	width: 270px;
-	height: 24px;
+	height: 40px;
 	color: #FFFFFF;
 	margin:auto;/*��Ҫ,IE����ģʽ*/
 	top:50%;
 	left:50%;
 }
 .bt_tj{
-	width: 74px;
-	height: 24px;
+	width: 116px;
+	height: 40px;
 	background-color: #33caa9;
 	border-radius: 2px;
 	cursor: pointer;
 	color: #FFFFFF;
 	float: left;
 	margin-left: 15px;
+	line-height: 40px;
 }
 #tsxz_span4{
 	background-image: url(../image/css_sprites.png);
