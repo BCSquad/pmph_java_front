@@ -220,4 +220,11 @@ public interface ArticleDetailDao {
      * @return
      */
     int QueryAllShip(@Param("id") String id);
+
+    /**
+     * 根据ID查询相关文章 总数
+     * @param id
+     * @return
+     */
+	int QueryShipByIDCount(String id);
 }

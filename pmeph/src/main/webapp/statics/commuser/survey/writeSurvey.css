@@ -122,7 +122,7 @@ input[type=radio]:checked:after  {
 	margin-left:530px;
 	width: 140px;
 	height: 28px;
-	background-color: #6FBCC2;
+	background-color: #33caa9;
 	border-radius:4px;
 	padding-top: 4px;
 }
