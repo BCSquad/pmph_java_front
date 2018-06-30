@@ -185,11 +185,13 @@ public class ArticleDetailController extends BaseController {
 		int startrow = Integer.parseInt(request.getParameter("startrow"));
 		List<Map<String, Object>> list=new ArrayList<Map<String, Object>>();
 		//查询后台是否配置了相关文章
-		list=articleDetailService.QueryShipByID(wid,startrow);
-		if(list.size()>0){
+		
+		int count = articleDetailService.QueryShipByIDCount(wid);
+		if(count>0){
+			list=articleDetailService.QueryShipByID(wid,startrow);
 			for (Map<String, Object> map: list) {
 				map.put("startrow",startrow);
-				map.put("end",list.size());
+				map.put("end",count);
 			}
 		}else{
 			list = articleDetailService.queryRecommendByE(startrow, wid);

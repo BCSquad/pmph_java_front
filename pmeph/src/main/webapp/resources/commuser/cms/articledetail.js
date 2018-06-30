@@ -133,7 +133,7 @@ function change(){
 		};
 	 $.ajax({
 			type:'post',
-			url:contextpath+'articledetail/change.action',
+			url:contextpath+'articledetail/change.action?t=' + new Date(),
 			async:false,
 			data:json,
 			success:function(json){
@@ -149,7 +149,7 @@ function change(){
 				});
 				$("#comment").html(ste);
 				var newrow=parseInt(startrow)+5;
-				if(newrow>count){
+				if(newrow>=count){
                     $("#startrow").val(0);
 				}else{
                     $("#startrow").val(newrow);
