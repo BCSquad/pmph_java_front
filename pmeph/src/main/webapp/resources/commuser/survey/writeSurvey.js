@@ -36,6 +36,7 @@ function validate(){
        var val= $(this).find('input:radio:checked');
        if(val.length<=0){
            flag = '请选择完单选题';
+           window.message.info(flag);
            return flag;
        }
     });

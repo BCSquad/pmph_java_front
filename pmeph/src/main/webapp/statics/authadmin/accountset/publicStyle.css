@@ -78,7 +78,7 @@ table {
     border: none;
     width: 116px;
     height: 40px;
-    background-color: #70bcc3;
+    background-color: #03717b;
 
     color: #ffffff;
     font-size: 14px;
@@ -91,7 +91,7 @@ table {
     width: 75px;
     height: 25px;
     line-height: 25px;
-    background-color: #70bcc3;
+    background-color: #03717b;
 
     color: #ffffff;
     font-size: 14px;
@@ -204,7 +204,7 @@ td{
     width: 75px;
     height: 25px;
     line-height: 25px;
-    background-color: #70bcc3;
+    background-color: #03717b;
     color: #ffffff;
     border-radius: 2px;
     cursor: pointer;

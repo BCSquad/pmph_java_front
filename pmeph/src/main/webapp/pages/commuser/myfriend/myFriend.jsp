@@ -184,7 +184,7 @@ accept{
     border: solid 1px #70bcc3;
 }*/
 .buttonAccept {
-    background-color: #70bcc3; /* Green */
+    background-color: #33caa9; /* Green */
     border: none;
     color: white;
     text-align: center;

@@ -47,12 +47,12 @@ String basePath =path+"/";
                 <a href="${article.skip}"> ${article.title }</a>
             </div>
             <input type="hidden" id="cms${article.cid }" value="${article.cid }"/>
-            <div class="tm">
+            <%--<div class="tm">
                    <span class="author-icon" ><img  src="${article.avatar}" style="width:25px;height:25px;border-radius: 50%;"/>
                    </span>
                 <span class="name">${article.realname }</span>
                 <span class="time"><fmt:formatDate  value="${article.gmt_create}" pattern="yyyy.MM.dd"/></span>
-            </div>
+            </div>--%>
         </div>
         <div class="content">
             <div  class="content-img">
