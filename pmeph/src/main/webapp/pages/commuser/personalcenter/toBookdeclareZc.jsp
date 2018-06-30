@@ -14,9 +14,11 @@
 	<link rel="stylesheet" href="${ctx}/statics/commuser/bookdeclare/bookdeclareadd.css?t=${_timestamp}" type="text/css">
 	<link rel="stylesheet" href="${ctx}/statics/css/jquery.calendar.css?t=${_timestamp}" type="text/css">
 	<link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}" type="text/css">
+	<link rel="stylesheet" href="${ctx}/statics/css/jquery.tipso.css?t=${_timestamp}" type="text/css">
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js?t=${_timestamp}"></script>
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.calendar.js?t=${_timestamp}"></script>
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
+	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.tipso.js?t=${_timestamp}"></script>
 	<script type="text/javascript" src="${ctx}/resources/comm/layer/layer.js?t=${_timestamp}"></script>
 	<script type="text/javascript" src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
 	<script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}" type="text/javascript"></script>
@@ -252,14 +254,19 @@
 					<table class="tab_1">
 						<!-- 选题情况 -->
 						<tr>
-							<td><span class="btbs">*</span><span>主要专业成就及学术地位：</span></td>
+							<td colspan="4"><div class="btbs" style="float: left">*</div><div style="text-align: left">主要专业成就及学术地位：</div></td>
+						</tr>
+						<tr>
 							<td colspan="3">
 								<div class="content">
 									<textarea class="text_cl" id="extra_achievement" name="extra_achievement" maxlength="1000">${textraMap.achievement}</textarea>
 								</div>
 							</td>
-						</tr><tr>
-						<td><span class="btbs1">*</span><span>写作、外语水平：</span></td>
+						</tr>
+						<tr>
+							<td colspan="4"><div style="text-align: left">写作、外语水平：</div></td>
+						</tr>
+						<tr>
 						<td colspan="3">
 							<div class="content">
 								<textarea class="text_cl" id="extra_ability" name="extra_ability" maxlength="1000">${textraMap.ability}</textarea>
@@ -276,7 +283,9 @@
 							</td>
 						</tr>
 						<tr>
-							<td><span class="btbs">*</span><span>选题理由及出版价值：</span></td>
+							<td colspan="4"><div class="btbs" style="float: left">*</div><div style="text-align: left">选题理由及出版价值：</div></td>
+						</tr>
+						<tr>
 							<td colspan="3">
 								<div class="content">
 									<textarea class="text_cl" id="extra_reason" name="extra_reason" maxlength="1000">${textraMap.reason}</textarea>
@@ -284,7 +293,9 @@
 							</td>
 						</tr>
 						<tr>
-							<td><span class="btbs">*</span><span>主要内容与特色：</span></td>
+							<td colspan="4"><div class="btbs" style="float: left">*</div><div style="text-align: left">主要内容与特色：</div></td>
+						</tr>
+						<tr>
 							<td colspan="3">
 								<div class="content">
 									<textarea class="text_cl" id="extra_score" name="extra_score" maxlength="1000">${textraMap.score}</textarea>
@@ -309,7 +320,7 @@
 							</td>
 							<td><span>作者购书：&emsp;&emsp;</span>
 								<input class="cg_input" name="purchase" id="purchase" placeholder="" value="${topicMap.purchase}"
-									   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+									   <%--onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"--%>
 									   maxlength="9"/>
 							</td>
 							<td><span>作者赞助：</span>
@@ -358,7 +369,7 @@
 			<div class="sbxq_item">
 				<div>
 					<span id="tsxz_span6"></span>
-					<span class="tsxz_title">申报编者情况 </span>
+					<span class="tsxz_title">主要参编者 </span>
 					<div class="sb_tj">
 						<div class="tj_div" onclick="add_zjky()">
 							<span id="img_1"></span>

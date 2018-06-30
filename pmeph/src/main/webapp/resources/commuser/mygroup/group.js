@@ -154,11 +154,12 @@ $(function(){
 		var content2=content.replace(/(^\s*)|(\s*$)/g, "");//兼容ie8
 		if(!content || content2 ==''){
 			$("#msgContent").val(content2);
-			window.message.warning("请键入消息");
+			//window.message.warning("请键入消息");
+            layer.msg('请输入消息');
 			return ;
 		}
 		if(content.length > 255){
-			window.message.error("发送失败:键入消息过长");
+            layer.msg("发送失败:键入消息过长");
 			return ;
 		}
 		webSocketSend("{senderId:"+$("#userId").val()+",senderType:"+2+",content:'"+content+"',groupId:"+$("#groupId").val()+",sendType:0}");

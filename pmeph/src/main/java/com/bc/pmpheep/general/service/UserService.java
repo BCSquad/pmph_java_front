@@ -2,7 +2,6 @@ package com.bc.pmpheep.general.service;
 
 import com.bc.pmpheep.general.dao.UserDao;
 import org.apache.commons.collections.MapUtils;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

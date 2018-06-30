@@ -7,6 +7,14 @@ body {
 body image{
     border: none;
 }
+input{
+     font-family: "Microsoft Yahei", Tahoma, Verdana !important;
+     color: #333333;
+ }
+textarea{
+    font-family: "Microsoft Yahei", Tahoma, Verdana !important;
+    color: #333333;
+}
 .content-wrapper {
     width: 1200px;
     margin: 0 auto;

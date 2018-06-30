@@ -131,7 +131,7 @@ $(function(){
 		var content=$("#content").val();
 		var sendTime = new Date();
 		if(!content || content.trim() ==''){
-			window.message.warning("请键入消息");
+            layer.msg('请键入消息');
 		}else{
 			var frendId =$("#frendId").val();
 			$.ajax({

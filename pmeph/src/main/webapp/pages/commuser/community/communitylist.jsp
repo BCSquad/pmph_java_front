@@ -23,6 +23,7 @@ String contextpath=request.getContextPath();
     <script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
     <script src="<%=path%>/resources/comm/jquery/jquery.pager.js?t=${_timestamp}"></script>
     <script src="<%=path%>/resources/comm/base.js?t=${_timestamp}"></script>
+    <script src="<%=path%>/resources/comm/reload.js?t=${_timestamp}"></script>
     <script src="<%=path%>/resources/commuser/community/communitylist.js?t=${_timestamp}"></script>
 </head>
 <body>

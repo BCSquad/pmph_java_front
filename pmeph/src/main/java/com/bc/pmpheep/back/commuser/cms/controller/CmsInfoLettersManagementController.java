@@ -127,7 +127,7 @@ public class CmsInfoLettersManagementController extends BaseController{
 	@RequestMapping(value = "/tolist", method = RequestMethod.GET)
 	public ModelAndView list(HttpServletRequest req,Integer pageSize, Integer pageNumber, Integer order) {
 		ModelAndView model = new ModelAndView();
-		Map<String, Object> adInfo = homeService.getPageAdInfo("信息快报和遴选公告列表 ");
+		Map<String, Object> adInfo = homeService.getPageAdInfo("pc信息快报和遴选公告列表 ");
 		String materialId=req.getParameter("materialId");
 		model.addObject("adInfo", adInfo);
 		model.setViewName("commuser/focusAndSelect/newsReport");

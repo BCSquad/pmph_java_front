@@ -1,4 +1,10 @@
 $(function () {
+    $('#content_book').tipso({validator: "isNonEmpty", message: "图书评论不能为空",group:1});
+    $('#page').tipso({validator: "isNonEmpty|onlyInt", message: "页码不能为空|页码必须是数字",group:2})
+    $('#line').tipso({validator: "isNonEmpty|onlyInt", message: "行数不能为空|行数必须是数字",group:2})
+    $('#content').tipso({validator: "isNonEmpty", message: "纠错内容不能为空",group:2})
+    $('#bookfeedback_content').tipso({validator: "isNonEmpty", message: "读者反馈不能为空",group:3})
+
     $("#start").val(2);//火狐浏览器点击刷新按钮 不刷新el表达式 此处用js初始化
     $("#longstart").val(2);
 
@@ -305,6 +311,9 @@ $(function () {
     morecontent();
 
 
+    relatiedBookPageSwitch('1');
+    relatiedBookPageSwitch('2');
+    relatiedBookPageSwitch('3');
 });
 //展开、收起
 function morecontent() {
@@ -491,10 +500,7 @@ function longcom() {
 
 //新增评论
 function insert() {
-    if ($("#content_book").val() == '' || $("#content_book").val() == null) {
-        window.message.info("请输入评论！");
-        return;
-    }
+    if ($.fireValidator(1)) {
     var json = {
         content: $("#content_book").val(),
         score: $("#last_score").html(),
@@ -525,6 +531,7 @@ function insert() {
         }
     });
 }
+}
 
 
 //相关推荐换一换
@@ -549,6 +556,95 @@ function fresh(row) {
             } else {
                 $("#change").html(str);
             }
+        }
+    });
+}
+
+/**
+ * 后台配置相关图书的"换一批按钮触发"
+ * relation_type ： 1.教材关联图书 2.相关推荐 3.人卫推荐
+ * nextPage: 换到第几页
+ */
+function relatiedBookPageSwitch(relation_type){
+	var id =$('#bookid').val();
+	var tagetElId= "";
+	var nextPage = 0;
+	var totalPage = 100;
+	if (relation_type == '1' ) {
+		tagetElId = "about";
+		if($("#"+tagetElId).children(".relation_totalPage").length==0
+				||$("#"+tagetElId).children(".relation_totalPage").val()==0){
+			fresh("6");
+			return;
+		}
+	}else if(relation_type == '2' ){
+		tagetElId = "change";
+		if($("#"+tagetElId).children(".relation_totalPage").length==0
+				||$("#"+tagetElId).children(".relation_totalPage").val()==0){
+			fresh("9");
+			return;
+		}
+	}else if(relation_type == '3'){
+		tagetElId = "comment";
+		if($("#"+tagetElId).children(".relation_totalPage").length==0
+				||$("#"+tagetElId).children(".relation_totalPage").val()==0){
+			change();
+			return;
+		}
+	}
+	nextPage = $("#"+tagetElId).children(".relation_page").val();
+	totalPage = $("#"+tagetElId).children(".relation_totalPage").val();
+	var str="";
+	$.ajax({
+        type: 'post',
+        url: contextpath + 'readdetail/relatiedBookPageSwitch.action?type=' + relation_type + '&page=' + nextPage+'&id='+id+'&t='+new Date(),
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+        	str += '<input class="relation_page" value="'+json.nextPage+'" type="hidden"></input>';
+        	str += '<input class="relation_totalPage" value="'+json.totalPage+'" type="hidden"></input>';
+        	if (relation_type == '1'||relation_type == '2') {
+        		$.each(json.list, function (i, x) {
+                    str += '<div class="right_9" onclick="todetail(' + x.id + ')"> <div class="right_10"><img class="right_12" src=' +
+                        x.image_url +
+                        '></div><div class="right_11">' +
+                        x.bookname +
+                        '</div></div>';
+                });
+			}else if(relation_type == '3'){
+				$.each(json.list, function (i, x) {
+	                str += '<div class="right_20"><div class="right_21" onclick="todetail(' +
+	                    x.id
+	                    + ')">' +
+	                    x.bookname +
+	                    '</div><div class="right_22">（' +
+	                    x.author +
+	                    '）</div></div>';
+	            });
+			}
+
+        	if (json.totalPage==0) {
+        		$(".relatiedBookPageSwitchWrapper."+relation_type).show();
+        		if (relation_type == '1' ) {
+        				fresh("6");
+        				return;
+        		}else if(relation_type == '2' ){
+        				fresh("9");
+        				return;
+        		}else if(relation_type == '3'){
+        				change();
+        				return;
+        		}
+			}
+
+
+            $("#"+tagetElId).html(str);
+            if (json.totalPage==1) {
+				$(".relatiedBookPageSwitchWrapper."+relation_type).hide();
+			}else{
+				$(".relatiedBookPageSwitchWrapper."+relation_type).show();
+
+			}
         }
     });
 }
@@ -590,9 +686,9 @@ function addlikes() {
         dataType: 'json',
         success: function (json) {
             if (json.returncode == "yes") {
-                $("#dz").attr("src", contextpath + "statics/image/dz02.png");
+                $("#dz").attr("class", "addlike");
             } else {
-                $("#dz").attr("src", contextpath + "statics/image/dz01.png");
+                $("#dz").attr("class", "left2");
             }
         }
     });
@@ -614,9 +710,9 @@ function addmark() {
         dataType: 'json',
         success: function (json) {
             if (json.returncode == "OK") {
-                $("#sc").attr("src", contextpath + "statics/image/sc101(1).png");
+                $("#sc").attr("class", "left3");
             } else {
-                $("#sc").attr("src", contextpath + "statics/image/s102(1).png");
+                $("#sc").attr("class", "left4");
             }
         }
     });
@@ -657,13 +753,14 @@ function showup(tag) {
 
 //点击纠错弹窗隐藏
 function hideup() {
+    //隐藏弹窗给值是是因为校验的时候页面上所有的输入框都会校验
     $(".bookmistake").hide();
     
 }
 
 //图书纠错
 function correction() {
-    if ($("#bookmistakeform").validate('submitValidate')) {
+    if ($.fireValidator(2)) {
         if ($("#upload_status").val() == '') {
             page = $("#page").val();
             line = $("#line").val();
@@ -692,8 +789,9 @@ function correction() {
                             $("#content").val(null);
                             $("#upname").html('未选择任何文件!');
                             $("#upload_status").val(null);
-                            
-                            var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
+
+                            /**企业微信消息**/
+                            /*var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
                             var bookId = $("#book_id").val();
                             var userId = $("#userid").val();
                             var correctId = json.correctId;
@@ -710,7 +808,7 @@ function correction() {
                                 error:function(XMLHttpRequest, textStatus){
                                 	
                                 }
-                                });
+                                });*/
                             
                             
                             
@@ -731,7 +829,7 @@ function correction() {
 
 function bookfeedback(){
 	
-    if ($("#bookfeedbackform").validate('submitValidate')) {
+    if ($.fireValidator(3)) {
             content = $("#bookfeedback_content").val();
             if (!Empty(content)) {//非空判断
             	$(".btn").attr("disabled",true);
@@ -851,4 +949,8 @@ function validLogin() {
             }
         }
     });
+}
+//下拉自动加载
+function loadData(){
+    changepage();
 }

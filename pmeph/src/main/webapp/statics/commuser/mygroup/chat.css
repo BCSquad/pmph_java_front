@@ -163,6 +163,9 @@
     margin-top: 6px;
     color: #999999;
     display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .div_tx_name {

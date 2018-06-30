@@ -214,7 +214,7 @@
 	-moz-opacity: 0.3;
 	-khtml-opacity: 0.3;
 	-webkit-opacity: 0.3;
-	opacity: 0.3;
+	opacity: 1;
 	filter:alpha(opacity=30);
 	padding: 15px 20px;
 	margin-top: 20px;

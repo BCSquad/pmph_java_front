@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="${ctx}/statics/commuser/myfriend/myFriend.css?t=${_timestamp}" type="text/css">
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js?t=${_timestamp}"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+    <script type="text/javascript" src="${ctx}/resources/comm/reload.js?t=${_timestamp}"></script>
     <script type="text/javascript" src="${ctx}/resources/commuser/myfriend/myFriend.js?t=${_timestamp}"></script>
     <style>
     	#rightContent .select-button {
@@ -678,6 +679,7 @@ max-width: 10px !important; min-width: 10px !important;
      </div>
 </div>
 <div style="clear:both;height: 30px" ></div>
+<input type="hidden" id="listSize" value="${listSize}">
 <c:if test="${listSize>0}">
 	<div class="last_div" id="span_more"><div class="more" ><span style="cursor: pointer;" onclick="morefriend()" id="mooorew">加载更多...</span></div></div>
 </c:if>
@@ -743,6 +745,12 @@ max-width: 10px !important; min-width: 10px !important;
             	}
             }
     	});
+    }
+    function loadData(){
+        var listSize =$("#listSize").val();
+        if(listSize>0){
+            morefriend();
+        }
     }
 </script>
 </body>

@@ -11,6 +11,13 @@
     display: block;
 }
 
+.doc {
+    float: left;
+    width: 6px;
+    height: 24px;
+    background-color: red;
+}
+
 .area1 {
     width: 100%;
     height: 412px;
@@ -419,6 +426,7 @@ ul li {
 
 .hot-list {
     width: 336px;
+    margin-top: 60px;
 }
 
 .hot-list .item {
@@ -628,28 +636,30 @@ ul li {
 }
 
 .tscx_type {
-    background-color: #dbe9ea;
+    /*background-color: #dbe9ea;*/
     height: 28px;
-    margin-right: 10px;
+    /*margin-right: 10px;*/
     line-height: 28px;
     padding: 0px 9px;
     float: left;
     display: inline-block;
     cursor: pointer;
-    border-radius: 2px;
-    margin-bottom: 10px;
+    /*border-radius: 2px;*/
+    /*margin-bottom: 10px;*/
+    width: 66px;
+    text-align: center;
 }
 
 .tscx_type1 {
-    background-color: #489399;
+    border-bottom: 1px solid #ff825c
 }
 
-.tscx_type span {
-    color: #489399;
+.tscx_type div {
+    color: black;
 }
 
 .tscx_type1 span {
-    color: white;
+    color: black;
 }
 
 .re_1 {

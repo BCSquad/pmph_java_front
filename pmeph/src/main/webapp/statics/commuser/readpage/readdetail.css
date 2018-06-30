@@ -277,6 +277,63 @@
     margin-left: 10px;
 }
 
+.addlikediv{
+    float: left;
+    background-color: #FDE9E7;
+    height: 26px;
+    cursor: pointer;
+}
+
+.left2{
+    background-image: url(../../image/css_sprites.png);
+    background-position: -112px -153px;
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 20px;
+    float: left;
+    margin-left: 5px;
+    margin-top: 3px;
+}
+
+.left3{
+    background-image: url(../../image/css_sprites.png);
+    background-position: -112px -177px;
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 20px;
+    float: left;
+    margin-left: 5px;
+    margin-top: 3px;
+}
+
+.left4{
+    background-image: url(../../image/css_sprites.png);
+    background-position: -85px -179px;
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 20px;
+    float: left;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.addlike{
+    background-image: url(../../image/css_sprites.png);
+    background-position: -86px -154px;
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 20px;
+    float: left;
+    margin-left: 5px;
+    margin-top: 3px;
+}
+
+.addliketext{
+    float: left;
+    color: #DB473D;
+    margin-right: 10px;
+}
+
 .mistake {
     height: 33px;
     width: 110px;
@@ -609,7 +666,7 @@
     height: 100px;
     background-color: #f1fbf4;
     border-radius: 3px;
-    color: #1abd44;
+    color: black;
     border: none;
     padding: 10px;
     resize:none;
@@ -783,8 +840,8 @@
     height: 15px;
     background-image: url("../../image/refresh.png");
     float: left;
-    margin-top: 16px;
-    margin-left: 80px;
+    margin-top: 14px;
+    margin-left: 75px;
 }
 
 .right_20 {
@@ -823,7 +880,7 @@
 .refresh1 {
     float: left;
     margin-top: 10px;
-
+    margin-left: 5px;
     font-size: 12px;
     color: #999999;
     cursor: pointer;
@@ -1146,4 +1203,7 @@
 .valid_message {
     color: red;
     margin-left: 80px;
+}
+img.no_relation {
+    width: 100%;
 }

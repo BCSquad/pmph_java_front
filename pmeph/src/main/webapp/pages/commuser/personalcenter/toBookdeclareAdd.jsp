@@ -11,17 +11,25 @@
 	<title>我要出书-申报</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
-	<link rel="stylesheet" href="${ctx}/statics/commuser/bookdeclare/bookdeclareadd.css?t=${_timestamp}" type="text/css">
+	<link rel="stylesheet" href="${ctx 	}/statics/commuser/bookdeclare/bookdeclareadd.css?t=${_timestamp}" type="text/css">
 	<link rel="stylesheet" href="${ctx}/statics/css/jquery.calendar.css?t=${_timestamp}" type="text/css">
 	<link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}" type="text/css">
+	<link rel="stylesheet" href="${ctx}/statics/css/jquery.tipso.css?t=${_timestamp}" type="text/css">
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js?t=${_timestamp}"></script>
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.calendar.js?t=${_timestamp}"></script>
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
 	<script type="text/javascript" src="${ctx}/resources/comm/layer/layer.js?t=${_timestamp}"></script>
+	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.tipso.js?t=${_timestamp}"></script>
 	<script type="text/javascript" src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
 	<script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}" type="text/javascript"></script>
 	<script type="text/javascript" src="${ctx}/resources/commuser/bookdeclare/bookdeclareadd.js?t=${_timestamp}"></script>
 </head>
+<style>
+	.footer{
+		margin-top: 50px;
+		background: #F8F8F8;
+	}
+</style>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="body">
@@ -249,20 +257,25 @@
 					<table class="tab_1">
 						<!-- 选题情况 -->
 						<tr>
-							<td><span class="btbs">*</span><span>主要专业成就及学术地位：</span></td>
-							<td colspan="3">
+							<td colspan="4"><div class="btbs" style="float: left">*</div><div style="text-align: left">主要专业成就及学术地位：</div></td>
+						</tr>
+						<tr>
+							<td colspan="4">
 								<div class="content">
 									<textarea class="text_cl" id="extra_achievement" name="extra_achievement" maxlength="1000"></textarea>
 								</div>
 							</td>
-						</tr><tr>
-						<td><span class="btbs1">*</span><span>写作、外语水平：</span></td>
-						<td colspan="3">
-							<div class="content">
-								<textarea class="text_cl" id="extra_ability" name="extra_ability" maxlength="1000"></textarea>
-							</div>
-						</td>
-					</tr>
+						</tr>
+						<tr>
+							<td colspan="4"><div style="text-align: left">写作、外语水平：</div></td>
+						</tr>
+						<tr>
+								<td colspan="3">
+								<div class="content">
+									<textarea class="text_cl" id="extra_ability" name="extra_ability" maxlength="1000"></textarea>
+								</div>
+						    </td>
+					    </tr>
 						<tr>
 							<td colspan="4">
 								<div style="text-align: left">
@@ -273,7 +286,9 @@
 							</td>
 						</tr>
 						<tr>
-							<td><span class="btbs">*</span><span>选题理由及出版价值：</span></td>
+							<td colspan="4"><div class="btbs" style="float: left">*</div><div style="text-align: left">选题理由及出版价值：</div></td>
+						</tr>
+						<tr>
 							<td colspan="3">
 								<div class="content">
 									<textarea class="text_cl" id="extra_reason" name="extra_reason" maxlength="1000"></textarea>
@@ -281,7 +296,9 @@
 							</td>
 						</tr>
 						<tr>
-							<td><span class="btbs">*</span><span>主要内容与特色：</span></td>
+							<td colspan="4"><div class="btbs" style="float: left">*</div><div style="text-align: left">主要内容与特色：</div></td>
+						</tr>
+						<tr>
 							<td colspan="3">
 								<div class="content">
 									<textarea class="text_cl" id="extra_score" name="extra_score" maxlength="1000"></textarea>
@@ -306,13 +323,13 @@
 							</td>
 							<td><span>作者购书：&emsp;&emsp;</span>
 								<input class="cg_input" name="purchase" id="purchase" placeholder="" value=""
-									   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
-									   <%--maxlength="9"--%>/>
+									   <%--onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"--%>
+									   maxlength="9"/>
 							</td>
 							<td><span>作者赞助：</span>
 								<input class="cg_input" name="sponsorship" id="sponsorship" placeholder="" value=""
-									   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
-									   maxlength="9"/>
+									   onafterpaste="this.value=this.value.replace(/\D/g,'')"
+									   maxlength="50"/>
 							</td>
 						</tr>
 						<tr>
@@ -351,11 +368,11 @@
 					</table>
 				</div>
 			</div>
-			<!-- 申报编者情况 -->
+			<!-- 主要参编者 -->
 			<div class="sbxq_item">
 				<div>
 					<span id="tsxz_span6"></span>
-					<span class="tsxz_title">申报编者情况 </span>
+					<span class="tsxz_title">主要参编者 </span>
 					<div class="sb_tj">
 						<div class="tj_div" onclick="add_zjky()">
 							<span id="img_1"></span>
@@ -370,10 +387,10 @@
 							<td width="140px">姓名</td>
 							<td width="100px">性别</td>
 							<td width="90px">年龄 </td>
-							<td width="300px">工作单位</td>
 							<td width="140px">电话</td>
-							<td width="200px">职务职称</td>
 							<td width="100px">学历</td>
+							<td width="200px">职务职称</td>
+							<td width="300px">工作单位</td>
 							<td width="80px">操作</td>
 						</tr>
 						</thead>
@@ -391,11 +408,7 @@
 									   onkeyup="this.value=this.value.replace(/(\D|^0+)/g,'');this.value=this.value.replace(/^[^0-1]\d{2}$/g,'199');" onafterpaste="this.value=this.value.replace(/(\D|^0+)/g,'');this.value=this.value.replace(/^[^0-1]\d{2}$/g,'199');"
 									   onBlur="checkAge(this)"
 									   maxlength="3"/></td>
-							<td><input class="sb_input" style="width: 280px;" id="write_workplace" name="write_workplace" placeholder="工作单位" value="" maxlength="36"/>
-								<input type="hidden" name="checkbzqk" value="write_realname,write_sex,write_price,write_phone,write_degree,write_position,write_workplace"/>
-							</td>
 							<td><input class="sb_input" style="width: 120px;" name="write_phone" placeholder="电话" value="" id="write_phone" maxlength="36"/></td>
-							<td><input class="sb_input" style="width: 180px;" id="write_position"  name="write_position" placeholder="职务职称" value="" maxlength="36"/></td>
 							<td>
 								<select id="write_degree" name="write_degree">
 									<option value="">-请选择-</option>
@@ -404,6 +417,10 @@
 									<option value="2">学士</option>
 									<option value="3">其他</option>
 								</select>
+							</td>
+							<td><input class="sb_input" style="width: 180px;" id="write_position"  name="write_position" placeholder="职务职称" value="" maxlength="36"/></td>
+							<td><input class="sb_input" style="width: 280px;" id="write_workplace" name="write_workplace" placeholder="工作单位" value="" maxlength="36"/>
+								<input type="hidden" name="checkbzqk" value="write_realname,write_sex,write_price,write_phone,write_degree,write_position,write_workplace"/>
 							</td>
 							<td><div class="add_div"><img class="add_img" src="${ctx}/statics/image/del.png" onclick="del_tr('sbbz_1')"></div></td>
 						</tr>
@@ -441,7 +458,7 @@
 						<tbody>
 						<tr id="sbbz_2">
 							<td><input class="sb_input" style="width: 230px;" id="similar_bookname" placeholder="书名" name="similar_bookname"  maxlength="40" value=""/></td>
-							<td><input class="sb_input" style="width: 80px;" id="similar_edition" placeholder="版次" name="similar_edition"  maxlength="2" value="" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/></td>
+							<td><input class="sb_input" style="width: 80px;" id="similar_edition" placeholder="版次" name="similar_edition"  maxlength="50" value=""/></td>
 							<td><input class="sb_input" style="width: 80px;" id="similar_author" placeholder="作者" name="similar_author"  maxlength="100" value=""/></td>
 							<td><input class="sb_input" style="width: 80px;" id="similar_booksize" placeholder="开本" name="similar_booksize"  maxlength="20" value=""/></td>
 							<td><input class="sb_input" style="width: 160px;" id="similar_publisher" placeholder="出版单位" name="similar_publisher"  maxlength="100" value=""/></td>

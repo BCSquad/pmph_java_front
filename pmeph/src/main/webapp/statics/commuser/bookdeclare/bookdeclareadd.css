@@ -224,18 +224,17 @@
 	width: 100%;
 }
 .text_cl{
-	width: 990px;
+	width: 1150px;
 	height: 60px;
 	background-color: #e8f1fa;
 	border-radius: 3px;
-	border: solid 1px #3996fa;
+	border: solid 1px #C8D5F8;
 	-moz-opacity: 0.3;
 	-khtml-opacity: 0.3;
 	-webkit-opacity: 0.3;
-	opacity: 0.3;
+	opacity: 1;
 	filter:alpha(opacity=30);
 	padding: 15px 20px;
-	margin-top: 20px;
 }
 /**�ύ��ť**/
 .button{
@@ -263,14 +262,15 @@
 	left:50%;
 }
 .bt_tj{
-	width: 74px;
-	height: 24px;
+	width: 116px;
+	height: 40px;
 	background-color: #70bcc3;
 	border-radius: 2px;
 	cursor: pointer;
 	color: #FFFFFF;
 	float: left;
 	margin-left: 15px;
+	line-height: 40px;
 }
 .sb_tj{
 	width: 74px;

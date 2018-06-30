@@ -22,8 +22,8 @@
             useTitle: false,
             onBeforeShow: null,
             onShow: null,
-            onHide: null
-
+            onHide: null,
+            group:0
         };
 
     function Plugin(element, options) {
@@ -41,14 +41,23 @@
     var rules = {};
 
     $.extend({
-        fireValidator: function () {
+        fireValidator: function (group) {
             var isshow = false;
+            if(group>0){
+
+            }else{
+                group=0;
+            }
             for (var i = 0; i < list.length; i++) {
                 var item = list[i];
                 console.log(item);
+
                 item.hideStyle();
                 item.hide();
 
+                if(item.settings.group!=group){
+                    continue;
+                }
 
                 var value = "";
                 if (item.element.find("input[type='hidden']").length > 0) {
@@ -127,6 +136,24 @@
     $.addValidatRule("onlyInt", function (value) {
         //不能为空
         if (!/^[0-9]*$/.test(value)) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+
+    $.addValidatRule("isPassword", function (value) {
+        //校验密码  只能为数字和字母
+        if (!/^[A-Za-z0-9!@#$%^&*]{6,16}$/.test(value)) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+
+    $.addValidatRule("isCard", function (value) {
+        //校验身份证号码
+        if (!/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(value)) {
             return false;
         } else {
             return true;

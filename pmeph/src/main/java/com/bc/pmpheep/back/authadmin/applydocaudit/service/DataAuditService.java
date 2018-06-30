@@ -234,6 +234,13 @@ public interface DataAuditService {
 
 	//只要点过打印按钮，都算已打印
 	void updPrintStatus(String id);
+
+	/**
+	 * 在dec_position和dec_position_published表中查询choosen_position大于0的项 即被遴选中的啊
+	 * @param declaration_id
+	 * @return
+	 */
+	List<Map<String, Object>> queryChoosenListByDeclarationId(String declaration_id);
 	
 
 }

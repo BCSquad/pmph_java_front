@@ -208,4 +208,16 @@ public interface ArticleDetailDao {
 	 */
 	//void updateComments(@Param("id") Long id);
 
+	/**
+	 * 根据ID查询相关文章
+	 * @param id 文章主键
+	 * @return
+	 */
+	List<Map<String, Object>> QueryShipByID(@Param("id") String id,@Param("startrow") int startrow);
+    /**
+     * 根据ID查询相关文章总条数
+     * @param id 文章主键
+     * @return
+     */
+    int QueryAllShip(@Param("id") String id);
 }
