@@ -21,7 +21,8 @@
     <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/commuser/mygroup/groupList.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
-    
+    <script src="${ctx}/resources/comm/reload.js?t=${_timestamp}"></script>
+
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
@@ -89,9 +90,11 @@
 		<div class="clear"></div>
     </div>
     <div style="clear: both"></div>
+	<input type="hidden" id="isover" value="${isover}">
     <c:if  test="${isover=='no'}">
         <div class="jzgd"><span onclick="javascript:doMore('${pageNumber}')">加载更多...</span></div>
         <div style="height: 30px;"></div>
+
     </c:if>
 	<%--
     <c:if  test="${isover=='yes'}">

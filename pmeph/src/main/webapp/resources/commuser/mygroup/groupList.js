@@ -10,4 +10,12 @@ function doMore(count){
 	window.location.href=contextpath+"group/list.action?pageNumber="+count;
 }
 
+//下拉加载
+function loadData(){
+	var isover = $("#isover").val()
+	var count = $("#pageNumber").val();
+	if(isover == "no"){
+        doMore(count);
+    }
+}
 

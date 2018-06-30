@@ -11,7 +11,7 @@
 	<title>我要出书-申报</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
-	<link rel="stylesheet" href="${ctx}/statics/commuser/bookdeclare/bookdeclareadd.css?t=${_timestamp}" type="text/css">
+	<link rel="stylesheet" href="${ctx}/statics/commuser/bookdeclare/bookdeclareDetail.css?t=${_timestamp}" type="text/css">
 	<link rel="stylesheet" href="${ctx}/statics/css/jquery.calendar.css?t=${_timestamp}" type="text/css">
 	<link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}" type="text/css">
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js?t=${_timestamp}"></script>
@@ -225,14 +225,19 @@
 					<table class="tab_1">
 						<!-- 选题情况 -->
 						<tr>
-							<td><span>主要专业成就及学术地位：</span></td>
+							<td colspan="4"><div style="text-align: left">主要专业成就及学术地位：</div></td>
+						</tr>
+						<tr>
 							<td colspan="3">
 								<div class="content">
 									<textarea class="text_cl" disabled maxlength="1000">${textraMap.achievement}</textarea>
 								</div>
 							</td>
-						</tr><tr>
-						<td><span>写作、外语水平：</span></td>
+						</tr>
+						<tr>
+							<td colspan="4"><div style="text-align: left">写作、外语水平：</div></td>
+						</tr>
+						<tr>
 						<td colspan="3">
 							<div class="content">
 								<textarea class="text_cl" disabled maxlength="1000">${textraMap.ability}</textarea>
@@ -249,7 +254,9 @@
 							</td>
 						</tr>
 						<tr>
-							<td><span>选题理由及出版价值：</span></td>
+							<td colspan="4"><div style="text-align: left">选题理由及出版价值：</div></td>
+						</tr>
+						<tr>
 							<td colspan="3">
 								<div class="content">
 									<textarea class="text_cl" disabled maxlength="1000">${textraMap.reason}</textarea>
@@ -257,7 +264,9 @@
 							</td>
 						</tr>
 						<tr>
-							<td><span>主要内容与特色：</span></td>
+							<td colspan="4"><div style="text-align: left">主要内容与特色：</div></td>
+						</tr>
+						<tr>
 							<td colspan="3">
 								<div class="content">
 									<textarea class="text_cl" disabled maxlength="1000">${textraMap.score}</textarea>
@@ -326,7 +335,7 @@
 			<div class="sbxq_item">
 				<div>
 					<span id="tsxz_span6"></span>
-					<span class="tsxz_title">申报编者情况 </span>
+					<span class="tsxz_title">主要参编者 </span>
 				</div>
 				<div class="content">
 					<table class="tab_2" id="sbbzqk">
@@ -335,10 +344,10 @@
 							<td width="150px">姓名</td>
 							<td width="100px">性别</td>
 							<td width="100px">年龄 </td>
-							<td width="100px">电话</td>
-							<td width="100px">学历</td>
-							<td width="200px">职务职称</td>
 							<td width="300px">工作单位</td>
+							<td width="100px">电话</td>
+							<td width="200px">职务职称</td>
+							<td width="100px">学历</td>
 						</tr>
 						</thead>
 						<tbody>
@@ -350,15 +359,15 @@
 									<c:if test="${list.sex == '1'}">女</c:if>
 								</td>
 								<td>${list.price}</td>
+								<td>${list.workplace}</td>
 								<td>${list.phone}</td>
+								<td>${list.position}</td>
 								<td>
 									<c:if test="${list.degree=='0'}">博士</c:if>
 									<c:if test="${list.degree=='1'}">硕士</c:if>
 									<c:if test="${list.degree=='2'}">学士</c:if>
 									<c:if test="${list.degree=='3'}">其他</c:if>
 								</td>
-								<td>${list.position}</td>
-								<td>${list.workplace}</td>
 							</tr>
 						</c:forEach>
 						</tbody>

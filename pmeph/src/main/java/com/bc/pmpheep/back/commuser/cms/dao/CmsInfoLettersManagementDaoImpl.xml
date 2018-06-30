@@ -13,7 +13,7 @@
 		LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
 
 		WHERE
-		cc.is_deleted = 0
+		cc.is_deleted = 0 and cc.apporpc != 2
 		<if test="materialId==null">
 		  AND ccg.id = 2
 		</if>
@@ -33,7 +33,7 @@
 		left join  material_extra me on me.material_id=cc.material_id
 		left join material m on m.id=cc.material_id
 		WHERE
-		cc.is_deleted = 0 and cc.is_published=1 and cc.auth_status=2
+		cc.is_deleted = 0 and cc.is_published=1 and cc.auth_status=2 and cc.apporpc !=2
 		<if test="materialId==null">
 		  AND ccg.id = 2
 		</if>

@@ -512,7 +512,7 @@
 		ON
 		b.`id`= bd.`book_id`
 		WHERE
-		1 = 1 and b.is_key =1
+		b.is_key =1
 		and b.is_on_sale=1
 		ORDER BY
 		<if test="parameter.order !=null">
@@ -533,7 +533,7 @@
 				b.`sort_promote`DESC,
 			</if>
 		</if>
-		b.id
+		b.sort_key desc
 		LIMIT #{start},#{pageSize}
 	</select>
 

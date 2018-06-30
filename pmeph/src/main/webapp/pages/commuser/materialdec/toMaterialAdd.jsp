@@ -33,6 +33,12 @@
 
 	 })*/
 	</script>
+	<style>
+		.footer {
+			background: #F8F8F8;
+			margin-top: 30px;
+		}
+	</style>
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
