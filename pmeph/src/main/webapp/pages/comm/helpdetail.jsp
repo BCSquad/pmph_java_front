@@ -64,7 +64,7 @@
         .div_btn11{
 
             padding:5px 20px;
-            background-color: #70bcc3;
+            background-color: #33caa9;
             border-radius: 2px;
             text-align: center;
             /*position: absolute;*/

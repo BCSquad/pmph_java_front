@@ -27,13 +27,13 @@ $(function () {
         $('#price').tipso({validator: "isNonEmpty", message: "年龄不能为空"});
         $('#position').tipso({validator: "isNonEmpty", message: "行政职务不能为空"});
         $('#workplace').tipso({validator: "isNonEmpty", message: "工作单位不能为空"});
+        $('#phone').tipso({validator: "isNonEmpty", message: "电话号码不能为空"});
         $('#email').tipso({validator: "isNonEmpty|isEmail", message: "邮箱不能为空|邮箱格式不正确"});
         $('#postcode').tipso({validator: "isNonEmpty", message: "邮编不能为空"});
         $('#address').tipso({validator: "isNonEmpty", message: "通讯地址不能为空"});
         $('#extra_achievement').tipso({validator: "isNonEmpty", message: "主要专业成就及学术地位不能为空"});
         $('#extra_reason').tipso({validator: "isNonEmpty", message: "选题理由及出版价值不能为空"});
         $('#extra_score').tipso({validator: "isNonEmpty", message: "主要内及特色不能为空"});
-        $('#phone').tipso({validator: "isNonEmpty", message: "电话号码不能为空"})
         $('#dzdx').tipso({validator: "isNonEmpty", message: "请选择读者对象"});
         $('#xzly').tipso({validator: "isNonEmpty", message: "请选择选题来源"});
         $('#sex').tipso({validator: "isNonEmpty", message: "请选择性别"});
