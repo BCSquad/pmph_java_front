@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%String path = request.getContextPath();%>
-<html>
+<!doctype html>
 <head>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>我的小组</title>
@@ -17,10 +17,11 @@
     <link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/communication.css?t=${_timestamp}" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/commuser/mygroup/chat.css?t=${_timestamp}" type="text/css">
     <link rel="stylesheet" href="<%=path %>/statics/css/jquery.selectlist.css?t=${_timestamp}"/>
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.tipso.css?t=${_timestamp}" type="text/css">
     <link rel="stylesheet" href="${ctx}/resources/comm/layui/css/layui.css"  media="all">
     <script src="<%=path %>/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
     <script src="<%=path %>/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
-
+    <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.tipso.js?t=${_timestamp}"></script>
     <script type="text/javascript">
 		var contxtpath  = '${pageContext.request.contextPath}';
 		var contextpath = '${pageContext.request.contextPath}/';

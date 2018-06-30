@@ -23,6 +23,7 @@
     <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/reload.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/commuser/focusAndSelect/materialNotice.js?t=${_timestamp}" ></script>
     
 

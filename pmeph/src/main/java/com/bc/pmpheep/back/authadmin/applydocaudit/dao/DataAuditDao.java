@@ -3,6 +3,8 @@ package com.bc.pmpheep.back.authadmin.applydocaudit.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
 import com.bc.pmpheep.back.plugin.PageParameter;
 
@@ -121,5 +123,12 @@ public interface DataAuditDao {
 
 			//打印状态改变
 			void updPrintStatus(String id);
+
+			/**
+			 * 在dec_position和dec_position_published表中查询choosen_position大于0的项 即被遴选中的
+			 * @param declaration_id
+			 * @return
+			 */
+			List<Map<String, Object>> queryChoosenListByDeclarationId(@Param(value = "declaration_id")String declaration_id);
 
 }

@@ -1,4 +1,8 @@
 $(function () {
+    $('#realname').tipso({validator: "isNonEmpty", message: "真是姓名不能为空"});
+    $('#handphone').tipso({validator: "isNonEmpty", message: "手机号码不能为空"});
+    $('#workplace').tipso({validator: "isNonEmpty", message: "工作单位不能为空"});
+
     //文件上传
     $("#uploadFile").uploadFile({
         accept: "image/*",
@@ -107,7 +111,7 @@ function save() {
     	 window.message.warning("标签的总长度过大！");
     	return; 
     }
-    if ($("#orgForm").validate('submitValidate')) {
+    if ($.fireValidator()) {
         $.ajax({
             type: 'post',
             url: contextpath + 'userinfo/update.action',

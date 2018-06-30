@@ -122,7 +122,7 @@ public class HomeServiceImpl implements HomeService {
             map.put("cover", RouteUtil.articleAvatar(MapUtils.getString(map, "cover")));
             String con = MapUtils.getString(map, "summary", "");
             String content = omit(con, 208);
-            map.put("content", content);
+            map.put("summary", content);
         }
         return list;
     }

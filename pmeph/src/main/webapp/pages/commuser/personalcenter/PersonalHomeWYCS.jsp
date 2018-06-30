@@ -106,12 +106,14 @@ request.setAttribute("currentTime",datetime);
                 	
                 </c:choose>
                 <br/>
+				<c:if test="${selfLog == true}">
+					<a href="<c:url value="/userinfo/touser.action"/>"><span id="zhsz"></span><span class="grsx">修改资料</span></a>
+				</c:if>
                 <c:if test="${permap.rank==0}"><span id="zjrz"></span><span class="grsx">普通用户</span></c:if>
                 <c:if test="${permap.rank==1}"><span id="zjrz"></span><span class="grsx">教师用户</span></c:if>
                 <c:if test="${permap.rank==2}"><span id="zjrz"></span><span class="grsx">作家用户</span></c:if>
                 <c:if test="${permap.rank==3}"><span id="zjrz"></span> <span class="grsx">专家用户</span></c:if>
                 <c:if test="${selfLog == true}">
-                	<a href="<c:url value="/userinfo/touser.action"/>"><span id="zhsz"></span><span class="grsx">修改资料</span></a>
                 	<a href="<c:url value="/integral/toPage.action"/>"><span id="jftb"></span><span class="grsx">积分</span></a>
                 </c:if>
                 

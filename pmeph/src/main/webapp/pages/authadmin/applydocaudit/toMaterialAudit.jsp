@@ -50,9 +50,17 @@
                 <div class="info">
                     <textarea class="misarea" id="return_cause" onkeyup="javascript:LengthLimit(this,90);"
                               onblur="javascript:LengthLimit(this,90);"></textarea>
+                    <c:if test="${expertChoosen }">
+		                <div class="choosenWarning">
+				          	提示:该作者已被遴选,退回将会同时 <font color="red" >撤销遴选</font> !
+				          	</br>
+				          	是否确认退回？
+				        </div>
+			        </c:if>
                 </div>
+                
           
-                <div class="">
+                <div class="return_cause_btn_wrapper">
                 	<button class="btn" type="button" onclick="hideup()">取消</button>
                     <button class="btn" type="button" onclick="correction()">确认</button>
                 </div>

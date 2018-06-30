@@ -83,3 +83,7 @@ function loadMore(){
 function enterCommunity(){
 	
 }
+
+function loadData(){
+    load("");
+}
