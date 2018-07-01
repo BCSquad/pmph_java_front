@@ -338,6 +338,19 @@ public class DataAuditServiceImpl implements DataAuditService {
 
     }
 
+    /**
+	 * 在dec_position和dec_position_published表中查询choosen_position大于0的项 即被遴选中的
+	 * @param declaration_id
+	 * @return
+	 */
+	@Override
+	public List<Map<String, Object>> queryChoosenListByDeclarationId(String declaration_id) {
+
+		List<Map<String, Object>> result = dataAuditDao.queryChoosenListByDeclarationId(declaration_id);
+		
+		return result;
+	}
+
 	
 	
 }

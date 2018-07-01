@@ -23,7 +23,7 @@
 		    left join cms_user_like a on a.content_id=t.id and a.writer_id = #{parameter.logUserId}
 		    where 
 		    t.category_id='1'
-		    and t.is_hide = 0 and t.is_published = 1 and t.auth_status = 2 and t.is_deleted = 0
+		    and t.is_hide = 0 and t.is_published = 1 and t.auth_status = 2 and t.is_deleted = 0 and t.apporpc != 2
 		    <if test="parameter.searchTextArray != null ">
 				<foreach collection="parameter.searchTextArray" open=" and( "  close=")" separator=" and "  item="searchText">
 					(
@@ -47,6 +47,7 @@
 		    where 
 		    t.category_id='1'
 		    and t.is_hide = 0 and t.is_published = 1 and t.auth_status = 2 and t.is_deleted = 0
+	        and t.apporpc != 2
 		    <if test="parameter.searchTextArray != null ">
 				<foreach collection="parameter.searchTextArray" open=" and( "  close=")" separator=" and "  item="searchText">
 					(
@@ -77,6 +78,7 @@
 		    from cms_content t
 		    left join writer_user b on t.author_id=b.id 
 		    left join cms_user_like a on a.content_id=t.id where t.category_id='1'
+		    where t.apporpc != 2
 		    order by clicks desc limit #{startrow},#{endrow} 
  </select>
  <!-- 查询一共有多少条数据 -->
@@ -122,7 +124,7 @@
 		    left join cms_user_like a on a.content_id=t.id
 		    where 
 		    t.category_id='1'
-		    and t.is_hide = 0 and t.is_published = 1 and auth_status = 2 and is_deleted = 0
+		    and t.is_hide = 0 and t.is_published = 1 and auth_status = 2 and is_deleted = 0  and t.apporpc != 2
 		    and t.title like #{title} 
 		    limit #{startrow},#{endrow} 
  </select>

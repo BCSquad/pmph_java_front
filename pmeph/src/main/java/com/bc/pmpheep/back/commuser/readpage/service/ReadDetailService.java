@@ -162,6 +162,16 @@ public interface ReadDetailService {
 	 * @return int
 	 */
 	int queryMoreBookVidosCount(Map<String,Object> map);
+	
+	/**
+	 * 查询图书关联列表
+	 * @param id 
+	 * @param page 当前页 从0起
+	 * @param type 1.教材关联图书 2.相关推荐 3.人卫推荐
+	 * @param contextPath 
+	 * @return
+	 */
+	Map<String, Object> queryRelatedBookList(String id, int page, int type, String contextPath);
 
 
 }

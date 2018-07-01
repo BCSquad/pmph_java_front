@@ -15,10 +15,12 @@
     <link rel="stylesheet" href="${ctx}/statics/materialdec/materialadd.css?t=${_timestamp}" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.calendar.css?t=${_timestamp}" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.tipso.css?t=${_timestamp}" type="text/css">
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js?t=${_timestamp}"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery-validate.js?t=${_timestamp}"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.calendar.js?t=${_timestamp}"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
+    <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.tipso.js?t=${_timestamp}"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/layer/layer.js?t=${_timestamp}"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}" type="text/javascript"></script>
@@ -1828,14 +1830,14 @@
                     <div class="bt_tj" id="buzc" onclick="javascript:buttAdd('2')">暂存</div>
                     <%--<div class="bt_tj" onclick="javascript:buttGive()">放弃</div>--%>
                 </div>
-                <div style="color: red;font-size: 16px;">（提示：如暂存或提交不成功请使用360浏览器极速模式或谷歌浏览器）</div>
+                <div style="color: red;font-size: 16px;margin-top: 15px;">（提示：如暂存或提交不成功请使用360浏览器极速模式或谷歌浏览器）</div>
             </div>
         </form>
     </div>
 </div>
 
 <!-- 退回原因显示悬浮框 -->
-<div class="bookmistake" id="return_cause_div">
+<%--<div class="bookmistake" id="return_cause_div">
     <div class="apache">
         <div class="mistitle">退回原因:</div>
         <div class="xx" onclick="$('#return_cause_div').fadeOut(500);"></div>
@@ -1849,7 +1851,7 @@
     <div class="">
         <button class="btn" type="button" onclick="$('#return_cause_div').fadeOut(500);">确认</button>
     </div>
-</div>
+</div>--%>
 
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>

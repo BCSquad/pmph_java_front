@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="${ctx}/statics/commuser/message/message.css?t=${_timestamp}" type="text/css">
     <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/reload.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/layer/layer.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/commuser/message/message.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
@@ -192,6 +193,7 @@
             <c:if test="${count>0}">
             <div id="loadMoreDiv" class="load-more clearfix" onclick='loadMore()'>加载更多...</div>
             <input id="startPara" name="startPara" type="hidden">
+                <input id="jsptype" name="jsptype" type="hidden" value="2">
             </c:if>
         </div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>

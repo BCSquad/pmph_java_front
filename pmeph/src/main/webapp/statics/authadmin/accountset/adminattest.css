@@ -134,8 +134,9 @@ td{
 
 .btnSubmit{
 	width: 74px;
-	height: 24px;
-	background-color: #70bcc3;
+	height: 30px;
+    padding-top: 6px;
+	background-color: #03717b;
 	border-radius: 2px;
 	text-align: center;
 	color:white;
@@ -156,7 +157,7 @@ td{
 	font-weight: normal;
 	font-stretch: normal;
 	color: #333333;
-	text-decoration:none;s
+	text-decoration:none;
 }
 
 /*退回原因悬浮框*/
@@ -220,7 +221,7 @@ td{
     margin-right: 27px;
     width: 84px;
     height: 31px;
-    background-color: #1CB394;
+    background-color: #03717b;
     border-radius: 3px;
     border: none;
     cursor: pointer;

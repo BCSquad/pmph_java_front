@@ -1,5 +1,11 @@
 $(function () {
 
+    $('#realname').tipso({validator: "isNonEmpty", message: "姓名不能为空"});
+    $('#handphone').tipso({validator: "isNonEmpty|isMobile", message: "手机号码不能为空|手机号码格式不正确"});
+    $('#postCode').tipso({validator: "isNonEmpty", message: "邮编不能为空"});
+    $('#email').tipso({validator: "isNonEmpty|isEmail", message: "邮箱不能为空|邮箱格式不正确"});
+
+
 	
 	//文件上传
 	$("#uploadFile").uploadFile({
@@ -73,7 +79,7 @@ function getform(){
 
 function save(){
 	var data = getform();
-    if($("form").validate('submitValidate')){ //通过校验
+    if($.fireValidator()){ //通过校验
     	if ($("#progress_original").val()==1
     			&&($("#realName_original").val()!=$("#realName").val()
     			||$("#handphone_original").val()!=$("#handphone").val()

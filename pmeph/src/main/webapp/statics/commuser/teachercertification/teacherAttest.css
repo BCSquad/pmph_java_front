@@ -60,7 +60,7 @@
     border: none;
     width: 100px;
     height: 25px;
-    background-color: #70bcc3;
+    background-color: #259980;
     color: #ffffff;
     font-size: 14px;
     border-radius: 2px;
@@ -241,9 +241,9 @@
 
 .btn-2 {
     /* border: none; */
-    width: 75px;
-    height: 25px;
-    background-color: #70bcc3;
+    width: 116px;
+    height: 40px;
+    background-color: #03717b;
     color: #ffffff;
     font-size: 14px;
     border-radius: 2px;

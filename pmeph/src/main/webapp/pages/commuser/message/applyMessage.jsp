@@ -17,6 +17,7 @@
     <script src="${ctx}/resources/commuser/message/message.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/reload.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
     <style type="text/css">
         #rightContent .select-button {
@@ -39,7 +40,7 @@
 					window.location.href="${ctx}/message/applyMessageList.action?condition="+$("input[name='condition']") .val();
 				}	
 			});
-		})	
+		});
 </script>
 </head>
 <body>
@@ -100,6 +101,7 @@
     <c:if test="${count>0}">
 	    <div id="loadMoreDiv" class="load-more clearfix" onclick="loadMoreApply()">加载更多...</div>
 	    <input id="applyPara" name="applyPara" type="hidden">
+	    <input id="jsptype" name="jsptype" type="hidden" value="1">
     </c:if>
 </div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>

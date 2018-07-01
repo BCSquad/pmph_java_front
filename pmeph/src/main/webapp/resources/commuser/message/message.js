@@ -404,3 +404,14 @@ function formatDate(value) {
         return dformat;// 最后返回格式化好的日期和时间
     }
 }
+
+//下拉刷新
+function loadData(){
+    var jsptype = $("#jsptype").val();
+    if(jsptype=="1"){
+        loadMoreApply();
+    }
+    if(jsptype=="2"){
+        loadMore();
+    }
+}

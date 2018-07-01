@@ -54,6 +54,7 @@
 	                               n.title+
 	              '</div>'+
 	              '<div  class="video-e">'+
+					  '<input type="hidden" id="playclicks'+n.id+'" value="0">'+
 	                 '<span class="video-f" >'+getDate(n.gmt_create)+'</span>'+
 	                 '<span class="video-g" style="float:right;line-height:30px;margin-left:5px" id="c'+n.id+'">'+n.clicks+'</span>'+
 	                 '<span class="video-h"></span>'+
@@ -78,18 +79,22 @@
 			        var player = new ckplayer(videoObject);
                   player.addListener("play",function () {
 					  var vid=$this.attr("id").substring(6);
-                      $.ajax({
-                          type:"post",
-                          url:contextpath+'community/videoCount.action',
-                          data:{vid:vid},
-                          success:function(data){
-							// console.log(data.clicks);
-							$("#c"+vid).text(data.clicks);
-                          },
-                          error:function(){
-                              alert('服务器错误');
-                          }
-                      });
+					  var c=$("#playclicks"+vid).val();
+					  if(c==0){
+                          $.ajax({
+                              type:"post",
+                              url:contextpath+'community/videoCount.action',
+                              data:{vid:vid},
+                              success:function(data){
+                                  // console.log(data.clicks);
+                                  $("#c"+vid).text(data.clicks);
+                                  $("#playclicks"+vid).val(1);
+                              },
+                              error:function(){
+                                  alert('服务器错误');
+                              }
+                          });
+					  }
                   });
 			    });
 			  

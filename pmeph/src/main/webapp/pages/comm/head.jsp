@@ -73,6 +73,10 @@
                     <span class="icon"></span>
                     <span class="wtext" >帮助中心</span>
                 </span>
+                <%--<span class="wxgzh" onclick="window.location.href='${ctx}/help/helpList.action'">
+                    <span class="icon"></span>
+                    <span class="wtext" >微信公众号</span>
+                </span>--%>
             </c:if>
 
 

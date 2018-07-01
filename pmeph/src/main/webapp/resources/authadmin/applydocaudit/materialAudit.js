@@ -110,7 +110,7 @@ function toAudit(id,type){
 			    if(msg.msg=='OK'){
 			    	 message.success("成功！");
 			    	 if(type=='3'){
-                    	var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
+                    	/*var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
                     	$.ajax({
                             type: 'get',
                             url: exportWordBaseUrl + '/frontWxMsg/projectEditorPleaseAdit/'+id,
@@ -124,8 +124,8 @@ function toAudit(id,type){
                             error:function(XMLHttpRequest, textStatus){
                             	toMain();
                             }
-                            });
-                    	
+                            });*/
+                         toMain();
 			    	 }
 			    	 
 			    }else{

@@ -31,7 +31,7 @@ var remoteUrl = "medu.ipmph.com";
 
 
     //引入html
-    var html = '<div class="message-tips">' +
+    var html = '<div class="message-tips">' +   //tips整个DIV，ICON提示的图标的DIV，text提示内容
         '	<div class="message-icon"></div>' +
         '	<div class="message-text"></div>' +
         '</div>';
@@ -110,13 +110,37 @@ var remoteUrl = "medu.ipmph.com";
             return new CreatMessage('success', text);
         },
         warning: function (text) {
-            return new CreatMessage('warning', text);
+            // return new CreatMessage('warning', text);
+            return layer.confirm(text, {icon: 7, title:'提示',btn:["确定"]},
+                function(index){
+                    layer.close(index);
+                },
+                function(index){
+                    layer.close(index);
+                }
+            );
         },
         info: function (text) {
-            return new CreatMessage('info', text);
+            //return new CreatMessage('info', text);
+            return layer.confirm(text, {icon: 7, title:'提示',btn:["确定"]},
+                function(index){
+                    layer.close(index);
+                },
+                function(index){
+                    layer.close(index);
+                }
+                );
         },
         error: function (text) {
-            return new CreatMessage('error', text);
+            // return new CreatMessage('error', text);
+            return layer.confirm(text, {icon: 2, title:'提示',btn:["确定"]},
+                function(index){
+                    layer.close(index);
+                },
+                function(index){
+                    layer.close(index);
+                }
+            );
         },
         confirm: function (e, t, n, a) {
             return layer.confirm(e, t, n, a);
@@ -147,7 +171,7 @@ var remoteUrl = "medu.ipmph.com";
         async: true,
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             var errmsg = XMLHttpRequest.responseText;
-            window.message.error("出错啦！");
+          //  window.message.error("出错啦！");
         },
         beforeSend: function (xhr, global) {
 
@@ -169,7 +193,7 @@ var remoteUrl = "medu.ipmph.com";
                     } else if (data.code == '250') {
                         var text;
                         var btn;
-                        if(data.msg=='0'){
+                        if(data.msg=='0' && data.proxy=='1'){
                             text="您的认证已提交，请耐心等待审核！";
                             btn="查看认证"
                         }else if(data.msg=='2'){
@@ -411,3 +435,13 @@ function Empty(v) {
     }
     return false;
 }
+
+
+
+
+
+
+
+
+
+

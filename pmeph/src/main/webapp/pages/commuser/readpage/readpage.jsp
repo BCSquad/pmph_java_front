@@ -228,19 +228,23 @@
                 </c:forEach>
                 <!--描述：图书畅销-->
                 <div class="rg_content">
-                    <span class="tsfl">图书畅销榜</span>
-                    <hr style=" height:1px;border:none;border-top:1px solid #f0f0f0;">
+                    <div class="doc"></div>
+                    <span class="tsfl" style="margin-left: 10px">图书畅销榜</span>
+                    <%--<hr style=" height:1px;border:none;border-top:1px solid #f0f0f0;">--%>
                 </div>
-                <div>
+                <div style="float: left;width: 360px;border-bottom: 1px solid #DEDEDE;margin-top: 15px;height: 28px">
                     <c:forEach items="${bookTypes}" var="type" varStatus="status">
                         <div class="tscx_type ${status.index==0?'tscx_type1':''}" id="CXDiv_${type.id}"
                              typeid="${type.id}"
                              onclick="javaScript:ChangeCXDiv(${type.id})">
-                            <span>${type.type_name}</span>
+                            <div>${type.type_name}</div>
+                        </div>
+                        <div class="div_center"><img src="${ctx}/statics/image/shu.png"
+                                                     style="margin-top: 5px;float: left">
                         </div>
                     </c:forEach>
                 </div>
-                <div style="clear: both;height: 14px;"></div>
+                <%--<div style="clear: both;height: 14px;"></div>--%>
                 <div class="hot-list" id="JKCXDiv_0">
                 </div>
                 <div style="clear: both"></div>

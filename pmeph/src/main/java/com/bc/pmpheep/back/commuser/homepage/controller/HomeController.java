@@ -58,13 +58,13 @@ public class HomeController extends BaseController{
         List<Map<String, Object>> listCom = homeService.queryComment();
         int countSurvey=homeService.countSurvey(logUserId);
 
-        Map<String,Object> adInfo1=homeService.getPageAdInfo("首页轮播");
-        Map<String,Object> adInfo2=homeService.getPageAdInfo("首页中部1");
-        Map<String,Object> adInfo3=homeService.getPageAdInfo("首页中部2");
-        Map<String,Object> adInfo4=homeService.getPageAdInfo("首页中部3");
-        Map<String,Object> adInfo5=homeService.getPageAdInfo("首页中部4");
-        Map<String,Object> adInfo6=homeService.getPageAdInfo("首页原重点推荐1");
-        Map<String,Object> adInfo7=homeService.getPageAdInfo("首页原重点推荐2");
+        Map<String,Object> adInfo1=homeService.getPageAdInfo("pc首页轮播");
+        Map<String,Object> adInfo2=homeService.getPageAdInfo("pc首页中部1");
+        Map<String,Object> adInfo3=homeService.getPageAdInfo("pc首页中部2");
+        Map<String,Object> adInfo4=homeService.getPageAdInfo("pc首页中部3");
+        Map<String,Object> adInfo5=homeService.getPageAdInfo("pc首页中部4");
+        Map<String,Object> adInfo6=homeService.getPageAdInfo("pc首页原重点推荐1");
+        Map<String,Object> adInfo7=homeService.getPageAdInfo("pc首页原重点推荐2");
         for (Map<String, Object> map : listCom) {
             String url=MapUtils.getString(map,"image_url","/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
 		//	String url=map.get("image_url").toString();
