@@ -172,7 +172,7 @@ var remoteUrl="120.76.221.250";
         async: true,
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             var errmsg = XMLHttpRequest.responseText;
-            window.message.error("出错啦！");
+          //  window.message.error("出错啦！");
         },
         beforeSend: function (xhr, global) {
 

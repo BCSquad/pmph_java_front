@@ -22,6 +22,7 @@ $(function () {
         $('#zjlx').tipso({validator: "isNonEmpty", message: "证件类型不能为空"});
         $('#idcard').tipso({validator: "isNonEmpty", message: "证件号码不能为空"});
         $('#address').tipso({validator: "isNonEmpty", message: "地址不能为空"});
+        checkExtra();
     },0)
 
 
@@ -1258,7 +1259,7 @@ function checkEqual(name){
 
 //验证扩展项必填
 function checkExtra(){
-    var map = $('input[name^="zjkzxx"]').map(
+    /*var map = $('input[name^="zjkzxx"]').map(
         function(){return this.value
         }).get();
     if(map!=null){
@@ -1275,7 +1276,17 @@ function checkExtra(){
             }
         }
     }
-    return true;
+    return true;*/
+    var a=document.getElementsByName("zjkzxx");
+    var b;
+    var c;
+    for(var i=0;i<a.length;i++){
+        b=a[i].value;
+        c=b.split("_");
+        if(c[0]=="true"){
+            $('#true_'+(i+1)).tipso({validator: "isNonEmpty", message: "拓展项必填"});
+        }
+    }
 }
 //列表填报校验
 function checkLb(){
