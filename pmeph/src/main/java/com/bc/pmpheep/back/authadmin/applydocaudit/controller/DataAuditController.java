@@ -1,28 +1,23 @@
 package com.bc.pmpheep.back.authadmin.applydocaudit.controller;
 
-import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
+import com.bc.pmpheep.back.authadmin.applydocaudit.service.DataAuditService;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.template.service.TemplateService;
+import com.bc.pmpheep.controller.bean.ResponseBean;
+import com.bc.pmpheep.general.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bc.pmpheep.back.authadmin.applydocaudit.service.DataAuditService;
-import com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailService;
-import com.bc.pmpheep.back.plugin.PageParameter;
-import com.bc.pmpheep.back.template.service.TemplateService;
-import com.bc.pmpheep.controller.bean.ResponseBean;
-import com.bc.pmpheep.general.controller.BaseController;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * 
