@@ -79,7 +79,7 @@ public class CmsNoticeManagementController extends BaseController {
 	@RequestMapping(value = "/tolist", method = RequestMethod.GET)
 	public ModelAndView tolistPage(HttpServletRequest req,Integer pageSize, Integer pageNumber, Boolean isHot) {
 		ModelAndView modelAndView = new ModelAndView();
-		Map<String, Object> adInfo = homeService.getPageAdInfo("信息快报和遴选公告列表 ");
+		Map<String, Object> adInfo = homeService.getPageAdInfo("pc信息快报和遴选公告列表 ");
 		String materialId=req.getParameter("materialId");
 		modelAndView.addObject("adInfo", adInfo);
 		modelAndView.addObject("materialId", materialId);
