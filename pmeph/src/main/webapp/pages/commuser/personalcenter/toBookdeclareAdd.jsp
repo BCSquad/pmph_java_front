@@ -24,12 +24,6 @@
 	<script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}" type="text/javascript"></script>
 	<script type="text/javascript" src="${ctx}/resources/commuser/bookdeclare/bookdeclareadd.js?t=${_timestamp}"></script>
 </head>
-<style>
-	.footer{
-		margin-top: 50px;
-		background: #F8F8F8;
-	}
-</style>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="body">

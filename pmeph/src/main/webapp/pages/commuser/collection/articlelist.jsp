@@ -73,7 +73,7 @@ String basePath =path+"/";
                         <span class="${article.like>0?'span3':'span2' }" id="like${article.cid}">${article.likes }</span>
                         <span class="smicon ${article.like>0?'good':'nogood' }"  onclick="addlike('${article.cid}')" id="good${article.cid}"></span>
                         <span class="span2">${article.clicks }</span>
-                        <span class="smicon look"></span>/
+                        <span class="smicon look"></span>
                     </div>
                 </div>
             </div>

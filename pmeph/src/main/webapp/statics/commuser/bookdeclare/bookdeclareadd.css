@@ -238,16 +238,16 @@
 }
 /**�ύ��ť**/
 .button{
-	height: 30px;
+	height: 65px;
 	width: 1200px;
 	text-align: center;
-	margin-top: 40px;
+	margin-top: 20px;
 	
 }
 
 .div_butt{
 	width: 270px;
-	height: 24px;
+	height: 45px;
 	color: #FFFFFF;
 	margin:auto;
 	top:50%;
@@ -255,7 +255,7 @@
 }
 .div_butt1{
 	width: 70px;
-	height: 24px;
+	height: 45px;
 	color: #FFFFFF;
 	margin:auto;
 	top:50%;
