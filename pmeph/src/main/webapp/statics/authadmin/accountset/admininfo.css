@@ -109,11 +109,33 @@ tr {
     margin-top: 70px;
     margin-bottom: 5px;
     color: #333333;
-    text-decoration: underline;
+    float: left;
+}
+
+.manager:before{
+    float: left;
+    content: '';
+    background-image: url("../../image/a2.png");
+    background-size: 100%;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
 }
 
 .he > .links .password {
-    color: #e52e2e;
+    margin-top: 70px;
+    float: left;
+    margin-left: 30px;
+}
+
+.password:before{
+    content: '';
+    background-image: url("../../image/a3.png");
+    float: left;
+    width: 20px;
+    height: 23px;
+    background-size: 100%;
+    margin-right: 10px;
 }
 
 .layui-layer-btn{
