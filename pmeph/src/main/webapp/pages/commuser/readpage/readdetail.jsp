@@ -314,7 +314,7 @@
                             </div>
 
                             <div class="video-btn">微视频</div>
-                            <div class="video-name">(微视频)${list.title}</div>
+                            <div class="video-name">${list.title}</div>
                         </div>
                     </c:forEach>
                     <script type="text/javascript">
