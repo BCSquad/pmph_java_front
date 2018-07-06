@@ -16,9 +16,8 @@ $(function () {
         $('#email').tipso({validator: "isNonEmpty|isEmail", message: "邮箱不能为空|邮箱格式不正确"});
         $('#handphone').tipso({validator: "isNonEmpty|isMobile", message: "手机号码不能为空|手机号码格式不正确"});
         $('#zjlx').tipso({validator: "isNonEmpty", message: "证件类型不能为空"});
-        $('#idcard').tipso({validator: "isNonEmpty", message: "证件号码不能为空"})
+        $('#idcard').tipso({validator: "isNonEmpty", message: "证件号码不能为空"});
         $('#address').tipso({validator: "isNonEmpty", message: "地址不能为空"});
-        $('#sbdw_name').tipso({validator: "isNonEmpty", message: "申报单位不能为空"})
         checkExtra();
     },0)
 
@@ -946,6 +945,7 @@ function del_tr(trId){
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type){
   //  if(checkEqual("textbook_id") && checkBoxInfo()){
+        $('#sbdw_name').tipso({validator: "isNonEmpty", message: "申报单位不能为空"});
         if(type == '2') { //表示暂存
             //避免重复点击
             document.getElementById('buzc').onclick=function(){window.message.warning("请不要重复点击");};
