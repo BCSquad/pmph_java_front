@@ -119,30 +119,32 @@ function getform() {
 }
 function submit(){
 	if($.fireValidator()){
-	    debugger
-	    if($("#fileid").val()==null){
+	 //   debugger
+        var aa = $("#fileid").val();
+	    if($("#fileid").val()==null || aa =="" ||aa=="default"){
 	        window.message.info("请长传委托书！")
+        }else {
+            $.ajax({
+                type: 'post',
+                url: contextpath + 'admininfocontroller/updateorguser.action',
+                async: false,
+                /* contentType: 'application/json',*/
+                dataType: 'json',
+                /* data:JSON2.stringify(getform()),*/
+                data: getform(),
+                success: function (code) {
+                    if (code == "success") {
+                        message.success("提交成功");
+                        //window.location.reload();
+                        setTimeout(function () {
+                            window.location.href = contextpath + "admininfocontroller/toadmininfo.action";
+                        }, 800);
+                    } else {
+                        message.error("提交失败");
+                    }
+                }
+            });
         }
-	    $.ajax({
-	        type:'post',
-	        url:contextpath+'admininfocontroller/updateorguser.action',
-	        async:false,
-	       /* contentType: 'application/json',*/
-	        dataType:'json',
-	       /* data:JSON2.stringify(getform()),*/
-	        data:getform(),
-	        success:function(code){
-	            if (code=="success"){
-	                message.success("提交成功");
-					//window.location.reload();
-	                setTimeout(function(){
-	                	window.location.href = contextpath + "admininfocontroller/toadmininfo.action";
-	                }, 800);
-	            }else{
-	            	message.error("提交失败");
-	            }
-	        }
-	    });
 	}
 }
 //下载委托书

@@ -20,9 +20,9 @@ $(function () {
         $('#email').tipso({validator: "isNonEmpty|isEmail", message: "邮箱不能为空|邮箱格式不正确"});
         $('#handphone').tipso({validator: "isNonEmpty|isMobile", message: "手机号码不能为空|手机号码格式不正确"});
         $('#zjlx').tipso({validator: "isNonEmpty", message: "证件类型不能为空"});
-        $('#idcard').tipso({validator: "isNonEmpty", message: "证件号码不能为空"})
+        $('#idcard').tipso({validator: "isNonEmpty", message: "证件号码不能为空"});
         $('#address').tipso({validator: "isNonEmpty", message: "地址不能为空"});
-        $('#sbdw_name').tipso({validator: "isNonEmpty", message: "申报单位不能为空"})
+        checkExtra();
     },0)
 
 
@@ -94,11 +94,11 @@ $(function () {
     //其他社教材-职务
     selectOption("jcjb_sl");
 
-    if ($("#return_cause_hidden").val().length>0) {
+   /* if ($("#return_cause_hidden").val().length>0) {
 
         $("#return_cause_div").fadeIn(800);
 
-    }
+    }*/
 });
 
 //下拉框格式优化
@@ -931,6 +931,7 @@ function del_tr(trId){
 
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type){
+    $('#sbdw_name').tipso({validator: "isNonEmpty", message: "申报单位不能为空"})
     //if(checkEqual("textbook_id")) {
         if (type == '2') { //表示暂存
             //避免重复点击
@@ -1258,7 +1259,7 @@ function checkEqual(name){
 
 //验证扩展项必填
 function checkExtra(){
-    var map = $('input[name^="zjkzxx"]').map(
+    /*var map = $('input[name^="zjkzxx"]').map(
         function(){return this.value
         }).get();
     if(map!=null){
@@ -1275,7 +1276,17 @@ function checkExtra(){
             }
         }
     }
-    return true;
+    return true;*/
+    var a=document.getElementsByName("zjkzxx");
+    var b;
+    var c;
+    for(var i=0;i<a.length;i++){
+        b=a[i].value;
+        c=b.split("_");
+        if(c[0]=="true"){
+            $('#true_'+(i+1)).tipso({validator: "isNonEmpty", message: "拓展项必填"});
+        }
+    }
 }
 //列表填报校验
 function checkLb(){

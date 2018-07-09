@@ -24,7 +24,7 @@
 #end
 <div class="listContent">
 	#foreach($c in $!{List_map})
-		
+		#set($bookNum = $velocityCount)
 			<div class="book_correct_unit">
 				<div class="unit_left">
 					<div class="img_box">
@@ -54,6 +54,9 @@
 						#foreach($o in $!{c.correctionList})
 							
 								#if($velocityCount != 1) <span class="correction_between_line"></span> #end   
+								<div >
+									<span>书序: $bookNum</span>
+								</div>
 								<div class="position_line">
 			    					<span>纠错信息：$!{o.page}页码
 			    						#if($!{selfLog}==true)

@@ -263,6 +263,12 @@ public class ArticleDetailServiceImpl implements ArticleDetailService {
         return articleDetailDao.QueryAllShip(id);
     }
 
+	@Override
+	public int QueryShipByIDCount(String id) {
+		int count = articleDetailDao.QueryShipByIDCount(id);
+		return count;
+	}
+
 //	@Override
 //	public void updateComments(Long id) {
 //		// TODO Auto-generated method stub

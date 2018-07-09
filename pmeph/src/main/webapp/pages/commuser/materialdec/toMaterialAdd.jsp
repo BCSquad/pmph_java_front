@@ -1365,7 +1365,7 @@
 					<div class="bt_tj" id="buzc" onclick="javascript:buttAdd('2')">暂存</div>
 					<%--<div class="bt_tj" onclick="javascript:buttGive()">放弃</div>--%>
 				</div>
-				<div style="color: red;font-size: 16px;">（提示：如暂存或提交不成功请使用360浏览器极速模式或谷歌浏览器）</div>
+				<div style="color: red;font-size: 16px;margin-top: 15px;">（提示：如暂存或提交不成功请使用360浏览器极速模式或谷歌浏览器）</div>
 			</div>
 		</form>
 </div>
