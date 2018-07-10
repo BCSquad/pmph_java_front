@@ -256,7 +256,7 @@
                   <div style="width: 400px">
                       <label >个人简介</label>
                       <div class="input-wrapper">
-                          <input type="text"   onblur="javascript:LengthLimit(this,100);"
+                          <input type="text"
                              id="note" name="note" style="width: 1040px" value="${map.profile }" placeholder="请输入个性签名，最大长度不能超过100汉字">
                       </div>
                   </div>
@@ -267,7 +267,7 @@
                    <div style="width: 400px">
                        <span class="sxy_span">个性签名</span>
                        <div class="input-wrapper" style="margin-left: 20px">
-                           <input type="text"  id="signature"  onblur="javascript:LengthLimit(this,50);"
+                           <input type="text"  id="signature"
                            name="signature" style="width: 1040px" value="${map.signature }" placeholder="请输入个性签名，最大长度不能超过50汉字">
                        </div>
                    </div>
