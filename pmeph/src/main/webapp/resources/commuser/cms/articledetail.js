@@ -215,7 +215,7 @@ function todetail(id) {
 //评论检查出敏感词时，用户修改文本域获取焦点，则把红边去掉
 $(function(){
 	$("#content").focus(function(){
-		$("#content").css("border","none");
+		$("#content").css("border","1px solid #B6EFCE");
 	});
 });
 
