@@ -36,7 +36,7 @@
 	<style>
 		.footer {
 			background: #F8F8F8;
-			margin-top: 30px;
+			margin-top: 60px;
 		}
 	</style>
 </head>
