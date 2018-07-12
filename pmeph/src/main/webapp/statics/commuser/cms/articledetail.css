@@ -206,7 +206,6 @@
     float: right;
     width: 80px;
     height: 28px;
-    border: 1px solid #3996fa;
     background-color: #e8f1fa;
     margin-top: 10px;
     border-radius: 3px;
@@ -215,14 +214,15 @@
 
 
 #span_4{
-	border:0px;
-    float: right;
-    width: 80px;
-    height: 28px;
-    font-size: 14px;
-    color: #3996fa;
-    cursor:pointer;
-    background-color: #F1FBF4;
+	border: 0px;
+	float: right;
+	width: 80px;
+	height: 28px;
+	font-size: 14px;
+	color: white;
+	cursor: pointer;
+	background-color: #70D68A;
+	border-radius: 3px;
 }
 
 .picturesize{
@@ -239,7 +239,7 @@
     float: left;
     width: 5px;
 	height: 20px;
-	background-color: #3996fa;
+	background-color: #35c974;
 }
 
 .block .title .rd_name {
@@ -260,9 +260,9 @@
 .pl_add .tarea{
 	width: 885px;
 	height: 90px;
-	background-color: #e8f1fa;
+	background-color: #f1fbf4;
 	border-radius: 3px;
-	border: solid 1px #3996fa;
+	border: 1px solid #B6EFCE;
 }
 
 .rwtx1{
