@@ -642,3 +642,39 @@
     /*text-align: center;*/
     /*padding-top: 3px;*/
 }
+
+.bookmistake {
+    width: 910px;
+    /* height: 309px; */
+    background-color: #FFFFFF;
+    display: none;
+    padding: 15px 20px;
+    /* position: fixed;*/
+    /*  left: 35%;
+      top: 30%;
+      box-shadow: 0px 0px 5px #888888;
+      border-radius: 5px;
+     z-index: 999;*/
+}
+
+.bookmistake img{
+	max-width: 100%;
+}
+
+.msg-info {
+    width: 426px;
+    /* height: 103px; */
+    /*    float: left;*/
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.misarea {
+    width: 880px;
+    min-height: 75px;
+    /* border: 1px solid #E0E0E0;*/
+    margin-left: 20px;
+    padding: 5px;
+    resize: vertical;
+    /*    max-height: 350px;*/
+}

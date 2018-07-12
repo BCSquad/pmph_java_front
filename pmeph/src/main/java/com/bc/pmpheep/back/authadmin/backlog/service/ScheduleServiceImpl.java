@@ -1,9 +1,13 @@
 package com.bc.pmpheep.back.authadmin.backlog.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +15,15 @@ import com.bc.pmpheep.back.authadmin.backlog.dao.ScheduleDao;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.general.pojo.Message;
+import com.bc.pmpheep.general.service.MessageService;
 
 @Service("com.bc.pmpheep.back.authadmin.backlog.service.ScheduleServiceImpl")
 public class ScheduleServiceImpl implements ScheduleService {
 	
 	@Autowired
 	ScheduleDao scheduleDao;
+	@Autowired
+    MessageService messageService;
 	
 	//查询待办事项列表
 	@Override
@@ -27,6 +34,23 @@ public class ScheduleServiceImpl implements ScheduleService {
 		
 		List<Map<String, Object>> list = scheduleDao.selectScheduleList(pageParameter);
 		int count = scheduleDao.selectScheduleCount(pageParameter);
+		List<String> ids = new ArrayList<String>();
+		Map<String,Map> relate_map = new HashMap<String, Map>();
+		for (Map<String, Object> map : list) {
+			if("C".equals(map.get("TYPE"))){
+				ids.add(MapUtils.getString(map, "CONTENT"));
+				relate_map.put(MapUtils.getString(map, "CONTENT"), map);
+				map.put("CONTENT","消息内容已丢失");
+			}
+		}
+		for (Message message : messageService.list(ids)) {
+            String str = message.getContent();
+            String regEx_html = "<[^>]+>"; //定义HTML标签的正则表达式
+            Pattern p_html = Pattern.compile(regEx_html, Pattern.CASE_INSENSITIVE);
+            Matcher m_html = p_html.matcher(str);
+            str = m_html.replaceAll(""); //过滤html标签
+            relate_map.get(message.getId()).put("CONTENT",str );
+        }
 		
 		pageResult.setRows(list);
 		pageResult.setTotal(count);
