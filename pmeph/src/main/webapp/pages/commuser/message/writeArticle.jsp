@@ -47,7 +47,7 @@
     </div>
     <div class="sxy-div-content2">
         <input type="hidden" name="atrticle_id" id="atrticle_id" value="${atrticle_id }">
-        <input type="text" class="sxy-txt2" id="TitleValue" name="titleValue" placeholder="输入文章标题请限100字以内.."
+        <input type="text" class="sxy-txt2" id="TitleValue" name="titleValue" placeholder="输入文章标题请限100字以内,超出长度会自动截取"
                onblur="if($('#TitleValue').val().length>100){$('#TitleValue').val($('#TitleValue').val().slice(0,100))};" value="${title}"/>
     </div>
     <div class="sxy-div-content4">
