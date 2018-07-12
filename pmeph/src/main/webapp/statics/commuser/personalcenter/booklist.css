@@ -428,6 +428,9 @@ width: 83px;
     float: right;
     margin-top: 3px;
 }
+
+
+
 .ytg {
     background-image: url(../../image/css_sprites.png);
     background-position: -333px -289px;
@@ -438,6 +441,22 @@ width: 83px;
     margin-top:3px;
     float: left;
 }
+
+.ysl{
+    background-image: url(../../image/asa.png);
+    background-position-x: 6px;
+    background-position-y: 1px;
+    background-repeat: no-repeat;
+    padding-left: 28px;
+}
+
+.ysl1{
+    background-image: url(../../image/asa.png);
+    float: right;
+    width: 20px;
+    height: 20px;
+}
+
 .ytj {
     background-image: url(../../image/css_sprites.png);
     background-position: -333px -242.5px;
