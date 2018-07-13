@@ -36,7 +36,7 @@ public interface TeacherAuthService {
 	 * @param string 
 	 * @return
 	 */
-	Map<String, Object> statusModify(String id, String status, String backReason, String orgId);
+	Map<String, Object> statusModify(String id, String status, String backReason, Map<String, Object> userInfo);
 
 
 
