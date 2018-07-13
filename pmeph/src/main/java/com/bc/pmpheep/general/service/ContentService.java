@@ -5,10 +5,14 @@ import com.bc.pmpheep.general.pojo.Content;
 import com.bc.pmpheep.service.exception.CheckedExceptionBusiness;
 import com.bc.pmpheep.service.exception.CheckedExceptionResult;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
+
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @Author: SuiXinYang
@@ -53,9 +57,23 @@ public class ContentService {
         Content content = contentDao.findOne(id);
         if (content == null) {
             return new Content("", "");
+        }else if(content.getContent()==null){
+        	content.setContent("");
+        }else{
+        	replaceIp(content);
         }
         return content;
     }
+
+    //去掉如下正则匹配的192.168.100.135/则
+	private void replaceIp(Content content) {
+		Pattern pa = Pattern.compile("(?<=<img .{0,2000}?src=\")(http://192.168.100.135)(?=/.*?\".*?/>)");
+		Matcher ma = pa.matcher(content.getContent());
+		String re = ma.replaceAll("");
+		content.setContent(re);
+	}
+    
+ 
 
     /**
      * 批量查找Content对象
@@ -64,7 +82,11 @@ public class ContentService {
      * @return 返回Content对象集合
      */
     public List<Content> list(List<String> ids) {
-        return (List<Content>) contentDao.findAll(ids);
+    	List<Content> list =(List<Content>) contentDao.findAll(ids);
+    	for (Content content : list) {
+            replaceIp(content);
+		}
+        return list;
     }
 
     /**

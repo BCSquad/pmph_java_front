@@ -74,7 +74,7 @@
     </div>
 
     <div class="sxy-div-content upload-image">
-        <button disabled="disabled"> 上传封面图片</button>
+        <div class="button" onclick="refresh()"> 上传封面图片</div>
         <div class="fileinfo"><span class="filename">${coverName }</span><span class="preview"> 预览</span></div>
     </div>
 

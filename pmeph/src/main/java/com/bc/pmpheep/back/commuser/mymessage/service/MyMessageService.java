@@ -1,6 +1,7 @@
 package com.bc.pmpheep.back.commuser.mymessage.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.bc.pmpheep.back.commuser.mymessage.bean.DialogueVO;
 import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessageVO;
@@ -100,9 +101,9 @@ public interface MyMessageService {
      * 机构用户发送通知给作家
      *
      * @param receiverWriterId 作家用户ID
-     * @param schoolName       学校名称
+     * @param userInfo       学校名称
      */
-    void sendNewNoticeOrgToWriter(String type, Long receiverWriterId, String schoolName);
+    void sendNewNoticeOrgToWriter(String type, Long receiverWriterId, Map<String, Object> userInfo);
 
 
     /**
@@ -112,12 +113,13 @@ public interface MyMessageService {
      * @param receiverWriterId
      * @param materialName
      */
-    public void sendNewNoticeDeclare(String type, Long receiverWriterId, String materialName);
+    public void sendNewNoticeDeclare(String type, Long receiverWriterId, String materialName,Map<String, Object> userInfo);
 
     public void sendMsg(Short msgType, Short senderType, Long senderId, Short receiverType, Long receiverId, String title, String content);
 
     /**
      * 教师认证发送通知
+     * @param senderId 
      */
-    public void sendTeacherMsg(Long orgId, String teacherName,String date);
+    public void sendTeacherMsg(Long orgId, String teacherName,String date, Long senderId);
 }
