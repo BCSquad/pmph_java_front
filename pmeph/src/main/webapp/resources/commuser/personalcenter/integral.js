@@ -15,9 +15,7 @@ $(function() {
         $("#sele").find("li").bind("click",function(){
         	queryTime();
     	});
-
-	
-	
+        
 	/* 初始化 */
 	var counter = 0; /* 计数器 */
 	var pageStart = 0; /* offset */
@@ -149,4 +147,9 @@ function formatDate(nS,str) {
 
 }
 
-
+/**
+ * 加载更多
+ */
+ function  loadData() {
+	 getData(pageStart, pageSize);
+}
