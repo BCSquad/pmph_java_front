@@ -1,3 +1,8 @@
+/* 初始化 */
+var counter = 0; /* 计数器 */
+var pageStart = 0; /* offset */
+var pageSize = 3; /* size */
+
 $(function() {
     	//积分筛选
         $('#sele').selectlist({
@@ -16,10 +21,6 @@ $(function() {
         	queryTime();
     	});
         
-	/* 初始化 */
-	var counter = 0; /* 计数器 */
-	var pageStart = 0; /* offset */
-	var pageSize = 10; /* size */
 
 	/* 首次加载 最终名单初始化 */
 	getData(pageStart, pageSize);
@@ -150,6 +151,9 @@ function formatDate(nS,str) {
 /**
  * 加载更多
  */
+
  function  loadData() {
+     counter++;
+     pageStart = counter * pageSize;
 	 getData(pageStart, pageSize);
 }
