@@ -260,18 +260,19 @@ public class MyMessageServiceImpl implements MyMessageService {
 
 
     @Override
-    public void sendNewMsgWriterToOrg(Long orgId, String teacherName, String materialName) {
-
+	public void sendNewMsgWriterToOrg(Long orgId, String teacherName, String materialName,String user_id) {
+    	
+    	
         for (Map<String, Object> item : myMessageDao.getOrgUser(orgId)) {
-            this.sendMsg(new Short("0"), new Short("0"), 0L, new Short("3"), MapUtils.getLong(item, "id"), "系统消息", "贵校老师[" + teacherName + "]提交了《" + materialName + "》申报表，请及时进行资料审核、打印并快递申报纸质表");
+            this.sendMsg(new Short("0"), new Short("2"), Long.valueOf(user_id), new Short("3"), MapUtils.getLong(item, "id"), "系统消息", "贵校老师[" + teacherName + "]提交了《" + materialName + "》申报表，请及时进行资料审核、打印并快递申报纸质表");
         }
     }
 
     @Override
-    public void sendNewMsgWriterToPublisher(Long materialId, String teacherName, String materialName) {
+    public void sendNewMsgWriterToPublisher(Long materialId, String teacherName, String materialName,String user_id) {
         List<Map<String, Object>> list = myMessageDao.getMaterialManagers(materialId);
         for (Map<String, Object> item : list) {
-            this.sendMsg(new Short("0"), new Short("0"), 0L, new Short("1"), MapUtils.getLong(item, "director"), "系统消息", "[" + teacherName + "]提交了《" + materialName + "》申报表，请及时进行资料审核");
+            this.sendMsg(new Short("0"), new Short("2"), Long.valueOf(user_id), new Short("1"), MapUtils.getLong(item, "director"), "系统消息", "[" + teacherName + "]提交了《" + materialName + "》申报表，请及时进行资料审核");
         }
     }
 

@@ -74,7 +74,7 @@ public interface MyMessageService {
      * @param title   消息标题
      * @param content 消息内容
      */
-    void sendNewMsgWriterToOrg(Long orgId, String title, String content);
+    void sendNewMsgWriterToOrg(Long orgId, String title, String content,String user_id);
 
     /**
      * 作家用户发送通知给出版社
@@ -83,7 +83,7 @@ public interface MyMessageService {
      * @param title       消息标题
      * @param content     消息内容
      */
-    void sendNewMsgWriterToPublisher(Long materialId, String title, String content);
+    void sendNewMsgWriterToPublisher(Long materialId, String title, String content,String user_id);
 
 
     /**
