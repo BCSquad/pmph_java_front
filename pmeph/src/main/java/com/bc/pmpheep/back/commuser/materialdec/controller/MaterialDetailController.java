@@ -261,7 +261,8 @@ public class MaterialDetailController extends BaseController{
 		if(type.equals("1")){ //提交
 			perMap.put("is_staging", "0");
 			perMap.put("online_progress", "1");
-		}else{ 
+			perMap.put("commit_date", date);
+		}else{
 			if(online_progress != null && online_progress.equals("2")){ //被退回
 				perMap.put("is_staging", "0");
 				perMap.put("online_progress", "2");
