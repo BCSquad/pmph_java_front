@@ -536,6 +536,14 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         if (achievementMap != null && !achievementMap.isEmpty()) {
             achievementMap.put("declaration_id", declaration_id);
             this.madd.insertAchievement(achievementMap);
+            String per_id = utool.getUUID();
+            if(!achievementMap.get("grcj_id").equals("")){
+                this.peradd.updatePerAchievement(achievementMap);
+            }else{
+                achievementMap.put("user_id", user_id);
+                achievementMap.put("per_id", per_id);
+                this.peradd.insertPerAchievement(achievementMap);
+            }
         }
         //14.主编学术专著新增
         if (monographList != null && !monographList.isEmpty()) {

@@ -1,7 +1,7 @@
 /* 初始化 */
 var counter = 0; /* 计数器 */
 var pageStart = 0; /* offset */
-var pageSize = 3; /* size */
+var pageSize = 10; /* size */
 
 $(function() {
     	//积分筛选
