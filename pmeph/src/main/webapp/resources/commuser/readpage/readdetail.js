@@ -791,7 +791,7 @@ function correction() {
                             $("#upload_status").val(null);
 
                             /**企业微信消息**/
-                            /*var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
+                            var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
                             var bookId = $("#book_id").val();
                             var userId = $("#userid").val();
                             var correctId = json.correctId;
@@ -799,8 +799,10 @@ function correction() {
                                 type: 'get',
                                 url: exportWordBaseUrl + '/frontWxMsg/bookError/'+bookId+"/"+userId+"/"+correctId,
                                 dataType: 'jsonp',
+                                jsonp:"callback", //这里定义了callback在后台controller的的参数名
+                    			jsonpCallback:"getMessage", //这里定义了jsonp的回调函数名。 那么在后台controller的相应方法其参数“callback”的值就是getMessage
                                 success:function(wxResult){
-                                	if(wxResult){
+                                	if(wxResult=="1"){
                                 		window.message.success("微信消息发送成功");
                                 		
                                 	}
@@ -808,7 +810,7 @@ function correction() {
                                 error:function(XMLHttpRequest, textStatus){
                                 	
                                 }
-                                });*/
+                                });
                             
                             
                             

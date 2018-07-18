@@ -350,9 +350,9 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         }
             if (perMap.get("type").equals("1")) { //提交
             if (perMap.get("org_id").equals("0")) {
-                messageService.sendNewMsgWriterToPublisher(MapUtils.getLong(perMap, "material_id"), MapUtils.getString(perMap, "realname"), MapUtils.getString(perMap, "materialName"));
+                messageService.sendNewMsgWriterToPublisher(MapUtils.getLong(perMap, "material_id"), MapUtils.getString(perMap, "realname"), MapUtils.getString(perMap, "materialName"),user_id);
             } else {
-                messageService.sendNewMsgWriterToOrg(MapUtils.getLong(perMap, "org_id"), MapUtils.getString(perMap, "realname"), MapUtils.getString(perMap, "materialName"));
+                messageService.sendNewMsgWriterToOrg(MapUtils.getLong(perMap, "org_id"), MapUtils.getString(perMap, "realname"), MapUtils.getString(perMap, "materialName"),user_id);
             }
             //若申报材料提交 则根据填写的专家信息对应更新个人资料，
             //若申报单位在未进行教师认证之前需要更新个人的所属机构（选择人卫出版社不能更新个人所属机构）
@@ -693,9 +693,9 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
         String user_id = perMap.get("user_id").toString();
         if (perMap.get("type").equals("1")) { //提交
             if (perMap.get("org_id").equals("0")) {
-                messageService.sendNewMsgWriterToPublisher(MapUtils.getLong(perMap, "material_id"), MapUtils.getString(perMap, "realname"), MapUtils.getString(perMap, "materialName"));
+                messageService.sendNewMsgWriterToPublisher(MapUtils.getLong(perMap, "material_id"), MapUtils.getString(perMap, "realname"), MapUtils.getString(perMap, "materialName"),user_id);
             } else {
-                messageService.sendNewMsgWriterToOrg(MapUtils.getLong(perMap, "org_id"), MapUtils.getString(perMap, "realname"), MapUtils.getString(perMap, "materialName"));
+                messageService.sendNewMsgWriterToOrg(MapUtils.getLong(perMap, "org_id"), MapUtils.getString(perMap, "realname"), MapUtils.getString(perMap, "materialName"),user_id);
             }
             //若申报材料提交 则根据填写的专家信息对应更新个人资料，
             //若申报单位在未进行教师认证之前需要更新个人的所属机构（选择人卫出版社不能更新个人所属机构）
