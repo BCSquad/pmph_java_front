@@ -545,7 +545,7 @@ function fresh(row) {
         dataType: 'json',
         success: function (json) {
             $.each(json, function (i, x) {
-                str += '<div class="right_9" onclick="todetail(' + x.id + ')"> <div class="right_10"><img class="right_12" src=' +
+                str += '<div class="right_9"  title="'+x.bookname+'" onclick="todetail(' + x.id + ')"> <div class="right_10"><img class="right_12" src=' +
                     x.image_url +
                     '></div><div class="right_11">' +
                     x.bookname +
@@ -605,7 +605,7 @@ function relatiedBookPageSwitch(relation_type){
         	str += '<input class="relation_totalPage" value="'+json.totalPage+'" type="hidden"></input>';
         	if (relation_type == '1'||relation_type == '2') {
         		$.each(json.list, function (i, x) {
-                    str += '<div class="right_9" onclick="todetail(' + x.id + ')"> <div class="right_10"><img class="right_12" src=' +
+                    str += '<div class="right_9" title="'+x.bookname+'" onclick="todetail(' + x.id + ')"> <div class="right_10"><img class="right_12" src=' +
                         x.image_url +
                         '></div><div class="right_11">' +
                         x.bookname +
