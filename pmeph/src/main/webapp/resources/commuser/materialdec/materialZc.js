@@ -1072,6 +1072,10 @@ function commit(type){
                             }
                     		
                             });
+					}else{
+						setTimeout(function(){
+                			window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
+                		},800);
 					}
                     //window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
                 }
