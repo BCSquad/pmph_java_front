@@ -46,7 +46,7 @@
 	  group by cc.id
 	  )t
 		ORDER BY
-	  		 t.sortByEntryBtnOn desc ,t.declaration_id asc, t.auth_date DESC ,t.deadline desc
+	  		 t.sortByEntryBtnOn desc ,t.declaration_id asc, <!-- t.auth_date DESC , -->t.deadline desc
 		limit 0,3
   </select>
   
