@@ -105,6 +105,7 @@ textarea{
     border-radius: 17px;
     border: solid 1px #1abd9b;
     line-height: 34px;
+    outline: none;
 }
 
 .head .search-icon {
