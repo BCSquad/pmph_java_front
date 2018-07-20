@@ -14,6 +14,7 @@
 <script>
 	var contextpath = "${pageContext.request.contextPath}/";
 </script>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <%-- <base href="<%=basePath%>"> --%>
 <title>个人资料</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -34,16 +35,18 @@
 	type="text/javascript"></script>
 <script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"
 	type="text/javascript"></script>
+<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.tipso.js?t=${_timestamp}"></script>
 <link href="<%=path%>/statics/css/jquery.selectlist.css?t=${_timestamp}"
 	rel="stylesheet" type="text/css" />
 <script src="<%=path%>/resources/comm/base.js?t=${_timestamp}"></script>
 <link
 	href="<%=path%>/statics/commuser/teachercertification/teacherAttest.css?t=${_timestamp}"
 	rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="${ctx}/statics/css/jquery.tipso.css?t=${_timestamp}" type="text/css">
 
 <script type="text/javascript">
 	function submitValidate() {
-		if ($("form").validate('submitValidate')) {
+		if ($.fireValidator()) {
 			$("#certForm").ajaxSubmit(
 							{
 								url : contextpath
@@ -76,12 +79,21 @@
 			return false;
 			//document.getElementById("certForm").submit();
 		}else{
-			window.message.error("请按要求填写必填信息！");
+			//window.message.error("请按要求填写必填信息！");
 			return false;
 		}
 	}
 
 	$(function() {
+
+        setTimeout(function () {
+            $('#realName').tipso({validator: "isNonEmpty", message: "姓名不能为空"});
+            $('#idcard').tipso({validator: "isNonEmpty|isCard", message: "身份证号不能为空|请输入正确的身份证号码"});
+            $('#Select1').tipso({validator: "isNonEmpty", message: "请选择学校"});
+            $('#certName').tipso({validator: "isNonEmpty", message: "请上传教师资格证"});
+            $('#handphone').tipso({validator: "isNonEmpty|isMobile", message: "手机号码不能为空|手机号码格式不正确"});
+        },0)
+
 		$('select').selectlist({
 			zIndex : 10,
 			width : 264,
@@ -303,10 +315,9 @@
 									<div class="label-input">
 										<label><font color="#ff3d38">*</font>姓名</label>
 										<div class="input-wrapper">
-											<input id="realName" class="sxy-txt required" type="text"
+											<input id="realName" class="sxy-txt" type="text"
 												value="${showWriterUserCertification.realName}"
-												name="realName" data-valid="isNonEmpty||maxLength"
-												data-error="真实姓名不能为空!||超过最大输入长度！已截取。" 
+												name="realName"
 												<%-- <c:if test="${showWriterUserCertification.progress != null&&(showWriterUserCertification.progress==1 || showWriterUserCertification.progress == 3)}">disabled="disabled"</c:if> --%>
 												/>
 												
@@ -324,9 +335,8 @@
 									<div class="label-input">
 										<label><font color="#ff3d38">*</font>身份证号</label>
 										<div class="input-wrapper">
-											<input id="idcard" class="sxy-txt required" type="text"
+											<input id="idcard" class="sxy-txt" type="text"
 												value="${showWriterUserCertification.idcard}" name="idcard"
-												data-valid="idcard" data-error="请填正确的身份证信息!" 
 												<%-- <c:if test="${showWriterUserCertification.progress != null&&(showWriterUserCertification.progress==1 || showWriterUserCertification.progress == 3)}">disabled="disabled"</c:if> --%>
 												/>
 										</div>
@@ -344,8 +354,7 @@
 									<div class="label-input">
 										<label><font color="#ff3d38">*</font>选择学校</label>
 										<div class="input-wrapper">
-											<input type="hidden" class="required" data-valid="isSelected"
-												data-error="请选择您所在的学校!"> 
+											<input type="hidden" class="">
 											
 											<%-- <c:choose>
 												<c:when test="${showWriterUserCertification.progress==null||showWriterUserCertification.progress==0||showWriterUserCertification.progress==2}"> --%>
@@ -385,10 +394,9 @@
 									<div class="label-input">
 										<label><font color="#ff3d38">*</font>手机</label>
 										<div class="input-wrapper">
-											<input id="handphone" class="sxy-txt required" type="text"
+											<input id="handphone" class="sxy-txt" type="text"
 												value="${showWriterUserCertification.handphone}"
-												name="handphone" data-valid="isHandphone"
-												data-error="请填写正确的手机号码!" 
+												name="handphone"
 												<%-- <c:if test="${showWriterUserCertification.progress != null&&(showWriterUserCertification.progress==1 || showWriterUserCertification.progress == 3)}">disabled="disabled"</c:if> --%>
 												/>
 										</div>
@@ -406,13 +414,12 @@
 									<div class="label-input">
 										<label><font color="#ff3d38">*</font>教师资格证</label>
 										<div class="input-wrapper">
-											<input class="sxy-txt required" type="hidden"
+											<input class="sxy-txt" type="hidden"
 												value="${showWriterUserCertification.cert}" id="cert"
-												name="cert" data-valid="isNonEmpty"
-												data-error="请上传教师资格证照片，并等待上传完成!" /> 
+												name="cert"/>
 											<input class="sxy-txt" type="text"
 												value="${showWriterUserCertification.certName}"
-												id="certName" name="certcertName" disabled="disabled"/>
+												id="certName" name="certcertName" readonly/>
 										</div>
 									</div>
 								</td>

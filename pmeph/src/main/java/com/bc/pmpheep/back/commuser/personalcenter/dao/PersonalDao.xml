@@ -1032,18 +1032,11 @@
 		as bc_is_deleted
 		from
 		writer_user_trendst t
-		left join cms_content c on
-		t.cms_content_id = c.id
-		left join cms_content pc on c.parent_id =
-		pc.id
-		left join book_user_comment bc on t.book_comment_id = bc.id
-		left
-		join
-		book b on t.book_id = b.id or bc.book_id = b.id
-		left join
-		book_detail bd
-		on b.id = bd.book_id
-
+		left join cms_content c on t.cms_content_id = c.id and t.type between 1 and 4
+		left join cms_content pc on c.parent_id = pc.id 
+		left join book_user_comment bc on t.book_comment_id = bc.id and t.type = 5
+		left join book b on (t.book_id = b.id and t.type in(6,7)) or bc.book_id = b.id 
+		left join book_detail bd on b.id = bd.book_id
 		left join writer_user u on
 		t.user_id = u.id
 		<where>
@@ -1077,14 +1070,10 @@
 		count(t.id )
 		from
 		writer_user_trendst t
-		left join cms_content c on
-		t.cms_content_id = c.id
-		left join cms_content pc on c.parent_id =
-		pc.id
+		left join cms_content c on t.cms_content_id = c.id
+		left join cms_content pc on c.parent_id = pc.id
 		left join book_user_comment bc on t.book_comment_id = bc.id
-		left
-		join
-		writer_user u on t.user_id = u.id
+		left join writer_user u on t.user_id = u.id
 		<where>
 			<!-- is_delete = 0 and -->
 			user_id = #{parameter.logUserId}
@@ -1357,7 +1346,7 @@ UNION
 			2 as f_type,
 			c.id AS id,
 			c.title AS title,
-			w.realname AS author,
+			c.author_name AS author,
 			m.id AS mid,
 			c.summary AS detail,
 			c.bookmarks AS bookmarks,
@@ -1385,7 +1374,7 @@ UNION
 	3 as f_type,
 	c.id AS id,
 	c.title AS title,
-	w.realname AS author,
+	c.author_name AS author,
 	m.id AS mid,
 	c.summary AS detail,
 	c.bookmarks AS bookmarks,

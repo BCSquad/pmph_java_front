@@ -11,6 +11,63 @@
     font-size: 14px;
 }
 
+.left2{
+	background-image: url(../../image/css_sprites.png);
+	background-position: -112px -153px;
+	background-repeat: no-repeat;
+	height: 20px;
+	width: 20px;
+	float: left;
+	margin-left: 5px;
+	margin-top: 3px;
+}
+
+.addlike{
+	background-image: url(../../image/css_sprites.png);
+	background-position: -86px -154px;
+	background-repeat: no-repeat;
+	height: 20px;
+	width: 20px;
+	float: left;
+	margin-left: 5px;
+	margin-top: 3px;
+}
+
+.left3{
+	background-image: url(../../image/css_sprites.png);
+	background-position: -112px -177px;
+	background-repeat: no-repeat;
+	height: 20px;
+	width: 20px;
+	float: left;
+	margin-left: 5px;
+	margin-top: 3px;
+}
+
+.left4{
+	background-image: url(../../image/css_sprites.png);
+	background-position: -85px -179px;
+	background-repeat: no-repeat;
+	height: 20px;
+	width: 20px;
+	float: left;
+	margin-left: 5px;
+	margin-top: 5px;
+}
+
+.addlikediv{
+	float: left;
+	background-color: #FDE9E7;
+	height: 26px;
+	cursor: pointer;
+}
+
+.addliketext {
+	float: left;
+	color: #DB473D;
+	margin-right: 10px;
+}
+
 .text00{
 	margin: 8px auto 0px;
     position: relative;
@@ -149,7 +206,6 @@
     float: right;
     width: 80px;
     height: 28px;
-    border: 1px solid #3996fa;
     background-color: #e8f1fa;
     margin-top: 10px;
     border-radius: 3px;
@@ -158,14 +214,15 @@
 
 
 #span_4{
-	border:0px;
-    float: right;
-    width: 80px;
-    height: 28px;
-    font-size: 14px;
-    color: #3996fa;
-    cursor:pointer;
-    background-color: #F1FBF4;
+	border: 0px;
+	float: right;
+	width: 80px;
+	height: 28px;
+	font-size: 14px;
+	color: white;
+	cursor: pointer;
+	background-color: #70D68A;
+	border-radius: 3px;
 }
 
 .picturesize{
@@ -182,7 +239,7 @@
     float: left;
     width: 5px;
 	height: 20px;
-	background-color: #3996fa;
+	background-color: #35c974;
 }
 
 .block .title .rd_name {
@@ -202,10 +259,10 @@
 
 .pl_add .tarea{
 	width: 885px;
-	height: 130px;
-	background-color: #e8f1fa;
+	height: 90px;
+	background-color: #f1fbf4;
 	border-radius: 3px;
-	border: solid 1px #3996fa;
+	border: 1px solid #B6EFCE;
 }
 
 .rwtx1{

@@ -1,4 +1,11 @@
 $(function () {
+
+    $('#realName').tipso({validator: "isNonEmpty", message: "管理员姓名不能为空"});
+    $('#email').tipso({validator: "isNonEmpty|isEmail", message: "邮箱地址不能为空|邮箱格式不正确"});
+    $('#handphone').tipso({validator: "isNonEmpty|isMobile", message: "手机号码不能为空|手机号码格式不正确"});
+    $('#position').tipso({validator: "isNonEmpty", message: "职务不能为空"});
+    $('#address').tipso({validator: "isNonEmpty", message: "地址不能为空"});
+    $('#postCode').tipso({validator: "isNonEmpty", message: "邮编不能为空"});
 	$("#disabled_all").val();
 	if ($("#disabled_all").val()=="true") {
 		$("input").attr("disabled",true);
@@ -111,27 +118,33 @@ function getform() {
 
 }
 function submit(){
-	if($("form").validate('submitValidate')){
-	    $.ajax({
-	        type:'post',
-	        url:contextpath+'admininfocontroller/updateorguser.action',
-	        async:false,
-	       /* contentType: 'application/json',*/
-	        dataType:'json',
-	       /* data:JSON2.stringify(getform()),*/
-	        data:getform(),
-	        success:function(code){
-	            if (code=="success"){
-	                message.success("提交成功");
-					//window.location.reload();
-	                setTimeout(function(){
-	                	window.location.href = contextpath + "admininfocontroller/toadmininfo.action";
-	                }, 800);
-	            }else{
-	            	message.error("提交失败");
-	            }
-	        }
-	    });
+	if($.fireValidator()){
+	 //   debugger
+        var aa = $("#fileid").val();
+	    if($("#fileid").val()==null || aa =="" ||aa=="default"){
+	        window.message.info("请长传委托书！")
+        }else {
+            $.ajax({
+                type: 'post',
+                url: contextpath + 'admininfocontroller/updateorguser.action',
+                async: false,
+                /* contentType: 'application/json',*/
+                dataType: 'json',
+                /* data:JSON2.stringify(getform()),*/
+                data: getform(),
+                success: function (code) {
+                    if (code == "success") {
+                        message.success("提交成功");
+                        //window.location.reload();
+                        setTimeout(function () {
+                            window.location.href = contextpath + "admininfocontroller/toadmininfo.action";
+                        }, 800);
+                    } else {
+                        message.error("提交失败");
+                    }
+                }
+            });
+        }
 	}
 }
 //下载委托书

@@ -1,28 +1,23 @@
 package com.bc.pmpheep.back.authadmin.applydocaudit.controller;
 
-import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
+import com.bc.pmpheep.back.authadmin.applydocaudit.service.DataAuditService;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.template.service.TemplateService;
+import com.bc.pmpheep.controller.bean.ResponseBean;
+import com.bc.pmpheep.general.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bc.pmpheep.back.authadmin.applydocaudit.service.DataAuditService;
-import com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailService;
-import com.bc.pmpheep.back.plugin.PageParameter;
-import com.bc.pmpheep.back.template.service.TemplateService;
-import com.bc.pmpheep.controller.bean.ResponseBean;
-import com.bc.pmpheep.general.controller.BaseController;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * 
@@ -271,6 +266,13 @@ public class DataAuditController extends BaseController{
 			//21.编写内容意向表
 			Map<String,Object> intentionMap = new HashMap<String,Object>();
 			intentionMap = this.dataAuditService.queryIntention(queryMap);
+			
+			//是否已被遴选，用于退回前提示。
+			declaration_id = queryMap.get("declaration_id").toString();
+			List<Map<String,Object>> choosenList = dataAuditService.queryChoosenListByDeclarationId(declaration_id);
+			Boolean expertChoosen = choosenList!=null&&choosenList.size()>0;
+			mav.addObject("choosenList", choosenList);
+			mav.addObject("expertChoosen", expertChoosen);
 
 			mav.addObject("material", materialMap);
 			mav.addObject("gezlList", gezlList.get(0));

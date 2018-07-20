@@ -26,11 +26,11 @@
 		left join cms_category ccy on cc.category_id= ccy.id
 		where   ccy.category_name='医学随笔' 
 			and cc.is_deleted=0
+		    and cc.apporpc != 2
 			and cc.auth_status=2 
-			and cc.is_published=1 
-		
+			and cc.is_published=1
 		order by 
-				cc.`auth_date` desc
+				cc.auth_date desc
 		<if test="start !=null and pageSize != null">
 			limit #{start},#{pageSize}
 		</if>

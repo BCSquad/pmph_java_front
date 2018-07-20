@@ -31,9 +31,10 @@
 				left join declaration d on d.user_id = #{id} and d.material_id=cc.material_id
 		WHERE
 				cc.is_deleted = 0
-				AND
-				cc.category_id=3
+				AND cc.category_id=3
 				AND cc.auth_status =2
+	            AND cc.apporpc!=2
+
 	  AND cc.is_published =1
 
 	  and (
@@ -45,7 +46,7 @@
 	  group by cc.id
 	  )t
 		ORDER BY
-	  		 t.sortByEntryBtnOn desc ,t.declaration_id asc, t.auth_date DESC ,t.deadline desc
+	  		 t.sortByEntryBtnOn desc ,t.declaration_id asc, <!-- t.auth_date DESC , -->t.deadline desc
 		limit 0,3
   </select>
   
@@ -63,6 +64,7 @@
 	  and b.is_public = 1
 	  and t.auth_status=2
 	  and t.is_deleted=0
+	  and t.apporpc!=2
 	  union
 	  select
 	  t.*
@@ -76,6 +78,7 @@
 	  <![CDATA[and t.material_id >0]]>
 	  and b.is_public = 0
 	  and t.auth_status=2
+	  and t.apporpc!=2
 	  and t.is_deleted=0
 	  and p.id= #{id}) n
 		order by n.sort asc limit 0,3
@@ -84,7 +87,7 @@
     <!-- 查询最新五条信息快报 -->
     <select id="queryNotice"  resultType="java.util.Map">
      select  * from cms_content  where  category_id='2' and auth_status='2' 
-     and is_deleted='0' order by gmt_create desc limit 0,5
+     and is_deleted='0' and apporpc!=2 order by gmt_create desc limit 0,5
   </select>
     <!-- 查询书籍 -->
     <select id="queryBook" parameterType="map" resultMap="Mapresult">
@@ -112,7 +115,7 @@
         or t.id = #{type}
         )
         where b.is_on_sale = 1
-        order by b.image_url desc
+        order by b.is_stick*b.sort desc, b.image_url desc
         <if test="startrows >= 0">
             <![CDATA[limit ${startrows},14]]>
         </if>
@@ -171,7 +174,7 @@
 			and cc.is_deleted=0
 			and cc.auth_status=2 
 			and cc.is_published=1 
-		
+		    and cc.apporpc != 2
 		order by 
 				cc.`auth_date` desc
         limit 0,#{endrow}

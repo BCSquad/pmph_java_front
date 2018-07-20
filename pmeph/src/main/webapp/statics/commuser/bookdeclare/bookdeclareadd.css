@@ -13,6 +13,24 @@
 	width: 1200px;
 }
 
+ td{
+	text-align: center;
+}
+.tab_3 td:first-child{
+	text-align: left;
+}
+.tab_3 td:last-child{
+	text-align: right;
+}
+
+
+.tab_4 td:first-child{
+	text-align: left;
+}
+.tab_4 td:last-child{
+	text-align: right;
+}
+
 #tsxz_span1{
 	background-image: url(../../image/css_sprites.png);
     background-position: -333px -7px;
@@ -100,7 +118,7 @@
 	line-height: 26px;
 	letter-spacing: 0px;
 	color: #666666;
-	text-align: left;
+	/*text-align: left;*/
 }
 .tab_1 tr td span{
 	width: 100px;
@@ -161,7 +179,7 @@
 /**加长输入框**/
 .jc_input{
 	clear:none;
-	width: 583px;
+	width: 595px;
 	height: 26px;
 	line-height: 26px;
 	border: solid 1px #dedede;
@@ -171,7 +189,7 @@
 /**通讯地址**/
 .tx_input{
 	clear:none;
-	width: 620px;
+	width: 668px;
 	height: 26px;
 	line-height: 26px;
 	border: solid 1px #dedede;
@@ -206,31 +224,30 @@
 	width: 100%;
 }
 .text_cl{
-	width: 892px;
+	width: 1150px;
 	height: 60px;
 	background-color: #e8f1fa;
 	border-radius: 3px;
-	border: solid 1px #3996fa;
+	border: solid 1px #C8D5F8;
 	-moz-opacity: 0.3;
 	-khtml-opacity: 0.3;
 	-webkit-opacity: 0.3;
-	opacity: 0.3;
+	opacity: 1;
 	filter:alpha(opacity=30);
 	padding: 15px 20px;
-	margin-top: 20px;
 }
 /**�ύ��ť**/
 .button{
-	height: 30px;
+	height: 65px;
 	width: 1200px;
 	text-align: center;
-	margin-top: 40px;
+	margin-top: 20px;
 	
 }
 
 .div_butt{
 	width: 270px;
-	height: 24px;
+	height: 45px;
 	color: #FFFFFF;
 	margin:auto;
 	top:50%;
@@ -238,21 +255,22 @@
 }
 .div_butt1{
 	width: 70px;
-	height: 24px;
+	height: 45px;
 	color: #FFFFFF;
 	margin:auto;
 	top:50%;
 	left:50%;
 }
 .bt_tj{
-	width: 74px;
-	height: 24px;
-	background-color: #70bcc3;
+	width: 116px;
+	height: 40px;
+	background-color: #1cb194;
 	border-radius: 2px;
 	cursor: pointer;
 	color: #FFFFFF;
 	float: left;
 	margin-left: 15px;
+	line-height: 40px;
 }
 .sb_tj{
 	width: 74px;
@@ -375,3 +393,7 @@
     color: #FFFFFF;
     margin-bottom: 10px;
 }
+
+
+
+

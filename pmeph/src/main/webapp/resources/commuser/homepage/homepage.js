@@ -72,7 +72,7 @@ function searchXstjBook(typeid) {
     $("#new"+typeid).addClass("active");
     $.ajax({
         type: 'post',
-        url: contextpath + 'readpage/searchXstjBook.action?type=' + typeid,
+        url: contextpath + 'readpage/searchXstjBook.action?type=' + typeid+'&t=' + new Date(),
         async: false,
         dataType: 'json',
         success: function (json) {

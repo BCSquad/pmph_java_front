@@ -12,8 +12,8 @@
 		a.gmt_create,
 		'%Y-%m-%d %H:%i:%S'
 		) AS TIME,
-		(CASE WHEN A.sender_type='0' THEN '系统消息' WHEN A.sender_type='1' THEN A.title END ) title,
-		(CASE WHEN A.sender_type='0' THEN 'DEFAULT' WHEN A.sender_type='1' THEN r1.avatar END ) avatar,
+		(CASE WHEN a.sender_type='0' THEN '系统消息' WHEN a.sender_type='1' THEN a.title END ) title,
+		(CASE WHEN a.sender_type='0' THEN 'DEFAULT' WHEN a.sender_type='1' THEN r1.avatar END ) avatar,
 		msg_id,
 		a.id,
 		a.is_read as isread
@@ -30,7 +30,7 @@
 			and a.is_withdraw = 0
 			
 		AND a.is_deleted=0
-		AND A.msg_type IN (1, 0)
+		AND a.msg_type IN (1, 0)
 		AND receiver_id = #{id}
 		) t
 		ORDER BY

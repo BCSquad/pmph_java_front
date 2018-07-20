@@ -17,12 +17,15 @@
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}"/>
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.pager.css?t=${_timestamp}" type="text/css">
     <link rel="stylesheet" href="${ctx}/resources/comm/layui/css/layui.css">
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.tipso.css?t=${_timestamp}" type="text/css">
     <link href="${ctx}/statics/commuser/readpage/readdetail.css?t=${_timestamp}" type="text/css" rel="stylesheet">
     <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/jquery/jquery-validate.js?t=${_timestamp}" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}?t=${_timestamp}" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
+    <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.tipso.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/reload.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.pager.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/layui/layui.js?t=${_timestamp}"></script>
@@ -43,31 +46,28 @@
 <div class="body">
     <input type="hidden" value="${map.type}" id="type_id">
     <div class="content-wrapper">
+    	<div class="content">
         <input type="hidden" id="book_id" value="${id}">
         <input type="hidden" id="marks" value="${map.bookmarks}">
         <!-- 图书纠错悬浮框 -->
         <div class="bookmistake" id="bookmistake">
-            <form id="bookmistakeform">
                 <div class="apache">
                     <div class="mistitle">图书纠错</div>
                     <div class="x" onclick="hideup()"></div>
                 </div>
                 <div class="input">
                     <div style="float:left;">
-                        <label style="margin-left: 20px" class="labell require">页码:</label>
+                        <label style="margin-left: 20px" class="labell"><font style="color: red">*</font>页码:</label>
                         <input type="text" style="width: 150px;" class="text required" id="page"
-                               data-valid="isNonEmpty||onlyInt"
-                               onblur="javascript:LengthLimit(this,4);" data-error="页码不能为空||页码只能是数字"/>
+                               onblur="javascript:LengthLimit(this,4);"/>
                     </div>
-                    <div style="float:right;margin-right: 50px"><label style="margin-left: 10px"
-                                                                       class="labell">行数:</label>
-                        <input type="text" style="width: 150px;" class="text required" id="line"
-                               data-valid="isNonEmpty||onlyInt"
-                               onblur="javascript:LengthLimit(this,4);" data-error="行数不能为空||行数只能是数字"/></div>
+                    <div style="float:right;margin-right: 50px"><label style="margin-left: 10px"class="labell"><font style="color: red">*</font>行数:</label>
+                        <input type="text" style="width: 150px;" class="text" id="line"
+                               onblur="javascript:LengthLimit(this,4);"/></div>
 
                 </div>
                 <div class="info">
-                    <label style="margin-left: 20px;" class="labell">纠错内容</label>
+                    <label style="margin-left: 20px;" class="labell"><font style="color: red">*</font>纠错内容</label>
                     <div style="margin-top: 5px;">
                          <textarea class="misarea" style="width:470px;" id="content"
                                    onkeyup="javascript:LengthLimit(this,500);"
@@ -89,7 +89,6 @@
                 <div class="">
                     <button class="btn" type="button" onclick="correction()">确认</button>
                 </div>
-            </form>
         </div>
         <!-- 图书纠错悬浮框 end -->
         
@@ -103,7 +102,7 @@
                 
                 <div class="info">
                     <div style="margin-top: 5px;">
-                         <textarea class="misarea" style="width:470px;" id="bookfeedback_content"
+                         <textarea class="misarea required" style="width:470px;" id="bookfeedback_content"
                                    onkeyup="javascript:LengthLimit(this,500);"
                                    onblur="javascript:LengthLimit(this,500);"></textarea>
                     </div>
@@ -132,14 +131,24 @@
             </div>
             <div style="width: 100%;">
                 <div class="dzsc">
-                    <c:if test="${flag=='no'}">
-                        <img src="${ctx}/statics/image/dz02.png" onclick="addlikes()" id="dz"/>
-                    </c:if>
-                    <c:if test="${flag=='yes'}">
-                        <img src="${ctx}/statics/image/dz01.png" onclick="addlikes()" id="dz"/>
-                    </c:if>
-                    <img src="${ctx}/statics/image/${mark=='yes' ? 'sc101(1).png':'s102(1).png'}" onclick="addmark()"
-                         id="sc"/>
+                    <div class="addlikediv" onclick="addlikes()">
+                        <c:if test="${flag=='no'}">
+                            <div class="addlike"  id="dz"/></div>
+                            <div class="addliketext">点赞</div>
+                         </c:if>
+                    </div>
+
+                    <div class="addlikediv" onclick="addlikes()">
+                        <c:if test="${flag=='yes'}">
+                            <div class="left2"  id="dz"/></div>
+                            <div class="addliketext">点赞</div>
+                        </c:if>
+                    </div>
+
+                    <div class="addlikediv" style="margin-left: 10px" onclick="addmark()">
+                        <div class="${mark=='yes' ? 'left3':'left4'}"  id="sc"/></div>
+                        <div class="addliketext">收藏</div>
+                    </div>
                     <div style="display: inline-block;vertical-align: top;margin-right: 8px;text-align:left;">
                     </div>
                 </div>
@@ -305,7 +314,7 @@
                             </div>
 
                             <div class="video-btn">微视频</div>
-                            <div class="video-name">(微视频)${list.title}</div>
+                            <div class="video-name">${list.title}</div>
                         </div>
                     </c:forEach>
                     <script type="text/javascript">
@@ -336,7 +345,7 @@
                 <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 15px;">
                 <div class="pl_add">
                     <a name="001" id="001"></a>
-                    <textarea class="tarea" id="content_book" onkeyup="javascript:LengthLimit(this,500);"
+                    <textarea class="tarea textarea_content" id="content_book" onkeyup="javascript:LengthLimit(this,500);"
                               onblur="javascript:LengthLimit(this,500);"></textarea>
                     <div style="border-top:1px solid rgba(180, 239, 205, 0.5);margin-left: 16px;margin-rihgt: 16px;text-align: right;font-size: 12px;width: 870px;">
                      评论最多500字</div>
@@ -534,12 +543,15 @@
                             <span id="span_3">教材关联图书</span>
                         </div>
                     </div>
-                    <div class="right_8">
+                    <div class="right_8 relatiedBookPageSwitchWrapper 1" style="display: none;">
                         <img src="../statics/image/refresh.png" style="float:left;margin-left:80px">
-                        <div class="refresh" onclick='fresh("6")'>换一批</div>
+                        <!-- <div class="refresh" onclick='fresh("6")'>换一批</div> -->
+                        <div class="refresh" onclick='relatiedBookPageSwitch("1")'>换一批</div>
                     </div>
                 </div>
                 <div id="about">
+                	<input class="relation_page" value="0" type="hidden"></input>
+                	<input class="relation_totalPage" value="-1" type="hidden" ></input>
                     <c:forEach items="${frList}" var="list">
                         <div class="right_9" onclick="todetail('${list.id}')">
                             <div class="right_10">
@@ -558,12 +570,14 @@
                             <span id="span_3">相关推荐</span>
                         </div>
                     </div>
-                    <div class="right_8">
+                    <div class="right_8 relatiedBookPageSwitchWrapper 2" style="display: none;">
                         <img src="../statics/image/refresh.png" style="float:left;margin-left:80px">
-                        <div class="refresh" onclick='fresh("9")'>换一批</div>
+                        <div class="refresh" onclick='relatiedBookPageSwitch("2")'>换一批</div>
                     </div>
                 </div>
                 <div id="change">
+                	<input class="relation_page" value="0" type="hidden"></input>
+                	<input class="relation_totalPage" value="-1" type="hidden" ></input>
                     <c:forEach items="${auList}" var="list">
                         <div class="right_9" onclick="todetail('${list.id}')">
                             <div class="right_10">
@@ -590,11 +604,13 @@
                         <div class="right_18">人卫推荐</div>
                     </div>
                 </div>
-                <div class="right_19">
+                <div class="right_19 relatiedBookPageSwitchWrapper 3" style="display: none;">
                     <div class="picture1"></div>
-                    <div class="refresh1" onclick="change()">换一批</div>
+                    <div class="refresh1" onclick="relatiedBookPageSwitch('3')">换一批</div>
                 </div>
                 <div id="comment">
+                	<input class="relation_page" value="0" type="hidden"></input>
+                	<input class="relation_totalPage" value="-1" type="hidden" ></input>
                     <c:forEach items="${eMap}" var="list">
                         <div class="right_20">
                             <div class="right_21" onclick="todetail('${list.id}')">${list.bookname}</div>
@@ -605,6 +621,7 @@
             </div>
         </div>
     </div>
+	</div>
 </div>
 <div style="clear:both;"></div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>

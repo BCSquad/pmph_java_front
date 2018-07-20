@@ -1,4 +1,7 @@
 $(function(){
+
+    $('#content').tipso({validator: "isNonEmpty", message: "评论内容不能为空"});
+
 	 Page({
 	        num: parseInt($("#allppage").html()),	//页码数
 	        startnum: parseInt($("#pageNumber").val()),	//指定页码
@@ -20,6 +23,8 @@ $(function(){
        });
 	   
 	   changepage(1);
+
+       change();
 });
 //分页前的初始化
 function beforechange(){
@@ -81,10 +86,7 @@ function changepage(n){
 
 //1.新增评论
 function insert(){
-	if($("#content").val()==''){
-		window.message.info("发表我的言论...");
-		return;
-	}
+	if($.fireValidator()){
 	var json={
 		 content:$("#content").val(),
 		 wid:$("#wid").val(),
@@ -116,31 +118,49 @@ function insert(){
 				}
 			}
 		});
+    }
 }
 
 
 
-//1.相关文章换一换
+//1.相关文章
 function change(){
+	var count=0;
+	var startrow=$("#startrow").val();
 	var json={
-			 wid:$("#wid").val()
+			 wid:$("#wid").val(),
+		     startrow:startrow,
 		};
 	 $.ajax({
 			type:'post',
-			url:contextpath+'articledetail/change.action',
+			url:contextpath+'articledetail/change.action?t=' + new Date(),
 			async:false,
-			dataType:'json',
 			data:json,
 			success:function(json){
 				var ste='';
 				$.each(json,function(i,n){
-					ste+='<div class="right_20"><div class="right_21">'+n.title+'</div><div class="right_22">'+n.realname+'</div></div>';
+					ste+='<div class="right_20" onclick="articledetail('+n.id+')"><div class="right_21">'+n.title+'</div>';
+						if(n.author_name==null){
+                            ste+='<div class="right_22"></div></div>';
+						}else{
+                            ste+='<div class="right_22">'+n.author_name+'</div></div>';
+						}
+				    count=n.end;
 				});
 				$("#comment").html(ste);
+				var newrow=parseInt(startrow)+5;
+				if(newrow>=count){
+                    $("#startrow").val(0);
+				}else{
+                    $("#startrow").val(newrow);
+				}
 			}
 		});
 }
 
+function articledetail(id) {
+	location.href=contextpath+'articledetail/toPage.action?wid='+id;
+}
 
 //点赞
 function addlikes(){
@@ -155,9 +175,9 @@ function addlikes(){
 			data:json,
 			success:function(json){
 				if(json.returncode=="yes"){
-					$("#dz").attr("src",contextpath+"statics/image/dz02.png");
+					$("#dz").attr("class","addlike");
 				}else{
-					$("#dz").attr("src",contextpath+"statics/image/dz01.png");
+					$("#dz").attr("class","left2");
 				}
 			}
 		});
@@ -179,9 +199,9 @@ function addmark(){
 			dataType:'json',
 			success:function(json){
 					if(json.returncode=="OK"){
-						$("#sc").attr("src",contextpath+"statics/image/sc101(1).png");
+						$("#sc").attr("class","left3");
 					}else{
-						$("#sc").attr("src",contextpath+"statics/image/s102(1).png");
+						$("#sc").attr("class","left4");
 					}
 			}
 		});
@@ -195,7 +215,7 @@ function todetail(id) {
 //评论检查出敏感词时，用户修改文本域获取焦点，则把红边去掉
 $(function(){
 	$("#content").focus(function(){
-		$("#content").css("border","none");
+		$("#content").css("border","1px solid #B6EFCE");
 	});
 });
 

@@ -145,6 +145,7 @@ a:active {color:yellow;}
     cursor: pointer;
     /*clear: both;*/
     float: left;
+    margin-left: 40px;
 }
 
 .top_content33{
@@ -469,7 +470,8 @@ ul{
     cursor: pointer;
 }
 #msgContent{
-    width: 890px;
+    /*width: 890px;*/
+    width: 868px;
     height: 77px;
     background-color: #f8f8f8;
     padding:10px;

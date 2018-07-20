@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.cms.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -97,9 +98,13 @@ public class ArticleDetailServiceImpl implements ArticleDetailService {
 	 * 查询相关文章
 	 */
 	@Override
-	public List<Map<String, Object>> queryRecommendByE(@Param("x") int num, @Param("wid") String wid) {
+	public List<Map<String, Object>> queryRecommendByE(int num,String wid) {
 		// TODO Auto-generated method stub
 		List<Map<String, Object>> map = articleDetailDao.queryRecommendByE(num, wid);
+		int count=articleDetailDao.QueryAllShip(wid);
+        for (Map<String, Object> smap: map ) {
+            smap.put("end",count);
+        }
 		return map;
 	}
 
@@ -243,6 +248,25 @@ public class ArticleDetailServiceImpl implements ArticleDetailService {
 	public List<Map<String, Object>> queryCMSAttach(Map<String, Object> paraMap) {
 		// TODO Auto-generated method stub
 		return articleDetailDao.queryCMSAttach(paraMap);
+	}
+
+	@Override
+	public List<Map<String, Object>> QueryShipByID(String id,int startrow) {
+		List<Map<String, Object>> list=new ArrayList<>();
+		list=articleDetailDao.QueryShipByID(id,startrow);
+		return list;
+	}
+
+
+    @Override
+    public int QueryAllShip(String id) {
+        return articleDetailDao.QueryAllShip(id);
+    }
+
+	@Override
+	public int QueryShipByIDCount(String id) {
+		int count = articleDetailDao.QueryShipByIDCount(id);
+		return count;
 	}
 
 //	@Override

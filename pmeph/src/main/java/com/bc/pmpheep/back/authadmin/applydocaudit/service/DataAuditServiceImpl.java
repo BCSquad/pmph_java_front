@@ -136,8 +136,8 @@ public class DataAuditServiceImpl implements DataAuditService {
             userMessage.setMaterial_id(0L);
             userMessage.setMsgType(new Short("0"));
             userMessage.setTitle(title);
-            userMessage.setSenderId(0L);
-            userMessage.setSenderType(new Short("0"));
+            userMessage.setSenderId(thisId);
+            userMessage.setSenderType(new Short("3"));
             userMessage.setReceiverId(frendId);
 
             userMessage.setReceiverType(new Short("2"));
@@ -337,6 +337,19 @@ public class DataAuditServiceImpl implements DataAuditService {
         this.dataAuditDao.updPrintStatus(id);
 
     }
+
+    /**
+	 * 在dec_position和dec_position_published表中查询choosen_position大于0的项 即被遴选中的
+	 * @param declaration_id
+	 * @return
+	 */
+	@Override
+	public List<Map<String, Object>> queryChoosenListByDeclarationId(String declaration_id) {
+
+		List<Map<String, Object>> result = dataAuditDao.queryChoosenListByDeclarationId(declaration_id);
+		
+		return result;
+	}
 
 	
 	

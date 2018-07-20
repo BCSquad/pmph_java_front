@@ -73,6 +73,7 @@
     clear: right;
 }
 
+/*
 .msg_line .success_smile{
 	background-image: url(../../image/css_sprites.png);
     background-position: -462px -192px;
@@ -83,6 +84,7 @@
     float: left;
     clear: right;
 }
+*/
 
 /* .msg_line .fail_unhappy{
 	background-image: url(../../image/css_sprites.png);
@@ -98,7 +100,7 @@
 .trendstWrapper .content_line{
 	margin: 15px 0px 15px 0px;
 	float: left;
-    clear: right;
+    /*clear: right;*/
     width: 100%;
     display: table-row;
 }

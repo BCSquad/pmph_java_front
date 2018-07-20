@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}" />
 <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
 <script type="text/javascript" src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+<script type="text/javascript" src="${ctx}/resources/comm/reload.js?t=${_timestamp}"></script>
 <script src="${ctx}/statics/js/jquery/jquery.selectlist.js"></script>
 <script src="${ctx}/resources/commuser/mymessage/personnelMessage.js?t=${_timestamp}"></script>
 

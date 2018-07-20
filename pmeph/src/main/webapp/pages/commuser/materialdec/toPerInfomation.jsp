@@ -60,11 +60,11 @@
 								<c:if test="${userMap.sex == '1'}">男</c:if>
 								<c:if test="${userMap.sex == '2'}">女</c:if>
 							</span></td>
-						<td><span>出生年月：${userMap.birthday1}</span></td>
+						<td><span>出生年月：${userMap.birthday}</span></td>
 						<td><span>教&emsp;&emsp;龄：${userMap.experience}</span></td>
 					</tr>
 					<tr>
-						<td><span>工作单位：${userMap.org_name}</span></td>
+						<td><span>工作单位：${userMap.workplace}</span></td>
 						<td><span>职&emsp;&emsp;务：${userMap.position}</span></td>
 						<td><span>职&emsp;&emsp;称：${userMap.title}</span></td>
 						<td><span>E-mail：&emsp;${userMap.email}</span></td>
@@ -76,15 +76,15 @@
 						<td><span>手&emsp;&emsp;机：${userMap.handphone}</span></td>
 					</tr>
 					<tr>
-						<td><span>证件类型：
+						<%--<td><span>证件类型：
 								<c:if test="${userMap.idtype == '0'}">身份证</c:if>
 								<c:if test="${userMap.idtype == '1'}">护照</c:if>
 								<c:if test="${userMap.idtype == '2'}">军官证</c:if>
-							</span></td>
+							</span></td>--%>
 						<td><span>证件号码：${userMap.idcard}</span></td>
-						<td colspan="2"><span>地&emsp;&emsp;址：${userMap.address}</span></td>
+						<td colspan="3"><span>地&emsp;&emsp;址：${userMap.address}</span></td>
 					</tr>
-					<tr>
+				<%--	<tr>
 						<td><span>服从调剂：</span>
 							<c:if test="${userMap.is_dispensed == '0'}">否</c:if>
 							<c:if test="${userMap.is_dispensed == '1'}">是</c:if>
@@ -103,7 +103,7 @@
 						<td><span>专业特长：</span>
 							${userMap.expertise}
 						</td>
-					</tr>
+					</tr>--%>
 				</table>
 			</div>
 		</div>
@@ -417,7 +417,7 @@
 			</div>
 		</div>
 		<!--参加人卫慕课、数字教材编写情况-->
-		<div class="sbxq_item1" id="digital">
+		<%--<div class="sbxq_item1" id="digital">
 			<div>
 				<span id="tsxz_span9"></span>
 				<span class="tsxz_title">参加人卫慕课、数字教材编写情况</span>
@@ -427,7 +427,7 @@
                     ${digitalMap.content}
                 </div>
 			</div>
-		</div>
+		</div>--%>
 		<!--精品课程建设-->
 		<div class="sbxq_item" id="gjjpkcjs">
 			<div>
@@ -650,18 +650,18 @@
 			</div>
 		</div>
 		<!--编写内容意向表-->
-	 	<div class="sbxq_item1" id="intention">
+	 	<%--<div class="sbxq_item1" id="intention">
 			<div>
 				<span id="tsxz_span9"></span>
 				<span class="tsxz_title">编写内容意向表</span>
 			</div>
 			<div class="content">
-				<%--<textarea class="text_cl" readonly="readonly">${intentionMap.content}</textarea>--%>
+				&lt;%&ndash;<textarea class="text_cl" readonly="readonly">${intentionMap.content}</textarea>&ndash;%&gt;
                 <div class="text_dy">
                     ${intentionMap.content}
                 </div>
 			</div>
-		</div>
+		</div>--%>
 	</div>
 </div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>

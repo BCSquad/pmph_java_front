@@ -33,6 +33,12 @@
 
 	 })*/
 	</script>
+	<style>
+		.footer {
+			background: #F8F8F8;
+			margin-top: 60px;
+		}
+	</style>
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
@@ -413,6 +419,7 @@
 				</div>
 				<div class="content">
 					<textarea class="text_cl" maxlength="1000"  name="gr_content" id="gr_content" maxlength="1000">${achievementMap.content}</textarea>
+					<input name="grcj_id" type="hidden" value="${achievementMap.id}">
 				</div>
 			</div>
 			<!--主要学术兼职-->
@@ -1359,7 +1366,7 @@
 					<div class="bt_tj" id="buzc" onclick="javascript:buttAdd('2')">暂存</div>
 					<%--<div class="bt_tj" onclick="javascript:buttGive()">放弃</div>--%>
 				</div>
-				<div style="color: red;font-size: 16px;">（提示：如暂存或提交不成功请使用360浏览器极速模式或谷歌浏览器）</div>
+				<div style="color: red;font-size: 16px;margin-top: 15px;">（提示：如暂存或提交不成功请使用360浏览器极速模式或谷歌浏览器）</div>
 			</div>
 		</form>
 </div>

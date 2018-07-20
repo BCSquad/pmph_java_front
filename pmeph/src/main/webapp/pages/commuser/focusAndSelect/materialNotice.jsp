@@ -23,6 +23,7 @@
     <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+    <script src="${ctx}/resources/comm/reload.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/commuser/focusAndSelect/materialNotice.js?t=${_timestamp}" ></script>
     
 
@@ -71,7 +72,7 @@
               </div>
         </div>
         <div class="right" style="width: 335px;float: right;">
-            <img src="${ctx}/image/${fn:length(adInfo.detailList)>1?adInfo.detailList[1].image:adInfo.detailList[0].image}.action" style="width: 335px;height: 335px;"/>
+            <img src="${ctx}/image/${fn:length(adInfo.detailList)>0?adInfo.detailList[0].image:'caode.png'}.action" style="width: 335px;height: 335px;"/>
         </div>
     </div>
 </div>

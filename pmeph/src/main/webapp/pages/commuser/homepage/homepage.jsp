@@ -118,11 +118,10 @@
         <div class="notice area-2">
             <div class="title" style="float: left">
                 <div class="line bgcolor-blue" style="float: left"></div>
-                <div class="name color-blue" style="float: left"><img src="${ctx}/statics/testfile/gg.png"
-                                                                      style="margin-left: 30px;margin-top: 42px">
+                <div class="name color-blue" style="float: left">
+                    <div class="ggpng"style="margin-left: 30px;margin-top: 42px"></div>
                 </div>
             </div>
-
             <c:forEach items="${listDou}" var="list" varStatus="status">
 
                 <%-- <c:if test="${status.index==0}">
@@ -184,8 +183,9 @@
         <div class="notice area-3">
             <div class="title" style="float: left;margin-right: 30px;">
                 <div class="line bgcolor-blue"></div>
-                <div class="name color-blue"><img src="${ctx}/statics/testfile/xx.png"
-                                                  style="margin-left: 30px;margin-top: 15px"></div>
+                <div class="name color-blue">
+                    <div class="xxkb" style="margin-left: 36px;margin-top: 15px"></div>
+                </div>
             </div>
             <c:if test="${listNot[0].first_img_url != 'none' }">
                 <div class="photo-size">
@@ -219,7 +219,8 @@
         <div class="area-4">
             <div class="content">
                 <div class="tab-bar" style="margin-top: 0px;">
-                    <div class="type_bar_float_right typebar">新书推荐</div>
+                    <div class="newdoc"></div>
+                    <div class="type_bar_float_right typebar doc_content" style="margin-left: 13px;margin-top: 10px">新书推荐</div>
                     <div class="page" style="width: auto;float: right;margin-right: 327px;margin-left: 10px;
                         height: 100%;color: #999999;">
                         <c:forEach items="${bookTypes}" var="type" varStatus="status">
@@ -473,7 +474,7 @@
                                  onclick="window.open(contextpath+'readdetail/todetail.action?id=${list.id1}')">
                                 <div class="sp_01"><img src="${list.image_url}"/></div>
                                 <div class="sp_02">
-                                    <div class="sp_title">${list.bookname}</div>
+                                    <div class="sp_title" title="${list.bookname}">${list.bookname}</div>
                                     <div style="float: left;" class="co">${list.nickname} 评论了 《${list.bookname}》</div>
                                     <div class="sp_pl">
                                         <c:if test="${list.score<=3}">
@@ -576,7 +577,7 @@
                                         <div class="num_book">${status.index+1}</div>
                                     </div>
                                     <div class="last_right_content">
-                                        <div class="sale_book" id="sale_book${status.count}">${list.bookname}</div>
+                                        <div class="sale_book" id="sale_book${status.count}" title="${list.bookname}">${list.bookname}</div>
                                     </div>
                                 </div>
                             </c:forEach>

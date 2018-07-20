@@ -106,6 +106,24 @@
 	<select id="fresh" parameterType="java.util.Map" resultType="java.util.Map">
 	   select * from book where type=#{type} Order By rand()  limit 0,#{row}
 	</select>
+	<!-- 查询后台配置的某书某类相关图书总数 -->
+	<select id="queryRelatedBookListCount" resultType="int" parameterType="Map">
+		select count(id) from book_book_relationship 
+		where main_book_id = #{id} and type = #{type}
+	</select>
+	<!-- 查询后台配置的某书某类相关图书 -->
+	<select id="queryRelatedBookList" resultType="Map" parameterType="Map">
+		select b.* 
+		from book_book_relationship bb
+		left join book b on b.id = bb.related_book_id
+		where bb.main_book_id = #{id} and bb.type = #{type}
+		group by b.id
+		order by bb.gmt_create desc
+		limit #{start},#{pageSize}
+	</select>
+	
+	
+	
 	<!-- 根据书籍ID改变点赞数 -->
 	<update id="addlikes" parameterType="java.util.Map"> 
 	   update book set likes=#{likes} where id=#{book_id}

@@ -62,6 +62,9 @@
 		order by t.gmt_create desc
 	</select>
 
+    
+
+
 	<!-- 查询最近文章医学随笔 -->
 	<select id="queryArticle" resultType="java.util.Map"
 		parameterType="java.lang.String">
@@ -84,25 +87,26 @@
 	</select>
 
 
-	<!-- 查询相关文章 换一换 -->
-	<select id="queryRecommendByE" parameterType="java.util.Map"
-		resultType="java.util.Map">
-		select c.title,w.realname,c.id as wid
-		from cms_content c
-		right join
-		cms_content tc on tc.material_id = c.material_id and tc.id =
-		#{wid}
-		left join writer_user w
-		on c.author_id=w.id
-		where c.is_promote !=
-		0 OR
-		c.is_promote is not null and c.auth_status='2'
-		and c.parent_id='0' and c.is_published=1   and  c.is_deleted=0 and c.category_id=1
-		and c.id != #{wid}
+	<!--查询相关文章-->
+	<select id="queryRecommendByE" parameterType="java.util.Map" resultType="java.util.Map">
+        select c.title,c.author_name,c.id
+        from cms_content c
+        where  c.auth_status='2'
+        and  c.is_published=1   and  c.is_deleted=0 and c.category_id=1 and c.apporpc != 2
+        and c.id != #{wid}
 		<if test="x >= 0">
 			limit #{x},5
 		</if>
 	</select>
+	
+	<!--查询相关文章总条数-->
+    <select id="QueryAllShip" resultType="int" parameterType="java.util.Map">
+        select count(*)
+		from cms_content c
+		where  c.auth_status='2'
+		and  c.is_published=1   and  c.is_deleted=0 and c.category_id=1 and c.apporpc != 2
+		and c.id != #{id}
+    </select>
 
 
 	<!-- 写评论插入数据 -->
@@ -266,4 +270,36 @@
 		where c.id=#{id} and  c.is_deleted=0
 	</select>
 
+	<!--根据ID查询文章后台是否配置了相关文章-->
+	<select id="QueryShipByID" resultType="java.util.Map" parameterType="java.util.Map">
+      select
+			 c.title,
+			 c.author_name,
+			 c.id
+			 from cms_content c   inner join (
+			 SELECT  t.related_cms_id ,t.gmt_create from
+			 cms_relationship t
+			 left join cms_content b on b.id=t.main_cms_id
+			 where b.is_published=1   and  b.is_deleted=0 and b.id=#{id}) cc
+			 on c.id = cc.related_cms_id
+			 where c.apporpc != 2
+			 order by cc.gmt_create desc
+			 limit #{startrow},5
+	</select>
+	
+	<select id="QueryShipByIDCount" resultType="int" parameterType="String">
+		select
+			 
+			 count(c.id)
+			 from cms_content c   inner join (
+			 SELECT  t.related_cms_id ,t.gmt_create from
+			 cms_relationship t
+			 left join cms_content b on b.id=t.main_cms_id
+			 where b.is_published=1   and  b.is_deleted=0 and b.id=#{id}) cc
+			 on c.id = cc.related_cms_id
+			 where c.apporpc != 2
+			 
+	</select>
+	
+	
 </mapper>
