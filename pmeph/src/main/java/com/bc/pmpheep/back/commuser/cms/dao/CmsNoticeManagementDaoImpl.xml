@@ -102,7 +102,7 @@ ORDER BY
 			b.is_hot DESC,b.sort_hot,
 		    b.auth_date DESC -->
 
-		    tt.sortByEntryBtnOn desc ,tt.declarationId asc,tt.auth_date DESC , tt.actual_deadline DESC ,tt.deadline desc
+		    tt.sortByEntryBtnOn desc ,tt.declarationId asc,<!-- tt.auth_date DESC , --> tt.actual_deadline DESC ,tt.deadline desc
 		</if>
 		<if test="order == 1">
 			tt.auth_date DESC
