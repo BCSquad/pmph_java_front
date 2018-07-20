@@ -1,6 +1,7 @@
 package com.bc.pmpheep.general.service;
 
 import com.bc.pmpheep.general.dao.MessageDao;
+import com.bc.pmpheep.general.pojo.Content;
 import com.bc.pmpheep.general.pojo.Message;
 import com.bc.pmpheep.service.exception.CheckedExceptionBusiness;
 import com.bc.pmpheep.service.exception.CheckedExceptionResult;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @Author: SuiXinYang
@@ -48,7 +51,17 @@ public class MessageService {
             throw new CheckedServiceException(CheckedExceptionBusiness.MESSAGE,
                     CheckedExceptionResult.NULL_PARAM, "消息获取时ID为空");
         }
-        return messageDao.findOne(id);
+        Message message = messageDao.findOne(id);
+        if(message==null){
+        	message = new Message("", "");
+        }else if(message.getContent()==null){
+        	message.setContent("");
+        }else{
+        	this.replaceIp(message);
+        }
+        
+        
+        return message;
     }
     /**
      * 批量查找Message对象
@@ -57,8 +70,19 @@ public class MessageService {
      * @return 返回Message对象集合
      */
     public List<Message> list(List<String> ids) {
-        return (List<Message>) messageDao.findAll(ids);
+    	List<Message> list = (List<Message>) messageDao.findAll(ids);
+    	for (Message message : list) {
+			this.replaceIp(message);
+		}
+        return list;
     }
+  //去掉如下正则匹配的192.168.100.135/
+  	private void replaceIp(Message message) {
+  		Pattern pa = Pattern.compile("(?<=<img .{0,2000}?src=\")(http://192.168.100.135)(?=/.*?\".*?/>)");
+  		Matcher ma = pa.matcher(message.getContent());
+  		String re = ma.replaceAll("");
+  		message.setContent(re);
+  	}
     /**
      * 更新Message对象
      *

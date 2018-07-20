@@ -189,8 +189,7 @@ $(function () {
     });
 
 
-    //加载上传插件隐藏域
-   refresh();
+    
     
     if ($("#image").val().length>0) {
     	$(".upload-image .fileinfo .preview").show();
@@ -219,12 +218,13 @@ $(function () {
         $(".hidden-upload").remove();
         refresh();
     }
-
+  //加载上传插件隐藏域
+    refresh();
 });
 
 
 function refresh() {
-    $(".upload-image button").uploadFile({
+    $(".upload-image .button").uploadFile({
         accept: "image/*",
         start: function () {
         },

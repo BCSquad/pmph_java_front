@@ -200,7 +200,7 @@ function showup(id,realname) {
 	$("#return_id").val(id);
 	$("#return_realname").val(realname);
 	$("#return_cause").val($("#backReason_"+id).val());
-	$("#return_cause_title").html("<div>认证-"+realname+"</div> 退回原因:");
+	$("#return_cause_title").html("退回原因:");
     $.ajax({
         type: 'post',
         url: contextpath + 'dataaudit/tologin.action',

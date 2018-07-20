@@ -148,7 +148,7 @@ public class WriterUserCommuserServiceImpl implements WriterUserCommuserService 
         Date date=new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy年MM月dd日");
         String createdate  = df.format(date);
-        messageService.sendTeacherMsg(orgId,realName,createdate);
+        messageService.sendTeacherMsg(orgId,realName,createdate,writerUserCertification.getUserId());
 		return writerUserCertification;
 	}
 

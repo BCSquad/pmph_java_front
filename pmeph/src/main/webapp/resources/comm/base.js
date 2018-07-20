@@ -1,7 +1,9 @@
 /**
  * 定义全局变量远程调用地址
  */
-var remoteUrl="120.76.221.250";
+//var remoteUrl="192.168.0.211";
+var remoteUrl="localhost:8088";
+
 //var remoteUrl="localhost:8088"; 
 /**
  * Created by lihuan on 2017/11/24.

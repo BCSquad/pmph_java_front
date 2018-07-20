@@ -121,10 +121,10 @@
                 	<div class="modify" id="uploadFile">修改头像</div>
 					
 					<div class="links">
-						<a href="javascript:;" class="manager"
-							onclick="window.location='${ctx}/admininfocontroller/toadminattest.action'">学校管理员认证</a>
-						<a href="javascript:;" class="password"
-							onclick="window.location='${ctx}/admininfocontroller/tochangepwd.action'">修改密码</a>
+						<div href="javascript:;" class="manager"
+							onclick="window.location='${ctx}/admininfocontroller/toadminattest.action'">学校管理员认证</div>
+						<div href="javascript:;" class="password"
+							onclick="window.location='${ctx}/admininfocontroller/tochangepwd.action'">修改密码</div>
 					</div>
 					<div style="clear: both"></div>
 				</div>
