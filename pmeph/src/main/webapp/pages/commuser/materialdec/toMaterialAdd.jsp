@@ -419,6 +419,7 @@
 				</div>
 				<div class="content">
 					<textarea class="text_cl" maxlength="1000"  name="gr_content" id="gr_content" maxlength="1000">${achievementMap.content}</textarea>
+					<input name="grcj_id" type="hidden" value="${achievementMap.id}">
 				</div>
 			</div>
 			<!--主要学术兼职-->
