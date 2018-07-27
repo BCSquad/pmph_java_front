@@ -297,6 +297,42 @@ ul li {
     overflow: hidden;
 }
 
+.lcjc{
+    height: 100%;
+    margin-left: 125px;
+}
+
+.lcjc-1{
+    background-image: url(../../image/11_03.png);
+    width: 70px;
+    height: 70px;
+    margin-top: 20px;
+}
+
+.lcjc-2{
+    background-image: url(../../image/11_03-02.png);
+    width: 70px;
+    height: 70px;
+    margin-top: 20px;
+}
+
+.lcjc-3{
+    background-image: url(../../image/11_03-03.png);
+    width: 70px;
+    height: 70px;
+    margin-top: 20px;
+}
+
+.lcjc-n{
+    margin-top: 10px;
+    margin-left: -5px;
+}
+
+.lcjc-a{
+    width: 156px;
+    float: left;
+}
+
 .ir_02 span {
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -586,7 +622,37 @@ ul li {
     height: 103px;
     margin-top: 20px;
     margin-right: 15px;
+    margin-left: 30px;
 }
+
+.lcjc-img{
+    background-image: url(../../image/r1.png);
+    margin-left: 35px;
+    margin-top: 15px;
+    width: 25px;
+    height: 100px;
+    float: left;
+}
+
+.lcjc-img-1{
+    background-image: url(../../image/r2.png);
+    margin-left: 35px;
+    margin-top: 15px;
+    width: 27px;
+    height: 100px;
+    float: left;
+}
+
+
+.lcjc-img-2{
+    background-image: url(../../image/r4.png);
+    margin-left: 35px;
+    margin-top: 15px;
+    width: 480px;
+    height: 118px;
+    float: left;
+}
+
 
 .area-3 .photo-size img{
 	width: 100%;
@@ -654,7 +720,6 @@ ul li {
 .notice {
     position: relative;
     top: 20px;
-    margin: 20px 0;
     height: 140px;
     background: #EFEEEC;
 }

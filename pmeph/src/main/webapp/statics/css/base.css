@@ -3,6 +3,7 @@ body {
     padding: 0;
     font-family: "Microsoft Yahei", Tahoma, Verdana !important;
     color: #333333;
+    font-size:14px;
 }
 body image{
     border: none;
@@ -10,6 +11,7 @@ body image{
 input{
      font-family: "Microsoft Yahei", Tahoma, Verdana !important;
      color: #333333;
+    font-size:14px;
  }
 textarea{
     font-family: "Microsoft Yahei", Tahoma, Verdana !important;
