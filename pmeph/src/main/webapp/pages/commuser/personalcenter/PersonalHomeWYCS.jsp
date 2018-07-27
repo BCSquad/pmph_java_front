@@ -116,8 +116,8 @@ request.setAttribute("currentTime",datetime);
                 <c:if test="${selfLog == true}">
                 	<a href="<c:url value="/integral/toPage.action"/>"><span id="jftb"></span><span class="grsx">积分</span></a>
                 </c:if>
-                
-                
+
+				<a href="<c:url value="/personalhomepage/declare.action"/>"><span id=""></span><span class="grsx"></span>临床决策专家申报</a>
                 
                 
                 
