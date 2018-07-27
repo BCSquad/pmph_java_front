@@ -171,7 +171,7 @@ public class ExpertationController extends BaseController{
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping("doMaterialAdd")
+	@RequestMapping("doExpertationAdd")
 	@ResponseBody
 	public Map<String,Object> doMaterialAdd(HttpServletRequest request,
 			HttpServletResponse response){

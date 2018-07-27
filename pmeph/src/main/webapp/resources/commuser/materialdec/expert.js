@@ -909,15 +909,13 @@ function del_tr(trId){
 
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type){
-  //  if(checkEqual("textbook_id") && checkBoxInfo()){
-        $('#sbdw_name').tipso({validator: "isNonEmpty", message: "申报单位不能为空"});
         if(type == '2') { //表示暂存
             //避免重复点击
             document.getElementById('buzc').onclick=function(){window.message.warning("请不要重复点击");};
             document.getElementById('butj').onclick=function(){window.message.warning("请不要重复点击");};
             $.ajax({
                 type: "POST",
-                url:contextpath+'material/doMaterialAdd.action?sjump=1&type='+type,
+                url:contextpath+'expertation/doExpertationAdd.action?sjump=1&type='+type,
                 data:$('#objForm').serialize(),// 您的formid
                 async: false,
                 success: function (json) {
@@ -929,10 +927,10 @@ function buttAdd(type){
             });
         }else {  //表示提交
             checkLb();
-            if (checkEqual("textbook_id") && checkBoxInfo()&& $.fireValidator() ) {
+            if ($.fireValidator() ) {
                 $.ajax({
                     type: "POST",
-                    url: contextpath + 'material/doMaterialAdd.action?sjump=1&type=' + type,
+                    url: contextpath + 'expertation/doExpertationAdd.action?sjump=1&type=' + type,
                     data: $('#objForm').serialize(),// 您的formid
                     async: false,
                     dataType: "json",
@@ -1229,24 +1227,6 @@ function downLoadProxy(fileId){
 }
 
 //定时器自动提交
-function setTimer(){
-
-    window.setInterval(function(){
-        $.ajax({
-            type: "POST",
-            url:contextpath+'material/doMaterialAdd.action?sjump=1&type=2',
-            data:$('#objForm').serialize(),// 您的formid
-            async: false,
-            success: function(json) {
-                $('#declaration_id').val(json.declaration_id);
-                if(json.msg=='OK'){
-                    window.message.success("自动暂存成功！");
-                }
-            }
-        });
-    },300000);
-
-}
 
 //获取当前时间，格式YYYY-MM-DD
 function getNowFormatDate() {
