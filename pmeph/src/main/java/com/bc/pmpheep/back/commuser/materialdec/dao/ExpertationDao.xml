@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.commuser.materialdec.dao.ExpertationDao" >
+	<!-- 专家信息 --> 
+	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
+		select t1.*,t2.org_name dwmc from (select id,material_id,user_id,realname,sex,birthday,REPLACE(birthday,'-','.') as birthday1,experience,org_name,position,title,address,postcode,handphone,email,idtype,
+idcard,telephone,fax,org_id,online_progress,auth_user_id,auth_date,offline_progress,paper_date,is_staging*1 is_staging,is_deleted*1 is_deleted,
+gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,expertise,return_cause from declaration) t1 left join (select id,org_name from org 
+	union select '0' id,'人民卫生出版社' org_name from dual) t2 on t1.org_id = t2.id
+		 where 1= 1 
+		<if test="user_id != null and user_id != ''">
+			and t1.user_id = #{user_id} 
+		</if>
+		<if test="material_id != null and material_id != ''">
+			and t1.material_id = #{material_id}
+		</if>
+		<if test="declaration_id != null and declaration_id != ''">
+			and t1.id = #{declaration_id}
+		</if>
+		<if test="realname != null and realname != ''">
+			and t1.realname = #{realname}
+		</if>
+	</select>
+	<insert id="insertPerson" parameterType="java.util.Map">
+		insert into expertation(product_id,expert_type,user_id,realname,sex,birthday,experience,org_name,position,expertise,is_dispensed,is_utec,degree,
+		title,address,postcode,handphone,email,idtype,idcard,telephone,fax,gmt_create,is_staging,online_progress,commit_date,sub_classification
+		,cont_classification,remark
+		) values(#{product_id},#{expert_type},#{user_id},#{realname},#{sex},#{birthday},#{experience},#{org_name},#{position},#{expertise},#{is_dispensed},#{is_utec},#{degree},
+		#{title},#{address},#{postcode},#{handphone},#{email},#{idtype},#{idcard},#{telephone},#{fax},#{gmt_create},
+		#{is_staging},#{online_progress},#{commit_date},#{sub_classification},#{cont_classification},#{remark})
+	</insert>
+	<update id="updatePerson" parameterType="java.util.Map">
+		update expertation set realname = #{realname},sex = #{sex},birthday = #{birthday},experience = #{experience},expertise = #{expertise},
+		org_name = #{org_name},position = #{position},title = #{title},address = #{address},idcard=#{idcard},is_dispensed=#{is_dispensed},is_utec=#{is_utec},degree=#{degree},
+		postcode = #{postcode},handphone = #{handphone},email = #{email},idtype = #{idtype},is_staging = #{is_staging},telephone = #{telephone},fax = #{fax},
+		gmt_update = #{gmt_update},online_progress = #{online_progress},sub_classification = #{sub_classification}
+		<if test="commit_date != null and commit_date != ''">
+			,commit_date=#{commit_date}
+		</if>
+		,cont_classification = #{cont_classification},remark=#{remark}
+		 where id = #{expertation_id}
+	</update>
+
+    <!-- 查询学科分类列表 -->
+    <select id="querySubjectList" parameterType="PageParameter" resultType="java.util.Map">
+        select * from product_subject_type t
+        <if test="parameter.type_name != null and parameter.type_name != ''">
+            where t.type_name like #{parameter.type_name}
+        </if>
+        order by parent_id asc limit #{start},#{pageSize}
+    </select>
+    <!-- 学科分类总数 -->
+    <select id="querySubjectCount" parameterType="PageParameter" resultType="int">
+        select count(*) from product_subject_type t
+        <if test="parameter.type_name != null and parameter.type_name != ''">
+            where t.type_name like #{parameter.type_name}
+        </if>
+    </select>
+
+    <!-- 查询内容分类列表 -->
+    <select id="queryContentList" parameterType="PageParameter" resultType="java.util.Map">
+        select * from product_content_type_detail t
+        <if test="parameter.name_path != null and parameter.name_path != ''">
+            where t.name_path like #{parameter.name_path}
+        </if>
+        order by t.id asc limit #{start},#{pageSize}
+    </select>
+    <!-- 内容分类总数 -->
+    <select id="queryContentCount" parameterType="PageParameter" resultType="int">
+        select count(*) from product_content_type_detail t
+        <if test="parameter.name_path != null and parameter.name_path != ''">
+            where t.name_path like #{parameter.name_path}
+        </if>
+    </select>
+</mapper>
