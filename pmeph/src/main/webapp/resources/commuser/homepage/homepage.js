@@ -233,6 +233,11 @@ function tosurvey() {
 	location.href = contextpath + 'survey/surveyList.action';
 }
 
+function on(){
+    location.href = contextpath + 'homepage/todeclaredetail.action';
+}
+
+
 // 跳转公告详情页面
 // function todou(mid,material_id,id) {
     // location.href = contextpath +'cmsnotice/noticeMessageDetail.action?id='+mid+'&materialId='+material_id+'&csmId='+id+'&'+'&tag=FromCommunityList';

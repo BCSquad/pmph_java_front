@@ -779,4 +779,11 @@ public class PersonalCenterController extends BaseController {
 		return map1;
 	}
 
+	@RequestMapping(value="/declare")
+	public ModelAndView topz(){
+		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.setViewName("commuser/personalcenter/declare");
+		return modelAndView;
+	}
+
 }
