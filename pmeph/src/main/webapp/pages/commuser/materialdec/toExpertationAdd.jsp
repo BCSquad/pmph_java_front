@@ -1252,11 +1252,10 @@
                 <div>
                     <span id="tsxz_span8"></span>
                     <span class="tsxz_title">学科分类(可多选)</span>
+					<span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.id}')">添加学科分类</span>
                 </div>
-                <div class="sbdw">
+                <div class="sbdw" id="xkfladd">
                     <span class="btmc">学科分类：</span>
-                    <input class="cg_input" id="sbdw_name" name="sbdw_name" value="" style="width: 1000px;" onclick="javascript:SubjectdAdd('${materialMap.id}')" readonly="readonly"/>
-                    <input type="hidden" id="sbdw_id" name="sbdw_id" value="" style="width: 300px;"/>
                 </div>
             </div>
             <!-- 内容分类-->
@@ -1264,11 +1263,10 @@
                 <div>
                     <span id="tsxz_span8"></span>
                     <span class="tsxz_title">内容分类(可多选)</span>
+					<span class="el-button" onclick="javascript:ContentAdd('${materialMap.id}')">添加内容分类</span>
                 </div>
-                <div class="sbdw">
+                <div class="sbdw" id="nrfladd">
                     <span class="btmc">内容分类：</span>
-                    <input class="cg_input" id="sbdw_name" name="sbdw_name" value="" style="width: 1000px;" onclick="javascript:ContentAdd('${materialMap.id}')" readonly="readonly"/>
-                    <input type="hidden" id="sbdw_id" name="sbdw_id" value="" style="width: 300px;"/>
                 </div>
             </div>
 			<hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">

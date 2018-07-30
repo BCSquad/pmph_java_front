@@ -8,7 +8,6 @@ import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.utils.UUIDTool;
-import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -70,19 +69,19 @@ public class ExpertationServiceImpl implements ExpertationService {
         String user_id = perMap.get("user_id").toString();
         //2.职位新增
         if (perMap.get("type").equals("1")) { //提交
-            if (perMap.get("org_id").equals("0")) {
+           /* if (perMap.get("org_id").equals("0")) {
                 messageService.sendNewMsgWriterToPublisher(MapUtils.getLong(perMap, "material_id"), MapUtils.getString(perMap, "realname"), MapUtils.getString(perMap, "materialName"),user_id);
             } else {
                 messageService.sendNewMsgWriterToOrg(MapUtils.getLong(perMap, "org_id"), MapUtils.getString(perMap, "realname"), MapUtils.getString(perMap, "materialName"),user_id);
-            }
+            }*/
             //若申报材料提交 则根据填写的专家信息对应更新个人资料，
             //若申报单位在未进行教师认证之前需要更新个人的所属机构（选择人卫出版社不能更新个人所属机构）
-            if (perMap.get("org_id").equals("0") || perMap.get("is_teacher").toString().equals("true")) { //表示人卫出版社或者已经进行教师认证  则不更新个人所属机构
+           /* if (perMap.get("org_id").equals("0") || perMap.get("is_teacher").toString().equals("true")) { //表示人卫出版社或者已经进行教师认证  则不更新个人所属机构
                 perMap.put("org_id", null);
             }
             if (!perMap.get("idtype").equals("0")) { //证件类型不为身份证
                 perMap.put("idcard", "");
-            }
+            }*/
             this.madd.updateWriter(perMap);
         }
         //3.作家学习经历新增
@@ -404,7 +403,7 @@ public class ExpertationServiceImpl implements ExpertationService {
         //获取userid
         String user_id = perMap.get("user_id").toString();
         if (perMap.get("type").equals("1")) { //提交
-            if (perMap.get("org_id").equals("0")) {
+            /*if (perMap.get("org_id").equals("0")) {
                 messageService.sendNewMsgWriterToPublisher(MapUtils.getLong(perMap, "material_id"), MapUtils.getString(perMap, "realname"), MapUtils.getString(perMap, "materialName"),user_id);
             } else {
                 messageService.sendNewMsgWriterToOrg(MapUtils.getLong(perMap, "org_id"), MapUtils.getString(perMap, "realname"), MapUtils.getString(perMap, "materialName"),user_id);
@@ -416,15 +415,13 @@ public class ExpertationServiceImpl implements ExpertationService {
             }
             if(!perMap.get("idtype").equals("0")){ //证件类型不为身份证
                 perMap.put("idcard",null);
-            }
+            }*/
             this.madd.updateWriter(perMap);
 
         }
         //删除暂存内容
         Map<String, Object> glMap = new HashMap<String, Object>();
         glMap.put("declaration_id", declaration_id);
-        this.madd.DelTsxz(glMap); //图书申报
-        this.madd.DelTssbZc(glMap); //图书申报职位暂存
         this.madd.DelStu(glMap);    //学习经历
         this.madd.DelWork(glMap);   //工作经历
         this.madd.DelStea(glMap);   //教学经历

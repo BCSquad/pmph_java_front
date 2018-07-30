@@ -1272,3 +1272,19 @@ function radioInfo(){
     }
     return true;
 }
+
+//删除
+function del(id){
+    $('#'+id).remove();
+}
+
+//添加学科分类span标签元素
+function addSubject(str){
+    var box = document.getElementById("xkfladd");
+    box.innerHTML = box.innerHTML+str;
+}
+//添加内容分类span标签元素
+function addContent(str){
+    var box = document.getElementById("nrfladd");
+    box.innerHTML = box.innerHTML+str;
+}

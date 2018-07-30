@@ -41,7 +41,7 @@
 				<tbody>
 					<c:forEach var="list" items="${pageResult.rows}">
 						<tr>
-							<td style="height: 30px;border: 1px solid #dedede;"><input type="radio" name="radio_id" value="${list.id}"/>
+							<td style="height: 30px;border: 1px solid #dedede;"><input type="checkbox" name="radio_id" value="${list.id}_${list.type_name}"/>
 								${list.type_name}</td>
 						</tr>
 					</c:forEach>
@@ -107,15 +107,14 @@ function query(){
 
 //确认选择
 function selectAdd(){
-	//获取radio值
+	//获取checkbox值
 	var strs= new Array(); //定义一数组 
-	var chkObjs =document.getElementsByName("radio_id"); 
+	var chkObjs =document.getElementsByName("radio_id");
 	 for(var i=0;i<chkObjs.length;i++){
          if(chkObjs[i].checked){
              strs = chkObjs[i].value.split("_");
-             parent.$("#sbdw_name").val(strs[1]);
-             parent.$("#sbdw_id").val(strs[0]);
-             break;
+             var str = '<span class="el-tag" id="xkfl_'+strs[0]+'">'+strs[1]+'<input name="subjectId" type="hidden" value="'+strs[0]+'"/><span style="margin-left: 8px;cursor: pointer;" onclick="del(\'xkfl_'+strs[0]+'\')">X</span></span>';
+             window.parent.addSubject(str);  //调用父页面方法
          }
      }
 	 //--关闭 当前页面 开始--

@@ -283,6 +283,9 @@ public class ExpertationController extends BaseController{
 		perMap.put("sub_classification ", request.getParameter("sub_classification"));
 		perMap.put("cont_classification ", request.getParameter("cont_classification"));
 		perMap.put("remark", request.getParameter("remark"));
+		//获取学科及内容分类id
+		String subjectIds[] = request.getParameterValues("subjectId");
+		String contentIds[] = request.getParameterValues("contentId");
 
 		//主要学习经历
 		String xx_kssj[] = request.getParameterValues("xx_kssj");

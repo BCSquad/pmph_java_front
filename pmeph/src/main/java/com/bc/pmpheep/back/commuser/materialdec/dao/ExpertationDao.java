@@ -30,4 +30,16 @@ public interface ExpertationDao {
 	 */
 	public List<Map<String,Object>> queryContentList(PageParameter<Map<String, Object>> pageParameter);
 	public int queryContentCount(PageParameter<Map<String, Object>> pageParameter);
+
+	/**
+	 * 学科分类关联表
+	 */
+	public int insertSubject(Map<String,Object> map);
+	public int delSubject(String experation_id);
+
+	/**
+	 * 内容分类关联表
+	 */
+	public int insertContent(Map<String,Object> map);
+	public int delContent(String experation_id);
 }
