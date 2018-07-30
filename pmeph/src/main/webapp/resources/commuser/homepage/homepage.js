@@ -233,7 +233,7 @@ function tosurvey() {
 	location.href = contextpath + 'survey/surveyList.action';
 }
 
-function on(){
+function todeclaredetail(){
     location.href = contextpath + 'homepage/todeclaredetail.action';
 }
 
