@@ -40,14 +40,49 @@
                      <th>操作</th>
                  </tr>
                  <tbody id="zebra-table">
+                 <c:forEach var="list" items="${list}" varStatus="status">
                      <tr>
-                         <th>1</th>
-                         <th>人卫临床助手专家申报</th>
-                         <th>某些传染病和寄生虫病/立克次病体</th>
-                         <th>2018/7/12</th>
-                         <th>已提交</th>
-                         <th style="color: #33CAA9">查看</th>
+                         <th>${status.index+1}</th>
+                         <c:if test="${list.expert_type==1}">
+                             <th>人卫临床助手</th>
+                         </c:if>
+                         <c:if test="${list.expert_type==2}">
+                             <th>人卫用药助手</th>
+                         </c:if>
+                         <c:if test="${list.expert_type==3}">
+                             <th>人卫中医助手</th>
+                         </c:if>
+                         <th>
+                             <c:forEach var="name" items="${list.names}" varStatus="name_status">
+                                 <div>${name_status.index+1})${name}</div>
+                             </c:forEach>
+                         </th>
+                         <th>${list.gmt_create_new}</th>
+                         <c:if test="${list.online_progress==0}">
+                             <th>暂存</th>
+                         </c:if>
+                         <c:if test="${list.online_progress==1}">
+                             <th>待审核</th>
+                         </c:if>
+                         <c:if test="${list.online_progress==2}">
+                             <th>被退回</th>
+                         </c:if>
+                         <c:if test="${list.online_progress==3}">
+                             <th>已通过</th>
+                         </c:if>
+                         <c:if test="${list.online_progress==1}">
+                             <th style="color: #33CAA9;cursor: pointer" onclick="todetail(1,${list.id})">查看</th>
+                         </c:if>
+                         <c:if test="${list.online_progress==2}">
+                             <th style="color: #33CAA9;cursor: pointer" onclick="todetail(2,${list.id})">查看</th>
+                         </c:if>
+                         <c:if test="${list.online_progress==3}">
+                             <th style="color: #33CAA9;cursor: pointer" onclick="todetail(3,${list.id})">查看</th>
+                         </c:if>
+
                      </tr>
+                 </c:forEach>
+
                  </tbody>
              </table>
          </div>
@@ -58,6 +93,11 @@
     <%--<jsp:param name="linked" value="linked"></jsp:param>--%>
 <%--</jsp:include>--%>
 </body>
+<script>
+    function todetail(material_id,declaration_id) {
+        location.href = contextpath + 'expertation/showExpertation.action?material_id='+material_id+'&&declaration_id='+declaration_id;
+    }
+</script>
 <style>
     #zebra-table tr th{
         background-color: white;
