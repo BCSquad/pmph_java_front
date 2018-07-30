@@ -16,13 +16,13 @@
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.jqprint-0.3.js?t=${_timestamp}"></script>
 	<script src="http://www.jq22.com/jquery/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
-<script type="text/javascript" src="${ctx}/resources/commuser/materialdec/materialdetail.js?t=${_timestamp}"></script>
+<script type="text/javascript" src="${ctx}/resources/commuser/materialdec/showExpertation.js?t=${_timestamp}"></script>
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="body">
 	<div class="content-wrapper">
-
+		<<input type="hidden" name="material_id" id="material_id" value="${material.id}">
 		<div class="sbxq_title">
 			<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=jcsb&pageNum=1&pageSize=10"> 教材申报 </a> > ${material.material_name}</span>
 		</div>
@@ -655,19 +655,28 @@
                 </div>
 			</div>
 		</c:forEach>
-		<!-- 申报单位-->
-		<div class="sbxq_item1">
-			<div>
-				<span id="tsxz_span8"></span>
-				<span class="tsxz_title">请选择您的申报单位</span>
-			</div>
-			<div class="sbdw">
-				<span>申报单位：</span>
-				<span>${gezlList.dwmc}</span>
-			</div>
-		</div>
+        <!-- 学科分类-->
+        <div class="sbxq_item1">
+            <div>
+                <span id="tsxz_span8"></span>
+                <span class="tsxz_title">学科分类(可多选)</span>
+            </div>
+            <div class="sbdw">
+                <span class="btmc">学科分类：</span>
+            </div>
+        </div>
+        <!-- 内容分类-->
+        <div class="sbxq_item1">
+            <div>
+                <span id="tsxz_span8"></span>
+                <span class="tsxz_title">内容分类(可多选)</span>
+            </div>
+            <div class="sbdw">
+                <span class="btmc">内容分类：</span>
+            </div>
+        </div>
 
-			<!-- 院校推荐意见-->
+        <!-- 院校推荐意见-->
 		<div class="yijian">
 			<div class="tujian01">院校推荐意见:</div>
 			<div class="tujian02">
