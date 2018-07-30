@@ -185,15 +185,15 @@
             <div class="lcjc-img"></div>
             <div class="lcjc">
                 <div class="lcjc-a">
-                    <div class="lcjc-1" onclick="on()"></div>
+                    <div class="lcjc-1" onclick="todeclaredetail(1)"></div>
                     <div class="lcjc-n">人卫临床助手</div>
                 </div>
                 <div class="lcjc-a">
-                    <div class="lcjc-2"></div>
+                    <div class="lcjc-2" onclick="todeclaredetail(2)"></div>
                     <div class="lcjc-n">人卫用药助手</div>
                 </div>
                 <div class="lcjc-a">
-                    <div class="lcjc-3"></div>
+                    <div class="lcjc-3" onclick="todeclaredetail(3)"></div>
                     <div class="lcjc-n">人卫中医助手</div>
                 </div>
             </div>
