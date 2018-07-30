@@ -341,8 +341,10 @@ public class HomeController extends BaseController{
 
     //跳转到三个产品详情界面
     @RequestMapping("todeclaredetail")
-    public ModelAndView todeclaredetail(){
+    public ModelAndView todeclaredetail(HttpServletRequest request){
         ModelAndView modelAndView=new ModelAndView();
+        String state=request.getParameter("state");
+        modelAndView.addObject("state",state);
         modelAndView.setViewName("commuser/cms/declaredatail");
         return modelAndView;
     }

@@ -26,7 +26,26 @@
     <jsp:param value="homepage" name="pageTitle"/>
 </jsp:include>
 <div class="content-wrapper">
-
+    <div style="margin-top: 15px">首页>临床决策专家申报</div>
+    <div class="name">人卫临床助手专家申报报名须知</div>
+    <div class="join" onclick="tojoin(${state})">报名参加</div>
 </div>
 </body>
+<style>
+    .name{
+        margin-top: 50px;
+        width: 100%;
+        text-align: center;
+        font-size: 20px;
+    }
+
+    .join{
+        margin-left: 45%;
+    }
+</style>
+<script>
+    function tojoin(material_id) {
+        location.href = contextpath + 'expertation/toExpertationAdd.action?material_id='+material_id;
+    }
+</script>
 </html>
