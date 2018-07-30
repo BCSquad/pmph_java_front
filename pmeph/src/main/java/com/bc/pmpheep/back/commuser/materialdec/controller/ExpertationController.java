@@ -1218,4 +1218,22 @@ public class ExpertationController extends BaseController{
 		mav.addObject("paraMap", paraMap);
 		return mav;
 	}
+
+    //跳转到个人申报列表页面
+	@RequestMapping(value="/declare")
+	public ModelAndView topz(){
+		ModelAndView modelAndView=new ModelAndView();
+		Map<String, Object> user=getUserInfo();
+//		String UserId= null;
+//		if (user!=null && user.get("id")!=null && !"".equals(user.get("id"))) {
+//			UserId = user.get("id").toString();
+//		}
+		String UserId="10055";
+		List<Map<String,Object>> list=etService.queryExpertation(UserId);
+		modelAndView.addObject("list",list);
+		//modelAndView.addObject("")
+		modelAndView.setViewName("commuser/personalcenter/declare");
+		return modelAndView;
+	}
+
 }

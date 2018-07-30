@@ -1,6 +1,7 @@
 package com.bc.pmpheep.back.commuser.materialdec.dao;
 
 import com.bc.pmpheep.back.plugin.PageParameter;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -30,4 +31,12 @@ public interface ExpertationDao {
 	 */
 	public List<Map<String,Object>> queryContentList(PageParameter<Map<String, Object>> pageParameter);
 	public int queryContentCount(PageParameter<Map<String, Object>> pageParameter);
+
+	/**
+	 * 根据作家艾迪查询申报（首页三大新产品申报）
+	 * @param user_id
+	 * @return
+	 */
+	List<Map<String,Object>> queryExpertation(@Param("user_id") String user_id);
+
 }

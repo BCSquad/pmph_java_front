@@ -34,4 +34,11 @@ public interface ExpertationService {
      * 内容分类
      */
     PageResult<Map<String, Object>> selectContentList(PageParameter<Map<String, Object>> pageParameter);
+
+	/**
+	 * 根据作家艾迪查询申报（首页三大新产品申报）
+	 * @param user_id
+	 * @return
+	 */
+	List<Map<String,Object>> queryExpertation(String user_id);
 }
