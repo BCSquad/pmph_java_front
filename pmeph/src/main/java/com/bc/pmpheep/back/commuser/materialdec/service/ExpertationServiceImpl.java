@@ -754,4 +754,15 @@ public class ExpertationServiceImpl implements ExpertationService {
         pageResult.setTotal(count);
         return pageResult;
     }
+
+    @Override
+    public List<Map<String, Object>> queryExpertation(String user_id) {
+        List<Map<String, Object>> list=exdao.queryExpertation(user_id);
+        for (Map<String, Object> map: list) {
+            String namePath=map.get("name_path").toString();
+            String[] names = namePath.split("_,_");
+            map.put("names",names);
+        }
+        return list;
+    }
 }

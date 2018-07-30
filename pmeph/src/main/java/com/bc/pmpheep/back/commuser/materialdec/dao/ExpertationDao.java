@@ -32,6 +32,14 @@ public interface ExpertationDao {
 	public int queryContentCount(PageParameter<Map<String, Object>> pageParameter);
 
 	/**
+	 * 根据作家艾迪查询申报（首页三大新产品申报）
+	 * @param user_id
+	 * @return
+	 */
+	List<Map<String,Object>> queryExpertation(@Param("user_id") String user_id);
+
+
+	/**
 	 * 学科分类关联表
 	 */
 	public int insertSubject(Map<String,Object> map);

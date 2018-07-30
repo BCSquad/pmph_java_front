@@ -338,4 +338,12 @@ public class HomeController extends BaseController{
         map.put("pagesize", pagesize);
         return new ModelAndView("commuser/homepage/hotbookcomments",map);
     }
+
+    //跳转到三个产品详情界面
+    @RequestMapping("todeclaredetail")
+    public ModelAndView todeclaredetail(){
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("commuser/cms/declaredatail");
+        return modelAndView;
+    }
 }
