@@ -233,8 +233,8 @@ function tosurvey() {
 	location.href = contextpath + 'survey/surveyList.action';
 }
 
-function todeclaredetail(){
-    location.href = contextpath + 'homepage/todeclaredetail.action';
+function todeclaredetail(state){
+    location.href = contextpath + 'homepage/todeclaredetail.action?state='+state;
 }
 
 
