@@ -178,6 +178,7 @@ public class ExpertationController extends BaseController{
 		//公共参数
 		Map<String,Object> userMap =  this.getUserInfo();
 		String material_id = request.getParameter("material_id");
+		String expert_type = "1"; //申报类型
 		String expertation_id = request.getParameter("expertation_id");
 		String user_id = request.getParameter("user_id"); //系统用户(暂存人)
 		String type = request.getParameter("type"); //类型
@@ -253,6 +254,7 @@ public class ExpertationController extends BaseController{
 		perMap.put("type", type);
 		perMap.put("is_teacher", userMap.get("is_teacher"));
 		perMap.put("material_id", material_id);
+		perMap.put("expert_type", expert_type);
 		String sex = request.getParameter("sex");
 		if(sex == null || sex.length() <= 0){
 			sex = "1";
@@ -645,9 +647,9 @@ public class ExpertationController extends BaseController{
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("showMaterial")
+	@RequestMapping("showExpertation")
 	public ModelAndView showMaterial(HttpServletRequest request){
-		ModelAndView mav = new ModelAndView("commuser/materialdec/showMaterial");
+		ModelAndView mav = new ModelAndView("commuser/materialdec/showExpertation");
 		//传参  user_id  material_id
 		//	String user_id = request.getParameter("user_id");
 		String material_id = request.getParameter("material_id");
@@ -659,7 +661,7 @@ public class ExpertationController extends BaseController{
 
 		//1.作家申报表
 		List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
-		gezlList = this.mdService.queryPerson(queryMap);
+		gezlList = this.etService.queryPerson(queryMap);
 		Boolean isSelfLog = false;
 		if (logUser.get("id").toString().equals(gezlList.get(0).get("user_id").toString())) {
 			isSelfLog = true;
@@ -677,48 +679,7 @@ public class ExpertationController extends BaseController{
 		//教材信息
 		Map<String,Object> materialMap = new HashMap<String,Object>();
 		materialMap = this.mdService.queryMaterialbyId(material_id);
-		//2.作家申报职位暂存
-		List<Map<String,Object>> tssbList = new ArrayList<Map<String,Object>>();
-	//	if(gezlList.get(0).get("online_progress").toString().equals("0")){ //表示未提交
-	//		tssbList=this.mdService.queryTssbZc(queryMap);
-	//	}else{//退回，通过，提交 都在正式申请表
-			tssbList=this.mdService.queryTsxz(queryMap);
-	//	}
-		if(tssbList.size()>0){
-			for (Map<String, Object> map : tssbList) {
-				if(map.get("preset_position").equals(3)){//
-					map.put("preset_position", "副主编,编委");
-				}else if(map.get("preset_position").equals(1)){
-					map.put("preset_position", "编委");
-				}else if(map.get("preset_position").equals(2)){
-					map.put("preset_position", "副主编");
-				}else if(map.get("preset_position").equals(4)){
-					map.put("preset_position", "主编");
-				}else if(map.get("preset_position").equals(8)){
-					map.put("preset_position", "数字编委");
-				}else if(map.get("preset_position").equals(5)){
-					map.put("preset_position", "主编,编委");
-				}else if(map.get("preset_position").equals(6)){
-					map.put("preset_position", "主编,副主编");
-				}else if(map.get("preset_position").equals(9)){
-					map.put("preset_position", "数字编委,编委");
-				}else if(map.get("preset_position").equals(10)){
-					map.put("preset_position", "副主编,数字编委");
-				}else if(map.get("preset_position").equals(12)){
-					map.put("preset_position", "主编,数字编委");
-				}else if(map.get("preset_position").equals(7)){
-					map.put("preset_position", "主编,副主编,编委");
-				}else if(map.get("preset_position").equals(11)){
-					map.put("preset_position", "副主编,编委,数字编委");
-				}else if(map.get("preset_position").equals(13)){
-					map.put("preset_position", "主编,编委,数字编委");
-				}else if(map.get("preset_position").equals(14)){
-					map.put("preset_position", "主编,副主编,数字编委");
-				}else if(map.get("preset_position").equals(15)){
-					map.put("preset_position", "主编,副主编,编委,数字编委");
-				}
-			}
-		}
+
 		//3.作家学习经历表
 		List<Map<String,Object>> stuList = new ArrayList<Map<String,Object>>();
 		stuList=this.mdService.queryStu(queryMap);
@@ -781,7 +742,6 @@ public class ExpertationController extends BaseController{
 		//填充
 		mav.addObject("material", materialMap);
 		mav.addObject("gezlList", gezlList.get(0));
-		mav.addObject("tssbList", tssbList);
 		mav.addObject("stuList", stuList);
 		mav.addObject("workList", workList);
 		mav.addObject("steaList", steaList);

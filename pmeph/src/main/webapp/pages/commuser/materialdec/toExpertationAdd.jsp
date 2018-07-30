@@ -1274,8 +1274,8 @@
 			<hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">
 			<div class="button">
 				<div class="div_butt">
-					<div class="bt_tj" id="butj" onclick="javascript:buttAdd('1')">提交</div>
-					<div class="bt_tj" id="buzc" onclick="javascript:buttAdd('2')">暂存</div>
+					<div class="bt_tj" id="butj" onclick="javascript:buttAdd('1')">保存</div>
+					<div class="bt_tj" id="buzc" onclick="javascript:buttAdd('2')">取消</div>
 					<%--<div class="bt_tj" onclick="javascript:buttGive()">放弃</div>--%>
 				</div>
 				<div style="color: red;font-size: 16px;margin-top: 15px;">（提示：如暂存或提交不成功请使用360浏览器极速模式或谷歌浏览器）</div>

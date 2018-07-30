@@ -34,6 +34,12 @@ public class ExpertationServiceImpl implements ExpertationService {
     private PersonalService personalService;
 
     public UUIDTool utool = new UUIDTool();
+
+    @Override
+    public List<Map<String, Object>> queryPerson(Map<String, Object> map) {
+        return this.exdao.queryPerson(map);
+    }
+
     @Override
     public Map<String,Object> insertJcsbxx(Map<String, Object> perMap,
                                List<Map<String, Object>> stuList,
@@ -56,9 +62,9 @@ public class ExpertationServiceImpl implements ExpertationService {
                                Map<String, Object> digitalMap,
                                Map<String, Object> intentionlMap) {
         //1.新增申报表
-        this.madd.insertPerson(perMap);
+        this.exdao.insertPerson(perMap);
         //查询上面新增的申报表ID
-        List<Map<String, Object>> perList = this.madd.queryPerson(perMap);
+        List<Map<String, Object>> perList = this.exdao.queryPerson(perMap);
         Object declaration_id = perList.get(0).get("id");
         //获取userid
         String user_id = perMap.get("user_id").toString();

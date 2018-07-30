@@ -16,7 +16,7 @@ $(function () {
         checkExtra();
     },0)
 
-    setTimer();
+   // setTimer();
     var id = $("#material_id").val();
   //  upload("1"); //附件上传
     queryMaterialMap(id);  //执行查询方法

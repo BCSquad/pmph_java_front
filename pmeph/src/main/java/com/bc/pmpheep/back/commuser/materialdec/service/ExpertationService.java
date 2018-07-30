@@ -10,6 +10,13 @@ public interface ExpertationService {
 
 
 	/**
+	 * 查询专家信息
+	 * @param map
+	 * @return
+	 */
+	public List<Map<String,Object>> queryPerson(Map<String,Object> map);
+
+	/**
 	 * 新增 专家申报信息
 	 */
 	public Map<String,Object> insertJcsbxx(Map<String, Object> perMap, List<Map<String, Object>> stuList, List<Map<String, Object>> workList,
