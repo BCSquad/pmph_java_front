@@ -30,13 +30,17 @@ $(function () {
     queryMaterialMap(id);  //执行查询方法
     //图书选择
     var sjxz =document.getElementsByName("sjxz");
-    for (var i = 0, j = sjxz.length; i < j; i++){
-        upload(i+1); //附件上传
-        $('#'+sjxz[i].value).selectlist({
-            width: 200,
-            height: 30,
-            optionHeight: 30
-        });
+    if(sjxz.length == 0){
+        upload(1);
+    } else{
+        for (var i = 0, j = sjxz.length; i < j; i++){
+            upload(i+1); //附件上传
+            $('#'+sjxz[i].value).selectlist({
+                width: 200,
+                height: 30,
+                optionHeight: 30
+            });
+        }
     }
     $('#pmph_rank').selectlist({
         zIndex: 10,

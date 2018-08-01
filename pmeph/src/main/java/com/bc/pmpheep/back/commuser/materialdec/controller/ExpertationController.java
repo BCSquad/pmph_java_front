@@ -4,7 +4,6 @@ import com.bc.pmpheep.back.authadmin.message.service.SendMessageServiceImpl;
 import com.bc.pmpheep.back.commuser.materialdec.service.ExpertationService;
 import com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailService;
 import com.bc.pmpheep.back.commuser.materialdec.service.PersonInfoService;
-import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
 import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
@@ -286,6 +285,22 @@ public class ExpertationController extends BaseController{
 		//获取学科及内容分类id
 		String subjectIds[] = request.getParameterValues("subjectId");
 		String contentIds[] = request.getParameterValues("contentId");
+		List<Map<String,Object>> subjectList = new ArrayList<Map<String,Object>>();
+		List<Map<String,Object>> contentList = new ArrayList<Map<String,Object>>();
+		if(subjectIds.length>0){
+			for(int i=0;i<subjectIds.length;i++) { //遍历数组
+				Map<String,Object> subjectMap = new HashMap<String,Object>();
+				subjectMap.put("subjectId", subjectIds[i]);
+				subjectList.add(subjectMap);
+			}
+		}
+		if(contentIds.length>0){
+			for(int i=0;i<contentIds.length;i++) { //遍历数组
+				Map<String,Object> contentMap = new HashMap<String,Object>();
+				contentMap.put("contentId", contentIds[i]);
+				contentList.add(contentMap);
+			}
+		}
 
 		//主要学习经历
 		String xx_kssj[] = request.getParameterValues("xx_kssj");
@@ -627,18 +642,18 @@ public class ExpertationController extends BaseController{
 		intentionlMap.put("content", intention_content);
         Map<String,Object> returnMap =  new HashMap<String,Object>();
 		if(expertation_id == null || expertation_id.length() <= 0){//表示新增
-            returnMap = this.etService.insertJcsbxx(perMap, stuList, workList, steaList, zjxsList, jcbjList, gjkcjsList, gjghjcList, jcbxList, zjkyList, zjkzqkList, achievementMap, monographList, publishList, sciList, clinicalList, acadeList, pmphList, digitalMap, intentionlMap);
+            returnMap = this.etService.insertJcsbxx(perMap, stuList, workList, steaList, zjxsList, jcbjList, gjkcjsList, gjghjcList, jcbxList, zjkyList, zjkzqkList, achievementMap, monographList, publishList, sciList, clinicalList, acadeList, pmphList, digitalMap, intentionlMap,subjectList,contentList);
 		}else{
-            returnMap=this.etService.updateJcsbxx(perMap, stuList, workList, expertation_id, steaList, zjxsList, jcbjList, gjkcjsList, gjghjcList, jcbxList, zjkyList, zjkzqkList, achievementMap, monographList, publishList, sciList, clinicalList, acadeList, pmphList, digitalMap, intentionlMap);
+            returnMap=this.etService.updateJcsbxx(perMap, stuList, workList, expertation_id, steaList, zjxsList, jcbjList, gjkcjsList, gjghjcList, jcbxList, zjkyList, zjkzqkList, achievementMap, monographList, publishList, sciList, clinicalList, acadeList, pmphList, digitalMap, intentionlMap,subjectList,contentList);
 		}
 		
-		if(type.equals("1")){ //提交
+		/*if(type.equals("1")){ //提交
 			//TODO 教材申报提交 生成动态
 			//Map<String, Object> materialMap = this.mdService.queryMaterialbyId(material_id);
 			WriterUserTrendst wut = new WriterUserTrendst(userMap.get("id").toString(), 8, material_id);
 			wut.setDetail("提交教材申报", "您申报的《"+materialMap.get("material_name").toString()+"》申报表已提交,请耐心等待 \\\""+returnMap.get("org_name").toString()+"\\\" 审核。", 0);
 			personalService.saveUserTrendst(wut);//教材申报提交 生成动态 被覆盖两次了
-		}
+		}*/
 		
 
 		return returnMap;
@@ -1191,8 +1206,8 @@ public class ExpertationController extends BaseController{
 //		if (user!=null && user.get("id")!=null && !"".equals(user.get("id"))) {
 //			UserId = user.get("id").toString();
 //		}
-		String UserId="10055";
-		List<Map<String,Object>> list=etService.queryExpertation(UserId);
+	//	String UserId="10055";
+		List<Map<String,Object>> list=etService.queryExpertation(user.get("id").toString());
 		modelAndView.addObject("list",list);
 		//modelAndView.addObject("")
 		modelAndView.setViewName("commuser/personalcenter/declare");

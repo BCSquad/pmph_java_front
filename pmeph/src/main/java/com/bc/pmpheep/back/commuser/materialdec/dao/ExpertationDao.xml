@@ -74,7 +74,7 @@
 
     <!--学科分类关联表-->
     <update id="insertSubject" parameterType="java.util.Map">
-        insert into expertation_subject_type(expertation_id,product_subject_type_id) VALUES(#{expertation_id},#{product_subject_type_id})
+        insert into expertation_subject_type(expertation_id,product_subject_type_id) VALUES(#{expertation_id},#{subjectId})
     </update>
     <delete id="delSubject" parameterType="java.lang.String">
         delete from expertation_subject_type where expertation_id = #{expertation_id}
@@ -82,7 +82,7 @@
 
     <!--内容分类关联表-->
     <update id="insertContent" parameterType="java.util.Map">
-        insert into expertation_content_type(expertation_id,product_content_type_id) VALUES(#{expertation_id},#{product_content_type_id})
+        insert into expertation_content_type(expertation_id,product_content_type_id) VALUES(#{expertation_id},#{contentId})
     </update>
     <delete id="delContent" parameterType="java.lang.String">
         delete from expertation_content_type where expertation_id = #{expertation_id}

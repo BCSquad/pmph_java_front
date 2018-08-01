@@ -59,7 +59,9 @@ public class ExpertationServiceImpl implements ExpertationService {
                                List<Map<String, Object>> acadeList,
                                List<Map<String, Object>> pmphList,
                                Map<String, Object> digitalMap,
-                               Map<String, Object> intentionlMap) {
+                               Map<String, Object> intentionlMap,
+                                           List<Map<String, Object>> subjectList,
+                                           List<Map<String, Object>> contentList) {
         //1.新增申报表
         this.exdao.insertPerson(perMap);
         //查询上面新增的申报表ID
@@ -67,7 +69,23 @@ public class ExpertationServiceImpl implements ExpertationService {
         Object declaration_id = perList.get(0).get("id");
         //获取userid
         String user_id = perMap.get("user_id").toString();
-        //2.职位新增
+
+        //学科分类
+        if (subjectList != null && !subjectList.isEmpty()) {
+            for (Map<String, Object> map : subjectList) {
+                map.put("expertation_id",declaration_id);
+                this.exdao.insertSubject(map);
+            }
+        }
+        //内容分类
+        if (contentList != null && !contentList.isEmpty()) {
+            for (Map<String, Object> map : contentList) {
+                map.put("expertation_id",declaration_id);
+                this.exdao.insertContent(map);
+            }
+        }
+
+        //2.
         if (perMap.get("type").equals("1")) { //提交
            /* if (perMap.get("org_id").equals("0")) {
                 messageService.sendNewMsgWriterToPublisher(MapUtils.getLong(perMap, "material_id"), MapUtils.getString(perMap, "realname"), MapUtils.getString(perMap, "materialName"),user_id);
@@ -396,7 +414,9 @@ public class ExpertationServiceImpl implements ExpertationService {
                                List<Map<String, Object>> acadeList,
                                List<Map<String, Object>> pmphList,
                                Map<String, Object> digitalMap,
-                               Map<String, Object> intentionlMap) {
+                               Map<String, Object> intentionlMap,
+                                           List<Map<String, Object>> subjectList,
+                                           List<Map<String, Object>> contentList) {
         //修改申报信息
         perMap.put("declaration_id", declaration_id);
         this.madd.updatePerson(perMap);
@@ -439,7 +459,23 @@ public class ExpertationServiceImpl implements ExpertationService {
         this.madd.delZjkzbb(glMap);   //扩展信息
         this.madd.DelAchievement(glMap);   //个人成就
         this.madd.DelRwsjc(glMap);  //人卫社教材
+        this.exdao.delContent(declaration_id);
+        this.exdao.delSubject(declaration_id);
 
+        //学科分类
+        if (subjectList != null && !subjectList.isEmpty()) {
+            for (Map<String, Object> map : subjectList) {
+                map.put("expertation_id","declaration_id");
+                this.exdao.insertSubject(map);
+            }
+        }
+        //内容分类
+        if (contentList != null && !contentList.isEmpty()) {
+            for (Map<String, Object> map : contentList) {
+                map.put("expertation_id","declaration_id");
+                this.exdao.insertContent(map);
+            }
+        }
         //3.作家学习经历新增
         if (stuList != null && !stuList.isEmpty()) {
             for (Map<String, Object> map : stuList) {

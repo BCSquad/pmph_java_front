@@ -41,7 +41,7 @@
 				<tbody>
 					<c:forEach var="list" items="${pageResult.rows}">
 						<tr>
-							<td style="height: 30px;border: 1px solid #dedede;"><input type="checkbox" name="radio_id" value="${list.id}_${list.name_path}"/>
+							<td style="height: 30px;border: 1px solid #dedede;"><input type="checkbox" name="radio_id" value="${list.product_type_id}_${list.name_path}"/>
 								${list.name_path}</td>
 						</tr>
 					</c:forEach>

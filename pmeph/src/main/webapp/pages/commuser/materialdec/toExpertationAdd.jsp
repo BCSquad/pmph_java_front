@@ -16,6 +16,8 @@
 	<link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}" type="text/css">
 	<link rel="stylesheet" href="${ctx}/statics/css/jquery.tipso.css?t=${_timestamp}" type="text/css">
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js?t=${_timestamp}"></script>
+	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.jqprint-0.3.js?t=${_timestamp}"></script>
+	<script src="http://www.jq22.com/jquery/jquery-migrate-1.2.1.min.js"></script>
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.calendar.js?t=${_timestamp}"></script>
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.tipso.js?t=${_timestamp}"></script>
@@ -38,6 +40,7 @@
 		<div class="sbxq_title">
 			<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=jcsb&pageNum=1&pageSize=10"> 教材申报 </a> > 填写申报表</span>
 		</div>
+		<div id="ifprint">
 		<!-- 图书选择-->
 		<form id="objForm">
 			<input type="hidden" id="material_id" name="material_id" value="${material_id}"/>
@@ -1269,16 +1272,39 @@
                     <span class="btmc">内容分类：</span>
                 </div>
             </div>
-			<hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">
-			<div class="button">
+			<div class="sbxq_item1">
+				<div>
+					<span id="tsxz_span8"></span>
+					<span class="tsxz_title">所在单位意见<span style="color: red">(上传单位盖章的申报表)</span></span>
+				</div>
+				<div style="height: 30px;margin-top: 10px;">
+					<div class="scys" id="dwyjsc"><span>上传文件</span></div>
+					<div id="fileNameDiv" class="fileNameDiv"></div>
+					<%--<input type="hidden" name="syllabus_id" id="syllabus_id_1"/>
+                    <input type="hidden" name="syllabus_name" id="syllabus_name_1"/>--%>
+				</div>
+			</div>
+			<!-- 院校推荐意见-->
+			<div class="yijian">
+				<div class="tujian01">院校推荐意见:</div>
+				<div class="tujian02">
+					<div class="qianzi">负责人签字:</div>
+					<div class="gaizhang">(院校盖章)</div>
+				</div>
+				<div class="tujian03">年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</div>
+			</div>
+			<hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 50px;">
+			<div class="button" id="button_cz">
 				<div class="div_butt">
-					<div class="bt_tj" id="butj" onclick="javascript:buttAdd('1')">保存</div>
-					<div class="bt_tj" id="buzc" onclick="javascript:buttAdd('2')">取消</div>
+					<div class="bt_tj" id="butj" onclick="javascript:buttAdd('2')">暂存</div>
+					<div class="bt_tj" id="buzc" onclick="javascript:buttAdd('1')">提交</div>
+					<div class="bt_tj" onclick="toprint()">打印</div>
 					<%--<div class="bt_tj" onclick="javascript:buttGive()">放弃</div>--%>
 				</div>
 				<div style="color: red;font-size: 16px;margin-top: 15px;">（提示：如暂存或提交不成功请使用360浏览器极速模式或谷歌浏览器）</div>
 			</div>
 		</form>
+		</div>
 </div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>

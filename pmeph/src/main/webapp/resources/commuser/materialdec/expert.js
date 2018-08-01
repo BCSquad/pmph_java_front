@@ -18,7 +18,7 @@ $(function () {
 
    // setTimer();
     var id = $("#material_id").val();
-  //  upload("1"); //附件上传
+    upload(); //附件上传
     queryMaterialMap(id);  //执行查询方法
 
     $('.select-input').selectlist({
@@ -100,17 +100,17 @@ function selectOption(name){
     }
 }
 //附件上传方法
-/*function upload(id){
-    $("#scjxdg_"+id).uploadFile({
+function upload(){
+    $("#dwyjsc").uploadFile({
         start: function () {
             console.log("开始上传。。。");
         },
         done: function (filename, fileid) {
-            $("#fileNameDiv_"+id).empty(); //清楚内容
-            $("#fileNameDiv_"+id).append("<span><div class=\"filename\"><a href='javascript:' class='filename'  onclick='downLoadProxy("+fileid+")' title='\"+filename+\"'>"+filename+"</a></div></span>");
-            $("#fileNameDiv_"+id).css("display","inline");
-            $("#syllabus_id_"+id).val(fileid);
-            $("#syllabus_name_"+id).val(filename);
+            $("#fileNameDiv").empty(); //清楚内容
+            $("#fileNameDiv").append("<span><div class=\"filename\"><a href='javascript:' class='filename'  onclick='downLoadProxy("+fileid+")' title='\"+filename+\"'>"+filename+"</a></div></span>");
+            $("#fileNameDiv").css("display","inline");
+        //    $("#syllabus_id").val(fileid);
+        //    $("#syllabus_name").val(filename);
             console.log("上传完成：name " + filename + " fileid " + fileid);
         },
         valid:function(file){
@@ -122,7 +122,7 @@ function selectOption(name){
         }
 
     });
-}*/
+}
 
 //页面组合方法
 function queryMaterialMap(id){
@@ -448,65 +448,6 @@ function fnt(){
     }
     return str;
 };
-//追加图书添加div
-function addTsxz(){
-    //是否职位多选
-    var is_multi_position = $("#is_multi_position").val();
-    var select_nr = $("#select_nr").val();
-    var sfbw = $("#sfbw").val();
-    var str = fnt();
-    var thtml = "";
-    thtml=	"<div class='item' id='xz_"+str+"'>"+
-        "<span style='float: left;line-height: 30px;'>图书：</span>"+
-        "<select id='edu_"+str+"' name='textbook_id' class='st book' style='float: left;'>"+
-        select_nr+
-        "</select>"+
-        "<div style='float: left;margin-left: 30px;' class='ts_radio'>"+
-        "<table style='width: 260px;border:0' cellspacing='0' cellpadding='0'><tr>";
-    if(is_multi_position=='1'){
-        thtml += "<td height='30px'><input type='checkbox' name='zw_"+str+"' value='4'/>主编</td>"+
-            "<td><input type='checkbox' name='zw_"+str+"' value='2'/>副主编</td>"+
-            "<td><input type='checkbox' name='zw_"+str+"' value='1'/>编委</td>";
-        if(sfbw == "1"){
-            thtml += "<td><input type='checkbox' name='zw_"+str+"' value='8'/>数字编委</td>";
-        }
-    }else{
-        thtml +=
-            "<td height='30px'><input type='radio' name='zw_"+str+"' value='4'/>主编</td>"+
-            "<td><input type='radio' name='zw_"+str+"' value='2'/>副主编</td>"+
-            "<td><input type='radio' name='zw_"+str+"' value='1'/>编委</td>";
-        if(sfbw == "1"){
-            thtml += "<td><input type='radio' name='zw_"+str+"' value='8'/>数字编委</td>";
-        }
-    }
-    thtml +=
-        "</tr></table>"+
-        "<input type='hidden' name='preset_position' value='zw_"+str+"'>"+
-        "</div>"+
-        "<div style='float: left;margin-left: 20px;height: 30px;'>"+
-        "<span style='float: left;line-height: 30px;'>上传教学大纲(只能上传一个文件或压缩包)：</span>"+
-        "<div id='fileNameDiv_"+str+"' class='fileNameDiv'></div>"+
-        "<input type='hidden' name='syllabus_id' id='syllabus_id_"+str+"'/>"+
-        "<input type='hidden' name='syllabus_name' id='syllabus_name_"+str+"'/>"+
-        "<div class='scys' id='scjxdg_"+str+"'><span>上传文件</span></div>"+
-        "</div>"+
-        "<div class='delBtn pull-right' onclick=\"javascript:delTsxz( 'xz_"+str+"')\"><span>删除</span></div>"+
-        "</div>";
-    $("#tsxz").append(thtml);
-    $('#edu_'+str).selectlist({
-        width: 200,
-        height: 30,
-        optionHeight: 30
-    });
-    upload(str);
-    $('#edu_'+str).tipso({validator: "isNonEmpty", message: "请选择申报的图书"});
-
-}
-
-//删除内容
-function delTsxz(str){
-    $("#"+str).remove();
-}
 
 //追加学习经历tr
 function add_xxjl(){
@@ -921,7 +862,7 @@ function buttAdd(type){
                 success: function (json) {
                     if (json.msg == 'OK') {
                         window.message.success("操作成功,正在跳转页面");
-                        window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
+                        window.location.href = contextpath + "expertation/declare.action";
                     }
                 }
             });
@@ -938,7 +879,7 @@ function buttAdd(type){
                         if (json.msg == 'OK') {
                             window.message.success("操作成功,正在跳转页面");
                             /**企业微信消息**/
-                            if (json.org_name=="人民卫生出版社") {
+                            /*if (json.org_name=="人民卫生出版社") {
                             	var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
                             	$.ajax({
                                     type: 'get',
@@ -965,7 +906,8 @@ function buttAdd(type){
     							setTimeout(function(){
                                 	window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
 								}, 800);
-    						}
+    						}*/
+                            window.location.href = contextpath + "expertation/declare.action";
                         }
                     }
                 });
@@ -1287,4 +1229,13 @@ function addSubject(str){
 function addContent(str){
     var box = document.getElementById("nrfladd");
     box.innerHTML = box.innerHTML+str;
+}
+
+//打印
+function toprint(){
+    $(".yijian").css("display","block");
+    $("#button_cz").css("display","none");
+    $("#ifprint").jqprint();
+    $(".yijian").css("display","none");
+    $("#button_cz").css("display","block");
 }

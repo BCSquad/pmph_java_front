@@ -23,7 +23,8 @@ public interface ExpertationService {
                                            List<Map<String, Object>> steaList, List<Map<String, Object>> zjxsList, List<Map<String, Object>> jcbjList, List<Map<String, Object>> gjkcjsList, List<Map<String, Object>> gjghjcList,
                                            List<Map<String, Object>> jcbxList, List<Map<String, Object>> zjkyList, List<Map<String, Object>> zjkzqkList, Map<String, Object> achievementMap, List<Map<String, Object>> monographList,
                                            List<Map<String, Object>> publishList, List<Map<String, Object>> sciList, List<Map<String, Object>> clinicalList, List<Map<String, Object>> acadeList,
-                                           List<Map<String, Object>> pmphList, Map<String, Object> digitalMap, Map<String, Object> intentionlMap);
+                                           List<Map<String, Object>> pmphList, Map<String, Object> digitalMap, Map<String, Object> intentionlMap,
+										   List<Map<String,Object>> subjectList,List<Map<String,Object>> contentList);
 	/**
 	 * 修改 专家申报信息
 	 */
@@ -31,7 +32,8 @@ public interface ExpertationService {
                                            List<Map<String, Object>> steaList, List<Map<String, Object>> zjxsList, List<Map<String, Object>> jcbjList, List<Map<String, Object>> gjkcjsList, List<Map<String, Object>> gjghjcList,
                                            List<Map<String, Object>> jcbxList, List<Map<String, Object>> zjkyList, List<Map<String, Object>> zjkzqkList, Map<String, Object> achievementMap, List<Map<String, Object>> monographList,
                                            List<Map<String, Object>> publishList, List<Map<String, Object>> sciList, List<Map<String, Object>> clinicalList, List<Map<String, Object>> acadeList,
-                                           List<Map<String, Object>> pmphList, Map<String, Object> digitalMap, Map<String, Object> intentionlMap);
+                                           List<Map<String, Object>> pmphList, Map<String, Object> digitalMap, Map<String, Object> intentionlMap,
+										   List<Map<String,Object>> subjectList,List<Map<String,Object>> contentList);
 
     /**
      * 学科分类

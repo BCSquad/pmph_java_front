@@ -1,25 +1,22 @@
 package com.bc.pmpheep.back.commuser.homepage.service;
 
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.apache.commons.collections.MapUtils;
-import org.apache.commons.collections.map.HashedMap;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
-
 import com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService;
 import com.bc.pmpheep.back.commuser.homepage.dao.HomeDao;
 import com.bc.pmpheep.back.util.RouteUtil;
 import com.bc.pmpheep.general.pojo.Content;
 import com.bc.pmpheep.general.service.ContentService;
+import org.apache.commons.collections.MapUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @Service("com.bc.pmpheep.back.homepage.service.HomeServiceImpl")
@@ -113,7 +110,7 @@ public class HomeServiceImpl implements HomeService {
      * 查询医学随笔
      */
     @Override
-    @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName+#endrow")
+   // @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName+#endrow")
     public List<Map<String, Object>> queryArticle(int endrow) throws Exception {
         List<Map<String, Object>> list = homeDao.queryArticle(endrow);
         for (Map<String, Object> map : list) {
@@ -141,7 +138,7 @@ public class HomeServiceImpl implements HomeService {
      * 查询书评
      */
     @Override
-    @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName")
+   // @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName")
     public List<Map<String, Object>> queryComment() throws UnsupportedEncodingException {
         List<Map<String, Object>> list = homeDao.queryComment();
         for (Map<String, Object> map : list) {
@@ -172,7 +169,7 @@ public class HomeServiceImpl implements HomeService {
      * 查询销量最高的书
      */
     @Override
-    @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName+#type")
+    //@Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName+#type")
     public List<Map<String, Object>> querySale(int type) throws UnsupportedEncodingException {
         List<Map<String, Object>> list = homeDao.querySale(type);
         for (Map<String, Object> map : list) {
@@ -196,7 +193,7 @@ public class HomeServiceImpl implements HomeService {
      * 查询热门标签
      */
     @Override
-    @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName+#typeid")
+   // @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName+#typeid")
     public List<Map<String, Object>> queryLabel(long typeid) {
         String typepath = "0-" + typeid + "-%";
         List<Map<String, Object>> list = homeDao.queryLabel(typepath);
