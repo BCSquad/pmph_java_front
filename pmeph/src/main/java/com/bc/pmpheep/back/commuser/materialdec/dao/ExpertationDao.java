@@ -8,6 +8,9 @@ import java.util.Map;
 
 public interface ExpertationDao {
 
+	//通过教材ID查出教材
+	public Map<String,Object> queryProductbyId(String product_id);
+
 	/**
 	 * 查询专家信息
 	 */

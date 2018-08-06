@@ -50,4 +50,11 @@ public interface ExpertationService {
 	 * @return
 	 */
 	List<Map<String,Object>> queryExpertation(String user_id);
+
+	/**
+	 * 通过教材ID查出教材
+	 * @param material_id
+	 * @return
+	 */
+	public Map<String,Object> queryMaterialbyId(String material_id);
 }

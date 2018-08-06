@@ -34,6 +34,12 @@ public class ExpertationServiceImpl implements ExpertationService {
 
     public UUIDTool utool = new UUIDTool();
 
+    //通过教材ID查出教材
+    @Override
+    public Map<String, Object> queryMaterialbyId(String product_id) {
+        return this.exdao.queryProductbyId(product_id);
+    }
+
     @Override
     public List<Map<String, Object>> queryPerson(Map<String, Object> map) {
         return this.exdao.queryPerson(map);
