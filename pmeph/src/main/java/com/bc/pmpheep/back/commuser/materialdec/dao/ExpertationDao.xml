@@ -22,7 +22,7 @@
           is_edit_book_required*1 is_edit_book_required,
           is_deleted*1 is_deleted,
           gmt_create,gmt_update,founder_id,publisher_id,gmt_publish,note,description
-        from product where id = #{product_id}
+        from product where product_type = #{product_id}
     </select>
 	<!-- 专家信息 --> 
 	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">

@@ -60,8 +60,6 @@ public interface ExpertationService {
 
     public List<Map<String,Object>> selectSubject(Map<String, Object> map);
     public List<Map<String,Object>> selectContent(Map<String, Object> map);
-    public List<Map<String,Object>> selectSubject(List<Map<String, Object>> map);
-    public List<Map<String,Object>> selectContent(List<Map<String, Object>> map);
 	/**
 	 * 根据用户ID和类型查询申请信息
 	 * @param user_id 用户ID

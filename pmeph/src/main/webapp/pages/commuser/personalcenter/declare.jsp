@@ -100,6 +100,9 @@
     function todetail(material_id,declaration_id) {
         location.href = contextpath + 'expertation/showExpertation.action?material_id='+material_id+'&&declaration_id='+declaration_id;
     }
+    function toupdate(material_id,declaration_id) {
+        location.href = contextpath + 'expertation/toExpertationZc.action?material_id='+material_id+'&&declaration_id='+declaration_id;
+    }
 </script>
 <style>
     #zebra-table tr th{

@@ -124,7 +124,7 @@ public class ExpertationController extends BaseController{
 
 
         String material_id = request.getParameter("material_id"); //教材ID
-        if(arrMaterial_id.length>0){
+        if(arrMaterial_id !=null && arrMaterial_id.length>0){
             material_id = arrMaterial_id[0];
         }
 		//作家扩展信息
@@ -161,9 +161,9 @@ public class ExpertationController extends BaseController{
 	@ResponseBody
 	public Map<String,Object> queryMaterialMap(HttpServletRequest request){
 		//教材信息
-		String material_id = request.getParameter("material_id");
+		String product_id = request.getParameter("material_id");
 		Map<String,Object> materialMap = new HashMap<String,Object>();
-		materialMap = this.etService.queryMaterialbyId(material_id);
+		materialMap = this.etService.queryMaterialbyId(product_id);
 		return materialMap;
 	}
 	
@@ -676,7 +676,7 @@ public class ExpertationController extends BaseController{
 		//传参  user_id  material_id
 		//	String user_id = request.getParameter("user_id");
 		String material_id = request.getParameter("material_id");
-        if(arrMaterial_id.length>0){
+        if(arrMaterial_id !=null && arrMaterial_id.length>0){
             material_id = arrMaterial_id[0];
         }
 		String declaration_id = request.getParameter("declaration_id");
@@ -800,15 +800,18 @@ public class ExpertationController extends BaseController{
 	@RequestMapping("toExpertationZc")
 	@ResponseBody
 	public ModelAndView toMaterialZc(HttpServletRequest request,
-			HttpServletResponse response){
+			String... arrMaterial_id){
 		ModelAndView mav = new ModelAndView("commuser/materialdec/toExpertationZc");
 		//传参   declaration_id
 		Map<String,Object> userMap =  this.getUserInfo();
-		String declaration_id = request.getParameter("declaration_id");
+		String expertation_id = request.getParameter("declaration_id");
+        if(arrMaterial_id !=null && arrMaterial_id.length>0){
+            expertation_id = arrMaterial_id[0];
+        }
 		String user_id = userMap.get("id").toString();
 		Map<String,Object> queryMap = new HashMap<String,Object>();
 		queryMap.put("user_id", user_id);
-		queryMap.put("declaration_id", declaration_id);
+		queryMap.put("expertation_id", expertation_id);
 		//学科
 		List<Map<String,Object>> subjectList = this.etService.selectSubject(queryMap);
 		List<Map<String,Object>> contentList = this.etService.selectContent(queryMap);
@@ -1069,10 +1072,10 @@ public class ExpertationController extends BaseController{
 		Map<String, Object> map=etService.queryExpertationDetail(user.get("id").toString(),expert_type);
 		if(map==null){
             modelAndView=this.toMaterialAdd(request,expert_type);
-		}else if(map.get("online_progress") == 0 ||map.get("online_progress") == 2){
+		}else if(map.get("online_progress").toString().equals("0") ||map.get("online_progress").toString().equals("2")){
 			//审核状态为未提交和被退回，跳转至编辑界面
-
-		}else if(map.get("online_progress") == 1 ||map.get("online_progress") == 3 ){
+            modelAndView=this.toMaterialZc(request,map.get("id").toString());
+		}else if(map.get("online_progress").toString().equals("1") ||map.get("online_progress").toString().equals("3") ){
             //审核状态为代审核和审核通过，跳转至查看界面
 			modelAndView=this.showMaterial(request,map.get("id").toString());
 		}

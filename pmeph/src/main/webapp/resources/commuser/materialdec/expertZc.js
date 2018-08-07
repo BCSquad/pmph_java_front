@@ -1240,7 +1240,10 @@ function toprint(){
     $(".yijian").css("display","none");
     $("#button_cz").css("display","block");
 }
-
+//删除
+function del(id){
+    $('#'+id).remove();
+}
 //学科选择
 function SubjectdAdd(material_id){
     layer.open({

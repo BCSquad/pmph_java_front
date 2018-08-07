@@ -1654,8 +1654,8 @@
                 <div class="sbdw" id="xkfladd">
                     <span class="btmc">学科分类：</span>
                     <c:forEach var="subject" items="${subjectList}" varStatus="status">
-                    <span class="el-tag" id="xkfl_"${status.count}>${subject.type_name}+'<input name="subjectId" type="hidden" value="${subject.product_subject_type_id}"/>
-                        <span style="margin-left: 8px;cursor: pointer;" onclick="del('${subject.product_content_type_id}')">X</span></span>
+                    <span class="el-tag" id="xkfl_${status.count}">${subject.type_name}<input name="subjectId" type="hidden" value="${subject.product_subject_type_id}"/>
+                        <span style="margin-left: 8px;cursor: pointer;" onclick="del('xkfl_${status.count}')">X</span></span>
                     </c:forEach>
                 </div>
             </div>
@@ -1669,8 +1669,8 @@
                 <div class="sbdw" id="nrfladd">
                     <span class="btmc">内容分类：</span>
                     <c:forEach var="content" items="${contentList}" varStatus="status">
-                    <span class="el-tag" id="nrfl_"${status.count}>${content.name_path}+'<input name="contentId" type="hidden" value="${content.product_content_type_id}"/>
-                        <span style="margin-left: 8px;cursor: pointer;" onclick="del('${subject.product_content_type_id}')">X</span></span>
+                    <span class="el-tag" id="nrfl_${status.count}">${content.name_path}<input name="contentId" type="hidden" value="${content.product_content_type_id}"/>
+                        <span style="margin-left: 8px;cursor: pointer;" onclick="del('nrfl_${status.count}')">X</span></span>
                     </c:forEach>
                 </div>
             </div>
@@ -1700,6 +1700,7 @@
                 <div class="div_butt">
                     <div class="bt_tj" id="butj" onclick="javascript:buttAdd('1')">提交</div>
                     <div class="bt_tj" id="buzc" onclick="javascript:buttAdd('2')">暂存</div>
+                    <div class="bt_tj" onclick="toprint()">打印</div>
                     <%--<div class="bt_tj" onclick="javascript:buttGive()">放弃</div>--%>
                 </div>
                 <div style="color: red;font-size: 16px;margin-top: 15px;">（提示：如暂存或提交不成功请使用360浏览器极速模式或谷歌浏览器）</div>
