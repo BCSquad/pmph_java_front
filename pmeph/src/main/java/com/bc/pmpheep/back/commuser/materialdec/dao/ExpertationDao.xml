@@ -100,4 +100,9 @@
             where e.user_id=#{user_id}
             group by e.id
 	</select>
+
+    <!--根据用户ID查询申请表-->
+	<select id="queryExpertationDetail" resultType="java.util.Map" parameterType="java.util.Map">
+	   select * from expertation  where user_id=#{user_id} and expert_type=#{expert_type}
+	</select>
 </mapper>

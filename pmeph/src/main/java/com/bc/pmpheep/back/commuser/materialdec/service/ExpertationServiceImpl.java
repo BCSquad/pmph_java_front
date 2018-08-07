@@ -801,4 +801,9 @@ public class ExpertationServiceImpl implements ExpertationService {
         }
         return list;
     }
+
+    @Override
+    public Map<String, Object> queryExpertationDetail(String user_id, String expert_type) {
+        return exdao.queryExpertationDetail(user_id,expert_type);
+    }
 }

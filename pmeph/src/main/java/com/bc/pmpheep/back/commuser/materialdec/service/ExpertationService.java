@@ -50,4 +50,11 @@ public interface ExpertationService {
 	 * @return
 	 */
 	List<Map<String,Object>> queryExpertation(String user_id);
+	/**
+	 * 根据用户ID和类型查询申请信息
+	 * @param user_id 用户ID
+	 * @param expert_type 申请类型
+	 * @return
+	 */
+	Map<String,Object> queryExpertationDetail(String user_id,String expert_type);
 }

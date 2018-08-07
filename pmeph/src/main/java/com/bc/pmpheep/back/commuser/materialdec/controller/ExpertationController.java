@@ -66,7 +66,7 @@ public class ExpertationController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("toExpertationAdd")
-	public ModelAndView toMaterialAdd(HttpServletRequest request){
+	public ModelAndView toMaterialAdd(HttpServletRequest request,String... arrMaterial_id){
 		ModelAndView mav = new ModelAndView("commuser/materialdec/toExpertationAdd");
 		//3.作家学习经历表
 		List<Map<String,Object>> perstuList = new ArrayList<Map<String,Object>>();
@@ -124,6 +124,9 @@ public class ExpertationController extends BaseController{
 
 
         String material_id = request.getParameter("material_id"); //教材ID
+        if(arrMaterial_id.length>0){
+            material_id = arrMaterial_id[0];
+        }
 		//作家扩展信息
 		List<Map<String,Object>> zjkzxxList = this.mdService.queryZjkzxxById(material_id);
 
@@ -666,11 +669,14 @@ public class ExpertationController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("showExpertation")
-	public ModelAndView showMaterial(HttpServletRequest request){
+	public ModelAndView showMaterial(HttpServletRequest request,String... arrMaterial_id){
 		ModelAndView mav = new ModelAndView("commuser/materialdec/showExpertation");
 		//传参  user_id  material_id
 		//	String user_id = request.getParameter("user_id");
 		String material_id = request.getParameter("material_id");
+        if(arrMaterial_id.length>0){
+            material_id = arrMaterial_id[0];
+        }
 		String declaration_id = request.getParameter("declaration_id");
 		Map<String,Object> queryMap = new HashMap<String,Object>();
 		queryMap.put("material_id", material_id);
@@ -1202,15 +1208,28 @@ public class ExpertationController extends BaseController{
 	public ModelAndView topz(){
 		ModelAndView modelAndView=new ModelAndView();
 		Map<String, Object> user=getUserInfo();
-//		String UserId= null;
-//		if (user!=null && user.get("id")!=null && !"".equals(user.get("id"))) {
-//			UserId = user.get("id").toString();
-//		}
-	//	String UserId="10055";
 		List<Map<String,Object>> list=etService.queryExpertation(user.get("id").toString());
 		modelAndView.addObject("list",list);
-		//modelAndView.addObject("")
 		modelAndView.setViewName("commuser/personalcenter/declare");
+		return modelAndView;
+	}
+
+    //重定向方法
+	@RequestMapping("lookforward")
+	public ModelAndView lookforward(HttpServletRequest request){
+	    ModelAndView modelAndView=new ModelAndView();
+		String expert_type=request.getParameter("expert_type");
+		Map<String, Object> user=getUserInfo();
+		Map<String, Object> map=etService.queryExpertationDetail(user.get("id").toString(),expert_type);
+		if(map==null){
+            modelAndView=this.toMaterialAdd(request,expert_type);
+		}else if(map.get("online_progress") == 0 ||map.get("online_progress") == 2){
+			//审核状态为未提交和被退回，跳转至编辑界面
+
+		}else if(map.get("online_progress") == 1 ||map.get("online_progress") == 3 ){
+            //审核状态为代审核和审核通过，跳转至查看界面
+			modelAndView=this.showMaterial(request,map.get("id").toString());
+		}
 		return modelAndView;
 	}
 
