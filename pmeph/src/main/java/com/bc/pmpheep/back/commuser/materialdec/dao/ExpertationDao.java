@@ -56,4 +56,12 @@ public interface ExpertationDao {
 	public List<Map<String,Object>> selectContent(Map<String, Object> map);
 	public int insertContent(Map<String,Object> map);
 	public int delContent(String experation_id);
+
+	/**
+	 * 根据用户ID和类型查询申请信息
+	 * @param user_id 用户ID
+	 * @param expert_type 申请类型
+	 * @return
+	 */
+	Map<String,Object> queryExpertationDetail(@Param("user_id") String user_id,@Param("expert_type") String expert_type);
 }

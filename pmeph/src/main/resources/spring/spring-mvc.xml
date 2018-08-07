@@ -41,7 +41,7 @@
                 <value>/material/* -> 1</value><!--教材申报 -->
                 <value>/integral/* -> 1</value><!--积分 -->
 
-
+                <value>/expertation/lookforward* -> 1</value><!--首页新产品拦截-->
                 <value>/bookcollection/* -> 1</value><!--书籍收藏 -->
                 <value>/articlecollection/* -> 1</value><!--文章收藏 -->
                 <value>/myGroup/* -> 1</value><!--我的小组 -->

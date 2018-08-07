@@ -65,16 +65,19 @@
                              <th>待审核</th>
                          </c:if>
                          <c:if test="${list.online_progress==2}">
-                             <th>被退回</th>
+                             <th>审核不通过,退回原因：</th>
                          </c:if>
                          <c:if test="${list.online_progress==3}">
                              <th>已通过</th>
+                         </c:if>
+                         <c:if test="${list.online_progress==0}">
+                             <th style="color: #33CAA9;cursor: pointer" onclick="toupdate(1,${list.id})">修改</th>
                          </c:if>
                          <c:if test="${list.online_progress==1}">
                              <th style="color: #33CAA9;cursor: pointer" onclick="todetail(1,${list.id})">查看</th>
                          </c:if>
                          <c:if test="${list.online_progress==2}">
-                             <th style="color: #33CAA9;cursor: pointer" onclick="todetail(2,${list.id})">查看</th>
+                             <th style="color: #33CAA9;cursor: pointer" onclick="toupdate(2,${list.id})">修改</th>
                          </c:if>
                          <c:if test="${list.online_progress==3}">
                              <th style="color: #33CAA9;cursor: pointer" onclick="todetail(3,${list.id})">查看</th>
