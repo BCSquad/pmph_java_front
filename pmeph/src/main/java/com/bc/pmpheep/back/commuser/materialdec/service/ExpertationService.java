@@ -67,4 +67,53 @@ public interface ExpertationService {
 	 * @return
 	 */
 	Map<String,Object> queryExpertationDetail(String user_id,String expert_type);
+	/**
+	 * 查询学习经历
+	 * @param map
+	 * @return
+	 */
+	public List<Map<String,Object>> queryStu(Map<String,Object> map);
+	/**
+	 * 查询工作经历
+	 * @param map
+	 * @return
+	 */
+	public List<Map<String,Object>> queryWork(Map<String,Object> map);
+	/**
+	 * 作家学术
+	 * @param map
+	 * @return
+	 */
+	public List<Map<String,Object>> queryZjxs(Map<String,Object> map);
+	/**
+	 * 作家主编国家级规划教材情况
+	 * @param map
+	 * @return
+	 */
+	public List<Map<String,Object>> queryGjghjc(Map<String,Object> map);
+	/**
+	 * 作家扩展项填报表
+	 * @param map
+	 * @return
+	 */
+	public List<Map<String,Object>> queryZjkzbb(Map<String,Object> map);
+	/**
+	 * 主编学术专著情况
+	 * @param map
+	 * @return
+	 */
+	public List<Map<String,Object>> queryMonograph(Map<String,Object> map);
+	/**
+	 * 查询人卫社教材编写情况
+	 * @param map
+	 * @return
+	 */
+	public List<Map<String,Object>> rwsjcList(Map<String,Object> map);
+
+	/**
+	 * 通过产品ID查出扩展信息
+	 * @param material_id
+	 * @return
+	 */
+	public List<Map<String,Object>> queryZjkzxxById(String material_id);
 }

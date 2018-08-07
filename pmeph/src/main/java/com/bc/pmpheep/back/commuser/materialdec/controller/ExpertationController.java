@@ -276,8 +276,6 @@ public class ExpertationController extends BaseController{
         perMap.put("idtype", "".equals(request.getParameter("idtype")) ? null:request.getParameter("idtype"));
 		perMap.put("idcard", request.getParameter("idcard"));
 		perMap.put("org_id", "".equals(request.getParameter("sbdw_id")) ? null:request.getParameter("sbdw_id"));
-		perMap.put("is_dispensed", "".equals(request.getParameter("is_dispensed")) ? null:request.getParameter("is_dispensed"));
-		perMap.put("is_utec", "".equals(request.getParameter("is_utec")) ? null:request.getParameter("is_utec"));
 		perMap.put("degree", "".equals(request.getParameter("degree")) ? null:request.getParameter("degree"));
 		perMap.put("rank","2");
 		perMap.put("expertise", request.getParameter("expertise"));
@@ -804,14 +802,14 @@ public class ExpertationController extends BaseController{
 		ModelAndView mav = new ModelAndView("commuser/materialdec/toExpertationZc");
 		//传参   declaration_id
 		Map<String,Object> userMap =  this.getUserInfo();
-		String expertation_id = request.getParameter("declaration_id");
+		String declaration_id = request.getParameter("declaration_id");
         if(arrMaterial_id !=null && arrMaterial_id.length>0){
-            expertation_id = arrMaterial_id[0];
+			declaration_id = arrMaterial_id[0];
         }
 		String user_id = userMap.get("id").toString();
 		Map<String,Object> queryMap = new HashMap<String,Object>();
 		queryMap.put("user_id", user_id);
-		queryMap.put("expertation_id", expertation_id);
+		queryMap.put("declaration_id", declaration_id);
 		//学科
 		List<Map<String,Object>> subjectList = this.etService.selectSubject(queryMap);
 		List<Map<String,Object>> contentList = this.etService.selectContent(queryMap);
@@ -837,63 +835,26 @@ public class ExpertationController extends BaseController{
 
 		//3.作家学习经历表
 		List<Map<String,Object>> stuList = new ArrayList<Map<String,Object>>();
-		stuList=this.mdService.queryStu(queryMap);
+		stuList=this.etService.queryStu(queryMap);
 		//4.作家工作经历表
 		List<Map<String,Object>> workList = new ArrayList<Map<String,Object>>();
-		workList=this.mdService.queryWork(queryMap);
-		//5.作家教学经历表
-		List<Map<String,Object>> steaList = new ArrayList<Map<String,Object>>();
-		steaList=this.mdService.queryStea(queryMap);
+		workList=this.etService.queryWork(queryMap);
 		//6.作家兼职学术表
 		List<Map<String,Object>> zjxsList = new ArrayList<Map<String,Object>>();
-		zjxsList=this.mdService.queryZjxs(queryMap);
-		//7.作家上套教材参编情况表
-		List<Map<String,Object>> jcbjList = new ArrayList<Map<String,Object>>();
-		jcbjList=this.mdService.queryJcbj(queryMap);
-		//8.作家精品课程建设情况表
-		List<Map<String,Object>> gjkcjsList = new ArrayList<Map<String,Object>>();
-		gjkcjsList=this.mdService.queryGjkcjs(queryMap);
+		zjxsList=this.etService.queryZjxs(queryMap);
 		//9.作家主编国家级规划教材情况表
 		List<Map<String,Object>> gjghjcList = new ArrayList<Map<String,Object>>();
-		gjghjcList = this.mdService.queryGjghjc(queryMap);
-		//10.作家教材编写情况表
+		gjghjcList = this.etService.queryGjghjc(queryMap);
+        //19.人卫社编写情况
 		List<Map<String,Object>> rwsjcList = new ArrayList<Map<String,Object>>();
-		List<Map<String,Object>> jcbxqtList = new ArrayList<Map<String,Object>>();
-		//其他社教材编写情况
-		jcbxqtList=this.mdService.queryqtJcbx(queryMap);
-		//19.人卫社编写情况
-		rwsjcList=this.mdService.rwsjcList(queryMap);
-		//11.作家科研情况表
-		List<Map<String,Object>> zjkyList = new ArrayList<Map<String,Object>>();
-		zjkyList = this.mdService.queryZjkyqk(queryMap);
+		rwsjcList=this.etService.rwsjcList(queryMap);
 		//12.作家扩展项填报表
 		List<Map<String,Object>> zjkzqkList = new ArrayList<Map<String,Object>>();
-		zjkzqkList = this.mdService.queryZjkzbb(queryMap);
-		List<Map<String,Object>> zjkzxxList = this.mdService.queryZjkzxxById(product_id);
-		//13.个人成就
-		Map<String,Object> achievementMap = new HashMap<String,Object>();
-		achievementMap = this.mdService.queryAchievement(queryMap);
+		zjkzqkList = this.etService.queryZjkzbb(queryMap);
+		List<Map<String,Object>> zjkzxxList = this.etService.queryZjkzxxById(product_id);
 		//14.主编学术专著情况表
 		List<Map<String,Object>> monographList = new ArrayList<Map<String,Object>>();
-		monographList = this.mdService.queryMonograph(queryMap);
-		//15.出版行业获奖情况表
-		List<Map<String,Object>> publishList = new ArrayList<Map<String,Object>>();
-		publishList = this.mdService.queryPublish(queryMap);
-		//16.SCI论文投稿及影响因子情况表
-		List<Map<String,Object>> sciList = new ArrayList<Map<String,Object>>();
-		sciList = this.mdService.querySci(queryMap);
-		//17.临床医学获奖情况表
-		List<Map<String,Object>> clinicalList = new ArrayList<Map<String,Object>>();
-		clinicalList = this.mdService.queryClinicalreward(queryMap);
-		//18.学术荣誉授予情况表
-		List<Map<String,Object>> acadeList = new ArrayList<Map<String,Object>>();
-		acadeList = this.mdService.queryAcadereward(queryMap);
-		//20.参加人卫慕课、数字教材编写情况
-		Map<String,Object> moocMap = new HashMap<String,Object>();
-		moocMap = this.mdService.queryMoocdigital(queryMap);
-		//21.编写内容意向表
-		Map<String,Object> intentionMap = new HashMap<String,Object>();
-		intentionMap = this.mdService.queryIntention(queryMap);
+		monographList = this.etService.queryMonograph(queryMap);
 
 		//填充
 		mav.addObject("subjectList", subjectList);
@@ -901,26 +862,14 @@ public class ExpertationController extends BaseController{
 		mav.addObject("gezlList", gezlList.get(0));
 		mav.addObject("stuList", stuList);
 		mav.addObject("workList", workList);
-		mav.addObject("steaList", steaList);
-		mav.addObject("jcbjList", jcbjList);
-		mav.addObject("gjkcjsList", gjkcjsList);
 		mav.addObject("rwsjcList", rwsjcList);
 		mav.addObject("gjghjcList", gjghjcList);
-		mav.addObject("zjkyList", zjkyList);
 		mav.addObject("zjxsList", zjxsList);
 		mav.addObject("zjkzqkList", zjkzqkList);
 		mav.addObject("zjkzxxList", zjkzxxList);
-		mav.addObject("achievementMap", achievementMap);
 		mav.addObject("monographList", monographList);
-		mav.addObject("publishList", publishList);
-		mav.addObject("sciList", sciList);
-		mav.addObject("clinicalList", clinicalList);
-		mav.addObject("acadeList", acadeList);
 		mav.addObject("materialMap", queryMap);
 		mav.addObject("userMap", userMap);
-		mav.addObject("jcbxqtList", jcbxqtList);
-		mav.addObject("digitalMap", moocMap);
-		mav.addObject("intentionMap", intentionMap);
         mav.addObject("return_cause", MapUtils.getString(gezlList.get(0), "return_cause"));
 
 		return mav;
