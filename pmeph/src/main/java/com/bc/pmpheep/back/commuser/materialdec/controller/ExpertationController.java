@@ -163,7 +163,7 @@ public class ExpertationController extends BaseController{
 		//教材信息
 		String material_id = request.getParameter("material_id");
 		Map<String,Object> materialMap = new HashMap<String,Object>();
-		materialMap = this.mdService.queryMaterialbyId(material_id);
+		materialMap = this.etService.queryMaterialbyId(material_id);
 		return materialMap;
 	}
 	
@@ -249,13 +249,13 @@ public class ExpertationController extends BaseController{
 			}
 		}
         Map<String, Object> materialMap = new HashMap<String, Object>();
-        materialMap = this.mdService.queryMaterialbyId(material_id);
+        materialMap = this.etService.queryMaterialbyId(material_id);
         perMap.put("materialName", MapUtils.getString(materialMap, "material_name"));
 		perMap.put("realname", request.getParameter("realname"));
 		perMap.put("user_id", user_id);
 		perMap.put("type", type);
 		perMap.put("is_teacher", userMap.get("is_teacher"));
-		perMap.put("material_id", material_id);
+		perMap.put("product_id", material_id);
 		perMap.put("expert_type", expert_type);
 		String sex = request.getParameter("sex");
 		if(sex == null || sex.length() <= 0){
@@ -285,9 +285,11 @@ public class ExpertationController extends BaseController{
 		perMap.put("sub_classification ", request.getParameter("sub_classification"));
 		perMap.put("cont_classification ", request.getParameter("cont_classification"));
 		perMap.put("remark", request.getParameter("remark"));
+		perMap.put("unit_advise", request.getParameter("syllabus_id"));
+		perMap.put("syllabus_name", request.getParameter("syllabus_name"));
 		//获取学科及内容分类id
 		String subjectIds[] = request.getParameterValues("subjectId");
-		String contentIds[] = request.getParameterValues("contentId");
+        String contentIds[] = request.getParameterValues("contentId");
 		List<Map<String,Object>> subjectList = new ArrayList<Map<String,Object>>();
 		List<Map<String,Object>> contentList = new ArrayList<Map<String,Object>>();
 		if(subjectIds.length>0){
@@ -697,12 +699,12 @@ public class ExpertationController extends BaseController{
 			queryMap.put("declaration_id", declaration_id);
 		}
 		if(material_id == null){
-			material_id= gezlList.get(0).get("material_id").toString();
+			material_id= gezlList.get(0).get("product_id").toString();
 		}
-		queryMap.put("material_id", material_id);
+		queryMap.put("product_id", material_id);
 		//教材信息
 		Map<String,Object> materialMap = new HashMap<String,Object>();
-		materialMap = this.mdService.queryMaterialbyId(material_id);
+		materialMap = this.etService.queryMaterialbyId(material_id);
 
 		//3.作家学习经历表
 		List<Map<String,Object>> stuList = new ArrayList<Map<String,Object>>();
@@ -795,11 +797,11 @@ public class ExpertationController extends BaseController{
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("toMaterialZc")
+	@RequestMapping("toExpertationZc")
 	@ResponseBody
 	public ModelAndView toMaterialZc(HttpServletRequest request,
 			HttpServletResponse response){
-		ModelAndView mav = new ModelAndView("commuser/materialdec/toMaterialZc");
+		ModelAndView mav = new ModelAndView("commuser/materialdec/toExpertationZc");
 		//传参   declaration_id
 		Map<String,Object> userMap =  this.getUserInfo();
 		String declaration_id = request.getParameter("declaration_id");
@@ -810,7 +812,7 @@ public class ExpertationController extends BaseController{
 
 		//1.作家申报信息表
 		List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
-		gezlList = this.mdService.queryPerson(queryMap);
+		gezlList = this.etService.queryPerson(queryMap);
         for (Map.Entry<String, Object> entry : gezlList.get(0).entrySet()) {
             String key = entry.getKey().toString();
             String value = entry.getValue().toString();
@@ -818,109 +820,14 @@ public class ExpertationController extends BaseController{
                 gezlList.get(0).put(key,"");
             }
         }
-		String material_id = gezlList.get(0).get("material_id").toString();
-		queryMap.put("material_id", material_id);
+		String product_id = gezlList.get(0).get("product_id").toString();
+		queryMap.put("product_id", product_id);
 		//教材信息
 		Map<String,Object> materialMap = new HashMap<String,Object>();
-		materialMap = this.mdService.queryMaterialbyId(material_id);
+		materialMap = this.etService.queryMaterialbyId(product_id);
 		queryMap.put("is_multi_books", materialMap.get("is_multi_books"));
 		queryMap.put("is_multi_position", materialMap.get("is_multi_position"));
 		queryMap.put("is_digital_editor_optional", materialMap.get("is_digital_editor_optional"));
-		//2.作家申报职位暂存
-		List<Map<String,Object>> tssbList = new ArrayList<Map<String,Object>>();
-	//	if(gezlList.get(0).get("online_progress").toString().equals("0")){ //表示未提交
-	//		tssbList=this.mdService.queryTssbZc(queryMap);
-	//	}else{//退回，通过，提交 都在正式申请表
-			tssbList=this.mdService.queryTsxz(queryMap);
-	//	}
-		if(tssbList.size()>0){
-			for (Map<String, Object> map : tssbList) {
-				String pos_a = ""; //主编 4
-				String pos_b = ""; //副主编 2
-				String pos_c = ""; //编委 1
-				String pos_d = ""; //数字编委 8
-				if(map.get("preset_position").equals(3)){//
-                    pos_a = "";
-                    pos_b = "1";
-                    pos_c = "1";
-                    pos_d = "";
-				}else if(map.get("preset_position").equals(1)){
-                    pos_a = "";
-                    pos_b = "";
-                    pos_c = "1";
-                    pos_d = "";
-				}else if(map.get("preset_position").equals(2)){
-                    pos_a = "";
-                    pos_b = "1";
-                    pos_c = "";
-                    pos_d = "";
-				}else if(map.get("preset_position").equals(4)){
-                    pos_a = "1";
-                    pos_b = "";
-                    pos_c = "";
-                    pos_d = "";
-				}else if(map.get("preset_position").equals(8)){
-                    pos_a = "";
-                    pos_b = "";
-                    pos_c = "";
-                    pos_d = "1";
-				}else if(map.get("preset_position").equals(5)){
-                    pos_a = "1";
-                    pos_b = "";
-                    pos_c = "1";
-                    pos_d = "";
-				}else if(map.get("preset_position").equals(6)){
-                    pos_a = "1";
-                    pos_b = "1";
-                    pos_c = "";
-                    pos_d = "";
-				}else if(map.get("preset_position").equals(9)){
-                    pos_a = "";
-                    pos_b = "";
-                    pos_c = "1";
-                    pos_d = "1";
-				}else if(map.get("preset_position").equals(10)){
-                    pos_a = "";
-                    pos_b = "1";
-                    pos_c = "";
-                    pos_d = "1";
-				}else if(map.get("preset_position").equals(12)){
-                    pos_a = "1";
-                    pos_b = "";
-                    pos_c = "";
-                    pos_d = "1";
-				}else if(map.get("preset_position").equals(7)){
-                    pos_a = "1";
-                    pos_b = "1";
-                    pos_c = "1";
-                    pos_d = "";
-				}else if(map.get("preset_position").equals(11)){
-                    pos_a = "";
-                    pos_b = "1";
-                    pos_c = "1";
-                    pos_d = "1";
-				}else if(map.get("preset_position").equals(13)){
-                    pos_a = "1";
-                    pos_b = "";
-                    pos_c = "1";
-                    pos_d = "1";
-				}else if(map.get("preset_position").equals(14)){
-                    pos_a = "1";
-                    pos_b = "";
-                    pos_c = "1";
-                    pos_d = "1";
-				}else if(map.get("preset_position").equals(15)){
-                    pos_a = "1";
-                    pos_b = "1";
-                    pos_c = "1";
-                    pos_d = "1";
-				}
-				map.put("pos_a", pos_a);
-				map.put("pos_b", pos_b);
-				map.put("pos_c", pos_c);
-				map.put("pos_d", pos_d);
-			}
-		}
 
 		//3.作家学习经历表
 		List<Map<String,Object>> stuList = new ArrayList<Map<String,Object>>();
@@ -956,7 +863,7 @@ public class ExpertationController extends BaseController{
 		//12.作家扩展项填报表
 		List<Map<String,Object>> zjkzqkList = new ArrayList<Map<String,Object>>();
 		zjkzqkList = this.mdService.queryZjkzbb(queryMap);
-		List<Map<String,Object>> zjkzxxList = this.mdService.queryZjkzxxById(material_id);
+		List<Map<String,Object>> zjkzxxList = this.mdService.queryZjkzxxById(product_id);
 		//13.个人成就
 		Map<String,Object> achievementMap = new HashMap<String,Object>();
 		achievementMap = this.mdService.queryAchievement(queryMap);
@@ -982,30 +889,8 @@ public class ExpertationController extends BaseController{
 		Map<String,Object> intentionMap = new HashMap<String,Object>();
 		intentionMap = this.mdService.queryIntention(queryMap);
 
-		//书籍信息
-		List<Map<String,Object>> bookList = this.mdService.queryBookById(material_id);
-		StringBuffer bookSelects = new StringBuffer();
-		bookSelects.append("<option value=''>-请选择-</option>");
-		for (Map<String, Object> map : bookList) {
-			bookSelects.append("<option value='"+map.get("id")+"'>"+map.get("textbook_name")+"</option>");
-		}
-		//职位选择
-		for (Map<String, Object> map : tssbList) {
-			StringBuffer bookSelect = new StringBuffer();
-			for (Map<String, Object> map2 : bookList) {
-				if(map.get("textbook_id").equals(map2.get("id"))){
-					bookSelect.append("<option value='"+map2.get("id")+"' selected='selected'>"+map2.get("textbook_name")+"</option>");
-				}else{
-					bookSelect.append("<option value='"+map2.get("id")+"'>"+map2.get("textbook_name")+"</option>");
-				}
-			}
-			map.put("bookSelect", bookSelect.toString());
-		}
-
 		//填充
-		mav.addObject("bookSelects", bookSelects.toString());
 		mav.addObject("gezlList", gezlList.get(0));
-		mav.addObject("tssbList", tssbList);
 		mav.addObject("stuList", stuList);
 		mav.addObject("workList", workList);
 		mav.addObject("steaList", steaList);
@@ -1033,51 +918,7 @@ public class ExpertationController extends BaseController{
 		return mav;
 	}
 	
-	
 
-	//机构信息选择
-	@RequestMapping("toSearchOrg")
-	public ModelAndView toSearchOrg(HttpServletRequest request,
-			HttpServletResponse response){
-		ModelAndView mav = new ModelAndView("commuser/materialdec/toOrgList");
-		//机构信息
-		String material_id = request.getParameter("material_id");
-		String  currentPageStr = (String) request.getParameter("currentPage");
-		String  pageSizeStr = request.getParameter("pageSize");
-		String  orgname = request.getParameter("orgname");
-		Map<String,Object> paraMap = new HashMap<String,Object>();
-		//分页查询
-		int currentPage = 0;
-		int pageSize = 10;
-		
-		if(null!=currentPageStr&&!currentPageStr.equals("")){
-			 currentPage = Integer.parseInt(currentPageStr);
-		}
-		if(null!=pageSizeStr&&!pageSizeStr.equals("")){
-			 pageSize = Integer.parseInt(pageSizeStr);
-		}
-		PageParameter<Map<String,Object>> pageParameter = new PageParameter<>(currentPage,pageSize);
-		
-		paraMap.put("material_id", material_id);
-		paraMap.put("endPage", pageSize);
-		paraMap.put("currentPage", currentPage);
-		if(orgname!=null && !orgname.equals("")){
-			try {
-				orgname = URLDecoder.decode(orgname,"UTF-8");
-				paraMap.put("org_name", "%"+orgname+"%");
-				paraMap.put("orgname", orgname);
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-		}
-		pageParameter.setParameter(paraMap);
-		PageResult<Map<String,Object>> pageResult = this.mdService.selectOrgList(pageParameter);
-		//List<Map<String,Object>> orgList = this.mdService.queryOrgById(material_id);
-		mav.addObject("pageResult", pageResult);
-		mav.addObject("paraMap", paraMap);
-		return mav;
-	} 
-	
 	/**
 	 *  重定向方法，根据教材id或申报id及当前登录人判断重定向到新增或是修改或是查看申报，
 	 * @param material_id

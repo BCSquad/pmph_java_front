@@ -1280,8 +1280,8 @@
 				<div style="height: 30px;margin-top: 10px;">
 					<div class="scys" id="dwyjsc"><span>上传文件</span></div>
 					<div id="fileNameDiv" class="fileNameDiv"></div>
-					<%--<input type="hidden" name="syllabus_id" id="syllabus_id_1"/>
-                    <input type="hidden" name="syllabus_name" id="syllabus_name_1"/>--%>
+					<input type="hidden" name="syllabus_id" id="syllabus_id_1"/>
+                    <input type="hidden" name="syllabus_name" id="syllabus_name_1"/>
 				</div>
 			</div>
 			<!-- 院校推荐意见-->
