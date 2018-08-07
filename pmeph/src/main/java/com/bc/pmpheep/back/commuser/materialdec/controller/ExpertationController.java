@@ -803,6 +803,9 @@ public class ExpertationController extends BaseController{
 		Map<String,Object> queryMap = new HashMap<String,Object>();
 		queryMap.put("user_id", user_id);
 		queryMap.put("declaration_id", declaration_id);
+		//学科
+		List<Map<String,Object>> subjectList = this.etService.selectSubject(queryMap);
+		List<Map<String,Object>> contentList = this.etService.selectContent(queryMap);
 
 		//1.作家申报信息表
 		List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
@@ -884,6 +887,8 @@ public class ExpertationController extends BaseController{
 		intentionMap = this.mdService.queryIntention(queryMap);
 
 		//填充
+		mav.addObject("subjectList", subjectList);
+		mav.addObject("contentList", contentList);
 		mav.addObject("gezlList", gezlList.get(0));
 		mav.addObject("stuList", stuList);
 		mav.addObject("workList", workList);
