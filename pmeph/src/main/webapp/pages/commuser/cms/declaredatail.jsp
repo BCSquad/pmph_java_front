@@ -28,6 +28,11 @@
 <div class="content-wrapper">
     <div style="margin-top: 15px">首页>临床决策专家申报</div>
     <div class="name">人卫临床助手专家申报报名须知</div>
+    <div style="color: red;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 50px;
+    line-height: 60px;">公告展示目前正在完善，请下个版本再测试！点击按钮报名参加。</div>
     <div class="join" onclick="tojoin(${state})">报名参加</div>
 </div>
 </body>
@@ -41,6 +46,12 @@
 
     .join{
         margin-left: 45%;
+        margin-top: 50px;
+        background-color: #33CAA9;
+        width: 70px;
+        border-radius: 2px;
+        text-align: center;
+        color: white;
     }
 </style>
 <script>
