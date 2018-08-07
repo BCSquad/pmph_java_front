@@ -44,8 +44,8 @@
     }
 </style>
 <script>
-    function tojoin(material_id) {
-        location.href = contextpath + 'expertation/toExpertationAdd.action?material_id='+material_id;
+    function tojoin(state) {
+        location.href = contextpath + 'expertation/lookforward.action?expert_type='+state;
     }
 </script>
 </html>
