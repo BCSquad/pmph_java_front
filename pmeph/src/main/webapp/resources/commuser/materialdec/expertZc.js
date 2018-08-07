@@ -827,48 +827,45 @@ function del_tr(trId){
 }
 
 //提交   类型1 表示提交  2 表示暂存
-function buttAdd(type){
-    $('#sbdw_name').tipso({validator: "isNonEmpty", message: "申报单位不能为空"})
-    //if(checkEqual("textbook_id")) {
-        if (type == '2') { //表示暂存
-            //避免重复点击
-            document.getElementById('buzc').onclick = function () {
-                window.message.warning("请不要重复点击");
-            };
-            document.getElementById('butj').onclick = function () {
-                window.message.warning("请不要重复点击");
-            };
+function buttAdd(type) {
+    if (type == '2') { //表示暂存
+        //避免重复点击
+        document.getElementById('buzc').onclick = function () {
+            window.message.warning("请不要重复点击");
+        };
+        document.getElementById('butj').onclick = function () {
+            window.message.warning("请不要重复点击");
+        };
+        $.ajax({
+            type: "POST",
+            url: contextpath + 'expertation/doExpertationAdd.action?sjump=1&type=' + type,
+            data: $('#objForm').serialize(),// 您的formid
+            async: false,
+            success: function (json) {
+                if (json.msg == 'OK') {
+                    window.message.success("操作成功,正在跳转页面");
+                    window.location.href = contextpath + "expertation/declare.action";
+                }
+            }
+        });
+    } else {  //表示提交
+        checkLb();
+        if ($.fireValidator()) {
             $.ajax({
                 type: "POST",
-                url: contextpath + 'material/doMaterialAdd.action?sjump=2&type=' + type,
+                url: contextpath + 'expertation/doExpertationAdd.action?sjump=1&type=' + type,
                 data: $('#objForm').serialize(),// 您的formid
                 async: false,
+                dataType: "json",
                 success: function (json) {
                     if (json.msg == 'OK') {
                         window.message.success("操作成功,正在跳转页面");
-                        window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
+                        window.location.href = contextpath + "expertation/declare.action";
                     }
                 }
             });
-        } else { //表示提交
-            checkLb();
-            if(checkEqual("textbook_id") && checkBoxInfo() && $.fireValidator()){
-                var username = $("#username").val();
-                var realname = $("#realname").val();
-                if(checkEqual("textbook_id")&&checkBoxInfo()){
-                    if (username == realname) {
-                        if (confirm("您填写的申报姓名和账号一致，是否已当前姓名提交申报！")) {
-                            commit(type);
-                        } else {
-                            $("#realname")[0].focus();
-                        }
-                    } else {
-                        commit(type);
-                    }
-            }
-            }
         }
-//    }
+    }
 }
 
 //判断checkbox是否被选中
@@ -1242,4 +1239,28 @@ function toprint(){
     $("#ifprint").jqprint();
     $(".yijian").css("display","none");
     $("#button_cz").css("display","block");
+}
+
+//学科选择
+function SubjectdAdd(material_id){
+    layer.open({
+        type: 2,
+        area: ['800px', '600px'],
+        fixed: false, //不固定
+        title:'学科分类选择',
+        maxmin: true,
+        content: contextpath+"expertation/querySubject.action?material_id="+material_id
+    });
+}
+
+//内容选择
+function ContentAdd(material_id){
+    layer.open({
+        type: 2,
+        area: ['800px', '600px'],
+        fixed: false, //不固定
+        title:'内容分类选择',
+        maxmin: true,
+        content: contextpath+"expertation/queryContent.action?material_id="+material_id
+    });
 }

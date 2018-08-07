@@ -65,9 +65,12 @@
 
     <!-- 查询学科分类列表 -->
     <select id="querySubjectList" parameterType="PageParameter" resultType="java.util.Map">
-        select * from product_subject_type t
+        select * from product_subject_type t where 1=1
         <if test="parameter.type_name != null and parameter.type_name != ''">
-            where t.type_name like #{parameter.type_name}
+            and t.type_name like #{parameter.type_name}
+        </if>
+        <if test="parameter.type_name != null and parameter.type_name != ''">
+            and t.type_name like #{parameter.type_name}
         </if>
         order by parent_id asc limit #{start},#{pageSize}
     </select>
@@ -96,6 +99,11 @@
     </select>
 
     <!--学科分类关联表-->
+    <select id="selectSubject" parameterType="java.util.Map">
+        select t1.*,t2.type_name from expertation_subject_type t1
+	    left join product_subject_type t2 on t1.product_subject_type_id = t2.id
+      where t1.expertation_id = #{expertation_id}
+    </select>
     <update id="insertSubject" parameterType="java.util.Map">
         insert into expertation_subject_type(expertation_id,product_subject_type_id) VALUES(#{expertation_id},#{subjectId})
     </update>
@@ -104,6 +112,11 @@
     </delete>
 
     <!--内容分类关联表-->
+    <select id="selectContent" parameterType="java.util.Map">
+       select t1.*,t2.name_path from expertation_content_type t1
+	  left join product_content_type_detail t2 on t1.product_content_type_id = t2.product_type_id
+        where t1.expertation_id = #{expertation_id}
+    </select>
     <update id="insertContent" parameterType="java.util.Map">
         insert into expertation_content_type(expertation_id,product_content_type_id) VALUES(#{expertation_id},#{contentId})
     </update>

@@ -1649,7 +1649,7 @@
                 <div>
                     <span id="tsxz_span8"></span>
                     <span class="tsxz_title">学科分类(可多选)</span>
-                    <span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.id}')">添加学科分类</span>
+                    <span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.product_id}')">添加学科分类</span>
                 </div>
                 <div class="sbdw" id="xkfladd">
                     <span class="btmc">学科分类：</span>
@@ -1660,7 +1660,7 @@
                 <div>
                     <span id="tsxz_span8"></span>
                     <span class="tsxz_title">内容分类(可多选)</span>
-                    <span class="el-button" onclick="javascript:ContentAdd('${materialMap.id}')">添加内容分类</span>
+                    <span class="el-button" onclick="javascript:ContentAdd('${materialMap.product_id}')">添加内容分类</span>
                 </div>
                 <div class="sbdw" id="nrfladd">
                     <span class="btmc">内容分类：</span>

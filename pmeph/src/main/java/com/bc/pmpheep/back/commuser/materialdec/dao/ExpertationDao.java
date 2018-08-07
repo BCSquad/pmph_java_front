@@ -46,12 +46,14 @@ public interface ExpertationDao {
 	/**
 	 * 学科分类关联表
 	 */
+	public List<Map<String,Object>> selectSubject(List<Map<String, Object>> map);
 	public int insertSubject(Map<String,Object> map);
 	public int delSubject(String experation_id);
 
 	/**
 	 * 内容分类关联表
 	 */
+	public List<Map<String,Object>> selectContent(List<Map<String, Object>> map);
 	public int insertContent(Map<String,Object> map);
 	public int delContent(String experation_id);
 }

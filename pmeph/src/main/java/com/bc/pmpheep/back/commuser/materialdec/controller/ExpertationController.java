@@ -286,7 +286,7 @@ public class ExpertationController extends BaseController{
 		perMap.put("syllabus_name", request.getParameter("syllabus_name"));
 		//获取学科及内容分类id
 		String subjectIds[] = request.getParameterValues("subjectId");
-		String contentIds[] = request.getParameterValues("contentId");
+        String contentIds[] = request.getParameterValues("contentId");
 		List<Map<String,Object>> subjectList = new ArrayList<Map<String,Object>>();
 		List<Map<String,Object>> contentList = new ArrayList<Map<String,Object>>();
 		if(subjectIds.length>0){

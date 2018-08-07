@@ -57,4 +57,7 @@ public interface ExpertationService {
 	 * @return
 	 */
 	public Map<String,Object> queryMaterialbyId(String material_id);
+
+    public List<Map<String,Object>> selectSubject(List<Map<String, Object>> map);
+    public List<Map<String,Object>> selectContent(List<Map<String, Object>> map);
 }
