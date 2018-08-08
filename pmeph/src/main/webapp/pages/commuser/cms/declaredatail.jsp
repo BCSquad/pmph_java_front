@@ -27,16 +27,46 @@
 </jsp:include>
 <div class="content-wrapper">
     <div style="margin-top: 15px">首页>临床决策专家申报</div>
-    <div class="name">人卫临床助手专家申报报名须知</div>
-    <div style="color: red;
-    text-align: center;
-    margin-top: 50px;
-    font-size: 50px;
-    line-height: 60px;">公告展示目前正在完善，请下个版本再测试！点击按钮报名参加。</div>
+    <c:if test="${state==1}">
+        <div class="name">人卫临床助手专家申报报名须知</div>
+    </c:if>
+    <c:if test="${state==2}">
+        <div class="name">人卫用药助手专家申报报名须知</div>
+    </c:if>
+    <c:if test="${state==3}">
+        <div class="name">人卫中医助手专家申报报名须知</div>
+    </c:if>
+    <div>${description}</div>
+
+    <div style="color: #70BBC2">相关附件：</div>
+    <div class="att">
+        <c:forEach items="${list}" var="list" varStatus="status">
+            <div>
+            <span style="float: left"><img src="${ctx}/statics/pictures/attachment.png">附件${status.index+1}:</span>
+            <span style="margin-left: 5px"><a href="${ctx}/${list.attachment}">${list.attachment_name}</a></span>
+            </div>
+        </c:forEach>
+    </div>
     <div class="join" onclick="tojoin(${state})">报名参加</div>
 </div>
 </body>
 <style>
+    a{
+        color: #70BBC2;
+        cursor: pointer;
+    }
+
+    img{
+        float: left;
+        margin-top: 5px;
+        margin-right: 5px;
+
+    }
+
+    .att{
+        margin-left: 80px;
+    }
+
     .name{
         margin-top: 50px;
         width: 100%;
@@ -47,11 +77,14 @@
     .join{
         margin-left: 45%;
         margin-top: 50px;
-        background-color: #33CAA9;
-        width: 70px;
+        background-color: #70BBC2;
+        width: 143px;
         border-radius: 2px;
+        height: 47px;
         text-align: center;
         color: white;
+        cursor: pointer;
+        line-height: 45px;
     }
 </style>
 <script>
