@@ -134,4 +134,10 @@ public interface HomeDao {
      */
     int querySize(@Param("type") String type);
 
+    /**
+     * 根据产品类型查询详情
+     * @return
+     */
+    List<Map<String,Object>> quertProductByType(@Param("product_type") String product_type);
+
 }

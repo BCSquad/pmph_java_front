@@ -317,6 +317,24 @@ public class HomeServiceImpl implements HomeService {
         return homeDao.querySize(type);
     }
 
+    @Override
+    public List<Map<String, Object>> quertProductByType(String product_type) {
+        List<Map<String, Object>> list=homeDao.quertProductByType(product_type);
+        if(list!=null){
+            for (Map<String, Object> map:list) {
+                //备注
+//                String note=list.get(0).get("note").toString();
+                //简介
+                String description=list.get(0).get("description").toString();
+//                Content note_detail = contentService.get(note);
+                Content description_detail = contentService.get(description);
+                map.put("description_detail",description_detail.getContent());
+                map.put("attachment","file/download/" + map.get("attachment") + ".action");
+            }
+        }
+        return list;
+    }
+
     //去掉字符串中的html标签
     public String removeHtml(String str){
         String regEx_html="<[^>]+>"; //定义HTML标签的正则表达式
