@@ -64,4 +64,36 @@ public interface ExpertationDao {
 	 * @return
 	 */
 	Map<String,Object> queryExpertationDetail(@Param("user_id") String user_id,@Param("expert_type") String expert_type);
+
+	//查询学习经历
+	public List<Map<String,Object>> queryStu(Map<String, Object> map);
+	public int insertStu(Map<String, Object> map);
+	public int DelStu(Map<String, Object> map);
+	//查询工作经历
+	public List<Map<String,Object>> queryWork(Map<String, Object> map);
+	public int insertWork(Map<String, Object> map);
+	public int DelWork(Map<String, Object> map);
+	//作家学术
+	public List<Map<String,Object>> queryZjxs(Map<String, Object> map);
+	public int insertZjxs(Map<String, Object> map);
+	public int DelZjxs(Map<String, Object> map);
+	//作家主编国家级规划教材情况
+	public List<Map<String,Object>> queryGjghjc(Map<String, Object> map);
+	public int insertGjghjc(Map<String, Object> map);
+	public int DelGjghjc(Map<String, Object> map);
+	//查询人卫社教材编写情况
+	public List<Map<String,Object>> queryRwsjc(Map<String, Object> map);
+	public int insertRwsjc(Map<String, Object> map);
+	public int DelRwsjc(Map<String, Object> map);
+	//作家扩展项填报表
+	public List<Map<String,Object>> queryZjkzbb(Map<String, Object> map);
+	public int insertZjkzbb(Map<String, Object> map);
+	public int delZjkzbb(Map<String, Object> map);
+
+	//主编学术专著情况
+	public List<Map<String,Object>> queryMonograph(Map<String, Object> map);
+	public int insertMonograph(Map<String, Object> map);
+	public int DelMonograph(Map<String, Object> map);
+
+	public List<Map<String,Object>> queryZjkzxxById(String material_id);
 }

@@ -39,6 +39,7 @@
         </div>
         <form id="objForm">
             <input type="hidden" id="material_id" name="material_id" value="${materialMap.product_id}"/>
+            <input type="hidden" id="expertation_id" name="expertation_id" value="${materialMap.declaration_id}"/>
             <!-- 专家信息-->
             <div class="sbxq_item1">
                 <div>
@@ -1682,8 +1683,10 @@
                 <div style="height: 30px;margin-top: 10px;">
                     <div class="scys" id="dwyjsc"><span>上传文件</span></div>
                     <div id="fileNameDiv" class="fileNameDiv"></div>
-                    <input type="hidden" name="syllabus_id" id="syllabus_id_1"/>
-                    <input type="hidden" name="syllabus_name" id="syllabus_name_1"/>
+                    <input type="hidden" name="syllabus_id" id="syllabus_id"/>
+                    <input type="hidden" name="syllabus_name" id="syllabus_name"/>
+                    <div class="filename"><a href="javascript:" onclick="downLoadProxy('${gezlList.unit_advise}')"
+                                             title="${gezlList.syllabus_name}">${gezlList.syllabus_name}</a></div>
                 </div>
             </div>
             <!-- 院校推荐意见-->
