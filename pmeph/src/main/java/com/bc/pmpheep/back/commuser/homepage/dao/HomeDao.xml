@@ -452,4 +452,12 @@ LIMIT 0,10
 		) t
 	</select>
 
+	<!--根据产品类型查询详情-->
+	<select id="quertProductByType" parameterType="java.util.Map" resultType="java.util.Map">
+        select
+		   t. note,t.description,b.*
+		   from product t left join product_attachment b on t.id=b.product_id
+		   where t.product_type=#{product_type} and t.is_deleted=0 and t.is_published=1
+	</select>
+
 </mapper>

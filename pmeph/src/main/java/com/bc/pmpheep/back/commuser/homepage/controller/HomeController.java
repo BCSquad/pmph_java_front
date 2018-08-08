@@ -344,7 +344,10 @@ public class HomeController extends BaseController{
     public ModelAndView todeclaredetail(HttpServletRequest request){
         ModelAndView modelAndView=new ModelAndView();
         String state=request.getParameter("state");
+        List<Map<String,Object>> list=homeService.quertProductByType(state);
+        modelAndView.addObject("description",list.get(0).get("description_detail"));
         modelAndView.addObject("state",state);
+        modelAndView.addObject("list",list);
         modelAndView.setViewName("commuser/cms/declaredatail");
         return modelAndView;
     }
