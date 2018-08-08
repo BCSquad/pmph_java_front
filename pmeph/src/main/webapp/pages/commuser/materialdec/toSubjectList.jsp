@@ -25,7 +25,7 @@
 		<div style="width: 100%;margin-top: 20px;">
 			<span class="mc1">学科分类：</span>
 			<input type="hidden" id="material_id" name="material_id" value="${paraMap.material_id}">
-			<input class="cg_input" style="width: 457px;height: 36px;" id="orgname" name="orgname" value="${paraMap.orgname}" />
+			<input class="cg_input" style="width: 457px;height: 36px;" id="typename" name="typename" value="${paraMap.typename}" />
 			<div class="cxbutn" onclick="javascript:query()">
 				<span>查询</span>
 			</div>
@@ -78,8 +78,8 @@ Page({
     startnum: parseInt("${pageResult.pageNumber}"),				//指定页码
     elem: $('#page1'),		//指定的元素
     callback: function (n) {	//回调函数
-    	var orgname =$("#orgname").val();
-        window.location.href="${ctx}/material/toSearchOrg.action?currentPage="+n+"&pageSize="+$("input[name='pageSize']").val()+"&material_id="+material_id+"&orgname="+encodeURI(encodeURI(orgname)); 
+    	var type_name =$("#type_name").val();
+        window.location.href="${ctx}/expertation/querySubject.action?currentPage="+n+"&pageSize="+$("input[name='pageSize']").val()+"&material_id="+material_id+"&typename="+encodeURI(encodeURI(typename));
     }
 });
 $(function () {
@@ -88,8 +88,8 @@ $(function () {
         height: 30,
         optionHeight: 30,
         onChange:function (){
-        	var orgname =$("#orgname").val();
-        	window.location.href="${ctx}/material/toSearchOrg.action?currentPage="+n+"&pageSize="+$("input[name='pageSize']").val()+"&material_id="+material_id+"&orgname="+encodeURI(encodeURI(orgname));
+            var typename =$("#typename").val();
+        	window.location.href="${ctx}/expertation/querySubject.action?currentPage="+n+"&pageSize="+$("input[name='pageSize']").val()+"&material_id="+material_id+"&typename="+encodeURI(encodeURI(typename));
         }
     });
     $('#org_tab tr:last').find('td').addClass('end'); 
@@ -97,12 +97,12 @@ $(function () {
 
 function tojump(){
 	var toPage = $("#toPage").val();
-	window.location.href="${ctx}/material/toSearchOrg.action?currentPage="+toPage+"&pageSize="+$("input[name='pageSize']").val()+"&material_id="+material_id;
+	window.location.href="${ctx}/expertation/querySubject.action?currentPage="+toPage+"&pageSize="+$("input[name='pageSize']").val();
 }
 //查询
 function query(){
-	var orgname =$("#orgname").val();
-	window.location.href="${ctx}/material/toSearchOrg.action?material_id="+material_id+"&orgname="+encodeURI(encodeURI(orgname)); 
+	var typename =$("#typename").val();
+	window.location.href="${ctx}/expertation/querySubject.action?material_id="+material_id+"&typename="+encodeURI(encodeURI(typename));
 }
 
 //确认选择

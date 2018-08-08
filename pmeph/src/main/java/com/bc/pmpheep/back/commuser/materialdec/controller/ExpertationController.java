@@ -924,7 +924,7 @@ public class ExpertationController extends BaseController{
 		String material_id = request.getParameter("material_id");
 		String  currentPageStr = (String) request.getParameter("currentPage");
 		String  pageSizeStr = request.getParameter("pageSize");
-		String  orgname = request.getParameter("orgname");
+		String  typename = request.getParameter("typename");
 		Map<String,Object> paraMap = new HashMap<String,Object>();
 		//分页查询
 		int currentPage = 0;
@@ -941,11 +941,11 @@ public class ExpertationController extends BaseController{
 		paraMap.put("material_id", material_id);
 		paraMap.put("endPage", pageSize);
 		paraMap.put("currentPage", currentPage);
-		if(orgname!=null && !orgname.equals("")){
+		if(typename!=null && !typename.equals("")){
 			try {
-				orgname = URLDecoder.decode(orgname,"UTF-8");
-				paraMap.put("org_name", "%"+orgname+"%");
-				paraMap.put("orgname", orgname);
+				typename = URLDecoder.decode(typename,"UTF-8");
+				paraMap.put("typename", "%"+typename+"%");
+				paraMap.put("type_name", typename);
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
@@ -968,7 +968,7 @@ public class ExpertationController extends BaseController{
 		String material_id = request.getParameter("material_id");
 		String  currentPageStr = (String) request.getParameter("currentPage");
 		String  pageSizeStr = request.getParameter("pageSize");
-		String  orgname = request.getParameter("orgname");
+		String  namepath = request.getParameter("namepath");
 		Map<String,Object> paraMap = new HashMap<String,Object>();
 		//分页查询
 		int currentPage = 0;
@@ -985,11 +985,11 @@ public class ExpertationController extends BaseController{
 		paraMap.put("material_id", material_id);
 		paraMap.put("endPage", pageSize);
 		paraMap.put("currentPage", currentPage);
-		if(orgname!=null && !orgname.equals("")){
+		if(namepath!=null && !namepath.equals("")){
 			try {
-				orgname = URLDecoder.decode(orgname,"UTF-8");
-				paraMap.put("org_name", "%"+orgname+"%");
-				paraMap.put("orgname", orgname);
+				namepath = URLDecoder.decode(namepath,"UTF-8");
+				paraMap.put("name_path", "%"+namepath+"%");
+				paraMap.put("namepath", namepath);
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
