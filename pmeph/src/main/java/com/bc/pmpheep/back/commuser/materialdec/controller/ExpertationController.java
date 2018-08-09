@@ -128,7 +128,7 @@ public class ExpertationController extends BaseController{
             material_id = arrMaterial_id[0];
         }
 		//作家扩展信息
-		List<Map<String,Object>> zjkzxxList = this.mdService.queryZjkzxxById(material_id);
+		List<Map<String,Object>> zjkzxxList = this.etService.queryZjkzxxById(material_id);
 
 		mav.addObject("userMap", userMap);
 		mav.addObject("zjkzxxList", zjkzxxList);
@@ -738,7 +738,7 @@ public class ExpertationController extends BaseController{
 		//12.作家扩展项填报表
 		List<Map<String,Object>> zjkzqkList = new ArrayList<Map<String,Object>>();
 		zjkzqkList = this.mdService.queryZjkzbb(queryMap);
-		List<Map<String,Object>> zjkzxxList = this.mdService.queryZjkzxxById(material_id);
+		List<Map<String,Object>> zjkzxxList = this.etService.queryZjkzxxById(material_id);
 		//13.个人成就
 		Map<String,Object> achievementMap = new HashMap<String,Object>();
 		achievementMap = this.mdService.queryAchievement(queryMap);
@@ -829,9 +829,6 @@ public class ExpertationController extends BaseController{
 		//教材信息
 		Map<String,Object> materialMap = new HashMap<String,Object>();
 		materialMap = this.etService.queryMaterialbyId(product_id);
-		queryMap.put("is_multi_books", materialMap.get("is_multi_books"));
-		queryMap.put("is_multi_position", materialMap.get("is_multi_position"));
-		queryMap.put("is_digital_editor_optional", materialMap.get("is_digital_editor_optional"));
 
 		//3.作家学习经历表
 		List<Map<String,Object>> stuList = new ArrayList<Map<String,Object>>();

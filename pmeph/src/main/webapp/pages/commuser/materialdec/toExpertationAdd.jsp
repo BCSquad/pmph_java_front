@@ -315,19 +315,6 @@
 					</table>
 				</div>
 			</div>
-			<!--个人成就-->
-			<div class="sbxq_item" id="grcjqk">
-				<div>
-					<span id="tsxz_span9"></span>
-					<span class="tsxz_title">个人成就</span>
-					<span class="tsxz_ts" id="grcj_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
-					<span class="tsxz_xt" id="grcj_xt" >（选填）</span>
-				</div>
-				<div class="content">
-					<textarea class="text_cl" maxlength="1000"  name="gr_content" id="gr_content" maxlength="1000">${achievementMap.content}</textarea>
-					<input name="grcj_id" type="hidden" value="${achievementMap.id}">
-				</div>
-			</div>
 			<!--主要学术兼职-->
 			<div class="sbxq_item" id="xsjz">
 				<div>
@@ -1254,7 +1241,7 @@
             <div class="sbxq_item1">
                 <div>
                     <span id="tsxz_span8"></span>
-                    <span class="tsxz_title">学科分类(可多选)</span>
+                    <span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" />学科分类(可多选)</span>
 					<span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.id}')">添加学科分类</span>
                 </div>
                 <div class="sbdw" id="xkfladd">
@@ -1272,10 +1259,10 @@
                     <span class="btmc">内容分类：</span>
                 </div>
             </div>
-			<div class="sbxq_item1">
+			<div class="sbxq_item" id="szdwyj">
 				<div>
 					<span id="tsxz_span8"></span>
-					<span class="tsxz_title">所在单位意见<span style="color: red">(上传单位盖章的申报表)</span></span>
+					<span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" />所在单位意见<span style="color: red">(上传单位盖章的申报表)</span></span>
 				</div>
 				<div style="height: 30px;margin-top: 10px;">
 					<div class="scys" id="dwyjsc"><span>上传文件</span></div>
@@ -1298,7 +1285,7 @@
 				<div class="div_butt">
 					<div class="bt_tj" id="butj" onclick="javascript:buttAdd('2')">暂存</div>
 					<div class="bt_tj" id="buzc" onclick="javascript:buttAdd('1')">提交</div>
-					<div class="bt_tj" onclick="toprint()">打印</div>
+					<div class="bt_tj" id="print" onclick="toprint()">打印</div>
 					<%--<div class="bt_tj" onclick="javascript:buttGive()">放弃</div>--%>
 				</div>
 				<div style="color: red;font-size: 16px;margin-top: 15px;">（提示：如暂存或提交不成功请使用360浏览器极速模式或谷歌浏览器）</div>
