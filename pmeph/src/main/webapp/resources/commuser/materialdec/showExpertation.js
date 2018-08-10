@@ -1,5 +1,6 @@
 $(function () {
 	var id = $("#material_id").val();
+	alert(id);
 	queryMaterialMap(id);  //执行查询方法
 });
 
@@ -18,6 +19,10 @@ function queryMaterialMap(id){
 
 //模块显示与隐藏判断
 function chooseModel(data){
+    //所在单位意见
+    if(data.is_unit_advise_used == "1"){
+        $("#szdwyj").css("display","block");
+    }
 	//学习经历
 	if(data.is_edu_exp_used == "1"){
 		$("#zyxxjl").css("display","block");
@@ -99,7 +104,7 @@ function downLoadProxy(fileId){
 
 //放弃
 function buttGive(){
-	window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=jcsb";
+	window.location.href=contextpath+"expertation/declare.action";
 }
 
 //打印按钮

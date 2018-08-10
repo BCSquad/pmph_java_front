@@ -20,7 +20,7 @@ $(function () {
     },0)
 
 
-    var id = $("#material_id").val();
+    var id = $("#expert_type").val();
     setTimeout(function (){
         upload();
     },1000);

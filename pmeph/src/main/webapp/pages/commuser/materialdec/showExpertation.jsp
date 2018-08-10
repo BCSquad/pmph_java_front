@@ -22,7 +22,7 @@
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="body">
 	<div class="content-wrapper">
-		<<input type="hidden" name="material_id" id="material_id" value="${material.id}">
+		<input type="hidden" name="material_id" id="material_id" value="${queryMap.expert_type}">
 		<div class="sbxq_title">
 			<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=jcsb&pageNum=1&pageSize=10"> 教材申报 </a> > ${material.material_name}</span>
 		</div>
@@ -675,22 +675,22 @@
                 <span class="btmc">内容分类：</span>
             </div>
         </div>
-
-        <!-- 院校推荐意见-->
-		<div class="yijian">
-			<div class="tujian01">院校推荐意见:</div>
-			<div class="tujian02">
-				<div class="qianzi">负责人签字:</div>
-				<div class="gaizhang">(院校盖章)</div>
+		<div class="sbxq_item" id="szdwyj">
+			<div>
+				<span id="tsxz_span8"></span>
+				<span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" />所在单位意见<span style="color: red">(上传单位盖章的申报表)</span></span>
 			</div>
-			<div class="tujian03">年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</div>
+			<div style="height: 30px;margin-top: 10px;">
+				<div class="filename"><a href="javascript:" onclick="downLoadProxy('${gezlList.unit_advise}')"
+						title="${gezlList.syllabus_name}">${gezlList.syllabus_name}</a>
+				</div>
+			</div>
 		</div>
 		<hr style=" height:1px;border:none;border-top:1px #999999 dashed;margin-top: 30px;">
 		</div>
 		<c:if test="${isSelfLog=='true' }">
 			<div class="button">
 				<div class="bt_tj" onclick="javascript:buttGive()">返回申报列表</div>
-				<div class="bt_tj" onclick="toprint()">打印</div>
 			</div>
 			<span style="color: #E31028;font-size: 14px;text-align: center;float: left;margin-left: 350px;">打印推荐使用浏览器：chrome、360浏览器极速模式、IE浏览器支持IE10及以上版本</span>
 		</c:if>

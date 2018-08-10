@@ -42,6 +42,7 @@
         <div id="ifprint">
         <form id="objForm">
             <input type="hidden" id="material_id" name="material_id" value="${materialMap.product_id}"/>
+            <input type="hidden" id="expert_type" name="expert_type" value="${materialMap.expert_type}"/>
             <input type="hidden" id="expertation_id" name="expertation_id" value="${materialMap.declaration_id}"/>
             <!-- 专家信息-->
             <div class="sbxq_item1">
