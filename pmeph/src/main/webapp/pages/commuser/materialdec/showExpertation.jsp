@@ -178,7 +178,7 @@
 		<div class="sbxq_item" id="xsjz">
 			<div>
 				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">学术兼职</span>
+				<span class="tsxz_title">主要学术兼职</span>
 			</div>
 			<div class="content">
 				<table class="tab_2" id="tab_xsjz">
@@ -614,6 +614,35 @@
 				</table>
 			</div>
 		</div>
+		<!--主编或参编图书情况-->
+		<div class="sbxq_item" id="zbcbtsqk">
+			<div>
+				<span id="tsxz_span6"></span>
+				<span class="tsxz_title">主编或参编图书情况</span>
+			</div>
+			<div class="content">
+				<table class="tab_2" id="tab_zbtsqk">
+					<thead>
+					<tr>
+						<td width="350px">教材名称</td>
+						<td width="330px">出版社</td>
+						<td width="160px">出版时间</td>
+						<td>备注</td>
+					</tr>
+					</thead>
+					<tbody>
+					<c:forEach var="list" items="${editorList}" varStatus="status">
+						<tr>
+							<td>${list.material_name}</td>
+							<td>${list.publisher}</td>
+							<td>${list.publish_date}</td>
+							<td>${list.note}</td>
+						</tr>
+					</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
 		<!--编写内容意向表-->
 	 	<div class="sbxq_item" id="intention">
 			<div>
@@ -655,26 +684,36 @@
                 </div>
 			</div>
 		</c:forEach>
-        <!-- 学科分类-->
-        <div class="sbxq_item1">
-            <div>
-                <span id="tsxz_span8"></span>
-                <span class="tsxz_title">学科分类(可多选)</span>
-            </div>
-            <div class="sbdw">
-                <span class="btmc">学科分类：</span>
-            </div>
-        </div>
-        <!-- 内容分类-->
-        <div class="sbxq_item1">
-            <div>
-                <span id="tsxz_span8"></span>
-                <span class="tsxz_title">内容分类(可多选)</span>
-            </div>
-            <div class="sbdw">
-                <span class="btmc">内容分类：</span>
-            </div>
-        </div>
+		<!-- 学科分类-->
+		<div class="sbxq_item1">
+			<div>
+				<span id="tsxz_span8"></span>
+				<span class="tsxz_title">学科分类(可多选)</span>
+				<span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.product_id}')">添加学科分类</span>
+			</div>
+			<div class="sbdw" id="xkfladd">
+				<span class="btmc">学科分类：</span>
+				<c:forEach var="subject" items="${subjectList}" varStatus="status">
+				<span class="el-tag" id="xkfl_${status.count}">${subject.type_name}<input name="subjectId" type="hidden" value="${subject.product_subject_type_id}"/>
+					</span>
+				</c:forEach>
+			</div>
+		</div>
+		<!-- 内容分类-->
+		<div class="sbxq_item1">
+			<div>
+				<span id="tsxz_span8"></span>
+				<span class="tsxz_title">内容分类(可多选)</span>
+				<span class="el-button" onclick="javascript:ContentAdd('${materialMap.product_id}')">添加内容分类</span>
+			</div>
+			<div class="sbdw" id="nrfladd">
+				<span class="btmc">内容分类：</span>
+				<c:forEach var="content" items="${contentList}" varStatus="status">
+				<span class="el-tag" id="nrfl_${status.count}">${content.name_path}<input name="contentId" type="hidden" value="${content.product_content_type_id}"/>
+					</span>
+				</c:forEach>
+			</div>
+		</div>
 		<div class="sbxq_item" id="szdwyj">
 			<div>
 				<span id="tsxz_span8"></span>

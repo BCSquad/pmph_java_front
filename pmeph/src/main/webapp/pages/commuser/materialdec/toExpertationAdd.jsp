@@ -319,7 +319,7 @@
 			<div class="sbxq_item" id="xsjz">
 				<div>
 					<span id="tsxz_span10"></span>
-					<span class="tsxz_title">学术兼职</span>
+					<span class="tsxz_title">主要学术兼职</span>
 					<span class="tsxz_ts" id="xsjz_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
 					<span id="xsjz_xt" class="tsxz_xt">（选填）</span>
 				</div>
@@ -1195,6 +1195,57 @@
 									</c:when>
 									<c:otherwise>
 										<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('acade_${status.count}')"/>
+									</c:otherwise>
+								</c:choose></td>
+							</tr>
+						</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!--主编或参编图书情况-->
+			<div class="sbxq_item" id="zbcbtsqk">
+				<div>
+					<span id="tsxz_span6"></span>
+					<span class="tsxz_title">主编或参编图书情况</span>
+					<span class="tsxz_ts" id="zbcb_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+					<span class="tsxz_xt" id="zbcb_xt" >（选填）</span>
+				</div>
+				<div class="content">
+					<table class="tab_2" id="tab_zbtsqk">
+						<thead>
+						<tr>
+							<td width="350px">教材名称</td>
+							<td width="330px">出版社</td>
+							<td width="160px">出版时间</td>
+							<td>备注</td>
+							<td width="78px">添加</td>
+						</tr>
+						</thead>
+						<tbody>
+						<c:if test="${empty perjcbjList[0]}">
+							<tr>
+								<td><input class="cg_input" maxlength="100" style="width: 320px" id="zbts_material_name" name="zbts_material_name" id="jc_material_name" value="" placeholder="教材名称"/></td>
+								<td><input class="cg_input" name="zbts_publisher" value=""  style="width: 300px;" maxlength="20"/></td>
+								<td><input class="cg_input" name="zbts_publish_date" id="zbts_publish_date" value="" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  style="width: 130px;"/></td>
+								<td><input class="cg_input" maxlength="100" name="zbts_note" value="" style="width: 240px;" placeholder="备注"/><input type="hidden" name="jc_id" value=""></td>
+								<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_zbtsqk()"/></td>
+							</tr></c:if>
+						<c:forEach var="list" items="${perjcbjList}" varStatus="status">
+							<tr id="zbtsqk_${status.count}">
+								<td><input class="cg_input" maxlength="100" style="width: 320px" name="zbts_material_name" id="zbts_material_name_${status.count}" value="${list.material_name}" placeholder="教材名称"/></td>
+								<td><input class="cg_input" name="zbts_publisher" value="${list.publisher}"  style="width: 300px;" maxlength="20"/></td>
+								<td><input class="cg_input" name="zbts_publish_date" id="zbts_publish_date_${status.count}" value="${list.publish_date}" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  style="width: 130px;"/></td>
+								<td><input class="cg_input" maxlength="100" name="zbts_note" value="${list.note}" style="width: 240px;" placeholder="备注"/>
+									<input type="hidden" name="zdjy" value="zbts_material_name_${status.count}"/>
+									<input type="hidden" name="zbts_id" value="${list.id}">
+								</td>
+								<td><c:choose>
+									<c:when test="${status.count == 1}">
+										<img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_zbtsqk()"/>
+									</c:when>
+									<c:otherwise>
+										<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('zbtsqk_${status.count}')"/>
 									</c:otherwise>
 								</c:choose></td>
 							</tr>

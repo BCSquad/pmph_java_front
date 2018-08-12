@@ -90,10 +90,18 @@ public interface ExpertationDao {
 	public int insertZjkzbb(Map<String, Object> map);
 	public int delZjkzbb(Map<String, Object> map);
 
+	//主编或参编图书情况
+	public List<Map<String,Object>> queryEditor(Map<String, Object> map);
+	public int insertEditor(Map<String, Object> map);
+	public int delEditor(Map<String, Object> map);
+
 	//主编学术专著情况
 	public List<Map<String,Object>> queryMonograph(Map<String, Object> map);
 	public int insertMonograph(Map<String, Object> map);
 	public int DelMonograph(Map<String, Object> map);
+
+	//查看临床信息
+	public Map<String,Object> queryProduct(String product_type);
 
 	public List<Map<String,Object>> queryZjkzxxById(String material_id);
 }

@@ -1,6 +1,5 @@
 $(function () {
 	var id = $("#material_id").val();
-	alert(id);
 	queryMaterialMap(id);  //执行查询方法
 });
 
@@ -94,6 +93,10 @@ function chooseModel(data){
     //编写内容意向表
     if(data.is_intention_used == "1"){
         $("#intention").css("display","block");
+    }
+    //主编或参编图书情况
+    if(data.is_edit_book_used == "1"){
+        $("#zbcbtsqk").css("display","block");
     }
 }
 

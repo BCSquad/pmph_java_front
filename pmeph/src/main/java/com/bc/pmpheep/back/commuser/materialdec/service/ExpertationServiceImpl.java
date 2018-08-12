@@ -76,8 +76,9 @@ public class ExpertationServiceImpl implements ExpertationService {
                                List<Map<String, Object>> pmphList,
                                Map<String, Object> digitalMap,
                                Map<String, Object> intentionlMap,
-                                           List<Map<String, Object>> subjectList,
-                                           List<Map<String, Object>> contentList) {
+                               List<Map<String, Object>> subjectList,
+                               List<Map<String, Object>> contentList,
+                               List<Map<String,Object>> editorList) {
         //1.新增申报表
         this.exdao.insertPerson(perMap);
         //2.更新人员信息表
@@ -153,6 +154,23 @@ public class ExpertationServiceImpl implements ExpertationService {
                 }
                 map.put("declaration_id", declaration_id);
                 this.exdao.insertZjxs(map);
+            }
+        }
+        //7.主编或参编图书情况
+        if (editorList != null && !editorList.isEmpty()) {
+            for (Map<String, Object> map : editorList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    /*if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerZjxs(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerZjxs(map);
+                    }*/
+                }
+                map.put("declaration_id", declaration_id);
+                this.exdao.insertEditor(map);
             }
         }
         //9.主编国家级规划教材新增
@@ -240,8 +258,9 @@ public class ExpertationServiceImpl implements ExpertationService {
                                List<Map<String, Object>> pmphList,
                                Map<String, Object> digitalMap,
                                Map<String, Object> intentionlMap,
-                                           List<Map<String, Object>> subjectList,
-                                           List<Map<String, Object>> contentList) {
+                               List<Map<String, Object>> subjectList,
+                               List<Map<String, Object>> contentList,
+                               List<Map<String,Object>> editorList) {
         //修改申报信息
         perMap.put("declaration_id", declaration_id);
         this.exdao.updatePerson(perMap);
@@ -261,6 +280,7 @@ public class ExpertationServiceImpl implements ExpertationService {
         this.exdao.DelMonograph(glMap); ////主编学术专著情况
         this.exdao.delZjkzbb(glMap);   //扩展信息
         this.exdao.DelRwsjc(glMap);  //人卫社教材
+        this.exdao.delEditor(glMap);  //主编或参编图书情况
         this.exdao.delContent(declaration_id);
         this.exdao.delSubject(declaration_id);
 
@@ -327,6 +347,23 @@ public class ExpertationServiceImpl implements ExpertationService {
                 }
                 map.put("declaration_id", declaration_id);
                 this.exdao.insertZjxs(map);
+            }
+        }
+        //7.主编或参编图书情况
+        if (editorList != null && !editorList.isEmpty()) {
+            for (Map<String, Object> map : editorList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    /*if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerZjxs(map);
+                    }else {
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPerZjxs(map);
+                    }*/
+                }
+                map.put("declaration_id", declaration_id);
+                this.exdao.insertEditor(map);
             }
         }
         //9.主编国家级规划教材新增
@@ -478,7 +515,18 @@ public class ExpertationServiceImpl implements ExpertationService {
     }
 
     @Override
+    public List<Map<String, Object>> queryEditor(Map<String, Object> map) {
+        return this.exdao.queryEditor(map);
+    }
+
+
+    @Override
     public List<Map<String, Object>> queryZjkzxxById(String material_id) {
         return this.exdao.queryZjkzxxById(material_id);
+    }
+
+    @Override
+    public Map<String, Object> queryProduct(String expert_type) {
+        return this.exdao.queryProduct(expert_type);
     }
 }

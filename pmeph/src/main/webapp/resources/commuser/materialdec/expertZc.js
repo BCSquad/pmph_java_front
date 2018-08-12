@@ -322,6 +322,20 @@ function chooseModel(data){
             $("#zbxszz_xt").css("display","inline");
         }
     }
+    //主编或参编图书情况
+    if(data.is_edit_book_used == "1"){
+        $("#zbcbtsqk").css("display","block");
+        //主编学术专著情况必填
+        if(data.is_edit_book_required == "1"){
+            $("#zbcb_bt").css("display","inline");
+            $('#zbts_material_name').tipso({validator: "isNonEmpty", message: "专著名称必填"})
+            //给其他值默认为无
+            $("#zbts_publish_date").val(getNowFormatDate());
+            $("#zbts_publisher").val("无");
+        }else{
+            $("#zbcb_xt").css("display","inline");
+        }
+    }
     //出版行业获奖情况
     if(data.is_publish_reward_used == "1"){
         $("#publish").css("display","block");
@@ -593,6 +607,25 @@ function add_gjghjc(){
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('gjghjc_"+num+"')\"/></td>"+
         "</tr>");
     $table.append($tr);
+}
+
+//主编或参编图书情况
+function add_zbtsqk(){
+    var num = fnt();
+    var $table = $("#tab_zbtsqk");
+    var $tr = $("<tr id='zbtsqk_"+num+"'>"+
+        "<td><input class='cg_input' maxlength='100' name='zbts_material_name' id='zbts_material_name_"+num+"' value='' style='width: 320px;' placeholder='教材名称'/></td>"+
+        "<td><input class='cg_input' maxlength='50' name='zbts_publisher' id='zbts_publisher_"+num+"' value='' style='width: 300px;' placeholder='出版社'/></td>"+
+        "<td><input class='cg_input' placeholder='出版时间' id='zbts_publish_date_"+num+"' calendar format=\"'yyyy-mm-dd'\"  z-index='100' name='zbts_publish_date' value='' style='width: 130px;'/></td>"+
+        "<td><input class='cg_input' maxlength='100' name='zbts_note' value='' placeholder='备注' style='width:240px;'/>" +
+        "<input type='hidden' name='zdjy' value='zbts_material_name_"+num+"' />" +
+        "<input type='hidden' name='zbts_id' value=''>"+
+        "</td>"+
+        "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('zbtsqk_"+num+"')\"/></td>"+
+        "</tr>");
+    $table.append($tr);
+    $tr.calendar();
+    $('#jcb_material_name_'+num).tipso({validator: "isNonEmpty", message: "教材名称必填"});
 }
 
 //人卫社教材编写情况
