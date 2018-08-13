@@ -24,11 +24,10 @@
 	<div class="content-wrapper">
 		<input type="hidden" name="material_id" id="material_id" value="${queryMap.expert_type}">
 		<div class="sbxq_title">
-			<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=jcsb&pageNum=1&pageSize=10"> 教材申报 </a> > ${material.material_name}</span>
+			<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> > <a style="text-decoration: none;color: #999999;" href="${contextpath}/expertation/declare.action"> 临床决策专家申报 </a> > 查看申报表</span>
 		</div>
 		<div id="ddd">
 			<div class="tsxz_title" id="tnone" style="display: none;text-align: center;font-size: 20px;margin-top: 6px;">${material.material_name}</div>
-
 		<!-- 专家信息-->
 		<div class="sbxq_item1">
 			<div>
@@ -132,52 +131,10 @@
 				</table>
 			</div>
 		</div>
-			<!--主要教学经历-->
-		<div class="sbxq_item" id="jxjl">
-			<div>
-				<span id="tsxz_span5"></span>
-				<span class="tsxz_title">教学经历</span>
-			</div>
-			<div class="content">
-				<table class="tab_2" id="tab_jxjz">
-					<thead>
-						<tr>
-							<td width="220px">起止时间</td>
-							<td width="220px">学校名称</td>
-							<td width="220px">教学科目 </td>
-							<td>备注</td>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="list" items="${steaList}">
-							<tr>
-								<td>${list.dbegin}-${list.dend}</td>
-								<td>${list.school_name}</td>
-								<td>${list.subject}</td>
-								<td>${list.note}</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<!--个人成就-->
-		<div class="sbxq_item" id="grcjqk">
-			<div>
-				<span id="tsxz_span9"></span>
-				<span class="tsxz_title">个人成就</span>
-			</div>
-			<div class="content">
-				<div class="text_dy">
-					${achievementMap.content}
-				</div>
-				<%--<textarea class="text_cl" name="gr_content" id="gr_content" maxlength="1000" readonly="readonly">${achievementMap.content}</textarea>--%>
-			</div>
-		</div>
 		<!--主要学术兼职-->
 		<div class="sbxq_item" id="xsjz">
 			<div>
-				<span id="tsxz_span7"></span>
+				<span id="tsxz_span10"></span>
 				<span class="tsxz_title">主要学术兼职</span>
 			</div>
 			<div class="content">
@@ -209,80 +166,10 @@
 				</table>
 			</div>
 		</div>
-		<!--上版教材参编情况-->
-		<div class="sbxq_item" id="sbjccb">
-			<div>
-				<span id="tsxz_span6"></span>
-				<span class="tsxz_title">本套上版教材参编情况</span>
-			</div>
-			<div class="content">
-				<table class="tab_2" id="tab_jccb">
-					<thead>
-						<tr>
-							<td width="340px">教材名称</td>
-							<td width="260px">编写职务</td>
-							<td width="120px">数字编委</td>
-							<td width="120px">出版单位</td>
-							<td width="120px">出版时间</td>
-							<td>备注</td>
-						</tr>
-					</thead>
-					<tbody>
-					<c:forEach var="list" items="${jcbjList}">
-						<tr>
-							<td>${list.material_name}</td>
-							<td>
-								<c:if test="${list.position == '0'}">无</c:if>
-								<c:if test="${list.position == '1'}">主编</c:if>
-								<c:if test="${list.position == '2'}">副主编</c:if>
-								<c:if test="${list.position == '3'}">编委</c:if>
-							</td>
-							<td>
-								<c:if test="${list.is_digital_editor == '1'}">是</c:if>
-								<c:if test="${list.is_digital_editor == '0'}">否</c:if>
-							</td>
-							<td>${list.publisher}</td>
-							<td>${list.publishdate}</td>
-							<td>${list.note}</td>
-						</tr>
-					</c:forEach>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<!--主编国家级规划教材情况-->
-		<div class="sbxq_item" id="zbgjjgh">
-			<div>
-				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">主编国家级规划教材情况</span>
-			</div>
-			<div class="content">
-				<table class="tab_2" id="tab_gjghjc">
-					<thead>
-						<tr>
-							<td width="340px">教材名称</td>
-							<td width="150px">标准书号</td>
-							<td width="330px">教材级别</td>
-							<td>备注</td>
-						</tr>
-					</thead>
-					<tbody>
-					<c:forEach var="list" items="${gjghjcList}">
-						<tr>
-							<td>${list.material_name}</td>
-							<td>${list.isbn}</td>
-							<td>${list.rank_text}</td>
-							<td>${list.note}</td>
-						</tr>
-					</c:forEach>	
-					</tbody>
-				</table>
-			</div>
-		</div>
 		<!--人卫社教材编写情况表-->
 		<div class="sbxq_item" id="rwsjcbx">
 			<div>
-				<span id="tsxz_span7"></span>
+				<span id="tsxz_span5"></span>
 				<span class="tsxz_title">人卫社教材编写情况</span>
 			</div>
 			<div class="content">
@@ -329,132 +216,6 @@
 				</table>
 			</div>
 		</div>
-			<!--其他社教材编写情况-->
-		<div class="sbxq_item" id="qtjcbxqk">
-			<div>
-				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">其他社教材编写情况</span>
-			</div>
-			<div class="content">
-				<table class="tab_2" id="tab_qtjcbxqk">
-					<thead>
-						<tr>
-							<td width="230px">教材名称</td>
-							<td width="120px">级别</td>
-							<td width="120px">编写职务</td>
-							<td width="100px">数字编委</td>
-							<td width="130px">出版单位</td>
-							<td width="120px">出版时间</td>
-							<td width="120px">标准书号</td>
-							<td>备注</td>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="list" items="${jcbxqtList}" varStatus="status">
-							<tr>
-							<td>${list.material_name}</td>
-							<td>
-								<c:if test="${list.rank == '0'}">无</c:if>
-								<c:if test="${list.rank == '1'}">国家</c:if>
-								<c:if test="${list.rank == '2'}">省部</c:if>
-								<c:if test="${list.rank == '3'}">协编</c:if>
-								<c:if test="${list.rank == '4'}">校本</c:if>
-								<c:if test="${list.rank == '5'}">其他</c:if>
-							</td>
-							<td>
-								<c:if test="${list.position == '0'}">无</c:if>
-								<c:if test="${list.position == '1'}">主编</c:if>
-								<c:if test="${list.position == '2'}">副主编</c:if>
-								<c:if test="${list.position == '3'}">编委</c:if>
-							</td>
-							<td style="color: #333333;">
-								<c:if test="${list.is_digital_editor == '1'}">是</c:if>
-								<c:if test="${list.is_digital_editor == '0'}">否</c:if>
-							</td>
-								<td>${list.publisher}</td>
-								<td>${list.publishdate}</td>
-								<td>${list.isbn}</td>
-								<td>${list.note}</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<!--参加人卫慕课、数字教材编写情况-->
-		<div class="sbxq_item" id="digital">
-			<div>
-				<span id="tsxz_span9"></span>
-				<span class="tsxz_title">参加人卫慕课、数字教材编写情况</span>
-			</div>
-			<div class="content">
-                <div class="text_dy">
-                    ${digitalMap.content}
-                </div>
-			</div>
-		</div>
-		<!--精品课程建设-->
-		<div class="sbxq_item" id="gjjpkcjs">
-			<div>
-				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">精品课程建设情况</span>
-			</div>
-			<div class="content">
-				<table class="tab_2" id="tab_jpkcjs">
-					<thead>
-					<tr>
-						<td width="350px">课程名称</td>
-						<td width="180px">全年课时</td>
-						<td width="200px">课程级别</td>
-						<td>备注</td>
-					</tr>
-					</thead>
-					<tbody>
-					<c:forEach var="list" items="${gjkcjsList}">
-						<tr>
-							<td>${list.course_name}</td>
-							<td>${list.class_hour}</td>
-							<td>
-								<c:if test="${list.type == '0'}">无</c:if>
-								<c:if test="${list.type == '1'}">国际</c:if>
-								<c:if test="${list.type == '2'}">国家</c:if>
-								<c:if test="${list.type == '3'}">省部</c:if>
-							</td>
-							<td>${list.note}</td>
-						</tr>
-					</c:forEach>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<!--作家科研情况-->
-		<div class="sbxq_item" id="zjkyqk">
-			<div>
-				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">科研情况</span>
-			</div>
-			<div class="content">
-				<table class="tab_2" id="tab_zjky">
-					<thead>
-						<tr>
-							<td width="220px">课题名称</td>
-							<td width="220px">审批单位</td>
-							<td width="320px">获奖情况</td>
-							<td width="320px">备注</td>
-						</tr>
-					</thead>
-					<tbody>
-					<c:forEach var="list" items="${zjkyList}">
-						<tr>
-							<td>${list.research_name}</td>
-							<td>${list.approval_unit}</td>
-							<td>${list.award}</td>
-							<td>${list.note}</td>
-						</tr></c:forEach>
-					</tbody>
-				</table>
-			</div>
-		</div>
 		<!--主编学术专著情况表-->
 		<div class="sbxq_item" id="zbxszz">
 			<div>
@@ -490,130 +251,6 @@
 				</table>
 			</div>
 		</div>
-		<!--出版行业获奖情况表-->
-		<div class="sbxq_item" id="publish">
-			<div>
-				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">出版行业获奖情况</span>
-			</div>
-			<div class="content">
-				<table class="tab_2" id="tab_publish">
-					<thead>
-						<tr>
-							<td width="340px">奖项名称</td>
-							<td width="330px">评奖单位</td>
-							<td width="150px">获奖时间</td>
-							<td>备注</td>
-						</tr>
-					</thead>
-					<tbody>
-					<c:forEach var="list" items="${publishList}">
-						<tr>
-							<td>${list.reward_name}</td>
-							<td>${list.award_unit}</td>
-							<td>${list.rewarddate}</td>
-							<td>${list.note}</td>
-						</tr></c:forEach>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<!--SCI论文投稿及影响因子情况表-->
-		<div class="sbxq_item" id="sci">
-			<div>
-				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">SCI论文投稿及影响因子情况</span>
-			</div>
-			<div class="content">
-				<table class="tab_2" id="tab_sci">
-					<thead>
-						<tr>
-							<td width="340px">论文名称</td>
-							<td width="150px">期刊名称</td>
-							<td width="200px">期刊SCI影响因子</td>
-							<td width="130px">发表时间</td>
-							<td>备注</td>
-						</tr>
-					</thead>
-					<tbody>
-					<c:forEach var="list" items="${sciList}">
-						<tr>
-							<td>${list.paper_name}</td>
-							<td>${list.journal_name}</td>
-							<td>${list.factor}</td>
-							<td>${list.publishdate}</td>
-							<td>${list.note}</td>
-						</tr></c:forEach>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<!--临床医学获奖情况表-->
-		<div class="sbxq_item" id="clinical">
-			<div>
-				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">临床医学获奖情况</span>
-			</div>
-			<div class="content">
-				<table class="tab_2" id="tab_clinical">
-					<thead>
-						<tr>
-							<td width="340px">奖项名称</td>
-							<td width="180px">奖项级别</td>
-							<td width="210px">获奖时间</td>
-							<td>备注</td>
-						</tr>
-					</thead>
-					<tbody>
-					<c:forEach var="list" items="${clinicalList}">
-						<tr>
-							<td>${list.reward_name}</td>
-							<td>
-								<c:if test="${list.award_unit == '0'}">无</c:if>
-								<c:if test="${list.award_unit == '1'}">国际</c:if>
-								<c:if test="${list.award_unit == '2'}">国家</c:if>
-							</td>
-							<td>${list.rewarddate}</td>
-							<td>${list.note}</td>
-						</tr></c:forEach>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<!--学术荣誉授予情况表-->
-		<div class="sbxq_item" id="acade">
-			<div>
-				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">学术荣誉授予情况</span>
-			</div>
-			<div class="content">
-				<table class="tab_2" id="tab_acade">
-					<thead>
-						<tr>
-							<td width="340px">荣誉名称</td>
-							<td width="280px">荣誉级别</td>
-							<td width="180px">授予时间</td>
-							<td>备注</td>
-						</tr>
-					</thead>
-					<tbody>
-					<c:forEach var="list" items="${acadeList}">
-						<tr>
-							<td>${list.reward_name}</td>
-							<td>
-								<c:if test="${list.award_unit == '0'}">无</c:if>
-								<c:if test="${list.award_unit == '1'}">国际</c:if>
-								<c:if test="${list.award_unit == '2'}">国家</c:if>
-								<c:if test="${list.award_unit == '3'}">省部</c:if>
-								<c:if test="${list.award_unit == '4'}">市</c:if>
-							</td>
-							<td>${list.rewarddate}</td>
-							<td>${list.note}</td>
-						</tr></c:forEach>
-					</tbody>
-				</table>
-			</div>
-		</div>
 		<!--主编或参编图书情况-->
 		<div class="sbxq_item" id="zbcbtsqk">
 			<div>
@@ -643,34 +280,7 @@
 				</table>
 			</div>
 		</div>
-		<!--编写内容意向表-->
-	 	<div class="sbxq_item" id="intention">
-			<div>
-				<span id="tsxz_span9"></span>
-				<span class="tsxz_title">编写内容意向表</span>
-			</div>
-			<div class="content">
-				<%--<textarea class="text_cl" readonly="readonly">${intentionMap.content}</textarea>--%>
-                <div class="text_dy">
-                    ${intentionMap.content}
-                </div>
-			</div>
-		</div>
 		<!--扩展信息-->
-		<c:if test="${empty zjkzqkList[0]}">
-			<c:forEach var="zjkzxx" items="${zjkzxxList}" varStatus="status">
-				<div class="sbxq_item1">
-					<div>
-						<span id="tsxz_span9"></span>
-						<span class="tsxz_title">${zjkzxx.extension_name}</span>
-					</div>
-					<div class="content">
-						<%--<textarea class="text_cl" readonly="readonly"></textarea>--%>
-                        <div class="text_dy1"></div>
-					</div>
-				</div>
-			</c:forEach>
-		</c:if>
 		<c:forEach var="zjkzxx" items="${zjkzqkList}">
 			<div class="sbxq_item1">
 				<div>
@@ -702,7 +312,7 @@
 		<!-- 内容分类-->
 		<div class="sbxq_item1">
 			<div>
-				<span id="tsxz_span8"></span>
+				<span id="tsxz_span12"></span>
 				<span class="tsxz_title">内容分类(可多选)</span>
 				<span class="el-button" onclick="javascript:ContentAdd('${materialMap.product_id}')">添加内容分类</span>
 			</div>
@@ -716,7 +326,7 @@
 		</div>
 		<div class="sbxq_item" id="szdwyj">
 			<div>
-				<span id="tsxz_span8"></span>
+				<span id="tsxz_span13"></span>
 				<span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" />所在单位意见<span style="color: red">(上传单位盖章的申报表)</span></span>
 			</div>
 			<div style="height: 30px;margin-top: 10px;">
@@ -727,12 +337,12 @@
 		</div>
 		<hr style=" height:1px;border:none;border-top:1px #999999 dashed;margin-top: 30px;">
 		</div>
-		<c:if test="${isSelfLog=='true' }">
+		<%--<c:if test="${isSelfLog=='true' }">
 			<div class="button">
 				<div class="bt_tj" onclick="javascript:buttGive()">返回申报列表</div>
 			</div>
 			<span style="color: #E31028;font-size: 14px;text-align: center;float: left;margin-left: 350px;">打印推荐使用浏览器：chrome、360浏览器极速模式、IE浏览器支持IE10及以上版本</span>
-		</c:if>
+		</c:if>--%>
 		
 	</div>
 </div>
