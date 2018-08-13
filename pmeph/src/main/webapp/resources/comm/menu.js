@@ -7,8 +7,9 @@ $(function () {
         "<a class='item' href='" + contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb'>教材申报</a>" +
         "<a class='item orange' href='" + contextpath + "bookdeclare/toBookdeclareAdd.action'>我要出书</a>" +
         "<a class='item blue' href='" + contextpath + "group/list.action'>交互服务</a>" +
+        "<a class='item green' href='##'>师资培训</a>" +
         "<a class='item black' href='" + contextpath + "help/helpList.action'>帮助</a>" +
-        "<a class='item blue' onmouseover='showEWM()' onmouseout='hideEWM()'><img style='margin-top: 7px;' src='"+contextpath+"statics/image/scj.png'></a>" +
+        "<a class='item red' onmouseover='showEWM()' onmouseout='hideEWM()'><img style='margin-top: 7px;' src='"+contextpath+"statics/image/scj.png'></a>" +
        /* "<div style='border: 1px red solid;width: 100px;height: 100px;'>111</div>"+*/
         "</div>");
 
