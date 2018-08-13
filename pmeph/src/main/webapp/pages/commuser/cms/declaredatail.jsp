@@ -39,20 +39,21 @@
     <div>${description}</div>
     <div style="float: left;width: 100%">
         <c:forEach varStatus="status" var="list" items="${list_scanimg}">
-            <img src="${ctx}/${list.attachment}">
+            <div class="picture01"><img src="${ctx}/${list.attachment}" class="picture02"></div>
         </c:forEach>
     </div>
 
     <div style="float: left;width: 100%">
         <div>${note_detail}</div>
     </div>
+    <div style="clear: both"></div>
 
-    <div style="float: left">
+    <div style="float: left;width: 100%">
         <div style="color: #70BBC2">相关附件：</div>
         <div class="att">
             <c:forEach items="${list_unscanimg}" var="list" varStatus="status">
                 <div>
-                <span style="float: left"><img src="${ctx}/statics/pictures/attachment.png">附件${status.index+1}:</span>
+                <span><img src="${ctx}/statics/pictures/attachment.png">附件${status.index+1}:</span>
                 <span style="margin-left: 5px"><a href="${ctx}/${list.attachment}">${list.attachment_name}</a></span>
                 </div>
             </c:forEach>
@@ -62,13 +63,25 @@
 </div>
 </body>
 <style>
+    .picture01{
+        float: left;
+        width: 100%;
+        margin: auto;
+        margin-top: 10px;
+    }
+
+    .picture02{
+        max-width: 100%;
+        margin: auto;
+        display: block;
+    }
+
     a{
         color: #70BBC2;
         cursor: pointer;
     }
 
     img{
-        float: left;
         margin-top: 5px;
         margin-right: 5px;
 
@@ -86,7 +99,7 @@
     }
 
     .join{
-        margin-left: 25%;
+        margin-left: 45%;
         margin-top: 50px;
         background-color: #70BBC2;
         width: 143px;
@@ -97,6 +110,7 @@
         cursor: pointer;
         line-height: 45px;
         float: left;
+        margin-bottom: 150px;
     }
 </style>
 <script>

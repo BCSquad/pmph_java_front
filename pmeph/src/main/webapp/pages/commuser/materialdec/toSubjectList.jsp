@@ -78,7 +78,7 @@ Page({
     startnum: parseInt("${pageResult.pageNumber}"),				//指定页码
     elem: $('#page1'),		//指定的元素
     callback: function (n) {	//回调函数
-    	var type_name =$("#type_name").val();
+    	var typename =$("#typename").val();
         window.location.href="${ctx}/expertation/querySubject.action?currentPage="+n+"&pageSize="+$("input[name='pageSize']").val()+"&material_id="+material_id+"&typename="+encodeURI(encodeURI(typename));
     }
 });

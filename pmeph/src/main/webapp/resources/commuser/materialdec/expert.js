@@ -4,7 +4,6 @@ $(function () {
     setTimeout(function () {
         $('#realname').tipso({validator: "isNonEmpty", message: "姓名不能为空"});
         $('#birthday').tipso({validator: "isNonEmpty", message: "出生日期不能为空"});
-        $('#experience').tipso({validator: "isNonEmpty|onlyInt", message: "教龄不能为空|教龄必须是数字"});
         $('#org_name').tipso({validator: "isNonEmpty", message: "工作单位不能为空"});
         $('#position').tipso({validator: "isNonEmpty", message: "职务不能为空"});
         $('#zc').tipso({validator: "isNonEmpty", message: "职称不能为空"});
@@ -17,7 +16,7 @@ $(function () {
     },0)
 
    // setTimer();
-    var id = $("#material_id").val();
+    var id = $("#expert_type").val();
     setTimeout(function (){
         upload();
     },1000);
@@ -30,43 +29,14 @@ $(function () {
         height: 30,
         optionHeight: 30
     });
-    $('.book').selectlist({
-        zIndex: 10,
-        width: 200,
-        height: 30,
-        optionHeight: 30
-    });
-    $('#degree').selectlist({
-        width: 192,
-        height: 30,
-        optionHeight: 30
-    });
     $('#zclx').selectlist({
         width: 192,
         height: 30,
         optionHeight: 30
     });
-    $('#jcxz').selectlist({
+    $('#education').selectlist({
         zIndex: 10,
-        width: 110,
-        height: 30,
-        optionHeight: 30
-    });
-    $('#jcjb').selectlist({
-        zIndex: 10,
-        width: 110,
-        height: 30,
-        optionHeight: 30
-    });
-    $('#jcb_rank').selectlist({
-        zIndex: 10,
-        width: 110,
-        height: 30,
-        optionHeight: 30
-    });
-    $('#jcb_position').selectlist({
-        zIndex: 10,
-        width: 110,
+        width: 192,
         height: 30,
         optionHeight: 30
     });
@@ -128,11 +98,11 @@ function upload(){
 }
 
 //页面组合方法
-function queryMaterialMap(id){
+function queryMaterialMap(expert_type){
     $.ajax({
         type: "POST",
         url:contextpath+'expertation/queryMaterialMap.action',
-        data:{material_id:id},// 您的formid
+        data:{expert_type:expert_type},// 您的formid
         dataType:"json",
         success: function(json) {
             chooseModel(json);
@@ -663,7 +633,7 @@ function add_rwsjcbx(){
         "</tr></table>"+
         "<input type='hidden' name='pmph_is_digital_editor' value='pmph_is_digital_editor_"+num+"' /></td>"+
         "<td><input class='cg_input' id='pmph_publish_date_"+num+"' placeholder='出版时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100' name='pmph_publish_date' value='' style='width: 100px;'/></td>"+
-        "<td><input class='cg_input' maxlength='50' name='pmph_isbn' value='' id='pmph_isbn_"+num+"'  style='width: 100px;' placeholder='978-7-117-'/></td>"+
+        "<td><input class='cg_input' maxlength='50' name='pmph_isbn' value='' id='pmph_isbn_"+num+"'  style='width: 100px;' placeholder='ISBN 978-7-117-23074-2'/></td>"+
         "<td><input class='cg_input' maxlength='100' name='pmph_note' value='' placeholder='备注' style='width: 140px;'/>" +
         "<input type='hidden' name='zdjy' value='pmph_material_name_"+num+"' />" +
         "<input type='hidden' name='pmph_id' value=''>"+
@@ -893,8 +863,8 @@ function del_tr(trId){
 function buttAdd(type){
         if(type == '2') { //表示暂存
             //避免重复点击
-            document.getElementById('buzc').onclick=function(){window.message.warning("请不要重复点击");};
-            document.getElementById('butj').onclick=function(){window.message.warning("请不要重复点击");};
+        //    document.getElementById('buzc').onclick=function(){window.message.warning("请不要重复点击");};
+        //    document.getElementById('butj').onclick=function(){window.message.warning("请不要重复点击");};
             $.ajax({
                 type: "POST",
                 url:contextpath+'expertation/doExpertationAdd.action?sjump=1&type='+type,

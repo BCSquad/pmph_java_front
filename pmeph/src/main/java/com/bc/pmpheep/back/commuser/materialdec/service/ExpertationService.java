@@ -20,20 +20,16 @@ public interface ExpertationService {
 	 * 新增 专家申报信息
 	 */
 	public Map<String,Object> insertJcsbxx(Map<String, Object> perMap, List<Map<String, Object>> stuList, List<Map<String, Object>> workList,
-                                           List<Map<String, Object>> steaList, List<Map<String, Object>> zjxsList, List<Map<String, Object>> jcbjList, List<Map<String, Object>> gjkcjsList, List<Map<String, Object>> gjghjcList,
-                                           List<Map<String, Object>> jcbxList, List<Map<String, Object>> zjkyList, List<Map<String, Object>> zjkzqkList, Map<String, Object> achievementMap, List<Map<String, Object>> monographList,
-                                           List<Map<String, Object>> publishList, List<Map<String, Object>> sciList, List<Map<String, Object>> clinicalList, List<Map<String, Object>> acadeList,
-                                           List<Map<String, Object>> pmphList, Map<String, Object> digitalMap, Map<String, Object> intentionlMap,
-										   List<Map<String,Object>> subjectList,List<Map<String,Object>> contentList,List<Map<String,Object>> editorList);
+				   List<Map<String, Object>> zjxsList, List<Map<String, Object>> zjkzqkList,List<Map<String, Object>> monographList,
+				   List<Map<String, Object>> pmphList,List<Map<String,Object>> subjectList,List<Map<String,Object>> contentList,List<Map<String,Object>> editorList
+                                          );
 	/**
 	 * 修改 专家申报信息
 	 */
-	public Map<String,Object> updateJcsbxx(Map<String, Object> perMap, List<Map<String, Object>> stuList, List<Map<String, Object>> workList, String declaration_id,
-                                           List<Map<String, Object>> steaList, List<Map<String, Object>> zjxsList, List<Map<String, Object>> jcbjList, List<Map<String, Object>> gjkcjsList, List<Map<String, Object>> gjghjcList,
-                                           List<Map<String, Object>> jcbxList, List<Map<String, Object>> zjkyList, List<Map<String, Object>> zjkzqkList, Map<String, Object> achievementMap, List<Map<String, Object>> monographList,
-                                           List<Map<String, Object>> publishList, List<Map<String, Object>> sciList, List<Map<String, Object>> clinicalList, List<Map<String, Object>> acadeList,
-                                           List<Map<String, Object>> pmphList, Map<String, Object> digitalMap, Map<String, Object> intentionlMap,
-										   List<Map<String,Object>> subjectList,List<Map<String,Object>> contentList,List<Map<String,Object>> editorList);
+	public Map<String,Object> updateJcsbxx(Map<String, Object> perMap, List<Map<String, Object>> stuList, List<Map<String, Object>> workList,
+				   List<Map<String, Object>> zjxsList, List<Map<String, Object>> zjkzqkList,List<Map<String, Object>> monographList,
+				   List<Map<String, Object>> pmphList,List<Map<String,Object>> subjectList,List<Map<String,Object>> contentList,List<Map<String,Object>> editorList,String declaration_id
+	);
 
     /**
      * 学科分类
@@ -53,10 +49,10 @@ public interface ExpertationService {
 
 	/**
 	 * 通过教材ID查出教材
-	 * @param material_id
+	 * @param expert_type
 	 * @return
 	 */
-	public Map<String,Object> queryMaterialbyId(String material_id);
+	public Map<String,Object> queryMaterialbyId(String expert_type);
 
     public List<Map<String,Object>> selectSubject(Map<String, Object> map);
     public List<Map<String,Object>> selectContent(Map<String, Object> map);

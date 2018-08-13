@@ -22,13 +22,13 @@
           is_edit_book_required*1 is_edit_book_required,
           is_deleted*1 is_deleted,
           gmt_create,gmt_update,founder_id,publisher_id,gmt_publish,note,description
-        from product where product_type = #{product_id}
+        from product where product_type = #{expert_type}
     </select>
 	<!-- 专家信息 --> 
 	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
 		select id,product_id,expert_type,user_id,realname,sex,birthday,REPLACE(birthday,'-','.') as birthday1,experience,org_name,position,title,address,postcode,handphone,email,idtype,
-		idcard,telephone,fax,online_progress,auth_date,is_staging*1 is_staging,is_deleted*1 is_deleted,
-		gmt_create,gmt_update,is_dispensed*1 is_dispensed,expertise,return_cause,unit_advise,syllabus_name from expertation t1
+		idcard,telephone,fax,online_progress,auth_date,is_staging*1 is_staging,is_deleted*1 is_deleted,banknumber,bankaddress,
+		gmt_create,gmt_update,education*1 education,expertise,return_cause,unit_advise,syllabus_name from expertation t1
 		 where 1= 1
 		<if test="user_id != null and user_id != ''">
 			and t1.user_id = #{user_id}
@@ -45,21 +45,21 @@
 	</select>
 	<insert id="insertPerson" parameterType="java.util.Map">
 		insert into expertation(product_id,expert_type,user_id,realname,sex,birthday,experience,org_name,position,
-		title,address,postcode,handphone,email,idtype,idcard,telephone,fax,gmt_create,is_staging,online_progress,commit_date,sub_classification
-		,cont_classification,remark,degree,unit_advise,syllabus_name
+		title,address,postcode,handphone,email,idtype,idcard,telephone,fax,gmt_create,is_staging,online_progress,commit_date,banknumber
+		,bankaddress,remark,degree,unit_advise,syllabus_name,education
 		) values(#{product_id},#{expert_type},#{user_id},#{realname},#{sex},#{birthday},#{experience},#{org_name},#{position},
 		#{title},#{address},#{postcode},#{handphone},#{email},#{idtype},#{idcard},#{telephone},#{fax},#{gmt_create},
-		#{is_staging},#{online_progress},#{commit_date},#{sub_classification},#{cont_classification},#{remark},#{degree},#{unit_advise},#{syllabus_name})
+		#{is_staging},#{online_progress},#{commit_date},#{banknumber},#{bankaddress},#{remark},#{degree},#{unit_advise},#{syllabus_name},#{education})
 	</insert>
 	<update id="updatePerson" parameterType="java.util.Map">
 		update expertation set realname = #{realname},sex = #{sex},birthday = #{birthday},experience = #{experience},expertise = #{expertise},
 		org_name = #{org_name},position = #{position},title = #{title},address = #{address},idcard=#{idcard},
 		postcode = #{postcode},handphone = #{handphone},email = #{email},idtype = #{idtype},is_staging = #{is_staging},telephone = #{telephone},fax = #{fax},
-		gmt_update = #{gmt_update},online_progress = #{online_progress},sub_classification = #{sub_classification},degree=#{degree}
+		gmt_update = #{gmt_update},online_progress = #{online_progress},banknumber = #{banknumber},degree=#{degree},education=#{education},
 		<if test="commit_date != null and commit_date != ''">
 			,commit_date=#{commit_date}
 		</if>
-		,cont_classification = #{cont_classification},remark=#{remark},unit_advise=#{unit_advise},syllabus_name=#{syllabus_name}
+		,bankaddress = #{bankaddress},remark=#{remark},unit_advise=#{unit_advise},syllabus_name=#{syllabus_name}
 		 where id = #{declaration_id}
 	</update>
 
@@ -192,7 +192,7 @@
     <select id="queryZjkzbb" resultType="java.util.Map" parameterType="java.util.Map">
         select * from (
         select id,product_id,extension_name,is_required,is_deleted from product_extension
-        where product_id = #{product_id}
+        where product_id = #{product_id} and is_deleted = 0
         )t4 left join
         (select t1.id,t2.expertation_id,t2.content from product_extension t1 LEFT JOIN dec_extension t2 ON
         t1.id = t2.extension_id where t2.expertation_id = #{declaration_id}
@@ -207,7 +207,7 @@
     </delete>
     <!-- 通过教材ID查出相关的扩展信息 -->
     <select id="queryZjkzxxById" resultType="java.util.Map" parameterType="java.lang.String">
-        select id,product_id,extension_name,is_required from product_extension where product_id = #{product_id}
+        select id,product_id,extension_name,is_required from product_extension where product_id = #{product_id} and is_deleted = 0
     </select>
     <!-- //主编学术专著情况 -->
     <select id="queryMonograph" resultType="java.util.Map" parameterType="java.util.Map">

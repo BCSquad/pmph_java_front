@@ -56,29 +56,18 @@ public class ExpertationServiceImpl implements ExpertationService {
     }
 
     @Override
-    public Map<String,Object> insertJcsbxx(Map<String, Object> perMap,
-                               List<Map<String, Object>> stuList,
-                               List<Map<String, Object>> workList,
-                               List<Map<String, Object>> steaList,
-                               List<Map<String, Object>> zjxsList,
-                               List<Map<String, Object>> jcbjList,
-                               List<Map<String, Object>> gjkcjsList,
-                               List<Map<String, Object>> gjghjcList,
-                               List<Map<String, Object>> jcbxList,
-                               List<Map<String, Object>> zjkyList,
-                               List<Map<String, Object>> zjkzqkList,
-                               Map<String, Object> achievementMap,
-                               List<Map<String, Object>> monographList,
-                               List<Map<String, Object>> publishList,
-                               List<Map<String, Object>> sciList,
-                               List<Map<String, Object>> clinicalList,
-                               List<Map<String, Object>> acadeList,
-                               List<Map<String, Object>> pmphList,
-                               Map<String, Object> digitalMap,
-                               Map<String, Object> intentionlMap,
-                               List<Map<String, Object>> subjectList,
-                               List<Map<String, Object>> contentList,
-                               List<Map<String,Object>> editorList) {
+    public Map<String,Object> insertJcsbxx(
+            Map<String, Object> perMap,
+            List<Map<String, Object>> stuList,
+            List<Map<String, Object>> workList,
+            List<Map<String, Object>> zjxsList,
+            List<Map<String, Object>> zjkzqkList,
+            List<Map<String, Object>> monographList,
+            List<Map<String, Object>> pmphList,
+            List<Map<String,Object>> subjectList,
+            List<Map<String,Object>> contentList,
+            List<Map<String,Object>> editorList
+    ) {
         //1.新增申报表
         this.exdao.insertPerson(perMap);
         //2.更新人员信息表
@@ -173,23 +162,6 @@ public class ExpertationServiceImpl implements ExpertationService {
                 this.exdao.insertEditor(map);
             }
         }
-        //9.主编国家级规划教材新增
-        if (gjghjcList != null && !gjghjcList.isEmpty()) {
-            for (Map<String, Object> map : gjghjcList) {
-                if(perMap.get("type").equals("1")){ //提交
-                    String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
-                        this.peradd.updatePerGjghjc(map);
-                    }else {
-                        map.put("user_id", user_id);
-                        map.put("per_id", per_id);
-                        this.peradd.insertPerGjghjc(map);
-                    }
-                }
-                map.put("declaration_id", declaration_id);
-                this.exdao.insertGjghjc(map);
-            }
-        }
         //12.作家扩展项新增
         if (zjkzqkList != null && !zjkzqkList.isEmpty()) {
             for (Map<String, Object> map : zjkzqkList) {
@@ -239,28 +211,16 @@ public class ExpertationServiceImpl implements ExpertationService {
 
     @Override
     public Map<String,Object> updateJcsbxx(Map<String, Object> perMap,
-                               List<Map<String, Object>> stuList,
-                               List<Map<String, Object>> workList, String declaration_id,
-                               List<Map<String, Object>> steaList,
-                               List<Map<String, Object>> zjxsList,
-                               List<Map<String, Object>> jcbjList,
-                               List<Map<String, Object>> gjkcjsList,
-                               List<Map<String, Object>> gjghjcList,
-                               List<Map<String, Object>> jcbxList,
-                               List<Map<String, Object>> zjkyList,
-                               List<Map<String, Object>> zjkzqkList,
-                               Map<String, Object> achievementMap,
-                               List<Map<String, Object>> monographList,
-                               List<Map<String, Object>> publishList,
-                               List<Map<String, Object>> sciList,
-                               List<Map<String, Object>> clinicalList,
-                               List<Map<String, Object>> acadeList,
-                               List<Map<String, Object>> pmphList,
-                               Map<String, Object> digitalMap,
-                               Map<String, Object> intentionlMap,
-                               List<Map<String, Object>> subjectList,
-                               List<Map<String, Object>> contentList,
-                               List<Map<String,Object>> editorList) {
+                                           List<Map<String, Object>> stuList,
+                                           List<Map<String, Object>> workList,
+                                           List<Map<String, Object>> zjxsList,
+                                           List<Map<String, Object>> zjkzqkList,
+                                           List<Map<String, Object>> monographList,
+                                           List<Map<String, Object>> pmphList,
+                                           List<Map<String,Object>> subjectList,
+                                           List<Map<String,Object>> contentList,
+                                           List<Map<String,Object>> editorList,
+                                           String declaration_id) {
         //修改申报信息
         perMap.put("declaration_id", declaration_id);
         this.exdao.updatePerson(perMap);
@@ -364,23 +324,6 @@ public class ExpertationServiceImpl implements ExpertationService {
                 }
                 map.put("declaration_id", declaration_id);
                 this.exdao.insertEditor(map);
-            }
-        }
-        //9.主编国家级规划教材新增
-        if (gjghjcList != null && !gjghjcList.isEmpty()) {
-            for (Map<String, Object> map : gjghjcList) {
-                if(perMap.get("type").equals("1")){ //提交
-                    String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
-                        this.peradd.updatePerGjghjc(map);
-                    }else {
-                        map.put("user_id", user_id);
-                        map.put("per_id", per_id);
-                        this.peradd.insertPerGjghjc(map);
-                    }
-                }
-                map.put("declaration_id", declaration_id);
-                this.exdao.insertGjghjc(map);
             }
         }
         //12.作家扩展项新增
