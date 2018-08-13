@@ -663,7 +663,15 @@ td {
 
 .float-menu .item.black {
     line-height: 44px;
-    background: #383C48;
+    background: #1AC5BB;
+}
+
+ .float-menu .item.green {
+     background: #3CC34C;
+ }
+
+.float-menu .item.red {
+    background: #EF4A46;
 }
 
 .input-error {
