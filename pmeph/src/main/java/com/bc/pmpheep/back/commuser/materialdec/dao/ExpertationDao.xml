@@ -26,7 +26,7 @@
     </select>
 	<!-- 专家信息 --> 
 	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
-		select id,product_id,user_id,realname,sex,birthday,REPLACE(birthday,'-','.') as birthday1,experience,org_name,position,title,address,postcode,handphone,email,idtype,
+		select id,product_id,expert_type,user_id,realname,sex,birthday,REPLACE(birthday,'-','.') as birthday1,experience,org_name,position,title,address,postcode,handphone,email,idtype,
 		idcard,telephone,fax,online_progress,auth_date,is_staging*1 is_staging,is_deleted*1 is_deleted,
 		gmt_create,gmt_update,is_dispensed*1 is_dispensed,expertise,return_cause,unit_advise,syllabus_name from expertation t1
 		 where 1= 1
@@ -66,9 +66,6 @@
     <!-- 查询学科分类列表 -->
     <select id="querySubjectList" parameterType="PageParameter" resultType="java.util.Map">
         select * from product_subject_type t where 1=1
-        <if test="parameter.type_name != null and parameter.type_name != ''">
-            and t.type_name like #{parameter.type_name}
-        </if>
         <if test="parameter.type_name != null and parameter.type_name != ''">
             and t.type_name like #{parameter.type_name}
         </if>
@@ -198,7 +195,7 @@
         where product_id = #{product_id}
         )t4 left join
         (select t1.id,t2.expertation_id,t2.content from product_extension t1 LEFT JOIN dec_extension t2 ON
-        t1.id = t2.extension_id where t2.declaration_id = #{declaration_id}
+        t1.id = t2.extension_id where t2.expertation_id = #{declaration_id}
         )t3 on t4.id = t3.id
     </select>
     <!-- 作家扩展项填报表新增 -->
@@ -234,4 +231,19 @@
     <delete id="DelGjghjc" parameterType="java.util.Map">
         delete from dec_national_plan where expertation_id = #{declaration_id}
     </delete>
+    <!-- 主编或参编图书情况 -->
+    <select id="queryEditor" resultType="java.util.Map" parameterType="java.util.Map">
+        select * from dec_editor_book where expertation_id = #{declaration_id} ORDER BY sort
+    </select>
+    <insert id="insertEditor" parameterType="java.util.Map">
+        insert into dec_editor_book(per_id,expertation_id,material_name,publisher,publish_date,note,sort)
+        values(#{per_id},#{declaration_id},#{material_name},#{publisher},#{publish_date},#{note},#{sort})
+    </insert>
+    <delete id="delEditor" parameterType="java.util.Map">
+        delete from dec_editor_book where expertation_id = #{declaration_id}
+    </delete>
+    <!--查看临床信息-->
+    <select id="queryProduct" resultType="java.util.Map" parameterType="java.lang.String">
+        select * from product where product_type = #{product_type}
+    </select>
 </mapper>

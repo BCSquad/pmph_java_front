@@ -327,3 +327,36 @@ a.input {
 	padding: 10px;
 	height: 50px;
 }
+
+
+.el-tag{
+	background-color: #838fa5;
+	display: inline-block;
+	padding: 0 5px;
+	height: 26px;
+	line-height: 22px;
+	font-size: 12px;
+	color: #fff;
+	border-radius: 4px;
+	box-sizing: border-box;
+	border: 1px solid transparent;
+	white-space: nowrap;
+	margin-top: 8px;
+	margin-right: 8px;
+}
+
+.el-button{
+	background-color: #33caa9;
+	display: inline-block;
+	padding: 0 5px;
+	height: 26px;
+	line-height: 22px;
+	font-size: 12px;
+	color: #fff;
+	border-radius: 4px;
+	box-sizing: border-box;
+	border: 1px solid transparent;
+	white-space: nowrap;
+	margin-left: 10px;
+	cursor: pointer;
+}

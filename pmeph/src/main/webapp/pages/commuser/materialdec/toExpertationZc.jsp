@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.tipso.css?t=${_timestamp}" type="text/css">
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js?t=${_timestamp}"></script>
+    <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.jqprint-0.3.js?t=${_timestamp}"></script>
+    <script src="http://www.jq22.com/jquery/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery-validate.js?t=${_timestamp}"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.calendar.js?t=${_timestamp}"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
@@ -37,8 +39,10 @@
                     style="text-decoration: none;color: #999999;"
                     href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=jcsb&pageNum=1&pageSize=10"> 教材申报 </a> > 修改申报表</span>
         </div>
+        <div id="ifprint">
         <form id="objForm">
             <input type="hidden" id="material_id" name="material_id" value="${materialMap.product_id}"/>
+            <input type="hidden" id="expert_type" name="expert_type" value="${materialMap.expert_type}"/>
             <input type="hidden" id="expertation_id" name="expertation_id" value="${materialMap.declaration_id}"/>
             <!-- 专家信息-->
             <div class="sbxq_item1">
@@ -386,24 +390,11 @@
                     </table>
                 </div>
             </div>
-            <!--个人成就-->
-            <div class="sbxq_item" id="grcjqk">
-                <div>
-                    <span id="tsxz_span9"></span>
-                    <span class="tsxz_title">个人成就</span>
-                    <span class="tsxz_ts" id="grcj_bt"><img src="${ctx}/statics/image/btxx.png"/></span>
-                    <span class="tsxz_xt" id="grcj_xt">（选填）</span>
-                </div>
-                <div class="content">
-                    <textarea class="text_cl" maxlength="1000" name="gr_content" id="gr_content"
-                              maxlength="1000">${achievementMap.content}</textarea>
-                </div>
-            </div>
             <!--主要学术兼职-->
             <div class="sbxq_item" id="xsjz">
                 <div>
                     <span id="tsxz_span10"></span>
-                    <span class="tsxz_title">学术兼职</span>
+                    <span class="tsxz_title">主要学术兼职</span>
                     <span class="tsxz_ts" id="xsjz_bt"><img src="${ctx}/statics/image/btxx.png"/></span>
                     <span id="xsjz_xt" class="tsxz_xt">（选填）</span>
                 </div>
@@ -1607,6 +1598,75 @@
                     </table>
                 </div>
             </div>
+            <!--主编或参编图书情况-->
+            <div class="sbxq_item" id="zbcbtsqk">
+                <div>
+                    <span id="tsxz_span6"></span>
+                    <span class="tsxz_title">主编或参编图书情况</span>
+                    <span class="tsxz_ts" id="zbcb_bt"><img src="${ctx}/statics/image/btxx.png"/></span>
+                    <span class="tsxz_xt" id="zbcb_xt">（选填）</span>
+                </div>
+                <div class="content">
+                    <table class="tab_2" id="tab_zbtsqk">
+                        <thead>
+                        <tr>
+                            <td width="350px">教材名称</td>
+                            <td width="330px">出版社</td>
+                            <td width="160px">出版时间</td>
+                            <td>备注</td>
+                            <td width="78px">添加</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:if test="${empty editorList[0]}">
+                            <tr>
+                                <td><input class="cg_input" maxlength="100" style="width: 320px" id="jc_material_name"
+                                           name="zbts_material_name" id="zbts_material_name" value="" style="width: 260px;"
+                                           placeholder="教材名称"/></td>
+                                <td><input class="cg_input" name="zbts_publisher" value=""
+                                           style="width: 300px;" maxlength="20"/></td>
+                                <td><input class="cg_input" name="zbts_publish_date" id="zbts_publish_date" value=""
+                                           placeholder="出版时间" calendar format="'yyyy-mm-dd'" z-index="100"
+                                           style="width: 130px;"/></td>
+                                <td><input class="cg_input" maxlength="100" name="zbts_note" value=""
+                                           style="width: 240px;" placeholder="备注"/>
+                                    <input type="hidden" name="zbts_id" value=""></td>
+                                </td>
+                                <td><img class="add_img" src="${ctx}/statics/image/add.png"
+                                         onclick="javascript:add_zbtsqk()"/></td>
+                            </tr>
+                        </c:if>
+                        <c:forEach var="list" items="${editorList}" varStatus="status">
+                            <tr id="zbtsqk_${status.count}">
+                                <td><input class="cg_input" maxlength="100" style="width: 320px" name="zbts_material_name"
+                                           id="zbts_material_name_${status.count}" value="${list.material_name}"
+                                           style="width: 260px;" placeholder="教材名称"/></td>
+                                <td><input class="cg_input" name="zbts_publisher" value="${list.publisher}"
+                                           style="width: 300px;" maxlength="20"/></td>
+                                <td><input class="cg_input" name="zbts_publish_date" id="zbts_publish_date_${status.count}"
+                                           value="${list.publish_date}" placeholder="出版时间" calendar
+                                           format="'yyyy-mm-dd'" z-index="100" style="width: 130px;"/></td>
+                                <td><input class="cg_input" maxlength="100" name="zbts_note" value="${list.note}"
+                                           style="width: 240px;" placeholder="备注"/>
+                                    <input type="hidden" name="zdjy" value="zbts_material_name_${status.count}"/>
+                                    <input type="hidden" name="zbts_id" value="${list.per_id}">
+                                </td>
+                                <td><c:choose>
+                                    <c:when test="${status.count == 1}">
+                                        <img class="add_img" src="${ctx}/statics/image/add.png"
+                                             onclick="javascript:add_zbtsqk()"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img class="add_img" src="${ctx}/statics/image/del.png"
+                                             onclick="javascript:del_tr('zbtsqk_${status.count}')"/>
+                                    </c:otherwise>
+                                </c:choose></td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             <!--编写内容意向表-->
             <div class="sbxq_item" id="intention">
                 <div>
@@ -1649,7 +1709,7 @@
             <div class="sbxq_item1">
                 <div>
                     <span id="tsxz_span8"></span>
-                    <span class="tsxz_title">学科分类(可多选)</span>
+                    <span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" />学科分类(可多选)</span>
                     <span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.product_id}')">添加学科分类</span>
                 </div>
                 <div class="sbdw" id="xkfladd">
@@ -1675,10 +1735,10 @@
                     </c:forEach>
                 </div>
             </div>
-            <div class="sbxq_item1">
+            <div class="sbxq_item" id="szdwyj">
                 <div>
                     <span id="tsxz_span8"></span>
-                    <span class="tsxz_title">所在单位意见<span style="color: red">(上传单位盖章的申报表)</span></span>
+                    <span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" />所在单位意见<span style="color: red">(上传单位盖章的申报表)</span></span>
                 </div>
                 <div style="height: 30px;margin-top: 10px;">
                     <div class="scys" id="dwyjsc"><span>上传文件</span></div>
@@ -1699,35 +1759,19 @@
                 <div class="tujian03">年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</div>
             </div>
             <hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">
-            <div class="button">
+            <div class="button" id="button_cz">
                 <div class="div_butt">
                     <div class="bt_tj" id="butj" onclick="javascript:buttAdd('1')">提交</div>
                     <div class="bt_tj" id="buzc" onclick="javascript:buttAdd('2')">暂存</div>
-                    <div class="bt_tj" onclick="toprint()">打印</div>
+                    <div class="bt_tj" id="print" onclick="toprint()">打印</div>
                     <%--<div class="bt_tj" onclick="javascript:buttGive()">放弃</div>--%>
                 </div>
                 <div style="color: red;font-size: 16px;margin-top: 15px;">（提示：如暂存或提交不成功请使用360浏览器极速模式或谷歌浏览器）</div>
             </div>
         </form>
+        </div>
     </div>
 </div>
-
-<!-- 退回原因显示悬浮框 -->
-<%--<div class="bookmistake" id="return_cause_div">
-    <div class="apache">
-        <div class="mistitle">退回原因:</div>
-        <div class="xx" onclick="$('#return_cause_div').fadeOut(500);"></div>
-    </div>
-
-    <div class="info">
-        <input id="return_cause_hidden" type="hidden" value="${return_cause }">
-        <textarea class="misarea" disabled="disabled">${return_cause }</textarea>
-    </div>
-
-    <div class="">
-        <button class="btn" type="button" onclick="$('#return_cause_div').fadeOut(500);">确认</button>
-    </div>
-</div>--%>
 
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>

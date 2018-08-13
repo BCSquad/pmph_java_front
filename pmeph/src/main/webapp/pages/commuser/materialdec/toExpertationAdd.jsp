@@ -315,24 +315,11 @@
 					</table>
 				</div>
 			</div>
-			<!--个人成就-->
-			<div class="sbxq_item" id="grcjqk">
-				<div>
-					<span id="tsxz_span9"></span>
-					<span class="tsxz_title">个人成就</span>
-					<span class="tsxz_ts" id="grcj_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
-					<span class="tsxz_xt" id="grcj_xt" >（选填）</span>
-				</div>
-				<div class="content">
-					<textarea class="text_cl" maxlength="1000"  name="gr_content" id="gr_content" maxlength="1000">${achievementMap.content}</textarea>
-					<input name="grcj_id" type="hidden" value="${achievementMap.id}">
-				</div>
-			</div>
 			<!--主要学术兼职-->
 			<div class="sbxq_item" id="xsjz">
 				<div>
 					<span id="tsxz_span10"></span>
-					<span class="tsxz_title">学术兼职</span>
+					<span class="tsxz_title">主要学术兼职</span>
 					<span class="tsxz_ts" id="xsjz_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
 					<span id="xsjz_xt" class="tsxz_xt">（选填）</span>
 				</div>
@@ -1216,6 +1203,57 @@
 					</table>
 				</div>
 			</div>
+			<!--主编或参编图书情况-->
+			<div class="sbxq_item" id="zbcbtsqk">
+				<div>
+					<span id="tsxz_span6"></span>
+					<span class="tsxz_title">主编或参编图书情况</span>
+					<span class="tsxz_ts" id="zbcb_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+					<span class="tsxz_xt" id="zbcb_xt" >（选填）</span>
+				</div>
+				<div class="content">
+					<table class="tab_2" id="tab_zbtsqk">
+						<thead>
+						<tr>
+							<td width="350px">教材名称</td>
+							<td width="330px">出版社</td>
+							<td width="160px">出版时间</td>
+							<td>备注</td>
+							<td width="78px">添加</td>
+						</tr>
+						</thead>
+						<tbody>
+						<c:if test="${empty perjcbjList[0]}">
+							<tr>
+								<td><input class="cg_input" maxlength="100" style="width: 320px" id="zbts_material_name" name="zbts_material_name" id="jc_material_name" value="" placeholder="教材名称"/></td>
+								<td><input class="cg_input" name="zbts_publisher" value=""  style="width: 300px;" maxlength="20"/></td>
+								<td><input class="cg_input" name="zbts_publish_date" id="zbts_publish_date" value="" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  style="width: 130px;"/></td>
+								<td><input class="cg_input" maxlength="100" name="zbts_note" value="" style="width: 240px;" placeholder="备注"/><input type="hidden" name="jc_id" value=""></td>
+								<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_zbtsqk()"/></td>
+							</tr></c:if>
+						<c:forEach var="list" items="${perjcbjList}" varStatus="status">
+							<tr id="zbtsqk_${status.count}">
+								<td><input class="cg_input" maxlength="100" style="width: 320px" name="zbts_material_name" id="zbts_material_name_${status.count}" value="${list.material_name}" placeholder="教材名称"/></td>
+								<td><input class="cg_input" name="zbts_publisher" value="${list.publisher}"  style="width: 300px;" maxlength="20"/></td>
+								<td><input class="cg_input" name="zbts_publish_date" id="zbts_publish_date_${status.count}" value="${list.publish_date}" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  style="width: 130px;"/></td>
+								<td><input class="cg_input" maxlength="100" name="zbts_note" value="${list.note}" style="width: 240px;" placeholder="备注"/>
+									<input type="hidden" name="zdjy" value="zbts_material_name_${status.count}"/>
+									<input type="hidden" name="zbts_id" value="${list.id}">
+								</td>
+								<td><c:choose>
+									<c:when test="${status.count == 1}">
+										<img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_zbtsqk()"/>
+									</c:when>
+									<c:otherwise>
+										<img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('zbtsqk_${status.count}')"/>
+									</c:otherwise>
+								</c:choose></td>
+							</tr>
+						</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
 			<!--编写内容意向表-->
 			<div class="sbxq_item" id="intention">
 				<div>
@@ -1254,7 +1292,7 @@
             <div class="sbxq_item1">
                 <div>
                     <span id="tsxz_span8"></span>
-                    <span class="tsxz_title">学科分类(可多选)</span>
+                    <span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" />学科分类(可多选)</span>
 					<span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.id}')">添加学科分类</span>
                 </div>
                 <div class="sbdw" id="xkfladd">
@@ -1272,10 +1310,10 @@
                     <span class="btmc">内容分类：</span>
                 </div>
             </div>
-			<div class="sbxq_item1">
+			<div class="sbxq_item" id="szdwyj">
 				<div>
 					<span id="tsxz_span8"></span>
-					<span class="tsxz_title">所在单位意见<span style="color: red">(上传单位盖章的申报表)</span></span>
+					<span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" />所在单位意见<span style="color: red">(上传单位盖章的申报表)</span></span>
 				</div>
 				<div style="height: 30px;margin-top: 10px;">
 					<div class="scys" id="dwyjsc"><span>上传文件</span></div>
@@ -1298,7 +1336,7 @@
 				<div class="div_butt">
 					<div class="bt_tj" id="butj" onclick="javascript:buttAdd('2')">暂存</div>
 					<div class="bt_tj" id="buzc" onclick="javascript:buttAdd('1')">提交</div>
-					<div class="bt_tj" onclick="toprint()">打印</div>
+					<div class="bt_tj" id="print" onclick="toprint()">打印</div>
 					<%--<div class="bt_tj" onclick="javascript:buttGive()">放弃</div>--%>
 				</div>
 				<div style="color: red;font-size: 16px;margin-top: 15px;">（提示：如暂存或提交不成功请使用360浏览器极速模式或谷歌浏览器）</div>

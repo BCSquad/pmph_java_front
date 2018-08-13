@@ -24,7 +24,7 @@ public interface ExpertationService {
                                            List<Map<String, Object>> jcbxList, List<Map<String, Object>> zjkyList, List<Map<String, Object>> zjkzqkList, Map<String, Object> achievementMap, List<Map<String, Object>> monographList,
                                            List<Map<String, Object>> publishList, List<Map<String, Object>> sciList, List<Map<String, Object>> clinicalList, List<Map<String, Object>> acadeList,
                                            List<Map<String, Object>> pmphList, Map<String, Object> digitalMap, Map<String, Object> intentionlMap,
-										   List<Map<String,Object>> subjectList,List<Map<String,Object>> contentList);
+										   List<Map<String,Object>> subjectList,List<Map<String,Object>> contentList,List<Map<String,Object>> editorList);
 	/**
 	 * 修改 专家申报信息
 	 */
@@ -33,7 +33,7 @@ public interface ExpertationService {
                                            List<Map<String, Object>> jcbxList, List<Map<String, Object>> zjkyList, List<Map<String, Object>> zjkzqkList, Map<String, Object> achievementMap, List<Map<String, Object>> monographList,
                                            List<Map<String, Object>> publishList, List<Map<String, Object>> sciList, List<Map<String, Object>> clinicalList, List<Map<String, Object>> acadeList,
                                            List<Map<String, Object>> pmphList, Map<String, Object> digitalMap, Map<String, Object> intentionlMap,
-										   List<Map<String,Object>> subjectList,List<Map<String,Object>> contentList);
+										   List<Map<String,Object>> subjectList,List<Map<String,Object>> contentList,List<Map<String,Object>> editorList);
 
     /**
      * 学科分类
@@ -104,6 +104,12 @@ public interface ExpertationService {
 	 */
 	public List<Map<String,Object>> queryMonograph(Map<String,Object> map);
 	/**
+	 * 主编学术专著情况
+	 * @param map
+	 * @return
+	 */
+	public List<Map<String,Object>> queryEditor(Map<String,Object> map);
+	/**
 	 * 查询人卫社教材编写情况
 	 * @param map
 	 * @return
@@ -116,4 +122,11 @@ public interface ExpertationService {
 	 * @return
 	 */
 	public List<Map<String,Object>> queryZjkzxxById(String material_id);
+
+	/**查看临床消息
+	 * @param expert_type 临床类型
+	 * @param expert_type 申请类型
+	 * @return
+	 */
+	Map<String,Object> queryProduct(String expert_type);
 }

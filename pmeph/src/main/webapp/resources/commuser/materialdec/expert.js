@@ -142,6 +142,10 @@ function queryMaterialMap(id){
 
 //模块显示与隐藏判断
 function chooseModel(data){
+    //所在单位意见
+    if(data.is_unit_advise_used == "1"){
+        $("#szdwyj").css("display","block");
+    }
     //学习经历
     if(data.is_edu_exp_used == "1"){
         $("#zyxxjl").css("display","block");
@@ -339,6 +343,20 @@ function chooseModel(data){
             $("#zb_publisher").val("无");
         }else{
             $("#zbxszz_xt").css("display","inline");
+        }
+    }
+    //主编或参编图书情况
+    if(data.is_edit_book_used == "1"){
+        $("#zbcbtsqk").css("display","block");
+        //主编学术专著情况必填
+        if(data.is_edit_book_required == "1"){
+            $("#zbcb_bt").css("display","inline");
+            $('#zbts_material_name').tipso({validator: "isNonEmpty", message: "专著名称必填"})
+            //给其他值默认为无
+            $("#zbts_publish_date").val(getNowFormatDate());
+            $("#zbts_publisher").val("无");
+        }else{
+            $("#zbcb_xt").css("display","inline");
         }
     }
     //出版行业获奖情况
@@ -562,7 +580,7 @@ function add_jccb(){
         "<td><input type='radio' name='jc_is_digital_editor_"+num+"' value='0' checked='checked'/>否</td>"+
         "</tr></table>"+
         "<input type='hidden' name='jc_is_digital_editor' value='jc_is_digital_editor_"+num+"' /></td>"+
-        "<td><input maxlength='20' class='cg_input' name='jc_publisher' value='人民卫生出版社' readonly='true' style='width: 100px;' /></td>" +
+        "<td><input maxlength='20' class='cg_input' name='jc_publisher' value=''  style='width: 100px;' placeholder='出版社' /></td>" +
         "<td><input class='cg_input' name='jc_publish_date' id='jc_publish_date_"+num+"' value='' placeholder='出版时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100'  style='width: 100px;'/></td>"+
         "<td><input maxlength='100' class='cg_input' name='jc_note' value='' style='width: 100px;' placeholder='备注'/>" +
         "<input type='hidden' name='zdjy' value='jc_material_name_"+num+"' />" +
@@ -715,6 +733,26 @@ function add_jcbx(){
     $tr.calendar();
     $('#jcb_material_name_'+num).tipso({validator: "isNonEmpty", message: "其他社教材编写情况必填"});
 }
+
+//主编或参编图书情况
+function add_zbtsqk(){
+    var num = fnt();
+    var $table = $("#tab_zbtsqk");
+    var $tr = $("<tr id='zbtsqk_"+num+"'>"+
+        "<td><input class='cg_input' maxlength='100' name='zbts_material_name' id='zbts_material_name_"+num+"' value='' style='width: 320px;' placeholder='教材名称'/></td>"+
+        "<td><input class='cg_input' maxlength='50' name='zbts_publisher' id='zbts_publisher_"+num+"' value='' style='width: 300px;' placeholder='出版社'/></td>"+
+        "<td><input class='cg_input' placeholder='出版时间' id='zbts_publish_date_"+num+"' calendar format=\"'yyyy-mm-dd'\"  z-index='100' name='zbts_publish_date' value='' style='width: 130px;'/></td>"+
+        "<td><input class='cg_input' maxlength='100' name='zbts_note' value='' placeholder='备注' style='width:240px;'/>" +
+        "<input type='hidden' name='zdjy' value='zbts_material_name_"+num+"' />" +
+        "<input type='hidden' name='zbts_id' value=''>"+
+        "</td>"+
+        "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('zbtsqk_"+num+"')\"/></td>"+
+        "</tr>");
+    $table.append($tr);
+    $tr.calendar();
+    $('#jcb_material_name_'+num).tipso({validator: "isNonEmpty", message: "教材名称必填"});
+}
+
 //作家科研
 function add_zjky(){
     var num = fnt();
@@ -881,35 +919,6 @@ function buttAdd(type){
                     success: function (json) {
                         if (json.msg == 'OK') {
                             window.message.success("操作成功,正在跳转页面");
-                            /**企业微信消息**/
-                            /*if (json.org_name=="人民卫生出版社") {
-                            	var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
-                            	$.ajax({
-                                    type: 'get',
-                                    url: exportWordBaseUrl + '/frontWxMsg/projectEditorPleaseAdit/'+json.declaration_id,
-                                    dataType: 'jsonp',
-                                    jsonp:"callback", //这里定义了callback在后台controller的的参数名
-                        			jsonpCallback:"getMessage", //这里定义了jsonp的回调函数名。 那么在后台controller的相应方法其参数“callback”的值就是getMessage
-                                    success:function(wxResult){
-                                    	if(wxResult=="1"){
-                                    		window.message.success("微信消息发送成功");
-                                    		setTimeout(function(){
-                                            	window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
-            								}, 800);
-                                    	}
-                                    	//window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
-                                    },
-                                    error:function(XMLHttpRequest, textStatus){
-                                    	setTimeout(function(){
-                                        	window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
-        								}, 800);
-                                    }
-                                    });
-    						}else{
-    							setTimeout(function(){
-                                	window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
-								}, 800);
-    						}*/
                             window.location.href = contextpath + "expertation/declare.action";
                         }
                     }
@@ -917,11 +926,6 @@ function buttAdd(type){
             }
         }
   //  }
-}
-
-//放弃
-function buttGive(){
-    window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=jcsb";
 }
 /**
  * 表单校验方法

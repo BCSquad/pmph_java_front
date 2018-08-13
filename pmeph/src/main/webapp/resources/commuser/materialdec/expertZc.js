@@ -1,7 +1,7 @@
 
 var is_pmph_textbook_required;
 var is_textbook_required;
-
+var jsonStr = "";
 $(function () {
     setTimeout(function () {
         $('#edu1').tipso({validator: "isNonEmpty", message: "请选择申报的图书"});
@@ -20,7 +20,7 @@ $(function () {
     },0)
 
 
-    var id = $("#material_id").val();
+    var id = $("#expert_type").val();
     setTimeout(function (){
         upload();
     },1000);
@@ -135,6 +135,10 @@ function queryMaterialMap(id){
 
 //模块显示与隐藏判断
 function chooseModel(data){
+    //所在单位意见
+    if(data.is_unit_advise_used == "1"){
+        $("#szdwyj").css("display","block");
+    }
     //学习经历
     if(data.is_edu_exp_used == "1"){
         $("#zyxxjl").css("display","block");
@@ -316,6 +320,20 @@ function chooseModel(data){
             $("#zb_publisher").val("无");
         }else{
             $("#zbxszz_xt").css("display","inline");
+        }
+    }
+    //主编或参编图书情况
+    if(data.is_edit_book_used == "1"){
+        $("#zbcbtsqk").css("display","block");
+        //主编学术专著情况必填
+        if(data.is_edit_book_required == "1"){
+            $("#zbcb_bt").css("display","inline");
+            $('#zbts_material_name').tipso({validator: "isNonEmpty", message: "专著名称必填"})
+            //给其他值默认为无
+            $("#zbts_publish_date").val(getNowFormatDate());
+            $("#zbts_publisher").val("无");
+        }else{
+            $("#zbcb_xt").css("display","inline");
         }
     }
     //出版行业获奖情况
@@ -589,6 +607,25 @@ function add_gjghjc(){
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('gjghjc_"+num+"')\"/></td>"+
         "</tr>");
     $table.append($tr);
+}
+
+//主编或参编图书情况
+function add_zbtsqk(){
+    var num = fnt();
+    var $table = $("#tab_zbtsqk");
+    var $tr = $("<tr id='zbtsqk_"+num+"'>"+
+        "<td><input class='cg_input' maxlength='100' name='zbts_material_name' id='zbts_material_name_"+num+"' value='' style='width: 320px;' placeholder='教材名称'/></td>"+
+        "<td><input class='cg_input' maxlength='50' name='zbts_publisher' id='zbts_publisher_"+num+"' value='' style='width: 300px;' placeholder='出版社'/></td>"+
+        "<td><input class='cg_input' placeholder='出版时间' id='zbts_publish_date_"+num+"' calendar format=\"'yyyy-mm-dd'\"  z-index='100' name='zbts_publish_date' value='' style='width: 130px;'/></td>"+
+        "<td><input class='cg_input' maxlength='100' name='zbts_note' value='' placeholder='备注' style='width:240px;'/>" +
+        "<input type='hidden' name='zdjy' value='zbts_material_name_"+num+"' />" +
+        "<input type='hidden' name='zbts_id' value=''>"+
+        "</td>"+
+        "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('zbtsqk_"+num+"')\"/></td>"+
+        "</tr>");
+    $table.append($tr);
+    $tr.calendar();
+    $('#jcb_material_name_'+num).tipso({validator: "isNonEmpty", message: "教材名称必填"});
 }
 
 //人卫社教材编写情况
@@ -917,17 +954,6 @@ function checkLb(){
             }
         }
     }
-    /*if(xtMap!=null){
-        xtMap.forEach(function (value, key, map) {
-            var strs= new Array(); //定义一数组
-            strs=value.split(","); //字符分割
-            for ( var j = 0; j < strs.length; j++) {
-                if($("#"+str[j]).val() !=""){
-                    jsonStr=jsonStr+"{\"id\":\""+strs[j]+"\",\"content\":\"请把该项资料填写完整\"},";
-                }
-            }
-        })
-    }*/
 }
 
 //提交
@@ -940,45 +966,10 @@ function commit(type){
             success: function (json) {
                 if (json.msg == 'OK') {
                     window.message.success("操作成功,正在跳转页面");
-                    /**企业微信消息**/
-                    /*if (json.org_name=="人民卫生出版社") {
-                    	var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
-                    	$.ajax({
-                            type: 'get',
-                            url: exportWordBaseUrl + '/frontWxMsg/projectEditorPleaseAdit/'+json.declaration_id,
-                            dataType: 'jsonp',
-                            jsonp:"callback", //这里定义了callback在后台controller的的参数名
-                			jsonpCallback:"getMessage", //这里定义了jsonp的回调函数名。 那么在后台controller的相应方法其参数“callback”的值就是getMessage
-                            success:function(wxResult){
-                            	if(wxResult=="1"){
-                            		window.message.success("微信消息发送成功");
-                            		setTimeout(function(){
-                            			window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
-                            		},800);
-                            	}
-                            	
-                            },
-                            error:function(XMLHttpRequest, textStatus){
-                            	//console.log("error "+wxResult);
-                            	setTimeout(function(){
-                        			window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
-                        		},800);
-                            }
-                    		
-                            });
-					}else{
-						setTimeout(function(){
-                			window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
-                		},800);
-					}*/
                     window.location.href = contextpath + "expertation/declare.action";
                 }
             }
         });
-}
-//放弃
-function buttGive(){
-    window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=jcsb";
 }
 /**
  * 表单校验方法
@@ -1109,18 +1100,6 @@ function check_jcb_isbn(id){
 	    }
 	}	*/
 	return true;
-}
-
-//机构选择
-function orgAdd(material_id){
-    layer.open({
-        type: 2,
-        area: ['800px', '600px'],
-        fixed: false, //不固定
-        title:'申报单位选择',
-        maxmin: true,
-        content: contextpath+"material/toSearchOrg.action?material_id="+material_id
-    });
 }
 
 //输入长度限制校验，ml为最大字节长度

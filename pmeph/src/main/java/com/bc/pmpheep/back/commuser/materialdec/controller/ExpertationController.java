@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -100,11 +99,12 @@ public class ExpertationController extends BaseController{
 		List<Map<String,Object>> perpmphList = new ArrayList<Map<String,Object>>();
 
 		Map<String,Object> queryMap = new HashMap<String,Object>();
+		Map<String,Object> productMap = new HashMap<String,Object>();
 		//查询个人信息库信息
 		//个人资料
 		Map<String,Object> userinfo =  this.getUserInfo();
 		Map<String,Object> userMap =  this.mdService.queryUserInfo(MapUtils.getString(userinfo,"id",""));
-        queryMap.put("user_id",userMap.get("id"));
+		queryMap.put("user_id",userMap.get("id"));
 		//个人资料库信息
 		perstuList = this.perService.queryPerStu(queryMap);
         perworkList= this.perService.queryPerWork(queryMap);
@@ -127,9 +127,9 @@ public class ExpertationController extends BaseController{
         if(arrMaterial_id !=null && arrMaterial_id.length>0){
             material_id = arrMaterial_id[0];
         }
+		productMap = this.etService.queryProduct(material_id);
 		//作家扩展信息
-		List<Map<String,Object>> zjkzxxList = this.mdService.queryZjkzxxById(material_id);
-
+		List<Map<String,Object>> zjkzxxList = this.etService.queryZjkzxxById(productMap.get("id").toString());
 		mav.addObject("userMap", userMap);
 		mav.addObject("zjkzxxList", zjkzxxList);
 		mav.addObject("material_id", material_id);
@@ -180,11 +180,14 @@ public class ExpertationController extends BaseController{
 		//公共参数
 		Map<String,Object> userMap =  this.getUserInfo();
 		String material_id = request.getParameter("material_id");
-		String expert_type = "1"; //申报类型
+		String expert_type = request.getParameter("expert_type");
 		String expertation_id = request.getParameter("expertation_id");
 		String user_id = request.getParameter("user_id"); //系统用户(暂存人)
 		String type = request.getParameter("type"); //类型
 		String sjump = request.getParameter("sjump"); //页面来源
+
+		Map<String,Object> productMap =  new HashMap<String,Object>();
+		productMap = this.etService.queryProduct(expert_type);
 		//求出信息集合
 		//1.作家申报表
 		Map<String,Object> perMap = new HashMap<String,Object>();
@@ -222,6 +225,8 @@ public class ExpertationController extends BaseController{
 		List<Map<String,Object>> acadeList = new ArrayList<Map<String,Object>>();
 		//19.人卫社教材编写情况表
 		List<Map<String,Object>> pmphList = new ArrayList<Map<String,Object>>();
+		//19.主编或参编图书情况
+		List<Map<String,Object>> editorList = new ArrayList<Map<String,Object>>();
 		//20.参加人卫慕课、数字教材编写情况
 		Map<String,Object> digitalMap = new HashMap<String,Object>();
 		//21.编写内容意向表
@@ -255,7 +260,8 @@ public class ExpertationController extends BaseController{
 		perMap.put("user_id", user_id);
 		perMap.put("type", type);
 		perMap.put("is_teacher", userMap.get("is_teacher"));
-		perMap.put("product_id", material_id);
+		perMap.put("material_id", material_id);
+		perMap.put("product_id", productMap.get("id").toString());
 		perMap.put("expert_type", expert_type);
 		String sex = request.getParameter("sex");
 		if(sex == null || sex.length() <= 0){
@@ -411,6 +417,26 @@ public class ExpertationController extends BaseController{
 				JcbjMap.put("per_id", jc_id[i]);
 				//作家上套教材参编
 				jcbjList.add(JcbjMap);
+			}
+		}
+		//主编或参编图书情况
+		String zbts_material_name[] = request.getParameterValues("zbts_material_name");
+		String zbts_note[] = request.getParameterValues("zbts_note");
+		String zbts_publish_date[] = request.getParameterValues("zbts_publish_date");
+		String zbts_publisher[] = request.getParameterValues("zbts_publisher");
+		String zbts_id[] = request.getParameterValues("zbts_id");
+		for(int i=0;i<zbts_material_name.length;i++) { //遍历数组
+			if(!zbts_material_name[i].equals("")){ //判断是否存在
+				Map<String,Object> JcbjMap = new HashMap<String,Object>();
+				JcbjMap.put("material_name", zbts_material_name[i]);
+				JcbjMap.put("note", zbts_note[i]);
+				JcbjMap.put("publisher", zbts_publisher[i]);
+				JcbjMap.put("publish_date", "".equals(zbts_publish_date[i]) ? null:zbts_publish_date[i]);
+
+				JcbjMap.put("sort", i);
+				JcbjMap.put("per_id", zbts_id[i]);
+				//作家上套教材参编
+				editorList.add(JcbjMap);
 			}
 		}
 		//精品课程建设情况
@@ -645,9 +671,9 @@ public class ExpertationController extends BaseController{
 		intentionlMap.put("content", intention_content);
         Map<String,Object> returnMap =  new HashMap<String,Object>();
 		if(expertation_id == null || expertation_id.length() <= 0){//表示新增
-            returnMap = this.etService.insertJcsbxx(perMap, stuList, workList, steaList, zjxsList, jcbjList, gjkcjsList, gjghjcList, jcbxList, zjkyList, zjkzqkList, achievementMap, monographList, publishList, sciList, clinicalList, acadeList, pmphList, digitalMap, intentionlMap,subjectList,contentList);
+            returnMap = this.etService.insertJcsbxx(perMap, stuList, workList, steaList, zjxsList, jcbjList, gjkcjsList, gjghjcList, jcbxList, zjkyList, zjkzqkList, achievementMap, monographList, publishList, sciList, clinicalList, acadeList, pmphList, digitalMap, intentionlMap,subjectList,contentList,editorList);
 		}else{
-            returnMap=this.etService.updateJcsbxx(perMap, stuList, workList, expertation_id, steaList, zjxsList, jcbjList, gjkcjsList, gjghjcList, jcbxList, zjkyList, zjkzqkList, achievementMap, monographList, publishList, sciList, clinicalList, acadeList, pmphList, digitalMap, intentionlMap,subjectList,contentList);
+            returnMap=this.etService.updateJcsbxx(perMap, stuList, workList, expertation_id, steaList, zjxsList, jcbjList, gjkcjsList, gjghjcList, jcbxList, zjkyList, zjkzqkList, achievementMap, monographList, publishList, sciList, clinicalList, acadeList, pmphList, digitalMap, intentionlMap,subjectList,contentList,editorList);
 		}
 		
 		/*if(type.equals("1")){ //提交
@@ -672,20 +698,19 @@ public class ExpertationController extends BaseController{
 	public ModelAndView showMaterial(HttpServletRequest request,String... arrMaterial_id){
 		ModelAndView mav = new ModelAndView("commuser/materialdec/showExpertation");
 		//传参  user_id  material_id
-		//	String user_id = request.getParameter("user_id");
-		String material_id = request.getParameter("material_id");
+        String declaration_id = request.getParameter("declaration_id");
         if(arrMaterial_id !=null && arrMaterial_id.length>0){
-            material_id = arrMaterial_id[0];
+            declaration_id = arrMaterial_id[0];
         }
-		String declaration_id = request.getParameter("declaration_id");
 		Map<String,Object> queryMap = new HashMap<String,Object>();
-		queryMap.put("material_id", material_id);
 		queryMap.put("declaration_id", declaration_id);
 		Map<String, Object> logUser = getUserInfo();
 
 		//1.作家申报表
 		List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
 		gezlList = this.etService.queryPerson(queryMap);
+		Map<String,Object> productMap =  new HashMap<String,Object>();
+		productMap = this.etService.queryProduct(gezlList.get(0).get("expert_type").toString());
 		Boolean isSelfLog = false;
 		if (logUser.get("id").toString().equals(gezlList.get(0).get("user_id").toString())) {
 			isSelfLog = true;
@@ -696,96 +721,51 @@ public class ExpertationController extends BaseController{
 		}else{
 			queryMap.put("declaration_id", declaration_id);
 		}
-		if(material_id == null){
-			material_id= gezlList.get(0).get("product_id").toString();
-		}
-		queryMap.put("product_id", material_id);
-		//教材信息
-		Map<String,Object> materialMap = new HashMap<String,Object>();
-		materialMap = this.etService.queryMaterialbyId(material_id);
+		queryMap.put("product_id", gezlList.get(0).get("product_id").toString());
+		queryMap.put("expert_type", gezlList.get(0).get("expert_type").toString());
 
+		//学科
+		List<Map<String,Object>> subjectList = this.etService.selectSubject(queryMap);
+		List<Map<String,Object>> contentList = this.etService.selectContent(queryMap);
 		//3.作家学习经历表
 		List<Map<String,Object>> stuList = new ArrayList<Map<String,Object>>();
-		stuList=this.mdService.queryStu(queryMap);
+		stuList=this.etService.queryStu(queryMap);
 		//4.作家工作经历表
 		List<Map<String,Object>> workList = new ArrayList<Map<String,Object>>();
-		workList=this.mdService.queryWork(queryMap);
-		//5.作家教学经历表
-		List<Map<String,Object>> steaList = new ArrayList<Map<String,Object>>();
-		steaList=this.mdService.queryStea(queryMap);
+		workList=this.etService.queryWork(queryMap);
 		//6.作家兼职学术表
 		List<Map<String,Object>> zjxsList = new ArrayList<Map<String,Object>>();
-		zjxsList=this.mdService.queryZjxs(queryMap);
-		//7.作家上套教材参编情况表
-		List<Map<String,Object>> jcbjList = new ArrayList<Map<String,Object>>();
-		jcbjList=this.mdService.queryJcbj(queryMap);
-		//8.作家精品课程建设情况表
-		List<Map<String,Object>> gjkcjsList = new ArrayList<Map<String,Object>>();
-		gjkcjsList=this.mdService.queryGjkcjs(queryMap);
+		zjxsList=this.etService.queryZjxs(queryMap);
 		//9.作家主编国家级规划教材情况表
 		List<Map<String,Object>> gjghjcList = new ArrayList<Map<String,Object>>();
-		gjghjcList = this.mdService.queryGjghjc(queryMap);
-		 //10.作家教材编写情况表
-		List<Map<String,Object>> rwsjcList = new ArrayList<Map<String,Object>>();
-		List<Map<String,Object>> jcbxqtList = new ArrayList<Map<String,Object>>();
-		//其他社教材编写情况
-		jcbxqtList=this.mdService.queryqtJcbx(queryMap);
-		//19.人卫社编写情况
-		rwsjcList=this.mdService.rwsjcList(queryMap);
-		//11.作家科研情况表
-		List<Map<String,Object>> zjkyList = new ArrayList<Map<String,Object>>();
-		zjkyList = this.mdService.queryZjkyqk(queryMap);
+		gjghjcList = this.etService.queryGjghjc(queryMap);
+        //19.人卫社编写情况
+        List<Map<String,Object>> rwsjcList = new ArrayList<Map<String,Object>>();
+		rwsjcList=this.etService.rwsjcList(queryMap);
 		//12.作家扩展项填报表
 		List<Map<String,Object>> zjkzqkList = new ArrayList<Map<String,Object>>();
-		zjkzqkList = this.mdService.queryZjkzbb(queryMap);
-		List<Map<String,Object>> zjkzxxList = this.mdService.queryZjkzxxById(material_id);
-		//13.个人成就
-		Map<String,Object> achievementMap = new HashMap<String,Object>();
-		achievementMap = this.mdService.queryAchievement(queryMap);
+		zjkzqkList = this.etService.queryZjkzbb(queryMap);
+		List<Map<String,Object>> zjkzxxList = this.etService.queryZjkzxxById(productMap.get("id").toString());
 		//14.主编学术专著情况表
 		List<Map<String,Object>> monographList = new ArrayList<Map<String,Object>>();
-		monographList = this.mdService.queryMonograph(queryMap);
-		//15.出版行业获奖情况表
-		List<Map<String,Object>> publishList = new ArrayList<Map<String,Object>>();
-		publishList = this.mdService.queryPublish(queryMap);
-		//16.SCI论文投稿及影响因子情况表
-		List<Map<String,Object>> sciList = new ArrayList<Map<String,Object>>();
-		sciList = this.mdService.querySci(queryMap);
-		//17.临床医学获奖情况表
-		List<Map<String,Object>> clinicalList = new ArrayList<Map<String,Object>>();
-		clinicalList = this.mdService.queryClinicalreward(queryMap);
-		//18.学术荣誉授予情况表
-		List<Map<String,Object>> acadeList = new ArrayList<Map<String,Object>>();
-		acadeList = this.mdService.queryAcadereward(queryMap);
-		//20.参加人卫慕课、数字教材编写情况
-		Map<String,Object> moocMap = new HashMap<String,Object>();
-		moocMap = this.mdService.queryMoocdigital(queryMap);
-		//21.编写内容意向表
-		Map<String,Object> intentionMap = new HashMap<String,Object>();
-		intentionMap = this.mdService.queryIntention(queryMap);
+		monographList = this.etService.queryMonograph(queryMap);
+		//6.主编或参编图书情况
+		List<Map<String,Object>> editorList = new ArrayList<Map<String,Object>>();
+		editorList=this.etService.queryEditor(queryMap);
 		//填充
-		mav.addObject("material", materialMap);
+		mav.addObject("queryMap", queryMap);
 		mav.addObject("gezlList", gezlList.get(0));
 		mav.addObject("stuList", stuList);
 		mav.addObject("workList", workList);
-		mav.addObject("steaList", steaList);
-		mav.addObject("jcbjList", jcbjList);
-		mav.addObject("gjkcjsList", gjkcjsList);
+		mav.addObject("editorList", editorList);
 		mav.addObject("rwsjcList", rwsjcList);
 		mav.addObject("gjghjcList", gjghjcList);
-		mav.addObject("zjkyList", zjkyList);
 		mav.addObject("zjxsList", zjxsList);
 		mav.addObject("zjkzqkList", zjkzqkList);
 		mav.addObject("zjkzxxList", zjkzxxList);
-		mav.addObject("achievementMap", achievementMap);
+		mav.addObject("subjectList", subjectList);
+		mav.addObject("contentList", contentList);
 		mav.addObject("monographList", monographList);
-		mav.addObject("publishList", publishList);
-		mav.addObject("sciList", sciList);
-		mav.addObject("clinicalList", clinicalList);
-		mav.addObject("acadeList", acadeList);
-		mav.addObject("jcbxqtList", jcbxqtList);
-		mav.addObject("digitalMap", moocMap);
-		mav.addObject("intentionMap", intentionMap);
 		return mav;
 	}
 
@@ -826,12 +806,7 @@ public class ExpertationController extends BaseController{
         }
 		String product_id = gezlList.get(0).get("product_id").toString();
 		queryMap.put("product_id", product_id);
-		//教材信息
-		Map<String,Object> materialMap = new HashMap<String,Object>();
-		materialMap = this.etService.queryMaterialbyId(product_id);
-		queryMap.put("is_multi_books", materialMap.get("is_multi_books"));
-		queryMap.put("is_multi_position", materialMap.get("is_multi_position"));
-		queryMap.put("is_digital_editor_optional", materialMap.get("is_digital_editor_optional"));
+		queryMap.put("expert_type", gezlList.get(0).get("expert_type").toString());
 
 		//3.作家学习经历表
 		List<Map<String,Object>> stuList = new ArrayList<Map<String,Object>>();
@@ -855,12 +830,16 @@ public class ExpertationController extends BaseController{
 		//14.主编学术专著情况表
 		List<Map<String,Object>> monographList = new ArrayList<Map<String,Object>>();
 		monographList = this.etService.queryMonograph(queryMap);
+		//6.主编或参编图书情况
+		List<Map<String,Object>> editorList = new ArrayList<Map<String,Object>>();
+		editorList=this.etService.queryEditor(queryMap);
 
 		//填充
 		mav.addObject("subjectList", subjectList);
 		mav.addObject("contentList", contentList);
 		mav.addObject("gezlList", gezlList.get(0));
 		mav.addObject("stuList", stuList);
+		mav.addObject("editorList", editorList);
 		mav.addObject("workList", workList);
 		mav.addObject("rwsjcList", rwsjcList);
 		mav.addObject("gjghjcList", gjghjcList);
@@ -875,44 +854,6 @@ public class ExpertationController extends BaseController{
 		return mav;
 	}
 	
-
-	/**
-	 *  重定向方法，根据教材id或申报id及当前登录人判断重定向到新增或是修改或是查看申报，
-	 * @param material_id
-	 * @param declaration_id
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping("MaterialDetailRedirect")
-	public ModelAndView MaterialDetailRedirect(
-			@RequestParam(value="material_id",defaultValue="")String material_id
-			,@RequestParam(value="declaration_id",defaultValue="")String declaration_id
-			,HttpServletRequest request){
-		ModelAndView mv = new ModelAndView();
-		Map<String, Object> user = getUserInfo();
-		String user_id = user.get("id").toString();
-		
-		Map<String, Object> dmap = mdService.queryDeclarationByUserIdAndMaterialIdOrDeclarationId(user_id,material_id,declaration_id);
-		
-		if (dmap!=null) {
-			if ("".equals(declaration_id)) {
-				declaration_id = dmap.get("id").toString();
-			}
-			if ("1".equals(dmap.get("notEnd").toString()) ) {
-				if ("1".equals(dmap.get("dec_editable").toString())) {
-					mv.setViewName("redirect:/material/toMaterialZc.action?declaration_id="+declaration_id);
-				}else {
-					mv.setViewName("redirect:/material/showMaterial.action?declaration_id="+declaration_id);
-				}
-			}else{
-				mv.setViewName("redirect:/material/showMaterial.action?declaration_id="+declaration_id);
-			}
-		}else{
-			mv.setViewName("redirect:/material/toMaterialAdd.action?material_id="+material_id);
-		}
-		return mv;
-	}
-
 	/**
 	 * 查询学科分类
 	 */
@@ -924,7 +865,7 @@ public class ExpertationController extends BaseController{
 		String material_id = request.getParameter("material_id");
 		String  currentPageStr = (String) request.getParameter("currentPage");
 		String  pageSizeStr = request.getParameter("pageSize");
-		String  orgname = request.getParameter("orgname");
+		String  typename = request.getParameter("typename");
 		Map<String,Object> paraMap = new HashMap<String,Object>();
 		//分页查询
 		int currentPage = 0;
@@ -941,11 +882,11 @@ public class ExpertationController extends BaseController{
 		paraMap.put("material_id", material_id);
 		paraMap.put("endPage", pageSize);
 		paraMap.put("currentPage", currentPage);
-		if(orgname!=null && !orgname.equals("")){
+		if(typename!=null && !typename.equals("")){
 			try {
-				orgname = URLDecoder.decode(orgname,"UTF-8");
-				paraMap.put("org_name", "%"+orgname+"%");
-				paraMap.put("orgname", orgname);
+				typename = URLDecoder.decode(typename,"UTF-8");
+				paraMap.put("type_name", "%"+typename.trim()+"%");
+				paraMap.put("typename", typename);
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
@@ -968,7 +909,7 @@ public class ExpertationController extends BaseController{
 		String material_id = request.getParameter("material_id");
 		String  currentPageStr = (String) request.getParameter("currentPage");
 		String  pageSizeStr = request.getParameter("pageSize");
-		String  orgname = request.getParameter("orgname");
+		String  namepath = request.getParameter("namepath");
 		Map<String,Object> paraMap = new HashMap<String,Object>();
 		//分页查询
 		int currentPage = 0;
@@ -985,11 +926,11 @@ public class ExpertationController extends BaseController{
 		paraMap.put("material_id", material_id);
 		paraMap.put("endPage", pageSize);
 		paraMap.put("currentPage", currentPage);
-		if(orgname!=null && !orgname.equals("")){
+		if(namepath!=null && !namepath.equals("")){
 			try {
-				orgname = URLDecoder.decode(orgname,"UTF-8");
-				paraMap.put("org_name", "%"+orgname+"%");
-				paraMap.put("orgname", orgname);
+				namepath = URLDecoder.decode(namepath,"UTF-8");
+				paraMap.put("name_path", "%"+namepath+"%");
+				paraMap.put("namepath", namepath);
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
@@ -1015,20 +956,20 @@ public class ExpertationController extends BaseController{
     //重定向方法
 	@RequestMapping("lookforward")
 	public ModelAndView lookforward(HttpServletRequest request){
-	    ModelAndView modelAndView=new ModelAndView();
-		String expert_type=request.getParameter("expert_type");
-		Map<String, Object> user=getUserInfo();
-		Map<String, Object> map=etService.queryExpertationDetail(user.get("id").toString(),expert_type);
-		if(map==null){
-            modelAndView=this.toMaterialAdd(request,expert_type);
-		}else if(map.get("online_progress").toString().equals("0") ||map.get("online_progress").toString().equals("2")){
-			//审核状态为未提交和被退回，跳转至编辑界面
-            modelAndView=this.toMaterialZc(request,map.get("id").toString());
-		}else if(map.get("online_progress").toString().equals("1") ||map.get("online_progress").toString().equals("3") ){
-            //审核状态为代审核和审核通过，跳转至查看界面
-			modelAndView=this.showMaterial(request,map.get("id").toString());
-		}
-		return modelAndView;
+            ModelAndView modelAndView=new ModelAndView();
+            String expert_type=request.getParameter("expert_type");
+            Map<String, Object> user=getUserInfo();
+            Map<String, Object> map=etService.queryExpertationDetail(user.get("id").toString(),expert_type);
+            if(map==null){
+                modelAndView=this.toMaterialAdd(request,expert_type);
+            }else if(map.get("online_progress").toString().equals("0") ||map.get("online_progress").toString().equals("2")){
+                //审核状态为未提交和被退回，跳转至编辑界面
+                modelAndView=this.toMaterialZc(request,map.get("id").toString());
+            }else if(map.get("online_progress").toString().equals("1") ||map.get("online_progress").toString().equals("3") ){
+                //审核状态为代审核和审核通过，跳转至查看界面
+                modelAndView=this.showMaterial(request,map.get("id").toString());
+            }
+            return modelAndView;
 	}
 
 }

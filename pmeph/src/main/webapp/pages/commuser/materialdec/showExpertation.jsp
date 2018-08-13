@@ -22,7 +22,7 @@
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="body">
 	<div class="content-wrapper">
-		<<input type="hidden" name="material_id" id="material_id" value="${material.id}">
+		<input type="hidden" name="material_id" id="material_id" value="${queryMap.expert_type}">
 		<div class="sbxq_title">
 			<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=jcsb&pageNum=1&pageSize=10"> 教材申报 </a> > ${material.material_name}</span>
 		</div>
@@ -178,7 +178,7 @@
 		<div class="sbxq_item" id="xsjz">
 			<div>
 				<span id="tsxz_span7"></span>
-				<span class="tsxz_title">学术兼职</span>
+				<span class="tsxz_title">主要学术兼职</span>
 			</div>
 			<div class="content">
 				<table class="tab_2" id="tab_xsjz">
@@ -614,6 +614,35 @@
 				</table>
 			</div>
 		</div>
+		<!--主编或参编图书情况-->
+		<div class="sbxq_item" id="zbcbtsqk">
+			<div>
+				<span id="tsxz_span6"></span>
+				<span class="tsxz_title">主编或参编图书情况</span>
+			</div>
+			<div class="content">
+				<table class="tab_2" id="tab_zbtsqk">
+					<thead>
+					<tr>
+						<td width="350px">教材名称</td>
+						<td width="330px">出版社</td>
+						<td width="160px">出版时间</td>
+						<td>备注</td>
+					</tr>
+					</thead>
+					<tbody>
+					<c:forEach var="list" items="${editorList}" varStatus="status">
+						<tr>
+							<td>${list.material_name}</td>
+							<td>${list.publisher}</td>
+							<td>${list.publish_date}</td>
+							<td>${list.note}</td>
+						</tr>
+					</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
 		<!--编写内容意向表-->
 	 	<div class="sbxq_item" id="intention">
 			<div>
@@ -655,42 +684,52 @@
                 </div>
 			</div>
 		</c:forEach>
-        <!-- 学科分类-->
-        <div class="sbxq_item1">
-            <div>
-                <span id="tsxz_span8"></span>
-                <span class="tsxz_title">学科分类(可多选)</span>
-            </div>
-            <div class="sbdw">
-                <span class="btmc">学科分类：</span>
-            </div>
-        </div>
-        <!-- 内容分类-->
-        <div class="sbxq_item1">
-            <div>
-                <span id="tsxz_span8"></span>
-                <span class="tsxz_title">内容分类(可多选)</span>
-            </div>
-            <div class="sbdw">
-                <span class="btmc">内容分类：</span>
-            </div>
-        </div>
-
-        <!-- 院校推荐意见-->
-		<div class="yijian">
-			<div class="tujian01">院校推荐意见:</div>
-			<div class="tujian02">
-				<div class="qianzi">负责人签字:</div>
-				<div class="gaizhang">(院校盖章)</div>
+		<!-- 学科分类-->
+		<div class="sbxq_item1">
+			<div>
+				<span id="tsxz_span8"></span>
+				<span class="tsxz_title">学科分类(可多选)</span>
+				<span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.product_id}')">添加学科分类</span>
 			</div>
-			<div class="tujian03">年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</div>
+			<div class="sbdw" id="xkfladd">
+				<span class="btmc">学科分类：</span>
+				<c:forEach var="subject" items="${subjectList}" varStatus="status">
+				<span class="el-tag" id="xkfl_${status.count}">${subject.type_name}<input name="subjectId" type="hidden" value="${subject.product_subject_type_id}"/>
+					</span>
+				</c:forEach>
+			</div>
+		</div>
+		<!-- 内容分类-->
+		<div class="sbxq_item1">
+			<div>
+				<span id="tsxz_span8"></span>
+				<span class="tsxz_title">内容分类(可多选)</span>
+				<span class="el-button" onclick="javascript:ContentAdd('${materialMap.product_id}')">添加内容分类</span>
+			</div>
+			<div class="sbdw" id="nrfladd">
+				<span class="btmc">内容分类：</span>
+				<c:forEach var="content" items="${contentList}" varStatus="status">
+				<span class="el-tag" id="nrfl_${status.count}">${content.name_path}<input name="contentId" type="hidden" value="${content.product_content_type_id}"/>
+					</span>
+				</c:forEach>
+			</div>
+		</div>
+		<div class="sbxq_item" id="szdwyj">
+			<div>
+				<span id="tsxz_span8"></span>
+				<span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" />所在单位意见<span style="color: red">(上传单位盖章的申报表)</span></span>
+			</div>
+			<div style="height: 30px;margin-top: 10px;">
+				<div class="filename"><a href="javascript:" onclick="downLoadProxy('${gezlList.unit_advise}')"
+						title="${gezlList.syllabus_name}">${gezlList.syllabus_name}</a>
+				</div>
+			</div>
 		</div>
 		<hr style=" height:1px;border:none;border-top:1px #999999 dashed;margin-top: 30px;">
 		</div>
 		<c:if test="${isSelfLog=='true' }">
 			<div class="button">
 				<div class="bt_tj" onclick="javascript:buttGive()">返回申报列表</div>
-				<div class="bt_tj" onclick="toprint()">打印</div>
 			</div>
 			<span style="color: #E31028;font-size: 14px;text-align: center;float: left;margin-left: 350px;">打印推荐使用浏览器：chrome、360浏览器极速模式、IE浏览器支持IE10及以上版本</span>
 		</c:if>

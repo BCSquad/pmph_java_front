@@ -18,6 +18,10 @@ function queryMaterialMap(id){
 
 //模块显示与隐藏判断
 function chooseModel(data){
+    //所在单位意见
+    if(data.is_unit_advise_used == "1"){
+        $("#szdwyj").css("display","block");
+    }
 	//学习经历
 	if(data.is_edu_exp_used == "1"){
 		$("#zyxxjl").css("display","block");
@@ -90,6 +94,10 @@ function chooseModel(data){
     if(data.is_intention_used == "1"){
         $("#intention").css("display","block");
     }
+    //主编或参编图书情况
+    if(data.is_edit_book_used == "1"){
+        $("#zbcbtsqk").css("display","block");
+    }
 }
 
 //文件下载
@@ -99,7 +107,7 @@ function downLoadProxy(fileId){
 
 //放弃
 function buttGive(){
-	window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=jcsb";
+	window.location.href=contextpath+"expertation/declare.action";
 }
 
 //打印按钮
