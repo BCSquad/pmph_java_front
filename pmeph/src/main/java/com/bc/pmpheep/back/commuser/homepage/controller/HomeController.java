@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.collections.MapUtils;
@@ -341,7 +342,23 @@ public class HomeController extends BaseController{
 
     //跳转到三个产品详情界面
     @RequestMapping("todeclaredetail")
-    public ModelAndView todeclaredetail(HttpServletRequest request){
+    @ResponseBody
+    public String todeclaredetail(HttpServletRequest request){
+        String returncode="";
+        ModelAndView modelAndView=new ModelAndView();
+        String state=request.getParameter("state");
+        List<Map<String,Object>> list=homeService.quertProductByType(state);
+        if(list!=null && list.size()>0){
+            returncode="OK";
+        }else{
+            returncode="NO";
+        }
+        return returncode;
+    }
+
+    //跳转到公告详情页（三大产品）
+    @RequestMapping("toproductdetail")
+    public ModelAndView toproductdetail(HttpServletRequest request){
         ModelAndView modelAndView=new ModelAndView();
         String state=request.getParameter("state");
         List<Map<String,Object>> list=homeService.quertProductByType(state);
