@@ -369,8 +369,7 @@ public class HomeController extends BaseController{
             Boolean s1=Boolean.valueOf(list.get(i).get("is_scan_img").toString());
             if(s1==true){
                 Map<String,Object> map=new HashMap();
-//                map.put("attachment","image/" + list.get(i).get("attachment") + ".action");
-                map.put("attachment","image/5b581f99e4b01f9d7abc3d61.action");
+                map.put("attachment","image/" + list.get(i).get("attachment") + ".action");
                 list_scanimg.add(map);
             }else{
                 Map<String,Object> map=new HashMap();
