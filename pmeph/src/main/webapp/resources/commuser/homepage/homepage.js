@@ -233,8 +233,22 @@ function tosurvey() {
 	location.href = contextpath + 'survey/surveyList.action';
 }
 
+//三个新产品跳转
 function todeclaredetail(state){
-    location.href = contextpath + 'homepage/todeclaredetail.action?state='+state;
+    $.ajax({
+        type:'post',
+        url:contextpath+'homepage/todeclaredetail.action?state='+state+'&&t='+new Date().getTime(),
+        async:false,
+        dataType:'json',
+        success:function(json){
+        	if(json=="OK"){
+                location.href = contextpath + 'homepage/toproductdetail.action?state='+state;
+			}else{
+                window.message.info("后台暂未发布公告！");
+			}
+
+        }
+    });
 }
 
 
