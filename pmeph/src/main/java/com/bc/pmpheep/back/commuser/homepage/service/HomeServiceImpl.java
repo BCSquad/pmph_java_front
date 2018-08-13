@@ -323,13 +323,13 @@ public class HomeServiceImpl implements HomeService {
         if(list!=null){
             for (Map<String, Object> map:list) {
                 //备注
-//                String note=list.get(0).get("note").toString();
+                String note=list.get(0).get("note").toString();
                 //简介
                 String description=list.get(0).get("description").toString();
-//                Content note_detail = contentService.get(note);
+                Content note_detail = contentService.get(note);
                 Content description_detail = contentService.get(description);
+                map.put("note_detail",note_detail.getContent());
                 map.put("description_detail",description_detail.getContent());
-                map.put("attachment","file/download/" + map.get("attachment") + ".action");
             }
         }
         return list;
