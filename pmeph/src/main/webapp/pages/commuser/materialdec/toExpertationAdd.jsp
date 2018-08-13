@@ -391,7 +391,7 @@
 									<input type="hidden" name="pmph_is_digital_editor" value="pmph_is_digital_editor_a" />
 								</td>
 								<td><input class="cg_input" id="pmph_publish_date" name="pmph_publish_date" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  value="" style="width: 100px;"/></td>
-								<td><input class="cg_input" maxlength="50" id="pmph_isbn" name="pmph_isbn" value="" style="width: 100px;" placeholder="978-7-117-"/></td>
+								<td><input class="cg_input" maxlength="50" id="pmph_isbn" name="pmph_isbn" value="" style="width: 100px;" placeholder="ISBN 978-7-117-23074-2"/></td>
 								<td><input class="cg_input" maxlength="100" id="pmph_note" name="pmph_note" value="" placeholder="备注" style="width: 140px;"/><input type="hidden" name="pmph_id" value=""></td>
 								<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_rwsjcbx()"/></td>
 							</tr> </c:if>
