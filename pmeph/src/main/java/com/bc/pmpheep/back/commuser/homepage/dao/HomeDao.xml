@@ -453,7 +453,7 @@ LIMIT 0,10
 	</select>
 
 	<!--根据产品类型查询详情-->
-	<select id="quertProductByType" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="quertProductByType" parameterType="map" resultType="java.util.Map">
         select
 		   t. note,t.description,b.*
 		   from product t left join product_attachment b on t.id=b.product_id
