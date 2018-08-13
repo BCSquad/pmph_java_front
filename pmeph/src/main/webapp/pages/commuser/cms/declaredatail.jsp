@@ -27,25 +27,36 @@
 </jsp:include>
 <div class="content-wrapper">
     <div style="margin-top: 15px">首页>临床决策专家申报</div>
-    <c:if test="${state==1}">
-        <div class="name">人卫临床助手专家申报报名须知</div>
-    </c:if>
-    <c:if test="${state==2}">
-        <div class="name">人卫用药助手专家申报报名须知</div>
-    </c:if>
-    <c:if test="${state==3}">
-        <div class="name">人卫中医助手专家申报报名须知</div>
-    </c:if>
+    <%--<c:if test="${state==1}">--%>
+        <%--<div class="name">人卫临床助手专家申报报名须知</div>--%>
+    <%--</c:if>--%>
+    <%--<c:if test="${state==2}">--%>
+        <%--<div class="name">人卫用药助手专家申报报名须知</div>--%>
+    <%--</c:if>--%>
+    <%--<c:if test="${state==3}">--%>
+        <%--<div class="name">人卫中医助手专家申报报名须知</div>--%>
+    <%--</c:if>--%>
     <div>${description}</div>
-
-    <div style="color: #70BBC2">相关附件：</div>
-    <div class="att">
-        <c:forEach items="${list}" var="list" varStatus="status">
-            <div>
-            <span style="float: left"><img src="${ctx}/statics/pictures/attachment.png">附件${status.index+1}:</span>
-            <span style="margin-left: 5px"><a href="${ctx}/${list.attachment}">${list.attachment_name}</a></span>
-            </div>
+    <div style="float: left;width: 100%">
+        <c:forEach varStatus="status" var="list" items="${list_scanimg}">
+            <img src="${ctx}/${list.attachment}">
         </c:forEach>
+    </div>
+
+    <div style="float: left;width: 100%">
+        <div>${note_detail}</div>
+    </div>
+
+    <div style="float: left">
+        <div style="color: #70BBC2">相关附件：</div>
+        <div class="att">
+            <c:forEach items="${list_unscanimg}" var="list" varStatus="status">
+                <div>
+                <span style="float: left"><img src="${ctx}/statics/pictures/attachment.png">附件${status.index+1}:</span>
+                <span style="margin-left: 5px"><a href="${ctx}/${list.attachment}">${list.attachment_name}</a></span>
+                </div>
+            </c:forEach>
+        </div>
     </div>
     <div class="join" onclick="tojoin(${state})">报名参加</div>
 </div>
@@ -75,7 +86,7 @@
     }
 
     .join{
-        margin-left: 45%;
+        margin-left: 25%;
         margin-top: 50px;
         background-color: #70BBC2;
         width: 143px;
@@ -85,6 +96,7 @@
         color: white;
         cursor: pointer;
         line-height: 45px;
+        float: left;
     }
 </style>
 <script>
