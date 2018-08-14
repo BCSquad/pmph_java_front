@@ -22,9 +22,9 @@
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="body">
 	<div class="content-wrapper">
-		<input type="hidden" name="material_id" id="material_id" value="${queryMap.expert_type}">
+		<input type="hidden" name="expert_type" id="expert_type" value="${queryMap.expert_type}">
 		<div class="sbxq_title">
-			<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> > <a style="text-decoration: none;color: #999999;" href="${contextpath}/expertation/declare.action"> 临床决策专家申报 </a> > 查看申报表</span>
+			<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> > <a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/expertation/declare.action"> 临床决策专家申报 </a> > 查看申报表</span>
 		</div>
 		<div id="ddd">
 			<div class="tsxz_title" id="tnone" style="display: none;text-align: center;font-size: 20px;margin-top: 6px;">${material.material_name}</div>

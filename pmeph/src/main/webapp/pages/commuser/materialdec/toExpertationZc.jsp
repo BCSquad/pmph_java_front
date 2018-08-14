@@ -9,7 +9,7 @@
         var contextpath = '${pageContext.request.contextPath}/';
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-    <title>专家表修改</title>
+    <title>临床申报表修改</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/materialdec/materialadd.css?t=${_timestamp}" type="text/css">
@@ -35,9 +35,9 @@
         <div style="color: red;font-size: 16px;margin-top: 28px;">（提示：为确保填写成功，请用360极速浏览器或谷歌浏览器）</div>
         <div class="sbxq_title">
             <span><a style="text-decoration: none;color: #999999;"
-                     href="${contextpath}/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a
+                     href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a
                     style="text-decoration: none;color: #999999;"
-                    href="${contextpath}/expertation/declare.action"> 临床决策专家申报 </a> > 修改申报表</span>
+                    href="${contextpath}/medu/expertation/declare.action"> 临床决策专家申报 </a> > 修改申报表</span>
         </div>
         <div id="ifprint">
         <form id="objForm">
@@ -55,35 +55,22 @@
                     <table class="tab_1">
                         <tr>
                             <td><span class="btbs">*</span><span>姓&emsp;&emsp;名：</span>
-                                <input class="cg_input" name="realname" id="realname" value="${gezlList.realname}"
-                                       maxlength="20"/>
-                                <input class="cg_input" name="user_id" type="hidden" value="${userMap.id}"/>
-                                <input class="cg_input" name="username" id="username" type="hidden"
-                                       value="${userMap.username}"/>
+                                <input class="cg_input" name="realname" id="realname" value="${gezlList.realname}" maxlength="20"/>
+                                <input class="cg_input" name="user_id" type="hidden" value="${userMap.id}" />
                             </td>
                             <td><span class="btbs">*</span><span>性&emsp;&emsp;别：</span>
                                 <select class="select-input" id="sex" name="sex">
-                                    <%--  <option value="0" ${gezlList.sex=='0'?'selected':'' }>保密</option>--%>
                                     <option value="1" ${gezlList.sex=='1'?'selected':'' }>男</option>
                                     <option value="2" ${gezlList.sex=='2'?'selected':'' }>女</option>
                                 </select></td>
                             <td><span class="btbs">*</span><span>出生年月：</span>
-                                <input class="cg_input" calendar format="'yyyy-mm-dd'" name="birthday"
-                                       value="${gezlList.birthday}" id="birthday"/></td>
-                            <td><span class="btbs">*</span><span>教&emsp;&emsp;龄：</span>
-                                <input class="cg_input" name="experience" value="${gezlList.experience}" id="experience"
-                                       onkeyup="this.value=this.value.replace(/\D/g,'')"
-                                       onafterpaste="this.value=this.value.replace(/\D/g,'')"
-                                       maxlength="2"
-                                /></td>
+                                <input class="cg_input" calendar format="'yyyy-mm-dd'"  name="birthday" value="${gezlList.birthday}"  id="birthday"  /></td>
+                            <td><span class="btbs">*</span><span>工作单位：</span>
+                                <input class="cg_input" name="org_name" value="${gezlList.org_name}" id="org_name"  maxlength="36"/></td>
                         </tr>
                         <tr>
-                            <td><span class="btbs">*</span><span>工作单位：</span>
-                                <input class="cg_input" name="org_name" value="${gezlList.org_name}" id="org_name"
-                                       maxlength="36"/></td>
                             <td><span class="btbs">*</span><span>职&emsp;&emsp;务：</span>
-                                <input class="cg_input" name="position" value="${gezlList.position}" id="position"
-                                       maxlength="36"/></td>
+                                <input class="cg_input" name="position" value="${gezlList.position}" id="position"  maxlength="36"/></td>
                             <td><span class="btbs">*</span><span>职&emsp;&emsp;称：</span>
                                 <select id="zclx" name="title">
                                     <option value="院士" ${gezlList.title=='院士'?'selected':'' }>院士</option>
@@ -94,32 +81,21 @@
                                     <option value="高级讲师" ${gezlList.title=='高级讲师'?'selected':'' }>高级讲师</option>
                                     <option value="讲师" ${gezlList.title=='讲师'?'selected':'' }>讲师</option>
                                     <option value="其他" ${gezlList.title=='其他'?'selected':'' }>其他</option>
-                                </select>
-                            </td>
-                            </td>
-                            <td><span class="btbs">*</span><span style="width: 70px">E-mail：</span>
-                                <input class="cg_input" name="email" value="${gezlList.email}" id="email"
-                                       maxlength="40"/></td>
-                        </tr>
-                        <tr>
-                            <td><span>&ensp;邮&emsp;&emsp;编：</span>
-                                <input class="cg_input" name="postcode" value="${gezlList.postcode}" id="postcode"
-                                       onblur="LengthLimit(this,20)" maxlength="20"/>
-                            </td>
+                                </select></td>
                             <td><span>&ensp;联系电话：</span>
                                 <input class="cg_input" name="telephone" value="${gezlList.telephone}" id="telephone"
-                                       onblur="LengthLimit(this,30)" maxlength="30"/>
-                            </td>
-                            <td><span>&ensp;传&emsp;&emsp;真：</span>
-                                <input class="cg_input" name="fax" value="${gezlList.fax}" id="fax" maxlength="20"
-                                       onblur="LengthLimit(this,20)"/>
+                                       onblur="LengthLimit(this,30)"
+                                       maxlength="30"/>
                             </td>
                             <td><span class="btbs">*</span><span>手&emsp;&emsp;机：</span>
-                                <input class="cg_input" name="handphone" value="${gezlList.handphone}" id="handphone"
-                                       onblur="LengthLimit(this,30)" maxlength="30"/>
+                                <input class="cg_input" name="handphone" value="${gezlList.handphone}" id="handphone" maxlength="30"/>
                             </td>
+
                         </tr>
                         <tr>
+                            <td><span class="btbs">*</span><span style="width: 70px">邮&emsp;&emsp;箱：</span>
+                                <input class="cg_input" name="email" value="${gezlList.email}" id="email"  maxlength="40"/></td>
+
                             <td><span class="btbs">*</span><span>证件类型：</span>
                                 <select class="select-input" id="zjlx" name="idtype">
                                     <option value="0" ${gezlList.idtype=='0'?'selected':'' }>身份证</option>
@@ -127,11 +103,36 @@
                                     <option value="2" ${gezlList.idtype=='2'?'selected':'' }>军官证</option>
                                 </select></td>
                             <td><span class="btbs">*</span><span>证件号码：</span>
-                                <input class="cg_input" name="idcard" value="${gezlList.idcard}" id="idcard"
-                                       maxlength="18"/></td>
+                                <input class="cg_input" name="idcard" value="${gezlList.idcard}" id="idcard"  maxlength="18"/></td>
+                            <td><span class="btbs">*</span><span>学&emsp;&emsp;历：</span>
+                                <select id="education" name="education">
+                                    <option value="0" ${gezlList.education=='0'?'selected':'' }>专科</option>
+                                    <option value="1" ${gezlList.education=='1'?'selected':'' }>本科</option>
+                                    <option value="2" ${gezlList.education=='2'?'selected':'' }>硕士</option>
+                                    <option value="3" ${gezlList.education=='3'?'selected':'' }>博士后</option>
+                                </select></td>
+                        </tr>
+                        <tr>
+                            <td><span>&ensp;邮&emsp;&emsp;编：</span>
+                                <input class="cg_input" name="postcode" value="${gezlList.postcode}" id="postcode"
+                                       onblur="LengthLimit(this,20)"
+                                       maxlength="20"/>
+                            </td>
                             <td colspan="2"><span class="btbs">*</span><span>地&emsp;&emsp;址：</span>
-                                <input class="cg_input" style="width: 488px;" name="address" value="${gezlList.address}"
-                                       id="address" maxlength="50"/></td>
+                                <input class="cg_input" style="width: 488px;" name="address" value="${gezlList.address}" id="address"  maxlength="50"/></td>
+                            <td><span>&ensp;专业特长：</span>
+                                <input class="cg_input" name="expertise" value="${gezlList.expertise}" id="expertise"  maxlength="50"/></td>
+                        </tr>
+                        <tr>
+                            <td><span>&ensp;卡&emsp;&emsp;号：</span>
+                                <input class="cg_input" name="banknumber" value="${gezlList.banknumber}" id="banknumber"
+                                       onblur="LengthLimit(this,20)"
+                                       maxlength="20"/>
+                            </td>
+                            <td colspan="3"><span>&ensp;开户行&emsp;：</span>
+                                <input class="cg_input" style="width: 488px;" name="bankaddress" value="${gezlList.bankaddress}" id="bankaddress"  maxlength="100"/>
+                                <span style="color: red">(具体到银行详细名称)</span>
+                            </td>
                         </tr>
                     </table>
                 </div>

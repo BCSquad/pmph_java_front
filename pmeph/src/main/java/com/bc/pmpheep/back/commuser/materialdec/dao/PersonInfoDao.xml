@@ -250,4 +250,20 @@
 	<delete id="DelPerAcadereward" parameterType="java.util.Map">
 		delete from per_acade_reward where user_id = #{user_id}
 	</delete>
+
+	<!--主编或参编图书情况-->
+	<select id="queryPerEditor" resultType="java.util.Map" parameterType="java.util.Map">
+		select r.*,REPLACE(r.publish_date,'-','.') as publishdate from per_editor_book r where r.user_id = #{user_id} ORDER BY r.sort
+	</select>
+	<insert id="insertPerEditor" parameterType="java.util.Map">
+		insert into per_editor_book(id,user_id,material_name,publisher,publish_date,note,sort)
+		values(#{per_id},#{user_id},#{material_name},#{publisher},#{publish_date},#{note},#{sort})
+	</insert>
+	<update id="updatePerEditor" parameterType="java.util.Map">
+		update per_editor_book set material_name = #{material_name},publisher=#{publisher},publish_date=#{publish_date},
+		note=#{note},sort=#{sort} where id = #{per_id}
+	</update>
+	<delete id="DelPerEditor" parameterType="java.util.Map">
+		delete from per_editor_book where user_id = #{user_id}
+	</delete>
 </mapper>

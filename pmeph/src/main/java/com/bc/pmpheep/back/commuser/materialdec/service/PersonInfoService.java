@@ -1,8 +1,5 @@
 package com.bc.pmpheep.back.commuser.materialdec.service;
 
-import com.bc.pmpheep.back.plugin.PageParameter;
-import com.bc.pmpheep.back.plugin.PageResult;
-
 import java.util.List;
 import java.util.Map;
 
@@ -110,11 +107,16 @@ public interface PersonInfoService {
 	public Map<String,Object> queryPerIntention(Map<String, Object> map);
 
 	/**
+	 * 主编或参编图书情况
+	 */
+	public List<Map<String, Object>> queryPerEditor(Map<String, Object> map);
+
+	/**
 	 * 新增或者修改资料信息
 	 */
 	public int insertJcsbxx(Map<String,Object> perMap,List<Map<String,Object>> tssbList,List<Map<String,Object>> stuList,List<Map<String,Object>> workList,
 										   List<Map<String,Object>> steaList,List<Map<String,Object>> zjxsList,List<Map<String,Object>> jcbjList,List<Map<String,Object>> gjkcjsList,List<Map<String,Object>> gjghjcList,
 										   List<Map<String,Object>> jcbxList,List<Map<String,Object>> zjkyList,List<Map<String,Object>> zjkzqkList,Map<String,Object> achievementMap,List<Map<String,Object>> monographList,
 										   List<Map<String,Object>> publishList,List<Map<String,Object>> sciList,List<Map<String,Object>> clinicalList,List<Map<String,Object>> acadeList,
-										   List<Map<String,Object>> pmphList,Map<String,Object> digitalMap,Map<String,Object> intentionlMap);
+										   List<Map<String,Object>> pmphList,Map<String,Object> digitalMap,Map<String,Object> intentionlMap,List<Map<String,Object>> editorList);
 }

@@ -1,8 +1,5 @@
 package com.bc.pmpheep.back.commuser.materialdec.dao;
 
-import com.bc.pmpheep.back.plugin.PageParameter;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 import java.util.Map;
 
@@ -89,5 +86,11 @@ public interface PersonInfoDao {
 		public int insertPerAcadereward(Map<String, Object> map);
 		public int updatePerAcadereward(Map<String, Object> map);
 		public int DelPerAcadereward(Map<String, Object> map);
+
+		//主编或参编图书情况
+		public List<Map<String,Object>> queryPerEditor(Map<String, Object> map);
+		public int insertPerEditor(Map<String, Object> map);
+		public int updatePerEditor(Map<String, Object> map);
+		public int DelPerEditor(Map<String, Object> map);
 
 }

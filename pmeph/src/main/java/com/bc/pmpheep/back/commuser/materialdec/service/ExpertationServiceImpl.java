@@ -150,13 +150,13 @@ public class ExpertationServiceImpl implements ExpertationService {
             for (Map<String, Object> map : editorList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    /*if(!map.get("per_id").equals("")) {
-                        this.peradd.updatePerZjxs(map);
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePerEditor(map);
                     }else {
                         map.put("user_id", user_id);
                         map.put("per_id", per_id);
-                        this.peradd.insertPerZjxs(map);
-                    }*/
+                        this.peradd.insertPerEditor(map);
+                    }
                 }
                 map.put("declaration_id", declaration_id);
                 this.exdao.insertEditor(map);

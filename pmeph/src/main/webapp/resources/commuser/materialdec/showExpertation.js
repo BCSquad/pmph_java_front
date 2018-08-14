@@ -1,14 +1,14 @@
 $(function () {
-	var id = $("#material_id").val();
+	var id = $("#expert_type").val();
 	queryMaterialMap(id);  //执行查询方法
 });
 
 //页面组合方法
-function queryMaterialMap(id){
+function queryMaterialMap(expert_type){
 	$.ajax({
 		type: "POST",
 		url:contextpath+'expertation/queryMaterialMap.action',
-		data:{material_id:id},// 您的formid
+		data:{expert_type:expert_type},// 您的formid
 		dataType:"json",
 	    success: function(json) {
 	    	chooseModel(json);
