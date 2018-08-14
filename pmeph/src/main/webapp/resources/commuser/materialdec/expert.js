@@ -861,31 +861,16 @@ function del_tr(trId){
 
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type){
-        if(type == '2') { //表示暂存
-            //避免重复点击
-        //    document.getElementById('buzc').onclick=function(){window.message.warning("请不要重复点击");};
-        //    document.getElementById('butj').onclick=function(){window.message.warning("请不要重复点击");};
-            $.ajax({
-                type: "POST",
-                url:contextpath+'expertation/doExpertationAdd.action?sjump=1&type='+type,
-                data:$('#objForm').serialize(),// 您的formid
-                async: false,
-                success: function (json) {
-                    if (json.msg == 'OK') {
-                        window.message.success("操作成功,正在跳转页面");
-                        window.location.href = contextpath + "expertation/declare.action";
-                    }
-                }
-            });
-        }else {  //表示提交
-            checkLb();
-            if ($.fireValidator() ) {
+        if($("#xkfladd").hasClass("el-tag")){
+            if(type == '2') { //表示暂存
+                //避免重复点击
+                //    document.getElementById('buzc').onclick=function(){window.message.warning("请不要重复点击");};
+                //    document.getElementById('butj').onclick=function(){window.message.warning("请不要重复点击");};
                 $.ajax({
                     type: "POST",
-                    url: contextpath + 'expertation/doExpertationAdd.action?sjump=1&type=' + type,
-                    data: $('#objForm').serialize(),// 您的formid
+                    url:contextpath+'expertation/doExpertationAdd.action?sjump=1&type='+type,
+                    data:$('#objForm').serialize(),// 您的formid
                     async: false,
-                    dataType: "json",
                     success: function (json) {
                         if (json.msg == 'OK') {
                             window.message.success("操作成功,正在跳转页面");
@@ -893,9 +878,28 @@ function buttAdd(type){
                         }
                     }
                 });
+            }else {  //表示提交
+                checkLb();
+                if ($.fireValidator() ) {
+                    $.ajax({
+                        type: "POST",
+                        url: contextpath + 'expertation/doExpertationAdd.action?sjump=1&type=' + type,
+                        data: $('#objForm').serialize(),// 您的formid
+                        async: false,
+                        dataType: "json",
+                        success: function (json) {
+                            if (json.msg == 'OK') {
+                                window.message.success("操作成功,正在跳转页面");
+                                window.location.href = contextpath + "expertation/declare.action";
+                            }
+                        }
+                    });
+                }
             }
+            //  }
+        }else{
+            window.message.info("请选择学科分类！")
         }
-  //  }
 }
 /**
  * 表单校验方法
