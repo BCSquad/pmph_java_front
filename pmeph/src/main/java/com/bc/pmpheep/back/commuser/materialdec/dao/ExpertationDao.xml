@@ -55,7 +55,7 @@
 		update expertation set realname = #{realname},sex = #{sex},birthday = #{birthday},experience = #{experience},expertise = #{expertise},
 		org_name = #{org_name},position = #{position},title = #{title},address = #{address},idcard=#{idcard},
 		postcode = #{postcode},handphone = #{handphone},email = #{email},idtype = #{idtype},is_staging = #{is_staging},telephone = #{telephone},fax = #{fax},
-		gmt_update = #{gmt_update},online_progress = #{online_progress},banknumber = #{banknumber},degree=#{degree},education=#{education},
+		gmt_update = #{gmt_update},online_progress = #{online_progress},banknumber = #{banknumber},degree=#{degree},education=#{education}
 		<if test="commit_date != null and commit_date != ''">
 			,commit_date=#{commit_date}
 		</if>

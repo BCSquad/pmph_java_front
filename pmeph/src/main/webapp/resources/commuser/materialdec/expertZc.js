@@ -37,6 +37,12 @@ $(function () {
         height: 30,
         optionHeight: 30
     });
+    $('#education').selectlist({
+        zIndex: 10,
+        width: 192,
+        height: 30,
+        optionHeight: 30
+    });
     $('#jcb_rank').selectlist({
         zIndex: 10,
         width: 110,
@@ -121,11 +127,11 @@ function upload(){
 }
 
 //页面组合方法
-function queryMaterialMap(id){
+function queryMaterialMap(expert_type){
     $.ajax({
         type: "POST",
         url:contextpath+'expertation/queryMaterialMap.action',
-        data:{material_id:id},// 您的formid
+        data:{expert_type:expert_type},// 您的formid
         dataType:"json",
         success: function(json) {
             chooseModel(json);

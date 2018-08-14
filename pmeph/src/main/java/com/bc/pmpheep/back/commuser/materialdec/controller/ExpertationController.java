@@ -86,6 +86,8 @@ public class ExpertationController extends BaseController{
 		List<Map<String,Object>> permonographList = new ArrayList<Map<String,Object>>();
 		//19.人卫社教材编写情况表
 		List<Map<String,Object>> perpmphList = new ArrayList<Map<String,Object>>();
+		//20.主编或参编图书情况
+		List<Map<String,Object>> pereditorList = new ArrayList<Map<String,Object>>();
 
 		Map<String,Object> queryMap = new HashMap<String,Object>();
 
@@ -102,6 +104,7 @@ public class ExpertationController extends BaseController{
         perzjxsList=this.perService.queryPerZjxs(queryMap);
         permonographList=this.perService.queryPerMonograph(queryMap);
         perpmphList=this.perService.rwsjcPerList(queryMap);
+		pereditorList=this.perService.queryPerEditor(queryMap);
 
 		//作家扩展信息
 		List<Map<String,Object>> zjkzxxList = this.etService.queryZjkzxxById(productMap.get("id").toString());
@@ -114,6 +117,7 @@ public class ExpertationController extends BaseController{
 		mav.addObject("perzjxsList",perzjxsList);
 		mav.addObject("permonographList",permonographList);
 		mav.addObject("perpmphList",perpmphList);
+		mav.addObject("pereditorList",pereditorList);
 		return mav;
 	}
 	
@@ -220,8 +224,8 @@ public class ExpertationController extends BaseController{
 		perMap.put("education", request.getParameter("education"));
 		perMap.put("expertise", request.getParameter("expertise"));
 		perMap.put("gmt_create", date);
-		perMap.put("banknumber ", request.getParameter("banknumber"));
-		perMap.put("bankaddress ", request.getParameter("bankaddress"));
+		perMap.put("banknumber", "".equals(request.getParameter("banknumber")) ? null:request.getParameter("banknumber"));
+		perMap.put("bankaddress", request.getParameter("bankaddress"));
 		perMap.put("remark", request.getParameter("remark"));
 		perMap.put("unit_advise", request.getParameter("syllabus_id"));
 		perMap.put("syllabus_name", request.getParameter("syllabus_name"));

@@ -544,7 +544,7 @@
 								<td><input class="cg_input" maxlength="100" name="zbts_note" value="" style="width: 240px;" placeholder="备注"/><input type="hidden" name="jc_id" value=""></td>
 								<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_zbtsqk()"/></td>
 							</tr></c:if>
-						<c:forEach var="list" items="${perjcbjList}" varStatus="status">
+						<c:forEach var="list" items="${pereditorList}" varStatus="status">
 							<tr id="zbtsqk_${status.count}">
 								<td><input class="cg_input" maxlength="100" style="width: 320px" name="zbts_material_name" id="zbts_material_name_${status.count}" value="${list.material_name}" placeholder="教材名称"/></td>
 								<td><input class="cg_input" name="zbts_publisher" value="${list.publisher}"  style="width: 300px;" maxlength="20"/></td>
