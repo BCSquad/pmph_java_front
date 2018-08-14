@@ -38,7 +38,7 @@
 	<div class="content-wrapper">
 		<div style="color: red;font-size: 16px;margin-top: 28px;">（提示：为确保填写成功，请用360极速浏览器或谷歌浏览器）</div>
 		<div class="sbxq_title">
-			<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a style="text-decoration: none;color: #999999;" href="${contextpath}/expertation/declare.action"> 临床决策专家申报 </a> > 填写申报表</span>
+			<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/expertation/declare.action"> 临床决策专家申报 </a> > 填写申报表</span>
 		</div>
 		<div id="ifprint">
 		<!-- 图书选择-->
@@ -536,12 +536,12 @@
 						</tr>
 						</thead>
 						<tbody>
-						<c:if test="${empty perjcbjList[0]}">
+						<c:if test="${empty pereditorList[0]}">
 							<tr>
 								<td><input class="cg_input" maxlength="100" style="width: 320px" id="zbts_material_name" name="zbts_material_name" id="jc_material_name" value="" placeholder="教材名称"/></td>
 								<td><input class="cg_input" name="zbts_publisher" value=""  style="width: 300px;" maxlength="20"/></td>
 								<td><input class="cg_input" name="zbts_publish_date" id="zbts_publish_date" value="" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  style="width: 130px;"/></td>
-								<td><input class="cg_input" maxlength="100" name="zbts_note" value="" style="width: 240px;" placeholder="备注"/><input type="hidden" name="jc_id" value=""></td>
+								<td><input class="cg_input" maxlength="100" name="zbts_note" value="" style="width: 240px;" placeholder="备注"/><input type="hidden" name="zbts_id" value=""></td>
 								<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_zbtsqk()"/></td>
 							</tr></c:if>
 						<c:forEach var="list" items="${pereditorList}" varStatus="status">
@@ -619,8 +619,8 @@
 				<div style="height: 30px;margin-top: 10px;">
 					<div class="scys" id="dwyjsc"><span>上传文件</span></div>
 					<div id="fileNameDiv" class="fileNameDiv"></div>
-					<input type="hidden" name="syllabus_id" id="syllabus_id_1"/>
-                    <input type="hidden" name="syllabus_name" id="syllabus_name_1"/>
+					<input type="hidden" name="syllabus_id" id="syllabus_id"/>
+                    <input type="hidden" name="syllabus_name" id="syllabus_name"/>
 				</div>
 			</div>
 			<!-- 院校推荐意见-->

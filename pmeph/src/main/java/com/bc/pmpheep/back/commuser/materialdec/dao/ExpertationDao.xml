@@ -211,7 +211,7 @@
     </select>
     <!-- //主编学术专著情况 -->
     <select id="queryMonograph" resultType="java.util.Map" parameterType="java.util.Map">
-        select id,expertation_id,monograph_name,monograph_date,REPLACE(monograph_date,'-','.') as monographdate,is_self_paid*1 is_self_paid,publisher,publish_date,REPLACE(publish_date,'-','.') as publishdate,note,sort from dec_monograph where declaration_id = #{declaration_id} ORDER BY sort
+        select id,expertation_id,monograph_name,monograph_date,REPLACE(monograph_date,'-','.') as monographdate,is_self_paid*1 is_self_paid,publisher,publish_date,REPLACE(publish_date,'-','.') as publishdate,note,sort from dec_monograph where expertation_id = #{declaration_id} ORDER BY sort
     </select>
     <insert id="insertMonograph" parameterType="java.util.Map">
         insert into dec_monograph(per_id,expertation_id,monograph_name,monograph_date,is_self_paid,publisher,publish_date,note,sort)
