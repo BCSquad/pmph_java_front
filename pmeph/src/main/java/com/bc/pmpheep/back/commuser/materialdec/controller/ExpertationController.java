@@ -234,14 +234,14 @@ public class ExpertationController extends BaseController{
         String contentIds[] = request.getParameterValues("contentId");
 		List<Map<String,Object>> subjectList = new ArrayList<Map<String,Object>>();
 		List<Map<String,Object>> contentList = new ArrayList<Map<String,Object>>();
-		if(subjectIds.length>0){
+		if(subjectIds!=null&&subjectIds.length>0){
 			for(int i=0;i<subjectIds.length;i++) { //遍历数组
 				Map<String,Object> subjectMap = new HashMap<String,Object>();
 				subjectMap.put("subjectId", subjectIds[i]);
 				subjectList.add(subjectMap);
 			}
 		}
-		if(contentIds.length>0){
+		if(contentIds!=null&&contentIds.length>0){
 			for(int i=0;i<contentIds.length;i++) { //遍历数组
 				Map<String,Object> contentMap = new HashMap<String,Object>();
 				contentMap.put("contentId", contentIds[i]);
