@@ -58,6 +58,10 @@ select tt.* from
   	(TO_DAYS(NOW()) &lt;= TO_DAYS(b.actual_deadline ) and  !b.is_force_end and !b.is_all_textbook_published)*b.is_material_entry as sortByEntryBtnOn,
   	(TO_DAYS(NOW()) &lt;= TO_DAYS(b.actual_deadline ) and  !b.is_force_end and !b.is_all_textbook_published) as notEnd,
 	d.id as declarationId,
+	
+	
+	
+	
 	(case
 	when d.online_progress REGEXP '^[520]{1}$'
 	then 1
@@ -67,6 +71,12 @@ select tt.* from
 	from
       (select
 	 	        t.*,b.deadline,me.notice,b.actual_deadline,b.is_force_end,b.is_all_textbook_published
+	 	        ,(case 
+		        when t.is_material_entry = 1
+		        then b.gmt_create
+		        else t.auth_date
+		        end) as orderDate
+		        
 		        from cms_content t
 		        left join  material b on t.material_id =b.id
 		        left join  material_extra me on me.material_id=b.id
@@ -78,6 +88,12 @@ select tt.* from
 		 union
 		 select
 		        t.*,b.deadline,me.notice,b.actual_deadline,b.is_force_end,b.is_all_textbook_published
+		        ,(case 
+		        when t.is_material_entry = 1
+		        then b.gmt_create
+		        else t.auth_date
+		        end) as orderDate
+		        
 		        from cms_content t
 		        left join  material b on t.material_id =b.id
 		        left join material_org u on b.id=u.material_id
@@ -101,8 +117,8 @@ ORDER BY
 			<!-- b.is_promote desc,b.sort_promote,
 			b.is_hot DESC,b.sort_hot,
 		    b.auth_date DESC -->
-
-		    tt.sortByEntryBtnOn desc ,tt.declarationId asc,<!-- tt.auth_date DESC , --> tt.actual_deadline DESC ,tt.deadline desc
+			tt.sortByEntryBtnOn desc,tt.is_material_entry desc,tt.orderDate desc,tt.deadline DESC 
+		    <!-- tt.sortByEntryBtnOn desc ,tt.declarationId asc,tt.actual_deadline DESC ,tt.deadline desc,tt.auth_date DESC  -->
 		</if>
 		<if test="order == 1">
 			tt.auth_date DESC
