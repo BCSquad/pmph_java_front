@@ -51,6 +51,9 @@ public class ScheduleController extends BaseController{
 	@RequestMapping(value="/scheduleList")
 	public ModelAndView toScheduleList (HttpServletRequest  request){
 		Map<String, Object> writerUser = this.getUserInfo();
+		if(writerUser.get("latest_login_time")==null||writerUser.get("latest_login_time").toString().length()<1){
+			writerUser.put("latest_login_time",new Date());
+		}
 		Long userId = new Long(String.valueOf(writerUser.get("id")));
 		//Long userId = (long) 1383;
 		String  currentPageStr = (String) request.getParameter("currentPage");
@@ -133,6 +136,7 @@ public class ScheduleController extends BaseController{
 			}else{
 				map.put("avatar", "file/download/"+map.get("avatar").toString().replace("/image/","/")+".action");
 			}*/
+			
             map.put("avatar", RouteUtil.userAvatar(MapUtils.getString(map, "avatar")));
 			map.put("time", time);
 			map.put("userId", userId);
@@ -157,6 +161,9 @@ public class ScheduleController extends BaseController{
 	@RequestMapping(value="/eventRecord")
 	public ModelAndView toEventRecord(HttpServletRequest  request) throws ParseException{
 		Map<String, Object> writerUser = this.getUserInfo();
+		if(writerUser.get("latest_login_time")==null||writerUser.get("latest_login_time").toString().length()<1){
+			writerUser.put("latest_login_time",new Date());
+		}
 		Long userId = new Long(String.valueOf(writerUser.get("id")));
 		//Long userId = (long) 1459;
 		String  currentPageStr = (String) request.getParameter("currentPage");
