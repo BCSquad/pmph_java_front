@@ -244,7 +244,7 @@ function todeclaredetail(state){
         	if(json=="OK"){
                 location.href = contextpath + 'homepage/toproductdetail.action?state='+state;
 			}else{
-                window.message.info("后台暂未发布公告！");
+                window.message.info("您好，当前产品的公告没有发布，请在发布之后再进行申报！");
 			}
 
         }
