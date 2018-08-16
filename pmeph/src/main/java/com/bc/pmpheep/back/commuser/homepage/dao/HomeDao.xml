@@ -16,6 +16,11 @@
 		else 0
 		end )as dec_editable,
 		m.deadline,
+		(case 
+		        when cc.is_material_entry = 1
+		        then m.gmt_create
+		        else cc.auth_date
+		        end) as orderDate,
 		cc.*
 		FROM
 				cms_content cc
@@ -46,7 +51,8 @@
 	  group by cc.id
 	  )t
 		ORDER BY
-	  		 t.sortByEntryBtnOn desc ,t.declaration_id asc, <!-- t.auth_date DESC , -->t.deadline desc
+			t.sortByEntryBtnOn desc,t.is_material_entry desc,t.orderDate desc,t.deadline DESC 
+	  		 <!-- t.sortByEntryBtnOn desc ,t.declaration_id asc, t.auth_date DESC ,t.deadline desc -->
 		limit 0,3
   </select>
   
