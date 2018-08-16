@@ -135,7 +135,7 @@
 			AND a.sender_type = 2
 			LEFT JOIN org_user s3 ON a.sender_id = s3.id
 			AND a.sender_type = 3
-			LEFT JOIN pmph_user r1 ON a.receiver_id = r1.id
+			LEFT JOIN pmph_user r1 ON a.sender_id = r1.id
 			AND a.sender_type = 1
 			WHERE
 				receiver_type = 3
