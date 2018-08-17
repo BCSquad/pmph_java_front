@@ -320,14 +320,22 @@ public class HomeServiceImpl implements HomeService {
     @Override
     public List<Map<String, Object>> quertProductByType(String product_type) {
         List<Map<String, Object>> list=homeDao.quertProductByType(product_type);
-        if(list!=null){
+        if(list!=null&&list.size()>0){
             for (Map<String, Object> map:list) {
+                String note="";
+                String description="";
+                Content note_detail=new Content();
+                Content description_detail=new Content();
                 //备注
-                String note=list.get(0).get("note").toString();
+                if(list.get(0).get("note")!=null && !list.get(0).get("note").equals("")){
+                     note=list.get(0).get("note").toString();
+                     note_detail = contentService.get(note);
+                }
                 //简介
-                String description=list.get(0).get("description").toString();
-                Content note_detail = contentService.get(note);
-                Content description_detail = contentService.get(description);
+                if(list.get(0).get("description")!=null && !list.get(0).get("description").equals("")){
+                     description=list.get(0).get("description").toString();
+                     description_detail = contentService.get(description);
+                }
                 map.put("note_detail",note_detail.getContent());
                 map.put("description_detail",description_detail.getContent());
             }

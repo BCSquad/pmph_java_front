@@ -780,8 +780,8 @@
                 <div style="height: 30px;margin-top: 10px;">
                     <div class="scys" id="dwyjsc"><span>上传文件</span></div>
                     <div id="fileNameDiv" class="fileNameDiv"></div>
-                    <input type="hidden" name="syllabus_id" id="syllabus_id"/>
-                    <input type="hidden" name="syllabus_name" id="syllabus_name"/>
+                    <input type="hidden" name="syllabus_id" id="syllabus_id" value="${gezlList.unit_advise}"/>
+                    <input type="hidden" name="syllabus_name" id="syllabus_name" value="${gezlList.syllabus_name}"/>
                     <div class="filename"><a href="javascript:" onclick="downLoadProxy('${gezlList.unit_advise}')"
                                              title="${gezlList.syllabus_name}">${gezlList.syllabus_name}</a></div>
                 </div>
