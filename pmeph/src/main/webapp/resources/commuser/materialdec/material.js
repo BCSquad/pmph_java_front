@@ -90,8 +90,17 @@ $(function () {
     selectOption("jcb_rank_sl");
     //其他社教材-职务
     selectOption("jcjb_sl");
+       
+    
 
 });
+
+window.onload = function(){
+	$("input[calendar]").each(function(i,n){
+    	var $t = $(n);
+    	$t.trigger("timeChange",new Date($t.val()));
+    });
+};
 
 //下拉框格式优化
 function selectOption(name){
