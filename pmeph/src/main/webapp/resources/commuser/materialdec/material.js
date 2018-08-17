@@ -961,7 +961,7 @@ function buttAdd(type){
                                     dataType: 'jsonp',
                                     success:function(wxResult){
                                     	if(wxResult){
-                                    		window.message.success("微信消息发送成功");
+                                    		//window.message.success("微信消息发送成功");
                                     	}
                                     	window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
                                     }
