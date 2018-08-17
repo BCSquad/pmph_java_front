@@ -1219,11 +1219,15 @@ function addContent(str){
 
 //打印
 function toprint(){
-    $(".yijian").css("display","block");
+    var material_id=$("#material_id").val();
+    var declaration_id=$("#expertation_id").val();
+    window.location.href=contextpath+"expertation/showExpertation.action?material_id="+material_id+"&&declaration_id="+declaration_id+"&&state=out";
+
+   /* $(".yijian").css("display","block");
     $("#button_cz").css("display","none");
     $("#ifprint").jqprint();
     $(".yijian").css("display","none");
-    $("#button_cz").css("display","block");
+    $("#button_cz").css("display","block");*/
 }
 //删除
 function del(id){

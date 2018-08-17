@@ -1,6 +1,12 @@
 $(function () {
 	var id = $("#expert_type").val();
 	queryMaterialMap(id);  //执行查询方法
+
+	var state=$("#printout").val();
+	if(state=="out"){
+        $("#yijian").css("display","block");
+        $("#print").css("display","block");
+    }
 });
 
 //页面组合方法
@@ -112,9 +118,6 @@ function buttGive(){
 
 //打印按钮
 function toprint() {
-    $(".yijian").css("display","block");
-    $("#tnone").css("display","block");
+    // $("#print").css("display","none");
     $("#ddd").jqprint();
-    $(".yijian").css("display","none");
-    $("#tnone").css("display","none");
 }
