@@ -61,6 +61,13 @@ $(function () {
 
 });
 
+window.onload = function(){
+	$("input[calendar]").each(function(i,n){
+    	var $t = $(n);
+    	$t.trigger("timeChange",new Date($t.val()));
+    });
+};
+
 //下拉框格式优化
 function selectOption(name){
     var els =document.getElementsByName(name);
