@@ -7,6 +7,9 @@ $(function () {
         $("#yijian").css("display","block");
         $("#print").css("display","block");
     }
+	if ($("#return_cause_hidden").val().length>0) {
+		$("#return_cause_div").fadeIn(800);
+	}
 });
 
 //页面组合方法
@@ -120,4 +123,136 @@ function buttGive(){
 function toprint() {
     // $("#print").css("display","none");
     $("#ddd").jqprint();
+}
+
+
+//提交   通过3 
+function toAudit(id,type){
+	var user_id=$("#user_id").val();
+		$.ajax({
+			type: "POST",
+			url:contextpath+'expertation/doExpertationAuditPass.action',
+			data:{expertation_id:id,online_progress:type,user_id:user_id},// 您的formid
+			async: false,
+			dataType:"json",
+		    success: function(msg) {
+			    if(msg.msg=='OK'){
+			    	 message.success("成功！");
+			    	 
+			    	 if(type=='3'){/*
+                    	var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
+                    	$.ajax({
+                            type: 'get',
+                            url: exportWordBaseUrl + '/frontWxMsg/projectEditorPleaseAdit/'+id,
+                            dataType: 'jsonp',
+                            jsonp:"callback", //这里定义了callback在后台controller的的参数名
+                			jsonpCallback:"getMessage", //这里定义了jsonp的回调函数名。 那么在后台controller的相应方法其参数“callback”的值就是getMessage
+                            success:function(wxResult){
+                            	if(wxResult=="1"){
+                            		window.message.success("微信消息发送成功");
+                            		setTimeout(function(){
+                            			toMain();
+                            		},800);
+                            	}
+                            },
+                            error:function(XMLHttpRequest, textStatus){
+                            	toMain();
+                            }
+                            });
+                         //toMain();
+			    	 */
+			    		 
+			    	 }
+			    	 window.location.href = contextpath+"schedule/scheduleList.action";
+			    }else{
+			    	message.success("失败了！");
+			    }
+		    }
+		});
+}
+
+
+//点击显示纠错弹窗
+function showup(id,type) {
+	$("#return_id").val(id);
+	$("#return_type").val(type);
+    $.ajax({
+        type: 'post',
+        url: contextpath + 'dataaudit/tologin.action',
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+            if (json == "OK") {
+                $("#bookmistake").show();
+            }
+        }
+    });
+}
+
+//点击弹窗隐藏
+function hideup() {
+    $("#bookmistake").hide();
+}
+
+//退回原因确认 
+function correction() {
+	var user_id=$("#user_id").val();
+	var expertation_id = $("#return_id").val();
+	var online_progress = $("#return_type").val();//表示驳回  2 
+	var return_cause = $("#return_cause").val();
+
+            if (!Empty(return_cause)) {//非空判断
+                var json = {
+                		expertation_id: expertation_id,
+                		online_progress: online_progress,
+                		return_cause: return_cause,
+                		user_id:user_id
+                };
+                $.ajax({
+                    type: 'post',
+                    url: contextpath+'expertation/doExpertationAuditPass.action',
+                    data: json,
+                    async: false,
+                    dataType: 'json',
+	                success: function(msg) {
+	    			    if(msg.msg=='OK'){
+	    			    	 message.success("成功！");
+	    			    	 $("#return_cause").val(null);
+	    			    	 $("#bookmistake").hide();
+	    			    	 window.location.href = contextpath+"schedule/scheduleList.action";
+	    			    }else{
+	    			    	message.success("失败！");
+	    			    }
+	    		    }
+                });
+            } else {
+                window.message.info("请输入退回原因！");
+            }
+        
+   
+
+}
+
+
+//输入长度限制校验，ml为最大字节长度
+function LengthLimit(obj,ml){
+	var maxStrlength ;
+	var va = obj.value;
+	var vat = "";
+	for ( var i = 1; i <= va.length; i++) {
+		vat = va.substring(0,i);
+		//把双字节的替换成两个单字节的然后再获得长度，与限制比较
+		if (vat.replace(/[^\x00-\xff]/g,"a").length <= ml) {
+			maxStrlength=i;
+		}else{
+
+			break;
+		}
+	}
+	obj.maxlength=maxStrlength;
+	//把双字节的替换成两个单字节的然后再获得长度，与限制比较
+	if (va.replace(/[^\x00-\xff]/g,"a").length > ml) {
+		obj.value=va.substring(0,maxStrlength);
+		//window.message.warning("不可超过输入最大长度"+ml+"字节！");
+	}
 }

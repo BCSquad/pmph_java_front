@@ -125,4 +125,11 @@ public interface ExpertationService {
 	 * @return
 	 */
 	Map<String,Object> queryProduct(String expert_type);
+
+	/**
+	 * 用于在机构管理员审核时修改审核状态，保存退回原因等
+	 * @param paramMap
+	 * @return
+	 */
+	public int updateExpertationPass(Map<String, Object> paramMap);
 }

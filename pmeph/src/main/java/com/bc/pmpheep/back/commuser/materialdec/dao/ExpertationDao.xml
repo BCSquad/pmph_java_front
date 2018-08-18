@@ -246,4 +246,18 @@
     <select id="queryProduct" resultType="java.util.Map" parameterType="java.lang.String">
         select * from product where product_type = #{product_type}
     </select>
+    
+    <!-- 更新 -->
+    <update id="updateExpertationAudit" parameterType="Map">
+    	update expertation 
+    	<set>
+    		<if test="online_progress != null ">
+    			online_progress = #{online_progress},
+    		</if>
+    		<if test="return_cause != null ">
+    			return_cause = #{return_cause},
+    		</if>
+    	</set>
+    	where id = #{expertation_id}
+    </update>
 </mapper>

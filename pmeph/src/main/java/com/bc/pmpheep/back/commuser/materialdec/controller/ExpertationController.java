@@ -711,5 +711,38 @@ public class ExpertationController extends BaseController{
             }
             return modelAndView;
 	}
+	
+	
+	//申报审核通过
+	@RequestMapping("doExpertationAuditPass")
+	@ResponseBody
+	public Map<String,Object> doExpertationAuditPass(HttpServletRequest request,
+			HttpServletResponse response){
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		String expertation_id = request.getParameter("expertation_id");
+		String online_progress = request.getParameter("online_progress");  //类型
+		String return_cause = request.getParameter("return_cause");
+		String writer_id = request.getParameter("user_id");  //作家用户Id
+		Map<String,Object> userMap =  this.getUserInfo();
+		String user_id = userMap.get("id").toString();
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+		String date = df.format(new Date());
+		String msg = "";
+		
+		paramMap.put("expertation_id", expertation_id);
+		paramMap.put("online_progress", online_progress);
+		paramMap.put("auth_user_id", user_id);
+		paramMap.put("auth_date", date);
+		paramMap.put("writer_id", writer_id);
+		paramMap.put("return_cause", return_cause);
+		
+		int count = this.etService.updateExpertationPass(paramMap);
+		if(count>0){
+			msg = "OK";
+		}
+		resultMap.put("msg", msg);
+		return resultMap;
+	}
 
 }

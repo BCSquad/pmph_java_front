@@ -21,6 +21,8 @@
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="body">
+	<input type="hidden" id="user_id" value="${gezlList.user_id }"> 
+	
 	<div class="content-wrapper">
 		<input type="hidden" name="expert_type" id="expert_type" value="${queryMap.expert_type}">
 		<input type="hidden" id="printout" value="${state}">
@@ -362,13 +364,61 @@
 		<c:if test="${state == 'audit' }">
 			<div lass = "audit_wrapper">
 				<div class="audit_middle">
-					<div class="audit" id="" onclick="toprint()" >退回给个人</div>
-					<div class="audit pass" id="" onclick="toprint()" >审核通过</div>
+					<div class="audit" id="" onclick="showup('${gezlList.id}','2')" >退回给个人</div>
+					<div class="audit pass" id="" onclick="toAudit('${gezlList.id}','3')" >审核通过</div>
 					<div class="audit" id="" onclick="toprint()" >打印</div>
-					<div class="audit" id="" onclick="toprint()" >返回</div>
+					<div class="audit" id="" onclick="javascript:history.go(-1)" >返回</div>
 				</div>
 			</div>
 		</c:if>
+		
+			<!-- 退回原因填写悬浮框 -->
+	        <div class="bookmistake" id="bookmistake">
+	            <form id="bookmistakeform">
+	            <input type="hidden"  id="return_id" value="">
+	            <input type="hidden"  id="return_type" value="">
+	                <div class="apache">
+	                    <div class="mistitle">退回原因:</div>
+	                    <div class="xx" onclick="hideup()"></div>
+	                </div>
+	                
+	                <div class="info">
+	                    <textarea class="misarea" id="return_cause" onkeyup="javascript:LengthLimit(this,90);"
+	                              onblur="javascript:LengthLimit(this,100);"></textarea>
+	                    <c:if test="${expertChoosen }">
+			                <div class="choosenWarning">
+					          	提示:该作者已被遴选,退回将会同时 <font color="red" >撤销遴选</font> !
+					          	</br>
+					          	是否确认退回？
+					        </div>
+				        </c:if>
+	                </div>
+	                
+	          
+	                <div class="return_cause_btn_wrapper">
+	                	<button class="btn" type="button" onclick="hideup()">取消</button>
+	                    <button class="btn" type="button" onclick="correction()">确认</button>
+	                </div>
+	            </form>
+	        </div>
+	        <!-- 退回原因显示悬浮框 -->
+	        <div class="bookmistake" id="return_cause_div">
+	                <div class="apache">
+	                    <div class="mistitle">退回原因:</div>
+	                    <div class="xx" onclick="$('#return_cause_div').fadeOut(500);"></div>
+	                </div>
+	                
+	                <div class="info">
+	                	<input id="return_cause_hidden" type="hidden" value="${gezlList.return_cause }">
+	                    <textarea class="misarea" disabled="disabled">${gezlList.return_cause }</textarea>
+	                </div>
+	          
+	                <div class="">
+	                    <button class="btn" type="button" onclick="$('#return_cause_div').fadeOut(500);">确认</button>
+	                </div>
+	        </div>
+		
+		
 		<!-- 机构用户审核显示 end  -->
 
 		<%--<c:if test="${isSelfLog=='true' }">
@@ -422,6 +472,77 @@
 	}
 	.footer {
     	clear: left;
+	}
+	
+	.bookmistake {
+    width: 426px;
+    background-color: #FFFFFF;
+    display: none;
+    position: fixed;
+    left: 35%;
+    top: 30%;
+    box-shadow: 0px 0px 5px #888888;
+    border-radius: 5px;
+    z-index: 999;
+	}
+	
+	.apache {
+	    width: 100%;
+	    height: 27px;
+	    float: left;
+	    margin-top: 16px;
+	}
+	
+	.mistitle {
+	    width: 50%;
+	    float: left;
+	
+	    line-height: 24px;
+	    letter-spacing: 1px;
+	    color: #333333;
+	    font-size: 20px;
+	    margin-left: 20px;
+	}
+	
+	.xx {
+	    width: 14px;
+	    height: 14px;
+	    background-image: url(../../image/close.png);
+	    float: right;
+	    margin-right: 10px;
+	    cursor: pointer;
+	}
+	
+	.info {
+	    width: 100%;
+	    /* height: 103px; */
+	    box-sizing: border-box;
+	    float: left;
+	    margin-top: 25px;
+	    padding: 0px 20px;
+	}
+	
+	.misarea {
+	    width: 374px;
+	    height: 75px;
+	    border: 1px solid #E0E0E0;
+	    
+	    padding: 5px;
+	    resize: vertical;
+	    max-height: 350px;
+	}
+	
+	.btn {
+	    float: right;
+	    margin-right: 27px;
+	    width: 84px;
+	    height: 31px;
+	    background-color: #1CB394;
+	    border-radius: 3px;
+	    border: none;
+	    cursor: pointer;
+	    color: #FFFFFF;
+	    margin-bottom: 10px;
 	}
 </style>
 </html>

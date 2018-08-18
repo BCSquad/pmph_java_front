@@ -472,4 +472,12 @@ public class ExpertationServiceImpl implements ExpertationService {
     public Map<String, Object> queryProduct(String expert_type) {
         return this.exdao.queryProduct(expert_type);
     }
+
+	@Override
+	public int updateExpertationPass(Map<String, Object> paramMap) {
+		
+		int count = exdao.updateExpertationAudit(paramMap);
+
+		return count;
+	}
 }

@@ -104,4 +104,11 @@ public interface ExpertationDao {
 	public Map<String,Object> queryProduct(String product_type);
 
 	public List<Map<String,Object>> queryZjkzxxById(String material_id);
+
+	/**
+	 * 更新临床申报（仅审核）
+	 * @param paramMap
+	 * @return
+	 */
+	public int updateExpertationAudit(Map<String, Object> paramMap);
 }
