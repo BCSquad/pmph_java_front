@@ -61,6 +61,13 @@ $(function () {
 
 });
 
+window.onload = function(){
+	$("input[calendar]").each(function(i,n){
+    	var $t = $(n);
+    	$t.trigger("timeChange",new Date($t.val()));
+    });
+};
+
 //下拉框格式优化
 function selectOption(name){
     var els =document.getElementsByName(name);
@@ -80,7 +87,7 @@ function upload(){
         },
         done: function (filename, fileid) {
             $("#fileNameDiv").empty(); //清楚内容
-            $("#fileNameDiv").append("<span><div class=\"filename\"><a href='javascript:' class='filename'  onclick='downLoadProxy("+fileid+")' title='\"+filename+\"'>"+filename+"</a></div></span>");
+            $("#fileNameDiv").append("<span><div class=\"filename whetherfile\"><a href='javascript:' class='filename'  onclick='downLoadProxy("+fileid+")' title='\"+filename+\"'>"+filename+"</a></div></span>");
             $("#fileNameDiv").css("display","inline");
             $("#syllabus_id").val(fileid);
             $("#syllabus_name").val(filename);
@@ -439,23 +446,30 @@ function buttAdd(type){
                 });
             }else {  //表示提交
                 checkLb();
-                if($("#xkfladd").hasClass("el-tag")){
                     if ($.fireValidator() ) {
-                        $.ajax({
-                            type: "POST",
-                            url: contextpath + 'expertation/doExpertationAdd.action?sjump=1&type=' + type,
-                            data: $('#objForm').serialize(),// 您的formid
-                            async: false,
-                            dataType: "json",
-                            success: function (json) {
-                                if (json.msg == 'OK') {
-                                    window.message.success("操作成功,正在跳转页面");
-                                    window.location.href = contextpath + "expertation/declare.action";
-                                }
+                        if($("#xkfladd").children().hasClass("el-tag")){
+                            if($("#fileNameDiv").children().children().hasClass("whetherfile")){
+                                $.ajax({
+                                    type: "POST",
+                                    url: contextpath + 'expertation/doExpertationAdd.action?sjump=1&type=' + type,
+                                    data: $('#objForm').serialize(),// 您的formid
+                                    async: false,
+                                    dataType: "json",
+                                    success: function (json) {
+                                        if (json.msg == 'OK') {
+                                            window.message.success("操作成功,正在跳转页面");
+                                            window.location.href = contextpath + "expertation/declare.action";
+                                        }
+                                    }
+                                });
+                            }else{
+                                window.message.info("请上传所在单位意见附件！");
                             }
-                        });
+                        }else{
+                            window.message.info("请选择学科分类！")
+                        }
+
                     }
-                }
             }
             //  }
 }

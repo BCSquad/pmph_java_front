@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.materialdec.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.bc.pmpheep.back.authadmin.message.service.SendMessageServiceImpl;
 import com.bc.pmpheep.back.commuser.materialdec.service.ExpertationService;
 import com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailService;
@@ -95,8 +96,21 @@ public class ExpertationController extends BaseController{
 		queryMap.put("product_id",productMap.get("id"));
 
 		//查询个人信息库信息
+		Map<String,Object> userMap=new HashMap<>();
 		Map<String,Object> userinfo =  this.getUserInfo();
-		Map<String,Object> userMap =  this.mdService.queryUserInfo(MapUtils.getString(userinfo,"id",""));
+		userMap =  this.mdService.queryUserInfo(MapUtils.getString(userinfo,"id",""));
+//		userMap = JSON.parseObject(JSON.toJSONString(userMap).replaceAll("-",""),java.util.HashMap.class);
+		if(userMap!=null){
+			Set set = userMap.keySet();
+			Iterator it = set.iterator();
+			while(it.hasNext()){
+				String key = (String)it.next();
+				String value=userMap.get(key).toString();
+				if(value!=null&&value.equals("-")){
+					userMap.put(key,"");
+				}
+			}
+		}
 		queryMap.put("user_id",userMap.get("id"));
 		//个人资料库信息
 		perstuList = this.perService.queryPerStu(queryMap);
@@ -425,6 +439,10 @@ public class ExpertationController extends BaseController{
 		ModelAndView mav = new ModelAndView("commuser/materialdec/showExpertation");
 		//传参  user_id  material_id
         String declaration_id = request.getParameter("declaration_id");
+        String state=request.getParameter("state");
+        if(state!=null){
+        	mav.addObject("state",state);
+		}
         if(arrMaterial_id !=null && arrMaterial_id.length>0){
             declaration_id = arrMaterial_id[0];
         }

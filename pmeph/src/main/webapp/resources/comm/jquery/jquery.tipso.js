@@ -50,7 +50,7 @@
             }
             for (var i = 0; i < list.length; i++) {
                 var item = list[i];
-                console.log(item);
+                //console.log(item);
 
                 item.hideStyle();
                 item.hide();
@@ -70,6 +70,7 @@
                     if (!isshow) {
                         item.element.focus();
                         item.show();
+                        console.log(item);
                         isshow = true;
                     }
                 }
@@ -270,6 +271,10 @@
             $e.off('.' + pluginName);
             $e.removeData(pluginName);
             $e.removeClass('tipso_style').attr('title', this._title);
+
+        },
+        removeFormFireVali: function(){
+        	
         },
         content: function () {
             var content,
@@ -574,8 +579,21 @@
                         .call(args, 1));
                 }
                 if (options === 'destroy') {
+                	var desTempIndex = 0 ;
+                	for ( var i = 0 ;i<list.length;i++) {
+                		var item = list[i];
+                		if(this.id == item.element.attr("id")){
+                			desTempIndex = i; 
+                			break;	
+                		}
+					}
+                	//从fireValidator校验列表中删除此项
+                	list = list.splice(desTempIndex, 1); 
+                	
                     $.data(this, 'plugin_' + pluginName, null);
                 }
+               
+                
             });
             return returns !== undefined ? returns : this;
         }

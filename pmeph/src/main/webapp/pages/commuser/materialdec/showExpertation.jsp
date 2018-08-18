@@ -23,6 +23,7 @@
 <div class="body">
 	<div class="content-wrapper">
 		<input type="hidden" name="expert_type" id="expert_type" value="${queryMap.expert_type}">
+		<input type="hidden" id="printout" value="${state}">
 		<div class="sbxq_title">
 			<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> > <a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/expertation/declare.action"> 临床决策专家申报 </a> > 查看申报表</span>
 		</div>
@@ -299,7 +300,7 @@
 			<div>
 				<span id="tsxz_span8"></span>
 				<span class="tsxz_title">学科分类(可多选)</span>
-				<span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.product_id}')">添加学科分类</span>
+				<%--<span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.product_id}')">添加学科分类</span>--%>
 			</div>
 			<div class="sbdw" id="xkfladd">
 				<span class="btmc">学科分类：</span>
@@ -314,7 +315,7 @@
 			<div>
 				<span id="tsxz_span12"></span>
 				<span class="tsxz_title">内容分类(可多选)</span>
-				<span class="el-button" onclick="javascript:ContentAdd('${materialMap.product_id}')">添加内容分类</span>
+				<%--<span class="el-button" onclick="javascript:ContentAdd('${materialMap.product_id}')">添加内容分类</span>--%>
 			</div>
 			<div class="sbdw" id="nrfladd">
 				<span class="btmc">内容分类：</span>
@@ -324,10 +325,20 @@
 				</c:forEach>
 			</div>
 		</div>
+		<!-- 院校推荐意见(仅打印显示)-->
+		<div class="yijian" style="display: none" id="yijian">
+			<div class="tujian01">院校推荐意见:</div>
+			<div class="tujian02">
+				<div class="qianzi">负责人签字:</div>
+				<div class="gaizhang">(院校盖章)</div>
+			</div>
+			<div class="tujian03">年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</div>
+		</div>
+
 		<div class="sbxq_item" id="szdwyj">
 			<div>
 				<span id="tsxz_span13"></span>
-				<span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" />所在单位意见<span style="color: red">(上传单位盖章的申报表)</span></span>
+				<span class="tsxz_title"><%--<img src="${ctx}/statics/image/btxx.png" />--%>所在单位意见<span style="color: red">(上传单位盖章的申报表)</span></span>
 			</div>
 			<div style="height: 30px;margin-top: 10px;">
 				<div class="filename"><a href="javascript:" onclick="downLoadProxy('${gezlList.unit_advise}')"
@@ -335,17 +346,37 @@
 				</div>
 			</div>
 		</div>
-		<hr style=" height:1px;border:none;border-top:1px #999999 dashed;margin-top: 30px;">
 		</div>
+			<div class="out" id="print" onclick="toprint()" style="display: none">确认打印</div>
+		<hr style=" height:1px;border:none;border-top:1px #999999 dashed;margin-top: 30px;">
+
+
 		<%--<c:if test="${isSelfLog=='true' }">
 			<div class="button">
 				<div class="bt_tj" onclick="javascript:buttGive()">返回申报列表</div>
 			</div>
 			<span style="color: #E31028;font-size: 14px;text-align: center;float: left;margin-left: 350px;">打印推荐使用浏览器：chrome、360浏览器极速模式、IE浏览器支持IE10及以上版本</span>
 		</c:if>--%>
-		
+
 	</div>
+
 </div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
+<style>
+	.out{
+		width: 128px;
+		height: 44px;
+		background-color: #33CAA9;
+		border-radius: 2px;
+		margin: auto;
+		cursor: pointer;
+		color: #ffffff;
+		margin-left: 500px;
+		margin-right: 20px;
+		margin-top: 20px;
+		text-align: center;
+		line-height: 42px;
+	}
+</style>
 </html>

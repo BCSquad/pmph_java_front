@@ -4,7 +4,10 @@
 //     "{\"id\":\"experience\",\"content\":\"教龄不能为空\"},{\"id\":\"org_name\",\"content\":\"工作单位不能为空\"},{\"id\":\"position\",\"content\":\"职务不能为空\"},"+
 //     "{\"id\":\"zc\",\"content\":\"职称不能为空\"},{\"id\":\"address\",\"content\":\"地址不能为空\"},{\"id\":\"email\",\"content\":\"邮箱不能为空\"},"+
 //     "{\"id\":\"handphone\",\"content\":\"手机号码不能为空\"},{\"id\":\"zjlx\",\"content\":\"证件类型不能为空\"},{\"id\":\"idcard\",\"content\":\"证件号码不能为空\"},{\"id\":\"sbdw_name\",\"content\":\"申报单位不能为空\"},";
-$(function () {
+
+var materialMap ;
+ 
+ $(function () {
     setTimeout(function () {
         $('#edu1').tipso({validator: "isNonEmpty", message: "请选择申报的图书"});
         $('#realname').tipso({validator: "isNonEmpty", message: "姓名不能为空"});
@@ -90,8 +93,17 @@ $(function () {
     selectOption("jcb_rank_sl");
     //其他社教材-职务
     selectOption("jcjb_sl");
+       
+    
 
 });
+
+window.onload = function(){
+	$("input[calendar]").each(function(i,n){
+    	var $t = $(n);
+    	$t.trigger("timeChange",new Date($t.val()));
+    });
+};
 
 //下拉框格式优化
 function selectOption(name){
@@ -138,6 +150,7 @@ function queryMaterialMap(id){
         dataType:"json",
         success: function(json) {
             chooseModel(json);
+            materialMap=json;
         }
     });
 }
@@ -233,8 +246,8 @@ function chooseModel(data){
         //上版教材参编情况必填
         if(data.is_last_position_required == "1"){
             $("#sbjccb_bt").css("display","inline");
-            jsonStr=jsonStr+"{\"id\":\"jc_material_name\",\"content\":\"本套上板教材参编情况必填\"},";
-            $('#jc_material_name').tipso({validator: "isNonEmpty", message: "本套上板教材参编情况必填"})
+            jsonStr=jsonStr+"{\"id\":\"jc_material_name\",\"content\":\"本套上版教材参编情况必填\"},";
+            $('#jc_material_name').tipso({validator: "isNonEmpty", message: "本套上版教材参编情况必填"})
         //    jsonStr=jsonStr+"{\"id\":\"jc_material_name\",\"content\":\"本套上板教材参编情况必填\"},{\"id\":\"jc_publish_date\",\"content\":\"发版时间必填\"},";
             //给其他值默认为无
             $("#jc_publish_date").val(getNowFormatDate());
@@ -248,8 +261,8 @@ function chooseModel(data){
         //主编国家规划教材情况必填
         if(data.is_national_plan_required == "1"){
             $("#zbgjjgh_bt").css("display","inline");
-            jsonStr=jsonStr+"{\"id\":\"hj_material_name\",\"content\":\"主编国家规划教材情况必填\"},";
-            $('#hj_material_name').tipso({validator: "isNonEmpty", message: "主编国家规划教材情况必填"})
+            jsonStr=jsonStr+"{\"id\":\"hj_material_name\",\"content\":\"主编国家级规划教材情况必填\"},";
+            $('#hj_material_name').tipso({validator: "isNonEmpty", message: "主编国家级规划教材情况必填"})
          //   jsonStr=jsonStr+"{\"id\":\"hj_material_name\",\"content\":\"主编国家规划教材情况必填\"},{\"id\":\"hj_rank_text\",\"content\":\"教材级别不能为空\"},{\"id\":\"hj_isbn\",\"content\":\"教材标准书号不能为空\"},";
             //给其他值默认为无
             $("#hj_rank_text").val("无");
@@ -547,8 +560,11 @@ function add_xxjl(){
     );
     $table.append($tr);
     $tr.calendar();
-    $('#xx_kssj_'+num).tipso({validator: "isNonEmpty", message: "学习开始时间必填"});
-    $('#xx_jssj_'+num).tipso({validator: "isNonEmpty", message: "学习结束时间必填"});
+    if(materialMap.is_edu_exp_required == "1"){
+    	$('#xx_kssj_'+num).tipso({validator: "isNonEmpty", message: "学习开始时间必填"});
+        $('#xx_jssj_'+num).tipso({validator: "isNonEmpty", message: "学习结束时间必填"});
+    }
+    
 }
 
 //追加工作经历tr
@@ -569,8 +585,11 @@ function add_gzjl(){
     );
     $table.append($tr);
     $tr.calendar();
-    $('#gz_kssj_'+num).tipso({validator: "isNonEmpty", message: "工作开始时间必填"});
-    $('#gz_jssj_'+num).tipso({validator: "isNonEmpty", message: "工作开始时间必填"});
+    if(materialMap.is_work_exp_required == "1"){
+    	$('#gz_kssj_'+num).tipso({validator: "isNonEmpty", message: "工作开始时间必填"});
+        $('#gz_jssj_'+num).tipso({validator: "isNonEmpty", message: "工作开始时间必填"});
+    }
+    
 }
 
 //追加教学经历
@@ -591,8 +610,11 @@ function add_jxjl(){
     );
     $table.append($tr);
     $tr.calendar();
-    $('#jx_kssj_'+num).tipso({validator: "isNonEmpty", message: "教学开始时间必填"});
-    $('#jx_jssj_'+num).tipso({validator: "isNonEmpty", message: "教学开始时间必填"});
+    if(materialMap.is_teach_exp_required == "1"){
+    	$('#jx_kssj_'+num).tipso({validator: "isNonEmpty", message: "教学开始时间必填"});
+        $('#jx_jssj_'+num).tipso({validator: "isNonEmpty", message: "教学开始时间必填"});
+    }
+    
 }
 
 //追加学术兼职
@@ -619,7 +641,10 @@ function add_xsjz(){
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('xsjz_"+num+"')\"/></td>"+
         "</tr>");
     $table.append($tr);
-    $('#xs_org_name_'+num).tipso({validator: "isNonEmpty", message: "学术兼职必填"});
+    if(materialMap.is_acade_required == "1"){
+    	$('#xs_org_name_'+num).tipso({validator: "isNonEmpty", message: "学术兼职必填"});
+    }
+    
 }
 
 //上版教材参编情况
@@ -653,7 +678,10 @@ function add_jccb(){
         "</tr>");
     $table.append($tr);
     $tr.calendar();
-    $('#jc_material_name_'+num).tipso({validator: "isNonEmpty", message: "本套上版教材参编情况必填"});
+    if(materialMap.is_last_position_required == "1"){
+    	$('#jc_material_name_'+num).tipso({validator: "isNonEmpty", message: "本套上版教材参编情况必填"});
+    }
+    
 }
 
 //精品课程建设情况
@@ -679,7 +707,10 @@ function add_jpkcjs(str,dim){
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('jpkcjs_"+num+"')\"/></td>"+
         "</tr>");
     $table.append($tr);
-    $('#gj_course_name_'+num).tipso({validator: "isNonEmpty", message: "精品课程建设情况必填"});
+    if(materialMap.is_course_required == "1"){
+    	$('#gj_course_name_'+num).tipso({validator: "isNonEmpty", message: "精品课程建设情况必填"});
+    }
+    
 }
 
 //主编国家级规划教材
@@ -698,7 +729,10 @@ function add_gjghjc(){
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('gjghjc_"+num+"')\"/></td>"+
         "</tr>");
     $table.append($tr);
-    $('#hj_material_name_'+num).tipso({validator: "isNonEmpty", message: "主编国家级规划教材必填"});
+    if(materialMap.is_national_plan_required == "1"){
+    	$('#hj_material_name_'+num).tipso({validator: "isNonEmpty", message: "主编国家级规划教材情况必填"});
+    }
+    
 }
 
 //人卫社教材编写情况
@@ -748,7 +782,10 @@ function add_rwsjcbx(){
         optionHeight: 30
     });
     $tr.calendar();
-    $('#pmph_material_name_'+num).tipso({validator: "isNonEmpty", message: "人卫社教材编写情况必填"});
+    if(materialMap.is_pmph_textbook_required == "1"){
+    	$('#pmph_material_name_'+num).tipso({validator: "isNonEmpty", message: "人卫社教材编写情况必填"});
+    }
+    
 }
 //其他社教材编写情况
 function add_jcbx(){
@@ -798,7 +835,10 @@ function add_jcbx(){
         optionHeight: 30
     });
     $tr.calendar();
-    $('#jcb_material_name_'+num).tipso({validator: "isNonEmpty", message: "其他社教材编写情况必填"});
+    if(materialMap.is_textbook_required == "1"){
+    	$('#jcb_material_name_'+num).tipso({validator: "isNonEmpty", message: "其他社教材编写情况必填"});
+    }
+    
 }
 //作家科研
 function add_zjky(){
@@ -816,7 +856,9 @@ function add_zjky(){
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('zjky_"+num+"')\"/></td>"+
         "</tr>");
     $table.append($tr);
-    $('#zjk_research_name_'+num).tipso({validator: "isNonEmpty", message: "科研情况必填"});
+    if(materialMap.is_research_required == "1"){
+    	$('#zjk_research_name_'+num).tipso({validator: "isNonEmpty", message: "科研情况必填"});
+    }
 }
 //主编学术专著情况表
 function add_zbxszz(){
@@ -842,7 +884,10 @@ function add_zbxszz(){
         "</tr>");
     $table.append($tr);
     $tr.calendar();
-    $('#zb_monograph_name_'+num).tipso({validator: "isNonEmpty", message: "专著名称必填"});
+    if(materialMap.is_monograph_required == "1"){
+    	$('#zb_monograph_name_'+num).tipso({validator: "isNonEmpty", message: "专著名称必填"});
+    }
+    
 }
 //出版行业获奖情况表
 function add_publish(){
@@ -862,7 +907,9 @@ function add_publish(){
         "</tr>");
     $table.append($tr);
     $tr.calendar();
-    $('#pu_reward_name_'+num).tipso({validator: "isNonEmpty", message: "出版行业获奖情况必填"});
+    if(materialMap.is_publish_reward_required == "1"){
+    	$('#pu_reward_name_'+num).tipso({validator: "isNonEmpty", message: "出版行业获奖情况必填"});
+    }
 }
 //SCI论文投稿及影响因子情况表
 function add_sci(){
@@ -882,7 +929,9 @@ function add_sci(){
         "</tr>");
     $table.append($tr);
     $tr.calendar();
-    $('#sci_paper_name_'+num).tipso({validator: "isNonEmpty", message: "SCI论文投稿及影响因子情况必填"});
+    if(materialMap.is_sci_required == "1"){
+        $('#sci_paper_name_'+num).tipso({validator: "isNonEmpty", message: "SCI论文投稿及影响因子情况必填"});
+    }
 }
 
 //临床医学获奖情况表
@@ -908,7 +957,10 @@ function add_clinical(){
         "</tr>");
     $table.append($tr);
     $tr.calendar();
-    $('#cl_reward_name_'+num).tipso({validator: "isNonEmpty", message: "临床医学获奖情况必填"});
+    if(materialMap.is_clinical_reward_required == "1"){
+    	$('#cl_reward_name_'+num).tipso({validator: "isNonEmpty", message: "临床医学获奖情况必填"});
+    }
+    
 }
 //学术荣誉授予情况表
 function add_acade(){
@@ -935,10 +987,16 @@ function add_acade(){
         "</tr>");
     $table.append($tr);
     $tr.calendar();
-    $('#ac_reward_name_'+num).tipso({validator: "isNonEmpty", message: "术荣誉授予情况必填"});
+    
+    if(materialMap.is_acade_reward_required == "1"){
+    	$('#ac_reward_name_'+num).tipso({validator: "isNonEmpty", message: "学术荣誉授予情况必填"});
+    }
+    
 }
 //删除表格tr
 function del_tr(trId){
+	
+	$("#"+trId).tipso("destroy");
     document.getElementById(trId).remove();
 }
 
