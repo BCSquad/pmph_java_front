@@ -25,7 +25,14 @@
 		<input type="hidden" name="expert_type" id="expert_type" value="${queryMap.expert_type}">
 		<input type="hidden" id="printout" value="${state}">
 		<div class="sbxq_title">
-			<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> > <a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/expertation/declare.action"> 临床决策专家申报 </a> > 查看申报表</span>
+		<c:choose>
+			<c:when test="${userType == 'org'}">
+				
+			</c:when>
+			<c:otherwise>
+				<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> > <a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/expertation/declare.action"> 临床决策专家申报 </a> > 查看申报表</span>
+			</c:otherwise>
+		</c:choose>
 		</div>
 		<div id="ddd">
 			<div class="tsxz_title" id="tnone" style="display: none;text-align: center;font-size: 20px;margin-top: 6px;">${material.material_name}</div>
@@ -349,7 +356,20 @@
 		</div>
 			<div class="out" id="print" onclick="toprint()" style="display: none">确认打印</div>
 		<hr style=" height:1px;border:none;border-top:1px #999999 dashed;margin-top: 30px;">
-
+		<!-- 院校推荐意见(仅打印显示) end -->
+		
+		<!-- 机构用户审核显示  -->
+		<c:if test="${state == 'audit' }">
+			<div lass = "audit_wrapper">
+				<div class="audit_middle">
+					<div class="audit" id="" onclick="toprint()" >退回给个人</div>
+					<div class="audit pass" id="" onclick="toprint()" >审核通过</div>
+					<div class="audit" id="" onclick="toprint()" >打印</div>
+					<div class="audit" id="" onclick="toprint()" >返回</div>
+				</div>
+			</div>
+		</c:if>
+		<!-- 机构用户审核显示 end  -->
 
 		<%--<c:if test="${isSelfLog=='true' }">
 			<div class="button">
@@ -377,6 +397,31 @@
 		margin-top: 20px;
 		text-align: center;
 		line-height: 42px;
+	}
+	.audit_wrapper{
+		width: 100%;
+	}
+	.audit_middle{
+		margin: auto;
+    	width: 32em;
+	}
+	.audit{
+	    line-height: 1em;
+	    padding: 0.8em 0em;
+    	width: 7em;
+	    background-color: #33CAA9;
+	    border-radius: 4px;
+	    margin: 1.5em 0.5em;
+	    cursor: pointer;
+	    color: #ffffff;
+	    text-align: center;
+	    float: left;
+	}
+	.audit.pass{
+		background-color:red;
+	}
+	.footer {
+    	clear: left;
 	}
 </style>
 </html>

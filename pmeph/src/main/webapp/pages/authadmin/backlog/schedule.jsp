@@ -58,7 +58,7 @@
 	                    <div class="leftContent">
 	                        <div class="leftContentSmall">
 	                            <div class="pictureDiv">
-	                            	<c:if test="${one.TYPE=='A'}">
+	                            	<c:if test="${one.TYPE=='A' || one.TYPE == 'D' }">
 	                            		<img  class="pictureB" src="${ctx}/statics/image/pic3555.png">
 	                            	</c:if>
 	                                <c:if test="${one.TYPE=='B'}">
@@ -284,9 +284,13 @@
     		if(type=="B"){
     			//跳转教师资格认证页面
     			window.location.href="${ctx}/teacherauth/toPage.action?";
-    		}else{
+    		}else if(type=="A"){
+    			//教材申报审核
     			//dataaudit/toMaterialAudit.action?material_id=10&declaration_id=123&view_audit=audit
     			window.location.href="${ctx}/dataaudit/toMaterialAudit.action?material_id="+auditId+"&declaration_id="+decId+"&view_audit=audit";
+    		}else if(type=="D"){
+    			//临床申报审核
+    			window.location.href="${ctx}/expertation/showExpertation.action?material_id="+auditId+"&declaration_id="+decId+"&state=audit&userType=org";   			
     		}
     	}	
     		

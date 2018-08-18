@@ -80,6 +80,31 @@
 			<if test="null!=parameter.year">AND a.gmt_create >= #{parameter.year}</if>
 			AND receiver_id = #{parameter.userId}
 			) t3
+			
+			union
+			
+			select * from(
+				select 
+				e.id as ID
+				,e.realname as NAME
+				,e.gmt_create as TIME
+				,p.product_name as CONTENT
+				,p.id as auditId
+				,'D' as TYPE   <!-- 临床申报 -->
+				,w.avatar as avatar
+				,e.online_progress as online_progress
+				 
+				from expertation e
+				inner join org_user u on e.org_id = u.org_id and u.id = #{parameter.userId} AND (e.online_progress='1' or e.online_progress='4')
+				left join writer_user w on e.user_id = w.id
+				left join product p on e.product_id = p.id
+				<where>
+					<if test="null!=parameter.week">AND e.gmt_create >= #{parameter.week} </if>
+					<if test="null!=parameter.month">AND e.gmt_create >= #{parameter.month}</if>
+					<if test="null!=parameter.year">AND e.gmt_create >= #{parameter.year}</if>
+				</where>
+			)t4
+			
 		ORDER BY TIME DESC
 		limit #{start},#{pageSize}
 	</select>
@@ -148,7 +173,28 @@
 			<if test="null!=parameter.year">AND a.gmt_create >= #{parameter.year}</if>
 			AND receiver_id = #{parameter.userId}
 			) t3
-		)t4
+			
+			union
+			
+			select * from(
+				select 
+				
+				e.realname as NAME
+				,e.gmt_create as TIME
+				,p.product_name as CONTENT
+				,'D' as TYPE   <!-- 临床申报 -->
+				
+				from expertation e
+				inner join org_user u on e.org_id = u.org_id and u.id = #{parameter.userId} AND (e.online_progress='1' or e.online_progress='4')
+				left join writer_user w on e.user_id = w.id
+				left join product p on e.product_id = p.id
+				<where>
+					<if test="null!=parameter.week">AND e.gmt_create >= #{parameter.week} </if>
+					<if test="null!=parameter.month">AND e.gmt_create >= #{parameter.month}</if>
+					<if test="null!=parameter.year">AND e.gmt_create >= #{parameter.year}</if>
+				</where>
+			)t4
+		)t5
 	</select>
 	<!-- 查询已办事项列表 -->
 	<select id="selectDoneSchedule" parameterType="PageParameter" resultType="java.util.Map">
@@ -175,6 +221,19 @@
 		ON w1.id= w.user_id
 		WHERE u1.`id` = #{parameter.userId} AND w.progress IN(2,3)
 		) t2
+		UNION
+		SELECT * FROM(
+		SELECT d.realname AS NAME,d.gmt_create AS gmt_create,m.`product_name` AS CONTENT,
+		d.product_id AS AUDITID,"C" AS TYPE,d.gmt_update AS UPDATETIME,d.`online_progress` AS PROGRESS,w.avatar,d.id
+		FROM expertation d 
+		LEFT JOIN product m
+		ON d.`product_id` = m.`id`
+		LEFT JOIN org_user u
+		ON d.`org_id` = u.`org_id`
+		left join writer_user w
+		on d.user_id = w.id
+		WHERE	u.`id` = #{parameter.userId} AND d.online_progress IN(2,3)
+		) t3
 		ORDER BY gmt_create DESC
 		limit #{start},#{pageSize}
 	</select>
@@ -198,7 +257,21 @@
 		LEFT JOIN writer_user w1		
 		ON w1.id= w.user_id 
 		WHERE	u1.`id` = #{parameter.userId} AND w.progress IN (2,3) 
-		ORDER BY w.gmt_create DESC) t2)t3
+		ORDER BY w.gmt_create DESC) t2
+		UNION
+		SELECT * FROM(
+		SELECT d.realname AS NAME,d.gmt_create AS gmt_create,m.`product_name` AS CONTENT
+		FROM expertation d 
+		LEFT JOIN product m
+		ON d.`product_id` = m.`id`
+		LEFT JOIN org_user u
+		ON d.`org_id` = u.`org_id`
+		left join writer_user w
+		on d.user_id = w.id
+		WHERE	u.`id` = #{parameter.userId} AND d.online_progress IN(2,3)
+		) t3
+		
+		)t4
 	</select>
 	
 	<!-- 查询机构用户信息 -->

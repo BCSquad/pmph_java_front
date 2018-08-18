@@ -440,8 +440,12 @@ public class ExpertationController extends BaseController{
 		//传参  user_id  material_id
         String declaration_id = request.getParameter("declaration_id");
         String state=request.getParameter("state");
+        String userType = request.getParameter("userType");
         if(state!=null){
         	mav.addObject("state",state);
+		}
+        if(userType!=null){
+        	mav.addObject("userType",userType);
 		}
         if(arrMaterial_id !=null && arrMaterial_id.length>0){
             declaration_id = arrMaterial_id[0];
