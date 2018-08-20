@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bc.pmpheep.back.authadmin.applydocaudit.dao.ExpertationListAuditDao">
+
+	<!-- 分页查询 -->
+	<select id="getOrg" parameterType="java.util.Map"  resultType="java.util.Map">
+		select t.id,t.user_id,t.org_id,t.product_id,t.title,t.position,
+		(case  when t.online_progress=0  then '未提交'
+		when t.online_progress=1  then '未审核'
+		when t.online_progress=2  then '已退回'
+		when t.online_progress=3  then '已审核'
+		when t.online_progress=4  then '未审核'
+		when t.online_progress=5  then '已退回'	END)	as 	online_progress,
+		p.product_name,wu.realname
+		from  expertation t
+		left join product p on p.id=t.product_id
+		left join writer_user wu on t.user_id=wu.id
+		where 1=1
+		<if test="orgId !=null and orgId !='' ">
+			and  t.org_id=#{orgId}
+		</if>
+		<if test="queryName !=null and queryName !='' ">
+			and wu.realname like concat('%',#{queryName},'%' )
+		</if>
+		<if test="productId !=null and productId !='' ">
+			and t.product_id =#{productId}
+		</if>
+		<if test="onlineProgress !=null and onlineProgress !='' ">
+			<if test="onlineProgress =='00'.toString()">
+
+				and t.online_progress =0
+			</if>
+			<if test="onlineProgress =='01'.toString()">
+				and t.online_progress in(1,4)
+			</if>
+			<if test="onlineProgress =='02'.toString()">
+				and t.online_progress in(2,5)
+			</if>
+			<if test="onlineProgress =='03'.toString()">
+				and t.online_progress =3
+			</if>
+		</if>
+		<if test="start !=null and pageNumber != null">
+			limit #{start},#{pageSize}
+		</if>
+	</select>
+	<!-- 查询机构用户的作家用户总数 -->
+	<select id="getOrgTotal" parameterType="java.util.Map"
+			resultType="java.lang.Integer">
+		select count(*)
+		from  expertation t
+		left join product p on p.id=t.product_id
+		left join writer_user wu on t.user_id=wu.id
+		where 1=1
+		<if test="orgId !=null and orgId !='' ">
+			and  t.org_id=#{orgId}
+		</if>
+		<if test="queryName !=null and queryName !='' ">
+			and wu.realname like concat('%',#{queryName},'%' )
+		</if>
+		<if test="productId !=null and productId !='' ">
+			and t.product_id =#{productId}
+		</if>
+        <if test="onlineProgress !=null and onlineProgress !='' ">
+            <if test="onlineProgress =='00'.toString()">
+                and t.online_progress =0
+            </if>
+            <if test="onlineProgress =='01'.toString()">
+                and t.online_progress in(1,4)
+            </if>
+            <if test="onlineProgress =='02'.toString()">
+                and t.online_progress in(2,5)
+            </if>
+            <if test="onlineProgress =='03'.toString()">
+                and t.online_progress =3
+            </if>
+        </if>
+	</select>
+
+	<!-- 根据id查询产品名称 -->
+	<select id="productIdList" resultType="java.util.Map">
+		select id,product_name from product
+	</select>
+</mapper>
