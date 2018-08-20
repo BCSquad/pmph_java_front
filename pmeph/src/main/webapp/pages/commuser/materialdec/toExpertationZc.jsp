@@ -786,6 +786,23 @@
                                              title="${gezlList.syllabus_name}">${gezlList.syllabus_name}</a></div>
                 </div>
             </div>
+            
+            <!-- 申报单位-->
+            <div class="sbxq_item1">
+                <div>
+                    <span id="tsxz_span8"></span>
+                    <span class="tsxz_title">请选择您的申报单位</span>
+                </div>
+                <div class="sbdw">
+                    <span class="btbs">*</span><span class="btmc">申报单位：</span>
+                    <input class="cg_input" id="sbdw_name" name="sbdw_name" value="${org.org_name}"
+                           style="width: 300px;" onclick="javascript:orgAdd('${materialMap.product_id}')"
+                           readonly="readonly"/>
+                    <input type="hidden" id="sbdw_id" name="sbdw_id" value="${gezlList.org_id}" style="width: 300px;"/>
+                </div>
+            </div>
+            
+            
             <!-- 院校推荐意见-->
             <div class="yijian">
                 <div class="tujian01">院校推荐意见:</div>

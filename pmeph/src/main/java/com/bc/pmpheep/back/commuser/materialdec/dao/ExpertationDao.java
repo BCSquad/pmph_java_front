@@ -111,4 +111,11 @@ public interface ExpertationDao {
 	 * @return
 	 */
 	public int updateExpertationAudit(Map<String, Object> paramMap);
+
+	public Map<String, Object> queryOrgById(String id);
+
+	public List<Map<String, Object>> queryOrgList(
+			PageParameter<Map<String, Object>> pageParameter);
+
+	public int queryOrgCount(PageParameter<Map<String, Object>> pageParameter);
 }

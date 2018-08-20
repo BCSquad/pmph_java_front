@@ -343,6 +343,7 @@
 			</div>
 			<div class="tujian03">年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</div>
 		</div>
+		<!-- 院校推荐意见(仅打印显示) end -->
 
 		<div class="sbxq_item" id="szdwyj">
 			<div>
@@ -356,9 +357,25 @@
 			</div>
 		</div>
 		</div>
-			<div class="out" id="print" onclick="toprint()" style="display: none">确认打印</div>
+		
+		<!-- 申报单位 -->
+		<div class="sbxq_item1">
+			<div>
+				<span id="tsxz_span8"></span>
+				<span class="tsxz_title">请选择您的申报单位</span>
+				<%--<span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.product_id}')">添加学科分类</span>--%>
+			</div>
+			<div class="sbdw" id="xkfladd">
+				<span class="btmc">申报单位：${org.org_name }</span>
+			</div>
+		</div>
+		
+		
+		<!-- 打印按钮(仅打印显示)-->
+		<div class="out" id="print" onclick="toprint()" style="display: none">确认打印</div>
+			
 		<hr style=" height:1px;border:none;border-top:1px #999999 dashed;margin-top: 30px;">
-		<!-- 院校推荐意见(仅打印显示) end -->
+		
 		
 		<!-- 机构用户审核显示  -->
 		<c:if test="${state == 'audit' }">

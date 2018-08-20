@@ -275,8 +275,10 @@ function add_xxjl(){
     );
     $table.append($tr);
     $tr.calendar();
-    $('#xx_kssj_'+num).tipso({validator: "isNonEmpty", message: "学习开始时间必填"});
-    $('#xx_jssj_'+num).tipso({validator: "isNonEmpty", message: "学习结束时间必填"});
+    if(data.is_edu_exp_required == "1"){
+	    $('#xx_kssj_'+num).tipso({validator: "isNonEmpty", message: "学习开始时间必填"});
+	    $('#xx_jssj_'+num).tipso({validator: "isNonEmpty", message: "学习结束时间必填"});
+    }
 }
 
 //追加工作经历tr
@@ -296,8 +298,10 @@ function add_gzjl(){
     );
     $table.append($tr);
     $tr.calendar();
-    $('#gz_kssj_'+num).tipso({validator: "isNonEmpty", message: "工作开始时间必填"});
-    $('#gz_jssj_'+num).tipso({validator: "isNonEmpty", message: "工作开始时间必填"});
+    if(data.is_work_exp_required == "1"){
+	    $('#gz_kssj_'+num).tipso({validator: "isNonEmpty", message: "工作开始时间必填"});
+	    $('#gz_jssj_'+num).tipso({validator: "isNonEmpty", message: "工作开始时间必填"});
+    }
 }
 
 
@@ -324,7 +328,9 @@ function add_xsjz(){
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('xsjz_"+num+"')\"/></td>"+
         "</tr>");
     $table.append($tr);
-    $('#xs_org_name_'+num).tipso({validator: "isNonEmpty", message: "学术兼职必填"});
+    if(data.is_acade_required == "1"){
+    	$('#xs_org_name_'+num).tipso({validator: "isNonEmpty", message: "学术兼职必填"});
+    }
 }
 
 //人卫社教材编写情况
@@ -373,7 +379,9 @@ function add_rwsjcbx(){
         optionHeight: 30
     });
     $tr.calendar();
-    $('#pmph_material_name_'+num).tipso({validator: "isNonEmpty", message: "人卫社教材编写情况必填"});
+    if(data.is_monograph_required == "1"){
+    	$('#pmph_material_name_'+num).tipso({validator: "isNonEmpty", message: "人卫社教材编写情况必填"});
+    }
 }
 
 //主编或参编图书情况
@@ -392,7 +400,9 @@ function add_zbtsqk(){
         "</tr>");
     $table.append($tr);
     $tr.calendar();
-    $('#jcb_material_name_'+num).tipso({validator: "isNonEmpty", message: "教材名称必填"});
+    if(data.is_edit_book_required == "1"){
+    	$('#zbts_material_name'+num).tipso({validator: "isNonEmpty", message: "专著名称必填"});
+    }
 }
 
 //主编学术专著情况表
@@ -418,7 +428,9 @@ function add_zbxszz(){
         "</tr>");
     $table.append($tr);
     $tr.calendar();
-    $('#zb_monograph_name_'+num).tipso({validator: "isNonEmpty", message: "专著名称必填"});
+    if(data.is_monograph_required == "1"){
+    	$('#zb_monograph_name_'+num).tipso({validator: "isNonEmpty", message: "专著名称必填"});
+    }
 }
 
 //删除表格tr
@@ -449,19 +461,23 @@ function buttAdd(type){
                     if ($.fireValidator() ) {
                         if($("#xkfladd").children().hasClass("el-tag")){
                             if($("#fileNameDiv").children().children().hasClass("whetherfile")){
-                                $.ajax({
-                                    type: "POST",
-                                    url: contextpath + 'expertation/doExpertationAdd.action?sjump=1&type=' + type,
-                                    data: $('#objForm').serialize(),// 您的formid
-                                    async: false,
-                                    dataType: "json",
-                                    success: function (json) {
-                                        if (json.msg == 'OK') {
-                                            window.message.success("操作成功,正在跳转页面");
-                                            window.location.href = contextpath + "expertation/declare.action";
+                            	if($("#sbdw_id").val()){
+                            		$.ajax({
+                                        type: "POST",
+                                        url: contextpath + 'expertation/doExpertationAdd.action?sjump=1&type=' + type,
+                                        data: $('#objForm').serialize(),// 您的formid
+                                        async: false,
+                                        dataType: "json",
+                                        success: function (json) {
+                                            if (json.msg == 'OK') {
+                                                window.message.success("操作成功,正在跳转页面");
+                                                window.location.href = contextpath + "expertation/declare.action";
+                                            }
                                         }
-                                    }
-                                });
+                                    });
+                            	}else{
+                            		window.message.info("请选择申报单位！");
+                            	}
                             }else{
                                 window.message.info("请上传所在单位意见附件！");
                             }
@@ -791,4 +807,16 @@ function toprint(){
     $("#ifprint").jqprint();
     $(".yijian").css("display","none");
     $("#button_cz").css("display","block");
+}
+
+//机构选择
+function orgAdd(product_id){
+    layer.open({
+        type: 2,
+        area: ['800px', '600px'],
+        fixed: false, //不固定
+        title:'申报单位选择',
+        maxmin: true,
+        content: contextpath+"expertation/toSearchOrg.action?product_id="+product_id
+    });
 }

@@ -243,6 +243,8 @@ public class ExpertationController extends BaseController{
 		perMap.put("remark", request.getParameter("remark"));
 		perMap.put("unit_advise", request.getParameter("syllabus_id"));
 		perMap.put("syllabus_name", request.getParameter("syllabus_name"));
+		perMap.put("org_id", request.getParameter("sbdw_id"));
+		
 		//获取学科及内容分类id
 		String subjectIds[] = request.getParameterValues("subjectId");
         String contentIds[] = request.getParameterValues("contentId");
@@ -497,6 +499,9 @@ public class ExpertationController extends BaseController{
 		//6.主编或参编图书情况
 		List<Map<String,Object>> editorList = new ArrayList<Map<String,Object>>();
 		editorList=this.etService.queryEditor(queryMap);
+		//所选申报单位
+		Map<String,Object> org =etService.queryOrgById(gezlList.get(0).get("org_id").toString());
+		
 		//填充
 		mav.addObject("queryMap", queryMap);
 		mav.addObject("gezlList", gezlList.get(0));
@@ -510,7 +515,13 @@ public class ExpertationController extends BaseController{
 		mav.addObject("subjectList", subjectList);
 		mav.addObject("contentList", contentList);
 		mav.addObject("monographList", monographList);
+		mav.addObject("org", org);
 		return mav;
+	}
+
+	private void queryOrgById(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	/**
@@ -574,6 +585,8 @@ public class ExpertationController extends BaseController{
 		//6.主编或参编图书情况
 		List<Map<String,Object>> editorList = new ArrayList<Map<String,Object>>();
 		editorList=this.etService.queryEditor(queryMap);
+		//所选申报单位
+		Map<String,Object> org =etService.queryOrgById(gezlList.get(0).get("org_id").toString());
 
 		//填充
 		mav.addObject("subjectList", subjectList);
@@ -590,6 +603,7 @@ public class ExpertationController extends BaseController{
 		mav.addObject("materialMap", queryMap);
 		mav.addObject("userMap", userMap);
         mav.addObject("return_cause", MapUtils.getString(gezlList.get(0), "return_cause"));
+        mav.addObject("org", org);
 
 		return mav;
 	}
@@ -744,5 +758,48 @@ public class ExpertationController extends BaseController{
 		resultMap.put("msg", msg);
 		return resultMap;
 	}
+	
+	//机构信息选择
+	@RequestMapping("toSearchOrg")
+	public ModelAndView toSearchOrg(HttpServletRequest request,
+			HttpServletResponse response){
+		ModelAndView mav = new ModelAndView("commuser/materialdec/toOrgList");
+		//机构信息
+		String product_id = request.getParameter("product_id");
+		String  currentPageStr = (String) request.getParameter("currentPage");
+		String  pageSizeStr = request.getParameter("pageSize");
+		String  orgname = request.getParameter("orgname");
+		Map<String,Object> paraMap = new HashMap<String,Object>();
+		//分页查询
+		int currentPage = 0;
+		int pageSize = 10;
+		
+		if(null!=currentPageStr&&!currentPageStr.equals("")){
+			 currentPage = Integer.parseInt(currentPageStr);
+		}
+		if(null!=pageSizeStr&&!pageSizeStr.equals("")){
+			 pageSize = Integer.parseInt(pageSizeStr);
+		}
+		PageParameter<Map<String,Object>> pageParameter = new PageParameter<>(currentPage,pageSize);
+		
+		paraMap.put("product_id", product_id);
+		paraMap.put("endPage", pageSize);
+		paraMap.put("currentPage", currentPage);
+		if(orgname!=null && !orgname.equals("")){
+			try {
+				orgname = URLDecoder.decode(orgname,"UTF-8");
+				paraMap.put("org_name", "%"+orgname+"%");
+				paraMap.put("orgname", orgname);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+		pageParameter.setParameter(paraMap);
+		PageResult<Map<String,Object>> pageResult = this.etService.selectOrgList(pageParameter);
+		mav.addObject("pageResult", pageResult);
+		mav.addObject("paraMap", paraMap);
+		return mav;
+	} 
+	
 
 }

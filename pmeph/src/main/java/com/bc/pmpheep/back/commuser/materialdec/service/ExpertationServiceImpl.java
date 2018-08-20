@@ -480,4 +480,31 @@ public class ExpertationServiceImpl implements ExpertationService {
 
 		return count;
 	}
+
+	@Override
+	public Map<String, Object> queryOrgById(String id) {
+		Map<String, Object> map = new HashMap();
+		if("0".equals(id)){
+			map.put(id, "0");
+			map.put("org_name", "人民卫生出版社");
+		}else{
+			map = exdao.queryOrgById(id);
+		}
+		return map;
+	}
+	
+	@Override
+    public PageResult<Map<String, Object>> selectOrgList(
+            PageParameter<Map<String, Object>> pageParameter) {
+        PageResult<Map<String, Object>> pageResult = new PageResult<Map<String, Object>>();
+        pageResult.setPageNumber(pageParameter.getPageNumber());
+        pageResult.setPageSize(pageParameter.getPageSize());
+
+        List<Map<String, Object>> list = exdao.queryOrgList(pageParameter);
+        int count = exdao.queryOrgCount(pageParameter);
+
+        pageResult.setRows(list);
+        pageResult.setTotal(count);
+        return pageResult;
+    }
 }

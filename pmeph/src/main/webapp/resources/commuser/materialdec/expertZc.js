@@ -471,6 +471,10 @@ function add_xxjl(){
     );
     $table.append($tr);
     $tr.calendar();
+    if(data.is_edu_exp_required == "1"){
+	    $('#xx_kssj_'+num).tipso({validator: "isNonEmpty", message: "学习开始时间必填"});
+	    $('#xx_jssj_'+num).tipso({validator: "isNonEmpty", message: "学习结束时间必填"});
+    }
 }
 
 //追加工作经历tr
@@ -491,10 +495,14 @@ function add_gzjl(){
     );
     $table.append($tr);
     $tr.calendar();
+    if(data.is_work_exp_required == "1"){
+	    $('#gz_kssj_'+num).tipso({validator: "isNonEmpty", message: "工作开始时间必填"});
+	    $('#gz_jssj_'+num).tipso({validator: "isNonEmpty", message: "工作开始时间必填"});
+    }
 }
 
 //追加教学经历
-function add_jxjl(){
+/*function add_jxjl(){
     var num = fnt();
     var $table = $("#tab_jxjz");
     var $tr = $("<tr id='jxjz_"+num+"'>"+
@@ -511,7 +519,7 @@ function add_jxjl(){
     );
     $table.append($tr);
     $tr.calendar();
-}
+}*/
 
 //追加学术兼职
 function add_xsjz(){
@@ -537,10 +545,13 @@ function add_xsjz(){
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('xsjz_"+num+"')\"/></td>"+
         "</tr>");
     $table.append($tr);
+    if(data.is_acade_required == "1"){
+    	$('#xs_org_name_'+num).tipso({validator: "isNonEmpty", message: "学术兼职必填"});
+    }
 }
 
 //上版教材参编情况
-function add_jccb(){
+/*function add_jccb(){
     var num = fnt();
     var $table = $("#tab_jccb");
     var $tr = $("<tr id='jccb_"+num+"'>"+
@@ -570,7 +581,7 @@ function add_jccb(){
         "</tr>");
     $table.append($tr);
     $tr.calendar();
-}
+}*/
 
 //精品课程建设情况
 function add_jpkcjs(str,dim){
@@ -631,7 +642,10 @@ function add_zbtsqk(){
         "</tr>");
     $table.append($tr);
     $tr.calendar();
-    $('#jcb_material_name_'+num).tipso({validator: "isNonEmpty", message: "教材名称必填"});
+    if(data.is_edit_book_required == "1"){
+    	$('#zbts_material_name'+num).tipso({validator: "isNonEmpty", message: "专著名称必填"});
+    }
+    
 }
 
 //人卫社教材编写情况
@@ -681,6 +695,9 @@ function add_rwsjcbx(){
         optionHeight: 30
     });
     $tr.calendar();
+    if(data.is_monograph_required == "1"){
+    	$('#pmph_material_name_'+num).tipso({validator: "isNonEmpty", message: "人卫社教材编写情况必填"});
+    }
 }
 //其他社教材编写情况
 function add_jcbx(){
@@ -772,6 +789,9 @@ function add_zbxszz(){
         "</tr>");
     $table.append($tr);
     $tr.calendar();
+    if(data.is_monograph_required == "1"){
+    	$('#zb_monograph_name_'+num).tipso({validator: "isNonEmpty", message: "专著名称必填"});
+    }
 }
 //出版行业获奖情况表
 function add_publish(){
@@ -1254,5 +1274,18 @@ function ContentAdd(material_id){
         title:'内容分类选择',
         maxmin: true,
         content: contextpath+"expertation/queryContent.action?material_id="+material_id
+    });
+}
+
+
+//机构选择
+function orgAdd(product_id){
+    layer.open({
+        type: 2,
+        area: ['800px', '600px'],
+        fixed: false, //不固定
+        title:'申报单位选择',
+        maxmin: true,
+        content: contextpath+"expertation/toSearchOrg.action?product_id="+product_id
     });
 }

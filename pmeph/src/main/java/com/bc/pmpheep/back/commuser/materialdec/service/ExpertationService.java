@@ -132,4 +132,17 @@ public interface ExpertationService {
 	 * @return
 	 */
 	public int updateExpertationPass(Map<String, Object> paramMap);
+
+	/**
+	 * 根据id查询机构
+	 * @param string
+	 * @return
+	 */
+	public Map<String, Object> queryOrgById(String id);
+
+	
+	/**
+	 * 机构选择
+	 */
+	PageResult<Map<String, Object>> selectOrgList(PageParameter<Map<String, Object>> pageParameter);
 }
