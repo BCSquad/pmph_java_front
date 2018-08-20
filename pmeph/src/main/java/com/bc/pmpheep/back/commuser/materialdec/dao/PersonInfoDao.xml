@@ -162,11 +162,12 @@
 	</delete>
 	<!-- //个人成就 -->
 	<select id="queryPerAchievement" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from per_achievement where user_id = #{user_id}  
+		select * from per_achievement where user_id = #{user_id}  limit 0,1
 	</select>
 	<insert id="insertPerAchievement" parameterType="java.util.Map">
 		insert into per_achievement(id,user_id,content)
 		  values(#{per_id},#{user_id},#{content})
+		  on duplicate key update values(content)
 	</insert>
 	<update id="updatePerAchievement" parameterType="java.util.Map">
 		update per_achievement set content = #{content} 
