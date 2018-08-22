@@ -588,7 +588,13 @@ public class ExpertationController extends BaseController{
 		List<Map<String,Object>> editorList = new ArrayList<Map<String,Object>>();
 		editorList=this.etService.queryEditor(queryMap);
 		//所选申报单位
-		Map<String,Object> org =etService.queryOrgById(gezlList.get(0).get("org_id").toString());
+		Map<String,Object> org = new HashMap<String, Object>();
+		if(gezlList.get(0).get("org_id")==null){
+			
+		}else{
+			org =etService.queryOrgById(gezlList.get(0).get("org_id").toString());
+		}
+		
 
 		//填充
 		mav.addObject("subjectList", subjectList);
