@@ -6,8 +6,14 @@ $(function () {
 	if(state=="out"){
         $("#yijian").css("display","block");
         $("#print").css("display","block");
+        $("#szdwyj").css("display","none");
+        $("#print_look").css("display","none");
+        $("#xzsbdw").css("display","none");
+        $("#return_cause_div").css("display","none");
+        $("#bookmistake").remove();
     }
-	if ($("#return_cause_hidden").val().length>0) {
+	if ($("#return_cause_hidden").val().length>0 && state!="out") {
+
 		$("#return_cause_div").fadeIn(800);
 	}
 });
@@ -121,7 +127,6 @@ function buttGive(){
 
 //打印按钮
 function toprint() {
-    // $("#print").css("display","none");
     $("#ddd").jqprint();
 }
 
@@ -255,4 +260,9 @@ function LengthLimit(obj,ml){
 		obj.value=va.substring(0,maxStrlength);
 		//window.message.warning("不可超过输入最大长度"+ml+"字节！");
 	}
+}
+
+function toprintdetail() {
+	var declaration_id=$("#declaration_id").val();
+    window.location.href=contextpath+"expertation/showExpertation.action?&&declaration_id="+declaration_id+"&&state=out";
 }
