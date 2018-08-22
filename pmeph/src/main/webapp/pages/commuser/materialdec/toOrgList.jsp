@@ -20,11 +20,15 @@
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
 </head>
 <body>
+	<!-- 教材申报 / 临床申报 product -->
+	<input id = "productOrMaterial" value="${productOrMaterial }" type="hidden">
+
 	<!-- 查询栏 -->
 	<div class="qy_div">
 		<div style="width: 100%;margin-top: 20px;">
 			<span class="mc1">单位名称：</span>
 			<input type="hidden" id="material_id" name="material_id" value="${paraMap.material_id}">
+			<input type="hidden" id="product_id" name="product_id" value="${paraMap.product_id}">
 			<input class="cg_input" style="width: 457px;height: 36px;" id="orgname" name="orgname" value="${paraMap.orgname}" />
 			<div class="cxbutn" onclick="javascript:query()">
 				<span>查询</span>
@@ -102,7 +106,12 @@ function tojump(){
 //查询
 function query(){
 	var orgname =$("#orgname").val();
-	window.location.href="${ctx}/material/toSearchOrg.action?material_id="+material_id+"&orgname="+encodeURI(encodeURI(orgname)); 
+	if("product"==$("#productOrMaterial").val()){
+		window.location.href="${ctx}/expertation/toSearchOrg.action?product_id="+$("#product_id").val()+"&orgname="+encodeURI(encodeURI(orgname)); 
+	}else{
+		window.location.href="${ctx}/material/toSearchOrg.action?material_id="+material_id+"&orgname="+encodeURI(encodeURI(orgname)); 
+
+	}
 }
 
 //确认选择

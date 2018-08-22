@@ -797,6 +797,7 @@ public class ExpertationController extends BaseController{
 		pageParameter.setParameter(paraMap);
 		PageResult<Map<String,Object>> pageResult = this.etService.selectOrgList(pageParameter);
 		mav.addObject("pageResult", pageResult);
+		mav.addObject("productOrMaterial", "product");
 		mav.addObject("paraMap", paraMap);
 		return mav;
 	} 
