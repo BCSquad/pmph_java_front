@@ -2,6 +2,7 @@
 var is_pmph_textbook_required;
 var is_textbook_required;
 var jsonStr = "";
+var is_unit_advise_used = "0";
 $(function () {
     setTimeout(function () {
         $('#edu1').tipso({validator: "isNonEmpty", message: "请选择申报的图书"});
@@ -144,6 +145,7 @@ function chooseModel(data){
     //所在单位意见
     if(data.is_unit_advise_used == "1"){
         $("#szdwyj").css("display","block");
+        is_unit_advise_used = data.is_unit_advise_used;
     }
     //学习经历
     if(data.is_edu_exp_used == "1"){
@@ -914,6 +916,34 @@ function buttAdd(type) {
     } else {  //表示提交
         checkLb();
         if ($.fireValidator()) {
+            if($("#xkfladd").children().hasClass("el-tag")){
+                if("0"==is_unit_advise_used||$("#fileNameDiv").children().children().hasClass("whetherfile")){
+                	if($("#sbdw_id").val()){
+                		$.ajax({
+                            type: "POST",
+                            url: contextpath + 'expertation/doExpertationAdd.action?sjump=1&type=' + type,
+                            data: $('#objForm').serialize(),// 您的formid
+                            async: false,
+                            dataType: "json",
+                            success: function (json) {
+                                if (json.msg == 'OK') {
+                                    window.message.success("操作成功,正在跳转页面");
+                                    window.location.href = contextpath + "expertation/declare.action";
+                                }
+                            }
+                        });
+                	}else{
+                		window.message.info("请选择申报单位！");
+                	}
+                }else{
+                    window.message.info("请上传所在单位意见附件！");
+                }
+            }else{
+                window.message.info("请选择学科分类！")
+            }
+
+        
+        	/*
             $.ajax({
                 type: "POST",
                 url: contextpath + 'expertation/doExpertationAdd.action?sjump=1&type=' + type,
@@ -927,7 +957,7 @@ function buttAdd(type) {
                     }
                 }
             });
-        }
+        */}
     }
 }
 
