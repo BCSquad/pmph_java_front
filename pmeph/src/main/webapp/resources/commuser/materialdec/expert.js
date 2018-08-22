@@ -186,7 +186,7 @@ function chooseModel(data){
             $('#pmph_material_name').tipso({validator: "isNonEmpty", message: "人卫社教材编写情况必填"})
             //给其他值默认为无
             $("#pmph_publish_date").val(getNowFormatDate());
-            $("#pmph_isbn").val("978-7-117-1");
+            $("#pmph_isbn").val("标准书号");
         }else{
             $("#rwsjcbx_xt").css("display","inline");
         }
@@ -363,7 +363,7 @@ function add_rwsjcbx(){
         "</tr></table>"+
         "<input type='hidden' name='pmph_is_digital_editor' value='pmph_is_digital_editor_"+num+"' /></td>"+
         "<td><input class='cg_input' id='pmph_publish_date_"+num+"' placeholder='出版时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100' name='pmph_publish_date' value='' style='width: 100px;'/></td>"+
-        "<td><input class='cg_input' maxlength='50' name='pmph_isbn' value='' id='pmph_isbn_"+num+"'  style='width: 100px;' placeholder='ISBN 978-7-117-23074-2'/></td>"+
+        "<td><input class='cg_input' maxlength='50' name='pmph_isbn' value='' id='pmph_isbn_"+num+"'  style='width: 100px;' placeholder='标准书号'/></td>"+
         "<td><input class='cg_input' maxlength='100' name='pmph_note' value='' placeholder='备注' style='width: 140px;'/>" +
         "<input type='hidden' name='zdjy' value='pmph_material_name_"+num+"' />" +
         "<input type='hidden' name='pmph_id' value=''>"+
