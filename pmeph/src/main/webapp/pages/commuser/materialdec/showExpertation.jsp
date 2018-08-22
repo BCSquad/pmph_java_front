@@ -54,7 +54,7 @@
 								<c:if test="${gezlList.sex == '2'}">女</c:if>
 							</span></td>
 						<td><span>出生年月：${gezlList.birthday1}</span></td>
-						<td><span>教&emsp;&emsp;龄：${gezlList.experience}</span></td>
+						<td><span>地&emsp;&emsp;址：${gezlList.address}</span></td>
 					</tr>
 					<tr>
 						<td><span>工作单位：${gezlList.org_name}</span></td>
@@ -75,7 +75,10 @@
 								<c:if test="${gezlList.idtype == '2'}">军官证</c:if>
 							</span></td>
 						<td><span>证件号码：${gezlList.idcard}</span></td>
-						<td colspan="2"><span>地&emsp;&emsp;址：${gezlList.address}</span></td>
+						<td colspan="2"><span>开户行：${gezlList.bankaddress}</span></td>
+					</tr>
+					<tr>
+						<td><span>卡号：${gezlList.banknumber}</span></td>
 					</tr>
 
 				</table>
@@ -334,6 +337,19 @@
 				</c:forEach>
 			</div>
 		</div>
+
+		<!-- 申报单位 -->
+		<div class="sbxq_item1">
+			<div>
+				<span id="tsxz_span8"></span>
+				<span class="tsxz_title" id="xzsbdw">请选择您的申报单位</span>
+				<%--<span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.product_id}')">添加学科分类</span>--%>
+			</div>
+			<div class="sbdw" id="xkfladd">
+				<span class="btmc">申报单位：${org.org_name }</span>
+			</div>
+		</div>
+
 		<!-- 院校推荐意见(仅打印显示)-->
 		<div class="yijian" style="display: none" id="yijian">
 			<div class="tujian01">院校推荐意见:</div>
@@ -343,6 +359,8 @@
 			</div>
 			<div class="tujian03">年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</div>
 		</div>
+
+
 		<!-- 院校推荐意见(仅打印显示) end -->
 
 		<div class="sbxq_item" id="szdwyj">
@@ -352,24 +370,14 @@
 			</div>
 			<div style="height: 30px;margin-top: 10px;">
 				<div class="filename"><a href="javascript:" onclick="downLoadProxy('${gezlList.unit_advise}')"
-						title="${gezlList.syllabus_name}">${gezlList.syllabus_name}</a>
+										 title="${gezlList.syllabus_name}">${gezlList.syllabus_name}</a>
 				</div>
 			</div>
 		</div>
 		</div>
-		
-		<!-- 申报单位 -->
-		<div class="sbxq_item1">
-			<div>
-				<span id="tsxz_span8"></span>
-				<span class="tsxz_title">请选择您的申报单位</span>
-				<%--<span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.product_id}')">添加学科分类</span>--%>
-			</div>
-			<div class="sbdw" id="xkfladd">
-				<span class="btmc">申报单位：${org.org_name }</span>
-			</div>
-		</div>
-		
+        <input type="hidden" id="declaration_id" value="${declaration_id}">
+		<!-- 打印按钮(查看界面的打印按钮，与下面的确认打印不是同一个按钮)-->
+		<div class="out" id="print_look" onclick="toprintdetail()">打印</div>
 		
 		<!-- 打印按钮(仅打印显示)-->
 		<div class="out" id="print" onclick="toprint()" style="display: none">确认打印</div>
