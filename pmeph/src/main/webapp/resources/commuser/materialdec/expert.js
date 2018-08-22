@@ -1,5 +1,6 @@
 //定义一个全局变量
  var jsonStr = "";
+ var is_unit_advise_used = "0";
 $(function () {
     setTimeout(function () {
         $('#realname').tipso({validator: "isNonEmpty", message: "姓名不能为空"});
@@ -59,6 +60,7 @@ $(function () {
     //其他社教材-职务
     selectOption("jcjb_sl");
 
+    
 });
 
 window.onload = function(){
@@ -122,6 +124,7 @@ function chooseModel(data){
     //所在单位意见
     if(data.is_unit_advise_used == "1"){
         $("#szdwyj").css("display","block");
+        is_unit_advise_used = data.is_unit_advise_used;
     }
     //学习经历
     if(data.is_edu_exp_used == "1"){
@@ -460,7 +463,7 @@ function buttAdd(type){
                 checkLb();
                     if ($.fireValidator() ) {
                         if($("#xkfladd").children().hasClass("el-tag")){
-                            if($("#fileNameDiv").children().children().hasClass("whetherfile")){
+                            if("0"==is_unit_advise_used||$("#fileNameDiv").children().children().hasClass("whetherfile")){
                             	if($("#sbdw_id").val()){
                             		$.ajax({
                                         type: "POST",
