@@ -100,6 +100,7 @@ public class ExpertationController extends BaseController{
 		Map<String,Object> userinfo =  this.getUserInfo();
 		userMap =  this.mdService.queryUserInfo(MapUtils.getString(userinfo,"id",""));
 //		userMap = JSON.parseObject(JSON.toJSONString(userMap).replaceAll("-",""),java.util.HashMap.class);
+		//个人信息中带有横杠的去掉
 		if(userMap!=null){
 			Set set = userMap.keySet();
 			Iterator it = set.iterator();
@@ -514,6 +515,7 @@ public class ExpertationController extends BaseController{
 		mav.addObject("zjkzxxList", zjkzxxList);
 		mav.addObject("subjectList", subjectList);
 		mav.addObject("contentList", contentList);
+		mav.addObject("declaration_id", declaration_id);
 		mav.addObject("monographList", monographList);
 		mav.addObject("org", org);
 		return mav;
