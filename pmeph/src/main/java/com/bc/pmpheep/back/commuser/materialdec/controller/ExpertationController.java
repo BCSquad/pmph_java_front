@@ -541,6 +541,14 @@ public class ExpertationController extends BaseController{
 		//6.主编或参编图书情况
 		List<Map<String,Object>> editorList = new ArrayList<Map<String,Object>>();
 		editorList=this.etService.queryEditor(queryMap);
+
+		//16.文章发表情况（须第一作者，与本专业相关）
+		List<Map<String,Object>> wzfbqkList = new ArrayList<Map<String,Object>>();
+		wzfbqkList = this.etService.queryWzfbqk(queryMap);
+		//17.本专业获奖情况
+		List<Map<String,Object>> bzyhjqkList = new ArrayList<Map<String,Object>>();
+		bzyhjqkList = this.etService.queryBzyhjqk(queryMap);
+
 		//所选申报单位
 		Map<String,Object> org =etService.queryOrgById(gezlList.get(0).get("org_id").toString());
 		
@@ -556,6 +564,9 @@ public class ExpertationController extends BaseController{
 		mav.addObject("zjkzxxList", zjkzxxList);
 		mav.addObject("subjectList", subjectList);
 		mav.addObject("contentList", contentList);
+		mav.addObject("wzfbqkList", wzfbqkList);
+		mav.addObject("bzyhjqkList", bzyhjqkList);
+
 		mav.addObject("declaration_id", declaration_id);
 		mav.addObject("monographList", monographList);
 		mav.addObject("org", org);

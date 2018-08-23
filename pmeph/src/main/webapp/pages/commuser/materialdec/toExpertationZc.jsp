@@ -406,11 +406,11 @@
                     </table>
                 </div>
             </div>
-            <!--人卫社教材编写情况表-->
+            <!--人卫社教材编写情况-->
             <div class="sbxq_item" id="rwsjcbx">
                 <div>
                     <span id="tsxz_span5"></span>
-                    <span class="tsxz_title">人卫社教材编写情况表</span>
+                    <span class="tsxz_title">人卫社教材编写情况</span>
                     <span class="tsxz_ts" id="rwsjcbx_bt"><img src="${ctx}/statics/image/btxx.png"/></span>
                     <span class="tsxz_xt" id="rwsjcbx_xt">（选填）</span>
                 </div>

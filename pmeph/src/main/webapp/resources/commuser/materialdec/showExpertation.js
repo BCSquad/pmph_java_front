@@ -116,6 +116,15 @@ function chooseModel(data){
     if(data.is_edit_book_used == "1"){
         $("#zbcbtsqk").css("display","block");
     }
+
+    //文章发表情况（须第一作者，与本专业相关）
+    if(data.is_article_published_used == "1"){
+        $("#wzfbqk").css("display","block");
+    }
+    //本专业获奖情况
+    if(data.is_profession_award_used == "1"){
+        $("#bzyhjqk").css("display","block");
+    }
 }
 
 //文件下载
@@ -129,8 +138,20 @@ function buttGive(){
 }
 
 //打印按钮
-function toprint() {
+function toprint(eid) {
     $("#ddd").jqprint();
+
+//打印状态
+    $.ajax({
+        type: 'post',
+        url: contextpath + 'expertationList/updPrintStatus.action?t=' + new Date().getTime()+'&did=' + eid ,
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+
+        }
+    });
+
 }
 
 

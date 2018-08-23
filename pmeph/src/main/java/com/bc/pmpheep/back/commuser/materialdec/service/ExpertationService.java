@@ -113,6 +113,19 @@ public interface ExpertationService {
 	public List<Map<String,Object>> rwsjcList(Map<String,Object> map);
 
 	/**
+	 * 文章发表情况（须第一作者，与本专业相关）
+	 * @param map
+	 * @return
+	 */
+	public List<Map<String,Object>> queryWzfbqk(Map<String,Object> map);
+	/**
+	 * 本专业获奖情况
+	 * @param map
+	 * @return
+	 */
+	public List<Map<String,Object>> queryBzyhjqk(Map<String,Object> map);
+
+	/**
 	 * 通过产品ID查出扩展信息
 	 * @param material_id
 	 * @return

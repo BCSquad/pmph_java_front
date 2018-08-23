@@ -12,7 +12,9 @@
 		when t.online_progress=3  then '已审核'
 		when t.online_progress=4  then '未审核'
 		when t.online_progress=5  then '已退回'	END)	as 	online_progress,
-		p.product_name,wu.realname
+		p.product_name,wu.realname,
+		(case  when t.isprint=0  then '未打印'
+		when t.isprint=1  then '已打印' 	END)	as 	isprint
 		from  expertation t
 		left join product p on p.id=t.product_id
 		left join writer_user wu on t.user_id=wu.id
@@ -82,4 +84,10 @@
 	<select id="productIdList" resultType="java.util.Map">
 		select id,product_name from product
 	</select>
+
+
+	<!--改变打印状态-->
+	<update id="updPrintStatus" parameterType="String" >
+		UPDATE `expertation` SET isprint =1 WHERE id=#{id}
+	</update>
 </mapper>

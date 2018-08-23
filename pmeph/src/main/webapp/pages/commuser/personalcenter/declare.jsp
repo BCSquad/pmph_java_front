@@ -19,6 +19,7 @@
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>人卫E教平台</title>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
+    <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
 </head>
 <body>
@@ -34,7 +35,8 @@
                  <tr>
                      <th>序号</th>
                      <th>申报名称</th>
-                     <th>申报类别</th>
+                     <%--<th>学科分类</th>
+                     <th>内容分类</th>--%>
                      <th>提交日期</th>
                      <th>状态&审核意见</th>
                      <th>操作</th>
@@ -52,11 +54,17 @@
                          <c:if test="${list.expert_type==3}">
                              <th>人卫中医助手</th>
                          </c:if>
-                         <th>
-                             <c:forEach var="name" items="${list.names}" varStatus="name_status">
-                                 <div>${name_status.index+1})${name}</div>
+                          <%--<th>
+                             <c:forEach var="subname" items="${list.type_name}" varStatus="name_status">
+                                 <div>${name_status.index+1})${subname})</div>
                              </c:forEach>
                          </th>
+                          <th>
+                                 <c:forEach var="contname" items="${list.name_path}" varStatus="name_status">
+                                     <div>${name_status.index+1})${contname})</div>
+                                 </c:forEach>
+                         </th>--%>
+
                          <th>${list.gmt_create_new}</th>
                          <c:if test="${list.online_progress==0}">
                              <th>暂存</th>
