@@ -28,7 +28,7 @@
 	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
 		select id,product_id,expert_type,user_id,realname,sex,birthday,REPLACE(birthday,'-','.') as birthday1,experience,org_name,position,title,address,postcode,handphone,email,idtype,
 		idcard,telephone,fax,online_progress,auth_date,is_staging*1 is_staging,is_deleted*1 is_deleted,banknumber,bankaddress,
-		gmt_create,gmt_update,education*1 education,expertise,return_cause,unit_advise,syllabus_name,org_id from expertation t1
+		gmt_create,gmt_update,education*1 education,expertise,return_cause,unit_advise,syllabus_name,org_id,banknumber,bankaddress from expertation t1
 		 where 1= 1
 		<if test="user_id != null and user_id != ''">
 			and t1.user_id = #{user_id}
@@ -49,7 +49,9 @@
 		,bankaddress,remark,degree,unit_advise,syllabus_name,education,org_id
 		) values(#{product_id},#{expert_type},#{user_id},#{realname},#{sex},#{birthday},#{experience},#{org_name},#{position},
 		#{title},#{address},#{postcode},#{handphone},#{email},#{idtype},#{idcard},#{telephone},#{fax},#{gmt_create},
-		#{is_staging},#{online_progress},#{commit_date},#{banknumber},#{bankaddress},#{remark},#{degree},#{unit_advise},#{syllabus_name},#{education},#{org_id})
+		#{is_staging},#{online_progress},#{commit_date},#{banknumber},#{bankaddress},#{remark},#{degree},#{unit_advise},#{syllabus_name},#{education}
+		
+		,#{org_id})
 	</insert>
 	<update id="updatePerson" parameterType="java.util.Map">
 		update expertation set realname = #{realname},sex = #{sex},birthday = #{birthday},experience = #{experience},expertise = #{expertise},
@@ -181,7 +183,7 @@
     <select id="queryRwsjc" resultType="java.util.Map" parameterType="java.util.Map">
         select id,expertation_id,material_name,rank,position,
         is_digital_editor*1 is_digital_editor,publish_date,REPLACE(publish_date,'-','.') as publishdate,isbn,note,sort
-        from dec_textbook_pmph where declaration_id = #{declaration_id}
+        from dec_textbook_pmph where expertation_id = #{declaration_id}
         ORDER BY sort
     </select>
     <insert id="insertRwsjc" parameterType="java.util.Map">

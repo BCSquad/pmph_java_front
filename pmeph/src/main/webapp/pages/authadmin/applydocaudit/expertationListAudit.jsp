@@ -197,7 +197,7 @@
 
     //点击名字跳转
     function toName(product_id,expertation_id) {
-        window.location.href = contextpath +'expertation/showExpertation.action?product_id='+product_id+'&id='+expertation_id+'&state=audit&userType=org';
+        window.location.href = contextpath +'expertation/showExpertation.action?product_id='+product_id+'&declaration_id='+expertation_id+'&state=audit&userType=org';
             }
     //返回
    function backparent() {

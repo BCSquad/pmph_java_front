@@ -100,6 +100,7 @@ public class ExpertationController extends BaseController{
 		Map<String,Object> userinfo =  this.getUserInfo();
 		userMap =  this.mdService.queryUserInfo(MapUtils.getString(userinfo,"id",""));
 //		userMap = JSON.parseObject(JSON.toJSONString(userMap).replaceAll("-",""),java.util.HashMap.class);
+		//个人信息中带有横杠的去掉
 		if(userMap!=null){
 			Set set = userMap.keySet();
 			Iterator it = set.iterator();
@@ -514,6 +515,7 @@ public class ExpertationController extends BaseController{
 		mav.addObject("zjkzxxList", zjkzxxList);
 		mav.addObject("subjectList", subjectList);
 		mav.addObject("contentList", contentList);
+		mav.addObject("declaration_id", declaration_id);
 		mav.addObject("monographList", monographList);
 		mav.addObject("org", org);
 		return mav;
@@ -586,7 +588,13 @@ public class ExpertationController extends BaseController{
 		List<Map<String,Object>> editorList = new ArrayList<Map<String,Object>>();
 		editorList=this.etService.queryEditor(queryMap);
 		//所选申报单位
-		Map<String,Object> org =etService.queryOrgById(gezlList.get(0).get("org_id").toString());
+		Map<String,Object> org = new HashMap<String, Object>();
+		if(gezlList.get(0).get("org_id")==null){
+			
+		}else{
+			org =etService.queryOrgById(gezlList.get(0).get("org_id").toString());
+		}
+		
 
 		//填充
 		mav.addObject("subjectList", subjectList);
@@ -797,6 +805,7 @@ public class ExpertationController extends BaseController{
 		pageParameter.setParameter(paraMap);
 		PageResult<Map<String,Object>> pageResult = this.etService.selectOrgList(pageParameter);
 		mav.addObject("pageResult", pageResult);
+		mav.addObject("productOrMaterial", "product");
 		mav.addObject("paraMap", paraMap);
 		return mav;
 	} 

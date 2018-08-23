@@ -69,6 +69,10 @@ public class ExpertationServiceImpl implements ExpertationService {
             List<Map<String,Object>> editorList
     ) {
         //1.新增申报表
+    	if(perMap.get("org_id")!=null && "".equals(perMap.get("org_id").toString().trim()) ){
+    		perMap.put("org_id",null); //若暂存未选机构
+    	}
+    	
         this.exdao.insertPerson(perMap);
         //2.更新人员信息表
         if (perMap.get("type").equals("1")) { //提交

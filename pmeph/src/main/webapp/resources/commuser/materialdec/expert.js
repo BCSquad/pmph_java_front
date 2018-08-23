@@ -1,5 +1,7 @@
 //定义一个全局变量
  var jsonStr = "";
+ var is_unit_advise_used = "0";
+ var expertMap;
 $(function () {
     setTimeout(function () {
         $('#realname').tipso({validator: "isNonEmpty", message: "姓名不能为空"});
@@ -59,6 +61,7 @@ $(function () {
     //其他社教材-职务
     selectOption("jcjb_sl");
 
+    
 });
 
 window.onload = function(){
@@ -113,6 +116,7 @@ function queryMaterialMap(expert_type){
         dataType:"json",
         success: function(json) {
             chooseModel(json);
+            expertMap = json;
         }
     });
 }
@@ -122,6 +126,7 @@ function chooseModel(data){
     //所在单位意见
     if(data.is_unit_advise_used == "1"){
         $("#szdwyj").css("display","block");
+        is_unit_advise_used = data.is_unit_advise_used;
     }
     //学习经历
     if(data.is_edu_exp_used == "1"){
@@ -275,7 +280,7 @@ function add_xxjl(){
     );
     $table.append($tr);
     $tr.calendar();
-    if(data.is_edu_exp_required == "1"){
+    if(expertMap.is_edu_exp_required == "1"){
 	    $('#xx_kssj_'+num).tipso({validator: "isNonEmpty", message: "学习开始时间必填"});
 	    $('#xx_jssj_'+num).tipso({validator: "isNonEmpty", message: "学习结束时间必填"});
     }
@@ -298,7 +303,7 @@ function add_gzjl(){
     );
     $table.append($tr);
     $tr.calendar();
-    if(data.is_work_exp_required == "1"){
+    if(expertMap.is_work_exp_required == "1"){
 	    $('#gz_kssj_'+num).tipso({validator: "isNonEmpty", message: "工作开始时间必填"});
 	    $('#gz_jssj_'+num).tipso({validator: "isNonEmpty", message: "工作开始时间必填"});
     }
@@ -328,7 +333,7 @@ function add_xsjz(){
         "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('xsjz_"+num+"')\"/></td>"+
         "</tr>");
     $table.append($tr);
-    if(data.is_acade_required == "1"){
+    if(expertMap.is_acade_required == "1"){
     	$('#xs_org_name_'+num).tipso({validator: "isNonEmpty", message: "学术兼职必填"});
     }
 }
@@ -379,7 +384,7 @@ function add_rwsjcbx(){
         optionHeight: 30
     });
     $tr.calendar();
-    if(data.is_monograph_required == "1"){
+    if(expertMap.is_pmph_textbook_used == "1"){
     	$('#pmph_material_name_'+num).tipso({validator: "isNonEmpty", message: "人卫社教材编写情况必填"});
     }
 }
@@ -400,7 +405,7 @@ function add_zbtsqk(){
         "</tr>");
     $table.append($tr);
     $tr.calendar();
-    if(data.is_edit_book_required == "1"){
+    if(expertMap.is_edit_book_required == "1"){
     	$('#zbts_material_name'+num).tipso({validator: "isNonEmpty", message: "专著名称必填"});
     }
 }
@@ -428,7 +433,7 @@ function add_zbxszz(){
         "</tr>");
     $table.append($tr);
     $tr.calendar();
-    if(data.is_monograph_required == "1"){
+    if(expertMap.is_monograph_required == "1"){
     	$('#zb_monograph_name_'+num).tipso({validator: "isNonEmpty", message: "专著名称必填"});
     }
 }
@@ -460,7 +465,7 @@ function buttAdd(type){
                 checkLb();
                     if ($.fireValidator() ) {
                         if($("#xkfladd").children().hasClass("el-tag")){
-                            if($("#fileNameDiv").children().children().hasClass("whetherfile")){
+                            if("0"==is_unit_advise_used||$("#fileNameDiv").children().children().hasClass("whetherfile")){
                             	if($("#sbdw_id").val()){
                             		$.ajax({
                                         type: "POST",
