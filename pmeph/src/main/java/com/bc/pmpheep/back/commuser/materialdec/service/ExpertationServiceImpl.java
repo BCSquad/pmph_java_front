@@ -407,13 +407,19 @@ public class ExpertationServiceImpl implements ExpertationService {
     @Override
     public List<Map<String, Object>> queryExpertation(String user_id) {
         List<Map<String, Object>> list=exdao.queryExpertation(user_id);
-        for (Map<String, Object> map: list) {
-            if(map.get("name_path") !=null) {
-                String namePath = map.get("name_path").toString();
-                String[] names = namePath.split("_,_");
-                map.put("names", names);
+        /*for (Map<String, Object> map: list) {
+            if(map.get("type_name") !=null) {
+                String psttype_name = map.get("type_name").toString();
+                String[] psttype = psttype_name.split("_,_");
+                map.put("type_name", psttype);
             }
-        }
+
+            if(map.get("name_path") !=null) {
+                String pdname_path = map.get("name_path").toString();
+                String[] pdname = pdname_path.split("_,_");
+                map.put("name_path", pdname);
+            }
+        }*/
         return list;
     }
 
