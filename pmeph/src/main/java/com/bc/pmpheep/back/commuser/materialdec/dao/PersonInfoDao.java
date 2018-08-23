@@ -93,4 +93,8 @@ public interface PersonInfoDao {
 		public int updatePerEditor(Map<String, Object> map);
 		public int DelPerEditor(Map<String, Object> map);
 
+		//文章发表详情
+		public int insertPreWzfbqk(Map<String, Object> map);
+	    public int updatePreWzfbqk(Map<String, Object> map);
+
 }

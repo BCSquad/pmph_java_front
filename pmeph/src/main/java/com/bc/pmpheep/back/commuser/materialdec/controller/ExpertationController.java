@@ -170,6 +170,7 @@ public class ExpertationController extends BaseController{
 		String sjump = request.getParameter("sjump"); //页面来源
 
 		Map<String,Object> productMap =  new HashMap<String,Object>();
+		//查看灵床信息
 		productMap = this.etService.queryProduct(expert_type);
 		//求出信息集合
 		//1.作家申报表
@@ -188,6 +189,10 @@ public class ExpertationController extends BaseController{
 		List<Map<String,Object>> pmphList = new ArrayList<Map<String,Object>>();
 		//19.主编或参编图书情况
 		List<Map<String,Object>> editorList = new ArrayList<Map<String,Object>>();
+		//20.文章发表情况
+		List<Map<String,Object>> wzfbqkList = new ArrayList<Map<String,Object>>();
+		//21.本专业获奖情况
+		List<Map<String,Object>> bzyhjqkList = new ArrayList<Map<String,Object>>();
 
 		String is_background = "0";
 		String msg = "";
@@ -412,9 +417,45 @@ public class ExpertationController extends BaseController{
 			}
 		}
 
+		//文章发表情况
+		String wzfb_name[] = request.getParameterValues("wzfb_name");
+		String wzfb_qkmc[] = request.getParameterValues("wzfb_qkmc");
+		String wzfb_njq[] = request.getParameterValues("wzfb_njq");
+		String wzfb_qklb[] = request.getParameterValues("wzfb_qklb");
+		String wzfb_note[] = request.getParameterValues("wzfb_note");
+		for(int i=0;i<wzfb_name.length;i++){//遍历数组
+			if(!wzfb_name[i].equals("")){ //判断是否存在
+				Map<String,Object> WzfbMap = new HashMap<String,Object>();
+				WzfbMap.put("title", wzfb_name[i]);
+				WzfbMap.put("periodical_title", "".equals(wzfb_qkmc[i]) ? null:wzfb_qkmc[i]);
+				WzfbMap.put("year_volume_period", "".equals(wzfb_njq[i]) ? null:wzfb_njq[i]);
+				WzfbMap.put("periodical_level", "".equals(wzfb_qklb[i]) ? null:wzfb_qklb[i]);
+				WzfbMap.put("note", "".equals(wzfb_note[i]) ? null:wzfb_note[i]);
+				WzfbMap.put("sort", i);
+				WzfbMap.put("per_id", "");
+				wzfbqkList.add(WzfbMap);
+			}
+		}
+
+		//本专业获奖情况
+		String hjqk_name[] = request.getParameterValues("hjqk_name");
+		String hjqk_jb[] = request.getParameterValues("hjqk_jb");
+		String hjqk_note[] = request.getParameterValues("hjqk_note");
+		for(int i=0;i<hjqk_name.length;i++){//遍历数组
+			if(!hjqk_name[i].equals("")){ //判断是否存在
+				Map<String,Object> HjqkMap = new HashMap<String,Object>();
+				HjqkMap.put("hjqk_name", hjqk_name[i]);
+				HjqkMap.put("hjqk_jb", "".equals(hjqk_jb[i]) ? null:hjqk_jb[i]);
+				HjqkMap.put("hjqk_note", "".equals(hjqk_note[i]) ? null:hjqk_note[i]);
+				HjqkMap.put("sort", i);
+				HjqkMap.put("per_id", pmph_id[i]);
+				bzyhjqkList.add(HjqkMap);
+			}
+		}
+
         Map<String,Object> returnMap =  new HashMap<String,Object>();
 		if(expertation_id == null || expertation_id.length() <= 0){//表示新增
-            returnMap = this.etService.insertJcsbxx(perMap, stuList, workList, zjxsList, zjkzqkList, monographList, pmphList,subjectList,contentList,editorList);
+            returnMap = this.etService.insertJcsbxx(perMap, stuList, workList, zjxsList, zjkzqkList, monographList, pmphList,subjectList,contentList,editorList,wzfbqkList,bzyhjqkList);
 		}else{
             returnMap=this.etService.updateJcsbxx(perMap, stuList, workList, zjxsList, zjkzqkList, monographList, pmphList,subjectList,contentList,editorList,expertation_id);
 		}

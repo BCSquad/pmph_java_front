@@ -64,7 +64,8 @@ public interface ExpertationDao {
 	 * @return
 	 */
 	Map<String,Object> queryExpertationDetail(@Param("user_id") String user_id,@Param("expert_type") String expert_type);
-
+    //文章发表情况 insertWzfbqk
+	public int insertWzfbqk(Map<String, Object> map);
 	//查询学习经历
 	public List<Map<String,Object>> queryStu(Map<String, Object> map);
 	public int insertStu(Map<String, Object> map);

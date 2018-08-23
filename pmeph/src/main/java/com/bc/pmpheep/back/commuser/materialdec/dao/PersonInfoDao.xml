@@ -120,6 +120,16 @@
 		insert into per_textbook_pmph(id,user_id,material_name,rank,position,publish_date,isbn,note,is_digital_editor,sort)
 		  values(#{per_id},#{user_id},#{material_name},#{rank},#{position},#{publish_date},#{isbn},#{note},#{is_digital_editor},#{sort})
 	</insert>
+	<!--文章发表情况-->
+	<insert id="insertPreWzfbqk" parameterType="java.util.Map">
+		insert into pre_article_publicshed (id,user_id,title,periodical_title,year_volume_period,periodical_level,note)
+		values(#{id},#{user_id},#{title},#{periodical_title},#{year_volume_period},#{periodical_level},#{note});
+	</insert>
+	<!--文章发表情况编辑-->
+	<update id="updatePreWzfbqk" parameterType="java.util.Map">
+		update pre_article_publicshed set user_id=#{user_id},title=#{title},periodical_title=#{periodical_title},
+		year_volume_period=#{year_volume_period},periodical_level=#{periodical_level},note=#{note} where id = #{per_id}
+	</update>
 	<update id="updatePerRwsjc" parameterType="java.util.Map">
 		update per_textbook_pmph set material_name = #{material_name},rank=#{rank},position=#{position},publish_date=#{publish_date},
 		isbn=#{isbn},is_digital_editor=#{is_digital_editor},note=#{note},sort=#{sort} where id = #{per_id}

@@ -64,9 +64,11 @@ public class ExpertationServiceImpl implements ExpertationService {
             List<Map<String, Object>> zjkzqkList,
             List<Map<String, Object>> monographList,
             List<Map<String, Object>> pmphList,
-            List<Map<String,Object>> subjectList,
-            List<Map<String,Object>> contentList,
-            List<Map<String,Object>> editorList
+            List<Map<String, Object>> subjectList,
+            List<Map<String, Object>> contentList,
+            List<Map<String, Object>> editorList,
+            List<Map<String, Object>> wzfbqkList,
+            List<Map<String, Object>> bzyhjqkList
     ) {
         //1.新增申报表
     	if(perMap.get("org_id")!=null && "".equals(perMap.get("org_id").toString().trim()) ){
@@ -205,6 +207,42 @@ public class ExpertationServiceImpl implements ExpertationService {
                 }
                 map.put("declaration_id", declaration_id);
                 this.exdao.insertRwsjc(map);
+            }
+        }
+
+        //文章发表情况新增
+        if (wzfbqkList != null && !wzfbqkList.isEmpty()) {
+            for (Map<String, Object> map : wzfbqkList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePreWzfbqk(map);
+                    }else{
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPreWzfbqk(map);
+                    }
+                }
+                map.put("declaration_id", declaration_id);
+                this.exdao.insertWzfbqk(map);
+            }
+        }
+
+        //本专业获奖情况新增
+        if (bzyhjqkList != null && !bzyhjqkList.isEmpty()) {
+            for (Map<String, Object> map : bzyhjqkList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        //this.peradd.updatePreBzyhjqk(map);
+                    }else{
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        //this.peradd.insertPreBzyhjqk(map);
+                    }
+                }
+                map.put("declaration_id", declaration_id);
+                //this.exdao.insertBzyhjqk(map);
             }
         }
         Map<String,Object> returnMap = new HashMap<String,Object>();

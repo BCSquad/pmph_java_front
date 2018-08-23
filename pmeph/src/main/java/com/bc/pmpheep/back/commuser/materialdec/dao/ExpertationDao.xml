@@ -187,6 +187,11 @@
         insert into dec_textbook_pmph(per_id,expertation_id,material_name,rank,position,publish_date,isbn,note,is_digital_editor,sort)
         values(#{per_id},#{declaration_id},#{material_name},#{rank},#{position},#{publish_date},#{isbn},#{note},#{is_digital_editor},#{sort})
     </insert>
+    <!--文章发表情况-->
+    <insert id="insertWzfbqk" parameterType="java.util.Map">
+        insert into dec_article_published (per_id,expertation_id,title,periodical_title,year_volume_period,periodical_level,note)
+        values(#{per_id},#{declaration_id},#{title},#{periodical_title},#{year_volume_period},#{periodical_level},#{note});
+    </insert>
     <delete id="DelRwsjc" parameterType="java.util.Map">
         delete from dec_textbook_pmph where expertation_id = #{declaration_id}
     </delete>

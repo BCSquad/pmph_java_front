@@ -21,8 +21,8 @@ public interface ExpertationService {
 	 */
 	public Map<String,Object> insertJcsbxx(Map<String, Object> perMap, List<Map<String, Object>> stuList, List<Map<String, Object>> workList,
 				   List<Map<String, Object>> zjxsList, List<Map<String, Object>> zjkzqkList,List<Map<String, Object>> monographList,
-				   List<Map<String, Object>> pmphList,List<Map<String,Object>> subjectList,List<Map<String,Object>> contentList,List<Map<String,Object>> editorList
-                                          );
+				   List<Map<String, Object>> pmphList,List<Map<String,Object>> subjectList,List<Map<String,Object>> contentList,List<Map<String,Object>> editorList,
+                   List<Map<String,Object>> wzfbqkList,List<Map<String,Object>> bzyhjqkList);
 	/**
 	 * 修改 专家申报信息
 	 */
