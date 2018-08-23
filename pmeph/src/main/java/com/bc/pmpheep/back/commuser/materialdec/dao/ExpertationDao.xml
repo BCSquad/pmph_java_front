@@ -49,7 +49,9 @@
 		,bankaddress,remark,degree,unit_advise,syllabus_name,education,org_id
 		) values(#{product_id},#{expert_type},#{user_id},#{realname},#{sex},#{birthday},#{experience},#{org_name},#{position},
 		#{title},#{address},#{postcode},#{handphone},#{email},#{idtype},#{idcard},#{telephone},#{fax},#{gmt_create},
-		#{is_staging},#{online_progress},#{commit_date},#{banknumber},#{bankaddress},#{remark},#{degree},#{unit_advise},#{syllabus_name},#{education},#{org_id})
+		#{is_staging},#{online_progress},#{commit_date},#{banknumber},#{bankaddress},#{remark},#{degree},#{unit_advise},#{syllabus_name},#{education}
+		
+		,#{org_id})
 	</insert>
 	<update id="updatePerson" parameterType="java.util.Map">
 		update expertation set realname = #{realname},sex = #{sex},birthday = #{birthday},experience = #{experience},expertise = #{expertise},
@@ -178,7 +180,7 @@
     <select id="queryRwsjc" resultType="java.util.Map" parameterType="java.util.Map">
         select id,expertation_id,material_name,rank,position,
         is_digital_editor*1 is_digital_editor,publish_date,REPLACE(publish_date,'-','.') as publishdate,isbn,note,sort
-        from dec_textbook_pmph where declaration_id = #{declaration_id}
+        from dec_textbook_pmph where expertation_id = #{declaration_id}
         ORDER BY sort
     </select>
     <insert id="insertRwsjc" parameterType="java.util.Map">
