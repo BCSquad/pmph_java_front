@@ -84,4 +84,10 @@
 	<select id="productIdList" resultType="java.util.Map">
 		select id,product_name from product
 	</select>
+
+
+	<!--改变打印状态-->
+	<update id="updPrintStatus" parameterType="String" >
+		UPDATE `expertation` SET isprint =1 WHERE id=#{id}
+	</update>
 </mapper>

@@ -472,6 +472,16 @@ public class ExpertationServiceImpl implements ExpertationService {
         return this.exdao.queryEditor(map);
     }
 
+    @Override
+    public List<Map<String, Object>> queryWzfbqk(Map<String, Object> map) {
+        return this.exdao.queryWzfbqk(map);
+    }
+
+    @Override
+    public List<Map<String, Object>> queryBzyhjqk(Map<String, Object> map) {
+        return this.exdao.queryBzyhjqk(map);
+    }
+
 
     @Override
     public List<Map<String, Object>> queryZjkzxxById(String material_id) {

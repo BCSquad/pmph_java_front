@@ -88,6 +88,7 @@
 					</tr>
 					<tr>
 						<td><span>卡号：${gezlList.banknumber}</span></td>
+						<td><span>专业特长(疾病诊治及研究方向)：${gezlList.specialty}</span></td>
 					</tr>
 
 				</table>
@@ -188,6 +189,10 @@
 				</table>
 			</div>
 		</div>
+
+
+
+
 		<!--人卫社教材编写情况-->
 		<div class="sbxq_item" id="rwsjcbx">
 			<div>
@@ -302,6 +307,72 @@
 				</table>
 			</div>
 		</div>
+
+			<!--文章发表情况（须第一作者，与本专业相关）-->
+			<div class="sbxq_item" id="wzfbqk" >
+				<div>
+					<span id="tsxz_span7"></span>
+					<span class="tsxz_title">文章发表情况（须第一作者，与本专业相关）</span>
+				</div>
+				<div class="content">
+					<table class="tab_2" id="tab_wzfbqk">
+						<thead>
+						<tr>
+							<td width="300px">题目</td>
+							<td width="150px">期刊名称</td>
+							<td width="100px">年、卷、期</td>
+							<td width="250px">期刊级别（SCI或国内核心期刊）</td>
+							<td>备注</td>
+						</tr>
+						</thead>
+						<tbody>
+						<c:forEach var="list" items="${wzfbqkList}">
+							<tr>
+								<td>${list.title}</td>
+								<td>${list.periodical_title}</td>
+								<td>${list.year_volume_period}</td>
+								<td>${list.periodical_level}</td>
+								<td>${list.note}</td>
+							</tr></c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!--本专业获奖情况-->
+			<div class="sbxq_item" id="bzyhjqk" >
+				<div>
+					<span id="tsxz_span7"></span>
+					<span class="tsxz_title">本专业获奖情况</span>
+				</div>
+				<div class="content">
+					<table class="tab_2" id="tab_bzyhjqk">
+						<thead>
+						<tr>
+							<td width="440px">名称</td>
+							<td width="340px">级别（国家、省、市、单位）</td>
+							<td>备注</td>
+						</tr>
+						</thead>
+						<tbody>
+						<c:forEach var="list" items="${bzyhjqkList}">
+							<tr>
+								<td>${list.title}</td>
+								<td>
+									<c:if test="${list.rank == '0'}">无</c:if>
+									<c:if test="${list.rank == '1'}">国家</c:if>
+									<c:if test="${list.rank == '2'}">省</c:if>
+									<c:if test="${list.rank == '3'}">市</c:if>
+									<c:if test="${list.rank == '4'}">单位</c:if>
+								</td>
+								<td>${list.note}</td>
+							</tr></c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+
 		<!--扩展信息-->
 		<c:forEach var="zjkzxx" items="${zjkzqkList}">
 			<div class="sbxq_item1">
@@ -400,7 +471,7 @@
 				<div class="audit_middle">
 					<div class="audit" id="" onclick="showup('${gezlList.id}','2')" >退回给个人</div>
 					<div class="audit pass" id="" onclick="toAudit('${gezlList.id}','3')" >审核通过</div>
-					<div class="audit" id="" onclick="toprint()" >打印</div>
+					<div class="audit" id="" onclick="toprint('${gezlList.id}')" >打印</div>
 					<div class="audit" id="" onclick="javascript:history.go(-1)" >返回</div>
 				</div>
 			</div>

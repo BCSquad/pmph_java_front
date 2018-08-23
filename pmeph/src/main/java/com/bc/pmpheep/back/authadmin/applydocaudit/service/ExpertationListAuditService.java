@@ -36,4 +36,8 @@ public interface ExpertationListAuditService {
      */
     List<Map<String, Object>> productIdList();
 
+    //只要点过打印按钮，都算已打印
+    void updPrintStatus(String id);
+
+
 }
