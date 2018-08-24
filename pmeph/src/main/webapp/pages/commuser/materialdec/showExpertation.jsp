@@ -389,7 +389,7 @@
 			</div>
 		</c:forEach>
 		<!-- 学科分类-->
-		<div class="sbxq_item1">
+		<div class="sbxq_item1"  id="xkfl">
 			<div>
 				<span id="tsxz_span8"></span>
 				<span class="tsxz_title">学科分类(可多选)</span>
@@ -404,7 +404,7 @@
 			</div>
 		</div>
 		<!-- 内容分类-->
-		<div class="sbxq_item1">
+		<div class="sbxq_item1" id="lrfl">
 			<div>
 				<span id="tsxz_span12" style="margin-top: 6px"></span>
 				<span class="tsxz_title">内容分类(可多选)</span>

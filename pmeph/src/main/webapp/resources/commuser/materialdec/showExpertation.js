@@ -132,6 +132,18 @@ function chooseModel(data){
     if(data.is_profession_award_used == "1"){
         $("#bzyhjqk").css("display","block");
     }
+
+    //学科分类
+    if(data.is_subject_type_used == "1"){
+        $("#xkfl").css("display","block");
+    }
+
+    //内容分类
+    if(data.is_content_type_used == "1"){
+        $("#lrfl").css("display","block");
+    }
+
+
 }
 
 //文件下载
