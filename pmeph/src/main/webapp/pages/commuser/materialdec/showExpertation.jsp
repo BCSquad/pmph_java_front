@@ -443,7 +443,7 @@
 
         </div>
 		<!-- 院校推荐意见(仅打印显示) end -->
-
+		<c:if test="${state == 'audit' }">
                 <div class="sbxq_item" id="szdwyj" style="display: block">
                     <div>
                         <span id="tsxz_span13"></span>
@@ -458,7 +458,7 @@
                                                  title="${gezlList.syllabus_name}">${gezlList.syllabus_name}</a></div>--%>
                     </div>
                 </div>
-
+		</c:if>
 
 
         <input type="hidden" id="declaration_id" value="${declaration_id}">
