@@ -756,6 +756,8 @@ public class ExpertationController extends BaseController{
 		String expertation_id = request.getParameter("expertation_id");
 		String online_progress = request.getParameter("online_progress");  //类型
 		String return_cause = request.getParameter("return_cause");
+		String unit_advise = request.getParameter("unit_advise");   //判断是否有附件上传
+        String syllabus_name = request.getParameter("syllabus_name");   //判断是否有附件上传
 		String writer_id = request.getParameter("user_id");  //作家用户Id
 		Map<String,Object> userMap =  this.getUserInfo();
 		String user_id = userMap.get("id").toString();
@@ -769,7 +771,17 @@ public class ExpertationController extends BaseController{
 		paramMap.put("auth_date", date);
 		paramMap.put("writer_id", writer_id);
 		paramMap.put("return_cause", return_cause);
-		
+		if(unit_advise!=null){
+			paramMap.put("unit_advise", unit_advise);
+		}else{
+			paramMap.put("unit_advise", "");
+		}
+        if(syllabus_name!=null){
+            paramMap.put("syllabus_name", syllabus_name);
+        }else{
+            paramMap.put("syllabus_name", "");
+        }
+
 		int count = this.etService.updateExpertationPass(paramMap);
 		if(count>0){
 			msg = "OK";

@@ -377,3 +377,29 @@ a.input {
 	margin-left: 10px;
 	cursor: pointer;
 }
+
+.scys{
+	width: 78px;
+	height: 30px;
+	background-color: #33CAA9;
+	border-radius: 2px;
+	cursor: pointer;
+	float: left;
+	text-align: center;
+	line-height: 30px;
+	border-radius: 3px;
+}
+
+.filename{
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	max-width:245px ;
+}
+
+.fileNameDiv{
+	float: left;
+	margin-right: 10px;
+	line-height: 30px;
+	height: 30px;
+}
