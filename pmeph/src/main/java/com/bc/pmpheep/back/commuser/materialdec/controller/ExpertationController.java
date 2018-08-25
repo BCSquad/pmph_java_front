@@ -628,6 +628,7 @@ public class ExpertationController extends BaseController{
 		String  currentPageStr = (String) request.getParameter("currentPage");
 		String  pageSizeStr = request.getParameter("pageSize");
 		String  typename = request.getParameter("typename");
+		String chooseId = request.getParameter("chooseId"); // 已选id 格式如 66,65
 		Map<String,Object> paraMap = new HashMap<String,Object>();
 		//分页查询
 		int currentPage = 0;
@@ -642,6 +643,7 @@ public class ExpertationController extends BaseController{
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<>(currentPage,pageSize);
 
 		paraMap.put("material_id", material_id);
+		paraMap.put("chooseId", chooseId);
 		paraMap.put("endPage", pageSize);
 		paraMap.put("currentPage", currentPage);
 		if(typename!=null && !typename.equals("")){
@@ -673,6 +675,7 @@ public class ExpertationController extends BaseController{
 		String  pageSizeStr = request.getParameter("pageSize");
 		String  namepath = request.getParameter("namepath");
 		Map<String,Object> paraMap = new HashMap<String,Object>();
+		String chooseId = request.getParameter("chooseId"); // 已选id 格式如 66,65
 		//分页查询
 		int currentPage = 0;
 		int pageSize = 10;
@@ -688,6 +691,7 @@ public class ExpertationController extends BaseController{
 		paraMap.put("material_id", material_id);
 		paraMap.put("endPage", pageSize);
 		paraMap.put("currentPage", currentPage);
+		paraMap.put("chooseId", chooseId);
 		if(namepath!=null && !namepath.equals("")){
 			try {
 				namepath = URLDecoder.decode(namepath,"UTF-8");

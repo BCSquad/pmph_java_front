@@ -752,7 +752,8 @@
                 <div class="sbdw" id="xkfladd">
                     <span class="btmc">学科分类：</span>
                     <c:forEach var="subject" items="${subjectList}" varStatus="status">
-                    <span class="el-tag" id="xkfl_${status.count}">${subject.type_name}<input name="subjectId" type="hidden" value="${subject.product_subject_type_id}"/>
+                    <span class="el-tag" id="xkfl_${status.count}">${subject.type_name}
+                    	<input name="subjectId" type="hidden" value="${subject.product_subject_type_id}"/>
                         <span style="margin-left: 8px;cursor: pointer;" onclick="del('xkfl_${status.count}')">X</span></span>
                     </c:forEach>
                 </div>

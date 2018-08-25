@@ -626,25 +626,45 @@ function check_jcb_isbn(id){
 
 //学科选择
 function SubjectdAdd(material_id){
+var chooseArr = [];
+	
+	$("input[name='subjectId']").each(function(){
+		var $t = $(this);
+		chooseArr.push($t.val());
+	});
+	var chooseId = chooseArr.toString()
+		.replace(/\[/g, '(')
+		.replace(/\]/g, ')').replace(/"/g, "");
+	
     layer.open({
         type: 2,
         area: ['800px', '600px'],
         fixed: false, //不固定
         title:'学科分类选择',
         maxmin: true,
-        content: contextpath+"expertation/querySubject.action?material_id="+material_id
+        content: contextpath+"expertation/querySubject.action?material_id="+material_id+"&chooseId="+chooseId
     });
 }
 
 //内容选择
 function ContentAdd(material_id){
+	var chooseArr = [];
+	
+	$("input[name='contentId']").each(function(){
+		var $t = $(this);
+		chooseArr.push($t.val());
+	});
+	var chooseId = chooseArr.toString()
+		.replace(/\[/g, '(')
+		.replace(/\]/g, ')').replace(/"/g, "");
+	
     layer.open({
         type: 2,
         area: ['800px', '600px'],
         fixed: false, //不固定
         title:'内容分类选择',
         maxmin: true,
-        content: contextpath+"expertation/queryContent.action?material_id="+material_id
+        content: contextpath+"expertation/queryContent.action?material_id="+material_id+"&chooseId="+chooseId
     });
 }
 

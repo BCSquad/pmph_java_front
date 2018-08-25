@@ -71,13 +71,19 @@
         <if test="parameter.type_name != null and parameter.type_name != ''">
             and t.type_name like #{parameter.type_name}
         </if>
+        <if test="parameter.chooseId != null and parameter.chooseId != ''">
+        	and t.id not in (${parameter.chooseId})
+        </if>
         order by parent_id asc limit #{start},#{pageSize}
     </select>
     <!-- 学科分类总数 -->
     <select id="querySubjectCount" parameterType="PageParameter" resultType="int">
-        select count(*) from product_subject_type t
+        select count(*) from product_subject_type t where 1=1
         <if test="parameter.type_name != null and parameter.type_name != ''">
-            where t.type_name like #{parameter.type_name}
+            and t.type_name like #{parameter.type_name}
+        </if>
+        <if test="parameter.chooseId != null and parameter.chooseId != ''">
+        	and t.id not in (${parameter.chooseId})
         </if>
     </select>
 
@@ -87,6 +93,9 @@
         <if test="parameter.name_path != null and parameter.name_path != ''">
             and t.name_path like #{parameter.name_path}
         </if>
+        <if test="parameter.chooseId != null and parameter.chooseId != ''">
+        	and t.product_type_id not in (${parameter.chooseId})
+        </if>
         order by t.id asc limit #{start},#{pageSize}
     </select>
     <!-- 内容分类总数 -->
@@ -94,6 +103,9 @@
         select count(*) from product_content_type_detail t where is_leaf = '1'
         <if test="parameter.name_path != null and parameter.name_path != ''">
             and t.name_path like #{parameter.name_path}
+        </if>
+        <if test="parameter.chooseId != null and parameter.chooseId != ''">
+        	and t.product_type_id not in (${parameter.chooseId})
         </if>
     </select>
 
