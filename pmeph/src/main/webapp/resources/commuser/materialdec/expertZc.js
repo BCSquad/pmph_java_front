@@ -909,6 +909,10 @@ function add_acade(){
 //删除表格tr
 function del_tr(trId){
   //  document.getElementById(trId).remove();
+	$("#"+trId).find("input").each(function(){
+		var $t = $(this);
+		$t.tipso("destroy");
+	});
     $("#"+trId).remove();
 }
 

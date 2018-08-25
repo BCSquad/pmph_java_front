@@ -463,6 +463,10 @@ function add_zbxszz(){
 
 //删除表格tr
 function del_tr(trId){
+	$("#"+trId).find("input").each(function(){
+		var $t = $(this);
+		$t.tipso("destroy");
+	});
     document.getElementById(trId).remove();
 }
 

@@ -588,7 +588,7 @@
                 		}
 					}
                 	//从fireValidator校验列表中删除此项
-                	list = list.splice(desTempIndex, 1); 
+                	list.splice(desTempIndex, 1); 
                 	
                     $.data(this, 'plugin_' + pluginName, null);
                 }
