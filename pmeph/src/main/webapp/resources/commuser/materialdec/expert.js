@@ -224,6 +224,73 @@ function chooseModel(data){
             $("#zbcb_xt").css("display","inline");
         }
     }
+
+    //文章发表情况
+    if(data.is_article_published_used == "1"){
+        $("#wzfbqk").css("display","block");
+        //主编学术专著情况必填
+        if(data.is_article_published_required == "1"){
+            $("#wzfbqk_bt").css("display","inline");
+            $('#wzfbqk_material_name').tipso({validator: "isNonEmpty", message: "专著名称必填"})
+        }else{
+            $("#wzfbqk_bt").css("display","none");
+            $("#wzfbqk_xt").css("display","inline");
+        }
+    }
+
+    //本专业获奖情况
+    if(data.is_profession_award_used == "1"){
+        $("#bzyhjqk").css("display","block");
+        //主编学术专著情况必填
+        if(data.is_profession_award_required == "1"){
+            $("#bzyhjqk_bt").css("display","inline");
+            $('#bzyhjqk_material_name').tipso({validator: "isNonEmpty", message: "专著名称必填"})
+        }else{
+            $("#bzyhjqk_bt").css("display","none");
+            $("#bzyhjqk_xt").css("display","inline");
+        }
+    }
+
+
+    //学科分类
+    if(data.is_subject_type_used == "1"){
+        $("#xkfl_qy").css("display","block");
+        //主编学术专著情况必填
+        if(data.is_subject_type_required != "1"){
+            $("#xkflbx").attr("style","display:none");
+        }else{
+            $("#xkflbt").val("yes");
+        }
+
+    }else{
+        $("#xkfl_qy").css("display","none");
+    }
+
+    //内容分类
+    if(data.is_content_type_used == "1") {
+        $("#nrfl_qy").css("display", "block");
+        //主编学术专著情况必填
+        if (data.is_content_type_required != "1") {
+            $("#nrflbx").attr("style", "display:none");
+        }else{
+            $("#nrflbt").val("yes");
+        }
+    }else{
+        $("#nrfl_qy").css("display", "none");
+    }
+
+    //申报专业
+    if(data.is_profession_type_used == "1") {
+        $("#sbzy_qy").css("display", "block");
+        //主编学术专著情况必填
+        if (data.is_profession_type_required != "1") {
+            $("#sbzybx").attr("style", "display:none");
+        }else{
+            $("#sbzybt").val("yes");
+        }
+    }else{
+        $("#sbzy_qy").css("display", "none");
+    }
 }
 
 //生成随机数
@@ -410,6 +477,36 @@ function add_zbtsqk(){
     }
 }
 
+//文章发表情况
+function add_wzfbqk() {
+    var num = fnt();
+    var $table = $("#tab_wzfbqk");
+    var $tr=$("<tr id='wzfbqk_"+num+"'>\n" +
+        "<td class=\"xztd\"><input class=\"cg_input xzip\" maxlength=\"100\"  id=\"wzfbqk_material_name_"+num+"\" name=\"wzfb_name\" value=\"\" placeholder=\"文章题目\"/></td>\n" +
+        "<td class=\"xztd\"><input class=\"cg_input\" name=\"wzfb_qkmc\" value=\"\"  maxlength=\"20\" placeholder=\"期刊名称\"/></td>\n" +
+        "<td class=\"xztd\"><input class=\"cg_input\" name=\"wzfb_njq\" value=\"\" placeholder=\"\"/></td>\n" +
+        "<td class=\"xztd\"><input class=\"cg_input\" maxlength=\"100\" name=\"wzfb_qklb\" value=\"\"  placeholder=\"\"/></td>\n" +
+        "<td class=\"xztd\"><input class=\"cg_input\" maxlength=\"100\" name=\"wzfb_note\" value=\"\"  placeholder=\"备注\"/></td>\n" +
+        "<td class=\"xztd\"><img class=\"add_img\" src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('wzfbqk_"+num+"')\"/></td>\n" +
+        "</tr>");
+    $table.append($tr);
+    $tr.calendar();
+}
+
+//本专业获奖情况
+function add_bzyhjqk() {
+    var num = fnt();
+    var $table = $("#tab_bzyhjqk");
+    var $tr=$("<tr id='bzyhjqk_"+num+"'>\n" +
+        "<td class=\"xztd\"><input class=\"cg_input xzip\" maxlength=\"100\"  id=\"bzyhjqk_material_name_"+num+"\" name=\"hjqk_name\"  value=\"\" placeholder=\"名称\"/></td>\n" +
+        "<td class=\"xztd\"><input class=\"cg_input xzip\" maxlength=\"100\" name=\"hjqk_jb\" value=\"\"  placeholder=\"级别（国家、省、市、单位）\"/></td>\n" +
+        "<td class=\"xztd\"><input class=\"cg_input xzip\" maxlength=\"100\" name=\"hjqk_note\" value=\"\"  placeholder=\"备注\"/></td>\n" +
+        "<td class=\"xztd\"><img class=\"add_img\" src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('bzyhjqk_"+num+"')\"/></td>\n" +
+        "</tr>");
+    $table.append($tr);
+    $tr.calendar();
+}
+
 //主编学术专著情况表
 function add_zbxszz(){
     var num = fnt();
@@ -443,6 +540,7 @@ function del_tr(trId){
     document.getElementById(trId).remove();
 }
 
+
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type){
             if(type == '2') { //表示暂存
@@ -464,8 +562,16 @@ function buttAdd(type){
             }else {  //表示提交
                 checkLb();
                     if ($.fireValidator() ) {
-                        if($("#xkfladd").children().hasClass("el-tag")){
-                            if("0"==is_unit_advise_used||$("#fileNameDiv").children().children().hasClass("whetherfile")){
+                                if(!$("#xkfladd").children().hasClass("el-tag")&&$("#xkflbt").val()=="yes"){
+                                    window.message.info("请选择学科分类！");
+                                    return ;
+                                }else if(!$("#nrfladd").children().hasClass("el-tag")&&$("#nrflbt").val()=="yes"){
+                                    window.message.info("请选择内容分类！");
+                                    return ;
+                                }else if(!$("#sbzyadd").children().hasClass("el-tag")&&$("#sbzybx").val()=="yes"){
+                                    window.message.info("请选择申报专业！");
+                                    return ;
+                                }
                             	if($("#sbdw_id").val()){
                             		$.ajax({
                                         type: "POST",
@@ -483,15 +589,9 @@ function buttAdd(type){
                             	}else{
                             		window.message.info("请选择申报单位！");
                             	}
-                            }else{
-                                window.message.info("请上传所在单位意见附件！");
                             }
-                        }else{
-                            window.message.info("请选择学科分类！")
-                        }
-
                     }
-            }
+
             //  }
 }
 /**
@@ -647,6 +747,19 @@ function ContentAdd(material_id){
         content: contextpath+"expertation/queryContent.action?material_id="+material_id
     });
 }
+
+//申报专业选择
+function sbzyAdd(product_id){
+    layer.open({
+        type: 2,
+        area: ['800px', '600px'],
+        fixed: false, //不固定
+        title:'申报专业选择',
+        maxmin: true,
+        content: contextpath+"expertation/toSearchZy.action?product_id="+product_id
+    });
+}
+
 
 //输入长度限制校验，ml为最大字节长度
 function LengthLimit(obj,ml){
@@ -805,6 +918,12 @@ function addContent(str){
     box.innerHTML = box.innerHTML+str;
 }
 
+//添加申报专业span标签元素
+function addSbzy(str){
+    var box = document.getElementById("sbzyadd");
+    box.innerHTML = box.innerHTML+str;
+}
+
 //打印
 function toprint(){
     $(".yijian").css("display","block");
@@ -825,3 +944,4 @@ function orgAdd(product_id){
         content: contextpath+"expertation/toSearchOrg.action?product_id="+product_id
     });
 }
+

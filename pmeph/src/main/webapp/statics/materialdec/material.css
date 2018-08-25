@@ -377,3 +377,11 @@ a.input {
 	margin-left: 10px;
 	cursor: pointer;
 }
+
+#sbzytb{
+	background-image: url(../image/zhuanye.png);
+	height: 19px;
+	width: 19px;
+	float: left;
+	background-size: 100% 100%;
+}
