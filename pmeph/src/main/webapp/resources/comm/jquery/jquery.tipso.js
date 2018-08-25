@@ -579,7 +579,7 @@
                         .call(args, 1));
                 }
                 if (options === 'destroy') {
-                	var desTempIndex = 0 ;
+                	var desTempIndex = -1 ;
                 	for ( var i = 0 ;i<list.length;i++) {
                 		var item = list[i];
                 		if(this.id == item.element.attr("id")){
@@ -588,7 +588,10 @@
                 		}
 					}
                 	//从fireValidator校验列表中删除此项
-                	list.splice(desTempIndex, 1); 
+                	if(desTempIndex>=0){
+                		list.splice(desTempIndex, 1); 
+                	}
+                	
                 	
                     $.data(this, 'plugin_' + pluginName, null);
                 }
