@@ -97,4 +97,9 @@ public interface PersonInfoDao {
 		public int insertPreWzfbqk(Map<String, Object> map);
 	    public int updatePreWzfbqk(Map<String, Object> map);
 
+	    //本专业获奖详情
+		public int insertPreBzyhjqk(Map<String, Object> map);
+		public int updatePreBzyhjqk(Map<String, Object> map);
+
+
 }

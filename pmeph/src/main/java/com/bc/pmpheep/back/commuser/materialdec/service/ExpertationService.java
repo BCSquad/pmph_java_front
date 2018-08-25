@@ -28,7 +28,8 @@ public interface ExpertationService {
 	 */
 	public Map<String,Object> updateJcsbxx(Map<String, Object> perMap, List<Map<String, Object>> stuList, List<Map<String, Object>> workList,
 				   List<Map<String, Object>> zjxsList, List<Map<String, Object>> zjkzqkList,List<Map<String, Object>> monographList,
-				   List<Map<String, Object>> pmphList,List<Map<String,Object>> subjectList,List<Map<String,Object>> contentList,List<Map<String,Object>> editorList,String declaration_id
+				   List<Map<String, Object>> pmphList,List<Map<String,Object>> subjectList,List<Map<String,Object>> contentList,List<Map<String,Object>> editorList, List<Map<String, Object>> wzfbqkList,
+                                           List<Map<String, Object>> bzyhjqkList,String declaration_id
 	);
 
     /**
@@ -158,4 +159,8 @@ public interface ExpertationService {
 	 * 机构选择
 	 */
 	PageResult<Map<String, Object>> selectOrgList(PageParameter<Map<String, Object>> pageParameter);
+	/**
+	 * 机构选择
+	 */
+	PageResult<Map<String, Object>> selectZyList(PageParameter<Map<String, Object>> pageParameter);
 }

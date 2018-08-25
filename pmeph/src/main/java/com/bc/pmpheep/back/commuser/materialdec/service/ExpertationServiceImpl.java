@@ -234,15 +234,15 @@ public class ExpertationServiceImpl implements ExpertationService {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
                     if(!map.get("per_id").equals("")) {
-                        //this.peradd.updatePreBzyhjqk(map);
+                        this.peradd.updatePreBzyhjqk(map);
                     }else{
                         map.put("user_id", user_id);
                         map.put("per_id", per_id);
-                        //this.peradd.insertPreBzyhjqk(map);
+                        this.peradd.insertPreBzyhjqk(map);
                     }
                 }
                 map.put("declaration_id", declaration_id);
-                //this.exdao.insertBzyhjqk(map);
+                this.exdao.insertBzyhjqk(map);
             }
         }
         Map<String,Object> returnMap = new HashMap<String,Object>();
@@ -262,6 +262,8 @@ public class ExpertationServiceImpl implements ExpertationService {
                                            List<Map<String,Object>> subjectList,
                                            List<Map<String,Object>> contentList,
                                            List<Map<String,Object>> editorList,
+                                           List<Map<String, Object>> wzfbqkList,
+                                           List<Map<String, Object>> bzyhjqkList,
                                            String declaration_id) {
         //修改申报信息
         perMap.put("declaration_id", declaration_id);
@@ -283,8 +285,11 @@ public class ExpertationServiceImpl implements ExpertationService {
         this.exdao.delZjkzbb(glMap);   //扩展信息
         this.exdao.DelRwsjc(glMap);  //人卫社教材
         this.exdao.delEditor(glMap);  //主编或参编图书情况
+        this.exdao.DelWzfbqk(glMap);//删除文章发表情况
+        this.exdao.DelBzyhjqk(glMap);//删除本专业获奖情况
         this.exdao.delContent(declaration_id);
         this.exdao.delSubject(declaration_id);
+
 
         //学科分类
         if (subjectList != null && !subjectList.isEmpty()) {
@@ -317,6 +322,43 @@ public class ExpertationServiceImpl implements ExpertationService {
                 this.exdao.insertStu(map);
             }
         }
+
+        //文章发表情况新增
+        if (wzfbqkList != null && !wzfbqkList.isEmpty()) {
+            for (Map<String, Object> map : wzfbqkList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePreWzfbqk(map);
+                    }else{
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPreWzfbqk(map);
+                    }
+                }
+                map.put("declaration_id", declaration_id);
+                this.exdao.insertWzfbqk(map);
+            }
+        }
+
+        //本专业获奖情况新增
+        if (bzyhjqkList != null && !bzyhjqkList.isEmpty()) {
+            for (Map<String, Object> map : bzyhjqkList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePreBzyhjqk(map);
+                    }else{
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPreBzyhjqk(map);
+                    }
+                }
+                map.put("declaration_id", declaration_id);
+                this.exdao.insertBzyhjqk(map);
+            }
+        }
+
         //4.作家工作经历新增
         if (workList != null && !workList.isEmpty()) {
             for (Map<String, Object> map : workList) {
@@ -559,6 +601,21 @@ public class ExpertationServiceImpl implements ExpertationService {
         pageResult.setPageSize(pageParameter.getPageSize());
 
         List<Map<String, Object>> list = exdao.queryOrgList(pageParameter);
+        int count = exdao.queryOrgCount(pageParameter);
+
+        pageResult.setRows(list);
+        pageResult.setTotal(count);
+        return pageResult;
+    }
+
+    @Override
+    public PageResult<Map<String, Object>> selectZyList(
+            PageParameter<Map<String, Object>> pageParameter) {
+        PageResult<Map<String, Object>> pageResult = new PageResult<Map<String, Object>>();
+        pageResult.setPageNumber(pageParameter.getPageNumber());
+        pageResult.setPageSize(pageParameter.getPageSize());
+
+        List<Map<String, Object>> list = exdao.queryZyList(pageParameter);
         int count = exdao.queryOrgCount(pageParameter);
 
         pageResult.setRows(list);

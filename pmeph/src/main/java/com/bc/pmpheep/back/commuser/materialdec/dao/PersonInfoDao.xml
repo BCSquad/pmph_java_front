@@ -130,6 +130,14 @@
 		update pre_article_publicshed set user_id=#{user_id},title=#{title},periodical_title=#{periodical_title},
 		year_volume_period=#{year_volume_period},periodical_level=#{periodical_level},note=#{note} where id = #{per_id}
 	</update>
+	<!--本专业获奖情况新增-->
+	<insert id="insertPreBzyhjqk" parameterType="java.util.Map">
+		insert into pre_profession_award (id,user_id,title,rank,note)
+		values(#{id},#{user_id},#{title},#{rank},#{note});
+	</insert>
+	<update id="updatePreBzyhjqk" parameterType="java.util.Map">
+		update pre_profession_award set user_id=#{user_id},title=#{title},rank=#{rank},note=#{note} where id = #{per_id}
+	</update>
 	<update id="updatePerRwsjc" parameterType="java.util.Map">
 		update per_textbook_pmph set material_name = #{material_name},rank=#{rank},position=#{position},publish_date=#{publish_date},
 		isbn=#{isbn},is_digital_editor=#{is_digital_editor},note=#{note},sort=#{sort} where id = #{per_id}
