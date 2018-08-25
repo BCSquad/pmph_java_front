@@ -227,6 +227,11 @@ public class ExpertationServiceImpl implements ExpertationService {
                                            String declaration_id) {
         //修改申报信息
         perMap.put("declaration_id", declaration_id);
+        
+        if(perMap.get("org_id")!=null && "".equals(perMap.get("org_id").toString().trim()) ){
+    		perMap.put("org_id",null); //若暂存未选机构
+    	}
+        
         this.exdao.updatePerson(perMap);
         //获取userid
         String user_id = perMap.get("user_id").toString();
@@ -234,6 +239,7 @@ public class ExpertationServiceImpl implements ExpertationService {
             this.madd.updateWriter(perMap);
 
         }
+        
         //删除暂存内容
         Map<String, Object> glMap = new HashMap<String, Object>();
         glMap.put("declaration_id", declaration_id);
