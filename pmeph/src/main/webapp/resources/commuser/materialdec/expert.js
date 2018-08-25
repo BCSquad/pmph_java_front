@@ -135,8 +135,12 @@ function chooseModel(data){
         if(data.is_edu_exp_required == "1"){
             $("#zyxxjl_bt").css("display","inline");
             jsonStr=jsonStr+"{\"id\":\"xx_kssj\",\"content\":\"学习经历起止时间必填\"},";
-            $('#xx_kssj').tipso({validator: "isNonEmpty", message: "学习开始时间必填"})
-            $('#xx_jssj').tipso({validator: "isNonEmpty", message: "学习结束时间必填"})
+            
+            tipsoAllByName("xx_kssj","isNonEmpty","学习开始时间必填");
+            tipsoAllByName("xx_jssj","isNonEmpty","学习结束时间必填");
+            
+            /*$('#xx_kssj').tipso({validator: "isNonEmpty", message: "学习开始时间必填"})
+            $('#xx_jssj').tipso({validator: "isNonEmpty", message: "学习结束时间必填"})*/
             //给其他值默认为无
             $("#xx_jssj").val(getNowFormatDate());
             $("#xx_school_name").val("无");
@@ -154,8 +158,10 @@ function chooseModel(data){
         if(data.is_work_exp_required == "1"){
             $("#gzjl_bt").css("display","inline");
             jsonStr=jsonStr+"{\"id\":\"gz_kssj\",\"content\":\"工作经历必填\"},";
-            $('#gz_kssj').tipso({validator: "isNonEmpty", message: "工作开始时间必填"})
-            $('#gz_jssj').tipso({validator: "isNonEmpty", message: "工作结束时间必填"})
+            tipsoAllByName("gz_kssj","isNonEmpty","工作开始时间必填");
+            tipsoAllByName("gz_jssj","isNonEmpty","工作结束时间必填");
+            /*$('#gz_kssj').tipso({validator: "isNonEmpty", message: "工作开始时间必填"})
+            $('#gz_jssj').tipso({validator: "isNonEmpty", message: "工作结束时间必填"})*/
             //给其他值默认为无
             $("#gz_jssj").val(getNowFormatDate());
             $("#gz_org_name").val("无");
@@ -171,7 +177,8 @@ function chooseModel(data){
         if(data.is_acade_required == "1"){
             $("#xsjz_bt").css("display","inline");
             jsonStr=jsonStr+"{\"id\":\"xs_org_name\",\"content\":\"学术兼职必填\"},";
-            $('#xs_org_name').tipso({validator: "isNonEmpty", message: "学术兼职必填"})
+            tipsoAllByName("xs_org_name","isNonEmpty","学术兼职必填");
+            /*$('#xs_org_name').tipso({validator: "isNonEmpty", message: "学术兼职必填"})*/
             //给其他值默认为无
             $("#xs_position").val("无");
         }else{
@@ -185,7 +192,8 @@ function chooseModel(data){
         if(data.is_pmph_textbook_required == "1"){
             $("#rwsjcbx_bt").css("display","inline");
             jsonStr=jsonStr+"{\"id\":\"pmph_material_name\",\"content\":\"人卫社教材编写情况必填\"},";
-            $('#pmph_material_name').tipso({validator: "isNonEmpty", message: "人卫社教材编写情况必填"})
+            tipsoAllByName("pmph_material_name","isNonEmpty","人卫社教材编写情况必填");
+            /*$('#pmph_material_name').tipso({validator: "isNonEmpty", message: "人卫社教材编写情况必填"})*/
             //给其他值默认为无
             $("#pmph_publish_date").val(getNowFormatDate());
             $("#pmph_isbn").val("978-7-117-1");
@@ -201,7 +209,8 @@ function chooseModel(data){
         if(data.is_monograph_required == "1"){
             $("#zbxszz_bt").css("display","inline");
             jsonStr=jsonStr+"{\"id\":\"zb_monograph_name\",\"content\":\"专著名称必填\"},";
-            $('#zb_monograph_name').tipso({validator: "isNonEmpty", message: "专著名称必填"})
+            tipsoAllByName("zb_monograph_name","isNonEmpty","专著名称必填");
+            /*$('#zb_monograph_name').tipso({validator: "isNonEmpty", message: "专著名称必填"})*/
             //给其他值默认为无
             $("#zb_monograph_date").val(getNowFormatDate());
             $("#zb_publish_date").val(getNowFormatDate());
@@ -216,7 +225,8 @@ function chooseModel(data){
         //主编学术专著情况必填
         if(data.is_edit_book_required == "1"){
             $("#zbcb_bt").css("display","inline");
-            $('#zbts_material_name').tipso({validator: "isNonEmpty", message: "专著名称必填"})
+            tipsoAllByName("zbts_material_name","isNonEmpty","专著名称必填");
+            /*$('#zbts_material_name').tipso({validator: "isNonEmpty", message: "专著名称必填"})*/
             //给其他值默认为无
             $("#zbts_publish_date").val(getNowFormatDate());
             $("#zbts_publisher").val("无");
@@ -225,6 +235,19 @@ function chooseModel(data){
         }
     }
 }
+
+/**
+ * 给所有当前已存在的某name的input新增validStr的tipso校验，提示为message
+ */
+function tipsoAllByName(name,validStr,message){
+	$("input[name='"+name+"']").each(function(){
+		var $t = $(this);
+		$t.tipso({validator: validStr, message: message});
+	});
+};
+
+
+
 
 //生成随机数
 function only(ele,arr){

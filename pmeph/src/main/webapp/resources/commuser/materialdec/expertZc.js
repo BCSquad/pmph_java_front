@@ -155,7 +155,9 @@ function chooseModel(data){
         //学习经历必填
         if(data.is_edu_exp_required == "1"){
             $("#zyxxjl_bt").css("display","inline");
-            $('#xx_kssj').tipso({validator: "isNonEmpty", message: "学习经历起止时间必填"})
+            tipsoAllByName("xx_kssj","isNonEmpty","学习开始时间必填");
+            tipsoAllByName("xx_jssj","isNonEmpty","学习结束时间必填");
+            /*$('#xx_kssj').tipso({validator: "isNonEmpty", message: "学习经历起止时间必填"})*/
             //给其他值默认为无
             $("#xx_jssj").val(getNowFormatDate());
             $("#xx_school_name").val("无");
@@ -172,7 +174,9 @@ function chooseModel(data){
         //工作经历必填
         if(data.is_work_exp_required == "1"){
             $("#gzjl_bt").css("display","inline");
-            $('#gz_kssj').tipso({validator: "isNonEmpty", message: "工作经历必填"})
+            tipsoAllByName("gz_kssj","isNonEmpty","工作开始时间必填");
+            tipsoAllByName("gz_jssj","isNonEmpty","工作结束时间必填");
+            /*$('#gz_kssj').tipso({validator: "isNonEmpty", message: "工作经历必填"})*/
             //给其他值默认为无
             $("#gz_jssj").val(getNowFormatDate());
             $("#gz_org_name").val("无");
@@ -182,11 +186,12 @@ function chooseModel(data){
         }
     }
     //教学经历
-    if(data.is_teach_exp_used == "1"){
+    /*if(data.is_teach_exp_used == "1"){
         $("#jxjl").css("display","block");
         //教学经历必填
         if(data.is_teach_exp_required == "1"){
             $("#jxjl_bt").css("display","inline");
+            tipsoAllByName("jx_kssj","isNonEmpty","教学经历必填");
             $('#jx_kssj').tipso({validator: "isNonEmpty", message: "教学经历必填"})
             //给其他值默认为无
             $("#jx_jssj").val(getNowFormatDate());
@@ -195,9 +200,9 @@ function chooseModel(data){
         }else{
             $("#jxjl_xt").css("display","inline");
         }
-    }
+    }*/
     //个人成就情况
-    if(data.is_achievement_used == "1"){
+    /*if(data.is_achievement_used == "1"){
         $("#grcjqk").css("display","block");
         //个人成就必填
         if(data.is_achievement_required == "1"){
@@ -206,14 +211,15 @@ function chooseModel(data){
         }else{
             $("#grcj_xt").css("display","inline");
         }
-    }
+    }*/
     //主要学术兼职
     if(data.is_acade_used == "1"){
         $("#xsjz").css("display","block");
         //主要学术兼职必填
         if(data.is_acade_required == "1"){
             $("#xsjz_bt").css("display","inline");
-            $('#xs_org_name').tipso({validator: "isNonEmpty", message: "学术兼职必填"})
+            tipsoAllByName("xs_org_name","isNonEmpty","学术兼职必填");
+            /*$('#xs_org_name').tipso({validator: "isNonEmpty", message: "学术兼职必填"})*/
             //给其他值默认为无
             $("#xs_position").val("无");
         }else{
@@ -221,7 +227,7 @@ function chooseModel(data){
         }
     }
     //上版教材参编情况
-    if(data.is_last_position_used == "1"){
+    /*if(data.is_last_position_used == "1"){
         $("#sbjccb").css("display","block");
         //上版教材参编情况必填
         if(data.is_last_position_required == "1"){
@@ -247,14 +253,15 @@ function chooseModel(data){
         }else{
             $("#zbgjjgh_xt").css("display","inline");
         }
-    }
+    }*/
     //人卫教材编写情况
     if(data.is_pmph_textbook_used == "1"){
         $("#rwsjcbx").css("display","block");
         //人卫教材编写情况必填
         if(data.is_pmph_textbook_required == "1"){
             $("#rwsjcbx_bt").css("display","inline");
-            $('#pmph_material_name').tipso({validator: "isNonEmpty", message: "人卫社教材编写情况必填"})
+            tipsoAllByName("pmph_material_name","isNonEmpty","人卫社教材编写情况必填");
+            /*$('#pmph_material_name').tipso({validator: "isNonEmpty", message: "人卫社教材编写情况必填"})*/
             //给其他值默认为无
             $("#pmph_publish_date").val(getNowFormatDate());
             $("#pmph_isbn").val("978-7-117-1");
@@ -264,7 +271,7 @@ function chooseModel(data){
     }
     is_pmph_textbook_required = data.is_pmph_textbook_required;
     //其他社教材编写情况
-    if(data.is_textbook_used == "1"){
+   /* if(data.is_textbook_used == "1"){
         $("#qtjcbxqk").css("display","block");
         //其他社教材编写情况必填
         if(data.is_textbook_required == "1"){
@@ -316,14 +323,15 @@ function chooseModel(data){
         }else{
             $("#zjkyqk_xt").css("display","inline");
         }
-    }
+    }*/
     //主编学术专著情况
     if(data.is_monograph_used == "1"){
         $("#zbxszz").css("display","block");
         //主编学术专著情况必填
         if(data.is_monograph_required == "1"){
             $("#zbxszz_bt").css("display","inline");
-            $('#zb_monograph_name').tipso({validator: "isNonEmpty", message: "专著名称必填"})
+            tipsoAllByName("zb_monograph_name","isNonEmpty","专著名称必填");
+            /*$('#zb_monograph_name').tipso({validator: "isNonEmpty", message: "专著名称必填"})*/
             //给其他值默认为无
             $("#zb_monograph_date").val(getNowFormatDate());
             $("#zb_publish_date").val(getNowFormatDate());
@@ -338,7 +346,8 @@ function chooseModel(data){
         //主编学术专著情况必填
         if(data.is_edit_book_required == "1"){
             $("#zbcb_bt").css("display","inline");
-            $('#zbts_material_name').tipso({validator: "isNonEmpty", message: "专著名称必填"})
+            tipsoAllByName("zbts_material_name","isNonEmpty","专著名称必填");
+            /*$('#zbts_material_name').tipso({validator: "isNonEmpty", message: "专著名称必填"})*/
             //给其他值默认为无
             $("#zbts_publish_date").val(getNowFormatDate());
             $("#zbts_publisher").val("无");
@@ -347,7 +356,7 @@ function chooseModel(data){
         }
     }
     //出版行业获奖情况
-    if(data.is_publish_reward_used == "1"){
+    /*if(data.is_publish_reward_used == "1"){
         $("#publish").css("display","block");
         //出版行业获奖情况必填
         if(data.is_publish_reward_required == "1"){
@@ -411,9 +420,19 @@ function chooseModel(data){
         }else{
             $("#intention_xt").css("display","inline");
         }
-    }
+    }*/
 
 }
+
+/**
+ * 给所有当前已存在的某name的input新增validStr的tipso校验，提示为message
+ */
+function tipsoAllByName(name,validStr,message){
+	$("input[name='"+name+"']").each(function(){
+		var $t = $(this);
+		$t.tipso({validator: validStr, message: message});
+	});
+};
 
 //生成随机数
 function only(ele,arr){

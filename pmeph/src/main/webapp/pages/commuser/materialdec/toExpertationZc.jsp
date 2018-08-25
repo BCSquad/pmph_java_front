@@ -670,7 +670,7 @@
                         <tbody>
                         <c:if test="${empty editorList[0]}">
                             <tr>
-                                <td><input class="cg_input" maxlength="100" style="width: 320px" id="jc_material_name"
+                                <td><input class="cg_input" maxlength="100" style="width: 320px" 
                                            name="zbts_material_name" id="zbts_material_name" value="" style="width: 260px;"
                                            placeholder="教材名称"/></td>
                                 <td><input class="cg_input" name="zbts_publisher" value=""
