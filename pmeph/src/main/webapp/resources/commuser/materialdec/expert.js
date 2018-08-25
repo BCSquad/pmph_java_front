@@ -496,7 +496,7 @@ function add_zbtsqk(){
     $table.append($tr);
     $tr.calendar();
     if(expertMap.is_edit_book_required == "1"){
-    	$('#zbts_material_name'+num).tipso({validator: "isNonEmpty", message: "专著名称必填"});
+    	$('#zbts_material_name_'+num).tipso({validator: "isNonEmpty", message: "专著名称必填"});
     }
 }
 
@@ -514,6 +514,9 @@ function add_wzfbqk() {
         "</tr>");
     $table.append($tr);
     $tr.calendar();
+    if(expertMap.is_article_published_required == "1"){
+        $('#wzfbqk_material_name_'+num).tipso({validator: "isNonEmpty", message: "文章发表情况必填"});
+    }
 }
 
 //本专业获奖情况
@@ -528,6 +531,9 @@ function add_bzyhjqk() {
         "</tr>");
     $table.append($tr);
     $tr.calendar();
+    if(expertMap.is_profession_award_required == "1"){
+        $('#bzyhjqk_material_name_'+num).tipso({validator: "isNonEmpty", message: "本专业获奖情况必填"});
+    }
 }
 
 //主编学术专著情况表
