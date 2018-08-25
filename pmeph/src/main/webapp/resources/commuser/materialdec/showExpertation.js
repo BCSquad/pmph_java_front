@@ -19,6 +19,13 @@ $(function () {
 
 		$("#return_cause_div").fadeIn(800);
 	}
+
+
+    setTimeout(function (){
+        //附件上传
+        upload();
+    },1000);
+
 });
 
 //页面组合方法
@@ -116,11 +123,57 @@ function chooseModel(data){
     if(data.is_edit_book_used == "1"){
         $("#zbcbtsqk").css("display","block");
     }
+
+    //文章发表情况（须第一作者，与本专业相关）
+    if(data.is_article_published_used == "1"){
+        $("#wzfbqk").css("display","block");
+    }
+    //本专业获奖情况
+    if(data.is_profession_award_used == "1"){
+        $("#bzyhjqk").css("display","block");
+    }
+
+    //学科分类
+    if(data.is_subject_type_used == "1"){
+        $("#xkfl").css("display","block");
+    }
+
+    //内容分类
+    if(data.is_content_type_used == "1"){
+        $("#lrfl").css("display","block");
+    }
+
+
 }
 
 //文件下载
 function downLoadProxy(fileId){
 	window.location.href=contextpath+'file/download/'+fileId+'.action';
+}
+
+//附件上传方法
+function upload(){
+    $("#dwyjsc").uploadFile({
+        start: function () {
+            console.log("开始上传。。。");
+        },
+        done: function (filename, fileid) {
+            $("#fileNameDiv").empty(); //清楚内容
+            $("#fileNameDiv").append("<span><div class=\"filename whetherfile\"><a href='javascript:' class='filename'  onclick='downLoadProxy("+fileid+")' title='\"+filename+\"'>"+filename+"</a></div></span>");
+            $("#fileNameDiv").css("display","inline");
+            $("#syllabus_id").val(fileid);
+            $("#syllabus_name").val(filename);
+            console.log("上传完成：name " + filename + " fileid " + fileid);
+        },
+        valid:function(file){
+            if(file.size/1024/1024>=100){ //判断文件上传大小
+                window.message.warning("不得上传100M以上文件!");
+                return false;
+            }
+            return true;
+        }
+
+    });
 }
 
 //放弃
@@ -129,18 +182,32 @@ function buttGive(){
 }
 
 //打印按钮
-function toprint() {
+function toprint(eid) {
     $("#ddd").jqprint();
+
+//打印状态
+    $.ajax({
+        type: 'post',
+        url: contextpath + 'expertationList/updPrintStatus.action?t=' + new Date().getTime()+'&did=' + eid ,
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+
+        }
+    });
+
 }
 
 
 //提交   通过3 
 function toAudit(id,type){
 	var user_id=$("#user_id").val();
+    var syllabus_id=$("#syllabus_id").val();
+    var syllabus_name=$("#syllabus_name").val();
 		$.ajax({
 			type: "POST",
 			url:contextpath+'expertation/doExpertationAuditPass.action',
-			data:{expertation_id:id,online_progress:type,user_id:user_id},// 您的formid
+			data:{expertation_id:id,online_progress:type,user_id:user_id,unit_advise:syllabus_id,syllabus_name:syllabus_name},// 您的formid
 			async: false,
 			dataType:"json",
 		    success: function(msg) {
@@ -197,6 +264,7 @@ function showup(id,type) {
     });
 }
 
+
 //点击弹窗隐藏
 function hideup() {
     $("#bookmistake").hide();
@@ -236,11 +304,23 @@ function correction() {
             } else {
                 window.message.info("请输入退回原因！");
             }
-        
-   
-
 }
 
+//单位所在意见为空  附件上传
+function toAuditPass(id,type) {
+   var sid= $("#syllabus_id").val();
+	if (sid==null||sid=="") {
+        var msg ='<font color="red" >单位所在意见为空</font>&nbsp;【确认】进行审核,【取消】可继续上传!';
+        window.message.confirm(msg,{icon: 7, title:'提示',btn:["确定","取消"]}
+            ,function(index){
+                layer.close(index);
+                toAudit(id,type);
+            }
+        );
+	}else{
+        toAudit(id,type);
+	}
+}
 
 //输入长度限制校验，ml为最大字节长度
 function LengthLimit(obj,ml){

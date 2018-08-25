@@ -69,4 +69,10 @@ public class ExpertationListAuditServiceImpl implements ExpertationListAuditServ
 	public List<Map<String, Object>> productIdList() {
 		return this.expertationListAuditDao.productIdList();
 	}
+
+	@Override
+	public void updPrintStatus(String id) {
+		this.expertationListAuditDao.updPrintStatus(id);
+
+	}
 }

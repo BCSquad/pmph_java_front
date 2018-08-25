@@ -90,4 +90,15 @@ public class ExpertationListAuditController extends com.bc.pmpheep.general.contr
     }
 
 
+    //点击打印按钮改变打印状态
+    @RequestMapping(value = "/updPrintStatus")
+    @ResponseBody
+    public String updPrintStatus(HttpServletRequest request) {
+        String id = request.getParameter("did");
+        this.expertationListAuditService.updPrintStatus(id);
+        return "OK";
+    }
+
+
+
 }

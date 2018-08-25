@@ -16,6 +16,7 @@
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.jqprint-0.3.js?t=${_timestamp}"></script>
 	<script src="http://www.jq22.com/jquery/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+	<script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}" type="text/javascript"></script>
 <script type="text/javascript" src="${ctx}/resources/commuser/materialdec/showExpertation.js?t=${_timestamp}"></script>
 </head>
 <body>
@@ -88,6 +89,7 @@
 					</tr>
 					<tr>
 						<td><span>卡号：${gezlList.banknumber}</span></td>
+						<td><span>专业特长(疾病诊治及研究方向)：${gezlList.specialty}</span></td>
 					</tr>
 
 				</table>
@@ -188,7 +190,11 @@
 				</table>
 			</div>
 		</div>
-		<!--人卫社教材编写情况表-->
+
+
+
+
+		<!--人卫社教材编写情况-->
 		<div class="sbxq_item" id="rwsjcbx">
 			<div>
 				<span id="tsxz_span5"></span>
@@ -302,6 +308,72 @@
 				</table>
 			</div>
 		</div>
+
+			<!--文章发表情况（须第一作者，与本专业相关）-->
+			<div class="sbxq_item" id="wzfbqk" >
+				<div>
+					<span id="tsxz_span7"></span>
+					<span class="tsxz_title">文章发表情况（须第一作者，与本专业相关）</span>
+				</div>
+				<div class="content">
+					<table class="tab_2" id="tab_wzfbqk">
+						<thead>
+						<tr>
+							<td width="300px">题目</td>
+							<td width="150px">期刊名称</td>
+							<td width="100px">年、卷、期</td>
+							<td width="250px">期刊级别（SCI或国内核心期刊）</td>
+							<td>备注</td>
+						</tr>
+						</thead>
+						<tbody>
+						<c:forEach var="list" items="${wzfbqkList}">
+							<tr>
+								<td>${list.title}</td>
+								<td>${list.periodical_title}</td>
+								<td>${list.year_volume_period}</td>
+								<td>${list.periodical_level}</td>
+								<td>${list.note}</td>
+							</tr></c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!--本专业获奖情况-->
+			<div class="sbxq_item" id="bzyhjqk" >
+				<div>
+					<span id="tsxz_span7"></span>
+					<span class="tsxz_title">本专业获奖情况</span>
+				</div>
+				<div class="content">
+					<table class="tab_2" id="tab_bzyhjqk">
+						<thead>
+						<tr>
+							<td width="440px">名称</td>
+							<td width="340px">级别（国家、省、市、单位）</td>
+							<td>备注</td>
+						</tr>
+						</thead>
+						<tbody>
+						<c:forEach var="list" items="${bzyhjqkList}">
+							<tr>
+								<td>${list.title}</td>
+								<td>
+									<c:if test="${list.rank == '0'}">无</c:if>
+									<c:if test="${list.rank == '1'}">国家</c:if>
+									<c:if test="${list.rank == '2'}">省</c:if>
+									<c:if test="${list.rank == '3'}">市</c:if>
+									<c:if test="${list.rank == '4'}">单位</c:if>
+								</td>
+								<td>${list.note}</td>
+							</tr></c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+
 		<!--扩展信息-->
 		<c:forEach var="zjkzxx" items="${zjkzqkList}">
 			<div class="sbxq_item1">
@@ -317,7 +389,7 @@
 			</div>
 		</c:forEach>
 		<!-- 学科分类-->
-		<div class="sbxq_item1">
+		<div class="sbxq_item1"  id="xkfl">
 			<div>
 				<span id="tsxz_span8"></span>
 				<span class="tsxz_title">学科分类(可多选)</span>
@@ -332,7 +404,7 @@
 			</div>
 		</div>
 		<!-- 内容分类-->
-		<div class="sbxq_item1">
+		<div class="sbxq_item1" id="lrfl">
 			<div>
 				<span id="tsxz_span12" style="margin-top: 6px"></span>
 				<span class="tsxz_title">内容分类(可多选)</span>
@@ -369,21 +441,26 @@
 			<div class="tujian03">年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</div>
 		</div>
 
-
+        </div>
 		<!-- 院校推荐意见(仅打印显示) end -->
+		<c:if test="${state == 'audit' }">
+                <div class="sbxq_item" id="szdwyj" style="display: block">
+                    <div>
+                        <span id="tsxz_span13"></span>
+                        <span class="tsxz_title"><%--<img src="${ctx}/statics/image/btxx.png" />--%>所在单位意见<span style="color: red">(上传单位盖章的申报表)</span></span>
+                    </div>
+                    <div style="height: 30px;margin-top: 10px;">
+                        <div class="scys" id="dwyjsc"><span>上传文件</span></div>
+                        <div id="fileNameDiv" class="fileNameDiv"></div>
+                        <input type="hidden" name="syllabus_id" id="syllabus_id" value="${gezlList.unit_advise}"/>
+                        <input type="hidden" name="syllabus_name" id="syllabus_name" value="${gezlList.syllabus_name}"/>
+                        <%--<div class="filename"><a href="javascript:" onclick="downLoadProxy('${gezlList.unit_advise}')"
+                                                 title="${gezlList.syllabus_name}">${gezlList.syllabus_name}</a></div>--%>
+                    </div>
+                </div>
+		</c:if>
 
-		<div class="sbxq_item" id="szdwyj">
-			<div>
-				<span id="tsxz_span13"></span>
-				<span class="tsxz_title"><%--<img src="${ctx}/statics/image/btxx.png" />--%>所在单位意见<span style="color: red">(上传单位盖章的申报表)</span></span>
-			</div>
-			<div style="height: 30px;margin-top: 10px;">
-				<div class="filename"><a href="javascript:" onclick="downLoadProxy('${gezlList.unit_advise}')"
-										 title="${gezlList.syllabus_name}">${gezlList.syllabus_name}</a>
-				</div>
-			</div>
-		</div>
-		</div>
+
         <input type="hidden" id="declaration_id" value="${declaration_id}">
 		<!-- 打印按钮(查看界面的打印按钮，与下面的确认打印不是同一个按钮)-->
 		<div class="out" id="print_look" onclick="toprintdetail()">打印</div>
@@ -399,8 +476,8 @@
 			<div lass = "audit_wrapper">
 				<div class="audit_middle">
 					<div class="audit" id="" onclick="showup('${gezlList.id}','2')" >退回给个人</div>
-					<div class="audit pass" id="" onclick="toAudit('${gezlList.id}','3')" >审核通过</div>
-					<div class="audit" id="" onclick="toprint()" >打印</div>
+					<div class="audit pass" id="" onclick="toAuditPass('${gezlList.id}','3')" >审核通过</div>
+					<div class="audit" id="" onclick="toprint('${gezlList.id}')" >打印</div>
 					<div class="audit" id="" onclick="javascript:history.go(-1)" >返回</div>
 				</div>
 			</div>
@@ -427,14 +504,13 @@
 					        </div>
 				        </c:if>
 	                </div>
-	                
-	          
 	                <div class="return_cause_btn_wrapper">
 	                	<button class="btn" type="button" onclick="hideup()">取消</button>
 	                    <button class="btn" type="button" onclick="correction()">确认</button>
 	                </div>
 	            </form>
 	        </div>
+
 	        <!-- 退回原因显示悬浮框 -->
 	        <div class="bookmistake" id="return_cause_div">
 	                <div class="apache">

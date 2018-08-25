@@ -95,6 +95,14 @@ public interface ExpertationDao {
 	public int insertEditor(Map<String, Object> map);
 	public int delEditor(Map<String, Object> map);
 
+	//文章发表情况（须第一作者，与本专业相关）
+	public List<Map<String,Object>> queryWzfbqk(Map<String, Object> map);
+
+
+	//本专业获奖情况
+	public List<Map<String,Object>> queryBzyhjqk(Map<String, Object> map);
+
+
 	//主编学术专著情况
 	public List<Map<String,Object>> queryMonograph(Map<String, Object> map);
 	public int insertMonograph(Map<String, Object> map);

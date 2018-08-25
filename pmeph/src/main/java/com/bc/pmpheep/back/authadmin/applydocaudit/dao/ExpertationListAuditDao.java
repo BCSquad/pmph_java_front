@@ -39,4 +39,7 @@ public interface ExpertationListAuditDao {
      * @return
      */
     List<Map<String, Object>> productIdList();
+
+    //打印状态改变
+    void updPrintStatus(String id);
 }

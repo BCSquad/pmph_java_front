@@ -70,6 +70,7 @@
                 <td>职务</td>
                 <td>职称</td>
                 <td>学校审核</td>
+                <td>打印状态</td>
             </tr>
             </thead>
             <tbody id='tb'>
@@ -88,6 +89,7 @@
                     <td>${item.position } </td>
                     <td>${item.title } </td>
                     <td>${item.online_progress } </td>
+                    <td>${item.isprint } </td>
                 </tr>
             </c:forEach>
             </tbody>
