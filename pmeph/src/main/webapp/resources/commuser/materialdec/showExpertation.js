@@ -135,12 +135,27 @@ function chooseModel(data){
 
     //学科分类
     if(data.is_subject_type_used == "1"){
-        $("#xkfl").css("display","block");
+        $("#xkflxs").css("display","block");
     }
 
     //内容分类
     if(data.is_content_type_used == "1"){
-        $("#lrfl").css("display","block");
+        $("#nrflxs").css("display","block");
+    }
+
+    //申报专业
+    if(data.is_profession_type_used == "1"){
+        $("#sbzyxs").css("display","block");
+    }
+
+    //文章发表情况
+    if(data.is_article_published_used == "1"){
+        $("#wzfbqk").css("display","block");
+    }
+
+    //本专业获奖情况
+    if(data.is_profession_award_used == "1"){
+        $("#bzyhjqk").css("display","block");
     }
 
 

@@ -89,6 +89,10 @@ public class ExpertationController extends BaseController{
 		List<Map<String,Object>> perpmphList = new ArrayList<Map<String,Object>>();
 		//20.主编或参编图书情况
 		List<Map<String,Object>> pereditorList = new ArrayList<Map<String,Object>>();
+		//16.文章发表情况
+		List<Map<String,Object>> wzfbqkList = new ArrayList<Map<String,Object>>();
+		//16.本专业获奖情况
+		List<Map<String,Object>> bzyhjqkList = new ArrayList<Map<String,Object>>();
 
 		Map<String,Object> queryMap = new HashMap<String,Object>();
 
@@ -120,6 +124,8 @@ public class ExpertationController extends BaseController{
         permonographList=this.perService.queryPerMonograph(queryMap);
         perpmphList=this.perService.rwsjcPerList(queryMap);
 		pereditorList=this.perService.queryPerEditor(queryMap);
+		wzfbqkList = this.etService.queryWzfbqk(queryMap);
+		bzyhjqkList= this.etService.queryBzyhjqk(queryMap);
 
 		//作家扩展信息
 		List<Map<String,Object>> zjkzxxList = this.etService.queryZjkzxxById(productMap.get("id").toString());
@@ -133,6 +139,8 @@ public class ExpertationController extends BaseController{
 		mav.addObject("permonographList",permonographList);
 		mav.addObject("perpmphList",perpmphList);
 		mav.addObject("pereditorList",pereditorList);
+		mav.addObject("wzfbqkList",wzfbqkList);
+		mav.addObject("bzyhjqkList",bzyhjqkList);
 		return mav;
 	}
 	
@@ -170,6 +178,7 @@ public class ExpertationController extends BaseController{
 		String sjump = request.getParameter("sjump"); //页面来源
 
 		Map<String,Object> productMap =  new HashMap<String,Object>();
+		//查看灵床信息
 		productMap = this.etService.queryProduct(expert_type);
 		//求出信息集合
 		//1.作家申报表
@@ -188,6 +197,10 @@ public class ExpertationController extends BaseController{
 		List<Map<String,Object>> pmphList = new ArrayList<Map<String,Object>>();
 		//19.主编或参编图书情况
 		List<Map<String,Object>> editorList = new ArrayList<Map<String,Object>>();
+		//20.文章发表情况
+		List<Map<String,Object>> wzfbqkList = new ArrayList<Map<String,Object>>();
+		//21.本专业获奖情况
+		List<Map<String,Object>> bzyhjqkList = new ArrayList<Map<String,Object>>();
 
 		String is_background = "0";
 		String msg = "";
@@ -244,13 +257,17 @@ public class ExpertationController extends BaseController{
 		perMap.put("remark", request.getParameter("remark"));
 		perMap.put("unit_advise", request.getParameter("syllabus_id"));
 		perMap.put("syllabus_name", request.getParameter("syllabus_name"));
-		perMap.put("org_id", request.getParameter("sbdw_id"));
+		String s=request.getParameter("sbdw_id");
+		perMap.put("org_id","".equals(request.getParameter("sbdw_id")) ? null:request.getParameter("sbdw_id"));
+
 		
 		//获取学科及内容分类id
 		String subjectIds[] = request.getParameterValues("subjectId");
         String contentIds[] = request.getParameterValues("contentId");
+		String sbzyIds[] = request.getParameterValues("sbzyId");
 		List<Map<String,Object>> subjectList = new ArrayList<Map<String,Object>>();
 		List<Map<String,Object>> contentList = new ArrayList<Map<String,Object>>();
+		List<Map<String,Object>> sbzyList = new ArrayList<Map<String,Object>>();
 		if(subjectIds!=null&&subjectIds.length>0){
 			for(int i=0;i<subjectIds.length;i++) { //遍历数组
 				Map<String,Object> subjectMap = new HashMap<String,Object>();
@@ -263,6 +280,13 @@ public class ExpertationController extends BaseController{
 				Map<String,Object> contentMap = new HashMap<String,Object>();
 				contentMap.put("contentId", contentIds[i]);
 				contentList.add(contentMap);
+			}
+		}
+		if(sbzyIds!=null&&sbzyIds.length>0){
+			for(int i=0;i<sbzyIds.length;i++) { //遍历数组
+				Map<String,Object> sbzyMap = new HashMap<String,Object>();
+				sbzyMap.put("sbzyId", sbzyIds[i]);
+				sbzyList.add(sbzyMap);
 			}
 		}
 
@@ -412,11 +436,49 @@ public class ExpertationController extends BaseController{
 			}
 		}
 
+		//文章发表情况
+		String wzfb_name[] = request.getParameterValues("wzfb_name");
+		String wzfb_qkmc[] = request.getParameterValues("wzfb_qkmc");
+		String wzfb_njq[] = request.getParameterValues("wzfb_njq");
+		String wzfb_qklb[] = request.getParameterValues("wzfb_qklb");
+		String wzfb_note[] = request.getParameterValues("wzfb_note");
+        String wzfbxq_id[] = request.getParameterValues("wzfbxq_id");
+		for(int i=0;i<wzfb_name.length;i++){//遍历数组
+			if(!wzfb_name[i].equals("")){ //判断是否存在
+				Map<String,Object> WzfbMap = new HashMap<String,Object>();
+				WzfbMap.put("title", wzfb_name[i]);
+				WzfbMap.put("periodical_title", "".equals(wzfb_qkmc[i]) ? null:wzfb_qkmc[i]);
+				WzfbMap.put("year_volume_period", "".equals(wzfb_njq[i]) ? null:wzfb_njq[i]);
+				WzfbMap.put("periodical_level", "".equals(wzfb_qklb[i]) ? null:wzfb_qklb[i]);
+				WzfbMap.put("note", "".equals(wzfb_note[i]) ? null:wzfb_note[i]);
+				WzfbMap.put("sort", i);
+				WzfbMap.put("per_id", wzfbxq_id[i]);
+				wzfbqkList.add(WzfbMap);
+			}
+		}
+
+		//本专业获奖情况
+		String hjqk_name[] = request.getParameterValues("hjqk_name");
+		String hjqk_jb[] = request.getParameterValues("hjqk_jb");
+		String hjqk_note[] = request.getParameterValues("hjqk_note");
+        String bzyhqqk_id[] = request.getParameterValues("bzyhqqk_id");
+		for(int i=0;i<hjqk_name.length;i++){//遍历数组
+			if(!hjqk_name[i].equals("")){ //判断是否存在
+				Map<String,Object> HjqkMap = new HashMap<String,Object>();
+				HjqkMap.put("title", hjqk_name[i]);
+				HjqkMap.put("rank", "".equals(hjqk_jb[i]) ? null:hjqk_jb[i]);
+				HjqkMap.put("note", "".equals(hjqk_note[i]) ? null:hjqk_note[i]);
+				HjqkMap.put("sort", i);
+				HjqkMap.put("per_id", bzyhqqk_id[i]);
+				bzyhjqkList.add(HjqkMap);
+			}
+		}
+
         Map<String,Object> returnMap =  new HashMap<String,Object>();
 		if(expertation_id == null || expertation_id.length() <= 0){//表示新增
-            returnMap = this.etService.insertJcsbxx(perMap, stuList, workList, zjxsList, zjkzqkList, monographList, pmphList,subjectList,contentList,editorList);
+            returnMap = this.etService.insertJcsbxx(perMap, stuList, workList, zjxsList, zjkzqkList, monographList, pmphList,subjectList,contentList,sbzyList,editorList,wzfbqkList,bzyhjqkList);
 		}else{
-            returnMap=this.etService.updateJcsbxx(perMap, stuList, workList, zjxsList, zjkzqkList, monographList, pmphList,subjectList,contentList,editorList,expertation_id);
+            returnMap=this.etService.updateJcsbxx(perMap, stuList, workList, zjxsList, zjkzqkList, monographList, pmphList,subjectList,contentList,sbzyList,editorList,wzfbqkList,bzyhjqkList,expertation_id);
 		}
 		
 		/*if(type.equals("1")){ //提交
@@ -478,6 +540,7 @@ public class ExpertationController extends BaseController{
 		//学科
 		List<Map<String,Object>> subjectList = this.etService.selectSubject(queryMap);
 		List<Map<String,Object>> contentList = this.etService.selectContent(queryMap);
+		List<Map<String,Object>> sbzyList = this.etService.selectSbzy(queryMap);
 		//3.作家学习经历表
 		List<Map<String,Object>> stuList = new ArrayList<Map<String,Object>>();
 		stuList=this.etService.queryStu(queryMap);
@@ -523,6 +586,7 @@ public class ExpertationController extends BaseController{
 		mav.addObject("zjkzxxList", zjkzxxList);
 		mav.addObject("subjectList", subjectList);
 		mav.addObject("contentList", contentList);
+		mav.addObject("sbzyList",sbzyList);
 		mav.addObject("wzfbqkList", wzfbqkList);
 		mav.addObject("bzyhjqkList", bzyhjqkList);
 
@@ -561,6 +625,7 @@ public class ExpertationController extends BaseController{
 		//学科
 		List<Map<String,Object>> subjectList = this.etService.selectSubject(queryMap);
 		List<Map<String,Object>> contentList = this.etService.selectContent(queryMap);
+		List<Map<String,Object>> sbzyList = this.etService.selectSbzy(queryMap);
 
 		//1.作家申报信息表
 		List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
@@ -598,6 +663,12 @@ public class ExpertationController extends BaseController{
 		//6.主编或参编图书情况
 		List<Map<String,Object>> editorList = new ArrayList<Map<String,Object>>();
 		editorList=this.etService.queryEditor(queryMap);
+		//文章发表详情
+		List<Map<String,Object>> wzfbqkList = new ArrayList<Map<String,Object>>();
+		wzfbqkList=this.etService.queryWzfbqk(queryMap);
+		//本专业获奖情况
+		List<Map<String,Object>> bzyhjqkList = new ArrayList<Map<String,Object>>();
+		bzyhjqkList=this.etService.queryBzyhjqk(queryMap);
 		//所选申报单位
 		Map<String,Object> org = new HashMap<String, Object>();
 		if(gezlList.get(0).get("org_id")==null){
@@ -608,8 +679,11 @@ public class ExpertationController extends BaseController{
 		
 
 		//填充
+		mav.addObject("wzfbqkList",wzfbqkList);
+		mav.addObject("bzyhjqkList",bzyhjqkList);
 		mav.addObject("subjectList", subjectList);
 		mav.addObject("contentList", contentList);
+		mav.addObject("sbzyList",sbzyList);
 		mav.addObject("gezlList", gezlList.get(0));
 		mav.addObject("stuList", stuList);
 		mav.addObject("editorList", editorList);
@@ -715,6 +789,49 @@ public class ExpertationController extends BaseController{
 		pageParameter.setParameter(paraMap);
 		PageResult<Map<String,Object>> pageResult = this.etService.selectContentList(pageParameter);
 		mav.addObject("pageResult", pageResult);
+		mav.addObject("paraMap", paraMap);
+		return mav;
+	}
+
+	//查询申报专业
+	@RequestMapping("toSearchZy")
+	public ModelAndView toSearchZy(HttpServletRequest request,
+								   HttpServletResponse response){
+		ModelAndView mav = new ModelAndView("commuser/materialdec/toSbzyList");
+		//机构信息
+		String  product_id = request.getParameter("product_id");
+		String  currentPageStr = (String) request.getParameter("currentPage");
+		String  pageSizeStr = request.getParameter("pageSize");
+		String  namepath = request.getParameter("namepath");
+		Map<String,Object> paraMap = new HashMap<String,Object>();
+		//分页查询
+		int currentPage = 0;
+		int pageSize = 10;
+
+		if(null!=currentPageStr&&!currentPageStr.equals("")){
+			currentPage = Integer.parseInt(currentPageStr);
+		}
+		if(null!=pageSizeStr&&!pageSizeStr.equals("")){
+			pageSize = Integer.parseInt(pageSizeStr);
+		}
+		PageParameter<Map<String,Object>> pageParameter = new PageParameter<>(currentPage,pageSize);
+
+		paraMap.put("product_id", product_id);
+		paraMap.put("endPage", pageSize);
+		paraMap.put("currentPage", currentPage);
+		if(namepath!=null && !namepath.equals("")){
+			try {
+				namepath = URLDecoder.decode(namepath,"UTF-8");
+				paraMap.put("name_path", "%"+namepath+"%");
+				paraMap.put("namepath", namepath);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+		pageParameter.setParameter(paraMap);
+		PageResult<Map<String,Object>> pageResult = this.etService.querySbzyList(pageParameter);
+		mav.addObject("pageResult", pageResult);
+		mav.addObject("productOrMaterial", "product");
 		mav.addObject("paraMap", paraMap);
 		return mav;
 	}
@@ -835,7 +952,8 @@ public class ExpertationController extends BaseController{
 		mav.addObject("productOrMaterial", "product");
 		mav.addObject("paraMap", paraMap);
 		return mav;
-	} 
-	
+	}
+
+
 
 }

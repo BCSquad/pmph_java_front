@@ -49,6 +49,10 @@ public class ExpertationServiceImpl implements ExpertationService {
     public List<Map<String, Object>> selectContent(Map<String, Object> map) {
         return this.exdao.selectContent(map);
     }
+    @Override
+    public List<Map<String, Object>> selectSbzy(Map<String, Object> map) {
+        return this.exdao.selectSbzy(map);
+    }
 
     @Override
     public List<Map<String, Object>> queryPerson(Map<String, Object> map) {
@@ -64,9 +68,12 @@ public class ExpertationServiceImpl implements ExpertationService {
             List<Map<String, Object>> zjkzqkList,
             List<Map<String, Object>> monographList,
             List<Map<String, Object>> pmphList,
-            List<Map<String,Object>> subjectList,
-            List<Map<String,Object>> contentList,
-            List<Map<String,Object>> editorList
+            List<Map<String, Object>> subjectList,
+            List<Map<String, Object>> contentList,
+            List<Map<String,Object>> sbzyList,
+            List<Map<String, Object>> editorList,
+            List<Map<String, Object>> wzfbqkList,
+            List<Map<String, Object>> bzyhjqkList
     ) {
         //1.新增申报表
     	if(perMap.get("org_id")!=null && "".equals(perMap.get("org_id").toString().trim()) ){
@@ -96,6 +103,13 @@ public class ExpertationServiceImpl implements ExpertationService {
             for (Map<String, Object> map : contentList) {
                 map.put("expertation_id",declaration_id);
                 this.exdao.insertContent(map);
+            }
+        }
+        //专业分类
+        if (sbzyList != null && !sbzyList.isEmpty()) {
+            for (Map<String, Object> map : sbzyList) {
+                map.put("expertation_id",declaration_id);
+                this.exdao.insertSbzy(map);
             }
         }
         //3.作家学习经历新增
@@ -207,6 +221,42 @@ public class ExpertationServiceImpl implements ExpertationService {
                 this.exdao.insertRwsjc(map);
             }
         }
+
+        //文章发表情况新增
+        if (wzfbqkList != null && !wzfbqkList.isEmpty()) {
+            for (Map<String, Object> map : wzfbqkList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePreWzfbqk(map);
+                    }else{
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPreWzfbqk(map);
+                    }
+                }
+                map.put("declaration_id", declaration_id);
+                this.exdao.insertWzfbqk(map);
+            }
+        }
+
+        //本专业获奖情况新增
+        if (bzyhjqkList != null && !bzyhjqkList.isEmpty()) {
+            for (Map<String, Object> map : bzyhjqkList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePreBzyhjqk(map);
+                    }else{
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPreBzyhjqk(map);
+                    }
+                }
+                map.put("declaration_id", declaration_id);
+                this.exdao.insertBzyhjqk(map);
+            }
+        }
         Map<String,Object> returnMap = new HashMap<String,Object>();
         returnMap.put("msg","OK");
         returnMap.put("declaration_id",declaration_id);
@@ -223,7 +273,10 @@ public class ExpertationServiceImpl implements ExpertationService {
                                            List<Map<String, Object>> pmphList,
                                            List<Map<String,Object>> subjectList,
                                            List<Map<String,Object>> contentList,
+                                           List<Map<String,Object>> sbzyList,
                                            List<Map<String,Object>> editorList,
+                                           List<Map<String, Object>> wzfbqkList,
+                                           List<Map<String, Object>> bzyhjqkList,
                                            String declaration_id) {
         //修改申报信息
         perMap.put("declaration_id", declaration_id);
@@ -251,8 +304,12 @@ public class ExpertationServiceImpl implements ExpertationService {
         this.exdao.delZjkzbb(glMap);   //扩展信息
         this.exdao.DelRwsjc(glMap);  //人卫社教材
         this.exdao.delEditor(glMap);  //主编或参编图书情况
+        this.exdao.DelWzfbqk(glMap);//删除文章发表情况
+        this.exdao.DelBzyhjqk(glMap);//删除本专业获奖情况
         this.exdao.delContent(declaration_id);
         this.exdao.delSubject(declaration_id);
+        this.exdao.delSbzy(declaration_id);
+
 
         //学科分类
         if (subjectList != null && !subjectList.isEmpty()) {
@@ -266,6 +323,13 @@ public class ExpertationServiceImpl implements ExpertationService {
             for (Map<String, Object> map : contentList) {
                 map.put("expertation_id",declaration_id);
                 this.exdao.insertContent(map);
+            }
+        }
+        //申报专业
+        if (sbzyList != null && !sbzyList.isEmpty()) {
+            for (Map<String, Object> map : sbzyList) {
+                map.put("expertation_id",declaration_id);
+                this.exdao.insertSbzy(map);
             }
         }
         //3.作家学习经历新增
@@ -285,6 +349,43 @@ public class ExpertationServiceImpl implements ExpertationService {
                 this.exdao.insertStu(map);
             }
         }
+
+        //文章发表情况新增
+        if (wzfbqkList != null && !wzfbqkList.isEmpty()) {
+            for (Map<String, Object> map : wzfbqkList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePreWzfbqk(map);
+                    }else{
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPreWzfbqk(map);
+                    }
+                }
+                map.put("declaration_id", declaration_id);
+                this.exdao.insertWzfbqk(map);
+            }
+        }
+
+        //本专业获奖情况新增
+        if (bzyhjqkList != null && !bzyhjqkList.isEmpty()) {
+            for (Map<String, Object> map : bzyhjqkList) {
+                if(perMap.get("type").equals("1")){ //提交
+                    String per_id = utool.getUUID();
+                    if(!map.get("per_id").equals("")) {
+                        this.peradd.updatePreBzyhjqk(map);
+                    }else{
+                        map.put("user_id", user_id);
+                        map.put("per_id", per_id);
+                        this.peradd.insertPreBzyhjqk(map);
+                    }
+                }
+                map.put("declaration_id", declaration_id);
+                this.exdao.insertBzyhjqk(map);
+            }
+        }
+
         //4.作家工作经历新增
         if (workList != null && !workList.isEmpty()) {
             for (Map<String, Object> map : workList) {
@@ -415,6 +516,21 @@ public class ExpertationServiceImpl implements ExpertationService {
     }
 
     @Override
+    public PageResult<Map<String, Object>> querySbzyList(
+            PageParameter<Map<String, Object>> pageParameter) {
+        PageResult<Map<String, Object>> pageResult = new PageResult<Map<String, Object>>();
+        pageResult.setPageNumber(pageParameter.getPageNumber());
+        pageResult.setPageSize(pageParameter.getPageSize());
+
+        List<Map<String, Object>> list = exdao.querySbzyList(pageParameter);
+        int count = exdao.querySbzyCount(pageParameter);
+
+        pageResult.setRows(list);
+        pageResult.setTotal(count);
+        return pageResult;
+    }
+
+    @Override
     public List<Map<String, Object>> queryExpertation(String user_id) {
         List<Map<String, Object>> list=exdao.queryExpertation(user_id);
         /*for (Map<String, Object> map: list) {
@@ -533,4 +649,5 @@ public class ExpertationServiceImpl implements ExpertationService {
         pageResult.setTotal(count);
         return pageResult;
     }
+
 }

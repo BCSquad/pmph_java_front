@@ -546,11 +546,11 @@
                     </table>
                 </div>
             </div>
-            <!--主编学术专著情况表-->
+            <!--图书出版情况-->
             <div class="sbxq_item" id="zbxszz">
                 <div>
                     <span id="tsxz_span7"></span>
-                    <span class="tsxz_title">主编学术专著情况</span>
+                    <span class="tsxz_title">图书出版情况</span>
                     <span class="tsxz_ts" id="zbxszz_bt"><img src="${ctx}/statics/image/btxx.png"/></span>
                     <span class="tsxz_xt" id="zbxszz_xt">（选填）</span>
                 </div>
@@ -648,6 +648,118 @@
                     </table>
                 </div>
             </div>
+
+            <!--文章发表情况-->
+            <div class="sbxq_item" id="wzfbqk">
+                <div>
+                    <span id="tsxz_span11"></span>
+                    <span class="tsxz_title">文章发表情况</span>
+                    <span class="tsxz_ts" id="wzfbqk_bt"><img src="${ctx}/statics/image/btxx.png"/></span>
+                    <span class="tsxz_xt" id="wzfbqk_xt" >（选填）</span>
+                </div>
+                <div class="content">
+                    <table class="tab_2" id="tab_wzfbqk">
+                        <thead>
+                        <tr>
+                            <td width="250px">题目</td>
+                            <td width="130px">期刊名称</td>
+                            <td width="160px">年、卷、期</td>
+                            <td width="220px">期刊级别（SCI或国内核心期刊）</td>
+                            <td width="100px">备注</td>
+                            <td width="78px">添加</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:if test="${empty wzfbqkList[0]}">
+                            <tr>
+                                <td class="xztd"><input class="cg_input xzip" maxlength="100"  id="wzfbqk_material_name" name="wzfb_name" <%--id="jc_material_name"--%> value="" placeholder="文章题目"/></td>
+                                <td class="xztd"><input class="cg_input xzip" name="wzfb_qkmc" value=""  maxlength="20" placeholder="期刊名称"/></td>
+                                <td class="xztd"><input class="cg_input xzip" name="wzfb_njq"  value="" placeholder=""/></td>
+                                <td class="xztd"><input class="cg_input xzip" maxlength="100" name="wzfb_qklb" value=""  placeholder=""/></td>
+                                <td class="xztd"><input class="cg_input xzip" maxlength="100" name="wzfb_note" value=""  placeholder="备注"/></td>
+                                <td class="xztd"><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_wzfbqk()"/></td>
+                                <input type="hidden" name="wzfbxq_id" value="">
+                            </tr></c:if>
+                        <c:forEach var="list" items="${wzfbqkList}" varStatus="status">
+                            <tr id="wzfbxq_${status.count}">
+                                <td class="xztd"><input class="cg_input xzip" maxlength="100" name="wzfb_name" id="wzfbqk_name_${status.count}" value="${list.title}"/></td>
+                                <td class="xztd"><input class="cg_input xzip" name="wzfb_qkmc" value="${list.periodical_title}"  maxlength="20"/></td>
+                                <td class="xztd"><input class="cg_input xzip" name="wzfb_njq"  value="${list.year_volume_period}"/></td>
+                                <td class="xztd"><input class="cg_input xzip" maxlength="100" name="wzfb_qklb" value="${list.periodical_level}"  placeholder=""/></td>
+                                <td class="xztd"><input class="cg_input xzip" maxlength="100" name="wzfb_note" value="${list.note}" placeholder="备注"/>
+                                    <input type="hidden" name="wzfb" value="wzfb_name_${status.count}"/>
+                                    <input type="hidden" name="wzfbxq_id" value="${list.id}">
+                                </td>
+                                <td><c:choose>
+                                    <c:when test="${status.count == 1}">
+                                        <img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_wzfbqk()"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('wzfbxq_${status.count}')"/>
+                                    </c:otherwise>
+                                </c:choose></td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+            <!--本专业获奖情况-->
+            <div class="sbxq_item" id="bzyhjqk">
+                <div>
+                    <span id="tsxz_span14"></span>
+                    <span class="tsxz_title">本专业获奖情况</span>
+                    <span class="tsxz_ts" id="bzyhjqk_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
+                    <span class="tsxz_xt" id="bzyhjqk_xt" >（选填）</span>
+                </div>
+                <div class="content">
+                    <table class="tab_2" id="tab_bzyhjqk">
+                        <thead>
+                        <tr>
+                            <td width="350px">名称</td>
+                            <td width="350px">级别（国家、省、市、单位）</td>
+                            <td width="150px">备注</td>
+                            <td width="78px">添加</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:if test="${empty bzyhjqkList[0]}">
+                            <tr>
+                                <td class="xztd"><input class="cg_input xzip" maxlength="100"  id="bzyhjqk_material_name" name="hjqk_name" value="" placeholder="名称"/></td>
+                                <td class="xztd"><input class="cg_input xzip" maxlength="100" name="hjqk_jb" value=""  placeholder="级别（国家、省、市、单位）"/></td>
+                                <td class="xztd"><input class="cg_input xzip" maxlength="100" name="hjqk_note" value=""  placeholder="备注"/></td>
+                                <td class="xztd"><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_bzyhjqk()"/></td>
+                                <input type="hidden" name="bzyhqqk_id" value="">
+                            </tr></c:if>
+                        <c:forEach var="list" items="${bzyhjqkList}" varStatus="status">
+                            <tr id="bzyhjqk_${status.count}">
+                                <td class="xztd"><input class="cg_input xzip" maxlength="100"  name="hjqk_name" id="bzyhjqk_name_${status.count}" value="${list.title}" placeholder="教材名称"/></td>
+                                <td class="xztd"><input class="cg_input xzip" name="hjqk_jb" value="${list.rank}"  maxlength="20"/></td>
+                                <td class="xztd"><input class="cg_input xzip" maxlength="100" name="hjqk_note" value="${list.note}"  placeholder="备注"/>
+                                    <input type="hidden" name="bzyhqqk" value="zbts_material_name_${status.count}"/>
+                                    <input type="hidden" name="bzyhqqk_id" value="${list.id}">
+                                </td>
+                                <td><c:choose>
+                                    <c:when test="${status.count == 1}">
+                                        <img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_bzyhjqk()"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img class="add_img" src="${ctx}/statics/image/del.png" onclick="javascript:del_tr('bzyhjqk_${status.count}')"/>
+                                    </c:otherwise>
+                                </c:choose></td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+
             <!--主编或参编图书情况-->
             <div class="sbxq_item" id="zbcbtsqk">
                 <div>
@@ -743,10 +855,11 @@
             </c:forEach>
 
             <!-- 学科分类-->
-            <div class="sbxq_item1">
+            <div class="sbxq_item1" id="xkfl_qy">
                 <div>
+                    <input type="hidden" id="xkflbt">
                     <span id="tsxz_span8"></span>
-                    <span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" />学科分类(可多选)</span>
+                    <span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" id="xkflbx"/>学科分类(可多选)</span>
                     <span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.product_id}')">添加学科分类</span>
                 </div>
                 <div class="sbdw" id="xkfladd">
@@ -758,11 +871,13 @@
                     </c:forEach>
                 </div>
             </div>
+
             <!-- 内容分类-->
-            <div class="sbxq_item1">
+            <div class="sbxq_item1" id="nrfl_qy">
                 <div>
+                    <input type="hidden" id="nrflbt">
                     <span id="tsxz_span12"></span>
-                    <span class="tsxz_title">内容分类(可多选)</span>
+                    <span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" id="nrflbx"/>内容分类(可多选)</span>
                     <span class="el-button" onclick="javascript:ContentAdd('${materialMap.product_id}')">添加内容分类</span>
                 </div>
                 <div class="sbdw" id="nrfladd">
@@ -773,7 +888,24 @@
                     </c:forEach>
                 </div>
             </div>
-            <div class="sbxq_item" id="szdwyj">
+
+            <!-- 申报专业-->
+            <div class="sbxq_item1" id="sbzy_qy">
+                <div>
+                    <input type="hidden" id="sbzybt">
+                    <span id="sbzytb"></span>
+                    <span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" id="sbzybx"/>申报专业(可多选)</span>
+                    <span class="el-button" onclick="javascript:sbzyAdd('${materialMap.product_id}')">添加申报专业</span>
+                </div>
+                <div class="sbdw" id="sbzyadd">
+                    <span class="btmc">申报专业：</span>
+                    <c:forEach var="sbzy" items="${sbzyList}" varStatus="status">
+                    <span class="el-tag" id="sbzy_${status.count}">${sbzy.type_name}<input name="sbzyId" type="hidden" value="${sbzy.product_profession_type_id}"/>
+                        <span style="margin-left: 8px;cursor: pointer;" onclick="del('sbzy_${status.count}')">X</span></span>
+                    </c:forEach>
+                </div>
+            </div>
+            <%--<div class="sbxq_item" id="szdwyj">
                 <div>
                     <span id="tsxz_span13"></span>
                     <span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" />所在单位意见<span style="color: red">(上传单位盖章的申报表)</span></span>
@@ -786,7 +918,7 @@
                     <div class="filename"><a href="javascript:" onclick="downLoadProxy('${gezlList.unit_advise}')"
                                              title="${gezlList.syllabus_name}">${gezlList.syllabus_name}</a></div>
                 </div>
-            </div>
+            </div>--%>
             
             <!-- 申报单位-->
             <div class="sbxq_item1">

@@ -379,6 +379,14 @@ a.input {
 	cursor: pointer;
 }
 
+#sbzytb{
+	background-image: url(../image/zhuanye.png);
+	height: 19px;
+	width: 19px;
+	float: left;
+	background-size: 100% 100%;
+}
+
 .scys{
 	width: 78px;
 	height: 30px;

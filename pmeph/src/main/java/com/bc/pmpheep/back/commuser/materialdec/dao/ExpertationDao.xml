@@ -21,6 +21,16 @@
           is_edit_book_used*1 is_edit_book_used,
           is_edit_book_required*1 is_edit_book_required,
           is_deleted*1 is_deleted,
+          is_article_published_used*1 is_article_published_used,
+          is_article_published_required*1 is_article_published_required,
+          is_profession_award_used*1 is_profession_award_used,
+          is_profession_award_required*1 is_profession_award_required,
+          is_subject_type_used*1 is_subject_type_used,
+          is_subject_type_required*1 is_subject_type_required,
+          is_content_type_used*1 is_content_type_used,
+          is_content_type_required*1 is_content_type_required,
+          is_profession_type_used*1 is_profession_type_used,
+          is_profession_type_required*1 is_profession_type_required,
           gmt_create,gmt_update,founder_id,publisher_id,gmt_publish,note,description
         from product where product_type = #{expert_type}
     </select>
@@ -86,6 +96,22 @@
         </if>
     </select>
 
+    <!-- 查询申报专业列表 -->
+    <select id="querySbzyList" parameterType="PageParameter" resultType="java.util.Map">
+        select * from product_profession_type t where product_id=#{parameter.product_id}
+        <if test="parameter.name_path != null and parameter.name_path != ''">
+            and t.type_name like #{parameter.name_path}
+        </if>
+         limit #{start},#{pageSize}
+    </select>
+    <!-- 申报专业总数 -->
+    <select id="querySbzyCount" parameterType="PageParameter" resultType="int">
+        select count(*) from product_profession_type t where product_id=#{parameter.product_id}
+        <if test="parameter.name_path != null and parameter.name_path != ''">
+            and t.type_name like #{parameter.name_path}
+        </if>
+    </select>
+
     <!-- 查询内容分类列表 -->
     <select id="queryContentList" parameterType="PageParameter" resultType="java.util.Map">
         select * from product_content_type_detail t where is_leaf = '1'
@@ -120,6 +146,20 @@
     <delete id="delSubject" parameterType="java.lang.String">
         delete from expertation_subject_type where expertation_id = #{expertation_id}
     </delete>
+
+    <!--申报专业关联表-->
+    <select id="selectSbzy" parameterType="java.util.Map" resultType="java.util.Map">
+        select t1.*,t2.type_name from expertation_profession_type t1
+        left join product_profession_type t2 on t1.product_profession_type_id = t2.id
+        where t1.expertation_id = #{declaration_id}
+    </select>
+    <update id="insertSbzy" parameterType="java.util.Map">
+        insert into expertation_profession_type(expertation_id,product_profession_type_id) VALUES(#{expertation_id},#{sbzyId})
+    </update>
+    <delete id="delSbzy" parameterType="java.lang.String">
+        delete from expertation_profession_type where expertation_id = #{expertation_id}
+    </delete>
+
 
     <!--内容分类关联表-->
     <select id="selectContent" parameterType="java.util.Map" resultType="java.util.Map">
@@ -200,6 +240,24 @@
     <insert id="insertRwsjc" parameterType="java.util.Map">
         insert into dec_textbook_pmph(per_id,expertation_id,material_name,rank,position,publish_date,isbn,note,is_digital_editor,sort)
         values(#{per_id},#{declaration_id},#{material_name},#{rank},#{position},#{publish_date},#{isbn},#{note},#{is_digital_editor},#{sort})
+    </insert>
+    <!--文章发表情况-->
+    <insert id="insertWzfbqk" parameterType="java.util.Map">
+        insert into dec_article_published (per_id,expertation_id,title,periodical_title,year_volume_period,periodical_level,note)
+        values(#{per_id},#{declaration_id},#{title},#{periodical_title},#{year_volume_period},#{periodical_level},#{note});
+    </insert>
+    <!--删除文章发表情况-->
+    <delete id="DelWzfbqk" parameterType="java.util.Map">
+        delete from dec_article_published where expertation_id = #{declaration_id}
+    </delete>
+    <!--删除本专业获奖情况情况-->
+    <delete id="DelBzyhjqk" parameterType="java.util.Map">
+        delete from dec_profession_award where expertation_id = #{declaration_id}
+    </delete>
+    <!--本专业获奖情况-->
+    <insert id="insertBzyhjqk" parameterType="java.util.Map">
+        insert into dec_profession_award (per_id,expertation_id,title,rank,note)
+        values(#{per_id},#{declaration_id},#{title},#{rank},#{note});
     </insert>
     <delete id="DelRwsjc" parameterType="java.util.Map">
         delete from dec_textbook_pmph where expertation_id = #{declaration_id}

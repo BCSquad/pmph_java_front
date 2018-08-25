@@ -62,7 +62,9 @@
     </div>
     <div class="join" onclick="tojoin(${state})">报名参加</div>
 </div>
+
 </body>
+<%--<jsp:include page="/pages/comm/tail.jsp"></jsp:include>--%>
 <style>
     .picture01{
         float: left;
