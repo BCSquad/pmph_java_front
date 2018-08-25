@@ -782,7 +782,7 @@
                         <tbody>
                         <c:if test="${empty editorList[0]}">
                             <tr>
-                                <td><input class="cg_input" maxlength="100" style="width: 320px" id="jc_material_name"
+                                <td><input class="cg_input" maxlength="100" style="width: 320px" 
                                            name="zbts_material_name" id="zbts_material_name" value="" style="width: 260px;"
                                            placeholder="教材名称"/></td>
                                 <td><input class="cg_input" name="zbts_publisher" value=""
@@ -865,7 +865,8 @@
                 <div class="sbdw" id="xkfladd">
                     <span class="btmc">学科分类：</span>
                     <c:forEach var="subject" items="${subjectList}" varStatus="status">
-                    <span class="el-tag" id="xkfl_${status.count}">${subject.type_name}<input name="subjectId" type="hidden" value="${subject.product_subject_type_id}"/>
+                    <span class="el-tag" id="xkfl_${status.count}">${subject.type_name}
+                    	<input name="subjectId" type="hidden" value="${subject.product_subject_type_id}"/>
                         <span style="margin-left: 8px;cursor: pointer;" onclick="del('xkfl_${status.count}')">X</span></span>
                     </c:forEach>
                 </div>

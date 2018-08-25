@@ -38,7 +38,7 @@
 	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
 		select id,product_id,expert_type,user_id,realname,sex,birthday,REPLACE(birthday,'-','.') as birthday1,experience,org_name,position,title,address,postcode,handphone,email,idtype,
 		idcard,telephone,fax,online_progress,auth_date,is_staging*1 is_staging,is_deleted*1 is_deleted,banknumber,bankaddress,
-		gmt_create,gmt_update,education*1 education,expertise,return_cause,unit_advise,syllabus_name,org_id,banknumber,bankaddress,expertise from expertation t1
+		gmt_create,gmt_update,education*1 education,expertise,return_cause,unit_advise,syllabus_name,org_id,banknumber,bankaddress from expertation t1
 		 where 1= 1
 		<if test="user_id != null and user_id != ''">
 			and t1.user_id = #{user_id}
@@ -56,12 +56,11 @@
 	<insert id="insertPerson" parameterType="java.util.Map">
 		insert into expertation(product_id,expert_type,user_id,realname,sex,birthday,experience,org_name,position,
 		title,address,postcode,handphone,email,idtype,idcard,telephone,fax,gmt_create,is_staging,online_progress,commit_date,banknumber
-		,bankaddress,remark,degree,unit_advise,syllabus_name,education,org_id
+		,bankaddress,remark,degree,unit_advise,syllabus_name,education,org_id,expertise
 		) values(#{product_id},#{expert_type},#{user_id},#{realname},#{sex},#{birthday},#{experience},#{org_name},#{position},
 		#{title},#{address},#{postcode},#{handphone},#{email},#{idtype},#{idcard},#{telephone},#{fax},#{gmt_create},
 		#{is_staging},#{online_progress},#{commit_date},#{banknumber},#{bankaddress},#{remark},#{degree},#{unit_advise},#{syllabus_name},#{education}
-		
-		,#{org_id})
+		,#{org_id},#{expertise})
 	</insert>
 	<update id="updatePerson" parameterType="java.util.Map">
 		update expertation set realname = #{realname},sex = #{sex},birthday = #{birthday},experience = #{experience},expertise = #{expertise},
@@ -81,13 +80,19 @@
         <if test="parameter.type_name != null and parameter.type_name != ''">
             and t.type_name like #{parameter.type_name}
         </if>
+        <if test="parameter.chooseId != null and parameter.chooseId != ''">
+        	and t.id not in (${parameter.chooseId})
+        </if>
         order by parent_id asc limit #{start},#{pageSize}
     </select>
     <!-- 学科分类总数 -->
     <select id="querySubjectCount" parameterType="PageParameter" resultType="int">
-        select count(*) from product_subject_type t
+        select count(*) from product_subject_type t where 1=1
         <if test="parameter.type_name != null and parameter.type_name != ''">
-            where t.type_name like #{parameter.type_name}
+            and t.type_name like #{parameter.type_name}
+        </if>
+        <if test="parameter.chooseId != null and parameter.chooseId != ''">
+        	and t.id not in (${parameter.chooseId})
         </if>
     </select>
 
@@ -113,6 +118,9 @@
         <if test="parameter.name_path != null and parameter.name_path != ''">
             and t.name_path like #{parameter.name_path}
         </if>
+        <if test="parameter.chooseId != null and parameter.chooseId != ''">
+        	and t.product_type_id not in (${parameter.chooseId})
+        </if>
         order by t.id asc limit #{start},#{pageSize}
     </select>
     <!-- 内容分类总数 -->
@@ -120,6 +128,9 @@
         select count(*) from product_content_type_detail t where is_leaf = '1'
         <if test="parameter.name_path != null and parameter.name_path != ''">
             and t.name_path like #{parameter.name_path}
+        </if>
+        <if test="parameter.chooseId != null and parameter.chooseId != ''">
+        	and t.product_type_id not in (${parameter.chooseId})
         </if>
     </select>
 
@@ -333,6 +344,12 @@
     		<if test="return_cause != null ">
     			return_cause = #{return_cause},
     		</if>
+            <if test="unit_advise != null ">
+                unit_advise = #{unit_advise},
+            </if>
+            <if test="syllabus_name != null ">
+                syllabus_name = #{syllabus_name},
+            </if>
     	</set>
     	where id = #{expertation_id}
     </update>
