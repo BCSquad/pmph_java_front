@@ -49,6 +49,12 @@ public interface ExpertationDao {
 	public List<Map<String,Object>> selectSubject(Map<String, Object> map);
 	public int insertSubject(Map<String,Object> map);
 	public int delSubject(String experation_id);
+    /**
+     * 申报专业关联表
+     */
+    public List<Map<String,Object>> selectSbzy(Map<String, Object> map);
+    public int insertSbzy(Map<String,Object> map);
+    public int delSbzy(String experation_id);
 
 	/**
 	 * 内容分类关联表
@@ -68,6 +74,9 @@ public interface ExpertationDao {
 	public List<Map<String,Object>> queryWzfbqk(Map<String, Object> map);
 	public int insertWzfbqk(Map<String, Object> map);
 	public int DelWzfbqk(Map<String, Object> map);
+	//申报专业
+    public List<Map<String,Object>> querySbzyList(PageParameter<Map<String, Object>> pageParameter);
+    public int querySbzyCount(PageParameter<Map<String, Object>> pageParameter);
 	//本专业获奖情况
 	public List<Map<String,Object>> queryBzyhjqk(Map<String, Object> map);
 	public int insertBzyhjqk(Map<String, Object> map);
@@ -123,9 +132,6 @@ public interface ExpertationDao {
 	public Map<String, Object> queryOrgById(String id);
 
 	public List<Map<String, Object>> queryOrgList(
-			PageParameter<Map<String, Object>> pageParameter);
-
-	public List<Map<String, Object>> queryZyList(
 			PageParameter<Map<String, Object>> pageParameter);
 
 	public int queryOrgCount(PageParameter<Map<String, Object>> pageParameter);

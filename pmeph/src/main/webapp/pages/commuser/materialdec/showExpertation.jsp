@@ -88,7 +88,7 @@
 					</tr>
 					<tr>
 						<td><span>卡号：${gezlList.banknumber}</span></td>
-						<td><span>专业特长(疾病诊治及研究方向)：${gezlList.specialty}</span></td>
+						<td><span>专业特长(疾病诊治及研究方向)：${gezlList.expertise}</span></td>
 					</tr>
 
 				</table>
@@ -391,7 +391,7 @@
 		<div class="sbxq_item1">
 			<div>
 				<span id="tsxz_span8"></span>
-				<span class="tsxz_title">学科分类(可多选)</span>
+				<span class="tsxz_title">学科分类</span>
 				<%--<span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.product_id}')">添加学科分类</span>--%>
 			</div>
 			<div class="sbdw" id="xkfladd">
@@ -402,6 +402,8 @@
 				</c:forEach>
 			</div>
 		</div>
+
+
 		<!-- 内容分类-->
 		<div class="sbxq_item1">
 			<div>
@@ -417,6 +419,24 @@
 				</c:forEach>
 			</div>
 		</div>
+
+		<!-- 申报专业-->
+		<div class="sbxq_item1">
+			<div>
+				<span id="sbzytb"></span>
+				<span class="tsxz_title">申报专业</span>
+				<%--<span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.product_id}')">添加学科分类</span>--%>
+			</div>
+			<div class="sbdw" id="xkfladd">
+				<span class="btmc">申报专业：</span>
+				<c:forEach var="sbzy" items="${sbzyList}" varStatus="status">
+		<span class="el-tag" id="xkfl_${status.count}">${sbzy.type_name}<input name="subjectId" type="hidden"/>
+			</span>
+				</c:forEach>
+			</div>
+		</div>
+
+
 
 		<!-- 申报单位 -->
 		<div class="sbxq_item1">

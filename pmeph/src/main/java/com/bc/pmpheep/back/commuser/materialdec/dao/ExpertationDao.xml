@@ -38,7 +38,7 @@
 	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
 		select id,product_id,expert_type,user_id,realname,sex,birthday,REPLACE(birthday,'-','.') as birthday1,experience,org_name,position,title,address,postcode,handphone,email,idtype,
 		idcard,telephone,fax,online_progress,auth_date,is_staging*1 is_staging,is_deleted*1 is_deleted,banknumber,bankaddress,
-		gmt_create,gmt_update,education*1 education,expertise,return_cause,unit_advise,syllabus_name,org_id,banknumber,bankaddress,specialty from expertation t1
+		gmt_create,gmt_update,education*1 education,expertise,return_cause,unit_advise,syllabus_name,org_id,banknumber,bankaddress,expertise from expertation t1
 		 where 1= 1
 		<if test="user_id != null and user_id != ''">
 			and t1.user_id = #{user_id}
@@ -91,6 +91,22 @@
         </if>
     </select>
 
+    <!-- 查询申报专业列表 -->
+    <select id="querySbzyList" parameterType="PageParameter" resultType="java.util.Map">
+        select * from product_profession_type t where product_id=#{parameter.product_id}
+        <if test="parameter.name_path != null and parameter.name_path != ''">
+            and t.type_name like #{parameter.name_path}
+        </if>
+         limit #{start},#{pageSize}
+    </select>
+    <!-- 申报专业总数 -->
+    <select id="querySbzyCount" parameterType="PageParameter" resultType="int">
+        select count(*) from product_profession_type t where product_id=#{parameter.product_id}
+        <if test="parameter.name_path != null and parameter.name_path != ''">
+            and t.type_name like #{parameter.name_path}
+        </if>
+    </select>
+
     <!-- 查询内容分类列表 -->
     <select id="queryContentList" parameterType="PageParameter" resultType="java.util.Map">
         select * from product_content_type_detail t where is_leaf = '1'
@@ -119,6 +135,20 @@
     <delete id="delSubject" parameterType="java.lang.String">
         delete from expertation_subject_type where expertation_id = #{expertation_id}
     </delete>
+
+    <!--申报专业关联表-->
+    <select id="selectSbzy" parameterType="java.util.Map" resultType="java.util.Map">
+        select t1.*,t2.type_name from expertation_profession_type t1
+        left join product_profession_type t2 on t1.product_profession_type_id = t2.id
+        where t1.expertation_id = #{declaration_id}
+    </select>
+    <update id="insertSbzy" parameterType="java.util.Map">
+        insert into expertation_profession_type(expertation_id,product_profession_type_id) VALUES(#{expertation_id},#{sbzyId})
+    </update>
+    <delete id="delSbzy" parameterType="java.lang.String">
+        delete from expertation_profession_type where expertation_id = #{expertation_id}
+    </delete>
+
 
     <!--内容分类关联表-->
     <select id="selectContent" parameterType="java.util.Map" resultType="java.util.Map">

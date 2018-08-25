@@ -264,8 +264,10 @@ public class ExpertationController extends BaseController{
 		//获取学科及内容分类id
 		String subjectIds[] = request.getParameterValues("subjectId");
         String contentIds[] = request.getParameterValues("contentId");
+		String sbzyIds[] = request.getParameterValues("sbzyId");
 		List<Map<String,Object>> subjectList = new ArrayList<Map<String,Object>>();
 		List<Map<String,Object>> contentList = new ArrayList<Map<String,Object>>();
+		List<Map<String,Object>> sbzyList = new ArrayList<Map<String,Object>>();
 		if(subjectIds!=null&&subjectIds.length>0){
 			for(int i=0;i<subjectIds.length;i++) { //遍历数组
 				Map<String,Object> subjectMap = new HashMap<String,Object>();
@@ -278,6 +280,13 @@ public class ExpertationController extends BaseController{
 				Map<String,Object> contentMap = new HashMap<String,Object>();
 				contentMap.put("contentId", contentIds[i]);
 				contentList.add(contentMap);
+			}
+		}
+		if(sbzyIds!=null&&sbzyIds.length>0){
+			for(int i=0;i<sbzyIds.length;i++) { //遍历数组
+				Map<String,Object> sbzyMap = new HashMap<String,Object>();
+				sbzyMap.put("sbzyId", sbzyIds[i]);
+				sbzyList.add(sbzyMap);
 			}
 		}
 
@@ -467,9 +476,9 @@ public class ExpertationController extends BaseController{
 
         Map<String,Object> returnMap =  new HashMap<String,Object>();
 		if(expertation_id == null || expertation_id.length() <= 0){//表示新增
-            returnMap = this.etService.insertJcsbxx(perMap, stuList, workList, zjxsList, zjkzqkList, monographList, pmphList,subjectList,contentList,editorList,wzfbqkList,bzyhjqkList);
+            returnMap = this.etService.insertJcsbxx(perMap, stuList, workList, zjxsList, zjkzqkList, monographList, pmphList,subjectList,contentList,sbzyList,editorList,wzfbqkList,bzyhjqkList);
 		}else{
-            returnMap=this.etService.updateJcsbxx(perMap, stuList, workList, zjxsList, zjkzqkList, monographList, pmphList,subjectList,contentList,editorList,wzfbqkList,bzyhjqkList,expertation_id);
+            returnMap=this.etService.updateJcsbxx(perMap, stuList, workList, zjxsList, zjkzqkList, monographList, pmphList,subjectList,contentList,sbzyList,editorList,wzfbqkList,bzyhjqkList,expertation_id);
 		}
 		
 		/*if(type.equals("1")){ //提交
@@ -531,6 +540,7 @@ public class ExpertationController extends BaseController{
 		//学科
 		List<Map<String,Object>> subjectList = this.etService.selectSubject(queryMap);
 		List<Map<String,Object>> contentList = this.etService.selectContent(queryMap);
+		List<Map<String,Object>> sbzyList = this.etService.selectSbzy(queryMap);
 		//3.作家学习经历表
 		List<Map<String,Object>> stuList = new ArrayList<Map<String,Object>>();
 		stuList=this.etService.queryStu(queryMap);
@@ -576,6 +586,7 @@ public class ExpertationController extends BaseController{
 		mav.addObject("zjkzxxList", zjkzxxList);
 		mav.addObject("subjectList", subjectList);
 		mav.addObject("contentList", contentList);
+		mav.addObject("sbzyList",sbzyList);
 		mav.addObject("wzfbqkList", wzfbqkList);
 		mav.addObject("bzyhjqkList", bzyhjqkList);
 
@@ -614,6 +625,7 @@ public class ExpertationController extends BaseController{
 		//学科
 		List<Map<String,Object>> subjectList = this.etService.selectSubject(queryMap);
 		List<Map<String,Object>> contentList = this.etService.selectContent(queryMap);
+		List<Map<String,Object>> sbzyList = this.etService.selectSbzy(queryMap);
 
 		//1.作家申报信息表
 		List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
@@ -671,6 +683,7 @@ public class ExpertationController extends BaseController{
 		mav.addObject("bzyhjqkList",bzyhjqkList);
 		mav.addObject("subjectList", subjectList);
 		mav.addObject("contentList", contentList);
+		mav.addObject("sbzyList",sbzyList);
 		mav.addObject("gezlList", gezlList.get(0));
 		mav.addObject("stuList", stuList);
 		mav.addObject("editorList", editorList);
@@ -780,12 +793,12 @@ public class ExpertationController extends BaseController{
 	@RequestMapping("toSearchZy")
 	public ModelAndView toSearchZy(HttpServletRequest request,
 								   HttpServletResponse response){
-		ModelAndView mav = new ModelAndView("commuser/materialdec/toZyList");
+		ModelAndView mav = new ModelAndView("commuser/materialdec/toSbzyList");
 		//机构信息
-		String  material_id = request.getParameter("material_id");
+		String  product_id = request.getParameter("product_id");
 		String  currentPageStr = (String) request.getParameter("currentPage");
 		String  pageSizeStr = request.getParameter("pageSize");
-		String  zyname = request.getParameter("zyname");
+		String  namepath = request.getParameter("namepath");
 		Map<String,Object> paraMap = new HashMap<String,Object>();
 		//分页查询
 		int currentPage = 0;
@@ -799,20 +812,20 @@ public class ExpertationController extends BaseController{
 		}
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<>(currentPage,pageSize);
 
-		paraMap.put("material_id", material_id);
+		paraMap.put("product_id", product_id);
 		paraMap.put("endPage", pageSize);
 		paraMap.put("currentPage", currentPage);
-		if(zyname!=null && !zyname.equals("")){
+		if(namepath!=null && !namepath.equals("")){
 			try {
-				zyname = URLDecoder.decode(zyname,"UTF-8");
-				paraMap.put("org_name", "%"+zyname+"%");
-				paraMap.put("orgname", zyname);
+				namepath = URLDecoder.decode(namepath,"UTF-8");
+				paraMap.put("name_path", "%"+namepath+"%");
+				paraMap.put("namepath", namepath);
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
 		}
 		pageParameter.setParameter(paraMap);
-		PageResult<Map<String,Object>> pageResult = this.etService.selectZyList(pageParameter);
+		PageResult<Map<String,Object>> pageResult = this.etService.querySbzyList(pageParameter);
 		mav.addObject("pageResult", pageResult);
 		mav.addObject("productOrMaterial", "product");
 		mav.addObject("paraMap", paraMap);

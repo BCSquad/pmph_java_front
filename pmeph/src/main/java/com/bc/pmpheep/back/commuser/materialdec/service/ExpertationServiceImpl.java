@@ -49,6 +49,10 @@ public class ExpertationServiceImpl implements ExpertationService {
     public List<Map<String, Object>> selectContent(Map<String, Object> map) {
         return this.exdao.selectContent(map);
     }
+    @Override
+    public List<Map<String, Object>> selectSbzy(Map<String, Object> map) {
+        return this.exdao.selectSbzy(map);
+    }
 
     @Override
     public List<Map<String, Object>> queryPerson(Map<String, Object> map) {
@@ -66,6 +70,7 @@ public class ExpertationServiceImpl implements ExpertationService {
             List<Map<String, Object>> pmphList,
             List<Map<String, Object>> subjectList,
             List<Map<String, Object>> contentList,
+            List<Map<String,Object>> sbzyList,
             List<Map<String, Object>> editorList,
             List<Map<String, Object>> wzfbqkList,
             List<Map<String, Object>> bzyhjqkList
@@ -98,6 +103,13 @@ public class ExpertationServiceImpl implements ExpertationService {
             for (Map<String, Object> map : contentList) {
                 map.put("expertation_id",declaration_id);
                 this.exdao.insertContent(map);
+            }
+        }
+        //专业分类
+        if (sbzyList != null && !sbzyList.isEmpty()) {
+            for (Map<String, Object> map : sbzyList) {
+                map.put("expertation_id",declaration_id);
+                this.exdao.insertSbzy(map);
             }
         }
         //3.作家学习经历新增
@@ -261,6 +273,7 @@ public class ExpertationServiceImpl implements ExpertationService {
                                            List<Map<String, Object>> pmphList,
                                            List<Map<String,Object>> subjectList,
                                            List<Map<String,Object>> contentList,
+                                           List<Map<String,Object>> sbzyList,
                                            List<Map<String,Object>> editorList,
                                            List<Map<String, Object>> wzfbqkList,
                                            List<Map<String, Object>> bzyhjqkList,
@@ -289,6 +302,7 @@ public class ExpertationServiceImpl implements ExpertationService {
         this.exdao.DelBzyhjqk(glMap);//删除本专业获奖情况
         this.exdao.delContent(declaration_id);
         this.exdao.delSubject(declaration_id);
+        this.exdao.delSbzy(declaration_id);
 
 
         //学科分类
@@ -303,6 +317,13 @@ public class ExpertationServiceImpl implements ExpertationService {
             for (Map<String, Object> map : contentList) {
                 map.put("expertation_id",declaration_id);
                 this.exdao.insertContent(map);
+            }
+        }
+        //申报专业
+        if (sbzyList != null && !sbzyList.isEmpty()) {
+            for (Map<String, Object> map : sbzyList) {
+                map.put("expertation_id",declaration_id);
+                this.exdao.insertSbzy(map);
             }
         }
         //3.作家学习经历新增
@@ -489,6 +510,21 @@ public class ExpertationServiceImpl implements ExpertationService {
     }
 
     @Override
+    public PageResult<Map<String, Object>> querySbzyList(
+            PageParameter<Map<String, Object>> pageParameter) {
+        PageResult<Map<String, Object>> pageResult = new PageResult<Map<String, Object>>();
+        pageResult.setPageNumber(pageParameter.getPageNumber());
+        pageResult.setPageSize(pageParameter.getPageSize());
+
+        List<Map<String, Object>> list = exdao.querySbzyList(pageParameter);
+        int count = exdao.querySbzyCount(pageParameter);
+
+        pageResult.setRows(list);
+        pageResult.setTotal(count);
+        return pageResult;
+    }
+
+    @Override
     public List<Map<String, Object>> queryExpertation(String user_id) {
         List<Map<String, Object>> list=exdao.queryExpertation(user_id);
         /*for (Map<String, Object> map: list) {
@@ -608,18 +644,4 @@ public class ExpertationServiceImpl implements ExpertationService {
         return pageResult;
     }
 
-    @Override
-    public PageResult<Map<String, Object>> selectZyList(
-            PageParameter<Map<String, Object>> pageParameter) {
-        PageResult<Map<String, Object>> pageResult = new PageResult<Map<String, Object>>();
-        pageResult.setPageNumber(pageParameter.getPageNumber());
-        pageResult.setPageSize(pageParameter.getPageSize());
-
-        List<Map<String, Object>> list = exdao.queryZyList(pageParameter);
-        int count = exdao.queryOrgCount(pageParameter);
-
-        pageResult.setRows(list);
-        pageResult.setTotal(count);
-        return pageResult;
-    }
 }
