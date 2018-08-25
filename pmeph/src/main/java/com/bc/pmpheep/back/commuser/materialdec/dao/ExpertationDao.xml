@@ -21,6 +21,16 @@
           is_edit_book_used*1 is_edit_book_used,
           is_edit_book_required*1 is_edit_book_required,
           is_deleted*1 is_deleted,
+          is_article_published_used*1 is_article_published_used,
+          is_article_published_required*1 is_article_published_required,
+          is_profession_award_used*1 is_profession_award_used,
+          is_profession_award_required*1 is_profession_award_required,
+          is_subject_type_used*1 is_subject_type_used,
+          is_subject_type_required*1 is_subject_type_required,
+          is_content_type_used*1 is_content_type_used,
+          is_content_type_required*1 is_content_type_required,
+          is_profession_type_used*1 is_profession_type_used,
+          is_profession_type_required*1 is_profession_type_required,
           gmt_create,gmt_update,founder_id,publisher_id,gmt_publish,note,description
         from product where product_type = #{expert_type}
     </select>
@@ -194,6 +204,19 @@
     <insert id="insertWzfbqk" parameterType="java.util.Map">
         insert into dec_article_published (per_id,expertation_id,title,periodical_title,year_volume_period,periodical_level,note)
         values(#{per_id},#{declaration_id},#{title},#{periodical_title},#{year_volume_period},#{periodical_level},#{note});
+    </insert>
+    <!--删除文章发表情况-->
+    <delete id="DelWzfbqk" parameterType="java.util.Map">
+        delete from dec_article_published where expertation_id = #{declaration_id}
+    </delete>
+    <!--删除本专业获奖情况情况-->
+    <delete id="DelBzyhjqk" parameterType="java.util.Map">
+        delete from dec_profession_award where expertation_id = #{declaration_id}
+    </delete>
+    <!--本专业获奖情况-->
+    <insert id="insertBzyhjqk" parameterType="java.util.Map">
+        insert into dec_profession_award (per_id,expertation_id,title,rank,note)
+        values(#{per_id},#{declaration_id},#{title},#{rank},#{note});
     </insert>
     <delete id="DelRwsjc" parameterType="java.util.Map">
         delete from dec_textbook_pmph where expertation_id = #{declaration_id}
