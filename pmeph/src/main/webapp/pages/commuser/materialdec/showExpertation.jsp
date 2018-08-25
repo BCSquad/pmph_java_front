@@ -49,7 +49,7 @@
 		<div id="ddd">
 			<div class="tsxz_title" id="tnone" style="display: none;text-align: center;font-size: 20px;margin-top: 6px;">${material.material_name}</div>
 		<!-- 专家信息-->
-		<div class="sbxq_item1">
+		<div class="sbxq_item1" style="display:block;">
 			<div>
 				<span id="tsxz_span2"></span>
 				<span class="tsxz_title">专家信息</span>
