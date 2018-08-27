@@ -601,7 +601,7 @@ function buttAdd(type){
                                 }else if(!$("#nrfladd").children().hasClass("el-tag")&&$("#nrflbt").val()=="yes"){
                                     window.message.info("请选择内容分类！");
                                     return ;
-                                }else if(!$("#sbzyadd").children().hasClass("el-tag")&&$("#sbzybx").val()=="yes"){
+                                }else if(!$("#sbzyadd").children().hasClass("el-tag")&&$("#sbzybt").val()=="yes"){
                                     window.message.info("请选择申报专业！");
                                     return ;
                                 }
