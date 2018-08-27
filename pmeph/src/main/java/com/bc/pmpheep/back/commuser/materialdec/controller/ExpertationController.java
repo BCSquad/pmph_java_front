@@ -861,10 +861,12 @@ public class ExpertationController extends BaseController{
             Map<String, Object> map=etService.queryExpertationDetail(user.get("id").toString(),expert_type);
             if(map==null){
                 modelAndView=this.toMaterialAdd(request,expert_type);
-            }else if(map.get("online_progress").toString().equals("0") ||map.get("online_progress").toString().equals("2")){
+            }else if(map.get("online_progress").toString().equals("0") ||map.get("online_progress").toString().equals("2")
+					||map.get("online_progress").toString().equals("5")){
                 //审核状态为未提交和被退回，跳转至编辑界面
                 modelAndView=this.toMaterialZc(request,map.get("id").toString());
-            }else if(map.get("online_progress").toString().equals("1") ||map.get("online_progress").toString().equals("3") ){
+            }else if(map.get("online_progress").toString().equals("1") ||map.get("online_progress").toString().equals("3")
+					||map.get("online_progress").toString().equals("4")){
                 //审核状态为代审核和审核通过，跳转至查看界面
                 modelAndView=this.showMaterial(request,map.get("id").toString());
             }
