@@ -23,7 +23,7 @@
 	<!-- 查询栏 -->
 	<div class="qy_div">
 		<div style="width: 100%;margin-top: 20px;">
-			<span class="mc1">内容分类关键字：</span>
+			<span class="mc1">申报专业关键字：</span>
 			<input type="hidden" id="product_id" name="product_id" value="${paraMap.product_id}">
 			<input class="cg_input" style="width: 400px;height: 36px;" id="namepath" name="namepath" value="${paraMap.namepath}" />
 			<div class="cxbutn" onclick="javascript:query()">
