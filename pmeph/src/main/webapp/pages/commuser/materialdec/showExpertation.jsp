@@ -492,7 +492,10 @@
 
         <input type="hidden" id="declaration_id" value="${declaration_id}">
 		<!-- 打印按钮(查看界面的打印按钮，与下面的确认打印不是同一个按钮)-->
-		<div class="out" id="print_look" onclick="toprintdetail()">打印</div>
+		<c:if test="${state==out}">
+			<div class="out" id="print_look" onclick="toprintdetail()">打印</div>
+		</c:if>
+
 		
 		<!-- 打印按钮(仅打印显示)-->
 		<div class="out" id="print" onclick="toprint()" style="display: none">确认打印</div>
