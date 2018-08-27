@@ -84,11 +84,18 @@
                             <td>${vs.count}</td>
                         </c:otherwise>
                     </c:choose>
-                    <td class="font_name" onclick="toName(${item.product_id },${item.id })">${item.realname } </td>
+                    <td class="font_name" onclick="toName(${item.product_id },${item.id },${item.online_progress })">${item.realname } </td>
                     <td>${item.product_name } </td>
                     <td>${item.position } </td>
                     <td>${item.title } </td>
-                    <td>${item.online_progress } </td>
+                    <td>
+                        <c:if test="${item.online_progress =='0'}">未审核</c:if>
+                        <c:if test="${item.online_progress =='1'}">未审核</c:if>
+                        <c:if test="${item.online_progress =='2'}">已退回</c:if>
+                        <c:if test="${item.online_progress =='3'}">已通过</c:if>
+                        <c:if test="${item.online_progress =='4'}">出版社退回给单位</c:if>
+                        <c:if test="${item.online_progress =='5'}">出版社退回给个人</c:if>
+                    </td>
                     <td>${item.isprint } </td>
                 </tr>
             </c:forEach>
@@ -196,8 +203,8 @@
     }
 
     //点击名字跳转
-    function toName(product_id,expertation_id) {
-        window.location.href = contextpath +'expertation/showExpertation.action?product_id='+product_id+'&declaration_id='+expertation_id+'&state=audit&userType=org';
+    function toName(product_id,expertation_id,online_progress) {
+        window.location.href = contextpath +'expertation/showExpertation.action?product_id='+product_id+'&declaration_id='+expertation_id+'&state=audit&userType=org&online_progress='+online_progress;
             }
     //返回
    function backparent() {
