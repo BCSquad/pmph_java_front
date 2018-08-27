@@ -1400,9 +1400,9 @@ function addSbzy(str){
 
 //打印
 function toprint(){
-    var material_id=$("#material_id").val();
+    var product_id=$("#product_id").val();
     var declaration_id=$("#expertation_id").val();
-    window.location.href=contextpath+"expertation/showExpertation.action?material_id="+material_id+"&&declaration_id="+declaration_id+"&&state=out";
+    window.location.href=contextpath+"expertation/showExpertation.action?product_id="+product_id+"&&declaration_id="+declaration_id+"&&state=out";
 
    /* $(".yijian").css("display","block");
     $("#button_cz").css("display","none");
@@ -1415,7 +1415,7 @@ function del(id){
     $('#'+id).remove();
 }
 //学科选择
-function SubjectdAdd(material_id){
+function SubjectdAdd(product_id){
 	
 	
 	var chooseArr = [];
@@ -1434,12 +1434,12 @@ function SubjectdAdd(material_id){
         fixed: false, //不固定
         title:'学科分类选择',
         maxmin: true,
-        content: contextpath+"expertation/querySubject.action?material_id="+material_id+"&chooseId="+chooseId
+        content: contextpath+"expertation/querySubject.action?product_id="+product_id+"&chooseId="+chooseId
     });
 }
 
 //内容选择
-function ContentAdd(material_id){
+function ContentAdd(product_id){
 	var chooseArr = [];
 	
 	$("input[name='contentId']").each(function(){
@@ -1456,20 +1456,29 @@ function ContentAdd(material_id){
         fixed: false, //不固定
         title:'内容分类选择',
         maxmin: true,
-        content: contextpath+"expertation/queryContent.action?material_id="+material_id+"&chooseId="+chooseId
+        content: contextpath+"expertation/queryContent.action?product_id="+product_id+"&chooseId="+chooseId
     });
 }
 
 
 //申报专业选择
 function sbzyAdd(product_id){
+	var chooseArr = [];
+	$("input[name='sbzyId']").each(function(){
+		var $t = $(this);
+		chooseArr.push($t.val());
+	});
+	var chooseId = chooseArr.toString()
+		.replace(/\[/g, '(')
+		.replace(/\]/g, ')').replace(/"/g, "");
+	
     layer.open({
         type: 2,
         area: ['800px', '600px'],
         fixed: false, //不固定
         title:'申报专业选择',
         maxmin: true,
-        content: contextpath+"expertation/toSearchZy.action?product_id="+product_id
+        content: contextpath+"expertation/toSearchZy.action?product_id="+product_id+"&chooseId="+chooseId
     });
 }
 

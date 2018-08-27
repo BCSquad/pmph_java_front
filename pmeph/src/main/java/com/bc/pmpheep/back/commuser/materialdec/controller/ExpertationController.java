@@ -709,7 +709,7 @@ public class ExpertationController extends BaseController{
 				HttpServletResponse response){
 		ModelAndView mav = new ModelAndView("commuser/materialdec/toSubjectList");
 		//机构信息
-		String material_id = request.getParameter("material_id");
+		String product_id = request.getParameter("product_id");
 		String  currentPageStr = (String) request.getParameter("currentPage");
 		String  pageSizeStr = request.getParameter("pageSize");
 		String  typename = request.getParameter("typename");
@@ -727,7 +727,7 @@ public class ExpertationController extends BaseController{
 		}
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<>(currentPage,pageSize);
 
-		paraMap.put("material_id", material_id);
+		paraMap.put("product_id", product_id);
 		paraMap.put("chooseId", chooseId);
 		paraMap.put("endPage", pageSize);
 		paraMap.put("currentPage", currentPage);
@@ -742,6 +742,7 @@ public class ExpertationController extends BaseController{
 		}
 		pageParameter.setParameter(paraMap);
 		PageResult<Map<String,Object>> pageResult = this.etService.selectSubjectList(pageParameter);
+		mav.addObject("chooseId", chooseId);
 		mav.addObject("pageResult", pageResult);
 		mav.addObject("paraMap", paraMap);
 		return mav;
@@ -755,7 +756,7 @@ public class ExpertationController extends BaseController{
 				HttpServletResponse response){
 		ModelAndView mav = new ModelAndView("commuser/materialdec/toContentList");
 		//机构信息
-		String material_id = request.getParameter("material_id");
+		String product_id = request.getParameter("product_id");
 		String  currentPageStr = (String) request.getParameter("currentPage");
 		String  pageSizeStr = request.getParameter("pageSize");
 		String  namepath = request.getParameter("namepath");
@@ -773,7 +774,7 @@ public class ExpertationController extends BaseController{
 		}
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<>(currentPage,pageSize);
 
-		paraMap.put("material_id", material_id);
+		paraMap.put("product_id", product_id);
 		paraMap.put("endPage", pageSize);
 		paraMap.put("currentPage", currentPage);
 		paraMap.put("chooseId", chooseId);
@@ -788,6 +789,7 @@ public class ExpertationController extends BaseController{
 		}
 		pageParameter.setParameter(paraMap);
 		PageResult<Map<String,Object>> pageResult = this.etService.selectContentList(pageParameter);
+		mav.addObject("chooseId", chooseId);
 		mav.addObject("pageResult", pageResult);
 		mav.addObject("paraMap", paraMap);
 		return mav;
@@ -803,6 +805,7 @@ public class ExpertationController extends BaseController{
 		String  currentPageStr = (String) request.getParameter("currentPage");
 		String  pageSizeStr = request.getParameter("pageSize");
 		String  namepath = request.getParameter("namepath");
+		String chooseId = request.getParameter("chooseId"); // 已选id 格式如 66,65
 		Map<String,Object> paraMap = new HashMap<String,Object>();
 		//分页查询
 		int currentPage = 0;
@@ -819,6 +822,7 @@ public class ExpertationController extends BaseController{
 		paraMap.put("product_id", product_id);
 		paraMap.put("endPage", pageSize);
 		paraMap.put("currentPage", currentPage);
+		paraMap.put("chooseId", chooseId);
 		if(namepath!=null && !namepath.equals("")){
 			try {
 				namepath = URLDecoder.decode(namepath,"UTF-8");
@@ -830,6 +834,7 @@ public class ExpertationController extends BaseController{
 		}
 		pageParameter.setParameter(paraMap);
 		PageResult<Map<String,Object>> pageResult = this.etService.querySbzyList(pageParameter);
+
 		mav.addObject("pageResult", pageResult);
 		mav.addObject("productOrMaterial", "product");
 		mav.addObject("paraMap", paraMap);

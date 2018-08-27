@@ -24,7 +24,8 @@
 	<div class="qy_div">
 		<div style="width: 100%;margin-top: 20px;">
 			<span class="mc1">内容分类关键字：</span>
-			<input type="hidden" id="material_id" name="material_id" value="${paraMap.material_id}">
+			<input type="hidden" id="product_id" name="product_id" value="${paraMap.product_id}">
+			<input type="hidden" id="chooseId" name="chooseId" value="${paraMap.chooseId}">
 			<input class="cg_input" style="width: 400px;height: 36px;" id="namepath" name="namepath" value="${paraMap.namepath}" />
 			<div class="cxbutn" onclick="javascript:query()">
 				<span>查询</span>
@@ -72,14 +73,15 @@
 	</div>
 </body>
 <script>
-var material_id = $("#material_id").val();
+var product_id = $("#product_id").val();
+var chooseId = $("#chooseId").val();
 Page({
     num: parseInt("${pageResult.pageTotal}"),					//页码数
     startnum: parseInt("${pageResult.pageNumber}"),				//指定页码
     elem: $('#page1'),		//指定的元素
     callback: function (n) {	//回调函数
     	var namepath =$("#namepath").val();
-        window.location.href="${ctx}/expertation/queryContent.action?currentPage="+n+"&pageSize="+$("input[name='pageSize']").val()+"&material_id="+material_id+"&namepath="+encodeURI(encodeURI(namepath));
+        window.location.href="${ctx}/expertation/queryContent.action?currentPage="+n+"&pageSize="+$("input[name='pageSize']").val()+"&product_id="+product_id+"&namepath="+encodeURI(encodeURI(namepath))+"&chooseId="+chooseId;
     }
 });
 $(function () {
@@ -89,7 +91,7 @@ $(function () {
         optionHeight: 30,
         onChange:function (){
         	var namepath =$("#namepath").val();
-        	window.location.href="${ctx}/expertation/queryContent.action?currentPage="+n+"&pageSize="+$("input[name='pageSize']").val()+"&material_id="+material_id+"&namepath="+encodeURI(encodeURI(namepath));
+        	window.location.href="${ctx}/expertation/queryContent.action?currentPage="+n+"&pageSize="+$("input[name='pageSize']").val()+"&product_id="+product_id+"&namepath="+encodeURI(encodeURI(namepath))+"&chooseId="+chooseId;
         }
     });
     $('#org_tab tr:last').find('td').addClass('end'); 
@@ -97,12 +99,12 @@ $(function () {
 
 function tojump(){
 	var toPage = $("#toPage").val();
-	window.location.href="${ctx}/expertation/queryContent.action?currentPage="+toPage+"&pageSize="+$("input[name='pageSize']").val()+"&material_id="+material_id;
+	window.location.href="${ctx}/expertation/queryContent.action?currentPage="+toPage+"&pageSize="+$("input[name='pageSize']").val()+"&product_id="+product_id+"&namepath="+encodeURI(encodeURI(namepath))+"&chooseId="+chooseId;
 }
 //查询
 function query(){
 	var namepath =$("#namepath").val();
-	window.location.href="${ctx}/expertation/queryContent.action?material_id="+material_id+"&namepath="+encodeURI(encodeURI(namepath));
+	window.location.href="${ctx}/expertation/queryContent.action?product_id="+product_id+"&namepath="+encodeURI(encodeURI(namepath))+"&chooseId="+chooseId;
 }
 
 //确认选择
