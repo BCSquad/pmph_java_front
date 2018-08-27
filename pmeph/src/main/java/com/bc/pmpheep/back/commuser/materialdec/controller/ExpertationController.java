@@ -572,8 +572,8 @@ public class ExpertationController extends BaseController{
 		bzyhjqkList = this.etService.queryBzyhjqk(queryMap);
 
 		//所选申报单位
-		Map<String,Object> org =etService.queryOrgById(gezlList.get(0).get("org_id").toString());
-		
+		Map<String,Object> org =etService.queryOrgById(MapUtils.getString(gezlList.get(0),"org_id"));
+
 		//填充
 		mav.addObject("queryMap", queryMap);
 		mav.addObject("gezlList", gezlList.get(0));
