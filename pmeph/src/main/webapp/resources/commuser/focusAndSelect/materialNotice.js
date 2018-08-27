@@ -79,7 +79,7 @@ function loadData(){
                     html+="</p></div> "+
                         "<div class=\"item3\">  "+
                         deadline+
-                        "<div style=\"float:right\">发布日期：" + formatDate((responsebean[i].isMaterialEntry==false||responsebean[i].authDate!=null)?responsebean[i].authDate:responsebean[i].gmtCreate, "yyyy.MM.dd") + "</div> "
+                        "<div style=\"float:right\">发布日期：" + formatDate((responsebean[i].isMaterialEntry==false||responsebean[i].authDate!=null)?responsebean[i].gmtCreate:responsebean[i].gmtCreate, "yyyy.MM.dd") + "</div> "
                     if (responsebean[i].isMaterialEntry == true && responsebean[i].notEnd == '1' && responsebean[i].declarationId == null) {
                         html+="<div class=\"gg\"\n" +
                             "                                 onclick=\"window.location.href='" + contextpath + "material/MaterialDetailRedirect.action?material_id=" + responsebean[i].materialId + "'\">\n" +
