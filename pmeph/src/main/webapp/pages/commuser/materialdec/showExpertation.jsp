@@ -493,7 +493,7 @@
         <input type="hidden" id="declaration_id" value="${declaration_id}">
 		<!-- 打印按钮(查看界面的打印按钮，与下面的确认打印不是同一个按钮)-->
 		<c:if test="${state==out}">
-			<div class="out" id="print_look" onclick="toprintdetail()">打印</div>
+			<div class="out" id="print_look" onclick="toprint()">打印</div>
 		</c:if>
 
 		
@@ -509,7 +509,7 @@
 				<div class="audit_middle">
 					<div class="audit"  onclick="showup('${gezlList.id}','2')" >退回给个人</div>
 					<div class="audit pass"  onclick="toAuditPass('${gezlList.id}','3')" >审核通过</div>
-					<div class="audit"  onclick="toprint('${gezlList.id}')" >打印</div>
+					<div class="audit" id="hisprint" onclick="toprint('${gezlList.id}')" >打印</div>
 					<div class="audit"  onclick="javascript:history.go(-1)" >返回</div>
 				</div>
 			</div>
