@@ -8,6 +8,7 @@ $(function () {
             $("#yijian").css("display","block");
             $("#print").css("display","block");
             $("#szdwyj").css("display","none");
+            $("#hisprint").css("display","none");
             $("#print_look").css("display","none");
             $("#xzsbdw").css("display","none");
             $("#return_cause_div").css("display","none");
@@ -198,6 +199,13 @@ function buttGive(){
 
 //打印按钮
 function toprint(eid) {
+    $("#yijian").css("display","block");
+    //$("#print").css("display","block");
+    $("#szdwyj").css("display","none");
+    $("#print_look").css("display","none");
+    $("#xzsbdw").css("display","none");
+    $("#return_cause_div").css("display","none");
+    $("#bookmistake").remove();
     $("#ddd").jqprint();
 
 //打印状态
@@ -360,7 +368,3 @@ function LengthLimit(obj,ml){
 	}
 }
 
-function toprintdetail() {
-	var declaration_id=$("#declaration_id").val();
-    window.location.href=contextpath+"expertation/showExpertation.action?&&declaration_id="+declaration_id+"&&state=out";
-}
