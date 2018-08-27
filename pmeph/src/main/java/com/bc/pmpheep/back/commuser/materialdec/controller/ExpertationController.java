@@ -506,8 +506,12 @@ public class ExpertationController extends BaseController{
         String declaration_id = request.getParameter("declaration_id");
         String state=request.getParameter("state");
         String userType = request.getParameter("userType");
+        String online_progress=request.getParameter("online_progress");
         if(state!=null){
-        	mav.addObject("state",state);
+			mav.addObject("state",state);
+		}
+		if(state!=online_progress){
+			mav.addObject("online_progress",online_progress);
 		}
         if(userType!=null){
         	mav.addObject("userType",userType);
