@@ -449,7 +449,7 @@
 
 
 		<!-- 申报单位 -->
-		<div class="sbxq_item1">
+		<div class="sbxq_item1" style="display: block">
 			<div>
 				<span id="tsxz_span8"></span>
 				<span class="tsxz_title" id="xzsbdw">请选择您的申报单位</span>
