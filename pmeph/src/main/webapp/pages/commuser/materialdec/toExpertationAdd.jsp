@@ -590,7 +590,7 @@
 						</tr>
 						</thead>
 						<tbody>
-						<c:if test="${empty pereditorList[0]}">
+						<c:if test="${empty wzfbqkList[0]}">
 							<tr>
 								<td class="xztd"><input class="cg_input xzip" maxlength="100"  id="wzfbqk_material_name" name="wzfb_name" <%--id="jc_material_name"--%> value="" placeholder="文章题目"/></td>
 								<td class="xztd"><input class="cg_input xzip" name="wzfb_qkmc" value=""  maxlength="20" placeholder="期刊名称"/></td>
@@ -646,7 +646,7 @@
 						</tr>
 						</thead>
 						<tbody>
-						<c:if test="${empty pereditorList[0]}">
+						<c:if test="${empty bzyhjqkList[0]}">
 							<tr>
 								<td class="xztd"><input class="cg_input xzip" maxlength="100"  id="bzyhjqk_material_name" name="hjqk_name" value="" placeholder="名称"/></td>
 								<td class="xztd"><input class="cg_input xzip" maxlength="100" name="hjqk_jb" value=""  placeholder="级别（国家、省、市、单位）"/></td>
