@@ -6,12 +6,12 @@
 	<!-- 分页查询 -->
 	<select id="getOrg" parameterType="java.util.Map"  resultType="java.util.Map">
 		select t.id,t.user_id,t.org_id,t.product_id,t.title,t.position,
-		(case  when t.online_progress=0  then '未提交'
+		/*(case  when t.online_progress=0  then '未提交'
 		when t.online_progress=1  then '未审核'
 		when t.online_progress=2  then '已退回'
 		when t.online_progress=3  then '已通过'
 		when t.online_progress=4  then '出版社退回给单位'
-		when t.online_progress=5  then '出版社退回给个人'	END)	as 	online_progress,
+		when t.online_progress=5  then '出版社退回给个人'	END)	as*/ 	online_progress ,
 		p.product_name,wu.realname,
 		(case  when t.isprint=0  then '未打印'
 		when t.isprint=1  then '已打印' 	END)	as 	isprint
