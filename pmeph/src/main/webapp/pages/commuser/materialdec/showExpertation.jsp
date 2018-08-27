@@ -472,7 +472,7 @@
 
         </div>
 		<!-- 院校推荐意见(仅打印显示) end -->
-		<c:if test="${state == 'audit' }">
+		<c:if test="${state == 'audit' && online_progress != 3}">
                 <div class="sbxq_item" id="szdwyj" style="display: block">
                     <div>
                         <span id="tsxz_span13"></span>
@@ -504,13 +504,13 @@
 		
 		
 		<!-- 机构用户审核显示  -->
-		<c:if test="${state == 'audit' }">
+		<c:if test="${state == 'audit' && online_progress != 3}">
 			<div lass = "audit_wrapper">
 				<div class="audit_middle">
-					<div class="audit" id="" onclick="showup('${gezlList.id}','2')" >退回给个人</div>
-					<div class="audit pass" id="" onclick="toAuditPass('${gezlList.id}','3')" >审核通过</div>
-					<div class="audit" id="" onclick="toprint('${gezlList.id}')" >打印</div>
-					<div class="audit" id="" onclick="javascript:history.go(-1)" >返回</div>
+					<div class="audit"  onclick="showup('${gezlList.id}','2')" >退回给个人</div>
+					<div class="audit pass"  onclick="toAuditPass('${gezlList.id}','3')" >审核通过</div>
+					<div class="audit"  onclick="toprint('${gezlList.id}')" >打印</div>
+					<div class="audit"  onclick="javascript:history.go(-1)" >返回</div>
 				</div>
 			</div>
 		</c:if>
