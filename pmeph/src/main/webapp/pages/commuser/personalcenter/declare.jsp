@@ -27,18 +27,20 @@
     <jsp:param value="homepage" name="pageTitle"/>
 </jsp:include>
 <div style="width: 100%;height: 100%;background-color:#F8F8F8">
-     <div class="content-wrapper">
+     <div class="content-wrapper" >
          <div class="title">临床决策专家申报</div>
 
          <div class="table-area">
-             <table>
+             <table >
                  <tr>
                      <th>序号</th>
                      <th>申报名称</th>
+                     <th>申报单位</th>
                      <%--<th>学科分类</th>
                      <th>内容分类</th>--%>
                      <th>提交日期</th>
-                     <th>状态&审核意见</th>
+                     <th>状态</th>
+                     <th >审核意见</th>
                      <th>操作</th>
                  </tr>
                  <tbody id="zebra-table">
@@ -64,7 +66,7 @@
                                      <div>${name_status.index+1})${contname})</div>
                                  </c:forEach>
                          </th>--%>
-
+                         <th>${list.org_name}</th>
                          <th>${list.gmt_create_new}</th>
                          <c:if test="${list.online_progress==0}">
                              <th>暂存</th>
@@ -78,6 +80,21 @@
                          <c:if test="${list.online_progress==3}">
                              <th>已通过</th>
                          </c:if>
+                         <c:if test="${list.online_progress==5}">
+                             <th>审核不通过,出版社退回个人</th>
+                         </c:if>
+
+
+                         <th align="center" title='${list.return_cause}'>
+                             <div class="qwewe" >
+                           <c:if test="${list.return_cause!=null}">
+                               ${list.return_cause}
+                           </c:if>
+                             </div>
+                         </th>
+
+
+
                          <c:if test="${list.online_progress==0}">
                              <th style="color: #33CAA9;cursor: pointer" onclick="toupdate(1,${list.id})">修改</th>
                          </c:if>
@@ -90,7 +107,9 @@
                          <c:if test="${list.online_progress==3}">
                              <th style="color: #33CAA9;cursor: pointer" onclick="todetail(3,${list.id})">查看</th>
                          </c:if>
-
+                         <c:if test="${list.online_progress==5}">
+                             <th style="color: #33CAA9;cursor: pointer" onclick="toupdate(5,${list.id})">修改</th>
+                         </c:if>
                      </tr>
                  </c:forEach>
 
@@ -129,6 +148,7 @@
 
     .table-area{
         min-height: 80px;
+
     }
 
     table{
@@ -138,6 +158,8 @@
 
         border-spacing: 0px 0px;
         border-collapse: collapse;
+        overflow: hidden;
+        text-overflow: ellipsis;
         white-space: nowrap;
 
     }
@@ -145,6 +167,14 @@
     tr{
         height: 46px;
 
+    }
+
+    .qwewe{
+
+        width:80px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     th{
