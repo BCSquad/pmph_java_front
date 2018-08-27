@@ -510,7 +510,7 @@ public class ExpertationController extends BaseController{
         if(state!=null){
 			mav.addObject("state",state);
 		}
-		if(state!=online_progress){
+		if(online_progress!=null){
 			mav.addObject("online_progress",online_progress);
 		}
         if(userType!=null){
