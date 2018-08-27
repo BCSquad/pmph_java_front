@@ -16,11 +16,11 @@
 		else 0
 		end )as dec_editable,
 		m.deadline,
-		(case 
+		<!-- (case 
 		        when cc.is_material_entry = 1
-		        then m.gmt_create
+		        then cc.gmt_create
 		        else cc.auth_date
-		        end) as orderDate,
+		        end) as -->cc.gmt_create  orderDate,
 		cc.*
 		FROM
 				cms_content cc

@@ -71,11 +71,11 @@ select tt.* from
 	from
       (select
 	 	        t.*,b.deadline,me.notice,b.actual_deadline,b.is_force_end,b.is_all_textbook_published
-	 	        ,(case 
+	 	        ,<!-- (case 
 		        when t.is_material_entry = 1
-		        then b.gmt_create
+		        then t.gmt_create
 		        else t.auth_date
-		        end) as orderDate
+		        end) --> t.gmt_create as orderDate
 		        
 		        from cms_content t
 		        left join  material b on t.material_id =b.id
@@ -88,11 +88,11 @@ select tt.* from
 		 union
 		 select
 		        t.*,b.deadline,me.notice,b.actual_deadline,b.is_force_end,b.is_all_textbook_published
-		        ,(case 
+		        ,<!-- (case 
 		        when t.is_material_entry = 1
-		        then b.gmt_create
+		        then t.gmt_create
 		        else t.auth_date
-		        end) as orderDate
+		        end) as  -->t.gmt_create orderDate
 		        
 		        from cms_content t
 		        left join  material b on t.material_id =b.id
