@@ -797,7 +797,7 @@ function ContentAdd(product_id){
         fixed: false, //不固定
         title:'内容分类选择',
         maxmin: true,
-        content: contextpath+"expertation/queryContent.actiproduct_id_id="+product_id+"&chooseId="+chooseId
+        content: contextpath+"expertation/queryContent.action?product_id_id="+product_id+"&chooseId="+chooseId
     });
 }
 
