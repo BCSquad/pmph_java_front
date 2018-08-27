@@ -122,7 +122,7 @@
 							<td colspan="2"><span class="btbs">*</span><span>地&emsp;&emsp;址：</span>
 								<input class="cg_input" style="width: 488px;" name="address" value="${userMap.address}" id="address"  maxlength="50"/></td>
 							<td><span>&ensp;专业特长：</span>
-								<input class="cg_input" name="expertise" value="${userMap.expertise}" id="expertise"  maxlength="50"/></td>
+								<input class="cg_input" name="expertise" value="${userMap.expertise}" id="expertise"  maxlength="50" placeholder="疾病诊治及研究方向"/></td>
 						</tr>
 						<tr>
 							<td><span>&ensp;卡&emsp;&emsp;号：</span>
