@@ -185,7 +185,7 @@
 	<insert id="insertPerAchievement" parameterType="java.util.Map">
 		insert into per_achievement(id,user_id,content)
 		  values(#{per_id},#{user_id},#{content})
-		  on duplicate key update values(content)
+		  on duplicate key update content = values(content)
 	</insert>
 	<update id="updatePerAchievement" parameterType="java.util.Map">
 		update per_achievement set content = #{content} 
