@@ -412,3 +412,11 @@ a.input {
 	line-height: 30px;
 	height: 30px;
 }
+
+#bzyhjqk_img{
+	background-image: url(../image/zhuanyehuojiang.png);
+	height: 19px;
+	width: 19px;
+	float: left;
+	background-size: 100% 100%;
+}
