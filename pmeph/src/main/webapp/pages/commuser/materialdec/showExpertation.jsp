@@ -511,16 +511,18 @@
 		
 		
 		<!-- 机构用户审核显示  -->
-		<div lass = "audit_wrapper">
-			<div class="audit_middle">
-			<c:if test="${state == 'audit' && online_progress != 3}">
-				<div class="audit"  onclick="showup('${gezlList.id}','2')" >退回给个人</div>
-				<div class="audit pass"  onclick="toAuditPass('${gezlList.id}','3')" >审核通过</div>
-			</c:if>
-				<div class="audit" id="hisprint" onclick="toprint('${gezlList.id}')" >打印</div>
-				<div class="audit"  onclick="javascript:history.go(-1)" >返回</div>
+		<c:if test="${state == 'audit'}">
+			<div lass = "audit_wrapper">
+				<div class="audit_middle">
+				<c:if test="${online_progress != 3}">
+					<div class="audit"  onclick="showup('${gezlList.id}','2')" >退回给个人</div>
+					<div class="audit pass"  onclick="toAuditPass('${gezlList.id}','3')" >审核通过</div>
+				</c:if>
+					<div class="audit" id="hisprint" onclick="toprint('${gezlList.id}')" >打印</div>
+					<div class="audit"  onclick="javascript:history.go(-1)" >返回</div>
+				</div>
 			</div>
-		</div>
+		</c:if>
 		
 		
 			<!-- 退回原因填写悬浮框 -->
