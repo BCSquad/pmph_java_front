@@ -480,9 +480,11 @@
                     </div>
                     <div style="height: 30px;margin-top: 10px;">
                         <div class="scys" id="dwyjsc"><span>上传文件</span></div>
-                        <div id="fileNameDiv" class="fileNameDiv"></div>
+                        <div id="fileNameDiv" class="fileNameDiv"><a href="javascript:" onclick="downLoadProxy('${gezlList.unit_advise}')"
+                                                 title="${gezlList.syllabus_name}">${gezlList.syllabus_name}</a></div>
                         <input type="hidden" name="syllabus_id" id="syllabus_id" value="${gezlList.unit_advise}"/>
                         <input type="hidden" name="syllabus_name" id="syllabus_name" value="${gezlList.syllabus_name}"/>
+                        
                         <%--<div class="filename"><a href="javascript:" onclick="downLoadProxy('${gezlList.unit_advise}')"
                                                  title="${gezlList.syllabus_name}">${gezlList.syllabus_name}</a></div>--%>
                     </div>
@@ -551,6 +553,7 @@
 	                </div>
 	                
 	                <div class="info">
+	                	<input id="online_progress" type="hidden" value="${gezlList.online_progress }">
 	                	<input id="return_cause_hidden" type="hidden" value="${gezlList.return_cause }">
 	                    <textarea class="misarea" disabled="disabled">${gezlList.return_cause }</textarea>
 	                </div>
@@ -685,6 +688,9 @@
 	    cursor: pointer;
 	    color: #FFFFFF;
 	    margin-bottom: 10px;
+	}
+	#nrflxs , #sbzyxs , #xkflxs{
+		display:none;
 	}
 </style>
 </html>
