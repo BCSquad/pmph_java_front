@@ -180,11 +180,34 @@
             </c:forEach>
             <div class="more" onclick="top.location='${ctx}/cmsnotice/tolist.action'">更多>></div>
         </div>
-        <div class="notice area-3">
-            <div class="title" style="float: left;margin-right: 30px;">
+        <div class="notice area-2-1" style="width: 50%;display: inline-block;margin-top: 10px">
+            <div class="bgcolor-blue" style="float: left;width: 7px;height: 100%"></div>
+            <div class="lcjc-img"></div>
+            <div class="lcjc">
+                <div class="lcjc-a">
+                    <div class="lcjc-1" onclick="todeclaredetail(1)"></div>
+                    <div class="lcjc-n">人卫临床助手</div>
+                </div>
+                <div class="lcjc-a">
+                    <div class="lcjc-2" onclick="todeclaredetail(2)"></div>
+                    <div class="lcjc-n">人卫用药助手</div>
+                </div>
+                <div class="lcjc-a">
+                    <div class="lcjc-3" onclick="todeclaredetail(3)"></div>
+                    <div class="lcjc-n">人卫中医助手</div>
+                </div>
+            </div>
+        </div>
+        <div class="notice area-2-2" style="width: 49.5%;display: inline-block">
+            <div class="bgcolor-blue" style="float: left;width: 7px;height: 100%"></div>
+            <div class="lcjc-img-1"></div>
+            <div class="lcjc-img-2"></div>
+        </div>
+        <div class="notice area-3" style="margin-top: 5px">
+            <div class="title">
                 <div class="line bgcolor-blue"></div>
-                <div class="name color-blue">
-                    <div class="xxkb" style="margin-left: 36px;margin-top: 15px"></div>
+                <div class="name color-blue" style="width: 93px;height: 100%;float: left">
+                    <div class="xxkb" style="margin-left: 32px;margin-top: 15px"></div>
                 </div>
             </div>
             <c:if test="${listNot[0].first_img_url != 'none' }">

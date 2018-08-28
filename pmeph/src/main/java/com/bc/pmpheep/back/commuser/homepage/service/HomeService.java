@@ -126,5 +126,10 @@ public interface HomeService {
      * @return
      */
     int querySize(String type);
+    /**
+     * 根据产品类型查询详情
+     * @return
+     */
+    List<Map<String,Object>> quertProductByType(String product_type);
 
 }

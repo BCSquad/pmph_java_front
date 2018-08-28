@@ -50,7 +50,7 @@
                 <div class="leftContent">
                     <div class="leftContentSmall">
                         <div class="pictureDiv">
-                            <c:if test="${message.TYPE=='A'}">
+                            <c:if test="${message.TYPE=='A' || message.TYPE=='C'}">
                         		<img  class="pictureB" src="${ctx}/statics/image/pic3555.png">
                         	</c:if>
                             <c:if test="${message.TYPE=='B'}">
@@ -70,7 +70,15 @@
                     <div class="leftEvent">
                         <div class="upContentEvent">
                             <div class="eventTypeAndTime">
-                                <span class="eventType"><c:if test="${message.TYPE=='A'}">教材申报审核</c:if><c:if test="${message.TYPE=='B'}">教师资格认证</c:if></span>&nbsp;&nbsp;<span class="eventTime"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${message.gmt_create}" /></span>
+                                <span class="eventType">
+                                	<c:if test="${message.TYPE=='A'}">教材申报审核</c:if>
+                                	<c:if test="${message.TYPE=='B'}">教师资格认证</c:if>
+                                	<c:if test="${message.TYPE=='C'}">临床申报审核</c:if>
+                                </span>
+                                &nbsp;&nbsp;
+                                <span class="eventTime">
+                                	<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${message.gmt_create}" />
+                                </span>
                             </div>
                         </div>
                         <div class="downContentEvent">
@@ -202,10 +210,13 @@
 		 if(type=='A'){
 			<%--window.location.href="${ctx}/dataaudit/toPage.action?material_id="+auditId;--%>
              window.location.href = contextpath + 'dataaudit/toMaterialAudit.action?material_id=' + auditId + '&declaration_id=' + declaration_id;
-		}else if(type='B'){
+		}else if(type=='B'){
     		//跳转教师资格认证页面
 			window.location.href="${ctx}/teacherauth/toPage.action?";
+		}else if(type=='C'){
+			window.location.href='${ctx}/expertation/showExpertation.action?material_id=' + auditId + '&declaration_id=' + declaration_id+'&userType=org';
 		}
+		 
 	}
 
    /* function checkAuthen(type,auditId){
