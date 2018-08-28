@@ -87,7 +87,7 @@
 
                          <th align="center" title='${list.return_cause}'>
                              <div class="qwewe" >
-                           <c:if test="${list.return_cause!=null}">
+                           <c:if test="${list.return_cause!=null && (list.online_progress == 2 || list.online_progress == 5 ) }">
                                ${list.return_cause}
                            </c:if>
                              </div>
