@@ -32,6 +32,8 @@
 
 <div class="body">
 	<input type="hidden" id="user_id" value="${gezlList.user_id }"> 
+	<input type="hidden" id="expertation_id" value="${gezlList.id}"> 
+	
 	
 	<div class="content-wrapper">
 		<input type="hidden" name="expert_type" id="expert_type" value="${queryMap.expert_type}">
@@ -472,7 +474,9 @@
 
         </div>
 		<!-- 院校推荐意见(仅打印显示) end -->
-		<c:if test="${state == 'audit' && online_progress != 3}">
+		
+		<!-- 上传单位意见 -->
+		<c:if test="${state == 'audit' && online_progress != 2}">
                 <div class="sbxq_item" id="szdwyj" style="display: block">
                     <div>
                         <span id="tsxz_span13"></span>
@@ -490,6 +494,7 @@
                     </div>
                 </div>
 		</c:if>
+		<!-- 上传单位意见 end -->
 
 
         <input type="hidden" id="declaration_id" value="${declaration_id}">
@@ -506,16 +511,17 @@
 		
 		
 		<!-- 机构用户审核显示  -->
-		<c:if test="${state == 'audit' && online_progress != 3}">
-			<div lass = "audit_wrapper">
-				<div class="audit_middle">
-					<div class="audit"  onclick="showup('${gezlList.id}','2')" >退回给个人</div>
-					<div class="audit pass"  onclick="toAuditPass('${gezlList.id}','3')" >审核通过</div>
-					<div class="audit" id="hisprint" onclick="toprint('${gezlList.id}')" >打印</div>
-					<div class="audit"  onclick="javascript:history.go(-1)" >返回</div>
-				</div>
+		<div lass = "audit_wrapper">
+			<div class="audit_middle">
+			<c:if test="${state == 'audit' && online_progress != 3}">
+				<div class="audit"  onclick="showup('${gezlList.id}','2')" >退回给个人</div>
+				<div class="audit pass"  onclick="toAuditPass('${gezlList.id}','3')" >审核通过</div>
+			</c:if>
+				<div class="audit" id="hisprint" onclick="toprint('${gezlList.id}')" >打印</div>
+				<div class="audit"  onclick="javascript:history.go(-1)" >返回</div>
 			</div>
-		</c:if>
+		</div>
+		
 		
 			<!-- 退回原因填写悬浮框 -->
 	        <div class="bookmistake" id="bookmistake">

@@ -179,7 +179,9 @@ function upload(){
             $("#fileNameDiv").css("display","inline");
             $("#syllabus_id").val(fileid);
             $("#syllabus_name").val(filename);
+            toAudit($("#expertation_id").val(),null,"doNotReLocate");
             console.log("上传完成：name " + filename + " fileid " + fileid);
+            
         },
         valid:function(file){
             if(file.size/1024/1024>=100){ //判断文件上传大小
@@ -223,7 +225,7 @@ function toprint(eid) {
 
 
 //提交   通过3 
-function toAudit(id,type){
+function toAudit(id,type,doLocation){
 	var user_id=$("#user_id").val();
     var syllabus_id=$("#syllabus_id").val();
     var syllabus_name=$("#syllabus_name").val();
@@ -261,7 +263,9 @@ function toAudit(id,type){
 			    	 */
 			    		 
 			    	 }
-			    	 window.location.href = contextpath+"schedule/scheduleList.action";
+			    	 if(!doLocation){
+			    		 window.location.href = contextpath+"schedule/scheduleList.action";
+			    	 }
 			    }else{
 			    	message.success("失败了！");
 			    }
