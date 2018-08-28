@@ -6,8 +6,6 @@ $(function () {
 
         if(state=="out"){
             $("#print").css("display","block");
-            //$("#szdwyj").css("display","none");
-            $("#xzsbdw").css("display","none");
             $("#return_cause_div").css("display","none");
             $("#bookmistake").remove();
         }
@@ -196,8 +194,6 @@ function buttGive(){
 
 //打印按钮
 function toprint(eid) {
-   // $("#szdwyj").css("display","none");
-    $("#xzsbdw").css("display","none");
     $("#return_cause_div").css("display","none");
     $("#bookmistake").remove();
     $("#ddd").jqprint();
