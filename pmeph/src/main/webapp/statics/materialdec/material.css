@@ -419,3 +419,10 @@ a.input {
 	float: left;
 	background-size: 100% 100%;
 }
+
+.adress{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 420px;
+}
