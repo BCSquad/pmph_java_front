@@ -505,6 +505,7 @@ function add_wzfbqk() {
     var num = fnt();
     var $table = $("#tab_wzfbqk");
     var $tr=$("<tr id='wzfbqk_"+num+"'>\n" +
+        "<input type='hidden' name='wzfbxq_id' value=''>"+
         "<td class=\"xztd\"><input class=\"cg_input xzip\" maxlength=\"100\"  id=\"wzfbqk_material_name_"+num+"\" name=\"wzfb_name\" value=\"\" placeholder=\"文章题目\"/></td>\n" +
         "<td class=\"xztd\"><input class=\"cg_input\" name=\"wzfb_qkmc\" value=\"\"  maxlength=\"20\" placeholder=\"期刊名称\"/></td>\n" +
         "<td class=\"xztd\"><input class=\"cg_input\" name=\"wzfb_njq\" value=\"\" placeholder=\"\"/></td>\n" +
@@ -524,6 +525,7 @@ function add_bzyhjqk() {
     var num = fnt();
     var $table = $("#tab_bzyhjqk");
     var $tr=$("<tr id='bzyhjqk_"+num+"'>\n" +
+        "<input type='hidden' name='bzyhqqk_id' value=''>"+
         "<td class=\"xztd\"><input class=\"cg_input xzip\" maxlength=\"100\"  id=\"bzyhjqk_material_name_"+num+"\" name=\"hjqk_name\"  value=\"\" placeholder=\"名称\"/></td>\n" +
         "<td class=\"xztd\"><input class=\"cg_input xzip\" maxlength=\"100\" name=\"hjqk_jb\" value=\"\"  placeholder=\"级别（国家、省、市、单位）\"/></td>\n" +
         "<td class=\"xztd\"><input class=\"cg_input xzip\" maxlength=\"100\" name=\"hjqk_note\" value=\"\"  placeholder=\"备注\"/></td>\n" +
