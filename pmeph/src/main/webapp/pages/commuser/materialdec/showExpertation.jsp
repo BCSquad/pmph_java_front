@@ -322,7 +322,7 @@
 			<!--文章发表情况（须第一作者，与本专业相关）-->
 			<div class="sbxq_item" id="wzfbqk" >
 				<div>
-					<span id="tsxz_span7"></span>
+					<span id="tsxz_span6"></span>
 					<span class="tsxz_title">文章发表情况（须第一作者，与本专业相关）</span>
 				</div>
 				<div class="content">
@@ -353,7 +353,7 @@
 			<!--本专业获奖情况-->
 			<div class="sbxq_item" id="bzyhjqk" >
 				<div>
-					<span id="tsxz_span7"></span>
+					<span id="bzyhjqk_img"></span>
 					<span class="tsxz_title">本专业获奖情况</span>
 				</div>
 				<div class="content">

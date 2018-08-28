@@ -652,7 +652,7 @@
             <!--文章发表情况-->
             <div class="sbxq_item" id="wzfbqk">
                 <div>
-                    <span id="tsxz_span11"></span>
+                    <span id="tsxz_span6"></span>
                     <span class="tsxz_title">文章发表情况</span>
                     <span class="tsxz_ts" id="wzfbqk_bt"><img src="${ctx}/statics/image/btxx.png"/></span>
                     <span class="tsxz_xt" id="wzfbqk_xt" >（选填）</span>
@@ -710,7 +710,7 @@
             <!--本专业获奖情况-->
             <div class="sbxq_item" id="bzyhjqk">
                 <div>
-                    <span id="tsxz_span14"></span>
+                    <span id="bzyhjqk_img"></span>
                     <span class="tsxz_title">本专业获奖情况</span>
                     <span class="tsxz_ts" id="bzyhjqk_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
                     <span class="tsxz_xt" id="bzyhjqk_xt" >（选填）</span>
