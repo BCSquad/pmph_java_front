@@ -652,7 +652,7 @@
             <!--文章发表情况-->
             <div class="sbxq_item" id="wzfbqk">
                 <div>
-                    <span id="tsxz_span11"></span>
+                    <span id="tsxz_span6"></span>
                     <span class="tsxz_title">文章发表情况</span>
                     <span class="tsxz_ts" id="wzfbqk_bt"><img src="${ctx}/statics/image/btxx.png"/></span>
                     <span class="tsxz_xt" id="wzfbqk_xt" >（选填）</span>
@@ -710,7 +710,7 @@
             <!--本专业获奖情况-->
             <div class="sbxq_item" id="bzyhjqk">
                 <div>
-                    <span id="tsxz_span14"></span>
+                    <span id="bzyhjqk_img"></span>
                     <span class="tsxz_title">本专业获奖情况</span>
                     <span class="tsxz_ts" id="bzyhjqk_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
                     <span class="tsxz_xt" id="bzyhjqk_xt" >（选填）</span>
@@ -955,6 +955,26 @@
                 <div style="color: red;font-size: 16px;margin-top: 15px;">（提示：如暂存或提交不成功请使用360浏览器极速模式或谷歌浏览器）</div>
             </div>
         </form>
+
+            <!-- 退回原因显示悬浮框 -->
+            <div class="bookmistake" id="return_cause_div">
+                <div class="apache">
+                    <div class="mistitle">退回原因:</div>
+                    <div class="xx" onclick="$('#return_cause_div').fadeOut(500);"></div>
+                </div>
+
+                <div class="info">
+                    <%--bug 4586 已被出版社退回的用户 应该提示退回原因--%>
+                    <input id="return_cause_hidden" type="hidden" value="${gezlList.return_cause }">
+                    <input id="online_progress_hidden" type="hidden" value="${gezlList.online_progress }">
+                    <textarea class="misarea" disabled="disabled">${gezlList.return_cause }</textarea>
+                </div>
+
+                <div class="">
+                    <button class="btn" type="button" onclick="$('#return_cause_div').fadeOut(500);">确认</button>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

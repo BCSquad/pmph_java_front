@@ -5,11 +5,8 @@ $(function () {
 	var state=$("#printout").val();
 
         if(state=="out"){
-            $("#yijian").css("display","block");
             $("#print").css("display","block");
-            $("#szdwyj").css("display","none");
-            $("#hisprint").css("display","none");
-            $("#print_look").css("display","none");
+            //$("#szdwyj").css("display","none");
             $("#xzsbdw").css("display","none");
             $("#return_cause_div").css("display","none");
             $("#bookmistake").remove();
@@ -201,10 +198,7 @@ function buttGive(){
 
 //打印按钮
 function toprint(eid) {
-    $("#yijian").css("display","block");
-    //$("#print").css("display","block");
-    $("#szdwyj").css("display","none");
-    $("#print_look").css("display","none");
+   // $("#szdwyj").css("display","none");
     $("#xzsbdw").css("display","none");
     $("#return_cause_div").css("display","none");
     $("#bookmistake").remove();

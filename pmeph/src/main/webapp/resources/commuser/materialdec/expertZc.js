@@ -89,6 +89,12 @@ $(function () {
     //其他社教材-职务
     selectOption("jcjb_sl");
 
+
+
+    if ($("#return_cause_hidden").val().length>0&&($("#online_progress_hidden").val()=='2'||$("#online_progress_hidden").val()=='5')) {
+        $("#return_cause_div").fadeIn(800);
+    }
+
 });
 
 //下拉框格式优化
@@ -1400,6 +1406,10 @@ function addSbzy(str){
 
 //打印
 function toprint(){
+    //退回原因
+    $("#return_cause_div").css("display","none");
+    $("#bookmistake").remove();
+
     var product_id=$("#product_id").val();
     var declaration_id=$("#expertation_id").val();
     window.location.href=contextpath+"expertation/showExpertation.action?product_id="+product_id+"&&declaration_id="+declaration_id+"&&state=out";
