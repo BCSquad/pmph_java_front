@@ -59,31 +59,31 @@
 			<div class="content">
 				<table class="tab_1">
 					<tr>
-						<td><span>姓&emsp;&emsp;名：${gezlList.realname}</span></td>
+						<td><span title="${gezlList.realname}">姓&emsp;&emsp;名：${gezlList.realname}</span></td>
 						<td><span>性&emsp;&emsp;别：
 								<c:if test="${gezlList.sex == '0'}">保密</c:if>
 								<c:if test="${gezlList.sex == '1'}">男</c:if>
 								<c:if test="${gezlList.sex == '2'}">女</c:if>
 							</span></td>
-						<td><span>出生年月：${gezlList.birthday1}</span></td>
-						<td><span>工作单位：${gezlList.org_name}</span></td>
+						<td><span title="${gezlList.birthday1}">出生年月：${gezlList.birthday1}</span></td>
+						<td><span title="${gezlList.org_name}">工作单位：${gezlList.org_name}</span></td>
 					</tr>
 					<tr>
 
-						<td><span>职&emsp;&emsp;务：${gezlList.position}</span></td>
-						<td><span>职&emsp;&emsp;称：${gezlList.title}</span></td>
-						<td><span>联系电话：${gezlList.telephone}</span></td>
-						<td><span>手&emsp;&emsp;机：${gezlList.handphone}</span></td>
+						<td><span title="${gezlList.position}">职&emsp;&emsp;务：${gezlList.position}</span></td>
+						<td><span title="${gezlList.title}">职&emsp;&emsp;称：${gezlList.title}</span></td>
+						<td><span title="${gezlList.telephone}">联系电话：${gezlList.telephone}</span></td>
+						<td><span title="${gezlList.handphone}">手&emsp;&emsp;机：${gezlList.handphone}</span></td>
 					</tr>
 					<tr>
-						<td><span>邮&emsp;&emsp;箱：${gezlList.email}</span></td>
+						<td><span title="${gezlList.email}">邮&emsp;&emsp;箱：${gezlList.email}</span></td>
 						<td><span>证件类型：
 								<c:if test="${gezlList.idtype == '0'}">身份证</c:if>
 								<c:if test="${gezlList.idtype == '1'}">护照</c:if>
 								<c:if test="${gezlList.idtype == '2'}">军官证</c:if>
 							</span>
 						</td>
-						<td><span>证件号码：${gezlList.idcard}</span></td>
+						<td><span title="${gezlList.idcard}">证件号码：${gezlList.idcard}</span></td>
 						<td><span>学&emsp;&emsp;历：
                                 <c:if test="${gezlList.education == '0'}">无</c:if>
 						        <c:if test="${gezlList.education == '1'}">专科</c:if>
@@ -94,14 +94,14 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span>邮&emsp;&emsp;编：${gezlList.postcode}</span></td>
-						<td><span>地&emsp;&emsp;址：${gezlList.address}</span></td>
-						<td colspan="2"><span>专业特长(疾病诊治及研究方向)：${gezlList.expertise}</span></td>
+						<td><span title="${gezlList.postcode}">邮&emsp;&emsp;编：${gezlList.postcode}</span></td>
+						<td colspan="2"><div class="adress" title="${gezlList.address}">地&emsp;&emsp;址：${gezlList.address}</div></td>
+						<td><span title="${gezlList.expertise}">专业特长(疾病诊治及研究方向)：${gezlList.expertise}</span></td>
 
 					</tr>
 					<tr>
-						<td><span>卡号：${gezlList.banknumber}</span></td>
-						<td colspan="2"><span>开户行：${gezlList.bankaddress}</span></td>
+						<td><span title="${gezlList.banknumber}">卡号：${gezlList.banknumber}</span></td>
+						<td colspan="2"><span title="${gezlList.bankaddress}">开户行：${gezlList.bankaddress}</span></td>
 						<%--<td><span>传&emsp;&emsp;真：${gezlList.fax}</span></td>--%>
 					</tr>
 
