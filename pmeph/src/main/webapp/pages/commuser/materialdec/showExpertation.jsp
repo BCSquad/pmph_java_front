@@ -64,32 +64,42 @@
 								<c:if test="${gezlList.sex == '2'}">女</c:if>
 							</span></td>
 						<td><span>出生年月：${gezlList.birthday1}</span></td>
-						<td><span>地&emsp;&emsp;址：${gezlList.address}</span></td>
+						<td><span>工作单位：${gezlList.org_name}</span></td>
 					</tr>
 					<tr>
-						<td><span>工作单位：${gezlList.org_name}</span></td>
+
 						<td><span>职&emsp;&emsp;务：${gezlList.position}</span></td>
 						<td><span>职&emsp;&emsp;称：${gezlList.title}</span></td>
-						<td><span>E-mail：&emsp;${gezlList.email}</span></td>
-					</tr>
-					<tr>
-						<td><span>邮&emsp;&emsp;编：${gezlList.postcode}</span></td>
 						<td><span>联系电话：${gezlList.telephone}</span></td>
-						<td><span>传&emsp;&emsp;真：${gezlList.fax}</span></td>
 						<td><span>手&emsp;&emsp;机：${gezlList.handphone}</span></td>
 					</tr>
 					<tr>
+						<td><span>邮&emsp;&emsp;箱：${gezlList.email}</span></td>
 						<td><span>证件类型：
 								<c:if test="${gezlList.idtype == '0'}">身份证</c:if>
 								<c:if test="${gezlList.idtype == '1'}">护照</c:if>
 								<c:if test="${gezlList.idtype == '2'}">军官证</c:if>
-							</span></td>
+							</span>
+						</td>
 						<td><span>证件号码：${gezlList.idcard}</span></td>
-						<td colspan="2"><span>开户行：${gezlList.bankaddress}</span></td>
+						<td><span>学&emsp;&emsp;历：
+						        <c:if test="${gezlList.education == '0'}">专科</c:if>
+								<c:if test="${gezlList.education == '1'}">本科</c:if>
+								<c:if test="${gezlList.education == '2'}">硕士</c:if>
+							    <c:if test="${gezlList.education == '2'}">博士后</c:if>
+						    </span>
+						</td>
+					</tr>
+					<tr>
+						<td><span>邮&emsp;&emsp;编：${gezlList.postcode}</span></td>
+						<td><span>地&emsp;&emsp;址：${gezlList.address}</span></td>
+						<td colspan="2"><span>专业特长(疾病诊治及研究方向)：${gezlList.expertise}</span></td>
+
 					</tr>
 					<tr>
 						<td><span>卡号：${gezlList.banknumber}</span></td>
-						<td><span>专业特长(疾病诊治及研究方向)：${gezlList.expertise}</span></td>
+						<td colspan="2"><span>开户行：${gezlList.bankaddress}</span></td>
+						<%--<td><span>传&emsp;&emsp;真：${gezlList.fax}</span></td>--%>
 					</tr>
 
 				</table>
@@ -439,7 +449,7 @@
 
 
 		<!-- 申报单位 -->
-		<div class="sbxq_item1">
+		<div class="sbxq_item1" style="display: block">
 			<div>
 				<span id="tsxz_span8"></span>
 				<span class="tsxz_title" id="xzsbdw">请选择您的申报单位</span>
@@ -462,7 +472,7 @@
 
         </div>
 		<!-- 院校推荐意见(仅打印显示) end -->
-		<c:if test="${state == 'audit' }">
+		<c:if test="${state == 'audit' && online_progress != 3}">
                 <div class="sbxq_item" id="szdwyj" style="display: block">
                     <div>
                         <span id="tsxz_span13"></span>
@@ -482,7 +492,10 @@
 
         <input type="hidden" id="declaration_id" value="${declaration_id}">
 		<!-- 打印按钮(查看界面的打印按钮，与下面的确认打印不是同一个按钮)-->
-		<div class="out" id="print_look" onclick="toprintdetail()">打印</div>
+		<c:if test="${state==out}">
+			<div class="out" id="print_look" onclick="toprint()">打印</div>
+		</c:if>
+
 		
 		<!-- 打印按钮(仅打印显示)-->
 		<div class="out" id="print" onclick="toprint()" style="display: none">确认打印</div>
@@ -491,13 +504,13 @@
 		
 		
 		<!-- 机构用户审核显示  -->
-		<c:if test="${state == 'audit' }">
+		<c:if test="${state == 'audit' && online_progress != 3}">
 			<div lass = "audit_wrapper">
 				<div class="audit_middle">
-					<div class="audit" id="" onclick="showup('${gezlList.id}','2')" >退回给个人</div>
-					<div class="audit pass" id="" onclick="toAuditPass('${gezlList.id}','3')" >审核通过</div>
-					<div class="audit" id="" onclick="toprint('${gezlList.id}')" >打印</div>
-					<div class="audit" id="" onclick="javascript:history.go(-1)" >返回</div>
+					<div class="audit"  onclick="showup('${gezlList.id}','2')" >退回给个人</div>
+					<div class="audit pass"  onclick="toAuditPass('${gezlList.id}','3')" >审核通过</div>
+					<div class="audit" id="hisprint" onclick="toprint('${gezlList.id}')" >打印</div>
+					<div class="audit"  onclick="javascript:history.go(-1)" >返回</div>
 				</div>
 			</div>
 		</c:if>

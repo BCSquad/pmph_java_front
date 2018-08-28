@@ -506,8 +506,12 @@ public class ExpertationController extends BaseController{
         String declaration_id = request.getParameter("declaration_id");
         String state=request.getParameter("state");
         String userType = request.getParameter("userType");
+        String online_progress=request.getParameter("online_progress");
         if(state!=null){
-        	mav.addObject("state",state);
+			mav.addObject("state",state);
+		}
+		if(online_progress!=null){
+			mav.addObject("online_progress",online_progress);
 		}
         if(userType!=null){
         	mav.addObject("userType",userType);
@@ -861,7 +865,7 @@ public class ExpertationController extends BaseController{
             Map<String, Object> map=etService.queryExpertationDetail(user.get("id").toString(),expert_type);
             if(map==null){
                 modelAndView=this.toMaterialAdd(request,expert_type);
-            }else if(map.get("online_progress").toString().equals("0")  //未提交	
+            }else if(map.get("online_progress").toString().equals("0")  //未提交
             		||map.get("online_progress").toString().equals("2") //被申报单位退回
             		||map.get("online_progress").toString().equals("5") //被出版社退回
             		){
