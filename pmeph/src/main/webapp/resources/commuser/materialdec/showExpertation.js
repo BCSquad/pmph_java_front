@@ -12,8 +12,8 @@ $(function () {
             $("#bookmistake").remove();
         }
 
-
-	if ($("#return_cause_hidden").val().length>0 && state!="out") {
+    var online_progress = $("#online_progress").val();
+	if ($("#return_cause_hidden").val().length>0 && state!="out" && online_progress == "4") {
 
 		$("#return_cause_div").fadeIn(800);
 	}
@@ -172,7 +172,7 @@ function upload(){
         },
         done: function (filename, fileid) {
             $("#fileNameDiv").empty(); //清楚内容
-            $("#fileNameDiv").append("<span><div class=\"filename whetherfile\"><a href='javascript:' class='filename'  onclick='downLoadProxy("+fileid+")' title='\"+filename+\"'>"+filename+"</a></div></span>");
+            $("#fileNameDiv").append("<span><div class=\"filename whetherfile\"><a href='javascript:' class='filename'  onclick='downLoadProxy(\""+fileid+"\")' title=\""+filename+"\">"+filename+"</a></div></span>");
             $("#fileNameDiv").css("display","inline");
             $("#syllabus_id").val(fileid);
             $("#syllabus_name").val(filename);

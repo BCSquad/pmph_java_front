@@ -89,6 +89,12 @@ $(function () {
     //其他社教材-职务
     selectOption("jcjb_sl");
 
+
+
+    if ($("#return_cause_hidden").val().length>0&&($("#online_progress_hidden").val()=='2'||$("#online_progress_hidden").val()=='5')) {
+        $("#return_cause_div").fadeIn(800);
+    }
+
 });
 
 //下拉框格式优化
@@ -979,10 +985,10 @@ function add_wzfbqk() {
     var $tr=$("<tr id='wzfbqk_"+num+"'>\n" +
         "<input type='hidden' name='wzfbxq_id' value=''>"+
         "<td class=\"xztd\"><input class=\"cg_input xzip\" maxlength=\"100\"  id=\"wzfbqk_material_name_"+num+"\" name=\"wzfb_name\" value=\"\" placeholder=\"文章题目\"/></td>\n" +
-        "<td class=\"xztd\"><input class=\"cg_input\" name=\"wzfb_qkmc\" value=\"\"  maxlength=\"20\" placeholder=\"期刊名称\"/></td>\n" +
-        "<td class=\"xztd\"><input class=\"cg_input\" name=\"wzfb_njq\" value=\"\" placeholder=\"\"/></td>\n" +
-        "<td class=\"xztd\"><input class=\"cg_input\" maxlength=\"100\" name=\"wzfb_qklb\" value=\"\"  placeholder=\"\"/></td>\n" +
-        "<td class=\"xztd\"><input class=\"cg_input\" maxlength=\"100\" name=\"wzfb_note\" value=\"\"  placeholder=\"备注\"/></td>\n" +
+        "<td class=\"xztd\"><input class=\"cg_input xzip\" name=\"wzfb_qkmc\" value=\"\"  maxlength=\"20\" placeholder=\"期刊名称\"/></td>\n" +
+        "<td class=\"xztd\"><input class=\"cg_input xzip\" name=\"wzfb_njq\" value=\"\" placeholder=\"\"/></td>\n" +
+        "<td class=\"xztd\"><input class=\"cg_input xzip\" maxlength=\"100\" name=\"wzfb_qklb\" value=\"\"  placeholder=\"\"/></td>\n" +
+        "<td class=\"xztd\"><input class=\"cg_input xzip\" maxlength=\"100\" name=\"wzfb_note\" value=\"\"  placeholder=\"备注\"/></td>\n" +
         "<td class=\"xztd\"><img class=\"add_img\" src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('wzfbqk_"+num+"')\"/></td>\n" +
         "</tr>");
     $table.append($tr);
@@ -1400,6 +1406,10 @@ function addSbzy(str){
 
 //打印
 function toprint(){
+    //退回原因
+    $("#return_cause_div").css("display","none");
+    $("#bookmistake").remove();
+
     var product_id=$("#product_id").val();
     var declaration_id=$("#expertation_id").val();
     window.location.href=contextpath+"expertation/showExpertation.action?product_id="+product_id+"&&declaration_id="+declaration_id+"&&state=out";
