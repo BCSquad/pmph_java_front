@@ -454,8 +454,6 @@
 		<div class="sbxq_item1" style="display: block">
 			<div>
 				<span id="tsxz_span8"></span>
-				<span class="tsxz_title" id="xzsbdw">请选择您的申报单位</span>
-				<%--<span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.product_id}')">添加学科分类</span>--%>
 			</div>
 			<div class="sbdw" id="xkfladd">
 				<span class="btmc">申报单位：${org.org_name }</span>
