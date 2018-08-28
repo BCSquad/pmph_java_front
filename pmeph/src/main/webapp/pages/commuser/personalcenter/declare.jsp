@@ -30,8 +30,8 @@
      <div class="content-wrapper" >
          <div class="title">临床决策专家申报</div>
 
-         <div class="table-area">
-             <table >
+         <div class="table-area"  >
+             <table  >
                  <tr>
                      <th>序号</th>
                      <th>申报名称</th>
