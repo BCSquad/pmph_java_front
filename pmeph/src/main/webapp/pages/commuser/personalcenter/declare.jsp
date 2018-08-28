@@ -28,7 +28,10 @@
 </jsp:include>
 <div style="width: 100%;height: 100%;background-color:#F8F8F8">
      <div class="content-wrapper" >
-         <div class="title">临床决策专家申报</div>
+         <div class="title">临床决策专家申报
+             <a > <span id="sxy-spantopright" style="cursor: pointer;" onclick="window.location='${ctx}/personalhomepage/tohomepage.action?pagetag=dt'">&lt;&lt;返回个人中心</span>
+             </a>
+         </div>
 
          <div class="table-area"  >
              <table  >
@@ -66,7 +69,7 @@
                                      <div>${name_status.index+1})${contname})</div>
                                  </c:forEach>
                          </th>--%>
-                         <th>${list.org_name}</th>
+                         <th>${list.org_name2}</th>
                          <th>${list.gmt_create_new}</th>
                          <c:if test="${list.online_progress==0}">
                              <th>暂存</th>
@@ -81,7 +84,7 @@
                              <th>已通过</th>
                          </c:if>
                          <c:if test="${list.online_progress==5}">
-                             <th>审核不通过,出版社退回个人</th>
+                             <th>出版社退回个人</th>
                          </c:if>
 
 
@@ -137,13 +140,17 @@
     }
 
     .title{
-        width: 1185px;
+        width: 1170px;
         height: 25px;
         background-color: white;
         margin-top: 40px;
         float: left;
-        padding: 15px 0 15px 15px;
+        padding: 15px 15px 15px 15px;
         margin-bottom: 30px;
+    }
+
+    .title a{
+        float: right;
     }
 
     .table-area{

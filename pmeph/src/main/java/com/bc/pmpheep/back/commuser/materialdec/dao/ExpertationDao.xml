@@ -186,12 +186,14 @@
 			/*group_concat(DISTINCT pst.type_name  SEPARATOR '_,_') as type_name,
 			group_concat(DISTINCT pd.name_path  SEPARATOR '_,_') as name_path,*/
 			e.*,
+			org.org_name as org_name2,
 			DATE_FORMAT(e.gmt_create,'%Y-%m-%d') as gmt_create_new
 			from expertation e
 			left join expertation_content_type et on et.expertation_id = e.id
 			left join product_content_type_detail pd on et.product_content_type_id = pd.product_type_id
 			left join expertation_subject_type est on est.expertation_id=e.id
 			left join product_subject_type  pst on pst.id=est.product_subject_type_id
+			left join  org on e.org_id=org.id
             where e.user_id=#{user_id}
             group by e.id
 	</select>

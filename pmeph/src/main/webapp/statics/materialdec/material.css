@@ -419,3 +419,15 @@ a.input {
 	float: left;
 	background-size: 100% 100%;
 }
+
+#sxy-spantopright
+{
+	float:right;
+	height: 14px;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 50px;
+	letter-spacing: 0px;
+	color: #999999;
+}
