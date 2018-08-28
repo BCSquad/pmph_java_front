@@ -7,7 +7,7 @@ $(function () {
         if(state=="out"){
             $("#print").css("display","block");
             $("#return_cause_div").css("display","none");
-            $("#bookmistake").remove();
+            //$("#bookmistake").remove();
         }
 
     var online_progress = $("#online_progress").val();
@@ -197,7 +197,7 @@ function buttGive(){
 //打印按钮
 function toprint(eid) {
     $("#return_cause_div").css("display","none");
-    $("#bookmistake").remove();
+    //$("#bookmistake").remove();
     $("#ddd").jqprint();
 
 //打印状态
