@@ -386,7 +386,7 @@
 
 		<!--扩展信息-->
 		<c:forEach var="zjkzxx" items="${zjkzqkList}">
-			<div class="sbxq_item1">
+			<div class="sbxq_item1" style="display: block">
 				<div>
 					<span id="tsxz_span9"></span>
 					<span class="tsxz_title">${zjkzxx.extension_name}</span>
@@ -461,7 +461,7 @@
 		</div>
 
 		<!-- 院校推荐意见(仅打印显示)-->
-		<div class="yijian" style="display: none" id="yijian">
+		<div class="yijian"  id="yijian">
 			<div class="tujian01">院校推荐意见:</div>
 			<div class="tujian02">
 				<div class="qianzi">负责人签字:</div>
@@ -576,6 +576,15 @@
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
 <style>
+    @media print {
+        #yijian{
+            display: block !important;
+        }
+    }
+
+    #yijian{
+        display: none;
+    }
 	.out{
 		width: 128px;
 		height: 44px;
