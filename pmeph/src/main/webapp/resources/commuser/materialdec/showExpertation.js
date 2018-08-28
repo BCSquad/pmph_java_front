@@ -6,10 +6,8 @@ $(function () {
 
         if(state=="out"){
             $("#print").css("display","block");
-            //$("#szdwyj").css("display","none");
-            $("#xzsbdw").css("display","none");
             $("#return_cause_div").css("display","none");
-            $("#bookmistake").remove();
+            //$("#bookmistake").remove();
         }
 
     var online_progress = $("#online_progress").val();
@@ -176,7 +174,9 @@ function upload(){
             $("#fileNameDiv").css("display","inline");
             $("#syllabus_id").val(fileid);
             $("#syllabus_name").val(filename);
+            toAudit($("#expertation_id").val(),null,"doNotReLocate");
             console.log("上传完成：name " + filename + " fileid " + fileid);
+            
         },
         valid:function(file){
             if(file.size/1024/1024>=100){ //判断文件上传大小
@@ -196,10 +196,8 @@ function buttGive(){
 
 //打印按钮
 function toprint(eid) {
-   // $("#szdwyj").css("display","none");
-    $("#xzsbdw").css("display","none");
     $("#return_cause_div").css("display","none");
-    $("#bookmistake").remove();
+    //$("#bookmistake").remove();
     $("#ddd").jqprint();
 
 //打印状态
@@ -217,7 +215,7 @@ function toprint(eid) {
 
 
 //提交   通过3 
-function toAudit(id,type){
+function toAudit(id,type,doLocation){
 	var user_id=$("#user_id").val();
     var syllabus_id=$("#syllabus_id").val();
     var syllabus_name=$("#syllabus_name").val();
@@ -255,7 +253,9 @@ function toAudit(id,type){
 			    	 */
 			    		 
 			    	 }
-			    	 window.location.href = contextpath+"schedule/scheduleList.action";
+			    	 if(!doLocation){
+			    		 window.location.href = contextpath+"schedule/scheduleList.action";
+			    	 }
 			    }else{
 			    	message.success("失败了！");
 			    }

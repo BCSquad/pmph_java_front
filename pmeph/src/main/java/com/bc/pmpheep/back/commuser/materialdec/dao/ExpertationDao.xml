@@ -346,16 +346,16 @@
     <update id="updateExpertationAudit" parameterType="Map">
     	update expertation 
     	<set>
-    		<if test="online_progress != null ">
+    		<if test="online_progress != null and online_progress != '' ">
     			online_progress = #{online_progress},
     		</if>
-    		<if test="return_cause != null ">
+    		<if test="return_cause != null and return_cause != '' ">
     			return_cause = #{return_cause},
     		</if>
-            <if test="unit_advise != null ">
+            <if test="unit_advise != null and unit_advise != '' ">
                 unit_advise = #{unit_advise},
             </if>
-            <if test="syllabus_name != null ">
+            <if test="syllabus_name != null and syllabus_name != '' ">
                 syllabus_name = #{syllabus_name},
             </if>
     	</set>

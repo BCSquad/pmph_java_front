@@ -32,6 +32,8 @@
 
 <div class="body">
 	<input type="hidden" id="user_id" value="${gezlList.user_id }"> 
+	<input type="hidden" id="expertation_id" value="${gezlList.id}"> 
+	
 	
 	<div class="content-wrapper">
 		<input type="hidden" name="expert_type" id="expert_type" value="${queryMap.expert_type}">
@@ -57,48 +59,49 @@
 			<div class="content">
 				<table class="tab_1">
 					<tr>
-						<td><span>姓&emsp;&emsp;名：${gezlList.realname}</span></td>
+						<td><span title="${gezlList.realname}">姓&emsp;&emsp;名：${gezlList.realname}</span></td>
 						<td><span>性&emsp;&emsp;别：
 								<c:if test="${gezlList.sex == '0'}">保密</c:if>
 								<c:if test="${gezlList.sex == '1'}">男</c:if>
 								<c:if test="${gezlList.sex == '2'}">女</c:if>
 							</span></td>
-						<td><span>出生年月：${gezlList.birthday1}</span></td>
-						<td><span>工作单位：${gezlList.org_name}</span></td>
+						<td><span title="${gezlList.birthday1}">出生年月：${gezlList.birthday1}</span></td>
+						<td><span title="${gezlList.org_name}">工作单位：${gezlList.org_name}</span></td>
 					</tr>
 					<tr>
 
-						<td><span>职&emsp;&emsp;务：${gezlList.position}</span></td>
-						<td><span>职&emsp;&emsp;称：${gezlList.title}</span></td>
-						<td><span>联系电话：${gezlList.telephone}</span></td>
-						<td><span>手&emsp;&emsp;机：${gezlList.handphone}</span></td>
+						<td><span title="${gezlList.position}">职&emsp;&emsp;务：${gezlList.position}</span></td>
+						<td><span title="${gezlList.title}">职&emsp;&emsp;称：${gezlList.title}</span></td>
+						<td><span title="${gezlList.telephone}">联系电话：${gezlList.telephone}</span></td>
+						<td><span title="${gezlList.handphone}">手&emsp;&emsp;机：${gezlList.handphone}</span></td>
 					</tr>
 					<tr>
-						<td><span>邮&emsp;&emsp;箱：${gezlList.email}</span></td>
+						<td><span title="${gezlList.email}">邮&emsp;&emsp;箱：${gezlList.email}</span></td>
 						<td><span>证件类型：
 								<c:if test="${gezlList.idtype == '0'}">身份证</c:if>
 								<c:if test="${gezlList.idtype == '1'}">护照</c:if>
 								<c:if test="${gezlList.idtype == '2'}">军官证</c:if>
 							</span>
 						</td>
-						<td><span>证件号码：${gezlList.idcard}</span></td>
+						<td><span title="${gezlList.idcard}">证件号码：${gezlList.idcard}</span></td>
 						<td><span>学&emsp;&emsp;历：
-						        <c:if test="${gezlList.education == '0'}">专科</c:if>
-								<c:if test="${gezlList.education == '1'}">本科</c:if>
-								<c:if test="${gezlList.education == '2'}">硕士</c:if>
-							    <c:if test="${gezlList.education == '2'}">博士后</c:if>
+                                <c:if test="${gezlList.education == '0'}">无</c:if>
+						        <c:if test="${gezlList.education == '1'}">专科</c:if>
+								<c:if test="${gezlList.education == '2'}">本科</c:if>
+								<c:if test="${gezlList.education == '3'}">硕士</c:if>
+							    <c:if test="${gezlList.education == '4'}">博士</c:if>
 						    </span>
 						</td>
 					</tr>
 					<tr>
-						<td><span>邮&emsp;&emsp;编：${gezlList.postcode}</span></td>
-						<td><span>地&emsp;&emsp;址：${gezlList.address}</span></td>
-						<td colspan="2"><span>专业特长(疾病诊治及研究方向)：${gezlList.expertise}</span></td>
+						<td><span title="${gezlList.postcode}">邮&emsp;&emsp;编：${gezlList.postcode}</span></td>
+						<td colspan="2"><div class="adress" title="${gezlList.address}">地&emsp;&emsp;址：${gezlList.address}</div></td>
+						<td><span title="${gezlList.expertise}">专业特长(疾病诊治及研究方向)：${gezlList.expertise}</span></td>
 
 					</tr>
 					<tr>
-						<td><span>卡号：${gezlList.banknumber}</span></td>
-						<td colspan="2"><span>开户行：${gezlList.bankaddress}</span></td>
+						<td><span title="${gezlList.banknumber}">卡号：${gezlList.banknumber}</span></td>
+						<td colspan="2"><span title="${gezlList.bankaddress}">开户行：${gezlList.bankaddress}</span></td>
 						<%--<td><span>传&emsp;&emsp;真：${gezlList.fax}</span></td>--%>
 					</tr>
 
@@ -452,8 +455,6 @@
 		<div class="sbxq_item1" style="display: block">
 			<div>
 				<span id="tsxz_span8"></span>
-				<span class="tsxz_title" id="xzsbdw">请选择您的申报单位</span>
-				<%--<span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.product_id}')">添加学科分类</span>--%>
 			</div>
 			<div class="sbdw" id="xkfladd">
 				<span class="btmc">申报单位：${org.org_name }</span>
@@ -472,7 +473,9 @@
 
         </div>
 		<!-- 院校推荐意见(仅打印显示) end -->
-		<c:if test="${state == 'audit' && online_progress != 3}">
+		
+		<!-- 上传单位意见 -->
+		<c:if test="${state == 'audit' && online_progress != 2}">
                 <div class="sbxq_item" id="szdwyj" style="display: block">
                     <div>
                         <span id="tsxz_span13"></span>
@@ -490,6 +493,7 @@
                     </div>
                 </div>
 		</c:if>
+		<!-- 上传单位意见 end -->
 
 
         <input type="hidden" id="declaration_id" value="${declaration_id}">
@@ -506,16 +510,19 @@
 		
 		
 		<!-- 机构用户审核显示  -->
-		<c:if test="${state == 'audit' && online_progress != 3}">
+		<c:if test="${state == 'audit'}">
 			<div lass = "audit_wrapper">
 				<div class="audit_middle">
+				<c:if test="${online_progress != 3}">
 					<div class="audit"  onclick="showup('${gezlList.id}','2')" >退回给个人</div>
 					<div class="audit pass"  onclick="toAuditPass('${gezlList.id}','3')" >审核通过</div>
+				</c:if>
 					<div class="audit" id="hisprint" onclick="toprint('${gezlList.id}')" >打印</div>
 					<div class="audit"  onclick="javascript:history.go(-1)" >返回</div>
 				</div>
 			</div>
 		</c:if>
+		
 		
 			<!-- 退回原因填写悬浮框 -->
 	        <div class="bookmistake" id="bookmistake">

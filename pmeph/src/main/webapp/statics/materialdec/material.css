@@ -431,3 +431,15 @@ a.input {
 	letter-spacing: 0px;
 	color: #999999;
 }
+
+.adress{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 420px;
+
+
+
+
+
+}

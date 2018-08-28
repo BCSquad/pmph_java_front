@@ -72,25 +72,25 @@
                          <th>${list.org_name2}</th>
                          <th>${list.gmt_create_new}</th>
                          <c:if test="${list.online_progress==0}">
-                             <th>暂存</th>
+                             <th>已暂存</th>
                          </c:if>
                          <c:if test="${list.online_progress==1}">
                              <th>待审核</th>
                          </c:if>
                          <c:if test="${list.online_progress==2}">
-                             <th>审核不通过,退回原因：</th>
+                             <th>申报单位退回</th>
                          </c:if>
                          <c:if test="${list.online_progress==3}">
-                             <th>已通过</th>
+                             <th>审核通过</th>
                          </c:if>
                          <c:if test="${list.online_progress==5}">
-                             <th>出版社退回个人</th>
+                             <th>出版社退回</th>
                          </c:if>
-
+						<!-- 已暂存 待审核 审核通过  申报单位退回 出版社退回 -->
 
                          <th align="center" title='${list.return_cause}'>
                              <div class="qwewe" >
-                           <c:if test="${list.return_cause!=null}">
+                           <c:if test="${list.return_cause!=null && (list.online_progress == 2 || list.online_progress == 5 ) }">
                                ${list.return_cause}
                            </c:if>
                              </div>
