@@ -390,7 +390,7 @@
 		<!--扩展信息-->
 		<c:forEach var="zjkzxx" items="${zjkzqkList}">
 			<div class="sbxq_item1" style="display: block">
-				<div>
+				<div style="margin-bottom: 3px">
 					<span id="tsxz_span9"></span>
 					<span class="tsxz_title">${zjkzxx.extension_name}</span>
 				</div>
