@@ -117,7 +117,7 @@
 
             <c:if test="${userInfo != null}">
                 <span class="logininfo" style="cursor: pointer" onclick="window.location.href='<c:url value="/userinfo/touser.action"/>'">
-                    您好,<%=MapUtils.getString(userInfo, "nickname")%>
+                    您好,<%=MapUtils.getString(userInfo, "nkname")%>
                 </span>
 
                 <span class="logininfoout"
