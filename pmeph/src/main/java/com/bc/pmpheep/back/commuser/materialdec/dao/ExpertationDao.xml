@@ -186,7 +186,7 @@
 			/*group_concat(DISTINCT pst.type_name  SEPARATOR '_,_') as type_name,
 			group_concat(DISTINCT pd.name_path  SEPARATOR '_,_') as name_path,*/
 			e.*,
-			org.org_name as org_name2,
+			case when e.org_id=0 then '人民卫生出版社' else org.org_name end as orgName,
 			DATE_FORMAT(e.gmt_create,'%Y-%m-%d') as gmt_create_new
 			from expertation e
 			left join expertation_content_type et on et.expertation_id = e.id
