@@ -218,7 +218,8 @@ textarea{
 
 .head .user-select img {
     width: 148px;
-    height: 175px;
+   /* height: 175px;*/
+    height: 206px;
 }
 
 .head .user-select .select {

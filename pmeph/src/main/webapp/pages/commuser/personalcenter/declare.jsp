@@ -89,11 +89,11 @@
 						<!-- 已暂存 待审核 审核通过  申报单位退回 出版社退回 -->
 
                          <th align="center" title='${list.return_cause}'>
-                             <div class="qwewe" >
+                             <%--<div class="qwewe" >--%>
                            <c:if test="${list.return_cause!=null && (list.online_progress == 2 || list.online_progress == 5|| list.online_progress == 4  ) }">
                                ${list.return_cause}
                            </c:if>
-                             </div>
+                           <%--  </div>--%>
                          </th>
 
 
@@ -183,9 +183,9 @@
     .qwewe{
 
         width:80px;
-        overflow: hidden;
+        /*overflow: hidden;
         text-overflow: ellipsis;
-        white-space: nowrap;
+        white-space: nowrap;*/
     }
 
     th{
