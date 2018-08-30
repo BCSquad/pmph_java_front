@@ -180,7 +180,7 @@
             </c:forEach>
             <div class="more" onclick="top.location='${ctx}/cmsnotice/tolist.action'">更多>></div>
         </div>
-        <div class="notice area-2-1" style="width: 120%;display: inline-block;margin-top: 10px">
+        <div class="notice area-2-1" style="width: 100%;display: inline-block;margin-top: 10px">
             <div class="bgcolor-blue" style="float: left;width: 7px;height: 100%"></div>
             <div class="lcjc-img"></div>
             <div class="lcjc">
