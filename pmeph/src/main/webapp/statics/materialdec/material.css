@@ -347,7 +347,7 @@ a.input {
 
 
 .el-tag{
-	background-color: #838fa5;
+	/*background-color: #838fa5;*/
 	display: inline-block;
 	padding: 0 5px;
 	height: 26px;
