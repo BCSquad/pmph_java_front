@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.materialdec.service;
 
+import com.bc.pmpheep.back.authadmin.applydocaudit.service.DataAuditService;
 import com.bc.pmpheep.back.commuser.materialdec.dao.ExpertationDao;
 import com.bc.pmpheep.back.commuser.materialdec.dao.MaterialDetailDao;
 import com.bc.pmpheep.back.commuser.materialdec.dao.PersonInfoDao;
@@ -8,6 +9,8 @@ import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.utils.UUIDTool;
+
+import org.apache.commons.collections4.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -31,6 +34,9 @@ public class ExpertationServiceImpl implements ExpertationService {
     @Autowired
     @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
     private PersonalService personalService;
+    @Autowired
+    @Qualifier("com.bc.pmpheep.back.authadmin.applydocaudit.service.DataAuditServiceImpl")
+    private DataAuditService dataAuditService;
 
     public UUIDTool utool = new UUIDTool();
 
@@ -618,7 +624,29 @@ public class ExpertationServiceImpl implements ExpertationService {
 	@Override
 	public int updateExpertationPass(Map<String, Object> paramMap) {
 		
+		String online_progress = MapUtils.getString(paramMap,"online_progress");
+		
+		Map<String,Object >expertation = exdao.queryExpertationById(MapUtils.getString(paramMap,"expertation_id"));
+		
 		int count = exdao.updateExpertationAudit(paramMap);
+		
+		String msgContent = "";	
+		if("2".equals(online_progress)){ //申报单位退回 
+			msgContent = "您提交的《"+MapUtils.getString(expertation,"product_name")+"》临床申报表被[学校管理员]退回，退回原因：" +MapUtils.getString(expertation,"return_cause")+
+            "，请您核对后重新提交!";
+		}else if("3".equals(online_progress)){ // 申报单位通过
+			msgContent = "恭喜！您提交的《"+MapUtils.getString(expertation,"product_name")+"》临床申报表已通过[学校管理员]审核!";
+		}
+		
+		
+		
+		dataAuditService.senNewMsgPass(MapUtils.getLong(paramMap,"expertation_id")
+				,MapUtils.getLong(paramMap,"auth_user_id")
+				, new Short("3")
+				, MapUtils.getLong(paramMap,"writer_id")
+				, new Short("2")
+				, "系统消息"
+				, msgContent);
 
 		return count;
 	}

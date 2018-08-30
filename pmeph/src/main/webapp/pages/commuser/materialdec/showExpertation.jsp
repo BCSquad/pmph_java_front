@@ -20,12 +20,12 @@
 <script type="text/javascript" src="${ctx}/resources/commuser/materialdec/showExpertation.js?t=${_timestamp}"></script>
 </head>
 <body>
-<c:if test="${state == 'audit' }">
+<c:if test="${userType == 'org' }">
 	<jsp:include page="/pages/comm/headGreenBackGround.jsp">
     <jsp:param name="pageTitle" value="backlog"></jsp:param>
 </jsp:include>
 </c:if>
-<c:if test="${state != 'audit' }">
+<c:if test="${userType != 'org' }">
 	<jsp:include page="/pages/comm/head.jsp"></jsp:include>
 </c:if>
 

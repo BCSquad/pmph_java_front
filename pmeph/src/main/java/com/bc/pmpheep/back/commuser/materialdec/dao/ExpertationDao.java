@@ -135,4 +135,11 @@ public interface ExpertationDao {
 			PageParameter<Map<String, Object>> pageParameter);
 
 	public int queryOrgCount(PageParameter<Map<String, Object>> pageParameter);
+
+	/**
+	 * 
+	 * @param string
+	 * @return
+	 */
+	public Map<String, Object> queryExpertationById(String expertation_id);
 }

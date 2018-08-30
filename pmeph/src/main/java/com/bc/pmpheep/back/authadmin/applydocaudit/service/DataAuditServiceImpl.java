@@ -157,8 +157,8 @@ public class DataAuditServiceImpl implements DataAuditService {
 	        userMessage.setMaterial_id(0L);
 	        userMessage.setMsgType(new Short("0"));
 	        userMessage.setTitle(title);
-	        userMessage.setSenderId(0L);
-            userMessage.setSenderType(new Short("0"));
+	        userMessage.setSenderId(thisId);
+            userMessage.setSenderType(new Short("3"));
 	        userMessage.setReceiverId(frendId);
 
 	        userMessage.setReceiverType(new Short("2"));
