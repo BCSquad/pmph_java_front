@@ -233,7 +233,7 @@ function buttAdd(type){
                 			jsonpCallback:"getMessage", //这里定义了jsonp的回调函数名。 那么在后台controller的相应方法其参数“callback”的值就是getMessage
                             success:function(wxResult){
                             	if(wxResult=="1"){
-                            		window.message.success("微信消息发送成功");
+                            		//window.message.success("微信消息发送成功");
                             		setTimeout(function(){
                                         window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=wycs";
     								}, 800);

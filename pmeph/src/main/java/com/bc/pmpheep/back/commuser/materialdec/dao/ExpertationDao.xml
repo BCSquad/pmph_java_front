@@ -38,7 +38,7 @@
 	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
 		select id,product_id,expert_type,user_id,realname,sex,birthday,REPLACE(birthday,'-','.') as birthday1,experience,org_name,position,title,address,postcode,handphone,email,idtype,
 		idcard,telephone,fax,online_progress,auth_date,is_staging*1 is_staging,is_deleted*1 is_deleted,banknumber,bankaddress,
-		gmt_create,gmt_update,education*1 education,expertise,return_cause,unit_advise,syllabus_name,IFNULL(org_id,'') as org_id,banknumber,bankaddress from expertation t1
+		gmt_create,gmt_update,education*1 education,expertise,return_cause,unit_advise,syllabus_name,IFNULL(org_id,'') as org_id,banknumber,bankaddress,unit_advise_online from expertation t1
 		 where 1= 1
 		<if test="user_id != null and user_id != ''">
 			and t1.user_id = #{user_id}
@@ -186,12 +186,14 @@
 			/*group_concat(DISTINCT pst.type_name  SEPARATOR '_,_') as type_name,
 			group_concat(DISTINCT pd.name_path  SEPARATOR '_,_') as name_path,*/
 			e.*,
+			case when e.org_id=0 then '人民卫生出版社' else org.org_name end as orgName,
 			DATE_FORMAT(e.gmt_create,'%Y-%m-%d') as gmt_create_new
 			from expertation e
 			left join expertation_content_type et on et.expertation_id = e.id
 			left join product_content_type_detail pd on et.product_content_type_id = pd.product_type_id
 			left join expertation_subject_type est on est.expertation_id=e.id
 			left join product_subject_type  pst on pst.id=est.product_subject_type_id
+			left join  org on e.org_id=org.id
             where e.user_id=#{user_id}
             group by e.id
 	</select>
@@ -356,6 +358,10 @@
             <if test="syllabus_name != null and syllabus_name != '' ">
                 syllabus_name = #{syllabus_name},
             </if>
+            <if test="unit_advise_online != null and unit_advise_online != '' ">
+                unit_advise_online = #{unit_advise_online},
+            </if>
+            
     	</set>
     	where id = #{expertation_id}
     </update>

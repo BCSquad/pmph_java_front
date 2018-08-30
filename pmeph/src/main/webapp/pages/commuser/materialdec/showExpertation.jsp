@@ -461,25 +461,44 @@
 			</div>
 		</div>
 
-		<!-- 院校推荐意见(仅打印显示)-->
-		<div class="yijian"  id="yijian">
-			<div class="tujian01">院校推荐意见:</div>
-			<div class="tujian02">
-				<div class="qianzi">负责人签字:</div>
-				<div class="gaizhang">(院校盖章)</div>
+		
+		<c:if test="${userType == 'org'}">
+		
+			<c:if test="${state == 'audit' }">
+				<div id="unit_advise_online_wrapper">
+					<div>
+						<span id="unit_advise_online_title">所在单位意见：</span>
+						<%--<span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.product_id}')">添加学科分类</span>--%>
+					</div>
+					<div>
+						<textarea maxlength="500" id = "unit_advise_online" name = "unit_advise_online">${gezlList.unit_advise_online }</textarea>
+					</div>
+				</div>
+			</c:if>
+			
+			
+			<!-- 院校推荐意见(仅打印显示)-->
+			<div class="yijian"  id="yijian">
+				<div class="tujian01">院校推荐意见:</div>
+				<div id="tujian00">${gezlList.unit_advise_online }</div>
+				<div class="tujian02">
+					<div class="qianzi">负责人签字:</div>
+					<div class="gaizhang">(院校盖章)</div>
+				</div>
+				<div class="tujian03">年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</div>
 			</div>
-			<div class="tujian03">年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</div>
-		</div>
+			<!-- 院校推荐意见(仅打印显示) end -->
+		</c:if>
 
         </div>
-		<!-- 院校推荐意见(仅打印显示) end -->
+		
 		
 		<!-- 上传单位意见 -->
 		<c:if test="${state == 'audit' && online_progress != 2}">
                 <div class="sbxq_item" id="szdwyj" style="display: block">
                     <div>
                         <span id="tsxz_span13"></span>
-                        <span class="tsxz_title"><%--<img src="${ctx}/statics/image/btxx.png" />--%>所在单位意见<span style="color: red">(上传单位盖章的申报表)</span></span>
+                        <span class="tsxz_title"><%--<img src="${ctx}/statics/image/btxx.png" />--%>上传申报表扫描件<span style="color: red">(上传单位盖章的申报表)</span></span>
                     </div>
                     <div style="height: 30px;margin-top: 10px;">
                         <div class="scys" id="dwyjsc"><span>上传文件</span></div>
@@ -586,15 +605,35 @@
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
 <style>
-    @media print {
-        #yijian{
-            display: block !important;
-        }
-    }
+    
 
     #yijian{
-        display: none;
+         display: none; 
+         position: relative;
+         min-height: 280px;
+         height: unset;
     }
+    #tujian00{
+    	margin-bottom: 100px;
+	    padding: 10px;
+	    word-break:  break-all;
+    }
+    .tujian02 {
+	    float: right;
+	    position: absolute;
+	    right: 0px;
+	    clear: left;
+	    bottom: 40px;
+	}
+	.tujian03 {
+	    
+	    bottom: 10px;
+	    right: 10px;
+	    float: right;
+	    position: absolute;
+	    text-align: right;
+	    clear: right;
+	}
 	.out{
 		width: 128px;
 		height: 44px;
@@ -708,5 +747,13 @@
 	#nrflxs , #sbzyxs , #xkflxs{
 		display:none;
 	}
+	#unit_advise_online{
+	    width: 1030px;
+	    border: 1px #000000 solid;
+	    padding: 10px;
+	    min-height: 100px;
+    }
+    
+    
 </style>
 </html>

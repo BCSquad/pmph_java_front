@@ -347,7 +347,7 @@ a.input {
 
 
 .el-tag{
-	background-color: #838fa5;
+	/*background-color: #838fa5;*/
 	display: inline-block;
 	padding: 0 5px;
 	height: 26px;
@@ -420,9 +420,60 @@ a.input {
 	background-size: 100% 100%;
 }
 
+#sxy-spantopright
+{
+	float:right;
+	height: 14px;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 50px;
+	letter-spacing: 0px;
+	color: #999999;
+}
+
 .adress{
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	width: 420px;
 }
+
+@media print{
+        #yijian{
+            display: block !important;
+        }
+        #unit_advise_online_wrapper , #unit_advise_online_title , #unit_advise_online{
+        	display: none !important;
+        }
+        #yijian{
+         position: relative;
+         min-height: 280px;
+         height: unset;
+	    }
+	    #tujian00{
+	    	margin-bottom: 100px;
+		    padding: 10px;
+		    word-break:  break-all;
+	    }
+	    .tujian02 {
+		    float: right;
+		    position: absolute;
+		    right: 0px;
+		    clear: left;
+		    bottom: 40px;
+		}
+		.tujian03 {
+		    
+		    bottom: 10px;
+		    right: 10px;
+		    float: right;
+		    position: absolute;
+		    text-align: right;
+		    clear: right;
+		}
+        
+    }
+    
+    
+    

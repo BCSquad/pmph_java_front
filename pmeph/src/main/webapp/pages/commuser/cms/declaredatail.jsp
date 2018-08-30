@@ -22,11 +22,12 @@
     <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
 </head>
-<body>
+<body >
 <jsp:include page="/pages/comm/head.jsp">
     <jsp:param value="homepage" name="pageTitle"/>
 </jsp:include>
-<div class="content-wrapper">
+<div class="body">
+    <div class="content-wrapper">
     <div style="margin-top: 15px">首页>临床决策专家申报</div>
     <%--<c:if test="${state==1}">--%>
         <%--<div class="name">人卫临床助手专家申报报名须知</div>--%>
@@ -61,10 +62,13 @@
         </div>
     </div>
     <div class="join" onclick="tojoin(${state})">报名参加</div>
+        <div style="clear: both"></div>
+</div>
 </div>
 
+<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
-<%--<jsp:include page="/pages/comm/tail.jsp"></jsp:include>--%>
+
 <style>
     .picture01{
         float: left;
