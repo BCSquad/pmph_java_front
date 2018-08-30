@@ -95,13 +95,13 @@
 					</tr>
 					<tr>
 						<td><span title="${gezlList.postcode}">邮&emsp;&emsp;编：${gezlList.postcode}</span></td>
-						<td colspan="2"><div class="adress" title="${gezlList.address}">地&emsp;&emsp;址：${gezlList.address}</div></td>
+						<td><span title="${gezlList.banknumber}">卡号：${gezlList.banknumber}</span></td>
+						<td><span title="${gezlList.bankaddress}">开户行：${gezlList.bankaddress}</span></td>
 						<td><span title="${gezlList.expertise}">专业特长(疾病诊治及研究方向)：${gezlList.expertise}</span></td>
 
 					</tr>
 					<tr>
-						<td><span title="${gezlList.banknumber}">卡号：${gezlList.banknumber}</span></td>
-						<td colspan="2"><span title="${gezlList.bankaddress}">开户行：${gezlList.bankaddress}</span></td>
+						<td colspan="2"><div class="adress" title="${gezlList.address}">地&emsp;&emsp;址：${gezlList.address}</div></td>
 						<%--<td><span>传&emsp;&emsp;真：${gezlList.fax}</span></td>--%>
 					</tr>
 
