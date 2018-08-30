@@ -550,3 +550,16 @@
 	background-size: 100% 100%;
 }
 
+@media print{
+        #yijian{
+            display: block !important;
+            position: relative !important;
+	         min-height: 280px !important;
+	         height: unset !important;
+        }
+        #unit_advise_online_wrapper , #unit_advise_online_title , #unit_advise_online{
+        	display: none !important;
+        }
+        
+    }
+

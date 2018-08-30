@@ -197,9 +197,11 @@ function buttGive(){
 //打印按钮
 function toprint(eid) {
     $("#return_cause_div").css("display","none");
-    //$("#bookmistake").remove();
-    $("#ddd").jqprint();
-
+    $("#tujian00").html($("#unit_advise_online").val());
+    $("#ddd").jqprint({
+    	  //debug: true, 
+          importCSS: true ,
+    });
 //打印状态
     $.ajax({
         type: 'post',
@@ -219,10 +221,11 @@ function toAudit(id,type,doLocation){
 	var user_id=$("#user_id").val();
     var syllabus_id=$("#syllabus_id").val();
     var syllabus_name=$("#syllabus_name").val();
+    var unit_advise_online = $("#unit_advise_online").val();
 		$.ajax({
 			type: "POST",
 			url:contextpath+'expertation/doExpertationAuditPass.action',
-			data:{expertation_id:id,online_progress:type,user_id:user_id,unit_advise:syllabus_id,syllabus_name:syllabus_name},// 您的formid
+			data:{expertation_id:id,online_progress:type,user_id:user_id,unit_advise:syllabus_id,syllabus_name:syllabus_name,unit_advise_online:unit_advise_online},// 您的formid
 			async: false,
 			dataType:"json",
 		    success: function(msg) {

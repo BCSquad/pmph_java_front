@@ -895,6 +895,8 @@ public class ExpertationController extends BaseController{
 		String unit_advise = request.getParameter("unit_advise");   //判断是否有附件上传
         String syllabus_name = request.getParameter("syllabus_name");   //判断是否有附件上传
 		String writer_id = request.getParameter("user_id");  //作家用户Id
+		String unit_advise_online = request.getParameter("unit_advise_online");
+		
 		Map<String,Object> userMap =  this.getUserInfo();
 		String user_id = userMap.get("id").toString();
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
@@ -907,6 +909,7 @@ public class ExpertationController extends BaseController{
 		paramMap.put("auth_date", date);
 		paramMap.put("writer_id", writer_id);
 		paramMap.put("return_cause", return_cause);
+		paramMap.put("unit_advise_online", unit_advise_online);
 		if(unit_advise!=null){
 			paramMap.put("unit_advise", unit_advise);
 		}else{

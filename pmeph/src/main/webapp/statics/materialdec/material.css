@@ -437,9 +437,43 @@ a.input {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	width: 420px;
-
-
-
-
-
 }
+
+@media print{
+        #yijian{
+            display: block !important;
+        }
+        #unit_advise_online_wrapper , #unit_advise_online_title , #unit_advise_online{
+        	display: none !important;
+        }
+        #yijian{
+         position: relative;
+         min-height: 280px;
+         height: unset;
+	    }
+	    #tujian00{
+	    	margin-bottom: 100px;
+		    padding: 10px;
+		    word-break:  break-all;
+	    }
+	    .tujian02 {
+		    float: right;
+		    position: absolute;
+		    right: 0px;
+		    clear: left;
+		    bottom: 40px;
+		}
+		.tujian03 {
+		    
+		    bottom: 10px;
+		    right: 10px;
+		    float: right;
+		    position: absolute;
+		    text-align: right;
+		    clear: right;
+		}
+        
+    }
+    
+    
+    
