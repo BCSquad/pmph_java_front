@@ -659,8 +659,8 @@
 							</tr></c:if>
 						<c:forEach var="list" items="${bzyhjqkList}" varStatus="status">
 							<tr id="zbtsqk_${status.count}">
-								<td class="xztd"><input class="cg_input xzip" maxlength="100"  name="hjqk_name" id="bzyhjqk_name_${status.count}" value="${list.title}" placeholder="教材名称"/></td>
-								<td class="xztd"><input class="cg_input xzip" name="hjqk_jb" value="${list.rank}"  maxlength="20"/></td>
+								<td class="xztd"><input class="cg_input xzip" maxlength="100"  name="hjqk_name" id="bzyhjqk_name_${status.count}" value="${list.title}" placeholder="名称"/></td>
+								<td class="xztd"><input class="cg_input xzip" name="hjqk_jb" value="${list.rank}"  maxlength="20" placeholder="级别（国家、省、市、单位）"/></td>
 								<td class="xztd"><input class="cg_input xzip" maxlength="100" name="hjqk_note" value="${list.note}"  placeholder="备注"/>
 									<input type="hidden" name="bzyhqqk" value="zbts_material_name_${status.count}"/>
 									<input type="hidden" name="bzyhqqk_id" value="${list.id}">
