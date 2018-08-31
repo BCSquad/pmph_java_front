@@ -132,7 +132,7 @@ function queryMaterialMap(expert_type){
  */
 function usedAndRequired(data){
 	$("div[wrapper_key] input").tipso("destroy");
-	$("input[name='zjkzxx']").tipso("destroy");
+	$("textarea[name='kz_content']").tipso("destroy");
 	$("div[wrapper_key]").each(function(){
 		var $d = $(this);
 		if(data[$d.attr("wrapper_key")+"_used"]){
