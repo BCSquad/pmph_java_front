@@ -578,6 +578,13 @@ public class ExpertationController extends BaseController{
 		//所选申报单位
 		Map<String,Object> org =etService.queryOrgById(MapUtils.getString(gezlList.get(0),"org_id"));
 
+		if(MapUtils.getString(gezlList.get(0),"expert_type").equals("1")){
+			mav.addObject("title","人卫临床助手专家申报表");
+		}else if(MapUtils.getString(gezlList.get(0),"expert_type").equals("2")){
+			mav.addObject("title","人卫用药助手专家申报表");
+		}else if(MapUtils.getString(gezlList.get(0),"expert_type").equals("3")){
+			mav.addObject("title","人卫中医助手专家申报表");
+		}
 		//填充
 		mav.addObject("queryMap", queryMap);
 		mav.addObject("gezlList", gezlList.get(0));
