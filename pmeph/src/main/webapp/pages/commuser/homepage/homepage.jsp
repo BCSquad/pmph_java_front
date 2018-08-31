@@ -619,7 +619,7 @@
     </c:if>
 
     <!--公众号悬浮框-->
-    <div id="EWM" class="emw"><img src="${ctx}/statics/image/wxgzh.jpg"></div>
+    <div id="EWM" onmouseover="showEWM()" onmouseout="hideEWM()" class="emw"><img src="${ctx}/statics/image/wxgzh.jpg"></div>
 </div>
 <jsp:include page="/pages/comm/tail.jsp">
     <jsp:param name="linked" value="linked"></jsp:param>
