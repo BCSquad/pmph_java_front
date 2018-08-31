@@ -402,6 +402,20 @@
                 </div>
 			</div>
 		</c:forEach>
+
+        <div class="sbxq_item1" style="display: block">
+            <div style="margin-bottom: 3px">
+                <span id="beizhu"></span>
+                <span class="tsxz_title">备注</span>
+            </div>
+            <div class="content">
+                <div class="text_dy">
+                    ${gezlList.remark}
+                </div>
+            </div>
+        </div>
+
+
 		<!-- 学科分类-->
 		<div class="sbxq_item1" id="xkflxs">
 			<div>
@@ -417,6 +431,7 @@
 				</c:forEach>
 			</div>
 		</div>
+
 
 
 		<!-- 内容分类-->
@@ -455,7 +470,7 @@
 		<!-- 申报单位 -->
 		<div class="sbxq_item1" style="display: block">
 			<div>
-				<span id="tsxz_span8"></span>
+				<span id="beizhu"></span>
 			</div>
 			<div class="sbdw" id="xkfladd">
 				<span class="btmc">申报单位：${org.org_name }</span>
