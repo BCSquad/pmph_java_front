@@ -257,6 +257,7 @@ public class ExpertationController extends BaseController{
 		perMap.put("remark", request.getParameter("remark"));
 		perMap.put("unit_advise", request.getParameter("syllabus_id"));
 		perMap.put("syllabus_name", request.getParameter("syllabus_name"));
+		perMap.put("remark", request.getParameter("remark"));
 		String s=request.getParameter("sbdw_id");
 		perMap.put("org_id","".equals(request.getParameter("sbdw_id")) ? null:request.getParameter("sbdw_id"));
 

@@ -37,7 +37,7 @@
 	<!-- 专家信息 --> 
 	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
 		select id,product_id,expert_type,user_id,realname,sex,birthday,REPLACE(birthday,'-','.') as birthday1,experience,org_name,position,title,address,postcode,handphone,email,idtype,
-		idcard,telephone,fax,online_progress,auth_date,is_staging*1 is_staging,is_deleted*1 is_deleted,banknumber,bankaddress,
+		idcard,telephone,fax,online_progress,auth_date,is_staging*1 is_staging,is_deleted*1 is_deleted,banknumber,bankaddress,remark,
 		gmt_create,gmt_update,education*1 education,expertise,return_cause,unit_advise,syllabus_name,IFNULL(org_id,'') as org_id,banknumber,bankaddress,unit_advise_online from expertation t1
 		 where 1= 1
 		<if test="user_id != null and user_id != ''">
@@ -60,7 +60,7 @@
 		) values(#{product_id},#{expert_type},#{user_id},#{realname},#{sex},#{birthday},#{experience},#{org_name},#{position},
 		#{title},#{address},#{postcode},#{handphone},#{email},#{idtype},#{idcard},#{telephone},#{fax},#{gmt_create},
 		#{is_staging},#{online_progress},#{commit_date},#{banknumber},#{bankaddress},#{remark},#{degree},#{unit_advise},#{syllabus_name},#{education}
-		,#{org_id},#{expertise})
+		,${org_id},#{expertise})
 	</insert>
 	<update id="updatePerson" parameterType="java.util.Map">
 		update expertation set realname = #{realname},sex = #{sex},birthday = #{birthday},experience = #{experience},expertise = #{expertise},
