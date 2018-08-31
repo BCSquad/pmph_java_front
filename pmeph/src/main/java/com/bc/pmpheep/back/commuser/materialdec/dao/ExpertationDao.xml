@@ -400,6 +400,12 @@
 				where t.org_name like #{parameter.org_name}
 			</if>
 	</select>
+	
+	<select id="queryExpertationById" parameterType="java.lang.String" resultType="Map">
+		select e.*,p.product_name from expertation e 
+		left join product p on e.product_id = p.id
+		where e.id = #{expertation_id}
+	</select>
     
     
 </mapper>

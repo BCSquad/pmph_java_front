@@ -550,6 +550,10 @@
 	background-size: 100% 100%;
 }
 
+#xkfl_qy,#nrfl_qy,#sbzy_qy{
+	display: none;
+}
+
 @media print{
         #yijian{
             display: block !important;

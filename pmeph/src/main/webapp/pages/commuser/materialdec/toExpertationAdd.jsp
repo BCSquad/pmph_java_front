@@ -30,6 +30,9 @@
 			background: #F8F8F8;
 			margin-top: 60px;
 		}
+		.el-tag{
+			background-color: #838fa5;
+		}
 	</style>
 </head>
 <body>
@@ -139,7 +142,7 @@
 				</div>
 			</div>
 			<!--主要学习经历-->
-			<div class="sbxq_item" id="zyxxjl">
+			<div class="sbxq_item" id="zyxxjl" wrapper_key="is_edu_exp">
 				<div>
 					<span id="tsxz_span3"></span>
 					<span class="tsxz_title">学习经历</span>
@@ -208,7 +211,7 @@
 				</div>
 			</div>
 			<!--主要工作经历-->
-			<div class="sbxq_item" id="gzjl">
+			<div class="sbxq_item" id="gzjl" wrapper_key="is_work_exp">
 				<div>
 					<span id="tsxz_span4"></span>
 					<span class="tsxz_title">工作经历</span>
@@ -269,7 +272,7 @@
 				</div>
 			</div>
 			<!--主要学术兼职-->
-			<div class="sbxq_item" id="xsjz">
+			<div class="sbxq_item" id="xsjz" wrapper_key="is_acade">
 				<div>
 					<span id="tsxz_span10"></span>
 					<span class="tsxz_title">主要学术兼职</span>
@@ -340,7 +343,7 @@
 				</div>
 			</div>
 			<!--人卫社教材编写情况-->
-			<div class="sbxq_item" id="rwsjcbx">
+			<div class="sbxq_item" id="rwsjcbx" wrapper_key="is_pmph_textbook">
 				<div>
 					<span id="tsxz_span5"></span>
 					<span class="tsxz_title">人卫社教材编写情况</span>
@@ -447,7 +450,7 @@
 				</div>
 			</div>
 			<!--图书出版情况-->
-			<div class="sbxq_item" id="zbxszz">
+			<div class="sbxq_item" id="zbxszz"  wrapper_key="is_monograph">
 				<div>
 					<span id="tsxz_span7"></span>
 					<span class="tsxz_title">图书出版情况</span>
@@ -517,7 +520,7 @@
 				</div>
 			</div>
 			<!--主编或参编图书情况-->
-			<div class="sbxq_item" id="zbcbtsqk">
+			<div class="sbxq_item" id="zbcbtsqk"  wrapper_key="is_edit_book">
 				<div>
 					<span id="tsxz_span6"></span>
 					<span class="tsxz_title">主编或参编图书情况</span>
@@ -539,7 +542,7 @@
 						<c:if test="${empty pereditorList[0]}">
 							<tr>
 								<td><input class="cg_input" maxlength="100" style="width: 320px" id="zbts_material_name" name="zbts_material_name"  value="" placeholder="教材名称"/></td>
-								<td><input class="cg_input" name="zbts_publisher" value=""  style="width: 300px;" maxlength="20"/></td>
+								<td><input class="cg_input" name="zbts_publisher" placeholder="出版单位" value=""  style="width: 300px;" maxlength="20"/></td>
 								<td><input class="cg_input" name="zbts_publish_date" id="zbts_publish_date" value="" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  style="width: 130px;"/></td>
 								<td><input class="cg_input" maxlength="100" name="zbts_note" value="" style="width: 240px;" placeholder="备注"/><input type="hidden" name="zbts_id" value=""></td>
 								<td><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_zbtsqk()"/></td>
@@ -547,7 +550,7 @@
 						<c:forEach var="list" items="${pereditorList}" varStatus="status">
 							<tr id="zbtsqk_${status.count}">
 								<td><input class="cg_input" maxlength="100" style="width: 320px" name="zbts_material_name" id="zbts_material_name_${status.count}" value="${list.material_name}" placeholder="教材名称"/></td>
-								<td><input class="cg_input" name="zbts_publisher" value="${list.publisher}"  style="width: 300px;" maxlength="20"/></td>
+								<td><input class="cg_input" name="zbts_publisher" placeholder="出版单位" value="${list.publisher}"  style="width: 300px;" maxlength="20"/></td>
 								<td><input class="cg_input" name="zbts_publish_date" id="zbts_publish_date_${status.count}" value="${list.publish_date}" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  style="width: 130px;"/></td>
 								<td><input class="cg_input" maxlength="100" name="zbts_note" value="${list.note}" style="width: 240px;" placeholder="备注"/>
 									<input type="hidden" name="zdjy" value="zbts_material_name_${status.count}"/>
@@ -570,7 +573,7 @@
 
 
 			<!--文章发表情况-->
-			<div class="sbxq_item" id="wzfbqk">
+			<div class="sbxq_item" id="wzfbqk"  wrapper_key="is_article_published">
 				<div>
 					<span id="tsxz_span6"></span>
 					<span class="tsxz_title">文章发表情况</span>
@@ -594,8 +597,8 @@
 							<tr>
 								<td class="xztd"><input class="cg_input xzip" maxlength="100"  id="wzfbqk_material_name" name="wzfb_name" <%--id="jc_material_name"--%> value="" placeholder="文章题目"/></td>
 								<td class="xztd"><input class="cg_input xzip" name="wzfb_qkmc" value=""  maxlength="20" placeholder="期刊名称"/></td>
-								<td class="xztd"><input class="cg_input xzip" name="wzfb_njq"  value="" placeholder=""/></td>
-								<td class="xztd"><input class="cg_input xzip" maxlength="100" name="wzfb_qklb" value=""  placeholder=""/></td>
+								<td class="xztd"><input class="cg_input xzip" name="wzfb_njq"  value="" placeholder="年、卷、期"/></td>
+								<td class="xztd"><input class="cg_input xzip" maxlength="100" name="wzfb_qklb" value=""  placeholder="期刊级别（SCI或国内核心期刊）"/></td>
 								<td class="xztd"><input class="cg_input xzip" maxlength="100" name="wzfb_note" value=""  placeholder="备注"/></td>
 								<td class="xztd"><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_wzfbqk()"/></td>
 								<input type="hidden" name="wzfbxq_id" value="">
@@ -627,7 +630,7 @@
 
 
 			<!--本专业获奖情况-->
-			<div class="sbxq_item" id="bzyhjqk">
+			<div class="sbxq_item" id="bzyhjqk"  wrapper_key="is_profession_award">
 				<div>
 					<span id="bzyhjqk_img"></span>
 					<span class="tsxz_title">本专业获奖情况</span>
@@ -656,8 +659,8 @@
 							</tr></c:if>
 						<c:forEach var="list" items="${bzyhjqkList}" varStatus="status">
 							<tr id="zbtsqk_${status.count}">
-								<td class="xztd"><input class="cg_input xzip" maxlength="100"  name="hjqk_name" id="bzyhjqk_name_${status.count}" value="${list.title}" placeholder="教材名称"/></td>
-								<td class="xztd"><input class="cg_input xzip" name="hjqk_jb" value="${list.rank}"  maxlength="20"/></td>
+								<td class="xztd"><input class="cg_input xzip" maxlength="100"  name="hjqk_name" id="bzyhjqk_name_${status.count}" value="${list.title}" placeholder="名称"/></td>
+								<td class="xztd"><input class="cg_input xzip" name="hjqk_jb" value="${list.rank}"  maxlength="20" placeholder="级别（国家、省、市、单位）"/></td>
 								<td class="xztd"><input class="cg_input xzip" maxlength="100" name="hjqk_note" value="${list.note}"  placeholder="备注"/>
 									<input type="hidden" name="bzyhqqk" value="zbts_material_name_${status.count}"/>
 									<input type="hidden" name="bzyhqqk_id" value="${list.id}">
@@ -702,7 +705,7 @@
 				</div>
 			</c:forEach>
             <!-- 学科分类-->
-            <div class="sbxq_item1" id="xkfl_qy">
+            <div class="sbxq_item1" id="xkfl_qy" >
                 <div>
 					<input type="hidden" id="xkflbt">
                     <span id="tsxz_span8"></span>
@@ -714,7 +717,7 @@
                 </div>
             </div>
             <!-- 内容分类-->
-            <div class="sbxq_item1" id="nrfl_qy">
+            <div class="sbxq_item1" id="nrfl_qy" >
                 <div>
 					<input type="hidden" id="nrflbt">
                     <span id="tsxz_span12"></span>
@@ -727,7 +730,7 @@
             </div>
 
 			<!-- 申报专业-->
-			<div class="sbxq_item1" id="sbzy_qy">
+			<div class="sbxq_item1" id="sbzy_qy" >
 				<div>
 					<input type="hidden" id="sbzybt">
 					<span id="sbzytb"></span>
@@ -756,7 +759,7 @@
 
 			
 			<!-- 申报单位-->
-            <div class="sbxq_item1">
+            <div class="sbxq_item1" >
                 <div>
                     <span id="tsxz_span8"></span>
                     <span class="tsxz_title">请选择您的申报单位</span>
