@@ -30,13 +30,17 @@ $(function () {
     queryMaterialMap(id);  //执行查询方法
     //图书选择
     var sjxz =document.getElementsByName("sjxz");
-    for (var i = 0, j = sjxz.length; i < j; i++){
-        upload(i+1); //附件上传
-        $('#'+sjxz[i].value).selectlist({
-            width: 200,
-            height: 30,
-            optionHeight: 30
-        });
+    if(sjxz.length == 0){
+        upload(1);
+    } else{
+        for (var i = 0, j = sjxz.length; i < j; i++){
+            upload(i+1); //附件上传
+            $('#'+sjxz[i].value).selectlist({
+                width: 200,
+                height: 30,
+                optionHeight: 30
+            });
+        }
     }
     $('#pmph_rank').selectlist({
         zIndex: 10,
@@ -1057,7 +1061,7 @@ function commit(type){
                 			jsonpCallback:"getMessage", //这里定义了jsonp的回调函数名。 那么在后台controller的相应方法其参数“callback”的值就是getMessage
                             success:function(wxResult){
                             	if(wxResult=="1"){
-                            		window.message.success("微信消息发送成功");
+                            		//window.message.success("微信消息发送成功");
                             		setTimeout(function(){
                             			window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
                             		},800);

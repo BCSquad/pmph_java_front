@@ -120,6 +120,24 @@
 		insert into per_textbook_pmph(id,user_id,material_name,rank,position,publish_date,isbn,note,is_digital_editor,sort)
 		  values(#{per_id},#{user_id},#{material_name},#{rank},#{position},#{publish_date},#{isbn},#{note},#{is_digital_editor},#{sort})
 	</insert>
+	<!--文章发表情况-->
+	<insert id="insertPreWzfbqk" parameterType="java.util.Map">
+		insert into per_article_published (id,user_id,title,periodical_title,year_volume_period,periodical_level,note)
+		values(#{per_id},#{user_id},#{title},#{periodical_title},#{year_volume_period},#{periodical_level},#{note});
+	</insert>
+	<!--文章发表情况编辑-->
+	<update id="updatePreWzfbqk" parameterType="java.util.Map">
+		update per_article_published set user_id=#{user_id},title=#{title},periodical_title=#{periodical_title},
+		year_volume_period=#{year_volume_period},periodical_level=#{periodical_level},note=#{note} where id = #{per_id}
+	</update>
+	<!--本专业获奖情况新增-->
+	<insert id="insertPreBzyhjqk" parameterType="java.util.Map">
+		insert into per_profession_award (id,user_id,title,rank,note)
+		values(#{per_id},#{user_id},#{title},#{rank},#{note});
+	</insert>
+	<update id="updatePreBzyhjqk" parameterType="java.util.Map">
+		update per_profession_award set user_id=#{user_id},title=#{title},rank=#{rank},note=#{note} where id = #{per_id}
+	</update>
 	<update id="updatePerRwsjc" parameterType="java.util.Map">
 		update per_textbook_pmph set material_name = #{material_name},rank=#{rank},position=#{position},publish_date=#{publish_date},
 		isbn=#{isbn},is_digital_editor=#{is_digital_editor},note=#{note},sort=#{sort} where id = #{per_id}
@@ -162,11 +180,12 @@
 	</delete>
 	<!-- //个人成就 -->
 	<select id="queryPerAchievement" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from per_achievement where user_id = #{user_id}  
+		select * from per_achievement where user_id = #{user_id}  limit 0,1
 	</select>
 	<insert id="insertPerAchievement" parameterType="java.util.Map">
 		insert into per_achievement(id,user_id,content)
 		  values(#{per_id},#{user_id},#{content})
+		  on duplicate key update content = values(content)
 	</insert>
 	<update id="updatePerAchievement" parameterType="java.util.Map">
 		update per_achievement set content = #{content} 
@@ -249,5 +268,21 @@
 	</update>
 	<delete id="DelPerAcadereward" parameterType="java.util.Map">
 		delete from per_acade_reward where user_id = #{user_id}
+	</delete>
+
+	<!--主编或参编图书情况-->
+	<select id="queryPerEditor" resultType="java.util.Map" parameterType="java.util.Map">
+		select r.*,REPLACE(r.publish_date,'-','.') as publishdate from per_editor_book r where r.user_id = #{user_id} ORDER BY r.sort
+	</select>
+	<insert id="insertPerEditor" parameterType="java.util.Map">
+		insert into per_editor_book(id,user_id,material_name,publisher,publish_date,note,sort)
+		values(#{per_id},#{user_id},#{material_name},#{publisher},#{publish_date},#{note},#{sort})
+	</insert>
+	<update id="updatePerEditor" parameterType="java.util.Map">
+		update per_editor_book set material_name = #{material_name},publisher=#{publisher},publish_date=#{publish_date},
+		note=#{note},sort=#{sort} where id = #{per_id}
+	</update>
+	<delete id="DelPerEditor" parameterType="java.util.Map">
+		delete from per_editor_book where user_id = #{user_id}
 	</delete>
 </mapper>

@@ -313,7 +313,7 @@
 	color: inherit;
 }
 
-.trendstWrapper:hover{
+/*.trendstWrapper:hover{
 	background-color: #fdfdff;
 	border-left: 1px solid #f1f1f1;
 	border-right: 1px solid #f1f1f1;
@@ -327,4 +327,4 @@
 }
 .trendstWrapper:hover+.trendstWrapper+.trendstWrapper{
 	border-top: 1px solid #f1f1f1;
-}
+}*/
