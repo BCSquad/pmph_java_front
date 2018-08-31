@@ -86,6 +86,9 @@
                                     <option value="副高" ${gezlList.title=='副高'?'selected':'' }>副高</option>
                                     <option value="高级讲师" ${gezlList.title=='高级讲师'?'selected':'' }>高级讲师</option>
                                     <option value="讲师" ${gezlList.title=='讲师'?'selected':'' }>讲师</option>
+                                    <option value="主任药师" ${userMap.title=='主任药师'?'selected':'' }>主任药师</option>
+                                    <option value="副主任药师" ${userMap.title=='副主任药师'?'selected':'' }>副主任药师</option>
+                                    <option value="主管药师" ${userMap.title=='主管药师'?'selected':'' }>主管药师</option>
                                     <option value="其他" ${gezlList.title=='其他'?'selected':'' }>其他</option>
                                 </select></td>
                             <td><span>&ensp;联系电话：</span>
