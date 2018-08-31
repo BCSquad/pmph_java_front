@@ -8,7 +8,7 @@
            var contextpath = '${pageContext.request.contextPath}/';
   </script>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-<title>临床决策专家申报详情</title>
+<title>${title}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
  <link rel="stylesheet" href="${ctx}/statics/materialdec/material.css?t=${_timestamp}" type="text/css">
