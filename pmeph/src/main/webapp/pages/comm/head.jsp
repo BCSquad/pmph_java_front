@@ -164,7 +164,7 @@
                            href='<c:url value="/personalhomepage/tohomepage.action?pagetag=jcsb"/>'>教材申报</a>
                         <a class="option"
                            href='<c:url value="/teacherCertification/showTeacherCertification.action"/>'>教师认证</a>
-                          <a class="option" style="line-height:14px;width:60px;">临床决策专家申报</a>
+                          <%--<a class="option" style="line-height:14px;width:60px;">临床决策专家申报</a>--%>
                         <%--<a class="option out" href='<c:url value="/logout.action"/>'>退出</a>--%>
                     </div>
                 </div>
