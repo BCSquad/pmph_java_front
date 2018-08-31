@@ -159,6 +159,9 @@
                                     <option value="副高" ${userMap.title=='副高'?'selected':'' }>副高</option>
                                     <option value="高级讲师" ${userMap.title=='高级讲师'?'selected':'' }>高级讲师</option>
                                     <option value="讲师" ${userMap.title=='讲师'?'selected':'' }>讲师</option>
+									<option value="主任药师" ${userMap.title=='主任药师'?'selected':'' }>主任药师</option>
+									<option value="副主任药师" ${userMap.title=='副主任药师'?'selected':'' }>副主任药师</option>
+									<option value="主管药师" ${userMap.title=='主管药师'?'selected':'' }>主管药师</option>
 									<option value="其他" ${userMap.title=='其他'?'selected':'' }>其他</option>
 								</select></td>
 							<td><span class="btbs">*</span><span style="width: 70px">邮&emsp;&emsp;箱：</span>

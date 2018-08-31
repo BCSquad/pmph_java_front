@@ -8,7 +8,7 @@
            var contextpath = '${pageContext.request.contextPath}/';
   </script>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-<title>临床决策专家申报详情</title>
+<title>${title}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
  <link rel="stylesheet" href="${ctx}/statics/materialdec/material.css?t=${_timestamp}" type="text/css">
@@ -20,12 +20,12 @@
 <script type="text/javascript" src="${ctx}/resources/commuser/materialdec/showExpertation.js?t=${_timestamp}"></script>
 </head>
 <body>
-<c:if test="${state == 'audit' }">
+<c:if test="${userType == 'org' }">
 	<jsp:include page="/pages/comm/headGreenBackGround.jsp">
     <jsp:param name="pageTitle" value="backlog"></jsp:param>
 </jsp:include>
 </c:if>
-<c:if test="${state != 'audit' }">
+<c:if test="${userType != 'org' }">
 	<jsp:include page="/pages/comm/head.jsp"></jsp:include>
 </c:if>
 
@@ -95,13 +95,13 @@
 					</tr>
 					<tr>
 						<td><span title="${gezlList.postcode}">邮&emsp;&emsp;编：${gezlList.postcode}</span></td>
-						<td colspan="2"><div class="adress" title="${gezlList.address}">地&emsp;&emsp;址：${gezlList.address}</div></td>
+						<td><span title="${gezlList.banknumber}">卡号：${gezlList.banknumber}</span></td>
+						<td><span title="${gezlList.bankaddress}">开户行：${gezlList.bankaddress}</span></td>
 						<td><span title="${gezlList.expertise}">专业特长(疾病诊治及研究方向)：${gezlList.expertise}</span></td>
 
 					</tr>
 					<tr>
-						<td><span title="${gezlList.banknumber}">卡号：${gezlList.banknumber}</span></td>
-						<td colspan="2"><span title="${gezlList.bankaddress}">开户行：${gezlList.bankaddress}</span></td>
+						<td colspan="2"><div class="adress" title="${gezlList.address}">地&emsp;&emsp;址：${gezlList.address}</div></td>
 						<%--<td><span>传&emsp;&emsp;真：${gezlList.fax}</span></td>--%>
 					</tr>
 
@@ -372,13 +372,14 @@
 						<c:forEach var="list" items="${bzyhjqkList}">
 							<tr>
 								<td>${list.title}</td>
-								<td>
+								<%--<td>
 									<c:if test="${list.rank == '0'}">无</c:if>
 									<c:if test="${list.rank == '1'}">国家</c:if>
 									<c:if test="${list.rank == '2'}">省</c:if>
 									<c:if test="${list.rank == '3'}">市</c:if>
 									<c:if test="${list.rank == '4'}">单位</c:if>
-								</td>
+								</td>--%>
+								<td>${list.rank}></td>
 								<td>${list.note}</td>
 							</tr></c:forEach>
 						</tbody>
@@ -390,7 +391,7 @@
 		<!--扩展信息-->
 		<c:forEach var="zjkzxx" items="${zjkzqkList}">
 			<div class="sbxq_item1" style="display: block">
-				<div>
+				<div style="margin-bottom: 3px">
 					<span id="tsxz_span9"></span>
 					<span class="tsxz_title">${zjkzxx.extension_name}</span>
 				</div>
@@ -401,6 +402,20 @@
                 </div>
 			</div>
 		</c:forEach>
+
+        <div class="sbxq_item1" style="display: block">
+            <div style="margin-bottom: 3px">
+                <span id="beizhu"></span>
+                <span class="tsxz_title">备注</span>
+            </div>
+            <div class="content">
+                <div class="text_dy">
+                    ${gezlList.remark}
+                </div>
+            </div>
+        </div>
+
+
 		<!-- 学科分类-->
 		<div class="sbxq_item1" id="xkflxs">
 			<div>
@@ -416,6 +431,7 @@
 				</c:forEach>
 			</div>
 		</div>
+
 
 
 		<!-- 内容分类-->
@@ -454,32 +470,51 @@
 		<!-- 申报单位 -->
 		<div class="sbxq_item1" style="display: block">
 			<div>
-				<span id="tsxz_span8"></span>
+				<span id="beizhu"></span>
 			</div>
 			<div class="sbdw" id="xkfladd">
 				<span class="btmc">申报单位：${org.org_name }</span>
 			</div>
 		</div>
 
-		<!-- 院校推荐意见(仅打印显示)-->
-		<div class="yijian"  id="yijian">
-			<div class="tujian01">院校推荐意见:</div>
-			<div class="tujian02">
-				<div class="qianzi">负责人签字:</div>
-				<div class="gaizhang">(院校盖章)</div>
+		
+		<c:if test="${userType == 'org'}">
+		
+			<c:if test="${state == 'audit' }">
+				<div id="unit_advise_online_wrapper">
+					<div>
+						<span id="unit_advise_online_title">所在单位意见：</span>
+						<%--<span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.product_id}')">添加学科分类</span>--%>
+					</div>
+					<div>
+						<textarea maxlength="500" id = "unit_advise_online" name = "unit_advise_online">${gezlList.unit_advise_online }</textarea>
+					</div>
+				</div>
+			</c:if>
+			
+			
+			<!-- 院校推荐意见(仅打印显示)-->
+			<div class="yijian"  id="yijian">
+				<div class="tujian01">院校推荐意见:</div>
+				<div id="tujian00">${gezlList.unit_advise_online }</div>
+				<div class="tujian02">
+					<div class="qianzi">负责人签字:</div>
+					<div class="gaizhang">(院校盖章)</div>
+				</div>
+				<div class="tujian03">年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</div>
 			</div>
-			<div class="tujian03">年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</div>
-		</div>
+			<!-- 院校推荐意见(仅打印显示) end -->
+		</c:if>
 
         </div>
-		<!-- 院校推荐意见(仅打印显示) end -->
+		
 		
 		<!-- 上传单位意见 -->
 		<c:if test="${state == 'audit' && online_progress != 2}">
                 <div class="sbxq_item" id="szdwyj" style="display: block">
                     <div>
                         <span id="tsxz_span13"></span>
-                        <span class="tsxz_title"><%--<img src="${ctx}/statics/image/btxx.png" />--%>所在单位意见<span style="color: red">(上传单位盖章的申报表)</span></span>
+                        <span class="tsxz_title"><%--<img src="${ctx}/statics/image/btxx.png" />--%>上传申报表扫描件<span style="color: red">(上传单位盖章的申报表)</span></span>
                     </div>
                     <div style="height: 30px;margin-top: 10px;">
                         <div class="scys" id="dwyjsc"><span>上传文件</span></div>
@@ -586,15 +621,35 @@
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
 <style>
-    @media print {
-        #yijian{
-            display: block !important;
-        }
-    }
+    
 
     #yijian{
-        display: none;
+         display: none; 
+         position: relative;
+         min-height: 280px;
+         height: unset;
     }
+    #tujian00{
+    	margin-bottom: 100px;
+	    padding: 10px;
+	    word-break:  break-all;
+    }
+    .tujian02 {
+	    float: right;
+	    position: absolute;
+	    right: 0px;
+	    clear: left;
+	    bottom: 40px;
+	}
+	.tujian03 {
+	    
+	    bottom: 10px;
+	    right: 10px;
+	    float: right;
+	    position: absolute;
+	    text-align: right;
+	    clear: right;
+	}
 	.out{
 		width: 128px;
 		height: 44px;
@@ -708,5 +763,13 @@
 	#nrflxs , #sbzyxs , #xkflxs{
 		display:none;
 	}
+	#unit_advise_online{
+	    width: 1030px;
+	    border: 1px #000000 solid;
+	    padding: 10px;
+	    min-height: 100px;
+    }
+    
+    
 </style>
 </html>

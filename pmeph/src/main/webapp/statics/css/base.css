@@ -219,6 +219,7 @@ textarea{
 .head .user-select img {
     width: 148px;
     height: 175px;
+   /* height: 206px;*/
 }
 
 .head .user-select .select {
@@ -667,6 +668,7 @@ td {
 }
 
  .float-menu .item.green {
+ 	 display:none; /* 师资培训 */
      background: #3CC34C;
  }
 

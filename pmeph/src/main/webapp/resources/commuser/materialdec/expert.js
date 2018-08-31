@@ -2,6 +2,8 @@
  var jsonStr = "";
  var is_unit_advise_used = "0";
  var expertMap;
+ var expertMapforNewVali;
+ 
 $(function () {
     setTimeout(function () {
         $('#realname').tipso({validator: "isNonEmpty", message: "姓名不能为空"});
@@ -14,16 +16,17 @@ $(function () {
         $('#zjlx').tipso({validator: "isNonEmpty", message: "证件类型不能为空"});
         $('#idcard').tipso({validator: "isNonEmpty", message: "证件号码不能为空"});
         $('#address').tipso({validator: "isNonEmpty", message: "地址不能为空"});
-        checkExtra();
+        //checkExtra();
     },0)
 
    // setTimer();
     var id = $("#expert_type").val();
-    setTimeout(function (){
+    /*setTimeout(function (){
         upload();
-    },1000);
+    },1000);*/
      //附件上传
     queryMaterialMap(id);  //执行查询方法
+    
 
     $('.select-input').selectlist({
         zIndex: 10,
@@ -115,11 +118,84 @@ function queryMaterialMap(expert_type){
         data:{expert_type:expert_type},// 您的formid
         dataType:"json",
         success: function(json) {
-            chooseModel(json);
-            expertMap = json;
+            //chooseModel(json);
+        	expertMapforNewVali = json;
+        	usedAndRequired(expertMapforNewVali);  
+            //expertMap = json;
         }
     });
 }
+
+/**
+ * 可配置项的显示及校验初始化
+ * @param data
+ */
+function usedAndRequired(data){
+	$("div[wrapper_key] input").tipso("destroy");
+	$("textarea[name='kz_content']").tipso("destroy");
+	$("div[wrapper_key]").each(function(){
+		var $d = $(this);
+		if(data[$d.attr("wrapper_key")+"_used"]){
+			$d.show();
+			if(data[$d.attr("wrapper_key")+"_required"]){
+				$d.find(".tsxz_ts").show();
+				$d.find("td input[type!='select'][type!='radio'][type!='checkbox'][placeholder!='备注'][type!='hidden']").each(function(){
+					var $in = $(this);
+					var message =$in.attr("placeholder")+"必填";
+					$in.tipso({validator: "isNonEmpty", message: message});
+				});
+			}
+		}
+	});
+	checkExtra();
+	typeUseRequired(data);
+}
+
+/**
+ * 分类的校验
+ */
+function typeUseRequired(data){
+	//学科分类
+    if(data.is_subject_type_used == "1"){
+        $("#xkfl_qy").css("display","block");
+        //主编学术专著情况必填
+        if(data.is_subject_type_required != "1"){
+            $("#xkflbx").attr("style","display:none");
+        }else{
+            $("#xkflbt").val("yes");
+        }
+
+    }else{
+        $("#xkfl_qy").css("display","none");
+    }
+
+    //内容分类
+    if(data.is_content_type_used == "1") {
+        $("#nrfl_qy").css("display", "block");
+        //主编学术专著情况必填
+        if (data.is_content_type_required != "1") {
+            $("#nrflbx").attr("style", "display:none");
+        }else{
+            $("#nrflbt").val("yes");
+        }
+    }else{
+        $("#nrfl_qy").css("display", "none");
+    }
+
+    //申报专业
+    if(data.is_profession_type_used == "1") {
+        $("#sbzy_qy").css("display", "block");
+        //主编学术专著情况必填
+        if (data.is_profession_type_required != "1") {
+            $("#sbzybx").attr("style", "display:none");
+        }else{
+            $("#sbzybt").val("yes");
+        }
+    }else{
+        $("#sbzy_qy").css("display", "none");
+    }
+};
+
 
 //模块显示与隐藏判断
 function chooseModel(data){
@@ -508,8 +584,8 @@ function add_wzfbqk() {
         "<input type='hidden' name='wzfbxq_id' value=''>"+
         "<td class=\"xztd\"><input class=\"cg_input xzip\" maxlength=\"100\"  id=\"wzfbqk_material_name_"+num+"\" name=\"wzfb_name\" value=\"\" placeholder=\"文章题目\"/></td>\n" +
         "<td class=\"xztd\"><input class=\"cg_input xzip\" name=\"wzfb_qkmc\" value=\"\"  maxlength=\"20\" placeholder=\"期刊名称\"/></td>\n" +
-        "<td class=\"xztd\"><input class=\"cg_input xzip\" name=\"wzfb_njq\" value=\"\" placeholder=\"\"/></td>\n" +
-        "<td class=\"xztd\"><input class=\"cg_input xzip\" maxlength=\"100\" name=\"wzfb_qklb\" value=\"\"  placeholder=\"\"/></td>\n" +
+        "<td class=\"xztd\"><input class=\"cg_input xzip\" name=\"wzfb_njq\" value=\"\" placeholder=\"年、卷、期\"/></td>\n" +
+        "<td class=\"xztd\"><input class=\"cg_input xzip\" maxlength=\"100\" name=\"wzfb_qklb\" value=\"\"  placeholder=\"期刊级别（SCI或国内核心期刊）\"/></td>\n" +
         "<td class=\"xztd\"><input class=\"cg_input xzip\" maxlength=\"100\" name=\"wzfb_note\" value=\"\"  placeholder=\"备注\"/></td>\n" +
         "<td class=\"xztd\"><img class=\"add_img\" src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('wzfbqk_"+num+"')\"/></td>\n" +
         "</tr>");
@@ -595,15 +671,16 @@ function buttAdd(type){
                     }
                 });
             }else {  //表示提交
+            	usedAndRequired(expertMapforNewVali);  
                 checkLb();
                     if ($.fireValidator() ) {
-                                if(!$("#xkfladd").children().hasClass("el-tag")&&$("#xkflbt").val()=="yes"){
+                                if(!$("#xkfladd").children().hasClass("el-tag")&&($("#xkflbt").val()=="yes")){
                                     window.message.info("请选择学科分类！");
                                     return ;
-                                }else if(!$("#nrfladd").children().hasClass("el-tag")&&$("#nrflbt").val()=="yes"){
+                                }else if(!$("#nrfladd").children().hasClass("el-tag")&&($("#nrflbt").val()=="yes")){
                                     window.message.info("请选择内容分类！");
                                     return ;
-                                }else if(!$("#sbzyadd").children().hasClass("el-tag")&&$("#sbzybt").val()=="yes"){
+                                }else if(!$("#sbzyadd").children().hasClass("el-tag")&&($("#sbzybt").val()=="yes")){
                                     window.message.info("请选择申报专业！");
                                     return ;
                                 }

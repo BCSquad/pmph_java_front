@@ -37,8 +37,8 @@
 	<!-- 专家信息 --> 
 	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
 		select id,product_id,expert_type,user_id,realname,sex,birthday,REPLACE(birthday,'-','.') as birthday1,experience,org_name,position,title,address,postcode,handphone,email,idtype,
-		idcard,telephone,fax,online_progress,auth_date,is_staging*1 is_staging,is_deleted*1 is_deleted,banknumber,bankaddress,
-		gmt_create,gmt_update,education*1 education,expertise,return_cause,unit_advise,syllabus_name,IFNULL(org_id,'') as org_id,banknumber,bankaddress from expertation t1
+		idcard,telephone,fax,online_progress,auth_date,is_staging*1 is_staging,is_deleted*1 is_deleted,banknumber,bankaddress,remark,
+		gmt_create,gmt_update,education*1 education,expertise,return_cause,unit_advise,syllabus_name,IFNULL(org_id,'') as org_id,banknumber,bankaddress,unit_advise_online from expertation t1
 		 where 1= 1
 		<if test="user_id != null and user_id != ''">
 			and t1.user_id = #{user_id}
@@ -60,7 +60,7 @@
 		) values(#{product_id},#{expert_type},#{user_id},#{realname},#{sex},#{birthday},#{experience},#{org_name},#{position},
 		#{title},#{address},#{postcode},#{handphone},#{email},#{idtype},#{idcard},#{telephone},#{fax},#{gmt_create},
 		#{is_staging},#{online_progress},#{commit_date},#{banknumber},#{bankaddress},#{remark},#{degree},#{unit_advise},#{syllabus_name},#{education}
-		,#{org_id},#{expertise})
+		,${org_id},#{expertise})
 	</insert>
 	<update id="updatePerson" parameterType="java.util.Map">
 		update expertation set realname = #{realname},sex = #{sex},birthday = #{birthday},experience = #{experience},expertise = #{expertise},
@@ -186,7 +186,7 @@
 			/*group_concat(DISTINCT pst.type_name  SEPARATOR '_,_') as type_name,
 			group_concat(DISTINCT pd.name_path  SEPARATOR '_,_') as name_path,*/
 			e.*,
-			org.org_name as org_name2,
+			case when e.org_id=0 then '人民卫生出版社' else org.org_name end as orgName,
 			DATE_FORMAT(e.gmt_create,'%Y-%m-%d') as gmt_create_new
 			from expertation e
 			left join expertation_content_type et on et.expertation_id = e.id
@@ -358,6 +358,10 @@
             <if test="syllabus_name != null and syllabus_name != '' ">
                 syllabus_name = #{syllabus_name},
             </if>
+            <if test="unit_advise_online != null and unit_advise_online != '' ">
+                unit_advise_online = #{unit_advise_online},
+            </if>
+            
     	</set>
     	where id = #{expertation_id}
     </update>
@@ -395,6 +399,12 @@
 			<if test="parameter.org_name != null and parameter.org_name != ''">
 				where t.org_name like #{parameter.org_name}
 			</if>
+	</select>
+	
+	<select id="queryExpertationById" parameterType="java.lang.String" resultType="Map">
+		select e.*,p.product_name from expertation e 
+		left join product p on e.product_id = p.id
+		where e.id = #{expertation_id}
 	</select>
     
     

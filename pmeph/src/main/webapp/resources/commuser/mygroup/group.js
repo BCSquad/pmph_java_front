@@ -45,7 +45,7 @@ $(function(){
     
     try {
         if (WebSocket) {
-            webSocket = new WebSocket("ws://"+remoteUrl+":11000/pmpheep/websocket?userType=2&userId=" + userId+"&t="+new Date());
+            webSocket = new WebSocket("ws://medu.ipmph.com/pmphwx/websocket?userType=2&userId=" + userId+"&t="+new Date());
             webSock_init();
         }
     } catch (e) {

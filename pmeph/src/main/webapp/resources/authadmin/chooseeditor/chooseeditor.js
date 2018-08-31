@@ -248,7 +248,7 @@ function selectRubmit(){
 		                            success:function(wxResult){
 		                            	//console.log("success "+wxResult);
 		                            	if(wxResult=="1"){
-		                            		window.message.success("微信消息发送成功");
+		                            		//window.message.success("微信消息发送成功");
 		                            		setTimeout(function(){
 		    									window.location.href=contextpath+'chooseEditor/toPage.action?textBookId='+$("#textBookId").val();
 		    								}, 800);

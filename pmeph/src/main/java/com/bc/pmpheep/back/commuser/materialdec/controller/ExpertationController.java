@@ -257,6 +257,7 @@ public class ExpertationController extends BaseController{
 		perMap.put("remark", request.getParameter("remark"));
 		perMap.put("unit_advise", request.getParameter("syllabus_id"));
 		perMap.put("syllabus_name", request.getParameter("syllabus_name"));
+		perMap.put("remark", request.getParameter("remark"));
 		String s=request.getParameter("sbdw_id");
 		perMap.put("org_id","".equals(request.getParameter("sbdw_id")) ? null:request.getParameter("sbdw_id"));
 
@@ -578,6 +579,13 @@ public class ExpertationController extends BaseController{
 		//所选申报单位
 		Map<String,Object> org =etService.queryOrgById(MapUtils.getString(gezlList.get(0),"org_id"));
 
+		if(MapUtils.getString(gezlList.get(0),"expert_type").equals("1")){
+			mav.addObject("title","人卫临床助手专家申报表");
+		}else if(MapUtils.getString(gezlList.get(0),"expert_type").equals("2")){
+			mav.addObject("title","人卫用药助手专家申报表");
+		}else if(MapUtils.getString(gezlList.get(0),"expert_type").equals("3")){
+			mav.addObject("title","人卫中医助手专家申报表");
+		}
 		//填充
 		mav.addObject("queryMap", queryMap);
 		mav.addObject("gezlList", gezlList.get(0));
@@ -895,6 +903,8 @@ public class ExpertationController extends BaseController{
 		String unit_advise = request.getParameter("unit_advise");   //判断是否有附件上传
         String syllabus_name = request.getParameter("syllabus_name");   //判断是否有附件上传
 		String writer_id = request.getParameter("user_id");  //作家用户Id
+		String unit_advise_online = request.getParameter("unit_advise_online");
+		
 		Map<String,Object> userMap =  this.getUserInfo();
 		String user_id = userMap.get("id").toString();
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
@@ -907,6 +917,7 @@ public class ExpertationController extends BaseController{
 		paramMap.put("auth_date", date);
 		paramMap.put("writer_id", writer_id);
 		paramMap.put("return_cause", return_cause);
+		paramMap.put("unit_advise_online", unit_advise_online);
 		if(unit_advise!=null){
 			paramMap.put("unit_advise", unit_advise);
 		}else{

@@ -180,11 +180,11 @@
             </c:forEach>
             <div class="more" onclick="top.location='${ctx}/cmsnotice/tolist.action'">更多>></div>
         </div>
-        <div class="notice area-2-1" style="width: 50%;display: inline-block;margin-top: 10px">
+        <div class="notice area-2-1" style="width: 100%;display: inline-block;margin-top: 10px">
             <div class="bgcolor-blue" style="float: left;width: 7px;height: 100%"></div>
             <div class="lcjc-img"></div>
             <div class="lcjc">
-                <div class="lcjc-a">
+                <div class="lcjc-a" style="margin-left: 100px">
                     <div class="lcjc-1" onclick="todeclaredetail(1)"></div>
                     <div class="lcjc-n">人卫临床助手</div>
                 </div>
@@ -198,11 +198,11 @@
                 </div>
             </div>
         </div>
-        <div class="notice area-2-2" style="width: 49.5%;display: inline-block">
+        <%--<div class="notice area-2-2" style="width: 49.5%;display: inline-block">
             <div class="bgcolor-blue" style="float: left;width: 7px;height: 100%"></div>
             <div class="lcjc-img-1"></div>
             <div class="lcjc-img-2"></div>
-        </div>
+        </div>--%>
         <div class="notice area-3" style="margin-top: 5px">
             <div class="title">
                 <div class="line bgcolor-blue"></div>
@@ -619,7 +619,7 @@
     </c:if>
 
     <!--公众号悬浮框-->
-    <div id="EWM" class="emw"><img src="${ctx}/statics/image/wxgzh.jpg"></div>
+    <div id="EWM" onmouseover="showEWM()" onmouseout="hideEWM()" class="emw"><img src="${ctx}/statics/image/wxgzh.jpg"></div>
 </div>
 <jsp:include page="/pages/comm/tail.jsp">
     <jsp:param name="linked" value="linked"></jsp:param>

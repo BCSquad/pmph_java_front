@@ -460,7 +460,7 @@
 }
 
 .el-tag{
-	background-color: #838fa5;
+	/*background-color: #838fa5;*/
 	display: inline-block;
 	padding: 0 5px;
 	height: 26px;
@@ -549,4 +549,30 @@
 	float: left;
 	background-size: 100% 100%;
 }
+
+#xkfl_qy,#nrfl_qy,#sbzy_qy{
+	display: none;
+}
+
+@media print{
+        #yijian{
+            display: block !important;
+            position: relative !important;
+	         min-height: 280px !important;
+	         height: unset !important;
+        }
+        #unit_advise_online_wrapper , #unit_advise_online_title , #unit_advise_online{
+        	display: none !important;
+        }
+        
+    }
+
+#beizhu{
+	background-image: url(../image/ramke.png);
+	height: 19px;
+	width: 19px;
+	float: left;
+	background-size: 100% 100%;
+}
+  
 

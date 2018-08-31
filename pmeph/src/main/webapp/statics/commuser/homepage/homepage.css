@@ -332,8 +332,8 @@ ul li {
 }
 
 .lcjc-a{
-    width: 156px;
     float: left;
+    margin-left: 250px;
 }
 
 .ir_02 span {
@@ -629,10 +629,10 @@ ul li {
 }
 
 .lcjc-img{
-    background-image: url(../../image/r1.png);
+    background-image: url(../../image/fffff.png);
     margin-left: 35px;
-    margin-top: 15px;
-    width: 25px;
+    margin-top: 25px;
+    width: 55px;
     height: 100px;
     float: left;
 }
@@ -1890,6 +1890,7 @@ ul li {
     position: fixed ! important;
     right: 92px;
     top: 435px;
+    top: 490px;
     display: none;
 }
 
