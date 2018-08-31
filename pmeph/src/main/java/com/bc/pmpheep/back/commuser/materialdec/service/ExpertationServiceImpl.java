@@ -638,15 +638,15 @@ public class ExpertationServiceImpl implements ExpertationService {
 			msgContent = "恭喜！您提交的《"+MapUtils.getString(expertation,"product_name")+"》临床申报表已通过[学校管理员]审核!";
 		}
 		
+		//TODO 待状态确认后再开放 与后台 一起发送消息
 		
-		
-		dataAuditService.senNewMsgPass(MapUtils.getLong(paramMap,"expertation_id")
+		/*dataAuditService.senNewMsgPass(MapUtils.getLong(paramMap,"expertation_id")
 				,MapUtils.getLong(paramMap,"auth_user_id")
 				, new Short("3")
 				, MapUtils.getLong(paramMap,"writer_id")
 				, new Short("2")
 				, "系统消息"
-				, msgContent);
+				, msgContent);*/
 
 		return count;
 	}
