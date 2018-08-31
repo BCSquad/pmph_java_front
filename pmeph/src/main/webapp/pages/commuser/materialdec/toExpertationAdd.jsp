@@ -738,7 +738,7 @@
 					<span class="el-button" onclick="javascript:sbzyAdd('${queryMap.product_id}')">添加专业分类</span>
 				</div>
 				<div class="sbdw" id="sbzyadd">
-					<span class="btmc">内容分类：</span>
+					<span class="btmc">申报专业：</span>
 				</div>
 			</div>
 			<%--<div class="sbxq_item" id="szdwyj">
