@@ -470,7 +470,7 @@
 		<!-- 申报单位 -->
 		<div class="sbxq_item1" style="display: block">
 			<div>
-				<span id="beizhu"></span>
+				<span id="tsxz_span8"></span>
 			</div>
 			<div class="sbdw" id="xkfladd">
 				<span class="btmc">申报单位：${org.org_name }</span>
