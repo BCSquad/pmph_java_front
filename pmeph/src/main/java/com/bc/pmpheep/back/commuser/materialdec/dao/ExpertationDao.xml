@@ -60,7 +60,15 @@
 		) values(#{product_id},#{expert_type},#{user_id},#{realname},#{sex},#{birthday},#{experience},#{org_name},#{position},
 		#{title},#{address},#{postcode},#{handphone},#{email},#{idtype},#{idcard},#{telephone},#{fax},#{gmt_create},
 		#{is_staging},#{online_progress},#{commit_date},#{banknumber},#{bankaddress},#{remark},#{degree},#{unit_advise},#{syllabus_name},#{education}
-		,${org_id},#{expertise})
+        <choose>
+            <when test="org_id=''">
+                ,NULL
+            </when>
+            <otherwise>
+                ,#{org_id}
+            </otherwise>
+        </choose>
+		,#{expertise})
 	</insert>
 	<update id="updatePerson" parameterType="java.util.Map">
 		update expertation set realname = #{realname},sex = #{sex},birthday = #{birthday},experience = #{experience},expertise = #{expertise},
