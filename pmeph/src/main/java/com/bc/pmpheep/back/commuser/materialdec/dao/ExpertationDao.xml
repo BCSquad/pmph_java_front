@@ -61,7 +61,7 @@
 		#{title},#{address},#{postcode},#{handphone},#{email},#{idtype},#{idcard},#{telephone},#{fax},#{gmt_create},
 		#{is_staging},#{online_progress},#{commit_date},#{banknumber},#{bankaddress},#{remark},#{degree},#{unit_advise},#{syllabus_name},#{education}
         <choose>
-            <when test="org_id=''">
+            <when test="org_id==''">
                 ,NULL
             </when>
             <otherwise>
