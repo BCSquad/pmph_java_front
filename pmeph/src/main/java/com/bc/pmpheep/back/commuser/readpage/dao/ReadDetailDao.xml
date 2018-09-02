@@ -36,6 +36,7 @@
 	     t.score,
 	     b.realname,
 	     b.nickname,
+		 b.username,
 	     b.avatar
 	     from book_user_comment t 
 	     left join book u on t.book_id=u.id

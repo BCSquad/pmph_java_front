@@ -191,7 +191,7 @@ public class UserInfoController extends BaseController {
     }
 
     /**
-     * 机构用户修改密码
+     * 机构用户修改密码(与sso对接)
      * @param orgUser
      * @return
      */
@@ -204,7 +204,7 @@ public class UserInfoController extends BaseController {
         Long userId = new Long(String.valueOf(map1.get("id")));
         map.put("id", userId);
         String password=request.getParameter("password");
-        /*   DesRun desRun=new DesRun("",password);
+     /*   DesRun desRun=new DesRun("",password);
         map.put("password", desRun.enpsw);
         userinfoService.updatePassword(map);*/
         userService.modifyUser(MapUtils.getString(map1,"username"),password);

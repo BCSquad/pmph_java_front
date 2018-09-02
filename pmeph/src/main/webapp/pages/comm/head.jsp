@@ -115,7 +115,7 @@
 
             <c:if test="${userInfo != null}">
                 <span class="logininfo" style="cursor: pointer" onclick="window.location.href='<c:url value="/userinfo/touser.action"/>'">
-                    您好,<%=MapUtils.getString(userInfo, "nickname")%>
+                    您好,<%=MapUtils.getString(userInfo, "nkname")%>
                 </span>
 
                 <span class="logininfoout"
@@ -162,6 +162,7 @@
                            href='<c:url value="/personalhomepage/tohomepage.action?pagetag=jcsb"/>'>教材申报</a>
                         <a class="option"
                            href='<c:url value="/teacherCertification/showTeacherCertification.action"/>'>教师认证</a>
+                          <%--<a class="option" style="line-height:14px;width:60px;">临床决策专家申报</a>--%>
                         <%--<a class="option out" href='<c:url value="/logout.action"/>'>退出</a>--%>
                     </div>
                 </div>

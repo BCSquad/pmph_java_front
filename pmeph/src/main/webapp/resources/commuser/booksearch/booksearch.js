@@ -214,7 +214,8 @@ function likeSwitch(bookId,icon){
 
 //搜索条件在相应部位红色
 function redQuery(){
-	var qsArray = $("#search-name-temp").val().trim().split(" ");
+	var qsArray = $("#search-name-temp").val().trim().split(/\s+/);
+	
 	for ( var i in qsArray) {
 		var re=new RegExp(qsArray[i],"ig");
 		var $tag= $(".book-name-span");

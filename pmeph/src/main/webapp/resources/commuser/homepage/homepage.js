@@ -233,6 +233,25 @@ function tosurvey() {
 	location.href = contextpath + 'survey/surveyList.action';
 }
 
+//三个新产品跳转
+function todeclaredetail(state){
+    $.ajax({
+        type:'post',
+        url:contextpath+'homepage/todeclaredetail.action?state='+state+'&&t='+new Date().getTime(),
+        async:false,
+        dataType:'json',
+        success:function(json){
+        	if(json=="OK"){
+                location.href = contextpath + 'homepage/toproductdetail.action?state='+state;
+			}else{
+                window.message.info("您好，当前产品的公告没有发布，请在发布之后再进行申报！");
+			}
+
+        }
+    });
+}
+
+
 // 跳转公告详情页面
 // function todou(mid,material_id,id) {
     // location.href = contextpath +'cmsnotice/noticeMessageDetail.action?id='+mid+'&materialId='+material_id+'&csmId='+id+'&'+'&tag=FromCommunityList';

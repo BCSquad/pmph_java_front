@@ -86,21 +86,26 @@
 /**tab1**/
 .tab_1{
 	width: 100%;
+    table-layout: fixed;
+    border-spacing: 0px 15px;
 }
-.tab_1 tr{
+/* .tab_1 tr{
 	height: 53px;
 }
 .tab_1 tr td{
 	height: 53px;
-}
+} */
 .tab_1 tr td {
 	font-size: 14px;
-	font-weight: normal;
-	font-stretch: normal;
-	line-height: 26px;
-	letter-spacing: 0px;
-	color: #666666;
-	/*text-align: left;*/
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 28px;
+    letter-spacing: 0px;
+    color: #666666;
+    /* text-align: left; */
+    word-break: break-all;
+    padding: 0px 15px;
+    vertical-align: top;
 }
 .tab_1 tr td span{
 	width: 100px;
@@ -142,11 +147,13 @@
 
 .tab_2 tbody td{
 	line-height: 30px;
-	letter-spacing: 0px;
-	color: #999999;
-	text-align: center;
-	border:1px solid #dedede; 
-	height: 35px;
+    letter-spacing: 0px;
+    color: #999999;
+    text-align: center;
+    border: 1px solid #dedede;
+    height: 35px;
+    word-break: break-all;
+    padding: 5px 10px;
 }
 /**常规输入框**/
 .cg_input{
@@ -206,18 +213,19 @@
 	width: 100%;
 }
 .text_cl{
-	width: 990px;
-	height: 60px;
-	background-color: #e8f1fa;
-	border-radius: 3px;
-	border: solid 1px #3996fa;
-	-moz-opacity: 0.3;
-	-khtml-opacity: 0.3;
-	-webkit-opacity: 0.3;
-	opacity: 1;
-	filter:alpha(opacity=30);
-	padding: 15px 20px;
-	margin-top: 20px;
+	width: 100%;
+    min-height: 100px;
+    background-color: #e8f1fa;
+    border-radius: 3px;
+    border: solid 1px #3996fa;
+    -moz-opacity: 0.3;
+    -khtml-opacity: 0.3;
+    -webkit-opacity: 0.3;
+    opacity: 1;
+    filter: alpha(opacity=30);
+    padding: 15px 20px;
+    /* margin-top: 20px; */
+    box-sizing: border-box;
 }
 /**�ύ��ť**/
 .button{

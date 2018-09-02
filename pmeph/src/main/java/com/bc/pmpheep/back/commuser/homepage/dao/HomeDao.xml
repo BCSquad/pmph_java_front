@@ -16,6 +16,11 @@
 		else 0
 		end )as dec_editable,
 		m.deadline,
+		<!-- (case 
+		        when cc.is_material_entry = 1
+		        then cc.gmt_create
+		        else cc.auth_date
+		        end) as -->cc.gmt_create  orderDate,
 		cc.*
 		FROM
 				cms_content cc
@@ -46,7 +51,8 @@
 	  group by cc.id
 	  )t
 		ORDER BY
-	  		 t.sortByEntryBtnOn desc ,t.declaration_id asc, t.auth_date DESC ,t.deadline desc
+			t.sortByEntryBtnOn desc,t.is_material_entry desc,t.orderDate desc,t.deadline DESC 
+	  		 <!-- t.sortByEntryBtnOn desc ,t.declaration_id asc, t.auth_date DESC ,t.deadline desc -->
 		limit 0,3
   </select>
   
@@ -450,6 +456,14 @@ LIMIT 0,10
 			AND buc.is_deleted = 0
 			AND buc.is_auth = 1
 		) t
+	</select>
+
+	<!--根据产品类型查询详情-->
+	<select id="quertProductByType" parameterType="map" resultType="java.util.Map">
+        select
+		   t. note,t.description,b.*
+		   from product t left join product_attachment b on t.id=b.product_id
+		   where t.product_type=#{product_type} and t.is_deleted=0 and t.is_published=1
 	</select>
 
 </mapper>

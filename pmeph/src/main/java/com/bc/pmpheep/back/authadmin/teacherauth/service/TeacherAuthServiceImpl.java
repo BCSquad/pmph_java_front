@@ -42,8 +42,9 @@ public class TeacherAuthServiceImpl implements TeacherAuthService {
     }
 
     @Override
-    public Map<String, Object> statusModify(String id, String status, String backReason, String orgId) {
+    public Map<String, Object> statusModify(String id, String status, String backReason, Map<String, Object> userInfo) {
         Map<String, Object> rb = new HashMap<String, Object>();
+        String orgId = MapUtils.getString(userInfo, "org_id");
         Map<String, Object> paraMap = new HashMap<String, Object>();
         paraMap.put("id", id);
         paraMap.put("status", status);
@@ -52,9 +53,9 @@ public class TeacherAuthServiceImpl implements TeacherAuthService {
         Map<String, Object> orgInfo = teacherAuthDao.getSchoolInfo(orgId);
         Map<String, Object> writerId = teacherAuthDao.getWriterId(id);
         if ("3".equals(status)) {
-            messageService.sendNewNoticeOrgToWriter("1", MapUtils.getLong(writerId, "user_id"), MapUtils.getString(orgInfo, "org_name"));
+            messageService.sendNewNoticeOrgToWriter("1", MapUtils.getLong(writerId, "user_id"), userInfo);
         } else {
-            messageService.sendNewNoticeOrgToWriter("0", MapUtils.getLong(writerId, "user_id"), MapUtils.getString(orgInfo, "org_name"));
+            messageService.sendNewNoticeOrgToWriter("0", MapUtils.getLong(writerId, "user_id"), userInfo);
         }
 
         rb.put("count", count);

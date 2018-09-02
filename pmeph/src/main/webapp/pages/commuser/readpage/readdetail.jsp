@@ -314,7 +314,7 @@
                             </div>
 
                             <div class="video-btn">微视频</div>
-                            <div class="video-name">(微视频)${list.title}</div>
+                            <div class="video-name">${list.title}</div>
                         </div>
                     </c:forEach>
                     <script type="text/javascript">
@@ -381,7 +381,14 @@
                                             <%-- <img src="${ctx}/statics/image/rwtx.png"
                                                                            class="picturesize"/> --%>
                                     </div>
-                                    <div style="float: left;margin-left: 10px;margin-top: 5px;">${list.nickname}</div>
+                                    <div style="float: left;margin-left: 10px;margin-top: 5px;">
+                                        <c:if test="${list.nickname==null or list.nickname==''}">
+                                            ${list.username}
+                                        </c:if>
+                                        <c:if test="${list.nickname!=null and list.nickname!=''}">
+                                            ${list.nickname}
+                                        </c:if>
+                                    </div>
                                     <div style="float: left;margin-left: 10px;">
                                         <c:if test="${list.score<=3}">
                                             <span class="rwtx1"></span>

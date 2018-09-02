@@ -261,7 +261,8 @@ public class MaterialDetailController extends BaseController{
 		if(type.equals("1")){ //提交
 			perMap.put("is_staging", "0");
 			perMap.put("online_progress", "1");
-		}else{ 
+			perMap.put("commit_date", date);
+		}else{
 			if(online_progress != null && online_progress.equals("2")){ //被退回
 				perMap.put("is_staging", "0");
 				perMap.put("online_progress", "2");
@@ -526,6 +527,7 @@ public class MaterialDetailController extends BaseController{
 		//个人成就
 		String gr_content = request.getParameter("gr_content");
 		achievementMap.put("content", gr_content);
+		achievementMap.put("grcj_id", request.getParameter("grcj_id"));
 		//扩展信息
 		String kz_content[] = request.getParameterValues("kz_content");
 		String extension_id[] = request.getParameterValues("extension_id");
@@ -1301,6 +1303,8 @@ public class MaterialDetailController extends BaseController{
         List<Map<String,Object>> perjcbxList = new ArrayList<Map<String,Object>>();
         //11.作家科研情况表
         List<Map<String,Object>> perzjkyList = new ArrayList<Map<String,Object>>();
+		//13.个人成就
+		Map<String,Object> achievementMap = new HashMap<String,Object>();
         //14.主编学术专著情况表
         List<Map<String,Object>> permonographList = new ArrayList<Map<String,Object>>();
         //15.出版行业获奖情况表
@@ -1343,6 +1347,7 @@ public class MaterialDetailController extends BaseController{
         perclinicalList=this.perService.queryPerClinicalreward(queryMap);
         peracadeList=this.perService.queryPerAcadereward(queryMap);
         perpmphList=this.perService.rwsjcPerList(queryMap);
+		achievementMap=this.perService.queryAchievement(queryMap);
 
     //    mav.addObject("zjkzxxList", zjkzxxList);
     //    mav.addObject("material_id", materialMap.get("id"));
@@ -1363,6 +1368,7 @@ public class MaterialDetailController extends BaseController{
         mav.addObject("peracadeList",peracadeList);
         mav.addObject("persciList",persciList);
         mav.addObject("perpmphList",perpmphList);
+        mav.addObject("achievementMap",achievementMap);
         return mav;
     }
 }

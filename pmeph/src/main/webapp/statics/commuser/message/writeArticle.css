@@ -87,7 +87,7 @@ body {
     height: 60px;
 }
 
-.upload-image button {
+.upload-image .button {
     width: 100px;
     height: 36px;
     margin: 0px;
@@ -100,6 +100,7 @@ body {
     color: #ffffff;
     line-height: 36px;
     padding: 0;
+    text-align: center;
     border: none;
     cursor: pointer;
     float: left;

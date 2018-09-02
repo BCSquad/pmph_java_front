@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.collections.MapUtils;
@@ -188,7 +189,7 @@ public class HomeController extends BaseController{
         Map<String, Object> map2 = new HashMap<String, Object>();
         map2.put("books", new ArrayList());
         if (state.equals("next")) {
-            typeMap.put("startrows", startrows * 10 );
+            typeMap.put("startrows", startrows * 14 );
             List<Map<String, Object>> listRow = homeService.queryBook(typeMap);
             for (int i = 0; i < listRow.size(); i++) {
                 Map<String, Object> map = new HashMap<String, Object>();
@@ -204,7 +205,7 @@ public class HomeController extends BaseController{
                 ((List) map2.get("books")).add(map);
             }
         } else {
-            typeMap.put("startrows", (startrows - 2) * 10);
+            typeMap.put("startrows", (startrows - 2) * 14);
             List<Map<String, Object>> listRow = homeService.queryBook(typeMap);
             for (int i = 0; i < listRow.size(); i++) {
                 Map<String, Object> map = new HashMap<String, Object>();
@@ -337,5 +338,52 @@ public class HomeController extends BaseController{
         map.put("pagenum", pagenum);
         map.put("pagesize", pagesize);
         return new ModelAndView("commuser/homepage/hotbookcomments",map);
+    }
+
+    //跳转到三个产品详情界面
+    @RequestMapping("todeclaredetail")
+    @ResponseBody
+    public String todeclaredetail(HttpServletRequest request){
+        String returncode="";
+        ModelAndView modelAndView=new ModelAndView();
+        String state=request.getParameter("state");
+        List<Map<String,Object>> list=homeService.quertProductByType(state);
+        if(list!=null && list.size()>0){
+            returncode="OK";
+        }else{
+            returncode="NO";
+        }
+        return returncode;
+    }
+
+    //跳转到公告详情页（三大产品）
+    @RequestMapping("toproductdetail")
+    public ModelAndView toproductdetail(HttpServletRequest request){
+        ModelAndView modelAndView=new ModelAndView();
+        String state=request.getParameter("state");
+        List<Map<String,Object>> list=homeService.quertProductByType(state);
+        //取出申报通知扫描图片
+        List<Map<String,Object>> list_scanimg=new ArrayList<>();
+        List<Map<String,Object>> list_unscanimg=new ArrayList<>();
+        for (int i=0;i<list.size();i++){
+            Boolean s1=Boolean.valueOf(list.get(i).get("is_scan_img").toString());
+            if(s1==true){
+                Map<String,Object> map=new HashMap();
+                map.put("attachment","image/" + list.get(i).get("attachment") + ".action");
+                list_scanimg.add(map);
+            }else{
+                Map<String,Object> map=new HashMap();
+                map.put("attachment","file/download/" + list.get(i).get("attachment") + ".action");
+                map.put("attachment_name",list.get(i).get("attachment_name").toString());
+                list_unscanimg.add(map);
+            }
+        }
+        modelAndView.addObject("list_scanimg",list_scanimg);
+        modelAndView.addObject("list_unscanimg",list_unscanimg);
+        modelAndView.addObject("note_detail",list.get(0).get("note_detail"));
+        modelAndView.addObject("description",list.get(0).get("description_detail"));
+        modelAndView.addObject("state",state);
+        modelAndView.setViewName("commuser/cms/declaredatail");
+        return modelAndView;
     }
 }

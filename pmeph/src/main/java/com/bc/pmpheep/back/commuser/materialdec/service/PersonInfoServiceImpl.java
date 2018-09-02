@@ -120,6 +120,11 @@ public class PersonInfoServiceImpl implements PersonInfoService {
     }
 
     @Override
+    public List<Map<String, Object>> queryPerEditor(Map<String, Object> map) {
+        return this.peradd.queryPerEditor(map);
+    }
+
+    @Override
     public int insertJcsbxx(Map<String, Object> perMap,
                             List<Map<String, Object>> tssbList,
                             List<Map<String, Object>> stuList,
@@ -140,7 +145,8 @@ public class PersonInfoServiceImpl implements PersonInfoService {
                             List<Map<String, Object>> acadeList,
                             List<Map<String, Object>> pmphList,
                             Map<String, Object> digitalMap,
-                            Map<String, Object> intentionlMap) {
+                            Map<String, Object> intentionlMap,
+                            List<Map<String,Object>> editorList) {
         //获取userid
         String user_id = perMap.get("user_id").toString();
 
@@ -261,6 +267,13 @@ public class PersonInfoServiceImpl implements PersonInfoService {
                 this.peradd.insertPerRwsjc(map);
             }
         }
-        return 0;
+        //19.主编或参编图书情况
+        if (editorList != null && !editorList.isEmpty()) {
+            for (Map<String, Object> map : editorList) {
+                map.put("user_id", user_id);
+                this.peradd.insertPerEditor(map);
+            }
+        }
+        return 1;
     }
 }
