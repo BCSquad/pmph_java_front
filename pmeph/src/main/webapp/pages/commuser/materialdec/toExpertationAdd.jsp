@@ -778,7 +778,7 @@
 			<!-- 申报单位-->
             <div class="sbxq_item1" >
                 <div>
-                    <span id="beizhu"></span>
+                    <span id="tsxz_span8"></span>
                     <span class="tsxz_title">请选择您的申报单位</span>
                 </div>
                 <div class="sbdw">
