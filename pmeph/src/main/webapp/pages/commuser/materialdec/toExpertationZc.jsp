@@ -47,7 +47,7 @@
         </div>
         <div id="ifprint">
         <form id="objForm">
-            <input type="hidden" id="material_id" name="material_id" value="${materialMap.product_id}"/>
+            <input type="hidden" id="material_id" name="material_id" value="${materialMap.expert_type}"/>
             <input type="hidden" id="product_id" name="product_id" value="${gezlList.product_id}"/>
             <input type="hidden" id="expert_type" name="expert_type" value="${materialMap.expert_type}"/>
             <input type="hidden" id="expertation_id" name="expertation_id" value="${materialMap.declaration_id}"/>
@@ -882,7 +882,7 @@
                     <input type="hidden" id="xkflbt">
                     <span id="tsxz_span8"></span>
                     <span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" id="xkflbx"/>学科分类(可多选)</span>
-                    <span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.product_id}')">添加学科分类</span>
+                    <span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.expert_type}')">添加学科分类</span>
                 </div>
                 <div class="sbdw" id="xkfladd">
                     <span class="btmc">学科分类：</span>
@@ -900,7 +900,7 @@
                     <input type="hidden" id="nrflbt">
                     <span id="tsxz_span12"></span>
                     <span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" id="nrflbx"/>内容分类(可多选)</span>
-                    <span class="el-button" onclick="javascript:ContentAdd('${materialMap.product_id}')">添加内容分类</span>
+                    <span class="el-button" onclick="javascript:ContentAdd('${materialMap.expert_type}')">添加内容分类</span>
                 </div>
                 <div class="sbdw" id="nrfladd">
                     <span class="btmc">内容分类：</span>
@@ -917,7 +917,7 @@
                     <input type="hidden" id="sbzybt">
                     <span id="sbzytb"></span>
                     <span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" id="sbzybx"/>申报专业(可多选)</span>
-                    <span class="el-button" onclick="javascript:sbzyAdd('${materialMap.product_id}')">添加申报专业</span>
+                    <span class="el-button" onclick="javascript:sbzyAdd('${materialMap.expert_type}')">添加申报专业</span>
                 </div>
                 <div class="sbdw" id="sbzyadd">
                     <span class="btmc">申报专业：</span>

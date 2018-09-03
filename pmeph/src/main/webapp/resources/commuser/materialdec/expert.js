@@ -20,7 +20,8 @@ $(function () {
     },0)
 
    // setTimer();
-    var id = $("#expert_type").val();
+    var expert_type = $("#expert_type").val();
+    var id = $("#product_id").val();
     /*setTimeout(function (){
         upload();
     },1000);*/
@@ -111,11 +112,11 @@ function upload(){
 }
 
 //页面组合方法
-function queryMaterialMap(expert_type){
+function queryMaterialMap(id){
     $.ajax({
         type: "POST",
         url:contextpath+'expertation/queryMaterialMap.action',
-        data:{expert_type:expert_type},// 您的formid
+        data:{product_id:id},// 您的formid
         dataType:"json",
         success: function(json) {
             //chooseModel(json);
@@ -837,7 +838,7 @@ function check_jcb_isbn(id){
 }
 
 //学科选择
-function SubjectdAdd(product_id){
+function SubjectdAdd(expert_type){
 var chooseArr = [];
 	
 	$("input[name='subjectId']").each(function(){
@@ -854,12 +855,12 @@ var chooseArr = [];
         fixed: false, //不固定
         title:'学科分类选择',
         maxmin: true,
-        content: contextpath+"expertation/querySubject.action?product_id="+product_id+"&chooseId="+chooseId
+        content: contextpath+"expertation/querySubject.action?product_type="+expert_type+"&chooseId="+chooseId
     });
 }
 
 //内容选择
-function ContentAdd(product_id){
+function ContentAdd(product_type){
 	var chooseArr = [];
 	
 	$("input[name='contentId']").each(function(){
@@ -876,12 +877,12 @@ function ContentAdd(product_id){
         fixed: false, //不固定
         title:'内容分类选择',
         maxmin: true,
-        content: contextpath+"expertation/queryContent.action?product_id="+product_id+"&chooseId="+chooseId
+        content: contextpath+"expertation/queryContent.action?product_type="+product_type+"&chooseId="+chooseId
     });
 }
 
 //申报专业选择
-function sbzyAdd(product_id){
+function sbzyAdd(product_type){
 	var chooseArr = [];
 	$("input[name='sbzyId']").each(function(){
 		var $t = $(this);
@@ -897,7 +898,7 @@ function sbzyAdd(product_id){
         fixed: false, //不固定
         title:'申报专业选择',
         maxmin: true,
-        content: contextpath+"expertation/toSearchZy.action?product_id="+product_id+"&chooseId="+chooseId
+        content: contextpath+"expertation/toSearchZy.action?product_type="+product_type+"&chooseId="+chooseId
     });
 }
 

@@ -47,7 +47,7 @@
 		<!-- 图书选择-->
 		<form id="objForm">
 			<input type="hidden" id="expert_type" name="expert_type" value="${queryMap.expert_type}"/>
-			<input type="hidden" id="product_id" name="product_id" value="${queryMap.product_id}"/>
+			<input type="hidden" id="" name="product_id" value="${queryMap.product_id}"/>
 			<!-- 专家信息-->
 			<div class="sbxq_item1">
 				<div>
@@ -727,7 +727,7 @@
 					<input type="hidden" id="xkflbt">
                     <span id="tsxz_span8"></span>
                     <span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" id="xkflbx"/>学科分类(可多选)</span>
-					<span class="el-button" onclick="javascript:SubjectdAdd('${queryMap.product_id}')">添加学科分类</span>
+					<span class="el-button" onclick="javascript:SubjectdAdd('${queryMap.expert_type}')">添加学科分类</span>
                 </div>
                 <div class="sbdw" id="xkfladd">
                     <span class="btmc">学科分类：</span>
@@ -739,7 +739,7 @@
 					<input type="hidden" id="nrflbt">
                     <span id="tsxz_span12"></span>
                     <span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" id="nrflbx"/>内容分类(可多选)</span>
-					<span class="el-button" onclick="javascript:ContentAdd('${queryMap.product_id}')">添加内容分类</span>
+					<span class="el-button" onclick="javascript:ContentAdd('${queryMap.expert_type}')">添加内容分类</span>
                 </div>
                 <div class="sbdw" id="nrfladd">
                     <span class="btmc">内容分类：</span>
@@ -752,7 +752,7 @@
 					<input type="hidden" id="sbzybt">
 					<span id="sbzytb"></span>
 					<span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" id="sbzybx" />申报专业(可多选)</span>
-					<span class="el-button" onclick="javascript:sbzyAdd('${queryMap.product_id}')">添加专业分类</span>
+					<span class="el-button" onclick="javascript:sbzyAdd('${queryMap.expert_type}')">添加专业分类</span>
 				</div>
 				<div class="sbdw" id="sbzyadd">
 					<span class="btmc">申报专业：</span>
