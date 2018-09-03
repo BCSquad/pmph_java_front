@@ -33,6 +33,7 @@
           is_profession_type_required*1 is_profession_type_required,
           gmt_create,gmt_update,founder_id,publisher_id,gmt_publish,note,description
         from product where product_type = #{expert_type}
+        ORDER  BY gmt_set_active DESC limit 0,1
     </select>
 	<!-- 专家信息 --> 
 	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
@@ -61,7 +62,7 @@
 		#{title},#{address},#{postcode},#{handphone},#{email},#{idtype},#{idcard},#{telephone},#{fax},#{gmt_create},
 		#{is_staging},#{online_progress},#{commit_date},#{banknumber},#{bankaddress},#{remark},#{degree},#{unit_advise},#{syllabus_name},#{education}
         <choose>
-            <when test="org_id=''">
+            <when test="org_id==''">
                 ,NULL
             </when>
             <otherwise>
@@ -347,7 +348,7 @@
 
     <!--查看临床信息-->
     <select id="queryProduct" resultType="java.util.Map" parameterType="java.lang.String">
-        select * from product where product_type = #{product_type}
+        select * from product t where t.product_type = #{product_type} ORDER BY t.gmt_set_active DESC limit 0,1
     </select>
     
     <!-- 更新 -->
