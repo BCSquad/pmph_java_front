@@ -37,6 +37,7 @@
 	
 	<div class="content-wrapper">
 		<input type="hidden" name="expert_type" id="expert_type" value="${queryMap.expert_type}">
+		<input type="hidden" name="product_id" id="product_id" value="${queryMap.product_id}">
 		<input type="hidden" id="printout" value="${state}">
 		<div class="sbxq_title">
 		<c:choose>
@@ -44,7 +45,7 @@
 				
 			</c:when>
 			<c:otherwise>
-				<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> > <a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/expertation/declare.action"> 临床决策专家申报 </a> > 查看申报表</span>
+				<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> > <a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/expertation/declare.action"> 临床决策专家申报 </a> > <span id="product_name"></span></span>
 			</c:otherwise>
 		</c:choose>
 		</div>

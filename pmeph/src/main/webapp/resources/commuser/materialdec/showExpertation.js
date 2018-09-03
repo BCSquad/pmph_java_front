@@ -1,5 +1,5 @@
 $(function () {
-	var id = $("#expert_type").val();
+	var id = $("#product_id").val();
 	queryMaterialMap(id);  //执行查询方法
 
 	var state=$("#printout").val();
@@ -25,13 +25,14 @@ $(function () {
 });
 
 //页面组合方法
-function queryMaterialMap(expert_type){
+function queryMaterialMap(id){
 	$.ajax({
 		type: "POST",
 		url:contextpath+'expertation/queryMaterialMap.action',
-		data:{expert_type:expert_type},// 您的formid
+		data:{product_id:id},// 您的formid
 		dataType:"json",
 	    success: function(json) {
+	    	$("#product_name").html(json.product_name);
 	    	chooseModel(json);
 	    }
 	});

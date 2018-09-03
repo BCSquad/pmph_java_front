@@ -167,7 +167,7 @@
 
     <!-- 查询内容分类列表 -->
     <select id="queryContentList" parameterType="PageParameter" resultType="java.util.Map">
-        select * from product_content_type_detail t where is_leaf = '1' and product_type=#{parameter.product_type} and t.is_deleted = 0
+        select * from product_content_type_detail t where <!-- is_leaf = '1' and --> product_type=#{parameter.product_type} and t.is_deleted = 0
         <if test="parameter.name_path != null and parameter.name_path != ''">
             and t.name_path like #{parameter.name_path}
         </if>
@@ -178,7 +178,7 @@
     </select>
     <!-- 内容分类总数 -->
     <select id="queryContentCount" parameterType="PageParameter" resultType="int">
-        select count(*) from product_content_type_detail t where is_leaf = '1' and product_type=#{parameter.product_type} and t.is_deleted = 0
+        select count(*) from product_content_type_detail t  where <!--is_leaf = '1' and --> product_type=#{parameter.product_type} and t.is_deleted = 0
         <if test="parameter.name_path != null and parameter.name_path != ''">
             and t.name_path like #{parameter.name_path}
         </if>
