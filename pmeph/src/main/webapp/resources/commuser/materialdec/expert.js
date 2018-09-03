@@ -26,7 +26,7 @@ $(function () {
         upload();
     },1000);*/
      //附件上传
-    queryMaterialMap(id);  //执行查询方法
+    queryMaterialMap(id,expert_type);  //执行查询方法
     
 
     $('.select-input').selectlist({
@@ -112,11 +112,11 @@ function upload(){
 }
 
 //页面组合方法
-function queryMaterialMap(id){
+function queryMaterialMap(id,expert_type){
     $.ajax({
         type: "POST",
         url:contextpath+'expertation/queryMaterialMap.action',
-        data:{product_id:id},// 您的formid
+        data:{product_id:id,expert_type:expert_type},// 您的formid
         dataType:"json",
         success: function(json) {
             //chooseModel(json);
