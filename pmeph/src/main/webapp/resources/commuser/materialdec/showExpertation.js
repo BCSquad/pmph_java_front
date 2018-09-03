@@ -176,11 +176,11 @@ function upload(){
         },
         done: function (filename, fileid) {
             $("#fileNameDiv").empty(); //清楚内容
-            $("#fileNameDiv").append("<span><div class=\"filename whetherfile\"><a href='javascript:' class='filename'  onclick='downLoadProxy(\""+fileid+"\")' title=\""+filename+"\">"+filename+"</a></div></span>");
+            $("#fileNameDiv").append("<span><div><a onclick='downLoadProxy(\""+fileid+"\")' title=\""+filename+"\">"+filename+"</a></div></span>");
             $("#fileNameDiv").css("display","inline");
             $("#syllabus_id").val(fileid);
             $("#syllabus_name").val(filename);
-            toAudit($("#expertation_id").val(),null,"doNotReLocate");
+            toAudit($("#expertation_id").val(),'3',"doNotReLocate");
             console.log("上传完成：name " + filename + " fileid " + fileid);
             
         },
@@ -340,11 +340,12 @@ function toAuditPass(id,type) {
         window.message.confirm(msg,{icon: 7, title:'提示',btn:["确定","取消"]}
             ,function(index){
                 layer.close(index);
-                toAudit(id,type);
+                toAudit(id,type,"doNotReLocate");
+
             }
         );
 	}else{
-        toAudit(id,type);
+        toAudit(id,type,"doNotReLocate");
 	}
 }
 

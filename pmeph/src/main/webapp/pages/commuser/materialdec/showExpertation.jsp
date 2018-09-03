@@ -510,7 +510,7 @@
 		
 		
 		<!-- 上传单位意见 -->
-		<c:if test="${state == 'audit' && online_progress != 2}">
+		<c:if test="${userType == 'org' && online_progress != 2}">
                 <div class="sbxq_item" id="szdwyj" style="display: block">
                     <div>
                         <span id="tsxz_span13"></span>
@@ -518,7 +518,7 @@
                     </div>
                     <div style="height: 30px;margin-top: 10px;">
                         <div class="scys" id="dwyjsc"><span>上传文件</span></div>
-                        <div id="fileNameDiv" class="fileNameDiv"><a href="javascript:" onclick="downLoadProxy('${gezlList.unit_advise}')"
+                        <div id="fileNameDiv" class="fileNameDiv"><a  onclick="downLoadProxy('${gezlList.unit_advise}')"
                                                  title="${gezlList.syllabus_name}">${gezlList.syllabus_name}</a></div>
                         <input type="hidden" name="syllabus_id" id="syllabus_id" value="${gezlList.unit_advise}"/>
                         <input type="hidden" name="syllabus_name" id="syllabus_name" value="${gezlList.syllabus_name}"/>
