@@ -337,7 +337,7 @@ function correction() {
 function toAuditPass(id,type) {
    var sid= $("#syllabus_id").val();
 	if (sid==null||sid=="") {
-        var msg ='<font color="red" >单位所在意见为空</font>&nbsp;【确认】进行审核,【取消】可继续上传!';
+        var msg ='<font color="red" >申报表扫描件为空</font>&nbsp;【确认】进行审核,【取消】可继续上传!';
         window.message.confirm(msg,{icon: 7, title:'提示',btn:["确定","取消"]}
             ,function(index){
                 layer.close(index);
