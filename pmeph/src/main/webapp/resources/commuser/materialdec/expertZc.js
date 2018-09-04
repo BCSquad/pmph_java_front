@@ -17,9 +17,9 @@ $(function () {
         $('#email').tipso({validator: "isNonEmpty|isEmail", message: "邮箱不能为空|邮箱格式不正确"});
         $('#handphone').tipso({validator: "isNonEmpty|isMobile", message: "手机号码不能为空|手机号码格式不正确"});
         $('#zjlx').tipso({validator: "isNonEmpty", message: "证件类型不能为空"});
-        $('#idcard').tipso({validator: "isNonEmpty", message: "证件号码不能为空"});
+        $('#idcard').tipso({validator: "isNonEmpty|isCard", message: "证件号码不能为空|身份证号格式不正确"});
         $('#address').tipso({validator: "isNonEmpty", message: "地址不能为空"});
-        checkExtra();
+        //checkExtra();
     },0)
 
 
@@ -96,8 +96,39 @@ $(function () {
     if ($("#return_cause_hidden").val().length>0&&($("#online_progress_hidden").val()=='2'||$("#online_progress_hidden").val()=='5')) {
         $("#return_cause_div").fadeIn(800);
     }
+    
+    
 
 });
+
+
+window.onload = function () {
+	//时间前后校验
+	$("input[calendar]").each(function(i,n){
+    	var $t = $(n);
+    	$t.trigger("timeChange",new Date($t.val()));
+    });
+	
+	// 证件类型改变后 立即改变其校验
+	$("#zjlx").find("li").click(function(){
+    	var idType = $("#zjlx").find("input[name='idtype']").val();
+    	$('#idcard').data("plugin_tipso").hide();
+    	//$('#idcard').tipso("destroy");
+    	cardSwitch(idType);
+    	$.fireValidator();
+    });
+	cardSwitch($("#zjlx").find("li[class='selected']").attr("data-value"));
+	
+	function cardSwitch(idType){
+		if(idType == '1'){
+    		$('#idcard').tipso({validator: "isNonEmpty|isPassport", message: "证件号码不能为空|护照格式不正确"});
+    	}else if(idType == '2'){
+    		$('#idcard').tipso({validator: "isNonEmpty|isOfficialCard", message: "证件号码不能为空|军官证格式不正确"});
+    	}else{
+    		$('#idcard').tipso({validator: "isNonEmpty|isCard", message: "证件号码不能为空|身份证号格式不正确"});
+    	}
+	}
+};
 
 //下拉框格式优化
 function selectOption(name){
@@ -145,6 +176,7 @@ function queryMaterialMap(id,expert_type){
         dataType:"json",
         success: function(json) {
             //chooseModel(json);
+        	$("#product_name").html(json.product_name);
             expertMapforNewVali = json;
             usedAndRequired(expertMapforNewVali);
             //expertMap = json;
@@ -158,8 +190,8 @@ function queryMaterialMap(id,expert_type){
  * @param data
  */
 function usedAndRequired(data){
-    $("div[wrapper_key] input").tipso("destroy");
-    $("textarea[name='kz_content']").tipso("destroy");
+    /*$("div[wrapper_key] input").tipso("destroy");
+    $("textarea[name='kz_content']").tipso("destroy");*/
     $("div[wrapper_key]").each(function(){
         var $d = $(this);
         if(data[$d.attr("wrapper_key")+"_used"]){

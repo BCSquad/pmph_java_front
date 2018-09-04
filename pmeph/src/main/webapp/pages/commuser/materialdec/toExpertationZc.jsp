@@ -43,7 +43,7 @@
             <span><a style="text-decoration: none;color: #999999;"
                      href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a
                     style="text-decoration: none;color: #999999;"
-                    href="${contextpath}/medu/expertation/declare.action"> 临床决策专家申报 </a> > 修改申报表</span>
+                    href="${contextpath}/medu/expertation/declare.action"> 临床决策专家申报 </a> > <span id="product_name"></span></span>
         </div>
         <div id="ifprint">
         <form id="objForm">
