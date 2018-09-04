@@ -367,7 +367,7 @@ public class HomeController extends BaseController{
         List<Map<String,Object>> list_unscanimg=new ArrayList<>();
         for (int i=0;i<list.size();i++){
             Boolean s1=Boolean.valueOf(list.get(i).get("is_scan_img").toString());
-            if(s1==true){
+            if(s1){
                 Map<String,Object> map=new HashMap();
                 map.put("attachment","image/" + list.get(i).get("attachment") + ".action");
                 list_scanimg.add(map);
