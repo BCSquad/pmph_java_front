@@ -140,7 +140,7 @@
 				</table>
 			</div>
 		</div>
-			<!--主要工作经历-->
+		<!--主要工作经历-->
 		<div class="sbxq_item" id="gzjl">
 			<div>
 				<span id="tsxz_span4"></span>
@@ -205,9 +205,6 @@
 			</div>
 		</div>
 
-
-
-
 		<!--人卫社教材编写情况-->
 		<div class="sbxq_item" id="rwsjcbx">
 			<div>
@@ -258,7 +255,7 @@
 				</table>
 			</div>
 		</div>
-		<!--主编学术专著情况表-->
+		<!--图书出版情况-->
 		<div class="sbxq_item" id="zbxszz">
 			<div>
 				<span id="tsxz_span7"></span>
@@ -293,6 +290,7 @@
 				</table>
 			</div>
 		</div>
+
 		<!--主编或参编图书情况-->
 		<div class="sbxq_item" id="zbcbtsqk">
 			<div>
@@ -323,8 +321,8 @@
 			</div>
 		</div>
 
-			<!--文章发表情况（须第一作者，与本专业相关）-->
-			<div class="sbxq_item" id="wzfbqk" >
+		<!--文章发表情况（须第一作者，与本专业相关）-->
+		<div class="sbxq_item" id="wzfbqk" >
 				<div>
 					<span id="tsxz_span6"></span>
 					<span class="tsxz_title">文章发表情况（须第一作者，与本专业相关）</span>
@@ -354,8 +352,8 @@
 				</div>
 			</div>
 
-			<!--本专业获奖情况-->
-			<div class="sbxq_item" id="bzyhjqk" >
+		<!--本专业获奖情况-->
+		<div class="sbxq_item" id="bzyhjqk" >
 				<div>
 					<span id="bzyhjqk_img"></span>
 					<span class="tsxz_title">本专业获奖情况</span>
@@ -387,7 +385,6 @@
 					</table>
 				</div>
 			</div>
-
 
 		<!--扩展信息-->
 		<c:forEach var="zjkzxx" items="${zjkzqkList}">
@@ -433,8 +430,6 @@
 			</div>
 		</div>
 
-
-
 		<!-- 内容分类-->
 		<div class="sbxq_item1" id="nrflxs">
 			<div>
@@ -465,8 +460,6 @@
 				</c:forEach>
 			</div>
 		</div>
-
-
 
 		<!-- 申报单位 -->
 		<div class="sbxq_item1" style="display: block">
