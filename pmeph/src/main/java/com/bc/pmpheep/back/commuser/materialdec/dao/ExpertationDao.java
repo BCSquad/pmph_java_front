@@ -137,9 +137,16 @@ public interface ExpertationDao {
 	public int queryOrgCount(PageParameter<Map<String, Object>> pageParameter);
 
 	/**
-	 * 
+	 * 根据id查询
 	 * @param string
 	 * @return
 	 */
 	public Map<String, Object> queryExpertationById(String expertation_id);
+
+	/**
+	 * 查询某分类的首页生效临床申报 产品   
+	 * @param expert_type
+	 * @return
+	 */
+	public Map<String, Object> queryActiveProductbyType(String expert_type);
 }

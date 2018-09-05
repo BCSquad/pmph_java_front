@@ -160,12 +160,44 @@
             return true;
         }
     });
+    
+    $.addValidatRule("isPassport", function (value) {
+        //校验护照号码
+        if (!/^[a-zA-Z0-9]{3,21}$/.test(value)) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+    
+    $.addValidatRule("isOfficialCard", function (value) {
+        //军官证号码
+        if (!/^[a-zA-Z0-9]{7,21}$/.test(value)) {
+            return false;
+        } else {
+            return true;
+        }
+    });
 
     $.extend(Plugin.prototype, {
         init: function () {
             var obj = this,
                 $e = this.element;
-            list.push(this);
+            
+            var updateTempIndex = -1 ;
+        	for ( var i = 0 ;i<list.length;i++) {
+        		var item = list[i];
+        		if(this.element[0] == item.element[0]){
+        			updateTempIndex = i; 
+        			break;	
+        		}
+			}
+        	
+        	if(updateTempIndex>=0){
+        		list[updateTempIndex] = obj;
+        	}else{
+        		list.push(this);
+        	}
 
             if (isTouchSupported()) {
                 $e.on('click' + '.' + pluginName, function (e) {
@@ -182,10 +214,10 @@
                  obj.show();
                  }, 0);*/
 
-                $e.on('mouseover' + '.' + pluginName, function () {
+                $e.unbind('mouseover' + '.' + pluginName).on('mouseover' + '.' + pluginName, function () {
                     obj.show();
                 });
-                $e.on('mouseout' + '.' + pluginName, function () {
+                $e.unbind('mouseout' + '.' + pluginName).on('mouseout' + '.' + pluginName, function () {
                     obj.hide();
                 });
                 $e.change(function () {
@@ -195,14 +227,20 @@
                     } else {
                         value = obj.element.val()
                     }
-                    if (!(obj.settings.content = startValidate.call(obj.element, obj.settings.validator, value, obj.settings.message))) {
+                    //if (!(obj.settings.content = startValidate.call(obj.element, obj.settings.validator, value, obj.settings.message))) {
+                    if (!(obj.settings.content = startValidate.call(obj.element,$(obj.element).data("plugin_"+pluginName).settings.validator, value, $(obj.element).data("plugin_"+pluginName).settings.message))) {
                         obj.hideStyle();
+                        obj.hide();
                     }else {
                         obj.showStyle();
+                        obj.show();
                     }
                 });
 
             }
+            /*if(updateTempIndex>=0){
+        		$e.trigger("change");
+        	}*/
         },
         tooltip: function () {
             if (!this.tipso_bubble) {
@@ -274,8 +312,24 @@
 
         },
         removeFormFireVali: function(){
-        	
+        	this.hide();
+        	this.hideStyle();
+        	var desTempIndex = -1 ;
+        	for ( var i = 0 ;i<list.length;i++) {
+        		var item = list[i];
+        		if(this.element.attr("id") == item.element.attr("id")){
+        			desTempIndex = i; 
+        			break;	
+        		}
+			}
+        	//从fireValidator校验列表中删除此项
+        	if(desTempIndex>=0){
+        		list.splice(desTempIndex, 1); 
+        	}
+            //$.data(this, 'plugin_' + pluginName, null);
+        
         },
+        
         content: function () {
             var content,
                 $e = this.element,
@@ -562,6 +616,9 @@
             return this.each(function () {
                 if (!$.data(this, 'plugin_' + pluginName)) {
                     $.data(this, 'plugin_' + pluginName, new Plugin(this, options));
+                }else{
+                	$.removeData(this,'plugin_' + pluginName);
+                	$.data(this, 'plugin_' + pluginName, new Plugin(this, options));
                 }
             });
         } else if (typeof options === 'string' && options[0] !== '_' && options !==
@@ -591,10 +648,9 @@
                 	if(desTempIndex>=0){
                 		list.splice(desTempIndex, 1); 
                 	}
-                	
-                	
-                    $.data(this, 'plugin_' + pluginName, null);
+                    //$.data(this, 'plugin_' + pluginName, null);
                 }
+                
                
                 
             });

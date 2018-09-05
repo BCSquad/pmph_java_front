@@ -32,9 +32,47 @@
           is_profession_type_used*1 is_profession_type_used,
           is_profession_type_required*1 is_profession_type_required,
           gmt_create,gmt_update,founder_id,publisher_id,gmt_publish,note,description
-        from product where product_type = #{expert_type}
+        from product where id = #{id}
+        limit 0,1
+    </select>
+    
+    <select id="queryActiveProductbyType" resultType="java.util.Map" parameterType="java.lang.String">
+        select
+          id,product_name,product_type,
+          is_published*1 is_published,
+          is_unit_advise_used*1 is_unit_advise_used,
+          is_unit_advise_required*1 is_unit_advise_required,
+          is_edu_exp_used*1 is_edu_exp_used,
+          is_edu_exp_required*1 is_edu_exp_required,
+          is_work_exp_used*1 is_work_exp_used,
+          is_work_exp_required*1 is_work_exp_required,
+          is_acade_used*1 is_acade_used,
+          is_acade_required*1 is_acade_required,
+          is_pmph_textbook_used*1 is_pmph_textbook_used,
+          is_pmph_textbook_required*1 is_pmph_textbook_required,
+          is_monograph_used*1 is_monograph_used,
+          is_monograph_required*1 is_monograph_required,
+          is_edit_book_used*1 is_edit_book_used,
+          is_edit_book_required*1 is_edit_book_required,
+          is_deleted*1 is_deleted,
+          is_article_published_used*1 is_article_published_used,
+          is_article_published_required*1 is_article_published_required,
+          is_profession_award_used*1 is_profession_award_used,
+          is_profession_award_required*1 is_profession_award_required,
+          is_subject_type_used*1 is_subject_type_used,
+          is_subject_type_required*1 is_subject_type_required,
+          is_content_type_used*1 is_content_type_used,
+          is_content_type_required*1 is_content_type_required,
+          is_profession_type_used*1 is_profession_type_used,
+          is_profession_type_required*1 is_profession_type_required,
+          gmt_create,gmt_update,founder_id,publisher_id,gmt_publish,note,description
+        from product where product_type = #{expert_type} and is_published  = 1 and is_deleted = 0
         ORDER  BY gmt_set_active DESC limit 0,1
     </select>
+    
+    
+    
+    
 	<!-- 专家信息 --> 
 	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
 		select id,product_id,expert_type,user_id,realname,sex,birthday,REPLACE(birthday,'-','.') as birthday1,experience,org_name,position,title,address,postcode,handphone,email,idtype,
@@ -85,7 +123,7 @@
 
     <!-- 查询学科分类列表 -->
     <select id="querySubjectList" parameterType="PageParameter" resultType="java.util.Map">
-        select * from product_subject_type t where product_id=#{parameter.product_id}
+        select * from product_subject_type t where product_type=#{parameter.product_type} and t.is_deleted = 0
         <if test="parameter.type_name != null and parameter.type_name != ''">
             and t.type_name like #{parameter.type_name}
         </if>
@@ -96,7 +134,7 @@
     </select>
     <!-- 学科分类总数 -->
     <select id="querySubjectCount" parameterType="PageParameter" resultType="int">
-        select count(*) from product_subject_type t where product_id=#{parameter.product_id}
+        select count(*) from product_subject_type t where product_type=#{parameter.product_type} and t.is_deleted = 0
         <if test="parameter.type_name != null and parameter.type_name != ''">
             and t.type_name like #{parameter.type_name}
         </if>
@@ -107,7 +145,7 @@
 
     <!-- 查询申报专业列表 -->
     <select id="querySbzyList" parameterType="PageParameter" resultType="java.util.Map">
-        select * from product_profession_type t where product_id=#{parameter.product_id}
+        select * from product_profession_type t where product_type=#{parameter.product_type} and t.is_deleted = 0
         <if test="parameter.name_path != null and parameter.name_path != ''">
             and t.type_name like #{parameter.name_path}
         </if>
@@ -118,7 +156,7 @@
     </select>
     <!-- 申报专业总数 -->
     <select id="querySbzyCount" parameterType="PageParameter" resultType="int">
-        select count(*) from product_profession_type t where product_id=#{parameter.product_id}
+        select count(*) from product_profession_type t where product_type=#{parameter.product_type} and t.is_deleted = 0
         <if test="parameter.name_path != null and parameter.name_path != ''">
             and t.type_name like #{parameter.name_path}
         </if>
@@ -129,7 +167,7 @@
 
     <!-- 查询内容分类列表 -->
     <select id="queryContentList" parameterType="PageParameter" resultType="java.util.Map">
-        select * from product_content_type_detail t where is_leaf = '1' and product_id=#{parameter.product_id}
+        select * from product_content_type_detail t where <!-- is_leaf = '1' and --> product_type=#{parameter.product_type} and t.is_deleted = 0
         <if test="parameter.name_path != null and parameter.name_path != ''">
             and t.name_path like #{parameter.name_path}
         </if>
@@ -140,7 +178,7 @@
     </select>
     <!-- 内容分类总数 -->
     <select id="queryContentCount" parameterType="PageParameter" resultType="int">
-        select count(*) from product_content_type_detail t where is_leaf = '1' and product_id=#{parameter.product_id}
+        select count(*) from product_content_type_detail t  where <!--is_leaf = '1' and --> product_type=#{parameter.product_type} and t.is_deleted = 0
         <if test="parameter.name_path != null and parameter.name_path != ''">
             and t.name_path like #{parameter.name_path}
         </if>
@@ -348,7 +386,7 @@
 
     <!--查看临床信息-->
     <select id="queryProduct" resultType="java.util.Map" parameterType="java.lang.String">
-        select * from product t where t.product_type = #{product_type} ORDER BY t.gmt_set_active DESC limit 0,1
+        select * from product t where t.product_type = #{product_type} and t.is_deleted = 0 and is_published = 1 ORDER BY t.gmt_set_active DESC limit 0,1
     </select>
     
     <!-- 更新 -->

@@ -37,6 +37,7 @@
 	
 	<div class="content-wrapper">
 		<input type="hidden" name="expert_type" id="expert_type" value="${queryMap.expert_type}">
+		<input type="hidden" name="product_id" id="product_id" value="${queryMap.product_id}">
 		<input type="hidden" id="printout" value="${state}">
 		<div class="sbxq_title">
 		<c:choose>
@@ -44,7 +45,7 @@
 				
 			</c:when>
 			<c:otherwise>
-				<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> > <a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/expertation/declare.action"> 临床决策专家申报 </a> > 查看申报表</span>
+				<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> > <a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/expertation/declare.action"> 临床决策专家申报 </a> > <span id="product_name"></span></span>
 			</c:otherwise>
 		</c:choose>
 		</div>
@@ -94,16 +95,17 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span title="${gezlList.postcode}">邮&emsp;&emsp;编：${gezlList.postcode}</span></td>
+						<td><span title="${gezlList.postcode}">邮&emsp;编：${gezlList.postcode}</span></td>
 						<td><span title="${gezlList.banknumber}">卡号：${gezlList.banknumber}</span></td>
-						<td><span title="${gezlList.bankaddress}">开户行：${gezlList.bankaddress}</span></td>
-						<td><span title="${gezlList.expertise}">专业特长(疾病诊治及研究方向)：${gezlList.expertise}</span></td>
-
+						<td colspan="2"><span title="${gezlList.bankaddress}">开户行：${gezlList.bankaddress}</span></td>
 					</tr>
 					<tr>
-						<td colspan="2"><div class="adress" title="${gezlList.address}">地&emsp;&emsp;址：${gezlList.address}</div></td>
+                        <td colspan="4"><span title="${gezlList.expertise}">专业特长(疾病诊治及研究方向)：${gezlList.expertise}</span></td>
 						<%--<td><span>传&emsp;&emsp;真：${gezlList.fax}</span></td>--%>
 					</tr>
+                    <tr>
+                        <td colspan="4"><div class="adress" title="${gezlList.address}">地&emsp;&emsp;址：${gezlList.address}</div></td>
+                    </tr>
 
 				</table>
 			</div>
@@ -139,7 +141,7 @@
 				</table>
 			</div>
 		</div>
-			<!--主要工作经历-->
+		<!--主要工作经历-->
 		<div class="sbxq_item" id="gzjl">
 			<div>
 				<span id="tsxz_span4"></span>
@@ -204,9 +206,6 @@
 			</div>
 		</div>
 
-
-
-
 		<!--人卫社教材编写情况-->
 		<div class="sbxq_item" id="rwsjcbx">
 			<div>
@@ -257,7 +256,7 @@
 				</table>
 			</div>
 		</div>
-		<!--主编学术专著情况表-->
+		<!--图书出版情况-->
 		<div class="sbxq_item" id="zbxszz">
 			<div>
 				<span id="tsxz_span7"></span>
@@ -292,6 +291,7 @@
 				</table>
 			</div>
 		</div>
+
 		<!--主编或参编图书情况-->
 		<div class="sbxq_item" id="zbcbtsqk">
 			<div>
@@ -322,8 +322,8 @@
 			</div>
 		</div>
 
-			<!--文章发表情况（须第一作者，与本专业相关）-->
-			<div class="sbxq_item" id="wzfbqk" >
+		<!--文章发表情况（须第一作者，与本专业相关）-->
+		<div class="sbxq_item" id="wzfbqk" >
 				<div>
 					<span id="tsxz_span6"></span>
 					<span class="tsxz_title">文章发表情况（须第一作者，与本专业相关）</span>
@@ -353,8 +353,8 @@
 				</div>
 			</div>
 
-			<!--本专业获奖情况-->
-			<div class="sbxq_item" id="bzyhjqk" >
+		<!--本专业获奖情况-->
+		<div class="sbxq_item" id="bzyhjqk" >
 				<div>
 					<span id="bzyhjqk_img"></span>
 					<span class="tsxz_title">本专业获奖情况</span>
@@ -386,7 +386,6 @@
 					</table>
 				</div>
 			</div>
-
 
 		<!--扩展信息-->
 		<c:forEach var="zjkzxx" items="${zjkzqkList}">
@@ -432,8 +431,6 @@
 			</div>
 		</div>
 
-
-
 		<!-- 内容分类-->
 		<div class="sbxq_item1" id="nrflxs">
 			<div>
@@ -464,8 +461,6 @@
 				</c:forEach>
 			</div>
 		</div>
-
-
 
 		<!-- 申报单位 -->
 		<div class="sbxq_item1" style="display: block">
@@ -510,7 +505,7 @@
 		
 		
 		<!-- 上传单位意见 -->
-		<c:if test="${state == 'audit' && online_progress != 2}">
+		<c:if test="${userType == 'org' && online_progress != 2}">
                 <div class="sbxq_item" id="szdwyj" style="display: block">
                     <div>
                         <span id="tsxz_span13"></span>
@@ -518,7 +513,7 @@
                     </div>
                     <div style="height: 30px;margin-top: 10px;">
                         <div class="scys" id="dwyjsc"><span>上传文件</span></div>
-                        <div id="fileNameDiv" class="fileNameDiv"><a href="javascript:" onclick="downLoadProxy('${gezlList.unit_advise}')"
+                        <div id="fileNameDiv" class="fileNameDiv"><a  onclick="downLoadProxy('${gezlList.unit_advise}')"
                                                  title="${gezlList.syllabus_name}">${gezlList.syllabus_name}</a></div>
                         <input type="hidden" name="syllabus_id" id="syllabus_id" value="${gezlList.unit_advise}"/>
                         <input type="hidden" name="syllabus_name" id="syllabus_name" value="${gezlList.syllabus_name}"/>

@@ -154,9 +154,10 @@ public class ExpertationController extends BaseController{
 	public Map<String,Object> queryMaterialMap(HttpServletRequest request){
 		//教材信息
 		String expert_type = request.getParameter("expert_type");
-		Map<String,Object> materialMap = new HashMap<String,Object>();
-		materialMap = this.etService.queryMaterialbyId(expert_type);
-		return materialMap;
+		String id = request.getParameter("product_id");
+		Map<String,Object> productMap = new HashMap<String,Object>();
+		productMap = this.etService.queryProductbyId(id,expert_type);
+		return productMap;
 	}
 	
 	/**
@@ -721,7 +722,7 @@ public class ExpertationController extends BaseController{
 				HttpServletResponse response){
 		ModelAndView mav = new ModelAndView("commuser/materialdec/toSubjectList");
 		//机构信息
-		String product_id = request.getParameter("product_id");
+		String product_type = request.getParameter("product_type");
 		String  currentPageStr = (String) request.getParameter("currentPage");
 		String  pageSizeStr = request.getParameter("pageSize");
 		String  typename = request.getParameter("typename");
@@ -739,7 +740,7 @@ public class ExpertationController extends BaseController{
 		}
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<>(currentPage,pageSize);
 
-		paraMap.put("product_id", product_id);
+		paraMap.put("product_type", product_type);
 		paraMap.put("chooseId", chooseId);
 		paraMap.put("endPage", pageSize);
 		paraMap.put("currentPage", currentPage);
@@ -768,7 +769,7 @@ public class ExpertationController extends BaseController{
 				HttpServletResponse response){
 		ModelAndView mav = new ModelAndView("commuser/materialdec/toContentList");
 		//机构信息
-		String product_id = request.getParameter("product_id");
+		String product_type = request.getParameter("product_type");
 		String  currentPageStr = (String) request.getParameter("currentPage");
 		String  pageSizeStr = request.getParameter("pageSize");
 		String  namepath = request.getParameter("namepath");
@@ -786,7 +787,7 @@ public class ExpertationController extends BaseController{
 		}
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<>(currentPage,pageSize);
 
-		paraMap.put("product_id", product_id);
+		paraMap.put("product_type", product_type);
 		paraMap.put("endPage", pageSize);
 		paraMap.put("currentPage", currentPage);
 		paraMap.put("chooseId", chooseId);
@@ -813,7 +814,7 @@ public class ExpertationController extends BaseController{
 								   HttpServletResponse response){
 		ModelAndView mav = new ModelAndView("commuser/materialdec/toSbzyList");
 		//机构信息
-		String  product_id = request.getParameter("product_id");
+		String  product_type = request.getParameter("product_type");
 		String  currentPageStr = (String) request.getParameter("currentPage");
 		String  pageSizeStr = request.getParameter("pageSize");
 		String  namepath = request.getParameter("namepath");
@@ -831,7 +832,7 @@ public class ExpertationController extends BaseController{
 		}
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<>(currentPage,pageSize);
 
-		paraMap.put("product_id", product_id);
+		paraMap.put("product_type", product_type);
 		paraMap.put("endPage", pageSize);
 		paraMap.put("currentPage", currentPage);
 		paraMap.put("chooseId", chooseId);

@@ -165,5 +165,8 @@ public interface ExpertationService {
 	 */
 	PageResult<Map<String, Object>> selectOrgList(PageParameter<Map<String, Object>> pageParameter);
 
+	
+	public Map<String, Object> queryProductbyId(String id,String expert_type);
+
 
 }
