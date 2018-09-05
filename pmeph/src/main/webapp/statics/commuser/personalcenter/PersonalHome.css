@@ -312,7 +312,7 @@ color:#FFF;
     list-style-type: none;
     width: auto;
     text-align: center;
-    margin-right: 25px;
+    margin-right: 18px;
     padding-bottom: 16px;
 }
 
@@ -1430,4 +1430,28 @@ color: #bcbcbc;
 } 
 input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
 color: #bcbcbc; 
-} 
+}
+
+.mleft1_1{
+    height: 170px;
+    width: 250px;
+    float: left;
+    background-color: #FFFFFF;
+    border-right-width: 1px;
+    border-right-style: dashed;
+    border-right-color: #dedede;
+}
+
+.left_1{
+    margin: 20px 0 20px 20px;
+}
+
+.left_2{
+    margin: 15px 0 15px 15px;
+}
+
+.upexr{
+    color: #46B7C1;
+    font-size: 18px;
+    cursor: pointer;
+}
