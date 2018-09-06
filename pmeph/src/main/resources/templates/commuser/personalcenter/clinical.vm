@@ -16,13 +16,17 @@
     <span class="jcsbsbzt" id="sbzc" onclick="listoction1('three');" style="cursor:pointer">暂存</span>
     <span class="jcsbsbzt" id="sbytj" onclick="listoction1('fore');" style="cursor:pointer">已提交</span>
     <span class="jcsbsbzt" id="qktj" onclick="listoction1('five');" style="cursor:pointer">全部</span>
-    <div id="btn_wdsbssk_div"><button title="搜索" id="btn_wdsbssk"><div></div></button></div>
+    <div id="btn_wdsbssk_div"><button title="搜索" id="btn_wdsbssk"><div onclick="querySearch()"></div></button></div>
     <input type="text" id="wdsbssk" value="" placeholder="搜索">
 </div>
 <div class="listContent">
     #foreach($c in $!{List_map})
         <div class="leftlb">
-            <div class="mleft1_1">
+            <div class="mleft1_1"
+                #if($!{c.flag}==1)
+                onclick="tojoin($!{c.product_type})" style="cursor: pointer"
+                #end
+            >
                 <div class="left_1">$!{c.product_name}
                 #if($!{c.online_progress}==0&&$!{c.flag}==1)
                   <img src="/pmeph/statics/image/zancun.png">
@@ -45,14 +49,14 @@
                 <div class="left_2">提交日期：$!{c.gmt_create_new}</div>
                 #if($!{c.flag}==1)<!--当前展示公告-->
                     #if($!{c.online_progress}==0||$!{c.online_progress}==2||$!{c.online_progress}==5)
-                        <div class="left_2 upexr" onclick="toproductdetail($!{c.product_type})">查看公告详情</div>
+                        <div class="left_2 upexr" onclick="toproductdetail($!{c.product_id})">修改申报表</div>
                     #elseif($!{c.online_progress}==1||$!{c.online_progress}==3||$!{c.online_progress}==4)
-                        <div class="left_2 upexr" onclick="toproductdetail($!{c.product_type})">查看公告详情</div>
-                    #else
-                        <div class="left_2 upexr" onclick="toproductdetail($!{c.product_type})">查看公告详情</div>
+                        <div class="left_2 upexr" onclick="toproductdetail($!{c.product_id})">查看申报表</div>
+                    #elseif($!{c.user_id}!=$!{c.longinUserId})
+                        <div class="left_2 upexr" onclick="tojoin($!{c.product_type})">报名参加</div>
                     #end
                 #else
-                    <div class="left_2 upexr" style="cursor:not-allowed;color:#D2D2D2">公告已过期</div>
+                    <div class="left_2 upexr" onclick="toPersondetail($!{c.product_id})">查看申报表</div>
                 #end
             </div>
         </div>
