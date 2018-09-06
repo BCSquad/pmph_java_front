@@ -890,6 +890,23 @@ public class ExpertationController extends BaseController{
             }
             return modelAndView;
 	}
+
+	//个人中心跳转链接
+	@RequestMapping("toPersondetail")
+	@ResponseBody
+	public String toPersondetail(HttpServletRequest request){
+		ModelAndView modelAndView=new ModelAndView();
+		String product_id=request.getParameter("product_id");
+		Map<String, Object> user=getUserInfo();
+		Map<String, Object> map=etService.queryExpertationDetail(user.get("id").toString(),product_id);
+		String returncode="";
+		if(map==null){
+			returncode="no";
+		}else{
+			returncode="yes";
+		}
+		return returncode;
+	}
 	
 	
 	//申报审核通过
