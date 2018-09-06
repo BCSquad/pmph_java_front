@@ -556,8 +556,8 @@ public class ExpertationServiceImpl implements ExpertationService {
     }
 
     @Override
-    public Map<String, Object> queryExpertationDetail(String user_id, String expert_type) {
-        return exdao.queryExpertationDetail(user_id,expert_type);
+    public Map<String, Object> queryExpertationDetail(String user_id, String product_id) {
+        return exdao.queryExpertationDetail(user_id,product_id);
     }
 
     @Override
@@ -617,8 +617,8 @@ public class ExpertationServiceImpl implements ExpertationService {
     }
 
     @Override
-    public Map<String, Object> queryProduct(String expert_type) {
-        return this.exdao.queryProduct(expert_type);
+    public Map<String, Object> queryProduct(String product_id) {
+        return this.exdao.queryProduct(product_id);
     }
 
 	@Override

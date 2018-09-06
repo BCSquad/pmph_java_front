@@ -68,7 +68,7 @@ public interface ExpertationService {
 	 * @param expert_type 申请类型
 	 * @return
 	 */
-	Map<String,Object> queryExpertationDetail(String user_id,String expert_type);
+	Map<String,Object> queryExpertationDetail(String user_id,String product_id);
 	/**
 	 * 查询学习经历
 	 * @param map
