@@ -40,9 +40,15 @@
             <div style="display: inline-block;float:left;padding-right: 20px;">
                 <select class="search-condition" id="product_id">
                     <option value="">全部</option>
-                    <c:forEach var="obj" items="${productIdList}" varStatus="i">
-                        <option value="${obj.id}" ${obj.id==product_id?'selected':''}>${obj.product_name}</option>
-                    </c:forEach>
+                    <option value="1">人卫临床助手</option>
+                    <option value="2">人卫用药助手</option>
+                    <option value="3">人卫中医助手</option>
+
+                <%--<c:forEach var="obj" items="${productIdList}" varStatus="i">
+                        <c:if test="${obj.product_type=='1'||obj.product_type=='2'||obj.product_type=='3'}">
+                            <option value="${obj.id}" ${obj.id==product_id ? 'selected':''}>${obj.product_name}</option>
+                        </c:if>
+                    </c:forEach>--%>
                 </select>
             </div>
             <div style="float: left;height: 42px;line-height: 42px;padding-right: 20px;color: #4e4e4e;">状态:</div>
