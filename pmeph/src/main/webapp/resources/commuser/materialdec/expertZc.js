@@ -1147,7 +1147,7 @@ function buttAdd(type) {
             success: function (json) {
                 if (json.msg == 'OK') {
                     window.message.success("操作成功,正在跳转页面");
-                    window.location.href = contextpath + "expertation/declare.action";
+                    window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=lcjc";
                 }
             }
         });
@@ -1175,7 +1175,7 @@ function buttAdd(type) {
                             success: function (json) {
                                 if (json.msg == 'OK') {
                                     window.message.success("操作成功,正在跳转页面");
-                                    window.location.href = contextpath + "expertation/declare.action";
+                                    window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=lcjc";
                                 }
                             }
                         });
