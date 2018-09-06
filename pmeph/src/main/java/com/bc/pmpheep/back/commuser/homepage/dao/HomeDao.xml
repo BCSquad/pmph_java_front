@@ -462,7 +462,9 @@ LIMIT 0,10
 	<select id="quertProductByType" parameterType="java.util.Map" resultType="java.util.Map">
 		    select
 		   p.note,p.description,pa.*,p.is_published,p.product_type,p.product_name
-		   from product_attachment pa left JOIN product p on p.id=pa.product_id
+		   ,p.id as product_id
+		   from product_attachment pa
+		   left JOIN product p on p.id=pa.product_id
 		   where p.product_type= #{product_type}  and p.is_deleted=0 and p.is_published=1
 				and pa.product_id=( select  id from product t
 				where t.product_type=#{product_type} and t.is_deleted=0 and t.is_published=1   order BY t.gmt_set_active DESC limit 0,1)
