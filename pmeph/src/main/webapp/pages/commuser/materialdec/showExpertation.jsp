@@ -545,7 +545,7 @@
 				<div class="audit_middle">
 				<c:if test="${online_progress != 3}">
 					<div class="audit"  onclick="showup('${gezlList.id}','2')" >退回给个人</div>
-					<div class="audit pass"  onclick="toAuditPass('${gezlList.id}','3')" >审核通过</div>
+                    <div class="audit pass"  id="shtg" onclick="toAuditPass('${gezlList.id}','3');changeColor()" >审核通过</div>
 				</c:if>
 					<div class="audit" id="hisprint" onclick="toprint('${gezlList.id}')" >打印</div>
 					<div class="audit"  onclick="javascript:history.go(-1)" >返回</div>
@@ -679,7 +679,7 @@
 	    float: left;
 	}
 	.audit.pass{
-		background-color:red;
+		background-color:#33CAA9;
 	}
 	.footer {
     	clear: left;
