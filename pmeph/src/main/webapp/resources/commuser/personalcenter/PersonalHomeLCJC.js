@@ -1,4 +1,8 @@
   $(document).ready(function () {
+
+      $("#myall").val(null);
+      $("#search").val(null);
+
 //进行选中
 	  var page=$("#pageinfo").val();
 	  if(page!=null){
@@ -52,16 +56,29 @@
 
 });
 
-  function todetail(declaration_id) {
-      location.href = contextpath + 'expertation/showExpertation.action?declaration_id='+declaration_id;
-  }
-  function toupdate(declaration_id) {
-      location.href = contextpath + 'expertation/toExpertationZc.action?declaration_id='+declaration_id;
-  }
+
   function toproductdetail(product_id) {
+      location.href = contextpath + 'expertation/lookforward.action?product_id='+product_id;
+  }
+  function tojoin(product_id) {
       location.href = contextpath + 'homepage/toproductdetail.action?state='+product_id;
   }
-  
+
+
+  function toPersondetail(product_id){
+      $.ajax({
+          type: "POST",
+          url:contextpath+'expertation/toPersondetail.action?product_id='+product_id,
+          dataType:"json",
+          success: function(json) {
+              if(json=="yes"){
+                  toproductdetail(product_id);
+              }else{
+                  window.message.info("您没有申报过当前公告")
+              }
+          }
+      });
+  }
 
 function listoction(){
     delCondition();
@@ -83,6 +100,13 @@ function delCondition(){
       var $t=$(this);
       $t.val('');
   });
+}
+
+function querySearch(){
+  var str=$("#wdsbssk").val();
+  $("#search").val(str);
+  $("#pageNum").val(1);
+  queryMain();
 }
 
 function listoction1(str){
