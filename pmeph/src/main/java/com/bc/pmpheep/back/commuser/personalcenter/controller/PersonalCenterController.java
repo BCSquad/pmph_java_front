@@ -318,6 +318,7 @@ public class PersonalCenterController extends BaseController {
 			for (Map<String, Object> map:List_map) {
 				map.put("longinUserId",logUserId);
 			}
+			//count=personalService.queryCountLcjc(pageParameter);
 			count=List_map.size();
 			// 分页数据代码块
 			String html = this.mergeToHtml("commuser/personalcenter/clinical.vm", contextpath, pageParameter,
