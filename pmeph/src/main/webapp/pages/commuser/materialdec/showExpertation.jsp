@@ -45,7 +45,7 @@
 				
 			</c:when>
 			<c:otherwise>
-				<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> > <a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/expertation/declare.action"> 临床决策专家申报 </a> > <span id="product_name"></span></span>
+				<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> > <a style="text-decoration: none;color: #999999;" href="${contextpath}/expertation/declare.action"> 临床决策专家申报 </a> > <span id="product_name"></span></span>
 			</c:otherwise>
 		</c:choose>
 		</div>
