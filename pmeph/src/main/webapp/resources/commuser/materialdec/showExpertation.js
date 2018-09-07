@@ -1,4 +1,8 @@
 $(function () {
+
+
+
+
 	var id = $("#product_id").val();
 	queryMaterialMap(id);  //执行查询方法
 
@@ -203,6 +207,7 @@ function buttGive(){
 
 //打印按钮
 function toprint(eid) {
+
     $("#return_cause_div").css("display","none");
     $("#tujian00").html($("#unit_advise_online").val());
     $("#ddd").jqprint({
@@ -371,3 +376,11 @@ function LengthLimit(obj,ml){
 	}
 }
 
+function changeColor(){
+
+   // $(this).css("backgroundColor","black");
+    //$("#shtg").css({'background-color': 'gray'});
+    $(".audit.pass").css({'background-color': 'gray'});
+
+
+}

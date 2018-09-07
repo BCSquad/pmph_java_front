@@ -122,8 +122,13 @@
                 				<img  src="${ctx}/image/${list.avatar}.action" height="30"  width="30" >
                 				</c:if>
                         	</div>
-                        	<div style="float: left;margin-left: 10px;margin-top: 5px;">${list.nickname}</div>
-                            <div class="date_content"><div class="date">${list.gmt_create}</div></div>
+							<c:if test="${list.nickname==''|| list.nickname==null}">
+                        	<div style="float: left;margin-left: 10px;margin-top: 5px;">${list.username}</div>
+							</c:if>
+							<c:if test="${list.nickname!=''and list.nickname!=null}">
+								<div style="float: left;margin-left: 10px;margin-top: 5px;">${list.nickname}</div>
+							</c:if>
+                            <div class="date_content"><div class="date"></div></div>
                         </div>
                         <div class="item_content">${list.content}</div>
                         <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
