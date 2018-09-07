@@ -210,10 +210,12 @@ function toprint(eid) {
 
     $("#return_cause_div").css("display","none");
     $("#tujian00").html($("#unit_advise_online").val());
+    $("#tnone").css("display","block");
     $("#ddd").jqprint({
     	  //debug: true, 
           importCSS: true ,
     });
+    $("#tnone").css("display","none");
 //打印状态
     $.ajax({
         type: 'post',
