@@ -30,6 +30,8 @@ public interface PersonalDao {
 
 	public List<Map<String, Object>> queryLcjc(PageParameter<Map<String, Object>> pageParameter);
 
+	int queryCountLcjc(PageParameter<Map<String, Object>> pageParameter);
+
 	/**
 	 * 分页查询选题申报topic表 供个人中心-我要出书页面展示
 	 * 

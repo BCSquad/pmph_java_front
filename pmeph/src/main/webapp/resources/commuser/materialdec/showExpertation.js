@@ -185,7 +185,7 @@ function upload(){
             $("#fileNameDiv").css("display","inline");
             $("#syllabus_id").val(fileid);
             $("#syllabus_name").val(filename);
-            toAudit($("#expertation_id").val(),'3',"doNotReLocate");
+            toAudit($("#expertation_id").val(),'3',false);
             console.log("上传完成：name " + filename + " fileid " + fileid);
             
         },
@@ -229,7 +229,7 @@ function toprint(eid) {
 
 
 //提交   通过3 
-function toAudit(id,type,doLocation){
+function toAudit(id,type,flag){
 	var user_id=$("#user_id").val();
     var syllabus_id=$("#syllabus_id").val();
     var syllabus_name=$("#syllabus_name").val();
@@ -243,7 +243,6 @@ function toAudit(id,type,doLocation){
 		    success: function(msg) {
 			    if(msg.msg=='OK'){
 			    	 message.success("成功！");
-			    	 
 			    	 if(type=='3'){/*
                     	var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
                     	$.ajax({
@@ -266,9 +265,8 @@ function toAudit(id,type,doLocation){
                             });
                          //toMain();
 			    	 */
-			    		 
 			    	 }
-			    	 if(!doLocation){
+			    	 if(flag){
 			    		 window.location.href = contextpath+"schedule/scheduleList.action";
 			    	 }
 			    }else{
@@ -346,12 +344,12 @@ function toAuditPass(id,type) {
         window.message.confirm(msg,{icon: 7, title:'提示',btn:["确定","取消"]}
             ,function(index){
                 layer.close(index);
-                toAudit(id,type,"doNotReLocate");
+                toAudit(id,type,true);
 
             }
         );
 	}else{
-        toAudit(id,type,"doNotReLocate");
+        toAudit(id,type,true);
 	}
 }
 

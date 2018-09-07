@@ -247,7 +247,7 @@
 
     <!--根据用户ID查询申请表-->
 	<select id="queryExpertationDetail" resultType="java.util.Map" parameterType="java.util.Map">
-	   select * from expertation  where user_id=#{user_id} and expert_type=#{expert_type}
+	   select * from expertation  where user_id=#{user_id} and product_id=#{product_id}
 	</select>
 
     <!-- 学习经历 -->
@@ -386,7 +386,7 @@
 
     <!--查看临床信息-->
     <select id="queryProduct" resultType="java.util.Map" parameterType="java.lang.String">
-        select * from product t where t.product_type = #{product_type} and t.is_deleted = 0 and is_published = 1 ORDER BY t.gmt_set_active DESC limit 0,1
+        select * from product t where t.id = #{product_id} and t.is_deleted = 0 and is_published = 1 ORDER BY t.gmt_set_active DESC limit 0,1
     </select>
     
     <!-- 更新 -->
