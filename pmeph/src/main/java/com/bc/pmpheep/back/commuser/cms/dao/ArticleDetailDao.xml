@@ -136,7 +136,7 @@
 		c.avatar,
 		c.username
 		from cms_content t
-		left join cms_category b onf
+		left join cms_category b on
 		t.category_id=b.id
 		left join writer_user c
 		on t.author_id=c.id
