@@ -383,6 +383,7 @@ public class HomeController extends BaseController{
         modelAndView.addObject("note_detail",list.get(0).get("note_detail"));
         modelAndView.addObject("description",list.get(0).get("description_detail"));
         modelAndView.addObject("product_name",list.get(0).get("product_name"));
+        modelAndView.addObject("product_id",list.get(0).get("product_id"));
         modelAndView.addObject("state",state);
         modelAndView.setViewName("commuser/cms/declaredatail");
         return modelAndView;
