@@ -141,12 +141,23 @@ public class PersonalServiceImpl implements PersonalService {
 		List<Map<String, Object>> result_list = personaldao.queryLcjc(pageParameter);
 		return result_list;
 	}
-
 	@Override
 	public int queryCountLcjc(PageParameter<Map<String, Object>> pageParameter) {
 		int count = personaldao.queryCountLcjc(pageParameter);
 		return count;
 	}
+	
+	@Override
+	public List<Map<String, Object>> queryLcjcVer2(PageParameter<Map<String, Object>> pageParameter) {
+		List<Map<String, Object>> result_list = personaldao.queryLcjcVer2(pageParameter);
+		return result_list;
+	}
+	@Override
+	public int queryCountLcjcVer2(PageParameter<Map<String, Object>> pageParameter) {
+		int count = personaldao.queryCountLcjcVer2(pageParameter);
+		return count;
+	}
+	
 
 	@Override
 	public List<Map<String, Object>> queryMyTopicChoose(PageParameter<Map<String, Object>> pageParameter) {

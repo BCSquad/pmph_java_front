@@ -885,7 +885,8 @@ color:#FFF;
     margin-left: 10px;
     color: #03717b;
 }
-.jcsbsbztxz{
+
+.jcsbsbztxz {
 width: 76px;
     height: 26px;
     background-color: #1d8ca0;
@@ -1455,3 +1456,61 @@ color: #bcbcbc;
     font-size: 18px;
     cursor: pointer;
 }
+#clnicalTag1 .backImge{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -333px -218px;
+    height: 20px;
+    width: 20px;
+    background-repeat: no-repeat;
+    margin-top: 3px;
+    margin-right: 3px;
+    float: left;
+}
+#clnicalTag2 .backImge{
+	background-image: url(../../image/clinicalChoosing.png);
+    height: 20px;
+    width: 20px;
+    background-size: 90%;
+    background-repeat: no-repeat;
+    margin-top: 3px;
+    margin-right: 3px;
+    float: left;
+}
+#clnicalTag3 .backImge{
+	background-image: url(../../image/clinicalEnd.png);
+    height: 20px;
+    width: 20px;
+    background-size: 90%;
+    background-repeat: no-repeat;
+    margin-top: 3px;
+    margin-right: 3px;
+    float: left;
+}
+#clnicalTag4 .backImge{
+    background-image: url(../../image/css_sprites.png);
+    background-position: -333px -289px;
+    height: 20px;
+    width: 20px;
+    background-repeat: no-repeat;
+    margin-top: 3px;
+    margin-right: 3px;
+    float: left;
+}
+
+.clnicalTag{
+	height: 26px;
+    background-color: #E6F1F3;
+    float: left;
+    font-size: 14px;
+    text-align: center;
+    margin-left: 10px;
+    color: #03717b;
+    padding: 0px 10px;
+    line-height: 26px;
+}
+
+.clnicalTag.active{
+    background-color: #1d8ca0;
+    color: #FFF;
+}
+    

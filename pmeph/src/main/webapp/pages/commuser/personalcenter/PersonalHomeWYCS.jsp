@@ -141,7 +141,9 @@ request.setAttribute("currentTime",datetime);
                     <c:if test="${selfLog == true }">
                     	<li id="jcsb" class="dtl pagetag"><a class="aher paged" >教材申报</a></li>
                     </c:if>
-					<li id="lcjc" class="dtl pagetag"><a class="aher paged">临床决策专家申报</a></li>
+                    <c:if test="${selfLog == true }">
+						<li id="lcjc" class="dtl pagetag"><a class="aher paged">临床决策专家申报</a></li>
+					</c:if>
 					<c:if test="${selfLog == true }">
 						<li id="wycs" class="dtl pagetag"><a class="aher paged"  >我要出书</a></li>
 					</c:if>
