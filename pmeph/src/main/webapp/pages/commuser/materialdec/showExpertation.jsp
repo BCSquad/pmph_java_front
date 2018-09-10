@@ -86,10 +86,10 @@
 						</td>
 						<td><span title="${gezlList.idcard}">证件号码：${gezlList.idcard}</span></td>
 						<td><span>学&emsp;&emsp;历：
-                                <c:if test="${gezlList.education == '0'}">无</c:if>
-						        <c:if test="${gezlList.education == '1'}">专科</c:if>
-								<c:if test="${gezlList.education == '2'}">本科</c:if>
-								<c:if test="${gezlList.education == '3'}">硕士</c:if>
+                                <c:if test="${gezlList.education == '0'}">专科</c:if>
+						        <c:if test="${gezlList.education == '1'}">本科</c:if>
+								<c:if test="${gezlList.education == '2'}">硕士</c:if>
+								<c:if test="${gezlList.education == '3'}">博士后</c:if>
 							    <c:if test="${gezlList.education == '4'}">博士</c:if>
 						    </span>
 						</td>
