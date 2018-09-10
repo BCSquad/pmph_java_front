@@ -10,6 +10,7 @@ $(document).ready(function () {
 				  $t.addClass("xz");
 				  $("#pagetag").val($t.attr("id"));
 				  $("#pageNum").val(1);
+				  $(".queryCondition").remove();
 				  queryMain();
 			  });
 		});
