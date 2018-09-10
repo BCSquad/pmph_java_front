@@ -116,7 +116,8 @@
 									<option value="0">专科</option>
 									<option value="1" selected="selected">本科</option>
 									<option value="2">硕士</option>
-									<option value="3">博士后</option>
+									<option value="3">博士</option>
+									<option value="4">博士后</option>
 								</select></td>
 						</tr>
 						<tr>

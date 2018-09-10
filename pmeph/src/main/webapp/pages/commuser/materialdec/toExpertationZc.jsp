@@ -119,7 +119,8 @@
                                     <option value="0" ${gezlList.education=='0'?'selected':'' }>专科</option>
                                     <option value="1" ${gezlList.education=='1'?'selected':'' }>本科</option>
                                     <option value="2" ${gezlList.education=='2'?'selected':'' }>硕士</option>
-                                    <option value="3" ${gezlList.education=='3'?'selected':'' }>博士后</option>
+                                    <option value="3" ${gezlList.education=='3'?'selected':'' }>博士</option>
+                                    <option value="4" ${gezlList.education=='4'?'selected':'' }>博士后</option>
                                 </select></td>
                         </tr>
                         <tr>
