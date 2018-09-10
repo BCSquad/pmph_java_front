@@ -1864,6 +1864,7 @@ ORDER BY t.gmt_create DESC  limit ${start},${pageSize}
 		 inner join expertation b on b.product_id=t.id and b.user_id=#{parameter.logUserId}
 
 		<where>
+			t.is_published = 1 and t.is_deleted = 0 
 			<if test="parameter.online_progress != null and parameter.online_progress != '' ">
 				and b.online_progress in (${parameter.online_progress})
 			</if>

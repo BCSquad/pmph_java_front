@@ -130,7 +130,8 @@
         <if test="parameter.chooseId != null and parameter.chooseId != ''">
         	and t.id not in (${parameter.chooseId})
         </if>
-        order by parent_id asc limit #{start},#{pageSize}
+        order by id asc 
+        limit #{start},#{pageSize}
     </select>
     <!-- 学科分类总数 -->
     <select id="querySubjectCount" parameterType="PageParameter" resultType="int">
