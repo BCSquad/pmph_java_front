@@ -38,6 +38,7 @@
     <%--<c:if test="${state==3}">--%>
         <%--<div class="name">人卫中医助手专家申报报名须知</div>--%>
     <%--</c:if>--%>
+        <div style="margin-top:20px; font-size: 30px; text-align: center" >${product_name}</div>
     <div>${description}</div>
     <div style="float: left;width: 100%">
         <c:forEach varStatus="status" var="list" items="${list_scanimg}">
@@ -61,7 +62,7 @@
             </c:forEach>
         </div>
     </div>
-    <div class="join" onclick="tojoin(${state})">报名参加</div>
+    <div class="join" onclick="tojoin(${product_id})">报名参加</div>
         <div style="clear: both"></div>
 </div>
 </div>
@@ -121,8 +122,8 @@
     }
 </style>
 <script>
-    function tojoin(state) {
-        location.href = contextpath + 'expertation/lookforward.action?expert_type='+state;
+    function tojoin(product_id) {
+        location.href = contextpath + 'expertation/lookforward.action?product_id='+product_id;
     }
 </script>
 </html>

@@ -459,11 +459,15 @@ LIMIT 0,10
 	</select>
 
 	<!--根据产品类型查询详情-->
-	<select id="quertProductByType" parameterType="map" resultType="java.util.Map">
-        select
-		   t. note,t.description,b.*
-		   from product t left join product_attachment b on t.id=b.product_id
-		   where t.product_type=#{product_type} and t.is_deleted=0 and t.is_published=1
+	<select id="quertProductByType" parameterType="java.util.Map" resultType="java.util.Map">		    select
+		   p.note,p.description,p.is_published,p.product_type,p.product_name
+		   ,p.id as product_id
+		   ,pa.*
+		   from product_attachment pa
+		   right JOIN product p on p.id=pa.product_id
+		   where p.product_type= #{product_type}  and p.is_deleted=0 and p.is_published=1 
+				and p.is_new = 1
+		   order BY p.gmt_set_active DESC
 	</select>
 
 </mapper>

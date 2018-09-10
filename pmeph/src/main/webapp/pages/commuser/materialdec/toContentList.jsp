@@ -25,6 +25,7 @@
 		<div style="width: 100%;margin-top: 20px;">
 			<span class="mc1">内容分类关键字：</span>
 			<input type="hidden" id="product_id" name="product_id" value="${paraMap.product_id}">
+			<input type="hidden" id="product_type" name="product_type" value="${paraMap.product_type}">
 			<input type="hidden" id="chooseId" name="chooseId" value="${paraMap.chooseId}">
 			<input class="cg_input" style="width: 400px;height: 36px;" id="namepath" name="namepath" value="${paraMap.namepath}" />
 			<div class="cxbutn" onclick="javascript:query()">
@@ -74,6 +75,7 @@
 </body>
 <script>
 var product_id = $("#product_id").val();
+var product_type = $("#product_type").val();
 var chooseId = $("#chooseId").val();
 Page({
     num: parseInt("${pageResult.pageTotal}"),					//页码数
@@ -81,7 +83,7 @@ Page({
     elem: $('#page1'),		//指定的元素
     callback: function (n) {	//回调函数
     	var namepath =$("#namepath").val();
-        window.location.href="${ctx}/expertation/queryContent.action?currentPage="+n+"&pageSize="+$("input[name='pageSize']").val()+"&product_id="+product_id+"&namepath="+encodeURI(encodeURI(namepath))+"&chooseId="+chooseId;
+        window.location.href="${ctx}/expertation/queryContent.action?currentPage="+n+"&pageSize="+$("input[name='pageSize']").val()+"&product_type="+product_type+"&namepath="+encodeURI(encodeURI(namepath))+"&chooseId="+chooseId;
     }
 });
 $(function () {
@@ -91,7 +93,7 @@ $(function () {
         optionHeight: 30,
         onChange:function (){
         	var namepath =$("#namepath").val();
-        	window.location.href="${ctx}/expertation/queryContent.action?currentPage="+n+"&pageSize="+$("input[name='pageSize']").val()+"&product_id="+product_id+"&namepath="+encodeURI(encodeURI(namepath))+"&chooseId="+chooseId;
+        	window.location.href="${ctx}/expertation/queryContent.action?currentPage="+n+"&pageSize="+$("input[name='pageSize']").val()+"&product_type="+product_type+"&namepath="+encodeURI(encodeURI(namepath))+"&chooseId="+chooseId;
         }
     });
     $('#org_tab tr:last').find('td').addClass('end'); 
@@ -99,12 +101,12 @@ $(function () {
 
 function tojump(){
 	var toPage = $("#toPage").val();
-	window.location.href="${ctx}/expertation/queryContent.action?currentPage="+toPage+"&pageSize="+$("input[name='pageSize']").val()+"&product_id="+product_id+"&namepath="+encodeURI(encodeURI(namepath))+"&chooseId="+chooseId;
+	window.location.href="${ctx}/expertation/queryContent.action?currentPage="+toPage+"&pageSize="+$("input[name='pageSize']").val()+"&product_type="+product_type+"&namepath="+encodeURI(encodeURI(namepath))+"&chooseId="+chooseId;
 }
 //查询
 function query(){
 	var namepath =$("#namepath").val();
-	window.location.href="${ctx}/expertation/queryContent.action?product_id="+product_id+"&namepath="+encodeURI(encodeURI(namepath))+"&chooseId="+chooseId;
+	window.location.href="${ctx}/expertation/queryContent.action?product_type="+product_type+"&namepath="+encodeURI(encodeURI(namepath))+"&chooseId="+chooseId;
 }
 
 //确认选择

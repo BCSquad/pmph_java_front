@@ -5,45 +5,48 @@
 
 	<!-- 分页查询 -->
 	<select id="getOrg" parameterType="java.util.Map"  resultType="java.util.Map">
-		select t.id,t.user_id,t.org_id,t.product_id,t.title,t.position,
-		/*(case  when t.online_progress=0  then '未提交'
-		when t.online_progress=1  then '未审核'
-		when t.online_progress=2  then '已退回'
-		when t.online_progress=3  then '已通过'
-		when t.online_progress=4  then '出版社退回给单位'
-		when t.online_progress=5  then '出版社退回给个人'	END)	as*/ 	online_progress ,
-		p.product_name,wu.realname,
-		(case  when t.isprint=0  then '未打印'
-		when t.isprint=1  then '已打印' 	END)	as 	isprint
-		from  expertation t
-		left join product p on p.id=t.product_id
-		left join writer_user wu on t.user_id=wu.id
-		where 1=1
+		<![CDATA[select e.id,e.user_id,e.org_id,e.product_id,wu.realname,p.product_name,
+			e.title,e.position,e.online_progress,e.finalResult,e.pmphAudit,e.expert_type,
+		(case
+		when e.online_progress=1  then '待审核'
+		when e.online_progress=2  then '已退回'
+		when e.online_progress=3  then '已通过'
+		when e.online_progress=4  then '已退回'
+		when e.online_progress=5  then '已退回'	END)	as xxsh,
+		(case
+		when ((e.online_progress=1||e.online_progress=3) && (e.finalResult = 0))  then '正在遴选'
+		when (e.online_progress=4  || e.online_progress=5) then '出版社退回'
+		when (e.finalResult =1 && (e.pmphAudit!=1))  then '遴选结束'
+		when (e.finalResult =1 && e.pmphAudit=1)  then '报名成功'
+		END)	as cbssh,
+		(case
+		when e.isprint=0  then '未打印'
+		when e.isprint=1  then '已打印'
+		END)	as 	isprint
+		from  expertation e
+		left join product p on p.id=e.product_id
+		left join writer_user wu on e.user_id=wu.id  where e.online_progress !=0  ]]>
 		<if test="orgId !=null and orgId !='' ">
-			and  t.org_id=#{orgId}
+			and  e.org_id=#{orgId}
 		</if>
 		<if test="queryName !=null and queryName !='' ">
 			and wu.realname like concat('%',#{queryName},'%' )
 		</if>
-		<if test="productId !=null and productId !='' ">
-			and t.product_id =#{productId}
+		<if test="expertType !=null and expertType !='' ">
+			and e.expert_type =#{expertType}
 		</if>
-		<if test="onlineProgress !=null and onlineProgress !='' ">
-			<if test="onlineProgress =='00'.toString()">
-
-				and t.online_progress =0
+		<if test="xxsh !=null and xxsh !='' ">
+			<if test="xxsh =='01'.toString()">
+				and e.online_progress =1
 			</if>
-			<if test="onlineProgress =='01'.toString()">
-				and t.online_progress in(1,4)
+			<if test="xxsh =='02'.toString()">
+				and e.online_progress in(2,4,5)
 			</if>
-			<if test="onlineProgress =='02'.toString()">
-				and t.online_progress in(2,5)
-			</if>
-			<if test="onlineProgress =='03'.toString()">
-				and t.online_progress =3
+			<if test="xxsh =='03'.toString()">
+				and e.online_progress =3
 			</if>
 		</if>
-		<if test="start !=null and pageNumber != null">
+		<if test="start !=null and pageSize != null">
 			limit #{start},#{pageSize}
 		</if>
 	</select>
@@ -51,31 +54,28 @@
 	<select id="getOrgTotal" parameterType="java.util.Map"
 			resultType="java.lang.Integer">
 		select count(*)
-		from  expertation t
-		left join product p on p.id=t.product_id
-		left join writer_user wu on t.user_id=wu.id
-		where 1=1
-		<if test="orgId !=null and orgId !='' ">
-			and  t.org_id=#{orgId}
-		</if>
-		<if test="queryName !=null and queryName !='' ">
-			and wu.realname like concat('%',#{queryName},'%' )
-		</if>
-		<if test="productId !=null and productId !='' ">
-			and t.product_id =#{productId}
-		</if>
-        <if test="onlineProgress !=null and onlineProgress !='' ">
-            <if test="onlineProgress =='00'.toString()">
-                and t.online_progress =0
+        from  expertation e
+        left join product p on p.id=e.product_id
+        left join writer_user wu on e.user_id=wu.id
+		where e.online_progress !=0
+        <if test="orgId !=null and orgId !='' ">
+            and  e.org_id=#{orgId}
+        </if>
+        <if test="queryName !=null and queryName !='' ">
+            and wu.realname like concat('%',#{queryName},'%' )
+        </if>
+        <if test="expertType !=null and expertType !='' ">
+            and e.expert_type =#{expertType}
+        </if>
+        <if test="xxsh !=null and xxsh !='' ">
+            <if test="xxsh =='01'.toString()">
+                and e.online_progress =1
             </if>
-            <if test="onlineProgress =='01'.toString()">
-                and t.online_progress in(1,4)
+            <if test="xxsh =='02'.toString()">
+                and e.online_progress in(2,4,5)
             </if>
-            <if test="onlineProgress =='02'.toString()">
-                and t.online_progress in(2,5)
-            </if>
-            <if test="onlineProgress =='03'.toString()">
-                and t.online_progress =3
+            <if test="xxsh =='03'.toString()">
+                and e.online_progress =3
             </if>
         </if>
 	</select>

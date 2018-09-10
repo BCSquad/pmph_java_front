@@ -556,8 +556,8 @@ public class ExpertationServiceImpl implements ExpertationService {
     }
 
     @Override
-    public Map<String, Object> queryExpertationDetail(String user_id, String expert_type) {
-        return exdao.queryExpertationDetail(user_id,expert_type);
+    public Map<String, Object> queryExpertationDetail(String user_id, String product_id) {
+        return exdao.queryExpertationDetail(user_id,product_id);
     }
 
     @Override
@@ -617,8 +617,8 @@ public class ExpertationServiceImpl implements ExpertationService {
     }
 
     @Override
-    public Map<String, Object> queryProduct(String expert_type) {
-        return this.exdao.queryProduct(expert_type);
+    public Map<String, Object> queryProduct(String product_id) {
+        return this.exdao.queryProduct(product_id);
     }
 
 	@Override
@@ -677,5 +677,17 @@ public class ExpertationServiceImpl implements ExpertationService {
         pageResult.setTotal(count);
         return pageResult;
     }
+
+	@Override
+	public Map<String, Object> queryProductbyId(String id,String expert_type) {
+		Map<String, Object> productMap = new HashMap<String, Object>();
+		if(id==null||id.length()<1){
+			productMap = exdao.queryActiveProductbyType(expert_type);
+		}else{
+			productMap = exdao.queryProductbyId(id);
+		}
+		
+		return productMap;
+	}
 
 }

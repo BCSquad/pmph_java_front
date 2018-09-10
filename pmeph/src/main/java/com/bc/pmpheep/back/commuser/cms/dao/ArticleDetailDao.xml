@@ -129,11 +129,12 @@
 		t.id,
 		t.mid,
 		c.realname,
-		c.nickname,
+		case when (c.nickname is null or c.nickname='' ) then c.username else c.nickname end as nickname,
 		c.avatar,
 		t.gmt_create,
 		<!-- t.score, -->
-		c.avatar
+		c.avatar,
+		c.username
 		from cms_content t
 		left join cms_category b on
 		t.category_id=b.id
