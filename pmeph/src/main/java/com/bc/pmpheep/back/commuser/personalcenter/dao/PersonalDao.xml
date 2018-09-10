@@ -1830,6 +1830,7 @@ ORDER BY t.gmt_create DESC  limit ${start},${pageSize}
          when b.finalResult = 1 and b.pmphAudit =1 then '报名成功'
          when b.finalResult = 1 then '遴选结束'
          when b.online_progress = 5 then '出版社退回'
+         when b.online_progress=1 or b.online_progress=3 then '正在遴选'
          else '待审核'
          end as pmeph_progress,
          
