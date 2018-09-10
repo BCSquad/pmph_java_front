@@ -482,7 +482,7 @@
 						<%--<span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.product_id}')">添加学科分类</span>--%>
 					</div>
 					<div>
-						<textarea maxlength="500" id = "unit_advise_online" name = "unit_advise_online">${gezlList.unit_advise_online }</textarea>
+						<textarea maxlength="500" id = "unit_advise_online"   name = "unit_advise_online"  <c:if test="${online_progress == 3}">readonly</c:if>  >${gezlList.unit_advise_online }</textarea>
 					</div>
 				</div>
 			</c:if>
