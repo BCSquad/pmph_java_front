@@ -126,7 +126,6 @@
                 <div style="display: inline-block;vertical-align: top;text-align:left;">
                     <select id="edu" name="edu">
                         <option value="5"  ${pagesize=='5'? 'selected':'' }>每页5条</option>
-                        <option value="8"  ${pagesize=='8'? 'selected':'' }>每页8条</option>
                         <option value="10" ${pagesize=='10'? 'selected':'' }>每页10条</option>
                         <option value="15" ${pagesize=='15'? 'selected':'' } >每页15条</option>
                         <option value="20" ${pagesize=='20'? 'selected':'' }>每页20条</option>

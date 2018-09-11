@@ -113,13 +113,17 @@ a {
 }
 
 .book .booklist {
-    margin: 0px auto 0px;
-    width: 840px;
+
+
+margin: 0px auto 0px;
+
+    width: 1000px;
     font-size: 16px;
+
 }
 
 .book .booklist .item {
-    width: 210px;
+    width: 188px;
     float: left;
     cursor: pointer;
 }
