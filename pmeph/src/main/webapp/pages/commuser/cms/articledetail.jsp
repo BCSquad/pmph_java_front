@@ -86,19 +86,7 @@
                     	
                         <div class="line"></div>
                         
-                           <div class="rd_name">文章评论<%-- （共${ComNum}条） --%></div>
-                        
-                        <!-- <div class="scorestar" id="star">
-                             <div class="scorestar1" id="score1"></div>
-                             <div class="scorestar1" id="score2"></div>
-                             <div class="scorestar1" id="score3"></div>
-                             <div class="scorestar1" id="score4"></div>
-                             <div class="scorestar1" id="score5"></div>
-	                    </div>
-	                    <div class="user_score">
-                              <span>评分：</span>
-                              <span style="color: #FFD200" id="last_score">10.0</span>
-                        </div> -->
+                           <div class="rd_name">文章评论</div>
                     </div>
                     <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
                     <div class="pl_add">

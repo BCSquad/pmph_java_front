@@ -160,18 +160,16 @@
 	select cc.*,wu.avatar,wu.id as userId,
 		case 
 		when cc.author_type =1
-		then pu.realname
+		then   IFNULL(pu.realname,pu.username)
 		when  cc.author_type =2
-		then wu.realname
+		then  IFNULL(wu.realname,wu.username)
 		else '系统' end as realname,
 		case 
 		when cc.author_type =1
 		then pu.avatar
 		when  cc.author_type =2
 		then wu.avatar
-		else 'DEFAULT' end as avatar,
-		cc.author_name,
-		cc.author_id
+		else 'DEFAULT' end as avatar
 		from cms_content cc
 		left join pmph_user pu on pu.id=cc.author_id
 		left join writer_user wu on wu.id=cc.author_id
@@ -249,17 +247,10 @@ LIMIT 0,10
     
     <!-- 查询热门书评 -->
     <select id="queryComment" resultMap="Mapresult">
-       SELECT
-			u.id,
-			b.id id1,
-			b.bookname,
-			b.image_url,
-			c.content,
-			c.score,
-			u.nickname
-			FROM
-					book 
-			AS b
+		<![CDATA[
+			SELECT u.id, b.id id1, b.bookname, b.image_url, c.content, c.score,
+			CASE 	WHEN (u.nickname IS NOT NULL && u.nickname !='') THEN u.nickname ELSE u.username END   as nickname
+			FROM book AS b
 			INNER JOIN 
 				(SELECT * from book_user_comment 
 					where is_auth = 1 AND
@@ -268,8 +259,8 @@ LIMIT 0,10
 					 GROUP BY book_id )AS c
 			ON b.id = c.book_id
 			INNER JOIN writer_user AS u ON c.writer_id = u.id
-			ORDER BY
-			b.comments DESC limit 0,4
+			ORDER BY b.comments DESC limit 0,4
+			 ]]>
   </select>
     <!-- 根据书籍类型查询图书畅销榜 -->
     <select id="querySale" parameterType="map" resultMap="Mapresult">
