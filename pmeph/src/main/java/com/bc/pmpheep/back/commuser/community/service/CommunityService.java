@@ -35,7 +35,7 @@ public interface CommunityService {
      * @param id  教材id
      * @return
      */
-    List<Map<String,Object>> queryTextBookList(Long id );
+    List<Map<String,Object>> queryTextBookList(Long id,int start,int pageSize );
     /**查询社区主页精选书评
      * @param id 教材id
      * @param startnum  分也开始序号
@@ -68,4 +68,6 @@ public interface CommunityService {
      * 根据ID编辑播放量
      */
     void changeClicks(Map<String,Object> map);
+
+    int countTextBookList(Long material_id);
 }
