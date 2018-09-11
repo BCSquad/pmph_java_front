@@ -25,7 +25,7 @@
             >
                 <div class="left_1">$!{c.product_name}
                 #if($!{c.online_progress}==0)
-                  <img src="$!{contextpath}statics/image/zancun.png">
+                  <img src="$!{ctx}statics/image/zancun.png">
                 #end
                 </div>
                 #if($!{c.product_type}==1)
