@@ -47,7 +47,7 @@
 		<!-- 图书选择-->
 		<form id="objForm">
 			<input type="hidden" id="expert_type" name="expert_type" value="${queryMap.expert_type}"/>
-			<input type="hidden" id="" name="product_id" value="${queryMap.product_id}"/>
+			<input type="hidden" id="product_id" name="product_id" value="${product_id}"/>
 			<!-- 专家信息-->
 			<div class="sbxq_item1">
 				<div>
