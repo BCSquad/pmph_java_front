@@ -17,7 +17,7 @@
       location.href = contextpath + 'expertation/lookforward.action?product_id='+product_id;
   }
   function tojoin(product_id) {
-      location.href = contextpath + 'homepage/toproductdetail.action?state='+product_id;
+      location.href = contextpath + 'expertation/toproductdetail.action?product_id='+product_id;
   }
 
 

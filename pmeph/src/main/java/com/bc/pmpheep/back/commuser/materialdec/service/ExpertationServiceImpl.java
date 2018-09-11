@@ -690,4 +690,11 @@ public class ExpertationServiceImpl implements ExpertationService {
 		return productMap;
 	}
 
+	@Override
+	public List<Map<String, Object>> queryProductByIdOrType(Map<String, Object> paraMap) {
+		List<Map<String, Object>> result = exdao.queryProductWithAttachmentByIdOrType(paraMap);
+		
+		return result;
+	}
+
 }

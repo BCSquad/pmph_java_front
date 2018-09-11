@@ -62,7 +62,12 @@
             </c:forEach>
         </div>
     </div>
-    <div class="join" onclick="tojoin(${product_id})">报名参加</div>
+    
+    <c:if test="${is_new == 1 }">
+		<div class="join" onclick="tojoin(${product_id})">报名参加</div>
+	</c:if>
+    
+    
         <div style="clear: both"></div>
 </div>
 </div>

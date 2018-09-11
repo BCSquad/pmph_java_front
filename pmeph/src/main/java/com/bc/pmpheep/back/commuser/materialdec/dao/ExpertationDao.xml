@@ -464,6 +464,31 @@
 		left join product p on e.product_id = p.id
 		where e.id = #{expertation_id}
 	</select>
+	
+	<select id="queryProductWithAttachmentByIdOrType" parameterType="Map" resultType="Map">
+		select
+		   p.note,p.description,p.is_published,p.product_type,p.product_name
+		   ,p.id as product_id
+		   ,p.is_new
+		   ,pa.*
+		   from product_attachment pa
+		   right JOIN product p on p.id=pa.product_id
+		   where 
+		   		p.is_deleted=0 and p.is_published=1 
+		   		<choose>
+		   			<when test="product_id != null and product_id != '' ">
+		   				and p.id= #{product_id}  
+		   			</when>
+		   			<when test="product_type != null and product_type != '' ">
+		   				and p.product_type= #{product_type}  
+						and p.is_new = 1
+		   			</when>
+		   			<otherwise>
+		   			</otherwise>
+		   		</choose>
+				
+		   order BY p.gmt_set_active DESC
+	</select>
     
     
 </mapper>
