@@ -7,9 +7,10 @@
     <input type="hidden" class="queryCondition" id="search" value="$!{search}">
 
     <span class="clnicalTag" id="clnicalTag1" onclick="listoction('1');" style="cursor:pointer"><span class="backImge"></span>已暂存</span>
-    <span class="clnicalTag" id="clnicalTag2" onclick="listoction('2');" style="cursor:pointer"><span class="backImge"></span>正在遴选</span>
-    <span class="clnicalTag" id="clnicalTag3" onclick="listoction('3');" style="cursor:pointer"><span class="backImge"></span>遴选结束</span>
-    <span class="clnicalTag" id="clnicalTag4" onclick="listoction('4');" style="cursor:pointer"><span class="backImge"></span>报名成功</span>
+    <span class="clnicalTag" id="clnicalTag2" onclick="listoction('2');" style="cursor:pointer"><span class="backImge"></span>已退回</span>
+    <span class="clnicalTag" id="clnicalTag3" onclick="listoction('3');" style="cursor:pointer"><span class="backImge"></span>正在遴选</span>
+    <span class="clnicalTag" id="clnicalTag4" onclick="listoction('4');" style="cursor:pointer"><span class="backImge"></span>遴选结束</span>
+    <span class="clnicalTag" id="clnicalTag5" onclick="listoction('5');" style="cursor:pointer"><span class="backImge"></span>报名成功</span>
     <span class="clnicalTag" id="clnicalTag" onclick="listoction('');"  style="cursor:pointer"><span class="backImge"></span>全部状态</span>
 
     <div id="btn_wdsbssk_div"><button title="搜索" id="btn_wdsbssk"><div onclick="querySearch()"></div></button></div>
