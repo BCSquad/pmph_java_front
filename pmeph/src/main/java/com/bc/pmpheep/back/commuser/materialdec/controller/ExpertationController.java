@@ -141,6 +141,7 @@ public class ExpertationController extends BaseController{
 		mav.addObject("pereditorList",pereditorList);
 		mav.addObject("wzfbqkList",wzfbqkList);
 		mav.addObject("bzyhjqkList",bzyhjqkList);
+		mav.addObject("product_id",product_id);
 		return mav;
 	}
 	
