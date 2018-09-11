@@ -45,15 +45,19 @@ function listoction(tag_num){
 		$("#online_progress").val("0");
 		$("#finalResult").val("0");
 		$("#pmphAudit").val("");
-	}else if(tag_num == "2"){ //正在遴选
-		$("#online_progress").val("1,3");
+	}else if(tag_num == "2"){ // 已退回
+		$("#online_progress").val("2,5");
 		$("#finalResult").val("0");
 		$("#pmphAudit").val("");
-	}else if(tag_num == "3"){ //遴选结束
+	}else if(tag_num == "3"){ //正在遴选
+		$("#online_progress").val("1,3,4");
+		$("#finalResult").val("0");
+		$("#pmphAudit").val("");
+	}else if(tag_num == "4"){ //遴选结束
 		$("#online_progress").val("");
 		$("#finalResult").val("1");
 		$("#pmphAudit").val("");
-	}else if(tag_num == "4"){ //报名成功
+	}else if(tag_num == "5"){ //报名成功
 		$("#online_progress").val("");
 		$("#finalResult").val("1");
 		$("#pmphAudit").val("1");
