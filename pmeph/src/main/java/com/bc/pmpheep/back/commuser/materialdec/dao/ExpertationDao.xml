@@ -66,7 +66,7 @@
           is_profession_type_used*1 is_profession_type_used,
           is_profession_type_required*1 is_profession_type_required,
           gmt_create,gmt_update,founder_id,publisher_id,gmt_publish,note,description
-        from product where product_type = #{expert_type} and is_published  = 1 and is_deleted = 0
+        from product where product_type = #{expert_type} and is_published  = 1 and is_deleted = 0 and is_new = 1
         ORDER  BY gmt_set_active DESC limit 0,1
     </select>
     
@@ -95,10 +95,20 @@
 	<insert id="insertPerson" parameterType="java.util.Map">
 		insert into expertation(product_id,expert_type,user_id,realname,sex,birthday,experience,org_name,position,
 		title,address,postcode,handphone,email,idtype,idcard,telephone,fax,gmt_create,is_staging,online_progress,commit_date,banknumber
-		,bankaddress,remark,degree,unit_advise,syllabus_name,education,org_id,expertise
+		,bankaddress,remark,degree,unit_advise,syllabus_name
+        <if test="education != null and education != ''">
+            ,education
+        </if>
+
+        ,org_id,expertise
 		) values(#{product_id},#{expert_type},#{user_id},#{realname},#{sex},#{birthday},#{experience},#{org_name},#{position},
 		#{title},#{address},#{postcode},#{handphone},#{email},#{idtype},#{idcard},#{telephone},#{fax},#{gmt_create},
-		#{is_staging},#{online_progress},#{commit_date},#{banknumber},#{bankaddress},#{remark},#{degree},#{unit_advise},#{syllabus_name},#{education}
+		#{is_staging},#{online_progress},#{commit_date},#{banknumber},#{bankaddress},#{remark},#{degree},#{unit_advise},#{syllabus_name}
+        <if test="education != null and education != ''">
+            ,#{education}
+        </if>
+
+
         <choose>
             <when test="org_id==''">
                 ,NULL

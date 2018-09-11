@@ -141,6 +141,7 @@ public class ExpertationController extends BaseController{
 		mav.addObject("pereditorList",pereditorList);
 		mav.addObject("wzfbqkList",wzfbqkList);
 		mav.addObject("bzyhjqkList",bzyhjqkList);
+		mav.addObject("product_id",product_id);
 		return mav;
 	}
 	
@@ -251,7 +252,7 @@ public class ExpertationController extends BaseController{
 		perMap.put("idcard", request.getParameter("idcard"));
 		perMap.put("degree", "".equals(request.getParameter("degree")) ? null:request.getParameter("degree"));
 		perMap.put("rank","2");
-		perMap.put("education", request.getParameter("education"));
+		perMap.put("education","".equals(request.getParameter("education")) ? null:request.getParameter("education"));
 		perMap.put("expertise", request.getParameter("expertise"));
 		perMap.put("gmt_create", date);
 		perMap.put("banknumber", "".equals(request.getParameter("banknumber")) ? null:request.getParameter("banknumber"));
