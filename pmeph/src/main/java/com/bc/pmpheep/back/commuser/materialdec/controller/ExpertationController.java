@@ -998,6 +998,53 @@ public class ExpertationController extends BaseController{
 		mav.addObject("paraMap", paraMap);
 		return mav;
 	}
+	
+	/**
+	 * 通过id或类型进入临床申报产品详情界面 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("toproductdetail")
+    public ModelAndView toproductdetail(HttpServletRequest request){
+        ModelAndView modelAndView=new ModelAndView();
+        String product_type=request.getParameter("product_type");
+        String product_id=request.getParameter("product_id");
+        Map<String,Object> paraMap = new HashMap<String,Object>();
+        paraMap.put("product_type", product_type);
+        paraMap.put("product_id", product_id);
+        
+        List<Map<String,Object>> list=etService.queryProductByIdOrType(paraMap);
+        
+        
+        
+        //取出申报通知扫描图片
+        List<Map<String,Object>> list_scanimg=new ArrayList<>();
+        List<Map<String,Object>> list_unscanimg=new ArrayList<>();
+        for (int i=0;i<list.size();i++){
+            //s1=true代表是扫描图片。false代表是附件
+            Boolean s1=Boolean.valueOf(list.get(i).get("is_scan_img").toString());
+            if(s1){
+                Map<String,Object> map=new HashMap();
+                map.put("attachment","image/" + list.get(i).get("attachment") + ".action");
+                list_scanimg.add(map);
+            }else{
+                Map<String,Object> map=new HashMap();
+                map.put("attachment","file/download/" + list.get(i).get("attachment") + ".action");
+                map.put("attachment_name",list.get(i).get("attachment_name").toString());
+                list_unscanimg.add(map);
+            }
+        }
+        modelAndView.addObject("list_scanimg",list_scanimg);
+        modelAndView.addObject("list_unscanimg",list_unscanimg);
+        modelAndView.addObject("note_detail",list.get(0).get("note_detail"));
+        modelAndView.addObject("description",list.get(0).get("description_detail"));
+        modelAndView.addObject("product_name",list.get(0).get("product_name"));
+        modelAndView.addObject("product_id",list.get(0).get("product_id"));
+        modelAndView.addObject("is_new",list.get(0).get("is_new"));
+        
+        modelAndView.setViewName("commuser/cms/declaredatail");
+        return modelAndView;
+    }
 
 
 
