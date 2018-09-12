@@ -21,7 +21,7 @@
         <div class="leftlb">
             <div class="mleft1_1">
                 <div class="left_1 product_name"
-                	onclick="tojoin($!{c.product_type})" style="cursor: pointer"
+                	onclick="tolcjcdetail($!{c.product_type})" style="cursor: pointer"
                 >$!{c.product_name}
                 #if($!{c.online_progress}==0)
                   <img src="$!{contextpath}statics/image/zancun.png">
