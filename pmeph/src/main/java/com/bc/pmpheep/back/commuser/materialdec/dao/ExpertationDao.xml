@@ -35,7 +35,7 @@
         from product where id = #{id}
         limit 0,1
     </select>
-    
+
     <select id="queryActiveProductbyType" resultType="java.util.Map" parameterType="java.lang.String">
         select
           id,product_name,product_type,
@@ -69,11 +69,11 @@
         from product where product_type = #{expert_type} and is_published  = 1 and is_deleted = 0 and is_new = 1
         ORDER  BY gmt_set_active DESC limit 0,1
     </select>
-    
-    
-    
-    
-	<!-- 专家信息 --> 
+
+
+
+
+	<!-- 专家信息 -->
 	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
 		select id,product_id,expert_type,user_id,realname,sex,birthday,REPLACE(birthday,'-','.') as birthday1,experience,org_name,position,title,address,postcode,handphone,email,idtype,
 		idcard,telephone,fax,online_progress,auth_date,is_staging*1 is_staging,is_deleted*1 is_deleted,banknumber,bankaddress,remark,
@@ -140,7 +140,7 @@
         <if test="parameter.chooseId != null and parameter.chooseId != ''">
         	and t.id not in (${parameter.chooseId})
         </if>
-        order by id asc 
+        order by id asc
         limit #{start},#{pageSize}
     </select>
     <!-- 学科分类总数 -->
@@ -464,7 +464,7 @@
 		left join product p on e.product_id = p.id
 		where e.id = #{expertation_id}
 	</select>
-	
+
 	<select id="queryProductWithAttachmentByIdOrType" parameterType="Map" resultType="Map">
 		select
 		   p.note,p.description,p.is_published,p.product_type,p.product_name
@@ -473,22 +473,22 @@
 		   ,pa.*
 		   from product_attachment pa
 		   right JOIN product p on p.id=pa.product_id
-		   where 
-		   		p.is_deleted=0 and p.is_published=1 
+		   where
+		   		p.is_deleted=0 and p.is_published=1
 		   		<choose>
 		   			<when test="product_id != null and product_id != '' ">
-		   				and p.id= #{product_id}  
+		   				and p.id= #{product_id}
 		   			</when>
 		   			<when test="product_type != null and product_type != '' ">
-		   				and p.product_type= #{product_type}  
+		   				and p.product_type= #{product_type}
 						and p.is_new = 1
 		   			</when>
 		   			<otherwise>
 		   			</otherwise>
 		   		</choose>
-				
+
 		   order BY p.gmt_set_active DESC
 	</select>
-    
+
     
 </mapper>
