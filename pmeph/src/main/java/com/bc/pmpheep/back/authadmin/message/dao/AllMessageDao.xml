@@ -50,7 +50,9 @@
 				m.gmt_create,
 				'%Y-%m-%d %H:%i:%S'
 				) AS TIME,
-		m.material_id
+		m.material_id,
+		m.is_product
+		
 		FROM
 		user_message AS m
 		WHERE

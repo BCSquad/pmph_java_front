@@ -157,11 +157,6 @@
                                     <div class="sp_title">${rmsp.bookname}</div>
                                     <div class="sp_pl">
                                         <span style="float: left;">${rmsp.nickname} 评论了 《${rmsp.bookname}》</span>
-                                            <%--	<span class="rwtx1"></span>
-                                                <span class="rwtx1"></span>
-                                                <span class="rwtx1"></span>
-                                                <span class="rwtx2"></span>
-                                                <span class="rwtx2"></span>--%>
                                     </div>
                                     <div style="clear: both"></div>
                                     <div class="sp_remark">${rmsp.content}</div>

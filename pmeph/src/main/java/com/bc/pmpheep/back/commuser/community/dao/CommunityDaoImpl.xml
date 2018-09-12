@@ -106,9 +106,23 @@
             b.material_id=#{materialId}
         order by
             b.sort
-        limit 0,10
+        limit #{start},#{pageSize}
      </select>
-     
+
+
+	<!--根据教材id查询本套教材的图书  -->
+	<select id="countTextBookList" parameterType="map" resultType="int">
+
+        select
+         count(1)
+        from
+        book b
+        where
+            b.material_id=#{materialId}
+
+
+     </select>
+
      <!--查询社区主页精选书评  -->
      <select id="querySomeComment" parameterType="map" resultMap="baseMap">
 			select buc.* ,b.bookname,wu.username,wu.nickname,wu.avatar,b.image_url

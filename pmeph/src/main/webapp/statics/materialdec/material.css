@@ -68,7 +68,7 @@
 .content{
 	/*width: 1200px;*/
 	width:1050px;
-
+	margin-top: 15px;
 }
 
 .tab_1{
@@ -408,8 +408,10 @@ a.input {
 .fileNameDiv{
 	float: left;
 	margin-right: 10px;
+	margin-left: 150px;
 	line-height: 30px;
 	height: 30px;
+    cursor: pointer;
 }
 
 #bzyhjqk_img{
@@ -481,6 +483,11 @@ a.input {
 	width: 19px;
 	float: left;
 	background-size: 100% 100%;
+}
+
+
+.tubiao3px{
+	margin-bottom: 3px;
 }
     
     

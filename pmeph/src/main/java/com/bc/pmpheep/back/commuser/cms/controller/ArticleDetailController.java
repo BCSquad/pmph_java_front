@@ -56,9 +56,7 @@ public class ArticleDetailController extends BaseController {
 		Map<String, Object> map1 = new HashMap<String, Object>();
 		map1.put("id", wid);
 		Map<String, Object> map = articleDetailService.queryTitle(map1);
-		// mongoDB查询内容
 		Content message = contentService.get(map.get("mid").toString());
-		// Content message = contentService.get("5a6544f290baad7f01b9bc52");
 		String UEContent = "";
 		if (message == null || "".equals(message.getContent().trim())) {
 			if (null==(map.get("summary"))||"".equals(map.get("summary").toString().trim())) {
@@ -71,7 +69,7 @@ public class ArticleDetailController extends BaseController {
 		}
 		//是否已通过审核
 		Boolean is_audit = false;
-		if("2".equals(map.get("auth_status").toString()) /*&& "false".equals(map.get("is_staging").toString())*/){
+		if("2".equals(map.get("auth_status").toString()) ){
 			is_audit = true;
 		}
 

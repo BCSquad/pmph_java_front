@@ -25,6 +25,13 @@ public interface PersonalService {
 
 	public int queryMyBooksJoinCount(PageParameter<Map<String, Object>> pageParameter);// 教材申报最新消息总数
 
+	public List<Map<String, Object>> queryLcjc(PageParameter<Map<String, Object>> pageParameter);//个人中心临床决策
+	
+	public List<Map<String, Object>> queryLcjcVer2(PageParameter<Map<String, Object>> pageParameter);//个人中心临床决策
+
+	public int queryCountLcjc(PageParameter<Map<String, Object>> pageParameter);//个人中心临床决策
+	
+	public int queryCountLcjcVer2(PageParameter<Map<String, Object>> pageParameter);//个人中心临床决策
 	/**
 	 * 分页查询选题申报topic表 供个人中心-我要出书页面展示
 	 * 
