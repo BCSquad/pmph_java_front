@@ -66,6 +66,7 @@
 		end) avatar,
 		u.gmt_update ,
 		u.material_id,
+		u.is_product,
 	    -- (select cc.id from cms_content cc where cc.material_id=u.material_id and cc.is_material_entry=1) as cmsid,
 		cc.id  as  cmsid,
 		u.is_read+'' is_read,
@@ -78,7 +79,7 @@
 		AND u.sender_type = 2
 		LEFT JOIN org_user s3 ON u.sender_id = s3.id
 		AND u.sender_type = 3
-		left join cms_content cc on cc.material_id = u.material_id AND cc.is_material_entry = 1
+		left join cms_content cc on cc.material_id = u.material_id AND cc.is_material_entry = 1 and u.is_product = 0
 		WHERE
 		u.is_withdraw = 0
 		AND u.is_deleted = 0
