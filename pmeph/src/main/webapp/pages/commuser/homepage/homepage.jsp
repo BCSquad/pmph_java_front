@@ -382,10 +382,6 @@
                                 <div class="a6_div2">${list.summary}</div>
                                 <div>
                                     <div class="a6_head_div">
-                                        <%-- <c:if test="${list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null}">
-                                            <img src="${ctx}/statics/image/default_image.png" class="a6_head"></c:if>
-                                        <c:if test="${!(list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null)}">
-                                            <img src="${ctx}/image/${list.avatar}.action" class="a6_head"></c:if> --%>
                                     </div>
                                     <div class="a6_name_div" style="cursor:pointer;"
                                          onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?userId=${list.userId }'">
