@@ -1818,9 +1818,9 @@ ORDER BY t.gmt_create DESC  limit ${start},${pageSize}
          	DATE_FORMAT(t.gmt_create,'%Y-%m-%d') as gmt_create_new,
          case
          when b.org_id=0 or b.online_progress=0  then ''
-         when b.online_progress =1 or b.online_progress =4 then '待审核'
+         when b.online_progress =1 then '待审核'
          when b.online_progress =3 then '已通过'
-         when b.online_progress =5 then '出版社退回'
+         when b.online_progress =5 or b.online_progress =4 then '出版社退回'
          when b.online_progress =2 then '被退回'
          else ''
          end as school_progress ,
