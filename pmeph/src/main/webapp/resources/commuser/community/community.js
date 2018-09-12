@@ -1,4 +1,33 @@
- function comments(id){
+//初始化页面
+$(function () {
+    var startnum= parseInt($("#pagenum").val());
+    var  pagetotal=parseInt($("#pagetotal").val());
+    Page({
+        num:pagetotal,
+        startnum: startnum,
+        elem:$("#page1"),
+        callback: function (n) {
+            var size=$("input[name='edu']").val();
+
+            location.href=contextpath+"community/toCommunity.action?pageNumber="+n+"&pageSize="+size+"&id="+$("#sid").val();
+        }
+    });
+    $('select').selectlist({
+        zIndex: 10,
+        width: 110,
+        height: 30,
+        optionHeight: 30,
+        onChange: function () {
+            var size=$("input[name='edu']").val();
+            location.href=contextpath+"community/toCommunity.action?pageNumber=1&pageSize="+size+"&id="+$("#sid").val();
+        }
+    });
+
+});
+
+
+
+function comments(id){
 	  $.ajax({
 			type:'post',
 			url:contextpath+'community/getComments.action',

@@ -168,5 +168,12 @@ public interface ExpertationService {
 	
 	public Map<String, Object> queryProductbyId(String id,String expert_type);
 
+	/**
+	 * 通过id或类型查询临床申报产品详情
+	 * @param paraMap
+	 * @return
+	 */
+	public List<Map<String, Object>> queryProductByIdOrType(Map<String, Object> paraMap);
+
 
 }

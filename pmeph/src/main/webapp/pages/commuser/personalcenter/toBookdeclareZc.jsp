@@ -29,7 +29,7 @@
 <div class="body">
 	<div class="content-wrapper">
 		<div class="sbxq_title">
-			<span><a style="text-decoration: none;color: #999999;" href="${ctx}personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> <a style="text-decoration: none;color: #999999;" href="${ctx}personalhomepage/tohomepage.action?pagetag=wycs&pageNum=1&pageSize=10">我要出书</a> > 编辑选题申报表</span>
+			<span><a style="text-decoration: none;color: #999999;" href="${ctx}/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> <a style="text-decoration: none;color: #999999;" href="${ctx}/personalhomepage/tohomepage.action?pagetag=wycs&pageNum=1&pageSize=10">我要出书</a> > 编辑选题申报表</span>
 		</div>
 		<form id="objForm">
 			<!-- 图书书稿情况-->

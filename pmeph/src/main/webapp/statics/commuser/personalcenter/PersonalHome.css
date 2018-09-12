@@ -1466,7 +1466,21 @@ color: #bcbcbc;
     margin-right: 3px;
     float: left;
 }
+
 #clnicalTag2 .backImge{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -333px -265.5px;
+    height: 20px;
+    width: 20px;
+    background-repeat: no-repeat;
+    margin-top: 3px;
+    margin-right: 3px;
+    float: left;
+}
+
+
+
+#clnicalTag3 .backImge{
 	background-image: url(../../image/clinicalChoosing.png);
     height: 20px;
     width: 20px;
@@ -1476,7 +1490,7 @@ color: #bcbcbc;
     margin-right: 3px;
     float: left;
 }
-#clnicalTag3 .backImge{
+#clnicalTag4 .backImge{
 	background-image: url(../../image/clinicalEnd.png);
     height: 20px;
     width: 20px;
@@ -1486,7 +1500,7 @@ color: #bcbcbc;
     margin-right: 3px;
     float: left;
 }
-#clnicalTag4 .backImge{
+#clnicalTag5 .backImge{
     background-image: url(../../image/css_sprites.png);
     background-position: -333px -289px;
     height: 20px;
@@ -1512,5 +1526,10 @@ color: #bcbcbc;
 .clnicalTag.active{
     background-color: #1d8ca0;
     color: #FFF;
+}
+
+.left_1.product_name{
+	font-weight: 700;
+	
 }
     

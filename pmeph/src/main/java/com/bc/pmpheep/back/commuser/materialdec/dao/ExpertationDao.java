@@ -149,4 +149,12 @@ public interface ExpertationDao {
 	 * @return
 	 */
 	public Map<String, Object> queryActiveProductbyType(String expert_type);
+
+	/**
+	 * 根据id或分类查询产品 带出附件
+	 * @param paraMap
+	 * @return
+	 */
+	public List<Map<String, Object>> queryProductWithAttachmentByIdOrType(
+			Map<String, Object> paraMap);
 }

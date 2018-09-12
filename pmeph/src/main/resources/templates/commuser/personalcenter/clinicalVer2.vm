@@ -7,9 +7,10 @@
     <input type="hidden" class="queryCondition" id="search" value="$!{search}">
 
     <span class="clnicalTag" id="clnicalTag1" onclick="listoction('1');" style="cursor:pointer"><span class="backImge"></span>已暂存</span>
-    <span class="clnicalTag" id="clnicalTag2" onclick="listoction('2');" style="cursor:pointer"><span class="backImge"></span>正在遴选</span>
-    <span class="clnicalTag" id="clnicalTag3" onclick="listoction('3');" style="cursor:pointer"><span class="backImge"></span>遴选结束</span>
-    <span class="clnicalTag" id="clnicalTag4" onclick="listoction('4');" style="cursor:pointer"><span class="backImge"></span>报名成功</span>
+    <span class="clnicalTag" id="clnicalTag2" onclick="listoction('2');" style="cursor:pointer"><span class="backImge"></span>已退回</span>
+    <span class="clnicalTag" id="clnicalTag3" onclick="listoction('3');" style="cursor:pointer"><span class="backImge"></span>正在遴选</span>
+    <span class="clnicalTag" id="clnicalTag4" onclick="listoction('4');" style="cursor:pointer"><span class="backImge"></span>遴选结束</span>
+    <span class="clnicalTag" id="clnicalTag5" onclick="listoction('5');" style="cursor:pointer"><span class="backImge"></span>报名成功</span>
     <span class="clnicalTag" id="clnicalTag" onclick="listoction('');"  style="cursor:pointer"><span class="backImge"></span>全部状态</span>
 
     <div id="btn_wdsbssk_div"><button title="搜索" id="btn_wdsbssk"><div onclick="querySearch()"></div></button></div>
@@ -18,14 +19,12 @@
 <div class="listContent">
     #foreach($c in $!{List_map})
         <div class="leftlb">
-            <div class="mleft1_1"
-                #if($!{c.flag}==1)
-                onclick="tojoin($!{c.product_type})" style="cursor: pointer"
-                #end
-            >
-                <div class="left_1">$!{c.product_name}
+            <div class="mleft1_1">
+                <div class="left_1 product_name"
+                	onclick="tojoin($!{c.product_id})" style="cursor: pointer"
+                >$!{c.product_name}
                 #if($!{c.online_progress}==0)
-                  <img src="/pmeph/statics/image/zancun.png">
+                  <img src="$!{contextpath}statics/image/zancun.png">
                 #end
                 </div>
                 #if($!{c.product_type}==1)
