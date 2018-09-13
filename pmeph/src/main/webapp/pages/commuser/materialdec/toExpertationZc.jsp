@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%String path = request.getContextPath();%>
@@ -120,7 +120,7 @@
                                     <option value="0" ${gezlList.education=='0'?'selected':'' }>专科</option>
                                     <option value="1" ${gezlList.education=='1'?'selected':'' }>本科</option>
                                     <option value="2" ${gezlList.education=='2'?'selected':'' }>硕士</option>
-                                    <option value="2" ${gezlList.education=='4'?'selected':'' }>博士</option>
+                                    <option value="4" ${gezlList.education=='4'?'selected':'' }>博士</option>
                                     <option value="3" ${gezlList.education=='3'?'selected':'' }>博士后</option>
                                 </select></td>
                         </tr>
