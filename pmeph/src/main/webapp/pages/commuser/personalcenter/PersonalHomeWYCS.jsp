@@ -79,7 +79,19 @@ request.setAttribute("currentTime",datetime);
         <div class="wrapper">
             <div class="myinfo">
                 <div class="headr">
-                    <div id="name">${permap.realname}</div>
+                    <div id="name">
+						<c:choose>
+							<c:when test="${permap.realname==null||permap.realname==''&&(permap.nickname!=null&&permap.nickname!='')}">
+								${permap.nickname}
+							</c:when>
+							<c:when test="${permap.realname==null||permap.realname==''&&(permap.nickname==null||permap.nickname=='')}">
+								${permap.username}
+							</c:when>
+							<c:otherwise>
+								${permap.realname}
+							</c:otherwise>
+						</c:choose>
+					</div>
                     <c:if test="${permap.sex==1}">
                         <div id="mansex"></div>
                     </c:if>

@@ -19,7 +19,7 @@
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>人卫E教平台</title>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
-    <link rel="stylesheet" href="${ctx}/statics/commuser/homepage/homepage.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/commuser/homepage/homepage.css?t=${_timestampJKFYDiv_0}" type="text/css">
     <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.scroll.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
