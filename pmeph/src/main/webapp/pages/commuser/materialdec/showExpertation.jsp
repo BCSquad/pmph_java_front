@@ -32,8 +32,8 @@
 
 <div class="body">
 	<input type="hidden" id="user_id" value="${gezlList.user_id }"> 
-	<input type="hidden" id="expertation_id" value="${gezlList.id}"> 
-	
+	<input type="hidden" id="expertation_id" value="${gezlList.id}">
+
 	
 	<div class="content-wrapper">
 		<input type="hidden" name="expert_type" id="expert_type" value="${queryMap.expert_type}">
@@ -543,7 +543,7 @@
 		<c:if test="${state == 'audit'}">
 			<div lass = "audit_wrapper">
 				<div class="audit_middle">
-				<c:if test="${online_progress != 3}">
+				<c:if test="${(online_progress != 3)&&(online_progress !=2)&&(online_progress !=5)}">
 					<div class="audit"  onclick="showup('${gezlList.id}','2')" >退回给个人</div>
                     <div class="audit pass"  id="shtg" onclick="toAuditPass('${gezlList.id}','3');changeColor()" >审核通过</div>
 				</c:if>
