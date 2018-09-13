@@ -20,6 +20,10 @@
       location.href = contextpath + 'expertation/toproductdetail.action?product_id='+product_id;
   }
 
+  function tolcjcdetail(product_type) {
+      location.href = contextpath + 'homepage/toproductdetail.action?state='+product_type;
+  }
+
 
   function toPersondetail(product_id){
       $.ajax({
