@@ -589,13 +589,13 @@
                                          onclick="window.open(contextpath+'readdetail/todetail.action?id='+$('#last_right_book_id_${status.count}').val())">
                                         <c:set var="default_url"
                                                value="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"></c:set>
-                                        <img src='${list.image_url == "DEFAULT"?default_url:list.image_url}'
-                                             class="book_style" id="right_book${status.count}">
+                                        <a title="${list.bookname}"><img src='${list.image_url == "DEFAULT"?default_url:list.image_url}'
+                                                           class="book_style" id="right_book${status.count}" ></a>
                                     </div>
                                     <div class="num${status.index>2?'4':status.index+1+''}">
                                         <div class="num_book">${status.index+1}</div>
                                     </div>
-                                    <div class="last_right_content">
+                                    <div class="last_right_content"  style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;text-align: center">
                                         <div class="sale_book" id="sale_book${status.count}" title="${list.bookname}">${list.bookname}</div>
                                     </div>
                                 </div>
