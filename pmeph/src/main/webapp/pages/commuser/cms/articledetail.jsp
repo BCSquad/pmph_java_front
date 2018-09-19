@@ -86,19 +86,7 @@
                     	
                         <div class="line"></div>
                         
-                           <div class="rd_name">文章评论<%-- （共${ComNum}条） --%></div>
-                        
-                        <!-- <div class="scorestar" id="star">
-                             <div class="scorestar1" id="score1"></div>
-                             <div class="scorestar1" id="score2"></div>
-                             <div class="scorestar1" id="score3"></div>
-                             <div class="scorestar1" id="score4"></div>
-                             <div class="scorestar1" id="score5"></div>
-	                    </div>
-	                    <div class="user_score">
-                              <span>评分：</span>
-                              <span style="color: #FFD200" id="last_score">10.0</span>
-                        </div> -->
+                           <div class="rd_name">文章评论</div>
                     </div>
                     <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
                     <div class="pl_add">
@@ -122,8 +110,13 @@
                 				<img  src="${ctx}/image/${list.avatar}.action" height="30"  width="30" >
                 				</c:if>
                         	</div>
-                        	<div style="float: left;margin-left: 10px;margin-top: 5px;">${list.nickname}</div>
-                            <div class="date_content"><div class="date">${list.gmt_create}</div></div>
+							<c:if test="${list.nickname==''|| list.nickname==null}">
+                        	<div style="float: left;margin-left: 10px;margin-top: 5px;">${list.username}</div>
+							</c:if>
+							<c:if test="${list.nickname!=''and list.nickname!=null}">
+								<div style="float: left;margin-left: 10px;margin-top: 5px;">${list.nickname}</div>
+							</c:if>
+                            <div class="date_content"><div class="date"></div></div>
                         </div>
                         <div class="item_content">${list.content}</div>
                         <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">

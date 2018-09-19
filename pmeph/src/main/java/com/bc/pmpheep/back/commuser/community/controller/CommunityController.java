@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -68,14 +69,16 @@ public class CommunityController extends BaseController{
 	 * 到教材社区主界面
 	 */
 	@RequestMapping("/toCommunity")
-	public ModelAndView toCommunity(HttpServletRequest req){
+	public ModelAndView toCommunity(HttpServletRequest req, @RequestParam(value = "pageNumber",defaultValue = "1",required =false) Integer pageNumber
+	,@RequestParam(value = "pageSize",defaultValue = "8")int pageSize){
 		Long noticeId=Long.valueOf(req.getParameter("id"));
-		
+
 		Map<String,Object> notice=communityService.queryNoticeById(noticeId);
 		//信息快报
 		List<Map<String,Object>> reportlist=communityService.queryMaterialNoticeList(Long.valueOf(notice.get("material_id").toString()));
 		//配套图书
-		List<Map<String,Object>> booklist=communityService.queryTextBookList(Long.valueOf(notice.get("material_id").toString()));
+        int start=(pageNumber-1)*pageSize;
+		List<Map<String,Object>> booklist=communityService.queryTextBookList(Long.valueOf(notice.get("material_id").toString()),start,pageSize);
 		//精彩书评
 		List<Map<String,Object>> someComments=communityService.querySomeComment(Long.valueOf(notice.get("material_id").toString()),0,4);
 		Map<String,Object> map=new HashMap<>();
@@ -83,6 +86,16 @@ public class CommunityController extends BaseController{
 		map.put("reportlist", reportlist);
 		map.put("booklist", booklist);
 		map.put("someComments", someComments);
+
+
+		int total=communityService.countTextBookList(Long.valueOf(notice.get("material_id").toString()));
+		Integer maxPageNum = (int) Math.ceil(1.0 * total / pageSize);
+		map.put("sid", noticeId);
+		map.put("total", total);
+		map.put("pagetotal", maxPageNum);
+		map.put("pagenum", pageNumber);
+		map.put("pagesize", pageSize);
+
 		return new ModelAndView("commuser/community/community",map);
 	}
 	

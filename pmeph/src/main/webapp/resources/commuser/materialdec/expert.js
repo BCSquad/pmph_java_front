@@ -14,18 +14,19 @@ $(function () {
         $('#email').tipso({validator: "isNonEmpty|isEmail", message: "邮箱不能为空|邮箱格式不正确"});
         $('#handphone').tipso({validator: "isNonEmpty|isMobile", message: "手机号码不能为空|手机号码格式不正确"});
         $('#zjlx').tipso({validator: "isNonEmpty", message: "证件类型不能为空"});
-        $('#idcard').tipso({validator: "isNonEmpty", message: "证件号码不能为空"});
+        $('#idcard').tipso({validator: "isNonEmpty|isCard", message: "证件号码不能为空|身份证号格式不正确"});
         $('#address').tipso({validator: "isNonEmpty", message: "地址不能为空"});
         //checkExtra();
     },0)
 
    // setTimer();
-    var id = $("#expert_type").val();
+    var expert_type = $("#expert_type").val();
+    var id = $("#product_id").val();
     /*setTimeout(function (){
         upload();
     },1000);*/
      //附件上传
-    queryMaterialMap(id);  //执行查询方法
+    queryMaterialMap(id,expert_type);  //执行查询方法
     
 
     $('.select-input').selectlist({
@@ -64,14 +65,46 @@ $(function () {
     //其他社教材-职务
     selectOption("jcjb_sl");
 
-    
+    $("#zjlx").change(function(){
+    	var idType = $("#zjlx").val();
+    	if(idType == '1'){
+    		$('#idcard').tipso({validator: "isNonEmpty|isPassport", message: "证件号码不能为空|护照格式不正确"});
+    	}else if(idType == '2'){
+    		$('#idcard').tipso({validator: "isNonEmpty|isOfficialCard", message: "证件号码不能为空|军官证格式不正确"});
+    	}else{
+    		$('#idcard').tipso({validator: "isNonEmpty|isCard", message: "证件号码不能为空|身份证号格式不正确"});
+    	}
+    });
 });
 
 window.onload = function(){
+	//时间前后校验
 	$("input[calendar]").each(function(i,n){
     	var $t = $(n);
     	$t.trigger("timeChange",new Date($t.val()));
     });
+	
+	// 证件类型改变后 立即改变其校验
+	$("#zjlx").find("li").click(function(){
+    	var idType = $("#zjlx").find("input[name='idtype']").val();
+    	$('#idcard').data("plugin_tipso").hide();
+    	//$('#idcard').tipso("destroy");
+    	cardSwitch(idType);
+    	$.fireValidator();
+    });
+	cardSwitch($("#zjlx").find("li[class='selected']").attr("data-value"));
+	
+	function cardSwitch(idType){
+		if(idType == '1'){
+    		$('#idcard').tipso({validator: "isNonEmpty|isPassport", message: "证件号码不能为空|护照格式不正确"});
+    	}else if(idType == '2'){
+    		$('#idcard').tipso({validator: "isNonEmpty|isOfficialCard", message: "证件号码不能为空|军官证格式不正确"});
+    	}else{
+    		$('#idcard').tipso({validator: "isNonEmpty|isCard", message: "证件号码不能为空|身份证号格式不正确"});
+    	}
+	}
+
+	
 };
 
 //下拉框格式优化
@@ -111,14 +144,15 @@ function upload(){
 }
 
 //页面组合方法
-function queryMaterialMap(expert_type){
+function queryMaterialMap(id,expert_type){
     $.ajax({
         type: "POST",
         url:contextpath+'expertation/queryMaterialMap.action',
-        data:{expert_type:expert_type},// 您的formid
+        data:{product_id:id,expert_type:expert_type},// 您的formid
         dataType:"json",
         success: function(json) {
             //chooseModel(json);
+        	$("#product_name").html(json.product_name);
         	expertMapforNewVali = json;
         	usedAndRequired(expertMapforNewVali);  
             //expertMap = json;
@@ -131,8 +165,8 @@ function queryMaterialMap(expert_type){
  * @param data
  */
 function usedAndRequired(data){
-	$("div[wrapper_key] input").tipso("destroy");
-	$("textarea[name='kz_content']").tipso("destroy");
+	/*$("div[wrapper_key] input").tipso("destroy");
+	$("textarea[name='kz_content']").tipso("destroy");*/
 	$("div[wrapper_key]").each(function(){
 		var $d = $(this);
 		if(data[$d.attr("wrapper_key")+"_used"]){
@@ -666,7 +700,7 @@ function buttAdd(type){
                     success: function (json) {
                         if (json.msg == 'OK') {
                             window.message.success("操作成功,正在跳转页面");
-                            window.location.href = contextpath + "expertation/declare.action";
+                            window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=lcjc";
                         }
                     }
                 });
@@ -694,7 +728,7 @@ function buttAdd(type){
                                         success: function (json) {
                                             if (json.msg == 'OK') {
                                                 window.message.success("操作成功,正在跳转页面");
-                                                window.location.href = contextpath + "expertation/declare.action";
+                                                window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=lcjc";
                                             }
                                         }
                                     });
@@ -837,7 +871,7 @@ function check_jcb_isbn(id){
 }
 
 //学科选择
-function SubjectdAdd(product_id){
+function SubjectdAdd(expert_type){
 var chooseArr = [];
 	
 	$("input[name='subjectId']").each(function(){
@@ -854,12 +888,12 @@ var chooseArr = [];
         fixed: false, //不固定
         title:'学科分类选择',
         maxmin: true,
-        content: contextpath+"expertation/querySubject.action?product_id="+product_id+"&chooseId="+chooseId
+        content: contextpath+"expertation/querySubject.action?product_type="+expert_type+"&chooseId="+chooseId
     });
 }
 
 //内容选择
-function ContentAdd(product_id){
+function ContentAdd(product_type){
 	var chooseArr = [];
 	
 	$("input[name='contentId']").each(function(){
@@ -876,12 +910,12 @@ function ContentAdd(product_id){
         fixed: false, //不固定
         title:'内容分类选择',
         maxmin: true,
-        content: contextpath+"expertation/queryContent.action?product_id="+product_id+"&chooseId="+chooseId
+        content: contextpath+"expertation/queryContent.action?product_type="+product_type+"&chooseId="+chooseId
     });
 }
 
 //申报专业选择
-function sbzyAdd(product_id){
+function sbzyAdd(product_type){
 	var chooseArr = [];
 	$("input[name='sbzyId']").each(function(){
 		var $t = $(this);
@@ -897,7 +931,7 @@ function sbzyAdd(product_id){
         fixed: false, //不固定
         title:'申报专业选择',
         maxmin: true,
-        content: contextpath+"expertation/toSearchZy.action?product_id="+product_id+"&chooseId="+chooseId
+        content: contextpath+"expertation/toSearchZy.action?product_type="+product_type+"&chooseId="+chooseId
     });
 }
 

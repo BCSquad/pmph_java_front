@@ -37,48 +37,7 @@
     	<div class="sbxq_title">
 			<span>文章 &gt;医学随笔</span>
         <div class="notes" id="tbody1">
-		   	<%-- <c:choose>
-        		<c:when test="${not empty page}">
-        			<c:forEach items="${page}" var="cms" varStatus="vs">
-        			<div class="${vs.index==0 or vs.index==4 ?'item' :'item behind'}" onclick="window.location.href='${ctx}/articledetail/toPage.action?wid=${cms.id}'">
-                			<div class="command">
-			                   	<span style="margin-left: 5px">推荐</span>
-			               	</div>
-                			<div  class="content" >
-	                   			<div class="content-image">
-	                       			<img src="${ctx}/statics/testfile/p2.png" />
-	                   			</div>
 
-	                    		<p  class="content-title"  >${cms.title }</p>
-	                    		<p  class="content-text">
-	                            		${cms.summary }
-	                    		<div  class="foot">
-			                        <div  class="msg">
-			                        	<span id="span_1"></span><span id="span_4">${cms.clicks }</span>
-			                        	<span id="span_2"></span><span id="span_4">${cms.likes }</span>
-			                        	<span id="span_3"></span><span id="span_4">${cms.comments }</span>
-			                        </div>
-	                    		</div>
-			                    <div class="ryxx">
-			                    	<div class="ryxx_foot">
-			                    		<c:if test="${cms.avatar=='DEFAULT'}">
-		                                <img src="${ctx}/statics/testfile/mi.png" class="ryxx_tx"></c:if>
-		                				<c:if test="${cms.avatar!='DEFAULT'}">
-		                				<img src="${ctx}/image/${cms.avatar}.action" class="ryxx_tx"></c:if>
-					                    <span class="ryxx_xm" style="cursor:pointer;" onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?userId=${cms.userId }'">${cms.realname }</span>
-			                    		<span class="ryxx_sj">${cms.auth_date }</span>
-			                    	</div>
-			                    </div>
-                			</div>
-            			</div>
-            	 		</c:forEach>
-           			</c:when>
-           		<c:otherwise>
-					<div class="oneList">
-						没有相关数据
-					</div>
-				</c:otherwise>
-            </c:choose> --%>
         </div>
       <!--   分页 -->
 				<div class="pagination-wrapper">

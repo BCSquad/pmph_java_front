@@ -68,7 +68,7 @@ public interface ExpertationService {
 	 * @param expert_type 申请类型
 	 * @return
 	 */
-	Map<String,Object> queryExpertationDetail(String user_id,String expert_type);
+	Map<String,Object> queryExpertationDetail(String user_id,String product_id);
 	/**
 	 * 查询学习经历
 	 * @param map
@@ -164,6 +164,16 @@ public interface ExpertationService {
 	 * 机构选择
 	 */
 	PageResult<Map<String, Object>> selectOrgList(PageParameter<Map<String, Object>> pageParameter);
+
+	
+	public Map<String, Object> queryProductbyId(String id,String expert_type);
+
+	/**
+	 * 通过id或类型查询临床申报产品详情
+	 * @param paraMap
+	 * @return
+	 */
+	public List<Map<String, Object>> queryProductByIdOrType(Map<String, Object> paraMap);
 
 
 }

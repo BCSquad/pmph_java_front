@@ -36,6 +36,12 @@
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="content-wrapper">
+    <input type="hidden" id="sid" value="${sid }"/>
+
+    <input type="hidden" id="pagenum" value="${pagenum }"/>
+    <input type="hidden" id="pagesize" value="${pagesize }"/>
+    <input type="hidden" id="total" value="${total }"/>
+    <input type="hidden" id="pagetotal" value="${pagetotal }"/>
     <div class="navigation">
         <a href="homepage/tohomepage.action">首页</a>&gt;
         <a href="community/tolist.action">教材社区</a>&gt;${notice.title }
@@ -112,6 +118,27 @@
                 </c:if>
             </div>
             <div style="clear: both"></div>
+
+
+            <div style="text-align: right;">
+                <ul class="pagination" id="page1">
+                </ul>
+                <div style="display: inline-block;vertical-align: top;text-align:left;">
+                    <select id="edu" name="edu">
+                        <option value="5"  ${pagesize=='5'? 'selected':'' }>每页5条</option>
+                        <option value="10" ${pagesize=='10'? 'selected':'' }>每页10条</option>
+                        <option value="15" ${pagesize=='15'? 'selected':'' } >每页15条</option>
+                        <option value="20" ${pagesize=='20'? 'selected':'' }>每页20条</option>
+                    </select>
+                </div>
+                <div class="pageJump">
+                    <span>共${pagetotal }页，共${total }条数据，跳转到</span>
+                    <input type="text"/>
+                    <span class="pp">页</span>
+                    <button type="button" class="button">确定</button>
+                </div>
+            </div>
+
             <div class="div_butt">
                 <div class="bt_tj" onclick="toMain()">返回</div>
             </div>

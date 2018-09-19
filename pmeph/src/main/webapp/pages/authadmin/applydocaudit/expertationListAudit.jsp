@@ -36,25 +36,22 @@
         <div class="sousuokuang">
             <div style="float: left;height: 42px;line-height: 42px;padding-right: 20px;color: #4e4e4e;">姓名:</div>
             <input type="text" value="${username}" placeholder='请输入' id="ssk" name="username" >
-            <div style="float: left;height: 42px;line-height: 42px;padding-right: 20px;color: #4e4e4e;">产品名称:</div>
+            <div style="float: left;height: 42px;line-height: 42px;padding-right: 20px;color: #4e4e4e;">产品分类:</div>
             <div style="display: inline-block;float:left;padding-right: 20px;">
-                <select class="search-condition" id="product_id">
+                <select class="search-condition" id="expertType">
                     <option value="">全部</option>
-                    <c:forEach var="obj" items="${productIdList}" varStatus="i">
-                        <option value="${obj.id}" ${obj.id==product_id?'selected':''}>${obj.product_name}</option>
-                    </c:forEach>
+                    <option value="1" ${"1"==expertType ? 'selected':''}>人卫临床助手</option>
+                    <option value="2" ${"2"==expertType ? 'selected':''}>人卫用药助手</option>
+                    <option value="3" ${expertType=='3'? 'selected':'' }>人卫中医助手</option>
                 </select>
             </div>
             <div style="float: left;height: 42px;line-height: 42px;padding-right: 20px;color: #4e4e4e;">状态:</div>
             <div style="display: inline-block;float:left;padding-right: 20px;">
-                <select class="search-condition" id="online_progress">
+                <select class="search-condition" id="xxsh">
                     <option value="">全部</option>
-                    <option value="00" <c:if test="${'00'==online_progress}">selected</c:if>>未提交</option>
-                    <option value="01" <c:if test="${'01'==online_progress}">selected</c:if>>未审核</option>
-                    <option value="02" <c:if test="${'02'==online_progress}">selected</c:if>>已退回</option>
-                    <option value="03" <c:if test="${'03'==online_progress}">selected</c:if>>已审核</option>
-                    <%--<option value="4">未审核</option>--%>
-                   <%-- <option value="5">已退回</option>--%>
+                    <option value="01" <c:if test="${'01'==xxsh}">selected</c:if>>待审核</option>
+                    <option value="02" <c:if test="${'02'==xxsh}">selected</c:if>>已退回</option>
+                    <option value="03" <c:if test="${'03'==xxsh}">selected</c:if>>已通过</option>
                 </select>
             </div>
             <input type="button"  value="清空" id="cclear" onclick="cclear()">
@@ -70,7 +67,22 @@
                 <td>职务</td>
                 <td>职称</td>
                 <td>学校审核</td>
+                <td>出版社审核</td>
                 <td>打印状态</td>
+
+                <%--学校审核状态online_progress：0=未提交/1=已提交但是待审核/2=被申报单位退回/3=申报单位通过/4=出版社退回申报单位/5=出版社退回个人
+                人卫社是否审核通过pmphAudit： 0-未操作/1-审核通过/2=审核未通过
+                finalResult 是否最终结果公布:0-未公布、1-已公布--%>
+
+
+            <%--学校审核状态：
+                待审核（online_progress==1） ，已退回（online_progress==2，4，5），已通过（online_progress==3）
+                出版社审核：
+                正在遴选((online_progress==1||online_progress==3) && finalResult == 0)、
+                出版社退回（online_progress=4 || online_progress=5）、
+                遴选结束（finalResult ==1 && pmphAudit!=1）、
+                报名成功（finalResult =1&&pmphAudit=1）--%>
+
             </tr>
             </thead>
             <tbody id='tb'>
@@ -88,14 +100,8 @@
                     <td>${item.product_name } </td>
                     <td>${item.position } </td>
                     <td>${item.title } </td>
-                    <td>
-                        <c:if test="${item.online_progress =='0'}">未审核</c:if>
-                        <c:if test="${item.online_progress =='1'}">未审核</c:if>
-                        <c:if test="${item.online_progress =='2'}">已退回</c:if>
-                        <c:if test="${item.online_progress =='3'}">已通过</c:if>
-                        <c:if test="${item.online_progress =='4'}">出版社退回给单位</c:if>
-                        <c:if test="${item.online_progress =='5'}">出版社退回给个人</c:if>
-                    </td>
+                    <td>${item.xxsh } </td>
+                    <td>${item.cbssh } </td>
                     <td>${item.isprint } </td>
                 </tr>
             </c:forEach>
@@ -125,34 +131,9 @@
 </div>
 </div>
 <script type="text/javascript">
-
-
-    function formatDate(nS, str) {
-        if (!nS) {
-            return "";
-        }
-        var date = new Date(nS);
-        var year = date.getFullYear();
-        var mon = date.getMonth() + 1;
-        var day = date.getDate();
-        var hours = date.getHours();
-        var minu = date.getMinutes();
-        var sec = date.getSeconds();
-        if (str == 'yyyy-MM-dd') {
-            return year + '-' + (mon < 10 ? '0' + mon : mon) + '-' + (day < 10 ? '0' + day : day);
-        } else if (str == 'yyyy.MM.dd') {
-            return year + '.' + (mon < 10 ? '0' + mon : mon) + '.' + (day < 10 ? '0' + day : day);
-        } else if (str == 'yyyy.MM.dd hh:ss:mm') {
-            return year + '.' + (mon < 10 ? '0' + mon : mon) + '.' + (day < 10 ? '0' + day : day) + ' ' + (hours < 10 ? '0' + hours : hours) + ':' + (minu < 10 ? '0' + minu : minu) + ':' + (sec < 10 ? '0' + sec : sec);
-        } else {
-            return year + '-' + (mon < 10 ? '0' + mon : mon) + '-' + (day < 10 ? '0' + day : day) + ' ' + (hours < 10 ? '0' + hours : hours) + ':' + (minu < 10 ? '0' + minu : minu) + ':' + (sec < 10 ? '0' + sec : sec);
-        }
-
-    }
-
     //点击查询
     function query() {
-        var url = contextpath + 'expertationList/toPageList.action?username=' + encodeURI(encodeURI($("#ssk").val()))+'&product_id='+$("#product_id").val()+'&online_progress='+$("#online_progress").val();
+        var url = contextpath + 'expertationList/toPageList.action?username=' + encodeURI(encodeURI($("#ssk").val()))+'&expertType='+$("#expertType").val()+'&xxsh='+$("#xxsh").val();
         window.location.href = url;
     }
     var pageSize = $("#pages").val();
@@ -189,15 +170,15 @@
     });
     //分页
     function pageFun(pageSize, pageNumber) {
-        window.location.href = contextpath + 'expertationList/toPageList.action?pageSize=' + pageSize + '&pageNumber=' + pageNumber + "&username=" + encodeURI(encodeURI($("#ssk").val()))+'&product_id='+$("#product_id").val()+'&online_progress='+$("#online_progress").val();
+        window.location.href = contextpath + 'expertationList/toPageList.action?pageSize=' + pageSize + '&pageNumber=' + pageNumber + "&username=" + encodeURI(encodeURI($("#ssk").val()))+'&expertType='+$("#expertType").val()+'&xxsh='+$("#xxsh").val();
     }
 
     //清空条件重查询
     function cclear(){
         setTimeout(function(){
             $("#ssk").val("");
-            $("#product_id").val("");
-            $("#online_progress").val("");
+            $("#expertType").val("");
+            $("#xxsh").val("");
         },100);
 
     }

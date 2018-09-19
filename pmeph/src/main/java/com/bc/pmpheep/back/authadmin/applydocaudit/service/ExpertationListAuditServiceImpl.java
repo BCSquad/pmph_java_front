@@ -48,16 +48,19 @@ public class ExpertationListAuditServiceImpl implements ExpertationListAuditServ
 			throw new CheckedServiceException(CheckedExceptionBusiness.USER_MANAGEMENT,
 					CheckedExceptionResult.NULL_PARAM, "机构id不能为空");
 		}
+
+
         Map<String, Object> paraMap = new HashMap<String, Object>();
-        paraMap.put("start", pageParameter.getStart());
+        paraMap.put("start", pageParameter.getParameter().get("starta"));
         paraMap.put("pageSize", pageParameter.getPageSize());
         paraMap.put("queryName", pageParameter.getParameter().get("queryName"));
-		paraMap.put("productId", pageParameter.getParameter().get("product_id"));
-		paraMap.put("onlineProgress", pageParameter.getParameter().get("online_progress"));
+		paraMap.put("expertType", pageParameter.getParameter().get("expertType"));
+		paraMap.put("xxsh", pageParameter.getParameter().get("xxsh"));
         paraMap.put("orgId", pageParameter.getParameter().get("orgId"));
 		int total = expertationListAuditDao.getOrgTotal(paraMap);
 		PageResult<Map<String, Object>> pageResult = new PageResult<Map<String, Object>>();
 		if (total > 0) {
+			PageParameterUitl.CopyPageParameter(pageParameter, pageResult);
 			List<Map<String, Object>> rows = expertationListAuditDao.getOrg(paraMap);
 			pageResult.setRows(rows);
 		}
