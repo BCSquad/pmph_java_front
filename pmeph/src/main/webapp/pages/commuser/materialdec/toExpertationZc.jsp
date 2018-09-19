@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%String path = request.getContextPath();%>
@@ -623,10 +623,10 @@
                                     <table class="radio_tb" style="width: 140px;">
                                         <tr>
                                             <td><input type="radio" name="is_self_paid_${status.count}"
-                                                       value="0" ${list.is_self_paid=='0'?'checked':'' }/>自费
+                                                       value="0" ${list.is_self_paid=='0'?'checked':'' }/>公费
                                             </td>
                                             <td><input type="radio" name="is_self_paid_${status.count}"
-                                                       value="1"  ${list.is_self_paid=='1'?'checked':'' }/>公费
+                                                       value="1"  ${list.is_self_paid=='1'?'checked':'' }/>自费
                                             </td>
                                         </tr>
                                     </table>
