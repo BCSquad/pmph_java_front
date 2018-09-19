@@ -1389,10 +1389,10 @@
                                     <table class="radio_tb" style="width: 140px;">
                                         <tr>
                                             <td><input type="radio" name="is_self_paid_${status.count}"
-                                                       value="0" ${list.is_self_paid=='0'?'checked':'' }/>自费
+                                                       value="0" ${list.is_self_paid=='0'?'checked':'' }/>公费
                                             </td>
                                             <td><input type="radio" name="is_self_paid_${status.count}"
-                                                       value="1"  ${list.is_self_paid=='1'?'checked':'' }/>公费
+                                                       value="1"  ${list.is_self_paid=='1'?'checked':'' }/>自费
                                             </td>
                                         </tr>
                                     </table>
