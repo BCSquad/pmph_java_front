@@ -1035,8 +1035,8 @@
 								<td><input class="cg_input" name="zb_monograph_date" id="zb_monograph_date_${status.count}" value="${list.monograph_date}" style="width: 120px;" calendar format="'yyyy-mm-dd'" placeholder="出版时间"/></td>
 								<td style="color: #333333;">
 									<table class="radio_tb" style="width: 140px;"><tr>
-										<td><input type="radio" name="is_self_paid_${status.count}" value="0" ${list.is_self_paid=='0'?'checked':'' }/>自费</td>
-										<td><input type="radio" name="is_self_paid_${status.count}" value="1"  ${list.is_self_paid=='1'?'checked':'' }/>公费</td>
+										<td><input type="radio" name="is_self_paid_${status.count}" value="0" ${list.is_self_paid=='0'?'checked':'' }/>公费</td>
+										<td><input type="radio" name="is_self_paid_${status.count}" value="1"  ${list.is_self_paid=='1'?'checked':'' }/>自费</td>
 									</tr></table>
 									<input type="hidden" name="is_self_paid" value="is_self_paid_${status.count}" />
 								</td>
