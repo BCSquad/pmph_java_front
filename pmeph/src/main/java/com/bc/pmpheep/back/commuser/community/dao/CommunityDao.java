@@ -35,7 +35,7 @@ public interface CommunityDao {
      * @param id  教材id
      * @return
      */
-    List<Map<String,Object>> queryTextBookList(@Param("materialId") Long id );
+    List<Map<String,Object>> queryTextBookList(@Param("materialId") Long id,@Param("start")int start,@Param("pageSize")int pageSize );
     /**查询社区主页精选书评
      * @param map
      * @return  List<Map<String,Object>>
@@ -70,4 +70,6 @@ public interface CommunityDao {
      * @return
      */
     void changeClicks(Map<String,Object> map);
+
+    int countTextBookList(Long material_id);
 }

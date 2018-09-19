@@ -49,18 +49,24 @@ public class ExpertationListAuditController extends com.bc.pmpheep.general.contr
         if (null == pageSize) {
             pageSize = 10;
         }
+        if (null == pageNumber) {
+            pageNumber = 1;
+        }
+
         PageParameter<Map<String, Object>> pageParameter = new PageParameter<Map<String, Object>>(pageNumber, pageSize);
         String username = request.getParameter("username");
-        String product_id = request.getParameter("product_id");
-        String online_progress = request.getParameter("online_progress");
+        String expertType = request.getParameter("expertType");
+        String xxsh = request.getParameter("xxsh");
         String name="";
         if (username != null) {
             name = java.net.URLDecoder.decode(username, "UTF-8");
         }
         Map<String, Object> paraMap = new HashMap<String, Object>();
+        int starta = (pageNumber - 1) * pageSize;
+        paraMap.put("starta", starta);
         paraMap.put("queryName", name);
-        paraMap.put("product_id", product_id);
-        paraMap.put("online_progress", online_progress);
+        paraMap.put("expertType", expertType);
+        paraMap.put("xxsh", xxsh);
 
 
         //获取当前用户
@@ -73,15 +79,13 @@ public class ExpertationListAuditController extends com.bc.pmpheep.general.contr
             PageResult<Map<String, Object>> page = expertationListAuditService.getOrg(pageParameter);
             model.setViewName(pageUrl);
             model.addObject("page", page);
-            if (null == pageNumber) {
-                pageNumber = 1;
-            }
+
             model.addObject("pageNumber", pageNumber);
             model.addObject("pageSize", pageSize);
             model.addObject("username", name);
-            model.addObject("product_id", product_id);
-            model.addObject("online_progress", online_progress);
-            model.addObject("productIdList", expertationListAuditService.productIdList());
+            model.addObject("expertType", expertType);
+            model.addObject("xxsh", xxsh);
+           /* model.addObject("productIdList", expertationListAuditService.productIdList());*/
         } catch (CheckedServiceException e) {
             throw new CheckedServiceException(e.getBusiness(), e.getResult(), e.getMessage(),
                     pageUrl);

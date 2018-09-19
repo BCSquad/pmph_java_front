@@ -307,6 +307,24 @@ public class PersonalCenterController extends BaseController {
 			/* mv.addObject("List_map",List_map); */// 测试
 			mv.addObject("html", html);
 			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
+		}else if("lcjc".equals(pagetag)){//临床决策专家申报
+			// 从request中取出查询条件，封装到pageParameter用于查询，传回到modelAndView,放入模版空间
+			// 设定条件名数组
+			String[] names = { "tag_num","online_progress","finalResult","pmphAudit"};
+			String[] namesChi = {"search"};
+			queryConditionOperation(names, namesChi, request, mv, paraMap, vm_map);
+			pageParameter.setParameter(paraMap);
+			List<Map<String, Object>> List_map = personalService.queryLcjcVer2(pageParameter);
+			for (Map<String, Object> map:List_map) {
+				map.put("longinUserId",logUserId);
+			}
+			count=personalService.queryCountLcjcVer2(pageParameter);
+			//count=List_map.size();
+			// 分页数据代码块
+			String html = this.mergeToHtml("commuser/personalcenter/clinicalVer2.vm", contextpath, pageParameter,
+					List_map, vm_map);
+			mv.addObject("html", html);
+			mv.setViewName("commuser/personalcenter/PersonalHomeWYCS");
 		}else {
 
 		}

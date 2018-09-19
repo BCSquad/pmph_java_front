@@ -11,7 +11,7 @@
 	<title>我要出书-申报</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
-	<link rel="stylesheet" href="${ctx 	}/statics/commuser/bookdeclare/bookdeclareadd.css?t=${_timestamp}" type="text/css">
+	<link rel="stylesheet" href="${ctx}/statics/commuser/bookdeclare/bookdeclareadd.css?t=${_timestamp}" type="text/css">
 	<link rel="stylesheet" href="${ctx}/statics/css/jquery.calendar.css?t=${_timestamp}" type="text/css">
 	<link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}" type="text/css">
 	<link rel="stylesheet" href="${ctx}/statics/css/jquery.tipso.css?t=${_timestamp}" type="text/css">
@@ -29,7 +29,7 @@
 <div class="body">
 	<div class="content-wrapper">
 		<div class="sbxq_title">
-			<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> > <a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=wycs&pageNum=1&pageSize=10">我要出书</a> > 填写选题申报表</span>
+			<span><a style="text-decoration: none;color: #999999;" href="${ctx}/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> > <a style="text-decoration: none;color: #999999;" href="${ctx}/personalhomepage/tohomepage.action?pagetag=wycs&pageNum=1&pageSize=10">我要出书</a> > 填写选题申报表</span>
 		</div>
 		<form id="objForm">
 			<!-- 图书书稿情况-->

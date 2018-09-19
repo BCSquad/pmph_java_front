@@ -82,7 +82,19 @@
                 <value>/message/applyMessageList* -> 1</value><!--查询申请列表 -->
                 <value>/userinfo/touser.action -> 1</value>
                 <value>/userinfo/comchangepwd.action -> 1</value>
-
+                
+                <value>/expertation/toExpertationAdd.action* -> 1</value> <!-- 临床申报 去新增界面 -->
+                <value>/expertation/doExpertationAdd.action* -> 1</value>  <!-- 临床申报 保存 -->
+                <value>/expertation/toExpertationZc.action* -> 1</value> <!-- 临床申报 去暂存界面 -->
+                <value>/expertation/querySubject.action* -> 1</value> <!-- 临床申报 查学科分类 -->
+                <value>/expertation/queryContent.action* -> 1</value> <!-- 临床申报 查内容分类 -->
+                <value>/expertation/toSearchZy.action* -> 1</value> <!-- 临床申报 查专业分类 -->
+                <value>/expertation/declare.action* -> 1</value> <!-- 临床申报 跳转到个人申报列表页面 -->
+                <value>/expertation/lookforward.action* -> 1</value>  <!-- 临床申报 重定向方法 -->
+                <value>/expertation/toPersondetail.action* -> 1</value> <!-- 临床申报 个人中心跳转链接 -->
+                <value>/expertation/toSearchOrg.action* -> 1</value> <!-- 临床申报 选择申报学校 -->
+                
+                
 
                 <!--机构用户-->
                 <value>/user/* -> 2</value><!--用户管理（机构用户） -->
@@ -99,6 +111,7 @@
                 <value>/admininfocontroller/* -> 2</value>
                 <value>/userinfo/toNoAccessToAuthority* -> 2</value>
                 <value>/admininfocontroller/tochangepwd.action -> 2</value>
+				<value>/expertation/doExpertationAuditPass.action* -> 2</value> <!-- 临床申报 机构审核 -->
 
             </set>
         </property>

@@ -556,8 +556,8 @@ public class ExpertationServiceImpl implements ExpertationService {
     }
 
     @Override
-    public Map<String, Object> queryExpertationDetail(String user_id, String expert_type) {
-        return exdao.queryExpertationDetail(user_id,expert_type);
+    public Map<String, Object> queryExpertationDetail(String user_id, String product_id) {
+        return exdao.queryExpertationDetail(user_id,product_id);
     }
 
     @Override
@@ -617,8 +617,8 @@ public class ExpertationServiceImpl implements ExpertationService {
     }
 
     @Override
-    public Map<String, Object> queryProduct(String expert_type) {
-        return this.exdao.queryProduct(expert_type);
+    public Map<String, Object> queryProduct(String product_id) {
+        return this.exdao.queryProduct(product_id);
     }
 
 	@Override
@@ -640,13 +640,13 @@ public class ExpertationServiceImpl implements ExpertationService {
 		
 		//TODO 待状态确认后再开放 与后台 一起发送消息
 		
-		/*dataAuditService.senNewMsgPass(MapUtils.getLong(paramMap,"expertation_id")
+		dataAuditService.senNewMsgPass(MapUtils.getLong(paramMap,"expertation_id")
 				,MapUtils.getLong(paramMap,"auth_user_id")
 				, new Short("3")
 				, MapUtils.getLong(paramMap,"writer_id")
 				, new Short("2")
 				, "系统消息"
-				, msgContent);*/
+				, msgContent);
 
 		return count;
 	}
@@ -677,5 +677,24 @@ public class ExpertationServiceImpl implements ExpertationService {
         pageResult.setTotal(count);
         return pageResult;
     }
+
+	@Override
+	public Map<String, Object> queryProductbyId(String id,String expert_type) {
+		Map<String, Object> productMap = new HashMap<String, Object>();
+		if(id==null||id.length()<1){
+			productMap = exdao.queryActiveProductbyType(expert_type);
+		}else{
+			productMap = exdao.queryProductbyId(id);
+		}
+		
+		return productMap;
+	}
+
+	@Override
+	public List<Map<String, Object>> queryProductByIdOrType(Map<String, Object> paraMap) {
+		List<Map<String, Object>> result = exdao.queryProductWithAttachmentByIdOrType(paraMap);
+		
+		return result;
+	}
 
 }

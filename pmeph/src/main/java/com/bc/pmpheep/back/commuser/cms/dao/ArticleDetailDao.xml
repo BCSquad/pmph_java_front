@@ -125,24 +125,16 @@
 	<!-- 评论返回 -->
 	<select id="queryComment" parameterType="java.util.Map"
 		resultType="java.util.Map">
-		select
-		t.id,
-		t.mid,
-		c.realname,
-		c.nickname,
-		c.avatar,
-		t.gmt_create,
-		<!-- t.score, -->
-		c.avatar
+		<![CDATA[
+		select t.id, t.mid, c.realname,
+		case when (c.nickname is not null && c.nickname !='') then c.nickname else c.username end as nickname,
+		c.avatar, t.gmt_create, c.avatar, c.username
 		from cms_content t
-		left join cms_category b on
-		t.category_id=b.id
-		left join writer_user c
-		on t.author_id=c.id
-		where
-		t.parent_id =#{parameter.id}
-		and t.is_deleted=0
-		AND t.category_id = 0 and
+		left join cms_category b on t.category_id=b.id
+		left join writer_user c on t.author_id=c.id
+		 ]]>
+		where t.parent_id =#{parameter.id}
+		and t.is_deleted=0 and t.category_id = 0 and
 		t.auth_status='2' and t.is_published=1
 		order by
 		t.gmt_create desc limit

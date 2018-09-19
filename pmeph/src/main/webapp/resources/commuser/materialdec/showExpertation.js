@@ -1,5 +1,9 @@
 $(function () {
-	var id = $("#expert_type").val();
+
+
+
+
+	var id = $("#product_id").val();
 	queryMaterialMap(id);  //执行查询方法
 
 	var state=$("#printout").val();
@@ -25,13 +29,14 @@ $(function () {
 });
 
 //页面组合方法
-function queryMaterialMap(expert_type){
+function queryMaterialMap(id){
 	$.ajax({
 		type: "POST",
 		url:contextpath+'expertation/queryMaterialMap.action',
-		data:{expert_type:expert_type},// 您的formid
+		data:{product_id:id},// 您的formid
 		dataType:"json",
 	    success: function(json) {
+	    	$("#product_name").html(json.product_name);
 	    	chooseModel(json);
 	    }
 	});
@@ -176,11 +181,11 @@ function upload(){
         },
         done: function (filename, fileid) {
             $("#fileNameDiv").empty(); //清楚内容
-            $("#fileNameDiv").append("<span><div class=\"filename whetherfile\"><a href='javascript:' class='filename'  onclick='downLoadProxy(\""+fileid+"\")' title=\""+filename+"\">"+filename+"</a></div></span>");
+            $("#fileNameDiv").append("<span><div><a onclick='downLoadProxy(\""+fileid+"\")' title=\""+filename+"\">"+filename+"</a></div></span>");
             $("#fileNameDiv").css("display","inline");
             $("#syllabus_id").val(fileid);
             $("#syllabus_name").val(filename);
-            toAudit($("#expertation_id").val(),null,"doNotReLocate");
+            toAudit($("#expertation_id").val(),'3',false);
             console.log("上传完成：name " + filename + " fileid " + fileid);
             
         },
@@ -202,12 +207,15 @@ function buttGive(){
 
 //打印按钮
 function toprint(eid) {
+
     $("#return_cause_div").css("display","none");
     $("#tujian00").html($("#unit_advise_online").val());
+    $("#tnone").css("display","block");
     $("#ddd").jqprint({
     	  //debug: true, 
           importCSS: true ,
     });
+    $("#tnone").css("display","none");
 //打印状态
     $.ajax({
         type: 'post',
@@ -223,7 +231,7 @@ function toprint(eid) {
 
 
 //提交   通过3 
-function toAudit(id,type,doLocation){
+function toAudit(id,type,flag){
 	var user_id=$("#user_id").val();
     var syllabus_id=$("#syllabus_id").val();
     var syllabus_name=$("#syllabus_name").val();
@@ -237,7 +245,6 @@ function toAudit(id,type,doLocation){
 		    success: function(msg) {
 			    if(msg.msg=='OK'){
 			    	 message.success("成功！");
-			    	 
 			    	 if(type=='3'){/*
                     	var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
                     	$.ajax({
@@ -260,9 +267,8 @@ function toAudit(id,type,doLocation){
                             });
                          //toMain();
 			    	 */
-			    		 
 			    	 }
-			    	 if(!doLocation){
+			    	 if(flag){
 			    		 window.location.href = contextpath+"schedule/scheduleList.action";
 			    	 }
 			    }else{
@@ -336,15 +342,16 @@ function correction() {
 function toAuditPass(id,type) {
    var sid= $("#syllabus_id").val();
 	if (sid==null||sid=="") {
-        var msg ='<font color="red" >单位所在意见为空</font>&nbsp;【确认】进行审核,【取消】可继续上传!';
+        var msg ='<font color="red" >申报表扫描件为空</font>&nbsp;【确认】进行审核,【取消】可继续上传!';
         window.message.confirm(msg,{icon: 7, title:'提示',btn:["确定","取消"]}
             ,function(index){
                 layer.close(index);
-                toAudit(id,type);
+                toAudit(id,type,true);
+
             }
         );
 	}else{
-        toAudit(id,type);
+        toAudit(id,type,true);
 	}
 }
 
@@ -371,3 +378,11 @@ function LengthLimit(obj,ml){
 	}
 }
 
+function changeColor(){
+
+   // $(this).css("backgroundColor","black");
+    //$("#shtg").css({'background-color': 'gray'});
+    $(".audit.pass").css({'background-color': 'gray'});
+
+
+}

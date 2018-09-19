@@ -61,7 +61,12 @@
             </c:forEach>
         </div>
     </div>
-    <div class="join" onclick="tojoin(${state})">报名参加</div>
+    
+    <c:if test="${is_new == 1 }">
+		<div class="join" onclick="tojoin(${product_id})">报名参加</div>
+	</c:if>
+    
+    
         <div style="clear: both"></div>
 </div>
 </div>
@@ -121,8 +126,8 @@
     }
 </style>
 <script>
-    function tojoin(state) {
-        location.href = contextpath + 'expertation/lookforward.action?expert_type='+state;
+    function tojoin(product_id) {
+        location.href = contextpath + 'expertation/lookforward.action?product_id='+product_id;
     }
 </script>
 </html>

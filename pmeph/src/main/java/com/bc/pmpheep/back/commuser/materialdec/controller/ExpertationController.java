@@ -66,16 +66,16 @@ public class ExpertationController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("toExpertationAdd")
-	public ModelAndView toMaterialAdd(HttpServletRequest request,String... arrMaterial_id){
+	public ModelAndView toMaterialAdd(HttpServletRequest request,String... arrProduct_id){
 		ModelAndView mav = new ModelAndView("commuser/materialdec/toExpertationAdd");
 
 		//获取参数
-		String expert_type = request.getParameter("expert_type");
-		if(arrMaterial_id !=null && arrMaterial_id.length>0){
-			expert_type = arrMaterial_id[0];
+		String product_id = request.getParameter("product_id");
+		if(arrProduct_id !=null && arrProduct_id.length>0){
+			product_id = arrProduct_id[0];
 		}
 		Map<String,Object> productMap = new HashMap<String,Object>();
-		productMap = this.etService.queryProduct(expert_type);
+		productMap = this.etService.queryProduct(product_id);
 
 		//3.作家学习经历表
 		List<Map<String,Object>> perstuList = new ArrayList<Map<String,Object>>();
@@ -141,6 +141,7 @@ public class ExpertationController extends BaseController{
 		mav.addObject("pereditorList",pereditorList);
 		mav.addObject("wzfbqkList",wzfbqkList);
 		mav.addObject("bzyhjqkList",bzyhjqkList);
+		mav.addObject("product_id",product_id);
 		return mav;
 	}
 	
@@ -154,9 +155,10 @@ public class ExpertationController extends BaseController{
 	public Map<String,Object> queryMaterialMap(HttpServletRequest request){
 		//教材信息
 		String expert_type = request.getParameter("expert_type");
-		Map<String,Object> materialMap = new HashMap<String,Object>();
-		materialMap = this.etService.queryMaterialbyId(expert_type);
-		return materialMap;
+		String id = request.getParameter("product_id");
+		Map<String,Object> productMap = new HashMap<String,Object>();
+		productMap = this.etService.queryProductbyId(id,expert_type);
+		return productMap;
 	}
 	
 	/**
@@ -176,10 +178,11 @@ public class ExpertationController extends BaseController{
 		String user_id = request.getParameter("user_id"); //系统用户(暂存人)
 		String type = request.getParameter("type"); //类型
 		String sjump = request.getParameter("sjump"); //页面来源
+		String product_id = request.getParameter("product_id"); //页面来源
 
 		Map<String,Object> productMap =  new HashMap<String,Object>();
 		//查看灵床信息
-		productMap = this.etService.queryProduct(expert_type);
+		productMap = this.etService.queryProduct(product_id);
 		//求出信息集合
 		//1.作家申报表
 		Map<String,Object> perMap = new HashMap<String,Object>();
@@ -249,7 +252,7 @@ public class ExpertationController extends BaseController{
 		perMap.put("idcard", request.getParameter("idcard"));
 		perMap.put("degree", "".equals(request.getParameter("degree")) ? null:request.getParameter("degree"));
 		perMap.put("rank","2");
-		perMap.put("education", request.getParameter("education"));
+		perMap.put("education","".equals(request.getParameter("education")) ? null:request.getParameter("education"));
 		perMap.put("expertise", request.getParameter("expertise"));
 		perMap.put("gmt_create", date);
 		perMap.put("banknumber", "".equals(request.getParameter("banknumber")) ? null:request.getParameter("banknumber"));
@@ -257,6 +260,7 @@ public class ExpertationController extends BaseController{
 		perMap.put("remark", request.getParameter("remark"));
 		perMap.put("unit_advise", request.getParameter("syllabus_id"));
 		perMap.put("syllabus_name", request.getParameter("syllabus_name"));
+		perMap.put("remark", request.getParameter("remark"));
 		String s=request.getParameter("sbdw_id");
 		perMap.put("org_id","".equals(request.getParameter("sbdw_id")) ? null:request.getParameter("sbdw_id"));
 
@@ -527,7 +531,7 @@ public class ExpertationController extends BaseController{
 		List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
 		gezlList = this.etService.queryPerson(queryMap);
 		Map<String,Object> productMap =  new HashMap<String,Object>();
-		productMap = this.etService.queryProduct(gezlList.get(0).get("expert_type").toString());
+		productMap = this.etService.queryProduct(gezlList.get(0).get("product_id").toString());
 		Boolean isSelfLog = false;
 		if (logUser.get("id").toString().equals(gezlList.get(0).get("user_id").toString())) {
 			isSelfLog = true;
@@ -720,7 +724,7 @@ public class ExpertationController extends BaseController{
 				HttpServletResponse response){
 		ModelAndView mav = new ModelAndView("commuser/materialdec/toSubjectList");
 		//机构信息
-		String product_id = request.getParameter("product_id");
+		String product_type = request.getParameter("product_type");
 		String  currentPageStr = (String) request.getParameter("currentPage");
 		String  pageSizeStr = request.getParameter("pageSize");
 		String  typename = request.getParameter("typename");
@@ -738,7 +742,7 @@ public class ExpertationController extends BaseController{
 		}
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<>(currentPage,pageSize);
 
-		paraMap.put("product_id", product_id);
+		paraMap.put("product_type", product_type);
 		paraMap.put("chooseId", chooseId);
 		paraMap.put("endPage", pageSize);
 		paraMap.put("currentPage", currentPage);
@@ -767,7 +771,7 @@ public class ExpertationController extends BaseController{
 				HttpServletResponse response){
 		ModelAndView mav = new ModelAndView("commuser/materialdec/toContentList");
 		//机构信息
-		String product_id = request.getParameter("product_id");
+		String product_type = request.getParameter("product_type");
 		String  currentPageStr = (String) request.getParameter("currentPage");
 		String  pageSizeStr = request.getParameter("pageSize");
 		String  namepath = request.getParameter("namepath");
@@ -785,7 +789,7 @@ public class ExpertationController extends BaseController{
 		}
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<>(currentPage,pageSize);
 
-		paraMap.put("product_id", product_id);
+		paraMap.put("product_type", product_type);
 		paraMap.put("endPage", pageSize);
 		paraMap.put("currentPage", currentPage);
 		paraMap.put("chooseId", chooseId);
@@ -812,7 +816,7 @@ public class ExpertationController extends BaseController{
 								   HttpServletResponse response){
 		ModelAndView mav = new ModelAndView("commuser/materialdec/toSbzyList");
 		//机构信息
-		String  product_id = request.getParameter("product_id");
+		String  product_type = request.getParameter("product_type");
 		String  currentPageStr = (String) request.getParameter("currentPage");
 		String  pageSizeStr = request.getParameter("pageSize");
 		String  namepath = request.getParameter("namepath");
@@ -830,7 +834,7 @@ public class ExpertationController extends BaseController{
 		}
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<>(currentPage,pageSize);
 
-		paraMap.put("product_id", product_id);
+		paraMap.put("product_type", product_type);
 		paraMap.put("endPage", pageSize);
 		paraMap.put("currentPage", currentPage);
 		paraMap.put("chooseId", chooseId);
@@ -867,11 +871,11 @@ public class ExpertationController extends BaseController{
 	@RequestMapping("lookforward")
 	public ModelAndView lookforward(HttpServletRequest request){
             ModelAndView modelAndView=new ModelAndView();
-            String expert_type=request.getParameter("expert_type");
+            String product_id=request.getParameter("product_id");
             Map<String, Object> user=getUserInfo();
-            Map<String, Object> map=etService.queryExpertationDetail(user.get("id").toString(),expert_type);
+            Map<String, Object> map=etService.queryExpertationDetail(user.get("id").toString(),product_id);
             if(map==null){
-                modelAndView=this.toMaterialAdd(request,expert_type);
+                modelAndView=this.toMaterialAdd(request,product_id);
             }else if(map.get("online_progress").toString().equals("0")  //未提交
             		||map.get("online_progress").toString().equals("2") //被申报单位退回
             		||map.get("online_progress").toString().equals("5") //被出版社退回
@@ -886,6 +890,23 @@ public class ExpertationController extends BaseController{
                 modelAndView=this.showMaterial(request,map.get("id").toString());
             }
             return modelAndView;
+	}
+
+	//个人中心跳转链接
+	@RequestMapping("toPersondetail")
+	@ResponseBody
+	public String toPersondetail(HttpServletRequest request){
+		ModelAndView modelAndView=new ModelAndView();
+		String product_id=request.getParameter("product_id");
+		Map<String, Object> user=getUserInfo();
+		Map<String, Object> map=etService.queryExpertationDetail(user.get("id").toString(),product_id);
+		String returncode="";
+		if(map==null){
+			returncode="no";
+		}else{
+			returncode="yes";
+		}
+		return returncode;
 	}
 	
 	
@@ -978,6 +999,53 @@ public class ExpertationController extends BaseController{
 		mav.addObject("paraMap", paraMap);
 		return mav;
 	}
+	
+	/**
+	 * 通过id或类型进入临床申报产品详情界面 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("toproductdetail")
+    public ModelAndView toproductdetail(HttpServletRequest request){
+        ModelAndView modelAndView=new ModelAndView();
+        String product_type=request.getParameter("product_type");
+        String product_id=request.getParameter("product_id");
+        Map<String,Object> paraMap = new HashMap<String,Object>();
+        paraMap.put("product_type", product_type);
+        paraMap.put("product_id", product_id);
+        
+        List<Map<String,Object>> list=etService.queryProductByIdOrType(paraMap);
+        
+        
+        
+        //取出申报通知扫描图片
+        List<Map<String,Object>> list_scanimg=new ArrayList<>();
+        List<Map<String,Object>> list_unscanimg=new ArrayList<>();
+        for (int i=0;i<list.size();i++){
+            //s1=true代表是扫描图片。false代表是附件
+            Boolean s1=Boolean.valueOf(list.get(i).get("is_scan_img").toString());
+            if(s1){
+                Map<String,Object> map=new HashMap();
+                map.put("attachment","image/" + list.get(i).get("attachment") + ".action");
+                list_scanimg.add(map);
+            }else{
+                Map<String,Object> map=new HashMap();
+                map.put("attachment","file/download/" + list.get(i).get("attachment") + ".action");
+                map.put("attachment_name",list.get(i).get("attachment_name").toString());
+                list_unscanimg.add(map);
+            }
+        }
+        modelAndView.addObject("list_scanimg",list_scanimg);
+        modelAndView.addObject("list_unscanimg",list_unscanimg);
+        modelAndView.addObject("note_detail",list.get(0).get("note_detail"));
+        modelAndView.addObject("description",list.get(0).get("description_detail"));
+        modelAndView.addObject("product_name",list.get(0).get("product_name"));
+        modelAndView.addObject("product_id",list.get(0).get("product_id"));
+        modelAndView.addObject("is_new",list.get(0).get("is_new"));
+        
+        modelAndView.setViewName("commuser/cms/declaredatail");
+        return modelAndView;
+    }
 
 
 

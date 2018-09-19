@@ -66,10 +66,10 @@ public interface ExpertationDao {
 	/**
 	 * 根据用户ID和类型查询申请信息
 	 * @param user_id 用户ID
-	 * @param expert_type 申请类型
+	 * @param product_id 公告主键
 	 * @return
 	 */
-	Map<String,Object> queryExpertationDetail(@Param("user_id") String user_id,@Param("expert_type") String expert_type);
+	Map<String,Object> queryExpertationDetail(@Param("user_id") String user_id,@Param("product_id") String product_id);
     //文章发表情况
 	public List<Map<String,Object>> queryWzfbqk(Map<String, Object> map);
 	public int insertWzfbqk(Map<String, Object> map);
@@ -118,7 +118,7 @@ public interface ExpertationDao {
 	public int DelMonograph(Map<String, Object> map);
 
 	//查看临床信息
-	public Map<String,Object> queryProduct(String product_type);
+	public Map<String,Object> queryProduct(String product_id);
 
 	public List<Map<String,Object>> queryZjkzxxById(String material_id);
 
@@ -137,9 +137,24 @@ public interface ExpertationDao {
 	public int queryOrgCount(PageParameter<Map<String, Object>> pageParameter);
 
 	/**
-	 * 
+	 * 根据id查询
 	 * @param string
 	 * @return
 	 */
 	public Map<String, Object> queryExpertationById(String expertation_id);
+
+	/**
+	 * 查询某分类的首页生效临床申报 产品   
+	 * @param expert_type
+	 * @return
+	 */
+	public Map<String, Object> queryActiveProductbyType(String expert_type);
+
+	/**
+	 * 根据id或分类查询产品 带出附件
+	 * @param paraMap
+	 * @return
+	 */
+	public List<Map<String, Object>> queryProductWithAttachmentByIdOrType(
+			Map<String, Object> paraMap);
 }

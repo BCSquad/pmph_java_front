@@ -41,13 +41,13 @@
 	<div class="content-wrapper">
 		<div style="color: red;font-size: 16px;margin-top: 28px;">（提示：为确保填写成功，请用360极速浏览器或谷歌浏览器）</div>
 		<div class="sbxq_title">
-			<span><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a style="text-decoration: none;color: #999999;" href="${contextpath}/medu/expertation/declare.action"> 临床决策专家申报 </a> > 填写申报表</span>
+			<span><a style="text-decoration: none;color: #999999;" href="${ctx}/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a style="text-decoration: none;color: #999999;" href="${ctx}/personalhomepage/tohomepage.action?pagetag=lcjc"> 临床决策专家申报 </a> > <span id="product_name"></span></span>
 		</div>
 		<div id="ifprint">
 		<!-- 图书选择-->
 		<form id="objForm">
 			<input type="hidden" id="expert_type" name="expert_type" value="${queryMap.expert_type}"/>
-			<input type="hidden" id="product_id" name="product_id" value="${queryMap.product_id}"/>
+			<input type="hidden" id="product_id" name="product_id" value="${product_id}"/>
 			<!-- 专家信息-->
 			<div class="sbxq_item1">
 				<div>
@@ -84,6 +84,9 @@
                                     <option value="副高" ${userMap.title=='副高'?'selected':'' }>副高</option>
                                     <option value="高级讲师" ${userMap.title=='高级讲师'?'selected':'' }>高级讲师</option>
                                     <option value="讲师" ${userMap.title=='讲师'?'selected':'' }>讲师</option>
+									<option value="主任药师" ${userMap.title=='主任药师'?'selected':'' }>主任药师</option>
+									<option value="副主任药师" ${userMap.title=='副主任药师'?'selected':'' }>副主任药师</option>
+									<option value="主管药师" ${userMap.title=='主管药师'?'selected':'' }>主管药师</option>
 									<option value="其他" ${userMap.title=='其他'?'selected':'' }>其他</option>
 								</select></td>
 							<td><span>&ensp;联系电话：</span>
@@ -113,6 +116,7 @@
 									<option value="0">专科</option>
 									<option value="1" selected="selected">本科</option>
 									<option value="2">硕士</option>
+									<option value="4">博士</option>
 									<option value="3">博士后</option>
 								</select></td>
 						</tr>
@@ -704,13 +708,27 @@
 					</div>
 				</div>
 			</c:forEach>
+
+
+			<!--备注-->
+			<div class="sbxq_item1" style="display: block">
+				<div>
+					<span id="tsxz_span9"></span>
+					<span class="tsxz_title">备注</span>
+					<span class="tsxz_xt" style="display: inline;">（选填）</span>
+				</div>
+				<div class="content">
+					<textarea class="text_cl" name="remark" placeholder="可填写您擅长的专业或者学科方向等相关内容......"></textarea>
+				</div>
+			</div>
+
             <!-- 学科分类-->
             <div class="sbxq_item1" id="xkfl_qy" >
                 <div>
 					<input type="hidden" id="xkflbt">
                     <span id="tsxz_span8"></span>
                     <span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" id="xkflbx"/>学科分类(可多选)</span>
-					<span class="el-button" onclick="javascript:SubjectdAdd('${queryMap.product_id}')">添加学科分类</span>
+					<span class="el-button" onclick="javascript:SubjectdAdd('${queryMap.expert_type}')">添加学科分类</span>
                 </div>
                 <div class="sbdw" id="xkfladd">
                     <span class="btmc">学科分类：</span>
@@ -722,7 +740,7 @@
 					<input type="hidden" id="nrflbt">
                     <span id="tsxz_span12"></span>
                     <span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" id="nrflbx"/>内容分类(可多选)</span>
-					<span class="el-button" onclick="javascript:ContentAdd('${queryMap.product_id}')">添加内容分类</span>
+					<span class="el-button" onclick="javascript:ContentAdd('${queryMap.expert_type}')">添加内容分类</span>
                 </div>
                 <div class="sbdw" id="nrfladd">
                     <span class="btmc">内容分类：</span>
@@ -735,10 +753,10 @@
 					<input type="hidden" id="sbzybt">
 					<span id="sbzytb"></span>
 					<span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" id="sbzybx" />申报专业(可多选)</span>
-					<span class="el-button" onclick="javascript:sbzyAdd('${queryMap.product_id}')">添加专业分类</span>
+					<span class="el-button" onclick="javascript:sbzyAdd('${queryMap.expert_type}')">添加专业分类</span>
 				</div>
 				<div class="sbdw" id="sbzyadd">
-					<span class="btmc">内容分类：</span>
+					<span class="btmc">申报专业：</span>
 				</div>
 			</div>
 			<%--<div class="sbxq_item" id="szdwyj">

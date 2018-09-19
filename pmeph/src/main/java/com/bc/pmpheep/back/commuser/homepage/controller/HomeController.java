@@ -366,8 +366,9 @@ public class HomeController extends BaseController{
         List<Map<String,Object>> list_scanimg=new ArrayList<>();
         List<Map<String,Object>> list_unscanimg=new ArrayList<>();
         for (int i=0;i<list.size();i++){
+            //s1=true代表是扫描图片。false代表是附件
             Boolean s1=Boolean.valueOf(list.get(i).get("is_scan_img").toString());
-            if(s1==true){
+            if(s1){
                 Map<String,Object> map=new HashMap();
                 map.put("attachment","image/" + list.get(i).get("attachment") + ".action");
                 list_scanimg.add(map);
@@ -382,6 +383,9 @@ public class HomeController extends BaseController{
         modelAndView.addObject("list_unscanimg",list_unscanimg);
         modelAndView.addObject("note_detail",list.get(0).get("note_detail"));
         modelAndView.addObject("description",list.get(0).get("description_detail"));
+        modelAndView.addObject("product_name",list.get(0).get("product_name"));
+        modelAndView.addObject("product_id",list.get(0).get("product_id"));
+        modelAndView.addObject("is_new",list.get(0).get("is_new"));
         modelAndView.addObject("state",state);
         modelAndView.setViewName("commuser/cms/declaredatail");
         return modelAndView;

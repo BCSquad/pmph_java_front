@@ -61,11 +61,6 @@ function addColum(list,startNum){
 		}
 					str +='<div  class="content" >';
 						str +='<div class="content-image">';
-						/*if (n.cover == '' || n.cover == 'DEFAULT' || n.cover == null) {
-							str +='<img src="'+contextpath+'statics/testfile/p2.png" />';
-			            } else {
-			            	str+='<img src="'+contextpath+'image/'+n.cover+'.action" />';
-			            }*/
 							str+='<img src="'+contextpath+''+n.cover+'" />';
 							str +='</div>';
 								str +='<p  class="content-title"  >'+n.title+'</p>';
@@ -78,15 +73,6 @@ function addColum(list,startNum){
 										str +='</div>';
 											str +='</div>';
 												str +='<div class="ryxx">';
-													/*str +='<div class="ryxx_foot">';
-														<img src="';
-            if (n.avatar == '' || n.avatar == 'DEFAULT' || n.avatar == null) {
-                str += contextpath + 'statics/image/default_image.png';
-            } else {
-            	str+=contextpath+'image/'+n.avatar+'.action';
-            }
-            str += '" class="ryxx_tx"/>';*/
-		
             	str +='<div class="ryxx_foot"><span class="ryxx_xm" style="cursor:pointer;" onclick="window.location.href='+contextpath+'personalhomepage/tohomepage.action?userId='+n.userId+'">文章来源：'+(n.author_name==null?n.realname:n.author_name)+'</span>';
             	str +='<span class="ryxx_sj">'+n.auth_date+'</span>';
             	str +='</div>';

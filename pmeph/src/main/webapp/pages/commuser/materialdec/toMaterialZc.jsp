@@ -33,9 +33,9 @@
         <div style="color: red;font-size: 16px;margin-top: 28px;">（提示：为确保填写成功，请用360极速浏览器或谷歌浏览器）</div>
         <div class="sbxq_title">
             <span><a style="text-decoration: none;color: #999999;"
-                     href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a
+                     href="${ctx}/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a
                     style="text-decoration: none;color: #999999;"
-                    href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=jcsb&pageNum=1&pageSize=10"> 教材申报 </a> > 修改申报表</span>
+                    href="${ctx}/personalhomepage/tohomepage.action?pagetag=jcsb&pageNum=1&pageSize=10"> 教材申报 </a> > 修改申报表</span>
         </div>
         <!-- 图书选择-->
         <form id="objForm">
@@ -229,6 +229,9 @@
                                     <option value="副高" ${gezlList.title=='副高'?'selected':'' }>副高</option>
                                     <option value="高级讲师" ${gezlList.title=='高级讲师'?'selected':'' }>高级讲师</option>
                                     <option value="讲师" ${gezlList.title=='讲师'?'selected':'' }>讲师</option>
+                                    <option value="主任药师" ${userMap.title=='主任药师'?'selected':'' }>主任药师</option>
+                                    <option value="副主任药师" ${userMap.title=='副主任药师'?'selected':'' }>副主任药师</option>
+                                    <option value="主管药师" ${userMap.title=='主管药师'?'selected':'' }>主管药师</option>
                                     <option value="其他" ${gezlList.title=='其他'?'selected':'' }>其他</option>
                                 </select>
                             </td>

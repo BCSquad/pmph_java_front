@@ -41,13 +41,15 @@
         <div style="color: red;font-size: 16px;margin-top: 28px;">（提示：为确保填写成功，请用360极速浏览器或谷歌浏览器）</div>
         <div class="sbxq_title">
             <span><a style="text-decoration: none;color: #999999;"
-                     href="${contextpath}/medu/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a
+                     href="${ctx}/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a
                     style="text-decoration: none;color: #999999;"
-                    href="${contextpath}/medu/expertation/declare.action"> 临床决策专家申报 </a> > 修改申报表</span>
+                    href="${ctx}/personalhomepage/tohomepage.action?pagetag=lcjc
+"> 临床决策专家申报 </a> > <span id="product_name"></span></span>
         </div>
         <div id="ifprint">
         <form id="objForm">
-            <input type="hidden" id="material_id" name="material_id" value="${materialMap.product_id}"/>
+            <input type="hidden" id="material_id" name="material_id" value="${materialMap.expert_type}"/>
+            <input type="hidden" id="product_id" name="product_id" value="${gezlList.product_id}"/>
             <input type="hidden" id="expert_type" name="expert_type" value="${materialMap.expert_type}"/>
             <input type="hidden" id="expertation_id" name="expertation_id" value="${materialMap.declaration_id}"/>
             <!-- 专家信息-->
@@ -86,6 +88,9 @@
                                     <option value="副高" ${gezlList.title=='副高'?'selected':'' }>副高</option>
                                     <option value="高级讲师" ${gezlList.title=='高级讲师'?'selected':'' }>高级讲师</option>
                                     <option value="讲师" ${gezlList.title=='讲师'?'selected':'' }>讲师</option>
+                                    <option value="主任药师" ${gezlList.title=='主任药师'?'selected':'' }>主任药师</option>
+                                    <option value="副主任药师" ${gezlList.title=='副主任药师'?'selected':'' }>副主任药师</option>
+                                    <option value="主管药师" ${gezlList.title=='主管药师'?'selected':'' }>主管药师</option>
                                     <option value="其他" ${gezlList.title=='其他'?'selected':'' }>其他</option>
                                 </select></td>
                             <td><span>&ensp;联系电话：</span>
@@ -115,6 +120,7 @@
                                     <option value="0" ${gezlList.education=='0'?'selected':'' }>专科</option>
                                     <option value="1" ${gezlList.education=='1'?'selected':'' }>本科</option>
                                     <option value="2" ${gezlList.education=='2'?'selected':'' }>硕士</option>
+                                    <option value="2" ${gezlList.education=='4'?'selected':'' }>博士</option>
                                     <option value="3" ${gezlList.education=='3'?'selected':'' }>博士后</option>
                                 </select></td>
                         </tr>
@@ -655,6 +661,76 @@
                 </div>
             </div>
 
+            <!--主编或参编图书情况-->
+            <div class="sbxq_item" id="zbcbtsqk" wrapper_key="is_edit_book">
+                <div>
+                    <span id="tsxz_span6"></span>
+                    <span class="tsxz_title">主编或参编图书情况</span>
+                    <span class="tsxz_ts" id="zbcb_bt"><img src="${ctx}/statics/image/btxx.png"/></span>
+                    <span class="tsxz_xt" id="zbcb_xt">（选填）</span>
+                </div>
+                <div class="content">
+                    <table class="tab_2" id="tab_zbtsqk">
+                        <thead>
+                        <tr>
+                            <td width="350px">名称</td>
+                            <td width="330px">出版单位</td>
+                            <td width="160px">出版时间</td>
+                            <td>备注</td>
+                            <td width="78px">添加</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:if test="${empty editorList[0]}">
+                            <tr>
+                                <td><input class="cg_input" maxlength="100" style="width: 320px"
+                                           name="zbts_material_name" id="zbts_material_name" value="" style="width: 260px;"
+                                           placeholder="教材名称"/></td>
+                                <td><input class="cg_input" name="zbts_publisher" value=""  placeholder="出版单位"
+                                           style="width: 300px;" maxlength="20"/></td>
+                                <td><input class="cg_input" name="zbts_publish_date" id="zbts_publish_date" value=""
+                                           placeholder="出版时间" calendar format="'yyyy-mm-dd'" z-index="100"
+                                           style="width: 130px;"/></td>
+                                <td><input class="cg_input" maxlength="100" name="zbts_note" value=""
+                                           style="width: 240px;" placeholder="备注"/>
+                                    <input type="hidden" name="zbts_id" value=""></td>
+                                </td>
+                                <td><img class="add_img" src="${ctx}/statics/image/add.png"
+                                         onclick="javascript:add_zbtsqk()"/></td>
+                            </tr>
+                        </c:if>
+                        <c:forEach var="list" items="${editorList}" varStatus="status">
+                            <tr id="zbtsqk_${status.count}">
+                                <td><input class="cg_input" maxlength="100" style="width: 320px" name="zbts_material_name"
+                                           id="zbts_material_name_${status.count}" value="${list.material_name}"
+                                           style="width: 260px;" placeholder="教材名称"/></td>
+                                <td><input class="cg_input" name="zbts_publisher" value="${list.publisher}"  placeholder="出版单位"
+                                           style="width: 300px;" maxlength="20"/></td>
+                                <td><input class="cg_input" name="zbts_publish_date" id="zbts_publish_date_${status.count}"
+                                           value="${list.publish_date}" placeholder="出版时间" calendar
+                                           format="'yyyy-mm-dd'" z-index="100" style="width: 130px;"/></td>
+                                <td><input class="cg_input" maxlength="100" name="zbts_note" value="${list.note}"
+                                           style="width: 240px;" placeholder="备注"/>
+                                    <input type="hidden" name="zdjy" value="zbts_material_name_${status.count}"/>
+                                    <input type="hidden" name="zbts_id" value="${list.per_id}">
+                                </td>
+                                <td><c:choose>
+                                    <c:when test="${status.count == 1}">
+                                        <img class="add_img" src="${ctx}/statics/image/add.png"
+                                             onclick="javascript:add_zbtsqk()"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img class="add_img" src="${ctx}/statics/image/del.png"
+                                             onclick="javascript:del_tr('zbtsqk_${status.count}')"/>
+                                    </c:otherwise>
+                                </c:choose></td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <!--文章发表情况-->
             <div class="sbxq_item" id="wzfbqk" wrapper_key="is_article_published">
                 <div>
@@ -711,8 +787,6 @@
                 </div>
             </div>
 
-
-
             <!--本专业获奖情况-->
             <div class="sbxq_item" id="bzyhjqk" wrapper_key="is_profession_award">
                 <div>
@@ -763,78 +837,6 @@
                 </div>
             </div>
 
-
-
-
-            <!--主编或参编图书情况-->
-            <div class="sbxq_item" id="zbcbtsqk" wrapper_key="is_edit_book">
-                <div>
-                    <span id="tsxz_span6"></span>
-                    <span class="tsxz_title">主编或参编图书情况</span>
-                    <span class="tsxz_ts" id="zbcb_bt"><img src="${ctx}/statics/image/btxx.png"/></span>
-                    <span class="tsxz_xt" id="zbcb_xt">（选填）</span>
-                </div>
-                <div class="content">
-                    <table class="tab_2" id="tab_zbtsqk">
-                        <thead>
-                        <tr>
-                            <td width="350px">名称</td>
-                            <td width="330px">出版单位</td>
-                            <td width="160px">出版时间</td>
-                            <td>备注</td>
-                            <td width="78px">添加</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:if test="${empty editorList[0]}">
-                            <tr>
-                                <td><input class="cg_input" maxlength="100" style="width: 320px" 
-                                           name="zbts_material_name" id="zbts_material_name" value="" style="width: 260px;"
-                                           placeholder="教材名称"/></td>
-                                <td><input class="cg_input" name="zbts_publisher" value=""  placeholder="出版单位"
-                                           style="width: 300px;" maxlength="20"/></td>
-                                <td><input class="cg_input" name="zbts_publish_date" id="zbts_publish_date" value=""
-                                           placeholder="出版时间" calendar format="'yyyy-mm-dd'" z-index="100"
-                                           style="width: 130px;"/></td>
-                                <td><input class="cg_input" maxlength="100" name="zbts_note" value=""
-                                           style="width: 240px;" placeholder="备注"/>
-                                    <input type="hidden" name="zbts_id" value=""></td>
-                                </td>
-                                <td><img class="add_img" src="${ctx}/statics/image/add.png"
-                                         onclick="javascript:add_zbtsqk()"/></td>
-                            </tr>
-                        </c:if>
-                        <c:forEach var="list" items="${editorList}" varStatus="status">
-                            <tr id="zbtsqk_${status.count}">
-                                <td><input class="cg_input" maxlength="100" style="width: 320px" name="zbts_material_name"
-                                           id="zbts_material_name_${status.count}" value="${list.material_name}"
-                                           style="width: 260px;" placeholder="教材名称"/></td>
-                                <td><input class="cg_input" name="zbts_publisher" value="${list.publisher}"  placeholder="出版单位"
-                                           style="width: 300px;" maxlength="20"/></td>
-                                <td><input class="cg_input" name="zbts_publish_date" id="zbts_publish_date_${status.count}"
-                                           value="${list.publish_date}" placeholder="出版时间" calendar
-                                           format="'yyyy-mm-dd'" z-index="100" style="width: 130px;"/></td>
-                                <td><input class="cg_input" maxlength="100" name="zbts_note" value="${list.note}"
-                                           style="width: 240px;" placeholder="备注"/>
-                                    <input type="hidden" name="zdjy" value="zbts_material_name_${status.count}"/>
-                                    <input type="hidden" name="zbts_id" value="${list.per_id}">
-                                </td>
-                                <td><c:choose>
-                                    <c:when test="${status.count == 1}">
-                                        <img class="add_img" src="${ctx}/statics/image/add.png"
-                                             onclick="javascript:add_zbtsqk()"/>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <img class="add_img" src="${ctx}/statics/image/del.png"
-                                             onclick="javascript:del_tr('zbtsqk_${status.count}')"/>
-                                    </c:otherwise>
-                                </c:choose></td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
             <!--扩展信息-->
             <c:forEach var="zjkzxx" items="${zjkzqkList}" varStatus="status">
                 <div class="sbxq_item1">
@@ -860,13 +862,25 @@
                 </div>
             </c:forEach>
 
+            <!--备注-->
+            <div class="sbxq_item1" style="display: block">
+                <div>
+                    <span id="beizhu"></span>
+                    <span class="tsxz_title">备注</span>
+                    <span class="tsxz_xt" style="display: inline;">（选填）</span>
+                </div>
+                <div class="content">
+                    <textarea class="text_cl" name="remark" placeholder="可填写您擅长的专业或者学科方向等相关内容......">${gezlList.remark}</textarea>
+                </div>
+            </div>
+
             <!-- 学科分类-->
             <div class="sbxq_item1" id="xkfl_qy">
                 <div>
                     <input type="hidden" id="xkflbt">
                     <span id="tsxz_span8"></span>
                     <span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" id="xkflbx"/>学科分类(可多选)</span>
-                    <span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.product_id}')">添加学科分类</span>
+                    <span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.expert_type}')">添加学科分类</span>
                 </div>
                 <div class="sbdw" id="xkfladd">
                     <span class="btmc">学科分类：</span>
@@ -884,7 +898,7 @@
                     <input type="hidden" id="nrflbt">
                     <span id="tsxz_span12"></span>
                     <span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" id="nrflbx"/>内容分类(可多选)</span>
-                    <span class="el-button" onclick="javascript:ContentAdd('${materialMap.product_id}')">添加内容分类</span>
+                    <span class="el-button" onclick="javascript:ContentAdd('${materialMap.expert_type}')">添加内容分类</span>
                 </div>
                 <div class="sbdw" id="nrfladd">
                     <span class="btmc">内容分类：</span>
@@ -901,7 +915,7 @@
                     <input type="hidden" id="sbzybt">
                     <span id="sbzytb"></span>
                     <span class="tsxz_title"><img src="${ctx}/statics/image/btxx.png" id="sbzybx"/>申报专业(可多选)</span>
-                    <span class="el-button" onclick="javascript:sbzyAdd('${materialMap.product_id}')">添加申报专业</span>
+                    <span class="el-button" onclick="javascript:sbzyAdd('${materialMap.expert_type}')">添加申报专业</span>
                 </div>
                 <div class="sbdw" id="sbzyadd">
                     <span class="btmc">申报专业：</span>
