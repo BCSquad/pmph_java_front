@@ -379,7 +379,7 @@
 									<c:if test="${list.rank == '3'}">市</c:if>
 									<c:if test="${list.rank == '4'}">单位</c:if>
 								</td>--%>
-								<td>${list.rank}></td>
+								<td>${list.rank}</td>
 								<td>${list.note}</td>
 							</tr></c:forEach>
 						</tbody>
