@@ -303,14 +303,15 @@ $(function () {
 
     $(".search-icon").click(function () {
 
-        if (!input_open) {
-            $(".delete").css("display", "block");
-            $(".search-input").css("display", "block");
-            input_open = true;
-
-        } else {
-            search();
-        }
+        // if (!input_open) {
+        //     $(".delete").css("display", "block");
+        //     $(".search-input").css("display", "block");
+        //     input_open = true;
+        //
+        // } else {
+        //     search();
+        // }
+        search();
     });
 
     $(".search-input").bind('keydown', function (event) {
