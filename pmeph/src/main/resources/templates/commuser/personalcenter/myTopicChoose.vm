@@ -1,7 +1,11 @@
 
 <link rel="stylesheet" href="$!{contextpath}statics/commuser/personalcenter/booklist.css" type="text/css">
 <script src="${contextpath}resources/commuser/personalcenter/PersonalHomeWYCS.js"></script>
-
+<style>
+    .leftlb_1 {
+        text-align: left;
+    }
+</style>
 <input type="hidden" class="queryCondition" id="isMine" value="$!{isMine}">
 <input type="hidden" class="queryCondition" id="auth_progress" value="$!{auth_progress}">
 <input type="hidden" class="queryCondition" id="bookname" value="$!{bookname}">
