@@ -28,6 +28,12 @@
 	.ztree li span.button.chk.checkbox_false_part_focus{
 		background-position: 0 -14px !important;
 	}
+	.ztree li span.button.chk.checkbox_true_part {
+	    background-position: -14px 0px !important;
+	}
+	.ztree li span.button.chk.checkbox_true_part_focus {
+	    background-position: -14px -14px !important;
+	}
   </style>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <title></title>
