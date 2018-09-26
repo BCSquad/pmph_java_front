@@ -903,8 +903,8 @@
                 <div class="sbdw" id="nrfladd">
                     <span class="btmc">内容分类：</span>
                     <c:forEach var="content" items="${contentList}" varStatus="status">
-                    <span class="el-tag" id="nrfl_${status.count}">${content.name_path}<input name="contentId" type="hidden" value="${content.product_content_type_id}"/>
-                        <span style="margin-left: 8px;cursor: pointer;" onclick="del('nrfl_${status.count}')">X</span></span>
+                    <span class="el-tag" id="nrfl_${content.product_content_type_id}">${content.type_name}<input name="contentId" type="hidden" value="${content.product_content_type_id}"/>
+                        <span style="margin-left: 8px;cursor: pointer;" onclick="del('nrfl_${content.product_content_type_id}')">X</span></span>
                     </c:forEach>
                 </div>
             </div>
