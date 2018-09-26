@@ -8,6 +8,7 @@ function getMessage(is_read,id1,id2){
     $("#"+id1).css({"background-color":"#1d8ca0","color":"#fff"});
     $("#"+id2).css({"background-color":"#E6F1F3","color":"#03717b"});
     $("#is_read_hidden").val(is_read);
+
     $.ajax({
         type: 'post',
         url: "messageIsRead.action",
@@ -21,6 +22,7 @@ function getMessage(is_read,id1,id2){
             var str = '';
             var strMessage = '';
             if(json.listSize>0){
+
                 $.each(json.list, function (i, n) {
                     var unixTimestamp = new Date(n.time);
                     commonTime = unixTimestamp.toLocaleString();
