@@ -21,6 +21,7 @@
 	.ztree li {
 	    /* margin: 5px !important;	 */
     }
+    /* 覆盖掉半选样式  */
     .ztree li span.button.chk.checkbox_false_part {
 	    background-position: 0 0px !important;
 	}
