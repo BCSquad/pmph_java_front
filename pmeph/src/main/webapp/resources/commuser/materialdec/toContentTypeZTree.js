@@ -31,7 +31,8 @@ var zTreeObj;
 				chkboxType: { "Y": "", "N": "" }
 			},
 			view: {
-				showIcon: false
+				showIcon: false,
+				showTitle: false
 			}
    };
    // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
