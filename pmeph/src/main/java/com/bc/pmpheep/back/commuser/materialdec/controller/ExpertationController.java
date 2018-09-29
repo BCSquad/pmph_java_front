@@ -8,6 +8,7 @@ import com.bc.pmpheep.back.commuser.materialdec.service.PersonInfoService;
 import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
+import com.bc.pmpheep.controller.bean.ResponseBean;
 import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.general.service.FileService;
 import org.apache.commons.collections.MapUtils;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -769,7 +771,7 @@ public class ExpertationController extends BaseController{
 	@RequestMapping("queryContent")
 	public ModelAndView queryContent(HttpServletRequest request,
 				HttpServletResponse response){
-		ModelAndView mav = new ModelAndView("commuser/materialdec/toContentList");
+		ModelAndView mav = new ModelAndView("commuser/materialdec/toContentTypeZTree");
 		//机构信息
 		String product_type = request.getParameter("product_type");
 		String  currentPageStr = (String) request.getParameter("currentPage");
@@ -803,11 +805,47 @@ public class ExpertationController extends BaseController{
 			}
 		}
 		pageParameter.setParameter(paraMap);
-		PageResult<Map<String,Object>> pageResult = this.etService.selectContentList(pageParameter);
+		//PageResult<Map<String,Object>> pageResult = this.etService.selectContentList(pageParameter);
 		mav.addObject("chooseId", chooseId);
-		mav.addObject("pageResult", pageResult);
+		//mav.addObject("pageResult", pageResult);
 		mav.addObject("paraMap", paraMap);
 		return mav;
+	}
+	
+	@RequestMapping(value="queryContentTree",method = RequestMethod.POST)
+	@ResponseBody
+	public PageResult<Map<String,Object>> queryContentTree(HttpServletRequest request){
+		
+		String product_type = request.getParameter("product_type");
+		String expertation_id = request.getParameter("expertation_id");
+		
+		String  namepath = request.getParameter("namepath");
+		Map<String,Object> paraMap = new HashMap<String,Object>();
+		String chooseId = request.getParameter("chooseId"); // 已选id 格式如 66,65
+		//分页查询
+		int currentPage = 0;
+		int pageSize = 10;
+		
+		PageParameter<Map<String,Object>> pageParameter = new PageParameter<>(currentPage,pageSize);
+
+		paraMap.put("product_type", product_type);
+		paraMap.put("expertation_id", expertation_id);
+		paraMap.put("endPage", pageSize);
+		paraMap.put("currentPage", currentPage);
+		paraMap.put("chooseId", chooseId);
+		if(namepath!=null && !namepath.equals("")){
+			try {
+				namepath = URLDecoder.decode(namepath,"UTF-8");
+				paraMap.put("name_path", "%"+namepath+"%");
+				paraMap.put("namepath", namepath);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+		pageParameter.setParameter(paraMap);
+		PageResult<Map<String,Object>> pageResult = this.etService.selectContentZTree(pageParameter);
+		
+		return pageResult;
 	}
 
 	//查询申报专业

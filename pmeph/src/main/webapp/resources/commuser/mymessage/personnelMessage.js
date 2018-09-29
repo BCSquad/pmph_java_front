@@ -71,7 +71,7 @@ $(function () {
                                     n.content +
                                     "</div> " +
                                     "</div> " +
-                                    "<div class='talkTime talkTimeAlignRight'>" + formatDate(n.sendTime) + "</div> " +
+                                    "<div class='talkTime talkTimeAlignRight'>" + formatDate(n.sendTime,"") + "</div> " +
                                     "</div> " +
                                     "</div> ";
 
@@ -87,7 +87,7 @@ $(function () {
                                     n.content +
                                     "</div> " +
                                     "</div> " +
-                                    "<div class='talkTime talkTimeAlignLeft'>" + formatDate(n.sendTime) + "</div> " +
+                                    "<div class='talkTime talkTimeAlignLeft'>" + formatDate(n.sendTime,"") + "</div> " +
                                     "</div> " +
                                     "</div> ";
                             }
@@ -245,86 +245,90 @@ $(function () {
             }
         }
 
-        function formatDate(nS, str) {
-            if (!nS) {
-                return "";
-            }
-            var date = new Date(nS);
-            var year = date.getFullYear();
-            var mon = date.getMonth() + 1;
-            var day = date.getDate();
-            var hours = date.getHours();
-            var minu = date.getMinutes();
-            var sec = date.getSeconds();
-            if (str == 'yyyy-MM-dd') {
-                return year + '-' + (mon < 10 ? '0' + mon : mon) + '-'
-                    + (day < 10 ? '0' + day : day);
-            } else if (str == 'yyyy.MM.dd') {
-                return year + '.' + (mon < 10 ? '0' + mon : mon) + '.'
-                    + (day < 10 ? '0' + day : day);
-            } else {
-                return year + '-' + (mon < 10 ? '0' + mon : mon) + '-'
-                    + (day < 10 ? '0' + day : day) + ' '
-                    + (hours < 10 ? '0' + hours : hours) + ':'
-                    + (minu < 10 ? '0' + minu : minu) + ':'
-                    + (sec < 10 ? '0' + sec : sec);
-            }
+        function init() {
+            $.ajax({
+                type: 'get',
+                url: contextpath + 'mymessage/tolist.action',
+                async: false,
+                contentType: 'application/json',
+                dataType: 'json',
+                data: {
+                    pageNumber: pageNumber,
+                    pageSize: pageSize,
+                    state: $("input[name='select']").val()
+                },
+                success: function (res) {
+                    if (res) {
+                        pageNumber++;
+                        if (res.length < pageSize) {
+                            $("#loadMore").hide();
+                        }
+                        if (res.length > 0) {
+
+                            $.each(res, function (i, n) {
+                                var type_id=$("#type_" + n.id).val();
+                                var html = "";
+                                html += "<tr><th rowspan='2' class='headPortrait'><img class='pictureNotice' src='" + contextpath + n.avatar
+
+                                    + "'></th><td class='name'><span>"
+                                    + n.name
+                                    + "</span><span class='time1'>"
+                                    + formatDate(n.sendTime, "")
+                                    + "</span></td></tr>";
+                                html += "<tr><td colspan='2' class='personMessageContent'>私信内容："
+                                    + n.content
+                                    + '</td><td class="buttonDetail"><div class="buttonAccept" ><a class="a openTallk" id="' + n.talkId + '" href="javascript:" >查看详情</a>' +
+                                    '<input type="hidden" value="'+n.id+'" id="msg_'+n.talkId+'">' +
+                                    '</div></td></tr>';
+                                html += "<tr><td colspan='4' align='center'><hr class='line'></td></tr>";
+                                html += "<input id='name_" + n.talkId + "' type='hidden' value='" + n.name + "'/><input id='type_" + n.talkId + "' type='hidden'value='" + n.type + "' />";
+                                $("#list").append(html);
+
+                            });
+                            $('#list .openTallk').click(openTallk);
+                        } else {
+                            /*var html = "";
+                            html += "<tr><td><div class='no-more'><img src='" + contextpath + "statics/image/aaa4.png'/><span>木有内容呀~~</span></div></td></tr>";
+                            $("#list").append(html);*/
+                        }
+                    }
+                }
+            })
         }
 
+    //下拉加载
+    function loadData(){
+        init();
     }
-);
 
-function init() {
-    $.ajax({
-        type: 'get',
-        url: contextpath + 'mymessage/tolist.action',
-        async: false,
-        contentType: 'application/json',
-        dataType: 'json',
-        data: {
-            pageNumber: pageNumber,
-            pageSize: pageSize,
-            state: $("input[name='select']").val()
-        },
-        success: function (res) {
-            if (res) {
-                pageNumber++;
-                if (res.length < pageSize) {
-                    $("#loadMore").hide();
-                }
-                if (res.length > 0) {
+});
 
-                    $.each(res, function (i, n) {
-                        var html = "";
-                        html += "<tr><th rowspan='2' class='headPortrait'><img class='pictureNotice' src='" + contextpath + n.avatar
 
-                            + "'></th><td class='name'><span>"
-                            + n.name
-                            + "</span><span class='time1'>"
-                            + formatDate(n.sendTime, "")
-                            + "</span></td></tr>";
-                        html += "<tr><td colspan='2' class='personMessageContent'>私信内容："
-                            + n.content
-                            + '</td><td class="buttonDetail"><div class="buttonAccept" ><a class="a openTallk" id="' + n.talkId + '" href="javascript:" >查看详情</a>' +
-                            '<input type="hidden" value="'+n.id+'" id="msg_'+n.talkId+'">' +
-                            '</div></td></tr>';
-                        html += "<tr><td colspan='4' align='center'><hr class='line'></td></tr>";
-                        html += "<input id='name_" + n.talkId + "' type='hidden' value='" + n.name + "'/><input id='type_" + n.talkId + "' type='hidden'value='" + n.type + "' />";
-                        $("#list").append(html);
 
-                    });
-                    $('#list .openTallk').click(openTallk);
-                } else {
-                    /*var html = "";
-                    html += "<tr><td><div class='no-more'><img src='" + contextpath + "statics/image/aaa4.png'/><span>木有内容呀~~</span></div></td></tr>";
-                    $("#list").append(html);*/
-                }
-            }
-        }
-    })
-}
 
-//下拉加载
-function loadData(){
-    init();
+
+function formatDate(nS, str) {
+    if (!nS) {
+        return "";
+    }
+    var date = new Date(nS);
+    var year = date.getFullYear();
+    var mon = date.getMonth() + 1;
+    var day = date.getDate();
+    var hours = date.getHours();
+    var minu = date.getMinutes();
+    var sec = date.getSeconds();
+    if (str == 'yyyy-MM-dd') {
+        return year + '-' + (mon < 10 ? '0' + mon : mon) + '-'
+            + (day < 10 ? '0' + day : day);
+    } else if (str == 'yyyy.MM.dd') {
+        return year + '.' + (mon < 10 ? '0' + mon : mon) + '.'
+            + (day < 10 ? '0' + day : day);
+    } else {
+        return year + '-' + (mon < 10 ? '0' + mon : mon) + '-'
+            + (day < 10 ? '0' + day : day) + ' '
+            + (hours < 10 ? '0' + hours : hours) + ':'
+            + (minu < 10 ? '0' + minu : minu) + ':'
+            + (sec < 10 ? '0' + sec : sec);
+    }
 }

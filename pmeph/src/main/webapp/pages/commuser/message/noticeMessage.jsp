@@ -42,7 +42,11 @@
 					window.location.href="${ctx}/message/noticeMessageList.action?condition="+$("input[name='select']") .val();
 				}
             });
-        });
+
+            //---------------统计未读数量----------------
+            $("#tzid").html('通知<span style="display: inline-block;position:absolute;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;' +
+                'line-height: 10px;padding: 3px 0px;border-radius: 50%;right: 10;top: 0;width: 20px;height: 10px;text-align: center;">' + (${noreadcount}?${noreadcount}:0) + '</span>');
+          });
     
         
       //删除通知
@@ -77,9 +81,9 @@
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 	
         <div class="messageList">
-            <span id="selected"><b>通知</b></span>
-            <span><a href="${ctx}/message/applyMessageList.action" class="unselected">申请</a></span>
-            <span><a href="${ctx}/mymessage/listMyMessage.action"  class="unselected">私信</a></span>
+            <span id="selected" ><span id="tzid" style="position: relative">通知</span></span>
+            <span ><a href="${ctx}/message/applyMessageList.action" class="unselected"><span>申请</span></a></span>
+            <span ><a href="${ctx}/mymessage/listMyMessage.action"  class="unselected"><span>私信</span></a></span>
             <span id="rightContent" >筛选：
                 <select id="select" name="select" title="请选择" >
                     <option value="3" ${condition=='3' ?'selected':''}>全部</option>
@@ -94,6 +98,7 @@
             <span class="jcsbsbzt" id="c_span1" onclick="getMessage('1','c_span1','c_span0')">已读</span>
             <span class="jcsbsbzt" id="c_span0" onclick="getMessage('0','c_span0','c_span1')">未读</span>
             <input type="hidden" value="" id="is_read_hidden"/>
+
         </div>
         <!-- 系统消息标题悬浮框 -->
         <div class="bookmistake" id="bookmistake">

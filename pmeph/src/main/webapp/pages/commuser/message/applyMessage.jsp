@@ -40,7 +40,11 @@
 					window.location.href="${ctx}/message/applyMessageList.action?condition="+$("input[name='condition']") .val();
 				}	
 			});
-		});
+            $("#sqid").html('申请<span style="display: inline-block;position:absolute;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;' +
+                'line-height: 10px;padding: 3px 0px;border-radius: 50%;right: 10;top: 0;width: 20px;height: 10px;text-align: center;">' + (${nodealcount}?${nodealcount}:0)  + '</span>');
+
+
+        });
 </script>
 </head>
 <body>
@@ -48,7 +52,7 @@
 <div style="align-self: center">
     <div class="messageList">
         <span><a href="${ctx}/message/noticeMessageList.action" class="otherOptions">通知</a></span>
-        <span id="otherSelected"><b>申请</b></span>
+        <span id="otherSelected"><span id="sqid" style="position: relative">申请</span></span>
         <span><a href="${ctx}/mymessage/listMyMessage.action" class="unselected">私信</a></span>
             <span id="rightContent">
                 <span class="filtrate-wrapper">
