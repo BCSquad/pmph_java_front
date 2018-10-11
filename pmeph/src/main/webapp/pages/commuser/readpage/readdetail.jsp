@@ -20,14 +20,14 @@
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.tipso.css?t=${_timestamp}" type="text/css">
     <link href="${ctx}/statics/commuser/readpage/readdetail.css?t=${_timestamp}" type="text/css" rel="stylesheet">
     <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery-validate.js?t=${_timestamp}" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}?t=${_timestamp}" type="text/javascript"></script>
+    <script src="${ctx}/resources/comm/jquery/jquery-validate.js?t=${_timestamp}" type="text/javascript"></script>
+
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.tipso.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/reload.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.pager.js?t=${_timestamp}"></script>
-    <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/layui/layui.js?t=${_timestamp}"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/ckplayer/ckplayer.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/commuser/readpage/readdetail.js?t=${_timestamp}"></script>

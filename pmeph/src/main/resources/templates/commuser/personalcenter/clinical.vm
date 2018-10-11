@@ -1,12 +1,17 @@
+#*
 <script src="${contextpath}resources/commuser/personalcenter/PersonalHomeLCJC.js"></script>
 <div class="jcsbssl">
     <input type="hidden" class="queryCondition" id="myall" value="$!{myall}">
+*#
 #*    <input type="hidden" class="queryCondition" id="pageinfo" value="$!{pageinfo}">
-    <input type="hidden" class="queryCondition" id="dateinfo" value="$!{dateinfo}">*#
+    <input type="hidden" class="queryCondition" id="dateinfo" value="$!{dateinfo}">*##*
+
     <input type="hidden" class="queryCondition" id="online_progress" value="$!{online_progress}">
     <input type="hidden" class="queryCondition" id="search" value="$!{search}">
-  #*  <input type="hidden" class="queryCondition" id="is_staging" value="$!{is_staging}">
-    <input type="hidden" class="queryCondition" id="pageinfo1" value="$!{pageinfo1}">*#
+  *#
+#*  <input type="hidden" class="queryCondition" id="is_staging" value="$!{is_staging}">
+    <input type="hidden" class="queryCondition" id="pageinfo1" value="$!{pageinfo1}">*##*
+
 
 
     <span id="jcsbwdsb" class="active" onclick="listoction();" style="cursor:pointer">我的申报</span>
@@ -61,4 +66,4 @@
             </div>
         </div>
     #end
-</div>
+</div>*#

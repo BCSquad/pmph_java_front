@@ -297,26 +297,27 @@ $(function () {
 
         window.location.href = contextpath + "booksearch/bookOrArtSpliter.action?search=" + encodeURI(encodeURI($("#search-input").val()));
     }
-    
-    $(".search-icon").click(function () {
-        
-        if (!input_open) {
-            $(".delete").css("display", "block");
-            $(".search-input").css("display", "block");
-            input_open = true;
 
-        } else {
-            search();
-        }
+    $(".search-icon").click(function () {
+
+        // if (!input_open) {
+        //     $(".delete").css("display", "block");
+        //     $(".search-input").css("display", "block");
+        //     input_open = true;
+        //
+        // } else {
+        //     search();
+        // }
+        search();
     });
-    
+
     $(".search-input").bind('keydown', function (event) {
         if (event.keyCode == "13") {
             search();
         }
     });
-    
-    
+
+
     $(".delete").click(function () {
         $(".delete").css("display", "none");
         $(".search-input").css("display", "none");

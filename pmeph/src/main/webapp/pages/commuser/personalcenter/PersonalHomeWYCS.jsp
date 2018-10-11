@@ -79,7 +79,19 @@ request.setAttribute("currentTime",datetime);
         <div class="wrapper">
             <div class="myinfo">
                 <div class="headr">
-                    <div id="name">${permap.realname}</div>
+                    <div id="name">
+						<c:choose>
+							<c:when test="${permap.realname==null||permap.realname==''&&(permap.nickname!=null&&permap.nickname!='')}">
+								${permap.nickname}
+							</c:when>
+							<c:when test="${permap.realname==null||permap.realname==''&&(permap.nickname==null||permap.nickname=='')}">
+								${permap.username}
+							</c:when>
+							<c:otherwise>
+								${permap.realname}
+							</c:otherwise>
+						</c:choose>
+					</div>
                     <c:if test="${permap.sex==1}">
                         <div id="mansex"></div>
                     </c:if>
@@ -116,6 +128,7 @@ request.setAttribute("currentTime",datetime);
                 <c:if test="${selfLog == true}">
                 	<a href="<c:url value="/integral/toPage.action"/>"><span id="jftb"></span><span class="grsx">积分</span></a>
                 </c:if>
+				<a href='<c:url value="/teacherCertification/showTeacherCertification.action"/>'><span id="jsrz" style="margin-left: -25px"></span><span class="grsx">教师认证</span></a>
 
 				<%--<a class="lcjczjsb" href="<c:url value="/expertation/declare.action"/>">
 					<span id="lcjczjsb"></span>

@@ -31,6 +31,16 @@
 }
 </style>
 </head>
+<script type="text/javascript">
+    $(function(){
+        //---------------统计未读数量----------------
+        $("#sxid").html('私信<span style="display: inline-block;position:absolute;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;' +
+            'line-height: 10px;border-radius: 50%;padding: 3px 0px;right: 10;top: 0;width: 20px;height: 10px;text-align: center;">' + (${no_read_count}?${no_read_count}:0) + '</span>');
+    });
+
+
+
+</script>
 <body>
 	<jsp:include page="/pages/comm/head.jsp"></jsp:include>
 	<div class="body">
@@ -38,7 +48,7 @@
 	<div class="messageList">
 		<span><a class="otherOptions" href="${ctx}/message/noticeMessageList.action">通知</a></span>
 		<span><a href="${ctx}/message/applyMessageList.action" class="unselected">申请</a></span>
-		<span id="otherSelected"><b>私信</b></span> <span id="rightContent">筛选：
+		<span id="otherSelected"><span id="sxid" style="position: relative">私信</span></span> <span id="rightContent">筛选：
 			<select id="select" title="请选择">
 				<option value="">全部</option>
 				<option value="reade">已读</option>

@@ -992,8 +992,10 @@
 		trendst_date
 		,DATE_FORMAT(t.gmt_create,'%Y%m%d%H%i') AS
 		trendst_date_num
-		<!-- ,t.gmt_create -->
-		,u.realname
+		 ,t.gmt_create
+		<!-- ,u.realname -->
+		,case when  (u.realname is null or u.realname='') then u.username else u.realname end as realname
+
 		,c.id as c_id
 		,c.category_id as c_category_id
 		,c.title as
