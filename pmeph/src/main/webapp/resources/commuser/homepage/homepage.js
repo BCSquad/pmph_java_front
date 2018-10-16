@@ -260,6 +260,11 @@ function todou(id) {
 location.href = contextpath + 'community/toCommunity.action?id=' + id;
 }
 
+//跳转到师资平台详情页面
+function toteacherPlatform() {
+    location.href = contextpath + 'teacherPlatform/todetail.action';
+}
+
 //添加好友 按钮触发
 function addFriendfun(uid,realname,status){
 	var data={uid:uid,status:status};
@@ -309,3 +314,5 @@ function showEWM(){
 function hideEWM(){
     document.getElementById("EWM").style.display = 'none';
 }
+
+

@@ -180,11 +180,11 @@
             </c:forEach>
             <div class="more" onclick="top.location='${ctx}/cmsnotice/tolist.action'">更多>></div>
         </div>
-        <div class="notice area-2-1" style="width: 100%;display: inline-block;margin-top: 10px">
+        <div class="notice area-2-1" style="width: 50.1%;display: inline-block;margin-top: 10px">
             <div class="bgcolor-blue" style="float: left;width: 7px;height: 100%"></div>
             <div class="lcjc-img"></div>
             <div class="lcjc">
-                <div class="lcjc-a" style="margin-left: 100px">
+                <div class="lcjc-a" style="margin-left: 10px">
                     <div class="lcjc-1" onclick="todeclaredetail(1)"></div>
                     <div class="lcjc-n">人卫临床助手</div>
                 </div>
@@ -198,11 +198,37 @@
                 </div>
             </div>
         </div>
-        <%--<div class="notice area-2-2" style="width: 49.5%;display: inline-block">
+        <div class="notice area-2-2" style="width: 49.5%;display: inline-block;float: right;margin-top: 10px">
             <div class="bgcolor-blue" style="float: left;width: 7px;height: 100%"></div>
             <div class="lcjc-img-1"></div>
-            <div class="lcjc-img-2"></div>
-        </div>--%>
+            <div style="height: 100%">
+                <div class="szpt">
+                    <div class="szpt-top">
+                        <img src="${ctx}/statics/image/2333.jpg">
+                    </div>
+                    <div class="szpt-buttom">
+                        2018年度全国省（市、区）属于高等医学院校协作年会...
+                    </div>
+                </div>
+                <div class="szpt">
+                    <div class="szpt-top">
+                        <img src="${ctx}/statics/image/2333.jpg">
+                    </div>
+                    <div class="szpt-buttom">
+                        2018年度全国省（市、区）属于高等医学院校协作年会...
+                    </div>
+                </div>
+                <div class="szpt">
+                    <div class="szpt-top">
+                        <img src="${ctx}/statics/image/2333.jpg">
+                    </div>
+                    <div class="szpt-buttom">
+                        2018年度全国省（市、区）属于高等医学院校协作年会...
+                    </div>
+                </div>
+                <div class="szpt-more" onclick="toteacherPlatform()">更多>></div>
+            </div>
+        </div>
         <div class="notice area-3" style="margin-top: 5px">
             <div class="title">
                 <div class="line bgcolor-blue"></div>
