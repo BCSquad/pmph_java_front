@@ -697,4 +697,15 @@ public class ExpertationServiceImpl implements ExpertationService {
 		return result;
 	}
 
+	@Override
+	public PageResult<Map<String, Object>> selectContentZTree(
+			PageParameter<Map<String, Object>> pageParameter) {
+		
+		PageResult<Map<String, Object>> result = new PageResult<Map<String,Object>>();
+		List<Map<String,Object>> list = exdao.selectContentZTree(pageParameter);
+		result.setRows(list);
+		
+		return result;
+	}
+
 }

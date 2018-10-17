@@ -140,7 +140,7 @@
         <if test="parameter.chooseId != null and parameter.chooseId != ''">
         	and t.id not in (${parameter.chooseId})
         </if>
-        order by id asc
+        order by id asc 
         limit #{start},#{pageSize}
     </select>
     <!-- 学科分类总数 -->
@@ -227,9 +227,13 @@
 
     <!--内容分类关联表-->
     <select id="selectContent" parameterType="java.util.Map" resultType="java.util.Map">
-       select t1.*,t2.name_path from expertation_content_type t1
-	  left join product_content_type_detail t2 on t1.product_content_type_id = t2.product_type_id
+       select t1.*,t2.type_name from expertation_content_type t1
+	  left join product_content_type t2 on t1.product_content_type_id = t2.id
         where t1.expertation_id = #{declaration_id}
+
+        <!-- select t1.*,t2.name_path from expertation_content_type t1
+	  left join product_content_type_detail t2 on t1.product_content_type_id = t2.product_type_id
+        where t1.expertation_id = #{declaration_id} -->
     </select>
     <update id="insertContent" parameterType="java.util.Map">
         insert into expertation_content_type(expertation_id,product_content_type_id) VALUES(#{expertation_id},#{contentId})
@@ -464,7 +468,7 @@
 		left join product p on e.product_id = p.id
 		where e.id = #{expertation_id}
 	</select>
-
+	
 	<select id="queryProductWithAttachmentByIdOrType" parameterType="Map" resultType="Map">
 		select
 		   p.note,p.description,p.is_published,p.product_type,p.product_name
@@ -473,21 +477,44 @@
 		   ,pa.*
 		   from product_attachment pa
 		   right JOIN product p on p.id=pa.product_id
-		   where
-		   		p.is_deleted=0 and p.is_published=1
+		   where 
+		   		p.is_deleted=0 and p.is_published=1 
 		   		<choose>
 		   			<when test="product_id != null and product_id != '' ">
-		   				and p.id= #{product_id}
+		   				and p.id= #{product_id}  
 		   			</when>
 		   			<when test="product_type != null and product_type != '' ">
-		   				and p.product_type= #{product_type}
+		   				and p.product_type= #{product_type}  
 						and p.is_new = 1
 		   			</when>
 		   			<otherwise>
 		   			</otherwise>
 		   		</choose>
-
+				
 		   order BY p.gmt_set_active DESC
+	</select>
+
+	<select id = "selectContentZTree" parameterType="PageParameter" resultType="java.util.Map">
+		select
+		t.id
+		,t.parent_id
+		,t.type_name as name
+		,!isNull(e.id) as checked
+
+		from
+		product_content_type t
+		left join expertation_content_type e on e.product_content_type_id = t.id
+
+
+		 and expertation_id = #{parameter.expertation_id}
+
+		left join product_content_type_detail d on d.product_type_id = t.id
+
+		where t.is_deleted = 0
+
+		and t.product_type = #{parameter.product_type}
+
+		order by excel_row_num asc;
 	</select>
 
     

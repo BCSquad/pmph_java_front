@@ -62,9 +62,15 @@
         </div>
     </div>
     
-    <c:if test="${is_new == 1 }">
-		<div class="join" onclick="tojoin(${product_id})">报名参加</div>
-	</c:if>
+    <c:choose>
+    	<c:when test="${is_new == 1 and notEnd == 1}">
+    		<div class="join" onclick="tojoin(${product_id})">报名参加</div>
+    	</c:when>
+    	<c:when test="${is_new == 1 and notEnd == 0}">
+    		<div class="join end" >报名结束</div>
+    	</c:when>
+    	
+    </c:choose>
     
     
         <div style="clear: both"></div>
@@ -124,6 +130,9 @@
         float: left;
         margin-bottom: 150px;
     }
+    .join.end {
+	    background-color: #bbbbbb;
+	}
 </style>
 <script>
     function tojoin(product_id) {

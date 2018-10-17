@@ -903,8 +903,8 @@
                 <div class="sbdw" id="nrfladd">
                     <span class="btmc">内容分类：</span>
                     <c:forEach var="content" items="${contentList}" varStatus="status">
-                    <span class="el-tag" id="nrfl_${status.count}">${content.name_path}<input name="contentId" type="hidden" value="${content.product_content_type_id}"/>
-                        <span style="margin-left: 8px;cursor: pointer;" onclick="del('nrfl_${status.count}')">X</span></span>
+                    <span class="el-tag" id="nrfl_${content.product_content_type_id}">${content.type_name}<input name="contentId" type="hidden" value="${content.product_content_type_id}"/>
+                        <span style="margin-left: 8px;cursor: pointer;" onclick="del('nrfl_${content.product_content_type_id}')">X</span></span>
                     </c:forEach>
                 </div>
             </div>
@@ -972,7 +972,7 @@
                     <div class="bt_tj" id="print" onclick="toprint()">打印</div>
                     <div class="bt_tj" id="butj" onclick="javascript:buttAdd('1')">提交</div>
                 </div>
-                <div style="color: red;font-size: 16px;margin-top: 15px;">（提示：如暂存或提交不成功请使用360浏览器极速模式或谷歌浏览器）</div>
+                <div style="color: red;font-size: 16px;margin-top: 15px;">（提示：如暂存或提交不成功请使用360浏览器极速模式或谷歌浏览器，请使用本人账号登录进行申报，否则可能会影响遴选结果）</div>
             </div>
         </form>
 

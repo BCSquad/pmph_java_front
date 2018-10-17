@@ -175,5 +175,13 @@ public interface ExpertationService {
 	 */
 	public List<Map<String, Object>> queryProductByIdOrType(Map<String, Object> paraMap);
 
+	/**
+	 * 为z-tree查询临床申报内容分类数据
+	 * @param pageParameter
+	 * @return
+	 */
+	public PageResult<Map<String, Object>> selectContentZTree(
+			PageParameter<Map<String, Object>> pageParameter);
+
 
 }

@@ -38,6 +38,11 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
     @RequestMapping(value = "/listMyMessage", method = RequestMethod.GET)
     public ModelAndView listMyFriend() throws Exception {
         ModelAndView modelAndView = new ModelAndView();
+        Map<String, Object> writerUser = this.getUserInfo();
+        Long userId = new Long(String.valueOf(writerUser.get("id")));
+        List<MyMessageVO> list = myMessageService.listMyMessage(1, 999999, "noreade", userId);
+        int no_read_count = list.size();
+        modelAndView.addObject("no_read_count",no_read_count);
         modelAndView.setViewName("commuser/mymessage/personnelMessage");
         return modelAndView;
     }

@@ -295,6 +295,7 @@ ul li {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    text-align: center;
 }
 
 .lcjc{
@@ -1014,7 +1015,8 @@ ul li {
 .book_content_name {
     font-size: 11px;
     margin-top: 2px;
-    color: #999999
+    color: #999999;
+    text-align: center;
 }
 
 .book_content_picture {

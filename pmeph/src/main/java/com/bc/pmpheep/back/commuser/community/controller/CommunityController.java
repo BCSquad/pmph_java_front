@@ -70,7 +70,7 @@ public class CommunityController extends BaseController{
 	 */
 	@RequestMapping("/toCommunity")
 	public ModelAndView toCommunity(HttpServletRequest req, @RequestParam(value = "pageNumber",defaultValue = "1",required =false) Integer pageNumber
-	,@RequestParam(value = "pageSize",defaultValue = "8")int pageSize){
+	,@RequestParam(value = "pageSize",defaultValue = "10")int pageSize){
 		Long noticeId=Long.valueOf(req.getParameter("id"));
 
 		Map<String,Object> notice=communityService.queryNoticeById(noticeId);
