@@ -39,7 +39,12 @@
     width: 450px;
     height: 300px;
     float: left;
-    background-image: url("../../image/test-p.jpg");
+}
+
+.szpt-img{
+    margin: auto;
+    display: block;
+    max-width: 100%;
 }
 
 .part1{
@@ -51,6 +56,7 @@
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
+    cursor: pointer;
 }
 
 .part2{
@@ -75,19 +81,19 @@
 
 .part5{
     float: left;
-    margin-top: 20px;
+    margin-top: 15px;
     width: 100%;
 }
 
 .video {
-    width: 800px;
-    height: 400px;
+    width: 370px;
+    height: 220px;
     float: left;
 }
 
 .video-a {
-    width: 800px;
-    height: 400px;
+    width: 370px;
+    height: 220px;
     background-color: black;
 /*    position: absolute;*/
     top: 0px;
@@ -102,7 +108,7 @@
 }
 
 .video-name {
-    width: 260px;
+    width: 100%;
     height: 30px;
     background-color: #F5F5F5;
     border-radius: 2px;
