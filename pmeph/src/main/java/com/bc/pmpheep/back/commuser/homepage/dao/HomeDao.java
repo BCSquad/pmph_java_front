@@ -140,4 +140,10 @@ public interface HomeDao {
      */
     List<Map<String,Object>> quertProductByType(@Param("product_type") String product_type);
 
+    /**
+     * 查询首页师资平台
+     * @return
+     */
+    List<Map<String,Object>> Queryszpt();
+
 }

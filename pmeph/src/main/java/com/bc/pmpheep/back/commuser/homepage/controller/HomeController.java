@@ -57,6 +57,14 @@ public class HomeController extends BaseController{
         List<Map<String, Object>> listArt = homeService.queryArticle(4);
         List<Map<String, Object>> listAut = homeService.queryAuthor(logUserId);
         List<Map<String, Object>> listCom = homeService.queryComment();
+        List<Map<String,Object>> listSzpt = homeService.Queryszpt();
+        for (Map<String, Object> map : listSzpt) {
+            String url=MapUtils.getString(map,"cover","/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+            //	String url=map.get("image_url").toString();
+            if(url.equals("DEFAULT")){
+                map.put("image_url", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+            }
+        }
         int countSurvey=homeService.countSurvey(logUserId);
 
         Map<String,Object> adInfo1=homeService.getPageAdInfo("pc首页轮播");
@@ -66,13 +74,6 @@ public class HomeController extends BaseController{
         Map<String,Object> adInfo5=homeService.getPageAdInfo("pc首页中部4");
         Map<String,Object> adInfo6=homeService.getPageAdInfo("pc首页原重点推荐1");
         Map<String,Object> adInfo7=homeService.getPageAdInfo("pc首页原重点推荐2");
-        for (Map<String, Object> map : listCom) {
-            String url=MapUtils.getString(map,"image_url","/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
-		//	String url=map.get("image_url").toString();
-			if(url.equals("DEFAULT")){
-				map.put("image_url", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
-			}
-		}
         //根据登录人查询可见公告，未登录查询所有人可见公告
         
         List<Map<String, Object>> listDou= homeService.queryDocument(user==null?"":user.get("id").toString());
@@ -88,6 +89,7 @@ public class HomeController extends BaseController{
         modelAndView.addObject("adInfo5", adInfo5);
         modelAndView.addObject("adInfo6", adInfo6);
         modelAndView.addObject("adInfo7", adInfo7);
+        modelAndView.addObject("listSzpt",listSzpt);
         modelAndView.addObject("countSurvey", countSurvey);
         List<Map<String, Object>> listM =new ArrayList<Map<String,Object>>();
         if(user==null){

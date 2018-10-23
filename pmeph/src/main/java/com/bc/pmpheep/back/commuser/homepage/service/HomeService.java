@@ -131,5 +131,10 @@ public interface HomeService {
      * @return
      */
     List<Map<String,Object>> quertProductByType(String product_type);
+    /**
+     * 查询首页师资平台
+     * @return
+     */
+    List<Map<String,Object>> Queryszpt();
 
 }

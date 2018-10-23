@@ -60,7 +60,8 @@ public class HomeServiceImpl implements HomeService {
 		}
         return list;
     }
-    
+
+
  // 获取html图片
  	private String getFirstImgUrlFromHtmlStr(Content content,String contextpath) {
  		String img_url = 
@@ -313,6 +314,12 @@ public class HomeServiceImpl implements HomeService {
     }
 
     @Override
+    public List<Map<String, Object>> Queryszpt() {
+        List<Map<String, Object>> list= homeDao.Queryszpt();
+        return list;
+    }
+
+    @Override
     public int querySize(String type) {
         return homeDao.querySize(type);
     }
@@ -343,6 +350,7 @@ public class HomeServiceImpl implements HomeService {
         return list;
     }
 
+
     //去掉字符串中的html标签
     public String removeHtml(String str){
         String regEx_html="<[^>]+>"; //定义HTML标签的正则表达式
@@ -351,5 +359,7 @@ public class HomeServiceImpl implements HomeService {
         str=m_html.replaceAll(""); //过滤html标签
         return str;
     }
+
+
 
 }
