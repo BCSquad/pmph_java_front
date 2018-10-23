@@ -202,30 +202,16 @@
             <div class="bgcolor-blue" style="float: left;width: 7px;height: 100%"></div>
             <div class="lcjc-img-1"></div>
             <div style="height: 100%">
-                <div class="szpt">
-                    <div class="szpt-top">
-                        <img src="${ctx}/statics/image/2333.jpg">
+                <c:forEach items="${listSzpt}" var="list">
+                    <div class="szpt" onclick="toszptdetail(${list.id},${list.activity_id})">
+                        <div class="szpt-top">
+                            <img src="${ctx}/image/${list.cover}.action">
+                        </div>
+                        <div class="szpt-buttom">
+                            ${list.activity_name}
+                        </div>
                     </div>
-                    <div class="szpt-buttom">
-                        2018年度全国省（市、区）属于高等医学院校协作年会...
-                    </div>
-                </div>
-                <div class="szpt">
-                    <div class="szpt-top">
-                        <img src="${ctx}/statics/image/2333.jpg">
-                    </div>
-                    <div class="szpt-buttom">
-                        2018年度全国省（市、区）属于高等医学院校协作年会...
-                    </div>
-                </div>
-                <div class="szpt">
-                    <div class="szpt-top">
-                        <img src="${ctx}/statics/image/2333.jpg">
-                    </div>
-                    <div class="szpt-buttom">
-                        2018年度全国省（市、区）属于高等医学院校协作年会...
-                    </div>
-                </div>
+                </c:forEach>
                 <div class="szpt-more" onclick="toteacherPlatform()">更多>></div>
             </div>
         </div>
