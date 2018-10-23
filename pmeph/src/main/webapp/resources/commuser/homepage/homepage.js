@@ -260,9 +260,14 @@ function todou(id) {
 location.href = contextpath + 'community/toCommunity.action?id=' + id;
 }
 
-//跳转到师资平台详情页面
+//跳转到师资平台列表页面
 function toteacherPlatform() {
-    location.href = contextpath + 'teacherPlatform/todetail.action';
+    location.href = contextpath + 'teacherPlatform/szpt.action';
+}
+
+//跳转到师资平台详情页面
+function toszptdetail(id,activity_id) {
+    location.href = contextpath + 'teacherPlatform/todetail.action?id='+id+'&activity_id='+activity_id;
 }
 
 //添加好友 按钮触发
