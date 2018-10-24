@@ -102,6 +102,7 @@ public class CommunityController extends BaseController{
 		map.put("pagenum", pageNumber);
 		map.put("pagesize", pageSize);
         map.put("activitiList",activitiList);
+        map.put("size",activitiList.size());
         map.put("material_id",notice.get("material_id"));
 		return new ModelAndView("commuser/community/community",map);
 	}
