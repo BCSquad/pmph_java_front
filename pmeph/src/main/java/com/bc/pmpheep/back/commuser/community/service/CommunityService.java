@@ -70,4 +70,10 @@ public interface CommunityService {
     void changeClicks(Map<String,Object> map);
 
     int countTextBookList(Long material_id);
+    /**
+     * 查询活动信息
+     * @param map
+     * @return
+     */
+    List<Map<String,Object>> QueryActivitiById(Map<String,Object> map);
 }
