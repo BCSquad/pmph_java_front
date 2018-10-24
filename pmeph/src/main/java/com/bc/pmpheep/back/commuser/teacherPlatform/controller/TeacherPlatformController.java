@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,8 +28,6 @@ public class TeacherPlatformController extends BaseController{
     @RequestMapping("/todetail")
     public ModelAndView todetail(HttpServletRequest request){
         ModelAndView modelAndView=new ModelAndView();
-        //信息快报ID
-        String id=request.getParameter("id");
         //活动ID
         String activity_id=request.getParameter("activity_id");
         Map<String,Object> voideomap = new HashMap<>();
@@ -39,7 +38,7 @@ public class TeacherPlatformController extends BaseController{
         sourcemap.put("id",activity_id);
         sourcemap.put("startrow",0);
         sourcemap.put("endrow",5);
-        Map<String,Object> map = teacherPlatformService.queryXikb(id);
+        Map<String,Object> map = teacherPlatformService.queryXikb(activity_id);
         List<Map<String,Object>> voideolist=teacherPlatformService.Queryvideo(voideomap);
         List<Map<String,Object>> sourcelist=teacherPlatformService.Querysource(sourcemap);
         modelAndView.addObject("map",map);
@@ -122,6 +121,8 @@ public class TeacherPlatformController extends BaseController{
     @RequestMapping("szpt")
     public ModelAndView szpt(){
         ModelAndView modelAndView=new ModelAndView();
+        //cms代表查询的是与信息快报有关的活动
+        modelAndView.addObject("state","cms");
         modelAndView.setViewName("commuser/teacherPlatform/teacherPlatformSourceList");
         return modelAndView;
     }
@@ -131,7 +132,17 @@ public class TeacherPlatformController extends BaseController{
     @ResponseBody
     public List<Map<String,Object>> sourcelist(HttpServletRequest request){
         String startrow=request.getParameter("startrow");
-        List<Map<String,Object>> list = teacherPlatformService.QuerySourceList(startrow);
+        String state=request.getParameter("state");
+        List<Map<String,Object>> list = new ArrayList<>();
+        if(state.equals("cms")){
+            list = teacherPlatformService.QuerySourceList(startrow);
+        }else{
+            String material_id=request.getParameter("material_id");
+            Map<String,Object> map = new HashMap<>();
+            map.put("material_id",material_id);
+            map.put("startrow",startrow);
+            list = teacherPlatformService.QueryActivitiById(map);
+        }
         return list;
     }
 

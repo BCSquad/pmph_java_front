@@ -46,4 +46,10 @@ public interface TeacherPlatformService {
      * @return
      */
     int VideoCount(String id);
+    /**
+     * 查询活动信息
+     * @param map
+     * @return
+     */
+    List<Map<String,Object>> QueryActivitiById(Map<String,Object> map);
 }

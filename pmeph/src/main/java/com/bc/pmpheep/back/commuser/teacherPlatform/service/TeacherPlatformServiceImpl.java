@@ -67,4 +67,10 @@ public class TeacherPlatformServiceImpl  implements TeacherPlatformService{
     public int VideoCount(String id) {
         return teacherPlatformDao.VideoCount(id);
     }
+
+    @Override
+    public List<Map<String, Object>> QueryActivitiById(Map<String,Object> map) {
+        List<Map<String, Object>> list=teacherPlatformDao.QueryActivitiById(map);
+        return list;
+    }
 }

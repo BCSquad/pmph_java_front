@@ -6,13 +6,12 @@
 		select
 		    t.id,
 			t.cover,
-			b.title,
 			t.activity_desc_cms_id,
 			t.activity_name,
 			b.id as cms_id
 			from activity t
 			left join cms_content b on t.info_express_cms_id=b.id
-			where b.id=#{id} and t.is_deleted=0 and t.status=1
+			where t.id=#{id} and t.is_deleted=0 and t.status=1
 	</select>
 
 	<!--查询相关视频-->
@@ -51,7 +50,7 @@
 			left join activity_source_chain b on b.activity_id=t.id
 			left join activity_source a on a.id=b.activity_source_id
 			where t.id=#{id} and a.is_deleted=0
-			order by a.gmt_upload desc limit ${startrow},${endrow}
+			order by a.gmt_upload desc limit ${startrow},10
 	</select>
 
     <!--查询相关资源总数-->
@@ -78,5 +77,19 @@
               left join cms_content b on b.id = t.info_express_cms_id
               where t.info_express_cms_id=b.id and b.category_id=2
               order by t.gmt_create desc limit ${startrow},10
+	</select>
+
+	<!--根据教材查询活动信息-->
+	<select id="QueryActivitiById" resultType="java.util.Map" parameterType="java.util.Map">
+		select t.activity_name ,
+		t.cover,
+		t.id as activity_id,
+		t.activity_desc_cms_id,
+		t.activity_date,
+		b.id
+		from activity t
+		left join material m on m.id=t.material_id
+		left join cms_content b on b.material_id=t.material_id
+		where b.material_id=#{material_id} limit ${start},10
 	</select>
 </mapper>

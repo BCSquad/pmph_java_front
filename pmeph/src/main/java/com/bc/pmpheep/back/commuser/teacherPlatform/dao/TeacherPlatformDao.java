@@ -47,5 +47,10 @@ public interface TeacherPlatformDao {
      * @return
      */
     int VideoCount(@Param("id") String id);
+    /**
+     * 查询活动信息
+     * @return
+     */
+    List<Map<String,Object>> QueryActivitiById(Map<String,Object> map);
 
 }
