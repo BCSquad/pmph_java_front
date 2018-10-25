@@ -1,0 +1,71 @@
+.video {
+    width: 260px;
+    height: 230px;
+    float: left;
+    position: relative;
+    margin-left: 32px;
+}
+
+.video-a {
+    width: 260px;
+    height: 165px;
+    /* opacity:0.5; */
+    background-color: black;
+    position: absolute;
+    top: 0px;
+    cursor: pointer;
+}
+
+.video-btn {
+    margin-top: -24px;
+
+    font-size: 12px;
+    color: #ffffff;
+}
+
+.video-name {
+    width: 260px;
+    height: 30px;
+    background-color: #F5F5F5;
+    border-radius: 2px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 30px;
+    color: #182d4c;
+    cursor: pointer;
+    margin-top: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.top{
+    width: 100%;
+    height: 40px;
+    background-color: white;
+    margin-top: 20px;
+    float: left;
+}
+
+.most{
+    width: 100%;
+    height: 100%;
+    background-color: #F7F7F7;
+}
+
+.mid{
+    width: 100%;
+    background-color: white;
+    float: left;
+    margin-top: 20px;
+}
+
+.count{
+    float: left;
+}
+
+.video-count{
+    float: left;
+    margin-top: 20px;
+    width: 100%;
+}

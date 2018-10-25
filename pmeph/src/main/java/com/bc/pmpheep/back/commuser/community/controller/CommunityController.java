@@ -81,6 +81,12 @@ public class CommunityController extends BaseController{
 		List<Map<String,Object>> booklist=communityService.queryTextBookList(Long.valueOf(notice.get("material_id").toString()),start,pageSize);
 		//精彩书评
 		List<Map<String,Object>> someComments=communityService.querySomeComment(Long.valueOf(notice.get("material_id").toString()),0,4);
+		//查询师资平台信息
+		Map<String,Object> vmap=new HashMap<>();
+		vmap.put("material_id",notice.get("material_id"));
+		vmap.put("start",0);
+		vmap.put("pageSize",3);
+		List<Map<String,Object>> activitiList=communityService.QueryActivitiById(vmap);
 		Map<String,Object> map=new HashMap<>();
 		map.put("notice", notice);
 		map.put("reportlist", reportlist);
@@ -95,9 +101,35 @@ public class CommunityController extends BaseController{
 		map.put("pagetotal", maxPageNum);
 		map.put("pagenum", pageNumber);
 		map.put("pagesize", pageSize);
-
+        map.put("activitiList",activitiList);
+        map.put("size",activitiList.size());
+        map.put("material_id",notice.get("material_id"));
 		return new ModelAndView("commuser/community/community",map);
 	}
+
+	/**
+	 * 跳转到社区列表页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/toactivitylist")
+	public ModelAndView tolist(HttpServletRequest request){
+		ModelAndView modelAndView=new ModelAndView();
+		String material_id=request.getParameter("material_id");
+//		String start=request.getParameter("start");
+//		String pageSize=request.getParameter("pageSize");
+//		Map<String,Object> map =new HashMap<>();
+//		map.put("material_id",material_id);
+//		map.put("start",start);
+//		map.put("pageSize",pageSize);
+//		List<Map<String,Object>> list=communityService.QueryActivitiById(map);
+//		modelAndView.addObject("list",list);
+		//material代表查询的是与教材有关的活动
+		modelAndView.addObject("state","material");
+		modelAndView.addObject("material_id",material_id);
+		modelAndView.setViewName("commuser/teacherPlatform/teacherPlatformSourceList");
+		return modelAndView;
+	};
 	
 	/**
 	 * 获取社区主页右边的精彩评论列表

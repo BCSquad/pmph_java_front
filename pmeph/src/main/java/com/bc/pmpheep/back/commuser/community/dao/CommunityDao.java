@@ -72,4 +72,11 @@ public interface CommunityDao {
     void changeClicks(Map<String,Object> map);
 
     int countTextBookList(Long material_id);
+
+    /**
+     * 查询活动信息
+     * @param material_id 教材ID
+     * @return
+     */
+    List<Map<String,Object>> QueryActivitiById(Map<String,Object> map);
 }
