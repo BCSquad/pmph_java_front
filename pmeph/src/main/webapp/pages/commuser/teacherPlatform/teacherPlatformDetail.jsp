@@ -57,9 +57,12 @@
                 <div class="video" style="margin-top: 20px;float: left;margin-left: 30px">
                     <div class="video-a" id="video-${status.index+1}" type="mp4"
                          src="http://${_remoteUrl}/v/play/${list.path}"
-                         poster="${ctx}/image/${list.cover}.action">
+                         poster="${ctx}/image/${list.cover}.action" onclick="addid('${list.id}','${list.clicks}')">
                     </div>
-                    <div class="video-name">${list.title}</div>
+                    <div class="detail">
+                        <div class="video-name">${list.title}</div>
+                        <div class="clicks">${list.clicks}</div>
+                    </div>
                 </div>
             </c:if>
         </c:forEach>
@@ -70,59 +73,21 @@
                 <div class="video" style="margin-top: 20px;float: left;margin-left: 30px">
                     <div class="video-a" id="video-${status.index+1}" type="mp4"
                          src="http://${_remoteUrl}/v/play/${list.path}"
-                         poster="${ctx}/image/${list.cover}.action">
+                         poster="${ctx}/image/${list.cover}.action" onclick="addid('${list.id}','${list.clicks}')">
                     </div>
-                    <div class="video-name">${list.title}</div>
+                    <div class="detail">
+                        <div class="video-name">${list.title}</div>
+                        <div class="clicks">${list.clicks}</div>
+                    </div>
                 </div>
             </c:if>
         </c:forEach>
     </div>
-    <%--<div class="video-list">
-        <div class="video-list-name">视频列表</div>
-        <div style="margin-top: 10px;float: left">
-            <div class="video-img"><img src="${ctx}/image/5b36f572879ab892c4c9d633.action" class="avatar"></div>
-            <div style="float: left;margin-left: 5px;width: 290px">
-                <div class="video-title"  onclick="toplay('video1')" id="video1"
-                     src="http://${_remoteUrl}/v/play/21a9e39c-e2c2-4f91-83b2-f1f52f5965de.mp4"
-                     poster="${ctx}/image/5b36f572879ab892c4c9d633.action">视频一
-                </div>
-                <div class="video-time">播放次数：30</div>
-            </div>
-        </div>
-    </div>--%>
+    <input type="hidden" id="video_id">
+    <input type="hidden" id="clicks">
     <script type="text/javascript">
-        /*function toplay(id) {
-            $(".video-title").removeClass('selected');
-            $("#"+id).addClass('selected');
-            var videoObject = {
-                container: "#video-5",
-                variable: 'player',
-                autoplay: true, //默认加载完毕开始播放
-                /!*flashplayer: true,*!/  //是否调用flash播放器
-                video: $("#"+id).attr('src'),
-                poster: $("#"+id).attr('poster'),
-
-            };
-            var player = new ckplayer(videoObject);
-        };*/
-
-        //跳转到视频列表页面
-        function tovideotolist(id) {
-            window.location.href=contextpath+'teacherPlatform/videotolist.action?id='+id+'&startrow=0&endrow=12';
-        }
-        //跳转到相关资源页面
-        function tosourcelist(id) {
-            window.location.href=contextpath+'teacherPlatform/tosourcelist.action?id='+id+'&startrow=0&endrow=10';
-        }
-        //跳转到信息快报详情页面
-        function toxikb(id) {
-            window.location.href=contextpath+'inforeport/toinforeport.action?id='+id;
-        }
-
-        function playHandler(){
-            alert('播放了123');
-        }
-
+        //定义一个数组，用来存储已经播放过的视频
+        var ids=[];
 
         $(function () {
             $(function () {
@@ -138,10 +103,73 @@
 
                     };
                     var player = new ckplayer(videoObject);
+
+                     //添加监听，监听播放事件
+                     player.addListener("play",function () {
+                         //延时执行，防止ID没有注入到隐藏域，后台报空指针
+                         setTimeout(function () {
+                             beforeadd();
+                         },0)
+                     });
+                     //监听暂停事件
+                     player.addListener("paused",function (paused) {
+                        //console.log(paused);
+                       // throw paused
+                    });
                 })
             });
         })
 
+        function addid(id,clicks) {
+            $("#video_id").val(id);
+            $("#clicks").val(clicks);
+        }
+
+        //添加播放次数，只添加一次
+        function beforeadd() {
+            console.log(ids)
+            //判断是否已经播放过此视频
+            var id='';
+            if(ids.length>0){
+                for(var i=0;i<ids.length;i++){
+                    id=ids[i];
+                    if($("#video_id").val()==id){
+                        console.log('播放次数已经增加，不予处理');
+                    }else{
+                        addclicks();
+                    }
+                }
+            }else{
+                addclicks();
+            }
+        }
+
+        //增加播放次数
+        function addclicks() {
+            $.ajax({
+                type:'post',
+                url:contextpath+'teacherPlatform/updateclicks.action?clicks='+$("#clicks").val()+'&id='+$("#video_id").val(),
+                async:false,
+                dataType:'json',
+                success:function(json){
+                    console.log(json)
+                    ids.push($("#video_id").val());
+                }
+            });
+        }
+
+        //跳转到视频列表页面
+        function tovideotolist(id) {
+            window.location.href=contextpath+'teacherPlatform/videotolist.action?id='+id+'&startrow=0&endrow=12';
+        }
+        //跳转到相关资源页面
+        function tosourcelist(id) {
+            window.location.href=contextpath+'teacherPlatform/tosourcelist.action?id='+id+'&startrow=0&endrow=10';
+        }
+        //跳转到信息快报详情页面
+        function toxikb(id) {
+            window.location.href=contextpath+'inforeport/toinforeport.action?id='+id;
+        }
     </script>
     <div class="part5" style="margin-top: 60px">
         <div class="part4"></div>
