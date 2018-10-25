@@ -19,7 +19,8 @@
         select a.path,
 			a.clicks,
 			a.cover,
-			a.title
+			a.title,
+			a.id
 			from activity t
 			left join activity_video_chain v on v.activity_id=t.id
 			left join cms_content c on c.id=t.info_express_cms_id
@@ -67,7 +68,7 @@
 
 	<!--增加视频播放点击数-->
 	<update id="updateclicks">
-		update from activity_video set clicks=${clicks} where id=#{id}
+		update  activity_video set clicks=${clicks} where id=#{id}
 	</update>
 
 	<!-- 查询师资培训列表 -->
