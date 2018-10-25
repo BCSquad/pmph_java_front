@@ -106,10 +106,7 @@
 
                      //添加监听，监听播放事件
                      player.addListener("play",function () {
-                         //延时执行，防止ID没有注入到隐藏域，后台报空指针
-                         setTimeout(function () {
-                             beforeadd();
-                         },0)
+                          beforeadd();
                      });
                      //监听暂停事件
                      player.addListener("paused",function (paused) {
