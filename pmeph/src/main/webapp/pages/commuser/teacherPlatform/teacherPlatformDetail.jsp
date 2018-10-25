@@ -42,7 +42,7 @@
             <img src="${ctx}/image/${map.cover}.action" class="szpt-img">
         </div>
         <div style="float: left;height: 300px">
-            <div class="part1" onclick="toxikb(${map.cms_id})">${map.title}</div>
+            <%--<div class="part1" onclick="toxikb(${map.cms_id})">${map.title}</div>--%>
             <div class="part2">${map.content}</div>
         </div>
     </div>
@@ -119,6 +119,11 @@
             window.location.href=contextpath+'inforeport/toinforeport.action?id='+id;
         }
 
+        function playHandler(){
+            alert('播放了123');
+        }
+
+
         $(function () {
             $(function () {
                 $(".video-a").each(function () {
@@ -134,7 +139,7 @@
                     };
                     var player = new ckplayer(videoObject);
                 })
-            })
+            });
         })
 
     </script>

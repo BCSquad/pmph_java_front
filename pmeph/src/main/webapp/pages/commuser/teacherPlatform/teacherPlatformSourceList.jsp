@@ -43,12 +43,16 @@
 </div>
 <%--结束--%>
 <div style="clear: both"></div>
+<input type="hidden" id="state" value="${state}">
+<input type="hidden" id="material_id" value="${material_id}">
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
 </html>
 <script>
     //定义全局变量
     var startrow=0;
+    var state=$("#state").val();
+    var material_id=$("#material_id").val();
 
     $(function () {
         //查询列表数据
@@ -64,10 +68,11 @@
         window.location.href=contextpath+'teacherPlatform/todetail.action?id='+id;
     }
 
+
     function loadData() {
         $.ajax({
             type:'post',
-            url:contextpath+'teacherPlatform/sourcelist.action?startrow='+startrow,
+            url:contextpath+'teacherPlatform/sourcelist.action?startrow='+startrow+'&state='+state+'&material_id='+material_id,
             async:false,
             dataType:'json',
             success:function(json){
