@@ -53,4 +53,15 @@ public interface TeacherPlatformDao {
      */
     List<Map<String,Object>> QueryActivitiById(Map<String,Object> map);
 
+    /**
+     * 增加活动阅读次数
+     */
+    void addtimes(@Param("times") int times,@Param("id") String id);
+
+    /**
+     * 查询视频播放次数的和
+     * @param id
+     * @return
+     */
+    int queryClicks(@Param("id") String id);
 }

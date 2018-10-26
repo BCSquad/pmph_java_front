@@ -24,6 +24,9 @@ public class TeacherPlatformServiceImpl  implements TeacherPlatformService{
         String mid= MapUtils.getString(map,"activity_desc_cms_id");
         Content content = contentService.get(mid);
         map.put("content",content.getContent());
+        String t=map.get("times").toString();
+        int times=Integer.parseInt(t)+1;
+        teacherPlatformDao.addtimes(times,id);
         return map;
     }
 
@@ -72,5 +75,10 @@ public class TeacherPlatformServiceImpl  implements TeacherPlatformService{
     public List<Map<String, Object>> QueryActivitiById(Map<String,Object> map) {
         List<Map<String, Object>> list=teacherPlatformDao.QueryActivitiById(map);
         return list;
+    }
+
+    @Override
+    public int queryClicks(String id) {
+        return teacherPlatformDao.queryClicks(id);
     }
 }

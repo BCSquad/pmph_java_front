@@ -2,6 +2,8 @@ package com.bc.pmpheep.back.commuser.teacherPlatform.controller;
 
 import com.bc.pmpheep.back.commuser.teacherPlatform.service.TeacherPlatformService;
 import com.bc.pmpheep.general.controller.BaseController;
+import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -133,9 +135,20 @@ public class TeacherPlatformController extends BaseController{
     public List<Map<String,Object>> sourcelist(HttpServletRequest request){
         String startrow=request.getParameter("startrow");
         String state=request.getParameter("state");
-        List<Map<String,Object>> list = new ArrayList<>();
+        List<Map<String,Object>> list;
+        int count;
         if(state.equals("cms")){
             list = teacherPlatformService.QuerySourceList(startrow);
+            for (Map<String,Object> map:list) {
+                String id= MapUtils.getString(map,"id");
+                if(StringUtils.isEmpty(id)){
+                    count = Integer.parseInt(map.get("times").toString());
+                    map.put("count",count);
+                }else{
+                    int t = teacherPlatformService.queryClicks(map.get("id").toString());
+                    map.put("count",t+Integer.parseInt(map.get("times").toString()));
+                }
+            }
         }else{
             String material_id=request.getParameter("material_id");
             Map<String,Object> map = new HashMap<>();
