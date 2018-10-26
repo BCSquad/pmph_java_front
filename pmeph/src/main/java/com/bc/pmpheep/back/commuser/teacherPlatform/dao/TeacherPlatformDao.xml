@@ -94,8 +94,8 @@
 		 select t.id,t.activity_name,t.cover,t.activity_desc_cms_id,t.activity_date,t.times
               from activity t
               left join cms_content b on b.id = t.info_express_cms_id
-              where t.info_express_cms_id=b.id and b.category_id=2
-              order by t.gmt_create desc limit ${startrow},10
+              where t.info_express_cms_id=b.id and b.category_id=2 and t.is_deleted=0 and t.status=1
+              order by t.is_set_top desc,t.gmt_set_top desc,t.gmt_create desc limit ${startrow},10
 	</select>
 
 	<!--根据教材查询活动信息-->

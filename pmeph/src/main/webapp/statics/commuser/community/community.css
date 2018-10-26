@@ -60,11 +60,13 @@ a {
 
 .report .center .inleft {
     float: left;
-    max-width: 590px;
+    max-width: 300px;
     height: 35px;
     line-height: 35px;
     overflow: hidden;
-    color: #4d4e4e
+    color: #4d4e4e;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .report .center .inright {
