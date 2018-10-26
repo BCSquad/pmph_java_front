@@ -43,7 +43,10 @@
         </div>
         <div style="float: left;height: 300px">
             <%--<div class="part1" onclick="toxikb(${map.cms_id})">${map.title}</div>--%>
-            <div class="part2">${map.content}</div>
+            <div class="part2">
+                <div>${map.content}</div>
+            </div>
+            <div class="more-content" onclick="toxikb('${map.cms_id}')">更多>></div>
         </div>
     </div>
     <div class="part5">
