@@ -56,20 +56,22 @@ public class TeacherPlatformController extends BaseController{
     public ModelAndView tolist(HttpServletRequest request){
         ModelAndView modelAndView=new ModelAndView();
         String id=request.getParameter("id");
-        String startrow=request.getParameter("startrow");
-        String endrow=request.getParameter("endrow");
+        //页码
+        int startrow=Integer.parseInt(request.getParameter("startrow"));
+        //每页显示多少条数据
+        int endrow=Integer.parseInt(request.getParameter("endrow"));
         Map<String,Object> map = new HashMap<>();
+        map.put("startrow",(startrow-1)*endrow);
         map.put("id",id);
-        map.put("startrow",startrow);
         map.put("endrow",endrow);
         List<Map<String,Object>> list=teacherPlatformService.Queryvideo(map);
         //查询总数
         int count =teacherPlatformService.VideoCount(id);
         int pagesize=0;
-        if(count<=Integer.parseInt(endrow)){
+        if(count<=endrow){
             pagesize=1;
         }else{
-            int t=count%Integer.parseInt(endrow);
+            int t=count%endrow;
             if(t==0){
                 pagesize=t;
             }else{
@@ -90,20 +92,21 @@ public class TeacherPlatformController extends BaseController{
     public ModelAndView tosourcelist(HttpServletRequest request){
         ModelAndView modelAndView=new ModelAndView();
         String id=request.getParameter("id");
-        String startrow=request.getParameter("startrow");
-        String endrow=request.getParameter("endrow");
+        int startrow=Integer.parseInt(request.getParameter("startrow"));
+        //每页显示多少条数据
+        int endrow=Integer.parseInt(request.getParameter("endrow"));
         Map<String,Object> map = new HashMap<>();
+        map.put("startrow",(startrow-1)*endrow);
         map.put("id",id);
-        map.put("startrow",startrow);
         map.put("endrow",endrow);
         List<Map<String,Object>> list = teacherPlatformService.Querysource(map);
         //查询总数
         int count=teacherPlatformService.sourceCount(id);
         int pagesize=0;
-        if(count<=Integer.parseInt(endrow)){
+        if(count<=endrow){
             pagesize=1;
         }else{
-            int t=count%Integer.parseInt(endrow);
+            int t=count%endrow;
             if(t==0){
                 pagesize=t;
             }else{
