@@ -35,7 +35,7 @@
     <div style="margin-top: 20px">
         <div class="time">活动日期：${map.activity_date}</div>
         <div class="picture"></div>
-        <div class="read">5</div>
+        <div class="read">${map.times}</div>
     </div>
     <div style="margin-top: 50px">
         <div class="bigpicture">
