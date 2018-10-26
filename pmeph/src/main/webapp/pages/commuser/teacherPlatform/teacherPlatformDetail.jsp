@@ -160,11 +160,11 @@
 
         //跳转到视频列表页面
         function tovideotolist(id) {
-            window.location.href=contextpath+'teacherPlatform/videotolist.action?id='+id+'&startrow=0&endrow=12';
+            window.location.href=contextpath+'teacherPlatform/videotolist.action?id='+id+'&startrow=1&endrow=12';
         }
         //跳转到相关资源页面
         function tosourcelist(id) {
-            window.location.href=contextpath+'teacherPlatform/tosourcelist.action?id='+id+'&startrow=0&endrow=10';
+            window.location.href=contextpath+'teacherPlatform/tosourcelist.action?id='+id+'&startrow=1&endrow=10';
         }
         //跳转到信息快报详情页面
         function toxikb(id) {

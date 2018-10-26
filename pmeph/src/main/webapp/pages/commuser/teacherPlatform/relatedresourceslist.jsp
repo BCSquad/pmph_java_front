@@ -33,8 +33,8 @@
         <div style="height: 30px"></div>
         <div class="sxy-div-content">
             <div style="height:50px;">
-                <span class="sxy-div-menu" style="color: #333333">相关资源</span>
-                <span class="sxy-div-back">&lt;&lt;返回活动</span>
+                <span class="sxy-div-menu" style="color: #333333;font-size: ">相关资源</span>
+                <span class="sxy-div-back" onclick="window.history.back()">&lt;&lt;返回活动</span>
             </div>
         </div>
         <div style="height:14px"></div>
@@ -98,8 +98,7 @@
             optionHeight: 30,
             onChange: function (n) {
                 //指定一页多少条数据
-                endrow=n;
-                queryList(id,startrow,endrow);
+                queryList(id,1,n);
             }
         });
         Page({
@@ -108,14 +107,13 @@
             elem: $('#page1'),		//指定的元素
             callback: function (n) {	//点击页码后触发的回调函数
                 //选定哪一页
-                startrow=n;
-                queryList(id,startrow,endrow);
+                queryList(id,n,endrow);
             }
         });
     });
 
     function queryList(id,startrow,endrow) {
-        window.location.href=contextpath+'teacherPlatform/videotolist.action?id='+id+'&startrow='+startrow+'&endrow='+endrow;
+        window.location.href=contextpath+'teacherPlatform/tosourcelist.action?id='+id+'&startrow='+startrow+'&endrow='+endrow;
     }
 
 </script>
