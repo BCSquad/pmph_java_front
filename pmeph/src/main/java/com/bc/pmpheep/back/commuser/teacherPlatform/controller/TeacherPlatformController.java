@@ -2,6 +2,8 @@ package com.bc.pmpheep.back.commuser.teacherPlatform.controller;
 
 import com.bc.pmpheep.back.commuser.teacherPlatform.service.TeacherPlatformService;
 import com.bc.pmpheep.general.controller.BaseController;
+import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -54,20 +56,22 @@ public class TeacherPlatformController extends BaseController{
     public ModelAndView tolist(HttpServletRequest request){
         ModelAndView modelAndView=new ModelAndView();
         String id=request.getParameter("id");
-        String startrow=request.getParameter("startrow");
-        String endrow=request.getParameter("endrow");
+        //页码
+        int startrow=Integer.parseInt(request.getParameter("startrow"));
+        //每页显示多少条数据
+        int endrow=Integer.parseInt(request.getParameter("endrow"));
         Map<String,Object> map = new HashMap<>();
+        map.put("startrow",(startrow-1)*endrow);
         map.put("id",id);
-        map.put("startrow",startrow);
         map.put("endrow",endrow);
         List<Map<String,Object>> list=teacherPlatformService.Queryvideo(map);
         //查询总数
         int count =teacherPlatformService.VideoCount(id);
         int pagesize=0;
-        if(count<=Integer.parseInt(endrow)){
+        if(count<=endrow){
             pagesize=1;
         }else{
-            int t=count%Integer.parseInt(endrow);
+            int t=count%endrow;
             if(t==0){
                 pagesize=t;
             }else{
@@ -88,20 +92,21 @@ public class TeacherPlatformController extends BaseController{
     public ModelAndView tosourcelist(HttpServletRequest request){
         ModelAndView modelAndView=new ModelAndView();
         String id=request.getParameter("id");
-        String startrow=request.getParameter("startrow");
-        String endrow=request.getParameter("endrow");
+        int startrow=Integer.parseInt(request.getParameter("startrow"));
+        //每页显示多少条数据
+        int endrow=Integer.parseInt(request.getParameter("endrow"));
         Map<String,Object> map = new HashMap<>();
+        map.put("startrow",(startrow-1)*endrow);
         map.put("id",id);
-        map.put("startrow",startrow);
         map.put("endrow",endrow);
         List<Map<String,Object>> list = teacherPlatformService.Querysource(map);
         //查询总数
         int count=teacherPlatformService.sourceCount(id);
         int pagesize=0;
-        if(count<=Integer.parseInt(endrow)){
+        if(count<=endrow){
             pagesize=1;
         }else{
-            int t=count%Integer.parseInt(endrow);
+            int t=count%endrow;
             if(t==0){
                 pagesize=t;
             }else{
@@ -133,9 +138,20 @@ public class TeacherPlatformController extends BaseController{
     public List<Map<String,Object>> sourcelist(HttpServletRequest request){
         String startrow=request.getParameter("startrow");
         String state=request.getParameter("state");
-        List<Map<String,Object>> list = new ArrayList<>();
+        List<Map<String,Object>> list;
+        int count;
         if(state.equals("cms")){
             list = teacherPlatformService.QuerySourceList(startrow);
+            for (Map<String,Object> map:list) {
+                String id= MapUtils.getString(map,"id");
+                if(StringUtils.isEmpty(id)){
+                    count = Integer.parseInt(map.get("times").toString());
+                    map.put("count",count);
+                }else{
+                    int t = teacherPlatformService.queryClicks(map.get("id").toString());
+                    map.put("count",t+Integer.parseInt(map.get("times").toString()));
+                }
+            }
         }else{
             String material_id=request.getParameter("material_id");
             Map<String,Object> map = new HashMap<>();

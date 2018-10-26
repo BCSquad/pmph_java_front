@@ -668,7 +668,7 @@ td {
 }
 
  .float-menu .item.green {
- 	 display:none; /* 师资培训 */
+ 	 display:block; /* 师资培训 */
      background: #3CC34C;
  }
 

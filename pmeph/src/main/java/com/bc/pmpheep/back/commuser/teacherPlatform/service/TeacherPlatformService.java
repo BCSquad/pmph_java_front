@@ -52,4 +52,11 @@ public interface TeacherPlatformService {
      * @return
      */
     List<Map<String,Object>> QueryActivitiById(Map<String,Object> map);
+
+    /**
+     * 查询视频播放次数的和
+     * @param id
+     * @return
+     */
+    int queryClicks(String id);
 }

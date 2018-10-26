@@ -65,7 +65,7 @@
     });
 
     function asd(id) {
-        window.location.href=contextpath+'teacherPlatform/todetail.action?id='+id;
+        window.location.href=contextpath+'teacherPlatform/todetail.action?activity_id='+id;
     }
 
 
@@ -93,7 +93,7 @@
                         '                        <div class="pictureDiv" >\n' +
                         '                            <div class="number2">活动日期：'+n.activity_date+'</div>\n' +
                         '                            <div class="eyePicture" title="点击数"></div>\n' +
-                        '                            <div class="number1">7</div>\n' +
+                        '                            <div class="number1">'+n.count+'</div>\n' +
                         '                        </div>\n' +
                         '                    </div>\n' +
                         '                </div>\n' +

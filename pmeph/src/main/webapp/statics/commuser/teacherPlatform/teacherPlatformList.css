@@ -69,3 +69,18 @@
     margin-top: 20px;
     width: 100%;
 }
+
+.top1{
+    width: 56px;
+    margin-left: 25px;
+    margin-top: 8px;
+    border-bottom: 1.2px solid;
+    height: 32px;
+}
+
+.top2{
+    float: right;
+    margin-top: -35px;
+    margin-right: 25px;
+    cursor: pointer;
+}
