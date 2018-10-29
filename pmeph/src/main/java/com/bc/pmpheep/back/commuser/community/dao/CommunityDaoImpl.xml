@@ -92,7 +92,7 @@
 			left join material m on m.id=t.material_id
 			left join cms_content b on b.material_id=t.material_id
 			where b.material_id=#{material_id} and t.is_deleted=0 and t.status=1
-			order by t.gmt_create desc
+			order by t.is_set_top desc,t.gmt_set_top,t.gmt_create desc
 			limit  0,3
 	</select>
      

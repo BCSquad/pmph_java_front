@@ -117,7 +117,7 @@
 
     $.addValidatRule("isMobile", function (value) {
         //不能为空
-        if (!/(^1[3|5|8][0-9]{9}$)/.test(value)) {
+        if (!/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/.test(value)) {
             return false;
         } else {
             return true;

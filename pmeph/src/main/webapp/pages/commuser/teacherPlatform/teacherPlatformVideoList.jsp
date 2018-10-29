@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>活动详情页</title>
+    <title>活动视频-更多</title>
     <script type="text/javascript">
         var contextpath = '${pageContext.request.contextPath}/';
     </script>
