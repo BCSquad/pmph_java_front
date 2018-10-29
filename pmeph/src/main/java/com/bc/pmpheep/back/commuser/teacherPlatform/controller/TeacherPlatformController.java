@@ -42,6 +42,11 @@ public class TeacherPlatformController extends BaseController{
         sourcemap.put("endrow",5);
         Map<String,Object> map = teacherPlatformService.queryXikb(activity_id);
         List<Map<String,Object>> voideolist=teacherPlatformService.Queryvideo(voideomap);
+        for (Map<String,Object> vmap: voideolist) {
+            //截取播放路径
+            String t=vmap.get("path").toString().replaceAll(".*(?=\\w{8}-(\\w{4}-){3}\\w{12}\\.mp4)","");
+            vmap.put("path",t);
+        }
         List<Map<String,Object>> sourcelist=teacherPlatformService.Querysource(sourcemap);
         modelAndView.addObject("map",map);
         modelAndView.addObject("voideolist",voideolist);
