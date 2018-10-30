@@ -190,5 +190,10 @@ public class CommunityServiceImpl implements CommunityService {
 		return list;
 	}
 
+	@Override
+	public int QueryCountById(String material_id) {
+		return communityDao.QueryCountById(material_id);
+	}
+
 
 }

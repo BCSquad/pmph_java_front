@@ -87,6 +87,7 @@ public class CommunityController extends BaseController{
 		vmap.put("start",0);
 		vmap.put("pageSize",3);
 		List<Map<String,Object>> activitiList=communityService.QueryActivitiById(vmap);
+		int count=communityService.QueryCountById(notice.get("material_id").toString());
 		Map<String,Object> map=new HashMap<>();
 		map.put("notice", notice);
 		map.put("reportlist", reportlist);
@@ -102,7 +103,7 @@ public class CommunityController extends BaseController{
 		map.put("pagenum", pageNumber);
 		map.put("pagesize", pageSize);
         map.put("activitiList",activitiList);
-        map.put("size",activitiList.size());
+        map.put("size",count);
         map.put("material_id",notice.get("material_id"));
 		return new ModelAndView("commuser/community/community",map);
 	}
@@ -116,15 +117,6 @@ public class CommunityController extends BaseController{
 	public ModelAndView tolist(HttpServletRequest request){
 		ModelAndView modelAndView=new ModelAndView();
 		String material_id=request.getParameter("material_id");
-//		String start=request.getParameter("start");
-//		String pageSize=request.getParameter("pageSize");
-//		Map<String,Object> map =new HashMap<>();
-//		map.put("material_id",material_id);
-//		map.put("start",start);
-//		map.put("pageSize",pageSize);
-//		List<Map<String,Object>> list=communityService.QueryActivitiById(map);
-//		modelAndView.addObject("list",list);
-		//material代表查询的是与教材有关的活动
 		modelAndView.addObject("state","material");
 		modelAndView.addObject("material_id",material_id);
 		modelAndView.setViewName("commuser/teacherPlatform/teacherPlatformSourceList");
