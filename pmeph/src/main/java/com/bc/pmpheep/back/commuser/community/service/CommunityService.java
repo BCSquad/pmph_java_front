@@ -76,4 +76,10 @@ public interface CommunityService {
      * @return
      */
     List<Map<String,Object>> QueryActivitiById(Map<String,Object> map);
+    /**
+     * 查询活动总数
+     * @param material_id
+     * @return
+     */
+    int QueryCountById(String material_id);
 }

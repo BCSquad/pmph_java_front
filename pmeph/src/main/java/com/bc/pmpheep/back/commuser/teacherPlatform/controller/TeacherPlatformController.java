@@ -39,7 +39,7 @@ public class TeacherPlatformController extends BaseController{
         Map<String,Object> sourcemap = new HashMap<>();
         sourcemap.put("id",activity_id);
         sourcemap.put("startrow",0);
-        sourcemap.put("endrow",5);
+        sourcemap.put("endrow",10);
         Map<String,Object> map = teacherPlatformService.queryXikb(activity_id);
         List<Map<String,Object>> voideolist=teacherPlatformService.Queryvideo(voideomap);
         for (Map<String,Object> vmap: voideolist) {
@@ -70,6 +70,11 @@ public class TeacherPlatformController extends BaseController{
         map.put("id",id);
         map.put("endrow",endrow);
         List<Map<String,Object>> list=teacherPlatformService.Queryvideo(map);
+        for (Map<String,Object> vmap: list) {
+            //截取播放路径
+            String t=vmap.get("path").toString().replaceAll(".*(?=\\w{8}-(\\w{4}-){3}\\w{12}\\.mp4)","");
+            vmap.put("path",t);
+        }
         //查询总数
         int count =teacherPlatformService.VideoCount(id);
         int pagesize=0;
@@ -147,22 +152,22 @@ public class TeacherPlatformController extends BaseController{
         int count;
         if(state.equals("cms")){
             list = teacherPlatformService.QuerySourceList(startrow);
-            for (Map<String,Object> map:list) {
-                String id= MapUtils.getString(map,"id");
-                if(StringUtils.isEmpty(id)){
-                    count = Integer.parseInt(map.get("times").toString());
-                    map.put("count",count);
-                }else{
-                    int t = teacherPlatformService.queryClicks(map.get("id").toString());
-                    map.put("count",t+Integer.parseInt(map.get("times").toString()));
-                }
-            }
         }else{
             String material_id=request.getParameter("material_id");
             Map<String,Object> map = new HashMap<>();
             map.put("material_id",material_id);
             map.put("startrow",startrow);
             list = teacherPlatformService.QueryActivitiById(map);
+        }
+        for (Map<String,Object> map:list) {
+            String id= MapUtils.getString(map,"id");
+            if(StringUtils.isEmpty(id)){
+                count = Integer.parseInt(map.get("times").toString());
+                map.put("count",count);
+            }else{
+                int t = teacherPlatformService.queryClicks(map.get("id").toString());
+                map.put("count",t+Integer.parseInt(map.get("times").toString()));
+            }
         }
         return list;
     }

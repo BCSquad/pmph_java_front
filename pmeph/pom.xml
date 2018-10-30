@@ -310,6 +310,7 @@
         </repository>
     </repositories>
     <build>
+		<finalName>medu</finalName>
         <resources>
             <resource>
                 <directory>src/main/java</directory>
