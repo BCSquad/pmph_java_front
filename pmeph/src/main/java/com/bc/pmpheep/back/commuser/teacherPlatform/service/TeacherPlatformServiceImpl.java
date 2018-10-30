@@ -74,6 +74,13 @@ public class TeacherPlatformServiceImpl  implements TeacherPlatformService{
     @Override
     public List<Map<String, Object>> QueryActivitiById(Map<String,Object> map) {
         List<Map<String, Object>> list=teacherPlatformDao.QueryActivitiById(map);
+        for (Map<String, Object> pmap: list) {
+            String mid= MapUtils.getString(pmap,"activity_desc_cms_id");
+            if(!mid.equals("")){
+                Content content = contentService.get(mid);
+                pmap.put("content",content.getContent());
+            }
+        }
         return list;
     }
 

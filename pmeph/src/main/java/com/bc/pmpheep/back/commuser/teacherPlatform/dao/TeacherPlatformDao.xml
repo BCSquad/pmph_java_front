@@ -102,13 +102,14 @@
 	<select id="QueryActivitiById" resultType="java.util.Map" parameterType="java.util.Map">
 		select t.activity_name ,
 		t.cover,
-		t.id as activity_id,
+		t.id,
+		t.activity_name,
 		t.activity_desc_cms_id,
 		t.activity_date,
-		b.id
+		t.times
 		from activity t
 		left join material m on m.id=t.material_id
 		left join cms_content b on b.material_id=t.material_id
-		where b.material_id=#{material_id} limit ${start},10
+		where b.material_id=#{material_id} limit ${startrow},10
 	</select>
 </mapper>
