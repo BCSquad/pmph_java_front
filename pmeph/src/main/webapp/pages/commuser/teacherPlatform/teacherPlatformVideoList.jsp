@@ -34,46 +34,18 @@
     <div class="content-wrapper">
         <div class="top">
             <div class="top1">活动视频</div>
-            <div class="top2" onclick="window.history.back()"><<返回活动</div>
+            <div class="top2" onclick="toback('${id}')"><<返回活动</div>
         </div>
         <div class="mid">
             <div class="video-count">
                 <c:forEach items="${list}" var="list" varStatus="status">
-                    <c:if test="${status.index<4}">
-                        <div class="video">
-                            <div class="video-a" id="video-${status.index+1}"
-                                 src="http://${_remoteUrl}/v/play/${list.path}"
-                                 poster="${ctx}/image/${list.cover}.action" type="mp4">
-                            </div>
-                            <div class="video-name">${list.title}</div>
+                    <div class="video">
+                        <div class="video-a" id="video-${status.index+1}"
+                             src="http://${_remoteUrl}/v/play/${list.path}"
+                             poster="${ctx}/image/${list.cover}.action" type="mp4">
                         </div>
-                        </c:if>
-                </c:forEach>
-            </div>
-            <div class="video-count">
-                <c:forEach items="${list}" var="list" varStatus="status">
-                    <c:if test="${status.index>3 and status.index<8}">
-                        <div class="video">
-                            <div class="video-a" id="video-${status.index+1}"
-                                 src="http://${_remoteUrl}/v/play/${list.path}"
-                                 poster="${ctx}/image/${list.cover}.action" type="mp4">
-                            </div>
-                            <div class="video-name">${list.title}</div>
-                        </div>
-                    </c:if>
-                </c:forEach>
-            </div>
-            <div class="video-count">
-                <c:forEach items="${list}" var="list" varStatus="status">
-                    <c:if test="${status.index>7 and status.index<11}">
-                        <div class="video">
-                            <div class="video-a" id="video-${status.index+1}"
-                                 src="http://${_remoteUrl}/v/play/${list.path}"
-                                 poster="${ctx}/image/${list.cover}.action" type="mp4">
-                            </div>
-                            <div class="video-name">${list.title}</div>
-                        </div>
-                    </c:if>
+                        <div class="video-name">${list.title}</div>
+                    </div>
                 </c:forEach>
             </div>
             <div class="pageDiv" style="float: right">
@@ -148,5 +120,8 @@
 
     function queryList(id,startrow,endrow) {
         window.location.href=contextpath+'teacherPlatform/videotolist.action?id='+id+'&startrow='+startrow+'&endrow='+endrow;
+    }
+    function toback(id) {
+        window.location.href=contextpath+'teacherPlatform/todetail.action?activity_id='+id;
     }
 </script>
