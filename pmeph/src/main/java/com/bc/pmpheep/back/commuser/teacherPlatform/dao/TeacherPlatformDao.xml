@@ -64,7 +64,7 @@
 			left join activity_source_chain b on b.activity_id=t.id
 			left join activity_source a on a.id=b.activity_source_id
 			where t.id=#{id} and a.is_deleted=0
-			order by a.sort asc limit ${startrow},10
+			order by a.sort asc limit ${startrow},${endrow}
 	</select>
 
     <!--查询相关资源总数-->
@@ -110,6 +110,8 @@
 		from activity t
 		left join material m on m.id=t.material_id
 		left join cms_content b on b.material_id=t.material_id
-		where b.material_id=#{material_id} limit ${startrow},10
+		where b.material_id=#{material_id}  and t.is_deleted=0 and t.status=1
+		order by t.is_set_top desc,t.gmt_set_top desc,t.gmt_create desc
+		limit ${startrow},10
 	</select>
 </mapper>
