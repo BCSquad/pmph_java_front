@@ -34,7 +34,7 @@
         <div class="sxy-div-content">
             <div style="height:50px;">
                 <span class="sxy-div-menu" style="color: #333333;font-size: ">相关资源</span>
-                <span class="sxy-div-back" onclick="window.history.back()">&lt;&lt;返回活动</span>
+                <span class="sxy-div-back" onclick="toback('${id}')">&lt;&lt;返回活动</span>
             </div>
         </div>
         <div style="height:14px"></div>
@@ -114,6 +114,9 @@
 
     function queryList(id,startrow,endrow) {
         window.location.href=contextpath+'teacherPlatform/tosourcelist.action?id='+id+'&startrow='+startrow+'&endrow='+endrow;
+    }
+    function toback(id) {
+        window.location.href=contextpath+'teacherPlatform/todetail.action?activity_id='+id;
     }
 
 </script>

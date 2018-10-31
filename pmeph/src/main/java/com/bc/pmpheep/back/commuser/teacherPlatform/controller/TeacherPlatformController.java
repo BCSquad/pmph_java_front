@@ -83,9 +83,9 @@ public class TeacherPlatformController extends BaseController{
         }else{
             int t=count%endrow;
             if(t==0){
-                pagesize=t;
+                pagesize=count/endrow;
             }else{
-                pagesize=t+1;
+                pagesize= (int) (Math.floor(count/endrow)+1);
             }
         }
         modelAndView.addObject("id",id);
@@ -118,9 +118,9 @@ public class TeacherPlatformController extends BaseController{
         }else{
             int t=count%endrow;
             if(t==0){
-                pagesize=t;
+                pagesize=count/endrow;
             }else{
-                pagesize=t+1;
+                pagesize= (int) (Math.floor(count/endrow)+1);
             }
         }
         modelAndView.addObject("id",id);

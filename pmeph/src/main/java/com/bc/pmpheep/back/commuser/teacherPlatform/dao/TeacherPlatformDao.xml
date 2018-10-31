@@ -39,7 +39,7 @@
 			left join cms_content c on c.id=t.info_express_cms_id
 			left join activity_video a on a.id=v.activity_video_id
 			where t.id=#{id} and a.is_deleted=0
-			order by a.gmt_create desc limit ${startrow},${endrow}
+			order by a.sort asc limit ${startrow},${endrow}
 	</select>
 
     <!--查询视频总数-->
@@ -64,7 +64,7 @@
 			left join activity_source_chain b on b.activity_id=t.id
 			left join activity_source a on a.id=b.activity_source_id
 			where t.id=#{id} and a.is_deleted=0
-			order by a.gmt_upload desc limit ${startrow},10
+			order by a.sort asc limit ${startrow},10
 	</select>
 
     <!--查询相关资源总数-->
