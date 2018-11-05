@@ -61,10 +61,10 @@
 	 SELECT a.source_name,
 			a.file_id
 			from activity t
-			left join activity_source_chain b on b.b=t.id
+			left join activity_source_chain b on b.activity_id=t.id
 			left join activity_source a on a.id=b.activity_source_id
 			where t.id=#{id} and a.is_deleted=0
-			order by .sort asc limit ${startrow},${endrow}
+			order by b.sort asc limit ${startrow},${endrow}
 	</select>
 
     <!--查询相关资源总数-->
