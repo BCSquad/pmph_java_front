@@ -1,0 +1,366 @@
+@charset "utf-8";
+
+body{
+
+}
+.body{
+    background-color: #f6f6f6;
+}
+
+.content-wrapper .content-teacher-wrapper{
+    width: 1200px;
+    padding:20px 0px 61px 0px;
+}
+
+.body .white-out-div{
+    width: 1198px;
+    /* min-height: 666px; */
+    background-image: linear-gradient(
+            #ffffff,
+            #ffffff),
+    linear-gradient(
+            #f5f5f5,
+            #f5f5f5);
+    background-blend-mode: normal,
+    normal;
+    border: solid 1px #dddddd;
+}
+
+div.white-out-div .search-condition{
+    width: 182px;
+    margin:15px -5px 0px 15px;
+
+    height: 40px;
+    background-color: #ffffff;
+    border: solid 1px #ededed;
+
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 24px;
+    letter-spacing: 0px;
+    outline: none;
+}
+
+#btn-search{
+    width: 80px;
+    text-align: center;
+    padding-left: 11.5px;
+    height: 33px;
+    margin:0px 15px 0px 15px;
+    background-color: #1898dd;
+
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 0px;
+    letter-spacing: 5px;
+    color: #ffffff;
+    border:none;
+    outline: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.tohis{
+    float: right;
+    width: 80px;
+    text-align: center;
+    padding-left: 11.5px;
+    height: 33px;
+    margin: 0px 15px 0px 15px;
+    background-color: #B0120E;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 0px;
+    letter-spacing: 5px;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#view-switch{
+    float: right;
+    width: 80px;
+    text-align: center;
+    height: 33px;
+    margin:21px 10px 21px 15px;
+    background-color: #1898dd;
+
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 0px;
+    letter-spacing: 0px;
+    color: #ffffff;
+    border:none;
+    outline: none;
+    border-radius: 3px;
+}
+
+.body .table-area{
+    min-height: 80px;
+}
+
+.body .table-area table{
+    padding:0px;
+    margin: 24px 0px 24px 0px;
+    width:100%;
+
+    border-spacing: 0px 0px;
+    border-collapse: collapse;
+    white-space: nowrap;
+
+}
+.body .table-area tr{
+    height: 46px;
+
+}
+.body .table-area tr:first-of-type{
+    height: 40px;
+}
+.body .table-area th{
+    height: 40px;
+    background-color: #f0f0f0;
+    padding:0px;margin:0px;
+
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 24px;
+    letter-spacing: 0px;
+    color: #4e4e4e;
+    border-left:3px  #ffffff solid;
+}
+.body .table-area th:first-of-type{
+    border-left:none;
+}
+
+.body .table-area tr:nth-child(odd){
+
+
+}
+
+.body .table-area tr:nth-child(even){
+    background-color: #f9f9f9;
+}
+
+.body .table-area td{
+    height: 46px;
+    border-collapse: collapse;
+    border:none;
+    padding:0px;margin:0px;
+
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 46px;
+    letter-spacing: 0px;
+    color: #4e4e4e;
+    text-align: center;
+}
+
+.body .table-area td .audit-status{
+
+    width: 49px;
+    height: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    padding:2.5px 5px 2.5px 5px;
+    border-radius: 2px;
+}
+
+.body #zebra-table td .audit-status.s1{
+    color: #fd9a2e;
+    background-color: #FFEBD6;
+}
+
+.body #zebra-table td .audit-status.s2{
+    color: #24c6c8;
+    background-color: #CDEFF0;
+}
+
+.body #zebra-table td .no-operate{
+    color: #333333;
+    letter-spacing: 0px;
+}
+
+.body #zebra-table td a.a-preview{
+
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 24px;
+    letter-spacing: 0px;
+    color: #489299;
+    cursor: pointer;
+}
+
+
+.body #zebra-table td a.a-pass{
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 24px;
+    letter-spacing: 0px;
+    color: #259980;
+    cursor: pointer;
+}
+
+.body #zebra-table td a.a-reject{
+    margin-left: 10px;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 24px;
+    letter-spacing: 0px;
+    color: #dc130e;
+    cursor: pointer;
+}
+
+.body #zebra-table td:nth-child(2){
+    width: 143px;
+}
+
+.body #zebra-table td .head-portrait-wrapper{
+    width: 90px;
+    height: 44px;
+    margin: auto;
+    display:inline;
+}
+
+.body #zebra-table td div.head-portrait{
+    width: 40px;
+    height: 40px;
+    background-image: url("../../image/putongyhtouxiang.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    float:left;
+    margin: 3.2px 10px 0px 22px;
+    border-radius:40px;
+}
+.body #zebra-table td div.head-portrait+div{
+    float: left;
+    width: 55px;
+    height: 46px;
+    text-align: center;
+    white-space: normal;
+    overflow: hidden;
+    word-break: break-all;
+}
+
+.pagination-wrapper{
+    display: inline-block;
+    width: 100%;
+    text-align: right;
+    margin: 10px 0px 10px 0px;
+}
+
+#select-search-condition-wrapper{
+    display: inline-block;
+}
+#select-search-status-wrapper{
+    display: inline-block;
+}
+#search-name{
+    display: inline-block;
+    padding: 0px 12px 0px 12px;
+}
+#page-size-select div.select-list li{
+    padding: 0px 10px 0px 10px;
+    text-align: left;
+}
+
+/*退回原因悬浮框*/
+.bookmistake {
+    width: 426px;
+    background-color: #FFFFFF;
+    display: none;
+    position: fixed;
+    left: 35%;
+    top: 30%;
+    box-shadow: 0px 0px 5px #888888;
+    border-radius: 5px;
+    z-index: 999;
+}
+
+.bookmistake .apache {
+    width: 100%;
+    height: 27px;
+    float: left;
+    margin-top: 16px;
+}
+
+.bookmistake .mistitle {
+    width: 85%;
+    float: left;
+    line-height: 24px;
+    letter-spacing: 1px;
+    color: #333333;
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+.bookmistake .mistitle div{
+    width: 100%;
+    height: 24px;
+    overflow: hidden;
+    word-break:break-all;
+
+}
+
+.bookmistake .xx {
+    width: 14px;
+    height: 14px;
+    background-image: url(../../image/close.png);
+    float: right;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.bookmistake .info {
+    width: 426px;
+    /* height: 103px; */
+    float: left;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.bookmistake .misarea {
+    width: 374px;
+    height: 75px;
+    border: 1px solid #E0E0E0;
+    margin-left: 20px;
+    padding: 5px;
+    resize: vertical;
+    max-height: 350px;
+}
+
+.bookmistake .btn {
+    float: right;
+    margin-right: 27px;
+    width: 84px;
+    height: 31px;
+    background-color: #1CB394;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+}
+
+.st{
+    padding-top: 20px;
+    border-bottom: 1px dashed #CCCCCC;
+    padding-bottom: 10px
+}
+
+.rt{
+    cursor: pointer;
+}
