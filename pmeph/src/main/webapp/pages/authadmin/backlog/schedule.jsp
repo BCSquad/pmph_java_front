@@ -110,6 +110,9 @@
                                			<div onclick="system('${one.ID}')"  class="buttonDiv">
 	                                        		查看
 	                                	</div>
+                                        <div onclick="fillMaterialSurvey('${one.materialId}')"  class="buttonDiv">
+                                            调查问卷
+                                        </div>
                                		</c:when>
                                		<c:otherwise>
                                			<div onclick="checkAuthen('block','${one.TYPE}','${one.auditId}','${one.ID}')" class="buttonDiv">
@@ -257,6 +260,8 @@
         }
     });
     $(function () {
+
+        console.log("${map.pageResult.rows}");
         $('#filtrate-select').selectlist({
             width: 100,
             height: 20,
@@ -311,6 +316,10 @@
                 }
             }
         });
+    }
+
+    function fillMaterialSurvey(str){
+        window.location.href="${ctx}/orgSurvey/fillSurveyById.action?materialId="+str;
     }
     
   //点击显示系统消息
