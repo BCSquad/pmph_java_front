@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bc.pmpheep.back.commuser.research.dao.ReSearchDao">
+
+    <!--查询与教材无关的调研表-->
+    <select id="querySearchList" resultType="java.util.Map" parameterType="PageParameter">
+        select t.title ,t.id,t.intro,
+        DATE_FORMAT(t.end_date,'%Y-%m-%d') as end_date,
+        DATE_FORMAT(b.gmt_create,'%Y-%m-%d %H:%i') as gmt_create
+        from material_survey t
+        left join material_survey_question_answer b on  b.survey_id=t.id
+        and b.user_id=#{parameter.id}  where t.material_id is null
+        <if test="parameter.state != null and parameter.state != '' and parameter.state == 1">
+            and b.gmt_create is not NULL
+        </if>
+        <if test="parameter.state != null and parameter.state != '' and parameter.state == 2">
+            and b.gmt_create is  NULL
+        </if>
+        and t.type_id != 1 GROUP BY t.id limit ${start},${pageSize}
+    </select>
+
+    <!--查询与教材无关调研表总数-->
+    <select id="queryCount" resultType="Integer">
+        select count(*) from ( select id
+        from material_survey where material_id is null and type_id != 1 )q
+    </select>
+
+    <!--根据调研表ID查询问题及选项-->
+    <select id="queryQuestionBySearchId" resultType="java.util.Map" parameterType="java.util.Map">
+        select
+	        t.title as survey_title,
+	        b.title as question_title,
+	        o.option_content,
+		    b.type
+            from material_survey t
+	        left join material_survey_question b on b.survey_id=t.id
+		    left join material_survey_question_option o on o.question_id=b.id
+		    where t.id='1'
+    </select>
+
+    <!--查询与教材有关的调研表-->
+    <select id="querySearchByMaterialId" parameterType="java.util.Map" resultType="java.util.Map">
+        select * from material_survey where material_id=#{material_id}
+    </select>
+</mapper>
