@@ -1,4 +1,4 @@
-@charset "utf-8"
+@charset "utf-8";
 
 .body{
     background-color: #f6f6f6;
@@ -221,6 +221,13 @@
     background-color: #ffffff;
     border: solid 1.5px #fd9a2e;
     left: 114px;
+    line-height: 15px;
+}
+.body .nine-block-box-container div .btn-type-5{
+    color: #f2f2f2;
+    background-color: #29ab8f;
+    border: solid 1.5px #29ab8f;
+    left: 220px;
     line-height: 15px;
 }
 

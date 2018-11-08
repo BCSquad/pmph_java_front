@@ -1,8 +1,11 @@
 package com.bc.pmpheep.back.authadmin.materialSurvey.service;
 
 import com.bc.pmpheep.back.authadmin.materialSurvey.bean.*;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MaterialSurveyService {
 
@@ -33,5 +36,10 @@ public interface MaterialSurveyService {
      * @return
      */
     Integer fillSurveyQuestion(List<MaterialSurveyQuestionAnswer> materialSurveyQuestionAnswer);
+
+
+    PageResult<Map<String, Object>> querySearchList(PageParameter<Map<String, Object>> pageParameter);
+
+    MaterialSurvey getSurveyById(Long id);
 
 }

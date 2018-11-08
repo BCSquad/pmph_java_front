@@ -15,4 +15,7 @@ public interface MaterialSurveyDao {
     List<MaterialSurveyQuestion> getSurveyQuestionBySurveyId (Long surveyId);
     List<MaterialSurveyQuestionOption> getSurveyQuestionOptionByQuestionId(Long questionId);
     Integer insertQuestionAnswer(List<MaterialSurveyQuestionAnswer> materialSurveyQuestionAnswer);
+    int queryCount();
+    List<Map<String,Object>> querySearchList(PageParameter<Map<String, Object>> pageParameter);
+    MaterialSurvey getSurveyById(Long id);
 }

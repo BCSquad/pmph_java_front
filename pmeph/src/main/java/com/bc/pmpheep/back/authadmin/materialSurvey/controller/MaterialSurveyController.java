@@ -4,6 +4,8 @@ package com.bc.pmpheep.back.authadmin.materialSurvey.controller;
 import com.bc.pmpheep.back.authadmin.backlog.service.ScheduleService;
 import com.bc.pmpheep.back.authadmin.materialSurvey.bean.*;
 import com.bc.pmpheep.back.authadmin.materialSurvey.service.MaterialSurveyService;
+import com.bc.pmpheep.back.plugin.PageParameter;
+import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.back.util.DateUtil;
 import com.bc.pmpheep.back.util.ObjectUtil;
 import com.bc.pmpheep.general.controller.BaseController;
@@ -13,10 +15,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,11 +55,23 @@ public class MaterialSurveyController extends BaseController {
         MaterialSurveyVO materialSurveyVO = new MaterialSurveyVO();
         List<MaterialSurveyQuestionVO> materialSurveyQuestionVOS = new ArrayList<>();
         //获取教材id
-        String materialId = request.getParameter("materialId");
 
-        /*根据教材id获取问卷
-         */
-        MaterialSurvey surveyByMaterialId = materialSurveyService.getSurveyByMaterialId(Long.parseLong(materialId));
+
+        MaterialSurvey surveyByMaterialId=null;
+        if(ObjectUtil.notNull(request.getParameter("materialId"))){
+            /*根据教材id获取问卷
+             */
+            String materialId = request.getParameter("materialId");
+           surveyByMaterialId = materialSurveyService.getSurveyByMaterialId(Long.parseLong(materialId));
+
+        }
+
+        if(ObjectUtil.notNull(request.getParameter("surveyId"))){
+            /*根据问卷id获取问卷对象
+             */
+            Long surveyId =  Long.parseLong(request.getParameter("surveyId"));
+            surveyByMaterialId = materialSurveyService.getSurveyById(surveyId);
+        }
 
         /*根据问卷id获取问题
          */
@@ -173,6 +184,37 @@ public class MaterialSurveyController extends BaseController {
         map.put("code", integer);
         return map;
 
+    }
+
+
+    @RequestMapping("tolist")
+    public ModelAndView tolist(HttpServletRequest request,
+                               @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                               @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize
+                               ){
+        ModelAndView modelAndView=new ModelAndView();
+        String state = request.getParameter("state");
+        String materialId = request.getParameter("materialId");
+        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> user=getUserInfo();
+        map.put("id",user.get("id"));
+        map.put("state",state);
+
+        if(materialId!=null){
+            map.put("materialId",materialId);
+            modelAndView.addObject("materialId",materialId);
+        }
+
+        PageParameter<Map<String, Object>> pageParameter = new PageParameter<Map<String, Object>>(pageNum, pageSize);
+        pageParameter.setParameter(map);
+        PageResult<Map<String, Object>> pageResult = materialSurveyService.querySearchList(pageParameter);
+        modelAndView.addObject("pageNum",pageNum);
+        modelAndView.addObject("pageSize",pageSize);
+        modelAndView.addObject("pageResult",pageResult);
+        modelAndView.addObject("state",state);
+
+        modelAndView.setViewName("authadmin/materialSurvey/SurveyList");
+        return modelAndView;
     }
 
 
