@@ -8,9 +8,11 @@ import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.back.util.DateUtil;
 import com.bc.pmpheep.back.util.ObjectUtil;
+import com.bc.pmpheep.back.util.StringUtil;
 import com.bc.pmpheep.general.controller.BaseController;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -58,7 +60,7 @@ public class MaterialSurveyController extends BaseController {
 
 
         MaterialSurvey surveyByMaterialId=null;
-        if(ObjectUtil.notNull(request.getParameter("materialId"))){
+        if(StringUtil.notEmpty(request.getParameter("materialId"))){
             /*根据教材id获取问卷
              */
             String materialId = request.getParameter("materialId");
@@ -66,7 +68,7 @@ public class MaterialSurveyController extends BaseController {
 
         }
 
-        if(ObjectUtil.notNull(request.getParameter("surveyId"))){
+        if(StringUtil.notEmpty(request.getParameter("surveyId"))){
             /*根据问卷id获取问卷对象
              */
             Long surveyId =  Long.parseLong(request.getParameter("surveyId"));
