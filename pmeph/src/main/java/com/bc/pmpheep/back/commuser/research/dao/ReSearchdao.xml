@@ -5,7 +5,7 @@
 
     <!--查询与教材无关的调研表-->
     <select id="querySearchList" resultType="java.util.Map" parameterType="PageParameter">
-        select t.title ,t.id,t.intro,
+        select t.title ,t.id,t.intro,t.id,
         DATE_FORMAT(t.end_date,'%Y-%m-%d') as end_date,
         DATE_FORMAT(b.gmt_create,'%Y-%m-%d %H:%i') as gmt_create
         from material_survey t
