@@ -50,9 +50,9 @@
             <div class="op-link">
                 <div class="transaction">
                     <div class="labeling">教材申报</div>
-                    <div class="bin consol" onclick="window.location.href='${ctx}/cmsnotice/tolist.action'">
+                    <div class="bin consol" onclick="">
                         <div class="lab-pic1"></div>
-                        最新公告
+                        调研表
                     </div>
                     <div class="bin marks"
                          onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?pagetag=jcsb'">

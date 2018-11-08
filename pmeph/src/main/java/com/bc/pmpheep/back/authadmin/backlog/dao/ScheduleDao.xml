@@ -5,7 +5,7 @@
 	<!-- 查询待办事项列表 -->
 	<select id="selectScheduleList" parameterType="PageParameter" resultType="java.util.Map">
 		SELECT * FROM(
-		SELECT d.id as ID,d.realname AS NAME,d.gmt_create AS TIME,m.`material_name` AS CONTENT,d.material_id as auditId,"A" as TYPE,w.avatar,d.online_progress as  online_progress
+		SELECT d.id as ID,d.realname AS NAME,d.gmt_create AS TIME,m.`material_name` AS CONTENT,d.material_id as auditId,"A" as TYPE,w.avatar,d.online_progress as  online_progress,d.material_id AS materialId
 		FROM declaration d 
 		LEFT JOIN material m
 		ON d.`material_id` = m.`id`
@@ -24,7 +24,7 @@
 		ORDER BY d.gmt_create DESC) t1
 		UNION 
 		SELECT * FROM (
-		SELECT w1.org_id,w1.realname,w.gmt_create,"教师资格认证",w1.id,"B",w1.avatar, '8' as  online_progress
+		SELECT w1.org_id,w1.realname,w.gmt_create,"教师资格认证",w1.id,"B",w1.avatar, '8' as  online_progress ,null AS materialId
 		FROM writer_user_certification w
 		LEFT JOIN org_user u1
 		ON w.org_id = u1.org_id
@@ -60,7 +60,7 @@
 				WHEN a.sender_type='2' THEN s2.avatar 
 				WHEN a.sender_type='3' THEN s3.avatar 
 			END ) avatar,
-			a.is_read as online_progress
+			a.is_read as online_progress,a.material_id AS materialId
 			FROM
 				user_message a
 			LEFT JOIN writer_user s2 ON a.sender_id = s2.id
@@ -92,7 +92,7 @@
 				,p.id as auditId
 				,'D' as TYPE   <!-- 临床申报 -->
 				,w.avatar as avatar
-				,e.online_progress as online_progress
+				,e.online_progress as online_progress,null AS materialId
 				 
 				from expertation e
 				inner join org_user u on e.org_id = u.org_id and u.id = #{parameter.userId} AND (e.online_progress='1' or e.online_progress='4')

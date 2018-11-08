@@ -93,7 +93,7 @@
                 <value>/expertation/lookforward.action* -> 1</value>  <!-- 临床申报 重定向方法 -->
                 <value>/expertation/toPersondetail.action* -> 1</value> <!-- 临床申报 个人中心跳转链接 -->
                 <value>/expertation/toSearchOrg.action* -> 1</value> <!-- 临床申报 选择申报学校 -->
-                
+                <value>/research/tolist.action* -> 1</value><!--调研表  列表页面-->
                 
 
                 <!--机构用户-->

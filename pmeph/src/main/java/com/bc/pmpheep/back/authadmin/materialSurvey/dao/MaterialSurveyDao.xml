@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.authadmin.materialSurvey.dao.MaterialSurveyDao">
+
+    <select id="getSurveyByMaterialId" parameterType="java.lang.Long" resultType="MaterialSurvey">
+	  	select * from material_survey where material_id=#{materIalId}
+	</select>
+
+
+    <select id="getSurveyQuestionBySurveyId" parameterType="java.lang.Long"  resultType="MaterialSurveyQuestion" >
+		select * from material_survey_question where survey_id=#{surveyId}
+	</select>
+
+	<select id="getSurveyQuestionOptionByQuestionId"  parameterType="java.lang.Long"  resultType="MaterialSurveyQuestionOption">
+
+		select  * from material_survey_question_option where  question_id=#{questionId}
+	</select>
+	<insert id="insertQuestionAnswer" parameterType="java.util.List" >
+		insert into material_survey_question_answer(user_id,user_type, question_id, option_id, option_content, gmt_create, survey_id) values
+		<foreach item="item" collection="list" index="index" separator=",">
+			(#{item.userId},#{item.userType},#{item.questionId},#{item.optionId},#{item.optionContent},#{item.gmtCreate},#{item.surveyId})
+
+		</foreach>
+	</insert>
+
+	<!--查询与教材有关的调研表-->
+	<select id="querySearchList" resultType="java.util.Map" parameterType="PageParameter">
+		select t.title ,t.id,t.intro,
+		DATE_FORMAT(t.end_date,'%Y-%m-%d') as end_date,
+		DATE_FORMAT(b.gmt_create,'%Y-%m-%d %H:%i') as gmt_create
+		from material_survey t
+		left join material_survey_question_answer b on  b.survey_id=t.id
+		and b.user_id=#{parameter.id}  where 1=1
+		<if test="parameter.state != null and parameter.state != '' and parameter.state == 1">
+			and b.gmt_create is not NULL
+		</if>
+		<if test="parameter.state != null and parameter.state != '' and parameter.state == 2">
+			and b.gmt_create is  NULL
+		</if>
+		<if test="parameter.materialId !=null">
+			and t.material_id or t.pre_version_material_id=#{parameter.materialId}
+		</if>
+		 GROUP BY t.id limit ${start},${pageSize}
+	</select>
+
+	<!--查询与教材无关调研表总数-->
+	<select id="queryCount" resultType="Integer">
+        select count(*) from ( select id
+        from material_survey where material_id or pre_version_material_id =#{materialId} )q
+    </select>
+
+	<select id="getSurveyById" parameterType="java.lang.Long" resultType="MaterialSurvey">
+		select * from material_survey where id=#{id}
+	</select>
+
+</mapper>
