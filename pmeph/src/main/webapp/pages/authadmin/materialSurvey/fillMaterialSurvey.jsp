@@ -85,7 +85,7 @@
 
         .qt {
             float: left;
-            font-size: 18px;
+            font-size: 16px;
             margin-bottom: 10px
         }
 
@@ -111,22 +111,43 @@
             border-radius: 5px;
             margin-top: 75px;
             margin-left: 30px;
+            margin-bottom: 50px;
 
         }
 
         .div-content {
-            width: 90%;
+            width: 80%;
+
             background-color: #ffffff;
-            margin-left: 100px;
+
+            margin-left: 10%;
 
         }
+        .form-table{
+            width: 85%;
+            margin-top: 20px;
+        }
+
+        .q .form-table input[type="radio"]{
+            margin-left: 15px;
+            padding: 0;
+            border: none;
+        }
+        .q .form-table input[type="checkbox"]{
+            margin-left: 15px;
+            padding: 0;
+            border: none;
+        }
+
+
+
 
     </style>
 </head>
 <body>
 <jsp:include page="/pages/comm/headGreenBackGround.jsp"/>
 <div class="body">
-    <form action="#">
+
         <div class="content-wrapper" style="width:100%;background-color: #f6f6f6">
             <input type="text" name="surveyId" id="id" value="${res.survey.id}" hidden>
             <div style="height:30px"></div>
@@ -234,7 +255,7 @@
                         </c:forEach>
 
                     </table>
-                    <div style="text-align: center;margin-right: 20%;">
+                    <div style="text-align: center;margin-right: 30%;">
                         <button class="btn-2" onclick="commit()"> 提交</button>
                         <button class="btn-2" onclick="back()">关闭</button>
                     </div>
@@ -242,7 +263,7 @@
             </div>
 
         </div>
-    </form>
+
 </div>
 
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
@@ -310,7 +331,7 @@
 
     }
     function back(){
-        window.location.href="${ctx}/schedule/scheduleList.action";
+        window.history.back()
     }
 
     function commit() {

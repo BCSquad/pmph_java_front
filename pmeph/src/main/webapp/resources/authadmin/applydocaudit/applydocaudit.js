@@ -90,6 +90,10 @@ function resultStatistics(id,name){
 function dealWithAudit(id,name,view_audit){
 	window.location.href = contextpath + "dataaudit/toPage.action?material_id="+id+"&view_audit="+view_audit;
 }
+function toSurvey(id){
+    window.location.href = contextpath + "orgSurvey/tolist.action?materialId="+id;
+
+}
 
 function checkAuthen(id,name,view_audit){
     $.ajax({
@@ -102,4 +106,6 @@ function checkAuthen(id,name,view_audit){
             }
         }
     });
+
+
 }
