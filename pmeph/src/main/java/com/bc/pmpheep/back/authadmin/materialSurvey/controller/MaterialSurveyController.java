@@ -8,6 +8,7 @@ import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.back.util.DateUtil;
 import com.bc.pmpheep.back.util.ObjectUtil;
+import com.bc.pmpheep.back.util.StringUtil;
 import com.bc.pmpheep.general.controller.BaseController;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -92,7 +93,7 @@ public class MaterialSurveyController extends BaseController {
         materialSurveyVO.setMaterialSurveyQuestionList(materialSurveyQuestionVOS);
         ModelAndView mv = new ModelAndView();
         //机构用户基本信息
-        Map<String, Object> map = scheduleService.selectOrgUser(userId);
+        Map<String, Object> map = new HashMap<>();
         map.put("survey", materialSurveyVO);
         mv.addObject("res", map);
         mv.setViewName("authadmin/materialSurvey/fillMaterialSurvey");
@@ -203,6 +204,7 @@ public class MaterialSurveyController extends BaseController {
         if(materialId!=null){
             map.put("materialId",materialId);
             modelAndView.addObject("materialId",materialId);
+
         }
 
         PageParameter<Map<String, Object>> pageParameter = new PageParameter<Map<String, Object>>(pageNum, pageSize);
