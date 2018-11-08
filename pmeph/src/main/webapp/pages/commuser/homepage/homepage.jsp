@@ -55,7 +55,7 @@
                         调研表
                     </div>
                     <div class="bin marks"
-                         onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?pagetag=jcsb'">
+                         onclick="">
                         <div class="lab-pic2"></div>
                         专家申报
                     </div>
