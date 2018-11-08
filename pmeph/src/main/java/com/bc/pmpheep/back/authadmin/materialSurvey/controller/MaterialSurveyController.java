@@ -93,8 +93,13 @@ public class MaterialSurveyController extends BaseController {
         }
         materialSurveyVO.setMaterialSurveyQuestionList(materialSurveyQuestionVOS);
         ModelAndView mv = new ModelAndView();
-        //机构用户基本信息
+        String state=request.getParameter("state");
         Map<String, Object> map = new HashMap<>();
+        if(StringUtil.notEmpty(state)){
+            mv.addObject("state",1);
+        }else{
+            mv.addObject("state",2);
+        }
         map.put("survey", materialSurveyVO);
         mv.addObject("res", map);
         mv.setViewName("authadmin/materialSurvey/fillMaterialSurvey");
