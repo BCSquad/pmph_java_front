@@ -94,7 +94,7 @@ public class MaterialSurveyController extends BaseController {
         materialSurveyVO.setMaterialSurveyQuestionList(materialSurveyQuestionVOS);
         ModelAndView mv = new ModelAndView();
         //机构用户基本信息
-        Map<String, Object> map = scheduleService.selectOrgUser(userId);
+        Map<String, Object> map = new HashMap<>();
         map.put("survey", materialSurveyVO);
         mv.addObject("res", map);
         mv.setViewName("authadmin/materialSurvey/fillMaterialSurvey");
@@ -205,6 +205,7 @@ public class MaterialSurveyController extends BaseController {
         if(materialId!=null){
             map.put("materialId",materialId);
             modelAndView.addObject("materialId",materialId);
+
         }
 
         PageParameter<Map<String, Object>> pageParameter = new PageParameter<Map<String, Object>>(pageNum, pageSize);
