@@ -55,7 +55,13 @@
                             <td>${list.intro}</td>
                             <td>${list.end_date == null?'永久有效':list.end_date}</td>
                             <td>${list.gmt_create == null?'暂未填写':list.end_date}</td>
-                             ${list.gmt_create == null?'<td class="rt" onclick="add(${list.id})">填写</td>':'<td class="rt">查看</td>'}
+                             <%--${list.gmt_create == null?'<td class="rt" onclick="add(${list.id})">填写</td>':'<td class="rt">查看</td>'}--%>
+                            <c:if test="${list.gmt_create == null}">
+                                <td class="rt" onclick="add(${list.id})"><font style="color: #337AB7;">填写</font></td>
+                            </c:if>
+                            <c:if test="${list.gmt_create != null}">
+                                <td class="rt"><font style="color: #337AB7;">查看</font></td>
+                            </c:if>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -125,7 +131,7 @@
     }
 
     function add(surveyId) {
-        window.location.href=contextpath+'orgSurvey/fillSurveyById.action?surveyId='+surveyId;
+        window.location.href=contextpath+'orgSurvey/fillSurveyById.action?surveyId='+surveyId+'&state=1';
     }
 </script>
 </html>
