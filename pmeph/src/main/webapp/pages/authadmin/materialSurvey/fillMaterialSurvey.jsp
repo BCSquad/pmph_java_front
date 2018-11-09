@@ -145,7 +145,15 @@
     </style>
 </head>
 <body>
-<jsp:include page="/pages/comm/headGreenBackGround.jsp"/>
+<c:if test="${state==2}">
+     <jsp:include page="/pages/comm/headGreenBackGround.jsp"/>
+</c:if>
+<c:if test="${state==1}">
+    <jsp:include page="/pages/comm/head.jsp">
+        <jsp:param value="homepage" name="pageTitle"/>
+    </jsp:include>
+</c:if>
+
 <div class="body">
 
         <div class="content-wrapper" style="width:100%;background-color: #f6f6f6">
