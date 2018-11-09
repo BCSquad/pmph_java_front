@@ -33,7 +33,7 @@
             padding: 5px 7px;
             line-height: 1.5;
             box-sizing: border-box;
-            width: 100%;
+            width: 95%;
             font-size: 14px;
             color: rgb(31, 43, 61);
             background-color: #fff;
@@ -70,14 +70,13 @@
             outline: none;
             padding: 3px 10px;
             transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
-            width: 100%;
+            width: 95%;
             margin-left: 15px;
 
         }
 
         .sxy-radio {
 
-            margin-left: 15px;
             margin-bottom: 10px;
             display: inline
 
@@ -90,7 +89,7 @@
         }
 
         .sxy-checkbox {
-            margin-left: 15px;
+
             margin-bottom: 10px;
             display: inline
         }
@@ -123,23 +122,23 @@
             margin-left: 10%;
 
         }
-        .form-table{
+
+        .form-table {
             width: 85%;
             margin-top: 20px;
         }
 
-        .q .form-table input[type="radio"]{
-            margin-left: 15px;
-            padding: 0;
-            border: none;
-        }
-        .q .form-table input[type="checkbox"]{
+        .q .form-table input[type="radio"] {
             margin-left: 15px;
             padding: 0;
             border: none;
         }
 
-
+        .q .form-table input[type="checkbox"] {
+            margin-left: 15px;
+            padding: 0;
+            border: none;
+        }
 
 
     </style>
@@ -156,121 +155,152 @@
 
 <div class="body">
 
-        <div class="content-wrapper" style="width:100%;background-color: #f6f6f6">
-            <input type="text" name="surveyId" id="id" value="${res.survey.id}" hidden>
-            <div style="height:30px"></div>
+    <div class="content-wrapper" style="width:100%;background-color: #f6f6f6">
+        <input type="text" name="surveyId" id="id" value="${res.survey.id}" hidden>
+        <div style="height:30px"></div>
 
-            <div style="height:14px"></div>
-            <div class="div-content">
-                <div style="padding-top: 20px;text-align: center">
-                    <h2>${res.survey.title}</h2>
+        <div style="height:14px"></div>
+        <div class="div-content">
+            <div style="padding-top: 20px;text-align: center">
+                <h2>${res.survey.title}</h2>
+            </div>
+
+            <div class="q">
+                <span>${res.survey.intro}</span>
+                <div style="margin-top: 10px;margin-left: 20px"><img alt=""
+                                                                     src="${ctx}/statics/image/_cupline.jpg"/>
                 </div>
+                <table border="0" class="form-table">
 
-                <div class="q">
-                    <span>${res.survey.intro}</span>
-                    <div style="margin-top: 10px;margin-left: 20px"><img alt=""
-                                                                         src="${ctx}/statics/image/_cupline.jpg"/>
-                    </div>
-                    <table border="0" class="form-table">
+                    <c:forEach items="${res.survey.materialSurveyQuestionList}" var="QuestionList"
+                               varStatus="QuestionListStatus">
 
-                        <c:forEach items="${res.survey.materialSurveyQuestionList}" var="QuestionList"
-                                   varStatus="QuestionListStatus">
-
-                            <td><span class="qt">${QuestionListStatus.index+1}.${QuestionList.title}
+                        <td><span class="qt">${QuestionListStatus.index+1}.${QuestionList.title}
                                   <c:if test="${QuestionList.isAnswer==1 }">
-                                      <span style="color:#ff3d38">*</span>
+
                                   </c:if>
                                 :</span></td>
 
-                            <tr style="height: 50px">
+                        <tr style="height: 50px">
                                 <%--类型是单选--%>
-                                <c:if test="${QuestionList.type==1 }">
-                                    <td style="margin-top: 10px">
-                                        <div class="sxy-radio">
-                                            <c:forEach items="${QuestionList.materialSurveyQuestionOptionList}"
-                                                       var="OptionList" varStatus="OptionLiStstatus">
-
+                            <c:if test="${QuestionList.type==1 }">
+                                <td style="margin-top: 10px">
+                                    <div class="sxy-radio">
+                                        <c:forEach items="${QuestionList.materialSurveyQuestionOptionList}"
+                                                   var="OptionList" varStatus="OptionLiStstatus">
+                                            <c:if test="${QuestionList.optionAnswer!=null }">
+                                                <input type="radio" checked id="${QuestionList.id}"
+                                                       value="${OptionList.id}"
+                                                       name="radio_${QuestionListStatus.index+1}"/>${OptionList.optionContent}
+                                            </c:if>
+                                            <c:if test="${QuestionList.optionAnswer==null }">
                                                 <input type="radio" id="${QuestionList.id}" value="${OptionList.id}"
                                                        name="radio_${QuestionListStatus.index+1}"/>${OptionList.optionContent}
+                                            </c:if>
+                                        </c:forEach>
+                                    </div>
+                                </td>
 
-                                            </c:forEach>
-                                        </div>
-                                    </td>
+                            </c:if>
+                                <%--类型是多选--%>
+                            <c:if test="${QuestionList.type==2 }">
 
-                                </c:if>
-                                        <%--类型是多选--%>
-                                <c:if test="${QuestionList.type==2 }">
+                                <td>
+                                    <div class="sxy-checkbox" id="cb${QuestionListStatus.index+1}">
+                                        <c:forEach items="${QuestionList.materialSurveyQuestionOptionList}"
+                                                   var="OptionList" varStatus="OptionLiStstatus">
 
-                                    <td>
-                                        <div class="sxy-checkbox" id="cb${QuestionListStatus.index+1}">
-                                            <c:forEach items="${QuestionList.materialSurveyQuestionOptionList}"
-                                                       var="OptionList" varStatus="OptionLiStstatus">
 
-                                                <input type="checkbox" name="checkbox_${QuestionListStatus.index+1}"
+                                            <c:if test="${QuestionList.optionAnswer== OptionList.id }">
+                                            <input type="checkbox" checked
+                                                   name="checkbox_${QuestionListStatus.index+1}"
+                                                   value="${OptionList.id}"
+                                                   id="${OptionList.id}">${OptionList.optionContent}
+                                            </c:if>
+                                            <c:if test="${QuestionList.optionAnswer!=OptionList.id  }">
+                                                <input type="checkbox"
+                                                       name="checkbox_${QuestionListStatus.index+1}"
                                                        value="${OptionList.id}"
-                                                       id="${QuestionList.id}">${OptionList.optionContent}
+                                                       id="${OptionList.id}">${OptionList.optionContent}
+                                            </c:if>
 
-                                            </c:forEach>
-                                        </div>
-                                    </td>
+                                        </c:forEach>
+                                    </div>
+                                </td>
 
-                                </c:if>
-                                        <%--类型是下拉框--%>
-                                <c:if test="${QuestionList.type==3 }">
+                            </c:if>
+                                <%--类型是下拉框--%>
+                            <c:if test="${QuestionList.type==3 }">
 
-                                    <td>
+                                <td>
 
-                                        <select name="optionContent" id="${QuestionList.id}">
-                                            <c:forEach items="${QuestionList.materialSurveyQuestionOptionList}"
-                                                       var="OptionList" varStatus="OptionLiStstatus">
+                                    <select name="optionContent" id="${QuestionList.id}">
+                                        <c:forEach items="${QuestionList.materialSurveyQuestionOptionList}"
+                                                   var="OptionList" varStatus="OptionLiStstatus">
+                                            <c:if test="${QuestionList.optionAnswers}">
+                                                <option value="${OptionList.optionContent}" selected
+                                                        id="OptionList.id"></option>
+                                            </c:if>
+                                            <c:if test="${QuestionList.optionAnswers}">
                                                 <option value="${OptionList.optionContent}" id="OptionList.id"></option>
-                                            </c:forEach>
-                                        </select>
-                                    </td>
+                                            </c:if>
+                                        </c:forEach>
+                                    </select>
+                                </td>
 
-                                </c:if>
-                                        <%--类型是输入框--%>
-                                <c:if test="${QuestionList.type==4 }">
+                            </c:if>
+                                <%--类型是输入框--%>
+                            <c:if test="${QuestionList.type==4 }">
 
-                                    <td>
-
+                                <td>
+                                    <c:if test="${QuestionList.optionContent!=null }">
+                                        <input class="input" id="${QuestionList.id}" type="text"
+                                               value="${QuestionList.optionContent}">
+                                    </c:if>
+                                    <c:if test="${QuestionList.optionContent==null }">
                                         <input class="input" id="${QuestionList.id}" type="text">
-                                    </td>
+                                    </c:if>
+                                </td>
 
-                                </c:if>
+                            </c:if>
 
-                                        <%--类型是文本域--%>
-                                <c:if test="${QuestionList.type==5 }">
+                                <%--类型是文本域--%>
+                            <c:if test="${QuestionList.type==5 }">
 
-                                    <td>
-
+                                <td>
+                                    <c:if test="${QuestionList.optionContent!=null }">
+                                        <textarea id="${QuestionList.id}"
+                                                  class="textarea">${QuestionList.optionContent}</textarea>
+                                    </c:if>
+                                    <c:if test="${QuestionList.optionContent==null }">
                                         <textarea id="${QuestionList.id}" class="textarea"></textarea>
+                                    </c:if>
 
-                                    </td>
+                                </td>
 
-                                </c:if>
-                                        <%--类型是文件--%>
-                                <c:if test="${QuestionList.type==6 }">
+                            </c:if>
+                                <%--类型是文件--%>
+                            <c:if test="${QuestionList.type==6 }">
 
-                                    <td>
+                                <td>
 
-                                        <input type="file" id="${QuestionList.id}">
+                                    <input type="file" id="${QuestionList.id}">
 
-                                    </td>
+                                </td>
 
-                                </c:if>
-                            </tr>
-                        </c:forEach>
+                            </c:if>
+                        </tr>
+                    </c:forEach>
 
-                    </table>
-                    <div style="text-align: center;margin-right: 30%;">
-                        <button class="btn-2" onclick="commit()"> 提交</button>
-                        <button class="btn-2" onclick="back()">关闭</button>
-                    </div>
+                </table>
+                <div style="text-align: center;margin-right: 15%;">
+                    <button id="commit" class="btn-2" onclick="commit()"> 提交</button>
+                    <button class="btn-2" onclick="back()">关闭</button>
                 </div>
             </div>
-
         </div>
+
+    </div>
 
 </div>
 
@@ -290,6 +320,18 @@
         answerTextArea: ''
     };
     $(function () {
+        var type = "${res.type}";
+        if (type) {
+            if ("view" == type) {
+                $("input").attr("disabled", "disabled");
+                $("input").css("background-color", "#eaeaea");
+                $("textarea").attr("disabled", "disabled");
+                $("textarea").css("background-color", "#EAEAEA");
+                $("#commit").hide();
+            }
+        }
+
+
         /*初始化表单提交数据*/
         <c:forEach items="${res.survey.materialSurveyQuestionList}" var="QuestionList"
                                       varStatus="QuestionListStatus">
@@ -297,12 +339,27 @@
             id: 0,
             type: 0
         };
+
         quesion.id = parseInt("${QuestionList.id}");
         quesion.type = parseInt("${QuestionList.type}");
         quesions.push(quesion);
-        </c:forEach>
-        console.log(quesions);
-    });
+
+        if ("${QuestionList.type}" == 2) {
+            <c:forEach items="${QuestionList.optionAnswers}" var="AnswersList"
+                       varStatus="QuestionListStatus">
+
+            $("#"+${AnswersList}).attr("checked", 'true');
+            </c:forEach>
+        }
+
+
+
+
+
+    </c:forEach>
+    console.log(quesions);
+    })
+    ;
 
     /*获取表单数据*/
     function getForm() {
@@ -313,7 +370,7 @@
                     break;
                 case 2:
                     var arr = new Array();
-                    $($("#cb"+(i+1)+" input:checkbox:checked")).each(function (i) {
+                    $($("#cb" + (i + 1) + " input:checkbox:checked")).each(function (i) {
                         arr[i] = $(this).val();
                     });
                     quesions[i].answerId = arr.join(",");
@@ -338,7 +395,8 @@
 
 
     }
-    function back(){
+
+    function back() {
         window.history.back()
     }
 
@@ -357,11 +415,11 @@
             success: function (res) {
                 if (res.code >= 1) {
                     window.message.success("填写成功");
-                    window.location.href="${ctx}/schedule/scheduleList.action";
+                    window.location.href = "${ctx}/schedule/scheduleList.action";
 
                 } else {
                     window.message.error("后台错误");
-                    window.location.href="${ctx}/schedule/scheduleList.action";
+                    window.location.href = "${ctx}/schedule/scheduleList.action";
                 }
 
 

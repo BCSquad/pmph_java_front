@@ -33,6 +33,35 @@ public class MaterialSurveyQuestionVO implements Serializable {
 
     //问题选项
     private List<MaterialSurveyQuestionOption> materialSurveyQuestionOptionList;
+    private List<Long> optionAnswers;
+    //选中选项
+    private Long optionAnswer;
+    //填写文本
+    private String optionContent;
+
+    public List<Long> getOptionAnswers() {
+        return optionAnswers;
+    }
+
+    public void setOptionAnswers(List<Long> optionAnswers) {
+        this.optionAnswers = optionAnswers;
+    }
+
+    public Long getOptionAnswer() {
+        return optionAnswer;
+    }
+
+    public void setOptionAnswer(Long optionAnswer) {
+        this.optionAnswer = optionAnswer;
+    }
+
+    public String getOptionContent() {
+        return optionContent;
+    }
+
+    public void setOptionContent(String optionContent) {
+        this.optionContent = optionContent;
+    }
 
     public List<MaterialSurveyQuestionOption> getMaterialSurveyQuestionOptionList() {
         return materialSurveyQuestionOptionList;
