@@ -26,7 +26,7 @@ public class TeacherPlatformServiceImpl  implements TeacherPlatformService{
         Map<String, Object> map = teacherPlatformDao.queryXikb(id);
         String mid= MapUtils.getString(map,"activity_desc_cms_id");
         Content content = contentService.get(mid);
-        map.put("content",omit(removeHtml(content.getContent()),2500));
+        map.put("content",content.getContent());
         String t=map.get("times").toString();
         int times=Integer.parseInt(t)+1;
         teacherPlatformDao.addtimes(times,id);
@@ -51,14 +51,14 @@ public class TeacherPlatformServiceImpl  implements TeacherPlatformService{
         return count;
     }
 
-    //去掉字符串中的html标签
+  /*  //去掉字符串中的html标签
     public String removeHtml(String str){
         String regEx_html="<[^>]+>"; //定义HTML标签的正则表达式
         Pattern p_html=Pattern.compile(regEx_html,Pattern.CASE_INSENSITIVE);
         Matcher m_html=p_html.matcher(str);
         str=m_html.replaceAll(""); //过滤html标签
         return str;
-    }
+    }*/
 
     /**
      * 超出部分省略号显示
@@ -66,7 +66,7 @@ public class TeacherPlatformServiceImpl  implements TeacherPlatformService{
      * @param content
      * @return
      */
-    public String omit(String content, int length) throws UnsupportedEncodingException {
+    /*public String omit(String content, int length) throws UnsupportedEncodingException {
         String returncontent = "";
         content = removeHtml(content);
         //int le = content.getBytes("UTF-8").length;
@@ -78,7 +78,7 @@ public class TeacherPlatformServiceImpl  implements TeacherPlatformService{
             returncontent = content;
         }
         return returncontent;
-    }
+    }*/
 
     @Override
     public List<Map<String, Object>> QuerySourceList(String startrow) throws UnsupportedEncodingException {
@@ -87,7 +87,7 @@ public class TeacherPlatformServiceImpl  implements TeacherPlatformService{
             String mid= MapUtils.getString(map,"activity_desc_cms_id");
             if(!mid.equals("")){
                 Content content = contentService.get(mid);
-                map.put("content",omit(removeHtml(content.getContent()),1800));
+                map.put("content",content.getContent());
             }
         }
         return list;
@@ -110,7 +110,7 @@ public class TeacherPlatformServiceImpl  implements TeacherPlatformService{
             String mid= MapUtils.getString(pmap,"activity_desc_cms_id");
             if(!mid.equals("")){
                 Content content = contentService.get(mid);
-                pmap.put("content",removeHtml(content.getContent()));
+                pmap.put("content",content.getContent());
             }
         }
         return list;
