@@ -91,13 +91,13 @@
 	                                	<c:choose>
 	                                		<c:when test="${one.TYPE=='C'}">
 	                                			<div class="timeEvent C">
-			                                        <span class="time">于<fmt:formatDate pattern="yyyy年MM月dd日" value="${one.TIME}" /></span>&nbsp;<span class="event">${one.CONTENT}</span>
+			                                        <span class="time">于<fmt:formatDate pattern="yyyy年MM月dd日" value="${one.TIME}" /></span>&nbsp;<a href="#" class="event" onclick="system('${one.ID}')" >${one.CONTENT}</a>
 			                                        <input type="hidden" class="msg_id" value="${one.CONTENT}">
 			                                    </div>
 	                                		</c:when>
 	                                		<c:otherwise>
 	                                			<div class="timeEvent">
-			                                        <span class="time">于<fmt:formatDate pattern="yyyy年MM月dd日" value="${one.TIME}" /></span>&nbsp;<span class="event">提交${one.CONTENT}</span><span class="event">，请审批</span>
+			                                        <span class="time">于<fmt:formatDate pattern="yyyy年MM月dd日" value="${one.TIME}" /></span>&nbsp;<a href="#" class="event" onclick="system('${one.ID}')" >提交${one.CONTENT}</a><span class="event">，请审批</span>
 			                                    </div>
 	                                		</c:otherwise>
 	                                	</c:choose>
@@ -107,11 +107,11 @@
 	                            <div class="rightButton">
 	                            <c:choose>
                                		<c:when test="${one.TYPE=='C'}">
-                               			<div onclick="system('${one.ID}')"  class="buttonDiv">
+                               			<%--<div onclick="system('${one.ID}')"  class="buttonDiv">
 	                                        		查看
-	                                	</div>
+	                                	</div>--%>
                                         <div onclick="fillMaterialSurvey('${one.materialId}')"  class="buttonDiv">
-                                            调查问卷
+                                            办理
                                         </div>
                                		</c:when>
                                		<c:otherwise>
@@ -319,7 +319,7 @@
     }
 
     function fillMaterialSurvey(str){
-        window.location.href="${ctx}/orgSurvey/fillSurveyById.action?materialId="+str;
+        window.location.href="${ctx}/applyDocAudit/toPage.action";
     }
     
   //点击显示系统消息
