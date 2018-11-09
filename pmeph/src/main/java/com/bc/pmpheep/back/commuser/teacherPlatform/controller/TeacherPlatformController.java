@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +29,7 @@ public class TeacherPlatformController extends BaseController{
 
     //跳转到师资平台详情页
     @RequestMapping("/todetail")
-    public ModelAndView todetail(HttpServletRequest request){
+    public ModelAndView todetail(HttpServletRequest request) throws UnsupportedEncodingException {
         ModelAndView modelAndView=new ModelAndView();
         //活动ID
         String activity_id=request.getParameter("activity_id");
@@ -145,7 +146,7 @@ public class TeacherPlatformController extends BaseController{
     //师资平台列表查询方法
     @RequestMapping("/sourcelist")
     @ResponseBody
-    public List<Map<String,Object>> sourcelist(HttpServletRequest request){
+    public List<Map<String,Object>> sourcelist(HttpServletRequest request) throws UnsupportedEncodingException {
         String startrow=request.getParameter("startrow");
         String state=request.getParameter("state");
         List<Map<String,Object>> list;

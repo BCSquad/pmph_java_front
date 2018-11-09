@@ -3,6 +3,7 @@ package com.bc.pmpheep.back.commuser.teacherPlatform.service;
 
 import org.apache.ibatis.annotations.Param;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +13,7 @@ public interface TeacherPlatformService {
      * @param id
      * @return
      */
-    Map<String,Object> queryXikb(String id);
+    Map<String,Object> queryXikb (String id) throws UnsupportedEncodingException;
     /**
      * 查询视频列表
      * @param map
@@ -35,7 +36,7 @@ public interface TeacherPlatformService {
      * 查询相关资源列表
      * @return
      */
-    List<Map<String,Object>> QuerySourceList(String startrow);
+    List<Map<String,Object>> QuerySourceList(String startrow) throws UnsupportedEncodingException ;
     /**
      * 查询相关资源总数
      * @return

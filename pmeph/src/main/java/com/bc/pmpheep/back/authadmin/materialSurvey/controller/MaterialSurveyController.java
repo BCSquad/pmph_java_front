@@ -14,6 +14,7 @@ import com.bc.pmpheep.back.util.StringUtil;
 import com.bc.pmpheep.general.controller.BaseController;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -37,9 +38,6 @@ public class MaterialSurveyController extends BaseController {
     @Qualifier("com.bc.pmpheep.back.authadmin.backlog.service.ScheduleServiceImpl")
     private
     ScheduleService scheduleService;
-
-    MaterialDetailService materialDetailService;
-
 
     @Autowired
     @Qualifier("com.bc.pmpheep.back.authadmin.materialSurvey.service.MaterialSurveyServiceImpl")
@@ -70,6 +68,9 @@ public class MaterialSurveyController extends BaseController {
         MaterialSurvey surveyByMaterialId = null;
         if (ObjectUtil.notNull(request.getParameter("materialId"))) {
             /*根据教材id获取最新的关联的问卷
+        MaterialSurvey surveyByMaterialId=null;
+        if(StringUtil.notEmpty(request.getParameter("materialId"))){
+            /*根据教材id获取问卷
              */
             String materialId = request.getParameter("materialId");
             List<MaterialSurvey> surveyByMaterialIds = materialSurveyService.getSurveyByMaterialId(Long.parseLong(materialId));
@@ -106,6 +107,7 @@ public class MaterialSurveyController extends BaseController {
         }
 
         if (ObjectUtil.notNull(request.getParameter("surveyId"))) {
+        if(StringUtil.notEmpty(request.getParameter("surveyId"))){
             /*根据问卷id获取问卷对象
              */
             Long surveyId = Long.parseLong(request.getParameter("surveyId"));
@@ -131,7 +133,14 @@ public class MaterialSurveyController extends BaseController {
         materialSurveyVO.setMaterialSurveyQuestionList(materialSurveyQuestionVOS);
 
         //机构用户基本信息
+
+        String state=request.getParameter("state");
         Map<String, Object> map = new HashMap<>();
+        if(StringUtil.notEmpty(state)){
+            mv.addObject("state",1);
+        }else{
+            mv.addObject("state",2);
+        }
         map.put("survey", materialSurveyVO);
         mv.addObject("res", map);
         mv.setViewName("authadmin/materialSurvey/fillMaterialSurvey");

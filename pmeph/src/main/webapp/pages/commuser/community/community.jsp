@@ -96,7 +96,7 @@
                     <div title=""   class="center-up"
                          onclick="window.location.href='<c:url value="/teacherPlatform/todetail.action?id=${list.cms_id}&activity_id=${list.activity_id}"/>'">
                         <div class="center-img" >
-                            <img alt="" src="${ctx}/image/${list.cover}.action" style="width:120px;height:80px;">
+                            <img alt="" src="${ctx}/image/${list.cover}.action" style="display:block;width:120px;max-height:80px;margin: auto">
                             <%--<img alt="" src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg" style="width:120px;height:80px;">--%>
                         </div>
                         <div class="center-down" >${list.activity_name}</div>

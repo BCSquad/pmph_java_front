@@ -1916,6 +1916,7 @@ ul li {
     width: 100%;
     height: 90px;
     margin-top: 10px;
+    display: flex;
 }
 
 .szpt-buttom{

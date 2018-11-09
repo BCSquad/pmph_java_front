@@ -6,8 +6,11 @@ import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service("com.bc.pmpheep.back.commuser.teacherPlatform.service.TeacherPlatformServiceImpl")
 public class TeacherPlatformServiceImpl  implements TeacherPlatformService{
@@ -19,7 +22,7 @@ public class TeacherPlatformServiceImpl  implements TeacherPlatformService{
     private ContentService contentService;
 
     @Override
-    public Map<String, Object> queryXikb(String id) {
+    public Map<String, Object> queryXikb(String id) throws UnsupportedEncodingException {
         Map<String, Object> map = teacherPlatformDao.queryXikb(id);
         String mid= MapUtils.getString(map,"activity_desc_cms_id");
         Content content = contentService.get(mid);
@@ -48,8 +51,37 @@ public class TeacherPlatformServiceImpl  implements TeacherPlatformService{
         return count;
     }
 
+  /*  //去掉字符串中的html标签
+    public String removeHtml(String str){
+        String regEx_html="<[^>]+>"; //定义HTML标签的正则表达式
+        Pattern p_html=Pattern.compile(regEx_html,Pattern.CASE_INSENSITIVE);
+        Matcher m_html=p_html.matcher(str);
+        str=m_html.replaceAll(""); //过滤html标签
+        return str;
+    }*/
+
+    /**
+     * 超出部分省略号显示
+     *
+     * @param content
+     * @return
+     */
+    /*public String omit(String content, int length) throws UnsupportedEncodingException {
+        String returncontent = "";
+        content = removeHtml(content);
+        //int le = content.getBytes("UTF-8").length;
+        int le = content.length();
+        if (le > length/4 && !content.equals(null)) {
+            int n = length / 4;
+            returncontent =content.substring(0, n) + "...";
+        } else {
+            returncontent = content;
+        }
+        return returncontent;
+    }*/
+
     @Override
-    public List<Map<String, Object>> QuerySourceList(String startrow) {
+    public List<Map<String, Object>> QuerySourceList(String startrow) throws UnsupportedEncodingException {
         List<Map<String, Object>> list=teacherPlatformDao.QuerySourceList(startrow);
         for (Map<String, Object> map: list) {
             String mid= MapUtils.getString(map,"activity_desc_cms_id");

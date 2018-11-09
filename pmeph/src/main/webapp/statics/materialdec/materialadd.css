@@ -574,5 +574,26 @@
 	float: left;
 	background-size: 100% 100%;
 }
-  
+
+.txdyb:after{
+	content: "";
+	background-image: url("../image/txdyb.png");
+	display:block;
+	width: 20px;
+	height: 20px;
+	float: left;
+	background-size: 100%;
+}
+
+.wrt:after{
+	content: "";
+	background-image: url("../image/tobb.png");
+	display:block;
+	width: 20px;
+	height: 20px;
+	float: left;
+	background-size: 100%;
+	margin-left: 10px;
+	cursor: pointer;
+}
 

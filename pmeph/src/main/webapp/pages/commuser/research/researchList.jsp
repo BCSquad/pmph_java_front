@@ -55,7 +55,7 @@
                             <td>${list.intro}</td>
                             <td>${list.end_date == null?'永久有效':list.end_date}</td>
                             <td>${list.gmt_create == null?'暂未填写':list.end_date}</td>
-                             ${list.gmt_create == null?'<td class="rt" onclick="add()">填写</td>':'<td class="rt">查看</td>'}
+                             ${list.gmt_create == null?'<td class="rt" onclick="add(${list.id})">填写</td>':'<td class="rt">查看</td>'}
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -124,8 +124,8 @@
         window.location.href=contextpath+'research/tolist.action?state='+state;
     }
 
-    function add() {
-        window.location.href=contextpath+'research/toinsert.action';
+    function add(surveyId) {
+        window.location.href=contextpath+'orgSurvey/fillSurveyById.action?surveyId='+surveyId;
     }
 </script>
 </html>
