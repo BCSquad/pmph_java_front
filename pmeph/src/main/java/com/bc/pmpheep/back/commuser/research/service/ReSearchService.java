@@ -25,5 +25,11 @@ public interface ReSearchService {
      * @param material_id
      * @return
      */
-    List<Map<String,Object>> querySearchByMaterialId(String material_id);
+    List<Map<String,Object>> querySearchByMaterialId(String material_id,String user_id);
+    /**
+     * 查询与教材下图书有关的调研表
+     * @param textbook_id
+     * @return
+     */
+    List<Map<String,Object>> querySearchByTextbookId(String textbook_id);
 }

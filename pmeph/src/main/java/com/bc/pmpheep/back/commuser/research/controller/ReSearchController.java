@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -51,7 +52,20 @@ public class ReSearchController extends BaseController{
     @ResponseBody
     public List<Map<String,Object>> querySearch(HttpServletRequest request){
         String material_id=request.getParameter("material_id");
-        List<Map<String,Object>> list = reSearchService.querySearchByMaterialId(material_id);
+        Map<String, Object> user=getUserInfo();
+        String user_id = user.get("id").toString();
+        List<Map<String,Object>> list = reSearchService.querySearchByMaterialId(material_id,user_id);
         return list;
+    }
+
+    //根据教材ID查询调研表
+    @RequestMapping("querySearchByTextbookId")
+    @ResponseBody
+    public List<Map<String,Object>> querySearchByTextbookId(HttpServletRequest request){
+        String textbook_id=request.getParameter("textbook_id");
+        textbook_id = textbook_id.replaceAll("[\\[|\\]|\\{|\\}|\"]","");
+        textbook_id = "(" + textbook_id + ")";
+        List<Map<String,Object>> list = reSearchService.querySearchByTextbookId(textbook_id);
+        return null;
     }
 }

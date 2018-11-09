@@ -41,6 +41,20 @@
 
     <!--查询与教材有关的调研表-->
     <select id="querySearchByMaterialId" parameterType="java.util.Map" resultType="java.util.Map">
-        select * from material_survey where material_id=#{material_id}
+        select b.*,a.gmt_create
+            from material_survey_chain t
+            left join material_survey b on t.material_survey_id = b.id
+			left join material_survey_question_answer a on  a.survey_id=t.material_survey_id
+            where t.material_id=#{material_id} and a.user_id=#{user_id} and  b.all_textbook_used=1
+    </select>
+
+    <!--查询与教材下图书有关的调研表-->
+    <select id="querySearchByTextbookId" resultType="java.util.Map" parameterType="java.util.Map">
+        select
+            b.id,b.title,max(t.required)
+                from material_survey_chain t
+                left join material_survey b on t.material_survey_id=b.id
+                where t.textbook_id in ${textbook_id} and b.all_textbook_used=0
+                group by b.id
     </select>
 </mapper>
