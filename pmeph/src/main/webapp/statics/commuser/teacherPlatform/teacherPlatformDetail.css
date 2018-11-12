@@ -61,7 +61,7 @@
 }
 
 .part2{
-    max-width: 730px;
+    width: 730px;
     margin-left: 20px;
     height: 260px;
     overflow: hidden;
