@@ -44,9 +44,14 @@
         <div style="float: left;height: 300px">
             <%--<div class="part1" onclick="toxikb(${map.cms_id})">${map.title}</div>--%>
             <div class="part2">
-                <div>${map.content}</div>
+                <div style="text-indent: 26px">${map.content}</div>
             </div>
-            <div class="more-content" onclick="toxikb('${map.cms_id}')">更多>></div>
+            <c:if test="${map.cms_id != null and map.cms_id !=''}">
+                <div class="more-content" onclick="toxikb('${map.cms_id}')">更多>></div>
+            </c:if>
+            <c:if test="${map.cms_id == null or map.cms_id ==''}">
+                <div class="more-content" onclick="toszpt('${map.id}')">更多>></div>
+            </c:if>
         </div>
     </div>
     <div class="part5">
@@ -169,6 +174,10 @@
         //跳转到信息快报详情页面
         function toxikb(id) {
             window.location.href=contextpath+'inforeport/toinforeport.action?id='+id;
+        }
+        //跳转到活动详情页面
+        function toszpt(id) {
+            window.location.href=contextpath+'teacherPlatform/todetailtwo.action?activity_id='+id;
         }
     </script>
     <div class="part5" style="margin-top: 60px">
