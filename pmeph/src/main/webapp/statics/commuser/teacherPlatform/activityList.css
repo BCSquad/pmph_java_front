@@ -44,7 +44,7 @@
     height: 160px;
     float: left;
     text-align: center;
-    vertical-align: middle;
+    display: flex;
 }
 
 .collection .content img {
