@@ -44,7 +44,7 @@
         <div style="float: left;height: 300px">
             <%--<div class="part1" onclick="toxikb(${map.cms_id})">${map.title}</div>--%>
             <div class="part2">
-                <div style="text-indent: 26px">${map.content}</div>
+                <div style="text-indent: 26px;font-family: 宋体;font-size: 16px">${map.content}</div>
             </div>
             <c:if test="${map.cms_id != null and map.cms_id !=''}">
                 <div class="more-content" onclick="toxikb('${map.cms_id}')">更多>></div>
