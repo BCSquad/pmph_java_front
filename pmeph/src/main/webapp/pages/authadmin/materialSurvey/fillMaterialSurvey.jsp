@@ -403,8 +403,6 @@
     function commit() {
         /*提交问卷  JSON字符串提交*/
         var formDate = getForm();
-        console.log(formDate);
-        console.log(JSON.stringify(formDate));
         $.ajax({
             type: 'post',
             data: JSON.stringify(formDate),
@@ -415,11 +413,11 @@
             success: function (res) {
                 if (res.code >= 1) {
                     window.message.success("填写成功");
-                    window.location.href = "${ctx}/schedule/scheduleList.action";
+                    back();
 
                 } else {
                     window.message.error("后台错误");
-                    window.location.href = "${ctx}/schedule/scheduleList.action";
+                    back();
                 }
 
 

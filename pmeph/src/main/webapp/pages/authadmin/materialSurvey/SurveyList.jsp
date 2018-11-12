@@ -49,7 +49,7 @@
                         <button id="btn-search" onclick="query()">查询</button>
                     </c:if>
                     <c:if test="${material == null}">
-                        <button id="btn-search" onclick="queryList()">查询</button>
+                        <td id="btn-search" onclick="queryList()">查询</td>
                     </c:if>
                     <button class="tohis" onclick="window.history.back()">返回</button>
                 </div>
@@ -60,6 +60,7 @@
                             <th>调研表名称</th>
                             <th>问卷概述</th>
                             <th>结束时间</th>
+                            <th>是否必填</th>
                             <th>填写时间</th>
                             <th>操作</th>
                         </tr>
@@ -70,6 +71,13 @@
                                 <td>${list.title}</td>
                                 <td>${list.intro}</td>
                                 <td>${list.end_date == null?'永久有效':list.end_date}</td>
+                                <c:if test="${list.required_for_material == true}">
+                                    <td>是</td>
+                                </c:if>
+                                <c:if test="${list.required_for_material == false}">
+                                    <td>否</td>
+                                </c:if>
+
 
                                 <c:if test="${list.gmt_create == null}">
                                     <td>暂未填写</td>
@@ -79,13 +87,11 @@
                                 </c:if>
 
                                 <c:if test="${list.gmt_create == null}">
-                                    <td onclick='fillMaterialSurvey("${list.id}")'>填写</td>
+                                    <td  style="cursor:pointer;" onclick='fillMaterialSurvey("${list.id}")'>填写</td>
                                 </c:if>
                                 <c:if test="${list.gmt_create != null}">
-                                    <td onclick='surveyDetails("${list.id}")'>查看</td>
+                                    <td style="cursor:pointer;"  onclick='surveyDetails("${list.id}")'>查看</td>
                                 </c:if>
-
-
                             </tr>
                         </c:forEach>
                         </tbody>

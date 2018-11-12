@@ -360,33 +360,24 @@ public class MaterialSurveyController extends BaseController {
     @ResponseBody
     public Map<String, Object> checkFill(HttpServletRequest request) throws ParseException {
         String materialId = request.getParameter("materialId");
+        String state ="2";
+        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> res = new HashMap<>();
+        map.put("state",state);
+        map.put("required","1");
         if(StringUtil.notEmpty(materialId)){
-
+            map.put("materialId", materialId);
         }
-
-
-
-        return null;
-
+        Integer integer = materialSurveyService.checkFile(map);
+        Boolean success=true;
+        if(integer>0){
+            success=false;
+            res.put("success",success);
+        }else{
+            res.put("success",success);
+        }
+        return res;
     }
 
-    /**
-     * 填写问卷内容
-     *
-     * @param json
-     * @param request
-     * @return
-     * @throws ParseException
-     */
-    @RequestMapping(value = "/getFillCount", method = RequestMethod.POST)
-    @ResponseBody
-    public Map<String, Object> getFillCount( HttpServletRequest request) throws ParseException {
-
-
-
-
-        return null;
-
-    }
 
 }

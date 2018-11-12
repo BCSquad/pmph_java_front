@@ -22,5 +22,6 @@ public interface MaterialSurveyDao {
     List<Map<String,Object>> querySearchList(PageParameter<Map<String, Object>> pageParameter);
     MaterialSurvey getSurveyById(Long id);
     Material getMaterialByid(Long id);
+    Integer checkFile(Map<String,Object> parameter);
 
 }

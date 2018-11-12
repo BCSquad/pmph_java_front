@@ -97,15 +97,33 @@ function toSurvey(id){
 
 function checkAuthen(id,name,view_audit){
     $.ajax({
-        type: "POST",
-        url:contextpath+'dataaudit/checkAuthen.action',
-        dataType:"json",
-        success: function(json) {
-            if(json=="OK"){
-                dealWithAudit(id,name,view_audit);
+        type: 'post',
+        url:contextpath+ "orgSurvey/checkFill.action?materialId="+id,
+        async: false,
+        success: function (res) {
+            if (!res.success) {
+                window.message.error("请先填写完必填的调研表");
+                return ;
+            }if(res.success){
+                $.ajax({
+                    type: "POST",
+                    url:contextpath+'dataaudit/checkAuthen.action',
+                    dataType:"json",
+                    success: function(json) {
+                        if(json=="OK"){
+                            dealWithAudit(id,name,view_audit);
+                        }
+                    }
+                });
             }
+
+
         }
     });
+
+
+
+
 
 
 }

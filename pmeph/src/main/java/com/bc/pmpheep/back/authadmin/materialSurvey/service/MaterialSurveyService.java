@@ -46,5 +46,6 @@ public interface MaterialSurveyService {
     Material getMaterialByid(Long id);
 
     List<MaterialSurveyQuestionAnswer> getSurveyQuestionAnswerByQuestionId (Long surveyId);
+    Integer checkFile(Map<String,Object> parameter);
 
 }
