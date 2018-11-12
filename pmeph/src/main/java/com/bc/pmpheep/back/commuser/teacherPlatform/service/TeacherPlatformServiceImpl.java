@@ -3,6 +3,7 @@ import com.bc.pmpheep.back.commuser.teacherPlatform.dao.TeacherPlatformDao;
 import com.bc.pmpheep.general.pojo.Content;
 import com.bc.pmpheep.general.service.ContentService;
 import org.apache.commons.collections.MapUtils;
+import org.apache.poi.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +23,15 @@ public class TeacherPlatformServiceImpl  implements TeacherPlatformService{
     private ContentService contentService;
 
     @Override
-    public Map<String, Object> queryXikb(String id) throws UnsupportedEncodingException {
+    public Map<String, Object> queryXikb(String id,String state){
         Map<String, Object> map = teacherPlatformDao.queryXikb(id);
         String mid= MapUtils.getString(map,"activity_desc_cms_id");
         Content content = contentService.get(mid);
-        map.put("content",omit(removeHtml(content.getContent()),2500));
+        if(state.equals("res")){
+            map.put("content",omit(content.getContent().replaceAll("&nbsp;",""),2200));
+        }else{
+            map.put("content",content.getContent());
+        }
         String t=map.get("times").toString();
         int times=Integer.parseInt(t)+1;
         teacherPlatformDao.addtimes(times,id);
@@ -66,12 +71,12 @@ public class TeacherPlatformServiceImpl  implements TeacherPlatformService{
      * @param content
      * @return
      */
-    public String omit(String content, int length) throws UnsupportedEncodingException {
+    public String omit(String content, int length){
         String returncontent = "";
         content = removeHtml(content);
         //int le = content.getBytes("UTF-8").length;
         int le = content.length();
-        if (le > length/4 && !content.equals(null)) {
+        if (le > length/4 && com.bc.pmpheep.back.util.StringUtil.notEmpty(content)) {
             int n = length / 4;
             returncontent =content.substring(0, n) + "...";
         } else {
@@ -81,13 +86,13 @@ public class TeacherPlatformServiceImpl  implements TeacherPlatformService{
     }
 
     @Override
-    public List<Map<String, Object>> QuerySourceList(String startrow) throws UnsupportedEncodingException {
+    public List<Map<String, Object>> QuerySourceList(String startrow)  {
         List<Map<String, Object>> list=teacherPlatformDao.QuerySourceList(startrow);
         for (Map<String, Object> map: list) {
             String mid= MapUtils.getString(map,"activity_desc_cms_id");
             if(!mid.equals("")){
                 Content content = contentService.get(mid);
-                map.put("content",omit(removeHtml(content.getContent()),1800));
+                map.put("content",omit(content.getContent().replaceAll("&nbsp;",""),1300));
             }
         }
         return list;

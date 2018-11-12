@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.authadmin.materialSurvey.service;
 
+import com.bc.pmpheep.back.authadmin.applydocaudit.bean.Material;
 import com.bc.pmpheep.back.authadmin.materialSurvey.bean.*;
 import com.bc.pmpheep.back.authadmin.materialSurvey.dao.MaterialSurveyDao;
 import com.bc.pmpheep.back.plugin.PageParameter;
@@ -16,7 +17,7 @@ public class MaterialSurveyServiceImpl implements MaterialSurveyService {
     MaterialSurveyDao materialSurveyDao;
 
     @Override
-    public MaterialSurvey getSurveyByMaterialId(Long materialId) {
+    public List<MaterialSurvey> getSurveyByMaterialId(Long materialId) {
         return materialSurveyDao.getSurveyByMaterialId(materialId);
     }
 
@@ -25,10 +26,22 @@ public class MaterialSurveyServiceImpl implements MaterialSurveyService {
         return materialSurveyDao.getSurveyQuestionBySurveyId(surveyId);
     }
 
+
+
     @Override
     public List<MaterialSurveyQuestionOption> getSurveyQuestionOptionByQuestionId(Long questionId) {
 
         return materialSurveyDao.getSurveyQuestionOptionByQuestionId(questionId);
+    }
+
+    @Override
+    public List<MaterialSurveyQuestionAnswer> getSurveyQuestionAnswerByQuestionId(Long questionId) {
+        return materialSurveyDao.getSurveyQuestionAnswerByQuestionId(questionId);
+    }
+
+    @Override
+    public Integer checkFile(Map<String, Object> parameter) {
+        return materialSurveyDao.checkFile(parameter);
     }
 
     @Override
@@ -42,7 +55,7 @@ public class MaterialSurveyServiceImpl implements MaterialSurveyService {
         pageResult.setPageNumber(pageParameter.getPageNumber());
         pageResult.setPageSize(pageParameter.getPageSize());
         List<Map<String,Object>> list = materialSurveyDao.querySearchList(pageParameter);
-        int count = materialSurveyDao.queryCount();
+        int count = materialSurveyDao.queryCount(pageParameter);
         pageResult.setRows(list);
         pageResult.setTotal(count);
         return pageResult;
@@ -52,6 +65,12 @@ public class MaterialSurveyServiceImpl implements MaterialSurveyService {
     public MaterialSurvey getSurveyById(Long id) {
         return materialSurveyDao.getSurveyById(id);
     }
+
+    @Override
+    public Material getMaterialByid(Long id) {
+        return materialSurveyDao.getMaterialByid(id);
+    }
+
 
 
 }

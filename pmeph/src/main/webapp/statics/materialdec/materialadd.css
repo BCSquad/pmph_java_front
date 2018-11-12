@@ -585,15 +585,12 @@
 	background-size: 100%;
 }
 
-.wrt:after{
-	content: "";
-	background-image: url("../image/tobb.png");
-	display:block;
+.wrt{
 	width: 20px;
 	height: 20px;
 	float: left;
-	background-size: 100%;
-	margin-left: 10px;
+	margin-top: 3px;
+	margin-left: 5px;
 	cursor: pointer;
 }
 

@@ -3,7 +3,7 @@
 <mapper namespace="com.bc.pmpheep.back.authadmin.materialSurvey.dao.MaterialSurveyDao">
 
     <select id="getSurveyByMaterialId" parameterType="java.lang.Long" resultType="MaterialSurvey">
-	  	select * from material_survey where material_id=#{materIalId}
+	  	select * from material_survey where (material_id=#{materIalId} or pre_version_material_id=#{materIalId}) and (title=2  or type_id=3) order by gmt_update
 	</select>
 
 
@@ -15,6 +15,13 @@
 
 		select  * from material_survey_question_option where  question_id=#{questionId}
 	</select>
+
+	<select id="getSurveyQuestionAnswerByQuestionId" parameterType="java.lang.Long"  resultType="MaterialSurveyQuestionAnswer">
+		select  * from material_survey_question_answer where question_id=#{questionId}
+	</select>
+
+
+
 	<insert id="insertQuestionAnswer" parameterType="java.util.List" >
 		insert into material_survey_question_answer(user_id,user_type, question_id, option_id, option_content, gmt_create, survey_id) values
 		<foreach item="item" collection="list" index="index" separator=",">
@@ -23,34 +30,86 @@
 		</foreach>
 	</insert>
 
-	<!--查询与教材有关的调研表-->
+	<!--查询调研表-->
 	<select id="querySearchList" resultType="java.util.Map" parameterType="PageParameter">
-		select t.title ,t.id,t.intro,
+		select t.title ,t.id,t.intro,t.required_for_material,
 		DATE_FORMAT(t.end_date,'%Y-%m-%d') as end_date,
 		DATE_FORMAT(b.gmt_create,'%Y-%m-%d %H:%i') as gmt_create
 		from material_survey t
 		left join material_survey_question_answer b on  b.survey_id=t.id
-		and b.user_id=#{parameter.id}  where 1=1
+		and b.user_id=#{parameter.id}  where
+		<choose>
+			<when test="parameter.materialId !=null">
+                (t.material_id =#{parameter.materialId}
+				or
+				t.pre_version_material_id=#{parameter.materialId})
+			</when>
+			<otherwise>
+				t.material_id is null
+			</otherwise>
+		</choose>
 		<if test="parameter.state != null and parameter.state != '' and parameter.state == 1">
 			and b.gmt_create is not NULL
 		</if>
 		<if test="parameter.state != null and parameter.state != '' and parameter.state == 2">
 			and b.gmt_create is  NULL
 		</if>
-		<if test="parameter.materialId !=null">
-			and t.material_id or t.pre_version_material_id=#{parameter.materialId}
-		</if>
+        and (t.title=2  or t.type_id=3)
 		 GROUP BY t.id limit ${start},${pageSize}
 	</select>
 
-	<!--查询与教材无关调研表总数-->
-	<select id="queryCount" resultType="Integer">
+	<!--查询调研表总数-->
+	<select id="queryCount" resultType="Integer" parameterType="PageParameter">
         select count(*) from ( select id
-        from material_survey where material_id or pre_version_material_id =#{materialId} )q
+        from material_survey where
+        <choose>
+        <when test="parameter.materialId !=null">
+            (material_id =#{parameter.materialId}
+            or
+            pre_version_material_id=#{parameter.materialId})
+        </when>
+        <otherwise>
+            material_id is null
+        </otherwise>
+
+    </choose> and (title=2  or type_id=3) )q
     </select>
 
 	<select id="getSurveyById" parameterType="java.lang.Long" resultType="MaterialSurvey">
 		select * from material_survey where id=#{id}
 	</select>
 
+    <select id="getMaterialByid" resultType="Material" parameterType="java.lang.Long">
+        select * from material where id=#{id}
+    </select>
+
+
+	<!--查询调研表-->
+	<select id="checkFile" resultType="java.lang.Integer" parameterType="java.util.Map">
+		select
+		count(DISTINCT t.id)
+		from material_survey t
+		left join material_survey_question_answer b on  b.survey_id=t.id
+		 where
+		<choose>
+			<when test="materialId !=null">
+				(t.material_id =#{materialId}
+				or
+				t.pre_version_material_id=#{materialId})
+			</when>
+			<otherwise>
+				t.material_id is null
+			</otherwise>
+		</choose>
+		<if test="state != null and state != '' and state == 1">
+			and b.gmt_create is not NULL
+		</if>
+		<if test="state != null and state != '' and state == 2">
+			and b.gmt_create is  NULL
+		</if>
+		<if test="required != null and required != '' and required == 1">
+			and t.required_for_material=1
+		</if>
+		and (t.title=2  or t.type_id=3)
+	</select>
 </mapper>

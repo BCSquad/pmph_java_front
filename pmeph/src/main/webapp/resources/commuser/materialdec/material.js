@@ -5,6 +5,9 @@
 //     "{\"id\":\"zc\",\"content\":\"职称不能为空\"},{\"id\":\"address\",\"content\":\"地址不能为空\"},{\"id\":\"email\",\"content\":\"邮箱不能为空\"},"+
 //     "{\"id\":\"handphone\",\"content\":\"手机号码不能为空\"},{\"id\":\"zjlx\",\"content\":\"证件类型不能为空\"},{\"id\":\"idcard\",\"content\":\"证件号码不能为空\"},{\"id\":\"sbdw_name\",\"content\":\"申报单位不能为空\"},";
 
+
+
+
 var materialMap ;
  
  $(function () {
@@ -24,10 +27,12 @@ var materialMap ;
         checkExtra();
     },0)
 
+
     setTimer();
     var id = $("#material_id").val();
     upload("1"); //附件上传
     queryMaterialMap(id);  //执行查询方法
+    querydyb();   //查询调研表
 
     $('.select-input').selectlist({
         zIndex: 10,
@@ -39,7 +44,10 @@ var materialMap ;
         zIndex: 10,
         width: 200,
         height: 30,
-        optionHeight: 30
+        optionHeight: 30,
+        onChange:function () {
+            querySearchByTextbookId();
+        }
     });
     $('#degree').selectlist({
         width: 192,
@@ -93,7 +101,6 @@ var materialMap ;
     selectOption("jcb_rank_sl");
     //其他社教材-职务
     selectOption("jcjb_sl");
-       
     
 
 });
@@ -105,6 +112,102 @@ window.onload = function(){
     });
 };
 
+//查询教材对应调研表
+function querydyb() {
+    var id = $("#material_id").val();
+    $.ajax({
+        type: "POST",
+        url:contextpath+'research/querySearch.action',
+        data:{material_id:id},// 您的formid
+        async : false,
+        success: function(json) {
+            var str='';
+           $.each(json,function (i,n) {
+           str+='<div style="margin-top: 5px">\n' +
+                   '<div style="float: left;">1).'+n.title+'</div>\n' ;
+           if(n.gmt_create!=null){
+               str+='<div style="float: left;color: #23527C;margin-left: 10px" onclick="tolook('+n.id+')">'+
+               '(已填)</div>\n';
+           }else{
+               str+='<div style="float: left;color: #23527C;margin-left: 10px">'+
+               '(未填)</div>\n';
+           }
+               str+='<div class="wrt">' +
+                   '<img src="'+contextpath+'statics/image/tobb.png" style="background-size: 100%;width: 100%" onclick="toinsert('+n.id+')">' +
+                   '</div>\n' +
+                   '</div>'+
+                   '<div style="clear: both"></div>';
+           });
+           $("#dyb").append(str);
+        }
+    });
+}
+
+//查询书籍对应调研表
+function querySearchByTextbookId() {
+    var ids=document.getElementsByName("textbook_id");
+    var str=[];
+    for(var i=0;i<ids.length;i++){
+        str.push(ids[i].value);
+    }
+    $.ajax({
+        type: "POST",
+        url:contextpath+'research/querySearchByTextbookId.action',
+        data:{
+            textbook_id:JSON2.stringify(str)
+        },
+        async : false,
+        success: function(json) {
+            var str='';
+            $.each(json,function (i,n) {
+                str+='<div style="margin-top: 5px">\n' +
+                    '<div style="float: left;">1).'+n.title+'</div>\n' ;
+                if(n.gmt_create!=null){
+                    str+='<div style="float: left;color: #23527C;margin-left: 10px" onclick="tolook('+n.id+')">'+
+                         '(已填)</div>\n';
+                }else{
+                    str+='<div style="float: left;color: #23527C;margin-left: 10px" onclick="toinsert('+n.id+')">'+
+                        '(未填)</div>\n';
+                }
+                str+='<div class="wrt">' +
+                    '<img src="'+contextpath+'statics/image/tobb.png" style="background-size: 100%;width: 100%" onclick="toinsert('+n.id+')">' +
+                    '</div>\n' +
+                    '</div>'+
+                    '<div style="clear: both"></div>';
+            });
+            $("#dyb").append(str);
+        }
+    });
+}
+
+//填写调研表之前自动暂存
+function savebaself() {
+    $.ajax({
+        type: "POST",
+        url:contextpath+'material/doMaterialAdd.action?sjump=1&type=2',
+        data:$('#objForm').serialize(),// 您的formid
+        async: false,
+        success: function(json) {
+            $('#declaration_id').val(json.declaration_id);
+            if(json.msg=='OK'){
+                window.message.success("自动暂存成功！");
+            }
+        }
+    });
+}
+
+//跳转到调研表新增页面
+function toinsert(id) {
+    savebaself();
+    window.location.href=contextpath+'orgSurvey/fillSurveyById.action?surveyId='+id+'&state=1';
+}
+
+//跳转到调研表查看页面
+function tolook(id) {
+    savebaself();
+    window.location.href = contextpath+"/orgSurvey/surveyDetailsById.action?surveyId=" + id;
+}
+
 //下拉框格式优化
 function selectOption(name){
     var els =document.getElementsByName(name);
@@ -113,6 +216,7 @@ function selectOption(name){
             width: 110,
             height: 30,
             optionHeight: 30
+
         });
     }
 }
@@ -147,6 +251,7 @@ function queryMaterialMap(id){
         type: "POST",
         url:contextpath+'material/queryMaterialMap.action',
         data:{material_id:id},// 您的formid
+        async : false,
         dataType:"json",
         success: function(json) {
             chooseModel(json);
@@ -529,12 +634,16 @@ function addTsxz(){
     $('#edu_'+str).selectlist({
         width: 200,
         height: 30,
-        optionHeight: 30
+        optionHeight: 30,
+        onChange:function () {
+            querySearchByTextbookId();
+        }
     });
     upload(str);
     $('#edu_'+str).tipso({validator: "isNonEmpty", message: "请选择申报的图书"});
 
 }
+
 
 //删除内容
 function delTsxz(str){

@@ -16,6 +16,7 @@ public class MaterialSurvey implements Serializable {
     private Timestamp gmtUpdate;
     private Integer status;
     private Long materialId;
+    private  Boolean requiredForMaterial;
 
 
     public Long getId() {
