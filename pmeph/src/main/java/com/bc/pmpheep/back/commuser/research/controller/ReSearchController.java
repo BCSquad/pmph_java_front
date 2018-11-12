@@ -58,7 +58,7 @@ public class ReSearchController extends BaseController{
         return list;
     }
 
-    //根据教材ID查询调研表
+    //根据书籍ID查询调研表
     @RequestMapping("querySearchByTextbookId")
     @ResponseBody
     public List<Map<String,Object>> querySearchByTextbookId(HttpServletRequest request){
@@ -66,6 +66,6 @@ public class ReSearchController extends BaseController{
         textbook_id = textbook_id.replaceAll("[\\[|\\]|\\{|\\}|\"]","");
         textbook_id = "(" + textbook_id + ")";
         List<Map<String,Object>> list = reSearchService.querySearchByTextbookId(textbook_id);
-        return null;
+        return list;
     }
 }
