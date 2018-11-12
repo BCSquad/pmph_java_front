@@ -40,6 +40,11 @@ public class MaterialSurveyServiceImpl implements MaterialSurveyService {
     }
 
     @Override
+    public Integer checkFile(Map<String, Object> parameter) {
+        return materialSurveyDao.checkFile(parameter);
+    }
+
+    @Override
     public Integer fillSurveyQuestion(List<MaterialSurveyQuestionAnswer> materialSurveyQuestionAnswer) {
         return materialSurveyDao.insertQuestionAnswer(materialSurveyQuestionAnswer);
     }
