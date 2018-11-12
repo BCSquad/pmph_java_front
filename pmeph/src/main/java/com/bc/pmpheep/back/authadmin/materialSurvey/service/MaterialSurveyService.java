@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.authadmin.materialSurvey.service;
 
+import com.bc.pmpheep.back.authadmin.applydocaudit.bean.Material;
 import com.bc.pmpheep.back.authadmin.materialSurvey.bean.*;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
@@ -14,7 +15,7 @@ public interface MaterialSurveyService {
      * @param materialId
      * @return
      */
-    MaterialSurvey getSurveyByMaterialId (Long materialId);
+    List<MaterialSurvey> getSurveyByMaterialId (Long materialId);
 
     /**
      * 根据问卷id获取问题
@@ -41,5 +42,10 @@ public interface MaterialSurveyService {
     PageResult<Map<String, Object>> querySearchList(PageParameter<Map<String, Object>> pageParameter);
 
     MaterialSurvey getSurveyById(Long id);
+
+    Material getMaterialByid(Long id);
+
+    List<MaterialSurveyQuestionAnswer> getSurveyQuestionAnswerByQuestionId (Long surveyId);
+    Integer checkFile(Map<String,Object> parameter);
 
 }

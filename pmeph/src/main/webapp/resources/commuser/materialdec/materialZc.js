@@ -77,7 +77,10 @@ $(function () {
         zIndex: 10,
         width: 200,
         height: 30,
-        optionHeight: 30
+        optionHeight: 30,
+        onChange:function () {
+            querySearchByTextbookId();
+        }
     });
     $('#zclx').selectlist({
         width: 192,
@@ -153,6 +156,102 @@ function queryMaterialMap(id){
             chooseModel(json);
         }
     });
+}
+
+//查询教材对应调研表
+function querydyb() {
+    var id = $("#material_id").val();
+    $.ajax({
+        type: "POST",
+        url:contextpath+'research/querySearch.action',
+        data:{material_id:id},// 您的formid
+        async : false,
+        success: function(json) {
+            var str='';
+            $.each(json,function (i,n) {
+                str+='<div style="margin-top: 5px">\n' +
+                    '<div style="float: left;">1).'+n.title+'</div>\n' ;
+                if(n.gmt_create!=null){
+                    str+='<div style="float: left;color: #23527C;margin-left: 10px" onclick="tolook('+n.id+')">'+
+                        '(已填)</div>\n';
+                }else{
+                    str+='<div style="float: left;color: #23527C;margin-left: 10px">'+
+                        '(未填)</div>\n';
+                }
+                str+='<div class="wrt">' +
+                    '<img src="'+contextpath+'statics/image/tobb.png" style="background-size: 100%;width: 100%" onclick="toinsert('+n.id+')">' +
+                    '</div>\n' +
+                    '</div>'+
+                    '<div style="clear: both"></div>';
+            });
+            $("#dyb").append(str);
+        }
+    });
+}
+
+//查询书籍对应调研表
+function querySearchByTextbookId() {
+    var ids=document.getElementsByName("textbook_id");
+    var str=[];
+    for(var i=0;i<ids.length;i++){
+        str.push(ids[i].value);
+    }
+    $.ajax({
+        type: "POST",
+        url:contextpath+'research/querySearchByTextbookId.action',
+        data:{
+            textbook_id:JSON2.stringify(str)
+        },
+        async : false,
+        success: function(json) {
+            var str='';
+            $.each(json,function (i,n) {
+                str+='<div style="margin-top: 5px">\n' +
+                    '<div style="float: left;">1).'+n.title+'</div>\n' ;
+                if(n.gmt_create!=null){
+                    str+='<div style="float: left;color: #23527C;margin-left: 10px" onclick="tolook('+n.id+')">'+
+                        '(已填)</div>\n';
+                }else{
+                    str+='<div style="float: left;color: #23527C;margin-left: 10px" onclick="toinsert('+n.id+')">'+
+                        '(未填)</div>\n';
+                }
+                str+='<div class="wrt">' +
+                    '<img src="'+contextpath+'statics/image/tobb.png" style="background-size: 100%;width: 100%" onclick="toinsert('+n.id+')">' +
+                    '</div>\n' +
+                    '</div>'+
+                    '<div style="clear: both"></div>';
+            });
+            $("#dyb").append(str);
+        }
+    });
+}
+
+//填写调研表之前自动暂存
+function savebaself() {
+    $.ajax({
+        type: "POST",
+        url:contextpath+'material/doMaterialAdd.action?sjump=1&type=2',
+        data:$('#objForm').serialize(),// 您的formid
+        async: false,
+        success: function(json) {
+            $('#declaration_id').val(json.declaration_id);
+            if(json.msg=='OK'){
+                window.message.success("自动暂存成功！");
+            }
+        }
+    });
+}
+
+//跳转到调研表新增页面
+function toinsert(id) {
+    savebaself();
+    window.location.href=contextpath+'orgSurvey/fillSurveyById.action?surveyId='+id+'&state=1';
+}
+
+//跳转到调研表查看页面
+function tolook(id) {
+    savebaself();
+    window.location.href = contextpath+"/orgSurvey/surveyDetailsById.action?surveyId=" + id;
 }
 
 //模块显示与隐藏判断
@@ -524,7 +623,10 @@ function addTsxz(){
     $('#edu_'+str).selectlist({
         width: 200,
         height: 30,
-        optionHeight: 30
+        optionHeight: 30,
+        onChange:function () {
+            querySearchByTextbookId();
+        }
     });
     upload(str);
     $('#edu_'+str).tipso({validator: "isNonEmpty", message: "请选择申报的图书"});

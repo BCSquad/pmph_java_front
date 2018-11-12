@@ -13,7 +13,7 @@ public interface TeacherPlatformService {
      * @param id
      * @return
      */
-    Map<String,Object> queryXikb (String id) throws UnsupportedEncodingException;
+    Map<String,Object> queryXikb (String id,String state);
     /**
      * 查询视频列表
      * @param map
@@ -36,7 +36,7 @@ public interface TeacherPlatformService {
      * 查询相关资源列表
      * @return
      */
-    List<Map<String,Object>> QuerySourceList(String startrow) throws UnsupportedEncodingException ;
+    List<Map<String,Object>> QuerySourceList(String startrow);
     /**
      * 查询相关资源总数
      * @return

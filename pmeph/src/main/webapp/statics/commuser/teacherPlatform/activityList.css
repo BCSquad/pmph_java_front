@@ -44,7 +44,7 @@
     height: 160px;
     float: left;
     text-align: center;
-    vertical-align: middle;
+    display: flex;
 }
 
 .collection .content img {
@@ -82,6 +82,7 @@
     color: #333333;
     line-height: 24px;
     max-height: 120px;
+    height: 250px;
 }
 
 .collection .content .content-text .pictureDiv {

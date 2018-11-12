@@ -7,6 +7,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,7 +42,7 @@ public class TeacherPlatformController extends BaseController{
         sourcemap.put("id",activity_id);
         sourcemap.put("startrow",0);
         sourcemap.put("endrow",10);
-        Map<String,Object> map = teacherPlatformService.queryXikb(activity_id);
+        Map<String,Object> map = teacherPlatformService.queryXikb(activity_id,"res");
         List<Map<String,Object>> voideolist=teacherPlatformService.Queryvideo(voideomap);
         for (Map<String,Object> vmap: voideolist) {
             //截取播放路径
@@ -191,4 +192,15 @@ public class TeacherPlatformController extends BaseController{
         }
         return returncode;
     };
+
+    //跳转到与信息快报无关的详情页面
+    @RequestMapping("/todetailtwo")
+    public  ModelAndView todetailtwo(HttpServletRequest request) throws UnsupportedEncodingException {
+        ModelAndView modelAndView = new ModelAndView();
+        String activity_id = request.getParameter("activity_id");
+        Map<String,Object> map = teacherPlatformService.queryXikb(activity_id,"ous");
+        modelAndView.addObject("map",map);
+        modelAndView.setViewName("commuser/teacherPlatform/teacherPlatformDetailtwo");
+        return modelAndView;
+    }
 }
