@@ -49,7 +49,7 @@
                         <button id="btn-search" onclick="query()">查询</button>
                     </c:if>
                     <c:if test="${material == null}">
-                        <button id="btn-search" onclick="queryList()">查询</button>
+                        <td id="btn-search" onclick="queryList()">查询</td>
                     </c:if>
                     <button class="tohis" onclick="window.history.back()">返回</button>
                 </div>
@@ -87,10 +87,10 @@
                                 </c:if>
 
                                 <c:if test="${list.gmt_create == null}">
-                                    <td onclick='fillMaterialSurvey("${list.id}")'>填写</td>
+                                    <td  style="cursor:pointer;" onclick='fillMaterialSurvey("${list.id}")'>填写</td>
                                 </c:if>
                                 <c:if test="${list.gmt_create != null}">
-                                    <td onclick='surveyDetails("${list.id}")'>查看</td>
+                                    <td style="cursor:pointer;"  onclick='surveyDetails("${list.id}")'>查看</td>
                                 </c:if>
                             </tr>
                         </c:forEach>

@@ -2,10 +2,7 @@ package com.bc.pmpheep.back.authadmin.applydocaudit.controller;
 
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -72,20 +69,7 @@ public class ApplyDocAuditController extends BaseController {
 		String vm = "authadmin/applydocaudit/applydocaudit.vm";
 		SimpleDateFormat dt = new SimpleDateFormat("yyyyMMdd");
 		for (Map<String, Object> m : List_map) {
-			Map<String, Object> map = new HashMap<>();
-			map.put("materialId", m.get("id"));
-			Integer count=0;
-			if(ObjectUtil.notNull(materialSurveyService.checkFile(map))){
-				 count = materialSurveyService.checkFile(map);
-			}
-			Integer fileCount=0;
-			map.put("state",1);
-			if(ObjectUtil.notNull(materialSurveyService.checkFile(map))){
-				fileCount=materialSurveyService.checkFile(map);
-			}
 			Date now = new Date();
-			m.put("count",count);
-			m.put("fileCount",fileCount);
 			if(m.get("actualDeadline") != null){
 				
 				m.put("isEnd",/*Integer.parseInt(dt.format(now))>Integer.parseInt(dt.format((Date)m.get("actualDeadline")))||*/((Boolean)m.get("is_all_textbook_published") || (Boolean)m.get("is_force_end"))?1:0);
@@ -130,15 +114,16 @@ public class ApplyDocAuditController extends BaseController {
 		for (Map<String, Object> m : List_map) {
 			Map<String, Object> map = new HashMap<>();
 			map.put("materialId", m.get("id"));
-			Integer count=0;
-			if(ObjectUtil.notNull(materialSurveyService.checkFile(map))){
-				count = materialSurveyService.checkFile(map);
+
+            Integer count = materialSurveyService.checkFile(map);
+            if(ObjectUtil.isNull(count)){
+                count=0;
 			}
-			Integer fileCount=0;
-			map.put("state",1);
-			if(ObjectUtil.notNull(materialSurveyService.checkFile(map))){
-				fileCount=materialSurveyService.checkFile(map);
-			}
+            Integer fileCount=0;
+            if(count!=0){
+                map.put("state",1);
+                 fileCount=materialSurveyService.checkFile(map);
+            }
 			Date now = new Date();
 			m.put("count",count);
 			m.put("fileCount",fileCount);

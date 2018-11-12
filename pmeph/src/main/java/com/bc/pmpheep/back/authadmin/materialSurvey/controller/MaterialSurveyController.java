@@ -379,35 +379,5 @@ public class MaterialSurveyController extends BaseController {
         return res;
     }
 
-    /**
-     * 填写问卷内容
-     *
-     * @param json
-     * @param request
-     * @return
-     * @throws ParseException
-     */
-    @RequestMapping(value = "/getFillCount", method = RequestMethod.POST)
-    @ResponseBody
-    public Map<String, Object> getFillCount( HttpServletRequest request) throws ParseException {
-
-        String materialId = request.getParameter("materialId");
-        String state ="1";
-        Map<String, Object> map = new HashMap<>();
-        Map<String, Object> res = new HashMap<>();
-
-
-        if(StringUtil.notEmpty(materialId)){
-            map.put("materialId", materialId);
-        }
-        Integer count = materialSurveyService.checkFile(map);
-
-        map.put("state",state);
-        Integer fileCount = materialSurveyService.checkFile(map);
-        Boolean success=true;
-        res.put("fileCount",fileCount);
-        res.put("count",count);
-        return res;
-    }
 
 }
