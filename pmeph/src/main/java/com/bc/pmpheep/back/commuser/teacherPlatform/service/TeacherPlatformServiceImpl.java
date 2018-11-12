@@ -28,7 +28,7 @@ public class TeacherPlatformServiceImpl  implements TeacherPlatformService{
         String mid= MapUtils.getString(map,"activity_desc_cms_id");
         Content content = contentService.get(mid);
         if(state.equals("res")){
-            map.put("content",omit(content.getContent(),2200));
+            map.put("content",omit(content.getContent().replaceAll("&nbsp;",""),2200));
         }else{
             map.put("content",content.getContent());
         }
@@ -92,7 +92,7 @@ public class TeacherPlatformServiceImpl  implements TeacherPlatformService{
             String mid= MapUtils.getString(map,"activity_desc_cms_id");
             if(!mid.equals("")){
                 Content content = contentService.get(mid);
-                map.put("content",omit(content.getContent(),1300));
+                map.put("content",omit(content.getContent().replaceAll("&nbsp;",""),1300));
             }
         }
         return list;
