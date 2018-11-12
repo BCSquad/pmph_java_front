@@ -1826,7 +1826,11 @@
                     <input type="hidden" id="sbdw_id" name="sbdw_id" value="${gezlList.org_id}" style="width: 300px;"/>
                 </div>
             </div>
-            <hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">
+            <!--调研表-->
+            <div style="margin-top: 20px">
+                <div class="txdyb">（ 温馨提醒: 根据您申报的书籍，需要填写以下<font style="color: red">标记*</font>的调研表才能提交, 如果没有请忽略。<font style="color: red">填写调研表前请先暂存申报表, 防止内容丢失。</font>)</div>
+                <div id="dyb"></div>
+            </div>
             <div class="button">
                 <div class="div_butt">
                     <div class="bt_tj" id="butj" onclick="javascript:buttAdd('1')">提交</div>
