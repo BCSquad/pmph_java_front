@@ -80,10 +80,13 @@
                     var html=
                         '<div class="collection">\n' +
                         '                <div class="content">\n' +
-                        '                    <div class="content-img" onclick="asd('+n.id+')">\n' +
-                        '                       <img src='+contextpath +'image/' + n.cover + '.action class="autoimg">\n' +
-                        '                    </div>\n' +
-                        '                    <div class="content-text">\n' +
+                        '                    <div class="content-img" onclick="asd('+n.id+')">\n' ;
+                                             if(n.cover==null || n.cover == '' ||n.cover=='DEFAULT'){
+                                                 html+='<img src='+contextpath +'statics/image/564f34b00cf2b738819e9c35_122x122!.jpg class="autoimg"></div>';
+                                             }else{
+                                                 html+='<img src='+contextpath +'image/' + n.cover + '.action class="autoimg"></div>';
+                                             }
+                                            html+='<div class="content-text">\n' +
                         '                        <div class="text">\n' +
                         '                        <span style="cursor: pointer;" onclick="asd('+n.id+')">'+n.activity_name+'</span>\n' +
                         '                        </div>\n' +
