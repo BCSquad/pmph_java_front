@@ -186,6 +186,12 @@ public class MaterialSurveyController extends BaseController {
             if (ObjectUtil.notNull(quesions.getJSONObject(i).get("id"))) {
                 fillMateriallSurveyQuestionVO.setQuestionId(quesions.getJSONObject(i).getLong("id"));
             }
+            if (ObjectUtil.notNull(quesions.getJSONObject(i).get("answerInput"))) {
+                fillMateriallSurveyQuestionVO.setOptionContent(quesions.getJSONObject(i).getString("answerInput"));
+            }
+            if (ObjectUtil.notNull(quesions.getJSONObject(i).get("answerTextArea"))) {
+                fillMateriallSurveyQuestionVO.setOptionContent(quesions.getJSONObject(i).getString("answerTextArea"));
+            }
             if (ObjectUtil.notNull(quesions.getJSONObject(i).get("answerId"))) {
                 String answerId = quesions.getJSONObject(i).getString("answerId");
 
@@ -202,16 +208,13 @@ public class MaterialSurveyController extends BaseController {
                         BeanUtils.copyProperties(fillMateriallSurveyQuestionVO, materialSurveyQuestionAnswer);
                         materialSurveyQuestionAnswer.setOptionId(Long.parseLong(opid));
                         fillMateriallSurveyQuestionVOS.add(materialSurveyQuestionAnswer);
+
                     }
+                    continue;
                 }
 
             }
-            if (ObjectUtil.notNull(quesions.getJSONObject(i).get("answerInput"))) {
-                fillMateriallSurveyQuestionVO.setOptionContent(quesions.getJSONObject(i).getString("answerInput"));
-            }
-            if (ObjectUtil.notNull(quesions.getJSONObject(i).get("answerTextArea"))) {
-                fillMateriallSurveyQuestionVO.setOptionContent(quesions.getJSONObject(i).getString("answerTextArea"));
-            }
+
 
             fillMateriallSurveyQuestionVOS.add(fillMateriallSurveyQuestionVO);
         }
