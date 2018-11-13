@@ -203,9 +203,16 @@
             <div class="lcjc-img-1"></div>
             <div style="height: 100%">
                 <c:forEach items="${listSzpt}" var="list">
-                    <div class="szpt" onclick="toszptdetail(${list.id},${list.activity_id})">
+                    <div class="szpt" onclick="toszptdetail(${list.activity_id})">
                         <div class="szpt-top">
-                            <img src="${ctx}/image/${list.cover}.action">
+                            <c:choose>
+                                <c:when test="${list.cover == '' || list.cover == 'DEFAULT' || list.cover == null}">
+                                    <img src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg">
+                                </c:when>
+                                <c:otherwise>
+                                    <img src="${ctx}/image/${list.cover}.action">
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                         <div class="szpt-buttom">
                             ${list.activity_name}

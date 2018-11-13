@@ -266,8 +266,8 @@ function toteacherPlatform() {
 }
 
 //跳转到师资平台详情页面
-function toszptdetail(id,activity_id) {
-    location.href = contextpath + 'teacherPlatform/todetail.action?id='+id+'&activity_id='+activity_id;
+function toszptdetail(activity_id) {
+    location.href = contextpath + 'teacherPlatform/todetail.action?activity_id='+activity_id;
 }
 
 //添加好友 按钮触发

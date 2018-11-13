@@ -39,7 +39,14 @@
     </div>
     <div style="margin-top: 50px">
         <div class="bigpicture">
-            <img src="${ctx}/image/${map.cover}.action" class="szpt-img">
+            <c:choose>
+                <c:when test="${list.cover == '' || list.cover == 'DEFAULT' || list.cover == null}">
+                    <img src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg" class="szpt-img">
+                </c:when>
+                <c:otherwise>
+                    <img src="${ctx}/image/${list.cover}.action" class="szpt-img">
+                </c:otherwise>
+            </c:choose>
         </div>
         <div style="float: left;height: 300px">
             <%--<div class="part1" onclick="toxikb(${map.cms_id})">${map.title}</div>--%>
