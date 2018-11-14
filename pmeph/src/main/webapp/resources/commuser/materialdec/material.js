@@ -123,20 +123,24 @@ function querydyb() {
         success: function(json) {
             var str='';
            $.each(json,function (i,n) {
-           str+='<div style="margin-top: 5px">\n' +
+               str+='<div style="margin-top: 5px">\n' +
                    '<div style="float: left;">1).'+n.title+'</div>\n' ;
-           if(n.gmt_create!=null){
-               str+='<div style="float: left;color: #23527C;margin-left: 10px" onclick="tolook('+n.id+')">'+
-               '(已填)</div>\n';
-           }else{
-               str+='<div style="float: left;color: #23527C;margin-left: 10px">'+
-               '(未填)</div>\n';
-           }
-               str+='<div class="wrt">' +
-                   '<img src="'+contextpath+'statics/image/tobb.png" style="background-size: 100%;width: 100%" onclick="toinsert('+n.id+')">' +
-                   '</div>\n' +
-                   '</div>'+
-                   '<div style="clear: both"></div>';
+               if(n.gmt_create!=null && n.gmt_create!=''){
+                   str+='<div style="float: left;color: #23527C;margin-left: 10px">'+
+                       '(已填)</div>\n'+
+                       '<div class="wrt">' +
+                       '<img src="'+contextpath+'statics/image/tobb.png" style="background-size: 100%;width: 100%" onclick="tolook('+n.id+')">' +
+                       '</div>\n' +
+                       '</div>';
+               }else{
+                   str+='<div style="float: left;color: #23527C;margin-left: 10px" onclick="toinsert('+n.id+')">'+
+                       '(未填)</div>\n'+
+                       '<div class="wrt">' +
+                       '<img src="'+contextpath+'statics/image/tobb.png" style="background-size: 100%;width: 100%" onclick="toinsert('+n.id+')">' +
+                       '</div>\n' +
+                       '</div>';
+               }
+               str+='<div style="clear: both"></div>';
            });
            $("#dyb").append(str);
         }
@@ -162,18 +166,22 @@ function querySearchByTextbookId() {
             $.each(json,function (i,n) {
                 str+='<div style="margin-top: 5px">\n' +
                     '<div style="float: left;">1).'+n.title+'</div>\n' ;
-                if(n.gmt_create!=null){
-                    str+='<div style="float: left;color: #23527C;margin-left: 10px" onclick="tolook('+n.id+')">'+
-                         '(已填)</div>\n';
+                if(n.gmt_create!=null && n.gmt_create!=''){
+                    str+='<div style="float: left;color: #23527C;margin-left: 10px">'+
+                        '(已填)</div>\n'+
+                        '<div class="wrt">' +
+                        '<img src="'+contextpath+'statics/image/tobb.png" style="background-size: 100%;width: 100%" onclick="tolook('+n.id+')">' +
+                        '</div>\n' +
+                        '</div>';
                 }else{
                     str+='<div style="float: left;color: #23527C;margin-left: 10px" onclick="toinsert('+n.id+')">'+
-                        '(未填)</div>\n';
+                        '(未填)</div>\n'+
+                        '<div class="wrt">' +
+                        '<img src="'+contextpath+'statics/image/tobb.png" style="background-size: 100%;width: 100%" onclick="toinsert('+n.id+')">' +
+                        '</div>\n' +
+                        '</div>';
                 }
-                str+='<div class="wrt">' +
-                    '<img src="'+contextpath+'statics/image/tobb.png" style="background-size: 100%;width: 100%" onclick="toinsert('+n.id+')">' +
-                    '</div>\n' +
-                    '</div>'+
-                    '<div style="clear: both"></div>';
+                str+='<div style="clear: both"></div>';
             });
             $("#dyb").append(str);
         }

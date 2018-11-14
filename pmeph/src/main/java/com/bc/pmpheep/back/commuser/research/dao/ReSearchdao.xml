@@ -41,10 +41,11 @@
 
     <!--查询与教材有关的调研表-->
     <select id="querySearchByMaterialId" parameterType="java.util.Map" resultType="java.util.Map">
-        select t.id,t.title,a.gmt_create
+        select t.id,t.title,a.gmt_create,max(a.gmt_create)
             from material_survey t
 			left join material_survey_question_answer a on  a.survey_id=t.id and a.user_id=#{user_id}
             where t.material_id=#{material_id}  and  t.all_textbook_used=1
+            group by a.survey_id
     </select>
 
     <!--查询与教材下图书有关的调研表-->

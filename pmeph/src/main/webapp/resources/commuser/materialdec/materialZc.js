@@ -28,6 +28,8 @@ $(function () {
 
     var id = $("#material_id").val();
     queryMaterialMap(id);  //执行查询方法
+
+    querydyb(); //查询与教材有关的调研表
     //图书选择
     var sjxz =document.getElementsByName("sjxz");
     if(sjxz.length == 0){
@@ -171,18 +173,22 @@ function querydyb() {
             $.each(json,function (i,n) {
                 str+='<div style="margin-top: 5px">\n' +
                     '<div style="float: left;">1).'+n.title+'</div>\n' ;
-                if(n.gmt_create!=null){
-                    str+='<div style="float: left;color: #23527C;margin-left: 10px" onclick="tolook('+n.id+')">'+
-                        '(已填)</div>\n';
-                }else{
+                if(n.gmt_create!=null && n.gmt_create!=''){
                     str+='<div style="float: left;color: #23527C;margin-left: 10px">'+
-                        '(未填)</div>\n';
+                        '(已填)</div>\n'+
+                        '<div class="wrt">' +
+                        '<img src="'+contextpath+'statics/image/tobb.png" style="background-size: 100%;width: 100%" onclick="tolook('+n.id+')">' +
+                        '</div>\n' +
+                        '</div>';
+                }else{
+                    str+='<div style="float: left;color: #23527C;margin-left: 10px" onclick="toinsert('+n.id+')">'+
+                        '(未填)</div>\n'+
+                        '<div class="wrt">' +
+                        '<img src="'+contextpath+'statics/image/tobb.png" style="background-size: 100%;width: 100%" onclick="toinsert('+n.id+')">' +
+                        '</div>\n' +
+                        '</div>';
                 }
-                str+='<div class="wrt">' +
-                    '<img src="'+contextpath+'statics/image/tobb.png" style="background-size: 100%;width: 100%" onclick="toinsert('+n.id+')">' +
-                    '</div>\n' +
-                    '</div>'+
-                    '<div style="clear: both"></div>';
+                str+='<div style="clear: both"></div>';
             });
             $("#dyb").append(str);
         }
@@ -208,18 +214,22 @@ function querySearchByTextbookId() {
             $.each(json,function (i,n) {
                 str+='<div style="margin-top: 5px">\n' +
                     '<div style="float: left;">1).'+n.title+'</div>\n' ;
-                if(n.gmt_create!=null){
-                    str+='<div style="float: left;color: #23527C;margin-left: 10px" onclick="tolook('+n.id+')">'+
-                        '(已填)</div>\n';
+                if(n.gmt_create!=null && n.gmt_create!=''){
+                    str+='<div style="float: left;color: #23527C;margin-left: 10px">'+
+                        '(已填)</div>\n'+
+                        '<div class="wrt">' +
+                        '<img src="'+contextpath+'statics/image/tobb.png" style="background-size: 100%;width: 100%" onclick="tolook('+n.id+')">' +
+                        '</div>\n' +
+                        '</div>';
                 }else{
                     str+='<div style="float: left;color: #23527C;margin-left: 10px" onclick="toinsert('+n.id+')">'+
-                        '(未填)</div>\n';
+                        '(未填)</div>\n'+
+                        '<div class="wrt">' +
+                        '<img src="'+contextpath+'statics/image/tobb.png" style="background-size: 100%;width: 100%" onclick="toinsert('+n.id+')">' +
+                        '</div>\n' +
+                        '</div>';
                 }
-                str+='<div class="wrt">' +
-                    '<img src="'+contextpath+'statics/image/tobb.png" style="background-size: 100%;width: 100%" onclick="toinsert('+n.id+')">' +
-                    '</div>\n' +
-                    '</div>'+
-                    '<div style="clear: both"></div>';
+                str+='<div style="clear: both"></div>';
             });
             $("#dyb").append(str);
         }

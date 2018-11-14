@@ -40,11 +40,11 @@
     <div style="margin-top: 50px">
         <div class="bigpicture">
             <c:choose>
-                <c:when test="${list.cover == '' || list.cover == 'DEFAULT' || list.cover == null}">
+                <c:when test="${map.cover == '' || map.cover == 'DEFAULT' || map.cover == null}">
                     <img src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg" class="szpt-img">
                 </c:when>
                 <c:otherwise>
-                    <img src="${ctx}/image/${list.cover}.action" class="szpt-img">
+                    <img src="${ctx}/image/${map.cover}.action" class="szpt-img">
                 </c:otherwise>
             </c:choose>
         </div>
