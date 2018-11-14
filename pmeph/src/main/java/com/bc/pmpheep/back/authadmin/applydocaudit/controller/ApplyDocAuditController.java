@@ -114,7 +114,7 @@ public class ApplyDocAuditController extends BaseController {
 		for (Map<String, Object> m : List_map) {
 			Map<String, Object> map = new HashMap<>();
 			map.put("materialId", m.get("id"));
-
+			map.put("id", user.get("id"));
             Integer count = materialSurveyService.checkFile(map);
             if(ObjectUtil.isNull(count)){
                 count=0;

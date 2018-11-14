@@ -312,7 +312,10 @@ public class MaterialSurveyController extends BaseController {
             /*根据问题id获取选项 回答
              */
             materialSurveyQuestionVO.setMaterialSurveyQuestionOptionList(surveyQuestionOptionByQuestionId);
-            List<MaterialSurveyQuestionAnswer> surveyQuestionAnswerByQuestionId = materialSurveyService.getSurveyQuestionAnswerByQuestionId(materialSurveyQuestion.getId());
+            Map<String, Object> parameter =new HashMap<>();
+            parameter.put("questionId",materialSurveyQuestion.getId());
+            parameter.put("userId",userId);
+            List<MaterialSurveyQuestionAnswer> surveyQuestionAnswerByQuestionId = materialSurveyService.getSurveyQuestionAnswerByQuestionId(parameter);
 
             switch (materialSurveyQuestion.getType()) {
                 case 1:

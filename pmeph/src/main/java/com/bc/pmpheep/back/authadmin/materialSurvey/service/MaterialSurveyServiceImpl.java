@@ -35,8 +35,8 @@ public class MaterialSurveyServiceImpl implements MaterialSurveyService {
     }
 
     @Override
-    public List<MaterialSurveyQuestionAnswer> getSurveyQuestionAnswerByQuestionId(Long questionId) {
-        return materialSurveyDao.getSurveyQuestionAnswerByQuestionId(questionId);
+    public List<MaterialSurveyQuestionAnswer> getSurveyQuestionAnswerByQuestionId(Map<String, Object> parameter) {
+        return materialSurveyDao.getSurveyQuestionAnswerByQuestionId(parameter);
     }
 
     @Override
