@@ -7,6 +7,7 @@
 
 var is_pmph_textbook_required;
 var is_textbook_required;
+var num=0;
 
 $(function () {
     setTimeout(function () {
@@ -30,6 +31,7 @@ $(function () {
     queryMaterialMap(id);  //执行查询方法
 
     querydyb(); //查询与教材有关的调研表
+    querySearchByTextbookId();  //查询与书籍有关的调研表
     //图书选择
     var sjxz =document.getElementsByName("sjxz");
     if(sjxz.length == 0){
@@ -156,82 +158,6 @@ function queryMaterialMap(id){
         dataType:"json",
         success: function(json) {
             chooseModel(json);
-        }
-    });
-}
-
-//查询教材对应调研表
-function querydyb() {
-    var id = $("#material_id").val();
-    $.ajax({
-        type: "POST",
-        url:contextpath+'research/querySearch.action',
-        data:{material_id:id},// 您的formid
-        async : false,
-        success: function(json) {
-            var str='';
-            $.each(json,function (i,n) {
-                str+='<div style="margin-top: 5px">\n' +
-                    '<div style="float: left;">1).'+n.title+'</div>\n' ;
-                if(n.gmt_create!=null && n.gmt_create!=''){
-                    str+='<div style="float: left;color: #23527C;margin-left: 10px">'+
-                        '(已填)</div>\n'+
-                        '<div class="wrt">' +
-                        '<img src="'+contextpath+'statics/image/tobb.png" style="background-size: 100%;width: 100%" onclick="tolook('+n.id+')">' +
-                        '</div>\n' +
-                        '</div>';
-                }else{
-                    str+='<div style="float: left;color: #23527C;margin-left: 10px" onclick="toinsert('+n.id+')">'+
-                        '(未填)</div>\n'+
-                        '<div class="wrt">' +
-                        '<img src="'+contextpath+'statics/image/tobb.png" style="background-size: 100%;width: 100%" onclick="toinsert('+n.id+')">' +
-                        '</div>\n' +
-                        '</div>';
-                }
-                str+='<div style="clear: both"></div>';
-            });
-            $("#dyb").append(str);
-        }
-    });
-}
-
-//查询书籍对应调研表
-function querySearchByTextbookId() {
-    var ids=document.getElementsByName("textbook_id");
-    var str=[];
-    for(var i=0;i<ids.length;i++){
-        str.push(ids[i].value);
-    }
-    $.ajax({
-        type: "POST",
-        url:contextpath+'research/querySearchByTextbookId.action',
-        data:{
-            textbook_id:JSON2.stringify(str)
-        },
-        async : false,
-        success: function(json) {
-            var str='';
-            $.each(json,function (i,n) {
-                str+='<div style="margin-top: 5px">\n' +
-                    '<div style="float: left;">1).'+n.title+'</div>\n' ;
-                if(n.gmt_create!=null && n.gmt_create!=''){
-                    str+='<div style="float: left;color: #23527C;margin-left: 10px">'+
-                        '(已填)</div>\n'+
-                        '<div class="wrt">' +
-                        '<img src="'+contextpath+'statics/image/tobb.png" style="background-size: 100%;width: 100%" onclick="tolook('+n.id+')">' +
-                        '</div>\n' +
-                        '</div>';
-                }else{
-                    str+='<div style="float: left;color: #23527C;margin-left: 10px" onclick="toinsert('+n.id+')">'+
-                        '(未填)</div>\n'+
-                        '<div class="wrt">' +
-                        '<img src="'+contextpath+'statics/image/tobb.png" style="background-size: 100%;width: 100%" onclick="toinsert('+n.id+')">' +
-                        '</div>\n' +
-                        '</div>';
-                }
-                str+='<div style="clear: both"></div>';
-            });
-            $("#dyb").append(str);
         }
     });
 }
@@ -645,6 +571,7 @@ function addTsxz(){
 //删除内容
 function delTsxz(str){
     $("#"+str).remove();
+    querySearchByTextbookId();
 }
 
 //追加学习经历tr

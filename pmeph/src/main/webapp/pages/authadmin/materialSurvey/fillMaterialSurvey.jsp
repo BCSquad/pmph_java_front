@@ -152,7 +152,7 @@
         <jsp:param value="homepage" name="pageTitle"/>
     </jsp:include>
 </c:if>
-
+<input type="hidden" value="${state}" id="state">
 <div class="body">
 
     <div class="content-wrapper" style="width:100%;background-color: #f6f6f6">
@@ -188,12 +188,12 @@
                                     <div class="sxy-radio">
                                         <c:forEach items="${QuestionList.materialSurveyQuestionOptionList}"
                                                    var="OptionList" varStatus="OptionLiStstatus">
-                                            <c:if test="${QuestionList.optionAnswer!=null }">
+                                            <c:if test="${QuestionList.optionAnswer==OptionList.id }">
                                                 <input type="radio" checked id="${QuestionList.id}"
                                                        value="${OptionList.id}"
                                                        name="radio_${QuestionListStatus.index+1}"/>${OptionList.optionContent}
                                             </c:if>
-                                            <c:if test="${QuestionList.optionAnswer==null }">
+                                            <c:if test="${QuestionList.optionAnswer!=OptionList.id }">
                                                 <input type="radio" id="${QuestionList.id}" value="${OptionList.id}"
                                                        name="radio_${QuestionListStatus.index+1}"/>${OptionList.optionContent}
                                             </c:if>
@@ -303,7 +303,7 @@
     </div>
 
 </div>
-
+<input type="hidden" value="${material_id}" id="material_id">
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 
 <script type="text/javascript">
@@ -366,7 +366,15 @@
         for (var i = 0; i < this.quesions.length; i++) {
             switch (quesions[i].type) {
                 case 1:
-                    quesions[i].answerId = $("#" + quesions[i].id).val();
+                    var radio=document.getElementsByName("radio_"+(i+1));
+                    var selectvalue=null;   //  selectvalue为radio中选中的值
+                    for(var j=0;j<radio.length;j++){
+                        if(radio[j].checked==true) {
+                            selectvalue=radio[j].value;
+                            break;
+                        }
+                    }
+                    quesions[i].answerId = selectvalue;
                     break;
                 case 2:
                     var arr = new Array();
@@ -413,8 +421,12 @@
             success: function (res) {
                 if (res.code >= 1) {
                     window.message.success("填写成功");
-                    back();
-
+                    if($("#state").val()!=null){
+                        var material_id=$("#material_id").val();
+                        window.location.href=contextpath+'/material/MaterialDetailRedirect.action?material_id='+material_id;
+                    }else{
+                        back();
+                    }
                 } else {
                     window.message.error("后台错误");
                     back();

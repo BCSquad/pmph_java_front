@@ -68,4 +68,15 @@ public class ReSearchController extends BaseController{
         List<Map<String,Object>> list = reSearchService.querySearchByTextbookId(textbook_id);
         return list;
     }
+
+    //查询登录用户已经填写过的调研表
+    @RequestMapping("queryAnswer")
+    @ResponseBody
+    public List<Map<String,Object>> queryAnswer(HttpServletRequest request){
+        String material_id=request.getParameter("material_id");
+        Map<String, Object> user=getUserInfo();
+        String user_id = user.get("id").toString();
+        List<Map<String,Object>> list = reSearchService.queryAnswer(material_id,user_id);
+        return list;
+    }
 }

@@ -130,13 +130,14 @@ public class MaterialSurveyController extends BaseController {
         }
         materialSurveyVO.setMaterialSurveyQuestionList(materialSurveyQuestionVOS);
 
-        String state=request.getParameter("state");
+        String material_id=request.getParameter("material_id");
         Map<String, Object> map = new HashMap<>();
-        if(StringUtil.notEmpty(state)){
+        if(StringUtil.notEmpty(material_id)){
             mv.addObject("state",1);
         }else{
             mv.addObject("state",2);
         }
+        mv.addObject("material_id",material_id);
         //机构用户基本信息
         map.put("survey", materialSurveyVO);
         mv.addObject("res", map);
@@ -312,7 +313,10 @@ public class MaterialSurveyController extends BaseController {
             /*根据问题id获取选项 回答
              */
             materialSurveyQuestionVO.setMaterialSurveyQuestionOptionList(surveyQuestionOptionByQuestionId);
-            List<MaterialSurveyQuestionAnswer> surveyQuestionAnswerByQuestionId = materialSurveyService.getSurveyQuestionAnswerByQuestionId(materialSurveyQuestion.getId());
+            Map<String, Object> parameter =new HashMap<>();
+            parameter.put("questionId",materialSurveyQuestion.getId());
+            parameter.put("userId",userId);
+            List<MaterialSurveyQuestionAnswer> surveyQuestionAnswerByQuestionId = materialSurveyService.getSurveyQuestionAnswerByQuestionId(parameter);
 
             switch (materialSurveyQuestion.getType()) {
                 case 1:

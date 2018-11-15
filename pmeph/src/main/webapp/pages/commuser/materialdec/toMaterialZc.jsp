@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}" type="text/css">
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.tipso.css?t=${_timestamp}" type="text/css">
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js?t=${_timestamp}"></script>
+    <script type="text/javascript" src="${ctx}/resources/comm/json2.js?t=${_timestamp}"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery-validate.js?t=${_timestamp}"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.calendar.js?t=${_timestamp}"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
@@ -1789,7 +1790,7 @@
             </div>
             <!--扩展信息-->
             <c:forEach var="zjkzxx" items="${zjkzqkList}" varStatus="status">
-                <div class="sbxq_item1">
+                <div  class="sbxq_item1">
                     <div>
                         <span id="tsxz_span9"></span>
                         <span class="tsxz_title">${zjkzxx.extension_name}</span>
@@ -1827,10 +1828,7 @@
                 </div>
             </div>
             <!--调研表-->
-            <div style="margin-top: 20px">
-                <div class="txdyb">（ 温馨提醒: 根据您申报的书籍，需要填写以下<font style="color: red">标记*</font>的调研表才能提交, 如果没有请忽略。<font style="color: red">填写调研表前请先暂存申报表, 防止内容丢失。</font>)</div>
-                <div id="dyb"></div>
-            </div>
+            <jsp:include page="/pages/comm/searchList.jsp"></jsp:include>
             <div class="button">
                 <div class="div_butt">
                     <div class="bt_tj" id="butj" onclick="javascript:buttAdd('1')">提交</div>

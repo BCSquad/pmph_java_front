@@ -44,7 +44,7 @@
         select t.id,t.title,a.gmt_create,max(a.gmt_create)
             from material_survey t
 			left join material_survey_question_answer a on  a.survey_id=t.id and a.user_id=#{user_id}
-            where t.material_id=#{material_id}  and  t.all_textbook_used=1
+            where t.material_id=#{material_id}  and  t.all_textbook_used=1 and t.type_id != 1
             group by a.survey_id
     </select>
 
@@ -52,9 +52,17 @@
     <select id="querySearchByTextbookId" resultType="java.util.Map" parameterType="java.util.Map">
         select
             b.id,b.title,max(t.required)
-                from material_survey_chain t
-                left join material_survey b on t.material_survey_id=b.id
-                where t.textbook_id in ${textbook_id} and b.all_textbook_used=0
-                group by b.id
+            from material_survey_chain t
+            left join material_survey b on t.material_survey_id=b.id
+            where t.textbook_id in ${textbook_id} and b.all_textbook_used=0 and b.type_id != 1
+            group by b.id
+    </select>
+
+    <select id="queryAnswer" parameterType="java.util.Map" resultType="java.util.Map">
+        select t.title,t.id,max(t.id),a.gmt_create
+            from material_survey t
+            left join material_survey_question_answer a on a.survey_id=t.id
+            and a.user_id=#{user_id}  where t.material_id=#{material_id}
+            and a.gmt_create is not null group by t.id
     </select>
 </mapper>
