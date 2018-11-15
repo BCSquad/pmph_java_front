@@ -42,4 +42,12 @@ public interface ReSearchDao {
      * @return
      */
     List<Map<String,Object>> querySearchByTextbookId(@Param("textbook_id") String textbook_id);
+
+    /**
+     * 查询登录用户已经填写过的调研表
+     * @param material_id
+     * @param user_id
+     * @return
+     */
+    List<Map<String,Object>> queryAnswer(@Param("material_id") String material_id,@Param("user_id") String user_id);
 }

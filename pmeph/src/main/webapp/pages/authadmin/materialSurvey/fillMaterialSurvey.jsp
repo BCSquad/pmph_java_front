@@ -152,7 +152,7 @@
         <jsp:param value="homepage" name="pageTitle"/>
     </jsp:include>
 </c:if>
-
+<input type="hidden" value="${state}" id="state">
 <div class="body">
 
     <div class="content-wrapper" style="width:100%;background-color: #f6f6f6">
@@ -303,7 +303,7 @@
     </div>
 
 </div>
-
+<input type="hidden" value="${material_id}" id="material_id">
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 
 <script type="text/javascript">
@@ -421,8 +421,12 @@
             success: function (res) {
                 if (res.code >= 1) {
                     window.message.success("填写成功");
-                    back();
-
+                    if($("#state").val()!=null){
+                        var material_id=$("#material_id").val();
+                        window.location.href=contextpath+'/material/MaterialDetailRedirect.action?material_id='+material_id;
+                    }else{
+                        back();
+                    }
                 } else {
                     window.message.error("后台错误");
                     back();

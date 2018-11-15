@@ -701,8 +701,11 @@
 				<span>${gezlList.dwmc}</span>
 			</div>
 		</div>
-
-			<!-- 院校推荐意见-->
+		<!--调研表-->
+		<div style="margin-top: 20px" id="dyb">
+			<div class="txdyb" style="font-weight: bold;">调研表</div>
+		</div>
+		<!-- 院校推荐意见-->
 		<div class="yijian" style="display: none;">
 			<div class="tujian01">院校推荐意见:</div>
 			<div class="tujian02">
@@ -718,9 +721,10 @@
 				<div class="bt_tj" onclick="javascript:buttGive()">返回申报列表</div>
 				<div class="bt_tj" onclick="toprint()">打印</div>
 			</div>
+			<div style="clear: both"></div>
 			<span style="color: #E31028;font-size: 14px;text-align: center;float: left;margin-left: 350px;">打印推荐使用浏览器：chrome、360浏览器极速模式、IE浏览器支持IE10及以上版本</span>
 		</c:if>
-		
+
 	</div>
 </div>
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
