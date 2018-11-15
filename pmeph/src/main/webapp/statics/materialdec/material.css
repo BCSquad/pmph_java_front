@@ -145,6 +145,16 @@
 	float: left;
 }
 
+.txdyb:after{
+	content: "";
+	background-image: url("../image/txdyb.png");
+	display:block;
+	width: 20px;
+	height: 20px;
+	float: left;
+	background-size: 100%;
+}
+
 /*.bt_tj{
 	width: 128px;
 	height: 24px;
