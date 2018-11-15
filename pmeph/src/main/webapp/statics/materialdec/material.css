@@ -139,10 +139,10 @@
 
 .button{
 	height: 30px;
-	width: 1200px;
 	text-align: center;
 	margin-top: 40px;
 	margin-left: 460px;
+	float: left;
 }
 
 /*.bt_tj{
