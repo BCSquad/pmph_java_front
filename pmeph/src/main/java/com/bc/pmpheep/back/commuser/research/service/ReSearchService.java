@@ -31,7 +31,7 @@ public interface ReSearchService {
      * @param textbook_id
      * @return
      */
-    List<Map<String,Object>> querySearchByTextbookId(String textbook_id);
+    List<Map<String,Object>> querySearchByTextbookId(String textbook_id,String user_id);
     /**
      * 查询登录用户已经填写过的调研表
      * @param material_id

@@ -5,12 +5,13 @@
 
     <!--查询与教材无关的调研表-->
     <select id="querySearchList" resultType="java.util.Map" parameterType="PageParameter">
-        select t.title ,t.id,t.intro,t.id,
+        select t.title ,t.id,t.intro,t.id,now() as now,m.material_name,
         DATE_FORMAT(t.end_date,'%Y-%m-%d') as end_date,
         DATE_FORMAT(b.gmt_create,'%Y-%m-%d %H:%i') as gmt_create
         from material_survey t
-        left join material_survey_question_answer b on  b.survey_id=t.id
-        and b.user_id=#{parameter.id}  where t.material_id is null
+        left join material_survey_question_answer b on  b.survey_id=t.id and b.user_id=#{parameter.id}
+        left join material m on m.id = t.material_id
+        where 1 = 1
         <if test="parameter.state != null and parameter.state != '' and parameter.state == 1">
             and b.gmt_create is not NULL
         </if>
@@ -41,7 +42,7 @@
 
     <!--查询与教材有关的调研表-->
     <select id="querySearchByMaterialId" parameterType="java.util.Map" resultType="java.util.Map">
-        select t.id,t.title,a.gmt_create,max(a.gmt_create)
+        select t.id,t.title,a.gmt_create,max(a.gmt_create),t.required_for_material
             from material_survey t
 			left join material_survey_question_answer a on  a.survey_id=t.id and a.user_id=#{user_id}
             where t.material_id=#{material_id}  and  t.all_textbook_used=1 and t.type_id != 1
@@ -51,13 +52,15 @@
     <!--查询与教材下图书有关的调研表-->
     <select id="querySearchByTextbookId" resultType="java.util.Map" parameterType="java.util.Map">
         select
-            b.id,b.title,max(t.required)
+            b.id,b.title,max(t.required),t.required,a.gmt_create
             from material_survey_chain t
             left join material_survey b on t.material_survey_id=b.id
+            left join material_survey_question_answer a on a.survey_id=b.id and a.user_id=#{user_id}
             where t.textbook_id in ${textbook_id} and b.all_textbook_used=0 and b.type_id != 1
             group by b.id
     </select>
 
+    <!--查询当前登录用户已经填写过的调研表-->
     <select id="queryAnswer" parameterType="java.util.Map" resultType="java.util.Map">
         select t.title,t.id,max(t.id),a.gmt_create
             from material_survey t

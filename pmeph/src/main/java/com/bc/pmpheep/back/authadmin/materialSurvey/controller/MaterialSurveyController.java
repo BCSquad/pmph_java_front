@@ -133,11 +133,14 @@ public class MaterialSurveyController extends BaseController {
         String material_id=request.getParameter("material_id");
         Map<String, Object> map = new HashMap<>();
         if(StringUtil.notEmpty(material_id)){
-            mv.addObject("state",1);
+            //mv.addObject("state",1);
+            map.put("state","1");
         }else{
-            mv.addObject("state",2);
+            //mv.addObject("state",2);
+            map.put("state","1");
         }
-        mv.addObject("material_id",material_id);
+        // mv.addObject("material_id",material_id);
+        map.put("material_id",material_id);
         //机构用户基本信息
         map.put("survey", materialSurveyVO);
         mv.addObject("res", map);
@@ -242,18 +245,17 @@ public class MaterialSurveyController extends BaseController {
         ModelAndView modelAndView = new ModelAndView();
         String state = request.getParameter("state");
         String materialId = request.getParameter("materialId");
+        String required = request.getParameter("required");
         Map<String, Object> map = new HashMap<>();
         Map<String, Object> user = getUserInfo();
         map.put("id", user.get("id"));
         map.put("state", state);
+        map.put("required",required);
 
         if (materialId != null) {
             map.put("materialId", materialId);
             Material materialByid = materialSurveyService.getMaterialByid(Long.parseLong(materialId));
-
             modelAndView.addObject("material", materialByid);
-
-
         }
 
         PageParameter<Map<String, Object>> pageParameter = new PageParameter<Map<String, Object>>(pageNum, pageSize);
@@ -263,6 +265,7 @@ public class MaterialSurveyController extends BaseController {
         modelAndView.addObject("pageSize", pageSize);
         modelAndView.addObject("pageResult", pageResult);
         modelAndView.addObject("state", state);
+        modelAndView.addObject("required", required);
 
         modelAndView.setViewName("authadmin/materialSurvey/SurveyList");
         return modelAndView;
@@ -358,7 +361,6 @@ public class MaterialSurveyController extends BaseController {
     /**
      * 填写问卷内容
      *
-     * @param json
      * @param request
      * @return
      * @throws ParseException

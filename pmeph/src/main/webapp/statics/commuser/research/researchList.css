@@ -145,6 +145,12 @@ div.white-out-div .search-condition{
 
 }
 
+.font{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 .body .table-area tr:nth-child(even){
     background-color: #f9f9f9;
 }

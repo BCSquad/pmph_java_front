@@ -8,6 +8,7 @@
 var is_pmph_textbook_required;
 var is_textbook_required;
 var num=0;
+var sta=true;
 
 $(function () {
     setTimeout(function () {
@@ -181,7 +182,8 @@ function savebaself() {
 //跳转到调研表新增页面
 function toinsert(id) {
     savebaself();
-    window.location.href=contextpath+'orgSurvey/fillSurveyById.action?surveyId='+id+'&state=1';
+    var mid=$("#material_id").val();
+    window.location.href=contextpath+'orgSurvey/fillSurveyById.action?surveyId='+id+'&material_id='+mid;
 }
 
 //跳转到调研表查看页面
@@ -998,6 +1000,10 @@ function buttAdd(type){
             });
         } else { //表示提交
             checkLb();
+            if(!sta){
+                window.message.info("请填写完所有必填调研表！")
+                return;
+            }
             if(checkEqual("textbook_id") && checkBoxInfo() && $.fireValidator()){
                 var username = $("#username").val();
                 var realname = $("#realname").val();

@@ -27,8 +27,12 @@
                 $.each(json,function (i,n) {
                     var c=i+1;
                     num=json.length;
-                    str+='<div style="margin-top: 5px">\n' +
-                        '<div style="float: left;">'+c+').'+n.title+'</div>\n' ;
+                    str+='<div style="margin-top: 5px">\n' ;
+                    if(n.required_for_material){
+                        str+='<div style="float: left;"><font color="red">*</font>'+c+').'+n.title+'</div>\n' ;
+                    }else{
+                        str+='<div style="float: left;">'+c+').'+n.title+'</div>\n' ;
+                    }
                     if(n.gmt_create!=null && n.gmt_create!=''){
                         str+='<div style="float: left;color: #23527C;margin-left: 10px">'+
                             '(已填)</div>\n'+
@@ -37,6 +41,9 @@
                             '</div>\n' +
                             '</div>';
                     }else{
+                        if(n.required){
+                            sta=false;
+                        }
                         str+='<div style="float: left;color: #23527C;margin-left: 10px" onclick="toinsert('+n.id+')">'+
                             '(未填)</div>\n'+
                             '<div class="wrt">' +
@@ -53,6 +60,7 @@
 
     //查询书籍对应调研表
     function querySearchByTextbookId() {
+        sta=true;
         var ber= num;
         var ids=document.getElementsByName("textbook_id");
         var str=[];
@@ -70,8 +78,12 @@
                 var str='';
                 $.each(json,function (i,n) {
                     ber=ber+1;
-                    str+='<div style="margin-top: 5px">\n' +
-                        '<div style="float: left;">'+ber+').'+n.title+'</div>\n' ;
+                    str+='<div style="margin-top: 5px">\n' ;
+                    if(n.required){
+                        str+='<div style="float: left;"><font color="red">*</font>'+ber+').'+n.title+'</div>\n' ;
+                    }else{
+                        str+='<div style="float: left;">'+ber+').'+n.title+'</div>\n' ;
+                    }
                     if(n.gmt_create!=null && n.gmt_create!=''){
                         str+='<div style="float: left;color: #23527C;margin-left: 10px">'+
                             '(已填)</div>\n'+
@@ -80,6 +92,9 @@
                             '</div>\n' +
                             '</div>';
                     }else{
+                        if(n.required){
+                            sta=false;
+                        }
                         str+='<div style="float: left;color: #23527C;margin-left: 10px" onclick="toinsert('+n.id+')">'+
                             '(未填)</div>\n'+
                             '<div class="wrt">' +
