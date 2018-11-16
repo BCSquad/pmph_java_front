@@ -38,13 +38,23 @@
 
             <div class="white-out-div">
                 <div>
-                    <div id="select-search-status-wrapper">
+                    <span  style="margin-left: 20px">是否已填写:</span>
+                    <div id="select-search-status-wrapper" style="margin-right: 30px">
                         <select class="search-condition" id="select-search-status">
                             <option value=""  ${state==''?'selected':''} >全部</option>
                             <option value="1" ${state=='1'?'selected':''}>已填</option>
                             <option value="2" ${state=='2'?'selected':''}>未填</option>
                         </select>
                     </div>
+                    <span  style="margin-left: 20px">是否必填:</span>
+                    <div id="select-search-status-wrapper" style="margin-right: 30px">
+                        <select class="search-condition" id="select-search-required">
+                            <option value=""  ${required==''?'selected':''} >全部</option>
+                            <option value="1" ${required=='1'?'selected':''}>是</option>
+                            <option value="0" ${required=='0'?'selected':''}>否</option>
+                        </select>
+                    </div>
+
                     <c:if test="${material != null}">
                         <button id="btn-search" onclick="query()">查询</button>
                     </c:if>
@@ -58,8 +68,8 @@
                         <tr>
                             <th>序号</th>
                             <th>调研表名称</th>
-                            <th>问卷概述</th>
-                            <th>结束时间</th>
+                            <th>调研表概述</th>
+
                             <th>是否必填</th>
                             <th>填写时间</th>
                             <th>操作</th>
@@ -70,7 +80,7 @@
                                 <td>${status.index+1}</td>
                                 <td>${list.title}</td>
                                 <td>${list.intro}</td>
-                                <td>${list.end_date == null?'永久有效':list.end_date}</td>
+
                                 <c:if test="${list.required_for_material == true}">
                                     <td>是</td>
                                 </c:if>
@@ -80,7 +90,7 @@
 
 
                                 <c:if test="${list.gmt_create == null}">
-                                    <td>暂未填写</td>
+                                    <td></td>
                                 </c:if>
                                 <c:if test="${list.gmt_create != null}">
                                     <td>${list.gmt_create}</td>
@@ -157,13 +167,20 @@
 
     function query() {
         var state = $("#select-search-status").val();
-        window.location.href = "${ctx}/orgSurvey/tolist.action?state="+ state + "&materialId=" +${material.id};
+        var required = $("#select-search-required").val();
+        window.location.href = "${ctx}/orgSurvey/tolist.action?state="+ state +"&required="+required+ "&materialId=" +${material.id};
     }
     function fillMaterialSurvey(str) {
         window.location.href = "${ctx}/orgSurvey/fillSurveyById.action?surveyId=" + str;
     }
     function surveyDetails(str) {
         window.location.href = "${ctx}/orgSurvey/surveyDetailsById.action?surveyId=" + str;
+    }
+
+    window.onpageshow = function(event) {
+        if (event.persisted) {
+            window.location.reload();
+        }
     }
 </script>
 </body>

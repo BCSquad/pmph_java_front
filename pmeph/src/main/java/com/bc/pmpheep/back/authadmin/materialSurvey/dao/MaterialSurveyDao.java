@@ -12,16 +12,16 @@ import java.util.Map;
 
 public interface MaterialSurveyDao {
 
-    List<MaterialSurvey> getSurveyByMaterialId (Long materialId);
-    List<MaterialSurveyQuestion> getSurveyQuestionBySurveyId (Long surveyId);
+    List<MaterialSurvey> getSurveyByMaterialId(Long materialId);
+    List<MaterialSurveyQuestion> getSurveyQuestionBySurveyId(Long surveyId);
     List<MaterialSurveyQuestionOption> getSurveyQuestionOptionByQuestionId(Long questionId);
-    List<MaterialSurveyQuestionAnswer> getSurveyQuestionAnswerByQuestionId(Map<String, Object> parameter);
+    List<MaterialSurveyQuestionAnswer> getSurveyQuestionAnswerByQuestionId(Map<String,Object> Parameter);
     Integer insertQuestionAnswer(List<MaterialSurveyQuestionAnswer> materialSurveyQuestionAnswer);
     int queryCount();
     int queryCount(PageParameter<Map<String, Object>> pageParameter);
     List<Map<String,Object>> querySearchList(PageParameter<Map<String, Object>> pageParameter);
     MaterialSurvey getSurveyById(Long id);
     Material getMaterialByid(Long id);
-    Integer checkFile(Map<String,Object> parameter);
+    Integer checkFile(Map<String, Object> parameter);
 
 }

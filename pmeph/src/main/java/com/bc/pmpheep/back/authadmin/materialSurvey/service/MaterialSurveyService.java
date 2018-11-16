@@ -1,7 +1,10 @@
 package com.bc.pmpheep.back.authadmin.materialSurvey.service;
 
 import com.bc.pmpheep.back.authadmin.applydocaudit.bean.Material;
-import com.bc.pmpheep.back.authadmin.materialSurvey.bean.*;
+import com.bc.pmpheep.back.authadmin.materialSurvey.bean.MaterialSurvey;
+import com.bc.pmpheep.back.authadmin.materialSurvey.bean.MaterialSurveyQuestion;
+import com.bc.pmpheep.back.authadmin.materialSurvey.bean.MaterialSurveyQuestionAnswer;
+import com.bc.pmpheep.back.authadmin.materialSurvey.bean.MaterialSurveyQuestionOption;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 
@@ -15,14 +18,14 @@ public interface MaterialSurveyService {
      * @param materialId
      * @return
      */
-    List<MaterialSurvey> getSurveyByMaterialId (Long materialId);
+    List<MaterialSurvey> getSurveyByMaterialId(Long materialId);
 
     /**
      * 根据问卷id获取问题
      * @param surveyId
      * @return
      */
-    List<MaterialSurveyQuestion> getSurveyQuestionBySurveyId (Long surveyId);
+    List<MaterialSurveyQuestion> getSurveyQuestionBySurveyId(Long surveyId);
 
     /**
      * 根据问题id获取选项
@@ -45,7 +48,7 @@ public interface MaterialSurveyService {
 
     Material getMaterialByid(Long id);
 
-    List<MaterialSurveyQuestionAnswer> getSurveyQuestionAnswerByQuestionId (Map<String, Object> parameter);
-    Integer checkFile(Map<String,Object> parameter);
+    List<MaterialSurveyQuestionAnswer> getSurveyQuestionAnswerByQuestionId(Map<String,Object> Parameter);
+    Integer checkFile(Map<String, Object> parameter);
 
 }
