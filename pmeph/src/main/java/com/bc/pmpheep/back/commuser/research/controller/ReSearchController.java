@@ -65,7 +65,9 @@ public class ReSearchController extends BaseController{
         String textbook_id=request.getParameter("textbook_id");
         textbook_id = textbook_id.replaceAll("[\\[|\\]|\\{|\\}|\"]","");
         textbook_id = "(" + textbook_id + ")";
-        List<Map<String,Object>> list = reSearchService.querySearchByTextbookId(textbook_id);
+        Map<String, Object> user=getUserInfo();
+        String user_id = user.get("id").toString();
+        List<Map<String,Object>> list = reSearchService.querySearchByTextbookId(textbook_id,user_id);
         return list;
     }
 

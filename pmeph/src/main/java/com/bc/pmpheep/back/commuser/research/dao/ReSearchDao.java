@@ -41,7 +41,7 @@ public interface ReSearchDao {
      * @param textbook_id
      * @return
      */
-    List<Map<String,Object>> querySearchByTextbookId(@Param("textbook_id") String textbook_id);
+    List<Map<String,Object>> querySearchByTextbookId(@Param("textbook_id") String textbook_id,@Param("user_id") String user_id);
 
     /**
      * 查询登录用户已经填写过的调研表

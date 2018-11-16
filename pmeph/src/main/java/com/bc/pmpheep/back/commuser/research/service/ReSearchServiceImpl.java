@@ -37,8 +37,8 @@ public class ReSearchServiceImpl implements ReSearchService{
     }
 
     @Override
-    public List<Map<String, Object>> querySearchByTextbookId(String textbook_id) {
-        return reSearchDao.querySearchByTextbookId(textbook_id);
+    public List<Map<String, Object>> querySearchByTextbookId(String textbook_id,String user_id) {
+        return reSearchDao.querySearchByTextbookId(textbook_id, user_id);
     }
 
     @Override
