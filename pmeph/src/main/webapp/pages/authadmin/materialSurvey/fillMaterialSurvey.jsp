@@ -405,7 +405,7 @@
     }
 
     function back() {
-        window.history.back()
+        window.location.replace(document.referrer)
     }
 
     function commit() {

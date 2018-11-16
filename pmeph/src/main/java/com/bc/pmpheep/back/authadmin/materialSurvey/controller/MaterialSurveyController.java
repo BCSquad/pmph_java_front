@@ -242,18 +242,17 @@ public class MaterialSurveyController extends BaseController {
         ModelAndView modelAndView = new ModelAndView();
         String state = request.getParameter("state");
         String materialId = request.getParameter("materialId");
+        String required = request.getParameter("required");
         Map<String, Object> map = new HashMap<>();
         Map<String, Object> user = getUserInfo();
         map.put("id", user.get("id"));
         map.put("state", state);
+        map.put("required",required);
 
         if (materialId != null) {
             map.put("materialId", materialId);
             Material materialByid = materialSurveyService.getMaterialByid(Long.parseLong(materialId));
-
             modelAndView.addObject("material", materialByid);
-
-
         }
 
         PageParameter<Map<String, Object>> pageParameter = new PageParameter<Map<String, Object>>(pageNum, pageSize);
@@ -263,6 +262,7 @@ public class MaterialSurveyController extends BaseController {
         modelAndView.addObject("pageSize", pageSize);
         modelAndView.addObject("pageResult", pageResult);
         modelAndView.addObject("state", state);
+        modelAndView.addObject("required", required);
 
         modelAndView.setViewName("authadmin/materialSurvey/SurveyList");
         return modelAndView;
