@@ -7,7 +7,7 @@
 
 
 var num=1;
-
+var sta=true;
 
 var materialMap ;
  
@@ -134,7 +134,8 @@ function savebaself() {
 //跳转到调研表新增页面
 function toinsert(id) {
     savebaself();
-    window.location.href=contextpath+'orgSurvey/fillSurveyById.action?surveyId='+id+'&material_id='+$("#material_id").val();
+    var mid=$("#material_id").val();
+    window.location.href=contextpath+'orgSurvey/fillSurveyById.action?surveyId='+id+'&material_id='+mid;
 }
 
 //跳转到调研表查看页面
@@ -1067,6 +1068,10 @@ function buttAdd(type){
             });
         }else {  //表示提交
             checkLb();
+            if(!sta){
+                window.message.info("请填写完所有必填调研表！")
+                return;
+            }
             if (checkEqual("textbook_id") && checkBoxInfo()&& $.fireValidator() ) {
                /*if (checkEqual("textbook_id") && checkBoxInfo() && checkNull(jsonStr) && checkExtra()) {*/
                /* document.getElementById('buzc').onclick = function () {

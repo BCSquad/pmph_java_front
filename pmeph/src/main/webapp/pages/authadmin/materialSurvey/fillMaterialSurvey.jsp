@@ -104,7 +104,7 @@
             width: 120px;
             height: 40px;
             background-color: #70bcc3;
-
+            cursor: pointer;
             color: #ffffff;
             font-size: 16px;
             border-radius: 5px;
@@ -144,10 +144,10 @@
     </style>
 </head>
 <body>
-<c:if test="${state==2}">
+<c:if test="${res.state==2}">
      <jsp:include page="/pages/comm/headGreenBackGround.jsp"/>
 </c:if>
-<c:if test="${state==1}">
+<c:if test="${res.state==1}">
     <jsp:include page="/pages/comm/head.jsp">
         <jsp:param value="homepage" name="pageTitle"/>
     </jsp:include>
@@ -303,7 +303,7 @@
     </div>
 
 </div>
-<input type="hidden" value="${material_id}" id="material_id">
+<input type="hidden" value="${res.material_id}" id="material_id">
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 
 <script type="text/javascript">

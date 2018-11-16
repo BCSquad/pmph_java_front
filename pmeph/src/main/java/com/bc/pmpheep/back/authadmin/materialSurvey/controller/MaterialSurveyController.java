@@ -133,11 +133,14 @@ public class MaterialSurveyController extends BaseController {
         String material_id=request.getParameter("material_id");
         Map<String, Object> map = new HashMap<>();
         if(StringUtil.notEmpty(material_id)){
-            mv.addObject("state",1);
+            //mv.addObject("state",1);
+            map.put("state","1");
         }else{
-            mv.addObject("state",2);
+            //mv.addObject("state",2);
+            map.put("state","1");
         }
-        mv.addObject("material_id",material_id);
+        // mv.addObject("material_id",material_id);
+        map.put("material_id",material_id);
         //机构用户基本信息
         map.put("survey", materialSurveyVO);
         mv.addObject("res", map);
@@ -358,7 +361,6 @@ public class MaterialSurveyController extends BaseController {
     /**
      * 填写问卷内容
      *
-     * @param json
      * @param request
      * @return
      * @throws ParseException

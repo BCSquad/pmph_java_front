@@ -38,30 +38,33 @@
                 <button class="tohis" onclick="window.history.back()">返回</button>
             </div>
             <div class="table-area">
-                <table >
+                <table style="table-layout: fixed;">
                     <tr>
-                        <th>序号</th>
-                        <th>调研表名称</th>
-                        <th>调研表概述</th>
-                        <th>结束时间</th>
-                        <th>填写时间</th>
-                        <th>操作</th>
+                        <th style="width: 20px">序号</th>
+                        <th style="width: 100px">调研表名称</th>
+                        <th style="width: 100px">调研表概述</th>
+                        <th style="width: 100px">书籍名称</th>
+                        <th style="width: 50px">结束时间</th>
+                        <th style="width: 50px">填写时间</th>
+                        <th style="width: 30px">操作</th>
                     </tr>
                     <tbody id="zebra-table">
                     <c:forEach items="${pageResult.rows}" var="list" varStatus="status">
                         <tr>
-                            <td>${status.index+1}</td>
-                            <td>${list.title}</td>
-                            <td>${list.intro}</td>
-                            <td>${list.end_date == null?'永久有效':list.end_date}</td>
-                            <td>${list.gmt_create == null?'暂未填写':list.end_date}</td>
+                            <td><div class="font">${status.index+1}</div></td>
+                            <td><div class="font">${list.title}</div></td>
+                            <td><div class="font">${list.intro}</div></td>
+                            <td><div class="font">${list.material_name}</div></td>
+                            <td><div class="font">${list.end_date == null?'永久有效':list.end_date}</div></td>
+                            <td><div class="font">${list.gmt_create == null?'暂未填写':list.end_date}</div></td>
                              <%--${list.gmt_create == null?'<td class="rt" onclick="add(${list.id})">填写</td>':'<td class="rt">查看</td>'}--%>
-                            <c:if test="${list.gmt_create == null}">
-                                <td class="rt" onclick="add(${list.id})"><font style="color: #337AB7;">填写</font></td>
+                            <c:if test="${list.gmt_create == null }">
+                                <div><td class="rt" onclick="add(${list.id})"><font style="color: #337AB7;">填写</font></div></td>
                             </c:if>
                             <c:if test="${list.gmt_create != null}">
-                                <td class="rt" onclick="look(${list.id})"><font style="color: #337AB7;">查看</font></td>
+                                <div><td class="rt" onclick="look(${list.id})"><font style="color: #337AB7;">查看</font></div></td>
                             </c:if>
+
                         </tr>
                     </c:forEach>
                     </tbody>
