@@ -159,8 +159,6 @@ public class MaterialSurveyController extends BaseController {
     @RequestMapping(value = "/fillSurveyQuestion", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> fillSurveyQuestion(@RequestBody String json, HttpServletRequest request) throws ParseException {
-
-
         Map<String, Object> writerUser = this.getUserInfo();
         if (writerUser.get("latest_login_time") == null || writerUser.get("latest_login_time").toString().length() < 1) {
             writerUser.put("latest_login_time", new Date());
@@ -183,7 +181,7 @@ public class MaterialSurveyController extends BaseController {
         for (int i = 0; i < quesions.size(); i++) {
             MaterialSurveyQuestionAnswer fillMateriallSurveyQuestionVO = new MaterialSurveyQuestionAnswer();
             fillMateriallSurveyQuestionVO.setUserId(userId);
-            fillMateriallSurveyQuestionVO.setUserType(2);   //机构用户2
+            fillMateriallSurveyQuestionVO.setUserType(Integer.parseInt(this.getUserType()));   //机构用户2
             fillMateriallSurveyQuestionVO.setSurveyId(surveyId);
             fillMateriallSurveyQuestionVO.setGmtCreate(DateUtil.getCurrentTime());
 
@@ -369,11 +367,13 @@ public class MaterialSurveyController extends BaseController {
     @ResponseBody
     public Map<String, Object> checkFill(HttpServletRequest request) throws ParseException {
         String materialId = request.getParameter("materialId");
+        Map<String, Object> user = this.getUserInfo();
         String state ="2";
         Map<String, Object> map = new HashMap<>();
         Map<String, Object> res = new HashMap<>();
         map.put("state",state);
         map.put("required","1");
+        map.put("id",this.getUserType());
         if(StringUtil.notEmpty(materialId)){
             map.put("materialId", materialId);
         }
@@ -387,6 +387,4 @@ public class MaterialSurveyController extends BaseController {
         }
         return res;
     }
-
-
 }
