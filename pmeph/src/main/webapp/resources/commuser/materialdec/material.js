@@ -1080,48 +1080,61 @@ function buttAdd(type){
                 document.getElementById('butj').onclick = function () {
                     window.message.warning("请不要重复点击");
                 };*/
-                $.ajax({
-                    type: "POST",
-                    url: contextpath + 'material/doMaterialAdd.action?sjump=1&type=' + type,
-                    data: $('#objForm').serialize(),// 您的formid
-                    async: false,
-                    dataType: "json",
-                    success: function (json) {
-                        if (json.msg == 'OK') {
-                            window.message.success("操作成功,正在跳转页面");
-                            /**企业微信消息**/
-                            if (json.org_name=="人民卫生出版社") {
-                            	var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
-                            	$.ajax({
-                                    type: 'get',
-                                    url: exportWordBaseUrl + '/frontWxMsg/projectEditorPleaseAdit/'+json.declaration_id,
-                                    dataType: 'jsonp',
-                                    jsonp:"callback", //这里定义了callback在后台controller的的参数名
-                        			jsonpCallback:"getMessage", //这里定义了jsonp的回调函数名。 那么在后台controller的相应方法其参数“callback”的值就是getMessage
-                                    success:function(wxResult){
-                                    	if(wxResult=="1"){
-                                    		//window.message.success("微信消息发送成功");
-                                    		setTimeout(function(){
-                                            	window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
-            								}, 800);
-                                    	}
-                                    	//window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
-                                    },
-                                    error:function(XMLHttpRequest, textStatus){
-                                    	setTimeout(function(){
-                                        	window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
-        								}, 800);
+                window.message.confirm(
+                    "确定提交吗？"
+                    ,{icon: 7, title:'提示',btn:["确定","取消"]}
+
+                    ,function(index){
+                        layer.close(index);
+                        $.ajax({
+                            type: "POST",
+                            url: contextpath + 'material/doMaterialAdd.action?sjump=1&type=' + type,
+                            data: $('#objForm').serialize(),// 您的formid
+                            async: false,
+                            dataType: "json",
+                            success: function (json) {
+                                if (json.msg == 'OK') {
+                                    window.message.success("操作成功,正在跳转页面");
+                                    /**企业微信消息**/
+                                    if (json.org_name=="人民卫生出版社") {
+                                        var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
+                                        $.ajax({
+                                            type: 'get',
+                                            url: exportWordBaseUrl + '/frontWxMsg/projectEditorPleaseAdit/'+json.declaration_id,
+                                            dataType: 'jsonp',
+                                            jsonp:"callback", //这里定义了callback在后台controller的的参数名
+                                            jsonpCallback:"getMessage", //这里定义了jsonp的回调函数名。 那么在后台controller的相应方法其参数“callback”的值就是getMessage
+                                            success:function(wxResult){
+                                                if(wxResult=="1"){
+                                                    //window.message.success("微信消息发送成功");
+                                                    setTimeout(function(){
+                                                        window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
+                                                    }, 800);
+                                                }
+                                                //window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
+                                            },
+                                            error:function(XMLHttpRequest, textStatus){
+                                                setTimeout(function(){
+                                                    window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
+                                                }, 800);
+                                            }
+                                        });
+                                    }else{
+                                        setTimeout(function(){
+                                            window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
+                                        }, 800);
                                     }
-                                    });
-    						}else{
-    							setTimeout(function(){
-                                	window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
-								}, 800);
-    						}
-                            //window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
-                        }
+                                    //window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
+                                }
+                            }
+                        });
+
                     }
-                });
+                    ,function(index){
+                        layer.close(index);
+                    }
+                );
+
             }
         }
   //  }
