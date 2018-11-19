@@ -18,7 +18,7 @@
         <if test="parameter.state != null and parameter.state != '' and parameter.state == 2">
             and b.gmt_create is  NULL
         </if>
-        and t.type_id != 1 GROUP BY t.id limit ${start},${pageSize}
+        and t.type_id != 1 and t.status=1 GROUP BY t.id limit ${start},${pageSize}
     </select>
 
     <!--查询与教材无关调研表总数-->
@@ -46,7 +46,7 @@
             from material_survey t
 			left join material_survey_question_answer a on  a.survey_id=t.id and a.user_id=#{user_id}
             where t.material_id=#{material_id}  and  t.all_textbook_used=1 and t.type_id != 1
-            group by a.survey_id
+            group by a t.id
     </select>
 
     <!--查询与教材下图书有关的调研表-->
@@ -56,7 +56,7 @@
             from material_survey_chain t
             left join material_survey b on t.material_survey_id=b.id
             left join material_survey_question_answer a on a.survey_id=b.id and a.user_id=#{user_id}
-            where t.textbook_id in ${textbook_id} and b.all_textbook_used=0 and b.type_id != 1
+            where t.textbook_id in ${textbook_id} and b.all_textbook_used=0 and b.type_id != 1 and b.status=1
             group by b.id
     </select>
 

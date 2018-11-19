@@ -708,18 +708,24 @@ function buttAdd(type){
             	usedAndRequired(expertMapforNewVali);  
                 checkLb();
                     if ($.fireValidator() ) {
-                                if(!$("#xkfladd").children().hasClass("el-tag")&&($("#xkflbt").val()=="yes")){
-                                    window.message.info("请选择学科分类！");
-                                    return ;
-                                }else if(!$("#nrfladd").children().hasClass("el-tag")&&($("#nrflbt").val()=="yes")){
-                                    window.message.info("请选择内容分类！");
-                                    return ;
-                                }else if(!$("#sbzyadd").children().hasClass("el-tag")&&($("#sbzybt").val()=="yes")){
-                                    window.message.info("请选择申报专业！");
-                                    return ;
-                                }
-                            	if($("#sbdw_id").val()){
-                            		$.ajax({
+                        if(!$("#xkfladd").children().hasClass("el-tag")&&($("#xkflbt").val()=="yes")){
+                            window.message.info("请选择学科分类！");
+                            return ;
+                        }else if(!$("#nrfladd").children().hasClass("el-tag")&&($("#nrflbt").val()=="yes")){
+                            window.message.info("请选择内容分类！");
+                            return ;
+                        }else if(!$("#sbzyadd").children().hasClass("el-tag")&&($("#sbzybt").val()=="yes")){
+                            window.message.info("请选择申报专业！");
+                            return ;
+                        }
+                        window.message.confirm(
+                            "确定提交吗？"
+                            ,{icon: 7, title:'提示',btn:["确定","取消"]}
+
+                            ,function(index){
+                                layer.close(index);
+                                if($("#sbdw_id").val()){
+                                    $.ajax({
                                         type: "POST",
                                         url: contextpath + 'expertation/doExpertationAdd.action?sjump=1&type=' + type,
                                         data: $('#objForm').serialize(),// 您的formid
@@ -732,9 +738,15 @@ function buttAdd(type){
                                             }
                                         }
                                     });
-                            	}else{
-                            		window.message.info("请选择申报单位！");
-                            	}
+                                }else{
+                                    window.message.info("请选择申报单位！");
+                                }
+
+                            }
+                            ,function(index){
+                                layer.close(index);
+                            }
+                        );
                             }
                     }
 

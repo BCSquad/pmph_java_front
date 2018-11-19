@@ -1005,19 +1005,30 @@ function buttAdd(type){
                 return;
             }
             if(checkEqual("textbook_id") && checkBoxInfo() && $.fireValidator()){
-                var username = $("#username").val();
-                var realname = $("#realname").val();
-                if(checkEqual("textbook_id")&&checkBoxInfo()){
-                    if (username == realname) {
-                        if (confirm("您填写的申报姓名和账号一致，是否已当前姓名提交申报！")) {
-                            commit(type);
-                        } else {
-                            $("#realname")[0].focus();
+                window.message.confirm(
+                    "确定提交吗？"
+                    ,{icon: 7, title:'提示',btn:["确定","取消"]}
+
+                    ,function(index){
+                        layer.close(index);
+                        var username = $("#username").val();
+                        var realname = $("#realname").val();
+                        if(checkEqual("textbook_id")&&checkBoxInfo()){
+                            if (username == realname) {
+                                if (confirm("您填写的申报姓名和账号一致，是否已当前姓名提交申报！")) {
+                                    commit(type);
+                                } else {
+                                    $("#realname")[0].focus();
+                                }
+                            } else {
+                                commit(type);
+                            }
                         }
-                    } else {
-                        commit(type);
                     }
-            }
+                    ,function(index){
+                        layer.close(index);
+                    }
+                );
             }
         }
 //    }

@@ -41,7 +41,7 @@
                             '</div>\n' +
                             '</div>';
                     }else{
-                        if(n.required){
+                        if(n.required_for_material){
                             sta=false;
                         }
                         str+='<div style="float: left;color: #23527C;margin-left: 10px" onclick="toinsert('+n.id+')">'+
