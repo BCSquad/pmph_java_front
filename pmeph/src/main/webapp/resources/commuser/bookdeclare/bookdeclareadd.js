@@ -212,43 +212,57 @@ function buttAdd(type){
             //避免重复点击
             document.getElementById('buzc').onclick=function(){window.message.warning("请不要重复点击");};
             document.getElementById('butj').onclick=function(){window.message.warning("请不要重复点击");};
-            $.ajax({
-                type: "POST",
-                url:contextpath+'bookdeclare/doBookdeclareAdd.action?stype='+type,
-                data:$('#objForm').serialize(),// 您的formid
-                async: false,
-                dataType:"json",
-                success: function(json) {
-                    if(json.msg=='OK'){
-                        window.message.success("添加成功,正在跳转页面");
+            window.message.confirm(
+                "确定提交吗？"
+                ,{icon: 7, title:'提示',btn:["确定","取消"]}
 
-                        /**企业微信消息**/
-                        var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
-                    	$.ajax({
-                            type: 'get',
-                            url: exportWordBaseUrl + '/frontWxMsg/topicSubmit/'+json.topic_id+"/"+json.user_id,
-                            dataType: 'jsonp',
-                            jsonp:"callback", //这里定义了callback在后台controller的的参数名
-                			jsonpCallback:"getMessage", //这里定义了jsonp的回调函数名。 那么在后台controller的相应方法其参数“callback”的值就是getMessage
-                            success:function(wxResult){
-                            	if(wxResult=="1"){
-                            		//window.message.success("微信消息发送成功");
-                            		setTimeout(function(){
-                                        window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=wycs";
-    								}, 800);
-                            	}
-                            },
-                            error:function(XMLHttpRequest, textStatus){
-                            	setTimeout(function(){
-                                    window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=wycs";
-								}, 800);
+                ,function(index){
+                    layer.close(index);
+                    $.ajax({
+                        type: "POST",
+                        url:contextpath+'bookdeclare/doBookdeclareAdd.action?stype='+type,
+                        data:$('#objForm').serialize(),// 您的formid
+                        async: false,
+                        dataType:"json",
+                        success: function(json) {
+                            if(json.msg=='OK'){
+                                window.message.success("添加成功,正在跳转页面");
+
+                                /**企业微信消息**/
+                                var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
+                                $.ajax({
+                                    type: 'get',
+                                    url: exportWordBaseUrl + '/frontWxMsg/topicSubmit/'+json.topic_id+"/"+json.user_id,
+                                    dataType: 'jsonp',
+                                    jsonp:"callback", //这里定义了callback在后台controller的的参数名
+                                    jsonpCallback:"getMessage", //这里定义了jsonp的回调函数名。 那么在后台controller的相应方法其参数“callback”的值就是getMessage
+                                    success:function(wxResult){
+                                        if(wxResult=="1"){
+                                            //window.message.success("微信消息发送成功");
+                                            setTimeout(function(){
+                                                window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=wycs";
+                                            }, 800);
+                                        }
+                                    },
+                                    error:function(XMLHttpRequest, textStatus){
+                                        setTimeout(function(){
+                                            window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=wycs";
+                                        }, 800);
+                                    }
+                                });
+
+                                //window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=wycs";
                             }
-                            });
+                        }
+                    });
 
-                        //window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=wycs";
-                    }
                 }
-            });
+                ,function(index){
+                    layer.close(index);
+                }
+            );
+
+
         }
 	}
 }
