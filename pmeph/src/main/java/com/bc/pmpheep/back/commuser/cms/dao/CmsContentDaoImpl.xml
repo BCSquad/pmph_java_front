@@ -6,14 +6,14 @@
 	<!-- 查询文章 -->
 	<select id="listCmsContentVO" parameterType="java.util.Map"
 		resultType="java.util.Map">
-	select cc.*,wu.id as userId,
-		case 
+		select cc.*,wu.id as userId,
+		case
 		when cc.author_type =1
-		then pu.realname
+		then  IFNULL(pu.realname,pu.username)
 		when  cc.author_type =2
-		then wu.realname
+		then  IFNULL(wu.realname,wu.username)
 		else '系统' end as realname,
-		case 
+		case
 		when cc.author_type =1
 		then pu.avatar
 		when  cc.author_type =2
@@ -24,13 +24,13 @@
 		left join pmph_user pu on pu.id=cc.author_id
 		left join writer_user wu on wu.id=cc.author_id
 		left join cms_category ccy on cc.category_id= ccy.id
-		where   ccy.category_name='医学随笔' 
-			and cc.is_deleted=0
-			and cc.auth_status=2 
-			and cc.is_published=1 
-		
-		order by 
-				cc.`auth_date` desc
+		where   ccy.category_name='医学随笔'
+		and cc.is_deleted=0
+		and cc.apporpc != 2
+		and cc.auth_status=2
+		and cc.is_published=1
+		order by
+		cc.auth_date desc
 		<if test="start !=null and pageSize != null">
 			limit #{start},#{pageSize}
 		</if>

@@ -79,7 +79,19 @@ request.setAttribute("currentTime",datetime);
         <div class="wrapper">
             <div class="myinfo">
                 <div class="headr">
-                    <div id="name">${permap.realname}</div>
+                    <div id="name">
+						<c:choose>
+							<c:when test="${permap.realname==null||permap.realname==''&&(permap.nickname!=null&&permap.nickname!='')}">
+								${permap.nickname}
+							</c:when>
+							<c:when test="${permap.realname==null||permap.realname==''&&(permap.nickname==null||permap.nickname=='')}">
+								${permap.username}
+							</c:when>
+							<c:otherwise>
+								${permap.realname}
+							</c:otherwise>
+						</c:choose>
+					</div>
                     <c:if test="${permap.sex==1}">
                         <div id="mansex"></div>
                     </c:if>
@@ -106,16 +118,22 @@ request.setAttribute("currentTime",datetime);
                 	
                 </c:choose>
                 <br/>
+				<c:if test="${selfLog == true}">
+					<a href="<c:url value="/userinfo/touser.action"/>"><span id="zhsz"></span><span class="grsx">修改资料</span></a>
+				</c:if>
                 <c:if test="${permap.rank==0}"><span id="zjrz"></span><span class="grsx">普通用户</span></c:if>
                 <c:if test="${permap.rank==1}"><span id="zjrz"></span><span class="grsx">教师用户</span></c:if>
                 <c:if test="${permap.rank==2}"><span id="zjrz"></span><span class="grsx">作家用户</span></c:if>
                 <c:if test="${permap.rank==3}"><span id="zjrz"></span> <span class="grsx">专家用户</span></c:if>
                 <c:if test="${selfLog == true}">
-                	<a href="<c:url value="/userinfo/touser.action"/>"><span id="zhsz"></span><span class="grsx">账户设置</span></a>
                 	<a href="<c:url value="/integral/toPage.action"/>"><span id="jftb"></span><span class="grsx">积分</span></a>
                 </c:if>
-                
-                
+				<a href='<c:url value="/teacherCertification/showTeacherCertification.action"/>'><span id="jsrz" style="margin-left: -25px"></span><span class="grsx">教师认证</span></a>
+
+				<%--<a class="lcjczjsb" href="<c:url value="/expertation/declare.action"/>">
+					<span id="lcjczjsb"></span>
+					<span class="grsx"></span>临床决策专家申报
+				</a>--%>
                 
                 
                 
@@ -136,18 +154,25 @@ request.setAttribute("currentTime",datetime);
                     <c:if test="${selfLog == true }">
                     	<li id="jcsb" class="dtl pagetag"><a class="aher paged" >教材申报</a></li>
                     </c:if>
+                    <c:if test="${selfLog == true }">
+						<li id="lcjc" class="dtl pagetag"><a class="aher paged">临床决策专家申报</a></li>
+					</c:if>
+					<c:if test="${selfLog == true }">
+						<li id="wycs" class="dtl pagetag"><a class="aher paged"  >我要出书</a></li>
+					</c:if>
+					<li id="wdjc" class="dtl pagetag"><a class="aher paged">图书纠错</a></li>
+					<li id="dzfk" class="dtl pagetag"><a class="aher paged" >读者反馈</a></li>
+					<li id="wdpl" class="dtl pagetag"><a class="aher paged" >个人评论</a></li>
                     <li id="sbwz" class="dtl pagetag"><a class="aher paged">随笔文章</a></li>
                     
-                    <li id="wdjc" class="dtl pagetag"><a class="aher paged">图书纠错</a></li>
+
                     
-                    <c:if test="${selfLog == true }">
-                    	<li id="wycs" class="dtl pagetag"><a class="aher paged"  >我要出书</a></li>
-                    </c:if>
+
 					<!-- <li id="wdjc" class="dtl pagetag"><a class="aher paged" >个人纠错</a></li> -->
-                    <li id="wdpl" class="dtl pagetag"><a class="aher paged" >个人评论</a></li>
+
                     <li id="wdwj" class="dtl pagetag"><a class="aher paged" >个人问卷</a></li>
 					<li id="grsc" class="dtl pagetag"><a class="aher paged" >个人收藏</a></li>
-					<li id="dzfk" class="dtl pagetag"><a class="aher paged" >读者反馈</a></li>
+
                     <%-- <li id="zxsp" class="dtl"><a class="aher"
                                                  href="${ctx}/personalhomepage/tohomepagethe.action">最新书评</a></li> --%>
                 </ul>
@@ -722,7 +747,7 @@ request.setAttribute("currentTime",datetime);
 
             <div class="right">
             	<div id="wdxz"><span id="xztb"></span><span class="rlan">加入的小组</span><span
-                        id="qbhy"><a href="${ctx}/group/list.action" class="aright">全部小组>>&nbsp;</a></span>
+                        id="qbhy"><a href="${ctx}/group/list.action" class="aright">${selfLog ==true?'全部小组>>':''}&nbsp;</a></span>
                     <br style="clear: both;"/>
                     <c:if test="${listmygroup == null || listmygroup.size()==0  }">
                 		<div style="padding-top: 10px;">
@@ -731,7 +756,9 @@ request.setAttribute("currentTime",datetime);
                 	</c:if>
                     <ul class="scul">
                         <c:forEach items="${listmygroup}" begin='0' end='8' var="listmyg" varStatus="status">
-                            <a  class="not-like-an-a" href="${ctx}/group/toMyGroup.action?groupId=${listmyg.group_id}">
+							<c:if test="${selfLog ==true}">
+								<a  class="not-like-an-a" href="${ctx}/group/toMyGroup.action?groupId=${listmyg.group_id}">
+						    </c:if>
 	                            <li class="wdxz" title="${listmyg.group_name}">
 	                            	<img src="${ctx}/${listmyg.group_image}" class="xztp">
 	                                <br/>
@@ -747,7 +774,7 @@ request.setAttribute("currentTime",datetime);
                 <span id="hytb"></span> 
                 <span class="rlan">好友</span> 
                 <span id="qbhy">
-                	<a href="${ctx}/myFriend/listMyFriend.action" class="aright">全部好友>>&nbsp;</a>
+                	<a href="${ctx}/myFriend/listMyFriend.action" class="aright">${selfLog ==true?'全部好友>>':''}&nbsp;</a>
                 </span>
                     <br style="clear: both;"/>
                     <c:if test="${listmyfriend == null || listmyfriend.size()==0  }">

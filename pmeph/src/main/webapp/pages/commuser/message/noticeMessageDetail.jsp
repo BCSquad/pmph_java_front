@@ -8,7 +8,7 @@
    var contextpath="${pageContext.request.contextPath}/"
 </script>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-    <title>申请列表</title>
+    <title>公告详情</title>
       <script>
         var contextpath='${pageContext.request.contextPath}/';
     </script>
@@ -51,7 +51,7 @@
 				               ${map.notice}
 		            </div>
 		        </div> --%>
-		        <div  class="con_css" >
+		        <div  class="con_css" id="cmscontent">
 		            <p>${content}</p>
 		        </div>
 		        <c:if test="${cmsAttach !=null && map.is_material_entry=='false'}">
@@ -120,7 +120,7 @@
 		         	<c:if test="${notEnd ==1 and is_material_entry==true and map.isapply!='yes'}">
 	                      <span class="button " onclick="register(${materialId})" >报名参加</span>
                	    </c:if>
-               	    <c:if test="${is_material_entry==true and map.isapply=='yes'}">
+               	    <c:if test="${notEnd ==1 and is_material_entry==true and map.isapply=='yes'}">
 	                      <span class="button " onclick="register(${materialId})" >报名参加</span>
                	    </c:if>
                	    <c:if test="${notEnd ==0 and is_material_entry==true}">
@@ -137,6 +137,33 @@
 </body>
 
 <script type="text/javascript">
+
+    $("#putPageA").find("[name='action']").val();
+
+    $(function () {
+        $('#cmscontent').find('p').each(function(i, obj){
+            var txt = $(obj).html();
+            html(txt);
+        });
+    });
+
+    function html(str) {
+        return str ? str.replace(/&((g|l|quo)t|amp|#39|nbsp|ldquo|rdquo|amp);/g, function (m) {
+            return {
+                '&lt;':'<',
+                '&amp;':'&',
+                '&quot;':'"',
+                '&gt;':'>',
+                '&#39;':"'",
+                '&nbsp;':' ',
+                '&ldquo;':'“',
+                '&rdquo;':'”',
+                '&amp;':'&'
+            }[m]
+        }) : '';
+    };
+
+
 		function register(materialId){
 			/* window.location.href="${ctx}/material/toMaterialAdd.action?material_id="+materialId; */
 			window.location.href="${ctx}/material/MaterialDetailRedirect.action?material_id="+materialId;

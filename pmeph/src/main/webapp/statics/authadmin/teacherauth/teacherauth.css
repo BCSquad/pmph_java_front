@@ -136,7 +136,7 @@ div.white-out-div .search-condition{
     border:none;
     padding:0px;margin:0px;
 
-    font-size: 12px;
+    font-size: 13px;
     font-weight: normal;
     font-stretch: normal;
     line-height: 46px;
@@ -173,7 +173,7 @@ div.white-out-div .search-condition{
 
 .body #zebra-table td a.a-preview{
 
-    font-size: 12px;
+    font-size: 13px;
     font-weight: normal;
     font-stretch: normal;
     line-height: 24px;
@@ -184,9 +184,7 @@ div.white-out-div .search-condition{
 
 
 .body #zebra-table td a.a-pass{
-
-    text-decoration: underline;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: normal;
     font-stretch: normal;
     line-height: 24px;
@@ -196,9 +194,8 @@ div.white-out-div .search-condition{
 }
 
 .body #zebra-table td a.a-reject{
-
-    text-decoration: underline;
-    font-size: 12px;
+    margin-left: 10px;
+    font-size: 13px;
     font-weight: normal;
     font-stretch: normal;
     line-height: 24px;

@@ -1,4 +1,33 @@
- function comments(id){
+//初始化页面
+$(function () {
+    var startnum= parseInt($("#pagenum").val());
+    var  pagetotal=parseInt($("#pagetotal").val());
+    Page({
+        num:pagetotal,
+        startnum: startnum,
+        elem:$("#page1"),
+        callback: function (n) {
+            var size=$("input[name='edu']").val();
+
+            location.href=contextpath+"community/toCommunity.action?pageNumber="+n+"&pageSize="+size+"&id="+$("#sid").val();
+        }
+    });
+    $('select').selectlist({
+        zIndex: 10,
+        width: 110,
+        height: 30,
+        optionHeight: 30,
+        onChange: function () {
+            var size=$("input[name='edu']").val();
+            location.href=contextpath+"community/toCommunity.action?pageNumber=1&pageSize="+size+"&id="+$("#sid").val();
+        }
+    });
+
+});
+
+
+
+function comments(id){
 	  $.ajax({
 			type:'post',
 			url:contextpath+'community/getComments.action',
@@ -14,7 +43,7 @@
 					  $("#ullist").append('<li class="commentli"><p class="title">'+
 					  n.bookname
 					  +'</p><p  class="message"><span class="name" >'+
-					    n.username
+					    n.nickname
 					  +'  发表了评论</span><span class="scoreimg '+
 					    (n.score>=2.0 ? "yellowstar":"graystar")
 					  +'"></span><span class="scoreimg '+
@@ -54,6 +83,7 @@
 	                               n.title+
 	              '</div>'+
 	              '<div  class="video-e">'+
+					  '<input type="hidden" id="playclicks'+n.id+'" value="0">'+
 	                 '<span class="video-f" >'+getDate(n.gmt_create)+'</span>'+
 	                 '<span class="video-g" style="float:right;line-height:30px;margin-left:5px" id="c'+n.id+'">'+n.clicks+'</span>'+
 	                 '<span class="video-h"></span>'+
@@ -78,18 +108,22 @@
 			        var player = new ckplayer(videoObject);
                   player.addListener("play",function () {
 					  var vid=$this.attr("id").substring(6);
-                      $.ajax({
-                          type:"post",
-                          url:contextpath+'community/videoCount.action',
-                          data:{vid:vid},
-                          success:function(data){
-							// console.log(data.clicks);
-							$("#c"+vid).text(data.clicks);
-                          },
-                          error:function(){
-                              alert('服务器错误');
-                          }
-                      });
+					  var c=$("#playclicks"+vid).val();
+					  if(c==0){
+                          $.ajax({
+                              type:"post",
+                              url:contextpath+'community/videoCount.action',
+                              data:{vid:vid},
+                              success:function(data){
+                                  // console.log(data.clicks);
+                                  $("#c"+vid).text(data.clicks);
+                                  $("#playclicks"+vid).val(1);
+                              },
+                              error:function(){
+                                  alert('服务器错误');
+                              }
+                          });
+					  }
                   });
 			    });
 			  

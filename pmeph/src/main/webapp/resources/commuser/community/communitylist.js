@@ -44,7 +44,8 @@ function  load(tag){
         	
         	$.each(json,function(i,n){
         		if(pageNumber==1&&i<3){
-        			lastest='<div class="items_img">最新</div>';
+        			//lastest='<div class="items_img">最新</div>';
+                    lastest='';
         		}else{
         			lastest='';
         		}
@@ -81,4 +82,8 @@ function loadMore(){
 
 function enterCommunity(){
 	
+}
+
+function loadData(){
+    load("");
 }

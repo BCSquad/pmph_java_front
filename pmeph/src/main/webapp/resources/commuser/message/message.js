@@ -8,6 +8,7 @@ function getMessage(is_read,id1,id2){
     $("#"+id1).css({"background-color":"#1d8ca0","color":"#fff"});
     $("#"+id2).css({"background-color":"#E6F1F3","color":"#03717b"});
     $("#is_read_hidden").val(is_read);
+
     $.ajax({
         type: 'post',
         url: "messageIsRead.action",
@@ -21,6 +22,7 @@ function getMessage(is_read,id1,id2){
             var str = '';
             var strMessage = '';
             if(json.listSize>0){
+
                 $.each(json.list, function (i, n) {
                     var unixTimestamp = new Date(n.time);
                     commonTime = unixTimestamp.toLocaleString();
@@ -402,5 +404,16 @@ function formatDate(value) {
                     d.getMinutes().padLeft(),// 把分钟格式化填充
                     d.getSeconds().padLeft()].join(':');// 把秒格式化填充
         return dformat;// 最后返回格式化好的日期和时间
+    }
+}
+
+//下拉刷新
+function loadData(){
+    var jsptype = $("#jsptype").val();
+    if(jsptype=="1"){
+        loadMoreApply();
+    }
+    if(jsptype=="2"){
+        loadMore();
     }
 }

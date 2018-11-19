@@ -37,7 +37,7 @@
 	           <if test="searchText !=null" >
 	              where n.material_name like #{searchText}
 	            </if>
-				order by n.gmt_create desc 
+				order by n.sort asc
 				limit #{startnum},#{size}
 
          
@@ -81,6 +81,33 @@
      <select id="queryNoticeById" parameterType="map" resultMap="baseMap">
         select * from cms_content  where id=#{Id}
      </select>
+
+	<!--根据教材查询活动信息-->
+	<select id="QueryActivitiById" resultType="java.util.Map">
+        select t.activity_name ,
+			t.cover,
+			t.id as activity_id,
+			b.id as cms_id
+			from activity t
+			left join material m on m.id=t.material_id
+			left join cms_content b on b.material_id=t.material_id
+			where b.material_id=#{material_id} and t.is_deleted=0 and t.status=1
+			order by t.is_set_top desc,t.gmt_set_top desc ,t.gmt_create desc
+			limit  0,3
+	</select>
+
+	<!--查询与教材关联的活动总数-->
+	<select id="QueryCountById" resultType="Integer">
+		 select count(*) from(select t.activity_name ,
+			t.cover,
+			t.id as activity_id,
+			b.id as cms_id
+			from activity t
+			left join material m on m.id=t.material_id
+			left join cms_content b on b.material_id=t.material_id
+			where b.material_id=#{material_id} and t.is_deleted=0 and t.status=1
+			order by t.is_set_top desc,t.gmt_set_top,t.gmt_create desc)q
+	</select>
      
      <!--根据教材id查询社区主页快报列表  -->
      <select id="queryMaterialNoticeList"  parameterType="map" resultMap="baseMap">
@@ -106,12 +133,26 @@
             b.material_id=#{materialId}
         order by
             b.sort
-        limit 0,10
+        limit #{start},#{pageSize}
      </select>
-     
+
+
+	<!--根据教材id查询本套教材的图书  -->
+	<select id="countTextBookList" parameterType="map" resultType="int">
+
+        select
+         count(1)
+        from
+        book b
+        where
+            b.material_id=#{materialId}
+
+
+     </select>
+
      <!--查询社区主页精选书评  -->
      <select id="querySomeComment" parameterType="map" resultMap="baseMap">
-			select buc.* ,b.bookname,wu.username,wu.avatar,b.image_url
+			select buc.* ,b.bookname,wu.username,wu.nickname,wu.avatar,b.image_url
 			from   book_user_comment buc
 				   left join writer_user wu on buc.writer_id=wu.id
 				   left join book b on buc.book_id=b.id

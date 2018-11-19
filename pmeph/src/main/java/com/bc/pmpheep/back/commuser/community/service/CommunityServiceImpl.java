@@ -69,9 +69,9 @@ public class CommunityServiceImpl implements CommunityService {
 	 * 根据教材id查询本套教材的图书 
 	 */
 	@Override
-	public List<Map<String, Object>> queryTextBookList(Long id) {
+	public List<Map<String, Object>> queryTextBookList(Long id,int start,int pageSize) {
 		// TODO Auto-generated method stub
-		return communityDao.queryTextBookList(id);
+		return communityDao.queryTextBookList(id,start,pageSize);
 	}
 	@Override
 	public List<Map<String, Object>> querySomeComment(Long id,int startnum,int size) {
@@ -179,5 +179,21 @@ public class CommunityServiceImpl implements CommunityService {
 		communityDao.changeClicks(map);
 	}
 
-    
+	@Override
+	public int countTextBookList(Long material_id) {
+		return communityDao.countTextBookList(material_id);
+	}
+
+	@Override
+	public List<Map<String, Object>> QueryActivitiById(Map<String,Object> map) {
+		List<Map<String, Object>> list=communityDao.QueryActivitiById(map);
+		return list;
+	}
+
+	@Override
+	public int QueryCountById(String material_id) {
+		return communityDao.QueryCountById(material_id);
+	}
+
+
 }

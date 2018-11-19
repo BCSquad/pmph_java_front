@@ -90,4 +90,40 @@ function resultStatistics(id,name){
 function dealWithAudit(id,name,view_audit){
 	window.location.href = contextpath + "dataaudit/toPage.action?material_id="+id+"&view_audit="+view_audit;
 }
-               
+function toSurvey(id){
+    window.location.href = contextpath + "orgSurvey/tolist.action?materialId="+id;
+
+}
+
+function checkAuthen(id,name,view_audit){
+    $.ajax({
+        type: 'post',
+        url:contextpath+ "orgSurvey/checkFill.action?materialId="+id,
+        async: false,
+        success: function (res) {
+            if (!res.success) {
+                window.message.error("请先填写完必填的调研表");
+                return ;
+            }if(res.success){
+                $.ajax({
+                    type: "POST",
+                    url:contextpath+'dataaudit/checkAuthen.action',
+                    dataType:"json",
+                    success: function(json) {
+                        if(json=="OK"){
+                            dealWithAudit(id,name,view_audit);
+                        }
+                    }
+                });
+            }
+
+
+        }
+    });
+
+
+
+
+
+
+}

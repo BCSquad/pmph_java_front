@@ -14,6 +14,23 @@ text-decoration:none;
 color:#FFF; 
 }
 
+.lcjczjsb{
+    line-height: 18px;
+    color: #03717b;
+    float: left;
+    margin-left: -15px;
+}
+
+#lcjczjsb{
+    background-image: url("../../image/za.png");
+    height: 20px;
+    width: 20px;
+    background-repeat: no-repeat;
+    float: left;
+    background-size: 100%;
+    margin-right: 5px;
+}
+
 .hytp{
 	height: 50px;
     width: 50px;
@@ -26,8 +43,6 @@ color:#FFF;
 
 .hytxdiv{
 	margin: auto;
-    height: 50px;
-    width: 50px;
     border-radius: 50px;
     overflow: hidden;
     border:1px solid #ebebeb;
@@ -200,7 +215,7 @@ color:#FFF;
     line-height:22px;
     text-align: justify;
     color: #03717b;
-    margin-left: 11px;
+    margin-left: 5px;
     width: 68px;
 }
 
@@ -248,7 +263,7 @@ color:#FFF;
 
 #wdxz {
     background-color: #FFFFFF;
-    min-height: 360px;
+    min-height: 400px;
     width: 255px;
     margin-bottom: 10px;
 }
@@ -297,7 +312,7 @@ color:#FFF;
     list-style-type: none;
     width: auto;
     text-align: center;
-    margin-right: 25px;
+    margin-right: 18px;
     padding-bottom: 16px;
 }
 
@@ -374,7 +389,7 @@ color:#FFF;
 .sclb {
 	line-height: 18px;
     float: left;
-    height: 130px;
+    height: 128px;
     width: 80px;
     font-size: 12px;
     color: #333333;
@@ -870,7 +885,8 @@ color:#FFF;
     margin-left: 10px;
     color: #03717b;
 }
-.jcsbsbztxz{
+
+.jcsbsbztxz {
 width: 76px;
     height: 26px;
     background-color: #1d8ca0;
@@ -1415,4 +1431,105 @@ color: #bcbcbc;
 } 
 input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
 color: #bcbcbc; 
-} 
+}
+
+.mleft1_1{
+    height: 170px;
+    width: 250px;
+    float: left;
+    background-color: #FFFFFF;
+    border-right-width: 1px;
+    border-right-style: dashed;
+    border-right-color: #dedede;
+}
+
+.left_1{
+    margin: 20px 0 20px 20px;
+}
+
+.left_2{
+    margin: 15px 0 15px 15px;
+}
+
+.upexr{
+    color: #46B7C1;
+    font-size: 18px;
+    cursor: pointer;
+}
+#clnicalTag1 .backImge{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -333px -218px;
+    height: 20px;
+    width: 20px;
+    background-repeat: no-repeat;
+    margin-top: 3px;
+    margin-right: 3px;
+    float: left;
+}
+
+#clnicalTag2 .backImge{
+	background-image: url(../../image/css_sprites.png);
+    background-position: -333px -265.5px;
+    height: 20px;
+    width: 20px;
+    background-repeat: no-repeat;
+    margin-top: 3px;
+    margin-right: 3px;
+    float: left;
+}
+
+
+
+#clnicalTag3 .backImge{
+	background-image: url(../../image/clinicalChoosing.png);
+    height: 20px;
+    width: 20px;
+    background-size: 90%;
+    background-repeat: no-repeat;
+    margin-top: 3px;
+    margin-right: 3px;
+    float: left;
+}
+#clnicalTag4 .backImge{
+	background-image: url(../../image/clinicalEnd.png);
+    height: 20px;
+    width: 20px;
+    background-size: 90%;
+    background-repeat: no-repeat;
+    margin-top: 3px;
+    margin-right: 3px;
+    float: left;
+}
+#clnicalTag5 .backImge{
+    background-image: url(../../image/css_sprites.png);
+    background-position: -333px -289px;
+    height: 20px;
+    width: 20px;
+    background-repeat: no-repeat;
+    margin-top: 3px;
+    margin-right: 3px;
+    float: left;
+}
+
+.clnicalTag{
+	height: 26px;
+    background-color: #E6F1F3;
+    float: left;
+    font-size: 14px;
+    text-align: center;
+    margin-left: 10px;
+    color: #03717b;
+    padding: 0px 10px;
+    line-height: 26px;
+}
+
+.clnicalTag.active{
+    background-color: #1d8ca0;
+    color: #FFF;
+}
+
+.left_1.product_name{
+	font-weight: 700;
+	
+}
+    

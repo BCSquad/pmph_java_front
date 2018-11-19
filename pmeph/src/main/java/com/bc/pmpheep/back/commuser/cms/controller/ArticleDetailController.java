@@ -53,13 +53,10 @@ public class ArticleDetailController extends BaseController {
 	public ModelAndView list(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		String wid = request.getParameter("wid");
-		// String wid = "10";
 		Map<String, Object> map1 = new HashMap<String, Object>();
 		map1.put("id", wid);
 		Map<String, Object> map = articleDetailService.queryTitle(map1);
-		// mongoDB查询内容
 		Content message = contentService.get(map.get("mid").toString());
-		// Content message = contentService.get("5a6544f290baad7f01b9bc52");
 		String UEContent = "";
 		if (message == null || "".equals(message.getContent().trim())) {
 			if (null==(map.get("summary"))||"".equals(map.get("summary").toString().trim())) {
@@ -72,7 +69,7 @@ public class ArticleDetailController extends BaseController {
 		}
 		//是否已通过审核
 		Boolean is_audit = false;
-		if("2".equals(map.get("auth_status").toString()) /*&& "false".equals(map.get("is_staging").toString())*/){
+		if("2".equals(map.get("auth_status").toString()) ){
 			is_audit = true;
 		}
 
@@ -84,9 +81,6 @@ public class ArticleDetailController extends BaseController {
 		// 最近3条医学随笔
 		List<Map<String, Object>> listArt = articleDetailService.queryArticle(Art.get("author_id").toString());
 		int numArt = articleDetailService.queryArticleCount(Art.get("author_id").toString());
-		// 相关文章换一换
-		List<Map<String, Object>> eMap = articleDetailService.queryRecommendByE(0, wid);
-
 		PageParameter<Map<String, Object>> pageParameter = new PageParameter<Map<String, Object>>(1, 2);
 		pageParameter.setParameter(map1);
 		PageResult<Map<String, Object>> listCom = articleDetailService.queryComment(pageParameter);
@@ -140,7 +134,6 @@ public class ArticleDetailController extends BaseController {
 		mv.addObject("listArt", listArt);
 		mv.addObject("Art", Art);
 		mv.addObject("numArt", numArt);
-		mv.addObject("eMap", eMap);
 		mv.addObject("listArtSix", listArtSix);
 		mv.addObject("is_audit", is_audit);
 		mv.setViewName("/commuser/cms/articledetail");
@@ -187,16 +180,21 @@ public class ArticleDetailController extends BaseController {
 	@ResponseBody
 	public List<Map<String, Object>> change(HttpServletRequest request) {
 		String wid = request.getParameter("wid");
-		List<Map<String, Object>> eMap = articleDetailService.queryRecommendByE(-1, wid);
-		int num = eMap.size();
-		if (num > 5) {
-			int x = (int) (Math.random() * (num - 5));
-			List<Map<String, Object>> cMap = articleDetailService.queryRecommendByE(x, wid);
-			return cMap;
-		} else {
-			return new ArrayList<Map<String, Object>>();
+		int startrow = Integer.parseInt(request.getParameter("startrow"));
+		List<Map<String, Object>> list=new ArrayList<Map<String, Object>>();
+		//查询后台是否配置了相关文章
+		
+		int count = articleDetailService.QueryShipByIDCount(wid);
+		if(count>0){
+			list=articleDetailService.QueryShipByID(wid,startrow);
+			for (Map<String, Object> map: list) {
+				map.put("startrow",startrow);
+				map.put("end",count);
+			}
+		}else{
+			list = articleDetailService.queryRecommendByE(startrow, wid);
 		}
-
+		return list;
 	}
 
 	/**

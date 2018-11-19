@@ -426,5 +426,40 @@ select e.*, REPLACE(e.date_begin,'-','.') as dbegin,REPLACE(e.date_end,'-','.') 
 	<update id="updPrintStatus" parameterType="String" >
 		UPDATE `declaration` SET isprint =1 WHERE id=#{id}
 	</update>
+	
+	<!-- 在dec_position和dec_position_published表中查询choosen_position大于0的项 即被遴选中的 -->
+	<select id="queryChoosenListByDeclarationId" resultType="Map" parameterType="String">
+		select 
+		dp.textbook_id
+		,t.textbook_name
+		,dp.chosen_position
+		,concat_ws(
+			','
+			,case when dp.chosen_position&amp;4 >0 then '主编' else null end
+			,case when dp.chosen_position&amp;2 >0 then '副主编' else null end
+			,case when dp.chosen_position&amp;1 >0 then '编委' else null end
+			,case when dp.chosen_position&amp;8 >0 then '数字编委' else null end
+		) chosen_position_text
+		from dec_position dp
+		left join textbook t on t.id = dp.textbook_id
+		where dp.declaration_id = #{declaration_id} and dp.chosen_position >0
+		
+		<!-- union
+		
+		select 
+		dp.textbook_id
+		,t.textbook_name
+		,dp.chosen_position
+		,concat_ws(
+			','
+			,case when dp.chosen_position&amp;4 >0 then '主编' else null end
+			,case when dp.chosen_position&amp;2 >0 then '副主编' else null end
+			,case when dp.chosen_position&amp;1 >0 then '编委' else null end
+			,case when dp.chosen_position&amp;8 >0 then '数字编委' else null end
+		) chosen_position_text
+		from dec_position_published dp
+		left join textbook t on t.id = dp.textbook_id
+		where dp.declaration_id = #{declaration_id} and dp.chosen_position >0 -->
+	</select>
 
 </mapper>

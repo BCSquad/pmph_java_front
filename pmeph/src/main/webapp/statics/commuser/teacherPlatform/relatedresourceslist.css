@@ -1,0 +1,96 @@
+.menus {
+    height: 40px;
+    border-bottom: 1px solid #F3F2F1;
+    margin: 0 20px;
+}
+
+.menu-item {
+    float: left;
+    height: 30px;
+    margin-top: 9px;
+    margin-right: 20px;
+    text-align: center;
+    line-height: 30px;
+    color: #343535;
+    font-size: 14px;
+    border-bottom: 1px solid white;
+    cursor: pointer;
+}
+
+.menu-item.active {
+    color: #00AC8A;
+    border-color: #00AC8A;
+    cursor: auto;
+}
+
+.list {
+    margin: 0 20px;
+}
+
+.list .item {
+    height: 60px;
+    border-bottom: 1px solid #F3F2F1;
+}
+
+.list .item .icon {
+    float: left;
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    background: #00AC8A;
+    position: relative;
+    top: 27px;
+}
+
+.list .item .content {
+    float: left;
+    height: 60px;
+    line-height: 60px;
+    max-width: 900px;
+    padding: 0 5px;
+    display: block;
+    text-decoration: none;
+}
+
+.list .item .time {
+    float: right;
+    line-height: 60px;
+    margin-right: 10px;
+    padding-top: 20px;
+}
+
+.list .item .time a{
+    text-decoration: none;
+    color: black;
+}
+
+.list .item .time a:focus{
+    color:blue;
+}
+
+.sxy-div-back {
+    font-size: 16px;
+    font-weight: normal;
+    height:50px;
+    line-height: 50px;
+    letter-spacing: 0px;
+    /*color: #999999;*/
+    margin-right:20px;
+    cursor:pointer;
+    float:right;
+}
+
+.pageDiv{
+    clear: both;
+    text-align: right;
+    margin-top: 30px;
+}
+
+.downimg{
+    background-image: url(../../image/u62.png);
+    background-size: 100%;
+    float: right;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}

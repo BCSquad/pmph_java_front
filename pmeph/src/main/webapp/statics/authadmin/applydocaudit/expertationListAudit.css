@@ -1,0 +1,527 @@
+.body{
+    background: #f6f6f6;
+}
+.content-wrapper{
+    padding-top: 30px;
+    padding-bottom: 60px;
+}
+.title {
+    font-size: 16px;
+    color: #333333;
+    height: 20px;
+    line-height: 20px;
+    padding:14px 0;
+    border-bottom: 2px dotted #999999;
+    margin-bottom: 20px;
+}
+.b{
+    width: 690px;
+    height: 495px;
+    position:fixed;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 10px 0px
+    rgba(0, 0, 0, 0.2);
+    position:absolute;
+    top:200px;
+    left:605px;
+    z-index: 99;
+}
+
+.oneTalk{
+    clear:both;
+    margin:0 auto;
+    padding-left: 10px;
+    padding-top: 20px;
+    height: auto;
+    margin-right: 5px;
+}
+.talkName{
+    font-size: 12px;
+}
+
+.headAndNameRight{
+    margin:0 auto;
+    text-align:right;
+    margin-right: 10px;
+}
+
+.sendMessage{
+    margin-top: 4px;
+    clear: both;
+    max-width: 510px;
+    height: auto;
+    min-height:34px;
+    min-width: 20px;
+    font-size: 12px;
+    position:  relative;
+}
+
+.textDiv{
+    font-size: 13px;
+    height: auto;
+    padding: 10px;
+    margin:0 auto;
+    word-wrap:break-word;
+    word-break:break-all;
+    text-align: left;
+    border-radius: 7px;
+    color: #333333;
+    background-color: #f8f8f8;
+    margin-bottom: 10px;
+    float: right;
+/*    margin-right: -132px;*/
+    
+    
+}
+
+.textDiv.float_left{
+    float: left;
+}
+
+.textDiv.float_right{
+    float: right;
+}
+
+
+
+.talkTimeAlignLeft{
+    text-align: left;
+}
+.talkTimeAlignRight{
+    text-align: right;
+}
+.headPicture{
+    width:44px;
+    height:44px;
+    border-radius: 50%;
+}
+
+.hiddenX{
+    width: 50px;
+    height: 50px;
+    position:absolute;
+    top:-25px;
+    right:-25px;
+    border-radius: 50%;
+    -webkit-transition: all 0.3s ;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.personMessageTitle{
+
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 45px;
+    letter-spacing: 1px;
+    color: #333333;
+    margin-left: 20px;
+}
+
+.contentBox{
+    width: 690px;
+    height: 321px;
+    overflow-y:auto;
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid #dedede;
+    border-top:1px solid #dedede;
+    clear: both;
+}
+
+.inputBox{
+    width: 690px;
+    height:120px;
+    border:none;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.div_btn11{
+
+    padding:5px 20px;
+    background-color: #70bcc3;
+    border-radius: 2px;
+    text-align: center;
+    position: absolute;
+    right:28px;
+    bottom:20px;
+    border: 1px solid #f2f2f2;
+}
+.btn_2{
+    float:right;
+    width: 100px;
+    height: 33px;
+    background-color: #f9be3e;
+
+    margin-right:10px;
+    border-radius: 1px;
+
+    color: #ffffff;
+    font-size: 14px;
+    border:none;
+}
+.bigbox{
+    width:1200px;
+    height: auto;
+   background-color: #FFFFFF;
+}
+
+.top-title{
+    position: relative;
+    height: 64px;
+    width: 1160px;
+    margin-top: 12px;
+    margin-left: 20px;
+    background-color:#F8F8F8;
+    padding-top: 12px;
+}
+
+.tj{
+    position: absolute;
+    width: 162px;
+    height: 30px;
+    background-color: #106dc1;
+    border-radius: 5px;
+    margin-left: 89px;
+    padding-bottom: 7px;
+}
+
+.wz {
+    position: absolute;
+    top:9px;
+    width: 121px;
+
+    color: #ffffff;
+    margin-left: 21px;
+}
+
+.tj1{
+    position: absolute;
+    top:33px;
+    left:281px;
+    width: 100px;
+    line-height: 0px;
+
+    color: #626262;
+}
+
+.top-tag {
+    height: 31px;
+    background-color: #FFFFFF;
+    margin-top: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 1160px;
+}
+
+.iconfont-export {
+    width: 18px;
+    height: 20px;
+    background-color: #1c74c2;
+}
+
+.excel {
+    width: 60px;
+    height: 12px;
+
+    font-size: 12px;
+    line-height: 42px;
+    color: #1c74c2;
+    float: right;
+}
+
+
+
+
+
+
+.message{
+    margin-right: auto;
+    margin-left: auto;
+    /*padding: 25px 20px;*/
+    background: #FFFFFF;
+    width: 100%;
+}
+
+table,tr,td{
+    padding: 0;
+    margin: 0;
+}
+table{
+    width: 100%;
+}
+table thead tr{
+    height: 46px;
+    line-height: 30px;
+    background-color:#f0f0f0;
+}
+table thead td{
+    text-align: center;
+
+    font-size: 14px;
+}
+table tbody tr{
+    height: 46px;
+    line-height: 30px;
+}
+
+
+table tbody tr:nth-child(odd){
+    background-color:#f9f9f9;
+    text-align: center;
+}
+
+table tbody tr:nth-child(even){
+    background: #f0f0f0;
+    text-align: center;
+}
+
+
+.fenyelan {
+	margin-top: 20px;
+	float: right;
+}
+.sousuokuang {
+	padding-top:15px;
+	margin-bottom: 20px;
+	color: #cacaca;
+	height: 50px;
+}
+#sstj {
+	width: 208px;
+	height: 40px;
+	float: left;
+    color: #4e4e4e;
+	margin-right: 15px;
+    margin-left: 15px;
+}
+#ssk {
+	width: 120px;
+	color: #A9A9A9;
+	height: 38px;
+	float: left;
+    border: solid 1px #ededed;
+	margin-right: 15px;
+    padding-left: 10px;
+    border-radius: 3px;
+}
+#cxan {
+	width: 80px;
+	background-color: #1898dd;
+	height: 33px;
+	color: #FFFFFF;
+	margin-right: 15px;
+	float: left;
+	margin-top: 5px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#cclear {
+    width: 80px;
+    background-color: #00AC8A;
+    height: 33px;
+    color: #FFFFFF;
+    margin-right: 15px;
+    float: left;
+    margin-top: 5px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#backparent {
+    width: 80px;
+    background-color: #aa1111;
+    height: 33px;
+    color: #FFFFFF;
+    margin-left: 150px;
+    float: left;
+    margin-top: 5px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#gjss {
+	width: 100px;
+	padding-top: 14px;
+	float: left;
+}
+#gjss a{
+    color: #4e4e4e;
+}
+
+
+table,tr,td{
+    padding: 0;
+    margin: 0;
+}
+table{
+    width: 100%;
+    border-spacing: 0px 0px;
+    border-collapse: collapse;
+}
+table thead tr{
+    height: 46px;
+    line-height: 30px;
+    background-color:#f0f0f0;
+}
+table thead td{
+    text-align: center;
+
+    font-size: 14px;
+    color: #4e4e4e;
+    border: 2px solid #fff;
+}
+
+table tbody td{
+
+    font-size: 12px;
+    color: #4e4e4e;
+}
+
+table tbody tr{
+    height: 46px;
+    line-height: 30px;
+
+}
+
+table tbody tr:hover{background:#fff4e5;}
+
+
+
+table tbody tr:nth-child(odd){
+    background: #ffffff;
+    text-align: center;
+}
+
+table tbody tr:nth-child(even){
+    text-align: center;
+    background-color:#f9f9f9;
+
+}
+table tbody td a{
+    text-decoration:none;
+}
+
+
+.talkTime{
+    clear: both;
+
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #d5d5d5;
+}
+.talkTimeAlignLeft{
+    text-align: left;
+}
+.talkTimeAlignRight{
+    text-align: right;
+}
+.oneTalk{
+    clear:both;
+    margin:0 auto;
+    padding-left: 10px;
+    padding-top: 20px;
+    width: 680px;
+    height: auto;
+}
+
+.headAndNameLeft{
+    margin:0 auto;
+    text-align:center;
+}
+
+.headAndNameRight{
+    margin:0 auto;
+    text-align:center;
+    margin-right: 10px;
+}
+
+.headDiv{
+    min-width: 44px;
+    height:50px;
+}
+
+.headPicture{
+    width:44px;
+    height:44px;
+    border-radius: 50%;
+    margin-right:7px;
+}
+
+.talkName{
+    height:15px;
+    line-height: 15px;
+    min-width: 44px;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 1px;
+    color: #999999;
+    margin-right:8px;
+}
+
+.talkDiv{
+    padding-left: 20px;
+}
+.talkDivRight{
+    padding-right: 20px;
+}
+.sendMessage{
+    clear: both;
+    max-width: 510px;
+    height: auto;
+    min-height:34px;
+    min-width: 20px;
+    font-size: 12px;
+    position:  relative;
+}
+
+.float_left {
+    float: left;
+}
+
+.float_right {
+    float: right;
+}
+
+
+.search-condition{
+    width: 182px;
+    height: 40px;
+    background-color: #ffffff;
+    border: solid 1px #ededed;
+
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 24px;
+    letter-spacing: 0px;
+    color: #cacaca;
+    outline: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.font_name {
+    width: auto;
+    height: 12px;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 24px;
+    letter-spacing: 0px;
+    color: #489299;
+    cursor: pointer;
+}

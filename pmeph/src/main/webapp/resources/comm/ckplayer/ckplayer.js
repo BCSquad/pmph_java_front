@@ -762,14 +762,14 @@ function ckplayerConfig() {
 			var eventPlaying = function(event) {
 				thisTemp.playingHandler();
 				thisTemp.sendJS('play');
-				thisTemp.sendJS('paused', false);
+				thisTemp.sendJS('paused', "false");
 			};
 			this.addListenerInside('playing', eventPlaying);
 			//监听视频暂停事件
 			var eventPause = function(event) {
 				thisTemp.pauseHandler();
 				thisTemp.sendJS('pause');
-				thisTemp.sendJS('paused', true);
+				thisTemp.sendJS('paused', "true");
 			};
 			this.addListenerInside('pause', eventPause);
 			//监听视频播放时间事件
@@ -3520,6 +3520,7 @@ function ckplayerConfig() {
 			if(this.playerType == 'html5video' && this.V != null && this.config['videoDrawImage']) {
 				this.sendVCanvas();
 			}
+
 		},
 		/*
 			内部函数

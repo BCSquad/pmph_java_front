@@ -1,25 +1,22 @@
 package com.bc.pmpheep.back.commuser.homepage.service;
 
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.apache.commons.collections.MapUtils;
-import org.apache.commons.collections.map.HashedMap;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
-
 import com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService;
 import com.bc.pmpheep.back.commuser.homepage.dao.HomeDao;
 import com.bc.pmpheep.back.util.RouteUtil;
 import com.bc.pmpheep.general.pojo.Content;
 import com.bc.pmpheep.general.service.ContentService;
+import org.apache.commons.collections.MapUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @Service("com.bc.pmpheep.back.homepage.service.HomeServiceImpl")
@@ -63,7 +60,8 @@ public class HomeServiceImpl implements HomeService {
 		}
         return list;
     }
-    
+
+
  // 获取html图片
  	private String getFirstImgUrlFromHtmlStr(Content content,String contextpath) {
  		String img_url = 
@@ -113,7 +111,7 @@ public class HomeServiceImpl implements HomeService {
      * 查询医学随笔
      */
     @Override
-    @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName+#endrow")
+   // @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName+#endrow")
     public List<Map<String, Object>> queryArticle(int endrow) throws Exception {
         List<Map<String, Object>> list = homeDao.queryArticle(endrow);
         for (Map<String, Object> map : list) {
@@ -122,7 +120,7 @@ public class HomeServiceImpl implements HomeService {
             map.put("cover", RouteUtil.articleAvatar(MapUtils.getString(map, "cover")));
             String con = MapUtils.getString(map, "summary", "");
             String content = omit(con, 208);
-            map.put("content", content);
+            map.put("summary", content);
         }
         return list;
     }
@@ -141,7 +139,7 @@ public class HomeServiceImpl implements HomeService {
      * 查询书评
      */
     @Override
-    @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName")
+   // @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName")
     public List<Map<String, Object>> queryComment() throws UnsupportedEncodingException {
         List<Map<String, Object>> list = homeDao.queryComment();
         for (Map<String, Object> map : list) {
@@ -172,7 +170,7 @@ public class HomeServiceImpl implements HomeService {
      * 查询销量最高的书
      */
     @Override
-    @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName+#type")
+    //@Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName+#type")
     public List<Map<String, Object>> querySale(int type) throws UnsupportedEncodingException {
         List<Map<String, Object>> list = homeDao.querySale(type);
         for (Map<String, Object> map : list) {
@@ -196,7 +194,7 @@ public class HomeServiceImpl implements HomeService {
      * 查询热门标签
      */
     @Override
-    @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName+#typeid")
+   // @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName+#typeid")
     public List<Map<String, Object>> queryLabel(long typeid) {
         String typepath = "0-" + typeid + "-%";
         List<Map<String, Object>> list = homeDao.queryLabel(typepath);
@@ -315,6 +313,44 @@ public class HomeServiceImpl implements HomeService {
         return homeDao.queryHotCommentListCount();
     }
 
+    @Override
+    public List<Map<String, Object>> Queryszpt() {
+        List<Map<String, Object>> list= homeDao.Queryszpt();
+        return list;
+    }
+
+    @Override
+    public int querySize(String type) {
+        return homeDao.querySize(type);
+    }
+
+    @Override
+    public List<Map<String, Object>> quertProductByType(String product_type) {
+        List<Map<String, Object>> list=homeDao.quertProductByType(product_type);
+        if(list!=null&&list.size()>0){
+            for (Map<String, Object> map:list) {
+                String note="";
+                String description="";
+                Content note_detail=new Content();
+                Content description_detail=new Content();
+                //备注
+                if(list.get(0).get("note")!=null && !list.get(0).get("note").equals("")){
+                     note=list.get(0).get("note").toString();
+                     note_detail = contentService.get(note);
+                }
+                //简介
+                if(list.get(0).get("description")!=null && !list.get(0).get("description").equals("")){
+                     description=list.get(0).get("description").toString();
+                     description_detail = contentService.get(description);
+                }
+                map.put("note_detail",note_detail.getContent());
+                map.put("description_detail",description_detail.getContent());
+            }
+        }
+        return list;
+    }
+
+
     //去掉字符串中的html标签
     public String removeHtml(String str){
         String regEx_html="<[^>]+>"; //定义HTML标签的正则表达式
@@ -323,5 +359,7 @@ public class HomeServiceImpl implements HomeService {
         str=m_html.replaceAll(""); //过滤html标签
         return str;
     }
+
+
 
 }

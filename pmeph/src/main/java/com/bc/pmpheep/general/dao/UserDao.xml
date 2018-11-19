@@ -4,10 +4,10 @@
 
     <select id="getUserInfo" resultType="map">
         <if test="usertype == 1">
-            select *,
-            (select max(operate_date) from sys_operation where operate_text='作家用户登录' and user_name=#{username} GROUP BY
-            user_name) latest_login_time
-            from writer_user where username=#{username} and is_disabled=0
+			select wu.*,IFNULL(wu.nickname,wu.username) as nkname,
+			(select max(operate_date) from sys_operation
+			where operate_text='作家用户登录' and user_name=#{username} GROUP BY user_name) latest_login_time
+			from writer_user wu where wu.username=#{username} and wu.is_disabled=0
         </if>
         <if test="usertype == 2">
             select u.*,o.org_name,

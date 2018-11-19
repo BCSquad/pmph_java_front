@@ -116,18 +116,30 @@
 
 .book_correct_unit .unit_right .title_line a{
 	text-decoration: none;
+    display: inline-block;
+    max-width: 500px;
+    height: 42px;
+    overflow: hidden;
+    float: left;
+    margin-left: 20px;
 }
 
 .book_correct_unit .unit_right .title_line .bookname{
 	color: #2772a8;
-	font-size: 15px;
-	margin-left: 20px;
+    font-size: 15px;
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
 }
 
 .book_correct_unit .unit_right .title_line .isbn{
 	color: #838383;
-	font-size: 12px;
-	margin-left: 45px;
+    font-size: 12px;
+    margin-right: 20px;
+    float: right;
 }
 
 .book_correct_unit .unit_right .position_line .position_line_line{

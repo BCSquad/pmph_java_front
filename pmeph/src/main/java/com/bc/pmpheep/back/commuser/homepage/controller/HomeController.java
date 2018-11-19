@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.collections.MapUtils;
@@ -56,22 +57,23 @@ public class HomeController extends BaseController{
         List<Map<String, Object>> listArt = homeService.queryArticle(4);
         List<Map<String, Object>> listAut = homeService.queryAuthor(logUserId);
         List<Map<String, Object>> listCom = homeService.queryComment();
+        List<Map<String,Object>> listSzpt = homeService.Queryszpt();
+        for (Map<String, Object> map : listSzpt) {
+            String url=MapUtils.getString(map,"cover","/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+            //	String url=map.get("image_url").toString();
+            if(url.equals("DEFAULT")){
+                map.put("image_url", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+            }
+        }
         int countSurvey=homeService.countSurvey(logUserId);
 
-        Map<String,Object> adInfo1=homeService.getPageAdInfo("首页轮播");
-        Map<String,Object> adInfo2=homeService.getPageAdInfo("首页中部1");
-        Map<String,Object> adInfo3=homeService.getPageAdInfo("首页中部2");
-        Map<String,Object> adInfo4=homeService.getPageAdInfo("首页中部3");
-        Map<String,Object> adInfo5=homeService.getPageAdInfo("首页中部4");
-        Map<String,Object> adInfo6=homeService.getPageAdInfo("首页原重点推荐1");
-        Map<String,Object> adInfo7=homeService.getPageAdInfo("首页原重点推荐2");
-        for (Map<String, Object> map : listCom) {
-            String url=MapUtils.getString(map,"image_url","/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
-		//	String url=map.get("image_url").toString();
-			if(url.equals("DEFAULT")){
-				map.put("image_url", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
-			}
-		}
+        Map<String,Object> adInfo1=homeService.getPageAdInfo("pc首页轮播");
+        Map<String,Object> adInfo2=homeService.getPageAdInfo("pc首页中部1");
+        Map<String,Object> adInfo3=homeService.getPageAdInfo("pc首页中部2");
+        Map<String,Object> adInfo4=homeService.getPageAdInfo("pc首页中部3");
+        Map<String,Object> adInfo5=homeService.getPageAdInfo("pc首页中部4");
+        Map<String,Object> adInfo6=homeService.getPageAdInfo("pc首页原重点推荐1");
+        Map<String,Object> adInfo7=homeService.getPageAdInfo("pc首页原重点推荐2");
         //根据登录人查询可见公告，未登录查询所有人可见公告
         
         List<Map<String, Object>> listDou= homeService.queryDocument(user==null?"":user.get("id").toString());
@@ -87,6 +89,7 @@ public class HomeController extends BaseController{
         modelAndView.addObject("adInfo5", adInfo5);
         modelAndView.addObject("adInfo6", adInfo6);
         modelAndView.addObject("adInfo7", adInfo7);
+        modelAndView.addObject("listSzpt",listSzpt);
         modelAndView.addObject("countSurvey", countSurvey);
         List<Map<String, Object>> listM =new ArrayList<Map<String,Object>>();
         if(user==null){
@@ -130,7 +133,9 @@ public class HomeController extends BaseController{
         //模板(首页默认显示学校教育下的书籍,从第一条开始显示，每页10条数据)
         Map<String, Object> pmap = new HashMap<String, Object>();
         pmap.put("startrows", 0);
-        pmap.put("type", MapUtils.getIntValue(types.get(0), "id"));
+        if(types.size()>0) {
+            pmap.put("type", MapUtils.getIntValue(types.get(0), "id"));
+        }
         List<Map<String, Object>> listBok = homeService.queryBook(pmap);
         String html = "";
         String vm = "commuser/homepage/homepage.vm";
@@ -153,10 +158,10 @@ public class HomeController extends BaseController{
         }
         html += templateService.mergeTemplateIntoString(vm, map2);
 
-        if (listrows % 10 == 0) {
-            flag = listrows / 10;
+        if (listrows % 14 == 0) {
+            flag = listrows / 14;
         } else {
-            flag = listrows / 10 + 1;
+            flag = listrows / 14 + 1;
         }
         modelAndView.addObject("allrows", flag);
         modelAndView.addObject("thisrows", "1");
@@ -186,7 +191,7 @@ public class HomeController extends BaseController{
         Map<String, Object> map2 = new HashMap<String, Object>();
         map2.put("books", new ArrayList());
         if (state.equals("next")) {
-            typeMap.put("startrows", startrows * 10 );
+            typeMap.put("startrows", startrows * 14 );
             List<Map<String, Object>> listRow = homeService.queryBook(typeMap);
             for (int i = 0; i < listRow.size(); i++) {
                 Map<String, Object> map = new HashMap<String, Object>();
@@ -202,7 +207,7 @@ public class HomeController extends BaseController{
                 ((List) map2.get("books")).add(map);
             }
         } else {
-            typeMap.put("startrows", (startrows - 2) * 10);
+            typeMap.put("startrows", (startrows - 2) * 14);
             List<Map<String, Object>> listRow = homeService.queryBook(typeMap);
             for (int i = 0; i < listRow.size(); i++) {
                 Map<String, Object> map = new HashMap<String, Object>();
@@ -265,15 +270,12 @@ public class HomeController extends BaseController{
         List<Map<String, Object>> listLabel = homeService.queryLabel(Integer.parseInt(state));
         map.put("listType", listType);
         map.put("listLabel", listLabel);
-        Map<String, Object> cmap = new HashMap<String, Object>();
-        cmap.put("startrows", -1);
-        cmap.put("type", Integer.parseInt(state));
-        List<Map<String, Object>> sizerow = homeService.queryBook(cmap);
+        int sizerow = homeService.querySize(state);
         int flag = 0;
-        if (sizerow.size() % 10 == 0) {
-            flag = sizerow.size() / 10;
+        if (sizerow % 14 == 0) {
+            flag = sizerow / 14;
         } else {
-            flag = sizerow.size() / 10 + 1;
+            flag = sizerow / 14 + 1;
         }
         map.put("allrows", flag);
         return map;
@@ -338,5 +340,58 @@ public class HomeController extends BaseController{
         map.put("pagenum", pagenum);
         map.put("pagesize", pagesize);
         return new ModelAndView("commuser/homepage/hotbookcomments",map);
+    }
+
+    //跳转到三个产品详情界面
+    @RequestMapping("todeclaredetail")
+    @ResponseBody
+    public String todeclaredetail(HttpServletRequest request){
+        String returncode="";
+        ModelAndView modelAndView=new ModelAndView();
+        String state=request.getParameter("state");
+        List<Map<String,Object>> list=homeService.quertProductByType(state);
+        if(list!=null && list.size()>0){
+            returncode="OK";
+        }else{
+            returncode="NO";
+        }
+        return returncode;
+    }
+
+    //跳转到公告详情页（三大产品）
+    @RequestMapping("toproductdetail")
+    public ModelAndView toproductdetail(HttpServletRequest request){
+        ModelAndView modelAndView=new ModelAndView();
+        String state=request.getParameter("state");
+        List<Map<String,Object>> list=homeService.quertProductByType(state);
+        //取出申报通知扫描图片
+        List<Map<String,Object>> list_scanimg=new ArrayList<>();
+        List<Map<String,Object>> list_unscanimg=new ArrayList<>();
+        for (int i=0;i<list.size();i++){
+            //s1=true代表是扫描图片。false代表是附件
+            Boolean s1=Boolean.valueOf(list.get(i).get("is_scan_img").toString());
+            if(s1){
+                Map<String,Object> map=new HashMap();
+                map.put("attachment","image/" + list.get(i).get("attachment") + ".action");
+                list_scanimg.add(map);
+            }else{
+                Map<String,Object> map=new HashMap();
+                map.put("attachment","file/download/" + list.get(i).get("attachment") + ".action");
+                map.put("attachment_name",list.get(i).get("attachment_name").toString());
+                list_unscanimg.add(map);
+            }
+        }
+        modelAndView.addObject("list_scanimg",list_scanimg);
+        modelAndView.addObject("list_unscanimg",list_unscanimg);
+        modelAndView.addObject("note_detail",list.get(0).get("note_detail"));
+        modelAndView.addObject("description",list.get(0).get("description_detail"));
+        modelAndView.addObject("product_name",list.get(0).get("product_name"));
+        modelAndView.addObject("product_id",list.get(0).get("product_id"));
+        modelAndView.addObject("actualDeadline",list.get(0).get("actualDeadline"));
+        modelAndView.addObject("notEnd",list.get(0).get("notEnd"));
+        modelAndView.addObject("is_new",list.get(0).get("is_new"));
+        modelAndView.addObject("state",state);
+        modelAndView.setViewName("commuser/cms/declaredatail");
+        return modelAndView;
     }
 }

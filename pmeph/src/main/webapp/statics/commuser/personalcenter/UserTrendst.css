@@ -5,7 +5,7 @@
     
     clear: both;
     padding: 20px 15px 20px 15px;
-    
+    box-sizing: border-box;
     float: left;
     clear: both;
     display: table;
@@ -73,6 +73,7 @@
     clear: right;
 }
 
+/*
 .msg_line .success_smile{
 	background-image: url(../../image/css_sprites.png);
     background-position: -462px -192px;
@@ -83,6 +84,7 @@
     float: left;
     clear: right;
 }
+*/
 
 /* .msg_line .fail_unhappy{
 	background-image: url(../../image/css_sprites.png);
@@ -98,7 +100,7 @@
 .trendstWrapper .content_line{
 	margin: 15px 0px 15px 0px;
 	float: left;
-    clear: right;
+    /*clear: right;*/
     width: 100%;
     display: table-row;
 }
@@ -311,7 +313,7 @@
 	color: inherit;
 }
 
-.trendstWrapper:hover{
+/*.trendstWrapper:hover{
 	background-color: #fdfdff;
 	border-left: 1px solid #f1f1f1;
 	border-right: 1px solid #f1f1f1;
@@ -325,4 +327,4 @@
 }
 .trendstWrapper:hover+.trendstWrapper+.trendstWrapper{
 	border-top: 1px solid #f1f1f1;
-}
+}*/

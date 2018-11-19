@@ -109,7 +109,29 @@ function toAudit(id,type){
 		    success: function(msg) {
 			    if(msg.msg=='OK'){
 			    	 message.success("成功！");
-			    	 toMain();
+			    	 if(type=='3'){
+                    	var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
+                    	$.ajax({
+                            type: 'get',
+                            url: exportWordBaseUrl + '/frontWxMsg/projectEditorPleaseAdit/'+id,
+                            dataType: 'jsonp',
+                            jsonp:"callback", //这里定义了callback在后台controller的的参数名
+                			jsonpCallback:"getMessage", //这里定义了jsonp的回调函数名。 那么在后台controller的相应方法其参数“callback”的值就是getMessage
+                            success:function(wxResult){
+                            	if(wxResult=="1"){
+                            		//window.message.success("微信消息发送成功");
+                            		setTimeout(function(){
+                            			toMain();
+                            		},800);
+                            	}
+                            },
+                            error:function(XMLHttpRequest, textStatus){
+                            	toMain();
+                            }
+                            });
+                         //toMain();
+			    	 }
+			    	 
 			    }else{
 			    	message.success("失败了！");
 			    }

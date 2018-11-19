@@ -26,6 +26,8 @@
 <script src="${ctx}/resources/comm/json2.js?t=${_timestamp}" type="text/javascript"></script>
 <script src="${ctx}/resources/authadmin/accountset/admininfo.js?t=${_timestamp}"
 	type="text/javascript"></script>
+	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.tipso.js?t=${_timestamp}">
+	</script>
  <script src="${ctx}/resources/comm/jquery/jquery.calendar.js?t=${_timestamp}"></script>	
      <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}" type="text/javascript"></script>
 <link href="${ctx}/statics/css/base.css?t=${_timestamp}" rel="stylesheet"
@@ -36,7 +38,8 @@
 	rel="stylesheet" type="text/css" />
 <link href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}" rel="stylesheet"
 	type="text/css" />
- <link rel="stylesheet" href="${ctx}/statics/css/jquery.calendar.css?t=${_timestamp}" type="text/css">	
+ <link rel="stylesheet" href="${ctx}/statics/css/jquery.calendar.css?t=${_timestamp}" type="text/css">
+	<link rel="stylesheet" href="${ctx}/statics/css/jquery.tipso.css?t=${_timestamp}" type="text/css">
 <script type="text/javascript">
 	
 </script>
@@ -118,10 +121,10 @@
                 	<div class="modify" id="uploadFile">修改头像</div>
 					
 					<div class="links">
-						<a href="javascript:;" class="manager"
-							onclick="window.location='${ctx}/admininfocontroller/toadminattest.action'">学校管理员认证</a>
-						<a href="javascript:;" class="password"
-							onclick="window.location='${ctx}/admininfocontroller/tochangepwd.action'">修改密码</a>
+						<div href="javascript:;" class="manager"
+							onclick="window.location='${ctx}/admininfocontroller/toadminattest.action'">学校管理员认证</div>
+						<div href="javascript:;" class="password"
+							onclick="window.location='${ctx}/admininfocontroller/tochangepwd.action'">修改密码</div>
 					</div>
 					<div style="clear: both"></div>
 				</div>
@@ -134,20 +137,18 @@
 						<tr>
 							<td>
 								<div class="label-input">
-									<label class="require">真实姓名</label>
+									<label class="">真实姓名</label>
 									<div class="input-wrapper">
-										<input class="required" data-valid="isNonEmpty"
-											data-error="真实姓名不能为空" placeholder="请填写真实姓名" type="text"
+										<input class="" type="text"
 											id="realName" value="${admininfo.realname}" maxLength="20">
 									</div>
 								</div>
 							</td>
 							<td>
 								<div class="label-input">
-									<label class="require">职务</label>
+									<label class="">职务</label>
 									<div class="input-wrapper">
-										<input class="required" data-valid="isNonEmpty" ${admininfo.progress==1?'disabled="disabled"':''}
-											data-error="职务不能为空" placeholder="请填写职务" type="text"
+										<input class=""  ${admininfo.progress==1?'disabled="disabled"':''} type="text"
 											id="position" value="${admininfo.position}" maxLength="35">
 									</div>
 								</div>
@@ -180,7 +181,7 @@
 							<td>
 
 								<div class="label-input">
-				                    <label class="require" >职称</label>
+				                    <label class="" >职称</label>
 				                    <div class="input-wrapper">
 				                    <input type="hidden" id="title-hidden" value="${admininfo.title}"> 
 				                    <c:choose>
@@ -220,8 +221,7 @@
 								<div class="label-input">
 									<label class="require">手机</label>
 									<div class="input-wrapper">
-										<input class="required" data-valid="isNonEmpty||isMobile"
-											data-error="手机不能为空||手机格式不正确" type="text" id="handphone"
+										<input class="" type="text" id="handphone"
 											value="${admininfo.handphone}" maxLength="20"/>
 									</div>
 								</div>
@@ -230,8 +230,7 @@
 								<div class="label-input">
 									<label class="require">邮编</label>
 									<div class="input-wrapper">
-										<input type="text" class="required" data-valid="isNonEmpty"
-											data-error="邮编不能为空" type="text" id="postCode"
+										<input type="text" class="" type="text" id="postCode"
 											value="${admininfo.postcode}" maxLength="25">
 									</div>
 								</div>
@@ -240,9 +239,8 @@
 								<div class="label-input">
 									<label class="require">E-mail</label>
 									<div class="input-wrapper">
-										<input type="text" class="required"
-											data-valid="isNonEmpty||isEmail"
-											data-error="E-mail不能为空||E-mail格式不正确" type="text" id="email"
+										<input type="text" class=""
+										 type="text" id="email"
 											value="${admininfo.email}" maxLength="40">
 									</div>
 								</div>
@@ -251,10 +249,9 @@
 						<tr>
 							<td colspan="3">
 								<div class="label-input col-3">
-									<label class="require">地址</label>
+									<label class="">地址</label>
 									<div class="input-wrapper">
-										<input type="text" class="required" data-valid="isNonEmpty"
-											data-error="地址不能为空" id="address" value="${admininfo.address}" maxLength="50">
+										<input type="text" class="" id="address" value="${admininfo.address}" maxLength="50">
 									</div>
 								</div>
 							</td>

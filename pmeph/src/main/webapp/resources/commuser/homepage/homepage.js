@@ -32,6 +32,9 @@ $(function() {
 		}
 	}
 
+	//查询新书推荐，默认显示第一类
+    searchXstjBook($("#typeid").val());
+
 });
 // 下一页
 function on(state) {
@@ -63,6 +66,29 @@ function on(state) {
 	});
 }
 
+//新书推荐
+function searchXstjBook(typeid) {
+    $(".new").removeClass("active");
+    $("#new"+typeid).addClass("active");
+    $.ajax({
+        type: 'post',
+        url: contextpath + 'readpage/searchXstjBook.action?type=' + typeid+'&t=' + new Date(),
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+            if(Empty(json.pagebook)){
+                $("#JKFYDiv_0").html('<div class="no-more-book">\n' +
+                    '                   <img src="'+contextpath+'statics/image/aaa4.png'+'">\n' +
+                    '                   <span>木有内容呀~~</span>\n' +
+                    '               \t</div>')
+            }else{
+                $("#JKFYDiv_0").html(json.pagebook);
+            }
+
+        }
+    });
+}
+
 // 书籍分类
 function chooseType(state) {
 	$.ajax({
@@ -88,8 +114,8 @@ function chooseType(state) {
 					$("#typeTwo").html(x.type_name);
 				}*/
 			});
-			$(".page").after(listTypeHtmlStr);
-			$(".tab").removeClass("active");
+			$(".asdf").after(listTypeHtmlStr);
+			$(".oldtab").removeClass("active");
 			$("#" + state).addClass("active");
 			$(".type").removeClass("active");
 			$("#book_type").val(state);
@@ -207,6 +233,25 @@ function tosurvey() {
 	location.href = contextpath + 'survey/surveyList.action';
 }
 
+//三个新产品跳转
+function todeclaredetail(state){
+    $.ajax({
+        type:'post',
+        url:contextpath+'homepage/todeclaredetail.action?state='+state+'&&t='+new Date().getTime(),
+        async:false,
+        dataType:'json',
+        success:function(json){
+        	if(json=="OK"){
+                location.href = contextpath + 'homepage/toproductdetail.action?state='+state;
+			}else{
+                window.message.info("您好，当前产品的公告没有发布，请在发布之后再进行申报！");
+			}
+
+        }
+    });
+}
+
+
 // 跳转公告详情页面
 // function todou(mid,material_id,id) {
     // location.href = contextpath +'cmsnotice/noticeMessageDetail.action?id='+mid+'&materialId='+material_id+'&csmId='+id+'&'+'&tag=FromCommunityList';
@@ -215,28 +260,40 @@ function todou(id) {
 location.href = contextpath + 'community/toCommunity.action?id=' + id;
 }
 
+//跳转到师资平台列表页面
+function toteacherPlatform() {
+    location.href = contextpath + 'teacherPlatform/szpt.action';
+}
+
+//跳转到师资平台详情页面
+function toszptdetail(activity_id) {
+    location.href = contextpath + 'teacherPlatform/todetail.action?activity_id='+activity_id;
+}
+
 //添加好友 按钮触发
 function addFriendfun(uid,realname,status){
-	var data={uid:uid
-			,status:status};
-	$.ajax({
-		type:'post',
-		url:contextpath+'addFriend/addFriendfun.action?t='+new Date().getTime(),
-		async:false,
-		dataType:'json',
-		data:data,
-		success:function(json){
-			if (status == 2) {
-				window.message.success("已和 "+realname+" 成为好友！");
-				$("#friend"+uid).removeClass("isBeenRequest").addClass("isFriend").html("<B>好友</B>").attr("title","已是您的好友！").unbind();
-			} else {
-				window.message.success("已向 "+realname+" 发起好友申请！");
-				$("#friend"+uid).removeClass("add").addClass("hasRequest").attr("title","已申请加为好友，请等待对方同意。").unbind();
-				
-			}
-			
-		}
-	});
+	var data={uid:uid,status:status};
+    window.message.confirm("您将添加该作家为好友！",{title:'好友申请',btn:["确定","取消"]},function(index){
+        layer.close(index);
+        $.ajax({
+            type:'post',
+            url:contextpath+'addFriend/addFriendfun.action?t='+new Date().getTime(),
+            async:false,
+            dataType:'json',
+            data:data,
+            success:function(json){
+                if (status == 2) {
+                    window.message.success("已和 "+realname+" 成为好友！");
+                    $("#friend"+uid).removeClass("isBeenRequest").addClass("isFriend").html("<B>好友</B>").attr("title","已是您的好友！").unbind();
+                } else {
+                    window.message.success("已向 "+realname+" 发起好友申请！");
+                    $("#friend"+uid).removeClass("add").addClass("hasRequest").attr("title","已申请加为好友，请等待对方同意。").unbind();
+
+                }
+
+            }
+        });
+    },function(index){layer.close(index);});
 }
 
 /*// 添加好友
@@ -254,3 +311,13 @@ function addfriend(target_id) {
 		}
 	});
 }*/
+
+//微信公众号悬浮
+function showEWM(){
+    document.getElementById("EWM").style.display = 'block';
+}
+function hideEWM(){
+    document.getElementById("EWM").style.display = 'none';
+}
+
+

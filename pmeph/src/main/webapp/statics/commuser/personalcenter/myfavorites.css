@@ -65,6 +65,10 @@
     float: left;
     font-size: 12px;
     color: #bdbdbd;
+    width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .collection .title .tm{
     height:25px;

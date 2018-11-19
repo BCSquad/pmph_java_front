@@ -16,10 +16,12 @@
     <link href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}" rel="stylesheet" type="text/css" />
     <link href="${ctx}/statics/commuser/userinfo/userinfo.css?t=${_timestamp}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.calendar.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.tipso.css?t=${_timestamp}" type="text/css">
     <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery-validate.js?t=${_timestamp}" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}" type="text/javascript"></script>
+    <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.tipso.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.calendar.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/commuser/userinfo/userinfo.js?t=${_timestamp}" type="text/javascript"></script>
@@ -65,13 +67,6 @@
 		<div class="content-wrapper" >
 			<div style="height: 30px"></div>
 			<input type="hidden" id="id" value="${map.id}">
-
-    <div class="sxy-div-content">
-        <div style="height:50px;">
-            <span style="width:20px;"></span>
-            <span class="sxy-div-menu">个人资料</span>
-        </div>
-    </div>
     <div style="height:14px"></div>
     <div class="sxy-div-content">
         <div>
@@ -87,26 +82,22 @@
                 <div class="sxy-userinfo-row"></div>
                 <div class="sxy-userinfo-row"></div>
                 <div class="sxy-userinfo-row"></div>
-                <div class="sxy-userinfo-row"></div>
-
-                <div class="sxy-userinfo-row">
-                	<a id="sxy-font-1" style="cursor: pointer;" onclick="window.location='${ctx}/teacherCertification/showTeacherCertification.action'">教师认证</a>
-                </div>
-                <div class="sxy-userinfo-row">
-                	<a id="sxy-font-2" style="cursor: pointer;" onclick="window.location='${ctx}/userinfo/comchangepwd.action'">修改密码</a>
+                <div class="sxy-userinfo-row" style="margin-top: 15px">
+                    <div id="person_SB" style="cursor: pointer;margin-left: 35px" onclick="testOne()">&nbsp;&nbsp;个人申报信息</div>
+                    <div id="sxy-font-1"  onclick="window.location='${ctx}/teacherCertification/showTeacherCertification.action'">教师认证</div>
+                    <div id="sxy-font-2" style="cursor: pointer;margin-left: 288px" onclick="window.location='${ctx}/userinfo/comchangepwd.action'">&nbsp;&nbsp;修改密码</div>
                 </div>
             </div>
             <div style="height:35px;"></div>
         </div>
            <span class="sxy-font-3" style="margin-left: 20px"><B>基本信息</B></span>
-        <form id="orgForm">
         <table border="0" class="form-table">
             <tr class="sxy-tr">
                 <td>
                   <div  style="width: 400px">
                        <label class="require">真实姓名</label>
                        <div class="input-wrapper">
-                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="真实姓名不能为空"  onblur="javascript:LengthLimit(this,20);"
+                          <input class="sxy-txt"onblur="javascript:LengthLimit(this,20);"
                            placeholder="真实姓名必填" type="text" id="realname" name="realname"  value="${map.realname }"/>
                        </div>
                   </div>
@@ -165,8 +156,7 @@
                   <div  style="width: 400px">
                        <label class="require">手机</label>
                        <div class="input-wrapper">
-                          <input class="sxy-txt required" data-valid="isNonEmpty||isMobile"  
-                          data-error="手机号码不能为空||请填写正确的手机号码" placeholder="手机号码必填" type="text" id="handphone"
+                          <input class="sxy-txt" placeholder="手机号码必填" type="text" id="handphone"
                           name="handphone" value="${map.handphone}"/>
                        </div>
                   </div>
@@ -207,7 +197,7 @@
                   <div  style="width: 400px">
                        <label class="require">工作单位</label>
                        <div class="input-wrapper">
-                          <input class="sxy-txt required" data-valid="isNonEmpty"  data-error="工作单位不能为空" onblur="javascript:LengthLimit(this,36);"
+                          <input class="sxy-txt" onblur="javascript:LengthLimit(this,36);"
                            placeholder="工作单位必填" type="text" id="workplace" name="workplace" value="${map.workplace }"/>
                        </div>
                   </div>
@@ -240,6 +230,15 @@
                        </div>
                   </div>
                 </td>
+               <td>
+                  <div  style="width: 400px">
+                       <label >昵称</label>
+                       <div class="input-wrapper">
+                          <input class="sxy-txt"  onblur="javascript:LengthLimit(this,30);"
+                            type="text" id="nickname" name="nickname" value="${map.nickname }"/>
+                       </div>
+                  </div>
+                </td>
             </tr>
             <tr class="sxy-tr">
                 <td>
@@ -257,8 +256,8 @@
                   <div style="width: 400px">
                       <label >个人简介</label>
                       <div class="input-wrapper">
-                          <input type="text"   onblur="javascript:LengthLimit(this,100);"
-                             id="note" name="note" style="width: 1040px" value="${map.profile }">
+                          <input type="text"
+                             id="note" name="note" style="width: 1040px" value="${map.profile }" placeholder="请输入个性签名，最大长度不能超过100汉字">
                       </div>
                   </div>
                 </td>
@@ -268,8 +267,8 @@
                    <div style="width: 400px">
                        <span class="sxy_span">个性签名</span>
                        <div class="input-wrapper" style="margin-left: 20px">
-                           <input type="text"  id="signature"  onblur="javascript:LengthLimit(this,50);"
-                           name="signature" style="width: 1040px" value="${map.signature }">
+                           <input type="text"  id="signature"
+                           name="signature" style="width: 1040px" value="${map.signature }" placeholder="请输入个性签名，最大长度不能超过50汉字">
                        </div>
                    </div>
                 </td>
@@ -289,7 +288,7 @@
                              </c:if>
                              </c:forEach>
                          </div>
-                        <input type="text" placeholder="请输入标签名，10字以内" style="height:28px;margin-left: 20px;margin-top:5px" id="mytag" onkeyup="LengthLimit(this,20)"/>
+                        <input type="text" placeholder="请输入标签名，10字以内" style="height:28px;margin-left: 20px;margin-top:5px" id="mytag" onkeyup="LengthLimit(this,10)"/>
                         <span style="margin-top:5px;height: 30px;line-height: 30px;display: inline-block;border: 1px solid #f1f1f1;border-radius: 5px;cursor: pointer;" onclick="addtag()"><font class="sxy-bottom-font">添加</font></span>
                    </div>
                </td>
@@ -304,7 +303,6 @@
                 <td colspan="9"></td>
             </tr>
         </table>
-        </form>
     </div>
 			
 		</div>

@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -89,11 +90,11 @@ public class ReadDetailController extends BaseController{
 			map.put("image_url", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
 		}
 		String author="%"+map.get("author").toString()+"%";
-		List<Map<String, Object>> eMap=readDetailService.queryRecommendByE(0);
+		/*List<Map<String, Object>> eMap=readDetailService.queryRecommendByE(0);*/
 		List<Map<String, Object>> listCom=readDetailService.queryComment(id,0);
 		List<Map<String, Object>> ComNum=readDetailService.queryComment(id,-1);
 		List<Map<String, Object>> Video=readDetailService.queryVideo(id);
-		List<Map<String, Object>> auList=readDetailService.queryAuthorType(author);
+		/*List<Map<String, Object>> auList=readDetailService.queryAuthorType(author);*/
 		List<Map<String, Object>> longList=readDetailService.queryLong(id,0);
 		if(longList.size()==0){
 			modelAndView.addObject("longcom", "nothing");
@@ -106,20 +107,23 @@ public class ReadDetailController extends BaseController{
 		readDetailService.changeClicks(id, clinum);
 		Long typeid=Long.valueOf(map.get("type").toString());
 		List<Map<String, Object>> typeList=bookService.queryParentTypeListByTypeId(typeid);
-		for (Map<String, Object> pmap : auList) {
+		/*for (Map<String, Object> pmap : auList) {
 			if(("DEFAULT").equals(pmap.get("image_url"))){
 				pmap.put("image_url", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
 			}
-		}
+		}*/
 		Map<String, Object> fmap=new HashMap<String, Object>();
 		fmap.put("type", map.get("type"));
 		fmap.put("row", 6);
-		List<Map<String, Object>> frList=readDetailService.fresh(fmap);
-		for (Map<String, Object> pmap : frList) {
+		//List<Map<String, Object>> frList=readDetailService.fresh(fmap);
+		//Map<String, Object> frMap =readDetailService.queryRelatedBookList(id,0,1);
+		//List<Map<String, Object>> frList = (List<Map<String, Object>>) frMap.get("list");
+		//int frNextPage = (int) frMap.get("nextPage");
+		/*for (Map<String, Object> pmap : frList) {
 			if(("DEFAULT").equals(pmap.get("image_url"))){
 				pmap.put("image_url", request.getContextPath() + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
 			}
-		}
+		}*/
 		Map<String, Object> user=getUserInfo();
 		if(user!=null){
 			Map<String, Object> zmap=new HashMap<String, Object>();
@@ -146,7 +150,8 @@ public class ReadDetailController extends BaseController{
 			modelAndView.addObject("flag","no");
 			modelAndView.addObject("mark", "no");
 		}
-		modelAndView.addObject("auList", auList);
+		//相关推荐
+		/*modelAndView.addObject("auList", auList);
 		if(auList.size()<9){
 			//该作者的书籍不足9本，根据书籍的类型凑足9本
 			int num=9-auList.size();
@@ -161,14 +166,17 @@ public class ReadDetailController extends BaseController{
 				}
 			}
 			modelAndView.addObject("tMaps", tMaps);
-		}
+		}*/
 		modelAndView.addObject("id", id);
-		modelAndView.addObject("eMap", eMap);
+		//人卫推荐
+		/*modelAndView.addObject("eMap", eMap);*/
 		modelAndView.addObject("ComNum", ComNum.size());
 		modelAndView.addObject("supMap", supMap);
 		modelAndView.addObject("map", map);
 		modelAndView.addObject("listCom", listCom);
-		modelAndView.addObject("frList", frList);
+		//教材关联图书
+		/*modelAndView.addObject("frList", frList);
+		modelAndView.addObject("frNextPage", frNextPage);*/
 		modelAndView.addObject("Video",Video);
 		modelAndView.addObject("longList", longList);
 		modelAndView.addObject("typeList", typeList);
@@ -189,8 +197,8 @@ public class ReadDetailController extends BaseController{
 	 */
 	@RequestMapping("/correction")
 	@ResponseBody
-	public String correction(HttpServletRequest request){
-		String returncode="";
+	public Map<String,Object> correction(HttpServletRequest request){
+		Map<String,Object> returnMap= new HashMap<String,Object>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		String book_id=request.getParameter("book_id");
 		String page=request.getParameter("page");
@@ -202,7 +210,7 @@ public class ReadDetailController extends BaseController{
 			StringUtils.isEmpty(page)||
 			StringUtils.isEmpty(line)||
 			StringUtils.isEmpty(content)){
-			returncode="NO";
+			returnMap.put("returnCode","NO");
 		}else{
 			Map<String, Object> user=getUserInfo();
 			map.put("user_id", user.get("id"));
@@ -212,9 +220,10 @@ public class ReadDetailController extends BaseController{
 			map.put("content", content);
 			map.put("attachment", attachment);
 			map.put("attachment_name", attachment_name);
-			returncode=readDetailService.correction(map);
+			returnMap = readDetailService.correction(map);
+			returnMap.put("returnCode","OK");
 		}
-		return returncode;
+		return returnMap;
 	}
 	
 	/**
@@ -569,6 +578,22 @@ public class ReadDetailController extends BaseController{
 		return new ModelAndView("commuser/readpage/morebookvideos",map);
 	}
 	
-	
+	/** 
+	 * 后台配置相关图书的"换一批按钮触发",换页
+	 * @param type 1.教材关联图书 2.相关推荐 3.人卫推荐
+	 * @param page 换到第几页
+	 * @return
+	 */
+	@RequestMapping(value="relatiedBookPageSwitch",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> relatiedBookPageSwitch(Integer type,Integer page,String id,HttpServletRequest request){
+		Map<String,Object> m= readDetailService.queryRelatedBookList(id, page, type,request.getContextPath());
+		
+		
+		
+		
+		
+		return m;
+	}
 	
 }

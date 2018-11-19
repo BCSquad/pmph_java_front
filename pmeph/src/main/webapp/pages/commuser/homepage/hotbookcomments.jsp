@@ -64,7 +64,16 @@ String contextpath=request.getContextPath();
                 </div>
                 <div class="message">
                    <div class="personicon"><img src="${comment.avatar}" style="height:33px;width:33px"/></div>
-                   <div class="username">${comment.username }</div>
+                   <div class="username">
+                       <c:if test="${comment.nickname ==null or comment.nickname ==''}">
+                           ${comment.username }
+                       </c:if>
+                       <c:if test="${comment.nickname!=null and comment.nickname!=''}">
+                           ${comment.nickname }
+                       </c:if>
+
+
+                   </div>
                    <div style="float: left;height: 33px;width: 75px;">
                    <div class="staricon ${comment.score>0.0 ? 'yellowstar':'graystar' }" >
                    </div>

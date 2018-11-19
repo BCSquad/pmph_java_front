@@ -17,10 +17,12 @@
 	type="text/css">
 <link rel="stylesheet"
 	href="${ctx}/statics/commuser/cms/articledetail.css?t=${_timestamp}" type="text/css">
+<link rel="stylesheet" href="${ctx}/statics/css/jquery.tipso.css?t=${_timestamp}" type="text/css">
 <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
 <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
 <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
 <script src="${ctx}/resources/comm/jquery/jquery.pager.js?t=${_timestamp}"></script>
+<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.tipso.js?t=${_timestamp}"></script>
 <script src="${ctx}/resources/commuser/cms/articledetail.js?t=${_timestamp}"></script>
 </head>
 <body>
@@ -41,9 +43,17 @@
 					<span>${map.title }</span>
 					<div style="width: 100%;">
 	        		<div class="dzsc">
-	        			 <img src="${ctx}/statics/image/${like=='yes' ? 'dz01.png':'dz02.png'}"  id="dz" ${is_audit=='false'?'disabled="disabled" style="opacity: 0.6;" title="文章未通过审核，仅供预览。" ':'onclick="addlikes()"'}/>
-	        		      <img src="${ctx}/statics/image/${mark=='yes' ? 'sc101(1).png':'s102(1).png'}"  id="sc" ${is_audit=='false'?'disabled="disabled" style="opacity: 0.6;" title="文章未通过审核，仅供预览。" ':'onclick="addmark()"'}/>
-	        			  <div style="display: inline-block;vertical-align: top;margin-right: 8px;text-align:left;"></div>
+						<div class="addlikediv" ${is_audit=='false'?'disabled="disabled" style="opacity: 0.6;" title="文章未通过审核，仅供预览。" ':'onclick="addlikes()"'}>
+							<div class="${like=='yes' ? 'left2':'addlike'}"  id="dz"></div>
+							<div class="addliketext">点赞</div>
+						</div>
+
+						<div class="addlikediv" style="margin-left: 10px" ${is_audit=='false'?'disabled="disabled" style="opacity: 0.6;" title="文章未通过审核，仅供预览。" ':'onclick="addmark()"'}>
+							<div class="${mark=='yes' ? 'left3':'left4'}"  id="sc"></div>
+							<div class="addliketext">收藏</div>
+						</div>
+
+						<div style="display: inline-block;vertical-align: top;margin-right: 8px;text-align:left;"></div>
 	        		</div>
         			</div>
 				</div>
@@ -76,25 +86,13 @@
                     	
                         <div class="line"></div>
                         
-                           <div class="rd_name">文章评论<%-- （共${ComNum}条） --%></div>
-                        
-                        <!-- <div class="scorestar" id="star">
-                             <div class="scorestar1" id="score1"></div>
-                             <div class="scorestar1" id="score2"></div>
-                             <div class="scorestar1" id="score3"></div>
-                             <div class="scorestar1" id="score4"></div>
-                             <div class="scorestar1" id="score5"></div>
-	                    </div>
-	                    <div class="user_score">
-                              <span>评分：</span>
-                              <span style="color: #FFD200" id="last_score">10.0</span>
-                        </div> -->
+                           <div class="rd_name">文章评论</div>
                     </div>
                     <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
                     <div class="pl_add">
                     	<a id="001" id="001"></a>
                     	
-                    	<textarea class="tarea" id="content" ${is_audit=='false'?' style="background-color: #d0d0d0;" title="文章未通过审核，仅供预览。" ':''} maxlength="225760"></textarea>
+                    	<textarea class="tarea" id="content" style="outline: #B6EFCE" ${is_audit=='false'?' style="background-color: #d0d0d0;" title="文章未通过审核，仅供预览。" ':''} maxlength="225760"></textarea>
                     	
                     </div>
                     <div class="buttonb"><button id="span_4" onclick="insert()" ${is_audit=='false'?'disabled="disabled" style="background-color: #d0d0d0;" title="文章未通过审核，仅供预览。" ':''}>发表</button></div>
@@ -112,45 +110,13 @@
                 				<img  src="${ctx}/image/${list.avatar}.action" height="30"  width="30" >
                 				</c:if>
                         	</div>
-                        	<div style="float: left;margin-left: 10px;margin-top: 5px;">${list.nickname}</div>
-                        	<%-- <div style="float: left;margin-left: 10px;">
-                        	<c:if test="${list.score<=3}">
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx2"></span>
-	                        	<span class="rwtx2"></span>
-	                        	<span class="rwtx2"></span>
-	                        	<span class="rwtx2"></span>
-	                        </c:if>
-	                        <c:if test="${list.score<=5 and list.score>3}">
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx2"></span>
-	                        	<span class="rwtx2"></span>
-	                        	<span class="rwtx2"></span>
-	                        </c:if>
-	                        <c:if test="${list.score<=7 and list.score>5}">
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx2"></span>
-	                        	<span class="rwtx2"></span>
-	                        </c:if>
-	                        <c:if test="${list.score<=9 and list.score>7}">
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx2"></span>
-	                        </c:if>
-	                        <c:if test="${list.score>9}">
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx1"></span>
-	                        	<span class="rwtx1"></span>
-	                        </c:if>
-                        	</div> --%>
-                            <div class="date_content"><div class="date">${list.gmt_create}</div></div>
+							<c:if test="${list.nickname==''|| list.nickname==null}">
+                        	<div style="float: left;margin-left: 10px;margin-top: 5px;">${list.username}</div>
+							</c:if>
+							<c:if test="${list.nickname!=''and list.nickname!=null}">
+								<div style="float: left;margin-left: 10px;margin-top: 5px;">${list.nickname}</div>
+							</c:if>
+                            <div class="date_content"><div class="date"></div></div>
                         </div>
                         <div class="item_content">${list.content}</div>
                         <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
@@ -238,14 +204,9 @@
                     <div id="xgwz_4" onclick="change()">换一批</div>
                     <div id="xgwz_3"></div>
     			</div>
-    			<div  id="comment">
-	                <c:forEach items="${eMap}" var="list">
-		    			<div class="right_20" >
-			    			<div class="right_21" onclick="todetail('${list.wid}')">${list.title}</div>
-			    			<div class="right_22">（${list.realname}）</div>
-			    		</div>
-	    		 </c:forEach>
-	            </div>
+				<input type="hidden" id="startrow" value="0">
+    			<div  id="comment"></div>
+    		
     		</div>
     		<!--文章链接-->
     		<div class="right_4">

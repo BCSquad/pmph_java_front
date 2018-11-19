@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.bc.pmpheep.back.util.RouteUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -62,7 +64,7 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 
 		}else {
 			map.put("code","no");
-			map.put("image_url", RouteUtil.bookAvatar(map.get("image_url")));
+			//map.put("image_url", RouteUtil.bookAvatar(map.get("image_url")));
 		}
 		return map;
 	}
@@ -219,17 +221,19 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 	 * 新增图书纠错
 	 */
 	@Override
-	public String correction(Map<String, Object> map) {
+	public Map<String, Object> correction(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		String returncode="";
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
 		int count=readDetailDao.correction(map);
 		if(count>0){
-			returncode="OK";
 		    WriterUserTrendst wut = new WriterUserTrendst(map.get("user_id").toString(), 10, map.get("book_id").toString());
 		    wut.setDetail("提交了图书纠错", map.get("content").toString(),0,Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("line").toString()));
 		    personalService.saveUserTrendst(wut);//生成动态 图书纠错 
+		    returnMap.put("returnCode", "OK");
+		    returnMap.put("correctId", map.get("table_trendst_id"));
 		}
-		return returncode;
+		return returnMap;
 	}
 
 	/**
@@ -353,5 +357,37 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 	public int queryMoreBookVidosCount(Map<String, Object> map) {
 
 		return readDetailDao.queryMoreBookVidosCount(map);
+	}
+
+	@Override
+	public Map<String, Object> queryRelatedBookList(String id,int page, int type,String contextPath) {
+		
+		int[] pageSizeConfig = {1,6,9,5};
+		int pageSize = pageSizeConfig[type];
+		Map<String,Object> paraMap = new HashMap<String,Object>();
+		paraMap.put("id", id);
+		paraMap.put("type", type);
+
+		int totalCount = readDetailDao.queryRelatedBookListCount(paraMap);
+		int totalPage = (int) Math.ceil(1.0*totalCount/pageSize);
+		int start = page*pageSize;
+		int nextPage = page +1 < totalPage? page+1:0;
+		paraMap.put("start", start);
+		paraMap.put("pageSize", pageSize);
+		List<Map<String, Object>> resultList = readDetailDao.queryRelatedBookList(paraMap);
+		
+		
+		
+		
+		for (Map<String, Object> pmap : resultList) {
+			if(("DEFAULT").equals(pmap.get("image_url"))){
+				pmap.put("image_url", contextPath + "/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg");
+			}
+		}
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		resultMap.put("list", resultList);
+		resultMap.put("nextPage", nextPage);
+		resultMap.put("totalPage", totalPage);
+		return resultMap;
 	}
 }

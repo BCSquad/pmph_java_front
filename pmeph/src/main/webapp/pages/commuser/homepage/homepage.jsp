@@ -19,7 +19,7 @@
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>人卫E教平台</title>
     <link rel="stylesheet" href="${ctx}/statics/css/base.css?t=${_timestamp}" type="text/css">
-    <link rel="stylesheet" href="${ctx}/statics/commuser/homepage/homepage.css?t=${_timestamp}" type="text/css">
+    <link rel="stylesheet" href="${ctx}/statics/commuser/homepage/homepage.css?t=${_timestampJKFYDiv_0}" type="text/css">
     <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.scroll.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
@@ -50,9 +50,9 @@
             <div class="op-link">
                 <div class="transaction">
                     <div class="labeling">教材申报</div>
-                    <div class="bin consol" onclick="window.location.href='${ctx}/cmsnotice/tolist.action'">
+                    <div class="bin consol" onclick="window.location.href='${ctx}/research/tolist.action'">
                         <div class="lab-pic1"></div>
-                        最新公告
+                        调研表
                     </div>
                     <div class="bin marks"
                          onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?pagetag=jcsb'">
@@ -118,11 +118,10 @@
         <div class="notice area-2">
             <div class="title" style="float: left">
                 <div class="line bgcolor-blue" style="float: left"></div>
-                <div class="name color-blue" style="float: left"><img src="${ctx}/statics/testfile/gg.png"
-                                                                      style="margin-left: 30px;margin-top: 42px">
+                <div class="name color-blue" style="float: left">
+                    <div class="ggpng"style="margin-left: 30px;margin-top: 42px"></div>
                 </div>
             </div>
-
             <c:forEach items="${listDou}" var="list" varStatus="status">
 
                 <%-- <c:if test="${status.index==0}">
@@ -181,11 +180,54 @@
             </c:forEach>
             <div class="more" onclick="top.location='${ctx}/cmsnotice/tolist.action'">更多>></div>
         </div>
-        <div class="notice area-3">
-            <div class="title" style="float: left;margin-right: 30px;">
+        <div class="notice area-2-1" style="width: 50.1%;display: inline-block;margin-top: 10px">
+            <div class="bgcolor-blue" style="float: left;width: 7px;height: 100%"></div>
+            <div class="lcjc-img"></div>
+            <div class="lcjc">
+                <div class="lcjc-a" style="margin-left: 10px">
+                    <div class="lcjc-1" onclick="todeclaredetail(1)"></div>
+                    <div class="lcjc-n">人卫临床助手</div>
+                </div>
+                <div class="lcjc-a">
+                    <div class="lcjc-2" onclick="todeclaredetail(2)"></div>
+                    <div class="lcjc-n">人卫用药助手</div>
+                </div>
+                <div class="lcjc-a">
+                    <div class="lcjc-3" onclick="todeclaredetail(3)"></div>
+                    <div class="lcjc-n">人卫中医助手</div>
+                </div>
+            </div>
+        </div>
+        <div class="notice area-2-2" style="width: 49.5%;display: inline-block;float: right;margin-top: 10px">
+            <div class="bgcolor-blue" style="float: left;width: 7px;height: 100%"></div>
+            <div class="lcjc-img-1"></div>
+            <div style="height: 100%">
+                <c:forEach items="${listSzpt}" var="list">
+                    <div class="szpt" onclick="toszptdetail(${list.activity_id})">
+                        <div class="szpt-top">
+                            <c:choose>
+                                <c:when test="${list.cover == '' || list.cover == 'DEFAULT' || list.cover == null}">
+                                    <img src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg">
+                                </c:when>
+                                <c:otherwise>
+                                    <img src="${ctx}/image/${list.cover}.action">
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                        <div class="szpt-buttom">
+                            ${list.activity_name}
+                        </div>
+                    </div>
+                </c:forEach>
+                <div class="szpt-more" onclick="toteacherPlatform()">更多>></div>
+            </div>
+        </div>
+        <div class="notice area-3" style="margin-top: 5px">
+            <div class="title">
                 <div class="line bgcolor-blue"></div>
-                <div class="name color-blue"><img src="${ctx}/statics/testfile/xx.png"
-                                                  style="margin-left: 30px;margin-top: 15px"></div>
+                <div class="name color-blue" style="width: 93px;height: 100%;float: left">
+                    <div class="xxkb" style="margin-left: 32px;margin-top: 15px"></div>
+                </div>
             </div>
             <c:if test="${listNot[0].first_img_url != 'none' }">
                 <div class="photo-size">
@@ -217,46 +259,21 @@
             <div class="more" onclick="top.location='${ctx}/cmsinfoletters/tolist.action'">更多>></div>
         </div>
         <div class="area-4">
-            <div class="tab-bar">
-                <div class="type_bar_float_right">
-                    <c:forEach items="${bookTypes}" var="type" varStatus="status">
-                        <div class="tab ${status.index==0?'active':''}" id="${type.id}"
-                             onclick='chooseType("${type.id}")'>${type.type_name}</div>
-                    </c:forEach>
-                </div>
-                <!-- <div class="tab active" id="1" onclick='chooseType("1")'>学校教育</div>
-                <div class="tab" id="2" onclick='chooseType("2")'>毕业后教育</div>
-                <div class="tab" id="3" onclick='chooseType("3")'>继续教育</div>
-                <div class="tab" id="4" onclick='chooseType("4")'>考试用书</div> -->
-                <div class="page ">
-                    <div class="page-num">
-                        <input type="hidden" id="book_type">
-                        <span class="beforepage" id="before">${thisrows}</span>/
-                        <span class="beforepage" id="next">${allrows}</span>
-                        <span class="icon-right" onclick='on("next")'></span>
-                        <span class="icon-left" onclick='on("before")'></span>
+            <div class="content">
+                <div class="tab-bar" style="margin-top: 0px;">
+                    <div class="newdoc"></div>
+                    <div class="type_bar_float_right typebar doc_content" style="margin-left: 13px;margin-top: 10px">新书推荐</div>
+                    <div class="page" style="width: auto;float: right;margin-right: 327px;margin-left: 10px;
+                        height: 100%;color: #999999;">
+                        <c:forEach items="${bookTypes}" var="type" varStatus="status">
+                            <div class="new tab ${status.index==0?'active':''}" id="new${type.id}"
+                                 onclick='searchXstjBook("${type.id}")'>${type.type_name}</div>
+                            <c:if test="${bookTypes !=null && status.index==0}">
+                                <input type="hidden" id="typeid" value="${type.id}">
+                            </c:if>
+                        </c:forEach>
                     </div>
                 </div>
-                <c:forEach items="${listType}" var="list" varStatus="status">
-                    <%-- <c:if test="${status.index==0}">
-                        <div class="type" id="typeOne">${list.type_name}</div>
-                    </c:if> --%>
-                    
-                   	<c:if test="${status.index!=0}">
-                   		<div class="point"></div>
-                   	</c:if>
-                   	<div class="type"  id="type_${list.id}" onclick="chooseTypeSecond(${list.id})">${list.type_name}</div>
-                   
-                    
-                </c:forEach>
-                <%-- <c:forEach items="${listType}" var="list" varStatus="status">
-                    <c:if test="${status.index==1 or status.index==2 }">
-                        <div class="point"></div>
-                        <div class="type" id="typeTwo">${list.type_name}</div>
-                    </c:if>
-                </c:forEach> --%>
-            </div>
-            <div class="content">
                 <div class="left">
                     <div class="left_one">
                         <div class="textbook_left">教材社区</div>
@@ -286,9 +303,49 @@
                         </c:forEach>
                     </div>
                 </div>
-                <div class="right" id="homepagebook" style="float: left;">${homepagebook}</div>
+                <div class="content" id="JKFYDiv_0">${pMap}</div>
             </div>
         </div>
+        <div class="tab-bar">
+            <div class="type_bar_float_right">
+                <c:forEach items="${bookTypes}" var="type" varStatus="status">
+                    <div class="oldtab tab ${status.index==0?'active':''}" id="${type.id}"
+                         onclick='chooseType("${type.id}")'>${type.type_name}</div>
+                </c:forEach>
+            </div>
+            <!-- <div class="tab active" id="1" onclick='chooseType("1")'>学校教育</div>
+            <div class="tab" id="2" onclick='chooseType("2")'>毕业后教育</div>
+            <div class="tab" id="3" onclick='chooseType("3")'>继续教育</div>
+            <div class="tab" id="4" onclick='chooseType("4")'>考试用书</div> -->
+            <div class="page  asdf">
+                <div class="page-num">
+                    <input type="hidden" id="book_type">
+                    <span class="beforepage" id="before">${thisrows}</span>/
+                    <span class="beforepage" id="next">${allrows}</span>
+                    <span class="icon-right" onclick='on("next")'></span>
+                    <span class="icon-left" onclick='on("before")'></span>
+                </div>
+            </div>
+            <c:forEach items="${listType}" var="list" varStatus="status">
+                <%-- <c:if test="${status.index==0}">
+                    <div class="type" id="typeOne">${list.type_name}</div>
+                </c:if> --%>
+
+                <c:if test="${status.index!=0}">
+                    <div class="point"></div>
+                </c:if>
+                <div class="type"  id="type_${list.id}" onclick="chooseTypeSecond(${list.id})">${list.type_name}</div>
+
+
+            </c:forEach>
+            <%-- <c:forEach items="${listType}" var="list" varStatus="status">
+                <c:if test="${status.index==1 or status.index==2 }">
+                    <div class="point"></div>
+                    <div class="type" id="typeTwo">${list.type_name}</div>
+                </c:if>
+            </c:forEach> --%>
+        </div>
+        <div class="right" id="homepagebook">${homepagebook}</div>
         <div class="area-5">
             <c:forEach var="ad" items="${adInfo2.detailList}">
                 <div class="item">
@@ -320,7 +377,7 @@
             </c:forEach>
         </div>
     </div>
-    <div style="background-color: #F6F6F6;margin-top: 60px;padding-top: 30px;">
+    <div style="background-color: #F6F6F6;margin-top: 630px;padding-top: 30px;">
         <div class="content-wrapper">
             <div class="area-6">
                 <div class="doc"></div>
@@ -344,10 +401,6 @@
                                 <div class="a6_div2">${list.summary}</div>
                                 <div>
                                     <div class="a6_head_div">
-                                        <%-- <c:if test="${list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null}">
-                                            <img src="${ctx}/statics/image/default_image.png" class="a6_head"></c:if>
-                                        <c:if test="${!(list.avatar == '' || list.avatar == 'DEFAULT' || list.avatar == null)}">
-                                            <img src="${ctx}/image/${list.avatar}.action" class="a6_head"></c:if> --%>
                                     </div>
                                     <div class="a6_name_div" style="cursor:pointer;"
                                          onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?userId=${list.userId }'">
@@ -409,10 +462,10 @@
                                 <div class="a7_author">
                                     <span class="a7_write" title="${list.realname}">${list.realname}</span>
                                 </div>
-                                <br>
-                                <div class="a7_cont">
-                                    <span class="a7_cont">${list.title}</span>
-                                </div>
+                                    <%--    <br>
+                                        <div class="a7_cont">
+                                            <span class="a7_cont">${list.title}</span>
+                                        </div>--%>
                             </div>
                             <div class="a7_friend">
                                 <c:choose>
@@ -459,7 +512,7 @@
                                  onclick="window.open(contextpath+'readdetail/todetail.action?id=${list.id1}')">
                                 <div class="sp_01"><img src="${list.image_url}"/></div>
                                 <div class="sp_02">
-                                    <div class="sp_title">${list.bookname}</div>
+                                    <div class="sp_title" title="${list.bookname}">${list.bookname}</div>
                                     <div style="float: left;" class="co">${list.nickname} 评论了 《${list.bookname}》</div>
                                     <div class="sp_pl">
                                         <c:if test="${list.score<=3}">
@@ -555,14 +608,14 @@
                                          onclick="window.open(contextpath+'readdetail/todetail.action?id='+$('#last_right_book_id_${status.count}').val())">
                                         <c:set var="default_url"
                                                value="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg"></c:set>
-                                        <img src='${list.image_url == "DEFAULT"?default_url:list.image_url}'
-                                             class="book_style" id="right_book${status.count}">
+                                        <a title="${list.bookname}"><img src='${list.image_url == "DEFAULT"?default_url:list.image_url}'
+                                                           class="book_style" id="right_book${status.count}" ></a>
                                     </div>
                                     <div class="num${status.index>2?'4':status.index+1+''}">
                                         <div class="num_book">${status.index+1}</div>
                                     </div>
-                                    <div class="last_right_content">
-                                        <div class="sale_book" id="sale_book${status.count}">${list.bookname}</div>
+                                    <div class="last_right_content"  style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;text-align: center">
+                                        <div class="sale_book" id="sale_book${status.count}" title="${list.bookname}">${list.bookname}</div>
                                     </div>
                                 </div>
                             </c:forEach>
@@ -580,6 +633,8 @@
         </div>
     </c:if>
 
+    <!--公众号悬浮框-->
+    <div id="EWM" onmouseover="showEWM()" onmouseout="hideEWM()" class="emw"><img src="${ctx}/statics/image/wxgzh.jpg"></div>
 </div>
 <jsp:include page="/pages/comm/tail.jsp">
     <jsp:param name="linked" value="linked"></jsp:param>

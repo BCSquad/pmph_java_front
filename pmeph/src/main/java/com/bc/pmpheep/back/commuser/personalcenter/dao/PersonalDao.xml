@@ -239,10 +239,12 @@
 				SELECT
 					*
 				FROM
-					writer_user u
+					(select tu.*,wuc.progress from writer_user tu LEFT JOIN
+		writer_user_certification wuc on tu.id = wuc.user_id where tu.id = #{parameter.logUserId}) u
 				JOIN material_org o ON o.org_id = u.org_id
 				WHERE
 					u.id = #{parameter.logUserId}
+					and u.progress = 3
 				AND a.id = o.material_id
 			)
 		)
@@ -356,10 +358,12 @@
 					SELECT
 						*
 					FROM
-						writer_user u
+		(select tu.*,wuc.progress from writer_user tu LEFT JOIN
+		writer_user_certification wuc on tu.id = wuc.user_id where tu.id = #{parameter.logUserId}) u
 					JOIN material_org o ON o.org_id = u.org_id
 					WHERE
 						u.id = #{parameter.logUserId}
+						and u.progress =3
 					AND a.id = o.material_id
 				)
 			)
@@ -452,7 +456,7 @@
 				AND (t.is_opts_handling = 1 and t.is_director_handling = 1 and t.is_editor_handling = 1 and t.is_accepted = 1) = #{parameter.is_handled} 
 			</if>
 		</where>
-		group by t.id
+		group by t.id order by gmt_create
 		limit ${start},${pageSize}
 
 	</select>
@@ -988,8 +992,10 @@
 		trendst_date
 		,DATE_FORMAT(t.gmt_create,'%Y%m%d%H%i') AS
 		trendst_date_num
-		<!-- ,t.gmt_create -->
-		,u.realname
+		 ,t.gmt_create
+		<!-- ,u.realname -->
+		,case when  (u.realname is null or u.realname='') then u.username else u.realname end as realname
+
 		,c.id as c_id
 		,c.category_id as c_category_id
 		,c.title as
@@ -1028,18 +1034,11 @@
 		as bc_is_deleted
 		from
 		writer_user_trendst t
-		left join cms_content c on
-		t.cms_content_id = c.id
-		left join cms_content pc on c.parent_id =
-		pc.id
-		left join book_user_comment bc on t.book_comment_id = bc.id
-		left
-		join
-		book b on t.book_id = b.id or bc.book_id = b.id
-		left join
-		book_detail bd
-		on b.id = bd.book_id
-
+		left join cms_content c on t.cms_content_id = c.id and t.type between 1 and 4
+		left join cms_content pc on c.parent_id = pc.id 
+		left join book_user_comment bc on t.book_comment_id = bc.id and t.type = 5
+		left join book b on (t.book_id = b.id and t.type in(6,7)) or bc.book_id = b.id 
+		left join book_detail bd on b.id = bd.book_id
 		left join writer_user u on
 		t.user_id = u.id
 		<where>
@@ -1073,14 +1072,10 @@
 		count(t.id )
 		from
 		writer_user_trendst t
-		left join cms_content c on
-		t.cms_content_id = c.id
-		left join cms_content pc on c.parent_id =
-		pc.id
+		left join cms_content c on t.cms_content_id = c.id
+		left join cms_content pc on c.parent_id = pc.id
 		left join book_user_comment bc on t.book_comment_id = bc.id
-		left
-		join
-		writer_user u on t.user_id = u.id
+		left join writer_user u on t.user_id = u.id
 		<where>
 			<!-- is_delete = 0 and -->
 			user_id = #{parameter.logUserId}
@@ -1353,7 +1348,7 @@ UNION
 			2 as f_type,
 			c.id AS id,
 			c.title AS title,
-			w.realname AS author,
+			c.author_name AS author,
 			m.id AS mid,
 			c.summary AS detail,
 			c.bookmarks AS bookmarks,
@@ -1381,7 +1376,7 @@ UNION
 	3 as f_type,
 	c.id AS id,
 	c.title AS title,
-	w.realname AS author,
+	c.author_name AS author,
 	m.id AS mid,
 	c.summary AS detail,
 	c.bookmarks AS bookmarks,
@@ -1608,5 +1603,285 @@ ORDER BY t.gmt_create DESC  limit ${start},${pageSize}
 		)t
 	</select>
 
+
+	<!--个人中心临床决策-->
+     <select id="queryLcjc" parameterType="java.util.Map" resultType="java.util.Map">
+		 select * from (
+         select  b.online_progress,b.user_id,t.product_name,t.product_type,
+         case
+         when b.org_id=0 or b.online_progress=0  then ''
+         when b.online_progress =1 or b.online_progress =4 then '待审核'
+         when b.online_progress =3 then '已通过'
+         when b.online_progress =5 then '出版社退回'
+         when b.online_progress =2 then '已退回'
+         else ''
+         end as school_progress ,
+
+         case
+		 when b.online_progress=0 or b.online_progress=2  then ''
+         when b.finalResult = 1 and b.pmphAudit =1 then '报名成功'
+         when b.finalResult = 1 then '遴选结束'
+         when b.online_progress = 5 then '出版社退回'
+         else '正在遴选'd
+         end as pmeph_progress,
+         t.actualDeadline,
+		 t.id as product_id,
+		 b.id as expertation_id,
+         DATE_FORMAT(t.gmt_create,'%Y-%m-%d') as gmt_create_new,
+		 1 as flag
+		 from product t
+		 left join expertation b on b.product_id=t.id and b.user_id=#{parameter.logUserId}
+		 order by  t.product_type asc ,t.gmt_set_active desc ) t1 group by t1.product_type
+		 <choose>
+			 <when test="parameter.myall == null"><!--我的申报公告-->
+				 /*第一次进入页面，默认显示全部*/
+			 </when>
+			 <when test="parameter.myall != null and parameter.myall != '' and parameter.myall =='my'"><!--我的申报公告-->
+				 having user_id=#{parameter.logUserId}
+			 </when>
+			 <when test="parameter.myall != null and parameter.myall != '' and parameter.myall =='all'"><!--所有申报公告-->
+				 /*所有公告不附加任何条件*/
+			 </when>
+			 <otherwise></otherwise>
+		 </choose>
+		 <choose>
+			 <when test="parameter.online_progress== null or parameter.online_progress== '' "><!--初始化默认为空-->
+			 </when>
+			 <when test="parameter.online_progress!= null and parameter.online_progress!= ''  and parameter.online_progress== 'one'"><!--正在进行-->
+				 and  b.finalResult=0
+			 </when>
+			 <when test="parameter.online_progress!= null and parameter.online_progress!= ''  and parameter.online_progress== 'two'"><!--已结束-->
+				 and  b.finalResult=1
+			 </when>
+			 <when test="parameter.online_progress!= null and parameter.online_progress!= ''  and parameter.online_progress== 'three'"><!--暂存-->
+				 and  b.online_progress=0
+			 </when>
+			 <when test="parameter.online_progress!= null and parameter.online_progress!= ''  and parameter.online_progress== 'fore'"><!--已提交-->
+				 and  b.online_progress !=0
+			 </when>
+			 <when test="parameter.online_progress!= null and parameter.online_progress!= ''  and parameter.online_progress== 'five'"><!--全部-->
+			 </when>
+			 <otherwise></otherwise>
+		 </choose>
+		 <if test="parameter.search != null and parameter.search !='' ">
+			 and ( t .product_name like #{parameter.search})
+		 </if>
+         <choose>
+             <when test="parameter.myall != null and parameter.myall != '' and parameter.myall =='all'"><!--所有申报公告-->
+				 union
+				 select * from (
+                 select  b.online_progress,b.user_id,t.product_name,t.product_type,
+                 case
+                 when b.org_id=0 or b.online_progress=0  then ''
+                 when b.online_progress =1 or b.online_progress =4 then '待审核'
+                 when b.online_progress =3 then '已通过'
+                 when b.online_progress =5 then ''
+                 when b.online_progress =2 then '被退回'
+                 else ''
+                 end as school_progress ,
+
+                 case
+                 when b.online_progress=0  then ''
+                 when b.finalResult = 1 and b.pmphAudit =1 then '报名成功'
+                 when b.finalResult = 1 then '遴选结束'
+                 when b.online_progress = 5 then '出版社退回'
+                 else '待审核'
+                 end as pmeph_progress,
+                 t.actualDeadline,
+                 t.id as product_id,
+				 b.id as expertation_id,
+                 DATE_FORMAT(t.gmt_create,'%Y-%m-%d') as gmt_create_new,
+				 0 as flag
+                 from product t
+				 left join expertation b on b.product_id=t.id
+				 order by t.gmt_set_active desc ) t1
+                 <if test="parameter.search != null and parameter.search !='' ">
+                     and ( t .product_name like #{parameter.search})
+                 </if>
+             </when>
+             <otherwise></otherwise>
+         </choose>
+		 limit ${start},${pageSize}
+	 </select>
+
+
+    <!--个人中心临床决策分页总数-->
+    <select id="queryCountLcjc" parameterType="java.util.Map" resultType="Integer">
+        select count(*) from
+        (select * from (
+        select b.online_progress,b.user_id,t.product_name,t.product_type,
+        case
+        when b.org_id=0 or b.online_progress=0 then ''
+        when b.online_progress =1 or b.online_progress =4 then '待审核'
+        when b.online_progress =3 then '已通过'
+        when b.online_progress =5 then ''
+        when b.online_progress =2 then '被退回'
+        else ''
+        end as school_progress ,
+
+        case
+        when b.online_progress=0 then ''
+        when b.finalResult = 1 and b.pmphAudit =1 then '报名成功'
+        when b.finalResult = 1 then '遴选结束'
+        when b.online_progress = 5 then '出版社退回'
+        else '待审核'
+        end as pmeph_progress,
+        t.actualDeadline,
+        t.id as product_id,
+        b.id as expertation_id,
+        DATE_FORMAT(t.gmt_create,'%Y-%m-%d') as gmt_create_new,
+        1 as flag
+        from product t
+        left join expertation b on b.product_id=t.id and b.user_id=#{parameter.logUserId}
+        order by t.product_type asc ,t.gmt_set_active desc ) t1 group by t1.product_type
+        <choose>
+            <when test="parameter.myall == null"><!--我的申报公告-->
+                /*第一次进入页面，默认显示全部*/
+            </when>
+            <when test="parameter.myall != null and parameter.myall != '' and parameter.myall =='my'"><!--我的申报公告-->
+                having user_id=#{parameter.logUserId}
+            </when>
+            <when test="parameter.myall != null and parameter.myall != '' and parameter.myall =='all'"><!--所有申报公告-->
+                /*所有公告不附加任何条件*/
+            </when>
+            <otherwise></otherwise>
+        </choose>
+        <choose>
+            <when test="parameter.online_progress== null or parameter.online_progress== '' "><!--初始化默认为空-->
+            </when>
+            <when test="parameter.online_progress!= null and parameter.online_progress!= ''  and parameter.online_progress== 'one'"><!--正在进行-->
+                and b.finalResult=0
+            </when>
+            <when test="parameter.online_progress!= null and parameter.online_progress!= ''  and parameter.online_progress== 'two'"><!--已结束-->
+                and b.finalResult=1
+            </when>
+            <when test="parameter.online_progress!= null and parameter.online_progress!= ''  and parameter.online_progress== 'three'"><!--暂存-->
+                and b.online_progress=0
+            </when>
+            <when test="parameter.online_progress!= null and parameter.online_progress!= ''  and parameter.online_progress== 'fore'"><!--已提交-->
+                and b.online_progress !=0
+            </when>
+            <when test="parameter.online_progress!= null and parameter.online_progress!= ''  and parameter.online_progress== 'five'"><!--全部-->
+            </when>
+            <otherwise></otherwise>
+        </choose>
+        <if test="parameter.search != null and parameter.search !='' ">
+            and ( t .product_name like #{parameter.search})
+        </if>
+        <choose>
+            <when test="parameter.myall != null and parameter.myall != '' and parameter.myall =='all'"><!--所有申报公告-->
+                union
+                select * from (
+                select b.online_progress,b.user_id,t.product_name,t.product_type,
+                case
+                when b.org_id=0 or b.online_progress=0 then ''
+                when b.online_progress =1 or b.online_progress =4 then '待审核'
+                when b.online_progress =3 then '已通过'
+                when b.online_progress =5 then ''
+                when b.online_progress =2 then '被退回'
+                else ''
+                end as school_progress ,
+
+                case
+                when b.online_progress=0 then ''
+                when b.finalResult = 1 and b.pmphAudit =1 then '报名成功'
+                when b.finalResult = 1 then '遴选结束'
+                when b.online_progress = 5 then '出版社退回'
+                else '待审核'
+                end as pmeph_progress,
+                t.actualDeadline,
+                t.id as product_id,
+                b.id as expertation_id,
+                DATE_FORMAT(t.gmt_create,'%Y-%m-%d') as gmt_create_new,
+                0 as flag
+                from product t
+                left join expertation b on b.product_id=t.id
+                order by t.gmt_set_active desc ) t1
+                <if test="parameter.search != null and parameter.search !='' ">
+                    and ( t .product_name like #{parameter.search})
+                </if>
+            </when>
+            <otherwise></otherwise>
+        </choose>) l
+
+    </select>
+    
+    <!--  -->
+    <!--个人中心临床决策 version2-->
+	<select id="queryLcjcVer2" parameterType="java.util.Map" resultType="java.util.Map">
+         select  
+         	b.online_progress,
+         	b.user_id,
+         	t.product_name,
+         	t.product_type,
+         	t.actualDeadline,
+		 	t.id as product_id,
+		 	b.id as expertation_id,
+         	DATE_FORMAT(t.gmt_create,'%Y-%m-%d') as gmt_create_new,
+         case
+         when b.org_id=0 or b.online_progress=0  then ''
+         when b.online_progress =1 then '待审核'
+         when b.online_progress =3 then '已通过'
+         when b.online_progress =5 or b.online_progress =4 then '出版社退回'
+         when b.online_progress =2 then '被退回'
+         else ''
+         end as school_progress ,
+
+         case
+		 when b.online_progress=0  then ''
+         when b.finalResult = 1 and b.pmphAudit =1 then '报名成功'
+         when b.finalResult = 1 then '遴选结束'
+         when b.online_progress = 5 then '出版社退回'
+         when b.online_progress=1 or b.online_progress=3 then '正在遴选'
+         else '待审核'
+         end as pmeph_progress,
+         
+		 t.is_new as flag
+		 from product t
+		 inner join expertation b on b.product_id=t.id and b.user_id=#{parameter.logUserId}
+
+		<where>
+			t.is_published = 1 and t.is_deleted = 0 
+			<if test="parameter.online_progress != null and parameter.online_progress != '' ">
+				and b.online_progress in (${parameter.online_progress})
+			</if>
+			<if test="parameter.pmphAudit != null and parameter.pmphAudit != '' ">
+				and b.pmphAudit in (${parameter.pmphAudit})
+			</if>
+			<if test="parameter.finalResult != null and parameter.finalResult != '' ">
+				and b.finalResult in (${parameter.finalResult})
+			</if>
+			<if test="parameter.search != null and parameter.search !='' ">
+				 and t.product_name like concat('%',#{parameter.search},'%')
+			 </if>
+		</where>
+		 order by  b.gmt_create desc , t.gmt_publish desc
+		 limit ${start},${pageSize}
+	 </select>
+
+    <!--个人中心临床决策分页总数 version2-->
+    <select id="queryCountLcjcVer2" parameterType="java.util.Map" resultType="Integer">
+        select  
+            count(t.id)
+		 from product t
+		 inner join expertation b on b.product_id=t.id and b.user_id=#{parameter.logUserId}
+
+		<where>
+			t.is_published = 1 and t.is_deleted = 0 
+			<if test="parameter.online_progress != null and parameter.online_progress != '' ">
+				and b.online_progress in (${parameter.online_progress})
+			</if>
+			<if test="parameter.pmphAudit != null and parameter.pmphAudit != '' ">
+				and b.pmphAudit in (${parameter.pmphAudit})
+			</if>
+			<if test="parameter.finalResult != null and parameter.finalResult != '' ">
+				and b.finalResult in (${parameter.finalResult})
+			</if>
+			<if test="parameter.search != null and parameter.search !='' ">
+				 and t.product_name like concat('%',#{parameter.search},'%')
+			 </if>
+		</where>
+
+    </select>
 
 </mapper>

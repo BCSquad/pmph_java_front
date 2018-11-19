@@ -15,6 +15,22 @@ a:active {color:yellow;}
     flex-direction: column;
     align-items: center;
 }
+
+.delnum{
+    background: red;
+    color: white;
+    cursor: pointer;
+    width: 70px;
+    text-align: center;
+    height: 25px;
+    line-height: 25px;
+    margin-left: 50px;
+    position: relative;
+    top: -55px;
+    left: 740px;
+    border-radius: 5px;
+}
+
 .container{
     display: inline-block;
     width: 50%;
@@ -129,6 +145,7 @@ a:active {color:yellow;}
     cursor: pointer;
     /*clear: both;*/
     float: left;
+    margin-left: 40px;
 }
 
 .top_content33{
@@ -228,7 +245,7 @@ a:active {color:yellow;}
     font-size: 14px;
 }
 .left_communions_files{
-    padding: 42px 0 5px 0;
+    padding: 42px 0 6px 0;
     width: 100%;
     margin: 0;
     border-bottom: 2px solid #489299;
@@ -453,7 +470,8 @@ ul{
     cursor: pointer;
 }
 #msgContent{
-    width: 890px;
+    /*width: 890px;*/
+    width: 868px;
     height: 77px;
     background-color: #f8f8f8;
     padding:10px;

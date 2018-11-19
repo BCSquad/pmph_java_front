@@ -28,7 +28,7 @@
 		<div class="box">
 			<!-- 图书选择-->
 			<div class="sbxq_item1">
-				<div>
+				<div class="tubiao3px">
 					<input type="hidden" id="material_id" name="material_id" value="${material.id}"/>
 					<span id="tsxz_span1"></span>
 					<span class="tsxz_title">作家申报职位选择</span>
@@ -45,7 +45,7 @@
 			</div>
 			<!-- 专家信息-->
 			<div class="sbxq_item1">
-				<div>
+				<div class="tubiao3px">
 					<span id="tsxz_span2"></span>
 					<span class="tsxz_title">专家信息</span>
 				</div>
@@ -107,7 +107,7 @@
 			</div>
 			<!--主要学习经历-->
 			<div class="sbxq_item" id="zyxxjl">
-				<div>
+				<div class="tubiao3px">
 					<span id="tsxz_span3"></span>
 					<span class="tsxz_title">学习经历</span>
 				</div>
@@ -138,7 +138,7 @@
 			</div>
 			<!--主要工作经历-->
 			<div class="sbxq_item" id="gzjl">
-				<div>
+				<div class="tubiao3px">
 					<span id="tsxz_span4"></span>
 					<span class="tsxz_title">工作经历</span>
 				</div>
@@ -167,7 +167,7 @@
 			</div>
 			<!--主要教学经历-->
 			<div class="sbxq_item" id="jxjl">
-				<div>
+				<div class="tubiao3px">
 					<span id="tsxz_span5"></span>
 					<span class="tsxz_title">教学经历</span>
 				</div>
@@ -196,7 +196,7 @@
 			</div>
 			<!--个人成就-->
 			<div class="sbxq_item" id="grcjqk">
-				<div>
+				<div class="tubiao3px">
 					<span id="tsxz_span9"></span>
 					<span class="tsxz_title">个人成就</span>
 				</div>
@@ -207,7 +207,7 @@
 			<!--扩展信息-->
 			<c:forEach var="zjkzxx" items="${zjkzqkList}">
 				<div class="sbxq_item1">
-					<div>
+					<div class="tubiao3px">
 						<span id="tsxz_span9"></span>
 						<span class="tsxz_title">${zjkzxx.extension_name}</span>
 					</div>
@@ -219,7 +219,7 @@
 
 			<!--主要学术兼职-->
 			<div class="sbxq_item" id="xsjz">
-				<div>
+				<div class="tubiao3px">
 					<span id="tsxz_span7"></span>
 					<span class="tsxz_title">学术兼职</span>
 				</div>
@@ -254,7 +254,7 @@
 			</div>
 			<!--上版教材参编情况-->
 			<div class="sbxq_item" id="sbjccb">
-				<div>
+				<div class="tubiao3px">
 					<span id="tsxz_span6"></span>
 					<span class="tsxz_title">本套上版教材参编情况</span>
 				</div>
@@ -291,7 +291,7 @@
 			</div>
 			<!--主编国家级规划教材情况-->
 			<div class="sbxq_item" id="zbgjjgh">
-				<div>
+				<div class="tubiao3px">
 					<span id="tsxz_span7"></span>
 					<span class="tsxz_title">主编国家级规划教材情况</span>
 				</div>
@@ -324,7 +324,7 @@
 			</div>
 			<!--人卫社教材编写情况表-->
 			<div class="sbxq_item" id="rwsjcbx">
-				<div>
+				<div class="tubiao3px">
 					<span id="tsxz_span7"></span>
 					<span class="tsxz_title">人卫社教材编写情况</span>
 					<span class="tsxz_ts" id="rwsjcbx_bt"><img src="${ctx}/statics/image/btxx.png" /></span>
@@ -376,7 +376,7 @@
 			</div>
 			<!--其他社教材编写情况-->
 			<div class="sbxq_item" id="qtjcbxqk">
-				<div>
+				<div class="tubiao3px">
 					<span id="tsxz_span7"></span>
 					<span class="tsxz_title">其他社教材编写情况</span>
 				</div>
@@ -428,7 +428,7 @@
 			</div>
 			<!--参加人卫慕课、数字教材编写情况-->
 			<div class="sbxq_item" >
-				<div>
+				<div class="tubiao3px">
 					<span id="tsxz_span9"></span>
 					<span class="tsxz_title">参加人卫慕课、数字教材编写情况</span>
 				</div>
@@ -438,7 +438,7 @@
 			</div>
 			<!--精品课程建设-->
 			<div class="sbxq_item" id="gjjpkcjs">
-				<div>
+				<div class="tubiao3px">
 					<span id="tsxz_span7"></span>
 					<span class="tsxz_title">精品课程建设情况</span>
 				</div>
@@ -472,7 +472,7 @@
 			</div>
 			<!--作家科研情况-->
 			<div class="sbxq_item" id="zjkyqk">
-				<div>
+				<div class="tubiao3px">
 					<span id="tsxz_span7"></span>
 					<span class="tsxz_title">科研情况</span>
 				</div>
@@ -500,7 +500,7 @@
 			</div>
 			<!--主编学术专著情况表-->
 			<div class="sbxq_item" id="zbxszz">
-				<div>
+				<div class="tubiao3px">
 					<span id="tsxz_span7"></span>
 					<span class="tsxz_title">主编学术专著情况</span>
 				</div>
@@ -520,8 +520,8 @@
 							<tr>
 								<td>${list.monograph_name}</td>
 								<td>
-									<c:if test="${list.is_self_paid == '0'}">自费</c:if>
-									<c:if test="${list.is_self_paid == '1'}">公费</c:if>
+									<c:if test="${list.is_self_paid == '0'}">公费</c:if>
+									<c:if test="${list.is_self_paid == '1'}">自费</c:if>
 								</td>
 								<td>${list.publisher}</td>
 								<td>${list.publish_date}</td>
@@ -533,7 +533,7 @@
 			</div>
 			<!--出版行业获奖情况表-->
 			<div class="sbxq_item" id="publish">
-				<div>
+				<div  class="tubiao3px">
 					<span id="tsxz_span7"></span>
 					<span class="tsxz_title">出版行业获奖情况</span>
 				</div>
@@ -560,7 +560,7 @@
 			</div>
 			<!--SCI论文投稿及影响因子情况表-->
 			<div class="sbxq_item" id="sci">
-				<div>
+				<div  class="tubiao3px">
 					<span id="tsxz_span7"></span>
 					<span class="tsxz_title">SCI论文投稿及影响因子情况</span>
 				</div>
@@ -589,7 +589,7 @@
 			</div>
 			<!--临床医学获奖情况表-->
 			<div class="sbxq_item" id="clinical">
-				<div>
+				<div  class="tubiao3px">
 					<span id="tsxz_span7"></span>
 					<span class="tsxz_title">临床医学获奖情况</span>
 				</div>
@@ -620,7 +620,7 @@
 			</div>
 			<!--学术荣誉授予情况表-->
 			<div class="sbxq_item" id="acade">
-				<div>
+				<div  class="tubiao3px">
 					<span id="tsxz_span7"></span>
 					<span class="tsxz_title">学术荣誉授予情况</span>
 				</div>
@@ -653,7 +653,7 @@
 			</div>
 			<!--编写内容意向表-->
 			<div class="sbxq_item" >
-				<div>
+				<div  class="tubiao3px">
 					<span id="tsxz_span9"></span>
 					<span class="tsxz_title">编写内容意向表</span>
 				</div>
@@ -664,7 +664,7 @@
 			
 			<!-- 申报单位-->
 			<div class="sbxq_item1">
-				<div>
+				<div  class="tubiao3px">
 					<span id="tsxz_span8"></span>
 					<span class="tsxz_title">请选择您的申报单位</span>
 				</div>

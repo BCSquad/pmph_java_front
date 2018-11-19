@@ -92,7 +92,10 @@ public class MessageController extends BaseController {
         mv.addObject("listSize", list.size());
         mv.addObject("condition", condition);
         mv.addObject("addPara", addPara);
-
+        //统计未处理的申请数量
+        paraMap.put("condition", "2");
+        int nodealcount = noticeMessageService.selectSysMessageTotalCount(paraMap);
+        mv.addObject("nodealcount", nodealcount);
         mv.setViewName("commuser/message/applyMessage");
         return mv;
     }
@@ -234,7 +237,10 @@ public class MessageController extends BaseController {
         mv.addObject("listSize", list.size());
         mv.addObject("list", list);
         mv.addObject("condition", condition);
-
+            //求出未读的数据总量
+            paraMap.put("is_read", "0");
+            int noreadcount = noticeMessageService.selectNoticeMessageTotalCount(paraMap);
+            mv.addObject("noreadcount", noreadcount);
         mv.setViewName("commuser/message/noticeMessage");
         return mv;
     }
@@ -312,6 +318,7 @@ public class MessageController extends BaseController {
         int count = noticeMessageService.selectNoticeMessageTotalCount(paraMap);
         count = count - list.size();
         returnMap.put("count",count);
+
         int listSize = list.size();
         returnMap.put("listSize",listSize);
         returnMap.put("list", list);

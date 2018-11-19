@@ -93,9 +93,9 @@ public class BookSearchController extends BaseController {
 		String redirectUrl = "redirect:/booksearch/toPage.action";
 		redirectAttributes.addAttribute("search",search);
 		String searchName = java.net.URLDecoder.decode(search.trim(),"UTF-8"); 
-		searchName = searchName !=null && !"".equals(searchName)? searchName.trim():"";
-        String[] searchTextArray = searchName.split(" ");
-        searchTextArray = searchTextArray.length>0?searchTextArray:null;
+		
+		String[] searchTextArray = fromQueryNameToSearchTextArray(searchName);
+        
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("searchTextArray",searchTextArray);
 		PageParameter<Map<String,Object>> pageParameter = new PageParameter<Map<String,Object>>(1,1);
@@ -137,9 +137,8 @@ public class BookSearchController extends BaseController {
 		String order=request.getParameter("order");
         Map<String,Object> smap=new HashMap<String, Object>();
         
-        queryName = queryName !=null && !"".equals(queryName)? queryName.trim():"";
-        String[] searchTextArray = queryName.split(" ");
-        searchTextArray = searchTextArray.length>0?searchTextArray:null;
+        String[] searchTextArray = fromQueryNameToSearchTextArray(queryName);
+        
         smap.put("searchTextArray",searchTextArray);
         //smap.put("searchText", queryName !=null && !"".equals(queryName)? "%"+queryName+"%":null );
         
@@ -174,6 +173,35 @@ public class BookSearchController extends BaseController {
 		pageParameter.setParameter(paraMap);
 		List<Map<String, Object>> List_map = bookSearchService.listBook(pageParameter);
 		int count =bookSearchService.getBookTotal(pageParameter);
+		
+		//将传到前端的书名 匹配的文字替换为红色字体
+		//此处支持间隔替换 如：  搜索条件为“药理学第3版” 书名为“药理学(第3版)” 那么仅匹配文字变红 中间的括号不变红
+		for (Map<String, Object> map : List_map) {
+			for (String searchText : searchTextArray) {
+				if(searchText.length()>0){
+					//String nameReplaceRex = searchText.replaceAll("(.*?)%", "($1)(.*?)");
+					String nameReplaceRex = "";
+					String[] searchCharArray = searchText.split("%");
+					String replacement = "";
+					for (int i =1 ;i<=searchCharArray.length;i++) {
+						replacement+="<font style=\"color:red;\">$"+(2*i-1)+"</font>";
+						nameReplaceRex += "("+searchCharArray[i-1]+")";
+						if(i<searchCharArray.length){
+							nameReplaceRex += "(.*?)";
+							replacement+= "$"+2*i;
+						}
+					}
+					nameReplaceRex = nameReplaceRex.length()>0?nameReplaceRex:" ";
+					String bookname = (String) map.get("bookname");
+					map.put("bookname", bookname.replaceAll(nameReplaceRex, replacement));
+					String author = (String) map.get("author");
+					map.put("author", author.replaceAll(nameReplaceRex, replacement));
+					String isbn = (String) map.get("isbn");
+					map.put("isbn", isbn.replaceAll(nameReplaceRex, replacement));
+				}
+			}
+		}
+		
 		Integer maxPageNum = (int) Math.ceil(1.0*count/pageParameter.getPageSize());
 //		Map<String, Object> paraMap = new HashMap<String, Object>();
 //		paraMap.put("queryName", queryName);
@@ -193,6 +221,26 @@ public class BookSearchController extends BaseController {
 		resultMap.put("totoal_count", maxPageNum);
 		resultMap.put("count", count);
 		return resultMap;
+	}
+	
+	
+	/**
+	 * 1.将输入按空格分开，作为多个查询条件，全部满足
+	 * 2.对各个查询条件 逐字插入% 
+	 * @param queryName
+	 * @return
+	 */
+	private String[] fromQueryNameToSearchTextArray(String queryName) {
+		queryName = queryName !=null && !"".equals(queryName)? queryName.trim():"";
+        String[] searchTextArray = queryName.split(" ");
+        searchTextArray = searchTextArray.length>0?searchTextArray:null;
+        List<String> searchTextList = new ArrayList<String>();
+        for (String searchText : searchTextArray) {
+        	searchText = searchText.replaceAll("(.{1})", "$1%").replaceAll("%$", "");
+        	searchTextList.add(searchText);
+		}
+        searchTextArray = searchTextList.toArray(searchTextArray);
+		return searchTextArray;
 	}
 	
 	/**

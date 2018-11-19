@@ -43,7 +43,7 @@
             <div class="div-menu-child div-menu-child-click">申报资料审核</div>
             <div class="div-menu-child">教师认证</div>
             <div class="div-menu-child">用户管理</div>
-            <div class="div-menu-child">账户设置</div>
+            <div class="div-menu-child">修改资料</div>
             <div class="div-menu-child">消息</div>
         </div>
     </div>

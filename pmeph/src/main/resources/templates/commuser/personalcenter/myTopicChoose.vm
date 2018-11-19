@@ -1,7 +1,11 @@
 
 <link rel="stylesheet" href="$!{contextpath}statics/commuser/personalcenter/booklist.css" type="text/css">
 <script src="${contextpath}resources/commuser/personalcenter/PersonalHomeWYCS.js"></script>
-
+<style>
+    .leftlb_1 {
+        text-align: left;
+    }
+</style>
 <input type="hidden" class="queryCondition" id="isMine" value="$!{isMine}">
 <input type="hidden" class="queryCondition" id="auth_progress" value="$!{auth_progress}">
 <input type="hidden" class="queryCondition" id="bookname" value="$!{bookname}">
@@ -14,7 +18,7 @@
         <span id="jcsbwdsb" onclick="listoction(this,1);" style="cursor:pointer">我的申报</span>*#
         <button class="jcsbsbzt" id="sbzzjx" value="0" style="cursor:pointer"><span class="yzc"></span>已暂存</button>
         <button class="jcsbsbzt" id="sbyjs"  value="1" style="cursor:pointer" ><span class="ytj"></span>已提交</button>
-        <button class="jcsbsbzt" id="sbysl" value="ysl" style="cursor:pointer"><span class="ytg"></span>已受理</button>
+        <button class="jcsbsbzt" id="sbysl" value="ysl" style="cursor:pointer"><div class="ysl">已受理</div></button>
         <button class="jcsbsbzt" id="sbzc"  value="3" style="cursor:pointer"><span class="ytg"></span>已通过</button>
         <button class="jcsbsbzt" id="sbytj" value="2" style="cursor:pointer"><span class="btg"></span>未通过</button>
         <button class="jcsbsbzt" id="allStatus" value="" style="cursor:pointer"><span class=""></span>全部状态</button>
@@ -87,7 +91,7 @@
            			<div><span class="btg1"></span><span class="left_zt">未通过</span></div>
            			<span class="handled_text" title="$!{c.auth_feedback}">退回原因：</br>$!{c.auth_feedback}</span>
            		#elseif($!{c.is_handled}==1)
-           			<div><span class="btg1"></span><span class="left_zt">已受理</span></div>
+           			<div><span class="ysl1"></span><span class="left_zt">已受理</span></div>
            			<span class="handled_text"><span>[$!{c.editor_department}]</span>[$!{c.editor_realname}]编辑</br>已受理。</span>
            		#elseif($!{c.auth_progress}==0)
            			<div><span class="yzc1"></span><span class="left_zt">已暂存</span></div>

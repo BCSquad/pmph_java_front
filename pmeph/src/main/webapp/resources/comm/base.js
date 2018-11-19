@@ -1,8 +1,10 @@
 /**
  * 定义全局变量远程调用地址
  */
-var remoteUrl="120.76.221.250";
+//var remoteUrl="192.168.0.211";
+//var remoteUrl="localhost:8088";
 
+var remoteUrl="192.168.0.211"; 
 /**
  * Created by lihuan on 2017/11/24.
  */
@@ -13,7 +15,6 @@ var remoteUrl="120.76.221.250";
  * 使用示例：message.success('这里是提示信息');
  *
  */
-
 (function () {
 
 
@@ -33,7 +34,7 @@ var remoteUrl="120.76.221.250";
 
 
     //引入html
-    var html = '<div class="message-tips">' +
+    var html = '<div class="message-tips">' +   //tips整个DIV，ICON提示的图标的DIV，text提示内容
         '	<div class="message-icon"></div>' +
         '	<div class="message-text"></div>' +
         '</div>';
@@ -112,13 +113,37 @@ var remoteUrl="120.76.221.250";
             return new CreatMessage('success', text);
         },
         warning: function (text) {
-            return new CreatMessage('warning', text);
+            // return new CreatMessage('warning', text);
+            return layer.confirm(text, {icon: 7, title:'提示',btn:["确定"]},
+                function(index){
+                    layer.close(index);
+                },
+                function(index){
+                    layer.close(index);
+                }
+            );
         },
         info: function (text) {
-            return new CreatMessage('info', text);
+            //return new CreatMessage('info', text);
+            return layer.confirm(text, {icon: 7, title:'提示',btn:["确定"]},
+                function(index){
+                    layer.close(index);
+                },
+                function(index){
+                    layer.close(index);
+                }
+                );
         },
         error: function (text) {
-            return new CreatMessage('error', text);
+            // return new CreatMessage('error', text);
+            return layer.confirm(text, {icon: 2, title:'提示',btn:["确定"]},
+                function(index){
+                    layer.close(index);
+                },
+                function(index){
+                    layer.close(index);
+                }
+            );
         },
         confirm: function (e, t, n, a) {
             return layer.confirm(e, t, n, a);
@@ -149,7 +174,7 @@ var remoteUrl="120.76.221.250";
         async: true,
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             var errmsg = XMLHttpRequest.responseText;
-            window.message.error("出错啦！");
+          //  window.message.error("出错啦！");
         },
         beforeSend: function (xhr, global) {
 
@@ -168,6 +193,33 @@ var remoteUrl="120.76.221.250";
                 if (data && data.code) {
                     if (data.code == '100') {
                         window.location.href = data.data;
+                    } else if (data.code == '250') {
+                        var text;
+                        var btn;
+                        if(data.msg=='0' && data.proxy=='1'){
+                            text="您的认证已提交，请耐心等待审核！";
+                            btn="查看认证"
+                        }else if(data.msg=='2'){
+                            text="您的认证已被退回，退回原因："+data.backReason+"。请修改资料重新认证！";
+                            btn="重新认证"
+                        }else if(data.proxy=='0' && data.msg!='1' && data.msg!='2'){
+                            text="您还未进行机构管理员认证，快去认证吧！";
+                            btn="马上认证"
+                        }
+                        window.message.confirm(
+                            text
+                            ,{icon: 7, title:'认证提醒',btn:[btn,"取消"]}
+
+                            ,function(index){
+                                layer.close(index);
+                                //进行认证
+                                window.location.href=contextpath+"admininfocontroller/toadminattest.action";
+
+                            }
+                            ,function(index){
+                                layer.close(index);
+                            }
+                        );
                     } else if (data.code != '1') {
                         window.message.error(data.msg);
                     } else {
@@ -248,26 +300,27 @@ $(function () {
 
         window.location.href = contextpath + "booksearch/bookOrArtSpliter.action?search=" + encodeURI(encodeURI($("#search-input").val()));
     }
-    
-    $(".search-icon").click(function () {
-        
-        if (!input_open) {
-            $(".delete").css("display", "block");
-            $(".search-input").css("display", "block");
-            input_open = true;
 
-        } else {
-            search();
-        }
+    $(".search-icon").click(function () {
+
+        // if (!input_open) {
+        //     $(".delete").css("display", "block");
+        //     $(".search-input").css("display", "block");
+        //     input_open = true;
+        //
+        // } else {
+        //     search();
+        // }
+        search();
     });
-    
+
     $(".search-input").bind('keydown', function (event) {
         if (event.keyCode == "13") {
             search();
         }
     });
-    
-    
+
+
     $(".delete").click(function () {
         $(".delete").css("display", "none");
         $(".search-input").css("display", "none");
@@ -386,3 +439,13 @@ function Empty(v) {
     }
     return false;
 }
+
+
+
+
+
+
+
+
+
+

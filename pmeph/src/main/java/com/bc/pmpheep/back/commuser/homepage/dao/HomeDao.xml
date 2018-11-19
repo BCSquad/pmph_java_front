@@ -16,6 +16,11 @@
 		else 0
 		end )as dec_editable,
 		m.deadline,
+		<!-- (case 
+		        when cc.is_material_entry = 1
+		        then cc.gmt_create
+		        else cc.auth_date
+		        end) as -->cc.gmt_create  orderDate,
 		cc.*
 		FROM
 				cms_content cc
@@ -24,26 +29,30 @@
 				LEFT JOIN material m ON m.id = cc.material_id
 				<if test="id != null and id != '' ">
 		    	left join material_org mo on mo.material_id=m.id
-				left join writer_user wu on wu.id= #{id} and  wu.org_id=mo.org_id
+				left join (select tu.*,wuc.progress from writer_user tu LEFT JOIN
+                    writer_user_certification wuc on tu.id = wuc.user_id where tu.id = #{id}) wu on wu.id= #{id}
+                and  wu.org_id=mo.org_id
 				</if>
 				left join declaration d on d.user_id = #{id} and d.material_id=cc.material_id
 		WHERE
 				cc.is_deleted = 0
-				AND
-				cc.category_id=3
+				AND cc.category_id=3
 				AND cc.auth_status =2
-				AND cc.is_published =1
-		        
-		    		and (
-		    		<if test="id != null and id != '' ">
-		    			(wu.id=#{id} and m.is_public = 0 and cc.is_material_entry=1 and m.is_deleted=0)or 
-		    		</if>
-		    		    (m.is_public = 1 and cc.is_material_entry=1 and m.is_deleted=0) or 
-		    		cc.is_material_entry = 0 )
-		group by cc.id
-		)t
+	            AND cc.apporpc!=2
+
+	  AND cc.is_published =1
+
+	  and (
+	  <if test="id != null and id != '' ">
+		  (wu.id=#{id} and m.is_public = 0 and wu.progress =3 and cc.is_material_entry=1 and m.is_deleted=0)or
+	  </if>
+	  (m.is_public = 1 and cc.is_material_entry=1 and m.is_deleted=0) or
+	  cc.is_material_entry = 0 )
+	  group by cc.id
+	  )t
 		ORDER BY
-				   t.sortByEntryBtnOn desc , t.deadline DESC ,t.auth_date desc
+			t.sortByEntryBtnOn desc,t.is_material_entry desc,t.orderDate desc,t.deadline DESC 
+	  		 <!-- t.sortByEntryBtnOn desc ,t.declaration_id asc, t.auth_date DESC ,t.deadline desc -->
 		limit 0,3
   </select>
   
@@ -61,6 +70,7 @@
 	  and b.is_public = 1
 	  and t.auth_status=2
 	  and t.is_deleted=0
+	  and t.apporpc!=2
 	  union
 	  select
 	  t.*
@@ -74,15 +84,16 @@
 	  <![CDATA[and t.material_id >0]]>
 	  and b.is_public = 0
 	  and t.auth_status=2
+	  and t.apporpc!=2
 	  and t.is_deleted=0
 	  and p.id= #{id}) n
-		order by n.gmt_create desc limit 0,3    
+		order by n.sort asc limit 0,3
   </select>
 
     <!-- 查询最新五条信息快报 -->
     <select id="queryNotice"  resultType="java.util.Map">
      select  * from cms_content  where  category_id='2' and auth_status='2' 
-     and is_deleted='0' order by gmt_create desc limit 0,5
+     and is_deleted='0' and apporpc!=2 order by gmt_create desc limit 0,5
   </select>
     <!-- 查询书籍 -->
     <select id="queryBook" parameterType="map" resultMap="Mapresult">
@@ -110,28 +121,55 @@
         or t.id = #{type}
         )
         where b.is_on_sale = 1
-        order by b.image_url desc
+        order by b.is_stick*b.sort desc, b.image_url desc
         <if test="startrows >= 0">
-            <![CDATA[limit ${startrows},10]]>
+            <![CDATA[limit ${startrows},14]]>
         </if>
     </select>
+
+    <!--根据书籍类型查询总条数-->
+    <select id="querySize" resultType="int" parameterType="map">
+    select count(*) from (
+	SELECT
+			t.type_name,
+			b.id
+			FROM
+			book AS b
+			INNER JOIN
+			material_type t
+			ON
+			t.id = b.type
+			and
+			(
+			SUBSTRING_INDEX(SUBSTRING_INDEX(CONCAT(t.path,'-',t.id),'-',
+			(select
+			cast(
+			(CHAR_LENGTH(path)-CHAR_LENGTH(REPLACE(path,'-','')))/CHAR_LENGTH('-')+2
+			as decimal(9,2)
+			)
+			from material_type
+			where id = cast(#{type} as decimal(9,2)))
+			),'-',-1) = #{type}
+			or t.id = #{type}
+			)
+			where b.is_on_sale = 1) as cc
+    </select>
+
     <!-- 查询最新医学随笔 -->
     <select id="queryArticle" resultMap="Mapresult">
 	select cc.*,wu.avatar,wu.id as userId,
 		case 
 		when cc.author_type =1
-		then pu.realname
+		then   IFNULL(pu.realname,pu.username)
 		when  cc.author_type =2
-		then wu.realname
+		then  IFNULL(wu.realname,wu.username)
 		else '系统' end as realname,
 		case 
 		when cc.author_type =1
 		then pu.avatar
 		when  cc.author_type =2
 		then wu.avatar
-		else 'DEFAULT' end as avatar,
-		cc.author_name,
-		cc.author_id
+		else 'DEFAULT' end as avatar
 		from cms_content cc
 		left join pmph_user pu on pu.id=cc.author_id
 		left join writer_user wu on wu.id=cc.author_id
@@ -140,7 +178,7 @@
 			and cc.is_deleted=0
 			and cc.auth_status=2 
 			and cc.is_published=1 
-		
+		    and cc.apporpc != 2
 		order by 
 				cc.`auth_date` desc
         limit 0,#{endrow}
@@ -174,7 +212,7 @@ LIMIT 0,10
 
     <!-- 查询点击人数最多的最多的作者  已改变为 ： 业务逻辑改为查询被推荐的作者 -->
     <select id="queryAuthor" resultMap="HotAuthorMap">
-        select u.*
+       <!-- select u.*
         ,f.request_id = u.id and f.target_id = #{logUserId} and f.status = 0 as isBeenRequest
         ,f.target_id = u.id and f.request_id = #{logUserId} and f.status = 0 as hasRequest
         ,max(f.status) as status
@@ -194,23 +232,25 @@ LIMIT 0,10
         #{logUserId})) and f.status != 1
         group by u.id
         order by u.topSort desc , u.total_click desc
-        limit 0,4
-        
-    </select>
+        limit 0,4-->
+		select u.*
+		,f.request_id = u.id and f.target_id = #{logUserId} and f.status = 0 as isBeenRequest
+		,f.target_id = u.id and f.request_id = #{logUserId} and f.status = 0 as hasRequest
+		,f.status
+		from writer_user u
+		left join writer_friend f
+		on ((f.request_id = u.id and f.target_id = #{logUserId} ) or (f.target_id = u.id and f.request_id =#{logUserId}))
+		where u.is_top = 1 order by top_sort desc
+		limit 0,4
+
+	</select>
     
     <!-- 查询热门书评 -->
     <select id="queryComment" resultMap="Mapresult">
-       SELECT
-			u.id,
-			b.id id1,
-			b.bookname,
-			b.image_url,
-			c.content,
-			c.score,
-			u.nickname
-			FROM
-					book 
-			AS b
+		<![CDATA[
+			SELECT u.id, b.id id1, b.bookname, b.image_url, c.content, c.score,
+			CASE 	WHEN (u.nickname IS NOT NULL && u.nickname !='') THEN u.nickname ELSE u.username END   as nickname
+			FROM book AS b
 			INNER JOIN 
 				(SELECT * from book_user_comment 
 					where is_auth = 1 AND
@@ -219,8 +259,8 @@ LIMIT 0,10
 					 GROUP BY book_id )AS c
 			ON b.id = c.book_id
 			INNER JOIN writer_user AS u ON c.writer_id = u.id
-			ORDER BY
-			b.comments DESC limit 0,4
+			ORDER BY b.comments DESC limit 0,4
+			 ]]>
   </select>
     <!-- 根据书籍类型查询图书畅销榜 -->
     <select id="querySale" parameterType="map" resultMap="Mapresult">
@@ -369,6 +409,7 @@ LIMIT 0,10
 		buc.is_promote*1 as ispromote,
 		b.bookname,
 		wu.username,
+		wu.nickname,
 		wu.avatar,
 		b.image_url,
 		IFNULL(buc.title, b.bookname) AS hottitle
@@ -408,4 +449,31 @@ LIMIT 0,10
 		) t
 	</select>
 
+	<!--根据产品类型查询详情-->
+	<select id="quertProductByType" parameterType="java.util.Map" resultType="java.util.Map">		    
+	select
+		   p.note,p.description,p.is_published,p.product_type,p.product_name
+		   ,p.id as product_id
+		   ,p.is_new
+		   ,p.actualDeadline
+		   ,date_format(now(),'%Y-%m-%d') &lt;= p.actualDeadline as notEnd
+		   ,pa.*
+		   from product_attachment pa
+		   right JOIN product p on p.id=pa.product_id
+		   where 
+		   
+		   		p.product_type= #{product_type}  
+				and p.is_new = 1
+				and p.is_deleted=0 and p.is_published=1 
+		   order BY p.gmt_set_active DESC
+	</select>
+
+	<!-- 查询首页师资培训,取最新三条数据 -->
+	<select id="Queryszpt" parameterType="java.util.Map" resultType="java.util.Map">
+          select b.id,t.activity_name,t.cover,t.id as activity_id
+              from activity t
+              left join cms_content b on b.id = t.info_express_cms_id
+              where  t.is_deleted=0 and t.status=1
+              order by t.is_set_top desc,t.gmt_set_top desc,t.gmt_create desc limit 0,3
+	</select>
 </mapper>

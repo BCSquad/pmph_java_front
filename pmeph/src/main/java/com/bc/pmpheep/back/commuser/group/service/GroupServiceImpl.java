@@ -171,7 +171,7 @@ public class GroupServiceImpl implements GroupService {
                 avatars.remove(i);
                 avatars.add(i,avatar);
             }
-            List<GroupMessageVO> messages = groupDao.getMessages(groupId);
+            List<GroupMessageVO> messages = groupDao.getMessages(groupId,id);
             String gruopImage = group.getGroupImage();
             group.setGroupImage(RouteUtil.gruopImage(gruopImage));
             group.setGmtCreate(createTime);
@@ -324,16 +324,17 @@ public class GroupServiceImpl implements GroupService {
         Map<String,Object> queryMap = new HashMap<String,Object>();
         queryMap.put("group_id", groupId);
         queryMap.put("user_id", memberId);
-        String flag = "您是这个小组的普通用户";
+       // String flag = "您是这个小组的普通用户";
+        String flag = "普通用户";
         Map<String,Object> map = groupDao.memberRole(queryMap);
         if(null == map){
             return flag;
         }
         if(((Boolean)map.get("is_admin"))){
-            flag = "您是这个小组的管理员";
+            flag = "管理员";
         }
         if (((Boolean)map.get("is_founder")) ) {
-            flag = "您是这个小组的创建者";
+            flag = "创建者";
         }
         
         return flag;
@@ -499,4 +500,17 @@ public class GroupServiceImpl implements GroupService {
 		int count = groupDao.updateDisplayName(paraMap);
 		return count;
 	}
+
+    @Override
+    public String deletePmphGroupMemberById(String id) {
+        String returncode ="OK";
+        int count=groupDao.deletePmphGroupMemberById(id);
+        return returncode;
+    }
+
+    @Override
+    public Map<String, Object> queryAdmin(String user_id, Long group_id) {
+        Map<String, Object> map=groupDao.queryAdmin(user_id,group_id);
+        return map;
+    }
 }

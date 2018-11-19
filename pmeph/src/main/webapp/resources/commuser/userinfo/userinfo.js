@@ -1,4 +1,8 @@
 $(function () {
+    $('#realname').tipso({validator: "isNonEmpty", message: "真是姓名不能为空"});
+    $('#handphone').tipso({validator: "isNonEmpty", message: "手机号码不能为空"});
+    $('#workplace').tipso({validator: "isNonEmpty", message: "工作单位不能为空"});
+
     //文件上传
     $("#uploadFile").uploadFile({
         accept: "image/*",
@@ -91,6 +95,7 @@ function getform() {
         note: $("#note").val(),
         signature: $("#signature").val(),
         workplace: $("#workplace").val(),
+        nickname: $("#nickname").val(),
         id: $("#id").val(),
         tags:(mytag.length==0?'':mytag.join('%')),
         hastag:$("#hastag").val()
@@ -101,12 +106,21 @@ function getform() {
 //普通用户信息编辑方法
 function save() {
     var mdata=getform();
+    var note=$("#note").val();
+    var signature=$("#signature").val();
+    if(note.length>100){
+        window.message.warning("个人简介字数不能超过100字！");
+        return;
+    }else if(signature.length>50){
+        window.message.warning("个性签名的长度不能超过50字！");
+        return;
+    }
     var len=mdata.tags.replace(/[^\x00-\xff]/g, "aa").length;//个人标签的总长度
     if(len>200){
     	 window.message.warning("标签的总长度过大！");
     	return; 
     }
-    if ($("#orgForm").validate('submitValidate')) {
+    if ($.fireValidator()) {
         $.ajax({
             type: 'post',
             url: contextpath + 'userinfo/update.action',
@@ -146,7 +160,7 @@ function LengthLimit(obj, ml) {
     for (var i = 1; i <= va.length; i++) {
         vat = va.substring(0, i);
         //把双字节的替换成两个单字节的然后再获得长度，与限制比较
-        if (vat.replace(/[^\x00-\xff]/g, "aa").length <= ml) {
+        if (vat.replace(/[^\x00-\xff]/g, "a").length <= ml) {
            var maxStrlength = i;
         } else {
 
@@ -155,9 +169,9 @@ function LengthLimit(obj, ml) {
     }
     obj.maxlength = maxStrlength;
     //把双字节的替换成两个单字节的然后再获得长度，与限制比较
-    if (va.replace(/[^\x00-\xff]/g, "aa").length > ml) {
-        obj.value = va.substring(0, maxStrlength);
-        window.message.warning("不可超过输入最大长度" + ml + "字节！");
+    if (va.replace(/[^\x00-\xff]/g, "a").length > ml) {
+        //obj.value = va.substring(0, maxStrlength);
+       window.message.warning("不可超过输入最大长度" + ml + "字！");
     }
 }
 
@@ -208,5 +222,9 @@ function check( email_address )
     {
         return false;
     }
+
 }
 
+function testOne(){
+   window.location.href=contextpath+"material/toperInformation.action";
+}

@@ -22,8 +22,8 @@
             useTitle: false,
             onBeforeShow: null,
             onShow: null,
-            onHide: null
-
+            onHide: null,
+            group:0
         };
 
     function Plugin(element, options) {
@@ -41,14 +41,23 @@
     var rules = {};
 
     $.extend({
-        fireValidator: function () {
+        fireValidator: function (group) {
             var isshow = false;
+            if(group>0){
+
+            }else{
+                group=0;
+            }
             for (var i = 0; i < list.length; i++) {
                 var item = list[i];
-                console.log(item);
+                //console.log(item);
+
                 item.hideStyle();
                 item.hide();
 
+                if(item.settings.group!=group){
+                    continue;
+                }
 
                 var value = "";
                 if (item.element.find("input[type='hidden']").length > 0) {
@@ -61,6 +70,7 @@
                     if (!isshow) {
                         item.element.focus();
                         item.show();
+                        console.log(item);
                         isshow = true;
                     }
                 }
@@ -107,7 +117,7 @@
 
     $.addValidatRule("isMobile", function (value) {
         //不能为空
-        if (!/(^1[3|5|8][0-9]{9}$)/.test(value)) {
+        if (!/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/.test(value)) {
             return false;
         } else {
             return true;
@@ -133,11 +143,61 @@
         }
     });
 
+    $.addValidatRule("isPassword", function (value) {
+        //校验密码  只能为数字和字母
+        if (!/^[A-Za-z0-9!@#$%^&*]{6,16}$/.test(value)) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+
+    $.addValidatRule("isCard", function (value) {
+        //校验身份证号码
+        if (!/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(value)) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+    
+    $.addValidatRule("isPassport", function (value) {
+        //校验护照号码
+        if (!/^[a-zA-Z0-9]{3,21}$/.test(value)) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+    
+    $.addValidatRule("isOfficialCard", function (value) {
+        //军官证号码
+        if (!/^[a-zA-Z0-9]{7,21}$/.test(value)) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+
     $.extend(Plugin.prototype, {
         init: function () {
             var obj = this,
                 $e = this.element;
-            list.push(this);
+            
+            var updateTempIndex = -1 ;
+        	for ( var i = 0 ;i<list.length;i++) {
+        		var item = list[i];
+        		if(this.element[0] == item.element[0]){
+        			updateTempIndex = i; 
+        			break;	
+        		}
+			}
+        	
+        	if(updateTempIndex>=0){
+        		list[updateTempIndex] = obj;
+        	}else{
+        		list.push(this);
+        	}
 
             if (isTouchSupported()) {
                 $e.on('click' + '.' + pluginName, function (e) {
@@ -154,10 +214,10 @@
                  obj.show();
                  }, 0);*/
 
-                $e.on('mouseover' + '.' + pluginName, function () {
+                $e.unbind('mouseover' + '.' + pluginName).on('mouseover' + '.' + pluginName, function () {
                     obj.show();
                 });
-                $e.on('mouseout' + '.' + pluginName, function () {
+                $e.unbind('mouseout' + '.' + pluginName).on('mouseout' + '.' + pluginName, function () {
                     obj.hide();
                 });
                 $e.change(function () {
@@ -167,14 +227,20 @@
                     } else {
                         value = obj.element.val()
                     }
-                    if (!(obj.settings.content = startValidate.call(obj.element, obj.settings.validator, value, obj.settings.message))) {
+                    //if (!(obj.settings.content = startValidate.call(obj.element, obj.settings.validator, value, obj.settings.message))) {
+                    if (!(obj.settings.content = startValidate.call(obj.element,$(obj.element).data("plugin_"+pluginName).settings.validator, value, $(obj.element).data("plugin_"+pluginName).settings.message))) {
                         obj.hideStyle();
+                        obj.hide();
                     }else {
                         obj.showStyle();
+                        obj.show();
                     }
                 });
 
             }
+            /*if(updateTempIndex>=0){
+        		$e.trigger("change");
+        	}*/
         },
         tooltip: function () {
             if (!this.tipso_bubble) {
@@ -243,7 +309,27 @@
             $e.off('.' + pluginName);
             $e.removeData(pluginName);
             $e.removeClass('tipso_style').attr('title', this._title);
+
         },
+        removeFormFireVali: function(){
+        	this.hide();
+        	this.hideStyle();
+        	var desTempIndex = -1 ;
+        	for ( var i = 0 ;i<list.length;i++) {
+        		var item = list[i];
+        		if(this.element.attr("id") == item.element.attr("id")){
+        			desTempIndex = i; 
+        			break;	
+        		}
+			}
+        	//从fireValidator校验列表中删除此项
+        	if(desTempIndex>=0){
+        		list.splice(desTempIndex, 1); 
+        	}
+            //$.data(this, 'plugin_' + pluginName, null);
+        
+        },
+        
         content: function () {
             var content,
                 $e = this.element,
@@ -530,6 +616,9 @@
             return this.each(function () {
                 if (!$.data(this, 'plugin_' + pluginName)) {
                     $.data(this, 'plugin_' + pluginName, new Plugin(this, options));
+                }else{
+                	$.removeData(this,'plugin_' + pluginName);
+                	$.data(this, 'plugin_' + pluginName, new Plugin(this, options));
                 }
             });
         } else if (typeof options === 'string' && options[0] !== '_' && options !==
@@ -547,8 +636,23 @@
                         .call(args, 1));
                 }
                 if (options === 'destroy') {
-                    $.data(this, 'plugin_' + pluginName, null);
+                	var desTempIndex = -1 ;
+                	for ( var i = 0 ;i<list.length;i++) {
+                		var item = list[i];
+                		if(this.id == item.element.attr("id")){
+                			desTempIndex = i; 
+                			break;	
+                		}
+					}
+                	//从fireValidator校验列表中删除此项
+                	if(desTempIndex>=0){
+                		list.splice(desTempIndex, 1); 
+                	}
+                    //$.data(this, 'plugin_' + pluginName, null);
                 }
+                
+               
+                
             });
             return returns !== undefined ? returns : this;
         }

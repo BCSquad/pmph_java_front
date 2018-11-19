@@ -13,7 +13,7 @@
         from material_type where id = cast('${type}' as decimal(9,2)))),'-',-1) = '${type}'
         WHERE b.is_promote = 1  and  b.is_on_sale =1
         AND (b.deadline_promote > now() or b.deadline_promote is null)
-        ORDER BY b.sort_promote ASC
+        ORDER BY b.sort_promote desc
         <if test="startrows != null and startrows != ''">
             <![CDATA[limit ${startrows},${endrows}]]>
         </if>
@@ -139,7 +139,7 @@
         from material_type where id = cast('${type}' as decimal(9,2)))),'-',-1) = '${type}'
         WHERE b.is_new = 1  and  b.is_on_sale =1
         AND (b.deadline_new > now() or b.deadline_new is null)
-        ORDER BY b.sort_new ASC
+        ORDER BY b.sort_new desc
         <if test="startrows != null and startrows != ''">
             <![CDATA[limit ${startrows},${endrows}]]>
         </if>
@@ -147,17 +147,16 @@
 
     <!-- 热门书评 -->
     <select id="queryRmspReadList" parameterType="java.util.Map" resultType="java.util.Map">
-        SELECT u.id,b.id id1,b.bookname,b.image_url,c.content,c.score,u.nickname
-        FROM book AS b INNER JOIN
-        (SELECT * from book_user_comment
-        GROUP BY book_id
-        HAVING is_auth = 1 AND
-        is_hide = 0 AND
-        is_deleted = 0)AS c
+        <![CDATA[
+		SELECT u.id,b.id id1,b.bookname,b.image_url,c.content,c.score,
+		CASE WHEN (u.nickname IS NOT NULL && u.nickname !='') THEN u.nickname ELSE u.username END as nickname
+        FROM book AS b
+        INNER JOIN
+        (SELECT * from book_user_comment GROUP BY book_id  HAVING is_auth = 1 AND is_hide = 0 AND is_deleted = 0)AS c
         ON b.id = c.book_id
         INNER JOIN writer_user AS u ON c.writer_id = u.id
-        ORDER BY
-        b.comments ASC
+        ORDER BY b.comments ASC
+		]]>
         <if test="startrows != null and startrows != ''">
             <![CDATA[limit ${startrows},${endrows}]]>
         </if>

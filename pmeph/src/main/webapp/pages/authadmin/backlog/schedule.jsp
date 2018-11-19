@@ -58,7 +58,7 @@
 	                    <div class="leftContent">
 	                        <div class="leftContentSmall">
 	                            <div class="pictureDiv">
-	                            	<c:if test="${one.TYPE=='A'}">
+	                            	<c:if test="${one.TYPE=='A' || one.TYPE == 'D' }">
 	                            		<img  class="pictureB" src="${ctx}/statics/image/pic3555.png">
 	                            	</c:if>
 	                                <c:if test="${one.TYPE=='B'}">
@@ -88,15 +88,41 @@
 	                                        </div>
 	                                </div>
 	                                <div class="downContent">
-	                                    <div class="timeEvent">
-	                                        <span class="time">于<fmt:formatDate pattern="yyyy年MM月dd日" value="${one.TIME}" /></span>&nbsp;<span class="event">提交${one.CONTENT}</span><span class="event">，请审批</span>
-	                                    </div>
+	                                	<c:choose>
+	                                		<c:when test="${one.TYPE=='C'}">
+	                                			<div class="timeEvent C">
+			                                        <span class="time">于<fmt:formatDate pattern="yyyy年MM月dd日" value="${one.TIME}" /></span>&nbsp;<a href="#" class="event" onclick="system('${one.ID}')" >${one.CONTENT}</a>
+			                                        <input type="hidden" class="msg_id" value="${one.CONTENT}">
+			                                    </div>
+	                                		</c:when>
+	                                		<c:otherwise>
+	                                			<div class="timeEvent">
+			                                        <span class="time">于<fmt:formatDate pattern="yyyy年MM月dd日" value="${one.TIME}" /></span>&nbsp;<a href="#" class="event" onclick="system('${one.ID}')" >提交${one.CONTENT}</a><span class="event">，请审批</span>
+			                                    </div>
+	                                		</c:otherwise>
+	                                	</c:choose>
 	                                </div>
 	                            </div>
+	                            
 	                            <div class="rightButton">
-	                                <div onclick="toogleTip('block','${one.TYPE}','${one.auditId}','${one.ID}')" class="buttonDiv">
+	                            <c:choose>
+                               		<c:when test="${one.TYPE=='C'}">
+                               			<%--<div onclick="system('${one.ID}')"  class="buttonDiv">
+	                                        		查看
+	                                	</div>--%>
+                                        <div onclick="fillMaterialSurvey('${one.materialId}')"  class="buttonDiv">
+                                            办理
+                                        </div>
+                               		</c:when>
+                               		<c:otherwise>
+                               			<div onclick="checkAuthen('block','${one.TYPE}','${one.auditId}','${one.ID}')" class="buttonDiv">
 	                                        		办理
-	                                </div>
+	                                	</div>
+                               		</c:otherwise>
+	                            </c:choose>
+	                                
+	                                
+	                                
 
 	                            </div>
 	                    </div>
@@ -189,6 +215,37 @@
 		</c:choose>
         </div>
    </div>
+   
+   <!-- 系统消息标题悬浮框 -->
+     <div class="bookmistake" id="bookmistake">
+         <form id="bookmistakeform">
+             <%--  <div class="apache">
+                   <div class="mistitle">消息详情</div>
+                  &lt;%&ndash; <div class="x" onclick="hideup()"></div>&ndash;%&gt;
+               </div>--%>
+             <div class="msg-info">
+                 <label style="margin-left: 20px" class="labell">标题:<span id="titlec"></span></label>
+
+             </div>
+             <div class="msg-info">
+                 <label style="margin-left: 20px" class="labell">发送人:<span id="sendc"></span></label>
+             </div>
+             <div class="msg-info">
+                 <label style="margin-left: 20px" class="labell">发送时间:<span id="timec"></span></label>
+             </div>
+
+             <div class="msg-info">
+                 <label style="margin-left: 20px" class="labell">内容:</label>
+                 <div class="misarea" id="tcontent" ></div>
+             </div>
+             <div class="msg-info">
+                 <label style="margin-left: 20px" class="labell">附件:<span id="tattachment"  class="listContent"></span></label>
+             </div>
+             <div class="clear"></div>
+         </form>
+     </div>
+   
+   
 <div style="clear: both; background-color: white;">   
 <jsp:include page="/pages/comm/tail.jsp"/>
 </div>
@@ -203,6 +260,8 @@
         }
     });
     $(function () {
+
+        console.log("${map.pageResult.rows}");
         $('#filtrate-select').selectlist({
             width: 100,
             height: 20,
@@ -230,9 +289,13 @@
     		if(type=="B"){
     			//跳转教师资格认证页面
     			window.location.href="${ctx}/teacherauth/toPage.action?";
-    		}else{
+    		}else if(type=="A"){
+    			//教材申报审核
     			//dataaudit/toMaterialAudit.action?material_id=10&declaration_id=123&view_audit=audit
     			window.location.href="${ctx}/dataaudit/toMaterialAudit.action?material_id="+auditId+"&declaration_id="+decId+"&view_audit=audit";
+    		}else if(type=="D"){
+    			//临床申报审核
+    			window.location.href="${ctx}/expertation/showExpertation.action?material_id="+auditId+"&declaration_id="+decId+"&state=audit&userType=org";   			
     		}
     	}	
     		
@@ -240,7 +303,154 @@
     function toAuthAudit(userId){
     	window.location.href="${ctx}/admininfocontroller/toadminattest.action?userId="+userId;
     }
+
+
+    function checkAuthen(val,type,auditId,decId){
+        $.ajax({
+            type: "POST",
+            url:contextpath+'dataaudit/checkAuthen.action',
+            dataType:"json",
+            success: function(json) {
+                if(json=="OK"){
+                    toogleTip(val,type,auditId,decId);
+                }
+            }
+        });
+    }
+
+    function fillMaterialSurvey(str){
+        window.location.href="${ctx}/applyDocAudit/toPage.action";
+    }
     
+  //点击显示系统消息
+    function system(str) {
+    	var loaded = false;
+    	var imgTimeOut = false;
+    	var clickToEndLoad = false;
+    	
+    	//10秒不论是否加载完成，都跳出弹窗；
+    	setTimeout(function(){
+    		imgTimeOut = true;
+    	}, 10000);
+    	
+    	//加载过程中点击window 阻止弹窗弹出（然而点不到window，只有加载图案的一小块有点击效果，问题待解决）
+    	$(window).one("click",function(){
+    		$(window).one("click",function(){
+    			clickToEndLoad = true;
+    		});
+    	});
+    	
+        if (str != '' && str != '') {
+            $.ajax({
+                type: "post",
+                url: contextpath + "message/queryTitleMessage.action?uid=" + str,
+                async: false,
+                dataType: 'json',
+                success: function (json) {
+                    $("#titlec").html(json.title);
+                    $("#sendc").html(json.realname);
+                    $("#timec").html(formatDate(json.gmt_create));
+                    $("#tcontent").html(json.tContent);
+                    /*$("#bookmistake").show();*/
+                    var ste = '';
+                    if(json.attaList){
+                    	$.each(json.attaList, function (i, x) {
+                            ste += '<a  href="' + contextpath + '' + x.attachment + '">' + x.attachment_name + '</a><br/>';
+                        });
+                    }
+                    
+                    if(ste==''){
+                        ste +="<span>无</span>"
+                    }
+                    $("#tattachment").html(ste);
+                    var imgTick;
+                    /**
+                     * 轮询$content下的图片是否加载完成，直到完成后回调
+                     * @param loaded 是否加载完成
+                     * @param id 所需判断的块的id
+                     * @param callback  加载完成的回调函数 
+                     */
+                    function isImgLoad(loaded,id,callback) {
+                    	//清除延时
+                    	clearTimeout(imgTick);
+                    	if ($("#"+id).find("img").length>0) { //有图片需要加载
+                    		//是否所有图片加载完成
+                        	$("#"+id).find("img").each(function(){
+                        		var $t = $(this);
+                        		if(imgTimeOut||$t[0].complete){
+                        			loaded = true;
+                        		}else{
+                        			loaded = false;
+                        			return false; 
+                        		}
+                        	});
+        				}else{ //无图片需要加载
+        					loaded = true;
+        				}
+                    	
+                    	if (clickToEndLoad) {
+                    		layer.closeAll("loading"); 
+        				}else{
+        					if (loaded) { // 若已全部加载 执行回调
+        	            		callback();
+        					}else{  //若还未全部加载完成 间隔每10毫秒再次轮询 直到加载完成执行回调 不再轮询0
+        						imgTick = setTimeout(function(){
+        							 layer.load(1); //加载图样载
+        							 isImgLoad(loaded,id,callback); //轮询
+        						}, 10);
+        					}
+        				}
+                    	
+                    }
+                    
+                    //开始轮询
+                    isImgLoad(loaded,"bookmistake", function() {
+                                layer.closeAll("loading"); //关闭所有layer.load(2);加载图样载
+                                layer.open({
+                                    type: 1,
+                                    title: false,
+                                    closeBtn: 1,
+                                    area: '967px',
+                                    skin: 'layui-layer-nobg', //没有背景色
+                                    shadeClose: true,
+                                    content: $("#bookmistake")
+                                });
+                            });
+                    
+                    var obj= document.getElementById('readyes'+str);
+                    var readno=document.getElementById('readno'+str);
+                    if(!obj&&json.isread=="yes"){
+                    	if(readno){
+                    		$("#readno"+str).remove();
+                    	}
+                      	$("#txt"+json.id).html('<img src="'+contextpath+'statics/image/readyes.png"  id="readyes'+str+'"/>'+$("#txt"+json.id).html());
+                    }
+                }
+            });
+        }
+    }
+
+    //点击关闭消息详情窗口
+    function hideup() {
+        $("#bookmistake").hide();
+    }
+  //时间格式化
+    function formatDate(value) {
+        if (value) {
+            Number.prototype.padLeft = function (base, chr) {
+                var len = (String(base || 10).length - String(this).length) + 1;// 获取value值的长度，如果长度大于0，就创建一个同等长度的数组
+                return len > 0 ? new Array(len).join(chr || '0') + this : this;
+            }
+            var d = new Date(value), // 创建一个当前日期对象d
+                dformat = [d.getFullYear(),// 把年格式化填充
+                        (d.getMonth() + 1).padLeft(),// 把月格式化填充
+                        d.getDate().padLeft()].join('-') + // 把日格式化填充
+                    ' ' + [d.getHours().padLeft(),// 把小时格式化填充
+                        d.getMinutes().padLeft(),// 把分钟格式化填充
+                        d.getSeconds().padLeft()].join(':');// 把秒格式化填充
+            return dformat;// 最后返回格式化好的日期和时间
+        }
+      }
 </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<div class="item" onclick="openUrl('$!{id}')">
+<div class="item" onclick="openUrl('$!{id}')" title="$!{bookname}">
 	#if($ordernum == 1)	
     <div class="flag red">
         $!{ordernum}
@@ -11,11 +11,11 @@
     <div class="flag yellow">
         $!{ordernum}
     </div>
-    #else
+    #*#else
     <div class="flag grey">
         $!{ordernum}
-    </div>
+    </div>*#
     #end
     <img class="pic" src="$!{img}" alt="">
-    <div class="name" title="$!{bookname}">$!{bookname}</div>
+    <div class="name" >$!{bookname}</div>
 </div>

@@ -1,5 +1,11 @@
 $(function () {
 
+    $('#realname').tipso({validator: "isNonEmpty", message: "姓名不能为空"});
+    $('#handphone').tipso({validator: "isNonEmpty|isMobile", message: "手机号码不能为空|手机号码格式不正确"});
+    $('#postCode').tipso({validator: "isNonEmpty", message: "邮编不能为空"});
+    $('#email').tipso({validator: "isNonEmpty|isEmail", message: "邮箱不能为空|邮箱格式不正确"});
+
+
 	
 	//文件上传
 	$("#uploadFile").uploadFile({
@@ -73,32 +79,31 @@ function getform(){
 
 function save(){
 	var data = getform();
-    if($("form").validate('submitValidate')){ //通过校验
+    if($.fireValidator()){ //通过校验
     	if ($("#progress_original").val()==1
     			&&($("#realName_original").val()!=$("#realName").val()
     			||$("#handphone_original").val()!=$("#handphone").val()
     			||$("#email_original").val()!=$("#email").val())) {
     		//修改了敏感项，若提交需要重审，询问是否提交
     		window.message.confirm(
-    				'<font color="red">真实姓名、手机、E-mail</font> 的修改将需要 人民卫生出版社 重新认证!</br><font color="red"><B>期间将暂时失去管理员权限！请慎重操作。</B></font>'
-    				,{icon: 7, title:'敏感项修改警告',btn:["仅修改非敏感项(无需重新认证)","全部修改并提交(需要重新认证)"]}
+    				'<font color="red">真实姓名、手机、E-mail</font> 的修改将需要重新进行管理员认证!</br><font color="red"></font>'
+    				,{icon: 7, title:'资料修改提醒',btn:["确定","取消"]}
     				
     				,function(index){
     					layer.close(index);
-    					//仅修改非敏感项
-    					data.realName=$("#realName_original").val();
-    					data.handphone=$("#handphone_original").val();
-    					data.email=$("#email_original").val();
-    					data.progress=-1;
-    					updateorguser(data);
+                        //提交，我要重新认证
+                        data.progress=0;
+                        updateorguser(data);
     					
     				}
     				,function(index){
     					layer.close(index);
-    					//提交，我要重新认证
-    					data.progress=0;
-    					updateorguser(data);
-    					
+                        //仅修改非敏感项
+                        // data.realName=$("#realName_original").val();
+                        // data.handphone=$("#handphone_original").val();
+                        // data.email=$("#email_original").val();
+                        // data.progress=-1;
+                        // updateorguser(data);
     				}
     				);
 		}else{

@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="${ctx}/statics/commuser/personalcenter/integral.css?t=${_timestamp}" type="text/css">
 <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
 <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+<script src="${ctx}/resources/comm/reload.js?t=${_timestamp}"></script>
 <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
 <script src="${ctx}/resources/commuser/personalcenter/integral.js?t=${_timestamp}"></script>
 </head>

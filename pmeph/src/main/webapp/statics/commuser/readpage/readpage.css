@@ -11,6 +11,13 @@
     display: block;
 }
 
+.doc {
+    float: left;
+    width: 6px;
+    height: 24px;
+    background-color: red;
+}
+
 .area1 {
     width: 100%;
     height: 412px;
@@ -114,7 +121,7 @@ ul li {
 .op-link {
     width: 376px;
     height: 400px;
-    background-color: #383837;
+    background-color: #a2a39f;
     opacity: 0.7;
     /*    background: chartreuse;*/
     float: right;
@@ -222,6 +229,7 @@ ul li {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    text-align: center;
 }
 
 .ir_03 span {
@@ -399,6 +407,7 @@ ul li {
     color: #333333;
     height: 66px;
     overflow: hidden;
+    word-break: break-all;
 }
 
 .area4 {
@@ -418,6 +427,7 @@ ul li {
 
 .hot-list {
     width: 336px;
+    margin-top: 60px;
 }
 
 .hot-list .item {
@@ -627,28 +637,30 @@ ul li {
 }
 
 .tscx_type {
-    background-color: #dbe9ea;
+    /*background-color: #dbe9ea;*/
     height: 28px;
-    margin-right: 10px;
+    /*margin-right: 10px;*/
     line-height: 28px;
     padding: 0px 9px;
     float: left;
     display: inline-block;
     cursor: pointer;
-    border-radius: 2px;
-    margin-bottom: 10px;
+    /*border-radius: 2px;*/
+    /*margin-bottom: 10px;*/
+    width: 66px;
+    text-align: center;
 }
 
 .tscx_type1 {
-    background-color: #489399;
+    border-bottom: 1px solid #ff825c
 }
 
-.tscx_type span {
-    color: #489399;
+.tscx_type div {
+    color: black;
 }
 
 .tscx_type1 span {
-    color: white;
+    color: black;
 }
 
 .re_1 {

@@ -168,7 +168,7 @@ public class AdminInfoController extends BaseController {
         orgUser.setPassword(desRun.enpsw);
      
         adminInfoService.updatePassword(orgUser);
-        
+
         return responseBean;
     }
     

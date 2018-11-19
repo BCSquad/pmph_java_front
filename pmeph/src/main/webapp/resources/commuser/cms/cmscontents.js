@@ -23,7 +23,6 @@ function queryMain(){
 			pageNum:$("#page-num-temp").val(),
 			pageSize:$("#page-size-select").find($("input[name='page-size-select']")).val()
 			};
-	
 	$.ajax({
 		type:'post',
 		url:contextpath+'cms/toPage.action?t='+new Date().getTime(),
@@ -31,7 +30,7 @@ function queryMain(){
 		dataType:'json',
 		data:data,
 		success:function(json){
-			addColum(json.page);
+			addColum(json.page,json.startNum);
 			$("#total").val(json.total);
 			
 			//刷新分页栏
@@ -49,23 +48,19 @@ function queryMain(){
 }
 
 
-function addColum(list){
+function addColum(list,startNum){
 	//清空
 	$("#tbody1").html("");
 	var str='';
 	$.each(list,function(i,n){
 		str+= '<div class="item behind" onclick="window.location.href=\''+contextpath+'articledetail/toPage.action?wid='+n.id+'\'">';
-		
-		str +='<div class="command">';
-			str +='<span style="margin-left: 5px">推荐</span>';
-				str +='</div>';
+		if(startNum<4 && i<=2) {
+			str += '<div class="command">';
+			str += '<span style="margin-left: 5px">推荐</span>';
+			str += '</div>';
+		}
 					str +='<div  class="content" >';
 						str +='<div class="content-image">';
-						/*if (n.cover == '' || n.cover == 'DEFAULT' || n.cover == null) {
-							str +='<img src="'+contextpath+'statics/testfile/p2.png" />';
-			            } else {
-			            	str+='<img src="'+contextpath+'image/'+n.cover+'.action" />';
-			            }*/
 							str+='<img src="'+contextpath+''+n.cover+'" />';
 							str +='</div>';
 								str +='<p  class="content-title"  >'+n.title+'</p>';
@@ -78,15 +73,6 @@ function addColum(list){
 										str +='</div>';
 											str +='</div>';
 												str +='<div class="ryxx">';
-													/*str +='<div class="ryxx_foot">';
-														<img src="';
-            if (n.avatar == '' || n.avatar == 'DEFAULT' || n.avatar == null) {
-                str += contextpath + 'statics/image/default_image.png';
-            } else {
-            	str+=contextpath+'image/'+n.avatar+'.action';
-            }
-            str += '" class="ryxx_tx"/>';*/
-		
             	str +='<div class="ryxx_foot"><span class="ryxx_xm" style="cursor:pointer;" onclick="window.location.href='+contextpath+'personalhomepage/tohomepage.action?userId='+n.userId+'">文章来源：'+(n.author_name==null?n.realname:n.author_name)+'</span>';
             	str +='<span class="ryxx_sj">'+n.auth_date+'</span>';
             	str +='</div>';

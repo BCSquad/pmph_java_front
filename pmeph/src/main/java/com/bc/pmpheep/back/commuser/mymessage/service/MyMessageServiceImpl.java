@@ -260,18 +260,19 @@ public class MyMessageServiceImpl implements MyMessageService {
 
 
     @Override
-    public void sendNewMsgWriterToOrg(Long orgId, String teacherName, String materialName) {
-
+	public void sendNewMsgWriterToOrg(Long orgId, String teacherName, String materialName,String user_id) {
+    	
+    	
         for (Map<String, Object> item : myMessageDao.getOrgUser(orgId)) {
-            this.sendMsg(new Short("0"), new Short("0"), 0L, new Short("3"), MapUtils.getLong(item, "id"), "系统消息", "贵校老师[" + teacherName + "]提交了《" + materialName + "》申报表，请及时进行资料审核、打印并快递申报纸质表");
+            this.sendMsg(new Short("0"), new Short("2"), Long.valueOf(user_id), new Short("3"), MapUtils.getLong(item, "id"), "系统消息", "贵校老师[" + teacherName + "]提交了《" + materialName + "》申报表，请及时进行资料审核、打印并快递申报纸质表");
         }
     }
 
     @Override
-    public void sendNewMsgWriterToPublisher(Long materialId, String teacherName, String materialName) {
+    public void sendNewMsgWriterToPublisher(Long materialId, String teacherName, String materialName,String user_id) {
         List<Map<String, Object>> list = myMessageDao.getMaterialManagers(materialId);
         for (Map<String, Object> item : list) {
-            this.sendMsg(new Short("0"), new Short("0"), 0L, new Short("1"), MapUtils.getLong(item, "director"), "系统消息", "[" + teacherName + "]提交了《" + materialName + "》申报表，请及时进行资料审核");
+            this.sendMsg(new Short("0"), new Short("2"), Long.valueOf(user_id), new Short("1"), MapUtils.getLong(item, "director"), "系统消息", "[" + teacherName + "]提交了《" + materialName + "》申报表，请及时进行资料审核");
         }
     }
 
@@ -281,24 +282,32 @@ public class MyMessageServiceImpl implements MyMessageService {
     }
 
     @Override
-    public void sendNewNoticeOrgToWriter(String type, Long receiverWriterId, String schoolName) {
+    public void sendNewNoticeOrgToWriter(String type, Long receiverWriterId, Map<String, Object> userInfo) {
+    	String schoolName = MapUtils.getString(userInfo, "org_name");
+    	Long senderId = Long.parseLong(MapUtils.getString(userInfo, "id")!=null?MapUtils.getString(userInfo, "id"):"0");
         if (type.equals("1")) {
-            this.sendMsg(new Short("0"), new Short("0"), 0L, new Short("2"), receiverWriterId, "系统消息", "恭喜！您提交的教师认证资料已通过[" + schoolName + "]管理员审核");
+            this.sendMsg(new Short("0"), new Short("3"), senderId, new Short("2"), receiverWriterId, "系统消息", "恭喜！您提交的教师认证资料已通过[" + schoolName + "]管理员审核");
         } else {
-            this.sendMsg(new Short("0"), new Short("0"), 0L, new Short("2"), receiverWriterId, "系统消息", "抱歉，您提交的教师认证资料已被[" + schoolName + "]管理员退回，请您核对后重试");
+            this.sendMsg(new Short("0"), new Short("3"), senderId, new Short("2"), receiverWriterId, "系统消息", "抱歉，您提交的教师认证资料已被[" + schoolName + "]管理员退回，请您核对后重试");
         }
 
     }
 
     @Override
-    public void sendNewNoticeDeclare(String type, Long receiverWriterId, String materialName) {
+    public void sendNewNoticeDeclare(String type, Long receiverWriterId, String materialName,Map<String, Object> userInfo) {
         if (type.equals("1")) {
-            this.sendMsg(new Short("0"), new Short("0"), 0L, new Short("2"), receiverWriterId, "系统消息", "恭喜！您提交的《" + materialName + "》申报表已通过[学校管理员/出版社]审核");
+            this.sendMsg(new Short("0"), new Short("3"), 0L, new Short("2"), receiverWriterId, "系统消息", "恭喜！您提交的《" + materialName + "》申报表已通过[学校管理员/出版社]审核");
         } else {
-            this.sendMsg(new Short("0"), new Short("0"), 0L, new Short("2"), receiverWriterId, "系统消息", " 抱歉，您提交的《" + materialName + "》申报表被[学校管理员/出版社]退回，请您核对后重试");
+            this.sendMsg(new Short("0"), new Short("3"), 0L, new Short("2"), receiverWriterId, "系统消息", " 抱歉，您提交的《" + materialName + "》申报表被[学校管理员/出版社]退回，请您核对后重试");
         }
 
     }
 
+    @Override
+    public void sendTeacherMsg(Long orgId, String teacherName,String date,Long senderId) {
+        for (Map<String, Object> item : myMessageDao.getOrgUser(orgId)) {
+            this.sendMsg(new Short("0"), new Short("2"), senderId, new Short("3"), MapUtils.getLong(item, "id"), "系统消息",  teacherName + "于"+date+"提交了教师资格认证，请您尽快审核。");
+        }
+    }
 
 }

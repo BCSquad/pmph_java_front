@@ -15,6 +15,7 @@ body
     background-color:White;
 }
 
+
 .sxy_span{
 	float: left;
 	margin-left: 32px;
@@ -41,7 +42,20 @@ body
 	float:left;
 	border-bottom:2px solid #333333;
     }
-    
+
+.sxy-div-menu1
+{
+
+	font-size: 16px;
+	font-weight: normal;
+	height:50px;
+	line-height: 50px;
+	letter-spacing: 0px;
+	color: #999999;
+	margin-left:20px;
+	cursor:pointer;
+	float:left;
+}
  /*深色页头二级菜单点击出现下划线*/
  .sxy-span-menu{
     border-bottom:2px solid #333333;
@@ -82,27 +96,57 @@ body
 	line-height: 120px;
 	color: #fff;
 }
-#sxy-font-1
-{
-    float:left;
 
-	text-decoration: none;
+#sxy-font-1{
+	cursor: pointer;
+	margin-top: -25px;
+	width: 88px;
+	height: 26px;
+	border: none;
+	border-radius: 2px;
 	font-size: 14px;
-	letter-spacing: 0px;
-	color: #333333;
+	color: black;
+	text-align: center;
+	margin-left: 320px;
 }
+
+#sxy-font-1:before{
+	float: left;
+	content: '';
+	background-image: url("../../image/a2.png");
+	background-size: 100%;
+	width: 20px;
+	height: 20px;
+}
+
+#person_SB:before{
+	content: '';
+	background-image: url("../../image/a1.png");
+	float: left;
+	background-size: 100%;
+	width: 20px;
+	height: 20px;
+}
+
+#sxy-font-2:before{
+	content: '';
+	background-image: url("../../image/a3.png");
+	float: left;
+	width: 20px;
+	height: 23px;
+	background-size: 100%;
+}
+
 
 #sxy-font-2
 {
 	float:left;
-	margin-top:10px;
+	margin-top:-27px;
 	margin-left:-56px;
-
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
 	letter-spacing: 0px;
-	color: #e52e2e;
 }
 /*基本信息几个字样式*/
 #sxy-font-3

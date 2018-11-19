@@ -36,6 +36,12 @@
 <body>
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="content-wrapper">
+    <input type="hidden" id="sid" value="${sid }"/>
+
+    <input type="hidden" id="pagenum" value="${pagenum }"/>
+    <input type="hidden" id="pagesize" value="${pagesize }"/>
+    <input type="hidden" id="total" value="${total }"/>
+    <input type="hidden" id="pagetotal" value="${pagetotal }"/>
     <div class="navigation">
         <a href="homepage/tohomepage.action">首页</a>&gt;
         <a href="community/tolist.action">教材社区</a>&gt;${notice.title }
@@ -80,6 +86,29 @@
             <div class="right"><a href="cmsinfoletters/tolist.action?materialId=${notice.material_id }">全部&gt;&gt;</a>
             </div>
         </div>
+        <div class="report"  style="float:right ">
+            <div class="left">
+                <div style="background-image: url(${ctx}/statics/image/r2.png);width:25px;height:100px;
+                        margin-left:10px;margin-top:34px"></div>
+            </div>
+            <div class="center">
+                <c:forEach items="${activitiList}" var="list" varStatus="status">
+                    <div title=""   class="center-up"
+                         onclick="window.location.href='<c:url value="/teacherPlatform/todetail.action?id=${list.cms_id}&activity_id=${list.activity_id}"/>'">
+                        <div class="center-img" >
+                            <img alt="" src="${ctx}/image/${list.cover}.action" style="display:block;width:120px;max-height:80px;margin: auto">
+                            <%--<img alt="" src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg" style="width:120px;height:80px;">--%>
+                        </div>
+                        <div class="center-down" >${list.activity_name}</div>
+                    </div>
+                </c:forEach>
+            </div>
+            <c:if test="${size>3}">
+                <div class="right"><a href="community/toactivitylist.action?material_id=${material_id}">更多&gt;&gt;</a></div>
+            </c:if>
+        </div>
+    </div>
+    <div class="pagecontent">
         <div class="book">
             <div class="bhead">
                 <div class="headicon"></div>
@@ -112,12 +141,32 @@
                 </c:if>
             </div>
             <div style="clear: both"></div>
+
+
+            <div style="text-align: right;">
+                <ul class="pagination" id="page1">
+                </ul>
+                <div style="display: inline-block;vertical-align: top;text-align:left;">
+                    <select id="edu" name="edu">
+                        <option value="5"  ${pagesize=='5'? 'selected':'' }>每页5条</option>
+                        <option value="10" ${pagesize=='10'? 'selected':'' }>每页10条</option>
+                        <option value="15" ${pagesize=='15'? 'selected':'' } >每页15条</option>
+                        <option value="20" ${pagesize=='20'? 'selected':'' }>每页20条</option>
+                    </select>
+                </div>
+                <div class="pageJump">
+                    <span>共${pagetotal }页，共${total }条数据，跳转到</span>
+                    <input type="text"/>
+                    <span class="pp">页</span>
+                    <button type="button" class="button">确定</button>
+                </div>
+            </div>
+
             <div class="div_butt">
                 <div class="bt_tj" onclick="toMain()">返回</div>
             </div>
         </div>
-    </div>
-    <div class="pageright">
+        <div class="pageright">
         <div class="rhead">
             <div class="item select" id="comment" onclick="comments('${notice.material_id }')">
                 精选书评
@@ -148,6 +197,7 @@
         </div>
         <div class="more" id="more"><a
                 href="community/morecomments.action?materialId=${notice.material_id}">查看更多精选书评</a></div>
+    </div>
     </div>
     <div style="clear:both;width:100%"></div>
 </div>

@@ -1,10 +1,42 @@
 //定义一个全局变量
 
-var jsonRequiredEleId = [
-                         {id:"bookname",content:"选题名称不能为空"}
-                         ];
+// var jsonRequiredEleId = [
+//                         {id:"bookname",content:"选题名称不能为空"},
+//                         {id:"realname",content:"主编姓名不能为空"},
+//                         {id:"price",content:"年龄不能为空"},
+//                         {id:"position",content:"行政职务不能为空"},
+//                         {id:"workplace",content:"工作单位不能为空"},
+//                         {id:"phone",content:"电话不能为空"},
+//                         {id:"email",content:"邮箱不能为空"},
+//                         {id:"address",content:"通讯地址不能为空"},
+//                         {id:"extra_achievement",content:"主要专业成就及学术地位不能为空"},
+//                         {id:"extra_reason",content:"选题理由及出版价值不能为空"},
+//                         {id:"extra_score",content:"主要内及特色不能为空"},
+//                          ];
 
 $(function () {
+
+    setTimeout(function () {
+        $('#bookname').tipso({validator: "isNonEmpty", message: "选题名称不能为空"});
+        $('#realname').tipso({validator: "isNonEmpty", message: "主编姓名不能为空"});
+        $('#price').tipso({validator: "isNonEmpty", message: "年龄不能为空"});
+        $('#position').tipso({validator: "isNonEmpty", message: "行政职务不能为空"});
+        $('#workplace').tipso({validator: "isNonEmpty", message: "工作单位不能为空"});
+        $('#phone').tipso({validator: "isNonEmpty", message: "电话号码不能为空"});
+        $('#email').tipso({validator: "isNonEmpty|isEmail", message: "邮箱不能为空|邮箱格式不正确"});
+        $('#postcode').tipso({validator: "isNonEmpty", message: "邮编不能为空"});
+        $('#address').tipso({validator: "isNonEmpty", message: "通讯地址不能为空"});
+        $('#extra_achievement').tipso({validator: "isNonEmpty", message: "主要专业成就及学术地位不能为空"});
+        $('#extra_reason').tipso({validator: "isNonEmpty", message: "选题理由及出版价值不能为空"});
+        $('#extra_score').tipso({validator: "isNonEmpty", message: "主要内及特色不能为空"});
+        $('#dzdx').tipso({validator: "isNonEmpty", message: "请选择读者对象"});
+        $('#xzly').tipso({validator: "isNonEmpty", message: "请选择选题来源"});
+        $('#sex').tipso({validator: "isNonEmpty", message: "请选择性别"});
+        $('#position_profession').tipso({validator: "isNonEmpty", message: "请选择专业职务"});
+        $('#degree').tipso({validator: "isNonEmpty", message: "请选择专业职务"});
+    },0)
+
+
     $('#dzdx').selectlist({
         width: 213,
         height: 30,
@@ -137,14 +169,14 @@ function add_similar(){
     var num = fnt();
     var $table = $("#similar");
     var $tr = $("<tr id='similar_"+num+"'>"+
-        "<td><input class='sb_input' style='width: 230px;' id='similar_bookname_"+num+"' name='similar_bookname'  maxlength='40' value=''/></td>"+
-        "<td><input class='sb_input' style='width: 80px;' id='similar_edition_"+num+"' name='similar_edition'  maxlength='2' value='' onkeyup=\"this.value=this.value.replace(/\\D/g,'')\" onafterpaste=\"this.value=this.value.replace(/\\D/g,'')\"/></td>"+
-        "<td><input class='sb_input' style='width: 80px;' id='similar_author_"+num+"' name='similar_author'  maxlength='100' value=''/></td>"+
-        "<td><input class='sb_input' style='width: 80px;' id='similar_booksize_"+num+"' name='similar_booksize'  maxlength='20' value=''/></td>"+
-        "<td><input class='sb_input' style='width: 160px;' id='similar_publisher_"+num+"' name='similar_publisher'  maxlength='100' value=''/></td>"+
-        "<td><input class='sb_input' style='width: 80px;' id='similar_print_number_"+num+"' name='similar_print_number'  maxlength='20' value=''/></td>"+
-        "<td><input class='sb_input' style='width: 80px;' id='similar_price_"+num+"' name='similar_price'  maxlength='20' value=''/></td>"+
-        "<td><input class='sb_input' style='width: 130px;' id='similar_publish_date_"+num+"' name='similar_publish_date'  calendar format=\"'yyyy-mm-dd'\" value=''/></td>"+
+        "<td><input class='sb_input' style='width: 230px;' placeholder=\"书名\" id='similar_bookname_"+num+"' name='similar_bookname'  maxlength='40' value=''/></td>"+
+        "<td><input class='sb_input' style='width: 80px;' placeholder=\"版次\" id='similar_edition_"+num+"' name='similar_edition'  maxlength='2' value='' onkeyup=\"this.value=this.value.replace(/\\D/g,'')\" onafterpaste=\"this.value=this.value.replace(/\\D/g,'')\"/></td>"+
+        "<td><input class='sb_input' style='width: 80px;' placeholder=\"作者\" id='similar_author_"+num+"' name='similar_author'  maxlength='100' value=''/></td>"+
+        "<td><input class='sb_input' style='width: 80px;' placeholder=\"开本\" id='similar_booksize_"+num+"' name='similar_booksize'  maxlength='20' value=''/></td>"+
+        "<td><input class='sb_input' style='width: 160px;' placeholder=\"出版单位\" id='similar_publisher_"+num+"' name='similar_publisher'  maxlength='100' value=''/></td>"+
+        "<td><input class='sb_input' style='width: 80px;' placeholder=\"印数\" id='similar_print_number_"+num+"' name='similar_print_number'  maxlength='20' value=''/></td>"+
+        "<td><input class='sb_input' style='width: 80px;' placeholder=\"定价\" id='similar_price_"+num+"' name='similar_price'  maxlength='20' value=''/></td>"+
+        "<td><input class='sb_input' style='width: 130px;' placeholder=\"出版时间\" id='similar_publish_date_"+num+"' name='similar_publish_date'  calendar format=\"'yyyy-mm-dd'\" value=''/></td>"+
         "<input type='hidden' name='checkbzqk' value='similar_bookname_"+num+",similar_edition_"+num+",similar_author_"+num+",similar_booksize_"+num+",similar_publisher_"+num+",similar_publish_date_"+num+"'/>" +
         "<td><div class='add_div'><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('similar_"+num+"')\"></div></td>"+
         "</tr>");
@@ -177,24 +209,59 @@ function buttAdd(type){
             }
         });
     }else{
-        checkLb();
-        if(checkNull(jsonRequiredEleId)){
+        //checkLb();
+        if($.fireValidator()){
             //避免重复点击
             document.getElementById('buzc').onclick=function(){window.message.warning("请不要重复点击");};
             document.getElementById('butj').onclick=function(){window.message.warning("请不要重复点击");};
-            $.ajax({
-                type: "POST",
-                url:contextpath+'bookdeclare/doBookdeclareAdd.action?stype='+type,
-                data:$('#objForm').serialize(),// 您的formid
-                async: false,
-                dataType:"json",
-                success: function(json) {
-                    if(json.msg=='OK'){
-                        window.message.success("添加成功,正在跳转页面");
-                        window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=wycs";
-                    }
+            window.message.confirm(
+                "确定提交吗？"
+                ,{icon: 7, title:'提示',btn:["确定","取消"]}
+
+                ,function(index){
+                    layer.close(index);
+                    $.ajax({
+                        type: "POST",
+                        url:contextpath+'bookdeclare/doBookdeclareAdd.action?stype='+type,
+                        data:$('#objForm').serialize(),// 您的formid
+                        async: false,
+                        dataType:"json",
+                        success: function(json) {
+                            if(json.msg=='OK'){
+                                window.message.success("添加成功,正在跳转页面");
+
+                                var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
+                                $.ajax({
+                                    type: 'get',
+                                    url: exportWordBaseUrl + '/frontWxMsg/topicSubmit/'+json.topic_id+"/"+json.user_id,
+                                    dataType: 'jsonp',
+                                    jsonp:"callback", //这里定义了callback在后台controller的的参数名
+                                    jsonpCallback:"getMessage", //这里定义了jsonp的回调函数名。 那么在后台controller的相应方法其参数“callback”的值就是getMessage
+                                    success:function(wxResult){
+                                        if(wxResult=="1"){
+                                            //window.message.success("微信消息发送成功");
+                                            setTimeout(function(){
+                                                window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=wycs";
+                                            }, 800);
+                                        }
+                                    },
+                                    error:function(XMLHttpRequest, textStatus){
+                                        setTimeout(function(){
+                                            window.location.href=contextpath+"personalhomepage/tohomepage.action?pagetag=wycs";
+                                        }, 800);
+                                    }
+                                });
+
+
+                            }
+                        }
+                    });
+
                 }
-            });
+                ,function(index){
+                    layer.close(index);
+                }
+            );
         }
     }
 }

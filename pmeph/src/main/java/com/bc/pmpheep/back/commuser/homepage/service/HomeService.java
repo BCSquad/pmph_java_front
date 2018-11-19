@@ -121,5 +121,20 @@ public interface HomeService {
      *
      */
     int queryHotCommentListCount();
+    /**
+     * 根据书籍类型查询总条数
+     * @return
+     */
+    int querySize(String type);
+    /**
+     * 根据产品类型查询详情
+     * @return
+     */
+    List<Map<String,Object>> quertProductByType(String product_type);
+    /**
+     * 查询首页师资平台
+     * @return
+     */
+    List<Map<String,Object>> Queryszpt();
 
 }

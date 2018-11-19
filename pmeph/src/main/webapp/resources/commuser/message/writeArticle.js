@@ -189,17 +189,7 @@ $(function () {
     });
 
 
-    $(".upload-image button").uploadFile({
-        accept: "image/*",
-        start: function () {
-        },
-        done: function (filename, fileid) {
-            $("#image").val(fileid);
-            $("#imageName").val(filename);
-            $(".upload-image .fileinfo .filename").text(filename);
-            $(".upload-image .fileinfo .preview").show();
-        }
-    });
+    
     
     if ($("#image").val().length>0) {
     	$(".upload-image .fileinfo .preview").show();
@@ -223,5 +213,26 @@ $(function () {
 
     })
 
-
+    //当浏览器窗口大小改变时监听事件
+    window.onresize = function(){
+        $(".hidden-upload").remove();
+        refresh();
+    }
+  //加载上传插件隐藏域
+    refresh();
 });
+
+
+function refresh() {
+    $(".upload-image .button").uploadFile({
+        accept: "image/*",
+        start: function () {
+        },
+        done: function (filename, fileid) {
+            $("#image").val(fileid);
+            $("#imageName").val(filename);
+            $(".upload-image .fileinfo .filename").text(filename);
+            $(".upload-image .fileinfo .preview").show();
+        }
+    });
+}
