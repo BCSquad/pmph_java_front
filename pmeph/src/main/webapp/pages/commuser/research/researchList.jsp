@@ -56,7 +56,7 @@
                             <td><div class="font">${list.intro}</div></td>
                             <td><div class="font">${list.material_name}</div></td>
                             <td><div class="font">${list.end_date == null?'永久有效':list.end_date}</div></td>
-                            <td><div class="font">${list.gmt_create == null?'暂未填写':list.end_date}</div></td>
+                            <td><div class="font">${list.gmt_create == null?'暂未填写':list.gmt_create}</div></td>
                              <%--${list.gmt_create == null?'<td class="rt" onclick="add(${list.id})">填写</td>':'<td class="rt">查看</td>'}--%>
                             <c:if test="${list.gmt_create == null }">
                                 <div><td class="rt" onclick="add(${list.id})"><font style="color: #337AB7;">填写</font></div></td>
