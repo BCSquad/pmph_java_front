@@ -428,7 +428,7 @@
                         back();
                     }
                 } else {
-                    window.message.error("请至少填写一项");
+                    window.message.error("请填写所有的未填项");
 
                 }
 
