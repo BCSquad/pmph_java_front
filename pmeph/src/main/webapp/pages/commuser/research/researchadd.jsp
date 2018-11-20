@@ -290,7 +290,7 @@
                 </table>
                 <div style="text-align: center;margin-right: 15%;">
                     <button id="commit" class="btn-2" onclick="commit()"> 提交</button>
-                    <button class="btn-2" onclick="back()">关闭</button>
+                    <button class="btn-2" onclick="back()">返回</button>
                 </div>
             </div>
         </div>
@@ -400,7 +400,7 @@
     }
 
     function back() {
-        window.location.replace(document.referrer)
+       window.history.back();
     }
 
     function commit() {
