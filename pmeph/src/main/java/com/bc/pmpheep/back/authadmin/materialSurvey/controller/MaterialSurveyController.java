@@ -160,6 +160,9 @@ public class MaterialSurveyController extends BaseController {
     @ResponseBody
     public Map<String, Object> fillSurveyQuestion(@RequestBody String json, HttpServletRequest request) throws ParseException {
         Map<String, Object> writerUser = this.getUserInfo();
+        Integer integer = 0;
+        Map<String, Object> map = new HashMap<>();
+        try {
         if (writerUser.get("latest_login_time") == null || writerUser.get("latest_login_time").toString().length() < 1) {
             writerUser.put("latest_login_time", new Date());
         }
@@ -220,9 +223,9 @@ public class MaterialSurveyController extends BaseController {
 
             fillMateriallSurveyQuestionVOS.add(fillMateriallSurveyQuestionVO);
         }
-        Integer integer = 0;
-        Map<String, Object> map = new HashMap<>();
-        try {
+
+
+
             integer = materialSurveyService.fillSurveyQuestion(fillMateriallSurveyQuestionVOS);
         } catch (Exception e) {
             e.printStackTrace();

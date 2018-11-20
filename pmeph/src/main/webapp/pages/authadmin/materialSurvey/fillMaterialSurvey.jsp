@@ -428,8 +428,8 @@
                         back();
                     }
                 } else {
-                    window.message.error("后台错误");
-                    back();
+                    window.message.error("请至少填写一项");
+
                 }
 
 
