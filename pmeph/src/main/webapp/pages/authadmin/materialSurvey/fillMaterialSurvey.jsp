@@ -405,7 +405,8 @@
     }
 
     function back() {
-        window.location.replace(document.referrer)
+        var material_id=$("#material_id").val();
+        window.location.href = "${ctx}/orgSurvey/tolist.action?materialId="+material_id;
     }
 
     function commit() {
@@ -421,12 +422,13 @@
             success: function (res) {
                 if (res.code >= 1) {
                     window.message.success("填写成功");
-                    var material_id=$("#material_id").val();
-                    if(!!$("#state").val()){
-                        window.location.href='${ctx}/material/MaterialDetailRedirect.action?material_id='+material_id;
-                    }else{
-                        back();
-                    }
+                    setTimeout(
+                        function() {
+                            /* window.location.href = contextpath
+                                    + "userinfo/touser.action?id="
+                                    + $("#userId").val(); */
+                           back();
+                        }, 1000);
                 } else {
                     window.message.error("请填写所有的未填项");
 

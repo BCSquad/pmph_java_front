@@ -405,4 +405,14 @@ public class MaterialSurveyController extends BaseController {
         List<Map<String,Object>> list = materialSurveyService.querySearchByTextbookId(textbook_id);
         return list;
     }
+
+    //查询登录用户已经填写过的调研表
+    @RequestMapping("queryAnswer")
+    @ResponseBody
+    public List<Map<String,Object>> queryAnswer(HttpServletRequest request){
+        String material_id=request.getParameter("material_id");
+        String user_id = request.getParameter("user_id");
+        List<Map<String,Object>> list = materialSurveyService.queryAnswer(material_id,user_id);
+        return list;
+    }
 }

@@ -76,6 +76,9 @@ public class MaterialSurveyServiceImpl implements MaterialSurveyService {
         return materialSurveyDao.getMaterialByid(id);
     }
 
-
+    @Override
+    public List<Map<String, Object>> queryAnswer(String material_id, String user_id) {
+        return materialSurveyDao.queryAnswer(material_id,user_id);
+    }
 
 }

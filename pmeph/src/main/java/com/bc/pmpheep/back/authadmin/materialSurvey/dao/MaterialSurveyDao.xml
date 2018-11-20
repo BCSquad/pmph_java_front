@@ -39,7 +39,7 @@
 		from material_survey t
 		left join material_survey_question_answer b on  b.survey_id=t.id
 		and b.user_id=#{parameter.id}
-		left JOIN (select *,max(required) as required2  from material_survey_chain GROUP BY material_id )c on c.material_id= t.material_id and t.id=c.material_survey_id
+		left JOIN (select *,max(required) as required2  from material_survey_chain GROUP BY  material_survey_id )c on c.material_id= t.material_id and t.id=c.material_survey_id
 		where
 		<choose>
 			<when test="parameter.materialId !=null">
@@ -143,5 +143,13 @@
             left join material_survey_question_answer a on a.survey_id=b.id
             where t.textbook_id in ${textbook_id} and b.all_textbook_used=0 and b.type_id != 1 and b.status=1
             group by b.id
+    </select>
+
+	<select id="queryAnswer" parameterType="java.util.Map" resultType="java.util.Map">
+        select t.title,t.id,max(t.id),a.gmt_create
+            from material_survey t
+            left join material_survey_question_answer a on a.survey_id=t.id
+            and a.user_id=#{user_id}  where t.material_id=#{material_id}
+            and a.gmt_create is not null group by t.id
     </select>
 </mapper>
