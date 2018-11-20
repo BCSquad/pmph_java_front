@@ -61,7 +61,7 @@
                     <c:if test="${material == null}">
                         <td id="btn-search" onclick="queryList()">查询</td>
                     </c:if>
-                    <button class="tohis" onclick="window.history.back()">返回</button>
+                    <button class="tohis" onclick="back()">返回</button>
                 </div>
                 <div class="table-area">
                     <table>
@@ -85,7 +85,14 @@
                                     <td>是</td>
                                 </c:if>
                                 <c:if test="${list.required_for_material == false}">
-                                    <td>否</td>
+
+                                    <c:if test="${list.required2 == true}">
+                                        <td>是</td>
+                                    </c:if>
+                                    <c:if test="${list.required2 == null}">
+                                        <td>否</td>
+                                    </c:if>
+
                                 </c:if>
 
 
@@ -171,10 +178,13 @@
         window.location.href = "${ctx}/orgSurvey/tolist.action?state="+ state +"&required="+required+ "&materialId=" +${material.id};
     }
     function fillMaterialSurvey(str) {
-        window.location.href = "${ctx}/orgSurvey/fillSurveyById.action?surveyId=" + str;
+        window.location.href = "${ctx}/orgSurvey/fillSurveyById.action?surveyId=" + str+ "&material_id=" +${material.id};
     }
     function surveyDetails(str) {
-        window.location.href = "${ctx}/orgSurvey/surveyDetailsById.action?surveyId=" + str;
+        window.location.href = "${ctx}/orgSurvey/surveyDetailsById.action?surveyId=" + str+ "&material_id=" +${material.id};
+    }
+    function back() {
+        window.location.href = "${ctx}/applyDocAudit/toPage.action";
     }
 
     window.onpageshow = function(event) {

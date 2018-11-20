@@ -754,6 +754,7 @@
 			</div>
 			<hr style=" height:1px;border:none;border-top:1px #999999 dashed;margin-top: 30px;">
 		</div>
+		<jsp:include page="/pages/authadmin/materialSurvey/searchSList.jsp"></jsp:include>
 			<div class="button">
 			<c:choose>
 					 <c:when test="${view_audit=='audit'}">
@@ -781,5 +782,15 @@
 <div style="width: 100%;padding: 0;margin: auto;border:none;overflow: hidden;">
 		<jsp:include page="/pages/comm/tail.jsp"></jsp:include> 
 </div>
+<script >
+   $(function(){
+       querySearchByTextbookId();
+   })
+
+    //跳转到调研表查看页面
+    function tolook(id) {
+        window.location.href ="${ctx}/orgSurvey/surveyDetailsById.action?surveyId=" + id;
+    }
+</script>
 </body>
 </html>

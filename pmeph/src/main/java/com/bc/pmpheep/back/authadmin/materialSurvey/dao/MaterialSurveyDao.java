@@ -6,6 +6,7 @@ import com.bc.pmpheep.back.authadmin.materialSurvey.bean.MaterialSurveyQuestion;
 import com.bc.pmpheep.back.authadmin.materialSurvey.bean.MaterialSurveyQuestionAnswer;
 import com.bc.pmpheep.back.authadmin.materialSurvey.bean.MaterialSurveyQuestionOption;
 import com.bc.pmpheep.back.plugin.PageParameter;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -23,5 +24,5 @@ public interface MaterialSurveyDao {
     MaterialSurvey getSurveyById(Long id);
     Material getMaterialByid(Long id);
     Integer checkFile(Map<String, Object> parameter);
-
+    List<Map<String,Object>> querySearchByTextbookId(@Param("textbook_id") String textbook_id);
 }
