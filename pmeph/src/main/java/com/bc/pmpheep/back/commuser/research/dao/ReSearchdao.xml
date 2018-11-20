@@ -24,7 +24,7 @@
     <!--查询与教材无关调研表总数-->
     <select id="queryCount" resultType="Integer">
         select count(*) from ( select id
-        from material_survey where material_id is null and type_id != 1 )q
+        from material_survey where  type_id != 1 and status=1)q
     </select>
 
     <!--根据调研表ID查询问题及选项-->
