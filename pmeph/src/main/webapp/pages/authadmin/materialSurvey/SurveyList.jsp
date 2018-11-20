@@ -89,9 +89,13 @@
                                     <c:if test="${list.required2 == true}">
                                         <td>是</td>
                                     </c:if>
+                                    <c:if test="${list.required2 == false}">
+                                        <td>否</td>
+                                    </c:if>
                                     <c:if test="${list.required2 == null}">
                                         <td>否</td>
                                     </c:if>
+
 
                                 </c:if>
 

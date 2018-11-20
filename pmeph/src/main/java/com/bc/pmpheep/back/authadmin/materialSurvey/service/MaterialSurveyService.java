@@ -51,4 +51,5 @@ public interface MaterialSurveyService {
     List<MaterialSurveyQuestionAnswer> getSurveyQuestionAnswerByQuestionId(Map<String,Object> Parameter);
     Integer checkFile(Map<String, Object> parameter);
    List<Map<String, Object>> querySearchByTextbookId(String textbook_id);
+    List<Map<String,Object>> queryAnswer(String material_id,String user_id);
 }
