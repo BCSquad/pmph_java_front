@@ -45,6 +45,11 @@ public class MaterialSurveyServiceImpl implements MaterialSurveyService {
     }
 
     @Override
+    public List<Map<String, Object>> querySearchByTextbookId(String textbook_id) {
+        return materialSurveyDao.querySearchByTextbookId(textbook_id);
+    }
+
+    @Override
     public Integer fillSurveyQuestion(List<MaterialSurveyQuestionAnswer> materialSurveyQuestionAnswer) {
         return materialSurveyDao.insertQuestionAnswer(materialSurveyQuestionAnswer);
     }

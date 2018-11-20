@@ -421,15 +421,15 @@
             success: function (res) {
                 if (res.code >= 1) {
                     window.message.success("填写成功");
+                    var material_id=$("#material_id").val();
                     if(!!$("#state").val()){
-                        var material_id=$("#material_id").val();
-                        window.location.href=contextpath+'/material/MaterialDetailRedirect.action?material_id='+material_id;
+                        window.location.href='${ctx}/material/MaterialDetailRedirect.action?material_id='+material_id;
                     }else{
                         back();
                     }
                 } else {
-                    window.message.error("后台错误");
-                    back();
+                    window.message.error("请填写所有的未填项");
+
                 }
 
 

@@ -46,7 +46,7 @@
             from material_survey t
 			left join material_survey_question_answer a on  a.survey_id=t.id and a.user_id=#{user_id}
             where t.material_id=#{material_id}  and  t.all_textbook_used=1 and t.type_id != 1
-            group by a t.id
+            group by t.id
     </select>
 
     <!--查询与教材下图书有关的调研表-->
