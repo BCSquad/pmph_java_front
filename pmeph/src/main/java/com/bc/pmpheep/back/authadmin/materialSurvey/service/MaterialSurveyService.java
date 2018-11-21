@@ -44,12 +44,44 @@ public interface MaterialSurveyService {
 
     PageResult<Map<String, Object>> querySearchList(PageParameter<Map<String, Object>> pageParameter);
 
+    /**
+     * 根据问卷id获取问卷对象
+     * @param id
+     * @return
+     */
     MaterialSurvey getSurveyById(Long id);
-
+    /**
+     * 根据教材id获取教材对象
+     * @param id
+     * @return
+     */
     Material getMaterialByid(Long id);
-
+    /**
+     * 根据问题id获取问题回答列表
+     * @param id
+     * @return
+     */
     List<MaterialSurveyQuestionAnswer> getSurveyQuestionAnswerByQuestionId(Map<String,Object> Parameter);
+
+    /**
+     * 检查是否填写必填项
+     * @param id
+     * @return
+     */
     Integer checkFile(Map<String, Object> parameter);
+
+    /**
+     * 根据图书id查询调研表
+     * @param textbook_id
+     * @return
+     */
    List<Map<String, Object>> querySearchByTextbookId(String textbook_id);
+
+    /**
+     *   查询申请用户已经填写过的调研表
+     * @param material_id
+     * @param user_id
+     * @return
+     */
     List<Map<String,Object>> queryAnswer(String material_id,String user_id);
 }
