@@ -405,8 +405,9 @@
     }
 
     function back() {
-        var material_id=$("#material_id").val();
-        window.location.href = "${ctx}/orgSurvey/tolist.action?materialId="+material_id;
+
+
+        window.location.href = "${ctx}/orgSurvey/tolist.action?materialId="+'${res.material_id}';
     }
 
     function commit() {

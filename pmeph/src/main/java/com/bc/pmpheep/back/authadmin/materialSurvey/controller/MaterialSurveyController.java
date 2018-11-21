@@ -356,6 +356,7 @@ public class MaterialSurveyController extends BaseController {
         Map<String, Object> map = new HashMap<>();
         map.put("survey", materialSurveyVO);
         map.put("type", "view");
+        map.put("material_id",request.getParameter("material_id"));
         mv.addObject("res", map);
         mv.setViewName("authadmin/materialSurvey/fillMaterialSurvey");
         return mv;
@@ -406,7 +407,7 @@ public class MaterialSurveyController extends BaseController {
         return list;
     }
 
-    //查询登录用户已经填写过的调研表
+    //查询申请用户已经填写过的调研表
     @RequestMapping("queryAnswer")
     @ResponseBody
     public List<Map<String,Object>> queryAnswer(HttpServletRequest request){
