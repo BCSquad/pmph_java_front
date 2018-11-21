@@ -405,9 +405,13 @@
     }
 
     function back() {
+        var material_id=$("#material_id").val();
+        if(material_id){
+            window.location.href = "${ctx}/orgSurvey/tolist.action?materialId="+'${res.material_id}';
+        }else{
+            window.location.replace(document.referrer)
+        }
 
-
-        window.location.href = "${ctx}/orgSurvey/tolist.action?materialId="+'${res.material_id}';
     }
 
     function commit() {
