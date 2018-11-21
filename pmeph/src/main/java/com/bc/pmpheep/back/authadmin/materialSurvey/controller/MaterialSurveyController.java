@@ -131,20 +131,17 @@ public class MaterialSurveyController extends BaseController {
         materialSurveyVO.setMaterialSurveyQuestionList(materialSurveyQuestionVOS);
 
         String material_id=request.getParameter("material_id");
+        String from=request.getParameter("state");
         Map<String, Object> map = new HashMap<>();
-        if(StringUtil.notEmpty(material_id)){
-            //mv.addObject("state",1);
-            map.put("state","1");
-        }else{
-            //mv.addObject("state",2);
-            map.put("state","1");
-        }
-        // mv.addObject("material_id",material_id);
         map.put("material_id",material_id);
-        //机构用户基本信息
         map.put("survey", materialSurveyVO);
+        if("fromwrtlist".equals(from)||"frommaterial".equals(from)){
+            map.put("from",from);
+            mv.setViewName("commuser/research/researchadd");
+        }else{
+            mv.setViewName("authadmin/materialSurvey/fillMaterialSurvey");
+        }
         mv.addObject("res", map);
-        mv.setViewName("authadmin/materialSurvey/fillMaterialSurvey");
         return mv;
     }
 
@@ -351,11 +348,19 @@ public class MaterialSurveyController extends BaseController {
             materialSurveyQuestionVOS.add(materialSurveyQuestionVO);
         }
         materialSurveyVO.setMaterialSurveyQuestionList(materialSurveyQuestionVOS);
-
+        String from=request.getParameter("state");
         //机构用户基本信息
         Map<String, Object> map = new HashMap<>();
         map.put("survey", materialSurveyVO);
         map.put("type", "view");
+        if("fromwrtlist".equals(from)||"frommaterial".equals(from)){
+            map.put("from",from);
+            mv.setViewName("commuser/research/researchadd");
+        }else{
+            mv.setViewName("authadmin/materialSurvey/fillMaterialSurvey");
+        }
+        map.put("material_id",request.getParameter("material_id"));
+        mv.addObject("res", map);
         mv.addObject("res", map);
         mv.setViewName("authadmin/materialSurvey/fillMaterialSurvey");
         return mv;
@@ -406,7 +411,7 @@ public class MaterialSurveyController extends BaseController {
         return list;
     }
 
-    //查询登录用户已经填写过的调研表
+    //查询申请用户已经填写过的调研表
     @RequestMapping("queryAnswer")
     @ResponseBody
     public List<Map<String,Object>> queryAnswer(HttpServletRequest request){

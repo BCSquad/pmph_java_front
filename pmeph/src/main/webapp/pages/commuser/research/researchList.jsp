@@ -134,11 +134,11 @@
     }
 
     function add(surveyId) {
-        window.location.href=contextpath+'orgSurvey/fillSurveyById.action?surveyId='+surveyId+'&state=1';
+        window.location.href=contextpath+'orgSurvey/fillSurveyById.action?surveyId='+surveyId+'&state=fromwrtlist';
     }
 
     function look(id) {
-        window.location.href = contextpath+"/orgSurvey/surveyDetailsById.action?surveyId=" + id;
+        window.location.href = contextpath+"/orgSurvey/surveyDetailsById.action?surveyId=" + id+'&state=fromwrtlist';
     }
 </script>
 </html>

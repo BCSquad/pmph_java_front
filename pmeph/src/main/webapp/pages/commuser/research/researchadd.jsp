@@ -144,14 +144,9 @@
     </style>
 </head>
 <body>
-<c:if test="${res.state==2}">
-     <jsp:include page="/pages/comm/headGreenBackGround.jsp"/>
-</c:if>
-<c:if test="${res.state==1}">
-    <jsp:include page="/pages/comm/head.jsp">
-        <jsp:param value="homepage" name="pageTitle"/>
-    </jsp:include>
-</c:if>
+<jsp:include page="/pages/comm/head.jsp">
+    <jsp:param value="homepage" name="pageTitle"/>
+</jsp:include>
 <input type="hidden" value="${state}" id="state">
 <div class="body">
 
@@ -295,13 +290,13 @@
                 </table>
                 <div style="text-align: center;margin-right: 15%;">
                     <button id="commit" class="btn-2" onclick="commit()"> 提交</button>
-                    <button class="btn-2" onclick="back()">关闭</button>
+                    <button class="btn-2" onclick="back()">返回</button>
                 </div>
             </div>
         </div>
 
     </div>
-
+<input type="hidden" id="from" value="${res.from}">
 </div>
 <input type="hidden" value="${res.material_id}" id="material_id">
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
@@ -405,13 +400,7 @@
     }
 
     function back() {
-        var material_id=$("#material_id").val();
-        if(material_id){
-            window.location.href = "${ctx}/orgSurvey/tolist.action?materialId="+'${res.material_id}';
-        }else{
-            window.location.replace(document.referrer)
-        }
-
+       window.history.back();
     }
 
     function commit() {
@@ -427,13 +416,13 @@
             success: function (res) {
                 if (res.code >= 1) {
                     window.message.success("填写成功");
-                    setTimeout(
-                        function() {
-                            /* window.location.href = contextpath
-                                    + "userinfo/touser.action?id="
-                                    + $("#userId").val(); */
-                           back();
-                        }, 1000);
+                    var from=$("#from").val();
+                    if(from=='fromwrtlist'){
+                        window.location.href=contextpath+'/research/tolist.action';
+                    }else{
+                        var material_id=$("#material_id").val();
+                        window.location.href=contextpath+'/material/MaterialDetailRedirect.action?material_id='+material_id;
+                    }
                 } else {
                     window.message.error("请填写所有的未填项");
 

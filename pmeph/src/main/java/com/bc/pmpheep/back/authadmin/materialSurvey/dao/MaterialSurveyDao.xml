@@ -104,8 +104,9 @@
 		select
 		count(DISTINCT t.id)
         from material_survey t
-        left join material_survey_question_answer b on  b.survey_id=t.id
-        and b.user_id=#{id}  where
+        left join material_survey_question_answer b on  b.survey_id=t.id and b.user_id=#{id}
+		left JOIN (select *,max(required) as required2  from material_survey_chain GROUP BY  material_survey_id )c on c.material_id= t.material_id and t.id=c.material_survey_id
+     where
 		<choose>
 			<when test="materialId !=null">
 				(t.material_id =#{materialId}
@@ -122,12 +123,8 @@
         <if test="state != null and state != '' and state == 2">
             and b.gmt_create is  NULL
         </if>
-        <if test="userType != null and userType != '' ">
-            and b.user_type =#{userType}
-        </if>
-
 		<if test="required != null and required != '' and required == 1">
-			and t.required_for_material=1
+			and (t.required_for_material=1 or c.required2=1)
 		</if>
         and t.status=1
 		and (t.type_id=1  or t.type_id=3)
