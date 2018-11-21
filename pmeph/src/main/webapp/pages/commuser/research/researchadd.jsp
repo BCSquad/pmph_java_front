@@ -296,7 +296,7 @@
         </div>
 
     </div>
-
+<input type="hidden" id="from" value="${res.from}">
 </div>
 <input type="hidden" value="${res.material_id}" id="material_id">
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
@@ -416,7 +416,13 @@
             success: function (res) {
                 if (res.code >= 1) {
                     window.message.success("填写成功");
-                    window.location.href=contextpath+'/research/tolist.action';
+                    var from=$("#from").val();
+                    if(from=='fromwrtlist'){
+                        window.location.href=contextpath+'/research/tolist.action';
+                    }else{
+                        var material_id=$("#material_id").val();
+                        window.location.href=contextpath+'/material/MaterialDetailRedirect.action?material_id='+material_id;
+                    }
                 } else {
                     window.message.error("请填写所有的未填项");
 

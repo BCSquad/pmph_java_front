@@ -138,7 +138,7 @@
     }
 
     function look(id) {
-        window.location.href = contextpath+"/orgSurvey/surveyDetailsById.action?surveyId=" + id;
+        window.location.href = contextpath+"/orgSurvey/surveyDetailsById.action?surveyId=" + id+'&state=fromwrtlist';
     }
 </script>
 </html>

@@ -133,21 +133,15 @@ public class MaterialSurveyController extends BaseController {
         String material_id=request.getParameter("material_id");
         String from=request.getParameter("state");
         Map<String, Object> map = new HashMap<>();
-        if(StringUtil.notEmpty(material_id)){
-            map.put("state","1");
-        }else{
-            map.put("state","2");
-        }
         map.put("material_id",material_id);
         map.put("survey", materialSurveyVO);
-        mv.addObject("res", map);
-        if("fromwrtlist".equals(from)){
-            //从首页调研表页面进入新增页面
+        if("fromwrtlist".equals(from)||"frommaterial".equals(from)){
+            map.put("from",from);
             mv.setViewName("commuser/research/researchadd");
         }else{
             mv.setViewName("authadmin/materialSurvey/fillMaterialSurvey");
         }
-
+        mv.addObject("res", map);
         return mv;
     }
 
@@ -354,13 +348,18 @@ public class MaterialSurveyController extends BaseController {
             materialSurveyQuestionVOS.add(materialSurveyQuestionVO);
         }
         materialSurveyVO.setMaterialSurveyQuestionList(materialSurveyQuestionVOS);
-
+        String from=request.getParameter("state");
         //机构用户基本信息
         Map<String, Object> map = new HashMap<>();
         map.put("survey", materialSurveyVO);
         map.put("type", "view");
+        if("fromwrtlist".equals(from)||"frommaterial".equals(from)){
+            map.put("from",from);
+            mv.setViewName("commuser/research/researchadd");
+        }else{
+            mv.setViewName("authadmin/materialSurvey/fillMaterialSurvey");
+        }
         mv.addObject("res", map);
-        mv.setViewName("authadmin/materialSurvey/fillMaterialSurvey");
         return mv;
     }
     /**
