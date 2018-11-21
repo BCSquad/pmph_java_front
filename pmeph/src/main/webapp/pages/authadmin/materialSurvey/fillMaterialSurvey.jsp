@@ -144,14 +144,7 @@
     </style>
 </head>
 <body>
-<c:if test="${res.state==2}">
-     <jsp:include page="/pages/comm/headGreenBackGround.jsp"/>
-</c:if>
-<c:if test="${res.state==1}">
-    <jsp:include page="/pages/comm/head.jsp">
-        <jsp:param value="homepage" name="pageTitle"/>
-    </jsp:include>
-</c:if>
+<jsp:include page="/pages/comm/headGreenBackGround.jsp"/>
 <input type="hidden" value="${state}" id="state">
 <div class="body">
 

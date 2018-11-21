@@ -135,7 +135,7 @@ public class MaterialSurveyController extends BaseController {
         Map<String, Object> map = new HashMap<>();
         map.put("material_id",material_id);
         map.put("survey", materialSurveyVO);
-        if("fromwrtlist".equals(from)||"frommaterial".equals(from)){
+        if("fromwrtlist".equals(from)||"material".equals(from)){
             map.put("from",from);
             mv.setViewName("commuser/research/researchadd");
         }else{
@@ -353,7 +353,7 @@ public class MaterialSurveyController extends BaseController {
         Map<String, Object> map = new HashMap<>();
         map.put("survey", materialSurveyVO);
         map.put("type", "view");
-        if("fromwrtlist".equals(from)||"frommaterial".equals(from)){
+        if("fromwrtlist".equals(from)||"material".equals(from)){
             map.put("from",from);
             mv.setViewName("commuser/research/researchadd");
         }else{

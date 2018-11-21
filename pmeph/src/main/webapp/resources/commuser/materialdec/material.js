@@ -135,13 +135,13 @@ function savebaself() {
 function toinsert(id) {
     savebaself();
     var mid=$("#material_id").val();
-    window.location.href=contextpath+'orgSurvey/fillSurveyById.action?surveyId='+id+'&material_id='+mid+'&state=fromwrtlist';
+    window.location.href=contextpath+'orgSurvey/fillSurveyById.action?surveyId='+id+'&material_id='+mid+'&state=material';
 }
 
 //跳转到调研表查看页面
 function tolook(id) {
     savebaself();
-    window.location.href = contextpath+"/orgSurvey/surveyDetailsById.action?surveyId=" + id+'&state=fromwrtlist';
+    window.location.href = contextpath+"/orgSurvey/surveyDetailsById.action?surveyId=" + id+'&state=material';
 }
 
 //下拉框格式优化

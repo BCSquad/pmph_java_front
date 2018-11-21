@@ -18,7 +18,7 @@
         <if test="parameter.state != null and parameter.state != '' and parameter.state == 2">
             and b.gmt_create is  NULL
         </if>
-        and t.type_id != 1 and t.status=1 GROUP BY t.id limit ${start},${pageSize}
+        and t.type_id != 1 and t.status=1 GROUP BY t.id order by t.gmt_publish desc limit ${start},${pageSize}
     </select>
 
     <!--查询与教材无关调研表总数-->
