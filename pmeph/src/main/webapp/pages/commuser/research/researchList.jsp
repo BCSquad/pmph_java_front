@@ -43,7 +43,7 @@
                         <th style="width: 20px">序号</th>
                         <th style="width: 100px">调研表名称</th>
                         <th style="width: 100px">调研表概述</th>
-                        <th style="width: 100px">书籍名称</th>
+                        <th style="width: 100px">教材名称</th>
                         <th style="width: 50px">结束时间</th>
                         <th style="width: 50px">填写时间</th>
                         <th style="width: 30px">操作</th>
