@@ -32,7 +32,7 @@ function querySurvey() {
 
 //跳转到调研表查看页面
 function tolook(id) {
-    window.location.href = contextpath+"/orgSurvey/surveyDetailsById.action?surveyId=" + id;
+    window.location.href = contextpath+"/orgSurvey/surveyDetailsById.action?surveyId=" + id+"&state="+'fromwrtlist';
 }
 
 //页面组合方法
