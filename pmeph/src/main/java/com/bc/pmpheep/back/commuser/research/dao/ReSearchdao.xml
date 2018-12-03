@@ -66,6 +66,7 @@
             from material_survey t
             left join material_survey_question_answer a on a.survey_id=t.id
             and a.user_id=#{user_id}  where t.material_id=#{material_id}
+            AND t.STATUS = 1
             and a.gmt_create is not null group by t.id
     </select>
 </mapper>

@@ -248,6 +248,8 @@ public class MaterialSurveyController extends BaseController {
         }
 
         Long userId = new Long(String.valueOf(writerUser.get("id")));
+        Long userType = new Long(String.valueOf(this.getUserType()));
+
         MaterialSurveyVO materialSurveyVO = new MaterialSurveyVO();
         List<MaterialSurveyQuestionVO> materialSurveyQuestionVOS = new ArrayList<>();
         //获取教材id
@@ -282,7 +284,11 @@ public class MaterialSurveyController extends BaseController {
             if(StringUtil.notEmpty(request.getParameter("user_id"))){
                 userId=Long.parseLong(request.getParameter("user_id"));
             }
+            if(StringUtil.notEmpty(request.getParameter("user_type"))){
+                userType=Long.parseLong(request.getParameter("user_type"));
+            }
             parameter.put("user_id",userId);
+            parameter.put("user_type",userType);
             List<MaterialSurveyQuestionAnswer> surveyQuestionAnswerByQuestionId = materialSurveyService.getSurveyQuestionAnswerByQuestionId(parameter);
             if(surveyQuestionAnswerByQuestionId.size()>0){
                 switch (materialSurveyQuestion.getType()) {

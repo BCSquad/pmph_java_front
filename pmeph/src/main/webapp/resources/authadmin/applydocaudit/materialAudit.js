@@ -35,7 +35,7 @@ function querySurvey() {
 //跳转到调研表查看页面
 function tolook(id,) {
     var user_id=$("#user_id").val();
-    window.location.href =contextpath+"orgSurvey/surveyDetailsById.action?surveyId=" + id+"&user_id="+user_id;
+    window.location.href =contextpath+"orgSurvey/surveyDetailsById.action?surveyId=" + id+"&user_id="+user_id+"&user_type="+1;
 }
 //页面组合方法
 function queryMaterialMap(id){

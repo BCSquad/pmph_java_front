@@ -17,7 +17,7 @@
     </select>
 
 	<select id="getSurveyQuestionAnswerByQuestionId" parameterType="java.util.Map"  resultType="MaterialSurveyQuestionAnswer">
-		select  * from material_survey_question_answer where question_id=#{questionId} and user_id =#{user_id}
+		select  * from material_survey_question_answer where question_id=#{questionId} and user_id =#{user_id} and user_type=#{user_type}
 	</select>
 
 
@@ -147,6 +147,7 @@
             from material_survey t
             left join material_survey_question_answer a on a.survey_id=t.id
             and a.user_id=#{user_id}  where t.material_id=#{material_id}
+			and t.status=1
             and a.gmt_create is not null group by t.id
     </select>
 </mapper>
