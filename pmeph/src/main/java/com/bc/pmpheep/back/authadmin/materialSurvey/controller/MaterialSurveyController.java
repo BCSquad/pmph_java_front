@@ -362,7 +362,6 @@ public class MaterialSurveyController extends BaseController {
         map.put("material_id",request.getParameter("material_id"));
         mv.addObject("res", map);
         mv.addObject("res", map);
-        mv.setViewName("authadmin/materialSurvey/fillMaterialSurvey");
         return mv;
     }
     /**

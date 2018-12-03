@@ -3,18 +3,18 @@
 <mapper namespace="com.bc.pmpheep.back.authadmin.materialSurvey.dao.MaterialSurveyDao">
 
 	<select id="getSurveyByMaterialId" parameterType="java.lang.Long" resultType="MaterialSurvey">
-	  	select * from material_survey where (material_id=#{materIalId} or pre_version_material_id=#{materIalId}) and (type_id=1  or type_id=3) order by gmt_update
-	</select>
+        select * from material_survey where (material_id=#{materIalId} or pre_version_material_id=#{materIalId}) and (type_id=1  or type_id=3) and is_deleted=0 order by gmt_update
+    </select>
 
 
 	<select id="getSurveyQuestionBySurveyId" parameterType="java.lang.Long"  resultType="MaterialSurveyQuestion" >
-		select * from material_survey_question where survey_id=#{surveyId}
-	</select>
+        select * from material_survey_question where survey_id=#{surveyId} and is_deleted=0
+    </select>
 
 	<select id="getSurveyQuestionOptionByQuestionId"  parameterType="java.lang.Long"  resultType="MaterialSurveyQuestionOption">
 
-		select  * from material_survey_question_option where  question_id=#{questionId}
-	</select>
+        select  * from material_survey_question_option where  question_id=#{questionId} and is_deleted=0
+    </select>
 
 	<select id="getSurveyQuestionAnswerByQuestionId" parameterType="java.util.Map"  resultType="MaterialSurveyQuestionAnswer">
 		select  * from material_survey_question_answer where question_id=#{questionId}

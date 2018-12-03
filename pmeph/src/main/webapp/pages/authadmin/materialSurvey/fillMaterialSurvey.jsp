@@ -7,7 +7,7 @@
         var contextpath = '${pageContext.request.contextPath}/';
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-    <title>填写调研表</title>
+    <title>调研表</title>
     <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery-validate.js?t=${_timestamp}" type="text/javascript"></script>
