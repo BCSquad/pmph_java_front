@@ -68,43 +68,6 @@ public class MaterialSurveyController extends BaseController {
 
 
         MaterialSurvey surveyByMaterialId = null;
-        /*if (StringUtil.notEmpty(request.getParameter("materialId"))) {
-            *//*根据教材id获取最新的关联的问卷
-             *//*
-            String materialId = request.getParameter("materialId");
-            List<MaterialSurvey> surveyByMaterialIds = materialSurveyService.getSurveyByMaterialId(Long.parseLong(materialId));
-
-            if (surveyByMaterialIds.size() == 1) {
-                surveyByMaterialId = surveyByMaterialIds.get(0);
-            } else {
-
-                int pageNum = 1;
-                int pageSize = 10;
-                Map<String, Object> map = new HashMap<>();
-                Map<String, Object> user = getUserInfo();
-                map.put("id", user.get("id"));
-                if (materialId != null) {
-                    if (surveyByMaterialIds.size() != 0) {
-                        map.put("materialId", materialId);
-                        Material materialByid = materialSurveyService.getMaterialByid(Long.parseLong(materialId));
-                        mv.addObject("material", materialByid);
-                    }
-
-                }
-                PageParameter<Map<String, Object>> pageParameter = new PageParameter<Map<String, Object>>(pageNum, pageSize);
-                pageParameter.setParameter(map);
-                PageResult<Map<String, Object>> pageResult = materialSurveyService.querySearchList(pageParameter);
-                mv.addObject("pageNum", pageNum);
-                mv.addObject("pageSize", pageSize);
-                mv.addObject("pageResult", pageResult);
-                mv.addObject("state", "");
-
-                mv.setViewName("authadmin/materialSurvey/SurveyList");
-                return mv;
-            }
-
-        }*/
-
         if (StringUtil.notEmpty(request.getParameter("surveyId"))) {
             /*根据问卷id获取问卷对象
              */
@@ -316,6 +279,10 @@ public class MaterialSurveyController extends BaseController {
             materialSurveyQuestionVO.setMaterialSurveyQuestionOptionList(surveyQuestionOptionByQuestionId);
             Map<String, Object> parameter =new HashMap<>();
             parameter.put("questionId",materialSurveyQuestion.getId());
+            if(StringUtil.notEmpty(request.getParameter("user_id"))){
+                userId=Long.parseLong(request.getParameter("user_id"));
+            }
+            parameter.put("user_id",userId);
             List<MaterialSurveyQuestionAnswer> surveyQuestionAnswerByQuestionId = materialSurveyService.getSurveyQuestionAnswerByQuestionId(parameter);
             if(surveyQuestionAnswerByQuestionId.size()>0){
                 switch (materialSurveyQuestion.getType()) {

@@ -17,7 +17,7 @@
     </select>
 
 	<select id="getSurveyQuestionAnswerByQuestionId" parameterType="java.util.Map"  resultType="MaterialSurveyQuestionAnswer">
-		select  * from material_survey_question_answer where question_id=#{questionId}
+		select  * from material_survey_question_answer where question_id=#{questionId} and user_id =#{user_id}
 	</select>
 
 
