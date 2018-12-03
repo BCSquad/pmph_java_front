@@ -13,7 +13,7 @@
 
 	<select id="getSurveyQuestionOptionByQuestionId"  parameterType="java.lang.Long"  resultType="MaterialSurveyQuestionOption">
 
-        select  * from material_survey_question_option where  question_id=#{questionId} and is_deleted=0
+        select  * from material_survey_question_option where  question_id=#{questionId} and is_deleted=0 order by id
     </select>
 
 	<select id="getSurveyQuestionAnswerByQuestionId" parameterType="java.util.Map"  resultType="MaterialSurveyQuestionAnswer">
