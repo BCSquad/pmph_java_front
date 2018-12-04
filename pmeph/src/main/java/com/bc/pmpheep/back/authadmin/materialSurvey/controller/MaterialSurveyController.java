@@ -315,6 +315,8 @@ public class MaterialSurveyController extends BaseController {
                     case 5:
                         materialSurveyQuestionVO.setOptionContent(surveyQuestionAnswerByQuestionId.get(0).getOptionContent());
                         break;
+                    default:
+                        break;
                 }
             }
 

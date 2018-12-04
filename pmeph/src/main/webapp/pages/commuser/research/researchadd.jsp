@@ -170,7 +170,7 @@
                     <c:forEach items="${res.survey.materialSurveyQuestionList}" var="QuestionList"
                                varStatus="QuestionListStatus">
 
-                        <td><span class="qt">${QuestionListStatus.index+1}.${QuestionList.title}
+                        <td ><span class="qt" style="width: 97%" >${QuestionListStatus.index+1}.${QuestionList.title}
                                   <c:if test="${QuestionList.isAnswer==1 }">
 
                                   </c:if>
