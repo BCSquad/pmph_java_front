@@ -10,16 +10,17 @@
     <title>调研表</title>
     <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}" type="text/javascript"></script>
+    <link rel="stylesheet" href="${ctx}/statics/css/jquery.tipso.css?t=${_timestamp}" type="text/css">
     <script src="${ctx}/resources/comm/jquery/jquery-validate.js?t=${_timestamp}" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}" type="text/javascript"></script>
     <script src="${ctx}/resources/authadmin/accountset/adminattest.js?t=${_timestamp}" type="text/javascript"></script>
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.tipso.js?t=${_timestamp}"></script>
+    <script type="text/javascript" src="${ctx}/resources/comm/layer/layer.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/json2.js?t=${_timestamp}" type="text/javascript"></script>
     <link href="${ctx}/statics/css/base.css?t=${_timestamp}" rel="stylesheet" type="text/css"/>
-
     <link href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="${ctx}/statics/css/jquery.tipso.css?t=${_timestamp}" type="text/css">
+
     <script type="text/javascript">
 
     </script>
@@ -27,7 +28,6 @@
 
 
         .textarea {
-
             display: block;
             resize: vertical;
             padding: 5px 7px;
@@ -35,10 +35,6 @@
             box-sizing: border-box;
             width: 95%;
             font-size: 14px;
-            color: rgb(31, 43, 61);
-            background-color: #fff;
-            background-image: none;
-            border: 1px solid rgb(191, 201, 217);
             border-radius: 4px;
             transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
             margin-left: 15px;
@@ -207,13 +203,13 @@
 
 
                                             <c:if test="${QuestionList.optionAnswer== OptionList.id }">
-                                            <input type="checkbox" checked
+                                            <input  class="checkbox" type="checkbox" checked
                                                    name="checkbox_${QuestionListStatus.index+1}"
                                                    value="${OptionList.id}"
                                                    id="${OptionList.id}">${OptionList.optionContent}
                                             </c:if>
                                             <c:if test="${QuestionList.optionAnswer!=OptionList.id  }">
-                                                <input type="checkbox"
+                                                <input class="checkbox" type="checkbox"
                                                        name="checkbox_${QuestionListStatus.index+1}"
                                                        value="${OptionList.id}"
                                                        id="${OptionList.id}">${OptionList.optionContent}
@@ -248,12 +244,14 @@
                             <c:if test="${QuestionList.type==4 }">
 
                                 <td>
+
                                     <c:if test="${QuestionList.optionContent!=null }">
                                         <input class="input" id="${QuestionList.id}" type="text"
                                                value="${QuestionList.optionContent}">
                                     </c:if>
                                     <c:if test="${QuestionList.optionContent==null }">
-                                        <input class="input" id="${QuestionList.id}" type="text">
+
+                                        <div class="tipso_bubble"></div> <input class="input "   onmouseover="checkedInput(this)" onmousemove="checkedInput(this)" id="${QuestionList.id}" type="text"><div class="tipso_arrow"></div>
                                     </c:if>
                                 </td>
 
@@ -261,14 +259,15 @@
 
                                 <%--类型是文本域--%>
                             <c:if test="${QuestionList.type==5 }">
-
                                 <td>
                                     <c:if test="${QuestionList.optionContent!=null }">
                                         <textarea id="${QuestionList.id}"
                                                   class="textarea">${QuestionList.optionContent}</textarea>
                                     </c:if>
                                     <c:if test="${QuestionList.optionContent==null }">
-                                        <textarea id="${QuestionList.id}" class="textarea"></textarea>
+
+                                        <div class="tipso_bubble"></div> <textarea id="${QuestionList.id}"   onmouseover="checkedInput(this)" onmousemove="checkedInput(this)" class="textarea"></textarea><div class="tipso_arrow"></div>
+
                                     </c:if>
 
                                 </td>
@@ -278,9 +277,7 @@
                             <c:if test="${QuestionList.type==6 }">
 
                                 <td>
-
                                     <input type="file" id="${QuestionList.id}">
-
                                 </td>
 
                             </c:if>
@@ -302,6 +299,7 @@
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 
 <script type="text/javascript">
+    var checkflag=true;
     var survey = {
         id: '',
         quesions: []
@@ -315,6 +313,22 @@
         answerTextArea: ''
     };
     $(function () {
+
+        setTimeout(function () {
+            $('.input').each(function (i,v) {
+                var $t = $(this);
+                $t.tipso({validator: "isNonEmpty", message: ""});
+            });
+            $('.textarea').each(function (i,v) {
+                var $t = $(this);
+                $t.tipso({validator: "isNonEmpty", message: ""});
+            });
+
+            //$('.input').tipso({validator: "isNonEmpty", message: "请选择申报的图书"});
+
+        },0);
+
+
         var type = "${res.type}";
         if (type) {
             if ("view" == type) {
@@ -405,6 +419,9 @@
 
     function commit() {
         /*提交问卷  JSON字符串提交*/
+        if(!checkflag){
+           return;
+        }
         var formDate = getForm();
         $.ajax({
             type: 'post',
@@ -433,6 +450,20 @@
         });
 
 
+    }
+    function checkedInput(obj){
+        if(obj.value.length>300){
+            $("#"+obj.id).addClass("tipso_style");
+            $(".tipso_content").html("输入最大长度300字");
+            checkflag=false;
+        }else if(obj.value.length<1){
+            $("#"+obj.id).addClass("tipso_style");
+            $(".tipso_content").html("不能为空");
+            checkflag=false;
+        }else{
+            $("#"+obj.id).removeClass("tipso_style");
+            checkflag=true;
+        }
     }
 </script>
 
