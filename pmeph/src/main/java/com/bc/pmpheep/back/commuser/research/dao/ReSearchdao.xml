@@ -5,20 +5,61 @@
 
     <!--查询与教材无关的调研表-->
     <select id="querySearchList" resultType="java.util.Map" parameterType="PageParameter">
-        select t.title ,t.id,t.intro,t.id,now() as now,m.material_name,
-        DATE_FORMAT(t.end_date,'%Y-%m-%d') as end_date,
-        DATE_FORMAT(b.gmt_create,'%Y-%m-%d %H:%i') as gmt_create
-        from material_survey t
-        left join material_survey_question_answer b on  b.survey_id=t.id and b.user_id=#{parameter.id}
-        left join material m on m.id = t.material_id
-        where 1 = 1
+        (SELECT
+        t.title,
+        t.id,
+        t.intro,
+        t.id,
+        t.gmt_publish,
+        now( ) AS now,
+        m.material_name,
+        DATE_FORMAT( t.end_date, '%Y-%m-%d' ) AS end_date,
+        DATE_FORMAT( b.gmt_create, '%Y-%m-%d %H:%i' ) AS gmt_create
+        FROM
+        material_survey t
+        LEFT JOIN material_survey_question_answer b ON b.survey_id = t.id
+        AND b.user_id =#{parameter.id}
+        LEFT JOIN material m ON m.id = t.material_id
+        WHERE
+        1 = 1
+        AND t.type_id != 1
+        AND t.STATUS = 1
+        and t.material_id is not null
         <if test="parameter.state != null and parameter.state != '' and parameter.state == 1">
             and b.gmt_create is not NULL
         </if>
         <if test="parameter.state != null and parameter.state != '' and parameter.state == 2">
             and b.gmt_create is  NULL
         </if>
-        and t.type_id != 1 and t.status=1 GROUP BY t.id order by t.gmt_publish desc limit ${start},${pageSize}
+        GROUP BY
+        t.id )
+        UNION
+        (
+        SELECT
+        t.title,
+        t.id,
+        t.intro,
+        t.id,
+        t.gmt_publish,
+        now( ) AS now,
+        '' as material_name,
+        DATE_FORMAT( t.end_date, '%Y-%m-%d' ) AS end_date,
+        DATE_FORMAT( b.gmt_create, '%Y-%m-%d %H:%i' ) AS gmt_create
+        FROM
+        material_survey t
+        LEFT JOIN material_survey_question_answer b ON b.survey_id = t.id
+        AND b.user_id = #{parameter.id}
+        inner JOIN material_survey_target s on t.id=s.survey_id and org_id=#{parameter.org_id} and material_id is null
+        <where>
+        <if test="parameter.state != null and parameter.state != '' and parameter.state == 1">
+        and b.gmt_create is not NULL
+    </if>
+        <if test="parameter.state != null and parameter.state != '' and parameter.state == 2">
+            and b.gmt_create is  NULL
+        </if>
+        </where>
+        )
+       order by gmt_publish desc limit ${start},${pageSize}
     </select>
 
     <!--查询与教材无关调研表总数-->
