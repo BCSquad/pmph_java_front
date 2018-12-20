@@ -159,6 +159,11 @@
             <version>${shiro.ver}</version>
         </dependency>
         <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>2.10.2</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
             <version>${shiro.ver}</version>
@@ -310,6 +315,7 @@
         </repository>
     </repositories>
     <build>
+		<finalName>medu</finalName>
         <resources>
             <resource>
                 <directory>src/main/java</directory>

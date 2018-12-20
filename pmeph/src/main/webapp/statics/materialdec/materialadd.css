@@ -574,5 +574,23 @@
 	float: left;
 	background-size: 100% 100%;
 }
-  
+
+.txdyb:after{
+	content: "";
+	background-image: url("../image/txdyb.png");
+	display:block;
+	width: 20px;
+	height: 20px;
+	float: left;
+	background-size: 100%;
+}
+
+.wrt{
+	width: 20px;
+	height: 20px;
+	float: left;
+	margin-top: 3px;
+	margin-left: 5px;
+	cursor: pointer;
+}
 

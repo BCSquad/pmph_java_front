@@ -7,6 +7,8 @@
 
 var is_pmph_textbook_required;
 var is_textbook_required;
+var num=0;
+var sta=true;
 
 $(function () {
     setTimeout(function () {
@@ -28,6 +30,9 @@ $(function () {
 
     var id = $("#material_id").val();
     queryMaterialMap(id);  //执行查询方法
+
+    querydyb(); //查询与教材有关的调研表
+    querySearchByTextbookId();  //查询与书籍有关的调研表
     //图书选择
     var sjxz =document.getElementsByName("sjxz");
     if(sjxz.length == 0){
@@ -77,7 +82,10 @@ $(function () {
         zIndex: 10,
         width: 200,
         height: 30,
-        optionHeight: 30
+        optionHeight: 30,
+        onChange:function () {
+            querySearchByTextbookId();
+        }
     });
     $('#zclx').selectlist({
         width: 192,
@@ -153,6 +161,35 @@ function queryMaterialMap(id){
             chooseModel(json);
         }
     });
+}
+
+//填写调研表之前自动暂存
+function savebaself() {
+    $.ajax({
+        type: "POST",
+        url:contextpath+'material/doMaterialAdd.action?sjump=1&type=2',
+        data:$('#objForm').serialize(),// 您的formid
+        async: false,
+        success: function(json) {
+            $('#declaration_id').val(json.declaration_id);
+            if(json.msg=='OK'){
+                window.message.success("自动暂存成功！");
+            }
+        }
+    });
+}
+
+//跳转到调研表新增页面
+function toinsert(id) {
+    savebaself();
+    var mid=$("#material_id").val();
+    window.location.href=contextpath+'orgSurvey/fillSurveyById.action?surveyId='+id+'&material_id='+mid+'&state=material';
+}
+
+//跳转到调研表查看页面
+function tolook(id) {
+    savebaself();
+    window.location.href = contextpath+"/orgSurvey/surveyDetailsById.action?surveyId=" + id+'&state=material';
 }
 
 //模块显示与隐藏判断
@@ -524,7 +561,10 @@ function addTsxz(){
     $('#edu_'+str).selectlist({
         width: 200,
         height: 30,
-        optionHeight: 30
+        optionHeight: 30,
+        onChange:function () {
+            querySearchByTextbookId();
+        }
     });
     upload(str);
     $('#edu_'+str).tipso({validator: "isNonEmpty", message: "请选择申报的图书"});
@@ -533,6 +573,7 @@ function addTsxz(){
 //删除内容
 function delTsxz(str){
     $("#"+str).remove();
+    querySearchByTextbookId();
 }
 
 //追加学习经历tr
@@ -959,20 +1000,35 @@ function buttAdd(type){
             });
         } else { //表示提交
             checkLb();
-            if(checkEqual("textbook_id") && checkBoxInfo() && $.fireValidator()){
-                var username = $("#username").val();
-                var realname = $("#realname").val();
-                if(checkEqual("textbook_id")&&checkBoxInfo()){
-                    if (username == realname) {
-                        if (confirm("您填写的申报姓名和账号一致，是否已当前姓名提交申报！")) {
-                            commit(type);
-                        } else {
-                            $("#realname")[0].focus();
-                        }
-                    } else {
-                        commit(type);
-                    }
+            if(!sta){
+                window.message.info("请填写完所有必填调研表！")
+                return;
             }
+            if(checkEqual("textbook_id") && checkBoxInfo() && $.fireValidator()){
+                window.message.confirm(
+                    "确定提交吗？"
+                    ,{icon: 7, title:'提示',btn:["确定","取消"]}
+
+                    ,function(index){
+                        layer.close(index);
+                        var username = $("#username").val();
+                        var realname = $("#realname").val();
+                        if(checkEqual("textbook_id")&&checkBoxInfo()){
+                            if (username == realname) {
+                                if (confirm("您填写的申报姓名和账号一致，是否已当前姓名提交申报！")) {
+                                    commit(type);
+                                } else {
+                                    $("#realname")[0].focus();
+                                }
+                            } else {
+                                commit(type);
+                            }
+                        }
+                    }
+                    ,function(index){
+                        layer.close(index);
+                    }
+                );
             }
         }
 //    }

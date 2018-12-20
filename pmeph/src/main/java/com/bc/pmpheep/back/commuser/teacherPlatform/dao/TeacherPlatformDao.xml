@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.commuser.teacherPlatform.dao.TeacherPlatformDao">
+    <!-- 查询信息快报 -->
+	<select id="queryXikb" resultType="java.util.Map" parameterType="java.util.Map">
+		select
+		    t.id,
+			t.cover,
+			t.times,
+			t.activity_desc_cms_id,
+			t.activity_name,
+			t.activity_date,
+			b.id as cms_id
+			from activity t
+			left join cms_content b on t.info_express_cms_id=b.id
+			where t.id=#{id} and t.is_deleted=0 and t.status=1
+	</select>
+
+	<!--查询视频播放次数的和-->
+	<select id="queryClicks" resultType="Integer">
+		 select IFNULL(sum(a.clicks),0)
+			from activity t
+			left join activity_video_chain v on v.activity_id=t.id
+			left join cms_content c on c.id=t.info_express_cms_id
+			left join activity_video a on a.id=v.activity_video_id
+			where t.id=#{id} and a.is_deleted=0
+			order by a.gmt_create desc
+	</select>
+
+	<!--查询相关视频-->
+	<select id="Queryvideo" parameterType="java.util.Map" resultType="java.util.Map">
+        select a.path,
+			a.clicks,
+			a.cover,
+			a.title,
+			a.id
+			from activity t
+			left join activity_video_chain v on v.activity_id=t.id
+			left join cms_content c on c.id=t.info_express_cms_id
+			left join activity_video a on a.id=v.activity_video_id
+			where t.id=#{id} and a.is_deleted=0
+			order by v.sort asc limit ${startrow},${endrow}
+	</select>
+
+    <!--查询视频总数-->
+    <select id="VideoCount" resultType="Integer">
+        select count(*) from(
+         select a.path,
+			a.clicks,
+			a.cover
+			from activity t
+			left join activity_video_chain v on v.activity_id=t.id
+			left join cms_content c on c.id=t.info_express_cms_id
+			left join activity_video a on a.id=v.activity_video_id
+			where t.id=#{id} and a.is_deleted=0
+        )r
+    </select>
+
+	<!--查询相关资源-->
+	<select id="Querysource" resultType="java.util.Map" parameterType="java.util.Map">
+	 SELECT a.source_name,
+			a.file_id
+			from activity t
+			left join activity_source_chain b on b.activity_id=t.id
+			left join activity_source a on a.id=b.activity_source_id
+			where t.id=#{id} and a.is_deleted=0
+			order by b.sort asc limit ${startrow},${endrow}
+	</select>
+
+    <!--查询相关资源总数-->
+    <select id="sourceCount" resultType="Integer">
+        select count(*) from (
+             SELECT a.source_name,
+                a.file_id
+                from activity t
+                left join activity_source_chain b on b.activity_id=t.id
+                left join activity_source a on a.id=b.activity_source_id
+                where t.id=#{id} and a.is_deleted=0
+        )r
+    </select>
+
+	<!--增加视频播放点击数-->
+	<update id="updateclicks">
+		update  activity_video set clicks=${clicks} where id=#{id}
+	</update>
+
+	<!--增加活动查看次数-->
+	<update id="addtimes">
+		update activity set times = ${times} where id=#{id}
+	</update>
+
+	<!-- 查询师资培训列表 -->
+	<select id="QuerySourceList" parameterType="java.util.Map" resultType="java.util.Map">
+		 select t.id,t.activity_name,t.cover,t.activity_desc_cms_id,t.activity_date,t.times
+              from activity t
+              left join cms_content b on b.id = t.info_express_cms_id
+              where  t.is_deleted=0 and t.status=1
+              order by t.is_set_top desc,t.gmt_set_top desc,t.gmt_create desc  limit ${startrow},10
+	</select>
+
+	<!--根据教材查询活动信息-->
+	<select id="QueryActivitiById" resultType="java.util.Map" parameterType="java.util.Map">
+		select t.activity_name ,
+		t.cover,
+		t.id,
+		t.activity_name,
+		t.activity_desc_cms_id,
+		t.activity_date,
+		t.times
+		from activity t
+		left join material m on m.id=t.material_id
+		left join cms_content b on b.material_id=t.material_id
+		where b.material_id=#{material_id}  and t.is_deleted=0 and t.status=1
+		order by t.is_set_top desc,t.gmt_set_top desc,t.gmt_create desc
+		limit ${startrow},10
+	</select>
+</mapper>

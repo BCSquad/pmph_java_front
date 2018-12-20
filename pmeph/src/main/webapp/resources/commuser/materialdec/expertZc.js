@@ -1165,23 +1165,35 @@ function buttAdd(type) {
                             window.message.info("请选择申报专业！");
                             return ;
                         }
-                        if($("#sbdw_id").val()){
-                		$.ajax({
-                            type: "POST",
-                            url: contextpath + 'expertation/doExpertationAdd.action?sjump=1&type=' + type,
-                            data: $('#objForm').serialize(),// 您的formid
-                            async: false,
-                            dataType: "json",
-                            success: function (json) {
-                                if (json.msg == 'OK') {
-                                    window.message.success("操作成功,正在跳转页面");
-                                    window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=lcjc";
+                        window.message.confirm(
+                            "确定要提交吗？"
+                            ,{icon: 7, title:'提示',btn:["确定","取消"]}
+
+                            ,function(index){
+                                layer.close(index);
+                                if($("#sbdw_id").val()){
+                                    $.ajax({
+                                        type: "POST",
+                                        url: contextpath + 'expertation/doExpertationAdd.action?sjump=1&type=' + type,
+                                        data: $('#objForm').serialize(),// 您的formid
+                                        async: false,
+                                        dataType: "json",
+                                        success: function (json) {
+                                            if (json.msg == 'OK') {
+                                                window.message.success("操作成功,正在跳转页面");
+                                                window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=lcjc";
+                                            }
+                                        }
+                                    });
+                                }else{
+                                    window.message.info("请选择申报单位！");
                                 }
                             }
-                        });
-                        }else{
-                            window.message.info("请选择申报单位！");
-                        }
+                            ,function(index){
+                                layer.close(index);
+                            }
+                        );
+
             }
 
         

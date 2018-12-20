@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}" type="text/css">
 	<link rel="stylesheet" href="${ctx}/statics/css/jquery.tipso.css?t=${_timestamp}" type="text/css">
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js?t=${_timestamp}"></script>
+	<script type="text/javascript" src="${ctx}/resources/comm/json2.js?t=${_timestamp}"></script>
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.calendar.js?t=${_timestamp}"></script>
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.tipso.js?t=${_timestamp}"></script>
@@ -1362,7 +1363,9 @@
 					<input type="hidden" id="sbdw_id" name="sbdw_id" value="" style="width: 300px;"/>
 				</div>
 			</div>
-			<hr style=" height:1px;border:none;border-top:1px #c1c1c1 dashed;margin-top: 30px;">
+			<!--调研表-->
+			<jsp:include page="/pages/comm/searchList.jsp"></jsp:include>
+			<div style="clear: both"></div>
 			<div class="button">
 				<div class="div_butt">
 					<div class="bt_tj" id="butj" onclick="javascript:buttAdd('1')">提交</div>

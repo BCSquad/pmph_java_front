@@ -5,6 +5,10 @@
 //     "{\"id\":\"zc\",\"content\":\"职称不能为空\"},{\"id\":\"address\",\"content\":\"地址不能为空\"},{\"id\":\"email\",\"content\":\"邮箱不能为空\"},"+
 //     "{\"id\":\"handphone\",\"content\":\"手机号码不能为空\"},{\"id\":\"zjlx\",\"content\":\"证件类型不能为空\"},{\"id\":\"idcard\",\"content\":\"证件号码不能为空\"},{\"id\":\"sbdw_name\",\"content\":\"申报单位不能为空\"},";
 
+
+var num=1;
+var sta=true;
+
 var materialMap ;
  
  $(function () {
@@ -24,10 +28,12 @@ var materialMap ;
         checkExtra();
     },0)
 
+
     setTimer();
     var id = $("#material_id").val();
     upload("1"); //附件上传
     queryMaterialMap(id);  //执行查询方法
+    querydyb();   //查询调研表
 
     $('.select-input').selectlist({
         zIndex: 10,
@@ -39,7 +45,10 @@ var materialMap ;
         zIndex: 10,
         width: 200,
         height: 30,
-        optionHeight: 30
+        optionHeight: 30,
+        onChange:function () {
+            querySearchByTextbookId();
+        }
     });
     $('#degree').selectlist({
         width: 192,
@@ -93,7 +102,6 @@ var materialMap ;
     selectOption("jcb_rank_sl");
     //其他社教材-职务
     selectOption("jcjb_sl");
-       
     
 
 });
@@ -105,6 +113,37 @@ window.onload = function(){
     });
 };
 
+
+
+//填写调研表之前自动暂存
+function savebaself() {
+    $.ajax({
+        type: "POST",
+        url:contextpath+'material/doMaterialAdd.action?sjump=1&type=2',
+        data:$('#objForm').serialize(),// 您的formid
+        async: false,
+        success: function(json) {
+            $('#declaration_id').val(json.declaration_id);
+            if(json.msg=='OK'){
+                window.message.success("自动暂存成功！");
+            }
+        }
+    });
+}
+
+//跳转到调研表新增页面
+function toinsert(id) {
+    savebaself();
+    var mid=$("#material_id").val();
+    window.location.href=contextpath+'orgSurvey/fillSurveyById.action?surveyId='+id+'&material_id='+mid+'&state=material';
+}
+
+//跳转到调研表查看页面
+function tolook(id) {
+    savebaself();
+    window.location.href = contextpath+"/orgSurvey/surveyDetailsById.action?surveyId=" + id+'&state=material';
+}
+
 //下拉框格式优化
 function selectOption(name){
     var els =document.getElementsByName(name);
@@ -113,6 +152,7 @@ function selectOption(name){
             width: 110,
             height: 30,
             optionHeight: 30
+
         });
     }
 }
@@ -147,6 +187,7 @@ function queryMaterialMap(id){
         type: "POST",
         url:contextpath+'material/queryMaterialMap.action',
         data:{material_id:id},// 您的formid
+        async : false,
         dataType:"json",
         success: function(json) {
             chooseModel(json);
@@ -529,16 +570,21 @@ function addTsxz(){
     $('#edu_'+str).selectlist({
         width: 200,
         height: 30,
-        optionHeight: 30
+        optionHeight: 30,
+        onChange:function () {
+            querySearchByTextbookId();
+        }
     });
     upload(str);
     $('#edu_'+str).tipso({validator: "isNonEmpty", message: "请选择申报的图书"});
 
 }
 
+
 //删除内容
 function delTsxz(str){
     $("#"+str).remove();
+    querySearchByTextbookId();
 }
 
 //追加学习经历tr
@@ -1022,6 +1068,10 @@ function buttAdd(type){
             });
         }else {  //表示提交
             checkLb();
+            if(!sta){
+                window.message.info("请填写完所有必填调研表！")
+                return;
+            }
             if (checkEqual("textbook_id") && checkBoxInfo()&& $.fireValidator() ) {
                /*if (checkEqual("textbook_id") && checkBoxInfo() && checkNull(jsonStr) && checkExtra()) {*/
                /* document.getElementById('buzc').onclick = function () {
@@ -1030,48 +1080,61 @@ function buttAdd(type){
                 document.getElementById('butj').onclick = function () {
                     window.message.warning("请不要重复点击");
                 };*/
-                $.ajax({
-                    type: "POST",
-                    url: contextpath + 'material/doMaterialAdd.action?sjump=1&type=' + type,
-                    data: $('#objForm').serialize(),// 您的formid
-                    async: false,
-                    dataType: "json",
-                    success: function (json) {
-                        if (json.msg == 'OK') {
-                            window.message.success("操作成功,正在跳转页面");
-                            /**企业微信消息**/
-                            if (json.org_name=="人民卫生出版社") {
-                            	var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
-                            	$.ajax({
-                                    type: 'get',
-                                    url: exportWordBaseUrl + '/frontWxMsg/projectEditorPleaseAdit/'+json.declaration_id,
-                                    dataType: 'jsonp',
-                                    jsonp:"callback", //这里定义了callback在后台controller的的参数名
-                        			jsonpCallback:"getMessage", //这里定义了jsonp的回调函数名。 那么在后台controller的相应方法其参数“callback”的值就是getMessage
-                                    success:function(wxResult){
-                                    	if(wxResult=="1"){
-                                    		//window.message.success("微信消息发送成功");
-                                    		setTimeout(function(){
-                                            	window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
-            								}, 800);
-                                    	}
-                                    	//window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
-                                    },
-                                    error:function(XMLHttpRequest, textStatus){
-                                    	setTimeout(function(){
-                                        	window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
-        								}, 800);
+                window.message.confirm(
+                    "确定提交吗？"
+                    ,{icon: 7, title:'提示',btn:["确定","取消"]}
+
+                    ,function(index){
+                        layer.close(index);
+                        $.ajax({
+                            type: "POST",
+                            url: contextpath + 'material/doMaterialAdd.action?sjump=1&type=' + type,
+                            data: $('#objForm').serialize(),// 您的formid
+                            async: false,
+                            dataType: "json",
+                            success: function (json) {
+                                if (json.msg == 'OK') {
+                                    window.message.success("操作成功,正在跳转页面");
+                                    /**企业微信消息**/
+                                    if (json.org_name=="人民卫生出版社") {
+                                        var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep";
+                                        $.ajax({
+                                            type: 'get',
+                                            url: exportWordBaseUrl + '/frontWxMsg/projectEditorPleaseAdit/'+json.declaration_id,
+                                            dataType: 'jsonp',
+                                            jsonp:"callback", //这里定义了callback在后台controller的的参数名
+                                            jsonpCallback:"getMessage", //这里定义了jsonp的回调函数名。 那么在后台controller的相应方法其参数“callback”的值就是getMessage
+                                            success:function(wxResult){
+                                                if(wxResult=="1"){
+                                                    //window.message.success("微信消息发送成功");
+                                                    setTimeout(function(){
+                                                        window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
+                                                    }, 800);
+                                                }
+                                                //window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
+                                            },
+                                            error:function(XMLHttpRequest, textStatus){
+                                                setTimeout(function(){
+                                                    window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
+                                                }, 800);
+                                            }
+                                        });
+                                    }else{
+                                        setTimeout(function(){
+                                            window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
+                                        }, 800);
                                     }
-                                    });
-    						}else{
-    							setTimeout(function(){
-                                	window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
-								}, 800);
-    						}
-                            //window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
-                        }
+                                    //window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
+                                }
+                            }
+                        });
+
                     }
-                });
+                    ,function(index){
+                        layer.close(index);
+                    }
+                );
+
             }
         }
   //  }

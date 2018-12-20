@@ -184,5 +184,16 @@ public class CommunityServiceImpl implements CommunityService {
 		return communityDao.countTextBookList(material_id);
 	}
 
+	@Override
+	public List<Map<String, Object>> QueryActivitiById(Map<String,Object> map) {
+		List<Map<String, Object>> list=communityDao.QueryActivitiById(map);
+		return list;
+	}
+
+	@Override
+	public int QueryCountById(String material_id) {
+		return communityDao.QueryCountById(material_id);
+	}
+
 
 }

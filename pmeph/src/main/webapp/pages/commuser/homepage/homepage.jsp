@@ -50,9 +50,9 @@
             <div class="op-link">
                 <div class="transaction">
                     <div class="labeling">教材申报</div>
-                    <div class="bin consol" onclick="window.location.href='${ctx}/cmsnotice/tolist.action'">
+                    <div class="bin consol" onclick="window.location.href='${ctx}/research/tolist.action'">
                         <div class="lab-pic1"></div>
-                        最新公告
+                        调研表
                     </div>
                     <div class="bin marks"
                          onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?pagetag=jcsb'">
@@ -180,11 +180,11 @@
             </c:forEach>
             <div class="more" onclick="top.location='${ctx}/cmsnotice/tolist.action'">更多>></div>
         </div>
-        <div class="notice area-2-1" style="width: 100%;display: inline-block;margin-top: 10px">
+        <div class="notice area-2-1" style="width: 50.1%;display: inline-block;margin-top: 10px">
             <div class="bgcolor-blue" style="float: left;width: 7px;height: 100%"></div>
             <div class="lcjc-img"></div>
             <div class="lcjc">
-                <div class="lcjc-a" style="margin-left: 100px">
+                <div class="lcjc-a" style="margin-left: 10px">
                     <div class="lcjc-1" onclick="todeclaredetail(1)"></div>
                     <div class="lcjc-n">人卫临床助手</div>
                 </div>
@@ -198,11 +198,30 @@
                 </div>
             </div>
         </div>
-        <%--<div class="notice area-2-2" style="width: 49.5%;display: inline-block">
+        <div class="notice area-2-2" style="width: 49.5%;display: inline-block;float: right;margin-top: 10px">
             <div class="bgcolor-blue" style="float: left;width: 7px;height: 100%"></div>
             <div class="lcjc-img-1"></div>
-            <div class="lcjc-img-2"></div>
-        </div>--%>
+            <div style="height: 100%">
+                <c:forEach items="${listSzpt}" var="list">
+                    <div class="szpt" onclick="toszptdetail(${list.activity_id})">
+                        <div class="szpt-top">
+                            <c:choose>
+                                <c:when test="${list.cover == '' || list.cover == 'DEFAULT' || list.cover == null}">
+                                    <img src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg">
+                                </c:when>
+                                <c:otherwise>
+                                    <img src="${ctx}/image/${list.cover}.action">
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                        <div class="szpt-buttom">
+                            ${list.activity_name}
+                        </div>
+                    </div>
+                </c:forEach>
+                <div class="szpt-more" onclick="toteacherPlatform()">更多>></div>
+            </div>
+        </div>
         <div class="notice area-3" style="margin-top: 5px">
             <div class="title">
                 <div class="line bgcolor-blue"></div>

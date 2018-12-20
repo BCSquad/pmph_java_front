@@ -1,7 +1,39 @@
 $(function () {
 	var id = $("#material_id").val();
 	queryMaterialMap(id);  //执行查询方法
+	
+	//查询登录用户已经填写过的调研表
+	querySurvey();
 });
+
+function querySurvey() {
+    var id = $("#material_id").val();
+    $.ajax({
+        type: "POST",
+        url:contextpath+'research/queryAnswer.action',
+        data:{material_id:id},
+        async : false,
+        success: function(json) {
+            var str='';
+            $.each(json,function (i,n) {
+                var c=i+1;
+                str+='<div style="margin-top: 5px">\n' +
+                    '<div style="float: left;">'+c+').'+n.title+'</div>\n' +
+					'<div class="wrt">' +
+					'<img src="'+contextpath+'statics/image/tobb.png" style="background-size: 100%;width: 100%" onclick="tolook('+n.id+')">' +
+					'</div>\n' +
+					'</div>';
+                str+='<div style="clear: both"></div>';
+            });
+            $("#dyb").append(str);
+        }
+    });
+}
+
+//跳转到调研表查看页面
+function tolook(id) {
+    window.location.href = contextpath+"/orgSurvey/surveyDetailsById.action?surveyId=" + id+"&state="+'fromwrtlist';
+}
 
 //页面组合方法
 function queryMaterialMap(id){

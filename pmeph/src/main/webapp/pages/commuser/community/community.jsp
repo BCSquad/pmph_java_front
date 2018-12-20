@@ -86,6 +86,29 @@
             <div class="right"><a href="cmsinfoletters/tolist.action?materialId=${notice.material_id }">全部&gt;&gt;</a>
             </div>
         </div>
+        <div class="report"  style="float:right ">
+            <div class="left">
+                <div style="background-image: url(${ctx}/statics/image/r2.png);width:25px;height:100px;
+                        margin-left:10px;margin-top:34px"></div>
+            </div>
+            <div class="center">
+                <c:forEach items="${activitiList}" var="list" varStatus="status">
+                    <div title=""   class="center-up"
+                         onclick="window.location.href='<c:url value="/teacherPlatform/todetail.action?id=${list.cms_id}&activity_id=${list.activity_id}"/>'">
+                        <div class="center-img" >
+                            <img alt="" src="${ctx}/image/${list.cover}.action" style="display:block;width:120px;max-height:80px;margin: auto">
+                            <%--<img alt="" src="${ctx}/statics/image/564f34b00cf2b738819e9c35_122x122!.jpg" style="width:120px;height:80px;">--%>
+                        </div>
+                        <div class="center-down" >${list.activity_name}</div>
+                    </div>
+                </c:forEach>
+            </div>
+            <c:if test="${size>3}">
+                <div class="right"><a href="community/toactivitylist.action?material_id=${material_id}">更多&gt;&gt;</a></div>
+            </c:if>
+        </div>
+    </div>
+    <div class="pagecontent">
         <div class="book">
             <div class="bhead">
                 <div class="headicon"></div>
@@ -143,8 +166,7 @@
                 <div class="bt_tj" onclick="toMain()">返回</div>
             </div>
         </div>
-    </div>
-    <div class="pageright">
+        <div class="pageright">
         <div class="rhead">
             <div class="item select" id="comment" onclick="comments('${notice.material_id }')">
                 精选书评
@@ -175,6 +197,7 @@
         </div>
         <div class="more" id="more"><a
                 href="community/morecomments.action?materialId=${notice.material_id}">查看更多精选书评</a></div>
+    </div>
     </div>
     <div style="clear:both;width:100%"></div>
 </div>

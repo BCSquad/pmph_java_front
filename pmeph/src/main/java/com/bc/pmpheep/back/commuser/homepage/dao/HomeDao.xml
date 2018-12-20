@@ -468,4 +468,12 @@ LIMIT 0,10
 		   order BY p.gmt_set_active DESC
 	</select>
 
+	<!-- 查询首页师资培训,取最新三条数据 -->
+	<select id="Queryszpt" parameterType="java.util.Map" resultType="java.util.Map">
+          select b.id,t.activity_name,t.cover,t.id as activity_id
+              from activity t
+              left join cms_content b on b.id = t.info_express_cms_id
+              where  t.is_deleted=0 and t.status=1
+              order by t.is_set_top desc,t.gmt_set_top desc,t.gmt_create desc limit 0,3
+	</select>
 </mapper>
