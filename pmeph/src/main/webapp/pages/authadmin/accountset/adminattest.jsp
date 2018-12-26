@@ -311,6 +311,8 @@
 		                                            </option>
 		                                            <option value="院士" ${admininfo.title=='院士' ?'selected':''}>院士
 		                                            </option>
+                                                    <option value="其他" ${admininfo.title=='院士' ?'selected':''}>其他
+                                                    </option>
 		                                        </select>
                                     		</c:otherwise>
                                     	</c:choose>
