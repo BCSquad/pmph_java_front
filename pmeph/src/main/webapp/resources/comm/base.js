@@ -1,5 +1,5 @@
 //定义全局变量远程调用地址
-var remoteUrl = "119.254.226.115";
+var remoteUrl = "medu.ipmph.com";
 
 
 /**
