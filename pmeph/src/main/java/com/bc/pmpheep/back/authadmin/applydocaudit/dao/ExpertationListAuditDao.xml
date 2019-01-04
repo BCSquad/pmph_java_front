@@ -14,6 +14,8 @@
 		when e.online_progress=4  then '出版社退回'
 		when e.online_progress=5  then '出版社退回'	END)	as xxsh,
 		(case
+		when e.online_progress=1  then '待学校审核'
+		when ((e.online_progress=3) && (e.pmphAudit = 0))  then '待审核'
 		when ((e.online_progress=1||e.online_progress=3) && (e.finalResult = 0))  then '正在遴选'
 		when (e.online_progress=4  || e.online_progress=5) then '出版社退回'
 		when (e.finalResult =1 && (e.pmphAudit!=1))  then '遴选结束'

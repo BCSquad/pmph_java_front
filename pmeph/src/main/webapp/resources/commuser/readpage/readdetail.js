@@ -65,7 +65,7 @@ $(function () {
     var element;
     var returnInfo;
     var $uploadvideo = $("#upload-video").fileupload({
-        url: 'http://' + remoteUrl + '/v/upload',
+        url: 'http://' + remoteVideoUrl + '/v/upload',
         dataType: 'json',
         autoUpload: true,
         /*    formData: function () {
@@ -156,7 +156,7 @@ $(function () {
                     var intervalId = setInterval(function () {
                         $.ajax({
                             type: 'get',
-                            url: "http://" + remoteUrl + "/v/query?key=" + data.result.data,
+                            url: "http://" + remoteVideoUrl + "/v/query?key=" + data.result.data,
                             async: false,
                             dataType: 'json',
                             beforeSend: function (xhr, global) {
@@ -239,7 +239,7 @@ $(function () {
                                                     }
                                                 }
 
-                                                $(".pop-body").find("input[type='text']").change(function () {
+                                                $(".pop-body").find("input[type='text']").hover(function(){
                                                     valid();
                                                 });
                                                 $(".pop-body").find("button.submit").unbind("click")
