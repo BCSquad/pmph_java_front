@@ -43,6 +43,26 @@
             $("#sqid").html('申请<span style="display: inline-block;position:absolute;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;' +
                 'line-height: 10px;padding: 3px 0px;border-radius: 50%;right: 10;top: 0;width: 20px;height: 10px;text-align: center;">' + (${nodealcount}?${nodealcount}:0)  + '</span>');
 
+            $.ajax({
+                type:'post',
+                url:"getMessageCount.action",
+                async:false,
+                dataType:'json',
+                success:function(json){
+                    $("#tzid").html('通知<span style="display: inline-block;position:absolute;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;' +
+                        'line-height: 10px;border-radius: 50%;padding: 3px 0px;right: 10;top: 0;width: 20px;height: 10px;text-align: center;">' + json.nodealcount + '</span>');
+                }
+            });
+            $.ajax({
+                type:'post',
+                url:"${ctx}/mymessage/getMyMessageCount.action",
+                async:false,
+                dataType:'json',
+                success:function(json){
+                    $("#sxid").html('私信<span style="display: inline-block;position:absolute;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;' +
+                        'line-height: 10px;border-radius: 50%;padding: 3px 0px;right: 10;top: 0;width: 20px;height: 10px;text-align: center;">' + json.no_read_count + '</span>');
+                }
+            });
 
         });
 </script>
@@ -51,9 +71,9 @@
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div style="align-self: center">
     <div class="messageList">
-        <span><a href="${ctx}/message/noticeMessageList.action" class="otherOptions">通知</a></span>
+        <span><a id="tzid" href="${ctx}/message/noticeMessageList.action" class="otherOptions" style="position: relative">通知</a></span>
         <span id="otherSelected"><span id="sqid" style="position: relative">申请</span></span>
-        <span><a href="${ctx}/mymessage/listMyMessage.action" class="unselected">私信</a></span>
+        <span><a id='sxid' href="${ctx}/mymessage/listMyMessage.action" class="unselected" style="position: relative">私信</a></span>
             <span id="rightContent">
                 <span class="filtrate-wrapper">
                   		  筛选:

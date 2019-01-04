@@ -35,6 +35,7 @@ public class ReSearchController extends BaseController{
         Map<String,Object> map = new HashMap<>();
         Map<String, Object> user=getUserInfo();
         map.put("id",user.get("id"));
+        map.put("org_id",user.get("org_id"));
         map.put("state",state);
         PageParameter<Map<String, Object>> pageParameter = new PageParameter<Map<String, Object>>(pageNum, pageSize);
         pageParameter.setParameter(map);

@@ -167,8 +167,7 @@
 
                     <c:forEach items="${res.survey.materialSurveyQuestionList}" var="QuestionList"
                                varStatus="QuestionListStatus">
-
-                        <td><span class="qt">${QuestionListStatus.index+1}.${QuestionList.title}
+                        <td ><span class="qt" style="width: 97%">${QuestionListStatus.index+1}.${QuestionList.title}
                                   <c:if test="${QuestionList.isAnswer==1 }">
 
                                   </c:if>
@@ -251,8 +250,9 @@
                                                value="${QuestionList.optionContent}">
                                     </c:if>
                                     <c:if test="${QuestionList.optionContent==null }">
-                                        <input class="input" id="${QuestionList.id}" type="text">
-                                    </c:if>
+
+                                        <div class="tipso_bubble"></div> <input class="input "   onmouseover="checkedInput(this)" onmousemove="checkedInput(this)" id="${QuestionList.id}" type="text"><div class="tipso_arrow"></div>
+        </c:if>
                                 </td>
 
                             </c:if>
@@ -266,7 +266,7 @@
                                                   class="textarea">${QuestionList.optionContent}</textarea>
                                     </c:if>
                                     <c:if test="${QuestionList.optionContent==null }">
-                                        <textarea id="${QuestionList.id}" class="textarea"></textarea>
+                                        <div class="tipso_bubble"></div> <textarea id="${QuestionList.id}"   onmouseover="checkedInput(this)" onmousemove="checkedInput(this)" class="textarea"></textarea><div class="tipso_arrow"></div>
                                     </c:if>
 
                                 </td>
@@ -300,6 +300,8 @@
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 
 <script type="text/javascript">
+
+    var checkflag=true;
     var survey = {
         id: '',
         quesions: []
@@ -313,6 +315,22 @@
         answerTextArea: ''
     };
     $(function () {
+
+
+        setTimeout(function () {
+            $('.input').each(function (i,v) {
+                var $t = $(this);
+                $t.tipso({validator: "isNonEmpty", message: ""});
+            });
+            $('.textarea').each(function (i,v) {
+                var $t = $(this);
+                $t.tipso({validator: "isNonEmpty", message: ""});
+            });
+
+            //$('.input').tipso({validator: "isNonEmpty", message: "请选择申报的图书"});
+
+        },0);
+
         var type = "${res.type}";
         if (type) {
             if ("view" == type) {
@@ -409,6 +427,10 @@
 
     function commit() {
         /*提交问卷  JSON字符串提交*/
+
+        if(!checkflag){
+            return;
+        }
         var formDate = getForm();
         $.ajax({
             type: 'post',
@@ -437,6 +459,22 @@
         });
 
 
+    }
+
+
+    function checkedInput(obj){
+        if(obj.value.length>300){
+            $("#"+obj.id).addClass("tipso_style");
+            $(".tipso_content").html("输入最大长度300字");
+            checkflag=false;
+        }else if(obj.value.length<1){
+            $("#"+obj.id).addClass("tipso_style");
+            $(".tipso_content").html("不能为空");
+            checkflag=false;
+        }else{
+            $("#"+obj.id).removeClass("tipso_style");
+            checkflag=true;
+        }
     }
 </script>
 
