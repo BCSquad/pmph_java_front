@@ -320,6 +320,14 @@ $(function () {
         }
     });
 
+    $(".searchKey").each(function () {
+        var $t = $(this);
+        $t.bind("click",function () {
+            $(".search-input").val($t.html());
+            search();
+        });
+    })
+
 
     $(".delete").click(function () {
         $(".delete").css("display", "none");

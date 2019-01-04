@@ -476,4 +476,11 @@ LIMIT 0,10
               where  t.is_deleted=0 and t.status=1
               order by t.is_set_top desc,t.gmt_set_top desc,t.gmt_create desc limit 0,3
 	</select>
+
+	<select id="getSearchKeyWords" parameterType="Integer" resultType="String">
+		select word from search_keyword
+		where is_disabled = 0 and is_deleted = 0
+		order by sort asc
+		limit 0,#{num}
+	</select>
 </mapper>

@@ -91,11 +91,12 @@
                 typeUrl.put("apply", "/message/applyMessageList.action");
                 typeUrl.put("message", "/mymessage/listMyMessage.action");
 
+                ApplicationContext applicationContext =
+                        WebApplicationContextUtils.getRequiredWebApplicationContext(request.getSession().getServletContext());
+                HomeService homeService = applicationContext.getBean("com.bc.pmpheep.back.homepage.service.HomeServiceImpl", HomeService.class);
 
                 if (userInfo != null) {
-                    ApplicationContext applicationContext =
-                            WebApplicationContextUtils.getRequiredWebApplicationContext(request.getSession().getServletContext());
-                    HomeService homeService = applicationContext.getBean("com.bc.pmpheep.back.homepage.service.HomeServiceImpl", HomeService.class);
+
                     List<Map<String, Object>> list = homeService.queryNotReadMessages(MapUtils.getString(userInfo, "id"));
 
                     for (Map<String, Object> item : list) {
@@ -111,6 +112,9 @@
 
 
                 }
+                List<String> searchKeyWords = homeService.getSearchKeyWords(3);
+
+                request.setAttribute("searchKeyWords", searchKeyWords);
                 request.setAttribute("NOT_READ_MESSAGE_NUM", messageNum);
                 request.setAttribute("NOT_READ_MESSAGE_URL", typeUrl.get(type));
 
@@ -180,6 +184,11 @@
                 </div>
             </c:if>
 
+        </div>
+        <div class="searchKey-wrapper">
+            <c:forEach items="${searchKeyWords}" var="searchKey">
+                <span class="searchKey">${searchKey}</span>
+            </c:forEach>
         </div>
     </div>
 </div>
