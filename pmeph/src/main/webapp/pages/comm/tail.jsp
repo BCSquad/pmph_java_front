@@ -1,4 +1,7 @@
-<%--
+<%@ page import="org.springframework.context.ApplicationContext" %>
+<%@ page import="org.springframework.web.context.support.WebApplicationContextUtils" %>
+<%@ page import="com.bc.pmpheep.general.service.SiteLinkService" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: SuiXinYang
   Date: 2017/11/21
@@ -15,12 +18,23 @@
         <%
             String linked = request.getParameter("linked");
             request.setAttribute("linked", linked);
+
+            ApplicationContext applicationContext =
+                    WebApplicationContextUtils.getRequiredWebApplicationContext(request.getSession().getServletContext());
+            SiteLinkService siteLinkService =applicationContext.getBean("com.bc.pmpheep.general.service.SiteLinkService", SiteLinkService.class);
+
+            List<String> linkHtmlList = siteLinkService.getSiteHtmlPerRow();
+            request.setAttribute("linkHtmlList",linkHtmlList);
         %>
         <c:if test="${linked!=null}">
             <div style="text-align: center;height: 50px; font-size: 20px;">
                 友情链接
             </div>
-            <div class="about">
+            <c:forEach items="${linkHtmlList}" var="linkHtml">
+                <div class="about">${linkHtml}</div>
+            </c:forEach>
+
+            <%--<div class="about">
                 <a class="item" href="http://www.nhfpc.gov.cn/">中华人民共和国国家卫生和计划生育委员会</a>
                 <a class="item">|</a><a class="item" href="http://www.nmec.org.cn/">国家医学考试网</a>
                 <a class="item">|</a><a class="item" href="http://www.21wecan.com/">中国卫生人才网</a>
@@ -40,7 +54,7 @@
                 <a class="item">|</a><a class="item" href="">人卫酒店</a>
                 <a class="item">|</a><a class="item" href="">中国学生健康报</a>
                 <a class="item">|</a><a class="item" href="">世界中医药学会联合会出版编辑专业委员会</a>
-            </div>
+            </div>--%>
         </c:if>
 
 
