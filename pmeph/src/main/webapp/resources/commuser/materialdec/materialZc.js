@@ -22,9 +22,28 @@ $(function () {
         $('#email').tipso({validator: "isNonEmpty|isEmail", message: "邮箱不能为空|邮箱格式不正确"});
         $('#handphone').tipso({validator: "isNonEmpty|isMobile", message: "手机号码不能为空|手机号码格式不正确"});
         $('#zjlx').tipso({validator: "isNonEmpty", message: "证件类型不能为空"});
-        $('#idcard').tipso({validator: "isNonEmpty", message: "证件号码不能为空"});
+        $('#idcard').tipso({validator: "isNonEmpty|isCard", message: "证件号码不能为空|请填写正确的证件号码"});
         $('#address').tipso({validator: "isNonEmpty", message: "地址不能为空"});
         checkExtra();
+
+        $('#zjlx .select-list li').click(function(){
+            $('#idcard').tipso("destroy");
+            if($('input[name = "idtype"]').val()=='0'){
+                $('#idcard').tipso({validator: "isNonEmpty|isCard", message: "证件号码不能为空|请填写正确的证件号码"});
+                $('#idcard').attr("maxlength",18);
+            }else if($('input[name = "idtype"]').val()=='1'){
+                $('#idcard').tipso({validator: "isNonEmpty|isPassport", message: "证件号码不能为空|请填写正确的护照号码"});
+                $('#idcard').attr("maxlength",21);
+            }else if($('input[name = "idtype"]').val()=='2'){
+                $('#idcard').tipso({validator: "isNonEmpty|isOfficialCard", message: "证件号码不能为空|请填写正确的军官证号码"});
+                $('#idcard').attr("maxlength",21);
+            }else{
+                $('#idcard').tipso({validator: "isNonEmpty|isCard", message: "证件号码不能为空|请填写正确的证件号码"});
+                $('#idcard').attr("maxlength",18);
+            }
+
+        });
+
     },0)
 
 
