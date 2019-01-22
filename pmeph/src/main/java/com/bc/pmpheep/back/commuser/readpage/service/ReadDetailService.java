@@ -131,6 +131,12 @@ public interface ReadDetailService {
 	 * @return List<Map<String, Object>>
 	 */
 	List<Map<String, Object>> queryVideo(String book_id);
+	/**
+	 * 查询资源
+	 * @param book_id 书籍ID
+	 * @return List<Map<String, Object>>
+	 */
+	List<Map<String, Object>> querySource(String book_id);
 	
 	/**
 	 * 查询我的长评
@@ -173,5 +179,5 @@ public interface ReadDetailService {
 	 */
 	Map<String, Object> queryRelatedBookList(String id, int page, int type, String contextPath);
 
-
+	Integer addSource(Map<String, Object> map);
 }

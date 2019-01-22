@@ -24,7 +24,12 @@
 		(case
 		when e.isprint=0  then '未打印'
 		when e.isprint=1  then '已打印'
-		END)	as 	isprint
+		END)	as 	isprint,
+		(case
+		when e.unit_advise is null then "未上传"
+		when e.unit_advise is not null then "已上传"
+		end) as isUpload
+
 		from  expertation e
 		left join product p on p.id=e.product_id
 		left join writer_user wu on e.user_id=wu.id  where e.online_progress !=0  ]]>

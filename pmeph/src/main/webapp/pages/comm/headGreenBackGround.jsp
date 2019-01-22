@@ -34,8 +34,12 @@
             <%--<c:choose>
      			<c:when test="${ SESSION_USER_CONST_ORGUSER.progress==1}">--%>
 				<div class="div-menu-child <%="audit".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
-					 onclick="window.location.href='<c:url value="/applyDocAudit/toPage.action"/>'">申报资料审核
+					 onclick="window.location.href='<c:url value="/applyDocAudit/toPage.action"/>'">教材申报资料审核
 				</div>
+
+            <div class="div-menu-child <%="experAudit".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
+                 onclick="window.location.href='<c:url value="/expertationList/toPageList.action"/>'">临床决策专家申报审核
+            </div>
 			<%--</c:when>
 				<c:otherwise>
      			<div class="div-menu-child <%="audit".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"

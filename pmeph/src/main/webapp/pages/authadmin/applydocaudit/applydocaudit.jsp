@@ -48,13 +48,6 @@ String path = request.getContextPath();
                     <button value="1" class="status-tab ">正在进行</button>
                     <button value="2" class="status-tab ">已结束</button>
                 </div>
-                <div style="color: #03717b;cursor: pointer;margin-left: 20px;display: inline-block;margin-top: 5px;float: left;">
-                    <img src="<%=path%>/statics/image/yuanjiantou.png" >
-                </div>
-                <div style="color: #03717b;cursor: pointer;display: inline-block;height: 20px;
-                        line-height: 20px;float: left;margin-top: 5px; margin-left: 5px;"
-                     onclick="window.location.href='<c:url value="/expertationList/toPageList.action"/>'">临床决策专家申报审核
-                </div>
                 <div class="search-tag right">
                     <input id="search_condition_input" type="text" placeholder="公告搜索">
                     <button onclick="search()"></button>

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.PUT;
 
 import com.bc.pmpheep.back.commuser.homepage.service.HomeService;
+import com.bc.pmpheep.back.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -94,6 +95,7 @@ public class ReadDetailController extends BaseController{
 		List<Map<String, Object>> listCom=readDetailService.queryComment(id,0);
 		List<Map<String, Object>> ComNum=readDetailService.queryComment(id,-1);
 		List<Map<String, Object>> Video=readDetailService.queryVideo(id);
+		List<Map<String, Object>> source=readDetailService.querySource(id);
 		/*List<Map<String, Object>> auList=readDetailService.queryAuthorType(author);*/
 		List<Map<String, Object>> longList=readDetailService.queryLong(id,0);
 		if(longList.size()==0){
@@ -178,6 +180,7 @@ public class ReadDetailController extends BaseController{
 		/*modelAndView.addObject("frList", frList);
 		modelAndView.addObject("frNextPage", frNextPage);*/
 		modelAndView.addObject("Video",Video);
+		modelAndView.addObject("source",source);
 		modelAndView.addObject("longList", longList);
 		modelAndView.addObject("typeList", typeList);
 		modelAndView.addObject("start", 2);
@@ -594,6 +597,34 @@ public class ReadDetailController extends BaseController{
 		
 		
 		return m;
+	}
+
+	/**
+	 * 新增图书资源
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/addSource")
+	@ResponseBody
+	public Map<String,Object> addSource(HttpServletRequest request){
+		Map<String,Object> returnMap= new HashMap<String,Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		String book_id=request.getParameter("book_id");;
+		String attachment=request.getParameter("attachment");
+		String attachment_name=request.getParameter("attachment_name");
+		if(StringUtils.isEmpty(book_id)){
+			returnMap.put("returnCode","NO");
+		}else{
+			Map<String, Object> user=getUserInfo();
+			map.put("user_id", user.get("id"));
+			map.put("book_id", book_id);
+			map.put("file_id", attachment);
+			map.put("source_name", attachment_name);
+
+			int re= readDetailService.addSource(map);
+			returnMap.put("returnCode","OK");
+		}
+		return returnMap;
 	}
 	
 }

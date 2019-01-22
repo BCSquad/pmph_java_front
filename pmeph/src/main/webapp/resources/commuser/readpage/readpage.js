@@ -98,7 +98,14 @@ function ChangeFLDiv(divId, divName) {
      document.getElementById("FLDiv_"+divId).setAttribute("class","ts_type ts_type1");
      //显示当前层*/
 }
-
+function toImageUrl(val) {
+    let url=val;
+    let regex =/(http:\/\/|https:\/\/)((\w|=|\?|\.|\/|&|-)+)/g;
+    if(url&&!regex.test(val)) {
+        url="http://"+val;
+    }
+    window.open(url)
+}
 //重点推荐
 function searchBook(typeid) {
     $.ajax({

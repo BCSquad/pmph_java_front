@@ -232,6 +232,15 @@ function cancel() {
 function tosurvey() {
 	location.href = contextpath + 'survey/surveyList.action';
 }
+// 跳转到问卷调查页面
+function toImageUrl(val) {
+    let url=val;
+    let regex =/(http:\/\/|https:\/\/)((\w|=|\?|\.|\/|&|-)+)/g;
+    if(url&&!regex.test(val)) {
+        url="http://"+val;
+    }
+    window.open(url)
+}
 
 //三个新产品跳转
 function todeclaredetail(state){
@@ -269,7 +278,15 @@ function toteacherPlatform() {
 function toszptdetail(activity_id) {
     location.href = contextpath + 'teacherPlatform/todetail.action?activity_id='+activity_id;
 }
+function openHref(){
 
+    let url=val;
+    let regex =/(http:\/\/|https:\/\/)((\w|=|\?|\.|\/|&|-)+)/g;
+    if(url&&!regex.test(val)) {
+        url="http"+val;
+    }
+    window.open(url)
+}
 //添加好友 按钮触发
 function addFriendfun(uid,realname,status){
 	var data={uid:uid,status:status};
