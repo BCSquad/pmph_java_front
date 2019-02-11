@@ -128,7 +128,7 @@ $(function () {
                      });*/
 
                     /* $('.pop-body select').selectlist({
-                     zIndex: 10,
+                     zIndex: 100,
                      width: 437,
                      height: 30,
                      optionHeight: 20
@@ -310,6 +310,16 @@ $(function () {
 
     morecontent();
 
+    $(".rd_name.tag").each(function(){
+        var $t = $(this);
+        $t.unbind().bind("click",function () {
+            $(".rd_name.tag").removeClass("active");
+            $t.addClass("active");
+            $(".list-page").hide();
+            $("."+$t.attr("tagName")).show();
+        });
+    });
+    $('.rd_name.tag').first().trigger('click');
 
     relatiedBookPageSwitch('1');
     relatiedBookPageSwitch('2');
@@ -334,11 +344,15 @@ function hidevideo() {
 
 //分页的具体实现
 function changepage() {
+
+    var tagName = $(".rd_name.tag.active").attr("tagName");
+
     $(".morecom").show();
     $(".moreothers").hide();
     var json = {
-        pageNumber: $("#start").val(),
+        pageNumber: $(".start."+tagName).val(),
         id: $("#book_id").val(),
+        tagName : tagName
     };
     $.ajax({
         type: 'post',
@@ -353,10 +367,11 @@ function changepage() {
                 $("#moreothers").html('');
             } else {
                 json = json.slice(0, 2);
+                $("#moreothers").html('加载更多');
             }
             var str = '';
             $.each(json, function (i, n) {
-                $("#start").val(n.start);
+                $(".start."+tagName).val(n.start);
                 str += '<div class="item"><div class="item_title">'
                     + '<div style="float: left;"><img src="';
                 if (n.avatar == '' || n.avatar == 'DEFAULT' || n.avatar == null) {
@@ -367,44 +382,53 @@ function changepage() {
                 str += '" class="picturesize"/></div><div style="float: left;margin-left: 10px;margin-top: 5px;">' +
                     n.nickname
                     + '</div><div style="float: left;margin-left: 10px;">';
-                if (n.score <= 3) {
-                    str += '<span class="rwtx1"></span>'
-                        + '<span class="rwtx2"></span>'
-                        + '<span class="rwtx2"></span>'
-                        + '<span class="rwtx2"></span>'
-                        + '<span class="rwtx2"></span>'
-                } else if (n.score <= 5) {
-                    str += '<span class="rwtx1"></span>'
-                        + '<span class="rwtx1"></span>'
-                        + '<span class="rwtx2"></span>'
-                        + '<span class="rwtx2"></span>'
-                        + '<span class="rwtx2"></span>'
-                } else if (n.score <= 7) {
-                    str += '<span class="rwtx1"></span>'
-                        + '<span class="rwtx1"></span>'
-                        + '<span class="rwtx1"></span>'
-                        + '<span class="rwtx2"></span>'
-                        + '<span class="rwtx2"></span>'
-                } else if (n.score <= 9) {
-                    str += '<span class="rwtx1"></span>'
-                        + '<span class="rwtx1"></span>'
-                        + '<span class="rwtx1"></span>'
-                        + '<span class="rwtx1"></span>'
-                        + '<span class="rwtx2"></span>'
-                } else if (n.score == 10) {
-                    str += '<span class="rwtx1"></span>'
-                        + '<span class="rwtx1"></span>'
-                        + '<span class="rwtx1"></span>'
-                        + '<span class="rwtx1"></span>'
-                        + '<span class="rwtx1"></span>'
+                if("changepage"==tagName) {
+                    if (n.score <= 3) {
+                        str += '<span class="rwtx1"></span>'
+                            + '<span class="rwtx2"></span>'
+                            + '<span class="rwtx2"></span>'
+                            + '<span class="rwtx2"></span>'
+                            + '<span class="rwtx2"></span>'
+                    } else if (n.score <= 5) {
+                        str += '<span class="rwtx1"></span>'
+                            + '<span class="rwtx1"></span>'
+                            + '<span class="rwtx2"></span>'
+                            + '<span class="rwtx2"></span>'
+                            + '<span class="rwtx2"></span>'
+                    } else if (n.score <= 7) {
+                        str += '<span class="rwtx1"></span>'
+                            + '<span class="rwtx1"></span>'
+                            + '<span class="rwtx1"></span>'
+                            + '<span class="rwtx2"></span>'
+                            + '<span class="rwtx2"></span>'
+                    } else if (n.score <= 9) {
+                        str += '<span class="rwtx1"></span>'
+                            + '<span class="rwtx1"></span>'
+                            + '<span class="rwtx1"></span>'
+                            + '<span class="rwtx1"></span>'
+                            + '<span class="rwtx2"></span>'
+                    } else if (n.score == 10) {
+                        str += '<span class="rwtx1"></span>'
+                            + '<span class="rwtx1"></span>'
+                            + '<span class="rwtx1"></span>'
+                            + '<span class="rwtx1"></span>'
+                            + '<span class="rwtx1"></span>'
+                    }
                 }
+
                 str += '</div><div class="date_content"><div class="date">'
                     + n.gmt_create
-                    + '</div></div></div><div class="item_content">'
+                    + '</div></div></div>' ;
+                if("correctpage"==tagName){
+                    str += '<div class="item_content">\n' +
+                        '第'+n.page+'页，第'+n.line+'行:\n' +
+                        '                        </div>';
+                }
+                str+= '<div class="item_content">'
                     + n.content
                     + '</div><hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;"></div>';
             });
-            $("#changepage").append(str);
+            $("#"+tagName).append(str);
         },
     });
 

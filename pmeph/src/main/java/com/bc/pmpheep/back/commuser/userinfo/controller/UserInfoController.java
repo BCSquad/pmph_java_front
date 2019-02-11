@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.bc.pmpheep.general.controller.BaseController;
+import com.bc.pmpheep.general.service.DataDictionaryService;
 import com.bc.pmpheep.general.service.FileService;
 import com.bc.pmpheep.general.service.MessageService;
 import com.bc.pmpheep.general.service.UserService;
@@ -45,6 +46,9 @@ public class UserInfoController extends BaseController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    DataDictionaryService dataDictionaryService;
+
     /**
      * 无权限 跳转地址
      * @param request
@@ -78,6 +82,12 @@ public class UserInfoController extends BaseController {
                 }
             }
         }
+        //数据字典
+        modelAndView.addObject("writerUserDegree", dataDictionaryService.getDataDictionaryListByType(Const.WRITER_USER_DEGREE));
+        modelAndView.addObject("writerUserTitle", dataDictionaryService.getDataDictionaryListByType(Const.WRITER_USER_TITLE));
+        modelAndView.addObject("pmphRank", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_RANK));
+        modelAndView.addObject("pmphPosition", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_POSITION));
+
         modelAndView.addObject("map", map);
         modelAndView.setViewName("commuser/userinfo/userinfo");
         return modelAndView;

@@ -405,8 +405,6 @@ function getImageTips(id,htmlId){
 }
 
 
-
-
 // 鼠标离开 提示语 消失
 function removeImageTips(){
     clearTimeout(t_Time);

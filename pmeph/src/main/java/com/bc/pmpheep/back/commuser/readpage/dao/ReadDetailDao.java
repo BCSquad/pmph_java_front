@@ -19,6 +19,18 @@ public interface ReadDetailDao {
 	 */
 	List<Map<String, Object>> queryComment(@Param("id") String id,@Param("start") int start);
 	/**
+	 * 根据书籍ID查询纠错
+	 * @param id
+	 * @return List<Map<String, Object>>
+	 */
+	List<Map<String, Object>> queryCorrectByBookId(@Param("id") String id,@Param("start") int start);
+	/**
+	 * 根据书籍ID查询读者反馈
+	 * @param id
+	 * @return List<Map<String, Object>>
+	 */
+	List<Map<String, Object>> queryFeedBackByBookId(@Param("id") String id,@Param("start") int start);
+	/**
 	 * 根据书籍ID查询配套图书
 	 * @param id
 	 * @return Map<String, Object>

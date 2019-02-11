@@ -77,7 +77,10 @@
 								<input class="cg_input" name="position" value="${userMap.position}" id="position"  maxlength="36"/></td>
 							<td><span class="btbs">*</span><span>职&emsp;&emsp;称：</span>
                                 <select id="zclx" name="title">
-                                    <option value="院士" ${userMap.title=='院士'?'selected':'' }>院士</option>
+									<c:forEach items="${writerUserTitle}" var="dic">
+										<option value="${dic.code}" ${userMap.title == dic.code ? 'selected':''}>${dic.name}</option>
+									</c:forEach>
+                                    <%--<option value="院士" ${userMap.title=='院士'?'selected':'' }>院士</option>
                                     <option value="教授"  ${userMap.title=='教授'?'selected':'' }>教授</option>
                                     <option value="正高"  ${userMap.title=='正高'?'selected':'' }>正高</option>
                                     <option value="副教授" ${userMap.title=='副教授'?'selected':'' }>副教授</option>
@@ -87,7 +90,7 @@
 									<option value="主任药师" ${userMap.title=='主任药师'?'selected':'' }>主任药师</option>
 									<option value="副主任药师" ${userMap.title=='副主任药师'?'selected':'' }>副主任药师</option>
 									<option value="主管药师" ${userMap.title=='主管药师'?'selected':'' }>主管药师</option>
-									<option value="其他" ${userMap.title=='其他'?'selected':'' }>其他</option>
+									<option value="其他" ${userMap.title=='其他'?'selected':'' }>其他</option>--%>
 								</select></td>
 							<td><span>&ensp;联系电话：</span>
 								<input class="cg_input" name="telephone" value="${userMap.telephone}" id="telephone"
@@ -113,11 +116,14 @@
 								<input class="cg_input" name="idcard" value="${userMap.idcard}" id="idcard"  maxlength="18"/></td>
 							<td><span class="btbs">*</span><span>学&emsp;&emsp;历：</span>
 								<select id="education" name="education">
-									<option value="0">专科</option>
+									<c:forEach items="${writerUserDegree}" var="dic">
+										<option value="${dic.code}" ${userMap.education==dic.code?'selected':'' }>${dic.name}</option>
+									</c:forEach>
+									<%--<option value="0">专科</option>
 									<option value="1" selected="selected">本科</option>
 									<option value="2">硕士</option>
 									<option value="4">博士</option>
-									<option value="3">博士后</option>
+									<option value="3">博士后</option>--%>
 								</select></td>
 						</tr>
 						<tr>

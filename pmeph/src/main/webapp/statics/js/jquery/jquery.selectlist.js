@@ -7,7 +7,7 @@
  * 用法
  * $(function(){
 		$('select').selectlist({
-			zIndex: 10,
+			zIndex: 100,
 			width: 200,
 			height: 26,
 			optionHeight:26

@@ -21,7 +21,7 @@ $(function () {
     });
 
     $('select').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 264,
         height: 40,
         optionHeight: 40,

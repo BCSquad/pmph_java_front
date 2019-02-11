@@ -66,7 +66,8 @@
 	</delete>
 	<!--上版教材编辑-->
 	<select id="queryPerJcbj" resultType="java.util.Map" parameterType="java.util.Map">
-		select id,user_id,material_name,position,is_digital_editor*1 is_digital_editor,note,sort,publisher,publish_date,REPLACE(publish_date,'-','.') as  publishdate from per_last_position where user_id = #{user_id} ORDER BY sort
+		select id,user_id,material_name,position,is_digital_editor*1 is_digital_editor,note,sort,publisher,publish_date,REPLACE(publish_date,'-','.') as  publishdate
+		from per_last_position where user_id = #{user_id} ORDER BY sort
 	</select>
 	<insert id="insertPerJcbj" parameterType="java.util.Map">
 		insert into per_last_position(id,user_id,material_name,position,is_digital_editor,publisher,publish_date,note,sort)
@@ -89,7 +90,7 @@
 	</insert>
 	<update id="updatePerGjkcjs" parameterType="java.util.Map">
 		update per_course_construction set course_name = #{course_name},class_hour=#{class_hour},type=#{type},
-		note=#{note},sort=#{sort} where id = #{id}
+		note=#{note},sort=#{sort} where id = #{per_id}
 	</update>
 	<delete id="DelPerGjkcjs" parameterType="java.util.Map">
 		delete from per_course_construction where user_id = #{user_id}
@@ -196,7 +197,8 @@
 	</delete>
 	<!-- //主编学术专著情况 -->
 	<select id="queryPerMonograph" resultType="java.util.Map" parameterType="java.util.Map">
-		select id,user_id,monograph_name,monograph_date,REPLACE(monograph_date,'-','.') as monographdate,is_self_paid*1 is_self_paid,publisher,publish_date,REPLACE(publish_date,'-','.') as publishdate,note,sort from per_monograph where user_id = #{user_id} ORDER BY sort
+		select id,user_id,monograph_name,monograph_date,REPLACE(monograph_date,'-','.') as monographdate,is_self_paid*1 is_self_paid,publisher,publish_date,REPLACE(publish_date,'-','.') as publishdate,note,sort
+		from per_monograph where user_id = #{user_id} ORDER BY sort
 	</select>
 	<insert id="insertPerMonograph" parameterType="java.util.Map">
 		insert into per_monograph(id,user_id,monograph_name,monograph_date,is_self_paid,publisher,publish_date,note,sort)
@@ -204,7 +206,7 @@
 	</insert>
 	<update id="updatePerMonograph" parameterType="java.util.Map">
 		update per_monograph set monograph_name = #{monograph_name},monograph_date=#{monograph_date},is_self_paid=#{is_self_paid},
-		publisher=#{publisher},publish_date=#{publish_date},note=#{note},sort=#{sort} where id = #{id}
+		publisher=#{publisher},publish_date=#{publish_date},note=#{note},sort=#{sort} where id = #{per_id}
 	</update>
 	<delete id="DelPerMonograph" parameterType="java.util.Map">
 		delete from per_monograph where user_id = #{user_id}

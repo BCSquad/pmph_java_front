@@ -2,6 +2,9 @@ package com.bc.pmpheep.back.util;
 
 import org.springframework.context.ApplicationContext;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * <pre>
@@ -207,4 +210,21 @@ public class Const {
     public static final String       SESSION_USER_CONST_WRITER  ="SESSION_USER_CONST_WRITER";
 
     public static final String       SESSION_USER_CONST_TYPE    ="SESSION_USER_CONST_TYPE";
+
+    /**
+     *申报表中“职称”项的数据字典 业务编码
+     */
+    public static final String       WRITER_USER_TITLE = "writer_user_title";
+    /**
+     * 申报表中“学历”项的数据字典 业务编码
+     */
+    public static final String       WRITER_USER_DEGREE = "writer_user_degree";
+    /**
+     * 人卫社教材编写情况表/其他社教材编写情况 -级别 业务编码
+     */
+    public static final String       PMPH_RANK = "pmph_rank";
+    /**
+     * 人卫社教材编写情况表/其他社教材编写情况-编写职务 业务编码
+     */
+    public static final String       PMPH_POSITION = "pmph_position";
 }

@@ -291,4 +291,31 @@ public interface PersonalService {
 	 * @return
 	 */
 	public int queryMyBookFeedBackCount(PageParameter<Map<String, Object>> pageParameter);
+
+	/**
+	 * 保存或更新个人申报信息
+	 * @param perMap
+	 * @param tssbList
+	 * @param stuList
+	 * @param workList
+	 * @param steaList
+	 * @param zjxsList
+	 * @param jcbjList
+	 * @param gjkcjsList
+	 * @param gjghjcList
+	 * @param jcbxList
+	 * @param zjkyList
+	 * @param zjkzqkList
+	 * @param achievementMap
+	 * @param monographList
+	 * @param publishList
+	 * @param sciList
+	 * @param clinicalList
+	 * @param acadeList
+	 * @param pmphList
+	 * @param digitalMap
+	 * @param intentionlMap
+	 * @return
+	 */
+    Map<String,Object> savePerInfo(Map<String, Object> perMap, List<Map<String, Object>> tssbList, List<Map<String, Object>> stuList, List<Map<String, Object>> workList, List<Map<String, Object>> steaList, List<Map<String, Object>> zjxsList, List<Map<String, Object>> jcbjList, List<Map<String, Object>> gjkcjsList, List<Map<String, Object>> gjghjcList, List<Map<String, Object>> jcbxList, List<Map<String, Object>> zjkyList, List<Map<String, Object>> zjkzqkList, Map<String, Object> achievementMap, List<Map<String, Object>> monographList, List<Map<String, Object>> publishList, List<Map<String, Object>> sciList, List<Map<String, Object>> clinicalList, List<Map<String, Object>> acadeList, List<Map<String, Object>> pmphList, Map<String, Object> digitalMap, Map<String, Object> intentionlMap);
 }

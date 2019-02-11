@@ -33,7 +33,7 @@
         $(function(){
         	
             $('#select').selectlist({
-                zIndex: 10,
+                zIndex: 100,
                 width: 100,
                 height: 20,
                 optionHeight: 20,

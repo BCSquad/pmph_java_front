@@ -227,7 +227,7 @@
                 <div class="xsp" style="float: left;">
                     <div id="xsp"></div>
                     <%--<a href="#001" onclick="writeablut()" style="text-decoration: none"><span id="xsp1">写书评</span></a>  --%>
-                    <a  style="text-decoration: none;cursor: pointer;" onclick="$('#content_book').focus()" ><span id="xsp1">写书评</span></a>
+                    <a  style="text-decoration: none;cursor: pointer;" onclick="$('.rd_name.tag').first().trigger('click');$('#content_book').focus()" ><span id="xsp1">写书评</span></a>
 
                 </div>
                 <div class="mistake" onclick="showup(1)">
@@ -340,10 +340,13 @@
             <div class="block">
                 <div class="title">
                     <div class="line"></div>
-                    <div class="rd_name">图书评论(共${ComNum}条)</div>
+                    <div class="rd_name tag active" tagName="changepage">图书评论(共${ComNum}条)</div>
+                    <div class="rd_name tag" tagName="correctpage">图书纠错(共${CorrNum}条)</div>
+                    <div class="rd_name tag" tagName="feedpage">读者反馈(共${FeedNum}条)</div>
                 </div>
-                <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 15px;">
-                <div class="pl_add">
+                <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 0px;">
+
+                <div class="pl_add changepage list-page">
                     <a name="001" id="001"></a>
                     <textarea class="tarea textarea_content" id="content_book" onkeyup="javascript:LengthLimit(this,500);"
                               onblur="javascript:LengthLimit(this,500);"></textarea>
@@ -367,8 +370,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="block">
-                    <divlistCom id="changepage">
+                <div class="">
+
+                    <divlistCom class="list-page changepage" id="changepage">
                         <c:forEach items="${listCom}" var="list" begin="0" end="1">
                             <div class="item">
                                 <div class="item_title">
@@ -435,8 +439,76 @@
                             </div>
                         </c:forEach>
                     </divlistCom>
+
+                    <divlistCorrect class="list-page correctpage" id="correctpage">
+                        <c:forEach items="${listCorr}" var="list" begin="0" end="1">
+                            <div class="item">
+                                <div class="item_title">
+                                    <div style="float: left;">
+                                        <c:if test="${list.avatar=='DEFAULT'}"><img
+                                                src="${ctx}/statics/image/default_image.png" class="picturesize"></c:if>
+                                        <c:if test="${list.avatar!='DEFAULT'}"><img
+                                                src="${ctx}/image/${list.avatar}.action" class="picturesize"></c:if>
+                                    </div>
+                                    <div style="float: left;margin-left: 10px;margin-top: 5px;">
+                                        <c:if test="${list.nickname==null or list.nickname==''}">
+                                            ${list.username}
+                                        </c:if>
+                                        <c:if test="${list.nickname!=null and list.nickname!=''}">
+                                            ${list.nickname}
+                                        </c:if>
+                                    </div>
+
+                                    <div class="date_content">
+                                        <div class="date">${list.gmt_create}</div>
+                                    </div>
+                                </div>
+                                <div class="item_content">
+                                       第${list.page}页，第${list.line}行:
+                                </div>
+                                <div class="item_content">
+                                        ${list.content}
+                                </div>
+                                <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
+                            </div>
+                        </c:forEach>
+                    </divlistCorrect>
+
+                    <divlistFeed class="list-page feedpage" id="feedpage">
+                        <c:forEach items="${listFeed}" var="list" begin="0" end="1">
+                            <div class="item">
+                                <div class="item_title">
+                                    <div style="float: left;">
+                                        <c:if test="${list.avatar=='DEFAULT'}"><img
+                                                src="${ctx}/statics/image/default_image.png" class="picturesize"></c:if>
+                                        <c:if test="${list.avatar!='DEFAULT'}"><img
+                                                src="${ctx}/image/${list.avatar}.action" class="picturesize"></c:if>
+                                    </div>
+                                    <div style="float: left;margin-left: 10px;margin-top: 5px;">
+                                        <c:if test="${list.nickname==null or list.nickname==''}">
+                                            ${list.username}
+                                        </c:if>
+                                        <c:if test="${list.nickname!=null and list.nickname!=''}">
+                                            ${list.nickname}
+                                        </c:if>
+                                    </div>
+
+                                    <div class="date_content">
+                                        <div class="date">${list.gmt_create}</div>
+                                    </div>
+                                </div>
+                                <div class="item_content">${list.content}</div>
+                                <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
+                            </div>
+                        </c:forEach>
+                    </divlistFeed>
+
+
                     <div class="morecon">
-                        <input type="hidden" value="${start}" id="start">
+                        <input type="hidden" value="${start}" class="start changepage">
+                        <input type="hidden" value="${start}" class="start correctpage">
+                        <input type="hidden" value="${start}" class="start feedpage">
+
                         <span class="moreothers" onclick="changepage()"
                               id="moreothers">${shortcom=='nothing' ? '[暂无评论]':'加载更多...'}</span>
                         <div class="morecom" style="display: none;"></div>

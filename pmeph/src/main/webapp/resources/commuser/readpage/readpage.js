@@ -9,7 +9,7 @@ $(function () {
     
     //0级图书类型下拉菜单初始化
     $("#ts_type_0").selectlist({
-        zIndex: 100,
+        zIndex: 1000,
         width: 100,
         height: 25,
         optionHeight: 25,

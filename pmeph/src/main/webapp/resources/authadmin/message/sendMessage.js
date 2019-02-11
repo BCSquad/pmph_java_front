@@ -206,7 +206,7 @@ $(function(){
 	});
 
 	$('#page-size-select').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 110,
         height: 30,
         optionHeight: 30
@@ -218,7 +218,7 @@ $(function(){
 		queryMain();
 	});
     $('#select-search-condition').selectlist({
-    	zIndex: 10,
+    	zIndex: 100,
         width: 600,
         height: 40,
         fiter: true,

@@ -220,7 +220,7 @@
                 $e.unbind('mouseout' + '.' + pluginName).on('mouseout' + '.' + pluginName, function () {
                     obj.hide();
                 });
-                $e.change(function () {
+                $e.unbind('change'+ '.' + pluginName).on('change' + '.' + pluginName,function () {
                     var value = "";
                     if (obj.element.find("input[type='hidden']").length > 0) {
                         value = obj.element.find("input[type='hidden']").val()
@@ -235,7 +235,23 @@
                         obj.showStyle();
                         obj.show();
                     }
-                });
+                })
+                /*$e.change(function () {
+                    var value = "";
+                    if (obj.element.find("input[type='hidden']").length > 0) {
+                        value = obj.element.find("input[type='hidden']").val()
+                    } else {
+                        value = obj.element.val()
+                    }
+                    //if (!(obj.settings.content = startValidate.call(obj.element, obj.settings.validator, value, obj.settings.message))) {
+                    if (!(obj.settings.content = startValidate.call(obj.element,$(obj.element).data("plugin_"+pluginName).settings.validator, value, $(obj.element).data("plugin_"+pluginName).settings.message))) {
+                        obj.hideStyle();
+                        obj.hide();
+                    }else {
+                        obj.showStyle();
+                        obj.show();
+                    }
+                });*/
 
             }
             /*if(updateTempIndex>=0){
@@ -646,6 +662,11 @@
 					}
                 	//从fireValidator校验列表中删除此项
                 	if(desTempIndex>=0){
+                	    //隐藏泡泡
+                        list[desTempIndex].hide();
+                        //删除该输入框的改变事件，该事件会生成泡泡（虽然fireValidator不再校验）
+                        list[desTempIndex].element.unbind('change'+ '.' + pluginName);
+                        //从fireValidator校验列表中删除此项
                 		list.splice(desTempIndex, 1); 
                 	}
                     //$.data(this, 'plugin_' + pluginName, null);

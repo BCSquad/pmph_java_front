@@ -1,6 +1,6 @@
 $(function(){
 	$('#auth_status_select').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 80,
         height: 30,
         optionHeight: 30

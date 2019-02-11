@@ -45,9 +45,52 @@
 	     order by t.sort*t.is_stick DESC , t.gmt_create desc
 	     <if test="start >= 0">
 	        limit #{start},3
-	     </if> 
-	     
+	     </if>
 	</select>
+
+	<!-- 根据书籍ID查询纠错信息 -->
+	<select id="queryCorrectByBookId" parameterType="java.util.Map" resultType="java.util.Map">
+		select
+		bc.content,
+		bc.gmt_create,
+		bc.page,
+		bc.line,
+		bc.is_editor_replied,
+		bc.editor_reply,
+		bc.result,
+		u.realname,
+		u.nickname,
+		u.username,
+		u.avatar
+		from
+		book_correction bc
+		left join writer_user u on bc.user_id = u.id
+		where bc.is_deleted =0 and gmt_show > '0000-00-00 00:00:00' and bc.book_id = #{id}
+		order by bc.gmt_show DESC
+		<if test="start >= 0">
+			limit #{start},3
+		</if>
+	</select>
+
+	<!-- 根据书籍ID查询反馈信息 -->
+	<select id="queryFeedBackByBookId" parameterType="java.util.Map" resultType="java.util.Map">
+		select
+		f.content,
+		f.gmt_create,
+		u.realname,
+		u.nickname,
+		u.username,
+		u.avatar
+		from
+		book_user_feedback f
+		left join writer_user u on f.user_id = u.id
+		where f.is_deleted =0 and f.gmt_show > '0000-00-00 00:00:00' and f.book_id = #{id}
+		order by f.gmt_show DESC
+		<if test="start >= 0">
+			limit #{start},3
+		</if>
+	</select>
+
 	<!-- 查询一共有多少条数据 -->
 	<select id="querySize" parameterType="java.util.Map" resultType="int">
 	   select count(*) from book_user_comment where book_id=#{book_id}
@@ -69,7 +112,7 @@
 	<select id="queryRecommendByE" parameterType="java.util.Map" resultType="java.util.Map">
 	    select bookname,author,id
 	       from book t 
-	       where t.is_promote != 0 OR t.is_promote is not null 
+	       where t.is_promote != 0 and t.is_promote is not null
 	    <if test="x >= 0">
 	        limit #{x},5
 	    </if>

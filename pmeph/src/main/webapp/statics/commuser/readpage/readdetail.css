@@ -166,7 +166,7 @@
 }
 
 .date {
-
+    margin-left: 20px;
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -656,6 +656,7 @@
     height:200px;
     background-color: #f1fbf4;
     margin-top: 21px;
+    margin-bottom:40px;
     border: 1px solid #B6EFCE;
     border-radius: 3px;
 }
@@ -1210,3 +1211,26 @@
 img.no_relation {
     width: 100%;
 }
+
+
+element.style {
+    background-color: #ecf4f6;
+    border-radius: 5px 5px 0px 0px;
+    border: 1px #e6e6e6 solid;
+    border-bottom: none;
+    color: #489299;
+}
+.block .title .rd_name.tag{
+    padding: 0px 10px;
+    margin-bottom: 0px;
+    cursor: pointer;
+}
+
+.block .title .rd_name.tag.active{
+    background-color: #ecf4f6;
+    border-radius: 5px 5px 0px 0px;
+    border: 1px #e6e6e6 solid;
+    border-bottom: none;
+    color: #489299;
+}
+

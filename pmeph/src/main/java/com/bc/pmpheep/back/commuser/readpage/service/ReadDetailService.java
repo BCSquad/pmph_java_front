@@ -20,9 +20,10 @@ public interface ReadDetailService {
 	/**
 	 * 查询书籍相关评论
 	 * @param id
+	 * tagName 集合了评论 纠错 反馈 的下拉加载查询 通过tagName区分
 	 * @return
 	 */
-	List<Map<String, Object>> queryComment(String id,int start);
+	List<Map<String, Object>> queryComment(String id,int start,String... tagName);
 	/**
 	 * 根据书籍ID查询配套图书
 	 * @param id

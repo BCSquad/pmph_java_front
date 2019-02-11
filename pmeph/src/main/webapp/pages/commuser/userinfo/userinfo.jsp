@@ -49,7 +49,7 @@
             });
             $(function() {
                 $('select').selectlist({
-                    zIndex: 10,
+                    zIndex: 100,
                     width: 280,
                     height: 40,
                     optionHeight: 40
@@ -140,14 +140,17 @@
 	                    <input type="hidden" >
 	                    <select class="sxy-select-td" id="title" name="title">
 	                    	<option value="" >请选择</option>
-	                    	<option value="院士" ${map.title=='院士' ?'selected':''}>院士</option>
+                            <c:forEach items="${writerUserTitle}" var="dic">
+                                <option value="${dic.code}" ${map.title == dic.code ? 'selected':''}>${dic.name}</option>
+                            </c:forEach>
+	                    	<%--<option value="院士" ${map.title=='院士' ?'selected':''}>院士</option>
 	                        <option value="教授" ${map.title=='教授' ?'selected':''}>教授</option>
 	                        <option value="正高" ${map.title=='正高' ?'selected':''}>正高</option>
 	                        <option value="副教授" ${map.title=='副教授' ?'selected':''}>副教授</option>
 	                        <option value="副高" ${map.title=='副高' ?'selected':''}>副高</option>
 	                        <option value="高级讲师" ${map.title=='高级讲师' ?'selected':''}>高级讲师</option>
 	                        <option value="讲师" ${map.title=='讲师' ?'selected':''}>讲师</option>
-	                        <option value="其他" ${map.title=='其他' ?'selected':''}>其他</option>
+	                        <option value="其他" ${map.title=='其他' ?'selected':''}>其他</option>--%>
 	                    </select>
                     </div>
                   </div>

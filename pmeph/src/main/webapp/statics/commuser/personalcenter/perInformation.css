@@ -1,0 +1,43 @@
+.content {
+    width: 1200px;
+    /* width: 1050px; */
+    margin-top: 15px;
+}
+.tab_1{
+    width: 100%;
+    margin-top: 15px;
+}
+.tab_1 tr{
+    height: 45px;
+}
+.tab_1 tr td{
+    height: 45px;
+}
+.tab_1 tr td {
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 26px;
+    letter-spacing: 0px;
+    color: #333333;
+}
+.tab_1 tr td span{
+    display: inline-block;
+}
+cg_input {
+    width: 120px;
+    height: 26px;
+    line-height: 26px;
+    border: solid 1px #dedede;
+    padding-left: 10px;
+}
+.cg_input{
+    width: 180px;
+    height: 26px;
+    line-height: 26px;
+    border: solid 1px #dedede;
+    padding-left: 10px;
+}
+.btbs{
+    color: red;
+}

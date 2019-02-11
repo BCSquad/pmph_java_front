@@ -54,13 +54,13 @@ var materialMap ;
     querydyb();   //查询调研表
 
     $('.select-input').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 192,
         height: 30,
         optionHeight: 30
     });
     $('.book').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 200,
         height: 30,
         optionHeight: 30,
@@ -79,25 +79,25 @@ var materialMap ;
         optionHeight: 30
     });
     $('#jcxz').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 110,
         height: 30,
         optionHeight: 30
     });
     $('#jcjb').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 110,
         height: 30,
         optionHeight: 30
     });
     $('#jcb_rank').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 110,
         height: 30,
         optionHeight: 30
     });
     $('#jcb_position').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 110,
         height: 30,
         optionHeight: 30

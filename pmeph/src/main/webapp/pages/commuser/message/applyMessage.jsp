@@ -31,7 +31,7 @@
 <script type="text/javascript">
 		$(function () {
 			$('#condition').selectlist({
-                zIndex: 10,
+                zIndex: 100,
                 width: 70,
                 height: 20,
                 optionHeight: 20,
@@ -134,7 +134,7 @@
 <script type="text/javascript">
     $(function(){
         $('#select').selectlist({
-            zIndex: 10,
+            zIndex: 100,
             width: 80,
             height: 30,
             optionHeight: 30
