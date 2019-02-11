@@ -95,6 +95,15 @@
             <tr class="sxy-tr">
                 <td>
                   <div  style="width: 400px">
+                        <label>用户名</label>
+                        <div class="input-wrapper">
+                            <input class="sxy-txt"
+                                  type="text" id="username" name="username" disabled  value="${map.username }"/>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                  <div  style="width: 400px">
                        <label class="require">真实姓名</label>
                        <div class="input-wrapper">
                           <input class="sxy-txt"onblur="javascript:LengthLimit(this,20);"
@@ -112,15 +121,7 @@
                        </div>
                   </div>
                 </td>
-                <td>
-                  <div  style="width: 400px">
-                       <label >传真</label>
-                       <div class="input-wrapper">
-                          <input class="sxy-txt"   maxlength="20"  onblur="LengthLimit(this,50)"
-                                  type="text" id="fax" name="fax" value="${map.fax }"/>
-                       </div>
-                  </div>
-                </td>
+
             </tr>
             <tr class="sxy-tr">
                 <td >
@@ -241,6 +242,15 @@
                             type="text" id="nickname" name="nickname" value="${map.nickname }"/>
                        </div>
                   </div>
+                </td>
+                <td>
+                    <div  style="width: 400px">
+                        <label >传真</label>
+                        <div class="input-wrapper">
+                            <input class="sxy-txt"   maxlength="20"  onblur="LengthLimit(this,50)"
+                                   type="text" id="fax" name="fax" value="${map.fax }"/>
+                        </div>
+                    </div>
                 </td>
             </tr>
             <tr class="sxy-tr">

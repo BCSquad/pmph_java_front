@@ -314,7 +314,13 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		List<Map<String, Object>> list=readDetailDao.queryVideo(book_id);
 		return list;
 	}
-	
+
+	@Override
+	public List<Map<String, Object>> querySource(String book_id) {
+		List<Map<String, Object>> list=readDetailDao.querySource(book_id);
+		return list;
+	}
+
 	/**
 	 * 查询我的长评
 	 */
@@ -401,5 +407,10 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		resultMap.put("nextPage", nextPage);
 		resultMap.put("totalPage", totalPage);
 		return resultMap;
+	}
+
+	@Override
+	public Integer addSource(Map<String, Object> map) {
+		return readDetailDao.addSource(map);
 	}
 }

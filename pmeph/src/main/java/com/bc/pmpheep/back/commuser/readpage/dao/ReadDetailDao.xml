@@ -5,17 +5,21 @@
     </resultMap>
 	<!-- 根据书籍ID查询数据相关信息 -->
 	<select id="queryReadBook" parameterType="java.util.Map" resultMap="readdetailmMap">
-		select 
+		select
 		  t.*,
 	      b.detail
-	      from book t 
-	      left join book_detail b  on t.id=b.book_id where t.id=#{id}		 
+	      from book t
+	      left join book_detail b  on t.id=b.book_id where t.id=#{id}
 	</select>
-	
+
 	<!-- 查询视频3条 -->
 	<select id="queryVideo" parameterType="java.util.Map" resultMap="readdetailmMap">
 	    select * from book_video where book_id=#{book_id} and is_auth=1 limit 0,3
 	</select>
+    <!-- 查询视频3条 -->
+    <select id="querySource" parameterType="java.util.Map" resultMap="readdetailmMap">
+        select * from book_source where book_id=#{book_id} and is_auth=1 limit 0,5
+    </select>
 
 	<!--查询书籍微视频  -->
 	<select id="queryMoreBookVidos" parameterType="map" resultType="java.util.Map">
@@ -27,10 +31,10 @@
 		select count(1) from book_video where book_id=#{id} and is_auth=1
 	</select>
 
-	
+
 	<!-- 根据书籍ID查询书籍评论信息 -->
 	<select id="queryComment" parameterType="java.util.Map" resultType="java.util.Map">
-	   select 
+	   select
 	     t.content,
 	     t.gmt_create,
 	     t.score,
@@ -38,7 +42,7 @@
 	     b.nickname,
 		 b.username,
 	     b.avatar
-	     from book_user_comment t 
+	     from book_user_comment t
 	     left join book u on t.book_id=u.id
 	     left join writer_user b on b.id=t.writer_id where u.id=#{id} and t.is_long=0
 	     and t.is_auth='1' and t.is_deleted='0'
@@ -97,15 +101,15 @@
 	</select>
 	<!-- 根据书籍ID查询配套图书 -->
 	<select id="querySupport" parameterType="java.util.Map" resultType="java.util.Map">
-	    select 
+	    select
 		    t.bookname,
 		    t.image_url,
 	        t.author,
 		    b.detail,
 		    t.id
-		    from book t left join book_support c on  c.support_id=t.id 
-		    left join book_detail b on b.book_id=t.id 
-		    where t.is_on_sale=1 and t.id in (select support_id from book_support where book_id=#{id}) 
+		    from book t left join book_support c on  c.support_id=t.id
+		    left join book_detail b on b.book_id=t.id
+		    where t.is_on_sale=1 and t.id in (select support_id from book_support where book_id=#{id})
 		    limit 0,1
 	</select>
 	<!-- 查询人卫推荐书籍 -->
@@ -119,12 +123,12 @@
 	</select>
 			<!-- 根据评论ID删除评论 -->
 	<update id="updateDelBookWriter"  parameterType="java.util.Map">
-		update book_user_comment set 
+		update book_user_comment set
 		is_deleted = 1
 		gmt_update = sysdate()
 		where id = #{bookwriterid}
 	</update>
-	
+
 	<!-- 根据书籍ID新增评论 -->
 	<insert id="insertComment" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="table_trendst_id">
 	   insert into book_user_comment(
@@ -144,7 +148,7 @@
 	</select>
 	<!-- 作者所写的书本数不足9本，根据书籍类型补足9本 -->
 	<select id="queryBookByType" parameterType="java.util.Map" resultType="java.util.Map">
-	   select * from book where type=#{type} and author<![CDATA[<>]]>#{author} limit 0,#{x} 
+	   select * from book where type=#{type} and author<![CDATA[<>]]>#{author} limit 0,#{x}
 	</select>
 	<!-- 相关推荐换一换 -->
 	<select id="fresh" parameterType="java.util.Map" resultType="java.util.Map">
@@ -152,24 +156,24 @@
 	</select>
 	<!-- 查询后台配置的某书某类相关图书总数 -->
 	<select id="queryRelatedBookListCount" resultType="int" parameterType="Map">
-		select count(id) from book_book_relationship 
+		select count(id) from book_book_relationship
 		where main_book_id = #{id} and type = #{type}
 	</select>
 	<!-- 查询后台配置的某书某类相关图书 -->
 	<select id="queryRelatedBookList" resultType="Map" parameterType="Map">
-		select b.* 
+	select b.*
 		from book_book_relationship bb
 		left join book b on b.id = bb.related_book_id
 		where bb.main_book_id = #{id} and bb.type = #{type}
 		group by b.id
 		order by bb.gmt_create desc
 		limit #{start},#{pageSize}
-	</select>
-	
-	
-	
+</select>
+
+
+
 	<!-- 根据书籍ID改变点赞数 -->
-	<update id="addlikes" parameterType="java.util.Map"> 
+	<update id="addlikes" parameterType="java.util.Map">
 	   update book set likes=#{likes} where id=#{book_id}
 	</update>
 	<!-- 往书籍点赞表里面添加数据 -->
@@ -181,7 +185,7 @@
 	  select * from book_user_like where book_id=#{book_id} and writer_id=#{writer_id}
 	</select>
 	<!-- 根据ID删除点赞记录 -->
-	<update id="dellikes" parameterType="java.util.Map"> 
+	<update id="dellikes" parameterType="java.util.Map">
 	  delete from book_user_like where id=#{id}
 	</update>
 	<!-- 查询用户收藏夹下是否已收藏此书籍  -->
@@ -250,26 +254,26 @@
 	     #{content},
 	     #{title},
 	     #{is_self_rating}
-	     
-	     
-	     );   
+
+
+	     );
 	</insert>
-	
+
 	<select id="queryEditor" parameterType="java.util.Map" resultType="Map">
-		select 
+		select
 		 *
-	     from 
+	     from
 	     book_editor be
 	     where book_id = #{book_id}
 	     group by book_id
 	</select>
-	
-	
+
+
 	<!-- 查询登录人是否写过长评 -->
 	<select id="queryLoginLong" parameterType="java.util.Map" resultType="java.util.Map">
 	    select * from book_user_comment where writer_id=#{writer_id} and book_id=#{book_id} and is_long=1
 	</select>
-	<!-- 查询长评 --> 
+	<!-- 查询长评 -->
 	<select id="queryLong" parameterType="java.util.Map" resultType="java.util.Map">
 	    select
 	     t.content,
@@ -278,36 +282,45 @@
 	     t.gmt_create,
 	     b.nickname,
 	     b.avatar
-	     from book_user_comment t 
+	     from book_user_comment t
 	     left join writer_user b
-	     on t.writer_id=b.id 
+	     on t.writer_id=b.id
 	     where t.book_id=#{book_id} and t.is_long =1 and is_hide=0 and t.is_auth = 1
 	     order by t.sort*t.is_stick DESC , t.gmt_create desc
 	     <if test="start >= 0">
 	        limit #{start},3
-	     </if> 
-	    
+	     </if>
+
 	</select>
 	<!-- 根据ID增加点击数 -->
 	<update id="changeClicks" parameterType="java.util.Map">
 	    update book set clicks=#{clicks} where id=#{book_id}
 	</update>
-	
+
 		<!-- 查询我的长评 -->
 	<select id="queryMyLong" parameterType="java.util.Map" resultType="java.util.Map">
 	    select * from book_user_comment where  book_id=#{book_id} and is_long=1 and id=#{id}
 	</select>
-	
+
 	<!-- 我的长评修改 -->
 	<update id="updateCommentLong" parameterType="java.util.Map">
 		UPDATE
 		book_user_comment AS bc SET bc.score=#{score},bc.content=#{content},bc.title=#{title} where
 		id=#{id} and bc.is_long =1 and bc.is_auth = 0
 	</update>
-	
+
 	<insert id="bookfeedback" parameterType="Map">
 		insert into book_user_feedback (book_id,user_id,content)
 		values(#{book_id},#{user_id},#{content})
 	</insert>
-	
+    <insert id="addSource" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="table_trendst_id">
+        insert into book_source (book_id,
+                                 user_id,
+                                 file_id,
+                                 source_name)
+        values (#{book_id},
+                #{user_id},
+                #{file_id},
+                #{source_name});
+    </insert>
 </mapper>

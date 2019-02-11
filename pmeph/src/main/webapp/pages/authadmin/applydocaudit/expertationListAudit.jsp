@@ -27,7 +27,7 @@
 </head>
 <body>
 <jsp:include page="/pages/comm/headGreenBackGround.jsp">
-    <jsp:param name="pageTitle" value="audit"></jsp:param>
+    <jsp:param name="pageTitle" value="experAudit"></jsp:param>
 </jsp:include>
 <div class="content-wrapper">
     临床决策专家申报审核
@@ -68,6 +68,7 @@
                 <td>职称</td>
                 <td>学校审核</td>
                 <td>出版社审核</td>
+                <td>是否上传附件</td>
                 <td>打印状态</td>
 
                 <%--学校审核状态online_progress：0=未提交/1=已提交但是待审核/2=被申报单位退回/3=申报单位通过/4=出版社退回申报单位/5=出版社退回个人
@@ -102,6 +103,7 @@
                     <td>${item.title } </td>
                     <td>${item.xxsh } </td>
                     <td>${item.cbssh } </td>
+                    <td>${item.isUpload }</td>
                     <td>${item.isprint } </td>
                 </tr>
             </c:forEach>

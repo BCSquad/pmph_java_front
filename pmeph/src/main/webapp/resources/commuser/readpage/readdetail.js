@@ -23,6 +23,29 @@ $(function () {
         },
     });
     //文件上传
+    $("#uploadFile2").uploadFile({
+        start: function () {
+            // console.log("开始上传。。。");
+            $("#upload_status2").val('start');
+            $("#uploadFile2").addClass("upload-loading").html('<div class="shade" style="border-radius: 4px;"></div>' +
+                ' <img src="' + contextpath + 'statics/image/20140524124238403.gif" style="height: 19.2px; width: 19.2px; margin-top: 2.4px; margin-left: 2.4px;">' +
+                ' <div class="loading-text" style="height: 24px; line-height: 24px;">上传中</div>');
+
+        },
+        done: function (filename, fileid) {
+            //console.log("上传完成：name " + filename + " fileid " + fileid);
+            window.message.success("上传成功！");
+            $("#uploadFile2").removeClass("upload-loading").text("选择文件");
+            $("#upload_status2").val('');
+            $("#upname2").html(filename);
+            $("#attachment2").val(fileid);
+            $("#attachment_name2").val(filename);
+        },
+        progressall: function (loaded, total, bitrate) {
+
+            /*console.log("正在上传。。。" + loaded / total);*/
+        }
+    });
     $("#uploadFile").uploadFile({
         start: function () {
             // console.log("开始上传。。。");
@@ -779,9 +802,40 @@ function showup(tag) {
 function hideup() {
     //隐藏弹窗给值是是因为校验的时候页面上所有的输入框都会校验
     $(".bookmistake").hide();
-    
-}
 
+}
+function hideupload() {
+    //隐藏弹窗给值是是因为校验的时候页面上所有的输入框都会校验
+    $(".sourceUp").hide();
+
+}
+function sourceCommit() {
+    var json = {
+        book_id: $("#book_id").val(),
+        attachment: $("#attachment2").val(),
+        attachment_name: $("#attachment_name2").val()
+    }
+    $.ajax({
+        type: 'post',
+        url: contextpath + 'readdetail/addSource.action',
+        data: json,
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+            if (json.returnCode == "OK") {
+                window.message.success("数据已提交！");
+                $("#sourceUp").hide();
+                $("#upname2").html('未选择任何文件!');
+                $("#upload_status2").val(null);
+            } else {
+                window.message.info("错误，请填写完所有内容！");
+            }
+        }
+    });
+
+    console.log(json)
+
+}
 //图书纠错
 function correction() {
     if ($.fireValidator(2)) {
@@ -979,4 +1033,19 @@ function validLogin() {
 //下拉自动加载
 function loadData(){
     changepage();
+}
+function sourceUpload() {
+    $.ajax({
+        type: 'post',
+        url: contextpath + 'readdetail/tologin.action',
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+            if (json == "OK") {
+                alert(1);
+                $("#sourceUp").show();
+            }
+        }
+    });
+
 }

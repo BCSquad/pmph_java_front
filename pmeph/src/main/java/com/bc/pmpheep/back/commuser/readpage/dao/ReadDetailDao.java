@@ -178,6 +178,7 @@ public interface ReadDetailDao {
 	 * @return List<Map<String, Object>>
 	 */
 	List<Map<String, Object>> queryVideo(@Param("book_id") String book_id);
+	List<Map<String, Object>> querySource(@Param("book_id") String book_id);
 	
 	/**
 	 * 查询我的长评
@@ -229,5 +230,5 @@ public interface ReadDetailDao {
 	 */
 	List<Map<String, Object>> queryRelatedBookList(Map<String,Object> map);
 
-
+	int addSource(Map<String, Object> map);
 }

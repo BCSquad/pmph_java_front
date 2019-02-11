@@ -332,11 +332,11 @@
 					<table class="tab_2" id="tab_wzfbqk">
 						<thead>
 						<tr>
-							<td width="440px">题目</td>
-							<td width="220px">期刊名称</td>
-							<td width="200px">年、卷、期</td>
-							<td width="150px">期刊级别（SCI或国内核心期刊）</td>
-							<td>备注</td>
+							<td width="450px">题目</td>
+							<td width="200px">期刊名称</td>
+							<td width="220px">年、卷、期</td>
+							<td width="120px">期刊级别（SCI或国内核心期刊）</td>
+							<td >备注</td>
 						</tr>
 						</thead>
 						<tbody>
