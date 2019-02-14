@@ -191,7 +191,7 @@ public class ReadDetailController extends BaseController{
 		modelAndView.addObject("frNextPage", frNextPage);*/
 		modelAndView.addObject("Video",Video);
 		modelAndView.addObject("source",source);
-		modelAndView.addObject("longList", longList);
+		//modelAndView.addObject("longList", longList);
 		modelAndView.addObject("typeList", typeList);
 		modelAndView.addObject("start", 2);
 		modelAndView.addObject("myLong", myLong);
