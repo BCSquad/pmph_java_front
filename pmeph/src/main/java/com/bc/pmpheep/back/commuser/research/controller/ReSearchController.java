@@ -3,6 +3,7 @@ package com.bc.pmpheep.back.commuser.research.controller;
 import com.bc.pmpheep.back.commuser.research.service.ReSearchService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
+import com.bc.pmpheep.back.util.StringUtil;
 import com.bc.pmpheep.general.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -35,6 +36,7 @@ public class ReSearchController extends BaseController{
         Map<String,Object> map = new HashMap<>();
         Map<String, Object> user=getUserInfo();
         map.put("id",user.get("id"));
+        map.put("org_id",user.get("org_id"));
         map.put("state",state);
         PageParameter<Map<String, Object>> pageParameter = new PageParameter<Map<String, Object>>(pageNum, pageSize);
         pageParameter.setParameter(map);
@@ -64,6 +66,7 @@ public class ReSearchController extends BaseController{
     public List<Map<String,Object>> querySearchByTextbookId(HttpServletRequest request){
         String textbook_id=request.getParameter("textbook_id");
         textbook_id = textbook_id.replaceAll("[\\[|\\]|\\{|\\}|\"]","");
+        textbook_id = "0" +(StringUtil.notEmpty(textbook_id)?",":"")+textbook_id;
         textbook_id = "(" + textbook_id + ")";
         Map<String, Object> user=getUserInfo();
         String user_id = user.get("id").toString();

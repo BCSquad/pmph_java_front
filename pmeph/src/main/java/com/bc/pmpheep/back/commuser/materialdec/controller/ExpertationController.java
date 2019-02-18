@@ -8,8 +8,10 @@ import com.bc.pmpheep.back.commuser.materialdec.service.PersonInfoService;
 import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
+import com.bc.pmpheep.back.util.Const;
 import com.bc.pmpheep.controller.bean.ResponseBean;
 import com.bc.pmpheep.general.controller.BaseController;
+import com.bc.pmpheep.general.service.DataDictionaryService;
 import com.bc.pmpheep.general.service.FileService;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +62,9 @@ public class ExpertationController extends BaseController{
 	@Autowired
     @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
     private PersonalService personalService;
+
+	@Autowired
+	DataDictionaryService dataDictionaryService;
 	
 	/**
 	 * 跳转到申报新增页面
@@ -131,6 +136,12 @@ public class ExpertationController extends BaseController{
 
 		//作家扩展信息
 		List<Map<String,Object>> zjkzxxList = this.etService.queryZjkzxxById(productMap.get("id").toString());
+
+		//数据字典
+		mav.addObject("writerUserDegree", dataDictionaryService.getDataDictionaryListByType(Const.WRITER_USER_DEGREE));
+		mav.addObject("writerUserTitle", dataDictionaryService.getDataDictionaryListByType(Const.WRITER_USER_TITLE));
+		mav.addObject("pmphRank", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_RANK));
+		mav.addObject("pmphPosition", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_POSITION));
 
 		mav.addObject("userMap", userMap);
 		mav.addObject("queryMap", queryMap);
@@ -591,6 +602,9 @@ public class ExpertationController extends BaseController{
 		}else if(MapUtils.getString(gezlList.get(0),"expert_type").equals("3")){
 			mav.addObject("title","人卫中医助手专家申报表");
 		}
+
+		gezlList.get(0).put("title",dataDictionaryService.getDataDictionaryItemNameByCode(Const.WRITER_USER_TITLE,MapUtils.getString(gezlList.get(0),"title")));
+
 		//填充
 		mav.addObject("queryMap", queryMap);
 		mav.addObject("gezlList", gezlList.get(0));
@@ -693,7 +707,12 @@ public class ExpertationController extends BaseController{
 		}else{
 			org =etService.queryOrgById(gezlList.get(0).get("org_id").toString());
 		}
-		
+
+		//数据字典
+		mav.addObject("writerUserDegree", dataDictionaryService.getDataDictionaryListByType(Const.WRITER_USER_DEGREE));
+		mav.addObject("writerUserTitle", dataDictionaryService.getDataDictionaryListByType(Const.WRITER_USER_TITLE));
+		mav.addObject("pmphRank", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_RANK));
+		mav.addObject("pmphPosition", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_POSITION));
 
 		//填充
 		mav.addObject("wzfbqkList",wzfbqkList);
@@ -927,6 +946,12 @@ public class ExpertationController extends BaseController{
                 //审核状态为代审核和审核通过，跳转至查看界面
                 modelAndView=this.showMaterial(request,map.get("id").toString());
             }
+			//数据字典
+			modelAndView.addObject("writerUserDegree", dataDictionaryService.getDataDictionaryListByType(Const.WRITER_USER_DEGREE));
+			modelAndView.addObject("writerUserTitle", dataDictionaryService.getDataDictionaryListByType(Const.WRITER_USER_TITLE));
+			modelAndView.addObject("pmphRank", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_RANK));
+			modelAndView.addObject("pmphPosition", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_POSITION));
+
             return modelAndView;
 	}
 

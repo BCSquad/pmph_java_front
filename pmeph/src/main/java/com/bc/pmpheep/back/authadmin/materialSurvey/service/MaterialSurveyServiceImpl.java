@@ -45,6 +45,11 @@ public class MaterialSurveyServiceImpl implements MaterialSurveyService {
     }
 
     @Override
+    public List<Map<String, Object>> querySearchByTextbookId(String textbook_id) {
+        return materialSurveyDao.querySearchByTextbookId(textbook_id);
+    }
+
+    @Override
     public Integer fillSurveyQuestion(List<MaterialSurveyQuestionAnswer> materialSurveyQuestionAnswer) {
         return materialSurveyDao.insertQuestionAnswer(materialSurveyQuestionAnswer);
     }
@@ -71,6 +76,9 @@ public class MaterialSurveyServiceImpl implements MaterialSurveyService {
         return materialSurveyDao.getMaterialByid(id);
     }
 
-
+    @Override
+    public List<Map<String, Object>> queryAnswer(String material_id, String user_id) {
+        return materialSurveyDao.queryAnswer(material_id,user_id);
+    }
 
 }

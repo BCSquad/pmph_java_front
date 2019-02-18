@@ -94,11 +94,12 @@
 							<c:if test="${gezlList.is_utec == '1'}">是</c:if>
 						</td>
 						<td><span>学&emsp;&emsp;历：</span>
-	                                <c:if test="${gezlList.degree=='0'}">无</c:if>
+							${gezlList.degree}
+	                                <%--<c:if test="${gezlList.degree=='0'}">无</c:if>
 	                                <c:if test="${gezlList.degree=='1'}">大专</c:if>
 	                                <c:if test="${gezlList.degree=='2'}">本科</c:if>
 	                                <c:if test="${gezlList.degree=='3'}">硕士</c:if>
-	                                <c:if test="${gezlList.degree=='4'}">博士</c:if>
+	                                <c:if test="${gezlList.degree=='4'}">博士</c:if>--%>
 	                    </td>
 						<td><span>专业特长：</span>
 							${gezlList.expertise}
@@ -267,10 +268,13 @@
 						<tr>
 							<td>${list.material_name}</td>
 							<td>
-								<c:if test="${list.position == '0'}">无</c:if>
+								<c:forEach items="${pmphPosition}" var="dic">
+									<c:if test="${list.position == dic.code}">${dic.name}</c:if>
+								</c:forEach>
+								<%--<c:if test="${list.position == '0'}">无</c:if>
 								<c:if test="${list.position == '1'}">主编</c:if>
 								<c:if test="${list.position == '2'}">副主编</c:if>
-								<c:if test="${list.position == '3'}">编委</c:if>
+								<c:if test="${list.position == '3'}">编委</c:if>--%>
 							</td>
 							<td>
 								<c:if test="${list.is_digital_editor == '1'}">是</c:if>
@@ -338,18 +342,24 @@
 						<tr>
 							<td>${list.material_name}</td>
 							<td>
-								<c:if test="${list.rank == '0'}">无</c:if>
+								<c:forEach items="${pmphRank}" var="dic">
+									<c:if test="${list.rank == dic.code}">${dic.name}</c:if>
+								</c:forEach>
+								<%--<c:if test="${list.rank == '0'}">无</c:if>
 								<c:if test="${list.rank == '1'}">国家</c:if>
 								<c:if test="${list.rank == '2'}">省部</c:if>
 								<c:if test="${list.rank == '3'}">协编</c:if>
 								<c:if test="${list.rank == '4'}">校本</c:if>
-								<c:if test="${list.rank == '5'}">其他</c:if>
+								<c:if test="${list.rank == '5'}">其他</c:if>--%>
 							</td>
 							<td>
-								<c:if test="${list.position == '0'}">无</c:if>
+								<c:forEach items="${pmphPosition}" var="dic">
+									<c:if test="${list.position == dic.code}">${dic.name}</c:if>
+								</c:forEach>
+								<%--<c:if test="${list.position == '0'}">无</c:if>
 								<c:if test="${list.position == '1'}">主编</c:if>
 								<c:if test="${list.position == '2'}">副主编</c:if>
-								<c:if test="${list.position == '3'}">编委</c:if>
+								<c:if test="${list.position == '3'}">编委</c:if>--%>
 							</td>
 							<td style="color: #333333;">
 								<c:if test="${list.is_digital_editor == '1'}">是</c:if>
@@ -389,18 +399,24 @@
 							<tr>
 							<td>${list.material_name}</td>
 							<td>
-								<c:if test="${list.rank == '0'}">无</c:if>
+								<c:forEach items="${pmphRank}" var="dic">
+									<c:if test="${list.rank == dic.code}">${dic.name}</c:if>
+								</c:forEach>
+								<%--<c:if test="${list.rank == '0'}">无</c:if>
 								<c:if test="${list.rank == '1'}">国家</c:if>
 								<c:if test="${list.rank == '2'}">省部</c:if>
 								<c:if test="${list.rank == '3'}">协编</c:if>
 								<c:if test="${list.rank == '4'}">校本</c:if>
-								<c:if test="${list.rank == '5'}">其他</c:if>
+								<c:if test="${list.rank == '5'}">其他</c:if>--%>
 							</td>
 							<td>
-								<c:if test="${list.position == '0'}">无</c:if>
+								<c:forEach items="${pmphPosition}" var="dic">
+									<c:if test="${list.position == dic.code}">${dic.name}</c:if>
+								</c:forEach>
+								<%--<c:if test="${list.position == '0'}">无</c:if>
 								<c:if test="${list.position == '1'}">主编</c:if>
 								<c:if test="${list.position == '2'}">副主编</c:if>
-								<c:if test="${list.position == '3'}">编委</c:if>
+								<c:if test="${list.position == '3'}">编委</c:if>--%>
 							</td>
 							<td style="color: #333333;">
 								<c:if test="${list.is_digital_editor == '1'}">是</c:if>

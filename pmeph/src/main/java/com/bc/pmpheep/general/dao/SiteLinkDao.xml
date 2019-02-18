@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.general.dao.SiteLinkDao">
+
+    <select id="getSiteHtmlPerRow" resultType="String">
+        select
+        group_concat('&lt;a class="item" href="',href,'"&gt;',name,'&lt;/a&gt;' order by sort  separator '&lt;a class="item"&gt;|&lt;/a&gt;')
+        from
+        site_link
+        where is_deleted = 0 and is_active =1
+        group by row_num
+        order by row_num asc
+    </select>
+</mapper>

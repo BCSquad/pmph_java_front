@@ -41,7 +41,7 @@
                 <c:forEach items="${list}" var="list" varStatus="status">
                     <div class="video">
                         <div class="video-a" id="video-${status.index+1}"
-                             src="http://${_remoteUrl}/v/play/${list.path}"
+                             src="http://${_remoteVideoUrl}/v/play/${list.path}"
                              poster="${ctx}/image/${list.cover}.action" type="mp4">
                         </div>
                         <div class="video-name">${list.title}</div>
@@ -84,7 +84,7 @@
         var pagesize=$("#pagesize").val();
 
         $('#pages').selectlist({
-            zIndex: 10,
+            zIndex: 100,
             width: 110,
             height: 30,
             optionHeight: 30,

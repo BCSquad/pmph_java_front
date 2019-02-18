@@ -23,6 +23,29 @@ $(function () {
         },
     });
     //文件上传
+    $("#uploadFile2").uploadFile({
+        start: function () {
+            // console.log("开始上传。。。");
+            $("#upload_status2").val('start');
+            $("#uploadFile2").addClass("upload-loading").html('<div class="shade" style="border-radius: 4px;"></div>' +
+                ' <img src="' + contextpath + 'statics/image/20140524124238403.gif" style="height: 19.2px; width: 19.2px; margin-top: 2.4px; margin-left: 2.4px;">' +
+                ' <div class="loading-text" style="height: 24px; line-height: 24px;">上传中</div>');
+
+        },
+        done: function (filename, fileid) {
+            //console.log("上传完成：name " + filename + " fileid " + fileid);
+            window.message.success("上传成功！");
+            $("#uploadFile2").removeClass("upload-loading").text("选择文件");
+            $("#upload_status2").val('');
+            $("#upname2").html(filename);
+            $("#attachment2").val(fileid);
+            $("#attachment_name2").val(filename);
+        },
+        progressall: function (loaded, total, bitrate) {
+
+            /*console.log("正在上传。。。" + loaded / total);*/
+        }
+    });
     $("#uploadFile").uploadFile({
         start: function () {
             // console.log("开始上传。。。");
@@ -65,7 +88,7 @@ $(function () {
     var element;
     var returnInfo;
     var $uploadvideo = $("#upload-video").fileupload({
-        url: 'http://' + remoteUrl + '/v/upload',
+        url: 'http://' + remoteVideoUrl + '/v/upload',
         dataType: 'json',
         autoUpload: true,
         /*    formData: function () {
@@ -128,7 +151,7 @@ $(function () {
                      });*/
 
                     /* $('.pop-body select').selectlist({
-                     zIndex: 10,
+                     zIndex: 100,
                      width: 437,
                      height: 30,
                      optionHeight: 20
@@ -156,7 +179,7 @@ $(function () {
                     var intervalId = setInterval(function () {
                         $.ajax({
                             type: 'get',
-                            url: "http://" + remoteUrl + "/v/query?key=" + data.result.data,
+                            url: "http://" + remoteVideoUrl + "/v/query?key=" + data.result.data,
                             async: false,
                             dataType: 'json',
                             beforeSend: function (xhr, global) {
@@ -239,7 +262,7 @@ $(function () {
                                                     }
                                                 }
 
-                                                $(".pop-body").find("input[type='text']").change(function () {
+                                                $(".pop-body").find("input[type='text']").hover(function(){
                                                     valid();
                                                 });
                                                 $(".pop-body").find("button.submit").unbind("click")
@@ -310,6 +333,16 @@ $(function () {
 
     morecontent();
 
+    $(".rd_name.tag").each(function(){
+        var $t = $(this);
+        $t.unbind().bind("click",function () {
+            $(".rd_name.tag").removeClass("active");
+            $t.addClass("active");
+            $(".list-page").hide();
+            $("."+$t.attr("tagName")).show();
+        });
+    });
+    $('.rd_name.tag').first().trigger('click');
 
     relatiedBookPageSwitch('1');
     relatiedBookPageSwitch('2');
@@ -334,11 +367,15 @@ function hidevideo() {
 
 //分页的具体实现
 function changepage() {
+
+    var tagName = $(".rd_name.tag.active").attr("tagName");
+
     $(".morecom").show();
     $(".moreothers").hide();
     var json = {
-        pageNumber: $("#start").val(),
+        pageNumber: $(".start."+tagName).val(),
         id: $("#book_id").val(),
+        tagName : tagName
     };
     $.ajax({
         type: 'post',
@@ -353,10 +390,11 @@ function changepage() {
                 $("#moreothers").html('');
             } else {
                 json = json.slice(0, 2);
+                $("#moreothers").html('加载更多');
             }
             var str = '';
             $.each(json, function (i, n) {
-                $("#start").val(n.start);
+                $(".start."+tagName).val(n.start);
                 str += '<div class="item"><div class="item_title">'
                     + '<div style="float: left;"><img src="';
                 if (n.avatar == '' || n.avatar == 'DEFAULT' || n.avatar == null) {
@@ -367,44 +405,53 @@ function changepage() {
                 str += '" class="picturesize"/></div><div style="float: left;margin-left: 10px;margin-top: 5px;">' +
                     n.nickname
                     + '</div><div style="float: left;margin-left: 10px;">';
-                if (n.score <= 3) {
-                    str += '<span class="rwtx1"></span>'
-                        + '<span class="rwtx2"></span>'
-                        + '<span class="rwtx2"></span>'
-                        + '<span class="rwtx2"></span>'
-                        + '<span class="rwtx2"></span>'
-                } else if (n.score <= 5) {
-                    str += '<span class="rwtx1"></span>'
-                        + '<span class="rwtx1"></span>'
-                        + '<span class="rwtx2"></span>'
-                        + '<span class="rwtx2"></span>'
-                        + '<span class="rwtx2"></span>'
-                } else if (n.score <= 7) {
-                    str += '<span class="rwtx1"></span>'
-                        + '<span class="rwtx1"></span>'
-                        + '<span class="rwtx1"></span>'
-                        + '<span class="rwtx2"></span>'
-                        + '<span class="rwtx2"></span>'
-                } else if (n.score <= 9) {
-                    str += '<span class="rwtx1"></span>'
-                        + '<span class="rwtx1"></span>'
-                        + '<span class="rwtx1"></span>'
-                        + '<span class="rwtx1"></span>'
-                        + '<span class="rwtx2"></span>'
-                } else if (n.score == 10) {
-                    str += '<span class="rwtx1"></span>'
-                        + '<span class="rwtx1"></span>'
-                        + '<span class="rwtx1"></span>'
-                        + '<span class="rwtx1"></span>'
-                        + '<span class="rwtx1"></span>'
+                if("changepage"==tagName) {
+                    if (n.score <= 3) {
+                        str += '<span class="rwtx1"></span>'
+                            + '<span class="rwtx2"></span>'
+                            + '<span class="rwtx2"></span>'
+                            + '<span class="rwtx2"></span>'
+                            + '<span class="rwtx2"></span>'
+                    } else if (n.score <= 5) {
+                        str += '<span class="rwtx1"></span>'
+                            + '<span class="rwtx1"></span>'
+                            + '<span class="rwtx2"></span>'
+                            + '<span class="rwtx2"></span>'
+                            + '<span class="rwtx2"></span>'
+                    } else if (n.score <= 7) {
+                        str += '<span class="rwtx1"></span>'
+                            + '<span class="rwtx1"></span>'
+                            + '<span class="rwtx1"></span>'
+                            + '<span class="rwtx2"></span>'
+                            + '<span class="rwtx2"></span>'
+                    } else if (n.score <= 9) {
+                        str += '<span class="rwtx1"></span>'
+                            + '<span class="rwtx1"></span>'
+                            + '<span class="rwtx1"></span>'
+                            + '<span class="rwtx1"></span>'
+                            + '<span class="rwtx2"></span>'
+                    } else if (n.score == 10) {
+                        str += '<span class="rwtx1"></span>'
+                            + '<span class="rwtx1"></span>'
+                            + '<span class="rwtx1"></span>'
+                            + '<span class="rwtx1"></span>'
+                            + '<span class="rwtx1"></span>'
+                    }
                 }
+
                 str += '</div><div class="date_content"><div class="date">'
                     + n.gmt_create
-                    + '</div></div></div><div class="item_content">'
+                    + '</div></div></div>' ;
+                if("correctpage"==tagName){
+                    str += '<div class="item_content">\n' +
+                        '第'+n.page+'页，第'+n.line+'行:\n' +
+                        '                        </div>';
+                }
+                str+= '<div class="item_content">'
                     + n.content
                     + '</div><hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;"></div>';
             });
-            $("#changepage").append(str);
+            $("#"+tagName).append(str);
         },
     });
 
@@ -755,9 +802,40 @@ function showup(tag) {
 function hideup() {
     //隐藏弹窗给值是是因为校验的时候页面上所有的输入框都会校验
     $(".bookmistake").hide();
-    
-}
 
+}
+function hideupload() {
+    //隐藏弹窗给值是是因为校验的时候页面上所有的输入框都会校验
+    $(".sourceUp").hide();
+
+}
+function sourceCommit() {
+    var json = {
+        book_id: $("#book_id").val(),
+        attachment: $("#attachment2").val(),
+        attachment_name: $("#attachment_name2").val()
+    }
+    $.ajax({
+        type: 'post',
+        url: contextpath + 'readdetail/addSource.action',
+        data: json,
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+            if (json.returnCode == "OK") {
+                window.message.success("数据已提交！");
+                $("#sourceUp").hide();
+                $("#upname2").html('未选择任何文件!');
+                $("#upload_status2").val(null);
+            } else {
+                window.message.info("错误，请填写完所有内容！");
+            }
+        }
+    });
+
+    console.log(json)
+
+}
 //图书纠错
 function correction() {
     if ($.fireValidator(2)) {
@@ -955,4 +1033,19 @@ function validLogin() {
 //下拉自动加载
 function loadData(){
     changepage();
+}
+function sourceUpload() {
+    $.ajax({
+        type: 'post',
+        url: contextpath + 'readdetail/tologin.action',
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+            if (json == "OK") {
+                alert(1);
+                $("#sourceUp").show();
+            }
+        }
+    });
+
 }

@@ -7,7 +7,7 @@
         var contextpath = '${pageContext.request.contextPath}/';
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-    <title>填写调研表</title>
+    <title>调研表</title>
     <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}" type="text/javascript"></script>
     <script src="${ctx}/resources/comm/jquery/jquery-validate.js?t=${_timestamp}" type="text/javascript"></script>
@@ -144,14 +144,7 @@
     </style>
 </head>
 <body>
-<c:if test="${res.state==2}">
-     <jsp:include page="/pages/comm/headGreenBackGround.jsp"/>
-</c:if>
-<c:if test="${res.state==1}">
-    <jsp:include page="/pages/comm/head.jsp">
-        <jsp:param value="homepage" name="pageTitle"/>
-    </jsp:include>
-</c:if>
+<jsp:include page="/pages/comm/headGreenBackGround.jsp"/>
 <input type="hidden" value="${state}" id="state">
 <div class="body">
 
@@ -174,8 +167,7 @@
 
                     <c:forEach items="${res.survey.materialSurveyQuestionList}" var="QuestionList"
                                varStatus="QuestionListStatus">
-
-                        <td><span class="qt">${QuestionListStatus.index+1}.${QuestionList.title}
+                        <td ><span class="qt" style="width: 97%">${QuestionListStatus.index+1}.${QuestionList.title}
                                   <c:if test="${QuestionList.isAnswer==1 }">
 
                                   </c:if>
@@ -258,8 +250,9 @@
                                                value="${QuestionList.optionContent}">
                                     </c:if>
                                     <c:if test="${QuestionList.optionContent==null }">
-                                        <input class="input" id="${QuestionList.id}" type="text">
-                                    </c:if>
+
+                                        <div class="tipso_bubble"></div> <input class="input "   onmouseover="checkedInput(this)" onmousemove="checkedInput(this)" id="${QuestionList.id}" type="text"><div class="tipso_arrow"></div>
+        </c:if>
                                 </td>
 
                             </c:if>
@@ -273,7 +266,7 @@
                                                   class="textarea">${QuestionList.optionContent}</textarea>
                                     </c:if>
                                     <c:if test="${QuestionList.optionContent==null }">
-                                        <textarea id="${QuestionList.id}" class="textarea"></textarea>
+                                        <div class="tipso_bubble"></div> <textarea id="${QuestionList.id}"   onmouseover="checkedInput(this)" onmousemove="checkedInput(this)" class="textarea"></textarea><div class="tipso_arrow"></div>
                                     </c:if>
 
                                 </td>
@@ -307,6 +300,8 @@
 <jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 
 <script type="text/javascript">
+
+    var checkflag=true;
     var survey = {
         id: '',
         quesions: []
@@ -320,6 +315,22 @@
         answerTextArea: ''
     };
     $(function () {
+
+
+        setTimeout(function () {
+            $('.input').each(function (i,v) {
+                var $t = $(this);
+                $t.tipso({validator: "isNonEmpty", message: ""});
+            });
+            $('.textarea').each(function (i,v) {
+                var $t = $(this);
+                $t.tipso({validator: "isNonEmpty", message: ""});
+            });
+
+            //$('.input').tipso({validator: "isNonEmpty", message: "请选择申报的图书"});
+
+        },0);
+
         var type = "${res.type}";
         if (type) {
             if ("view" == type) {
@@ -405,11 +416,21 @@
     }
 
     function back() {
-        window.location.replace(document.referrer)
+        var material_id=$("#material_id").val();
+        if(material_id){
+            window.location.href = "${ctx}/orgSurvey/tolist.action?materialId="+'${res.material_id}';
+        }else{
+            window.location.replace(document.referrer)
+        }
+
     }
 
     function commit() {
         /*提交问卷  JSON字符串提交*/
+
+        if(!checkflag){
+            return;
+        }
         var formDate = getForm();
         $.ajax({
             type: 'post',
@@ -421,15 +442,16 @@
             success: function (res) {
                 if (res.code >= 1) {
                     window.message.success("填写成功");
-                    if(!!$("#state").val()){
-                        var material_id=$("#material_id").val();
-                        window.location.href=contextpath+'/material/MaterialDetailRedirect.action?material_id='+material_id;
-                    }else{
-                        back();
-                    }
+                    setTimeout(
+                        function() {
+                            /* window.location.href = contextpath
+                                    + "userinfo/touser.action?id="
+                                    + $("#userId").val(); */
+                           back();
+                        }, 1000);
                 } else {
-                    window.message.error("后台错误");
-                    back();
+                    window.message.error("请填写所有的未填项");
+
                 }
 
 
@@ -437,6 +459,22 @@
         });
 
 
+    }
+
+
+    function checkedInput(obj){
+        if(obj.value.length>300){
+            $("#"+obj.id).addClass("tipso_style");
+            $(".tipso_content").html("输入最大长度300字");
+            checkflag=false;
+        }else if(obj.value.length<1){
+            $("#"+obj.id).addClass("tipso_style");
+            $(".tipso_content").html("不能为空");
+            checkflag=false;
+        }else{
+            $("#"+obj.id).removeClass("tipso_style");
+            checkflag=true;
+        }
     }
 </script>
 

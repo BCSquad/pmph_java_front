@@ -1,7 +1,7 @@
 $(function(){
 
 	$('#page-size-select').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 110,
         height: 30,
         optionHeight: 30

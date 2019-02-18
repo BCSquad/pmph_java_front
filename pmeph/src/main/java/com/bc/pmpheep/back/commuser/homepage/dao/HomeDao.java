@@ -146,4 +146,10 @@ public interface HomeDao {
      */
     List<Map<String,Object>> Queryszpt();
 
+    /**
+     * 查询前num个搜索关键词
+     * @param num
+     * @return
+     */
+    List<String> getSearchKeyWords(Integer num);
 }

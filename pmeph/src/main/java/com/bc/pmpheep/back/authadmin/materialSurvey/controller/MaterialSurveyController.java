@@ -68,43 +68,6 @@ public class MaterialSurveyController extends BaseController {
 
 
         MaterialSurvey surveyByMaterialId = null;
-        if (StringUtil.notEmpty(request.getParameter("materialId"))) {
-            /*根据教材id获取最新的关联的问卷
-             */
-            String materialId = request.getParameter("materialId");
-            List<MaterialSurvey> surveyByMaterialIds = materialSurveyService.getSurveyByMaterialId(Long.parseLong(materialId));
-
-            if (surveyByMaterialIds.size() == 1) {
-                surveyByMaterialId = surveyByMaterialIds.get(0);
-            } else {
-
-                int pageNum = 1;
-                int pageSize = 10;
-                Map<String, Object> map = new HashMap<>();
-                Map<String, Object> user = getUserInfo();
-                map.put("id", user.get("id"));
-                if (materialId != null) {
-                    if (surveyByMaterialIds.size() != 0) {
-                        map.put("materialId", materialId);
-                        Material materialByid = materialSurveyService.getMaterialByid(Long.parseLong(materialId));
-                        mv.addObject("material", materialByid);
-                    }
-
-                }
-                PageParameter<Map<String, Object>> pageParameter = new PageParameter<Map<String, Object>>(pageNum, pageSize);
-                pageParameter.setParameter(map);
-                PageResult<Map<String, Object>> pageResult = materialSurveyService.querySearchList(pageParameter);
-                mv.addObject("pageNum", pageNum);
-                mv.addObject("pageSize", pageSize);
-                mv.addObject("pageResult", pageResult);
-                mv.addObject("state", "");
-
-                mv.setViewName("authadmin/materialSurvey/SurveyList");
-                return mv;
-            }
-
-        }
-
         if (StringUtil.notEmpty(request.getParameter("surveyId"))) {
             /*根据问卷id获取问卷对象
              */
@@ -131,20 +94,17 @@ public class MaterialSurveyController extends BaseController {
         materialSurveyVO.setMaterialSurveyQuestionList(materialSurveyQuestionVOS);
 
         String material_id=request.getParameter("material_id");
+        String from=request.getParameter("state");
         Map<String, Object> map = new HashMap<>();
-        if(StringUtil.notEmpty(material_id)){
-            //mv.addObject("state",1);
-            map.put("state","1");
-        }else{
-            //mv.addObject("state",2);
-            map.put("state","1");
-        }
-        // mv.addObject("material_id",material_id);
         map.put("material_id",material_id);
-        //机构用户基本信息
         map.put("survey", materialSurveyVO);
+        if("fromwrtlist".equals(from)||"material".equals(from)){
+            map.put("from",from);
+            mv.setViewName("commuser/research/researchadd");
+        }else{
+            mv.setViewName("authadmin/materialSurvey/fillMaterialSurvey");
+        }
         mv.addObject("res", map);
-        mv.setViewName("authadmin/materialSurvey/fillMaterialSurvey");
         return mv;
     }
 
@@ -160,6 +120,9 @@ public class MaterialSurveyController extends BaseController {
     @ResponseBody
     public Map<String, Object> fillSurveyQuestion(@RequestBody String json, HttpServletRequest request) throws ParseException {
         Map<String, Object> writerUser = this.getUserInfo();
+        Integer integer = 0;
+        Map<String, Object> map = new HashMap<>();
+        try {
         if (writerUser.get("latest_login_time") == null || writerUser.get("latest_login_time").toString().length() < 1) {
             writerUser.put("latest_login_time", new Date());
         }
@@ -220,9 +183,9 @@ public class MaterialSurveyController extends BaseController {
 
             fillMateriallSurveyQuestionVOS.add(fillMateriallSurveyQuestionVO);
         }
-        Integer integer = 0;
-        Map<String, Object> map = new HashMap<>();
-        try {
+
+
+
             integer = materialSurveyService.fillSurveyQuestion(fillMateriallSurveyQuestionVOS);
         } catch (Exception e) {
             e.printStackTrace();
@@ -285,6 +248,8 @@ public class MaterialSurveyController extends BaseController {
         }
 
         Long userId = new Long(String.valueOf(writerUser.get("id")));
+        Long userType = new Long(String.valueOf(this.getUserType()));
+
         MaterialSurveyVO materialSurveyVO = new MaterialSurveyVO();
         List<MaterialSurveyQuestionVO> materialSurveyQuestionVOS = new ArrayList<>();
         //获取教材id
@@ -316,44 +281,62 @@ public class MaterialSurveyController extends BaseController {
             materialSurveyQuestionVO.setMaterialSurveyQuestionOptionList(surveyQuestionOptionByQuestionId);
             Map<String, Object> parameter =new HashMap<>();
             parameter.put("questionId",materialSurveyQuestion.getId());
-            parameter.put("userId",userId);
-            List<MaterialSurveyQuestionAnswer> surveyQuestionAnswerByQuestionId = materialSurveyService.getSurveyQuestionAnswerByQuestionId(parameter);
-
-            switch (materialSurveyQuestion.getType()) {
-                case 1:
-                    materialSurveyQuestionVO.setOptionAnswer(surveyQuestionAnswerByQuestionId.get(0).getOptionId());
-                    break;
-                case 2:
-                    if (surveyQuestionAnswerByQuestionId.size() > 1) {
-                        List<Long> qustionAnswers = new ArrayList<>();
-                        for (MaterialSurveyQuestionAnswer materialSurveyQuestionAnswer : surveyQuestionAnswerByQuestionId) {
-                            qustionAnswers.add(materialSurveyQuestionAnswer.getOptionId());
-                        }
-                        materialSurveyQuestionVO.setOptionAnswers(qustionAnswers);
-                    } else {
-                        materialSurveyQuestionVO.setOptionAnswer(surveyQuestionAnswerByQuestionId.get(0).getOptionId());
-                    }
-                    break;
-                case 3:
-                    materialSurveyQuestionVO.setOptionAnswer(surveyQuestionAnswerByQuestionId.get(0).getOptionId());
-                    break;
-                case 4:
-                    materialSurveyQuestionVO.setOptionContent(surveyQuestionAnswerByQuestionId.get(0).getOptionContent());
-                    break;
-                case 5:
-                    materialSurveyQuestionVO.setOptionContent(surveyQuestionAnswerByQuestionId.get(0).getOptionContent());
-                    break;
+            if(StringUtil.notEmpty(request.getParameter("user_id"))){
+                userId=Long.parseLong(request.getParameter("user_id"));
             }
+            if(StringUtil.notEmpty(request.getParameter("user_type"))){
+                userType=Long.parseLong(request.getParameter("user_type"));
+            }
+            parameter.put("user_id",userId);
+            parameter.put("user_type",userType);
+            List<MaterialSurveyQuestionAnswer> surveyQuestionAnswerByQuestionId = materialSurveyService.getSurveyQuestionAnswerByQuestionId(parameter);
+            if(surveyQuestionAnswerByQuestionId.size()>0){
+                switch (materialSurveyQuestion.getType()) {
+                    case 1:
+                        materialSurveyQuestionVO.setOptionAnswer(surveyQuestionAnswerByQuestionId.get(0).getOptionId());
+                        break;
+                    case 2:
+                        if (surveyQuestionAnswerByQuestionId.size() > 1) {
+                            List<Long> qustionAnswers = new ArrayList<>();
+                            for (MaterialSurveyQuestionAnswer materialSurveyQuestionAnswer : surveyQuestionAnswerByQuestionId) {
+                                qustionAnswers.add(materialSurveyQuestionAnswer.getOptionId());
+                            }
+                            materialSurveyQuestionVO.setOptionAnswers(qustionAnswers);
+                        } else {
+                            materialSurveyQuestionVO.setOptionAnswer(surveyQuestionAnswerByQuestionId.get(0).getOptionId());
+                        }
+                        break;
+                    case 3:
+                        materialSurveyQuestionVO.setOptionAnswer(surveyQuestionAnswerByQuestionId.get(0).getOptionId());
+                        break;
+                    case 4:
+                        materialSurveyQuestionVO.setOptionContent(surveyQuestionAnswerByQuestionId.get(0).getOptionContent());
+                        break;
+                    case 5:
+                        materialSurveyQuestionVO.setOptionContent(surveyQuestionAnswerByQuestionId.get(0).getOptionContent());
+                        break;
+                    default:
+                        break;
+                }
+            }
+
             materialSurveyQuestionVOS.add(materialSurveyQuestionVO);
         }
         materialSurveyVO.setMaterialSurveyQuestionList(materialSurveyQuestionVOS);
-
+        String from=request.getParameter("state");
         //机构用户基本信息
         Map<String, Object> map = new HashMap<>();
         map.put("survey", materialSurveyVO);
         map.put("type", "view");
+        if("fromwrtlist".equals(from)||"material".equals(from)){
+            map.put("from",from);
+            mv.setViewName("commuser/research/researchadd");
+        }else{
+            mv.setViewName("authadmin/materialSurvey/fillMaterialSurvey");
+        }
+        map.put("material_id",request.getParameter("material_id"));
         mv.addObject("res", map);
-        mv.setViewName("authadmin/materialSurvey/fillMaterialSurvey");
+        mv.addObject("res", map);
         return mv;
     }
     /**
@@ -373,7 +356,8 @@ public class MaterialSurveyController extends BaseController {
         Map<String, Object> res = new HashMap<>();
         map.put("state",state);
         map.put("required","1");
-        map.put("id",this.getUserType());
+        map.put("id",this.getUserInfo().get("id"));
+        map.put("userType",this.getUserType());
         if(StringUtil.notEmpty(materialId)){
             map.put("materialId", materialId);
         }
@@ -386,5 +370,29 @@ public class MaterialSurveyController extends BaseController {
             res.put("success",success);
         }
         return res;
+    }
+
+    //根据书籍ID查询调研表
+    @RequestMapping("querySearchByTextbookId")
+    @ResponseBody
+    public List<Map<String,Object>> querySearchByTextbookId(HttpServletRequest request){
+        String textbook_id=request.getParameter("textbook_id");
+        textbook_id = textbook_id.replaceAll("[\\[|\\]|\\{|\\}|\"]","");
+        textbook_id = "0" +(StringUtil.notEmpty(textbook_id)?",":"")+textbook_id;
+        textbook_id = "(" + textbook_id + ")";
+        Map<String, Object> user=getUserInfo();
+
+        List<Map<String,Object>> list = materialSurveyService.querySearchByTextbookId(textbook_id);
+        return list;
+    }
+
+    //查询申请用户已经填写过的调研表
+    @RequestMapping("queryAnswer")
+    @ResponseBody
+    public List<Map<String,Object>> queryAnswer(HttpServletRequest request){
+        String material_id=request.getParameter("material_id");
+        String user_id = request.getParameter("user_id");
+        List<Map<String,Object>> list = materialSurveyService.queryAnswer(material_id,user_id);
+        return list;
     }
 }

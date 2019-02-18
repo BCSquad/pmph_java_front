@@ -36,6 +36,28 @@
         //---------------统计未读数量----------------
         $("#sxid").html('私信<span style="display: inline-block;position:absolute;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;' +
             'line-height: 10px;border-radius: 50%;padding: 3px 0px;right: 10;top: 0;width: 20px;height: 10px;text-align: center;">' + (${no_read_count}?${no_read_count}:0) + '</span>');
+
+		$.ajax({
+			type:'post',
+			url:"${ctx}/message/getMessageCount.action",
+			async:false,
+			dataType:'json',
+			success:function(json){
+				$("#tzid").html('通知<span style="display: inline-block;position:absolute;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;' +
+						'line-height: 10px;border-radius: 50%;padding: 3px 0px;right: 10;top: 0;width: 20px;height: 10px;text-align: center;">' + json.nodealcount + '</span>');
+			}
+		});
+
+		$.ajax({
+			type:'post',
+			url:"${ctx}/message/applyMessageCount.action",
+			async:false,
+			dataType:'json',
+			success:function(json){
+				$("#sqid").html('申请<span style="display: inline-block;position:absolute;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;' +
+						'line-height: 10px;border-radius: 50%;padding: 3px 0px;right: 10;top: 0;width: 20px;height: 10px;text-align: center;">' + json.nodealcount + '</span>');
+			}
+		});
     });
 
 
@@ -46,8 +68,8 @@
 	<div class="body">
 	<div class="content-wrapper" style="line-height:normal">
 	<div class="messageList">
-		<span><a class="otherOptions" href="${ctx}/message/noticeMessageList.action">通知</a></span>
-		<span><a href="${ctx}/message/applyMessageList.action" class="unselected">申请</a></span>
+		<span><a id="tzid" class="otherOptions" href="${ctx}/message/noticeMessageList.action" style="position: relative">通知</a></span>
+		<span><a id="sqid" href="${ctx}/message/applyMessageList.action" class="unselected" style="position: relative">申请</a></span>
 		<span id="otherSelected"><span id="sxid" style="position: relative">私信</span></span> <span id="rightContent">筛选：
 			<select id="select" title="请选择">
 				<option value="">全部</option>

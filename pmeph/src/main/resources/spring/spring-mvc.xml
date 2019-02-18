@@ -25,6 +25,7 @@
 
     <bean id="loginInterceptor" class="com.bc.pmpheep.back.interceptor.LoginInterceptor">
         <property name="remoteUrl" value="${remoteUrl}"></property>
+        <property name="remoteVideoUrl" value="${remoteVideoUrl}"></property>
         <property name="redirectUrl" value="/pages/comm/login.jsp"/>
         <property name="pathWithUsertypeMaps">
             <set>

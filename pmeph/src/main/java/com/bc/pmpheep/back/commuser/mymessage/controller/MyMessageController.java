@@ -47,6 +47,18 @@ public class MyMessageController extends com.bc.pmpheep.general.controller.BaseC
         return modelAndView;
     }
 
+    @RequestMapping(value = "/getMyMessageCount")
+    @ResponseBody
+    public  Map<String,Object> getMyFriendCount() throws Exception {
+        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> writerUser = this.getUserInfo();
+        Long userId = new Long(String.valueOf(writerUser.get("id")));
+        List<MyMessageVO> list = myMessageService.listMyMessage(1, 999999, "noreade", userId);
+        int no_read_count = list.size();
+        map.put("no_read_count",no_read_count);
+        return map;
+    }
+
     /**
      * 功能描述：获取我的消息列表
      *

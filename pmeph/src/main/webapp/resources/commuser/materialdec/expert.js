@@ -30,7 +30,7 @@ $(function () {
     
 
     $('.select-input').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 192,
         height: 30,
         optionHeight: 30
@@ -41,7 +41,7 @@ $(function () {
         optionHeight: 30
     });
     $('#education').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 192,
         height: 30,
         optionHeight: 30

@@ -8,6 +8,7 @@ import com.bc.pmpheep.general.service.ContentService;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
@@ -36,7 +37,7 @@ public class HomeServiceImpl implements HomeService {
      * 查询公告
      */
     @Override
-   /* @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName+#id")*/
+    @Cacheable(value = "commDataCache", key = "#root.targetClass+#root.methodName+#id")
     public List<Map<String, Object>> queryDocument(String id) {
         List<Map<String, Object>> list = homeDao.queryDocument(id);
         return list;
@@ -316,6 +317,13 @@ public class HomeServiceImpl implements HomeService {
     @Override
     public List<Map<String, Object>> Queryszpt() {
         List<Map<String, Object>> list= homeDao.Queryszpt();
+        return list;
+    }
+
+    @Override
+    public List<String> getSearchKeyWords(Integer num) {
+        num = (num == null?3:num);
+        List<String> list = homeDao.getSearchKeyWords(num);
         return list;
     }
 

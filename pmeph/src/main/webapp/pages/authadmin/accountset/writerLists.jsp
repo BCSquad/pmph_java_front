@@ -261,14 +261,14 @@ function formatDate(nS,str) {
             });
             $(function () {
             	$('#sstj').selectlist({
-                    zIndex: 10,
+                    zIndex: 100,
                     width: 208,
                     height: 40,
                     optionHeight: 40
                 });
             	
                 $('#pages').selectlist({
-                    zIndex: 10,
+                    zIndex: 100,
                     width: 110,
                     height: 30,
                     optionHeight: 30,

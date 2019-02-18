@@ -129,7 +129,7 @@ $(function(){
 
      
     $('#edu').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 130,
         height: 37,
         triangleSize:3,
@@ -266,7 +266,7 @@ $(function(){
 	
 	//分页
     $('#page-size-select').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 110,
         height: 30,
         optionHeight: 30

@@ -7,7 +7,11 @@ import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
 import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
+import com.bc.pmpheep.back.util.Const;
+import com.bc.pmpheep.back.util.ObjectUtil;
+import com.bc.pmpheep.back.util.StringUtil;
 import com.bc.pmpheep.general.controller.BaseController;
+import com.bc.pmpheep.general.service.DataDictionaryService;
 import com.bc.pmpheep.general.service.FileService;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +58,9 @@ public class MaterialDetailController extends BaseController{
 	@Autowired
     @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
     private PersonalService personalService;
+
+	@Autowired
+	DataDictionaryService dataDictionaryService;
 	
 	/**
 	 * 跳转到申报新增页面
@@ -149,6 +156,12 @@ public class MaterialDetailController extends BaseController{
 			orgSelects.append("<option value='"+map.get("org_id")+"'>"+map.get("org_name")+"</option>");
             }
         }
+		//数据字典
+		mav.addObject("writerUserDegree", dataDictionaryService.getDataDictionaryListByType(Const.WRITER_USER_DEGREE));
+		mav.addObject("writerUserTitle", dataDictionaryService.getDataDictionaryListByType(Const.WRITER_USER_TITLE));
+		mav.addObject("pmphRank", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_RANK));
+		mav.addObject("pmphPosition", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_POSITION));
+
 		mav.addObject("bookSelects", bookSelects.toString());
 		mav.addObject("orgSelects", orgSelects.toString());
 		mav.addObject("materialMap", materialMap);
@@ -828,6 +841,14 @@ public class MaterialDetailController extends BaseController{
 		//21.编写内容意向表
 		Map<String,Object> intentionMap = new HashMap<String,Object>();
 		intentionMap = this.mdService.queryIntention(queryMap);
+
+		//数据字典
+		gezlList.get(0).put("title",dataDictionaryService.getDataDictionaryItemNameByCode(Const.WRITER_USER_TITLE, ObjectUtil.notNull(gezlList.get(0).get("title"))?gezlList.get(0).get("title").toString():""));
+		gezlList.get(0).put("degree",dataDictionaryService.getDataDictionaryItemNameByCode(Const.WRITER_USER_DEGREE,MapUtils.getString(gezlList.get(0),"degree")));
+		mav.addObject("pmphRank", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_RANK));
+		mav.addObject("pmphPosition", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_POSITION));
+
+
 		//填充
 		mav.addObject("material", materialMap);
 		mav.addObject("gezlList", gezlList.get(0));
@@ -1068,6 +1089,12 @@ public class MaterialDetailController extends BaseController{
 			map.put("bookSelect", bookSelect.toString());
 		}
 
+		//数据字典
+		mav.addObject("writerUserDegree", dataDictionaryService.getDataDictionaryListByType(Const.WRITER_USER_DEGREE));
+		mav.addObject("writerUserTitle", dataDictionaryService.getDataDictionaryListByType(Const.WRITER_USER_TITLE));
+		mav.addObject("pmphRank", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_RANK));
+		mav.addObject("pmphPosition", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_POSITION));
+
 		//填充
 		mav.addObject("bookSelects", bookSelects.toString());
 		mav.addObject("gezlList", gezlList.get(0));
@@ -1275,6 +1302,7 @@ public class MaterialDetailController extends BaseController{
 		}else{
 			mv.setViewName("redirect:/material/toMaterialAdd.action?material_id="+material_id);
 		}
+
 		return mv;
 	}
 
@@ -1349,6 +1377,12 @@ public class MaterialDetailController extends BaseController{
         perpmphList=this.perService.rwsjcPerList(queryMap);
 		achievementMap=this.perService.queryAchievement(queryMap);
 
+		//数据字典
+		mav.addObject("writerUserDegree", dataDictionaryService.getDataDictionaryListByType(Const.WRITER_USER_DEGREE));
+		mav.addObject("writerUserTitle", dataDictionaryService.getDataDictionaryListByType(Const.WRITER_USER_TITLE));
+		mav.addObject("pmphRank", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_RANK));
+		mav.addObject("pmphPosition", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_POSITION));
+
     //    mav.addObject("zjkzxxList", zjkzxxList);
     //    mav.addObject("material_id", materialMap.get("id"));
         mav.addObject("userMap",userMap);
@@ -1371,4 +1405,19 @@ public class MaterialDetailController extends BaseController{
         mav.addObject("achievementMap",achievementMap);
         return mav;
     }
+
+	/**
+	 * 跳转到个人申报信息界面 只读不能修改 供访客访问的接口
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("showPerInformation")
+	public ModelAndView showPerInformation(HttpServletRequest request,
+										 HttpServletResponse response){
+		ModelAndView result = this.toperInformation(request, response);
+		result.setViewName("commuser/materialdec/showPerInformation");
+		return result;
+	}
+
 }

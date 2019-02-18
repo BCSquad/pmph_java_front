@@ -754,6 +754,10 @@
 			</div>
 			<hr style=" height:1px;border:none;border-top:1px #999999 dashed;margin-top: 30px;">
 		</div>
+		<!--调研表-->
+		<div style="margin-top: 20px" id="dyb">
+			<div class="txdyb" style="font-weight: bold;">调研表</div>
+		</div>
 			<div class="button">
 			<c:choose>
 					 <c:when test="${view_audit=='audit'}">
@@ -781,5 +785,8 @@
 <div style="width: 100%;padding: 0;margin: auto;border:none;overflow: hidden;">
 		<jsp:include page="/pages/comm/tail.jsp"></jsp:include> 
 </div>
+<script >
+
+</script>
 </body>
 </html>

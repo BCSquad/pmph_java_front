@@ -4,6 +4,7 @@ import com.bc.pmpheep.back.authadmin.usermanage.bean.WriterUser;
 import com.bc.pmpheep.back.commuser.research.dao.ReSearchDao;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
+import com.bc.pmpheep.back.util.StringUtil;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,7 @@ public class ReSearchServiceImpl implements ReSearchService{
 
     @Override
     public List<Map<String, Object>> querySearchByTextbookId(String textbook_id,String user_id) {
+
         return reSearchDao.querySearchByTextbookId(textbook_id, user_id);
     }
 

@@ -58,18 +58,21 @@
 		               			#end
 	               			</span></td>
                			<td>
+							#*0=社策划/1=编辑策划/2=修订/3=离退休编审策划/4=专家推荐/5=上级交办/6=作者投稿*#
                				<span class="left_content">选题来源：
 								#if($!{c.source}==0)
 		               				社策划
 		               			#elseif($!{c.source}==1)
 		               				编辑策划
 		               			#elseif($!{c.source}==2)
-		               				专家策划
+									修订
 		               			#elseif($!{c.source}==3)
 		               				离退休编审策划
 		               			#elseif($!{c.source}==4)
-		               				上级交办
-		               			#elseif($!{c.source}==5)
+									专家推荐
+								#elseif($!{c.source}==5)
+									上级交办
+		               			#elseif($!{c.source}==6)
 		               				作者投稿
 		               			#else
 		               				其他

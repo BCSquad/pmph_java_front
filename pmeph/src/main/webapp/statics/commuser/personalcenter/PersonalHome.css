@@ -200,12 +200,21 @@ color:#FFF;
 }
 
 #jftb {
-    background-image: url(../../image/jifeng.png);
-    background-position: 0px 4px;
+     background-image: url(../../image/jifeng.png);
+     background-position: 0px 4px;
+     height: 20px;
+     width: 16px;
+     background-repeat: no-repeat;
+     float: left;
+ }
+
+#sbxx {
+    background-image: url(../../image/a1.png);
     height: 20px;
-    width: 16px;
+    width: 20px;
     background-repeat: no-repeat;
     float: left;
+    background-size: 100%;
 }
 
 .grsx {
@@ -1532,4 +1541,31 @@ color: #bcbcbc;
 	font-weight: 700;
 	
 }
-    
+
+.bmcjan5 {
+    width: 112px;
+    height: 33px;
+    font-size: 14px;
+    color: #ffffff;
+    text-align: center;
+    margin: auto;
+    margin-top: 4px;
+    margin-bottom: 0px;
+    background-color: #5aaf98;
+    border-radius: 18px;
+    line-height: 33px;
+    float: left;
+    margin-left: 12px;
+}
+
+.bmcjan6 {
+    float: right;
+    width: 60px;
+    background-color: #d5d5d5;
+    padding: 0px 5px;
+    color: #9999a9;
+    font-size: 14px;
+    border-radius: 5px;
+    /* margin-top: 10px; */
+    margin-right: 10px;
+}

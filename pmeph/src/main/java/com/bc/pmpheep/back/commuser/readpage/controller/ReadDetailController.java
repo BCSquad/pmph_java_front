@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.PUT;
 
 import com.bc.pmpheep.back.commuser.homepage.service.HomeService;
+import com.bc.pmpheep.back.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -93,12 +94,18 @@ public class ReadDetailController extends BaseController{
 		/*List<Map<String, Object>> eMap=readDetailService.queryRecommendByE(0);*/
 		List<Map<String, Object>> listCom=readDetailService.queryComment(id,0);
 		List<Map<String, Object>> ComNum=readDetailService.queryComment(id,-1);
+		List<Map<String, Object>> listCorr=readDetailService.queryComment(id,0,"correctpage");
+		List<Map<String, Object>> CorrNum=readDetailService.queryComment(id,-1,"correctpage");
+		List<Map<String, Object>> listFeed=readDetailService.queryComment(id,0,"feedpage");
+		List<Map<String, Object>> FeedNum=readDetailService.queryComment(id,-1,"feedpage");
 		List<Map<String, Object>> Video=readDetailService.queryVideo(id);
+		List<Map<String, Object>> source=readDetailService.querySource(id);
 		/*List<Map<String, Object>> auList=readDetailService.queryAuthorType(author);*/
-		List<Map<String, Object>> longList=readDetailService.queryLong(id,0);
+		//长评列表 废弃
+		/*List<Map<String, Object>> longList=readDetailService.queryLong(id,0);
 		if(longList.size()==0){
 			modelAndView.addObject("longcom", "nothing");
-		}
+		}*/
 		if(listCom.size()==0){
 			modelAndView.addObject("shortcom", "nothing");
 		}
@@ -171,18 +178,25 @@ public class ReadDetailController extends BaseController{
 		//人卫推荐
 		/*modelAndView.addObject("eMap", eMap);*/
 		modelAndView.addObject("ComNum", ComNum.size());
+		modelAndView.addObject("CorrNum", CorrNum.size());
+		modelAndView.addObject("FeedNum", FeedNum.size());
 		modelAndView.addObject("supMap", supMap);
 		modelAndView.addObject("map", map);
 		modelAndView.addObject("listCom", listCom);
+		modelAndView.addObject("listCorr", listCorr);
+		modelAndView.addObject("listFeed", listFeed);
+
 		//教材关联图书
 		/*modelAndView.addObject("frList", frList);
 		modelAndView.addObject("frNextPage", frNextPage);*/
 		modelAndView.addObject("Video",Video);
-		modelAndView.addObject("longList", longList);
+		modelAndView.addObject("source",source);
+		//modelAndView.addObject("longList", longList);
 		modelAndView.addObject("typeList", typeList);
 		modelAndView.addObject("start", 2);
 		modelAndView.addObject("myLong", myLong);
-		if(null!=(request.getParameter("state"))){
+		//if(null!=(request.getParameter("state"))){ //写长评入口 废弃
+		if(false){
 			modelAndView.setViewName("commuser/readpage/writecom");
 		}else{
 			modelAndView.setViewName("commuser/readpage/readdetail");
@@ -377,6 +391,7 @@ public class ReadDetailController extends BaseController{
 	/**
 	 * 评论分页的具体实现
 	 * @param request
+	 * tagName 集合了评论 纠错 反馈 的下拉加载查询 通过tagName区分
 	 * @return
 	 */
 	@RequestMapping("changepage")
@@ -384,7 +399,8 @@ public class ReadDetailController extends BaseController{
 	public List<Map<String, Object>> changepage(HttpServletRequest request){
 		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
 		String id=request.getParameter("id");
-		List<Map<String, Object>> listCom=readDetailService.queryComment(id,pageNumber);
+		String tagName = request.getParameter("tagName");
+		List<Map<String, Object>> listCom=readDetailService.queryComment(id,pageNumber,tagName);
 		return listCom;
 	}
 	
@@ -594,6 +610,34 @@ public class ReadDetailController extends BaseController{
 		
 		
 		return m;
+	}
+
+	/**
+	 * 新增图书资源
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/addSource")
+	@ResponseBody
+	public Map<String,Object> addSource(HttpServletRequest request){
+		Map<String,Object> returnMap= new HashMap<String,Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		String book_id=request.getParameter("book_id");;
+		String attachment=request.getParameter("attachment");
+		String attachment_name=request.getParameter("attachment_name");
+		if(StringUtils.isEmpty(book_id)){
+			returnMap.put("returnCode","NO");
+		}else{
+			Map<String, Object> user=getUserInfo();
+			map.put("user_id", user.get("id"));
+			map.put("book_id", book_id);
+			map.put("file_id", attachment);
+			map.put("source_name", attachment_name);
+
+			int re= readDetailService.addSource(map);
+			returnMap.put("returnCode","OK");
+		}
+		return returnMap;
 	}
 	
 }

@@ -632,10 +632,10 @@ public class ExpertationServiceImpl implements ExpertationService {
 		
 		String msgContent = "";	
 		if("2".equals(online_progress)){ //申报单位退回 
-			msgContent = "您提交的《"+MapUtils.getString(expertation,"product_name")+"》临床申报表被[学校管理员]退回，退回原因：" +MapUtils.getString(expertation,"return_cause")+
+			msgContent = "您提交的《"+MapUtils.getString(expertation,"product_name")+"》申报表被[学校管理员]退回，退回原因：" +MapUtils.getString(expertation,"return_cause")+
             "，请您核对后重新提交!";
 		}else if("3".equals(online_progress)){ // 申报单位通过
-			msgContent = "恭喜！您提交的《"+MapUtils.getString(expertation,"product_name")+"》临床申报表已通过[学校管理员]审核!";
+			msgContent = "恭喜！您提交的《"+MapUtils.getString(expertation,"product_name")+"》申报表已通过[学校管理员]审核!";
 		}
 		
 		//TODO 待状态确认后再开放 与后台 一起发送消息

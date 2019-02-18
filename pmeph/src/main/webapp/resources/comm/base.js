@@ -4,7 +4,8 @@
 //var remoteUrl="192.168.0.211";
 //var remoteUrl="localhost:8088";
 
-var remoteUrl="192.168.0.211"; 
+var remoteUrl="192.168.0.211";
+var remoteVideoUrl= "192.168.100.131:11100";
 /**
  * Created by lihuan on 2017/11/24.
  */
@@ -320,6 +321,14 @@ $(function () {
         }
     });
 
+    $(".searchKey").each(function () {
+        var $t = $(this);
+        $t.bind("click",function () {
+            $(".search-input").val($t.html());
+            search();
+        });
+    })
+
 
     $(".delete").click(function () {
         $(".delete").css("display", "none");
@@ -394,8 +403,6 @@ function getImageTips(id,htmlId){
 
 
 }
-
-
 
 
 // 鼠标离开 提示语 消失

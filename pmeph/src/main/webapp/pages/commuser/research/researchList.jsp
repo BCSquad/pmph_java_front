@@ -43,7 +43,7 @@
                         <th style="width: 20px">序号</th>
                         <th style="width: 100px">调研表名称</th>
                         <th style="width: 100px">调研表概述</th>
-                        <th style="width: 100px">书籍名称</th>
+                        <th style="width: 100px">教材名称</th>
                         <th style="width: 50px">结束时间</th>
                         <th style="width: 50px">填写时间</th>
                         <th style="width: 30px">操作</th>
@@ -56,7 +56,7 @@
                             <td><div class="font">${list.intro}</div></td>
                             <td><div class="font">${list.material_name}</div></td>
                             <td><div class="font">${list.end_date == null?'永久有效':list.end_date}</div></td>
-                            <td><div class="font">${list.gmt_create == null?'暂未填写':list.end_date}</div></td>
+                            <td><div class="font">${list.gmt_create == null?'暂未填写':list.gmt_create}</div></td>
                              <%--${list.gmt_create == null?'<td class="rt" onclick="add(${list.id})">填写</td>':'<td class="rt">查看</td>'}--%>
                             <c:if test="${list.gmt_create == null }">
                                 <div><td class="rt" onclick="add(${list.id})"><font style="color: #337AB7;">填写</font></div></td>
@@ -104,7 +104,7 @@
 </body>
 <script>
     $('#pages').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 110,
         height: 30,
         optionHeight: 30,
@@ -134,11 +134,11 @@
     }
 
     function add(surveyId) {
-        window.location.href=contextpath+'orgSurvey/fillSurveyById.action?surveyId='+surveyId+'&state=1';
+        window.location.href=contextpath+'orgSurvey/fillSurveyById.action?surveyId='+surveyId+'&state=fromwrtlist';
     }
 
     function look(id) {
-        window.location.href = contextpath+"/orgSurvey/surveyDetailsById.action?surveyId=" + id;
+        window.location.href = contextpath+"/orgSurvey/surveyDetailsById.action?surveyId=" + id+'&state=fromwrtlist';
     }
 </script>
 </html>

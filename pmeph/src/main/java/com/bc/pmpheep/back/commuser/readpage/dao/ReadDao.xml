@@ -172,9 +172,16 @@
         as decimal(9,2)
         )
         from material_type where id = cast('${type}' as decimal(9,2)))),'-',-1) = '${type}'
-        where b.is_on_sale = 1 ORDER BY b.sales DESC
+        where b.is_on_sale = 1 and b.is_sell_well=1
+		ORDER BY b.sort_sell_well
         <if test="startrows != null and startrows != ''">
             <![CDATA[limit ${startrows},${endrows}]]>
         </if>
     </select>
+	<insert id="addBookSellWell" parameterType="java.util.Map">
+		insert into book_sell_well(book_id,type_name,sort)values (#{book_id},#{tyoe_name},#{sort})
+	</insert>
+	<select id="getBookSellwellMaxSort" resultType="java.lang.Integer">
+		select IFNULL(sort,0) as max from book_sell_well order by sort desc LIMIT 1
+	</select>
 </mapper>

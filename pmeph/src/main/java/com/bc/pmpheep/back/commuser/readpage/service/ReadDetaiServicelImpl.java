@@ -1,11 +1,10 @@
 package com.bc.pmpheep.back.commuser.readpage.service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.bc.pmpheep.back.util.CollectionUtil;
 import com.bc.pmpheep.back.util.RouteUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -40,11 +39,24 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 
 	/**
 	 * 查询相关评论
+	 * tagName 集合了评论 纠错 反馈 的下拉加载查询 通过tagName区分
 	 */
 	@Override
-	public List<Map<String, Object>> queryComment(String id,int start) {
-		// TODO Auto-generated method stub
-		List<Map<String, Object>> map=readDetailDao.queryComment(id,start);
+	public List<Map<String, Object>> queryComment(String id,int start,String... tagName) {
+		List<Map<String, Object>> map = new ArrayList<>();
+		if(tagName!=null&&tagName.length>0&&!"changepage".equals(tagName[0])){
+			if("correctpage".equals(tagName[0])){
+				//纠错
+				map=readDetailDao.queryCorrectByBookId(id,start);
+			}else if("feedpage".equals(tagName[0])){
+				//反馈
+				map=readDetailDao.queryFeedBackByBookId(id,start);
+			}
+		}else{
+			//评论
+			map=readDetailDao.queryComment(id,start);
+		}
+
 		for (Map<String, Object> pmap : map) {
 			String time=pmap.get("gmt_create").toString().substring(0, 16);
 			pmap.put("gmt_create", time);
@@ -302,7 +314,13 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		List<Map<String, Object>> list=readDetailDao.queryVideo(book_id);
 		return list;
 	}
-	
+
+	@Override
+	public List<Map<String, Object>> querySource(String book_id) {
+		List<Map<String, Object>> list=readDetailDao.querySource(book_id);
+		return list;
+	}
+
 	/**
 	 * 查询我的长评
 	 */
@@ -389,5 +407,10 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		resultMap.put("nextPage", nextPage);
 		resultMap.put("totalPage", totalPage);
 		return resultMap;
+	}
+
+	@Override
+	public Integer addSource(Map<String, Object> map) {
+		return readDetailDao.addSource(map);
 	}
 }

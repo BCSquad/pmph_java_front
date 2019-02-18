@@ -104,6 +104,7 @@
 	border-collapse: collapse;
 }
 
+
 .tab_2 thead tr{
 	background-color: #f8f8f8;
 }
@@ -125,6 +126,38 @@
 	color: #000000;
 	text-align: center;
 	border:1px solid #000000;
+}
+
+.tab_3{
+	width: 100%;
+	margin-top: 15px;
+	border:1px solid #dedede;
+	empty-cells:show;
+	border-collapse: collapse;
+}
+
+.tab_3 thead tr{
+	background-color: #f8f8f8;
+}
+.tab_3 thead td{
+
+	line-height: 30px;
+	letter-spacing: 0px;
+	color: #333333;
+	border:1px solid #dedede;
+	text-align: center;
+}
+.tab_3 tbody td{
+	line-height: 48px;
+	height: 48px;
+	letter-spacing: 0px;
+	color: #000000;
+	border:1px solid #dedede;
+	text-align: center;
+}
+
+.radio_tb tr td {
+	border: 0;
 }
 
 .sbdw{
@@ -293,14 +326,14 @@ a.input {
     font-size: 14px;
     color: #03717b;
 }
-.icon{
+/*.icon{
     background-image: url(../../statics/image/附件拷贝4.png);
     background-position: 0px 2px;
     height: 30px;
     width: 16px;
     background-repeat: no-repeat;
     margin-left: 25px
-}
+}*/
 .name{
     color: #333333;
     margin-right: 6px

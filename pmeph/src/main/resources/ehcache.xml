@@ -27,7 +27,8 @@
     </defaultCache>
     
     <!-- pmph ehcache  -->
-
+    <!--自定的缓存，当自定的配置不满足实际情况时可以通过自定义（可以包含多个cache节点）-->
+    <!--缓存的名称，可以通过指定名称获取指定的某个Cache对象-->
     <cache name="commDataCache"
            maxEntriesLocalHeap="1000"
            eternal="false"

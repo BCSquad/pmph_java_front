@@ -19,6 +19,18 @@ public interface ReadDetailDao {
 	 */
 	List<Map<String, Object>> queryComment(@Param("id") String id,@Param("start") int start);
 	/**
+	 * 根据书籍ID查询纠错
+	 * @param id
+	 * @return List<Map<String, Object>>
+	 */
+	List<Map<String, Object>> queryCorrectByBookId(@Param("id") String id,@Param("start") int start);
+	/**
+	 * 根据书籍ID查询读者反馈
+	 * @param id
+	 * @return List<Map<String, Object>>
+	 */
+	List<Map<String, Object>> queryFeedBackByBookId(@Param("id") String id,@Param("start") int start);
+	/**
 	 * 根据书籍ID查询配套图书
 	 * @param id
 	 * @return Map<String, Object>
@@ -166,6 +178,7 @@ public interface ReadDetailDao {
 	 * @return List<Map<String, Object>>
 	 */
 	List<Map<String, Object>> queryVideo(@Param("book_id") String book_id);
+	List<Map<String, Object>> querySource(@Param("book_id") String book_id);
 	
 	/**
 	 * 查询我的长评
@@ -217,5 +230,5 @@ public interface ReadDetailDao {
 	 */
 	List<Map<String, Object>> queryRelatedBookList(Map<String,Object> map);
 
-
+	int addSource(Map<String, Object> map);
 }

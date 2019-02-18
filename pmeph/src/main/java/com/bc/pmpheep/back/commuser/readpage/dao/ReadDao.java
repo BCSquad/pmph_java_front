@@ -26,5 +26,7 @@ public interface ReadDao {
 	//热门书评
 	List<Map<String,Object>> queryRmspReadList(Map<String,Object> map); 
 	//图书畅销
-	List<Map<String,Object>> queryTscxReadList(Map<String,Object> map); 
+	List<Map<String,Object>> queryTscxReadList(Map<String,Object> map);
+	void addBookSellWell(Map<String,Object> map);
+	int getBookSellwellMaxSort(Map<String,Object> map);
 }

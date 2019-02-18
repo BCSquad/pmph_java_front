@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.general.dao.DataDictionaryDao">
+
+
+
+    <select id="getDataDictionaryListByType" parameterType="String" resultType="Map">
+        select i.code,i.name
+        from data_dictionary_item i
+        inner join data_dictionary_type t
+        on t.id = i.type_id and t.type_code = #{type_code} and i.deleted = 0
+        order by i.sort asc
+    </select>
+
+    <select id="getDataDictionaryItemNameByCode"  parameterType="String" resultType="String">
+        select i.name
+        from data_dictionary_item i
+        inner join data_dictionary_type t
+        on t.id = i.type_id and t.type_code = #{type_code} and i.deleted = 0 and i.code = #{code}
+        order by i.sort asc
+        limit 0,1
+    </select>
+</mapper>

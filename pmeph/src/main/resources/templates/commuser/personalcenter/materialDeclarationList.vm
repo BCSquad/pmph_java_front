@@ -40,18 +40,16 @@
                     <br/><span class="ybmcj3">已报名人数</span></div>
                 </div>
                 <div class="bmcj3">
-                    #if( $!{c.is_all_textbook_published}==true && ($!{c.datebase}>0 || $!{c.is_force_end}==true))
-                        <div class="bmcjan3"><span>遴选结束</span></div>
-                    #elseif( $!{c.is_all_textbook_published}==true)
-                       <div class="bmcjan3"><span>报名结束</span></div>
-                    #elseif($!{c.datebase}>0 || $!{c.is_force_end}==true )
-                        <div class="bmcjan3"><span>遴选结束</span></div>
-                    #end
+
+
                     #if($!{c.iamin}>0 && $!{c.online_progress}>=0)
+                    <a class="bmcjan5" href="$!{contextpath}progress/listReportProgress.action?materialId=$!{c.material_id}">
+                        <div class=""><span>申报进度查询</span></div>
+                    </a>
                     <a class="abmcj" href="$!{contextpath}material/showMaterial.action?declaration_id=$!{c.declaration_id}">
                 		<div class="bmcjan4">查看申报表</div>
                 	</a>
-                	#end
+                    #end
                 </div>
             </div>
         #elseif($!{c.iamin}==0 && $!{c.datebase}<=0 && $!{c.is_all_textbook_published}==false && $!{c.is_force_end}==false)
@@ -123,6 +121,9 @@
                     #if(($!{c.is_staging}==true || $!{c.is_staging}==1)&&$!{c.online_progress}==0)
                     	<img src="$!{contextpath}statics/image/zancun.png">
                     #end
+
+
+
                     #if($!{c.online_progress}==2 || $!{c.online_progress}==5)
                     	<img src="$!{contextpath}statics/image/tuihui.png" title="退回原因：$!{c.return_cause}">
                     #end
@@ -130,6 +131,15 @@
                 </div>
                 <div class="rxia">
                     <div class="rxian">截止日期：$!{c.age_deadline}</div>
+
+                    #if( $!{c.is_all_textbook_published}==true && ($!{c.datebase}>0 || $!{c.is_force_end}==true))
+                        <div class="bmcjan6"><span>遴选结束</span></div>
+                    #elseif( $!{c.is_all_textbook_published}==true)
+                        <div class="bmcjan6"><span>报名结束</span></div>
+                    #elseif($!{c.datebase}>0 || $!{c.is_force_end}==true )
+                        <div class="bmcjan6"><span>遴选结束</span></div>
+                    #end
+
                     #if(${c.notNullIfFirstManager})
                     	#if(( $!{c.chosen_position}==4||$!{c.chosen_position}==12 ) && $!{c.rank}==1 && $!{c.is_force_end}==false && $!{c.is_all_textbook_published}==false)
 	                		<div class="btn-chooseEditor" onclick="chooseEditor('$!{c.textbook_id}',this)">选编委>></div>
@@ -146,6 +156,9 @@
                 		</select>
                 		#end
 	                #end
+
+
+
                 </div>
                 
             </div>
