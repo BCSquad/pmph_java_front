@@ -218,7 +218,7 @@ $(function () {
 
 
                                         $("#add-icon_upload").fileupload({
-                                            url: 'http://' + remoteUrl + '/pmpheep/bookVideo/addVideo',
+                                            url: contextpath +'readdetail/addVideo.action',
                                             dataType: 'json',
                                             type: 'post',
                                             autoUpload: true,
@@ -1042,7 +1042,6 @@ function sourceUpload() {
         dataType: 'json',
         success: function (json) {
             if (json == "OK") {
-                alert(1);
                 $("#sourceUp").show();
             }
         }

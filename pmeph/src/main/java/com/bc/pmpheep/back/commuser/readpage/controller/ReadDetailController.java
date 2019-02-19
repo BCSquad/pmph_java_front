@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.readpage.controller;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
@@ -12,14 +13,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.PUT;
 
 import com.bc.pmpheep.back.commuser.homepage.service.HomeService;
+import com.bc.pmpheep.back.commuser.readpage.bean.BookVideo;
+import com.bc.pmpheep.back.commuser.readpage.service.BookVideoService;
 import com.bc.pmpheep.back.util.DateUtil;
+import com.bc.pmpheep.controller.bean.ResponseBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.pmpheep.back.commuser.book.service.BookService;
@@ -54,6 +60,10 @@ public class ReadDetailController extends BaseController{
 	 @Autowired
 	 @Qualifier("com.bc.pmpheep.back.homepage.service.HomeServiceImpl")
 	 private HomeService homeService;
+
+	@Autowired
+	@Qualifier("com.bc.pmpheep.back.commuser.readpage.service.BookVideoServiceImpl")
+	private BookVideoService bookVideoService;
 	 
 	 
 	/**
@@ -638,6 +648,27 @@ public class ReadDetailController extends BaseController{
 			returnMap.put("returnCode","OK");
 		}
 		return returnMap;
+	}
+	@ResponseBody
+	@RequestMapping("/addVideo")
+	public ResponseBean<Integer> addVideo(Long userId, Long bookId,
+										  String title, String origPath, String origFileName, Long origFileSize,
+										  String path, String fileName, Long fileSize,
+										  @RequestParam("cover") MultipartFile cover) throws IOException {
+		Map<String, Object> userInfo = getUserInfo();
+
+		BookVideo bookVideo = new BookVideo();
+		bookVideo.setBookId(bookId);
+		bookVideo.setTitle(title);
+		bookVideo.setOrigPath(origPath);
+		bookVideo.setOrigFileName(origFileName);
+		bookVideo.setOrigFileSize(origFileSize);
+		bookVideo.setPath(path);
+		bookVideo.setFileName(fileName);
+		bookVideo.setFileSize(fileSize);
+		Integer integer = bookVideoService.addBookVideoFront(userId, bookVideo, cover);
+
+		return new ResponseBean(integer);
 	}
 	
 }
