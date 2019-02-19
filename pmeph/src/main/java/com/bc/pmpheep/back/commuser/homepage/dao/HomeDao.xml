@@ -280,9 +280,8 @@ LIMIT 0,10
 				 from material_type 
 				where id = cast(#{type} as decimal(9,2)))
 	        ),'-',-1) = #{type}
-		where b.is_on_sale = 1
-		ORDER BY
-		b.sales DESC limit 0,6 
+	   where b.is_on_sale = 1 and b.is_sell_well=1
+	   ORDER BY b.sort_sell_well  limit 0,6
   </select>
     <!-- 查询书籍分类-->
     <select id="queryBookType" parameterType="map" resultMap="Mapresult">
