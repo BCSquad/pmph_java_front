@@ -139,6 +139,11 @@ public interface HomeDao {
      * @return
      */
     List<Map<String,Object>> quertProductByType(@Param("product_type") String product_type);
+    /**
+     * 根据产品id查询详情
+     * @return
+     */
+    List<Map<String,Object>> quertProductById(@Param("id") String id);
 
     /**
      * 查询首页师资平台

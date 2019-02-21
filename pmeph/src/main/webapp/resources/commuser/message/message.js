@@ -240,6 +240,11 @@ Date.prototype.toLocaleString = function () {
  //window.location.href="${ctx}/message/deleteNoticeMessage.action?id="+id;
  }*/
 
+
+function toproductdetail(product_id) {
+    location.href = contextpath + "homepage/toproductdetail.action?state=1&product_id="+product_id;
+}
+
 function lookDetailInfo(id,cmsid,is_read){
     if(parseInt(is_read)==1){
         location.href=contextpath+"message/noticeMessageDetail.action?cmsId="+cmsid+"&umid="+id;

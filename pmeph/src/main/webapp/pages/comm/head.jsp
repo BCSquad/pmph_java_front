@@ -177,9 +177,10 @@
                            href='<c:url value="/personalhomepage/tohomepage.action?pagetag=jcsb"/>'>教材申报</a>
                         <a class="option"
                            href='<c:url value="/teacherCertification/showTeacherCertification.action"/>'>教师认证</a>
-                          <a class="option" href='<c:url value="/personalhomepage/tohomepage.action?pagetag=lcjc
-"/>'  style="line-height:14px;width:60px;">临床决策专家申报</a>
-                        <%--<a class="option out" href='<c:url value="/logout.action"/>'>退出</a>--%>
+                          <a class="option" href='<c:url value="/personalhomepage/tohomepage.action?pagetag=lcjc"/>'  style="line-height:14px;width:60px;">临床决策专家申报</a>
+                        <c:if test="${userInfo.is_org_user ==1}">
+                            <a class="option out" onclick='loginOrgHome("${userInfo.username}")'>切换机构</a>
+                        </c:if>
                     </div>
                 </div>
             </c:if>
@@ -197,5 +198,21 @@
         <div class="btm-text" onclick="location.href='${ctx}${NOT_READ_MESSAGE_URL}'">您有未读消息!!!</div>
     </div>
 </c:if>
+<script>
+    function loginOrgHome(username){
+        console.log(username);
+        $.ajax({
+            type: "POST",
+            url:contextpath+'/login.action',
+            data:{username:username,usertype:'2'},
+            success: function(json) {
+            },
+            beforeSend(XHR){
+                setTimeout(function() { window.location.href=contextpath+"schedule/scheduleList.action"; }, 1500);
+            }
+        });
+    }
+
+</script>
 
 
