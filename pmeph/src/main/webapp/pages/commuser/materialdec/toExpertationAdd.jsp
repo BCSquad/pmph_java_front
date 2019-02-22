@@ -59,16 +59,16 @@
 					<table class="tab_1">
 						<tr>
 							<td><span class="btbs">*</span><span>姓&emsp;&emsp;名：</span>
-								<input class="cg_input" name="realname" id="realname" value="${userMap.writername}" maxlength="20"/>
+								<input class="cg_input" disabled name="realname" id="realname" value="${userMap.writername}" maxlength="20"/>
 								<input class="cg_input" name="user_id" type="hidden" value="${userMap.id}" />
 							</td>
 							<td><span class="btbs">*</span><span>性&emsp;&emsp;别：</span>
-								<select class="select-input" id="sex" name="sex">
+								<select class="select-input" disabled id="sex" name="sex">
 									<option value="1" ${userMap.sex=='1'?'selected':'' }>男</option>
 									<option value="2" ${userMap.sex=='2'?'selected':'' }>女</option>
 								</select></td>
 							<td><span class="btbs">*</span><span>出生年月：</span>
-								<input class="cg_input" calendar format="'yyyy-mm-dd'"  name="birthday" value="${userMap.birthday}"  id="birthday"  /></td>
+								<input class="cg_input" disabled calendar format="'yyyy-mm-dd'"  name="birthday" value="${userMap.birthday}"  id="birthday"  /></td>
 							<td><span class="btbs">*</span><span>工作单位：</span>
 								<input class="cg_input" name="org_name" value="${userMap.workplace}" id="org_name"  maxlength="36"/></td>
 						</tr>
@@ -113,7 +113,7 @@
 									<option value="2">军官证</option>
 								</select></td>
 							<td><span class="btbs">*</span><span>证件号码：</span>
-								<input class="cg_input" name="idcard" value="${userMap.idcard}" id="idcard"  maxlength="18"/></td>
+								<input class="cg_input" name="idcard" disabled value="${userMap.idcard}" id="idcard"  maxlength="18"/></td>
 							<td><span class="btbs">*</span><span>学&emsp;&emsp;历：</span>
 								<select id="education" name="education">
 									<c:forEach items="${writerUserDegree}" var="dic">
