@@ -499,4 +499,10 @@ LIMIT 0,10
 		order by sort asc
 		limit 0,#{num}
 	</select>
+
+	<select id="getSearchKeyWordsAll"  resultType="String">
+		select word from search_keyword
+		where is_disabled = 0 and is_deleted = 0
+		order by sort asc
+	</select>
 </mapper>

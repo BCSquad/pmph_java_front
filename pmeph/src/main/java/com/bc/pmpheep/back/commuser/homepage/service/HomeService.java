@@ -144,4 +144,9 @@ public interface HomeService {
      */
     List<String> getSearchKeyWords(Integer num);
 
+    /**
+     * 查询前n搜索关键词
+     */
+    List<String> getSearchKeyWordsAll();
+
 }

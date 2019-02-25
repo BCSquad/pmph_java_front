@@ -329,6 +329,12 @@ public class HomeServiceImpl implements HomeService {
     }
 
     @Override
+    public List<String> getSearchKeyWordsAll() {
+
+        List<String> list = homeDao.getSearchKeyWordsAll();
+        return list;
+    }
+    @Override
     public int querySize(String type) {
         return homeDao.querySize(type);
     }

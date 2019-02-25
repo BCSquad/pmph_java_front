@@ -16,6 +16,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <c:set var="contextpath" value="${pageContext.request.contextPath}"/>
+<link rel="stylesheet" href="${ctx}/statics/comm/head.css" type="text/css">
+<script type="text/javascript" src="${ctx}/resources/comm/head.js?t=${_timestamp}"></script>
 <div class="head">
     <div class="content-wrapper">
         <div class="content">
@@ -31,7 +33,9 @@
                    onclick="window.location='${ctx}/articlepage/toarticlepage.action'">文章</a>
             </div>
             <span class="delete"></span>
-            <input class="search-input" id="search-input" placeholder="图书/文章" maxlength="50">
+            <input  class="search-input" type="text" autocomplete="off" data-list  id="search-input"   onclick="listd()" placeholder="图书/文章" maxlength="50">
+            <ul class="datalist_ul" id="datalist_ul" data-list-id="search-input">
+            </ul>
 
             <img class="search-icon" src="${ctx}/statics/image/search.png" alt="">
 
@@ -112,8 +116,7 @@
 
 
                 }
-                List<String> searchKeyWords = homeService.getSearchKeyWords(3);
-
+                List<String> searchKeyWords = homeService.getSearchKeyWordsAll();
                 request.setAttribute("searchKeyWords", searchKeyWords);
                 request.setAttribute("NOT_READ_MESSAGE_NUM", messageNum);
                 request.setAttribute("NOT_READ_MESSAGE_URL", typeUrl.get(type));
@@ -186,11 +189,24 @@
             </c:if>
 
         </div>
-        <div class="searchKey-wrapper">
+       <%-- <div class="searchKey-wrapper">
             <c:forEach items="${searchKeyWords}" var="searchKey">
                 <span class="searchKey">${searchKey}</span>
             </c:forEach>
-        </div>
+        </div>--%>
+
+        <script>
+            $(function(){
+                <c:forEach items="${searchKeyWords}" var="searchKey">
+                $("#datalist_ul").append('<li class="datalist_li" onclick="searchKey()">${searchKey}</li>');
+                </c:forEach>
+                    $('[data-list-id="search-input"]').datalist({
+                        "max-height": "15em"
+                    }, function () {
+                        window.location.href = contextpath + "booksearch/bookOrArtSpliter.action?search=" + encodeURI(encodeURI($("#search-input").val()));
+                    });
+            })
+        </script>
     </div>
 </div>
 <c:if test="${NOT_READ_MESSAGE_NUM>0}">

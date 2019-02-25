@@ -157,4 +157,11 @@ public interface HomeDao {
      * @return
      */
     List<String> getSearchKeyWords(Integer num);
+
+    /**
+     * 查询前num个搜索关键词
+     * @param num
+     * @return
+     */
+    List<String> getSearchKeyWordsAll();
 }
