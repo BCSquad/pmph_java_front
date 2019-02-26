@@ -1,0 +1,10 @@
+
+#foreach($c in $!{List_map})
+<tr>
+    <td><input class="checkbox book-check" type="checkbox" bookid="$!{c.bookId}" bookname="$!{c.bookname}" isbn="$!{c.isbn}"></td>
+    <td>$!{c.bookname}</td>
+    <td>$!{c.isbn}</td>
+</tr>
+
+
+#end

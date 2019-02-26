@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.pmpheep.back.commuser.course.dao.CourseDao">
+
+
+    <sql id="teacherCourseParameter">
+        <if test="parameter.name != null and parameter.name != '' ">
+            and name like concat('%',#{parameter.name},'%')
+        </if>
+        <if test="parameter.published != null">
+            and published = #{parameter.published}
+        </if>
+        <if test="parameter.orderPlaced != null">
+            and order_placed = #{parameter.orderPlaced}
+        </if>
+        <if test="parameter.paid != null">
+            and paid = #{parameter.paid}
+        </if>
+        <if test="parameter.status != null and parameter.status == '已截止' ">
+            and TO_DAYS(NOW()) > TO_DAYS(end_date)
+        </if>
+    </sql>
+
+    <select id="getTeacherCourseList" parameterType="PageParameter" resultType="CourseVO">
+        select * from course
+        where teacher_id = #{parameter.teacherId}
+        <include refid="teacherCourseParameter"></include>
+        <if test="start != null">
+            limit #{start},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getTeacherCourseListCount" parameterType="PageParameter" resultType="int">
+        select count(id)
+        from course
+        where teacher_id = #{parameter.teacherId}
+        <include refid="teacherCourseParameter"></include>
+    </select>
+
+    <select id="getCourseById" parameterType="Long" resultType="CourseVO">
+        select * from course where id = #{id}
+    </select>
+
+    <select id="getCourseBookListByCourseId" parameterType="Long" resultType="CourseBookVO">
+        select cb.*,b.bookname,b.isbn from
+        course_book cb
+        join book b on b.id = cb.book_id
+        where cb.course_id = #{id} and cb.deleted = 0
+    </select>
+
+    <!-- 获取已选图书的bookId列表-->
+    <select id="getCourseAllBookId" parameterType="Long" resultType="Long">
+        select cb.bookId from
+        course_book cb
+        where cb.course_id = #{id} and cb.deleted = 0
+    </select>
+
+    <select id="getCourseBookListCountByCourseId" parameterType="Long" resultType="int">
+        select count(id) from course_book where course_id = #{id} and deleted = 0
+    </select>
+
+    <!--列出未选择的图书 供选择-->
+    <select id="listBookUnSelected" parameterType="PageParameter" resultType="CourseBookVO">
+        select b.id as bookId ,b.bookname,b.isbn,#{parameter.courseId} as courseId from
+        book b
+        where b.id not in
+        (select cb.book_id from
+        course_book cb
+        where cb.course_id = #{parameter.courseId} and cb.deleted = 0)
+
+        <if test="parameter.bookname != null and parameter.bookname != '' ">
+            and b.bookname like concat('%',#{parameter.bookname},'%')
+        </if>
+        <if test="parameter.isbn != null and parameter.isbn != '' ">
+            and b.isbn like concat('%',#{parameter.isbn},'%')
+        </if>
+        <if test="start != null">
+            limit #{start},#{pageSize}
+        </if>
+    </select>
+    <!--未选择的图书 供选择总数-->
+    <select id="listBookUnSelectedCount" parameterType="Map" resultType="int">
+        select count(id) from
+        book b
+        where b.id not in
+        (select cb.book_id from
+        course_book cb
+        where cb.course_id = #{courseId} and cb.deleted = 0)
+        <if test="bookname != null and bookname != '' ">
+            and b.bookname like concat('%',#{bookname},'%')
+        </if>
+        <if test="isbn != null and isbn != '' ">
+            and b.isbn like concat('%',#{isbn},'%')
+        </if>
+    </select>
+
+    <!--批量插入课程图书-->
+    <insert id="addCourseBookBatch" >
+        insert INTO
+        course_book(course_id,book_id)
+        VALUES
+        <foreach collection="bookIds" item="bookId" separator="," index="index">
+            (#{courseId},#{bookId})
+        </foreach>
+        on duplicate key update deleted = 0
+    </insert>
+
+    <update id="courseBookDelete" parameterType="Long">
+        update course_book set deleted = 1 where id = #{id}
+    </update>
+
+    <update id="updateCourseBook" parameterType="CourseBookVO">
+        update course_book
+        <set>
+            <if test="courseId != null ">
+                course_id	=	#{courseId}	,
+            </if>
+            <if test="bookId != null ">
+                book_id	=	#{bookId}	,
+            </if>
+            <if test="note != null ">
+                note	=	#{note}	,
+            </if>
+            <if test="deleted != null ">
+                deleted	=	#{deleted}	,
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--新增或更新课程基本信息-->
+    <insert id="saveCourse" useGeneratedKeys="true" keyProperty="id" parameterType="CourseVO">
+        insert into
+        course(
+        <trim suffixOverrides=",">
+            <if test="id != null ">
+                id	,
+            </if>
+            <if test="name != null and name != '' ">
+                name	,
+            </if>
+            <if test="note != null ">
+                note	,
+            </if>
+            <if test="beginDate != null ">
+                begin_date	,
+            </if>
+            <if test="endDate != null ">
+                end_date	,
+            </if>
+            <if test="stuRepreUsername != null ">
+                stu_repre_username	,
+            </if>
+            <if test="published != null ">
+                published	,
+            </if>
+            <if test="orderPlaced != null ">
+                order_placed	,
+            </if>
+            <if test="paid != null ">
+                paid	,
+            </if>
+            <if test="deleted != null ">
+                deleted	,
+            </if>
+            <if test="teacherId != null ">
+                teacher_id	,
+            </if>
+        </trim>
+        )
+        VALUES(
+        <trim suffixOverrides=",">
+            <if test="id != null ">
+                #{id}	,
+            </if>
+            <if test="name != null and name != '' ">
+                #{name}	,
+            </if>
+            <if test="note != null ">
+                #{note}	,
+            </if>
+            <if test="beginDate != null ">
+                #{beginDate}	,
+            </if>
+            <if test="endDate != null ">
+                #{endDate}	,
+            </if>
+            <if test="stuRepreUsername != null ">
+                #{stuRepreUsername}	,
+            </if>
+            <if test="published != null ">
+                #{published}	,
+            </if>
+            <if test="orderPlaced != null ">
+                #{orderPlaced}	,
+            </if>
+            <if test="paid != null ">
+                #{paid}	,
+            </if>
+            <if test="deleted != null ">
+                #{deleted}	,
+            </if>
+            <if test="teacherId != null ">
+                #{teacherId}	,
+            </if>
+        </trim>
+        )
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null ">
+                id	=	values(id)	,
+            </if>
+            <if test="name != null and name != '' ">
+                name	=	values(name)	,
+            </if>
+            <if test="note != null ">
+                note	=	values(note)	,
+            </if>
+            <if test="beginDate != null ">
+                begin_date	=	values(begin_date)	,
+            </if>
+            <if test="endDate != null ">
+                end_date	=	values(end_date)	,
+            </if>
+            <if test="stuRepreUsername != null ">
+                stu_repre_username	=	values(stu_repre_username)	,
+            </if>
+            <if test="published != null ">
+                published	=	values(published)	,
+            </if>
+            <if test="orderPlaced != null ">
+                order_placed	=	values(order_placed)	,
+            </if>
+            <if test="paid != null ">
+                paid	=	values(paid)	,
+            </if>
+            <if test="deleted != null ">
+                deleted	=	values(deleted)	,
+            </if>
+            <if test="teacherId != null ">
+                teacher_id	=	values(teacher_id)	,
+            </if>
+        </trim>
+    </insert>
+
+    <!--删除课程下所有图书-->
+    <update id="courseBookDeleteByCourseId" parameterType="Long" >
+        update course_book set deleted = 1 where course_id = #{id}
+    </update>
+
+    <insert id="saveCourseBookList" parameterType="CourseBookVO" >
+        insert into course_book(
+                  id	,
+                  course_id	,
+                  book_id	,
+                  note
+        )
+        VALUES
+        <foreach collection="list" item="b" separator="," index="index">
+            (#{b.id},#{b.courseId},#{b.bookId},ifNull(#{b.note},''))
+        </foreach>
+        on duplicate key UPDATE
+                    course_id = VALUES(course_id),
+                    note	=	VALUES(note),
+                    deleted = 0
+    </insert>
+
+    <select id="queryCountWriterUserByUsername" parameterType="String" resultType="int">
+        select count(*) from writer_user where username = #{username}
+    </select>
+
+    <update id="courseStatusModify" parameterType="CourseVO" >
+        update course
+        <set>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
+            <if test="published != null">
+                published = #{published},
+            </if>
+            <if test="order_placed != null">
+                order_placed = #{orderPlaced},
+            </if>
+            <if test="paid != null">
+                paid = #{paid},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>

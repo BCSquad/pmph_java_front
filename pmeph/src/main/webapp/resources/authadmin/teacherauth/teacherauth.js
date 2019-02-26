@@ -87,6 +87,8 @@ function queryMain(){
 	});
 }
 
+
+
 //查询条件切换 姓名或状态   姓名及状态相互制约  多条件暂时禁用
 function selectSearchCondition(mutiCondition){
 	if(mutiCondition=="ture"){//多条件查询 高级查询按钮触发

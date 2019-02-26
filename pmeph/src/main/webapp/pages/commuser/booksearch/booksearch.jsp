@@ -62,32 +62,6 @@ String contextpath=request.getContextPath();
         
         <div class="bigContent">
            <div id="mysort" style="background-color: #ffffff;float:left;margin-top: 20px;padding-bottom: 10px;width:1200px">
-          <%--  <c:forEach items="${list }" var="sort" varStatus="status">
-           <div style="background-color: #ffffff;float:left;padding-bottom: 10px" id="sort${sort.parent.id }">
-           <div style="float:left;min-width:100px;height:56px;line-height: 56px;text-align: center">
-             ${sort.parent.type_name }:
-           </div>
-            <div style="float:left;max-width: 1100px">
-            <ul class="dowebok" >
-                 <c:forEach items="${sort.child }" var="child">
-                   <li style="float:left;margin-left: 10px;margin-top: 10px" ><input type="radio" name="radio${child.parent_id }" value="${child.id }" onclick="getSort('${sort.parent.id }',this.value)" data-labelauty="${child.type_name }"></li>
-                 </c:forEach>
-                 </ul>
-           </div>
-           </div>
-           </c:forEach> --%>
-           <%-- <div style="background-color: #ffffff;float:left;padding-bottom: 10px" id="sort${fistsort[0].parent_id }">
-           <div style="float:left;min-width:100px;height:56px;line-height: 56px;text-align: center;margin-left:10px">
-                                                      全部分类:
-           </div>
-            <div style="float:left;max-width: 1090px">
-            <ul class="dowebok" >
-                 <c:forEach items="${fistsort}" var="child">
-                   <li style="float:left;margin-left: 10px;margin-top: 10px" ><input type="radio" name="radio${child.parent_id }" value="${child.id }" onclick="getSort('${child.parent_id }',this.value,'sort')" data-labelauty="${child.type_name }"></li>
-                 </c:forEach>
-                 </ul>
-           </div>
-           </div> --%>
            
            </div>
             <div  style="background-color: #f6f6f6;width: 100%;height: 15px;"></div>
