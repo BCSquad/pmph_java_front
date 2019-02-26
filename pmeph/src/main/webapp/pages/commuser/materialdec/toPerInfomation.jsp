@@ -48,20 +48,58 @@
 					<table class="tab_1">
 						<tr>
 							<td><span>姓&emsp;&emsp;名：</span>
-								<input class="cg_input" name="realname" id="realname" value="${userMap.realname}" validator = "isNonEmpty" message="姓名不能为空"
-									   maxlength="20"/>
+								<c:choose>
+									<c:when test="${userMap.realname!=null}">
+										<input class="cg_input" name="realname" id="realname" disabled value="${userMap.realname}" validator = "isNonEmpty" message="姓名不能为空"
+											   maxlength="20"/>
+									</c:when>
+									<c:otherwise>
+										<input class="cg_input" name="realname" id="realname"  value="${userMap.realname}" validator = "isNonEmpty" message="姓名不能为空"
+											   maxlength="20"/>
+									</c:otherwise>
+								</c:choose>
+
+
+							<%--	<input class="cg_input" name="realname" id="realname" value="${userMap.realname}" validator = "isNonEmpty" message="姓名不能为空"
+									   maxlength="20"/>--%>
 								<input class="cg_input" name="user_id" type="hidden" value="${userMap.id}"/>
 								<input class="cg_input" name="username" id="username" type="hidden"
 									   value="${userMap.username}"/>
 							</td>
 							<td><span>性&emsp;&emsp;别：</span>
-								<select class="select-input" id="sex" name="sex">
-									<option value="1" ${userMap.sex=='1'?'selected':'' }>男</option>
-									<option value="2" ${userMap.sex=='2'?'selected':'' }>女</option>
-								</select></td>
+
+                                <c:choose>
+                                    <c:when test="${userMap.sex!=null}">
+                                        <select class="select-input" disabled id="sex" name="sex">
+                                            <option value="1" ${userMap.sex=='1'?'selected':'' }>男</option>
+                                            <option value="2" ${userMap.sex=='2'?'selected':'' }>女</option>
+                                        </select>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <select class="select-input" id="sex" name="sex">
+                                            <option value="1" ${userMap.sex=='1'?'selected':'' }>男</option>
+                                            <option value="2" ${userMap.sex=='2'?'selected':'' }>女</option>
+                                        </select>
+                                    </c:otherwise>
+                                </c:choose>
+
+
+							</td>
 							<td><span>出生年月：</span>
-								<input class="cg_input" calendar format="'yyyy-mm-dd'" name="birthday" validator= "isNonEmpty"  message= "出生日期不能为空"
-									   value="${userMap.birthday}" id="birthday"/></td>
+                                <c:choose>
+                                    <c:when test="${userMap.birthday!=null}">
+                                        <input class="cg_input" calendar format="'yyyy-mm-dd'" name="birthday"
+                                               validator="isNonEmpty" message="出生日期不能为空"
+                                               value="${userMap.birthday}" disabled id="birthday"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input class="cg_input" calendar format="'yyyy-mm-dd'" name="birthday"
+                                               validator="isNonEmpty" message="出生日期不能为空"
+                                               value="${userMap.birthday}" id="birthday"/>
+
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
 							<td><span>教&emsp;&emsp;龄：</span>
 								<input class="cg_input" name="experience" value="${userMap.experience}" id="experience"
 									   onkeyup="this.value=this.value.replace(/\D/g,'')"
@@ -118,10 +156,25 @@
 						</tr>
 						<tr>
 							<td><span>证件号码：</span>
-								<input class="cg_input" name="idcard" value="${userMap.idcard}" id="idcard"
-									   validator="isNonEmpty|isCard"
-									   message="证件号码不能为空|请填写正确的证件号码"
-									   maxlength="18"/></td>
+
+                                <c:choose>
+                                    <c:when test="${userMap.idcard!=null}">
+                                        <input class="cg_input" name="idcard" value="${userMap.idcard}" id="idcard"
+                                               validator="isNonEmpty|isCard" disabled
+                                               message="证件号码不能为空|请填写正确的证件号码"
+                                               maxlength="18"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input class="cg_input" name="idcard" value="${userMap.idcard}" id="idcard"
+                                               validator="isNonEmpty|isCard"
+                                               message="证件号码不能为空|请填写正确的证件号码"
+                                               maxlength="18"/>
+
+                                    </c:otherwise>
+                                </c:choose>
+
+
+							</td>
 							<td><span>学&emsp;&emsp;历：</span>
 								<select id="degree" class="select-input" name="degree">
 									<c:forEach items="${writerUserDegree}" var="dic">

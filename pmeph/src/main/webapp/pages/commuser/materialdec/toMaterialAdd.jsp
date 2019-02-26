@@ -129,17 +129,17 @@
 					<table class="tab_1">
 						<tr>
 							<td><span class="btbs">*</span><span>姓&emsp;&emsp;名：</span>
-								<input class="cg_input" name="realname" id="realname" value="${userMap.writername}" maxlength="20"/>
+								<input class="cg_input" name="realname" id="realname" disabled value="${userMap.writername}" maxlength="20"/>
 								<input class="cg_input" name="user_id" type="hidden" value="${userMap.id}" />
 							</td>
 							<td><span class="btbs">*</span><span>性&emsp;&emsp;别：</span>
-								<select class="select-input" id="sex" name="sex">
+								<select class="select-input" disabled id="sex" name="sex">
 									<option value="1" ${userMap.sex=='1'?'selected':'' }>男</option>
 									<option value="2" ${userMap.sex=='2'?'selected':'' }>女</option>
 									<%--<option value="0" ${userMap.sex=='0'?'selected':'' }>保密</option>--%>
 								</select></td>
 							<td><span class="btbs">*</span><span>出生年月：</span>
-								<input class="cg_input" calendar format="'yyyy-mm-dd'"  name="birthday" value="${userMap.birthday}"  id="birthday"  /></td>
+								<input class="cg_input" disabled calendar format="'yyyy-mm-dd'"  name="birthday" value="${userMap.birthday}"  id="birthday"  /></td>
 							<td><span class="btbs">*</span><span>教&emsp;&emsp;龄：</span>
 								<input class="cg_input" name="experience" value="${userMap.experience}" id="experience"
 									   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
@@ -197,7 +197,7 @@
 									<option value="2">军官证</option>
 								</select></td>
 							<td><span class="btbs">*</span><span>证件号码：</span>
-								<input class="cg_input" name="idcard" value="${userMap.idcard}" id="idcard"  maxlength="18"/></td>
+								<input class="cg_input" name="idcard" disabled value="${userMap.idcard}" id="idcard"  maxlength="18"/></td>
 							<td colspan="2"><span class="btbs">*</span><span>地&emsp;&emsp;址：</span>
 								<input class="cg_input" style="width: 488px;" name="address" value="${userMap.address}" id="address"  maxlength="50"/></td>
 						</tr>

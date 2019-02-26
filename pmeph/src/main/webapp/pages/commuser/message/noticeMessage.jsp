@@ -196,7 +196,16 @@
 		                  
 		                    <td class="buttonDetail">
 		                    	<c:if test="${message.msgType==0 && message.material_id!=0}">
-		                      	<div class="buttonAccept" ><a href="javascript:lookDetailInfo('${message.id}','${message.cmsid}','${message.is_read}')">查看详情</a></div>
+                                    <c:choose>
+                                        <c:when test="${message.is_product==1}">
+                                            <div class="buttonAccept" ><a href="javascript:toproductdetail('${message.material_id}')">查看详情</a></div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="buttonAccept" ><a href="javascript:lookDetailInfo('${message.id}','${message.cmsid}','${message.is_read}')">查看详情</a></div>
+                                        </c:otherwise>
+                                    </c:choose>
+
+
 		                        </c:if>
 		                        <c:if test="${message.msgType==0||message.msgType==1}">
 		   					    <span class="deleteButton" onclick="deleteNotice(${message.id })"><span style="font-size:18px;">×</span> 删除</span>

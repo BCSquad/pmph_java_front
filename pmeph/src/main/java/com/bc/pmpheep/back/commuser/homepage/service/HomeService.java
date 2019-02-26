@@ -130,7 +130,7 @@ public interface HomeService {
      * 根据产品类型查询详情
      * @return
      */
-    List<Map<String,Object>> quertProductByType(String product_type);
+    List<Map<String,Object>> quertProductByType(String product_type,String id);
     /**
      * 查询首页师资平台
      * @return
@@ -143,5 +143,10 @@ public interface HomeService {
      * @return
      */
     List<String> getSearchKeyWords(Integer num);
+
+    /**
+     * 查询前n搜索关键词
+     */
+    List<String> getSearchKeyWordsAll();
 
 }

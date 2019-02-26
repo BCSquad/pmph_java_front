@@ -192,20 +192,20 @@
                     <table class="tab_1">
                         <tr>
                             <td><span class="btbs">*</span><span>姓&emsp;&emsp;名：</span>
-                                <input class="cg_input" name="realname" id="realname" value="${gezlList.realname}"
+                                <input class="cg_input" name="realname" disabled id="realname" value="${gezlList.realname}"
                                        maxlength="20"/>
                                 <input class="cg_input" name="user_id" type="hidden" value="${userMap.id}"/>
                                 <input class="cg_input" name="username" id="username" type="hidden"
                                        value="${userMap.username}"/>
                             </td>
                             <td><span class="btbs">*</span><span>性&emsp;&emsp;别：</span>
-                                <select class="select-input" id="sex" name="sex">
+                                <select class="select-input" id="sex" disabled name="sex">
                                     <%--  <option value="0" ${gezlList.sex=='0'?'selected':'' }>保密</option>--%>
                                     <option value="1" ${gezlList.sex=='1'?'selected':'' }>男</option>
                                     <option value="2" ${gezlList.sex=='2'?'selected':'' }>女</option>
                                 </select></td>
                             <td><span class="btbs">*</span><span>出生年月：</span>
-                                <input class="cg_input" calendar format="'yyyy-mm-dd'" name="birthday"
+                                <input class="cg_input" disabled calendar format="'yyyy-mm-dd'" name="birthday"
                                        value="${gezlList.birthday}" id="birthday"/></td>
                             <td><span class="btbs">*</span><span>教&emsp;&emsp;龄：</span>
                                 <input class="cg_input" name="experience" value="${gezlList.experience}" id="experience"
@@ -270,7 +270,7 @@
                                     <option value="2" ${gezlList.idtype=='2'?'selected':'' }>军官证</option>
                                 </select></td>
                             <td><span class="btbs">*</span><span>证件号码：</span>
-                                <input class="cg_input" name="idcard" value="${gezlList.idcard}" id="idcard"
+                                <input class="cg_input" disabled  name="idcard" value="${gezlList.idcard}" id="idcard"
                                        maxlength="18"/></td>
                             <td colspan="2"><span class="btbs">*</span><span>地&emsp;&emsp;址：</span>
                                 <input class="cg_input" style="width: 488px;" name="address" value="${gezlList.address}"

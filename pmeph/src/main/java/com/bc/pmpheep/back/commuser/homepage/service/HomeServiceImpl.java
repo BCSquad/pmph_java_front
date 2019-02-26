@@ -3,6 +3,7 @@ package com.bc.pmpheep.back.commuser.homepage.service;
 import com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService;
 import com.bc.pmpheep.back.commuser.homepage.dao.HomeDao;
 import com.bc.pmpheep.back.util.RouteUtil;
+import com.bc.pmpheep.back.util.StringUtil;
 import com.bc.pmpheep.general.pojo.Content;
 import com.bc.pmpheep.general.service.ContentService;
 import org.apache.commons.collections.MapUtils;
@@ -323,18 +324,27 @@ public class HomeServiceImpl implements HomeService {
     @Override
     public List<String> getSearchKeyWords(Integer num) {
         num = (num == null?3:num);
-        List<String> list = homeDao.getSearchKeyWords(num);
-        return list;
+        return homeDao.getSearchKeyWords(num);
     }
 
+    @Override
+    public List<String> getSearchKeyWordsAll() {
+        return homeDao.getSearchKeyWordsAll();
+    }
     @Override
     public int querySize(String type) {
         return homeDao.querySize(type);
     }
 
     @Override
-    public List<Map<String, Object>> quertProductByType(String product_type) {
-        List<Map<String, Object>> list=homeDao.quertProductByType(product_type);
+    public List<Map<String, Object>> quertProductByType(String product_type,String id) {
+        List<Map<String, Object>> list;
+        if(StringUtil.notEmpty(id)){
+            list=homeDao.quertProductById(id);
+        }else{
+            list=homeDao.quertProductByType(product_type);
+        }
+
         if(list!=null&&list.size()>0){
             for (Map<String, Object> map:list) {
                 String note="";

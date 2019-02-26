@@ -1,3 +1,4 @@
+
 <%@ page import="java.util.Map" %>
 <%@ page import="com.bc.pmpheep.back.util.Const" %>
 <%@ page import="org.apache.commons.collections.MapUtils" %>
@@ -16,6 +17,127 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <c:set var="contextpath" value="${pageContext.request.contextPath}"/>
+<link rel="stylesheet" href="${ctx}/statics/comm/head.css" type="text/css">
+<script type="text/javascript" src="${ctx}/resources/comm/head.js?t=${_timestamp}"></script>
+<style>
+
+    .datalist_ul {
+
+        position: absolute;
+        z-index: 1;
+        display: none;
+        background: #fff;
+        overflow: auto;
+        box-shadow: 1px 1px 3px #ededed;
+        -webkit-box-shadow: 1px 1px 3px #ededed;
+        -moz-box-shadow: 1px 1px 3px #ededed;
+        -o-box-shadow: 1px 1px 3px #ededed;
+        border-bottom-right-radius: 17px;
+        border-bottom-left-radius: 17px;
+        border: solid 1px #1abd9b;
+        border-top-width: 0px;
+    !important
+    }
+
+    .datalist_ul .datalist_li {
+        background: white;
+        color: #000;
+        padding: 0.5em 0.5em;
+        text-align: left;
+        box-sizing: border-box;
+    !important
+    }
+
+    .datalist_ul .datalist_li_hover {
+        background: rgba(100, 149, 237,0.8);
+        color: #fff;
+    !important
+    }
+
+    .detalist_ul .datalist_li_hide {
+        display: none;
+    !important
+    }
+    ::-webkit-scrollbar {
+        width: 0.5em;
+    }
+    /*
+            ::-webkit-scrollbar-button{
+                height:0.5em;
+                width:0.5em;
+                background:#ccc;
+            }*/
+
+    ::-webkit-scrollbar:horizontal {
+        height: 0.2em;
+    }
+
+    ::-webkit-scrollbar-track {
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+
+        -webkit-box-shadow: #0C0C0C;
+    }
+
+    ::-webkit-scrollbar-thumb:window-inactive {
+        background: rgba(35, 169, 110, 0.4);
+    }
+    html{color:#000;background:#FFF;}
+    body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,
+    fieldset,input,textarea,p,blockquote,th,td {
+        margin:0;
+        padding:0;
+    }
+    table{
+        border-collapse:collapse;
+        border-spacing:0;
+    }
+    fieldset,img {
+        border:0;
+    }
+    address,caption,cite,code,dfn,em,strong,th,var {
+        font-style:normal;
+        font-weight:normal;
+    }
+    ol,ul {
+        list-style:none;
+    }
+    caption,th {
+        text-align:left;
+    }
+    h1,h2,h3,h4,h5,h6 {
+        font-size:100%;
+        font-weight:normal;
+    }
+    q:before,q:after {
+        content:'';
+    }
+    abbr,acronym { border:0;
+    }
+    @charset "utf-8";
+    *{
+        margin: 0px;
+        padding: 0px;
+
+    }
+    a{
+        text-decoration: none;
+        color: #000000;
+        font-size:15px;
+        /*字体*/
+    }
+    li{
+        list-style: none;
+    }
+    input,img{
+        border: none;
+    }
+</style>
 <div class="head">
     <div class="content-wrapper">
         <div class="content">
@@ -31,7 +153,9 @@
                    onclick="window.location='${ctx}/articlepage/toarticlepage.action'">文章</a>
             </div>
             <span class="delete"></span>
-            <input class="search-input" id="search-input" placeholder="图书/文章" maxlength="50">
+            <input  class="search-input" type="text" autocomplete="off" data-list  id="search-input"   onclick="listd()" placeholder="图书/文章" maxlength="50">
+            <ul class="datalist_ul" id="datalist_ul" data-list-id="search-input">
+            </ul>
 
             <img class="search-icon" src="${ctx}/statics/image/search.png" alt="">
 
@@ -112,8 +236,7 @@
 
 
                 }
-                List<String> searchKeyWords = homeService.getSearchKeyWords(3);
-
+                List<String> searchKeyWords = homeService.getSearchKeyWordsAll();
                 request.setAttribute("searchKeyWords", searchKeyWords);
                 request.setAttribute("NOT_READ_MESSAGE_NUM", messageNum);
                 request.setAttribute("NOT_READ_MESSAGE_URL", typeUrl.get(type));
@@ -177,19 +300,33 @@
                            href='<c:url value="/personalhomepage/tohomepage.action?pagetag=jcsb"/>'>教材申报</a>
                         <a class="option"
                            href='<c:url value="/teacherCertification/showTeacherCertification.action"/>'>教师认证</a>
-                          <a class="option" href='<c:url value="/personalhomepage/tohomepage.action?pagetag=lcjc
-"/>'  style="line-height:14px;width:60px;">临床决策专家申报</a>
-                        <%--<a class="option out" href='<c:url value="/logout.action"/>'>退出</a>--%>
+                          <a class="option" href='<c:url value="/personalhomepage/tohomepage.action?pagetag=lcjc"/>'  style="line-height:14px;width:60px;">临床决策专家申报</a>
+                        <c:if test="${userInfo.is_org_user ==1}">
+                            <a class="option out" onclick='loginOrgHome("${userInfo.username}")'>切换机构</a>
+                        </c:if>
                     </div>
                 </div>
             </c:if>
 
         </div>
-        <div class="searchKey-wrapper">
+       <%-- <div class="searchKey-wrapper">
             <c:forEach items="${searchKeyWords}" var="searchKey">
                 <span class="searchKey">${searchKey}</span>
             </c:forEach>
-        </div>
+        </div>--%>
+
+        <script>
+            $(function(){
+                <c:forEach items="${searchKeyWords}" var="searchKey">
+                $("#datalist_ul").append('<li class="datalist_li" onclick="searchKey()">${searchKey}</li>');
+                </c:forEach>
+                    $('[data-list-id="search-input"]').datalist({
+                        "max-height": "15em"
+                    }, function () {
+                        window.location.href = contextpath + "booksearch/bookOrArtSpliter.action?search=" + encodeURI(encodeURI($("#search-input").val()));
+                    });
+            })
+        </script>
     </div>
 </div>
 <c:if test="${NOT_READ_MESSAGE_NUM>0}">
@@ -197,5 +334,21 @@
         <div class="btm-text" onclick="location.href='${ctx}${NOT_READ_MESSAGE_URL}'">您有未读消息!!!</div>
     </div>
 </c:if>
+<script>
+    function loginOrgHome(username){
+        console.log(username);
+        $.ajax({
+            type: "POST",
+            url:contextpath+'/login.action',
+            data:{username:username,usertype:'2'},
+            success: function(json) {
+            },
+            beforeSend(XHR){
+                setTimeout(function() { window.location.href=contextpath+"schedule/scheduleList.action"; }, 1500);
+            }
+        });
+    }
+
+</script>
 
 
