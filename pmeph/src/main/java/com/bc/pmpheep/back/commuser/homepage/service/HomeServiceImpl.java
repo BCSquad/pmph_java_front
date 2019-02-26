@@ -324,15 +324,12 @@ public class HomeServiceImpl implements HomeService {
     @Override
     public List<String> getSearchKeyWords(Integer num) {
         num = (num == null?3:num);
-        List<String> list = homeDao.getSearchKeyWords(num);
-        return list;
+        return homeDao.getSearchKeyWords(num);
     }
 
     @Override
     public List<String> getSearchKeyWordsAll() {
-
-        List<String> list = homeDao.getSearchKeyWordsAll();
-        return list;
+        return homeDao.getSearchKeyWordsAll();
     }
     @Override
     public int querySize(String type) {

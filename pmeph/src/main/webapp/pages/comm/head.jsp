@@ -1,3 +1,4 @@
+
 <%@ page import="java.util.Map" %>
 <%@ page import="com.bc.pmpheep.back.util.Const" %>
 <%@ page import="org.apache.commons.collections.MapUtils" %>
@@ -18,6 +19,125 @@
 <c:set var="contextpath" value="${pageContext.request.contextPath}"/>
 <link rel="stylesheet" href="${ctx}/statics/comm/head.css" type="text/css">
 <script type="text/javascript" src="${ctx}/resources/comm/head.js?t=${_timestamp}"></script>
+<style>
+
+    .datalist_ul {
+
+        position: absolute;
+        z-index: 1;
+        display: none;
+        background: #fff;
+        overflow: auto;
+        box-shadow: 1px 1px 3px #ededed;
+        -webkit-box-shadow: 1px 1px 3px #ededed;
+        -moz-box-shadow: 1px 1px 3px #ededed;
+        -o-box-shadow: 1px 1px 3px #ededed;
+        border-bottom-right-radius: 17px;
+        border-bottom-left-radius: 17px;
+        border: solid 1px #1abd9b;
+        border-top-width: 0px;
+    !important
+    }
+
+    .datalist_ul .datalist_li {
+        background: white;
+        color: #000;
+        padding: 0.5em 0.5em;
+        text-align: left;
+        box-sizing: border-box;
+    !important
+    }
+
+    .datalist_ul .datalist_li_hover {
+        background: rgba(100, 149, 237,0.8);
+        color: #fff;
+    !important
+    }
+
+    .detalist_ul .datalist_li_hide {
+        display: none;
+    !important
+    }
+    ::-webkit-scrollbar {
+        width: 0.5em;
+    }
+    /*
+            ::-webkit-scrollbar-button{
+                height:0.5em;
+                width:0.5em;
+                background:#ccc;
+            }*/
+
+    ::-webkit-scrollbar:horizontal {
+        height: 0.2em;
+    }
+
+    ::-webkit-scrollbar-track {
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+
+        -webkit-box-shadow: #0C0C0C;
+    }
+
+    ::-webkit-scrollbar-thumb:window-inactive {
+        background: rgba(35, 169, 110, 0.4);
+    }
+    html{color:#000;background:#FFF;}
+    body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,
+    fieldset,input,textarea,p,blockquote,th,td {
+        margin:0;
+        padding:0;
+    }
+    table{
+        border-collapse:collapse;
+        border-spacing:0;
+    }
+    fieldset,img {
+        border:0;
+    }
+    address,caption,cite,code,dfn,em,strong,th,var {
+        font-style:normal;
+        font-weight:normal;
+    }
+    ol,ul {
+        list-style:none;
+    }
+    caption,th {
+        text-align:left;
+    }
+    h1,h2,h3,h4,h5,h6 {
+        font-size:100%;
+        font-weight:normal;
+    }
+    q:before,q:after {
+        content:'';
+    }
+    abbr,acronym { border:0;
+    }
+    @charset "utf-8";
+    *{
+        margin: 0px;
+        padding: 0px;
+
+    }
+    a{
+        text-decoration: none;
+        color: #000000;
+        font-size:15px;
+        /*字体*/
+    }
+    li{
+        list-style: none;
+    }
+    input,img{
+        border: none;
+    }
+</style>
 <div class="head">
     <div class="content-wrapper">
         <div class="content">
