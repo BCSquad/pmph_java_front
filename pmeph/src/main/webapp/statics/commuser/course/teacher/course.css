@@ -98,7 +98,7 @@ input.input{
     margin: 10px 0px 10px 0px;
 }
 
-#btn-search{
+.btn-search{
     width: 80px;
     text-align: center;
     padding-left: 11.5px;
@@ -168,7 +168,7 @@ input.input{
     display: none;
     position: fixed;
     left: 20%;
-    top: 30%;
+    top: 10%;
     box-shadow: 0px 0px 5px #888888;
     border-radius: 5px;
     z-index: 999;
@@ -211,7 +211,7 @@ input.input{
 }
 
 .search-condition{
-    width: 182px;
+    width: 150px;
     margin:15px 15px 0px 5px;
     height: 40px;
     background-color: #ffffff;
@@ -258,7 +258,7 @@ input.input{
     background-color: rgba(22, 155, 213, 1);
 }
 
-button#btn-confirm {
+button.btn-confirm {
     background-color: #12c09c;
 }
 
@@ -273,4 +273,14 @@ span.courseBookNote{
     line-height: 2em;
     border: 1px solid #ededed;
     border-radius: 5px;
+}
+
+.dialog .table-area{
+    min-height: 200px;
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+tr.teacherCanceled td {
+    color: #bebebe;
 }

@@ -23,7 +23,7 @@
 
     <select id="getTeacherCourseList" parameterType="PageParameter" resultType="CourseVO">
         select * from course
-        where teacher_id = #{parameter.teacherId}
+        where teacher_id = #{parameter.teacherId} and deleted = 0
         <include refid="teacherCourseParameter"></include>
         <if test="start != null">
             limit #{start},#{pageSize}
@@ -42,9 +42,20 @@
     </select>
 
     <select id="getCourseBookListByCourseId" parameterType="Long" resultType="CourseBookVO">
-        select cb.*,b.bookname,b.isbn from
+        select cb.*,b.bookname,b.isbn
+        ,cs.countStu,cr.countRes
+        from
         course_book cb
         join book b on b.id = cb.book_id
+
+        left join
+        (select course_book_id,count(id) as countStu from course_book_student where deleted=0 GROUP by course_book_id)cs
+        on cb.id = cs.course_book_id
+
+        left join
+        (select course_book_id,count(id) as countRes from course_book_student where deleted=0 and teacher_canceled =0 GROUP by course_book_id)cr
+        on cb.id = cr.course_book_id
+
         where cb.course_id = #{id} and cb.deleted = 0
     </select>
 
@@ -63,7 +74,9 @@
     <select id="listBookUnSelected" parameterType="PageParameter" resultType="CourseBookVO">
         select b.id as bookId ,b.bookname,b.isbn,#{parameter.courseId} as courseId from
         book b
-        where b.id not in
+        where
+        b.is_on_sale = 1
+        and b.id not in
         (select cb.book_id from
         course_book cb
         where cb.course_id = #{parameter.courseId} and cb.deleted = 0)
@@ -82,7 +95,8 @@
     <select id="listBookUnSelectedCount" parameterType="Map" resultType="int">
         select count(id) from
         book b
-        where b.id not in
+        where b.is_on_sale = 1
+        and b.id not in
         (select cb.book_id from
         course_book cb
         where cb.course_id = #{courseId} and cb.deleted = 0)
@@ -142,12 +156,11 @@
             <if test="note != null ">
                 note	,
             </if>
-            <if test="beginDate != null ">
+
                 begin_date	,
-            </if>
-            <if test="endDate != null ">
+
                 end_date	,
-            </if>
+
             <if test="stuRepreUsername != null ">
                 stu_repre_username	,
             </if>
@@ -179,12 +192,11 @@
             <if test="note != null ">
                 #{note}	,
             </if>
-            <if test="beginDate != null ">
+
                 #{beginDate}	,
-            </if>
-            <if test="endDate != null ">
+
                 #{endDate}	,
-            </if>
+
             <if test="stuRepreUsername != null ">
                 #{stuRepreUsername}	,
             </if>
@@ -216,12 +228,12 @@
             <if test="note != null ">
                 note	=	values(note)	,
             </if>
-            <if test="beginDate != null ">
+
                 begin_date	=	values(begin_date)	,
-            </if>
-            <if test="endDate != null ">
+
+
                 end_date	=	values(end_date)	,
-            </if>
+
             <if test="stuRepreUsername != null ">
                 stu_repre_username	=	values(stu_repre_username)	,
             </if>
@@ -278,7 +290,7 @@
             <if test="published != null">
                 published = #{published},
             </if>
-            <if test="order_placed != null">
+            <if test="orderPlaced != null">
                 order_placed = #{orderPlaced},
             </if>
             <if test="paid != null">
@@ -287,5 +299,93 @@
         </set>
         where id = #{id}
     </update>
+
+    <select id="querybookStudentList" parameterType="PageParameter" resultType="CourseBookStudentVO">
+        select cbs.*,cs.name as student_name,cs.class_name,cs.student_id,cs.telephone
+        from
+        (
+            select cbs.*,(select course_id from course_book where id = #{parameter.courseBookId})course_id
+            from
+            (
+                select * from
+                course_book_student
+                where course_book_id = #{parameter.courseBookId} and deleted = 0
+            )cbs
+        )cbs
+        left join course_student cs on cs.course_id = cbs.course_id and cbs.writer_user_id = cs.writer_user_id and cs.deleted = 0
+        <where>
+            <if test="parameter.studentName != null and parameter.studentName != '' ">
+                and cs.name like concat('%',#{parameter.studentName},'%')
+            </if>
+            <if test="parameter.className != null and parameter.className != '' ">
+                and cs.class_name like concat('%',#{parameter.className},'%')
+            </if>
+            <if test="parameter.studentId != null and parameter.studentId != '' ">
+                and cs.student_id like concat('%',#{parameter.studentId},'%')
+            </if>
+            <if test="parameter.telephone != null and parameter.telephone != '' ">
+                and cs.telephone like concat('%',#{parameter.telephone},'%')
+            </if>
+        </where>
+        <if test="start != null">
+            limit #{start} , #{pageSize}
+        </if>
+
+    </select>
+
+    <select id="querybookStudentListCount" parameterType="PageParameter" resultType="int">
+
+        select count(distinct cbs.id)
+        from
+        (
+            select cbs.*,(select course_id from course_book where id = #{parameter.courseBookId})course_id
+            from
+                (
+                    select * from
+                    course_book_student
+                    where course_book_id = #{parameter.courseBookId} and deleted = 0
+                )cbs
+        )cbs
+        left join course_student cs on cs.course_id = cbs.course_id and cbs.writer_user_id = cs.writer_user_id and cs.deleted = 0
+        <where>
+            <if test="parameter.studentName != null and parameter.studentName != '' ">
+                and cs.name like concat('%',#{parameter.studentName},'%')
+            </if>
+            <if test="parameter.className != null and parameter.className != '' ">
+                and cs.class_name like concat('%',#{parameter.className},'%')
+            </if>
+            <if test="parameter.studentId != null and parameter.studentId != '' ">
+                and cs.student_id like concat('%',#{parameter.studentId},'%')
+            </if>
+            <if test="parameter.telephone != null and parameter.telephone != '' ">
+                and cs.telephone like concat('%',#{parameter.telephone},'%')
+            </if>
+        </where>
+
+    </select>
+
+    <update id="updateCourseBookStudent" parameterType="CourseBookStudentVO" >
+        update course_book_student
+        <set>
+            <if test="note != null ">
+                note	=	#{note}	,
+            </if>
+            <if test="deleted != null ">
+                deleted	=	#{deleted}	,
+            </if>
+            <if test="teacherCanceled != null ">
+                teacher_canceled	=	#{teacherCanceled}	,
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="getCountResByCourseBookId" parameterType="Long" resultType="int">
+        select count(id) as countRes
+        from course_book_student
+        where
+        deleted=0 and teacher_canceled =0
+        and course_book_id = #{id}
+    </select>
 
 </mapper>

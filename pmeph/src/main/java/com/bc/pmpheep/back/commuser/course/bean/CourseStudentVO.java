@@ -19,14 +19,18 @@ public class CourseStudentVO {
      * 学生姓名
      */
     private String name ;
-/**
- * 班级
- */
+    /**
+     * 班级
+     */
     private String className ;
     /**
      * 学号
      */
     private String studentId ;
+    /**
+     * 电话
+     */
+    private String telephone;
     /**
      * 备注
      */
@@ -125,5 +129,13 @@ public class CourseStudentVO {
 
     public void setGmtUpdate(Timestamp gmtUpdate) {
         this.gmtUpdate = gmtUpdate;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 }

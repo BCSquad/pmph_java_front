@@ -93,10 +93,7 @@
         margin:0;
         padding:0;
     }
-    table{
-        border-collapse:collapse;
-        border-spacing:0;
-    }
+
     fieldset,img {
         border:0;
     }
@@ -107,9 +104,7 @@
     ol,ul {
         list-style:none;
     }
-    caption,th {
-        text-align:left;
-    }
+
     h1,h2,h3,h4,h5,h6 {
         font-size:100%;
         font-weight:normal;

@@ -30,9 +30,17 @@ public class CourseVO implements Serializable{
      */
     private Timestamp beginDate ;
     /**
+     * 展示
+     */
+    private String beginDateStr;
+    /**
      * 结束时间为空时永久有效
      */
     private Timestamp endDate ;
+    /**
+     * 展示
+     */
+    private String endDateStr;
     /**
      * 学生代表用户名关联用户名username
      */
@@ -102,6 +110,7 @@ public class CourseVO implements Serializable{
 
     public void setBeginDate(Timestamp beginDate) {
         this.beginDate = beginDate;
+        //this.beginDateStr = ObjectUtil.notNull(beginDate)?beginDate.toString().substring(0,10):"不限";
     }
 
     public Timestamp getEndDate() {
@@ -110,6 +119,7 @@ public class CourseVO implements Serializable{
 
     public void setEndDate(Timestamp endDate) {
         this.endDate = endDate;
+        //this.endDateStr = ObjectUtil.notNull(endDate)?endDate.toString().substring(0,10):"不限";
     }
 
     public String getStuRepreUsername() {
@@ -215,5 +225,23 @@ public class CourseVO implements Serializable{
             this.paid =true;
         }
         this.status = status;
+    }
+
+    public String getBeginDateStr() {
+        this.beginDateStr = ObjectUtil.notNull(this.beginDate)?this.beginDate.toString().substring(0,10):"不限";
+        return beginDateStr;
+    }
+
+    public void setBeginDateStr(String beginDateStr) {
+        this.beginDateStr = beginDateStr;
+    }
+
+    public String getEndDateStr() {
+        this.endDateStr = ObjectUtil.notNull(this.endDate)?this.endDate.toString().substring(0,10):"不限";
+        return endDateStr;
+    }
+
+    public void setEndDateStr(String endDateStr) {
+        this.endDateStr = endDateStr;
     }
 }

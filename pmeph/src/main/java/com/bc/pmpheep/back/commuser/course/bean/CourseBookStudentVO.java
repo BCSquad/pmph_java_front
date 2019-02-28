@@ -36,6 +36,29 @@ public class CourseBookStudentVO {
      */
     private Timestamp gmtUpdate ;
 
+
+    /**
+     * 学生姓名(course_student表)
+     */
+    private String studentName ;
+
+    /**
+     * 班级(course_student表)
+     */
+    private String className ;
+
+    /**
+     * 学号(course_student表)
+     */
+    private String studentId ;
+
+    /**
+     * 电话(course_student表)
+     */
+    private String telephone;
+
+
+
     public CourseBookStudentVO() {
     }
 
@@ -101,5 +124,37 @@ public class CourseBookStudentVO {
 
     public void setGmtUpdate(Timestamp gmtUpdate) {
         this.gmtUpdate = gmtUpdate;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 }

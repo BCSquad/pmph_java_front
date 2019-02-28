@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.course.dao;
 
+import com.bc.pmpheep.back.commuser.course.bean.CourseBookStudentVO;
 import com.bc.pmpheep.back.commuser.course.bean.CourseBookVO;
 import com.bc.pmpheep.back.commuser.course.bean.CourseVO;
 import com.bc.pmpheep.back.plugin.PageParameter;
@@ -97,4 +98,22 @@ public interface CourseDao {
      * @return
      */
     int courseStatusModify(CourseVO course);
+
+    int querybookStudentListCount(PageParameter<CourseBookStudentVO> pageParameter);
+
+    List<CourseBookStudentVO> querybookStudentList(PageParameter<CourseBookStudentVO> pageParameter);
+
+    /**
+     *
+     * @param courseBookStudent
+     * @return
+     */
+    int updateCourseBookStudent(CourseBookStudentVO courseBookStudent);
+
+    /**
+     * 返回图书订单总数
+     * @param courseBookId
+     * @return
+     */
+    int getCountResByCourseBookId(Long courseBookId);
 }

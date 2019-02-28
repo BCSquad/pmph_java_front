@@ -2,6 +2,7 @@ package com.bc.pmpheep.back.commuser.course.controller;
 
 
 import com.bc.pmpheep.back.commuser.booksearch.service.BookSearchService;
+import com.bc.pmpheep.back.commuser.course.bean.CourseBookStudentVO;
 import com.bc.pmpheep.back.commuser.course.bean.CourseBookVO;
 import com.bc.pmpheep.back.commuser.course.bean.CourseVO;
 import com.bc.pmpheep.back.commuser.course.service.CourseService;
@@ -152,6 +153,7 @@ public class CourseController  extends BaseController {
         mv.addObject("courseBookList",courseBookList);
         mv.addObject("bookCount",bookCount);
 
+
         mv.addObject("isNew",isNew);
         mv.addObject("readOnly",readOnly);
         mv.setViewName("commuser/course/teacher/course");
@@ -224,7 +226,7 @@ public class CourseController  extends BaseController {
 
         Map<String, Object> data_map = new HashMap<String, Object>();
         data_map.put("html", html);
-        data_map.put("totoal_count", totoal_count);
+        data_map.put("totoal_count", Math.ceil(totoal_count/pageParameter.getPageSize()));
 
         return data_map;
     }
@@ -312,7 +314,13 @@ public class CourseController  extends BaseController {
         return result;
     }
 
-    @RequestMapping(value = "courseStatusModify")
+    /**
+     * 课程状态变更
+     * @param request
+     * @param course
+     * @return
+     */
+    @RequestMapping(value = "courseStatusModify",method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> courseStatusModify(HttpServletRequest request,
                                                  CourseVO course){
@@ -324,5 +332,62 @@ public class CourseController  extends BaseController {
 
         return resultMap;
     }
+
+    @RequestMapping(value = "querybookStudent",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> querybookStudent(HttpServletRequest request,
+                                               CourseBookStudentVO courseBookStudent,
+                                               @RequestParam(defaultValue = "1") Integer pageNumber,
+                                               @RequestParam(defaultValue = "10") Integer pageSize
+                                               ){
+        String contextpath = request.getParameter("contextpath");
+        Map<String,Object> result_map = new HashMap<>(2);
+        PageParameter<CourseBookStudentVO> pageParameter = new PageParameter<>(pageNumber,pageSize);
+        pageParameter.setParameter(courseBookStudent);
+
+        int totoal_count = courseService.querybookStudentListCount(pageParameter);
+        List<CourseBookStudentVO> list = new ArrayList<>();
+        if(totoal_count > 0){
+            list = courseService.querybookStudentList(pageParameter);
+        }
+
+        result_map.put("list",list);
+
+        Map<String, Object> vm_map = new HashMap<String, Object>();
+        vm_map.put("List_map", list);
+        vm_map.put("startNum", pageParameter.getStart() + 1);
+        vm_map.put("contextpath", contextpath);
+        String html = "";
+        String vm = "commuser/personalcenter/courseQueryStudentList.vm";
+        html = templateService.mergeTemplateIntoString(vm, vm_map);
+
+        result_map.put("html", html);
+        result_map.put("totoal_count", Math.ceil(totoal_count/pageParameter.getPageSize()));
+
+        return result_map;
+    }
+
+    /**
+     * 切换课程图书-学生的 教师取消状态 并返回切换后的图书订单总数
+     * @param request
+     * @param courseBookStudent
+     * @return
+     */
+    @RequestMapping(value = "switchTeacherCanceled",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> switchTeacherCanceled(HttpServletRequest request,CourseBookStudentVO courseBookStudent){
+        Map<String,Object> result_map = new HashMap<>(2);
+
+
+        int count = courseService.switchTeacherCanceled(courseBookStudent);
+        if(count > 0){
+            result_map.put("code","OK");
+            int countRes = courseService.getCountResByCourseBookId(courseBookStudent.getCourseBookId());
+            result_map.put("countRes",countRes);
+        }
+
+        return result_map;
+    }
+
 
 }

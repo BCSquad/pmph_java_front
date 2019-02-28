@@ -1,15 +1,23 @@
-var courseId = $("#courseId").val();
-var published = $("#published").val();
+var courseId ;
+var published ;
 
 $(function(){
+    courseId = $("#courseId").val();
+    published = eval($("#published").val());
     //queryMain();
-    $('#page-size-select').selectlist({
+    $('#course-dialog .page-size-select').selectlist({
         zIndex: 100,
         width: 110,
         height: 30,
         optionHeight: 30
     });
-    $("#page-size-select").find("li").bind("click",function(){
+    $('#student-dialog .page-size-select').selectlist({
+        zIndex: 100,
+        width: 110,
+        height: 30,
+        optionHeight: 30
+    });
+    $(".page-size-select").find("li").bind("click",function(){
         $("#page-num-temp").val(1);
         queryDialog();
     });
@@ -94,8 +102,11 @@ function queryCourseBook() {
 }
 
 //点击显示弹窗
-function showup(type) {
-    if($("#course-dialog").css("display")=="none"){
+function showup(type,courseBookId,bookname) {
+    if((type=='bookAdd' && $("#course-dialog").css("display")=="none")
+        ||
+        (type=='student' && $("#student-dialog").css("display")=="none")
+        ){
         $.ajax({
             type: 'post',
             url: contextpath + 'readdetail/tologin.action',
@@ -103,10 +114,11 @@ function showup(type) {
             dataType: 'json',
             success: function (json) {
                 if (json == "OK") {
-                    $("#course-dialog").show();
+                    $("#student-dialog .mistitle").html(bookname);
+                    $("#"+(type=='bookAdd'?"course-dialog":"student-dialog")).show();
                     $("#page-num-temp").val(1);
                     addBookId = [];
-                    queryDialog();
+                    queryDialog(courseBookId);
                 }
             }
         });
@@ -117,9 +129,12 @@ function showup(type) {
 /**
  * 弹出窗列表查询
  */
-function queryDialog(){
+function queryDialog(courseBookId){
     if(published){ //已发布查询学生
-
+        if(courseBookId){
+            $("#courseBookId").val(courseBookId);
+        }
+        queryStudent();
     }else{ //未发布查询图书
         queryBook();
     }
@@ -188,14 +203,20 @@ function save(publish) {
                 id:$("#courseId").val(),
                 name:$("#courseForm input[name='name']").val(),
                 stuRepreUsername:$("#courseForm input[name='stuRepreUsername']").val(),
-                beginDate:$("#courseForm input[name='beginDate']").val(),
-                endDate:$("#courseForm input[name='endDate']").val(),
+
                 note:$("#courseForm textarea[name='note']").val(),
                 published:publish
             };
 
-            data.beginDate= data.beginDate?data.beginDate+" 00:00:00.0":"";
-            data.endDate= data.endDate?data.endDate+" 00:00:00.0":"";
+            var beginDate=$("#courseForm input[name='beginDate']").val();
+            var endDate=$("#courseForm input[name='endDate']").val();
+            if(beginDate){
+                data.beginDate= beginDate?beginDate+" 00:00:00.0":null;
+            }
+            if(endDate){
+                data.endDate= endDate?endDate+" 00:00:00.0":null;
+            }
+
             var books = [];
 
             $("#zebra-table").find("input[deleted='0']").parents("tr").each(function () {
@@ -239,43 +260,52 @@ function save(publish) {
  * 备注的修改初始化
  */
 function courseBookNoteUpdate() {
-    $("span.courseBookNote").each(function () {
-        $(this).unbind().bind("click",function () {
-            $span = $(this);
-            $span.hide();
-            var $textarea = $(this).parent("td.courseBookNote").children("textarea.courseBookNote");
-            $textarea.show().focus();
+    if($("#readOnly").val() == "false"){
+        $("span.courseBookNote").each(function () {
+            $(this).unbind().bind("click",function () {
+                $span = $(this);
+                $span.hide();
+                var $textarea = $(this).parent("td.courseBookNote").children("textarea.courseBookNote");
+                $textarea.show().focus();
 
-            $textarea.unbind().bind("blur",function () {
-                if($textarea.val() != $span.html()){//发生了修改
-                    /*$.ajax({
-                        type:'post',
-                        url:contextpath+'course/updateCourseBookNote.action?t='+new Date().getTime(),
-                        async:false,
-                        dataType:'json',
-                        data:{id:$span.attr("courseBookId"),note:$textarea.val()},
-                        success:function(json){
-                            if(json > 0){
-                                $span.html($textarea.val());
+                $textarea.unbind().bind("blur",function () {
+                    if($textarea.val() != $span.html()){//发生了修改
+                        /*$.ajax({
+                            type:'post',
+                            url:contextpath+'course/updateCourseBookNote.action?t='+new Date().getTime(),
+                            async:false,
+                            dataType:'json',
+                            data:{id:$span.attr("courseBookId"),note:$textarea.val()},
+                            success:function(json){
+                                if(json > 0){
+                                    $span.html($textarea.val());
+                                }
+                            },
+                            complete:function () {
+                                $textarea.hide();
+                                $textarea.unbind();
+                                $span.show();
                             }
-                        },
-                        complete:function () {
-                            $textarea.hide();
-                            $textarea.unbind();
-                            $span.show();
-                        }
-                    })*/
-                    $span.html($textarea.val());
-                    $textarea.hide();
-                    $textarea.unbind();
-                    $span.show();
-                }else{
-                    $textarea.hide();
-                    $textarea.unbind();
-                    $span.show();
-                }
+                        })*/
+                        $span.html($textarea.val());
+                        $textarea.hide();
+                        $textarea.unbind();
+                        $span.show();
+                    }else{
+                        $textarea.hide();
+                        $textarea.unbind();
+                        $span.show();
+                    }
 
+                })
             })
         })
-    })
+    }
+}
+
+/**
+ * 打开选书学生列表弹出层
+ */
+function course_book_student(courseBookId,bookname,t) {
+
 }
