@@ -1131,6 +1131,11 @@ function del_tr(trId){
 
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type) {
+
+    $("#realname").removeAttr("disabled");
+    $("#sex").removeAttr("disabled");
+    $("#birthday").removeAttr("disabled");
+    $("#idcard").removeAttr("disabled");
     if (type == '2') { //表示暂存
         //避免重复点击
         document.getElementById('buzc').onclick = function () {

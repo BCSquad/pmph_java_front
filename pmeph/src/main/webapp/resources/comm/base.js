@@ -201,7 +201,7 @@ var remoteVideoUrl= "192.168.100.131:11100";
                             text="您的认证已提交，请耐心等待审核！";
                             btn="查看认证"
                         }else if(data.msg=='2'){
-                            text="您的认证已被退回，退回原因："+data.backReason+"。请修改资料重新认证！";
+                            text="您的认证已被审核驳回，退回原因："+data.backReason+"。请修改资料重新认证！";
                             btn="重新认证"
                         }else if(data.proxy=='0' && data.msg!='1' && data.msg!='2'){
                             text="您还未进行机构管理员认证，快去认证吧！";

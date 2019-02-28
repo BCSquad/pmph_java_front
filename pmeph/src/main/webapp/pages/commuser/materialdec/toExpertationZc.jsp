@@ -38,7 +38,7 @@
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="body">
     <div class="content-wrapper">
-        <div style="color: red;font-size: 16px;margin-top: 28px;">（提示：为确保填写成功，请用360极速浏览器或谷歌浏览器）</div>
+        <div style="color: red;font-size: 16px;margin-top: 28px;">（提示：为确保填写成功，请用360极速浏览器或谷歌浏览器，请使用本人账号登录进行申报，否则可能会影响遴选结果）</div>
         <div class="sbxq_title">
             <span><a style="text-decoration: none;color: #999999;"
                      href="${ctx}/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a

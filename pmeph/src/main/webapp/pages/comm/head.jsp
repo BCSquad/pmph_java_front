@@ -153,10 +153,11 @@
                    onclick="window.location='${ctx}/articlepage/toarticlepage.action'">文章</a>
             </div>
             <span class="delete"></span>
-            <input  class="search-input" type="text" autocomplete="off" data-list  id="search-input"   onclick="listd()" placeholder="图书/文章" maxlength="50">
+            <div class="searcjDiv">
+            <input  class="search-input" type="text" autocomplete="off" data-list  id="search-input"  placeholder="图书/文章" maxlength="50">
             <ul class="datalist_ul" id="datalist_ul" data-list-id="search-input">
             </ul>
-
+            </div>
             <img class="search-icon" src="${ctx}/statics/image/search.png" alt="">
 
             <%--         <span class="write" onclick="window.location.href='${ctx}/writerArticle/initWriteArticle.action'">写文章</span>

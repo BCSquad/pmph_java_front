@@ -288,7 +288,7 @@ public class MyMessageServiceImpl implements MyMessageService {
         if (type.equals("1")) {
             this.sendMsg(new Short("0"), new Short("3"), senderId, new Short("2"), receiverWriterId, "系统消息", "恭喜！您提交的教师认证资料已通过[" + schoolName + "]管理员审核");
         } else {
-            this.sendMsg(new Short("0"), new Short("3"), senderId, new Short("2"), receiverWriterId, "系统消息", "抱歉，您提交的教师认证资料已被[" + schoolName + "]管理员退回，请您核对后重试");
+            this.sendMsg(new Short("0"), new Short("3"), senderId, new Short("2"), receiverWriterId, "系统消息", "抱歉，您提交的教师认证资料已被[" + schoolName + "]管理员审核驳回，请您核对后重试");
         }
 
     }
@@ -298,7 +298,7 @@ public class MyMessageServiceImpl implements MyMessageService {
         if (type.equals("1")) {
             this.sendMsg(new Short("0"), new Short("3"), 0L, new Short("2"), receiverWriterId, "系统消息", "恭喜！您提交的《" + materialName + "》申报表已通过[学校管理员/出版社]审核");
         } else {
-            this.sendMsg(new Short("0"), new Short("3"), 0L, new Short("2"), receiverWriterId, "系统消息", " 抱歉，您提交的《" + materialName + "》申报表被[学校管理员/出版社]退回，请您核对后重试");
+            this.sendMsg(new Short("0"), new Short("3"), 0L, new Short("2"), receiverWriterId, "系统消息", " 抱歉，您提交的《" + materialName + "》申报表被[学校管理员/出版社]审核驳回，请您核对后重试");
         }
 
     }

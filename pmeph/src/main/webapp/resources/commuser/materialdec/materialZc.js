@@ -995,6 +995,10 @@ function del_tr(trId){
 
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type){
+    $("#realname").removeAttr("disabled");
+    $("#sex").removeAttr("disabled");
+    $("#birthday").removeAttr("disabled");
+    $("#idcard").removeAttr("disabled");
     $('#sbdw_name').tipso({validator: "isNonEmpty", message: "申报单位不能为空"})
     //if(checkEqual("textbook_id")) {
         if (type == '2') { //表示暂存
