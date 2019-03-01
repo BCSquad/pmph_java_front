@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.course.service;
 
+import com.bc.pmpheep.back.commuser.course.bean.CourseBookStudentVO;
 import com.bc.pmpheep.back.commuser.course.bean.CourseBookVO;
 import com.bc.pmpheep.back.commuser.course.bean.CourseVO;
 import com.bc.pmpheep.back.plugin.PageParameter;
@@ -107,4 +108,32 @@ public interface CourseService  {
      * @return
      */
     int courseStatusModify(CourseVO course);
+
+    /**
+     * 查询某本课程图书下的选书学生总数
+     * @param pageParameter
+     * @return
+     */
+    int querybookStudentListCount(PageParameter<CourseBookStudentVO> pageParameter);
+
+    /**
+     * 查询某本课程图书下的选书学生列表
+     * @param pageParameter
+     * @return
+     */
+    List<CourseBookStudentVO> querybookStudentList(PageParameter<CourseBookStudentVO> pageParameter);
+
+    /**
+     * 切换课程图书-学生的 教师取消状态
+     * @param courseBookStudent
+     * @return
+     */
+    int switchTeacherCanceled(CourseBookStudentVO courseBookStudent);
+
+    /**
+     * 返回图书订单总数
+     * @param courseBookId
+     * @return
+     */
+    int getCountResByCourseBookId(Long courseBookId);
 }

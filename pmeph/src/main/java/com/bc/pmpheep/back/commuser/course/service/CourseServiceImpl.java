@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.course.service;
 
+import com.bc.pmpheep.back.commuser.course.bean.CourseBookStudentVO;
 import com.bc.pmpheep.back.commuser.course.bean.CourseBookVO;
 import com.bc.pmpheep.back.commuser.course.bean.CourseVO;
 import com.bc.pmpheep.back.commuser.course.dao.CourseDao;
@@ -171,5 +172,39 @@ public class CourseServiceImpl implements CourseService {
         int modCount = courseDao.courseStatusModify(course);
 
         return modCount;
+    }
+
+    @Override
+    public int querybookStudentListCount(PageParameter<CourseBookStudentVO> pageParameter) {
+
+        int count = courseDao.querybookStudentListCount(pageParameter);
+
+        return count;
+    }
+
+    @Override
+    public List<CourseBookStudentVO> querybookStudentList(PageParameter<CourseBookStudentVO> pageParameter) {
+
+        List<CourseBookStudentVO> list = new ArrayList<>();
+
+        list = courseDao.querybookStudentList(pageParameter);
+
+        return list;
+    }
+
+
+    @Override
+    public int switchTeacherCanceled(CourseBookStudentVO courseBookStudent) {
+        if(ObjectUtil.isNull(courseBookStudent) || ObjectUtil.isNull(courseBookStudent.getId())){
+            throw new CheckedServiceException(CheckedExceptionBusiness.COURSE,CheckedExceptionResult.NULL_PARAM,"参数为空");
+        }
+        int count = courseDao.updateCourseBookStudent(courseBookStudent);
+        return count;
+    }
+
+    @Override
+    public int getCountResByCourseBookId(Long courseBookId) {
+        int count = courseDao.getCountResByCourseBookId(courseBookId);
+        return count;
     }
 }

@@ -1,0 +1,25 @@
+#set($countNum =$!{startNum})
+#foreach($c in $!{List_map})
+<tr
+    #if($c.teacherCanceled)
+            class="teacherCanceled"
+    #end
+>
+    <td>$countNum</td>
+    <td>$!{c.studentName}</td>
+    <td>$!{c.studentId}</td>
+    <td>$!{c.className}</td>
+    <td>$!{c.telephone}</td>
+    <td><a class="not-like-an-a course-handler" onclick="javascript:switchTeacherCanceled($c.id,$c.teacherCanceled,this)">
+        #if($c.teacherCanceled )
+            恢复订购
+        #else
+            取消订购
+        #end
+        </a>
+    </td>
+</tr>
+
+    #set($countNum = $countNum + 1)
+
+#end

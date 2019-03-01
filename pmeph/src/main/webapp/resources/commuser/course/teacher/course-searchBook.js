@@ -37,8 +37,8 @@ Array.prototype.removeByValue = function(val) {
 //查询所有图书以供选择
 function queryBook(){
     data = {
-        pageNum:$("#page-num-temp").val(),
-        pageSize:$("#page-size-select").find("input[name='page-size-select']").val(),
+        pageNum:$("#course-dialog .page-num-temp").val(),
+        pageSize:$("#course-dialog .page-size-select").find("input[name='page-size-select']").val(),
         bookname:$("#search-bookname").val(),
         isbn:$("#search-ISBN").val(),
         courseId:$("#courseId").val(),
@@ -52,7 +52,7 @@ function queryBook(){
         dataType:'json',
         data:data,
         success:function(json){
-            $("#dialog-table").html(json.html);
+            $("#course-dialog .dialog-table").html(json.html);
 
             if (json.html.trim() == "") {
                 $("#course-dialog .pagination-wrapper").hide();
@@ -64,15 +64,15 @@ function queryBook(){
                 $("#course-dialog .pageJump").css("display","inline-block");
                 $("#course-dialog .pagination").next("div").css("display","inline-block");
             }
-            $('#page1').html("");
-            $("#totoal_count").html(json.totoal_count);
+            $('#course-dialog .pagination').html("");
+            $("#course-dialog .totoal_count").html(json.totoal_count);
             //刷新分页栏
             Page({
                 num: json.totoal_count,					//页码数
-                startnum: $("#page-num-temp").val(),				//指定页码
-                elem: $('#page1'),
+                startnum: $("#course-dialog .page-num-temp").val(),				//指定页码
+                elem: $('#course-dialog .pagination'),
                 callback: function (n){     //点击页码后触发的回调函数
-                    $("#page-num-temp").val(n);
+                    $("#course-dialog .page-num-temp").val(n);
                     queryDialog();
                 }
             });

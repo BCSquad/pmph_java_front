@@ -26,6 +26,16 @@ public class CourseBookVO {
 
     private String isbn;
 
+    /**
+     * 报名学生总数
+     */
+    private int countStu;
+
+    /**
+     * 调整后总数
+     */
+    private int countRes;
+
     public CourseBookVO() {
     }
 
@@ -84,5 +94,21 @@ public class CourseBookVO {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    public int getCountStu() {
+        return countStu;
+    }
+
+    public void setCountStu(int countStu) {
+        this.countStu = countStu;
+    }
+
+    public int getCountRes() {
+        return countRes;
+    }
+
+    public void setCountRes(int countRes) {
+        this.countRes = countRes;
     }
 }
