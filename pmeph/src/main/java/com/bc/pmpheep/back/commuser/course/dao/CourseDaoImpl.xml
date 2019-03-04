@@ -388,4 +388,22 @@
         and course_book_id = #{id}
     </select>
 
+    <!--清单的excel或打印用 查询课程下学生列表-->
+    <select id="getCourseStudentByCourseId" parameterType="Long" resultType="Map">
+        select
+        writer_user_id as writerUserId,
+        name as studentName,
+        student_id as studentId,
+        class_name as className,
+        telephone
+         from course_student where course_id = #{courseId} and deleted = 0
+    </select>
+
+    <select id="queryCourseBook2WriterUserChain" parameterType="Long" resultType="String">
+        select concat(course_book_id,'-',writer_user_id) as courseBookId2writerUserId
+        from course_book_student
+        where deleted = 0 and
+        course_book_id in (select id from course_book where course_id = #{courseId})
+    </select>
+
 </mapper>

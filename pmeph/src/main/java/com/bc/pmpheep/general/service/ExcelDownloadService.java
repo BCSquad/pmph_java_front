@@ -22,7 +22,7 @@ public interface ExcelDownloadService {
      *
      * @return
      */
-    public String[][] getColTitle();
+    public String[][] getColTitle(Map<String, Object> param);
 
 
     /**

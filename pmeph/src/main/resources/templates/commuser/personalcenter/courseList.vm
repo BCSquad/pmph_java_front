@@ -21,7 +21,9 @@
             <a class="not-like-an-a course-handler" href="javascript:courseStatusModify($c.id,'$c.name',false)">撤回</a>
         #end
         <a class="not-like-an-a course-handler" href="javascript:course_copy($c.id)">复制新增</a>
-        <a class="not-like-an-a course-handler" href="javascript:course_code($c.id)">二维码</a>
+        #if($c.published)
+        <a class="not-like-an-a course-handler" href="javascript:course_code($c.id,'$c.name')">二维码</a>
+        #end
     </td>
 
 </tr>

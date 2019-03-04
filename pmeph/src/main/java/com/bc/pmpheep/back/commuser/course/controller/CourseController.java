@@ -11,6 +11,7 @@ import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.back.template.service.TemplateService;
 import com.bc.pmpheep.back.util.ObjectUtil;
 import com.bc.pmpheep.general.controller.BaseController;
+import com.bc.pmpheep.general.service.ExcelDownloadService;
 import com.bc.pmpheep.service.exception.CheckedExceptionBusiness;
 import com.bc.pmpheep.service.exception.CheckedExceptionResult;
 import com.bc.pmpheep.service.exception.CheckedServiceException;
@@ -49,6 +50,10 @@ public class CourseController  extends BaseController {
     @Qualifier("com.bc.pmpheep.back.commuser.booksearch.service.BookSearchServiceImpl")
     BookSearchService bookSearchService;
 
+    @Autowired
+    @Qualifier("CourseBillExcelServiceImpl")
+    ExcelDownloadService excelDownloadService;
+
     /**
      * 进入 教师的 课程列表界面
      * @param request
@@ -59,7 +64,7 @@ public class CourseController  extends BaseController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("commuser/course/teacher/courseList");
         Map<String, Object> user = getUserInfo();
-        if(MapUtils.getBooleanValue(user,"is_teacher")){
+        if(!MapUtils.getBooleanValue(user,"is_teacher")){
             throw new CheckedServiceException(CheckedExceptionBusiness.COURSE, CheckedExceptionResult.NULL_PARAM,"用户并非教师");
         }
         return mv;
@@ -142,6 +147,10 @@ public class CourseController  extends BaseController {
         //新增 将courseId和选书id置空
         if(ObjectUtil.isNull(id) || copyNew){
             course.setId(null);
+            course.setPublished(false);
+            course.setOrderPlaced(false);
+            course.setPaid(false);
+            course.setName("");
             for (CourseBookVO cb:courseBookList) {
                 cb.setId(null);
                 cb.setCourseId(null);
@@ -389,5 +398,37 @@ public class CourseController  extends BaseController {
         return result_map;
     }
 
+    @RequestMapping(value = "toBill" ,method = RequestMethod.GET)
+    public ModelAndView toBill(HttpServletRequest request,@RequestParam(required = true)Long courseId) throws Exception {
+        ModelAndView mv = new ModelAndView();
 
+        mv.addObject("courseId",request.getParameter("courseId"));
+        mv.addObject("courseName",request.getParameter("courseName"));
+
+        String[][] colTitle = excelDownloadService.getColTitle(mv.getModelMap());
+        List<Map<String, Object>> data = excelDownloadService.getData(mv.getModelMap());
+
+        List<List<String>> tbody_list= new ArrayList<>();
+
+        for(Map<String, Object> stu :data){
+            List<String> tr_list = new ArrayList<>();
+            tbody_list.add(tr_list);
+            for (String[] col:colTitle) {
+                tr_list.add(MapUtils.getString(stu,col[1]));
+            }
+        }
+
+        mv.addObject("tbody_list",tbody_list);
+        mv.addObject("colTitle",colTitle);
+        mv.setViewName("commuser/course/teacher/courseBill");
+        return  mv ;
+    }
+
+
+    @RequestMapping(value = "placeOrder" ,method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> placeOrder(HttpServletRequest request,CourseVO courseVO){
+
+        return null;
+    }
 }

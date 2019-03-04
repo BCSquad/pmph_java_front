@@ -217,6 +217,15 @@ color:#FFF;
     background-size: 100%;
 }
 
+#kcxs {
+    background-image: url(../../image/course.png);
+    height: 20px;
+    width: 20px;
+    background-repeat: no-repeat;
+    float: left;
+    background-size: 100%;
+}
+
 .grsx {
     float: left;
     /*height: 32px;*/

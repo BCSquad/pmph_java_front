@@ -1,0 +1,118 @@
+.course_title {
+    text-align: center;
+    font-size: 2em;
+    line-height: 2em;
+}
+
+body .table-area{
+    min-height: 80px;
+}
+
+body .table-area table{
+    padding:0px;
+    margin: 24px 0px 24px 0px;
+    width:100%;
+
+    border-spacing: 0px 0px;
+    border-collapse: collapse;
+
+}
+body .table-area tr{
+    height: 46px;
+
+}
+body .table-area tr:first-of-type{
+    height: 40px;
+}
+body .table-area th{
+    height: 40px;
+    background-color: #f0f0f0;
+    padding:0px;margin:0px;
+
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 24px;
+    letter-spacing: 0px;
+    color: #4e4e4e;
+    border-left:3px  #ffffff solid;
+}
+body .table-area th:first-of-type{
+    border-left:none;
+}
+
+body .table-area tr:nth-child(odd){
+
+
+}
+
+body .table-area tr:nth-child(even){
+    background-color: #f9f9f9;
+}
+
+body .table-area td{
+    height: 46px;
+    border-collapse: collapse;
+    border:none;
+    padding:0px;margin:0px;
+
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 46px;
+    letter-spacing: 0px;
+    color: #4e4e4e;
+    text-align: center;
+}
+
+table.course_bill{
+    table-layout: fixed;
+    width: 100%;
+    white-space: normal;
+}
+
+.btn-wrapper{
+    text-align: center;
+}
+
+.btn {
+    width: 80px;
+    text-align: center;
+    height: 33px;
+    margin: 0px 15px 0px 15px;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 0px;
+    letter-spacing: 1px;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.btn.print{
+    background-color: #00AC8A;
+}
+.btn.excel{
+    background-color: #00b7ee;
+}
+
+@media   print   {
+    table.course_bill{
+        border:1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+    }
+    td{
+        border:1px solid #7b7b7b !important;
+    }
+    tr{
+        border:1px solid #7b7b7b !important;
+    }
+    th{
+        border:1px solid #b7b7b7 !important;
+        background-color: #bfbfbf;
+    }
+}

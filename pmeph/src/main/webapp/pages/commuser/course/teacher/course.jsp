@@ -168,6 +168,8 @@
                         <button class="btn save"  onclick="save(0)">保存</button>
                     </c:when>
                     <c:otherwise>
+                        <button class="btn print"  onclick="toBill(1)">打印清单</button>
+                        <button class="btn order"  onclick="placeOrder(1)">确认下单</button>
                         <button class="btn save"  onclick="save(1)">保存</button>
                     </c:otherwise>
                 </c:choose>

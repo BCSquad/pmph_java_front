@@ -304,8 +304,40 @@ function courseBookNoteUpdate() {
 }
 
 /**
- * 打开选书学生列表弹出层
+ * 去打印页面
  */
-function course_book_student(courseBookId,bookname,t) {
+function toBill() {
+    var courseId = $("#courseId").val();
+    window.location.href = contextpath + "course/toBill.action?courseId="+courseId
+        +"&courseName=" + $("#courseForm input[name='name']").val()
+        +"&t=" + new Date().getTime();
+}
+
+function placeOrder(id) {
+    window.message.confirm("确定下单吗？",{title:'提示',btn:["确定","取消"]},function(index) {
+        $.ajax({
+            type:'post',
+            url:contextpath+'course/placeOrder.action?t='+new Date().getTime(),
+            async:false,
+            dataType:'json',
+            data:{id:id},
+            success:function(json){
+                layer.close(index);
+
+
+
+                if(json){
+                    window.location.href = contextpath + "course/teacher/toCourseList.action";
+                }
+                //queryCourseBook();
+            }
+        })
+
+
+
+
+
+
+    });
 
 }

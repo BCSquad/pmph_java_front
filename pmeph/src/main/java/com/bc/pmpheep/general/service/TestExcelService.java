@@ -20,7 +20,7 @@ public class TestExcelService implements ExcelDownloadService {
     }
 
     @Override
-    public String[][] getColTitle() {
+    public String[][] getColTitle(Map<String, Object> param) {
         return new String[][]{{"数据1", "data1"}, {"数据2", "data2"}};
     }
 

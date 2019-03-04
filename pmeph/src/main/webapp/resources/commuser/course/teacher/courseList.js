@@ -87,6 +87,7 @@ function queryBtnClick(){
  * 跳转到详情页 （修改/查看）
  */
 function course_detail(id) {
+    id = id?id:"";
     window.location.href = contextpath+'course/teacher/toCourseDetail.action?id='+id+'&t='+new Date().getTime();
 }
 
@@ -131,4 +132,20 @@ function courseStatusModify(id,name,published,deleted,orderPlaced,paid) {
             }
         })
     });
+}
+
+/**
+ * 打开二维码
+ * @param id
+ * @param name
+ */
+function course_code(id,name){
+    if($("#qrcode-dialog").css("display")=="none"){
+        $("#qrcode-dialog").show();
+    }
+    $("#qrcode-dialog .mistitle").html(name);
+    $("#qrcode").html("");
+    //TODO 这里填入移动端学生进入课程的地址
+    var code = "testHtml"+id;
+    $("#qrcode").qrcode(code);
 }
