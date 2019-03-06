@@ -1,7 +1,9 @@
 package com.bc.pmpheep.back.commuser.reportprogress.dao;
 
 import java.util.List;
+import java.util.Map;
 
+import com.bc.pmpheep.back.commuser.reportprogress.bean.Textbook;
 import org.apache.ibatis.annotations.Param;
 
 import com.bc.pmpheep.back.commuser.reportprogress.bean.Declaration;
@@ -82,4 +84,11 @@ public interface ReportProgressDao {
     Declaration getDeclarationByMaterialIdAndUserId(@Param("userId") Long userId,
     @Param("materialId") Long materialId);
 
+    /**
+     * 获取教材下图书列表
+     * @ materialId 教材id
+     * @ userId 当前登录人用户id 若为机构用户传入null 表示不受此参数限制
+     * @return
+     */
+    List<Textbook> getTextBookListByMaterialId(Map<String,Object> paraMap);
 }

@@ -116,4 +116,27 @@ select id,detail,gmt_create from writer_user_trendst where type = 8 and book_id 
 			d.`material_id`=#{materialId}
 	</select>
 
+	<select id="getTextBookListByMaterialId" resultType="Textbook" parameterType="Map">
+		select * from
+		textbook tb
+		where tb.material_id = #{materialId}
+		<if test="textbookName != null and textbookName != '' ">
+			and tb.textbook_name like concat('%',#{textbookName},'%')
+		</if>
+		<if test="userId != null">
+			and id in
+			(
+				select textbook_id
+				from
+				dec_position_published dpp
+				where declaration_id =
+				(
+					select id from
+					declaration
+					where user_id = #{userId} and material_id = #{materialId} limit 0,1
+				)
+			)
+		</if>
+	</select>
+
 </mapper>

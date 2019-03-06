@@ -2,7 +2,9 @@ package com.bc.pmpheep.back.commuser.reportprogress.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import com.bc.pmpheep.back.commuser.reportprogress.bean.Textbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -122,6 +124,20 @@ public class ReportProgressServiceImpl implements ReportProgressService {
                                               CheckedExceptionResult.NULL_PARAM, "参数为空");
         }
         return reportProgressDao.getDeclarationByMaterialIdAndUserId(userId, materialId);
+    }
+
+    /**
+     * 获取教材下图书列表
+     * @ materialId 教材id
+     * @ userId 当前登录人用户id 若为机构用户传入null 表示不受此参数限制
+     * @return
+     */
+    @Override
+    public List<Textbook> getTextBookListByMaterialId(Map<String,Object> paraMap) {
+
+        List<Textbook> list = reportProgressDao.getTextBookListByMaterialId(paraMap);
+
+        return list;
     }
 
 }
