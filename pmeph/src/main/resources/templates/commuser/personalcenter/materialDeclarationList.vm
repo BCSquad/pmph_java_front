@@ -129,7 +129,7 @@
                     #end
                    </div>
                     #if( $!{c.datebase}>0 && ( $!{c.is_all_textbook_published}==true|| $!{c.is_force_end}==true))
-                        <a class="abmcj" href="$!{contextpath}progress/listEditProgress.action?materialId=$!{c.material_id}&materialName=$!{c.material_name}">
+                        <a  style="pointer-events: none;background-color: gray" #*class="abmcj"*# href="$!{contextpath}progress/listEditProgress.action?materialId=$!{c.material_id}&materialName=$!{c.material_name}">
                             <div class="editPro" >编写进度</div>
                         </a>
                     #end

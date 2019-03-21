@@ -150,7 +150,7 @@
             <span class="delete"></span>
             <div class="searcjDiv">
             <input  class="search-input" type="text" autocomplete="off" data-list  id="search-input"  placeholder="图书/文章" maxlength="50">
-            <ul class="datalist_ul" id="datalist_ul" data-list-id="search-input">
+            <ul class="datalist_ul" style="margin-left: -30px" id="datalist_ul" data-list-id="search-input">
             </ul>
             </div>
             <img class="search-icon" src="${ctx}/statics/image/search.png" alt="">
@@ -240,7 +240,8 @@
             %>
 
             <c:if test="${userInfo != null}">
-                <span class="logininfo" style="cursor: pointer" onclick="window.location.href='<c:url value="/userinfo/touser.action"/>'">
+                <c:if test="${userInfo.is_org_user ==1}">
+                <span class="logininfo1" style="cursor: pointer" onclick="window.location.href='<c:url value="/userinfo/touser.action"/>'">
                   <c:choose>
                       <c:when test="${userInfo.nkname==null||userInfo.nkname==''}">
                           您好,${userInfo.username}
@@ -251,7 +252,7 @@
                   </c:choose>
                  <%--  您好,<%=MapUtils.getString(userInfo, "nkname")%>--%>
                 </span>
-                <div class="user-detail">
+                <div class="user-detail1">
                     <img src="${ctx}/statics/image/userSelectbg.png" alt="">
                     <div  class="user_detail_lab">
                         <div class="info_font">用户名:${userInfo.username}</div>
@@ -261,12 +262,48 @@
 
                 </div>
 
-                <span class="logininfoout"
+
+                    <div class="changeOrg" >
+                        <span onclick='loginOrgHome("${userInfo.username}")'>切换机构</span>
+                    </div>
+
+
+                <span class="logininfoout1"
                       onclick="window.location.href='<c:url value="/logout.action"/>'">
                     <%--<span class="icon"></span>--%>
                     <span class="wtext">退出</span>
                 </span>
+                </c:if>
 
+                <c:if test="${userInfo.is_org_user !=1}">
+                       <span class="logininfo" style="cursor: pointer" onclick="window.location.href='<c:url value="/userinfo/touser.action"/>'">
+                  <c:choose>
+                      <c:when test="${userInfo.nkname==null||userInfo.nkname==''}">
+                          您好,${userInfo.username}
+                      </c:when>
+                      <c:otherwise>
+                          您好,${userInfo.nkname}
+                      </c:otherwise>
+                  </c:choose>
+                 <%--  您好,<%=MapUtils.getString(userInfo, "nkname")%>--%>
+                </span>
+                    <div class="user-detail">
+                        <img src="${ctx}/statics/image/userSelectbg.png" alt="">
+                        <div  class="user_detail_lab">
+                            <div class="info_font">用户名:${userInfo.username}</div>
+                            <div class="info_font">昵称:${userInfo.nkname}</div>
+
+                        </div>
+
+                    </div>
+                    <span class="logininfoout"
+                          onclick="window.location.href='<c:url value="/logout.action"/>'">
+                    <%--<span class="icon"></span>--%>
+                    <span class="wtext">退出</span>
+                </span>
+
+
+                </c:if>
 
                 <span class="writing logined"
                       onclick="window.location.href='${ctx}/writerArticle/initWriteArticle.action'">
@@ -296,7 +333,8 @@
                 <div class="user-select">
                     <img src="${ctx}/statics/image/userSelectbg.png" alt="">
                     <div class="select">
-                        <c:if test="${userInfo.is_org_user !=1}">
+
+                        <c:if test="${userInfo.is_teacher ==false}">
                             <div style="height: 15px"></div>
                         </c:if>
                       <%--  <a class="option wide" href="javascript:;">您好,<%=MapUtils.getString(userInfo, "realname")%></a>--%>
@@ -309,9 +347,10 @@
                         <a class="option"
                            href='<c:url value="/teacherCertification/showTeacherCertification.action"/>'>教师认证</a>
                           <a class="option" href='<c:url value="/personalhomepage/tohomepage.action?pagetag=lcjc"/>'  style="line-height:14px;width:60px;">临床决策专家申报</a>
-                        <c:if test="${userInfo.is_org_user ==1}">
-                            <a class="option out" onclick='loginOrgHome("${userInfo.username}")'>切换机构</a>
+                        <c:if test="${userInfo.is_teacher ==true}">
+                            <a class="option" href="<c:url value="/course/teacher/toCourseList.action"/>">课程选书</a>
                         </c:if>
+
                     </div>
                 </div>
             </c:if>

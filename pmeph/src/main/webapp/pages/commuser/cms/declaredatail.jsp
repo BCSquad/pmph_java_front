@@ -64,7 +64,16 @@
     
     <c:choose>
     	<c:when test="${is_new == 1 and notEnd == 1}">
-    		<div class="join" onclick="tojoin(${product_id})">报名参加</div>
+            <c:if test="${userInfo.is_org_user==1}">
+                <div class="join" style="pointer-events: none;background-color: gray" onclick="tojoin(${product_id})">报名参加</div>
+            </c:if>
+
+            <c:if test="${userInfo.is_org_user==0}">
+
+                <div class="join" onclick="tojoin(${product_id})">报名参加</div>
+            </c:if>
+
+
     	</c:when>
     	<c:when test="${is_new == 1 and notEnd == 0}">
     		<div class="join end" >报名结束</div>

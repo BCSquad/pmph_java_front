@@ -459,7 +459,7 @@ public class CourseController  extends BaseController {
 
 
         StringBuilder sb=new StringBuilder();
-        sb.append("{\"staff_code\":\""+"notalike000"+"\",\"gds_detail\":[");
+        sb.append("{\"staff_code\":\""+user.get("username")+"\",\"gds_detail\":[");
         for(CourseBookVO c:courseBookList){
             if(c.getCountRes()>0){
                 Long bookId = c.getBookId();
@@ -491,8 +491,8 @@ public class CourseController  extends BaseController {
         String aipUrl = "http://192.168.2.11/route/rest";
         String s1 = SyncUtils.StringGet(params,aipUrl);
         JSONObject jsonObject = JSON.parseObject(s1);
-        Integer code = jsonObject.getInteger("CODE");
-        String msg = jsonObject.getString("MSG");
+        Integer code = jsonObject.getInteger("code");
+        String msg = jsonObject.getString("msg");
         Object godList = jsonObject.get("goodsList");
         if(code==0){
             responseBean.setMsg("下单成功正在跳转购物车");

@@ -150,7 +150,7 @@ public class IntegralController extends BaseController {
 
 		WriterPointRuleVO writerPointRuleVO = integralService.findWrterPointRulePointByRuleCode(rule_Code);
 		StringBuilder sb=new StringBuilder();
-		sb.append("{\"staff_code\":\""+"notalike000"+"\",");
+		sb.append("{\"staff_code\":\""+usermap.get("username")+"\",");
 		if(count!=null){
 			Integer point = writerPointRuleVO.getPoint();
 			Integer exchangePoint = writerPointRuleVO.getExchangePoint();
@@ -177,15 +177,15 @@ public class IntegralController extends BaseController {
 		String params = SyncUtils.getUrlApi(api);
 		params+="&sign="+sign;
 
-		params+="&biz_content="+ CodecUtil.encodeURL("{\"staff_code\":\"notalike000\",\"score\":\"100\"}");
+		params+="&biz_content="+ CodecUtil.encodeURL(sb.toString());
 
 		String url="http://192.168.2.11/route/rest";
 
 		String urlapi=url+"?"+params;
 		String s1 = SyncUtils.StringGet(params,url);
 		JSONObject jsonObject = JSON.parseObject(s1);
-		Integer code = jsonObject.getInteger("CODE");
-		jsonObject.getString("MSG");
+		Integer code = jsonObject.getInteger("code");
+		jsonObject.getString("msg");
 		if(code==0){
 			responseBean.setMsg("积分兑换成功");
 			Map<String, Object> writerPointByid = integralService.findWriterPointByid(userId);

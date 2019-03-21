@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.Map" %>
+<%@ page import="com.bc.pmpheep.back.util.Const" %><%--
   Created by IntelliJ IDEA.
   User: SuiXinYang
   Date: 2017/11/21
@@ -33,6 +34,7 @@
 </jsp:include>
 <input type="hidden" id="auto_play" value="${adInfo1.auto_play}">
 <input type="hidden" id="animation_interval" value="${adInfo1.animation_interval}">
+<input type="hidden" id="is_org_user" value="${userInfo.is_org_user}">
 <div class="body">
     <div class="content-wrapper">
         <div class="area-1">
@@ -70,21 +72,44 @@
                     </div>
                     <div class="transaction" style="margin-top: 18px;">
                         <div class="labeling">我要出书</div>
-                        <div class="binone consol"
-                             onclick="window.location.href='${ctx}/bookdeclare/toBookdeclareAdd.action'">
-                            <div class="lab-pic5"></div>
-                            医学专著
-                        </div>
-                        <div class="binone marks"
-                             onclick="window.location.href='${ctx}/bookdeclare/toBookdeclareAdd.action'">
-                            <div class="lab-pic6"></div>
-                            科普图书
-                        </div>
-                        <div class="binone consol"
-                             onclick="window.location.href='${ctx}/bookdeclare/toBookdeclareAdd.action'">
-                            <div class="lab-pic7"></div>
-                            创新教材
-                        </div>
+
+                        <c:if test="${userInfo.is_org_user==1}">
+                            <div class="binone consol" style="pointer-events: none;background-color: gray"
+                                 onclick="window.location.href='${ctx}/bookdeclare/toBookdeclareAdd.action'">
+                                <div class="lab-pic5"></div>
+                                医学专著
+                            </div>
+                            <div class="binone marks" style="pointer-events: none;background-color: gray"
+                                 onclick="window.location.href='${ctx}/bookdeclare/toBookdeclareAdd.action'">
+                                <div class="lab-pic6"></div>
+                                科普图书
+                            </div>
+                            <div class="binone consol" style="pointer-events: none;background-color: gray"
+                                 onclick="window.location.href='${ctx}/bookdeclare/toBookdeclareAdd.action'">
+                                <div class="lab-pic7"></div>
+                                创新教材
+                            </div>
+                        </c:if>
+
+                        <c:if test="${userInfo.is_org_user!=1}">
+                            <div class="binone consol"
+                                 onclick="window.location.href='${ctx}/bookdeclare/toBookdeclareAdd.action'">
+                                <div class="lab-pic5"></div>
+                                医学专著
+                            </div>
+                            <div class="binone marks"
+                                 onclick="window.location.href='${ctx}/bookdeclare/toBookdeclareAdd.action'">
+                                <div class="lab-pic6"></div>
+                                科普图书
+                            </div>
+                            <div class="binone consol"
+                                 onclick="window.location.href='${ctx}/bookdeclare/toBookdeclareAdd.action'">
+                                <div class="lab-pic7"></div>
+                                创新教材
+                            </div>
+                        </c:if>
+
+
                         <div class="binone marks"
                              onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?pagetag=wycs'">
                             <div class="lab-pic8"></div>
@@ -161,15 +186,41 @@
                     <c:if test="${list.notEnd ==0 and list.is_material_entry==true}">
                         <div class="left_join end">报名结束</div>
                     </c:if> --%>
+
+                    <%
+                        Map<String, Object> userInfo = null;
+                        if ("1".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
+                            userInfo = (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_WRITER);
+                        }
+
+                        if (userInfo == null || userInfo.isEmpty()) {
+                            request.setAttribute("userInfo", null);
+                        } else {
+                            request.setAttribute("userInfo", userInfo);
+                        }
+                    %>
                     <c:choose>
                     	<c:when test="${list.is_material_entry!=true}"></c:when>
                     	<c:when test="${list.notEnd ==0 and list.is_material_entry==true}">
                     		<div class="left_join end">报名结束</div>
                     	</c:when>
+
                     	<c:otherwise>
-                    		<div class="left_join" onclick="window.location.href='${ctx}/material/MaterialDetailRedirect.action?material_id=${list.material_id}'">
-                           		报名参加
-                        	</div>
+                            <c:if test="${userInfo.is_org_user==1}">
+                                    <div class="left_join" style="pointer-events: none;background-color: gray"
+                                         onclick="window.location.href='${ctx}/material/MaterialDetailRedirect.action?material_id=${list.material_id}'">
+                                        报名参加
+                                    </div>
+                                </c:if>
+
+                            <c:if test="${userInfo.is_org_user!=1}">
+                                <div class="left_join"
+                                     onclick="window.location.href='${ctx}/material/MaterialDetailRedirect.action?material_id=${list.material_id}'">
+                                    报名参加
+                                </div>
+                            </c:if>
+
+
                     	</c:otherwise>
                     </c:choose>
                     

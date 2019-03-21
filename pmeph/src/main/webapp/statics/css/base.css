@@ -96,6 +96,7 @@ textarea{
 }
 
 .head .search-input {
+    margin-left: -30px;
     box-sizing: content-box;
     width: 270px;
     height: 34px;
@@ -111,6 +112,7 @@ textarea{
 }
 
 .head .search-icon {
+    margin-left: -30px;
     width: 18px;
     height: 18px;
     position: absolute;
@@ -215,6 +217,16 @@ textarea{
     right: 240px;
     display: none;
 }
+.user-detail1{
+    width: 130px;
+    height: 140px;
+    z-index: 99;
+    /* background: white; */
+    position: absolute;
+    top: 50px;
+    right: 290px;
+    display: none;
+}
 .user_detail_lab{
     position: absolute;
     top: 0;
@@ -244,19 +256,19 @@ textarea{
     z-index: 99;
     /*   background: white;*/
     position: absolute;
-    top: 66px;
+    top: 55px;
     right: -40px;
     display: none;
 }
 
 .head .user-select img {
     width: 148px;
-    height: 240px;
+    height: 260px;
 }
 
 .head .user-select .select {
     position: absolute;
-    top: 0;
+    top: 12px;
     left: 15px;
     width: 114px;
     height: 110px;
@@ -398,6 +410,20 @@ textarea{
     white-space: nowrap;
     text-align: right;
 }
+.head .logininfo1 {
+    position: absolute;
+    top: 32px;
+    right: 300px;
+    width: 110px;
+    color: #ff0000;
+    vertical-align: middle;
+    line-height: 18px;
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: right;
+}
 
 .head .logininfoout {
     position: absolute;
@@ -412,6 +438,34 @@ textarea{
     white-space: nowrap;
     cursor: pointer;
 }
+.head .logininfoout1 {
+    position: absolute;
+    top: 32px;
+    right: 250px;
+    width: 40px;
+    vertical-align: middle;
+    line-height: 16px;
+    height: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+
+.head .changeOrg {
+    position: absolute;
+    top: 32px;
+    right: 194px;
+    vertical-align: middle;
+    line-height: 16px;
+    height: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
 
 .head .logininfoout .icon {
     background: url("../image/logout.png");
@@ -459,6 +513,16 @@ textarea{
     cursor: pointer;
 
 }
+.head .changeOrg .icon {
+    background: url("../image/refresh.png");
+    background-position: -16px -15px;
+    height: 16px;
+    width: 14px;
+    display: inline-block;
+    cursor: pointer;
+
+}
+
 
 .head .writing .wtext {
     height: 16px;
