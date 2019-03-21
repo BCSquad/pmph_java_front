@@ -61,7 +61,6 @@
                             <option value="已发布">已发布</option>
                             <option value="已截止">已截止</option>
                             <option value="已下单">已下单</option>
-                            <option value="已付款">已付款</option>
                         </select>
                         <button id="btn-search" onclick="queryBtnClick()">查询</button>
                         <button id="btn-add" onclick="course_detail()">新增</button>

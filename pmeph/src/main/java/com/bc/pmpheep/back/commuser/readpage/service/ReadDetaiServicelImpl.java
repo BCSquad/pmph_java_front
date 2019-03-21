@@ -1,21 +1,25 @@
 package com.bc.pmpheep.back.commuser.readpage.service;
 
-import java.util.*;
-
-import javax.servlet.http.HttpServletRequest;
-
-import com.bc.pmpheep.back.util.CollectionUtil;
-import com.bc.pmpheep.back.util.RouteUtil;
+import com.bc.pmpheep.back.authadmin.usermanage.bean.PmphUser;
+import com.bc.pmpheep.back.authadmin.usermanage.dao.PmphUserDao;
+import com.bc.pmpheep.back.authadmin.usermanage.dao.WriterUserDao;
+import com.bc.pmpheep.back.commuser.book.bean.Book;
+import com.bc.pmpheep.back.commuser.book.dao.BookDao;
+import com.bc.pmpheep.back.commuser.mymessage.bean.MyMessage;
+import com.bc.pmpheep.back.commuser.mymessage.dao.MyMessageDao;
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
+import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
+import com.bc.pmpheep.back.commuser.readpage.dao.ReadDetailDao;
+import com.bc.pmpheep.general.pojo.Message;
+import com.bc.pmpheep.general.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
-import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
-import com.bc.pmpheep.back.commuser.readpage.dao.ReadDetailDao;
-import com.bc.pmpheep.back.plugin.PageParameter;
-import com.bc.pmpheep.back.plugin.PageResult;
-import com.mongodb.util.Hash;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service("com.bc.pmpheep.back.commuser.readpage.service.ReadDetaiServicelImpl")
 public class ReadDetaiServicelImpl implements ReadDetailService {
@@ -26,6 +30,22 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 	@Autowired
     @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
     private PersonalService personalService;
+
+	@Autowired
+	private WriterUserDao writerUserDao;
+	@Autowired
+	private PmphUserDao pmphUserDao;
+
+	@Autowired
+	MyMessageDao myMessageDao;
+
+	@Autowired
+	@Qualifier("com.bc.pmpheep.general.service.MessageService")
+	MessageService messageService;
+
+	@Autowired
+	BookDao bookDao;
+
 
 	/**
 	 * 查询读书详情页信息
@@ -238,11 +258,32 @@ public class ReadDetaiServicelImpl implements ReadDetailService {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		
 		int count=readDetailDao.correction(map);
+		String name = writerUserDao.get(new Long(map.get("user_id").toString())).getRealname();
+		Book book = bookDao.getBookById(new Long(map.get("book_id").toString()));
 		if(count>0){
 		    WriterUserTrendst wut = new WriterUserTrendst(map.get("user_id").toString(), 10, map.get("book_id").toString());
-		    wut.setDetail("提交了图书纠错", map.get("content").toString(),0,Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("line").toString()));
-		    personalService.saveUserTrendst(wut);//生成动态 图书纠错 
-		    returnMap.put("returnCode", "OK");
+		   	wut.setDetail("提交了图书纠错", map.get("content").toString(),0,Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("line").toString()));
+			String msg=name+"提交"+book.getBookname()+"的图书纠错,纠错内容:("+map.get("content")+")请在纠错管理中审核";
+		    personalService.saveUserTrendst(wut);//生成动态 图书纠错
+			List<PmphUser> pmphUserByRole = pmphUserDao.getPmphUserByRole();
+			for(PmphUser p:pmphUserByRole){
+				Message message = new Message();
+				message.setContent(msg);
+				messageService.add(message);
+				MyMessage userMessage = new MyMessage();
+				userMessage.setMsgId(message.getId());
+				userMessage.setMsgType(new Short("0"));
+				userMessage.setTitle("图书纠错");
+				userMessage.setSenderId(0L);
+				userMessage.setSenderType(new Short("0"));
+				userMessage.setReceiverId(p.getId());
+				userMessage.setReceiverType(new Short("1"));
+				if (myMessageDao.addUserMessage(userMessage) == 0) {
+					throw new RuntimeException("发送消息失败！");
+				}
+
+			}
+			returnMap.put("returnCode", "OK");
 		    returnMap.put("correctId", map.get("table_trendst_id"));
 		}
 		return returnMap;

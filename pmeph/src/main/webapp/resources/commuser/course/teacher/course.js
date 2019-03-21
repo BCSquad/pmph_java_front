@@ -191,12 +191,19 @@ function course_book_delete(id,bookname,a_dom) {
 /**
  * publish 1 为发布 0 为暂存
  */
-function save(publish) {
+function save(publish,type) {
 
 
 
     if($.fireValidator()){
-        window.message.confirm("确定"+(publish?"发布":"保存")+"吗？",{title:'提示',btn:["确定","取消"]},function(index){
+        var msg="";
+        if(type){
+             msg="确定"+(publish?"保存":"保存")+"吗？";
+
+        }else{
+            msg="确定"+(publish?"发布":"保存")+"吗？";
+        }
+        window.message.confirm(msg,{title:'提示',btn:["确定","取消"]},function(index){
 
 
             var data = {
@@ -244,9 +251,7 @@ function save(publish) {
                 data:data,
                 success:function(json){
                     layer.close(index);
-                    if(publish){
                         window.location.href = contextpath + "course/teacher/toCourseList.action";
-                    }
                     //queryCourseBook();
                 }
             })
@@ -314,20 +319,25 @@ function toBill() {
 }
 
 function placeOrder(id) {
+    var courseId = $("#courseId").val();
+
     window.message.confirm("确定下单吗？",{title:'提示',btn:["确定","取消"]},function(index) {
         $.ajax({
+
             type:'post',
             url:contextpath+'course/placeOrder.action?t='+new Date().getTime(),
             async:false,
             dataType:'json',
-            data:{id:id},
+            data:{id:courseId},
             success:function(json){
                 layer.close(index);
+                console.log(json);
+                if(json.code==1){
+                    window.message.success(json.msg);
+                    setTimeout(function(){
+                        window.location.href =$("#cartUrl").val();
+                    },500);
 
-
-
-                if(json){
-                    window.location.href = contextpath + "course/teacher/toCourseList.action";
                 }
                 //queryCourseBook();
             }

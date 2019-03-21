@@ -25,6 +25,7 @@
         select * from course
         where teacher_id = #{parameter.teacherId} and deleted = 0
         <include refid="teacherCourseParameter"></include>
+              order by gmt_create desc
         <if test="start != null">
             limit #{start},#{pageSize}
         </if>

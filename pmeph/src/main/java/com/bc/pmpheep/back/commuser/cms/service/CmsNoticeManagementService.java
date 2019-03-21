@@ -34,6 +34,6 @@ public interface CmsNoticeManagementService {
 	 * @param materialId 
 	 * @return
 	 */
-	List<CmsNoticeList> list(Integer pageSize, Integer pageNumber, Integer order,Long userid, String materialId) ;
+	List<CmsNoticeList> list(Integer pageSize, Integer pageNumber, Integer order,Long userid, String materialId,String noticeName) ;
 	
 }

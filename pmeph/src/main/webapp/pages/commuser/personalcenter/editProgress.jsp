@@ -127,7 +127,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		});*/
 
 		//解开可测试 注意现textbook表中的topicnumber基本没有数据 需加上相应数据
-        /*var data = [
+        var data = [
             {
                 "topicNumber":"10015-1",
                 "currentStatus":"图书定稿中",
@@ -153,7 +153,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             $tr.find("td[name='currentStatus']").html(item.currentStatus);
             $tr.find("td[name='currentStatusDate']").html(item.currentStatusDate);
             $tr.find("td[name='currentHandler']").html(item.currentHandler);
-        }*/
+        }
 
     })
 
