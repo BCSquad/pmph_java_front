@@ -22,9 +22,28 @@ $(function () {
         $('#email').tipso({validator: "isNonEmpty|isEmail", message: "邮箱不能为空|邮箱格式不正确"});
         $('#handphone').tipso({validator: "isNonEmpty|isMobile", message: "手机号码不能为空|手机号码格式不正确"});
         $('#zjlx').tipso({validator: "isNonEmpty", message: "证件类型不能为空"});
-        $('#idcard').tipso({validator: "isNonEmpty", message: "证件号码不能为空"});
+        $('#idcard').tipso({validator: "isNonEmpty|isCard", message: "证件号码不能为空|请填写正确的证件号码"});
         $('#address').tipso({validator: "isNonEmpty", message: "地址不能为空"});
         checkExtra();
+
+        $('#zjlx .select-list li').click(function(){
+            $('#idcard').tipso("destroy");
+            if($('input[name = "idtype"]').val()=='0'){
+                $('#idcard').tipso({validator: "isNonEmpty|isCard", message: "证件号码不能为空|请填写正确的证件号码"});
+                $('#idcard').attr("maxlength",18);
+            }else if($('input[name = "idtype"]').val()=='1'){
+                $('#idcard').tipso({validator: "isNonEmpty|isPassport", message: "证件号码不能为空|请填写正确的护照号码"});
+                $('#idcard').attr("maxlength",21);
+            }else if($('input[name = "idtype"]').val()=='2'){
+                $('#idcard').tipso({validator: "isNonEmpty|isOfficialCard", message: "证件号码不能为空|请填写正确的军官证号码"});
+                $('#idcard').attr("maxlength",21);
+            }else{
+                $('#idcard').tipso({validator: "isNonEmpty|isCard", message: "证件号码不能为空|请填写正确的证件号码"});
+                $('#idcard').attr("maxlength",18);
+            }
+
+        });
+
     },0)
 
 
@@ -48,38 +67,38 @@ $(function () {
         }
     }
     $('#pmph_rank').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 110,
         height: 30,
         optionHeight: 30
     });
     $('#pmph_position').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 110,
         height: 30,
         optionHeight: 30
     });
     $('#jcb_rank').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 110,
         height: 30,
         optionHeight: 30
     });
     $('#jcb_position').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 110,
         height: 30,
         optionHeight: 30
     });
 
     $('.select-input').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 192,
         height: 30,
         optionHeight: 30
     });
     $('.book').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 200,
         height: 30,
         optionHeight: 30,
@@ -976,6 +995,10 @@ function del_tr(trId){
 
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type){
+    $("#realname").removeAttr("disabled");
+    $("#sex").removeAttr("disabled");
+    $("#birthday").removeAttr("disabled");
+    $("#idcard").removeAttr("disabled");
     $('#sbdw_name').tipso({validator: "isNonEmpty", message: "申报单位不能为空"})
     //if(checkEqual("textbook_id")) {
         if (type == '2') { //表示暂存

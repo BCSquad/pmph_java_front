@@ -170,6 +170,13 @@
 					)
 				</foreach>
 			</if>
+			<if test="parameter.bookname != null and parameter.bookname != '' ">
+				and b.bookname like concat('%',#{parameter.bookname},'%')
+			</if>
+			<if test="parameter.isbn != null and parameter.isbn != '' ">
+				and b.isbn like concat('%',#{parameter.isbn},'%')
+			</if>
+
 			<!-- <if test="parameter.searchText != null and parameter.searchText != '' ">
 				and 
 				(
@@ -238,6 +245,12 @@
 					or b.author like concat('%',#{searchText},'%')
 					)
 				</foreach>
+			</if>
+			<if test="parameter.bookname != null and parameter.bookname != '' ">
+				and b.bookname like concat('%',#{parameter.bookname},'%')
+			</if>
+			<if test="parameter.isbn != null and parameter.isbn != '' ">
+				and b.isbn like concat('%',#{parameter.isbn},'%')
 			</if>
 			<!-- <if test="parameter.searchText != null and parameter.searchText != '' ">
 				and 

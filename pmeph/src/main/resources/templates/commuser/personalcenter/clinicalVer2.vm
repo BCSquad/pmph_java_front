@@ -28,13 +28,13 @@
                 #end
                 </div>
                 #if($!{c.product_type}==1)
-                    <div class="left_1" style="margin-top: 30px">产品分类：人卫临床助手</div>
+                    <div class="left_1" >产品分类：人卫临床助手</div>
                 #end
                 #if($!{c.product_type}==2)
-                    <div class="left_1" style="margin-top: 30px">产品分类：人卫用药助手</div>
+                    <div class="left_1" >产品分类：人卫用药助手</div>
                 #end
                 #if($!{c.product_type}==3)
-                    <div class="left_1" style="margin-top: 30px">产品分类：人卫中医助手</div>
+                    <div class="left_1" >产品分类：人卫中医助手</div>
                 #end
                 <div class="left_1">截止日期：$!{c.actualDeadline}</div>
             </div>

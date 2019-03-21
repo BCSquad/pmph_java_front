@@ -30,44 +30,44 @@ $(function () {
     },1000);*/
     queryMaterialMap(id,expert_type);  //执行查询方法
     $('#pmph_rank').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 110,
         height: 30,
         optionHeight: 30
     });
     $('#pmph_position').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 110,
         height: 30,
         optionHeight: 30
     });
     $('#education').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 192,
         height: 30,
         optionHeight: 30
     });
     $('#jcb_rank').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 110,
         height: 30,
         optionHeight: 30
     });
     $('#jcb_position').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 110,
         height: 30,
         optionHeight: 30
     });
 
     $('.select-input').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 192,
         height: 30,
         optionHeight: 30
     });
     $('.book').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 200,
         height: 30,
         optionHeight: 30
@@ -1131,6 +1131,11 @@ function del_tr(trId){
 
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type) {
+
+    $("#realname").removeAttr("disabled");
+    $("#sex").removeAttr("disabled");
+    $("#birthday").removeAttr("disabled");
+    $("#idcard").removeAttr("disabled");
     if (type == '2') { //表示暂存
         //避免重复点击
         document.getElementById('buzc').onclick = function () {

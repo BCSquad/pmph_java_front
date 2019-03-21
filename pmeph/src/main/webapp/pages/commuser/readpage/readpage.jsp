@@ -39,7 +39,7 @@
                 <div class="move" id="move">
                     <ul>
                         <c:forEach var="ad" items="${adInfo.detailList}">
-                            <li><img src="${ctx}/image/${ad.image}.action" class="img-move"/></li>
+                            <li><img src="${ctx}/image/${ad.image}.action" onclick="toImageUrl('${ad.image_jump_url}')" class="img-move"/></li>
                         </c:forEach>
 
 
@@ -53,16 +53,28 @@
                 <c:forEach var="ad3" items="${adInfo3.detailList}" varStatus="status">
                     <c:if test="${status.index==0}">
                         <div class="re_1">
-                            <a href="${adInfo3.url}"><img src="${ctx}/image/${ad3.image}.action"
-                                                          style="width: 310px;height: 130px;border-radius: 5px"></a>
+                            <c:if test="${adInfo3.type==0}">
+                                <img src="${ctx}/image/${ad3.image}.action" onclick="toImageUrl('${adInfo3.url}')"
+                                     style="width: 310px;height: 130px;border-radius: 5px">
+                            </c:if>
+                            <c:if test="${adInfo3.type==1}">
+                                <img src="${ctx}/image/${ad3.image}.action" onclick="toImageUrl('${ad3.image_jump_url}')"
+                                     style="width: 310px;height: 130px;border-radius: 5px">
+                            </c:if>
                         </div>
                     </c:if>
                 </c:forEach>
                 <c:forEach var="ad3" items="${adInfo4.detailList}" varStatus="status">
                     <c:if test="${status.index==0}">
                         <div class="re_2">
-                            <a href="${adInfo4.url}"><img src="${ctx}/image/${ad3.image}.action"
-                                                          style="width: 310px;height: 130px;border-radius: 5px"></a>
+                            <c:if test="${adInfo4.type==0}">
+                                <img src="${ctx}/image/${ad3.image}.action" onclick="toImageUrl('${adInfo4.url}')"
+                                     style="width: 310px;height: 130px;border-radius: 5px">
+                            </c:if>
+                            <c:if test="${adInfo4.type==1}">
+                                <img src="${ctx}/image/${ad3.image}.action" onclick="toImageUrl('${adInfo4.image_jump_url}')"
+                                     style="width: 310px;height: 130px;border-radius: 5px">
+                            </c:if>
                         </div>
                     </c:if>
                 </c:forEach>

@@ -25,7 +25,7 @@
     <script type="text/javascript">
         $(function () {
             $('select').selectlist({
-                zIndex: 10,
+                zIndex: 100,
                 width: 280,
                 height: 40,
                 optionHeight: 40

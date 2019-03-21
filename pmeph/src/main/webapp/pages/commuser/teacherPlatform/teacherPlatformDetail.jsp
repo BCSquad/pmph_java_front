@@ -70,10 +70,18 @@
         <c:forEach var="list" items="${voideolist}" varStatus="status">
             <c:if test="${status.index<3}">
                 <div class="video" style="margin-top: 20px;float: left;margin-left: 30px">
-                    <div class="video-a" id="video-${status.index+1}" type="mp4"
-                         src="http://${_remoteUrl}/v/play/${list.path}"
+            <c:if test="${status.index==0}">
+                    <video  class="video-a"   autoplay   poster  loop preload  controls  x5-playsinline="" playsinline="" src="http://${_remoteVideoUrl}/v/play/${list.path}" ></video>
+
+            </c:if>
+            <c:if test="${status.index>0}">
+
+                <video  class="video-a"    poster  loop buffered preload  controls  x5-playsinline="" playsinline="" src="http://${_remoteVideoUrl}/v/play/${list.path}" ></video>
+            </c:if>
+                <%--<div class="video-a" id="video-${status.index+1}" type="mp4"
+                         src="http://${_remoteVideoUrl}/v/play/${list.path}"
                          poster="${ctx}/image/${list.cover}.action" onclick="addid('${list.id}','${list.clicks}')">
-                    </div>
+                    </div>--%>
                     <div class="detail">
                         <div class="video-name">${list.title}</div>
                         <div class="clicks">${list.clicks}</div>
@@ -87,7 +95,7 @@
             <c:if test="${status.index>2}">
                 <div class="video" style="margin-top: 20px;float: left;margin-left: 30px">
                     <div class="video-a" id="video-${status.index+1}" type="mp4"
-                         src="http://${_remoteUrl}/v/play/${list.path}"
+                         src="http://${_remoteVideoUrl}/v/play/${list.path}"
                          poster="${ctx}/image/${list.cover}.action" onclick="addid('${list.id}','${list.clicks}')">
                     </div>
                     <div class="detail">

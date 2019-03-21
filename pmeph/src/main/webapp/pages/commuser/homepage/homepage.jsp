@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.Map" %>
+<%@ page import="com.bc.pmpheep.back.util.Const" %><%--
   Created by IntelliJ IDEA.
   User: SuiXinYang
   Date: 2017/11/21
@@ -33,6 +34,7 @@
 </jsp:include>
 <input type="hidden" id="auto_play" value="${adInfo1.auto_play}">
 <input type="hidden" id="animation_interval" value="${adInfo1.animation_interval}">
+<input type="hidden" id="is_org_user" value="${userInfo.is_org_user}">
 <div class="body">
     <div class="content-wrapper">
         <div class="area-1">
@@ -41,7 +43,7 @@
                 <div class="move" id="move">
                     <ul>
                         <c:forEach var="ad" items="${adInfo1.detailList}">
-                            <li><img src="${ctx}/image/${ad.image}.action" style="width: 922px; height: 380px"/></li>
+                            <li><img src="${ctx}/image/${ad.image}.action" onclick="toImageUrl('${ad.image_jump_url}')"  style="width: 922px; height: 380px"/></li>
                         </c:forEach>
                     </ul>
                 </div>
@@ -70,21 +72,44 @@
                     </div>
                     <div class="transaction" style="margin-top: 18px;">
                         <div class="labeling">我要出书</div>
-                        <div class="binone consol"
-                             onclick="window.location.href='${ctx}/bookdeclare/toBookdeclareAdd.action'">
-                            <div class="lab-pic5"></div>
-                            医学专著
-                        </div>
-                        <div class="binone marks"
-                             onclick="window.location.href='${ctx}/bookdeclare/toBookdeclareAdd.action'">
-                            <div class="lab-pic6"></div>
-                            科普图书
-                        </div>
-                        <div class="binone consol"
-                             onclick="window.location.href='${ctx}/bookdeclare/toBookdeclareAdd.action'">
-                            <div class="lab-pic7"></div>
-                            创新教材
-                        </div>
+
+                        <c:if test="${userInfo.is_org_user==1}">
+                            <div class="binone consol" style="pointer-events: none;background-color: gray"
+                                 onclick="window.location.href='${ctx}/bookdeclare/toBookdeclareAdd.action'">
+                                <div class="lab-pic5"></div>
+                                医学专著
+                            </div>
+                            <div class="binone marks" style="pointer-events: none;background-color: gray"
+                                 onclick="window.location.href='${ctx}/bookdeclare/toBookdeclareAdd.action'">
+                                <div class="lab-pic6"></div>
+                                科普图书
+                            </div>
+                            <div class="binone consol" style="pointer-events: none;background-color: gray"
+                                 onclick="window.location.href='${ctx}/bookdeclare/toBookdeclareAdd.action'">
+                                <div class="lab-pic7"></div>
+                                创新教材
+                            </div>
+                        </c:if>
+
+                        <c:if test="${userInfo.is_org_user!=1}">
+                            <div class="binone consol"
+                                 onclick="window.location.href='${ctx}/bookdeclare/toBookdeclareAdd.action'">
+                                <div class="lab-pic5"></div>
+                                医学专著
+                            </div>
+                            <div class="binone marks"
+                                 onclick="window.location.href='${ctx}/bookdeclare/toBookdeclareAdd.action'">
+                                <div class="lab-pic6"></div>
+                                科普图书
+                            </div>
+                            <div class="binone consol"
+                                 onclick="window.location.href='${ctx}/bookdeclare/toBookdeclareAdd.action'">
+                                <div class="lab-pic7"></div>
+                                创新教材
+                            </div>
+                        </c:if>
+
+
                         <div class="binone marks"
                              onclick="window.location.href='${ctx}/personalhomepage/tohomepage.action?pagetag=wycs'">
                             <div class="lab-pic8"></div>
@@ -161,15 +186,41 @@
                     <c:if test="${list.notEnd ==0 and list.is_material_entry==true}">
                         <div class="left_join end">报名结束</div>
                     </c:if> --%>
+
+                    <%
+                        Map<String, Object> userInfo = null;
+                        if ("1".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
+                            userInfo = (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_WRITER);
+                        }
+
+                        if (userInfo == null || userInfo.isEmpty()) {
+                            request.setAttribute("userInfo", null);
+                        } else {
+                            request.setAttribute("userInfo", userInfo);
+                        }
+                    %>
                     <c:choose>
                     	<c:when test="${list.is_material_entry!=true}"></c:when>
                     	<c:when test="${list.notEnd ==0 and list.is_material_entry==true}">
                     		<div class="left_join end">报名结束</div>
                     	</c:when>
+
                     	<c:otherwise>
-                    		<div class="left_join" onclick="window.location.href='${ctx}/material/MaterialDetailRedirect.action?material_id=${list.material_id}'">
-                           		报名参加
-                        	</div>
+                            <c:if test="${userInfo.is_org_user==1}">
+                                    <div class="left_join" style="pointer-events: none;background-color: gray"
+                                         onclick="window.location.href='${ctx}/material/MaterialDetailRedirect.action?material_id=${list.material_id}'">
+                                        报名参加
+                                    </div>
+                                </c:if>
+
+                            <c:if test="${userInfo.is_org_user!=1}">
+                                <div class="left_join"
+                                     onclick="window.location.href='${ctx}/material/MaterialDetailRedirect.action?material_id=${list.material_id}'">
+                                    报名参加
+                                </div>
+                            </c:if>
+
+
                     	</c:otherwise>
                     </c:choose>
                     
@@ -290,14 +341,29 @@
                         <c:forEach var="ad3" items="${adInfo6.detailList}" varStatus="status">
                             <c:if test="${status.index==0}">
                                 <div class="p1_left">
-                                    <a href="${adInfo6.url}" id="a5"><img src="${ctx}/image/${ad3.image}.action" style="width: 216px;height: 89px;border-radius: 5px"></a>
+                                    <c:if test="${adInfo6.type==0}">
+                                        <a id="a5"><img src="${ctx}/image/${ad3.image}.action" onclick="toImageUrl('${adInfo6.url}')"
+                                                        style="width: 216px;height: 89px;border-radius: 5px"></a>
+                                    </c:if>
+                                    <c:if test="${adInfo6.type==1}">
+                                        <a id="a5"><img src="${ctx}/image/${ad3.image}.action" onclick="toImageUrl('${ad3.image_jump_url}')"
+                                                        style="width: 216px;height: 89px;border-radius: 5px"></a>
+                                    </c:if>
+
                                 </div>
                             </c:if>
                         </c:forEach>
                         <c:forEach var="ad3" items="${adInfo7.detailList}" varStatus="status">
                             <c:if test="${status.index==0}">
                                 <div class="p2_left">
-                                    <a href="${adInfo7.url}" id="a6"><img src="${ctx}/image/${ad3.image}.action" style="width: 216px;height: 89px;border-radius: 5px"></a>
+                                    <c:if test="${adInfo7.type==0}">
+                                        <a id="a6"><img src="${ctx}/image/${ad3.image}.action" onclick="toImageUrl('${adInfo7.url}')"
+                                                                              style="width: 216px;height: 89px;border-radius: 5px"></a>
+                                    </c:if>
+                                    <c:if test="${adInfo7.type==1}">
+                                        <a  id="a6"><img src="${ctx}/image/${ad3.image}.action" onclick="toImageUrl('${ad3.image_jump_url}')"
+                                                                              style="width: 216px;height: 89px;border-radius: 5px"></a>
+                                    </c:if>
                                 </div>
                             </c:if>
                         </c:forEach>
@@ -349,30 +415,58 @@
         <div class="area-5">
             <c:forEach var="ad" items="${adInfo2.detailList}">
                 <div class="item">
-                    <a href="${adInfo2.url}" id="a1">
-                        <img src="${ctx}/image/${ad.image}.action" height="82" width="285" class="book1">
+                    <c:if test="${adInfo2.type==0}">
+                    <a id="a1">
+                        <img src="${ctx}/image/${ad.image}.action" onclick="toImageUrl('${adInfo2.url}')" height="82" width="285" class="book1">
                     </a>
+                    </c:if>
+                    <c:if test="${adInfo2.type==1}">
+                        <a id="a1">
+                            <img src="${ctx}/image/${ad.image}.action"  onclick="toImageUrl('${ad.image_jump_url}')" height="82" width="285" class="book1">
+                        </a>
+                    </c:if>
                 </div>
             </c:forEach>
             <c:forEach var="ad" items="${adInfo3.detailList}">
                 <div class="item">
-                    <a href="${adInfo3.url}" id="a2">
-                        <img src="${ctx}/image/${ad.image}.action" height="82" width="285" class="book1">
+                    <c:if test="${adInfo3.type==0}">
+                    <a  id="a2">
+                        <img src="${ctx}/image/${ad.image}.action" onclick="toImageUrl('${adInfo3.url}')" height="82" width="285" class="book1">
                     </a>
+                    </c:if>
+                    <c:if test="${adInfo3.type==1}">
+                        <a  id="a2">
+                            <img src="${ctx}/image/${ad.image}.action" onclick="toImageUrl('${ad.image_jump_url}')" height="82" width="285" class="book1">
+                        </a>
+                    </c:if>
                 </div>
             </c:forEach>
             <c:forEach var="ad" items="${adInfo4.detailList}">
                 <div class="item">
-                    <a href="${adInfo4.url}" id="a3">
-                        <img src="${ctx}/image/${ad.image}.action" height="82" width="285" class="book1">
-                    </a>
+                    <c:if test="${adInfo4.type==0}">
+                        <a  id="a3">
+                            <img src="${ctx}/image/${ad.image}.action" onclick="toImageUrl('${adInfo4.url}')" height="82" width="285" class="book1">
+                        </a>
+                    </c:if>
+                    <c:if test="${adInfo4.type==1}">
+                        <a  id="a3">
+                            <img src="${ctx}/image/${ad.image}.action" onclick="toImageUrl('${ad.image_jump_url}')" height="82" width="285" class="book1">
+                        </a>
+                    </c:if>
                 </div>
             </c:forEach>
             <c:forEach var="ad" items="${adInfo5.detailList}">
                 <div class="item">
-                    <a href="${adInfo5.url}" id="a4">
-                        <img src="${ctx}/image/${ad.image}.action" height="82" width="285" class="book1">
-                    </a>
+                    <c:if test="${adInfo5.type==0}">
+                        <a  id="a4">
+                            <img src="${ctx}/image/${ad.image}.action" onclick="toImageUrl('${adInfo5.url}')" height="82" width="285" class="book1">
+                        </a>
+                    </c:if>
+                    <c:if test="${adInfo5.type==1}">
+                        <a  id="a4">
+                            <img src="${ctx}/image/${ad.image}.action" onclick="toImageUrl('${ad.image_jump_url}')" height="82" width="285" class="book1">
+                        </a>
+                    </c:if>
                 </div>
             </c:forEach>
         </div>

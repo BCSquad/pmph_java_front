@@ -30,10 +30,28 @@ public class LoginInterceptor implements HandlerInterceptor, ApplicationContextA
 
     private String remoteUrl;
 
+    private String remoteVideoUrl;
+
     private String _timestamp = "";
+
+    private String aipUrl;
+    private String cartUrl;
+
+    public void setCartUrl(String cartUrl) {
+        this.cartUrl = cartUrl;
+    }
 
     public void setRemoteUrl(String remoteUrl) {
         this.remoteUrl = remoteUrl;
+    }
+
+
+    public void setAipUrl(String aipUrl) {
+        this.aipUrl = aipUrl;
+    }
+
+    public void setRemoteVideoUrl(String remoteVideoUrl) {
+        this.remoteVideoUrl = remoteVideoUrl;
     }
 
 
@@ -180,6 +198,10 @@ public class LoginInterceptor implements HandlerInterceptor, ApplicationContextA
             o, ModelAndView modelAndView) throws Exception {
         httpServletRequest.getServletContext().setAttribute("_remoteUrl", remoteUrl);
         httpServletRequest.getServletContext().setAttribute("_timestamp", _timestamp);
+        httpServletRequest.getServletContext().setAttribute("_remoteVideoUrl", remoteVideoUrl);
+        httpServletRequest.getServletContext().setAttribute("_cartUrl", cartUrl);
+        httpServletRequest.getServletContext().setAttribute("_aipUrl", aipUrl);
+
     }
 
     @Override

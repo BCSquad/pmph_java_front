@@ -40,7 +40,7 @@ public class ExcelController {
 
         WritableSheet sheet = book.createSheet(" 第一页 ", 0);
 
-        sheet.mergeCells(0, 0, excleService.getColTitle().length, 0);
+        sheet.mergeCells(0, 0, excleService.getColTitle(arrayMapToStringMap(param)).length, 0);
 
 
         //设置标题样式
@@ -75,6 +75,9 @@ public class ExcelController {
 
         WritableCellFormat wcf_content = new WritableCellFormat(wf_content);
         wcf_content.setAlignment(Alignment.CENTRE);
+        wcf_content.setVerticalAlignment(VerticalAlignment.CENTRE);
+        wcf_content.setWrap(true);
+        wcf_content.setShrinkToFit(true);
         wcf_content.setBorder(Border.ALL, BorderLineStyle.THIN);
 
 
@@ -88,9 +91,9 @@ public class ExcelController {
          */
         sheet.setColumnView(0, 10);
         sheet.addCell(new jxl.write.Label(0, 1, "序号", wcf_col_title));
-        for (int i = 1; i <= excleService.getColTitle().length; i++) {
+        for (int i = 1; i <= excleService.getColTitle(arrayMapToStringMap(param)).length; i++) {
             sheet.setColumnView(i, 30);
-            jxl.write.Label col_title = new jxl.write.Label(i, 1, excleService.getColTitle()[i - 1][0], wcf_col_title);
+            jxl.write.Label col_title = new jxl.write.Label(i, 1, excleService.getColTitle(arrayMapToStringMap(param))[i - 1][0], wcf_col_title);
             sheet.addCell(col_title);
         }
 
@@ -105,8 +108,8 @@ public class ExcelController {
             jxl.write.Label col_content = new jxl.write.Label(0, i + 2, (i + 1) + "", wcf_content);
             sheet.addCell(col_content);
 
-            for (int j = 0; j < excleService.getColTitle().length; j++) {
-                String[] colkv = excleService.getColTitle()[j];
+            for (int j = 0; j < excleService.getColTitle(arrayMapToStringMap(param)).length; j++) {
+                String[] colkv = excleService.getColTitle(arrayMapToStringMap(param))[j];
 
                 col_content = new jxl.write.Label(j + 1, i + 2, MapUtils.getString(rowData, colkv[1], ""), wcf_content);
                 sheet.addCell(col_content);

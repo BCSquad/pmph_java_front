@@ -129,6 +129,12 @@ request.setAttribute("currentTime",datetime);
                 	<a href="<c:url value="/integral/toPage.action"/>"><span id="jftb"></span><span class="grsx">积分</span></a>
                 </c:if>
 				<a href='<c:url value="/teacherCertification/showTeacherCertification.action"/>'><span id="jsrz" style="margin-left: -25px"></span><span class="grsx">教师认证</span></a>
+				<c:if test="${selfLog == true}">
+					<a href="<c:url value="/material/toperInformation.action"/>"><span id="sbxx"></span><span class="grsx">申报信息</span></a>
+				</c:if>
+				<c:if test="${selfLog == true && permap.is_teacher == true}">
+					<a href="<c:url value="/course/teacher/toCourseList.action"/>"><span id="kcxs"></span><span class="grsx">课程选书</span></a>
+				</c:if>
 
 				<%--<a class="lcjczjsb" href="<c:url value="/expertation/declare.action"/>">
 					<span id="lcjczjsb"></span>

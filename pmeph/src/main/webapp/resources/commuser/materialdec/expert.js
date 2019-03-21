@@ -16,7 +16,23 @@ $(function () {
         $('#zjlx').tipso({validator: "isNonEmpty", message: "证件类型不能为空"});
         $('#idcard').tipso({validator: "isNonEmpty|isCard", message: "证件号码不能为空|身份证号格式不正确"});
         $('#address').tipso({validator: "isNonEmpty", message: "地址不能为空"});
-        //checkExtra();
+        checkExtra();
+        $('#zjlx .select-list li').click(function(){
+            $('#idcard').tipso("destroy");
+            if($('input[name = "idtype"]').val()=='0'){
+                $('#idcard').tipso({validator: "isNonEmpty|isCard", message: "证件号码不能为空|请填写正确的证件号码"});
+                $('#idcard').attr("maxlength",18);
+            }else if($('input[name = "idtype"]').val()=='1'){
+                $('#idcard').tipso({validator: "isNonEmpty|isPassport", message: "证件号码不能为空|请填写正确的护照号码"});
+                $('#idcard').attr("maxlength",21);
+            }else if($('input[name = "idtype"]').val()=='2'){
+                $('#idcard').tipso({validator: "isNonEmpty|isOfficialCard", message: "证件号码不能为空|请填写正确的军官证号码"});
+                $('#idcard').attr("maxlength",21);
+            }else{
+                $('#idcard').tipso({validator: "isNonEmpty|isCard", message: "证件号码不能为空|请填写正确的证件号码"});
+                $('#idcard').attr("maxlength",18);
+            }
+        });
     },0)
 
    // setTimer();
@@ -30,7 +46,7 @@ $(function () {
     
 
     $('.select-input').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 192,
         height: 30,
         optionHeight: 30
@@ -41,7 +57,7 @@ $(function () {
         optionHeight: 30
     });
     $('#education').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 192,
         height: 30,
         optionHeight: 30
@@ -688,6 +704,10 @@ function del_tr(trId){
 
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type){
+            $("#realname").removeAttr("disabled");
+            $("#sex").removeAttr("disabled");
+            $("#birthday").removeAttr("disabled");
+            $("#idcard").removeAttr("disabled");
             if(type == '2') { //表示暂存
                 //避免重复点击
                 //    document.getElementById('buzc').onclick=function(){window.message.warning("请不要重复点击");};

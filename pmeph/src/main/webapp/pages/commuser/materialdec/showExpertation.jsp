@@ -332,11 +332,11 @@
 					<table class="tab_2" id="tab_wzfbqk">
 						<thead>
 						<tr>
-							<td width="300px">题目</td>
-							<td width="150px">期刊名称</td>
-							<td width="100px">年、卷、期</td>
-							<td width="250px">期刊级别（SCI或国内核心期刊）</td>
-							<td>备注</td>
+							<td width="400px">题目</td>
+							<td width="160px">期刊名称</td>
+							<td width="150px">年、卷、期</td>
+							<td width="130px">期刊级别（SCI或国内核心期刊）</td>
+							<td >备注</td>
 						</tr>
 						</thead>
 						<tbody>
@@ -419,7 +419,7 @@
 		<div class="sbxq_item1" id="xkflxs">
 			<div>
 				<span id="tsxz_span8"></span>
-				<span class="tsxz_title">学科分类</span>
+				<span class="tsxz_title">学科分类(可多选)</span>
 				<%--<span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.product_id}')">添加学科分类</span>--%>
 			</div>
 			<div class="sbdw" >
@@ -441,7 +441,7 @@
 			<div class="sbdw" id="nrfladd">
 				<span class="btmc">内容分类：</span>
 				<c:forEach var="content" items="${contentList}" varStatus="status">
-				<span class="el-tag" id="nrfl_${status.count}">${content.name_path}<input name="contentId" type="hidden" value="${content.product_content_type_id}"/>
+				<span class="el-tag" id="nrfl_${status.count}">${content.type_name}<input name="contentId" type="hidden" value="${content.product_content_type_id}"/>
 					</span>
 				</c:forEach>
 			</div>
@@ -451,7 +451,7 @@
 		<div class="sbxq_item1" id="sbzyxs">
 			<div>
 				<span id="sbzytb"></span>
-				<span class="tsxz_title">申报专业</span>
+				<span class="tsxz_title">申报专业(可多选)</span>
 				<%--<span class="el-button" onclick="javascript:SubjectdAdd('${materialMap.product_id}')">添加学科分类</span>--%>
 			</div>
 			<div class="sbdw">
@@ -545,7 +545,7 @@
 				<div class="audit_middle">
 				<c:if test="${(online_progress != 3)&&(online_progress !=2)&&(online_progress !=5)}">
 					<div class="audit"  onclick="showup('${gezlList.id}','2')" >退回给个人</div>
-                    <div class="audit pass"  id="shtg" onclick="toAuditPass('${gezlList.id}','3');changeColor()" >审核通过</div>
+                    <div class="audit pass"  id="shtg" onclick="toAuditPass('${gezlList.id}','3')" >审核通过</div>
 				</c:if>
 					<div class="audit" id="hisprint" onclick="toprint('${gezlList.id}')" >打印</div>
 					<div class="audit"  onclick="javascript:history.go(-1)" >返回</div>

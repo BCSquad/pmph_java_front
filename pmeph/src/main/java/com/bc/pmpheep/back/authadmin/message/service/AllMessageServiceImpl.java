@@ -71,10 +71,10 @@ public class AllMessageServiceImpl implements AllMessageService {
 
         List<Map<String, Object>> messages = allMessageDao.getAllMessageInit(params);
         List<String> ids = new ArrayList<String>();
-        Map<String, Map<String, Object>> map = new HashMap<String, Map<String, Object>>();
+        Map<String, String> map = new HashMap<String, String>();
         for (Map<String, Object> message : messages) {
             ids.add(MapUtils.getString(message, "msg_id"));
-            map.put(MapUtils.getString(message, "msg_id"), message);
+            //map.put(MapUtils.getString(message, "msg_id"), message);
             message.put("avatar", RouteUtil.userAvatar(MapUtils.getString(message, "avatar")));
         }
 
@@ -84,7 +84,12 @@ public class AllMessageServiceImpl implements AllMessageService {
             Pattern p_html = Pattern.compile(regEx_html, Pattern.CASE_INSENSITIVE);
             Matcher m_html = p_html.matcher(str);
             str = m_html.replaceAll(""); //过滤html标签
-            map.get(message.getId()).put("msg_content",str );
+            map.put(message.getId().toString(), str);
+            //map.get(message.getId()).put("msg_content",str );
+        }
+        //由于补发的存在 可能出现多条消息对应一条mdb消息的情况 必须再次遍历 原map保存未考虑重复key的情况
+        for(Map<String, Object> message : messages){
+        	message.put("msg_content",map.get(MapUtils.getString(message, "msg_id")));
         }
 
         return messages;

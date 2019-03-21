@@ -33,7 +33,7 @@
         $(function(){
         	
             $('#select').selectlist({
-                zIndex: 10,
+                zIndex: 100,
                 width: 100,
                 height: 20,
                 optionHeight: 20,
@@ -46,6 +46,29 @@
             //---------------统计未读数量----------------
             $("#tzid").html('通知<span style="display: inline-block;position:absolute;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;' +
                 'line-height: 10px;padding: 3px 0px;border-radius: 50%;right: 10;top: 0;width: 20px;height: 10px;text-align: center;">' + (${noreadcount}?${noreadcount}:0) + '</span>');
+
+
+            $.ajax({
+                type:'post',
+                url:"applyMessageCount.action",
+                async:false,
+                dataType:'json',
+                success:function(json){
+                    $("#sqid").html('申请<span style="display: inline-block;position:absolute;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;' +
+                        'line-height: 10px;border-radius: 50%;padding: 3px 0px;right: 10;top: 0;width: 20px;height: 10px;text-align: center;">' + json.nodealcount + '</span>');
+                }
+            });
+            $.ajax({
+                type:'post',
+                url:"${ctx}/mymessage/getMyMessageCount.action",
+                async:false,
+                dataType:'json',
+                success:function(json){
+                    $("#sxid").html('私信<span style="display: inline-block;position:absolute;background: #ff0000 !important;color: #fff;font-size: 10px;font-weight: 400;' +
+                        'line-height: 10px;border-radius: 50%;padding: 3px 0px;right: 10;top: 0;width: 20px;height: 10px;text-align: center;">' + json.no_read_count + '</span>');
+                }
+            });
+
           });
     
         
@@ -82,8 +105,8 @@
 	
         <div class="messageList">
             <span id="selected" ><span id="tzid" style="position: relative">通知</span></span>
-            <span ><a href="${ctx}/message/applyMessageList.action" class="unselected"><span>申请</span></a></span>
-            <span ><a href="${ctx}/mymessage/listMyMessage.action"  class="unselected"><span>私信</span></a></span>
+            <span ><a id="sqid" href="${ctx}/message/applyMessageList.action" class="unselected" style="position: relative"><span>申请</span></a></span>
+            <span ><a  id="sxid" href="${ctx}/mymessage/listMyMessage.action"  class="unselected" style="position: relative"><span>私信</span></a></span>
             <span id="rightContent" >筛选：
                 <select id="select" name="select" title="请选择" >
                     <option value="3" ${condition=='3' ?'selected':''}>全部</option>
@@ -173,7 +196,16 @@
 		                  
 		                    <td class="buttonDetail">
 		                    	<c:if test="${message.msgType==0 && message.material_id!=0}">
-		                      	<div class="buttonAccept" ><a href="javascript:lookDetailInfo('${message.id}','${message.cmsid}','${message.is_read}')">查看详情</a></div>
+                                    <c:choose>
+                                        <c:when test="${message.is_product==1}">
+                                            <div class="buttonAccept" ><a href="javascript:toproductdetail('${message.material_id}')">查看详情</a></div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="buttonAccept" ><a href="javascript:lookDetailInfo('${message.id}','${message.cmsid}','${message.is_read}')">查看详情</a></div>
+                                        </c:otherwise>
+                                    </c:choose>
+
+
 		                        </c:if>
 		                        <c:if test="${message.msgType==0||message.msgType==1}">
 		   					    <span class="deleteButton" onclick="deleteNotice(${message.id })"><span style="font-size:18px;">×</span> 删除</span>

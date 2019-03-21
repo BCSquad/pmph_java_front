@@ -94,7 +94,7 @@
                 <value>/expertation/toPersondetail.action* -> 1</value> <!-- 临床申报 个人中心跳转链接 -->
                 <value>/expertation/toSearchOrg.action* -> 1</value> <!-- 临床申报 选择申报学校 -->
                 <value>/research/tolist.action* -> 1</value><!--调研表  列表页面-->
-                
+                <value>/course/teacher/* -> 1</value><!--课程选书  页面-->
 
                 <!--机构用户-->
                 <value>/user/* -> 2</value><!--用户管理（机构用户） -->

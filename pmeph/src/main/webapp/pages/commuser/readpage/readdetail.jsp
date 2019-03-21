@@ -90,8 +90,27 @@
                     <button class="btn" type="button" onclick="correction()">确认</button>
                 </div>
         </div>
-        <!-- 图书纠错悬浮框 end -->
-        
+            <div class="bookmistake" id="sourceUp">
+                <div class="apache">
+                    <div class="mistitle">资源共享</div>
+                    <div class="x" onclick="hideup()"></div>
+                </div>
+                <div class="upload">
+                    <label style="margin-left: 20px" class="labell">资源附件</label>
+                    <div style="position: relative">
+                        <div id="uploadFile2" class="upbutten  "><%--选择文件</div>--%>
+                            选择文件
+                        </div>
+                    </div>
+                    <label class="uploadfile" id="upname2">未选择任何文件!</label>
+                    <input type="hidden" id="attachment2"/>
+                    <input type="hidden" id="attachment_name2"/>
+                    <input type="hidden" id="upload_status2"/>
+                </div>
+                <div class="">
+                    <button class="btn" type="button" onclick="sourceCommit()">确认</button>
+                </div>
+            </div>
         <!-- 读者反馈悬浮框 -->
         <div class="bookmistake" id="bookfeedback">
             <form id="bookfeedbackform">
@@ -227,7 +246,7 @@
                 <div class="xsp" style="float: left;">
                     <div id="xsp"></div>
                     <%--<a href="#001" onclick="writeablut()" style="text-decoration: none"><span id="xsp1">写书评</span></a>  --%>
-                    <a  style="text-decoration: none;cursor: pointer;" onclick="$('#content_book').focus()" ><span id="xsp1">写书评</span></a>
+                    <a  style="text-decoration: none;cursor: pointer;" onclick="$('.rd_name.tag').first().trigger('click');$('#content_book').focus()" ><span id="xsp1">写书评</span></a>
 
                 </div>
                 <div class="mistake" onclick="showup(1)">
@@ -258,6 +277,10 @@
                 <div class="mistake" onclick="showup(2)">
                     <div class="feedback_pic" ></div>
                     <div class="mis_content">读者反馈</div>
+                </div>
+                <div class="mistake" onclick="sourceUpload()">
+                    <div class="vid_pic" ></div>
+                    <div class="mis_content">资源共享</div>
                 </div>
                 
                 <c:choose>
@@ -297,7 +320,7 @@
                 <div class="block">
                     <div class="title">
                         <div class="line"></div>
-                        <div class="rd_name">相关资源
+                        <div class="rd_name">相关视频
                             <div onclick="window.location.href='${ctx}/readdetail/morebookvideo.action?id=${id}'"  style="float: right;margin-left: 50px;color: #489299;font-size: 14px;cursor: pointer;">更多>></div>
                         </div>
                     </div>
@@ -308,7 +331,7 @@
                                        poster="${ctx}/image/${list.cover}.action" type="mp4" controls>
                                 </video>--%>
                             <div class="video-a" id="video-${list.id}"
-                                 src="http://${_remoteUrl}/v/play/${list.file_name}"
+                                 src="http://${_remoteVideoUrl}/v/play/${list.file_name}"
                                  poster="${ctx}/image/${list.cover}.action" type="mp4">
 
                             </div>
@@ -337,13 +360,17 @@
                     </script>
                 </div>
             </c:if>
+
             <div class="block">
                 <div class="title">
                     <div class="line"></div>
-                    <div class="rd_name">图书评论(共${ComNum}条)</div>
+                    <div class="rd_name tag active" tagName="changepage">图书评论(共${ComNum}条)</div>
+                    <div class="rd_name tag" tagName="correctpage">图书纠错(共${CorrNum}条)</div>
+                    <div class="rd_name tag" tagName="feedpage">读者反馈(共${FeedNum}条)</div>
                 </div>
-                <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 15px;">
-                <div class="pl_add">
+                <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 0px;">
+
+                <div class="pl_add changepage list-page">
                     <a name="001" id="001"></a>
                     <textarea class="tarea textarea_content" id="content_book" onkeyup="javascript:LengthLimit(this,500);"
                               onblur="javascript:LengthLimit(this,500);"></textarea>
@@ -367,8 +394,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="block">
-                    <divlistCom id="changepage">
+                <div class="">
+
+                    <divlistCom class="list-page changepage" id="changepage">
                         <c:forEach items="${listCom}" var="list" begin="0" end="1">
                             <div class="item">
                                 <div class="item_title">
@@ -435,8 +463,76 @@
                             </div>
                         </c:forEach>
                     </divlistCom>
+
+                    <divlistCorrect class="list-page correctpage" id="correctpage">
+                        <c:forEach items="${listCorr}" var="list" begin="0" end="1">
+                            <div class="item">
+                                <div class="item_title">
+                                    <div style="float: left;">
+                                        <c:if test="${list.avatar=='DEFAULT'}"><img
+                                                src="${ctx}/statics/image/default_image.png" class="picturesize"></c:if>
+                                        <c:if test="${list.avatar!='DEFAULT'}"><img
+                                                src="${ctx}/image/${list.avatar}.action" class="picturesize"></c:if>
+                                    </div>
+                                    <div style="float: left;margin-left: 10px;margin-top: 5px;">
+                                        <c:if test="${list.nickname==null or list.nickname==''}">
+                                            ${list.username}
+                                        </c:if>
+                                        <c:if test="${list.nickname!=null and list.nickname!=''}">
+                                            ${list.nickname}
+                                        </c:if>
+                                    </div>
+
+                                    <div class="date_content">
+                                        <div class="date">${list.gmt_create}</div>
+                                    </div>
+                                </div>
+                                <div class="item_content">
+                                       第${list.page}页，第${list.line}行:
+                                </div>
+                                <div class="item_content">
+                                        ${list.content}
+                                </div>
+                                <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
+                            </div>
+                        </c:forEach>
+                    </divlistCorrect>
+
+                    <divlistFeed class="list-page feedpage" id="feedpage">
+                        <c:forEach items="${listFeed}" var="list" begin="0" end="1">
+                            <div class="item">
+                                <div class="item_title">
+                                    <div style="float: left;">
+                                        <c:if test="${list.avatar=='DEFAULT'}"><img
+                                                src="${ctx}/statics/image/default_image.png" class="picturesize"></c:if>
+                                        <c:if test="${list.avatar!='DEFAULT'}"><img
+                                                src="${ctx}/image/${list.avatar}.action" class="picturesize"></c:if>
+                                    </div>
+                                    <div style="float: left;margin-left: 10px;margin-top: 5px;">
+                                        <c:if test="${list.nickname==null or list.nickname==''}">
+                                            ${list.username}
+                                        </c:if>
+                                        <c:if test="${list.nickname!=null and list.nickname!=''}">
+                                            ${list.nickname}
+                                        </c:if>
+                                    </div>
+
+                                    <div class="date_content">
+                                        <div class="date">${list.gmt_create}</div>
+                                    </div>
+                                </div>
+                                <div class="item_content">${list.content}</div>
+                                <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
+                            </div>
+                        </c:forEach>
+                    </divlistFeed>
+
+
                     <div class="morecon">
-                        <input type="hidden" value="${start}" id="start">
+                        <input type="hidden" value="${start}" class="start changepage">
+                        <input type="hidden" value="${start}" class="start correctpage">
+                        <input type="hidden" value="${start}" class="start feedpage">
+
                         <span class="moreothers" onclick="changepage()"
                               id="moreothers">${shortcom=='nothing' ? '[暂无评论]':'加载更多...'}</span>
                         <div class="morecom" style="display: none;"></div>
@@ -519,6 +615,25 @@
                     </div>--%>
                 </div>
             </div>
+            <c:if test="${ not empty source}">
+        <div class="block">
+            <div class="title">
+                <div class="line"></div>
+                <div class="rd_name" style="width: calc(100% - 15px);">相关资源
+                    <div onclick="window.location.href='${ctx}/readdetail/morebookvideo.action?id=${id}'"  style="float: right;margin-left: 50px;color: #489299;font-size: 14px;cursor: pointer;">更多>></div>
+                </div>
+            </div>
+            <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
+            <c:forEach items="${source}" var="list" varStatus="status">
+                <div class="right_20" style="border: none;">
+                    <a href="#"><div class="downimg" onclick="window.location.href='${ctx}/file/download/${list.file_id}.action'">${list.source_name}</div></a>
+                    <div class="right_22"></div>
+                    <br />
+                </div>
+            </c:forEach>
+
+        </div>
+    </c:if>
         </div>
         <!--右边区域-->
         <div class="rightarea">

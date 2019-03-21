@@ -38,7 +38,7 @@ public class ChooseEditorExcelServiceImpl implements ExcelDownloadService {
 	}
 
 	@Override
-	public String[][] getColTitle() {
+	public String[][] getColTitle(Map<String, Object> param) {
 		
 		return new String[][]{{"姓名", "realname"},{"性别", "sex"},{"工作单位", "work_org_name"},{"申报单位", "dec_org_name"}, {"职位", "position"}, {"职称", "title"}, {"选为编委", "choosenEditor"}, {"选为数字编委", "choosenNumEditor"}};
 	}

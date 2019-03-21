@@ -27,15 +27,19 @@
     <div class="div-menu">
         <div class="div-content">
             <div style="width:176px;float:left;"><img alt="" src="<c:url value="/statics/image/_logo.jpg"/>"/></div>
-            <div style="width:90px;float:left;">&nbsp</div>
+            <div style="width:20px;float:left;">&nbsp</div>
             <div class="div-menu-child <%="backlog".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
                  onclick="window.location.href='<c:url value="/schedule/scheduleList.action"/>'">待办事项
             </div>
             <%--<c:choose>
      			<c:when test="${ SESSION_USER_CONST_ORGUSER.progress==1}">--%>
 				<div class="div-menu-child <%="audit".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
-					 onclick="window.location.href='<c:url value="/applyDocAudit/toPage.action"/>'">申报资料审核
+					 onclick="window.location.href='<c:url value="/applyDocAudit/toPage.action"/>'">教材申报资料审核
 				</div>
+
+            <div class="div-menu-child <%="experAudit".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
+                 onclick="window.location.href='<c:url value="/expertationList/toPageList.action"/>'">临床决策专家申报审核
+            </div>
 			<%--</c:when>
 				<c:otherwise>
      			<div class="div-menu-child <%="audit".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
@@ -84,7 +88,13 @@
 	     			 	<div class="div-menu-child <%="account".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
 	                 	onclick="window.location.href='<c:url value="/admininfocontroller/toadmininfo.action"/>'">修改资料
 	            		</div>
- 				<%--</c:when>
+            <div class="div-menu-child <%="home".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
+                 onclick="loginHome('${ SESSION_USER_CONST_ORGUSER.username}')">个人首页
+            </div>
+
+
+
+        <%--</c:when>
      			<c:otherwise>  
      			<div class="div-menu-child <%="account".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
 	                 onclick="window.location.href='<c:url value="/userinfo/toNoAccessToAuthority.action?pageType=account"/>'">修改资料
@@ -95,5 +105,22 @@
         </div>
     </div>
 </div>
+<script>
+   function loginHome(username){
+
+       $.ajax({
+           type: "POST",
+           url:contextpath+'/login.action',
+           data:{username:username,usertype:'1'},
+           success: function(json) {
+               setTimeout(function() { window.location.href=contextpath; }, 10);
+           },
+           beforeSend(XHR){
+               setTimeout(function() { window.location.href=contextpath; }, 1000);
+           }
+       });
+
+   }
+</script>
 
 

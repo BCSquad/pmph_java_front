@@ -192,20 +192,20 @@
                     <table class="tab_1">
                         <tr>
                             <td><span class="btbs">*</span><span>姓&emsp;&emsp;名：</span>
-                                <input class="cg_input" name="realname" id="realname" value="${gezlList.realname}"
+                                <input class="cg_input" name="realname" disabled id="realname" value="${gezlList.realname}"
                                        maxlength="20"/>
                                 <input class="cg_input" name="user_id" type="hidden" value="${userMap.id}"/>
                                 <input class="cg_input" name="username" id="username" type="hidden"
                                        value="${userMap.username}"/>
                             </td>
                             <td><span class="btbs">*</span><span>性&emsp;&emsp;别：</span>
-                                <select class="select-input" id="sex" name="sex">
+                                <select class="select-input" id="sex" disabled name="sex">
                                     <%--  <option value="0" ${gezlList.sex=='0'?'selected':'' }>保密</option>--%>
                                     <option value="1" ${gezlList.sex=='1'?'selected':'' }>男</option>
                                     <option value="2" ${gezlList.sex=='2'?'selected':'' }>女</option>
                                 </select></td>
                             <td><span class="btbs">*</span><span>出生年月：</span>
-                                <input class="cg_input" calendar format="'yyyy-mm-dd'" name="birthday"
+                                <input class="cg_input" disabled calendar format="'yyyy-mm-dd'" name="birthday"
                                        value="${gezlList.birthday}" id="birthday"/></td>
                             <td><span class="btbs">*</span><span>教&emsp;&emsp;龄：</span>
                                 <input class="cg_input" name="experience" value="${gezlList.experience}" id="experience"
@@ -223,7 +223,10 @@
                                        maxlength="36"/></td>
                             <td><span class="btbs">*</span><span>职&emsp;&emsp;称：</span>
                                 <select id="zclx" name="title">
-                                    <option value="院士" ${gezlList.title=='院士'?'selected':'' }>院士</option>
+                                    <c:forEach items="${writerUserTitle}" var="dic">
+                                        <option value="${dic.code}" ${gezlList.title == dic.code ? 'selected':''}>${dic.name}</option>
+                                    </c:forEach>
+                                    <%--<option value="院士" ${gezlList.title=='院士'?'selected':'' }>院士</option>
                                     <option value="教授"  ${gezlList.title=='教授'?'selected':'' }>教授</option>
                                     <option value="正高"  ${gezlList.title=='正高'?'selected':'' }>正高</option>
                                     <option value="副教授" ${gezlList.title=='副教授'?'selected':'' }>副教授</option>
@@ -233,7 +236,7 @@
                                     <option value="主任药师" ${userMap.title=='主任药师'?'selected':'' }>主任药师</option>
                                     <option value="副主任药师" ${userMap.title=='副主任药师'?'selected':'' }>副主任药师</option>
                                     <option value="主管药师" ${userMap.title=='主管药师'?'selected':'' }>主管药师</option>
-                                    <option value="其他" ${gezlList.title=='其他'?'selected':'' }>其他</option>
+                                    <option value="其他" ${gezlList.title=='其他'?'selected':'' }>其他</option>--%>
                                 </select>
                             </td>
                             </td>
@@ -267,7 +270,7 @@
                                     <option value="2" ${gezlList.idtype=='2'?'selected':'' }>军官证</option>
                                 </select></td>
                             <td><span class="btbs">*</span><span>证件号码：</span>
-                                <input class="cg_input" name="idcard" value="${gezlList.idcard}" id="idcard"
+                                <input class="cg_input" disabled  name="idcard" value="${gezlList.idcard}" id="idcard"
                                        maxlength="18"/></td>
                             <td colspan="2"><span class="btbs">*</span><span>地&emsp;&emsp;址：</span>
                                 <input class="cg_input" style="width: 488px;" name="address" value="${gezlList.address}"
@@ -286,11 +289,14 @@
                             </td>
                             <td><span>&ensp;学&emsp;&emsp;历：</span>
                                 <select id="degree" name="degree">
-                                    <option value="0" ${gezlList.degree=='0'?'selected':'' }>无</option>
+                                    <c:forEach items="${writerUserDegree}" var="dic">
+                                        <option value="${dic.code}" ${gezlList.degree==dic.code?'selected':'' }>${dic.name}</option>
+                                    </c:forEach>
+                                    <%--<option value="0" ${gezlList.degree=='0'?'selected':'' }>无</option>
                                     <option value="1" ${gezlList.degree=='1'?'selected':'' }>专科</option>
                                     <option value="2" ${gezlList.degree=='2'?'selected':'' }>本科</option>
                                     <option value="3" ${gezlList.degree=='3'?'selected':'' }>硕士</option>
-                                    <option value="4" ${gezlList.degree=='4'?'selected':'' }>博士</option>
+                                    <option value="4" ${gezlList.degree=='4'?'selected':'' }>博士</option>--%>
                                 </select></td>
                             <td><span>&ensp;专业特长：</span>
                                 <input class="cg_input" name="expertise" value="${gezlList.expertise}" id="expertise"
@@ -892,20 +898,26 @@
                                            style="width: 200px;" placeholder="教材名称"/></td>
                                 <td>
                                     <select id="pmph_rank" name="pmph_rank">
-                                        <option value="0">无</option>
+                                        <c:forEach items="${pmphRank}" var="dic">
+                                            <option value="${dic.code}" >${dic.name}</option>
+                                        </c:forEach>
+                                        <%--<option value="0">无</option>
                                         <option value="1">国家</option>
                                         <option value="2">省部</option>
                                         <option value="3">协编</option>
                                         <option value="4">校本</option>
-                                        <option value="5">其他</option>
+                                        <option value="5">其他</option>--%>
                                     </select>
                                 </td>
                                 <td>
                                     <select id="pmph_position" name="pmph_position">
-                                        <option value="0">无</option>
+                                        <c:forEach items="${pmphPosition}" var="dic">
+                                            <option value="${dic.code}" >${dic.name}</option>
+                                        </c:forEach>
+                                        <%--<option value="0">无</option>
                                         <option value="1">主编</option>
                                         <option value="2">副主编</option>
-                                        <option value="3">编委</option>
+                                        <option value="3">编委</option>--%>
                                     </select>
                                 </td>
                                 <td style="color: #333333;">
@@ -940,22 +952,28 @@
                                            value="${list.material_name}" style="width: 200px;" placeholder="教材名称"/></td>
                                 <td>
                                     <select id="pmph_rank_${status.count}" name="pmph_rank">
-                                        <option value="0" ${list.rank=='0'?'selected':'' }>无</option>
+                                        <c:forEach items="${pmphRank}" var="dic">
+                                            <option value="${dic.code}" ${list.rank==dic.code?'selected':'' }>${dic.name}</option>
+                                        </c:forEach>
+                                        <%--<option value="0" ${list.rank=='0'?'selected':'' }>无</option>
                                         <option value="1" ${list.rank=='1'?'selected':'' }>国家</option>
                                         <option value="2" ${list.rank=='2'?'selected':'' }>省部</option>
                                         <option value="3" ${list.rank=='3'?'selected':'' }>协编</option>
                                         <option value="4" ${list.rank=='4'?'selected':'' }>校本</option>
-                                        <option value="5" ${list.rank=='5'?'selected':'' }>其他</option>
+                                        <option value="5" ${list.rank=='5'?'selected':'' }>其他</option>--%>
                                     </select>
                                     <input type="hidden" id="pmph_rank_sl" name="pmph_rank_sl"
                                            value="pmph_rank_${status.count}"/>
                                 </td>
                                 <td>
                                     <select id="pmph_position_${status.count}" name="pmph_position">
-                                        <option value="0" ${list.position=='0'?'selected':'' }>无</option>
+                                        <c:forEach items="${pmphPosition}" var="dic">
+                                            <option value="${dic.code}" ${list.position==dic.code?'selected':''}>${dic.name}</option>
+                                        </c:forEach>
+                                        <%--<option value="0" ${list.position=='0'?'selected':'' }>无</option>
                                         <option value="1" ${list.position=='1'?'selected':'' }>主编</option>
                                         <option value="2" ${list.position=='2'?'selected':'' }>副主编</option>
-                                        <option value="3" ${list.position=='3'?'selected':'' }>编委</option>
+                                        <option value="3" ${list.position=='3'?'selected':'' }>编委</option>--%>
                                     </select>
                                     <input type="hidden" id="pmph_sl" name="pmph_sl"
                                            value="pmph_position_${status.count}"/>
@@ -1033,20 +1051,26 @@
                                 </td>
                                 <td>
                                     <select id="jcb_rank" name="jcb_rank">
-                                        <option value="0">无</option>
+                                        <c:forEach items="${pmphRank}" var="dic">
+                                            <option value="${dic.code}">${dic.name}</option>
+                                        </c:forEach>
+                                        <%--<option value="0">无</option>
                                         <option value="1">国家</option>
                                         <option value="2">省部</option>
                                         <option value="3">协编</option>
                                         <option value="4">校本</option>
-                                        <option value="5">其他</option>
+                                        <option value="5">其他</option>--%>
                                     </select>
                                 </td>
                                 <td>
                                     <select id="jcb_position" name="jcb_position">
-                                        <option value="0">无</option>
+                                        <c:forEach items="${pmphPosition}" var="dic">
+                                            <option value="${dic.code}" >${dic.name}</option>
+                                        </c:forEach>
+                                        <%--<option value="0">无</option>
                                         <option value="1">主编</option>
                                         <option value="2">副主编</option>
-                                        <option value="3">编委</option>
+                                        <option value="3">编委</option>--%>
                                     </select>
                                 </td>
                                 <td style="color: #333333;">
@@ -1082,22 +1106,28 @@
                                            style="width: 200px;" placeholder="教材名称"/></td>
                                 <td>
                                     <select id="jcb_rank_${status.count}" name="jcb_rank">
-                                        <option value="0" ${list.rank=='0'?'selected':'' }>无</option>
+                                        <c:forEach items="${pmphRank}" var="dic">
+                                            <option value="${dic.code}" ${list.rank==dic.code?'selected':'' }>${dic.name}</option>
+                                        </c:forEach>
+                                        <%--<option value="0" ${list.rank=='0'?'selected':'' }>无</option>
                                         <option value="1" ${list.rank=='1'?'selected':'' }>国家</option>
                                         <option value="2" ${list.rank=='2'?'selected':'' }>省部</option>
                                         <option value="3" ${list.rank=='3'?'selected':'' }>协编</option>
                                         <option value="4" ${list.rank=='4'?'selected':'' }>校本</option>
-                                        <option value="5" ${list.rank=='5'?'selected':'' }>其他</option>
+                                        <option value="5" ${list.rank=='5'?'selected':'' }>其他</option>--%>
                                     </select>
                                     <input type="hidden" id="jcb_rank_sl" name="jcb_rank_sl"
                                            value="jcb_rank_${status.count}"/>
                                 </td>
                                 <td>
                                     <select id="jcb_position_${status.count}" name="jcb_position">
-                                        <option value="0" ${list.position=='0'?'selected':'' }>无</option>
+                                        <c:forEach items="${pmphPosition}" var="dic">
+                                            <option value="${dic.code}" ${list.position==dic.code?'selected':'' }>${dic.name}</option>
+                                        </c:forEach>
+                                        <%--<option value="0" ${list.position=='0'?'selected':'' }>无</option>
                                         <option value="1" ${list.position=='1'?'selected':'' }>主编</option>
                                         <option value="2" ${list.position=='2'?'selected':'' }>副主编</option>
-                                        <option value="3" ${list.position=='3'?'selected':'' }>编委</option>
+                                        <option value="3" ${list.position=='3'?'selected':'' }>编委</option>--%>
                                     </select>
                                     <input type="hidden" id="jcjb_sl" name="jcjb_sl"
                                            value="jcb_position_${status.count}"/>

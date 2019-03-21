@@ -29,13 +29,7 @@
 
     
     <style type="text/css">
-        .div_content_right .select-button {
-            background: #f6f6f6;
-        }
 
-        .div_content_right .select-wrapper {
-            border: none;
-        }
     </style>
 </head>
 <body>
@@ -50,8 +44,13 @@
             <span class="clickbefore mouse-gesture" id="infoReport" 
                   onclick="ChangeDiv('infoReport')">${materialId!=null && materialId!=''? '社区':'信息' }快报</span>
             <span class="clicked"     style="margin-left: 15px;" id="selectAnnco" onclick="ChangeDiv('selectAnnco')">遴选公告</span>
+
         </div>
         <div class="div_content_right">
+            <div style="float: left;margin-top: 10px;margin-right: 20px;">
+                <input type="text" id="wdsbssk" value="" placeholder="公告搜索">
+                <div id="btn_wdsbssk_div"><button title="搜索" id="btn_wdsbssk" onclick="search()"><div></div></button></div></div>
+
             <span style="color: #999999;">排序：</span>
              <div style="display: inline-block;text-align:left;color: #333333;">
                 <select id="sort-wrapper" name="sort-wrapper">

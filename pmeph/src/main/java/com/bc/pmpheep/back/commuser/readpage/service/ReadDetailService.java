@@ -20,9 +20,10 @@ public interface ReadDetailService {
 	/**
 	 * 查询书籍相关评论
 	 * @param id
+	 * tagName 集合了评论 纠错 反馈 的下拉加载查询 通过tagName区分
 	 * @return
 	 */
-	List<Map<String, Object>> queryComment(String id,int start);
+	List<Map<String, Object>> queryComment(String id,int start,String... tagName);
 	/**
 	 * 根据书籍ID查询配套图书
 	 * @param id
@@ -131,6 +132,12 @@ public interface ReadDetailService {
 	 * @return List<Map<String, Object>>
 	 */
 	List<Map<String, Object>> queryVideo(String book_id);
+	/**
+	 * 查询资源
+	 * @param book_id 书籍ID
+	 * @return List<Map<String, Object>>
+	 */
+	List<Map<String, Object>> querySource(String book_id);
 	
 	/**
 	 * 查询我的长评
@@ -173,5 +180,5 @@ public interface ReadDetailService {
 	 */
 	Map<String, Object> queryRelatedBookList(String id, int page, int type, String contextPath);
 
-
+	Integer addSource(Map<String, Object> map);
 }

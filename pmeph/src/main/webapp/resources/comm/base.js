@@ -197,7 +197,7 @@ var remoteUrl = "medu.ipmph.com";
                             text="您的认证已提交，请耐心等待审核！";
                             btn="查看认证"
                         }else if(data.msg=='2'){
-                            text="您的认证已被退回，退回原因："+data.backReason+"。请修改资料重新认证！";
+                            text="您的认证已被审核驳回，退回原因："+data.backReason+"。请修改资料重新认证！";
                             btn="重新认证"
                         }else if(data.proxy=='0' && data.msg!='1' && data.msg!='2'){
                             text="您还未进行机构管理员认证，快去认证吧！";
@@ -317,6 +317,14 @@ $(function () {
         }
     });
 
+    $(".searchKey").each(function () {
+        var $t = $(this);
+        $t.bind("click",function () {
+            $(".search-input").val($t.html());
+            search();
+        });
+    })
+
 
     $(".delete").click(function () {
         $(".delete").css("display", "none");
@@ -393,8 +401,6 @@ function getImageTips(id,htmlId){
 }
 
 
-
-
 // 鼠标离开 提示语 消失
 function removeImageTips(){
     clearTimeout(t_Time);
@@ -438,7 +444,29 @@ function Empty(v) {
 }
 
 
+//输入长度限制校验，ml为最大字节长度
+function LengthLimit(obj, ml) {
 
+    var va = obj.value;
+    var vat = "";
+    if(va !=null){
+        for (var i = 1; i <= va.length; i++) {
+            vat = va.substring(0, i);
+            //把双字节的替换成两个单字节的然后再获得长度，与限制比较
+            if (vat.replace(/[^\x00-\xff]/g, "a").length <= ml) {
+                var maxStrlength = i;
+            } else {
+
+                break;
+            }}
+    }
+    //obj.maxlength = maxStrlength;
+    //把双字节的替换成两个单字节的然后再获得长度，与限制比较
+    if (va.replace(/[^\x00-\xff]/g, "a").length > ml) {
+        obj.value = va.substring(0, maxStrlength);
+        window.message.warning("不可超过输入最大长度" + ml + "字！");
+    }
+}
 
 
 

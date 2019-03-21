@@ -79,7 +79,7 @@ public class CmsNoticeManagementController extends BaseController {
 	@RequestMapping(value = "/tolist", method = RequestMethod.GET)
 	public ModelAndView tolistPage(HttpServletRequest req,Integer pageSize, Integer pageNumber, Boolean isHot) {
 		ModelAndView modelAndView = new ModelAndView();
-		Map<String, Object> adInfo = homeService.getPageAdInfo("pc信息快报和遴选公告列表 ");
+		Map<String, Object> adInfo = homeService.getPageAdInfo("信息快报和遴选公告列表 ");
 		String materialId=req.getParameter("materialId");
 		modelAndView.addObject("adInfo", adInfo);
 		modelAndView.addObject("materialId", materialId);
@@ -103,14 +103,14 @@ public class CmsNoticeManagementController extends BaseController {
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	@ResponseBody
-	public List<CmsNoticeList> list(HttpServletRequest req,Integer pageSize, Integer pageNumber, Integer order) {
+	public List<CmsNoticeList> list(HttpServletRequest req,Integer pageSize, Integer pageNumber, Integer order,String noticeName) {
 		Long userid=0L;
 		Map<String,Object> usermap=getUserInfo();
 		String materialId=req.getParameter("materialId");
 		if(usermap !=null){
 			userid=Long.valueOf(usermap.get("id").toString());
 		}
-		List<CmsNoticeList> cmsNoticeList =  cmsNoticeManagementService.list(pageSize, pageNumber, order,userid,materialId);
+		List<CmsNoticeList> cmsNoticeList =  cmsNoticeManagementService.list(pageSize, pageNumber, order,userid,materialId,noticeName);
 		if(cmsNoticeList!=null && cmsNoticeList.size()>0){
 			for (CmsNoticeList cmsNotice : cmsNoticeList) {
 				Content content = contentService.get(cmsNotice.getMid());

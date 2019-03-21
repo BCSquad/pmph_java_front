@@ -459,8 +459,21 @@
 						<img class="cupline" alt=""
 							src="<%=path%>/statics/image/_cupline.jpg" />
 						<div class="submit_btn_wrapper">
-							<button class="btn-2" onclick="return submitValidate()" <%-- <c:if test="${(showWriterUserCertification.progress==1 || showWriterUserCertification.progress == 3)}">style = "display:none;"</c:if> --%> 
-							>提交</button>
+
+								 <c:if test="${showWriterUserCertification.progress==0}">
+									 <button class="btn-2" onclick="return submitValidate()" <%-- <c:if test="${(showWriterUserCertification.progress==1 || showWriterUserCertification.progress == 3)}">style = "display:none;"</c:if> --%>
+									 >
+									 提交
+									 </button>
+								 </c:if>
+								<c:if test="${showWriterUserCertification.progress!=0 && showWriterUserCertification.progress!=1}">
+							<button class="btn-2" onclick="return submitValidate()" <%-- <c:if test="${(showWriterUserCertification.progress==1 || showWriterUserCertification.progress == 3)}">style = "display:none;"</c:if> --%>
+							>
+									重新提交
+							</button>
+								</c:if>
+
+
 						</div>
 					</form>
 				</div>

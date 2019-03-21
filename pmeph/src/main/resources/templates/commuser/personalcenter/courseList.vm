@@ -1,0 +1,33 @@
+#set($countNum =$!{startNum})
+#foreach($c in $!{List_map})
+<tr>
+    <td>$countNum</td>
+    <td>
+        $c.name
+    </td>
+    <td>$!{c.note}</td>
+    <td>$!{c.gmtCreate}</td>
+    <td>$!{c.beginDateStr}</td>
+    <td>$!{c.endDateStr}</td>
+    <td>$!{c.status}</td>
+    <td>
+        #if(!$c.published)
+            <a class="not-like-an-a course-handler" href="javascript:course_detail($c.id)" >修改</a>
+            <a class="not-like-an-a course-handler" href="javascript:courseStatusModify($c.id,'$c.name',null,true)">删除</a>
+        #else
+            <a class="not-like-an-a course-handler" href="javascript:course_detail($c.id)">查看</a>
+        #end
+        #if($c.published && !$c.orderPlaced && !$c.paid)
+            <a class="not-like-an-a course-handler" href="javascript:courseStatusModify($c.id,'$c.name',false)">撤回</a>
+        #end
+        <a class="not-like-an-a course-handler" href="javascript:course_copy($c.id)">复制新增</a>
+        #if($c.published)
+        <a class="not-like-an-a course-handler" href="javascript:course_code($c.id,'$c.name')">二维码</a>
+        #end
+    </td>
+
+</tr>
+
+    #set($countNum = $countNum + 1)
+
+#end

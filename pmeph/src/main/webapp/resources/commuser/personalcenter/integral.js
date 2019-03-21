@@ -6,7 +6,7 @@ var pageSize = 10; /* size */
 $(function() {
     	//积分筛选
         $('#sele').selectlist({
-            zIndex: 10,
+            zIndex: 100,
             width: 80,
             height: 20,
             optionHeight: 20,
@@ -86,6 +86,7 @@ function getData(offset, size) {
 				}
 			});
 }
+
 
 
 //查询三个月内的积分

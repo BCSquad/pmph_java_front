@@ -378,6 +378,7 @@ public class MaterialSurveyController extends BaseController {
     public List<Map<String,Object>> querySearchByTextbookId(HttpServletRequest request){
         String textbook_id=request.getParameter("textbook_id");
         textbook_id = textbook_id.replaceAll("[\\[|\\]|\\{|\\}|\"]","");
+        textbook_id = "0" +(StringUtil.notEmpty(textbook_id)?",":"")+textbook_id;
         textbook_id = "(" + textbook_id + ")";
         Map<String, Object> user=getUserInfo();
 

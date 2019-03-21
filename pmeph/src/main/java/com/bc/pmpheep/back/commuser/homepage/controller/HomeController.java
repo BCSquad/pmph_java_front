@@ -349,7 +349,8 @@ public class HomeController extends BaseController{
         String returncode="";
         ModelAndView modelAndView=new ModelAndView();
         String state=request.getParameter("state");
-        List<Map<String,Object>> list=homeService.quertProductByType(state);
+        String id=request.getParameter("product_id");
+        List<Map<String,Object>> list=homeService.quertProductByType(state,id);
         if(list!=null && list.size()>0){
             returncode="OK";
         }else{
@@ -363,7 +364,8 @@ public class HomeController extends BaseController{
     public ModelAndView toproductdetail(HttpServletRequest request){
         ModelAndView modelAndView=new ModelAndView();
         String state=request.getParameter("state");
-        List<Map<String,Object>> list=homeService.quertProductByType(state);
+        String id=request.getParameter("product_id");
+        List<Map<String,Object>> list=homeService.quertProductByType(state,id);
         //取出申报通知扫描图片
         List<Map<String,Object>> list_scanimg=new ArrayList<>();
         List<Map<String,Object>> list_unscanimg=new ArrayList<>();

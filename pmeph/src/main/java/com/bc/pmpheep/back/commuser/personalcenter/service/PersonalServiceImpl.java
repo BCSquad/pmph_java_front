@@ -9,6 +9,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.bc.pmpheep.back.commuser.collection.dao.BookCollectionDao;
+import com.bc.pmpheep.back.commuser.materialdec.dao.MaterialDetailDao;
+import com.bc.pmpheep.back.commuser.materialdec.dao.PersonInfoDao;
+import com.bc.pmpheep.back.util.StringUtil;
+import com.bc.pmpheep.utils.UUIDTool;
 import org.apache.commons.collections.MapUtils;
 import org.apache.ibatis.javassist.expr.Instanceof;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +43,12 @@ public class PersonalServiceImpl implements PersonalService {
 	private ContentService contentService;
 
 	@Autowired
+	private PersonInfoDao personInfoDao;
+
+	@Autowired
+	private MaterialDetailDao madd;
+
+	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.articlepage.service.ArticleSearchService")
 	private ArticleSearchService articleSearchService;
 
@@ -46,7 +56,7 @@ public class PersonalServiceImpl implements PersonalService {
 	@Qualifier("com.bc.pmpheep.general.service.FileService")
 	FileService fileService;
 
-
+	
 
 	@Override
 	public List<PersonalNewMessage> queryMyCol(Map<String, Object> permap) {
@@ -609,6 +619,252 @@ public class PersonalServiceImpl implements PersonalService {
 	public int queryMyBookFeedBackCount(PageParameter<Map<String, Object>> pageParameter) {
 		Integer count = personaldao.queryMyBookFeedBackCount(pageParameter);
 		return count;
+	}
+
+    @Override
+    public Map<String, Object> savePerInfo(Map<String, Object> perMap, List<Map<String, Object>> tssbList, List<Map<String, Object>> stuList, List<Map<String, Object>> workList, List<Map<String, Object>> steaList, List<Map<String, Object>> zjxsList, List<Map<String, Object>> jcbjList, List<Map<String, Object>> gjkcjsList, List<Map<String, Object>> gjghjcList, List<Map<String, Object>> jcbxList, List<Map<String, Object>> zjkyList, List<Map<String, Object>> zjkzqkList, Map<String, Object> achievementMap, List<Map<String, Object>> monographList, List<Map<String, Object>> publishList, List<Map<String, Object>> sciList, List<Map<String, Object>> clinicalList, List<Map<String, Object>> acadeList, List<Map<String, Object>> pmphList, Map<String, Object> digitalMap, Map<String, Object> intentionlMap) {
+		
+		//获取userid
+		String user_id = perMap.get("user_id").toString();
+		
+		//根据填写的专家信息对应更新个人资料，
+		this.madd.updateWriter(perMap);
+
+		/**
+		 * 清除
+		 */
+		if(StringUtil.notEmpty(user_id)){
+			personInfoDao.DelPerStu(perMap);
+			personInfoDao.DelPerWork(perMap);
+			personInfoDao.DelPerStea(perMap);
+			personInfoDao.DelPerZjxs(perMap);
+			personInfoDao.DelPerJcbj(perMap);
+			personInfoDao.DelPerGjkcjs(perMap);
+			personInfoDao.DelPerGjghjc(perMap);
+			personInfoDao.DelPerJcbx(perMap);
+			personInfoDao.DelPerZjkyqk(perMap);
+			personInfoDao.DelPerAchievement(perMap);
+			personInfoDao.DelPerMonograph(perMap);
+			personInfoDao.DelPerPublish(perMap);
+			personInfoDao.DelPerSci(perMap);
+			personInfoDao.DelPerClinicalreward(perMap);
+			personInfoDao.DelPerAcadereward(perMap);
+			personInfoDao.DelPerRwsjc(perMap);
+		}
+		
+		//3.作家学习经历新增
+		if (stuList != null && !stuList.isEmpty()) {
+			for (Map<String, Object> map : stuList) {
+					String per_id = UUIDTool.getUUID();
+					if(false){
+						this.personInfoDao.updatePerStu(map);
+					}else{
+						map.put("user_id", user_id);
+						map.put("per_id", per_id);
+						this.personInfoDao.insertPerStu(map);
+					}
+			}
+		}
+		//4.作家工作经历新增
+		if (workList != null && !workList.isEmpty()) {
+			for (Map<String, Object> map : workList) {
+					String per_id = UUIDTool.getUUID();
+					if(false){
+						this.personInfoDao.updatePerWork(map);
+					}else {
+						map.put("user_id", user_id);
+						map.put("per_id", per_id);
+						this.personInfoDao.insertPerWork(map);
+					}
+
+			}
+		}
+		//5.作家教学经历新增
+		if (steaList != null && !steaList.isEmpty()) {
+			for (Map<String, Object> map : steaList) {
+					String per_id = UUIDTool.getUUID();
+					if(false){
+						this.personInfoDao.updatePerStea(map);
+					}else {
+						map.put("user_id", user_id);
+						map.put("per_id", per_id);
+						this.personInfoDao.insertPerStea(map);
+					}
+			}
+		}
+		//6.作家兼职学术新增
+		if (zjxsList != null && !zjxsList.isEmpty()) {
+			for (Map<String, Object> map : zjxsList) {
+					String per_id = UUIDTool.getUUID();
+					if(false){
+						this.personInfoDao.updatePerZjxs(map);
+					}else {
+						map.put("user_id", user_id);
+						map.put("per_id", per_id);
+						this.personInfoDao.insertPerZjxs(map);
+					}
+			}
+		}
+		//7.上套教材参编新增
+		if (jcbjList != null && !jcbjList.isEmpty()) {
+			for (Map<String, Object> map : jcbjList) {
+					String per_id = UUIDTool.getUUID();
+					if(false){
+						this.personInfoDao.updatePerJcbj(map);
+					}else {
+						map.put("user_id", user_id);
+						map.put("per_id", per_id);
+						this.personInfoDao.insertPerJcbj(map);
+					}
+			}
+		}
+		//8.精品课程建设新增
+		if (gjkcjsList != null && !gjkcjsList.isEmpty()) {
+			for (Map<String, Object> map : gjkcjsList) {
+					String per_id = UUIDTool.getUUID();
+					if(false){
+						this.personInfoDao.updatePerGjkcjs(map);
+					}else {
+						map.put("user_id", user_id);
+						map.put("per_id", per_id);
+						this.personInfoDao.insertPerGjkcjs(map);
+					}
+			}
+		}
+		//9.主编国家级规划教材新增
+		if (gjghjcList != null && !gjghjcList.isEmpty()) {
+			for (Map<String, Object> map : gjghjcList) {
+					String per_id = UUIDTool.getUUID();
+					if(false){
+						this.personInfoDao.updatePerGjghjc(map);
+					}else {
+						map.put("user_id", user_id);
+						map.put("per_id", per_id);
+						this.personInfoDao.insertPerGjghjc(map);
+					}
+			}
+		}
+		//10.作家教材编写新增
+		if (jcbxList != null && !jcbxList.isEmpty()) {
+			for (Map<String, Object> map : jcbxList) {
+					String per_id = UUIDTool.getUUID();
+					if(false){
+						
+						this.personInfoDao.updatePerJcbx(map);
+					}else {
+						map.put("user_id", user_id);
+						map.put("per_id", per_id);
+						this.personInfoDao.insertPerJcbx(map);
+					}
+			}
+		}
+		//11.作家科研情况新增
+		if (zjkyList != null && !zjkyList.isEmpty()) {
+			for (Map<String, Object> map : zjkyList) {
+					String per_id = UUIDTool.getUUID();
+					if(false){
+						this.personInfoDao.updatePerZjkyqk(map);
+					}else {
+						map.put("user_id", user_id);
+						map.put("per_id", per_id);
+						this.personInfoDao.insertPerZjkyqk(map);
+					}
+			}
+		}
+
+		//13.个人成就新增
+		if (achievementMap != null && !achievementMap.isEmpty()) {
+			String per_id = UUIDTool.getUUID();
+			if(false){//(achievementMap.get("grcj_id") != null && !"".equals(achievementMap.get("grcj_id"))){
+				this.personInfoDao.updatePerAchievement(achievementMap);
+			}else{
+				achievementMap.put("user_id", user_id);
+				achievementMap.put("per_id", per_id);
+				this.personInfoDao.insertPerAchievement(achievementMap);
+			}
+		}
+		//14.主编学术专著新增
+		if (monographList != null && !monographList.isEmpty()) {
+			for (Map<String, Object> map : monographList) {
+					String per_id = UUIDTool.getUUID();
+					if(false){
+						this.personInfoDao.updatePerMonograph(map);
+					}else {
+						map.put("user_id", user_id);
+						map.put("per_id", per_id);
+						this.personInfoDao.insertPerMonograph(map);
+					}
+			}
+		}
+		//15.出版行业获奖情况新增
+		if (publishList != null && !publishList.isEmpty()) {
+			for (Map<String, Object> map : publishList) {
+					String per_id = UUIDTool.getUUID();
+					if(false){
+						this.personInfoDao.updatePerPublish(map);
+					}else {
+						map.put("user_id", user_id);
+						map.put("per_id", per_id);
+						this.personInfoDao.insertPerPublish(map);
+					}
+			}
+		}
+		//16.SCI论文投稿及影响因子新增
+		if (sciList != null && !sciList.isEmpty()) {
+			for (Map<String, Object> map : sciList) {
+					String per_id = UUIDTool.getUUID();
+					if(false){
+						this.personInfoDao.updatePerSci(map);
+					}else {
+						map.put("user_id", user_id);
+						map.put("per_id", per_id);
+						this.personInfoDao.insertPerSci(map);
+					}
+			}
+		}
+		//17.临床医学获奖情况新增
+		if (clinicalList != null && !clinicalList.isEmpty()) {
+			for (Map<String, Object> map : clinicalList) {
+					String per_id = UUIDTool.getUUID();
+					if(false){
+						this.personInfoDao.updatePerClinicalreward(map);
+					}else {
+						map.put("user_id", user_id);
+						map.put("per_id", per_id);
+						this.personInfoDao.insertPerClinicalreward(map);
+					}
+			}
+		}
+		//18.作家学术荣誉新增
+		if (acadeList != null && !acadeList.isEmpty()) {
+			for (Map<String, Object> map : acadeList) {
+					String per_id = UUIDTool.getUUID();
+					if(false){
+						this.personInfoDao.updatePerAcadereward(map);
+					}else {
+						map.put("user_id", user_id);
+						map.put("per_id", per_id);
+						this.personInfoDao.insertPerAcadereward(map);
+					}
+			}
+		}
+		//19.人卫社教材编写新增
+		if (pmphList != null && !pmphList.isEmpty()) {
+			for (Map<String, Object> map : pmphList) {
+					String per_id = UUIDTool.getUUID();
+					if(false){
+						this.personInfoDao.updatePerRwsjc(map);
+					}else {
+						map.put("user_id", user_id);
+						map.put("per_id", per_id);
+						this.personInfoDao.insertPerRwsjc(map);
+					}
+			}
+		}
+
+		Map<String,Object> returnMap = new HashMap<String,Object>();
+		returnMap.put("msg","OK");
+		return returnMap;
 	}
 
 

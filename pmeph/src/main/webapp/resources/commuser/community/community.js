@@ -13,7 +13,7 @@ $(function () {
         }
     });
     $('select').selectlist({
-        zIndex: 10,
+        zIndex: 100,
         width: 110,
         height: 30,
         optionHeight: 30,
@@ -76,7 +76,7 @@ function comments(id){
 			  $.each(json.result,function(i,n){
 				  html+='<li style="margin-bottom:10px">'+
 	              '<div class="video-c">'+
-	                 '<div class="videou" id="videou'+n.id+'" src="http://'+remoteUrl+'/v/play/'+n.file_name+'" style="width:230px;height:184px" controls type="mp4"'+
+	                 '<div class="videou" id="videou'+n.id+'" src="http://'+remoteVideoUrl+'/v/play/'+n.file_name+'" style="width:230px;height:184px" controls type="mp4"'+
 	              'poster="'+contextpath+'image/'+n.cover+'.action"></div>'+
 	              '</div>'+
 	              '<div class="video-d" >'+

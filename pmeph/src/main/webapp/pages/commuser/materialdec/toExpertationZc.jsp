@@ -38,7 +38,7 @@
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="body">
     <div class="content-wrapper">
-        <div style="color: red;font-size: 16px;margin-top: 28px;">（提示：为确保填写成功，请用360极速浏览器或谷歌浏览器）</div>
+        <div style="color: red;font-size: 16px;margin-top: 28px;">（提示：为确保填写成功，请用360极速浏览器或谷歌浏览器，请使用本人账号登录进行申报，否则可能会影响遴选结果）</div>
         <div class="sbxq_title">
             <span><a style="text-decoration: none;color: #999999;"
                      href="${ctx}/personalhomepage/tohomepage.action?pagetag=dt">个人中心</a> ><a
@@ -63,16 +63,16 @@
                     <table class="tab_1">
                         <tr>
                             <td><span class="btbs">*</span><span>姓&emsp;&emsp;名：</span>
-                                <input class="cg_input" name="realname" id="realname" value="${gezlList.realname}" maxlength="20"/>
+                                <input class="cg_input" disabled name="realname" id="realname" value="${gezlList.realname}" maxlength="20"/>
                                 <input class="cg_input" name="user_id" type="hidden" value="${userMap.id}" />
                             </td>
                             <td><span class="btbs">*</span><span>性&emsp;&emsp;别：</span>
-                                <select class="select-input" id="sex" name="sex">
+                                <select class="select-input" disabled id="sex" name="sex">
                                     <option value="1" ${gezlList.sex=='1'?'selected':'' }>男</option>
                                     <option value="2" ${gezlList.sex=='2'?'selected':'' }>女</option>
                                 </select></td>
                             <td><span class="btbs">*</span><span>出生年月：</span>
-                                <input class="cg_input" calendar format="'yyyy-mm-dd'"  name="birthday" value="${gezlList.birthday}"  id="birthday"  /></td>
+                                <input class="cg_input" disabled calendar format="'yyyy-mm-dd'"  name="birthday" value="${gezlList.birthday}"  id="birthday"  /></td>
                             <td><span class="btbs">*</span><span>工作单位：</span>
                                 <input class="cg_input" name="org_name" value="${gezlList.org_name}" id="org_name"  maxlength="36"/></td>
                         </tr>
@@ -81,7 +81,10 @@
                                 <input class="cg_input" name="position" value="${gezlList.position}" id="position"  maxlength="36"/></td>
                             <td><span class="btbs">*</span><span>职&emsp;&emsp;称：</span>
                                 <select id="zclx" name="title">
-                                    <option value="院士" ${gezlList.title=='院士'?'selected':'' }>院士</option>
+                                    <c:forEach items="${writerUserTitle}" var="dic">
+                                        <option value="${dic.code}" ${gezlList.title == dic.code ? 'selected':''}>${dic.name}</option>
+                                    </c:forEach>
+                                    <%--<option value="院士" ${gezlList.title=='院士'?'selected':'' }>院士</option>
                                     <option value="教授"  ${gezlList.title=='教授'?'selected':'' }>教授</option>
                                     <option value="正高"  ${gezlList.title=='正高'?'selected':'' }>正高</option>
                                     <option value="副教授" ${gezlList.title=='副教授'?'selected':'' }>副教授</option>
@@ -91,7 +94,7 @@
                                     <option value="主任药师" ${gezlList.title=='主任药师'?'selected':'' }>主任药师</option>
                                     <option value="副主任药师" ${gezlList.title=='副主任药师'?'selected':'' }>副主任药师</option>
                                     <option value="主管药师" ${gezlList.title=='主管药师'?'selected':'' }>主管药师</option>
-                                    <option value="其他" ${gezlList.title=='其他'?'selected':'' }>其他</option>
+                                    <option value="其他" ${gezlList.title=='其他'?'selected':'' }>其他</option>--%>
                                 </select></td>
                             <td><span>&ensp;联系电话：</span>
                                 <input class="cg_input" name="telephone" value="${gezlList.telephone}" id="telephone"
@@ -114,14 +117,17 @@
                                     <option value="2" ${gezlList.idtype=='2'?'selected':'' }>军官证</option>
                                 </select></td>
                             <td><span class="btbs">*</span><span>证件号码：</span>
-                                <input class="cg_input" name="idcard" value="${gezlList.idcard}" id="idcard"  maxlength="18"/></td>
+                                <input class="cg_input" disabled name="idcard" value="${gezlList.idcard}" id="idcard"  maxlength="18"/></td>
                             <td><span class="btbs">*</span><span>学&emsp;&emsp;历：</span>
                                 <select id="education" name="education">
-                                    <option value="0" ${gezlList.education=='0'?'selected':'' }>专科</option>
+                                    <c:forEach items="${writerUserDegree}" var="dic">
+                                        <option value="${dic.code}" ${gezlList.education==dic.code?'selected':'' }>${dic.name}</option>
+                                    </c:forEach>
+                                    <%--<option value="0" ${gezlList.education=='0'?'selected':'' }>专科</option>
                                     <option value="1" ${gezlList.education=='1'?'selected':'' }>本科</option>
                                     <option value="2" ${gezlList.education=='2'?'selected':'' }>硕士</option>
                                     <option value="4" ${gezlList.education=='4'?'selected':'' }>博士</option>
-                                    <option value="3" ${gezlList.education=='3'?'selected':'' }>博士后</option>
+                                    <option value="3" ${gezlList.education=='3'?'selected':'' }>博士后</option>--%>
                                 </select></td>
                         </tr>
                         <tr>

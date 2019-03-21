@@ -39,7 +39,7 @@ public class writerListExcelImpl implements ExcelDownloadService {
     }
 
     @Override
-    public String[][] getColTitle() {
+    public String[][] getColTitle(Map<String, Object> param) {
         return new String[][]{{"姓名","realname"},{"性别","sex"},{"手机号","handphone"},{"邮箱","email"},{"工作单位","workplace"},{"职务","position"},{"职称","title"}};
     }
 

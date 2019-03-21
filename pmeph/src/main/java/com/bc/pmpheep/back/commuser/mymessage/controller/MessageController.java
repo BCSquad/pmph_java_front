@@ -101,8 +101,39 @@ public class MessageController extends BaseController {
     }
 
     //查询更多申请列表
-    @RequestMapping(value = "/loadMoreApply")
+    @RequestMapping(value = "/applyMessageCount")
     @ResponseBody
+    public Map<String, Object> getApplyMessageCount() {
+        Map<String, Object> userInfo = getUserInfo();
+        Map<String,Object> map=new HashMap<>();
+
+        Map<String, Object> paraMap = new HashMap<String, Object>();
+        Long userId = new Long(String.valueOf(userInfo.get("id")));
+        paraMap.put("condition", "2");
+        paraMap.put("userId", userId);
+        int nodealcount = noticeMessageService.selectSysMessageTotalCount(paraMap);
+        map.put("nodealcount",nodealcount);
+        return map;
+    }
+
+
+    @RequestMapping(value = "/getMessageCount")
+    @ResponseBody
+    public Map<String, Object> getMessageCount() {
+        Map<String, Object> userInfo = getUserInfo();
+        Map<String,Object> map=new HashMap<>();
+
+        Map<String, Object> paraMap = new HashMap<String, Object>();
+        Long userId = new Long(String.valueOf(userInfo.get("id")));
+        paraMap.put("userId", userId);
+        paraMap.put("is_read", "0");
+        int nodealcount = noticeMessageService.selectNoticeMessageTotalCount(paraMap);
+        map.put("nodealcount",nodealcount);
+        return map;
+    }
+
+
+
     public List<Map<String, Object>> loadMoreApply(HttpServletRequest request) {
         String condition = request.getParameter("condition");
         String para = request.getParameter("startPara");

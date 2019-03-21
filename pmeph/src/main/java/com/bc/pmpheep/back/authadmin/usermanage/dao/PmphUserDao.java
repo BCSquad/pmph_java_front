@@ -2,6 +2,8 @@ package com.bc.pmpheep.back.authadmin.usermanage.dao;
 
 import com.bc.pmpheep.back.authadmin.usermanage.bean.PmphUser;
 
+import java.util.List;
+
 /**
  * 
  * 
@@ -30,4 +32,7 @@ public interface PmphUserDao {
 	 *
 	 */
 	PmphUser get(Long id);
+
+	//获取系统管理员的对象
+	List<PmphUser> getPmphUserByRole();
 }

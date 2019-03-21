@@ -200,12 +200,30 @@ color:#FFF;
 }
 
 #jftb {
-    background-image: url(../../image/jifeng.png);
-    background-position: 0px 4px;
+     background-image: url(../../image/jifeng.png);
+     background-position: 0px 4px;
+     height: 20px;
+     width: 16px;
+     background-repeat: no-repeat;
+     float: left;
+ }
+
+#sbxx {
+    background-image: url(../../image/a1.png);
     height: 20px;
-    width: 16px;
+    width: 20px;
     background-repeat: no-repeat;
     float: left;
+    background-size: 100%;
+}
+
+#kcxs {
+    background-image: url(../../image/course.png);
+    height: 20px;
+    width: 20px;
+    background-repeat: no-repeat;
+    float: left;
+    background-size: 100%;
 }
 
 .grsx {
@@ -1180,7 +1198,7 @@ width: 76px;
 
 .rshang {
     width: 287px;
-    height: 70px;
+    height: 87px;
 }
 
 .rxia {
@@ -1190,15 +1208,30 @@ width: 76px;
 
 .rshangn {
     width: 253px;
-    max-height: 71px;
-    overflow:hidden;
+    height: 2.5em;
+    overflow: hidden;
     text-align: left;
     font-size: 18px;
     color: #333333;
-    margin-top: 30px;
+    margin-top: 15px;
     margin-right: 18px;
-    margin-bottom: 19px;
+    /* margin-bottom: 19px; */
     margin-left: 18px;
+}
+
+.editPro{
+    display: block;
+    padding: 0px 7px;
+    /* width: 8em; */
+    font-size: 14px;
+    height: 24px;
+    line-height: 24px;
+    background-color: #5aaf98;
+    color: #ffffff;
+    border-radius: 5px;
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
 }
 
 .rxian {
@@ -1532,4 +1565,31 @@ color: #bcbcbc;
 	font-weight: 700;
 	
 }
-    
+
+.bmcjan5 {
+    width: 112px;
+    height: 33px;
+    font-size: 14px;
+    color: #ffffff;
+    text-align: center;
+    margin: auto;
+    margin-top: 4px;
+    margin-bottom: 0px;
+    background-color: #5aaf98;
+    border-radius: 18px;
+    line-height: 33px;
+    float: left;
+    margin-left: 12px;
+}
+
+.bmcjan6 {
+    float: right;
+    width: 60px;
+    background-color: #d5d5d5;
+    padding: 0px 5px;
+    color: #9999a9;
+    font-size: 14px;
+    border-radius: 5px;
+    /* margin-top: 10px; */
+    margin-right: 10px;
+}

@@ -564,6 +564,10 @@ jQuery.fn.extend({
                     });
                     $clear.click(function (e) {
                         $this.val("");
+                        //取消时间 应该激活改变事件 以使其他依赖于当前改变的calendar的其他calendar刷新上下限
+                        $this.trigger("timeChange");
+                        //同时出发tipso的改变事件 激发其校验
+                        $this.trigger("change.tipso");
                         $this.text("");
                         $("#" + c.controlId).height(0);
                         $("#" + c.controlId).hide();
@@ -682,6 +686,7 @@ $(function () {
                 var that = this;
                 $(ele).on('timeChange', function (event, val) {
                     calendar = $(that).data("calendar-id");
+                    //console.log("1max "+val);
                     calendar.upperLimit = val;
                     calendar.refresh();
                 });
@@ -690,6 +695,7 @@ $(function () {
                 var that = this;
                 $(ele).on('timeChange', function (event, val) {
                     calendar = $(that).data("calendar-id");
+                    //console.log("2min"+val);
                     calendar.lowerLimit = val;
                     calendar.refresh();
                 });
@@ -702,6 +708,7 @@ $(function () {
                 var that = this;
                 $(ele).on('timeChange', function (event, val) {
                     calendar = $(that).data("calendar-id");
+                    //console.log(val);
                     calendar.lowerLimit = val;
                     calendar.refresh();
                 });

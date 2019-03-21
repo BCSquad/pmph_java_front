@@ -280,9 +280,8 @@ LIMIT 0,10
 				 from material_type 
 				where id = cast(#{type} as decimal(9,2)))
 	        ),'-',-1) = #{type}
-		where b.is_on_sale = 1
-		ORDER BY
-		b.sales DESC limit 0,6 
+	   where b.is_on_sale = 1 and b.is_sell_well=1
+	   ORDER BY b.sort_sell_well  limit 0,6
   </select>
     <!-- 查询书籍分类-->
     <select id="queryBookType" parameterType="map" resultMap="Mapresult">
@@ -467,6 +466,23 @@ LIMIT 0,10
 				and p.is_deleted=0 and p.is_published=1 
 		   order BY p.gmt_set_active DESC
 	</select>
+	<!--根据产品类型查询详情-->
+	<select id="quertProductById" parameterType="java.util.Map" resultType="java.util.Map">
+		select
+			p.note,p.description,p.is_published,p.product_type,p.product_name
+				,p.id as product_id
+				,p.is_new
+				,p.actualDeadline
+				,date_format(now(),'%Y-%m-%d') &lt;= p.actualDeadline as notEnd
+				,pa.*
+		from product_attachment pa
+				 right JOIN product p on p.id=pa.product_id
+		where
+
+			p.id=#{id}
+		  and p.is_deleted=0 and p.is_published=1
+		order BY p.gmt_set_active DESC
+	</select>
 
 	<!-- 查询首页师资培训,取最新三条数据 -->
 	<select id="Queryszpt" parameterType="java.util.Map" resultType="java.util.Map">
@@ -475,5 +491,18 @@ LIMIT 0,10
               left join cms_content b on b.id = t.info_express_cms_id
               where  t.is_deleted=0 and t.status=1
               order by t.is_set_top desc,t.gmt_set_top desc,t.gmt_create desc limit 0,3
+	</select>
+
+	<select id="getSearchKeyWords" parameterType="Integer" resultType="String">
+		select word from search_keyword
+		where is_disabled = 0 and is_deleted = 0
+		order by sort asc
+		limit 0,#{num}
+	</select>
+
+	<select id="getSearchKeyWordsAll"  resultType="String">
+		select word from search_keyword
+		where is_disabled = 0 and is_deleted = 0
+		order by sort asc
 	</select>
 </mapper>

@@ -38,7 +38,9 @@ public enum FileType {
     /**
      * 机构用户委托书
      */
-    ORGUSER_PIC("机构用户委托书");
+    ORGUSER_PIC("机构用户委托书"),
+
+    BOOKVEDIO_CONER("CMS广告图片");
 
     private final String type;
 
