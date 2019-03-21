@@ -234,15 +234,13 @@ input.input{
 .btn {
     width: 80px;
     text-align: center;
-    padding-left: 11.5px;
     height: 33px;
     margin: 0px 15px 0px 15px;
-    /* background-color: #1898dd; */
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
     line-height: 0px;
-    letter-spacing: 5px;
+    letter-spacing: 1px;
     color: #ffffff;
     border: none;
     outline: none;
@@ -258,8 +256,16 @@ input.input{
     background-color: rgba(22, 155, 213, 1);
 }
 
+button.btn.order {
+    background-color: indianred;
+}
+
 button.btn-confirm {
     background-color: #12c09c;
+}
+
+button.btn.print {
+    background-color: cornflowerblue;
 }
 
 textarea.courseBookNote{

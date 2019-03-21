@@ -128,6 +128,11 @@
                     	<img src="$!{contextpath}statics/image/tuihui.png" title="退回原因：$!{c.return_cause}">
                     #end
                    </div>
+                    #if( $!{c.datebase}>0 && ( $!{c.is_all_textbook_published}==true|| $!{c.is_force_end}==true))
+                        <a class="abmcj" href="$!{contextpath}progress/listEditProgress.action?materialId=$!{c.material_id}&materialName=$!{c.material_name}">
+                            <div class="editPro" >编写进度</div>
+                        </a>
+                    #end
                 </div>
                 <div class="rxia">
                     <div class="rxian">截止日期：$!{c.age_deadline}</div>

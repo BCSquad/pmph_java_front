@@ -45,6 +45,14 @@
 		LEFT JOIN writer_user AS u ON p.user_id = u.id 
 		where  p.user_id=#{userId}
 	</select>
+	<select id="findPointExchange" resultType="java.util.Map"
+			parameterType="java.util.Map">
+		SELECT
+			 p.*
+		FROM
+			writer_point_rule AS p
+		where  p.rule_code=#{rule_code}
+	</select>
 
 	<!--查询筛选积分记录数据 -->
 	<select id="findPointByMonth" resultType="java.util.Map"
@@ -77,4 +85,34 @@
 	   
 	</select>
 
+	<!-- 积分规则表分页列表（同时查询分页数据和总条数）积分兑换规则 -->
+	<select id="listWriterPointRulePoint"  resultType="WriterPointRuleVO">
+		SELECT
+			*
+		FROM
+			writer_point_rule
+		where is_exchange=false
+	</select>
+
+	<!-- 积分规则表分页列表（同时查询分页数据和总条数）积分兑换规则 -->
+	<select id="findWrterPointRulePointByRuleCode"  parameterType="string" resultType="WriterPointRuleVO">
+		SELECT
+			*
+		FROM
+			writer_point_rule
+		where  rule_code like concat('%',#{rule_code},'%')
+	</select>
+
+	<update id="updateWriterPoint" parameterType="map">
+		 update writer_point set  total=#{total} ,loss=#{loss} where id = #{id}
+	</update>
+
+	<select id="findWriterPointByid" parameterType="Long" resultType="map">
+
+		 select *from  writer_point  where id = #{id}
+	</select>
+
+	<insert id="addPointlog" parameterType="map">
+		insert into  writer_point_log(user_id, rule_id, point )values (#{user_id},#{rule_id},#{point})
+	</insert>
 </mapper>

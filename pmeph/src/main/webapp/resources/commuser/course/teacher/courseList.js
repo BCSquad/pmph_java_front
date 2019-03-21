@@ -34,7 +34,7 @@ $(function(){
 //条件设定完成后查询的实现  点击查询 翻页 更换查询条件等都要先设定条件 不能直接调用此实现
 function queryMain(){
     data = {
-        pageNum:$("#page-num-temp").val(),
+        pageNumber:$("#page-num-temp").val(),
         pageSize:$("#page-size-select").find("input[name='page-size-select']").val(),
         name:$("#search-name-temp").val(),
         status:$("#select-search-status").find("input.select-button").val()
@@ -47,6 +47,7 @@ function queryMain(){
         dataType:'json',
         data:data,
         success:function(json){
+
             $("#zebra-table").html(json.html);
 
             if (json.html.trim() == "") {
@@ -60,10 +61,10 @@ function queryMain(){
                 $(".pagination").next("div").css("display","inline-block");
             }
             $('#page1').html("");
-            $("#totoal_count").html(json.totoal_count);
+            $("#totoal_count").html(Math.ceil(json.totoal_count/data.pageSize));
             //刷新分页栏
             Page({
-                num: json.totoal_count,					//页码数
+                num:Math.ceil(json.totoal_count/data.pageSize),					//页码数
                 startnum: $("#page-num-temp").val(),				//指定页码
                 elem: $('#page1'),
                 callback: function (n){     //点击页码后触发的回调函数
@@ -87,6 +88,7 @@ function queryBtnClick(){
  * 跳转到详情页 （修改/查看）
  */
 function course_detail(id) {
+    id = id?id:"";
     window.location.href = contextpath+'course/teacher/toCourseDetail.action?id='+id+'&t='+new Date().getTime();
 }
 
@@ -131,4 +133,20 @@ function courseStatusModify(id,name,published,deleted,orderPlaced,paid) {
             }
         })
     });
+}
+
+/**
+ * 打开二维码
+ * @param id
+ * @param name
+ */
+function course_code(id,name){
+    if($("#qrcode-dialog").css("display")=="none"){
+        $("#qrcode-dialog").show();
+    }
+    $("#qrcode-dialog .mistitle").html(name);
+    $("#qrcode").html("");
+    //TODO 这里填入移动端学生进入课程的地址
+    var code ='http://119.254.226.115/meduwx/course/student/toCourseDetail.action?id='+id;
+    $("#qrcode").qrcode(code);
 }

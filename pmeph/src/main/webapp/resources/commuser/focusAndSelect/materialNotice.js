@@ -19,6 +19,15 @@ var pageSize   = 10;
 var pageNumber = 1 ;
 var order;
 $(function(){
+
+
+    $("#wdsbssk").keyup(function(){
+        if(event.keyCode == 13){
+            search();
+        }
+    });
+
+
 	 $('#sort-wrapper').selectlist({
          zIndex: 100,
          width: 70,
@@ -39,10 +48,16 @@ $(function(){
 	
 	//加载更多
 	$("#loadMore").click(function(){
+
 		loadData();
 	});
 });
+function search(){
+    $("#content").html("");
+    pageNumber=1;
+    loadData();
 
+}
 function loadData(){
     $.ajax({
         type:'get',
@@ -54,7 +69,8 @@ function loadData(){
             pageNumber : pageNumber,
             pageSize   : pageSize,
             order      : order,
-            materialId:$("#materialId").val()
+            materialId:$("#materialId").val(),
+            noticeName:$("#wdsbssk").val()
         },
         success:function(responsebean){
             if(null != responsebean && responsebean.length >= 0){

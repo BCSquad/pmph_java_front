@@ -32,7 +32,7 @@ public class DeclareResultExcelService implements ExcelDownloadService {
     }
 
     @Override
-    public String[][] getColTitle() {
+    public String[][] getColTitle(Map<String, Object> param) {
         return new String[][]{{"书名", "textbook_name"}, {"主编名单", "zb"}, {"副主编名单", "fb"}, {"编委名单", "bw"},{"数字编委名单", "szbw"}};
     }
 

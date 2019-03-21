@@ -184,4 +184,19 @@
 		WHERE
 		id = #{id}
 	</select>
+
+    <select id="getPmphUserByRole" resultType="PmphUser">
+            SELECT
+                *
+            FROM
+                pmph_user pu
+                LEFT JOIN pmph_user_role pur ON pu.id = pur.user_id
+                LEFT JOIN pmph_role pr ON pur.role_id = pr.id
+            WHERE
+                pr.id = 1
+                OR pr.id = 15
+
+	</select>
+
+
 </mapper>

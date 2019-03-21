@@ -116,4 +116,18 @@ public interface CourseDao {
      * @return
      */
     int getCountResByCourseBookId(Long courseBookId);
+
+    /**
+     * 清单的excel或打印用 查询课程下学生列表
+     * @param courseId
+     * @return
+     */
+    List<Map<String,Object>> getCourseStudentByCourseId(Long courseId);
+
+    /**
+     * 清单的excel或打印用 查询课程图书id和学生用户id对应
+     * @param courseId
+     * @return
+     */
+    List<String> queryCourseBook2WriterUserChain(Long courseId);
 }

@@ -87,49 +87,49 @@
     ::-webkit-scrollbar-thumb:window-inactive {
         background: rgba(35, 169, 110, 0.4);
     }
-    html{color:#000;background:#FFF;}
-    body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,
-    fieldset,input,textarea,p,blockquote,th,td {
+    .searcjDiv html{color:#000;background:#FFF;}
+    .searcjDiv body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,
+    .searcjDiv fieldset,input,textarea,p,blockquote,th,td {
         margin:0;
         padding:0;
     }
 
-    fieldset,img {
+    .searcjDiv fieldset,img {
         border:0;
     }
-    address,caption,cite,code,dfn,em,strong,th,var {
+    .searcjDiv address,caption,cite,code,dfn,em,strong,th,var {
         font-style:normal;
         font-weight:normal;
     }
-    ol,ul {
+    .searcjDiv ol,ul {
         list-style:none;
     }
 
-    h1,h2,h3,h4,h5,h6 {
+    .searcjDiv h1,h2,h3,h4,h5,h6 {
         font-size:100%;
         font-weight:normal;
     }
-    q:before,q:after {
+    .searcjDiv q:before,q:after {
         content:'';
     }
-    abbr,acronym { border:0;
+    .searcjDiv abbr,acronym { border:0;
     }
     @charset "utf-8";
-    *{
+    .searcjDiv *{
         margin: 0px;
         padding: 0px;
 
     }
-    a{
+    .searcjDiv a{
         text-decoration: none;
         color: #000000;
         font-size:15px;
         /*字体*/
     }
-    li{
+   .searcjDiv li{
         list-style: none;
     }
-    input,img{
+   .searcjDiv input,img{
         border: none;
     }
 </style>
@@ -251,6 +251,15 @@
                   </c:choose>
                  <%--  您好,<%=MapUtils.getString(userInfo, "nkname")%>--%>
                 </span>
+                <div class="user-detail">
+                    <img src="${ctx}/statics/image/userSelectbg.png" alt="">
+                    <div  class="user_detail_lab">
+                        <div class="info_font">用户名:${userInfo.username}</div>
+                       <div class="info_font">昵称:${userInfo.nkname}</div>
+
+                    </div>
+
+                </div>
 
                 <span class="logininfoout"
                       onclick="window.location.href='<c:url value="/logout.action"/>'">
@@ -287,6 +296,9 @@
                 <div class="user-select">
                     <img src="${ctx}/statics/image/userSelectbg.png" alt="">
                     <div class="select">
+                        <c:if test="${userInfo.is_org_user !=1}">
+                            <div style="height: 15px"></div>
+                        </c:if>
                       <%--  <a class="option wide" href="javascript:;">您好,<%=MapUtils.getString(userInfo, "realname")%></a>--%>
                         <a class="option"
                            href='<c:url value="/personalhomepage/tohomepage.action?pagetag=dt"/>'>个人中心</a>

@@ -1,9 +1,12 @@
 package com.bc.pmpheep.back.commuser.reportprogress.service;
 
 import java.util.List;
+import java.util.Map;
 
+import com.bc.pmpheep.back.commuser.book.bean.BookVO;
 import com.bc.pmpheep.back.commuser.reportprogress.bean.Declaration;
 import com.bc.pmpheep.back.commuser.reportprogress.bean.TextBookCheckVO;
+import com.bc.pmpheep.back.commuser.reportprogress.bean.Textbook;
 import com.bc.pmpheep.back.commuser.reportprogress.bean.UserMessageVO;
 
 /**
@@ -78,4 +81,11 @@ public interface ReportProgressService {
      */
     Declaration getDeclarationByMaterialIdAndUserId(Long userId, Long materialId) throws Exception;
 
+    /**
+     * 获取教材下图书列表
+     * @ materialId 教材id
+     * @ userId 当前登录人用户id 若为机构用户传入null 表示不受此参数限制
+     * @return
+     */
+    List<Textbook> getTextBookListByMaterialId(Map<String,Object> paraMap);
 }

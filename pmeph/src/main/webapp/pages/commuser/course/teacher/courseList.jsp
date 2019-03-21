@@ -31,6 +31,7 @@
     <script src="<%=path%>/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
     <script src="<%=path%>/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
     <script src="<%=path%>/resources/comm/jquery/jquery.pager.js?t=${_timestamp}"></script>
+    <script src="<%=path%>/resources/comm/jquery/jquery.qrcode.min.js?t=${_timestamp}"></script>
     <script src="<%=path%>/resources/comm/base.js?t=${_timestamp}"></script>
     <script src="<%=path%>/resources/commuser/course/teacher/courseList.js?t=${_timestamp}"></script>
 
@@ -60,7 +61,6 @@
                             <option value="已发布">已发布</option>
                             <option value="已截止">已截止</option>
                             <option value="已下单">已下单</option>
-                            <option value="已付款">已付款</option>
                         </select>
                         <button id="btn-search" onclick="queryBtnClick()">查询</button>
                         <button id="btn-add" onclick="course_detail()">新增</button>
@@ -107,6 +107,30 @@
                         <button type="button" class="button">确定</button>
                     </div>
                 </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- 二维码悬浮框 -->
+    <div class="dialog" id="qrcode-dialog">
+        <div class="apache">
+            <div class="mistitle"></div>
+            <div class="xx" onclick="$('#qrcode-dialog').fadeOut(500);"></div>
+        </div>
+        <div class="info">
+            <div id = "qrcode">
+
+            </div>
+            <div class="qrcode-text">
+                此码为课程选书入口
+            </div>
+            <div class="qrcode-text">
+                可发送给需要选购教材的学生
+            </div>
+            <div class="btn-wrapper">
+                <button class="btn btn-cancle"  onclick="$('#qrcode-dialog').fadeOut(500);">关闭</button>
             </div>
 
         </div>

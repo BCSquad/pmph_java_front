@@ -49,8 +49,7 @@
 <input type="hidden" id="isNew" value="${isNew}">
 <input type="hidden" id="courseId" value="${course.id}">
 <input type="hidden" id="readOnly" value="${readOnly}">
-
-
+<input type="hidden" id="cartUrl" value="${_cartUrl}">
 
 
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
@@ -116,7 +115,7 @@
                         <th>ISBN</th>
                         <th>课程备注</th>
                         <c:if test="${course.published}">
-                            <th>订购数/人数</th>
+                            <th>订购数</th>
                         </c:if>
                         <th>操作</th>
                     </tr>
@@ -133,8 +132,7 @@
                                 </td>
                                 <c:if test="${course.published}">
                                     <td courseBookId="${courseBook.id}">
-                                        <span class="countRes" courseBookId="${courseBook.id}">${courseBook.countRes}</span>/
-                                        <span >${courseBook.countStu}</span>
+                                        <span class="countRes" courseBookId="${courseBook.id}">${courseBook.countRes}</span>
                                     </td>
                                 </c:if>
                                 <td>
@@ -168,7 +166,9 @@
                         <button class="btn save"  onclick="save(0)">保存</button>
                     </c:when>
                     <c:otherwise>
-                        <button class="btn save"  onclick="save(1)">保存</button>
+                        <button class="btn print"  onclick="toBill(1)">打印清单</button>
+                        <button class="btn order"  onclick="placeOrder(1)">确认下单</button>
+                        <button class="btn save"  onclick="save(1,1)">保存</button>
                     </c:otherwise>
                 </c:choose>
 

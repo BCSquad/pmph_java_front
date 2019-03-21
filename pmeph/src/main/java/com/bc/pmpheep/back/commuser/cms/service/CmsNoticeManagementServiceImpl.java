@@ -34,7 +34,7 @@ public class CmsNoticeManagementServiceImpl implements CmsNoticeManagementServic
 	CmsNoticeManagementDao cmsNoticeManagementDao;
 
 	@Override
-	public List<CmsNoticeList> list(Integer pageSize, Integer pageNumber, Integer order,Long userid,String materialId){
+	public List<CmsNoticeList> list(Integer pageSize, Integer pageNumber, Integer order,Long userid,String materialId,String noticeName){
 		if(null == pageSize || pageSize < 1){
 			pageSize =10 ;
 		}
@@ -48,6 +48,7 @@ public class CmsNoticeManagementServiceImpl implements CmsNoticeManagementServic
 		map.put("order", order);
 		map.put("userid", userid);
 		map.put("materialId", materialId);
+		map.put("noticeName",noticeName);
 		return  cmsNoticeManagementDao.list(map);
 	}
 

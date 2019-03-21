@@ -111,8 +111,11 @@ select tt.* from
 		        and p.id= #{userid}
 ) b left join declaration d on d.user_id = #{userid} and d.material_id=b.material_id
 	
-)tt
-ORDER BY
+)tt WHERE
+	1 = 1
+	and tt.title like  concat('%',#{noticeName},'%')
+
+ORDER BY auth_date DESC,tt.is_stick desc,
 		<if test="order == 0">
 			<!-- b.is_promote desc,b.sort_promote,
 			b.is_hot DESC,b.sort_hot,
@@ -126,6 +129,7 @@ ORDER BY
 		<if test="order == 2">
 			tt.jcount DESC
 		</if>
+
 		LIMIT #{start},#{pageSize} 
 </if>
 

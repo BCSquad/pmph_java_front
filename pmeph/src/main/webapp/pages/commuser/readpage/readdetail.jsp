@@ -92,7 +92,7 @@
         </div>
             <div class="bookmistake" id="sourceUp">
                 <div class="apache">
-                    <div class="mistitle">资源上传</div>
+                    <div class="mistitle">资源共享</div>
                     <div class="x" onclick="hideup()"></div>
                 </div>
                 <div class="upload">
@@ -280,7 +280,7 @@
                 </div>
                 <div class="mistake" onclick="sourceUpload()">
                     <div class="vid_pic" ></div>
-                    <div class="mis_content">资源上传</div>
+                    <div class="mis_content">资源共享</div>
                 </div>
                 
                 <c:choose>
@@ -360,25 +360,7 @@
                     </script>
                 </div>
             </c:if>
-            <c:if test="${ not empty source}">
-                <div class="block">
-                    <div class="title">
-                        <div class="line"></div>
-                        <div class="rd_name">相关资源
-                            <div onclick="window.location.href='${ctx}/readdetail/morebookvideo.action?id=${id}'"  style="float: right;margin-left: 50px;color: #489299;font-size: 14px;cursor: pointer;">更多>></div>
-                        </div>
-                    </div>
-                    <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
-                    <c:forEach items="${source}" var="list" varStatus="status">
-                        <div class="right_20">
-                            <a href="#"><div class="downimg" onclick="window.location.href='${ctx}/file/download/${list.file_id}.action'">${list.source_name}</div></a>
-                            <div class="right_22"></div>
-                            <br />
-                        </div>
-                    </c:forEach>
 
-                </div>
-            </c:if>
             <div class="block">
                 <div class="title">
                     <div class="line"></div>
@@ -633,6 +615,25 @@
                     </div>--%>
                 </div>
             </div>
+            <c:if test="${ not empty source}">
+        <div class="block">
+            <div class="title">
+                <div class="line"></div>
+                <div class="rd_name" style="width: calc(100% - 15px);">相关资源
+                    <div onclick="window.location.href='${ctx}/readdetail/morebookvideo.action?id=${id}'"  style="float: right;margin-left: 50px;color: #489299;font-size: 14px;cursor: pointer;">更多>></div>
+                </div>
+            </div>
+            <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
+            <c:forEach items="${source}" var="list" varStatus="status">
+                <div class="right_20" style="border: none;">
+                    <a href="#"><div class="downimg" onclick="window.location.href='${ctx}/file/download/${list.file_id}.action'">${list.source_name}</div></a>
+                    <div class="right_22"></div>
+                    <br />
+                </div>
+            </c:forEach>
+
+        </div>
+    </c:if>
         </div>
         <!--右边区域-->
         <div class="rightarea">

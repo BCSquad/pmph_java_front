@@ -35,7 +35,7 @@ public class DataAuditExcelService implements ExcelDownloadService {
     }
 
     @Override
-    public String[][] getColTitle() {
+    public String[][] getColTitle(Map<String, Object> param) {
         return new String[][]{{"姓名", "drealname"}, {"职务", "dposition"}, {"职称", "dtitle"}, {"所选书籍与职务", "bpp"}, {"学校审核", "onlineprogress"}, {"出版社审核", "offlineprogress"}, {"遴选结果", "cp"}};
     }
 

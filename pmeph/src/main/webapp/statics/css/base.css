@@ -205,6 +205,39 @@ textarea{
     border-radius: 50%;
 }
 
+.user-detail{
+    width: 130px;
+    height: 140px;
+    z-index: 99;
+    /* background: white; */
+    position: absolute;
+    top: 50px;
+    right: 240px;
+    display: none;
+}
+.user_detail_lab{
+    position: absolute;
+    top: 0;
+    left: 15px;
+    width: 200px;
+    height: 110px;
+    margin: auto;
+    margin-top: 22px;
+}
+.info_font{
+    margin-left: 10px;
+    display: inline-block;
+    height: 28px;
+    line-height: 28px;
+    width: 100%;
+    color: #999999;
+    cursor: pointer;
+    text-decoration: none;
+}
+ .user-detail img {
+     width: 220px;
+     height: 100px;
+ }
 .head .user-select {
     width: 130px;
     height: 140px;

@@ -104,3 +104,53 @@
         }
     })
 })(jQuery);
+
+
+$(function(){
+
+    var open_user_select = false;
+    var show = function () {
+        $(".user-detail").css("display", "block");
+    }
+    var hidden = function () {
+        $(".user-detail").css("display", "none");
+    }
+    /*  $(".user-info .user-icon").click(function () {
+          if (open_user_select) {
+              hidden();
+          } else {
+              show();
+          }
+      });*/
+    /* $(".user-select").mouseleave(function () {
+         console.log("mouseleave")
+        // hidden();
+     })*/
+
+    $(".logininfo").mouseover(function () {
+        user_info = false;
+        show();
+
+    });
+
+    $(".user-detail").mouseover(function () {
+        user_info = true;
+    });
+
+    $(".logininfo").mouseleave(function () {
+        setTimeout(function () {
+            if (!user_info) {
+                hidden();
+            }
+        }, 300);
+
+    })
+    $(".user-detail").mouseleave(function () {
+        hidden();
+    })
+
+
+
+
+
+});

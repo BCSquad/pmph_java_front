@@ -304,6 +304,7 @@
 		)
 	</insert>
 
+
 	<!-- 通过id 动态更新UserMessage -->
 	<update id="updateUserMessage" parameterType="MyMessage">
 		update user_message
