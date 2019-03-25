@@ -78,8 +78,8 @@
             <div class="top3">${total.total }</div>
 
             <div style="float: right">
-                <button type="button" class="dhBtn" onclick="redeemPoints()">积分兑换</button>
-                <button type="button" class="dhBtn" onclick="showMallPoints()">商城积分</button>
+                <button type="button" style="display: none" class="dhBtn" onclick="redeemPoints()">积分兑换</button>
+                <button type="button" style="display: none" class="dhBtn" onclick="showMallPoints()">商城积分</button>
             </div>
             <div class="line"></div>
             <div class="tb2">

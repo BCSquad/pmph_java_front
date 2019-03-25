@@ -262,7 +262,7 @@
 
 
                     <div class="changeOrg" >
-                        <span onclick='loginOrgHome("${userInfo.username}")'>切换机构</span>
+                        <span onclick='loginOrgHome("${userInfo.username}")' style="display: none">切换机构</span>
                     </div>
 
 

@@ -486,9 +486,7 @@ public class CourseController  extends BaseController {
         params+="&sign="+sign;
 
         params+="&biz_content="+ CodecUtil.encodeURL(sb.toString());
-
-
-        String aipUrl = "http://192.168.2.11/route/rest";
+        String aipUrl = "http://aip.pmph.com/route/rest";
         String s1 = SyncUtils.StringGet(params,aipUrl);
         JSONObject jsonObject = JSON.parseObject(s1);
         Integer code = jsonObject.getInteger("code");

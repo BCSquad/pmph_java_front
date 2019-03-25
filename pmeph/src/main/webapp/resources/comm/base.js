@@ -1,5 +1,7 @@
 //定义全局变量远程调用地址
 var remoteUrl = "medu.ipmph.com";
+var remoteVideoUrl="192.168.100.136:11100";
+
 
 
 /**

@@ -179,7 +179,7 @@ public class IntegralController extends BaseController {
 
 		params+="&biz_content="+ CodecUtil.encodeURL(sb.toString());
 
-		String url="http://192.168.2.11/route/rest";
+		String url="http://aip.pmph.com/route/rest";
 
 		String urlapi=url+"?"+params;
 		String s1 = SyncUtils.StringGet(params,url);

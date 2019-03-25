@@ -35,6 +35,8 @@
         <property name="remoteUrl" value="${remoteUrl}"></property>
         <property name="redirectUrl" value="${sso.url}"/>
         <property name="serviceID" value="${sso.serviceID}"></property>
+        <property name="remoteVideoUrl" value="${remoteUrl}"></property>
+        <property name="cartUrl" value="${cartUrl}"></property>
         <property name="pathWithUsertypeMaps">
             <set>
 
