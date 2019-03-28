@@ -71,7 +71,7 @@
               </div>
         </div>
         <div class="right" style="width: 335px;float: right;">
-            <img src="${ctx}/image/${fn:length(adInfo.detailList)>1?adInfo.detailList[1].image:adInfo.detailList[0].image}.action" style="width: 335px;height: 335px;"/>
+            <img src="${ctx}/image/${fn:length(adInfo.detailList)>0?adInfo.detailList[0].image:'caode.png'}.action" style="width: 335px;height: 335px;"/>
         </div>
     </div>
 </div>

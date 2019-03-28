@@ -35,7 +35,7 @@
         from product where id = #{id}
         limit 0,1
     </select>
-    
+
     <select id="queryActiveProductbyType" resultType="java.util.Map" parameterType="java.lang.String">
         select
           id,product_name,product_type,
@@ -69,11 +69,11 @@
         from product where product_type = #{expert_type} and is_published  = 1 and is_deleted = 0 and is_new = 1
         ORDER  BY gmt_set_active DESC limit 0,1
     </select>
-    
-    
-    
-    
-	<!-- 专家信息 --> 
+
+
+
+
+	<!-- 专家信息 -->
 	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
 		select id,product_id,expert_type,user_id,realname,sex,birthday,REPLACE(birthday,'-','.') as birthday1,experience,org_name,position,title,address,postcode,handphone,email,idtype,
 		idcard,telephone,fax,online_progress,auth_date,is_staging*1 is_staging,is_deleted*1 is_deleted,banknumber,bankaddress,remark,
@@ -230,7 +230,7 @@
        select t1.*,t2.type_name from expertation_content_type t1
 	  left join product_content_type t2 on t1.product_content_type_id = t2.id
         where t1.expertation_id = #{declaration_id}
-        
+
         <!-- select t1.*,t2.name_path from expertation_content_type t1
 	  left join product_content_type_detail t2 on t1.product_content_type_id = t2.product_type_id
         where t1.expertation_id = #{declaration_id} -->
@@ -493,29 +493,29 @@
 				
 		   order BY p.gmt_set_active DESC
 	</select>
-	
+
 	<select id = "selectContentZTree" parameterType="PageParameter" resultType="java.util.Map">
-		select 
+		select
 		t.id
 		,t.parent_id
 		,t.type_name as name
-		,!isNull(e.id) as checked 
-		
+		,!isNull(e.id) as checked
+
 		from
-		product_content_type t 
-		left join expertation_content_type e on e.product_content_type_id = t.id 
-		
-		
-		 and expertation_id = #{parameter.expertation_id} 
-		 
+		product_content_type t
+		left join expertation_content_type e on e.product_content_type_id = t.id
+
+
+		 and expertation_id = #{parameter.expertation_id}
+
 		left join product_content_type_detail d on d.product_type_id = t.id
-		
-		where t.is_deleted = 0 
-		
-		and t.product_type = #{parameter.product_type} 
-		
+
+		where t.is_deleted = 0
+
+		and t.product_type = #{parameter.product_type}
+
 		order by excel_row_num asc;
 	</select>
-    
+
     
 </mapper>

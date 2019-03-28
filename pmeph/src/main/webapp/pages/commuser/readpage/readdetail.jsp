@@ -522,7 +522,28 @@
                                     </div>
                                 </div>
                                 <div class="item_content">${list.content}</div>
-                                <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
+                                <c:if test="${list.author_reply!=null}">
+                                <div style="margin: 20px;background-color: #fafaf8;height: 100px">
+                                    <div style="margin: 15px">
+                                    <div class="item_title">
+                                        <div style="float: left;">
+                                            <img src="${ctx}/statics/image/default_image.png" class="picturesize">
+                                        </div>
+                                        <div style="float: left;margin-left: 10px;margin-top: 5px;">
+                                           主编回复
+                                        </div>
+
+                                        <div class="date_content">
+                                            <div class="date">${list.auth_date}</div>
+                                        </div>
+                                    </div>
+                                    <div class="item_content">${list.author_reply}</div>
+                                    </div>
+
+                                </div>
+                                </c:if>
+                                <hr style=" height:1px;border:none;border-top:1px solid #e2eaf1;margin-top: 5px;">
+
                             </div>
                         </c:forEach>
                     </divlistFeed>

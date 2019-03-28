@@ -296,7 +296,8 @@
                 <div class="user-select">
                     <img src="${ctx}/statics/image/userSelectbg.png" alt="">
                     <div class="select">
-                        <c:if test="${userInfo.is_org_user !=1}">
+
+                        <c:if test="${userInfo.is_teacher ==false}">
                             <div style="height: 15px"></div>
                         </c:if>
                       <%--  <a class="option wide" href="javascript:;">您好,<%=MapUtils.getString(userInfo, "realname")%></a>--%>
@@ -309,9 +310,10 @@
                         <a class="option"
                            href='<c:url value="/teacherCertification/showTeacherCertification.action"/>'>教师认证</a>
                           <a class="option" href='<c:url value="/personalhomepage/tohomepage.action?pagetag=lcjc"/>'  style="line-height:14px;width:60px;">临床决策专家申报</a>
-                        <c:if test="${userInfo.is_org_user ==1}">
-                            <a class="option out" onclick='loginOrgHome("${userInfo.username}")'>切换机构</a>
+                        <c:if test="${userInfo.is_teacher ==true}">
+                            <a class="option" href="<c:url value="/course/teacher/toCourseList.action"/>">课程选书</a>
                         </c:if>
+
                     </div>
                 </div>
             </c:if>

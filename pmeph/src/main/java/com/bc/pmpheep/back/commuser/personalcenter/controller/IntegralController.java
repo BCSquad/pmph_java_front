@@ -11,11 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterPointActivityVO;
 import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterPointRuleVO;
-import com.bc.pmpheep.back.util.CodecUtil;
-import com.bc.pmpheep.back.util.DateUtil;
-import com.bc.pmpheep.back.util.DigestUtil;
-import com.bc.pmpheep.back.util.SyncUtils;
+import com.bc.pmpheep.back.util.*;
 import com.bc.pmpheep.controller.bean.ResponseBean;
 
 import org.apache.commons.collections.MapUtils;
@@ -113,7 +111,18 @@ public class IntegralController extends BaseController {
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("rule_code", request.getParameter("ruleCode"));
 		Map<String, Object> map = integralService.findPointExchange(paraMap);
-		return map;
+		Map<String, Object> res=new HashMap<>();
+		res.put("rule",map);
+		Long id = MapUtils.getLong(map, "id");
+		Map<String, Object> writerPointActivityVO = integralService.queryMallExchangeRule(id);
+		if(ObjectUtil.notNull(writerPointActivityVO)){
+			res.put("activity",true);
+			res.put("ruleActivity",writerPointActivityVO);
+		}else{
+			res.put("activity",false);
+		}
+
+		return res;
 	}
 
 	/**
@@ -150,7 +159,7 @@ public class IntegralController extends BaseController {
 
 		WriterPointRuleVO writerPointRuleVO = integralService.findWrterPointRulePointByRuleCode(rule_Code);
 		StringBuilder sb=new StringBuilder();
-		sb.append("{\"staff_code\":\""+"notalike000"+"\",");
+		sb.append("{\"staff_code\":\""+usermap.get("username")+"\",");
 		if(count!=null){
 			Integer point = writerPointRuleVO.getPoint();
 			Integer exchangePoint = writerPointRuleVO.getExchangePoint();
@@ -177,15 +186,15 @@ public class IntegralController extends BaseController {
 		String params = SyncUtils.getUrlApi(api);
 		params+="&sign="+sign;
 
-		params+="&biz_content="+ CodecUtil.encodeURL("{\"staff_code\":\"notalike000\",\"score\":\"100\"}");
+		params+="&biz_content="+ CodecUtil.encodeURL(sb.toString());
 
 		String url="http://192.168.2.11/route/rest";
 
 		String urlapi=url+"?"+params;
 		String s1 = SyncUtils.StringGet(params,url);
 		JSONObject jsonObject = JSON.parseObject(s1);
-		Integer code = jsonObject.getInteger("CODE");
-		jsonObject.getString("MSG");
+		Integer code = jsonObject.getInteger("code");
+		jsonObject.getString("msg");
 		if(code==0){
 			responseBean.setMsg("积分兑换成功");
 			Map<String, Object> writerPointByid = integralService.findWriterPointByid(userId);

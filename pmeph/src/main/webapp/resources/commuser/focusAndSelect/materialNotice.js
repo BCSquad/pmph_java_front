@@ -86,7 +86,7 @@ function loadData(){
                         "<div class=\"item1 cutmore\">" +
                         "<a href='"+contextpath+"cmsnotice/noticeMessageDetail.action?id="+responsebean[i].mid+"&&materialId="+responsebean[i].materialId+"&&csmId="+responsebean[i].id+"'>" +responsebean[i].title+"</a></div> "+
 
-                        "<div class=\"item2 cutmore\"><p style='margin:0;height:40px;line-height:20px'>";
+                        "<div class=\"item2 cutmore\">";
                     if(responsebean[i].isMaterialEntry==true){
                         html+=responsebean[i].notice;
                     }else{

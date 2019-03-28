@@ -84,7 +84,9 @@
 		u.realname,
 		u.nickname,
 		u.username,
-		u.avatar
+		u.avatar,
+		f.author_reply,
+		f.auth_date
 		from
 		book_user_feedback f
 		left join writer_user u on f.user_id = u.id

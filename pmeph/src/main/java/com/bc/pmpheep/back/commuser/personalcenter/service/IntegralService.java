@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.commuser.personalcenter.service;
 
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterPointActivityVO;
 import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterPointRuleVO;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
@@ -81,4 +82,6 @@ public interface IntegralService {
 	Map<String,Object> findWriterPointByid(Long id);
 
 	int addPointlog(Map<String,Object> params);
+
+	Map<String, Object> queryMallExchangeRule(Long id);
 }

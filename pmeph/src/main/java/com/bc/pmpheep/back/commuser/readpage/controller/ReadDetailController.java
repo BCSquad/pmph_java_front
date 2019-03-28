@@ -64,7 +64,7 @@ public class ReadDetailController extends BaseController{
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.commuser.readpage.service.BookVideoServiceImpl")
 	private BookVideoService bookVideoService;
-	 
+
 	 
 	/**
 	 * 根据图书ID初始化数据

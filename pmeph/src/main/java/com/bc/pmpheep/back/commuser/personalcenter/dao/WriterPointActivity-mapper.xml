@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bc.pmpheep.back.commuser.personalcenter.dao.WriterPointActivityDao">
+        <select id="queryMallExchangeRule" parameterType="long" resultType="map">
+            SELECT
+            a.*,b.rule_name,b.point
+            FROM
+            writer_point_activity a
+            LEFT JOIN writer_point_rule b  on  a.rule_id=b.id
+            WHERE
+            <![CDATA[  now() >   a.start_gmt]]>
+           AND <![CDATA[   now()  <  a.end_gmt ]]>
+            and a.rule_id=#{id}
+            and a.`status`=1
+            limit 1
+        </select>
+
+</mapper>
