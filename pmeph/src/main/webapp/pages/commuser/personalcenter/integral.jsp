@@ -130,18 +130,13 @@
                             <td><label style="font-size: 12px;color: gray" id="pointLab"></label></td>
                         </tr>
 
-
                     </table>
-                    <div style="margin-right: 170px;margin-top: 20px;">
+                    <div style="margin-right: 170px;margin-top: 50px;">
                         <button class="dhBtn" onclick="confirmExcheang()">确认兑换</button>
                     </div>
                 </div>
-                <div id="info" style="margin-left: 50px;margin-top: 100px;">
-
-
+                <div id="info" style="margin-left: 50px;margin-top: 130px;height: 50px;">
                 </div>
-
-
             </div>
 
             <div class="dialog2" id="points-dialog" style="width: 60%">
@@ -224,6 +219,7 @@
     }
 
     function redeemPoints() {
+        $("#info").html("")
         $.ajax({
             type: 'get',
             url: contextpath + 'integral/findPointExchange.action?ruleCode=buss',
@@ -232,14 +228,26 @@
             success: function (json) {
                 console.log(json);
                 $("#redeemPoints-dialog").show();
-                var html = '<lable id="infolable">兑换规则:';
-                html += json.description;
-                html += "<lable>";
-                html += '<input style="display: none" id="point" value="' + json.point + '" />';
-                html += '<input style="display: none" id="exchange_point" value="' + json.exchange_point + '"/>';
-                $("#pointLab").text("请输入"+json.point +"的倍数");
 
-                $("#info").append(html)
+
+                if(!json.activity){
+
+                var html = '<div><lable id="infolable">兑换描述:';
+                html += json.rule.description;
+                html += "<lable>";
+                html += '<input style="display: none" id="point" value="' + json.rule.point + '" />';
+                html += '<input style="display: none" id="exchange_point" value="' + json.rule.exchange_point + '"/></div>';
+                $("#pointLab").text("请输入"+json.rule.point +"的倍数");
+                }else{
+                    var html = '<table><tr><span id="infolable">活动兑换描述:';
+                    html += "活动期间"+json.ruleActivity.point+"积分可兑换"+json.ruleActivity.rule_name+json.ruleActivity.exchange_point+"积分";
+                    html += "<span></tr>";
+                    html += '<tr><input style="display: none" id="point" value="' + json.ruleActivity.point + '" />';
+                    html += '<input style="display: none" id="exchange_point" value="' + json.ruleActivity.exchange_point + '"/></tr><table>';
+                    $("#pointLab").text("请输入"+json.rule.point +"的倍数");
+                    $("#info").append(html)
+                }
+
 
             }
         })

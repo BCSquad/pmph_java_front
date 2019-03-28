@@ -13,7 +13,7 @@
 
 <div class="footer">
     <div style="height: 30px;"></div>
-    <div class="tail">
+    <div class="tail" style="margin-top: 20px">
 
         <%
             String linked = request.getParameter("linked");

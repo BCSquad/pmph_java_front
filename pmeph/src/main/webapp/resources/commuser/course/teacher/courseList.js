@@ -147,6 +147,6 @@ function course_code(id,name){
     $("#qrcode-dialog .mistitle").html(name);
     $("#qrcode").html("");
     //TODO 这里填入移动端学生进入课程的地址
-    var code ='http://119.254.226.115/meduwx/course/student/toCourseDetail.action?id='+id;
+    var code ='http://127.0.0.1/meduwx/course/student/toCourseDetail.action?id='+id;
     $("#qrcode").qrcode(code);
 }

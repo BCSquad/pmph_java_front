@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterPointActivityVO;
 import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterPointRuleVO;
+import com.bc.pmpheep.back.commuser.personalcenter.dao.WriterPointActivityDao;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.back.util.CollectionUtil;
@@ -22,6 +24,8 @@ public class IntegralServiceImpl implements IntegralService {
 
 	@Autowired
 	private IntegralDao integralDao;
+	@Autowired
+	private WriterPointActivityDao writerPointActivityDao;
 	
 	
 	/**
@@ -89,6 +93,11 @@ public class IntegralServiceImpl implements IntegralService {
 	@Override
 	public int addPointlog(Map<String, Object> params) {
 		return integralDao.addPointlog(params);
+	}
+
+	@Override
+	public Map<String, Object> queryMallExchangeRule(final Long id) {
+		return writerPointActivityDao.queryMallExchangeRule(id);
 	}
 
 }

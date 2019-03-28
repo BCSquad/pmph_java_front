@@ -11,11 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterPointActivityVO;
 import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterPointRuleVO;
-import com.bc.pmpheep.back.util.CodecUtil;
-import com.bc.pmpheep.back.util.DateUtil;
-import com.bc.pmpheep.back.util.DigestUtil;
-import com.bc.pmpheep.back.util.SyncUtils;
+import com.bc.pmpheep.back.util.*;
 import com.bc.pmpheep.controller.bean.ResponseBean;
 
 import org.apache.commons.collections.MapUtils;
@@ -113,7 +111,18 @@ public class IntegralController extends BaseController {
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("rule_code", request.getParameter("ruleCode"));
 		Map<String, Object> map = integralService.findPointExchange(paraMap);
-		return map;
+		Map<String, Object> res=new HashMap<>();
+		res.put("rule",map);
+		Long id = MapUtils.getLong(map, "id");
+		Map<String, Object> writerPointActivityVO = integralService.queryMallExchangeRule(id);
+		if(ObjectUtil.notNull(writerPointActivityVO)){
+			res.put("activity",true);
+			res.put("ruleActivity",writerPointActivityVO);
+		}else{
+			res.put("activity",false);
+		}
+
+		return res;
 	}
 
 	/**
