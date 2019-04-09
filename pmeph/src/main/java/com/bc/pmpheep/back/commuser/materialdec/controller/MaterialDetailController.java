@@ -13,6 +13,7 @@ import com.bc.pmpheep.back.util.StringUtil;
 import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.general.service.DataDictionaryService;
 import com.bc.pmpheep.general.service.FileService;
+import com.mysql.jdbc.StringUtils;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -133,7 +134,12 @@ public class MaterialDetailController extends BaseController{
         perpmphList=this.perService.rwsjcPerList(queryMap);
 
 
-        String material_id = request.getParameter("material_id"); //教材ID
+		int declarationCount =0;
+					Integer id = mdService.queryDeclarationCountByUserId(MapUtils.getLong(userinfo, "id"));
+					declarationCount=id!=null?id:0;
+
+
+		String material_id = request.getParameter("material_id"); //教材ID
 		//教材信息
 		Map<String,Object> materialMap = new HashMap<String,Object>();
 		materialMap = this.mdService.queryMaterialbyId(material_id);
@@ -168,6 +174,7 @@ public class MaterialDetailController extends BaseController{
 		mav.addObject("userMap", userMap);
 		mav.addObject("zjkzxxList", zjkzxxList);
 		mav.addObject("material_id", materialMap.get("id"));
+		mav.addObject("declarationCount",declarationCount);
 
 		mav.addObject("perstuList",perstuList);
 		mav.addObject("perworkList",perworkList);
@@ -898,9 +905,23 @@ public class MaterialDetailController extends BaseController{
 		//1.作家申报信息表
 		List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
 		gezlList = this.mdService.queryPerson(queryMap);
-        for (Map.Entry<String, Object> entry : gezlList.get(0).entrySet()) {
+		Map<String, Object> id = mdService.queryUserInfo(MapUtils.getString(userMap, "id"));
+		for (Map.Entry<String, Object> entry : gezlList.get(0).entrySet()) {
             String key = entry.getKey().toString();
             String value = entry.getValue().toString();
+			Object o = id.get(key);
+            if(StringUtils.isNullOrEmpty(value)){
+				if(ObjectUtil.notNull(o)){
+					entry.setValue(o);
+				}
+			}else{
+				if(ObjectUtil.notNull(o)){
+					if(!value.equals(o.toString())){
+						entry.setValue(id.get(key));
+					}
+				}
+
+            }
             if(value.equals("-")){
                 gezlList.get(0).put(key,"");
             }

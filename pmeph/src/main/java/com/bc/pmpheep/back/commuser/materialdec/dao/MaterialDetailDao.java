@@ -138,4 +138,6 @@ public interface MaterialDetailDao {
 		 * 查看用户信息
 		 */
 		public Map<String, Object> queryUserInfo(String user_id);
+
+		Integer queryDeclarationCountByUserId(Long user_id);
 }

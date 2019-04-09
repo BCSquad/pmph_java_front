@@ -9,10 +9,12 @@ import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.back.util.Const;
+import com.bc.pmpheep.back.util.ObjectUtil;
 import com.bc.pmpheep.controller.bean.ResponseBean;
 import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.general.service.DataDictionaryService;
 import com.bc.pmpheep.general.service.FileService;
+import com.mysql.jdbc.StringUtils;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -111,15 +113,31 @@ public class ExpertationController extends BaseController{
 		Map<String,Object> userinfo =  this.getUserInfo();
 		userMap =  this.mdService.queryUserInfo(MapUtils.getString(userinfo,"id",""));
 //		userMap = JSON.parseObject(JSON.toJSONString(userMap).replaceAll("-",""),java.util.HashMap.class);
+		Map<String, Object> id = mdService.queryUserInfo(MapUtils.getString(userMap, "id"));
 		//个人信息中带有横杠的去掉
 		if(userMap!=null){
-			Set set = userMap.keySet();
-			Iterator it = set.iterator();
-			while(it.hasNext()){
-				String key = (String)it.next();
-				String value=userMap.get(key).toString();
-				if(value!=null&&value.equals("-")){
-					userMap.put(key,"");
+
+			for (Map.Entry<String, Object> entry : userMap.entrySet()) {
+				String key = entry.getKey();
+				String value = entry.getValue().toString();
+
+				Object o = id.get(key);
+				if (StringUtils.isNullOrEmpty(value)) {
+					if (ObjectUtil.notNull(o)) {
+						entry.setValue(o);
+					}
+				} else {
+					if (ObjectUtil.notNull(o)) {
+						if (!value.equals(o.toString())) {
+							entry.setValue(id.get(key));
+						}
+					}
+
+				}
+
+
+				if (value != null && value.equals("-")) {
+					userMap.put(key, "");
 				}
 			}
 		}
@@ -661,13 +679,27 @@ public class ExpertationController extends BaseController{
 		//1.作家申报信息表
 		List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
 		gezlList = this.etService.queryPerson(queryMap);
-        for (Map.Entry<String, Object> entry : gezlList.get(0).entrySet()) {
-            String key = entry.getKey().toString();
-            String value = entry.getValue().toString();
-            if(value.equals("-")){
-                gezlList.get(0).put(key,"");
-            }
-        }
+		Map<String, Object> id = mdService.queryUserInfo(MapUtils.getString(userMap, "id"));
+		for (Map.Entry<String, Object> entry : gezlList.get(0).entrySet()) {
+			String key = entry.getKey().toString();
+			String value = entry.getValue().toString();
+			Object o = id.get(key);
+			if(StringUtils.isNullOrEmpty(value)){
+				if(ObjectUtil.notNull(o)){
+					entry.setValue(o);
+				}
+			}else{
+				if(ObjectUtil.notNull(o)){
+					if(!value.equals(o.toString())){
+						entry.setValue(id.get(key));
+					}
+				}
+
+			}
+			if(value.equals("-")){
+				gezlList.get(0).put(key,"");
+			}
+		}
 		String product_id = gezlList.get(0).get("product_id").toString();
 		queryMap.put("product_id", product_id);
 		queryMap.put("expert_type", gezlList.get(0).get("expert_type").toString());

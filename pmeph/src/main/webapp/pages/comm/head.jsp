@@ -384,7 +384,7 @@
         console.log(username);
         $.ajax({
             type: "POST",
-            url:contextpath+'/login.action',
+            url:contextpath+'/innerlogin.action',
             data:{username:username,usertype:'2'},
             success: function(json) {
             },

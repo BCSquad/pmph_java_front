@@ -295,7 +295,7 @@ LIMIT 0,10
 		on p.full_path REGEXP concat('^.*-',m.id,'-.*')
        where  m.parent_id=#{parent_id} 
        group by m.id
-       order by m.sort 
+       order by m.sort  limit 2
   </select>
 
 

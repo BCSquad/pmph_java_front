@@ -82,9 +82,45 @@
 	
 	<!-- 专家信息 --> 
 	<select id="queryPerson" resultType="java.util.Map" parameterType="java.util.Map">
-		select t1.*,t2.org_name dwmc from (select id,material_id,user_id,realname,sex,birthday,REPLACE(birthday,'-','.') as birthday1,experience,org_name,position,title,address,postcode,handphone,email,idtype,
-idcard,telephone,fax,org_id,online_progress,auth_user_id,auth_date,offline_progress,paper_date,is_staging*1 is_staging,is_deleted*1 is_deleted,
-gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,expertise,return_cause from declaration) t1 left join (select id,org_name from org 
+		select t1.*,t2.org_name dwmc from (
+		SELECT
+		d.id,
+		d.material_id,
+		d.user_id,
+		IFNULL(d.realname,w.realname) as realname,
+		ifNull(d.sex,w.sex) as sex,
+		ifNull(d.birthday,w.birthday) as birthday,
+		REPLACE (ifNull(d.birthday,w.birthday), '-', '.' ) AS birthday1 ,
+		ifNull(d.experience,w.experience) as experience ,
+		d.org_name,
+		ifNull(d.position,d.position) as position ,
+		d.title,
+		ifNUll(d.address,w.address) as address,
+		ifNUll(d.postcode,w.postcode)as postcode,
+		ifNUll(d.handphone,w.handphone)as handphone,
+		ifNUll(d.email,w.email)as email,
+		ifNUll(d.idtype,0)as idtype ,
+		ifNull(d.idcard,w.idcard) as idcard,
+		ifNull(d.telephone,w.telephone)as telephone ,
+		ifNull(d.fax,w.fax)as fax,
+		d.org_id,
+		d.online_progress,
+		d.auth_user_id,
+		d.auth_date,
+		d.offline_progress,
+		d.paper_date,
+		d.is_staging * 1 is_staging,
+		d.is_deleted * 1 is_deleted,
+		d.gmt_create,
+		d.gmt_update,
+		d.is_dispensed * 1 is_dispensed,
+		d.is_utec * 1 is_utec,
+		d.degree,
+		d.expertise,
+		d.return_cause
+		FROM
+		declaration  d
+		left join  writer_user  w on  d.user_id=w.id) t1 left join (select id,org_name from org
 	union select '0' id,'人民卫生出版社' org_name from dual) t2 on t1.org_id = t2.id
 		 where 1= 1 
 		<if test="user_id != null and user_id != ''">
@@ -547,5 +583,10 @@ gmt_create,gmt_update,is_dispensed*1 is_dispensed,is_utec*1 is_utec,degree,exper
 				and d.id = #{declaration_id}
 			</if>
 		group by d.id
+	</select>
+
+	<select id="queryDeclarationCountByUserId" parameterType="long" resultType="int">
+		select count(id) from declaration where user_id=#{user_id}
+
 	</select>
 </mapper>

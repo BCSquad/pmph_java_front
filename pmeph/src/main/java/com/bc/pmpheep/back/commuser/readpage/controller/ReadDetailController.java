@@ -188,6 +188,9 @@ public class ReadDetailController extends BaseController{
 		//人卫推荐
 		/*modelAndView.addObject("eMap", eMap);*/
 		modelAndView.addObject("ComNum", ComNum.size());
+		modelAndView.addObject("CorrNum",CorrNum.size());
+		modelAndView.addObject("FeedNum",FeedNum.size());
+
 		modelAndView.addObject("supMap", supMap);
 		modelAndView.addObject("map", map);
 		modelAndView.addObject("listCom", listCom);

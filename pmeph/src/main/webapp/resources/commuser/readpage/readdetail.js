@@ -439,23 +439,93 @@ function changepage() {
                     }
                 }
 
+
                 str += '</div><div class="date_content"><div class="date">'
                     + n.gmt_create
                     + '</div></div></div>' ;
+                str += '<div class="item_content">\n' +
+                    '第'+n.page+'页，第'+n.line+'行:\n' +
+                    '                        </div>';
+                str+= '<div class="item_content">' + n.content;
+
                 if("correctpage"==tagName){
-                    str += '<div class="item_content">\n' +
-                        '第'+n.page+'页，第'+n.line+'行:\n' +
-                        '                        </div>';
+                    if(n.editor_reply!=null){
+
+                        str+='<div style="margin: 20px;background-color: #fafaf8;width: 870px">\n';
+                        str+='<div style="margin: 15px">';
+                        str+='<div class="item_title">';
+                        str+=' <div style="float: left;">';
+                        str+='<img src="';
+                        str += contextpath + 'statics/image/default_image.png';
+                        str += '" class="picturesize"></div>';
+                        str+='<div style="float: left;margin-left: 10px;margin-top: 5px;">回复</div>';
+                        str+='<div class="date_content">';
+                        str+='<div class="date">'+formatDate(n.reply_date,'yyyy.MM.dd hh:mm')+'</div>';
+                        str+='</div></div>';
+                        str+='<div class="item_content"  style="width: 850px;overflow: auto">'+n.editor_reply+'</div>';
+                        str+='</div></div>';
+                    }
+
+
+
+
+
+
                 }
-                str+= '<div class="item_content">'
-                    + n.content
-                    + '</div><hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;"></div>';
+                if("feedpage"==tagName){
+                    if(n.author_reply!=null){
+                        str+='<div style="margin: 20px;background-color: #fafaf8;height: 100px;width: 870px">\n';
+                        str+='<div style="margin: 15px">';
+                        str+='<div class="item_title">';
+                        str+=' <div style="float: left;">';
+                        str+='<img src="';
+                        str += contextpath + 'statics/image/default_image.png';
+                        str += '" class="picturesize"></div>';
+                        str+='<div style="float: left;margin-left: 10px;margin-top: 5px;">回复</div>';
+                        str+='<div class="date_content">';
+                        str+='<div class="date">'+formatDate(n.auth_date,'yyyy.MM.dd hh:mm')+'</div>';
+                        str+='</div></div>';
+                        str+='<div class="item_content" style="width: 850px">'+n.author_reply+'</div>';
+                        str+='</div></div>';
+                    }
+
+
+                }
+
+
+
+
+                str+='</div><hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;"></div>';
             });
             $("#"+tagName).append(str);
         },
     });
 
 };
+
+//时间转化
+function formatDate(nS,str) {
+    if(!nS){
+        return "";
+    }
+    var date=new Date(nS);
+    var year=date.getFullYear();
+    var mon = date.getMonth()+1;
+    var day = date.getDate();
+    var hours = date.getHours();
+    var minu = date.getMinutes();
+    var sec = date.getSeconds();
+    if(str=='yyyy-MM-dd'){
+        return year + '-' + (mon < 10 ? '0' + mon : mon) + '-' + (day < 10 ? '0' + day : day);
+    }else if(str=='yyyy.MM.dd'){
+        return year + '.' + (mon < 10 ? '0' + mon : mon) + '.' + (day < 10 ? '0' + day : day);
+    }else if(str=='yyyy.MM.dd hh:mm:ss'){
+        return year + '.' + (mon < 10 ? '0' + mon : mon) + '.' + (day < 10 ? '0' + day : day) + ' ' + (hours < 10 ? '0' + hours : hours) + ':' + (minu < 10 ? '0' + minu : minu) + ':' + (sec < 10 ? '0' + sec : sec);
+    }else if(str=='yyyy.MM.dd hh:mm'){
+        return year + '-' + (mon < 10 ? '0' + mon : mon) + '-' + (day < 10 ? '0' + day : day) + ' ' + (hours < 10 ? '0' + hours : hours);
+    }
+
+}
 
 //长评加载更多
 function longcom() {
@@ -810,6 +880,11 @@ function hideupload() {
 
 }
 function sourceCommit() {
+    if(!$("#attachment2").val()){
+        window.message.error("文件不能为空,请上传文件后再提交！");
+        return;
+    }
+
     var json = {
         book_id: $("#book_id").val(),
         attachment: $("#attachment2").val(),
@@ -823,12 +898,12 @@ function sourceCommit() {
         dataType: 'json',
         success: function (json) {
             if (json.returnCode == "OK") {
-                window.message.success("数据已提交！");
+                window.message.success("文件上传成功！");
                 $("#sourceUp").hide();
                 $("#upname2").html('未选择任何文件!');
                 $("#upload_status2").val(null);
             } else {
-                window.message.info("错误，请填写完所有内容！");
+                window.message.info("错误，文件上传四百！");
             }
         }
     });

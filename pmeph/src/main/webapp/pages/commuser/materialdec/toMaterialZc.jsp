@@ -199,7 +199,7 @@
                                        value="${userMap.username}"/>
                             </td>
                             <td><span class="btbs">*</span><span>性&emsp;&emsp;别：</span>
-                                <select class="select-input" id="sex" disabled name="sex">
+                                <select class="select-input" id="sex"  disabled="disabled" name="sex">
                                     <%--  <option value="0" ${gezlList.sex=='0'?'selected':'' }>保密</option>--%>
                                     <option value="1" ${gezlList.sex=='1'?'selected':'' }>男</option>
                                     <option value="2" ${gezlList.sex=='2'?'selected':'' }>女</option>

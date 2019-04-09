@@ -1,6 +1,7 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="com.bc.pmpheep.back.util.Const" %>
 <%@ page import="org.apache.commons.collections.MapUtils" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
 "http://www.w3.org/TR/html4/strict.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -493,6 +494,26 @@
                                 <div class="item_content">
                                         ${list.content}
                                 </div>
+                                <c:if test="${list.editor_reply!=null}">
+                                    <div style="margin: 20px;background-color: #fafaf8;height: 100px;width: 870px">
+                                        <div style="margin: 15px">
+                                            <div class="item_title">
+                                                <div style="float: left;">
+                                                    <img src="${ctx}/statics/image/default_image.png" class="picturesize">
+                                                </div>
+                                                <div style="float: left;margin-left: 10px;margin-top: 5px;">
+                                                    回复
+                                                </div>
+
+                                                <div class="date_content">
+                                                    <div class="date"><fmt:formatDate pattern="yyyy.MM.dd HH:mm" value="${list.reply_date}" /></div>
+                                                </div>
+                                            </div>
+                                            <div class="item_content" style="width: 850px">${list.editor_reply}</div>
+                                        </div>
+
+                                    </div>
+                                </c:if>
                                 <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
                             </div>
                         </c:forEach>
@@ -523,21 +544,21 @@
                                 </div>
                                 <div class="item_content">${list.content}</div>
                                 <c:if test="${list.author_reply!=null}">
-                                <div style="margin: 20px;background-color: #fafaf8;height: 100px">
+                                <div style="margin: 20px;background-color: #fafaf8;height: 100px;width: 860px">
                                     <div style="margin: 15px">
                                     <div class="item_title">
                                         <div style="float: left;">
                                             <img src="${ctx}/statics/image/default_image.png" class="picturesize">
                                         </div>
                                         <div style="float: left;margin-left: 10px;margin-top: 5px;">
-                                           主编回复
+                                           回复
                                         </div>
 
                                         <div class="date_content">
-                                            <div class="date">${list.auth_date}</div>
+                                            <div class="date"><fmt:formatDate pattern="yyyy.MM.dd HH:mm" value="${list.auth_date}" /></div>
                                         </div>
                                     </div>
-                                    <div class="item_content">${list.author_reply}</div>
+                                    <div class="item_content" style="width: 850px">${list.author_reply}</div>
                                     </div>
 
                                 </div>

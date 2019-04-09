@@ -695,8 +695,8 @@
                                                             </div>
                                                             <div class="right_div1" onclick='changesale("exam")' id="exam">考试用书</div>--%>
                             </div>
-                            <c:forEach items="${listSal}" var="list" varStatus="status">
-                                <div class="last_right_body">
+                            <c:forEach items="${listSal}" var="list" varStatus="status" >
+                                <div class="last_right_body" id="count_${status.index}" >
                                     <input id="last_right_book_id_${status.count}" value="${list.id}" type="hidden">
                                     <div class="last_right_book"
                                          onclick="window.open(contextpath+'readdetail/todetail.action?id='+$('#last_right_book_id_${status.count}').val())">

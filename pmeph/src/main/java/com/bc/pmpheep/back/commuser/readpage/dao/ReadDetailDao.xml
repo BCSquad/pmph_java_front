@@ -61,6 +61,7 @@
 		bc.line,
 		bc.is_editor_replied,
 		bc.editor_reply,
+		bc.reply_date,
 		bc.result,
 		u.realname,
 		u.nickname,

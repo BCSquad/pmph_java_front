@@ -354,16 +354,21 @@ public class BookServiceImpl extends BaseService implements BookService {
 	@Override
 	public List<Map<String, Object>> queryParentTypeListByTypeId(Long id) {
 		Map<String, Object> materialType = bookDao.queryMaterialTypeById(String.valueOf(id));
+
+
+            List<Map<String, Object>> typeList= new ArrayList<Map<String, Object>>();
+        if(materialType!=null){
 		String pathStr = (String) materialType.get("path");
 		String[] pathStrList = pathStr.split("-");
-		List<Map<String, Object>> typeList= new ArrayList<Map<String, Object>>();
+
 		for (String pid : pathStrList) {
 			Map<String, Object> parent_material = bookDao.queryMaterialTypeById(pid);
 			if (parent_material != null) {
 				typeList.add(parent_material);
 			}
 		}
-		
+
+        }
 		return typeList;
 	}
 

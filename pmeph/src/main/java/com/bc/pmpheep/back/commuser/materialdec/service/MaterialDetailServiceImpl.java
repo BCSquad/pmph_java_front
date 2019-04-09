@@ -1046,6 +1046,12 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 		Map<String, Object> map = this.madd.queryUserInfo(user_id);
 		return map;
 	}
+    @Override
+    public Integer queryDeclarationCountByUserId(Long user_id){
+
+        return madd.queryDeclarationCountByUserId(user_id);
+
+    };
 
 
 }

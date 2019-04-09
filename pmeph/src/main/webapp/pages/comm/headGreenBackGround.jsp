@@ -110,7 +110,7 @@
 
        $.ajax({
            type: "POST",
-           url:contextpath+'/login.action',
+           url:contextpath+'/innerlogin.action',
            data:{username:username,usertype:'1'},
            success: function(json) {
                setTimeout(function() { window.location.href=contextpath; }, 10);
