@@ -187,41 +187,17 @@
                         <div class="left_join end">报名结束</div>
                     </c:if> --%>
 
-                    <%
-                        Map<String, Object> userInfo = null;
-                        if ("1".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
-                            userInfo = (Map<String, Object>) session.getAttribute(Const.SESSION_USER_CONST_WRITER);
-                        }
 
-                        if (userInfo == null || userInfo.isEmpty()) {
-                            request.setAttribute("userInfo", null);
-                        } else {
-                            request.setAttribute("userInfo", userInfo);
-                        }
-                    %>
                     <c:choose>
-                    	<c:when test="${list.is_material_entry!=true}"></c:when>
-                    	<c:when test="${list.notEnd ==0 and list.is_material_entry==true}">
-                    		<div class="left_join end">报名结束</div>
-                    	</c:when>
-
-                    	<c:otherwise>
-                            <c:if test="${userInfo.is_org_user==1}">
-                                    <div class="left_join" style="pointer-events: none;background-color: gray"
-                                         onclick="window.location.href='${ctx}/material/MaterialDetailRedirect.action?material_id=${list.material_id}'">
-                                        报名参加
-                                    </div>
-                                </c:if>
-
-                            <c:if test="${userInfo.is_org_user!=1}">
-                                <div class="left_join"
-                                     onclick="window.location.href='${ctx}/material/MaterialDetailRedirect.action?material_id=${list.material_id}'">
-                                    报名参加
-                                </div>
-                            </c:if>
-
-
-                    	</c:otherwise>
+                        <c:when test="${list.is_material_entry!=true}"></c:when>
+                        <c:when test="${list.notEnd ==0 and list.is_material_entry==true}">
+                            <div class="left_join end">报名结束</div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="left_join" onclick="window.location.href='${ctx}/material/MaterialDetailRedirect.action?material_id=${list.material_id}'">
+                                报名参加
+                            </div>
+                        </c:otherwise>
                     </c:choose>
                     
                     
