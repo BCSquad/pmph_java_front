@@ -89,17 +89,17 @@
 						<table style="width: 260px;border:0" cellspacing="0" cellpadding="0">
 							<tr>
 								<c:if test="${materialMap.is_multi_position =='1'}">
-									<td height="30px;"><input type="checkbox" id="zw_1" name="zw_1" value="4"/>主编</td>
-									<td><input type="checkbox" id="zw_1" name="zw_1" value="2"/>副主编</td>
-									<td><input type="checkbox" id="zw_1" name="zw_1" value="1"/>编委</td>
+									<c:forEach items="${pmphPosition}" var="dic">
+										<td><input type="checkbox" id="zw_1" name="zw_1" value="${dic.code}" />${dic.name}</td>
+									</c:forEach>
 									<c:if test="${materialMap.is_digital_editor_optional =='1'}">
 										<td><input type="checkbox" id="zw_1" name="zw_1" value="8"/>数字编委</td>
 									</c:if>
 								</c:if>
 								<c:if test="${materialMap.is_multi_position !='1'}">
-									<td><input type="radio" id="zw_1" name="zw_1" value="4"/>主编</td>
-									<td><input type="radio" id="zw_1" name="zw_1" value="2"/>副主编</td>
-									<td><input type="radio" id="zw_1" name="zw_1" value="1"/>编委</td>
+									<c:forEach items="${pmphPosition}" var="dic">
+										<td><input type="radio" id="zw_1" name="zw_1" value="${dic.code}"/>${dic.name}</td>
+									</c:forEach>
 									<c:if test="${materialMap.is_digital_editor_optional =='1'}">
 										<td><input type="radio" id="zw_1" name="zw_1" value="8"/>数字编委</td>
 									</c:if>
@@ -192,11 +192,12 @@
 							<td><span class="btbs">*</span><span>工作单位：</span>
 								<input class="cg_input" name="org_name" value="${userMap.workplace}" id="org_name"  maxlength="36"/></td>
 							<td><span class="btbs">*</span><span>职&emsp;&emsp;务：</span>
-                                <select id="position" class="select-input"  name="position">
+								<input class="cg_input" id="position" class="select-input"  name="position">
+                              <%--  <select id="position" class="select-input"  name="position">
                                     <c:forEach items="${pmphPosition}" var="dic">
                                         <option value="${dic.code}" ${userMap.title == dic.code ? 'selected':''}>${dic.name}</option>
                                     </c:forEach>
-                                </select>
+                                </select>--%>
 
 
 							<td><span class="btbs">*</span><span>职&emsp;&emsp;称：</span>
@@ -578,7 +579,7 @@
 						<thead>
 						<tr>
 							<td width="350px">教材名称</td>
-							<td width="280px">编写职务</td>
+							<td width="120px">编写职务</td>
 							<td width="100px">数字编委</td>
 							<td width="120px">出版社</td>
 							<td width="120px">出版时间</td>
@@ -591,12 +592,22 @@
 							<tr>
 								<td><input class="cg_input" maxlength="100" style="width: 320px" id="jc_material_name" name="jc_material_name" id="jc_material_name" value="" style="width: 260px;" placeholder="教材名称"/></td>
 								<td style="color: #333333;">
-									<table class="radio_tb" style="width: 100%;"><tr>
+									<%--<table class="radio_tb" style="width: 100%;"><tr>
 										<td><input type="radio" name="jc_position_a" value="0" checked="checked"/>无</td>
 										<td><input type="radio" name="jc_position_a" value="1" />主编</td>
 										<td><input type="radio" name="jc_position_a" value="2" />副主编</td>
 										<td><input type="radio" name="jc_position_a" value="3" />编委</td>
-									</tr></table>
+									</tr></table>--%>
+
+									<select  id="jc_position_a" name="jc_position_a" >
+										<c:forEach items="${pmphPosition}" var="dic">
+											<option value="${dic.code}" >${dic.name}</option>
+										</c:forEach>
+											<%--<option value="0">无</option>
+                                            <option value="1">主编</option>
+                                            <option value="2">副主编</option>
+                                            <option value="3">编委</option>--%>
+									</select>
 									<input type="hidden" name="jc_position" value="jc_position_a" />
 									<input type="hidden" name="jc_id" value="${list.id}">
 								</td>
@@ -1415,7 +1426,7 @@
 					<span class="tsxz_xt" id="intention_xt" >（选填）</span>
 				</div>
 				<div class="content">
-					<textarea class="text_cl" name="intention_content" id="intention_content" maxlength="1000"></textarea>
+					<textarea class="text_cl" name="intention_content" id="intention_content" placeholder="" maxlength="1000"></textarea>
 				</div>
 			</div>
 			<!--扩展信息-->

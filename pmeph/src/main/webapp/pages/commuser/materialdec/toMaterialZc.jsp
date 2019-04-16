@@ -85,18 +85,27 @@
                             <table style="width: 260px;border:0" cellspacing="0" cellpadding="0">
                                 <tr>
                                     <c:if test="${materialMap.is_multi_position =='1'}">
-                                        <td height="30px;"><input type="checkbox" id="zw_1" name="zw_1" value="4"/>主编
-                                        </td>
-                                        <td><input type="checkbox" id="zw_1" name="zw_1" value="2"/>副主编</td>
-                                        <td><input type="checkbox" id="zw_1" name="zw_1" value="1"/>编委</td>
+
+                                        <c:forEach items="${pmphPosition}" var="dic">
+
+                                            <td><input type="checkbox" id="zw_1" name="zw_1" value="${dic.code}" />${dic.name}</td>
+
+                                        </c:forEach>
+
                                         <c:if test="${materialMap.is_digital_editor_optional =='1'}">
                                             <td><input type="checkbox" id="zw_1" name="zw_1" value="8"/>数字编委</td>
                                         </c:if>
                                     </c:if>
                                     <c:if test="${materialMap.is_multi_position !='1'}">
-                                        <td><input type="radio" id="zw_1" name="zw_1" value="4"/>主编</td>
+
+                                        <c:forEach items="${pmphPosition}" var="dic">
+
+                                            <td><input type="radio" id="zw_1" name="zw_1" value="${dic.code}" />${dic.name}</td>
+
+                                        </c:forEach>
+                                     <%--   <td><input type="radio" id="zw_1" name="zw_1" value="4"/>主编</td>
                                         <td><input type="radio" id="zw_1" name="zw_1" value="2"/>副主编</td>
-                                        <td><input type="radio" id="zw_1" name="zw_1" value="1"/>编委</td>
+                                        <td><input type="radio" id="zw_1" name="zw_1" value="1"/>编委</td>--%>
                                         <c:if test="${materialMap.is_digital_editor_optional =='1'}">
                                             <td><input type="radio" id="zw_1" name="zw_1" value="8"/>数字编委</td>
                                         </c:if>
@@ -127,23 +136,28 @@
                             <table style="width: 260px;border:0" cellspacing="0" cellpadding="0">
                                 <tr>
                                     <c:if test="${materialMap.is_multi_position =='1'}">
-                                        <td height="30px;"><input type="checkbox" name="zw_1_${status.count}"
+                                      <%--  <td height="30px;"><input type="checkbox" name="zw_1_${status.count}"
                                                                   value="4" ${list.pos_a=='1'?'checked':'' }/>主编
                                         </td>
                                         <td><input type="checkbox" name="zw_1_${status.count}"
                                                    value="2" ${list.pos_b=='1'?'checked':'' }/>副主编
                                         </td>
                                         <td><input type="checkbox" name="zw_1_${status.count}"
-                                                   value="1" ${list.pos_c=='1'?'checked':'' }/>编委
+                                                   value="1" />编委
                                         </td>
+--%>
+                                        <c:forEach items="${pmphPosition}" var="dic">
+                                            <td><input type="checkbox" id="zw_1" name="zw_1_${status.count}" value="${dic.code}"  ${list.preset_position==dic.code?'selected':'' }  />${dic.name}</td>
+                                        </c:forEach>
+
                                         <c:if test="${materialMap.is_digital_editor_optional =='1'}">
                                             <td><input type="checkbox" name="zw_1_${status.count}"
-                                                       value="8" ${list.pos_d=='1'?'checked':'' }/>数字编委
+                                                       value="8" ${list.preset_position=='1'?'checked':'' }/>数字编委
                                             </td>
                                         </c:if>
                                     </c:if>
                                     <c:if test="${materialMap.is_multi_position !='1'}">
-                                        <td height="30px;"><input type="radio" name="zw_1_${status.count}"
+                                        <%--<td height="30px;"><input type="radio" name="zw_1_${status.count}"
                                                                   value="4" ${list.preset_position=='4'?'checked':'' }/>主编
                                         </td>
                                         <td><input type="radio" name="zw_1_${status.count}"
@@ -151,7 +165,10 @@
                                         </td>
                                         <td><input type="radio" name="zw_1_${status.count}"
                                                    value="1" ${list.preset_position=='1'?'checked':'' }/>编委
-                                        </td>
+                                        </td>--%>
+                                        <c:forEach items="${pmphPosition}" var="dic">
+                                            <td><input type="radio" id="zw_1" name="zw_1_${status.count}" value="${dic.code}"  ${list.preset_position==dic.code?'checked':'' }  />${dic.name}</td>
+                                        </c:forEach>
                                         <c:if test="${materialMap.is_digital_editor_optional =='1'}">
                                             <td><input type="radio" name="zw_1_${status.count}"
                                                        value="8" ${list.preset_position=='8'?'checked':'' }/>数字编委
@@ -700,11 +717,15 @@
                                 <td style="color: #333333;">
                                     <table class="radio_tb" style="width: 100%;">
                                         <tr>
-                                            <td><input type="radio" name="jc_position_a" value="0" checked="checked"/>无
-                                            </td>
-                                            <td><input type="radio" name="jc_position_a" value="1"/>主编</td>
-                                            <td><input type="radio" name="jc_position_a" value="2"/>副主编</td>
-                                            <td><input type="radio" name="jc_position_a" value="3"/>编委</td>
+                                            <select id="jc_position_a" name="jc_position_a">
+                                                <c:forEach items="${pmphPosition}" var="dic">
+                                                    <option value="${dic.code}" >${dic.name}</option>
+                                                </c:forEach>
+                                                    <%--<option value="0">无</option>
+                                                    <option value="1">主编</option>
+                                                    <option value="2">副主编</option>
+                                                    <option value="3">编委</option>--%>
+                                            </select>
                                         </tr>
                                     </table>
                                     <input type="hidden" name="jc_position" value="jc_position_a"/>
@@ -1814,7 +1835,7 @@
                     <span class="tsxz_xt" id="intention_xt">（选填）</span>
                 </div>
                 <div class="content">
-                    <textarea class="text_cl" name="intention_content" id="intention_content"
+                    <textarea class="text_cl" name="intention_content" id="intention_content" placeholder="主要介绍自己的专业方向及编写内容
                               maxlength="1000">${intentionMap.content}</textarea>
                 </div>
             </div>

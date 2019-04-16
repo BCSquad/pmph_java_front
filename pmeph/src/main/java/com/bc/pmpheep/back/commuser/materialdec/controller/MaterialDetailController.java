@@ -756,7 +756,7 @@ public class MaterialDetailController extends BaseController{
 	//	}
 		if(tssbList.size()>0){
 			for (Map<String, Object> map : tssbList) {
-				if(map.get("preset_position").equals(3)){//
+				/*if(map.get("preset_position").equals(3)){//
 					map.put("preset_position", "副主编,编委");
 				}else if(map.get("preset_position").equals(1)){
 					map.put("preset_position", "编委");
@@ -786,7 +786,11 @@ public class MaterialDetailController extends BaseController{
 					map.put("preset_position", "主编,副主编,数字编委");
 				}else if(map.get("preset_position").equals(15)){
 					map.put("preset_position", "主编,副主编,编委,数字编委");
-				}
+				}*/
+				Integer preset_position = Integer.parseInt(map.get("preset_position").toString());
+				String preset_position1 = dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION, map.get("preset_position").toString());
+				map.put("preset_position", preset_position1);
+
 			}
 		}
 		//3.作家学习经历表
@@ -941,94 +945,7 @@ public class MaterialDetailController extends BaseController{
 	//	}else{//退回，通过，提交 都在正式申请表
 			tssbList=this.mdService.queryTsxz(queryMap);
 	//	}
-		if(tssbList.size()>0){
-			for (Map<String, Object> map : tssbList) {
-				String pos_a = ""; //主编 4
-				String pos_b = ""; //副主编 2
-				String pos_c = ""; //编委 1
-				String pos_d = ""; //数字编委 8
-				if(map.get("preset_position").equals(3)){//
-                    pos_a = "";
-                    pos_b = "1";
-                    pos_c = "1";
-                    pos_d = "";
-				}else if(map.get("preset_position").equals(1)){
-                    pos_a = "";
-                    pos_b = "";
-                    pos_c = "1";
-                    pos_d = "";
-				}else if(map.get("preset_position").equals(2)){
-                    pos_a = "";
-                    pos_b = "1";
-                    pos_c = "";
-                    pos_d = "";
-				}else if(map.get("preset_position").equals(4)){
-                    pos_a = "1";
-                    pos_b = "";
-                    pos_c = "";
-                    pos_d = "";
-				}else if(map.get("preset_position").equals(8)){
-                    pos_a = "";
-                    pos_b = "";
-                    pos_c = "";
-                    pos_d = "1";
-				}else if(map.get("preset_position").equals(5)){
-                    pos_a = "1";
-                    pos_b = "";
-                    pos_c = "1";
-                    pos_d = "";
-				}else if(map.get("preset_position").equals(6)){
-                    pos_a = "1";
-                    pos_b = "1";
-                    pos_c = "";
-                    pos_d = "";
-				}else if(map.get("preset_position").equals(9)){
-                    pos_a = "";
-                    pos_b = "";
-                    pos_c = "1";
-                    pos_d = "1";
-				}else if(map.get("preset_position").equals(10)){
-                    pos_a = "";
-                    pos_b = "1";
-                    pos_c = "";
-                    pos_d = "1";
-				}else if(map.get("preset_position").equals(12)){
-                    pos_a = "1";
-                    pos_b = "";
-                    pos_c = "";
-                    pos_d = "1";
-				}else if(map.get("preset_position").equals(7)){
-                    pos_a = "1";
-                    pos_b = "1";
-                    pos_c = "1";
-                    pos_d = "";
-				}else if(map.get("preset_position").equals(11)){
-                    pos_a = "";
-                    pos_b = "1";
-                    pos_c = "1";
-                    pos_d = "1";
-				}else if(map.get("preset_position").equals(13)){
-                    pos_a = "1";
-                    pos_b = "";
-                    pos_c = "1";
-                    pos_d = "1";
-				}else if(map.get("preset_position").equals(14)){
-                    pos_a = "1";
-                    pos_b = "";
-                    pos_c = "1";
-                    pos_d = "1";
-				}else if(map.get("preset_position").equals(15)){
-                    pos_a = "1";
-                    pos_b = "1";
-                    pos_c = "1";
-                    pos_d = "1";
-				}
-				map.put("pos_a", pos_a);
-				map.put("pos_b", pos_b);
-				map.put("pos_c", pos_c);
-				map.put("pos_d", pos_d);
-			}
-		}
+
 
 		//3.作家学习经历表
 		List<Map<String,Object>> stuList = new ArrayList<Map<String,Object>>();

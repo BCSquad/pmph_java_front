@@ -116,6 +116,12 @@ $(function () {
         height: 30,
         optionHeight: 30
     });
+
+    $('#jc_position_a').selectlist({
+        width: 110,
+        height: 30,
+        optionHeight: 30
+    });
     //人卫社教材编写-级别
     selectOption("pmph_rank_sl");
     //人卫社教材编写-职务

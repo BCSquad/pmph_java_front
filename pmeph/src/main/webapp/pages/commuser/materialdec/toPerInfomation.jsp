@@ -93,11 +93,11 @@
 									   message="工作单位不能为空"
 									   maxlength="36"/></td>
 							<td><span>职&emsp;&emsp;务：</span>
-								<select id="position" class="select-input"  name="position">
-									<c:forEach items="${pmphPosition}" var="dic">
+								<input  id="position" class="cg_input"  name="position">
+									<%--<c:forEach items="${pmphPosition}" var="dic">
 										<option value="${dic.code}" ${userMap.title == dic.code ? 'selected':''}>${dic.name}</option>
 									</c:forEach>
-								</select></td>
+								</input>--%></td>
 							<td><span>职&emsp;&emsp;称：</span>
 								<select id="zclx" class="select-input" name="title">
 									<c:forEach items="${writerUserTitle}" var="dic">
