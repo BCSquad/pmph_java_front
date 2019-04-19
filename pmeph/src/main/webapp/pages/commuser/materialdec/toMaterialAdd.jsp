@@ -25,14 +25,14 @@
 	<script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}" type="text/javascript"></script>
 	<script type="text/javascript" src="${ctx}/resources/commuser/materialdec/material.js?t=${_timestamp}"></script>
 	<script>
-	/*	$(function () {
-	 //realname sex birthday experience
-	 $('#realname').tipso({content: "请输入起止时间"});
-	 $('#sex').tipso({content: "请输入起止时间"});
-	 $('#birthday').tipso({content: "请输入起止时间"});
-	 $('#experience').tipso({content: "请输入起止时间"});
+        /*	$(function () {
+         //realname sex birthday experience
+         $('#realname').tipso({content: "请输入起止时间"});
+         $('#sex').tipso({content: "请输入起止时间"});
+         $('#birthday').tipso({content: "请输入起止时间"});
+         $('#experience').tipso({content: "请输入起止时间"});
 
-	 })*/
+         })*/
 	</script>
 	<style>
 		.footer {
@@ -89,17 +89,17 @@
 						<table style="width: 260px;border:0" cellspacing="0" cellpadding="0">
 							<tr>
 								<c:if test="${materialMap.is_multi_position =='1'}">
-									<td height="30px;"><input type="checkbox" id="zw_1" name="zw_1" value="4"/>主编</td>
-									<td><input type="checkbox" id="zw_1" name="zw_1" value="2"/>副主编</td>
-									<td><input type="checkbox" id="zw_1" name="zw_1" value="1"/>编委</td>
+									<c:forEach items="${pmphPosition}" var="dic">
+										<td><input type="checkbox" id="zw_1" name="zw_1" value="${dic.code}" />${dic.name}</td>
+									</c:forEach>
 									<c:if test="${materialMap.is_digital_editor_optional =='1'}">
 										<td><input type="checkbox" id="zw_1" name="zw_1" value="8"/>数字编委</td>
 									</c:if>
 								</c:if>
 								<c:if test="${materialMap.is_multi_position !='1'}">
-									<td><input type="radio" id="zw_1" name="zw_1" value="4"/>主编</td>
-									<td><input type="radio" id="zw_1" name="zw_1" value="2"/>副主编</td>
-									<td><input type="radio" id="zw_1" name="zw_1" value="1"/>编委</td>
+									<c:forEach items="${pmphPosition}" var="dic">
+										<td><input type="radio" id="zw_1" name="zw_1" value="${dic.code}"/>${dic.name}</td>
+									</c:forEach>
 									<c:if test="${materialMap.is_digital_editor_optional =='1'}">
 										<td><input type="radio" id="zw_1" name="zw_1" value="8"/>数字编委</td>
 									</c:if>
@@ -129,17 +129,59 @@
 					<table class="tab_1">
 						<tr>
 							<td><span class="btbs">*</span><span>姓&emsp;&emsp;名：</span>
-								<input class="cg_input" name="realname" id="realname" disabled value="${userMap.writername}" maxlength="20"/>
+
+								<c:choose>
+
+									<c:when test="${declarationCount==0}">
+										<input class="cg_input" name="realname" id="realname"
+											   value="${userMap.realname}" maxlength="20"/>
+									</c:when>
+									<c:otherwise>
+										<input class="cg_input" name="realname" id="realname" disabled
+											   value="${userMap.realname}" maxlength="20"/>
+									</c:otherwise>
+								</c:choose>
+
+
 								<input class="cg_input" name="user_id" type="hidden" value="${userMap.id}" />
 							</td>
 							<td><span class="btbs">*</span><span>性&emsp;&emsp;别：</span>
-								<select class="select-input" disabled id="sex" name="sex">
-									<option value="1" ${userMap.sex=='1'?'selected':'' }>男</option>
-									<option value="2" ${userMap.sex=='2'?'selected':'' }>女</option>
-									<%--<option value="0" ${userMap.sex=='0'?'selected':'' }>保密</option>--%>
-								</select></td>
+
+								<c:choose>
+
+									<c:when test="${declarationCount==0}">
+										<select class="select-input"  id="sex" name="sex">
+											<option value="1" ${userMap.sex=='1'?'selected':'' }>男</option>
+											<option value="2" ${userMap.sex=='2'?'selected':'' }>女</option>
+												<%--<option value="0" ${userMap.sex=='0'?'selected':'' }>保密</option>--%>
+										</select>
+									</c:when>
+									<c:otherwise>
+										<select class="select-input"  id="sex" name="sex">
+										<option value="1" ${userMap.sex=='1'?'selected':'' }>男</option>
+										<option value="2" ${userMap.sex=='2'?'selected':'' }>女</option>
+										<%--<option value="0" ${userMap.sex=='0'?'selected':'' }>保密</option>--%>
+										</select>
+									</c:otherwise>
+								</c:choose>
+
+
+							</td>
 							<td><span class="btbs">*</span><span>出生年月：</span>
-								<input class="cg_input" disabled calendar format="'yyyy-mm-dd'"  name="birthday" value="${userMap.birthday}"  id="birthday"  /></td>
+
+								<c:choose>
+									<c:when test="${declarationCount==0}">
+										<input class="cg_input" calendar format="'yyyy-mm-dd'" name="birthday"
+											   value="${userMap.birthday}" id="birthday"/>
+									</c:when>
+									<c:otherwise>
+										<input class="cg_input" disabled calendar format="'yyyy-mm-dd'" name="birthday"
+											   value="${userMap.birthday}" id="birthday"/>
+									</c:otherwise>
+								</c:choose>
+
+
+							</td>
 							<td><span class="btbs">*</span><span>教&emsp;&emsp;龄：</span>
 								<input class="cg_input" name="experience" value="${userMap.experience}" id="experience"
 									   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
@@ -150,23 +192,30 @@
 							<td><span class="btbs">*</span><span>工作单位：</span>
 								<input class="cg_input" name="org_name" value="${userMap.workplace}" id="org_name"  maxlength="36"/></td>
 							<td><span class="btbs">*</span><span>职&emsp;&emsp;务：</span>
-								<input class="cg_input" name="position" value="${userMap.position}" id="position"  maxlength="36"/></td>
+								<input class="cg_input" id="position" class="select-input"  name="position">
+                              <%--  <select id="position" class="select-input"  name="position">
+                                    <c:forEach items="${pmphPosition}" var="dic">
+                                        <option value="${dic.code}" ${userMap.title == dic.code ? 'selected':''}>${dic.name}</option>
+                                    </c:forEach>
+                                </select>--%>
+
+
 							<td><span class="btbs">*</span><span>职&emsp;&emsp;称：</span>
-                                <select id="zclx" name="title">
+								<select id="zclx" name="title">
 									<c:forEach items="${writerUserTitle}" var="dic">
 										<option value="${dic.code}" ${userMap.title == dic.code ? 'selected':''}>${dic.name}</option>
 									</c:forEach>
-                                    <%--<option value="院士" ${userMap.title=='院士'?'selected':'' }>院士</option>
+									<%--<option value="院士" ${userMap.title=='院士'?'selected':'' }>院士</option>
                                     <option value="教授"  ${userMap.title=='教授'?'selected':'' }>教授</option>
                                     <option value="正高"  ${userMap.title=='正高'?'selected':'' }>正高</option>
                                     <option value="副教授" ${userMap.title=='副教授'?'selected':'' }>副教授</option>
                                     <option value="副高" ${userMap.title=='副高'?'selected':'' }>副高</option>
                                     <option value="高级讲师" ${userMap.title=='高级讲师'?'selected':'' }>高级讲师</option>
                                     <option value="讲师" ${userMap.title=='讲师'?'selected':'' }>讲师</option>
-									<option value="主任药师" ${userMap.title=='主任药师'?'selected':'' }>主任药师</option>
-									<option value="副主任药师" ${userMap.title=='副主任药师'?'selected':'' }>副主任药师</option>
-									<option value="主管药师" ${userMap.title=='主管药师'?'selected':'' }>主管药师</option>
-									<option value="其他" ${userMap.title=='其他'?'selected':'' }>其他</option>--%>
+                                    <option value="主任药师" ${userMap.title=='主任药师'?'selected':'' }>主任药师</option>
+                                    <option value="副主任药师" ${userMap.title=='副主任药师'?'selected':'' }>副主任药师</option>
+                                    <option value="主管药师" ${userMap.title=='主管药师'?'selected':'' }>主管药师</option>
+                                    <option value="其他" ${userMap.title=='其他'?'selected':'' }>其他</option>--%>
 								</select></td>
 							<td><span class="btbs">*</span><span style="width: 70px">邮&emsp;&emsp;箱：</span>
 								<input class="cg_input" name="email" value="${userMap.email}" id="email"  maxlength="40"/></td>
@@ -197,7 +246,11 @@
 									<option value="2">军官证</option>
 								</select></td>
 							<td><span class="btbs">*</span><span>证件号码：</span>
-								<input class="cg_input" name="idcard" disabled value="${userMap.idcard}" id="idcard"  maxlength="18"/></td>
+
+										<input class="cg_input" name="idcard" value="${userMap.idcard}" id="idcard"
+											   maxlength="18"/>
+
+							</td>
 							<td colspan="2"><span class="btbs">*</span><span>地&emsp;&emsp;址：</span>
 								<input class="cg_input" style="width: 488px;" name="address" value="${userMap.address}" id="address"  maxlength="50"/></td>
 						</tr>
@@ -516,7 +569,7 @@
 						<thead>
 						<tr>
 							<td width="350px">教材名称</td>
-							<td width="280px">编写职务</td>
+							<td width="120px">编写职务</td>
 							<td width="100px">数字编委</td>
 							<td width="120px">出版社</td>
 							<td width="120px">出版时间</td>
@@ -529,12 +582,22 @@
 							<tr>
 								<td><input class="cg_input" maxlength="100" style="width: 320px" id="jc_material_name" name="jc_material_name" id="jc_material_name" value="" style="width: 260px;" placeholder="教材名称"/></td>
 								<td style="color: #333333;">
-									<table class="radio_tb" style="width: 100%;"><tr>
+									<%--<table class="radio_tb" style="width: 100%;"><tr>
 										<td><input type="radio" name="jc_position_a" value="0" checked="checked"/>无</td>
 										<td><input type="radio" name="jc_position_a" value="1" />主编</td>
 										<td><input type="radio" name="jc_position_a" value="2" />副主编</td>
 										<td><input type="radio" name="jc_position_a" value="3" />编委</td>
-									</tr></table>
+									</tr></table>--%>
+
+									<select  id="jc_position_a" name="jc_position_a" >
+										<c:forEach items="${pmphPosition}" var="dic">
+											<option value="${dic.code}" >${dic.name}</option>
+										</c:forEach>
+											<%--<option value="0">无</option>
+                                            <option value="1">主编</option>
+                                            <option value="2">副主编</option>
+                                            <option value="3">编委</option>--%>
+									</select>
 									<input type="hidden" name="jc_position" value="jc_position_a" />
 									<input type="hidden" name="jc_id" value="${list.id}">
 								</td>
@@ -570,7 +633,7 @@
 									<input type="hidden" name="jc_is_digital_editor" value="jc_is_digital_editor_${status.count}" />
 								</td>
 								<td><input class="cg_input" name="jc_publisher" value="人民卫生出版社" readonly="true" style="width: 100px;" maxlength="20"/></td>
-								<td><input class="cg_input" name="jc_publish_date" id="jc_publish_date_${status.count}" value="${list.publish_date}" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  style="width: 100px;"/></td>
+								<td><input class="cg_input" name="jc_publish_date" id="jc_publish_date_${status.count}" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  style="width: 100px;"/></td>
 								<td><input class="cg_input" maxlength="100" name="jc_note" value="${list.note}" style="width: 100px;" placeholder="备注"/>
 									<input type="hidden" name="zdjy" value="jc_material_name_${status.count}"/>
 									<input type="hidden" name="jc_id" value="${list.id}">
@@ -674,12 +737,12 @@
 										<c:forEach items="${pmphRank}" var="dic">
 											<option value="${dic.code}">${dic.name}</option>
 										</c:forEach>
-										<%--<option value="0">无</option>
-										<option value="1">国家</option>
-										<option value="2">省部</option>
-										<option value="3">协编</option>
-										<option value="4">校本</option>
-										<option value="5">其他</option>--%>
+											<%--<option value="0">无</option>
+                                            <option value="1">国家</option>
+                                            <option value="2">省部</option>
+                                            <option value="3">协编</option>
+                                            <option value="4">校本</option>
+                                            <option value="5">其他</option>--%>
 									</select>
 								</td>
 								<td>
@@ -687,10 +750,10 @@
 										<c:forEach items="${pmphPosition}" var="dic">
 											<option value="${dic.code}" >${dic.name}</option>
 										</c:forEach>
-										<%--<option value="0">无</option>
-										<option value="1">主编</option>
-										<option value="2">副主编</option>
-										<option value="3">编委</option>--%>
+											<%--<option value="0">无</option>
+                                            <option value="1">主编</option>
+                                            <option value="2">副主编</option>
+                                            <option value="3">编委</option>--%>
 									</select>
 								</td>
 								<td style="color: #333333;">
@@ -713,12 +776,12 @@
 										<c:forEach items="${pmphRank}" var="dic">
 											<option value="${dic.code}" ${list.rank==dic.code?'selected':'' }>${dic.name}</option>
 										</c:forEach>
-										<%--<option value="0" ${list.rank=='0'?'selected':'' }>无</option>
-										<option value="1" ${list.rank=='1'?'selected':'' }>国家</option>
-										<option value="2" ${list.rank=='2'?'selected':'' }>省部</option>
-										<option value="3" ${list.rank=='3'?'selected':'' }>协编</option>
-										<option value="4" ${list.rank=='4'?'selected':'' }>校本</option>
-										<option value="5" ${list.rank=='5'?'selected':'' }>其他</option>--%>
+											<%--<option value="0" ${list.rank=='0'?'selected':'' }>无</option>
+                                            <option value="1" ${list.rank=='1'?'selected':'' }>国家</option>
+                                            <option value="2" ${list.rank=='2'?'selected':'' }>省部</option>
+                                            <option value="3" ${list.rank=='3'?'selected':'' }>协编</option>
+                                            <option value="4" ${list.rank=='4'?'selected':'' }>校本</option>
+                                            <option value="5" ${list.rank=='5'?'selected':'' }>其他</option>--%>
 									</select>
 									<input type="hidden" id="pmph_rank_sl" name="pmph_rank_sl" value="pmph_rank_${status.count}" />
 								</td>
@@ -727,10 +790,10 @@
 										<c:forEach items="${pmphPosition}" var="dic">
 											<option value="${dic.code}" ${list.position==dic.code?'selected':'' }>${dic.name}</option>
 										</c:forEach>
-										<%--<option value="0" ${list.position=='0'?'selected':'' }>无</option>
-										<option value="1" ${list.position=='1'?'selected':'' }>主编</option>
-										<option value="2" ${list.position=='2'?'selected':'' }>副主编</option>
-										<option value="3" ${list.position=='3'?'selected':'' }>编委</option>--%>
+											<%--<option value="0" ${list.position=='0'?'selected':'' }>无</option>
+                                            <option value="1" ${list.position=='1'?'selected':'' }>主编</option>
+                                            <option value="2" ${list.position=='2'?'selected':'' }>副主编</option>
+                                            <option value="3" ${list.position=='3'?'selected':'' }>编委</option>--%>
 									</select>
 									<input type="hidden" id="pmph_sl" name="pmph_sl" value="pmph_position_${status.count}" />
 								</td>
@@ -794,12 +857,12 @@
 										<c:forEach items="${pmphRank}" var="dic">
 											<option value="${dic.code}" >${dic.name}</option>
 										</c:forEach>
-										<%--<option value="0">无</option>
-										<option value="1">国家</option>
-										<option value="2">省部</option>
-										<option value="3">协编</option>
-										<option value="4">校本</option>
-										<option value="5">其他</option>--%>
+											<%--<option value="0">无</option>
+                                            <option value="1">国家</option>
+                                            <option value="2">省部</option>
+                                            <option value="3">协编</option>
+                                            <option value="4">校本</option>
+                                            <option value="5">其他</option>--%>
 									</select>
 								</td>
 								<td>
@@ -807,10 +870,10 @@
 										<c:forEach items="${pmphPosition}" var="dic">
 											<option value="${dic.code}" >${dic.name}</option>
 										</c:forEach>
-										<%--<option value="0">无</option>
-										<option value="1">主编</option>
-										<option value="2">副主编</option>
-										<option value="3">编委</option>--%>
+											<%--<option value="0">无</option>
+                                            <option value="1">主编</option>
+                                            <option value="2">副主编</option>
+                                            <option value="3">编委</option>--%>
 									</select>
 								</td>
 								<td style="color: #333333;">
@@ -834,12 +897,12 @@
 										<c:forEach items="${pmphRank}" var="dic">
 											<option value="${dic.code}" ${list.rank==dic.code?'selected':'' }>${dic.name}</option>
 										</c:forEach>
-										<%--<option value="0" ${list.rank=='0'?'selected':'' }>无</option>
-										<option value="1" ${list.rank=='1'?'selected':'' }>国家</option>
-										<option value="2" ${list.rank=='2'?'selected':'' }>省部</option>
-										<option value="3" ${list.rank=='3'?'selected':'' }>协编</option>
-										<option value="4" ${list.rank=='4'?'selected':'' }>校本</option>
-										<option value="5" ${list.rank=='5'?'selected':'' }>其他</option>--%>
+											<%--<option value="0" ${list.rank=='0'?'selected':'' }>无</option>
+                                            <option value="1" ${list.rank=='1'?'selected':'' }>国家</option>
+                                            <option value="2" ${list.rank=='2'?'selected':'' }>省部</option>
+                                            <option value="3" ${list.rank=='3'?'selected':'' }>协编</option>
+                                            <option value="4" ${list.rank=='4'?'selected':'' }>校本</option>
+                                            <option value="5" ${list.rank=='5'?'selected':'' }>其他</option>--%>
 									</select>
 									<input type="hidden" id="jcb_rank_sl" name="jcb_rank_sl" value="jcb_rank_${status.count}" />
 								</td>
@@ -848,10 +911,10 @@
 										<c:forEach items="${pmphPosition}" var="dic">
 											<option value="${dic.code}" ${list.position==dic.code?'selected':'' }>${dic.name}</option>
 										</c:forEach>
-										<%--<option value="0" ${list.position=='0'?'selected':'' }>无</option>
-										<option value="1" ${list.position=='1'?'selected':'' }>主编</option>
-										<option value="2" ${list.position=='2'?'selected':'' }>副主编</option>
-										<option value="3" ${list.position=='3'?'selected':'' }>编委</option>--%>
+											<%--<option value="0" ${list.position=='0'?'selected':'' }>无</option>
+                                            <option value="1" ${list.position=='1'?'selected':'' }>主编</option>
+                                            <option value="2" ${list.position=='2'?'selected':'' }>副主编</option>
+                                            <option value="3" ${list.position=='3'?'selected':'' }>编委</option>--%>
 									</select>
 									<input type="hidden" id="jcjb_sl" name="jcjb_sl" value="jcb_position_${status.count}" />
 								</td>
@@ -1353,7 +1416,7 @@
 					<span class="tsxz_xt" id="intention_xt" >（选填）</span>
 				</div>
 				<div class="content">
-					<textarea class="text_cl" name="intention_content" id="intention_content" maxlength="1000"></textarea>
+					<textarea class="text_cl" name="intention_content" id="intention_content" placeholder="" maxlength="1000"></textarea>
 				</div>
 			</div>
 			<!--扩展信息-->
@@ -1405,7 +1468,7 @@
 				<div style="color: red;font-size: 16px;margin-top: 15px;">（提示：如暂存或提交不成功请使用360浏览器极速模式或谷歌浏览器，请使用本人账号登录进行申报，否则可能会影响遴选结果）</div>
 			</div>
 		</form>
-</div>
-<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
+	</div>
+	<jsp:include page="/pages/comm/tail.jsp"></jsp:include>
 </body>
 </html>

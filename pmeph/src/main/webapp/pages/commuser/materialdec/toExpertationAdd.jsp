@@ -605,21 +605,21 @@
 						<tbody>
 						<c:if test="${empty wzfbqkList[0]}">
 							<tr>
-								<td class="xztd"><input class="cg_input xzip" maxlength="100"  id="wzfbqk_material_name" name="wzfb_name" <%--id="jc_material_name"--%> value="" placeholder="文章题目"/></td>
-								<td class="xztd"><input class="cg_input xzip" name="wzfb_qkmc" value=""  maxlength="20" placeholder="期刊名称"/></td>
-								<td class="xztd"><input class="cg_input xzip" name="wzfb_njq"  value="" placeholder="年、卷、期"/></td>
-								<td class="xztd"><input class="cg_input xzip" maxlength="100" name="wzfb_qklb" value=""  placeholder="期刊级别（SCI或国内核心期刊）"/></td>
-								<td class="xztd"><input class="cg_input xzip" maxlength="100" name="wzfb_note" value=""  placeholder="备注"/></td>
+								<td class="xztd"><input class="cg_input xzip" maxlength="400"  id="wzfbqk_material_name" name="wzfb_name" <%--id="jc_material_name"--%> value="" placeholder="文章题目"/></td>
+								<td class="xztd"><input class="cg_input xzip" name="wzfb_qkmc" value=""  maxlength="50" placeholder="期刊名称"/></td>
+								<td class="xztd"><input class="cg_input xzip" name="wzfb_njq"  value="" placeholder="年、卷、期" maxlength="50"/></td>
+								<td class="xztd"><input class="cg_input xzip" maxlength="50" name="wzfb_qklb" value=""  placeholder="期刊级别（SCI或国内核心期刊）"/></td>
+								<td class="xztd"><input class="cg_input xzip" maxlength="50" name="wzfb_note" value=""  placeholder="备注"/></td>
 								<td class="xztd"><img class="add_img" src="${ctx}/statics/image/add.png" onclick="javascript:add_wzfbqk()"/></td>
 								<input type="hidden" name="wzfbxq_id" value="">
 							</tr></c:if>
 						<c:forEach var="list" items="${wzfbqkList}" varStatus="status">
 							<tr id="wzfbxq_${status.count}">
-								<td class="xztd"><input class="cg_input xzip" maxlength="100" name="wzfb_name" id="wzfbqk_name_${status.count}" value="${list.title}"/></td>
-								<td class="xztd"><input class="cg_input xzip" name="wzfb_qkmc" value="${list.periodical_title}"  maxlength="20"/></td>
-								<td class="xztd"><input class="cg_input xzip" name="wzfb_njq"  value="${list.year_volume_period}"/></td>
-								<td class="xztd"><input class="cg_input xzip" maxlength="100" name="wzfb_qklb" value="${list.periodical_level}"  placeholder=""/></td>
-								<td class="xztd"><input class="cg_input xzip" maxlength="100" name="wzfb_note" value="${list.note}" placeholder="备注"/>
+								<td class="xztd"><input class="cg_input xzip" maxlength="400" name="wzfb_name" id="wzfbqk_name_${status.count}" value="${list.title}"/></td>
+								<td class="xztd"><input class="cg_input xzip" name="wzfb_qkmc" value="${list.periodical_title}"  maxlength="50"/></td>
+								<td class="xztd"><input class="cg_input xzip" name="wzfb_njq"  value="${list.year_volume_period}" maxlength="50"/></td>
+								<td class="xztd"><input class="cg_input xzip" maxlength="50" name="wzfb_qklb" value="${list.periodical_level}"  placeholder=""/></td>
+								<td class="xztd"><input class="cg_input xzip" maxlength="50" name="wzfb_note" value="${list.note}" placeholder="备注"/>
 									<input type="hidden" name="wzfb" value="wzfb_name_${status.count}"/>
 									<input type="hidden" name="wzfbxq_id" value="${list.id}">
 								</td>

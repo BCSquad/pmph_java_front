@@ -59,7 +59,7 @@
 		(
 		select concat(m.path,'-',m.id,'-') full_path from material_type m 
 		inner join book b on b.type = m.id and b.is_on_sale =1
-		group by m.id
+		group by m.id limit 2
 		)p
 		on p.full_path REGEXP concat('^.*-',m.id,'-.*')
 		where m.path = '0'
@@ -118,13 +118,14 @@
 		</if>
 		<!-- group by t3.id -->
 		order by t0.sort, t1.sort , t2.sort , t3.sort  
-		
+
 
 		 <!-- <![CDATA[
 
 		select * from material_type where length(path) < 20 order by length(path),parent_id,length(note),sort
 
         ]]>  -->
+
 	</select>
 
     <!-- 根据某类下的新书推荐 -->

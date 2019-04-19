@@ -22,6 +22,11 @@ public class UserService {
         return userDao.getUserInfo(username, usertype);
     }
 
+
+    public List<Map<String, Object>> getUserType(String username) {
+        return userDao.getUserType(username);
+    }
+
     @Transactional
     public int insertUserLoginLog(Map<String, Object> info) {
         return userDao.insertUserLoginLog(info);

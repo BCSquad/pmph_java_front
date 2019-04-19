@@ -24,7 +24,9 @@
 		when p.preset_position = 14 then '数字编委,主编,副主编'
 		when p.preset_position = 15 then '数字编委,主编,编委,副主编'
 		else '无'  end )) SEPARATOR '\n') as bpp,
-		(case  when d.online_progress=0  then '未提交'  
+		p.preset_position,
+		t.textbook_name,
+		(case  when d.online_progress=0  then '未提交'
 		when d.online_progress=1  then '未审核' 
 		when d.online_progress=2  then '已退回' 
 		when d.online_progress=3  then '已审核' 

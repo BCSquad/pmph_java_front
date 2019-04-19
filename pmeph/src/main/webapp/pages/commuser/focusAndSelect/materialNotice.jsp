@@ -25,11 +25,18 @@
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/reload.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/commuser/focusAndSelect/materialNotice.js?t=${_timestamp}" ></script>
-    
 
-    
+
+
+
     <style type="text/css">
+        .div_content_right .select-button {
+            background: #f6f6f6;
+        }
 
+        .div_content_right .select-wrapper {
+            border: none;
+        }
     </style>
 </head>
 <body>

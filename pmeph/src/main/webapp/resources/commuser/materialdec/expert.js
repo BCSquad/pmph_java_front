@@ -632,11 +632,11 @@ function add_wzfbqk() {
     var $table = $("#tab_wzfbqk");
     var $tr=$("<tr id='wzfbqk_"+num+"'>\n" +
         "<input type='hidden' name='wzfbxq_id' value=''>"+
-        "<td class=\"xztd\"><input class=\"cg_input xzip\" maxlength=\"100\"  id=\"wzfbqk_material_name_"+num+"\" name=\"wzfb_name\" value=\"\" placeholder=\"文章题目\"/></td>\n" +
-        "<td class=\"xztd\"><input class=\"cg_input xzip\" name=\"wzfb_qkmc\" value=\"\"  maxlength=\"20\" placeholder=\"期刊名称\"/></td>\n" +
-        "<td class=\"xztd\"><input class=\"cg_input xzip\" name=\"wzfb_njq\" value=\"\" placeholder=\"年、卷、期\"/></td>\n" +
-        "<td class=\"xztd\"><input class=\"cg_input xzip\" maxlength=\"100\" name=\"wzfb_qklb\" value=\"\"  placeholder=\"期刊级别（SCI或国内核心期刊）\"/></td>\n" +
-        "<td class=\"xztd\"><input class=\"cg_input xzip\" maxlength=\"100\" name=\"wzfb_note\" value=\"\"  placeholder=\"备注\"/></td>\n" +
+        "<td class=\"xztd\"><input class=\"cg_input xzip\" maxlength=\"400\"  id=\"wzfbqk_material_name_"+num+"\" name=\"wzfb_name\" value=\"\" placeholder=\"文章题目\"/></td>\n" +
+        "<td class=\"xztd\"><input class=\"cg_input xzip\" name=\"wzfb_qkmc\" value=\"\"  maxlength=\"50\" placeholder=\"期刊名称\"/></td>\n" +
+        "<td class=\"xztd\"><input class=\"cg_input xzip\" name=\"wzfb_njq\" value=\"\" placeholder=\"年、卷、期\" maxlength=\"50\"/></td>\n" +
+        "<td class=\"xztd\"><input class=\"cg_input xzip\" maxlength=\"50\" name=\"wzfb_qklb\" value=\"\"  placeholder=\"期刊级别（SCI或国内核心期刊）\"/></td>\n" +
+        "<td class=\"xztd\"><input class=\"cg_input xzip\" maxlength=\"50\" name=\"wzfb_note\" value=\"\"  placeholder=\"备注\"/></td>\n" +
         "<td class=\"xztd\"><img class=\"add_img\" src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr('wzfbqk_"+num+"')\"/></td>\n" +
         "</tr>");
     $table.append($tr);

@@ -135,6 +135,7 @@ function chooseType(state) {
 
 //书籍分类 次分类点击事件
 function chooseTypeSecond(state) {
+
 	$.ajax({
 		type : 'post',
 		url : contextpath + 'homepage/chooseType.action?state=' + state,
@@ -162,14 +163,22 @@ function chooseTypeSecond(state) {
 // 根据分类改变图书畅销榜
 function changesale(type) {
 
+
 	$.ajax({
 		type : 'post',
 		url : contextpath + 'homepage/changesale.action?type=' + type,
 		async : false,
 		dataType : 'json',
 		success : function(json) {
+			if(json.type.length<6){
+				let count=6-(6-json.type.length);
+				$("#count_"+(count)).css("display","none");
+			}else if(json.type.length==6){
+				let count=5-(6-json.type.length);
+				$("#count_"+(count)).css("display","block");
+			}
 			$.each(json.type, function(i, x) {
-				/*if (i == 0) {*/
+
 					$("#sale_book"+(i+1)).html(x.bookname);
 					$("#right_book"+(i+1)).attr('src', x.image_url);
 					$("#last_right_book_id_"+(i+1)).val(x.id);

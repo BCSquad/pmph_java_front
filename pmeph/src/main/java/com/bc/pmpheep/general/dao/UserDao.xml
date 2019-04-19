@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bc.pmpheep.general.dao.UserDao">
 
+    <select id="getUserType" resultType="map">
+      select '1' type from writer_user where  username=#{username}
+      UNION
+      select '2' type from org_user where  username=#{username}
+    </select>
+
+
     <select id="getUserInfo" resultType="map">
         <if test="usertype == 1">
 			select wu.*,IFNULL(wu.nickname,wu.username) as nkname,
@@ -16,6 +23,17 @@
             from org_user u join org o on u.org_id=o.id where username=#{username} and is_disabled=0
         </if>
     </select>
+
+    <insert id="addNewUser" >
+        <if test="usertype == 1">
+            insert into  writer_user (username,password,nickname,realname,avatar)
+            VALUES (#{username},'B1:40:2F:CF:BD:1D:92:05',#{username},'','DEFAULT');
+            insert into writer_point (user_id,total,gain,loss) values ((select id from writer_user where username=#{username} ),0,0,0);
+        </if>
+        <if test="usertype == 2">
+            insert into  org_user (username,password,nickname,realname) values (#{username},'B1:40:2F:CF:BD:1D:92:05',#{username},#{username})
+        </if>
+    </insert>
 
 
     <select id="getPointRules" resultType="map">

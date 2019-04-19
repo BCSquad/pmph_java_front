@@ -12,9 +12,12 @@ var sta=true;
 var materialMap ;
  
  $(function () {
+     checkRealName();
+
+
     setTimeout(function () {
         $('#edu1').tipso({validator: "isNonEmpty", message: "请选择申报的图书"});
-        $('#realname').tipso({validator: "isNonEmpty", message: "姓名不能为空"});
+        $('#realname').tipso({validator: "isNonEmpty|notHan", message: "姓名不能为空|姓名必须是中文"});
         $('#birthday').tipso({validator: "isNonEmpty", message: "出生日期不能为空"});
         $('#experience').tipso({validator: "isNonEmpty|onlyInt", message: "教龄不能为空|教龄必须是数字"});
         $('#org_name').tipso({validator: "isNonEmpty", message: "工作单位不能为空"});
@@ -112,6 +115,11 @@ var materialMap ;
         height: 30,
         optionHeight: 30
     });
+     $('#jc_position_a').selectlist({
+         width: 110,
+         height: 30,
+         optionHeight: 30
+     });
     //人卫社教材编写-级别
     selectOption("pmph_rank_sl");
     //人卫社教材编写-职务
@@ -131,7 +139,33 @@ window.onload = function(){
     });
 };
 
+var nameFlag=true;
+function checkRealName(){
 
+    var ralname=$("#realname").val();
+
+    var reg = /^[\u4e00-\u9fa5]+$/;
+    if(ralname){
+        nameFlag=false;
+
+    }
+    if(reg.test(ralname)){
+        nameFlag=false;
+
+    }else{
+        nameFlag=true;
+
+    }
+
+    if(nameFlag){
+        window.message.confirm("申报资料中的姓名不能为空且必须是中文,请转跳后修改为正确的真实姓名",{btn:["确定转跳"]},function(){
+            window.location.href='http://medu.ipmph.com/userinfo/touser.action';
+        },function(){
+            return fasle;
+        });
+    }
+
+}
 
 //填写调研表之前自动暂存
 function savebaself() {
@@ -1103,7 +1137,12 @@ function buttAdd(type){
                 document.getElementById('butj').onclick = function () {
                     window.message.warning("请不要重复点击");
                 };*/
-                window.message.confirm(
+                checkRealName();
+                if(nameFlag){
+                    return;
+                }
+
+                    window.message.confirm(
                     "确定提交吗？"
                     ,{icon: 7, title:'提示',btn:["确定","取消"]}
 

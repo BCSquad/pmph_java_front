@@ -13,6 +13,7 @@ import com.bc.pmpheep.back.util.StringUtil;
 import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.general.service.DataDictionaryService;
 import com.bc.pmpheep.general.service.FileService;
+import com.mysql.jdbc.StringUtils;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -54,14 +55,14 @@ public class MaterialDetailController extends BaseController{
 	@Autowired
     @Qualifier("com.bc.pmpheep.general.service.FileService")
     FileService fileService;
-	
+
 	@Autowired
     @Qualifier("com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService")
     private PersonalService personalService;
 
 	@Autowired
 	DataDictionaryService dataDictionaryService;
-	
+
 	/**
 	 * 跳转到申报新增页面
      *
@@ -107,13 +108,24 @@ public class MaterialDetailController extends BaseController{
 		//个人资料
 		Map<String,Object> userinfo =  this.getUserInfo();
 		Map<String,Object> userMap =  this.mdService.queryUserInfo(MapUtils.getString(userinfo,"id",""));
-        for (Map.Entry<String, Object> entry : userMap.entrySet()) {
-            String key = entry.getKey().toString();
-            String value = entry.getValue().toString();
-            if(value.equals("-")){
-				userMap.put(key,"");
+		String idcar = MapUtils.getString(userMap, "idcard", null);
+
+		if (StringUtils.isNullOrEmpty(idcar))
+		{
+			Map<String, Object> id = this.mdService.queryIdcar(MapUtils.getLong(userinfo, "id"));
+			if ((id != null) &&
+					(id.get("idcard") != null)) {
+				userMap.put("idcard", id.get("idcard"));
 			}
-        }
+		}
+		for (Map.Entry<String, Object> entry : userMap.entrySet())
+		{
+			String key = ((String)entry.getKey()).toString();
+			String value = entry.getValue().toString();
+			if (value.equals("-")) {
+				userMap.put(key, "");
+			}
+		}
         queryMap.put("user_id",userMap.get("id"));
 		//个人资料库信息
 		perstuList = this.perService.queryPerStu(queryMap);
@@ -133,7 +145,12 @@ public class MaterialDetailController extends BaseController{
         perpmphList=this.perService.rwsjcPerList(queryMap);
 
 
-        String material_id = request.getParameter("material_id"); //教材ID
+		int declarationCount =0;
+					Integer id = mdService.queryDeclarationCountByUserId(MapUtils.getLong(userinfo, "id"));
+					declarationCount=id!=null?id:0;
+
+
+		String material_id = request.getParameter("material_id"); //教材ID
 		//教材信息
 		Map<String,Object> materialMap = new HashMap<String,Object>();
 		materialMap = this.mdService.queryMaterialbyId(material_id);
@@ -168,6 +185,7 @@ public class MaterialDetailController extends BaseController{
 		mav.addObject("userMap", userMap);
 		mav.addObject("zjkzxxList", zjkzxxList);
 		mav.addObject("material_id", materialMap.get("id"));
+		mav.addObject("declarationCount",declarationCount);
 
 		mav.addObject("perstuList",perstuList);
 		mav.addObject("perworkList",perworkList);
@@ -317,6 +335,8 @@ public class MaterialDetailController extends BaseController{
 		perMap.put("rank","2");
 		perMap.put("expertise", request.getParameter("expertise"));
 		perMap.put("gmt_create", date);
+
+
 		//获取图书选择参数
 		String textbook_ids[] = request.getParameterValues("textbook_id");
 		String preset_positions[] = request.getParameterValues("preset_position");
@@ -749,7 +769,7 @@ public class MaterialDetailController extends BaseController{
 	//	}
 		if(tssbList.size()>0){
 			for (Map<String, Object> map : tssbList) {
-				if(map.get("preset_position").equals(3)){//
+				/*if(map.get("preset_position").equals(3)){//
 					map.put("preset_position", "副主编,编委");
 				}else if(map.get("preset_position").equals(1)){
 					map.put("preset_position", "编委");
@@ -779,7 +799,11 @@ public class MaterialDetailController extends BaseController{
 					map.put("preset_position", "主编,副主编,数字编委");
 				}else if(map.get("preset_position").equals(15)){
 					map.put("preset_position", "主编,副主编,编委,数字编委");
-				}
+				}*/
+				Integer preset_position = Integer.parseInt(map.get("preset_position").toString());
+				String preset_position1 = dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION, map.get("preset_position").toString());
+				map.put("preset_position", preset_position1);
+
 			}
 		}
 		//3.作家学习经历表
@@ -898,9 +922,26 @@ public class MaterialDetailController extends BaseController{
 		//1.作家申报信息表
 		List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
 		gezlList = this.mdService.queryPerson(queryMap);
-        for (Map.Entry<String, Object> entry : gezlList.get(0).entrySet()) {
+		Map<String, Object> userInfo = mdService.queryUserInfo(MapUtils.getString(userMap, "id"));
+		for (Map.Entry<String, Object> entry : gezlList.get(0).entrySet()) {
             String key = entry.getKey().toString();
             String value = entry.getValue().toString();
+			Object o = userInfo.get(key);
+            if(StringUtils.isNullOrEmpty(value)){
+				if(ObjectUtil.notNull(o)){
+					entry.setValue(o);
+				}
+			}else{
+					if(ObjectUtil.notNull(o)){
+						if("idcard".equals(key)){
+								entry.setValue(userInfo.get(key));
+						}else if("realname".equals(key)){
+								entry.setValue(userInfo.get(key));
+						}else if("birthday".equals(key)){
+								entry.setValue(userInfo.get(key));
+						}
+				}
+            }
             if(value.equals("-")){
                 gezlList.get(0).put(key,"");
             }
@@ -920,94 +961,11 @@ public class MaterialDetailController extends BaseController{
 	//	}else{//退回，通过，提交 都在正式申请表
 			tssbList=this.mdService.queryTsxz(queryMap);
 	//	}
-		if(tssbList.size()>0){
-			for (Map<String, Object> map : tssbList) {
-				String pos_a = ""; //主编 4
-				String pos_b = ""; //副主编 2
-				String pos_c = ""; //编委 1
-				String pos_d = ""; //数字编委 8
-				if(map.get("preset_position").equals(3)){//
-                    pos_a = "";
-                    pos_b = "1";
-                    pos_c = "1";
-                    pos_d = "";
-				}else if(map.get("preset_position").equals(1)){
-                    pos_a = "";
-                    pos_b = "";
-                    pos_c = "1";
-                    pos_d = "";
-				}else if(map.get("preset_position").equals(2)){
-                    pos_a = "";
-                    pos_b = "1";
-                    pos_c = "";
-                    pos_d = "";
-				}else if(map.get("preset_position").equals(4)){
-                    pos_a = "1";
-                    pos_b = "";
-                    pos_c = "";
-                    pos_d = "";
-				}else if(map.get("preset_position").equals(8)){
-                    pos_a = "";
-                    pos_b = "";
-                    pos_c = "";
-                    pos_d = "1";
-				}else if(map.get("preset_position").equals(5)){
-                    pos_a = "1";
-                    pos_b = "";
-                    pos_c = "1";
-                    pos_d = "";
-				}else if(map.get("preset_position").equals(6)){
-                    pos_a = "1";
-                    pos_b = "1";
-                    pos_c = "";
-                    pos_d = "";
-				}else if(map.get("preset_position").equals(9)){
-                    pos_a = "";
-                    pos_b = "";
-                    pos_c = "1";
-                    pos_d = "1";
-				}else if(map.get("preset_position").equals(10)){
-                    pos_a = "";
-                    pos_b = "1";
-                    pos_c = "";
-                    pos_d = "1";
-				}else if(map.get("preset_position").equals(12)){
-                    pos_a = "1";
-                    pos_b = "";
-                    pos_c = "";
-                    pos_d = "1";
-				}else if(map.get("preset_position").equals(7)){
-                    pos_a = "1";
-                    pos_b = "1";
-                    pos_c = "1";
-                    pos_d = "";
-				}else if(map.get("preset_position").equals(11)){
-                    pos_a = "";
-                    pos_b = "1";
-                    pos_c = "1";
-                    pos_d = "1";
-				}else if(map.get("preset_position").equals(13)){
-                    pos_a = "1";
-                    pos_b = "";
-                    pos_c = "1";
-                    pos_d = "1";
-				}else if(map.get("preset_position").equals(14)){
-                    pos_a = "1";
-                    pos_b = "";
-                    pos_c = "1";
-                    pos_d = "1";
-				}else if(map.get("preset_position").equals(15)){
-                    pos_a = "1";
-                    pos_b = "1";
-                    pos_c = "1";
-                    pos_d = "1";
-				}
-				map.put("pos_a", pos_a);
-				map.put("pos_b", pos_b);
-				map.put("pos_c", pos_c);
-				map.put("pos_d", pos_d);
-			}
-		}
+
+        int declarationCount =0;
+        Integer id = mdService.queryDeclarationCountByUserId(MapUtils.getLong(userInfo, "id"));
+        declarationCount=id!=null?id:0;
+
 
 		//3.作家学习经历表
 		List<Map<String,Object>> stuList = new ArrayList<Map<String,Object>>();
@@ -1096,6 +1054,7 @@ public class MaterialDetailController extends BaseController{
 		mav.addObject("pmphPosition", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_POSITION));
 
 		//填充
+        mav.addObject("declarationCount",declarationCount);
 		mav.addObject("bookSelects", bookSelects.toString());
 		mav.addObject("gezlList", gezlList.get(0));
 		mav.addObject("tssbList", tssbList);
@@ -1125,8 +1084,8 @@ public class MaterialDetailController extends BaseController{
 
 		return mav;
 	}
-	
-	
+
+
 	/*//申报审核页面
 	@RequestMapping("toMaterialAudit")
 	public ModelAndView toMaterialAudit(HttpServletRequest request,
@@ -1136,9 +1095,9 @@ public class MaterialDetailController extends BaseController{
 		String material_id = request.getParameter("material_id");
 		String declaration_id = request.getParameter("declaration_id");
 		Map<String,Object> queryMap = new HashMap<String,Object>();
-		queryMap.put("material_id", material_id); 
-		queryMap.put("declaration_id", declaration_id); 
-		
+		queryMap.put("material_id", material_id);
+		queryMap.put("declaration_id", declaration_id);
+
 		//1.作家申报表
 		List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
 		gezlList = this.mdService.queryPerson(queryMap);
@@ -1196,7 +1155,7 @@ public class MaterialDetailController extends BaseController{
 		mav.addObject("zjkzqkList", zjkzqkList);
 		return mav;
 	}*/
-	
+
 	//申报审核
 	/*@RequestMapping("doMaterialAudit")
 	@ResponseBody
@@ -1211,7 +1170,7 @@ public class MaterialDetailController extends BaseController{
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String date = df.format(new Date());
 		String msg = "";
-		
+
 		paramMap.put("declaration_id", declaration_id);
 		paramMap.put("online_progress", type);
 		paramMap.put("auth_user_id", user_id);
@@ -1266,8 +1225,8 @@ public class MaterialDetailController extends BaseController{
 		mav.addObject("pageResult", pageResult);
 		mav.addObject("paraMap", paraMap);
 		return mav;
-	} 
-	
+	}
+
 	/**
 	 *  重定向方法，根据教材id或申报id及当前登录人判断重定向到新增或是修改或是查看申报，
 	 * @param material_id
@@ -1283,9 +1242,9 @@ public class MaterialDetailController extends BaseController{
 		ModelAndView mv = new ModelAndView();
 		Map<String, Object> user = getUserInfo();
 		String user_id = user.get("id").toString();
-		
+
 		Map<String, Object> dmap = mdService.queryDeclarationByUserIdAndMaterialIdOrDeclarationId(user_id,material_id,declaration_id);
-		
+
 		if (dmap!=null) {
 			if ("".equals(declaration_id)) {
 				declaration_id = dmap.get("id").toString();

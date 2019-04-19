@@ -363,7 +363,15 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
                 perMap.put("idcard", "");
             }
             this.madd.updateWriter(perMap);
-        }
+        } else{
+                HashMap<String, Object> map = new HashMap<>();
+                map.put("idcard",perMap.get("idcard"));
+                map.put("realname",perMap.get("realname"));
+                map.put("birthday",perMap.get("birthday"));
+                map.put("user_id",perMap.get("user_id"));
+                int i = this.madd.updateWriter(map);
+
+            }
        /* else { //暂存
             if (tssbList != null && !tssbList.isEmpty()) {
                 for (Map<String, Object> map : tssbList) {
@@ -707,6 +715,15 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             }
             this.madd.updateWriter(perMap);
 
+        }else{
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("idcard",perMap.get("idcard"));
+            map.put("realname",perMap.get("realname"));
+            map.put("birthday",perMap.get("birthday"));
+            map.put("user_id",perMap.get("user_id"));
+            int i = this.madd.updateWriter(map);
+
+
         }
         //删除暂存内容
         Map<String, Object> glMap = new HashMap<String, Object>();
@@ -1046,6 +1063,16 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
 		Map<String, Object> map = this.madd.queryUserInfo(user_id);
 		return map;
 	}
+    @Override
+    public Integer queryDeclarationCountByUserId(Long user_id){
+
+        return madd.queryDeclarationCountByUserId(user_id);
+
+    };
+    public Map<String, Object> queryIdcar(Long user_id)
+    {
+        return this.madd.queryIdcar(user_id);
+    }
 
 
 }

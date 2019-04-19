@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.Map" %>
+<%@ page import="com.bc.pmpheep.back.util.Const" %><%--
   Created by IntelliJ IDEA.
   User: SuiXinYang
   Date: 2017/11/21
@@ -33,6 +34,7 @@
 </jsp:include>
 <input type="hidden" id="auto_play" value="${adInfo1.auto_play}">
 <input type="hidden" id="animation_interval" value="${adInfo1.animation_interval}">
+<input type="hidden" id="is_org_user" value="${userInfo.is_org_user}">
 <div class="body">
     <div class="content-wrapper">
         <div class="area-1">

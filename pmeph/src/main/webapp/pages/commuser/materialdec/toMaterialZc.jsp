@@ -27,7 +27,21 @@
     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}" type="text/javascript"></script>
     <script type="text/javascript" src="${ctx}/resources/commuser/materialdec/materialZc.js?t=${_timestamp}"></script>
 </head>
+<style>
+    Body {
+        scrollbar-arrow-color: #f4ae21; /*三角箭头的颜色*/
+        scrollbar-face-color: #333; /*立体滚动条的颜色*/
+        scrollbar-3dlight-color: #666; /*立体滚动条亮边的颜色*/
+        scrollbar-highlight-color: #666; /*滚动条空白部分的颜色*/
+        scrollbar-shadow-color: #999; /*立体滚动条阴影的颜色*/
+        scrollbar-darkshadow-color: #666; /*立体滚动条强阴影的颜色*/
+        scrollbar-track-color: #666; /*立体滚动条背景颜色*/
+        scrollbar-base-color:#f8f8f8; /*滚动条的基本颜色*/
+        Cursor:url(mouse.cur); /*自定义个性鼠标*/
+    }
+</style>
 <body>
+
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="body">
     <div class="content-wrapper">
@@ -78,25 +92,34 @@
                     <div class="item" id="xz1">
                         <span style="float: left;line-height: 30px;">图书：</span>
                         <select id="edu1" name="textbook_id" class="st book" data-valid="isNonEmpty"
-                                data-error="书籍选择不能为空" style="float: left;height: 40px;">
+                                data-error="书籍选择不能为空" style="float: left;height: 40px;overflow-y: auto">
                                 ${bookSelects}
                         </select>
                         <div style="float: left;margin-left: 30px;" class="ts_radio">
                             <table style="width: 260px;border:0" cellspacing="0" cellpadding="0">
                                 <tr>
                                     <c:if test="${materialMap.is_multi_position =='1'}">
-                                        <td height="30px;"><input type="checkbox" id="zw_1" name="zw_1" value="4"/>主编
-                                        </td>
-                                        <td><input type="checkbox" id="zw_1" name="zw_1" value="2"/>副主编</td>
-                                        <td><input type="checkbox" id="zw_1" name="zw_1" value="1"/>编委</td>
+
+                                        <c:forEach items="${pmphPosition}" var="dic">
+
+                                            <td><input type="checkbox" id="zw_1" name="zw_1" value="${dic.code}" />${dic.name}</td>
+
+                                        </c:forEach>
+
                                         <c:if test="${materialMap.is_digital_editor_optional =='1'}">
                                             <td><input type="checkbox" id="zw_1" name="zw_1" value="8"/>数字编委</td>
                                         </c:if>
                                     </c:if>
                                     <c:if test="${materialMap.is_multi_position !='1'}">
-                                        <td><input type="radio" id="zw_1" name="zw_1" value="4"/>主编</td>
+
+                                        <c:forEach items="${pmphPosition}" var="dic">
+
+                                            <td><input type="radio" id="zw_1" name="zw_1" value="${dic.code}" />${dic.name}</td>
+
+                                        </c:forEach>
+                                     <%--   <td><input type="radio" id="zw_1" name="zw_1" value="4"/>主编</td>
                                         <td><input type="radio" id="zw_1" name="zw_1" value="2"/>副主编</td>
-                                        <td><input type="radio" id="zw_1" name="zw_1" value="1"/>编委</td>
+                                        <td><input type="radio" id="zw_1" name="zw_1" value="1"/>编委</td>--%>
                                         <c:if test="${materialMap.is_digital_editor_optional =='1'}">
                                             <td><input type="radio" id="zw_1" name="zw_1" value="8"/>数字编委</td>
                                         </c:if>
@@ -119,7 +142,7 @@
                     <div class="item" id="xz1">
                         <span style="float: left;line-height: 30px;">图书：</span>
                         <select id="edu_${status.count}" name="textbook_id" class="st" data-valid="isNonEmpty"
-                                data-error="书籍选择不能为空" style="float: left;">
+                                data-error="书籍选择不能为空" style="float: left;overflow: scroll">
                                 ${list.bookSelect}
                         </select>
                         <input type="hidden" name="sjxz" value="edu_${status.count}"/>
@@ -127,23 +150,28 @@
                             <table style="width: 260px;border:0" cellspacing="0" cellpadding="0">
                                 <tr>
                                     <c:if test="${materialMap.is_multi_position =='1'}">
-                                        <td height="30px;"><input type="checkbox" name="zw_1_${status.count}"
+                                      <%--  <td height="30px;"><input type="checkbox" name="zw_1_${status.count}"
                                                                   value="4" ${list.pos_a=='1'?'checked':'' }/>主编
                                         </td>
                                         <td><input type="checkbox" name="zw_1_${status.count}"
                                                    value="2" ${list.pos_b=='1'?'checked':'' }/>副主编
                                         </td>
                                         <td><input type="checkbox" name="zw_1_${status.count}"
-                                                   value="1" ${list.pos_c=='1'?'checked':'' }/>编委
+                                                   value="1" />编委
                                         </td>
+--%>
+                                        <c:forEach items="${pmphPosition}" var="dic">
+                                            <td><input type="checkbox" id="zw_1" name="zw_1_${status.count}" value="${dic.code}"  ${list.preset_position==dic.code?'selected':'' }  />${dic.name}</td>
+                                        </c:forEach>
+
                                         <c:if test="${materialMap.is_digital_editor_optional =='1'}">
                                             <td><input type="checkbox" name="zw_1_${status.count}"
-                                                       value="8" ${list.pos_d=='1'?'checked':'' }/>数字编委
+                                                       value="8" ${list.preset_position=='1'?'checked':'' }/>数字编委
                                             </td>
                                         </c:if>
                                     </c:if>
                                     <c:if test="${materialMap.is_multi_position !='1'}">
-                                        <td height="30px;"><input type="radio" name="zw_1_${status.count}"
+                                        <%--<td height="30px;"><input type="radio" name="zw_1_${status.count}"
                                                                   value="4" ${list.preset_position=='4'?'checked':'' }/>主编
                                         </td>
                                         <td><input type="radio" name="zw_1_${status.count}"
@@ -151,7 +179,10 @@
                                         </td>
                                         <td><input type="radio" name="zw_1_${status.count}"
                                                    value="1" ${list.preset_position=='1'?'checked':'' }/>编委
-                                        </td>
+                                        </td>--%>
+                                        <c:forEach items="${pmphPosition}" var="dic">
+                                            <td><input type="radio" id="zw_1" name="zw_1_${status.count}" value="${dic.code}"  ${list.preset_position==dic.code?'checked':'' }  />${dic.name}</td>
+                                        </c:forEach>
                                         <c:if test="${materialMap.is_digital_editor_optional =='1'}">
                                             <td><input type="radio" name="zw_1_${status.count}"
                                                        value="8" ${list.preset_position=='8'?'checked':'' }/>数字编委
@@ -199,7 +230,7 @@
                                        value="${userMap.username}"/>
                             </td>
                             <td><span class="btbs">*</span><span>性&emsp;&emsp;别：</span>
-                                <select class="select-input" id="sex" disabled name="sex">
+                                <select class="select-input" id="sex"  disabled="disabled" name="sex">
                                     <%--  <option value="0" ${gezlList.sex=='0'?'selected':'' }>保密</option>--%>
                                     <option value="1" ${gezlList.sex=='1'?'selected':'' }>男</option>
                                     <option value="2" ${gezlList.sex=='2'?'selected':'' }>女</option>
@@ -270,7 +301,7 @@
                                     <option value="2" ${gezlList.idtype=='2'?'selected':'' }>军官证</option>
                                 </select></td>
                             <td><span class="btbs">*</span><span>证件号码：</span>
-                                <input class="cg_input" disabled  name="idcard" value="${gezlList.idcard}" id="idcard"
+                                <input class="cg_input"   name="idcard" value="${gezlList.idcard}" id="idcard"
                                        maxlength="18"/></td>
                             <td colspan="2"><span class="btbs">*</span><span>地&emsp;&emsp;址：</span>
                                 <input class="cg_input" style="width: 488px;" name="address" value="${gezlList.address}"
@@ -700,11 +731,15 @@
                                 <td style="color: #333333;">
                                     <table class="radio_tb" style="width: 100%;">
                                         <tr>
-                                            <td><input type="radio" name="jc_position_a" value="0" checked="checked"/>无
-                                            </td>
-                                            <td><input type="radio" name="jc_position_a" value="1"/>主编</td>
-                                            <td><input type="radio" name="jc_position_a" value="2"/>副主编</td>
-                                            <td><input type="radio" name="jc_position_a" value="3"/>编委</td>
+                                            <select id="jc_position_a" name="jc_position_a">
+                                                <c:forEach items="${pmphPosition}" var="dic">
+                                                    <option value="${dic.code}" >${dic.name}</option>
+                                                </c:forEach>
+                                                    <%--<option value="0">无</option>
+                                                    <option value="1">主编</option>
+                                                    <option value="2">副主编</option>
+                                                    <option value="3">编委</option>--%>
+                                            </select>
                                         </tr>
                                     </table>
                                     <input type="hidden" name="jc_position" value="jc_position_a"/>
@@ -774,7 +809,7 @@
                                 <td><input class="cg_input" name="jc_publisher" value="人民卫生出版社" readonly="true"
                                            style="width: 100px;" maxlength="20"/></td>
                                 <td><input class="cg_input" name="jc_publish_date" id="jc_publish_date_${status.count}"
-                                           value="${list.publish_date}" placeholder="出版时间" calendar
+                                            placeholder="出版时间" calendar
                                            format="'yyyy-mm-dd'" z-index="100" style="width: 100px;"/></td>
                                 <td><input class="cg_input" maxlength="100" name="jc_note" value="${list.note}"
                                            style="width: 100px;" placeholder="备注"/>
@@ -1814,8 +1849,7 @@
                     <span class="tsxz_xt" id="intention_xt">（选填）</span>
                 </div>
                 <div class="content">
-                    <textarea class="text_cl" name="intention_content" id="intention_content"
-                              maxlength="1000">${intentionMap.content}</textarea>
+                    <textarea class="text_cl" name="intention_content" id="intention_content" placeholder="主要介绍自己的专业方向及编写内容" maxlength="1000">${intentionMap.content}</textarea>
                 </div>
             </div>
             <!--扩展信息-->

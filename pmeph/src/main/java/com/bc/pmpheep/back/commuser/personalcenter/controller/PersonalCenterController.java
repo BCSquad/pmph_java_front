@@ -995,7 +995,7 @@ public class PersonalCenterController extends BaseController {
 				JcbjMap.put("is_digital_editor", "".equals(request.getParameter(jc_is_digital_editor[i])) ? null:request.getParameter(jc_is_digital_editor[i]));
 				JcbjMap.put("position", "".equals(request.getParameter(jc_position[i])) ? null:request.getParameter(jc_position[i]));
 				JcbjMap.put("note", jc_note[i]);
-				JcbjMap.put("publisher", jc_publisher[i]);
+				JcbjMap.put("publisher", jc_publisher[i]==null?"人民卫生出版社":jc_publisher[i]);
 				JcbjMap.put("publish_date", "".equals(jc_publish_date[i]) ? null:jc_publish_date[i]);
 
 				JcbjMap.put("sort", i);
