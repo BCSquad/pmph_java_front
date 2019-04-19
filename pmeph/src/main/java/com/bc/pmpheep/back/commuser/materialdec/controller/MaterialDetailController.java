@@ -335,6 +335,8 @@ public class MaterialDetailController extends BaseController{
 		perMap.put("rank","2");
 		perMap.put("expertise", request.getParameter("expertise"));
 		perMap.put("gmt_create", date);
+
+
 		//获取图书选择参数
 		String textbook_ids[] = request.getParameterValues("textbook_id");
 		String preset_positions[] = request.getParameterValues("preset_position");
@@ -930,12 +932,15 @@ public class MaterialDetailController extends BaseController{
 					entry.setValue(o);
 				}
 			}else{
-				if(ObjectUtil.isNull(value)){
-					if(!value.equals(o.toString())){
-						entry.setValue(userInfo.get(key));
-					}
+					if(ObjectUtil.notNull(o)){
+						if("idcard".equals(key)){
+								entry.setValue(userInfo.get(key));
+						}else if("realname".equals(key)){
+								entry.setValue(userInfo.get(key));
+						}else if("birthday".equals(key)){
+								entry.setValue(userInfo.get(key));
+						}
 				}
-
             }
             if(value.equals("-")){
                 gezlList.get(0).put(key,"");

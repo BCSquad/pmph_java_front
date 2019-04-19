@@ -363,7 +363,15 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
                 perMap.put("idcard", "");
             }
             this.madd.updateWriter(perMap);
-        }
+        } else{
+                HashMap<String, Object> map = new HashMap<>();
+                map.put("idcard",perMap.get("idcard"));
+                map.put("realname",perMap.get("realname"));
+                map.put("birthday",perMap.get("birthday"));
+                map.put("user_id",perMap.get("user_id"));
+                int i = this.madd.updateWriter(map);
+
+            }
        /* else { //暂存
             if (tssbList != null && !tssbList.isEmpty()) {
                 for (Map<String, Object> map : tssbList) {
@@ -706,6 +714,15 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
                 perMap.put("idcard",null);
             }
             this.madd.updateWriter(perMap);
+
+        }else{
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("idcard",perMap.get("idcard"));
+            map.put("realname",perMap.get("realname"));
+            map.put("birthday",perMap.get("birthday"));
+            map.put("user_id",perMap.get("user_id"));
+            int i = this.madd.updateWriter(map);
+
 
         }
         //删除暂存内容

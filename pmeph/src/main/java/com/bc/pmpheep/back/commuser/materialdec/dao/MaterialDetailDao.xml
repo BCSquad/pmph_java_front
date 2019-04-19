@@ -468,7 +468,7 @@
 			<if test=" nickname!= null and nickname !=''">
 				nickname= #{nickname},
 			</if>
-			<if test=" realname!= null and realname !=''">
+			<if test="realname!= null and realname !=''">
 				realname= #{realname},
 				writername= #{realname},
 			</if>

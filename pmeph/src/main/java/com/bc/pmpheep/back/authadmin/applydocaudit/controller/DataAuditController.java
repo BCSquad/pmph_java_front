@@ -113,11 +113,13 @@ public class DataAuditController extends BaseController{
 				pageNum, pageSize);
 		pageParameter.setParameter(paraMap);
 		List<Map<String, Object>> List_map = dataAuditService.findDataAudit(pageParameter);
+        if(List_map.size()>0){
+            for(Map<String,Object> map:List_map){
+                String preset_position1 = dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION, map.get("preset_position").toString());
+                map.put("bpp",map.get("textbook_name")+"-"+preset_position1);
+            }
+        }
 
-		for(Map<String,Object> map:List_map){
-			String preset_position1 = dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION, map.get("preset_position").toString());
-			map.put("bpp",map.get("textbook_name"+"-"+preset_position1));
-		}
 		int totoal_count = dataAuditService.findDataAuditCount(pageParameter);
 
 		Map<String, Object> vm_map = new HashMap<String, Object>();
@@ -182,37 +184,9 @@ public class DataAuditController extends BaseController{
 			}
 			if(tssbList.size()>0){
 				for (Map<String, Object> map : tssbList) {
-					if(map.get("preset_position").equals(3)){//
-						map.put("preset_position", "副主编,编委");
-					}else if(map.get("preset_position").equals(1)){
-						map.put("preset_position", "编委");
-					}else if(map.get("preset_position").equals(2)){
-						map.put("preset_position", "副主编");
-					}else if(map.get("preset_position").equals(4)){
-						map.put("preset_position", "主编");
-					}else if(map.get("preset_position").equals(8)){
-						map.put("preset_position", "数字编委");
-					}else if(map.get("preset_position").equals(5)){
-						map.put("preset_position", "主编,编委");
-					}else if(map.get("preset_position").equals(6)){
-						map.put("preset_position", "主编,副主编");
-					}else if(map.get("preset_position").equals(9)){
-						map.put("preset_position", "数字编委,编委");
-					}else if(map.get("preset_position").equals(10)){
-						map.put("preset_position", "副主编,数字编委");
-					}else if(map.get("preset_position").equals(12)){
-						map.put("preset_position", "主编,数字编委");
-					}else if(map.get("preset_position").equals(7)){
-						map.put("preset_position", "主编,副主编,编委");
-					}else if(map.get("preset_position").equals(11)){
-						map.put("preset_position", "副主编,编委,数字编委");
-					}else if(map.get("preset_position").equals(13)){
-						map.put("preset_position", "主编,编委,数字编委");
-					}else if(map.get("preset_position").equals(14)){
-						map.put("preset_position", "主编,副主编,数字编委");
-					}else if(map.get("preset_position").equals(15)){
-						map.put("preset_position", "主编,副主编,编委,数字编委");
-					}
+                    String preset_position1 = dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION, map.get("preset_position").toString());
+
+						map.put("preset_position", preset_position1);
 				}
 			}
 			//3.作家学习经历表
