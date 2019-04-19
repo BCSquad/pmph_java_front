@@ -428,7 +428,7 @@
 			<if test="parameter.material_id != null and parameter.material_id != ''">
 				and t1.material_id = #{parameter.material_id}
 			</if>
-			UNION select '' material_id,'0' org_id,'人民卫生出版社' org_name,'0' sort from dual
+			UNION select '' material_id,'0' org_id,'人民卫生出版社' org_name,'999999' sort from dual
 		)t 
 		<if test="parameter.org_name != null and parameter.org_name != ''">
 			where t.org_name like #{parameter.org_name}
@@ -586,7 +586,10 @@
 	</select>
 
 	<select id="queryDeclarationCountByUserId" parameterType="long" resultType="int">
-		select count(id) from declaration where user_id=#{user_id}
+		select count(id) from declaration where user_id=#{user_id}   <![CDATA[AND online_progress <> 0]]>
+	</select>
 
+	<select id="queryIdcar" parameterType="long" resultType="map">
+		select dt.idcard  from (select * from declaration dc where dc.idcard is not NULL  order by gmt_create desc)dt left join dec_textbook d on d.declaration_id=d.id where dt.user_id=#{user_id}  LIMIT 1
 	</select>
 </mapper>

@@ -140,4 +140,6 @@ public interface MaterialDetailDao {
 		public Map<String, Object> queryUserInfo(String user_id);
 
 		Integer queryDeclarationCountByUserId(Long user_id);
+
+	    Map<String, Object> queryIdcar(Long paramLong);
 }

@@ -7,7 +7,7 @@ import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 
 public interface MaterialDetailService {
-	
+
 	/**
 	 * 通过教材ID查出教材
 	 * @param material_id
@@ -62,7 +62,7 @@ public interface MaterialDetailService {
 	 * @return
 	 */
 	public int insertTsxz(Map<String,Object> map);
-	
+
 	/**
 	 * 图书申报职位暂存
 	 * @param map
@@ -75,7 +75,7 @@ public interface MaterialDetailService {
 	 * @return
 	 */
 	public int insertTssbZc(Map<String,Object> map);
-	
+
 	/**
 	 * 查询学习经历
 	 * @param map
@@ -194,17 +194,17 @@ public interface MaterialDetailService {
 	 * 清除所有关联表
 	 */
 	public int delGlxx(Map<String,Object> map);
-	
+
 	/**
 	 * 申报审核
 	 */
 	public int updateDeclaration(Map<String,Object> map);
-	
+
 	/**
 	 * 机构选择
 	 */
 	PageResult<Map<String, Object>> selectOrgList(PageParameter<Map<String, Object>> pageParameter);
-	
+
 	/**
 	 * 新增 申报信息
 	 */
@@ -229,7 +229,7 @@ public interface MaterialDetailService {
 	 * 编写内容意向表
 	 */
 	public Map<String,Object> queryIntention(Map<String, Object> map);
-	
+
 	/**
 	 * 通过以下参数查找已存在的申报
 	 * @param user_id
@@ -245,4 +245,6 @@ public interface MaterialDetailService {
 	public Map<String, Object> queryUserInfo(String user_id);
 
 	Integer queryDeclarationCountByUserId(Long user_id);
+
+	public abstract Map<String, Object> queryIdcar(Long paramLong);
 }

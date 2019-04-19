@@ -27,7 +27,21 @@
     <script src="${ctx}/resources/comm/jquery/jquery.fileupload.js?t=${_timestamp}" type="text/javascript"></script>
     <script type="text/javascript" src="${ctx}/resources/commuser/materialdec/materialZc.js?t=${_timestamp}"></script>
 </head>
+<style>
+    Body {
+        scrollbar-arrow-color: #f4ae21; /*三角箭头的颜色*/
+        scrollbar-face-color: #333; /*立体滚动条的颜色*/
+        scrollbar-3dlight-color: #666; /*立体滚动条亮边的颜色*/
+        scrollbar-highlight-color: #666; /*滚动条空白部分的颜色*/
+        scrollbar-shadow-color: #999; /*立体滚动条阴影的颜色*/
+        scrollbar-darkshadow-color: #666; /*立体滚动条强阴影的颜色*/
+        scrollbar-track-color: #666; /*立体滚动条背景颜色*/
+        scrollbar-base-color:#f8f8f8; /*滚动条的基本颜色*/
+        Cursor:url(mouse.cur); /*自定义个性鼠标*/
+    }
+</style>
 <body>
+
 <jsp:include page="/pages/comm/head.jsp"></jsp:include>
 <div class="body">
     <div class="content-wrapper">
@@ -78,7 +92,7 @@
                     <div class="item" id="xz1">
                         <span style="float: left;line-height: 30px;">图书：</span>
                         <select id="edu1" name="textbook_id" class="st book" data-valid="isNonEmpty"
-                                data-error="书籍选择不能为空" style="float: left;height: 40px;">
+                                data-error="书籍选择不能为空" style="float: left;height: 40px;overflow-y: auto">
                                 ${bookSelects}
                         </select>
                         <div style="float: left;margin-left: 30px;" class="ts_radio">
@@ -128,7 +142,7 @@
                     <div class="item" id="xz1">
                         <span style="float: left;line-height: 30px;">图书：</span>
                         <select id="edu_${status.count}" name="textbook_id" class="st" data-valid="isNonEmpty"
-                                data-error="书籍选择不能为空" style="float: left;">
+                                data-error="书籍选择不能为空" style="float: left;overflow: scroll">
                                 ${list.bookSelect}
                         </select>
                         <input type="hidden" name="sjxz" value="edu_${status.count}"/>
@@ -287,7 +301,7 @@
                                     <option value="2" ${gezlList.idtype=='2'?'selected':'' }>军官证</option>
                                 </select></td>
                             <td><span class="btbs">*</span><span>证件号码：</span>
-                                <input class="cg_input" disabled  name="idcard" value="${gezlList.idcard}" id="idcard"
+                                <input class="cg_input"   name="idcard" value="${gezlList.idcard}" id="idcard"
                                        maxlength="18"/></td>
                             <td colspan="2"><span class="btbs">*</span><span>地&emsp;&emsp;址：</span>
                                 <input class="cg_input" style="width: 488px;" name="address" value="${gezlList.address}"
@@ -795,7 +809,7 @@
                                 <td><input class="cg_input" name="jc_publisher" value="人民卫生出版社" readonly="true"
                                            style="width: 100px;" maxlength="20"/></td>
                                 <td><input class="cg_input" name="jc_publish_date" id="jc_publish_date_${status.count}"
-                                           value="${list.publish_date}" placeholder="出版时间" calendar
+                                            placeholder="出版时间" calendar
                                            format="'yyyy-mm-dd'" z-index="100" style="width: 100px;"/></td>
                                 <td><input class="cg_input" maxlength="100" name="jc_note" value="${list.note}"
                                            style="width: 100px;" placeholder="备注"/>
@@ -1835,8 +1849,7 @@
                     <span class="tsxz_xt" id="intention_xt">（选填）</span>
                 </div>
                 <div class="content">
-                    <textarea class="text_cl" name="intention_content" id="intention_content" placeholder="主要介绍自己的专业方向及编写内容
-                              maxlength="1000">${intentionMap.content}</textarea>
+                    <textarea class="text_cl" name="intention_content" id="intention_content" placeholder="主要介绍自己的专业方向及编写内容" maxlength="1000">${intentionMap.content}</textarea>
                 </div>
             </div>
             <!--扩展信息-->

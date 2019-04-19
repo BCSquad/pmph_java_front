@@ -15,12 +15,26 @@
     /*************************策略对象*****************************/
 
     var RULES = {
+        isnumber:function (value,errorMsg){
+            var reg =/.*\d+.*/;
+            if (reg.test(value)) {
+                return errorMsg;
+            }
+        },
         isNonEmpty: function (value, errorMsg) {
             //不能为空
             if (!value.length) {
                 return errorMsg;
             }
         },
+        notHan:function (value, errorMsg) {
+            var reg = /^[\u4e00-\u9fa5]+$/;
+            if (!reg.test(value)) {
+                return errorMsg;
+            }
+        },
+
+
         minLength: function (value, length, errorMsg) {
             //大于
             if (value.length > length) {

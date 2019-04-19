@@ -106,6 +106,27 @@
 
     }
 
+    $.addValidatRule("notHan", function (value) {
+        var reg = /^[\u4e00-\u9fa5]+$/;
+        if (reg.test(value)) {
+            return true;
+        } else {
+            return false;
+
+        }
+    });
+
+
+
+    $.addValidatRule("isnumber", function (value) {
+        var reg =/.*\d+.*/;
+        if (reg.test(value)) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+
     $.addValidatRule("isNonEmpty", function (value) {
         //不能为空
         if (!value.length) {

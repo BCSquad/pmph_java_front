@@ -3,8 +3,10 @@ package com.bc.pmpheep.back.authadmin.applydocaudit.controller;
 import com.bc.pmpheep.back.authadmin.applydocaudit.service.DataAuditService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.template.service.TemplateService;
+import com.bc.pmpheep.back.util.Const;
 import com.bc.pmpheep.controller.bean.ResponseBean;
 import com.bc.pmpheep.general.controller.BaseController;
+import com.bc.pmpheep.general.service.DataDictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -38,6 +40,9 @@ public class DataAuditController extends BaseController{
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.template.service.TemplateService")
 	private TemplateService templateService;
+
+	@Autowired
+	DataDictionaryService dataDictionaryService;
 	
 
 	/**
@@ -108,9 +113,13 @@ public class DataAuditController extends BaseController{
 				pageNum, pageSize);
 		pageParameter.setParameter(paraMap);
 		List<Map<String, Object>> List_map = dataAuditService.findDataAudit(pageParameter);
+
+		for(Map<String,Object> map:List_map){
+			String preset_position1 = dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION, map.get("preset_position").toString());
+			map.put("bpp",map.get("textbook_name"+"-"+preset_position1));
+		}
 		int totoal_count = dataAuditService.findDataAuditCount(pageParameter);
 
-		
 		Map<String, Object> vm_map = new HashMap<String, Object>();
 		vm_map.put("List_map", List_map);
 		vm_map.put("material_id", material_id);

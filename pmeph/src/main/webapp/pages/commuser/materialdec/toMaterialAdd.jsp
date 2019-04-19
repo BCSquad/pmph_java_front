@@ -134,11 +134,11 @@
 
 									<c:when test="${declarationCount==0}">
 										<input class="cg_input" name="realname" id="realname"
-											   value="${userMap.writername}" maxlength="20"/>
+											   value="${userMap.realname}" maxlength="20"/>
 									</c:when>
 									<c:otherwise>
 										<input class="cg_input" name="realname" id="realname" disabled
-											   value="${userMap.writername}" maxlength="20"/>
+											   value="${userMap.realname}" maxlength="20"/>
 									</c:otherwise>
 								</c:choose>
 
@@ -157,7 +157,7 @@
 										</select>
 									</c:when>
 									<c:otherwise>
-										<select class="select-input" /material/toMaterialAdd id="sex" name="sex">
+										<select class="select-input"  id="sex" name="sex">
 										<option value="1" ${userMap.sex=='1'?'selected':'' }>男</option>
 										<option value="2" ${userMap.sex=='2'?'selected':'' }>女</option>
 										<%--<option value="0" ${userMap.sex=='0'?'selected':'' }>保密</option>--%>
@@ -247,18 +247,8 @@
 								</select></td>
 							<td><span class="btbs">*</span><span>证件号码：</span>
 
-								<c:choose>
-
-									<c:when test="${declarationCount==0}">
 										<input class="cg_input" name="idcard" value="${userMap.idcard}" id="idcard"
 											   maxlength="18"/>
-									</c:when>
-									<c:otherwise>
-										<input class="cg_input" name="idcard" disabled value="${userMap.idcard}"
-											   id="idcard" maxlength="18"/>
-									</c:otherwise>
-								</c:choose>
-
 
 							</td>
 							<td colspan="2"><span class="btbs">*</span><span>地&emsp;&emsp;址：</span>
@@ -643,7 +633,7 @@
 									<input type="hidden" name="jc_is_digital_editor" value="jc_is_digital_editor_${status.count}" />
 								</td>
 								<td><input class="cg_input" name="jc_publisher" value="人民卫生出版社" readonly="true" style="width: 100px;" maxlength="20"/></td>
-								<td><input class="cg_input" name="jc_publish_date" id="jc_publish_date_${status.count}" value="${list.publish_date}" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  style="width: 100px;"/></td>
+								<td><input class="cg_input" name="jc_publish_date" id="jc_publish_date_${status.count}" placeholder="出版时间" calendar format="'yyyy-mm-dd'"  z-index="100"  style="width: 100px;"/></td>
 								<td><input class="cg_input" maxlength="100" name="jc_note" value="${list.note}" style="width: 100px;" placeholder="备注"/>
 									<input type="hidden" name="zdjy" value="jc_material_name_${status.count}"/>
 									<input type="hidden" name="jc_id" value="${list.id}">
