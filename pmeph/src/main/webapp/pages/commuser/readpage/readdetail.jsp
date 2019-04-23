@@ -495,8 +495,8 @@
                                         ${list.content}
                                 </div>
                                 <c:if test="${list.editor_reply!=null}">
-                                    <div style="margin: 20px;background-color: #fafaf8;height: 100px;width: 870px">
-                                        <div style="margin: 15px">
+                                    <div style="margin: 20px;background-color: #fafaf8;width: 870px">
+                                        <div style="margin: 15px;" >
                                             <div class="item_title">
                                                 <div style="float: left;">
                                                     <img src="${ctx}/statics/image/default_image.png" class="picturesize">
@@ -509,7 +509,9 @@
                                                     <div class="date"><fmt:formatDate pattern="yyyy.MM.dd HH:mm" value="${list.reply_date}" /></div>
                                                 </div>
                                             </div>
-                                            <div class="item_content" style="width: 850px">${list.editor_reply}</div>
+                                            <div >
+                                            <div class="item_content" style="width: 850px;">${list.editor_reply}</div>
+                                            </div>
                                         </div>
 
                                     </div>

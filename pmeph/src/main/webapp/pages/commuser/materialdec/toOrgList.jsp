@@ -45,8 +45,8 @@
 				<tbody>
 					<c:forEach var="list" items="${pageResult.rows}">
 						<tr>
-							<td style="height: 30px;border: 1px solid #dedede;"><input type="radio" name="radio_id" value="${list.org_id}_${list.org_name}"/>
-								${list.org_name}</td>
+							<td style="height: 30px;border: 1px solid #dedede;"> <div onclick="checkRadio('${list.org_id}_${list.org_name}')"><input type="radio" name="radio_id" value="${list.org_id}_${list.org_name}"/>
+                                    ${list.org_name}</div></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -69,7 +69,8 @@
                  <span class="pp">页</span>
                  <button type="button" class="button" onclick="javascript:tojump()">确定</button>
              </div>
-         </div> 
+         </div>
+		<div class="text_1"><label id="text" style="color: red"></label></div>
          <div class="button2">
 				<div class="bt_tj" onclick="javascript:selectAdd()"><span>确认</span></div>
 		</div>
@@ -112,24 +113,42 @@ function query(){
 		window.location.href="${ctx}/material/toSearchOrg.action?material_id="+material_id+"&orgname="+encodeURI(encodeURI(orgname)); 
 
 	}
+
+}
+
+function checkRadio(id){
+    var chkObjs =document.getElementsByName("radio_id");
+    for(var i=0;i<chkObjs.length;i++){
+        var str=chkObjs[i].value;
+        if(str==id){
+            chkObjs[i].checked=true;
+        }
+    }
 }
 
 //确认选择
 function selectAdd(){
 	//获取radio值
 	var strs= new Array(); //定义一数组 
-	var chkObjs =document.getElementsByName("radio_id"); 
+	var chkObjs =document.getElementsByName("radio_id");
+
 	 for(var i=0;i<chkObjs.length;i++){
          if(chkObjs[i].checked){
              strs = chkObjs[i].value.split("_");
              parent.$("#sbdw_name").val(strs[1]);
              parent.$("#sbdw_id").val(strs[0]);
+			 console.log(strs);
              break;
          }
      }
 	 //--关闭 当前页面 开始--
-     var index = parent.layer.getFrameIndex(window.name);
-     parent.layer.close(index);
+	if(strs.length>0){
+		var index = parent.layer.getFrameIndex(window.name);
+		parent.layer.close(index);
+	}else{
+		$("#text").html("请先选择对应的申报单位后点击确认按钮");
+	}
+
      //--关闭 当前页面 结束--
 }
 
