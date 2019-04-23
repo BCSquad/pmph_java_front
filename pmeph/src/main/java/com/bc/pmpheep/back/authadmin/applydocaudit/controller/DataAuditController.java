@@ -116,7 +116,9 @@ public class DataAuditController extends BaseController{
         if(List_map.size()>0){
             for(Map<String,Object> map:List_map){
                 String preset_position1 = dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION, map.get("preset_position").toString());
-                map.put("bpp",map.get("textbook_name")+"-"+preset_position1);
+				String dtitle = dataDictionaryService.getDataDictionaryItemNameByCode(Const.WRITER_USER_TITLE, map.get("dtitle").toString());
+				map.put("bpp",map.get("textbook_name")+"-"+preset_position1);
+                map.put("dtitle",dtitle);
             }
         }
 
@@ -154,6 +156,13 @@ public class DataAuditController extends BaseController{
 			//1.作家申报表
 			List<Map<String,Object>> gezlList = new ArrayList<Map<String,Object>>();
 			gezlList = this.dataAuditService.queryPerson(queryMap);
+			if(gezlList.size()>0){
+				for (Map<String, Object> map : gezlList) {
+					String title = dataDictionaryService.getDataDictionaryItemNameByCode(Const.WRITER_USER_TITLE, map.get("title").toString());
+					map.put("title", title);
+
+				}
+			}
 			String return_cause = "";
 			if(declaration_id == null){
 			queryMap.put("declaration_id", gezlList.get(0).get("id"));
@@ -187,6 +196,7 @@ public class DataAuditController extends BaseController{
                     String preset_position1 = dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION, map.get("preset_position").toString());
 
 						map.put("preset_position", preset_position1);
+
 				}
 			}
 			//3.作家学习经历表

@@ -60,6 +60,6 @@ public class DataAuditExcelService implements ExcelDownloadService {
             list.add(map);
         }
 
-        return list;
+        return resultList;
     }
 }

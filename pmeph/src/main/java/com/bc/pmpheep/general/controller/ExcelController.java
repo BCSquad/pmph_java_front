@@ -1,5 +1,7 @@
 package com.bc.pmpheep.general.controller;
 
+import com.bc.pmpheep.back.util.Const;
+import com.bc.pmpheep.general.service.DataDictionaryService;
 import com.bc.pmpheep.general.service.ExcelDownloadService;
 import jxl.Workbook;
 import jxl.format.*;
@@ -9,6 +11,7 @@ import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import org.apache.commons.collections4.MapUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +31,10 @@ import java.util.Map;
 @Controller
 @RequestMapping("excel")
 public class ExcelController {
+
+    @Autowired
+    DataDictionaryService dataDictionaryService;
+
 
     @RequestMapping("download")
     public void downloadExcelData(String service, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -102,8 +109,14 @@ public class ExcelController {
 
         List<Map<String, Object>> data = excleService.getData(arrayMapToStringMap(param));
 
+
         for (int i = 0; i < data.size(); i++) {
             Map<String, Object> rowData = data.get(i);
+            String dtitle = dataDictionaryService.getDataDictionaryItemNameByCode(Const.WRITER_USER_TITLE, data.get(i).get("dtitle").toString());
+            data.get(i).put("dtitle",dtitle);
+
+            String preset_position1 = dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION, data.get(i).get("preset_position").toString());
+            data.get(i).put("bpp",data.get(i).get("textbook_name")+"-"+preset_position1);
 
             jxl.write.Label col_content = new jxl.write.Label(0, i + 2, (i + 1) + "", wcf_content);
             sheet.addCell(col_content);
