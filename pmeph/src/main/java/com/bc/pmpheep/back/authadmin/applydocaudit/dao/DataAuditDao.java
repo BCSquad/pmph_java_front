@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.authadmin.applydocaudit.dao;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +44,7 @@ public interface DataAuditDao {
 	 */
 	String findTitleName(Map<String, Object> paraMap);
 
+	String findMaterialCreateDate(Map<String, Object> paraMap);
 	/**
 	 * 导出excle表
 	 * @Title: findDataAuditExcel

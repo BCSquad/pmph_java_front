@@ -1,12 +1,15 @@
 package com.bc.pmpheep.back.authadmin.applydocaudit.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.crypto.Data;
 
+import com.bc.pmpheep.back.util.DateUtil;
 import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -65,10 +68,20 @@ public class DeclareCountController extends BaseController {
 		paraMap.put("material_id", material_id);
 		// 获取标题
 		String material_name = dataAuditService.findTitleName(paraMap);
+		String materialCreateDate = dataAuditService.findMaterialCreateDate(paraMap);
+		Date date1 = DateUtil.fomatDate(materialCreateDate);
+		Date date = DateUtil.fomatDate("2019-04-01");
+		List<Map<String, Object>> list ;
+		if(date1.getTime()>date.getTime()){
+			list = declareCountService
+					.findDeclareCount2(paraMap);
+		}else{
+			list = declareCountService
+					.findDeclareCount(paraMap);
+		}
 
 		// 我校统计情况
-		List<Map<String, Object>> list = declareCountService
-				.findDeclareCount(paraMap);
+
 		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("material_id", material_id);

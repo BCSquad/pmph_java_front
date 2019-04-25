@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.authadmin.applydocaudit.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,6 +78,11 @@ public class DataAuditServiceImpl implements DataAuditService {
 		String resultList = dataAuditDao.findTitleName(map);
 		return resultList;
 	}
+    @Override
+    public String findMaterialCreateDate(Map<String, Object> map) {
+        String resultList = dataAuditDao.findMaterialCreateDate(map);
+        return resultList;
+    }
 
 
 

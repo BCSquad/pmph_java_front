@@ -32,6 +32,13 @@ public class DeclareCountServiceImpl implements DeclareCountService {
 				.findDeclareCount(paraMap);
 		return list;
 	}
+	@Override
+	public List<Map<String, Object>> findDeclareCount2(
+			Map<String, Object> paraMap) {
+		List<Map<String, Object>> list = declareCountDao
+				.findDeclareCount2(paraMap);
+		return list;
+	}
 
 
 	/**

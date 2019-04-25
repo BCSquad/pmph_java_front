@@ -109,14 +109,8 @@ public class ExcelController {
 
         List<Map<String, Object>> data = excleService.getData(arrayMapToStringMap(param));
 
-
         for (int i = 0; i < data.size(); i++) {
             Map<String, Object> rowData = data.get(i);
-            String dtitle = dataDictionaryService.getDataDictionaryItemNameByCode(Const.WRITER_USER_TITLE, data.get(i).get("dtitle").toString());
-            data.get(i).put("dtitle",dtitle);
-
-            String preset_position1 = dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION, data.get(i).get("preset_position").toString());
-            data.get(i).put("bpp",data.get(i).get("textbook_name")+"-"+preset_position1);
 
             jxl.write.Label col_content = new jxl.write.Label(0, i + 2, (i + 1) + "", wcf_content);
             sheet.addCell(col_content);

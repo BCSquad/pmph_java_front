@@ -26,6 +26,7 @@ public interface DeclareCountService {
 	 * @throws
 	 */
 	List<Map<String, Object>> findDeclareCount(Map<String, Object> paraMap);
+	List<Map<String, Object>> findDeclareCount2(Map<String, Object> paraMap);
 
 
 	

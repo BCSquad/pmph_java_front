@@ -128,7 +128,16 @@
 			</if>
 		</where>
 	</select>
-	
+	<select id="findMaterialCreateDate" parameterType="java.util.Map"
+			resultType="java.lang.String">
+		SELECT m.gmt_create from  material m
+		<where>
+			<if test="material_id != null and material_id != '' ">
+				and m.id = ${material_id}
+			</if>
+		</where>
+	</select>
+
 	<select id="findDataAuditExcel" parameterType="java.util.Map"
 		resultType="java.util.Map">
 		<![CDATA[SELECT

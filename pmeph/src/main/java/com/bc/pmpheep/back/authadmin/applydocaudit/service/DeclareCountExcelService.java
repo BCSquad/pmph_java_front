@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.authadmin.applydocaudit.service;
 
+import com.bc.pmpheep.back.util.DateUtil;
 import jxl.format.Colour;
 import org.apache.commons.collections.map.HashedMap;
 
@@ -10,12 +11,7 @@ import com.bc.pmpheep.back.authadmin.applydocaudit.dao.DataAuditDao;
 import com.bc.pmpheep.back.authadmin.applydocaudit.dao.DeclareCountDao;
 import com.bc.pmpheep.general.service.ExcelDownloadService;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by sunzhuoqun on 2017/12/13.
@@ -25,7 +21,9 @@ public class DeclareCountExcelService implements ExcelDownloadService {
 	
 	@Autowired
 	DeclareCountDao declareCountDao;
-	
+	@Autowired
+    DataAuditDao dataAuditDao;
+
 	
     @Override
     public String getTitle(Map<String, Object> param) {
@@ -46,9 +44,17 @@ public class DeclareCountExcelService implements ExcelDownloadService {
     @Override
     public List<Map<String, Object>> getData(Map<String, Object> param) throws Exception {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-        
-        List<Map<String, Object>> resultList = declareCountDao
-				.selectAll(param);
+        String materialCreateDate = dataAuditDao.findMaterialCreateDate(param);
+        Date date1 = DateUtil.fomatDate(materialCreateDate);
+        Date date = DateUtil.fomatDate("2019-04-01");
+        List<Map<String, Object>> resultList ;
+        if(date1.getTime()>date.getTime()){
+            resultList = declareCountDao
+                    .selectAll2(param);
+        }else{
+            resultList=declareCountDao
+                    .selectAll(param);
+        }
         Map<String, Object> totalMap=new HashMap<String, Object>();
         totalMap.put("textbook_name", "合计");
        

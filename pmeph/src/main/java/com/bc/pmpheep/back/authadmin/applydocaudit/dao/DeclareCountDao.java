@@ -24,7 +24,7 @@ public interface DeclareCountDao {
 	 * @throws
 	 */
 	List<Map<String, Object>> findDeclareCount(Map<String, Object> paraMap);
-
+	List<Map<String, Object>> findDeclareCount2(Map<String, Object> paraMap);
 
 
 	/**
@@ -49,7 +49,8 @@ public interface DeclareCountDao {
 	 * @throws
 	 */
 	List<Map<String, Object>> selectAll(Map<String, Object> paraMap);
-	
+	List<Map<String, Object>> selectAll2(Map<String, Object> paraMap);
+
 	/**
 	 * 最终结果名单  导出excel
 	 * @Title: selectResults

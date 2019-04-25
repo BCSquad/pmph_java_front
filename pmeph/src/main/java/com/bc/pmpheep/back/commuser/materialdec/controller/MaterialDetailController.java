@@ -800,9 +800,16 @@ public class MaterialDetailController extends BaseController{
 				}else if(map.get("preset_position").equals(15)){
 					map.put("preset_position", "主编,副主编,编委,数字编委");
 				}*/
-				Integer preset_position = Integer.parseInt(map.get("preset_position").toString());
-				String preset_position1 = dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION, map.get("preset_position").toString());
-				map.put("preset_position", preset_position1);
+
+
+				String post =map.get("preset_position").toString();
+
+				if(post!=null){
+					if(ObjectUtil.isNumber(post)){
+						post = dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION,map.get("preset_position").toString());
+					}
+				}
+				map.put("preset_position", post);
 
 			}
 		}
@@ -867,8 +874,23 @@ public class MaterialDetailController extends BaseController{
 		intentionMap = this.mdService.queryIntention(queryMap);
 
 		//数据字典
-		gezlList.get(0).put("title",dataDictionaryService.getDataDictionaryItemNameByCode(Const.WRITER_USER_TITLE, ObjectUtil.notNull(gezlList.get(0).get("title"))?gezlList.get(0).get("title").toString():""));
-		gezlList.get(0).put("degree",dataDictionaryService.getDataDictionaryItemNameByCode(Const.WRITER_USER_DEGREE,MapUtils.getString(gezlList.get(0),"degree")));
+
+		String degree =MapUtils.getString(gezlList.get(0),"degree");
+		String tit = gezlList.get(0).get("title").toString();
+		if(tit!=null){
+			if(ObjectUtil.isNumber(tit)){
+				tit=dataDictionaryService.getDataDictionaryItemNameByCode(Const.WRITER_USER_TITLE,tit);
+			}
+		}
+		if(degree!=null){
+			if(ObjectUtil.isNumber(degree)){
+				degree = dataDictionaryService.getDataDictionaryItemNameByCode(Const.WRITER_USER_DEGREE,degree);
+			}
+		}
+
+
+		gezlList.get(0).put("title",tit);
+		gezlList.get(0).put("degree",degree);
 		mav.addObject("pmphRank", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_RANK));
 		mav.addObject("pmphPosition", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_POSITION));
 

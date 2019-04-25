@@ -39,7 +39,7 @@
             String url = MapUtils.getString(resultMap, "url", "");
             String id = fileService.saveLocalFile(Thread.currentThread().getContextClassLoader().getResourceAsStream("../../" + url), FileType.CMS_ATTACHMENT, 0);
 
-            resultMap.put("url", "//image/" + id);
+            resultMap.put("url", "/v/image/" + id);
         } else if (action.equals("uploadfile")) {
             String url = MapUtils.getString(resultMap, "url", "");
             String id = fileService.saveLocalFile(Thread.currentThread().getContextClassLoader().getResourceAsStream("../../" + url),

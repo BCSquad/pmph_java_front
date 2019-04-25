@@ -1,5 +1,6 @@
 package com.bc.pmpheep.back.authadmin.applydocaudit.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import com.bc.pmpheep.back.plugin.PageParameter;
@@ -50,7 +51,8 @@ public interface DataAuditService {
 	 * @throws
 	 */
 	String findTitleName(Map<String, Object> map);
-	
+
+	String findMaterialCreateDate(Map<String, Object> map);
 	
 	/**
 	 * 申报审核通过

@@ -621,7 +621,14 @@ public class ExpertationController extends BaseController{
 			mav.addObject("title","人卫中医助手专家申报表");
 		}
 
-		gezlList.get(0).put("title",dataDictionaryService.getDataDictionaryItemNameByCode(Const.WRITER_USER_TITLE,MapUtils.getString(gezlList.get(0),"title")));
+
+		String tit = MapUtils.getString(gezlList.get(0),"title");
+		if(tit!=null){
+			if(ObjectUtil.isNumber(tit)){
+				tit=dataDictionaryService.getDataDictionaryItemNameByCode(Const.WRITER_USER_TITLE,tit);
+			}
+		}
+		gezlList.get(0).put("title",tit);
 
 		//填充
 		mav.addObject("queryMap", queryMap);
