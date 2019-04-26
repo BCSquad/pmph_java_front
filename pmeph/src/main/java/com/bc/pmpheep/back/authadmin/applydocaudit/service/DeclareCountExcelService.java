@@ -46,7 +46,8 @@ public class DeclareCountExcelService implements ExcelDownloadService {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         String materialCreateDate = dataAuditDao.findMaterialCreateDate(param);
         Date date1 = DateUtil.fomatDate(materialCreateDate);
-        Date date = DateUtil.fomatDate("2019-04-19 17:00");
+        Date date = DateUtil.fomatDate("2019-3-19 15:30");
+      /*  Date date = DateUtil.fomatDate("2019-4-19 15:30");*/
         List<Map<String, Object>> resultList ;
         if(date1.getTime()>date.getTime()){
             resultList = declareCountDao

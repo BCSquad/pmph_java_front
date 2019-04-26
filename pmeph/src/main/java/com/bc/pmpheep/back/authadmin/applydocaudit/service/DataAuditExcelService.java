@@ -57,10 +57,11 @@ public class DataAuditExcelService implements ExcelDownloadService {
             map.put("dposition", resultList.get(i).get("dposition"));
             map.put("dtitle", resultList.get(i).get("dtitle"));
             Map<String, Object> params = new HashMap<>();
-            param.put("declarationId",resultList.get(i).get("dtitle"));
+            params.put("declarationId",resultList.get(i).get("dtitle"));
             String materialCreateDate = dataAuditDao.findDeclarationCreateDate(params);
             Date date1 = DateUtil.fomatDate(materialCreateDate);
-            Date date = DateUtil.fomatDate("2019-04-19 17:00");
+            Date date = DateUtil.fomatDate("2019-3-20 17:00");
+            /*Date date = DateUtil.fomatDate("2019-04-20 15:30");*/
 
             if(date1.getTime()>date.getTime()) {
                 String post =resultList.get(i).get("preset_position").toString();
