@@ -84,9 +84,16 @@ public class DataAuditServiceImpl implements DataAuditService {
         return resultList;
     }
 
+    @Override
+    public String findDeclarationCreateDate(Map<String, Object> map) {
+        String resultList = dataAuditDao.findDeclarationCreateDate(map);
+        return resultList;
+    }
 
 
-	//申报审核通过
+
+
+    //申报审核通过
 		@Override
 		public int updateDeclarationPass(Map<String, Object> map) {
 			Map<String,Object> dmap =personalService.queryDeclarationById(map.get("declaration_id").toString());

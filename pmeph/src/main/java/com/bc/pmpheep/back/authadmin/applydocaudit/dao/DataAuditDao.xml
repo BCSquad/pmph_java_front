@@ -138,6 +138,12 @@
 		</where>
 	</select>
 
+	<select id="findDeclarationCreateDate" parameterType="java.util.Map"
+			resultType="java.lang.String">
+		SELECT d.gmt_create from  declaration d
+				where  d.id = ${declarationId}
+	</select>
+
 	<select id="findDataAuditExcel" parameterType="java.util.Map"
 		resultType="java.util.Map">
 		<![CDATA[SELECT

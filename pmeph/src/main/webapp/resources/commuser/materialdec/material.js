@@ -17,7 +17,7 @@ var materialMap ;
 
     setTimeout(function () {
         $('#edu1').tipso({validator: "isNonEmpty", message: "请选择申报的图书"});
-        $('#realname').tipso({validator: "isNonEmpty|notHan", message: "姓名不能为空|姓名必须是中文"});
+        $('#realname').tipso({validator: "isNonEmpty|isnumber", message: "姓名不能为空|姓名必须是中文"});
         $('#birthday').tipso({validator: "isNonEmpty", message: "出生日期不能为空"});
         $('#experience').tipso({validator: "isNonEmpty|onlyInt", message: "教龄不能为空|教龄必须是数字"});
         $('#org_name').tipso({validator: "isNonEmpty", message: "工作单位不能为空"});
@@ -144,12 +144,12 @@ function checkRealName(){
 
     var ralname=$("#realname").val();
 
-    var reg = /^[\u4e00-\u9fa5]+$/;
+    var reg =/.*\d+.*/;
     if(ralname){
         nameFlag=false;
 
     }
-    if(reg.test(ralname)){
+    if(!reg.test(ralname)){
         nameFlag=false;
 
     }else{
@@ -158,7 +158,7 @@ function checkRealName(){
     }
 
     if(nameFlag){
-        window.message.confirm("申报资料中的姓名不能为空且必须是中文,请转跳后修改为正确的真实姓名",{btn:["确定转跳"]},function(){
+        window.message.confirm("申报资料中的姓名不能为空且不能包含数字,请转跳后修改为正确的真实姓名",{btn:["确定转跳"]},function(){
             window.location.href='http://medu.ipmph.com/userinfo/touser.action';
         },function(){
             return fasle;

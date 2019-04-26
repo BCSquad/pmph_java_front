@@ -4,6 +4,7 @@ import com.bc.pmpheep.back.authadmin.applydocaudit.service.DataAuditService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.template.service.TemplateService;
 import com.bc.pmpheep.back.util.Const;
+import com.bc.pmpheep.back.util.DateUtil;
 import com.bc.pmpheep.back.util.ObjectUtil;
 import com.bc.pmpheep.controller.bean.ResponseBean;
 import com.bc.pmpheep.general.controller.BaseController;
@@ -114,26 +115,34 @@ public class DataAuditController extends BaseController{
 				pageNum, pageSize);
 		pageParameter.setParameter(paraMap);
 		List<Map<String, Object>> List_map = dataAuditService.findDataAudit(pageParameter);
-        if(List_map.size()>0){
-            for(Map<String,Object> map:List_map){
 
-            	   String post =map.get("preset_position").toString();
-            String tit = map.get("dtitle").toString();
-            if(tit!=null){
-                if(ObjectUtil.isNumber(tit)){
-                    tit=dataDictionaryService.getDataDictionaryItemNameByCode(Const.WRITER_USER_TITLE,tit);
-                }
-            }
-            if(post!=null){
-                if(ObjectUtil.isNumber(post)){
-                    post = dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION,post);
-                }
-            }
+			if(List_map.size()>0){
 
-				map.put("bpp",map.get("textbook_name")+"-"+post);
-                map.put("dtitle",tit);
-            }
-        }
+				for(Map<String,Object> map:List_map){
+					paraMap.put("declarationId",map.get("did"));
+					String declarationCreateDate = dataAuditService.findDeclarationCreateDate(paraMap);
+					Date date1 = DateUtil.fomatDate(declarationCreateDate);
+					Date date = DateUtil.fomatDate("2019-4-19 17:00");
+					if(date1.getTime()>date.getTime()) {
+						String post = map.get("preset_position").toString();
+						if (post != null) {
+							if (ObjectUtil.isNumber(post)) {
+								post = dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION, post);
+							}
+						}
+						map.put("bpp", map.get("textbook_name") + "-" + post);
+
+					}
+					String tit = map.get("dtitle").toString();
+					if (tit != null) {
+						if (ObjectUtil.isNumber(tit)) {
+							tit = dataDictionaryService.getDataDictionaryItemNameByCode(Const.WRITER_USER_TITLE, tit);
+						}
+					}
+					map.put("dtitle", tit);
+				}
+
+		}
 
 		int totoal_count = dataAuditService.findDataAuditCount(pageParameter);
 
@@ -212,17 +221,53 @@ public class DataAuditController extends BaseController{
 			}
 			if(tssbList.size()>0){
 				for (Map<String, Object> map : tssbList) {
+					Map<String, Object> paraMap = new HashMap<>();
 
-					String post=map.get("preset_position").toString();
-					if(post!=null){
-						if(ObjectUtil.isNumber(post)){
-							post=dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION,post);
+					paraMap.put("declarationId",map.get("declaration_id"));
+					String declarationCreateDate = dataAuditService.findDeclarationCreateDate(paraMap);
+					Date date1 = DateUtil.fomatDate(declarationCreateDate);
+					Date date = DateUtil.fomatDate("2019-4-19 17:00");
+					if(date1.getTime()>date.getTime()) {
+						String post = map.get("preset_position").toString();
+						if (post != null) {
+							if (ObjectUtil.isNumber(post)) {
+								post = dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION, post);
+							}
+						}
+						map.put("preset_position", post);
+					}else{
+						if(map.get("preset_position").equals(3)){//
+							map.put("preset_position", "副主编,编委");
+						}else if(map.get("preset_position").equals(1)){
+							map.put("preset_position", "编委");
+						}else if(map.get("preset_position").equals(2)){
+							map.put("preset_position", "副主编");
+						}else if(map.get("preset_position").equals(4)){
+							map.put("preset_position", "主编");
+						}else if(map.get("preset_position").equals(8)){
+							map.put("preset_position", "数字编委");
+						}else if(map.get("preset_position").equals(5)){
+							map.put("preset_position", "主编,编委");
+						}else if(map.get("preset_position").equals(6)){
+							map.put("preset_position", "主编,副主编");
+						}else if(map.get("preset_position").equals(9)){
+							map.put("preset_position", "数字编委,编委");
+						}else if(map.get("preset_position").equals(10)){
+							map.put("preset_position", "副主编,数字编委");
+						}else if(map.get("preset_position").equals(12)){
+							map.put("preset_position", "主编,数字编委");
+						}else if(map.get("preset_position").equals(7)){
+							map.put("preset_position", "主编,副主编,编委");
+						}else if(map.get("preset_position").equals(11)){
+							map.put("preset_position", "副主编,编委,数字编委");
+						}else if(map.get("preset_position").equals(13)){
+							map.put("preset_position", "主编,编委,数字编委");
+						}else if(map.get("preset_position").equals(14)){
+							map.put("preset_position", "主编,副主编,数字编委");
+						}else if(map.get("preset_position").equals(15)){
+							map.put("preset_position", "主编,副主编,编委,数字编委");
 						}
 					}
-
-
-						map.put("preset_position", post);
-
 				}
 			}
 			//3.作家学习经历表

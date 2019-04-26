@@ -70,7 +70,7 @@ public class DeclareCountController extends BaseController {
 		String material_name = dataAuditService.findTitleName(paraMap);
 		String materialCreateDate = dataAuditService.findMaterialCreateDate(paraMap);
 		Date date1 = DateUtil.fomatDate(materialCreateDate);
-		Date date = DateUtil.fomatDate("2019-04-01");
+		Date date = DateUtil.fomatDate("2019-04-19 17:00");
 		List<Map<String, Object>> list ;
 		if(date1.getTime()>date.getTime()){
 			list = declareCountService

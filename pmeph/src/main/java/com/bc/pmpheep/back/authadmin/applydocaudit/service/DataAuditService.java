@@ -53,7 +53,8 @@ public interface DataAuditService {
 	String findTitleName(Map<String, Object> map);
 
 	String findMaterialCreateDate(Map<String, Object> map);
-	
+	String findDeclarationCreateDate(Map<String, Object> paraMap);
+
 	/**
 	 * 申报审核通过
 	 */

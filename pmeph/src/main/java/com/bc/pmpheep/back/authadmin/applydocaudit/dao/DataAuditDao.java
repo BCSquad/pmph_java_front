@@ -33,6 +33,7 @@ public interface DataAuditDao {
 	 */
 	Integer findDataAuditCount(PageParameter<Map<String, Object>> pageParameter);
 
+
 	/**
 	 * 
 	 * @Title: findTitleName
@@ -45,6 +46,8 @@ public interface DataAuditDao {
 	String findTitleName(Map<String, Object> paraMap);
 
 	String findMaterialCreateDate(Map<String, Object> paraMap);
+
+	String findDeclarationCreateDate(Map<String, Object> paraMap);
 	/**
 	 * 导出excle表
 	 * @Title: findDataAuditExcel
