@@ -57,10 +57,10 @@ public class DataAuditExcelService implements ExcelDownloadService {
             map.put("dposition", resultList.get(i).get("dposition"));
             map.put("dtitle", resultList.get(i).get("dtitle"));
             Map<String, Object> params = new HashMap<>();
-            params.put("declarationId",resultList.get(i).get("dtitle"));
+            params.put("declarationId",resultList.get(i).get("did"));
             String materialCreateDate = dataAuditDao.findDeclarationCreateDate(params);
             Date date1 = DateUtil.fomatDate(materialCreateDate);
-            Date date = DateUtil.fomatDate("2019-3-20 17:00");
+            Date date = DateUtil.fomatDate("2019-3-22 12:00");
             /*Date date = DateUtil.fomatDate("2019-04-20 15:30");*/
 
             if(date1.getTime()>date.getTime()) {
@@ -76,6 +76,16 @@ public class DataAuditExcelService implements ExcelDownloadService {
             }else{
                 map.put("bpp", resultList.get(i).get("bpp"));
             }
+
+            String tit = resultList.get(i).get("dtitle").toString();
+            if (tit != null) {
+                if (ObjectUtil.isNumber(tit)) {
+                    tit = dataDictionaryDao.getDataDictionaryItemNameByCode(Const.WRITER_USER_TITLE, tit);
+                }
+
+            }
+            map.put("dtitle",tit);
+
             map.put("onlineprogress", resultList.get(i).get("onlineprogress"));
             map.put("offlineprogress", resultList.get(i).get("offlineprogress"));
             map.put("cp", resultList.get(i).get("cp"));

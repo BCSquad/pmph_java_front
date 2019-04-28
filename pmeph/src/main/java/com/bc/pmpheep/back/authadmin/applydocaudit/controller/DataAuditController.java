@@ -122,7 +122,7 @@ public class DataAuditController extends BaseController{
 					paraMap.put("declarationId",map.get("did"));
 					String declarationCreateDate = dataAuditService.findDeclarationCreateDate(paraMap);
 					Date date1 = DateUtil.fomatDate(declarationCreateDate);
-					Date date = DateUtil.fomatDate("2019-3-20 17:00");
+					Date date = DateUtil.fomatDate("2019-04-16 12:00");
 					/*Date date = DateUtil.fomatDate("2019-4-19 17:00");*/
 					if(date1.getTime()>date.getTime()) {
 						String post = map.get("preset_position").toString();
@@ -227,7 +227,7 @@ public class DataAuditController extends BaseController{
 					paraMap.put("declarationId",map.get("declaration_id"));
 					String declarationCreateDate = dataAuditService.findDeclarationCreateDate(paraMap);
 					Date date1 = DateUtil.fomatDate(declarationCreateDate);
-					Date date = DateUtil.fomatDate("2019-4-19 17:00");
+					Date date = DateUtil.fomatDate("2019-04-12 12:00");
 					if(date1.getTime()>date.getTime()) {
 						String post = map.get("preset_position").toString();
 						if (post != null) {

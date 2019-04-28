@@ -106,7 +106,7 @@
 		sum( CASE WHEN de.preset_position = 4 THEN 1 ELSE 0 END ) AS decid4,
 		sum( CASE WHEN dpp.chosen_position =1 THEN 1 ELSE 0 END ) AS dp1,
 		sum( CASE WHEN dpp.chosen_position =2 THEN 1 ELSE 0 END ) AS dp2,
-		sum( CASE WHEN dpp.chosen_position  =3 THEN 1 ELSE 0 END ) AS dp3,
+		sum( CASE WHEN dpp.chosen_position  >=3 THEN 1 ELSE 0 END ) AS dp3,
 		sum( CASE WHEN dpp.chosen_position  =4 THEN 1 ELSE 0 END ) AS dp4
 		FROM
 		dec_position de
