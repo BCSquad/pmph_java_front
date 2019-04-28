@@ -26,7 +26,7 @@ var materialMap ;
         $('#email').tipso({validator: "isNonEmpty|isEmail", message: "邮箱不能为空|邮箱格式不正确"});
         $('#handphone').tipso({validator: "isNonEmpty|isMobile", message: "手机号码不能为空|手机号码格式不正确"});
         $('#zjlx').tipso({validator: "isNonEmpty", message: "证件类型不能为空"});
-        $('#idcard').tipso({validator: "isNonEmpty|isCard", message: "证件号码不能为空|请填写正确的证件号码"});
+        $('#idcard').tipso({validator: "isNonEmpty", message: "证件号码不能为空|请填写正确的证件号码"});
         $('#address').tipso({validator: "isNonEmpty", message: "地址不能为空"});
         checkExtra();
 

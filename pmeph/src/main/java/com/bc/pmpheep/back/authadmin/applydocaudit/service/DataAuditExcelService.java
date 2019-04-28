@@ -60,7 +60,7 @@ public class DataAuditExcelService implements ExcelDownloadService {
             params.put("declarationId",resultList.get(i).get("did"));
             String materialCreateDate = dataAuditDao.findDeclarationCreateDate(params);
             Date date1 = DateUtil.fomatDate(materialCreateDate);
-            Date date = DateUtil.fomatDate("2019-3-22 12:00");
+            Date date = DateUtil.fomatDate("2019-04-12 12:00");
             /*Date date = DateUtil.fomatDate("2019-04-20 15:30");*/
 
             if(date1.getTime()>date.getTime()) {
