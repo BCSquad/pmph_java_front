@@ -809,7 +809,7 @@
                                 <td><input class="cg_input" name="jc_publisher" value="人民卫生出版社" readonly="true"
                                            style="width: 100px;" maxlength="20"/></td>
                                 <td><input class="cg_input" name="jc_publish_date" id="jc_publish_date_${status.count}"
-                                            placeholder="出版时间" calendar   value="${list.publish_date}"z
+                                            placeholder="出版时间" calendar   value="${list.publish_date}"
                                            format="'yyyy-mm-dd'" z-index="100" style="width: 100px;"/></td>
                                 <td><input class="cg_input" maxlength="100" name="jc_note" value="${list.note}"
                                            style="width: 100px;" placeholder="备注"/>
