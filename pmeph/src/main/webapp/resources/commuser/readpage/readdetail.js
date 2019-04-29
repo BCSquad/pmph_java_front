@@ -474,7 +474,7 @@ function changepage() {
                 }
                 if("feedpage"==tagName){
                     if(n.author_reply!=null){
-                        str+='<div style="margin: 20px;background-color: #fafaf8;height: 100px;width: 870px">\n';
+                        str+='<div style="margin: 20px;background-color: #fafaf8;width: 870px">\n';
                         str+='<div style="margin: 15px">';
                         str+='<div class="item_title">';
                         str+=' <div style="float: left;">';
