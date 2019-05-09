@@ -1637,7 +1637,7 @@
                         <c:if test="${empty sciList[0]}">
                             <tr>
                                 <td><input class="cg_input" name="sci_paper_name" id="sci_paper_name" value=""
-                                           style="width: 410px;" placeholder="论文名称" maxlength="500"/></td>
+                                           style="width: 410px;" placeholder="论文名称" maxlength="1000"/></td>
                                 <td><input class="cg_input" name="sci_journal_name" id="sci_journal_name" value=""
                                            style="width: 130px;" placeholder="期刊名称" maxlength="50"/></td>
                                 <td><input class="cg_input" name="sci_factor" id="sci_factor" value=""
