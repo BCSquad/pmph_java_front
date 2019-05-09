@@ -1236,7 +1236,7 @@
 						<tbody>
 						<c:if test="${empty persciList[0]}">
 							<tr>
-								<td><input class="cg_input" name="sci_paper_name" id="sci_paper_name" value="" style="width: 410px;" placeholder="论文名称" maxlength="500"/></td>
+								<td><input class="cg_input" name="sci_paper_name" id="sci_paper_name" value="" style="width: 410px;" placeholder="论文名称" maxlength="1000"/></td>
 								<td><input class="cg_input" name="sci_journal_name" id="sci_journal_name" value="" style="width: 130px;" placeholder="期刊名称" maxlength="50"/></td>
 								<td><input class="cg_input" name="sci_factor" id="sci_factor" value="" style="width: 170px;" placeholder="期刊SCI影响因子" maxlength="20"/></td>
 								<td><input class="cg_input" name="sci_publish_date" id="sci_publish_date" value="" style="width: 110px;" calendar format="'yyyy-mm-dd'" placeholder="发表时间"/></td>
@@ -1246,7 +1246,7 @@
 							</tr> </c:if>
 						<c:forEach var="list" items="${persciList}" varStatus="status">
 							<tr id="sci_${status.count}">
-								<td><input class="cg_input" name="sci_paper_name" id="sci_paper_name_${status.count}" value="${list.paper_name}" style="width: 410px;" placeholder="论文名称" maxlength="500"/></td>
+								<td><input class="cg_input" name="sci_paper_name" id="sci_paper_name_${status.count}" value="${list.paper_name}" style="width: 410px;" placeholder="论文名称" maxlength="1000"/></td>
 								<td><input class="cg_input" name="sci_journal_name" id="sci_journal_name_${status.count}" value="${list.journal_name}" style="width: 130px;" placeholder="期刊名称" maxlength="50"/></td>
 								<td><input class="cg_input" name="sci_factor" id="sci_factor_${status.count}" value="${list.factor}" style="width: 170px;" placeholder="期刊SCI影响因子" maxlength="20"/></td>
 								<td><input class="cg_input" name="sci_publish_date" id="sci_publish_date_${status.count}" value="${list.publish_date}" style="width: 110px;" calendar format="'yyyy-mm-dd'" placeholder="发表时间"/></td>

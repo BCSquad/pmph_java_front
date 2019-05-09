@@ -223,21 +223,66 @@
                     <table class="tab_1">
                         <tr>
                             <td><span class="btbs">*</span><span>姓&emsp;&emsp;名：</span>
-                                <input class="cg_input" name="realname" disabled id="realname" value="${gezlList.realname}"
-                                       maxlength="20"/>
+                                <%--<input class="cg_input" name="realname" disabled id="realname" value="${gezlList.realname}"
+                                       maxlength="20"/>--%>
+                                <c:choose>
+
+                                    <c:when test="${declarationCount==0}">
+                                        <input class="cg_input" name="realname" id="realname"
+                                               value="${gezlList.realname}" maxlength="20"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input class="cg_input" name="realname" id="realname" disabled
+                                               value="${gezlList.realname}" maxlength="20"/>
+                                    </c:otherwise>
+                                </c:choose>
+
                                 <input class="cg_input" name="user_id" type="hidden" value="${userMap.id}"/>
                                 <input class="cg_input" name="username" id="username" type="hidden"
                                        value="${userMap.username}"/>
                             </td>
                             <td><span class="btbs">*</span><span>性&emsp;&emsp;别：</span>
-                                <select class="select-input" id="sex"  disabled="disabled" name="sex">
-                                    <%--  <option value="0" ${gezlList.sex=='0'?'selected':'' }>保密</option>--%>
+                                <c:choose>
+
+                                    <c:when test="${declarationCount==0}">
+                                        <select class="select-input"  id="sex" name="sex">
+                                            <option value="1" ${gezlList.sex=='1'?'selected':'' }>男</option>
+                                            <option value="2" ${gezlList.sex=='2'?'selected':'' }>女</option>
+                                                <%--<option value="0" ${userMap.sex=='0'?'selected':'' }>保密</option>--%>
+                                        </select>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <select class="select-input"  id="sex" name="sex">
+                                            <option value="1" ${gezlList.sex=='1'?'selected':'' }>男</option>
+                                            <option value="2" ${gezlList.sex=='2'?'selected':'' }>女</option>
+                                                <%--<option value="0" ${userMap.sex=='0'?'selected':'' }>保密</option>--%>
+                                        </select>
+                                    </c:otherwise>
+                                </c:choose>
+
+                              <%--  <select class="select-input" id="sex"  disabled="disabled" name="sex">
+                                    &lt;%&ndash;  <option value="0" ${gezlList.sex=='0'?'selected':'' }>保密</option>&ndash;%&gt;
                                     <option value="1" ${gezlList.sex=='1'?'selected':'' }>男</option>
                                     <option value="2" ${gezlList.sex=='2'?'selected':'' }>女</option>
-                                </select></td>
+                                </select></td>--%>
                             <td><span class="btbs">*</span><span>出生年月：</span>
-                                <input class="cg_input" disabled calendar format="'yyyy-mm-dd'" name="birthday"
-                                       value="${gezlList.birthday}" id="birthday"/></td>
+                            <c:choose>
+                                <c:when test="${declarationCount==0}">
+                                    <input class="cg_input" calendar format="'yyyy-mm-dd'" name="birthday"
+                                           value="${gezlList.birthday}" id="birthday"/>
+                                </c:when>
+                                <c:otherwise>
+                                    <input class="cg_input" disabled calendar format="'yyyy-mm-dd'" name="birthday"
+                                           value="${gezlList.birthday}" id="birthday"/>
+                                </c:otherwise>
+                            </c:choose>
+
+
+
+
+
+                            <%--<input class="cg_input" disabled calendar format="'yyyy-mm-dd'" name="birthday"
+                                       value="${gezlList.birthday}" id="birthday"/>--%></td>
                             <td><span class="btbs">*</span><span>教&emsp;&emsp;龄：</span>
                                 <input class="cg_input" name="experience" value="${gezlList.experience}" id="experience"
                                        onkeyup="this.value=this.value.replace(/\D/g,'')"
@@ -1592,7 +1637,7 @@
                         <c:if test="${empty sciList[0]}">
                             <tr>
                                 <td><input class="cg_input" name="sci_paper_name" id="sci_paper_name" value=""
-                                           style="width: 410px;" placeholder="论文名称" maxlength="100"/></td>
+                                           style="width: 410px;" placeholder="论文名称" maxlength="500"/></td>
                                 <td><input class="cg_input" name="sci_journal_name" id="sci_journal_name" value=""
                                            style="width: 130px;" placeholder="期刊名称" maxlength="50"/></td>
                                 <td><input class="cg_input" name="sci_factor" id="sci_factor" value=""
@@ -1612,7 +1657,7 @@
                             <tr id="sci_${status.count}">
                                 <td><input class="cg_input" name="sci_paper_name" id="sci_paper_name_${status.count}"
                                            value="${list.paper_name}" style="width: 410px;" placeholder="论文名称"
-                                           maxlength="100"/></td>
+                                           maxlength="1000"/></td>
                                 <td><input class="cg_input" name="sci_journal_name"
                                            id="sci_journal_name_${status.count}" value="${list.journal_name}"
                                            style="width: 130px;" placeholder="期刊名称" maxlength="50"/></td>
