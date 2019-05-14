@@ -7,6 +7,7 @@ import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.utils.UUIDTool;
+import com.mysql.jdbc.StringUtils;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Service("com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailServiceImpl")
 public class MaterialDetailServiceImpl implements MaterialDetailService {
@@ -367,10 +369,23 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
                 HashMap<String, Object> map = new HashMap<>();
                 map.put("idcard",perMap.get("idcard"));
                 map.put("realname",perMap.get("realname"));
-                map.put("birthday",perMap.get("birthday"));
+                map.put("birthday",perMap.get("birthday")==null?null:perMap.get("birthday"));
                 map.put("user_id",perMap.get("user_id"));
-                int i = this.madd.updateWriter(map);
+                Set<Map.Entry<String, Object>> entries = map.entrySet();
 
+                Boolean flag=false;
+                for(Map.Entry e: entries){
+                    if(!e.getKey().equals("user_id")){
+                        if (!StringUtils.isNullOrEmpty(e.getValue()==null?null:e.getValue().toString())) {
+                            flag=false;
+
+                        }
+                    }
+
+                }
+                if(flag){
+                    this.madd.updateWriter(map);
+                }
             }
        /* else { //暂存
             if (tssbList != null && !tssbList.isEmpty()) {
