@@ -109,6 +109,7 @@
 			</div>
 		</div>
 		<!--主要学习经历-->
+			<div id="allTable">
 		<div class="sbxq_item" id="zyxxjl">
 			<div class="tubiao3px">
 				<span id="tsxz_span3"></span>
@@ -128,7 +129,7 @@
 					<tbody>
 						<c:forEach var="stulist" items="${stuList}">
 							<tr>
-								<td>${stulist.dbegin}-${stulist.dend}</td>
+								<td>${stulist.dbegin=="0000.00.00"?"":stulist.dbegin}-${stulist.dend=="0000.00.00"?"":stulist.dend}</td>
 								<td>${stulist.school_name}</td>
 								<td>${stulist.major}</td>
 								<td>${stulist.degree}</td>
@@ -158,7 +159,7 @@
 					<tbody>
 						<c:forEach var="list" items="${workList}">
 							<tr>
-								<td>${list.dbegin}-${list.dend}</td>
+								<td>${list.dbegin=="0000.00.00"?"":list.dbegin}-${list.dend=="0000.00.00"?"":list.dend}</td>
 								<td>${list.org_name}</td>
 								<td>${list.position}</td>
 								<td>${list.note}</td>
@@ -187,7 +188,7 @@
 					<tbody>
 						<c:forEach var="list" items="${steaList}">
 							<tr>
-								<td>${list.dbegin}-${list.dend}</td>
+								<td>${list.dbegin=="0000.00.00"?"":list.dbegin}-${list.dend=="0000.00.00"?"":list.dend}</td>
 								<td>${list.school_name}</td>
 								<td>${list.subject}</td>
 								<td>${list.note}</td>
@@ -281,7 +282,7 @@
 								<c:if test="${list.is_digital_editor == '0'}">否</c:if>
 							</td>
 							<td>${list.publisher}</td>
-							<td>${list.publishdate}</td>
+							<td>${list.publishdate=="0000.00.00"?"":list.publishdate}</td>
 							<td>${list.note}</td>
 						</tr>
 					</c:forEach>
@@ -365,7 +366,7 @@
 								<c:if test="${list.is_digital_editor == '1'}">是</c:if>
 								<c:if test="${list.is_digital_editor == '0'}">否</c:if>
 							</td>
-							<td>${list.publishdate}</td>
+							<td>${list.publishdate=="0000.00.00"?"":list.publishdate}</td>
 							<td>${list.isbn}</td>
 							<td>${list.note}</td>
 						</tr>
@@ -423,7 +424,7 @@
 								<c:if test="${list.is_digital_editor == '0'}">否</c:if>
 							</td>
 								<td>${list.publisher}</td>
-								<td>${list.publishdate}</td>
+								<td>${list.publishdate=="0000.00.00"?"":list.publishdate}</td>
 								<td>${list.isbn}</td>
 								<td>${list.note}</td>
 							</tr>
@@ -534,7 +535,7 @@
 								<c:if test="${list.is_self_paid == '1'}">自费</c:if>
 							</td>
 							<td>${list.publisher}</td>
-							<td>${list.publishdate}</td>
+							<td>${list.publishdate=="0000.00.00"?"":list.publishdate}</td>
 							<td>${list.note}</td>
 							</tr></c:forEach>
 					</tbody>
@@ -562,7 +563,7 @@
 						<tr>
 							<td>${list.reward_name}</td>
 							<td>${list.award_unit}</td>
-							<td>${list.rewarddate}</td>
+							<td>${list.rewarddate=="0000.00.00"?"":ist.rewarddate}</td>
 							<td>${list.note}</td>
 						</tr></c:forEach>
 					</tbody>
@@ -592,7 +593,7 @@
 							<td>${list.paper_name}</td>
 							<td>${list.journal_name}</td>
 							<td>${list.factor}</td>
-							<td>${list.publishdate}</td>
+							<td>${list.publishdate=="0000.00.00"?"":list.publishdate}</td>
 							<td>${list.note}</td>
 						</tr></c:forEach>
 					</tbody>
@@ -624,7 +625,7 @@
 								<c:if test="${list.award_unit == '1'}">国际</c:if>
 								<c:if test="${list.award_unit == '2'}">国家</c:if>
 							</td>
-							<td>${list.rewarddate}</td>
+							<td>${list.rewarddate=="0000.00.00"?"":ist.rewarddate}</td>
 							<td>${list.note}</td>
 						</tr></c:forEach>
 					</tbody>
@@ -658,13 +659,14 @@
 								<c:if test="${list.award_unit == '3'}">省部</c:if>
 								<c:if test="${list.award_unit == '4'}">市</c:if>
 							</td>
-							<td>${list.rewarddate}</td>
+							<td>${list.rewarddate=="0000.00.00"?"":ist.rewarddate}</td>
 							<td>${list.note}</td>
 						</tr></c:forEach>
 					</tbody>
 				</table>
 			</div>
 		</div>
+			</div>
 		<!--编写内容意向表-->
 	 	<div class="sbxq_item" id="intention">
 			<div class="tubiao3px">

@@ -12,9 +12,12 @@ var sta=true;
 var materialMap ;
  
  $(function () {
+     $("#allTable input").each(function () {
+         if(this.value=="0000-00-00"){
+             this.value=null;
+         }
+     });
      checkRealName();
-
-
     setTimeout(function () {
         $('#edu1').tipso({validator: "isNonEmpty", message: "请选择申报的图书"});
         $('#realname').tipso({validator: "isNonEmpty|isnumber", message: "姓名不能为空|姓名必须是中文"});
@@ -1111,6 +1114,14 @@ function buttAdd(type){
             //避免重复点击
             document.getElementById('buzc').onclick=function(){window.message.warning("请不要重复点击");};
             document.getElementById('butj').onclick=function(){window.message.warning("请不要重复点击");};
+            $("#allTable input").each(function () {
+                if(!!!this.value)
+                    if (this.getAttribute('calendar') != null) {
+                        this.value ="0000-00-00";
+                    } else {
+                        this.value = "-";
+                    }
+            });
             $.ajax({
                 type: "POST",
                 url:contextpath+'material/doMaterialAdd.action?sjump=1&type='+type,
@@ -1141,7 +1152,14 @@ function buttAdd(type){
                 if(nameFlag){
                     return;
                 }
-
+                $("#allTable input").each(function () {
+                    if(!!!this.value)
+                        if (this.getAttribute('calendar') != null) {
+                            this.value ="0000-00-00";
+                        } else {
+                            this.value = "-";
+                        }
+                });
                     window.message.confirm(
                     "确定提交吗？"
                     ,{icon: 7, title:'提示',btn:["确定","取消"]}

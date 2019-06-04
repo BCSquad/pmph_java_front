@@ -14,6 +14,7 @@ import com.bc.pmpheep.general.controller.BaseController;
 import com.bc.pmpheep.general.service.DataDictionaryService;
 import com.bc.pmpheep.general.service.FileService;
 import com.mysql.jdbc.StringUtils;
+import org.apache.commons.collections.ListUtils;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -345,16 +346,19 @@ public class MaterialDetailController extends BaseController{
 		for(int i=0;i<preset_positions.length;i++) { //遍历数组
 			if(!textbook_ids[i].equals("")) {
 				Map<String, Object> tsxzMap = new HashMap<String, Object>();
-				String preset_position[] = request.getParameterValues(preset_positions[i].toString());
+				String[] preset_position = request.getParameterValues(preset_positions[i].toString());
 				int k = 0;
+				String s="";
 				//遍历职位信息
 				if(preset_position == null){}else{
 					for (String st : preset_position) {
 						k += Integer.parseInt(st);
+						s+=st+",";
 					}
+						 s = s.substring(0, s.lastIndexOf(","));
 				}
 				tsxzMap.put("textbook_id", textbook_ids[i]);
-				tsxzMap.put("preset_position", k);
+				tsxzMap.put("preset_position", s);
 				tsxzMap.put("is_on_list", "1"); //默认值
 				tsxzMap.put("author_id", user_id); //暂存人Id
 				tsxzMap.put("is_background", is_background); //是否为社内用户

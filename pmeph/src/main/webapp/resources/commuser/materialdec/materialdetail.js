@@ -4,6 +4,12 @@ $(function () {
 	
 	//查询登录用户已经填写过的调研表
 	querySurvey();
+	$("#allTable input").each(function () {
+		if(this.value=="0000-00-00"){
+			this.value=null;
+		}
+	});
+
 });
 
 function querySurvey() {

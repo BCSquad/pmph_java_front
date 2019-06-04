@@ -140,9 +140,9 @@
                     #if( $!{c.is_all_textbook_published}==true && ($!{c.datebase}>0 || $!{c.is_force_end}==true))
                         <div class="bmcjan6"><span>遴选结束</span></div>
                     #elseif( $!{c.is_all_textbook_published}==true)
-                        <div class="bmcjan6"><span>报名结束</span></div>
-                    #elseif($!{c.datebase}>0 || $!{c.is_force_end}==true )
                         <div class="bmcjan6"><span>遴选结束</span></div>
+                    #elseif($!{c.datebase}>0 || $!{c.is_force_end}==true )
+                        <div class="bmcjan6"><span>申报结束</span></div>
                     #end
 
                     #if(${c.notNullIfFirstManager})

@@ -122,9 +122,9 @@
 					
 					<div class="links">
 						<div href="javascript:;" class="manager"
-							onclick="window.location='${ctx}/admininfocontroller/toadminattest.action'">学校管理员认证</div>
+							onclick="window.location='${ctx}/admininfocontroller/toadminattest.action'" style="cursor:pointer ">学校管理员认证</div>
 						<div href="javascript:;" class="password"
-							onclick="window.location='${ctx}/admininfocontroller/tochangepwd.action'">修改密码</div>
+							onclick="window.location='${ctx}/admininfocontroller/tochangepwd.action'" style="cursor:pointer ">修改密码</div>
 					</div>
 					<div style="clear: both"></div>
 				</div>

@@ -282,6 +282,8 @@
 				</div>
 			</div>
 			<!--主要学习经历-->
+
+            <div id="allTable">
 			<div class="sbxq_item" id="zyxxjl">
 				<div>
 					<span id="tsxz_span3"></span>
@@ -1407,6 +1409,7 @@
 					</table>
 				</div>
 			</div>
+            </div>
 			<!--编写内容意向表-->
 			<div class="sbxq_item" id="intention">
 				<div>

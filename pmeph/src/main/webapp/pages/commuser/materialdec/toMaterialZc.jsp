@@ -102,7 +102,7 @@
 
                                         <c:forEach items="${pmphPosition}" var="dic">
 
-                                            <td><input type="checkbox" id="zw_1" name="zw_1" value="${dic.code}" />${dic.name}</td>
+                                            <td><input type="checkbox" id="zw_1" name="zw_1" value="${dic.code}"  />${dic.name}</td>
 
                                         </c:forEach>
 
@@ -159,14 +159,37 @@
                                         <td><input type="checkbox" name="zw_1_${status.count}"
                                                    value="1" />编委
                                         </td>
---%>
+--%>                                   <c:if test="${fn:length(list.preset_position)==1}">
                                         <c:forEach items="${pmphPosition}" var="dic">
-                                            <td><input type="checkbox" id="zw_1" name="zw_1_${status.count}" value="${dic.code}"  ${list.preset_position==dic.code?'selected':'' }  />${dic.name}</td>
+                                            <td><input type="checkbox" id="zw_1" name="zw_1_${status.count}" value="${dic.code}"  ${list.preset_position==dic.code?'checked':'' }  />${dic.name}</td>
                                         </c:forEach>
+                                        </c:if>
 
+                                        <c:if test="${fn:length(list.preset_position)>1}">
+                                            <c:set value="${ fn:split(list.preset_position, ',') }" var="arr" />
+                                                <c:forEach items="${pmphPosition}" var="dic">
+                                                    <td><input type="checkbox" id="zw_1" class="zw_s" name="zw_1_${status.count}" value="${dic.code}"  ${dic2==dic.code?'checked':'' }  />${dic.name}</td>
+                                                </c:forEach>
+                                        </c:if>
+
+                                        <script>
+                                            $(function () {
+                                                var result =[];
+                                                <c:forEach items="${arr}" var="dic">
+                                                result.push(${dic});
+                                                </c:forEach>
+                                                $(".zw_s").each(function (f,v) {
+                                                    $.each(result,function(i,n) {
+                                                        if(v.value==n){
+                                                            v.checked=true;
+                                                        }
+                                                    })
+                                                })
+                                            })
+                                        </script>
                                         <c:if test="${materialMap.is_digital_editor_optional =='1'}">
-                                            <td><input type="checkbox" name="zw_1_${status.count}"
-                                                       value="8" ${list.preset_position=='1'?'checked':'' }/>数字编委
+                                            <td><input type="checkbox" name="zw_1_${status.count}" class="zw_s"
+                                                       value="8" ${list.preset_position=='8'?'checked':'' }/>数字编委
                                             </td>
                                         </c:if>
                                     </c:if>
@@ -181,7 +204,7 @@
                                                    value="1" ${list.preset_position=='1'?'checked':'' }/>编委
                                         </td>--%>
                                         <c:forEach items="${pmphPosition}" var="dic">
-                                            <td><input type="radio" id="zw_1" name="zw_1_${status.count}" value="${dic.code}"  ${list.preset_position==dic.code?'checked':'' }  />${dic.name}</td>
+                                            <td><input type="radio" id="zw_1" name="zw_1_${status.count}" value="${dic.code}"  ${list.preset_position==dic.code?'selected':'' }  />${dic.name}</td>
                                         </c:forEach>
                                         <c:if test="${materialMap.is_digital_editor_optional =='1'}">
                                             <td><input type="radio" name="zw_1_${status.count}"
@@ -213,6 +236,7 @@
                 </c:forEach>
             </div>
             <!-- 专家信息-->
+
             <div class="sbxq_item1">
                 <div>
                     <span id="tsxz_span2"></span>
@@ -383,6 +407,8 @@
                 </div>
             </div>
             <!--主要学习经历-->
+
+            <div id="allTable">
             <div class="sbxq_item" id="zyxxjl">
                 <div>
                     <span id="tsxz_span3"></span>
@@ -431,7 +457,7 @@
                         <c:forEach var="list" items="${stuList}" varStatus="status">
                             <tr id="xxjl_${status.count}">
                                 <td>
-                                    <input class="cg_input" placeholder="开始时间" calendar format="'yyyy-mm-dd'"
+                                    <input class="cg_input"  placeholder="开始时间" calendar format="'yyyy-mm-dd'"
                                            z-index="100" name="xx_kssj" max="'$#xx_jssj_${status.count}'"
                                            id="xx_kssj_${status.count}" value="${list.date_begin}"
                                            style="width: 80px;"/>
@@ -1656,7 +1682,7 @@
                         <c:forEach var="list" items="${sciList}" varStatus="status">
                             <tr id="sci_${status.count}">
                                 <td><input class="cg_input" name="sci_paper_name" id="sci_paper_name_${status.count}"
-                                           value="${list.paper_name}" style="width: 410px;" placeholder="论文名称"
+                                           value="${list.paper_name}" style="width: 410px;" maxlength="1000" placeholder="论文名称"
                                            maxlength="1000"/></td>
                                 <td><input class="cg_input" name="sci_journal_name"
                                            id="sci_journal_name_${status.count}" value="${list.journal_name}"
@@ -1885,6 +1911,7 @@
                     </table>
                 </div>
             </div>
+            </div>
             <!--编写内容意向表-->
             <div class="sbxq_item" id="intention">
                 <div>
@@ -1921,6 +1948,7 @@
                     </div>
                 </div>
             </c:forEach>
+
 
             <!-- 申报单位-->
             <div class="sbxq_item1">
