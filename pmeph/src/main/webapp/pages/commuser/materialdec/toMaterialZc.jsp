@@ -168,7 +168,7 @@
                                         <c:if test="${fn:length(list.preset_position)>1}">
                                             <c:set value="${ fn:split(list.preset_position, ',') }" var="arr" />
                                                 <c:forEach items="${pmphPosition}" var="dic">
-                                                    <td><input type="checkbox" id="zw_1" class="zw_s" name="zw_1_${status.count}" value="${dic.code}"  ${dic2==dic.code?'checked':'' }  />${dic.name}</td>
+                                                    <td><input type="checkbox" id="zw_1" class="zw_s_${status.count}" name="zw_1_${status.count}" value="${dic.code}"  ${dic2==dic.code?'checked':'' }  />${dic.name}</td>
                                                 </c:forEach>
                                         </c:if>
 
@@ -178,7 +178,7 @@
                                                 <c:forEach items="${arr}" var="dic">
                                                 result.push(${dic});
                                                 </c:forEach>
-                                                $(".zw_s").each(function (f,v) {
+                                                $(".zw_s_${status.count}").each(function (f,v) {
                                                     $.each(result,function(i,n) {
                                                         if(v.value==n){
                                                             v.checked=true;

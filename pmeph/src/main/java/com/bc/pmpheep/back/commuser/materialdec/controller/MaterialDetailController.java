@@ -807,10 +807,24 @@ public class MaterialDetailController extends BaseController{
 
 
 				String post =map.get("preset_position").toString();
-
-				if(post!=null){
-					if(ObjectUtil.isNumber(post)){
-						post = dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION,map.get("preset_position").toString());
+				String post2="";
+				if (post != null) {
+					if (ObjectUtil.isNumber(post)) {
+						if(Integer.parseInt(post)==8){
+							post="数字编委";
+						}else{
+							post = dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION, post);
+						}
+					} else {
+						String[] split = post.split(",");
+						for (String s : split) {
+							if (Integer.parseInt(s) == 8) {
+								post2 += "数字编委,";
+							} else {
+								post2 += dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION, s)+",";
+							}
+						}
+						post = post2.substring(0,post2.lastIndexOf(","));
 					}
 				}
 				map.put("preset_position", post);
