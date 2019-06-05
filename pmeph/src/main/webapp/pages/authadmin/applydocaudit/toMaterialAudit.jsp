@@ -213,7 +213,7 @@
 					<tbody>
 					<c:forEach var="list" items="${workList}">
 						<tr>
-							<td>${list.dbegin=="0000.00.00"?"":stulist.dbegin}-${list.dend=="0000.00.00"?"":stulist.dend}</td>
+							<td>${list.dbegin=="0000.00.00"?"":list.dbegin}-${list.dend=="0000.00.00"?"":list.dend}</td>
 							<td>${list.org_name}</td>
 							<td>${list.position}</td>
 							<td>${list.note}</td>
@@ -242,7 +242,7 @@
 					<tbody>
 					<c:forEach var="list" items="${steaList}">
 						<tr>
-							<td>${list.dbegin=="0000.00.00"?"":stulist.dbegin}-${list.dend=="0000.00.00"?"":stulist.dend}</td>
+							<td>${list.dbegin=="0000.00.00"?"":list.dbegin}-${list.dend=="0000.00.00"?"":list.dbegin}</td>
 							<td>${list.school_name}</td>
 							<td>${list.subject}</td>
 							<td>${list.note}</td>
