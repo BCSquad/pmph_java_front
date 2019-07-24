@@ -461,6 +461,27 @@
                                 </div>
                                 <div class="item_content">${list.content}</div>
                                 <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
+                                <c:if test="${list.auth_reply!=null}">
+                                    <div style="margin: 20px;background-color: #fafaf8;width: 870px">
+                                        <div style="margin: 15px">
+                                            <div class="item_title">
+                                                <div style="float: left;">
+                                                    <img src="${ctx}/statics/image/default_image.png" class="picturesize">
+                                                </div>
+                                                <div style="float: left;margin-left: 10px;margin-top: 5px;">
+                                                    回复
+                                                </div>
+
+                                                <div class="date_content">
+                                                    <div class="date"><fmt:formatDate pattern="yyyy.MM.dd HH:mm" value="${list.reply_date}" /></div>
+                                                </div>
+                                            </div>
+                                            <div class="item_content" style="width: 850px">${list.auth_reply}</div>
+                                        </div>
+
+                                    </div>
+                                </c:if>
+
                             </div>
                         </c:forEach>
                     </divlistCom>

@@ -165,12 +165,21 @@
     });
 
     $.addValidatRule("isPassword", function (value) {
-        //校验密码  只能为数字和字母
-        if (!/^[A-Za-z0-9!@#$%^&*]{6,16}$/.test(value)) {
+        //校验密码  只能为大写字母，小写字母，数字，字符中的三种组合
+
+        if(!/^(?![a-zA-Z]+$)(?![A-Z0-9]+$)(?![A-Z\W_]+$)(?![a-z0-9]+$)(?![a-z\W_]+$)(?![0-9\W_]+$)[a-zA-Z0-9\W_]{8,16}$/.test(value))
+        {
             return false;
         } else {
             return true;
         }
+
+
+       /* if (!/^[A-Za-z0-9!@#$%^&*]{6,16}$/.test(value)) {
+            return false;
+        } else {
+            return true;
+        }*/
     });
 
     $.addValidatRule("isCard", function (value) {

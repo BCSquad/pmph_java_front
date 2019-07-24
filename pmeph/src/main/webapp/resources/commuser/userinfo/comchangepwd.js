@@ -1,6 +1,6 @@
 $(function () {
-    $('#newpassword').tipso({validator: "isNonEmpty|isPassword", message: "密码不能为空|密码必须由 6-16位字母、数字组成"});
-    $('#confirmpassword').tipso({validator: "isNonEmpty|isPassword", message: "密码不能为空|密码必须由 6-16位字母、数字组成"});
+    $('#newpassword').tipso({validator: "isNonEmpty|isPassword", message: "密码不能为空|密码必须由 8-16位大写字母，小写字母，数字，字符至少三种组成"});
+    $('#confirmpassword').tipso({validator: "isNonEmpty|isPassword", message: "密码不能为空|密码必须由 8-16位大写字母，小写字母，数字，字符至少三种组成"});
 })
 
 

@@ -122,7 +122,7 @@ function submit(){
 	 //   debugger
         var aa = $("#fileid").val();
 	    if($("#fileid").val()==null || aa =="" ||aa=="default"){
-	        window.message.info("请长传委托书！")
+	        window.message.info("请上传委托书！")
         }else {
             $.ajax({
                 type: 'post',

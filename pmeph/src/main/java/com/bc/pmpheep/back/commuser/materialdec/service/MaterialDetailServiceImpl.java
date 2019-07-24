@@ -2,6 +2,7 @@ package com.bc.pmpheep.back.commuser.materialdec.service;
 
 import com.bc.pmpheep.back.commuser.materialdec.dao.MaterialDetailDao;
 import com.bc.pmpheep.back.commuser.materialdec.dao.PersonInfoDao;
+import com.bc.pmpheep.back.commuser.materialdec.po.MaterialPosition;
 import com.bc.pmpheep.back.commuser.mymessage.service.MyMessageService;
 import com.bc.pmpheep.back.commuser.personalcenter.service.PersonalService;
 import com.bc.pmpheep.back.plugin.PageParameter;
@@ -1087,6 +1088,11 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
     public Map<String, Object> queryIdcar(Long user_id)
     {
         return this.madd.queryIdcar(user_id);
+    }
+
+    @Override
+    public  List<Map<String,Object>> getMaterialPositions(Long id) {
+        return madd.getMaterialPositions(id);
     }
 
 

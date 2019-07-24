@@ -80,13 +80,17 @@
 						<div class="addBtn pull-right" id="sjtj" onclick="javascript:addTsxz()"><span>增加</span></div>
 					</c:if>
 				</div>
+
+
 				<div class="item" id="xz1">
+					<div style="float: left">
 					<span style="float: left;line-height: 30px;">图书：</span>
 					<select id="edu1" name="textbook_id" class="st book" data-valid="isNonEmpty" data-error="书籍选择不能为空" style="float: left;height: 40px;">
 						${bookSelects}
 					</select>
-					<div style="float: left;margin-left: 30px;" class="ts_radio">
-						<table style="width: 260px;border:0" cellspacing="0" cellpadding="0">
+					</div>
+					<div style="float: left;margin-left: 30px;width: auto" class="ts_radio">
+						<table style="width: auto;border:0" cellspacing="0" cellpadding="0">
 							<tr>
 								<c:if test="${materialMap.is_multi_position =='1'}">
 									<c:forEach items="${pmphPosition}" var="dic">
@@ -109,15 +113,29 @@
 						<!-- 用于遍历radio中的值 -->
 						<input type="hidden" name="preset_position" value="zw_1">
 					</div>
-					<div style="float: left;margin-left: 20px;height: 30px;">
+					<div style="float: left;margin-left: 50px;height: 30px;">
 						<span style="float: left;line-height: 30px;">上传教学大纲(只能上传一个文件或压缩包)：</span>
-						<div id="fileNameDiv_1" class="fileNameDiv"></div>
+						<div id="fileNameDiv_1" class="fileNameDiv" ></div>
 						<input type="hidden" name="syllabus_id" id="syllabus_id_1"/>
 						<input type="hidden" name="syllabus_name" id="syllabus_name_1"/>
 						<div class="scys" id="scjxdg_1"><span>上传文件</span></div>
 					</div>
 				</div>
 			</div>
+
+<script>
+var result2=[];
+$(function () {
+<c:forEach items="${pmphPosition}" var="dic">
+    var item={};
+    item.code="${dic.code}";
+    item.name="${dic.name}";
+    result2.push(item)
+    </c:forEach>
+
+	console.log("${checkPositon}")
+    })
+    </script>
 			<!-- 专家信息-->
 			<div class="sbxq_item1">
 				<div>

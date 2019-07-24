@@ -242,7 +242,7 @@
 					<tbody>
 					<c:forEach var="list" items="${steaList}">
 						<tr>
-							<td>${list.dbegin=="0000.00.00"?"":list.dbegin}-${list.dend=="0000.00.00"?"":list.dbegin}</td>
+							<td>${list.dbegin=="0000.00.00"?"":list.dbegin}-${list.dend=="0000.00.00"?"":list.dend}</td>
 							<td>${list.school_name}</td>
 							<td>${list.subject}</td>
 							<td>${list.note}</td>
@@ -396,11 +396,10 @@
 							<td>${list.material_name}</td>
 							<td>
 								<c:if test="${list.rank == '0'}">无</c:if>
-								<c:if test="${list.rank == '1'}">国家</c:if>
-								<c:if test="${list.rank == '2'}">省部</c:if>
-								<c:if test="${list.rank == '3'}">协编</c:if>
-								<c:if test="${list.rank == '4'}">校本</c:if>
-								<c:if test="${list.rank == '5'}">其他</c:if>
+								<c:if test="${list.rank == '1'}">国际</c:if>
+								<c:if test="${list.rank == '2'}">国家</c:if>
+								<c:if test="${list.rank == '3'}">省部</c:if>
+								<c:if test="${list.rank == '4'}">市级</c:if>
 							</td>
 							<td>
 								<c:if test="${list.position == '0'}">无</c:if>
@@ -447,11 +446,11 @@
 							<td>${list.material_name}</td>
 							<td>
 								<c:if test="${list.rank == '0'}">无</c:if>
-								<c:if test="${list.rank == '1'}">国家</c:if>
-								<c:if test="${list.rank == '2'}">省部</c:if>
-								<c:if test="${list.rank == '3'}">协编</c:if>
-								<c:if test="${list.rank == '4'}">校本</c:if>
-								<c:if test="${list.rank == '5'}">其他</c:if>
+								<c:if test="${list.rank == '1'}">国际</c:if>
+								<c:if test="${list.rank == '2'}">国家</c:if>
+								<c:if test="${list.rank == '3'}">省部</c:if>
+								<c:if test="${list.rank == '4'}">市级</c:if>
+
 							</td>
 							<td>
 								<c:if test="${list.position == '0'}">无</c:if>

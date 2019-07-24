@@ -89,14 +89,16 @@
                     </c:if>
                 </div>
                 <c:if test="${empty tssbList[0]}">
-                    <div class="item" id="xz1">
+                    <div class="item" id="xz1" >
+                        <div style="float: left">
                         <span style="float: left;line-height: 30px;">图书：</span>
                         <select id="edu1" name="textbook_id" class="st book" data-valid="isNonEmpty"
                                 data-error="书籍选择不能为空" style="float: left;height: 40px;overflow-y: auto">
                                 ${bookSelects}
                         </select>
-                        <div style="float: left;margin-left: 30px;" class="ts_radio">
-                            <table style="width: 260px;border:0" cellspacing="0" cellpadding="0">
+                        </div>
+                        <div style="float: left;margin-left: 30px;width: auto" class="ts_radio" >
+                            <table style="width: auto;border:0" cellspacing="0" cellpadding="0">
                                 <tr>
                                     <c:if test="${materialMap.is_multi_position =='1'}">
 
@@ -129,9 +131,9 @@
                             <!-- 用于遍历radio中的值 -->
                             <input type="hidden" name="preset_position" value="zw_1">
                         </div>
-                        <div style="float: left;margin-left: 20px;height: 30px;">
+                        <div style="float: left;margin-left: 50px;height: 30px;">
                             <span style="float: left;line-height: 30px;">上传教学大纲(只能上传一个文件或压缩包)：</span>
-                            <div id="fileNameDiv_1" class="fileNameDiv"></div>
+                            <div id="fileNameDiv_1" class="fileNameDiv" ></div>
                             <input type="hidden" name="syllabus_id" id="syllabus_id_1"/>
                             <input type="hidden" name="syllabus_name" id="syllabus_name_1"/>
                             <div class="scys" id="scjxdg_1"><span>上传文件</span></div>
@@ -140,14 +142,16 @@
                 </c:if>
                 <c:forEach var="list" items="${tssbList}" varStatus="status">
                     <div class="item" id="xz1">
+                        <div style="float: left">
                         <span style="float: left;line-height: 30px;">图书：</span>
                         <select id="edu_${status.count}" name="textbook_id" class="st" data-valid="isNonEmpty"
                                 data-error="书籍选择不能为空" style="float: left;overflow: scroll">
                                 ${list.bookSelect}
                         </select>
                         <input type="hidden" name="sjxz" value="edu_${status.count}"/>
-                        <div style="float: left;margin-left: 30px;" class="ts_radio">
-                            <table style="width: 260px;border:0" cellspacing="0" cellpadding="0">
+                        </div>
+                        <div style="float: left;margin-left: 30px;width: auto" class="ts_radio">
+                            <table style="width: auto;border:0" cellspacing="0" cellpadding="0">
                                 <tr>
                                     <c:if test="${materialMap.is_multi_position =='1'}">
                                       <%--  <td height="30px;"><input type="checkbox" name="zw_1_${status.count}"
@@ -159,7 +163,8 @@
                                         <td><input type="checkbox" name="zw_1_${status.count}"
                                                    value="1" />编委
                                         </td>
---%>                                   <c:if test="${fn:length(list.preset_position)==1}">
+--%>                                   <c:if test="${fn:length(list.preset_position)<=1}">
+
                                         <c:forEach items="${pmphPosition}" var="dic">
                                             <td><input type="checkbox" id="zw_1" name="zw_1_${status.count}" value="${dic.code}"  ${list.preset_position==dic.code?'checked':'' }  />${dic.name}</td>
                                         </c:forEach>
@@ -173,8 +178,18 @@
                                         </c:if>
 
                                         <script>
+                                            var result;
+                                            var result2=[];
                                             $(function () {
-                                                var result =[];
+                                                result2=[];
+                                                <c:forEach items="${pmphPosition}" var="dic">
+                                                var item={};
+                                                item.code="${dic.code}";
+                                                item.name="${dic.name}";
+                                                result2.push(item)
+                                                </c:forEach>
+                                                console.log(result2)
+                                                result =[];
                                                 <c:forEach items="${arr}" var="dic">
                                                 result.push(${dic});
                                                 </c:forEach>
@@ -188,7 +203,7 @@
                                             })
                                         </script>
                                         <c:if test="${materialMap.is_digital_editor_optional =='1'}">
-                                            <td><input type="checkbox" name="zw_1_${status.count}" class="zw_s"
+                                            <td><input type="checkbox" name="zw_1_${status.count}" class="zw_s_${status.count}"
                                                        value="8" ${list.preset_position=='8'?'checked':'' }/>数字编委
                                             </td>
                                         </c:if>
@@ -218,7 +233,7 @@
                             <!-- 用于遍历radio中的值 -->
                             <input type="hidden" name="preset_position" value="zw_1_${status.count}">
                         </div>
-                        <div style="float: left;margin-left: 20px;height: 30px;">
+                        <div style="float: left;margin-left: 50px;height: 30px;">
                             <span style="float: left;line-height: 30px;">上传教学大纲(只能上传一个文件或压缩包)：</span>
                             <div id="fileNameDiv_${status.count}" class="fileNameDiv"></div>
                             <input type="hidden" name="syllabus_id" id="syllabus_id_${status.count}"
@@ -226,8 +241,15 @@
                             <input type="hidden" name="syllabus_name" id="syllabus_name_${status.count}"
                                    value="${list.syllabus_name}"/>
                             <span style="float: left;margin-right: 10px;" id="fjxq_${status.count}">
-							<div class="filename"><a href="javascript:" onclick="downLoadProxy('${list.syllabus_id}')"
-                                                     title="${list.syllabus_name}">${list.syllabus_name}</a></div>
+							<div class="filename" style="display:inline-flex" id="a_${status.count}" ><a href="javascript:" onclick="downLoadProxy('${list.syllabus_id}')"
+                                                     title="${list.syllabus_name}">${list.syllabus_name}</a>
+                                   <c:if test="${list.syllabus_id !='' }">
+                                       <div title="删除" style="margin-left: 5px;cursor:pointer;color: red" onclick='delfile("syllabus_id_${status.count}","syllabus_name_${status.count}","a_${status.count}","${status.count}")'>X</div>
+                                   </c:if>
+
+
+                            </div>
+
 						</span>
                             <div class="scys" id="scjxdg_${status.count}"><span>上传文件</span></div>
                             <input type="hidden" name="scfjb" id="scfjb" value="${status.count}">

@@ -35,6 +35,8 @@
 	<!-- 根据书籍ID查询书籍评论信息 -->
 	<select id="queryComment" parameterType="java.util.Map" resultType="java.util.Map">
 	   select
+	   	 t.front,
+	   	 t.auth_reply,
 	     t.content,
 	     t.gmt_create,
 	     t.score,
@@ -45,7 +47,7 @@
 	     from book_user_comment t
 	     left join book u on t.book_id=u.id
 	     left join writer_user b on b.id=t.writer_id where u.id=#{id} and t.is_long=0
-	     and t.is_auth='1' and t.is_deleted='0'
+	     and t.is_auth='1' and t.is_deleted='0' and t.front=1
 	     order by t.sort*t.is_stick DESC , t.gmt_create desc
 	     <if test="start >= 0">
 	        limit #{start},3

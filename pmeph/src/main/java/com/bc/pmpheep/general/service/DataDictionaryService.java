@@ -36,4 +36,12 @@ public class DataDictionaryService {
         }
         return result;
     }
+    public String getDataDictionaryItemNameByCode2(String writerUserTitle, String title) {
+        String result = "";
+        result = dataDictionaryDao.getDataDictionaryItemNameByCode2(writerUserTitle,title);
+        if(ObjectUtil.isNull(result)){
+            result = "";
+        }
+        return result;
+    }
 }

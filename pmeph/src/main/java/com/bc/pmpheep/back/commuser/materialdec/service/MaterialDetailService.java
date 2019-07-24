@@ -3,6 +3,7 @@ package com.bc.pmpheep.back.commuser.materialdec.service;
 import java.util.List;
 import java.util.Map;
 
+import com.bc.pmpheep.back.commuser.materialdec.po.MaterialPosition;
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 
@@ -247,4 +248,5 @@ public interface MaterialDetailService {
 	Integer queryDeclarationCountByUserId(Long user_id);
 
 	public abstract Map<String, Object> queryIdcar(Long paramLong);
+	List<Map<String,Object>> getMaterialPositions(Long id);
 }

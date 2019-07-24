@@ -3,6 +3,7 @@ package com.bc.pmpheep.back.commuser.materialdec.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.bc.pmpheep.back.commuser.materialdec.po.MaterialPosition;
 import org.apache.ibatis.annotations.Param;
 
 import com.bc.pmpheep.back.plugin.PageParameter;
@@ -142,4 +143,6 @@ public interface MaterialDetailDao {
 		Integer queryDeclarationCountByUserId(Long user_id);
 
 	    Map<String, Object> queryIdcar(Long paramLong);
+	List<Map<String,Object>> getMaterialPositions(Long id);
+
 }

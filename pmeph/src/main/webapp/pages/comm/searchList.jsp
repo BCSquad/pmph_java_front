@@ -7,7 +7,7 @@
 <body>
 <!--调研表-->
 <div style="margin-top: 20px">
-    <div class="txdyb">（ 温馨提醒: 根据您申报的书籍，需要填写以下<font style="color: red">标记*</font>的调研表才能提交, 如果没有请忽略。<font style="color: red">填写调研表前请先暂存申报表, 防止内容丢失。</font>)</div>
+    <div id="dyb" style="display: none" class="txdyb">（ 温馨提醒: 根据您申报的书籍，需要填写以下<font style="color: red">标记*</font>的调研表才能提交, 如果没有请忽略。<font style="color: red">填写调研表前请先暂存申报表, 防止内容丢失。</font>)</div>
     <div id="jcdyb"></div>
     <div id="tsdyb"></div>
 </div>
@@ -23,6 +23,9 @@
             data:{material_id:id},// 您的formid
             async : false,
             success: function(json) {
+                if(json.length!=0){
+                    $("#dyb").css("display","block");
+                }
                 var str='';
                 $.each(json,function (i,n) {
                     var c=i+1;
@@ -75,6 +78,9 @@
             },
             async : false,
             success: function(json) {
+                if(json.length!=0){
+                    $("#dyb").css("display","block");
+                }
                 var str='';
                 $.each(json,function (i,n) {
                     ber=ber+1;

@@ -1,6 +1,7 @@
 package com.bc.pmpheep.back.commuser.materialdec.controller;
 
 import com.bc.pmpheep.back.authadmin.message.service.SendMessageServiceImpl;
+import com.bc.pmpheep.back.commuser.materialdec.po.MaterialPosition;
 import com.bc.pmpheep.back.commuser.materialdec.service.MaterialDetailService;
 import com.bc.pmpheep.back.commuser.materialdec.service.PersonInfoService;
 import com.bc.pmpheep.back.commuser.personalcenter.bean.WriterUserTrendst;
@@ -174,12 +175,13 @@ public class MaterialDetailController extends BaseController{
 			orgSelects.append("<option value='"+map.get("org_id")+"'>"+map.get("org_name")+"</option>");
             }
         }
+		List<Map<String,Object>> materialPositions = mdService.getMaterialPositions(Long.parseLong(material_id));
+		List<Map<String, Object>> dataDictionaryListByType = dataDictionaryService.getDataDictionaryListByType(Const.PMPH_POSITION);
 		//数据字典
 		mav.addObject("writerUserDegree", dataDictionaryService.getDataDictionaryListByType(Const.WRITER_USER_DEGREE));
 		mav.addObject("writerUserTitle", dataDictionaryService.getDataDictionaryListByType(Const.WRITER_USER_TITLE));
 		mav.addObject("pmphRank", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_RANK));
-		mav.addObject("pmphPosition", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_POSITION));
-
+		mav.addObject("pmphPosition",materialPositions!=null?materialPositions:dataDictionaryListByType );
 		mav.addObject("bookSelects", bookSelects.toString());
 		mav.addObject("orgSelects", orgSelects.toString());
 		mav.addObject("materialMap", materialMap);
@@ -813,7 +815,7 @@ public class MaterialDetailController extends BaseController{
 						if(Integer.parseInt(post)==8){
 							post="数字编委";
 						}else{
-							post = dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION, post);
+							post = dataDictionaryService.getDataDictionaryItemNameByCode2(Const.PMPH_POSITION, post);
 						}
 					} else {
 						String[] split = post.split(",");
@@ -821,7 +823,7 @@ public class MaterialDetailController extends BaseController{
 							if (Integer.parseInt(s) == 8) {
 								post2 += "数字编委,";
 							} else {
-								post2 += dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION, s)+",";
+								post2 += dataDictionaryService.getDataDictionaryItemNameByCode2(Const.PMPH_POSITION, s)+",";
 							}
 						}
 						post = post2.substring(0,post2.lastIndexOf(","));
@@ -1087,11 +1089,14 @@ public class MaterialDetailController extends BaseController{
 			map.put("bookSelect", bookSelect.toString());
 		}
 
+		List<Map<String,Object>> materialPositions = mdService.getMaterialPositions(Long.parseLong(material_id));
+		List<Map<String, Object>> dataDictionaryListByType = dataDictionaryService.getDataDictionaryListByType(Const.PMPH_POSITION);
+
 		//数据字典
 		mav.addObject("writerUserDegree", dataDictionaryService.getDataDictionaryListByType(Const.WRITER_USER_DEGREE));
 		mav.addObject("writerUserTitle", dataDictionaryService.getDataDictionaryListByType(Const.WRITER_USER_TITLE));
 		mav.addObject("pmphRank", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_RANK));
-		mav.addObject("pmphPosition", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_POSITION));
+		mav.addObject("pmphPosition",materialPositions!=null?materialPositions:dataDictionaryListByType);
 
 		//填充
         mav.addObject("declarationCount",declarationCount);

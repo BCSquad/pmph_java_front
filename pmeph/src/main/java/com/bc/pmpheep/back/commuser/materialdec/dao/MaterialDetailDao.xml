@@ -592,4 +592,11 @@
 	<select id="queryIdcar" parameterType="long" resultType="map">
 		select dt.idcard  from (select * from declaration dc where dc.idcard is not NULL  order by gmt_create desc)dt left join dec_textbook d on d.declaration_id=d.id where dt.user_id=#{user_id}  LIMIT 1
 	</select>
+	<select id="getMaterialPositions" resultType="map" parameterType="long">
+		select d.name,d.code from
+		data_dictionary_item d
+		left JOIN material_position m on d.`code`=m.position_code
+		where material_id=#{id} and d.type_id=3
+		ORDER BY d.sort asc
+	</select>
 </mapper>

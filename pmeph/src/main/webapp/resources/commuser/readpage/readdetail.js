@@ -443,10 +443,24 @@ function changepage() {
                 str += '</div><div class="date_content"><div class="date">'
                     + n.gmt_create
                     + '</div></div></div>' ;
-                str += '<div class="item_content">\n' +
-                    '第'+n.page+'页，第'+n.line+'行:\n' +
-                    '                        </div>';
                 str+= '<div class="item_content">' + n.content;
+                if(n.auth_reply!=null){
+                    str+='<div style="margin: 20px;background-color: #fafaf8;width: 870px">\n';
+                    str+='<div style="margin: 15px">';
+                    str+='<div class="item_title">';
+                    str+=' <div style="float: left;">';
+                    str+='<img src="';
+                    str += contextpath + 'statics/image/default_image.png';
+                    str += '" class="picturesize"></div>';
+                    str+='<div style="float: left;margin-left: 10px;margin-top: 5px;">回复</div>';
+                    str+='<div class="date_content">';
+                    str+='<div class="date">'+formatDate(n.reply_date,'yyyy.MM.dd hh:mm')+'</div>';
+                    str+='</div></div>';
+                    str+='<div class="item_content"  style="width: 850px;overflow: auto">'+n.auth_reply+'</div>';
+                    str+='</div></div>';
+                }
+
+
 
                 if("correctpage"==tagName){
                     if(n.editor_reply!=null){

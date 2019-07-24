@@ -20,4 +20,12 @@
         order by i.sort asc
         limit 0,1
     </select>
+    <select id="getDataDictionaryItemNameByCode2"  parameterType="String" resultType="String">
+        select i.name
+        from data_dictionary_item i
+        inner join data_dictionary_type t
+        on t.id = i.type_id and t.type_code = #{type_code} and i.code = #{code}
+        order by i.sort asc
+        limit 0,1
+    </select>
 </mapper>

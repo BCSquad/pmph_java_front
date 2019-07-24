@@ -196,7 +196,7 @@ function upload(id){
         done: function (filename, fileid) {
             $("#fjxq_"+id).css("display","none");
             $("#fileNameDiv_"+id).empty(); //清楚内容
-            $("#fileNameDiv_"+id).append("<span><div class=\"filename\"><a href='javascript:' class='filename'  onclick='downLoadProxy("+fileid+")' title='\"+filename+\"'>"+filename+"</a></div></span>");
+            $("#fileNameDiv_"+id).append("<span><div  class=\"filename\" style=\"display:inline-flex\" id='a_"+id+"'><a href='javascript:' class='filename'  onclick='downLoadProxy("+fileid+")' title='"+filename+"'>"+filename+"</a><div title='删除' style='margin-left: 5px;cursor:pointer;color: red' onclick='delfile(\"syllabus_id_"+id+"\",\"syllabus_name_"+id+"\",\"a_"+id+"\","+id+")'>X</div></div></span>");
             $("#fileNameDiv_"+id).css("display","inline");
             $("#syllabus_id_"+id).val(fileid);
             $("#syllabus_name_"+id).val(filename);
@@ -652,8 +652,23 @@ function fnt(){
     }
     return str;
 };
+function delfile (id,name,a,s){
+    var id=$("#"+id);
+    var name=$("#"+name);
+    var a=$("#"+a);
+    id.val("");
+    name.val("");
+    a.html("");
+    var o=$("#scjxdg_"+s).offset().left;
+    $("#scjxdg_"+s+"_upload").css("left",o);
+ /*   console.log(id);*/
+
+
+}
 //追加图书添加div
 function addTsxz(){
+    console.log(result);
+    console.log(1);
     //是否职位多选
     var is_multi_position = $("#is_multi_position").val();
     var select_nr = $("#select_nr").val();
@@ -661,24 +676,23 @@ function addTsxz(){
     var str = fnt();
     var thtml = "";
     thtml=	"<div class='item' id='xz_"+str+"'>"+
-        "<span style='float: left;line-height: 30px;'>图书：</span>"+
+        "<div style='float: left'><span style='float: left;line-height: 30px;'>图书：</span>"+
         "<select id='edu_"+str+"' name='textbook_id' class='st book' style='float: left;'>"+
         select_nr+
-        "</select>"+
-        "<div style='float: left;margin-left: 30px;' class='ts_radio'>"+
-        "<table style='width: 260px;border:0' cellspacing='0' cellpadding='0'><tr>";
+        "</select></div>"+
+        "<div style='float: left;margin-left: 30px;width: auto' class='ts_radio'>"+
+        "<table style='width: auto;border:0' cellspacing='0' cellpadding='0'><tr>";
     if(is_multi_position=='1'){
-        thtml += "<td height='30px'><input type='checkbox' name='zw_"+str+"' value='1'/>主编</td>"+
-            "<td><input type='checkbox' name='zw_"+str+"' value='2'/>副主编</td>"+
-            "<td><input type='checkbox' name='zw_"+str+"' value='3'/>编委</td>";
+        result2.forEach(function(i,v){
+            thtml+="<td height='30px'><input type='checkbox' name='zw_"+str+"' value="+i.code+">"+i.name+"</td>";
+        });
         if(sfbw == "1"){
             thtml += "<td><input type='checkbox' name='zw_"+str+"' value='8'/>数字编委</td>";
         }
     }else{
-        thtml +=
-            "<td height='30px'><input type='radio' name='zw_"+str+"' value='1'/>主编</td>"+
-            "<td><input type='radio' name='zw_"+str+"' value='2'/>副主编</td>"+
-            "<td><input type='radio' name='zw_"+str+"' value='3'/>编委</td>";
+        result2.forEach(function(i,v){
+            thtml+="<td height='30px'><input type='radio' name='zw_"+str+"' value="+i.code+">"+i.name+"</td>";
+        });
         if(sfbw == "1"){
             thtml += "<td><input type='radio' name='zw_"+str+"' value='8'/>数字编委</td>";
         }
@@ -687,14 +701,14 @@ function addTsxz(){
         "</tr></table>"+
         "<input type='hidden' name='preset_position' value='zw_"+str+"'>"+
         "</div>"+
-        "<div style='float: left;margin-left: 20px;height: 30px;'>"+
+        "<div style='float: left;margin-left: 50px;height: 30px;'>"+
         "<span style='float: left;line-height: 30px;'>上传教学大纲(只能上传一个文件或压缩包)：</span>"+
         "<div id='fileNameDiv_"+str+"' class='fileNameDiv'></div>"+
         "<input type='hidden' name='syllabus_id' id='syllabus_id_"+str+"'/>"+
         "<input type='hidden' name='syllabus_name' id='syllabus_name_"+str+"'/>"+
         "<div class='scys' id='scjxdg_"+str+"'><span>上传文件</span></div>"+
         "</div>"+
-        "<div class='delBtn pull-right' onclick=\"javascript:delTsxz( 'xz_"+str+"')\"><span>删除</span></div>"+
+        "<div class='delBtn pull-right'  onclick=\"javascript:delTsxz( 'xz_"+str+"')\"><span>删除</span></div>"+
         "</div>";
     $("#tsxz").append(thtml);
     $('#edu_'+str).selectlist({

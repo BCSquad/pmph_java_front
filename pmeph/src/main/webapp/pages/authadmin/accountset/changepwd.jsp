@@ -46,7 +46,7 @@
                 <tr>
                     <td class="td-lable-right" align="right"><font color="#ff3d38">*</font>新密码</td>
                     <td class="td-input"><input class="txt" type="password" id="newpassword"/></td>
-                    <td class="td-lable-left">请输入您的新密码（6-16位字母、数字或符号的组合）</td>
+                    <td class="td-lable-left">请输入您的新密码（8-16位字母、必须包含大写字母，小写字母，数字，字符至少三种组合）</td>
                 </tr>
                 <tr>
                     <td class="td-lable-right" align="right"><font color="#ff3d38">*</font>确认新密码</td>

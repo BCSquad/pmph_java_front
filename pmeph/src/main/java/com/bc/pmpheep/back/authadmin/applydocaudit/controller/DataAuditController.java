@@ -132,7 +132,7 @@ public class DataAuditController extends BaseController{
 								if(Integer.parseInt(post)==8){
 									post="数字编委";
 								}else{
-									post = dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION, post);
+									post = dataDictionaryService.getDataDictionaryItemNameByCode2(Const.PMPH_POSITION, post);
 								}
 							}else{
 								String[] split = post.split(",");
@@ -141,7 +141,7 @@ public class DataAuditController extends BaseController{
 									if(Integer.parseInt(s)==8){
 										post2+="数字编委,";
 									}else{
-										post2+=dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION, s)+",";
+										post2+=dataDictionaryService.getDataDictionaryItemNameByCode2(Const.PMPH_POSITION, s)+",";
 									}
 
 								}
@@ -260,7 +260,7 @@ public class DataAuditController extends BaseController{
 								if(Integer.parseInt(post)==8){
 									post="数字编委";
 								}else{
-									post = dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION, post);
+									post = dataDictionaryService.getDataDictionaryItemNameByCode2(Const.PMPH_POSITION, post);
 								}
 							}else{
 								String[] split = post.split(",");
@@ -270,7 +270,7 @@ public class DataAuditController extends BaseController{
 									if(Integer.parseInt(s)==8){
 										post2+="数字编委,";
 									}else{
-										post2 += dataDictionaryService.getDataDictionaryItemNameByCode(Const.PMPH_POSITION, s)+",";
+										post2 += dataDictionaryService.getDataDictionaryItemNameByCode2(Const.PMPH_POSITION, s)+",";
 									}
 
 								}
